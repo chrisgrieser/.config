@@ -27,6 +27,7 @@ end
 
 function notify (text)
 	hs.notify.new({title="Hammerspoon", informativeText=text}):send()
+	print("notify: "..text)
 end
 
 function frontapp ()
