@@ -5,6 +5,7 @@
 Sublime User Folder/FileHistory*.json
 Sublime User Folder/AutoFoldCode.sublime-settings
 Cron Jobs/frequent.log
+.zsh_history
 
 # redundant
 .config/karabiner/automatic_backups
