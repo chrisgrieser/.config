@@ -61,9 +61,7 @@ wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
 
 -- reset firstWake variable
-firstWakeTimer = hs.timer.doAt("12:10", "12h", function()
-	firstWakeOfTheDay = true
-end, false)
+firstWakeTimer = hs.timer.doAt("12:10", "12h", function() firstWakeOfTheDay = true end)
 firstWakeTimer:start()
 
 -- redundancy: daily morning run
