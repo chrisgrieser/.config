@@ -7,7 +7,7 @@ function settings () {
 		SEARCH_FOR="$BUFFER"
 	fi
 	# shellcheck disable=SC2012
-	( cd "$ZSH_DOTFILE_LOCATION" || return
+	( cd "$DOTFILE_FOLDER" || return
 	# shellcheck disable=SC1009,SC1056,SC1073,SC2035
 	SELECTED=$( { ls *.zsh | cut -d. -f1 ; ls .z* } | fzf \
 	           -0 -1 \
@@ -51,7 +51,7 @@ function mkcd () {
 # restart terminal
 function rr () {
 	# run in subshell to surpress output
-	(nohup "$ZSH_DOTFILE_LOCATION"/restart_terminal.zsh >/dev/null &)
+	(nohup "$DOTFILE_FOLDER"/restart_terminal.zsh >/dev/null &)
 }
 
 # get path of file
@@ -95,7 +95,7 @@ function view () {
 }
 
 # extract function
-extract () {
+ex () {
 	if [[ -f $1 ]] ; then
 		case $1 in
 			*.tar.bz2)   tar -xjf "$1"     ;;

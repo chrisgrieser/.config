@@ -2,7 +2,7 @@
 
 export HISTSIZE=3000
 export SAVEHIST=3000
-export HISTFILE="$ZSH_DOTFILE_LOCATION"/.zsh_history
+export HISTFILE="$DOTFILE_FOLDER/.zsh_history"
 
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS
