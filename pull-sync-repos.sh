@@ -9,7 +9,8 @@ git add -A
 git pull
 
 # pull Alfred repos
-cd "Alfred.alfredpreferences/workflows/shimmering-obsidian"
+cd "Alfred.alfredpreferences/workflows"
+cd "./shimmering-obsidian"
 git pull
 cd "../alfred-bibtex-citation-picker"
 git pull
