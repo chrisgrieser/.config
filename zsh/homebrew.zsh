@@ -137,9 +137,9 @@ function print-section () {
 }
 
 function dump () {
-	DEVICE_NAME=$(hostname | cut -d"." -f1)
-	brew bundle dump --force --file "$BREWDUMP_PATH/Brewfile_$DEVICE_NAME"
-	npm list --location=global --parseable | sed "1d" | sed -E "s/.*\///" > "$BREWDUMP_PATH/NPMfile_$DEVICE_NAME"
+	local device_name=$(scutil --get ComputerName | cut -d" " -f2-)
+	brew bundle dump --force --file "$BREWDUMP_PATH/Brewfile_$device_name"
+	npm list --location=global --parseable | sed "1d" | sed -E "s/.*\///" > "$BREWDUMP_PATH/NPMfile_$device_name"
 	echo "Brewfile & NPM-File dumped at \"$BREWDUMP_PATH\""
 }
 
