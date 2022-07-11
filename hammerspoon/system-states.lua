@@ -5,7 +5,7 @@ require("window-management")
 firstWakeOfTheDay = true
 --------------------------------------------------------------------------------
 
-repoSyncFrequencyMin = 0.5
+repoSyncFrequencyMin = 15
 function dotfileRepoGitSync ()
 	local output, success = hs.execute('zsh "$HOME/Dotfiles/git-dotfile-backup.sh"')
 	if not(success) then
