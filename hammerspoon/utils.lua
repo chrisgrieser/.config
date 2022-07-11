@@ -21,7 +21,7 @@ function isAtOffice()
 end
 
 function isDarkMode()
-	local _, isDark = hs.applescript('tell application "System Events" to return dark mode of appearance preferences')
+	local _, isDark = hs.osascript.applescript('tell application "System Events" to return dark mode of appearance preferences')
 	return isDark
 end
 
@@ -57,10 +57,6 @@ function killIfRunning (appName)
 		runs = hs.application.get(appName)
 		if runs then runs:kill9() end
 	end)
-end
-
-function bttBridge (triggerName)
-	hs.osascript.applescript('tell application "BetterTouchTool" to trigger_named "'..triggerName..'"')
 end
 
 function runDelayed (delaySecs, fn)
