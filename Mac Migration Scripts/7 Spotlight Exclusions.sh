@@ -15,12 +15,14 @@ sudo plutil -insert Exclusions.0 -string ~'/Library/Mobile Documents/com~apple~C
 # restart spotlight indexing
 sudo launchctl stop com.apple.metadata.mds
 sudo launchctl start com.apple.metadata.mds
-sudo rm -R "$SPOTLIGHT_CONFIG"
 sudo mdutil -E -i on /
+sudo rm -R "$SPOTLIGHT_CONFIG"
+
+#-------------------------------------------------------------------------------
 
 # show current exclusions
 sudo plutil -extract Exclusions xml1 -o - "$SPOTLIGHT_CONFIG"
 
 # remove an exclusion
-# sudo plutil -remove Exclusions.{index} "$SPOTLIGHT_CONFIG"
+sudo plutil -remove Exclusions.{index} "$SPOTLIGHT_CONFIG"
 
