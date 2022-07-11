@@ -13,13 +13,12 @@ Cron Jobs/frequent.log
 # Redundant
 .config/karabiner/automatic_backups
 
-# (potentially) sensitive data
-pw.*
-private.*
-Private.*
+# NOTE: private dotfile data is located on the cloud drive, but symlinked into
+# this dotfile folder to keep it in sync but outside of this repo
+
+# -------------------------------------------------------------
 
 # Git Repos (already backed up & git can't handle nested repos)
-# -------------------------------------------------------------
 # Shimmering Obsidian
 user.workflow.D02FCDA1-EA32-4486-B5A6-09B42C44677C
 # PDF Annotation Extractor
@@ -31,6 +30,7 @@ user.workflow.41B90DCD-A99E-4943-A19A-E91859557FB0
 *.mp4
 *.tiff
 *.part
+pw.*
 
 # safety net in case sensitive data is accidentally moved
 *.kdb

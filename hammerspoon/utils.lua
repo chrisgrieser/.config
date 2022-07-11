@@ -27,7 +27,12 @@ end
 
 function notify (text)
 	hs.notify.new({title="Hammerspoon", informativeText=text}):send()
-	print("notify: "..text)
+	print("notify: "..text) -- for the console
+end
+
+function log (text, location)
+	hs.execute('echo "'..text..' $(date "+%Y-%m-%d %H:%M")" >> "'..location..'"')
+	print ("log: "..text) -- for the console
 end
 
 function frontapp ()
@@ -63,5 +68,6 @@ end
 function runDelayed (delaySecs, fn)
 	hs.timer.doAfter(delaySecs, function () fn() end)
 end
+
 
 
