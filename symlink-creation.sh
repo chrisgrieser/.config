@@ -8,7 +8,6 @@ ln -sf "$DOTFILE_FOLDER/zsh/.zshrc" ~
 [[ -e ~/.zprofile ]] && rm -rf ~/.zprofile
 ln -sf "$DOTFILE_FOLDER/zsh/.zprofile" ~
 [[ -e ~/.zsh_history ]] && rm -rf ~/.zsh_history
-ln -sf "$DOTFILE_FOLDER/zsh/.zsh_history" ~
 ln -sf "$DOTFILE_FOLDER/zsh/.zlogin" ~
 
 # other dotfiles
