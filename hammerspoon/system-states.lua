@@ -4,17 +4,20 @@ require("window-management")
 
 firstWakeOfTheDay = true
 --------------------------------------------------------------------------------
-repoSyncFrequencyMin = 15
+
+repoSyncFrequencyMin = 0.5
 function dotfileRepoGitSync ()
 	local output, success = hs.execute('zsh "$HOME/Dotfiles/git-dotfile-backup.sh"')
 	if not(success) then
 		notify("⚠️⚠️⚠️ "..output)
+		hs.execute('echo "dotfile Repo Git Sync ERROR $(date "+%Y-%m-%d %H:%M")" >> "$HOME/Dotfiles/Cron Jobs/frequent.log"')
 	else
 		notify ("✅ Dotfile Repo Sync successful.")
+		hs.execute('echo "dotfile Repo Git Sync success $(date "+%Y-%m-%d %H:%M")" >> "$HOME/Dotfiles/Cron Jobs/frequent.log"')
 	end
-	firstWakeOfTheDay = false
 end
 hs.timer.doEvery(repoSyncFrequencyMin * 60, dotfileRepoGitSync)
+
 --------------------------------------------------------------------------------
 
 function systemWake (eventType)
@@ -25,7 +28,12 @@ function systemWake (eventType)
 	if appIsRunning("Obsidian") and appIsRunning("Discord") then
 		hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
 	end
-	if isIMacAtHome() then homeModeLayout() end
+
+	if isIMacAtHome() then
+		homeModeLayout()
+	elseif isAtOffice() then
+		officeModeLayout()
+	end
 
 	-- run darkmode toggle between 6:00 and 19:00
 	local timeHours = hs.timer.localTime() / 60 / 60
@@ -49,7 +57,6 @@ function systemWake (eventType)
 		firstWakeOfTheDay = false
 	end
 end
-
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
 
@@ -59,9 +66,9 @@ hs.timer.doAt("12:10", "12h", function()
 end, false)
 
 -- redundancy: daily morning run
--- if isIMacAtHome() then
--- 	hs.timer.doAt("06:10", "01d", function()
--- 		systemWake()
--- 		hs.execute("echo Hammer-Morning\\ $(date '+%Y-%m-%d %H:%M') >> $HOME'/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Dotfiles/Cron Jobs/some.log'")
--- 	end, false)
--- end
+if isIMacAtHome() then
+	hs.timer.doAt("06:10", "01d", function()
+		systemWake()
+		hs.execute('echo "Hammer-Morning $(date "+%Y-%m-%d %H:%M")" >> "$HOME/Dotfiles/Cron Jobs/some.log"')
+	end, false)
+end

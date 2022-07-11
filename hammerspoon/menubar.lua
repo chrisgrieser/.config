@@ -30,6 +30,7 @@ function setWeather()
 
 	weatherStatusBar:setTitle(weather)
 	weatherStatusBar:setTooltip(weatherLong)
+	notify ("weather updated")
 end
 setWeather()
 hs.timer.doEvery(weatherUpdateMin * 60, setWeather)
