@@ -119,6 +119,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>FFB0D0F8-D135-4B2E-A306-54E5C2268D38</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E6689D89-3A3C-46C6-A5C3-F48EC6FC79B1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -383,29 +396,6 @@ end alfred_script</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>applescript</key>
-				<string>on alfred_script(q)
-  tell application "System Events"
-	tell process "Drafts"
-		set frontmost to true
-		click menu item "Move to Archive" of menu "File" of menu bar 1
-		click menu item "New" of menu "File" of menu bar 1
-	end tell
-end tell
-end alfred_script</string>
-				<key>cachescript</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.applescript</string>
-			<key>uid</key>
-			<string>1C3D78DC-489D-4E04-B780-4B301F7BF529</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -437,6 +427,29 @@ end alfred_script</string>
 			<string>1E26E0EC-403C-4C10-80A4-BAE73726E9C7</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+  tell application "System Events"
+	tell process "Drafts"
+		set frontmost to true
+		click menu item "Move to Archive" of menu "File" of menu bar 1
+		click menu item "New" of menu "File" of menu bar 1
+	end tell
+end tell
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>1C3D78DC-489D-4E04-B780-4B301F7BF529</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -587,6 +600,70 @@ end alfred_script</string>
 			<string>7716F21D-3E2C-47B8-A227-B515E15D2F06</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+
+tell application "System Events"
+	tell process "Brave Browser"
+		set frontmost to true
+			try
+				click menu item "Exit Full Screen" of menu "View" of menu bar 1
+			end
+	end tell
+end tell
+
+
+tell application "System Events" to keystroke "gU"
+
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>E6689D89-3A3C-46C6-A5C3-F48EC6FC79B1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>106</integer>
+				<key>hotmod</key>
+				<integer>8388608</integer>
+				<key>hotstring</key>
+				<string>F16</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>FFB0D0F8-D135-4B2E-A306-54E5C2268D38</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -752,6 +829,26 @@ end alfred_script</string>
 			<real>690</real>
 			<key>ypos</key>
 			<real>160</real>
+		</dict>
+		<key>E6689D89-3A3C-46C6-A5C3-F48EC6FC79B1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>close one tab</string>
+			<key>xpos</key>
+			<real>250</real>
+			<key>ypos</key>
+			<real>715</real>
+		</dict>
+		<key>FFB0D0F8-D135-4B2E-A306-54E5C2268D38</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>60</real>
+			<key>ypos</key>
+			<real>715</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
