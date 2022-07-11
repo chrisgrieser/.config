@@ -65,39 +65,6 @@ appActivationWatcher = hs.application.watcher.new(activeWindowHighlight)
 appActivationWatcher:start()
 
 --------------------------------------------------------------------------------
--- app-only Window Switchers
--- https://www.hammerspoon.org/docs/hs.window.switcher.html
-
-finderWindowSwitcher = hs.window.switcher.new{"Finder"}
-browserWindowSwitcher = hs.window.switcher.new{"Brave Browser"}
-mailWindowSwitcher = hs.window.switcher.new{"Mimestream"}
-sublimeWindowSwitcher = hs.window.switcher.new{"Sublime Text"}
-obsidianWindowSwitcher = hs.window.switcher.new{"Obsidian"}
-draftsWindowSwitcher = hs.window.switcher.new{"Drafts"}
-twitterrificWindowSwitcher = hs.window.switcher.new{"Twitterrific"}
-wordWindowSwitcher = hs.window.switcher.new{"Microsoft Word"}
-
-function appWindowSwitcher()
-	if (frontapp() == "Finder") then
-		finderWindowSwitcher:next()
-	elseif (frontapp() == "Brave Browser") then
-		browserWindowSwitcher:next()
-	elseif (frontapp() == "Mimestream") then
-		mailWindowSwitcher:next()
-	elseif (frontapp() == "Sublime Text") then
-		sublimeWindowSwitcher:next()
-	elseif (frontapp() == "Obsidian") then
-		obsidianWindowSwitcher:next()
-	elseif (frontapp() == "Drafts") then
-		draftsWindowSwitcher:next()
-	elseif (frontapp() == "Twitterrific") then
-		twitterrificWindowSwitcher:next()
-	elseif (frontapp() == "Microsoft Word") then
-		wordWindowSwitcher:next()
-	end
-end
-
---------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
 function toggleDraftsSidebar (draftsWin)
@@ -478,4 +445,3 @@ hotkey(hyper, "V", function()
 	end
 end)
 
-hotkey({"alt"}, "tab", appWindowSwitcher)

@@ -9,11 +9,11 @@ repoSyncFrequencyMin = 15
 function dotfileRepoGitSync ()
 	local output, success = hs.execute('zsh "$HOME/Dotfiles/git-dotfile-backup.sh"')
 	if success then
-		notify ("✅ Dotfile Repo Sync successful.")
-		hs.execute('echo "dotfile Repo Git Sync success $(date "+%Y-%m-%d %H:%M")" >> "$HOME/Dotfiles/Cron Jobs/frequent.log"')
+		notify("dotfile sync ✅")
+		log ("dotfile sync ✅", "$HOME/Dotfiles/Cron Jobs/frequent.log")
 	else
 		notify("⚠️⚠️⚠️ "..output)
-		hs.execute('echo "dotfile Repo Git Sync ERROR $(date "+%Y-%m-%d %H:%M")" >> "$HOME/Dotfiles/Cron Jobs/frequent.log"')
+		log ("⚠️ dotfile sync ERROR", "$HOME/Dotfiles/Cron Jobs/frequent.log")
 	end
 end
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, dotfileRepoGitSync)
@@ -23,8 +23,6 @@ function pullSync()
 	local output, success = hs.execute('zsh "$HOME/Dotfiles/pull-sync-repos.sh"')
 	if not(success) then
 		notify("⚠️⚠️⚠️ "..output)
-	else
-		notify ("✅ Pull Sync successful.")
 	end
 end
 pullSync()
@@ -73,7 +71,7 @@ firstWakeTimer:start()
 if isIMacAtHome() then
 	dailyMorningTimer = hs.timer.doAt("06:10", "01d", function()
 		systemWake()
-		hs.execute('echo "Hammer-Morning $(date "+%Y-%m-%d %H:%M")" >> "$HOME/Dotfiles/Cron Jobs/some.log"')
+		log("Hammer-Morning ✅", "$HOME/Dotfiles/Cron Jobs/some.log")
 	end, false)
 	dailyMorningTimer:start()
 end

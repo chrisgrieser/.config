@@ -31,11 +31,15 @@ ln -sf "$DOTFILE_FOLDER/.config/" ~/.config
 # Hammerspoon
 [[ -e ~/.hammerspoon ]] && rm -rf ~/.hammerspoon
 ln -sf "$DOTFILE_FOLDER/hammerspoon" ~/.hammerspoon
+# to keep private stuff out of the dotfile repo
+ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/private dotfiles/private.lua" "$DOTFILE_FOLDER/hammerspoon/private.lua"
 
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"
 [[ -e "$ESPANSO_DIR" ]] && rm -rf "$ESPANSO_DIR"
 ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
+# to keep private stuff out of the dotfile repo
+ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/private dotfiles/private.yml" "$DOTFILE_FOLDER/espanso/match/private.yml"
 
 # Sublime
 SUBLIME_USER_DIR=~"/Library/Application Support/Sublime Text/Packages/User"
