@@ -35,9 +35,6 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 "/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
 "/File Hub" = "/ "
 "Configs/Alfred.alfredpreferences/workflows" = "AlfredPrefs"
-"user.workflow.765354AA-49F0-4CB1-8DB0-EA4BE2DB09F8" = "PDF Annotation Extractor"
-"user.workflow.D02FCDA1-EA32-4486-B5A6-09B42C44677C" = "Shimmering Obsidian"
-"user.workflow.41B90DCD-A99E-4943-A19A-E91859557FB0" = "Citation Picker"
 
 [custom.file_number]
 command = "find . -maxdepth 1 -type f -not -name '.DS_Store' | wc -l"
