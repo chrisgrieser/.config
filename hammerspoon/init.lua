@@ -23,9 +23,6 @@ require("watchers")
 require("discord")
 require("twitterrific-iina")
 
--- Spoons
-require("vim-mode")
-
 --------------------------------------------------------------------------------
 
 notify("Config reloaded")

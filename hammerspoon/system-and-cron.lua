@@ -23,6 +23,8 @@ function pullSync()
 	local output, success = hs.execute('zsh "$HOME/Dotfiles/pull-sync-repos.sh"')
 	if not(success) then
 		notify("⚠️⚠️⚠️ "..output)
+	else
+		notify("✅ pull sync success")
 	end
 end
 
