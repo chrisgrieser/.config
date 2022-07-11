@@ -30,11 +30,10 @@ function setWeather()
 
 	weatherStatusBar:setTitle(weather)
 	weatherStatusBar:setTooltip(weatherLong)
-	notify ("weather updated")
 end
 setWeather()
-hs.timer.doEvery(weatherUpdateMin * 60, setWeather)
-
+weatherTimer = hs.timer.doEvery(weatherUpdateMin * 60, setWeather)
+weatherTimer:start()
 --------------------------------------------------------------------------------
 
 -- German Covid-Numbers by the RKI → https://api.corona-zahlen.org/docs/
