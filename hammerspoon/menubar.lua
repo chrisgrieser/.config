@@ -61,9 +61,11 @@ function setCovidBar()
 
 end
 setCovidBar()
-hs.timer.doEvery(covidUpdateHours * 60 * 60, setCovidBar)
+covidTimer = hs.timer.doEvery(covidUpdateHours * 60 * 60, setCovidBar)
+covidTimer:start()
 
 --------------------------------------------------------------------------------
+
 fileHubCountMenuBar = hs.menubar.new()
 function setFileHubCountMenuBar()
 	local numberOfFiles, success = hs.execute('ls "'..fileHubLocation..'" | wc -l | tr -d " "')
