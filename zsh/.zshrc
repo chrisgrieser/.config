@@ -1,6 +1,6 @@
 # shellcheck disable=SC1091
 
-export DOTFILE_FOLDER=~/Dotfiles
+export DOTFILE_FOLDER=~/dotfiles
 export WD=~"/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
 export VAULT_PATH=~'/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault'
 

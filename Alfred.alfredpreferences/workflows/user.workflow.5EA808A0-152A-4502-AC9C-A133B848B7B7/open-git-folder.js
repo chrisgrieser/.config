@@ -14,7 +14,7 @@ const pathsToSearch = [
 	$.getenv("working_folder").replace("~", home),
 	home + "/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development",
 	home + "/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Code",
-	home + "/Dotfiles" // folder also includes Alfred Preferences folder, which is therefore omitted here
+	home + "/dotfiles" // folder also includes Alfred Preferences folder, which is therefore omitted here
 ];
 
 // ---------------------------------------------
