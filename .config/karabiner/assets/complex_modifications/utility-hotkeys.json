@@ -1,9 +1,5 @@
 {
   "title": "🔘 Utility Shortcuts",
-  "maintainers": [
-    "pseudometa"
-  ],
-  "import-url": "karabiner://karabiner/assets/complex_modifications/import?url=https://github.com/chrisgrieser/dotfiles/blob/main/.config/karabiner/assets/complex_modifications/utility-hotkeys.json",
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
@@ -358,7 +354,6 @@
           ]
         },
         {
-          "description": "tilde",
           "type": "basic",
           "from": {
             "key_code": "n",
@@ -394,6 +389,12 @@
                 "^com\\.apple\\.Terminal$",
                 "^md\\.obsidian$",
                 "^com\\.sublimetext\\.4$"
+              ]
+            },
+            {
+              "type": "frontmost_application_unless",
+              "file_path": [
+                "alacritty$"
               ]
             }
           ]
