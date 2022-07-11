@@ -9,10 +9,8 @@ device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 
 details="$(git status --porcelain)"
 filesChanged="$(echo "$details" | wc -l | tr -d ' ')"
-if [[ "$filesChanged" == 0 ]] ; then
-	exit 0
-	changeType="none"
-elif [[ "$filesChanged" == 1 ]] ; then
+[[ -z "$filesChanged" ]] && changeType="none"
+if [[ "$filesChanged" == 1 ]] ; then
 	changeType="$filesChanged file"
 else
 	changeType="$filesChanged files"
