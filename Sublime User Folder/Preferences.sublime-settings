@@ -557,6 +557,8 @@
 		"copypaste",
 		"\n-",
 		"Hammerspoon",
+		"repos",
+		"gitignored",
 	],
 
 	"neovintageous_build_version": 11100,

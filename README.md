@@ -16,7 +16,6 @@ Most people tell me they find the following configurations useful:
 - [complex modifications for Karabiner Elements](/.config/karabiner)
 - [starship prompt](/.config/starship/starship.toml)
 - Various Vim Emulation Configs
-	- System wide: [Vim Utilities](/.config/karabiner#vim-utilities) and [Vim Mode](/.config/karabiner#vim-mode) via Karabiner Elements
 	- Browser: [Vimium configs](/Browser%20Extension%20Settings/vimium.vimrc) via [Vimium](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb)
 	- Obsidian: [.obsidian.vimrc](obsidian.vimrc) via [Vimrc Support Plugin](https://obsidian.md/plugins?id=obsidian-vimrc-support) 
 	- Sublime: [.neovintageousrc](Sublime%20User%20Folder/.neovintageousrc) via [Neovintageous](https://github.com/NeoVintageous/NeoVintageous)
@@ -30,8 +29,8 @@ __What are "dotfiles"?__
 
 __How this repository works__
 - These files are symlinked into iCloud for synchronization.
-- `crontab` on my main machine [is configured](Cron%20Jobs/30-min.sh) to run the script [30-min.sh](Cron%20Jobs/30-min.sh) every 30 minutes.
-- [30-min.sh](Cron%20Jobs/30-min_%5BBrowser-Path%5D.sh) runs various tasks that should run regularly, one of them is to trigger the shell script [git-dotfile-backup.sh](git-dotfile-backup.sh).
+- `Hammerspoon` [is configured](hammerspoon/system-states.lua) to run the script [git-dotfile-backup.sh](git-dotfile-backup.sh) every 15 minutes. In addition, on System Boot as well as any system wake at least 12 hours after the last system wake, the script [pull-sync-repos.sh](pull-sync-repos.sh) keeps the dot files up to date for when the machine is changed.
+- The git repos that are nested inside this dotfile repository (i.e. Alfred git repositories, because the nesting can't be avoided in this case) are gitignored and pulled individually. 
 - [git-dotfile-backup.sh](git-dotfile-backup.sh) checks whether there have been any changes in dot files. If there are, it creates somewhat useful commit messages and runs the `git add commit pull push` sequence.
 - [.gitignore](.gitignore) contains a list of files not to backups for various reasons, e.g. redundancy, privacy, or simply because they are too big for a git repo.
 
