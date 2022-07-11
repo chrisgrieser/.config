@@ -1,0 +1,8 @@
+# Overview
+# https://iorate.github.io/ublacklist/subscriptions
+
+# GitHub Translations
+https://raw.githubusercontent.com/arosh/ublacklist-github-translation/master/uBlacklist.txt
+
+# Stackoverflow Translations
+https://raw.githubusercontent.com/arosh/ublacklist-stackoverflow-translation/master/uBlacklist.txt

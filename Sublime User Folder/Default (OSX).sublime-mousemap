@@ -1,0 +1,26 @@
+[
+	// Multi-cursor
+	{
+		"button": "button1", "count": 1, "modifiers": ["alt"],
+		"press_command": "drag_select",
+		"press_args": {"additive": true}
+	},
+	// Double CLick + Multi-select
+	{
+		"button": "button1", "count": 2, "modifiers": ["alt"],
+		"press_command": "drag_select",
+		"press_args": {"by": "words", "additive": true}
+	},
+
+	// Open URL under Cursor
+	{
+		"button": "button1", "count": 1, "modifiers": ["super"],
+		"press_command": "open_url_under_cursor"
+	},
+
+	// Undo/Redo Selection
+	// basically this is active, but Mosue 4 and Mouse 5 have been remapped to
+	// F13 and F14, so the following are set in the keyboard mappings
+	// { "button": "button4", "modifiers": [], "command": "jump_back" },
+	// { "button": "button5", "modifiers": [], "command": "jump_forward" },
+]

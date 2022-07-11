@@ -1,0 +1,255 @@
+title: "⚒️ Vim Utilities"
+homepage: https://github.com/chrisgrieser/dotfiles/karabiner
+rules:
+  - description: "⚒️ k+l / f+j (simultaneously): ⌫ / ↵"
+    manipulators:
+      - type: basic
+        from:
+          simultaneous:
+            - key_code: k
+            - key_code: l
+        parameters:
+          basic.simultaneous_threshold_milliseconds: 60
+        to:
+          - key_code: delete_or_backspace
+      - type: basic
+        from:
+          simultaneous:
+            - key_code: f
+            - key_code: j
+        parameters:
+          basic.simultaneous_threshold_milliseconds: 100
+        to:
+          - key_code: return_or_enter
+          - set_variable:
+              name: VIM_MODE
+              value: 0
+          - set_notification_message:
+              id: vim-mode-notice
+              text: ""
+  - description: "⚒️ R-⌘ (tap): Focus Window & Hide Cursor"
+    manipulators:
+      - type: basic
+        from:
+          key_code: right_command
+        to:
+          - key_code: right_command
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 250
+        to_if_alone:
+          - software_function:
+              set_mouse_cursor_position:
+                x: 50%
+                y: 50%
+                screen: 0
+          - key_code: vk_none
+            hold_down_milliseconds: 15
+          - pointing_button: button1
+          - key_code: vk_none
+            hold_down_milliseconds: 15
+          - software_function:
+              set_mouse_cursor_position:
+                x: 99%
+                y: 75%
+                screen: 0
+  - description: "⚒️ {}@^~|: German to US layout"
+    manipulators:
+      - type: basic
+        from:
+          key_code: "8"
+          modifiers:
+            mandatory:
+              - option
+        conditions:
+          - type: input_source_if
+            input_sources:
+              - language: ^de$
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^md\.obsidian$
+              - ^com\.sublimetext\.4$
+        to:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.US$
+          - key_code: vk_none
+            hold_down_milliseconds: 20
+          - key_code: open_bracket
+            modifiers:
+              - shift
+        to_after_key_up:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+      - type: basic
+        from:
+          key_code: "9"
+          modifiers:
+            mandatory:
+              - option
+        conditions:
+          - type: input_source_if
+            input_sources:
+              - language: ^de$
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^md\.obsidian$
+              - ^com\.sublimetext\.4$
+        to:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.US$
+          - key_code: vk_none
+            hold_down_milliseconds: 20
+          - key_code: close_bracket
+            modifiers:
+              - shift
+        to_after_key_up:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+      - type: basic
+        from:
+          key_code: l
+          modifiers:
+            mandatory:
+              - option
+        conditions:
+          - type: input_source_if
+            input_sources:
+              - language: ^de$
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^md\.obsidian$
+              - ^com\.sublimetext\.4$
+        to:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.US$
+          - key_code: vk_none
+            hold_down_milliseconds: 20
+          - key_code: "2"
+            modifiers:
+              - shift
+        to_after_key_up:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+      - type: basic
+        from:
+          key_code: non_us_backslash
+        conditions:
+          - type: input_source_if
+            input_sources:
+              - language: ^de$
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^md\.obsidian$
+              - ^com\.sublimetext\.4$
+        to:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.US$
+          - key_code: vk_none
+            hold_down_milliseconds: 20
+          - key_code: "6"
+            modifiers:
+              - shift
+        to_after_key_up:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+      - type: basic
+        from:
+          key_code: "n"
+          modifiers:
+            mandatory:
+              - option
+        conditions:
+          - type: input_source_if
+            input_sources:
+              - language: ^de$
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^md\.obsidian$
+              - ^com\.sublimetext\.4$
+        to:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.US$
+          - key_code: vk_none
+            hold_down_milliseconds: 20
+          - key_code: grave_accent_and_tilde
+            modifiers:
+              - shift
+        to_after_key_up:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+      - type: basic
+        from:
+          key_code: "7"
+          modifiers:
+            mandatory:
+              - option
+        conditions:
+          - type: input_source_if
+            input_sources:
+              - language: ^de$
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^md\.obsidian$
+              - ^com\.sublimetext\.4$
+        to:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.US$
+          - key_code: vk_none
+            hold_down_milliseconds: 20
+          - key_code: non_us_pound
+            modifiers:
+              - shift
+        to_after_key_up:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+  - description: "⚒️ ß´ → [] (+ German to US Layout), ß (hold) → ß"
+    manipulators:
+      - type: basic
+        from:
+          key_code: hyphen
+        conditions:
+          - type: input_source_if
+            input_sources:
+              - language: ^de$
+          - type: frontmost_application_if
+            file_paths:
+              - alacritty$
+              - ^/System/Applications/Utilities/Terminal.app
+              - ^/Applications/Obsidian\.app
+              - ^/Applications/Sublime Text\.app
+              - ^/Applications/Discord\.app
+              - ^/Applications/Brave Browser\.app
+              - ^/Applications/Hammerspoon\.app
+        to_if_alone:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.US$
+            repeat: false
+          - key_code: vk_none
+            hold_down_milliseconds: 60
+            repeat: false
+          - key_code: open_bracket
+            repeat: false
+        parameters:
+          basic.to_if_held_down_threshold_milliseconds: 250
+          basic.to_if_alone_timeout_milliseconds: 250
+        to_if_held_down:
+          - key_code: hyphen
+            repeat: false
+        to_after_key_up:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+      - type: basic
+        from:
+          key_code: equal_sign
+        conditions:
+          - type: input_source_if
+            input_sources:
+              - language: ^de$
+        to:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.US$
+          - key_code: vk_none
+            hold_down_milliseconds: 20
+          - key_code: close_bracket
+        to_after_key_up:
+          - select_input_source:
+              input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$

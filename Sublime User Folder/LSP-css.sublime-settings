@@ -1,0 +1,13 @@
+// Settings in here override those in "LSP-css/LSP-css.sublime-settings"
+
+{
+	"schemes": ["file", "res"],
+
+	"settings": {
+		// for Obsidian, using "webkit-" suffices
+		"css.lint.vendorPrefix": "ignore",
+		"css.lint.duplicateProperties": "error",
+		"css.lint.emptyRules": "ignore", // already covered by stylelint
+	},
+	"enabled": true,
+}

@@ -1,0 +1,19 @@
+// Documentation at https://www.sublimetext.com/docs/color_schemes.html
+{
+	"variables":
+	{
+		"teal": "hsl(170, 70%, 42%)",
+	},
+	"globals":
+	{
+      "background": "hsl(0, 0%, 94%)",
+      "line_highlight": "hsl(0, 10%, 97%)",
+	},
+	"rules":
+	[
+		{
+		    "scope": "keyword.operator",
+		    "background": "none"
+		}
+	]
+}

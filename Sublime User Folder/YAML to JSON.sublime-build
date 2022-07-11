@@ -1,0 +1,5 @@
+{
+	"selector": "source.yaml",
+	"shell_cmd": "yq -o=json '.' \"$file\" > \"$file_base_name\".json",
+	"working_dir": "$file_path",
+}

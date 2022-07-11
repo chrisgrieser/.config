@@ -1,0 +1,164 @@
+colors:
+  primary:
+    background: '0x24283b'
+    foreground: '0xa9b1d6'
+    dim_foreground: '#a5abb6'
+    bright_foreground: '0xffffff'
+    dim_background: '0x31363b'
+    bright_background: '0x000000'
+  normal:
+    black: '0x32344a'
+    red: '0xf7768e'
+    green: '0x9ece6a'
+    yellow: '0xe0af68'
+    blue: '0x7aa2f7'
+    magenta: '0xad8ee6'
+    cyan: '0x449dab'
+    white: '0x9699a8'
+  bright:
+    black: '0x444b6a'
+    yellow: '0xff9e64'
+    red: '0xff7a93'
+    green: '0xb9f27c'
+    magenta: '0xbb9af7'
+    white: '0xacb0d0'
+    blue: '0x7da6ff'
+    cyan: '0x0db9d7'
+  cursor:
+    text: '#2e3440'
+    cursor: '#d8dee9'
+  dim:
+    black: '#373e4d'
+    red: '#94545d'
+    green: '#809575'
+    yellow: '#b29e75'
+    blue: '#68809a'
+    magenta: '#8c738c'
+    cyan: '#6d96a5'
+    white: '#aeb3bb'
+  indexed_colors:
+    - index: 16
+      color: '0xF8BD96'
+    - index: 17
+      color: '0xF5E0DC'
+    - index: 16
+      color: '0xF8BD96'
+    - index: 17
+      color: '0xF5E0DC'
+  search:
+    matches:
+      foreground: CellBackground
+      background: '#88c0d0'
+    focused_match:
+      foreground: CellBackground
+      background: CellForeground
+    bar:
+      background: '#434c5e'
+      foreground: '#d8dee9'
+  vi_mode_cursor:
+    text: '#2e3440'
+    cursor: '#d8dee9'
+  selection:
+    text: CellForeground
+    background: '#4c566a'
+font:
+  normal:
+    family: JetBrainsMonoNL Nerd Font
+    style: Regular
+  bold:
+    family: JetBrainsMonoNL Nerd Font
+    style: Bold
+  italic:
+    family: JetBrainsMonoNL Nerd Font
+    style: Italic
+  bold_italic:
+    family: JetBrainsMonoNL Nerd Font
+    style: Bold Italic
+  size: 24
+  use_thin_strokes: true
+  draw_bold_text_with_bright_colors: true
+  builtin_box_drawing: true
+  offset:
+    x: 2
+    'y': 6
+  glyph_offset:
+    'y': 3
+window:
+  decorations: buttonless
+  position:
+    x: 0
+  dimensions:
+    columns: 104
+    lines: 50
+  padding:
+    x: 6
+    'y': 6
+  opacity: 0.96
+scrolling:
+  history: 5000
+  multiplier: 3
+working_directory: /Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File Hub/
+cursor:
+  style:
+    shape: Block
+    blinking: Always
+    blink_interval: 500
+    unfocused_hollow: true
+live_config_reload: true
+selection:
+  save_to_clipboard: true
+key_bindings:
+  - key: 43
+    mods: Command
+    command:
+      program: sh
+      args:
+        - '-c'
+        - open ~/.config/alacritty/alacritty.yml
+  - key: K
+    mods: Command
+    mode: ~Vi|~Search
+    chars: "\f"
+  - key: Left
+    mods: Command
+    chars: "\eOH"
+  - key: Right
+    mods: Command
+    chars: "\eOF"
+  - key: L
+    mods: Command
+    command:
+      program: sh
+      args:
+        - '-c'
+        - open .
+  - key: 28
+    mods: Alt
+    chars: '{'
+  - key: 25
+    mods: Alt
+    chars: '}'
+  - key: 37
+    mods: Alt
+    chars: '@'
+  - key: 26
+    mods: Alt|Shift
+    chars: \
+  - key: 26
+    mods: Alt
+    chars: '|'
+  - key: 45
+    mods: Alt
+    chars: '~'
+  - key: 23
+    mods: Alt
+    chars: '['
+  - key: 22
+    mods: Alt
+    chars: ']'
+  - key: 20
+    mods: Shift
+    chars: §
+  - key: W
+    mods: Command
+    chars: "\x04"

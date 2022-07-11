@@ -1,0 +1,4 @@
+{
+	"selector": "source.yaml",
+	"shell_cmd": "osascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"rebuild-karabiner-config\" in workflow \"de.chris-grieser.karabiner-espanso\"'"
+}

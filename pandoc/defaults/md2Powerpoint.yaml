@@ -1,0 +1,34 @@
+# https://pandoc.org/MANUAL.html#defaults-files
+# ---------------------------------------------
+
+# Powerpoint-Writer
+# https://pandoc.org/MANUAL.html#structuring-the-slide-show
+writer: pptx
+reference-doc: ${USERDATA}/reference-docs/academic-presentation.pptx
+slide-level: 0      # use --- as slide seperators
+incremental: true   # list items display one by one per default
+
+# General
+verbosity: INFO
+fail-if-warnings: true
+table-of-contents: false
+toc-depth: 3
+resource-path:
+  - .
+  - ./attachments
+  - ${HOME}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/ # Vault path for images
+
+# Markdown-Reader
+reader: markdown+lists_without_preceding_blankline
+strip-comments: true
+number-sections: true
+default-image-extension: '.png'
+
+# Academic
+citeproc: true
+metadata-files: # must be array
+  - academic.yaml
+bibliography: ${USERDATA}/main-bibliography.bib
+metadata:
+  link-citations: true
+  link-bibliography: true

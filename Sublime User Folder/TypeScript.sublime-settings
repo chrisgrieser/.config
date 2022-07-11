@@ -1,0 +1,4 @@
+// These settings override both User and Default settings for the TypeScript syntax
+{
+	"draw_white_space": ["selection", "isolated"],
+}

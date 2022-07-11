@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>scope</key>
+	<array>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub</string>
+		<string>~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta</string>
+		<string>~/RomComs/-new</string>
+		<string>~/Video</string>
+	</array>
+</dict>
+</plist>

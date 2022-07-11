@@ -1,0 +1,13 @@
+{
+
+	"light_color_scheme": "Packages/User/material-light-custom.tmTheme",
+	"dark_color_scheme": "Dark Knight.sublime-color-scheme",
+
+	"disable_default_completions": true, // for lsp
+	"auto_complete_delay": 0,
+	"auto_complete_use_history": false,
+	"auto_complete_use_index": false,
+
+	"extensions": ["css", "scss"],
+	"draw_white_space": ["selection", "isolated_mixed"],
+}

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.folded-paper.menu-bar-search</string>
+	<key>category</key>
+	<string>Mini-Apps</string>
+	<key>connections</key>
+	<dict>
+		<key>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C8DFF277-2C74-48D3-B685-F304268DF007</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C8DFF277-2C74-48D3-B685-F304268DF007</key>
+		<array/>
+		<key>CD061C82-1321-458D-B46E-3603B3DB27E0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CE6777D4-DFB9-460C-897D-EB6C45E6A769</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Benzi Ahamed</string>
+	<key>description</key>
+	<string>Search through menu options for front-most application</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Menu Bar Search</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>keyword</key>
+				<string>m</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string>./menu -async -cache 5 -query "{query}"
+</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Menu Bar Search</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>script</key>
+				<string>./menu -click "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C8DFF277-2C74-48D3-B685-F304268DF007</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>:menubar</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>./menu -show-folders</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Menu search folders</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>CD061C82-1321-458D-B46E-3603B3DB27E0</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string></string>
+				<key>sortBy</key>
+				<integer>0</integer>
+				<key>sortDirection</key>
+				<integer>0</integer>
+				<key>sortFoldersAtTop</key>
+				<false/>
+				<key>sortOverride</key>
+				<false/>
+				<key>stackBrowserView</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinalfred</string>
+			<key>uid</key>
+			<string>CE6777D4-DFB9-460C-897D-EB6C45E6A769</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># Menu Bar Search
+
+Quickly search menu bar items of the front most application.
+
+Based on modifications done by ctwise, which is based almost entirely on menu bar search workflow by Jeroen van der Neut.
+
+## Usage
+
+Type `m` in Alfred to list menu bar items for front most application
+You can filter menu items by name, or do a fuzzy search.
+
+E.g
+
+- `m new tab` will match the menu item **New Tab**
+- `m cw` will match the menu item **Close Window**
+
+
+## Settings
+
+You can change the workflow environment variables to fine tune menu listings
+
+* -show-disabled    true/false    controls if diabled menu items should be shown (default is false)
+
+*  -show-apple-menu    true/false    if true, menus items under the apple menu will be shown (default is false)
+
+*  -max-children    number    how many sub-menu items to load for each menu item (default is 40)
+
+*  -max-depth    number    how many nested levels if sub menus should be listed (default is 10)
+
+
+
+## Change log
+
+- 1.0 - Initial Release
+- 1.1 - Added Fuzzy Text Matching for Menus
+
+  If you have a menu item `New Tab`, then typing `m nt` in Alfred will match `New Tab`, since `n` and `t` matches the first letters of the menu text.
+
+- 1.1.1 - Changed run behaviour to terminate previous script, this makes the experience slightly more faster
+- 1.2 - Completely native menu clicking, removed reliance on AppleScript
+  - 1.2.1 - Performance improvements when generating menus using direct JSON encoding
+  - 1.2.2 - More performance improvements while filtering menu items
+- 1.3 - Added `-async` flag to allow threaded scanning and populating of menus
+- 1.4 - Added `-cache` setting to enable menu result caching and also set a timeout for cache invalidation
+  - 1.4.1 - Invalidate cache (if present) after actioning a menu press
+  - 1.4.2 - Slide the cache invalidation window forward in case we get invalidated by a near miss
+  - 1.4.3 - Speed improvements to caching, text search and fuzzy matching
+  - 1.4.4 - Added `-no-apple-menu` flag that will skip the apple menu items
+  - 1.4.5 - Tuned fuzzy matcher, allows non-continuous anchor token search
+- 1.5 - Faster caching using protocol buffers
+  - 1.5.1 - Reduced file creation for cache storage
+  - 1.5.2 - Better support for command line apps that create menu bar owning applications
+  - 1.5.3 - Protocol buffer everything - microscopic speed improvements, but hey...
+
+  - 1.5.4 - Added various environment variables to fine tune menu listings
+  - 1.5.5 - Tweaked ranking of search results for better menu listings
+
+- 1.6 - added per app customization settings, `-show-apple-menu` flag
+- 1.7 - universal build for M1 and Intel
+- 1.8 - fixed universal build</string>
+	<key>uidata</key>
+	<dict>
+		<key>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</key>
+		<dict>
+			<key>xpos</key>
+			<integer>290</integer>
+			<key>ypos</key>
+			<integer>140</integer>
+		</dict>
+		<key>C8DFF277-2C74-48D3-B685-F304268DF007</key>
+		<dict>
+			<key>xpos</key>
+			<integer>560</integer>
+			<key>ypos</key>
+			<integer>140</integer>
+		</dict>
+		<key>CD061C82-1321-458D-B46E-3603B3DB27E0</key>
+		<dict>
+			<key>note</key>
+			<string>config</string>
+			<key>xpos</key>
+			<integer>290</integer>
+			<key>ypos</key>
+			<integer>280</integer>
+		</dict>
+		<key>CE6777D4-DFB9-460C-897D-EB6C45E6A769</key>
+		<dict>
+			<key>xpos</key>
+			<integer>560</integer>
+			<key>ypos</key>
+			<integer>280</integer>
+		</dict>
+	</dict>
+	<key>variables</key>
+	<dict>
+		<key>-max-children</key>
+		<string>30</string>
+		<key>-max-depth</key>
+		<string>3</string>
+		<key>-show-apple-menu</key>
+		<string>false</string>
+		<key>-show-disabled</key>
+		<string>false</string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array>
+		<string>-show-apple-menu</string>
+		<string>-max-children</string>
+		<string>-show-disabled</string>
+		<string>-max-depth</string>
+	</array>
+	<key>version</key>
+	<string>1.8</string>
+	<key>webaddress</key>
+	<string>https://github.com/BenziAhamed/Menu-Bar-Search</string>
+</dict>
+</plist>

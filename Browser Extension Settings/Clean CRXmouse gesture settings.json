@@ -1,0 +1,223 @@
+{
+  "normal": {
+    "autocancel": true,
+    "autocancelvalue": "1",
+    "cancelcontextmenu": true,
+    "capturetype": "jpeg",
+    "clickedOptin": true,
+    "cursorimg": null,
+    "cursorimgscale": 1,
+    "dbclicktime": 600,
+    "drag": true,
+    "gesture": true,
+    "hidetrash": true,
+    "jpegquality": 100,
+    "lasttab": false,
+    "minilength": 10,
+    "newtabposition": "chrome",
+    "scroll": false,
+    "scrolleffects": true,
+    "scrollgesture": false,
+    "strokegesture": false,
+    "backgroundtab": false
+  },
+  "gesture": {
+    "direct": false,
+    "directcolor": "778899",
+    "directopa": 0.9,
+    "gesPos": "cc",
+    "geskey": "right",
+    "gesture": [
+      {
+        "action": "G_back",
+        "direct": "L",
+        "whitelist": []
+      },
+      {
+        "action": "G_go",
+        "direct": "R",
+        "whitelist": []
+      },
+      {
+        "action": "G_reclosedtab",
+        "direct": "D",
+        "moreDes": "Reopen closed tab",
+        "morePinned": "unpinned",
+        "morePosition": "chrome",
+        "moreTarget": "newfront",
+        "whitelist": []
+      },
+      {
+        "action": "G_closelefttabs",
+        "direct": "UL",
+        "whitelist": []
+      },
+      {
+        "action": "G_closerighttabs",
+        "direct": "UR",
+        "whitelist": []
+      },
+      {
+        "direct": "UD",
+        "action": "G_closeothers"
+      },
+      {
+        "direct": "U",
+        "action": "G_close",
+        "moreCloseurl": "chrome://newtab/",
+        "moreClosesel": "chrome",
+        "moreCloseopts": "close"
+      },
+      {
+        "direct": "DU",
+        "action": "G_reloadclear"
+      }
+    ],
+    "gestureui": true,
+    "gholdkey": "none",
+    "gholdkeydisable": "alt",
+    "gholdkeytype": "true",
+    "stenable": false,
+    "stroke": true,
+    "strokecolor": "792ECF",
+    "strokeopa": "0.7",
+    "strokewidth": "6",
+    "tooltip": false,
+    "tooltipcolor": "120310",
+    "tooltipopa": 0.9,
+    "tooltipwidth": "23"
+  },
+  "drag": {
+    "ddirect": false,
+    "ddirectcolor": "778899",
+    "ddirectopa": 0.9,
+    "dholdkey": "alt",
+    "dragimage": true,
+    "draginput": false,
+    "draglink": true,
+    "dragtext": true,
+    "dragui": true,
+    "dstroke": true,
+    "dstrokecolor": "112185",
+    "dstrokeopa": 0.8,
+    "dstrokewidth": 5,
+    "dtooltip": true,
+    "dtooltipcolor": "120310",
+    "dtooltipopa": 0.9,
+    "dtooltipwidth": "21",
+    "image": [
+      {
+        "action": "I_save",
+        "direct": "D"
+      },
+      {
+        "direct": "R",
+        "action": "I_open",
+        "moreDes": "Open image in new tab",
+        "moreTarget": "newfront",
+        "morePosition": "chrome",
+        "morePinned": "unpinned"
+      },
+      {
+        "direct": "U",
+        "action": "I_copyurl"
+      }
+    ],
+    "imgfirst": "none",
+    "imgfirstcheck": true,
+    "link": [
+      {
+        "direct": "D",
+        "action": "L_copyurl"
+      },
+      {
+        "direct": "R",
+        "action": "L_open",
+        "moreDes": "Open link in new background tab",
+        "moreTarget": "newback",
+        "morePosition": "chrome",
+        "morePinned": "unpinned"
+      }
+    ],
+    "setdragurl": true,
+    "text": [
+      {
+        "direct": "D",
+        "action": "T_copytext"
+      },
+      {
+        "direct": "R",
+        "action": "T_search",
+        "moreDes": "Use %name to search \"%s\"",
+        "moreTsearch": "sgoogle",
+        "moreTarget": "newfront",
+        "morePosition": "chrome",
+        "morePinned": "unpinned"
+      }
+    ]
+  },
+  "scroll": {
+    "scrollaccele": 1,
+    "scrollspeed": 3,
+    "smooth": false
+  },
+  "scrollgesture": {
+    "fastSwitch": false,
+    "reverseFS": false,
+    "sgsleft": [
+      {
+        "action": "G_lefttab"
+      },
+      {
+        "action": "G_righttab"
+      }
+    ],
+    "sgsleftenable": false,
+    "sgsright": [
+      {
+        "action": "G_top"
+      },
+      {
+        "action": "G_bottom"
+      }
+    ],
+    "sgsrightenable": false,
+    "tablist": false,
+    "tablistVisual": true,
+    "tablistkey": "left"
+  },
+  "strokegesture": {
+    "strleft": [
+      {
+        "action": "G_none"
+      },
+      {
+        "action": "G_righttab"
+      }
+    ],
+    "strleftenable": true,
+    "strmiddle": [
+      {
+        "action": "G_lefttab"
+      },
+      {
+        "action": "G_righttab"
+      }
+    ],
+    "strmiddleenable": false,
+    "strpress": "down",
+    "strright": [
+      {
+        "action": "G_lefttab"
+      },
+      {
+        "action": "G_none"
+      }
+    ],
+    "strrightenable": true
+  },
+  "sync": "local",
+  "extid": "mjidkpedjlfnanainpdfnedkdlacidla",
+  "cfgver": 2.3,
+  "others": {}
+}

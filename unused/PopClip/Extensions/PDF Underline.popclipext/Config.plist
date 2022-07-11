@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Actions</key>
+	<array>
+		<dict>
+			<key>Image File</key>
+			<string>underline.png</string>
+			<key>Key Combo</key>
+			<dict>
+				<key>keyChar</key>
+				<string>U</string>
+				<key>modifiers</key>
+				<integer>1310720</integer>
+			</dict>
+			<key>Required Apps</key>
+			<array>
+				<string>com.readdle.PDFExpert-Mac</string>
+			</array>
+			<key>Title</key>
+			<string>Underline</string>
+		</dict>
+	</array>
+	<key>Extension Description</key>
+	<string>Underlines the selected text. Works in PDF Expert.</string>
+	<key>Extension Identifier</key>
+	<string>de.chris-grieser.popclip.extension.pdf-underline</string>
+	<key>Extension Name</key>
+	<string>PDF Underline</string>
+</dict>
+</plist>

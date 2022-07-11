@@ -1,0 +1,33 @@
+# https://espanso.org/docs/
+# ------------------------------------------
+
+# temporary matches, e.g. as they are only needed for a current writing project
+matches:
+
+  # InIn Paper
+  - trigger: inte
+    replace: interdependent technologies
+    word: true
+    propagate_case: true
+  - trigger: inin
+    replace: interdependent innovations
+    word: true
+    propagate_case: true
+  - trigger: tein
+    replace: technological interdependence
+    word: true
+    propagate_case: true
+  - trigger: cotein
+    replace: constellation of technological interdependence
+    word: true
+    propagate_case: true
+  - trigger: coteins
+    replace: constellations of technological interdependence
+    word: true
+    propagate_case: true
+
+  # AcCo Paper
+  - trigger: acre
+    replace: acceleration of research
+    word: true
+    propagate_case: true

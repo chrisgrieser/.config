@@ -1,0 +1,39 @@
+# This is the gitignore of *this* dotfile repo only
+# `gitignore_global` is for *all* of git repos
+# ------------------------------------------------
+
+# Mac
+.DS_Store
+
+# Activity Data
+Sublime User Folder/FileHistory*.json
+Sublime User Folder/AutoFoldCode.sublime-settings
+Cron Jobs/frequent.log
+
+# Redundant
+.config/karabiner/automatic_backups
+
+# (potentially) sensitive data
+pw.*
+private.*
+Private.*
+
+# Git Repos (already backed up)
+# -----------------------------
+# Shimmering Obsidian
+user.workflow.D02FCDA1-EA32-4486-B5A6-09B42C44677C
+# PDF Annotation Extractor
+user.workflow.765354AA-49F0-4CB1-8DB0-EA4BE2DB09F8
+# Citation Picker
+user.workflow.41B90DCD-A99E-4943-A19A-E91859557FB0
+
+# in case of accidental saving of such files in the repo
+*.mp4
+*.tiff
+*.part
+
+# safety net in case sensitive data is accidentally moved
+*.kdb
+*.kdbx
+*.pfx
+*.key

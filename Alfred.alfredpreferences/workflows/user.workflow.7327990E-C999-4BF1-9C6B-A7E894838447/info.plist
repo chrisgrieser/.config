@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>de.chris-grieser.volume-tweaks</string>
+	<key>category</key>
+	<string>Tweaks</string>
+	<key>connections</key>
+	<dict>
+		<key>6AFDF8FB-7B99-46E6-ABBB-772B0525181A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C18146DE-959B-4A0E-AC09-BED0D28AD242</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>2CFE15BC-B802-49B9-86EE-234FB30174C2</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Browse in Terminal</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C18146DE-959B-4A0E-AC09-BED0D28AD242</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>83CE207E-318C-4E3C-AD01-1ABA65DCD173</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>B26496AC-993F-479A-A16C-7AAD7453E6D0</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6EE6E827-27D1-4C3C-BE0D-1361E16F0F32</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Chris Grieser</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Volume Search</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/System/Applications/Utilities/Disk Utility.app</string>
+				</array>
+				<key>toggle</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>83CE207E-318C-4E3C-AD01-1ABA65DCD173</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>disk_utility</string>
+						<key>outputlabel</key>
+						<string>disk_utility</string>
+						<key>uid</key>
+						<string>B26496AC-993F-479A-A16C-7AAD7453E6D0</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>C18146DE-959B-4A0E-AC09-BED0D28AD242</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>vv</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading...</string>
+				<key>script</key>
+				<string>app = Application.currentApplication();
+app.includeStandardAdditions = true;
+volumeList = app.doShellScript("ls /Volumes");
+var single_volumes = volumeList.split("\r");
+
+//function to remove elements from Array
+function arrayRemove(arr, value) {
+    return arr.filter(function(elem){
+        return !elem.includes(value);
+    });
+}
+var single_volumes = arrayRemove(single_volumes, "TimeMachine");
+var single_volumes = arrayRemove(single_volumes, "Macintosh");
+var single_volumes = arrayRemove(single_volumes, "HDD");
+var single_volumes = arrayRemove(single_volumes, "SSD");
+
+let volume_array = [];
+if (single_volumes.length == 0) {
+    volume_array.push ({
+        'title': "No mounted volume recognized.",
+        'subtitle': "Press [Esc] to abort.",
+        'arg': "no volume"
+    });
+} else {
+    single_volumes.forEach(element =&gt; {
+        let disk_space = app.doShellScript('df -h | grep "' + element + '" | cut -c 16-42');
+        disk_space = disk_space.replace(/^(.{6}) (.{6}) (.{6}) *(.*)/gm,"Total:$1   Available:$3   Used:$2 ($4)");
+        volume_array.push ({
+            'title': element,
+            'subtitle': disk_space,
+            'arg': "/Volumes/"+ element
+        })
+    });
+}
+
+JSON.stringify({ 'items': volume_array });
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>volume-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Select a Volume</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>6AFDF8FB-7B99-46E6-ABBB-772B0525181A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Library/CoreServices/Finder.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>6EE6E827-27D1-4C3C-BE0D-1361E16F0F32</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>2CFE15BC-B802-49B9-86EE-234FB30174C2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<key>uidata</key>
+	<dict>
+		<key>2CFE15BC-B802-49B9-86EE-234FB30174C2</key>
+		<dict>
+			<key>xpos</key>
+			<integer>455</integer>
+			<key>ypos</key>
+			<integer>315</integer>
+		</dict>
+		<key>6AFDF8FB-7B99-46E6-ABBB-772B0525181A</key>
+		<dict>
+			<key>xpos</key>
+			<integer>155</integer>
+			<key>ypos</key>
+			<integer>185</integer>
+		</dict>
+		<key>6EE6E827-27D1-4C3C-BE0D-1361E16F0F32</key>
+		<dict>
+			<key>xpos</key>
+			<integer>455</integer>
+			<key>ypos</key>
+			<integer>185</integer>
+		</dict>
+		<key>83CE207E-318C-4E3C-AD01-1ABA65DCD173</key>
+		<dict>
+			<key>xpos</key>
+			<integer>455</integer>
+			<key>ypos</key>
+			<integer>60</integer>
+		</dict>
+		<key>C18146DE-959B-4A0E-AC09-BED0D28AD242</key>
+		<dict>
+			<key>xpos</key>
+			<integer>330</integer>
+			<key>ypos</key>
+			<integer>140</integer>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>https://chris-grieser.de/</string>
+</dict>
+</plist>

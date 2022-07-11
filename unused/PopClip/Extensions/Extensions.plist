@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Installed Extensions</key>
+	<array>
+		<dict>
+			<key>Enabled</key>
+			<true/>
+			<key>Extension Identifier</key>
+			<string>com.pilotmoon.popclip.extension.highlight</string>
+			<key>Extension Name</key>
+			<string>Highlight</string>
+			<key>Package Name</key>
+			<string>Highlight.popclipext</string>
+		</dict>
+		<dict>
+			<key>Enabled</key>
+			<true/>
+			<key>Extension Identifier</key>
+			<string>de.chris-grieser.popclip.extension.strikethrough</string>
+			<key>Extension Name</key>
+			<string>PDF Strikethrough</string>
+			<key>Package Name</key>
+			<string>PDF Strikethrough.popclipext</string>
+		</dict>
+		<dict>
+			<key>Enabled</key>
+			<true/>
+			<key>Extension Identifier</key>
+			<string>de.chris-grieser.popclip.extension.pdf-underline</string>
+			<key>Extension Name</key>
+			<string>PDF Underline</string>
+			<key>Package Name</key>
+			<string>PDF Underline.popclipext</string>
+		</dict>
+		<dict>
+			<key>Enabled</key>
+			<true/>
+			<key>Extension Identifier</key>
+			<string>de.chris-grieser.doi-2-bibtex</string>
+			<key>Extension Name</key>
+			<string>DOI/ISBN 2 BibTeX</string>
+			<key>Package Name</key>
+			<string>DOI-or-ISBN 2 BibTeX.popclipext</string>
+		</dict>
+		<dict>
+			<key>Enabled</key>
+			<true/>
+			<key>Extension Identifier</key>
+			<string>de.chris-grieser.popclip.extension.comment</string>
+			<key>Extension Name</key>
+			<string>Word Comment</string>
+			<key>Package Name</key>
+			<string>Word Comment.popclipext</string>
+		</dict>
+		<dict>
+			<key>Enabled</key>
+			<true/>
+			<key>Extension Identifier</key>
+			<string>com.pilotmoon.popclip.extension.generic-mail</string>
+			<key>Extension Name</key>
+			<string>Email</string>
+			<key>Package Name</key>
+			<string>Email.popclipext</string>
+		</dict>
+		<dict>
+			<key>Enabled</key>
+			<true/>
+			<key>Extension Identifier</key>
+			<string>autoid.on-screen keyboard.popclipext</string>
+			<key>Extension Name</key>
+			<string>On-Screen Keyboard</string>
+			<key>Package Name</key>
+			<string>On-Screen Keyboard.popclipext</string>
+		</dict>
+		<dict>
+			<key>Enabled</key>
+			<true/>
+			<key>Extension Identifier</key>
+			<string>com.popclip.extension.instant-translate</string>
+			<key>Extension Name</key>
+			<string>Instant Translate</string>
+			<key>Package Name</key>
+			<string>InstantTranslate.popclipext</string>
+		</dict>
+		<dict>
+			<key>Enabled</key>
+			<true/>
+			<key>Extension Identifier</key>
+			<string>de.chris-grieser.custom-busycal</string>
+			<key>Extension Name</key>
+			<string>BusyCal</string>
+			<key>Package Name</key>
+			<string>BusyCal.popclipext</string>
+		</dict>
+		<dict>
+			<key>Enabled</key>
+			<true/>
+			<key>Extension Identifier</key>
+			<string>com.pilotmoon.popclip.extension.drafts</string>
+			<key>Extension Name</key>
+			<string>Drafts</string>
+			<key>Package Name</key>
+			<string>Drafts.popclipext</string>
+		</dict>
+	</array>
+	<key>Version</key>
+	<integer>1</integer>
+</dict>
+</plist>

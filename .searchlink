@@ -1,0 +1,85 @@
+# set to true to have an HTML comment included detailing any errors
+debug: true
+# set to true to have an HTML comment included reporting results
+report: true
+
+# use Notification Center to display progress
+notifications: false
+
+# when running on a file, back up original to *.bak
+backup: true
+
+# change this to set a specific country for search (default US)
+country_code: DE
+
+# set to true to force inline Markdown links
+inline: false
+
+# set to true to include a random string in reference titles.
+# Avoids conflicts if you're only running on part of a document
+# or using SearchLink multiple times within a document
+prefix_random: true
+
+# set to true to add titles to links based on the page title
+# of the search result
+include_titles: false
+
+# confirm existence (200) of generated links. Can be disabled
+# per search with `--v`, or enabled with `++v`.
+validate_links: false
+
+# If the link text is left empty, always insert the page title
+# E.g. [](!g Search Text)
+empty_uses_page_title: true
+
+# Formatting for social links, use %service%, %user%, and %url%
+# E.g. "%user% on %service%" => "ttscoff on Twitter"
+#      "%service%/%user%" => "Twitter/ttscoff"
+#      "%url%" => "twitter.com/ttscoff"
+social_template: "%service%/%user%"
+
+# append affiliate link info to iTunes urls, empty quotes for none
+# example:
+# itunes_affiliate: "&at=10l4tL&ct=searchlink"
+itunes_affiliate: ""
+
+# to create Amazon affiliate links, set amazon_partner to your amazon
+# affiliate tag
+#    amazon_partner: "bretttercom-20"
+amazon_partner: ""
+
+# To create custom abbreviations for Google Site Searches,
+# add to (or replace) the hash below.
+# "abbreviation" => "site.url",
+# This allows you, for example to use [search term](!bt)
+# as a shortcut to search brettterpstra.com (using a site-specific
+# Google search). Keys in this list can override existing
+# search trigger abbreviations.
+#
+# If a custom search starts with "http" or "/", it becomes
+# a simple replacement. Any instance of "$term" is replaced
+# with a URL-escaped version of your search terms.
+# Use $term1, $term2, etc. to replace in sequence from
+# multiple search terms. No instances of "$term" functions
+# as a simple shortcut. "$term" followed by a "d" lowercases
+# the replacement. Use "$term1d," "$term2d" to downcase
+# sequential replacements (affected individually).
+# Long flags (e.g. --no-validate_links) can be used after
+# any url in the custom searches.
+custom_site_searches:
+  tub: tu-berlin.de
+  gh: github.com
+# Remove or comment (with #) history searches you don't want
+# performed by `!h`. You can force-enable them per search, e.g.
+# `!hsh` (Safari History only), `!hcb` (Chrome Bookmarks only),
+# etc. Multiple types can be strung together: !hshcb (Safari
+# History and Chrome bookmarks).
+history_types:
+- chrome_history
+- chrome_bookmarks
+# safari_bookmarks
+# safari_history
+# Pinboard search
+# You can find your api key here: https://pinboard.in/settings/password
+pinboard_api_key: ''
+

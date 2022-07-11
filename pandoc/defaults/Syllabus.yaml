@@ -1,0 +1,52 @@
+# https://pandoc.org/MANUAL.html#defaults-files
+# ---------------------------------------------
+
+filters: # must be array
+# needs extension to be recognized as lua filter instead of normal filter
+# must come after citeproc
+  - cite-full-source.lua
+
+# Academic
+citeproc: true
+csl: apa-6th-edition # does not need extension
+lang: de-DE
+bibliography: ${USERDATA}/main-bibliography.bib
+metadata:
+  link-citations: true
+  link-bibliography: true
+
+table-of-contents: true
+toc-depth: 2
+
+# ----------------------------------------
+
+# PDF-Writer
+writer: pdf
+standalone: true
+
+# html-based PDF-engine
+pdf-engine: wkhtmltopdf
+css: ${USERDATA}/css/nice-pandoc.css
+template: default
+dpi: 96 # default: 96
+
+# html options https://pandoc.org/MANUAL.html#variables-for-html
+marginTop: 25
+marginRight: 25
+marginBottom: 25
+marginLeft: 25
+pageSize: A4
+fontsize: 16px
+
+# General
+verbosity: INFO
+fail-if-warnings: true
+resource-path:
+  - .
+  - ./attachments
+  - ${HOME}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/ # Vault path for images
+
+# Markdown-Reader
+reader: markdown+lists_without_preceding_blankline
+strip-comments: true
+number-sections: true

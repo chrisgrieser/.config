@@ -1,0 +1,102 @@
+# Obsidian Discord Server Snippets
+# type "!carl" to then search for the approriate Carl trigger
+
+# Save this file without a leading underscore to use this expansions everywhere,
+# or save it with leading underscore to use for Discord-specific expansions
+# using this file: https://github.com/chrisgrieser/dotfiles/blob/main/espanso/config/discord.yml
+
+# ------------------------------------------------------------------------------
+matches:
+
+  - trigger: '!carl'
+    replace: debug help
+    label: Debugging Infos
+  - trigger: '!carl'
+    replace: migration help
+    label: Migration (Notion, Roam, Evernote)
+  - trigger: '!carl'
+    replace: get insider build
+    label: How to get the Insider Build
+  - trigger: '!carl'
+    replace: '!report {link-to-msg}'
+    label: Report a Spammer to the Mods
+  - trigger: '!carl'
+    replace: new to obsidian
+    label: Welcome Message for new People
+  - trigger: '!carl'
+    replace: format help
+    label: How to format in Markdown
+  - trigger: '!carl'
+    replace: config help
+    label: Config Help
+  - trigger: '!carl'
+    replace: alias help
+    label: Alias Help
+  - trigger: '!carl'
+    replace: mobile help
+    label: Mobile Help
+  - trigger: '!carl'
+    replace: template help
+    label: Template Help
+  - trigger: '!carl'
+    replace: get catalyst badge
+    label: Get Catalyst Badge
+  - trigger: '!carl'
+    replace: get roles
+    label: Get Discord Roles
+  - trigger: '!carl'
+    replace: get roles
+    label: 'Get the Developer role for #updates'
+  - trigger: '!carl'
+    replace: sync help
+    label: Sync Help
+  - trigger: '!carl'
+    replace: roadmap
+    label: Obsidian's roadmap
+  - trigger: '!carl'
+    replace: linux help
+    label: Linux Help
+  - trigger: '!carl'
+    replace: publish help
+    label: Obsidian Publish Help
+  - trigger: '!carl'
+    replace: check console
+    label: 'Where is the console in Obsidian?'
+  - trigger: '!carl'
+    replace: css help
+    label: CSS help
+  - trigger: '!carl'
+    replace: discord tricks
+    label: Discord Tricks
+  - trigger: '!carl'
+    replace: plugin security help
+    label: Info on Plugin Security in Obsidian
+  - trigger: '!carl'
+    replace: https://discord.com/channels/686053708261228577/840286264964022302/860627666100551721
+    label: "Get the 'Dev for Hire' role"
+  - trigger: '!carl'
+    replace: pins help
+    label: Where are the pins in Discord?
+
+  # Utilities
+  - trigger: '!carl'
+    replace: 'sudo rm "one day" buy milk'
+    label: Let Carl remind you to do sth
+  - trigger: '!carl'
+    replace: '!star stats @username'
+    label: Starboard Statistics for a user
+  - trigger: '!carl'
+    replace: '!plugin {query}'
+    label: Create a Plugin Search Link
+  - trigger: '!carl'
+    replace: 'sudo info {username}'
+    label: Info on the user
+
+  # Memes
+  - trigger: '!carl'
+    replace: all features of obsidian
+    label: 'Meme: All Features of Obsidian'
+
+  - triggers: ['!carl', '!xkcd']
+    replace: sudo xkcd automation
+    label: 'xkcd: automation'

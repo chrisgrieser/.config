@@ -1,0 +1,626 @@
+title: 🔺 App Switcher
+homepage: https://github.com/chrisgrieser/dotfiles/karabiner
+rules:
+  - description: '🔺 L-Ctrl (Non-Apple) / fn (Apple)'
+    manipulators:
+      - type: basic
+        description: Non-Apple Keyboard
+        from:
+          key_code: left_control
+        to:
+          - key_code: left_control
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 600
+        conditions:
+          - type: variable_unless
+            name: LEADER_ACTIVE
+            value: 1
+          - type: device_unless
+            identifiers:
+              - vendor_id: 76
+                is_keyboard: true
+        to_if_alone:
+          - key_code: left_control
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 1
+          - set_notification_message:
+              id: leader-notice
+              text: 🔺 Leader
+      - description: '2x Leader: F19'
+        type: basic
+        from:
+          key_code: left_control
+        to:
+          - key_code: left_control
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+          - type: device_unless
+            identifiers:
+              - vendor_id: 76
+                is_keyboard: true
+          - type: device_if
+            description: Prevent footpedal from accidentally triggering twice.
+            identifiers:
+              - is_pointing_device: false
+        to_if_alone:
+          - key_code: f19
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        description: Apple Keyboard
+        from:
+          key_code: fn
+        to:
+          - key_code: fn
+        conditions:
+          - type: variable_unless
+            name: LEADER_ACTIVE
+            value: 1
+          - type: device_if
+            identifiers:
+              - vendor_id: 76
+                is_keyboard: true
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 600
+        to_if_alone:
+          - key_code: fn
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 1
+          - set_notification_message:
+              id: leader-notice
+              text: 🔺 Leader
+      - description: '2x Leader: F19'
+        type: basic
+        from:
+          key_code: fn
+        to:
+          - key_code: fn
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+          - type: device_if
+            identifiers:
+              - vendor_id: 76
+                is_keyboard: true
+        to_if_alone:
+          - key_code: f19
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+  - description: 🔺 App Switcher Actions
+    manipulators:
+      - type: basic
+        description: Leader Cancel
+        from:
+          key_code: escape
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        description: 'Hyper (Esc): Leader Cancel'
+        from:
+          key_code: caps_lock
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to_if_alone:
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - description: Emoji Inserter
+        type: basic
+        from:
+          key_code: period
+        to:
+          - key_code: spacebar
+            modifiers:
+              - right_command
+              - right_control
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+      - description: Emoji Inserter
+        type: basic
+        from:
+          key_code: period
+          modifiers:
+            mandatory:
+              - shift
+        to:
+          - key_code: spacebar
+            modifiers:
+              - right_command
+              - right_control
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+      - type: basic
+        from:
+          key_code: c
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'BusyCal'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: comma
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'System Preferences'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: o
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Obsidian'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: d
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Discord'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          # switched y and z due to German Keyboard
+          key_code: "y"
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'zoom.us'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: e
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Sublime Text'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: r
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Drafts'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: s
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Slack'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: m
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Mimestream'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: b
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Brave Browser'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: l
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          # l: Activate Finder
+          - shell_command: open -a "Finder"
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: l
+          modifiers:
+            mandatory:
+              - shift
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          # L: Open default Location with Finder
+          - shell_command: open "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: k
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Karabiner-Elements'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: h
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Hammerspoon'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: k
+          modifiers:
+            mandatory:
+              - shift
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Karabiner-EventViewer'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: x
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          # for some reason open -a sometimes puts MacPass into the background :/
+          - shell_command: "osascript -e 'tell application \"MacPass\" to activate'"
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          # switched y and z due to German Keyboard
+          key_code: z
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'YouTube' || open 'https://www.youtube.com/'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: a
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Alfred Preferences'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: i
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Inoreader' || open 'https://www.inoreader.com/'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        description: ö → Twitterific (with scrolling fix)
+        from:
+          key_code: semicolon
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Twitterrific'
+          - key_code: down_arrow
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+      - type: basic
+        from:
+          key_code: p
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Highlights'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: g
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Docs' || open 'https://docs.google.com/'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: v
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'IINA'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          # "#" on Germany keyboard
+          key_code: non_us_pound
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'Color Picker'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: b
+          modifiers:
+            mandatory:
+              - shift
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'BetterTouchTool'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: w
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open 'https://web.whatsapp.com/'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: f
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open 'https://www.messenger.com/'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: t
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open 'https://web.telegram.org/z/'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: "y"
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: 1
+        to:
+          - shell_command: open -a 'zoom.us'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: 0
+          - set_notification_message:
+              id: leader-notice
+              text: ""

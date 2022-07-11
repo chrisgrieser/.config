@@ -1,0 +1,21 @@
+{
+  "name": "squatto/alfred-imessage-2fa",
+  "description": "Find two-factor authentication codes in your recent iMessage messages",
+  "version": "1.2.8",
+  "keywords": [
+    "alfred",
+    "alfred-workflow",
+    "2fa",
+    "imessage"
+  ],
+  "homepage": "https://github.com/squatto/alfred-imessage-2fa",
+  "support": {
+    "source": "https://github.com/squatto/alfred-imessage-2fa",
+    "issues": "https://github.com/squatto/alfred-imessage-2fa/issues"
+  },
+  "license": "MIT",
+  "require": {
+    "joetannenbaum/alfred-workflow": "^0.1.0",
+    "ext-pdo": "*"
+  }
+}

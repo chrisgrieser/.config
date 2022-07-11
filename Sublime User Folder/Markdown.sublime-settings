@@ -1,0 +1,16 @@
+// These settings override both User and Default settings for the Markdown syntax
+{
+	// Markdown Editing
+	"mde.italic_marker_asterisk": true, // * for italics
+	"mde.bold_marker_asterisk": false, //  __ for bold
+	"mde.list_indent_auto_switch_bullet": false,
+	"mde.list_align_text": false,
+
+	// Markdown specific theme
+	"light_color_scheme": "MarkdownEditor-ArcDark.sublime-color-scheme",
+	"dark_color_scheme": "Packages/User/MarkdownEditor-MonokaiC.tmTheme",
+
+	"spell_check": true,
+	// turn off spellcheck in URLs, inline code, fenced code, and HTML tags
+	"spelling_selector": "-(markup.underline.link, markup.raw.inline, markup.raw.code-fence, meta.code-fence.definition, meta.tag)",
+}

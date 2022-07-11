@@ -1,0 +1,54 @@
+{
+  "settingsVersion": "1.67",
+  "exclusionRules": [
+    {
+      "pattern": "https?://mail.google.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.inoreader.com/*",
+      "passKeys": "vo?a1dnpjkgM<C-m>"
+    },
+    {
+      "pattern": "https?://excalidraw.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.google.*/search*",
+      "passKeys": "jkHL-"
+    },
+    {
+      "pattern": "https?://github.com/*",
+      "passKeys": "?o"
+    },
+    {
+      "pattern": "https?://www.youtube.com/*",
+      "passKeys": "cm0123456789lNP/,.ti"
+    },
+    {
+      "pattern": "https?://github.com/*/issues(\\?q=*)?",
+      "passKeys": "jk"
+    },
+    {
+      "pattern": "https?://github.com/*/pulls(\\?q=*)?",
+      "passKeys": "jk"
+    }
+  ],
+  "filterLinkHints": false,
+  "waitForEnterForFilteredHints": false,
+  "hideHud": false,
+  "keyMappings": "\" Closing Tabs\nmap wq closeTabsOnLeft\nmap we closeTabsOnRight\nmap w2 moveTabToNewWindow\nmap ww closeOtherTabs\nmap u removeTab\nmap U restoreTab\n\" W = close window\nmap W removeTab count=19\n\n\" Scrolling Fast\nmap J scrollDown count=3\nmap K scrollUp count=3\nmap gl scrollRight\nmap gh scrollLeft\n\n\" History\nmap h goBack\nmap l goForward\n\n\" Reload\nmap R reload hard\n\n\" Pages (not history)\nmap H goPrevious\nmap L goNext\n \n\" Tabs\nmap t Vomnibar.activateTabSelection\nmap b previousTab\nmap e nextTab\nmap < moveTabLeft\nmap > moveTabRight\nmap 0 firstTab\nmap $ lastTab\n\n\" Link Mode\nmap <c-f> LinkHints.activateModeWithQueue\n\n\" mimic American keyboard layout\nmap - enterFindMode\n\n\" Global Marks\n\" https://github.com/philc/vimium/wiki/Tips-and-Tricks#swapping-global-and-local-marks\nmap ä Marks.activateGotoMode swap\nmap m Marks.activateCreateMode swap\n\n\" Misc\nmap M toggleMuteTab\nmap a passNextKey\n\n\" unmap unneeded stuff\nunmap d\nunmap B\nunmap T\nunmap o\nunmap O\nunmap `\nunmap <c-e>\nunmap <c-y>\nunmap /\nunmap ^\nunmap >>\nunmap <<\nunmap <a-m>\nunmap <a-p>\nunmap X\nunmap g0\nunmap g$\nunmap gE\nunmap [[\nunmap ]]\nunmap <a-f>",
+  "linkHintCharacters": "sadfjklewcmpgh",
+  "linkHintNumbers": "0123456789",
+  "newTabUrl": "about:newtab",
+  "nextPatterns": "next,more,newer,>,›,→,»,≫,>>",
+  "previousPatterns": "prev,previous,back,older,<,‹,←,«,≪,<<",
+  "regexFindMode": false,
+  "ignoreKeyboardLayout": false,
+  "scrollStepSize": 330,
+  "smoothScroll": true,
+  "grabBackFocus": true,
+  "searchEngines": "",
+  "searchUrl": "https://www.google.com/search?q=",
+  "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFF785),\n  color-stop(100%,#FFC542));\nborder: 1px solid #E3BE23;\n}\n\ndiv > .vimiumHintMarker span {\n/* linkhint text */\ncolor: black;\nfont-weight: bold;\nfont-size: 12px;\n}\n\ndiv > .vimiumHintMarker > .matchingCharacter {\n}"
+}

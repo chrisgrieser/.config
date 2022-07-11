@@ -1,0 +1,57 @@
+[
+   {
+      "title": "Editor",
+      "id": "editor",
+      "match": "editor readable line length brackets"
+   },
+   {
+      "title": "Files & Links",
+      "id": "file",
+      "match": "files links wikilinks trash path attachments"
+   },
+   {
+      "title": "Hotkeys",
+      "id": "hotkeys",
+      "match": "hotkeys keyboard shortcut"
+   },
+   {
+      "title": "Appearance",
+      "id": "appearance",
+      "match": "appearance themes snippets css"
+   },
+   {
+      "title": "About",
+      "id": "about",
+      "match": "about version update help"
+   },
+   {
+      "title": "Account",
+      "id": "account",
+      "match": "account sync publish mail password email"
+   },
+   {
+      "title": "Core Plugins",
+      "id": "plugins",
+      "match": "core plugins"
+   },
+   {
+      "title": "Community Plugins",
+      "id": "community-plugins",
+      "match": "community plugins"
+   },
+   {
+      "title": "Plugin Browser",
+      "id": "plugin-browser",
+      "match": "community plugins browser store"
+   },
+   {
+      "title": "Theme Browser",
+      "id": "theme-browser",
+      "match": "community themes browser store appearance css"
+   },
+   {
+      "title": "Update Community Plugins",
+      "id": "updateplugins",
+      "match": "plugins update"
+   }
+]

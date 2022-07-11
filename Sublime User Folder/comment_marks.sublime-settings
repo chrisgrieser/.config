@@ -1,0 +1,9 @@
+{
+	"default_level_char": "<",
+	"trim_trailing_comment_chars": true,
+	"scope_comment_chars": {
+		"source.neovintageousrc": ["\""],
+		"source.viml": ["\""],
+		"text.neovintageous.help": ["|", "*"]
+	},
+}

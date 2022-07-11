@@ -1,0 +1,27 @@
+[init]
+	defaultBranch = main
+[user]
+	name = pseudometa
+	email = 73286100+chrisgrieser@users.noreply.github.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	ui = true
+[core]
+	editor = vim
+	excludesfile = /Users/chrisgrieser/.gitignore_global
+# https://www.git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_formatting_and_whitespace
+	autocrlf = input
+[pager]
+	branch = false
+[pull]
+	rebase = true
+[status]
+	showUntrackedFiles = all
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

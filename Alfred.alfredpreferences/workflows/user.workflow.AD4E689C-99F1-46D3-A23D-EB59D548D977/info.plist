@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>de.chris-grieser.portfolio-performance</string>
+	<key>category</key>
+	<string>Stocks</string>
+	<key>connections</key>
+	<dict>
+		<key>0B8E1E56-5E9C-4E84-85C7-0F20E691CDA3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E134D3E9-9391-4703-8A58-28C22635069F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>38D89DF4-F068-4134-A21A-34EAADA5246E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FC8D25C0-57F5-4305-B668-16C344FA2211</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3E23500C-DCBF-48D6-879D-3087EA14DFA7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FC8D25C0-57F5-4305-B668-16C344FA2211</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4475FDC5-1AA5-4794-A478-36A8DD3D6D43</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5764C2E0-6B01-4410-A431-1B17CD6C0A71</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>48C01841-219C-4405-961D-A33BF7FC98BE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>38D89DF4-F068-4134-A21A-34EAADA5246E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4D0F59AA-8220-4B94-9BDA-6AA2834799FD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FBC05DED-4A46-46B7-8DBB-C03D3E4011AC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5764C2E0-6B01-4410-A431-1B17CD6C0A71</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AB2CFA84-74F7-4C3E-B9C0-1F0D2DF0DDFA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>811D21FB-47D1-4DBA-8E32-981AE6B69B7B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FC8D25C0-57F5-4305-B668-16C344FA2211</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AB2CFA84-74F7-4C3E-B9C0-1F0D2DF0DDFA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FC8D25C0-57F5-4305-B668-16C344FA2211</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B6351950-8536-46AD-A832-D23A7B8DC2C1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FC8D25C0-57F5-4305-B668-16C344FA2211</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B8D43BC5-BE16-495E-B193-81D0E2B04BDC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4D0F59AA-8220-4B94-9BDA-6AA2834799FD</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Copy Name &amp; ISIN</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>C08CBDAC-8DFC-4E6E-BF1D-ED4E6B14BDEA</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Copy Symbol</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0B8E1E56-5E9C-4E84-85C7-0F20E691CDA3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>FEBE6935-198A-4272-A17F-CC24C44391D8</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy WKN</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4475FDC5-1AA5-4794-A478-36A8DD3D6D43</string>
+				<key>modifiers</key>
+				<integer>8388608</integer>
+				<key>modifiersubtext</key>
+				<string>fn: Copy Name</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C08CBDAC-8DFC-4E6E-BF1D-ED4E6B14BDEA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CBD365BF-74F4-4326-91CB-5BBD9722F21B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CBD365BF-74F4-4326-91CB-5BBD9722F21B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B6351950-8536-46AD-A832-D23A7B8DC2C1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E134D3E9-9391-4703-8A58-28C22635069F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>811D21FB-47D1-4DBA-8E32-981AE6B69B7B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FBC05DED-4A46-46B7-8DBB-C03D3E4011AC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3E23500C-DCBF-48D6-879D-3087EA14DFA7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FEBE6935-198A-4272-A17F-CC24C44391D8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>48C01841-219C-4405-961D-A33BF7FC98BE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Chris Grieser</string>
+	<key>description</key>
+	<string>Searches your watchlists in the Portfolio Performance App for securities. Select one to copy its Name, Symbol, ISIN or WKN to the clipboard.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Portfolio Performance</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>'{var:id4}, {var:id1}'</string>
+				<key>title</key>
+				<string>Name &amp; ISIN copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>3E23500C-DCBF-48D6-879D-3087EA14DFA7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{var:id4}, {var:id1}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>FBC05DED-4A46-46B7-8DBB-C03D3E4011AC</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>delimiter</key>
+				<string>,</string>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>id</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>4D0F59AA-8220-4B94-9BDA-6AA2834799FD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>'{var:id2}'</string>
+				<key>title</key>
+				<string>Symbol copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>B6351950-8536-46AD-A832-D23A7B8DC2C1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{var:id2}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>CBD365BF-74F4-4326-91CB-5BBD9722F21B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>delimiter</key>
+				<string>,</string>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>id</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>C08CBDAC-8DFC-4E6E-BF1D-ED4E6B14BDEA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>'{var:id1}'</string>
+				<key>title</key>
+				<string>ISIN copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>811D21FB-47D1-4DBA-8E32-981AE6B69B7B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>pp</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Scanning Portfolio File for Assets...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>parse-pp-xml.js</string>
+				<key>subtext</key>
+				<string>by Name or Symbol</string>
+				<key>title</key>
+				<string>Search Portfolio for '{query}'</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>B8D43BC5-BE16-495E-B193-81D0E2B04BDC</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{var:id1}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>E134D3E9-9391-4703-8A58-28C22635069F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string># THESE VARIABLES MUST BE SET. SEE THE ONEUPDATER README FOR AN EXPLANATION OF EACH.
+readonly remote_info_plist='hhttps://raw.githubusercontent.com/chrisgrieser/portfolio-performance-alfred/main/info.plist'
+readonly workflow_url='chrisgrieser/portfolio-performance-alfred'
+readonly download_type='github_release'
+readonly frequency_check='1'
+
+# FROM HERE ON, CODE SHOULD BE LEFT UNTOUCHED!
+function abort {
+  echo "${1}" &gt;&amp;2
+  exit 1
+}
+
+function url_exists {
+  curl --silent --location --output /dev/null --fail --range 0-0 "${1}"
+}
+
+function notification {
+  local -r notificator="$(find . -type d -name 'Notificator.app')"
+  if [[ -n "${notificator}" ]]; then
+    "${notificator}/Contents/Resources/Scripts/notificator" --message "${1}" --title "${alfred_workflow_name}" --subtitle 'A new version is available'
+    return
+  fi
+
+  local -r terminal_notifier="$(find . -type f -name 'terminal-notifier')"
+  if [[ -n "${terminal_notifier}" ]]; then
+    "${terminal_notifier}" -title "${alfred_workflow_name}" -subtitle 'A new version is available' -message "${1}"
+    return
+  fi
+
+  osascript -e "display notification \"${1}\" with title \"${alfred_workflow_name}\" subtitle \"A new version is available\""
+}
+
+# Local sanity checks
+readonly local_info_plist='info.plist'
+readonly local_version="$(/usr/libexec/PlistBuddy -c 'print version' "${local_info_plist}")"
+
+[[ -n "${local_version}" ]] || abort 'You need to set a workflow version in the configuration sheet.'
+[[ "${download_type}" =~ ^(direct|page|github_release)$ ]] || abort "'download_type' (${download_type}) needs to be one of 'direct', 'page', or 'github_release'."
+[[ "${frequency_check}" =~ ^[0-9]+$ ]] || abort "'frequency_check' (${frequency_check}) needs to be a number."
+
+# Check for updates
+if [[ $(find "${local_info_plist}" -mtime +"${frequency_check}"d) ]]; then
+  if ! url_exists "${remote_info_plist}"; then abort "'remote_info_plist' (${remote_info_plist}) appears to not be reachable."; fi # Remote sanity check
+
+  readonly tmp_file="$(mktemp)"
+  curl --silent --location --output "${tmp_file}" "${remote_info_plist}"
+  readonly remote_version="$(/usr/libexec/PlistBuddy -c 'print version' "${tmp_file}")"
+
+  if [[ "${local_version}" == "${remote_version}" ]]; then
+    touch "${local_info_plist}" # Reset timer by touching local file
+    exit 0
+  fi
+
+  if [[ "${download_type}" == 'page' ]]; then
+    notification 'Opening download page…'
+    open "${workflow_url}"
+    exit 0
+  fi
+
+  download_url="$([[ "${download_type}" == 'github_release' ]] &amp;&amp; curl --silent "https://api.github.com/repos/${workflow_url}/releases/latest" | grep 'browser_download_url' | head -1 | sed -E 's/.*browser_download_url": "(.*)"/\1/' || echo "${workflow_url}")"
+
+  if url_exists "${download_url}"; then
+    notification 'Downloading and installing…'
+    curl --silent --location --output "${HOME}/Downloads/${alfred_workflow_name}.alfredworkflow" "${download_url}"
+    open "${HOME}/Downloads/${alfred_workflow_name}.alfredworkflow"
+  else
+    abort "'workflow_url' (${download_url}) appears to not be reachable."
+  fi
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>FC8D25C0-57F5-4305-B668-16C344FA2211</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>delimiter</key>
+				<string>,</string>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>id</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>0B8E1E56-5E9C-4E84-85C7-0F20E691CDA3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>'{var:id3}'</string>
+				<key>title</key>
+				<string>WKN copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>38D89DF4-F068-4134-A21A-34EAADA5246E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{var:id3}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>48C01841-219C-4405-961D-A33BF7FC98BE</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>delimiter</key>
+				<string>,</string>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>id</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>FEBE6935-198A-4272-A17F-CC24C44391D8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{var:id4}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>5764C2E0-6B01-4410-A431-1B17CD6C0A71</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>'{var:id4}'</string>
+				<key>title</key>
+				<string>Name copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>AB2CFA84-74F7-4C3E-B9C0-1F0D2DF0DDFA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>delimiter</key>
+				<string>,</string>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>id</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>4475FDC5-1AA5-4794-A478-36A8DD3D6D43</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># Release Notes
+v1.0
+- Copy ISIN and Name as Standard Action, as sharing with others seems to be one of the main use cases
+- changed some assignments of the modifier key accordingly
+- Search starts directly with PP keyword
+- enabled the use of `~` as substitute for the home folder. This is useful for when you sync Alfred across multiple machines.
+
+---
+
+# Portfolio Performance - Alfred Workflow
+
+Searches your watchlists in the Portfolio Performance App via Alfred. Select one to copy its Name, Symbol, ISIN, or WKN to the clipboard.
+
+&lt;img src="https://github.com/chrisgrieser/portfolio-performance-alfred/blob/main/Demo%20PPP.gif?raw=true" alt="" width=70% height=70%&gt;
+
+## How to use
+
+- Use the keyword `pp` in Alfred to search  your watchlists for a security. You can search for the name or the ticker symbol.
+- Select with `↵` to copy Name &amp; ISIN to your clipboard.
+- Select with `⌘` + `↵` to copy the ISIN.
+- Select with `⌥` + `↵` to copy the WKN.
+- Select with `⌥` + `↵` to copy the Symbol.
+- Select with `fn` + `↵` to copy the Name.
+
+Portfolio Performance does not need to be running. The xml-file has to be unencrypted, as Alfred is otherwise not able to read ist.
+
+## Installation
+
+- You need the [Alfred Powerpack](https://www.alfredapp.com/powerpack/) as well as [Portfolio Performance](https://www.portfolio-performance.info/).
+- Install [Homebrew](https://brew.sh/) by copypasting the following line into the Terminal:
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+- Wait for the installation to finish. If you are asked for a password, enter your Mac user password. It won't be visible while typing, but will still be accepted.
+- Afterwards, install the pcre library by copypasting the following line: `brew install pcre`.
+- [Download the latest release of this workflow](https://github.com/chrisgrieser/portfolio-performance-alfred/releases/latest)
+- Doubleclick the .alfredworkflow file to install it in Alfred
+- Enter the full path to your portfolio `xml`-file from *Portfolio Performance* next to `portfolio_file`
+  -  example: `/Users/chrisgrieser/Portfolio/My_Portfolio.xml`
+  -  replacing your home folder with `~` is fine. (useful when you sync Alfred across multiple machines)
+
+&lt;img src="https://github.com/chrisgrieser/portfolio-performance-alfred/blob/main/setup%201.png?raw=true" alt="Click here" width=60% height=60%&gt;
+
+&lt;img src="https://github.com/chrisgrieser/portfolio-performance-alfred/blob/main/setup%202.png?raw=true" alt="enter path to your portfolio file here" width=50% height=50%&gt;
+---
+
+[Disscussion at the Portfolio Performance Community (in German)](https://forum.portfolio-performance.info/t/isin-symbol-wkn-name-per-alfred-workflow-kopieren/16831)
+
+This workflow has been created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<key>uidata</key>
+	<dict>
+		<key>0B8E1E56-5E9C-4E84-85C7-0F20E691CDA3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<integer>295</integer>
+			<key>ypos</key>
+			<integer>330</integer>
+		</dict>
+		<key>38D89DF4-F068-4134-A21A-34EAADA5246E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<integer>535</integer>
+			<key>ypos</key>
+			<integer>455</integer>
+		</dict>
+		<key>3E23500C-DCBF-48D6-879D-3087EA14DFA7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<integer>535</integer>
+			<key>ypos</key>
+			<integer>25</integer>
+		</dict>
+		<key>4475FDC5-1AA5-4794-A478-36A8DD3D6D43</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<integer>295</integer>
+			<key>ypos</key>
+			<integer>625</integer>
+		</dict>
+		<key>48C01841-219C-4405-961D-A33BF7FC98BE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>copy WKN</string>
+			<key>xpos</key>
+			<integer>365</integer>
+			<key>ypos</key>
+			<integer>455</integer>
+		</dict>
+		<key>4D0F59AA-8220-4B94-9BDA-6AA2834799FD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<integer>295</integer>
+			<key>ypos</key>
+			<integer>55</integer>
+		</dict>
+		<key>5764C2E0-6B01-4410-A431-1B17CD6C0A71</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>copy Name</string>
+			<key>xpos</key>
+			<integer>365</integer>
+			<key>ypos</key>
+			<integer>595</integer>
+		</dict>
+		<key>811D21FB-47D1-4DBA-8E32-981AE6B69B7B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<integer>535</integer>
+			<key>ypos</key>
+			<integer>300</integer>
+		</dict>
+		<key>AB2CFA84-74F7-4C3E-B9C0-1F0D2DF0DDFA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<integer>535</integer>
+			<key>ypos</key>
+			<integer>595</integer>
+		</dict>
+		<key>B6351950-8536-46AD-A832-D23A7B8DC2C1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<integer>535</integer>
+			<key>ypos</key>
+			<integer>160</integer>
+		</dict>
+		<key>B8D43BC5-BE16-495E-B193-81D0E2B04BDC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<integer>55</integer>
+			<key>ypos</key>
+			<integer>300</integer>
+		</dict>
+		<key>C08CBDAC-8DFC-4E6E-BF1D-ED4E6B14BDEA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<integer>295</integer>
+			<key>ypos</key>
+			<integer>190</integer>
+		</dict>
+		<key>CBD365BF-74F4-4326-91CB-5BBD9722F21B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>copy Symbol</string>
+			<key>xpos</key>
+			<integer>365</integer>
+			<key>ypos</key>
+			<integer>160</integer>
+		</dict>
+		<key>E134D3E9-9391-4703-8A58-28C22635069F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>copy ISIN</string>
+			<key>xpos</key>
+			<integer>365</integer>
+			<key>ypos</key>
+			<integer>300</integer>
+		</dict>
+		<key>FBC05DED-4A46-46B7-8DBB-C03D3E4011AC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>copy Name &amp; ISIN</string>
+			<key>xpos</key>
+			<integer>365</integer>
+			<key>ypos</key>
+			<integer>25</integer>
+		</dict>
+		<key>FC8D25C0-57F5-4305-B668-16C344FA2211</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>OneUpdater (automatic update function)</string>
+			<key>xpos</key>
+			<integer>755</integer>
+			<key>ypos</key>
+			<integer>300</integer>
+		</dict>
+		<key>FEBE6935-198A-4272-A17F-CC24C44391D8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<integer>295</integer>
+			<key>ypos</key>
+			<integer>485</integer>
+		</dict>
+	</dict>
+	<key>variables</key>
+	<dict>
+		<key>portfolio_file</key>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Portfolio/Mein Portfolio.xml</string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array>
+		<string>portfolio_file</string>
+	</array>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/chrisgrieser/portfolio-performance-alfred/r</string>
+</dict>
+</plist>

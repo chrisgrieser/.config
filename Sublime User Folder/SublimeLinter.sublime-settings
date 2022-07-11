@@ -1,0 +1,52 @@
+// SublimeLinter Settings - User
+{
+	"lint_mode": "background",
+	"highlights.demote_while_editing": "some_ws",
+	"highlights.demote_scope": "region.yellowish markup.warning.sublime_linter",
+
+	"statusbar.messages_template": "{code}",
+	"statusbar.show_active_linters": true,
+
+	"styles": [
+		{
+			"types": ["info"],
+			"scope": "region.blueish",
+			"icon": "square",
+			"mark_style": "solid_underline",
+		},
+		{
+			"types": ["warning"],
+			"icon": "dot",
+			"mark_style": "none",
+		},
+		{
+			"types": ["error"],
+			"icon": "triangle",
+		},
+	],
+
+	"linters": {
+		// this ensures that markdownlint's rc is found. also no ~ is needed
+		// trailing spaces and single trailing new line disabled as Sublime already does take care of that
+		"markdownlint": {
+			"args": ["--config", "/.markdownlintrc", "--disable=no-trailing-spaces", "--disable=single-trailing-newline"]
+		},
+		"stylelint": {
+			"filter_errors": "warning: ",
+		},
+		// "yamllint": {
+		// 	"args": ["--config-file", "/.config/yamllint/config/.yamllint.yaml"]
+		// },
+		"eslint": {
+			// "filter_errors": "warning: ",
+		},
+		// https://scriptingosx.com/2019/08/shellcheck-and-zsh/
+		"shellcheck": {
+			"args": ["--shell=bash"]
+		},
+		"annotations": {
+			"infos": ["TODO", "INFO"],
+			"errors": ["WARNING"]
+		}
+	}
+}

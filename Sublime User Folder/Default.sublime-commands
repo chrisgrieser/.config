@@ -1,0 +1,5 @@
+// these commands will be added to the Command Palette
+[
+	{ "caption": "Toggle Record Macro", "command": "toggle_record_macro" },
+	{ "caption": "Show Scope Name", "command": "show_scope_name" },
+]

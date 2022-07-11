@@ -1,0 +1,6 @@
+// These settings override both User and Default settings for the YAML syntax
+{
+	"translate_tabs_to_spaces": true,
+	"tab_size": 2,
+	"draw_white_space": ["all_tabs"],
+}

@@ -1,0 +1,306 @@
+""""""""""""""""""""""
+" < Leader
+""""""""""""""""""""""
+let mapleader=,
+
+""""""""""""""""""""""
+" < Clipboard
+""""""""""""""""""""""
+" yank to system clipboard
+" set via setting: "vintageous_use_sys_clipboard": true,
+
+" Y consistent with D and C to the end of linek
+nnoremap Y y$
+
+" always paste what was yanked, not what was deleted
+nnoremap P "0p
+vnoremap P "0p
+
+""""""""""""""""""""""
+" < Search
+""""""""""""""""""""""
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+
+" no modfier key for jumping to next word
+noremap + *
+
+" quicker find mode (by mirroring American keyboard layout on German keyboard layout)
+noremap - /
+
+" [M]ute search highlights
+nnoremap <C-m> :nohlsearch<CR>
+
+""""""""""""""""""""""
+" < Nagivation
+""""""""""""""""""""""
+
+" Scroll horizontally back
+nnoremap Q mz0`z
+
+" Have j and k navigate visual lines rather than logical ones
+nnoremap j gj
+nnoremap k gk
+
+" HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
+nnoremap H ^
+vnoremap H ^
+nnoremap L $
+vnoremap L $
+nnoremap J 7j
+vnoremap J 7j
+nnoremap K 7k
+vnoremap K 7k
+
+" gA and gI analog
+nnoremap gA g$a
+nnoremap gI g^i
+
+" cause easier to press, lol
+nnoremap [ {
+nnoremap ] }
+
+" Goto Mark
+nnoremap ä `
+
+" Next/Previous Sublime Linter Errors
+nnoremap gl ]l
+nnoremap gL [l
+
+" [g]oto [z]pelling Errors (Spelling)
+nnoremap gz ]s
+nnoremap gZ [s
+" add word to dictionary/undo adding to dictionary (already built in)
+" nnoremap zg zg
+
+" [g]oto [d]efinition
+nnoremap gd :LspSymbolDefinition side_by_side=false<CR>
+nnoremap gD :LspSymbolReferences<CR>
+
+" [g]oto [s]ymbol
+noremap gs :ShowOverlay overlay=goto text=@<CR>
+
+" [g]oto [r]egion (via comment marks plugin)
+noremap gr :GotoComment<CR>
+
+" [g]oto [o]pen file (= Quick Switcher)
+noremap go :OpenBrowse<CR>
+
+" [g]oto [f]ollow link under cursor
+noremap gf :OpenUrlUnderCursor<CR>
+
+""""""""""""""""""""""
+" < Editing
+""""""""""""""""""""""
+
+""""""""""""""""""""""
+" << General Editing
+""""""""""""""""""""""
+
+" don't pollute the register
+nnoremap x "_x
+nnoremap c "_c
+
+" Consistent with Insert Mode Selection
+vnoremap <BS> "_d
+
+" UNDO consistently on one key
+nnoremap U <C-r>
+vnoremap U <C-r>
+
+" CASE SWITCH (added h for vertical navigation)
+nnoremap Ü ~h
+" Switch Case of first letter of the word = (toggle between Capital and lower case)
+nnoremap ü mzlblgueh~`z
+
+" TRANSPOSE
+" (insert mode done via Sublime's build in command imap <C-t> xph)
+" current & next char
+nnoremap ö xp
+" current & previous char
+nnoremap Ö xhhp
+" current & next word
+nnoremap Ä dawelpb
+
+""""""""""""""""""""""
+" << Line-Based Editing
+""""""""""""""""""""""
+
+" [M]erge lines
+noremap M J
+
+" Add Blank Line above/below
+nnoremap = mzO<Esc>`z
+nnoremap _ mzo<Esc>`z
+" these require cursor being on the right end of the selection though...
+vnoremap = <Esc>O<Esc>gv
+vnoremap _ <Esc>o<Esc>gv
+
+
+" Append punctuation to end of line
+nnoremap <leader>, mzA,<Esc>`z
+nnoremap <leader>; mzA;<Esc>`z
+nnoremap <leader>. mzA.<Esc>`z
+nnoremap <leader>" mzA"<Esc>`z
+nnoremap <leader>' mzA'<Esc>`z
+nnoremap <leader>: mzA:<Esc>`z
+nnoremap <leader>) mzA)<Esc>`z
+nnoremap <leader>( mzA(<Esc>`z
+nnoremap <leader>] mzA]<Esc>`z
+nnoremap <leader>[ mzA[<Esc>`z
+nnoremap <leader>{ mzA{<Esc>`z
+nnoremap <leader>} mzA}<Esc>`z
+nnoremap <leader>} mzA}<Esc>`z
+
+" Remove last character from line
+nnoremap X mz$"_x`z
+
+""""""""""""""""""""""
+" << Indentation
+""""""""""""""""""""""
+
+" Make indention work like in other editors
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+nnoremap \ =
+nnoremap \\ ==
+vnoremap \ =
+
+""""""""""""""""""""""
+" << language-specific
+""""""""""""""""""""""
+
+" Markdown: allows Double Enter to add new line and indent bullet points
+nnoremap <CR> A
+
+" Markdown: Prepend Bullet or Blockquote
+nnoremap <leader>- mzI- <Esc>`z
+nnoremap <leader>< mzI> <Esc>`z
+nnoremap <leader>> mzI> <Esc>`z
+
+" Markdown: [g]oto footnote [d]efinition (and back)
+noremap g<M-d> :MdeMagicFootnotes<CR>h<Esc>
+
+" CSS: double/remove [c]lass under cursor
+nnoremap <leader>c mzlEF.yEEp`z
+nnoremap <leader>C lF.d/[.\s]<CR>
+
+" CSS: Important Switcher
+noremap <leader>i :ImportantSwitcher<CR>
+
+""""""""""""""""""""""
+" < Text Objects
+""""""""""""""""""""""
+
+" Change Word/Selection
+nnoremap <Space> "_ciw
+vnoremap <Space> "_c
+
+" Delete Word/Selection
+nnoremap <S-Space> "_daw
+vnoremap <S-Space> "_d
+vnoremap d "_d
+vnoremap x "_d
+
+" [R]eplace Word with register content
+nnoremap R viw"0p
+vnoremap R "0P
+
+""""""""""""""""""""""
+" < Insert Mode
+""""""""""""""""""""""
+" implemented via in "Default (OSX).sublime-keymap"
+" since neovintageousrc cannot do that in its rc file
+
+""""""""""""""""""""""
+" < Surround
+""""""""""""""""""""""
+" emulate some smarter punctuation bindings from Smarter MD Hotkeys
+nnoremap <C-2> ysiw"
+vnoremap <C-2> S"
+
+nnoremap <C-0> ysiw]
+vnoremap <C-0> iwoiwS]
+
+nnoremap <C-8> ysiw)
+vnoremap <C-8> iwoiwS)
+nnoremap <C-9> ysiw)
+vnoremap <C-9> iwoiwS)
+
+""""""""""""""""""""""
+" < not needed
+""""""""""""""""""""""
+" Tabs, Folding, and Sneak already built in
+
+""""""""""""""""""""""
+" < Window Management
+""""""""""""""""""""""
+" most <C-w> commands are only unlocked by using the Sublime Origami Plugin
+" https://vimhelp.org/index.txt.html#CTRL-W
+
+" move buffer instead of copying it when splitting
+nnoremap <C-w>v <C-w>v<C-w>h<C-w>c<C-w>l
+vnoremap <C-w>v <C-w>v<C-w>h<C-w>c<C-w>l
+nnoremap <C-w>s <C-w>s<C-w>k<C-w>c<C-w>j
+vnoremap <C-w>s <C-w>s<C-w>k<C-w>c<C-w>j
+
+" [g]oto next/prev [w]indow (analogous to gt)
+nnoremap gw :FocusNeighboringGroup<CR>
+vnoremap gw :FocusNeighboringGroup<CR>
+nnoremap gW :FocusNeighboringGroup forward=false<CR>
+vnoremap gW :FocusNeighboringGroup forward=false<CR>
+
+" using Origami Commands
+" https://github.com/SublimeText/Origami/blob/master/Origami.sublime-commands
+nnoremap <C-w>+ :ZoomPane fraction=0.9<CR>
+" this is essentially nnoremap <C-w>+ <C-w>_
+
+""""""""""""""""""""""
+" < Options
+""""""""""""""""""""""
+" textwidth for gq
+set textwidth=80
+
+" Shortcuts from vim.unimpaired
+" [O]ption: line [n]umbers
+noremap <leader>on yon
+" [O]ption: [s]pellcheck
+noremap <leader>os yos
+" [O]ption: line [w]rap
+noremap <leader>ow yow
+
+""""""""""""""""""""""
+" < Sorting
+"""""""""""""""""""""
+
+" [s]ort [s]election
+vnoremap <leader>ss :'<,'>sort<CR>
+
+" [s]ort [a]rray, if multi-line (+ remove duplicates)
+nnoremap <leader>sa vi]:sort u<CR>
+
+" [s]ort [g]lobally
+nnoremap <leader>sg :sort<CR>
+
+" [s]ort [p]aragraph
+nnoremap <leader>sp vip:sort<CR>
+
+"""""""""""""""""""""""""""""
+" < Neovintageous Limitations
+"""""""""""""""""""""""""""""
+" - Normal `map` (as opposed to noremap) is not supported any i command 🙈
+" - macros are not saved to a register
+" - gi does not work https://github.com/NeoVintageous/NeoVintageous/issues/810
+" - Neovintageous does not allow for any insert mode modifications, these need
+"   to be done in Sublime, with
+"   "context": [{"key": "vi_insert_mode_aware"}]
+
+""""""""""""""""""""""
+" < unused keys
+""""""""""""""""""""""
+" ? !

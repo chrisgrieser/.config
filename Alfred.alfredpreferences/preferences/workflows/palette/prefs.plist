@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>favourites</key>
+	<array>
+		<string>Junction</string>
+		<string>Hotkey</string>
+		<string>Universal Action</string>
+		<string>Copy to Clipboard</string>
+		<string>Arg and Vars</string>
+		<string>Open URL</string>
+		<string>Script Filter</string>
+		<string>Open File</string>
+		<string>Split Arg</string>
+		<string>External</string>
+		<string>Keyword</string>
+		<string>Replace</string>
+		<string>Post Notification</string>
+		<string>Conditional</string>
+		<string>Large Type</string>
+		<string>Call External Trigger</string>
+		<string>Run Script</string>
+		<string>Dispatch Key Combo</string>
+		<string>Running Apps</string>
+	</array>
+</dict>
+</plist>

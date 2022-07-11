@@ -1,0 +1,21 @@
+# encrypted data
+Academia/PhD Data/
+
+# Mac Stuff
+.DS_Store
+.Trash
+# Icon must end with two \r
+Icon
+
+
+# Sublime
+*.sublime-workspace
+
+# git
+**/.git/
+
+# Backup folder
+Dotfolder/Backups/
+
+# zsh raw plugins
+Dotfolder/Config/zsh/plugins

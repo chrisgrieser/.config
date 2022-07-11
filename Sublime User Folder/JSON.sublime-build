@@ -1,0 +1,11 @@
+{
+	"selector": "source.json",
+	"cmd": ["echo", "No standard build available. Build variants available, though."],
+	"working_dir": "$file_path",
+	"variants": [
+		{
+			"name": "Convert to YAML",
+			"shell_cmd": "yq -P '.' \"$file\" > \"$file_base_name\".yaml"
+		}
+	]
+}
