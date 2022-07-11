@@ -64,6 +64,7 @@ wakeWatcher:start()
 firstWakeTimer = hs.timer.doAt("12:10", "12h", function()
 	firstWakeOfTheDay = true
 end, false)
+firstWakeTimer:start()
 
 -- redundancy: daily morning run
 if isIMacAtHome() then
