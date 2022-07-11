@@ -14,7 +14,7 @@ require("utils")
 -- Base
 require("scroll-and-cursor")
 require("menubar")
-require("system-states")
+require("system-and-cron")
 require("window-management")
 require("filesystem-watchers")
 
@@ -28,12 +28,6 @@ require("twitterrific-iina")
 
 -- Spoons
 require("vim-mode")
-
--- https://www.hammerspoon.org/Spoons/ColorPicker.html
-hs.loadSpoon("ColorPicker")
-spoon.ColorPicker:start()
-hotkey(hyper, "P", function () spoon.ColorPicker.toggleColorSamples("Crayons") end)
--- spoon.ColorPicker:bindHotkeys({show={hyper, "U"}})
 
 --------------------------------------------------------------------------------
 notify("Config reloaded")
