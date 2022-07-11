@@ -1,7 +1,5 @@
 #!/bin/zsh
 
-set -e  # exit with 1 if any command fails
-
 # go to script location (the script should be located in the git repository)
 THIS_LOCATION="$(dirname "$0")"
 cd "$THIS_LOCATION" || exit 1
@@ -20,7 +18,7 @@ git add -A
 # no full date needed, since git shows it already
 git commit -m "$(date +"%a, %H:%M"), $changeType, $device_name" -m "$details"
 
-git pull
-git push
+git pull || exit 1
+git push || exit 1
 
 
