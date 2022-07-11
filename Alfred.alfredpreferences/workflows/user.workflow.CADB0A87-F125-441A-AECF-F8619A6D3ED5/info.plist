@@ -136,7 +136,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>requires Mouse 4/5 set to F13/14 via Karabiner Elements. Sublime Mousekeys set in Sublime configs</string>
+	<string>Magic Mouse/Trackpad actions defined via BetterTouchTool. Sublime Mousekeys set in Sublime configs</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -608,7 +608,7 @@ end alfred_script</string>
 				<string>on alfred_script(q)
 
 tell application "System Events"
-	tell process "Brave Browser"
+	tell process "YouTube"
 		set frontmost to true
 			try
 				click menu item "Exit Full Screen" of menu "View" of menu bar 1
