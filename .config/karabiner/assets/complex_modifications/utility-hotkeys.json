@@ -385,16 +385,10 @@
             },
             {
               "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^com\\.apple\\.Terminal$",
-                "^md\\.obsidian$",
-                "^com\\.sublimetext\\.4$"
-              ]
-            },
-            {
-              "type": "frontmost_application_unless",
               "file_path": [
-                "alacritty$"
+                "alacritty$",
+                "Obsidian\\.app",
+                "Sublime Text\\.app"
               ]
             }
           ]
