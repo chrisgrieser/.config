@@ -55,8 +55,10 @@ function activeWindowHighlight(appName, eventType)
 	end)
 
 	rectTimer = runDelayed(highlightDuration, function()
-		rect:delete()
-		rect = nil
+		if rect then
+			rect:delete()
+			rect = nil
+		end
 	end)
 end
 appActivationWatcher = hs.application.watcher.new(activeWindowHighlight)

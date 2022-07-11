@@ -7,16 +7,17 @@ firstWakeOfTheDay = true
 
 repoSyncFrequencyMin = 0.5
 function dotfileRepoGitSync ()
-	local output, success = hs.execute('zsh "$HOME/Dotfiles/git-dotfile-backup.sh"')
-	if not(success) then
-		notify("⚠️⚠️⚠️ "..output)
-		hs.execute('echo "dotfile Repo Git Sync ERROR $(date "+%Y-%m-%d %H:%M")" >> "$HOME/Dotfiles/Cron Jobs/frequent.log"')
-	else
-		notify ("✅ Dotfile Repo Sync successful.")
-		hs.execute('echo "dotfile Repo Git Sync success $(date "+%Y-%m-%d %H:%M")" >> "$HOME/Dotfiles/Cron Jobs/frequent.log"')
-	end
+	-- local output, success = hs.execute('zsh "$HOME/Dotfiles/git-dotfile-backup.sh"')
+	-- if not(success) then
+	-- 	notify("⚠️⚠️⚠️ "..output)
+	-- 	hs.execute('echo "dotfile Repo Git Sync ERROR $(date "+%Y-%m-%d %H:%M")" >> "$HOME/Dotfiles/Cron Jobs/frequent.log"')
+	-- else
+	-- 	notify ("✅ Dotfile Repo Sync successful.")
+	-- 	hs.execute('echo "dotfile Repo Git Sync success $(date "+%Y-%m-%d %H:%M")" >> "$HOME/Dotfiles/Cron Jobs/frequent.log"')
+	-- end
+		notify("⚠test")
 end
-hs.timer.doEvery(repoSyncFrequencyMin * 60, dotfileRepoGitSync)
+repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, dotfileRepoGitSync)
 
 --------------------------------------------------------------------------------
 
@@ -61,7 +62,7 @@ wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
 
 -- reset firstWake variable
-hs.timer.doAt("12:10", "12h", function()
+firstWakeTimer = hs.timer.doAt("12:10", "12h", function()
 	firstWakeOfTheDay = true
 end, false)
 
