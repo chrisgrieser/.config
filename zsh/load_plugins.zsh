@@ -16,8 +16,8 @@ source "$(brew --prefix)"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.
 source "$(brew --prefix)"/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 eval "$(starship init zsh)"
-source "$ZSH_DOTFILE_LOCATION"/plugins/magic_enter.zsh
-source "$ZSH_DOTFILE_LOCATION"/plugins/obsidian-vault-navigation.sh
+source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
+source "$DOTFILE_FOLDER/zsh/plugins/obsidian-vault-navigation.sh"
 
 # fix for Starship-Terminus issue, https://github.com/starship/starship/issues/3627
 if [[ "$TERM_PROGRAM" == "Terminus-Sublime" ]] ; then

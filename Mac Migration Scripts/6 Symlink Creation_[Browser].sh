@@ -3,10 +3,12 @@ cd ~/Desktop || return 1
 # -------------------
 
 DOTFILE_FOLDER=~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Dotfiles/"
-rm -rf ~/.zshrc
+[[ -e ~/.zshrc ]] && rm -rf ~/.zshrc
 ln -sf "$DOTFILE_FOLDER/zsh/.zshrc" ~
-rm -rf ~/.zprofile
+[[ -e ~/.zprofile ]] && rm -rf ~/.zprofile
 ln -sf "$DOTFILE_FOLDER/zsh/.zprofile" ~
+[[ -e ~/.zsh_history ]] && rm -rf ~/.zsh_history
+ln -sf "$DOTFILE_FOLDER/zsh/.zsh_history" ~
 ln -sf "$DOTFILE_FOLDER/zsh/.zlogin" ~
 
 ln -sf "$DOTFILE_FOLDER/.searchlink" ~
@@ -23,7 +25,7 @@ ln -sf "$DOTFILE_FOLDER/.flake8" ~
 ln -sf "$DOTFILE_FOLDER/.vimrc" ~
 
 # .config
-rm -rf ~/.config
+[[ -e ~/.config ]] && rm -rf ~/.config
 ln -sf "$DOTFILE_FOLDER/.config/" ~/.config
 
 # Hammerspoon
@@ -36,8 +38,9 @@ ESPANSO_DIR=~"/Library/Application Support/espanso"
 ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 
 # Sublime
-rm -rf ~"/Library/Application Support/Sublime Text/Packages/User"
-ln -sf "$DOTFILE_FOLDER/Sublime User Folder/" ~"/Library/Application Support/Sublime Text/Packages/User"
+SUBLIME_USER_DIR=~"/Library/Application Support/Sublime Text/Packages/User"
+[[ -e "$SUBLIME_USER_DIR" ]] && rm -rf "$SUBLIME_USER_DIR"
+ln -sf "$DOTFILE_FOLDER/Sublime User Folder/" "$SUBLIME_USER_DIR"
 rm -rf ~"/Library/Application Support/Sublime Text/Installed Packages/CSS3.sublime-package"
 ln -sf "$DOTFILE_FOLDER/Sublime Packages/CSS3.sublime-package" ~"/Library/Application Support/Sublime Text/Installed Packages"
 
