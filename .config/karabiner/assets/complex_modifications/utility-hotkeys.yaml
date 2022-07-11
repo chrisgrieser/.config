@@ -192,13 +192,10 @@ rules:
             input_sources:
               - language: ^de$
           - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^com\.apple\.Terminal$
-              - ^md\.obsidian$
-              - ^com\.sublimetext\.4$
-          - type: frontmost_application_unless
             file_path:
               - alacritty$
+              - Obsidian\.app
+              - Sublime Text\.app
       - description: ^
         type: basic
         from:

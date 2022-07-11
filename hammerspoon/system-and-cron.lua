@@ -13,7 +13,7 @@ function dotfileRepoGitSync ()
 		log ("dotfile sync ✅", "$HOME/Dotfiles/Cron Jobs/frequent.log")
 	else
 		notify("⚠️⚠️⚠️ "..output)
-		log ("dotfile sync ⚠️ ERROR", "$HOME/Dotfiles/Cron Jobs/frequent.log")
+		log ("dotfile sync ⚠️", "$HOME/Dotfiles/Cron Jobs/frequent.log")
 	end
 end
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, dotfileRepoGitSync)

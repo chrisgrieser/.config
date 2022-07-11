@@ -66,5 +66,5 @@ ln -sf "$DOTFILE_FOLDER/../$BROWSER Apps.localized/" ~"/Applications/$BROWSER Ap
 # ln -sf "$DOTFILE_FOLDER/obsidian-vim-helpers.js" "$OBSI_ICLOUD/Development/Meta"
 # ln -sf "$DOTFILE_FOLDER/pandoc/README.md" "$OBSI_ICLOUD/Main Vault/Knowledge Base/Pandoc.md"
 
-
-
+# YAMLlint
+# ln -sf "$DOTFILE_FOLDER/.config/yamllint/config/.yamllint.yaml" "$DOTFILE_FOLDER/.config/karabiner/assets/complex_modifications"
