@@ -6,11 +6,12 @@ if [[ "$TERM_PROGRAM" != "Terminus-Sublime" ]] ; then
 	clear
 	# 33% art, 66% fortune
 	if [[ $((RANDOM%3)) == 1 ]] ; then
-		bash "$ZSH_DOTFILE_LOCATION"/plugins/colorscript.bash --random
+		bash "$DOTFILE_FOLDER/zsh/plugins/colorscript.bash" --random
 	else
 		echo
 		echo "> $(fortune -n270 -s)"
 	fi
 	echo
 fi
+
 
