@@ -9,6 +9,7 @@ local vim = VimMode:new()
 -- vim
 vim
   :disableForApp('Alacritty')
+  :disableForApp('alacritty')
   :disableForApp('Sublime Text')
   :disableForApp('Obsidian')
   :disableForApp('zoom.us')
