@@ -60,7 +60,7 @@ function killIfRunning (appName)
 end
 
 function bttBridge (triggerName)
-	hs.applescript('tell application "BetterTouchTool" to trigger_named "'..triggerName..'"')
+	hs.osascript.applescript('tell application "BetterTouchTool" to trigger_named "'..triggerName..'"')
 end
 
 function runDelayed (delaySecs, fn)

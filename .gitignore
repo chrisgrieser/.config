@@ -18,8 +18,8 @@ pw.*
 private.*
 Private.*
 
-# Git Repos (already backed up)
-# -----------------------------
+# Git Repos (already backed up & git can't handle nested repos)
+# -------------------------------------------------------------
 # Shimmering Obsidian
 user.workflow.D02FCDA1-EA32-4486-B5A6-09B42C44677C
 # PDF Annotation Extractor

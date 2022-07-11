@@ -30,5 +30,11 @@ workArray.push({
 	"arg": "https://www.hammerspoon.org/docs/hs.keycodes.html#map",
 	"uid": "keymaps",
 });
+workArray.push({
+	"title": "hs.execute",
+	"match": "shell execute hs hs.execute",
+	"arg": "https://www.hammerspoon.org/docs/hs.html#execute",
+	"uid": "execute",
+});
 
 JSON.stringify({ items: workArray });
