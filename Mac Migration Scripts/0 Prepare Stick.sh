@@ -3,24 +3,16 @@
 # change to target
 STICK="/Volumes/CG_Stick"
 
-
 # ----------------------------
 
-# TODO Script to create 'pw.md'
-
-cd "$STICK" || exit
+cd "$STICK" || exit 1
 dump
+DOTFILE_FOLDER="$(dirname "$0")"
 
-DOTFOLDER=~'/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/'
+cp -R "$DOTFILE_FOLDER/Mac Installation Scripts" .
 
-# Installation Scripts
-cp -R "$DOTFOLDER/Mac Installation Scripts" .
-
-# Keeweb
-cp "$DOTFOLDER/log11.kdbx" .
-cp "$DOTFOLDER/log11.key" .
+cp ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Authentification/log11.kdbx" .
+cp ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Authentification/log11.key" .
 cp -R '/Applications/MacPass.app' .
-cp -R ~'/Library/Application Support/MacPass' .
 
-# open folder afterwards
 open .
