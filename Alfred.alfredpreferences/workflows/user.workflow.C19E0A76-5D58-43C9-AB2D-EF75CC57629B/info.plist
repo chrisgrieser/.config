@@ -614,11 +614,11 @@ end tell</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>18</integer>
+				<integer>34</integer>
 				<key>hotmod</key>
-				<integer>1179648</integer>
+				<integer>1048576</integer>
 				<key>hotstring</key>
-				<string>1</string>
+				<string>I</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -878,63 +878,63 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<integer>740</integer>
+			<real>740</real>
 			<key>ypos</key>
-			<integer>430</integer>
+			<real>430</real>
 		</dict>
 		<key>24D53802-F053-49F4-B779-6BDB1A52ED1F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>560</integer>
+			<real>560</real>
 			<key>ypos</key>
-			<integer>430</integer>
+			<real>430</real>
 		</dict>
 		<key>35ABB0A1-AF1E-4ED6-A919-795E719E7A3E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>50</integer>
+			<real>50</real>
 			<key>ypos</key>
-			<integer>265</integer>
+			<real>265</real>
 		</dict>
 		<key>4B25067C-D4E4-42B0-8423-89F4259F3747</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>560</integer>
+			<real>560</real>
 			<key>ypos</key>
-			<integer>290</integer>
+			<real>290</real>
 		</dict>
 		<key>4BB46A41-E38A-452E-BE45-654A047753E7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>220</integer>
+			<real>220</real>
 			<key>ypos</key>
-			<integer>515</integer>
+			<real>515</real>
 		</dict>
 		<key>543286E3-D2BA-4E83-97C5-BC1C80DA423F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>50</integer>
+			<real>50</real>
 			<key>ypos</key>
-			<integer>150</integer>
+			<real>150</real>
 		</dict>
 		<key>5C2F5D32-3378-4113-8B9C-0EE01B44217C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>215</integer>
+			<real>215</real>
 			<key>ypos</key>
-			<integer>150</integer>
+			<real>150</real>
 		</dict>
 		<key>6CA2A894-8F29-4377-A512-D1176412BE12</key>
 		<dict>
@@ -943,81 +943,81 @@ end tell</string>
 			<key>note</key>
 			<string>Rename</string>
 			<key>xpos</key>
-			<integer>215</integer>
+			<real>215</real>
 			<key>ypos</key>
-			<integer>385</integer>
+			<real>385</real>
 		</dict>
 		<key>779F2DDF-0F3A-4554-B618-42112ADE236A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>215</integer>
+			<real>215</real>
 			<key>ypos</key>
-			<integer>645</integer>
+			<real>645</real>
 		</dict>
 		<key>78265889-4998-4FB4-81C8-4E4A310FBEC3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>390</integer>
+			<real>390</real>
 			<key>ypos</key>
-			<integer>15</integer>
+			<real>15</real>
 		</dict>
 		<key>7F6BF142-13CA-46BC-84CD-BD118A19E4EB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>50</integer>
+			<real>50</real>
 			<key>ypos</key>
-			<integer>20</integer>
+			<real>20</real>
 		</dict>
 		<key>81FB5A92-6950-4467-BD70-412B75FC5D9C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>560</integer>
+			<real>560</real>
 			<key>ypos</key>
-			<integer>15</integer>
+			<real>15</real>
 		</dict>
 		<key>8381EF4A-4C44-45C9-85EF-267E24F63778</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>560</integer>
+			<real>560</real>
 			<key>ypos</key>
-			<integer>555</integer>
+			<real>555</real>
 		</dict>
 		<key>8761D3DB-84AE-4647-8309-12721F4D1E0B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>50</integer>
+			<real>50</real>
 			<key>ypos</key>
-			<integer>515</integer>
+			<real>515</real>
 		</dict>
 		<key>A25572A8-A977-4A22-843D-3B1AED7E452C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>215</integer>
+			<real>215</real>
 			<key>ypos</key>
-			<integer>265</integer>
+			<real>265</real>
 		</dict>
 		<key>A6945A0F-251F-4EFF-B9B0-3F71BE399933</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>50</integer>
+			<real>50</real>
 			<key>ypos</key>
-			<integer>645</integer>
+			<real>645</real>
 		</dict>
 		<key>C4BC97EE-7AF6-43A0-B84A-7B9249B659C0</key>
 		<dict>
@@ -1026,45 +1026,45 @@ end tell</string>
 			<key>note</key>
 			<string>go forward</string>
 			<key>xpos</key>
-			<integer>390</integer>
+			<real>390</real>
 			<key>ypos</key>
-			<integer>290</integer>
+			<real>290</real>
 		</dict>
 		<key>DF06A248-C7EF-4162-9214-81143FA2E662</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>395</integer>
+			<real>395</real>
 			<key>ypos</key>
-			<integer>430</integer>
+			<real>430</real>
 		</dict>
 		<key>EB5E0C6A-B758-4923-8925-D057C2C338B8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>50</integer>
+			<real>50</real>
 			<key>ypos</key>
-			<integer>385</integer>
+			<real>385</real>
 		</dict>
 		<key>EDDFA7E8-44AC-4634-A419-9C2EE170C373</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<integer>740</integer>
+			<real>740</real>
 			<key>ypos</key>
-			<integer>555</integer>
+			<real>555</real>
 		</dict>
 		<key>EFE37DC6-56C2-49F9-8665-76325F648FF8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>560</integer>
+			<real>560</real>
 			<key>ypos</key>
-			<integer>150</integer>
+			<real>150</real>
 		</dict>
 		<key>F7DCF7C1-239F-45F8-B3A9-DA3F7CCFA161</key>
 		<dict>
@@ -1073,9 +1073,9 @@ end tell</string>
 			<key>note</key>
 			<string>comment</string>
 			<key>xpos</key>
-			<integer>395</integer>
+			<real>395</real>
 			<key>ypos</key>
-			<integer>555</integer>
+			<real>555</real>
 		</dict>
 		<key>FAC27072-95C2-4043-9525-80C28D16E3A4</key>
 		<dict>
@@ -1084,20 +1084,22 @@ end tell</string>
 			<key>note</key>
 			<string>go back</string>
 			<key>xpos</key>
-			<integer>390</integer>
+			<real>390</real>
 			<key>ypos</key>
-			<integer>150</integer>
+			<real>150</real>
 		</dict>
 		<key>FEB25131-5B73-4417-B3FF-7DCC2B250357</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>215</integer>
+			<real>215</real>
 			<key>ypos</key>
-			<integer>20</integer>
+			<real>20</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
