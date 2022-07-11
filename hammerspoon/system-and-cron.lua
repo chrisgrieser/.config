@@ -25,11 +25,19 @@ function pullSync()
 		notify("⚠️⚠️⚠️ "..output)
 	end
 end
-pullSync()
+
 --------------------------------------------------------------------------------
 
+function systemShutDown (eventType)
+	if not(eventType == hs.caffeinate.watcher.systemWillSleep or eventType == hs.caffeinate.watcher.systemWillPowerOff) then return end
+	dotfileRepoGitSync()
+	firstWakeOfTheDay = true
+end
+shutDownWatcher = hs.caffeinate.watcher.new(systemShutDown)
+shutDownWatcher:start()
+
 function systemWake (eventType)
-	if (eventType == hs.caffeinate.watcher.systemDidWake) then return end
+	if not(eventType == hs.caffeinate.watcher.systemDidWake) then return end
 
 	reloadAllMenubarItems()
 	hs.shortcuts.run("Send Reminders due today to Drafts")
@@ -55,17 +63,10 @@ function systemWake (eventType)
 		]])
 	end
 
-	if firstWakeOfTheDay then
-		pullSync()
-		firstWakeOfTheDay = false
-	end
+	pullSync()
 end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
-
--- reset firstWake variable
-firstWakeTimer = hs.timer.doAt("12:10", "12h", function() firstWakeOfTheDay = true end)
-firstWakeTimer:start()
 
 -- redundancy: daily morning run
 if isIMacAtHome() then
