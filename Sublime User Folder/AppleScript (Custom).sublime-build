@@ -1,0 +1,10 @@
+{
+	"selector": "source.applescript",
+	"cmd": ["echo", "No Standard Build available."],
+	"variants": [
+		{
+			"name": "Make Executable",
+			"cmd": ["chmod", "+x", "$file"]
+		},
+	]
+}

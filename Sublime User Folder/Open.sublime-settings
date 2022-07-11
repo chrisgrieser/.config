@@ -1,0 +1,10 @@
+{
+    // Files or directories to be shown at the begining
+    "bookmarks": [],
+
+    // List the directory of the currently file
+    "list_current_dir": true,
+
+    // Ignore regex patters
+    "filter_regex": ["\\.DS_Store", "\\.git", ".*\\.json"]
+}

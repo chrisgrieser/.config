@@ -1,0 +1,26 @@
+# https://espanso.org/docs/configuration/options/
+# -----------------------------------------------------
+
+toggle_key: OFF  # yamllint disable-line rule:truthy
+search_shortcut: META+ALT+SPACE
+
+show_icon: false
+show_notifications: true
+
+# Enable/disable the config auto-reload after a file change is detected.
+# buggy (leads to crashes) and also annoying when working on a file :/
+auto_restart: true
+
+# --- Clipboard threshold
+# Because injecting long texts char-by-char is a slow operation, espanso automatically
+# uses the clipboard if the text is longer than 'clipboard_threshold' characters.
+clipboard_threshold: 100
+preserve_clipboard: true
+restore_clipboard_delay: 300
+
+# --- Injection Backend
+# Espanso supports multiple ways of injecting text into applications. Each of
+# them has its quirks, therefore you may want to change it if you are having problems.
+# By default, espanso uses the "Auto" backend which should work well in most cases,
+# but you may want to try the "Clipboard" or "Inject" backend in case of issues.
+# backend: Clipboard

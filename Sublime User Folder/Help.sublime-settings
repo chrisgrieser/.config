@@ -1,0 +1,8 @@
+// These settings override both User and Default settings for the Help syntax
+{
+	"draw_white_space": ["selection"],
+
+	// Markdown specific theme
+	"light_color_scheme": "MarkdownEditor.sublime-color-scheme",
+	"dark_color_scheme": "Packages/User/MarkdownEditor-MonokaiC.tmTheme",
+}

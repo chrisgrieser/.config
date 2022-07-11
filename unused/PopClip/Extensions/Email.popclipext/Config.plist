@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Extension Description</key>
+	<string>Create a new mail message with the selected "to:" address, or with the selected text, in the default mail client.</string>
+	<key>Extension Identifier</key>
+	<string>com.pilotmoon.popclip.extension.generic-mail</string>
+	<key>Extension Image File</key>
+	<string>envelope.png</string>
+	<key>Extension Name</key>
+	<string>Email</string>
+	<key>Required Software Version</key>
+	<integer>3543</integer>
+</dict>
+</plist>

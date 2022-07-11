@@ -1,0 +1,31 @@
+# https://pandoc.org/MANUAL.html#defaults-files
+# ---------------------------------------------
+
+# Word-Writer
+writer: docx+native_numbering
+reference-doc: ${USERDATA}/reference-docs/academic-paper.docx
+
+# General
+verbosity: WARNING
+fail-if-warnings: true
+table-of-contents: false
+toc-depth: 3
+resource-path:  # must be array
+  - .
+  - ./attachments
+  - ${HOME}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/  # Vault path for images
+
+# Markdown-Reader
+reader: markdown+lists_without_preceding_blankline
+strip-comments: true
+number-sections: true
+
+# Academic
+citeproc: true
+metadata-files:  # = fallback values
+  - academic.yaml  # (must be array)
+bibliography: ${USERDATA}/main-bibliography.bib
+
+# INFO: needs to be installed
+# filters: # must be array
+#   - pandoc-crossref

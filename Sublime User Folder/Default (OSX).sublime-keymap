@@ -1,0 +1,290 @@
+// https://www.sublimetext.com/docs/key_bindings.html
+
+// find menu commands
+// cp "/Applications/Sublime Text.app/Contents/MacOS/Packages/Default.sublime-package" .
+// unzip Default.sublime-package -d ./Default\ Package/
+// cd Default\ Package/
+
+// find plugin command IDs
+// /Library/Application Support/Sublime Text/Installed Packages/
+// Plugin Package → unzip → Default.sublime-commands
+
+// toggle multiple commands
+// https://stackoverflow.com/questions/23312111/multiple-commands-with-args-under-1-hotkey-in-sublime-text-3
+
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+[
+	// MEH Bindings (shift+control+alt = meh)
+
+	// Change Color Scheme
+	{ "keys": ["shift+control+alt+t"], "command": "select_color_scheme" },
+	// Installation / Uninstallation
+	{ "keys": ["shift+control+alt+i"], "command": "install_package" },
+	{ "keys": ["shift+control+alt+u"], "command": "remove_package" },
+
+	// Wrap
+	{ "keys": ["alt+shift+ctrl+w"], "command": "toggle_setting", "args": { "setting": "word_wrap" } },
+
+	// LSP Variable Rename
+	{"command": "lsp_symbol_rename", "keys": ["shift+control+alt+r"], "context": [
+		{"key": "lsp.session_with_capability", "operator": "equal", "operand": "renameProvider"}
+	] },
+
+	// Fold
+	{ "keys": ["shift+control+alt+1"], "command": "fold_by_level", "args": {"level": 1} },
+	{ "keys": ["shift+control+alt+2"], "command": "fold_by_level", "args": {"level": 2} },
+	{ "keys": ["shift+control+alt+3"], "command": "fold_by_level", "args": {"level": 3} },
+	{ "keys": ["shift+control+alt+4"], "command": "fold_by_level", "args": {"level": 4} },
+	{ "keys": ["shift+control+alt+5"], "command": "fold_by_level", "args": {"level": 5} },
+	{ "keys": ["shift+control+alt+6"], "command": "fold_by_level", "args": {"level": 6} },
+	{ "keys": ["shift+control+alt+7"], "command": "fold_by_level", "args": {"level": 7} },
+	{ "keys": ["shift+control+alt+8"], "command": "fold_by_level", "args": {"level": 8} },
+	{ "keys": ["shift+control+alt+9"], "command": "fold_by_level", "args": {"level": 9} },
+	{ "keys": ["shift+control+alt+f"], "command": "unfold_all" },
+
+
+	// ------------------------------------
+
+	// to avoid `Esc` leaving insert mode and autocomplete
+	// (weirdly enough, copying this from the default sublime-keymap
+	// is required to fix it oO)
+	// https://github.com/NeoVintageous/NeoVintageous/issues/822
+	{ "keys": ["escape"], "command": "hide_auto_complete", "context": [
+		{ "key": "auto_complete_visible", "operator": "equal", "operand": true }
+	] },
+	{
+		"keys": ["escape"],
+		"command": "nv_feed_key",
+		"args": {"key": "<esc>"},
+		"context": [
+			{ "key": "vi_insert_mode_aware"},
+			{ "key": "auto_complete_visible", "operator": "not_equal", "operand":  true }
+		]
+	},
+
+	// Window Closing Bugfix, https://github.com/sublimehq/sublime_text/issues/5237#issuecomment-1048857619
+	// fixed with Build 4130
+	{ "keys": ["super+q"],
+		"command": "chain",
+		"args": {
+			"commands": [
+				["close_all"],
+				["set_layout", {"cols": [0.0, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1]] } ],
+				["exit"]
+			]
+		}
+	},
+
+	//---------------------------------------------------------------------------
+
+	// imap vv <Esc>v (quick visual mode)
+	{"keys": ["v", "v"], "command": "chain",
+		"args": {
+			"commands": [
+				["nv_enter_normal_mode"],
+				["nv_feed_key", {"key": "v"}],
+			]
+		},
+		"context": [{ "key": "vi_insert_mode_aware" } ]
+	},
+
+	// imap VV <Esc>V (quick visual line mode)
+	{"keys": ["V", "V"], "command": "chain",
+		"args": {
+			"commands": [
+				["nv_enter_normal_mode"],
+				["nv_feed_key", {"key": "V"}],
+			]
+		},
+		"context": [{ "key": "vi_insert_mode_aware" } ]
+	},
+
+	// Kill line, imap <C-k> <Esc>C
+	{ "keys": ["ctrl+k"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard EOL.sublime-macro"},
+		"context": [{ "key": "vi_insert_mode_aware" } ]
+	},
+
+	// Kill line backwards, imap <C-j> <Esc>c^
+	{ "keys": ["ctrl+j"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard BOL.sublime-macro"},
+		"context": [{ "key": "vi_insert_mode_aware" } ]
+	},
+
+	// ctrl+a and ctrl+e already seem to work out of the box
+
+	//---------------------------------------------------------------------------
+
+	// Build System
+	// Build Selection
+	{ "keys": ["super+shift+r"], "command": "build", "args": {"select": true} },
+	// Lint (using Build System)
+	{ "keys": ["shift+alt+ctrl+l"], "command": "build", "args": { "variant": "Lint Autofix" } },
+	// Executable (using Build System)
+	{ "keys": ["shift+alt+ctrl+x"], "command": "build", "args": { "variant": "Make Executable" } },
+	// Quick Build
+	{ "keys": ["super+r"], "command": "build", "context": [
+		{"key": "selector", "operator": "not_equal", "operand": "text.html.markdown"},
+	] },
+
+	// Build System: Console
+	{"keys": ["ctrl+escape"], "command": "show_panel", "args": {"panel": "output.exec"}, "context": [
+		{ "key": "panel_visible", "operand": false }
+	] },
+
+	//---------------------------------------------------------------------------
+
+	// Lines
+	{ "keys": ["super+d"], "command": "run_macro_file", "args": { "file": "res://Packages/Default/Delete Line.sublime-macro" } },
+	{ "keys": ["super+2"], "command": "swap_line_up" },
+	{ "keys": ["super+3"], "command": "swap_line_down" },
+
+	// Merge Line up
+	{ "keys": ["super+m"], "command": "join_lines" },
+	// Merge Line down
+	{ "keys": ["super+shift+m"], "command": "run_macro_file", "args": {"file": "res://Packages/User/Merge Line Down.sublime-macro"} },
+
+	// Smart Duplicate (CSS) (Plugin)
+	{ "keys": ["shift+alt+ctrl+d"], "command": "smart_duplicate", "context": [
+		{"key": "selector", "operator": "equal", "operand": "source.css"},
+	]},
+	// lineS is the smarter duplication plugin
+	{ "keys": ["super+shift+d"], "command": "duplicate_lines" },
+	// Split Line
+	{ "keys": ["super+shift+l"], "command": "split_selection_into_lines"},
+
+	// Multi Cursor down / up
+	{ "keys": ["ctrl+shift+up"], "command": "select_lines", "args": {"forward": false} },
+	{ "keys": ["ctrl+shift+down"], "command": "select_lines", "args": {"forward": true} },
+
+	// Comment
+	{ "keys": ["super+7"], "command": "toggle_comment", "args": { "block": false } },
+	{ "keys": ["super+shift+7"], "command": "toggle_comment", "args": { "block": true } },
+
+	// Undo/Redo Selection
+	{ "keys": ["super+u"], "command": "jump_back" },
+	{ "keys": ["super+shift+u"], "command": "jump_forward" },
+
+	// Mouse Keys
+	{ "keys": ["f16"], "command": "close" },
+	{ "keys": ["f13"], "command": "next_view" },
+
+   // Disable Accidental Triggering of Saving Modal
+   { "keys": ["super+shift+s"], "command": "noop" },
+
+	// Expand Selection
+	{ "keys": ["super+j"], "command": "find_under_expand",
+		"context": [ { "key": "auto_complete_visible", "operator": "equal", "operand": false } ]
+	},
+	{ "keys": ["super+shift+j"], "command": "find_under_expand_skip" },
+	{ "keys": ["alt+shift+j"], "command": "find_under" },
+	{ "keys": ["super+shift+a"], "command": "lsp_expand_selection"},
+
+	// Paste and Indent & Convert Indentation
+	{ "keys": ["super+v"], "command": "paste_and_indent",
+		"context": [{"key": "terminus_view", "operator": "not_equal" ,"operand": true}]
+	},
+	{ "keys": ["super+shift+i"], "command": "reindent", "args": {"single_line": false} },
+
+	// SETTINGS & INSTALLATION
+	// Open preferences without the annoying split
+	{ "keys": ["super+,"], "command": "open_file", "args": { "file": "${packages}/User/Preferences.sublime-settings"} },
+	// Keybindings Settings
+	{ "keys": ["super+shift+,"], "command": "open_file", "args": { "file": "${packages}/User/Default ($platform).sublime-keymap"} },
+	// Syntax-Specific Settings
+	{ "keys": ["super+alt+,"], "command": "edit_syntax_settings" },
+	// .neovintageousrc
+	{ "keys": ["shift+alt+,"], "command": "open_file", "args": { "file": "${packages}/User/.neovintageousrc"} },
+	// Console
+	{ "keys": ["ctrl+escape"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
+
+	// Palette
+	{ "keys": ["super+p"], "command": "show_overlay", "args": { "overlay": "command_palette" } },
+
+	// Spellcheck
+	{ "keys": ["ctrl+s"], "command": "toggle_setting", "args": {"setting": "spell_check"} },
+	// Sidebar
+	{ "keys": ["super+1"], "command": "toggle_side_bar" },
+	{ "keys": ["super+0"], "command": "toggle_tabs" },
+
+	// FILE MANAGEMENT
+	{ "keys": ["super+n"], "command": "advanced_new_file_new"},
+	{ "keys": ["super+shift+n"], "command": "new_file" },
+	{ "keys": ["ctrl+d"], "command": "advanced_new_file_copy"},
+	{ "keys": ["super+backspace"], "command": "delete_current_file" },
+	{ "keys": ["super+l"], "command": "open_dir", "args": {"dir": "$file_path", "file": "$file_name"}  },
+	{ "keys": ["ctrl+r"], "command": "rename_file"},
+	{ "keys": ["ctrl+p"], "command": "copy_path"},
+
+	// "Open" Plugin
+	{ "keys": ["super+o"], "command": "open_browse", "context": [
+		{ "key": "auto_complete_visible", "operator": "equal", "operand": false }
+	] },
+
+	// CUSTOM PLUGINS
+	{ "keys": ["ctrl+n"], "command": "copy_filename" },
+	{ "keys": ["super+i"], "command": "important_switcher", "context": [
+		{ "key": "selector", "operator": "equal", "operand": "source.css" }
+	] },
+
+	// TERMINUS
+	// Terminus: Open a terminal panel at current file directory
+	{  "keys": ["super+8"],
+		"command": "toggle_terminus_panel",
+		"args": {
+			"cwd": "${file_path:${folder}}",
+		}
+	},
+
+	// fix entering of pipe character and @
+	{ "keys": ["alt+7"], "command": "terminus_keypress", "args": {"key": "|"}, "context": [{"key": "terminus_view"}] },
+	{ "keys": ["alt+l"], "command": "terminus_keypress", "args": {"key": "@"}, "context": [{"key": "terminus_view"}] },
+	{ "keys": ["super+k"], "command": "terminus_keypress", "args": {"key": "l", "ctrl": true}, "context": [
+		{ "key": "terminus_view" },
+		{ "key": "auto_complete_visible", "operator": "equal", "operand": false }
+	] },
+
+	// MARKDOWN
+	{ "keys": ["super+r"], "command": "markdown_preview", "args": {"target": "browser", "parser":"github"} , "context": [
+		{"key": "selector", "operator": "equal", "operand": "text.html.markdown"},
+	] },
+	{ "keys": ["super+^"], "command": "mde_reference_new_footnote", "context": [
+		{ "key": "selector", "operator": "equal", "operand": "text.html.markdown", "match_all": true },
+		{ "key": "setting.mde.keymap_disable.reference_new_footnote", "operator": "not_equal", "operand": true }
+	] },
+
+	// Markdown Inline Code (w/o selection)
+	{ "keys": ["super+e"], "command": "chain",
+		"args": {
+			"commands": [
+				["insert", {"characters": "``"}],
+				["move", {"by": "characters", "forward": false}]
+			]
+		},
+		"context": [
+			// not restricted to markdown `scope`, so it can be used in comments as well
+			{"key": "selection_empty", "operator": "equal", "operand": true},
+		]
+	},
+
+	// Markdown Inline Code (w/ selection)
+	{ "keys": ["super+e"], "command": "chain",
+		"args": {
+			"commands": [
+				{"command": "cut" },
+				{"args": { "characters": "`" }, "command": "insert" },
+				{"command": "paste" },
+				{"args": { "characters": "`" }, "command": "insert" },
+			]
+		},
+		"context": [
+			// not restricted to markdown `scope`, so it can be used in comments as well
+			{"key": "selection_empty", "operator": "equal", "operand": false},
+		]
+	},
+
+	{ "keys": ["super+k"], "command": "mde_reference_new_inline_link", "context": [
+		{ "key": "selector", "operator": "equal", "operand": "text.html.markdown" },
+		{ "key": "auto_complete_visible", "operator": "equal", "operand": false }
+	] },
+]
+

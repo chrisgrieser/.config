@@ -1,0 +1,21 @@
+matches:
+  - trigger: "roadmap"
+    replace: "ro*dmap [auto-censored]"
+  - $trigger: "!update"
+    replace: |
+      **Shimmering Focus Update ⟡**
+
+      ✨ __New__
+      - $|$
+
+      ↗️ __Improvements__
+      -
+
+      🐞 __Bug Fixes__
+      -
+
+      ⚠️ __Breaking Changes__
+      -
+
+      📓 __Docs__
+      https:\\chrisgrieser.github.io/shimmering-focus/

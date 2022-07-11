@@ -1,0 +1,13 @@
+// Documentation at https://www.sublimetext.com/docs/themes.html
+{
+	"variables":
+	{
+	},
+	"rules":
+	[
+		{
+		"class": "quick_panel_label",
+		"font.size": 15,
+		}
+	]
+}

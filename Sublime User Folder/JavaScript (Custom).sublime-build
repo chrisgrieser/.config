@@ -1,0 +1,21 @@
+{
+	"selector": "source.js",
+	"cmd": ["node", "$file"],
+	"variants": [
+		{
+			"name": "Lint Autofix",
+			// needs explicite reference to config file: https://eslint.org/docs/user-guide/migrating-to-7.0.0#-runtime-deprecation-warnings-for-eslintrc-config-files
+			"shell_cmd": "eslint --config \\$HOME/.eslintrc.json --fix \"$file\""
+		},
+		{
+			"name": "Make Executable",
+			"cmd": ["chmod", "+x", "$file"]
+		},
+		{
+			"name": "run",
+			"shell_cmd": "/usr/bin/osascript -l JavaScript \"$file\""
+		},
+	]
+}
+
+

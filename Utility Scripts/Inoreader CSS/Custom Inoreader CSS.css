@@ -1,0 +1,103 @@
+/* reset in case css breaks something: https://www.inoreader.com/?safe_mode=1 */
+
+.article_open_new_tab,
+.article_unread_dot,
+.article_favicon {
+	display: none;
+}
+
+body .reader_pane_view_style_0 .article_short_contents {
+	display: none !important; /* important needed */
+}
+
+.article_title_wrapper {
+	max-width: 840px;
+}
+
+.article_feed_title {
+	width: 240px;
+	flex: 0 0 240px;
+}
+
+.article_header_title {
+	font-weight: 500;
+}
+
+
+.article_title_wrapper,
+.article_feed_title {
+	font-family: "Avenir Next";
+	letter-spacing: -0.2px;
+}
+
+/* favicons */
+.article_feed_favicon > img {
+	height: 17px;
+	width: 17px;
+}
+
+.feed_favicon,
+.discovery_feed_favicon {
+	opacity: 0.9;
+}
+
+/* opened article */
+.article_expanded .article_content.article_content.article_content {
+	line-height: 1.3;
+	font-family: "Garamond";
+	max-width: 1000px;
+	font-size: 1.7em;
+}
+
+.article_expanded .article_title .article_title_link {
+	font-size: 90%;
+	line-height: 1.15 !important;
+	font-family: "Optima" !important;
+	letter-spacing: 0.2px;
+}
+
+.article_expanded br,
+.article_footer_placeholder_middle,
+.article_expanded .article_header_text {
+	display: none;
+}
+
+.article_full_contents.article_full_contents.article_full_contents.article_full_contents {
+	width: 750px;
+}
+
+.article_content.article_content {
+	text-align: justify;
+	hyphens: auto;
+}
+
+.article_expanded :is(h1, h2, h3, h4, h5, h6, p) {
+	margin-block-end: 0.6em;
+	margin-block-start: 0.6em;
+}
+
+.article_expanded .article_author,
+.article_expanded .article_sub_title.article_sub_title {
+	font-size: 1rem;
+}
+
+.article_expanded .article_author .feed_favicon {
+	vertical-align: unset !important; /* needs important */
+	height: 18px;
+	width: 18px;
+}
+
+.article_expanded .article_sub_title.article_sub_title {
+	margin-bottom: 10px;
+	padding-right: 0;
+	font-family: "Avenir Next" !important;
+}
+
+/* finish line */
+div#no_more_div {
+	display: none !important;
+}
+
+.older_articles_hint {
+	padding-top: 10px;
+}

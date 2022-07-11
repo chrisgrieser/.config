@@ -1,0 +1,33 @@
+// Settings in here override those in "LSP/LSP.sublime-settings"
+{
+  // Status Bar
+  "show_view_status": true,
+  "show_diagnostics_count_in_view_status": false,
+  "show_diagnostics_in_view_status": true,
+
+  // severity levels
+  // none: 0 (never show)
+  // error: 1
+  // warning: 2
+  // info: 3
+  // hint: 4
+
+  // Panel
+  "show_diagnostics_panel_on_save": 0,
+  "diagnostics_panel_include_severity_level": 4,
+  "show_diagnostics_severity_level": 4,
+
+  // Gutter
+  "diagnostics_gutter_marker": "dot",
+
+  // Code Action
+  "show_code_actions": "annotation",
+  "show_code_actions_in_hover": true,
+
+  // Autocomplete
+  "inhibit_snippet_completions": false,
+
+  // hover
+  "show_references_in_quick_panel": true,
+
+}

@@ -1,0 +1,43 @@
+font:
+  normal:
+    family: Input
+    style: Regular
+  bold:
+    family: Input
+    style: Bold
+  italic:
+    family: Input
+    style: Italic
+  size: 23
+  use_thin_strokes: true
+  draw_bold_text_with_bright_colors: true
+  builtin_box_drawing: true
+  offset:
+    x: 2
+    'y': 6
+  glyph_offset:
+    'y': 3
+cursor:
+  style:
+    shape: Beam
+    blinking: Never
+    unfocused_hollow: true
+window:
+  decorations: buttonless
+  dimensions:
+    columns: 70
+  padding:
+    x: 20
+    'y': 15
+  opacity: 0.99
+live_config_reload: true
+selection:
+  save_to_clipboard: true
+key_bindings:
+  - key: 43
+    mods: Command
+    command:
+      program: sh
+      args:
+        - '-c'
+        - open ~/.config/alacritty/preview-window.yml

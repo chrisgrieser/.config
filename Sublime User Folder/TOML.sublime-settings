@@ -1,0 +1,6 @@
+// These settings override both User and Default settings for the TOML syntax
+{
+	// for previewing icons for Starship
+	"font_face": "JetBrainsMonoNL Nerd Font",
+	"font_size": 14,
+}

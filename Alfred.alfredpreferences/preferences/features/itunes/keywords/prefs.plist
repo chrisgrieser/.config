@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>backEnabled</key>
+	<false/>
+	<key>inDefaultResults</key>
+	<true/>
+	<key>nextEnabled</key>
+	<false/>
+	<key>playpauseEnabled</key>
+	<false/>
+	<key>previousEnabled</key>
+	<false/>
+	<key>randomEnabled</key>
+	<false/>
+	<key>volmaxEnabled</key>
+	<false/>
+	<key>volmidEnabled</key>
+	<false/>
+	<key>volminEnabled</key>
+	<false/>
+</dict>
+</plist>

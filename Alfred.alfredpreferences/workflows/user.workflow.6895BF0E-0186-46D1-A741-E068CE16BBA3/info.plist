@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>de.chris-grieser.trashmail</string>
+	<key>category</key>
+	<string>Mini-Apps</string>
+	<key>connections</key>
+	<dict>
+		<key>0198854D-4A0F-4717-BC41-B4B814951876</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>08216767-CB9A-4FB6-AEDF-AA927704AEB5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>08216767-CB9A-4FB6-AEDF-AA927704AEB5</key>
+		<array/>
+		<key>0F6DB773-7447-4D7C-900E-59F3E9C69B19</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B46D4F01-F87D-4123-9D22-FB7EDABD729F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>361EF992-408A-44A7-8928-706BE131B801</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>90439A10-18CA-44FC-9516-21723CE49144</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3C073A54-0FF5-46B7-A886-7EF36A81668C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>59869625-BFE1-4EFE-BDF5-2C209BA3CC85</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5DEA869F-1D1D-433F-B75A-213565DCD579</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5DEA869F-1D1D-433F-B75A-213565DCD579</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7888F38A-9726-4D88-AB3B-A0FBC509F7BD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>74C53D92-1952-4166-8D9F-7499047E29FF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0198854D-4A0F-4717-BC41-B4B814951876</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7888F38A-9726-4D88-AB3B-A0FBC509F7BD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>74C53D92-1952-4166-8D9F-7499047E29FF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>90439A10-18CA-44FC-9516-21723CE49144</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>59869625-BFE1-4EFE-BDF5-2C209BA3CC85</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Chris Grieser</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Trash Mail &amp; Password Generation</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>mail</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Create Trash Mailadress &amp; Password</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>361EF992-408A-44A7-8928-706BE131B801</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>'{query}'</string>
+				<key>title</key>
+				<string>✅ Mail &amp; Password copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>08216767-CB9A-4FB6-AEDF-AA927704AEB5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>--loadtell application "Brave Browser"	open location "https://muellmail.com/"	delay 0.2	repeat until (loading of active tab of front window is false)		delay 0.2	end repeat	delay 0.2end tell--check whether homepage or old mailtell application "Brave Browser" to set currentTab to URL of active tab of front window--goes to homepage, if neededif currentTab contains ("@") then	tell application "System Events" to keystroke tab	delay 0.2	tell application "System Events" to keystroke return	delay 0.5end if--create random mailtell application "System Events" to keystroke tabtell application "System Events" to keystroke tabtell application "System Events" to keystroke tabtell application "System Events" to keystroke return--copy mail adressdelay 1tell application "Brave Browser" to set mailTab to URL of active tab of front window--go backtell application "System Events"	tell process "Brave Browser"		set frontmost to true		click menu item "Select Next Tab" of menu "Tab" of menu bar 1	end tellend tell-- return mail adressreturn mailTab</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>create-trashmail_[Browser].applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5DEA869F-1D1D-433F-B75A-213565DCD579</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>0198854D-4A0F-4717-BC41-B4B814951876</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>59869625-BFE1-4EFE-BDF5-2C209BA3CC85</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.random</string>
+			<key>uid</key>
+			<string>90439A10-18CA-44FC-9516-21723CE49144</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>matchstring</key>
+				<string>
+</string>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>7888F38A-9726-4D88-AB3B-A0FBC509F7BD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>.*\/(.*?@.*)$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string>$1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>74C53D92-1952-4166-8D9F-7499047E29FF</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>pw</string>
+				<key>subtext</key>
+				<string>with length: '{query}' (default: 32)</string>
+				<key>text</key>
+				<string>Random password</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>3C073A54-0FF5-46B7-A886-7EF36A81668C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>function run() {
+
+	const pwlength = parseInt("{query}");
+    var result           = '';
+    const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for ( var i = 0; i &lt; pwlength; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+   }
+   return result;
+
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>pw-generate.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ Password copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>B46D4F01-F87D-4123-9D22-FB7EDABD729F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<key>uidata</key>
+	<dict>
+		<key>0198854D-4A0F-4717-BC41-B4B814951876</key>
+		<dict>
+			<key>note</key>
+			<string>copy mail</string>
+			<key>xpos</key>
+			<integer>690</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
+		<key>08216767-CB9A-4FB6-AEDF-AA927704AEB5</key>
+		<dict>
+			<key>xpos</key>
+			<integer>825</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
+		<key>0F6DB773-7447-4D7C-900E-59F3E9C69B19</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<integer>180</integer>
+			<key>ypos</key>
+			<integer>175</integer>
+		</dict>
+		<key>361EF992-408A-44A7-8928-706BE131B801</key>
+		<dict>
+			<key>xpos</key>
+			<integer>30</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
+		<key>3C073A54-0FF5-46B7-A886-7EF36A81668C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>paste random password</string>
+			<key>xpos</key>
+			<integer>30</integer>
+			<key>ypos</key>
+			<integer>175</integer>
+		</dict>
+		<key>59869625-BFE1-4EFE-BDF5-2C209BA3CC85</key>
+		<dict>
+			<key>note</key>
+			<string>copy password</string>
+			<key>xpos</key>
+			<integer>315</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
+		<key>5DEA869F-1D1D-433F-B75A-213565DCD579</key>
+		<dict>
+			<key>xpos</key>
+			<integer>450</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
+		<key>74C53D92-1952-4166-8D9F-7499047E29FF</key>
+		<dict>
+			<key>xpos</key>
+			<integer>635</integer>
+			<key>ypos</key>
+			<integer>60</integer>
+		</dict>
+		<key>7888F38A-9726-4D88-AB3B-A0FBC509F7BD</key>
+		<dict>
+			<key>note</key>
+			<string>remove \n</string>
+			<key>xpos</key>
+			<integer>580</integer>
+			<key>ypos</key>
+			<integer>60</integer>
+		</dict>
+		<key>90439A10-18CA-44FC-9516-21723CE49144</key>
+		<dict>
+			<key>xpos</key>
+			<integer>260</integer>
+			<key>ypos</key>
+			<integer>60</integer>
+		</dict>
+		<key>B46D4F01-F87D-4123-9D22-FB7EDABD729F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<integer>335</integer>
+			<key>ypos</key>
+			<integer>175</integer>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>https://chris-grieser.de/</string>
+</dict>
+</plist>

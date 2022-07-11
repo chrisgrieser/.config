@@ -1,0 +1,60 @@
+# https://espanso.org/docs/
+# ------------------------------------------
+
+matches:
+  - replace: 'osascript -e "tell application \"Drafts\" to make new draft with properties {content: \"$foo\", tags: {\"bar\"}}"'
+    label: 🐚 Create Draft
+  - replace: |
+      file_name=$(basename "$input_path")
+      ext="${file_name##*.}"
+      file_without_extension="${file_name%.*}"
+      file_name=$(basename "$input_path" .txt) # when extension is know, e.g. .txt
+      parent_folder=$(dirname "$input_path")
+    label: 🐚 Extract file name, extension or folder from path
+  - replace: cd "$(dirname "$0")"
+    label: 🐚 Go to directory of script (location)
+  - replace: qlmanage -p "$filepath"
+    label: 🐚 Quick Look file
+  - replace: |
+      plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1
+    label: 🐚 Read plist value
+  - replace: echo | {command} 2>&1
+    label: 🐚 Redirect STDERR to STDOUT
+  - replace: |
+      if [[ "$LONG_STRING" =~ "$SHORTSTRING" ]] ; then
+      	echo "short string is part of long string"
+      fi
+    label: 🐚 String Includes
+  - trigger: "!zsh"
+    replace: "#!/usr/bin/env zsh\n"
+    label: 🐚 zsh Shebang
+  - trigger: "!path"
+    replace: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH"
+    label: 🐚 PATH
+  - replace: '[[ "$LONG_STRING" =~ "$SHORT_STRING" ]]'
+    label: 🐚 String contains other string
+  - trigger: "!sed"
+    replace: "| sed 's/$|$//g' "
+    label: 🐚 pipe to sed
+  - trigger: "!null"
+    replace: "&> /dev/null"
+    label: 🐚 dev/null
+  - replace: 'system_profiler SPDisplaysDataType | grep -c "Resolution"'
+    label: 🐚 Screen count
+  - trigger: "!resolve"
+    replace: |
+      resolved_path="${file_path/#\~/$HOME}"
+
+    label: '🐚 Resolve ~'
+  - trigger: "!hr"
+    replace: "#-------------------------------------------------------------------------------"
+  - label: "🐚 Number of Displays (on macOS)"
+    replace: "system_profiler SPDisplaysDataType | grep -c resolution"
+
+  - label: "🐚 Check whether process is running"
+    replace: |
+      if pgrep -x "app$|$" > /dev/null; then
+      	echo "Running"
+      else
+      	echo "Not running"
+      fi

@@ -1,0 +1,236 @@
+<html>
+<head><title>Template Tags Quick Reference</title></head>
+<body>
+<style>
+	body {
+		color: #333;
+		background-color: #ccc;
+		margin: 0 auto;
+		font-family: arial;
+		font-size: small;
+		max-width: 90%;
+	}
+	div, p{
+		font-size: 1em;
+		padding: 1em;
+		background-color: #fff;
+		margin: 1em 0;
+		
+		-webkit-box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+		-moz-box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+		box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+	}
+	
+	code {
+		white-space: nowrap;
+		padding: 0.1em 0.3em 0.1em 0.3em;
+		font-weight: 400;
+		background-color: rgba(2,2,2,0.1);
+		border: 1px solid #44434d;
+		border-radius: 4px;
+		margin-left: 0.1em;
+		margin-right: 0.1em;
+		font-family: "SFMono-Regular", Menlo, Consolas, Monospace;
+		font-size: 0.75em;
+		line-height: 1.4;
+	}
+	
+	td, th {
+		padding: .5em 1em;
+		text-align: left;
+		vertical-align: top;
+		line-height: 1.2;
+	}
+	
+	tr:nth-child(even) {
+		background-color: #eee;
+	}
+</style>
+	
+<h1>Template Tags</h1>
+
+<h2>Content Tags</h2>
+	<div class="">
+		<table cellpadding="0" cellspacing="0" border="0">
+			<colgroup>
+				<col id="directive">
+				<col id="meaning">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>Tag</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><code>[[draft]]</code></td>
+					<td> The full text of the draft.</td>
+				</tr>
+				<tr>
+					<td><code>[[title]]</code></td>
+					<td> The first line of the draft only.</td>
+				</tr>
+				<tr>
+					<td><code>[[safe_title]]</code></td>
+					<td> File name safe version of the first line with ASCII control characters and path separators that can interfere with file names removed (<code>\/:*?&lt;&gt;|#</code>).</td>
+				</tr>
+				<tr>
+					<td><code>[[display_title]]</code></td>
+					<td> A cleaned and trimmed version of the first line as would be displayed in the draft list. Removes whitespace and leading "<code>#</code>" characters.</td>
+				</tr>
+				<tr>
+					<td><code>[[body]]</code></td>
+					<td> The remainder of the draft text after the first line is removed.</td>
+				</tr>
+				<tr>
+					<td><code>[[body_preview]]</code></td>
+					<td> A trimmed and shortened snippet of the body, as would be displayed in the draft list.</td>
+				</tr>
+				<tr>
+					<td><code>[[selection]]</code></td>
+					<td> If text was selected within the draft before selecting an action, this tag will return only that selected text. If no text was selected, it will return the full text of the draft.</td>
+				</tr>
+				<tr>
+					<td><code>[[selection_only]]</code></td>
+					<td> Returns selected text, but unlike <code>[[selection]]</code>
+					 will not default to returning the entire draft if no selection was made - it will simply return an empty string.
+				<tr>
+					<td><code>[[tags]]</code></td>
+					<td> Comma-separated list of tags linked to the draft.</td>
+				</tr>
+				<tr>
+					<td><code>[[line|n]]</code></td>
+					<td> The text of a specific line number in the draft, where "<code>n</code>" is the line number. i.e. <code>[[line|1]]</code>, <code>[[line|2]]</code>.</td>
+				</tr>
+				<tr>
+					<td><code>[[line|n..n]]</code></td>
+					<td> In addition to specific lines, the lines tag (above) can accept ranges of lines, such as <code>[[line|2..5]]</code> for lines 2 through 5. This initial or trailing number in the range can be omitted to indicate the beginning or end, i.e. <code>[[line|2..]]</code> is line 2 through the end of the draft, <code>[[line|..4]]</code> is the first for lines of the draft. This tag also support negative indexes, which count back from the last line of the draft, e.g. <code>[[line|-1]]</code> returns the last line of the draft.</td>
+				</tr>
+				<tr>
+					<td><code>[[selection_start]]</code></td>
+					<td> The integer index of the start location of the last text selection in the draft.</td>
+				</tr>
+				<tr>
+					<td><code>[[selection_length]]</code></td>
+					<td> The number of characters in the last text selection in the draft.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+<h2>Identifier Tags</h2>
+	<div class="">
+		<table cellpadding="0" cellspacing="0" border="0">
+			<colgroup>
+				<col id="directive">
+				<col id="meaning">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>Tag</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><code>[[uuid]]</code></td>
+					<td>A unique identifier for the current draft.</td>
+				</tr>
+				<tr>
+					<td><code>[[draft_open_url]]</code></td>
+					<td>A URL which can be used as a bookmark to open Drafts and select the current draft.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+<h2>Dates and Locations</h2>
+	<div class="">
+		<table cellpadding="0" cellspacing="0" border="0">
+			<colgroup>
+				<col id="directive">
+				<col id="meaning">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>Tag</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><code>[[date]]</code></td>
+					<td>Timestamp in the format YYYY-MM-DD.<td>
+				</tr>
+				<tr>
+					<td><code>[[date|format]]</code></td>
+					<td>Timestamp, formatted based on a custom strfime format string. For example <code>[[date|%m-%d-%Y]]</code> becomes "01-02-2013".<td>
+				</tr>
+				<tr>
+					<td><code>[[created|format]]</code></td>
+					<td>Same as <code>[[date]]</code>, but returns the timestamp for the creation of the draft, rather than the current time.<td>
+				</tr>
+				<tr>
+					<td><code>[[modified|format]]</code></td>
+					<td>Same as <code>[[date]]</code>, but returns the timestamp for the last modification date of the draft content, rather than the current time.<td>
+				</tr>
+				<tr>
+					<td><code>[[longitude]]</code></td>
+					<td>The current device location longitude.<td>
+				</tr>
+				<tr>
+					<td><code>[[latitude]]</code></td>
+					<td>The current device location latitude.<td>
+				</tr>
+				<tr>
+					<td><code>[[created_longitude]]</code></td>
+					<td>The location longitude where the draft was created.<td>
+				</tr>
+				<tr>
+					<td><code>[[created_latitude]]</code></td>
+					<td>The location latitude where the draft was created.<td>
+				</tr>
+				<tr>
+					<td><code>[[modified_longitude]]</code></td>
+					<td>The location longitude where the content of the draft was last modified.<td>
+				</tr>
+				<tr>
+					<td><code>[[modified_latitude]]</code></td>
+					<td>The location latitude where the content of the draft was last modified.<td>
+				</tr>
+				<tr>
+					<td><code>[[time]]</code></td>
+					<td>Timestamp in the format "YYYY-MM-DD-HH-MM-SS".<td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+<h2>Utility Tags</h2>
+	<div class="">
+		<table cellpadding="0" cellspacing="0" border="0">
+			<colgroup>
+				<col id="directive">
+				<col id="meaning">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>Tag</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><code>[[template|path]]</code></td>
+					<td>Inserts a template store in a file in <code>iCloud Drive/Drafts/Library/Templates</code>. "<code>path</code>" should be the related path to a file which exists in that folder, for example: <code>[[template|my-site-template.txt]]</code>. File will be loaded an evaluated as if its text was inline in the current template, allowing re-use of templates across actions.</td>
+				</tr>
+				<tr>
+					<td><code>[[clipboard]]</code></td>
+					<td>The current contents of the OS clipboard.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<p>Tag information is from the<a href="https://docs.getdrafts.com/docs/actions/templates">Templates page</a> in the <a href="https://docs.getdrafts.com">Drafts User Guide</a>.</p>
+</html>

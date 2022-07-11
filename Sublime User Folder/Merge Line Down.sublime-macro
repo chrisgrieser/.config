@@ -1,0 +1,18 @@
+[
+	{
+		"args": null,
+		"command": "swap_line_down"
+	},
+	{
+		"args":
+		{
+			"by": "lines",
+			"forward": false
+		},
+		"command": "move"
+	},
+	{
+		"args": null,
+		"command": "join_lines"
+	}
+]

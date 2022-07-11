@@ -1,0 +1,15 @@
+# https://pandoc.org/MANUAL.html#defaults-files
+# ---------------------------------------------
+
+# Markdown Writer
+writer: markdown+lists_without_preceding_blankline+hard_line_breaks
+extract-media: attachments
+track-changes: all
+shift-heading-level-by: 1
+
+# Word-Reader
+reader: docx
+
+# General
+verbosity: INFO
+fail-if-warnings: true

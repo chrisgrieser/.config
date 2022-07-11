@@ -1,0 +1,21 @@
+# https://pandoc.org/MANUAL.html#option--metadata-file
+# "Metadata values specified inside the document, or by using -M,
+# overwrite values specified with this option. The file will be
+# searched for first in the working directory, and then in the metadata
+# subdirectory of the user data directory (see --data-dir)."
+# ---------------------------------------------
+
+csl: apa-6th-edition  # does not need extension
+lang: en-US
+
+metadata:
+  link-citations: false
+  link-bibliography: false
+
+title: Untitled
+subtitle: Some Subtitle
+author:
+  - Christopher Grieser
+  - Research Group “Social Studies of Science & Technology”
+  - Technical University of Berlin (Germany)
+  - christopher.grieser@tu-berlin.de

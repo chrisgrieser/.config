@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>co.bluehelix.imessage-2fa</string>
+	<key>category</key>
+	<string>Tweaks</string>
+	<key>connections</key>
+	<dict>
+		<key>3D26FE0D-9464-426E-8EAA-03376F20B9CA</key>
+		<array/>
+		<key>7B86D057-DA8E-4302-AF17-83B889B48EE2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3D26FE0D-9464-426E-8EAA-03376F20B9CA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F66B4E67-AAD4-4597-9902-E084CCFAE32F</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Copy the code and paste it into the active app with simulated keystrokes</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F66B4E67-AAD4-4597-9902-E084CCFAE32F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3E71F597-EA2F-4B39-B8E4-69A3D625872E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Scott Carpenter</string>
+	<key>description</key>
+	<string>Find two-factor authentication codes in your recent iMessage messages</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>iMessage 2FA</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>3D26FE0D-9464-426E-8EAA-03376F20B9CA</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>keyword</key>
+				<string>two</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Finding two-factor authentication codes...</string>
+				<key>script</key>
+				<string>#!/bin/bash
+
+php_exec=""
+
+for f in php /usr/local/bin/php /opt/local/bin/php /opt/homebrew/bin/php /usr/bin/php; do
+    if test -x $f; then
+        php_exec=$f
+    fi
+done
+
+if test -z "$php_exec"; then
+	cat &lt;&lt;- EOB
+		{"items": [
+			{
+				"arg": "https://brew.sh",
+				"title": "ERROR: PHP is not installed on your system",
+				"subtitle": "Please install php. We recommend using Homebrew: https://brew.sh",
+				"valid": true
+			}
+		]}
+	EOB
+else
+	$php_exec find-messages.php $look_back_minutes
+fi
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Find two-factor authentication codes...</string>
+				<key>title</key>
+				<string>iMessage 2FA</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>7B86D057-DA8E-4302-AF17-83B889B48EE2</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>F66B4E67-AAD4-4597-9902-E084CCFAE32F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>osascript -e 'tell application "System Events" to keystroke the clipboard as text'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>3E71F597-EA2F-4B39-B8E4-69A3D625872E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Find two-factor authentication codes in your recent iMessage messages.
+
+## Requirements
+
+* `php` must be installed on your system
+  * macOS Monterey **does not** have `php` preinstalled!
+* We recommend using [Homebrew](https://brew.sh) to install `php`
+  * To install Homebrew, follow the instructions on the "Install Homebrew" section of the [Homebrew website](https://brew.sh)
+  * Once you have installed Homebrew, install `php` by running `brew install php`
+
+## Configuration
+
+* By default, only messages received in the past 15 minutes will be searched
+* You can change how many minutes to look back by changing the `look_back_minutes` workflow variable
+* Tutorial: [How to set workflow variables](https://www.alfredapp.com/help/workflows/advanced/variables/#environment)
+
+## Usage
+
+Type `2fm` to view the most recent two-factor authentication codes from iMessage messages.
+
+Select a 2FA code and do one of the following:
+
+* Press `&lt;enter&gt;` to copy it to your clipboard
+* Press `⌘+&lt;enter&gt;` (command + enter) to copy it to your clipboard and paste it into the active app window using simulated keystrokes
+  * Some websites (e.g. Wells Fargo online banking) don't support pasting a 2FA code, so this will instead simulate typing the code
+  * In order for this to work, you MUST grant Alfred automation access to `System Events`. If you haven't already done so, you will be prompted to grant access. [See here for more information about Alfred automation.](https://www.alfredapp.com/help/getting-started/permissions/#automation) 
+* Press `⌥+&lt;enter&gt;` (option + enter) to copy it to your clipboard and paste it into the active app window using the system paste (similar to pressing `⌘+V`)</string>
+	<key>uidata</key>
+	<dict>
+		<key>3D26FE0D-9464-426E-8EAA-03376F20B9CA</key>
+		<dict>
+			<key>note</key>
+			<string>Type</string>
+			<key>xpos</key>
+			<real>325</real>
+			<key>ypos</key>
+			<real>190</real>
+		</dict>
+		<key>3E71F597-EA2F-4B39-B8E4-69A3D625872E</key>
+		<dict>
+			<key>xpos</key>
+			<real>485</real>
+			<key>ypos</key>
+			<real>335</real>
+		</dict>
+		<key>7B86D057-DA8E-4302-AF17-83B889B48EE2</key>
+		<dict>
+			<key>xpos</key>
+			<real>90</real>
+			<key>ypos</key>
+			<real>250</real>
+		</dict>
+		<key>F66B4E67-AAD4-4597-9902-E084CCFAE32F</key>
+		<dict>
+			<key>note</key>
+			<string>Method 1: AppleScript paste to simulate keystrokes</string>
+			<key>xpos</key>
+			<real>325</real>
+			<key>ypos</key>
+			<real>335</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>variables</key>
+	<dict>
+		<key>look_back_minutes</key>
+		<string>15</string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.2.8</string>
+	<key>webaddress</key>
+	<string>https://github.com/squatto/alfred-imessage-2fa/</string>
+</dict>
+</plist>

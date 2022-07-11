@@ -1,0 +1,138 @@
+# https://espanso.org/docs/
+# ------------------------------------------
+
+matches:
+  - trigger: '!continue'
+    replace: "¬"
+    label: 🍏 Continuation Character
+  - replace: |
+      if frontmost of application "$|$" then
+
+      end if
+    label: 🍏 Check whether App is frontmost
+  - replace: |
+      if application "$|$" is running then
+
+      end if
+    label: 🍏 Check whether app is running
+  - trigger: '!menu'
+    replace: |
+      tell application "System Events"
+      	tell process "$|$"
+      		set frontmost to true
+      		click menu item "" of menu "File" of menu bar 1
+      	end tell
+      end tell
+    label: 🍏 Click Menubar Item
+  - trigger: '!submenu'
+    replace: |
+      tell application "System Events"
+      	tell process "$|$"
+      		set frontmost to true
+      		click menu item "" of menu of menu item "Share" of menu "Edit" of menu bar 1
+      	end tell
+      end tell
+    label: 🍏 Click Submenu Item of Menubar
+  - replace: |
+      tell application "Brave Browser" to close active tab of front window
+    label: 🍏 Close Browser Tab
+  - replace: set the clipboard to POSIX file ($|$)
+    label: 🍏 Copy Image to Clipboard
+  - replace: |
+      tell application "Drafts"
+      	make new draft with properties {content: "$|$", tags: {"blue", "green"}}
+      end tell
+    label: 🍏 Create new Draft
+  - replace: display notification "subtitle" with title "title$|$" subtitle "subtitle2" sound name "Frog"
+    label: 🍏 Display Notification
+  - replace: |
+      tell application "Brave Browser"
+      	set currentTabUrl to URL of active tab of front window
+      end tell
+    label: 🍏 Get Current Browser Tab
+  - replace: |
+      tell application "Finder"
+      	if (count windows) is 0 then
+      		activate
+      		tell application "System Events" to keystroke "n" using {command down}
+      		delay 0.1
+      	end if
+      	set currentDir to target of Finder window 1 as alias
+      end tell
+      return POSIX path of currentDir
+    label: 🍏 Get Current Finder Window
+  - replace: |
+      tell application "Finder"
+      	if ((count windows) is 0) then return "no window"
+
+      	set sel to selection
+      	if ((count sel) > 1) then return POSIX path of ((item 1 of sel) as text)
+      	if ((count sel) = 1) then return POSIX path of (sel as text)
+      	if ((count sel) = 0) then return POSIX path of (target of window 1 as alias)
+      end tell
+    label: 🍏 Get Finder selection / window
+  - replace: tell application "System Events" to set frontApp to (name of first process where it is frontmost)
+    label: 🍏 Get name of frontmost app
+  - replace: tell application "System Events" to tell process "Drafts" to set visible to false
+    label: 🍏 Hide App
+  - trigger: '!key'
+    replace: tell application "System Events" to keystroke "$|$" using {command down}
+    label: 🍏 Keystroke
+  - trigger: '!click'
+    replace: tell application "System Events" to click at {123$|$, 456}
+    label: 🍏 Mouse Click
+  - replace: tell application "Twitterrific$|$" to if it is not running then activate
+    label: 🍏 Launch App
+  - trigger: '!quit'
+    replace: tell application "Twitterrific$|$" to if it is running then quit
+    label: 🍏 Quit App
+  - replace: |
+      set AppleScript's text item delimiters to ":"
+      set theTextItems to every text item of strWithoutReplacement
+      set AppleScript's text item delimiters to "-"
+      set strWithReplacement to theTextItems as string
+    label: 🍏 Replace in String
+  - replace: |
+      "-- when app name and menu item name are the same, this can be applied to multiple apps\n\nset ServiceName to "Scrivener: Make New Clipping (Unformatted)"
+      tell application "System Events"
+      	tell process "Brave Browser"
+      		set frontmost to true
+      		click menu item ServiceName of menu of menu item "Services" of menu "Brave" of menu bar 1
+      	end tell
+      end tell"
+    label: 🍏 Run Services
+  - trigger: '!shortcut'
+    replace: tell application "Shortcuts" to run shortcut "$|$"
+    label: 🍏 Run Shortcut
+  - replace: |
+      repeat until application "Drafts$|$" is running
+      	delay 0.5
+      end repeat
+    label: 🍏 Wait till app is running
+  - replace: |
+      tell application "Brave Browser"
+      	repeat until (loading of active tab of front window is false)
+      	end repeat
+      end tell
+    label: 🍏 Wait till tab is loaded
+  - trigger: "!as"
+    replace: "#!/usr/bin/env osascript\n"
+    label: 🍏 AppleScript Shebang
+  - trigger: "!resolve"
+    replace: |
+      # resolve ~
+      set unresolved_path to "~/Documents"
+      set AppleScript's text item delimiters to "~/"
+      set theTextItems to every text item of unresolved_path
+      set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))
+      set resolved_path to theTextItems as string
+    label: 🍏 Resolve ~
+  - replace: |
+      tell application "System Events"
+      	tell process "Highlights"
+      		if (count of windows) > 0 then set window_name to name of front window
+      	end tell
+      end tell
+    label: 🍏 Name of front window of a process
+  - trigger: "!hr"
+    replace: "#-------------------------------------------------------------------------------"

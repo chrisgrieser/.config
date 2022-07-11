@@ -1,0 +1,26 @@
+// Settings in here override those in "LSP-lua/LSP-lua.sublime-settings"
+{
+	"settings": {
+		"Lua.diagnostics.globals": [
+			// Hammerspoon Core
+			"hs",
+			"spoon",
+			// Hammerspoon utils.lua
+			"notify",
+			"keystroke",
+			"appIsRunning",
+			"runDelayed",
+			"frontapp",
+			"hotkey",
+			"hyper",
+			"isIMacAtHome",
+			"isDarkMode",
+			"openIfNotRunning",
+			"killIfRunning",
+			"isAtOffice",
+			"isProjector",
+			"numberOfScreens",
+		],
+      "Lua.diagnostics.disable": ["lowercase-global"],
+	}
+}

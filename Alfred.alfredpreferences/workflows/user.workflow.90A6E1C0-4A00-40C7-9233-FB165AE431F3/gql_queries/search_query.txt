@@ -1,0 +1,8 @@
+query SEARCH_QUERY($query: String!) {
+  search(query: $query) {
+    terms {
+      id
+      name
+    }
+  }
+}

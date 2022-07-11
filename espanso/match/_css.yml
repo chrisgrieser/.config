@@ -1,0 +1,15 @@
+# https://espanso.org/docs/
+# ------------------------------------------
+
+matches:
+  - $trigger: "!hr"
+    replace: |+
+
+      /* ───────────────────────────────────────────────── */
+      /* << $|$
+      ──────────────────────────────────────────────────── */
+
+    label: commented section
+  - regex: " ?!!"  # so this works whether prepended with space or note
+    replace: " {\n"
+    label: Quicker Block

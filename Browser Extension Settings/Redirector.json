@@ -1,0 +1,109 @@
+{
+    "createdBy": "Redirector v3.5.3",
+    "createdAt": "2022-06-07T18:19:41.517Z",
+    "redirects": [
+        {
+            "description": "Discord App",
+            "exampleUrl": "https://discord.com/channels/686053708261228577/840286264964022302/960973322668109844\t",
+            "exampleResult": "discord://discord.com/channels/686053708261228577/840286264964022302/960973322668109844\t",
+            "error": null,
+            "includePattern": "https?(:\\/\\/discord(app)?\\.com\\/channels\\/.*)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "discord$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "Wikiwand",
+            "exampleUrl": "https://en.wikipedia.org/wiki/Natural_science",
+            "exampleResult": "https://www.wikiwand.com/en/Natural_science",
+            "error": null,
+            "includePattern": "https?:\\/\\/(\\w+?)(?:\\.m)?\\.wikipedia\\.org\\/wiki\\/(.*)",
+            "excludePattern": "\\?oldformat=true$",
+            "patternDesc": "",
+            "redirectUrl": "https://www.wikiwand.com/$1/$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame",
+                "sub_frame",
+                "stylesheet",
+                "script",
+                "image",
+                "imageset",
+                "object",
+                "xmlhttprequest",
+                "history",
+                "other"
+            ]
+        },
+        {
+            "description": "GitHub Wikis",
+            "exampleUrl": "https://github-wiki-see.page/m/koalaman/shellcheck/wiki/SC3020",
+            "exampleResult": "https://github.com/koalaman/shellcheck/wiki/SC3020",
+            "error": null,
+            "includePattern": "(.*?)-wiki-see.page\\/m(.*)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "$1.com$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame",
+                "sub_frame",
+                "stylesheet",
+                "script",
+                "image",
+                "imageset",
+                "object",
+                "xmlhttprequest",
+                "history",
+                "other"
+            ]
+        },
+        {
+            "description": "Zoom without Tab",
+            "exampleUrl": "https://tu-berlin.zoom.us/j/65255824131?pwd=xxxxxxxxx",
+            "exampleResult": "zoommtg://zoom.us/join?confno=65255824131&pwd=xxxxxxxxx",
+            "error": null,
+            "includePattern": "https?:\\/\\/.*\\.zoom\\.us\\/j\\/(\\w+)\\?pwd=(\\w+)$",
+            "excludePattern": "",
+            "patternDesc": "opens Zoom Directly in the desktop client",
+            "redirectUrl": "zoommtg://zoom.us/join?confno=$1&pwd=$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "Remove targetText v2",
+            "exampleUrl": "https://chromium.googlesource.com/chromium/src.git/+/master/docs/user_data_dir.md#:~:text=The%20default%20location%20is%20in,Google%5CChrome%20SxS%5CUser%20Data",
+            "exampleResult": "https://chromium.googlesource.com/chromium/src.git/+/master/docs/user_data_dir.md",
+            "error": null,
+            "includePattern": "^(.*?)#:~:text=",
+            "excludePattern": "",
+            "patternDesc": "Clean targetText URLS",
+            "redirectUrl": "$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        }
+    ]
+}

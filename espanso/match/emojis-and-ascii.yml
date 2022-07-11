@@ -1,0 +1,39 @@
+# https://espanso.org/docs/
+# ------------------------------------------
+
+matches:
+  - trigger: '!no'
+    replace: ❌
+  - trigger: '!yes'
+    replace: ✅
+  - trigger: '->'
+    replace: →
+    word: true
+  - trigger: '!->'
+    replace: ▸
+  - trigger: '->>'
+    replace: ➡️
+    word: true
+  - trigger: '!ampel'
+    replace: 🔴🟡🟢
+  - trigger: ' mm'
+    replace: ' 🙈'
+  - trigger: '!eyes'
+    replace: 👁️👄👁️
+  - trigger: '!tm'
+    replace: ™
+
+  - triggers: ['!shrug', "!ascii"]
+    replace: ¯\_(ツ)_/¯
+  - triggers: ['!gimme', "!ascii"]
+    replace: ༼つ ◕_◕ ༽つ
+  - triggers: ['!tableflip', "!ascii"]
+    replace: (╯°□°)--︻╦╤─ - - -
+  - triggers: ['!tableflip', "!ascii"]
+    replace: (╯°□°）╯︵ ┻━┻
+  - triggers: ['!tableflip', "!ascii"]
+    replace: ┻━┻︵ \\(°□°)\/ ︵ ┻━┻
+  - triggers: ['!tableflip', "!ascii"]
+    replace: (ノಠ_ಠ)ノ彡︵ ┻━┻︵ ┻━┻
+  - triggers: ['!tableflip', "!ascii"]
+    replace: ┬─┬ノ(ಠ_ಠノ)

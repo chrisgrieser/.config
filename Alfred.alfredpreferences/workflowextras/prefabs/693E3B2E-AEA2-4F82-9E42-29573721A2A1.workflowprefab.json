@@ -1,0 +1,26 @@
+{
+  "name" : "Remove \\n",
+  "data" : {
+    "items" : [
+      {
+        "workflowobjecttype" : "alfred.workflow.utility.replace",
+        "uid" : "F1646853-4BE7-44BE-985F-9282246BAFCA",
+        "note" : "remove \\n",
+        "workflowobjectconfig" : {
+          "replacestring" : "",
+          "regexcaseinsensitive" : false,
+          "regexmultiline" : false,
+          "matchmode" : 1,
+          "matchstring" : "\\n$"
+        },
+        "colorindex" : 3,
+        "ypos" : 5,
+        "xpos" : 35
+      }
+    ],
+    "connections" : [
+
+    ]
+  },
+  "description" : "Removes the trailing \\n from return statements"
+}

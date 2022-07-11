@@ -1,0 +1,6 @@
+// pycodestyle already enabled via flake8
+{
+	"settings": {
+        "pylsp.plugins.pycodestyle.enabled": false,
+	}
+}

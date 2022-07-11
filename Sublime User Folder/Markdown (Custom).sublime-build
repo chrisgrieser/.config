@@ -1,0 +1,10 @@
+{
+	"selector": "text.html.markdown",
+	"cmd": ["echo", "No standard build available. Build variants available, though."],
+	"variants": [
+		{
+			"name": "Lint Autofix",
+			"cmd": ["markdownlint", "--fix", "$file"]
+		},
+	]
+}

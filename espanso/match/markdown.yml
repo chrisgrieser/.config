@@ -1,0 +1,50 @@
+# https://espanso.org/docs/
+# ------------------------------------------
+
+matches:
+  # ",,lang,," will create a code block of the respective language and prefill
+  # it with the clipboard content, e.g. `,,js,,`
+  - regex: ",,(?P<lang>\\w*),,"
+    replace: "\n```{{lang}}\n{{clipboard}}\n```"
+    label: Markdown Codeblock
+    vars:
+      - name: clipboard
+        type: shell
+        params:
+          # non-macs will require a different command
+          cmd: "pbpaste | sed 's/^\t/  /g'"
+          shell: bash
+
+  - trigger: ttt
+    replace: '- [ ] '
+    label: Markdown Task
+
+  - trigger: '!references'
+    replace: |
+      ::: {#refs}
+      :::
+    label: Pandoc Reference List
+
+  - trigger: '!table'
+    replace: |
+      ::: {custom-style="Table Caption"}
+      Table $|$:
+      :::
+    label: Pandoc Table Caption
+
+  - trigger: '!img'
+    replace: '<img width=60% alt="" src="$|$">'
+    label: HTML Image
+
+  - trigger: '!progress'
+    replace: '<progress value="$|$" max="10"></progress>'
+    label: HTML Progress Bar
+
+  - trigger: '!yaml'
+    replace: |
+      ---
+      aliases:
+      tags: seedling, $|$
+      similar:
+      ---
+    label: Base YAML Header

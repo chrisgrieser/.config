@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>categories</key>
+	<array>
+		<string>App-Enhance</string>
+		<string>Tweaks</string>
+		<string>Searches</string>
+		<string>Mini-Apps</string>
+		<string>Examples</string>
+		<string>Academic</string>
+		<string>Development</string>
+		<string>Stocks</string>
+		<string>Language</string>
+	</array>
+	<key>defaultBundleId</key>
+	<string>de.chris-grieser.</string>
+	<key>defaultCreatedBy</key>
+	<string>Chris Grieser</string>
+	<key>defaultReadme</key>
+	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<key>defaultWebsite</key>
+	<string>https://chris-grieser.de/</string>
+	<key>rememberSelectedCategory</key>
+	<true/>
+</dict>
+</plist>

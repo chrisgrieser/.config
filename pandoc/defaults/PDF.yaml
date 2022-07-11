@@ -1,0 +1,44 @@
+# https://pandoc.org/MANUAL.html#defaults-files
+# ---------------------------------------------
+
+# PDF-Writer
+writer: pdf
+standalone: true
+
+# html-based PDF-engine
+pdf-engine: wkhtmltopdf
+css: ${USERDATA}/css/nice-pandoc.css
+template: default
+dpi: 96 # default: 96
+
+# html options https://pandoc.org/MANUAL.html#variables-for-html
+marginTop: 25
+marginRight: 25
+marginBottom: 25
+marginLeft: 25
+pageSize: A4
+fontsize: 16px
+
+# General
+verbosity: INFO
+fail-if-warnings: true
+table-of-contents: false
+toc-depth: 3
+resource-path:
+  - .
+  - ./attachments
+  - ${HOME}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/ # Vault path for images
+
+# Markdown-Reader
+reader: markdown+lists_without_preceding_blankline
+strip-comments: true
+number-sections: true
+
+# Academic
+citeproc: true
+metadata-files: # must be array
+  - academic.yaml
+bibliography: ${USERDATA}/main-bibliography.bib
+metadata:
+  link-citations: true
+  link-bibliography: true

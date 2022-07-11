@@ -1,0 +1,6 @@
+{
+	"selector": "source.lua",
+	"cmd": ["open", "hammerspoon://hs-reload"],
+}
+
+

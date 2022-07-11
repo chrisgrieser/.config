@@ -1,0 +1,437 @@
+{
+  "title": "🔘 Utility Shortcuts",
+  "maintainers": [
+    "pseudometa"
+  ],
+  "import-url": "karabiner://karabiner/assets/complex_modifications/import?url=https://github.com/chrisgrieser/dotfiles/blob/main/.config/karabiner/assets/complex_modifications/utility-hotkeys.json",
+  "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
+  "rules": [
+    {
+      "description": "🔘 ⌘+J → Expand Word",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": [
+                "option"
+              ]
+            },
+            {
+              "key_code": "left_arrow",
+              "modifiers": [
+                "option",
+                "shift"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^md\\.obsidian$",
+                "^com\\.sublimetext",
+                "^com\\.apple\\.finder$",
+                "^com\\.iconfactory\\.Twitterrific"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "🔘 ⌃+T → Transpose Characters",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "t",
+            "modifiers": {
+              "mandatory": [
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": [
+                "shift"
+              ]
+            },
+            {
+              "key_code": "x",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "key_code": "left_arrow"
+            },
+            {
+              "key_code": "v",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^md\\.obsidian$",
+                "^com\\.sublimetext"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "🔘 ⌃+W → Delete Word (Vim: i_Ctrl-W)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "w",
+            "modifiers": {
+              "mandatory": [
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_or_backspace",
+              "modifiers": [
+                "option"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^md\\.obsidian$",
+                "^com\\.sublimetext"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "🔘 § → | (+ US Layout); ⌥3 for Paragraph Symbol",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "3",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "language": "^de$"
+                }
+              ]
+            }
+          ],
+          "to": [
+            {
+              "select_input_source": {
+                "input_source_id": "^com\\.apple\\.keylayout\\.US$"
+              }
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 20
+            },
+            {
+              "key_code": "non_us_pound",
+              "modifiers": [
+                "shift"
+              ]
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "select_input_source": {
+                "input_source_id": "^com\\.apple\\.keylayout\\.ABC-QWERTZ$"
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "3",
+            "modifiers": {
+              "mandatory": [
+                "option"
+              ]
+            }
+          },
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "language": "^de$"
+                }
+              ]
+            }
+          ],
+          "to": [
+            {
+              "key_code": "3",
+              "modifiers": [
+                "shift"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "🔘 ° → \\ (+ US Layout); ⌥^ for ° Symbol",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "non_us_backslash",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "language": "^de$"
+                }
+              ]
+            }
+          ],
+          "to": [
+            {
+              "select_input_source": {
+                "input_source_id": "^com\\.apple\\.keylayout\\.US$"
+              }
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 20
+            },
+            {
+              "key_code": "non_us_pound"
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "select_input_source": {
+                "input_source_id": "^com\\.apple\\.keylayout\\.ABC-QWERTZ$"
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "3",
+            "modifiers": {
+              "mandatory": [
+                "option"
+              ]
+            }
+          },
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "language": "^de$"
+                }
+              ]
+            }
+          ],
+          "to": [
+            {
+              "key_code": "3",
+              "modifiers": [
+                "shift"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "🔘1️⃣ One Stroke ^`~ (German Layout)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "equal_sign",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "equal_sign",
+              "modifiers": [
+                "shift"
+              ]
+            },
+            {
+              "key_code": "spacebar"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "language": "^de$"
+                }
+              ]
+            },
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Terminal$",
+                "^md\\.obsidian$",
+                "^com\\.sublimetext\\.4$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "equal_sign",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "equal_sign",
+              "modifiers": [
+                "shift"
+              ]
+            },
+            {
+              "key_code": "escape"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.sublimetext\\.4$"
+              ]
+            }
+          ]
+        },
+        {
+          "description": "tilde",
+          "type": "basic",
+          "from": {
+            "key_code": "n",
+            "modifiers": {
+              "mandatory": [
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "n",
+              "modifiers": [
+                "option"
+              ]
+            },
+            {
+              "key_code": "spacebar"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "language": "^de$"
+                }
+              ]
+            },
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Terminal$",
+                "^md\\.obsidian$",
+                "^com\\.sublimetext\\.4$"
+              ]
+            }
+          ]
+        },
+        {
+          "description": "^",
+          "type": "basic",
+          "from": {
+            "key_code": "non_us_backslash"
+          },
+          "to": [
+            {
+              "key_code": "non_us_backslash"
+            },
+            {
+              "key_code": "spacebar"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "language": "^de$"
+                }
+              ]
+            },
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Terminal$",
+                "^md\\.obsidian$",
+                "^com\\.sublimetext\\.4$"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+# https://espanso.org/docs/
+# ------------------------------------------
+
+matches:
+  - trigger: '!web'
+    replace: https://chris-grieser.de/
+  - trigger: "!name"
+    replace: "Christopher Grieser"
+
+  - trigger: '!wd'
+    replace: '~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/'
+
+  - trigger: '!bug'
+    replace: >
+      Could you open a bug report at the GitHub repo?
+      Reason being that the bug report forms asks for the various &
+      information I need to look into the issue.
+
+  - trigger: "!esp"
+    replace: |
+      - trigger: "$|$"
+        replace: ""
+    label: espanso rule
+
+  - trigger: "!iso"
+    replace: "{{todayISO}}"
+    vars:
+      - name: todayISO
+        type: date
+        params:
+          format: "%Y-%m-%d"
+  - trigger: "!today"
+    replace: "{{today}}"
+    vars:
+      - name: today
+        type: date
+        params:
+          format: "%d.%m.%Y"
+  - trigger: "!la"
+    replace: ", last accessed: {{today}}"
+    label: Last Accessed
+    vars:
+      - name: today
+        type: date
+        params:
+          format: "%d.%m.%Y"
+
+  - trigger: "!version"
+    replace: "{{version}}"
+    vars:
+      - name: version
+        type: shell
+        params:
+          cmd: "echo -n macOS $(sw_vers -productVersion)"
+  - trigger: "!oversion"
+    replace: "Obsidian {{version}}"
+    vars:
+      - name: version
+        type: shell
+        params:
+          cmd: 'ls ~"/Library/Application Support/obsidian/"*".asar" | xargs -I {} basename {} | cut -d"." -f1-3 | cut -d"-" -f2'
+  - trigger: "!resolution"
+    replace: "{{resolution}}"
+    vars:
+      - name: resolution
+        type: shell
+        params:
+          cmd: "osascript -e 'tell application \"Finder\" to get bounds of window of desktop' | cut -d ' ' -f 3,4"

@@ -1,0 +1,10 @@
+{
+	"selector": "text.bibtex",
+	"cmd": ["echo", "No standard build available. Build variants available, though."],
+	"variants": [
+		{
+			"name": "Lint Autofix",
+			"cmd": ["bibtex-tidy", "--numeric", "--tab", "--no-align", "--tidy-comments", "--strip-enclosing-braces", "--remove-empty-fields", "--drop-all-caps", "--remove-dupe-fields", "--omit=month,issn,pagetotal", "--backup", "--quiet", "--sort-fields", "--escape", "$file"]
+		}
+	]
+}

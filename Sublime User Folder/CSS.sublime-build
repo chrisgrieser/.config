@@ -1,0 +1,10 @@
+{
+	"selector": "source.css",
+	"cmd": ["echo", "No standard build available. Build variants available, though."],
+	"variants": [
+		{
+			"name": "Lint Autofix",
+			"cmd": ["stylelint", "--fix", "$file"]
+		}
+	]
+}

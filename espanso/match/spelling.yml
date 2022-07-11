@@ -1,0 +1,136 @@
+# https://espanso.org/docs/
+# ------------------------------------------
+
+matches:
+  # https://espanso.org/docs/matches/regex-triggers/#advanced-examples two
+  # uppercase letters followed by lowercase letter -> capital-cased => "THe"
+  # becomes "The". (not using \b as this reduces accidental triggering in vim)
+  - regex: "\\r(?P<one>[A-Z])(?P<two>[A-Z])(?P<three>[a-z])"  # \r as macOS line break needed, \n for other OS fine.
+    replace: "\n{{CapitalCased}}"
+    label: ""
+    vars:
+      - name: CapitalCased
+        type: shell
+        params:
+          cmd: "echo $ESPANSO_ONE$(echo $ESPANSO_TWO | tr [A-Z] [a-z])$ESPANSO_THREE"
+          shell: bash
+  - regex: '(?P<prefix>[ "-])(?P<one>[A-Z])(?P<two>[A-Z])(?P<three>[a-z])'
+    replace: " {{CapitalCased}}"
+    label: ""
+    vars:
+      - name: CapitalCased
+        type: shell
+        params:
+          cmd: "echo $ESPANSO_PREFIX$ESPANSO_ONE$(echo $ESPANSO_TWO | tr [A-Z] [a-z])$ESPANSO_THREE"
+          shell: bash
+
+  # ----------------------------------------------------------------------------
+
+  - trigger: "I#d"
+    replace: "I'd"
+  - trigger: appraoch
+    replace: approach
+    propagate_case: true
+  - trigger: cih
+    replace: ich
+    word: true
+    propagate_case: true
+  - trigger: eien
+    replace: eine
+    word: true
+    propagate_case: true
+  - trigger: fiels
+    replace: files
+  - trigger: fo
+    replace: of
+    word: true
+  - trigger: Forshcung
+    replace: Forschung
+  - trigger: gnaz
+    replace: ganz
+  - trigger: innovaiton
+    replace: innovation
+    propagate_case: true
+  - trigger: keybaord
+    replace: keyboard
+    propagate_case: true
+  - trigger: lcih
+    replace: lich
+  - trigger: liek
+    replace: like
+  - trigger: mcih
+    replace: mich
+  - trigger: mcuh
+    replace: much
+  - trigger: mrogen
+    replace: morgen
+    propagate_case: true
+  - trigger: msot
+    replace: most
+  - trigger: mti
+    replace: mit
+    word: true
+  - trigger: nciht
+    replace: nicht
+  - trigger: ncoh
+    replace: noch
+  - trigger: 'n#t '
+    replace: "n't "
+  - trigger: onyl
+    replace: only
+  - trigger: '#s '
+    replace: "'s "
+  - trigger: shcon
+    replace: schon
+  - trigger: sosnt
+    replace: sonst
+  - trigger: sueful
+    replace: useful
+  - trigger: suer
+    replace: user
+    propagate_case: true
+  - trigger: twitterific
+    replace: twitterrific
+    propagate_case: true
+  - trigger: technsich
+    replace: technisch
+    propagate_case: true
+  - trigger: verison
+    replace: version
+    propagate_case: true
+  - triggers: [definitly, definetly, definetely, definitely]
+    replace: definitely
+    propagate_case: true
+  - trigger: auxilliary
+    replace: auxiliary
+  - trigger: highlgiht
+    replace: highlight
+    propagate_case: true
+  - trigger: shoudl
+    replace: should
+  - triggers: ["Bibtex", "bibtex"]
+    replace: BibTeX
+    word: true
+  - trigger: torwards
+    replace: towards
+    propagate_case: true
+  - trigger: english
+    replace: English
+  - trigger: german
+    replace: German
+  - trigger: american
+    replace: American
+  - trigger: nto
+    replace: not
+    word: true
+  - trigger: teh
+    replace: the
+    word: true
+  - trigger: ahve
+    replace: have
+    word: true
+  - trigger: sicne
+    replace: since
+    word: true
+  - trigger: repalce
+    replace: replace

@@ -1,0 +1,183 @@
+title: ⇪↹ Hyper and Meh Key
+version: "1.0"
+maintainers:
+  - pseudometa
+import-url: karabiner://karabiner/assets/complex_modifications/import?url=https://github.com/chrisgrieser/dotfiles/blob/main/.config/karabiner/assets/complex_modifications/Hyper-and-Meh.json
+homepage: https://github.com/chrisgrieser/dotfiles/karabiner
+rules:
+  - description: ⇪ Capslock → Hyper/Esc
+    manipulators:
+      - type: basic
+        from:
+          key_code: caps_lock
+        to_if_alone:
+          - key_code: escape
+        to:
+          - key_code: right_shift
+            modifiers:
+              - right_command
+              - right_control
+              - right_option
+        conditions:
+          - type: variable_unless
+            name: LEADER_ACTIVE
+            value: 1
+      - description: Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+,
+        from:
+          key_code: comma
+          modifiers:
+            mandatory:
+              - command
+              - shift
+              - option
+              - control
+        to:
+          - key_code: vk_none
+        type: basic
+      # capslock + modifier = escape + modifier
+      - type: basic
+        from:
+          key_code: caps_lock
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: escape
+            modifiers:
+              - command
+      - type: basic
+        from:
+          key_code: caps_lock
+          modifiers:
+            mandatory:
+              - shift
+        to:
+          - key_code: escape
+            modifiers:
+              - shift
+      - type: basic
+        from:
+          key_code: caps_lock
+          modifiers:
+            mandatory:
+              - control
+        to:
+          - key_code: escape
+            modifiers:
+              - control
+      - type: basic
+        from:
+          key_code: caps_lock
+          modifiers:
+            mandatory:
+              - option
+        to:
+          - key_code: escape
+            modifiers:
+              - option
+  - description: '⇪ Hyper + hjklmnbe: ←↓↑→↵⌫⇐⇒'
+    manipulators:
+      - type: basic
+        from:
+          key_code: h
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: left_arrow
+      - type: basic
+        from:
+          key_code: j
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: down_arrow
+      - type: basic
+        from:
+          key_code: k
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: up_arrow
+      - type: basic
+        from:
+          key_code: l
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: right_arrow
+      - type: basic
+        from:
+          key_code: m
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: return_or_enter
+      - type: basic
+        from:
+          key_code: "n"
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: delete_or_backspace
+      - type: basic
+        from:
+          key_code: b
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: left_arrow
+            modifiers:
+              - option
+      - type: basic
+        from:
+          key_code: e
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: right_arrow
+            modifiers:
+              - option
+  - description: ↹ Tab →  Meh
+    manipulators:
+      - type: basic
+        from:
+          key_code: tab
+        to_if_alone:
+          - key_code: tab
+        to:
+          - key_code: right_shift
+            modifiers:
+              - right_control
+              - right_option

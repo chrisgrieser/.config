@@ -1,0 +1,9 @@
+# https://espanso.org/docs/
+# ------------------------------------------
+
+matches:
+  - trigger: '!hr'
+    replace: "--------------------------------------------------------------------------------\n"
+  - $trigger: "!resolve"
+    replace: 'os.getenv("HOME")'
+    label: resolve ~

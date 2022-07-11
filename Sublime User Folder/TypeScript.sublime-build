@@ -1,0 +1,11 @@
+{
+	"selector": "source.ts",
+	"working_dir": "$file_path",
+	"cmd": ["npm", "run", "build"],
+	"variants": [
+		{
+			"name": "Lint Autofix",
+			"cmd": ["eslint", "--fix", "$file"]
+		},
+	]
+}

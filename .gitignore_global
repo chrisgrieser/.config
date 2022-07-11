@@ -1,0 +1,21 @@
+# Mac
+.DS_Store
+
+# Icon must end with two \r
+Icon
+
+
+# Sublime
+*.sublime-workspace
+
+# NPM
+node_modules
+
+# safety net to prevent sensitive data being accidentally moved
+*.kdb
+*.kdbx
+*.pfx
+*.key
+
+# created with sync issues
+*.icloud

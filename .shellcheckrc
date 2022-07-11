@@ -1,0 +1,25 @@
+# https://github.com/koalaman/shellcheck/wiki/Directive
+# https://gist.github.com/nicerobot/53cee11ee0abbdc997661e65b348f375#file-_shellcheck-md
+
+# -----------------------------------------------------
+# Disabling rules that are irrelevant to zsh
+# (since shellcheck is mostly for bash)
+# -----------------------------------------------------
+
+# 1083: zsh accepts without ; at the end of oneline-functions
+# 1072: seems to be bug: https://github.com/koalaman/shellcheck/wiki/SC1072
+
+disable=SC1083,SC1072
+
+# -----------------------------------------------------
+# Enable some Optional Rules
+# -----------------------------------------------------
+
+# `shellcheck --list-optional`
+enable=deprecate-which,quote-safe-variables,require-double-brackets
+
+# -----------------------------------------------------
+# Enable some Optional Rules
+# -----------------------------------------------------
+# always follow `source` https://github.com/koalaman/shellcheck/wiki/Directive#external-sources
+external-sources=true

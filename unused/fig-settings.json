@@ -1,0 +1,13 @@
+{
+  "app.disableAutoupdates" : false,
+  "autocomplete.disable" : false,
+  "autocomplete.fontFamily" : "Input",
+  "autocomplete.fontSize" : 22,
+  "autocomplete.height" : 500,
+  "autocomplete.scrollWrapAround" : true,
+  "autocomplete.theme" : "dracula",
+  "autocomplete.width" : 400,
+  "cli.tips.disabled" : false,
+  "pty.path" : "\/Applications\/Sublime Text.app\/Contents\/SharedSupport\/bin:\/opt\/homebrew\/bin:\/opt\/homebrew\/sbin:\/usr\/local\/bin:\/usr\/bin:\/bin:\/usr\/sbin:\/sbin:\/Users\/chrisgrieser\/.fig\/bin",
+  "telemetry.disabled" : true
+}

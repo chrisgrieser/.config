@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string></string>
+	<key>category</key>
+	<string>Mini-Apps</string>
+	<key>connections</key>
+	<dict>
+		<key>432EB74A-9F76-4DD1-A316-CF3041712A9A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9312BB2F-700A-466B-A2F0-8D540BA24C5D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>48C18C9E-A9C3-4B8F-AED2-D2CBC81517B5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C3A574FB-D0D4-49BC-A318-14715CAA6854</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7D70D13D-24D9-4581-B67C-635A6479FF76</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>48C18C9E-A9C3-4B8F-AED2-D2CBC81517B5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3F2A1AEA-A2BF-41BE-80F1-6A6025626C24</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>88917A0B-7E84-42A9-905F-670430B81BBF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7D70D13D-24D9-4581-B67C-635A6479FF76</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9312BB2F-700A-466B-A2F0-8D540BA24C5D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>88917A0B-7E84-42A9-905F-670430B81BBF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>51243FFA-EE20-4337-BE38-9A9C9EA2B809</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>69321844-5FD6-49B4-904B-EA6C9F22AA56</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C3A574FB-D0D4-49BC-A318-14715CAA6854</key>
+		<array/>
+	</dict>
+	<key>createdby</key>
+	<string>Chris Grieser</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Zoom</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>var input = "{query}";
+var zoomURL = input.replace (/https?:\/\/.*\.zoom\.us\/j\/(\w+)\?pwd=(\w+)$/,"zoommtg://zoom.us/join?confno=$1&amp;amp;pwd=$2");
+Zoom = Application("/Applications/zoom.us.app");
+Zoom.includeStandardAdditions = true;
+Zoom.openLocation(zoomURL);</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>48C18C9E-A9C3-4B8F-AED2-D2CBC81517B5</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>--volumeset volume output volume 80--pause spotifytell application id "com.runningwithcrayons.Alfred" to run trigger "pause" in workflow "com.vdesabou.spotify.mini.player" with argument ""--get variablesset slack_url to (system attribute "slack_url")set notes to (system attribute "notes")
+set zoom_url to (system attribute "zoom_url")--open Obsidian notesif (notes contains "obsidian") then	tell application "Obsidian"		open location notes		repeat until application "Obsidian" is running			delay 0.2		end repeat		delay 0.1
+		open location "obsidian://advanced-uri?commandid=app%253Atoggle-left-sidebar"	end tellend if-- open Drafts for notetakingif (notes is "drafts") then	tell application "Drafts" to open location "drafts://x-callback-url/runaction?&amp;action=Workspace-Basic%20(note-taking)"	repeat until (application "Drafts" is running)		delay 0.2	end repeat
+	-- wait till Zoom meeting has started
+	set nameList to ""	repeat until nameList contains "Zoom Meeting"		tell application "System Events" to set nameList to name of windows of (processes whose name is "zoom.us")		set nameList to item 1 of nameList		delay 0.2	end repeat
+	delay 0.5
+
+	tell application "Moom" to arrange windows according to snapshot "📝 Drafts + Zoom"
+	display notification "" with title "📝 Note Mode ready"end if
+
+-- maximize Zoom when not a special context
+if (notes is "none") then
+
+	-- wait till Zoom meeting has started
+	set nameList to ""	repeat until nameList contains "Zoom Meeting"		tell application "System Events" to set nameList to name of windows of (processes whose name is "zoom.us")		set nameList to item 1 of nameList		delay 0.2	end repeat
+	delay 0.5
+
+	-- maximize Zoom
+	tell application "System Events"
+		tell process "zoom.us" 
+			set frontmost to true
+			click menu item "Zoom" of menu "Window" of menu bar 1
+		end tell
+	end tell
+
+end if-- Seminar Preparationif (slack_url is not "") then
+
+	-- Quit apps	tell application "Twitterrific" to if it is running then quit	tell application "Drafts" to if it is running then quit	tell application "BusyCal" to if it is running then quit
+	tell application "YouTube" to if it is running then quit
+	tell application "BibDesk" to if it is running then quit
+	tell application "Telegram" to if it is running then quit
+	tell application "Mimestream" to if it is running then quit
+	tell application "Discord" to if it is running then quit
+	repeat until (application "Mimestream" is not running)		delay 0.5	end repeat
+
+	-- Moom
+	delay 1
+	tell application "Moom" to arrange windows according to snapshot "👨‍🏫 Seminar"
+
+	-- DND on SOS Slack Workspace
+	tell application "Slack"		tell application "Slack" to open location "https://sosimexil.slack.com/archives/D0107FHT5U4"		delay 0.4		activate	end tell
+	tell application "System Events"		keystroke "/dnd 110 min"		delay 0.3		keystroke return
+		keystroke return	end tell
+	
+	-- post Zoom Link	tell application "Slack"		open location slack_url		delay 0.4		activate	end tell	tell application "System Events"		keystroke "Raum ist offen: "		keystroke zoom_url		delay 0.2		keystroke return	end tell
+	
+	-- notification
+	display notification "" with title "👨‍🏫 Seminar Mode ready"end if</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>set-context_[Browser].applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C3A574FB-D0D4-49BC-A318-14715CAA6854</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"Sprechstunden Chris","arg":"https:\/\/tu-berlin.zoom.us\/j\/99415959096?pwd=VFFETk91U0E5UDdKSVNzUTBkNWZwdz09;drafts","subtitle":"+ Drafts"},{"title":"Personal Room","arg":"https:\/\/tu-berlin.zoom.us\/j\/7855484257?pwd=cjY5eDhyVEI5Zk9EcnVPMHpJUSs2Zz09;none"},{"title":"🔐 Login","arg":"login"},{"title":"Einführung Technikforschung","arg":"https:\/\/tu-berlin.zoom.us\/j\/65299324579?pwd=NzgwSFNtTUxVa21HS0pKNndvQ3lJUT09;obsidian:\/\/open?vault=Main%20Vault&amp;file=Teaching%2F%F0%9F%93%BC%20Einf%C3%BChrung%20Technikforschung%20(SoSe22)","subtitle":"Seminar"},{"title":"Tech-StartUp","arg":"https:\/\/tu-berlin.zoom.us\/j\/65624610291?pwd=MEt0aWtjcVNGdzQ4NUtwOWxUSlpPQT09;obsidian:\/\/open?vault=Main%20Vault&amp;file=Teaching%2F%F0%9F%9A%80%20Das%20Tech-StartUp%20(SoSe%2022)","subtitle":"Seminar"}]</string>
+				<key>keyword</key>
+				<string>zz</string>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Join Zoom Meeting</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>432EB74A-9F76-4DD1-A316-CF3041712A9A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string>login</string>
+						<key>outputlabel</key>
+						<string>join meeting</string>
+						<key>uid</key>
+						<string>51243FFA-EE20-4337-BE38-9A9C9EA2B809</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>login</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>9312BB2F-700A-466B-A2F0-8D540BA24C5D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>delimiter</key>
+				<string>;</string>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>split</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>88917A0B-7E84-42A9-905F-670430B81BBF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{var:split1}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>notes</key>
+					<string>{var:split2}</string>
+					<key>zoom_url</key>
+					<string>{var:split1}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>7D70D13D-24D9-4581-B67C-635A6479FF76</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>📹 Launching Zoom Meeting</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>3F2A1AEA-A2BF-41BE-80F1-6A6025626C24</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "zoom.us" to activate
+delay 1
+tell application "System Events" 
+	keystroke tab
+	keystroke space
+	delay 0.2
+	keystroke tab
+	keystroke tab
+	keystroke tab
+	keystroke tab
+	keystroke space
+end tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>login-automation_[Browser].applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>69321844-5FD6-49B4-904B-EA6C9F22AA56</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<key>uidata</key>
+	<dict>
+		<key>3F2A1AEA-A2BF-41BE-80F1-6A6025626C24</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<integer>495</integer>
+			<key>ypos</key>
+			<integer>145</integer>
+		</dict>
+		<key>432EB74A-9F76-4DD1-A316-CF3041712A9A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>- edit this to add more Zoom-Meetings
+- format: zoomURL;notesURI</string>
+			<key>xpos</key>
+			<integer>35</integer>
+			<key>ypos</key>
+			<integer>15</integer>
+		</dict>
+		<key>48C18C9E-A9C3-4B8F-AED2-D2CBC81517B5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>open in Zoom</string>
+			<key>xpos</key>
+			<integer>495</integer>
+			<key>ypos</key>
+			<integer>10</integer>
+		</dict>
+		<key>69321844-5FD6-49B4-904B-EA6C9F22AA56</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>login script</string>
+			<key>xpos</key>
+			<integer>310</integer>
+			<key>ypos</key>
+			<integer>145</integer>
+		</dict>
+		<key>7D70D13D-24D9-4581-B67C-635A6479FF76</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<integer>405</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+		<key>88917A0B-7E84-42A9-905F-670430B81BBF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<integer>345</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+		<key>9312BB2F-700A-466B-A2F0-8D540BA24C5D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<integer>190</integer>
+			<key>ypos</key>
+			<integer>35</integer>
+		</dict>
+		<key>C3A574FB-D0D4-49BC-A318-14715CAA6854</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>set context</string>
+			<key>xpos</key>
+			<integer>655</integer>
+			<key>ypos</key>
+			<integer>10</integer>
+		</dict>
+	</dict>
+	<key>version</key>
+	<string></string>
+	<key>webaddress</key>
+	<string>https://chris-grieser.de/</string>
+</dict>
+</plist>

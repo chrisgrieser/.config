@@ -1,0 +1,132 @@
+title: "🐁 Mouse Click Trickery"
+version: "0.1"
+maintainers:
+  - pseudometa
+import-url: karabiner://karabiner/assets/complex_modifications/import?url=https://github.com/chrisgrieser/dotfiles/blob/main/.config/karabiner/assets/complex_modifications/mouse-click-trickery.json
+homepage: https://github.com/chrisgrieser/dotfiles/karabiner
+rules:
+  - description: "🐁 R (tap): Open link (when in Browser)"
+    manipulators:
+      - type: basic
+        from:
+          pointing_button: button2
+        to_if_held_down:
+          - pointing_button: button2
+        to:
+          - pointing_button: button3
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.vivaldi\.Vivaldi$
+              - ^org\.chromium\.Chromium$
+              - ^com\.google\.Chrome$
+              - ^com\.brave\.Browser$
+              - ^com\.apple\.Safari$
+        parameters:
+          # very short, so mouse gestures requiring held right button still work
+          basic.to_if_held_down_threshold_milliseconds: 30
+      - type: basic
+        from:
+          pointing_button: button2
+        to_if_held_down:
+          - pointing_button: button2
+        to:
+          - pointing_button: button3
+          - key_code: vk_none
+            hold_down_milliseconds: 200
+          - key_code: h
+            modifiers:
+              - command
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              # .+ so that the browser isn't matched, but PWAs are
+              - ^com\.vivaldi\.Vivaldi.+$
+              - ^org\.chromium\.Chromium.+$
+              - ^com\.google\.Chrome.+$
+              - ^com\.brave\.Browser.+$
+        parameters:
+          # very short, so mouse gestures requiring held right button still work
+          basic.to_if_held_down_threshold_milliseconds: 30
+  - description: "🐁 3: Quit app"
+    manipulators:
+      - type: basic
+        from:
+          pointing_button: button3
+        to:
+          - key_code: q
+            modifiers:
+              - command
+        conditions:
+          - type: frontmost_application_unless
+            bundle_identifiers:
+              - ^com\.apple\.finder$
+              - ^com\.hegenberg\.BetterTouchTool$
+              - ^org\.hammerspoon\.Hammerspoon$
+      - type: basic
+        from:
+          pointing_button: button3
+        to:
+          - key_code: w
+            modifiers:
+              - command
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.apple\.finder$
+              - ^com\.hegenberg\.BetterTouchTool$
+              - ^org\.hammerspoon\.Hammerspoon$
+  - description: "🐁 4 (hold): ⇧ for horizontal scroll, (tap): send F13"
+    manipulators:
+      - type: basic
+        from:
+          pointing_button: button4
+        to_if_alone:
+          - key_code: f13
+        to_if_held_down:
+          - key_code: right_shift
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 300
+          basic.to_if_held_down_threshold_milliseconds: 300
+  - description: "🐁 5 (hold): search selected text / open URL, (tap): send F16"
+    manipulators:
+      - type: basic
+        from:
+          pointing_button: button5
+        to_if_alone:
+          - key_code: f16
+        to_if_held_down:
+          - key_code: c
+            modifiers:
+              - command
+          - key_code: vk_none
+            hold_down_milliseconds: 75
+            # shell command in "raw" form placed next to this file
+          - shell_command: SEL=$(pbpaste) ; SEL="${SEL/#\~/$HOME}" ; if [[ -f "$SEL" ]]; then open -R "$SEL" ; elif [[ -d "$SEL" ]]; then open "$SEL" ; elif [[ "$SEL" =~ ^[[:space:]]*http.*[[:space:]]*$ ]]; then open "$(echo "$SEL" | tr -d " ")" ; elif [[ -n "$SEL" ]]; then open "https://www.google.com/search?q=$SEL" ; fi
+          # - key_code: d
+          #   modifiers:
+          #     - command
+          #     - control
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 250
+          basic.to_if_held_down_threshold_milliseconds: 250
+  - description: "🐁 6 / 1+2 (simultaneously): ⌘↹"
+    manipulators:
+      - type: basic
+        from:
+          pointing_button: button6
+        to:
+          - key_code: tab
+            modifiers:
+              - command
+      - type: basic
+        to:
+          - key_code: tab
+            modifiers:
+              - command
+        from:
+          simultaneous:
+            - pointing_button: button1
+            - pointing_button: button2
+        parameters:
+          basic.simultaneous_threshold_milliseconds: 40
