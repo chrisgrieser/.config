@@ -10,7 +10,6 @@ Cron Jobs/frequent.log
 # redundant
 .config/karabiner/automatic_backups
 
-
 # -------------------------------------------------------------
 
 # Git Repos (already backed up & git can't handle nested repos)
