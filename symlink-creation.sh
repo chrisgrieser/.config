@@ -50,7 +50,8 @@ rm -rf ~"/Applications/$BROWSER Apps.localized"
 ln -sf "$DOTFILE_FOLDER/../$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
 
 #-------------------------------------------------------------------------------
-# already set up, no need to run again. Only left here for reference
+# already set up, no need to run again.
+# Only left here for reference, or when dotfile folder location changes
 #-------------------------------------------------------------------------------
 
 # to keep private stuff out of the dotfile repo

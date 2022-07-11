@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+set -e  # exit with 1 if any command fails
+
 # go to script location (the script should be located in the git repository)
 THIS_LOCATION="$(dirname "$0")"
 cd "$THIS_LOCATION" || exit 1
@@ -9,7 +11,6 @@ details="$(git status --porcelain)"
 filesChanged="$(echo "$details" | wc -l | tr -d ' ')"
 
 if [[ "$filesChanged" == 0 ]] ; then
-	# abort if there haven't been changes
 	exit 0
 elif [[ "$filesChanged" == 1 ]] ; then
 	changeType="$filesChanged file"
