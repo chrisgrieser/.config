@@ -15,7 +15,6 @@ if [[ "$filesChanged" == 1 ]] ; then
 else
 	changeType="$filesChanged files"
 fi
-echo "$changeType"
 
 git add -A
 # no full date needed, since git shows it already
