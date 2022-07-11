@@ -1,7 +1,3 @@
-# This is the gitignore of *this* dotfile repo only
-# `gitignore_global` is for *all* of git repos
-# ------------------------------------------------
-
 # Mac
 .DS_Store
 
@@ -10,21 +6,16 @@ Sublime User Folder/FileHistory*.json
 Sublime User Folder/AutoFoldCode.sublime-settings
 Cron Jobs/frequent.log
 
-# Redundant
+# redundant
 .config/karabiner/automatic_backups
 
-# NOTE: private dotfile data is located on the cloud drive, but symlinked into
-# this dotfile folder to keep it in sync but outside of this repo
 
 # -------------------------------------------------------------
 
 # Git Repos (already backed up & git can't handle nested repos)
-# Shimmering Obsidian
-user.workflow.D02FCDA1-EA32-4486-B5A6-09B42C44677C
-# PDF Annotation Extractor
-user.workflow.765354AA-49F0-4CB1-8DB0-EA4BE2DB09F8
-# Citation Picker
-user.workflow.41B90DCD-A99E-4943-A19A-E91859557FB0
+shimmering-obsidian
+alfred-bibtex-citation-picker
+pdf-annotation-extractor-alfred
 
 # in case of accidental saving of such files in the repo
 *.mp4
