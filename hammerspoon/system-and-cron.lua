@@ -12,8 +12,8 @@ function dotfileRepoGitSync ()
 		notify("dotfile sync ✅")
 		log ("dotfile sync ✅", "$HOME/Dotfiles/Cron Jobs/frequent.log")
 	else
-		notify("⚠️⚠️⚠️ "..output)
-		log ("dotfile sync ⚠️", "$HOME/Dotfiles/Cron Jobs/frequent.log")
+		notify("⚠️️ "..output)
+		log ("dotfile sync ⚠️: "..output, "$HOME/Dotfiles/Cron Jobs/frequent.log")
 	end
 end
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, dotfileRepoGitSync)
@@ -22,7 +22,7 @@ repoSyncTimer:start()
 function pullSync()
 	local output, success = hs.execute('zsh "$HOME/Dotfiles/pull-sync-repos.sh"')
 	if not(success) then
-		notify("⚠️⚠️⚠️ "..output)
+		notify("⚠️ "..output)
 	else
 		notify("✅ pull sync success")
 	end
