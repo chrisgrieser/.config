@@ -8,10 +8,10 @@ cd "$THIS_LOCATION"
 git pull
 
 # pull Alfred repos
-cd "Alfred.alfredpreferences/workflows/user.workflow.41B90DCD-A99E-4943-A19A-E91859557FB0/"
+cd "Alfred.alfredpreferences/workflows/shimmering-obsidian"
 git pull
-cd "../user.workflow.D02FCDA1-EA32-4486-B5A6-09B42C44677C/"
+cd "../alfred-bibtex-citation-picker"
 git pull
-cd "../user.workflow.765354AA-49F0-4CB1-8DB0-EA4BE2DB09F8/"
+cd "../pdf-annotation-extractor-alfred"
 git pull
 
