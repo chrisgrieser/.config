@@ -3,6 +3,8 @@
 export HISTSIZE=3000
 export SAVEHIST=3000
 
+export HISTFILE=~"/.zsh_history" # so it isn't saved in the dotfile repo
+
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
