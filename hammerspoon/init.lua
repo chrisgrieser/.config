@@ -23,11 +23,10 @@ require("watchers")
 require("discord")
 require("twitterrific-iina")
 
---------------------------------------------------------------------------------
--- https://github.com/Hammerspoon/hammerspoon/blob/master/SPOONS.md
-
 -- Spoons
 require("vim-mode")
 
 --------------------------------------------------------------------------------
+
 notify("Config reloaded")
+pullSync()
