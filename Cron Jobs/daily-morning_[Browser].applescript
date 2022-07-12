@@ -37,4 +37,4 @@ tell application "Busycal"
 end tell
 
 # LOGGING
-do shell script "echo Morning\\ $(date '+%Y-%m-%d %H:%M') >> '/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Dotfiles/Cron Jobs/some.log'"
+do shell script "echo Morning\\ $(date '+%Y-%m-%d %H:%M') >> \"$HOME/dotfiles/Cron Jobs/some.log\""

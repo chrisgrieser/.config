@@ -10,10 +10,10 @@ function dotfileRepoGitSync ()
 	local output, success = hs.execute('zsh "$HOME/Dotfiles/git-dotfile-backup.sh"')
 	if success then
 		notify("dotfile sync ✅")
-		log ("dotfile sync ✅", "$HOME/Dotfiles/Cron Jobs/frequent.log")
+		log ("dotfile sync ✅", "$HOME/Dotfiles/Cron Jobs/sync.log")
 	else
 		notify("⚠️️ "..output)
-		log ("dotfile sync ⚠️: "..output, "$HOME/Dotfiles/Cron Jobs/frequent.log")
+		log ("dotfile sync ⚠️: "..output, "$HOME/Dotfiles/Cron Jobs/sync.log")
 	end
 end
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, dotfileRepoGitSync)

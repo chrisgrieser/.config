@@ -9,4 +9,4 @@ tell application "System Events"
 end tell
 
 # LOGGING
-do shell script "echo Evening\\ $(date '+%Y-%m-%d %H:%M') >> '/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Dotfiles/Cron Jobs/some.log'"
+do shell script "echo Evening\\ $(date '+%Y-%m-%d %H:%M') >> \"$HOME/dotfiles/Cron Jobs/some.log\""
