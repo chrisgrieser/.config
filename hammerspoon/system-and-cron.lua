@@ -10,7 +10,7 @@ function gitSync ()
 	if success then
 		log ("dotfiles sync ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
 	else
-		notify("⚠️️ dotfiles"..output)
+		notify("⚠️️ dotfiles "..output)
 		log ("dotfiles sync ⚠️: "..output, "$HOME/dotfiles/Cron Jobs/sync.log")
 	end
 
@@ -18,22 +18,33 @@ function gitSync ()
 	if success then
 		log ("vault backup 🟪", "$HOME/dotfiles/Cron Jobs/sync.log")
 	else
-		notify("⚠️️ vault"..output)
+		notify("⚠️️ vault "..output)
 		log ("vault backup ⚠️: "..output, "$HOME/dotfiles/Cron Jobs/sync.log")
 	end
 end
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, gitSync)
 repoSyncTimer:start()
 
-function pullSync()
-	local output, success = hs.execute('zsh "$HOME/dotfiles/pull-sync-repos.sh"')
-	if success then
+function pullsyncCallback(exitCode, _, stdErr)
+	if exitCode == 0 then
 		notify("pull sync ✅")
 		log ("pull sync ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
 	else
-		notify("⚠️ pull sync"..output)
-		log ("pull sync ⚠️: "..output, "$HOME/dotfiles/Cron Jobs/sync.log")
+		notify("⚠️ pull sync "..stdErr)
+		log ("pull sync ⚠️: "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
 	end
+end
+
+function pullSync()
+	-- local output, success = hs.execute('zsh "$HOME/dotfiles/pull-sync-repos.sh"')
+	-- if success then
+	-- 	notify("pull sync ✅")
+	-- 	log ("pull sync ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
+	-- else
+	-- 	notify("⚠️ pull sync"..output)
+	-- 	log ("pull sync ⚠️: "..output, "$HOME/dotfiles/Cron Jobs/sync.log")
+	-- end
+	hs.task.new(os.getenv("HOME").."/dotfiles/pull-sync-repos.sh", pullsyncCallback)
 end
 
 --------------------------------------------------------------------------------
