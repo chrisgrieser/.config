@@ -262,50 +262,9 @@
           ]
         },
         {
-          "description": "Emoji Inserter",
           "type": "basic",
           "from": {
             "key_code": "period"
-          },
-          "to": [
-            {
-              "key_code": "spacebar",
-              "modifiers": [
-                "right_command",
-                "right_control"
-              ]
-            },
-            {
-              "set_variable": {
-                "name": "LEADER_ACTIVE",
-                "value": 0
-              }
-            },
-            {
-              "set_notification_message": {
-                "id": "leader-notice",
-                "text": ""
-              }
-            }
-          ],
-          "conditions": [
-            {
-              "type": "variable_if",
-              "name": "LEADER_ACTIVE",
-              "value": 1
-            }
-          ]
-        },
-        {
-          "description": "Emoji Inserter",
-          "type": "basic",
-          "from": {
-            "key_code": "period",
-            "modifiers": {
-              "mandatory": [
-                "shift"
-              ]
-            }
           },
           "to": [
             {
@@ -704,36 +663,6 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "k"
-          },
-          "conditions": [
-            {
-              "type": "variable_if",
-              "name": "LEADER_ACTIVE",
-              "value": 1
-            }
-          ],
-          "to": [
-            {
-              "shell_command": "open -a 'Karabiner-Elements'"
-            },
-            {
-              "set_variable": {
-                "name": "LEADER_ACTIVE",
-                "value": 0
-              }
-            },
-            {
-              "set_notification_message": {
-                "id": "leader-notice",
-                "text": ""
-              }
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
             "key_code": "h"
           },
           "conditions": [
@@ -764,12 +693,7 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "k",
-            "modifiers": {
-              "mandatory": [
-                "shift"
-              ]
-            }
+            "key_code": "k"
           },
           "conditions": [
             {
@@ -1180,36 +1104,6 @@
           "to": [
             {
               "shell_command": "open 'https://web.telegram.org/z/'"
-            },
-            {
-              "set_variable": {
-                "name": "LEADER_ACTIVE",
-                "value": 0
-              }
-            },
-            {
-              "set_notification_message": {
-                "id": "leader-notice",
-                "text": ""
-              }
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "y"
-          },
-          "conditions": [
-            {
-              "type": "variable_if",
-              "name": "LEADER_ACTIVE",
-              "value": 1
-            }
-          ],
-          "to": [
-            {
-              "shell_command": "open -a 'zoom.us'"
             },
             {
               "set_variable": {
