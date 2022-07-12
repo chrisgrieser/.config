@@ -63,6 +63,13 @@ case $APP_TO_UPDATE in
 		cp "$CUSTOM_ICON_FOLDER/Discord Black.icns" 'Discord.app/Contents/Resources/electron.icns'
 		touch "Discord.app" ;;
 
+	"LimeChat")
+		osascript -e "tell application \"Finder\"
+			open information window of (\"/Applications/LimeChat.app\" as POSIX file as alias)
+			activate
+		end tell
+		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/LimeChat.icns\""
+		INFO_WINDOW=1 ;;
 	"Microsoft Word")
 		osascript -e "tell application \"Finder\"
 			open information window of (\"/Applications/Microsoft Word.app\" as POSIX file as alias)
@@ -133,8 +140,8 @@ if [[ $NONE_FOUND == 0 ]]; then
 		killall "Dock"
 		sleep 2.5
 		open -a "$APP_TO_UPDATE"
+		echo -n "$APP_TO_UPDATE" # pass for notification
 	fi
-	echo -n "$APP_TO_UPDATE" # pass for notification
 else
 	echo -n "No icon set up for $APP_TO_UPDATE."
 fi
