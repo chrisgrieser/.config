@@ -98,7 +98,7 @@ end
 setDraftsCounterMenuBar()
 
 -- update when database changes
-draftsSqliteLocation = os.getenv("HOME").."/Library/Group Containers/GTFQ98J4YG.com.agiletortoise.Drafts/DraftStore.sqlite"
+draftsSqliteLocation = os.getenv("HOME").."/Library/Group Containers/GTFQ98J4YG.com.agiletortoise.Drafts/DraftStore.sqlite-shm"
 draftsMenuBarWatcher = hs.pathwatcher.new(draftsSqliteLocation, setDraftsCounterMenuBar)
 draftsMenuBarWatcher:start()
 
