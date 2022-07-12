@@ -206,8 +206,6 @@ function homeModeLayout ()
 
 	runDelayed(0.5, function ()
 		hs.layout.apply(homeLayout)
-
-		twitterrificScrollUp()
 		hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
 	end)
 
@@ -297,7 +295,7 @@ function moveWindowToMouseScreen(win)
 	win:moveToScreen(mouseScreen)
 end
 function alwaysOpenOnMouseDisplay(appName, eventType, appObject)
-	if numberOfScreens() == 1 then return end
+	if not (isProjector()) then return end
 
 	if (eventType == hs.application.watcher.launched) then
 		-- delayed, to ensure window has launched properly
@@ -313,7 +311,7 @@ function alwaysOpenOnMouseDisplay(appName, eventType, appObject)
 	end
 end
 launchWhileMultiScreenWatcher = hs.application.watcher.new(alwaysOpenOnMouseDisplay)
-launchWhileMultiScreenWatcher:start()
+if isIMacAtHome then launchWhileMultiScreenWatcher:start() end
 
 function moveToOtherDisplay ()
 	local win = hs.window.focusedWindow()
@@ -424,6 +422,7 @@ hotkey(hyper, "home", function()
 	else
 		homeModeLayout()
 	end
+	twitterrificScrollUp()
 end)
 
 hotkey({"ctrl"}, "Space", function ()

@@ -7,7 +7,13 @@ matches:
   - triggers: ['!greet', "!sm"]
     replace: "Dear sir or madam,\n\n"
   - triggers: ['!greet', "!dh"]
-    replace: "Sehr geehrte Damen und Herren,\n\n"
+    replace: |
+      Sehr geehrte Damen und Herren,
+
+      $|$
+
+      Mit freundlichen Grüßen
+      Christopher Grieser
   - trigger: '!greet'
     replace: "Sehr geehrte $|$,\n\n"
 
