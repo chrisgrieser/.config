@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C18146DE-959B-4A0E-AC09-BED0D28AD242</string>
+				<string>6EE6E827-27D1-4C3C-BE0D-1361E16F0F32</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -31,31 +31,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C18146DE-959B-4A0E-AC09-BED0D28AD242</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>83CE207E-318C-4E3C-AD01-1ABA65DCD173</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>B26496AC-993F-479A-A16C-7AAD7453E6D0</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>6EE6E827-27D1-4C3C-BE0D-1361E16F0F32</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -67,53 +42,6 @@
 	<string>Volume Search</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>paths</key>
-				<array>
-					<string>/System/Applications/Utilities/Disk Utility.app</string>
-				</array>
-				<key>toggle</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.launchfiles</string>
-			<key>uid</key>
-			<string>83CE207E-318C-4E3C-AD01-1ABA65DCD173</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>disk_utility</string>
-						<key>outputlabel</key>
-						<string>disk_utility</string>
-						<key>uid</key>
-						<string>B26496AC-993F-479A-A16C-7AAD7453E6D0</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>C18146DE-959B-4A0E-AC09-BED0D28AD242</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -235,39 +163,27 @@ JSON.stringify({ 'items': volume_array });
 		<key>2CFE15BC-B802-49B9-86EE-234FB30174C2</key>
 		<dict>
 			<key>xpos</key>
-			<integer>455</integer>
+			<real>455</real>
 			<key>ypos</key>
-			<integer>315</integer>
+			<real>315</real>
 		</dict>
 		<key>6AFDF8FB-7B99-46E6-ABBB-772B0525181A</key>
 		<dict>
 			<key>xpos</key>
-			<integer>155</integer>
+			<real>155</real>
 			<key>ypos</key>
-			<integer>185</integer>
+			<real>185</real>
 		</dict>
 		<key>6EE6E827-27D1-4C3C-BE0D-1361E16F0F32</key>
 		<dict>
 			<key>xpos</key>
-			<integer>455</integer>
+			<real>455</real>
 			<key>ypos</key>
-			<integer>185</integer>
-		</dict>
-		<key>83CE207E-318C-4E3C-AD01-1ABA65DCD173</key>
-		<dict>
-			<key>xpos</key>
-			<integer>455</integer>
-			<key>ypos</key>
-			<integer>60</integer>
-		</dict>
-		<key>C18146DE-959B-4A0E-AC09-BED0D28AD242</key>
-		<dict>
-			<key>xpos</key>
-			<integer>330</integer>
-			<key>ypos</key>
-			<integer>140</integer>
+			<real>185</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
