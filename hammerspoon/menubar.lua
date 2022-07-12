@@ -93,7 +93,6 @@ function setDraftsCounterMenuBar()
 		return
 	end
 	draftsCounterMenuBar:setTitle("☑️ "..numberOfDrafts)
-	notify("test")
 end
 setDraftsCounterMenuBar()
 

@@ -31,7 +31,7 @@ function pullSync()
 		notify("pull sync ✅")
 		log ("pull sync ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
 	else
-		notify("⚠️ "..output)
+		notify("⚠️ pull sync"..output)
 		log ("pull sync ⚠️: "..output, "$HOME/dotfiles/Cron Jobs/sync.log")
 	end
 end
