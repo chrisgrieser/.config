@@ -6,7 +6,7 @@ require("utils")
 function reloadAllMenubarItems ()
 	setWeather()
 	setCovidBar()
-	setDraftsCounterMenuBar()
+	updateDraftsMenubar()
 	setFileHubCountMenuBar()
 end
 
@@ -67,7 +67,7 @@ covidTimer:start()
 
 --------------------------------------------------------------------------------
 draftsCounterMenuBar = hs.menubar.new()
-function setDraftsCounterMenuBar()
+function updateDraftsMenubar()
 	local excludeTask1 = "tasklist"
 	local excludeTask2
 	if isIMacAtHome() then
@@ -83,18 +83,23 @@ function setDraftsCounterMenuBar()
 	end
 	draftsCounterMenuBar:setTitle("🏁 "..numberOfDrafts)
 end
-setDraftsCounterMenuBar()
+updateDraftsMenubar()
 
 function draftsWatcher(appName, eventType)
 	if not(eventType == hs.application.watcher.deactivated and appName == "Drafts") then return end
-	setDraftsCounterMenuBar()
+	updateDraftsMenubar()
 end
 -- update when database changes or Drafts loses focus
 draftsSqliteLocation = os.getenv("HOME").."/Library/Group Containers/GTFQ98J4YG.com.agiletortoise.Drafts/Changes.sqlite-shm"
-draftsMenuBarWatcher1 = hs.pathwatcher.new(draftsSqliteLocation, setDraftsCounterMenuBar)
+draftsMenuBarWatcher1 = hs.pathwatcher.new(draftsSqliteLocation, updateDraftsMenubar)
 draftsMenuBarWatcher1:start()
 draftsMenuBarWatcher2 = hs.application.watcher.new(draftsWatcher)
 draftsMenuBarWatcher2:start()
+
+
+-- for Alfred Triggers
+-- `hammerspoon://update-drafts-menubar` for reloading via Sublime Build System or Karabiner
+hs.urlevent.bind("update-drafts-menubar",  updateDraftsMenubar)
 
 --------------------------------------------------------------------------------
 
