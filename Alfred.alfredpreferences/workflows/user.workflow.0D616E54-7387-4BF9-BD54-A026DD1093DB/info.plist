@@ -44,7 +44,7 @@
 				<key>modifiersubtext</key>
 				<string>fn: Append</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -173,6 +173,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>71FBE1C5-BC7B-43A4-BCB9-727D69B6383C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>7B4F8DF4-D76C-419E-A643-E2667687215E</key>
 		<array>
@@ -217,6 +227,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A2BDE635-2747-44A5-A4B5-4E7551E8E371</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A2BDE635-2747-44A5-A4B5-4E7551E8E371</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7C03B571-C16B-40CF-9A37-EFDEF0819A53</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -462,6 +485,10 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -572,6 +599,14 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>7C03B571-C16B-40CF-9A37-EFDEF0819A53</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
@@ -625,6 +660,10 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -663,6 +702,10 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -812,6 +855,10 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -848,6 +895,27 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{var:url_to_open_after}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>71FBE1C5-BC7B-43A4-BCB9-727D69B6383C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -877,6 +945,10 @@ end tell</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -985,6 +1057,10 @@ end tell</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -1209,6 +1285,10 @@ end tell</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -1304,9 +1384,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>565</real>
+			<real>580</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>395</real>
 		</dict>
 		<key>08BA2565-9B60-4A1C-BC0E-7BCD74ADF899</key>
 		<dict>
@@ -1446,6 +1526,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>735</real>
 		</dict>
+		<key>71FBE1C5-BC7B-43A4-BCB9-727D69B6383C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>580</real>
+			<key>ypos</key>
+			<real>520</real>
+		</dict>
 		<key>74B62267-C649-4561-93C7-DCBDD98B8D63</key>
 		<dict>
 			<key>colorindex</key>
@@ -1487,6 +1576,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>770</real>
 			<key>ypos</key>
 			<real>1005</real>
+		</dict>
+		<key>7C03B571-C16B-40CF-9A37-EFDEF0819A53</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>1000</real>
+			<key>ypos</key>
+			<real>200</real>
 		</dict>
 		<key>7F193D53-A438-48E3-AA84-18737E10DC34</key>
 		<dict>
@@ -1677,10 +1775,13 @@ Recommended Hotkey: ⇧⌘2</string>
 		<string>eng+deu</string>
 		<key>tagToExcludeFromSearch</key>
 		<string>tasklist</string>
+		<key>url_to_open_after</key>
+		<string>hammerspoon://update-drafts-menubar</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
 		<string>tagToExcludeFromSearch</string>
+		<string>url_to_open_after</string>
 	</array>
 	<key>version</key>
 	<string>0.8</string>
