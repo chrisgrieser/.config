@@ -3,9 +3,9 @@ require("utils")
 require("window-management")
 
 firstWakeOfTheDay = true
+repoSyncFrequencyMin = 15
 --------------------------------------------------------------------------------
 
-repoSyncFrequencyMin = 15
 function gitSync ()
 	local output1, success1 = hs.execute('zsh "$HOME/dotfiles/git-dotfile-backup.sh"')
 	if success1 then
@@ -41,6 +41,26 @@ end
 
 --------------------------------------------------------------------------------
 
+function setDarkmode (toDark)
+	if toDark then
+		hs.osascript.applescript([[
+			tell application "System Events"
+				tell appearance preferences
+					if (dark mode is true) then tell application id "com.runningwithcrayons.Alfred" to run trigger "toggle-dark-mode" in workflow "de.chris-grieser.dark-mode-toggle"
+				end tell
+			end tell
+		]])
+	else
+		hs.osascript.applescript([[
+			tell application "System Events"
+				tell appearance preferences
+					if (dark mode is false) then tell application id "com.runningwithcrayons.Alfred" to run trigger "toggle-dark-mode" in workflow "de.chris-grieser.dark-mode-toggle"
+				end tell
+			end tell
+		]])
+	end
+end
+
 function systemShutDown (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemWillSleep or eventType == hs.caffeinate.watcher.systemWillPowerOff) then return end
 	dotfileRepoGitSync()
@@ -64,16 +84,10 @@ function systemWake (eventType)
 		officeModeLayout()
 	end
 
-	-- run darkmode toggle between 6:00 and 19:00
+	-- set darkmode if waking between 6:00 and 19:00
 	local timeHours = hs.timer.localTime() / 60 / 60
 	if timeHours < 19 and timeHours > 6 then
-		hs.osascript.applescript([[
-			tell application "System Events"
-				tell appearance preferences
-					if (dark mode is true) then tell application id "com.runningwithcrayons.Alfred" to run trigger "toggle-dark-mode" in workflow "de.chris-grieser.dark-mode-toggle"
-				end tell
-			end tell
-		]])
+		setDarkmode(true)
 	end
 
 	pullSync()
@@ -84,7 +98,7 @@ wakeWatcher:start()
 -- redundancy: daily morning run
 if isIMacAtHome() then
 	dailyMorningTimer = hs.timer.doAt("06:10", "01d", function()
-		systemWake()
+		setDarkmode(true)
 		log("Hammer-Morning ✅", "$HOME/dotfiles/Cron Jobs/some.log")
 	end, false)
 	dailyMorningTimer:start()
