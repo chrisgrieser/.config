@@ -7,6 +7,7 @@ function reloadAllMenubarItems ()
 	setWeather()
 	setCovidBar()
 	setFileHubCountMenuBar()
+	setDraftsCounterMenuBar()
 end
 
 weatherUpdateMin = 15
@@ -85,6 +86,7 @@ fileHubMenuBarWatcher:start()
 
 --------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------
 -- obsidianStatusBar = hs.menubar.new()
 -- obsiWorkspaceJSON = os.getenv("HOME") .. "/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/.obsidian/workspace"
 -- function obsidianCurrentFile()

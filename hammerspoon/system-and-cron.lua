@@ -6,22 +6,20 @@ repoSyncFrequencyMin = 15
 --------------------------------------------------------------------------------
 
 function gitSync ()
-	local output1, success1 = hs.execute('zsh "$HOME/dotfiles/git-dotfile-backup.sh"')
-	if success1 then
-		notify("dotfiles sync ✅")
+	local output, success = hs.execute('zsh "$HOME/dotfiles/git-dotfile-backup.sh"')
+	if success then
 		log ("dotfiles sync ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
 	else
-		notify("⚠️️ dotfiles"..output1)
-		log ("dotfiles sync ⚠️: "..output1, "$HOME/dotfiles/Cron Jobs/sync.log")
+		notify("⚠️️ dotfiles"..output)
+		log ("dotfiles sync ⚠️: "..output, "$HOME/dotfiles/Cron Jobs/sync.log")
 	end
 
-	local output2, success2 = hs.execute('zsh "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh"')
-	if success2 then
-		notify("vault backup 🟪")
+	output, success = hs.execute('zsh "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh"')
+	if success then
 		log ("vault backup 🟪", "$HOME/dotfiles/Cron Jobs/sync.log")
 	else
-		notify("⚠️️ vault"..output2)
-		log ("vault backup ⚠️: "..output2, "$HOME/dotfiles/Cron Jobs/sync.log")
+		notify("⚠️️ vault"..output)
+		log ("vault backup ⚠️: "..output, "$HOME/dotfiles/Cron Jobs/sync.log")
 	end
 end
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, gitSync)
