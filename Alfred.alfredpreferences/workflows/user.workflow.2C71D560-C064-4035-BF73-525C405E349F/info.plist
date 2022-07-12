@@ -110,7 +110,7 @@ dym --clean-output -n1 $LANG "$1"</string>
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>--lang=de</string>
+				<string>--lang={var:second_lang}</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -147,7 +147,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>de</string>
+			<string>second language (defined in settings)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -157,8 +157,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
-			<key>note</key>
-			<string>aspell auto-correction</string>
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
@@ -169,7 +167,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>en</string>
+			<string>English</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -180,11 +178,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<array/>
 	<key>variables</key>
 	<dict>
+		<key>delay_ms</key>
+		<string>70</string>
 		<key>second_lang</key>
 		<string>de</string>
 	</dict>
 	<key>version</key>
-	<string>0.1</string>
+	<string>0.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
