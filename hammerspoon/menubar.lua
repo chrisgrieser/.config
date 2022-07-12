@@ -80,7 +80,7 @@ function setFileHubCountMenuBar()
 end
 setFileHubCountMenuBar()
 
--- update menubar every time the folder changes
+-- update when folder changes
 fileHubMenuBarWatcher = hs.pathwatcher.new(fileHubLocation, setFileHubCountMenuBar)
 fileHubMenuBarWatcher:start()
 
@@ -92,6 +92,11 @@ function setDraftsCounterMenuBar()
 	draftsCounterMenuBar:setTitle("☑️ "..numberOfDrafts)
 end
 setDraftsCounterMenuBar()
+
+-- update when database changes
+draftsSqliteLocation = os.getenv("HOME").."/Library/Group Containers/GTFQ98J4YG.com.agiletortoise.Drafts/DraftStore.sqlite"
+draftsMenuBarWatcher = hs.pathwatcher.new(draftsSqliteLocation, setDraftsCounterMenuBar)
+draftsMenuBarWatcher:start()
 
 --------------------------------------------------------------------------------
 -- obsidianStatusBar = hs.menubar.new()

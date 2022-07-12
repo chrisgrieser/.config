@@ -18,4 +18,4 @@ Icon
 Dotfolder/Backups/
 
 # zsh raw plugins
-Dotfolder/Config/zsh/plugins
+zsh/plugins/
