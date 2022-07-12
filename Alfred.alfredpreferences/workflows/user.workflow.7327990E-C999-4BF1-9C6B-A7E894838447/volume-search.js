@@ -38,17 +38,5 @@ if (singleVolumes.length) {
 	});
 }
 
-volumeArray.push ({
-	"title": "Disk Utility",
-	"subtitle": "",
-	"arg": "disk_utility",
-	"icon": { "path" : "disk_utility.png" },
-	"mods": {
-		"cmd" : {
-			"valid": false,
-			"subtitle": ""
-		}
-	}
-});
 
 JSON.stringify({ "items": volumeArray });
