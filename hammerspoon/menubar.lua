@@ -69,14 +69,19 @@ covidTimer:start()
 draftsCounterMenuBar = hs.menubar.new()
 function setDraftsCounterMenuBar()
 	local excludeTask1 = "tasklist"
-	local excludeTask2 = "office"
+	local excludeTask2
+	if isIMacAtHome() then
+		excludeTask2 = "office"
+	else
+		excludeTask2 = "home"
+	end
 	local numberOfDrafts, success = hs.execute("python3 numberOfDrafts.py "..excludeTask1.." "..excludeTask2)
 	numberOfDrafts = numberOfDrafts:gsub("\n", "")
 	if tonumber(numberOfDrafts) == 0 or not(success) then
 		draftsCounterMenuBar:setTitle("")
 		return
 	end
-	draftsCounterMenuBar:setTitle("⚑ "..numberOfDrafts)
+	draftsCounterMenuBar:setTitle("🏁 "..numberOfDrafts)
 end
 setDraftsCounterMenuBar()
 
