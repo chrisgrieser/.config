@@ -153,8 +153,8 @@
 	{ "keys": ["super+shift+l"], "command": "split_selection_into_lines"},
 
 	// Multi Cursor down / up
-	{ "keys": ["ctrl+shift+up"], "command": "select_lines", "args": {"forward": false} },
-	{ "keys": ["ctrl+shift+down"], "command": "select_lines", "args": {"forward": true} },
+	{ "keys": ["ctrl+shift+alt+up"], "command": "select_lines", "args": {"forward": false} },
+	{ "keys": ["ctrl+shift+alt+down"], "command": "select_lines", "args": {"forward": true} },
 
 	// Comment
 	{ "keys": ["super+7"], "command": "toggle_comment", "args": { "block": false } },
