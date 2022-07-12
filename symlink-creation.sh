@@ -7,7 +7,6 @@ DOTFILE_FOLDER="$(dirname "$0")"
 ln -sf "$DOTFILE_FOLDER/zsh/.zshrc" ~
 [[ -e ~/.zprofile ]] && rm -rf ~/.zprofile
 ln -sf "$DOTFILE_FOLDER/zsh/.zprofile" ~
-[[ -e ~/.zsh_history ]] && rm -rf ~/.zsh_history
 ln -sf "$DOTFILE_FOLDER/zsh/.zlogin" ~
 
 # other dotfiles
@@ -67,3 +66,4 @@ ln -sf "$DOTFILE_FOLDER/../$BROWSER Apps.localized/" ~"/Applications/$BROWSER Ap
 
 # YAMLlint
 # ln -sf "$DOTFILE_FOLDER/.config/yamllint/config/.yamllint.yaml" "$DOTFILE_FOLDER/.config/karabiner/assets/complex_modifications"
+# ln -sf "$DOTFILE_FOLDER/.config/yamllint/config/.yamllint.yaml" "$DOTFILE_FOLDER/espanso/config/"
