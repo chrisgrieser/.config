@@ -87,7 +87,7 @@ fileHubMenuBarWatcher:start()
 --------------------------------------------------------------------------------
 draftsCounterMenuBar = hs.menubar.new()
 function setDraftsCounterMenuBar()
-	local numberOfDrafts = hs.execute("pwd")
+	local numberOfDrafts = hs.execute("python3 numberOfDrafts.py")
 	numberOfDrafts = numberOfDrafts:gsub("\n", "")
 	draftsCounterMenuBar:setTitle("☑️ "..numberOfDrafts)
 end
