@@ -346,7 +346,8 @@ function vsplit (mode)
 
 	-- switch order of windows
 	if mode == "switch" then
-		if (f1.w + f2.w ~= max.w) then
+		if (f1.w +
+		f2.w ~= max.w) then
 			notify ("not a correct vertical split")
 			return
 		end
@@ -365,6 +366,15 @@ function vsplit (mode)
 			f1 = hs.layout.left50
 			f2 = hs.layout.right50
 		end
+	elseif mode == "unsplit" then
+		local layout
+		if isAtOffice() then
+			layout = hs.layout.maximized
+		else
+			layout = {x=0, y=0, w=0.815, h=1} -- pseudo-maximized
+		end
+		f1 = layout
+		f2 = layout
 	end
 
 	resizingWorkaround(win1, f1)
@@ -436,6 +446,7 @@ hotkey({"ctrl"}, "Space", function ()
 end)
 
 hotkey(hyper, "X", function() vsplit("switch") end)
+hotkey(hyper, "U", function() vsplit("unsplit") end)
 hotkey(hyper, "V", function()
 	if (frontapp() == "Finder") then
 		finderVsplit()
