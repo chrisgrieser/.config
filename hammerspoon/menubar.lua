@@ -76,7 +76,7 @@ function setFileHubCountMenuBar()
 		return
 	end
 
-	fileHubCountMenuBar:setTitle("🗂 "..numberOfFiles)
+	fileHubCountMenuBar:setTitle("📂 "..numberOfFiles)
 end
 setFileHubCountMenuBar()
 
@@ -85,6 +85,13 @@ fileHubMenuBarWatcher = hs.pathwatcher.new(fileHubLocation, setFileHubCountMenuB
 fileHubMenuBarWatcher:start()
 
 --------------------------------------------------------------------------------
+draftsCounterMenuBar = hs.menubar.new()
+function setDraftsCounterMenuBar()
+	local numberOfDrafts = hs.execute("pwd")
+	numberOfDrafts = numberOfDrafts:gsub("\n", "")
+	draftsCounterMenuBar:setTitle("☑️ "..numberOfDrafts)
+end
+setDraftsCounterMenuBar()
 
 --------------------------------------------------------------------------------
 -- obsidianStatusBar = hs.menubar.new()
