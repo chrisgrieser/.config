@@ -6,8 +6,8 @@ require("utils")
 function reloadAllMenubarItems ()
 	setWeather()
 	setCovidBar()
-	setFileHubCountMenuBar()
 	setDraftsCounterMenuBar()
+	setFileHubCountMenuBar()
 end
 
 weatherUpdateMin = 15
@@ -66,6 +66,32 @@ covidTimer = hs.timer.doEvery(covidUpdateHours * 60 * 60, setCovidBar)
 covidTimer:start()
 
 --------------------------------------------------------------------------------
+draftsCounterMenuBar = hs.menubar.new()
+function setDraftsCounterMenuBar()
+	local excludeTask1 = "tasklist"
+	local excludeTask2 = "office"
+	local numberOfDrafts, success = hs.execute("python3 numberOfDrafts.py "..excludeTask1.." "..excludeTask2)
+	numberOfDrafts = numberOfDrafts:gsub("\n", "")
+	if tonumber(numberOfDrafts) == 0 or not(success) then
+		draftsCounterMenuBar:setTitle("")
+		return
+	end
+	draftsCounterMenuBar:setTitle("⚑ "..numberOfDrafts)
+end
+setDraftsCounterMenuBar()
+
+function draftsWatcher(appName, eventType)
+	if not(eventType == hs.application.watcher.deactivated and appName == "Drafts") then return end
+	setDraftsCounterMenuBar()
+end
+-- update when database changes or Drafts loses focus
+draftsSqliteLocation = os.getenv("HOME").."/Library/Group Containers/GTFQ98J4YG.com.agiletortoise.Drafts/Changes.sqlite-shm"
+draftsMenuBarWatcher1 = hs.pathwatcher.new(draftsSqliteLocation, setDraftsCounterMenuBar)
+draftsMenuBarWatcher1:start()
+draftsMenuBarWatcher2 = hs.application.watcher.new(draftsWatcher)
+draftsMenuBarWatcher2:start()
+
+--------------------------------------------------------------------------------
 
 fileHubCountMenuBar = hs.menubar.new()
 function setFileHubCountMenuBar()
@@ -82,30 +108,6 @@ setFileHubCountMenuBar()
 -- update when folder changes
 fileHubMenuBarWatcher = hs.pathwatcher.new(fileHubLocation, setFileHubCountMenuBar)
 fileHubMenuBarWatcher:start()
-
---------------------------------------------------------------------------------
-draftsCounterMenuBar = hs.menubar.new()
-function setDraftsCounterMenuBar()
-	local numberOfDrafts, success = hs.execute("python3 numberOfDrafts.py")
-	numberOfDrafts = numberOfDrafts:gsub("\n", "")
-	if tonumber(numberOfDrafts) == 0 or not(success) then
-		draftsCounterMenuBar:setTitle("")
-		return
-	end
-	draftsCounterMenuBar:setTitle("☑️ "..numberOfDrafts)
-end
-setDraftsCounterMenuBar()
-
-function draftsWatcher(appName, eventType)
-	if not(eventType == hs.application.watcher.deactivated and appName == "Drafts") then return end
-	setDraftsCounterMenuBar()
-end
--- update when database changes or Drafts loses focus
-draftsSqliteLocation = os.getenv("HOME").."/Library/Group Containers/GTFQ98J4YG.com.agiletortoise.Drafts/Changes.sqlite-shm"
-draftsMenuBarWatcher1 = hs.pathwatcher.new(draftsSqliteLocation, setDraftsCounterMenuBar)
-draftsMenuBarWatcher1:start()
-draftsMenuBarWatcher2 = hs.application.watcher.new(draftsWatcher)
-draftsMenuBarWatcher2:start()
 
 --------------------------------------------------------------------------------
 -- obsidianStatusBar = hs.menubar.new()

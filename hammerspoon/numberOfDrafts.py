@@ -5,8 +5,8 @@ import sys
 from contextlib import closing
 from os.path import expanduser
 
-TAG_TO_EXCLUDE_1 = 'tasklist'
-TAG_TO_EXCLUDE_2 = 'office'
+TAG_TO_EXCLUDE_1 = sys.argv[1]
+TAG_TO_EXCLUDE_2 = sys.argv[2]
 
 
 def search_draft():
