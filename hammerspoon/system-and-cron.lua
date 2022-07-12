@@ -5,27 +5,35 @@ require("window-management")
 repoSyncFrequencyMin = 15
 --------------------------------------------------------------------------------
 
-function gitSync ()
-	local output, success = hs.execute('zsh "$HOME/dotfiles/git-dotfile-backup.sh"')
-	if success then
+
+
+function gitDotfileSyncCallback(exitCode, _, stdErr)
+	if exitCode == 0 then
 		log ("dotfiles sync ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
 	else
-		notify("⚠️️ dotfiles "..output)
-		log ("dotfiles sync ⚠️: "..output, "$HOME/dotfiles/Cron Jobs/sync.log")
-	end
-
-	output, success = hs.execute('zsh "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh"')
-	if success then
-		log ("vault backup 🟪", "$HOME/dotfiles/Cron Jobs/sync.log")
-	else
-		notify("⚠️️ vault "..output)
-		log ("vault backup ⚠️: "..output, "$HOME/dotfiles/Cron Jobs/sync.log")
+		notify("⚠️️ dotfiles "..stdErr)
+		log ("dotfiles sync ⚠️: "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
 	end
 end
-repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, gitSync)
+gitDotfileSync = hs.task.new(os.getenv("HOME").."/dotfiles/git-dotfile-backup.sh", gitDotfileSyncCallback)
+
+function gitVaultBackupCallback(exitCode, _, stdErr)
+	if exitCode == 0 then
+		log ("vault backup 🟪", "$HOME/dotfiles/Cron Jobs/sync.log")
+	else
+		notify("⚠️️ vault "..stdErr)
+		log ("vault backup ⚠️: "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
+	end
+end
+gitVaultBackup = hs.task.new(os.getenv("HOME").."/dotfiles/git vault backup.sh", gitVaultBackupCallback)
+
+repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
+	if not gitDotfileSync:isRunning() then gitDotfileSync:start() end
+	if not gitVaultBackup:isRunning() then gitVaultBackup:start() end
+end)
 repoSyncTimer:start()
 
-function pullsyncCallback(exitCode, stdOut, stdErr)
+function pullsyncCallback(exitCode, _, stdErr)
 	if exitCode == 0 then
 		notify("pull sync ✅")
 		log ("pull sync ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
@@ -34,19 +42,8 @@ function pullsyncCallback(exitCode, stdOut, stdErr)
 		log ("pull sync ⚠️: "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
 	end
 end
+pullSync = hs.task.new(os.getenv("HOME").."/dotfiles/pull-sync-repos.sh", pullsyncCallback)
 
-pullSyncScript = hs.task.new(os.getenv("HOME").."/dotfiles/pull-sync-repos.sh", pullsyncCallback)
-function pullSync()
-	-- local output, success = hs.execute('zsh "$HOME/dotfiles/pull-sync-repos.sh"')
-	-- if success then
-	-- 	notify("pull sync ✅")
-	-- 	log ("pull sync ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
-	-- else
-	-- 	notify("⚠️ pull sync"..output)
-	-- 	log ("pull sync ⚠️: "..output, "$HOME/dotfiles/Cron Jobs/sync.log")
-	-- end
-	pullSyncScript:start()
-end
 
 --------------------------------------------------------------------------------
 
@@ -66,7 +63,8 @@ end
 
 function systemShutDown (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemWillSleep or eventType == hs.caffeinate.watcher.systemWillPowerOff) then return end
-	gitSync()
+	gitDotfileSync:start()
+	gitVaultBackup:start()
 end
 shutDownWatcher = hs.caffeinate.watcher.new(systemShutDown)
 shutDownWatcher:start()
@@ -92,7 +90,7 @@ function systemWake (eventType)
 		setDarkmode(true)
 	end
 
-	pullSync()
+	pullSync:start()
 end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
