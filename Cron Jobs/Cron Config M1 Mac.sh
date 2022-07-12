@@ -6,7 +6,6 @@ function add-cronjob () {
 	(crontab -l && echo "$1 \"$CRON_JOB_FOLDER/$2\"") | crontab -
 }
 
-add-cronjob "*/15 * * * *" '15-min_[Browser-Path].sh'
 add-cronjob "5 3 * * *" 'sleep-timer_[Browser].applescript'
 add-cronjob "5 6 * * *" 'daily-morning_[Browser].applescript'
 add-cronjob "5 21 * * *" 'daily-evening.applescript'
