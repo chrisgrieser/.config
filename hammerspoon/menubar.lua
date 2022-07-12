@@ -97,10 +97,16 @@ function setDraftsCounterMenuBar()
 end
 setDraftsCounterMenuBar()
 
--- update when database changes
+function draftsWatcher(appName, eventType)
+	if not(eventType == hs.application.watcher.deactivated and appName == "Drafts") then return end
+	setDraftsCounterMenuBar()
+end
+-- update when database changes or Drafts loses focus
 draftsSqliteLocation = os.getenv("HOME").."/Library/Group Containers/GTFQ98J4YG.com.agiletortoise.Drafts/Changes.sqlite-shm"
-draftsMenuBarWatcher = hs.pathwatcher.new(draftsSqliteLocation, setDraftsCounterMenuBar)
-draftsMenuBarWatcher:start()
+draftsMenuBarWatcher1 = hs.pathwatcher.new(draftsSqliteLocation, setDraftsCounterMenuBar)
+draftsMenuBarWatcher1:start()
+draftsMenuBarWatcher2 = hs.application.watcher.new(draftsWatcher)
+draftsMenuBarWatcher2:start()
 
 --------------------------------------------------------------------------------
 -- obsidianStatusBar = hs.menubar.new()
