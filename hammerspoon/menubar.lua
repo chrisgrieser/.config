@@ -99,7 +99,10 @@ draftsMenuBarWatcher2:start()
 
 -- for Alfred Triggers
 -- `hammerspoon://update-drafts-menubar` for reloading via Sublime Build System or Karabiner
-hs.urlevent.bind("update-drafts-menubar",  updateDraftsMenubar)
+hs.urlevent.bind("update-drafts-menubar",  function()
+	updateDraftsMenubar()
+	hs.application("Hammerspoon"):hide()
+end)
 
 --------------------------------------------------------------------------------
 
