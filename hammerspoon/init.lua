@@ -29,5 +29,6 @@ notify("Config reloaded")
 
 -- startup tasks
 gitDotfileSync:start()
-gitVaultBackup:start()
+gitDotfileSync:waitUntilExit() -- needed so sync finishes before pull
 pullSync:start()
+gitVaultBackup:start()
