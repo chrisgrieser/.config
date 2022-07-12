@@ -5,6 +5,8 @@ require("utils")
 -- have to be done here, since when send from Karabiner, gets caught by the
 -- pagedown/up listener from Hammerspoon in `twitterific-iina.lua`
 
+highlightsScrollAmount = 15
+
 function highlightsAppScroll (amount)
 		-- has to be done via applescript, as repeated keystrokes
 		-- via Hammerspoon have a slight lag
@@ -27,7 +29,7 @@ function scrollDown ()
 	if frontapp():lower() == "alacritty" or frontapp() == "Terminal" then
 		keystroke ({"shift"}, "pagedown")
 	elseif frontapp() == "Highlights" then
-		highlightsAppScroll(-13)
+		highlightsAppScroll(-highlightsScrollAmount)
 	else
 		keystroke ({}, "pagedown")
 	end
@@ -36,7 +38,7 @@ function scrollUp ()
 	if frontapp():lower() == "alacritty" or frontapp() == "Terminal" then
 		keystroke ({"shift"}, "pageup")
 	elseif frontapp() == "Highlights" then
-		highlightsAppScroll(13)
+		highlightsAppScroll(highlightsScrollAmount)
 	else
 		keystroke ({}, "pageup")
 	end
