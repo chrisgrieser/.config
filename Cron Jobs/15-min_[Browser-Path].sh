@@ -7,4 +7,4 @@ zsh ~"/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git
 
 # LOGGING
 # ---------------------------------------------------
-echo "15-min $(date '+%Y-%m-%d %H:%M')" >> ~'/Dotfolder/Dotfiles/Cron Jobs/frequent.log'
+echo "🟪 vault backup $(date '+%Y-%m-%d %H:%M')" >> ~"/dotfiles/Cron Jobs/frequent.log"
