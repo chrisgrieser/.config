@@ -6,25 +6,36 @@ firstWakeOfTheDay = true
 --------------------------------------------------------------------------------
 
 repoSyncFrequencyMin = 15
-function dotfileRepoGitSync ()
-	local output, success = hs.execute('zsh "$HOME/Dotfiles/git-dotfile-backup.sh"')
-	if success then
-		notify("dotfile sync ✅")
-		log ("dotfile sync ✅", "$HOME/Dotfiles/Cron Jobs/sync.log")
+function gitSync ()
+	local output1, success1 = hs.execute('zsh "$HOME/dotfiles/git-dotfile-backup.sh"')
+	if success1 then
+		notify("dotfiles sync ✅")
+		log ("dotfiles sync ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
 	else
-		notify("⚠️️ "..output)
-		log ("dotfile sync ⚠️: "..output, "$HOME/Dotfiles/Cron Jobs/sync.log")
+		notify("⚠️️ dotfiles"..output1)
+		log ("dotfiles sync ⚠️: "..output1, "$HOME/dotfiles/Cron Jobs/sync.log")
+	end
+
+	local output2, success2 = hs.execute('zsh "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh"')
+	if success2 then
+		notify("vault backup 🟪")
+		log ("vault backup 🟪", "$HOME/dotfiles/Cron Jobs/sync.log")
+	else
+		notify("⚠️️ vault"..output2)
+		log ("vault backup ⚠️: "..output2, "$HOME/dotfiles/Cron Jobs/sync.log")
 	end
 end
-repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, dotfileRepoGitSync)
+repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, gitSync)
 repoSyncTimer:start()
 
 function pullSync()
-	local output, success = hs.execute('zsh "$HOME/Dotfiles/pull-sync-repos.sh"')
-	if not(success) then
-		notify("⚠️ "..output)
+	local output, success = hs.execute('zsh "$HOME/dotfiles/pull-sync-repos.sh"')
+	if success then
+		notify("pull sync ✅")
+		log ("pull sync ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
 	else
-		notify("✅ pull sync success")
+		notify("⚠️ "..output)
+		log ("pull sync ⚠️: "..output, "$HOME/dotfiles/Cron Jobs/sync.log")
 	end
 end
 
@@ -74,7 +85,7 @@ wakeWatcher:start()
 if isIMacAtHome() then
 	dailyMorningTimer = hs.timer.doAt("06:10", "01d", function()
 		systemWake()
-		log("Hammer-Morning ✅", "$HOME/Dotfiles/Cron Jobs/some.log")
+		log("Hammer-Morning ✅", "$HOME/dotfiles/Cron Jobs/some.log")
 	end, false)
 	dailyMorningTimer:start()
 end
