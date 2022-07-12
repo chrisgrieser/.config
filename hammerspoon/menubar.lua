@@ -75,7 +75,6 @@ function setFileHubCountMenuBar()
 		fileHubCountMenuBar:setTitle("")
 		return
 	end
-
 	fileHubCountMenuBar:setTitle("📂 "..numberOfFiles)
 end
 setFileHubCountMenuBar()
@@ -87,8 +86,12 @@ fileHubMenuBarWatcher:start()
 --------------------------------------------------------------------------------
 draftsCounterMenuBar = hs.menubar.new()
 function setDraftsCounterMenuBar()
-	local numberOfDrafts = hs.execute("python3 numberOfDrafts.py")
+	local numberOfDrafts, success = hs.execute("python3 numberOfDrafts.py")
 	numberOfDrafts = numberOfDrafts:gsub("\n", "")
+	if tonumber(numberOfDrafts) == 0 or not(success) then
+		draftsCounterMenuBar:setTitle("")
+		return
+	end
 	draftsCounterMenuBar:setTitle("☑️ "..numberOfDrafts)
 end
 setDraftsCounterMenuBar()
