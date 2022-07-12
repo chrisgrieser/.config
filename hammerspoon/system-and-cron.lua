@@ -44,23 +44,17 @@ end
 --------------------------------------------------------------------------------
 
 function setDarkmode (toDark)
-	if toDark then
-		hs.osascript.applescript([[
-			tell application "System Events"
-				tell appearance preferences
-					if (dark mode is true) then tell application id "com.runningwithcrayons.Alfred" to run trigger "toggle-dark-mode" in workflow "de.chris-grieser.dark-mode-toggle"
-				end tell
+	local darkStr
+	if toDark then darkStr = "true"
+	else darkStr = "false" end
+	hs.osascript.applescript([[
+		tell application "System Events"
+			tell appearance preferences
+				if (dark mode is not ]]..darkStr..[[) then tell application id "com.runningwithcrayons.Alfred" to run trigger "toggle-dark-mode" in workflow "de.chris-grieser.dark-mode-toggle"
 			end tell
-		]])
-	else
-		hs.osascript.applescript([[
-			tell application "System Events"
-				tell appearance preferences
-					if (dark mode is false) then tell application id "com.runningwithcrayons.Alfred" to run trigger "toggle-dark-mode" in workflow "de.chris-grieser.dark-mode-toggle"
-				end tell
-			end tell
-		]])
-	end
+		end tell
+	]])
+	log("Dark Mode: "..darkStr, "$HOME/dotfiles/Cron Jobs/some.log")
 end
 
 function systemShutDown (eventType)
@@ -76,9 +70,6 @@ function systemWake (eventType)
 
 	reloadAllMenubarItems()
 	hs.shortcuts.run("Send Reminders due today to Drafts")
-	if appIsRunning("Obsidian") and appIsRunning("Discord") then
-		hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
-	end
 
 	if isIMacAtHome() then
 		homeModeLayout()
@@ -101,7 +92,6 @@ wakeWatcher:start()
 if isIMacAtHome() then
 	dailyMorningTimer = hs.timer.doAt("06:10", "01d", function()
 		setDarkmode(true)
-		log("Hammer-Morning ✅", "$HOME/dotfiles/Cron Jobs/some.log")
 	end, false)
 	dailyMorningTimer:start()
 end
