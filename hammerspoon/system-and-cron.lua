@@ -5,8 +5,6 @@ require("window-management")
 repoSyncFrequencyMin = 15
 --------------------------------------------------------------------------------
 
-
-
 function gitDotfileSyncCallback(exitCode, _, stdErr)
 	if exitCode == 0 then
 		log ("dotfiles sync ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
@@ -44,7 +42,6 @@ function pullsyncCallback(exitCode, _, stdErr)
 end
 pullSync = hs.task.new(os.getenv("HOME").."/dotfiles/pull-sync-repos.sh", pullsyncCallback)
 
-
 --------------------------------------------------------------------------------
 
 function setDarkmode (toDark)
@@ -63,8 +60,9 @@ end
 
 function systemShutDown (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemWillSleep or eventType == hs.caffeinate.watcher.systemWillPowerOff) then return end
-	gitDotfileSync:start()
-	gitVaultBackup:start()
+
+	if not gitDotfileSync:isRunning() then gitDotfileSync:start() end
+	if not gitVaultBackup:isRunning() then gitVaultBackup:start() end
 end
 shutDownWatcher = hs.caffeinate.watcher.new(systemShutDown)
 shutDownWatcher:start()
@@ -78,11 +76,8 @@ function systemWake (eventType)
 		hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
 	end
 
-	if isIMacAtHome() then
-		homeModeLayout()
-	elseif isAtOffice() then
-		officeModeLayout()
-	end
+	if isIMacAtHome() then homeModeLayout()
+	elseif isAtOffice() then officeModeLayout() end
 
 	-- set darkmode if waking between 6:00 and 19:00
 	local timeHours = hs.timer.localTime() / 60 / 60
