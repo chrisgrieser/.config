@@ -22,7 +22,7 @@ if [[ $ext == "applescript" ]] ; then
 	content='#!/usr/bin/env osascript\n'"$content"
 fi
 if [[ $ext == "py" ]] ; then
-	content='#!/bin/python\n'"$content"
+	content='#!/usr/bin/env python3\n'"$content"
 fi
 if [[ $ext == "se-applescript" ]] ; then
 	content='#!/usr/bin/env osascript\n'"$content"
