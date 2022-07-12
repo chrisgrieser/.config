@@ -7,7 +7,10 @@ matches:
       const app = Application.currentApplication();
       app.includeStandardAdditions = true;
       const onlineJSON = (url) => JSON.parse (app.doShellScript("curl -sL '" + url + "'"));
-    label: '🏝 [JXA] GET online JSON'
+    label: '🏝 GET online JSON'
+  - replace: |
+      const fileExists = Application("Finder").exists(Path(file_path));
+    label: '🏝 [JXA] Check File Existence'
   - replace: const discordReadyLinks = Application("Discord").frontmost();
     label: '🏝 [JXA] Check whether App is frontmost'
   - replace: |
