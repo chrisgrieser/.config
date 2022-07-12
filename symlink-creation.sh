@@ -66,4 +66,5 @@ ln -sf "$DOTFILE_FOLDER/../$BROWSER Apps.localized/" ~"/Applications/$BROWSER Ap
 
 # YAMLlint
 # ln -sf "$DOTFILE_FOLDER/.config/yamllint/config/.yamllint.yaml" "$DOTFILE_FOLDER/.config/karabiner/assets/complex_modifications"
-# ln -sf "$DOTFILE_FOLDER/.config/yamllint/config/.yamllint.yaml" "$DOTFILE_FOLDER/espanso/config/"
+ln -sf "$DOTFILE_FOLDER/.config/yamllint/config/.yamllint.yaml" "$DOTFILE_FOLDER/espanso/config/"
+ln -sf "$DOTFILE_FOLDER/.config/yamllint/config/.yamllint.yaml" "$DOTFILE_FOLDER/espanso/match/"
