@@ -2,14 +2,14 @@
 # ------------------------------------------
 
 matches:
-  - $trigger: "!py"
+  - trigger: "!py"
     replace: "#!/usr/bin/env python3\n"
     label: 🐍 Python Shebang
-  - $trigger: "!resolve"
+  - trigger: "!resolve"
     replace: |
       from os.path import expanduser
 
       expanduser(\"~\")
     label: 🐍 Resolve ~
-  - $trigger: "!hr"
-    replace: "#-------------------------------------------------------------------------------"
+  - trigger: "!hr"
+    replace: "# ------------------------------------------------------------------------------"
