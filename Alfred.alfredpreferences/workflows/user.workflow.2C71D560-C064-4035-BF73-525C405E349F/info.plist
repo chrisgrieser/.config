@@ -178,8 +178,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
-	<key>variablesdontexport</key>
-	<array/>
+	<key>variables</key>
+	<dict>
+		<key>second_lang</key>
+		<string>de</string>
+	</dict>
 	<key>version</key>
 	<string>0.1</string>
 	<key>webaddress</key>
