@@ -25,7 +25,7 @@ end
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, gitSync)
 repoSyncTimer:start()
 
-function pullsyncCallback(exitCode, _, stdErr)
+function pullsyncCallback(exitCode, stdOut, stdErr)
 	if exitCode == 0 then
 		notify("pull sync ✅")
 		log ("pull sync ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
@@ -35,6 +35,7 @@ function pullsyncCallback(exitCode, _, stdErr)
 	end
 end
 
+pullSyncScript = hs.task.new(os.getenv("HOME").."/dotfiles/pull-sync-repos.sh", pullsyncCallback)
 function pullSync()
 	-- local output, success = hs.execute('zsh "$HOME/dotfiles/pull-sync-repos.sh"')
 	-- if success then
@@ -44,7 +45,7 @@ function pullSync()
 	-- 	notify("⚠️ pull sync"..output)
 	-- 	log ("pull sync ⚠️: "..output, "$HOME/dotfiles/Cron Jobs/sync.log")
 	-- end
-	hs.task.new(os.getenv("HOME").."/dotfiles/pull-sync-repos.sh", pullsyncCallback)
+	pullSyncScript:start()
 end
 
 --------------------------------------------------------------------------------
