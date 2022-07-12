@@ -2,9 +2,6 @@ require("menubar")
 require("utils")
 require("window-management")
 
-firstWakeOfTheDay = true
---------------------------------------------------------------------------------
-
 repoSyncFrequencyMin = 15
 --------------------------------------------------------------------------------
 
@@ -59,8 +56,7 @@ end
 
 function systemShutDown (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemWillSleep or eventType == hs.caffeinate.watcher.systemWillPowerOff) then return end
-	dotfileRepoGitSync()
-	firstWakeOfTheDay = true
+	gitSync()
 end
 shutDownWatcher = hs.caffeinate.watcher.new(systemShutDown)
 shutDownWatcher:start()
@@ -70,6 +66,9 @@ function systemWake (eventType)
 
 	reloadAllMenubarItems()
 	hs.shortcuts.run("Send Reminders due today to Drafts")
+	if appIsRunning("Obsidian") and appIsRunning("Discord") then
+		hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
+	end
 
 	if isIMacAtHome() then
 		homeModeLayout()
