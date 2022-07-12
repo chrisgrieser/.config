@@ -28,6 +28,8 @@ gitVaultBackup = hs.task.new(os.getenv("HOME").."/dotfiles/git vault backup.sh",
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
 	if not gitDotfileSync:isRunning() then gitDotfileSync:start() end
 	if not gitVaultBackup:isRunning() then gitVaultBackup:start() end
+	gitDotfileSync:waitUntilExit() -- block shutdown until done (hopefully... 🥴)
+	gitVaultBackup:waitUntilExit()
 end)
 repoSyncTimer:start()
 

@@ -101,6 +101,7 @@ rules:
               text: ""
   - description: 🔺 App Switcher Actions
     manipulators:
+      # Cancel (Esc)
       - type: basic
         description: Leader Cancel
         from:
@@ -116,6 +117,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Cancel (Hyper)
       - type: basic
         description: 'Hyper (Esc): Leader Cancel'
         from:
@@ -131,8 +133,8 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
-      - description: Emoji Inserter
-        type: basic
+      # Emoji Inserter
+      - type: basic
         from:
           key_code: period
         to:
@@ -150,28 +152,7 @@ rules:
           - type: variable_if
             name: LEADER_ACTIVE
             value: 1
-      - description: Emoji Inserter
-        type: basic
-        from:
-          key_code: period
-          modifiers:
-            mandatory:
-              - shift
-        to:
-          - key_code: spacebar
-            modifiers:
-              - right_command
-              - right_control
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: 0
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: 1
+      # BusyCal
       - type: basic
         from:
           key_code: c
@@ -187,6 +168,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # System Preferences
       - type: basic
         from:
           key_code: comma
@@ -202,6 +184,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Obsidian
       - type: basic
         from:
           key_code: o
@@ -217,6 +200,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Discord
       - type: basic
         from:
           key_code: d
@@ -232,6 +216,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Zoom
       - type: basic
         from:
           # switched y and z due to German Keyboard
@@ -248,6 +233,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Sublime Text
       - type: basic
         from:
           key_code: e
@@ -263,6 +249,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Drafts
       - type: basic
         from:
           key_code: r
@@ -278,6 +265,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Slack
       - type: basic
         from:
           key_code: s
@@ -293,6 +281,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Mimestream
       - type: basic
         from:
           key_code: m
@@ -308,6 +297,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Brave Browser
       - type: basic
         from:
           key_code: b
@@ -323,6 +313,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # l: Activate Finder
       - type: basic
         from:
           key_code: l
@@ -331,7 +322,6 @@ rules:
             name: LEADER_ACTIVE
             value: 1
         to:
-          # l: Activate Finder
           - shell_command: open -a "Finder"
           - set_variable:
               name: LEADER_ACTIVE
@@ -339,6 +329,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # L: Open default Location with Finder
       - type: basic
         from:
           key_code: l
@@ -350,7 +341,6 @@ rules:
             name: LEADER_ACTIVE
             value: 1
         to:
-          # L: Open default Location with Finder
           - shell_command: open "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
           - set_variable:
               name: LEADER_ACTIVE
@@ -358,21 +348,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
-      - type: basic
-        from:
-          key_code: k
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: 1
-        to:
-          - shell_command: open -a 'Karabiner-Elements'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: 0
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+      # Hammerspoon
       - type: basic
         from:
           key_code: h
@@ -388,12 +364,10 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Karabiner-EventViewer
       - type: basic
         from:
           key_code: k
-          modifiers:
-            mandatory:
-              - shift
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
@@ -406,6 +380,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # MacPass
       - type: basic
         from:
           key_code: x
@@ -422,10 +397,10 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # YouTube
       - type: basic
         from:
-          # switched y and z due to German Keyboard
-          key_code: z
+          key_code: z  # switched y and z due to German Keyboard
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
@@ -438,6 +413,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Alfred Preferences
       - type: basic
         from:
           key_code: a
@@ -453,6 +429,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Inoreader
       - type: basic
         from:
           key_code: i
@@ -468,6 +445,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Twitterrific
       - type: basic
         description: ö → Twitterific (with scrolling fix)
         from:
@@ -485,6 +463,7 @@ rules:
           - set_variable:
               name: LEADER_ACTIVE
               value: 0
+      # Highlights
       - type: basic
         from:
           key_code: p
@@ -500,6 +479,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Google Docs
       - type: basic
         from:
           key_code: g
@@ -515,6 +495,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # IINA
       - type: basic
         from:
           key_code: v
@@ -530,10 +511,10 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Color Picker
       - type: basic
         from:
-          # "#" on Germany keyboard
-          key_code: non_us_pound
+          key_code: non_us_pound  # "#" on Germany keyboard
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
@@ -546,6 +527,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # BetterTouchTool
       - type: basic
         from:
           key_code: b
@@ -564,6 +546,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # WhatsApp
       - type: basic
         from:
           key_code: w
@@ -579,6 +562,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Facebook Messenger
       - type: basic
         from:
           key_code: f
@@ -594,6 +578,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Telegram
       - type: basic
         from:
           key_code: t
@@ -603,21 +588,6 @@ rules:
             value: 1
         to:
           - shell_command: open 'https://web.telegram.org/z/'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: 0
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "y"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: 1
-        to:
-          - shell_command: open -a 'zoom.us'
           - set_variable:
               name: LEADER_ACTIVE
               value: 0

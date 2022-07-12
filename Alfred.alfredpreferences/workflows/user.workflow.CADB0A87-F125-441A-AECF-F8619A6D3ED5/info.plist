@@ -396,6 +396,29 @@ end alfred_script</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+  tell application "System Events"
+	tell process "Drafts"
+		set frontmost to true
+		click menu item "Move to Archive" of menu "File" of menu bar 1
+		click menu item "New" of menu "File" of menu bar 1
+	end tell
+end tell
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>1C3D78DC-489D-4E04-B780-4B301F7BF529</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -433,35 +456,15 @@ end alfred_script</string>
 			<dict>
 				<key>applescript</key>
 				<string>on alfred_script(q)
-  tell application "System Events"
-	tell process "Drafts"
-		set frontmost to true
-		click menu item "Move to Archive" of menu "File" of menu bar 1
-		click menu item "New" of menu "File" of menu bar 1
-	end tell
-end tell
-end alfred_script</string>
-				<key>cachescript</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.applescript</string>
-			<key>uid</key>
-			<string>1C3D78DC-489D-4E04-B780-4B301F7BF529</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>applescript</key>
-				<string>on alfred_script(q)
 	tell application "System Events"
-		tell process "Highlights" to click menu item "Highlight" of menu "Tools" of menu bar 1
+		tell process "Highlights" 
+			click menu item "Highlight" of menu "Tools" of menu bar 1
+			click menu item "Yellow" of menu of menu item "Color" of menu "Tools" of menu bar 1
+		end tell
 	end tell
 end alfred_script</string>
 				<key>cachescript</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.applescript</string>
@@ -571,7 +574,7 @@ end alfred_script</string>
 				<key>text</key>
 				<string></string>
 				<key>title</key>
-				<string>🖊 Highlights</string>
+				<string>〽️ Yellow Highlights</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
