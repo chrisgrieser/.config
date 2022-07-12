@@ -26,5 +26,7 @@ require("twitterrific-iina")
 --------------------------------------------------------------------------------
 
 notify("Config reloaded")
-gitSync()
-pullSync()
+
+gitDotfileSync:start()
+gitVaultBackup:start()
+pullSync:start()
