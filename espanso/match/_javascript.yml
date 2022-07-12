@@ -2,82 +2,8 @@
 # ------------------------------------------
 
 matches:
-  - replace: |
-      ObjC.import("stdlib");
-      const app = Application.currentApplication();
-      app.includeStandardAdditions = true;
-      const onlineJSON = (url) => JSON.parse (app.doShellScript("curl -sL '" + url + "'"));
-    label: '🏝 [JXA] GET online JSON'
-  - replace: const discordReadyLinks = Application("Discord").frontmost();
-    label: '🏝 [JXA] Check whether App is frontmost'
-  - replace: |
-      const posixPath = (finderWindow) => $.NSURL.alloc.initWithString(finderWindow.target.url()).fileSystemRepresentation;
-      posixPath(Application("Finder").finderWindows[0]);
-    label: '🏝 [JXA] Get Current Finder Window'
-  - replace: |
-      let finderSelection = "§§§";
-      const finderHasSelection = Boolean(Application("Finder").selection()[0]?.url())
-      if (finderHasSelection) finderSelection = decodeURI(Application("Finder").selection()[0].url()).slice(7);
-    label: '🏝 [JXA] Get Finder Selection'
-  - replace: |
-      const app = Application.currentApplication();
-      app.includeStandardAdditions = true;
-
-      app.doShellScript('ls');
-    label: '🏝 [JXA] JavaScript ➞ Shell'
-  - replace: |
-      const app = Application.currentApplication();
-      app.includeStandardAdditions = true;
-      app.openLocation(url);
-    label: '🏝 [JXA] Open Location'
-  - $trigger: "!read"
-    replace: |
-      ObjC.import("Foundation");
-      function readFile (path, encoding) {
-      	if (!encoding) encoding = $.NSUTF8StringEncoding;
-      	const fm = $.NSFileManager.defaultManager;
-      	const data = fm.contentsAtPath(path);
-      	const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
-      	return ObjC.unwrap(str);
-      }
-    label: '🏝 [JXA] Read File'
-  - replace: |
-      const app = Application.currentApplication();
-      app.includeStandardAdditions = true;
-      app.setTheClipboardTo("[NONE]");
-    label: '🏝 [JXA] Set clipboard'
-  - trigger: '!write'
-    replace: |
-      function writeToFile(text, file) {
-      	const str = $.NSString.alloc.initWithUTF8String(text);
-      	str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
-      }
-    label: '🏝 [JXA] Write to File'
-  - replace: |
-      function readPlist (key, path){
-      	return app.doShellScript(
-      		'plutil -extract ' + key
-      		+ ' xml1 -o - ' + path
-      		+ ' | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1')
-      		.replaceAll ("&amp;", "&");
-      }
-    label: '🏝 [JXA] read plist'
-  - replace: |
-      function readJSON (json, lineNo){
-      	if (json.split("\r") == null) return "§§§";
-      	return json.split("\r")[lineNo].split('"')[3];
-      }
-    label: '🏝 readJSONline'
   - replace: const todayISO = (new Date()).toISOString().slice(0,10);
     label: '🏝 today ISOdate'
-  - trigger: "!js"
-    replace: "#!/usr/bin/env osascript -l JavaScript\n"
-    label: '🏝 JXA Shebang'
-  - trigger: "!resolve"
-    replace: |
-      const vaultPath = $.getenv("vault_path").replace(/^~/, app.pathTo("home folder"));
-
-    label: '🏝 [JXA] Resolve ~'
   - trigger: "!hr"
     replace: "//------------------------------------------------------------------------------"
   - trigger: ".rr"
@@ -85,10 +11,5 @@ matches:
   - regex: " ?!!"  # so this works whether prepended with space or not
     replace: " {\n"
     label: 🏝 Quicker Block
-  - trigger: "!app"
-    replace: |
-      const app = Application.currentApplication();
-      app.includeStandardAdditions = true;
-    label: "🏝 [JXA] Define App"
   - replace: "[...new Set(myArray)]"
     label: 🏝 Filter Duplicates / Keep Uniques in Array
