@@ -311,7 +311,7 @@ function alwaysOpenOnMouseDisplay(appName, eventType, appObject)
 	end
 end
 launchWhileMultiScreenWatcher = hs.application.watcher.new(alwaysOpenOnMouseDisplay)
-if isIMacAtHome then launchWhileMultiScreenWatcher:start() end
+if isIMacAtHome() then launchWhileMultiScreenWatcher:start() end
 
 function moveToOtherDisplay ()
 	local win = hs.window.focusedWindow()
