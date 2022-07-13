@@ -331,10 +331,25 @@ end
 
 --------------------------------------------------------------------------------
 -- SPLITS
+function mainScreenWindows()
+	local winArr = hs.window.orderedWindows()
+	local out = {}
+	local j = 1
+	local mainScreen = hs.screen.mainScreen()
+
+	for i = 1, #winArr do
+		if winArr[i]:screen() == mainScreen then
+			out[j] = winArr[i]
+		end
+	end
+	return out
+end
 
 function vsplit (mode)
-	local win1 = hs.window.orderedWindows()[1]
-	local win2 = hs.window.orderedWindows()[2]
+	local wins = mainScreenWindows()
+
+	local win1 = wins[1]
+	local win2 = wins[2]
 	local f1 = win1:frame()
 	local f2 = win2:frame()
 	local max = win1:screen():frame()

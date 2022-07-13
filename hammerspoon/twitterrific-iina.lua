@@ -73,7 +73,7 @@ iinaAppLauncher:start()
 --------------------------------------------------------------------------------
 -- raise all windows on activation,
 -- open both windows on launch
--- (only active in office though)
+-- only active in office & when not using twitterrificScrollUp()
 function twitterificAppActivated(appName, eventType, appObject)
 	if twitterrificScrolling or appName ~= "Twitterrific" then return end
 	if (eventType == hs.application.watcher.launching) then
