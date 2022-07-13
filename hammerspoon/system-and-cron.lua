@@ -60,7 +60,7 @@ end
 -- these watchers aren't super reliable though :(
 function systemShutDown (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemWillSleep or eventType == hs.caffeinate.watcher.systemWillPowerOff or eventType == hs.caffeinate.watcher.screensDidSleep or eventType == hs.caffeinate.watcher.screensDidLock) then return end
-	if not gitDotfileSync:isRunning() then return end
+	if gitDotfileSync:isRunning() then return end
 	gitDotfileSync:start()
 	gitDotfileSync:waitUntilExit()
 end
@@ -68,7 +68,7 @@ shutDownWatcher = hs.caffeinate.watcher.new(systemShutDown)
 shutDownWatcher:start()
 
 hotkey(hyper, "end", function ()
-	if not gitDotfileSync:isRunning() then
+	if gitDotfileSync:isRunning() then
 		notify("currently syncing…")
 		return
 	end
