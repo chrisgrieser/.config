@@ -17,17 +17,9 @@ function twitterrificScrollUp ()
 	hs.eventtap.leftClick(pos)
 	hs.mouse.absolutePosition(prevMousePos) -- restore mouse position
 
-	if #(twitterrific:allWindows()) == 1 then
-		keystroke({"cmd"}, "1") -- go to home window
-	else
-		local homeWindow = twitterrific:getWindow("@pseudo_meta - Home")
-		if homeWindow then
-			homeWindow:focus()
-		else
-			twitterrific.allWindows()[1]:focus()
-			keystroke({"cmd"}, "1") -- go to home window
-		end
-	end
+	local homeWindow = twitterrific:getWindow("@pseudo_meta - Home")
+	if homeWindow then homeWindow:focus() end
+	keystroke({"cmd"}, "1") -- go to home window
 
 	keystroke({"cmd"}, "k") -- mark all as red
 	keystroke({"cmd"}, "j") -- scroll up
@@ -83,28 +75,25 @@ iinaAppLauncher:start()
 -- open both windows on launch
 -- (only active in office though)
 function twitterificAppActivated(appName, eventType, appObject)
-	if twitterrificScrolling then return end
-	if (appName == "Twitterrific") then
-		if (eventType == hs.application.watcher.launching) then
-			runDelayed(1, function ()
-				twitterrific = hs.application("Twitterrific")
-				if #(twitterrific:allWindows()) > 1 then return end
-				-- switch to list view has (to be done via keystroke, since headless)
-				keystroke({"cmd"}, "T", twitterrific)
-				keystroke({"cmd"}, "5", twitterrific)
-				keystroke({}, "down", twitterrific)
-				keystroke({}, "return", twitterrific)
-			end)
-
-		elseif (eventType == hs.application.watcher.activated) then
-			appObject:getWindow("@pseudo_meta - List"):raise()
-			appObject:getWindow("@pseudo_meta - Home"):focus()
-		end
+	if twitterrificScrolling or appName ~= "Twitterrific" then return end
+	if (eventType == hs.application.watcher.launching) then
+		runDelayed(1, function ()
+			twitterrific = hs.application("Twitterrific")
+			if #(twitterrific:allWindows()) > 1 then return end
+			-- switch to list view has (to be done via keystroke, since headless)
+			keystroke({"cmd"}, "T", twitterrific)
+			keystroke({"cmd"}, "5", twitterrific)
+			keystroke({}, "down", twitterrific)
+			keystroke({}, "return", twitterrific)
+		end)
+	elseif (eventType == hs.application.watcher.activated) then
+		appObject:getWindow("@pseudo_meta - List"):raise()
+		appObject:getWindow("@pseudo_meta - Home"):focus()
 	end
 end
+twitterrificScrolling = false
 twitterificAppWatcher = hs.application.watcher.new(twitterificAppActivated)
 if isAtOffice() then twitterificAppWatcher:start() end
-twitterrificScrolling = false
 
 
 --------------------------------------------------------------------------------
