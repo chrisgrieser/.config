@@ -26,7 +26,5 @@ on run argv
 		tell application id "com.runningwithcrayons.Alfred" to set configuration "last_uuid" to value uuid in workflow (system attribute "alfred_workflow_bundleid")
 	end if
 
-	delay 1
-
 	return notif_msg
 end run
