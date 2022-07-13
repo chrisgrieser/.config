@@ -9,6 +9,7 @@ hs.window.animationDuration = 0
 require("meta")
 require("utils")
 
+
 --------------------------------------------------------------------------------
 
 -- Base
