@@ -9,17 +9,25 @@ gitVaultScript = os.getenv("HOME").."/Library/Mobile Documents/iCloud~md~obsidia
 pullScript = os.getenv("HOME").."/dotfiles/pull-sync-repos.sh"
 --------------------------------------------------------------------------------
 
-function gitDotfileSyncCallback(exitCode, _, stdErr)
-	if exitCode == 0 then
-		notify("✅ dotfiles")
-		log ("dotfiles sync ("..deviceName()..") ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
-	else
-		notify("⚠️️ dotfiles "..stdErr)
-		log ("dotfiles sync ("..deviceName()..") ⚠️: "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
-	end
-end
+-- function gitDotfileSyncCallback(exitCode, _, stdErr)
+-- 	if exitCode == 0 then
+-- 		notify("✅ dotfiles")
+-- 		log ("dotfiles sync ("..deviceName()..") ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
+-- 	else
+-- 		notify("⚠️️ dotfiles "..stdErr)
+-- 		log ("dotfiles sync ("..deviceName()..") ⚠️: "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
+-- 	end
+-- end
 function gitDotfileSync()
-	hs.task.new(gitDotfileScript, gitDotfileSyncCallback):start()
+	hs.task.new(gitDotfileScript, function (exitCode, _, stdErr)
+		if exitCode == 0 then
+			notify("✅ dotfiles")
+			log ("dotfiles sync ("..deviceName()..") ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
+		else
+			notify("⚠️️ dotfiles "..stdErr)
+			log ("dotfiles sync ("..deviceName()..") ⚠️: "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
+		end
+	end):start()
 end
 
 function gitVaultBackupCallback(exitCode, _, stdErr)
