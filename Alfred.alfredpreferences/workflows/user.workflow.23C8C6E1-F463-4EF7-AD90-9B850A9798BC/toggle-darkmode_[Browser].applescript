@@ -55,4 +55,5 @@ tell application "System Events"
 	end if
 end tell
 
-
+-- change the color of the menubar icon
+open location "hammerspoon://update-drafts-menubar"

@@ -7,7 +7,14 @@ function numberOfScreens()
 end
 
 function isIMacAtHome ()
-	return hs.screen.primaryScreen():name() == "Built-in Retina Display"
+	local iMacFirstScreen = hs.screen.primaryScreen():name() == "Built-in Retina Display"
+	local iMacSecondScreen
+	if numberOfScreens() > 1 then
+		iMacSecondScreen = hs.screen.allScreens()[2]:name() == "Built-in Retina Display"
+	else
+		iMacSecondScreen = false
+	end
+	return iMacFirstScreen or iMacSecondScreen
 end
 
 function isProjector()
