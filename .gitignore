@@ -4,7 +4,6 @@
 # Activity Data
 Sublime User Folder/FileHistory*.json
 Sublime User Folder/AutoFoldCode.sublime-settings
-Cron Jobs/frequent.log
 Cron Jobs/sync.log
 .zsh_history
 # redundant

@@ -38,7 +38,7 @@ function notify (text)
 end
 
 function log (text, location)
-	hs.execute('echo "'..text..' $(date "+%Y-%m-%d %H:%M")" >> "'..location..'"')
+	hs.execute('echo "$(date "+%Y-%m-%d %H:%M")" "'..text..'" >> "'..location..'"')
 	print ("log: "..text) -- for the console
 end
 
