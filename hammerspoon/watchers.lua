@@ -86,12 +86,16 @@ hotcornerEmulation:start()
 
 
 -- DRAFTS: Hide Toolbar on launch
-function draftsLaunch(appName, eventType, appObject)
-	if not(eventType == hs.application.watcher.launched and appName == "Drafts") then return end
+function draftsLaunchWake(appName, eventType, appObject)
+	if not(appName == "Drafts") then return end
 
-	runDelayed(0.5, function ()
+	if (eventType == hs.application.watcher.launched) then
+		runDelayed(0.5, function ()
+			appObject:selectMenuItem({"View", "Hide Toolbar"})
+		end)
+	elseif (eventType == hs.application.watcher.activated) then
 		appObject:selectMenuItem({"View", "Hide Toolbar"})
-	end)
+	end
 end
-draftsMenuBarWatcher3 = hs.application.watcher.new(draftsLaunch)
-draftsMenuBarWatcher3:start()
+draftsWatcher3 = hs.application.watcher.new(draftsLaunchWake)
+draftsWatcher3:start()
