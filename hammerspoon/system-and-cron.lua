@@ -57,6 +57,9 @@ repoSyncTimer:start()
 
 function systemShutDown (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemWillSleep or eventType == hs.caffeinate.watcher.systemWillPowerOff or eventType == hs.caffeinate.watcher.screensDidSleep or eventType == hs.caffeinate.watcher.screensDidLock) then return end
+
+	log ("📴 shutdown/sleep", "$HOME/dotfiles/Cron Jobs/sync.log")
+	log ("📴 shutdown/sleep", "$HOME/dotfiles/Cron Jobs/some.log")
 	gitDotfileSync()
 end
 shutDownWatcher = hs.caffeinate.watcher.new(systemShutDown)
