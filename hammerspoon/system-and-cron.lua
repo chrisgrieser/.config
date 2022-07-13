@@ -64,11 +64,11 @@ end
 shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
 shutDownWatcher:start()
 
--- `hammerspoon://shutdown` for Alfred Shutdown Sequence
-hs.urlevent.bind("shutdown", function()
+-- `hammerspoon://pre-shutdown-sync` for Alfred
+hs.urlevent.bind("pre-shutdown-sync", function()
 	-- can't use shutdown via caffeinate watcher, since git sync will not finish in time
-	log ("📴 shutdown", "$HOME/dotfiles/Cron Jobs/some.log")
-	log ("📴 shutdown", "$HOME/dotfiles/Cron Jobs/sync.log")
+	log ("📴 pre-shutdown-sync", "$HOME/dotfiles/Cron Jobs/some.log")
+	log ("📴 pre-shutdown-sync", "$HOME/dotfiles/Cron Jobs/sync.log")
 	gitDotfileSync()
 end)
 
