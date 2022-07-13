@@ -25,14 +25,26 @@
 	<false/>
 	<key>hideKeyword</key>
 	<string>h</string>
+	<key>hideKeywordEnabled</key>
+	<false/>
 	<key>quitKeyword</key>
 	<string>q</string>
+	<key>quitKeywordEnabled</key>
+	<false/>
 	<key>quitallConfirm</key>
 	<true/>
+	<key>quitallKeywordEnabled</key>
+	<false/>
 	<key>restartConfirm</key>
 	<true/>
+	<key>screensaverKeywordEnabled</key>
+	<false/>
 	<key>shutdownConfirm</key>
 	<true/>
+	<key>shutdownKeywordEnabled</key>
+	<false/>
+	<key>sleepdisplaysKeywordEnabled</key>
+	<false/>
 	<key>volumedownKeywordEnabled</key>
 	<false/>
 	<key>volumemuteKeywordEnabled</key>
