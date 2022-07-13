@@ -27,4 +27,5 @@ require("twitterrific-iina")
 
 notify("Config reloaded")
 reloadAllMenubarItems()
+gitDotfileSync()
 pullSync()
