@@ -34,7 +34,7 @@
 				<false/>
 			</dict>
 		</array>
-		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
+		<key>3B49D86A-594E-411D-A812-D34349A13F8D</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -46,9 +46,12 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>13DAA5E7-0648-41DB-A26B-357535D607FA</string>
+				<string>3B49D86A-594E-411D-A812-D34349A13F8D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -464,9 +467,8 @@ delay 0.5
 
 filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
 if [[ -n "$filesChanged" ]] ; then
-	open "hammerspoon://pre-shutdown-sync"
-	sleep 8
-	echo "🔁 pre-shutdown-sync"
+	echo "📴 pre-shutdown-sync" &gt;&gt; ~"/dotfiles/Cron Jobs/sync.log"
+	zsh ~/dotfiles/git-dotfile-sync.sh
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -500,21 +502,13 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>🔁 Syncing before shutdown</string>
+				<key>seconds</key>
+				<string>0.5</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.utility.delay</string>
 			<key>uid</key>
-			<string>13DAA5E7-0648-41DB-A26B-357535D607FA</string>
+			<string>3B49D86A-594E-411D-A812-D34349A13F8D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -541,12 +535,12 @@ fi</string>
 			<key>ypos</key>
 			<real>245</real>
 		</dict>
-		<key>13DAA5E7-0648-41DB-A26B-357535D607FA</key>
+		<key>3B49D86A-594E-411D-A812-D34349A13F8D</key>
 		<dict>
 			<key>xpos</key>
-			<real>365</real>
+			<real>340</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>545</real>
 		</dict>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<dict>
@@ -558,7 +552,7 @@ fi</string>
 		<key>7E7254FB-7761-400D-887B-162AB242F68E</key>
 		<dict>
 			<key>xpos</key>
-			<real>365</real>
+			<real>415</real>
 			<key>ypos</key>
 			<real>515</real>
 		</dict>
