@@ -4,7 +4,7 @@
 THIS_LOCATION="$(dirname "$0")"
 cd "$THIS_LOCATION" || exit 1
 git add -A
-git commit -m "⚠️ sync issue: changes were uncommited"
+git commit -m "ℹ️ minor uncommitted changes"
 git pull || exit 1
 
 # pull Alfred repos

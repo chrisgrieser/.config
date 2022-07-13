@@ -47,22 +47,26 @@ end
 
 --------------------------------------------------------------------------------
 -- TRIGGERS
+
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
 	gitDotfileSync()
 	if isIMacAtHome() then gitVaultBackup() end
 end)
 repoSyncTimer:start()
 
-function systemShutDown (eventType)
-	if not(eventType == hs.caffeinate.watcher.systemWillSleep or eventType == hs.caffeinate.watcher.systemWillPowerOff or eventType == hs.caffeinate.watcher.screensDidSleep or eventType == hs.caffeinate.watcher.screensDidLock) then return end
+function screenSleep (eventType)
+	-- can't use shutdown as trigger, since git vault sync will not finish in time there
+	-- use hotkey, if there is a gitsync still to be done
+	if not(eventType == hs.caffeinate.watcher.screensDidSleep or eventType == hs.caffeinate.watcher.screensDidLock) then return end
 
 	log ("📴 shutdown/sleep", "$HOME/dotfiles/Cron Jobs/sync.log")
 	log ("📴 shutdown/sleep", "$HOME/dotfiles/Cron Jobs/some.log")
 	gitDotfileSync()
 end
-shutDownWatcher = hs.caffeinate.watcher.new(systemShutDown)
+shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
 shutDownWatcher:start()
 
+hotkey(hyper, "end", gitDotfileSync)
 
 function systemWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemDidWake or eventType == hs.caffeinate.watcher.screensDidUnlock) then return end
