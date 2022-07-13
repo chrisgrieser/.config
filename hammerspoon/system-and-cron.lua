@@ -72,7 +72,6 @@ hs.urlevent.bind("pre-shutdown-sync", function()
 	gitDotfileSync()
 end)
 
-
 function systemWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemDidWake or eventType == hs.caffeinate.watcher.screensDidUnlock) then return end
 
