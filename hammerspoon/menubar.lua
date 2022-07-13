@@ -131,21 +131,21 @@ dotfilesWatcher:start()
 
 --------------------------------------------------------------------------------
 
-fileHubCountMenuBar = hs.menubar.new()
-function setFileHubCountMenuBar()
-	local numberOfFiles, success = hs.execute('ls "'..fileHubLocation..'" | wc -l | tr -d " "')
-	numberOfFiles = numberOfFiles:gsub("\n", "")
-	if tonumber(numberOfFiles) == 0 or not(success) then
-		fileHubCountMenuBar:setTitle("")
-		return
-	end
-	fileHubCountMenuBar:setTitle("📂 "..numberOfFiles)
-end
-setFileHubCountMenuBar()
+-- fileHubCountMenuBar = hs.menubar.new()
+-- function setFileHubCountMenuBar()
+-- 	local numberOfFiles, success = hs.execute('ls "'..fileHubLocation..'" | wc -l | tr -d " "')
+-- 	numberOfFiles = numberOfFiles:gsub("\n", "")
+-- 	if tonumber(numberOfFiles) == 0 or not(success) then
+-- 		fileHubCountMenuBar:setTitle("")
+-- 		return
+-- 	end
+-- 	fileHubCountMenuBar:setTitle("📂 "..numberOfFiles)
+-- end
+-- setFileHubCountMenuBar()
 
--- update when folder changes
-fileHubMenuBarWatcher = hs.pathwatcher.new(fileHubLocation, setFileHubCountMenuBar)
-fileHubMenuBarWatcher:start()
+-- -- update when folder changes
+-- fileHubMenuBarWatcher = hs.pathwatcher.new(fileHubLocation, setFileHubCountMenuBar)
+-- fileHubMenuBarWatcher:start()
 
 --------------------------------------------------------------------------------
 -- obsidianStatusBar = hs.menubar.new()
