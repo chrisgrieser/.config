@@ -18,7 +18,7 @@ function activeWindowHighlight(appName, eventType)
 
 	-- Delete an existing highlight if it exists
 	if rect then
-		rect = nil
+		rect:delete() -- needed despite log message saying garbage collection takes care of it
 		if rectTimer then
 			rectTimer:stop()
 		end
@@ -55,7 +55,10 @@ function activeWindowHighlight(appName, eventType)
 	end)
 
 	rectTimer = runDelayed(highlightDuration, function()
-		if rect then rect = nil end
+		if rect then
+			rect:delete()
+			rect = nil
+		end
 	end)
 end
 appActivationWatcher = hs.application.watcher.new(activeWindowHighlight)
