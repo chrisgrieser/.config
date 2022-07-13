@@ -5,8 +5,7 @@
 SPOTLIGHT_CONFIG="/System/Volumes/Data/.Spotlight-V100/VolumeConfiguration.plist"
 
 # restart spotlight indexing (this also writing exclusions again)
-sudo launchctl stop com.apple.metadata.mds
-sudo launchctl start com.apple.metadata.mds
+
 sudo mdutil -E -i on /
 sudo rm -R "$SPOTLIGHT_CONFIG"
 
@@ -15,7 +14,6 @@ sleep 1
 sudo plutil -insert Exclusions.0 -string '/Applications/Utilities/' "$SPOTLIGHT_CONFIG"
 sudo plutil -insert Exclusions.0 -string '/Applications/Cisco' "$SPOTLIGHT_CONFIG"
 sudo plutil -insert Exclusions.0 -string ~'/Dotfiles/Alfred.alfredpreferences/workflows/' "$SPOTLIGHT_CONFIG"
-sudo plutil -insert Exclusions.0 -string ~'/Dotfiles/hammerspoon/Spoons/' "$SPOTLIGHT_CONFIG"
 sudo plutil -insert Exclusions.0 -string ~'/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/' "$SPOTLIGHT_CONFIG"
 sudo plutil -insert Exclusions.0 -string ~'/Library/Mobile Documents/com~apple~CloudDocs/.Trash/' "$SPOTLIGHT_CONFIG"
 sudo plutil -insert Exclusions.0 -string ~'/Library/Mobile Documents/com~apple~CloudDocs/Academia/PhD Data/' "$SPOTLIGHT_CONFIG"
@@ -24,6 +22,7 @@ sudo plutil -insert Exclusions.0 -string ~'/Library/Mobile Documents/com~apple~C
 #-------------------------------------------------------------------------------
 
 # show current exclusions
+SPOTLIGHT_CONFIG="/System/Volumes/Data/.Spotlight-V100/VolumeConfiguration.plist"
 sudo plutil -extract Exclusions xml1 -o - "$SPOTLIGHT_CONFIG"
 
 # remove an exclusion

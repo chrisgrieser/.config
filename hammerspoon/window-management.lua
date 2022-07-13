@@ -170,12 +170,12 @@ function officeModeLayout ()
 	local screen2 = hs.screen.allScreens()[2]
 
 	openIfNotRunning("Mimestream")
-	openIfNotRunning("Discord")
 	openIfNotRunning("Slack")
 	openIfNotRunning("Brave Browser")
 	openIfNotRunning("Obsidian")
 	openIfNotRunning("Twitterrific")
 	openIfNotRunning("Drafts")
+	hs.urlevent.openURL("discord://discord.com/channels/686053708261228577/700466324840775831")
 
 	local maximized = hs.layout.maximized
 	local bottom = {x=0, y=0.5, w=1, h=0.5}
