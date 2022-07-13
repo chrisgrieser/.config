@@ -86,7 +86,7 @@ end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
 
--- redundancy: daily morning run
+-- daily morning run (redundant to Cron job)
 if isIMacAtHome() then
 	dailyMorningTimer = hs.timer.doAt("06:10", "01d", function()
 		setDarkmode(false)
