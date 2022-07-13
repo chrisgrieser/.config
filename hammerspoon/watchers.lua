@@ -50,19 +50,20 @@ zoomAppWatcher:start()
 -- HIGHLIGHTS:
 -- - Sync Dark & Light Mode
 -- - Start with Highlight as Selection
-function highlightsWatcher(appName, eventType, appObject)
+function highlightsWatcher(appName, eventType)
 	if not(eventType == hs.application.watcher.launching and appName == "Highlights") then return end
-	appObject:selectMenuItem({"Tools", "Highlight"})
 	hs.osascript.applescript([[
 		tell application "System Events"
 			tell appearance preferences to set isDark to dark mode
 			if (isDark is false) then set targetView to "Default"
 			if (isDark is true) then set targetView to "Night"
-			delay 0.5
+			delay 0.6
 
 			tell process "Highlights"
 				set frontmost to true
 				click menu item targetView of menu of menu item "PDF Appearance" of menu "View" of menu bar 1
+				click menu item "Highlight" of menu "Tools" of menu bar 1
+				click menu item "Yellow" of menu of menu item "Color" of menu "Tools" of menu bar 1
 			end tell
 		end tell
 	]])
