@@ -27,9 +27,7 @@ gitVaultBackup = hs.task.new(os.getenv("HOME").."/dotfiles/git vault backup.sh",
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
 	if not gitDotfileSync:isRunning() then gitDotfileSync:start() end
-	if not gitVaultBackup:isRunning() then gitVaultBackup:start() end
-	gitDotfileSync:waitUntilExit() -- block shutdown until done (hopefully... 🥴)
-	gitVaultBackup:waitUntilExit()
+	if (not gitVaultBackup:isRunning()) and isIMacAtHome() then gitVaultBackup:start() end
 end)
 repoSyncTimer:start()
 
@@ -62,9 +60,10 @@ end
 
 function systemShutDown (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemWillSleep or eventType == hs.caffeinate.watcher.systemWillPowerOff) then return end
-
-	if not gitDotfileSync:isRunning() then gitDotfileSync:start() end
-	if not gitVaultBackup:isRunning() then gitVaultBackup:start() end
+	if not gitDotfileSync:isRunning() then
+		gitDotfileSync:start()
+		gitDotfileSync:waitUntilExit() -- block shutdown until done (hopefully... 🥴)
+	end
 end
 shutDownWatcher = hs.caffeinate.watcher.new(systemShutDown)
 shutDownWatcher:start()

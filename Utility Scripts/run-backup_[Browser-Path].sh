@@ -39,6 +39,7 @@ bkp ~'/Games/' ./Homefolder/Games
 bkp ~'/Video/' ./Homefolder/Video
 bkp ~'/RomComs/' ./Homefolder/RomComs
 bkp ~'/Library/Mobile Documents/com~apple~CloudDocs/' ./iCloud-Folder
+bkp ~'/dotfiles/' ./dotfiles
 
 # =========================
 
