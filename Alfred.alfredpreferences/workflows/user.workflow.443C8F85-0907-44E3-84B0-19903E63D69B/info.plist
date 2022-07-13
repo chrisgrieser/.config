@@ -333,6 +333,10 @@ end tell</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -490,6 +494,10 @@ end tell</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -792,6 +800,10 @@ end tell</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -831,7 +843,7 @@ end tell</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>filter</string>
+				<string>filters</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -851,6 +863,10 @@ end tell</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -869,7 +885,7 @@ end tell</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>ma filter</string>
+				<string>ma filters</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>

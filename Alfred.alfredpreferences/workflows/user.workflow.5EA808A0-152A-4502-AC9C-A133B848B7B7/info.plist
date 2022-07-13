@@ -109,6 +109,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A9C9D34F-A692-412A-9152-2BC3E99B51BE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2272192E-81AD-4662-A0D4-58300A23360E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>AC483565-D8EB-4AAD-99AA-229D0C632CE8</key>
 		<array>
 			<dict>
@@ -212,6 +225,85 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>open-github-remote.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>92246A7B-E550-40D1-9840-C2CB0F213DE3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>2272192E-81AD-4662-A0D4-58300A23360E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>5</integer>
+				<key>hotmod</key>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>G</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>C2F2DD6E-652E-4EC6-B5B7-E03FAAB7941B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -255,64 +347,6 @@
 			<string>A9C9D34F-A692-412A-9152-2BC3E99B51BE</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-github-remote.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>92246A7B-E550-40D1-9840-C2CB0F213DE3</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>5</integer>
-				<key>hotmod</key>
-				<integer>917504</integer>
-				<key>hotstring</key>
-				<string>G</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>C2F2DD6E-652E-4EC6-B5B7-E03FAAB7941B</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -477,27 +511,6 @@ open $(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | c
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ URL copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>8D2069C6-2EDB-40CD-854E-38574F301A4B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -526,42 +539,21 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>gr</string>
-				<key>subtext</key>
-				<string>Max repos: {var:maxReposNumber}</string>
-				<key>text</key>
-				<string>⬇️ Repo Downloader</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>7788A2EF-46C7-48E7-A073-C7938913B87D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<false/>
+				<true/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>{query}</string>
 				<key>title</key>
-				<string>✅Download complete</string>
+				<string>✅ URL copied</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>07D214D7-7035-4125-88CE-4BEA2F46A4DA</string>
+			<string>8D2069C6-2EDB-40CD-854E-38574F301A4B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -591,6 +583,48 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅Download complete</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>07D214D7-7035-4125-88CE-4BEA2F46A4DA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>gr</string>
+				<key>subtext</key>
+				<string>Max repos: {var:maxReposNumber}</string>
+				<key>text</key>
+				<string>⬇️ Repo Downloader</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>7788A2EF-46C7-48E7-A073-C7938913B87D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -615,21 +649,6 @@ subl --command toggle_side_bar</string>
 			<string>AD4F6532-1C9C-4A7D-894C-6243DB064568</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>BEA583C1-293D-4CF7-AB3A-7BEE5A3B41CA</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -675,6 +694,21 @@ subl --command toggle_side_bar</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>80310399-4092-49D2-B048-D91D9184B37F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>BEA583C1-293D-4CF7-AB3A-7BEE5A3B41CA</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -740,6 +774,15 @@ subl --command toggle_side_bar</string>
 			<real>225</real>
 			<key>ypos</key>
 			<real>395</real>
+		</dict>
+		<key>2272192E-81AD-4662-A0D4-58300A23360E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>935</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>4C4CA3DF-BB26-4393-84E2-27190A118611</key>
 		<dict>

@@ -324,7 +324,7 @@
       ]
     },
     {
-      "description": "🅰️🔨 Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘R → Reload",
+      "description": "🅰️🔨 Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console",
       "manipulators": [
         {
           "type": "basic",
@@ -366,30 +366,6 @@
           "to": [
             {
               "shell_command": "open 'hammerspoon://clear-console'"
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^org\\.hammerspoon\\.Hammerspoon$"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "r",
-            "modifiers": {
-              "mandatory": [
-                "command"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "open 'hammerspoon://hs-reload'"
             }
           ],
           "conditions": [

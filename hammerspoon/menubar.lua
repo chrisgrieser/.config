@@ -81,7 +81,13 @@ function updateDraftsMenubar()
 		draftsCounterMenuBar:setTitle("")
 		return
 	end
-	draftsCounterMenuBar:setTitle("🏁 "..numberOfDrafts)
+	draftsCounterMenuBar:setTitle(numberOfDrafts)
+	if isDarkMode() then
+		draftsIcon = "drafts-menubar-white.tiff"
+	else
+		draftsIcon = "drafts-menubar-black.tiff"
+	end
+	draftsCounterMenuBar:setIcon(draftsIcon, false)
 end
 updateDraftsMenubar()
 
@@ -97,11 +103,10 @@ draftsMenuBarWatcher2 = hs.application.watcher.new(draftsWatcher)
 draftsMenuBarWatcher2:start()
 
 
--- for Alfred Triggers
--- `hammerspoon://update-drafts-menubar` for reloading via Sublime Build System or Karabiner
+-- `hammerspoon://update-drafts-menubar` for Alfred Triggers
 hs.urlevent.bind("update-drafts-menubar",  function()
 	updateDraftsMenubar()
-	hs.application("Hammerspoon"):hide()
+	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
 --------------------------------------------------------------------------------

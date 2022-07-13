@@ -45,7 +45,8 @@ nnoremap j gj
 nnoremap k gk
 
 " HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
-nnoremap H ^
+" h 0^ ensures scrolling to the left (when there is no wrapping)
+nnoremap H 0^
 vnoremap H ^
 nnoremap L $
 vnoremap L $

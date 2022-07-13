@@ -77,8 +77,12 @@ function toggleDraftsSidebar (draftsWin)
 	end
 end
 
+-- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
 function toggleObsidianSidebar (obsiWin)
-	-- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
+	-- prevent popout window resizing to affect sidebars
+	local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
+	if (numberOfObsiWindows > 1) then return end
+
 	local obsi_width = obsiWin:frame().w
 	local screen_width = obsiWin:screen():frame().w
 	if (obsi_width / screen_width > 0.6) then
