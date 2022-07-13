@@ -93,5 +93,5 @@ function draftsLaunch(appName, eventType, appObject)
 		appObject:selectMenuItem({"View", "Hide Toolbar"})
 	end)
 end
-draftsMenuBarWatcher2 = hs.application.watcher.new(draftsLaunch)
-draftsMenuBarWatcher2:start()
+draftsMenuBarWatcher3 = hs.application.watcher.new(draftsLaunch)
+draftsMenuBarWatcher3:start()
