@@ -27,7 +27,7 @@ gitVaultBackup = hs.task.new(os.getenv("HOME").."/Library/Mobile Documents/iClou
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
 	if not gitDotfileSync:isRunning() then gitDotfileSync:start() end
-	if (not gitVaultBackup:isRunning()) and isIMacAtHome() then gitVaultBackup:start() end
+	if isIMacAtHome() and (not gitVaultBackup:isRunning()) then gitVaultBackup:start() end
 end)
 repoSyncTimer:start()
 
@@ -59,11 +59,10 @@ function setDarkmode (toDark)
 end
 
 function systemShutDown (eventType)
-	if not(eventType == hs.caffeinate.watcher.systemWillSleep or eventType == hs.caffeinate.watcher.systemWillPowerOff) then return end
-	if not gitDotfileSync:isRunning() then
-		gitDotfileSync:start()
-		gitDotfileSync:waitUntilExit() -- block shutdown until done (hopefully... 🥴)
-	end
+	if not(eventType == hs.caffeinate.watcher.systemWillSleep or eventType == hs.caffeinate.watcher.systemWillPowerOff or eventType == hs.caffeinate.watcher.screensDidSleep or eventType == hs.caffeinate.watcher.screensDidLock) then return end
+	if not gitDotfileSync:isRunning() then return end
+	gitDotfileSync:start()
+	gitDotfileSync:waitUntilExit() -- block shutdown until done (hopefully... 🥴)
 end
 shutDownWatcher = hs.caffeinate.watcher.new(systemShutDown)
 shutDownWatcher:start()
