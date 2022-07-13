@@ -14,6 +14,7 @@ lightModeStrokeWidth = 10
 darkModeStrokeWidth = 7
 
 function activeWindowHighlight(appName, eventType)
+	if appName == "Twitterrific" then return end -- running headless leads to some bugs
 	if eventType == hs.application.watcher.activated or eventType == hs.application.watcher.deactivated then
 		-- Delete an existing highlight if it exists
 		if rect then
