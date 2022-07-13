@@ -19,7 +19,7 @@ function activeWindowHighlight(appName, eventType)
 		rect:delete()
 		if rect then
 			rect:delete() -- needed despite log message saying garbage collection takes care of it
-			runDelayed(0.5, function () rect = nil end)
+			rect = nil
 			if rectTimer then rectTimer:stop() end
 		end
 	end
