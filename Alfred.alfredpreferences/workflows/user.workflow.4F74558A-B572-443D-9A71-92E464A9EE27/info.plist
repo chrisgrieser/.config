@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.terminal</string>
+	<string>de.chris-grieser.terminal-dotfiles</string>
 	<key>category</key>
 	<string>Development</string>
 	<key>connections</key>
@@ -13,6 +13,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>C8135108-B86E-49C6-81FB-5601CFB5BF9A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1A820AA0-CFDD-4B5A-9E6D-BF2990A3E581</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A883397A-C748-4E51-B5EB-96B4F58AADCD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -40,6 +53,71 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Reveal in Finder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4852BD0B-45FE-4BD1-9B24-75D32B5EAA7D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>97B7CF87-4080-4394-87B8-2074B83B59A7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5707C8CC-3CD7-4D92-A6CD-283E796905EC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>97B7CF87-4080-4394-87B8-2074B83B59A7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>97B7CF87-4080-4394-87B8-2074B83B59A7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A0F4AE0E-4A85-4D7A-AAF1-54C04E9DE25D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A0F4AE0E-4A85-4D7A-AAF1-54C04E9DE25D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1A820AA0-CFDD-4B5A-9E6D-BF2990A3E581</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A883397A-C748-4E51-B5EB-96B4F58AADCD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A91C3D48-6860-4B50-B5E9-83B5ACFF6C05</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -72,11 +150,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D12DF4C4-EFC9-4491-B5FA-38F978D3C114</key>
+		<key>FE91F5F4-DB81-40FB-95B9-20859076AB23</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3AC8EDAE-B6DF-4BF1-8060-EADD52ACDA99</string>
+				<string>5707C8CC-3CD7-4D92-A6CD-283E796905EC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -93,7 +171,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Terminal &amp; Alacritty</string>
+	<string>Terminal &amp; Dotfiles</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -289,34 +367,183 @@ end if</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>zsh "{query}"</string>
+				<string>timestamp=`date '+%Y-%m-%d_%H-%M'`
+resolved_bkp_dest=~`echo -n $backup_location | sed -e "s/~//"`
+backup="$resolved_bkp_dest""/Alfred-Backup_""$timestamp"".zip"
+vault=~`echo -n $vault_path | sed -e "s/~//"`
+
+# directory change necessary to avoid zipping root folder
+# https://unix.stackexchange.com/questions/245856/zip-a-file-without-including-the-parent-directory
+cd $vault
+zip -r --quiet $backup ./*
+
+# restrict number of backups
+actual_number=$((max_number_of_bkps + 1))
+cd $resolved_bkp_dest
+ls -t | tail -n +$actual_number | tr '\n' '\0' | xargs -0 rm
+
+echo "$backup"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>dotfile-bkp.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>3AC8EDAE-B6DF-4BF1-8060-EADD52ACDA99</string>
+			<string>A0F4AE0E-4A85-4D7A-AAF1-54C04E9DE25D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>bkp dotfiles</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Backup: dotfiles</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>4852BD0B-45FE-4BD1-9B24-75D32B5EAA7D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.shell-script</string>
-				</array>
-				<key>name</key>
-				<string>Run Shell Script</string>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>dotfiles</string>
+				<key>title</key>
+				<string>⏳ Creating Backup...</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>D12DF4C4-EFC9-4491-B5FA-38F978D3C114</string>
+			<string>97B7CF87-4080-4394-87B8-2074B83B59A7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<true/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>'{query}'</string>
+				<key>title</key>
+				<string>✅ Dotfiles Backup finished</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>1A820AA0-CFDD-4B5A-9E6D-BF2990A3E581</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Blow</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>A91C3D48-6860-4B50-B5E9-83B5ACFF6C05</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>no sound</string>
+						<key>outputlabel</key>
+						<string>no</string>
+						<key>uid</key>
+						<string>FEA7E4E2-00DD-487A-B6A4-1A72E14035C4</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>yes</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>A883397A-C748-4E51-B5EB-96B4F58AADCD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>backup-dotfiles</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>FE91F5F4-DB81-40FB-95B9-20859076AB23</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>mode</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>5707C8CC-3CD7-4D92-A6CD-283E796905EC</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -334,17 +561,19 @@ end if</string>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
-		<key>3AC8EDAE-B6DF-4BF1-8060-EADD52ACDA99</key>
+		<key>1A820AA0-CFDD-4B5A-9E6D-BF2990A3E581</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>525</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>445</real>
 		</dict>
 		<key>3ADE22C7-10D2-4528-9298-22A616F276B1</key>
 		<dict>
 			<key>xpos</key>
-			<real>220</real>
+			<real>205</real>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
@@ -357,12 +586,59 @@ end if</string>
 			<key>ypos</key>
 			<real>70</real>
 		</dict>
+		<key>4852BD0B-45FE-4BD1-9B24-75D32B5EAA7D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>445</real>
+		</dict>
+		<key>5707C8CC-3CD7-4D92-A6CD-283E796905EC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>160</real>
+			<key>ypos</key>
+			<real>595</real>
+		</dict>
+		<key>97B7CF87-4080-4394-87B8-2074B83B59A7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>240</real>
+			<key>ypos</key>
+			<real>445</real>
+		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
 			<key>xpos</key>
-			<real>220</real>
+			<real>205</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>A0F4AE0E-4A85-4D7A-AAF1-54C04E9DE25D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>445</real>
+		</dict>
+		<key>A883397A-C748-4E51-B5EB-96B4F58AADCD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>sound</string>
+			<key>xpos</key>
+			<real>691</real>
+			<key>ypos</key>
+			<real>465</real>
 		</dict>
 		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
 		<dict>
@@ -372,6 +648,15 @@ end if</string>
 			<real>490</real>
 			<key>ypos</key>
 			<real>290</real>
+		</dict>
+		<key>A91C3D48-6860-4B50-B5E9-83B5ACFF6C05</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>765</real>
+			<key>ypos</key>
+			<real>445</real>
 		</dict>
 		<key>BD16A75F-DC81-47C0-99A3-8A4360CCEA08</key>
 		<dict>
@@ -387,20 +672,26 @@ end if</string>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
-		<key>D12DF4C4-EFC9-4491-B5FA-38F978D3C114</key>
+		<key>FE91F5F4-DB81-40FB-95B9-20859076AB23</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>565</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
 	<key>variables</key>
 	<dict>
+		<key>dotfile_bkp_destination</key>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/dotfile bkp/</string>
 		<key>dotfile_folder</key>
-		<string>~/Dotfiles/</string>
+		<string>~/dotfiles/</string>
+		<key>max_number_of_bkps</key>
+		<string>20</string>
 		<key>vault_path</key>
 		<string>~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/</string>
 		<key>working_directory</key>
@@ -408,8 +699,9 @@ end if</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
-		<string>vault_path</string>
 		<string>working_directory</string>
+		<string>dotfile_bkp_destination</string>
+		<string>vault_path</string>
 		<string>dotfile_folder</string>
 	</array>
 	<key>version</key>

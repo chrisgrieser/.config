@@ -21,19 +21,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>48898411-6F12-4ADD-830B-88FED0F66BB0</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FBE773BF-5340-43E6-98F8-22E1C4F01CC5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4A3828AC-7DF5-44AE-84CE-3F1B054C7349</key>
 		<array>
 			<dict>
@@ -103,63 +90,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>72429B6F-6A52-4E6C-93A4-FD88489A22F2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8C4DE1F4-CC9B-41F7-A3B6-122F5485EA84</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>8C4DE1F4-CC9B-41F7-A3B6-122F5485EA84</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>48898411-6F12-4ADD-830B-88FED0F66BB0</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>AB2FC894-EB25-4C16-B958-43863871807B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>57787A3F-711D-487E-A402-6DB381439B3A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>BC41C6FD-A0A1-48EC-A156-72DC0D9520FF</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>D81F901E-8EAB-4D27-B7F2-CB2C26893AEF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>DB75DE0D-5D08-4DC0-8F18-35F4D551A52A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>AB2FC894-EB25-4C16-B958-43863871807B</string>
+				<string>EAD2AC7E-2F9F-4704-B8C6-6A5FB1934632</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -194,32 +129,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>F335D8C8-905A-4192-90B9-033173FEB8AF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>48898411-6F12-4ADD-830B-88FED0F66BB0</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>FBE773BF-5340-43E6-98F8-22E1C4F01CC5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>DB75DE0D-5D08-4DC0-8F18-35F4D551A52A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -236,6 +145,10 @@
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -253,6 +166,10 @@
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -291,6 +208,10 @@
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -308,6 +229,10 @@
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -341,11 +266,11 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>kill alfred</string>
+				<string>restart alfred</string>
 				<key>subtext</key>
-				<string>and reveal it in Finder</string>
+				<string>via Shortcut</string>
 				<key>text</key>
-				<string>Force Quit Alfred</string>
+				<string>Restart Alfred</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -355,33 +280,6 @@
 			<string>BC41C6FD-A0A1-48EC-A156-72DC0D9520FF</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>osascript -e 'tell application "Alfred Preferences" to quit'
-
-killall "Alfred Preferences"killall -KILL Alfred
-
-open -R /Applications/Alfred*.app</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>D81F901E-8EAB-4D27-B7F2-CB2C26893AEF</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -407,36 +305,21 @@ open -R /Applications/Alfred*.app</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
+				<key>browser</key>
 				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library/Application Support/Alfred/Workflow Data</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>33BD77E2-2929-432E-9718-B2FDBAF4EFE5</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>alfred workflow data</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>📂 Alfred Workflow Data</string>
-				<key>withspace</key>
+				<key>skipqueryencode</key>
 				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>shortcuts://run-shortcut?name=Restart%20Alfred</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>411F0C67-7E50-4B01-AF68-F2742465259B</string>
+			<string>EAD2AC7E-2F9F-4704-B8C6-6A5FB1934632</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -499,46 +382,38 @@ open -R /Applications/Alfred*.app</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library/Application Support/Alfred/Workflow Data</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>33BD77E2-2929-432E-9718-B2FDBAF4EFE5</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>alfred workflows</string>
+				<string>alfred workflow data</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>📂 Alfred Workflows Folder</string>
+				<string>📂 Alfred Workflow Data</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>DCD9C133-BB06-4C67-9775-B4814A38FF71</string>
+			<string>411F0C67-7E50-4B01-AF68-F2742465259B</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>open ..</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>4A6AD1C0-ABCF-4C85-8E12-C4170B8982C5</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -580,20 +455,20 @@ open -R /Applications/Alfred*.app</string>
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>keyword</key>
-				<string>bkp alfred</string>
+				<string>alfred workflows</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Backup: Alfred Preferences</string>
+				<string>📂 Alfred Workflows Folder</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>F335D8C8-905A-4192-90B9-033173FEB8AF</string>
+			<string>DCD9C133-BB06-4C67-9775-B4814A38FF71</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -603,161 +478,22 @@ open -R /Applications/Alfred*.app</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>102</integer>
 				<key>script</key>
-				<string>timestamp=`date '+%Y-%m-%d_%H-%M'`
-resolved_bkp_dest=~`echo -n $backup_location | sed -e "s/~//"`
-backup="$resolved_bkp_dest""/Alfred-Backup_""$timestamp"".zip"
-vault=~`echo -n $vault_path | sed -e "s/~//"`
-
-# directory change necessary to avoid zipping root folder
-# https://unix.stackexchange.com/questions/245856/zip-a-file-without-including-the-parent-directory
-cd $vault
-zip -r --quiet $backup ./*
-
-# restrict number of backups
-actual_number=$((max_number_of_bkps + 1))
-cd $resolved_bkp_dest
-ls -t | tail -n +$actual_number | tr '\n' '\0' | xargs -0 rm
-
-echo "$backup"</string>
+				<string>open ..</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>alfred-backup.sh</string>
+				<string></string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>FBE773BF-5340-43E6-98F8-22E1C4F01CC5</string>
+			<string>4A6AD1C0-ABCF-4C85-8E12-C4170B8982C5</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Blow</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>57787A3F-711D-487E-A402-6DB381439B3A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>Alfred Preferences</string>
-				<key>title</key>
-				<string>⏳ Creating Backup...</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>48898411-6F12-4ADD-830B-88FED0F66BB0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<true/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>'{query}'</string>
-				<key>title</key>
-				<string>✅ Alfred Preferences Backup finished</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>DB75DE0D-5D08-4DC0-8F18-35F4D551A52A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:mode}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>no sound</string>
-						<key>outputlabel</key>
-						<string>no</string>
-						<key>uid</key>
-						<string>FEA7E4E2-00DD-487A-B6A4-1A72E14035C4</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>yes</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>AB2FC894-EB25-4C16-B958-43863871807B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>backup-alfred-prefs</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>72429B6F-6A52-4E6C-93A4-FD88489A22F2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>mode</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>8C4DE1F4-CC9B-41F7-A3B6-122F5485EA84</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -791,15 +527,6 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>180</real>
 		</dict>
-		<key>48898411-6F12-4ADD-830B-88FED0F66BB0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>240</real>
-			<key>ypos</key>
-			<real>770</real>
-		</dict>
 		<key>4A3828AC-7DF5-44AE-84CE-3F1B054C7349</key>
 		<dict>
 			<key>colorindex</key>
@@ -818,15 +545,6 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>565</real>
 		</dict>
-		<key>57787A3F-711D-487E-A402-6DB381439B3A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>755</real>
-			<key>ypos</key>
-			<real>770</real>
-		</dict>
 		<key>59B65F8F-3EDB-4000-8F90-1C01AF6BC6A5</key>
 		<dict>
 			<key>colorindex</key>
@@ -841,23 +559,16 @@ echo "$backup"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>630</real>
-		</dict>
-		<key>72429B6F-6A52-4E6C-93A4-FD88489A22F2</key>
-		<dict>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>890</real>
+			<real>550</real>
 		</dict>
 		<key>859A813B-BC0E-4FD1-B2A5-E698076BF6E5</key>
 		<dict>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>430</real>
 		</dict>
 		<key>88BE14E8-8C6C-40C6-9497-48E193416293</key>
 		<dict>
@@ -867,24 +578,6 @@ echo "$backup"</string>
 			<real>365</real>
 			<key>ypos</key>
 			<real>25</real>
-		</dict>
-		<key>8C4DE1F4-CC9B-41F7-A3B6-122F5485EA84</key>
-		<dict>
-			<key>xpos</key>
-			<real>160</real>
-			<key>ypos</key>
-			<real>920</real>
-		</dict>
-		<key>AB2FC894-EB25-4C16-B958-43863871807B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>sound</string>
-			<key>xpos</key>
-			<real>681</real>
-			<key>ypos</key>
-			<real>790</real>
 		</dict>
 		<key>ABF30A35-70D2-41E3-B40B-4A5E783EB7FC</key>
 		<dict>
@@ -918,27 +611,9 @@ echo "$backup"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>630</real>
-		</dict>
-		<key>D81F901E-8EAB-4D27-B7F2-CB2C26893AEF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>310</real>
-		</dict>
-		<key>DB75DE0D-5D08-4DC0-8F18-35F4D551A52A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>525</real>
-			<key>ypos</key>
-			<real>770</real>
+			<real>550</real>
 		</dict>
 		<key>DCD9C133-BB06-4C67-9775-B4814A38FF71</key>
 		<dict>
@@ -952,18 +627,18 @@ echo "$backup"</string>
 		<key>E1B642B1-7077-4090-9C23-656A55E19199</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>430</real>
 		</dict>
-		<key>F335D8C8-905A-4192-90B9-033173FEB8AF</key>
+		<key>EAD2AC7E-2F9F-4704-B8C6-6A5FB1934632</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>310</real>
 		</dict>
 		<key>F55D1533-F14F-4A8E-88D1-B4C3F3DACB70</key>
 		<dict>
@@ -973,15 +648,6 @@ echo "$backup"</string>
 			<real>210</real>
 			<key>ypos</key>
 			<real>25</real>
-		</dict>
-		<key>FBE773BF-5340-43E6-98F8-22E1C4F01CC5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>380</real>
-			<key>ypos</key>
-			<real>770</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

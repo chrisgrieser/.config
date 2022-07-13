@@ -34,5 +34,3 @@ if not pullSync:isRunning() then
 	gitDotfileSync:waitUntilExit() -- needed so sync finishes before pull
 	pullSync:start()
 end
-if not gitVaultBackup:isRunning() then gitVaultBackup:start() end
-if not gitVaultBackup:isRunning() then gitVaultBackup:start() end
