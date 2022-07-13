@@ -75,7 +75,10 @@ hotkey(hyper, "end", function ()
 		return
 	end
 	local didStart = gitDotfileSync:start()
-	if not(didStart) then notify("didn't start") end
+	if not(didStart) then
+		notify("didn't start")
+		return
+	end
 	gitDotfileSync:waitUntilExit()
 	notify("✅ dotfiles sync")
 end)
