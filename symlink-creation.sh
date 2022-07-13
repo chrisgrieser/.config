@@ -16,7 +16,7 @@ ln -sf "$DOTFILE_FOLDER/.stylelintrc.json" ~
 ln -sf "$DOTFILE_FOLDER/.gitconfig" ~
 ln -sf "$DOTFILE_FOLDER/.eslintrc.json" ~
 ln -sf "$DOTFILE_FOLDER/.gitignore_global" ~
-ln -sf "$DOTFILE_FOLDER/pandoc" ~/.pandoc
+ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
 ln -sf "$DOTFILE_FOLDER/.markdownlintrc" ~
 ln -sf "$DOTFILE_FOLDER/.pylintrc" ~
 ln -sf "$DOTFILE_FOLDER/.flake8" ~
