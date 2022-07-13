@@ -64,6 +64,22 @@ end
 covidTimer = hs.timer.doEvery(covidUpdateHours * 60 * 60, setCovidBar)
 covidTimer:start()
 
+
+--------------------------------------------------------------------------------
+dotfileSyncMenuBar = hs.menubar.new()
+function updateDotfileSyncStatusMenuBar()
+	local changes, success = hs.execute('git status --short | wc -l | tr -d " "')
+	changes = changes:gsub("\n", "")
+	if tonumber(changes) == 0 or not(success) then
+		dotfileSyncMenuBar:setTitle("")
+		return
+	end
+	dotfileSyncMenuBar:setTitle("🔁 "..changes)
+end
+dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
+dotfilesWatcher:start()
+-- also updated on gitDotfileSync()
+
 --------------------------------------------------------------------------------
 draftsCounterMenuBar = hs.menubar.new()
 function updateDraftsMenubar()
@@ -110,20 +126,6 @@ hs.urlevent.bind("update-drafts-menubar",  function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
---------------------------------------------------------------------------------
-dotfileSyncMenuBar = hs.menubar.new()
-function updateDotfileSyncStatusMenuBar()
-	local changes, success = hs.execute('git status --short | wc -l | tr -d " "')
-	changes = changes:gsub("\n", "")
-	if tonumber(changes) == 0 or not(success) then
-		dotfileSyncMenuBar:setTitle("")
-		return
-	end
-	dotfileSyncMenuBar:setTitle("🔁 "..changes)
-end
-dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
-dotfilesWatcher:start()
--- also updated on gitDotfileSync()
 
 --------------------------------------------------------------------------------
 
