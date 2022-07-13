@@ -8,6 +8,7 @@ end
 
 function deviceName()
 	local name = hs.execute('scutil --get ComputerName | cut -d" " -f2-')
+	name = name:gsub():gsub("\n", "")
 	return name
 end
 
