@@ -6,6 +6,11 @@ function numberOfScreens()
 	return #(hs.screen.allScreens())
 end
 
+function deviceName()
+	local name = hs.execute('scutil --get ComputerName | cut -d" " -f2-')
+	return name
+end
+
 function isIMacAtHome ()
 	local iMacFirstScreen = hs.screen.primaryScreen():name() == "Built-in Retina Display"
 	local iMacSecondScreen

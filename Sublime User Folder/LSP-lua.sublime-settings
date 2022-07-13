@@ -14,6 +14,7 @@
 			"frontapp",
 			"hotkey",
 			"hyper",
+			"deviceName",
 			"isIMacAtHome",
 			"isDarkMode",
 			"openIfNotRunning",
