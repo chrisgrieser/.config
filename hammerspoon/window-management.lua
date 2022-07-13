@@ -340,6 +340,7 @@ function mainScreenWindows()
 	for i = 1, #winArr do
 		if winArr[i]:screen() == mainScreen then
 			out[j] = winArr[i]
+			j = j+1
 		end
 	end
 	return out
