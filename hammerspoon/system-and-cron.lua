@@ -19,7 +19,6 @@ function gitDotfileSync()
 		end
 		updateDotfileSyncStatusMenuBar()
 	end):start()
-
 end
 
 function gitVaultBackup()
@@ -56,18 +55,23 @@ end)
 repoSyncTimer:start()
 
 function screenSleep (eventType)
-	-- can't use shutdown as trigger, since git vault sync will not finish in time there
-	-- use hotkey, if there is a gitsync still to be done
 	if not(eventType == hs.caffeinate.watcher.screensDidSleep or eventType == hs.caffeinate.watcher.screensDidLock) then return end
 
-	log ("📴 shutdown/sleep", "$HOME/dotfiles/Cron Jobs/sync.log")
-	log ("📴 shutdown/sleep", "$HOME/dotfiles/Cron Jobs/some.log")
+	log ("💤 sleep", "$HOME/dotfiles/Cron Jobs/sync.log")
+	log ("💤 sleep", "$HOME/dotfiles/Cron Jobs/some.log")
 	gitDotfileSync()
 end
 shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
 shutDownWatcher:start()
 
-hotkey(hyper, "end", gitDotfileSync)
+-- `hammerspoon://shutdown` for Alfred Shutdown Sequence
+hs.urlevent.bind("shutdown", function()
+	-- can't use shutdown via caffeinate watcher, since git sync will not finish in time
+	log ("📴 shutdown", "$HOME/dotfiles/Cron Jobs/some.log")
+	log ("📴 shutdown", "$HOME/dotfiles/Cron Jobs/sync.log")
+	gitDotfileSync()
+end)
+
 
 function systemWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemDidWake or eventType == hs.caffeinate.watcher.screensDidUnlock) then return end
