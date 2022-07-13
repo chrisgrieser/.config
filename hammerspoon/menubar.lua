@@ -78,7 +78,6 @@ function updateDotfileSyncStatusMenuBar()
 end
 dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
 dotfilesWatcher:start()
--- also updated on gitDotfileSync()
 
 --------------------------------------------------------------------------------
 draftsCounterMenuBar = hs.menubar.new()
