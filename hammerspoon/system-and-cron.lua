@@ -16,7 +16,6 @@ function gitDotfileSync()
 			notify("⚠️️ dotfiles "..stdErr)
 			log ("dotfiles sync ("..deviceName()..") ⚠️: "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
 		end
-		updateDotfileSyncStatusMenuBar()
 	end):start()
 end
 
