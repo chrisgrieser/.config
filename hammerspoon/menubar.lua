@@ -6,9 +6,8 @@ require("utils")
 function reloadAllMenubarItems ()
 	setWeather()
 	setCovidBar()
-	updateDraftsMenubar()
-	setFileHubCountMenuBar()
 	updateDotfileSyncStatusMenuBar()
+	updateDraftsMenubar()
 end
 
 weatherUpdateMin = 15
@@ -34,7 +33,6 @@ function setWeather()
 	weatherStatusBar:setTitle(weather)
 	weatherStatusBar:setTooltip(weatherLong)
 end
-setWeather()
 weatherTimer = hs.timer.doEvery(weatherUpdateMin * 60, setWeather)
 weatherTimer:start()
 --------------------------------------------------------------------------------
@@ -63,7 +61,6 @@ function setCovidBar()
 	covidBar:setTooltip(stateName..": "..state_7D_incidence)
 
 end
-setCovidBar()
 covidTimer = hs.timer.doEvery(covidUpdateHours * 60 * 60, setCovidBar)
 covidTimer:start()
 
@@ -94,7 +91,6 @@ function updateDraftsMenubar()
 
 	draftsCounterMenuBar:setTitle(numberOfDrafts)
 end
-updateDraftsMenubar()
 
 function draftsWatcher(appName, eventType)
 	if not(appName == "Drafts") then return end
