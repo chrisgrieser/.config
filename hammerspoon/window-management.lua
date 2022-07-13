@@ -16,6 +16,7 @@ darkModeStrokeWidth = 7
 function activeWindowHighlight(appName, eventType)
 	if eventType == hs.application.watcher.activated or eventType == hs.application.watcher.deactivated then
 		-- Delete an existing highlight if it exists
+		rect:delete()
 		if rect then
 			rect:delete() -- needed despite log message saying garbage collection takes care of it
 			runDelayed(0.5, function () rect = nil end)
