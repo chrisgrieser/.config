@@ -7,6 +7,7 @@ repoSyncFrequencyMin = 15
 
 function gitDotfileSyncCallback(exitCode, _, stdErr)
 	if exitCode == 0 then
+		notify("✅ dotfiles")
 		log ("dotfiles sync ("..deviceName()..") ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
 	else
 		notify("⚠️️ dotfiles "..stdErr)
@@ -33,6 +34,7 @@ repoSyncTimer:start()
 
 function pullsyncCallback(exitCode, _, stdErr)
 	if exitCode == 0 then
+		notify("✅ pull sync")
 		log ("pull sync ("..deviceName()..") ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
 	else
 		notify("⚠️ pull sync "..stdErr)
@@ -72,7 +74,8 @@ hotkey(hyper, "end", function ()
 		notify("currently syncing…")
 		return
 	end
-	gitDotfileSync:start()
+	local didStart = gitDotfileSync:start()
+	if not(didStart) then notify("didn't start") end
 	gitDotfileSync:waitUntilExit()
 	notify("✅ dotfiles sync")
 end)
