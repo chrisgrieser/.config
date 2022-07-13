@@ -67,10 +67,8 @@ shutDownWatcher:start()
 
 
 function systemWake (eventType)
-	if not(eventType == hs.caffeinate.watcher.systemDidWake) then return end
+	if not(eventType == hs.caffeinate.watcher.systemDidWake or eventType == hs.caffeinate.watcher.screensDidUnlock) then return end
 
-	reloadAllMenubarItems()
-	hs.shortcuts.run("Send Reminders due today to Drafts")
 	if appIsRunning("Obsidian") and appIsRunning("Discord") then
 		hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
 	end
@@ -83,8 +81,13 @@ function systemWake (eventType)
 	if timeHours < 19 and timeHours > 6 then
 		setDarkmode(false)
 	end
+	-- get reminders after 6:00
+	if timeHours > 6 then
+		hs.shortcuts.run("Send Reminders due today to Drafts")
+	end
 
-	pullSync:start()
+	reloadAllMenubarItems()
+	pullSync()
 end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
