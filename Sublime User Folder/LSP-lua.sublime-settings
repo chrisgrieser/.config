@@ -15,6 +15,7 @@
 			"hotkey",
 			"hyper",
 			"deviceName",
+			"setDarkmode",
 			"isIMacAtHome",
 			"isDarkMode",
 			"openIfNotRunning",
