@@ -8,6 +8,7 @@ function reloadAllMenubarItems ()
 	setCovidBar()
 	updateDraftsMenubar()
 	setFileHubCountMenuBar()
+	checkDotfileSyncStatus()
 end
 
 weatherUpdateMin = 15
@@ -111,6 +112,19 @@ hs.urlevent.bind("update-drafts-menubar",  function()
 	updateDraftsMenubar()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
+
+--------------------------------------------------------------------------------
+dotfileSyncMenuBar = hs.menubar.new()
+function checkDotfileSyncStatus()
+	local changes, success = hs.execute('git status --short | wc -l | tr -d " "')
+	changes = changes:gsub("\n", "")
+	if tonumber(changes) == 0 or not(success) then
+		dotfileSyncMenuBar:setTitle("")
+		return
+	end
+	dotfileSyncMenuBar:setTitle("🔁 "..changes)
+end
+-- watcher set in system-and-cron.lua
 
 --------------------------------------------------------------------------------
 
