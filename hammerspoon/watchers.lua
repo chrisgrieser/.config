@@ -47,10 +47,13 @@ end
 zoomAppWatcher = hs.application.watcher.new(zoomWatcher)
 zoomAppWatcher:start()
 
--- HIGHLIGHTS: Sync Dark & Light Mode
-function highlightsWatcher(appName, eventType)
-	if (eventType ~= hs.application.watcher.launching) or (appName ~= "Highlights") then return end
-	hs.applescript([[
+-- HIGHLIGHTS:
+-- - Sync Dark & Light Mode
+-- - Start with Highlight as Selection
+function highlightsWatcher(appName, eventType, appObject)
+	if not(eventType == hs.application.watcher.launching and appName == "Highlights") then return end
+	appObject:selectMenuItem({"Tools", "Highlight"})
+	hs.osascript.applescript([[
 		tell application "System Events"
 			tell appearance preferences to set isDark to dark mode
 			if (isDark is false) then set targetView to "Default"

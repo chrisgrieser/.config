@@ -25,6 +25,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>8146B782-E941-42AB-9FE2-FF9FBB89456E</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Move to frontmost Finder Window</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>DC23B294-25E4-4CEA-841A-71546D15BD89</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -41,7 +51,7 @@
 				<key>modifiersubtext</key>
 				<string>^: delete</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>10E85A5A-FC6B-43F7-AAAA-1304838DCCBC</key>
@@ -1237,6 +1247,29 @@ open .</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>move-to-frontmost-Finder-window.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>8146B782-E941-42AB-9FE2-FF9FBB89456E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>availableviaurlhandler</key>
 				<false/>
 				<key>triggerid</key>
@@ -1387,6 +1420,38 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string>0</string>
+						<key>outputlabel</key>
+						<string>&gt; 1</string>
+						<key>uid</key>
+						<string>A08176B6-C054-434D-855E-4DF2F119FF6F</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>= 0</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>externaltriggerid</key>
 				<string>file-hub-cycle</string>
 				<key>passinputasargument</key>
@@ -1428,38 +1493,6 @@ end run</string>
 			<string>49C1CB43-3C55-4085-BBF5-A406476E7309</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>1</integer>
-						<key>matchstring</key>
-						<string>0</string>
-						<key>outputlabel</key>
-						<string>&gt; 1</string>
-						<key>uid</key>
-						<string>A08176B6-C054-434D-855E-4DF2F119FF6F</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>= 0</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2085,9 +2118,9 @@ md2docx "$*" 2&gt;&amp;1</string>
 		<key>11D8554B-846B-40DD-9CA0-C73F5736472F</key>
 		<dict>
 			<key>xpos</key>
-			<real>815</real>
+			<real>860</real>
 			<key>ypos</key>
-			<real>930</real>
+			<real>1000</real>
 		</dict>
 		<key>1B6838B5-A98F-4E36-B645-F289BA31A5F8</key>
 		<dict>
@@ -2181,7 +2214,7 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>235</real>
+			<real>230</real>
 			<key>ypos</key>
 			<real>1140</real>
 		</dict>
@@ -2189,12 +2222,10 @@ md2docx "$*" 2&gt;&amp;1</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
-			<key>note</key>
-			<string>restart &amp; reset default window size</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>1240</real>
+			<real>1210</real>
 		</dict>
 		<key>46F3C23D-7A2C-4F9D-893D-DE7985DCC184</key>
 		<dict>
@@ -2225,9 +2256,9 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>note</key>
 			<string>delete file</string>
 			<key>xpos</key>
-			<real>665</real>
+			<real>710</real>
 			<key>ypos</key>
-			<real>930</real>
+			<real>1000</real>
 		</dict>
 		<key>4A2BBCFD-F977-4747-A19C-0CA5ABFC48D0</key>
 		<dict>
@@ -2290,7 +2321,7 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>230</real>
+			<real>225</real>
 			<key>ypos</key>
 			<real>1260</real>
 		</dict>
@@ -2311,6 +2342,15 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<real>425</real>
 			<key>ypos</key>
 			<real>930</real>
+		</dict>
+		<key>8146B782-E941-42AB-9FE2-FF9FBB89456E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>710</real>
+			<key>ypos</key>
+			<real>755</real>
 		</dict>
 		<key>854C7C80-AC64-4A5D-938F-4EC378280457</key>
 		<dict>
@@ -2485,9 +2525,9 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>665</real>
+			<real>710</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>880</real>
 		</dict>
 		<key>DD0CEE0C-A408-4870-82D6-3D5E3AF8F457</key>
 		<dict>
