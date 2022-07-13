@@ -347,7 +347,7 @@ function mainScreenWindows()
 end
 
 function vsplit (mode)
-	local wins = mainScreenWindows() -- to not split windows on second screen
+	local wins = mainScreenWindows()	-- to not split windows on second screen
 
 	local win1 = wins[1]
 	local win2 = wins[2]
@@ -366,8 +366,7 @@ function vsplit (mode)
 
 	-- switch order of windows
 	if mode == "switch" then
-		if (f1.w +
-		f2.w ~= max.w) then
+		if (f1.w + f2.w ~= max.w) then
 			notify ("not a correct vertical split")
 			return
 		end
@@ -379,12 +378,12 @@ function vsplit (mode)
 			f2 = hs.layout.left70
 		end
 	elseif mode == "split" then
-		if (f1.w == f2.w) then
-			f1 = hs.layout.left70
-			f2 = hs.layout.right30
-		else
+		if (f1.w ~= f2.w or f1.w > 0.7*max.w) then
 			f1 = hs.layout.left50
 			f2 = hs.layout.right50
+		else
+			f1 = hs.layout.left70
+			f2 = hs.layout.right30
 		end
 	elseif mode == "unsplit" then
 		local layout
