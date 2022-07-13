@@ -5,24 +5,25 @@ require("utils")
 -- have to be done here, since when send from Karabiner, gets caught by the
 -- pagedown/up listener from Hammerspoon in `twitterific-iina.lua`
 
-highlightsScrollAmount = 15
+highlightsScrollAmount = 16
 
 function highlightsAppScroll (amount)
-		-- has to be done via applescript, as repeated keystrokes
-		-- via Hammerspoon have a slight lag
-		local prevMousePos = hs.mouse.absolutePosition()
-
-		-- center mouse on Highlights window
+		local screen = hs.mouse.getCurrentScreen()
 		local highlightsWin = hs.application("Highlights"):mainWindow():frame()
-		local pos = {
+
+		local centerPos = {
 			x = highlightsWin.x + highlightsWin.w * 0.5,
 			y = highlightsWin.y + highlightsWin.h * 0.5,
 		}
-		hs.mouse.setRelativePosition(pos)
+		hs.mouse.setRelativePosition(centerPos)
 
 		hs.eventtap.scrollWheel({0, amount}, {})
-		-- restore previous mouse position
-		hs.mouse.absolutePosition(prevMousePos)
+
+		local pseudoHiddenPos = {
+			x = screen:frame().w - 1, -- -1 to keep it on the current screen
+			y = screen:frame().h * 0.75,
+		}
+		hs.mouse.absolutePosition(pseudoHiddenPos)
 end
 
 function scrollDown ()
