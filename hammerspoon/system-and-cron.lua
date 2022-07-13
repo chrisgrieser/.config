@@ -47,8 +47,6 @@ end
 
 --------------------------------------------------------------------------------
 -- TRIGGERS
-hotkey(hyper, "end", pullSync)
-
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
 	gitDotfileSync()
 	if isIMacAtHome() then gitVaultBackup() end
