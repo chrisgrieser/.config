@@ -34,6 +34,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7E7254FB-7761-400D-887B-162AB242F68E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>13DAA5E7-0648-41DB-A26B-357535D607FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A25DDA0D-DA11-46FF-9CCB-41D3D338B420</key>
 		<array>
 			<dict>
@@ -48,7 +71,18 @@
 			</dict>
 		</array>
 		<key>AA5C04E1-1B2F-4CEA-8B5D-6E4E4ECD0D8B</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C129402F-060A-4E14-A919-D21FCE15A4A4</key>
 		<array>
 			<dict>
@@ -400,29 +434,6 @@ delay 0.5
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -444,10 +455,55 @@ delay 0.5
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>cd ~/dotfiles/
+
+filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
+if [[ -n "$filesChanged" ]] ; then
+	open "hammerspoon://pre-shutdown-sync"
+	sleep 8
+	echo "🔁 pre-shutdown-sync"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>command</key>
+				<integer>8</integer>
+				<key>confirm</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemcommand</string>
+			<key>uid</key>
+			<string>7E7254FB-7761-400D-887B-162AB242F68E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<false/>
+				<true/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
@@ -488,16 +544,23 @@ delay 0.5
 		<key>13DAA5E7-0648-41DB-A26B-357535D607FA</key>
 		<dict>
 			<key>xpos</key>
-			<real>185</real>
+			<real>365</real>
 			<key>ypos</key>
 			<real>640</real>
 		</dict>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<dict>
 			<key>xpos</key>
-			<real>160</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>515</real>
+		</dict>
+		<key>7E7254FB-7761-400D-887B-162AB242F68E</key>
+		<dict>
+			<key>xpos</key>
+			<real>365</real>
+			<key>ypos</key>
+			<real>515</real>
 		</dict>
 		<key>8B8645C1-776A-41E4-B093-DF59FEF6D696</key>
 		<dict>
