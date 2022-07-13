@@ -95,7 +95,8 @@ end
 updateDraftsMenubar()
 
 function draftsWatcher(appName, eventType)
-	if not(eventType == hs.application.watcher.deactivated and appName == "Drafts") then return end
+	if not(appName == "Drafts") then return end
+	if not(eventType == hs.application.watcher.deactivated or eventType == hs.application.watcher.activated) then return end
 	updateDraftsMenubar()
 end
 -- update when database changes or Drafts loses focus
