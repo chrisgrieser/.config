@@ -1,9 +1,10 @@
 require("utils")
 
--- `hammerspoon://hs-reload` for reloading via Sublime Build System or Karabiner
+-- `hammerspoon://hs-reload` for reloading via Sublime Build System
 hs.urlevent.bind("hs-reload", function()
 	print("Reloading Config...")
 	hs.reload()
+	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
 --------------------------------------------------------------------------------
@@ -29,4 +30,5 @@ end
 -- `hammerspoon://clear-console` for Karabiner Elements
 hs.urlevent.bind("clear-console", function()
 	hs.console.clearConsole()
+	-- no hiding needed, since Hammerspoon already frontmost
 end)

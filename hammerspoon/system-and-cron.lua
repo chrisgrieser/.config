@@ -84,7 +84,7 @@ function systemWake (eventType)
 	-- set darkmode if waking between 6:00 and 19:00
 	local timeHours = hs.timer.localTime() / 60 / 60
 	if timeHours < 19 and timeHours > 6 then
-		setDarkmode(true)
+		setDarkmode(false)
 	end
 
 	pullSync:start()
@@ -95,7 +95,7 @@ wakeWatcher:start()
 -- redundancy: daily morning run
 if isIMacAtHome() then
 	dailyMorningTimer = hs.timer.doAt("06:10", "01d", function()
-		setDarkmode(true)
+		setDarkmode(false)
 	end, false)
 	dailyMorningTimer:start()
 end

@@ -67,20 +67,6 @@ end
 highlightsAppWatcher = hs.application.watcher.new(highlightsWatcher)
 highlightsAppWatcher:start()
 
--- BRAVE Bookmarks synced to Chrome Bookmarks (needed for Alfred)
-function bookmarkSync()
-	hs.execute([[
-		BROWSER="BraveSoftware/Brave-Browser"
-		mkdir -p "$HOME/Library/Application Support/Google/Chrome/Default"
-		cp "$HOME/Library/Application Support/$BROWSER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
-		cp "$HOME/Library/Application Support/$BROWSER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
-	]])
-	notify("Bookmarks synced")
-end
-BraveBookmarks = os.getenv("HOME") .. "/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks"
-bookmarkWatcher = hs.pathwatcher.new(BraveBookmarks, bookmarkSync)
-bookmarkWatcher:start()
-
 -- HOT CORNER Use "Quick Note" as Pseudo Hot Corner Action
 -- to trigger something else instead
 function hotcornerWatcher(appName, eventType)
