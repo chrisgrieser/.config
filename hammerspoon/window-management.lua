@@ -14,8 +14,7 @@ lightModeStrokeWidth = 10
 darkModeStrokeWidth = 7
 
 function activeWindowHighlight(appName, eventType)
-	if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.launched) then return end
-
+	if eventType == hs.application.watcher.activated or eventType == hs.application.watcher.deactivated then
 	-- Delete an existing highlight if it exists
 	if rect then
 		rect:delete() -- needed despite log message saying garbage collection takes care of it
@@ -23,6 +22,9 @@ function activeWindowHighlight(appName, eventType)
 			rectTimer:stop()
 		end
 	end
+	end
+
+	if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.launched) then return end
 
 	-- guard clauses
 	if (appName == "IINA") then return end
