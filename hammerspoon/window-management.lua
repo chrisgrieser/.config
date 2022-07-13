@@ -18,10 +18,8 @@ function activeWindowHighlight(appName, eventType)
 		-- Delete an existing highlight if it exists
 		if rect then
 			rect:delete() -- needed despite log message saying garbage collection takes care of it
-			rect = nil
-			if rectTimer then
-				rectTimer:stop()
-			end
+			runDelayed(0.5, function () rect = nil end)
+			if rectTimer then rectTimer:stop() end
 		end
 	end
 
