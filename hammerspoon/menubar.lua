@@ -42,7 +42,7 @@ covidBar = hs.menubar.new()
 function setCovidBar()
 	local _, nationalDataJSON = hs.http.get("https://api.corona-zahlen.org/germany", nil)
 	if not (nationalDataJSON) then
-		covidBar.setTitle("")
+		covidBar:setTitle("")
 		return
 	end
 	local nationalNumbers = hs.json.decode(nationalDataJSON)
