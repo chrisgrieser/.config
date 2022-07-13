@@ -68,25 +68,28 @@ covidTimer:start()
 --------------------------------------------------------------------------------
 draftsCounterMenuBar = hs.menubar.new()
 function updateDraftsMenubar()
-	local excludeTask1 = "tasklist"
-	local excludeTask2
+	local excludeTag1 = "tasklist"
+	local excludeTag2
 	if isIMacAtHome() then
-		excludeTask2 = "office"
+		excludeTag2 = "office"
 	else
-		excludeTask2 = "home"
+		excludeTag2 = "home"
 	end
-	local numberOfDrafts, success = hs.execute("python3 numberOfDrafts.py "..excludeTask1.." "..excludeTask2)
+	local numberOfDrafts, success = hs.execute("python3 numberOfDrafts.py "..excludeTag1.." "..excludeTag2)
 	numberOfDrafts = numberOfDrafts:gsub("\n", "")
 	if tonumber(numberOfDrafts) == 0 or not(success) then
 		draftsCounterMenuBar:setTitle("")
 		return
 	end
-	draftsCounterMenuBar:setTitle(numberOfDrafts)
+
+	local draftsIcon
 	if isDarkMode() then
 		draftsIcon = "drafts-menubar-white.tiff"
 	else
 		draftsIcon = "drafts-menubar-black.tiff"
 	end
+
+	draftsCounterMenuBar:setTitle(numberOfDrafts)
 	draftsCounterMenuBar:setIcon(draftsIcon, false)
 end
 updateDraftsMenubar()
@@ -102,8 +105,7 @@ draftsMenuBarWatcher1:start()
 draftsMenuBarWatcher2 = hs.application.watcher.new(draftsWatcher)
 draftsMenuBarWatcher2:start()
 
-
--- `hammerspoon://update-drafts-menubar` for Alfred Triggers
+-- `hammerspoon://update-drafts-menubar` for Alfred Triggers (incl. Dark Mode Toggle)
 hs.urlevent.bind("update-drafts-menubar",  function()
 	updateDraftsMenubar()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
