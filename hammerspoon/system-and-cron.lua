@@ -66,7 +66,6 @@ end
 shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
 shutDownWatcher:start()
 
-
 hotkey(hyper, "end", gitDotfileSync)
 
 function systemWake (eventType)
