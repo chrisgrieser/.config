@@ -1,8 +1,12 @@
 require("menubar")
 require("utils")
 require("window-management")
+--------------------------------------------------------------------------------
 
 repoSyncFrequencyMin = 15
+gitDotfileScript = os.getenv("HOME").."/dotfiles/git-dotfile-backup.sh"
+gitVaultScript = os.getenv("HOME").."/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh"
+pullScript = os.getenv("HOME").."/dotfiles/pull-sync-repos.sh"
 --------------------------------------------------------------------------------
 
 function gitDotfileSyncCallback(exitCode, _, stdErr)
@@ -14,7 +18,9 @@ function gitDotfileSyncCallback(exitCode, _, stdErr)
 		log ("dotfiles sync ("..deviceName()..") ⚠️: "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
 	end
 end
-gitDotfileSync = hs.task.new(os.getenv("HOME").."/dotfiles/git-dotfile-backup.sh", gitDotfileSyncCallback)
+function gitDotfileSync()
+	hs.task.new(gitDotfileScript, gitDotfileSyncCallback):start()
+end
 
 function gitVaultBackupCallback(exitCode, _, stdErr)
 	if exitCode == 0 then
@@ -24,7 +30,7 @@ function gitVaultBackupCallback(exitCode, _, stdErr)
 		log ("vault backup ⚠️: "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
 	end
 end
-gitVaultBackup = hs.task.new(os.getenv("HOME").."/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh", gitVaultBackupCallback)
+gitVaultBackup = hs.task.new(gitVaultScript, gitVaultBackupCallback)
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
 	if not gitDotfileSync:isRunning() then
@@ -44,7 +50,8 @@ function pullsyncCallback(exitCode, _, stdErr)
 		log ("pull sync ("..deviceName()..") ⚠️: "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
 	end
 end
-pullSync = hs.task.new(os.getenv("HOME").."/dotfiles/pull-sync-repos.sh", pullsyncCallback)
+local pullSync = hs.task.new(pullScript, pullsyncCallback)
+pullSync:start()
 
 --------------------------------------------------------------------------------
 
