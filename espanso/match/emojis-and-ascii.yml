@@ -4,6 +4,8 @@
 matches:
   - trigger: '!no'
     replace: ❌
+  - trigger: '!info'
+    replace: ℹ️
   - trigger: '!yes'
     replace: ✅
   - trigger: '->'
