@@ -7,7 +7,6 @@ Sublime User Folder/AutoFoldCode.sublime-settings
 Cron Jobs/frequent.log
 Cron Jobs/sync.log
 .zsh_history
-
 # redundant
 .config/karabiner/automatic_backups
 
@@ -20,11 +19,10 @@ pdf-annotation-extractor-alfred
 
 # in case of accidental saving of such files in the repo
 *.mp4
-*.tiff
 *.part
-pw.*
 
 # safety net in case sensitive data is accidentally moved
+pw.*
 *.kdb
 *.kdbx
 *.pfx
