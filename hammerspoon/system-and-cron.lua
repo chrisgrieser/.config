@@ -4,9 +4,8 @@ require("window-management")
 --------------------------------------------------------------------------------
 -- SYNC
 repoSyncFrequencyMin = 15
-gitDotfileScript = os.getenv("HOME").."/dotfiles/git-dotfile-backup.sh"
+gitDotfileScript = os.getenv("HOME").."/dotfiles/git-dotfile-sync.sh"
 gitVaultScript = os.getenv("HOME").."/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh"
-pullScript = os.getenv("HOME").."/dotfiles/pull-sync-repos.sh"
 
 function gitDotfileSync()
 	hs.task.new(gitDotfileScript, function (exitCode, _, stdErr)
@@ -33,18 +32,6 @@ function gitVaultBackup()
 	end):start()
 end
 
-function pullSync()
-	hs.task.new(pullScript, function (exitCode, _, stdErr)
-		if exitCode == 0 then
-			notify("✅ pull sync")
-			log ("pull sync ("..deviceName()..") ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
-		else
-			notify("⚠️️ pull "..stdErr)
-			log ("⚠️ pull sync ("..deviceName()..") ⚠️: "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
-		end
-	end):start()
-end
-
 --------------------------------------------------------------------------------
 -- TRIGGERS
 
@@ -63,14 +50,6 @@ function screenSleep (eventType)
 end
 shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
 shutDownWatcher:start()
-
--- `hammerspoon://pre-shutdown-sync` for Alfred
-hs.urlevent.bind("pre-shutdown-sync", function()
-	-- can't use shutdown via caffeinate watcher, since git sync will not finish in time
-	log ("📴 pre-shutdown-sync", "$HOME/dotfiles/Cron Jobs/some.log")
-	log ("📴 pre-shutdown-sync", "$HOME/dotfiles/Cron Jobs/sync.log")
-	gitDotfileSync()
-end)
 
 function systemWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemDidWake or eventType == hs.caffeinate.watcher.screensDidUnlock) then return end
@@ -93,7 +72,7 @@ function systemWake (eventType)
 	end
 
 	reloadAllMenubarItems()
-	pullSync()
+	gitDotfileSync()
 end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
