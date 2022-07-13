@@ -20,8 +20,13 @@ on run argv
 	end if
 
 	if (output is not "") then
-		tell application "Drafts" to make new draft with properties {content: output}
+		tell application "Drafts"
+			set uuid to make new draft with properties {content: output}
+		end tell
+		tell application id "com.runningwithcrayons.Alfred" to set configuration "last_uuid" to value uuid in workflow (system attribute "alfred_workflow_bundleid")
 	end if
+
+	delay 1
 
 	return notif_msg
 end run
