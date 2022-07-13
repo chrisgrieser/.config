@@ -27,7 +27,10 @@ end
 gitVaultBackup = hs.task.new(os.getenv("HOME").."/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh", gitVaultBackupCallback)
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
-	if not gitDotfileSync:isRunning() then gitDotfileSync:start() end
+	if not gitDotfileSync:isRunning() then
+		gitDotfileSync:start()
+		updateDotfileSyncStatusMenuBar()
+	end
 	if isIMacAtHome() and (not gitVaultBackup:isRunning()) then gitVaultBackup:start() end
 end)
 repoSyncTimer:start()
