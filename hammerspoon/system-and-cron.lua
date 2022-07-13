@@ -19,6 +19,7 @@ function gitDotfileSync()
 		end
 		updateDotfileSyncStatusMenuBar()
 	end):start()
+
 end
 
 function gitVaultBackup()
