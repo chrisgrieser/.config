@@ -29,7 +29,7 @@ __What are "dotfiles"?__
 
 __How this repository works__
 - These files are symlinked into iCloud for synchronization.
-- `Hammerspoon` [is configured](hammerspoon/system-states.lua) to run the script [git-dotfile-backup.sh](git-dotfile-backup.sh) every 15 minutes. In addition, on System Boot as well as any system wake at least 12 hours after the last system wake, the script [pull-sync-repos.sh](pull-sync-repos.sh) keeps the dot files up to date for when the machine is changed.
+- `Hammerspoon` [is configured](hammerspoon/system-states.lua) to run the script [git-dotfile-sync.sh](git-dotfile-sync.sh) every 15 minutes, or on wake/sleep. In addition, the Alfred keyword `shutdown` will trigger the script before shutting down. 
 - The git repos that are nested inside this dotfile repository (i.e. Alfred git repositories, because the nesting can't be avoided in this case) are gitignored and pulled individually. 
 - [git-dotfile-backup.sh](git-dotfile-backup.sh) checks whether there have been any changes in dot files. If there are, it creates somewhat useful commit messages and runs the `git add commit pull push` sequence.
 - [.gitignore](.gitignore) contains a list of files not to backups for various reasons, e.g. redundancy, privacy, or simply because they are too big for a git repo.

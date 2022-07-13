@@ -15,10 +15,15 @@ else
 fi
 
 git add -A
-# no full date needed, since git shows it already
 git commit -m "$(date +"%a, %H:%M"), $changeType, $device_name" -m "$details"
+git pull
+git push
 
-git pull || exit 1
-git push || exit 1
-
-
+# Alfred Repos pullen
+cd "Alfred.alfredpreferences/workflows" || exit 1
+cd "./shimmering-obsidian" || exit 1
+git pull
+cd "../alfred-bibtex-citation-picker" || exit 1
+git pull
+cd "../pdf-annotation-extractor-alfred" || exit 1
+git pull
