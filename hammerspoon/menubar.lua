@@ -8,7 +8,7 @@ function reloadAllMenubarItems ()
 	setCovidBar()
 	updateDraftsMenubar()
 	setFileHubCountMenuBar()
-	checkDotfileSyncStatus()
+	updateDotfileSyncStatusMenuBar()
 end
 
 weatherUpdateMin = 15
@@ -16,6 +16,7 @@ weatherLocation = "Berlin"
 covidUpdateHours = 12
 covidLocationCode = "BE"
 fileHubLocation = os.getenv("HOME").."/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+dotfileLocation = os.getenv("HOME").."/dotfiles/"
 
 --------------------------------------------------------------------------------
 
@@ -115,7 +116,7 @@ end)
 
 --------------------------------------------------------------------------------
 dotfileSyncMenuBar = hs.menubar.new()
-function checkDotfileSyncStatus()
+function updateDotfileSyncStatusMenuBar()
 	local changes, success = hs.execute('git status --short | wc -l | tr -d " "')
 	changes = changes:gsub("\n", "")
 	if tonumber(changes) == 0 or not(success) then
@@ -124,7 +125,9 @@ function checkDotfileSyncStatus()
 	end
 	dotfileSyncMenuBar:setTitle("🔁 "..changes)
 end
--- watcher set in system-and-cron.lua
+dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
+dotfilesWatcher:start()
+-- also updated on reposync-interval
 
 --------------------------------------------------------------------------------
 
