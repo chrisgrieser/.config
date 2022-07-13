@@ -347,7 +347,7 @@ function mainScreenWindows()
 end
 
 function vsplit (mode)
-	local wins = mainScreenWindows()
+	local wins = mainScreenWindows() -- to not split windows on second screen
 
 	local win1 = wins[1]
 	local win2 = wins[2]

@@ -88,9 +88,9 @@ function updateDraftsMenubar()
 	else
 		draftsIcon = "drafts-menubar-black.tiff"
 	end
+	draftsCounterMenuBar:setIcon(draftsIcon, false)
 
 	draftsCounterMenuBar:setTitle(numberOfDrafts)
-	draftsCounterMenuBar:setIcon(draftsIcon, false)
 end
 updateDraftsMenubar()
 
