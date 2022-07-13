@@ -58,14 +58,21 @@ function setDarkmode (toDark)
 	log("Dark Mode: "..darkStr, "$HOME/dotfiles/Cron Jobs/some.log")
 end
 
+-- these watchers aren't super reliable though :(
 function systemShutDown (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemWillSleep or eventType == hs.caffeinate.watcher.systemWillPowerOff or eventType == hs.caffeinate.watcher.screensDidSleep or eventType == hs.caffeinate.watcher.screensDidLock) then return end
 	if not gitDotfileSync:isRunning() then return end
 	gitDotfileSync:start()
-	gitDotfileSync:waitUntilExit() -- block shutdown until done (hopefully... 🥴)
+	gitDotfileSync:waitUntilExit()
 end
 shutDownWatcher = hs.caffeinate.watcher.new(systemShutDown)
 shutDownWatcher:start()
+
+hotkey(hyper, "end", function ()
+	gitDotfileSync:start()
+	gitDotfileSync:waitUntilExit()
+	notify("✅ dotfiles sync")
+end)
 
 function systemWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemDidWake) then return end
