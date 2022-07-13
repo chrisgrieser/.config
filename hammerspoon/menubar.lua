@@ -123,7 +123,7 @@ function updateDotfileSyncStatusMenuBar()
 end
 dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
 dotfilesWatcher:start()
--- also updated on reposync-interval
+-- also updated on gitDotfileSync()
 
 --------------------------------------------------------------------------------
 

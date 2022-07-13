@@ -38,6 +38,20 @@ function isDarkMode()
 	return isDark
 end
 
+function setDarkmode (toDark)
+	local darkStr
+	if toDark then darkStr = "true"
+	else darkStr = "false" end
+	hs.osascript.applescript([[
+		tell application "System Events"
+			tell appearance preferences
+				if (dark mode is not ]]..darkStr..[[) then tell application id "com.runningwithcrayons.Alfred" to run trigger "toggle-dark-mode" in workflow "de.chris-grieser.dark-mode-toggle"
+			end tell
+		end tell
+	]])
+	log("Dark Mode: "..darkStr, "$HOME/dotfiles/Cron Jobs/some.log")
+end
+
 function notify (text)
 	hs.notify.new({title="Hammerspoon", informativeText=text}):send()
 	print("notify: "..text) -- for the console
