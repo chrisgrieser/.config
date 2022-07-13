@@ -33,7 +33,6 @@ repoSyncTimer:start()
 
 function pullsyncCallback(exitCode, _, stdErr)
 	if exitCode == 0 then
-		notify("pull sync ✅")
 		log ("pull sync ("..deviceName()..") ✅", "$HOME/dotfiles/Cron Jobs/sync.log")
 	else
 		notify("⚠️ pull sync "..stdErr)
@@ -69,6 +68,10 @@ shutDownWatcher = hs.caffeinate.watcher.new(systemShutDown)
 shutDownWatcher:start()
 
 hotkey(hyper, "end", function ()
+	if not gitDotfileSync:isRunning() then
+		notify("currently syncing…")
+		return
+	end
 	gitDotfileSync:start()
 	gitDotfileSync:waitUntilExit()
 	notify("✅ dotfiles sync")
