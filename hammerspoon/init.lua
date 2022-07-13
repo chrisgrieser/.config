@@ -26,11 +26,4 @@ require("twitterrific-iina")
 --------------------------------------------------------------------------------
 
 notify("Config reloaded")
-
--- startup tasks
--- -- isRunning() conditions, so quick reloading does cause trouble
--- if not gitDotfileSync:isRunning() then gitDotfileSync:start() end
--- if not pullSync:isRunning() then
--- 	gitDotfileSync:waitUntilExit() -- needed so sync finishes before pull
--- 	pullSync:start()
--- end
+pullSync()
