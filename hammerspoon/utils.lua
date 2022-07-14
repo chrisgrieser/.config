@@ -49,7 +49,7 @@ function setDarkmode (toDark)
 			end tell
 		end tell
 	]])
-	log("Dark Mode: "..darkStr, "$HOME/dotfiles/Cron Jobs/some.log")
+	log("🌒 Dark Mode: "..darkStr.." ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/some.log")
 end
 
 function notify (text)
