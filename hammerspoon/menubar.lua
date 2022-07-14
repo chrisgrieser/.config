@@ -59,7 +59,6 @@ function setCovidBar()
 	local stateName = stateNumbers.data[covidLocationCode].name
 	local state_7D_incidence = math.floor(stateNumbers.data[covidLocationCode].weekIncidence)
 	covidBar:setTooltip(stateName..": "..state_7D_incidence)
-
 end
 covidTimer = hs.timer.doEvery(covidUpdateHours * 60 * 60, setCovidBar)
 covidTimer:start()
@@ -69,11 +68,13 @@ dotfileSyncMenuBar = hs.menubar.new()
 function updateDotfileSyncStatusMenuBar()
 	local changes, success = hs.execute('git status --porcelain | wc -l | tr -d " "')
 	changes = changes:gsub("\n", "")
+
 	if tonumber(changes) == 0 or not(success) then
-		dotfileSyncMenuBar:setTitle("")
-		return
+		dotfileSyncMenuBar:removeFromMenuBar()
+	else
+		dotfileSyncMenuBar:returnToMenuBar()
+		dotfileSyncMenuBar:setTitle("🔁 "..changes)
 	end
-	dotfileSyncMenuBar:setTitle("🔁 "..changes)
 end
 dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
 dotfilesWatcher:start()
@@ -83,21 +84,19 @@ draftsCounterMenuBar = hs.menubar.new()
 function updateDraftsMenubar()
 	local excludeTag1 = "tasklist"
 	local excludeTag2
-	if isIMacAtHome() then
-		excludeTag2 = "office"
-	else
-		excludeTag2 = "home"
-	end
+	if isIMacAtHome() then excludeTag2 = "office"
+	else excludeTag2 = "home" end
 
 	local numberOfDrafts, success = hs.execute("python3 numberOfDrafts.py "..excludeTag1.." "..excludeTag2)
 	numberOfDrafts = numberOfDrafts:gsub("\n", "")
-	if tonumber(numberOfDrafts) == 0 or not(success) then
-		draftsCounterMenuBar:setTitle("")
-		return
-	end
 	numberOfDrafts = "🔷 "..numberOfDrafts
 
-	draftsCounterMenuBar:setTitle(numberOfDrafts)
+	if tonumber(numberOfDrafts) == 0 or not(success) then
+		draftsCounterMenuBar:removeFromMenuBar()
+	else
+		draftsCounterMenuBar:returnToMenuBar()
+		draftsCounterMenuBar:setTitle(numberOfDrafts)
+	end
 end
 
 function draftsWatcher(appName, eventType)
