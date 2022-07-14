@@ -343,6 +343,8 @@ function vsplit (mode)
 
 	resizingWorkaround(WIN_RIGHT, f1)
 	resizingWorkaround(WIN_LEFT, f2)
+	WIN_RIGHT:raise()
+	WIN_LEFT:raise()
 	runDelayed (0.3, function ()
 		if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
 		elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
@@ -354,7 +356,6 @@ function vsplit (mode)
 		WIN_RIGHT = nil
 		WIN_LEFT = nil
 	end
-
 end
 
 function finderVsplit ()
