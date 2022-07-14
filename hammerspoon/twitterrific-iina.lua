@@ -102,6 +102,7 @@ function twitterrificNextToPseudoMax(_, eventType)
 	local max = hs.screen.mainScreen():frame()
 	if (currentWindow:frame().w - pseudoMaximized.w*max.w) < 10 then
 		hs.application("Twitterrific"):mainWindow():raise()
+		notify(currentWindow:frame().w)
 	end
 end
 
