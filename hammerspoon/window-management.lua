@@ -6,34 +6,28 @@ require("private")
 -- WINDOW MOVEMENT
 
 function toggleDraftsSidebar (draftsWin)
-	-- delay to ensure Drafts has already been resized, so width calc is correct
-	runDelayed (0.3, function ()
-		local drafts_w = draftsWin:frame().w
-		local screen_w = draftsWin:screen():frame().w
-		if (drafts_w / screen_w > 0.6) then
-			hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
-		else
-			hs.application("Drafts"):selectMenuItem({"View", "Hide Draft List"})
-		end
-	end)
+	local drafts_w = draftsWin:frame().w
+	local screen_w = draftsWin:screen():frame().w
+	if (drafts_w / screen_w > 0.6) then
+		hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
+	else
+		hs.application("Drafts"):selectMenuItem({"View", "Hide Draft List"})
+	end
 end
 
 -- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
 function toggleObsidianSidebar (obsiWin)
-	-- delay to ensure Obsi has already been resized, so width calc is correct
-	runDelayed (0.2, function ()
-		-- prevent popout window resizing to affect sidebars
-		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
-		if (numberOfObsiWindows > 1) then return end
+	-- prevent popout window resizing to affect sidebars
+	local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
+	if (numberOfObsiWindows > 1) then return end
 
-		local obsi_width = obsiWin:frame().w
-		local screen_width = obsiWin:screen():frame().w
-		if (obsi_width / screen_width > 0.6) then
-			hs.urlevent.openURL("obsidian://sidebar?side=left&show=true")
-		else
-			hs.urlevent.openURL("obsidian://sidebar?side=left&show=false")
-		end
-	end)
+	local obsi_width = obsiWin:frame().w
+	local screen_width = obsiWin:screen():frame().w
+	if (obsi_width / screen_width > 0.6) then
+		hs.urlevent.openURL("obsidian://sidebar?side=left&show=true")
+	else
+		hs.urlevent.openURL("obsidian://sidebar?side=left&show=false")
+	end
 end
 
 function moveAndResize(direction)
@@ -60,10 +54,10 @@ function moveAndResize(direction)
 	resizingWorkaround(win, position)
 
 	if win:application():name() == "Drafts" then
-		runDelayed(0.3, function () toggleDraftsSidebar(win)	end)
+		runDelayed(0.3, function () toggleDraftsSidebar(win) end)
 	end
 	if win:application():name() == "Obsidian" then
-		runDelayed(0.3, function () toggleObsidianSidebar(win)	end)
+		runDelayed(0.3, function () toggleObsidianSidebar(win) end)
 	end
 end
 
@@ -349,10 +343,12 @@ function vsplit (mode)
 
 	resizingWorkaround(WIN_RIGHT, f1)
 	resizingWorkaround(WIN_LEFT, f2)
-	if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
-	elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
-	if WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT)
-	elseif WIN_LEFT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_LEFT) end
+	runDelayed (0.3, function ()
+		if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
+		elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
+		if WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT)
+		elseif WIN_LEFT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_LEFT) end
+	end)
 
 	if mode == "unsplit" then
 		WIN_RIGHT = nil
