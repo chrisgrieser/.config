@@ -44,8 +44,8 @@ ln -sf "$DOTFILE_FOLDER/Sublime Packages/CSS3.sublime-package" ~"/Library/Applic
 
 # Brave
 BROWSER="Brave Browser"
-rm -rf ~"/Applications/$BROWSER Apps.localized"
-ln -sf "$DOTFILE_FOLDER/../$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
+[[ -e ~"/Applications/$BROWSER Apps.localized" ]] && rm -rf ~"/Applications/$BROWSER Apps.localized"
+ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
 
 #-------------------------------------------------------------------------------
 # already set up, no need to run again.
