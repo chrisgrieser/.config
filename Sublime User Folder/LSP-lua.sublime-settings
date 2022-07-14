@@ -12,6 +12,7 @@
 			"appIsRunning",
 			"runDelayed",
 			"frontapp",
+			"pseudoMaximized",
 			"hotkey",
 			"hyper",
 			"deviceName",
