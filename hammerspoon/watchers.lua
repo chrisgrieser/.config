@@ -30,6 +30,7 @@ finderAppWatcher:start()
 function zoomWatcher(appName, eventType)
 	if not(eventType == hs.application.watcher.launched and appName == "zoom.us") then return end
 	hs.osascript.applescript([[
+		delay 2
 		tell application "Brave Browser"
 			set window_list to every window
 			repeat with the_window in window_list
