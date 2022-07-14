@@ -20,10 +20,12 @@ git pull
 git push
 
 # Alfred Repos pullen
-cd "Alfred.alfredpreferences/workflows" || exit 1
-cd "./shimmering-obsidian" || exit 1
-git pull
-cd "../alfred-bibtex-citation-picker" || exit 1
-git pull
-cd "../pdf-annotation-extractor-alfred" || exit 1
-git pull
+if [[ "$1" != "pre-shutdown" ]] ; then
+	cd "Alfred.alfredpreferences/workflows" || exit 1
+	cd "./shimmering-obsidian" || exit 1
+	git pull
+	cd "../alfred-bibtex-citation-picker" || exit 1
+	git pull
+	cd "../pdf-annotation-extractor-alfred" || exit 1
+	git pull
+fi

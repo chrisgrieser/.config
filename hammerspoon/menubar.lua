@@ -64,11 +64,10 @@ end
 covidTimer = hs.timer.doEvery(covidUpdateHours * 60 * 60, setCovidBar)
 covidTimer:start()
 
-
 --------------------------------------------------------------------------------
 dotfileSyncMenuBar = hs.menubar.new()
 function updateDotfileSyncStatusMenuBar()
-	local changes, success = hs.execute('git status --short | wc -l | tr -d " "')
+	local changes, success = hs.execute('git status --porcelain | wc -l | tr -d " "')
 	changes = changes:gsub("\n", "")
 	if tonumber(changes) == 0 or not(success) then
 		dotfileSyncMenuBar:setTitle("")
@@ -96,13 +95,14 @@ function updateDraftsMenubar()
 		return
 	end
 
-	local draftsIcon
-	if isDarkMode() then
-		draftsIcon = "drafts-menubar-white.tiff"
-	else
-		draftsIcon = "drafts-menubar-black.tiff"
-	end
-	draftsCounterMenuBar:setIcon(draftsIcon, false)
+	-- local draftsIcon
+	-- if isDarkMode() then
+	-- 	draftsIcon = "drafts-menubar-white.tiff"
+	-- else
+	-- 	draftsIcon = "drafts-menubar-black.tiff"
+	-- end
+	-- draftsCounterMenuBar:setIcon(draftsIcon, false)
+	numberOfDrafts = "🔷"..numberOfDrafts
 
 	draftsCounterMenuBar:setTitle(numberOfDrafts)
 end
