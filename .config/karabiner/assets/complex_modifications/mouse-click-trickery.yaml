@@ -76,7 +76,7 @@ rules:
               - ^com\.apple\.finder$
               - ^com\.hegenberg\.BetterTouchTool$
               - ^org\.hammerspoon\.Hammerspoon$
-  - description: "🐁 4 (hold): ⇧ for horizontal scroll, (tap): send F13"
+  - description: "🐁 4 (hold): Look up word under cusor, (tap): send F13"
     manipulators:
       - type: basic
         from:
@@ -84,7 +84,10 @@ rules:
         to_if_alone:
           - key_code: f13
         to_if_held_down:
-          - key_code: right_shift
+          - key_code: d
+            modifiers:
+              - command
+              - control
         parameters:
           basic.to_if_alone_timeout_milliseconds: 300
           basic.to_if_held_down_threshold_milliseconds: 300
@@ -101,15 +104,11 @@ rules:
               - command
           - key_code: vk_none
             hold_down_milliseconds: 75
-          - shell_command:
-          # - key_code: d
-          #   modifiers:
-          #     - command
-          #     - control
+          - shell_command: 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
-  - description: "🐁 6 / 1+2 (simultaneously): ⌘↹"
+  - description: "🐁 6: ⌘↹"
     manipulators:
       - type: basic
         from:
@@ -118,14 +117,16 @@ rules:
           - key_code: tab
             modifiers:
               - command
-      - type: basic
-        to:
-          - key_code: tab
-            modifiers:
-              - command
-        from:
-          simultaneous:
-            - pointing_button: button1
-            - pointing_button: button2
-        parameters:
-          basic.simultaneous_threshold_milliseconds: 40
+  # - description: "🐁 1+2 (simultaneously): ⌘↹"
+  #   manipulators:
+  #     - type: basic
+  #       to:
+  #         - key_code: tab
+  #           modifiers:
+  #             - command
+  #       from:
+  #         simultaneous:
+  #           - pointing_button: button1
+  #           - pointing_button: button2
+  #       parameters:
+  #         basic.simultaneous_threshold_milliseconds: 40
