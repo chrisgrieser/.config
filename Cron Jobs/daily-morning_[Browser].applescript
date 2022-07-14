@@ -28,13 +28,5 @@ tell application "System Events"
 	end tell
 end tell
 
-# BUSYCAL RESTART
-# to ensure menubar icon is there
-tell application "Busycal"
-	activate
-	delay 5
-	quit
-end tell
-
 # LOGGING
-do shell script "echo Morning\\ $(date '+%Y-%m-%d %H:%M') >> \"$HOME/dotfiles/Cron Jobs/some.log\""
+do shell script "echo \"Cron Morning $(date '+%Y-%m-%d %H:%M')\" >> \"$HOME/dotfiles/Cron Jobs/some.log\""
