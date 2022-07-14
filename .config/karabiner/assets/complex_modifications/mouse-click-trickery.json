@@ -114,7 +114,7 @@
               "hold_down_milliseconds": 75
             },
             {
-              "shell_command": "tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.plain-text-utilities\""
+              "shell_command": "osascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.plain-text-utilities\"'"
             }
           ],
           "parameters": {
