@@ -10,6 +10,7 @@ alias ..="z .."
 alias ...="z ../.."
 alias ....="z ../../.."
 alias wd='z "$WD"' # working directory
+alias d='z "$DOTFILES_FOLDER"' # working directory
 
 # utils
 alias q='exit'
@@ -20,7 +21,7 @@ alias urlencode='node --eval "console.log(encodeURIComponent(process.argv[1]))"'
 alias t="alacritty-theme-switch"
 
 # colorize by default
-alias grep='grep --color -i' # and case insensitive
+alias grep='grep --color'
 alias ls='ls -G'
 alias diff='diff --color=auto'
 
@@ -45,9 +46,6 @@ alias treee='exa --tree -L3'
 alias treeee='exa --tree -L4'
 alias treeeee='exa --tree -L5'
 alias size="du -sh ./* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
-
-# Global Alias
-alias -g §='| grep --color -i'
 
 # Suffix Aliases
 # = default command to act upon the filetype, when is is entered

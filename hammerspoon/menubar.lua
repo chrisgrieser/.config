@@ -88,13 +88,13 @@ function updateDraftsMenubar()
 	else
 		excludeTag2 = "home"
 	end
+
 	local numberOfDrafts, success = hs.execute("python3 numberOfDrafts.py "..excludeTag1.." "..excludeTag2)
 	numberOfDrafts = numberOfDrafts:gsub("\n", "")
 	if tonumber(numberOfDrafts) == 0 or not(success) then
 		draftsCounterMenuBar:setTitle("")
 		return
 	end
-
 	numberOfDrafts = "🔷 "..numberOfDrafts
 
 	draftsCounterMenuBar:setTitle(numberOfDrafts)
@@ -111,13 +111,6 @@ draftsMenuBarWatcher1 = hs.pathwatcher.new(draftsSqliteLocation, updateDraftsMen
 draftsMenuBarWatcher1:start()
 draftsMenuBarWatcher2 = hs.application.watcher.new(draftsWatcher)
 draftsMenuBarWatcher2:start()
-
--- `hammerspoon://update-drafts-menubar` for Alfred Triggers (incl. Dark Mode Toggle)
-hs.urlevent.bind("update-drafts-menubar",  function()
-	updateDraftsMenubar()
-	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
-end)
-
 
 --------------------------------------------------------------------------------
 

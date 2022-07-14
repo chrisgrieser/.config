@@ -60,12 +60,12 @@ function systemWake (eventType)
 	elseif isAtOffice() then officeModeLayout() end
 
 	-- set darkmode if waking between 6:00 and 19:00
-	local timeHours = hs.timer.localTime() / 60 / 60
-	if timeHours < 19 and timeHours > 6 then
+	local currentTimeHours = hs.timer.localTime() / 60 / 60
+	if currentTimeHours < 19 and currentTimeHours > 6 then
 		setDarkmode(false)
 	end
 	-- get reminders after 6:00
-	if timeHours > 6 then
+	if currentTimeHours > 6 then
 		hs.shortcuts.run("Send Reminders due today to Drafts")
 	end
 

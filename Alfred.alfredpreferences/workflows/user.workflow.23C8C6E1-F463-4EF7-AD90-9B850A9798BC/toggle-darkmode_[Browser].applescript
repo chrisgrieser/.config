@@ -36,7 +36,6 @@ if (BrowserWasntRunning)
 	tell application "Brave Browser" to close active tab of front window
 end if
 
-
 # Make Highlights.app get the same mode as the OS mode (if running)
 tell application "System Events"
 	tell appearance preferences to set isDark to dark mode
@@ -45,8 +44,7 @@ tell application "System Events"
 	else
 		set targetView to "Night"
 	end if
-
-	set highlightsRunning to (name of processes) contains "Highlights"
+	set highlightsRunning (to (name of processes) contains "Highlights")
 	if (highlightsRunning is true) then
 		tell process "Highlights"
 			set frontmost to true
@@ -55,5 +53,5 @@ tell application "System Events"
 	end if
 end tell
 
--- change the color of the menubar icon
-open location "hammerspoon://update-drafts-menubar"
+# Log
+do shell script "echo \"🌒 Dark Mode: manual toggle $(date '+%Y-%m-%d %H:%M')\" >> \"$HOME/dotfiles/Cron Jobs/some.log\""

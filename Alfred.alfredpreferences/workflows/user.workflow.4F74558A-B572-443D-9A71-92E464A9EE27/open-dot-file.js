@@ -20,7 +20,9 @@ const workArray = app.doShellScript (
 	-E ".config/karabiner/assets/complex_modifications/*.json" \
 	-E "FileHistory*.json" \
 	-E "Mac Migration Scripts/to do*" \
-	-E "unused/*"'
+	-E "unused/*" \
+	-E ".DS_Store" \
+	-E ".git/"'
 ).split("\r");
 /* eslint-enable no-multi-str, quotes */
 
