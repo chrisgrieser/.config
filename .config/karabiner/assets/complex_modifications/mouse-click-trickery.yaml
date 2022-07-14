@@ -5,49 +5,6 @@ maintainers:
 import-url: karabiner://karabiner/assets/complex_modifications/import?url=https://github.com/chrisgrieser/dotfiles/blob/main/.config/karabiner/assets/complex_modifications/mouse-click-trickery.json
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
-  - description: "🐁 R (tap): Open link (when in Browser)"
-    manipulators:
-      - type: basic
-        from:
-          pointing_button: button2
-        to_if_held_down:
-          - pointing_button: button2
-        to:
-          - pointing_button: button3
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.vivaldi\.Vivaldi$
-              - ^org\.chromium\.Chromium$
-              - ^com\.google\.Chrome$
-              - ^com\.brave\.Browser$
-              - ^com\.apple\.Safari$
-        parameters:
-          # very short, so mouse gestures requiring held right button still work
-          basic.to_if_held_down_threshold_milliseconds: 30
-      - type: basic
-        from:
-          pointing_button: button2
-        to_if_held_down:
-          - pointing_button: button2
-        to:
-          - pointing_button: button3
-          - key_code: vk_none
-            hold_down_milliseconds: 200
-          - key_code: h
-            modifiers:
-              - command
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              # .+ so that the browser isn't matched, but PWAs are
-              - ^com\.vivaldi\.Vivaldi.+$
-              - ^org\.chromium\.Chromium.+$
-              - ^com\.google\.Chrome.+$
-              - ^com\.brave\.Browser.+$
-        parameters:
-          # very short, so mouse gestures requiring held right button still work
-          basic.to_if_held_down_threshold_milliseconds: 30
   - description: "🐁 3: Quit app"
     manipulators:
       - type: basic
@@ -117,16 +74,16 @@ rules:
           - key_code: tab
             modifiers:
               - command
-  # - description: "🐁 1+2 (simultaneously): ⌘↹"
-  #   manipulators:
-  #     - type: basic
-  #       to:
-  #         - key_code: tab
-  #           modifiers:
-  #             - command
-  #       from:
-  #         simultaneous:
-  #           - pointing_button: button1
-  #           - pointing_button: button2
-  #       parameters:
-  #         basic.simultaneous_threshold_milliseconds: 40
+  - description: "🐁 1+2 (simultaneously): ⌘← (back)"
+    manipulators:
+      - type: basic
+        to:
+          - key_code: left_arrow
+            modifiers:
+              - command
+        from:
+          simultaneous:
+            - pointing_button: button1
+            - pointing_button: button2
+        parameters:
+          basic.simultaneous_threshold_milliseconds: 100
