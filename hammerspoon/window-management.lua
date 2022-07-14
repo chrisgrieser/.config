@@ -70,28 +70,9 @@ end
 function resizingWorkaround(win, pos)
 	-- replaces `win:moveToUnit(pos)`
 
-	local winApp = win:application():name()
-	-- add Applescript-capable apps used to the if-condition below
-	-- if (winApp == "Finder" or winApp == "Brave Browser" or winApp == "BusyCal" or winApp == "Safari") then
-	if (false) then
-		hs.osascript.applescript([[
-			use framework "AppKit"
-			set allFrames to (current application's NSScreen's screens()'s valueForKey:"frame") as list
-			set max_x to item 1 of item 2 of item 1 of allFrames
-			set max_y to item 2 of item 2 of item 1 of allFrames
-			]] ..
-
-			"set x to "..pos.x .." * max_x\n" ..
-			"set y to "..pos.y .." * max_y\n" ..
-			"set w to "..pos.w .." * max_x\n" ..
-			"set h to "..pos.h .." * max_y\n" ..
-			'tell application "'..winApp..'" to set bounds of front window to {x, y, x + w, y + h}'
-		)
-	else
-		win:moveToUnit(pos)
-		-- has to repeat due to bug for some apps... :/
-		hs.timer.delayed.new(0.3, function () win:moveToUnit(pos) end):start()
-	end
+	win:moveToUnit(pos)
+	-- has to repeat due to bug for some apps... :/
+	hs.timer.delayed.new(0.3, function () win:moveToUnit(pos) end):start()
 end
 
 --------------------------------------------------------------------------------
