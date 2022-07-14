@@ -17,9 +17,10 @@ require("menubar")
 require("system-and-cron")
 require("window-management")
 require("filesystem-watchers")
+require("hot-corner-action")
 
 -- app-specific
-require("watchers")
+require("app-watchers")
 require("discord")
 require("twitterrific-iina")
 

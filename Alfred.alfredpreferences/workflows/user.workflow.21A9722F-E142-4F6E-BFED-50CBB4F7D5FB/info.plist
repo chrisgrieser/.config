@@ -47,6 +47,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4EF7790E-0DD8-4D03-B2AF-660B58CCE55A</key>
+		<array/>
 		<key>59B65F8F-3EDB-4000-8F90-1C01AF6BC6A5</key>
 		<array>
 			<dict>
@@ -514,13 +516,13 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>u</string>
+				<string>http:</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Open URL: {query}</string>
+				<string>Open URL: http:{query}</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
@@ -535,13 +537,13 @@
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
-				<false/>
+				<true/>
 				<key>skipvarencode</key>
 				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string></string>
+				<string>http:{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -584,6 +586,8 @@
 		</dict>
 		<key>484AC850-7009-4B8A-9143-F7908712D994</key>
 		<dict>
+			<key>note</key>
+			<string>workaround, so URL opening only happens with "http" at the beginning</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>

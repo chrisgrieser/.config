@@ -15,7 +15,7 @@ tell application "Brave Browser"
 		if (tabcount > 0) then set currentURL to URL of active tab of front window
 
 		if (tabcount is 0 or currentURL starts with "chrome:" or currentURL starts with "vivaldi:")
-			open location "https://example.com/"
+			open location "http://www.blankwebsite.com/"
 			repeat until (loading of active tab of front window is false)
 				delay 0.1
 			end repeat
@@ -44,7 +44,7 @@ tell application "System Events"
 	else
 		set targetView to "Night"
 	end if
-	set highlightsRunning (to (name of processes) contains "Highlights")
+	set highlightsRunning to ((name of processes) contains "Highlights")
 	if (highlightsRunning is true) then
 		tell process "Highlights"
 			set frontmost to true
