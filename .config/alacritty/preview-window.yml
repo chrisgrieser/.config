@@ -25,7 +25,7 @@ cursor:
 window:
   decorations: buttonless
   dimensions:
-    columns: 70
+    columns: 75
   padding:
     x: 20
     'y': 15

@@ -9,13 +9,13 @@ BG_COLOR=#303643
 STATUSLINE_COLOR=#859DC5
 STYLE=paraiso-dark # https://cheat.sh/:styles-demo
 if [[ "$(scutil --get ComputerName)" =~ "Mac mini" ]]; then
-	X=250
+	X=200
 	Y=40
 	LINES=22
 else
-	X=700
-	Y=250
-	LINES=27
+	X=600
+	Y=100
+	LINES=28
 fi
 
 #-------------------------------------------------------------------------------

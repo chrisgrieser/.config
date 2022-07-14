@@ -6,28 +6,34 @@ require("private")
 -- WINDOW MOVEMENT
 
 function toggleDraftsSidebar (draftsWin)
-	local drafts_w = draftsWin:frame().w
-	local screen_w = draftsWin:screen():frame().w
-	if (drafts_w / screen_w > 0.6) then
-		hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
-	else
-		hs.application("Drafts"):selectMenuItem({"View", "Hide Draft List"})
-	end
+	-- delay to ensure Drafts has already been resized, so width calc is correct
+	runDelayed (0.2, function ()
+		local drafts_w = draftsWin:frame().w
+		local screen_w = draftsWin:screen():frame().w
+		if (drafts_w / screen_w > 0.6) then
+			hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
+		else
+			hs.application("Drafts"):selectMenuItem({"View", "Hide Draft List"})
+		end
+	end)
 end
 
 -- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
 function toggleObsidianSidebar (obsiWin)
-	-- prevent popout window resizing to affect sidebars
-	local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
-	if (numberOfObsiWindows > 1) then return end
+	-- delay to ensure Obsi has already been resized, so width calc is correct
+	runDelayed (0.2, function ()
+		-- prevent popout window resizing to affect sidebars
+		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
+		if (numberOfObsiWindows > 1) then return end
 
-	local obsi_width = obsiWin:frame().w
-	local screen_width = obsiWin:screen():frame().w
-	if (obsi_width / screen_width > 0.6) then
-		hs.urlevent.openURL("obsidian://sidebar?side=left&show=true")
-	else
-		hs.urlevent.openURL("obsidian://sidebar?side=left&show=false")
-	end
+		local obsi_width = obsiWin:frame().w
+		local screen_width = obsiWin:screen():frame().w
+		if (obsi_width / screen_width > 0.6) then
+			hs.urlevent.openURL("obsidian://sidebar?side=left&show=true")
+		else
+			hs.urlevent.openURL("obsidian://sidebar?side=left&show=false")
+		end
+	end)
 end
 
 function moveAndResize(direction)
@@ -287,7 +293,13 @@ function mainScreenWindows()
 	return out
 end
 
-splitActive = false
+function pairedActivation(win1, win2)
+	pairedWinWatcher = hs.application.watcher.new(function ()
+
+	end)
+	pairedWinWatcher:start()
+end
+
 function vsplit (mode)
 	local wins = mainScreenWindows()	-- to not split windows on second screen
 
@@ -320,7 +332,7 @@ function vsplit (mode)
 			f2 = hs.layout.left70
 		end
 	elseif mode == "split" then
-		splitActive = true
+		pairedActivation(win1, win2)
 		if (f1.w ~= f2.w or f1.w > 0.7*max.w) then
 			f1 = hs.layout.left50
 			f2 = hs.layout.right50
@@ -329,7 +341,6 @@ function vsplit (mode)
 			f2 = hs.layout.right30
 		end
 	elseif mode == "unsplit" then
-		splitActive = false
 		local layout
 		if isAtOffice() then
 			layout = hs.layout.maximized
@@ -338,21 +349,22 @@ function vsplit (mode)
 		end
 		f1 = layout
 		f2 = layout
+		pairedWinWatcher:stop()
 	end
 
 	resizingWorkaround(win1, f1)
 	resizingWorkaround(win2, f2)
 
 	if win1:application():name() == "Drafts" then
-		runDelayed(0.2, function () toggleDraftsSidebar(win1)	end)
+		toggleDraftsSidebar(win1)
 	elseif win2:application():name() == "Drafts" then
-		runDelayed(0.2, function () toggleDraftsSidebar(win2)	end)
+		toggleDraftsSidebar(win2)
 	end
 
 	if win1:application():name() == "Obsidian" then
-		runDelayed(0.2, function () toggleObsidianSidebar(win1) end)
+		toggleObsidianSidebar(win1)
 	elseif win2:application():name() == "Obsidian" then
-		runDelayed(0.2, function () toggleObsidianSidebar(win2) end)
+		toggleObsidianSidebar(win2)
 	end
 
 end
