@@ -98,6 +98,8 @@ function twitterrificNextToPseudoMax(_, eventType)
 	local currentWindow = hs.window.focusedWindow()
 	if not(currentWindow) then return end
 
+	notify (test)
+
 	if currentWindow:frame() == pseudoMaximized then
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
