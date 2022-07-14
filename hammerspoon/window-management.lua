@@ -121,7 +121,9 @@ function homeModeLayout ()
 	openIfNotRunning("Brave Browser")
 	openIfNotRunning("Obsidian")
 	openIfNotRunning("Twitterrific")
-	openIfNotRunning("Drafts")
+	-- open Discord in OMG Server (redundancy to the discord launch, in case
+	-- Discord launched while Hammerspoon wasn't active yet)
+	hs.urlevent.openURL("discord://discord.com/channels/686053708261228577/700466324840775831")
 
 	killIfRunning("YouTube")
 	killIfRunning("Netflix")
@@ -174,6 +176,8 @@ function officeModeLayout ()
 	openIfNotRunning("Obsidian")
 	openIfNotRunning("Twitterrific")
 	openIfNotRunning("Drafts")
+	-- open Discord in OMG Server (redundancy to the discord launch, in case
+	-- Discord launched while Hammerspoon wasn't active yet)
 	hs.urlevent.openURL("discord://discord.com/channels/686053708261228577/700466324840775831")
 
 	local maximized = hs.layout.maximized
@@ -283,6 +287,7 @@ function mainScreenWindows()
 	return out
 end
 
+splitActive = false
 function vsplit (mode)
 	local wins = mainScreenWindows()	-- to not split windows on second screen
 
@@ -315,6 +320,7 @@ function vsplit (mode)
 			f2 = hs.layout.left70
 		end
 	elseif mode == "split" then
+		splitActive = true
 		if (f1.w ~= f2.w or f1.w > 0.7*max.w) then
 			f1 = hs.layout.left50
 			f2 = hs.layout.right50
@@ -323,6 +329,7 @@ function vsplit (mode)
 			f2 = hs.layout.right30
 		end
 	elseif mode == "unsplit" then
+		splitActive = false
 		local layout
 		if isAtOffice() then
 			layout = hs.layout.maximized
