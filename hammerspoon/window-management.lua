@@ -301,6 +301,7 @@ function pairedActivation(start)
 		pairedWinWatcher = hs.application.watcher.new(function (_, eventType)
 			if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.deactivated) then return end
 			local currentWin = hs.window.focusedWindow()
+			if not(currentWin) then return end
 			if currentWin:id() == WIN_RIGHT:id() then
 				WIN_LEFT:raise() -- not using :focus(), since that causes infinite recursion
 			elseif currentWin:id() == WIN_LEFT:id() then
