@@ -90,13 +90,12 @@ function updateDraftsMenubar()
 
 	local numberOfDrafts, success = hs.execute("python3 numberOfDrafts.py "..excludeTag1.." "..excludeTag2)
 	numberOfDrafts = numberOfDrafts:gsub("\n", "")
-	numberOfDrafts = "🔷 "..numberOfDrafts
 
 	if tonumber(numberOfDrafts) == 0 or not(success) then
 		draftsCounterMenuBar:removeFromMenuBar()
 	else
 		draftsCounterMenuBar:returnToMenuBar()
-		draftsCounterMenuBar:setTitle(numberOfDrafts)
+		draftsCounterMenuBar:setTitle("🔷 "..numberOfDrafts)
 	end
 end
 
