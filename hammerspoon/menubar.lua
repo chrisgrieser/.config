@@ -95,14 +95,7 @@ function updateDraftsMenubar()
 		return
 	end
 
-	-- local draftsIcon
-	-- if isDarkMode() then
-	-- 	draftsIcon = "drafts-menubar-white.tiff"
-	-- else
-	-- 	draftsIcon = "drafts-menubar-black.tiff"
-	-- end
-	-- draftsCounterMenuBar:setIcon(draftsIcon, false)
-	numberOfDrafts = "🔷"..numberOfDrafts
+	numberOfDrafts = "🔷 "..numberOfDrafts
 
 	draftsCounterMenuBar:setTitle(numberOfDrafts)
 end
