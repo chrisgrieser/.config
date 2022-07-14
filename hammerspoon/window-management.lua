@@ -267,7 +267,7 @@ function mainScreenWindows()
 	local mainScreen = hs.screen.mainScreen()
 
 	for i = 1, #winArr do
-		if winArr[i]:screen() == mainScreen then
+		if winArr[i]:screen() == mainScreen and winArr[i]:isStandard() then
 			out[j] = winArr[i]
 			j = j+1
 		end
@@ -280,13 +280,20 @@ splitStatusMenubar = hs.menubar.new()
 function pairedActivation(start)
 	if start then
 		pairedWinWatcher = hs.application.watcher.new(function (_, eventType)
-			if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.deactivated) then return end
 			local currentWin = hs.window.focusedWindow()
 			if not(currentWin) then return end
-			if currentWin:id() == WIN_RIGHT:id() then
-				WIN_LEFT:raise() -- not using :focus(), since that causes infinite recursion
-			elseif currentWin:id() == WIN_LEFT:id() then
-				WIN_RIGHT:raise()
+			if eventType == hs.application.watcher.activated then
+				if currentWin:id() == WIN_RIGHT:id() then
+					WIN_LEFT:raise() -- not using :focus(), since that causes infinite recursion
+				elseif currentWin:id() == WIN_LEFT:id() then
+					WIN_RIGHT:raise()
+				end
+			elseif eventType == hs.application.watcher.deactivated then
+				if currentWin:id() == WIN_RIGHT:id() then
+					WIN_LEFT:sendToBack()
+				elseif currentWin:id() == WIN_LEFT:id() then
+					WIN_RIGHT:sendToBack()
+				end
 			end
 		end)
 		pairedWinWatcher:start()
@@ -330,9 +337,6 @@ function vsplit (mode)
 		end
 	elseif mode == "unsplit" then
 		pairedActivation(false)
-		WIN_RIGHT = nil
-		WIN_LEFT = nil
-
 		local layout
 		if isAtOffice() then layout = hs.layout.maximized
 		else layout = {x=0, y=0, w=0.815, h=1} end -- pseudo-maximized
@@ -350,11 +354,16 @@ function vsplit (mode)
 
 	resizingWorkaround(WIN_RIGHT, f1)
 	resizingWorkaround(WIN_LEFT, f2)
-
 	if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
 	elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
 	if WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT)
 	elseif WIN_LEFT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_LEFT) end
+
+	if mode == "unsplit" then
+		WIN_RIGHT = nil
+		WIN_LEFT = nil
+	end
+
 end
 
 function finderVsplit ()
