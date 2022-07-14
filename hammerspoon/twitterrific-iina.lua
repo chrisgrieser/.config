@@ -100,7 +100,7 @@ function twitterrificNextToPseudoMax(_, eventType)
 
 	notify ("test")
 
-	if currentWindow:frame() == pseudoMaximized then
+	if currentWindow:frame().w == pseudoMaximized.w then
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end
