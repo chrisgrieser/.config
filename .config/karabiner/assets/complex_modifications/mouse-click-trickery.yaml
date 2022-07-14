@@ -61,7 +61,8 @@ rules:
               - command
           - key_code: vk_none
             hold_down_milliseconds: 75
-          - shell_command: 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
+          - shell_command:
+              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
