@@ -105,7 +105,7 @@ function twitterrificNextToPseudoMax(_, eventType)
 end
 
 anyAppActivationWatcher = hs.application.watcher.new(twitterrificNextToPseudoMax)
--- anyAppActivationWatcher:start()
+anyAppActivationWatcher:start()
 
 
 --------------------------------------------------------------------------------

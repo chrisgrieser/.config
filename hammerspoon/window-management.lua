@@ -7,7 +7,7 @@ require("private")
 
 function toggleDraftsSidebar (draftsWin)
 	-- delay to ensure Drafts has already been resized, so width calc is correct
-	runDelayed (0.2, function ()
+	runDelayed (0.3, function ()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
 		if (drafts_w / screen_w > 0.6) then
