@@ -280,21 +280,20 @@ splitStatusMenubar = hs.menubar.new()
 function pairedActivation(start)
 	if start then
 		pairedWinWatcher = hs.application.watcher.new(function (_, eventType)
-			local currentWin = hs.window.focusedWindow()
-			if not(currentWin) then return end
-			if eventType == hs.application.watcher.activated then
-				if currentWin:id() == WIN_RIGHT:id() then
-					WIN_LEFT:raise() -- not using :focus(), since that causes infinite recursion
-				elseif currentWin:id() == WIN_LEFT:id() then
-					WIN_RIGHT:raise()
-				end
-			elseif eventType == hs.application.watcher.deactivated then
-				if currentWin:id() == WIN_RIGHT:id() then
-					WIN_LEFT:sendToBack()
-				elseif currentWin:id() == WIN_LEFT:id() then
-					WIN_RIGHT:sendToBack()
-				end
+			if not(hs.window.focusedWindow()) then return end
+			if not(eventType == hs.application.watcher.activated) then return end
+
+			currentId = hs.window.focusedWindow():id()
+
+			if currentId == WIN_RIGHT:id() then
+				WIN_LEFT:raise() -- not using :focus(), since that causes infinite recursion
+			elseif currentId == WIN_LEFT:id() then
+				WIN_RIGHT:raise()
+			else
+				WIN_LEFT:sendToBack()
+				WIN_RIGHT:sendToBack()
 			end
+
 		end)
 		pairedWinWatcher:start()
 		splitStatusMenubar:returnToMenuBar()
