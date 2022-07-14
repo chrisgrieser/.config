@@ -97,6 +97,7 @@ function twitterrificNextToPseudoMax(_, eventType)
 	if not(eventType == hs.application.watcher.activated) then return end
 	local currentWindow = hs.window.focusedWindow()
 	if not(currentWindow) then return end
+	if (WIN_LEFT == currentWindow) or (WIN_RIGHT == currentWindow) then return end
 
 	local max = hs.screen.mainScreen():frame()
 	if currentWindow:frame().w - pseudoMaximized.w*max.w < 10 then
