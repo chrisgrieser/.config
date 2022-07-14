@@ -300,7 +300,7 @@ end
 
 function vsplit (mode)
 	if not WIN_RIGHT and (mode == "switch" or mode == "unsplit") then
-		notify ("No split active.")
+		notify ("No split active")
 		return
 	end
 
@@ -320,7 +320,7 @@ function vsplit (mode)
 
 	if mode == "split" then
 		pairedActivation(true)
-		local max = hs.screen.mainWindow():frame()
+		local max = hs.screen.mainScreen():frame()
 		if (f1.w ~= f2.w or f1.w > 0.7*max.w) then
 			f1 = hs.layout.left50
 			f2 = hs.layout.right50
