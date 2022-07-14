@@ -301,10 +301,10 @@ function pairedActivation(start)
 		pairedWinWatcher = hs.application.watcher.new(function (_, eventType)
 			if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.deactivated) then return end
 			local currentWin = hs.window.focusedWindow()
-			if currentWin:id() == WIN_ONE:id() then
-				WIN_TWO:raise() -- not using :focus(), since that causes infinite recursion
-			elseif currentWin:id() == WIN_TWO:id() then
-				WIN_ONE:raise()
+			if currentWin:id() == WIN_RIGHT:id() then
+				WIN_LEFT:raise() -- not using :focus(), since that causes infinite recursion
+			elseif currentWin:id() == WIN_LEFT:id() then
+				WIN_RIGHT:raise()
 			end
 		end)
 		pairedWinWatcher:start()
@@ -317,30 +317,28 @@ function pairedActivation(start)
 end
 
 function vsplit (mode)
-	if not WIN_ONE and (mode == "switch" or mode == "unsplit") then
+	if not WIN_RIGHT and (mode == "switch" or mode == "unsplit") then
 		notify ("No split active.")
 		return
 	end
 
 	if mode == "split" then
 		local wins = mainScreenWindows()	-- to not split windows on second screen
-		WIN_ONE = wins[1] -- save in global variables, so they are not garbage-collected
-		WIN_TWO = wins[2]
+		WIN_RIGHT = wins[1] -- save in global variables, so they are not garbage-collected
+		WIN_LEFT = wins[2]
 	end
 
-	local f1 = WIN_ONE:frame()
-	local f2 = WIN_TWO:frame()
-	local max = win1:screen():frame()
-	if (f1.x > f2.x) then -- ensure that win1 is to the right
-		local temp = win1
-		win1 = win2
-		win2 = temp
-		f1 = win1:frame()
-		f2 = win2:frame()
+	if (WIN_RIGHT:frame().x > WIN_LEFT:frame().x) then -- ensure that WIN_RIGHT is really the right
+		local temp = WIN_RIGHT
+		WIN_RIGHT = WIN_LEFT
+		WIN_LEFT = temp
 	end
+	local f1 = WIN_RIGHT:frame()
+	local f2 = WIN_LEFT:frame()
 
 	if mode == "split" then
 		pairedActivation(true)
+		local max = hs.screen.mainWindow():frame()
 		if (f1.w ~= f2.w or f1.w > 0.7*max.w) then
 			f1 = hs.layout.left50
 			f2 = hs.layout.right50
@@ -350,8 +348,8 @@ function vsplit (mode)
 		end
 	elseif mode == "unsplit" then
 		pairedActivation(false)
-		WIN_ONE = nil
-		WIN_TWO = nil
+		WIN_RIGHT = nil
+		WIN_LEFT = nil
 
 		local layout
 		if isAtOffice() then layout = hs.layout.maximized
@@ -368,13 +366,13 @@ function vsplit (mode)
 		end
 	end
 
-	resizingWorkaround(win1, f1)
-	resizingWorkaround(win2, f2)
+	resizingWorkaround(WIN_RIGHT, f1)
+	resizingWorkaround(WIN_RIGHT, f2)
 
-	if win1:application():name() == "Drafts" then toggleDraftsSidebar(win1)
-	elseif win2:application():name() == "Drafts" then toggleDraftsSidebar(win2) end
-	if win1:application():name() == "Obsidian" then toggleObsidianSidebar(win1)
-	elseif win2:application():name() == "Obsidian" then toggleObsidianSidebar(win2) end
+	if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
+	elseif WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT) end
+	if WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT)
+	elseif WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT) end
 end
 
 function finderVsplit ()

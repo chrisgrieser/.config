@@ -122,7 +122,7 @@ function setFileHubCountMenuBar()
 		fileHubCountMenuBar:removeFromMenuBar()
 	else
 		fileHubCountMenuBar:returnToMenuBar()
-		fileHubCountMenuBar:setTitle("📂 "..changes)
+		fileHubCountMenuBar:setTitle("📂 "..numberOfFiles)
 	end
 end
 setFileHubCountMenuBar()
