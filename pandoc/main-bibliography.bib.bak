@@ -17838,7 +17838,7 @@
 	publisher = {Campus Verlag},
 	pages = {61--100},
 	editor = {Rammert, Werner and Schubert, Cornelius},
-	keywords = {Techniksoziologie,Innovationssoziologie,ANT,Erkenntnistheorie,Interaktion,Kognitionswissenschaft,Kooperation,Lehrforschungsprojekt,Mikrosoziologie: Technik und Interaktion,Repr{\"a}sentationen,Schiff,Technikbegriff,Techniksoziologie,Technikvergessenheit,Verteilte Kognition,Wissens{\"u}berlappung}
+	keywords = {Synchronisation,Zeit,Kognition,Kooperation,Technikbegriff,Techniksoziologie,Technikvergessenheit,Verteilte Kognition,Wissens{\"u}berlappung}
 }
 @article{Hutchins2011,
 	title = {The {{Acceleration}} of {{Media Sport Culture}}},
@@ -26404,25 +26404,6 @@
 	editor = {Selke, Stefan},
 	keywords = {Armut,Non-Profit Organisationen,Obdachlose,Parallelgesellschaft,strukturelle Abh{\"a}ngigkeit}
 }
-@article{Monbiot2014,
-	title = {Interstellar: Magnificent Film, Insane Fantasy},
-	author = {Monbiot, George},
-	year = {2014-11-11t19:47gmt},
-	journal = {The Guardian},
-	url = {http://www.theguardian.com/commentisfree/2014/nov/11/interstellar-insane-fantasy-abandoning-earth-political-defeatism},
-	entrysubtype = {newspaper},
-	journalsubtitle = {Comment is free}
-}
-@book{Mooney2009,
-	title = {({{Not}}) {{Keeping Up}} with {{Our Parents}}: {{The Decline}} of the {{Professional Middle Class}}},
-	author = {Mooney, Nan},
-	year = 2009,
-	location = {Boston},
-	publisher = {Beacon Press},
-	isbn = {978-0-8070-1139-3},
-	edition = {Reprint edition},
-	keywords = {BIldungssoziologie,Mittelschicht}
-}
 @article{Moore1965,
 	title = {Cramming More Components onto Integrated Circuits},
 	author = {Moore, Gordon E.},
@@ -26435,7 +26416,7 @@
 @article{Moore1993,
 	title = {Predators and Prey: A New Ecology of Competition},
 	author = {Moore, J. F.},
-	year = {1993 May-Jun},
+	year = {1993},
 	journal = {Harvard Business Review},
 	volume = 71,
 	number = 3,
@@ -40499,7 +40480,6 @@
 	url = {https://doi.org/10.5210/fm.v27i4.12571},
 	keywords = {Corona, Wissenschaftssoziologie}
 }
-%% für das Algo Paper (Start)
 @article{LogueGrimes2022,
 	title = {Living up to the Hype: How New Ventures Manage the Resource and Liability of Future-Oriented Visions within the Nascent Market of Impact Investing},
 	author = {Danielle Logue and Matthew G. Grimes},
@@ -40507,9 +40487,13 @@
 	journal = {Academy of Management Journal},
 	publisher = {Academy of Management},
 	doi = {10.5465/amj.2020.1583},
+	pages = {1055–-1082},
+	volume = {65},
+	number = {3},
 	url = {https://doi.org/10.5465/amj.2020.1583},
-	keywords = {hype, Zukunft, Erwartung}
+	keywords = {hype, Zukunft, Erwartung, Wirtschaftssoziologie, Silicon Valley, StartUps}
 }
+%% für das Algo Paper (Start)
 @report{LKANRW2018,
 	title = {Projekt {{SKALA}}. {{Abschlussbericht}}},
 	author = {Lka Nrw},
@@ -40577,7 +40561,7 @@
 	keywords = {},
 	journal = {Research Policy}
 }
-@article{DrewLaniSeibt2018,
+@article{DrewlaniSeibt2018,
 	title={Configuring the independent developer},
 	author={Drewlani, Tobias and Seibt, David},
 	journal={Journal of Peer Production},
@@ -40585,3 +40569,25 @@
 	pages={96--114},
 	year=2018
 }
+@incollection{AlbertEtAl2010,
+	author={Mills, Albert, and Durepos, Gabrielle and Wiebe, Elden},
+	doi = {10.4135/9781412957397.n142},
+	url = {http://dx.doi.org/10.4135/9781412957397.n142},
+	year = 2010,
+	publisher = {{SAGE} Publications, Inc.},
+	keywords = {qualitative-Methode, Fallauswahl},
+	title = {Extreme Cases},
+	booktitle = {Encyclopedia of Case Study Research}
+}
+
+@book{Patton2015,
+	author = {Patton, Michael Quinn},
+	title = {Qualitative Research & Evaluation Methods},
+	publisher = {Sage},
+	year = {2015},
+	isbn = {1412972124},
+	keywords = {Qualitative-Methoden},
+	edition = {4},
+	url = {https://us.sagepub.com/en-us/nam/qualitative-research-evaluation-methods/book232962}
+}
+
