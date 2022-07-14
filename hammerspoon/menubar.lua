@@ -8,6 +8,7 @@ function reloadAllMenubarItems ()
 	setCovidBar()
 	updateDotfileSyncStatusMenuBar()
 	updateDraftsMenubar()
+	setFileHubCountMenuBar()
 end
 
 weatherUpdateMin = 15
@@ -89,7 +90,7 @@ function updateDraftsMenubar()
 
 	local numberOfDrafts, success = hs.execute("python3 numberOfDrafts.py "..excludeTag1.." "..excludeTag2)
 	numberOfDrafts = numberOfDrafts:gsub("\n", "")
-	numberOfDrafts = "🔷 "..numberOfDrafts
+	numberOfDrafts = "📘 "..numberOfDrafts
 
 	if tonumber(numberOfDrafts) == 0 or not(success) then
 		draftsCounterMenuBar:removeFromMenuBar()
@@ -113,21 +114,23 @@ draftsMenuBarWatcher2:start()
 
 --------------------------------------------------------------------------------
 
--- fileHubCountMenuBar = hs.menubar.new()
--- function setFileHubCountMenuBar()
--- 	local numberOfFiles, success = hs.execute('ls "'..fileHubLocation..'" | wc -l | tr -d " "')
--- 	numberOfFiles = numberOfFiles:gsub("\n", "")
--- 	if tonumber(numberOfFiles) == 0 or not(success) then
--- 		fileHubCountMenuBar:setTitle("")
--- 		return
--- 	end
--- 	fileHubCountMenuBar:setTitle("📂 "..numberOfFiles)
--- end
--- setFileHubCountMenuBar()
+fileHubCountMenuBar = hs.menubar.new()
+function setFileHubCountMenuBar()
+	local numberOfFiles, success = hs.execute('ls "'..fileHubLocation..'" | wc -l | tr -d " "')
+	numberOfFiles = numberOfFiles:gsub("\n", "")
 
--- -- update when folder changes
--- fileHubMenuBarWatcher = hs.pathwatcher.new(fileHubLocation, setFileHubCountMenuBar)
--- fileHubMenuBarWatcher:start()
+	if tonumber(numberOfFiles) == 0 or not(success) then
+		fileHubCountMenuBar:removeFromMenuBar()
+	else
+		fileHubCountMenuBar:returnToMenuBar()
+		fileHubCountMenuBar:setTitle("📂 "..changes)
+	end
+end
+setFileHubCountMenuBar()
+
+-- update when folder changes
+fileHubMenuBarWatcher = hs.pathwatcher.new(fileHubLocation, setFileHubCountMenuBar)
+fileHubMenuBarWatcher:start()
 
 --------------------------------------------------------------------------------
 -- obsidianStatusBar = hs.menubar.new()
