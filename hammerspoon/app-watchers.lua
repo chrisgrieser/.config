@@ -24,13 +24,8 @@ function finderWatcher(appName, eventType, appObject)
 		finderWin:setSize({w = target_w, h = target_h})
 	end
 
-	hs.osascript.applescript([[
-		tell application "Finder"
-			if (count of window) is 0
-				tell application "System Events" to tell process "Finder" to set visible to false
-			end if
-		end tell
-	]])
+	local hasNoWindows = #(appObject:allWindows()) == 0
+	if hasNoWindows then appObject:hide() end
 end
 finderAppWatcher = hs.application.watcher.new(finderWatcher)
 finderAppWatcher:start()
@@ -97,16 +92,10 @@ draftsWatcher3 = hs.application.watcher.new(draftsLaunchWake)
 draftsWatcher3:start()
 
 -- BRAVE: Hide when no window on activation
-function braveActivation(appName, eventType)
+function braveActivation(appName, eventType, appObject)
 	if not(appName == "Brave Browser" and eventType == hs.application.watcher.activated) then return end
-
-	hs.osascript.applescript([[
-		tell application "Brave Browser"
-			if (count of window) is 0
-				tell application "System Events" to tell process "Brave Browser" to set visible to false
-			end if
-		end tell
-	]])
+	local hasNoWindows = #(appObject:allWindows()) == 0
+	if hasNoWindows then appObject:hide() end
 end
 braveWatcher = hs.application.watcher.new(braveActivation)
 braveWatcher:start()
