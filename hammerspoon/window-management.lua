@@ -49,7 +49,7 @@ function moveAndResize(direction)
 	elseif (direction == "down") then
 		position = {x=0, y=0.5, w=1, h=0.5}
 	elseif (direction == "pseudo-maximized") then
-		position = {x=0, y=0, w=0.815, h=1}
+		position = pseudoMaximized
 	elseif (direction == "maximized") then
 		position = hs.layout.maximized
 	elseif (direction == "centered") then
@@ -99,7 +99,6 @@ end
 function homeModeLayout ()
 	if not(isIMacAtHome()) then return end
 
-	local pseudoMaximized = {x=0, y=0, w=0.815, h=1}
 	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
 
 	openIfNotRunning("Mimestream")
@@ -335,7 +334,7 @@ function vsplit (mode)
 		pairedActivation(false)
 		local layout
 		if isAtOffice() then layout = hs.layout.maximized
-		else layout = {x=0, y=0, w=0.815, h=1} end -- pseudo-maximized
+		else layout = pseudoMaximized end
 		f1 = layout
 		f2 = layout
 	elseif mode == "switch" then
