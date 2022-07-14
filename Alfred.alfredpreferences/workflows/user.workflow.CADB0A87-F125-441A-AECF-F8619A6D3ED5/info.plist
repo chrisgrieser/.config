@@ -73,6 +73,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B76661AC-FCA1-4DCA-9E9B-9B1A812210D4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>18FD51AD-4411-49F6-938D-CDB1ACE1E070</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>FFB0D0F8-D135-4B2E-A306-54E5C2268D38</key>
 		<array>
 			<dict>
@@ -97,6 +110,41 @@
 	<string>Mousekey Remapping</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>106</integer>
+				<key>hotmod</key>
+				<integer>8388608</integer>
+				<key>hotstring</key>
+				<string>F16</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>5D57E096-989E-472D-97A9-4C0D0058DCB3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -130,6 +178,27 @@ end alfred_script</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>→</string>
+				<key>keycode</key>
+				<integer>124</integer>
+				<key>keymod</key>
+				<integer>12058624</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>18FD51AD-4411-49F6-938D-CDB1ACE1E070</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -139,18 +208,18 @@ end alfred_script</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>106</integer>
+				<integer>105</integer>
 				<key>hotmod</key>
 				<integer>8388608</integer>
 				<key>hotstring</key>
-				<string>F16</string>
+				<string>F13</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.apple.finder</string>
+					<string>com.brave.Browser</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -158,7 +227,7 @@ end alfred_script</string>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>5D57E096-989E-472D-97A9-4C0D0058DCB3</string>
+			<string>B76661AC-FCA1-4DCA-9E9B-9B1A812210D4</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -238,6 +307,27 @@ end alfred_script</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>→</string>
+				<key>keycode</key>
+				<integer>124</integer>
+				<key>keymod</key>
+				<integer>12058624</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>E27C16A0-4853-4EFD-8BE3-6071AD862B4F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -273,27 +363,6 @@ end alfred_script</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>→</string>
-				<key>keycode</key>
-				<integer>124</integer>
-				<key>keymod</key>
-				<integer>12058624</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>E27C16A0-4853-4EFD-8BE3-6071AD862B4F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -303,11 +372,11 @@ end alfred_script</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>106</integer>
+				<integer>105</integer>
 				<key>hotmod</key>
 				<integer>8388608</integer>
 				<key>hotstring</key>
-				<string>F16</string>
+				<string>F13</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -322,7 +391,7 @@ end alfred_script</string>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>1E26E0EC-403C-4C10-80A4-BAE73726E9C7</string>
+			<string>9F7321C0-2B4E-45C7-BAC6-FA78E1345869</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -359,11 +428,11 @@ end alfred_script</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>105</integer>
+				<integer>106</integer>
 				<key>hotmod</key>
 				<integer>8388608</integer>
 				<key>hotstring</key>
-				<string>F13</string>
+				<string>F16</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -378,7 +447,7 @@ end alfred_script</string>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>9F7321C0-2B4E-45C7-BAC6-FA78E1345869</string>
+			<string>1E26E0EC-403C-4C10-80A4-BAE73726E9C7</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -485,6 +554,17 @@ end alfred_script</string>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
+		<key>18FD51AD-4411-49F6-938D-CDB1ACE1E070</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>Cycle through</string>
+			<key>xpos</key>
+			<real>575</real>
+			<key>ypos</key>
+			<real>145</real>
+		</dict>
 		<key>1C3D78DC-489D-4E04-B780-4B301F7BF529</key>
 		<dict>
 			<key>colorindex</key>
@@ -564,6 +644,15 @@ end alfred_script</string>
 			<real>505</real>
 			<key>ypos</key>
 			<real>290</real>
+		</dict>
+		<key>B76661AC-FCA1-4DCA-9E9B-9B1A812210D4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>390</real>
+			<key>ypos</key>
+			<real>145</real>
 		</dict>
 		<key>E27C16A0-4853-4EFD-8BE3-6071AD862B4F</key>
 		<dict>
