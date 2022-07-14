@@ -4,6 +4,7 @@ require("utils")
 -- - Bring all windows forward
 -- - hide sidebar
 -- - enlarge window if it's too small
+-- - hide Finder when no window
 function finderWatcher(appName, eventType, appObject)
 	if not(eventType == hs.application.watcher.activated and appName == "Finder") then return end
 
@@ -22,6 +23,14 @@ function finderWatcher(appName, eventType, appObject)
 	if (win_h / max_h) < 0.7 then
 		finderWin:setSize({w = target_w, h = target_h})
 	end
+
+	hs.osascript.applescript([[
+		tell application "Finder"
+			if (count of window) is 0
+				tell application "System Events" to tell process "Finder" to set visible to false
+			end if
+		end tell
+	]])
 end
 finderAppWatcher = hs.application.watcher.new(finderWatcher)
 finderAppWatcher:start()
@@ -72,20 +81,6 @@ end
 highlightsAppWatcher = hs.application.watcher.new(highlightsWatcher)
 highlightsAppWatcher:start()
 
--- HOT CORNER Use "Quick Note" as Pseudo Hot Corner Action
--- to trigger something else instead
-function hotcornerWatcher(appName, eventType)
-	if (eventType == hs.application.watcher.activated) then
-		if (appName == "Notes") then
-			hs.application("Notes"):kill9()
-			hs.shortcuts.run("Keyboard on-screen")
-		end
-	end
-end
-hotcornerEmulation = hs.application.watcher.new(hotcornerWatcher)
-hotcornerEmulation:start()
-
-
 -- DRAFTS: Hide Toolbar on launch
 function draftsLaunchWake(appName, eventType, appObject)
 	if not(appName == "Drafts") then return end
@@ -100,3 +95,18 @@ function draftsLaunchWake(appName, eventType, appObject)
 end
 draftsWatcher3 = hs.application.watcher.new(draftsLaunchWake)
 draftsWatcher3:start()
+
+-- BRAVE: Hide when no window on activation
+function braveActivation(appName, eventType)
+	if not(appName == "Brave Browser" and eventType == hs.application.watcher.activated) then return end
+
+	hs.osascript.applescript([[
+		tell application "Brave Browser"
+			if (count of window) is 0
+				tell application "System Events" to tell process "Brave Browser" to set visible to false
+			end if
+		end tell
+	]])
+end
+braveWatcher = hs.application.watcher.new(braveActivation)
+braveWatcher:start()

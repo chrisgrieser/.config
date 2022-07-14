@@ -55,13 +55,11 @@ vnoremap J 7j
 nnoremap K 7k
 vnoremap K 7k
 
-" gA and gI analog
-nnoremap gA g$a
-nnoremap gI g^i
-
 " cause easier to press, lol
 nnoremap [ {
 nnoremap ] }
+vnoremap [ {
+vnoremap ] }
 
 " Goto Mark
 nnoremap ä `
