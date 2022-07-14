@@ -290,8 +290,7 @@ function pairedActivation(start)
 			elseif currentId == WIN_LEFT:id() then
 				WIN_RIGHT:raise()
 			else
-				WIN_LEFT:sendToBack()
-				WIN_RIGHT:sendToBack()
+				if isIMacAtHome() then hs.application("Twitterrific"):mainWindow():raise() end
 			end
 
 		end)
