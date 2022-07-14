@@ -294,8 +294,17 @@ function mainScreenWindows()
 end
 
 function pairedActivation(win1, win2)
-	pairedWinWatcher = hs.application.watcher.new(function ()
-
+	-- save in global variables, so they are not garbage-collected
+	WIN_ONE = win1
+	WIN_TWO = win2
+	pairedWinWatcher = hs.application.watcher.new(function (_, eventType)
+		if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.deactivated) then return end
+		local currentWin = hs.window.focusedWindow()
+		if currentWin:id() == WIN_ONE:id() then
+			WIN_TWO:focus()
+		elseif currentWin:id() == WIN_TWO:id() then
+			WIN_ONE:focus()
+		end
 	end)
 	pairedWinWatcher:start()
 end
