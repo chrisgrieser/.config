@@ -97,6 +97,19 @@
 		</array>
 		<key>C3A574FB-D0D4-49BC-A318-14715CAA6854</key>
 		<array/>
+		<key>E2E50A21-55EC-48F7-80FB-047931E107C6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4FD1CE6A-A995-4691-94F1-99CEE25277B3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -111,29 +124,33 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>var input = "{query}";
-var zoomURL = input.replace (/https?:\/\/.*\.zoom\.us\/j\/(\w+)\?pwd=(\w+)$/,"zoommtg://zoom.us/join?confno=$1&amp;amp;pwd=$2");
-Zoom = Application("/Applications/zoom.us.app");
-Zoom.includeStandardAdditions = true;
-Zoom.openLocation(zoomURL);</string>
-				<key>scriptargtype</key>
+				<key>argumenttrimmode</key>
 				<integer>0</integer>
-				<key>scriptfile</key>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"Sprechstunden Chris","arg":"https:\/\/tu-berlin.zoom.us\/j\/99415959096?pwd=VFFETk91U0E5UDdKSVNzUTBkNWZwdz09;drafts","subtitle":"+ Drafts"},{"title":"Personal Room","arg":"https:\/\/tu-berlin.zoom.us\/j\/7855484257?pwd=cjY5eDhyVEI5Zk9EcnVPMHpJUSs2Zz09;none"},{"title":"🔐 Login","arg":"login"},{"title":"Einführung Technikforschung","arg":"https:\/\/tu-berlin.zoom.us\/j\/65299324579?pwd=NzgwSFNtTUxVa21HS0pKNndvQ3lJUT09;obsidian:\/\/open?vault=Main%20Vault&amp;file=Teaching%2F%F0%9F%93%BC%20Einf%C3%BChrung%20Technikforschung%20(SoSe22)","subtitle":"Seminar"},{"title":"Tech-StartUp","arg":"https:\/\/tu-berlin.zoom.us\/j\/65624610291?pwd=MEt0aWtjcVNGdzQ4NUtwOWxUSlpPQT09;obsidian:\/\/open?vault=Main%20Vault&amp;file=Teaching%2F%F0%9F%9A%80%20Das%20Tech-StartUp%20(SoSe%2022)","subtitle":"Seminar"}]</string>
+				<key>keyword</key>
+				<string>zz</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
 				<string></string>
-				<key>type</key>
-				<integer>7</integer>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Join Zoom Meeting</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.listfilter</string>
 			<key>uid</key>
-			<string>48C18C9E-A9C3-4B8F-AED2-D2CBC81517B5</string>
+			<string>432EB74A-9F76-4DD1-A316-CF3041712A9A</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -208,31 +225,29 @@ end if-- Seminar Preparationif (slack_url is not "") then
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>fixedorder</key>
+				<key>concurrently</key>
 				<false/>
-				<key>items</key>
-				<string>[{"title":"Sprechstunden Chris","arg":"https:\/\/tu-berlin.zoom.us\/j\/99415959096?pwd=VFFETk91U0E5UDdKSVNzUTBkNWZwdz09;drafts","subtitle":"+ Drafts"},{"title":"Personal Room","arg":"https:\/\/tu-berlin.zoom.us\/j\/7855484257?pwd=cjY5eDhyVEI5Zk9EcnVPMHpJUSs2Zz09;none"},{"title":"🔐 Login","arg":"login"},{"title":"Einführung Technikforschung","arg":"https:\/\/tu-berlin.zoom.us\/j\/65299324579?pwd=NzgwSFNtTUxVa21HS0pKNndvQ3lJUT09;obsidian:\/\/open?vault=Main%20Vault&amp;file=Teaching%2F%F0%9F%93%BC%20Einf%C3%BChrung%20Technikforschung%20(SoSe22)","subtitle":"Seminar"},{"title":"Tech-StartUp","arg":"https:\/\/tu-berlin.zoom.us\/j\/65624610291?pwd=MEt0aWtjcVNGdzQ4NUtwOWxUSlpPQT09;obsidian:\/\/open?vault=Main%20Vault&amp;file=Teaching%2F%F0%9F%9A%80%20Das%20Tech-StartUp%20(SoSe%2022)","subtitle":"Seminar"}]</string>
-				<key>keyword</key>
-				<string>zz</string>
-				<key>runningsubtext</key>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>var input = "{query}";
+var zoomURL = input.replace (/https?:\/\/.*\.zoom\.us\/j\/(\w+)\?pwd=(\w+)$/,"zoommtg://zoom.us/join?confno=$1&amp;amp;pwd=$2");
+Zoom = Application("/Applications/zoom.us.app");
+Zoom.includeStandardAdditions = true;
+Zoom.openLocation(zoomURL);</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
 				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Join Zoom Meeting</string>
-				<key>withspace</key>
-				<true/>
+				<key>type</key>
+				<integer>7</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.listfilter</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>432EB74A-9F76-4DD1-A316-CF3041712A9A</string>
+			<string>48C18C9E-A9C3-4B8F-AED2-D2CBC81517B5</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -256,28 +271,13 @@ end if-- Seminar Preparationif (slack_url is not "") then
 				</array>
 				<key>elselabel</key>
 				<string>login</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>9312BB2F-700A-466B-A2F0-8D540BA24C5D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>delimiter</key>
-				<string>;</string>
-				<key>trimarguments</key>
-				<true/>
-				<key>variableprefix</key>
-				<string>split</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.split</string>
-			<key>uid</key>
-			<string>88917A0B-7E84-42A9-905F-670430B81BBF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -306,21 +306,19 @@ end if-- Seminar Preparationif (slack_url is not "") then
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>📹 Launching Zoom Meeting</string>
+				<key>delimiter</key>
+				<string>;</string>
+				<key>outputas</key>
+				<integer>0</integer>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>split</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.utility.split</string>
 			<key>uid</key>
-			<string>3F2A1AEA-A2BF-41BE-80F1-6A6025626C24</string>
+			<string>88917A0B-7E84-42A9-905F-670430B81BBF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -358,6 +356,83 @@ end tell</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>📹 Launching Zoom Meeting</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>3F2A1AEA-A2BF-41BE-80F1-6A6025626C24</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>h</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1179648</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>4FD1CE6A-A995-4691-94F1-99CEE25277B3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>29</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>0</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>us.zoom.xos</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>E2E50A21-55EC-48F7-80FB-047931E107C6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -368,9 +443,9 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>495</integer>
+			<real>495</real>
 			<key>ypos</key>
-			<integer>145</integer>
+			<real>145</real>
 		</dict>
 		<key>432EB74A-9F76-4DD1-A316-CF3041712A9A</key>
 		<dict>
@@ -380,9 +455,9 @@ end tell</string>
 			<string>- edit this to add more Zoom-Meetings
 - format: zoomURL;notesURI</string>
 			<key>xpos</key>
-			<integer>35</integer>
+			<real>35</real>
 			<key>ypos</key>
-			<integer>15</integer>
+			<real>15</real>
 		</dict>
 		<key>48C18C9E-A9C3-4B8F-AED2-D2CBC81517B5</key>
 		<dict>
@@ -391,9 +466,16 @@ end tell</string>
 			<key>note</key>
 			<string>open in Zoom</string>
 			<key>xpos</key>
-			<integer>495</integer>
+			<real>495</real>
 			<key>ypos</key>
-			<integer>10</integer>
+			<real>15</real>
+		</dict>
+		<key>4FD1CE6A-A995-4691-94F1-99CEE25277B3</key>
+		<dict>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>350</real>
 		</dict>
 		<key>69321844-5FD6-49B4-904B-EA6C9F22AA56</key>
 		<dict>
@@ -402,36 +484,36 @@ end tell</string>
 			<key>note</key>
 			<string>login script</string>
 			<key>xpos</key>
-			<integer>310</integer>
+			<real>310</real>
 			<key>ypos</key>
-			<integer>145</integer>
+			<real>145</real>
 		</dict>
 		<key>7D70D13D-24D9-4581-B67C-635A6479FF76</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>405</integer>
+			<real>405</real>
 			<key>ypos</key>
-			<integer>40</integer>
+			<real>40</real>
 		</dict>
 		<key>88917A0B-7E84-42A9-905F-670430B81BBF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>345</integer>
+			<real>345</real>
 			<key>ypos</key>
-			<integer>40</integer>
+			<real>40</real>
 		</dict>
 		<key>9312BB2F-700A-466B-A2F0-8D540BA24C5D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>190</integer>
+			<real>190</real>
 			<key>ypos</key>
-			<integer>35</integer>
+			<real>35</real>
 		</dict>
 		<key>C3A574FB-D0D4-49BC-A318-14715CAA6854</key>
 		<dict>
@@ -440,11 +522,22 @@ end tell</string>
 			<key>note</key>
 			<string>set context</string>
 			<key>xpos</key>
-			<integer>655</integer>
+			<real>655</real>
 			<key>ypos</key>
-			<integer>10</integer>
+			<real>15</real>
+		</dict>
+		<key>E2E50A21-55EC-48F7-80FB-047931E107C6</key>
+		<dict>
+			<key>note</key>
+			<string>Shwo Chat Sidebar</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>350</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>
