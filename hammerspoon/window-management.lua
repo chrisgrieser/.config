@@ -367,12 +367,12 @@ function vsplit (mode)
 	end
 
 	resizingWorkaround(WIN_RIGHT, f1)
-	resizingWorkaround(WIN_RIGHT, f2)
+	resizingWorkaround(WIN_LEFT, f2)
 
 	if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
-	elseif WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT) end
+	elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
 	if WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT)
-	elseif WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT) end
+	elseif WIN_LEFT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_LEFT) end
 end
 
 function finderVsplit ()
