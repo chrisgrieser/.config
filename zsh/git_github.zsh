@@ -41,11 +41,12 @@ function amend () {
 	git push --force
 }
 
-alias gc="git commit -m"
-alias ga="git add"
+alias commit="git commit -m"
+alias push="git push"
+alias pull="git pull"
 alias ignored="git status --ignored"
 alias status='git status --short'
-alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+alias log="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 
 # go to git root https://stackoverflow.com/a/38843585
 alias groot='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
