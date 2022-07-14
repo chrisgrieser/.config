@@ -8,6 +8,7 @@ gitDotfileScript = os.getenv("HOME").."/dotfiles/git-dotfile-sync.sh"
 gitVaultScript = os.getenv("HOME").."/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh"
 
 function gitDotfileSync()
+	-- wrapped like this, since hs.task objects can only be run one time
 	hs.task.new(gitDotfileScript, function (exitCode, _, stdErr)
 		if exitCode == 0 then
 			log ("✅ dotfiles sync ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/sync.log")
@@ -41,8 +42,8 @@ repoSyncTimer:start()
 function screenSleep (eventType)
 	if not(eventType == hs.caffeinate.watcher.screensDidSleep or eventType == hs.caffeinate.watcher.screensDidLock) then return end
 
-	log ("💤 sleep", "$HOME/dotfiles/Cron Jobs/sync.log")
-	log ("💤 sleep", "$HOME/dotfiles/Cron Jobs/some.log")
+	log ("💤 sleep ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/sync.log")
+	log ("💤 sleep ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/some.log")
 	gitDotfileSync()
 end
 shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
@@ -74,7 +75,7 @@ end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
 
--- daily morning run (redundant to Cron job)
+-- daily morning run (redundant to Cron Job)
 if isIMacAtHome() then
 	dailyMorningTimer = hs.timer.doAt("06:10", "01d", function()
 		setDarkmode(false)

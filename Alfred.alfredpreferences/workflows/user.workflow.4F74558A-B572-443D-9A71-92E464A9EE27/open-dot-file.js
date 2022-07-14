@@ -12,12 +12,15 @@ const dotfileFolder = getEnv ("dotfile_folder");
 /* eslint-disable no-multi-str, quotes */
 const workArray = app.doShellScript (
 	'PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;\
-	cd "' + dotfileFolder + '" ; fd -H \
+	cd "' + dotfileFolder + '" ; \
+	fd --hidden --no-ignore \
 	-E "Alfred.alfredpreferences" \
 	-E ".config/alacritty/themes/" \
 	-E "zsh/plugins/colorscript.bash" \
 	-E ".config/karabiner/assets/complex_modifications/*.json" \
-	-E "FileHistory*.json"'
+	-E "FileHistory*.json" \
+	-E "Mac Migration Scripts/to do*" \
+	-E "unused/*"'
 ).split("\r");
 /* eslint-enable no-multi-str, quotes */
 
