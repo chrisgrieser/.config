@@ -34,24 +34,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>3B49D86A-594E-411D-A812-D34349A13F8D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7E7254FB-7761-400D-887B-162AB242F68E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3B49D86A-594E-411D-A812-D34349A13F8D</string>
+				<string>7E7254FB-7761-400D-887B-162AB242F68E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -499,19 +486,6 @@ fi</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>seconds</key>
-				<string>0.5</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.delay</string>
-			<key>uid</key>
-			<string>3B49D86A-594E-411D-A812-D34349A13F8D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -535,13 +509,6 @@ fi</string>
 			<key>ypos</key>
 			<real>245</real>
 		</dict>
-		<key>3B49D86A-594E-411D-A812-D34349A13F8D</key>
-		<dict>
-			<key>xpos</key>
-			<real>340</real>
-			<key>ypos</key>
-			<real>545</real>
-		</dict>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<dict>
 			<key>xpos</key>
@@ -552,7 +519,7 @@ fi</string>
 		<key>7E7254FB-7761-400D-887B-162AB242F68E</key>
 		<dict>
 			<key>xpos</key>
-			<real>415</real>
+			<real>335</real>
 			<key>ypos</key>
 			<real>515</real>
 		</dict>
