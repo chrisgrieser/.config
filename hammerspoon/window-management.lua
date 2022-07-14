@@ -278,6 +278,7 @@ end
 
 --------------------------------------------------------------------------------
 -- SPLITS
+-- gets the Windows on the main screen, in order of the stack
 function mainScreenWindows()
 	local winArr = hs.window.orderedWindows()
 	local out = {}
@@ -293,20 +294,29 @@ function mainScreenWindows()
 	return out
 end
 
-function pairedActivation(win1, win2)
-	-- save in global variables, so they are not garbage-collected
-	WIN_ONE = win1
-	WIN_TWO = win2
-	pairedWinWatcher = hs.application.watcher.new(function (_, eventType)
-		if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.deactivated) then return end
-		local currentWin = hs.window.focusedWindow()
-		if currentWin:id() == WIN_ONE:id() then
-			WIN_TWO:focus()
-		elseif currentWin:id() == WIN_TWO:id() then
-			WIN_ONE:focus()
-		end
-	end)
-	pairedWinWatcher:start()
+-- Watcher, that raises win2 when win1 activates and vice versa. useful for splits
+splitStatusMenubar = hs.menubar.new()
+function pairedActivation(start, win1, win2)
+	if start then
+		-- save in global variables, so they are not garbage-collected
+		WIN_ONE = win1
+		WIN_TWO = win2
+		pairedWinWatcher = hs.application.watcher.new(function (_, eventType)
+			if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.deactivated) then return end
+			local currentWin = hs.window.focusedWindow()
+			if currentWin:id() == WIN_ONE:id() then
+				WIN_TWO:raise()
+			elseif currentWin:id() == WIN_TWO:id() then
+				WIN_ONE:raise()
+			end
+		end)
+		pairedWinWatcher:start()
+		splitStatusMenubar:returnToMenuBar()
+		splitStatusMenubar:setTitle("🔳🔲")
+	else
+		pairedWinWatcher:stop()
+		splitStatusMenubar:removeFromMenuBar()
+	end
 end
 
 function vsplit (mode)
@@ -341,7 +351,7 @@ function vsplit (mode)
 			f2 = hs.layout.left70
 		end
 	elseif mode == "split" then
-		pairedActivation(win1, win2)
+		pairedActivation(true, win1, win2)
 		if (f1.w ~= f2.w or f1.w > 0.7*max.w) then
 			f1 = hs.layout.left50
 			f2 = hs.layout.right50
@@ -350,6 +360,7 @@ function vsplit (mode)
 			f2 = hs.layout.right30
 		end
 	elseif mode == "unsplit" then
+		pairedActivation(false)
 		local layout
 		if isAtOffice() then
 			layout = hs.layout.maximized
@@ -358,7 +369,6 @@ function vsplit (mode)
 		end
 		f1 = layout
 		f2 = layout
-		pairedWinWatcher:stop()
 	end
 
 	resizingWorkaround(win1, f1)
