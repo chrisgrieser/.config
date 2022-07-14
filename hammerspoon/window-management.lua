@@ -280,6 +280,7 @@ splitStatusMenubar = hs.menubar.new()
 function pairedActivation(start)
 	if start then
 		pairedWinWatcher = hs.application.watcher.new(function (_, eventType)
+			if recursionProtection then return end
 			if not(hs.window.focusedWindow()) then return end
 			if not(eventType == hs.application.watcher.activated) then return end
 
@@ -290,7 +291,10 @@ function pairedActivation(start)
 			elseif currentId == WIN_LEFT:id() then
 				WIN_RIGHT:raise()
 			else
-				if isIMacAtHome() then hs.application("Twitterrific"):mainWindow():raise() end
+				recursionProtection = true
+				WIN_LEFT:sendToBack()
+				WIN_RIGHT:sendToBack()
+				recursionProtection = false
 			end
 
 		end)
