@@ -1,17 +1,11 @@
 # settings (zshrc)
 alias ,="settings"
 function settings () {
-	if [[ $# == 0 ]] ; then
-		SEARCH_FOR="$*"
-	else
-		SEARCH_FOR="$BUFFER"
-	fi
-	# shellcheck disable=SC2012
-	( cd "$DOTFILE_FOLDER" || return
+	( cd "$DOTFILE_FOLDER/zsh" || return
 	# shellcheck disable=SC1009,SC1056,SC1073,SC2035
 	SELECTED=$( { ls *.zsh | cut -d. -f1 ; ls .z* } | fzf \
 	           -0 -1 \
-	           --query "$SEARCH_FOR" \
+	           --query "$*" \
 	           --height=75% \
 	           --layout=reverse \
 	           --info=hidden \
@@ -46,12 +40,6 @@ function del () {
 function mkcd () {
 	mkdir -p "$1"
 	cd "$1" || return 1
-}
-
-# restart terminal
-function rr () {
-	# run in subshell to surpress output
-	(nohup "$DOTFILE_FOLDER"/restart_terminal.zsh >/dev/null &)
 }
 
 # get path of file

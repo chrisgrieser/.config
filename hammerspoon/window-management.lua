@@ -107,7 +107,6 @@ function movieModeLayout()
 	killIfRunning("Sublime Text")
 	killIfRunning("alacritty")
 	killIfRunning("Alacritty")
-
 end
 
 function homeModeLayout ()
