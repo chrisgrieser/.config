@@ -203,7 +203,6 @@ vnoremap <Space> "_c
 " Delete Word/Selection
 nnoremap <S-Space> "_daw
 vnoremap <S-Space> "_d
-vnoremap d "_d
 vnoremap x "_d
 
 " [R]eplace Word with register content
