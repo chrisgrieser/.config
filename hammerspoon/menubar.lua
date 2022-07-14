@@ -90,7 +90,7 @@ function updateDraftsMenubar()
 
 	local numberOfDrafts, success = hs.execute("python3 numberOfDrafts.py "..excludeTag1.." "..excludeTag2)
 	numberOfDrafts = numberOfDrafts:gsub("\n", "")
-	numberOfDrafts = "📘 "..numberOfDrafts
+	numberOfDrafts = "🟦 "..numberOfDrafts
 
 	if tonumber(numberOfDrafts) == 0 or not(success) then
 		draftsCounterMenuBar:removeFromMenuBar()
