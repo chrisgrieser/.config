@@ -1,6 +1,6 @@
 {
 	// https://facelessuser.github.io/BracketHighlighter/customize/
-	"show_in_minimap": true,
+   "gutter_icons": false,
 	"search_threshold": 10000,
 
 	"default": {

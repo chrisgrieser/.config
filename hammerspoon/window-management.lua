@@ -296,11 +296,8 @@ end
 
 -- Watcher, that raises win2 when win1 activates and vice versa. useful for splits
 splitStatusMenubar = hs.menubar.new()
-function pairedActivation(start, win1, win2)
+function pairedActivation(start)
 	if start then
-		-- save in global variables, so they are not garbage-collected
-		WIN_ONE = win1
-		WIN_TWO = win2
 		pairedWinWatcher = hs.application.watcher.new(function (_, eventType)
 			if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.deactivated) then return end
 			local currentWin = hs.window.focusedWindow()
@@ -320,15 +317,7 @@ function pairedActivation(start, win1, win2)
 end
 
 function vsplit (mode)
-	local wins = mainScreenWindows()	-- to not split windows on second screen
-
-	local win1 = wins[1]
-	local win2 = wins[2]
-	local f1 = win1:frame()
-	local f2 = win2:frame()
-	local max = win1:screen():frame()
-
-	-- switch up, to ensure that win1 is the right one
+	-- ensure that win1 is to the right
 	if (f1.x > f2.x) then
 		local temp = win1
 		win1 = win2
@@ -337,10 +326,27 @@ function vsplit (mode)
 		f2 = win2:frame()
 	end
 
-	-- switch order of windows
-	if mode == "switch" then
-		if (f1.w + f2.w ~= max.w) then
-			notify ("not a correct vertical split")
+	if mode == "split" then
+		local wins = mainScreenWindows()	-- to not split windows on second screen
+		WIN_ONE = wins[1] -- save in global variables, so they are not garbage-collected
+		WIN_TWO = wins[2]
+	end
+	local f1 = WIN_ONE:frame()
+	local f2 = WIN_TWO:frame()
+	local max = win1:screen():frame()
+
+	if mode == "split" then
+		pairedActivation(true)
+		if (f1.w ~= f2.w or f1.w > 0.7*max.w) then
+			f1 = hs.layout.left50
+			f2 = hs.layout.right50
+		else
+			f1 = hs.layout.left70
+			f2 = hs.layout.right30
+		end
+	elseif mode == "switch" then
+		if not (WIN_ONE) then
+			notify ("No split active.")
 			return
 		end
 		if (f1.w == f2.w) then
@@ -349,15 +355,6 @@ function vsplit (mode)
 		else
 			f1 = hs.layout.right30
 			f2 = hs.layout.left70
-		end
-	elseif mode == "split" then
-		pairedActivation(true, win1, win2)
-		if (f1.w ~= f2.w or f1.w > 0.7*max.w) then
-			f1 = hs.layout.left50
-			f2 = hs.layout.right50
-		else
-			f1 = hs.layout.left70
-			f2 = hs.layout.right30
 		end
 	elseif mode == "unsplit" then
 		pairedActivation(false)
