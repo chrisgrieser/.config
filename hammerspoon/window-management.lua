@@ -289,11 +289,6 @@ function pairedActivation(start)
 				WIN_LEFT:raise() -- not using :focus(), since that causes infinite recursion
 			elseif currentWindow:id() == WIN_LEFT:id() then
 				WIN_RIGHT:raise()
-			else
-				if isIMacAtHome() then
-					hs.application("Twitterrific"):mainWindow():raise()
-					currentWindow:focus()
-				end
 			end
 
 		end)
