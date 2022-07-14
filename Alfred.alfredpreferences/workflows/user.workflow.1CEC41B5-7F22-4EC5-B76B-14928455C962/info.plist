@@ -296,35 +296,6 @@ echo | last reboot | head -n 10 | cut -c 37-</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string>Menlo</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>FDF63B46-8376-4578-B3D1-6AF2ECC6ABFE</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -352,6 +323,35 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<string>08FF165B-3950-4760-9A48-5996704B1C65</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string>Menlo</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>FDF63B46-8376-4578-B3D1-6AF2ECC6ABFE</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -442,7 +442,7 @@ delay 0.5
 				<key>keyword</key>
 				<string>shutdown</string>
 				<key>subtext</key>
-				<string>will run git dotfiles sync before</string>
+				<string>run dotfiles sync before</string>
 				<key>text</key>
 				<string>Shutdown</string>
 				<key>withspace</key>
@@ -473,9 +473,9 @@ fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>pre-shutdown.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -514,7 +514,7 @@ fi</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>dependency https://github.com/toy/blueutil</string>
+	<string></string>
 	<key>uidata</key>
 	<dict>
 		<key>0374B2C9-BC32-4520-B8FC-826A3F26C196</key>
