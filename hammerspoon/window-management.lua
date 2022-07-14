@@ -302,7 +302,7 @@ function pairedActivation(start)
 			if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.deactivated) then return end
 			local currentWin = hs.window.focusedWindow()
 			if currentWin:id() == WIN_ONE:id() then
-				WIN_TWO:raise() -- don't use :focus(), since that causes fatal recursion
+				WIN_TWO:raise() -- not using :focus(), since that causes infinite recursion
 			elseif currentWin:id() == WIN_TWO:id() then
 				WIN_ONE:raise()
 			end
@@ -317,13 +317,9 @@ function pairedActivation(start)
 end
 
 function vsplit (mode)
-	-- ensure that win1 is to the right
-	if (f1.x > f2.x) then
-		local temp = win1
-		win1 = win2
-		win2 = temp
-		f1 = win1:frame()
-		f2 = win2:frame()
+	if not WIN_ONE and (mode == "switch" or mode == "unsplit") then
+		notify ("No split active.")
+		return
 	end
 
 	if mode == "split" then
@@ -331,9 +327,17 @@ function vsplit (mode)
 		WIN_ONE = wins[1] -- save in global variables, so they are not garbage-collected
 		WIN_TWO = wins[2]
 	end
+
 	local f1 = WIN_ONE:frame()
 	local f2 = WIN_TWO:frame()
 	local max = win1:screen():frame()
+	if (f1.x > f2.x) then -- ensure that win1 is to the right
+		local temp = win1
+		win1 = win2
+		win2 = temp
+		f1 = win1:frame()
+		f2 = win2:frame()
+	end
 
 	if mode == "split" then
 		pairedActivation(true)
@@ -344,11 +348,17 @@ function vsplit (mode)
 			f1 = hs.layout.left70
 			f2 = hs.layout.right30
 		end
+	elseif mode == "unsplit" then
+		pairedActivation(false)
+		WIN_ONE = nil
+		WIN_TWO = nil
+
+		local layout
+		if isAtOffice() then layout = hs.layout.maximized
+		else layout = {x=0, y=0, w=0.815, h=1} end -- pseudo-maximized
+		f1 = layout
+		f2 = layout
 	elseif mode == "switch" then
-		if not (WIN_ONE) then
-			notify ("No split active.")
-			return
-		end
 		if (f1.w == f2.w) then
 			f1 = hs.layout.right50
 			f2 = hs.layout.left50
@@ -356,33 +366,15 @@ function vsplit (mode)
 			f1 = hs.layout.right30
 			f2 = hs.layout.left70
 		end
-	elseif mode == "unsplit" then
-		pairedActivation(false)
-		local layout
-		if isAtOffice() then
-			layout = hs.layout.maximized
-		else
-			layout = {x=0, y=0, w=0.815, h=1} -- pseudo-maximized
-		end
-		f1 = layout
-		f2 = layout
 	end
 
 	resizingWorkaround(win1, f1)
 	resizingWorkaround(win2, f2)
 
-	if win1:application():name() == "Drafts" then
-		toggleDraftsSidebar(win1)
-	elseif win2:application():name() == "Drafts" then
-		toggleDraftsSidebar(win2)
-	end
-
-	if win1:application():name() == "Obsidian" then
-		toggleObsidianSidebar(win1)
-	elseif win2:application():name() == "Obsidian" then
-		toggleObsidianSidebar(win2)
-	end
-
+	if win1:application():name() == "Drafts" then toggleDraftsSidebar(win1)
+	elseif win2:application():name() == "Drafts" then toggleDraftsSidebar(win2) end
+	if win1:application():name() == "Obsidian" then toggleObsidianSidebar(win1)
+	elseif win2:application():name() == "Obsidian" then toggleObsidianSidebar(win2) end
 end
 
 function finderVsplit ()
