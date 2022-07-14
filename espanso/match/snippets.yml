@@ -13,9 +13,10 @@ matches:
   - trigger: '!bug'
     replace: >
       Could you open a bug report at the GitHub repo?
-      Reason being that the bug report forms asks for the various &
+      Reason being that the bug report forms asks for the various
       information I need to look into the issue.
-
+      (also, I don't have the time to look into it right now,
+      so an issue will make sure the problem is still tracked.)
   - trigger: "!esp"
     replace: |
       - trigger: "$|$"
