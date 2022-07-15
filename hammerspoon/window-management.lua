@@ -6,39 +6,45 @@ require("private")
 -- WINDOW MOVEMENT
 
 function toggleDraftsSidebar (draftsWin)
-	local drafts_w = draftsWin:frame().w
-	local screen_w = draftsWin:screen():frame().w
-	if (drafts_w / screen_w > 0.55) then
-		-- using actions since they are more reliable than the menu item
-		hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-left-sidebar")
-	else
-		hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=hide-left-sidebar")
-	end
+	runDelayed(0.05, function ()
+		local drafts_w = draftsWin:frame().w
+		local screen_w = draftsWin:screen():frame().w
+		if (drafts_w / screen_w > 0.55) then
+			-- using actions since they are more reliable than the menu item
+			hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-left-sidebar")
+		else
+			hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=hide-left-sidebar")
+		end
+	end)
 end
 
 function toggleHighlightsSidebar (highlightsWin)
-	local drafts_w = highlightsWin:frame().w
-	local screen_w = highlightsWin:screen():frame().w
-	if (drafts_w / screen_w > 0.6) then
-		hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
-	else
-		hs.application("Highlights"):selectMenuItem({"View", "Hide Sidebar"})
-	end
+	runDelayed(0.3, function ()
+		local drafts_w = highlightsWin:frame().w
+		local screen_w = highlightsWin:screen():frame().w
+		if (drafts_w / screen_w > 0.6) then
+			hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
+		else
+			hs.application("Highlights"):selectMenuItem({"View", "Hide Sidebar"})
+		end
+	end)
 end
 
 -- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
 function toggleObsidianSidebar (obsiWin)
-	-- prevent popout window resizing to affect sidebars
-	local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
-	if (numberOfObsiWindows > 1) then return end
+	runDelayed(0.05, function ()
+		-- prevent popout window resizing to affect sidebars
+		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
+		if (numberOfObsiWindows > 1) then return end
 
-	local obsi_width = obsiWin:frame().w
-	local screen_width = obsiWin:screen():frame().w
-	if (obsi_width / screen_width > 0.6) then
-		hs.urlevent.openURL("obsidian://sidebar?side=left&show=true")
-	else
-		hs.urlevent.openURL("obsidian://sidebar?side=left&show=false")
-	end
+		local obsi_width = obsiWin:frame().w
+		local screen_width = obsiWin:screen():frame().w
+		if (obsi_width / screen_width > 0.6) then
+			hs.urlevent.openURL("obsidian://sidebar?side=left&show=true")
+		else
+			hs.urlevent.openURL("obsidian://sidebar?side=left&show=false")
+		end
+	end)
 end
 
 function moveAndResize(direction)
@@ -64,12 +70,9 @@ function moveAndResize(direction)
 	-- workaround for https://github.com/Hammerspoon/hammerspoon/issues/2316
 	resizingWorkaround(win, position)
 
-	if win:application():name() == "Drafts" then
-		runDelayed(0.05, function () toggleDraftsSidebar(win) end)
-	elseif win:application():name() == "Obsidian" then
-		runDelayed(0.05, function () toggleObsidianSidebar(win) end)
-	elseif win:application():name() == "Highlights" then
-		runDelayed(0.3, function () toggleHighlightsSidebar(win) end)
+	if win:application():name() == "Drafts" then toggleDraftsSidebar(win)
+	elseif win:application():name() == "Obsidian" then toggleObsidianSidebar(win)
+	elseif win:application():name() == "Highlights" then toggleHighlightsSidebar(win)
 	end
 end
 
@@ -378,14 +381,12 @@ function vsplit (mode)
 	resizingWorkaround(WIN_LEFT, f2)
 	WIN_RIGHT:raise()
 	WIN_LEFT:raise()
-	runDelayed (0.2, function ()
-		if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
-		elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
-		if WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT)
-		elseif WIN_LEFT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_LEFT) end
-		if WIN_RIGHT:application():name() == "Highlights" then toggleHighlightsSidebar(WIN_RIGHT)
-		elseif WIN_LEFT:application():name() == "Highlights" then toggleHighlightsSidebar(WIN_LEFT) end
-	end)
+	if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
+	elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
+	if WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT)
+	elseif WIN_LEFT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_LEFT) end
+	if WIN_RIGHT:application():name() == "Highlights" then toggleHighlightsSidebar(WIN_RIGHT)
+	elseif WIN_LEFT:application():name() == "Highlights" then toggleHighlightsSidebar(WIN_LEFT) end
 
 	if mode == "unsplit" then
 		WIN_RIGHT = nil
