@@ -6,9 +6,10 @@ require("private")
 -- WINDOW MOVEMENT
 
 function toggleDraftsSidebar (draftsWin)
+	notify ("Drafts")
 	local drafts_w = draftsWin:frame().w
 	local screen_w = draftsWin:screen():frame().w
-	if (drafts_w / screen_w > 0.6) then
+	if (drafts_w / screen_w > 0.55) then
 		hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
 	else
 		hs.application("Drafts"):selectMenuItem({"View", "Hide Draft List"})
@@ -136,10 +137,12 @@ function homeModeLayout ()
 	}
 	hs.layout.apply(homeLayout)
 
+	-- show sidebars
 	runDelayed(0.5, function ()
 		hs.layout.apply(homeLayout)
 		hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
 		hs.urlevent.openURL("obsidian://sidebar?side=left&show=true")
+		hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
 	end)
 
 	runDelayed(2, function ()
