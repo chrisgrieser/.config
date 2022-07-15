@@ -7,8 +7,8 @@ require("private")
 
 function toggleDraftsSidebar (draftsWin)
 	local drafts_w = draftsWin:frame().w
-	notify ("Drafts "..drafts_w)
 	local screen_w = draftsWin:screen():frame().w
+	notify ("Drafts "..drafts_w / screen_w)
 	if (drafts_w / screen_w > 0.55) then
 		notify ("show")
 		hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
