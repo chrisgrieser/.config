@@ -91,24 +91,6 @@ end
 twitterrificScrolling = false
 twitterificAppWatcher = hs.application.watcher.new(twitterificAppActivated)
 if isAtOffice() then twitterificAppWatcher:start() end
---------------------------------------------------------------------------------
--- keep Twitterrific visible
-function twitterrificNextToPseudoMax(_, eventType)
-	if not(eventType == hs.application.watcher.activated) then return end
-	local currentWindow = hs.window.focusedWindow()
-	if not(currentWindow) then return end
-	if (WIN_LEFT == currentWindow) or (WIN_RIGHT == currentWindow) then return end
-
-	local max = hs.screen.mainScreen():frame()
-	local dif = currentWindow:frame().w - pseudoMaximized.w*max.w
-	if dif < 10 and dif > -10 then
-		hs.application("Twitterrific"):mainWindow():raise()
-	end
-end
-
-anyAppActivationWatcher = hs.application.watcher.new(twitterrificNextToPseudoMax)
-anyAppActivationWatcher:start()
-
 
 --------------------------------------------------------------------------------
 -- Hotkeys
