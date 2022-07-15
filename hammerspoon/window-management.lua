@@ -8,7 +8,6 @@ require("private")
 function toggleDraftsSidebar (draftsWin)
 	local drafts_w = draftsWin:frame().w
 	local screen_w = draftsWin:screen():frame().w
-	notify ("Drafts "..drafts_w / screen_w)
 	if (drafts_w / screen_w > 0.55) then
 		-- using actions since they are more reliable than the menu item
 		hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-left-sidebar")
