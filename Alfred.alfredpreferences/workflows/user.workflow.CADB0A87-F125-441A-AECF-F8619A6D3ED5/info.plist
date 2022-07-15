@@ -217,7 +217,7 @@ end if
 
 end alfred_script</string>
 				<key>cachescript</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.applescript</string>

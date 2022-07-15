@@ -5,20 +5,20 @@
 #-------------------------------------------------------------------------------
 
 # open tab if there is no tab open to ensure Dark Reader switches as well
-set BrowserWasntRunning to false
 tell application "Brave Browser"
-		set tabcount to 0
-		set currentURL to ""
-		try
-			set tabcount to number of tabs in front window
-		end try
-		if (tabcount > 0) then set currentURL to URL of active tab of front window
+		activate
+		set openblank to false
+		if ((count of window) is 0) then
+			set openblank to true
+		else
+			set currentURL to URL of active tab of front window
+			if (currentURL starts with "chrome:" or currentURL starts with "vivaldi:")
+				set openblank to true
+			end if
+		end if
 
-		if (tabcount is 0 or currentURL starts with "chrome:" or currentURL starts with "vivaldi:")
+		if (openblank) then
 			open location "http://www.blankwebsite.com/"
-			repeat until (loading of active tab of front window is false)
-				delay 0.1
-			end repeat
 			delay 0.2
 			set BrowserWasntRunning to true
 		end if
@@ -31,7 +31,7 @@ tell application "System Events"
 end tell
 
 # close tab again
-if (BrowserWasntRunning)
+if (openblank)
 	delay 0.2
 	tell application "Brave Browser" to close active tab of front window
 end if
