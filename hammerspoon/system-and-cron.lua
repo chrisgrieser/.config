@@ -7,7 +7,7 @@ repoSyncFrequencyMin = 15
 gitDotfileScript = os.getenv("HOME").."/dotfiles/git-dotfile-sync.sh"
 gitVaultScript = os.getenv("HOME").."/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh"
 
-function gitDotfileSync()
+function gitDotfileSync(withAlfredPull)
 	-- wrapped like this, since hs.task objects can only be run one time
 	hs.task.new(gitDotfileScript, function (exitCode, _, stdErr)
 		if exitCode == 0 then
@@ -16,7 +16,7 @@ function gitDotfileSync()
 			notify("⚠️️ dotfiles "..stdErr)
 			log ("⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
 		end
-	end):start()
+	end, _, withAlfredPull):start()
 end
 
 function gitVaultBackup()
