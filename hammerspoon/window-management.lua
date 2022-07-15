@@ -387,6 +387,10 @@ function vsplit (mode)
 		if WIN_RIGHT:application():name() == "Highlights" then toggleHighlightsSidebar(WIN_RIGHT)
 		elseif WIN_LEFT:application():name() == "Highlights" then toggleHighlightsSidebar(WIN_LEFT) end
 	end)
+	runDelayed (0.6, function ()
+		if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
+		elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
+	end)
 
 	if mode == "unsplit" then
 		WIN_RIGHT = nil
