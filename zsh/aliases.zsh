@@ -52,3 +52,6 @@ alias size="du -sh ./* | sort -rh | sed 's/\\.\\///'" # size of files in current
 # without preceding command (analogous to `setopt AUTO_CD` but for files)
 # shellcheck disable=SC2139
 alias -s {css,ts,js,md,yml,json,plist,xml,pdf,png,jpg,jpeg}='open'
+
+# open log files in less and at the end
+alias -s log="less +G"
