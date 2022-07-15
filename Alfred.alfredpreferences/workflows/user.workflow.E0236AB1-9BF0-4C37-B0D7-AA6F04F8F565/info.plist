@@ -381,7 +381,7 @@ end tell</string>
 				<key>hotkey</key>
 				<integer>5</integer>
 				<key>hotmod</key>
-				<integer>917504</integer>
+				<integer>1048576</integer>
 				<key>hotstring</key>
 				<string>G</string>
 				<key>leftcursor</key>
@@ -453,7 +453,7 @@ end tell</string>
 				<key>hotkey</key>
 				<integer>15</integer>
 				<key>hotmod</key>
-				<integer>917504</integer>
+				<integer>1048576</integer>
 				<key>hotstring</key>
 				<string>R</string>
 				<key>leftcursor</key>
@@ -839,6 +839,10 @@ end tell</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
