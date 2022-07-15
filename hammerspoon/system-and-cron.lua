@@ -72,7 +72,7 @@ function systemWake (eventType)
 	end
 
 	reloadAllMenubarItems()
-	gitDotfileSync()
+	gitDotfileSync("wake")
 end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
