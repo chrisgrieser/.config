@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-# go to script location (the script should be located in the git repository)
 cd "$(dirname "$0")" || exit 1
 
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
@@ -13,7 +12,6 @@ if [[ "$filesChanged" == 1 ]] ; then
 else
 	changeType="$filesChanged files"
 fi
-
 msg="$(date +"%a, %H:%M"), $changeType, $device_name"
 
 git add -A \
