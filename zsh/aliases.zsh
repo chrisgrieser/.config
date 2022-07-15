@@ -10,7 +10,7 @@ alias ..="z .."
 alias ...="z ../.."
 alias ....="z ../../.."
 alias wd='z "$WD"' # working directory
-alias d='z "$DOTFILES_FOLDER"' # working directory
+alias d='z "$DOTFILES_FOLDER"' # dotfiles repo
 
 # utils
 alias q='exit'
@@ -53,5 +53,5 @@ alias size="du -sh ./* | sort -rh | sed 's/\\.\\///'" # size of files in current
 # shellcheck disable=SC2139
 alias -s {css,ts,js,md,yml,json,plist,xml,pdf,png,jpg,jpeg}='open'
 
-# open log files in less and at the end
+# open log files in less and scrolled to the bottom
 alias -s log="less +G"
