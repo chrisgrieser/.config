@@ -10,7 +10,6 @@ function toggleDraftsSidebar (draftsWin)
 	local screen_w = draftsWin:screen():frame().w
 	notify ("Drafts "..drafts_w / screen_w)
 	if (drafts_w / screen_w > 0.55) then
-		notify ("show")
 		hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
 	else
 		hs.application("Drafts"):selectMenuItem({"View", "Hide Draft List"})
@@ -379,7 +378,7 @@ function vsplit (mode)
 	resizingWorkaround(WIN_LEFT, f2)
 	WIN_RIGHT:raise()
 	WIN_LEFT:raise()
-	runDelayed (0.5, function ()
+	runDelayed (0.7, function ()
 		if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
 		elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
 		if WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT)
