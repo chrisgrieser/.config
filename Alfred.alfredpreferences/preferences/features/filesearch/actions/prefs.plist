@@ -38,8 +38,6 @@
 		<true/>
 		<key>alfred.action.text.openindictionary</key>
 		<true/>
-		<key>alfred.action.text.pasteasplaintext</key>
-		<true/>
 		<key>alfred.action.text.saveassnippet</key>
 		<true/>
 		<key>alfred.action.text.searchwithfinder</key>
