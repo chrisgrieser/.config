@@ -4,7 +4,7 @@ cd "$(dirname "$0")" || exit 1
 
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 details=$(git status --porcelain)
-filesChanged=$(echo "$details" | wc -l | tr -d ' ')
+filesChanged=$(echo -n "$details" | wc -l | tr -d ' ')
 
 [[ -z "$filesChanged" ]] && exit 0
 if [[ "$filesChanged" == 1 ]] ; then
