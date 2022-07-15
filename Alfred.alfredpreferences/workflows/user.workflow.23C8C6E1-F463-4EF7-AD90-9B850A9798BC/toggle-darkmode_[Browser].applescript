@@ -54,4 +54,4 @@ tell application "System Events"
 end tell
 
 # Log
-do shell script "echo \"🌒 Dark Mode: manual toggle $(date '+%Y-%m-%d %H:%M')\" >> \"$HOME/dotfiles/Cron Jobs/some.log\""
+do shell script "echo \"$(date '+%Y-%m-%d %H:%M') 🌒 Dark Mode: manual toggle\" >> \"$HOME/dotfiles/Cron Jobs/some.log\""

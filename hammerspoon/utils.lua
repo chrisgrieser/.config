@@ -58,13 +58,15 @@ function setDarkmode (toDark)
 end
 
 function notify (text)
+	text = (trim(text)):gsub("\n", " –– ")
 	hs.notify.new({title="Hammerspoon", informativeText=text}):send()
-	print("notify: "..trim(text)) -- for the console
+	print("notify: "..text) -- for the console
 end
 
 function log (text, location)
+	text = (trim(text)):gsub("\n", " –– ")
 	hs.execute('echo "$(date "+%Y-%m-%d %H:%M")" "'..text..'" >> "'..location..'"')
-	print ("log: "..trim(text)) -- for the console
+	print ("log: "..text) -- for the console
 end
 
 function frontapp ()
