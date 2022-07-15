@@ -10,9 +10,10 @@ function toggleDraftsSidebar (draftsWin)
 	local screen_w = draftsWin:screen():frame().w
 	notify ("Drafts "..drafts_w / screen_w)
 	if (drafts_w / screen_w > 0.55) then
-		hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
+		-- using actions since they are more reliable than the menu item
+		hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-left-sidebar")
 	else
-		hs.application("Drafts"):selectMenuItem({"View", "Hide Draft List"})
+		hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=hide-left-sidebar")
 	end
 end
 
