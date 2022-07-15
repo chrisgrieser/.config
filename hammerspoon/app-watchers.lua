@@ -93,13 +93,3 @@ end
 draftsWatcher3 = hs.application.watcher.new(draftsLaunchWake)
 draftsWatcher3:start()
 
--- BRAVE: Hide when no window on activation
-function braveActivation(appName, eventType, appObject)
-	if not(appName == "Brave Browser" and eventType == hs.application.watcher.activated) then return end
-	runDelayed(0.1, function ()
-		local hasNoWindows = #(appObject:allWindows()) == 0
-		if hasNoWindows then appObject:hide() end
-	end)
-end
-braveWatcher = hs.application.watcher.new(braveActivation)
-braveWatcher:start()
