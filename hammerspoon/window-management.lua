@@ -65,9 +65,9 @@ function moveAndResize(direction)
 	resizingWorkaround(win, position)
 
 	if win:application():name() == "Drafts" then
-		runDelayed(0.15, function () toggleDraftsSidebar(win) end)
+		runDelayed(0.05, function () toggleDraftsSidebar(win) end)
 	elseif win:application():name() == "Obsidian" then
-		runDelayed(0.15, function () toggleObsidianSidebar(win) end)
+		runDelayed(0.05, function () toggleObsidianSidebar(win) end)
 	elseif win:application():name() == "Highlights" then
 		runDelayed(0.3, function () toggleHighlightsSidebar(win) end)
 	end
