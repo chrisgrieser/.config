@@ -5,6 +5,7 @@ require("private")
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
+-- requires actions `show-left-sidebar` and `hide-left-sidebar`
 function toggleDraftsSidebar (draftsWin)
 	runDelayed(0.05, function ()
 		local drafts_w = draftsWin:frame().w
