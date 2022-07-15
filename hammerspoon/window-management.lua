@@ -65,9 +65,9 @@ function moveAndResize(direction)
 	resizingWorkaround(win, position)
 
 	if win:application():name() == "Drafts" then
-		runDelayed(0.3, function () toggleDraftsSidebar(win) end)
+		runDelayed(0.15, function () toggleDraftsSidebar(win) end)
 	elseif win:application():name() == "Obsidian" then
-		runDelayed(0.3, function () toggleObsidianSidebar(win) end)
+		runDelayed(0.15, function () toggleObsidianSidebar(win) end)
 	elseif win:application():name() == "Highlights" then
 		runDelayed(0.3, function () toggleHighlightsSidebar(win) end)
 	end
@@ -378,7 +378,7 @@ function vsplit (mode)
 	resizingWorkaround(WIN_LEFT, f2)
 	WIN_RIGHT:raise()
 	WIN_LEFT:raise()
-	runDelayed (0.3, function ()
+	runDelayed (0.2, function ()
 		if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
 		elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
 		if WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT)
