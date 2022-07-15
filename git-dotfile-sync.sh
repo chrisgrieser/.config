@@ -3,6 +3,7 @@
 # go to script location (the script should be located in the git repository)
 THIS_LOCATION="$(dirname "$0")"
 cd "$THIS_LOCATION" || exit 1
+
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 
 details="$(git status --porcelain)"
