@@ -13,10 +13,10 @@ function acp (){
 		COMMIT_MSG="patch"
 	fi
 
-	git add -A
-	git commit -m "$COMMIT_MSG"
-	git pull
-	git push
+	git add -A \
+	&& git commit -m "$COMMIT_MSG" \
+	&& git pull \
+	&& git push
 }
 
 function amend () {
@@ -41,6 +41,7 @@ function amend () {
 	git push --force
 }
 
+alias add="git add -A"
 alias commit="git commit -m"
 alias push="git push"
 alias pull="git pull"
@@ -82,6 +83,7 @@ function nuke {
 
 	rm -rf "$LOCAL_REPO"
 	echo "Local repo removed."
+	echo "Downloading it again from remote…"
 
 	git clone "$SSH_REMOTE"
 	cd "$LOCAL_REPO" || return 1
@@ -120,5 +122,5 @@ function past (){
 		grep -i --context=1 "$query" "$new_file"
 		echo "**************************************************"
 	done
-	cd "$start_dir"
+	cd "$start_dir" || exit 1
 }

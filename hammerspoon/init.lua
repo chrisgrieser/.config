@@ -28,4 +28,4 @@ require("twitterrific-iina")
 
 notify("Config reloaded")
 reloadAllMenubarItems()
-gitDotfileSync()
+gitDotfileSync("wake")
