@@ -8,7 +8,7 @@ gitDotfileScript = os.getenv("HOME").."/dotfiles/git-dotfile-sync.sh"
 gitVaultScript = os.getenv("HOME").."/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh"
 
 function gitDotfileSync(args)
-	if not(args) then args = {args} end
+	if not(args) then args = {} end
 	hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		if exitCode == 0 then
 			log ("✅ dotfiles sync ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/sync.log")
@@ -20,7 +20,7 @@ function gitDotfileSync(args)
 end
 
 function gitVaultBackup(args)
-	if not(args) then args = {args} end
+	if not(args) then args = {} end
 	hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
 		if exitCode == 0 then
 			log ("🟪 vault sync ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/sync.log")
