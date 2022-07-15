@@ -56,7 +56,8 @@ function systemWake (eventType)
 		hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
 	end
 
-	if isIMacAtHome() then homeModeLayout()
+	if isIMacAtHome() and isProjector() then movieModeLayout()
+	elseif isIMacAtHome and not(isProjector()) then homeModeLayout()
 	elseif isAtOffice() then officeModeLayout() end
 
 	-- set darkmode if waking between 6:00 and 19:00
