@@ -6,10 +6,11 @@ require("private")
 -- WINDOW MOVEMENT
 
 function toggleDraftsSidebar (draftsWin)
-	notify ("Drafts")
 	local drafts_w = draftsWin:frame().w
+	notify ("Drafts "..drafts_w)
 	local screen_w = draftsWin:screen():frame().w
 	if (drafts_w / screen_w > 0.55) then
+		notify ("show")
 		hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
 	else
 		hs.application("Drafts"):selectMenuItem({"View", "Hide Draft List"})
