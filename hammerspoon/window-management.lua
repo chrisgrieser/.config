@@ -5,13 +5,12 @@ require("private")
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
--- requires actions `show-left-sidebar` and `hide-left-sidebar`
 function toggleDraftsSidebar (draftsWin)
 	runDelayed(0.05, function ()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
-		if (drafts_w / screen_w > 0.55) then
-			-- using actions since they are more reliable than the menu item
+		if (drafts_w / screen_w > 0.6) then
+			-- using URI scheme since they are more reliable than the menu item
 			hs.urlevent.openURL("drafts://x-callback-url/getCurrentDraft?x-success=drafts://open?showDraftList=true&uuid=")
 		else
 			hs.urlevent.openURL("drafts://x-callback-url/getCurrentDraft?x-success=drafts://open?showDraftList=false&uuid=")
