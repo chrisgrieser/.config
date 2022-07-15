@@ -11,14 +11,8 @@ function toggleDraftsSidebar (draftsWin)
 	notify ("Drafts "..drafts_w / screen_w)
 	if (drafts_w / screen_w > 0.55) then
 		hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
-		runDelayed(0.3, function ()
-			hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
-		end)
 	else
 		hs.application("Drafts"):selectMenuItem({"View", "Hide Draft List"})
-		runDelayed(0.3, function ()
-			hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
-		end)
 	end
 end
 

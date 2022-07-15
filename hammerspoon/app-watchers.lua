@@ -24,8 +24,10 @@ function finderWatcher(appName, eventType, appObject)
 		finderWin:setSize({w = target_w, h = target_h})
 	end
 
-	local hasNoWindows = #(appObject:allWindows()) == 0
-	if hasNoWindows then appObject:hide() end
+	runDelayed(0.1, function ()
+		local hasNoWindows = #(appObject:allWindows()) == 0
+		if hasNoWindows then appObject:hide() end
+	end)
 end
 finderAppWatcher = hs.application.watcher.new(finderWatcher)
 finderAppWatcher:start()
@@ -94,8 +96,10 @@ draftsWatcher3:start()
 -- BRAVE: Hide when no window on activation
 function braveActivation(appName, eventType, appObject)
 	if not(appName == "Brave Browser" and eventType == hs.application.watcher.activated) then return end
-	local hasNoWindows = #(appObject:allWindows()) == 0
-	if hasNoWindows then appObject:hide() end
+	runDelayed(0.1, function ()
+		local hasNoWindows = #(appObject:allWindows()) == 0
+		if hasNoWindows then appObject:hide() end
+	end)
 end
 braveWatcher = hs.application.watcher.new(braveActivation)
 braveWatcher:start()
