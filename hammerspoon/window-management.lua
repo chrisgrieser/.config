@@ -96,7 +96,7 @@ function homeModeLayout ()
 	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
 
 	openIfNotRunning("Mimestream")
-	openIfNotRunning("Discord")
+	openIfNotRunning("Drafts")
 	openIfNotRunning("Slack")
 	openIfNotRunning("Brave Browser")
 	openIfNotRunning("Obsidian")
@@ -109,8 +109,6 @@ function homeModeLayout ()
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
 	closeFinderWindows()
-
-	hs.brightness.set(60)
 
 	local screen = hs.screen.primaryScreen():name()
 	local homeLayout = {
