@@ -3,15 +3,16 @@
 cd "$(dirname "$0")" || exit 1
 
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
-details=$(git status --porcelain)
-filesChanged=$(echo -n "$details" | wc -l | tr -d ' ')
+filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
 
-[[ -z "$filesChanged" ]] && exit 0
-if [[ "$filesChanged" == 1 ]] ; then
+if [[ "$filesChanged" == 0 ]] ; then
+	exit 0
+elif [[ "$filesChanged" == 1 ]] ; then
 	changeType="$filesChanged file"
 else
 	changeType="$filesChanged files"
 fi
+details=$(git status --porcelain)
 msg="$(date +"%a, %H:%M"), $changeType, $device_name"
 
 git add -A \
