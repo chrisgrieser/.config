@@ -81,7 +81,7 @@ function draftsLaunchWake(appName, eventType, appObject)
 	if not(appName == "Drafts") then return end
 
 	if (eventType == hs.application.watcher.launched) then
-		runDelayed(0.5, function ()
+		runDelayed(1, function ()
 			appObject:selectMenuItem({"View", "Hide Toolbar"})
 		end)
 	elseif (eventType == hs.application.watcher.activated) then

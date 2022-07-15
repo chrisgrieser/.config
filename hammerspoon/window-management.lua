@@ -15,6 +15,16 @@ function toggleDraftsSidebar (draftsWin)
 	end
 end
 
+function toggleHighlightsSidebar (highlightsWin)
+	local drafts_w = highlightsWin:frame().w
+	local screen_w = highlightsWin:screen():frame().w
+	if (drafts_w / screen_w > 0.6) then
+		hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
+	else
+		hs.application("Highlights"):selectMenuItem({"View", "Hide Sidebar"})
+	end
+end
+
 -- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
 function toggleObsidianSidebar (obsiWin)
 	-- prevent popout window resizing to affect sidebars
@@ -55,9 +65,10 @@ function moveAndResize(direction)
 
 	if win:application():name() == "Drafts" then
 		runDelayed(0.3, function () toggleDraftsSidebar(win) end)
-	end
-	if win:application():name() == "Obsidian" then
+	elseif win:application():name() == "Obsidian" then
 		runDelayed(0.3, function () toggleObsidianSidebar(win) end)
+	elseif win:application():name() == "Highlights" then
+		runDelayed(0.3, function () toggleHighlightsSidebar(win) end)
 	end
 end
 
@@ -268,6 +279,7 @@ end
 
 -- Watcher, that raises win2 when win1 activates and vice versa. useful for splits
 splitStatusMenubar = hs.menubar.new()
+splitStatusMenubar:removeFromMenuBar() -- hide at beginning
 function pairedActivation(start)
 	if start then
 		pairedWinWatcher = hs.application.watcher.new(function (_, eventType)
@@ -348,6 +360,8 @@ function vsplit (mode)
 		elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
 		if WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT)
 		elseif WIN_LEFT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_LEFT) end
+		if WIN_RIGHT:application():name() == "Highlights" then toggleHighlightsSidebar(WIN_RIGHT)
+		elseif WIN_LEFT:application():name() == "Highlights" then toggleHighlightsSidebar(WIN_LEFT) end
 	end)
 
 	if mode == "unsplit" then
