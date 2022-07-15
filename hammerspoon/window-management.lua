@@ -317,7 +317,7 @@ function pairedActivation(start)
 		end)
 		pairedWinWatcher:start()
 		splitStatusMenubar:returnToMenuBar()
-		splitStatusMenubar:setTitle("")
+		splitStatusMenubar:setTitle("2️⃣")
 	else
 		pairedWinWatcher:stop()
 		splitStatusMenubar:removeFromMenuBar()
