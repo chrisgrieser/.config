@@ -68,7 +68,7 @@ covidTimer:start()
 dotfileSyncMenuBar = hs.menubar.new()
 function updateDotfileSyncStatusMenuBar()
 	local changes, success = hs.execute('git status --porcelain | wc -l | tr -d " "')
-	changes = changes:gsub("\n", "")
+	changes = trim(changes)
 
 	if tonumber(changes) == 0 or not(success) then
 		dotfileSyncMenuBar:removeFromMenuBar()
@@ -89,7 +89,7 @@ function updateDraftsMenubar()
 	else excludeTag2 = "home" end
 
 	local numberOfDrafts, success = hs.execute("python3 numberOfDrafts.py "..excludeTag1.." "..excludeTag2)
-	numberOfDrafts = numberOfDrafts:gsub("\n", "")
+	numberOfDrafts = trim(numberOfDrafts)
 
 	if tonumber(numberOfDrafts) == 0 or not(success) then
 		draftsCounterMenuBar:removeFromMenuBar()

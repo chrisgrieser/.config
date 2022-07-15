@@ -7,6 +7,10 @@ function numberOfScreens()
 	return #(hs.screen.allScreens())
 end
 
+function trim(str)
+	return (str:gsub("^%s*(.-)%s*$", "%1"))
+end
+
 function deviceName()
 	local name = hs.execute('scutil --get ComputerName | cut -d" " -f2-')
 	name = name:gsub("\n", "")
@@ -55,12 +59,12 @@ end
 
 function notify (text)
 	hs.notify.new({title="Hammerspoon", informativeText=text}):send()
-	print("notify: "..text) -- for the console
+	print("notify: "..trim(text)) -- for the console
 end
 
 function log (text, location)
 	hs.execute('echo "$(date "+%Y-%m-%d %H:%M")" "'..text..'" >> "'..location..'"')
-	print ("log: "..text) -- for the console
+	print ("log: "..trim(text)) -- for the console
 end
 
 function frontapp ()
