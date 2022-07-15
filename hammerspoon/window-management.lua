@@ -379,7 +379,7 @@ function vsplit (mode)
 	resizingWorkaround(WIN_LEFT, f2)
 	WIN_RIGHT:raise()
 	WIN_LEFT:raise()
-	runDelayed (0.7, function ()
+	runDelayed (0.3, function ()
 		if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
 		elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
 		if WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT)
@@ -387,12 +387,6 @@ function vsplit (mode)
 		if WIN_RIGHT:application():name() == "Highlights" then toggleHighlightsSidebar(WIN_RIGHT)
 		elseif WIN_LEFT:application():name() == "Highlights" then toggleHighlightsSidebar(WIN_LEFT) end
 	end)
-	-- runDelayed (0.6, function ()
-	-- 	if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
-	-- 	elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
-	-- 	if WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT)
-	-- 	elseif WIN_LEFT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_LEFT) end
-	-- end)
 
 	if mode == "unsplit" then
 		WIN_RIGHT = nil
