@@ -24,15 +24,12 @@ weatherStatusBar = hs.menubar.new()
 function setWeather()
 	local _, weather = hs.http.get("https://wttr.in/" .. weatherLocation .. "?format=1", nil)
 	if not (weather) then
-		weatherStatusBar:setTitle("")
+		weatherStatusBar:setTitle("–")
 		return
 	end
-	local _, weatherLong = hs.http.get("https://wttr.in/" .. weatherLocation .. "?format=4", nil)
-	weather = weather:gsub("\n", ""):gsub("+", "")
-	weatherLong = weatherLong:gsub("\n", ""):gsub("+", "")
+	weather = (trim(weather)):gsub("+", "")
 
 	weatherStatusBar:setTitle(weather)
-	weatherStatusBar:setTooltip(weatherLong)
 end
 weatherTimer = hs.timer.doEvery(weatherUpdateMin * 60, setWeather)
 weatherTimer:start()
@@ -43,7 +40,7 @@ covidBar = hs.menubar.new()
 function setCovidBar()
 	local _, nationalDataJSON = hs.http.get("https://api.corona-zahlen.org/germany", nil)
 	if not (nationalDataJSON) then
-		covidBar:setTitle("")
+		covidBar:setTitle("–")
 		return
 	end
 	local nationalNumbers = hs.json.decode(nationalDataJSON)
@@ -116,7 +113,7 @@ draftsMenuBarWatcher2:start()
 fileHubCountMenuBar = hs.menubar.new()
 function setFileHubCountMenuBar()
 	local numberOfFiles, success = hs.execute('ls "'..fileHubLocation..'" | wc -l | tr -d " "')
-	numberOfFiles = numberOfFiles:gsub("\n", "")
+	numberOfFiles = trim(numberOfFiles)
 
 	if tonumber(numberOfFiles) == 0 or not(success) then
 		fileHubCountMenuBar:removeFromMenuBar()
