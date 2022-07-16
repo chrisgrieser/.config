@@ -16,6 +16,17 @@ function toggleDraftsSidebar (draftsWin)
 			hs.urlevent.openURL("drafts://x-callback-url/getCurrentDraft?x-success=drafts://open?showDraftList=false&uuid=")
 		end
 	end)
+	-- repetitation for some rare cases with lag needed
+	runDelayed(0.3, function ()
+		local drafts_w = draftsWin:frame().w
+		local screen_w = draftsWin:screen():frame().w
+		if (drafts_w / screen_w > 0.6) then
+			-- using URI scheme since they are more reliable than the menu item
+			hs.urlevent.openURL("drafts://x-callback-url/getCurrentDraft?x-success=drafts://open?showDraftList=true&uuid=")
+		else
+			hs.urlevent.openURL("drafts://x-callback-url/getCurrentDraft?x-success=drafts://open?showDraftList=false&uuid=")
+		end
+	end)
 end
 
 function toggleHighlightsSidebar (highlightsWin)
@@ -34,6 +45,18 @@ end
 function toggleObsidianSidebar (obsiWin)
 	runDelayed(0.05, function ()
 		-- prevent popout window resizing to affect sidebars
+		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
+		if (numberOfObsiWindows > 1) then return end
+
+		local obsi_width = obsiWin:frame().w
+		local screen_width = obsiWin:screen():frame().w
+		if (obsi_width / screen_width > 0.6) then
+			hs.urlevent.openURL("obsidian://sidebar?side=left&show=true")
+		else
+			hs.urlevent.openURL("obsidian://sidebar?side=left&show=false")
+		end
+	end)
+	runDelayed(0.3, function ()
 		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
 		if (numberOfObsiWindows > 1) then return end
 
