@@ -2,9 +2,9 @@ require("utils")
 
 function openSwimUSB (device)
 	if device.eventType == "added" then
-		notify ("connected: "..productName)
+		notify ("connected: "..device.productName)
 	elseif device.eventType == "removed" then
-		notify ("disconnected"..productName)
+		notify ("disconnected"..device.productName)
 	end
 end
 
