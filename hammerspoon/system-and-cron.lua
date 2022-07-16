@@ -8,11 +8,8 @@ gitDotfileScript = os.getenv("HOME").."/dotfiles/git-dotfile-sync.sh"
 gitVaultScript = os.getenv("HOME").."/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh"
 
 function gitDotfileSync(args)
-	if args then
-		args = {args}
-	else
-		args = {}
-	end
+	if args then args = {args}
+	else args = {} end
 
 	hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		if exitCode == 0 then
