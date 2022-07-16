@@ -39,6 +39,15 @@ function toggleHighlightsSidebar (highlightsWin)
 			hs.application("Highlights"):selectMenuItem({"View", "Hide Sidebar"})
 		end
 	end)
+	runDelayed(0.5, function ()
+		local drafts_w = highlightsWin:frame().w
+		local screen_w = highlightsWin:screen():frame().w
+		if (drafts_w / screen_w > 0.6) then
+			hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
+		else
+			hs.application("Highlights"):selectMenuItem({"View", "Hide Sidebar"})
+		end
+	end)
 end
 
 -- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
