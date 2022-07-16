@@ -14,8 +14,8 @@ function bookmarkSync()
 		cp "$HOME/Library/Application Support/$BROWSER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
 	]])
 end
-BraveBookmarks = os.getenv("HOME") .. "/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks"
-bookmarkWatcher = hs.pathwatcher.new(BraveBookmarks, bookmarkSync)
+BrowserBookmarks = home.."/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks"
+bookmarkWatcher = hs.pathwatcher.new(BrowserBookmarks, bookmarkSync)
 bookmarkWatcher:start()
 
 --------------------------------------------------------------------------------
