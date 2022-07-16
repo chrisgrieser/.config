@@ -6,7 +6,6 @@
 
 # open tab if there is no tab open to ensure Dark Reader switches as well
 tell application "Brave Browser"
-		activate
 		set openblank to false
 		if ((count of window) is 0) then
 			set openblank to true
