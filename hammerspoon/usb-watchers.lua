@@ -7,6 +7,7 @@ function openSwimAdded (device)
 		if exitCode == 0 then notify ("✅ podcast sync finished.")
 		else notify("⚠️️ podcast sync error"..stdErr) end
 	end):start()
+
 end
 
 openSwimWatcher = hs.usb.watcher.new(openSwimAdded)
