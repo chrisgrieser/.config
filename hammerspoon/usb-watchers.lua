@@ -1,12 +1,9 @@
 require("utils")
 
 function openSwimUSB (device)
-	notify(device.eventType)
-	if device.eventType == "added" then
-		notify ("connected: "..device.productName)
-	elseif device.eventType == "removed" then
-		notify ("disconnected"..device.productName)
-	end
+	if not(device.eventType == "added" and device.productName == "LC8234xx_17S EVK") then return end
+
+	notify ("connected: openSwim")
 end
 
 openSwimWatcher = hs.usb.watcher.new(openSwimUSB)
