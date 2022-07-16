@@ -58,13 +58,13 @@ zoomAppWatcher:start()
 -- - Sync Dark & Light Mode
 -- - Start with Highlight as Selection
 function highlightsWatcher(appName, eventType)
-	if not(eventType == hs.application.watcher.launching and appName == "Highlights") then return end
+	if not(eventType == hs.application.watcher.launched and appName == "Highlights") then return end
 	hs.osascript.applescript([[
 		tell application "System Events"
 			tell appearance preferences to set isDark to dark mode
 			if (isDark is false) then set targetView to "Default"
 			if (isDark is true) then set targetView to "Night"
-			delay 0.6
+			delay 0.4
 
 			tell process "Highlights"
 				set frontmost to true
@@ -74,6 +74,14 @@ function highlightsWatcher(appName, eventType)
 			end tell
 		end tell
 	]])
+
+	-- move to the left
+	runDelayed(0.5, function ()
+		local win = hs.application("Highlights"):focusedWindow()
+		local win_w = win:frame().w
+		local win_h = win:frame().h
+		win:move({x = 0, y = 0, w = win_w, h = win_h })
+	end)
 end
 highlightsAppWatcher = hs.application.watcher.new(highlightsWatcher)
 highlightsAppWatcher:start()

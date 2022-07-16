@@ -55,6 +55,12 @@ repoArray.forEach(localRepoFilePath => {
 	const isAlfredWorkflow = finderApp.exists(Path(localRepoFilePath + "/info.plist"));
 	const isObsiPlugin = finderApp.exists(Path(localRepoFilePath + "/manifest.json"));
 
+	// Dirty Repo
+	let dirtyIcon = "";
+	const filesChangedStr = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain | wc -l | tr -d " "`);
+	const dirtyRepo = parseInt(filesChangedStr) !== 0;
+	if (dirtyRepo) dirtyIcon = " ✴️";
+
 	// Alfred Workflow Repos
 	if (isAlfredWorkflow) {
 		repoName = readPlist("name", localRepoFilePath + "/info.plist");
@@ -80,7 +86,7 @@ repoArray.forEach(localRepoFilePath => {
 	}
 
 	jsonArray.push({
-		"title": repoName,
+		"title": repoName + dirtyIcon,
 		"match": alfredMatcher (repoName),
 		"icon": { "path": iconpath },
 		"arg": localRepoFilePath,
