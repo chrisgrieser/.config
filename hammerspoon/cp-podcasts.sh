@@ -1,7 +1,11 @@
 #!/bin/zsh
+
 PODCAST_LOCATION=~"/Library/Group Containers/243LU875E5.groups.com.apple.podcasts/Library/Cache/"
 PODCAST_TARGET="/Volumes/OpenSwim/"
 
+#-------------------------------------------------------------------------------
+
+# in case mounting is lagging
 i=1
 while [[ ! -e "$PODCAST_TARGET" ]] && [[ $i -lt 10 ]]; do
 	sleep 0.5
