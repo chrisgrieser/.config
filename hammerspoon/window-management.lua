@@ -309,17 +309,17 @@ splitStatusMenubar:removeFromMenuBar() -- hide at beginning
 function pairedActivation(start)
 	if start then
 		pairedWinWatcher = hs.application.watcher.new(function (_, eventType)
-			if not(eventType == hs.application.watcher.activated) then return end
-
-			local currentWindow = hs.window.focusedWindow()
-			if not(currentWindow) then return end
-
-			if currentWindow:id() == WIN_RIGHT:id() then
-				WIN_LEFT:raise() -- not using :focus(), since that causes infinite recursion
-			elseif currentWindow:id() == WIN_LEFT:id() then
-				WIN_RIGHT:raise()
+			if eventType == hs.application.watcher.activated then
+				local currentWindow = hs.window.focusedWindow()
+				if not(currentWindow) then return end
+				if currentWindow:id() == WIN_RIGHT:id() then
+					WIN_LEFT:raise() -- not using :focus(), since that causes infinite recursion
+				elseif currentWindow:id() == WIN_LEFT:id() then
+					WIN_RIGHT:raise()
+				end
+			elseif eventType == hs.application.watcher.terminated then
+				vsplit("unsplit")
 			end
-
 		end)
 		pairedWinWatcher:start()
 		splitStatusMenubar:returnToMenuBar()
