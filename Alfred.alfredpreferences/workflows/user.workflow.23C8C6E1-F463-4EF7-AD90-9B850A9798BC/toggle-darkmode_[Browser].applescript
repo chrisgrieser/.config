@@ -18,7 +18,7 @@ tell application "Brave Browser"
 
 		if (openblank) then
 			open location "http://www.blankwebsite.com/"
-			delay 0.2
+			delay 0.3
 			set BrowserWasntRunning to true
 		end if
 		delay 0.1
@@ -31,7 +31,7 @@ end tell
 
 # close tab again
 if (openblank)
-	delay 0.2
+	delay 0.3
 	tell application "Brave Browser" to close active tab of front window
 end if
 
