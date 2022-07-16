@@ -108,6 +108,13 @@ draftsMenuBarWatcher1:start()
 draftsMenuBarWatcher2 = hs.application.watcher.new(draftsWatcher)
 draftsMenuBarWatcher2:start()
 
+-- `hammerspoon://update-drafts-menubar`
+hs.urlevent.bind("update-drafts-menubar", function()
+	updateDraftsMenubar()
+	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
+end)
+
+
 --------------------------------------------------------------------------------
 
 fileHubCountMenuBar = hs.menubar.new()
