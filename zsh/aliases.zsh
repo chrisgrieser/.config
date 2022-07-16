@@ -9,8 +9,8 @@ alias .="open ."
 alias ..="z .."
 alias ...="z ../.."
 alias ....="z ../../.."
-alias wd='z "$WD"' # working directory
-alias d='z "$DOTFILES_FOLDER"' # dotfiles repo
+alias wd='cd "$WD"' # working directory
+alias d='cd "$DOTFILE_FOLDER"' # dotfiles repo
 
 # utils
 alias q='exit'

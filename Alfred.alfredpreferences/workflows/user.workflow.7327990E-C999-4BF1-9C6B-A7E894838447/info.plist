@@ -45,6 +45,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string>/System/Library/CoreServices/Finder.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>6EE6E827-27D1-4C3C-BE0D-1361E16F0F32</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -124,21 +139,6 @@ JSON.stringify({ 'items': volume_array });
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>6AFDF8FB-7B99-46E6-ABBB-772B0525181A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Library/CoreServices/Finder.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>6EE6E827-27D1-4C3C-BE0D-1361E16F0F32</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
