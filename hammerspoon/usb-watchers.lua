@@ -2,11 +2,11 @@ require("utils")
 
 function openSwimAdded (device)
 	if not(device.eventType == "added" and device.productName == "LC8234xx_17S EVK") then return end
-	hs.execute([[
-		PODCAST_LOCATION=~"/Library/Group Containers/243LU875E5.groups.com.apple.podcasts/Library/Cache/"
-		rsync "$PODCAST_LOCATION"/*.mp3 "/Volumes/OpenSwim/"
-	]])
-	notify ("Podcasts moved.")
+
+	hs.task.new(os.getenv("HOME").."dotfiles/hammerspoon/cp-podcasts.zsh", function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
+		if exitCode == 0 then notify ("✅ podcast sync finished.")
+		else notify("⚠️️ podcast sync error"..stdErr) end
+	end):start()
 end
 
 openSwimWatcher = hs.usb.watcher.new(openSwimAdded)
