@@ -270,7 +270,7 @@ end
 
 -- keep Twitterrific visible
 function twitterrificNextToPseudoMax(_, eventType)
-	if not(eventType == hs.application.watcher.activated) then return end
+	if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.launching) then return end
 	local currentWindow = hs.window.focusedWindow()
 	if not(currentWindow) then return end
 	if (WIN_LEFT == currentWindow) or (WIN_RIGHT == currentWindow) then return end
