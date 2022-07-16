@@ -2,11 +2,10 @@
 
 # Check with Catch
 # this prevents having the catch icon on all the time
-tell application "Catch"
-	launch
-	delay 7
-	quit
-end tell
+tell application "Catch" to launch
+delay 7
+tell application "Catch" to quit
+
 
 # SLEEP TIMER
 do shell script "killall \"YouTube\" || true"
