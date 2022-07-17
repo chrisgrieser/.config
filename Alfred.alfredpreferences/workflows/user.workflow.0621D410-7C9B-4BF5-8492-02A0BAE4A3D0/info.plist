@@ -23,19 +23,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>414582E5-0391-48AC-B78B-79F0B0E179EF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>66AE3F35-B1A8-4065-90F8-C963E53500E3</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>5043B89E-B8D1-4515-ACDA-70F5B4D009FA</key>
 		<array/>
 		<key>548C7E00-D279-4BFE-B4CB-4F94C970637F</key>
@@ -106,7 +93,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</string>
+				<string>BCD625F9-B6D0-4E0E-A014-2FBF6A2248A5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -132,7 +119,30 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>BCD625F9-B6D0-4E0E-A014-2FBF6A2248A5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BCD625F9-B6D0-4E0E-A014-2FBF6A2248A5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
 				<string>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>5043B89E-B8D1-4515-ACDA-70F5B4D009FA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -209,17 +219,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>414582E5-0391-48AC-B78B-79F0B0E179EF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>5043B89E-B8D1-4515-ACDA-70F5B4D009FA</string>
+				<string>66AE3F35-B1A8-4065-90F8-C963E53500E3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -283,25 +283,20 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>68</integer>
 				<key>script</key>
-				<string>export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
-
-download_location="${download_location/#~/$HOME}"
-cd "$download_location"
-
-youtube-dl --format $output_format "{query}" 2&gt;&amp;1</string>
+				<string>tell application "Brave Browser" to return URL of active tab of front window</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>ydl.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>414582E5-0391-48AC-B78B-79F0B0E179EF</string>
+			<string>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -325,29 +320,6 @@ youtube-dl --format $output_format "{query}" 2&gt;&amp;1</string>
 			<string>7EC8C18F-E353-4A93-9F40-FDB4C9531D57</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "Brave Browser" to return URL of active tab of front window</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-browser-url_[Browser].applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -392,6 +364,14 @@ youtube-dl --format $output_format "{query}" 2&gt;&amp;1</string>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>66AE3F35-B1A8-4065-90F8-C963E53500E3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>BCD625F9-B6D0-4E0E-A014-2FBF6A2248A5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -607,6 +587,21 @@ echo -n "$title"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>soundname</key>
+				<string>Basso</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>802A4E01-7BC2-4D33-AE03-CA4171F5CEE7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -622,21 +617,6 @@ echo -n "$title"</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>E1E42FAB-DEA5-479C-90B3-1B2A03B28BBF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Basso</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>802A4E01-7BC2-4D33-AE03-CA4171F5CEE7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -668,7 +648,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>820</real>
+			<real>700</real>
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
@@ -680,17 +660,6 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<real>385</real>
 			<key>ypos</key>
 			<real>425</real>
-		</dict>
-		<key>414582E5-0391-48AC-B78B-79F0B0E179EF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>run youtube-dl</string>
-			<key>xpos</key>
-			<real>425</real>
-			<key>ypos</key>
-			<real>70</real>
 		</dict>
 		<key>4B06046A-148C-4F17-B241-C48299B1D2F1</key>
 		<dict>
@@ -706,9 +675,9 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>315</real>
 			<key>ypos</key>
-			<real>225</real>
+			<real>215</real>
 		</dict>
 		<key>548C7E00-D279-4BFE-B4CB-4F94C970637F</key>
 		<dict>
@@ -735,7 +704,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>575</real>
+			<real>455</real>
 			<key>ypos</key>
 			<real>75</real>
 		</dict>
@@ -786,6 +755,15 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
+		<key>BCD625F9-B6D0-4E0E-A014-2FBF6A2248A5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>235</real>
+			<key>ypos</key>
+			<real>155</real>
+		</dict>
 		<key>C0034F9D-C3AB-45C4-B7FD-F2DF921E9D5C</key>
 		<dict>
 			<key>colorindex</key>
@@ -800,7 +778,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>680</real>
+			<real>560</real>
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
@@ -818,7 +796,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>685</real>
+			<real>560</real>
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
@@ -829,16 +807,16 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>note</key>
 			<string>get current Browser URL</string>
 			<key>xpos</key>
-			<real>230</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>70</real>
+			<real>65</real>
 		</dict>
 		<key>F6D1C954-6EC9-4DF0-9124-DC7506653028</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>825</real>
+			<real>700</real>
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
