@@ -8,6 +8,31 @@
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
+      "description": "↹ Tab →  Meh",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "tab"
+          },
+          "to_if_alone": [
+            {
+              "key_code": "tab"
+            }
+          ],
+          "to": [
+            {
+              "key_code": "right_shift",
+              "modifiers": [
+                "right_control",
+                "right_option"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "description": "⇪ Capslock → Hyper/Esc",
       "manipulators": [
         {
@@ -137,7 +162,7 @@
       ]
     },
     {
-      "description": "⇪ Hyper + hjklmnbe: ←↓↑→↵⌫⇐⇒",
+      "description": "⇪ Hyper + hjkliomn: ←↓↑→↵⌫⇐⇒",
       "manipulators": [
         {
           "type": "basic",
@@ -256,7 +281,7 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "b",
+            "key_code": "i",
             "modifiers": {
               "mandatory": [
                 "option",
@@ -278,7 +303,7 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "e",
+            "key_code": "o",
             "modifiers": {
               "mandatory": [
                 "option",
@@ -296,28 +321,69 @@
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "description": "↹ Tab →  Meh",
-      "manipulators": [
+        },
         {
           "type": "basic",
           "from": {
-            "key_code": "tab"
-          },
-          "to_if_alone": [
-            {
-              "key_code": "tab"
+            "key_code": "b",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "shift",
+                "command",
+                "control"
+              ]
             }
-          ],
+          },
           "to": [
             {
-              "key_code": "right_shift",
+              "key_code": "delete_or_backspace",
               "modifiers": [
-                "right_control",
-                "right_option"
+                "option"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "p",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "u",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow",
+              "modifiers": [
+                "command"
               ]
             }
           ]
