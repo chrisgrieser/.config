@@ -103,10 +103,11 @@ draftsWatcher3 = hs.application.watcher.new(draftsLaunchWake)
 draftsWatcher3:start()
 
 -- SUBLIME
-function sublimeLaunch(appName, eventType, appObject)
+-- workaround for Window positioning issue, will be fixed with build 4130 being released - https://github.com/sublimehq/sublime_text/issues/5237
+function sublimeLaunch(appName, eventType)
 	if not(appName == "Sublime Text" and eventType == hs.application.watcher.launched) then return end
 
-	runDelayed(0.02, function ()
+	runDelayed(0.04, function ()
 		moveAndResize("pseudo-maximized")
 	end)
 end
