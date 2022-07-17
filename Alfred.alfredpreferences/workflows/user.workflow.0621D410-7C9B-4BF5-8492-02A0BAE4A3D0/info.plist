@@ -280,6 +280,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>ydl</string>
+				<key>subtext</key>
+				<string>Browser tab</string>
+				<key>text</key>
+				<string>⬇️ Download with youtube-dl</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>7EC8C18F-E353-4A93-9F40-FDB4C9531D57</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -303,27 +324,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>ydl</string>
-				<key>subtext</key>
-				<string>Brave tab</string>
-				<key>text</key>
-				<string>⬇️ Download with youtube-dl</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>7EC8C18F-E353-4A93-9F40-FDB4C9531D57</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -339,20 +339,6 @@
 						<string>error</string>
 						<key>uid</key>
 						<string>B13FDA78-F912-4379-8044-815D8730371F</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>.*warning.*</string>
-						<key>outputlabel</key>
-						<string>warning</string>
-						<key>uid</key>
-						<string>DFD5D12E-B63F-421E-A927-D95DD8C053A6</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
@@ -706,7 +692,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>90</real>
 		</dict>
 		<key>77FF34ED-C1A2-4866-B205-06B792B3975B</key>
 		<dict>
@@ -804,12 +790,10 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
-			<key>note</key>
-			<string>get current Browser URL</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>65</real>
+			<real>70</real>
 		</dict>
 		<key>F6D1C954-6EC9-4DF0-9124-DC7506653028</key>
 		<dict>
@@ -827,8 +811,6 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 	<dict>
 		<key>download_location</key>
 		<string>~/RomComs/-new</string>
-		<key>output_format</key>
-		<string>mp4</string>
 		<key>youtube_link_folder</key>
 		<string>~/Video/Downloaded</string>
 	</dict>
