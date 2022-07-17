@@ -67,6 +67,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>15B82CF7-E5F9-4F86-B84E-325326D2D931</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0844494F-6093-4130-BB1D-E363DD0E89B1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>228D9B7B-E0CD-45DA-8942-23DBC58C1432</key>
 		<array>
 			<dict>
@@ -111,19 +124,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>346BDE9D-5DC3-466F-8DE1-3F9BFC9E6646</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B54963C8-650A-4E42-A841-A1A744BE7D2A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -369,6 +369,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B2CCA815-4645-4387-A918-9B61380863A7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8F2ACB5B-825C-4F66-AA40-1E4155A96426</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>BBEB4750-0817-42C1-BA51-23E6E7A48C0D</key>
 		<array>
 			<dict>
@@ -544,19 +557,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>0323386B-1C83-483E-9C13-88DAD0F48CE9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F87AADFD-2C80-4344-AF69-0647B7DC0048</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>346BDE9D-5DC3-466F-8DE1-3F9BFC9E6646</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -966,69 +966,56 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
 				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>geniusScanFolder=~"/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
-default_folder="${default_folder/#\~/$HOME}"
-
-mv "$geniusScanFolder"* "$default_folder"
-open "$default_folder"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
+				<key>focusedappvariablename</key>
 				<string></string>
-				<key>type</key>
-				<integer>5</integer>
+				<key>hotkey</key>
+				<integer>4</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>H</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>346BDE9D-5DC3-466F-8DE1-3F9BFC9E6646</string>
+			<string>B2CCA815-4645-4387-A918-9B61380863A7</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
+				<key>count</key>
 				<integer>1</integer>
-				<key>keyword</key>
-				<string>scans</string>
-				<key>subtext</key>
-				<string>from Genius Scan</string>
-				<key>text</key>
-				<string>Move Scans to File Hub</string>
-				<key>withspace</key>
-				<true/>
+				<key>keychar</key>
+				<string>←</string>
+				<key>keycode</key>
+				<integer>123</integer>
+				<key>keymod</key>
+				<integer>12058624</integer>
+				<key>overridewithargument</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
 			<key>uid</key>
-			<string>F87AADFD-2C80-4344-AF69-0647B7DC0048</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ Scans moved</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>B54963C8-650A-4E42-A841-A1A744BE7D2A</string>
+			<string>8F2ACB5B-825C-4F66-AA40-1E4155A96426</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1098,6 +1085,41 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>37</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>L</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>15B82CF7-E5F9-4F86-B84E-325326D2D931</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>jumpto</key>
 				<string>alfred.action.move</string>
 				<key>path</key>
@@ -1146,6 +1168,27 @@ end tell</string>
 			<string>993B0563-52D6-4547-B1D7-97E70FF55DB2</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>→</string>
+				<key>keycode</key>
+				<integer>124</integer>
+				<key>keymod</key>
+				<integer>12058624</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>0844494F-6093-4130-BB1D-E363DD0E89B1</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1416,23 +1459,6 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string> </string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>7B43FD68-D463-4626-BE13-7D1C65B12ECF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -1459,6 +1485,23 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string> </string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>7B43FD68-D463-4626-BE13-7D1C65B12ECF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2118,6 +2161,13 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>ypos</key>
 			<real>90</real>
 		</dict>
+		<key>0844494F-6093-4130-BB1D-E363DD0E89B1</key>
+		<dict>
+			<key>xpos</key>
+			<real>570</real>
+			<key>ypos</key>
+			<real>540</real>
+		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
 			<key>colorindex</key>
@@ -2142,6 +2192,15 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<real>920</real>
 			<key>ypos</key>
 			<real>1000</real>
+		</dict>
+		<key>15B82CF7-E5F9-4F86-B84E-325326D2D931</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>540</real>
 		</dict>
 		<key>1B6838B5-A98F-4E36-B645-F289BA31A5F8</key>
 		<dict>
@@ -2189,15 +2248,6 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<real>210</real>
 			<key>ypos</key>
 			<real>910</real>
-		</dict>
-		<key>346BDE9D-5DC3-466F-8DE1-3F9BFC9E6646</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>210</real>
-			<key>ypos</key>
-			<real>380</real>
 		</dict>
 		<key>394B346C-D913-44B8-B811-71FFE2F6A2C2</key>
 		<dict>
@@ -2391,6 +2441,13 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>ypos</key>
 			<real>1645</real>
 		</dict>
+		<key>8F2ACB5B-825C-4F66-AA40-1E4155A96426</key>
+		<dict>
+			<key>xpos</key>
+			<real>570</real>
+			<key>ypos</key>
+			<real>415</real>
+		</dict>
 		<key>93B85973-AE73-4B7F-A698-D19A0E332914</key>
 		<dict>
 			<key>colorindex</key>
@@ -2456,14 +2513,14 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>ypos</key>
 			<real>1645</real>
 		</dict>
-		<key>B54963C8-650A-4E42-A841-A1A744BE7D2A</key>
+		<key>B2CCA815-4645-4387-A918-9B61380863A7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>390</real>
+			<real>405</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>415</real>
 		</dict>
 		<key>B608F624-BD49-4530-BB67-00CD6692B0C8</key>
 		<dict>
@@ -2669,17 +2726,6 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<real>370</real>
 			<key>ypos</key>
 			<real>235</real>
-		</dict>
-		<key>F87AADFD-2C80-4344-AF69-0647B7DC0048</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>restart &amp; reset default window size</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>380</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
