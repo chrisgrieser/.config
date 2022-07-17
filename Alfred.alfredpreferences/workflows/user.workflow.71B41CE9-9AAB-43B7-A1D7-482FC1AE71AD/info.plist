@@ -966,6 +966,58 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>jumpto</key>
+				<string>alfred.action.move</string>
+				<key>path</key>
+				<string></string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.actioninalfred</string>
+			<key>uid</key>
+			<string>56CD69F0-DA3F-4EF1-809F-78543F4459A1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>46</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>M</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>993B0563-52D6-4547-B1D7-97E70FF55DB2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1085,6 +1137,58 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>file_path="$*"
+file_name="${file_path##*/}"
+file_without_ext="${file_name%.*}"
+parent_folder="${file_path%/*}"
+
+cd "$parent_folder"
+mkdir "$file_without_ext"
+mv "$file_name" ./"$file_without_ext"/"$file_without_ext".zip
+cd ./"$file_without_ext"
+
+unzip "$file_without_ext".zip
+mv "$file_without_ext".zip ~/.trash
+open .</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>95E5B67E-7350-4876-B7DF-90F25BC4A121</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Unzip as if .zip file</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>C5110F20-5D1C-438B-862D-177C45274CDD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1114,58 +1218,6 @@ end tell</string>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>15B82CF7-E5F9-4F86-B84E-325326D2D931</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>jumpto</key>
-				<string>alfred.action.move</string>
-				<key>path</key>
-				<string></string>
-				<key>type</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.actioninalfred</string>
-			<key>uid</key>
-			<string>56CD69F0-DA3F-4EF1-809F-78543F4459A1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>46</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>M</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>993B0563-52D6-4547-B1D7-97E70FF55DB2</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1247,58 +1299,6 @@ end tell</string>
 			<string>96400117-9585-4C38-8250-D27376BAED9A</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>file_path="$*"
-file_name="${file_path##*/}"
-file_without_ext="${file_name%.*}"
-parent_folder="${file_path%/*}"
-
-cd "$parent_folder"
-mkdir "$file_without_ext"
-mv "$file_name" ./"$file_without_ext"/"$file_without_ext".zip
-cd ./"$file_without_ext"
-
-unzip "$file_without_ext".zip
-mv "$file_without_ext".zip ~/.trash
-open .</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>95E5B67E-7350-4876-B7DF-90F25BC4A121</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Unzip as if .zip file</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>C5110F20-5D1C-438B-862D-177C45274CDD</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2374,9 +2374,9 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>215</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>410</real>
 		</dict>
 		<key>589D0BC3-B2D3-4FB3-909C-249C10B2E2DD</key>
 		<dict>
@@ -2473,9 +2473,9 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>215</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>535</real>
 		</dict>
 		<key>96400117-9585-4C38-8250-D27376BAED9A</key>
 		<dict>
@@ -2491,9 +2491,9 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>410</real>
 		</dict>
 		<key>9C6A258E-06E8-493F-8009-194EED03FAFF</key>
 		<dict>
@@ -2565,9 +2565,9 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>535</real>
 		</dict>
 		<key>C9992321-E495-42F5-8309-4206EE81A1F6</key>
 		<dict>
