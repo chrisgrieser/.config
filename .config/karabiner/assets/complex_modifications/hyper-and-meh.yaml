@@ -1,8 +1,4 @@
 title: ⇪↹ Hyper and Meh Key
-version: "1.0"
-maintainers:
-  - pseudometa
-import-url: karabiner://karabiner/assets/complex_modifications/import?url=https://github.com/chrisgrieser/dotfiles/blob/main/.config/karabiner/assets/complex_modifications/Hyper-and-Meh.json
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
   - description: ↹ Tab →  Meh
@@ -87,7 +83,7 @@ rules:
           - key_code: escape
             modifiers:
               - option
-  - description: '⇪ Hyper + hjkliomn: ←↓↑→↵⌫⇐⇒'
+  - description: '⇪ Hyper + hjkliomnö: ←↓↑→↵⌫⇐⇒'
     manipulators:
       - type: basic
         from:
@@ -198,6 +194,36 @@ rules:
           - key_code: delete_or_backspace
             modifiers:
               - option
+
+      # ö (German Keyboard) → transpose
+      - type: basic
+        from:
+          key_code: semicolon
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: right_arrow
+            modifiers:
+              - shift
+          - key_code: x
+            modifiers:
+              - command
+          - key_code: left_arrow
+          - key_code: v
+            modifiers:
+              - command
+        conditions:
+          - type: frontmost_application_unless
+            bundle_identifiers:
+              - ^md\.obsidian$
+              - ^com\.sublimetext
+          - type: input_source_if
+            input_sources:
+              - language: ^de$
 
       # goto end of (visual) line
       - type: basic
