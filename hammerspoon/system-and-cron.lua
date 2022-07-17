@@ -7,9 +7,9 @@ repoSyncFrequencyMin = 15
 gitDotfileScript = os.getenv("HOME").."/dotfiles/git-dotfile-sync.sh"
 gitVaultScript = os.getenv("HOME").."/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh"
 
-function gitDotfileSync(args)
-	if args then args = {args}
-	else args = {} end
+function gitDotfileSync(arg)
+	if arg then arg = {arg}
+	else arg = {} end
 
 	hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		if exitCode == 0 then
@@ -18,13 +18,10 @@ function gitDotfileSync(args)
 			notify("⚠️️ dotfiles "..stdErr)
 			log ("⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
 		end
-	end, args):start()
+	end, arg):start()
 end
 
-function gitVaultBackup(args)
-	if args then args = {args}
-	else args = {} end
-
+function gitVaultBackup(arg)
 	hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
 		if exitCode == 0 then
 			log ("🟪 vault sync ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/sync.log")
@@ -32,7 +29,7 @@ function gitVaultBackup(args)
 			notify("⚠️️ vault "..stdErr)
 			log ("⚠️ vault sync ("..deviceName().."): "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
 		end
-	end, args):start()
+	end):start()
 end
 
 --------------------------------------------------------------------------------
@@ -55,7 +52,7 @@ shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
 shutDownWatcher:start()
 
 function systemWake (eventType)
-	if not(eventType == hs.caffeinate.watcher.systemDidWake or eventType == hs.caffeinate.watcher.screensDidUnlock) then return end
+	if not(eventType == hs.caffeinate.watcher.systemDidWake) then return end
 
 	if appIsRunning("Obsidian") and appIsRunning("Discord") then
 		hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
