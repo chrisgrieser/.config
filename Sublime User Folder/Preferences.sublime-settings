@@ -45,7 +45,7 @@
 
 	// Font & Spacing
 	"ui_scale": 1.7,
-	"font_size": 14,
+	"font_size": 13,
 	"font_face": "Input",
 	"font_options": ["no_liga", "no_italic", "no_bold"],
 

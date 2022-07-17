@@ -48,23 +48,6 @@ rules:
             bundle_identifiers:
               - ^md\.obsidian$
               - ^com\.sublimetext
-  - description: '🔘 ⌃+W → Delete Word (Vim: i_Ctrl-W)'
-    manipulators:
-      - type: basic
-        from:
-          key_code: w
-          modifiers:
-            mandatory:
-              - control
-        to:
-          - key_code: delete_or_backspace
-            modifiers:
-              - option
-        conditions:
-          - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^md\.obsidian$
-              - ^com\.sublimetext
   - description: "🔘 § → | (+ US Layout); ⌥3 for Paragraph Symbol"
     manipulators:
       - type: basic
