@@ -55,7 +55,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E6A06157-47F3-4C45-B94C-30ACCE2DB626</string>
+				<string>2856DA0F-7623-47F9-9E7C-DA4CC8F0B448</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -67,7 +67,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>C7716DBE-2C15-46FC-A1E7-1A722EA60267</string>
+				<string>802A4E01-7BC2-4D33-AE03-CA4171F5CEE7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -155,6 +155,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>E1E42FAB-DEA5-479C-90B3-1B2A03B28BBF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>77FF34ED-C1A2-4866-B205-06B792B3975B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -165,22 +175,12 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>E1E42FAB-DEA5-479C-90B3-1B2A03B28BBF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>C7716DBE-2C15-46FC-A1E7-1A722EA60267</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>2856DA0F-7623-47F9-9E7C-DA4CC8F0B448</string>
+				<string>66AE3F35-B1A8-4065-90F8-C963E53500E3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -202,24 +202,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E6A06157-47F3-4C45-B94C-30ACCE2DB626</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F6D1C954-6EC9-4DF0-9124-DC7506653028</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>66AE3F35-B1A8-4065-90F8-C963E53500E3</string>
+				<string>C7716DBE-2C15-46FC-A1E7-1A722EA60267</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -228,8 +215,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>F6D1C954-6EC9-4DF0-9124-DC7506653028</key>
-		<array/>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -244,6 +229,53 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>soundname</key>
+				<string>Blow</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>2856DA0F-7623-47F9-9E7C-DA4CC8F0B448</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>.*finished.*</string>
+						<key>outputlabel</key>
+						<string>success</string>
+						<key>uid</key>
+						<string>B13FDA78-F912-4379-8044-815D8730371F</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>error</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>66AE3F35-B1A8-4065-90F8-C963E53500E3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -253,27 +285,12 @@
 				<key>text</key>
 				<string></string>
 				<key>title</key>
-				<string>⛔️ Site not supported</string>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>E6A06157-47F3-4C45-B94C-30ACCE2DB626</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Basso</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>F6D1C954-6EC9-4DF0-9124-DC7506653028</string>
+			<string>C7716DBE-2C15-46FC-A1E7-1A722EA60267</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -322,38 +339,6 @@
 			<integer>2</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>.*ERROR.*</string>
-						<key>outputlabel</key>
-						<string>error</string>
-						<key>uid</key>
-						<string>B13FDA78-F912-4379-8044-815D8730371F</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>success</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>66AE3F35-B1A8-4065-90F8-C963E53500E3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -365,35 +350,14 @@
 			<key>config</key>
 			<dict>
 				<key>soundname</key>
-				<string>Blow</string>
+				<string>Basso</string>
 				<key>systemsound</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.playsound</string>
 			<key>uid</key>
-			<string>2856DA0F-7623-47F9-9E7C-DA4CC8F0B448</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Download finished</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>C7716DBE-2C15-46FC-A1E7-1A722EA60267</string>
+			<string>802A4E01-7BC2-4D33-AE03-CA4171F5CEE7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -430,6 +394,118 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>5043B89E-B8D1-4515-ACDA-70F5B4D009FA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⛔️ Not a YouTube Link</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>E1E42FAB-DEA5-479C-90B3-1B2A03B28BBF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "Brave Browser"	return the URL of active tab of front windowend tell
+
+-- funktioniert auch mit der Youtube Webapp</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-youtube-url_[Browser].applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5B268CB5-D72B-4280-8EC7-820859701FDE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>wl</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🕔 Watch Later</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>548C7E00-D279-4BFE-B4CB-4F94C970637F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>https?.*youtu.*</string>
+						<key>outputlabel</key>
+						<string>Youtube Link</string>
+						<key>uid</key>
+						<string>651E4EB7-5F03-42F1-9130-6F3D6997E3D6</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>error</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>C0034F9D-C3AB-45C4-B7FD-F2DF921E9D5C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.transform</string>
+			<key>uid</key>
+			<string>2B34C51A-B434-45D5-9705-2866E79B33BC</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -482,133 +558,6 @@ echo -n "$title"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>wl</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🕔 Watch Later</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>548C7E00-D279-4BFE-B4CB-4F94C970637F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "Brave Browser"	return the URL of active tab of front windowend tell
-
--- funktioniert auch mit der Youtube Webapp</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-youtube-url_[Browser].applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>5B268CB5-D72B-4280-8EC7-820859701FDE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>https?.*youtu.*</string>
-						<key>outputlabel</key>
-						<string>Youtube Link</string>
-						<key>uid</key>
-						<string>651E4EB7-5F03-42F1-9130-6F3D6997E3D6</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>error</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>C0034F9D-C3AB-45C4-B7FD-F2DF921E9D5C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.transform</string>
-			<key>uid</key>
-			<string>2B34C51A-B434-45D5-9705-2866E79B33BC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Basso</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>802A4E01-7BC2-4D33-AE03-CA4171F5CEE7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⛔️ Not a YouTube Link</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>E1E42FAB-DEA5-479C-90B3-1B2A03B28BBF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>availableviaurlhandler</key>
 				<false/>
 				<key>triggerid</key>
@@ -632,16 +581,16 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 		<key>2856DA0F-7623-47F9-9E7C-DA4CC8F0B448</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>700</real>
+			<real>850</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>25</real>
 		</dict>
 		<key>2B34C51A-B434-45D5-9705-2866E79B33BC</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>10</integer>
 			<key>xpos</key>
 			<real>385</real>
 			<key>ypos</key>
@@ -650,25 +599,25 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 		<key>4B06046A-148C-4F17-B241-C48299B1D2F1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>10</integer>
 			<key>xpos</key>
-			<real>760</real>
+			<real>780</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>460</real>
 		</dict>
 		<key>5043B89E-B8D1-4515-ACDA-70F5B4D009FA</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>315</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>215</real>
+			<real>200</real>
 		</dict>
 		<key>548C7E00-D279-4BFE-B4CB-4F94C970637F</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>10</integer>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
@@ -677,7 +626,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 		<key>5B268CB5-D72B-4280-8EC7-820859701FDE</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>10</integer>
 			<key>note</key>
 			<string>get Browser URL</string>
 			<key>xpos</key>
@@ -688,27 +637,27 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 		<key>66AE3F35-B1A8-4065-90F8-C963E53500E3</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>455</real>
+			<real>650</real>
 			<key>ypos</key>
-			<real>90</real>
+			<real>60</real>
 		</dict>
 		<key>77FF34ED-C1A2-4866-B205-06B792B3975B</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>10</integer>
 			<key>note</key>
 			<string>save bookmark with image</string>
 			<key>xpos</key>
-			<real>615</real>
+			<real>635</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>460</real>
 		</dict>
 		<key>7EC8C18F-E353-4A93-9F40-FDB4C9531D57</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
@@ -717,11 +666,11 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 		<key>802A4E01-7BC2-4D33-AE03-CA4171F5CEE7</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>755</real>
+			<real>850</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>185</real>
 		</dict>
 		<key>905948C2-F071-4D3E-A1F5-3A0E54BC18F0</key>
 		<dict>
@@ -744,7 +693,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 		<key>BCD625F9-B6D0-4E0E-A014-2FBF6A2248A5</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
@@ -753,7 +702,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 		<key>C0034F9D-C3AB-45C4-B7FD-F2DF921E9D5C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>10</integer>
 			<key>xpos</key>
 			<real>460</real>
 			<key>ypos</key>
@@ -762,47 +711,29 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 		<key>C7716DBE-2C15-46FC-A1E7-1A722EA60267</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>560</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>70</real>
 		</dict>
 		<key>E1E42FAB-DEA5-479C-90B3-1B2A03B28BBF</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>615</real>
-			<key>ypos</key>
-			<real>475</real>
-		</dict>
-		<key>E6A06157-47F3-4C45-B94C-30ACCE2DB626</key>
-		<dict>
-			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>560</real>
+			<real>635</real>
 			<key>ypos</key>
-			<real>35</real>
+			<real>315</real>
 		</dict>
 		<key>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
 			<real>70</real>
-		</dict>
-		<key>F6D1C954-6EC9-4DF0-9124-DC7506653028</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>700</real>
-			<key>ypos</key>
-			<real>35</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
