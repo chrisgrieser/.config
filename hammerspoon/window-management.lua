@@ -477,7 +477,7 @@ hotkey({"ctrl"}, "Space", function ()
 end)
 
 hotkey(hyper, "X", function() vsplit("switch") end)
-hotkey(hyper, "U", function() vsplit("unsplit") end)
+hotkey(hyper, "C", function() vsplit("unsplit") end)
 hotkey(hyper, "V", function()
 	if (frontapp() == "Finder") then
 		finderVsplit()

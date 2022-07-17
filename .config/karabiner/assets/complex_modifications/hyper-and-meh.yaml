@@ -5,6 +5,18 @@ maintainers:
 import-url: karabiner://karabiner/assets/complex_modifications/import?url=https://github.com/chrisgrieser/dotfiles/blob/main/.config/karabiner/assets/complex_modifications/Hyper-and-Meh.json
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
+  - description: ↹ Tab →  Meh
+    manipulators:
+      - type: basic
+        from:
+          key_code: tab
+        to_if_alone:
+          - key_code: tab
+        to:
+          - key_code: right_shift
+            modifiers:
+              - right_control
+              - right_option
   - description: ⇪ Capslock → Hyper/Esc
     manipulators:
       - type: basic
@@ -75,7 +87,7 @@ rules:
           - key_code: escape
             modifiers:
               - option
-  - description: '⇪ Hyper + hjklmnbe: ←↓↑→↵⌫⇐⇒'
+  - description: '⇪ Hyper + hjkliomn: ←↓↑→↵⌫⇐⇒'
     manipulators:
       - type: basic
         from:
@@ -143,9 +155,10 @@ rules:
               - control
         to:
           - key_code: delete_or_backspace
+      # word to the left
       - type: basic
         from:
-          key_code: b
+          key_code: i
           modifiers:
             mandatory:
               - option
@@ -156,9 +169,10 @@ rules:
           - key_code: left_arrow
             modifiers:
               - option
+      # word to the right
       - type: basic
         from:
-          key_code: e
+          key_code: o
           modifiers:
             mandatory:
               - option
@@ -169,15 +183,48 @@ rules:
           - key_code: right_arrow
             modifiers:
               - option
-  - description: ↹ Tab →  Meh
-    manipulators:
+
+      # delete to beginning of word
       - type: basic
         from:
-          key_code: tab
-        to_if_alone:
-          - key_code: tab
+          key_code: b
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
         to:
-          - key_code: right_shift
+          - key_code: delete_or_backspace
             modifiers:
-              - right_control
-              - right_option
+              - option
+
+      # goto end of (visual) line
+      - type: basic
+        from:
+          key_code: p
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: right_arrow
+            modifiers:
+              - command
+
+      # goto beginning of (visual) line
+      - type: basic
+        from:
+          key_code: u
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: left_arrow
+            modifiers:
+              - command
