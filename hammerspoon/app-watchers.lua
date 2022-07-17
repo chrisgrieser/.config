@@ -106,7 +106,7 @@ draftsWatcher3:start()
 function sublimeLaunch(appName, eventType, appObject)
 	if not(appName == "Sublime Text" and eventType == hs.application.watcher.launched) then return end
 
-	runDelayed(0.2, function ()
+	runDelayed(0.05, function ()
 		moveAndResize("pseudo-maximized")
 	end)
 end
