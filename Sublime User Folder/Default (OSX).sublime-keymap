@@ -63,19 +63,6 @@
 		]
 	},
 
-	// Window Closing Bugfix, https://github.com/sublimehq/sublime_text/issues/5237#issuecomment-1048857619
-	// fixed with Build 4130
-	{ "keys": ["super+q"],
-		"command": "chain",
-		"args": {
-			"commands": [
-				["close_all"],
-				["set_layout", {"cols": [0.0, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1]] } ],
-				["exit"]
-			]
-		}
-	},
-
 	//---------------------------------------------------------------------------
 
 	// imap vv <Esc>v (quick visual mode)

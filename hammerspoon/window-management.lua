@@ -251,7 +251,6 @@ end
 
 --------------------------------------------------------------------------------
 
-
 function displayCountWatcher()
 	if (isProjector()) then
 		movieModeLayout()

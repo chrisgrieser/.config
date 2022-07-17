@@ -1,4 +1,5 @@
 require("utils")
+require("window-management")
 
 -- FINDER: when activated
 -- - Bring all windows forward
@@ -100,4 +101,13 @@ function draftsLaunchWake(appName, eventType, appObject)
 end
 draftsWatcher3 = hs.application.watcher.new(draftsLaunchWake)
 draftsWatcher3:start()
+
+-- SUBLIME
+function sublimeLaunch(appName, eventType, appObject)
+	if not(appName == "Sublime" and eventType == hs.application.watcher.launched) then return end
+
+	moveAndResize("pseudo-maximized")
+end
+sublimeWatcher = hs.application.watcher.new(sublimeLaunch)
+sublimeWatcher:start()
 

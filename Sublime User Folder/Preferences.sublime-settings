@@ -98,8 +98,8 @@
 	// Startup & Exit
 	"save_on_focus_lost": true,
 	"open_files_in_new_window": "never",
-	"close_windows_when_empty": false,
-	"hot_exit": "always",
+	"close_windows_when_empty": true,
+	"hot_exit": "disabled",
 	"create_window_at_startup": false,
 	"remember_layout": false, // don't start in split view
 
@@ -112,7 +112,7 @@
 	// Titlebar
 	"show_full_path": false,
 	"show_rel_path": true,
-	"show_project_first": true, // necessary for espanso trigger to wrok correctly
+	"show_project_first": true, // necessary for espanso trigger to work correctly
 
 	// Build
 	"show_panel_on_build": false,
