@@ -334,7 +334,7 @@
 						<key>matchmode</key>
 						<integer>4</integer>
 						<key>matchstring</key>
-						<string>.*error.*</string>
+						<string>.*ERROR.*</string>
 						<key>outputlabel</key>
 						<string>error</string>
 						<key>uid</key>
