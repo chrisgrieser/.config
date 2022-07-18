@@ -63,6 +63,10 @@ function notify (text)
 	print("notify: "..text) -- for the console
 end
 
+function alert (text)
+	hs.alert.show(text)
+end
+
 function log (text, location)
 	text = (trim(text)):gsub("\n", " –– ")
 	hs.execute('echo "$(date "+%Y-%m-%d %H:%M")" "'..text..'" >> "'..location..'"')
