@@ -49,7 +49,7 @@ function homeAction ()
 		-- toggle mute
 		keystroke({"shift", "command"}, "A", 1, hs.application("zoom.us"))
 	else
-		hs.application("Twitterrific"):activate()
+		twitterrificScrollUp()
 	end
 end
 
@@ -99,6 +99,8 @@ if isAtOffice() then twitterificAppWatcher:start() end
 -- Hotkeys
 hotkey({}, "pagedown", pagedownAction, nil, pagedownAction)
 hotkey({}, "pageup", pageupAction, nil, pageupAction)
-hotkey({}, "home", twitterrificScrollUp)
+hotkey({}, "home", homeAction)
 
-hotkey({"shift"}, "home", homeAction)
+hotkey({"shift"}, "home", function ()
+	hs.application("Twitterrific"):activate()
+end)
