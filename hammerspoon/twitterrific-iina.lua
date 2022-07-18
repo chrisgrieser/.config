@@ -11,9 +11,10 @@ function twitterrificScrollUp ()
 	local twitterrificWins = twitterrific:allWindows()
 
 	for i = 1, #twitterrificWins do
+		local f = twitterrificWins[i]:frame()
 		local pos = {
-			x = twitterrificWins[i].x + twitterrificWins[i].w * 0.5,
-			y = twitterrificWins[i].y + 100,
+			x = f.x + f.w * 0.5,
+			y = f.y + 100,
 		}
 		hs.eventtap.leftClick(pos)
 		keystroke({"cmd"}, "k") -- mark all as red
