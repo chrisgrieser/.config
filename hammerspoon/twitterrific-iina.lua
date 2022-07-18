@@ -1,13 +1,12 @@
 require("utils")
 
 function twitterrificScrollUp ()
-	-- needs activation, cause sending to app in background doesn't work w/ cmd
+	twitterrificScrolling = true
 	local previousApp = hs.application.frontmostApplication():name()
 	local prevMousePos = hs.mouse.absolutePosition()
-	twitterrificScrolling = true
 
 	local twitterrific = hs.application("Twitterrific")
-	twitterrific:activate()
+	twitterrific:activate() -- needs activation, cause sending to app in background doesn't work w/ cmd
 	local twitterrificWins = twitterrific:allWindows()
 
 	for i = 1, #twitterrificWins do
