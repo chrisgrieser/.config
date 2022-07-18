@@ -180,7 +180,7 @@ rules:
             modifiers:
               - option
 
-      # delete to beginning of word
+      # delete word
       - type: basic
         from:
           key_code: b
@@ -191,9 +191,14 @@ rules:
               - command
               - control
         to:
-          - key_code: delete_or_backspace
+          - key_code: right_arrow
             modifiers:
               - option
+          - key_code: left_arrow
+            modifiers:
+              - option
+              - shift
+          - key_code: delete_or_backspace
 
       # ö (German Keyboard) → transpose
       - type: basic
