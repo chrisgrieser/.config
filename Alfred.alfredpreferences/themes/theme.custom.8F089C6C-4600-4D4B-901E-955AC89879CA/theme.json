@@ -3,7 +3,7 @@
     "result" : {
       "textSpacing" : 9,
       "subtext" : {
-        "size" : 16,
+        "size" : 17,
         "colorSelected" : "#DB290CFF",
         "font" : "Recursive",
         "color" : "#00D5FFFF"
@@ -12,7 +12,7 @@
         "size" : 20,
         "colorSelected" : "#DB290CFF",
         "font" : "System",
-        "color" : "#77C6B9FF"
+        "color" : "#B6C6BFFF"
       },
       "backgroundSelected" : "#FFBB00FF",
       "text" : {
