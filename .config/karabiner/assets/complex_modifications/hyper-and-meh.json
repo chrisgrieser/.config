@@ -332,10 +332,20 @@
           },
           "to": [
             {
-              "key_code": "delete_or_backspace",
+              "key_code": "right_arrow",
               "modifiers": [
                 "option"
               ]
+            },
+            {
+              "key_code": "left_arrow",
+              "modifiers": [
+                "option",
+                "shift"
+              ]
+            },
+            {
+              "key_code": "delete_or_backspace"
             }
           ]
         },
