@@ -3,27 +3,27 @@
     "result" : {
       "textSpacing" : 9,
       "subtext" : {
-        "size" : 18,
+        "size" : 16,
         "colorSelected" : "#DB290CFF",
         "font" : "Recursive",
         "color" : "#00D5FFFF"
       },
       "shortcut" : {
-        "size" : 23,
+        "size" : 20,
         "colorSelected" : "#DB290CFF",
         "font" : "System",
-        "color" : "#7EA6C1FF"
+        "color" : "#56C17EFF"
       },
       "backgroundSelected" : "#FFBB00FF",
       "text" : {
-        "size" : 25,
+        "size" : 22,
         "colorSelected" : "#590907FF",
         "font" : "Recursive",
         "color" : "#FDFDFDFF"
       },
       "iconPaddingHorizontal" : 6,
       "roundness" : 7,
-      "paddingVertical" : 5,
+      "paddingVertical" : 3,
       "iconSize" : 56
     },
     "search" : {
@@ -43,7 +43,7 @@
     "window" : {
       "color" : "#454545FF",
       "paddingHorizontal" : 11,
-      "width" : 986,
+      "width" : 893,
       "borderPadding" : 6,
       "borderColor" : "#4141417F",
       "blur" : 0,
