@@ -108,9 +108,9 @@ function sublimeLaunch(appName, eventType)
 	if not(appName == "Sublime Text" and eventType == hs.application.watcher.launched) then return end
 
 	if isAtOffice() then
-		runDelayed(0.1, function () moveAndResize("pseudo-maximized") end)
-	else
 		runDelayed(0.1, function () moveAndResize("maximized") end)
+	else
+		runDelayed(0.1, function () moveAndResize("pseudo-maximized") end)
 	end
 end
 sublimeWatcher = hs.application.watcher.new(sublimeLaunch)
