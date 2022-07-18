@@ -47,7 +47,7 @@ function homeAction ()
 		keystroke({}, "Space", 1, hs.application("IINA"))
 	elseif appIsRunning("zoom.us") then
 		-- toggle mute
-		keystroke({"shift", "command"}, "A", "🔇🔈", 1, hs.application("zoom.us"))
+		keystroke({"shift", "command"}, "A", 1, hs.application("zoom.us"))
 	else
 		twitterrificScrollUp()
 	end
