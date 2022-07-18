@@ -21,7 +21,7 @@ function gitDotfileSync(arg)
 	end, arg):start()
 end
 
-function gitVaultBackup(arg)
+function gitVaultBackup()
 	hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
 		if exitCode == 0 then
 			log ("🟪 vault sync ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/sync.log")
@@ -62,10 +62,12 @@ function systemWake (eventType)
 	elseif isIMacAtHome and not(isProjector()) then homeModeLayout()
 	elseif isAtOffice() then officeModeLayout() end
 
-	-- set darkmode if waking between 6:00 and 19:00
+	-- set light mode if waking between 6:00 and 19:00
 	local currentTimeHours = hs.timer.localTime() / 60 / 60
 	if currentTimeHours < 19 and currentTimeHours > 6 then
 		setDarkmode(false)
+	else
+		setDarkmode(true)
 	end
 	-- get reminders after 6:00
 	if currentTimeHours > 6 then
