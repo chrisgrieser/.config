@@ -219,7 +219,7 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "3",
+            "key_code": "non_us_backslash",
             "modifiers": {
               "mandatory": [
                 "option"
@@ -238,7 +238,7 @@
           ],
           "to": [
             {
-              "key_code": "3",
+              "key_code": "non_us_backslash",
               "modifiers": [
                 "shift"
               ]

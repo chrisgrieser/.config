@@ -108,7 +108,7 @@ rules:
               input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
       - type: basic
         from:
-          key_code: "3"
+          key_code: non_us_backslash
           modifiers:
             mandatory:
               - option
@@ -117,7 +117,7 @@ rules:
             input_sources:
               - language: ^de$
         to:
-          - key_code: "3"
+          - key_code: non_us_backslash
             modifiers:
               - shift
   - description: "🔘1️⃣ One Stroke ^`~ (German Layout)"
