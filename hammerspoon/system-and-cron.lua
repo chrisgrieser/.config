@@ -85,7 +85,7 @@ function screenWake (eventType)
 	gitDotfileSync("wake")
 end
 screenWakeWatcher = hs.caffeinate.watcher.new(screenWake)
-if isIMacAtHome() then screenWakeWatcher:start() end
+if isAtOffice() then screenWakeWatcher:start() end
 
 -- daily morning run (redundant to Cron Job)
 if isIMacAtHome() then
