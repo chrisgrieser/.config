@@ -78,8 +78,9 @@ end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
 
+-- Office Wake
 function screenWake (eventType)
-	if not(eventType == hs.caffeinate.watcher.screensDidWake) then return end
+	if not(eventType == hs.caffeinate.watcher.screensDidWake or hs.caffeinate.watcher.screensaverWillStop) then return end
 	officeModeLayout()
 	reloadAllMenubarItems()
 	gitDotfileSync("wake")
@@ -87,7 +88,7 @@ end
 screenWakeWatcher = hs.caffeinate.watcher.new(screenWake)
 if isAtOffice() then screenWakeWatcher:start() end
 
--- daily morning run (redundant to Cron Job)
+-- Home: daily morning run (redundant to Cron Job)
 if isIMacAtHome() then
 	dailyMorningTimer = hs.timer.doAt("06:10", "01d", function()
 		setDarkmode(false)
