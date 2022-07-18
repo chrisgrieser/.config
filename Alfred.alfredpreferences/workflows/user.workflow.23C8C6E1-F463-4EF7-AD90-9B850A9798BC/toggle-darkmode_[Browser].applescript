@@ -4,34 +4,30 @@
 
 #-------------------------------------------------------------------------------
 
-# open tab if there is no tab open to ensure Dark Reader switches as well
+-- ensure tab is open (otherwise Dark Reader Toggle won't work)
 tell application "Brave Browser"
-		set openblank to false
-		if ((count of window) is 0) then
-			set openblank to true
-		else
-			set currentURL to URL of active tab of front window
-			if (currentURL starts with "chrome:" or currentURL starts with "vivaldi:")
-				set openblank to true
-			end if
-		end if
-
-		if (openblank) then
-			open location "http://www.blankwebsite.com/"
-			delay 0.3
-			set BrowserWasntRunning to true
-		end if
+	if application "Brave Browser" is not running then
+		launch
+		delay 1
+	end if
+	if ((count of window) is 0) then
+		open location "chrome://newtab/"
 		delay 0.1
+		set tabOpened to true
+	else
+		set tabOpened to false
+	end if
 end tell
 
 # toggle dark mode
 tell application "System Events"
 	tell appearance preferences to set dark mode to not dark mode
+	keystroke "d" using {shift down, option down} -- Dark Reader
 end tell
 
 # close tab again
-if (openblank)
-	delay 0.3
+if (tabOpened)
+	delay 0.1
 	tell application "Brave Browser" to close active tab of front window
 end if
 
