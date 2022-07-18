@@ -109,6 +109,10 @@ nnoremap <D-w> ZZ
 noremap <D-2> [e
 noremap <D-3> ]e
 
+" alt+right/left work like in macOS. Needed to make some macros work in Normal Mode
+nnoremap <M-Right> e
+nnoremap <M-Left> b
+
 """"""""""""""""""""""
 " Clipboard
 """"""""""""""""""""""

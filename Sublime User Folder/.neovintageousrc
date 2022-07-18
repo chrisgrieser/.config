@@ -88,7 +88,11 @@ noremap gr :GotoComment<CR>
 noremap go :OpenBrowse<CR>
 
 " [g]oto [f]ollow link under cursor
-noremap gf :OpenUrlUnderCursor<CR>
+nnoremap gf :OpenUrlUnderCursor<CR>
+
+" alt+right/left work like in macOS. Needed to make some macros work in Normal Mode
+nnoremap <M-Right> e
+nnoremap <M-Left> b
 
 """"""""""""""""""""""
 " < Editing
