@@ -46,7 +46,8 @@ function homeAction ()
 	if appIsRunning("IINA") then
 		keystroke({}, "Space", 1, hs.application("IINA"))
 	elseif appIsRunning("zoom.us") then
-		keystroke({"shift", ""}, "Space", 1, hs.application("zoom.us"))
+		-- toggle mute
+		keystroke({"shift", "command"}, "A", 1, hs.application("zoom.us"))
 	else
 		hs.application("Twitterrific"):activate()
 	end
