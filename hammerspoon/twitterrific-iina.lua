@@ -1,31 +1,29 @@
 require("utils")
 
 function twitterrificScrollUp ()
-	twitterrificScrolling = true
-
 	-- needs activation, cause sending to app in background doesn't work w/ cmd
 	local previousApp = hs.application.frontmostApplication():name()
+	local prevMousePos = hs.mouse.absolutePosition()
+	twitterrificScrolling = true
+
 	local twitterrific = hs.application("Twitterrific")
 	twitterrific:activate()
+	local twitterrificWins = twitterrific:allWindows()
 
-	twitterrificWins = twitterrific
-	local twitterrificWin = twitterrific:getWindow("@pseudo_meta - Home"):frame()
+	for i = 1, #twitterrificWins do
+		local pos = {
+			x = twitterrificWins[i].x + twitterrificWins[i].w * 0.5,
+			y = twitterrificWins[i].y + 100,
+		}
+		hs.eventtap.leftClick(pos)
+		keystroke({"cmd"}, "k") -- mark all as red
+		keystroke({"cmd"}, "j") -- scroll up
+		keystroke({"cmd"}, "1") -- go to home window
+		keystroke({}, "down") -- enable j/k movement
+	end
 
-	local prevMousePos = hs.mouse.absolutePosition()
-	local pos = {
-		x = twitterrificWin.x + twitterrificWin.w * 0.5,
-		y = twitterrificWin.y + 100,
-	}
-	hs.eventtap.leftClick(pos)
-	hs.mouse.absolutePosition(prevMousePos) -- restore mouse position
-
-	keystroke({"cmd"}, "k") -- mark all as red
-	keystroke({"cmd"}, "j") -- scroll up
-	keystroke({"cmd"}, "1") -- go to home window
-	keystroke({}, "down") -- enable j/k movement
-
+	hs.mouse.absolutePosition(prevMousePos)
 	hs.application(previousApp):activate()
-
 	twitterrificScrolling = false
 end
 
