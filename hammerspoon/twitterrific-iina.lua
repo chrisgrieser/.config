@@ -19,7 +19,6 @@ function twitterrificScrollUp ()
 		hs.eventtap.leftClick(pos)
 		keystroke({"cmd"}, "k") -- mark all as red
 		keystroke({"cmd"}, "j") -- scroll up
-		keystroke({"cmd"}, "1") -- go to home window
 		keystroke({}, "down") -- enable j/k movement
 	end
 
