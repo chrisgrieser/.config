@@ -6,9 +6,10 @@ function twitterrificScrollUp ()
 	-- needs activation, cause sending to app in background doesn't work w/ cmd
 	local previousApp = hs.application.frontmostApplication():name()
 	local twitterrific = hs.application("Twitterrific")
-	local twitterrificWin = twitterrific:getWindow("@pseudo_meta - Home"):frame()
-
 	twitterrific:activate()
+
+	twitterrificWins = twitterrific
+	local twitterrificWin = twitterrific:getWindow("@pseudo_meta - Home"):frame()
 
 	local prevMousePos = hs.mouse.absolutePosition()
 	local pos = {
