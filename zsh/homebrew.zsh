@@ -160,13 +160,9 @@ function update (){
 
 	print-section "DUMP INSTALLS"
 	dump
-
-	osascript -e 'display notification "" with title "Updates finished."	'
 }
 
 function report (){
-	print-section "Espanso"
-	espanso status
 	print-section "HOMEBREW"
 	print-section "Taps"
 	brew tap
