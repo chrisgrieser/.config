@@ -73,7 +73,7 @@ systemDlFolderWatcher:start()
 
 function autoRemoveFromFileHub(files)
 	for _,file in pairs(files) do
-		if file:sub(-15) == ".alfredworkflow" then
+		if file:sub(-15) == ".alfredworkflow" or file:sub(-4) == ".ics" then
 			hs.applescript(
 			   'delay 3\n'.. -- delay so auto-opening still works
 				'set toDelete to "'..file..'" as POSIX file\n'..
