@@ -668,7 +668,7 @@
 			<key>config</key>
 			<dict>
 				<key>count</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>keychar</key>
 				<string>d</string>
 				<key>keycode</key>
