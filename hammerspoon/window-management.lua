@@ -143,7 +143,6 @@ function homeModeLayout ()
 	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
 
 	openIfNotRunning("Mimestream")
-	openIfNotRunning("Drafts")
 	openIfNotRunning("Slack")
 	openIfNotRunning("Brave Browser")
 	openIfNotRunning("Obsidian")
@@ -151,11 +150,13 @@ function homeModeLayout ()
 	-- open Discord in OMG Server (redundancy to the discord launch, in case
 	-- Discord launched while Hammerspoon wasn't active yet)
 	hs.urlevent.openURL("discord://discord.com/channels/686053708261228577/700466324840775831")
+	openIfNotRunning("Drafts")
 
 	killIfRunning("YouTube")
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
 	closeFinderWindows()
+	closer()
 
 	local screen = hs.screen.primaryScreen():name()
 	local homeLayout = {
@@ -175,22 +176,19 @@ function homeModeLayout ()
 	-- show sidebars
 	runDelayed(0.5, function ()
 		hs.layout.apply(homeLayout)
-		hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
+		hs.urlevent.openURL("drafts://x-callback-url/getCurrentDraft?x-success=drafts://open?showDraftList=true&uuid=")
 		hs.urlevent.openURL("obsidian://sidebar?side=left&show=true")
 		hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
 	end)
 
-	runDelayed(2, function ()
+	runDelayed(2.5, function ()
 		-- delay necessary due to things triggered by Discord launch (see discord.lua)
 		local slackWindowTitle = hs.application("Slack"):mainWindow():title()
 		local slackUnreadMsg = slackWindowTitle:match("%*")
 		if (slackUnreadMsg) then
 			hs.application("Slack"):mainWindow():focus()
-		else
-			hs.application("Drafts"):mainWindow():focus()
 		end
 	end)
-
 end
 
 function officeModeLayout ()
@@ -232,10 +230,14 @@ function officeModeLayout ()
 	runDelayed(0.3, function ()
 		hs.layout.apply(officeLayout)
 	end)
-	runDelayed(0.6, function ()
+	runDelayed(0.5, function ()
 		hs.layout.apply(officeLayout)
-		hs.application("Drafts"):selectMenuItem({"View", "Show Draft List"})
+		-- show sidebars
+		hs.urlevent.openURL("drafts://x-callback-url/getCurrentDraft?x-success=drafts://open?showDraftList=true&uuid=")
+		hs.urlevent.openURL("obsidian://sidebar?side=left&show=true")
+		hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
 	end)
+
 
 	runDelayed(2.5, function ()
 		-- delay necessary due to things triggered by Discord launch (see discord.lua)
@@ -243,8 +245,6 @@ function officeModeLayout ()
 		local slackUnreadMsg = slackWindowTitle:match("%*")
 		if (slackUnreadMsg) then
 			hs.application("Slack"):mainWindow():raise()
-		else
-			hs.application("Discord"):mainWindow():raise()
 		end
 	end)
 end
