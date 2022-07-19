@@ -20,7 +20,7 @@
               "key_code": "right_shift",
               "modifiers": [
                 "right_control",
-                "right_option-"
+                "right_option"
               ]
             }
           ]
@@ -59,7 +59,6 @@
           ]
         },
         {
-          "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+,",
           "from": {
             "key_code": "comma",
             "modifiers": {
@@ -157,7 +156,7 @@
       ]
     },
     {
-      "description": "⇪ Hyper + hjkliomnö: ←↓↑→↵⌫⇐⇒",
+      "description": "⇪ Hyper + hjkliomnbö: ←↓↑→↵⌫⇐⇒",
       "manipulators": [
         {
           "type": "basic",

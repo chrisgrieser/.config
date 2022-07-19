@@ -12,7 +12,7 @@ rules:
           - key_code: right_shift
             modifiers:
               - right_control
-              - right_option-
+              - right_option
   - description: ⇪ Capslock → Hyper/Esc
     manipulators:
       - type: basic
@@ -30,8 +30,8 @@ rules:
           - type: variable_unless
             name: LEADER_ACTIVE
             value: 1
-      - description: Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+,
-        from:
+      # Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+,
+      - from:
           key_code: comma
           modifiers:
             mandatory:
@@ -83,7 +83,7 @@ rules:
           - key_code: escape
             modifiers:
               - option
-  - description: '⇪ Hyper + hjkliomnö: ←↓↑→↵⌫⇐⇒'
+  - description: '⇪ Hyper + hjkliomnbö: ←↓↑→↵⌫⇐⇒'
     manipulators:
       - type: basic
         from:
