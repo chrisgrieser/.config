@@ -76,11 +76,11 @@ function highlightsWatcher(appName, eventType)
 		end tell
 	]])
 	if isAtOffice() then
-		runDelayed(0.2, function () moveAndResize("pseudo-maximized") end)
-		runDelayed(0.4, function () moveAndResize("pseudo-maximized") end)
+		runDelayed(0.1, function () moveAndResize("maximized") end)
+		runDelayed(0.3, function () moveAndResize("maximized") end)
 	else
-		runDelayed(0.2, function () moveAndResize("maximized") end)
-		runDelayed(0.4, function () moveAndResize("maximized") end)
+		runDelayed(0.1, function () moveAndResize("pseudo-maximized") end)
+		runDelayed(0.3, function () moveAndResize("pseudo-maximized") end)
 	end
 
 	-- move to the left
