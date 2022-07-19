@@ -54,6 +54,19 @@
 				<true/>
 			</dict>
 		</array>
+		<key>0DCCD910-9B5E-4C8A-8FE0-C31909AA92DD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DF6BC461-1649-44AA-B495-1C2040D63A65</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>10982972-9D41-4F67-ABA9-6C669FB62755</key>
 		<array>
 			<dict>
@@ -97,7 +110,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>DF6BC461-1649-44AA-B495-1C2040D63A65</string>
+				<string>0DCCD910-9B5E-4C8A-8FE0-C31909AA92DD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -668,7 +681,7 @@
 			<key>config</key>
 			<dict>
 				<key>count</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>keychar</key>
 				<string>d</string>
 				<key>keycode</key>
@@ -742,6 +755,19 @@
 			<string>E0A3B959-9472-4B43-B469-56E20E333E3B</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>seconds</key>
+				<string>0.2</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>0DCCD910-9B5E-4C8A-8FE0-C31909AA92DD</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1891,6 +1917,15 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>ypos</key>
 			<real>900</real>
 		</dict>
+		<key>0DCCD910-9B5E-4C8A-8FE0-C31909AA92DD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>xpos</key>
+			<real>960</real>
+			<key>ypos</key>
+			<real>230</real>
+		</dict>
 		<key>10982972-9D41-4F67-ABA9-6C669FB62755</key>
 		<dict>
 			<key>colorindex</key>
@@ -1937,7 +1972,7 @@ md2docx "$*" 2&gt;&amp;1</string>
 		<key>24ACE1D3-3C4C-40C3-9B65-87C2DCC745BD</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>4</integer>
 			<key>xpos</key>
 			<real>790</real>
 			<key>ypos</key>
@@ -2281,7 +2316,7 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>note</key>
 			<string>Duplicate</string>
 			<key>xpos</key>
-			<real>960</real>
+			<real>1050</real>
 			<key>ypos</key>
 			<real>200</real>
 		</dict>
