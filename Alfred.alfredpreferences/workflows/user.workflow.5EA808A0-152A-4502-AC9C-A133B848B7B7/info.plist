@@ -600,11 +600,11 @@ echo "$url"</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>5</integer>
+				<integer>9</integer>
 				<key>hotmod</key>
 				<integer>917504</integer>
 				<key>hotstring</key>
-				<string>G</string>
+				<string>V</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -635,7 +635,7 @@ echo "$url"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-github-remote.sh</string>
+				<string>version-history.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -680,12 +680,29 @@ subl --command toggle_side_bar</string>
 				<key>availableviaurlhandler</key>
 				<false/>
 				<key>triggerid</key>
-				<string>open-at-github</string>
+				<string>version-history</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.external</string>
 			<key>uid</key>
 			<string>50DA0039-5840-45F9-9D05-E64BBAC96D45</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Version History</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -750,23 +767,6 @@ subl --command toggle_side_bar</string>
 			<string>BEA583C1-293D-4CF7-AB3A-7BEE5A3B41CA</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Show File in GitHub</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -956,7 +956,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>680</real>
 		</dict>
 		<key>07D214D7-7035-4125-88CE-4BEA2F46A4DA</key>
 		<dict>
@@ -965,7 +965,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
-			<real>935</real>
+			<real>865</real>
 		</dict>
 		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
 		<dict>
@@ -994,7 +994,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>820</real>
+			<real>750</real>
 		</dict>
 		<key>2272192E-81AD-4662-A0D4-58300A23360E</key>
 		<dict>
@@ -1041,7 +1041,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>935</real>
+			<real>865</real>
 		</dict>
 		<key>50DA0039-5840-45F9-9D05-E64BBAC96D45</key>
 		<dict>
@@ -1059,7 +1059,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>935</real>
+			<real>865</real>
 		</dict>
 		<key>78077732-42EB-4967-885E-DF4366FAB695</key>
 		<dict>
@@ -1142,7 +1142,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>1100</real>
+			<real>1030</real>
 		</dict>
 		<key>BEA583C1-293D-4CF7-AB3A-7BEE5A3B41CA</key>
 		<dict>
@@ -1191,7 +1191,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>1100</real>
+			<real>1030</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
