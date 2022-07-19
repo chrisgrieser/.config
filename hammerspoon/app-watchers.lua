@@ -77,7 +77,13 @@ function highlightsWatcher(appName, eventType)
 	]])
 
 	-- move to the left
-	runDelayed(0.5, function ()
+	runDelayed(0.2, function ()
+		local win = hs.application("Highlights"):focusedWindow()
+		local win_w = win:frame().w
+		local win_h = win:frame().h
+		win:move({x = 0, y = 0, w = win_w, h = win_h })
+	end)
+	runDelayed(0.4, function ()
 		local win = hs.application("Highlights"):focusedWindow()
 		local win_w = win:frame().w
 		local win_h = win:frame().h
