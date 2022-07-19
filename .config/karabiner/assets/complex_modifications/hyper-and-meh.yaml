@@ -12,7 +12,7 @@ rules:
           - key_code: right_shift
             modifiers:
               - right_control
-              - right_option
+              - right_option-
   - description: ⇪ Capslock → Hyper/Esc
     manipulators:
       - type: basic
