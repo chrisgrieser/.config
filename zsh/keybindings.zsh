@@ -24,7 +24,6 @@ bindkey '^[[Z' autosuggest-accept # shift+tab: only auto-completion
 
 copyLocation () {
 	pwd | pbcopy
-	echo "'$PWD' copied."
 }
 zle -N copyLocation
 
