@@ -20,7 +20,7 @@
               "key_code": "right_shift",
               "modifiers": [
                 "right_control",
-                "right_option"
+                "right_option-"
               ]
             }
           ]
@@ -343,6 +343,9 @@
                 "option",
                 "shift"
               ]
+            },
+            {
+              "key_code": "delete_or_backspace"
             },
             {
               "key_code": "delete_or_backspace"

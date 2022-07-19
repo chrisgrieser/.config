@@ -198,7 +198,8 @@ rules:
             modifiers:
               - option
               - shift
-          - key_code: delete_or_backspace
+          - key_code: delete_or_backspace # delete the selection
+          - key_code: delete_or_backspace # delete the space
 
       # ö (German Keyboard) → transpose
       - type: basic
