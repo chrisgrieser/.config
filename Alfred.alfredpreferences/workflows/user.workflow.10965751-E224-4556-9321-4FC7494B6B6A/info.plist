@@ -438,6 +438,8 @@
 				</array>
 				<key>elselabel</key>
 				<string>--</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -678,6 +680,8 @@
 				</array>
 				<key>elselabel</key>
 				<string>one</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -822,61 +826,61 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>1115</integer>
+			<real>1115</real>
 			<key>ypos</key>
-			<integer>590</integer>
+			<real>590</real>
 		</dict>
 		<key>030D0D74-FC17-4504-B31D-3417940A7080</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>455</integer>
+			<real>455</real>
 			<key>ypos</key>
-			<integer>210</integer>
+			<real>210</real>
 		</dict>
 		<key>0E71F532-8554-48C0-B7F0-FADA559A831C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<integer>800</integer>
+			<real>800</real>
 			<key>ypos</key>
-			<integer>335</integer>
+			<real>335</real>
 		</dict>
 		<key>2168E700-2687-41C9-9B03-97661BD3AD70</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>585</integer>
+			<real>585</real>
 			<key>ypos</key>
-			<integer>595</integer>
+			<real>595</real>
 		</dict>
 		<key>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</key>
 		<dict>
 			<key>xpos</key>
-			<integer>245</integer>
+			<real>245</real>
 			<key>ypos</key>
-			<integer>30</integer>
+			<real>30</real>
 		</dict>
 		<key>3B606123-349E-431A-B4E6-B6D8C5F4D35B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>765</integer>
+			<real>765</real>
 			<key>ypos</key>
-			<integer>470</integer>
+			<real>470</real>
 		</dict>
 		<key>4ED764B2-0EF6-4208-B794-3E956BD419D6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>25</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>585</integer>
+			<real>585</real>
 		</dict>
 		<key>5A3FDCC7-3964-4CA6-9B34-3DBA927D80FD</key>
 		<dict>
@@ -885,52 +889,52 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>saves pdf_path</string>
 			<key>xpos</key>
-			<integer>260</integer>
+			<real>260</real>
 			<key>ypos</key>
-			<integer>620</integer>
+			<real>620</real>
 		</dict>
 		<key>673B6424-8CD7-44F4-95A0-9E3B8759C064</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>20</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>210</integer>
+			<real>210</real>
 		</dict>
 		<key>769D9FCB-D640-41FC-8076-AC1EA99EB319</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<integer>800</integer>
+			<real>800</real>
 			<key>ypos</key>
-			<integer>220</integer>
+			<real>220</real>
 		</dict>
 		<key>7DFCE745-A1BC-4042-9D56-A22C4B08E73F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>900</integer>
+			<real>900</real>
 			<key>ypos</key>
-			<integer>620</integer>
+			<real>620</real>
 		</dict>
 		<key>84C07023-C7E9-4DAD-8EF8-0700B1CB05E3</key>
 		<dict>
 			<key>xpos</key>
-			<integer>20</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>30</integer>
+			<real>30</real>
 		</dict>
 		<key>870525DC-7F08-4E4B-A9EA-8E9E784BC543</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>630</integer>
+			<real>630</real>
 			<key>ypos</key>
-			<integer>240</integer>
+			<real>240</real>
 		</dict>
 		<key>8820CF69-3EB2-4193-AFCF-0D368DFD4C9D</key>
 		<dict>
@@ -941,36 +945,36 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 
 CHANGE SCRIPT HERE to a different type of parsing</string>
 			<key>xpos</key>
-			<integer>365</integer>
+			<real>365</real>
 			<key>ypos</key>
-			<integer>590</integer>
+			<real>590</real>
 		</dict>
 		<key>A1984774-184F-4A18-8608-093AC1ABA3B4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>695</integer>
+			<real>695</real>
 			<key>ypos</key>
-			<integer>230</integer>
+			<real>230</real>
 		</dict>
 		<key>B0E28085-73FC-4A79-A52D-6F87FC592ECC</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>770</integer>
+			<real>770</real>
 			<key>ypos</key>
-			<integer>755</integer>
+			<real>755</real>
 		</dict>
 		<key>B465E912-87A4-4B0D-81C3-344591A15C7A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>765</integer>
+			<real>765</real>
 			<key>ypos</key>
-			<integer>590</integer>
+			<real>590</real>
 		</dict>
 		<key>C0D4F600-908A-4E85-9F00-408968229A72</key>
 		<dict>
@@ -979,38 +983,40 @@ CHANGE SCRIPT HERE to a different type of parsing</string>
 			<key>note</key>
 			<string>rename and reveal</string>
 			<key>xpos</key>
-			<integer>1070</integer>
+			<real>1070</real>
 			<key>ypos</key>
-			<integer>755</integer>
+			<real>755</real>
 		</dict>
 		<key>C55943D1-99B0-4CF7-AF0D-E72C29E7365A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>1235</integer>
+			<real>1235</real>
 			<key>ypos</key>
-			<integer>755</integer>
+			<real>755</real>
 		</dict>
 		<key>D68403B9-E178-4C01-8C7F-3881A7466449</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>520</integer>
+			<real>520</real>
 			<key>ypos</key>
-			<integer>620</integer>
+			<real>620</real>
 		</dict>
 		<key>F9B10BB0-226E-447B-9112-A6CC64FFFCFA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>950</integer>
+			<real>950</real>
 			<key>ypos</key>
-			<integer>590</integer>
+			<real>590</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>variables</key>
 	<dict>
 		<key>alfred_bar_length</key>

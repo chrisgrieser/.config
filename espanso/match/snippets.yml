@@ -6,6 +6,8 @@ matches:
     replace: https://chris-grieser.de/
   - trigger: "!name"
     replace: "Christopher Grieser"
+  - trigger: ":: "
+    replace: ":innen "
 
   - trigger: '!wd'
     replace: '~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/'
