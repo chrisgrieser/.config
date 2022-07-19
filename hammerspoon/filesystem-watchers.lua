@@ -72,15 +72,16 @@ systemDlFolderWatcher = hs.pathwatcher.new(systemDownloadFolder, systemDlFolderM
 systemDlFolderWatcher:start()
 
 function autoRemoveFromFileHub(files)
-	for _,file in pairs(files) do
-		if file:sub(-15) == ".alfredworkflow" or file:sub(-4) == ".ics" then
-			hs.applescript(
-			   'delay 3\n'.. -- delay so auto-opening still works
-				'set toDelete to "'..file..'" as POSIX file\n'..
-				'tell application "Finder" to delete toDelete'
-			)
+	runDelayed(3, function ()
+		for _,file in pairs(files) do
+			if file:sub(-15) == ".alfredworkflow" or file:sub(-4) == ".ics" then
+				hs.applescript(
+					'set toDelete to "'..file..'" as POSIX file\n'..
+					'tell application "Finder" to delete toDelete'
+				)
+			end
 		end
-	end
+	end)
 end
 fileHubWatcher = hs.pathwatcher.new(fileHub, autoRemoveFromFileHub)
 fileHubWatcher:start()
