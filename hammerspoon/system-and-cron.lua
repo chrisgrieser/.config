@@ -13,10 +13,10 @@ function gitDotfileSync(arg)
 
 	hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		if exitCode == 0 then
-			log ("✅ dotfiles sync ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/sync.log")
+			log ("✅ dotfiles sync ("..deviceName()..")", "./cronjobs/sync.log")
 		else
 			notify("⚠️️ dotfiles "..stdErr)
-			log ("⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
+			log ("⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./cronjobs/sync.log")
 		end
 	end, arg):start()
 end
@@ -24,10 +24,10 @@ end
 function gitVaultBackup()
 	hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
 		if exitCode == 0 then
-			log ("🟪 vault sync ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/sync.log")
+			log ("🟪 vault sync ("..deviceName()..")", "./cronjobs/sync.log")
 		else
 			notify("⚠️️ vault "..stdErr)
-			log ("⚠️ vault sync ("..deviceName().."): "..stdErr, "$HOME/dotfiles/Cron Jobs/sync.log")
+			log ("⚠️ vault sync ("..deviceName().."): "..stdErr, "./cronjobs/sync.log")
 		end
 	end):start()
 end
@@ -44,8 +44,8 @@ repoSyncTimer:start()
 function screenSleep (eventType)
 	if not(eventType == hs.caffeinate.watcher.screensDidSleep or eventType == hs.caffeinate.watcher.screensDidLock) then return end
 
-	log ("💤 sleep ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/sync.log")
-	log ("💤 sleep ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/some.log")
+	log ("💤 sleep ("..deviceName()..")", "./cronjobs/sync.log")
+	log ("💤 sleep ("..deviceName()..")", "./cronjobs/some.log")
 	gitDotfileSync()
 end
 shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
@@ -90,10 +90,17 @@ end
 screenWakeWatcher = hs.caffeinate.watcher.new(screenWake)
 if isAtOffice() then screenWakeWatcher:start() end
 
--- Home: daily morning run (redundant to Cron Job)
-if isIMacAtHome() then
-	dailyMorningTimer = hs.timer.doAt("06:10", "01d", function()
-		setDarkmode(false)
-	end, false)
-	dailyMorningTimer:start()
-end
+--------------------------------------------------------------------------------
+
+-- Home: daily morning run
+dailyMorningTimer = hs.timer.doAt("06:10", "01d", function()
+	setDarkmode(false)
+end, false)
+
+if isIMacAtHome() then dailyMorningTimer:start() end
+
+
+-- add-cronjob "5 3 * * *" 'sleep-timer_[Browser].applescript'
+-- add-cronjob "5 6 * * *" 'daily-morning_[Browser].applescript'
+-- add-cronjob "5 21 * * *" 'daily-evening.applescript'
+-- add-cronjob "10 6 * * 0,3" 'biweekly.applescript'
