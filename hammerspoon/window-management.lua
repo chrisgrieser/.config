@@ -5,7 +5,6 @@ require("Discord")
 
 --------------------------------------------------------------------------------
 -- WINDOW MANAGEMENT UTILS
-
 if isAtOffice() then
 	baseLayout = hs.layout.maximized
 else
@@ -486,7 +485,7 @@ hotkey(hyper, "V", function()
 end)
 
 --------------------------------------------------------------------------------
--- WINDOW FILTERS & WINDOW FIXES
+-- WINDOW FILTERS & WINDOW-FIXES
 -- - https://www.hammerspoon.org/go/#winfilters
 -- - https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 
