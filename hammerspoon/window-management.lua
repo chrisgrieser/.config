@@ -361,7 +361,7 @@ end
 
 function vsplit (mode)
 	local noSplitActive = true
-	if SPLIT_RIGHT then splitExists = true end
+	if SPLIT_RIGHT then noSplitActive = false end
 
 	if noSplitActive and (mode == "switch" or mode == "unsplit") then
 		notify ("No split active")
