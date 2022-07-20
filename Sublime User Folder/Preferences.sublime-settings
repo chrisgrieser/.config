@@ -560,6 +560,7 @@
 		"repos",
 		"gitignored",
 		"anystyle",
+		"Toggler",
 	],
 
 	"neovintageous_build_version": 11100,
