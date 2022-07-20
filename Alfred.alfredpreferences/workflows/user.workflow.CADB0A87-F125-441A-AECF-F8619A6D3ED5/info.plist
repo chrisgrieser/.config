@@ -25,7 +25,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4A9F45CE-87ED-4A36-8F75-CE82DF2BCE6A</string>
+				<string>E0281C61-0743-4F18-A171-CCCC0948FFAB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -191,38 +191,21 @@ end alfred_script</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>applescript</key>
-				<string>on alfred_script(q)
-
-tell application "Brave Browser"
-	set isLastTab to false
-	set noWindow to false
-
-	if ((count of window) is 0)
-		set noWindow to true
-	else
-		if ((count of window) is 1)
-			if ((count of tab of front window) is 1)
-				set isLastTab to true
-			end if
-		end if
-		close active tab of front window
-	end if
-end tell
-
-# Hide (to lose focus)
-if (isLastTab is true) or (noWindow is true)
-	tell application "System Events" to tell process "Brave Browser" to set visible to false
-end if
-
-end alfred_script</string>
-				<key>cachescript</key>
-				<true/>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>w</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1048576</integer>
+				<key>overridewithargument</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.applescript</string>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
 			<key>uid</key>
-			<string>4A9F45CE-87ED-4A36-8F75-CE82DF2BCE6A</string>
+			<string>E0281C61-0743-4F18-A171-CCCC0948FFAB</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -663,17 +646,6 @@ end alfred_script</string>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
-		<key>4A9F45CE-87ED-4A36-8F75-CE82DF2BCE6A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>close one tab</string>
-			<key>xpos</key>
-			<real>250</real>
-			<key>ypos</key>
-			<real>155</real>
-		</dict>
 		<key>52A5D72A-8342-43A9-861A-F2CD4DCF6E4B</key>
 		<dict>
 			<key>colorindex</key>
@@ -742,6 +714,15 @@ end alfred_script</string>
 			<real>690</real>
 			<key>ypos</key>
 			<real>600</real>
+		</dict>
+		<key>E0281C61-0743-4F18-A171-CCCC0948FFAB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>250</real>
+			<key>ypos</key>
+			<real>155</real>
 		</dict>
 		<key>E27C16A0-4853-4EFD-8BE3-6071AD862B4F</key>
 		<dict>

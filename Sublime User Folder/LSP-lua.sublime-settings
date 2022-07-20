@@ -8,6 +8,7 @@
 			// Hammerspoon utils.lua
 			"notify",
 			"log",
+			"wf",
 			"keystroke",
 			"appIsRunning",
 			"runDelayed",
