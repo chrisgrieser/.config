@@ -4,7 +4,23 @@ require("private")
 require("Discord")
 
 --------------------------------------------------------------------------------
--- WINDOW MOVEMENT
+-- WINDOW MANAGEMENT UTILS
+
+if isAtOffice() then
+	baseLayout = hs.layout.maximized
+else
+	baseLayout = pseudoMaximized
+end
+wf = hs.window.filter
+pseudoMaximized = {x=0, y=0, w=0.815, h=1}
+
+function numberOfScreens()
+	return #(hs.screen.allScreens())
+end
+
+
+--------------------------------------------------------------------------------
+-- WINDOW BASE MOVEMENT & SIDEBARS
 
 -- requires these two actiosn beeing installed:
 -- https://directory.getdrafts.com/a/2BS
@@ -250,7 +266,7 @@ function officeModeLayout ()
 end
 
 --------------------------------------------------------------------------------
-
+-- MULTI DISPLAY
 function displayCountWatcher()
 	if (isProjector()) then
 		movieModeLayout()
@@ -298,23 +314,6 @@ function moveToOtherDisplay ()
 		win_:setFrameInScreenBounds(win_:frame())
 	end)
 end
-
--- keep Twitterrific visible
-function twitterrificNextToPseudoMax(_, eventType)
-	if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.launching) then return end
-	local currentWindow = hs.window.focusedWindow()
-	if not(currentWindow) then return end
-	if (WIN_LEFT == currentWindow) or (WIN_RIGHT == currentWindow) then return end
-
-	local max = hs.screen.mainScreen():frame()
-	local dif = currentWindow:frame().w - pseudoMaximized.w*max.w
-	if dif < 10 and dif > -10 then
-		hs.application("Twitterrific"):mainWindow():raise()
-	end
-end
-
-anyAppActivationWatcher = hs.application.watcher.new(twitterrificNextToPseudoMax)
-anyAppActivationWatcher:start()
 
 --------------------------------------------------------------------------------
 -- SPLITS
@@ -396,11 +395,8 @@ function vsplit (mode)
 		end
 	elseif mode == "unsplit" then
 		pairedActivation(false)
-		local layout
-		if isAtOffice() then layout = hs.layout.maximized
-		else layout = pseudoMaximized end
-		f1 = layout
-		f2 = layout
+		f1 = baseLayout
+		f2 = baseLayout
 	elseif mode == "switch" then
 		if (f1.w == f2.w) then
 			f1 = hs.layout.right50
@@ -490,12 +486,13 @@ hotkey(hyper, "V", function()
 end)
 
 --------------------------------------------------------------------------------
--- WINDOW FILTERS
+-- WINDOW FILTERS & WINDOW FIXES
 -- - https://www.hammerspoon.org/go/#winfilters
 -- - https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 
 wf_browser = wf.new("Brave Browser")
 wf_browser:subscribe(wf.windowCreated, function ()
+	-- split when second window is opened
 	if #wf_browser:getWindows() == 2 then
 		local win1 = wf_browser:getWindows()[1]
 		local win2 = wf_browser:getWindows()[2]
@@ -503,15 +500,40 @@ wf_browser:subscribe(wf.windowCreated, function ()
 		resizingWorkaround(win2, hs.layout.right50)
 	end
 end)
+
 wf_browser:subscribe(wf.windowDestroyed, function ()
-	numberOfBrowserWindows = #wf_browser:getWindows()
+	-- Automatically hide Browser when no window
 	if #wf_browser:getWindows() == 0 then
 		hs.application("Brave Browser"):hide()
+
+	-- change sizing back, when back to one window
 	elseif #wf_browser:getWindows() == 1 then
 		local win = wf_browser:getWindows()[1]
-		local layout
-		if isAtOffice() then layout = hs.layout.maximized
-		else layout = pseudoMaximized end
-		resizingWorkaround(win, layout)
+		resizingWorkaround(win, baseLayout)
 	end
 end)
+
+-- Automatically hide Finder when no window
+wf_finder = wf.new("Finder")
+wf_finder:subscribe(wf.windowDestroyed, function ()
+	if #wf_finder:getWindows() == 0 then
+		hs.application("Finder"):hide()
+	end
+end)
+
+-- keep Twitterrific visible
+function twitterrificNextToPseudoMax(_, eventType)
+	if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.launching) then return end
+	local currentWindow = hs.window.focusedWindow()
+	if not(currentWindow) then return end
+	if (WIN_LEFT == currentWindow) or (WIN_RIGHT == currentWindow) then return end
+
+	local max = hs.screen.mainScreen():frame()
+	local dif = currentWindow:frame().w - pseudoMaximized.w*max.w
+	if dif < 10 and dif > -10 then
+		hs.application("Twitterrific"):mainWindow():raise()
+	end
+end
+
+anyAppActivationWatcher = hs.application.watcher.new(twitterrificNextToPseudoMax)
+anyAppActivationWatcher:start()
