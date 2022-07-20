@@ -38,7 +38,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>52A5D72A-8342-43A9-861A-F2CD4DCF6E4B</string>
+				<string>BC65620C-4621-4783-BD03-DD00BF67A3A1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -126,6 +126,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>w</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1048576</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>BC65620C-4621-4783-BD03-DD00BF67A3A1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -157,36 +178,6 @@
 			<string>5D57E096-989E-472D-97A9-4C0D0058DCB3</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>applescript</key>
-				<string>on alfred_script(q)
-
-tell application "Finder"
-	set hideAfter to false
-	if ((count window) is 0) or ((count window) is 1)
-		set hideAfter to true
-	end if
-	close Finder window 1
-end tell
-
-# Hide (to lose focus)
-if (hideAfter is true)
-	tell application "System Events" to tell process "Finder" to set visible to false
-end if
-
-end alfred_script</string>
-				<key>cachescript</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.applescript</string>
-			<key>uid</key>
-			<string>52A5D72A-8342-43A9-861A-F2CD4DCF6E4B</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -646,17 +637,6 @@ end alfred_script</string>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
-		<key>52A5D72A-8342-43A9-861A-F2CD4DCF6E4B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>close one window</string>
-			<key>xpos</key>
-			<real>250</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
 		<key>5D57E096-989E-472D-97A9-4C0D0058DCB3</key>
 		<dict>
 			<key>colorindex</key>
@@ -715,6 +695,15 @@ end alfred_script</string>
 			<key>ypos</key>
 			<real>600</real>
 		</dict>
+		<key>BC65620C-4621-4783-BD03-DD00BF67A3A1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>250</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
 		<key>E0281C61-0743-4F18-A171-CCCC0948FFAB</key>
 		<dict>
 			<key>colorindex</key>
@@ -740,7 +729,7 @@ end alfred_script</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>close one tab</string>
+			<string>go back home</string>
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>
