@@ -6,6 +6,9 @@ sudo -v
 # needed for php installation, php needed for Spotify workflow
 xcode-select --install
 
+sudo gem install anystyle-cli
+pip3 install pdfannots
+
 # MAS CLI sign in currently broken due to Apple API change
 # Sign in Bug: https://github.com/mas-cli/mas#-sign-in
 # ➞ sign in manually to start download
