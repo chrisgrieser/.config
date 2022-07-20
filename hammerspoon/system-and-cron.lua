@@ -91,7 +91,7 @@ screenWakeWatcher = hs.caffeinate.watcher.new(screenWake)
 if isAtOffice() then screenWakeWatcher:start() end
 
 --------------------------------------------------------------------------------
--- CRONJOBS
+-- CRONJOBS AT HOME
 
 function sleepYouTube ()
 	killIfRunning("YouTube")
@@ -107,11 +107,10 @@ function sleepYouTube ()
 	]])
 	log ("😴 sleepTimer ("..deviceName()..")", "./logs/some.log")
 end
+sleepTimer = hs.timer.doAt("03:00", "01d", sleepYouTube, true)
+sleepTimer2 = hs.timer.doAt("05:00", "01d", sleepYouTube, true)
 
-sleepTimer = hs.timer.doAt("03:00", "01d", function() sleepYouTube() end, true)
-sleepTimer2 = hs.timer.doAt("05:00", "01d", function() sleepYouTube() end, true)
-
-biiweeklyTimer = hs.timer.doAt("05:00", "04d", function()
+biiweeklyTimer = hs.timer.doAt("05:00", "03d", function()
 	hs.osascript.applescript([[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
@@ -119,14 +118,19 @@ biiweeklyTimer = hs.timer.doAt("05:00", "04d", function()
 			run trigger "re-index-doc-search" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
 		end tell
 	]])
-	log ("✅ biweekly ("..deviceName()..")", "./logs/some.log")
+	log ("2️⃣ biweekly ("..deviceName()..")", "./logs/some.log")
+end, true)
+
+dailyMorningTimer = hs.timer.doAt("06:30", "01d", function()
+	setDarkmode(false)
+	openIfNotRunning("Catch")
+	runDelayed(10, function () killIfRunning("Catch") end)
+	log ("🌻 daily morning ("..deviceName()..")", "./logs/some.log")
 end, true)
 
 if isIMacAtHome() then
-	dailyEveningTimer:start()
+	dailyMorningTimer:start()
 	sleepTimer:start()
+	sleepTimer2:start()
 	biiweeklyTimer:start()
 end
-
-
--- add-cronjob "5 21 * * *" 'daily-evening.applescript'
