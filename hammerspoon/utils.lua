@@ -2,6 +2,7 @@ hyper = {"cmd", "alt", "ctrl", "shift"}
 hotkey = hs.hotkey.bind
 keystroke = hs.eventtap.keyStroke
 pseudoMaximized = {x=0, y=0, w=0.815, h=1}
+wf = hs.window.filter
 
 function numberOfScreens()
 	return #(hs.screen.allScreens())
