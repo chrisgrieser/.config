@@ -8,6 +8,19 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
+		<key>04106BDF-B453-45B9-B9C7-00E5B943CCD2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1EA67BCF-5320-41BA-B446-8FB00AC9958C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>411F0C67-7E50-4B01-AF68-F2742465259B</key>
 		<array>
 			<dict>
@@ -167,12 +180,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://npms.io/search?q=alfred+workflow+{query}</string>
+				<string>https://github.com/search?q=alfred-workflow+{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>88BE14E8-8C6C-40C6-9497-48E193416293</string>
+			<string>F55D1533-F14F-4A8E-88D1-B4C3F3DACB70</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -188,12 +201,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://github.com/search?q=alfred-workflow+{query}</string>
+				<string>https://npms.io/search?q=alfred+workflow+{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>F55D1533-F14F-4A8E-88D1-B4C3F3DACB70</string>
+			<string>88BE14E8-8C6C-40C6-9497-48E193416293</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -230,12 +243,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://pacmax.org/?s={query}</string>
+				<string>http://www.packal.org/workflow-search?query={query}&amp;osx-version=All&amp;items_per_page=50</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>BF89C364-F5A2-446D-A3F4-F0EAF2212146</string>
+			<string>424FC24A-8D2D-4BE5-A394-E934EF993E6F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -251,14 +264,29 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>http://www.packal.org/workflow-search?query={query}&amp;osx-version=All&amp;items_per_page=50</string>
+				<string>https://pacmax.org/?s={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>424FC24A-8D2D-4BE5-A394-E934EF993E6F</string>
+			<string>BF89C364-F5A2-446D-A3F4-F0EAF2212146</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library/Caches/com.runningwithcrayons.Alfred</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>ABF30A35-70D2-41E3-B40B-4A5E783EB7FC</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -278,6 +306,27 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>BC41C6FD-A0A1-48EC-A156-72DC0D9520FF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alfred workflow cache</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>📂 Alfred Workflow Cache</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>4A3828AC-7DF5-44AE-84CE-3F1B054C7349</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -305,36 +354,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library/Caches/com.runningwithcrayons.Alfred</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>ABF30A35-70D2-41E3-B40B-4A5E783EB7FC</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>alfred workflow cache</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>📂 Alfred Workflow Cache</string>
-				<key>withspace</key>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>9</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1048576</integer>
+				<key>overridewithargument</key>
 				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
 			<key>uid</key>
-			<string>4A3828AC-7DF5-44AE-84CE-3F1B054C7349</string>
+			<string>859A813B-BC0E-4FD1-B2A5-E698076BF6E5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -372,27 +406,6 @@
 			<string>E1B642B1-7077-4090-9C23-656A55E19199</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>9</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>859A813B-BC0E-4FD1-B2A5-E698076BF6E5</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -513,6 +526,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>http:{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>4EF7790E-0DD8-4D03-B2AF-660B58CCE55A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -534,6 +568,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>obsidian:</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Obsidian URI: obsidian:{query}</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>04106BDF-B453-45B9-B9C7-00E5B943CCD2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -543,12 +598,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>http:{query}</string>
+				<string>obsidian:{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>4EF7790E-0DD8-4D03-B2AF-660B58CCE55A</string>
+			<string>1EA67BCF-5320-41BA-B446-8FB00AC9958C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -557,6 +612,22 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>04106BDF-B453-45B9-B9C7-00E5B943CCD2</key>
+		<dict>
+			<key>note</key>
+			<string>workaround, so URL opening only happens with "http" at the beginning</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>850</real>
+		</dict>
+		<key>1EA67BCF-5320-41BA-B446-8FB00AC9958C</key>
+		<dict>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>850</real>
+		</dict>
 		<key>33BD77E2-2929-432E-9718-B2FDBAF4EFE5</key>
 		<dict>
 			<key>colorindex</key>
