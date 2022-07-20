@@ -39,6 +39,7 @@ tell application "System Events"
 	else
 		set targetView to "Night"
 	end if
+
 	set highlightsRunning to ((name of processes) contains "Highlights")
 	if (highlightsRunning is true) then
 		tell process "Highlights"
@@ -49,4 +50,4 @@ tell application "System Events"
 end tell
 
 # Log
-do shell script "echo \"$(date '+%Y-%m-%d %H:%M') 🌒 Dark Mode: manual toggle\" >> \"$HOME/dotfiles/Cron Jobs/some.log\""
+do shell script "echo \"$(date '+%Y-%m-%d %H:%M') 🌒 Dark Mode: manual toggle\" >> \"$HOME/dotfiles/hammerspoon/logs/some.log\""
