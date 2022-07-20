@@ -8,7 +8,6 @@
 			// Hammerspoon utils.lua
 			"notify",
 			"log",
-			"wf",
 			"keystroke",
 			"appIsRunning",
 			"runDelayed",
@@ -25,7 +24,6 @@
 			"killIfRunning",
 			"isAtOffice",
 			"isProjector",
-			"numberOfScreens",
 		],
       "Lua.diagnostics.disable": ["lowercase-global"],
 	}
