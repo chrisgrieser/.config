@@ -42,11 +42,11 @@ matches:
     replace: |
       ObjC.import("Foundation");
       function readFile (path, encoding) {
-        if (!encoding) encoding = $.NSUTF8StringEncoding;
-        const fm = $.NSFileManager.defaultManager;
-        const data = fm.contentsAtPath(path);
-        const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
-        return ObjC.unwrap(str);
+      	if (!encoding) encoding = $.NSUTF8StringEncoding;
+      	const fm = $.NSFileManager.defaultManager;
+      	const data = fm.contentsAtPath(path);
+      	const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
+      	return ObjC.unwrap(str);
       }
     label: '🏗 Read File'
   - replace: |
@@ -57,17 +57,17 @@ matches:
   - trigger: '!write'
     replace: |
       function writeToFile(text, file) {
-        const str = $.NSString.alloc.initWithUTF8String(text);
-        str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
+      	const str = $.NSString.alloc.initWithUTF8String(text);
+      	str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
       }
     label: '🏗 Write to File'
   - replace: |
       function readPlist (key, path){
-        return app.doShellScript(
-          'plutil -extract ' + key
-          + ' xml1 -o - ' + path
-          + ' | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1')
-          .replaceAll ("&amp;", "&");
+      	return app.doShellScript(
+      		'plutil -extract ' + key
+      		+ ' xml1 -o - ' + path
+      		+ ' | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1')
+      		.replaceAll ("&amp;", "&");
       }
     label: '🏗 read plist'
   - triggers: ["!js", "!jxa"]
@@ -76,5 +76,4 @@ matches:
   - trigger: "!resolve"
     replace: |
       const vaultPath = $.getenv("vault_path").replace(/^~/, app.pathTo("home folder"));
-
     label: '🏗 Resolve ~'
