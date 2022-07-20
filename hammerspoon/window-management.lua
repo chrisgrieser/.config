@@ -497,6 +497,6 @@ end)
 wf = hs.window.filter
 wf_browser = wf.new("Brave Browser")
 wf_browser:subscribe(hs.window.filter.windowCreated, function ()
-	if #wf_browser:getWindows() == 2 then return end
+	if #wf_browser:getWindows() == 1 then return end
 	notify ("new Brave Window was created")
 end)
