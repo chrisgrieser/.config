@@ -494,9 +494,21 @@ end)
 -- - https://www.hammerspoon.org/go/#winfilters
 -- - https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 
-wf = hs.window.filter
 wf_browser = wf.new("Brave Browser")
-wf_browser:subscribe(hs.window.filter.windowCreated, function ()
-	if #wf_browser:getWindows() == 1 then return end
-	notify ("new Brave Window was created")
+wf_browser:subscribe(wf.windowCreated, function ()
+	numberOfBrowserWindows = #wf_browser:getWindows()
+	if numberOfBrowserWindows == 0 then
+		hs.application("Brave Browser"):hide()
+	elseif numberOfBrowserWindows == 1 then
+		local win = wf_browser:getWindows()[1]
+		local layout
+		if isAtOffice() then layout = hs.layout.maximized
+		else layout = pseudoMaximized end
+		resizingWorkaround(win, layout)
+	elseif numberOfBrowserWindows == 2 then
+		local win1 = wf_browser:getWindows()[1]
+		local win2 = wf_browser:getWindows()[2]
+		resizingWorkaround(win1, hs.layout.left50)
+		resizingWorkaround(win2, hs.layout.right50)
+	end
 end)
