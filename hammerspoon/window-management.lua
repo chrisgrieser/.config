@@ -341,10 +341,10 @@ function pairedActivation(start)
 			if eventType == hs.application.watcher.activated then
 				local currentWindow = hs.window.focusedWindow()
 				if not(currentWindow) then return end
-				if currentWindow:id() == WIN_RIGHT:id() then
-					WIN_LEFT:raise() -- not using :focus(), since that causes infinite recursion
-				elseif currentWindow:id() == WIN_LEFT:id() then
-					WIN_RIGHT:raise()
+				if currentWindow:id() == SPLIT_RIGHT:id() then
+					SPLIT_LEFT:raise() -- not using :focus(), since that causes infinite recursion
+				elseif currentWindow:id() == SPLIT_LEFT:id() then
+					SPLIT_RIGHT:raise()
 				end
 			elseif eventType == hs.application.watcher.terminated then
 				vsplit("unsplit")
@@ -361,7 +361,7 @@ end
 
 function vsplit (mode)
 	local noSplitActive = true
-	if WIN_RIGHT then splitExists = true end
+	if SPLIT_RIGHT then splitExists = true end
 
 	if noSplitActive and (mode == "switch" or mode == "unsplit") then
 		notify ("No split active")
@@ -370,17 +370,17 @@ function vsplit (mode)
 
 	if mode == "split" and noSplitActive then
 		local wins = mainScreenWindows()	-- to not split windows on second screen
-		WIN_RIGHT = wins[1] -- save in global variables, so they are not garbage-collected
-		WIN_LEFT = wins[2]
+		SPLIT_RIGHT = wins[1] -- save in global variables, so they are not garbage-collected
+		SPLIT_LEFT = wins[2]
 	end
 
-	if (WIN_RIGHT:frame().x > WIN_LEFT:frame().x) then -- ensure that WIN_RIGHT is really the right
-		local temp = WIN_RIGHT
-		WIN_RIGHT = WIN_LEFT
-		WIN_LEFT = temp
+	if (SPLIT_RIGHT:frame().x > SPLIT_LEFT:frame().x) then -- ensure that WIN_RIGHT is really the right
+		local temp = SPLIT_RIGHT
+		SPLIT_RIGHT = SPLIT_LEFT
+		SPLIT_LEFT = temp
 	end
-	local f1 = WIN_RIGHT:frame()
-	local f2 = WIN_LEFT:frame()
+	local f1 = SPLIT_RIGHT:frame()
+	local f2 = SPLIT_LEFT:frame()
 
 	if mode == "split" then
 		pairedActivation(true)
@@ -406,20 +406,20 @@ function vsplit (mode)
 		end
 	end
 
-	resizingWorkaround(WIN_RIGHT, f1)
-	resizingWorkaround(WIN_LEFT, f2)
-	WIN_RIGHT:raise()
-	WIN_LEFT:raise()
-	if WIN_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_RIGHT)
-	elseif WIN_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(WIN_LEFT) end
-	if WIN_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_RIGHT)
-	elseif WIN_LEFT:application():name() == "Obsidian" then toggleObsidianSidebar(WIN_LEFT) end
-	if WIN_RIGHT:application():name() == "Highlights" then toggleHighlightsSidebar(WIN_RIGHT)
-	elseif WIN_LEFT:application():name() == "Highlights" then toggleHighlightsSidebar(WIN_LEFT) end
+	resizingWorkaround(SPLIT_RIGHT, f1)
+	resizingWorkaround(SPLIT_LEFT, f2)
+	SPLIT_RIGHT:raise()
+	SPLIT_LEFT:raise()
+	if SPLIT_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(SPLIT_RIGHT)
+	elseif SPLIT_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(SPLIT_LEFT) end
+	if SPLIT_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(SPLIT_RIGHT)
+	elseif SPLIT_LEFT:application():name() == "Obsidian" then toggleObsidianSidebar(SPLIT_LEFT) end
+	if SPLIT_RIGHT:application():name() == "Highlights" then toggleHighlightsSidebar(SPLIT_RIGHT)
+	elseif SPLIT_LEFT:application():name() == "Highlights" then toggleHighlightsSidebar(SPLIT_LEFT) end
 
 	if mode == "unsplit" then
-		WIN_RIGHT = nil
-		WIN_LEFT = nil
+		SPLIT_RIGHT = nil
+		SPLIT_LEFT = nil
 	end
 end
 
@@ -489,6 +489,7 @@ end)
 -- - https://www.hammerspoon.org/go/#winfilters
 -- - https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 
+-- BROWSER
 wf_browser = wf.new("Brave Browser")
 wf_browser:subscribe(wf.windowCreated, function ()
 	-- split when second window is opened
@@ -512,7 +513,7 @@ wf_browser:subscribe(wf.windowDestroyed, function ()
 	end
 end)
 
--- Automatically hide Finder when no window
+-- Automatically hide FINDER when no window
 wf_finder = wf.new("Finder")
 wf_finder:subscribe(wf.windowDestroyed, function ()
 	if #wf_finder:getWindows() == 0 then
@@ -520,12 +521,11 @@ wf_finder:subscribe(wf.windowDestroyed, function ()
 	end
 end)
 
--- keep Twitterrific visible
+-- keep TWITTERRIFIC visible, when active window is pseudomaximized
 function twitterrificNextToPseudoMax(_, eventType)
 	if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.launching) then return end
 	local currentWindow = hs.window.focusedWindow()
 	if not(currentWindow) then return end
-	if (WIN_LEFT == currentWindow) or (WIN_RIGHT == currentWindow) then return end
 
 	local max = hs.screen.mainScreen():frame()
 	local dif = currentWindow:frame().w - pseudoMaximized.w*max.w
@@ -533,6 +533,5 @@ function twitterrificNextToPseudoMax(_, eventType)
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end
-
 anyAppActivationWatcher = hs.application.watcher.new(twitterrificNextToPseudoMax)
 anyAppActivationWatcher:start()
