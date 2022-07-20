@@ -13,10 +13,10 @@ function gitDotfileSync(arg)
 
 	hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		if exitCode == 0 then
-			log ("✅ dotfiles sync ("..deviceName()..")", "./cronjobs/sync.log")
+			log ("✅ dotfiles sync ("..deviceName()..")", "./logs/sync.log")
 		else
 			notify("⚠️️ dotfiles "..stdErr)
-			log ("⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./cronjobs/sync.log")
+			log ("⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
 		end
 	end, arg):start()
 end
@@ -24,10 +24,10 @@ end
 function gitVaultBackup()
 	hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
 		if exitCode == 0 then
-			log ("🟪 vault sync ("..deviceName()..")", "./cronjobs/sync.log")
+			log ("🟪 vault sync ("..deviceName()..")", "./logs/sync.log")
 		else
 			notify("⚠️️ vault "..stdErr)
-			log ("⚠️ vault sync ("..deviceName().."): "..stdErr, "./cronjobs/sync.log")
+			log ("⚠️ vault sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
 		end
 	end):start()
 end
@@ -44,8 +44,8 @@ repoSyncTimer:start()
 function screenSleep (eventType)
 	if not(eventType == hs.caffeinate.watcher.screensDidSleep or eventType == hs.caffeinate.watcher.screensDidLock) then return end
 
-	log ("💤 sleep ("..deviceName()..")", "./cronjobs/sync.log")
-	log ("💤 sleep ("..deviceName()..")", "./cronjobs/some.log")
+	log ("💤 sleep ("..deviceName()..")", "./logs/sync.log")
+	log ("💤 sleep ("..deviceName()..")", "./logs/some.log")
 	gitDotfileSync()
 end
 shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
