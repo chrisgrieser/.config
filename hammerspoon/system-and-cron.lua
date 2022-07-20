@@ -91,16 +91,42 @@ screenWakeWatcher = hs.caffeinate.watcher.new(screenWake)
 if isAtOffice() then screenWakeWatcher:start() end
 
 --------------------------------------------------------------------------------
+-- CRONJOBS
 
--- Home: daily morning run
-dailyMorningTimer = hs.timer.doAt("06:10", "01d", function()
-	setDarkmode(false)
-end, false)
+function sleepYouTube ()
+	killIfRunning("YouTube")
+	hs.osascript.applescript([[
+		tell application "Brave Browser"
+			if ((count of window) is not 0)
+				if ((count of tab of front window) is not 0)
+					set currentTabUrl to URL of active tab of front window
+					if (currentTabUrl contains "youtu") then close active tab of front window
+				end if
+			end if
+		end tell
+	]])
+	log ("😴 sleepTimer ("..deviceName()..")", "./logs/some.log")
+end
 
-if isIMacAtHome() then dailyMorningTimer:start() end
+sleepTimer = hs.timer.doAt("03:00", "01d", function() sleepYouTube() end, true)
+sleepTimer2 = hs.timer.doAt("05:00", "01d", function() sleepYouTube() end, true)
+
+biiweeklyTimer = hs.timer.doAt("05:00", "04d", function()
+	hs.osascript.applescript([[
+		tell application id "com.runningwithcrayons.Alfred"
+			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
+			run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles" with argument "no sound"
+			run trigger "re-index-doc-search" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
+		end tell
+	]])
+	log ("✅ biweekly ("..deviceName()..")", "./logs/some.log")
+end, true)
+
+if isIMacAtHome() then
+	dailyEveningTimer:start()
+	sleepTimer:start()
+	biiweeklyTimer:start()
+end
 
 
--- add-cronjob "5 3 * * *" 'sleep-timer_[Browser].applescript'
--- add-cronjob "5 6 * * *" 'daily-morning_[Browser].applescript'
 -- add-cronjob "5 21 * * *" 'daily-evening.applescript'
--- add-cronjob "10 6 * * 0,3" 'biweekly.applescript'
