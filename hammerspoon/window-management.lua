@@ -487,6 +487,9 @@ hotkey(hyper, "V", function()
 end)
 
 --------------------------------------------------------------------------------
+-- WINDOW FILTERS
+-- - https://www.hammerspoon.org/go/#winfilters
+-- - https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 
 wf = hs.window.filter
 wf_browser = wf.new("Brave Browser")
