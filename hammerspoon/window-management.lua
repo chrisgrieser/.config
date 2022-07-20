@@ -488,4 +488,8 @@ end)
 
 --------------------------------------------------------------------------------
 
-wf = hs.window.filter.new()
+wf = hs.window.filter
+wf_browser = wf.new("Brave Browser")
+wf_browser:subscribe(hs.window.filter.windowCreated, function ()
+	notify ("new Brave Window was created")
+end)
