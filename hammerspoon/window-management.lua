@@ -26,9 +26,9 @@ function toggleDraftsSidebar (draftsWin)
 		local screen_w = draftsWin:screen():frame().w
 		if (drafts_w / screen_w > 0.6) then
 			-- using URI scheme since they are more reliable than the menu item
-			hs.urlevent.openURL("drafts://x-callback-url/getCurrentDraft?x-success=drafts://open?showDraftList=true&uuid=")
+			hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 		else
-			hs.urlevent.openURL("drafts://x-callback-url/getCurrentDraft?x-success=drafts://open?showDraftList=false&uuid=")
+			hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=hide-sidebar")
 		end
 	end)
 end
@@ -54,7 +54,8 @@ function toggleHighlightsSidebar (highlightsWin)
 	end)
 end
 
--- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
+-- requires Obsidian Sidebar Toggler Plugin
+-- https://github.com/chrisgrieser/obsidian-sidebar-toggler
 function toggleObsidianSidebar (obsiWin)
 	runDelayed(0.05, function ()
 		-- prevent popout window resizing to affect sidebars
