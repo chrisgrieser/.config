@@ -5,13 +5,13 @@ require("Discord")
 
 --------------------------------------------------------------------------------
 -- WINDOW MANAGEMENT UTILS
+pseudoMaximized = {x=0, y=0, w=0.815, h=1}
+wf = hs.window.filter
 if isAtOffice() then
 	baseLayout = hs.layout.maximized
 else
 	baseLayout = pseudoMaximized
 end
-wf = hs.window.filter
-pseudoMaximized = {x=0, y=0, w=0.815, h=1}
 
 function numberOfScreens()
 	return #(hs.screen.allScreens())
