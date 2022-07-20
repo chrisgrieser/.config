@@ -1,6 +1,7 @@
 require("utils")
 require("twitterrific-iina")
 require("private")
+require("Discord")
 
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
@@ -138,18 +139,16 @@ function movieModeLayout()
 end
 
 function homeModeLayout ()
-	if not(isIMacAtHome()) then return end
+	if not(isIMacAtHome()) or isProjector() then return end
 
 	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
 
+	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
 	openIfNotRunning("Slack")
 	openIfNotRunning("Brave Browser")
 	openIfNotRunning("Obsidian")
 	openIfNotRunning("Twitterrific")
-	-- open Discord in OMG Server (redundancy to the discord launch, in case
-	-- Discord launched while Hammerspoon wasn't active yet)
-	hs.urlevent.openURL("discord://discord.com/channels/686053708261228577/700466324840775831")
 	openIfNotRunning("Drafts")
 
 	killIfRunning("YouTube")
@@ -181,12 +180,17 @@ function homeModeLayout ()
 		hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
 	end)
 
+	-- (redundancy to the discord launch, in case
+	-- Discord launched while Hammerspoon wasn't active yet)
+	discordWatcher("Discord", hs.application.watcher.launched)
 	runDelayed(2.5, function ()
 		-- delay necessary due to things triggered by Discord launch (see discord.lua)
 		local slackWindowTitle = hs.application("Slack"):mainWindow():title()
 		local slackUnreadMsg = slackWindowTitle:match("%*")
 		if (slackUnreadMsg) then
 			hs.application("Slack"):mainWindow():focus()
+		else
+			hs.application("Drafts"):focus()
 		end
 	end)
 end
@@ -196,15 +200,13 @@ function officeModeLayout ()
 	local screen1 = hs.screen.allScreens()[1]
 	local screen2 = hs.screen.allScreens()[2]
 
+	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
 	openIfNotRunning("Slack")
 	openIfNotRunning("Brave Browser")
 	openIfNotRunning("Obsidian")
 	openIfNotRunning("Twitterrific")
 	openIfNotRunning("Drafts")
-	-- open Discord in OMG Server (redundancy to the discord launch, in case
-	-- Discord launched while Hammerspoon wasn't active yet)
-	hs.urlevent.openURL("discord://discord.com/channels/686053708261228577/700466324840775831")
 
 	local maximized = hs.layout.maximized
 	local bottom = {x=0, y=0.5, w=1, h=0.5}
@@ -238,6 +240,9 @@ function officeModeLayout ()
 		hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
 	end)
 
+	-- (redundancy to the discord launch, in case
+	-- Discord launched while Hammerspoon wasn't active yet)
+	discordWatcher("Discord", hs.application.watcher.launched)
 
 	runDelayed(2.5, function ()
 		-- delay necessary due to things triggered by Discord launch (see discord.lua)
