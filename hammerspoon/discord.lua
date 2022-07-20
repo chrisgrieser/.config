@@ -3,7 +3,6 @@ require("utils")
 function discordWatcher(appName, eventType)
 	if appName ~= "Discord" then return end
 
-
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	-- and reconnect Obsidian's Discord Rich Presence (Obsidian launch already covered by RP Plugin)
 	if eventType == hs.application.watcher.launched then
