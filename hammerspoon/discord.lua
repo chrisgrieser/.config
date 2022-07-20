@@ -8,7 +8,7 @@ function discordWatcher(appName, eventType)
 	if eventType == hs.application.watcher.launched then
 		hs.urlevent.openURL("discord://discord.com/channels/686053708261228577/700466324840775831")
 		if appIsRunning("Obsidian") then
-			runDelayed(2.5, function()
+			runDelayed(3, function()
 				hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
 				hs.application("Discord"):activate()
 			end)
