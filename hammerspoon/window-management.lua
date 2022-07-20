@@ -496,19 +496,22 @@ end)
 
 wf_browser = wf.new("Brave Browser")
 wf_browser:subscribe(wf.windowCreated, function ()
+	if #wf_browser:getWindows() == 2 then
+		local win1 = wf_browser:getWindows()[1]
+		local win2 = wf_browser:getWindows()[2]
+		resizingWorkaround(win1, hs.layout.left50)
+		resizingWorkaround(win2, hs.layout.right50)
+	end
+end)
+wf_browser:subscribe(wf.windowDestroyed, function ()
 	numberOfBrowserWindows = #wf_browser:getWindows()
-	if numberOfBrowserWindows == 0 then
+	if #wf_browser:getWindows() == 0 then
 		hs.application("Brave Browser"):hide()
-	elseif numberOfBrowserWindows == 1 then
+	elseif #wf_browser:getWindows() == 1 then
 		local win = wf_browser:getWindows()[1]
 		local layout
 		if isAtOffice() then layout = hs.layout.maximized
 		else layout = pseudoMaximized end
 		resizingWorkaround(win, layout)
-	elseif numberOfBrowserWindows == 2 then
-		local win1 = wf_browser:getWindows()[1]
-		local win2 = wf_browser:getWindows()[2]
-		resizingWorkaround(win1, hs.layout.left50)
-		resizingWorkaround(win2, hs.layout.right50)
 	end
 end)
