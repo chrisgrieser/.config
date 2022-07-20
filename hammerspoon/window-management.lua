@@ -362,12 +362,15 @@ function pairedActivation(start)
 end
 
 function vsplit (mode)
-	if not WIN_RIGHT and (mode == "switch" or mode == "unsplit") then
+	local noSplitActive = true
+	if WIN_RIGHT then splitExists = true end
+
+	if noSplitActive and (mode == "switch" or mode == "unsplit") then
 		notify ("No split active")
 		return
 	end
 
-	if mode == "split" then
+	if mode == "split" and noSplitActive then
 		local wins = mainScreenWindows()	-- to not split windows on second screen
 		WIN_RIGHT = wins[1] -- save in global variables, so they are not garbage-collected
 		WIN_LEFT = wins[2]
@@ -494,5 +497,6 @@ end)
 wf = hs.window.filter
 wf_browser = wf.new("Brave Browser")
 wf_browser:subscribe(hs.window.filter.windowCreated, function ()
+	if #wf_browser:getWindows() == 2 then return end
 	notify ("new Brave Window was created")
 end)
