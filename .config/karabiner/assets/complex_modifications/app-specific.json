@@ -3,39 +3,6 @@
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
-      "description": "🅰️🧑‍💻 Alacritty/Terminal: ⌘Q → ⌃D (Quit on Process End)",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "q",
-            "modifiers": {
-              "mandatory": [
-                "command"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "d",
-              "modifiers": [
-                "control"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "file_paths": [
-                "bin/alacritty$",
-                "/System/Applications/Utilities/Terminal.app"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
       "description": "🅰️🖊 Highlights: ⌘+L → Show PDF in Finder",
       "manipulators": [
         {
