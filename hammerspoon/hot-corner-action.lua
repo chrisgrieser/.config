@@ -1,3 +1,5 @@
+-- CURRENTLY INACTIVE
+--------------------------------------------------------------------------------
 
 -- HOT CORNER Use "Quick Note" as Pseudo Hot Corner Action
 -- to trigger something else instead
