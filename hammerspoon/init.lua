@@ -17,7 +17,7 @@ require("menubar")
 require("system-and-cron")
 require("window-management")
 require("filesystem-watchers")
-require("hot-corner-action")
+-- require("hot-corner-action")
 require("usb-watchers")
 
 -- app-specific
