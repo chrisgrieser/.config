@@ -1,7 +1,7 @@
 " Closing Tabs
 map wq closeTabsOnLeft
 map we closeTabsOnRight
-map w2 moveTabToNewWindow
+map wv moveTabToNewWindow
 map ww closeOtherTabs
 map u removeTab
 map U restoreTab
@@ -31,11 +31,17 @@ map b previousTab
 map e nextTab
 map < moveTabLeft
 map > moveTabRight
-map 0 firstTab
-map $ lastTab
+map 1 firstTab
+map 9 lastTab
 
 " Link Mode
 map <c-f> LinkHints.activateModeWithQueue
+map sf LinkHints.activateModeToDownloadLink
+
+" New Tabs
+" map X createTab http://www.bbc.com/news
+map wn createTab window
+map wi createTab incognito
 
 " mimic American keyboard layout
 map - enterFindMode
@@ -53,8 +59,6 @@ map a passNextKey
 unmap d
 unmap B
 unmap T
-unmap o
-unmap O
 unmap `
 unmap <c-e>
 unmap <c-y>
