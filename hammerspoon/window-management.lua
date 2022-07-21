@@ -185,15 +185,15 @@ function homeModeLayout ()
 	-- show sidebars
 	runDelayed(0.5, function ()
 		hs.layout.apply(homeLayout)
-		hs.urlevent.openURL("drafts://x-callback-url/getCurrentDraft?x-success=drafts://open?showDraftList=true&uuid=")
-		hs.urlevent.openURL("obsidian://sidebar?side=left&show=true")
+		hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
+		hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
 		hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
 	end)
 
 	-- (redundancy to the discord launch, in case
 	-- Discord launched while Hammerspoon wasn't active yet)
 	discordWatcher("Discord", hs.application.watcher.launched)
-	runDelayed(2.5, function ()
+	runDelayed(3, function ()
 		-- delay necessary due to things triggered by Discord launch (see discord.lua)
 		local slackWindowTitle = hs.application("Slack"):mainWindow():title()
 		local slackUnreadMsg = slackWindowTitle:match("%*")
