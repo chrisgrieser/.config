@@ -9,6 +9,7 @@ function reloadAllMenubarItems ()
 	updateDotfileSyncStatusMenuBar()
 	updateDraftsMenubar()
 	setFileHubCountMenuBar()
+	updateSlackUnreadMenuBar()
 end
 
 weatherUpdateMin = 15
@@ -134,11 +135,28 @@ function setFileHubCountMenuBar()
 		fileHubCountMenuBar:setTitle("📂 "..numberOfFiles)
 	end
 end
-setFileHubCountMenuBar()
 
 -- update when folder changes
 fileHubMenuBarWatcher = hs.pathwatcher.new(fileHubLocation, setFileHubCountMenuBar)
 fileHubMenuBarWatcher:start()
+--------------------------------------------------------------------------------
+
+slackUnreadMenuBar = hs.menubar.new()
+function updateSlackUnreadMenuBar()
+	local slackWinName = wf_slack:getWindows()[1]:title()
+	local hasUnreads = slackWinName:match("%*")
+
+	if hasUnreads then
+		slackUnreadMenuBar:returnToMenuBar()
+		slackUnreadMenuBar:setTitle("✴️")
+	else
+		slackUnreadMenuBar:removeFromMenuBar()
+	end
+end
+
+wf = hs.window.filter
+wf_slack = wf.new("Slack")
+wf_slack:subscribe(wf.windowTitleChanged, updateSlackUnreadMenuBar)
 
 --------------------------------------------------------------------------------
 -- obsidianStatusBar = hs.menubar.new()
