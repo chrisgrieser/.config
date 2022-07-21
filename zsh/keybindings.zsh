@@ -1,3 +1,5 @@
+# https://jvns.ca/blog/2022/07/20/pseudoterminals/
+
 bindkey "\e\e" quitSession # Double Esc
 bindkey "^P" copyLocation
 bindkey "^B" copyBuffer

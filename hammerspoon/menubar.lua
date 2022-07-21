@@ -65,7 +65,9 @@ covidTimer:start()
 dotfileSyncMenuBar = hs.menubar.new()
 function updateDotfileSyncStatusMenuBar()
 	local changes, success = hs.execute('git status --porcelain | wc -l | tr -d " "')
+	local lastCommit, success2 = hs.execute('git log -1 --format=%ar')
 	changes = trim(changes)
+	lastCommit = trim(lastCommit)
 
 	if tonumber(changes) == 0 or not(success) then
 		dotfileSyncMenuBar:removeFromMenuBar()
@@ -108,12 +110,11 @@ draftsMenuBarWatcher1:start()
 draftsMenuBarWatcher2 = hs.application.watcher.new(draftsWatcher)
 draftsMenuBarWatcher2:start()
 
--- `hammerspoon://update-drafts-menubar`
+-- `hammerspoon://update-drafts-menubar` for Alfred when adding Drafts in the background
 hs.urlevent.bind("update-drafts-menubar", function()
 	updateDraftsMenubar()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
-
 
 --------------------------------------------------------------------------------
 
