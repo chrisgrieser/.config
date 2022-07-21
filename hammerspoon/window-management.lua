@@ -521,3 +521,16 @@ function twitterrificNextToPseudoMax(_, eventType)
 end
 anyAppActivationWatcher = hs.application.watcher.new(twitterrificNextToPseudoMax)
 anyAppActivationWatcher:start()
+
+-- Minimize Zoom Window, when the second is opened
+wf_zoom = wf.new("zoom.us")
+wf_zoom:subscribe(wf.windowCreated, function ()
+	if #wf_zoom:getWindows() == 2 then
+		hs.application("zoom.us"):mainWindow():minimize()
+	end
+end)
+wf_zoom:subscribe(wf.windowDestroyed, function ()
+	if #wf_zoom:getWindows() == 1 then
+		hs.application("zoom.us"):mainWindow():unminimize()
+	end
+end)
