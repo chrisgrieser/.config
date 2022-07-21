@@ -34,6 +34,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>1F381AED-559E-4CD5-B1C5-E97FDDE86541</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0394E195-B211-460A-AA61-7FD79149A56B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2B8D7DA4-2146-4F71-8597-E14FC9C4E21C</key>
 		<array>
 			<dict>
@@ -388,9 +401,9 @@
 				<key>relatedApps</key>
 				<array>
 					<string>com.vivaldi.Vivaldi</string>
-					<string>com.brave.Browser</string>
-					<string>org.chromium.Chromium</string>
 					<string>com.brave.Browser.app.fmajbmdokmecmpllfhcamihghgoablgg</string>
+					<string>org.chromium.Chromium</string>
+					<string>com.brave.Browser</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -723,6 +736,65 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>bookmark_[Browser].applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0394E195-B211-460A-AA61-7FD79149A56B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>11</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>B</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.brave.Browser</string>
+					<string>org.chromium.Chromium</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>1F381AED-559E-4CD5-B1C5-E97FDDE86541</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -801,6 +873,15 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>0394E195-B211-460A-AA61-7FD79149A56B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>595</real>
+		</dict>
 		<key>0ABBA2D0-AB03-47DC-952B-157EAB6B558B</key>
 		<dict>
 			<key>colorindex</key>
@@ -840,6 +921,17 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>160</real>
+		</dict>
+		<key>1F381AED-559E-4CD5-B1C5-E97FDDE86541</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>Bookmark</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>595</real>
 		</dict>
 		<key>2B8D7DA4-2146-4F71-8597-E14FC9C4E21C</key>
 		<dict>

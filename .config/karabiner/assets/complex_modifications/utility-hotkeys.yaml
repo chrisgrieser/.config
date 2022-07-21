@@ -24,6 +24,27 @@ rules:
               - ^com\.sublimetext
               - ^com\.apple\.finder$
               - ^com\.iconfactory\.Twitterrific
+  - description: '🔘 ⌘+D → Delete (Visual) Line'
+    manipulators:
+      - type: basic
+        from:
+          key_code: d
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: right_arrow
+            modifiers:
+              - command
+          - key_code: delete_or_backspace
+            modifiers:
+              - command
+        conditions:
+          - type: frontmost_application_unless
+            bundle_identifiers:
+              - ^md\.obsidian$
+              - ^com\.sublimetext
+              - ^com\.apple\.finder$
   - description: '🔘 ⌃+T → Transpose Characters'
     manipulators:
       - type: basic
