@@ -6,17 +6,18 @@ require("Discord")
 --------------------------------------------------------------------------------
 -- WINDOW MANAGEMENT UTILS
 pseudoMaximized = {x=0, y=0, w=0.815, h=1}
+maximized = hs.layout.maximized
 wf = hs.window.filter
 if isAtOffice() then
-	baseLayout = hs.layout.maximized
+	baseLayout = maximized
 else
 	baseLayout = pseudoMaximized
 end
+iMacDisplay = hs.screen("Built%-in") -- % to escape hyphen repetition
 
 function numberOfScreens()
 	return #(hs.screen.allScreens())
 end
-
 
 --------------------------------------------------------------------------------
 -- WINDOW BASE MOVEMENT & SIDEBARS
@@ -90,6 +91,12 @@ function toggleObsidianSidebar (obsiWin)
 	end)
 end
 
+function showAllSidebars ()
+	hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
+	hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
+	hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
+end
+
 function moveAndResize(direction)
 	local win = hs.window.focusedWindow()
 	local position
@@ -105,7 +112,7 @@ function moveAndResize(direction)
 	elseif (direction == "pseudo-maximized") then
 		position = pseudoMaximized
 	elseif (direction == "maximized") then
-		position = hs.layout.maximized
+		position = maximized
 	elseif (direction == "centered") then
 		position = {x=0.2, y=0.1, w=0.6, h=0.8}
 	end
@@ -132,7 +139,6 @@ end
 
 function movieModeLayout()
 	if not(isProjector()) then return end
-	local iMacDisplay = hs.screen.allScreens()[2]
 	iMacDisplay:setBrightness(0)
 
 	openIfNotRunning("YouTube")
@@ -151,8 +157,6 @@ end
 function homeModeLayout ()
 	if not(isIMacAtHome()) or isProjector() then return end
 
-	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
-
 	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
 	openIfNotRunning("Slack")
@@ -167,42 +171,27 @@ function homeModeLayout ()
 	closeFinderWindows()
 	closer()
 
-	local screen = hs.screen.primaryScreen():name()
+	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
 	local homeLayout = {
-		{"Twitterrific", nil, screen, toTheSide, nil, nil},
-		{"Brave Browser", nil, screen, pseudoMaximized, nil, nil},
-		{"Sublime Text", nil, screen, pseudoMaximized, nil, nil},
-		{"Slack", nil, screen, pseudoMaximized, nil, nil},
-		{"Discord", nil, screen, pseudoMaximized, nil, nil},
-		{"Obsidian", nil, screen, pseudoMaximized, nil, nil},
-		{"Drafts", nil, screen, pseudoMaximized, nil, nil},
-		{"Mimestream", nil, screen, pseudoMaximized, nil, nil},
-		{"alacritty", nil, screen, pseudoMaximized, nil, nil},
-		{"Alacritty", nil, screen, pseudoMaximized, nil, nil},
+		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
+		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Slack", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Discord", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
 	}
-	hs.layout.apply(homeLayout)
 
-	-- show sidebars
+	hs.layout.apply(homeLayout)
 	runDelayed(0.5, function ()
 		hs.layout.apply(homeLayout)
-		hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
-		hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
-		hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
+		showAllSidebars()
+		discordLaunch()
 	end)
 
-	-- (redundancy to the discord launch, in case
-	-- Discord launched while Hammerspoon wasn't active yet)
-	discordWatcher("Discord", hs.application.watcher.launched)
-	runDelayed(3, function ()
-		-- delay necessary due to things triggered by Discord launch (see discord.lua)
-		local slackWindowTitle = hs.application("Slack"):mainWindow():title()
-		local slackUnreadMsg = slackWindowTitle:match("%*")
-		if (slackUnreadMsg) then
-			hs.application("Slack"):mainWindow():focus()
-		else
-			hs.application("Drafts"):focus()
-		end
-	end)
 end
 
 function officeModeLayout ()
@@ -218,7 +207,6 @@ function officeModeLayout ()
 	openIfNotRunning("Twitterrific")
 	openIfNotRunning("Drafts")
 
-	local maximized = hs.layout.maximized
 	local bottom = {x=0, y=0.5, w=1, h=0.5}
 	local topLeft = {x=0, y=0, w=0.515, h=0.5}
 	local topRight = {x=0.51, y=0, w=0.49, h=0.5}
@@ -244,24 +232,10 @@ function officeModeLayout ()
 	end)
 	runDelayed(0.5, function ()
 		hs.layout.apply(officeLayout)
-		-- show sidebars
-		hs.urlevent.openURL("drafts://x-callback-url/getCurrentDraft?x-success=drafts://open?showDraftList=true&uuid=")
-		hs.urlevent.openURL("obsidian://sidebar?side=left&show=true")
-		hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
+		showAllSidebars()
+		discordLaunch()
 	end)
 
-	-- (redundancy to the discord launch, in case
-	-- Discord launched while Hammerspoon wasn't active yet)
-	discordWatcher("Discord", hs.application.watcher.launched)
-
-	runDelayed(2.5, function ()
-		-- delay necessary due to things triggered by Discord launch (see discord.lua)
-		local slackWindowTitle = hs.application("Slack"):mainWindow():title()
-		local slackUnreadMsg = slackWindowTitle:match("%*")
-		if (slackUnreadMsg) then
-			hs.application("Slack"):mainWindow():raise()
-		end
-	end)
 end
 
 --------------------------------------------------------------------------------
