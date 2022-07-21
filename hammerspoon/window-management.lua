@@ -526,11 +526,15 @@ anyAppActivationWatcher:start()
 wf_zoom = wf.new("zoom.us")
 wf_zoom:subscribe(wf.windowCreated, function ()
 	if #wf_zoom:getWindows() == 2 then
-		hs.application("zoom.us"):findWindow("^Zoom$"):minimize()
+		runDelayed (0.5, function()
+			hs.application("zoom.us"):findWindow("^Zoom$"):minimize()
+		end)
 	end
 end)
 wf_zoom:subscribe(wf.windowDestroyed, function ()
 	if #wf_zoom:getWindows() == 1 then
-		hs.application("zoom.us"):findWindow("^Zoom$"):unminimize()
+		runDelayed (0.5, function()
+			hs.application("zoom.us"):findWindow("^Zoom$"):unminimize()
+		end)
 	end
 end)
