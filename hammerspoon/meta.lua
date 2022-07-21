@@ -27,6 +27,12 @@ function lc ()
 	print ("Copied: '"..lastcommand.."'")
 end
 
+-- info on current window
+function cwin ()
+	print(hs.window.orderedWindows()[1]
+	hs.window.orderedWindows()[1]
+end
+
 -- `hammerspoon://clear-console` for Karabiner Elements
 hs.urlevent.bind("clear-console", function()
 	hs.console.clearConsole()
