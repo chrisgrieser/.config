@@ -33,7 +33,7 @@ end)
 -- `hammerspoon://current-window` for Alfred
 hs.urlevent.bind("current-window", function()
 	alert(hs.window.orderedWindows()[1]:title())
-	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
+	-- hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
 -- `hammerspoon://clear-console` for Karabiner Elements
