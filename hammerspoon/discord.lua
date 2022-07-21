@@ -25,14 +25,16 @@ function discordWatcher(appName, eventType)
 	if not (clipb) then return end
 
 	if eventType == hs.application.watcher.activated then
-		local hasURL = clipb:match('^https?%S+$')
-		if (hasURL) then
+		local hasURL = clipb:match('^https?:%S+$')
+		local hasObsidianURL = clipb:match('^obsidian:%S+$')
+		if hasURL or hasObsidianURL then
 			hs.pasteboard.setContents("<"..clipb..">")
 		end
 
 	elseif eventType == hs.application.watcher.deactivated then
-		local hasEnclosedURL = clipb:match('^<https?%S+>$')
-		if (hasEnclosedURL) then
+		local hasEnclosedURL = clipb:match('^<https?:%S+>$')
+		local hasEnclosedObsidianURL = clipb:match('^<obsidian:%S+>$')
+		if hasEnclosedURL or hasEnclosedObsidianURL then
 			clipb = clipb:sub(2, -2) -- remove first & last character
 			hs.pasteboard.setContents(clipb)
 		end
