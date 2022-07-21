@@ -39,7 +39,7 @@
 	"theme": "Adaptive.sublime-theme",
 	"color_scheme": "auto",
 	"light_color_scheme": "Packages/Color Scheme - Rainbow/Rainbow (Light).tmTheme",
-	"dark_color_scheme": "Night Owl.sublime-color-scheme",
+	"dark_color_scheme": "Packages/Dracula Color Scheme/Dracula.tmTheme",
 	"adaptive_dividers": true, // adaptive theme only
 	"themed_title_bar": true, // adaptive theme only
 
