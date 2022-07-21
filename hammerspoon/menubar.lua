@@ -75,6 +75,10 @@ function updateDotfileSyncStatusMenuBar()
 		dotfileSyncMenuBar:returnToMenuBar()
 		dotfileSyncMenuBar:setTitle("🔁 "..changes)
 	end
+
+	if dotfileSyncMenuBar:isInMenuBar() and success2 then
+		dotfileSyncMenuBar:setTooltip(lastCommit)
+	end
 end
 dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
 dotfilesWatcher:start()
