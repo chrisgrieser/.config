@@ -45,15 +45,15 @@
       ]
     },
     {
-      "description": "🔘 ⌃+T → Transpose Characters",
+      "description": "🔘 ⌘+D → Delete (Visual) Line",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "key_code": "t",
+            "key_code": "d",
             "modifiers": {
               "mandatory": [
-                "control"
+                "command"
               ]
             }
           },
@@ -61,23 +61,17 @@
             {
               "key_code": "right_arrow",
               "modifiers": [
-                "shift"
+                "command"
               ]
             },
             {
-              "key_code": "x",
+              "key_code": "delete_or_backspace",
               "modifiers": [
                 "command"
               ]
             },
             {
-              "key_code": "left_arrow"
-            },
-            {
-              "key_code": "v",
-              "modifiers": [
-                "command"
-              ]
+              "key_code": "delete_or_backspace"
             }
           ],
           "conditions": [
@@ -85,7 +79,8 @@
               "type": "frontmost_application_unless",
               "bundle_identifiers": [
                 "^md\\.obsidian$",
-                "^com\\.sublimetext"
+                "^com\\.sublimetext",
+                "^com\\.apple\\.finder$"
               ]
             }
           ]

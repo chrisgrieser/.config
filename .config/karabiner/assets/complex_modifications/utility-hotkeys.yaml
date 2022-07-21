@@ -36,39 +36,16 @@ rules:
           - key_code: right_arrow
             modifiers:
               - command
-          - key_code: delete_or_backspace
+          - key_code: delete_or_backspace  # delete the line content
             modifiers:
               - command
+          - key_code: delete_or_backspace  # delete the line (line break)
         conditions:
           - type: frontmost_application_unless
             bundle_identifiers:
               - ^md\.obsidian$
               - ^com\.sublimetext
               - ^com\.apple\.finder$
-  - description: '🔘 ⌃+T → Transpose Characters'
-    manipulators:
-      - type: basic
-        from:
-          key_code: t
-          modifiers:
-            mandatory:
-              - control
-        to:
-          - key_code: right_arrow
-            modifiers:
-              - shift
-          - key_code: x
-            modifiers:
-              - command
-          - key_code: left_arrow
-          - key_code: v
-            modifiers:
-              - command
-        conditions:
-          - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^md\.obsidian$
-              - ^com\.sublimetext
   - description: "🔘 § → | (+ US Layout); ⌥3 for Paragraph Symbol"
     manipulators:
       - type: basic
