@@ -108,6 +108,7 @@ function sublimeLaunch(appName, eventType)
 		runDelayed(0.1, function () moveAndResize("maximized") end)
 	else
 		runDelayed(0.1, function () moveAndResize("pseudo-maximized") end)
+		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end
 sublimeWatcher = hs.application.watcher.new(sublimeLaunch)
