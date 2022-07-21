@@ -20,18 +20,21 @@ hs.console.darkMode(false)
 hs.console.outputBackgroundColor{ white = 0.92 }
 
 -- copy last command to clipboard
-function lc ()
+-- `hammerspoon://copy-last-command` for Karabiner Elements
+hs.urlevent.bind("copy-last-command", function()
+	hs.console.clearConsole()
 	consoleHistory = hs.console.getHistory()
 	lastcommand = consoleHistory[#consoleHistory]
 	hs.pasteboard.setContents(lastcommand)
-	print ("Copied: '"..lastcommand.."'")
-end
+	notify("Copied: '"..lastcommand.."'")
+end)
 
--- info on current windows
-function cwin ()
-	print(hs.window.orderedWindows()[1]:title())
-	print(hs.window.orderedWindows()[2]:title())
-end
+-- info on current window(s)
+-- `hammerspoon://current-window` for Karabiner Elements
+hs.urlevent.bind("current-window", function()
+	alert(hs.window.orderedWindows()[1]:title())
+	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
+end)
 
 -- `hammerspoon://clear-console` for Karabiner Elements
 hs.urlevent.bind("clear-console", function()

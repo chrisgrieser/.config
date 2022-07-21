@@ -169,3 +169,16 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^org\.hammerspoon\.Hammerspoon$
+      - type: basic
+        from:
+          key_code: c
+          modifiers:
+            mandatory:
+              - command
+              - shift
+        to:
+          - shell_command: open 'hammerspoon://copy-last-command'
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^org\.hammerspoon\.Hammerspoon$
