@@ -459,7 +459,7 @@ hotkey(hyper, "V", function()
 end)
 
 --------------------------------------------------------------------------------
--- WINDOW FILTERS & WINDOW-FIXES
+-- APP-SPECIFIC WINDOW BEHAVIOR
 -- - https://www.hammerspoon.org/go/#winfilters
 -- - https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 
