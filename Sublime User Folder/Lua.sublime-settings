@@ -1,0 +1,4 @@
+// These settings override both User and Default settings for the Lua syntax
+{
+	"dark_color_scheme": "Packages/Dracula Color Scheme/Dracula.tmTheme",
+}

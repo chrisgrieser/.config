@@ -1,8 +1,7 @@
 {
-	"light_color_scheme": "Night Owl - Light.sublime-color-scheme",
-	"dark_color_scheme": "Night Owl.sublime-color-scheme",
-
 	"draw_white_space": ["selection", "isolated"],
+
+	"color_scheme": "Nord.sublime-color-scheme",
 
 	"extensions":
 	[
