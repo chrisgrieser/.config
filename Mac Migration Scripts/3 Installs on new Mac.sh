@@ -60,3 +60,6 @@ echo ":root { zoom: \"1.5\"; }" > "$newSkinPath"/resource/webkit.css
 
 # Espanso
 espanso service register
+
+# Hammerspoon
+defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0

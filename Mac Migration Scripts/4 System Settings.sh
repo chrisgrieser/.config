@@ -256,5 +256,8 @@ defaults write com.apple.TextEdit RichText -int 0
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
-# Hammerspoon
-defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
+# Energy Saver Settings
+sudo pmset displaysleep 30 # minutes till display sleep
+sudo pmset sleep 1 # will sleep when displays are off
+sudo pmset autorestart 0 # restart on power failure
+sudo pmset womp 1 # Wake for network access

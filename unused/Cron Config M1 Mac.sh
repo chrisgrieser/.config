@@ -22,4 +22,5 @@ crontab -l # check the current cronjobs
 #-------------------------------------------------------------------------------
 
 # wake before morning cronjobs run → https://www.dssw.co.uk/reference/pmset.html
-sudo pmset repeat wake MTWRFSU 06:01:00
+# same as energy saver schedule setting
+# sudo pmset repeat wake MTWRFSU 06:01:00
