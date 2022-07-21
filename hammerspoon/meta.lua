@@ -30,7 +30,7 @@ hs.urlevent.bind("copy-last-command", function()
 end)
 
 -- info on current window(s)
--- `hammerspoon://current-window` for Karabiner Elements
+-- `hammerspoon://current-window` for Alfred
 hs.urlevent.bind("current-window", function()
 	alert(hs.window.orderedWindows()[1]:title())
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
