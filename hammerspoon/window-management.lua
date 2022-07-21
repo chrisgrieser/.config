@@ -467,12 +467,16 @@ end)
 wf_browser = wf.new("Brave Browser")
 wf_browser:subscribe(wf.windowCreated, function ()
 	-- split when second window is opened
-	if #wf_browser:getWindows() == 2 then
-		local win1 = wf_browser:getWindows()[1]
-		local win2 = wf_browser:getWindows()[2]
-		resizingWorkaround(win1, hs.layout.left50)
-		resizingWorkaround(win2, hs.layout.right50)
-	end
+	if not(#wf_browser:getWindows() == 2) then return end
+
+	local win1 = wf_browser:getWindows()[1]
+	local win2 = wf_browser:getWindows()[2]
+
+	-- do not effect switch to inkognito windows
+	if (win1:title():match("%(Private%)$")) or (win2:title():match("%(Private%)$")) then return end
+
+	resizingWorkaround(win1, hs.layout.left50)
+	resizingWorkaround(win2, hs.layout.right50)
 end)
 
 wf_browser:subscribe(wf.windowDestroyed, function ()

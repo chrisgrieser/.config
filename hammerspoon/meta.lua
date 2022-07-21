@@ -22,15 +22,15 @@ hs.console.outputBackgroundColor{ white = 0.92 }
 -- copy last command to clipboard
 function lc ()
 	consoleHistory = hs.console.getHistory()
-	lastcommand = consoleHistory[#consoleHistory-1] -- -1 to not copy this itself
+	lastcommand = consoleHistory[#consoleHistory]
 	hs.pasteboard.setContents(lastcommand)
 	print ("Copied: '"..lastcommand.."'")
 end
 
--- info on current window
+-- info on current windows
 function cwin ()
-	print(hs.window.orderedWindows()[1]
-	hs.window.orderedWindows()[1]
+	print(hs.window.orderedWindows()[1]:title())
+	print(hs.window.orderedWindows()[2]:title())
 end
 
 -- `hammerspoon://clear-console` for Karabiner Elements
