@@ -463,20 +463,28 @@ end)
 -- - https://www.hammerspoon.org/go/#winfilters
 -- - https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 
+function isIncognitoWindow(browserWin)
+	if browserWin:title():match("%(Private%)$") then return true
+	else return false end
+end
+
 -- BROWSER
 wf_browser = wf.new("Brave Browser")
 wf_browser:subscribe(wf.windowCreated, function ()
 	-- split when second window is opened
-	if not(#wf_browser:getWindows() == 2) then return end
+	if #wf_browser:getWindows() == 2 then
+		local win1 = wf_browser:getWindows()[1]
+		local win2 = wf_browser:getWindows()[2]
+		if isIncognitoWindow(win1) or isIncognitoWindow(win2) then return end -- do not effect switch to inkognito windows
+		resizingWorkaround(win1, hs.layout.left50)
+		resizingWorkaround(win2, hs.layout.right50)
+	end
 
-	local win1 = wf_browser:getWindows()[1]
-	local win2 = wf_browser:getWindows()[2]
-
-	-- do not effect switch to inkognito windows
-	if (win1:title():match("%(Private%)$")) or (win2:title():match("%(Private%)$")) then return end
-
-	resizingWorkaround(win1, hs.layout.left50)
-	resizingWorkaround(win2, hs.layout.right50)
+	-- if new window is incognito window, position it to the left
+	local currentWindow = hs.window.focusedWindow()
+	if isIncognitoWindow(currentWindow) then
+		resizingWorkaround(currentWindow, baseLayout)
+	end
 end)
 
 wf_browser:subscribe(wf.windowDestroyed, function ()
