@@ -118,6 +118,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9C50256F-4B6D-4944-8AE6-5189C9F136F2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F90DBBB8-585E-43DF-AE37-27ED42C7F52A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>BC41C6FD-A0A1-48EC-A156-72DC0D9520FF</key>
 		<array>
 			<dict>
@@ -571,6 +584,48 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
+				<string>https:</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Open URL: https:{query}</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>9C50256F-4B6D-4944-8AE6-5189C9F136F2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https:{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>F90DBBB8-585E-43DF-AE37-27ED42C7F52A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
 				<string>obsidian:</string>
 				<key>subtext</key>
 				<string></string>
@@ -614,19 +669,17 @@
 	<dict>
 		<key>04106BDF-B453-45B9-B9C7-00E5B943CCD2</key>
 		<dict>
-			<key>note</key>
-			<string>workaround, so URL opening only happens with "http" at the beginning</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>850</real>
+			<real>970</real>
 		</dict>
 		<key>1EA67BCF-5320-41BA-B446-8FB00AC9958C</key>
 		<dict>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>850</real>
+			<real>970</real>
 		</dict>
 		<key>33BD77E2-2929-432E-9718-B2FDBAF4EFE5</key>
 		<dict>
@@ -723,6 +776,13 @@
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
+		<key>9C50256F-4B6D-4944-8AE6-5189C9F136F2</key>
+		<dict>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>850</real>
+		</dict>
 		<key>ABF30A35-70D2-41E3-B40B-4A5E783EB7FC</key>
 		<dict>
 			<key>colorindex</key>
@@ -792,6 +852,13 @@
 			<real>210</real>
 			<key>ypos</key>
 			<real>25</real>
+		</dict>
+		<key>F90DBBB8-585E-43DF-AE37-27ED42C7F52A</key>
+		<dict>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>850</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
