@@ -307,17 +307,19 @@ return "{query}"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://icons8.com/icons/set/{query}/color</string>
-				<key>utf8</key>
-				<true/>
+				<string>https://www.google.com/search?tbs=ic%3Atrans&amp;tbm=isch&amp;q={query}+icon</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>795116F8-1CC3-4379-A1AB-2A4A51D41240</string>
+			<string>7CF8B97A-6865-489C-8B65-3C892683D59E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -326,17 +328,19 @@ return "{query}"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.google.com/search?tbs=ic%3Atrans&amp;tbm=isch&amp;q={query}+icon</string>
-				<key>utf8</key>
-				<true/>
+				<string>https://icons8.com/icons/set/{query}/color</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>7CF8B97A-6865-489C-8B65-3C892683D59E</string>
+			<string>795116F8-1CC3-4379-A1AB-2A4A51D41240</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -415,12 +419,14 @@ return "{query}"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>https://www.iconfinder.com/search/?q={query}&amp;price=free</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -434,12 +440,14 @@ return "{query}"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>https://www.flaticon.com/search?word={query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -468,12 +476,14 @@ return "{query}"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>https://thenounproject.com/search/?q={query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -529,12 +539,14 @@ return "{query}"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>https://icon-sets.iconify.design/?query={query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -607,6 +619,8 @@ return "{query}"</string>
 				</array>
 				<key>elselabel</key>
 				<string>updated</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -662,12 +676,14 @@ return "{query}"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>https://macosicons.com/{query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -717,12 +733,14 @@ return "{query}"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>https://fonts.google.com/icons?icon.query={query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -757,12 +775,14 @@ return "{query}"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>https://lucide.dev/?search={query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -797,12 +817,14 @@ return "{query}"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>https://unicode-table.com/en/search/?q={query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -837,12 +859,14 @@ return "{query}"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>http://www.amp-what.com/unicode/search/{query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -856,12 +880,14 @@ return "{query}"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>https://graphemica.com/search?q={query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -881,45 +907,45 @@ brew install folderify</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<integer>650</integer>
+			<real>650</real>
 			<key>ypos</key>
-			<integer>415</integer>
+			<real>415</real>
 		</dict>
 		<key>0951FDD8-D9E2-4DC3-8844-58CF1AABE48C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>200</integer>
+			<real>200</real>
 			<key>ypos</key>
-			<integer>815</integer>
+			<real>815</real>
 		</dict>
 		<key>15FF9B9D-0AF2-48F4-84C0-9781E0F3766B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>690</integer>
+			<real>690</real>
 			<key>ypos</key>
-			<integer>140</integer>
+			<real>140</real>
 		</dict>
 		<key>1DEB7DC6-BC1F-4E24-8930-2D157EF66CE1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>20</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>475</integer>
+			<real>475</real>
 		</dict>
 		<key>279C338C-5842-421C-A857-FBD9552F5A2C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<integer>800</integer>
+			<real>800</real>
 			<key>ypos</key>
-			<integer>435</integer>
+			<real>435</real>
 		</dict>
 		<key>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</key>
 		<dict>
@@ -928,117 +954,117 @@ brew install folderify</string>
 			<key>note</key>
 			<string>copy image to clipboard</string>
 			<key>xpos</key>
-			<integer>690</integer>
+			<real>690</real>
 			<key>ypos</key>
-			<integer>10</integer>
+			<real>15</real>
 		</dict>
 		<key>4610619C-F64A-42DF-B3B5-F2E14447FA42</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<integer>925</integer>
+			<real>925</real>
 			<key>ypos</key>
-			<integer>350</integer>
+			<real>350</real>
 		</dict>
 		<key>4CA334D9-5DCD-4CEF-986C-3ED4283F6C55</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>200</integer>
+			<real>200</real>
 			<key>ypos</key>
-			<integer>250</integer>
+			<real>250</real>
 		</dict>
 		<key>5BA12A65-7280-4D1E-AE15-F609CF646399</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>200</integer>
+			<real>200</real>
 			<key>ypos</key>
-			<integer>930</integer>
+			<real>930</real>
 		</dict>
 		<key>5E00EB78-1FAB-400E-B437-E867401108F0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<integer>650</integer>
+			<real>650</real>
 			<key>ypos</key>
-			<integer>575</integer>
+			<real>575</real>
 		</dict>
 		<key>669EC31A-C9B1-4515-85BA-4809329A85F8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>200</integer>
+			<real>200</real>
 			<key>ypos</key>
-			<integer>475</integer>
+			<real>475</real>
 		</dict>
 		<key>7067A0A4-D9DA-4775-BECD-24C3249B29E2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>840</integer>
+			<real>840</real>
 			<key>ypos</key>
-			<integer>10</integer>
+			<real>15</real>
 		</dict>
 		<key>787AA6A6-CD07-447C-8D73-F4FCD1FEC10D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>200</integer>
+			<real>200</real>
 			<key>ypos</key>
-			<integer>360</integer>
+			<real>360</real>
 		</dict>
 		<key>795116F8-1CC3-4379-A1AB-2A4A51D41240</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>205</integer>
+			<real>205</real>
 			<key>ypos</key>
-			<integer>10</integer>
+			<real>15</real>
 		</dict>
 		<key>7CF8B97A-6865-489C-8B65-3C892683D59E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>350</integer>
+			<real>350</real>
 			<key>ypos</key>
-			<integer>15</integer>
+			<real>15</real>
 		</dict>
 		<key>9B285645-6D02-442F-8EAC-6DB1EBBF0AD0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>15</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>930</integer>
+			<real>930</real>
 		</dict>
 		<key>A069BE51-DA62-4835-8048-AF3A608C97D0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>350</integer>
+			<real>350</real>
 			<key>ypos</key>
-			<integer>130</integer>
+			<real>130</real>
 		</dict>
 		<key>AB2F50DC-81E4-4FE9-B053-EE4331CB76D5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>20</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>585</integer>
+			<real>585</real>
 		</dict>
 		<key>ADC0722C-95D6-4BDE-B235-615784A424DA</key>
 		<dict>
@@ -1047,101 +1073,103 @@ brew install folderify</string>
 			<key>note</key>
 			<string>edit preferences file</string>
 			<key>xpos</key>
-			<integer>435</integer>
+			<real>435</real>
 			<key>ypos</key>
-			<integer>570</integer>
+			<real>570</real>
 		</dict>
 		<key>AF9EC7AB-2DA7-4A8E-86CC-D63DF4929210</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>200</integer>
+			<real>200</real>
 			<key>ypos</key>
-			<integer>1050</integer>
+			<real>1050</real>
 		</dict>
 		<key>B2FE0349-860A-44F0-B49D-20C8F895F9C0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>510</integer>
+			<real>510</real>
 			<key>ypos</key>
-			<integer>75</integer>
+			<real>75</real>
 		</dict>
 		<key>B5FEA91E-E371-4D98-863B-604F2D5DCADA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>20</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>700</integer>
+			<real>700</real>
 		</dict>
 		<key>BAA2ADF7-2FEB-4F9A-AE98-17378171B5CA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<integer>430</integer>
+			<real>430</real>
 			<key>ypos</key>
-			<integer>415</integer>
+			<real>415</real>
 		</dict>
 		<key>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>20</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>75</integer>
+			<real>75</real>
 		</dict>
 		<key>C35BAC57-E3D9-4FCA-8B09-2C81C2D8D7B9</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>200</integer>
+			<real>200</real>
 			<key>ypos</key>
-			<integer>130</integer>
+			<real>130</real>
 		</dict>
 		<key>D6F7AD54-C4BD-4B8F-8D32-D5680EECB192</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<integer>925</integer>
+			<real>925</real>
 			<key>ypos</key>
-			<integer>475</integer>
+			<real>475</real>
 		</dict>
 		<key>DF4BD673-F9B0-471E-9562-239EA93A628A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>20</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>300</integer>
+			<real>300</real>
 		</dict>
 		<key>DF55CB29-2AC2-4527-BCDC-A622FBD4BAE1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>200</integer>
+			<real>200</real>
 			<key>ypos</key>
-			<integer>700</integer>
+			<real>700</real>
 		</dict>
 		<key>E8277AD7-938D-47A3-8C3E-CA4929723C43</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<integer>200</integer>
+			<real>200</real>
 			<key>ypos</key>
-			<integer>585</integer>
+			<real>585</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>variables</key>
 	<dict>
 		<key>custom_icon_folder</key>
