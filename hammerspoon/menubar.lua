@@ -143,15 +143,18 @@ fileHubMenuBarWatcher:start()
 
 slackUnreadMenuBar = hs.menubar.new()
 function updateSlackUnreadMenuBar()
+	if not(appIsRunning("Slack")) then
+		slackUnreadMenuBar:removeFromMenuBar()
+		return
+	end
 	local slackWinName = wf_slack:getWindows()[1]:title()
 	local hasUnreads = slackWinName:match("%*")
 
-	if hasUnreads then
-		slackUnreadMenuBar:returnToMenuBar()
-		slackUnreadMenuBar:setTitle("✴️")
-	else
+	if not hasUnreads then
 		slackUnreadMenuBar:removeFromMenuBar()
 	end
+	slackUnreadMenuBar:returnToMenuBar()
+	slackUnreadMenuBar:setTitle("✴️")
 end
 
 wf = hs.window.filter

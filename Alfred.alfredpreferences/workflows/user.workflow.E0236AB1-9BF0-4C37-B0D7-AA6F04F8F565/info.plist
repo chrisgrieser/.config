@@ -692,41 +692,6 @@ end tell</string>
 				<integer>0</integer>
 				<key>argument</key>
 				<integer>3</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>32</integer>
-				<key>hotmod</key>
-				<integer>917504</integer>
-				<key>hotstring</key>
-				<string>U</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.hnc.Discord</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>1949AD43-9714-415D-A3EA-6D5BBEDEE319</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>3</integer>
 				<key>argumenttext</key>
 				<string>5</string>
 				<key>focusedappvariable</key>
@@ -754,6 +719,41 @@ end tell</string>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>613721AC-5C03-421A-A4B5-63C252B4DDB7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>32</integer>
+				<key>hotmod</key>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>U</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.hnc.Discord</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>1949AD43-9714-415D-A3EA-6D5BBEDEE319</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -923,9 +923,9 @@ end tell</string>
 			<key>note</key>
 			<string>Emoji</string>
 			<key>xpos</key>
-			<real>485</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>460</real>
 		</dict>
 		<key>0B8F3A31-A96C-42D3-BFAD-D19717C6DFF6</key>
 		<dict>
@@ -943,9 +943,9 @@ end tell</string>
 			<key>note</key>
 			<string>Next Unread</string>
 			<key>xpos</key>
-			<real>490</real>
+			<real>485</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>610</real>
 		</dict>
 		<key>297933F2-17E5-496D-B5E6-0906D07389B1</key>
 		<dict>
@@ -963,7 +963,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>35</real>
+			<real>45</real>
 		</dict>
 		<key>3FED977F-99BD-44C7-8346-832F3A9CEFD6</key>
 		<dict>
@@ -972,9 +972,9 @@ end tell</string>
 			<key>note</key>
 			<string>Scroll to Bottom (like vim G)</string>
 			<key>xpos</key>
-			<real>485</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>175</real>
 		</dict>
 		<key>574AFFBF-079A-47F9-945D-4AF65EF44FC1</key>
 		<dict>
@@ -1008,9 +1008,9 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>670</real>
+			<real>665</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>460</real>
 		</dict>
 		<key>6D9162FA-11B3-418A-BDDC-AFCBB47C2F75</key>
 		<dict>
@@ -1028,9 +1028,9 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>670</real>
+			<real>665</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>325</real>
 		</dict>
 		<key>76715D8A-261B-4002-AF36-35E8E07F4641</key>
 		<dict>
@@ -1039,9 +1039,9 @@ end tell</string>
 			<key>note</key>
 			<string>reply directly above</string>
 			<key>xpos</key>
-			<real>485</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>325</real>
 		</dict>
 		<key>7863F264-D62A-4EC2-9129-1DCEF6D2DE70</key>
 		<dict>
@@ -1064,9 +1064,9 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>675</real>
+			<real>670</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>610</real>
 		</dict>
 		<key>A2EF8883-F34D-4551-AD50-9FD1398F1F71</key>
 		<dict>
@@ -1136,9 +1136,9 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>670</real>
+			<real>665</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>175</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
