@@ -522,15 +522,15 @@ end
 anyAppActivationWatcher = hs.application.watcher.new(twitterrificNextToPseudoMax)
 anyAppActivationWatcher:start()
 
--- Minimize Zoom Window, when the second is opened
+-- Minimize first Zoom Window, when second is open
 wf_zoom = wf.new("zoom.us")
 wf_zoom:subscribe(wf.windowCreated, function ()
 	if #wf_zoom:getWindows() == 2 then
-		hs.application("zoom.us"):mainWindow():minimize()
+		hs.application("zoom.us"):findWindow("^Zoom$"):minimize()
 	end
 end)
 wf_zoom:subscribe(wf.windowDestroyed, function ()
 	if #wf_zoom:getWindows() == 1 then
-		hs.application("zoom.us"):mainWindow():unminimize()
+		hs.application("zoom.us"):findWindow("^Zoom$"):unminimize()
 	end
 end)
