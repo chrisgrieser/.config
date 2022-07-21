@@ -46,6 +46,9 @@ matches:
     word: true
   - trigger: Forshcung
     replace: Forschung
+    word: true
+  - trigger: forshcung
+    replace: forschung
   - trigger: gnaz
     replace: ganz
   - trigger: innovaiton
