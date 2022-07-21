@@ -29,17 +29,6 @@ hs.urlevent.bind("copy-last-command", function()
 	notify("Copied: '"..lastcommand.."'")
 end)
 
--- info on current window(s)
--- `hammerspoon://current-window` for Alfred
-hs.urlevent.bind("current-window", function()
-	local currentWin = hs.window.orderedWindows()[1]:title()
-	alert(currentWin)
-	hs.pasteboard.setContents(currentWin)
-	runDelayed (2.5, function ()
-		hs.application("Hammerspoon"):hide() -- delayed, since the alert msg belongs to hammerspoon
-	end)
-end)
-
 -- `hammerspoon://clear-console` for Karabiner Elements
 hs.urlevent.bind("clear-console", function()
 	hs.console.clearConsole()
