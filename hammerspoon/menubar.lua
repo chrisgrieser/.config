@@ -150,11 +150,12 @@ function updateSlackUnreadMenuBar()
 	local slackWinName = wf_slack:getWindows()[1]:title()
 	local hasUnreads = slackWinName:match("%*")
 
-	if not hasUnreads then
+	if hasUnreads then
+		slackUnreadMenuBar:returnToMenuBar()
+		slackUnreadMenuBar:setTitle("✴️")
+	else
 		slackUnreadMenuBar:removeFromMenuBar()
 	end
-	slackUnreadMenuBar:returnToMenuBar()
-	slackUnreadMenuBar:setTitle("✴️")
 end
 
 wf = hs.window.filter
