@@ -55,8 +55,7 @@ function systemWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemDidWake) then return end
 
 	if isIMacAtHome() and isProjector() then movieModeLayout()
-	elseif isIMacAtHome and not(isProjector()) then homeModeLayout()
-	elseif isAtOffice() then officeModeLayout() end
+	elseif isIMacAtHome and not(isProjector()) then homeModeLayout() end
 
 	-- set light mode if waking between 6:00 and 19:00
 	local currentTimeHours = hs.timer.localTime() / 60 / 60

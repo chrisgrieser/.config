@@ -1,6 +1,7 @@
-# https://jvns.ca/blog/2022/07/20/pseudoterminals/
+# Enable vi mode
+bindkey -v
 
-bindkey "\e\e" quitSession # Double Esc
+#-------------------------------------------------------------------------------
 bindkey "^P" copyLocation
 bindkey "^B" copyBuffer
 

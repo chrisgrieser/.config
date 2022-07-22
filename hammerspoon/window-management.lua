@@ -532,10 +532,3 @@ wf_zoom:subscribe(wf.windowCreated, function ()
 		end)
 	end
 end)
-wf_zoom:subscribe(wf.windowDestroyed, function ()
-	if #wf_zoom:getWindows() == 1 then
-		runDelayed (1, function()
-			hs.application("zoom.us"):findWindow("^Zoom$"):unminimize()
-		end)
-	end
-end)

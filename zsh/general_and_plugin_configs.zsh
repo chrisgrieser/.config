@@ -4,6 +4,7 @@
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+#-------------------------------------------------------------
 # zsh syntax highlighting
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern regexp root)
 typeset -A ZSH_HIGHLIGHT_PATTERNS # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/pattern.md
@@ -15,7 +16,6 @@ ZSH_HIGHLIGHT_PATTERNS+=('§' 'fg=magenta,bold') # § = global alias for greppin
 # shellcheck disable=SC2034,SC2154
 ZSH_HIGHLIGHT_STYLES[root]='bg=red' # highlight red when currently root
 
-#-------------------------------------------------------------
 # =~ operator uses PCRE with this option
 # zsh/pcre does nto seem to be available, without PCRE, no lookbehind
 # for the zsh regex highlighter available :(
