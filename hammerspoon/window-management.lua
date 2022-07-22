@@ -321,7 +321,7 @@ function pairedActivation(start)
 				elseif currentWindow:id() == SPLIT_LEFT:id() then
 					SPLIT_RIGHT:raise()
 				end
-			elseif eventType == aw.terminated and (appName == SPLIT_LEFT:application():name() or (appName == SPLIT_RIGHT:application():name())) then
+			elseif eventType == aw.terminated and (appName == SPLIT_LEFT:application():name() or appName == SPLIT_RIGHT:application():name()) then
 				vsplit("unsplit")
 			end
 		end)
