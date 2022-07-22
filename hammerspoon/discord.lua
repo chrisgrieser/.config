@@ -2,12 +2,12 @@ require("utils")
 
 -- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 -- and reconnect Obsidian's Discord Rich Presence (Obsidian launch already covered by RP Plugin)
-function discordLaunch()
+function discordLaunch(activateDiscordAfter)
 	hs.urlevent.openURL("discord://discord.com/channels/686053708261228577/700466324840775831")
 	if appIsRunning("Obsidian") then
 		runDelayed(3, function()
 			hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
-			hs.application("Discord"):activate()
+			if activateDiscordAfter then hs.application("Discord"):activate() end
 		end)
 	end
 end
@@ -16,7 +16,7 @@ function discordWatcher(appName, eventType)
 	if appName ~= "Discord" then return end
 
 	if eventType == hs.application.watcher.launched then
-		discordLaunch()
+		discordLaunch(true)
 	end
 
 	-- when Discord is focused, enclose URL in clipboard with <>
