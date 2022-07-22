@@ -36,19 +36,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>48DA5080-9765-4B60-BAC6-44BBBA7F83E4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F802A1F3-262C-4738-AFF7-DDE34474EE0E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>67F611D4-A5E9-451E-AFEE-59046947524A</key>
 		<array>
 			<dict>
@@ -767,70 +754,6 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>sr</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>sublime-recent-files.js</string>
-				<key>subtext</key>
-				<string>Loading...</string>
-				<key>title</key>
-				<string>🕐 Sublime Recent Files</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>48DA5080-9765-4B60-BAC6-44BBBA7F83E4</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>F802A1F3-262C-4738-AFF7-DDE34474EE0E</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -917,15 +840,6 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 			<real>615</real>
 			<key>ypos</key>
 			<real>170</real>
-		</dict>
-		<key>48DA5080-9765-4B60-BAC6-44BBBA7F83E4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>465</real>
-			<key>ypos</key>
-			<real>470</real>
 		</dict>
 		<key>67F611D4-A5E9-451E-AFEE-59046947524A</key>
 		<dict>
@@ -1051,13 +965,6 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 			<real>615</real>
 			<key>ypos</key>
 			<real>25</real>
-		</dict>
-		<key>F802A1F3-262C-4738-AFF7-DDE34474EE0E</key>
-		<dict>
-			<key>xpos</key>
-			<real>680</real>
-			<key>ypos</key>
-			<real>470</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

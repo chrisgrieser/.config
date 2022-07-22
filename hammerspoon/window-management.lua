@@ -530,10 +530,10 @@ function sublimeLaunch(appName, eventType)
 	if not(appName == "Sublime Text" and eventType == aw.launched) then return end
 
 	if isAtOffice() then
-		runDelayed(0.1, function () moveAndResize("maximized") end)
+		runDelayed(0.15, function () moveAndResize("maximized") end)
 	else
-		runDelayed(0.1, function () moveAndResize("pseudo-maximized") end)
 		hs.application("Twitterrific"):mainWindow():raise()
+		runDelayed(0.15, function () moveAndResize("pseudo-maximized") end)
 	end
 end
 sublimeWatcher = aw.new(sublimeLaunch)
