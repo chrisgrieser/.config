@@ -3,12 +3,13 @@
 require("utils")
 --------------------------------------------------------------------------------
 
+-- this also determines the order of menubar items
 function reloadAllMenubarItems ()
 	setWeather()
 	setCovidBar()
-	updateDotfileSyncStatusMenuBar()
 	updateDraftsMenubar()
 	setFileHubCountMenuBar()
+	updateDotfileSyncStatusMenuBar()
 end
 
 weatherUpdateMin = 15
