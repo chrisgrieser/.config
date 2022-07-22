@@ -1,8 +1,3 @@
-# Enable vi mode
-bindkey -v
-
-
-#-------------------------------------------------------------------------------
 bindkey "^P" copyLocation
 bindkey "^B" copyBuffer
 
