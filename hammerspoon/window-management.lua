@@ -307,20 +307,18 @@ function mainScreenWindows()
 	return out
 end
 
--- Watcher, that raises win2 when win1 activates and vice versa. useful for splits
+-- Watcher, that raises win2 when win1 activates and vice versa
 splitStatusMenubar = hs.menubar.new()
 splitStatusMenubar:removeFromMenuBar() -- hide at beginning
 function pairedActivation(start)
 	if start then
 		pairedWinWatcher = aw.new(function (_, eventType)
-			if eventType == aw.activated then
-				local currentWindow = hs.window.focusedWindow()
-				if not(currentWindow) then return end
-				if currentWindow:id() == SPLIT_RIGHT:id() then
-					SPLIT_LEFT:raise() -- not using :focus(), since that causes infinite recursion
-				elseif currentWindow:id() == SPLIT_LEFT:id() then
-					SPLIT_RIGHT:raise()
-				end
+			-- if one of the two is activated, also activate the other
+			local currentWindow = hs.window.focusedWindow()
+			if eventType == aw.activated and currentWindow then
+				if currentWindow:id() == SPLIT_RIGHT:id() then SPLIT_LEFT:raise() -- not using :focus(), since that causes infinite recursion
+				elseif currentWindow:id() == SPLIT_LEFT:id() then SPLIT_RIGHT:raise() end
+			-- unsplit if one of the two apps has been terminated
 			elseif eventType == aw.terminated and (not SPLIT_LEFT:application() or not SPLIT_RIGHT:application()) then
 				vsplit("unsplit")
 			end
@@ -328,7 +326,10 @@ function pairedActivation(start)
 		pairedWinWatcher:start()
 		splitStatusMenubar:returnToMenuBar()
 		splitStatusMenubar:setTitle("2️⃣")
-	else
+	end
+
+	-- end the paired activation
+	if not (start) then
 		pairedWinWatcher:stop()
 		splitStatusMenubar:removeFromMenuBar()
 	end
