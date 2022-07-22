@@ -46,6 +46,7 @@ rules:
               - ^md\.obsidian$
               - ^com\.sublimetext
               - ^com\.apple\.finder$
+              - ^com\.agiletortoise\.Drafts-OSX$
   - description: "🔘 § → | (+ US Layout); ⌥3 for Paragraph Symbol"
     manipulators:
       - type: basic

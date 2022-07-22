@@ -551,8 +551,8 @@ sublimeWatcher:start()
 -- if new window is a settings window, maximize it
 wf_sublime = wf.new("Sublime Text")
 wf_sublime:subscribe(wf.windowCreated, function ()
-		local currentWindow = hs.window.focusedWindow()
-		if currentWindow:title():match("sublime%-settings$") then
-			moveAndResize("maximized")
-		end
+	local currentWindow = hs.window.focusedWindow()
+	if currentWindow:title():match("sublime%-settings$") then  -- % to escape hyphen repetition
+		moveAndResize("maximized")
+	end
 end)

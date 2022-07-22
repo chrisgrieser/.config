@@ -80,7 +80,8 @@
               "bundle_identifiers": [
                 "^md\\.obsidian$",
                 "^com\\.sublimetext",
-                "^com\\.apple\\.finder$"
+                "^com\\.apple\\.finder$",
+                "^com\\.agiletortoise\\.Drafts-OSX$"
               ]
             }
           ]
