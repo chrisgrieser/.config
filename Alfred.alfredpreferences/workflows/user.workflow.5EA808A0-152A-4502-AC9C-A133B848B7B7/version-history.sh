@@ -29,7 +29,7 @@ open "$output_dir"
 
 # https://stackoverflow.com/questions/1964142/how-can-i-list-all-the-different-versions-of-a-file-and-diff-them-also/32849134#32849134
 for commit_hash in $(git log --pretty=format:%h "$FILE") ; do
-	commit_date=$(git show -s --format=%ci "$commit_hash" | cut -c-16)
+	commit_date=$(git show -s --format=%ci "$commit_hash" | cut -c-16 | tr "/" "-")
 	out="$output_dir/$commit_date ($commit_hash).$EXT"
 	git show "$commit_hash:./$FILE" > "$out"
 done
