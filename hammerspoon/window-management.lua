@@ -90,10 +90,10 @@ function toggleObsidianSidebar (obsiWin)
 	end)
 end
 
-function showAllSidebars ()
-	hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
-	hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
+function showAllSidebarsAndActivateDrafts ()
 	hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
+	hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
+	hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
 
 function moveAndResize(direction)
@@ -187,8 +187,7 @@ function homeModeLayout ()
 	hs.layout.apply(homeLayout)
 	runDelayed(0.3, function ()
 		hs.layout.apply(homeLayout)
-		showAllSidebars()
-		hs.application("Drafts"):activate()
+		showAllSidebarsAndActivateDrafts()
 	end)
 end
 
@@ -228,8 +227,7 @@ function officeModeLayout ()
 	hs.layout.apply(officeLayout)
 	runDelayed(0.3, function ()
 		hs.layout.apply(officeLayout)
-		showAllSidebars()
-		hs.application("Drafts"):activate()
+		showAllSidebarsAndActivateDrafts()
 	end)
 end
 
