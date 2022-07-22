@@ -90,12 +90,6 @@ function toggleObsidianSidebar (obsiWin)
 	end)
 end
 
-function showAllSidebarsAndActivateDrafts ()
-	hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
-	hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
-	hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
-end
-
 function moveAndResize(direction)
 	local win = hs.window.focusedWindow()
 	local position
@@ -187,7 +181,9 @@ function homeModeLayout ()
 	hs.layout.apply(homeLayout)
 	runDelayed(0.3, function ()
 		hs.layout.apply(homeLayout)
-		showAllSidebarsAndActivateDrafts()
+		if appIsRunning("Highlights") then hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"}) end
+		hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
+		hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 	end)
 end
 
@@ -227,7 +223,9 @@ function officeModeLayout ()
 	hs.layout.apply(officeLayout)
 	runDelayed(0.3, function ()
 		hs.layout.apply(officeLayout)
-		showAllSidebarsAndActivateDrafts()
+		if appIsRunning("Highlights") then hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"}) end
+		hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
+		hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 	end)
 end
 
