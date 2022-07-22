@@ -193,6 +193,7 @@ function homeModeLayout ()
 	end)
 	runDelayed(0.4, function ()
 		hs.application("Drafts"):activate()
+		notify("test")
 	end)
 end
 
