@@ -14,9 +14,11 @@ format = "[$directory${custom.folder_number}${custom.file_number}$git_branch$git
 right_format="$package${custom.alfred}$nodejs$python$jobs$memory_usage"
 
 [character]
-# "⏼⏻⟐"
+# ⏼⏻⟐
 success_symbol = " [⟐](bold green)"
 error_symbol = " [](bold red)" # terminus needs extra space
+vimcmd_symbol = " [](bold blue)"
+# https://starship.rs/config/#character
 
 [cmd_duration]
 min_time = 2500
