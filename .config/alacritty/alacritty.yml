@@ -99,13 +99,13 @@ scrolling:
   multiplier: 3
 working_directory: /Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File Hub/
 cursor:
+  style:
+    shape: Block
+    blinking: Always
+    blink_interval: 500
+    unfocused_hollow: true
   vi_mode_style:
-    shape: Beam
-#   style:
-#     shape: Beam
-#     blinking: Always
-#     blink_interval: 500
-#     unfocused_hollow: true
+    shape: Underline
 live_config_reload: true
 selection:
   save_to_clipboard: true
