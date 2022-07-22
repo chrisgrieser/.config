@@ -81,7 +81,8 @@
                 "^md\\.obsidian$",
                 "^com\\.sublimetext",
                 "^com\\.apple\\.finder$",
-                "^com\\.agiletortoise\\.Drafts-OSX$"
+                "^com\\.agiletortoise\\.Drafts-OSX$",
+                "^com\\.runningwithcrayons\\.Alfred-Preferences$"
               ]
             }
           ]
