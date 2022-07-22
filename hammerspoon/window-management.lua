@@ -190,6 +190,8 @@ function homeModeLayout ()
 		hs.layout.apply(homeLayout)
 		showAllSidebars()
 		discordLaunch(false)
+	end)
+	runDelayed(0.4, function ()
 		hs.application("Drafts"):activate()
 	end)
 end
