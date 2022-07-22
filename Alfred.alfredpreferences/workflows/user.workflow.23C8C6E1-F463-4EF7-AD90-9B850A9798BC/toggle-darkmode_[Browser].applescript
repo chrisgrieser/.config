@@ -22,7 +22,7 @@ end tell
 # toggle dark mode
 tell application "System Events"
 	tell appearance preferences to set dark mode to not dark mode
-	keystroke "d" using {shift down, option down} -- Dark Reader
+	keystroke "d" using {shift down, option down} -- Dark Reader global hotkey
 end tell
 
 # close tab again
@@ -49,5 +49,3 @@ tell application "System Events"
 	end if
 end tell
 
-# Log
-do shell script "echo \"$(date '+%Y-%m-%d %H:%M') 🌒 Dark Mode: manual toggle\" >> \"$HOME/dotfiles/hammerspoon/logs/some.log\""
