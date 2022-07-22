@@ -8,37 +8,11 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
-		<key>04106BDF-B453-45B9-B9C7-00E5B943CCD2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1EA67BCF-5320-41BA-B446-8FB00AC9958C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>411F0C67-7E50-4B01-AF68-F2742465259B</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>33BD77E2-2929-432E-9718-B2FDBAF4EFE5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>484AC850-7009-4B8A-9143-F7908712D994</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4EF7790E-0DD8-4D03-B2AF-660B58CCE55A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -60,8 +34,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>4EF7790E-0DD8-4D03-B2AF-660B58CCE55A</key>
-		<array/>
 		<key>59B65F8F-3EDB-4000-8F90-1C01AF6BC6A5</key>
 		<array>
 			<dict>
@@ -110,19 +82,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>D5D0024E-316C-4A4C-BEA4-7366C58BF580</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>9C50256F-4B6D-4944-8AE6-5189C9F136F2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F90DBBB8-585E-43DF-AE37-27ED42C7F52A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -536,151 +495,11 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>http:{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>4EF7790E-0DD8-4D03-B2AF-660B58CCE55A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>http:</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Open URL: http:{query}</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>484AC850-7009-4B8A-9143-F7908712D994</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>https:</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Open URL: https:{query}</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>9C50256F-4B6D-4944-8AE6-5189C9F136F2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https:{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>F90DBBB8-585E-43DF-AE37-27ED42C7F52A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>obsidian:</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Obsidian URI: obsidian:{query}</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>04106BDF-B453-45B9-B9C7-00E5B943CCD2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>obsidian:{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>1EA67BCF-5320-41BA-B446-8FB00AC9958C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>04106BDF-B453-45B9-B9C7-00E5B943CCD2</key>
-		<dict>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>970</real>
-		</dict>
-		<key>1EA67BCF-5320-41BA-B446-8FB00AC9958C</key>
-		<dict>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>970</real>
-		</dict>
 		<key>33BD77E2-2929-432E-9718-B2FDBAF4EFE5</key>
 		<dict>
 			<key>colorindex</key>
@@ -708,15 +527,6 @@
 			<key>ypos</key>
 			<real>180</real>
 		</dict>
-		<key>484AC850-7009-4B8A-9143-F7908712D994</key>
-		<dict>
-			<key>note</key>
-			<string>workaround, so URL opening only happens with "http" at the beginning</string>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>680</real>
-		</dict>
 		<key>4A3828AC-7DF5-44AE-84CE-3F1B054C7349</key>
 		<dict>
 			<key>colorindex</key>
@@ -734,13 +544,6 @@
 			<real>675</real>
 			<key>ypos</key>
 			<real>565</real>
-		</dict>
-		<key>4EF7790E-0DD8-4D03-B2AF-660B58CCE55A</key>
-		<dict>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>680</real>
 		</dict>
 		<key>59B65F8F-3EDB-4000-8F90-1C01AF6BC6A5</key>
 		<dict>
@@ -775,13 +578,6 @@
 			<real>365</real>
 			<key>ypos</key>
 			<real>25</real>
-		</dict>
-		<key>9C50256F-4B6D-4944-8AE6-5189C9F136F2</key>
-		<dict>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>850</real>
 		</dict>
 		<key>ABF30A35-70D2-41E3-B40B-4A5E783EB7FC</key>
 		<dict>
@@ -852,13 +648,6 @@
 			<real>210</real>
 			<key>ypos</key>
 			<real>25</real>
-		</dict>
-		<key>F90DBBB8-585E-43DF-AE37-27ED42C7F52A</key>
-		<dict>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>850</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
