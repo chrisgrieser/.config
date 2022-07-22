@@ -33,10 +33,10 @@ rules:
             mandatory:
               - command
         to:
-          - key_code: right_arrow
+          - key_code: right_arrow  # go the the end of line
             modifiers:
               - command
-          - key_code: delete_or_backspace  # delete the line content
+          - key_code: delete_or_backspace  # delete to beginning of line
             modifiers:
               - command
           - key_code: delete_or_backspace  # delete the line (line break)
@@ -47,6 +47,7 @@ rules:
               - ^com\.sublimetext
               - ^com\.apple\.finder$
               - ^com\.agiletortoise\.Drafts-OSX$
+              - ^com\.runningwithcrayons\.Alfred-Preferences$
   - description: "🔘 § → | (+ US Layout); ⌥3 for Paragraph Symbol"
     manipulators:
       - type: basic

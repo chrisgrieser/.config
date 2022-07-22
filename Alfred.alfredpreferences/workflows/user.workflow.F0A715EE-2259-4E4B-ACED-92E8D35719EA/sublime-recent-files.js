@@ -19,10 +19,15 @@ function readFile (path, encoding) {
 const sessionFile = "~/Library/Application Support/Sublime Text/Local/Session.sublime_session"
 	.replace(/^~/, app.pathTo("home folder"));
 const recentFilesArr = [];
-JSON.parse(readFile(sessionFile)).windows
+const sessionFileContent = JSON.parse(readFile(sessionFile))
+sessionFileContent
+	.windows
 	.forEach(window => {
 		window.file_history.forEach(f => recentFilesArr.push(f));
 	});
+sessionFileContent
+	.file_history
+	.forEach(f => recentFilesArr.push(f));
 
 //------------------------------------------------------------------------------
 
