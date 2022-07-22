@@ -7,7 +7,7 @@ require("window-management")
 -- - enlarge window if it's too small
 -- - hide Finder when no window
 function finderWatcher(appName, eventType, appObject)
-	if not(eventType == hs.application.watcher.activated and appName == "Finder") then return end
+	if not(eventType == aw.activated and appName == "Finder") then return end
 
 	appObject:selectMenuItem({"Window", "Bring All to Front"})
 	appObject:selectMenuItem({"View", "Hide Sidebar"})
@@ -30,12 +30,12 @@ function finderWatcher(appName, eventType, appObject)
 		if hasNoWindows then appObject:hide() end
 	end)
 end
-finderAppWatcher = hs.application.watcher.new(finderWatcher)
+finderAppWatcher = aw.new(finderWatcher)
 finderAppWatcher:start()
 
 -- ZOOM: don't leave behind tab when opening URL
 function zoomWatcher(appName, eventType)
-	if not(eventType == hs.application.watcher.launched and appName == "zoom.us") then return end
+	if not(eventType == aw.launched and appName == "zoom.us") then return end
 	hs.osascript.applescript([[
 		delay 2
 		tell application "Brave Browser"
@@ -52,14 +52,14 @@ function zoomWatcher(appName, eventType)
 		end tell
 	]])
 end
-zoomAppWatcher = hs.application.watcher.new(zoomWatcher)
+zoomAppWatcher = aw.new(zoomWatcher)
 zoomAppWatcher:start()
 
 -- HIGHLIGHTS:
 -- - Sync Dark & Light Mode
 -- - Start with Highlight as Selection
 function highlightsWatcher(appName, eventType)
-	if not(eventType == hs.application.watcher.launched and appName == "Highlights") then return end
+	if not(eventType == aw.launched and appName == "Highlights") then return end
 	hs.osascript.applescript([[
 		tell application "System Events"
 			tell appearance preferences to set isDark to dark mode
@@ -81,28 +81,28 @@ function highlightsWatcher(appName, eventType)
 		runDelayed(0.2, function () moveAndResize("pseudo-maximized") end)
 	end
 end
-highlightsAppWatcher = hs.application.watcher.new(highlightsWatcher)
+highlightsAppWatcher = aw.new(highlightsWatcher)
 highlightsAppWatcher:start()
 
 -- DRAFTS: Hide Toolbar on launch
 function draftsLaunchWake(appName, eventType, appObject)
 	if not(appName == "Drafts") then return end
 
-	if (eventType == hs.application.watcher.launched) then
+	if (eventType == aw.launched) then
 		runDelayed(1, function ()
 			appObject:selectMenuItem({"View", "Hide Toolbar"})
 		end)
-	elseif (eventType == hs.application.watcher.activated) then
+	elseif (eventType == aw.activated) then
 		appObject:selectMenuItem({"View", "Hide Toolbar"})
 	end
 end
-draftsWatcher3 = hs.application.watcher.new(draftsLaunchWake)
+draftsWatcher3 = aw.new(draftsLaunchWake)
 draftsWatcher3:start()
 
 -- SUBLIME
 -- workaround for Window positioning issue, will be fixed with build 4130 being released - https://github.com/sublimehq/sublime_text/issues/5237
 function sublimeLaunch(appName, eventType)
-	if not(appName == "Sublime Text" and eventType == hs.application.watcher.launched) then return end
+	if not(appName == "Sublime Text" and eventType == aw.launched) then return end
 
 	if isAtOffice() then
 		runDelayed(0.1, function () moveAndResize("maximized") end)
@@ -111,5 +111,5 @@ function sublimeLaunch(appName, eventType)
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end
-sublimeWatcher = hs.application.watcher.new(sublimeLaunch)
+sublimeWatcher = aw.new(sublimeLaunch)
 sublimeWatcher:start()
