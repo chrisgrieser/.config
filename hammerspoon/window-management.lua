@@ -261,20 +261,20 @@ end
 function alwaysOpenOnMouseDisplay(appName, eventType, appObject)
 	if not (isProjector()) then return end
 
-	if (eventType == hs.application.watcher.launched) then
+	if (eventType == aw.launched) then
 		-- delayed, to ensure window has launched properly
 		runDelayed(0.5, function ()
 			local appWindow = appObject:focusedWindow()
 			moveWindowToMouseScreen(appWindow)
 		end)
-	elseif ((appName == "Brave Browser" or appName == "Finder") and hs.application.watcher.activated and isProjector()) then
+	elseif (appName == "Brave Browser" or appName == "Finder") and aw.activated and isProjector() then
 		runDelayed(0.5, function ()
 			local appWindow = appObject:focusedWindow()
 			moveWindowToMouseScreen(appWindow)
 		end)
 	end
 end
-launchWhileMultiScreenWatcher = hs.application.watcher.new(alwaysOpenOnMouseDisplay)
+launchWhileMultiScreenWatcher = aw.new(alwaysOpenOnMouseDisplay)
 if isIMacAtHome() then launchWhileMultiScreenWatcher:start() end
 
 function moveToOtherDisplay ()
@@ -312,8 +312,8 @@ splitStatusMenubar = hs.menubar.new()
 splitStatusMenubar:removeFromMenuBar() -- hide at beginning
 function pairedActivation(start)
 	if start then
-		pairedWinWatcher = hs.application.watcher.new(function (_, eventType)
-			if eventType == hs.application.watcher.activated then
+		pairedWinWatcher = aw.new(function (appName, eventType)
+			if eventType == aw.activated then
 				local currentWindow = hs.window.focusedWindow()
 				if not(currentWindow) then return end
 				if currentWindow:id() == SPLIT_RIGHT:id() then
@@ -321,7 +321,7 @@ function pairedActivation(start)
 				elseif currentWindow:id() == SPLIT_LEFT:id() then
 					SPLIT_RIGHT:raise()
 				end
-			elseif eventType == hs.application.watcher.terminated then
+			elseif eventType == aw.terminated and (appName == SPLIT_LEFT:application():name() or (appName == SPLIT_RIGHT:application():name())) then
 				vsplit("unsplit")
 			end
 		end)
@@ -510,7 +510,7 @@ end)
 
 -- keep TWITTERRIFIC visible, when active window is pseudomaximized
 function twitterrificNextToPseudoMax(_, eventType)
-	if not(eventType == hs.application.watcher.activated or eventType == hs.application.watcher.launching) then return end
+	if not(eventType == aw.activated or eventType == aw.launching) then return end
 	local currentWindow = hs.window.focusedWindow()
 	if not(currentWindow) then return end
 
@@ -520,7 +520,7 @@ function twitterrificNextToPseudoMax(_, eventType)
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end
-anyAppActivationWatcher = hs.application.watcher.new(twitterrificNextToPseudoMax)
+anyAppActivationWatcher = aw.new(twitterrificNextToPseudoMax)
 anyAppActivationWatcher:start()
 
 -- Minimize first Zoom Window, when second is open
@@ -528,14 +528,7 @@ wf_zoom = wf.new("zoom.us")
 wf_zoom:subscribe(wf.windowCreated, function ()
 	if #wf_zoom:getWindows() == 2 then
 		runDelayed (1, function()
-			hs.application("zoom.us"):findWindow("^Zoom$"):minimize()
-		end)
-	end
-end)
-wf_zoom:subscribe(wf.windowDestroyed, function ()
-	if #wf_zoom:getWindows() == 1 then
-		runDelayed (1, function()
-			hs.application("zoom.us"):findWindow("^Zoom$"):unminimize()
+			hs.application("zoom.us"):findWindow("^Zoom$"):close()
 		end)
 	end
 end)
