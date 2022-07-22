@@ -16,12 +16,8 @@ right_format="$package${custom.alfred}$nodejs$python$jobs$memory_usage"
 # ⏼⏻⟐ﰉﰊ
 [character]
 success_symbol = " [ﰉ](bold green)"
-error_symbol = " [](bold red)" # terminus needs extra space
-vimcmd_symbol = " [ﰊ](bold blue)"
-# those don't work properly due to upstream zsh bug
-vimcmd_visual_symbol = " [V](bold blue)"
-vimcmd_replace_symbol = " [R](bold blue)"
-vimcmd_replace_one_symbol = " [r](bold blue)"
+error_symbol = " [](bold red)"
+# vimcmd_symbol = " [Normal](bold blue)" # doesn't work as long as cursor styling snippet is active
 
 [cmd_duration]
 min_time = 2500
