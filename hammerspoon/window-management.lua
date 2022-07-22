@@ -186,12 +186,12 @@ function homeModeLayout ()
 	}
 
 	hs.layout.apply(homeLayout)
-	runDelayed(0.5, function ()
+	runDelayed(0.3, function ()
 		hs.layout.apply(homeLayout)
 		showAllSidebars()
-		discordLaunch()
+		discordLaunch(false)
+		hs.application("Drafts"):activate()
 	end)
-
 end
 
 function officeModeLayout ()
@@ -229,12 +229,13 @@ function officeModeLayout ()
 	hs.layout.apply(officeLayout)
 	runDelayed(0.3, function ()
 		hs.layout.apply(officeLayout)
-	end)
-	runDelayed(0.5, function ()
-		hs.layout.apply(officeLayout)
 		showAllSidebars()
-		discordLaunch()
+		discordLaunch(false)
+		hs.application("Drafts"):activate()
 	end)
+	-- runDelayed(0.5, function ()
+	-- 	hs.layout.apply(officeLayout)
+	-- end)
 
 end
 
