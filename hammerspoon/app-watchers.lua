@@ -99,17 +99,3 @@ end
 draftsWatcher3 = aw.new(draftsLaunchWake)
 draftsWatcher3:start()
 
--- SUBLIME
--- workaround for Window positioning issue, will be fixed with build 4130 being released - https://github.com/sublimehq/sublime_text/issues/5237
-function sublimeLaunch(appName, eventType)
-	if not(appName == "Sublime Text" and eventType == aw.launched) then return end
-
-	if isAtOffice() then
-		runDelayed(0.1, function () moveAndResize("maximized") end)
-	else
-		runDelayed(0.1, function () moveAndResize("pseudo-maximized") end)
-		hs.application("Twitterrific"):mainWindow():raise()
-	end
-end
-sublimeWatcher = aw.new(sublimeLaunch)
-sublimeWatcher:start()

@@ -532,3 +532,27 @@ wf_zoom:subscribe(wf.windowCreated, function ()
 		end)
 	end
 end)
+
+-- SUBLIME
+-- workaround for Window positioning issue, will be fixed with build 4130 being released - https://github.com/sublimehq/sublime_text/issues/5237
+function sublimeLaunch(appName, eventType)
+	if not(appName == "Sublime Text" and eventType == aw.launched) then return end
+
+	if isAtOffice() then
+		runDelayed(0.1, function () moveAndResize("maximized") end)
+	else
+		runDelayed(0.1, function () moveAndResize("pseudo-maximized") end)
+		hs.application("Twitterrific"):mainWindow():raise()
+	end
+end
+sublimeWatcher = aw.new(sublimeLaunch)
+sublimeWatcher:start()
+
+-- if new window is a settings window, maximize it
+wf_sublime = wf.new("Sublime Text")
+wf_sublime:subscribe(wf.windowCreated, function ()
+	local currentWindow = hs.window.focusedWindow()
+	if currentWindow:title():match("%.sublime-settings$") then
+		moveAndResize("maximized")
+	end
+end)
