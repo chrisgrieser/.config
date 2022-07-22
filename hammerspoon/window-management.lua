@@ -23,8 +23,7 @@ end
 -- WINDOW BASE MOVEMENT & SIDEBARS
 
 -- requires these two actiosn beeing installed:
--- https://directory.getdrafts.com/a/2BS
--- https://directory.getdrafts.com/a/2BR
+-- https://directory.getdrafts.com/a/2BS & https://directory.getdrafts.com/a/2BR
 function toggleDraftsSidebar (draftsWin)
 	runDelayed(0.05, function ()
 		local drafts_w = draftsWin:frame().w
@@ -191,10 +190,9 @@ function homeModeLayout ()
 		showAllSidebars()
 		discordLaunch(false)
 	end)
-	runDelayed(0.4, function ()
+	runDelayed(0.35, function ()
 		hs.application("Drafts"):activate()
 	end)
-	notify("test")
 end
 
 function officeModeLayout ()
@@ -215,11 +213,12 @@ function officeModeLayout ()
 	local topRight = {x=0.51, y=0, w=0.49, h=0.5}
 
 	local officeLayout = {
+		-- screen 2
 		{"Twitterrific", "@pseudo_meta - Home", screen2, topLeft, nil, nil},
 		{"Twitterrific", "@pseudo_meta - List: _PKM & Obsidian Community", screen2, topRight, nil, nil},
 		{"Discord", nil, screen2, bottom, nil, nil},
 		{"Slack", nil, screen2, bottom, nil, nil},
-
+		-- screen 1
 		{"Brave Browser", nil, screen1, maximized, nil, nil},
 		{"Sublime Text", nil, screen1, maximized, nil, nil},
 		{"Obsidian", nil, screen1, maximized, nil, nil},
@@ -234,12 +233,10 @@ function officeModeLayout ()
 		hs.layout.apply(officeLayout)
 		showAllSidebars()
 		discordLaunch(false)
+	end)
+	runDelayed(0.35, function ()
 		hs.application("Drafts"):activate()
 	end)
-	-- runDelayed(0.5, function ()
-	-- 	hs.layout.apply(officeLayout)
-	-- end)
-
 end
 
 --------------------------------------------------------------------------------
