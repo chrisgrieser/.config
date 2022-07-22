@@ -312,7 +312,7 @@ splitStatusMenubar = hs.menubar.new()
 splitStatusMenubar:removeFromMenuBar() -- hide at beginning
 function pairedActivation(start)
 	if start then
-		pairedWinWatcher = aw.new(function (appName, eventType)
+		pairedWinWatcher = aw.new(function (_, eventType)
 			if eventType == aw.activated then
 				local currentWindow = hs.window.focusedWindow()
 				if not(currentWindow) then return end
@@ -321,7 +321,7 @@ function pairedActivation(start)
 				elseif currentWindow:id() == SPLIT_LEFT:id() then
 					SPLIT_RIGHT:raise()
 				end
-			elseif eventType == aw.terminated and (appName == SPLIT_LEFT:application():name() or appName == SPLIT_RIGHT:application():name()) then
+			elseif eventType == aw.terminated and (not(SPLIT_LEFT) or not(SPLIT_RIGHT)) then
 				vsplit("unsplit")
 			end
 		end)
