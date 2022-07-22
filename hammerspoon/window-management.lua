@@ -553,7 +553,7 @@ wf_sublime = wf.new("Sublime Text")
 wf_sublime:subscribe(wf.windowCreated, function ()
 	runDelayed(1, function ()
 		local currentWindow = hs.window.focusedWindow()
-		if currentWindow:title():match("%.sublime-settings$") then
+		if currentWindow:title():match("sublime%-settings$") then
 			moveAndResize("maximized")
 		end
 	end)
