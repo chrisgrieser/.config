@@ -36,6 +36,7 @@ alias help='run-help'
 zsh_ver=$(zsh --version | cut -d" " -f2)
 export HELPDIR="/usr/share/zsh/$zsh_ver/help"
 
+# Pager (less)
 export PAGER=less
 
 # colorize less https://wiki.archlinux.org/index.php/Color_output_in_console#less .
