@@ -106,6 +106,7 @@ function updateDraftsMenubar()
 	end)
 end
 
+
 function draftsWatcher(appName, eventType)
 	if not(appName == "Drafts") then return end
 	if not(eventType == hs.application.watcher.deactivated or eventType == hs.application.watcher.activated) then return end
