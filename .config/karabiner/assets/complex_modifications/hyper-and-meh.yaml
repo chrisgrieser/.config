@@ -23,9 +23,9 @@ rules:
         to:
           - key_code: right_shift
             modifiers:
-              - right_command
-              - right_control
-              - right_option
+              - command
+              - control
+              - option
         conditions:
           - type: variable_unless
             name: LEADER_ACTIVE
