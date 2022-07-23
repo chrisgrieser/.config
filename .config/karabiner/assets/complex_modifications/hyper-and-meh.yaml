@@ -15,11 +15,12 @@ rules:
               - right_option
   - description: ⇪ Capslock → Hyper/Esc
     manipulators:
+      # Capslock to Hyper
       - type: basic
         from:
           key_code: caps_lock
         to_if_alone:
-          - key_code: escape
+          - key_code: escape  # Capslock to Esc
         to:
           - key_code: right_shift
             modifiers:
@@ -30,15 +31,18 @@ rules:
           - type: variable_unless
             name: LEADER_ACTIVE
             value: true
+      # Capslock/Shift to Hyper/Shift
       - type: basic
         from:
           key_code: caps_lock
-        to_if_alone:
-          - key_code: escape
+          modifiers:
+            mandatory:
+              - left_shift
         to:
-          - key_code: right_shift
+          - key_code: left_shift
             modifiers:
               - command
+              - right_shift
               - control
               - option
         conditions:
@@ -57,47 +61,6 @@ rules:
         to:
           - key_code: vk_none
         type: basic
-      # capslock + modifier = escape + modifier
-      - type: basic
-        from:
-          key_code: caps_lock
-          modifiers:
-            mandatory:
-              - shift
-        to_if_alone:  # to_if_alone to avoid conflict with hyper + left-shift
-          - key_code: escape
-            modifiers:
-              - shift
-      - type: basic
-        from:
-          key_code: caps_lock
-          modifiers:
-            mandatory:
-              - command
-        to:
-          - key_code: escape
-            modifiers:
-              - command
-      - type: basic
-        from:
-          key_code: caps_lock
-          modifiers:
-            mandatory:
-              - control
-        to:
-          - key_code: escape
-            modifiers:
-              - control
-      - type: basic
-        from:
-          key_code: caps_lock
-          modifiers:
-            mandatory:
-              - option
-        to:
-          - key_code: escape
-            modifiers:
-              - option
   - description: '⇪ Hyper + hjkliomnbö: ←↓↑→↵⌫⇐⇒ (w/ shift option)'
     manipulators:
       - type: basic
@@ -111,19 +74,6 @@ rules:
               - control
         to:
           - key_code: left_arrow
-      - type: basic
-        from:
-          key_code: h
-          modifiers:
-            mandatory:
-              - option
-              - left_shift
-              - command
-              - control
-        to:
-          - key_code: left_arrow
-            modifiers:
-              - shift
       - type: basic
         from:
           key_code: j
