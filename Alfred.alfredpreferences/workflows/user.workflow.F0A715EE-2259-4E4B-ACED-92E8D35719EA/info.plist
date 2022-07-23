@@ -103,6 +103,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9EB552F8-810B-4DCF-BD12-2F4456944C6E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8B539A06-FF0B-4931-8E97-8377B6E1164B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B4A903D4-94B6-4C63-A768-5C0F11AF3A99</key>
 		<array>
 			<dict>
@@ -661,47 +674,6 @@ EOB</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>93D77E92-BC96-4F37-9A4F-A167E19BBEC3</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>ext</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>6A64ED91-B242-40F9-A1FF-325B90785D5F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -754,6 +726,47 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>93D77E92-BC96-4F37-9A4F-A167E19BBEC3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>ext</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>6A64ED91-B242-40F9-A1FF-325B90785D5F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -795,6 +808,70 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>8B539A06-FF0B-4931-8E97-8377B6E1164B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>sr</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>sublime-recent-files.js</string>
+				<key>subtext</key>
+				<string>in Sublime</string>
+				<key>title</key>
+				<string>Recent Files</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>9EB552F8-810B-4DCF-BD12-2F4456944C6E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -802,6 +879,8 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 	<dict>
 		<key>0A0E00A7-D3B0-4720-9C59-06268FCDF9BC</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>765</real>
 			<key>ypos</key>
@@ -809,19 +888,23 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 		</dict>
 		<key>1BFAF32E-D632-4159-9A02-EB21FC2E4E88</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>985</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>320</real>
 		</dict>
 		<key>2D2FF3DD-7D9E-4619-B2F5-CEE2775BC460</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>note</key>
 			<string>Default package folder</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>770</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>320</real>
 		</dict>
 		<key>304A4BD1-2865-49EE-8F2B-E75BF1E72E55</key>
 		<dict>
@@ -836,6 +919,8 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 		</dict>
 		<key>3B8E0E60-076A-4F6C-823A-87D7110791EA</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>615</real>
 			<key>ypos</key>
@@ -870,14 +955,21 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 			<key>ypos</key>
 			<real>315</real>
 		</dict>
+		<key>8B539A06-FF0B-4931-8E97-8377B6E1164B</key>
+		<dict>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>465</real>
+		</dict>
 		<key>8E258BEA-2CAC-460B-8345-A1499C2F8ED1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>985</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>455</real>
 		</dict>
 		<key>929B6B55-BD09-43B3-AFC4-C5B0ED80906C</key>
 		<dict>
@@ -904,14 +996,21 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
+			<real>770</real>
+			<key>ypos</key>
+			<real>455</real>
+		</dict>
+		<key>9EB552F8-810B-4DCF-BD12-2F4456944C6E</key>
+		<dict>
+			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>465</real>
 		</dict>
 		<key>B4A903D4-94B6-4C63-A768-5C0F11AF3A99</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>Version history</string>
 			<key>xpos</key>
@@ -944,7 +1043,7 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 		<key>D4E8E541-5A1B-449B-ADFE-97C614A4E4B4</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>Open History (GitHub Workflow)</string>
 			<key>xpos</key>
@@ -954,6 +1053,8 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 		</dict>
 		<key>E187D0D2-F43F-4B2E-9413-82949A8FD689</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>765</real>
 			<key>ypos</key>
@@ -961,6 +1062,8 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 		</dict>
 		<key>E76E7C83-2FA4-46C1-8648-98FC60D72055</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>615</real>
 			<key>ypos</key>

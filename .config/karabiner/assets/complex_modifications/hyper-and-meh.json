@@ -44,9 +44,9 @@
             {
               "key_code": "right_shift",
               "modifiers": [
-                "right_command",
-                "right_control",
-                "right_option"
+                "command",
+                "control",
+                "option"
               ]
             }
           ],
@@ -54,7 +54,35 @@
             {
               "type": "variable_unless",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock"
+          },
+          "to_if_alone": [
+            {
+              "key_code": "escape"
+            }
+          ],
+          "to": [
+            {
+              "key_code": "right_shift",
+              "modifiers": [
+                "command",
+                "control",
+                "option"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_unless",
+              "name": "LEADER_ACTIVE",
+              "value": true
             }
           ]
         },
@@ -83,15 +111,15 @@
             "key_code": "caps_lock",
             "modifiers": {
               "mandatory": [
-                "command"
+                "shift"
               ]
             }
           },
-          "to": [
+          "to_if_alone": [
             {
               "key_code": "escape",
               "modifiers": [
-                "command"
+                "shift"
               ]
             }
           ]
@@ -102,7 +130,7 @@
             "key_code": "caps_lock",
             "modifiers": {
               "mandatory": [
-                "shift"
+                "command"
               ]
             }
           },
@@ -110,7 +138,7 @@
             {
               "key_code": "escape",
               "modifiers": [
-                "shift"
+                "command"
               ]
             }
           ]
@@ -156,7 +184,7 @@
       ]
     },
     {
-      "description": "⇪ Hyper + hjkliomnbö: ←↓↑→↵⌫⇐⇒",
+      "description": "⇪ Hyper + hjkliomnbö: ←↓↑→↵⌫⇐⇒ (w/ shift option)",
       "manipulators": [
         {
           "type": "basic",
@@ -174,6 +202,28 @@
           "to": [
             {
               "key_code": "left_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "left_shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow",
+              "modifiers": [
+                "shift"
+              ]
             }
           ]
         },

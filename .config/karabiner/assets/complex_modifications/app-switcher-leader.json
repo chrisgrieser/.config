@@ -23,7 +23,7 @@
             {
               "type": "variable_unless",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             },
             {
               "type": "device_unless",
@@ -42,7 +42,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 1
+                "value": true
               }
             },
             {
@@ -68,7 +68,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             },
             {
               "type": "device_unless",
@@ -96,7 +96,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -122,7 +122,7 @@
             {
               "type": "variable_unless",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             },
             {
               "type": "device_if",
@@ -144,7 +144,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 1
+                "value": true
               }
             },
             {
@@ -170,7 +170,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             },
             {
               "type": "device_if",
@@ -189,7 +189,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -215,14 +215,14 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -243,14 +243,14 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to_if_alone": [
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -277,7 +277,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -291,7 +291,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ]
         },
@@ -304,7 +304,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -314,7 +314,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -334,7 +334,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -344,7 +344,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -364,7 +364,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -374,7 +374,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -394,7 +394,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -404,7 +404,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -424,7 +424,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -434,7 +434,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -454,7 +454,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -464,7 +464,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -484,7 +484,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -494,7 +494,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -514,7 +514,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -524,7 +524,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -544,7 +544,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -554,7 +554,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -574,7 +574,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -584,7 +584,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -604,7 +604,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -614,7 +614,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -639,7 +639,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -649,7 +649,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -669,7 +669,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -679,7 +679,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -699,7 +699,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -709,7 +709,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -729,7 +729,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -739,7 +739,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -759,7 +759,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -769,7 +769,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -789,7 +789,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -799,7 +799,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -819,7 +819,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -829,7 +829,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -850,7 +850,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -869,7 +869,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             }
           ]
@@ -883,7 +883,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -893,7 +893,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -913,7 +913,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -923,7 +923,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -943,7 +943,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -953,7 +953,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -973,7 +973,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -983,7 +983,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -1008,7 +1008,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -1018,7 +1018,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -1038,7 +1038,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -1048,7 +1048,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -1068,7 +1068,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -1078,7 +1078,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
@@ -1098,7 +1098,7 @@
             {
               "type": "variable_if",
               "name": "LEADER_ACTIVE",
-              "value": 1
+              "value": true
             }
           ],
           "to": [
@@ -1108,7 +1108,7 @@
             {
               "set_variable": {
                 "name": "LEADER_ACTIVE",
-                "value": 0
+                "value": false
               }
             },
             {
