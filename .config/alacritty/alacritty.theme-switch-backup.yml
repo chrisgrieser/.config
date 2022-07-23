@@ -1,29 +1,29 @@
 colors:
   primary:
-    background: '0x24283b'
-    foreground: '0xa9b1d6'
+    background: '0x1e282d'
+    foreground: '0xc4c7d1'
     dim_foreground: '#a5abb6'
     bright_foreground: '0xffffff'
     dim_background: '0x31363b'
     bright_background: '0x000000'
   normal:
-    black: '0x32344a'
-    red: '0xf7768e'
-    green: '0x9ece6a'
-    yellow: '0xe0af68'
-    blue: '0x7aa2f7'
-    magenta: '0xad8ee6'
-    cyan: '0x449dab'
-    white: '0x9699a8'
+    black: '0x666666'
+    red: '0xeb606b'
+    green: '0xc3e88d'
+    yellow: '0xf7eb95'
+    blue: '0x80cbc4'
+    magenta: '0xff2f90'
+    cyan: '0xaeddff'
+    white: '0xffffff'
   bright:
-    black: '0x444b6a'
-    yellow: '0xff9e64'
-    red: '0xff7a93'
-    green: '0xb9f27c'
-    magenta: '0xbb9af7'
-    white: '0xacb0d0'
-    blue: '0x7da6ff'
-    cyan: '0x0db9d7'
+    black: '0xa1a1a1'
+    yellow: '0xf7eb95'
+    red: '0xeb606b'
+    green: '0xc3e88d'
+    magenta: '0x6c71c4'
+    white: '0xffffff'
+    blue: '0x7dc6bf'
+    cyan: '0x35434d'
   cursor:
     text: '#2e3440'
     cursor: '#d8dee9'
@@ -104,6 +104,8 @@ cursor:
     blinking: Always
     blink_interval: 500
     unfocused_hollow: true
+  vi_mode_style:
+    shape: Underline
 live_config_reload: true
 selection:
   save_to_clipboard: true
