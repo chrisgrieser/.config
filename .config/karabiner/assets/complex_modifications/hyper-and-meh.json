@@ -61,18 +61,19 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "caps_lock"
-          },
-          "to_if_alone": [
-            {
-              "key_code": "escape"
+            "key_code": "caps_lock",
+            "modifiers": {
+              "mandatory": [
+                "left_shift"
+              ]
             }
-          ],
+          },
           "to": [
             {
-              "key_code": "right_shift",
+              "key_code": "left_shift",
               "modifiers": [
                 "command",
+                "right_shift",
                 "control",
                 "option"
               ]
@@ -104,82 +105,6 @@
             }
           ],
           "type": "basic"
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "caps_lock",
-            "modifiers": {
-              "mandatory": [
-                "shift"
-              ]
-            }
-          },
-          "to_if_alone": [
-            {
-              "key_code": "escape",
-              "modifiers": [
-                "shift"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "caps_lock",
-            "modifiers": {
-              "mandatory": [
-                "command"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "escape",
-              "modifiers": [
-                "command"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "caps_lock",
-            "modifiers": {
-              "mandatory": [
-                "control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "escape",
-              "modifiers": [
-                "control"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "caps_lock",
-            "modifiers": {
-              "mandatory": [
-                "option"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "escape",
-              "modifiers": [
-                "option"
-              ]
-            }
-          ]
         }
       ]
     },
@@ -202,28 +127,6 @@
           "to": [
             {
               "key_code": "left_arrow"
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "h",
-            "modifiers": {
-              "mandatory": [
-                "option",
-                "left_shift",
-                "command",
-                "control"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "left_arrow",
-              "modifiers": [
-                "shift"
-              ]
             }
           ]
         },

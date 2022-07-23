@@ -368,6 +368,8 @@
 				</array>
 				<key>elselabel</key>
 				<string>okay</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -507,6 +509,8 @@ zsh build.sh "$*"</string>
 				</array>
 				<key>elselabel</key>
 				<string>pass</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -518,6 +522,8 @@ zsh build.sh "$*"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>too-long-loop</string>
 			</dict>
@@ -707,11 +713,11 @@ lineNo="$*"
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>53</integer>
+				<integer>79</integer>
 				<key>hotmod</key>
-				<integer>262144</integer>
+				<integer>8650752</integer>
 				<key>hotstring</key>
-				<string>⎋</string>
+				<string>F18</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -758,12 +764,14 @@ lineNo="$*"
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>obsidian://advanced-uri?settingid=obsidian-style-settings</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -882,70 +890,70 @@ lineNo="$*"
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<integer>225</integer>
+			<real>225</real>
 			<key>ypos</key>
-			<integer>60</integer>
+			<real>60</real>
 		</dict>
 		<key>26D32329-094D-4EE5-98BE-7D4B1C5BFA95</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<integer>1055</integer>
+			<real>1055</real>
 			<key>ypos</key>
-			<integer>20</integer>
+			<real>20</real>
 		</dict>
 		<key>3207C2A9-F28C-4B7F-89E9-525F8011B3AF</key>
 		<dict>
 			<key>xpos</key>
-			<integer>245</integer>
+			<real>245</real>
 			<key>ypos</key>
-			<integer>600</integer>
+			<real>600</real>
 		</dict>
 		<key>3A8836DB-3455-405F-9E15-B2876FC9967D</key>
 		<dict>
 			<key>note</key>
 			<string>Open Style Settings</string>
 			<key>xpos</key>
-			<integer>20</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>750</integer>
+			<real>750</real>
 		</dict>
 		<key>440612A1-D74A-4799-A0D6-F88760AF14CF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<integer>1055</integer>
+			<real>1055</real>
 			<key>ypos</key>
-			<integer>335</integer>
+			<real>335</real>
 		</dict>
 		<key>4DD2CA0C-DA1D-4C4C-B207-AC70E83B3C4F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<integer>710</integer>
+			<real>710</real>
 			<key>ypos</key>
-			<integer>250</integer>
+			<real>250</real>
 		</dict>
 		<key>532ED943-AA0D-43A0-BBCF-3EBEA97FFD31</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<integer>920</integer>
+			<real>920</real>
 			<key>ypos</key>
-			<integer>335</integer>
+			<real>335</real>
 		</dict>
 		<key>5E6686A0-B634-4A23-A4FA-7DAF29604957</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<integer>855</integer>
+			<real>855</real>
 			<key>ypos</key>
-			<integer>235</integer>
+			<real>235</real>
 		</dict>
 		<key>681793A7-1E5D-456D-8593-88828D1E5C40</key>
 		<dict>
@@ -954,27 +962,27 @@ lineNo="$*"
 			<key>note</key>
 			<string>Open Shimmering Focus at line</string>
 			<key>xpos</key>
-			<integer>20</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>430</integer>
+			<real>430</real>
 		</dict>
 		<key>6C82BEC8-E24E-4C35-9066-32FE30D50429</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<integer>15</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>245</integer>
+			<real>245</real>
 		</dict>
 		<key>7A76325B-A77E-4806-A66C-34AB8C27ECA9</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<integer>370</integer>
+			<real>370</real>
 			<key>ypos</key>
-			<integer>25</integer>
+			<real>25</real>
 		</dict>
 		<key>846A75D1-67B5-4DFC-A2B0-8F8276CA4423</key>
 		<dict>
@@ -983,18 +991,18 @@ lineNo="$*"
 			<key>note</key>
 			<string>open at line</string>
 			<key>xpos</key>
-			<integer>245</integer>
+			<real>245</real>
 			<key>ypos</key>
-			<integer>430</integer>
+			<real>430</real>
 		</dict>
 		<key>8627A802-741F-4477-A445-AA3EA82ED4C8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<integer>505</integer>
+			<real>505</real>
 			<key>ypos</key>
-			<integer>220</integer>
+			<real>220</real>
 		</dict>
 		<key>90D551C1-F214-4BD2-8D16-B5047536BAE1</key>
 		<dict>
@@ -1003,86 +1011,86 @@ lineNo="$*"
 			<key>note</key>
 			<string>shorten</string>
 			<key>xpos</key>
-			<integer>170</integer>
+			<real>170</real>
 			<key>ypos</key>
-			<integer>275</integer>
+			<real>275</real>
 		</dict>
 		<key>9D9FB4C3-2338-4F5E-BAB8-DEFB91716031</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<integer>700</integer>
+			<real>700</real>
 			<key>ypos</key>
-			<integer>95</integer>
+			<real>95</real>
 		</dict>
 		<key>9E30D1B8-EBD0-418C-B6A3-6E326DAA6032</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<integer>400</integer>
+			<real>400</real>
 			<key>ypos</key>
-			<integer>910</integer>
+			<real>910</real>
 		</dict>
 		<key>B3464F95-B489-4113-82A7-9CCB3300B0E1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<integer>365</integer>
+			<real>365</real>
 			<key>ypos</key>
-			<integer>220</integer>
+			<real>220</real>
 		</dict>
 		<key>CE15BDDF-BE0F-4506-9F3F-EE61551C52FA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<integer>770</integer>
+			<real>770</real>
 			<key>ypos</key>
-			<integer>240</integer>
+			<real>240</real>
 		</dict>
 		<key>CF0FFFAF-3C89-45A9-8EEA-244171D413FE</key>
 		<dict>
 			<key>note</key>
 			<string>open Console</string>
 			<key>xpos</key>
-			<integer>20</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>600</integer>
+			<real>600</real>
 		</dict>
 		<key>D96BC2AD-EC81-4B13-B499-1B0FFC9EB952</key>
 		<dict>
 			<key>xpos</key>
-			<integer>20</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>910</integer>
+			<real>910</real>
 		</dict>
 		<key>DDC3D252-6578-4A57-A511-7C45C64C2CA1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<integer>920</integer>
+			<real>920</real>
 			<key>ypos</key>
-			<integer>205</integer>
+			<real>205</real>
 		</dict>
 		<key>E28945AC-6D2E-4DD0-A8CD-A3BA57E7C0DA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<integer>650</integer>
+			<real>650</real>
 			<key>ypos</key>
-			<integer>250</integer>
+			<real>250</real>
 		</dict>
 		<key>E3E53E94-0FC1-4954-B5F8-257313FB7EA7</key>
 		<dict>
 			<key>xpos</key>
-			<integer>245</integer>
+			<real>245</real>
 			<key>ypos</key>
-			<integer>750</integer>
+			<real>750</real>
 		</dict>
 		<key>F3EA6027-C734-4625-9ECD-2FE2DA83829F</key>
 		<dict>
@@ -1091,9 +1099,9 @@ lineNo="$*"
 			<key>note</key>
 			<string>svg converting</string>
 			<key>xpos</key>
-			<integer>245</integer>
+			<real>245</real>
 			<key>ypos</key>
-			<integer>910</integer>
+			<real>910</real>
 		</dict>
 		<key>F50EE2DE-822A-4F52-915D-9312B6BD4582</key>
 		<dict>
@@ -1102,11 +1110,13 @@ lineNo="$*"
 			<key>note</key>
 			<string>Shimmering Focus</string>
 			<key>xpos</key>
-			<integer>65</integer>
+			<real>65</real>
 			<key>ypos</key>
-			<integer>40</integer>
+			<real>40</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>variables</key>
 	<dict>
 		<key>shimmering_focus_repo_path</key>
