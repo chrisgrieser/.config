@@ -74,13 +74,13 @@ function updateDotfileSyncStatusMenuBar()
 		dotfileSyncMenuBar:returnToMenuBar()
 		dotfileSyncMenuBar:setTitle("🔁 "..changes)
 	end
-
-	dotfileSyncMenuBar:setClickCallback(function ()
-		local lastCommit = hs.execute('git log -1 --format=%ar')
-		lastCommit = trim(lastCommit)
-		notify("last commit: "..lastCommit)
-	end)
 end
+
+dotfileSyncMenuBar:setClickCallback(function ()
+	local lastCommit = hs.execute('git log -1 --format=%ar')
+	lastCommit = trim(lastCommit)
+	notify("last commit: "..lastCommit)
+end)
 
 dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
 dotfilesWatcher:start()
