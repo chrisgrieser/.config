@@ -29,7 +29,22 @@ rules:
         conditions:
           - type: variable_unless
             name: LEADER_ACTIVE
-            value: 1
+            value: true
+      - type: basic
+        from:
+          key_code: caps_lock
+        to_if_alone:
+          - key_code: escape
+        to:
+          - key_code: right_shift
+            modifiers:
+              - command
+              - control
+              - option
+        conditions:
+          - type: variable_unless
+            name: LEADER_ACTIVE
+            value: true
       # Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+,
       - from:
           key_code: comma
@@ -48,21 +63,21 @@ rules:
           key_code: caps_lock
           modifiers:
             mandatory:
-              - command
-        to:
+              - shift
+        to_if_alone:  # to_if_alone to avoid conflict with hyper + left-shift
           - key_code: escape
             modifiers:
-              - command
+              - shift
       - type: basic
         from:
           key_code: caps_lock
           modifiers:
             mandatory:
-              - shift
+              - command
         to:
           - key_code: escape
             modifiers:
-              - shift
+              - command
       - type: basic
         from:
           key_code: caps_lock
@@ -83,7 +98,7 @@ rules:
           - key_code: escape
             modifiers:
               - option
-  - description: '⇪ Hyper + hjkliomnbö: ←↓↑→↵⌫⇐⇒'
+  - description: '⇪ Hyper + hjkliomnbö: ←↓↑→↵⌫⇐⇒ (w/ shift option)'
     manipulators:
       - type: basic
         from:
@@ -96,6 +111,19 @@ rules:
               - control
         to:
           - key_code: left_arrow
+      - type: basic
+        from:
+          key_code: h
+          modifiers:
+            mandatory:
+              - option
+              - left_shift
+              - command
+              - control
+        to:
+          - key_code: left_arrow
+            modifiers:
+              - shift
       - type: basic
         from:
           key_code: j

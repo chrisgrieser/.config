@@ -14,7 +14,7 @@ rules:
         conditions:
           - type: variable_unless
             name: LEADER_ACTIVE
-            value: 1
+            value: true
           - type: device_unless
             identifiers:
               - vendor_id: 76
@@ -23,7 +23,7 @@ rules:
           - key_code: left_control
           - set_variable:
               name: LEADER_ACTIVE
-              value: 1
+              value: true
           - set_notification_message:
               id: leader-notice
               text: 🔺 Leader
@@ -36,7 +36,7 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
           - type: device_unless
             identifiers:
               - vendor_id: 76
@@ -49,7 +49,7 @@ rules:
           - key_code: f19
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -62,7 +62,7 @@ rules:
         conditions:
           - type: variable_unless
             name: LEADER_ACTIVE
-            value: 1
+            value: true
           - type: device_if
             identifiers:
               - vendor_id: 76
@@ -73,7 +73,7 @@ rules:
           - key_code: fn
           - set_variable:
               name: LEADER_ACTIVE
-              value: 1
+              value: true
           - set_notification_message:
               id: leader-notice
               text: 🔺 Leader
@@ -86,7 +86,7 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
           - type: device_if
             identifiers:
               - vendor_id: 76
@@ -95,7 +95,7 @@ rules:
           - key_code: f19
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -109,11 +109,11 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -125,11 +125,11 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to_if_alone:
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -144,14 +144,14 @@ rules:
               - right_control
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
       # BusyCal
       - type: basic
         from:
@@ -159,12 +159,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'BusyCal'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -175,12 +175,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'System Preferences'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -191,12 +191,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Obsidian'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -207,12 +207,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Discord'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -224,12 +224,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'zoom.us'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -240,12 +240,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Sublime Text'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -256,12 +256,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Drafts'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -272,12 +272,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Slack'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -288,12 +288,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Mimestream'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -304,12 +304,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Brave Browser'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -320,12 +320,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a "Finder"
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -339,12 +339,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -355,12 +355,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Hammerspoon'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -371,12 +371,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Karabiner-EventViewer'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -387,13 +387,13 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           # for some reason open -a sometimes puts MacPass into the background :/
           - shell_command: "osascript -e 'tell application \"MacPass\" to activate'"
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -404,12 +404,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'YouTube' || open 'https://www.youtube.com/'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -420,12 +420,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Alfred Preferences'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -436,12 +436,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Inoreader' || open 'https://www.inoreader.com/'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -453,7 +453,7 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Twitterrific'
           - key_code: down_arrow
@@ -462,7 +462,7 @@ rules:
               text: ""
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
       # Highlights
       - type: basic
         from:
@@ -470,12 +470,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Highlights'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -486,12 +486,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Docs' || open 'https://docs.google.com/'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -502,12 +502,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'IINA'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -518,12 +518,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'Color Picker'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -537,12 +537,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open -a 'BetterTouchTool'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -553,12 +553,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open 'https://web.whatsapp.com/'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -569,12 +569,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open 'https://www.messenger.com/'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
@@ -585,12 +585,12 @@ rules:
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
-            value: 1
+            value: true
         to:
           - shell_command: open 'https://web.telegram.org/z/'
           - set_variable:
               name: LEADER_ACTIVE
-              value: 0
+              value: false
           - set_notification_message:
               id: leader-notice
               text: ""
