@@ -69,7 +69,7 @@ function updateDotfileSyncStatusMenuBar()
 	changes = trim(changes)
 
 	if tonumber(changes) == 0 or not(success) then
-		dotfileSyncMenuBar:removeFromMenuBar()
+		dotfileSyncMenuBar:removeFromMenuBar() -- also removed clickcallback, which therefore has to be set again
 	else
 		dotfileSyncMenuBar:returnToMenuBar()
 		dotfileSyncMenuBar:setTitle("🔁 "..changes)
@@ -80,7 +80,6 @@ function updateDotfileSyncStatusMenuBar()
 		end)
 	end
 end
-
 
 dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
 dotfilesWatcher:start()
