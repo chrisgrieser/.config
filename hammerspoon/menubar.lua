@@ -101,8 +101,7 @@ function updateDraftsMenubar()
 	dotfileSyncMenuBar:setClickCallback(function ()
 		local lastCommit = hs.execute('git log -1 --format=%ar')
 		lastCommit = trim(lastCommit)
-		local minTillSync = math.floor(repoSyncTimer:nextTrigger() / 60)
-		notify("last commit "..lastCommit.."\r\rnext sync in "..tostring(minTillSync).." min")
+		notify("last commit: "..lastCommit)
 	end)
 end
 
