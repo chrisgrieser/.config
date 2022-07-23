@@ -66,9 +66,7 @@ covidTimer:start()
 dotfileSyncMenuBar = hs.menubar.new()
 function updateDotfileSyncStatusMenuBar()
 	local changes, success = hs.execute('git status --porcelain | wc -l | tr -d " "')
-	local lastCommit, success2 = hs.execute('git log -1 --format=%ar')
 	changes = trim(changes)
-	lastCommit = trim(lastCommit)
 
 	if tonumber(changes) == 0 or not(success) then
 		dotfileSyncMenuBar:removeFromMenuBar()
@@ -76,13 +74,18 @@ function updateDotfileSyncStatusMenuBar()
 		dotfileSyncMenuBar:returnToMenuBar()
 		dotfileSyncMenuBar:setTitle("🔁 "..changes)
 	end
-
-	if dotfileSyncMenuBar:isInMenuBar() and success2 then
-		dotfileSyncMenuBar:setTooltip(lastCommit)
-	end
 end
+
 dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
 dotfilesWatcher:start()
+
+dotfileSyncMenuBar:setClickCallback(function ()
+	local lastCommit, success2 = hs.execute('git log -1 --format=%ar')
+	lastCommit = trim(lastCommit)
+	dotfileSyncMenuBar:setTooltip(lastCommit)
+	local minTillSync = math.floor(repoSyncTimer:nextTrigger() / 60)
+	notify("next sync in "..tostring(minTillSync).."min\nlast commit "..lastCommit)
+end)
 
 --------------------------------------------------------------------------------
 draftsCounterMenuBar = hs.menubar.new()
