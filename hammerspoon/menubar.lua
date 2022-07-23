@@ -70,13 +70,7 @@ function updateDotfileSyncStatusMenuBar()
 
 	if tonumber(changes) == 0 or not(success) then
 		dotfileSyncMenuBar:removeFromMenuBar()
-		dotfileSyncMenuBar:setClickCallback(function ()
-			local lastCommit, success2 = hs.execute('git log -1 --format=%ar')
-			lastCommit = trim(lastCommit)
-			dotfileSyncMenuBar:setTooltip(lastCommit)
-			local minTillSync = math.floor(repoSyncTimer:nextTrigger() / 60)
-			notify("last commit "..lastCommit.."\r\rnext sync in "..tostring(minTillSync).." min")
-		end)
+
 	else
 		dotfileSyncMenuBar:returnToMenuBar()
 		dotfileSyncMenuBar:setTitle("🔁 "..changes)
@@ -85,7 +79,6 @@ end
 
 dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
 dotfilesWatcher:start()
-
 
 --------------------------------------------------------------------------------
 draftsCounterMenuBar = hs.menubar.new()
