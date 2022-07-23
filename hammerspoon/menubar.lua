@@ -84,8 +84,9 @@ dotfileSyncMenuBar:setClickCallback(function ()
 	lastCommit = trim(lastCommit)
 	dotfileSyncMenuBar:setTooltip(lastCommit)
 	local minTillSync = math.floor(repoSyncTimer:nextTrigger() / 60)
-	notify("next sync in "..tostring(minTillSync).."min\nlast commit "..lastCommit)
+	notify("last commit "..lastCommit.."\rnext sync in "..tostring(minTillSync).."min")
 end)
+
 
 --------------------------------------------------------------------------------
 draftsCounterMenuBar = hs.menubar.new()
