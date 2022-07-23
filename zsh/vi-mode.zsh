@@ -21,3 +21,4 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.Use
 #-------------------------------------------------------------------------------
 
 # ℹ️ prompt styling based on vi mode in starship config
+# possible, but not compatible when using the snippet to style the cursor
