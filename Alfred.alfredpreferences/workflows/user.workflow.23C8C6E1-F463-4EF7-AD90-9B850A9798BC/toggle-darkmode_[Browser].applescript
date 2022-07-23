@@ -8,11 +8,11 @@
 tell application "Brave Browser"
 	if application "Brave Browser" is not running then
 		launch
-		delay 1
+		delay 3
 	end if
 	if ((count of window) is 0) then
 		open location "chrome://newtab/"
-		delay 0.1
+		delay 0.2
 		set tabOpened to true
 	else
 		set tabOpened to false
