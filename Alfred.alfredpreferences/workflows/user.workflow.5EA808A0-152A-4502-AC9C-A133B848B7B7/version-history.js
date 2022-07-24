@@ -10,6 +10,8 @@ function run () {
 		return sel.slice(7);
 	}
 
+	const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
+
 	const filePathRegex = /(\/.*)\/(.*\.(\w+))$/;
 
 	function alfredErrorDisplay (text) {
@@ -33,26 +35,36 @@ function run () {
 	const ext = selection.replace(filePathRegex, "$3");
 	const fileIcon = { "type": "fileicon", "path": selection };
 
-	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad,%s" --date=human "${selection}"`)
+	let firstItem = true;
+
+	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad;%s;%an" --date=human "${selection}"`)
 		.split("\r")
 		.map(logLine => {
 			const commitHash = logLine.split(";")[0];
 			const date = logLine.split(";")[1];
 			const commitMsg = logLine.split(";")[2];
+			const author = logLine.split(";")[3];
 
 			const fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}"`);
 			const fileSizeKb = (fileContent.length / 1024).toFixed(2);
 
 			// write the file on disk for quicklook and opening
+			// dont write file if it already exists, to speed up repeated searches
 			const safeDate = date.replaceAll(" ", "-");
 			const tempPath = `/tmp/${safeDate}_${commitHash}.${ext}`;
-			app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > ${tempPath}`);
+			if (!fileExists(tempPath)) app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > ${tempPath}`);
+
+			let titleAppendix = "";
+			if (firstItem) {
+				titleAppendix = " – " + fileName;
+				firstItem = false;
+			}
 
 			return {
-				"title": date,
+				"title": date + titleAppendix,
 				"match": fileContent.replace(/\r|[:,;.()/\\{}[\]\-+"']/g, " "),
 				"quicklookurl": tempPath,
-				"subtitle": `${fileSizeKb}kb | ${commitMsg} | (${commitHash})`,
+				"subtitle": `${fileSizeKb}Kb  ▪  ${commitMsg}  ▪  ${author}  ▪  ${commitHash}`,
 				"icon": fileIcon,
 				"arg": tempPath,
 			};

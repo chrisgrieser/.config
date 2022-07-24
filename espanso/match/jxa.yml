@@ -14,7 +14,7 @@ matches:
       const onlineJSON = (url) => JSON.parse (app.doShellScript("curl -sL '" + url + "'"));
     label: '🏗 GET online JSON'
   - replace: |
-      const fileExists = Application("Finder").exists(Path(file_path));
+      const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
     label: '🏗 Check File Existence'
   - replace: |
      function finderSelection () {
