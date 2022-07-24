@@ -414,9 +414,9 @@
 				<key>relatedApps</key>
 				<array>
 					<string>com.vivaldi.Vivaldi</string>
-					<string>com.brave.Browser</string>
-					<string>org.chromium.Chromium</string>
 					<string>com.brave.Browser.app.fmajbmdokmecmpllfhcamihghgoablgg</string>
+					<string>org.chromium.Chromium</string>
+					<string>com.brave.Browser</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -781,7 +781,7 @@
 				<key>hotkey</key>
 				<integer>11</integer>
 				<key>hotmod</key>
-				<integer>1048576</integer>
+				<integer>1179648</integer>
 				<key>hotstring</key>
 				<string>B</string>
 				<key>leftcursor</key>
