@@ -1,6 +1,6 @@
 #!/usr/bin/env osascript -l JavaScript
 
-function run () {
+function run (argv) {
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
 
@@ -19,8 +19,13 @@ function run () {
 		return JSON.stringify({ items: item });
 	}
 
+	const input = argv.join("");
+
 	//------------------------------------------------------------------------------
 
+	if (input) {
+		selection = finderSelection();
+	}
 	const selection = finderSelection();
 	if (!selection) return alfredErrorDisplay("No selection");
 
@@ -62,7 +67,7 @@ function run () {
 
 			return {
 				"title": date + titleAppendix,
-				"match": fileContent.replace(/\r|[:,;.()/\\{}[\]\-+"']/g, " "),
+				"match": fileContent.replace(/\r|[:,;.()/\\{}[\]\-_+"']/g, " ") + ` ${author} ${commitMsg}`,
 				"quicklookurl": tempPath,
 				"subtitle": `${fileSizeKb} Kb  ▪  ${commitMsg}  ▪  ${author}  ▪  ${commitHash}`,
 				"icon": fileIcon,
