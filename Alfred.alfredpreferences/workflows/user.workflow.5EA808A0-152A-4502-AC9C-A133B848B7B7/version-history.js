@@ -47,17 +47,18 @@ function run () {
 		.map(logLine => {
 			const commitHash = logLine.split(";")[0];
 			const date = logLine.split(";")[1];
+			const safeDate = date.replaceAll(" ", "-");
 			const commitMsg = logLine.split(";")[2];
 			const author = logLine.split(";")[3];
 
-			const fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}"`);
-			const fileSizeKb = (fileContent.length / 1024).toFixed(2);
-
 			// write the file on disk for quicklook and opening
 			// dont write file if it already exists, to speed up repeated searches
-			const safeDate = date.replaceAll(" ", "-");
 			const tempPath = `/tmp/${safeDate}_${commitHash}.${ext}`;
-			if (!fileExists(tempPath)) app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > ${tempPath}`);
+			let fileContent;
+			if (!fileExists(tempPath)) {
+				fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" | tee "${tempPath}"`);
+			}
+			const fileSizeKb = (fileContent.length / 1024).toFixed(2);
 
 			let titleAppendix = "";
 			if (firstItem) {
@@ -69,11 +70,13 @@ function run () {
 				"title": date + titleAppendix,
 				"match": fileContent.replace(/\r|[:,;.()/\\{}[\]\-_+"']/g, " ") + ` ${author} ${commitMsg}`,
 				"quicklookurl": tempPath,
-				"subtitle": `${fileSizeKb} Kb  ▪  ${commitMsg}  ▪  ${author}  ▪  ${commitHash}`,
+				"subtitle": `${fileSizeKb} Kb  ▪  ${author}  ▪  ${commitMsg}  ▪  ${commitHash}`,
+				"mods": {
+					"alt": {"arg": commitHash },
+				},
 				"icon": fileIcon,
 				"arg": tempPath,
 			};
 		});
 	return JSON.stringify({ items: gitLogArr });
 }
-
