@@ -14,7 +14,7 @@ auto_restart: true
 # --- Clipboard threshold
 # Because injecting long texts char-by-char is a slow operation, espanso automatically
 # uses the clipboard if the text is longer than 'clipboard_threshold' characters.
-clipboard_threshold: 100
+clipboard_threshold: 20
 preserve_clipboard: true
 restore_clipboard_delay: 300
 
