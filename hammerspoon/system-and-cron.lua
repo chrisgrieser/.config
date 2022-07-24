@@ -202,3 +202,10 @@ function manualToggleDarkmode()
 end
 
 hotkey({}, "end", manualToggleDarkmode)
+
+-- `hammerspoon://toggle-darkmode` for toggling via Shortcuts
+hs.urlevent.bind("toggle-darkmode", function()
+	manualToggleDarkmode()
+	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
+end)
+
