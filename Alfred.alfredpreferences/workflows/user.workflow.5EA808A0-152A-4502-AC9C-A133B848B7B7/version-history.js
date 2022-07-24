@@ -10,7 +10,7 @@ function run () {
 		return sel.slice(7);
 	}
 
-	const filePathRegex = /(\/.*)\/(.*\.\w+)$/;
+	const filePathRegex = /(\/.*)\/(.*\.(\w+))$/;
 
 	function alfredErrorDisplay (text) {
 		const item = [{ "title": text }];
@@ -22,7 +22,7 @@ function run () {
 	const selection = finderSelection();
 	if (!selection) return alfredErrorDisplay("No selection");
 
-	const isRegularFile = selection.match(/\/.*\.\w+$/);
+	const isRegularFile = selection.match(filePathRegex);
 	if (!isRegularFile) return alfredErrorDisplay("Not a regular file");
 
 	const parentFolder = selection.replace(filePathRegex, "$1");
@@ -30,6 +30,7 @@ function run () {
 	if (!isGitRepo) return alfredErrorDisplay("Not a git directory");
 
 	const fileName = selection.replace(filePathRegex, "$2");
+	const ext = selection.replace(filePathRegex, "$3");
 	const fileIcon = { "type": "fileicon", "path": selection };
 
 	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad" --date=human "${selection}"`)
@@ -39,11 +40,16 @@ function run () {
 			const date = logLine.split(";")[1];
 
 			const fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}"`);
-			const fileSize = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}"`);
+			const fileSizeKb = (fileContent.length / 1024).toFixed(2);
+
+			app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > /tmp/${commitHash}.${ext}`);
+			const quicklookPath = `/tmp/${commitHash}.${ext}`;
+
 			return {
 				"title": date,
 				"match": fileContent,
-				"subtitle": `${fileSize}  (${commitHash})`,
+				"quicklookurl": quicklookPath,
+				"subtitle": `${fileSizeKb}kb  (${commitHash})`,
 				"icon": fileIcon,
 				"arg": commitHash,
 			};
