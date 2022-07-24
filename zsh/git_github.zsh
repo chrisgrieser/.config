@@ -83,6 +83,7 @@ function nuke {
 
 	rm -rf "$LOCAL_REPO"
 	echo "Local repo removed."
+	echo
 	echo "Downloading it again from remote…"
 
 	git clone "$SSH_REMOTE"

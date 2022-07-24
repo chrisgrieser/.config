@@ -14,37 +14,42 @@ function run () {
 
 	const filePathRegex = /(\/.*)\/(.*\.\w+)$/;
 
+	function alfredErrorDisplay (text) {
+		const item = {
+			"title": text,
+			"subtitle": text
+		};
+		return JSON.stringify({ items: item });
+	}
+
 	//------------------------------------------------------------------------------
 
 	const selection = finderSelection();
-	if (!selection) return;
+	if (!selection) return alfredErrorDisplay("no selection");
 
-	console.log(selection);
 
 	const isRegularFile = Boolean(selection.match(/\/.*\.\w+$/));
-	if (!isRegularFile) return;
+	if (!isRegularFile) alfredErrorDisplay("no selection");
 
 	const parentFolder = selection.replace(filePathRegex, "$1");
 	const fileName = selection.replace(filePathRegex, "$2");
-	console.log(fileName);
 
 	const fileIcon = { "type": "fileicon", "path": selection };
 
-	const isGitRepo = app.doShellScript(`cd "${parentFolder}" ; git rev-parse --git-dir || echo "not a git directory"`) === ".git";
+	const isGitRepo = app.doShellScript(`cd "${parentFolder}" ; git rev-parse --git-dir || echo "not a git directory"`).endsWith(".git");
 	if (!isGitRepo) return;
 
-	// const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad" --date=human "${fileName}"`)
-	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:%h "${fileName}"`)
+	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad" --date=human "${selection}"`)
 		.split("\r")
 		.map(logLine => {
 			const commitHash = logLine.split(";")[0];
 			const date = logLine.split(";")[1];
 
-			// const fileContent = app.doShellScript(`git show "${commitHash}:./${fileName}"`);
-			// const fileContent = "bla";
+			const fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}"`);
+			// console.log(fileContent);
 			return {
 				"title": date,
-				"match": alfredMatcher (date),
+				"match": alfredMatcher (fileContent),
 				"subtitle": commitHash,
 				"icon": fileIcon,
 				"arg": commitHash,
