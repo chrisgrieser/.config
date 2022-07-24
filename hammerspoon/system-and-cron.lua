@@ -77,7 +77,8 @@ end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
 
--- Office Wake
+--------------------------------------------------------------------------------
+-- OFFICE
 function screenWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.screensDidWake or hs.caffeinate.watcher.screensaverWillStop) then return end
 	officeModeLayout()
@@ -129,12 +130,20 @@ dailyMorningTimer = hs.timer.doAt("06:30", "01d", function()
 	log ("🌻 daily morning ("..deviceName()..")", "./logs/some.log")
 end, true)
 
+function projectorScreensaverStop (eventType)
+	if not(eventType == hs.caffeinate.watcher.screensaverDidStop) or not(isProjector()) then return end
+	iMacDisplay:setBrightness(0)
+end
+projectorScreensaverWatcher = hs.caffeinate.watcher.new(projectorScreensaverStop)
+
 if isIMacAtHome() then
 	dailyMorningTimer:start()
 	sleepTimer:start()
 	sleepTimer2:start()
 	biiweeklyTimer:start()
+	projectorScreensaverWatcher:start()
 end
+
 --------------------------------------------------------------------------------
 -- DARK MODE
 function toggleDarkMode ()
@@ -200,7 +209,6 @@ function manualToggleDarkmode()
 	toggleDarkMode()
 	log ("🌒 Manual Toggle Darkmode ("..deviceName()..")", "./logs/some.log")
 end
-
 
 -- `hammerspoon://toggle-darkmode` for toggling via Shortcuts
 hs.urlevent.bind("toggle-darkmode", function()
