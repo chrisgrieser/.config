@@ -23,29 +23,6 @@
 		</array>
 		<key>8BC396F3-80B7-4E93-8FE8-0285BD25B53A</key>
 		<array/>
-		<key>DDB63880-A3F4-4349-9D72-7863515C4FFA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8BC396F3-80B7-4E93-8FE8-0285BD25B53A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>30619821-1803-4426-B443-8C6DEA3697D2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -127,76 +104,11 @@ tell application "Brave Browser" to close active tab of front window</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>119</integer>
-				<key>hotmod</key>
-				<integer>8388608</integer>
-				<key>hotstring</key>
-				<string>↘</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>DDB63880-A3F4-4349-9D72-7863515C4FFA</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>echo "$(date '+%Y-%m-%d %H:%M') 🌒 Dark Mode: manual toggle" &gt;&gt; "$HOME/dotfiles/hammerspoon/logs/some.log"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>30619821-1803-4426-B443-8C6DEA3697D2</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>A simple one-liner terminal script that toggles Dark Mode on/off if you are using MacOS 10.14 (Mojave) and beyond.</string>
 	<key>uidata</key>
 	<dict>
-		<key>30619821-1803-4426-B443-8C6DEA3697D2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>log</string>
-			<key>xpos</key>
-			<real>290</real>
-			<key>ypos</key>
-			<real>360</real>
-		</dict>
 		<key>419C3BB1-4F7F-46AE-9685-0D53BFB091B0</key>
 		<dict>
 			<key>colorindex</key>
@@ -216,17 +128,6 @@ tell application "Brave Browser" to close active tab of front window</string>
 			<real>290</real>
 			<key>ypos</key>
 			<real>215</real>
-		</dict>
-		<key>DDB63880-A3F4-4349-9D72-7863515C4FFA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>🌗</string>
-			<key>xpos</key>
-			<real>60</real>
-			<key>ypos</key>
-			<real>300</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
