@@ -156,6 +156,7 @@ nnoremap <leader>[ mzA[<Esc>`z
 nnoremap <leader>{ mzA{<Esc>`z
 nnoremap <leader>} mzA}<Esc>`z
 nnoremap <leader>} mzA}<Esc>`z
+nnoremap ! a <Esc>hh
 
 " Remove last character from line
 nnoremap X mz$"_x`z
@@ -305,4 +306,4 @@ nnoremap <leader>sp vip:sort<CR>
 """"""""""""""""""""""
 " < unused keys
 """"""""""""""""""""""
-" ? !
+" ?
