@@ -52,7 +52,7 @@
 
 		// Brackets
 		"no-extra-parens": ["warn", "all", { "returnAssign": false }],
-		"curly": ["warn", "multi-or-nest"],
+		// "curly": ["warn", "multi-or-nest"],
 
 		// Arrays
 		"array-callback-return": ["error", { "checkForEach": false, "allowImplicit": true }],
