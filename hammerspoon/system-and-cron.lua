@@ -183,9 +183,7 @@ function toggleDarkMode ()
 			end if
 		end tell
 	]])
-	log ("🌒 Toggle Darkmode ("..deviceName()..")", "./logs/some.log")
 end
-
 
 function isDarkMode()
 	local _, isDark = hs.osascript.applescript('tell application "System Events" to return dark mode of appearance preferences')
@@ -193,15 +191,14 @@ function isDarkMode()
 end
 
 function setDarkmode (toDark)
-	local darkStr
-	if toDark then darkStr = "true"
-	else darkStr = "false" end
-	hs.osascript.applescript([[
-		tell application "System Events"
-			tell appearance preferences
-				if (dark mode is not ]]..darkStr..[[) then tell application id "com.runningwithcrayons.Alfred" to run trigger "toggle-dark-mode" in workflow "de.chris-grieser.dark-mode-toggle"
-			end tell
-		end tell
-	]])
-	log("🌒 Dark Mode: "..darkStr.." ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/some.log")
+	if not(isDarkMode()) and toDark then toggleDarkMode() end
+	if isDarkMode() and not(toDark) then toggleDarkMode() end
+	log("🌒 Dark Mode: "..(isDarkMode()).." ("..deviceName()..")", "./logs/some.log")
 end
+
+function manualToggleDarkmode()
+	toggleDarkMode()
+	log ("🌒 Manual Toggle Darkmode ("..deviceName()..")", "./logs/some.log")
+end
+
+hotkey({}, "end", manualToggleDarkmode)
