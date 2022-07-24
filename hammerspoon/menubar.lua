@@ -77,7 +77,8 @@ function updateDotfileSyncStatusMenuBar()
 		dotfileSyncMenuBar:setClickCallback(function ()
 			local lastCommit = hs.execute('git log -1 --format=%ar')
 			lastCommit = trim(lastCommit)
-			notify("last commit: "..lastCommit)
+			local nextSync = math.floor(repoSyncTimer:nextTrigger() / 60)
+			notify("last commit: "..lastCommit.."\n".."next sync: "..tostring(nextSync))
 		end)
 	end
 end
@@ -103,8 +104,6 @@ function updateDraftsMenubar()
 		draftsCounterMenuBar:setTitle("🔷 "..numberOfDrafts)
 	end
 end
-
-
 
 function draftsWatcher(appName, eventType)
 	if not(appName == "Drafts") then return end
