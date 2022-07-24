@@ -63,18 +63,17 @@ function run () {
 			// write the file on disk for quicklook and opening
 			// dont write file if it already exists, to speed up repeated searches
 			const tempPath = `/tmp/${safeDate}_${commitHash}.${ext}`;
+
 			let fileContent;
-			if (fileExists(tempPath)) {
-				fileContent = readFile(tempPath);
-			} else {
-				fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" | tee "${tempPath}"`);
-			}
+			if (fileExists(tempPath)) fileContent = readFile(tempPath);
+			else fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" | tee "${tempPath}"`);
 			if (!fileContent) fileContent = "";
+
 			const fileSizeKb = (fileContent.length / 1024).toFixed(2);
 
 			let titleAppendix = "";
 			if (firstItem) {
-				titleAppendix = " – " + fileName;
+				titleAppendix = "  –  " + fileName;
 				firstItem = false;
 			}
 
@@ -83,12 +82,12 @@ function run () {
 				"match": fileContent.replace(/\r|[:,;.()/\\{}[\]\-_+"']/g, " ") + ` ${author} ${commitMsg}`,
 				"quicklookurl": tempPath,
 				"subtitle": `${fileSizeKb} Kb  ▪  ${author}  ▪  ${commitMsg}`,
-				// "mods": {
-				// 	"alt": {
-				// 		"arg": commitHash,
-				// 		"subtitle": `Hash: ${commitHash} (⌥: Copy)`
-				// 	},
-				// },
+				"mods": {
+					"alt": {
+						"arg": commitHash,
+						"subtitle": `${commitHash} (⌥: Copy)`
+					},
+				},
 				"icon": fileIcon,
 				"arg": tempPath,
 			};

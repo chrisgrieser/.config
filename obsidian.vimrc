@@ -185,7 +185,7 @@ vmap _ <Esc>o<Esc>gv
 
 " Append punctuation to end of line
 " `&§&` are helper commands for addings substitution to command chain,
-" `A;<Esc>` does not work as insert mode mappings aren't remembered
+" `A;<Esc>` does not work as insert mode keystrokes aren't supported
 nmap &§&. :.s/$/./
 nmap &§&, :.s/$/,/
 nmap &§&; :.s/$/;/
@@ -204,6 +204,7 @@ nmap ,: mz&§&:`z
 nmap ,) mz&§&)`z
 nmap ,] mz&§&]`z
 nmap ,} mz&§&}`z
+" nmap ! a <Esc>hh does not work, cause insert mode keystrokes aren't supported
 
 " Remove last character from line
 nmap X mz$"_x`z
@@ -412,4 +413,4 @@ map ,ow :readableLineLength
 """"""""""""""""""""""
 " < unused keys
 """"""""""""""""""""""
-" ? !
+" ?
