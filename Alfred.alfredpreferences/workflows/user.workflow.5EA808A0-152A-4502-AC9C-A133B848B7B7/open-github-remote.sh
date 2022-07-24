@@ -1,26 +1,28 @@
 #!/bin/zsh
 
-# get path of current Finder Selection/Window
-FINDER_SEL=$(osascript -e 'tell application "Finder"
-	if ((count windows) is 0) then return "no window"
+INPUT="$*"
+if [[ -z "$INPUT" ]] ; then
+	# get path of current Finder Selection/Window
+	FINDER_SEL=$(osascript -e 'tell application "Finder"
+		if ((count windows) is 0) then return "no window"
+		set sel to selection
+		if ((count sel) > 1) then return POSIX path of ((item 1 of sel) as text)
+		if ((count sel) = 1) then return POSIX path of (sel as text)
+		if ((count sel) = 0) then return POSIX path of (target of window 1 as alias)
+	end tell')
+	[[ "$FINDER_SEL" == "no window" ]] && exit 1 # no finder window
+	INPUT="$FINDER_SEL"
+fi
 
-	set sel to selection
-	if ((count sel) > 1) then return POSIX path of ((item 1 of sel) as text)
-	if ((count sel) = 1) then return POSIX path of (sel as text)
-	if ((count sel) = 0) then return POSIX path of (target of window 1 as alias)
-end tell')
+FOLDER=$(dirname "$INPUT")
+FILE=$(basename "$INPUT")
 
-[[ "$FINDER_SEL" == "no window" ]] && exit 1 # no finder window
-
-FOLDER=$(dirname "$FINDER_SEL")
-FILE=$(basename "$FINDER_SEL")
-
-if [[ -d "$FINDER_SEL" ]] ; then
-	FOLDER="$FINDER_SEL"
+if [[ -d "$INPUT" ]] ; then
+	FOLDER="$INPUT"
 	FILE=""
-elif [[ -f "$FINDER_SEL" ]] ; then
-	FOLDER=$(dirname "$FINDER_SEL")
-	FILE=$(basename "$FINDER_SEL")
+elif [[ -f "$INPUT" ]] ; then
+	FOLDER=$(dirname "$INPUT")
+	FILE=$(basename "$INPUT")
 else
 	exit 1 # no regular file selected
 fi

@@ -280,7 +280,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C7CDBB63-914B-4E57-8643-E8D751667BF6</string>
+				<string>C21186A4-BFA2-43DB-8893-567B30CBA24D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -568,6 +568,76 @@ open $(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | c
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>git</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>git-doc-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Git Docs</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>F2940C32-987B-4532-89CA-BBD07A85A4C3</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>B1E58173-5F7C-4BE2-B736-DA93564702AA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -652,71 +722,6 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
-subl -n "$*"
-
-# show sidebar and hide tabbar
-subl --command toggle_tabs
-subl --command toggle_side_bar</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>AD4F6532-1C9C-4A7D-894C-6243DB064568</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string> </string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>input</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>C21186A4-BFA2-43DB-8893-567B30CBA24D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Version History</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -777,6 +782,86 @@ subl --command toggle_side_bar</string>
 			<string>C7CDBB63-914B-4E57-8643-E8D751667BF6</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
+subl -n "$*"
+
+# show sidebar and hide tabbar
+subl --command toggle_tabs
+subl --command toggle_side_bar</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>AD4F6532-1C9C-4A7D-894C-6243DB064568</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>version-history</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>FE8844C2-F37E-4BDC-BD1D-991BDB9B4574</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string> </string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>input</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>C21186A4-BFA2-43DB-8893-567B30CBA24D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Version History</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -843,41 +928,6 @@ subl --command toggle_side_bar</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string> </string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>folderToSearch</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>version-history</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>FE8844C2-F37E-4BDC-BD1D-991BDB9B4574</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -893,6 +943,26 @@ subl --command toggle_side_bar</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>17EA82AA-E281-483E-9B42-DCEF8CCB61A1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string> </string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>folderToSearch</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -948,9 +1018,9 @@ subl --command toggle_side_bar</string>
 				<key>keyword</key>
 				<string>gr</string>
 				<key>subtext</key>
-				<string>Max repos: {var:maxReposNumber}</string>
+				<string>Enter GitHub Topic</string>
 				<key>text</key>
-				<string>⬇️ Repo Downloader</string>
+				<string>⬇️ Download Repos: '{query}'</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -958,76 +1028,6 @@ subl --command toggle_side_bar</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>7788A2EF-46C7-48E7-A073-C7938913B87D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>git</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>git-doc-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Git Docs</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>F2940C32-987B-4532-89CA-BBD07A85A4C3</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>B1E58173-5F7C-4BE2-B736-DA93564702AA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1043,7 +1043,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>675</real>
 		</dict>
 		<key>07D214D7-7035-4125-88CE-4BEA2F46A4DA</key>
 		<dict>
@@ -1052,16 +1052,16 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
-			<real>975</real>
+			<real>805</real>
 		</dict>
 		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>590</real>
+			<real>710</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>710</real>
 		</dict>
 		<key>0E26657D-87C2-4501-A282-F674945D73C9</key>
 		<dict>
@@ -1070,7 +1070,7 @@ subl --command toggle_side_bar</string>
 			<key>note</key>
 			<string>Open GitHub</string>
 			<key>xpos</key>
-			<real>745</real>
+			<real>780</real>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
@@ -1079,9 +1079,9 @@ subl --command toggle_side_bar</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>425</real>
+			<real>410</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>430</real>
 		</dict>
 		<key>17EA82AA-E281-483E-9B42-DCEF8CCB61A1</key>
 		<dict>
@@ -1090,7 +1090,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>690</real>
 		</dict>
 		<key>2272192E-81AD-4662-A0D4-58300A23360E</key>
 		<dict>
@@ -1108,9 +1108,9 @@ subl --command toggle_side_bar</string>
 			<key>note</key>
 			<string>Version history</string>
 			<key>xpos</key>
-			<real>60</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>430</real>
 		</dict>
 		<key>4C4CA3DF-BB26-4393-84E2-27190A118611</key>
 		<dict>
@@ -1119,7 +1119,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>280</real>
 		</dict>
 		<key>4E05F542-9EEE-41E9-86B1-B4F1C201A764</key>
 		<dict>
@@ -1128,7 +1128,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>975</real>
+			<real>805</real>
 		</dict>
 		<key>7788A2EF-46C7-48E7-A073-C7938913B87D</key>
 		<dict>
@@ -1137,9 +1137,9 @@ subl --command toggle_side_bar</string>
 			<key>note</key>
 			<string>config download</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>975</real>
+			<real>805</real>
 		</dict>
 		<key>78077732-42EB-4967-885E-DF4366FAB695</key>
 		<dict>
@@ -1157,16 +1157,16 @@ subl --command toggle_side_bar</string>
 			<key>note</key>
 			<string>fd search</string>
 			<key>xpos</key>
-			<real>665</real>
+			<real>785</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>680</real>
 		</dict>
 		<key>8D2069C6-2EDB-40CD-854E-38574F301A4B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>905</real>
+			<real>940</real>
 			<key>ypos</key>
 			<real>400</real>
 		</dict>
@@ -1181,6 +1181,8 @@ subl --command toggle_side_bar</string>
 		</dict>
 		<key>96CFC640-02E4-4744-A92F-B6468A795B1C</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1202,9 +1204,9 @@ subl --command toggle_side_bar</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>475</real>
+			<real>560</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>150</real>
 		</dict>
 		<key>AD4F6532-1C9C-4A7D-894C-6243DB064568</key>
 		<dict>
@@ -1213,34 +1215,36 @@ subl --command toggle_side_bar</string>
 			<key>note</key>
 			<string>open in Sublime</string>
 			<key>xpos</key>
-			<real>745</real>
+			<real>780</real>
 			<key>ypos</key>
 			<real>540</real>
 		</dict>
 		<key>B1E58173-5F7C-4BE2-B736-DA93564702AA</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
 			<key>xpos</key>
-			<real>230</real>
+			<real>410</real>
 			<key>ypos</key>
-			<real>1185</real>
+			<real>290</real>
 		</dict>
 		<key>BEA583C1-293D-4CF7-AB3A-7BEE5A3B41CA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>840</real>
+			<real>960</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>680</real>
 		</dict>
 		<key>C21186A4-BFA2-43DB-8893-567B30CBA24D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>295</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>590</real>
 		</dict>
 		<key>C2F2DD6E-652E-4EC6-B5B7-E03FAAB7941B</key>
 		<dict>
@@ -1260,7 +1264,7 @@ subl --command toggle_side_bar</string>
 			<key>note</key>
 			<string>Copy GitHub URL</string>
 			<key>xpos</key>
-			<real>745</real>
+			<real>780</real>
 			<key>ypos</key>
 			<real>400</real>
 		</dict>
@@ -1269,34 +1273,38 @@ subl --command toggle_side_bar</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>260</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>430</real>
 		</dict>
 		<key>CC7C190D-D205-4F5B-A0DC-2A6D64736EC7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>745</real>
+			<real>780</real>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
 		<key>F2940C32-987B-4532-89CA-BBD07A85A4C3</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
 			<key>note</key>
 			<string>search docs</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>260</real>
 			<key>ypos</key>
-			<real>1185</real>
+			<real>290</real>
 		</dict>
 		<key>FE8844C2-F37E-4BDC-BD1D-991BDB9B4574</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>560</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

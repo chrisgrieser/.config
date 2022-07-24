@@ -23,19 +23,6 @@
 		</array>
 		<key>304A4BD1-2865-49EE-8F2B-E75BF1E72E55</key>
 		<array/>
-		<key>3B8E0E60-076A-4F6C-823A-87D7110791EA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0A0E00A7-D3B0-4720-9C59-06268FCDF9BC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>67F611D4-A5E9-451E-AFEE-59046947524A</key>
 		<array>
 			<dict>
@@ -67,6 +54,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>6A64ED91-B242-40F9-A1FF-325B90785D5F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7E4CDA87-C077-4E93-9425-E93BBB7EB7E1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E187D0D2-F43F-4B2E-9413-82949A8FD689</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -120,7 +120,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3B8E0E60-076A-4F6C-823A-87D7110791EA</string>
+				<string>E16EE84A-11C3-46E1-8A54-8ED45772AE2E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -159,7 +159,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E76E7C83-2FA4-46C1-8648-98FC60D72055</string>
+				<string>7E4CDA87-C077-4E93-9425-E93BBB7EB7E1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -168,11 +168,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E76E7C83-2FA4-46C1-8648-98FC60D72055</key>
+		<key>E16EE84A-11C3-46E1-8A54-8ED45772AE2E</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E187D0D2-F43F-4B2E-9413-82949A8FD689</string>
+				<string>0A0E00A7-D3B0-4720-9C59-06268FCDF9BC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -265,6 +265,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-sublime-path.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>7E4CDA87-C077-4E93-9425-E93BBB7EB7E1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>externaltriggerid</key>
 				<string>open-at-github</string>
 				<key>passinputasargument</key>
@@ -278,27 +301,6 @@
 			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
 			<string>E187D0D2-F43F-4B2E-9413-82949A8FD689</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>l</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>E76E7C83-2FA4-46C1-8648-98FC60D72055</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -371,27 +373,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>l</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>3B8E0E60-076A-4F6C-823A-87D7110791EA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -421,6 +402,29 @@ fi</string>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>B4A903D4-94B6-4C63-A768-5C0F11AF3A99</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-sublime-path.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E16EE84A-11C3-46E1-8A54-8ED45772AE2E</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -917,15 +921,6 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 			<key>ypos</key>
 			<real>315</real>
 		</dict>
-		<key>3B8E0E60-076A-4F6C-823A-87D7110791EA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>615</real>
-			<key>ypos</key>
-			<real>170</real>
-		</dict>
 		<key>67F611D4-A5E9-451E-AFEE-59046947524A</key>
 		<dict>
 			<key>colorindex</key>
@@ -954,6 +949,17 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>315</real>
+		</dict>
+		<key>7E4CDA87-C077-4E93-9425-E93BBB7EB7E1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>get path from Sublime</string>
+			<key>xpos</key>
+			<real>615</real>
+			<key>ypos</key>
+			<real>25</real>
 		</dict>
 		<key>8B539A06-FF0B-4931-8E97-8377B6E1164B</key>
 		<dict>
@@ -1051,21 +1057,23 @@ open -R ./Default\ Package/Default.sublime-commands</string>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
+		<key>E16EE84A-11C3-46E1-8A54-8ED45772AE2E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>get path from Sublime</string>
+			<key>xpos</key>
+			<real>615</real>
+			<key>ypos</key>
+			<real>170</real>
+		</dict>
 		<key>E187D0D2-F43F-4B2E-9413-82949A8FD689</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
 			<real>765</real>
-			<key>ypos</key>
-			<real>25</real>
-		</dict>
-		<key>E76E7C83-2FA4-46C1-8648-98FC60D72055</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>615</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
