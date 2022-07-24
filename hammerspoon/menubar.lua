@@ -78,10 +78,11 @@ function updateDotfileSyncStatusMenuBar()
 			local lastCommit = hs.execute('git log -1 --format=%ar')
 			lastCommit = trim(lastCommit)
 			local nextSync = math.floor(repoSyncTimer:nextTrigger() / 60)
-			notify("last commit: "..lastCommit.."\n".."next sync: "..tostring(nextSync))
+			notify("last commit: "..lastCommit.."\n".."next sync: in "..tostring(nextSync).." min")
 		end)
 	end
 end
+
 
 dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
 dotfilesWatcher:start()
