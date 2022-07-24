@@ -33,23 +33,26 @@ function run () {
 	const ext = selection.replace(filePathRegex, "$3");
 	const fileIcon = { "type": "fileicon", "path": selection };
 
-	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad" --date=human "${selection}"`)
+	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad,%s" --date=human "${selection}"`)
 		.split("\r")
 		.map(logLine => {
 			const commitHash = logLine.split(";")[0];
 			const date = logLine.split(";")[1];
+			const commitMsg = logLine.split(";")[2];
 
 			const fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}"`);
 			const fileSizeKb = (fileContent.length / 1024).toFixed(2);
 
-			app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > /tmp/${commitHash}.${ext}`);
-			const tempPath = `/tmp/${date} (${commitHash}).${ext}`;
+			// write the file on disk for quicklook and opening
+			const safeDate = date.replaceAll(" ", "-");
+			const tempPath = `/tmp/${safeDate}_${commitHash}.${ext}`;
+			app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > ${tempPath}`);
 
 			return {
 				"title": date,
 				"match": fileContent.replace(/\r|[:,;.()/\\{}[\]\-+"']/g, " "),
 				"quicklookurl": tempPath,
-				"subtitle": `${fileSizeKb}kb  (${commitHash})`,
+				"subtitle": `${fileSizeKb}kb | ${commitMsg} | (${commitHash})`,
 				"icon": fileIcon,
 				"arg": tempPath,
 			};
