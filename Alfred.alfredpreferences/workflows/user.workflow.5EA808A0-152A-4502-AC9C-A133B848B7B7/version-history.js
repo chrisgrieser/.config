@@ -5,39 +5,32 @@ function run () {
 	app.includeStandardAdditions = true;
 
 	function finderSelection () {
-		const sel = decodeURI(Application("Finder").selection()[0]?.url()).slice(7);
+		const sel = decodeURI(Application("Finder").selection()[0]?.url());
 		if (sel === "undefined") return ""; // no selection
-		return sel;
+		return sel.slice(7);
 	}
-
-	const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
 
 	const filePathRegex = /(\/.*)\/(.*\.\w+)$/;
 
 	function alfredErrorDisplay (text) {
-		const item = {
-			"title": text,
-			"subtitle": text
-		};
+		const item = [{ "title": text }];
 		return JSON.stringify({ items: item });
 	}
 
 	//------------------------------------------------------------------------------
 
 	const selection = finderSelection();
-	if (!selection) return alfredErrorDisplay("no selection");
+	if (!selection) return alfredErrorDisplay("No selection");
 
-
-	const isRegularFile = Boolean(selection.match(/\/.*\.\w+$/));
-	if (!isRegularFile) alfredErrorDisplay("no selection");
+	const isRegularFile = selection.match(/\/.*\.\w+$/);
+	if (!isRegularFile) return alfredErrorDisplay("Not a regular file");
 
 	const parentFolder = selection.replace(filePathRegex, "$1");
-	const fileName = selection.replace(filePathRegex, "$2");
-
-	const fileIcon = { "type": "fileicon", "path": selection };
-
 	const isGitRepo = app.doShellScript(`cd "${parentFolder}" ; git rev-parse --git-dir || echo "not a git directory"`).endsWith(".git");
-	if (!isGitRepo) return;
+	if (!isGitRepo) return alfredErrorDisplay("Not a git directory");
+
+	const fileName = selection.replace(filePathRegex, "$2");
+	const fileIcon = { "type": "fileicon", "path": selection };
 
 	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad" --date=human "${selection}"`)
 		.split("\r")
@@ -46,11 +39,11 @@ function run () {
 			const date = logLine.split(";")[1];
 
 			const fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}"`);
-			// console.log(fileContent);
+			const fileSize = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}"`);
 			return {
 				"title": date,
-				"match": alfredMatcher (fileContent),
-				"subtitle": commitHash,
+				"match": fileContent,
+				"subtitle": `${fileSize}  (${commitHash})`,
 				"icon": fileIcon,
 				"arg": commitHash,
 			};

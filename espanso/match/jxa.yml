@@ -18,9 +18,9 @@ matches:
     label: '🏗 Check File Existence'
   - replace: |
      function finderSelection () {
-      const selection = decodeURI(Application("Finder").selection()[0]?.url()).slice(7);
+      const selection = decodeURI(Application("Finder").selection()[0]?.url());
       if (selection === "undefined") return ""; // no selection
-      return selection;
+      return selection.slice(7);
      }
     label: '🏗 Get Finder Selection'
   - replace: const discordReadyLinks = Application("Discord").frontmost();
