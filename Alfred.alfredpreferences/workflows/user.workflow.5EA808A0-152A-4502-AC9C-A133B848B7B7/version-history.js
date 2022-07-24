@@ -43,15 +43,15 @@ function run () {
 			const fileSizeKb = (fileContent.length / 1024).toFixed(2);
 
 			app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > /tmp/${commitHash}.${ext}`);
-			const quicklookPath = `/tmp/${commitHash}.${ext}`;
+			const tempPath = `/tmp/${date} (${commitHash}).${ext}`;
 
 			return {
 				"title": date,
-				"match": fileContent,
-				"quicklookurl": quicklookPath,
+				"match": fileContent.replace(/\r|[:,;.()/\\{}[\]\-+"']/g, " "),
+				"quicklookurl": tempPath,
 				"subtitle": `${fileSizeKb}kb  (${commitHash})`,
 				"icon": fileIcon,
-				"arg": commitHash,
+				"arg": tempPath,
 			};
 		});
 	return JSON.stringify({ items: gitLogArr });

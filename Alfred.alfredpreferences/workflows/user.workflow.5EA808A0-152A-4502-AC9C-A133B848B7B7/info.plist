@@ -250,6 +250,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C7CDBB63-914B-4E57-8643-E8D751667BF6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>170D1EBD-15B5-4AC3-A173-A150348D8454</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F2940C32-987B-4532-89CA-BBD07A85A4C3</key>
 		<array>
 			<dict>
@@ -640,60 +653,17 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
+				<key>openwith</key>
 				<string></string>
-				<key>hotkey</key>
-				<integer>9</integer>
-				<key>hotmod</key>
-				<integer>917504</integer>
-				<key>hotstring</key>
-				<string>V</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
+				<key>sourcefile</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>3635E187-AAD5-40A0-937E-19BBE688B10C</string>
+			<string>170D1EBD-15B5-4AC3-A173-A150348D8454</string>
 			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>version-history.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>4977B388-FDAB-4622-975A-219DB4951AFD</string>
-			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -726,34 +696,37 @@ subl --command toggle_side_bar</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>version-history</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>50DA0039-5840-45F9-9D05-E64BBAC96D45</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
+				<key>action</key>
 				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Version History</string>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>9</integer>
+				<key>hotmod</key>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>V</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</string>
+			<string>3635E187-AAD5-40A0-937E-19BBE688B10C</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -834,6 +807,61 @@ subl --command toggle_side_bar</string>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>version-history.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4977B388-FDAB-4622-975A-219DB4951AFD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>version-history</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>50DA0039-5840-45F9-9D05-E64BBAC96D45</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Version History</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1005,7 +1033,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>875</real>
 		</dict>
 		<key>07D214D7-7035-4125-88CE-4BEA2F46A4DA</key>
 		<dict>
@@ -1014,7 +1042,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
-			<real>865</real>
+			<real>1060</real>
 		</dict>
 		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
 		<dict>
@@ -1036,6 +1064,13 @@ subl --command toggle_side_bar</string>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
+		<key>170D1EBD-15B5-4AC3-A173-A150348D8454</key>
+		<dict>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>410</real>
+		</dict>
 		<key>17EA82AA-E281-483E-9B42-DCEF8CCB61A1</key>
 		<dict>
 			<key>colorindex</key>
@@ -1043,7 +1078,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>750</real>
+			<real>945</real>
 		</dict>
 		<key>2272192E-81AD-4662-A0D4-58300A23360E</key>
 		<dict>
@@ -1063,7 +1098,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>620</real>
 		</dict>
 		<key>4977B388-FDAB-4622-975A-219DB4951AFD</key>
 		<dict>
@@ -1072,7 +1107,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>730</real>
 		</dict>
 		<key>4C4CA3DF-BB26-4393-84E2-27190A118611</key>
 		<dict>
@@ -1090,14 +1125,14 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>865</real>
+			<real>1060</real>
 		</dict>
 		<key>50DA0039-5840-45F9-9D05-E64BBAC96D45</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>765</real>
 		</dict>
 		<key>7788A2EF-46C7-48E7-A073-C7938913B87D</key>
 		<dict>
@@ -1108,7 +1143,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>865</real>
+			<real>1060</real>
 		</dict>
 		<key>78077732-42EB-4967-885E-DF4366FAB695</key>
 		<dict>
@@ -1191,7 +1226,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>1225</real>
 		</dict>
 		<key>BEA583C1-293D-4CF7-AB3A-7BEE5A3B41CA</key>
 		<dict>
@@ -1226,10 +1261,12 @@ subl --command toggle_side_bar</string>
 		</dict>
 		<key>C7CDBB63-914B-4E57-8643-E8D751667BF6</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>270</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>410</real>
 		</dict>
 		<key>CC7C190D-D205-4F5B-A0DC-2A6D64736EC7</key>
 		<dict>
@@ -1247,7 +1284,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>1225</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
