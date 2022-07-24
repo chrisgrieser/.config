@@ -388,7 +388,7 @@
             {
               "key_code": "left_arrow",
               "modifiers": [
-                "command"
+                "control"
               ]
             }
           ],
@@ -415,7 +415,7 @@
             {
               "key_code": "right_arrow",
               "modifiers": [
-                "command"
+                "control"
               ]
             }
           ],
