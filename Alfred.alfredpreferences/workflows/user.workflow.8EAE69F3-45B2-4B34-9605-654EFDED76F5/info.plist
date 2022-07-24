@@ -8,6 +8,19 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
+		<key>7A86B5B1-E60C-4A6C-A220-0893F3D48599</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C7CEE1BE-F622-4A58-BFDE-8B1DF12C1B14</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>945ED155-23DF-4F0F-B90C-DBDDB2C715A9</key>
 		<array>
 			<dict>
@@ -51,7 +64,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C7CEE1BE-F622-4A58-BFDE-8B1DF12C1B14</string>
+				<string>7A86B5B1-E60C-4A6C-A220-0893F3D48599</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -207,29 +220,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-obsidian-path.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>EECD8B98-E934-4325-A613-8673D7A2FB7D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -262,6 +252,50 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-obsidian-path.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>EECD8B98-E934-4325-A613-8673D7A2FB7D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>7A86B5B1-E60C-4A6C-A220-0893F3D48599</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -280,6 +314,17 @@
 			<real>245</real>
 			<key>ypos</key>
 			<real>150</real>
+		</dict>
+		<key>7A86B5B1-E60C-4A6C-A220-0893F3D48599</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>remove \n</string>
+			<key>xpos</key>
+			<real>410</real>
+			<key>ypos</key>
+			<real>320</real>
 		</dict>
 		<key>945ED155-23DF-4F0F-B90C-DBDDB2C715A9</key>
 		<dict>
@@ -301,6 +346,8 @@
 		</dict>
 		<key>C3163E68-E961-49C7-A170-E3D3AE97DE4C</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>Version History</string>
 			<key>xpos</key>
@@ -313,7 +360,7 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>395</real>
+			<real>505</real>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
@@ -331,6 +378,17 @@
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
+	<key>variables</key>
+	<dict>
+		<key>vault_path</key>
+		<string>~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault</string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array>
+		<string>vault_path</string>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

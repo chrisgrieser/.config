@@ -4,16 +4,16 @@
     "items" : [
       {
         "workflowobjecttype" : "alfred.workflow.utility.replace",
-        "uid" : "F1646853-4BE7-44BE-985F-9282246BAFCA",
+        "uid" : "7A86B5B1-E60C-4A6C-A220-0893F3D48599",
         "note" : "remove \\n",
         "workflowobjectconfig" : {
-          "replacestring" : "",
           "regexcaseinsensitive" : false,
+          "matchstring" : "\\n$",
           "regexmultiline" : false,
-          "matchmode" : 1,
-          "matchstring" : "\\n$"
+          "replacestring" : "",
+          "matchmode" : 1
         },
-        "colorindex" : 3,
+        "colorindex" : 0,
         "ypos" : 5,
         "xpos" : 35
       }
@@ -22,5 +22,5 @@
 
     ]
   },
-  "description" : "Removes the trailing \\n from return statements"
+  "description" : "Remove the trailing line break from script outputs"
 }
