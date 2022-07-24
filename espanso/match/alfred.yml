@@ -67,7 +67,7 @@ matches:
     replace: set input to argv as string
     label: "🎩🍏 get argv"
   - trigger: "!argv"
-    replace: |-
+    replace: |
       function run (argv){
       	const input = argv.join('');
       }

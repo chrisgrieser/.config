@@ -5,11 +5,11 @@ FINDER_SEL=$(osascript -e 'tell application "Finder"
 	set sel to selection
 	if ((count sel) > 1) then return POSIX path of ((item 1 of sel) as text)
 	if ((count sel) = 1) then return POSIX path of (sel as text)
-	if ((count sel) = 0) then return "no selection"
+	if ((count sel) = 0) then return ""
 end tell')
 
-[[ "$FINDER_SEL" == "no selection" ]] && exit 1
-[[ -d "$FINDER_SEL" ]] && exit 1 # selection is not a file
+[[ -z "$FINDER_SEL" ]] && exit 1
+[[ ! -f "$FINDER_SEL" ]] && exit 1
 
 FOLDER=$(dirname "$FINDER_SEL")
 FILE=$(basename "$FINDER_SEL")
