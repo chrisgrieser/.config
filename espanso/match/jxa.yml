@@ -16,6 +16,13 @@ matches:
   - replace: |
       const fileExists = Application("Finder").exists(Path(file_path));
     label: '🏗 Check File Existence'
+  - replace: |
+     function finderSelection () {
+      const selection = decodeURI(Application("Finder").selection()[0]?.url()).slice(7);
+      if (selection === "undefined") return ""; // no selection
+      return selection;
+     }
+    label: '🏗 Get Finder Selection'
   - replace: const discordReadyLinks = Application("Discord").frontmost();
     label: '🏗 Check whether App is frontmost'
   - replace: |
