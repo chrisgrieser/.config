@@ -136,7 +136,7 @@ if isIMacAtHome() then
 	biiweeklyTimer:start()
 end
 --------------------------------------------------------------------------------
-
+-- DARK MODE
 function toggleDarkMode ()
 	hs.osascript.applescript([[
 		tell application "Brave Browser"
@@ -201,7 +201,6 @@ function manualToggleDarkmode()
 	log ("🌒 Manual Toggle Darkmode ("..deviceName()..")", "./logs/some.log")
 end
 
-hotkey({}, "end", manualToggleDarkmode)
 
 -- `hammerspoon://toggle-darkmode` for toggling via Shortcuts
 hs.urlevent.bind("toggle-darkmode", function()
@@ -209,3 +208,4 @@ hs.urlevent.bind("toggle-darkmode", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
+hotkey({}, "end", manualToggleDarkmode)
