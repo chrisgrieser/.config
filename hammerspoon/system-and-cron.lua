@@ -131,8 +131,9 @@ dailyMorningTimer = hs.timer.doAt("06:30", "01d", function()
 end, true)
 
 function projectorScreensaverStop (eventType)
-	if not(eventType == hs.caffeinate.watcher.screensaverDidStop) or not(isProjector()) then return end
-	iMacDisplay:setBrightness(0)
+	if isProjector() and (eventType == hs.caffeinate.watcher.screensaverDidStop or eventType == hs.caffeinate.watcher.screensaverDidStart) then
+		iMacDisplay:setBrightness(0)
+	end
 end
 projectorScreensaverWatcher = hs.caffeinate.watcher.new(projectorScreensaverStop)
 
