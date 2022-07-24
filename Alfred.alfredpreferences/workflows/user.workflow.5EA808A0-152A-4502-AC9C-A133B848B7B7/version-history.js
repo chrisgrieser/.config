@@ -12,36 +12,39 @@ function run () {
 
 	const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
 
-	const filePathRegex = /(\/.*)\/(.*\.(\w+))$/;
+	const filePathRegex = /(\/.*)\/(.*\.\w+)$/;
 
 	//------------------------------------------------------------------------------
 
 	const selection = finderSelection();
 	if (!selection) return;
 
+	console.log(selection);
+
 	const isRegularFile = Boolean(selection.match(/\/.*\.\w+$/));
 	if (!isRegularFile) return;
 
 	const parentFolder = selection.replace(filePathRegex, "$1");
 	const fileName = selection.replace(filePathRegex, "$2");
-	const ext = selection.replace(filePathRegex, "$3");
-	const fileNameSave = fileName.replaceAll(".", "-");
+	console.log(fileName);
+
 	const fileIcon = { "type": "fileicon", "path": selection };
 
 	const isGitRepo = app.doShellScript(`cd "${parentFolder}" ; git rev-parse --git-dir || echo "not a git directory"`) === ".git";
 	if (!isGitRepo) return;
 
-	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad" --date=human "${selection}"`)
+	// const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad" --date=human "${fileName}"`)
+	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:%h "${fileName}"`)
 		.split("\r")
 		.map(logLine => {
 			const commitHash = logLine.split(";")[0];
 			const date = logLine.split(";")[1];
 
-			const fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${selection}"`);
-
+			// const fileContent = app.doShellScript(`git show "${commitHash}:./${fileName}"`);
+			// const fileContent = "bla";
 			return {
-				"title": fileContent,
-				"match": alfredMatcher (fileContent),
+				"title": date,
+				"match": alfredMatcher (date),
 				"subtitle": commitHash,
 				"icon": fileIcon,
 				"arg": commitHash,
