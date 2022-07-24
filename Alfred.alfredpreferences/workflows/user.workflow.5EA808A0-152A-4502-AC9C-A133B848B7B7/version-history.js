@@ -1,6 +1,7 @@
 #!/usr/bin/env osascript -l JavaScript
 
-function run (argv) {
+function run () {
+	ObjC.import("stdlib");
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
 
@@ -19,30 +20,29 @@ function run (argv) {
 		return JSON.stringify({ items: item });
 	}
 
-	const input = argv.join("");
-
 	//------------------------------------------------------------------------------
-
-	if (input) {
-		selection = finderSelection();
+	let fullPath;
+	try {
+		fullPath = $.getenv("input");
+	} catch (error) {
+		fullPath = finderSelection();
+		if (!fullPath) return alfredErrorDisplay("No selection");
 	}
-	const selection = finderSelection();
-	if (!selection) return alfredErrorDisplay("No selection");
 
-	const isRegularFile = selection.match(filePathRegex);
+	const isRegularFile = fullPath.match(filePathRegex);
 	if (!isRegularFile) return alfredErrorDisplay("Not a regular file");
 
-	const parentFolder = selection.replace(filePathRegex, "$1");
+	const parentFolder = fullPath.replace(filePathRegex, "$1");
 	const isGitRepo = app.doShellScript(`cd "${parentFolder}" ; git rev-parse --git-dir || echo "not a git directory"`).endsWith(".git");
 	if (!isGitRepo) return alfredErrorDisplay("Not a git directory");
 
-	const fileName = selection.replace(filePathRegex, "$2");
-	const ext = selection.replace(filePathRegex, "$3");
-	const fileIcon = { "type": "fileicon", "path": selection };
+	const fileName = fullPath.replace(filePathRegex, "$2");
+	const ext = fullPath.replace(filePathRegex, "$3");
+	const fileIcon = { "type": "fileicon", "path": fullPath };
 
 	let firstItem = true;
 
-	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad;%s;%an" --date=human "${selection}"`)
+	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad;%s;%an" --date=human "${fullPath}"`)
 		.split("\r")
 		.map(logLine => {
 			const commitHash = logLine.split(";")[0];
