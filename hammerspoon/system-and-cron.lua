@@ -12,6 +12,7 @@ function gitDotfileSync(arg)
 	else arg = {} end
 
 	hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
+		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode == 0 then
 			log ("✅ dotfiles sync ("..deviceName()..")", "./logs/sync.log")
 		else
@@ -23,6 +24,7 @@ end
 
 function gitVaultBackup()
 	hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
+		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode == 0 then
 			log ("🟪 vault sync ("..deviceName()..")", "./logs/sync.log")
 		else
@@ -132,4 +134,74 @@ if isIMacAtHome() then
 	sleepTimer:start()
 	sleepTimer2:start()
 	biiweeklyTimer:start()
+end
+--------------------------------------------------------------------------------
+
+function toggleDarkMode ()
+	hs.osascript.applescript([[
+		tell application "Brave Browser"
+			if application "Brave Browser" is not running then
+				launch
+				delay 3
+			end if
+			if ((count of window) is 0) then
+				open location "chrome://newtab/"
+				delay 0.2
+				set tabOpened to true
+			else
+				set tabOpened to false
+			end if
+		end tell
+
+		# toggle dark mode
+		tell application "System Events"
+			tell appearance preferences to set dark mode to not dark mode
+			keystroke "d" using {shift down, option down} -- Dark Reader global hotkey
+		end tell
+
+		# close tab again
+		if (tabOpened)
+			delay 0.1
+			tell application "Brave Browser" to close active tab of front window
+		end if
+
+		# Make Highlights.app get the same mode as the OS mode (if running)
+		tell application "System Events"
+			tell appearance preferences to set isDark to dark mode
+			if (isDark is false) then
+				set targetView to "Default"
+			else
+				set targetView to "Night"
+			end if
+
+			set highlightsRunning to ((name of processes) contains "Highlights")
+			if (highlightsRunning is true) then
+				tell process "Highlights"
+					set frontmost to true
+					click menu item targetView of menu of menu item "PDF Appearance" of menu "View" of menu bar 1
+				end tell
+			end if
+		end tell
+	]])
+	log ("🌒 Toggle Darkmode ("..deviceName()..")", "./logs/some.log")
+end
+
+
+function isDarkMode()
+	local _, isDark = hs.osascript.applescript('tell application "System Events" to return dark mode of appearance preferences')
+	return isDark
+end
+
+function setDarkmode (toDark)
+	local darkStr
+	if toDark then darkStr = "true"
+	else darkStr = "false" end
+	hs.osascript.applescript([[
+		tell application "System Events"
+			tell appearance preferences
+				if (dark mode is not ]]..darkStr..[[) then tell application id "com.runningwithcrayons.Alfred" to run trigger "toggle-dark-mode" in workflow "de.chris-grieser.dark-mode-toggle"
+			end tell
+		end tell
+	]])
+	log("🌒 Dark Mode: "..darkStr.." ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/some.log")
 end
