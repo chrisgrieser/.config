@@ -89,6 +89,10 @@ if isAtOffice() then screenWakeWatcher:start() end
 -- CRONJOBS AT HOME
 
 function sleepYouTube ()
+	-- abort on delayed run
+	local currentTimeHours = hs.timer.localTime() / 60 / 60
+	if currentTimeHours < 2.9 and currentTimeHours > 5.1 then return end
+
 	killIfRunning("YouTube")
 	hs.osascript.applescript([[
 		tell application "Brave Browser"
@@ -105,7 +109,7 @@ end
 sleepTimer = hs.timer.doAt("03:00", "01d", sleepYouTube, true)
 sleepTimer2 = hs.timer.doAt("05:00", "01d", sleepYouTube, true)
 
-biiweeklyTimer = hs.timer.doAt("05:00", "03d", function()
+biiweeklyTimer = hs.timer.doAt("02:00", "03d", function()
 	hs.osascript.applescript([[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
