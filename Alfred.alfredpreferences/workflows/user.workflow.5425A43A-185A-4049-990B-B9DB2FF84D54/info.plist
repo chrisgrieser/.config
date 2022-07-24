@@ -35,19 +35,6 @@
 		</array>
 		<key>26D32329-094D-4EE5-98BE-7D4B1C5BFA95</key>
 		<array/>
-		<key>3A8836DB-3455-405F-9E15-B2876FC9967D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E3E53E94-0FC1-4954-B5F8-257313FB7EA7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4DD2CA0C-DA1D-4C4C-B207-AC70E83B3C4F</key>
 		<array>
 			<dict>
@@ -192,19 +179,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>532ED943-AA0D-43A0-BBCF-3EBEA97FFD31</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>CF0FFFAF-3C89-45A9-8EEA-244171D413FE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3207C2A9-F28C-4B7F-89E9-525F8011B3AF</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -704,120 +678,6 @@ lineNo="$*"
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>79</integer>
-				<key>hotmod</key>
-				<integer>8650752</integer>
-				<key>hotstring</key>
-				<string>F18</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>md.obsidian</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>CF0FFFAF-3C89-45A9-8EEA-244171D413FE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "System Events"	keystroke "i" using {command down, option down}	delay 0.4	keystroke "c" using {command down, shift down}end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>3207C2A9-F28C-4B7F-89E9-525F8011B3AF</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>obsidian://advanced-uri?settingid=obsidian-style-settings</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>E3E53E94-0FC1-4954-B5F8-257313FB7EA7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>43</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>,</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>md.obsidian</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>3A8836DB-3455-405F-9E15-B2876FC9967D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -903,22 +763,6 @@ lineNo="$*"
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
-		<key>3207C2A9-F28C-4B7F-89E9-525F8011B3AF</key>
-		<dict>
-			<key>xpos</key>
-			<real>245</real>
-			<key>ypos</key>
-			<real>600</real>
-		</dict>
-		<key>3A8836DB-3455-405F-9E15-B2876FC9967D</key>
-		<dict>
-			<key>note</key>
-			<string>Open Style Settings</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>750</real>
-		</dict>
 		<key>440612A1-D74A-4799-A0D6-F88760AF14CF</key>
 		<dict>
 			<key>colorindex</key>
@@ -964,7 +808,7 @@ lineNo="$*"
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>380</real>
 		</dict>
 		<key>6C82BEC8-E24E-4C35-9066-32FE30D50429</key>
 		<dict>
@@ -993,7 +837,7 @@ lineNo="$*"
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>380</real>
 		</dict>
 		<key>8627A802-741F-4477-A445-AA3EA82ED4C8</key>
 		<dict>
@@ -1031,7 +875,7 @@ lineNo="$*"
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
-			<real>910</real>
+			<real>530</real>
 		</dict>
 		<key>B3464F95-B489-4113-82A7-9CCB3300B0E1</key>
 		<dict>
@@ -1051,21 +895,12 @@ lineNo="$*"
 			<key>ypos</key>
 			<real>240</real>
 		</dict>
-		<key>CF0FFFAF-3C89-45A9-8EEA-244171D413FE</key>
-		<dict>
-			<key>note</key>
-			<string>open Console</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>600</real>
-		</dict>
 		<key>D96BC2AD-EC81-4B13-B499-1B0FFC9EB952</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>910</real>
+			<real>530</real>
 		</dict>
 		<key>DDC3D252-6578-4A57-A511-7C45C64C2CA1</key>
 		<dict>
@@ -1085,13 +920,6 @@ lineNo="$*"
 			<key>ypos</key>
 			<real>250</real>
 		</dict>
-		<key>E3E53E94-0FC1-4954-B5F8-257313FB7EA7</key>
-		<dict>
-			<key>xpos</key>
-			<real>245</real>
-			<key>ypos</key>
-			<real>750</real>
-		</dict>
 		<key>F3EA6027-C734-4625-9ECD-2FE2DA83829F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1101,7 +929,7 @@ lineNo="$*"
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>910</real>
+			<real>530</real>
 		</dict>
 		<key>F50EE2DE-822A-4F52-915D-9312B6BD4582</key>
 		<dict>
