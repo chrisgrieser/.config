@@ -64,7 +64,7 @@ function run () {
 				"title": date + titleAppendix,
 				"match": fileContent.replace(/\r|[:,;.()/\\{}[\]\-+"']/g, " "),
 				"quicklookurl": tempPath,
-				"subtitle": `${fileSizeKb}Kb  ▪  ${commitMsg}  ▪  ${author}  ▪  ${commitHash}`,
+				"subtitle": `${fileSizeKb} Kb  ▪  ${commitMsg}  ▪  ${author}  ▪  ${commitHash}`,
 				"icon": fileIcon,
 				"arg": tempPath,
 			};
