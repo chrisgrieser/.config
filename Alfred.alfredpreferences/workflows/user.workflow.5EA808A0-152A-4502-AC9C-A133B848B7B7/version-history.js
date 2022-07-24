@@ -31,17 +31,22 @@ function run () {
 	const isGitRepo = app.doShellScript(`cd "${parentFolder}" ; git rev-parse --git-dir || echo "not a git directory"`) === ".git";
 	if (!isGitRepo) return;
 
-	const commitHashArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:%h "${selection}"`)
+	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad" --date=human "${selection}"`)
 		.split("\r")
-		.map(hash => {
+		.map(logLine => {
+			const commitHash = logLine.split(";")[0];
+			const date = logLine.split(";")[1];
+
+			const fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${selection}"`);
+
 			return {
-				"title": hash,
-				"match": alfredMatcher (hash),
-				"subtitle": hash,
+				"title": fileContent,
+				"match": alfredMatcher (fileContent),
+				"subtitle": commitHash,
 				"icon": fileIcon,
-				"arg": hash,
+				"arg": commitHash,
 			};
-		})
-	return JSON.stringify({ items: commitHashArr });
+		});
+	return JSON.stringify({ items: gitLogArr });
 }
 
