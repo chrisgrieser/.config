@@ -257,6 +257,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F3966E19-739B-4CD9-9ADE-6AFE837C3817</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2D16E8C6-DE6C-4485-A253-14235E4A1A94</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -400,10 +413,10 @@
 				<integer>2</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.brave.Browser.app.fmajbmdokmecmpllfhcamihghgoablgg</string>
 					<string>com.vivaldi.Vivaldi</string>
-					<string>org.chromium.Chromium</string>
 					<string>com.brave.Browser</string>
+					<string>org.chromium.Chromium</string>
+					<string>com.brave.Browser.app.fmajbmdokmecmpllfhcamihghgoablgg</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -559,40 +572,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>mouse</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🖱 Mouse Gestures</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>6B0C6024-DB7D-489C-84CA-118D4AD29879</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
+				<key>action</key>
+				<integer>0</integer>
 				<key>argument</key>
-				<string>chrome-extension://mjidkpedjlfnanainpdfnedkdlacidla/options.html</string>
-				<key>passthroughargument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>43</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>,</string>
+				<key>leftcursor</key>
 				<false/>
-				<key>variables</key>
-				<dict/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.brave.Browser</string>
+					<string>org.chromium.Chromium</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>6AD9D65A-5CD0-4DB2-860D-03EC5018186B</string>
+			<string>F3966E19-739B-4CD9-9ADE-6AFE837C3817</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -701,18 +712,18 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>redirects</string>
+				<string>mouse</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>⤵️ Redirects</string>
+				<string>🖱 Mouse Gestures</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>2B8D7DA4-2146-4F71-8597-E14FC9C4E21C</string>
+			<string>6B0C6024-DB7D-489C-84CA-118D4AD29879</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -720,7 +731,7 @@
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>chrome-extension://ocgpenflpmgnfapjedencafcfakcekcd/redirector.html</string>
+				<string>chrome-extension://mjidkpedjlfnanainpdfnedkdlacidla/options.html</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
@@ -729,7 +740,7 @@
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>C71C58FE-597F-47BA-BA2C-0CEEA6E173FD</string>
+			<string>6AD9D65A-5CD0-4DB2-860D-03EC5018186B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -791,6 +802,44 @@
 			<string>1F381AED-559E-4CD5-B1C5-E97FDDE86541</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>redirects</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>⤵️ Redirects</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>2B8D7DA4-2146-4F71-8597-E14FC9C4E21C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>chrome-extension://ocgpenflpmgnfapjedencafcfakcekcd/redirector.html</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>C71C58FE-597F-47BA-BA2C-0CEEA6E173FD</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -942,7 +991,7 @@
 			<key>xpos</key>
 			<real>585</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>675</real>
 		</dict>
 		<key>2D16E8C6-DE6C-4485-A253-14235E4A1A94</key>
 		<dict>
@@ -998,7 +1047,7 @@
 			<key>xpos</key>
 			<real>750</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>845</real>
 		</dict>
 		<key>6AD9D65A-5CD0-4DB2-860D-03EC5018186B</key>
 		<dict>
@@ -1007,7 +1056,7 @@
 			<key>xpos</key>
 			<real>750</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>565</real>
 		</dict>
 		<key>6B0C6024-DB7D-489C-84CA-118D4AD29879</key>
 		<dict>
@@ -1018,7 +1067,7 @@
 			<key>xpos</key>
 			<real>585</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>535</real>
 		</dict>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<dict>
@@ -1045,7 +1094,7 @@
 			<key>xpos</key>
 			<real>755</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>970</real>
 		</dict>
 		<key>89602BBE-3B63-40C2-9346-F6B2F1CFEF68</key>
 		<dict>
@@ -1076,7 +1125,7 @@
 			<key>xpos</key>
 			<real>585</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>940</real>
 		</dict>
 		<key>BE7EDFB7-052F-45E8-BC4B-5448613EE413</key>
 		<dict>
@@ -1103,7 +1152,7 @@
 			<key>xpos</key>
 			<real>750</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>705</real>
 		</dict>
 		<key>E3CB06C7-80F4-4569-9646-EC67EEEFB51C</key>
 		<dict>
@@ -1132,7 +1181,16 @@
 			<key>xpos</key>
 			<real>585</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>815</real>
+		</dict>
+		<key>F3966E19-739B-4CD9-9ADE-6AFE837C3817</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>585</real>
+			<key>ypos</key>
+			<real>405</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
