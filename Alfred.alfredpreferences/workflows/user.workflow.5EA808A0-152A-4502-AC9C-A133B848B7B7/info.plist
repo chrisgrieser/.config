@@ -262,6 +262,29 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F02DA72C-B6FC-41F0-874A-46A76906E65E</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy Hash</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F02DA72C-B6FC-41F0-874A-46A76906E65E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0696CF60-CCEE-4A13-B435-B3F0384C89C8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>F2940C32-987B-4532-89CA-BBD07A85A4C3</key>
 		<array>
@@ -784,6 +807,46 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>F02DA72C-B6FC-41F0-874A-46A76906E65E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>0696CF60-CCEE-4A13-B435-B3F0384C89C8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>availableviaurlhandler</key>
 				<false/>
 				<key>triggerid</key>
@@ -999,7 +1062,7 @@ subl --command toggle_side_bar</string>
 				<key>text</key>
 				<string></string>
 				<key>title</key>
-				<string>✅Download complete</string>
+				<string>✅ Download complete</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -1043,6 +1106,15 @@ subl --command toggle_side_bar</string>
 			<key>ypos</key>
 			<real>640</real>
 		</dict>
+		<key>0696CF60-CCEE-4A13-B435-B3F0384C89C8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>570</real>
+			<key>ypos</key>
+			<real>520</real>
+		</dict>
 		<key>07D214D7-7035-4125-88CE-4BEA2F46A4DA</key>
 		<dict>
 			<key>colorindex</key>
@@ -1057,7 +1129,7 @@ subl --command toggle_side_bar</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>710</real>
+			<real>755</real>
 			<key>ypos</key>
 			<real>710</real>
 		</dict>
@@ -1077,7 +1149,7 @@ subl --command toggle_side_bar</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>410</real>
+			<real>425</real>
 			<key>ypos</key>
 			<real>395</real>
 		</dict>
@@ -1155,7 +1227,7 @@ subl --command toggle_side_bar</string>
 			<key>note</key>
 			<string>fd search</string>
 			<key>xpos</key>
-			<real>785</real>
+			<real>830</real>
 			<key>ypos</key>
 			<real>680</real>
 		</dict>
@@ -1213,7 +1285,7 @@ subl --command toggle_side_bar</string>
 			<key>note</key>
 			<string>open in Sublime</string>
 			<key>xpos</key>
-			<real>780</real>
+			<real>825</real>
 			<key>ypos</key>
 			<real>540</real>
 		</dict>
@@ -1231,7 +1303,7 @@ subl --command toggle_side_bar</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>960</real>
+			<real>1005</real>
 			<key>ypos</key>
 			<real>680</real>
 		</dict>
@@ -1283,6 +1355,15 @@ subl --command toggle_side_bar</string>
 			<real>780</real>
 			<key>ypos</key>
 			<real>150</real>
+		</dict>
+		<key>F02DA72C-B6FC-41F0-874A-46A76906E65E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>430</real>
+			<key>ypos</key>
+			<real>520</real>
 		</dict>
 		<key>F2940C32-987B-4532-89CA-BBD07A85A4C3</key>
 		<dict>

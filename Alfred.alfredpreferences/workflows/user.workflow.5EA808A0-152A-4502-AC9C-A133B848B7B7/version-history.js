@@ -20,6 +20,15 @@ function run () {
 		return JSON.stringify({ items: item });
 	}
 
+	ObjC.import("Foundation");
+	function readFile (path, encoding) {
+		if (!encoding) encoding = $.NSUTF8StringEncoding;
+		const fm = $.NSFileManager.defaultManager;
+		const data = fm.contentsAtPath(path);
+		const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
+		return ObjC.unwrap(str);
+	}
+
 	//------------------------------------------------------------------------------
 	let fullPath;
 	try {
@@ -47,7 +56,7 @@ function run () {
 		.map(logLine => {
 			const commitHash = logLine.split(";")[0];
 			const date = logLine.split(";")[1];
-			const safeDate = date.replaceAll(" ", "-");
+			const safeDate = date.replace(/[/: ]/g, "-");
 			const commitMsg = logLine.split(";")[2];
 			const author = logLine.split(";")[3];
 
@@ -55,9 +64,12 @@ function run () {
 			// dont write file if it already exists, to speed up repeated searches
 			const tempPath = `/tmp/${safeDate}_${commitHash}.${ext}`;
 			let fileContent;
-			if (!fileExists(tempPath)) {
+			if (fileExists(tempPath)) {
+				fileContent = readFile(tempPath);
+			} else {
 				fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" | tee "${tempPath}"`);
 			}
+			if (!fileContent) fileContent = "";
 			const fileSizeKb = (fileContent.length / 1024).toFixed(2);
 
 			let titleAppendix = "";
@@ -70,10 +82,13 @@ function run () {
 				"title": date + titleAppendix,
 				"match": fileContent.replace(/\r|[:,;.()/\\{}[\]\-_+"']/g, " ") + ` ${author} ${commitMsg}`,
 				"quicklookurl": tempPath,
-				"subtitle": `${fileSizeKb} Kb  ▪  ${author}  ▪  ${commitMsg}  ▪  ${commitHash}`,
-				"mods": {
-					"alt": {"arg": commitHash },
-				},
+				"subtitle": `${fileSizeKb} Kb  ▪  ${author}  ▪  ${commitMsg}`,
+				// "mods": {
+				// 	"alt": {
+				// 		"arg": commitHash,
+				// 		"subtitle": `Hash: ${commitHash} (⌥: Copy)`
+				// 	},
+				// },
 				"icon": fileIcon,
 				"arg": tempPath,
 			};
