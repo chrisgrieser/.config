@@ -48,6 +48,7 @@ function setCovidBar()
 	local national_7D_incidence = math.floor(nationalNumbers.weekIncidence)
 	local nationalR = nationalNumbers.r.rValue7Days.value
 	covidBar:setTitle("🦠 "..national_7D_incidence.." ("..nationalR..")")
+	covidBar:setClickCallback(function ()hs.urlevent.openURL("https://data.lageso.de/lageso/corona/corona.html#start") end)
 
 	local _, stateDataJSON = hs.http.get("https://api.corona-zahlen.org/states/" .. covidLocationCode, nil)
 	if not (stateDataJSON) then

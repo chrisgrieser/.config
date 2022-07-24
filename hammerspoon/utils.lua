@@ -34,27 +34,8 @@ function isAtOffice()
 	return (screenOne or screenTwo)
 end
 
-function isDarkMode()
-	local _, isDark = hs.osascript.applescript('tell application "System Events" to return dark mode of appearance preferences')
-	return isDark
-end
-
-function setDarkmode (toDark)
-	local darkStr
-	if toDark then darkStr = "true"
-	else darkStr = "false" end
-	hs.osascript.applescript([[
-		tell application "System Events"
-			tell appearance preferences
-				if (dark mode is not ]]..darkStr..[[) then tell application id "com.runningwithcrayons.Alfred" to run trigger "toggle-dark-mode" in workflow "de.chris-grieser.dark-mode-toggle"
-			end tell
-		end tell
-	]])
-	log("🌒 Dark Mode: "..darkStr.." ("..deviceName()..")", "$HOME/dotfiles/Cron Jobs/some.log")
-end
-
 function notify (text)
-	text = (trim(text)):gsub("\n", " –– ")
+	text = (trim(text))
 	hs.notify.new({title="Hammerspoon", informativeText=text}):send()
 	print("notify: "..text) -- for the console
 end
@@ -64,7 +45,7 @@ function alert (text)
 end
 
 function log (text, location)
-	text = (trim(text)):gsub("\n", " –– ")
+	text = (trim(text))
 	hs.execute('echo "$(date "+%Y-%m-%d %H:%M")" "'..text..'" >> "'..location..'"')
 	print ("log: "..text) -- for the console
 end

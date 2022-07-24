@@ -166,7 +166,7 @@ tell application "Brave Browser" to close active tab of front window</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>echo "$(dddate '+%Y-%m-%d %H:%M') 🌒 Dark Mode: manual toggle" &gt;&gt; "$HOME/dotfiles/hammerspoon/logs/some.log"</string>
+				<string>echo "$(date '+%Y-%m-%d %H:%M') 🌒 Dark Mode: manual toggle" &gt;&gt; "$HOME/dotfiles/hammerspoon/logs/some.log"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
