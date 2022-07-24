@@ -34,9 +34,9 @@
 		"stylelint": {
 			"filter_errors": "warning: ",
 		},
-		// "yamllint": {
-		// 	"args": ["--config-file", "/.config/yamllint/config/.yamllint.yaml"]
-		// },
+		"yamllint": {
+			"args": ["--config-file", "/.config/yamllint/config/.yamllint.yaml"]
+		},
 		"eslint": {
 			// "filter_errors": "warning: ",
 		},

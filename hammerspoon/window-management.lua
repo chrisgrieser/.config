@@ -534,9 +534,9 @@ wf_sublime:subscribe(wf.windowCreated, function ()
 	if currentWindow:title():match("sublime%-settings$") then
 		moveAndResize("maximized")
 	elseif isAtOffice() then
-		runDelayed(0.1, function () moveAndResize("maximized") end)
+		runDelayed(0.01, function () moveAndResize("maximized") end)
 	else
 		hs.application("Twitterrific"):mainWindow():raise()
-		runDelayed(0.1, function () moveAndResize("pseudo-maximized") end)
+		runDelayed(0.01, function () moveAndResize("pseudo-maximized") end)
 	end
 end)

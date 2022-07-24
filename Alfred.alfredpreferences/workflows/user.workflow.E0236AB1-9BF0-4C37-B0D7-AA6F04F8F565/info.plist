@@ -34,19 +34,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>1949AD43-9714-415D-A3EA-6D5BBEDEE319</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A128FEAD-70FC-48A6-B61E-6BC1790D6497</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>2E4AAD86-345B-497C-89A3-36585534A83C</key>
 		<array>
 			<dict>
@@ -667,27 +654,6 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>↓</string>
-				<key>keycode</key>
-				<integer>125</integer>
-				<key>keymod</key>
-				<integer>12189696</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>A128FEAD-70FC-48A6-B61E-6BC1790D6497</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -719,41 +685,6 @@ end tell</string>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>613721AC-5C03-421A-A4B5-63C252B4DDB7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>3</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>32</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>U</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.hnc.Discord</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>1949AD43-9714-415D-A3EA-6D5BBEDEE319</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -936,17 +867,6 @@ end tell</string>
 			<key>ypos</key>
 			<real>745</real>
 		</dict>
-		<key>1949AD43-9714-415D-A3EA-6D5BBEDEE319</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>Next Unread</string>
-			<key>xpos</key>
-			<real>480</real>
-			<key>ypos</key>
-			<real>610</real>
-		</dict>
 		<key>297933F2-17E5-496D-B5E6-0906D07389B1</key>
 		<dict>
 			<key>colorindex</key>
@@ -1058,15 +978,6 @@ end tell</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>870</real>
-		</dict>
-		<key>A128FEAD-70FC-48A6-B61E-6BC1790D6497</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>670</real>
-			<key>ypos</key>
-			<real>610</real>
 		</dict>
 		<key>A2EF8883-F34D-4551-AD50-9FD1398F1F71</key>
 		<dict>
