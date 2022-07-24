@@ -531,12 +531,10 @@ wf_sublime = wf.new("Sublime Text")
 wf_sublime:subscribe(wf.windowCreated, function ()
 	local currentWindow = hs.window.focusedWindow()
 
-	if currentWindow:title():match("sublime%-settings$") then
+	if currentWindow:title():match("sublime%-settings$") or isAtOffice() then
 		moveAndResize("maximized")
-	elseif isAtOffice() then
-		runDelayed(0.01, function () moveAndResize("maximized") end)
 	else
+		moveAndResize("pseudo-maximized")
 		hs.application("Twitterrific"):mainWindow():raise()
-		runDelayed(0.01, function () moveAndResize("pseudo-maximized") end)
 	end
 end)
