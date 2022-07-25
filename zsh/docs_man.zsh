@@ -6,6 +6,8 @@ function cc () {
 	echo "$CHEAT_CODE_ONLY" | pbcopy
 }
 
+# first arg: command
+# second arg: search term
 function man () {
 	which alacritty &> /dev/null
 	if [[ $? == 1 ]] ; then
@@ -27,7 +29,7 @@ function man () {
 	(alacritty \
 		--option=window.decorations=full \
 		--title="man $1" \
-		--command man "$1" &)
+		--command man "$1" -P "/usr/bin/less -is --pattern=$2" &)
 }
 
 # man pages for zsh-builtins https://stackoverflow.com/a/35456287

@@ -62,15 +62,16 @@ function run (argv) {
 			if (!fileExists(tempPath)) app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > "${tempPath}"`);
 		});
 
-	const ripgrepMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --sort=created --ignore-case "${query}"`)
+	const ripgrepMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --sort=created --files-with-matches --ignore-case "${query}"`)
 		.split("\r")
-		.map(line => {
-			const commitHash = line.replace(/(\w+)\.\w+/, "$1");
+		.map(file => {
+			const commitHash = file.replace(/(\w+)\.\w+/, "$1");
+			const match = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 "${query}" "${file}"`);
 			const date = app.doShellScript(`cd "${parentFolder}" ; git show -s --format=%ad --date=human ${commitHash}`);
 
 			return {
 				"title": date,
-				"subtitle": commitHash,
+				"subtitle": match,
 				"mods": {
 					"alt": {
 						"arg": commitHash,
