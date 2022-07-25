@@ -48,42 +48,36 @@ function run (argv) {
 	if (!isGitRepo) return alfredErrorDisplay("Not a git directory");
 
 	const fileName = fullPath.replace(filePathRegex, "$2");
+	const safeFileName = fileName.replace(/[/: .]/g, "-");
 	const ext = fullPath.replace(filePathRegex, "$3");
 	const fileIcon = { "type": "fileicon", "path": fullPath };
 
 	let firstItem = true;
 
-	const gitLogArr = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad;%s;%an" --date=human "${fullPath}"`)
+	app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad" --date=human "${fullPath}"`)
 		.split("\r")
-		.map(logLine => {
+		.forEach(logLine => {
 			const commitHash = logLine.split(";")[0];
 			const date = logLine.split(";")[1];
 			const safeDate = date.replace(/[/: ]/g, "-");
-			const commitMsg = logLine.split(";")[2];
-			const author = logLine.split(";")[3];
 
 			// write the file on disk for quicklook and opening
 			// dont write file if it already exists, to speed up repeated searches
-			const tempPath = `/tmp/${safeDate}_${commitHash}.${ext}`;
+			const tempPath = `/tmp/${safeFileName}/${safeDate}_${commitHash}.${ext}`;
+			if (!fileExists(tempPath)) app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > "${tempPath}"`);
+		});
 
-			let fileContent;
-			if (fileExists(tempPath)) fileContent = readFile(tempPath);
-			else fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" | tee "${tempPath}"`);
-			if (!fileContent) fileContent = "";r
-
-			const fileSizeKb = (fileContent.length / 1024).toFixed(2);
-
-			let titleAppendix = "";
-			if (firstItem) {
-				titleAppendix = "  –  " + fileName;
-				firstItem = false;
-			}
+	const ripgrepMatches = app.doShellScript(`cd "/tmp/${safeFileName}/" ; ripgrep --hidden --files-with-matches "${query}"`)
+		.split("\r")
+		.map(line => {
+			const commitHash = line.replace(/_(\w+)(?=\.)/, "$1");
+			const date = line.replace(/(.*)(?=_)/, "$1");
+			// const safeDate = date.replace(/[/: ]/g, "-");
+			// const commitMsg = line.split(";")[2];
+			// const author = line.split(";")[3];
 
 			return {
-				"title": date + titleAppendix,
-				"match": fileContent.replace(/\r|[:,;.()/\\{}[\]\-_+"']/g, " ") + ` ${author} ${commitMsg}`,
-				"quicklookurl": tempPath,
-				"subtitle": `${fileSizeKb} Kb  ▪  ${author}  ▪  ${commitMsg}`,
+				"title": date,
 				"mods": {
 					"alt": {
 						"arg": commitHash,
@@ -91,8 +85,8 @@ function run (argv) {
 					},
 				},
 				"icon": fileIcon,
-				"arg": tempPath,
+				"arg": commitHash,
 			};
 		});
-	return JSON.stringify({ items: gitLogArr });
+	return JSON.stringify({ items: ripgrepMatches });
 }
