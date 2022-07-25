@@ -57,6 +57,8 @@ function run (argv) {
 			}
 		});
 
+	let firstItem = true;
+
 	const ripgrepMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --sort=accessed --files-with-matches --ignore-case "${query}"`)
 		.split("\r")
 		.map(file => {
@@ -68,17 +70,23 @@ function run (argv) {
 			let match = "";
 			let line = "";
 			if (query) {
-				const firstMatch = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 --line-number "${query}" "${file}"`)
-					.trim();
-				match = firstMatch.split(":")[1];
-				line = ";" + firstMatch.split(":")[0];
+				const firstMatch = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 --line-number "${query}" "${file}"`);
+				match = firstMatch.split(":")[1].trim();
+				line = ":" + firstMatch.split(":")[0];
 			}
+
+			let appendix = "";
+			if (firstItem) {
+				appendix = "  ▪︎  " + fileName;
+				firstItem = false;
+			}
+
 			return {
-				"title": date,
+				"title": date + appendix,
 				"subtitle": match,
 				"mods": {
 					"cmd": {
-						"subtitle": commitMsg,
+						"subtitle": `${commitMsg}  ▪︎  ${author}`,
 						"valid": false,
 					},
 					"alt": {
@@ -87,7 +95,7 @@ function run (argv) {
 					},
 				},
 				"icon": fileIcon,
-				"arg": `${tempDir} + line`,
+				"arg": `${tempDir}/${file}${line}`,
 			};
 		});
 	return JSON.stringify({ items: ripgrepMatches });

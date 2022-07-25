@@ -156,10 +156,11 @@ nnoremap <leader>[ mzA[<Esc>`z
 nnoremap <leader>{ mzA{<Esc>`z
 nnoremap <leader>} mzA}<Esc>`z
 nnoremap <leader>} mzA}<Esc>`z
-nnoremap <leader>t ysiw}i$<Esc>l
+
+" append space
 nnoremap ! a <Esc>hh
 
-" Remove last character ${from} ${line}
+" Remove last character from line
 nnoremap X mz$"_x`z
 
 """"""""""""""""""""""
@@ -197,6 +198,9 @@ nnoremap <leader>C lF.d/[.\s]<CR>
 
 " CSS: Important Switcher
 noremap <leader>i :ImportantSwitcher<CR>
+
+" JS: make template string variable
+nnoremap <leader>t ysiw}i$<Esc>l
 
 """"""""""""""""""""""
 " < Text Objects
