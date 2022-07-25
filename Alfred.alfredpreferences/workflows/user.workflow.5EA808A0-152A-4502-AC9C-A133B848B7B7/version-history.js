@@ -90,13 +90,14 @@ function run (argv) {
 				"title": date + appendix,
 				"subtitle": match,
 				"mods": {
-					"cmd": {
-						"subtitle": `${commitMsg}  ▪︎  ${author}`,
-						"valid": false,
-					},
+					"cmd": { "arg": `${tempDir}/${file};${fullPath}` },
 					"alt": {
 						"arg": commitHash,
 						"subtitle": `${commitHash} (⌥: Copy)`
+					},
+					"ctrl": {
+						"subtitle": `${commitMsg}  ▪︎  ${author}`,
+						"valid": false
 					},
 				},
 				"icon": fileIcon,
