@@ -44,6 +44,7 @@ function run (argv) {
 	const fileIcon = { "type": "fileicon", "path": fullPath };
 	const tempDir = `/tmp/${safeFileName}`;
 
+	//------------------------------------------------------------------------------
 
 	// write versions into temporary directory
 	app.doShellScript(`mkdir -p ${tempDir}`);
@@ -61,7 +62,7 @@ function run (argv) {
 	let firstItem = true;
 
 	// search versions with ripgrep & display git commit info for matched versions
-	const ripgrepMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --sort=accessed --files-with-matches --ignore-case "${query}"`)
+	const ripgrepMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --sort=accessed --files-with-matches --smart-case "${query}"`)
 		.split("\r")
 		.map(file => {
 			const commitHash = file.replace(/(\w+)\.\w+/, "$1");
@@ -69,17 +70,18 @@ function run (argv) {
 			const date = logline.split(";")[0];
 			const commitMsg = logline.split(";")[1];
 			const author = logline.split(";")[2];
+			const filePath =`${tempDir}/${file}`;
 
 			// if there is a query, display match instead of commit msg & author
 			// also add line count for opening the file
 			let subtitle = `${commitMsg}  ▪︎  ${author}`;
-			let line = "";
+			let line = "0";
 			if (query) {
-				const firstMatch = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 --line-number "${query}" "${file}"`);
+				const firstMatch = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; rg --smart-case --max-count=1 --line-number "${query}" "${filePath}"`);
 				const tempArr = firstMatch.split(":");
 				tempArr.shift();
 				subtitle = tempArr.join("").trim();
-				line = ":" + firstMatch.split(":")[0];
+				line = firstMatch.split(":")[0];
 			}
 
 			let appendix = "";
@@ -91,15 +93,16 @@ function run (argv) {
 			return {
 				"title": date + appendix,
 				"subtitle": subtitle,
+				"quicklookurl": filePath,
 				"mods": {
-					"cmd": { "arg": `${tempDir}/${file};${fullPath}` },
+					"cmd": { "arg": `${filePath};${fullPath}` },
 					"alt": {
 						"arg": commitHash,
 						"subtitle": `${commitHash}    (⌥: Copy)`
 					},
 				},
 				"icon": fileIcon,
-				"arg": `${tempDir}/${file}${line}`,
+				"arg": `${filePath}:${line}`,
 			};
 		});
 	return JSON.stringify({ items: ripgrepMatches });
