@@ -20,6 +20,7 @@ echo "Brewfile and NPM-File dumped at \"$BREWDUMP_PATH\""
 
 # rsync function
 function bkp () {
+	echo "-------------------------------------------"
 	echo "⏺ starting: $1"
 	rsync --archive --progress --delete -h --exclude=".Trash/*" --exclude="*/.Trash/*" "$1" "$2"
 	echo "-------------------------------------------"
@@ -38,7 +39,11 @@ bkp ~'/Video/' ./Homefolder/Video
 bkp ~'/RomComs/' ./Homefolder/RomComs
 bkp ~'/Library/Mobile Documents/com~apple~CloudDocs/' ./iCloud-Folder
 bkp ~'/dotfiles/' ./dotfiles
-cp -vr ~'/Library/Application Support/Alfred/Workflow Data/com.vdesabou.spotify.mini.player/' ./Spotify-Mini-Player
+
+# for whatever reason, using rsync on that directory is slow and often leads rsync to get stuck
+echo "⏺ Spotify Mini Player"
+[[ -e "./Spotify-Mini-Player" ]] && rm -r "./Spotify-Mini-Player"
+cp -v -R -f ~'/Library/Application Support/Alfred/Workflow Data/com.vdesabou.spotify.mini.player/' ./Spotify-Mini-Player
 # =========================
 
 # Log (on Mac)

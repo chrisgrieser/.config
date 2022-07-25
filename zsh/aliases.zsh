@@ -28,7 +28,6 @@ alias ls='ls -G'
 alias rm='rm -i'
 alias mv='mv -i'
 alias ln='ln -i'
-alias cp='cp -i'
 
 # defaults
 alias which='which -a'
