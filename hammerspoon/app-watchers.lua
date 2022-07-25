@@ -99,3 +99,15 @@ end
 draftsWatcher3 = aw.new(draftsLaunchWake)
 draftsWatcher3:start()
 
+
+-- MacPass: properly show
+function macPassActivate(appName, eventType, appObject)
+	if not(appName == "MacPass") or not(eventType == aw.launched) then return end
+
+	runDelayed(0.3, function ()
+		appObject:activate()
+	end)
+end
+macPassWatcher = aw.new(macPassActivate)
+macPassWatcher:start()
+
