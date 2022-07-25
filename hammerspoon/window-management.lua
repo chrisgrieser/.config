@@ -40,7 +40,6 @@ function toggleDraftsSidebar (draftsWin)
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
 		if (drafts_w / screen_w > 0.6) then
-			-- using URI scheme since they are more reliable than the menu item
 			hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 		else
 			hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=hide-sidebar")
@@ -123,7 +122,7 @@ function resizingWorkaround(win, pos)
 	-- replaces `win:moveToUnit(pos)`
 
 	win:moveToUnit(pos)
-	-- has to repeat due to bug for some apps... :/
+	-- has to repeat due to bug for some apps... >:(
 	hs.timer.delayed.new(0.3, function () win:moveToUnit(pos) end):start()
 end
 
