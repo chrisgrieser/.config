@@ -34,14 +34,13 @@ function gitVaultBackup()
 	end):start()
 end
 
---------------------------------------------------------------------------------
--- TRIGGERS
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
 	gitDotfileSync()
 	if isIMacAtHome() then gitVaultBackup() end
 end)
 repoSyncTimer:start()
+--------------------------------------------------------------------------------
 
 function screenSleep (eventType)
 	if not(eventType == hs.caffeinate.watcher.screensDidSleep or eventType == hs.caffeinate.watcher.screensDidLock) then return end
