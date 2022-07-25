@@ -61,22 +61,24 @@ function run (argv) {
 		.split("\r")
 		.map(file => {
 			const commitHash = file.replace(/(\w+)\.\w+/, "$1");
-			const logline = app.doShellScript(`cd "${parentFolder}" ; git show -s --format="%ad;%s;%an" --date=human ${commitHash}`);
+			const logline = app.doShellScript(`cd "${parentFolder}" ; git show -s --format="%ad;%s" --date=human ${commitHash}`);
 			const date = logline.split(";")[0];
 			const commitMsg = logline.split(";")[1];
-			const author = logline.split(";")[2];
 
 			let match = "";
+			let line = "";
 			if (query) {
-				match = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 "${query}" "${file}"`)
+				const firstMatch = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 --line-number "${query}" "${file}"`)
 					.trim();
+				match = firstMatch.split(":")[1];
+				line = ";" + firstMatch.split(":")[0];
 			}
 			return {
 				"title": date,
 				"subtitle": match,
 				"mods": {
 					"cmd": {
-						"subtitle": `${author}  ▪︎  ${commitMsg}`,
+						"subtitle": commitMsg,
 						"valid": false,
 					},
 					"alt": {
@@ -85,7 +87,7 @@ function run (argv) {
 					},
 				},
 				"icon": fileIcon,
-				"arg": commitHash,
+				"arg": `${tempDir} + line`,
 			};
 		});
 	return JSON.stringify({ items: ripgrepMatches });

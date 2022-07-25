@@ -156,9 +156,10 @@ nnoremap <leader>[ mzA[<Esc>`z
 nnoremap <leader>{ mzA{<Esc>`z
 nnoremap <leader>} mzA}<Esc>`z
 nnoremap <leader>} mzA}<Esc>`z
+nnoremap <leader>t ysiw}i$<Esc>l
 nnoremap ! a <Esc>hh
 
-" Remove last character from line
+" Remove last character ${from} ${line}
 nnoremap X mz$"_x`z
 
 """"""""""""""""""""""
