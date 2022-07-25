@@ -70,13 +70,15 @@ function run (argv) {
 			const commitMsg = logline.split(";")[1];
 			const author = logline.split(";")[2];
 
-			let match = "";
+			// if there is a query, display match instead of commit msg & author
+			// also add line count for opening the file
+			let subtitle = `${commitMsg}  ▪︎  ${author}`;
 			let line = "";
 			if (query) {
 				const firstMatch = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 --line-number "${query}" "${file}"`);
 				const tempArr = firstMatch.split(":");
 				tempArr.shift();
-				match = tempArr.join("").trim();
+				subtitle = tempArr.join("").trim();
 				line = ":" + firstMatch.split(":")[0];
 			}
 
@@ -88,16 +90,12 @@ function run (argv) {
 
 			return {
 				"title": date + appendix,
-				"subtitle": match,
+				"subtitle": subtitle,
 				"mods": {
 					"cmd": { "arg": `${tempDir}/${file};${fullPath}` },
 					"alt": {
 						"arg": commitHash,
-						"subtitle": `${commitHash} (⌥: Copy)`
-					},
-					"ctrl": {
-						"subtitle": `${commitMsg}  ▪︎  ${author}`,
-						"valid": false
+						"subtitle": `${commitHash}    (⌥: Copy)`
 					},
 				},
 				"icon": fileIcon,
