@@ -389,8 +389,8 @@ rules:
             name: LEADER_ACTIVE
             value: true
         to:
-          # for some reason open -a sometimes puts MacPass into the background :/
-          - shell_command: "osascript -e 'tell application \"MacPass\"\nactivate\ndelay 0.3\nactivate\nend tell'"
+          # for some reason opening once sometimes puts MacPass in the bg
+          - shell_command: 'open -a "MacPass" ; sleep 0.3 ; open -a "MacPass"'
           - set_variable:
               name: LEADER_ACTIVE
               value: false
