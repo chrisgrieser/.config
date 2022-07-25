@@ -51,8 +51,9 @@ function run (argv) {
 	const safeFileName = fileName.replace(/[/: .]/g, "-");
 	const ext = fullPath.replace(filePathRegex, "$3");
 	const fileIcon = { "type": "fileicon", "path": fullPath };
+	const tempDir = `/tmp/${safeFileName}`;
 
-	let firstItem = true;
+	app.doShellScript(`mkdir -p ${tempDir}`);
 
 	app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad" --date=human "${fullPath}"`)
 		.split("\r")
@@ -63,21 +64,22 @@ function run (argv) {
 
 			// write the file on disk for quicklook and opening
 			// dont write file if it already exists, to speed up repeated searches
-			const tempPath = `/tmp/${safeFileName}/${safeDate}_${commitHash}.${ext}`;
+			const tempPath = `${tempDir}/${safeDate}_${commitHash}.${ext}`;
 			if (!fileExists(tempPath)) app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > "${tempPath}"`);
 		});
 
-	const ripgrepMatches = app.doShellScript(`cd "/tmp/${safeFileName}/" ; ripgrep --hidden --files-with-matches "${query}"`)
+	const ripgrepMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --hidden --files-with-matches "${query}"`)
 		.split("\r")
 		.map(line => {
-			const commitHash = line.replace(/_(\w+)(?=\.)/, "$1");
-			const date = line.replace(/(.*)(?=_)/, "$1");
+			const commitHash = line.replace(/.*_(\w+)\.\w+/, "$1");
+			const date = line.replace(/(.*)_.*/, "$1");
 			// const safeDate = date.replace(/[/: ]/g, "-");
 			// const commitMsg = line.split(";")[2];
 			// const author = line.split(";")[3];
 
 			return {
 				"title": date,
+				"subtitle": commitHash,
 				"mods": {
 					"alt": {
 						"arg": commitHash,
