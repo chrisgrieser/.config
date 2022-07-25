@@ -7,7 +7,7 @@ matches:
   - trigger: "!hr"
     replace: "//------------------------------------------------------------------------------"
   - trigger: ".rr"
-    replace: ".replace(/.$|$/gm, \"\");"
+    replace: ".replace(/$|$/g, \"\");"
   - regex: " ?!!"  # so this works whether prepended with space or not
     replace: " {\n"
     label: 🏝 Quicker Block
