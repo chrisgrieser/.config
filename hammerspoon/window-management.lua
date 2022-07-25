@@ -50,9 +50,18 @@ end
 
 function toggleHighlightsSidebar (highlightsWin)
 	runDelayed(0.3, function ()
-		local drafts_w = highlightsWin:frame().w
+		local highlights_w = highlightsWin:frame().w
 		local screen_w = highlightsWin:screen():frame().w
-		if (drafts_w / screen_w > 0.6) then
+		if (highlights_w / screen_w > 0.6) then
+			hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
+		else
+			hs.application("Highlights"):selectMenuItem({"View", "Hide Sidebar"})
+		end
+	end)
+	runDelayed(0.5, function ()
+		local highlights_w = highlightsWin:frame().w
+		local screen_w = highlightsWin:screen():frame().w
+		if (highlights_w / screen_w > 0.6) then
 			hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"})
 		else
 			hs.application("Highlights"):selectMenuItem({"View", "Hide Sidebar"})
@@ -162,8 +171,7 @@ function homeModeLayout ()
 	killIfRunning("YouTube")
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
-	closeFinderWindows()
-	closer()
+	privateClosers()
 
 	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
 	local homeLayout = {
