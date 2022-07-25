@@ -1,6 +1,6 @@
 #!/usr/bin/env osascript -l JavaScript
 
-function run () {
+function run (argv) {
 	ObjC.import("stdlib");
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
@@ -30,6 +30,8 @@ function run () {
 	}
 
 	//------------------------------------------------------------------------------
+	const query = argv.join("");
+
 	let fullPath;
 	try {
 		fullPath = $.getenv("input");
@@ -67,7 +69,7 @@ function run () {
 			let fileContent;
 			if (fileExists(tempPath)) fileContent = readFile(tempPath);
 			else fileContent = app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" | tee "${tempPath}"`);
-			if (!fileContent) fileContent = "";
+			if (!fileContent) fileContent = "";r
 
 			const fileSizeKb = (fileContent.length / 1024).toFixed(2);
 
