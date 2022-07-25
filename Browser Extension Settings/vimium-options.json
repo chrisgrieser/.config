@@ -15,7 +15,7 @@
     },
     {
       "pattern": "https?://www.google.*/search*",
-      "passKeys": "jk"
+      "passKeys": "j\\ k"
     },
     {
       "pattern": "https?://github.com/*",
@@ -37,7 +37,7 @@
   "filterLinkHints": false,
   "waitForEnterForFilteredHints": false,
   "hideHud": false,
-  "keyMappings": "\" Closing Tabs\nmap wq closeTabsOnLeft\nmap we closeTabsOnRight\nmap wv moveTabToNewWindow\nmap ww closeOtherTabs\nmap u removeTab\nmap U restoreTab\n\" W = close window\nmap W removeTab count=19\n\n\" Scrolling Fast\nmap J scrollDown count=3\nmap K scrollUp count=3\nmap gl scrollRight\nmap gh scrollLeft\n\n\" History\nmap h goBack\nmap l goForward\n\n\" Reload\nmap R reload hard\n\n\" Pages (not history)\nmap H goPrevious\nmap L goNext\n \n\" Tabs\nmap t Vomnibar.activateTabSelection\nmap b previousTab\nmap e nextTab\nmap < moveTabLeft\nmap > moveTabRight\nmap 1 firstTab\nmap 9 lastTab\n\n\" Link Mode\nmap <c-f> LinkHints.activateModeWithQueue\nmap sf LinkHints.activateModeToDownloadLink\n\n\" New Tabs\nmap gn createTab https://news.google.com/home?hl=de&gl=DE&ceid=DE:de\nmap wn createTab window\n\n\" mimic American keyboard layout\nmap - enterFindMode\n\n\" Global Marks\n\" https://github.com/philc/vimium/wiki/Tips-and-Tricks#swapping-global-and-local-marks\nmap ä Marks.activateGotoMode swap\nmap m Marks.activateCreateMode swap\n\n\" Misc\nmap M toggleMuteTab\nmap a passNextKey\n\n\" unmap unneeded stuff\nunmap d\nunmap B\nunmap T\nunmap `\nunmap <c-e>\nunmap <c-y>\nunmap /\nunmap ^\nunmap >>\nunmap <<\nunmap <a-m>\nunmap <a-p>\nunmap X\nunmap g0\nunmap g$\nunmap gE\nunmap [[\nunmap ]]\nunmap <a-f>",
+  "keyMappings": "\" Closing Tabs\nmap wq closeTabsOnLeft\nmap we closeTabsOnRight\nmap wv moveTabToNewWindow\nmap ww closeOtherTabs\nmap u restoreTab\nmap U restoreTab\nmap W removeTab count=19\n\n\" Scrolling Fast\nmap J scrollDown count=3\nmap K scrollUp count=3\nmap gl scrollRight\nmap gh scrollLeft\n\n\" History\nmap h goBack\nmap l goForward\n\n\" Reload\nmap R reload hard\n\n\" Pages (not history)\nmap H goPrevious\nmap L goNext\n \n\" Tabs\nmap t Vomnibar.activateTabSelection\nmap b previousTab\nmap e nextTab\nmap <Tab> visitPreviousTab\nmap < moveTabLeft\nmap > moveTabRight\nmap 1 firstTab\nmap 9 lastTab\n\n\" Link Mode\nmap <c-f> LinkHints.activateModeWithQueue\nmap sf LinkHints.activateModeToDownloadLink\n\n\" New Tabs\nmap gn createTab https://news.google.com/home?hl=de&gl=DE&ceid=DE:de\nmap wn createTab window\n\n\" mimic American keyboard layout\nmap - enterFindMode\n\n\" Global Marks\n\" https://github.com/philc/vimium/wiki/Tips-and-Tricks#swapping-global-and-local-marks\nmap ä Marks.activateGotoMode swap\nmap m Marks.activateCreateMode swap\n\n\" Misc\nmap M toggleMuteTab\nmap a passNextKey\n\n\" unmap unneeded stuff\nunmap d\nunmap B\nunmap T\nunmap `\nunmap <c-e>\nunmap <c-y>\nunmap /\nunmap ^\nunmap >>\nunmap <<\nunmap <a-m>\nunmap <a-p>\nunmap X\nunmap g0\nunmap g$\nunmap gE\nunmap [[\nunmap ]]\nunmap <a-f>",
   "linkHintCharacters": "sadfjklewcmpgh",
   "linkHintNumbers": "0123456789",
   "newTabUrl": "about:newtab",
