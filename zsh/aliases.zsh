@@ -23,7 +23,6 @@ alias t="alacritty-theme-switch"
 # colorize by default
 alias grep='grep --color'
 alias ls='ls -G'
-alias diff='diff --color=auto'
 
 # Safety nets
 alias rm='rm -i'

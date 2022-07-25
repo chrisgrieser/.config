@@ -266,6 +266,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>4D767180-5C0F-4AAE-9C93-BE41D821EB5D</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Show Diff</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>F02DA72C-B6FC-41F0-874A-46A76906E65E</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
@@ -666,15 +676,17 @@ open $(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | c
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>102</integer>
 				<key>script</key>
-				<string></string>
+				<string>sublcli="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" # using full path makes this work even if `subl` hasn't been added to PATH
+
+"$sublcli" "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string>open-rg-match.sh</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -817,42 +829,25 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
+				<key>concurrently</key>
 				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>show-diff.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>F02DA72C-B6FC-41F0-874A-46A76906E65E</string>
+			<string>4D767180-5C0F-4AAE-9C93-BE41D821EB5D</string>
 			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>0696CF60-CCEE-4A13-B435-B3F0384C89C8</string>
-			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -920,19 +915,21 @@ subl --command toggle_side_bar</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Version History</string>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</string>
+			<string>F02DA72C-B6FC-41F0-874A-46A76906E65E</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -944,14 +941,31 @@ subl --command toggle_side_bar</string>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>{query}</string>
 				<key>title</key>
-				<string>⏳ Download starting...</string>
+				<string>✅ Copied</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>17EA82AA-E281-483E-9B42-DCEF8CCB61A1</string>
+			<string>0696CF60-CCEE-4A13-B435-B3F0384C89C8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Version History</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1034,6 +1048,27 @@ subl --command toggle_side_bar</string>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳ Download starting...</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>17EA82AA-E281-483E-9B42-DCEF8CCB61A1</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1123,7 +1158,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>570</real>
 			<key>ypos</key>
-			<real>520</real>
+			<real>625</real>
 		</dict>
 		<key>07D214D7-7035-4125-88CE-4BEA2F46A4DA</key>
 		<dict>
@@ -1132,7 +1167,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>860</real>
 		</dict>
 		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
 		<dict>
@@ -1161,7 +1196,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>745</real>
 		</dict>
 		<key>2272192E-81AD-4662-A0D4-58300A23360E</key>
 		<dict>
@@ -1177,7 +1212,7 @@ subl --command toggle_side_bar</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>430</real>
+			<real>475</real>
 			<key>ypos</key>
 			<real>395</real>
 		</dict>
@@ -1201,6 +1236,15 @@ subl --command toggle_side_bar</string>
 			<key>ypos</key>
 			<real>280</real>
 		</dict>
+		<key>4D767180-5C0F-4AAE-9C93-BE41D821EB5D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>475</real>
+			<key>ypos</key>
+			<real>505</real>
+		</dict>
 		<key>4E05F542-9EEE-41E9-86B1-B4F1C201A764</key>
 		<dict>
 			<key>colorindex</key>
@@ -1208,7 +1252,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>860</real>
 		</dict>
 		<key>7788A2EF-46C7-48E7-A073-C7938913B87D</key>
 		<dict>
@@ -1219,7 +1263,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>860</real>
 		</dict>
 		<key>78077732-42EB-4967-885E-DF4366FAB695</key>
 		<dict>
@@ -1373,7 +1417,7 @@ subl --command toggle_side_bar</string>
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>520</real>
+			<real>625</real>
 		</dict>
 		<key>F2940C32-987B-4532-89CA-BBD07A85A4C3</key>
 		<dict>
