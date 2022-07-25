@@ -145,6 +145,7 @@ function movieModeLayout()
 	killIfRunning("Sublime Text")
 	killIfRunning("alacritty")
 	killIfRunning("Alacritty")
+	runDelayed(1, function () openIfNotRunning("YouTube") end) -- safety redundancy
 end
 
 function homeModeLayout ()
