@@ -162,6 +162,10 @@
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -263,7 +267,7 @@ open -a "Twitterrific"</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>🔇 Add to Muted</string>
+				<string>🔇 Muted Words</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -279,6 +283,10 @@ open -a "Twitterrific"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -361,6 +369,10 @@ open -a "Twitterrific"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -399,6 +411,10 @@ open -a "Twitterrific"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -408,6 +424,27 @@ open -a "Twitterrific"</string>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>B6151B85-7052-4FAE-A01B-8963B1B509D2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://twitter.com/pseudo_meta/followers</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>E286DBA7-2559-48DF-800B-A66A6523BB93</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -437,23 +474,10 @@ open -a "Twitterrific"</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://twitter.com/pseudo_meta/followers</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>E286DBA7-2559-48DF-800B-A66A6523BB93</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>

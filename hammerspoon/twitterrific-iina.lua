@@ -12,8 +12,8 @@ function twitterrificScrollUp ()
 	for i = 1, #twitterrificWins do
 		local f = twitterrificWins[i]:frame()
 		local pos = {
-			x = f.x + f.w * 0.5,
-			y = f.y + 120,
+			x = f.x + f.w * 0.1,
+			y = f.y + 130,
 		}
 		hs.eventtap.leftClick(pos)
 		keystroke({"cmd"}, "k") -- mark all as red
