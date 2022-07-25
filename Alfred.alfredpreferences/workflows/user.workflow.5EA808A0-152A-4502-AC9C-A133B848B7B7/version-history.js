@@ -55,27 +55,18 @@ function run (argv) {
 
 	app.doShellScript(`mkdir -p ${tempDir}`);
 
-	app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad" --date=human "${fullPath}"`)
+	app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:%h "${fullPath}"`)
 		.split("\r")
-		.forEach(logLine => {
-			const commitHash = logLine.split(";")[0];
-			const date = logLine.split(";")[1];
-			const safeDate = date.replace(/[/: ]/g, "-");
-
-			// write the file on disk for quicklook and opening
-			// dont write file if it already exists, to speed up repeated searches
-			const tempPath = `${tempDir}/${safeDate}_${commitHash}.${ext}`;
+		.forEach(commitHash => {
+			const tempPath = `${tempDir}/${commitHash}.${ext}`;
 			if (!fileExists(tempPath)) app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > "${tempPath}"`);
 		});
 
-	const ripgrepMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --hidden --files-with-matches "${query}"`)
+	const ripgrepMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --sort=created --files-with-matches --ignore-case "${query}"`)
 		.split("\r")
 		.map(line => {
-			const commitHash = line.replace(/.*_(\w+)\.\w+/, "$1");
-			const date = line.replace(/(.*)_.*/, "$1");
-			// const safeDate = date.replace(/[/: ]/g, "-");
-			// const commitMsg = line.split(";")[2];
-			// const author = line.split(";")[3];
+			const commitHash = line.replace(/(\w+)\.\w+/, "$1");
+			const date = app.doShellScript(``);
 
 			return {
 				"title": date,
