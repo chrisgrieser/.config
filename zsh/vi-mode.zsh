@@ -55,12 +55,4 @@ export KEYTIMEOUT=1
 bindkey -M vicmd 'L' vi-end-of-line
 bindkey -M vicmd 'H' vi-first-non-blank
 bindkey -M vicmd 'U' redo
-bindkey -M vicmd ' ' '"ciw"'
-bindkey -M vicmd 'Y' "y\$"
 bindkey -M vicmd '-' vi-history-search-backward
-bindkey -M vicmd '?' show-vim-commands
-
-show-vim-commands () {
-	bindkey -M vicmd
-}
-zle -N show-vim-commands
