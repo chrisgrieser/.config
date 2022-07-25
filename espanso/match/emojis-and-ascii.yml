@@ -6,6 +6,10 @@ matches:
     replace: ❌
   - trigger: '!info'
     replace: ℹ️
+  - trigger: '!new'
+    replace: 🆕
+  - trigger: '!square'
+    replace: ▪︎
   - trigger: '!yes'
     replace: ✅
   - trigger: '->'
