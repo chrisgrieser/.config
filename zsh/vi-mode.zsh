@@ -16,6 +16,18 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.Use beam shape cursor on startup.
+#-------------------------------------------------------------------------------
+# Display all commands for Normal/Insert Mode
+# bindkey -M vicmd
+# bindkey -M viins
+bindkey -M viins 'jj' vi-cmd-mode
+bindkey -M vicmd 'L' vi-end-of-line
+bindkey -M vicmd 'H' vi-first-non-blank
+bindkey -M vicmd 'U' redo
+bindkey -M vicmd ' ' 'ciw'
+bindkey -M vicmd 'Y' 'y\$'
+bindkey -M vicmd '-' vi-history-search-backward
+bindkey -M vicmd '?' show-vim-commands
 
 
 #-------------------------------------------------------------------------------
