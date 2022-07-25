@@ -235,7 +235,7 @@
 	<key>description</key>
 	<string>requires Karabiner elements</string>
 	<key>disabled</key>
-	<true/>
+	<false/>
 	<key>name</key>
 	<string>Spotify Addons &amp; Keyboard Remapping</string>
 	<key>objects</key>
