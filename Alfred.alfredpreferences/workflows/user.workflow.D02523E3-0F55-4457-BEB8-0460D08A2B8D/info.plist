@@ -327,19 +327,6 @@
 				<true/>
 			</dict>
 		</array>
-		<key>D059CCB1-3315-45DA-8808-6AB9411CA63C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>075B91F1-976D-42B4-96E3-293F0517DB7A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>E40A4B08-727F-4348-83B7-4DDADF9D0A42</key>
 		<array>
 			<dict>
@@ -357,7 +344,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>D059CCB1-3315-45DA-8808-6AB9411CA63C</string>
+				<string>075B91F1-976D-42B4-96E3-293F0517DB7A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -377,27 +364,6 @@
 	<string>Backup Utility</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>to '{var:backup_destination}'</string>
-				<key>title</key>
-				<string>➡️ Starting Backup...</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>D059CCB1-3315-45DA-8808-6AB9411CA63C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -447,6 +413,8 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>dest-loop</string>
 			</dict>
@@ -751,6 +719,8 @@ end run</string>
 				</array>
 				<key>elselabel</key>
 				<string>Volume</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -823,6 +793,8 @@ end run</string>
 				</array>
 				<key>elselabel</key>
 				<string>exit</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -861,6 +833,8 @@ end run</string>
 				<string>[{"title":"🚪 Exit","arg":"exit"},{"title":"➡️ Create Backup","arg":"create","subtitle":""},{"title":"📍 Select Destination","arg":"destination","subtitle":"{var:backup_destination}"},{"title":"🗄 Show Log of Backups","arg":"log","subtitle":"Last Backup: {var:last_backup}"},{"title":"⚙️ Select Backup Script","arg":"script","subtitle":"{var:script_location}"}]</string>
 				<key>keyword</key>
 				<string>bkp utility</string>
+				<key>matchmode</key>
+				<integer>0</integer>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>subtext</key>
@@ -952,29 +926,6 @@ end run</string>
 			<string>487E90B9-FE7B-429C-BFCB-E7E12B983BAF</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application id "com.runningwithcrayons.Alfred" to set configuration "script_location" to value "{query}" in workflow (system attribute "alfred_workflow_bundleid") with exportable</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>BFBB8395-D000-444C-BC6A-B50B390B15AD</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1078,6 +1029,29 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application id "com.runningwithcrayons.Alfred" to set configuration "script_location" to value "{query}" in workflow (system attribute "alfred_workflow_bundleid") with exportable</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>BFBB8395-D000-444C-BC6A-B50B390B15AD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -1153,90 +1127,90 @@ open "$(dirname "$script_location")"/backup.log</string>
 			<key>note</key>
 			<string>resolve script location</string>
 			<key>xpos</key>
-			<integer>500</integer>
+			<real>350</real>
 			<key>ypos</key>
-			<integer>20</integer>
+			<real>20</real>
 		</dict>
 		<key>140A99D1-A544-4DF9-B129-AC4820665AFD</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>495</integer>
+			<real>495</real>
 			<key>ypos</key>
-			<integer>320</integer>
+			<real>320</real>
 		</dict>
 		<key>153E3F6A-95A8-4FF7-805A-A623048AF293</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>740</integer>
+			<real>740</real>
 			<key>ypos</key>
-			<integer>400</integer>
+			<real>400</real>
 		</dict>
 		<key>1E6008CC-A359-4017-8146-31C971DB1042</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<integer>665</integer>
+			<real>515</real>
 			<key>ypos</key>
-			<integer>20</integer>
+			<real>20</real>
 		</dict>
 		<key>21773296-E9A5-45E2-BFAD-B68AA2338E9C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>345</integer>
+			<real>345</real>
 		</dict>
 		<key>28224466-3E8A-45AC-BC8F-C67065C919F1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>405</integer>
+			<real>405</real>
 		</dict>
 		<key>3AB5A5A0-4AC0-41EA-BC28-57C32CB52CE0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>900</integer>
+			<real>900</real>
 			<key>ypos</key>
-			<integer>315</integer>
+			<real>315</real>
 		</dict>
 		<key>3EA056EC-6E7E-4F3F-ADDE-328221C20F4F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<integer>20</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>635</integer>
+			<real>635</real>
 		</dict>
 		<key>43252EC6-55CA-4A44-A188-D5BBD5C4AA80</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<integer>1385</integer>
+			<real>1385</real>
 			<key>ypos</key>
-			<integer>445</integer>
+			<real>445</real>
 		</dict>
 		<key>487E90B9-FE7B-429C-BFCB-E7E12B983BAF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>365</integer>
+			<real>365</real>
 			<key>ypos</key>
-			<integer>530</integer>
+			<real>530</real>
 		</dict>
 		<key>60D0C994-319C-4EAE-B5FB-96A4B4EF94B6</key>
 		<dict>
@@ -1245,9 +1219,9 @@ open "$(dirname "$script_location")"/backup.log</string>
 			<key>note</key>
 			<string>replace home with ~</string>
 			<key>xpos</key>
-			<integer>695</integer>
+			<real>695</real>
 			<key>ypos</key>
-			<integer>600</integer>
+			<real>600</real>
 		</dict>
 		<key>695CE482-D056-450D-B34E-0374DBE3E130</key>
 		<dict>
@@ -1256,27 +1230,27 @@ open "$(dirname "$script_location")"/backup.log</string>
 			<key>note</key>
 			<string>Sucess Sound</string>
 			<key>xpos</key>
-			<integer>1240</integer>
+			<real>1240</real>
 			<key>ypos</key>
-			<integer>445</integer>
+			<real>445</real>
 		</dict>
 		<key>76B52A08-F741-4099-8E6F-497F935F3F46</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>350</integer>
+			<real>350</real>
 			<key>ypos</key>
-			<integer>315</integer>
+			<real>315</real>
 		</dict>
 		<key>799CE1E5-8C21-4CB5-BFBF-ABBCCA293FF2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>1050</integer>
+			<real>1050</real>
 			<key>ypos</key>
-			<integer>570</integer>
+			<real>570</real>
 		</dict>
 		<key>7ED1ECFF-CA2A-4CA8-9708-104CC4AC0F66</key>
 		<dict>
@@ -1285,36 +1259,36 @@ open "$(dirname "$script_location")"/backup.log</string>
 			<key>note</key>
 			<string>replace home with ~</string>
 			<key>xpos</key>
-			<integer>800</integer>
+			<real>800</real>
 			<key>ypos</key>
-			<integer>270</integer>
+			<real>270</real>
 		</dict>
 		<key>8CC9695B-FF16-4D41-96E2-00AB6C8E0FD8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<integer>95</integer>
+			<real>95</real>
 			<key>ypos</key>
-			<integer>115</integer>
+			<real>115</real>
 		</dict>
 		<key>928B3C0B-1C4F-4E82-8FB5-A8D994E7B377</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>20</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>360</integer>
+			<real>360</real>
 		</dict>
 		<key>BC51A3E9-3309-48C6-95AB-FF3BA9BECFB2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>1045</integer>
+			<real>1045</real>
 			<key>ypos</key>
-			<integer>315</integer>
+			<real>315</real>
 		</dict>
 		<key>BFBB8395-D000-444C-BC6A-B50B390B15AD</key>
 		<dict>
@@ -1323,9 +1297,9 @@ open "$(dirname "$script_location")"/backup.log</string>
 			<key>note</key>
 			<string>set script_location</string>
 			<key>xpos</key>
-			<integer>780</integer>
+			<real>780</real>
 			<key>ypos</key>
-			<integer>570</integer>
+			<real>570</real>
 		</dict>
 		<key>C6827BBA-3B61-41F0-AE3B-A0F9EC8B1BA0</key>
 		<dict>
@@ -1334,71 +1308,64 @@ open "$(dirname "$script_location")"/backup.log</string>
 			<key>note</key>
 			<string>open backup.log</string>
 			<key>xpos</key>
-			<integer>225</integer>
+			<real>225</real>
 			<key>ypos</key>
-			<integer>635</integer>
+			<real>635</real>
 		</dict>
 		<key>C9B603D2-DA32-4499-B9FB-4E4C4A44199D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>170</integer>
+			<real>170</real>
 			<key>ypos</key>
-			<integer>335</integer>
+			<real>335</real>
 		</dict>
 		<key>CC0D60EA-68F4-41E1-BB41-416CFFB90AC0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>510</integer>
+			<real>510</real>
 			<key>ypos</key>
-			<integer>570</integer>
+			<real>570</real>
 		</dict>
 		<key>D03967B5-2EA2-4564-A50E-4DCFE6A462D8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>640</integer>
+			<real>640</real>
 			<key>ypos</key>
-			<integer>240</integer>
-		</dict>
-		<key>D059CCB1-3315-45DA-8808-6AB9411CA63C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<integer>350</integer>
-			<key>ypos</key>
-			<integer>20</integer>
+			<real>240</real>
 		</dict>
 		<key>E40A4B08-727F-4348-83B7-4DDADF9D0A42</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>585</integer>
+			<real>585</real>
 			<key>ypos</key>
-			<integer>270</integer>
+			<real>270</real>
 		</dict>
 		<key>ED3C9FD2-44B2-4B74-AA30-21125E2222FF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>50</integer>
+			<real>50</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>variables</key>
 	<dict>
 		<key>backup_destination</key>
 		<string>/Volumes/Externe C</string>
 		<key>last_backup</key>
-		<string>2022-07-25 15:20</string>
+		<string>2022-07-25 15:56</string>
 		<key>script_location</key>
 		<string>~/dotfiles/Utility Scripts/run-backup_[Browser-Path].sh</string>
 	</dict>

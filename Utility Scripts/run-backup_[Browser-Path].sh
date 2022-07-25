@@ -2,14 +2,14 @@
 DEVICE_NAME="$(scutil --get ComputerName)"
 
 # Backup location
-INPUT="$*" # volume name
-BACKUP_DEST="${INPUT/#\~/$HOME}"/Backup_"$DEVICE_NAME"
+VOLUME_NAME="$*"
+BACKUP_DEST="${VOLUME_NAME/#\~/$HOME}/Backup_$DEVICE_NAME"
 mkdir -p "$BACKUP_DEST"
 cd "$BACKUP_DEST" || exit 1
 
 # Log (on the Mac)
 LOG_LOCATION="$(dirname "$0")/backup.log"
-echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $INPUT -- " >> "$LOG_LOCATION"
+echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $VOLUME_NAME -- " >> "$LOG_LOCATION"
 
 # Brew Dumps
 BREWDUMP_PATH="$BACKUP_DEST/install lists"
@@ -20,9 +20,9 @@ echo "Brewfile and NPM-File dumped at \"$BREWDUMP_PATH\""
 
 # rsync function
 function bkp () {
-	# ⚠️ `--delete` option will remove backup when source folder is empty
-	# `-hhh` highes level of human readable
+	echo "⏺ starting: $1"
 	rsync --archive --progress --delete -h --exclude=".Trash/*" --exclude="*/.Trash/*" "$1" "$2"
+	echo "-------------------------------------------"
 }
 
 # =========================
@@ -32,7 +32,6 @@ function bkp () {
 # the --delete option will override the previous contents
 bkp ~'/Library/Preferences/' ./Preferences
 bkp ~'/Library/Application Support/Alfred/Workflow Data/com.vdesabou.spotify.mini.player/' ./Spotify-Mini-Player
-bkp ~'/Library/Application Support/BraveSoftware/Brave-Browser/Default/' ./Browser-Default-Folder
 bkp ~'/Library/Fonts/' ./Fonts
 mkdir -p ./Homefolder
 bkp ~'/Games/' ./Homefolder/Games
@@ -43,12 +42,13 @@ bkp ~'/dotfiles/' ./dotfiles
 
 # =========================
 
-# Log (on Device)
+# Log (on Mac)
 echo "completed: $(date '+%H:%M')" >> "$LOG_LOCATION"
-osascript -e 'tell application id "com.runningwithcrayons.Alfred" to set configuration "last_backup" to value "'"$(date '+%Y-%m-%d %H:%M')"'" in workflow "de.chris-grieser.backup-utility" '
+log_date="$(date '+%Y-%m-%d %H:%M')"
+osascript -e "tell application id \"com.runningwithcrayons.Alfred\" to set configuration \"last_backup\" to value \"$log_date\" in workflow \"de.chris-grieser.backup-utility\" "
 
 # Log (on Backup Destination)
 echo "Backup: $(date '+%Y-%m-%d %H:%M')" >> last_backup.log
 
 # Notify on Completion
-osascript -e 'display notification "" with title "Backup finished." subtitle "" sound name ""'
+osascript -e 'display notification "" with title "Backup finished."'
