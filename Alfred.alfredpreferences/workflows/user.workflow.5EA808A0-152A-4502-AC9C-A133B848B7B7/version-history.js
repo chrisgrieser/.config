@@ -44,8 +44,9 @@ function run (argv) {
 	const fileIcon = { "type": "fileicon", "path": fullPath };
 	const tempDir = `/tmp/${safeFileName}`;
 
-	app.doShellScript(`mkdir -p ${tempDir}`);
 
+	// write versions into temporary directory
+	app.doShellScript(`mkdir -p ${tempDir}`);
 	app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:%h "${fullPath}"`)
 		.split("\r")
 		.forEach(commitHash => {
@@ -59,19 +60,23 @@ function run (argv) {
 
 	let firstItem = true;
 
+	// search versions with ripgrep & display git commit info for matched versions
 	const ripgrepMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --sort=accessed --files-with-matches --ignore-case "${query}"`)
 		.split("\r")
 		.map(file => {
 			const commitHash = file.replace(/(\w+)\.\w+/, "$1");
-			const logline = app.doShellScript(`cd "${parentFolder}" ; git show -s --format="%ad;%s" --date=human ${commitHash}`);
+			const logline = app.doShellScript(`cd "${parentFolder}" ; git show -s --format="%ad;%s;%an" --date=human ${commitHash}`);
 			const date = logline.split(";")[0];
 			const commitMsg = logline.split(";")[1];
+			const author = logline.split(";")[2];
 
 			let match = "";
 			let line = "";
 			if (query) {
 				const firstMatch = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 --line-number "${query}" "${file}"`);
-				match = firstMatch.split(":")[1].trim();
+				const tempArr = firstMatch.split(":");
+				tempArr.shift();
+				match = tempArr.join("").trim();
 				line = ":" + firstMatch.split(":")[0];
 			}
 
