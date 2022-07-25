@@ -17,6 +17,9 @@ sudo plutil -insert Exclusions.0 -string ~'/Dotfiles/Alfred.alfredpreferences/wo
 sudo plutil -insert Exclusions.0 -string ~'/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/' "$SPOTLIGHT_CONFIG"
 sudo plutil -insert Exclusions.0 -string ~'/Library/Mobile Documents/com~apple~CloudDocs/.Trash/' "$SPOTLIGHT_CONFIG"
 sudo plutil -insert Exclusions.0 -string ~'/Library/Mobile Documents/com~apple~CloudDocs/Academia/PhD Data/' "$SPOTLIGHT_CONFIG"
+sudo plutil -insert Exclusions.0 -string "/Volumes/Externe A" "$SPOTLIGHT_CONFIG"
+sudo plutil -insert Exclusions.0 -string "/Volumes/Externe B" "$SPOTLIGHT_CONFIG"
+sudo plutil -insert Exclusions.0 -string "/Volumes/Externe C" "$SPOTLIGHT_CONFIG"
 
 
 #-------------------------------------------------------------------------------
