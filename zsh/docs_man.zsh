@@ -6,28 +6,29 @@ function cc () {
 	echo "$CHEAT_CODE_ONLY" | pbcopy
 }
 
-# if alacritty installed open man page in new alacritty window
-if which alacritty &> /dev/null ; then
-	function man () {
-		# abort if pager or command uninstalled
-		which "$1" &> /dev/null
-		if [[ $? == 1 ]] ; then
-			echo "Command '$1' not installed."
-			return 1
-		fi
-		which "$PAGER" &> /dev/null
-		if [[ $? == 1 ]] ; then
-	 		echo "Pager '$PAGER' not installed."
-	 		return 1
-	 	fi
+function man () {
+	which alacritty &> /dev/null
+	if [[ $? == 1 ]] ; then
+		echo "Not using Alacritty."
+		return 1
+	fi
+	which "$1" &> /dev/null
+	if [[ $? == 1 ]] ; then
+		echo "Command '$1' not installed."
+		return 1
+	fi
+	which "$PAGER" &> /dev/null
+	if [[ $? == 1 ]] ; then
+ 		echo "Pager '$PAGER' not installed."
+ 		return 1
+ 	fi
 
-		# run in subshell to surpress output
-		(alacritty \
-			--option=window.decorations=full \
-			--title="man $1" \
-			--command man "$1" &)
-	}
-fi
+	# run in subshell to surpress output
+	(alacritty \
+		--option=window.decorations=full \
+		--title="man $1" \
+		--command man "$1" &)
+}
 
 # man pages for zsh-builtins https://stackoverflow.com/a/35456287
 unalias run-help 2>/dev/null
