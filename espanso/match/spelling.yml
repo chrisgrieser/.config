@@ -137,3 +137,5 @@ matches:
     word: true
   - trigger: repalce
     replace: replace
+  - trigger: algorithmsich
+    replace: algorithmisch
