@@ -20,15 +20,6 @@ function run (argv) {
 		return JSON.stringify({ items: item });
 	}
 
-	ObjC.import("Foundation");
-	function readFile (path, encoding) {
-		if (!encoding) encoding = $.NSUTF8StringEncoding;
-		const fm = $.NSFileManager.defaultManager;
-		const data = fm.contentsAtPath(path);
-		const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
-		return ObjC.unwrap(str);
-	}
-
 	//------------------------------------------------------------------------------
 	const query = argv.join("");
 
@@ -70,20 +61,24 @@ function run (argv) {
 		.split("\r")
 		.map(file => {
 			const commitHash = file.replace(/(\w+)\.\w+/, "$1");
-			const date = app.doShellScript(`cd "${parentFolder}" ; git show -s --format=%ad --date=human ${commitHash}`);
+			const logline = app.doShellScript(`cd "${parentFolder}" ; git show -s --format="%ad;%s;%an" --date=human ${commitHash}`);
+			const date = logline.split(";")[0];
+			const commitMsg = logline.split(";")[1];
+			const author = logline.split(";")[2];
 
 			let match = "";
-			let countMatches = "";
 			if (query) {
 				match = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 "${query}" "${file}"`)
 					.trim();
-				countMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --count-matches "${query}" "${file}"`);
-				countMatches = `    (${countMatches})`;
 			}
 			return {
-				"title": `${date}${countMatches}`,
+				"title": date,
 				"subtitle": match,
 				"mods": {
+					"cmd": {
+						"subtitle": `${author}  ▪︎  ${commitMsg}`,
+						"valid": false,
+					},
 					"alt": {
 						"arg": commitHash,
 						"subtitle": `${commitHash} (⌥: Copy)`
