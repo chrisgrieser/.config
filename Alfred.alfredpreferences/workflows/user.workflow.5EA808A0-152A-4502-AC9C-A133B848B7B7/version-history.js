@@ -59,18 +59,29 @@ function run (argv) {
 		.split("\r")
 		.forEach(commitHash => {
 			const tempPath = `${tempDir}/${commitHash}.${ext}`;
-			if (!fileExists(tempPath)) app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > "${tempPath}"`);
+			if (fileExists(tempPath)) {
+				app.doShellScript(`touch "${tempPath}"`); // to update access date, which is used by rg for sorting
+			} else {
+				app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > "${tempPath}"`);
+			}
 		});
 
-	const ripgrepMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --sort=created --files-with-matches --ignore-case "${query}"`)
+	const ripgrepMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --sort=accessed --files-with-matches --ignore-case "${query}"`)
 		.split("\r")
 		.map(file => {
 			const commitHash = file.replace(/(\w+)\.\w+/, "$1");
-			const match = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 "${query}" "${file}"`);
 			const date = app.doShellScript(`cd "${parentFolder}" ; git show -s --format=%ad --date=human ${commitHash}`);
 
+			let match = "";
+			let countMatches = "";
+			if (query) {
+				match = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 "${query}" "${file}"`)
+					.trim();
+				countMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --count-matches "${query}" "${file}"`);
+				countMatches = `    (${countMatches})`;
+			}
 			return {
-				"title": date,
+				"title": `${date}${countMatches}`,
 				"subtitle": match,
 				"mods": {
 					"alt": {
