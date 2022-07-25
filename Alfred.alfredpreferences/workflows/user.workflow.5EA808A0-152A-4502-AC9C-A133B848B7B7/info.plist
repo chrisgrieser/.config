@@ -35,18 +35,7 @@
 			</dict>
 		</array>
 		<key>478C272A-AA90-4C7C-B103-6A3BC82916D4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B4B254CD-5D37-4F1B-BFED-5DE36A08F7F2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>48D312AB-EA06-4853-819D-FA93E86CEF9B</key>
 		<array>
 			<dict>
@@ -674,35 +663,6 @@ open $(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | c
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>B4B254CD-5D37-4F1B-BFED-5DE36A08F7F2</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1214,6 +1174,8 @@ subl --command toggle_side_bar</string>
 		</dict>
 		<key>478C272A-AA90-4C7C-B103-6A3BC82916D4</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
@@ -1342,16 +1304,9 @@ subl --command toggle_side_bar</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>405</real>
+			<real>430</real>
 			<key>ypos</key>
 			<real>260</real>
-		</dict>
-		<key>B4B254CD-5D37-4F1B-BFED-5DE36A08F7F2</key>
-		<dict>
-			<key>xpos</key>
-			<real>585</real>
-			<key>ypos</key>
-			<real>295</real>
 		</dict>
 		<key>BEA583C1-293D-4CF7-AB3A-7BEE5A3B41CA</key>
 		<dict>
