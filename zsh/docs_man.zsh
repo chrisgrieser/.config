@@ -25,11 +25,18 @@ function man () {
  		return 1
  	fi
 
-	# run in subshell to surpress output
-	(alacritty \
-		--option=window.decorations=full \
-		--title="man $1" \
-		--command man "$1" -P "/usr/bin/less -is --pattern=$2" &)
+	if [[ -z "$2" ]] ; then
+		# run in subshell to surpress output
+		(alacritty \
+			--option=window.decorations=full \
+			--title="man $1" \
+			--command man "$1"&)
+	else
+		(alacritty \
+			--option=window.decorations=full \
+			--title="man $1" \
+			--command man "$1" -P "/usr/bin/less -is --pattern=$2" &)
+	fi
 }
 
 # man pages for zsh-builtins https://stackoverflow.com/a/35456287
