@@ -182,7 +182,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^org\.hammerspoon\.Hammerspoon$
-  - description: "🅰️🔨 Discord: ⌃H/⌃L → ⌘←/⌘→"
+  - description: "🅰️💬 Discord: Various Hotkeys"
     # to circumvent Discord's weird keybindings, which seem to capture things
     # before transformation. Hyper key bindings seem to conflict with those,
     # since they temporarily send a control.
@@ -215,6 +215,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.hnc\.Discord$
+      # go to next unread
       - type: basic
         from:
           key_code: u
@@ -227,6 +228,25 @@ rules:
               - command
               - shift
               - option
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.hnc\.Discord$
+      # inline code
+      - type: basic
+        from:
+          key_code: e
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: equal_sign
+            modifiers:
+              - shift
+          - key_code: equal_sign
+            modifiers:
+              - shift
+          - key_code: left_arrow
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
