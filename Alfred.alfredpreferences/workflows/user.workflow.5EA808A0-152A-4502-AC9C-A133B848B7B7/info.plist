@@ -1426,7 +1426,7 @@ subl --command toggle_side_bar</string>
 			<key>note</key>
 			<string>search docs</string>
 			<key>xpos</key>
-			<real>255</real>
+			<real>260</real>
 			<key>ypos</key>
 			<real>260</real>
 		</dict>

@@ -52,15 +52,18 @@ function run (argv) {
 		.split("\r")
 		.forEach(commitHash => {
 			const tempPath = `${tempDir}/${commitHash}.${ext}`;
-			if (fileExists(tempPath)) {
-				app.doShellScript(`touch "${tempPath}"`); // to update access date, which is used by rg for sorting
-			} else {
+			if (!fileExists(tempPath)) {
 				app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > "${tempPath}"`);
 			}
 		});
 
 	let firstItem = true;
 
+	if (query) {
+
+	} else {
+
+	}
 	// search versions with ripgrep & display git commit info for matched versions
 	const ripgrepMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --sort=accessed --files-with-matches --smart-case "${query}"`)
 		.split("\r")
