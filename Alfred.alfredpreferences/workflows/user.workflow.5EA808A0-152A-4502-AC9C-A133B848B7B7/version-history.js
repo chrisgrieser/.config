@@ -49,8 +49,10 @@ function run (argv) {
 	const firstRun = query === "";
 	let firstItem = true;
 	let historyMatches;
+	let extraOptionsForFirstRun = "";
+	if (firstRun) extraOptionsForFirstRun = ";%ad;%s;%an";
 
-	const logLines = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad;%s;%an" "${fullPath}"`)
+	const logLines = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h${extraOptionsForFirstRun}" "${fullPath}"`)
 		.split("\r");
 
 	// write versions into temporary directory
@@ -101,15 +103,13 @@ function run (argv) {
 	} else {
 		historyMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 --smart-case "${query}"`)
 			.split("\r\r")
-			.map(file => {
-				const commitHash = file.replace(/(\w+)\.\w+/, "$1");
+			.map(rgMatch => {
+				const commitHash = rgMatch.match(/(\w+)(?=\.\w+)/)[0];
+				const file = rgMatch.split("\r")[0];
+				const firstMatch = rgMatch.split("\r")[1].split(":")[1].trim();
+				const line = rgMatch.match(/\d+(?=:)/)[0];
 				const date = app.doShellScript(`cd "${parentFolder}" ; git show -s --format=%ad --date=human ${commitHash}`);
 				const filePath =`${tempDir}/${file}`;
-
-				const tempArr = firstMatch.split(":");
-				tempArr.shift();
-				subtitle = tempArr.join("").trim();
-				line = firstMatch.split(":")[0];
 
 				let appendix = "";
 				if (firstItem) {
@@ -117,10 +117,9 @@ function run (argv) {
 					firstItem = false;
 				}
 
-
 				return {
 					"title": date + appendix,
-					"subtitle": subtitle,
+					"subtitle": firstMatch,
 					"quicklookurl": filePath,
 					"mods": {
 						"cmd": { "arg": `${filePath};${fullPath}` }, // old;new file for diff view
@@ -130,10 +129,11 @@ function run (argv) {
 						},
 					},
 					"icon": fileIcon,
-					"arg": `${filePath}`,
+					"arg": `${filePath}:${line}`,
 				};
 
 			});
 	}
+
 	return JSON.stringify({ items: historyMatches });
 }
