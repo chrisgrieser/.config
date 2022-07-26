@@ -285,7 +285,10 @@ function mainScreenWindows()
 	local winArr = hs.window.orderedWindows()
 	local out = {}
 	local j = 1
-	local mainScreen = hs.screen.mainScreen()
+	local mainScreen
+	-- safety net, since sometimes the projector is still regarded as mainscreen even though disconnected
+	if isIMacAtHome() then mainScreen = iMacDisplay
+	else mainScreen = hs.screen.mainScreen() end
 
 	for i = 1, #winArr do
 		if winArr[i]:screen() == mainScreen and winArr[i]:isStandard() then
