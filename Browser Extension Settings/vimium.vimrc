@@ -66,6 +66,7 @@ map f LinkHints.activateMode
 map F LinkHints.activateModeToOpenInNewTab
 map <c-f> LinkHints.activateModeWithQueue
 map sf LinkHints.activateModeToDownloadLink
+map yf LinkHints.activateModeToCopyLinkUrl
 
 " Find
 map - enterFindMode
