@@ -53,7 +53,7 @@ shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
 shutDownWatcher:start()
 
 function systemWake (eventType)
-	if not(eventType == hs.caffeinate.watcher.systemDidWake) then return end
+	if not(eventType == hs.caffeinate.watcher.systemDidWake or eventType == hs.caffeinate.watcher.screensDidWake) then return end
 
 	if isIMacAtHome() and isProjector() then movieModeLayout()
 	elseif isIMacAtHome and not(isProjector()) then homeModeLayout() end
