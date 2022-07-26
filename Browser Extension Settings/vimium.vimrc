@@ -31,6 +31,14 @@ map K scrollUp count=3
 map gl scrollRight
 map gh scrollLeft
 
+" History
+map h goBack
+map l goForward
+
+" Pages (not history)
+map H goPrevious
+map L goNext
+
 " url
 map ge Vomnibar.activateEditUrl
 map gu goUp
@@ -49,17 +57,9 @@ map i enterInsertMode
 map v enterVisualMode
 map V enterVisualLineMode
 
-" History
-map h goBack
-map l goForward
-
 " Reload
 map r reload
 map R reload hard
-
-" Pages (not history)
-map H goPrevious
-map L goNext
 
 " Link Mode
 map f LinkHints.activateMode
