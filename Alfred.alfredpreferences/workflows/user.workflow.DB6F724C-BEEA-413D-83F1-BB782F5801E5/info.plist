@@ -11323,6 +11323,8 @@ main($query,"TRACK","");
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -14550,11 +14552,11 @@ Example: https://open.spotify.com/track/6hxgHNJjadmCHAJPXw6AYL</string>
 		<key>c_mute</key>
 		<string>mute</string>
 		<key>c_next</key>
-		<string></string>
+		<string>next</string>
 		<key>c_pause</key>
-		<string></string>
+		<string>pause</string>
 		<key>c_play</key>
-		<string></string>
+		<string>play</string>
 		<key>c_play_album</key>
 		<string>play_album</string>
 		<key>c_play_alfred_playlist</key>
@@ -14566,7 +14568,7 @@ Example: https://open.spotify.com/track/6hxgHNJjadmCHAJPXw6AYL</string>
 		<key>c_playpause</key>
 		<string>playpause</string>
 		<key>c_previous</key>
-		<string></string>
+		<string>previous</string>
 		<key>c_random</key>
 		<string>random</string>
 		<key>c_random_album</key>
@@ -14594,7 +14596,7 @@ Example: https://open.spotify.com/track/6hxgHNJjadmCHAJPXw6AYL</string>
 		<key>c_show_in_spotify</key>
 		<string>show_in_spotify</string>
 		<key>c_shuffle</key>
-		<string></string>
+		<string>shuffle</string>
 		<key>c_song_radio</key>
 		<string>radio</string>
 		<key>c_spot_mini</key>
