@@ -141,7 +141,7 @@ rules:
           - key_code: h
             modifiers:
               - command
-  - description: "🅰️🔨 Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console"
+  - description: "🅰️🔨 Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
       - type: basic
         from:
@@ -183,10 +183,11 @@ rules:
             bundle_identifiers:
               - ^org\.hammerspoon\.Hammerspoon$
   - description: "🅰️💬 Discord: Various Hotkeys"
-    # to circumvent Discord's weird keybindings, which seem to capture things
-    # before transformation. Hyper key bindings seem to conflict with those,
-    # since they temporarily send a control.
     manipulators:
+      # ctrl-h & ctrl-l to go back / forward a channel
+      # to circumvent Discord's weird keybindings, which seem to capture things
+      # before transformation. Hyper key bindings seem to conflict with those,
+      # since they temporarily send a control.
       - type: basic
         from:
           key_code: h
@@ -215,7 +216,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.hnc\.Discord$
-      # go to next unread
+      # go to next [u]nread
       - type: basic
         from:
           key_code: u
@@ -232,7 +233,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.hnc\.Discord$
-      # inline code
+      # inline cod[e]
       - type: basic
         from:
           key_code: e
@@ -247,6 +248,100 @@ rules:
             modifiers:
               - shift
           - key_code: left_arrow
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.hnc\.Discord$
+      # [r]eply to msg above
+      - type: basic
+        from:
+          key_code: r
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: tab
+          - key_code: vk_none
+            hold_down_milliseconds: 40
+          - key_code: up_arrow
+          - key_code: vk_none
+            hold_down_milliseconds: 40
+          - key_code: r
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.hnc\.Discord$
+      # go 3 up [t]
+      - type: basic
+        from:
+          key_code: t
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: tab
+          - key_code: vk_none
+            hold_down_milliseconds: 40
+          - key_code: up_arrow
+          - key_code: vk_none
+            hold_down_milliseconds: 30
+          - key_code: up_arrow
+          - key_code: vk_none
+            hold_down_milliseconds: 30
+          - key_code: up_arrow
+          - key_code: vk_none
+            hold_down_milliseconds: 30
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.hnc\.Discord$
+      # next/prev channel
+      - type: basic
+        from:
+          key_code: j
+          modifiers:
+            mandatory:
+              - control
+        to:
+          - key_code: down_arrow
+            modifiers:
+              - shift
+              - option
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.hnc\.Discord$
+      - type: basic
+        from:
+          key_code: k
+          modifiers:
+            mandatory:
+              - control
+        to:
+          - key_code: up_arrow
+            modifiers:
+              - shift
+              - option
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.hnc\.Discord$
+      # scroll to bottom (mnenonic: vim's G)
+      - type: basic
+        from:
+          key_code: g
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: tab
+          - key_code: vk_none
+            hold_down_milliseconds: 40
+          - key_code: up_arrow
+          - key_code: vk_none
+            hold_down_milliseconds: 30
+          - key_code: escape
+          - key_code: escape
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
