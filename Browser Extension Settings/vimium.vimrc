@@ -1,77 +1,81 @@
-" Closing Tabs
+unmapAll
+
+" Tabs
 map wq closeTabsOnLeft
 map we closeTabsOnRight
 map wv moveTabToNewWindow
 map ww closeOtherTabs
 map u removeTab
+map x removeTab
 map U restoreTab
-" W = close window
 map W removeTab count=19
+map t Vomnibar.activateTabSelection
+map b previousTab
+map e nextTab
+map gT previousTab
+map gt nextTab
+map <Tab> visitPreviousTab
+map < moveTabLeft
+map > moveTabRight
+map 1 firstTab
+map 9 lastTab
+map gn createTab https://news.google.com/home?hl=de&gl=DE&ceid=DE:de
+map wn createTab window
+map yt duplicateTab
 
-" Scrolling Fast
+" Scrolling
+map j scrollDown
+map k scrollUp
 map J scrollDown count=3
 map K scrollUp count=3
 map gl scrollRight
 map gh scrollLeft
+
+" url
+map ge Vomnibar.activateEditUrl
+map gu goUp
+map gU goToRoot
+map gi focusInput
+map gs toggleViewSource
+map yy copyCurrentUrl
+map p openCopiedUrlInCurrentTab
+map P openCopiedUrlInNewTab
+map M toggleMuteTab
+map a passNextKey
+map gf nextFrame
+
+" Modes
+map i enterInsertMode
+map v enterVisualMode
+map V enterVisualLineMode
 
 " History
 map h goBack
 map l goForward
 
 " Reload
+map r reload
 map R reload hard
 
 " Pages (not history)
 map H goPrevious
 map L goNext
 
-" Tabs
-map t Vomnibar.activateTabSelection
-map b previousTab
-map e nextTab
-map < moveTabLeft
-map > moveTabRight
-map 1 firstTab
-map 9 lastTab
-
 " Link Mode
+map f LinkHints.activateMode
+map F LinkHints.activateModeToOpenInNewTab
 map <c-f> LinkHints.activateModeWithQueue
 map sf LinkHints.activateModeToDownloadLink
 
-" New Tabs
-" map X createTab http://www.bbc.com/news
-map wn createTab window
-map wi createTab incognito
-
-" mimic American keyboard layout
+" Find
 map - enterFindMode
+map n nextFrame
+map N performBackwardsFind
 
 " Global Marks
 " https://github.com/philc/vimium/wiki/Tips-and-Tricks#swapping-global-and-local-marks
 map ä Marks.activateGotoMode swap
 map m Marks.activateCreateMode swap
 
-" Misc
-map M toggleMuteTab
-map a passNextKey
-
-" unmap unneeded stuff
-unmap d
-unmap B
-unmap T
-unmap `
-unmap <c-e>
-unmap <c-y>
-unmap /
-unmap ^
-unmap >>
-unmap <<
-unmap <a-m>
-unmap <a-p>
-unmap X
-unmap g0
-unmap g$
-unmap gE
-unmap [[
-unmap ]]
-unmap <a-f>
+"Misc
+map ? showHelp
