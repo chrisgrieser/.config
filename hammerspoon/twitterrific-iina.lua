@@ -49,11 +49,19 @@ function homeAction ()
 	if appIsRunning("IINA") then
 		keystroke({}, "Space", 1, hs.application("IINA"))
 	elseif appIsRunning("zoom.us") then
-		-- toggle mute
-		alert("🔈/🔇")
+		alert("🔈/🔇") -- toggle mute
 		keystroke({"shift", "command"}, "A", 1, hs.application("zoom.us"))
 	else
 		twitterrificScrollUp()
+	end
+end
+
+function shiftedHomeAction ()
+	if appIsRunning("zoom.us") then
+		alert("📹/⬛️") -- toggle video
+		keystroke({"shift", "command"}, "V", 1, hs.application("zoom.us"))
+	else
+		hs.application("Twitterrific"):activate()
 	end
 end
 
@@ -104,7 +112,5 @@ if isAtOffice() then twitterificAppWatcher:start() end
 hotkey({}, "pagedown", pagedownAction, nil, pagedownAction)
 hotkey({}, "pageup", pageupAction, nil, pageupAction)
 hotkey({}, "home", homeAction)
+hotkey({"shift"}, "home", shiftedHomeAction)
 
-hotkey({"shift"}, "home", function ()
-	hs.application("Twitterrific"):activate()
-end)
