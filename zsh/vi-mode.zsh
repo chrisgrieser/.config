@@ -56,3 +56,5 @@ bindkey -M vicmd 'L' vi-end-of-line
 bindkey -M vicmd 'H' vi-first-non-blank
 bindkey -M vicmd 'U' redo
 bindkey -M vicmd '-' vi-history-search-backward
+
+alias :help ="bindkey -M vicmd"

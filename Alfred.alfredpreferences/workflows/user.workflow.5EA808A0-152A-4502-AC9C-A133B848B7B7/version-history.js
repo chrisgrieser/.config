@@ -46,67 +46,77 @@ function run (argv) {
 
 	//------------------------------------------------------------------------------
 
+	const firstRun = query === "";
+	let firstItem = true;
+	let historyMatches;
+
+	const logLines = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h;%ad;%s;%an" "${fullPath}"`)
+		.split("\r");
+
 	// write versions into temporary directory
 	app.doShellScript(`mkdir -p ${tempDir}`);
-	app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:%h "${fullPath}"`)
-		.split("\r")
-		.forEach(commitHash => {
-			const tempPath = `${tempDir}/${commitHash}.${ext}`;
-			if (!fileExists(tempPath)) {
-				app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > "${tempPath}"`);
-			}
-		});
+	logLines.forEach(logLine => {
+		const commitHash = logLine.split(";")[0];
+		const tempPath = `${tempDir}/${commitHash}.${ext}`;
+		if (!fileExists(tempPath)) {
+			app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > "${tempPath}"`);
+		}
+	});
 
-	let firstItem = true;
+	// show all versions of file with commit message, author. Sorted by commit date.
+	if (firstRun) {
+		historyMatches = logLines
+			.map(logLine => {
+				const commitHash = logLine.split(";")[0];
+				const date = logLine.split(";")[0];
+				const commitMsg = logLine.split(";")[1];
+				const author = logLine.split(";")[2];
+				const filePath =`${tempDir}/${file}`;
+			});
 
-	if (query) {
-
-	} else {
-
-	}
 	// search versions with ripgrep & display git commit info for matched versions
-	const ripgrepMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --sort=accessed --files-with-matches --smart-case "${query}"`)
-		.split("\r")
-		.map(file => {
-			const commitHash = file.replace(/(\w+)\.\w+/, "$1");
-			const logline = app.doShellScript(`cd "${parentFolder}" ; git show -s --format="%ad;%s;%an" --date=human ${commitHash}`);
-			const date = logline.split(";")[0];
-			const commitMsg = logline.split(";")[1];
-			const author = logline.split(";")[2];
-			const filePath =`${tempDir}/${file}`;
+	} else {
+		historyMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 --line-number --smart-case "${query}"`)
+			.split("\r")
+			.map(file => {
+				const commitHash = file.replace(/(\w+)\.\w+/, "$1");
+				const logline = app.doShellScript(`cd "${parentFolder}" ; git show -s --format="%ad;%s;%an" --date=human ${commitHash}`);
+				const date = logline.split(";")[0];
+				const filePath =`${tempDir}/${file}`;
 
-			// if there is a query, display match instead of commit msg & author
-			// also add line count for opening the file
-			let subtitle = `${commitMsg}  ▪︎  ${author}`;
-			let line = "0";
-			if (query) {
-				const firstMatch = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; rg --smart-case --max-count=1 --line-number "${query}" "${filePath}"`);
-				const tempArr = firstMatch.split(":");
-				tempArr.shift();
-				subtitle = tempArr.join("").trim();
-				line = firstMatch.split(":")[0];
-			}
+				// if there is a query, display match instead of commit msg & author
+				// also add line count for opening the file
+				let subtitle = `${commitMsg}  ▪︎  ${author}`;
+				let line = "0";
+				if (query) {
+					const firstMatch = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; rg --smart-case --max-count=1 --line-number "${query}" "${filePath}"`);
+					const tempArr = firstMatch.split(":");
+					tempArr.shift();
+					subtitle = tempArr.join("").trim();
+					line = firstMatch.split(":")[0];
+				}
 
-			let appendix = "";
-			if (firstItem) {
-				appendix = "  ▪︎  " + fileName;
-				firstItem = false;
-			}
+				let appendix = "";
+				if (firstItem) {
+					appendix = "  ▪︎  " + fileName;
+					firstItem = false;
+				}
 
-			return {
-				"title": date + appendix,
-				"subtitle": subtitle,
-				"quicklookurl": filePath,
-				"mods": {
-					"cmd": { "arg": `${filePath};${fullPath}` },
-					"alt": {
-						"arg": commitHash,
-						"subtitle": `${commitHash}    (⌥: Copy)`
+				return {
+					"title": date + appendix,
+					"subtitle": subtitle,
+					"quicklookurl": filePath,
+					"mods": {
+						"cmd": { "arg": `${filePath};${fullPath}` },
+						"alt": {
+							"arg": commitHash,
+							"subtitle": `${commitHash}    (⌥: Copy)`
+						},
 					},
-				},
-				"icon": fileIcon,
-				"arg": `${filePath}:${line}`,
-			};
-		});
-	return JSON.stringify({ items: ripgrepMatches });
+					"icon": fileIcon,
+					"arg": `${filePath}:${line}`,
+				};
+			});
+	}
+	return JSON.stringify({ items: historyMatches });
 }
