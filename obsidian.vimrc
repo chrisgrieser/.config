@@ -289,7 +289,13 @@ imap <C-e> <Esc>A
 imap <C-k> <Esc>lC
 
 " Kill line backwards
-imap <C-j> <Esc>c^
+imap <C-u> <Esc>c^
+
+""""""""""""""""""""""
+" < Visual Mode
+""""""""""""""""""""""
+" so that VV... in normal mode just selects more lines
+vmap V gj
 
 """"""""""""""""""""""
 " < Tabs/Window
