@@ -23,62 +23,63 @@ function run (argv) {
 	//------------------------------------------------------------------------------
 	const query = argv.join("");
 
-	let fullPath;
+	let FULL_PATH;
 	try {
-		fullPath = $.getenv("input");
+		FULL_PATH = $.getenv("input");
 	} catch (error) {
-		fullPath = finderSelection();
-		if (!fullPath) return alfredErrorDisplay("No selection");
+		FULL_PATH = finderSelection();
+		if (!FULL_PATH) return alfredErrorDisplay("No selection");
 	}
 
-	const isRegularFile = fullPath.match(filePathRegex);
+	const isRegularFile = FULL_PATH.match(filePathRegex);
 	if (!isRegularFile) return alfredErrorDisplay("Not a regular file");
 
-	const parentFolder = fullPath.replace(filePathRegex, "$1");
-	const isGitRepo = app.doShellScript(`cd "${parentFolder}" ; git rev-parse --git-dir || echo "not a git directory"`).endsWith(".git");
+	const PARENT_FOLDER = FULL_PATH.replace(filePathRegex, "$1");
+	const isGitRepo = app.doShellScript(`cd "${PARENT_FOLDER}" ; git rev-parse --git-dir || echo "not a git directory"`).endsWith(".git");
 	if (!isGitRepo) return alfredErrorDisplay("Not a git directory");
 
-	const fileName = fullPath.replace(filePathRegex, "$2");
-	const safeFileName = fileName.replace(/[/: .]/g, "-");
-	const ext = fullPath.replace(filePathRegex, "$3");
-	const fileIcon = { "type": "fileicon", "path": fullPath };
-	const tempDir = `/tmp/${safeFileName}`;
+	const FILE_NAME = FULL_PATH.replace(filePathRegex, "$2");
+	const safeFileName = FILE_NAME.replace(/[/: .]/g, "-");
+	const EXT = FULL_PATH.replace(filePathRegex, "$3");
+	const FILE_ICON = { "type": "fileicon", "path": FULL_PATH };
+	const TEMP_DIR = "/tmp/" + safeFileName;
 
 	//------------------------------------------------------------------------------
 
 	const firstRun = query === "";
-	let firstItem = true;
+	let FIRST_ITEM = true;
 	let historyMatches;
 	let extraOptions = "";
 	if (firstRun) extraOptions = ";%ad;%s;%an";
 
 	// write versions into temporary directory
-	const logLines = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h${extraOptions}" --date=human "${fullPath}"`)
+	const logLines = app.doShellScript(`cd "${PARENT_FOLDER}" ; git log --pretty=format:"%h${extraOptions}" --date=human "${FULL_PATH}"`)
 		.split("\r");
-	app.doShellScript(`mkdir -p ${tempDir}`);
-	logLines.forEach(logLine => {
-		const commitHash = logLine.split(";")[0];
-		const tempPath = `${tempDir}/${commitHash}.${ext}`;
-		if (!fileExists(tempPath)) {
-			app.doShellScript(`cd "${parentFolder}" ; git show "${commitHash}:./${fileName}" > "${tempPath}"`);
+	app.doShellScript(`mkdir -p ${TEMP_DIR}`);
+	logLines.forEach(line => {
+		const commitHash = line.split(";")[0];
+		const filePath = `${TEMP_DIR}/${commitHash}.${EXT}`;
+		if (!fileExists(filePath)) {
+			app.doShellScript(`cd "${PARENT_FOLDER}" ; git show "${commitHash}:./${FILE_NAME}" > "${filePath}"`);
 		}
 	});
 
 	// show all versions of file with commit message, author. Sorted by commit date.
 	if (firstRun) {
-		historyMatches = logLines.map(logLine => {
-			const commitHash = logLine.split(";")[0];
-			const date = logLine.split(";")[1];
-			const commitMsg = logLine.split(";")[2];
-			const author = logLine.split(";")[3];
-			const filePath =`${tempDir}/${commitHash}.${ext}`;
+		historyMatches = logLines.map(line => {
+			const lineParts = line.split(";");
+			const commitHash = lineParts[0];
+			const date = lineParts[1];
+			const commitMsg = lineParts[2];
+			const author = lineParts[3];
+			const filePath =`${TEMP_DIR}/${commitHash}.${EXT}`;
 
 			const subtitle = `${commitMsg}  ▪︎  ${author}`;
 
 			let appendix = "";
-			if (firstItem) {
-				appendix = "  ▪︎  " + fileName;
-				firstItem = false;
+			if (FIRST_ITEM) {
+				appendix = "  ▪︎  " + FILE_NAME;
+				FIRST_ITEM = false;
 			}
 
 			return {
@@ -86,13 +87,13 @@ function run (argv) {
 				"subtitle": subtitle,
 				"quicklookurl": filePath,
 				"mods": {
-					"cmd": { "arg": `${filePath};${fullPath}` }, // old;new file for diff view
+					"cmd": { "arg": `${filePath};${FULL_PATH}` }, // old;new file for diff view
 					"alt": {
 						"arg": commitHash,
 						"subtitle": `${commitHash}    (⌥: Copy)`
 					},
 				},
-				"icon": fileIcon,
+				"icon": FILE_ICON,
 				"arg": `${filePath}`,
 			};
 
@@ -100,20 +101,21 @@ function run (argv) {
 
 	// search versions with ripgrep & display git commit info for matched versions
 	} else {
-		historyMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 --line-number --smart-case "${query}"`)
+		historyMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${TEMP_DIR}" ; rg --max-count=1 --line-number --smart-case "${query}"`)
 			.split("\r")
 			.map(rgMatch => {
 				const commitHash = rgMatch.split(".")[0];
-				const file = rgMatch.split(":")[0];
-				const line = rgMatch.split(":")[1];
-				const firstMatch = rgMatch.split(":")[2].trim();
-				const date = app.doShellScript(`cd "${parentFolder}" ; git show -s --format=%ad --date=human ${commitHash}`);
-				const filePath =`${tempDir}/${file}`;
+				const date = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show -s --format=%ad --date=human ${commitHash}`);
+				const lineParts = rgMatch.split(":");
+				const file = lineParts[0];
+				const line = lineParts[1];
+				const firstMatch = lineParts[2].trim();
+				const filePath =`${TEMP_DIR}/${file}`;
 
 				let appendix = "";
-				if (firstItem) {
-					appendix = "  ▪︎  " + fileName;
-					firstItem = false;
+				if (FIRST_ITEM) {
+					appendix = "  ▪︎  " + FILE_NAME;
+					FIRST_ITEM = false;
 				}
 
 				return {
@@ -121,13 +123,13 @@ function run (argv) {
 					"subtitle": firstMatch,
 					"quicklookurl": filePath,
 					"mods": {
-						"cmd": { "arg": `${filePath};${fullPath}` }, // old;new file for diff view
+						"cmd": { "arg": `${filePath};${FULL_PATH}` }, // old;new file for diff view
 						"alt": {
 							"arg": commitHash,
 							"subtitle": `${commitHash}    (⌥: Copy)`
 						},
 					},
-					"icon": fileIcon,
+					"icon": FILE_ICON,
 					"arg": `${filePath}:${line}`,
 				};
 
