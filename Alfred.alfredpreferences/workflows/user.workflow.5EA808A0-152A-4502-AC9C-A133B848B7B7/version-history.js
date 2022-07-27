@@ -24,7 +24,7 @@ function run (argv) {
 		const diff = target - str.length;
 		if (diff > 0) {
 			for (let i = 1; i <= diff; i++) {
-				str += "a";
+				str += " ";
 			}
 		}
 		return str;
@@ -85,8 +85,8 @@ function run (argv) {
 			const displayDate = line.split(";")[1]; // results from `extraOptions`
 			const commitMsg = line.split(";")[2]; //             ^
 			const author = line.split(";")[3]; //                ^
-
 			const numstat = line.split(";")[4].match(/\d+/g); // ^
+
 			const changes = Number(numstat[0]) + Number(numstat[1]);
 			const displayChanges = padLeft(changes.toString(), 3);
 
