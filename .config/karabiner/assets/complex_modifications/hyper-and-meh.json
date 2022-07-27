@@ -1,5 +1,5 @@
 {
-  "title": "⇪↹ Hyper and Meh Key",
+  "title": "⇪ Hyper and ↹ Meh Key",
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
@@ -295,6 +295,9 @@
                 "option",
                 "shift"
               ]
+            },
+            {
+              "key_code": "delete_or_backspace"
             },
             {
               "key_code": "delete_or_backspace"
