@@ -46,11 +46,11 @@ function run (argv) {
 
 	//------------------------------------------------------------------------------
 
-	const firstRun = query === "";
+	const FIRST_RUN = query === "";
 	let FIRST_ITEM = true;
 	let historyMatches;
 	let extraOptions = "";
-	if (firstRun) extraOptions = ";%ad;%s;%an";
+	if (FIRST_RUN) extraOptions = ";%ad;%s;%an";
 
 	// write versions into temporary directory
 	const logLines = app.doShellScript(`cd "${PARENT_FOLDER}" ; git log --pretty=format:"%h${extraOptions}" --date=human "${FULL_PATH}"`)
@@ -65,13 +65,13 @@ function run (argv) {
 	});
 
 	// show all versions of file with commit message, author. Sorted by commit date.
-	if (firstRun) {
+	if (FIRST_RUN) {
 		historyMatches = logLines.map(line => {
 			const lineParts = line.split(";");
 			const commitHash = lineParts[0];
-			const date = lineParts[1];
-			const commitMsg = lineParts[2];
-			const author = lineParts[3];
+			const displayDate = lineParts[1]; // results from `extraOptions`
+			const commitMsg = lineParts[2]; // ^
+			const author = lineParts[3]; //    ^
 			const filePath =`${TEMP_DIR}/${commitHash}.${EXT}`;
 
 			const subtitle = `${commitMsg}  ▪︎  ${author}`;
@@ -83,7 +83,7 @@ function run (argv) {
 			}
 
 			return {
-				"title": date + appendix,
+				"title": displayDate + appendix,
 				"subtitle": subtitle,
 				"quicklookurl": filePath,
 				"mods": {
@@ -105,7 +105,8 @@ function run (argv) {
 			.split("\r")
 			.map(rgMatch => {
 				const commitHash = rgMatch.split(".")[0];
-				const date = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show -s --format=%ad --date=human ${commitHash}`);
+				const displayDate = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show -s --format=%ad --date=human ${commitHash}`);
+				const date = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show -s --format=%ad ${commitHash}`);
 				const lineParts = rgMatch.split(":");
 				const file = lineParts[0];
 				const line = lineParts[1];
@@ -119,7 +120,8 @@ function run (argv) {
 				}
 
 				return {
-					"title": date + appendix,
+					"date": date,
+					"title": displayDate + appendix,
 					"subtitle": firstMatch,
 					"quicklookurl": filePath,
 					"mods": {
@@ -133,7 +135,9 @@ function run (argv) {
 					"arg": `${filePath}:${line}`,
 				};
 
-			});
+			})
+			// sort here and not via ripgrep, since sorting in ripgrep makes it run single-threated (= slower)
+			.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 	}
 
 	return JSON.stringify({ items: historyMatches });
