@@ -7,6 +7,9 @@ FILE="$(basename "$FULL_PATH")"
 EXT="${FILE##*.}"
 OLD="/tmp/$hash.$EXT"
 
+cd "$(dirname "$FULL_PATH")" || exit 1
+[[ ! -e "$OLD" ]] && git show "$hash:./$FILE" > "$OLD"
+
 diff --unified --ignore-all-space "$OLD" "$FULL_PATH" | tail -n+3 > "/tmp/$hash.diff"
 
 "$sublcli" "/tmp/$hash.diff"

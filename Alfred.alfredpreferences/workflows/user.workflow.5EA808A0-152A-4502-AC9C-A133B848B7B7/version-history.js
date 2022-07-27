@@ -104,13 +104,8 @@ function run (argv) {
 		historyMatches = app.doShellScript(`cd "${PARENT_FOLDER}" ; git log -G"${query}" --regexp-ignore-case --pretty=%h -- "${FULL_PATH}"`)
 			.split("\r")
 			.map(commitHash => {
-				// const commitHash = rgMatch.split(".")[0];
-				const dateData = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show -s --format="%ah;%ad" ${commitHash}`);
-				const displayDate = dateData.split(";")[0];
-				const date = dateData.split(";")[1];
-				// const file = rgMatch.split(":")[0];
-				// const line = rgMatch.split(":")[1];
-				// const firstMatch = rgMatch.split(":")[2].trim();
+				const displayDate = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show -s --format=%ah ${commitHash}`);
+				const firstMatch = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show "${commitHash}:./${FILE_NAME}" | grep "${query}" --max-count=1 --ignore-case --line-number || true`);
 				// const line = "0";
 
 				let appendix = "";
@@ -120,9 +115,8 @@ function run (argv) {
 				}
 
 				return {
-					"date": date,
 					"title": displayDate + appendix,
-					// "subtitle": firstMatch,
+					"subtitle": firstMatch,
 					"mods": {
 						"alt": {
 							"arg": commitHash,

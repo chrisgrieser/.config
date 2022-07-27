@@ -8,6 +8,6 @@ EXT="${FILE##*.}"
 OLD="/tmp/$hash.$EXT"
 
 cd "$(dirname "$FULL_PATH")" || exit 1
-git show "$hash:./$FILE" > "$OLD"
+[[ ! -e "$OLD" ]] && git show "$hash:./$FILE" > "$OLD"
 
 "$sublcli" "$OLD"
