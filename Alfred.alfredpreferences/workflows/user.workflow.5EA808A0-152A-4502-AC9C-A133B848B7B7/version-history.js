@@ -11,8 +11,6 @@ function run (argv) {
 		return sel.slice(7);
 	}
 
-	const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
-
 	const filePathRegex = /(\/.*)\/(.*\.(\w+))$/;
 
 	function alfredErrorDisplay (text) {
@@ -49,10 +47,7 @@ function run (argv) {
 	if (!isGitRepo) return alfredErrorDisplay("Not a git directory");
 
 	const FILE_NAME = FULL_PATH.replace(filePathRegex, "$2");
-	const safeFileName = FILE_NAME.replace(/[/: .]/g, "-");
-	const EXT = FULL_PATH.replace(filePathRegex, "$3");
 	const FILE_ICON = { "type": "fileicon", "path": FULL_PATH };
-	const TEMP_DIR = "/tmp/" + safeFileName;
 
 	//------------------------------------------------------------------------------
 
@@ -68,15 +63,6 @@ function run (argv) {
 		logLines = app.doShellScript(`cd "${PARENT_FOLDER}" ; git log --pretty=format:%h "${FULL_PATH}"`)
 			.split("\r");
 	}
-	// write versions into temporary directory
-	// app.doShellScript(`mkdir -p ${TEMP_DIR}`);
-	// logLines.forEach(line => {
-	// 	const commitHash = line.split(";")[0];
-	// 	const filePath = `${TEMP_DIR}/${commitHash}.${EXT}`;
-	// 	if (!fileExists(filePath)) {
-	// 		app.doShellScript(`cd "${PARENT_FOLDER}" ; git show "${commitHash}:./${FILE_NAME}" > "${filePath}"`);
-	// 	}
-	// });
 
 	// show all versions of file with commit message, author. Sorted by commit date.
 	if (FIRST_RUN) {
@@ -90,8 +76,6 @@ function run (argv) {
 			const changes = Number(numstat[0]) + Number(numstat[1]);
 			const displayChanges = padLeft(changes.toString(), 3);
 
-			const filePath =`${TEMP_DIR}/${commitHash}.${EXT}`;
-
 			const subtitle = `${displayChanges}  ▪︎  ${commitMsg}  ▪︎  ${author}`;
 
 			let appendix = "";
@@ -103,17 +87,14 @@ function run (argv) {
 			return {
 				"title": displayDate + appendix,
 				"subtitle": subtitle,
-				"quicklookurl": filePath,
 				"mods": {
-					"cmd": { "arg": `${filePath};${FULL_PATH}` }, // old;new file for diff view
-					"shift": { "arg": `${commitHash};${FULL_PATH}` },
 					"alt": {
 						"arg": commitHash,
 						"subtitle": `${commitHash}    (⌥: Copy)`
 					},
 				},
 				"icon": FILE_ICON,
-				"arg": `${filePath}`,
+				"arg": `${commitHash};${FULL_PATH}`,
 			};
 
 		});
@@ -130,8 +111,7 @@ function run (argv) {
 				// const file = rgMatch.split(":")[0];
 				// const line = rgMatch.split(":")[1];
 				// const firstMatch = rgMatch.split(":")[2].trim();
-				const line = "0";
-				const filePath =`${TEMP_DIR}/${commitHash}.${EXT}`;
+				// const line = "0";
 
 				let appendix = "";
 				if (FIRST_ITEM) {
@@ -143,21 +123,17 @@ function run (argv) {
 					"date": date,
 					"title": displayDate + appendix,
 					// "subtitle": firstMatch,
-					"quicklookurl": filePath,
 					"mods": {
-						"cmd": { "arg": `${filePath};${FULL_PATH}` }, // old;new file for diff view
 						"alt": {
 							"arg": commitHash,
 							"subtitle": `${commitHash}    (⌥: Copy)`
 						},
 					},
 					"icon": FILE_ICON,
-					"arg": `${filePath}:${line}`,
+					"arg": `${commitHash};${FULL_PATH}`,
 				};
 
-			})
-			// sort not via ripgrep, since sorting in ripgrep makes it run single-threaded (= slower)
-			.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+			});
 	}
 
 	return JSON.stringify({ items: historyMatches });
