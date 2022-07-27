@@ -12,6 +12,10 @@ matches:
   - trigger: '!wd'
     replace: '~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/'
 
+  - trigger: "!path"
+    replace: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH"
+    label: PATH
+
   - trigger: '!bug'
     replace: >
       Could you open a bug report at the GitHub repo?

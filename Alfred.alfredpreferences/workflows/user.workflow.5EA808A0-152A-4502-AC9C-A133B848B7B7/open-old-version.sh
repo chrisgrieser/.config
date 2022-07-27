@@ -3,6 +3,7 @@ sublcli="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" # using
 
 hash=$(echo "$*" | cut -d";" -f1)
 FULL_PATH=$(echo "$*" | cut -d";" -f2)
+line=$(echo "$*" | cut -d";" -f3)
 FILE="$(basename "$FULL_PATH")"
 EXT="${FILE##*.}"
 OLD="/tmp/$hash.$EXT"
@@ -10,4 +11,4 @@ OLD="/tmp/$hash.$EXT"
 cd "$(dirname "$FULL_PATH")" || exit 1
 [[ ! -e "$OLD" ]] && git show "$hash:./$FILE" > "$OLD"
 
-"$sublcli" "$OLD"
+"$sublcli" "$OLD:$line"

@@ -534,7 +534,7 @@ wf_sublime = wf.new("Sublime Text")
 wf_sublime:subscribe(wf.windowCreated, function ()
 	local currentWindow = hs.window.focusedWindow()
 
-	if currentWindow:title():match("sublime%-settings$") or isAtOffice() then
+	if currentWindow:title():match("sublime%-settings$") or currentWindow:title():match("sublime%-keymap$") or isAtOffice() then
 		moveAndResize("maximized")
 	else
 		moveAndResize("pseudo-maximized")
