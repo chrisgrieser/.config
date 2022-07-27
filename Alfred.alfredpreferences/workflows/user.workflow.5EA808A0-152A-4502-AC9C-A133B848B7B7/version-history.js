@@ -94,7 +94,7 @@ function run (argv) {
 					},
 				},
 				"icon": FILE_ICON,
-				"arg": `${commitHash};${FULL_PATH}`,
+				"arg": `${commitHash};${FULL_PATH};0`,
 			};
 
 		});
@@ -105,8 +105,16 @@ function run (argv) {
 			.split("\r")
 			.map(commitHash => {
 				const displayDate = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show -s --format=%ah ${commitHash}`);
-				const firstMatch = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show "${commitHash}:./${FILE_NAME}" | grep "${query}" --max-count=1 --ignore-case --line-number || true`);
-				// const line = "0";
+				const grepMatch = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show "${commitHash}:./${FILE_NAME}" | grep "${query}" --max-count=1 --ignore-case --line-number || true`);
+				let line;
+				let firstMatch;
+				if (grepMatch) {
+					line = grepMatch.split(":")[0];
+					firstMatch = grepMatch.split(":")[1].trim();
+				} else {
+					firstMatch = `['${query}' removed in this commit]`;
+					line = "0";
+				}
 
 				let appendix = "";
 				if (FIRST_ITEM) {
@@ -124,7 +132,7 @@ function run (argv) {
 						},
 					},
 					"icon": FILE_ICON,
-					"arg": `${commitHash};${FULL_PATH}`,
+					"arg": `${commitHash};${FULL_PATH};${line}`,
 				};
 
 			});
