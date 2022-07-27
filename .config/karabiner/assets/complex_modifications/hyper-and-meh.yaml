@@ -200,14 +200,6 @@ rules:
           - key_code: v
             modifiers:
               - command
-        conditions:
-          - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^md\.obsidian$
-              - ^com\.sublimetext
-          - type: input_source_if
-            input_sources:
-              - language: ^de$
 
       # goto end of (visual) line
       - type: basic

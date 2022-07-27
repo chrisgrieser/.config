@@ -1,3 +1,4 @@
+# shellcheck disable=SC2139
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
 
 # configurations
@@ -48,8 +49,8 @@ alias size="du -sh ./* | sort -rh | sed 's/\\.\\///'" # size of files in current
 # Suffix Aliases
 # = default command to act upon the filetype, when is is entered
 # without preceding command (analogous to `setopt AUTO_CD` but for files)
-# shellcheck disable=SC2139
-alias -s {css,ts,js,md,yml,json,plist,xml,pdf,png,jpg,jpeg}='open'
+alias -s {css,ts,js,md,yml,json,plist,xml}='open'
+alias -s {pdf,png,jpg,jpeg}="qlmanage -p"
 
 # open log files in less and scrolled to the bottom
 alias -s log="less +G"
