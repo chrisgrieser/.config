@@ -70,8 +70,8 @@ function run (argv) {
 			const lineParts = line.split(";");
 			const commitHash = lineParts[0];
 			const displayDate = lineParts[1]; // results from `extraOptions`
-			const commitMsg = lineParts[2]; // ^
-			const author = lineParts[3]; //    ^
+			const commitMsg = lineParts[2]; //   ^
+			const author = lineParts[3]; //      ^
 			const filePath =`${TEMP_DIR}/${commitHash}.${EXT}`;
 
 			const subtitle = `${commitMsg}  ▪︎  ${author}`;
@@ -136,7 +136,7 @@ function run (argv) {
 				};
 
 			})
-			// sort here and not via ripgrep, since sorting in ripgrep makes it run single-threated (= slower)
+			// sort not via ripgrep, since sorting in ripgrep makes it run single-threaded (= slower)
 			.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 	}
 

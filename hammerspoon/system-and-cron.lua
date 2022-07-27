@@ -3,7 +3,7 @@ require("utils")
 require("window-management")
 --------------------------------------------------------------------------------
 -- SYNC
-repoSyncFrequencyMin = 15
+repoSyncFrequencyMin = 20
 gitDotfileScript = os.getenv("HOME").."/dotfiles/git-dotfile-sync.sh"
 gitVaultScript = os.getenv("HOME").."/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh"
 
