@@ -56,7 +56,9 @@ end
 downloadFolderWatcher = hs.pathwatcher.new(home.."/Video/Downloaded", downloadFolderBadge)
 if isIMacAtHome() then downloadFolderWatcher:start() end
 
--- Folder Redirects to File Hub
+--------------------------------------------------------------------------------
+
+-- Redirects TO File Hub
 scanFolder = home.."/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 function scanFolderMove()
 	hs.execute("mv '"..scanFolder.."'/* '"..fileHub.."'")
@@ -71,18 +73,19 @@ end
 systemDlFolderWatcher = hs.pathwatcher.new(systemDownloadFolder, systemDlFolderMove)
 systemDlFolderWatcher:start()
 
-function autoRemoveFromFileHub(files)
-	runDelayed(3, function ()
-		for _,file in pairs(files) do
-			if file:sub(-15) == ".alfredworkflow" or file:sub(-4) == ".ics" then
-				hs.applescript(
-					'set toDelete to "'..file..'" as POSIX file\n'..
-					'tell application "Finder" to delete toDelete'
-				)
-			end
+-- Redirects FROM File Hub
+function fromFileHub(files)
+	for _,file in pairs(files) do
+		if file:sub(-15) == ".alfredworkflow" or file:sub(-4) == ".ics" then
+			runDelayed(3, function ()
+				hs.applescript('set toDelete to "'..file..'" as POSIX file\n'..
+					'tell application "Finder" to delete toDelete')
+			end)
+		elseif file == "vimium-options.json" then
+			hs.execute("mv -f '"..fileHub.."vimium-options.json' \"$HOME/dotfiles/Browser Extension Settings/vimium-options.json\"")
 		end
-	end)
+	end
 end
-fileHubWatcher = hs.pathwatcher.new(fileHub, autoRemoveFromFileHub)
+fileHubWatcher = hs.pathwatcher.new(fileHub, fromFileHub)
 fileHubWatcher:start()
 
