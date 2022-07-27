@@ -36,21 +36,22 @@ finderAppWatcher:start()
 -- ZOOM: don't leave behind tab when opening URL
 function zoomWatcher(appName, eventType)
 	if not(eventType == aw.launched and appName == "zoom.us") then return end
-	hs.osascript.applescript([[
-		delay 2
-		tell application "Brave Browser"
-			set window_list to every window
-			repeat with the_window in window_list
-				set tab_list to every tab in the_window
-				repeat with the_tab in tab_list
-					set the_url to the url of the_tab
-					if the_url contains ("zoom.us") then
-						close the_tab
-					end if
+	runDelayed(3, function ()
+		hs.osascript.applescript([[
+			tell application "Brave Browser"
+				set window_list to every window
+				repeat with the_window in window_list
+					set tab_list to every tab in the_window
+					repeat with the_tab in tab_list
+						set the_url to the url of the_tab
+						if the_url contains ("zoom.us") then
+							close the_tab
+						end if
+					end repeat
 				end repeat
-			end repeat
-		end tell
-	]])
+			end tell
+		]])
+	end)
 end
 zoomAppWatcher = aw.new(zoomWatcher)
 zoomAppWatcher:start()
