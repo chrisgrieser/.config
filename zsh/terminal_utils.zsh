@@ -1,12 +1,3 @@
-# better cd/z
-function z () {
-	if [[ -d "$1" ]] ; then
-		z "$1"
-	elif [[ -f  "$1" ]] ; then
-		z "$(dirname "$1")"
-	fi
-}
-
 # settings (zshrc)
 alias ,="settings"
 function settings () {

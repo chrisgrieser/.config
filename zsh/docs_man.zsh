@@ -9,18 +9,15 @@ function cc () {
 # first arg: command
 # second arg: search term
 function man () {
-	which alacritty &> /dev/null
-	if [[ $? == 1 ]] ; then
+	if ! which alacritty &> /dev/null; then
 		echo "Not using Alacritty."
 		return 1
 	fi
-	which "$1" &> /dev/null
-	if [[ $? == 1 ]] ; then
+	if ! which "$1" &> /dev/null; then
 		echo "Command '$1' not installed."
 		return 1
 	fi
-	which "$PAGER" &> /dev/null
-	if [[ $? == 1 ]] ; then
+	if ! which "$PAGER" &> /dev/null; then
  		echo "Pager '$PAGER' not installed."
  		return 1
  	fi
@@ -30,7 +27,7 @@ function man () {
 		(alacritty \
 			--option=window.decorations=full \
 			--title="man $1" \
-			--command man "$1"&)
+			--command man "$1" &)
 	else
 		(alacritty \
 			--option=window.decorations=full \

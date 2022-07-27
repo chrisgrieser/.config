@@ -163,6 +163,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E91BA4CB-B708-47B1-B606-EC119ECC9301</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>64C686C1-E836-4CB7-AAD4-52E72832714C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>FE91F5F4-DB81-40FB-95B9-20859076AB23</key>
 		<array>
 			<dict>
@@ -414,6 +427,50 @@ end if</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>man</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>man {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E91BA4CB-B708-47B1-B606-EC119ECC9301</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>open-man-page.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>64C686C1-E836-4CB7-AAD4-52E72832714C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -606,7 +663,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>275</real>
 		</dict>
 		<key>1A820AA0-CFDD-4B5A-9E6D-BF2990A3E581</key>
 		<dict>
@@ -615,7 +672,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>525</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>575</real>
 		</dict>
 		<key>3ADE22C7-10D2-4528-9298-22A616F276B1</key>
 		<dict>
@@ -640,7 +697,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>575</real>
 		</dict>
 		<key>5707C8CC-3CD7-4D92-A6CD-283E796905EC</key>
 		<dict>
@@ -649,7 +706,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>160</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>725</real>
 		</dict>
 		<key>6434A449-59F1-4AD1-B616-B22CC2FC4A6D</key>
 		<dict>
@@ -660,6 +717,15 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
+		<key>64C686C1-E836-4CB7-AAD4-52E72832714C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>240</real>
+			<key>ypos</key>
+			<real>430</real>
+		</dict>
 		<key>97B7CF87-4080-4394-87B8-2074B83B59A7</key>
 		<dict>
 			<key>colorindex</key>
@@ -667,7 +733,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>575</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
@@ -683,7 +749,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>575</real>
 		</dict>
 		<key>A883397A-C748-4E51-B5EB-96B4F58AADCD</key>
 		<dict>
@@ -694,7 +760,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>691</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>595</real>
 		</dict>
 		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
 		<dict>
@@ -703,7 +769,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>490</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>275</real>
 		</dict>
 		<key>A91C3D48-6860-4B50-B5E9-83B5ACFF6C05</key>
 		<dict>
@@ -712,7 +778,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>765</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>575</real>
 		</dict>
 		<key>B49ADC0D-7CDD-4567-A6DE-E7D97662B343</key>
 		<dict>
@@ -728,14 +794,23 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>295</real>
 		</dict>
 		<key>C8135108-B86E-49C6-81FB-5601CFB5BF9A</key>
 		<dict>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>275</real>
+		</dict>
+		<key>E91BA4CB-B708-47B1-B606-EC119ECC9301</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>430</real>
 		</dict>
 		<key>FE91F5F4-DB81-40FB-95B9-20859076AB23</key>
 		<dict>
@@ -744,7 +819,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>695</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
