@@ -1,13 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
 
-
-// test #2
-// test #2
-// test #2
-// test #2
-// test #2
-
-
 function run (argv) {
 	ObjC.import("stdlib");
 	const app = Application.currentApplication();
