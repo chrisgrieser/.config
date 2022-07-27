@@ -65,35 +65,13 @@
 
 	//---------------------------------------------------------------------------
 
-	// imap vv <Esc>v (quick visual mode)
-	{"keys": ["v", "v"], "command": "chain",
-		"args": {
-			"commands": [
-				["nv_enter_normal_mode"],
-				["nv_feed_key", {"key": "v"}],
-			]
-		},
-		"context": [{ "key": "vi_insert_mode_aware" } ]
-	},
-
-	// imap VV <Esc>V (quick visual line mode)
-	{"keys": ["V", "V"], "command": "chain",
-		"args": {
-			"commands": [
-				["nv_enter_normal_mode"],
-				["nv_feed_key", {"key": "V"}],
-			]
-		},
-		"context": [{ "key": "vi_insert_mode_aware" } ]
-	},
-
 	// Kill line, imap <C-k> <Esc>C
 	{ "keys": ["ctrl+k"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard EOL.sublime-macro"},
 		"context": [{ "key": "vi_insert_mode_aware" } ]
 	},
 
-	// Kill line backwards, imap <C-j> <Esc>c^
-	{ "keys": ["ctrl+j"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard BOL.sublime-macro"},
+	// Kill line backwards, imap <C-u> <Esc>c^
+	{ "keys": ["ctrl+u"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard BOL.sublime-macro"},
 		"context": [{ "key": "vi_insert_mode_aware" } ]
 	},
 

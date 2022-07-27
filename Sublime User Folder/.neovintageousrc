@@ -203,6 +203,12 @@ noremap <leader>i :ImportantSwitcher<CR>
 nnoremap <leader>t ysiw}i$<Esc>l
 
 """"""""""""""""""""""
+" < Visual Mode
+""""""""""""""""""""""
+" so that VV... in normal mode just selects more lines
+vnoremap V j
+
+""""""""""""""""""""""
 " < Text Objects
 """"""""""""""""""""""
 

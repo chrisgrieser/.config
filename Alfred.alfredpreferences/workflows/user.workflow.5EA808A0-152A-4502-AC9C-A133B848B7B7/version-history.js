@@ -49,12 +49,15 @@ function run (argv) {
 	const FIRST_RUN = query === "";
 	let FIRST_ITEM = true;
 	let historyMatches;
-	let extraOptions = "";
-	if (FIRST_RUN) extraOptions = ";%ad;%s;%an";
-
+	let logLines;
+	if (FIRST_RUN)  {
+		logLines = app.doShellScript(`cd "${PARENT_FOLDER}" ; git log --pretty=format:%h "${FULL_PATH}"`)
+			.split("\r");
+	} else {
+		logLines = app.doShellScript(`cd "${PARENT_FOLDER}" ; git log --pretty=format:%h "${FULL_PATH}"`)
+			.split("\r");
+	}
 	// write versions into temporary directory
-	const logLines = app.doShellScript(`cd "${PARENT_FOLDER}" ; git log --pretty=format:"%h${extraOptions}" --date=human "${FULL_PATH}"`)
-		.split("\r");
 	app.doShellScript(`mkdir -p ${TEMP_DIR}`);
 	logLines.forEach(line => {
 		const commitHash = line.split(";")[0];
@@ -67,11 +70,10 @@ function run (argv) {
 	// show all versions of file with commit message, author. Sorted by commit date.
 	if (FIRST_RUN) {
 		historyMatches = logLines.map(line => {
-			const lineParts = line.split(";");
-			const commitHash = lineParts[0];
-			const displayDate = lineParts[1]; // results from `extraOptions`
-			const commitMsg = lineParts[2]; //   ^
-			const author = lineParts[3]; //      ^
+			const commitHash = line.split(";")[0];
+			const displayDate = line.split(";")[1]; // results from `extraOptions`
+			const commitMsg = line.split(";")[2]; //   ^
+			const author = line.split(";")[3]; //      ^
 			const filePath =`${TEMP_DIR}/${commitHash}.${EXT}`;
 
 			const subtitle = `${commitMsg}  ▪︎  ${author}`;
@@ -105,12 +107,12 @@ function run (argv) {
 			.split("\r")
 			.map(rgMatch => {
 				const commitHash = rgMatch.split(".")[0];
-				const displayDate = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show -s --format=%ad --date=human ${commitHash}`);
-				const date = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show -s --format=%ad ${commitHash}`);
-				const lineParts = rgMatch.split(":");
-				const file = lineParts[0];
-				const line = lineParts[1];
-				const firstMatch = lineParts[2].trim();
+				const dateData = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show -s --format="%ah;%ad" ${commitHash}`);
+				const displayDate = dateData.split(";")[0];
+				const date = dateData.split(";")[1];
+				const file = rgMatch.split(":")[0];
+				const line = rgMatch.split(":")[1];
+				const firstMatch = rgMatch.split(":")[2].trim();
 				const filePath =`${TEMP_DIR}/${file}`;
 
 				let appendix = "";
