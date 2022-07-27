@@ -59,8 +59,6 @@ function run (argv) {
 				const numstat = line.split(";")[4].match(/\d+/g); // ^
 				const changes = Number(numstat[0]) + Number(numstat[1]);
 
-				const subtitle = `${changes}  ▪︎  ${commitMsg}  ▪︎  ${author}`;
-
 				let appendix = "";
 				if (FIRST_ITEM) {
 					appendix = "  ▪︎  " + FILE_NAME;
@@ -69,7 +67,7 @@ function run (argv) {
 
 				return {
 					"title": displayDate + appendix,
-					"subtitle": subtitle,
+					"subtitle": `${changes}  ▪︎  ${commitMsg}  ▪︎  ${author}`,
 					"mods": {
 						"alt": {
 							"arg": commitHash,
@@ -86,43 +84,44 @@ function run (argv) {
 
 		const ripgrepInstalled = app.doShellScript('which rg || echo "no"') !== "no";
 		const grepEngine = ripgrepInstalled ? "rg" : "grep";
-		console.log("grepEngine used: " + grepEngine)
 
 		historyMatches = app.doShellScript(`cd "${PARENT_FOLDER}" ; git log -G"${query}" --regexp-ignore-case --pretty=%h -- "${FULL_PATH}"`)
-			.split("\r")
-			.map(commitHash => {
-				const displayDate = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show -s --format=%ah ${commitHash}`);
-				const grepMatch = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${PARENT_FOLDER}" ; git show "${commitHash}:./${FILE_NAME}" | ${grepEngine} "${query}" --max-count=1 --ignore-case --line-number || true`);
-				let line;
-				let firstMatch;
-				if (grepMatch) {
-					firstMatch = grepMatch.split(":")[1].trim();
-					line = grepMatch.split(":")[0];
-				} else {
-					firstMatch = `('${query}' removed in this commit)`;
-					line = "0";
-				}
+			.split("\r");
+		if (!historyMatches[0]) return alfredErrorDisplay("No matches found.");
 
-				let appendix = "";
-				if (FIRST_ITEM) {
-					appendix = "  ▪︎  " + FILE_NAME;
-					FIRST_ITEM = false;
-				}
+		historyMatches = historyMatches.map(commitHash => {
+			const displayDate = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show -s --format=%ah ${commitHash}`);
+			const grepMatch = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${PARENT_FOLDER}" ; git show "${commitHash}:./${FILE_NAME}" | ${grepEngine} "${query}" --max-count=1 --ignore-case --line-number || true`);
+			let line;
+			let firstMatch;
+			if (grepMatch) {
+				firstMatch = grepMatch.split(":")[1].trim();
+				line = grepMatch.split(":")[0];
+			} else {
+				firstMatch = `('${query}' removed in this commit)`;
+				line = "0";
+			}
 
-				return {
-					"title": displayDate + appendix,
-					"subtitle": firstMatch,
-					"mods": {
-						"alt": {
-							"arg": commitHash,
-							"subtitle": `${commitHash}    (⌥: Copy)`
-						},
+			let appendix = "";
+			if (FIRST_ITEM) {
+				appendix = "  ▪︎  " + FILE_NAME;
+				FIRST_ITEM = false;
+			}
+
+			return {
+				"title": displayDate + appendix,
+				"subtitle": firstMatch,
+				"mods": {
+					"alt": {
+						"arg": commitHash,
+						"subtitle": `${commitHash}    (⌥: Copy)`
 					},
-					"icon": FILE_ICON,
-					"arg": `${commitHash};${FULL_PATH};${line}`,
-				};
+				},
+				"icon": FILE_ICON,
+				"arg": `${commitHash};${FULL_PATH};${line}`,
+			};
 
-			});
+		});
 	}
 
 	return JSON.stringify({ items: historyMatches });
