@@ -69,14 +69,14 @@ function run (argv) {
 			.split("\r");
 	}
 	// write versions into temporary directory
-	app.doShellScript(`mkdir -p ${TEMP_DIR}`);
-	logLines.forEach(line => {
-		const commitHash = line.split(";")[0];
-		const filePath = `${TEMP_DIR}/${commitHash}.${EXT}`;
-		if (!fileExists(filePath)) {
-			app.doShellScript(`cd "${PARENT_FOLDER}" ; git show "${commitHash}:./${FILE_NAME}" > "${filePath}"`);
-		}
-	});
+	// app.doShellScript(`mkdir -p ${TEMP_DIR}`);
+	// logLines.forEach(line => {
+	// 	const commitHash = line.split(";")[0];
+	// 	const filePath = `${TEMP_DIR}/${commitHash}.${EXT}`;
+	// 	if (!fileExists(filePath)) {
+	// 		app.doShellScript(`cd "${PARENT_FOLDER}" ; git show "${commitHash}:./${FILE_NAME}" > "${filePath}"`);
+	// 	}
+	// });
 
 	// show all versions of file with commit message, author. Sorted by commit date.
 	if (FIRST_RUN) {
@@ -118,19 +118,20 @@ function run (argv) {
 
 		});
 
-	// search versions with ripgrep & display git commit info for matched versions
+	// search patches for change (git log -G) & display git commit info for matched versions
 	} else {
-		historyMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${TEMP_DIR}" ; rg --max-count=1 --line-number --smart-case "${query}"`)
+		historyMatches = app.doShellScript(`cd "${PARENT_FOLDER}" ; git log -G"${query}" --regexp-ignore-case --pretty=%h -- "${FULL_PATH}"`)
 			.split("\r")
-			.map(rgMatch => {
-				const commitHash = rgMatch.split(".")[0];
+			.map(commitHash => {
+				// const commitHash = rgMatch.split(".")[0];
 				const dateData = app.doShellScript(`cd "${PARENT_FOLDER}" ; git show -s --format="%ah;%ad" ${commitHash}`);
 				const displayDate = dateData.split(";")[0];
 				const date = dateData.split(";")[1];
-				const file = rgMatch.split(":")[0];
-				const line = rgMatch.split(":")[1];
-				const firstMatch = rgMatch.split(":")[2].trim();
-				const filePath =`${TEMP_DIR}/${file}`;
+				// const file = rgMatch.split(":")[0];
+				// const line = rgMatch.split(":")[1];
+				// const firstMatch = rgMatch.split(":")[2].trim();
+				const line = "0";
+				const filePath =`${TEMP_DIR}/${commitHash}.${EXT}`;
 
 				let appendix = "";
 				if (FIRST_ITEM) {
@@ -141,7 +142,7 @@ function run (argv) {
 				return {
 					"date": date,
 					"title": displayDate + appendix,
-					"subtitle": firstMatch,
+					// "subtitle": firstMatch,
 					"quicklookurl": filePath,
 					"mods": {
 						"cmd": { "arg": `${filePath};${FULL_PATH}` }, // old;new file for diff view
