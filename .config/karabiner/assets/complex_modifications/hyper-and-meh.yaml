@@ -1,4 +1,4 @@
-title: ⇪↹ Hyper and Meh Key
+title: ⇪ Hyper and ↹ Meh Key
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
   - description: ↹ Tab →  Meh
@@ -177,6 +177,7 @@ rules:
               - option
               - shift
           - key_code: delete_or_backspace  # delete the selection
+          - key_code: delete_or_backspace  # delete the space
 
       # ö (German Keyboard) → transpose
       - type: basic
