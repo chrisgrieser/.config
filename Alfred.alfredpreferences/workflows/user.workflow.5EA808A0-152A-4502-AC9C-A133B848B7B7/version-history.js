@@ -49,13 +49,12 @@ function run (argv) {
 	const firstRun = query === "";
 	let firstItem = true;
 	let historyMatches;
-	let extraOptionsForFirstRun = "";
-	if (firstRun) extraOptionsForFirstRun = ";%ad;%s;%an";
-
-	const logLines = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h${extraOptionsForFirstRun}" "${fullPath}"`)
-		.split("\r");
+	let extraOptions = "";
+	if (firstRun) extraOptions = ";%ad;%s;%an";
 
 	// write versions into temporary directory
+	const logLines = app.doShellScript(`cd "${parentFolder}" ; git log --pretty=format:"%h${extraOptions}" --date=human "${fullPath}"`)
+		.split("\r");
 	app.doShellScript(`mkdir -p ${tempDir}`);
 	logLines.forEach(logLine => {
 		const commitHash = logLine.split(";")[0];
@@ -101,13 +100,13 @@ function run (argv) {
 
 	// search versions with ripgrep & display git commit info for matched versions
 	} else {
-		historyMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 --smart-case "${query}"`)
-			.split("\r\r")
+		historyMatches = app.doShellScript(`export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; cd "${tempDir}" ; rg --max-count=1 --line-number --smart-case "${query}"`)
+			.split("\r")
 			.map(rgMatch => {
-				const commitHash = rgMatch.match(/(\w+)(?=\.\w+)/)[0];
-				const file = rgMatch.split("\r")[0];
-				const firstMatch = rgMatch.split("\r")[1].split(":")[1].trim();
-				const line = rgMatch.match(/\d+(?=:)/)[0];
+				const commitHash = rgMatch.split(".")[0];
+				const file = rgMatch.split(":")[0];
+				const line = rgMatch.split(":")[1];
+				const firstMatch = rgMatch.split(":")[2].trim();
 				const date = app.doShellScript(`cd "${parentFolder}" ; git show -s --format=%ad --date=human ${commitHash}`);
 				const filePath =`${tempDir}/${file}`;
 
