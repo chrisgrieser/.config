@@ -77,14 +77,13 @@ systemDlFolderWatcher:start()
 function fromFileHub(files)
 	for _,file in pairs(files) do
 		fileName = file:gsub(".*/","")
-		notify (fileName)
 		if fileName:sub(-15) == ".alfredworkflow" or fileName:sub(-4) == ".ics" then
 			runDelayed(3, function ()
 				hs.applescript('set toDelete to "'..file..'" as POSIX file\n'..
 					'tell application "Finder" to delete toDelete')
 			end)
 		elseif fileName == "vimium-options.json" then
-			hs.execute("mv -f '"..fileHub.."vimium-options.json' \"$HOME/dotfiles/Browser Extension Settings/vimium-options.json\"")
+			hs.execute("mv -f '"..file.."' \"$HOME/dotfiles/Browser Extension Settings/\"")
 		end
 	end
 end
