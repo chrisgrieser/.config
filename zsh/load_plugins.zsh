@@ -9,7 +9,15 @@ if [[ $(uname -p) == "i386" ]]; then
 fi
 
 # needs to be placed after compinit
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --no-cmd zsh)"
+function z () {
+	if [[ -d "$1" ]] ; then
+		__zoxide_z "$1"
+	elif [[ -f  "$1" ]] ; then
+		__zoxide_z "$(dirname "$1")"
+	fi
+}
+alias zi='__zoxide_zi'
 
 # `brew --prefix` ensures the right path is inserted on M1 and non-M1 macs
 source "$(brew --prefix)"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

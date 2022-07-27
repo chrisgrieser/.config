@@ -1,19 +1,21 @@
 #!/usr/bin/env zsh
-# run in subshell to surpress output
 
 # to import LESS settings
 DOTFILE_FOLDER=~/dotfiles
 source "$DOTFILE_FOLDER/zsh/docs_man.zsh"
 
+# INPUT terms
+ONE=$(echo "$*" | cut -d" " -f1)
+TWO=$(echo "$*" | cut -d" " -f2)
 
-if [[ -z "$2" ]] ; then
-	(alacritty \
+if [[ -z "$TWO" ]] ; then
+	alacritty \
 		--option=window.decorations=full \
-		--title="man $1" \
-		--command man "$1" &)
+		--title="man $ONE" \
+		--command man "$ONE" &
 else
-	(alacritty \
+	alacritty \
 		--option=window.decorations=full \
-		--title="man $1" \
-		--command man "$1" -P "/usr/bin/less -is --pattern=$2" &)
+		--title="man $ONE" \
+		--command man "$ONE" -P "/usr/bin/less -is --pattern=$TWO" &
 fi
