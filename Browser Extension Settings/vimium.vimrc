@@ -70,7 +70,7 @@ map yf LinkHints.activateModeToCopyLinkUrl
 
 " Find
 map - enterFindMode
-map n nextFrame
+map n performFind
 map N performBackwardsFind
 
 " Global Marks
