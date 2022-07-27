@@ -76,6 +76,7 @@ systemDlFolderWatcher:start()
 -- Redirects FROM File Hub
 function fromFileHub(files)
 	for _,file in pairs(files) do
+		notify (file)
 		if file:sub(-15) == ".alfredworkflow" or file:sub(-4) == ".ics" then
 			runDelayed(3, function ()
 				hs.applescript('set toDelete to "'..file..'" as POSIX file\n'..
