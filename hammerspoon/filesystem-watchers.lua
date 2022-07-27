@@ -76,13 +76,14 @@ systemDlFolderWatcher:start()
 -- Redirects FROM File Hub
 function fromFileHub(files)
 	for _,file in pairs(files) do
-		notify (file)
-		if file:sub(-15) == ".alfredworkflow" or file:sub(-4) == ".ics" then
+		fileName = file:gsub(".*/","")
+		notify (fileName)
+		if fileName:sub(-15) == ".alfredworkflow" or fileName:sub(-4) == ".ics" then
 			runDelayed(3, function ()
 				hs.applescript('set toDelete to "'..file..'" as POSIX file\n'..
 					'tell application "Finder" to delete toDelete')
 			end)
-		elseif file == "vimium-options.json" then
+		elseif fileName == "vimium-options.json" then
 			hs.execute("mv -f '"..fileHub.."vimium-options.json' \"$HOME/dotfiles/Browser Extension Settings/vimium-options.json\"")
 		end
 	end
