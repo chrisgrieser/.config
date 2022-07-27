@@ -1,7 +1,6 @@
 require("utils")
 require("twitterrific-iina")
 require("private")
-require("Discord")
 
 --------------------------------------------------------------------------------
 -- WINDOW MANAGEMENT UTILS
@@ -426,6 +425,8 @@ hotkey(hyper, "pageup", function() moveToOtherDisplay() end)
 hotkey(hyper, "home", function()
 	if isAtOffice() then
 		officeModeLayout()
+	elseif isProjector() then
+		movieModeLayout()
 	else
 		homeModeLayout()
 	end
