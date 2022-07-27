@@ -116,7 +116,6 @@ biiweeklyTimer = hs.timer.doAt("02:00", "03d", function()
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
 			run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles" with argument "no sound"
-			run trigger "re-index-doc-search" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
 		end tell
 	]])
 	log ("2️⃣ biweekly ("..deviceName()..")", "./logs/some.log")
