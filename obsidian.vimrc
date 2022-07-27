@@ -295,7 +295,7 @@ imap <C-u> <Esc>c^
 " < Visual Mode
 """"""""""""""""""""""
 " so that VV... in normal mode just selects more lines
-vmap V gj
+vmap V j
 
 """"""""""""""""""""""
 " < Tabs/Window
