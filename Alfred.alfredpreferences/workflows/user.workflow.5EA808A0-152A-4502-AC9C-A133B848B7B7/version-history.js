@@ -106,6 +106,7 @@ function run (argv) {
 				"quicklookurl": filePath,
 				"mods": {
 					"cmd": { "arg": `${filePath};${FULL_PATH}` }, // old;new file for diff view
+					"shift": { "arg": `${commitHash};${FULL_PATH}` },
 					"alt": {
 						"arg": commitHash,
 						"subtitle": `${commitHash}    (⌥: Copy)`
