@@ -21,6 +21,7 @@ function run (argv) {
 	//------------------------------------------------------------------------------
 
 	const query = argv.join("");
+	const gitAuthor = $.getenv("git_author");
 
 	let FULL_PATH;
 	try {
@@ -59,6 +60,9 @@ function run (argv) {
 				const numstat = line.split(";")[4].match(/\d+/g); // ^
 				const changes = Number(numstat[0]) + Number(numstat[1]);
 
+				let subtitle = `${changes}  ▪︎  ${commitMsg}`;
+				if (author !== gitAuthor) subtitle += `  ▪︎  ${author}`; // only add author when oneself
+
 				let appendix = "";
 				if (FIRST_ITEM) {
 					appendix = "  ▪︎  " + FILE_NAME;
@@ -67,7 +71,7 @@ function run (argv) {
 
 				return {
 					"title": displayDate + appendix,
-					"subtitle": `${changes}  ▪︎  ${commitMsg}  ▪︎  ${author}`,
+					"subtitle": subtitle,
 					"mods": {
 						"alt": {
 							"arg": commitHash,

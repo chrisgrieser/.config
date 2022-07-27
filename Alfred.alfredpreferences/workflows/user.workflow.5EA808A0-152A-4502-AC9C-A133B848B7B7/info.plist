@@ -1170,7 +1170,9 @@ subl --command toggle_side_bar</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>Install ripgrep for quicker search
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</key>
@@ -1484,6 +1486,8 @@ subl --command toggle_side_bar</string>
 	<array/>
 	<key>variables</key>
 	<dict>
+		<key>git_author</key>
+		<string>pseudometa</string>
 		<key>maxReposNumber</key>
 		<string>100</string>
 		<key>working_folder</key>
@@ -1491,6 +1495,7 @@ subl --command toggle_side_bar</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
+		<string>git_author</string>
 		<string>working_folder</string>
 	</array>
 	<key>version</key>
