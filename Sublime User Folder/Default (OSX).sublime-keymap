@@ -31,6 +31,11 @@
 		{"key": "lsp.session_with_capability", "operator": "equal", "operand": "renameProvider"}
 	] },
 
+	// LSP Code Action
+	{"keys": ["alt+shift+ctrl+a"], "command": "lsp_code_actions", "context": [
+		{"key": "lsp.session_with_capability", "operator": "equal", "operand": "codeActionProvider"}
+	]},
+
 	// Fold
 	{ "keys": ["shift+control+alt+1"], "command": "fold_by_level", "args": {"level": 1} },
 	{ "keys": ["shift+control+alt+2"], "command": "fold_by_level", "args": {"level": 2} },
