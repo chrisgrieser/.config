@@ -97,18 +97,7 @@
 			</dict>
 		</array>
 		<key>64C686C1-E836-4CB7-AAD4-52E72832714C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>835EB3E7-E331-41C6-A2AD-9693744B7963</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>97B7CF87-4080-4394-87B8-2074B83B59A7</key>
 		<array>
 			<dict>
@@ -445,7 +434,7 @@ end if</string>
 				<key>keyword</key>
 				<string>man</string>
 				<key>subtext</key>
-				<string></string>
+				<string>$1: CLI  –  $2: search-term</string>
 				<key>text</key>
 				<string>man {query}</string>
 				<key>withspace</key>
@@ -480,35 +469,6 @@ end if</string>
 			<string>64C686C1-E836-4CB7-AAD4-52E72832714C</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>835EB3E7-E331-41C6-A2AD-9693744B7963</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -755,9 +715,9 @@ echo "$backup"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>470</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>35</real>
+			<real>20</real>
 		</dict>
 		<key>64C686C1-E836-4CB7-AAD4-52E72832714C</key>
 		<dict>
@@ -765,13 +725,6 @@ echo "$backup"</string>
 			<integer>7</integer>
 			<key>xpos</key>
 			<real>240</real>
-			<key>ypos</key>
-			<real>430</real>
-		</dict>
-		<key>835EB3E7-E331-41C6-A2AD-9693744B7963</key>
-		<dict>
-			<key>xpos</key>
-			<real>390</real>
 			<key>ypos</key>
 			<real>430</real>
 		</dict>
@@ -834,9 +787,9 @@ echo "$backup"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>645</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>35</real>
+			<real>20</real>
 		</dict>
 		<key>BD16A75F-DC81-47C0-99A3-8A4360CCEA08</key>
 		<dict>
