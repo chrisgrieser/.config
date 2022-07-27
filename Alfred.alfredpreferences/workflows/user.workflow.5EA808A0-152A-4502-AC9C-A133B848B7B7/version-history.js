@@ -20,6 +20,16 @@ function run (argv) {
 		return JSON.stringify({ items: item });
 	}
 
+	function padLeft (str, target) {
+		const diff = target - str.length;
+		if (diff > 0) {
+			for (let i = 1; i <= diff; i++) {
+				str += "a";
+			}
+		}
+		return str;
+	}
+
 	//------------------------------------------------------------------------------
 	const query = argv.join("");
 
@@ -51,9 +61,9 @@ function run (argv) {
 	let historyMatches;
 	let logLines;
 	if (FIRST_RUN) {
-		logLines = app.doShellScript(`cd "${PARENT_FOLDER}" ; git log --pretty=format:"%h;%ah;%s;%an" --shortstat "${FULL_PATH}"`)
+		logLines = app.doShellScript(`cd "${PARENT_FOLDER}" ; git log --pretty=format:"%h;%ah;%s;%an" --numstat "${FULL_PATH}"`)
 			.split("\r\r")
-			.map(commit => commit.replaceAll("\r ", ";"));
+			.map(commit => commit.replaceAll("\r", ";"));
 	} else {
 		logLines = app.doShellScript(`cd "${PARENT_FOLDER}" ; git log --pretty=format:%h "${FULL_PATH}"`)
 			.split("\r");
@@ -73,15 +83,16 @@ function run (argv) {
 		historyMatches = logLines.map(line => {
 			const commitHash = line.split(";")[0];
 			const displayDate = line.split(";")[1]; // results from `extraOptions`
-			const commitMsg = line.split(";")[2]; //   ^
-			const author = line.split(";")[3]; //      ^
-			const changes = line.split(";")[4] //      ^
-				.replace(/^.*?,|[() a-z]/g, "")
-				.replace(",", " ")
-				.replace(/(\d+)(\+|-)/g, "$2$1");
+			const commitMsg = line.split(";")[2]; //             ^
+			const author = line.split(";")[3]; //                ^
+
+			const numstat = line.split(";")[4].match(/\d+/g); // ^
+			const changes = Number(numstat[0]) + Number(numstat[1]);
+			const displayChanges = padLeft(changes.toString(), 3);
+
 			const filePath =`${TEMP_DIR}/${commitHash}.${EXT}`;
 
-			const subtitle = `${changes}  ▪︎  ${commitMsg}  ▪︎  ${author}`;
+			const subtitle = `${displayChanges}  ▪︎  ${commitMsg}  ▪︎  ${author}`;
 
 			let appendix = "";
 			if (FIRST_ITEM) {
@@ -95,7 +106,6 @@ function run (argv) {
 				"quicklookurl": filePath,
 				"mods": {
 					"cmd": { "arg": `${filePath};${FULL_PATH}` }, // old;new file for diff view
-					"shift": { "arg": `${commitHash};${FULL_PATH}` }, // old;new file for diff view
 					"alt": {
 						"arg": commitHash,
 						"subtitle": `${commitHash}    (⌥: Copy)`
