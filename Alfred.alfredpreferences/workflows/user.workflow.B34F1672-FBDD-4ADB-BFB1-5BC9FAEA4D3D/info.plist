@@ -47,6 +47,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>2F0710E7-D440-4B8E-BD7F-FB7FA8670039</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7E6054B0-3785-45A2-A92E-9896CFEBA420</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3993F079-41AC-4743-9079-38D50670BEFB</key>
 		<array>
 			<dict>
@@ -97,18 +110,7 @@
 			</dict>
 		</array>
 		<key>5320A9D6-5BED-4AC3-B729-7E0FCA44A54B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B10287C7-6013-4ED0-AF11-53B2EA6DBBEB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>76E5A56C-0258-48FF-A883-94D79A066C82</key>
 		<array>
 			<dict>
@@ -243,35 +245,6 @@
 			<string>852FEFE2-6998-4254-985C-75A2E3AEB5B2</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>B10287C7-6013-4ED0-AF11-53B2EA6DBBEB</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -456,6 +429,100 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<string>9F684AD8-A54B-461A-A897-B3CC1713BCFA</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "Script Editor" to activate
+delay 0.3
+tell application "System Events" 
+	keystroke "n" using {command down}
+	delay 0.3
+	keystroke "v" using {command down}
+	delay 0.3
+	keystroke "k" using {command down}
+end tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2A1BDD0B-9649-4DA9-A016-038C9C89F949</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>aslint</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Lint &amp; Validate AppleScript</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>3993F079-41AC-4743-9079-38D50670BEFB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://devdocs.io/#q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>7E6054B0-3785-45A2-A92E-9896CFEBA420</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>cc</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Devdocs: '{query}'</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>2F0710E7-D440-4B8E-BD7F-FB7FA8670039</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -827,58 +894,6 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "Script Editor" to activate
-delay 0.3
-tell application "System Events" 
-	keystroke "n" using {command down}
-	delay 0.3
-	keystroke "v" using {command down}
-	delay 0.3
-	keystroke "k" using {command down}
-end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2A1BDD0B-9649-4DA9-A016-038C9C89F949</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>aslint</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Lint &amp; Validate AppleScript</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>3993F079-41AC-4743-9079-38D50670BEFB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -891,7 +906,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>455</real>
 		</dict>
 		<key>150AD279-99E1-4CB0-9F90-F4395A3A116A</key>
 		<dict>
@@ -913,16 +928,16 @@ end tell</string>
 			<key>xpos</key>
 			<real>170</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>455</real>
 		</dict>
 		<key>2A1BDD0B-9649-4DA9-A016-038C9C89F949</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>215</real>
+			<real>850</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>230</real>
 		</dict>
 		<key>2C02AA01-C80E-4781-84EF-8547306C00C6</key>
 		<dict>
@@ -931,16 +946,25 @@ end tell</string>
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>370</real>
+		</dict>
+		<key>2F0710E7-D440-4B8E-BD7F-FB7FA8670039</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>305</real>
 		</dict>
 		<key>3993F079-41AC-4743-9079-38D50670BEFB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>670</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>230</real>
 		</dict>
 		<key>405F9220-F864-4C8A-9A00-29E258A78E5A</key>
 		<dict>
@@ -949,7 +973,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>425</real>
 		</dict>
 		<key>4CA2F90B-A1A0-477A-9DEC-7A100D05A12B</key>
 		<dict>
@@ -958,7 +982,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>425</real>
 		</dict>
 		<key>50F4BA75-EC14-431B-BA50-28DEABC12BBD</key>
 		<dict>
@@ -967,7 +991,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>715</real>
 		</dict>
 		<key>5320A9D6-5BED-4AC3-B729-7E0FCA44A54B</key>
 		<dict>
@@ -987,7 +1011,16 @@ end tell</string>
 			<key>xpos</key>
 			<real>215</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>630</real>
+		</dict>
+		<key>7E6054B0-3785-45A2-A92E-9896CFEBA420</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>250</real>
+			<key>ypos</key>
+			<real>305</real>
 		</dict>
 		<key>852FEFE2-6998-4254-985C-75A2E3AEB5B2</key>
 		<dict>
@@ -1011,13 +1044,6 @@ end tell</string>
 			<key>ypos</key>
 			<real>165</real>
 		</dict>
-		<key>B10287C7-6013-4ED0-AF11-53B2EA6DBBEB</key>
-		<dict>
-			<key>xpos</key>
-			<real>435</real>
-			<key>ypos</key>
-			<real>85</real>
-		</dict>
 		<key>C1D85811-801A-4017-AEB6-6EC5A99F109C</key>
 		<dict>
 			<key>colorindex</key>
@@ -1025,7 +1051,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>600</real>
 		</dict>
 		<key>C2852F05-D89A-4B01-A3AD-88076C1A401D</key>
 		<dict>
@@ -1034,7 +1060,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>490</real>
 		</dict>
 		<key>D582977E-DA6A-46AD-93B6-3FF01EBA96BE</key>
 		<dict>
@@ -1043,7 +1069,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>630</real>
 		</dict>
 		<key>DCA89D5A-1D6F-4495-BD59-CA92D46FE0B7</key>
 		<dict>
@@ -1052,7 +1078,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>375</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>650</real>
 		</dict>
 		<key>DFA20026-87BD-47FC-988A-0956B5B30EBF</key>
 		<dict>
@@ -1061,7 +1087,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>650</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>600</real>
 		</dict>
 		<key>EA3DF9A8-C9B9-4A5B-BE23-02A376F9B128</key>
 		<dict>
