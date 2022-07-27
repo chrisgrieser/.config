@@ -683,7 +683,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>585</real>
 		</dict>
 		<key>2234A5C0-FDE3-435A-83A4-6CC19FA4480C</key>
 		<dict>
@@ -868,9 +868,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>585</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
