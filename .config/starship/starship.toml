@@ -10,7 +10,7 @@
 # prompt in general
 add_newline = false
 continuation_prompt = "❯"
-format = "[$directory${custom.folder_number}${custom.file_number}$git_branch$git_status$git_metrics$git_commit$git_state](bg:black)[](black)$cmd_duration$status$character"
+format = "[$directory${custom.folder_number}${custom.file_number}$git_branch$git_status$git_metrics$git_commit$git_state$sudo](bg:black)[](black)$cmd_duration$status$character"
 right_format="$package${custom.alfred}$nodejs$python$jobs$memory_usage"
 
 # ⏼⏻⟐ﰉﰊ
@@ -18,6 +18,12 @@ right_format="$package${custom.alfred}$nodejs$python$jobs$memory_usage"
 success_symbol = " [ﰉ](bold green)"
 error_symbol = " [](bold red)"
 # vimcmd_symbol = " [Normal](bold blue)" # doesn't work as long as cursor styling snippet is active
+
+[sudo]
+style = 'fg:red bg:black'
+symbol = " "
+format = " [$symbol]($style)"
+disabled = false
 
 [cmd_duration]
 min_time = 2500
@@ -58,10 +64,6 @@ style = "fg:yellow bg:black bold" # terminus different
 format = " [$symbol$status]($style)"
 disabled = false
 symbol = ""
-
-[sudo]
-format="[sudo $symbol]($style)"
-disabled = false
 
 # -------------
 # git

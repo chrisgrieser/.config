@@ -1,0 +1,102 @@
+#!/hint/zsh
+
+local tmp_dir=${TMPPREFIX:-/tmp/zsh}-fzf-tab-$USER
+[[ -d $tmp_dir ]] || command mkdir $tmp_dir
+
+local ftb_preview_init="
+zmodload zsh/mapfile
+local -a _ftb_compcap=(\"\${(@f)mapfile[$tmp_dir/compcap.$$]}\")
+local -a _ftb_groups=(\"\${(@f)mapfile[$tmp_dir/groups.$$]}\")
+local bs=\$'\2'
+# get descriptoin
+export desc=\${\${\"\$(<{f})\"%\$'\0'*}#*\$'\0'}
+# get ctxt for current completion
+local -A ctxt=(\"\${(@0)\${_ftb_compcap[(r)\${(b)desc}\$bs*]#*\$bs}}\")
+# get group
+if (( \$+ctxt[group] )); then
+  export group=\$_ftb_groups[\$ctxt[group]]
+fi
+# get original word
+export word=\${(Q)ctxt[word]}
+# get real path if it is file
+if (( \$+ctxt[realdir] )); then
+  export realpath=\${ctxt[realdir]}\$word
+fi
+"
+local binds=tab:down,btab:up,change:top,ctrl-space:toggle
+local fzf_command fzf_flags fzf_preview debug_command tmp switch_group fzf_pad
+local ret=0
+
+-ftb-zstyle -s fzf-command fzf_command || fzf_command=fzf
+-ftb-zstyle -a fzf-bindings tmp && binds+=,${(j:,:)tmp}
+-ftb-zstyle -a fzf-flags fzf_flags
+-ftb-zstyle -s fzf-preview fzf_preview
+-ftb-zstyle -a switch-group switch_group || switch_group=(F1 F2)
+-ftb-zstyle -s fzf-pad fzf_pad || fzf_pad=2
+
+-ftb-zstyle -a debug-command debug_command && {
+  ${(eX)debug_command} $fzf_flags
+  return
+}
+
+print -rl -- $_ftb_compcap > $tmp_dir/compcap.$$
+print -rl -- $_ftb_groups  > $tmp_dir/groups.$$
+print -r -- ${ftb_preview_init/{f}/\$1} > $tmp_dir/ftb_preview_init.$$
+
+binds=${binds//{_FTB_INIT_}/. $tmp_dir/ftb_preview_init.$$ {f} $'\n'}
+
+local -i header_lines=$#_ftb_headers
+local -i lines=$(( $#_ftb_compcap + fzf_pad + header_lines ))
+local reload_command="$commands[zsh] -f $FZF_TAB_HOME/lib/ftb-switch-group $$ $header_lines $tmp_dir"
+
+# detect if we will use tmux popup
+local use_tmux_popup=0
+if [[ $fzf_command == "ftb-tmux-popup" ]]; then
+  use_tmux_popup=1
+fi
+
+if (( ! use_tmux_popup )); then
+  # fzf will cause the current line to refresh, so move the cursor down.
+  echoti cud1 >/dev/tty
+  # reset cursor before call fzf
+  echoti cnorm >/dev/tty 2>/dev/null
+fi
+
+cat > $tmp_dir/completions.$$
+
+local dd='gdd'
+if (( ${+commands[$dd]} == 0 )) ; then
+  dd='dd'
+fi
+if (( ${+commands[$dd]} == 0 )) ; then
+  dd='true' # nop if dd is not installed
+fi
+
+_ftb_query="${_ftb_query}$(command "$dd" bs=1G count=1 status=none iflag=nonblock < /dev/tty 2>/dev/null)" || true
+
+$fzf_command \
+  --ansi \
+  --bind=$binds \
+  --bind="${switch_group[1]}:reload($reload_command -1),${switch_group[2]}:reload($reload_command 1)" \
+  --color=hl:$(( header_lines == 0 ? 188 : 255 )) \
+  --cycle \
+  --delimiter='\x00' \
+  --expect=$continuous_trigger,$print_query,$accept_line \
+  --header-lines=$header_lines \
+  --height=${FZF_TMUX_HEIGHT:=$(( lines > LINES / 3 * 2 ? LINES / 3 * 2 : lines ))} \
+  --layout=reverse \
+  --multi \
+  --nth=2,3 \
+  --print-query \
+  --query=$_ftb_query \
+  --tiebreak=begin \
+  ${fzf_preview:+--preview=$ftb_preview_init$fzf_preview} \
+  $fzf_flags < $tmp_dir/completions.$$ || ret=$?
+
+if (( ! use_tmux_popup )); then
+  echoti civis >/dev/tty 2>/dev/null
+  echoti cuu1 >/dev/tty
+fi
+
+command rm $tmp_dir/*.$$ 2>/dev/null
+return $ret

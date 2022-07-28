@@ -12,9 +12,9 @@ bindkey "^U" vi-kill-line
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
-# plugins
-# bindkey '^I' autosuggest-execute # tab: only auto-completion
-bindkey '^[[Z' autosuggest-accept # shift+tab: auto-completion
+# zsh-autosuggest
+bindkey '^[[Z' autosuggest-execute # shift-tab
+bindkey '^C' autosuggest-accept
 # https://github.com/zsh-users/zsh-autosuggestions/issues/532#issuecomment-907361899
 
 # -----------------------------------

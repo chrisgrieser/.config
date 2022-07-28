@@ -288,9 +288,6 @@ imap <C-e> <Esc>A
 " Kill line
 imap <C-k> <Esc>lC
 
-" Kill line backwards
-imap <C-u> <Esc>c^
-
 """"""""""""""""""""""
 " < Visual Mode
 """"""""""""""""""""""

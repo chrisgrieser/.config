@@ -1,3 +1,15 @@
+
+# smarter z/cd
+eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
+function z () {
+	if [[ -d "$1" ]] ; then
+		__zoxide_z "$1"
+	elif [[ -f  "$1" ]] ; then
+		__zoxide_z "$(dirname "$1")"
+	fi
+}
+alias zi='__zoxide_zi'
+
 # settings (zshrc)
 alias ,="settings"
 function settings () {
