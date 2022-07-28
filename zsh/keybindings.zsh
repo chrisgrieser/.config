@@ -1,17 +1,20 @@
 bindkey "^P" copyLocation
 bindkey "^B" copyBuffer
+bindkey "^A" beginning-of-buffer-or-history
+bindkey "^E" end-of-buffer-or-history
 
 bindkey "^Z" undo
+bindkey "^Y" redo
 bindkey "^K" kill-line
-bindkey "^V" yank # pastes content previously removed with 'kill-line'
+bindkey "^U" vi-kill-line
 
-# [alt+arrow] - move word forward or backward
+# [alt+arrow] - move word forward or backward (like in Mac)
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
 # plugins
-bindkey '^I' autosuggest-accept # tab: only auto-completion
-bindkey '^[[Z' autosuggest-execute # shift+tab: auto-completion & execution from zsh-autosuggest
+# bindkey '^I' autosuggest-execute # tab: only auto-completion
+bindkey '^[[Z' autosuggest-accept # shift+tab: auto-completion
 # https://github.com/zsh-users/zsh-autosuggestions/issues/532#issuecomment-907361899
 
 # -----------------------------------
