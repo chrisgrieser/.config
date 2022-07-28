@@ -14,7 +14,7 @@ map b previousTab
 map e nextTab
 map gT previousTab
 map gt nextTab
-map <Tab> visitPreviousTab
+map <Space> visitPreviousTab
 map < moveTabLeft
 map > moveTabRight
 map 1 firstTab
