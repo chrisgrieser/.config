@@ -13,14 +13,13 @@ bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
 # zsh-autosuggest
-bindkey '^[[Z' autosuggest-execute # shift-tab
+bindkey '^X' autosuggest-execute
 bindkey '^C' autosuggest-accept
-# https://github.com/zsh-users/zsh-autosuggestions/issues/532#issuecomment-907361899
 
 # -----------------------------------
 # `bindkey -M main` to show existing keybinds
 # there `^[` usually means escape
-# some bindings with '^' are reserved (^M=enter, ^I=tab)
+# some bindings with '^' are reserved (^M=enter, ^I=tab, ^[[Z = shift+tab)
 # -----------------------------------
 
 copyLocation () {

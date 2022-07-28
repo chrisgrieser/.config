@@ -28,3 +28,4 @@ if [[ "$TERM_PROGRAM" == "Terminus-Sublime" ]] ; then
 else
 	export STARSHIP_CONFIG=~/.config/starship/starship.toml
 fi
+
