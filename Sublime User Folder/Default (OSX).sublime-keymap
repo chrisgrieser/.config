@@ -68,15 +68,8 @@
 		]
 	},
 
-	//---------------------------------------------------------------------------
-
 	// Kill line, imap <C-k> <Esc>C
 	{ "keys": ["ctrl+k"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard EOL.sublime-macro"},
-		"context": [{ "key": "vi_insert_mode_aware" } ]
-	},
-
-	// Kill line backwards, imap <C-u> <Esc>c^
-	{ "keys": ["ctrl+u"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard BOL.sublime-macro"},
 		"context": [{ "key": "vi_insert_mode_aware" } ]
 	},
 

@@ -12,6 +12,7 @@ sudo rm -R "$SPOTLIGHT_CONFIG"
 sleep 1
 
 sudo plutil -insert Exclusions.0 -string '/Applications/Utilities/' "$SPOTLIGHT_CONFIG"
+sudo plutil -insert Exclusions.0 -string ~'/dotfiles/zsh/plugins/' "$SPOTLIGHT_CONFIG"
 sudo plutil -insert Exclusions.0 -string '/Applications/Cisco' "$SPOTLIGHT_CONFIG"
 sudo plutil -insert Exclusions.0 -string ~'/dotfiles/Alfred.alfredpreferences/workflows/' "$SPOTLIGHT_CONFIG"
 sudo plutil -insert Exclusions.0 -string ~'/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/' "$SPOTLIGHT_CONFIG"

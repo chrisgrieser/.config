@@ -8,20 +8,15 @@ if [[ $(uname -p) == "i386" ]]; then
 	compaudit | xargs chmod g-w
 fi
 
-# needs to be placed after compinit
-eval "$(zoxide init --no-cmd zsh)"
-function z () {
-	if [[ -d "$1" ]] ; then
-		__zoxide_z "$1"
-	elif [[ -f  "$1" ]] ; then
-		__zoxide_z "$(dirname "$1")"
-	fi
-}
-alias zi='__zoxide_zi'
+# zoxide loading in terminal-utils, cause needs to be loaded with configuration
+# parameters
 
-# `brew --prefix` ensures the right path is inserted on M1 and non-M1 macs
-source "$(brew --prefix)"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source "$(brew --prefix)"/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# fzf tab needs to be loaded after compinit, but before zsh-syntax-highlighting and zsh-autosuggestions
+source "$DOTFILE_FOLDER/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
+
+# `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 eval "$(starship init zsh)"
 source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"

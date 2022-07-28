@@ -1,0 +1,32 @@
+#!/usr/bin/env zsh
+
+zmodload zsh/zutil
+
+local -A headers range query
+
+zparseopts -E h:=headers n:=range q:=query e:=expect
+
+print -r -- "${query//\"/}"
+print -r -- "$expect"
+print -r -- "<QUERY>${query//\"/}</QUERY>" >&2
+
+local -a lines=() 
+while read input; do
+    lines+=(${input%$'\033[00m'})
+done
+
+for ((i = 1; i <= headers; i++)); do
+    print -r -- $lines[i] >&2
+done
+
+lines[1,headers]=()
+
+for i in {1..$#lines}; do
+    print -r -- ${lines[i]//$'\0'}"<EC>" >&2
+done
+
+if [[ $range != QUERY ]]; then
+    for i in ${(s:,:)range}; do
+        print -r -- $lines[i]
+    done
+fi

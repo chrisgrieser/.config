@@ -1,0 +1,211 @@
+# Tests for fzf tab.
+
+%prep
+  unset -m LC_\*
+  ZSH_TEST_LANG=
+  langs=(en_{US,GB}.{UTF-,utf}8 en.UTF-8
+         $(locale -a 2>/dev/null | egrep 'utf8|UTF-8'))
+  for LANG in $langs; do
+    if [[ é = ? ]]; then
+      ZSH_TEST_LANG=$LANG
+      break;
+    fi
+  done
+  if [[ $OSTYPE = cygwin ]]; then
+    ZTST_unimplemented="the zsh/zpty module does not work on Cygwin"
+  elif ( zmodload zsh/zpty 2>/dev/null ); then
+    . $ZTST_srcdir/comptest
+    mkdir comp.tmp
+    cd comp.tmp
+    comptestinit -z zsh &&
+    {
+      comptesteval 'compdef _tst tst'
+      mkdir dir1 &&
+      mkdir dir2 &&
+      touch file1 &&
+      touch file2
+      touch dir1/file1
+      git init
+    }
+  else
+    ZTST_unimplemented="the zsh/zpty module is not available"
+  fi
+
+  comptesteval ". $ZTST_srcdir/../fzf-tab.zsh"
+  comptesteval "zstyle ':fzf-tab:*' debug-command $ZTST_srcdir/select -n 1 -h '\$#_ftb_headers' -q '\"\$_ftb_query\"'"
+  comptesteval '
+  zstyle ":fzf-tab:*" default-color "<LC><C0><RC>"
+  zstyle ":fzf-tab:*" single-group color header
+  zstyle ":fzf-tab:*" group-colors "<LC><C1><RC>" "<LC><C2><RC>" "<LC><C3><RC>" "<LC><C4><RC>"
+  fzf-tab-complete-with-report() {
+    print -lr "<WIDGET><fzf-tab-complete>"
+    zle fzf-tab-complete 2>&1
+    print -lr - "<LBUFFER>$LBUFFER</LBUFFER>" "<RBUFFER>$RBUFFER</RBUFFER>"
+    zle clear-screen
+    zle -R
+  }
+  zle -N fzf-tab-complete-with-report
+  bindkey "^I" fzf-tab-complete-with-report
+  '
+
+%test
+
+  comptest $': \t'
+0:directories and files
+>line: {: dir1/}{}
+>QUERY:{}
+>DESCRIPTION:{file}
+>C1:{dir1/}
+>C1:{dir2/}
+>C1:{file1}
+>C1:{file2}
+
+  comptest $': d\t'
+0:prefix
+>line: {: dir1/}{}
+>QUERY:{dir}
+>DESCRIPTION:{file}
+>C1:{dir1/}
+>C1:{dir2/}
+
+  comptesteval '_tst () { compadd d c b a }'
+  comptest $'tst \t'
+0:normal
+>line: {tst a }{}
+>QUERY:{}
+>C0:{a}
+>C0:{b}
+>C0:{c}
+>C0:{d}
+
+  comptesteval 'zstyle ":completion:*:tst:*" sort false'
+  comptest $'tst \t'
+0:no sort
+>line: {tst d }{}
+>QUERY:{}
+>C0:{d}
+>C0:{c}
+>C0:{b}
+>C0:{a}
+
+  comptesteval 'zstyle ":fzf-tab:*:tst:*" fzf-flags -n 1,2'
+  comptest $'tst \t'
+  comptesteval 'zstyle -d ":fzf-tab:*:tst:*" fzf-flags'
+0:multi select
+>line: {tst c d }{}
+>QUERY:{}
+>C0:{d}
+>C0:{c}
+>C0:{b}
+>C0:{a}
+
+  comptest $': *\t'
+0:expand
+>line: {: dir1 dir2 file1 file2 }{}
+
+  comptesteval 'zstyle ":completion:*:warnings" format "<WARN>%d</WARN>"'
+  comptest $': asd\t'
+0:warnings
+>line: {: asd}{}
+>WARN:{`file'}
+>WARN:{`file'}
+# FIXME：why two warnings？
+
+  comptesteval "touch 'abc def'"
+  comptest $': ./a\t'
+0:filename with space
+>line: {: ./abc\ def }{}
+
+  comptest $': ./abdef\C-b\C-b\C-b\t'
+0:complete in word
+>line: {: ./abc\ def }{}
+
+  comptest $': ./abc def\C-b\C-b\C-b\C-b\t'
+  comptesteval "rm 'abc def'"
+0:complete in word(with known bug)
+>line: {: ./abc\ def}{ def}
+
+  comptesteval 'mkdir -p abc/def/hij abc/dfe/hij'
+  comptest $': ./a/d/h\t'
+  comptesteval 'rm -rd abc'
+0:nested directory
+>line: {: ./abc/def/h}{}
+>QUERY:{d}
+>DESCRIPTION:{file}
+>C1:{def/}
+>C1:{dfe/}
+
+  comptesteval '_tst() { a=(a); _describe "group1" a; a=(b); _describe "group2" a }'
+  comptest $'tst \t'
+0:multi headers
+>line: {tst a }{}
+>QUERY:{}
+>DESCRIPTION:{group1}
+>DESCRIPTION:{group2}
+>C1:{·a}
+>C2:{·b}
+
+  comptest $'git add dir1\t'
+0:add empty word
+>line: {git add dir1/}{}
+# FIXME：why two warnings？
+
+  comptesteval "zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'"
+  comptesteval "touch vim.coc"
+  comptest $': coc\t'
+  comptesteval "rm vim.coc; zstyle -d ':completion:*' matcher-list"
+0:matcher-list
+>line: {: vim.coc }{}
+
+  comptesteval $'cd dir1'
+  comptest $': ../d\t'
+  comptesteval $'cd ..'
+0:IPREFIX
+>line: {: ../dir1/}{}
+>QUERY:{dir}
+>DESCRIPTION:{file}
+>C1:{dir1/}
+>C1:{dir2/}
+
+  comptest $': $PWD/d\t'
+0:expansion
+>line: {: $PWD/dir1/}{}
+>QUERY:{dir}
+>DESCRIPTION:{file}
+>C1:{dir1/}
+>C1:{dir2/}
+
+  comptesteval 'echo no > called'
+  comptesteval "touch 'dir\`echo yes > called\`'"
+  comptest $': d\t'
+  echo called:$(<called)
+  comptesteval "rm 'dir\`echo yes > called\`' called"
+0:don''t expand file name
+>line: {: dir1/}{}
+>QUERY:{dir}
+>DESCRIPTION:{file}
+>C1:{dir1/}
+>C1:{dir2/}
+>C1:{dir`echo yes > called`}
+>called:no
+
+  comptesteval "zstyle ':fzf-tab:*' debug-command true"
+  comptest $': d\t'
+  comptesteval "zstyle ':fzf-tab:*' debug-command $ZTST_srcdir/select -n 1 -h '\$#headers' -q '\"\$query\"'"
+0:cancel completion
+>line: {: d}{}
+
+  comptesteval "zstyle ':fzf-tab:*' debug-command $ZTST_srcdir/select -n QUERY -h '\$#headers' -q '\"dragon\"'"
+  comptest $': ./d\t'
+  comptesteval "zstyle ':fzf-tab:*' debug-command $ZTST_srcdir/select -n 1 -h '\$#headers' -q '\"\$query\"'"
+0:use query directly
+>line: {: ./dragon}{}
+>QUERY:{dragon}
+>DESCRIPTION:{file}
+>C1:{dir1/}
+>C1:{dir2/}
+
+%clean
+
+  zmodload -ui zsh/zpty
+
