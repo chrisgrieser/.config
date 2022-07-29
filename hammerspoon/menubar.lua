@@ -145,7 +145,6 @@ fileHubMenuBarWatcher:start()
 
 --------------------------------------------------------------------------------
 
-
 finderGitRepoBar = hs.menubar.new()
 function finderGitRepoUpdate ()
 	local _, currentFinderPath = hs.osascript.applescript([[
@@ -158,8 +157,10 @@ function finderGitRepoUpdate ()
 	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
 
 	if isGitRepo and currentFinderPath and frontapp() == "Finder" then
+		local changes = hs.execute(' cd "'..currentFinderPath..'" ; git status --porcelain | wc -l')
+		changes = trim(changes)
 		finderGitRepoBar:returnToMenuBar()
-		finderGitRepoBar:setTitle("git repo")
+		finderGitRepoBar:setTitle("✴️"..changes)
 	else
 		finderGitRepoBar:removeFromMenuBar()
 	end
