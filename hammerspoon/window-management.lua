@@ -522,7 +522,8 @@ function finderGitRepoUpdate ()
 		banner:setStrokeWidth(5)
 		banner:setFill(false)
 		banner:show()
-	elseif banner or not(currentFinderPath) then
+	end
+	if (isGitRepo and banner) or not(currentFinderPath) then
 		banner:delete() -- Delete an existing highlight if it exists
 		runDelayed(0.2, function () banner = nil end)
 	end
