@@ -517,7 +517,7 @@ function finderGitRepoUpdate ()
 	-- Delete an existing highlight if it exists
 	if banner then
 		banner:delete()
-		runDelayed(0.1, function () banner = nil end)
+		runDelayed(0.3, function () banner = nil end)
 	end
 
 	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
