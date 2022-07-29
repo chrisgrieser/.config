@@ -531,7 +531,7 @@ wf_finder:subscribe(wf.windowFocused, function ()
 		banner:show()
 	elseif banner then
 		banner:delete() -- Delete an existing highlight if it exists
-		banner = nil
+		runDelayed(0.2, function () banner = nil end)
 	end
 
 end)
