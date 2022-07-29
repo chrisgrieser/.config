@@ -9,12 +9,12 @@ map u removeTab
 map x removeTab
 map U restoreTab
 map W removeTab count=19
-map t Vomnibar.activateTabSelection
+map T Vomnibar.activateTabSelection
 map b previousTab
 map e nextTab
 map gT previousTab
 map gt nextTab
-map <Space> visitPreviousTab
+map t visitPreviousTab
 map < moveTabLeft
 map > moveTabRight
 map 1 firstTab
