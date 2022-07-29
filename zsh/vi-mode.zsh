@@ -39,6 +39,7 @@ done
 
 bindkey -M vicmd 'L' vi-end-of-line
 bindkey -M vicmd 'H' vi-first-non-blank
+bindkey -M vicmd 'gg' vi-beginning-of-line
 bindkey -M vicmd 'U' redo
 # -s flag sends direct keystrokes, to allow for remappings
 bindkey -M vicmd -s 'Y' 'y$'
