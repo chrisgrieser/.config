@@ -55,6 +55,10 @@ shutDownWatcher:start()
 function systemWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemDidWake or eventType == hs.caffeinate.watcher.screensDidWake) then return end
 
+	if appIsRunning("Obsidian") and appIsRunning("Discord") then
+		hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
+	end
+
 	if isIMacAtHome() and isProjector() then movieModeLayout()
 	elseif isIMacAtHome and not(isProjector()) then homeModeLayout() end
 
@@ -72,6 +76,7 @@ function systemWake (eventType)
 
 	reloadAllMenubarItems()
 	gitDotfileSync("wake")
+
 end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
