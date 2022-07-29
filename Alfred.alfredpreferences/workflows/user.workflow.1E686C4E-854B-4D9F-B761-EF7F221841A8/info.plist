@@ -8,19 +8,6 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
-		<key>06F3A05C-624E-44E1-88BA-E97EC7C60DFE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F83C33F7-02A4-4163-9240-0219CD2B7144</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>0E76B185-230E-4B1E-9EA6-5D7073AD8E0D</key>
 		<array>
 			<dict>
@@ -60,19 +47,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>2163D1C9-C7FB-4650-9C33-9A7D73314C2E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F83C33F7-02A4-4163-9240-0219CD2B7144</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>387E93E5-B099-4784-8538-0CE2E9086D86</key>
 		<array>
 			<dict>
@@ -89,18 +63,7 @@
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<array/>
 		<key>9D930052-357B-496C-BF72-A006260DBE9D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2381FD05-8DB5-4B75-9D6A-36329E668C7F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</key>
 		<array>
 			<dict>
@@ -197,19 +160,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>3ADD88AD-97C0-461E-8E11-82570C8A25B2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F83C33F7-02A4-4163-9240-0219CD2B7144</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9D930052-357B-496C-BF72-A006260DBE9D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -684,50 +634,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>yaml2json.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>F83C33F7-02A4-4163-9240-0219CD2B7144</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>ke</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🏗 Build Config JSON</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>2163D1C9-C7FB-4650-9C33-9A7D73314C2E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -794,21 +700,6 @@
 			<string>20AA6DBE-F597-47FF-B059-314D7D83B612</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<true/>
-				<key>triggerid</key>
-				<string>rebuild-karabiner-config</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>06F3A05C-624E-44E1-88BA-E97EC7C60DFE</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -893,13 +784,6 @@ window_name</string>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>06F3A05C-624E-44E1-88BA-E97EC7C60DFE</key>
-		<dict>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>610</real>
-		</dict>
 		<key>0E76B185-230E-4B1E-9EA6-5D7073AD8E0D</key>
 		<dict>
 			<key>colorindex</key>
@@ -969,17 +853,6 @@ window_name</string>
 			<key>ypos</key>
 			<real>560</real>
 		</dict>
-		<key>2163D1C9-C7FB-4650-9C33-9A7D73314C2E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>rebuild Config JSON</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>465</real>
-		</dict>
 		<key>2381FD05-8DB5-4B75-9D6A-36329E668C7F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1034,7 +907,7 @@ window_name</string>
 			<key>note</key>
 			<string>build config json</string>
 			<key>xpos</key>
-			<real>320</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>465</real>
 		</dict>
@@ -1119,17 +992,6 @@ window_name</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>20</real>
-		</dict>
-		<key>F83C33F7-02A4-4163-9240-0219CD2B7144</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>yamls 2 json</string>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>465</real>
 		</dict>
 		<key>FB5EF1DE-1F91-43D6-BCE1-E29E2026FC7D</key>
 		<dict>
