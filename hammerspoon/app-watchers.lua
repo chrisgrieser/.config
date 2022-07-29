@@ -133,7 +133,6 @@ function youtubeSpotify (appName, eventType)
 	elseif (eventType == aw.terminated) then
 		spotifyTUI("play")
 	end
-
 end
 youtubeWatcher = aw.new(youtubeSpotify)
 youtubeWatcher:start()
