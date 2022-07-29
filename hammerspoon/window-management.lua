@@ -514,6 +514,12 @@ function finderGitRepoUpdate ()
 			return POSIX path of currentDir
 		end tell
 	]])
+	-- Delete an existing highlight if it exists
+	if banner then
+		banner:delete()
+		runDelayed(0.1, function () banner = nil end)
+	end
+
 	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
 	if isGitRepo then
 		local curWin = hs.window.focusedWindow():frame()
@@ -522,10 +528,6 @@ function finderGitRepoUpdate ()
 		banner:setStrokeWidth(5)
 		banner:setFill(false)
 		banner:show()
-	end
-	if (isGitRepo and banner) or not(currentFinderPath) then
-		banner:delete() -- Delete an existing highlight if it exists
-		runDelayed(0.2, function () banner = nil end)
 	end
 end
 
