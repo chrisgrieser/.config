@@ -27,7 +27,7 @@ rules:
           - set_notification_message:
               id: vim-mode-notice
               text: ""
-  - description: "⚒️ R-⌘ (tap): Focus Window & Hide Cursor"
+  - description: "⚒️ R-⌘ (tap): go to end of line"
     manipulators:
       - type: basic
         from:
@@ -35,23 +35,35 @@ rules:
         to:
           - key_code: right_command
         parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
+          basic.to_if_alone_timeout_milliseconds: 200
         to_if_alone:
-          - software_function:
-              set_mouse_cursor_position:
-                x: 50%
-                y: 50%
-                screen: 0
-          - key_code: vk_none
-            hold_down_milliseconds: 15
-          - pointing_button: button1
-          - key_code: vk_none
-            hold_down_milliseconds: 15
-          - software_function:
-              set_mouse_cursor_position:
-                x: 99%
-                y: 75%
-                screen: 0
+          - key_code: e
+            modifiers:
+              - control
+  - description: "⚒️ R/L-⇧ (tap): go to prev/next word"
+    manipulators:
+      - type: basic
+        from:
+          key_code: right_shift
+        to:
+          - key_code: right_shift
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 200
+        to_if_alone:
+          - key_code: right_arrow
+            modifiers:
+              - option
+      - type: basic
+        from:
+          key_code: left_shift
+        to:
+          - key_code: left_shift
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 200
+        to_if_alone:
+          - key_code: left_arrow
+            modifiers:
+              - option
   - description: "⚒️ {}@^~|: German to US layout"
     manipulators:
       - type: basic
@@ -253,3 +265,185 @@ rules:
         to_after_key_up:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+  - description: 'Insert Mode Vim: ⇪ Hyper + hjkliomnbö → ←↓↑→↵⌫⇐⇒ (w/ shift option)'
+    manipulators:
+      - type: basic
+        from:
+          key_code: h
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: left_arrow
+      - type: basic
+        from:
+          key_code: j
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: down_arrow
+      - type: basic
+        from:
+          key_code: k
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: up_arrow
+      - type: basic
+        from:
+          key_code: l
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: right_arrow
+      - type: basic
+        from:
+          key_code: m
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: return_or_enter
+      # n: backspace/delete
+      - type: basic
+        from:
+          key_code: "n"
+          modifiers:
+            mandatory:
+              - option
+              - right_shift  # only hyper
+              - command
+              - control
+        to:
+          - key_code: delete_or_backspace
+      - type: basic
+        from:
+          key_code: "n"
+          modifiers:
+            mandatory:
+              - option
+              - left_shift  # hyper + shift
+              - right_shift
+              - command
+              - control
+        to:
+          - key_code: delete_forward
+      # word to the left
+      - type: basic
+        from:
+          key_code: i
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: left_arrow
+            modifiers:
+              - option
+      # word to the right
+      - type: basic
+        from:
+          key_code: o
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: right_arrow
+            modifiers:
+              - option
+
+      # delete word
+      - type: basic
+        from:
+          key_code: b
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: right_arrow
+            modifiers:
+              - option
+          - key_code: left_arrow
+            modifiers:
+              - option
+              - shift
+          - key_code: delete_or_backspace  # delete the selection
+          - key_code: delete_or_backspace  # delete the space
+
+      # ö (German Keyboard) → transpose
+      - type: basic
+        from:
+          key_code: semicolon
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: right_arrow
+            modifiers:
+              - shift
+          - key_code: x
+            modifiers:
+              - command
+          - key_code: left_arrow
+          - key_code: v
+            modifiers:
+              - command
+
+      # goto end of (visual) line
+      - type: basic
+        from:
+          key_code: p
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: right_arrow
+            modifiers:
+              - command
+
+      # goto beginning of (visual) line
+      - type: basic
+        from:
+          key_code: u
+          modifiers:
+            mandatory:
+              - option
+              - shift
+              - command
+              - control
+        to:
+          - key_code: left_arrow
+            modifiers:
+              - command

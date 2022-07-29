@@ -20,6 +20,17 @@ function writeToFile(text, file) {
 karabinerJSON = karabinerJSON.replace(/^~/, app.pathTo("home folder"));
 customRulesJSONlocation = customRulesJSONlocation.replace(/^~/, app.pathTo("home folder"));
 
+// convert yaml to json
+app.doShellScript("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH");
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+cd ~/.config/karabiner/assets/complex_modifications/ || exit 1
+
+for f in *.yaml ; do
+  f=$(basename "$f" .yaml)
+  yq -o=json '.' "$f.yaml" > "$f.json"
+done
+
+// built new karabiner.json out of single jsons
 const customRules = [];
 app.doShellScript(`ls "${customRulesJSONlocation}" | grep ".json"`)
 	.split("\r")
