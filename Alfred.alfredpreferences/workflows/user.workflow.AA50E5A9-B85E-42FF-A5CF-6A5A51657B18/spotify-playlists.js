@@ -5,6 +5,7 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
 const currentlyPlaying = app.doShellScript("spt playback --status --format=%p").trim();
+// INFO: currently, the display of the current playlist is broken
 
 const playlists = app.doShellScript("spt list --playlists --limit=50")
 	.split("\r")
@@ -21,10 +22,11 @@ const playlists = app.doShellScript("spt list --playlists --limit=50")
 			"uid": id,
 		};
 	})
+	// sort playing playlist up top
 	.sort((a, b) => {
 		if (a.title.endsWith(" ▶️") && !b.title.endsWith(" ▶️")) return 1;
 		if (!a.title.endsWith(" ▶️") && b.title.endsWith(" ▶️")) return -1;
-		if (a.title.endsWith(" ▶️") && b.title.endsWith(" ▶️")) return 0;
+		return 0;
 	});
 
 JSON.stringify({ items: playlists });
