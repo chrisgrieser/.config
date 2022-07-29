@@ -1,1 +1,1 @@
-/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/private dotfiles/private.lua
+/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/hammerspoon-private.lua

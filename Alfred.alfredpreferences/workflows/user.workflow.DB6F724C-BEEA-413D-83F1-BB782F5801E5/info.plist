@@ -3830,7 +3830,7 @@
 	<key>description</key>
 	<string>Control your Spotify library at your fingertips</string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>Spotify Mini Player</string>
 	<key>objects</key>
@@ -3886,6 +3886,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>spot_mini</string>
 			</dict>
@@ -4175,6 +4177,8 @@ main($query,"ALBUM_OR_PLAYLIST","ADDTOPLAYLIST");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>show_settings</string>
 			</dict>
@@ -4253,6 +4257,8 @@ main($query,"TRACK","ADDTOPLAYLIST");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>show_playlists</string>
 			</dict>
@@ -4343,6 +4349,8 @@ main($query,"TRACK","REMOVEFROMPLAYLIST");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>show_current_track</string>
 			</dict>
@@ -4435,6 +4443,8 @@ main($query,"ONLINE","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>show_recent_tracks</string>
 			</dict>
@@ -4513,6 +4523,8 @@ main($query,"ADDTOQUEUE","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>show_new_releases</string>
 			</dict>
@@ -4591,6 +4603,8 @@ main($query,"PREVIEW","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>show_search_online</string>
 			</dict>
@@ -4677,6 +4691,8 @@ php -S 127.0.0.1:15298</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>start_php_server</string>
 			</dict>
@@ -4690,6 +4706,8 @@ php -S 127.0.0.1:15298</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>show_play_queue</string>
 			</dict>
@@ -4741,6 +4759,8 @@ php -S 127.0.0.1:15298</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>show_browse</string>
 			</dict>
@@ -4802,6 +4822,8 @@ php -S 127.0.0.1:15298</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>show_connect</string>
 			</dict>
@@ -4853,6 +4875,8 @@ php -S 127.0.0.1:15298</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>show_shows</string>
 			</dict>
@@ -5099,6 +5123,8 @@ php -S 127.0.0.1:15298</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>spot_mini_debug</string>
 			</dict>
@@ -5156,6 +5182,8 @@ php -S 127.0.0.1:15298</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>volume_up</string>
 			</dict>
@@ -5365,6 +5393,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>volume_down</string>
 			</dict>
@@ -5468,6 +5498,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>random_track</string>
 			</dict>
@@ -5579,6 +5611,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>add_current_track_to_alfred_playlist_or_your_music</string>
 			</dict>
@@ -5621,6 +5655,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>pause</string>
 			</dict>
@@ -5732,6 +5768,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>play</string>
 			</dict>
@@ -5953,6 +5991,8 @@ echo -n $query</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>shuffle</string>
 			</dict>
@@ -6022,6 +6062,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>previous</string>
 			</dict>
@@ -6133,6 +6175,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>next</string>
 			</dict>
@@ -6244,6 +6288,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>display_current_track_notification</string>
 			</dict>
@@ -6355,6 +6401,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>lyrics</string>
 			</dict>
@@ -6466,6 +6514,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>artist_radio</string>
 			</dict>
@@ -6577,6 +6627,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>song_radio</string>
 			</dict>
@@ -6688,6 +6740,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>spot_mini_reset_settings</string>
 			</dict>
@@ -6770,6 +6824,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>spot_mini_kill</string>
 			</dict>
@@ -6879,6 +6935,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>refresh_library</string>
 			</dict>
@@ -6940,6 +6998,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>play_artist</string>
 			</dict>
@@ -7022,6 +7082,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>follow_artist</string>
 			</dict>
@@ -7035,6 +7097,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>unfollow_artist</string>
 			</dict>
@@ -7294,6 +7358,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>play_album</string>
 			</dict>
@@ -7384,6 +7450,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>play_alfred_playlist</string>
 			</dict>
@@ -7495,6 +7563,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>spot_mini_issue</string>
 			</dict>
@@ -7531,12 +7601,14 @@ main($query,"TRACK","");
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>https://github.com/vdesabou/alfred-spotify-mini-player/issues/new</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -7569,6 +7641,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>add_current_track_to</string>
 			</dict>
@@ -7680,6 +7754,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>lookup_artist_online</string>
 			</dict>
@@ -7975,6 +8051,8 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>show_alfred_playlist</string>
 			</dict>
@@ -8086,6 +8164,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>remove_current_track_from</string>
 			</dict>
@@ -8197,6 +8277,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>random_album</string>
 			</dict>
@@ -8308,6 +8390,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>mute</string>
 			</dict>
@@ -8419,6 +8503,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>playpause</string>
 			</dict>
@@ -8532,6 +8618,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>volmax</string>
 			</dict>
@@ -8643,6 +8731,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>volmid</string>
 			</dict>
@@ -8754,6 +8844,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>repeating</string>
 			</dict>
@@ -8886,6 +8978,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>repeating_current_track</string>
 			</dict>
@@ -8976,6 +9070,8 @@ main($query,"ARTIST_OR_PLAYLIST_PRIVACY","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>share</string>
 			</dict>
@@ -9058,6 +9154,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>web_search_current_track</string>
 			</dict>
@@ -9148,6 +9246,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>reddit_search_current_track</string>
 			</dict>
@@ -9190,12 +9290,14 @@ main($query,"TRACK","");
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string>%20</string>
 				<key>url</key>
 				<string>https://www.reddit.com/search?q={query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -9278,6 +9380,8 @@ echo "$tmp[1] $tmp[0]";
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>soundcloud_search_current_track</string>
 			</dict>
@@ -9349,12 +9453,14 @@ main($query,"TRACK","");
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string>%20</string>
 				<key>url</key>
 				<string>https://soundcloud.com/search?q={query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -9474,6 +9580,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>youtube_search_current_track</string>
 			</dict>
@@ -9529,6 +9637,8 @@ main($query,"TRACK","");
 				<false/>
 				<key>items</key>
 				<string>[{"imagefile":"7f73299e44208b1bf3ea24353e08897cc883f3fb.png","title":"Youtube","arg":"youtube","subtitle":"Select to search current track on Youtube"},{"imagefile":"23dbf40eac5c981b0171d90427f6ba54b71239e0.png","title":"Wikipedia","arg":"wikipedia","subtitle":"Select to search current artist on Wikipedia"},{"imagefile":"82859060e592ee7da3bc7067150201773fdcfdda.png","title":"Facebook","arg":"facebook","subtitle":"Select to search current artist on Facebook"},{"imagefile":"078886c96323cf8fa4dc08c047f730f210d436c3.png","title":"Twitter","arg":"twitter","subtitle":"Select to search current artist on Twitter"},{"imagefile":"5438218af54404741e979e30029dffc8cfa027e0.png","title":"Soundcloud","arg":"soundcloud","subtitle":"Select to search current track on Soundcloud"},{"imagefile":"616d2b26fc250b4bcbabb45fab72267d90b86d5b.png","title":"Reddit","arg":"reddit","subtitle":"Select to search current track on Reddit"}]</string>
+				<key>matchmode</key>
+				<integer>0</integer>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>subtext</key>
@@ -9621,6 +9731,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>web_search</string>
 			</dict>
@@ -9634,6 +9746,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>wikipedia_search_current_track</string>
 			</dict>
@@ -9686,6 +9800,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>facebook_search_current_track</string>
 			</dict>
@@ -9791,6 +9907,8 @@ echo "$tmp[1]";
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>twitter_search_current_track</string>
 			</dict>
@@ -9904,6 +10022,8 @@ echo "$tmp[1]";
 				<true/>
 				<key>items</key>
 				<string>[{"imagefile":"89d65b3654007d57567c65b8369feec3a867ab18.png","title":"Switch to black theme","arg":"black","subtitle":"Change theme to black"},{"imagefile":"17ebacf9fa9a2526eed6e79be7619d1a296f5c07.png","title":"Switch to orange theme","arg":"orange","subtitle":"Change theme to orange"},{"imagefile":"416366eee910711e509f9c7381a14729a4fec214.png","title":"Switch to pink theme","arg":"pink","subtitle":"Change theme to pink"},{"imagefile":"33a76cda76a24b29c08fa6a30b306f8d18842a69.png","title":"Switch to blue theme","arg":"blue","subtitle":"Change theme to blue"},{"imagefile":"d1502fd6b51fa78e31bd5061b9f0c368b504c617.png","title":"Switch to red theme","arg":"red","subtitle":"Change theme to red"},{"imagefile":"afb9b5f72d45346d3a11ab99023d14d3dde3eea0.png","title":"Switch to green theme","arg":"green","subtitle":"Change theme to green"},{"imagefile":"0ff3394be61c7c822d06e3228c89add5b462084f.png","title":"Switch to legacy theme","arg":"legacy","subtitle":"Change theme to legacy one"}]</string>
+				<key>matchmode</key>
+				<integer>0</integer>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>subtext</key>
@@ -9950,6 +10070,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>change_theme_color</string>
 			</dict>
@@ -10200,6 +10322,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>change_search_order</string>
 			</dict>
@@ -10398,6 +10522,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>copy_current_track_url_to_clipboard</string>
 			</dict>
@@ -10488,6 +10614,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>show_in_spotify</string>
 			</dict>
@@ -10599,6 +10727,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>choose_output</string>
 			</dict>
@@ -10841,6 +10971,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>play_liked_songs</string>
 			</dict>
@@ -11021,6 +11153,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>remove_current_track_from_alfred_playlist_or_your_music</string>
 			</dict>
@@ -11063,6 +11197,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>set_volume</string>
 			</dict>
@@ -11236,6 +11372,8 @@ main($query,"TRACK","");
 				<true/>
 				<key>items</key>
 				<string>[{"title":"Download artworks ? (highly recommended)","subtitle":"This process may take several hours to complete (it is done in background and can be cancelled in settings)"},{"imagefile":"c9bfba56ebdb29294659fad3f0c404fd21a4a351.png","title":"Sure, Continue","arg":"yes"},{"imagefile":"8463286a72f3370db63cf3cfae416c88d22c7ae3.png","title":"Use without artworks","arg":"no"}]</string>
+				<key>matchmode</key>
+				<integer>0</integer>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>subtext</key>
@@ -11255,6 +11393,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>guided_setup</string>
 			</dict>
@@ -11276,6 +11416,8 @@ main($query,"TRACK","");
 				<true/>
 				<key>items</key>
 				<string>[{"imagefile":"7d7b41231987359303c4a136766288027188db0a.png","title":"Enable Shows (podcasts) ?","subtitle":"Display your shows in the workflow (increase library creation\/refresh time)"},{"imagefile":"c9bfba56ebdb29294659fad3f0c404fd21a4a351.png","title":"Sure, Continue","arg":"yes"},{"imagefile":"8463286a72f3370db63cf3cfae416c88d22c7ae3.png","title":"Use without shows","arg":"no"}]</string>
+				<key>matchmode</key>
+				<integer>0</integer>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>subtext</key>
@@ -11314,6 +11456,8 @@ main($query,"TRACK","");
 				</array>
 				<key>elselabel</key>
 				<string>no</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -11323,8 +11467,6 @@ main($query,"TRACK","");
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -11354,6 +11496,8 @@ main($query,"TRACK","");
 				</array>
 				<key>elselabel</key>
 				<string>no</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -11488,6 +11632,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>add_current_track_to_alfred_playlist</string>
 			</dict>
@@ -11599,6 +11745,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>add_current_track_to_your_music</string>
 			</dict>
@@ -11710,6 +11858,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>remove_current_track_from_alfred_playlist</string>
 			</dict>
@@ -11821,6 +11971,8 @@ main($query,"TRACK","");
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
 				<key>triggerid</key>
 				<string>remove_current_track_from_your_music</string>
 			</dict>
@@ -14439,6 +14591,8 @@ Example: https://open.spotify.com/track/6hxgHNJjadmCHAJPXw6AYL</string>
 			<integer>12770</integer>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>variables</key>
 	<dict>
 		<key>__alfred_playlist_name</key>
