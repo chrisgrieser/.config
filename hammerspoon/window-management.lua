@@ -512,6 +512,19 @@ wf_finder:subscribe(wf.windowDestroyed, function ()
 		hs.application("Finder"):hide()
 	end
 end)
+wf_finder:subscribe(wf.windowFocused, function ()
+	local currentWin = hs.window.focusedWindow():frame()
+	local currentFinderPath = hs.osascript.applescript([[
+		tell application "Finder"
+			if (count windows) is 0 then return ""
+			set currentDir to target of Finder window 1 as alias
+			return POSIX path of currentDir
+		end tell
+	]])
+
+	notify(currentFinderPath)
+
+end)
 
 -- keep TWITTERRIFIC visible, when active window is pseudomaximized
 function twitterrificNextToPseudoMax(_, eventType)
@@ -551,6 +564,6 @@ wf_sublime:subscribe(wf.windowCreated, function ()
 end)
 wf_sublime:subscribe(wf.windowDestroyed, function ()
 	if #wf_sublime:getWindows() == 0 and appIsRunning("Sublime Text") then
-		hs.application("Sublime Text"):hide()
+		hs.application("Sublime Text"):kill()
 	end
 end)
