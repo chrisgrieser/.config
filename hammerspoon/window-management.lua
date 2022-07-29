@@ -12,10 +12,17 @@ if isAtOffice() then
 else
 	baseLayout = pseudoMaximized
 end
-iMacDisplay = hs.screen("Built%-in") -- % to escape hyphen repetition
+iMacDisplay = hs.screen("Built%-in") -- % to escape hyphen (is a quantifier in lua patterns)
 
 function numberOfScreens()
 	return #(hs.screen.allScreens())
+end
+
+function isPseudoMaximized (win)
+	if not(win) then return false end
+	local max = hs.screen.mainScreen():frame()
+	local dif = win:frame().w - pseudoMaximized.w*max.w
+	return (dif > -10 and dif < 10) -- leeway for some apps
 end
 
 --------------------------------------------------------------------------------
@@ -414,34 +421,38 @@ end
 --------------------------------------------------------------------------------
 -- HOTKEYS
 
+
+function controlSpace ()
+	local size = "maximized"
+	local currentWin = hs.window.focusedWindow()
+
+	if (frontapp() == "Finder") then
+		size = "centered"
+	elseif isIMacAtHome() and not(isPseudoMaximized(currentWin)) then
+		size = "pseudo-maximized"
+	end
+
+	moveAndResize(size)
+end
+
+
 hotkey(hyper, "Up", function() moveAndResize("up") end)
 hotkey(hyper, "Down", function() moveAndResize("down") end)
 hotkey(hyper, "Right", function() moveAndResize("right") end)
 hotkey(hyper, "Left", function() moveAndResize("left") end)
 hotkey(hyper, "Space", function() moveAndResize("maximized") end)
-hotkey(hyper, "pagedown", function() moveToOtherDisplay() end)
-hotkey(hyper, "pageup", function() moveToOtherDisplay() end)
+hotkey(hyper, "pagedown", moveToOtherDisplay)
+hotkey(hyper, "pageup", moveToOtherDisplay)
+hotkey({"ctrl"}, "Space", controlSpace)
 
 hotkey(hyper, "home", function()
-	if isAtOffice() then
-		officeModeLayout()
-	elseif isProjector() then
-		movieModeLayout()
-	else
-		homeModeLayout()
-	end
+	if isAtOffice() then officeModeLayout()
+	elseif isProjector() then movieModeLayout()
+	else homeModeLayout() end
+
 	twitterrificScrollUp()
 end)
 
-hotkey({"ctrl"}, "Space", function ()
-	if (frontapp() == "Finder") then
-		moveAndResize("centered")
-	elseif isAtOffice() then
-		moveAndResize("maximized")
-	else
-		moveAndResize("pseudo-maximized")
-	end
-end)
 
 hotkey(hyper, "X", function() vsplit("switch") end)
 hotkey(hyper, "C", function() vsplit("unsplit") end)
@@ -505,12 +516,9 @@ end)
 -- keep TWITTERRIFIC visible, when active window is pseudomaximized
 function twitterrificNextToPseudoMax(_, eventType)
 	if not(eventType == aw.activated or eventType == aw.launching) then return end
-	local currentWindow = hs.window.focusedWindow()
-	if not(currentWindow) then return end
+	local currentWin = hs.window.focusedWindow()
 
-	local max = hs.screen.mainScreen():frame()
-	local dif = currentWindow:frame().w - pseudoMaximized.w*max.w
-	if dif < 10 and dif > -10 then
+	if isPseudoMaximized(currentWin) then
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end
