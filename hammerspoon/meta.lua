@@ -22,9 +22,9 @@ hs.console.outputBackgroundColor{ white = 0.92 }
 -- copy last command to clipboard
 -- `hammerspoon://copy-last-command` for Karabiner Elements (⌘⇧C)
 hs.urlevent.bind("copy-last-command", function()
-	hs.console.clearConsole()
 	consoleHistory = hs.console.getHistory()
 	lastcommand = consoleHistory[#consoleHistory]
+	lastcommand = trim(lastcommand)
 	hs.pasteboard.setContents(lastcommand)
 	notify("Copied: '"..lastcommand.."'")
 end)
