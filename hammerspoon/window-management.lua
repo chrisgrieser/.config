@@ -515,8 +515,6 @@ function hideBanner ()
 end
 
 function finderGitRepoUpdate ()
-	deleteBanner()
-
 	local _, currentFinderPath = hs.osascript.applescript([[
 		tell application "Finder"
 			if (count windows) is 0 then return ""
