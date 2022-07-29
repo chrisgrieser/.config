@@ -549,3 +549,8 @@ wf_sublime:subscribe(wf.windowCreated, function ()
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
+wf_sublime:subscribe(wf.windowDestroyed, function ()
+	if #wf_sublime:getWindows() == 0 and appIsRunning("Sublime Text") then
+		hs.application("Sublime Text"):hide()
+	end
+end)
