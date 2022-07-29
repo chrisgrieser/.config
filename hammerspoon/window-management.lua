@@ -526,9 +526,10 @@ wf_finder:subscribe(wf.windowFocused, function ()
 		local currentWin = hs.window.focusedWindow():frame()
 		banner = hs.drawing.rect(currentWin.x, currentWin.y, 200, 30)
 		banner:setStrokeColor(hs.drawing.color.osx_yellow)
+		banner:setStrokeWidth(5)
 		banner:show()
 	elseif banner then
-		banner:delete() -- Delete an existing highlight if it exists
+		-- banner:delete() -- Delete an existing highlight if it exists
 	end
 
 end)
