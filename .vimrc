@@ -10,8 +10,6 @@ set relativenumber
 set cursorline
 set scrolloff=7
 
-" vertical ruler
-set colorcolumn=80
 " mostly used by `gq`
 set textwidth=80
 
@@ -171,33 +169,18 @@ vnoremap <Space> c
 " Switch Modes
 """"""""""""""""""""""
 
-" quick switch to insert mode
-inoremap jj <Esc>
-
-" already built in: presss v in visual mode to go back
 vnoremap J <Esc>
 
 """"""""""""""""""""""
 " Insert Mode
 """"""""""""""""""""""
 
-" mirroring HL in Normal Mode
-inoremap <C-l> <Esc>A
-inoremap <C-h> <Esc>I
-
 " Kill line
 inoremap <C-k> <Esc>C
 
-" Kill line backwards
-inoremap <C-j> <Esc>c^
 
 """"""""""""""""""""""
 " Misc
 """"""""""""""""""""""
 " quicker access to help command-ids
 nnoremap ? :help
-
-" copy path of current file
-noremap <C-p> "%y
-
-
