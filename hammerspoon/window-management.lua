@@ -524,7 +524,7 @@ wf_finder:subscribe(wf.windowFocused, function ()
 	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
 	if isGitRepo then
 		local currentWin = hs.window.focusedWindow():frame()
-		banner = hs.drawing.rectangle(currentWin.x, currentWin.y, 200, 30)
+		banner = hs.drawing.rectangle({x=currentWin.x, y=currentWin.y, w=200, h=30})
 		banner:setStrokeColor(hs.drawing.color.osx_yellow)
 		banner:setStrokeWidth(5)
 		banner:show()
