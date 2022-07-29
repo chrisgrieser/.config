@@ -528,7 +528,7 @@ function finderGitRepoUpdate ()
 	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
 	if isGitRepo then
 		local curWin = hs.window.focusedWindow():frame()
-		banner = hs.drawing.rectangle({x=curWin.x, y=curWin.y, w=200, h=30})
+		banner = hs.drawing.rectangle({x=curWin.x + curWin.w - 200, y=curWin.y, w=200, h=30})
 		banner:setStrokeColor(hs.drawing.color.osx_yellow)
 		banner:setStrokeWidth(5)
 		banner:setFill(false)
