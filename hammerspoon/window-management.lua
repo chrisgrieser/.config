@@ -514,7 +514,7 @@ wf_finder:subscribe(wf.windowDestroyed, function ()
 end)
 wf_finder:subscribe(wf.windowFocused, function ()
 	local currentWin = hs.window.focusedWindow():frame()
-	local currentFinderPath = hs.osascript.applescript([[
+	local _, currentFinderPath = hs.osascript.applescript([[
 		tell application "Finder"
 			if (count windows) is 0 then return ""
 			set currentDir to target of Finder window 1 as alias
