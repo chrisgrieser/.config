@@ -10,8 +10,9 @@ alias .="open ."
 alias ..="z .."
 alias ...="z ../.."
 alias ....="z ../../.."
-alias wd='cd "$WD"' # working directory
+alias wd='cd "$WD"' # Working Directory
 alias d='cd "$DOTFILE_FOLDER"' # dotfiles repo
+alias ov='cd "$VAULT_PATH"' # Obsidian Vault
 
 # utils
 alias q='exit'
@@ -49,7 +50,7 @@ alias size="du -sh ./* | sort -rh | sed 's/\\.\\///'" # size of files in current
 # Suffix Aliases
 # = default command to act upon the filetype, when is is entered
 # without preceding command (analogous to `setopt AUTO_CD` but for files)
-alias -s {css,ts,js,md,yml,json,plist,xml}='open'
+alias -s {css,ts,js,yml,json,plist,xml,md}='bat'
 alias -s {pdf,png,jpg,jpeg}="qlmanage -p"
 
 # open log files in less and scrolled to the bottom
