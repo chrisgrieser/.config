@@ -506,13 +506,7 @@ wf_browser:subscribe(wf.windowDestroyed, function ()
 end)
 
 -- Automatically hide FINDER when no window
-wf_finder = wf.new("Finder")
-wf_finder:subscribe(wf.windowDestroyed, function ()
-	if #wf_finder:getWindows() == 0 then
-		hs.application("Finder"):hide()
-	end
-end)
-wf_finder:subscribe(wf.windowFocused, function ()
+function finderGitRepoUpdate ()
 	local _, currentFinderPath = hs.osascript.applescript([[
 		tell application "Finder"
 			if (count windows) is 0 then return ""
@@ -521,20 +515,34 @@ wf_finder:subscribe(wf.windowFocused, function ()
 		end tell
 	]])
 	if not (currentFinderPath) then return end
-
 	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
 	if isGitRepo then
 		local curWin = hs.window.focusedWindow():frame()
 		banner = hs.drawing.rectangle({x=curWin.x, y=curWin.y, w=200, h=30})
 		banner:setStrokeColor(hs.drawing.color.osx_yellow)
 		banner:setStrokeWidth(5)
+		banner:setFill(false)
 		banner:show()
 	elseif banner then
 		banner:delete() -- Delete an existing highlight if it exists
 		runDelayed(0.2, function () banner = nil end)
 	end
+end
 
+wf_finder = wf.new("Finder")
+wf_finder:subscribe(wf.windowDestroyed, function ()
+	if #wf_finder:getWindows() == 0 then
+		hs.application("Finder"):hide()
+	end
+	finderGitRepoUpdate()
 end)
+wf_finder:subscribe(wf.windowFocused, finderGitRepoUpdate)
+wf_finder:subscribe(wf.windowCreated, finderGitRepoUpdate)
+wf_finder:subscribe(wf.windowTitleChanged, finderGitRepoUpdate)
+wf_finder:subscribe(wf.windowUnfocused, finderGitRepoUpdate)
+wf_finder:subscribe(wf.windowMoved, finderGitRepoUpdate)
+
+
 
 -- keep TWITTERRIFIC visible, when active window is pseudomaximized
 function twitterrificNextToPseudoMax(_, eventType)
