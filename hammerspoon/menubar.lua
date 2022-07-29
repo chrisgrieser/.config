@@ -160,7 +160,7 @@ function finderGitRepoUpdate ()
 		local changes = hs.execute(' cd "'..currentFinderPath..'" ; git status --porcelain | wc -l')
 		changes = trim(changes)
 		finderGitRepoBar:returnToMenuBar()
-		finderGitRepoBar:setTitle("✴️"..changes)
+		finderGitRepoBar:setTitle("✴️ "..changes)
 	else
 		finderGitRepoBar:removeFromMenuBar()
 	end
