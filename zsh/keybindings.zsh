@@ -7,13 +7,14 @@ bindkey "^K" kill-line
 bindkey "^U" vi-kill-line
 
 # custom ZLE funtions
-bindkey "^P" copyLocation
-bindkey "^B" copyBuffer
-bindkey '“' quote-args # alt+2 → quote all args
-
-# [alt+arrow] - move word forward or backward (like on Mac)
-bindkey "^[[1;3C" forward-word
-bindkey "^[[1;3D" backward-word
+function bindEverywhere () {
+	bindkey -M emacs "$1" $2
+	bindkey -M viins "$1" $2
+	bindkey -M vicmd "$1" $2
+}
+bindEverywhere "^P" copy-location
+bindEverywhere "^B" copy-buffer
+bindEverywhere '“' quote-all-args # “=alt+2
 
 # zsh-autosuggest
 bindkey '^X' autosuggest-execute # e[x]ecute
@@ -26,20 +27,24 @@ bindkey '^Y' autosuggest-accept # [y]ank the completion
 # INFO: use ctrl-v and then a key combination to get the shell binding for the
 #-------------------------------------------------------------------------------
 
-copyLocation () {
+copy-location () {
 	pwd | pbcopy
 	zle -M "'$PWD' copied."
 }
-zle -N copyLocation
+zle -N copy-location
 
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/copybuffer/copybuffer.plugin.zsh
-copyBuffer () {
+copy-buffer () {
 	printf "%s" "$BUFFER" | pbcopy
 	zle -M "Buffer copied."
 }
-zle -N copyBuffer
+zle -N copy-buffer
 
-quote-args() {
-    BUFFER="$(echo "$BUFFER" | sed 's/ / "/' | sed 's/$/"/' )"
+quote-all-args() {
+	if [[ "$BUFFER" =~ " " ]] ; then
+		BUFFER="$(echo "$BUFFER" | sed 's/ / "/' | sed 's/$/"/' )"
+	else
+		BUFFER="\"$BUFFER\""
+	fi
 }
-zle -N quote-args
+zle -N quote-all-args
