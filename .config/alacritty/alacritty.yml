@@ -121,12 +121,6 @@ key_bindings:
     mods: Command
     mode: ~Vi|~Search
     chars: "\f"
-  - key: Left
-    mods: Command
-    chars: "\eOH"
-  - key: Right
-    mods: Command
-    chars: "\eOF"
   - key: L
     mods: Command
     command:
@@ -134,6 +128,7 @@ key_bindings:
       args:
         - '-c'
         - open .
+  - { key: Space, mods: shift, chars: '^]'}
   - key: 28
     mods: Alt
     chars: '{'
@@ -158,9 +153,6 @@ key_bindings:
   - key: 22
     mods: Alt
     chars: ']'
-  - key: 20
-    mods: Shift
-    chars: §
   - key: W
     mods: Command
     chars: "\x04"
