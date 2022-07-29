@@ -5,9 +5,6 @@
 # Enable vi mode
 bindkey -v
 
-# fix backspace
-bindkey "^?" backward-delete-char
-
 # in hundredth's of seconds (default: 0.4 seconds)
 export KEYTIMEOUT=1
 
@@ -39,15 +36,21 @@ done
 
 bindkey -M vicmd 'L' vi-end-of-line
 bindkey -M vicmd 'H' vi-first-non-blank
-bindkey -M vicmd 'gg' vi-beginning-of-line
 bindkey -M vicmd 'U' redo
-# -s flag sends direct keystrokes, to allow for remappings
-bindkey -M vicmd -s 'Y' 'y$'
-bindkey -M vicmd -s ' ' 'ciw'
+
+# to prevent accidentally going to the beginning of the history (which is never
+# a desired behavior...) Not implemented for 'G', since going down the history
+# is useful.
+bindkey -M vicmd 'gg' vi-beginning-of-line
+
+bindkey "^?" backward-delete-char # fix backspace
+bindkey -M vicmd -s 'Y' 'y$' # -s flag sends direct keystrokes, to allow for remappings
 bindkey -M vicmd -s 'ö' 'xp' # transpose (move character to the right)
 bindkey -M vicmd -s 'Ö' 'xhhp' # reversed transpose (move character to the left)
+
+bindkey -M vicmd -s ' ' 'ciw'
 # shift-space has to be bound to daw via alacritty.yml, cause shell does not accept shift-space :(
-  # - { key: Space, mods: shift, chars: '^]'}
+# - { key: Space, mods: shift, chars: '^]'}
 
 bindkey -M vicmd -s '?' "ibindkey -M vicmd^M" # this properly re-shows the prompt after execution
 
