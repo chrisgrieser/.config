@@ -437,12 +437,10 @@ function controlSpace ()
 	moveAndResize(size)
 end
 
-
 hotkey(hyper, "Up", function() moveAndResize("up") end)
 hotkey(hyper, "Down", function() moveAndResize("down") end)
 hotkey(hyper, "Right", function() moveAndResize("right") end)
 hotkey(hyper, "Left", function() moveAndResize("left") end)
-hotkey(hyper, "Space", function() moveAndResize("maximized") end)
 hotkey(hyper, "pagedown", moveToOtherDisplay)
 hotkey(hyper, "pageup", moveToOtherDisplay)
 hotkey({"ctrl"}, "Space", controlSpace)
