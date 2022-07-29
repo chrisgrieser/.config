@@ -420,16 +420,18 @@ end
 
 --------------------------------------------------------------------------------
 -- HOTKEYS
-
-
 function controlSpace ()
-	local size = "maximized"
-	local currentWin = hs.window.focusedWindow()
-
 	if (frontapp() == "Finder") then
 		size = "centered"
-	elseif isIMacAtHome() and not(isPseudoMaximized(currentWin)) then
-		size = "pseudo-maximized"
+	elseif isIMacAtHome() then
+		local currentWin = hs.window.focusedWindow()
+		if isPseudoMaximized(currentWin) then
+			size = "maximized"
+		else
+			size = "pseudo-maximized"
+		end
+	else
+		size = "maximized"
 	end
 
 	moveAndResize(size)
