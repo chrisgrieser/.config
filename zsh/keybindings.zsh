@@ -14,7 +14,7 @@ bindkey "^[[1;3D" backward-word
 
 # zsh-autosuggest
 bindkey '^X' autosuggest-execute # e[x]ecute
-bindkey '^C' autosuggest-accept # [c]omplete
+bindkey '^F' autosuggest-accept # [f]orward completion
 
 #-------------------------------------------------------------------------------
 # `bindkey -M main` to show existing keybinds
