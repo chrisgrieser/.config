@@ -511,7 +511,6 @@ wf_finder:subscribe(wf.windowDestroyed, function ()
 	if #wf_finder:getWindows() == 0 then
 		hs.application("Finder"):hide()
 	end
-	finderGitRepoUpdate()
 end)
 
 

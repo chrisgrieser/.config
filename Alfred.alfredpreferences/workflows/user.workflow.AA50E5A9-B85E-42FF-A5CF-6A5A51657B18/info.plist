@@ -22,12 +22,36 @@
 			</dict>
 		</array>
 		<key>14DF7AF2-4381-4FFD-BAD2-E76C91A4FBF2</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>48D47FC0-C103-4E74-8DFB-5FA68969DBFD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>38EBCA09-3B03-4DEB-A7FC-4177C1AABD60</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>302BBA3D-DF8C-4F50-959F-F4EB6DE213D8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>48D47FC0-C103-4E74-8DFB-5FA68969DBFD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B8F7B396-5251-46CD-84A6-97B424BEC02E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -75,13 +99,24 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A2CA2F4B-949B-4449-9F4E-F3BC94025B9C</key>
-		<array/>
 		<key>B6733E74-1E2D-4FA3-AA49-51270C6535A7</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>38EBCA09-3B03-4DEB-A7FC-4177C1AABD60</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B8F7B396-5251-46CD-84A6-97B424BEC02E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>302BBA3D-DF8C-4F50-959F-F4EB6DE213D8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -228,27 +263,6 @@ spt playback --$1</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>302BBA3D-DF8C-4F50-959F-F4EB6DE213D8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -278,6 +292,27 @@ spt playback --$1</string>
 			<string>A0FE43DC-98A7-4B5C-A2DA-AEE17890B84F</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>302BBA3D-DF8C-4F50-959F-F4EB6DE213D8</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -316,7 +351,7 @@ spt playback --$1</string>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<false/>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -324,9 +359,9 @@ spt playback --$1</string>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>escaping</key>
-				<integer>127</integer>
+				<integer>0</integer>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -342,13 +377,13 @@ spt playback --$1</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>spotify-playlists.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
 				<string></string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -393,29 +428,25 @@ spt playback --$1</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
+				<key>concurrently</key>
 				<false/>
-				<key>focusedappvariablename</key>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+spt play --playlist --random --name="$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string></string>
-				<key>hotkey</key>
-				<integer>0</integer>
-				<key>hotmod</key>
-				<integer>0</integer>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<key>type</key>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>A2CA2F4B-949B-4449-9F4E-F3BC94025B9C</string>
+			<string>B8F7B396-5251-46CD-84A6-97B424BEC02E</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -451,9 +482,9 @@ spt playback --$1</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>495</real>
+			<real>625</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>520</real>
 		</dict>
 		<key>38EBCA09-3B03-4DEB-A7FC-4177C1AABD60</key>
 		<dict>
@@ -466,10 +497,12 @@ spt playback --$1</string>
 		</dict>
 		<key>48D47FC0-C103-4E74-8DFB-5FA68969DBFD</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>435</real>
+			<real>215</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>690</real>
 		</dict>
 		<key>73BD8961-0B9D-42B7-8B23-EDAEBD6949DF</key>
 		<dict>
@@ -504,17 +537,6 @@ spt playback --$1</string>
 			<key>ypos</key>
 			<real>420</real>
 		</dict>
-		<key>A2CA2F4B-949B-4449-9F4E-F3BC94025B9C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>🔊</string>
-			<key>xpos</key>
-			<real>45</real>
-			<key>ypos</key>
-			<real>845</real>
-		</dict>
 		<key>B6733E74-1E2D-4FA3-AA49-51270C6535A7</key>
 		<dict>
 			<key>colorindex</key>
@@ -525,6 +547,15 @@ spt playback --$1</string>
 			<real>45</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>B8F7B396-5251-46CD-84A6-97B424BEC02E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>690</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
