@@ -1,7 +1,9 @@
 """"""""""""""""""""""
-" < Leader
+" < Leader & INFO
 """"""""""""""""""""""
 let mapleader=,
+
+nnoremap ? :help nv<CR>
 
 """"""""""""""""""""""
 " < Clipboard
@@ -314,7 +316,3 @@ nnoremap <leader>sp vip:sort<CR>
 "   to be done in Sublime, with
 "   "context": [{"key": "vi_insert_mode_aware"}]
 
-""""""""""""""""""""""
-" < unused keys
-""""""""""""""""""""""
-" ?
