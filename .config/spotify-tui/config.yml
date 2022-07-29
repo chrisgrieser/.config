@@ -12,6 +12,6 @@ behavior:
   shuffle_icon: 🔀
   repeat_track_icon: 🔂
   repeat_context_icon: 🔁
-  playing_icon: ▶️
+  playing_icon: "▶️"
   paused_icon: ⏸
 

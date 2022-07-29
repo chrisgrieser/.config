@@ -5,7 +5,7 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
 
-const playlists = app.doShellScript("spt list --playlists --format=%p")
+const playlists = app.doShellScript("spt list --playlists --format=%p --limit=50")
 	.split("\r")
 	.map(playlist => {
 		return {
