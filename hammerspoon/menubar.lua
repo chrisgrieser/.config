@@ -170,7 +170,7 @@ wf_finder2 = wf.new("Finder")
 wf_finder2:subscribe(wf.windowFocused, finderGitRepoUpdate)
 wf_finder2:subscribe(wf.windowCreated, finderGitRepoUpdate)
 wf_finder2:subscribe(wf.windowTitleChanged, finderGitRepoUpdate)
-wf_finder2:subscribe(wf.windowUnfocused, finderGitRepoUpdate)
+wf_finder2:subscribe(wf.windowUnfocused, function() finderGitRepoBar:removeFromMenuBar() end)
 
 --------------------------------------------------------------------------------
 -- obsidianStatusBar = hs.menubar.new()
