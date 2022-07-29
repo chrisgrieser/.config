@@ -510,7 +510,6 @@ end)
 function hideBanner ()
 	if banner then
 		banner:hide()
-		banner = nil
 	end
 end
 
