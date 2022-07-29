@@ -1,5 +1,5 @@
 """"""""""""""""""""""
-" < Leader & INFO
+" < Leader & info
 """"""""""""""""""""""
 let mapleader=,
 
@@ -58,10 +58,8 @@ nnoremap K 7k
 vnoremap K 7k
 
 " cause easier to press, lol
-nnoremap [ {
-nnoremap ] }
-vnoremap [ {
-vnoremap ] }
+noremap [ {
+noremap ] }
 
 " Goto Mark
 nnoremap ä `
@@ -121,7 +119,6 @@ nnoremap Ü ~h
 nnoremap ü mzlblgueh~`z
 
 " TRANSPOSE
-" (insert mode done via Sublime's build in command imap <C-t> xph)
 " current & next char
 nnoremap ö xp
 " current & previous char
@@ -176,7 +173,6 @@ vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
 nnoremap \ =
-nnoremap \\ ==
 vnoremap \ =
 
 """"""""""""""""""""""
