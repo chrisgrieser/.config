@@ -529,7 +529,7 @@ wf_finder:subscribe(wf.windowFocused, function ()
 		banner:setStrokeWidth(5)
 		banner:show()
 	elseif banner then
-		-- banner:delete() -- Delete an existing highlight if it exists
+		banner:delete() -- Delete an existing highlight if it exists
 	end
 
 end)
