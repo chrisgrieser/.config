@@ -6,6 +6,7 @@ app.includeStandardAdditions = true;
 const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
 
 const playlists = app.doShellScript("spt list --playlists --format=%p")
+	.split("\r")
 	.map(playlist => {
 		return {
 			"title": playlist,
