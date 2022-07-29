@@ -213,7 +213,7 @@
             "modifiers": {
               "mandatory": [
                 "option",
-                "shift",
+                "right_shift",
                 "command",
                 "control"
               ]
@@ -222,6 +222,26 @@
           "to": [
             {
               "key_code": "delete_or_backspace"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "n",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "left_shift",
+                "right_shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_forward"
             }
           ]
         },
