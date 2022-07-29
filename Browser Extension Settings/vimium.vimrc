@@ -30,6 +30,8 @@ map J scrollDown count=3
 map K scrollUp count=3
 map gl scrollRight
 map gh scrollLeft
+map gg scrollToTop
+map G scrollToBottom
 
 " History
 map h goBack
