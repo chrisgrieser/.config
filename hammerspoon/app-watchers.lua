@@ -113,18 +113,25 @@ macPassWatcher = aw.new(macPassActivate)
 macPassWatcher:start()
 
 -- YouTube: Play/Pause Spotify on launch/quit
-function spotifyTUI (playback)
-	local currentStatus = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt --playback --status --format=%s")
+function spotifyTUI (toStatus)
+	local currentStatus = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s")
 	notify (currentStatus)
+	if (toStatus == "toggle") or (currentStatus == "▶️" and toStatus == "pause") or (currentStatus == "⏸" and toStatus == "play") then
+		hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle")
+	end
 end
 
-function youtubeSpotify (appName, eventType, appObject)
+function youtubeSpotify (appName, eventType)
 	if not(appName == "YouTube") then return end
-	if (eventType == aw.launched) then
+	if isProjector() or isAtOffice() then return end
 
+	if (eventType == aw.launched) then
+		spotifyTUI("pause")
+	elseif (eventType == aw.terminated) then
+		spotifyTUI("play")
 	end
 
 end
-macPassWatcher = aw.new(macPassActivate)
-macPassWatcher:start()
+youtubeWatcher = aw.new(youtubeSpotify)
+youtubeWatcher:start()
 
