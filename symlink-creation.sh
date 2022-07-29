@@ -52,9 +52,10 @@ ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.l
 # Only left here for reference, or when dotfile folder location changes
 #-------------------------------------------------------------------------------
 
-# to keep private stuff out of the dotfile repo
-# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/private dotfiles/private.lua" "$DOTFILE_FOLDER/hammerspoon/private.lua"
-# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/private dotfiles/private.yml" "$DOTFILE_FOLDER/espanso/match/private.yml"
+# # to keep private stuff out of the dotfile repo
+# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/hammerspoon-private.lua" "$DOTFILE_FOLDER/hammerspoon/private.lua"
+# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/espanso-private.yml" "$DOTFILE_FOLDER/espanso/match/private.yml"
+# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify-tui-client.yml" "$DOTFILE_FOLDER/.config/spotify-tui/client.yml"
 
 # Obsidian vimrc
 # OBSI_ICLOUD=~'/Library/Mobile Documents/iCloud~md~obsidian/Documents/'
