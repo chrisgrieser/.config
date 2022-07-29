@@ -492,7 +492,6 @@ wf_browser:subscribe(wf.windowCreated, function ()
 		resizingWorkaround(currentWindow, baseLayout)
 	end
 end)
-
 wf_browser:subscribe(wf.windowDestroyed, function ()
 	-- Automatically hide Browser when no window
 	if #wf_browser:getWindows() == 0 then
@@ -506,50 +505,14 @@ wf_browser:subscribe(wf.windowDestroyed, function ()
 end)
 
 
--- FINDER
-function hideBanner ()
-	if banner then
-		banner:hide()
-	end
-end
-
-function finderGitRepoUpdate ()
-	local _, currentFinderPath = hs.osascript.applescript([[
-		tell application "Finder"
-			if (count windows) is 0 then return ""
-			set currentDir to target of Finder window 1 as alias
-			return POSIX path of currentDir
-		end tell
-	]])
-
-	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
-	if isGitRepo then
-		if banner then
-			banner:delete()
-			banner = nil
-		end
-		local curWin = hs.window.focusedWindow():frame()
-		banner = hs.drawing.rectangle({x=curWin.x + curWin.w - 200, y=curWin.y, w=200, h=30})
-		banner:setStrokeColor(hs.drawing.color.osx_yellow)
-		banner:setStrokeWidth(5)
-		banner:setFill(false)
-		banner:show()
-	end
-end
-
+-- FINDER: hide when no window
 wf_finder = wf.new("Finder")
 wf_finder:subscribe(wf.windowDestroyed, function ()
 	if #wf_finder:getWindows() == 0 then
 		hs.application("Finder"):hide()
 	end
-	hideBanner()
+	finderGitRepoUpdate()
 end)
-wf_finder:subscribe(wf.windowFocused, finderGitRepoUpdate)
-wf_finder:subscribe(wf.windowCreated, finderGitRepoUpdate)
-wf_finder:subscribe(wf.windowTitleChanged, finderGitRepoUpdate)
-wf_finder:subscribe(wf.windowUnfocused, hideBanner)
-wf_finder:subscribe(wf.windowMoved, finderGitRepoUpdate)
-
 
 
 -- keep TWITTERRIFIC visible, when active window is pseudomaximized

@@ -144,6 +144,34 @@ fileHubMenuBarWatcher = hs.pathwatcher.new(fileHubLocation, setFileHubCountMenuB
 fileHubMenuBarWatcher:start()
 
 --------------------------------------------------------------------------------
+
+
+finderGitRepoBar = hs.menubar.new()
+function finderGitRepoUpdate ()
+	local _, currentFinderPath = hs.osascript.applescript([[
+		tell application "Finder"
+			if (count windows) is 0 then return ""
+			set currentDir to target of Finder window 1 as alias
+			return POSIX path of currentDir
+		end tell
+	]])
+	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
+
+	if isGitRepo and currentFinderPath and frontapp() == "Finder" then
+		finderGitRepoBar:returnToMenuBar()
+		finderGitRepoBar:setTitle("git repo")
+	else
+		finderGitRepoBar:removeFromMenuBar()
+	end
+end
+wf = hs.window.filter
+wf_finder2 = wf.new("Finder")
+wf_finder2:subscribe(wf.windowFocused, finderGitRepoUpdate)
+wf_finder2:subscribe(wf.windowCreated, finderGitRepoUpdate)
+wf_finder2:subscribe(wf.windowTitleChanged, finderGitRepoUpdate)
+wf_finder2:subscribe(wf.windowUnfocused, finderGitRepoUpdate)
+
+--------------------------------------------------------------------------------
 -- obsidianStatusBar = hs.menubar.new()
 -- obsiWorkspaceJSON = os.getenv("HOME") .. "/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/.obsidian/workspace"
 -- function obsidianCurrentFile()
