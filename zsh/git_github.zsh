@@ -13,10 +13,9 @@ function acp (){
 		COMMIT_MSG="patch"
 	fi
 
-	git add -A \
-	&& git commit -m "$COMMIT_MSG" \
-	&& git pull \
-	&& git push
+	git add -A && git commit -m "$COMMIT_MSG"
+	git pull
+	git push
 }
 
 function amend () {
@@ -47,7 +46,7 @@ alias push="git push"
 alias pull="git pull"
 alias ignored="git status --ignored"
 alias status='git status --short'
-alias log="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+alias log="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=human"
 
 # go to git root https://stackoverflow.com/a/38843585
 alias groot='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
@@ -84,7 +83,7 @@ function nuke {
 	rm -rf "$LOCAL_REPO"
 	echo "Local repo removed."
 	echo
-	echo "Downloading it again from remote…"
+	echo "Downloading repo again from remote…"
 
 	git clone "$SSH_REMOTE"
 	cd "$LOCAL_REPO" || return 1
@@ -101,27 +100,3 @@ function rel(){
 	fi
 }
 
-# searches for $1 in the git history of $2
-function past (){
-	start_dir="$PWD"
-	query="$1"
-	file_path="$2"
-	file_name="$(basename "$file_path")"
-	cd "$(dirname "$file_path")" || return 1
-
-	commit_list=$(git log --pretty=format:%h -S "$query" -- "$file_path")
-	if [[ -z $commit_list ]] ; then
-		echo "\"$query\" cannot be found in the history of \"$file_name\"."
-		return 1
-	fi
-
-	echo "$commit_list" | while read -r commit ; do
-		commit_date="$(git show -s --format=%ci "$commit" | cut -d" " -f1-2 | tr ":" "-")"
-		new_file="${commit_date}_$file_name"
-		git show "$commit:./$file_name" > "$start_dir/$new_file"
-		echo "$new_file"
-		grep -i --context=1 "$query" "$new_file"
-		echo "**************************************************"
-	done
-	cd "$start_dir" || exit 1
-}

@@ -15,10 +15,9 @@ fi
 details=$(git status --porcelain)
 msg="$(date +"%a, %H:%M"), $changeType, $device_name"
 
-git add -A \
-&& git commit -m "$msg" -m "$details" \
-&& git pull \
-&& git push
+git add -A && git commit -m "$msg" -m "$details"
+git pull
+git push
 
 # Alfred Repos pullen
 if [[ "$1" == "wake" ]] ; then
