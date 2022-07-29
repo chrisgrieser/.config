@@ -165,7 +165,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>requires Karabiner elements</string>
+	<string>requires Spotify TUI</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -248,7 +248,9 @@
 				<key>script</key>
 				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
-spt playback --$1 --format="🎵 %t – %a – %p (%f)"</string>
+
+
+spt playback --$1 --format="$format" --device="$device"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -509,7 +511,7 @@ spt playback --$1 --format="🎵 %t – %a – %p (%f)"</string>
 				<key>script</key>
 				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
-spt play --playlist --random --name="$*"</string>
+spt play --playlist --random --name="$*" --format="$format" --device="$device"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -615,7 +617,7 @@ spt play --playlist --random --name="$*"</string>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
-			<real>955</real>
+			<real>935</real>
 		</dict>
 		<key>73BD8961-0B9D-42B7-8B23-EDAEBD6949DF</key>
 		<dict>
@@ -681,7 +683,52 @@ spt play --playlist --random --name="$*"</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>🎵 %t – %a – %p (%f)</string>
+				<key>placeholder</key>
+				<string>🎵 %t – %a (%f)</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>There are multiple format specifiers you can use: %a: artist, %b: album, %p: playlist, %t: track, %h: show, %f: flags (shuffle, repeat, like), %s: playback status, %v: volume, %d: current device. Example: spt pb -s -f 'playing on %d at %v%'</string>
+			<key>label</key>
+			<string>Notification format</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>format</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>For Spotify Connect. Leave empty to play on this Mac.</string>
+			<key>label</key>
+			<string>Output Device</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>device</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
