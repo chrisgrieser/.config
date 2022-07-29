@@ -520,16 +520,18 @@ wf_finder:subscribe(wf.windowFocused, function ()
 			return POSIX path of currentDir
 		end tell
 	]])
+	if not (currentFinderPath) then return end
 
 	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
 	if isGitRepo then
-		local currentWin = hs.window.focusedWindow():frame()
-		banner = hs.drawing.rectangle({x=currentWin.x, y=currentWin.y, w=200, h=30})
+		local curWin = hs.window.focusedWindow():frame()
+		banner = hs.drawing.rectangle({x=curWin.x, y=curWin.y, w=200, h=30})
 		banner:setStrokeColor(hs.drawing.color.osx_yellow)
 		banner:setStrokeWidth(5)
 		banner:show()
 	elseif banner then
 		banner:delete() -- Delete an existing highlight if it exists
+		banner = nil
 	end
 
 end)
