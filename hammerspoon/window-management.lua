@@ -522,7 +522,7 @@ wf_finder:subscribe(wf.windowFocused, function ()
 		end tell
 	]])
 
-	local isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
+	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
 	notify(tostring(isGitRepo))
 
 end)
