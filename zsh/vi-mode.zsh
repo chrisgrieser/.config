@@ -32,20 +32,23 @@ for m in visual viopp; do
 done
 
 #-------------------------------------------------------------------------------
-# Display all commands for Normal/Insert Mode
-# bindkey -M vicmd
-# bindkey -M viins
-# bindkey -M visual
+# INFO:Display all commands for Normal/Insert Mode
+# bindkey -M [vicmd|viins|visual]
+# use ctrl-v and then a key combination to get the shell binding for the
+#-------------------------------------------------------------------------------
+
 bindkey -M vicmd 'L' vi-end-of-line
 bindkey -M vicmd 'H' vi-first-non-blank
 bindkey -M vicmd 'U' redo
+# -s flag sends direct keystrokes, to allow for remappings
+bindkey -M vicmd -s 'Y' 'y$'
 bindkey -M vicmd -s ' ' 'ciw'
 bindkey -M vicmd -s 'ö' 'xp' # transpose (move character to the right)
 bindkey -M vicmd -s 'Ö' 'xhhp' # reversed transpose (move character to the left)
 # shift-space has to be bound to daw via alacritty.yml, cause shell does not accept shift-space :(
   # - { key: Space, mods: shift, chars: '^]'}
-bindkey -M vicmd -s '?' "ibindkey -M vicmd^M" # this properly re-shows the prompt after execution
 
+bindkey -M vicmd -s '?' "ibindkey -M vicmd^M" # this properly re-shows the prompt after execution
 
 #-------------------------------------------------------------------------------
 
