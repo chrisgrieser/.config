@@ -3,11 +3,9 @@
 	// https://github.com/NeoVintageous/NeoVintageous/blob/master/Preferences.sublime-settings
 	"vintageous_use_sys_clipboard": true, // = set clipboard=unnamed
 
-	"vintageous_i_escape_jj": true, // = imap jj <Esc>
-	"highlightedyank_duration": 8000,
+	"highlightedyank_duration": 5000,
 	"vintageous_enable_sneak": true, // disables the default s/S for Substitute
 	"vintageous_sneak_use_ic_scs": 1, // case-sensitivity depends on ignore/smart-case
-	"vintageous_exit_when_quiting_last_window": false,
 	"vintageous_reset_mode_when_switching_tabs": false,
 	"vintageous_bell": "blink", // "Error" when using invalid vim command
 
@@ -25,11 +23,9 @@
 		"<C-n>": false, // copy file name
 		"<C-p>": false, // copy path
 		"<C-r>": false, // rename file
-		"<C-t>": false, // transpose → Sublime built-in command
 		"<C-s>": false, // Spellcheck toggle
 		"<C-d>": false, // Duplicate File
 		"<C-k>": false, // Kill Line
-		"<C-j>": false, // Kill Line backwards
 	},
 
 	//-------------------------------------------------
@@ -199,8 +195,6 @@
 	"ignored_words":
 	[
 		"200ms",
-		"Baumann",
-		"Chetachi",
 		"Cloudflare",
 		"Copinara",
 		"Excalidraw",
@@ -208,11 +202,8 @@
 		"Fi",
 		"Freepik",
 		"Gitmoji",
-		"H2",
-		"Hormann",
 		"Hyperkey",
 		"Init",
-		"Ips",
 		"Jenks",
 		"Ko",
 		"Konik",
