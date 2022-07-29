@@ -104,27 +104,17 @@
 
 	// Merge Line up
 	{ "keys": ["super+m"], "command": "join_lines" },
-	// Merge Line down
-	{ "keys": ["super+shift+m"], "command": "run_macro_file", "args": {"file": "res://Packages/User/Merge Line Down.sublime-macro"} },
 
-	[
-		{
-			"args": null,
-			"command": "swap_line_down"
+	// Merge Line down (add commands to the side)
+	{ "keys": ["super+shift+m"], "command": "chain",
+		"args": {
+			"commands": [
+				["swap_line_down"],
+				["move", {"by": "lines", "forward": false}],
+				["join_lines"],
+			]
 		},
-		{
-			"args":
-			{
-				"by": "lines",
-				"forward": false
-			},
-			"command": "move"
-		},
-		{
-			"args": null,
-			"command": "join_lines"
-		}
-	]
+	},
 
 	// Duplicate
 	{ "keys": ["super+shift+d"], "command": "duplicate_line" },
@@ -224,7 +214,7 @@
 			]
 		},
 		"context": [
-			// not restricted to markdown `scope`, so it can be used in comments as well
+			// not restricted to markdown `scope`, so it can be used in comments of other langues or template strings as well
 			{"key": "selection_empty", "operator": "equal", "operand": true},
 		]
 	},
