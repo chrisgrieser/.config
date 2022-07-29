@@ -115,9 +115,9 @@ macPassWatcher:start()
 -- YouTube: Play/Pause Spotify on launch/quit
 function spotifyTUI (toStatus)
 	local currentStatus = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s")
-	notify (currentStatus)
 	if (toStatus == "toggle") or (currentStatus == "▶️" and toStatus == "pause") or (currentStatus == "⏸" and toStatus == "play") then
 		hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle")
+		notify ("toggle")
 	end
 end
 
