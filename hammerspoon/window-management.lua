@@ -505,8 +505,18 @@ wf_browser:subscribe(wf.windowDestroyed, function ()
 	end
 end)
 
--- Automatically hide FINDER when no window
+
+-- FINDER
+function deleteBanner ()
+	if banner then
+		banner:delete()
+		runDelayed(0.3, function () banner = nil end)
+	end
+end
+
 function finderGitRepoUpdate ()
+	deleteBanner()
+
 	local _, currentFinderPath = hs.osascript.applescript([[
 		tell application "Finder"
 			if (count windows) is 0 then return ""
@@ -514,11 +524,6 @@ function finderGitRepoUpdate ()
 			return POSIX path of currentDir
 		end tell
 	]])
-	-- Delete an existing highlight if it exists
-	if banner then
-		banner:delete()
-		runDelayed(0.3, function () banner = nil end)
-	end
 
 	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
 	if isGitRepo then
@@ -536,12 +541,12 @@ wf_finder:subscribe(wf.windowDestroyed, function ()
 	if #wf_finder:getWindows() == 0 then
 		hs.application("Finder"):hide()
 	end
-	finderGitRepoUpdate()
+	deleteBanner()
 end)
 wf_finder:subscribe(wf.windowFocused, finderGitRepoUpdate)
 wf_finder:subscribe(wf.windowCreated, finderGitRepoUpdate)
 wf_finder:subscribe(wf.windowTitleChanged, finderGitRepoUpdate)
-wf_finder:subscribe(wf.windowUnfocused, finderGitRepoUpdate)
+wf_finder:subscribe(wf.windowUnfocused, deleteBanner)
 wf_finder:subscribe(wf.windowMoved, finderGitRepoUpdate)
 
 
