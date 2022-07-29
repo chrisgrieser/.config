@@ -524,7 +524,13 @@ wf_finder:subscribe(wf.windowFocused, function ()
 	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
 	if isGitRepo then
 		local currentWin = hs.window.focusedWindow():frame()
-		local banner = hs.geometry.rect(currentWin.x, currentWin.y, 200, 30)
+		banner = hs.geometry.rect(currentWin.x, currentWin.y, 200, 30)
+		banner:setStrokeColor({["red"]=1,["blue"]=0,["green"]=0,["alpha"]=1})
+		banner:setFill(false)
+		banner:setStrokeWidth(5)
+		banner:show()
+	elseif banner then
+		banner:delete() -- Delete an existing highlight if it exists
 	end
 
 end)
