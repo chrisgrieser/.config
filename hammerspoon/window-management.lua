@@ -513,7 +513,6 @@ wf_finder:subscribe(wf.windowDestroyed, function ()
 	end
 end)
 wf_finder:subscribe(wf.windowFocused, function ()
-	local currentWin = hs.window.focusedWindow():frame()
 	local _, currentFinderPath = hs.osascript.applescript([[
 		tell application "Finder"
 			if (count windows) is 0 then return ""
@@ -523,7 +522,10 @@ wf_finder:subscribe(wf.windowFocused, function ()
 	]])
 
 	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
-	notify(tostring(isGitRepo))
+	if isGitRepo then
+		local currentWin = hs.window.focusedWindow():frame()
+		local banner = hs.geometry.rect(currentWin.x, currentWin.y, 200, 30)
+	end
 
 end)
 
