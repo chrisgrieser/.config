@@ -64,7 +64,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E27C16A0-4853-4EFD-8BE3-6071AD862B4F</string>
+				<string>589EA44A-24A6-44C8-8FCC-A3A2D467DB12</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -199,62 +199,6 @@
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>106</integer>
-				<key>hotmod</key>
-				<integer>8388608</integer>
-				<key>hotstring</key>
-				<string>F16</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.brave.Browser</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>3B9CC1E6-13AA-4265-879E-8F4C366D3AF2</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>←</string>
-				<key>keycode</key>
-				<integer>123</integer>
-				<key>keymod</key>
-				<integer>11534336</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>E27C16A0-4853-4EFD-8BE3-6071AD862B4F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
 				<integer>105</integer>
 				<key>hotmod</key>
 				<integer>8388608</integer>
@@ -275,6 +219,65 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>99986663-D8A9-423B-9FCD-2C6F7D9B04D5</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string># AppleScript avoids cmd+left being caught when in text field
+
+on alfred_script(q)
+  tell application "System Events"
+	tell process "Brave Browser"
+		set frontmost to true
+		click menu item "Back" of menu "History" of menu bar 1
+	end tell
+end tell
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>589EA44A-24A6-44C8-8FCC-A3A2D467DB12</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>106</integer>
+				<key>hotmod</key>
+				<integer>8388608</integer>
+				<key>hotstring</key>
+				<string>F16</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.brave.Browser</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>3B9CC1E6-13AA-4265-879E-8F4C366D3AF2</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -526,7 +529,7 @@ end alfred_script</string>
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>585</real>
 		</dict>
 		<key>1C3D78DC-489D-4E04-B780-4B301F7BF529</key>
 		<dict>
@@ -557,6 +560,17 @@ end alfred_script</string>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
+		<key>589EA44A-24A6-44C8-8FCC-A3A2D467DB12</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>back</string>
+			<key>xpos</key>
+			<real>555</real>
+			<key>ypos</key>
+			<real>155</real>
+		</dict>
 		<key>5D57E096-989E-472D-97A9-4C0D0058DCB3</key>
 		<dict>
 			<key>colorindex</key>
@@ -573,27 +587,27 @@ end alfred_script</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>505</real>
+			<real>415</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>590</real>
 		</dict>
 		<key>99986663-D8A9-423B-9FCD-2C6F7D9B04D5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>505</real>
+			<real>400</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>155</real>
 		</dict>
 		<key>B76661AC-FCA1-4DCA-9E9B-9B1A812210D4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>65</real>
+			<real>60</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>585</real>
 		</dict>
 		<key>B9C495DC-0387-4FA8-9249-4E625E970B5B</key>
 		<dict>
@@ -602,9 +616,9 @@ end alfred_script</string>
 			<key>note</key>
 			<string>delete</string>
 			<key>xpos</key>
-			<real>690</real>
+			<real>570</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>590</real>
 		</dict>
 		<key>BC65620C-4621-4783-BD03-DD00BF67A3A1</key>
 		<dict>
@@ -624,23 +638,12 @@ end alfred_script</string>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
-		<key>E27C16A0-4853-4EFD-8BE3-6071AD862B4F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>back</string>
-			<key>xpos</key>
-			<real>690</real>
-			<key>ypos</key>
-			<real>160</real>
-		</dict>
 		<key>E6689D89-3A3C-46C6-A5C3-F48EC6FC79B1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>go back home</string>
+			<string>go up (via Vimium)</string>
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>

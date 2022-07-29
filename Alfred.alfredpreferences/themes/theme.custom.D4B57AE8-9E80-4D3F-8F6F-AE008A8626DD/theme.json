@@ -21,7 +21,7 @@
         "font" : "Recursive",
         "color" : "#FDFDFDFF"
       },
-      "iconPaddingHorizontal" : 4,
+      "iconPaddingHorizontal" : 7,
       "roundness" : 7,
       "paddingVertical" : 7,
       "iconSize" : 56
