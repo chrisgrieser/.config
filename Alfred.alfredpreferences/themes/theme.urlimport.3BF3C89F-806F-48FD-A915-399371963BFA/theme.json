@@ -3,49 +3,49 @@
     "result" : {
       "textSpacing" : 10,
       "subtext" : {
-        "size" : 19,
+        "size" : 18,
         "colorSelected" : "#FFFFFFC4",
-        "font" : "JetBrainsMonoNL Nerd Font",
+        "font" : "Geneva",
         "color" : "#CBCBCBF3"
       },
       "shortcut" : {
         "size" : 23,
         "colorSelected" : "#FFFFFFFF",
-        "font" : "System",
+        "font" : "Geneva",
         "color" : "#7D57C2FF"
       },
       "backgroundSelected" : "#7D57C2FF",
       "text" : {
-        "size" : 28,
+        "size" : 30,
         "colorSelected" : "#FFFFFFFF",
-        "font" : "JetBrainsMonoNL Nerd Font",
+        "font" : "Geneva",
         "color" : "#88DDFEFF"
       },
       "iconPaddingHorizontal" : 10,
       "roundness" : 0,
-      "paddingVertical" : 9,
+      "paddingVertical" : 6,
       "iconSize" : 50
     },
     "search" : {
       "backgroundSelected" : "#480069E4",
-      "paddingHorizontal" : 8,
+      "paddingHorizontal" : 11,
       "spacing" : 10,
       "text" : {
-        "size" : 56,
+        "size" : 47,
         "colorSelected" : "#FFFFFFFF",
-        "font" : "System Light",
+        "font" : "Geneva",
         "color" : "#FFFFFFFF"
       },
       "background" : "#8084CC32",
-      "roundness" : 0,
-      "paddingVertical" : 5
+      "roundness" : 5,
+      "paddingVertical" : 9
     },
     "window" : {
       "color" : "#292C3EFF",
       "paddingHorizontal" : 10,
       "width" : 998,
       "borderPadding" : 6,
-      "borderColor" : "#7D57C2FF",
+      "borderColor" : "#7D57C276",
       "blur" : 15,
       "roundness" : 5,
       "paddingVertical" : 10
