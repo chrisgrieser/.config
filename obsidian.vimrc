@@ -10,7 +10,6 @@ unmap ,
 " Clipboard
 """"""""""""""""""""""
 " yank to system clipboard
-" disabled due to koala's PR
 set clipboard=unnamed
 
 " Y consistent with D and C to the end of line
@@ -18,12 +17,7 @@ nmap Y y$
 
 " always paste what was yanked, not what was deleted
 nmap P "0p
-
-" append to register
-map gy "Yy
-map gx "Yd
-" paste from register
-map gp "yp
+vmap P "0p
 
 """"""""""""""""""""""
 " < Search
@@ -35,15 +29,11 @@ nmap + *
 " (by mirroring American keyboard layout on German keyboard layout)
 map - /
 
-" [M]ute search highlights
-nmap <C-m> :nohlsearch
-
 """"""""""""""""""""""
 " < Nagivation
 """"""""""""""""""""""
-imap jj <Esc>
 
-" Scroll horizontally back
+" Scroll horizontally back (for when there is no wrapping, e.g. when working with tables)
 nmap Q mz0`z
 
 " Have j and k navigate visual lines rather than logical ones
@@ -56,23 +46,6 @@ exmap startOfVisualLine jsfile Meta/obsidian-vim-helpers.js {goToStart()}
 nmap g0 :startOfVisualLine
 nmap g$ :endOfVisualLine
 
-" // Save these as "Meta/obsidian-vim-helpers.js" in your vault
-" function movementHelper() {
-"     const editor = app.workspace.activeLeaf.view.editor
-"     let pos = {from: editor.posToOffset(editor.getCursor('from')), to: editor.posToOffset(editor.getCursor('to')), head: editor.posToOffset(editor.getCursor('head')), anchor: editor.posToOffset(editor.getCursor('anchor')), empty: true}
-"     return pos
-" }
-" function goToEnd() {
-"     const pos = movementHelper()
-"     const endOfLine = editor.cm.moveToLineBoundary(pos, true)
-"     editor.setCursor(editor.offsetToPos(endOfLine.from -1))
-" }
-" function goToStart() {
-"     const pos = movementHelper()
-"     const startOfLine = editor.cm.moveToLineBoundary(pos, false)
-"     editor.setCursor(editor.offsetToPos(startOfLine.from))
-" }
-
 " HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
 nmap H g0
 vmap H g0
@@ -84,8 +57,8 @@ nmap K 6k
 vmap K 6k
 
 " cause easier to press, lol
-nmap [ (
-nmap ] )
+map [ {
+map ] }
 
 " Goto Mark
 nmap ä `
@@ -101,11 +74,8 @@ exmap prevHeading obcommand obsidian-editor-shortcuts:goToPrevHeading
 nmap <C-j> :nextHeading
 nmap <C-k> :prevHeading
 
-" Navigating Pane History done via Obsdian Hotkeys, so they also work
-" in Preview Mode
-" exmap back obcommand app:go-back
+" History done via Obsdian Hotkeys, so they also work in Preview Mode
 " nmap <C-h> :back
-" exmap forward obcommand app:go-forward
 " nmap <C-l> :forward
 
 " [g]oto [s]ymbol
@@ -258,8 +228,6 @@ nmap ,+ mz&§&#a&§&#bO<Esc>`z
 """"""""""""""""""""""
 " Tab as indentation is already implemented in Obsidian
 
-" Can't `map ° =` due to missing noremap... :/
-
 """"""""""""""""""""""
 " < Text Objects
 """"""""""""""""""""""
@@ -277,9 +245,9 @@ nmap R viw"0p
 vmap R "0P
 
 """"""""""""""""""""""
-" < Insert Mode
+" < Mode
 """"""""""""""""""""""
-" mirroring emacs commands available globally on Mac
+imap jj <Esc>
 
 " move to BOL/EOL
 imap <C-a> <Esc>I
@@ -288,9 +256,6 @@ imap <C-e> <Esc>A
 " Kill line
 imap <C-k> <Esc>lC
 
-""""""""""""""""""""""
-" < Visual Mode
-""""""""""""""""""""""
 " so that VV... in normal mode just selects more lines
 vmap V j
 
@@ -401,7 +366,7 @@ nmap ,sp vip,ss
 " < Options
 """"""""""""""""""""""
 
-" shortcuts from vim.unimpaired
+" emulate shortcuts from vim.unimpaired
 exmap number obcommand obsidian-smarter-md-hotkeys:toggle-line-numbers
 exmap readableLineLength obcommand obsidian-smarter-md-hotkeys:toggle-readable-line-length
 exmap spellcheck obcommand editor:toggle-spellcheck
@@ -413,7 +378,3 @@ map ,os :spellcheck
 " [O]ption: line [w]rap
 map ,ow :readableLineLength
 
-""""""""""""""""""""""
-" < unused keys
-""""""""""""""""""""""
-" ?
