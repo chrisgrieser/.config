@@ -101,13 +101,29 @@ draftsWatcher3 = aw.new(draftsLaunchWake)
 draftsWatcher3:start()
 
 
--- MacPass: properly show
+-- MACPASS: properly show when activated
 function macPassActivate(appName, eventType, appObject)
 	if not(appName == "MacPass") or not(eventType == aw.launched) then return end
 
 	runDelayed(0.3, function ()
 		appObject:activate()
 	end)
+end
+macPassWatcher = aw.new(macPassActivate)
+macPassWatcher:start()
+
+-- YouTube: Play/Pause Spotify on launch/quit
+function spotifyTUI (playback)
+	local currentStatus = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt --playback --status --format=%s")
+	notify (currentStatus)
+end
+
+function youtubeSpotify (appName, eventType, appObject)
+	if not(appName == "YouTube") then return end
+	if (eventType == aw.launched) then
+
+	end
+
 end
 macPassWatcher = aw.new(macPassActivate)
 macPassWatcher:start()
