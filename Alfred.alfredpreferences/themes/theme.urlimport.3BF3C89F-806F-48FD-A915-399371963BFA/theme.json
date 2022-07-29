@@ -16,10 +16,10 @@
       },
       "backgroundSelected" : "#7D57C2FF",
       "text" : {
-        "size" : 30,
+        "size" : 31,
         "colorSelected" : "#FFFFFFFF",
         "font" : "Geneva",
-        "color" : "#88DDFEFF"
+        "color" : "#A4FCD1FF"
       },
       "iconPaddingHorizontal" : 10,
       "roundness" : 0,
@@ -44,7 +44,7 @@
       "color" : "#292C3EFF",
       "paddingHorizontal" : 10,
       "width" : 998,
-      "borderPadding" : 6,
+      "borderPadding" : 3,
       "borderColor" : "#7D57C276",
       "blur" : 15,
       "roundness" : 5,

@@ -10,6 +10,9 @@ some.log
 # redundant
 .config/karabiner/automatic_backups
 
+# includes authentification data
+spotifyd.conf
+
 # -------------------------------------------------------------
 
 # Git Repos (already backed up & git can't handle nested repos)
