@@ -22,44 +22,7 @@
 			</dict>
 		</array>
 		<key>14DF7AF2-4381-4FFD-BAD2-E76C91A4FBF2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>22ED7F25-1811-4D53-B573-08763B579D8B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>22ED7F25-1811-4D53-B573-08763B579D8B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9B1175BD-0707-4517-9567-84A63DE1C1AD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>2D4802D1-DB08-492C-8D46-37AE57634698</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D69744D0-59D4-43A8-B8ED-F169B139B10D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>38EBCA09-3B03-4DEB-A7FC-4177C1AABD60</key>
 		<array>
 			<dict>
@@ -113,18 +76,7 @@
 			</dict>
 		</array>
 		<key>A2CA2F4B-949B-4449-9F4E-F3BC94025B9C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>38642B1F-2C61-4D93-8CD7-BC811CB520F0</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>B6733E74-1E2D-4FA3-AA49-51270C6535A7</key>
 		<array>
 			<dict>
@@ -157,7 +109,7 @@
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>spt playback --shuffle</string>
+				<string>shuffle</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -190,7 +142,7 @@
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>playback --like</string>
+				<string>like</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -223,7 +175,7 @@
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>playback --previous</string>
+				<string>previous</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -257,7 +209,8 @@
 				<integer>102</integer>
 				<key>script</key>
 				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-spt "$*"</string>
+
+spt playback --$1</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -278,7 +231,7 @@ spt "$*"</string>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<false/>
+				<true/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
@@ -301,7 +254,7 @@ spt "$*"</string>
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>playback --toggle</string>
+				<string>toggle</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -329,60 +282,12 @@ spt "$*"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>show_connect</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>com.vdesabou.spotify.mini.player</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>38642B1F-2C61-4D93-8CD7-BC811CB520F0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>0</integer>
-				<key>hotmod</key>
-				<integer>0</integer>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>A2CA2F4B-949B-4449-9F4E-F3BC94025B9C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>playback --next</string>
+				<string>next</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -406,6 +311,53 @@ spt "$*"</string>
 			<string>0C89E83F-2EBC-475C-868A-BDF5E26BF097</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>48D47FC0-C103-4E74-8DFB-5FA68969DBFD</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -441,78 +393,31 @@ spt "$*"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>spot_mini</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>com.vdesabou.spotify.mini.player</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>9B1175BD-0707-4517-9567-84A63DE1C1AD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
+				<key>action</key>
+				<integer>0</integer>
 				<key>argument</key>
-				<string>✧Playlist▹{query}</string>
-				<key>passthroughargument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
 				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>22ED7F25-1811-4D53-B573-08763B579D8B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>refresh_library</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>com.vdesabou.spotify.mini.player</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>D69744D0-59D4-43A8-B8ED-F169B139B10D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>refresh</string>
-				<key>subtext</key>
+				<key>focusedappvariablename</key>
 				<string></string>
-				<key>text</key>
-				<string>Refresh Spotify Playlists</string>
-				<key>withspace</key>
-				<true/>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>2D4802D1-DB08-492C-8D46-37AE57634698</string>
+			<string>A2CA2F4B-949B-4449-9F4E-F3BC94025B9C</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -522,7 +427,7 @@ spt "$*"</string>
 		<key>0C89E83F-2EBC-475C-868A-BDF5E26BF097</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>5</integer>
 			<key>note</key>
 			<string>⏭</string>
 			<key>xpos</key>
@@ -541,55 +446,35 @@ spt "$*"</string>
 			<key>ypos</key>
 			<real>690</real>
 		</dict>
-		<key>22ED7F25-1811-4D53-B573-08763B579D8B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>720</real>
-		</dict>
-		<key>2D4802D1-DB08-492C-8D46-37AE57634698</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>935</real>
-		</dict>
 		<key>302BBA3D-DF8C-4F50-959F-F4EB6DE213D8</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>
 			<real>285</real>
 		</dict>
-		<key>38642B1F-2C61-4D93-8CD7-BC811CB520F0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>675</real>
-			<key>ypos</key>
-			<real>490</real>
-		</dict>
 		<key>38EBCA09-3B03-4DEB-A7FC-4177C1AABD60</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>340</real>
 			<key>ypos</key>
 			<real>285</real>
 		</dict>
+		<key>48D47FC0-C103-4E74-8DFB-5FA68969DBFD</key>
+		<dict>
+			<key>xpos</key>
+			<real>435</real>
+			<key>ypos</key>
+			<real>625</real>
+		</dict>
 		<key>73BD8961-0B9D-42B7-8B23-EDAEBD6949DF</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>5</integer>
 			<key>note</key>
 			<string>⏮</string>
 			<key>xpos</key>
@@ -600,7 +485,7 @@ spt "$*"</string>
 		<key>76A5622F-175B-4AB2-8D64-41B97D60EEE5</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>5</integer>
 			<key>note</key>
 			<string>💚</string>
 			<key>xpos</key>
@@ -608,19 +493,10 @@ spt "$*"</string>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
-		<key>9B1175BD-0707-4517-9567-84A63DE1C1AD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>245</real>
-			<key>ypos</key>
-			<real>690</real>
-		</dict>
 		<key>A0FE43DC-98A7-4B5C-A2DA-AEE17890B84F</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>5</integer>
 			<key>note</key>
 			<string>⏯</string>
 			<key>xpos</key>
@@ -635,29 +511,20 @@ spt "$*"</string>
 			<key>note</key>
 			<string>🔊</string>
 			<key>xpos</key>
-			<real>475</real>
+			<real>45</real>
 			<key>ypos</key>
-			<real>490</real>
+			<real>845</real>
 		</dict>
 		<key>B6733E74-1E2D-4FA3-AA49-51270C6535A7</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>5</integer>
 			<key>note</key>
 			<string>🔀</string>
 			<key>xpos</key>
 			<real>45</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>D69744D0-59D4-43A8-B8ED-F169B139B10D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>230</real>
-			<key>ypos</key>
-			<real>935</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
