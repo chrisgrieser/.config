@@ -1,6 +1,5 @@
 # shellcheck disable=SC1090,SC1091,SC2292
 
-
 # activate completions, also needed for ZSH auto suggestions & completions
 autoload compinit -Uz +X && compinit
 
