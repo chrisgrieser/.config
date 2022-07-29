@@ -507,10 +507,10 @@ end)
 
 
 -- FINDER
-function deleteBanner ()
+function hideBanner ()
 	if banner then
-		banner:delete()
-		runDelayed(0.3, function () banner = nil end)
+		banner:hide()
+		banner = nil
 	end
 end
 
@@ -527,6 +527,10 @@ function finderGitRepoUpdate ()
 
 	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
 	if isGitRepo then
+		if banner then
+			banner:delete()
+			banner = nil
+		end
 		local curWin = hs.window.focusedWindow():frame()
 		banner = hs.drawing.rectangle({x=curWin.x + curWin.w - 200, y=curWin.y, w=200, h=30})
 		banner:setStrokeColor(hs.drawing.color.osx_yellow)
@@ -541,12 +545,12 @@ wf_finder:subscribe(wf.windowDestroyed, function ()
 	if #wf_finder:getWindows() == 0 then
 		hs.application("Finder"):hide()
 	end
-	deleteBanner()
+	hideBanner()
 end)
 wf_finder:subscribe(wf.windowFocused, finderGitRepoUpdate)
 wf_finder:subscribe(wf.windowCreated, finderGitRepoUpdate)
 wf_finder:subscribe(wf.windowTitleChanged, finderGitRepoUpdate)
-wf_finder:subscribe(wf.windowUnfocused, deleteBanner)
+wf_finder:subscribe(wf.windowUnfocused, hideBanner)
 wf_finder:subscribe(wf.windowMoved, finderGitRepoUpdate)
 
 
