@@ -1,0 +1,17 @@
+# https://github.com/Rigellute/spotify-tui#configuration
+# Sample config file
+
+behavior:
+  seek_milliseconds: 5000
+  volume_increment: 10
+  enable_text_emphasis: true
+  show_loading_indicator: true
+  set_window_title: true
+
+  liked_icon: 💚
+  shuffle_icon: 🔀
+  repeat_track_icon: 🔂
+  repeat_context_icon: 🔁
+  playing_icon: ▶️
+  paused_icon: ⏸
+
