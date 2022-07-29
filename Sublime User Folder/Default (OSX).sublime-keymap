@@ -47,6 +47,7 @@
 	{ "keys": ["shift+control+alt+8"], "command": "fold_by_level", "args": {"level": 8} },
 	{ "keys": ["shift+control+alt+9"], "command": "fold_by_level", "args": {"level": 9} },
 	{ "keys": ["shift+control+alt+f"], "command": "unfold_all" },
+	{ "keys": ["super+6"], "command": "open_context_url" },
 
 
 	// ------------------------------------
@@ -85,12 +86,10 @@
 	// Executable (using Build System)
 	{ "keys": ["shift+alt+ctrl+x"], "command": "build", "args": { "variant": "Make Executable" } },
 	// Quick Build
-	{ "keys": ["super+r"], "command": "build", "context": [
-		{"key": "selector", "operator": "not_equal", "operand": "text.html.markdown"},
-	] },
+	{ "keys": ["super+r"], "command": "build" },
 
 	// Build System: Console
-	{"keys": ["ctrl+escape"], "command": "show_panel", "args": {"panel": "output.exec"}, "context": [
+	{"keys": ["ctrl+f18"], "command": "show_panel", "args": {"panel": "output.exec"}, "context": [
 		{ "key": "panel_visible", "operand": false }
 	] },
 
@@ -110,22 +109,11 @@
 	{ "keys": ["shift+alt+ctrl+d"], "command": "smart_duplicate", "context": [
 		{"key": "selector", "operator": "equal", "operand": "source.css"},
 	]},
-	// lineS is the smarter duplication plugin
-	{ "keys": ["super+shift+d"], "command": "duplicate_lines" },
-	// Split Line
-	{ "keys": ["super+shift+l"], "command": "split_selection_into_lines"},
-
-	// Multi Cursor down / up
-	{ "keys": ["ctrl+shift+alt+up"], "command": "select_lines", "args": {"forward": false} },
-	{ "keys": ["ctrl+shift+alt+down"], "command": "select_lines", "args": {"forward": true} },
+	{ "keys": ["super+shift+d"], "command": "duplicate_line" },
 
 	// Comment
 	{ "keys": ["super+7"], "command": "toggle_comment", "args": { "block": false } },
 	{ "keys": ["super+shift+7"], "command": "toggle_comment", "args": { "block": true } },
-
-	// Undo/Redo Selection
-	{ "keys": ["super+u"], "command": "jump_back" },
-	{ "keys": ["super+shift+u"], "command": "jump_forward" },
 
 	// Mouse Keys
 	{ "keys": ["f16"], "command": "close" },
@@ -139,8 +127,6 @@
 		"context": [ { "key": "auto_complete_visible", "operator": "equal", "operand": false } ]
 	},
 	{ "keys": ["super+shift+j"], "command": "find_under_expand_skip" },
-	{ "keys": ["alt+shift+j"], "command": "find_under" },
-	{ "keys": ["super+shift+a"], "command": "lsp_expand_selection"},
 
 	// Paste and Indent & Convert Indentation
 	{ "keys": ["super+v"], "command": "paste_and_indent",
@@ -207,9 +193,6 @@
 	] },
 
 	// MARKDOWN
-	{ "keys": ["super+r"], "command": "markdown_preview", "args": {"target": "browser", "parser":"github"} , "context": [
-		{"key": "selector", "operator": "equal", "operand": "text.html.markdown"},
-	] },
 	{ "keys": ["super+^"], "command": "mde_reference_new_footnote", "context": [
 		{ "key": "selector", "operator": "equal", "operand": "text.html.markdown", "match_all": true },
 		{ "key": "setting.mde.keymap_disable.reference_new_footnote", "operator": "not_equal", "operand": true }
