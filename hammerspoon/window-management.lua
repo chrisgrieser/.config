@@ -523,8 +523,9 @@ end)
 -- keep TWITTERRIFIC visible, when active window is pseudomaximized
 function twitterrificNextToPseudoMax(_, eventType)
 	if not(eventType == aw.activated or eventType == aw.launching) then return end
-	local currentWin = hs.window.focusedWindow()
+	if not(appIsRunning("Twitterrific")) then return end
 
+	local currentWin = hs.window.focusedWindow()
 	if isPseudoMaximized(currentWin) then
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
@@ -563,7 +564,8 @@ wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 			end tell
 		]])
 
-	-- workaround for Window positioning issue, will be fixed with build 4130 being released - https://github.com/sublimehq/sublime_text/issues/5237
+	-- workaround for Window positioning issue, will be fixed with build 4130 being released
+	-- https://github.com/sublimehq/sublime_text/issues/5237
 	elseif isAtOffice() then
 		moveResizeCurWin("maximized")
 	else
@@ -585,8 +587,8 @@ wf_sublime:subscribe(wf.windowDestroyed, function ()
 		keystroke({}, "space") -- to redraw zsh-syntax highlighting of the buffer
 	end
 end)
--- editing command line: paired activation of both windows
 wf_sublime:subscribe(wf.windowFocused, function (focusedWin)
+	-- editing command line: paired activation of both windows
 	local alacrittyWin = hs.application("alacritty"):mainWindow()
 	if focusedWin:title():match("^zsh%w+$") and isHalf(alacrittyWin) then
 		alacrittyWin:raise()

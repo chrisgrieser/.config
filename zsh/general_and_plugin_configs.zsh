@@ -30,7 +30,6 @@ export FZF_DEFAULT_OPTS='-0 --pointer=⟐ --prompt="❱ "'
 export MAGIC_ENTER_GIT_COMMAND="git status"
 export MAGIC_ENTER_OTHER_COMMAND="exa"
 
-
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
@@ -38,7 +37,6 @@ export LC_CTYPE="en_US.UTF-8"
 # OPTIONS --- (`man zshoptions` to see all options)
 setopt AUTO_CD # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypasting)
-
 
 export EDITOR='subl --new-window --wait'
 #-------------------------------------------------------------------------------
@@ -49,13 +47,12 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 # selected completion item highlighted
 zstyle ':completion:*' menu select
 
-_comp_options+=(globdots) # Include hidden files
-
 # Use vim keys in tab complete menu
 zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect ' ' accept-line
 
 

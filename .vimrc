@@ -66,7 +66,7 @@ set mouse+=a
 
 " cursor look depending on mode
 let &t_SI = "\e[5 q"
-let &t_SR = "\e[4 q"
+let &t_SR = "\e[3 q"
 let &t_EI = "\e[0 q"
 set ttimeoutlen=40	" don't wait when switching from insert to esc mode
 " Ps = 0  -> blinking block
