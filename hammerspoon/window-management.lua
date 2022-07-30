@@ -582,5 +582,6 @@ wf_sublime:subscribe(wf.windowDestroyed, function ()
 	if isHalf(alacrittyWin) then
 		moveResize(alacrittyWin, baseLayout)
 		alacrittyWin:focus()
+		keystroke({}, "space") -- to redraw zsh-syntax highlighting of the buffer
 	end
 end)
