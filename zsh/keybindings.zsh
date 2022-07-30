@@ -1,11 +1,12 @@
 # shellcheck disable=SC2086
 
 # built-in zle functions
-bindkey "^A" beginning-of-buffer-or-history
-bindkey "^E" end-of-buffer-or-history
-bindkey "^Z" undo
-bindkey "^Y" redo
-bindkey "^K" kill-line
+bindkey -M viins "^A" beginning-of-line
+bindkey -M viins "^E" end-of-line
+bindkey -M viins "^Z" undo
+bindkey -M viins "^Y" redo
+bindkey -M viins "^K" kill-line
+bindkey -M viins "^U" kill-whole-line
 
 # custom ZLE funtions
 function bindEverywhere () {
@@ -22,8 +23,8 @@ autoload edit-command-line; zle -N edit-command-line
 bindEverywhere '^F' edit-command-line
 
 # zsh-autosuggest
-bindkey '^X' autosuggest-execute # e[x]ecute
-bindkey '^Y' autosuggest-accept # [y]ank the completion
+bindkey -M viins '^X' autosuggest-execute # e[x]ecute
+bindkey -M viins '^Y' autosuggest-accept # [y]ank the completion
 
 #-------------------------------------------------------------------------------
 # INFO: use ctrl-v and then a key combination to get the shell binding
