@@ -27,7 +27,7 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( "${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-
 export FZF_DEFAULT_COMMAND='fd --hidden'
 export FZF_DEFAULT_OPTS='-0 --pointer=⟐ --prompt="❱ "'
 
-export MAGIC_ENTER_GIT_COMMAND="git status"
+export MAGIC_ENTER_GIT_COMMAND="exagit"
 export MAGIC_ENTER_OTHER_COMMAND="exa"
 
 export LC_ALL="en_US.UTF-8"

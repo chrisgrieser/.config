@@ -30,7 +30,7 @@ function hs {
 	           --layout=reverse \
 	           --info=hidden \
 	           --query "$*" \
-	           --height=50% \
+	           --height=60% \
 	           --bind "alt-enter:execute(echo {} | cut -c\"$TO_CUT\"- | pbcopy)+abort" \
 	          )
 	COMMAND=$(echo "$SELECTED" | cut -c"$TO_CUT"-)

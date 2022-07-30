@@ -10,7 +10,7 @@
 	interactive = auto
 	ui = true
 [core]
-	editor = vim
+	editor = subl -n -w
 	excludesfile = /Users/chrisgrieser/.gitignore_global
 # https://www.git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_formatting_and_whitespace
 	autocrlf = input
