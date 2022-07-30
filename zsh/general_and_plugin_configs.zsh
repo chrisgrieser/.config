@@ -16,12 +16,6 @@ ZSH_HIGHLIGHT_PATTERNS+=('§' 'fg=magenta,bold') # § = global alias for greppin
 # shellcheck disable=SC2034,SC2154
 ZSH_HIGHLIGHT_STYLES[root]='bg=red' # highlight red when currently root
 
-# =~ operator uses PCRE with this option
-# zsh/pcre does nto seem to be available, without PCRE, no lookbehind
-# for the zsh regex highlighter available :(
-# setopt RE_MATCH_PCRE
-# setopt REMATCH_PCRE
-
 # # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
 typeset -A ZSH_HIGHLIGHT_REGEXP
 ZSH_HIGHLIGHT_REGEXP+=('^(git commit -m|acp|amend) .{50,}' 'fg=white,bold,bg=red') # commit msgs too lonag
@@ -34,10 +28,10 @@ export BAT_THEME='Sublime Snazzy'
 export FZF_DEFAULT_COMMAND='fd --hidden'
 export FZF_DEFAULT_OPTS='-0 --pointer=⟐ --prompt="❱ "'
 
-export MAGIC_ENTER_GIT_COMMAND="exagit"
+export MAGIC_ENTER_GIT_COMMAND="git status"
 export MAGIC_ENTER_OTHER_COMMAND="exa"
 
-export EDITOR='vim' # 😎
+export EDITOR='subl -n -w'
 
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
@@ -47,16 +41,18 @@ export LC_CTYPE="en_US.UTF-8"
 setopt AUTO_CD # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypasting)
 
+
+#-------------------------------------------------------------------------------
+# COMPLETION
 # case insensitive path-completion, see https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
 
-#-------------------------------------------------------------------------------
-# https://github.com/Aloxaf/fzf-tab#configure
+# selected completion item highlighted
+zstyle ':completion:*' menu select
+zmodload zsh/complist
 
-# set list-colors to enable filename colorizing
-# shellcheck disable=SC2086,SC2296
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# preview directory's content with exa when completing cd
-# shellcheck disable=SC2016
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-zstyle ':fzf-tab:*' switch-group ',' '.'
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
