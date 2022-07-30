@@ -7,14 +7,13 @@ typeset -A ZSH_HIGHLIGHT_PATTERNS # https://github.com/zsh-users/zsh-syntax-high
 ZSH_HIGHLIGHT_PATTERNS+=('rm -r?f' 'fg=white,bold,bg=red') # `rm -f` in red
 ZSH_HIGHLIGHT_PATTERNS+=('rm -f' 'fg=white,bold,bg=red')
 ZSH_HIGHLIGHT_PATTERNS+=('git reset' 'fg=white,bold,bg=red') # `git reset` in red
-ZSH_HIGHLIGHT_PATTERNS+=('§' 'fg=magenta,bold') # § = global alias for grepping
 
 # shellcheck disable=SC2034,SC2154
 ZSH_HIGHLIGHT_STYLES[root]='bg=red' # highlight red when currently root
 
 # # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
 typeset -A ZSH_HIGHLIGHT_REGEXP
-ZSH_HIGHLIGHT_REGEXP+=('^(git commit -m|acp|amend) .{50,}' 'fg=white,bold,bg=red') # commit msgs too lonag
+ZSH_HIGHLIGHT_REGEXP+=('^(git commit -m|acp|amend) .{50,}' 'fg=white,bold,bg=red') # commit msgs too long
 ZSH_HIGHLIGHT_REGEXP+=('(git reset|rm -r?f) .*' 'fg=white,bold,bg=red') # dangerous stuff
 
 #-------------------------------------------------------------
@@ -40,11 +39,11 @@ setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypast
 
 export EDITOR='subl --new-window --wait'
 #-------------------------------------------------------------------------------
-# COMPLETION
+# COMPLETIONS
 # case insensitive path-completion, see https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
 
-# selected completion item highlighted
+# highlight selected completion item
 zstyle ':completion:*' menu select
 
 # Use vim keys in tab complete menu
@@ -53,6 +52,14 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
-bindkey -M menuselect ' ' accept-line
+# bindkey -M menuselect ' ' accept-line
 
-
+six-down () {
+   zle vi-down-line-or-history
+   zle vi-down-line-or-history
+   zle vi-down-line-or-history
+   zle vi-down-line-or-history
+   zle vi-down-line-or-history
+   zle vi-down-line-or-history
+}
+zle -N six-down

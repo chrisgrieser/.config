@@ -4,8 +4,6 @@
 
 # Enable vi mode
 bindkey -v
-
-# in hundredth's of seconds (default: 0.4 seconds)
 export KEYTIMEOUT=1
 
 #-------------------------------------------------------------------------------
@@ -60,12 +58,20 @@ bindkey -M vicmd -s '?' "ibindkey -M vicmd^M" # this properly re-shows the promp
 # INFO: prompt styling based on vi mode in starship config
 # possible, but not compatible when using the snippet to style the cursor
 
+# numbers in: '\e[1 q'
+# Ps = 0  -> blinking block
+# Ps = 1  -> blinking block (default)
+# Ps = 2  -> steady block
+# Ps = 3  -> blinking underline
+# Ps = 4  -> steady underline
+# Ps = 5  -> blinking bar (xterm)
+# Ps = 6  -> steady bar (xterm)
+
 # Change cursor shape for different vi modes
 function zle-keymap-select () {
     case $KEYMAP in
         vicmd) echo -ne '\e[1 q';;      # block
         viins|main) echo -ne '\e[5 q';; # beam
-        visual) echo -ne '\e[5 q';;     # underline
     esac
 }
 zle -N zle-keymap-select
