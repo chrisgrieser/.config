@@ -131,8 +131,8 @@ function moveResizeCurWin(direction)
 	end
 end
 
+-- replaces `win:moveToUnit(pos)`
 function moveResize(win, pos)
-	-- replaces `win:moveToUnit(pos)`
 
 	win:moveToUnit(pos)
 	-- has to repeat due to bug for some apps... >:(
