@@ -18,9 +18,8 @@
 		"press_command": "open_url_under_cursor"
 	},
 
-	// Undo/Redo Selection
-	// basically this is active, but Mosue 4 and Mouse 5 have been remapped to
-	// F13 and F14, so the following are set in the keyboard mappings
-	// { "button": "button4", "modifiers": [], "command": "jump_back" },
-	// { "button": "button5", "modifiers": [], "command": "jump_forward" },
+	// Mouse Keys
+	{ "button": "button5", "modifiers": [], "command": "close" },
+	{ "button": "button4", "modifiers": [], "command": "next_view" },
+
 ]

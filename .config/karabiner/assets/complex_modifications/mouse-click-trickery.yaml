@@ -48,6 +48,10 @@ rules:
         parameters:
           basic.to_if_alone_timeout_milliseconds: 300
           basic.to_if_held_down_threshold_milliseconds: 300
+        conditions:
+          - type: frontmost_application_unless
+            bundle_identifiers:
+              - ^com\.sublimetext
   - description: "🐁 5 (hold): search selected text / open URL, (tap): send F16"
     manipulators:
       - type: basic
@@ -66,6 +70,10 @@ rules:
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
+        conditions:
+          - type: frontmost_application_unless
+            bundle_identifiers:
+              - ^com\.sublimetext
   - description: "🐁 6: ⌘↹"
     manipulators:
       - type: basic
