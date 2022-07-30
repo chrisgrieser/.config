@@ -7,13 +7,13 @@ function o (){
 
 	# skip `fzf` if file is fully named (e.g. through tab-completion)
 	[[ -f "$INPUT" ]] && { open "$INPUT" ; return }
-	[[ -d "$INPUT" ]] && { cd "$INPUT" ; return }
+	[[ -d "$INPUT" ]] && { z "$INPUT" ; return }
 
 	local SELECTED
 	SELECTED=$(fd --hidden | fzf \
 	           -0 -1 \
 	           --query "$INPUT" \
-	           --preview "bat --color=always --style=snip --wrap=character --tabs=3 --line-range=:100 --terminal-width=50 {}" \
+	           --preview "bat --color=always --style=snip --wrap=character --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=50 {}" \
 	           )
 	[[ -z "$SELECTED" ]] && return 130 # abort if no selection
 

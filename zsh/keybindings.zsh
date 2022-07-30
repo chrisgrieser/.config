@@ -24,7 +24,7 @@ bindEverywhere '^F' edit-command-line
 
 # zsh-autosuggest
 bindkey -M viins '^X' autosuggest-execute # e[x]ecute
-bindkey -M viins '^Y' autosuggest-accept # [y]ank the completion
+bindkey -M viins '^[[Z' autosuggest-accept # shift+tab
 
 #-------------------------------------------------------------------------------
 # INFO: use ctrl-v and then a key combination to get the shell binding
