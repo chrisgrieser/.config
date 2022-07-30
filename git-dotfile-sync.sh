@@ -12,10 +12,9 @@ elif [[ "$filesChanged" == 1 ]] ; then
 else
 	changeType="$filesChanged files"
 fi
-details=$(git status --porcelain)
-msg="$(date +"%a, %H:%M"), $changeType, $device_name"
+msg="$changeType, $device_name"
 
-git add -A && git commit -m "$msg" -m "$details"
+git add -A && git commit -m "$msg"
 git pull
 git push
 

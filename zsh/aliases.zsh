@@ -17,8 +17,6 @@ alias ov='cd "$VAULT_PATH"' # Obsidian Vault
 # utils
 alias q='exit'
 alias notify="osascript -e 'display notification \"\" with title \"Terminal Process finished.\" subtitle \"\" sound name \"\"'"
-alias version='echo "macOS "`sw_vers -productVersion`'
-alias resolution="osascript -e 'tell application \"Finder\" to get bounds of window of desktop' | cut -d ' ' -f 3,4"
 alias urlencode='node --eval "console.log(encodeURIComponent(process.argv[1]))"'
 alias t="alacritty-theme-switch"
 
