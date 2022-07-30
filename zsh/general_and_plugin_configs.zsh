@@ -1,9 +1,5 @@
 # shellcheck disable=SC2190
 
-# ENVIRONMENT --- (use `printenv` to see all environment variables)
-export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
-export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-
 #-------------------------------------------------------------
 # zsh syntax highlighting
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern regexp root)
@@ -25,13 +21,15 @@ ZSH_HIGHLIGHT_REGEXP+=('(git reset|rm -r?f) .*' 'fg=white,bold,bg=red') # danger
 
 export BAT_THEME='Sublime Snazzy'
 
+export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
 export FZF_DEFAULT_COMMAND='fd --hidden'
 export FZF_DEFAULT_OPTS='-0 --pointer=⟐ --prompt="❱ "'
 
 export MAGIC_ENTER_GIT_COMMAND="git status"
 export MAGIC_ENTER_OTHER_COMMAND="exa"
 
-export EDITOR='subl -n -w'
 
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
@@ -42,6 +40,7 @@ setopt AUTO_CD # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypasting)
 
 
+export EDITOR='subl --new-window --wait'
 #-------------------------------------------------------------------------------
 # COMPLETION
 # case insensitive path-completion, see https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
@@ -49,10 +48,14 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 
 # selected completion item highlighted
 zstyle ':completion:*' menu select
-zmodload zsh/complist
 
-# Use vim keys in tab complete menu:
+_comp_options+=(globdots) # Include hidden files
+
+# Use vim keys in tab complete menu
+zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
+
+
