@@ -13,7 +13,7 @@ function o (){
 	SELECTED=$(fd --hidden | fzf \
 	           -0 -1 \
 	           --query "$INPUT" \
-	           --preview "bat --color=always --style=snip --wrap=character --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=50 {}" \
+	           --preview "if [[ -d {} ]] ; then exa ; else ; bat --color=always --style=snip --wrap=character --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
 	           )
 	[[ -z "$SELECTED" ]] && return 130 # abort if no selection
 
@@ -23,27 +23,3 @@ function o (){
 		open "$SELECTED"
 	fi
 }
-
-# cd to directory
-function c (){
-	local C_TO_SEARCH=~'/Library/Mobile Documents/com~apple~CloudDocs/'
-	local INPUT="$*"
-	[[ -d "$INPUT" ]] && { z "$INPUT" ; return }
-
-	z "$C_TO_SEARCH" || return
-	local SELECTED
-	SELECTED=$(fd --type d --exclude "*.app" | cut -c3- | fzf \
-	           -0 -1 \
-	           --query "$INPUT" \
-	           --preview "exa -T -L2 {}" \
-	           --preview-window=right:35% \
-	           --height=80% \
-	           --layout=reverse \
-	           --info=inline
-	           )
-	[[ -z "$SELECTED" ]] && return 130
-
-	z "$C_TO_SEARCH""$SELECTED" || return
-	exa
-}
-
