@@ -299,7 +299,7 @@
 
 
 
-spt playback --$1 --format="$format" --device="$device"</string>
+spt playback --$1 --format="$format"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -560,7 +560,7 @@ spt playback --$1 --format="$format" --device="$device"</string>
 				<key>script</key>
 				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
-spt play --playlist --random --name="$*" --format="$format" --device="$device"</string>
+spt play --playlist --random --name="$*" --format="$format"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
