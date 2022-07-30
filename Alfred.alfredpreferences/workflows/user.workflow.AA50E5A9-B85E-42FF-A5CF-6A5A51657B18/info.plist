@@ -655,9 +655,9 @@ spt play --playlist --random --name="$*" --format="$format" --device="$device"</
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>340</real>
+			<real>335</real>
 			<key>ypos</key>
-			<real>100</real>
+			<real>20</real>
 		</dict>
 		<key>48D47FC0-C103-4E74-8DFB-5FA68969DBFD</key>
 		<dict>
@@ -737,9 +737,9 @@ spt play --playlist --random --name="$*" --format="$format" --device="$device"</
 			<key>note</key>
 			<string>run spt</string>
 			<key>xpos</key>
-			<real>520</real>
+			<real>515</real>
 			<key>ypos</key>
-			<real>100</real>
+			<real>20</real>
 		</dict>
 		<key>E3B9EB88-8AF7-4B8E-9F6A-DF8223E62AC9</key>
 		<dict>
