@@ -18,14 +18,17 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'J' vi-forward-blank-word # next group
-bindkey -M menuselect '^M' accept-and-infer-next-history
-bindkey -M menuselect ' ' accept-and-infer-next-history
-
+bindkey -M menuselect 'K' vi-backward-blank-word # previous group
+bindkey -M menuselect '^X' accept-and-infer-next-history # for directories, query for children
+bindkey -M menuselect '^Y' accept-and-hold
+bindkey -M menuselect '\e' send-break
+bindkey -M menuselect '^Z' undo
+bindkey -M menuselect '^L' clear-screen
 
 # coloring & messages
 zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
-zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
-zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:messages' format '%F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format '%F{red}No completions found.%f'
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # order files by last access
@@ -35,6 +38,7 @@ zstyle ':completion:*' file-sort access
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 setopt AUTO_MENU
+setopt AUTO_LIST
 #-------------------------------------------------------------------------------
 # CLI-SPECIFIC COMPLETIONS
 
