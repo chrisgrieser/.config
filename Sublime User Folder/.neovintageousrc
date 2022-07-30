@@ -106,6 +106,7 @@ nnoremap <M-Left> b
 " don't pollute the register
 nnoremap x "_x
 nnoremap c "_c
+nnoremap C "_C
 
 " Consistent with Insert Mode Selection
 vnoremap <BS> "_d

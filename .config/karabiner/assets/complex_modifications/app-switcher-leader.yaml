@@ -313,6 +313,26 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # Brave [B]rowser: re-open tab
+      - type: basic
+        from:
+          key_code: b
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: true
+        to:
+          - shell_command: osascript -e 'tell application "Brave Browser" to activate'
+          - key_code: t
+            modifiers:
+              - command
+              - shift
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: false
+          - set_notification_message:
+              id: leader-notice
+              text: ""
       # [l] Activate Finder
       - type: basic
         from:
@@ -527,7 +547,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
-      # [B]etterTouchTool (shift)
+      # Better[T]ouchTool (shift)
       - type: basic
         from:
           key_code: b
