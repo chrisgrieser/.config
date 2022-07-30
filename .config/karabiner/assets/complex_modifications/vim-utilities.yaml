@@ -1,7 +1,7 @@
 title: "⚒️ Vim Utilities"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
-  - description: "⚒️ k+l / f+j (simultaneously): ⌫ / ↵"
+  - description: "⚒️ k+l (simultaneously): ↵"
     manipulators:
       - type: basic
         from:
@@ -12,21 +12,6 @@ rules:
           basic.simultaneous_threshold_milliseconds: 60
         to:
           - key_code: delete_or_backspace
-      - type: basic
-        from:
-          simultaneous:
-            - key_code: f
-            - key_code: j
-        parameters:
-          basic.simultaneous_threshold_milliseconds: 100
-        to:
-          - key_code: return_or_enter
-          - set_variable:
-              name: VIM_MODE
-              value: 0
-          - set_notification_message:
-              id: vim-mode-notice
-              text: ""
   - description: "⚒️ R-⌘ (tap): go to end of line"
     manipulators:
       - type: basic
@@ -40,30 +25,30 @@ rules:
           - key_code: e
             modifiers:
               - control
-  - description: "⚒️ R/L-⇧ (tap): go to prev/next word"
-    manipulators:
-      - type: basic
-        from:
-          key_code: right_shift
-        to:
-          - key_code: right_shift
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 200
-        to_if_alone:
-          - key_code: right_arrow
-            modifiers:
-              - option
-      - type: basic
-        from:
-          key_code: left_shift
-        to:
-          - key_code: left_shift
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 200
-        to_if_alone:
-          - key_code: left_arrow
-            modifiers:
-              - option
+  # - description: "⚒️ R/L-⇧ (tap): go to prev/next word"
+  #   manipulators:
+  #     - type: basic
+  #       from:
+  #         key_code: right_shift
+  #       to:
+  #         - key_code: right_shift
+  #       parameters:
+  #         basic.to_if_alone_timeout_milliseconds: 200
+  #       to_if_alone:
+  #         - key_code: right_arrow
+  #           modifiers:
+  #             - option
+  #     - type: basic
+  #       from:
+  #         key_code: left_shift
+  #       to:
+  #         - key_code: left_shift
+  #       parameters:
+  #         basic.to_if_alone_timeout_milliseconds: 200
+  #       to_if_alone:
+  #         - key_code: left_arrow
+  #           modifiers:
+  #             - option
   - description: "⚒️ {}@^~|: German to US layout"
     manipulators:
       - type: basic
