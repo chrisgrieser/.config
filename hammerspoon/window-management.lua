@@ -136,7 +136,8 @@ function moveResize(win, pos)
 
 	win:moveToUnit(pos)
 	-- has to repeat due to bug for some apps... >:(
-	hs.timer.delayed.new(0.3, function () win:moveToUnit(pos) end):start()
+	hs.timer.delayed.new(0.2, function () win:moveToUnit(pos) end):start()
+	hs.timer.delayed.new(0.4, function () win:moveToUnit(pos) end):start()
 end
 
 --------------------------------------------------------------------------------
