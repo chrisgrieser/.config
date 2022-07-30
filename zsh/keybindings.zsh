@@ -6,7 +6,6 @@ bindkey "^E" end-of-buffer-or-history
 bindkey "^Z" undo
 bindkey "^Y" redo
 bindkey "^K" kill-line
-bindkey "^U" vi-kill-line
 
 # custom ZLE funtions
 function bindEverywhere () {
