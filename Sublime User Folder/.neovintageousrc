@@ -91,6 +91,9 @@ nnoremap gf :OpenUrlUnderCursor<CR>
 nnoremap <M-Right> e
 nnoremap <M-Left> b
 
+" go to last change - https://vimhelp.org/motion.txt.html#g%3B
+nnoremap g; u<C-r>
+
 """"""""""""""""""""""
 " < Editing
 """"""""""""""""""""""

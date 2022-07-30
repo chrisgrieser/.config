@@ -97,6 +97,9 @@ exmap quickSwitcher obcommand obsidian-another-quick-switcher:filename-recent-se
 nmap go :quickSwitcher
 vmap go :quickSwitcher
 
+" go to last change - https://vimhelp.org/motion.txt.html#g%3B
+nmap g; u<C-r>
+
 """"""""""""""""""""""
 " < Editing
 """"""""""""""""""""""
