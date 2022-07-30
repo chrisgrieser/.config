@@ -127,7 +127,7 @@ biiweeklyTimer = hs.timer.doAt("02:00", "03d", function()
 	log ("2️⃣ biweekly ("..deviceName()..")", "./logs/some.log")
 end, true)
 
-dailyMorningTimer = hs.timer.doAt("02:00", "01d", function()
+dailyMorningTimer = hs.timer.doAt("02:00", "12h", function()
 	openIfNotRunning("Catch")
 	runDelayed(10, function () killIfRunning("Catch") end)
 	log ("🌻 daily morning ("..deviceName()..")", "./logs/some.log")
