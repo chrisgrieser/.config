@@ -558,7 +558,6 @@ wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 		hs.osascript.applescript([[
 			tell application "System Events"
 				tell process "Sublime Text"
-					set frontmost to true
 					click menu item "Bash" of menu of menu item "Syntax" of menu "View" of menu bar 1
 				end tell
 			end tell
