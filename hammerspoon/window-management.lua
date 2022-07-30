@@ -554,7 +554,7 @@ wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 		local alacrittyWin = hs.application("alacritty"):mainWindow()
 		moveResize(alacrittyWin, hs.layout.left50)
 		moveResize(newWindow, hs.layout.right50)
-		newWindow:becomeMain()
+		newWindow:becomeMain() -- so cmd-tabbing activates this window and not any other one
 		hs.osascript.applescript([[
 			tell application "System Events"
 				tell process "Sublime Text"
@@ -583,5 +583,12 @@ wf_sublime:subscribe(wf.windowDestroyed, function ()
 		moveResize(alacrittyWin, baseLayout)
 		alacrittyWin:focus()
 		keystroke({}, "space") -- to redraw zsh-syntax highlighting of the buffer
+	end
+end)
+-- editing command line: paired activation of both windows
+wf_sublime:subscribe(wf.windowFocused, function (focusedWin)
+	local alacrittyWin = hs.application("alacritty"):mainWindow()
+	if focusedWin:title():match("^zsh%w+$") and isHalf(alacrittyWin) then
+		alacrittyWin:raise()
 	end
 end)
