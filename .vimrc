@@ -65,17 +65,17 @@ set backspace=indent,eol,start
 set mouse+=a
 
 " cursor look depending on mode
-" let &t_SI = "\e[5 q"
-" let &t_EI = "\e[1 q"
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-" Ps = 0  -> blinking block.
-" Ps = 1  -> blinking block (default).
-" Ps = 2  -> steady block.
-" Ps = 3  -> blinking underline.
-" Ps = 4  -> steady underline.
-" Ps = 5  -> blinking bar (xterm).
-" Ps = 6  -> steady bar (xterm).
+let &t_SI = "\e[5 q"
+let &t_SR = "\e[4 q"
+let &t_EI = "\e[0 q"
+set ttimeoutlen=40	" don't wait when switching from insert to esc mode
+" Ps = 0  -> blinking block
+" Ps = 1  -> blinking block (default)
+" Ps = 2  -> steady block
+" Ps = 3  -> blinking underline
+" Ps = 4  -> steady underline
+" Ps = 5  -> blinking bar (xterm)
+" Ps = 6  -> steady bar (xterm)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
