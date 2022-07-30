@@ -142,35 +142,6 @@
           ]
         }
       ]
-    },
-    {
-      "description": "🐁 1+2 (simultaneously): ⌘← (back)",
-      "manipulators": [
-        {
-          "type": "basic",
-          "to": [
-            {
-              "key_code": "left_arrow",
-              "modifiers": [
-                "command"
-              ]
-            }
-          ],
-          "from": {
-            "simultaneous": [
-              {
-                "pointing_button": "button1"
-              },
-              {
-                "pointing_button": "button2"
-              }
-            ]
-          },
-          "parameters": {
-            "basic.simultaneous_threshold_milliseconds": 100
-          }
-        }
-      ]
     }
   ]
 }

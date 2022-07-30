@@ -47,6 +47,68 @@
       ]
     },
     {
+      "description": "🅰️🖥 Alacritty: Keyboard Shortcut Fixes",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "y",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "y",
+              "modifiers": [
+                "control"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "file_paths": [
+                "alacritty$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "space",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "d"
+            },
+            {
+              "key_code": "a"
+            },
+            {
+              "key_code": "w"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "file_paths": [
+                "alacritty$"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "description": "🅰️🏞 YouTube: ⌘+P → Picture-in-Picture Mode",
       "manipulators": [
         {

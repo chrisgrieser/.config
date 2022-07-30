@@ -116,8 +116,14 @@
 		},
 	},
 
-	// Duplicate
-	{ "keys": ["super+shift+d"], "command": "duplicate_line" },
+	// Duplicate (ending with capital-S is the plugin)
+	// one version is buggy in Visual mode, the other in insert mode, so this is the fix 🙈
+	{ "keys": ["super+shift+d"], "command": "duplicate_lines" ,"context": [
+			{ "key": "vi_insert_mode_aware"},
+	]},
+	{ "keys": ["super+shift+d"], "command": "duplicate_line" ,"context": [
+			{ "key": "vi_insert_mode_aware", "operator": "equal", "operand": false},
+	]},
 
 	// Comment
 	{ "keys": ["super+7"], "command": "toggle_comment", "args": { "block": false } },
