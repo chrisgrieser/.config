@@ -265,7 +265,7 @@ rules:
         to_after_key_up:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
-  - description: 'Insert Mode Vim: ⇪ Hyper + hjkliomnbö → ←↓↑→↵⌫⇐⇒ (w/ shift option)'
+  - description: 'Insert Mode Vim: ⇪ Hyper + hjkliomn<space>ö → ←↓↑→↵⌫⇐⇒ (w/ shift option)'
     manipulators:
       - type: basic
         from:
@@ -378,7 +378,7 @@ rules:
       # delete word
       - type: basic
         from:
-          key_code: b
+          key_code: spacebar
           modifiers:
             mandatory:
               - option

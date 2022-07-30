@@ -554,7 +554,7 @@
       ]
     },
     {
-      "description": "Insert Mode Vim: ⇪ Hyper + hjkliomnbö → ←↓↑→↵⌫⇐⇒ (w/ shift option)",
+      "description": "Insert Mode Vim: ⇪ Hyper + hjkliomn<space>ö → ←↓↑→↵⌫⇐⇒ (w/ shift option)",
       "manipulators": [
         {
           "type": "basic",
@@ -737,7 +737,7 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "b",
+            "key_code": "spacebar",
             "modifiers": {
               "mandatory": [
                 "option",
