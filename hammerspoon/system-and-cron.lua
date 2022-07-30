@@ -130,7 +130,7 @@ end, true)
 dailyMorningTimer = hs.timer.doAt("02:00", "12h", function()
 	openIfNotRunning("Catch")
 	runDelayed(10, function () killIfRunning("Catch") end)
-	log ("🌻 daily morning ("..deviceName()..")", "./logs/some.log")
+	log ("🫴 Catch Torrents ("..deviceName()..")", "./logs/some.log")
 end, true)
 
 function projectorScreensaverStop (eventType)
