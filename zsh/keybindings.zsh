@@ -1,4 +1,6 @@
-# built in zle functions
+# shellcheck disable=SC2086
+
+# built-in zle functions
 bindkey "^A" beginning-of-buffer-or-history
 bindkey "^E" end-of-buffer-or-history
 bindkey "^Z" undo
@@ -16,15 +18,18 @@ bindEverywhere "^P" copy-location
 bindEverywhere "^B" copy-buffer
 bindEverywhere '“' quote-all-args # “=alt+2
 
+# [f]orward to editor
+autoload edit-command-line; zle -N edit-command-line
+bindEverywhere '^F' edit-command-line
+
 # zsh-autosuggest
 bindkey '^X' autosuggest-execute # e[x]ecute
 bindkey '^Y' autosuggest-accept # [y]ank the completion
 
 #-------------------------------------------------------------------------------
+# INFO: use ctrl-v and then a key combination to get the shell binding
 # `bindkey -M main` to show existing keybinds
-# there `^[` usually means escape
 # some bindings with '^' are reserved (^M=enter, ^I=tab, ^[[Z = shift+tab)
-# INFO: use ctrl-v and then a key combination to get the shell binding for the
 #-------------------------------------------------------------------------------
 
 copy-location () {

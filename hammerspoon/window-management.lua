@@ -545,6 +545,9 @@ wf_sublime:subscribe(wf.windowCreated, function ()
 
 	if currentWindow:title():match("sublime%-settings$") or currentWindow:title():match("sublime%-keymap$") or isAtOffice() then
 		moveAndResize("maximized")
+	elseif currentWindow:title():match("^zsh%w+$") then -- command-line-edit window (using EDITOR='subl --new-window --wait')
+		moveAndResize("right")
+		resizingWorkaround(win, position)
 	else
 		moveAndResize("pseudo-maximized")
 		hs.application("Twitterrific"):mainWindow():raise()
