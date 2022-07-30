@@ -39,7 +39,7 @@ bindkey -M vicmd 'Ü' vi-swap-case
 
 # to prevent accidentally going to the beginning of the history (which is never
 # a desired behavior...) Not implemented for 'G', since going down the history
-# is useful.
+# is useful
 bindkey -M vicmd 'gg' vi-beginning-of-line
 
 bindkey "^?" backward-delete-char # fix backspace
@@ -48,8 +48,7 @@ bindkey -M vicmd -s 'ö' 'xp' # transpose (move character to the right)
 bindkey -M vicmd -s 'Ö' 'xhhp' # reversed transpose (move character to the left)
 
 bindkey -M vicmd -s ' ' 'ciw'
-# shift-space has to be bound to daw via alacritty.yml, cause shell does not accept shift-space :(
-# - { key: Space, mods: shift, chars: '^]'}
+# shift-space has to be bound to daw via Karabiner, since the shell does not understand <S-Space>
 
 bindkey -M vicmd -s '?' "ibindkey -M vicmd;bindkey -M viins^M" # this properly re-shows the prompt after execution
 
