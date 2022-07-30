@@ -1,11 +1,7 @@
 # shellcheck disable=SC2190
 
 # zsh syntax highlighting
-export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern regexp root)
-typeset -A ZSH_HIGHLIGHT_PATTERNS # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/pattern.md
-ZSH_HIGHLIGHT_PATTERNS+=('rm -r?f' 'fg=white,bold,bg=red') # `rm -f` in red
-ZSH_HIGHLIGHT_PATTERNS+=('rm -f' 'fg=white,bold,bg=red')
-ZSH_HIGHLIGHT_PATTERNS+=('git reset' 'fg=white,bold,bg=red') # `git reset` in red
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp root)
 
 # shellcheck disable=SC2034,SC2154
 ZSH_HIGHLIGHT_STYLES[root]='bg=red' # highlight red when currently root
@@ -13,7 +9,7 @@ ZSH_HIGHLIGHT_STYLES[root]='bg=red' # highlight red when currently root
 # # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
 typeset -A ZSH_HIGHLIGHT_REGEXP
 ZSH_HIGHLIGHT_REGEXP+=('^(git commit -m|acp|amend) .{50,}' 'fg=white,bold,bg=red') # commit msgs too long
-ZSH_HIGHLIGHT_REGEXP+=('(git reset|rm -r?f) .*' 'fg=white,bold,bg=red') # dangerous stuff
+ZSH_HIGHLIGHT_REGEXP+=('(git reset --hard|rm -r?f) .*' 'fg=white,bold,bg=red') # dangerous stuff
 
 #-------------------------------------------------------------
 
