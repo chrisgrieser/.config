@@ -543,20 +543,28 @@ wf_zoom:subscribe(wf.windowCreated, function ()
 end)
 
 -- SUBLIME
--- workaround for Window positioning issue, will be fixed with build 4130 being released - https://github.com/sublimehq/sublime_text/issues/5237
--- if new window is a settings window, maximize it
 wf_sublime = wf.new("Sublime Text")
 wf_sublime:subscribe(wf.windowCreated, function (newWindow)
+	-- if new window is a settings window, maximize it
 	if newWindow:title():match("sublime%-settings$") or newWindow:title():match("sublime%-keymap$") then
 		moveResizeCurWin("maximized")
 
-	-- command-line-edit window (using EDITOR='subl --new-window --wait')
+	-- command-line-edit window = split with alacritty (using EDITOR='subl --new-window --wait')
 	elseif newWindow:title():match("^zsh%w+$") then
 		local alacrittyWin = hs.application("alacritty"):mainWindow()
-		moveResize(newWindow, hs.layout.right50)
 		moveResize(alacrittyWin, hs.layout.left50)
+		moveResize(newWindow, hs.layout.right50)
 		newWindow:becomeMain()
+		hs.osascript.applescript([[
+			tell application "System Events"
+				tell process "Sublime Text"
+					set frontmost to true
+					click menu item "Bash" of menu of menu item "Syntax" of menu "View" of menu bar 1
+				end tell
+			end tell
+		]])
 
+	-- workaround for Window positioning issue, will be fixed with build 4130 being released - https://github.com/sublimehq/sublime_text/issues/5237
 	elseif isAtOffice() then
 		moveResizeCurWin("maximized")
 	else
@@ -565,6 +573,7 @@ wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 	end
 end)
 wf_sublime:subscribe(wf.windowDestroyed, function ()
+	-- don't leave windowless app behind
 	if #wf_sublime:getWindows() == 0 and appIsRunning("Sublime Text") then
 		hs.application("Sublime Text"):kill()
 	end
