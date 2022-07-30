@@ -281,6 +281,25 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # [S]cript Editor (Shift)
+      - type: basic
+        from:
+          key_code: s
+          modifiers:
+            mandatory:
+              - shift
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: true
+        to:
+          - shell_command: open -a 'Script Editor'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: false
+          - set_notification_message:
+              id: leader-notice
+              text: ""
       # [M]imestream
       - type: basic
         from:
@@ -313,16 +332,21 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
-      # Brave [B]rowser: re-open tab
+      # Brave [B]rowser: re-open tab (Shift)
       - type: basic
         from:
           key_code: b
+          modifiers:
+            mandatory:
+              - shift
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
             value: true
         to:
           - shell_command: osascript -e 'tell application "Brave Browser" to activate'
+          - key_code: vk_none
+            hold_down_milliseconds: 150
           - key_code: t
             modifiers:
               - command
@@ -550,7 +574,7 @@ rules:
       # Better[T]ouchTool (shift)
       - type: basic
         from:
-          key_code: b
+          key_code: t
           modifiers:
             mandatory:
               - shift

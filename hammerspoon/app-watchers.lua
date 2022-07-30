@@ -137,3 +137,13 @@ end
 youtubeWatcher = aw.new(youtubeSpotify)
 youtubeWatcher:start()
 
+-- SCRIPT EDITOR
+function scriptEditorLaunch (appName, eventType)
+	if not(appName == "Script Editor" and eventType == aw.launched) then return end
+	runDelayed (0.3, function () keystroke({"cmd"}, "n") end)
+	runDelayed (0.6, function () keystroke({"cmd"}, "v") end)
+	runDelayed (0.9, function () keystroke({"cmd"}, "k") end)
+end
+scriptEditorWatcher = aw.new(scriptEditorLaunch)
+scriptEditorWatcher:start()
+
