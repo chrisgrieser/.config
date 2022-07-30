@@ -46,6 +46,7 @@ bindkey "^?" backward-delete-char # fix backspace
 bindkey -M vicmd -s 'Y' 'y$' # -s flag sends direct keystrokes, to allow for remappings
 bindkey -M vicmd -s 'ö' 'xp' # transpose (move character to the right)
 bindkey -M vicmd -s 'Ö' 'xhhp' # reversed transpose (move character to the left)
+bindkey -M vicmd -s 'X' 'mz$"_x`z' # Remove last character from line
 
 bindkey -M vicmd -s ' ' 'ciw'
 # shift-space has to be bound to daw via Karabiner, since the shell does not understand <S-Space>
