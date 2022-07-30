@@ -19,7 +19,7 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'J' vi-forward-blank-word # next group
 bindkey -M menuselect 'K' vi-backward-blank-word # previous group
-bindkey -M menuselect '^[[Z' accept-and-infer-next-history # shift+tab=for directories, query for children
+bindkey -M menuselect '^[[Z' accept-and-infer-next-history # shift+tab: for directories, query for children
 bindkey -M menuselect ' ' accept-line
 bindkey -M menuselect '\e' send-break
 bindkey -M menuselect '^Z' undo
@@ -29,6 +29,7 @@ bindkey -M menuselect '^L' clear-screen
 zstyle ':completion:*:*:*:*:descriptions' format '%F{blue}[%d]%f'
 zstyle ':completion:*:messages' format '%F{yellow}-- %d --%f'
 zstyle ':completion:*:warnings' format '%F{yellow}-- No completions found.%f'
+# shellcheck disable=SC2086,SC2296
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # order files by last access
@@ -37,8 +38,11 @@ zstyle ':completion:*' file-sort access
 # low priority match in word
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-setopt AUTO_MENU
-setopt AUTO_LIST
+
+# only require one <tab> completion (the docs do not describe the actual
+# behavior of the setting) https://zsh.sourceforge.io/Doc/Release/Options.html#Completion-4
+setopt MENU_COMPLETE
+
 #-------------------------------------------------------------------------------
 # CLI-SPECIFIC COMPLETIONS
 
