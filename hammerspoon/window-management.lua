@@ -483,7 +483,7 @@ end
 
 -- BROWSER
 wf_browser = wf.new("Brave Browser")
-wf_browser:subscribe(wf.windowCreated, function ()
+wf_browser:subscribe(wf.windowCreated, function (newWindow)
 	-- split when second window is opened
 	if #wf_browser:getWindows() == 2 then
 		local win1 = wf_browser:getWindows()[1]
@@ -494,9 +494,8 @@ wf_browser:subscribe(wf.windowCreated, function ()
 	end
 
 	-- if new window is incognito window, position it to the left
-	local currentWindow = hs.window.focusedWindow()
-	if isIncognitoWindow(currentWindow) then
-		moveResize(currentWindow, baseLayout)
+	if isIncognitoWindow(newWindow) then
+		moveResize(newWindow, baseLayout)
 	end
 end)
 wf_browser:subscribe(wf.windowDestroyed, function ()
@@ -556,6 +555,7 @@ wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 		local alacrittyWin = hs.application("alacritty"):mainWindow()
 		moveResize(newWindow, hs.layout.right50)
 		moveResize(alacrittyWin, hs.layout.left50)
+		newWindow:becomeMain()
 
 	elseif isAtOffice() then
 		moveResizeCurWin("maximized")
@@ -564,13 +564,15 @@ wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
-wf_sublime:subscribe(wf.windowDestroyed, function (closedWin)
+wf_sublime:subscribe(wf.windowDestroyed, function ()
 	if #wf_sublime:getWindows() == 0 and appIsRunning("Sublime Text") then
 		hs.application("Sublime Text"):kill()
 	end
-	local alacrittyWin = hs.application("alacritty"):mainWindow()
 
+	-- editing command line finished
+	local alacrittyWin = hs.application("alacritty"):mainWindow()
 	if isHalf(alacrittyWin) then
 		moveResize(alacrittyWin, baseLayout)
+		alacrittyWin:focus()
 	end
 end)
