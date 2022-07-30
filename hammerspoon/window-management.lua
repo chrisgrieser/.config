@@ -95,7 +95,7 @@ function toggleObsidianSidebar (obsiWin)
 	end)
 end
 
-function moveAndResize(direction)
+function moveResizeCurWin(direction)
 	local win = hs.window.focusedWindow()
 	local position
 
@@ -116,7 +116,7 @@ function moveAndResize(direction)
 	end
 
 	-- workaround for https://github.com/Hammerspoon/hammerspoon/issues/2316
-	resizingWorkaround(win, position)
+	moveResize(win, position)
 
 	if win:application():name() == "Drafts" then toggleDraftsSidebar(win)
 	elseif win:application():name() == "Obsidian" then toggleObsidianSidebar(win)
@@ -124,7 +124,7 @@ function moveAndResize(direction)
 	end
 end
 
-function resizingWorkaround(win, pos)
+function moveResize(win, pos)
 	-- replaces `win:moveToUnit(pos)`
 
 	win:moveToUnit(pos)
@@ -380,8 +380,8 @@ function vsplit (mode)
 		end
 	end
 
-	resizingWorkaround(SPLIT_RIGHT, f1)
-	resizingWorkaround(SPLIT_LEFT, f2)
+	moveResize(SPLIT_RIGHT, f1)
+	moveResize(SPLIT_LEFT, f2)
 	SPLIT_RIGHT:raise()
 	SPLIT_LEFT:raise()
 	if SPLIT_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(SPLIT_RIGHT)
@@ -434,13 +434,13 @@ function controlSpace ()
 		size = "maximized"
 	end
 
-	moveAndResize(size)
+	moveResizeCurWin(size)
 end
 
-hotkey(hyper, "Up", function() moveAndResize("up") end)
-hotkey(hyper, "Down", function() moveAndResize("down") end)
-hotkey(hyper, "Right", function() moveAndResize("right") end)
-hotkey(hyper, "Left", function() moveAndResize("left") end)
+hotkey(hyper, "Up", function() moveResizeCurWin("up") end)
+hotkey(hyper, "Down", function() moveResizeCurWin("down") end)
+hotkey(hyper, "Right", function() moveResizeCurWin("right") end)
+hotkey(hyper, "Left", function() moveResizeCurWin("left") end)
 hotkey(hyper, "pagedown", moveToOtherDisplay)
 hotkey(hyper, "pageup", moveToOtherDisplay)
 hotkey({"ctrl"}, "Space", controlSpace)
@@ -482,14 +482,14 @@ wf_browser:subscribe(wf.windowCreated, function ()
 		local win1 = wf_browser:getWindows()[1]
 		local win2 = wf_browser:getWindows()[2]
 		if isIncognitoWindow(win1) or isIncognitoWindow(win2) then return end -- do not effect switch to inkognito windows
-		resizingWorkaround(win1, hs.layout.left50)
-		resizingWorkaround(win2, hs.layout.right50)
+		moveResize(win1, hs.layout.left50)
+		moveResize(win2, hs.layout.right50)
 	end
 
 	-- if new window is incognito window, position it to the left
 	local currentWindow = hs.window.focusedWindow()
 	if isIncognitoWindow(currentWindow) then
-		resizingWorkaround(currentWindow, baseLayout)
+		moveResize(currentWindow, baseLayout)
 	end
 end)
 wf_browser:subscribe(wf.windowDestroyed, function ()
@@ -500,7 +500,7 @@ wf_browser:subscribe(wf.windowDestroyed, function ()
 	-- change sizing back, when back to one window
 	elseif #wf_browser:getWindows() == 1 then
 		local win = wf_browser:getWindows()[1]
-		resizingWorkaround(win, baseLayout)
+		moveResize(win, baseLayout)
 	end
 end)
 
@@ -540,20 +540,24 @@ end)
 -- workaround for Window positioning issue, will be fixed with build 4130 being released - https://github.com/sublimehq/sublime_text/issues/5237
 -- if new window is a settings window, maximize it
 wf_sublime = wf.new("Sublime Text")
-wf_sublime:subscribe(wf.windowCreated, function ()
-	local currentWindow = hs.window.focusedWindow()
+wf_sublime:subscribe(wf.windowCreated, function (newWindow)
+	if newWindow:title():match("sublime%-settings$") or newWindow:title():match("sublime%-keymap$") then
+		moveResizeCurWin("maximized")
 
-	if currentWindow:title():match("sublime%-settings$") or currentWindow:title():match("sublime%-keymap$") or isAtOffice() then
-		moveAndResize("maximized")
-	elseif currentWindow:title():match("^zsh%w+$") then -- command-line-edit window (using EDITOR='subl --new-window --wait')
-		moveAndResize("right")
-		resizingWorkaround(win, position)
+	-- command-line-edit window (using EDITOR='subl --new-window --wait')
+	elseif newWindow:title():match("^zsh%w+$") then
+		local alacrittyWin = hs.application("alacritty"):mainWindow()
+		moveResize(newWindow, hs.layout.right50)
+		moveResize(alacrittyWin, hs.layout.left50)
+
+	elseif isAtOffice() then
+		moveResizeCurWin("maximized")
 	else
-		moveAndResize("pseudo-maximized")
+		moveResizeCurWin("pseudo-maximized")
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
-wf_sublime:subscribe(wf.windowDestroyed, function ()
+wf_sublime:subscribe(wf.windowDestroyed, function (closedWin)
 	if #wf_sublime:getWindows() == 0 and appIsRunning("Sublime Text") then
 		hs.application("Sublime Text"):kill()
 	end
