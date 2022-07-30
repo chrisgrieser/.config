@@ -10,7 +10,7 @@ export KEYTIMEOUT=1
 
 #-------------------------------------------------------------------------------
 # https://jindalakshett.medium.com/zsh-vim-%EF%B8%8F-eafdef2183c4
-# ci", ci', ci`, di", etc
+# Text object: i" i' i` i" etc.
 autoload -U select-quoted
 zle -N select-quoted
 for m in visual viopp; do
@@ -19,7 +19,7 @@ for m in visual viopp; do
 	done
 done
 
-# ci{, ci(, ci<, di{, etc
+# i{ i( i< i{ etc.
 autoload -U select-bracketed
 zle -N select-bracketed
 for m in visual viopp; do
@@ -37,6 +37,7 @@ done
 bindkey -M vicmd 'L' vi-end-of-line
 bindkey -M vicmd 'H' vi-first-non-blank
 bindkey -M vicmd 'U' redo
+bindkey -M vicmd 'Ü' vi-swap-case
 
 # to prevent accidentally going to the beginning of the history (which is never
 # a desired behavior...) Not implemented for 'G', since going down the history
@@ -64,6 +65,7 @@ function zle-keymap-select () {
     case $KEYMAP in
         vicmd) echo -ne '\e[1 q';;      # block
         viins|main) echo -ne '\e[5 q';; # beam
+        visual) echo -ne '\e[5 q';;     # underline
     esac
 }
 zle -N zle-keymap-select

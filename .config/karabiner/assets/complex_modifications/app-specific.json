@@ -79,7 +79,7 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "space",
+            "key_code": "spacebar",
             "modifiers": {
               "mandatory": [
                 "shift"
