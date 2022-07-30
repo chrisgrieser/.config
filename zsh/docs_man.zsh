@@ -1,3 +1,5 @@
+# search cht.sh for information
+# aggregates stackoverflow, tl;dr and many other help pages
 function cc () {
 	QUERY=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
 	CHEAT_INFO=$(curl -s "https://cht.sh/$QUERY") # https://cht.sh/:help
@@ -13,27 +15,24 @@ function man () {
 		echo "Not using Alacritty." ; return 1
 	elif ! which "$1" &> /dev/null; then
 		echo "Command '$1' not installed." ; return 1
-	elif ! which "$PAGER" &> /dev/null; then
- 		echo "Pager '$PAGER' not installed." ; return 1
  	fi
 
- 	if [[ "$(which "$1")" =~ "built-in" ]] ; then
-		# man pages for zsh-builtins https://stackoverflow.com/a/35456287
- 		zsh_ver=$(zsh --version | cut -d" " -f2)
- 		HELPDIR="/usr/share/zsh/$zsh_ver/help"
- 		unalias run-help 2>/dev/null
- 		autoload run-help
- 		run-help "$1"
-	elif [[ -z "$2" ]] ; then
-		# run in subshell to surpress output
-		(alacritty --option=window.decorations=full --title="man $1" \
+	# run in subshell to surpress output
+ 	if [[ "$(which "$1")" =~ "built-in" ]] && [[ -z "$2" ]] ; then
+ 		(alacritty --option=window.decorations=full --title="built-in help: $1" \
+ 			--command less /usr/share/zsh/*/help/$1 &)
+ 	elif [[ "$(which "$1")" =~ "built-in" ]] && [[ -n "$2" ]] ; then
+ 		(alacritty --option=window.decorations=full --title="built-in help: $1" \
+ 			--command less --pattern=$2 /usr/share/zsh/*/help/$1 &)
+	elif [[ ! "$(which "$1")" =~ "built-in" ]] && [[ -z "$2" ]] ; then
+		(alacritty --option=window.decorations=full --title="man: $1" \
 			--command man "$1" &)
 	else
 		(alacritty --option=window.decorations=full --title="man $1" \
 			--command man "$1" -P "/usr/bin/less -is --pattern=$2" &)
 	fi
 }
-export PAGER=less
+
 
 # colorize less https://wiki.archlinux.org/index.php/Color_output_in_console#less .
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
