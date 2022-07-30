@@ -125,6 +125,8 @@
 			{ "key": "vi_insert_mode_aware", "operator": "equal", "operand": false},
 	]},
 
+	// { "keys": ["super+shift+d"], "command": "duplicate_line"},
+
 	// Comment
 	{ "keys": ["super+7"], "command": "toggle_comment", "args": { "block": false } },
 

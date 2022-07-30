@@ -17,7 +17,6 @@ source "$DOTFILE_FOLDER/zsh/keybindings.zsh"
 source "$DOTFILE_FOLDER/zsh/vi-mode.zsh"
 source "$DOTFILE_FOLDER/zsh/docs_man.zsh"
 
-source "$DOTFILE_FOLDER/zsh/fzf_functions.zsh"
 source "$DOTFILE_FOLDER/zsh/git_github.zsh"
 source "$DOTFILE_FOLDER/zsh/homebrew.zsh"
 source "$DOTFILE_FOLDER/zsh/../pandoc/pandoc.zsh"
