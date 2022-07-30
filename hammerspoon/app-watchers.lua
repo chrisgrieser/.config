@@ -85,7 +85,7 @@ end
 highlightsAppWatcher = aw.new(highlightsWatcher)
 highlightsAppWatcher:start()
 
--- DRAFTS: Hide Toolbar on launch
+-- DRAFTS: Hide Toolbar
 function draftsLaunchWake(appName, eventType, appObject)
 	if not(appName == "Drafts") then return end
 
