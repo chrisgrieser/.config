@@ -93,7 +93,7 @@ window:
   padding:
     x: 6
     'y': 6
-  opacity: 0.96
+  opacity: 0.94
 scrolling:
   history: 5000
   multiplier: 3

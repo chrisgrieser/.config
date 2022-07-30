@@ -75,9 +75,9 @@ function systemWake (eventType)
 	end
 
 	reloadAllMenubarItems()
-	twitterrificScrollUp()
 	gitDotfileSync("wake")
 
+	twitterrificScrollUp()
 end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()

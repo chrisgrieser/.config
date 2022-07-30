@@ -51,7 +51,7 @@ bindkey -M vicmd -s ' ' 'ciw'
 # shift-space has to be bound to daw via alacritty.yml, cause shell does not accept shift-space :(
 # - { key: Space, mods: shift, chars: '^]'}
 
-bindkey -M vicmd -s '?' "ibindkey -M vicmd^M" # this properly re-shows the prompt after execution
+bindkey -M vicmd -s '?' "ibindkey -M vicmd;bindkey -M viins^M" # this properly re-shows the prompt after execution
 
 #-------------------------------------------------------------------------------
 
