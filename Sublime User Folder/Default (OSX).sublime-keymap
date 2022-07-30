@@ -118,14 +118,14 @@
 
 	// Duplicate (ending with capital-S is the plugin)
 	// one version is buggy in Visual mode, the other in insert mode, so this is the fix 🙈
-	{ "keys": ["super+shift+d"], "command": "duplicate_lines" ,"context": [
-			{ "key": "vi_insert_mode_aware"},
-	]},
-	{ "keys": ["super+shift+d"], "command": "duplicate_line" ,"context": [
-			{ "key": "vi_insert_mode_aware", "operator": "equal", "operand": false},
-	]},
+	// { "keys": ["super+shift+d"], "command": "duplicate_lines" ,"context": [
+	// 		{ "key": "vi_insert_mode_aware"},
+	// ]},
+	// { "keys": ["super+shift+d"], "command": "duplicate_line" ,"context": [
+	// { "keys": ["super+shift+d"], "command": "duplicate_line" ,"context": [
+	// 		{ "key": "vi_insert_mode_aware", "operator": "equal", "operand": false},
+	// ]},
 
-	// { "keys": ["super+shift+d"], "command": "duplicate_line"},
 
 	// Comment
 	{ "keys": ["super+7"], "command": "toggle_comment", "args": { "block": false } },
@@ -173,7 +173,7 @@
 	// FILE MANAGEMENT
 	{ "keys": ["super+n"], "command": "advanced_new_file_new"},
 	{ "keys": ["super+shift+n"], "command": "new_file" },
-	{ "keys": ["ctrl+d"], "command": "advanced_new_file_copy"},
+	{ "keys": ["super+shift+d"], "command": "advanced_new_file_copy"},
 	{ "keys": ["super+backspace"], "command": "delete_current_file" },
 	{ "keys": ["super+l"], "command": "open_dir", "args": {"dir": "$file_path", "file": "$file_name"}  },
 	{ "keys": ["ctrl+r"], "command": "rename_file"},

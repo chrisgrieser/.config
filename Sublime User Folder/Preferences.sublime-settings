@@ -24,7 +24,6 @@
 		"<C-p>": false, // copy path
 		"<C-r>": false, // rename file
 		"<C-s>": false, // Spellcheck toggle
-		"<C-d>": false, // Duplicate File
 		"<C-k>": false, // Kill Line
 	},
 

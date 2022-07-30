@@ -15,14 +15,19 @@ nnoremap ? :help nv<CR>
 nnoremap Y y$
 
 " always paste what was yanked, not what was deleted
-nnoremap Y y$
-
 nnoremap gp "0p
 vnoremap gp "0p
+
+" Line Duplication
+vnoremap <C-d> mzy`zpgv:nohl<CR>
+nnoremap <C-d> yyp:nohl<CR>
+nnoremap <C-d> yyp:nohl<CR>
+nnoremap <C-d> yyp:nohl<CR>
 
 """"""""""""""""""""""
 " < Search
 """"""""""""""""""""""
+
 set ignorecase
 set smartcase
 set incsearch
