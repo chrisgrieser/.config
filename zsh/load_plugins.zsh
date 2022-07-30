@@ -11,8 +11,8 @@ fi
 # zoxide loading in terminal-utils, cause needs to be loaded with configuration
 # parameters
 
-# fzf tab needs to be loaded after compinit, but before zsh-syntax-highlighting and zsh-autosuggestions
-source "$DOTFILE_FOLDER/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
+# FZF-TAB needs to be loaded after compinit, but before zsh-syntax-highlighting and zsh-autosuggestions
+# source "$DOTFILE_FOLDER/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 # `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
 source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
