@@ -75,6 +75,7 @@ function systemWake (eventType)
 	end
 
 	reloadAllMenubarItems()
+	twitterrificScrollUp()
 	gitDotfileSync("wake")
 
 end
