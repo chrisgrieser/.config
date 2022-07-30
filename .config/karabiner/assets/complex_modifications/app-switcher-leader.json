@@ -598,6 +598,43 @@
         {
           "type": "basic",
           "from": {
+            "key_code": "b"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            }
+          ],
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell application \"Brave Browser\" to activate'"
+            },
+            {
+              "key_code": "t",
+              "modifiers": [
+                "command",
+                "shift"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
             "key_code": "l"
           },
           "conditions": [
