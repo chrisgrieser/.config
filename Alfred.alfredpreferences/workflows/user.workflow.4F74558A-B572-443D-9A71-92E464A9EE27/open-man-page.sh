@@ -1,12 +1,12 @@
 #!/usr/bin/env zsh
 
-# to import LESS settings
+# to import LESS settings like colorization
 DOTFILE_FOLDER=~/dotfiles
 source "$DOTFILE_FOLDER/zsh/docs_man.zsh"
 
 # INPUT terms
 ONE=$(echo "$*" | cut -d" " -f1)
-TWO=$(echo "$*" | cut -d" " -f2)
+[[ "$*" =~ " " ]] && TWO=$(echo "$*" | cut -d" " -f2)
 
 if [[ -z "$TWO" ]] ; then
 	alacritty \

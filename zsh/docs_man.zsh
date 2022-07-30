@@ -10,39 +10,29 @@ function cc () {
 # second arg: search term
 function man () {
 	if ! which alacritty &> /dev/null; then
-		echo "Not using Alacritty."
-		return 1
-	fi
-	if ! which "$1" &> /dev/null; then
-		echo "Command '$1' not installed."
-		return 1
-	fi
-	if ! which "$PAGER" &> /dev/null; then
- 		echo "Pager '$PAGER' not installed."
- 		return 1
+		echo "Not using Alacritty." ; return 1
+	elif ! which "$1" &> /dev/null; then
+		echo "Command '$1' not installed." ; return 1
+	elif ! which "$PAGER" &> /dev/null; then
+ 		echo "Pager '$PAGER' not installed." ; return 1
  	fi
 
-	if [[ -z "$2" ]] ; then
+ 	if [[ "$(which "$1")" =~ "built-in" ]] ; then
+		# man pages for zsh-builtins https://stackoverflow.com/a/35456287
+ 		zsh_ver=$(zsh --version | cut -d" " -f2)
+ 		HELPDIR="/usr/share/zsh/$zsh_ver/help"
+ 		unalias run-help 2>/dev/null
+ 		autoload run-help
+ 		run-help "$1"
+	elif [[ -z "$2" ]] ; then
 		# run in subshell to surpress output
-		(alacritty \
-			--option=window.decorations=full \
-			--title="man $1" \
+		(alacritty --option=window.decorations=full --title="man $1" \
 			--command man "$1" &)
 	else
-		(alacritty \
-			--option=window.decorations=full \
-			--title="man $1" \
+		(alacritty --option=window.decorations=full --title="man $1" \
 			--command man "$1" -P "/usr/bin/less -is --pattern=$2" &)
 	fi
 }
-
-# man pages for zsh-builtins https://stackoverflow.com/a/35456287
-unalias run-help 2>/dev/null
-autoload run-help
-alias help='run-help'
-zsh_ver=$(zsh --version | cut -d" " -f2)
-export HELPDIR="/usr/share/zsh/$zsh_ver/help"
-
 export PAGER=less
 
 # colorize less https://wiki.archlinux.org/index.php/Color_output_in_console#less .
