@@ -1,6 +1,5 @@
 # shellcheck disable=SC2190
 
-#-------------------------------------------------------------
 # zsh syntax highlighting
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern regexp root)
 typeset -A ZSH_HIGHLIGHT_PATTERNS # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/pattern.md
@@ -38,28 +37,3 @@ setopt AUTO_CD # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypasting)
 
 export EDITOR='subl --new-window --wait'
-#-------------------------------------------------------------------------------
-# COMPLETIONS
-# case insensitive path-completion, see https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
-
-# highlight selected completion item
-zstyle ':completion:*' menu select
-
-# Use vim keys in tab complete menu
-zmodload zsh/complist
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-# bindkey -M menuselect ' ' accept-line
-
-six-down () {
-   zle vi-down-line-or-history
-   zle vi-down-line-or-history
-   zle vi-down-line-or-history
-   zle vi-down-line-or-history
-   zle vi-down-line-or-history
-   zle vi-down-line-or-history
-}
-zle -N six-down

@@ -33,9 +33,3 @@ function docx2md () {
 }
 
 
-# ------------------
-
-# Pandoc Completions, https://groups.google.com/g/pandoc-discuss/c/Ot019yRiJFQ/m/VPchuJRkBQAJ
-# these won't work with the `eval` from triggering Pandoc via Finder
-# autoload -U +X bashcompinit && bashcompinit
-# eval "$(pandoc --bash-completion)"
