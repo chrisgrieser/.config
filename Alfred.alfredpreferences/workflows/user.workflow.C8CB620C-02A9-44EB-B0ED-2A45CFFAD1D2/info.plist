@@ -60,19 +60,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>59880808-66A8-4459-B33C-A5FE98786D2F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C6A9FE99-C9C0-4439-98AD-85E5A8105B6F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>6893CDFD-0423-4258-A2EC-B278E825E37C</key>
 		<array>
 			<dict>
@@ -150,6 +137,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F34C6943-91F1-4BAD-BAE1-6037B7259020</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>969689CD-BF5D-466B-AA0C-5FC5F536B880</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -185,21 +185,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>searcher</key>
-				<integer>1635215215</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.systemwebsearch</string>
-			<key>uid</key>
-			<string>03A61E61-611A-4555-B4F6-30ED79850890</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -215,6 +200,21 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>6893CDFD-0423-4258-A2EC-B278E825E37C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>searcher</key>
+				<integer>1635215215</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemwebsearch</string>
+			<key>uid</key>
+			<string>03A61E61-611A-4555-B4F6-30ED79850890</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -240,6 +240,8 @@
 				</array>
 				<key>elselabel</key>
 				<string>vim keyword</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -349,46 +351,61 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>qlmanage -p ~"/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Code/Cheatsheets/Vim Cheat Sheet.png"</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C6A9FE99-C9C0-4439-98AD-85E5A8105B6F</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>vim</string>
+				<string>vimrc</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>⌨️ Vim Cheat Sheet</string>
+				<string>.neovintageousrc</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>59880808-66A8-4459-B33C-A5FE98786D2F</string>
+			<string>85ED60B5-47C7-4A5C-8E14-F838BDEFFE0B</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library/Application Support/Sublime Text/Packages/User/.neovintageousrc</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>2FFD13E1-74D7-441C-8D92-52C637DD85D7</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>open-vimrcs.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>52E4440D-A985-49F4-913B-DB43D6AED740</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -424,25 +441,44 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>vim codemirror</string>
+				<key>subtext</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-vimrcs.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>text</key>
+				<string>CM6 Vim</string>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>52E4440D-A985-49F4-913B-DB43D6AED740</string>
+			<string>F34C6943-91F1-4BAD-BAE1-6037B7259020</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://github.com/replit/codemirror-vim/blob/master/src/vim.js</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>969689CD-BF5D-466B-AA0C-5FC5F536B880</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -515,42 +551,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library/Application Support/Sublime Text/Packages/User/.neovintageousrc</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>2FFD13E1-74D7-441C-8D92-52C637DD85D7</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>vimrc</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>.neovintageousrc</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>85ED60B5-47C7-4A5C-8E14-F838BDEFFE0B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -559,9 +559,9 @@
 		<key>03A61E61-611A-4555-B4F6-30ED79850890</key>
 		<dict>
 			<key>xpos</key>
-			<integer>440</integer>
+			<real>440</real>
 			<key>ypos</key>
-			<integer>40</integer>
+			<real>40</real>
 		</dict>
 		<key>27B379BB-1B88-4D59-9ECE-96DFFF88322F</key>
 		<dict>
@@ -570,43 +570,45 @@
 			<key>note</key>
 			<string>vimrc</string>
 			<key>xpos</key>
-			<integer>40</integer>
+			<real>40</real>
 			<key>ypos</key>
-			<integer>325</integer>
+			<real>635</real>
 		</dict>
 		<key>2C3AD0F5-2D56-474A-B922-8340DD8E20DF</key>
 		<dict>
 			<key>xpos</key>
-			<integer>365</integer>
+			<real>365</real>
 			<key>ypos</key>
-			<integer>60</integer>
+			<real>60</real>
 		</dict>
 		<key>2FFD13E1-74D7-441C-8D92-52C637DD85D7</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>6</integer>
 			<key>xpos</key>
-			<integer>230</integer>
+			<real>230</real>
 			<key>ypos</key>
-			<integer>590</integer>
+			<real>190</real>
 		</dict>
 		<key>344CD4D7-7498-430B-BE0F-5122D38B377B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
 			<key>note</key>
 			<string>open neovintageous and obsidian vimrc</string>
 			<key>xpos</key>
-			<integer>635</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>290</integer>
+			<real>330</real>
 		</dict>
 		<key>49BF37B2-3037-4978-954E-E89973D38B6D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>810</integer>
+			<real>810</real>
 			<key>ypos</key>
-			<integer>95</integer>
+			<real>95</real>
 		</dict>
 		<key>4CB01888-1BBF-43A3-B369-5C65420EA7C4</key>
 		<dict>
@@ -615,43 +617,36 @@
 			<key>note</key>
 			<string>vimium settings</string>
 			<key>xpos</key>
-			<integer>635</integer>
+			<real>635</real>
 			<key>ypos</key>
-			<integer>150</integer>
+			<real>150</real>
 		</dict>
 		<key>52E4440D-A985-49F4-913B-DB43D6AED740</key>
 		<dict>
-			<key>xpos</key>
-			<integer>820</integer>
-			<key>ypos</key>
-			<integer>290</integer>
-		</dict>
-		<key>59880808-66A8-4459-B33C-A5FE98786D2F</key>
-		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
-			<key>note</key>
-			<string>cheat sheet</string>
 			<key>xpos</key>
-			<integer>40</integer>
+			<real>230</real>
 			<key>ypos</key>
-			<integer>185</integer>
+			<real>330</real>
 		</dict>
 		<key>6893CDFD-0423-4258-A2EC-B278E825E37C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>635</integer>
+			<real>635</real>
 			<key>ypos</key>
-			<integer>40</integer>
+			<real>40</real>
 		</dict>
 		<key>7497EF13-1EBB-4720-8F82-83144C19C542</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
 			<key>xpos</key>
-			<integer>440</integer>
+			<real>440</real>
 			<key>ypos</key>
-			<integer>160</integer>
+			<real>160</real>
 		</dict>
 		<key>85ED60B5-47C7-4A5C-8E14-F838BDEFFE0B</key>
 		<dict>
@@ -660,43 +655,43 @@
 			<key>note</key>
 			<string>neovintageousrc</string>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>590</integer>
+			<real>190</real>
 		</dict>
 		<key>87FAFB82-BA4C-4B86-BFB7-42F829F37218</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<integer>230</integer>
+			<real>230</real>
 			<key>ypos</key>
-			<integer>380</integer>
+			<real>690</real>
 		</dict>
-		<key>C6A9FE99-C9C0-4439-98AD-85E5A8105B6F</key>
+		<key>969689CD-BF5D-466B-AA0C-5FC5F536B880</key>
 		<dict>
-			<key>note</key>
-			<string>Quicklook</string>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<integer>225</integer>
+			<real>230</real>
 			<key>ypos</key>
-			<integer>185</integer>
+			<real>485</real>
 		</dict>
 		<key>CDDD44C0-E8E4-4F89-8ED9-3DB266215A4B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>235</integer>
+			<real>235</real>
 			<key>ypos</key>
-			<integer>55</integer>
+			<real>55</real>
 		</dict>
 		<key>D3317886-6B6B-4FAB-8FF0-7AAB24B3390D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<integer>40</integer>
+			<real>40</real>
 			<key>ypos</key>
-			<integer>470</integer>
+			<real>780</real>
 		</dict>
 		<key>E56FB083-4DE7-4650-A497-30E811525588</key>
 		<dict>
@@ -705,11 +700,22 @@
 			<key>note</key>
 			<string>vim quick reference</string>
 			<key>xpos</key>
-			<integer>40</integer>
+			<real>40</real>
 			<key>ypos</key>
-			<integer>35</integer>
+			<real>35</real>
+		</dict>
+		<key>F34C6943-91F1-4BAD-BAE1-6037B7259020</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>40</real>
+			<key>ypos</key>
+			<real>485</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
