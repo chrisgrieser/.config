@@ -112,7 +112,7 @@ end
 macPassWatcher = aw.new(macPassActivate)
 macPassWatcher:start()
 
--- YOUTUBE
+-- YOUTUBE + SPOTIFY
 -- Pause Spotify on launch
 -- Resume Spotify on quit
 function spotifyTUI (toStatus)
