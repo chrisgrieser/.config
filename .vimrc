@@ -72,8 +72,6 @@ set mouse+=a
 
 " Plug 'neovim/nvim-lspconfig'
 " Plug 'hrsh7th/cmp-nvim-lsp'
-" Plug 'Lokaltog/vim-easymotion'
-" Plug 'airblade/vim-gitgutter'
 
 " " PLUGINS TO ADD
 " " unimpaired
@@ -81,7 +79,9 @@ set mouse+=a
 " " commantary
 " " sneak
 " " highlightedyank
-" https://github.com/vim-syntastic/syntastic
+" https://github.com/neoclide/coc.nvim
+" https://github.com/svermeulen/vim-subversive
+" https://github.com/svermeulen/vim-cutlass
 " startify
 
 " call plug#end()

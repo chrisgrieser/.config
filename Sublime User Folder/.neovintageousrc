@@ -15,8 +15,6 @@ nnoremap ? :help nv<CR>
 nnoremap Y y$
 
 " always paste what was yanked, not what was deleted
-""""""""""""""""""""""
-""""""""""""""""""""""
 nnoremap Y y$
 
 nnoremap gp "0p
