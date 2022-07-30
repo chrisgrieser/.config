@@ -22,7 +22,14 @@ function isPseudoMaximized (win)
 	if not(win) then return false end
 	local max = hs.screen.mainScreen():frame()
 	local dif = win:frame().w - pseudoMaximized.w*max.w
-	return (dif > -10 and dif < 10) -- leeway for some apps
+	return (dif > -15 and dif < 15) -- leeway for some apps
+end
+
+function isHalf (win)
+	if not(win) then return false end
+	local max = hs.screen.mainScreen():frame()
+	local dif = win:frame().w - 0.5*max.w
+	return (dif > -15 and dif < 15) -- leeway for some apps
 end
 
 --------------------------------------------------------------------------------
@@ -564,7 +571,7 @@ wf_sublime:subscribe(wf.windowDestroyed, function (closedWin)
 	local alacrittyWin = hs.application("alacritty"):mainWindow():frame()
 	local max = hs.screen.mainScreen():frame()
 
-	if (alacrittyWin.w / max.w == 0.5) then
+	if isHalf(alacrittyWin) then
 		moveResize(alacrittyWin, baseLayout)
 	end
 end)
