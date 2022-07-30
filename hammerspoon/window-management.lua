@@ -568,8 +568,7 @@ wf_sublime:subscribe(wf.windowDestroyed, function (closedWin)
 	if #wf_sublime:getWindows() == 0 and appIsRunning("Sublime Text") then
 		hs.application("Sublime Text"):kill()
 	end
-	local alacrittyWin = hs.application("alacritty"):mainWindow():frame()
-	local max = hs.screen.mainScreen():frame()
+	local alacrittyWin = hs.application("alacritty"):mainWindow()
 
 	if isHalf(alacrittyWin) then
 		moveResize(alacrittyWin, baseLayout)
