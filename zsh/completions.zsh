@@ -19,16 +19,16 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'J' vi-forward-blank-word # next group
 bindkey -M menuselect 'K' vi-backward-blank-word # previous group
-bindkey -M menuselect '^X' accept-and-infer-next-history # for directories, query for children
-bindkey -M menuselect '^Y' accept-and-hold
+bindkey -M menuselect '^I' accept-and-infer-next-history # tab=for directories, query for children
+bindkey -M menuselect ' ' accept-line
 bindkey -M menuselect '\e' send-break
 bindkey -M menuselect '^Z' undo
 bindkey -M menuselect '^L' clear-screen
 
 # coloring & messages
-zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
-zstyle ':completion:*:messages' format '%F{purple} -- %d --%f'
-zstyle ':completion:*:warnings' format '%F{red}No completions found.%f'
+zstyle ':completion:*:*:*:*:descriptions' format '[%d]'
+zstyle ':completion:*:messages' format '%F{purple}-- %d --%f'
+zstyle ':completion:*:warnings' format '%F{red}-- No completions found.%f'
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # order files by last access

@@ -15,6 +15,7 @@ function twitterrificScrollUp ()
 			x = f.x + f.w * 0.09,
 			y = f.y + 140,
 		}
+		keystroke({"cmd"}, "1") -- properly up (to avoid clicking on tweet content)
 		hs.eventtap.leftClick(pos)
 		keystroke({"cmd"}, "k") -- mark all as red
 		keystroke({"cmd"}, "j") -- scroll up
