@@ -106,6 +106,8 @@ nnoremap <D-s> :write<CR>
 nnoremap <D-a> ggvG
 " cmd+w to save&quit
 nnoremap <D-w> ZZ
+" cmd+d to duplicate
+nnoremap <D-d> yyp
 " Swap up/down (vim.unimpaired)
 noremap <D-2> [e
 noremap <D-3> ]e
@@ -142,9 +144,6 @@ nnoremap - /
 
 " Quickly remove search highlights
 nnoremap <C-m> :nohlsearch<CR>
-
-" Goto Mark: remapping since ` not working
-nnoremap ö `
 
 """"""""""""""""""""""
 " Editing
