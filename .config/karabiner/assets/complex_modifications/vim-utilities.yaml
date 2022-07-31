@@ -1,17 +1,17 @@
 title: "⚒️ Vim Utilities"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
-  - description: "⚒️ k+l (simultaneously): ↵"
+  - description: "⚒️ f+j (simultaneously): ↵"
     manipulators:
       - type: basic
         from:
           simultaneous:
-            - key_code: k
-            - key_code: l
+            - key_code: f
+            - key_code: j
         parameters:
           basic.simultaneous_threshold_milliseconds: 60
         to:
-          - key_code: delete_or_backspace
+          - key_code: return_or_enter
   - description: "⚒️ R-⌘ (tap): go to end of line"
     manipulators:
       - type: basic
