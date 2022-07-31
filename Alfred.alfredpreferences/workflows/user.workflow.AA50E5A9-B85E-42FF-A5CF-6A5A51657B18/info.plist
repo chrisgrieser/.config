@@ -161,11 +161,50 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C94155F1-0E40-46D9-AFC3-21C739F8B557</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FA94C925-E85B-4BD2-9D19-C26F2CF06358</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E3B9EB88-8AF7-4B8E-9F6A-DF8223E62AC9</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>38EBCA09-3B03-4DEB-A7FC-4177C1AABD60</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FA94C925-E85B-4BD2-9D19-C26F2CF06358</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>302BBA3D-DF8C-4F50-959F-F4EB6DE213D8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FB42D01D-8AF3-4993-ADB7-DFA8AE7EDE47</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FA94C925-E85B-4BD2-9D19-C26F2CF06358</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -290,23 +329,33 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
+				<key>action</key>
 				<integer>0</integer>
-				<key>script</key>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>down</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>playback.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>hotkey</key>
+				<integer>103</integer>
+				<key>hotmod</key>
+				<integer>8388608</integer>
+				<key>hotstring</key>
+				<string>F11</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>38EBCA09-3B03-4DEB-A7FC-4177C1AABD60</string>
+			<string>C94155F1-0E40-46D9-AFC3-21C739F8B557</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -346,6 +395,62 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>volume-control.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>FA94C925-E85B-4BD2-9D19-C26F2CF06358</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>up</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>111</integer>
+				<key>hotmod</key>
+				<integer>8388608</integer>
+				<key>hotstring</key>
+				<string>F12</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>FB42D01D-8AF3-4993-ADB7-DFA8AE7EDE47</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -379,6 +484,50 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>playback.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>38EBCA09-3B03-4DEB-A7FC-4177C1AABD60</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>302BBA3D-DF8C-4F50-959F-F4EB6DE213D8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -408,27 +557,6 @@
 			<string>0C89E83F-2EBC-475C-868A-BDF5E26BF097</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>302BBA3D-DF8C-4F50-959F-F4EB6DE213D8</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -594,7 +722,9 @@ spt play --playlist --random --name="$*" --format="$format"</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>Requires the [Spotify-TUI](https://github.com/Rigellute/spotify-tui).
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>018CFD53-52AA-46A8-A745-DFFD5C49C54F</key>
@@ -633,18 +763,20 @@ spt play --playlist --random --name="$*" --format="$format"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>660</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>550</real>
 		</dict>
 		<key>38EBCA09-3B03-4DEB-A7FC-4177C1AABD60</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
+			<key>note</key>
+			<string>Playback</string>
 			<key>xpos</key>
-			<real>340</real>
+			<real>330</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>550</real>
 		</dict>
 		<key>3A983C30-3CA9-4BBD-8D1B-BAABCCFA0F38</key>
 		<dict>
@@ -726,6 +858,15 @@ spt play --playlist --random --name="$*" --format="$format"</string>
 			<key>ypos</key>
 			<real>815</real>
 		</dict>
+		<key>C94155F1-0E40-46D9-AFC3-21C739F8B557</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>245</real>
+		</dict>
 		<key>CE90C0E2-6FA5-4C58-B04A-13569886DBD8</key>
 		<dict>
 			<key>colorindex</key>
@@ -745,6 +886,26 @@ spt play --playlist --random --name="$*" --format="$format"</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>725</real>
+		</dict>
+		<key>FA94C925-E85B-4BD2-9D19-C26F2CF06358</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>Volume</string>
+			<key>xpos</key>
+			<real>530</real>
+			<key>ypos</key>
+			<real>305</real>
+		</dict>
+		<key>FB42D01D-8AF3-4993-ADB7-DFA8AE7EDE47</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>360</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -770,9 +931,30 @@ spt play --playlist --random --name="$*" --format="$format"</string>
 			<key>variable</key>
 			<string>format</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>10</string>
+				<key>placeholder</key>
+				<string>5</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Controlling the Output Device</string>
+			<key>label</key>
+			<string>Volume Increment</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>vol_increment</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string></string>
+	<string>0.5</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
