@@ -33,7 +33,7 @@ rules:
               - ^com\.apple\.finder$
               - ^com\.hegenberg\.BetterTouchTool$
               - ^org\.hammerspoon\.Hammerspoon$
-  - description: "🐁 4 (hold): Look up word under cusor, (tap): send F13"
+  - description: "🐁 4 (hold): Look up word under cursor, (tap): mouse4"
     manipulators:
       - type: basic
         from:
@@ -52,13 +52,13 @@ rules:
           - type: frontmost_application_unless # Sublime allows assignment of mouse keys
             bundle_identifiers:
               - ^com\.sublimetext
-  - description: "🐁 5 (hold): search selected text / open URL, (tap): send F16"
+  - description: "🐁 5 (hold): search selected text/URL, (tap): mouse5"
     manipulators:
       - type: basic
         from:
           pointing_button: button5
         to_if_alone:
-          - key_code: f16
+          - pointing_button: button5
         to_if_held_down:
           - key_code: c
             modifiers:
@@ -71,9 +71,23 @@ rules:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
         conditions:
-          - type: frontmost_application_unless # Sublime allows assignment of mouse keys
+          - type: frontmost_application_unless
             bundle_identifiers:
-              - ^com\.sublimetext
+              - ^com\.brave\.Browser$
+              - ^com\.apple\.finder$
+      - type: basic
+        from:
+          pointing_button: button5
+        to:
+          - key_code: w
+            modifiers:
+              - command
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.brave\.Browser$
+              - ^com\.apple\.finder$
+
   - description: "🐁 6: ⌘↹"
     manipulators:
       - type: basic

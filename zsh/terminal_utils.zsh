@@ -136,3 +136,11 @@ ex () {
 		echo "'$1' is not a valid file"
 	fi
 }
+
+# appid
+function appid () {
+	local id
+	id=$(osascript -e "id of app \"$1\"")
+	echo "appid: $id"
+	echo "$id" | pbcopy
+}
