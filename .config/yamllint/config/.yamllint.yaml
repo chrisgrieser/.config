@@ -1,6 +1,7 @@
 # https://yamllint.readthedocs.io/en/stable/configuration.html#extending-the-default-configuration
 extends: default
 
+
 yaml-files:
   - '*.yaml'
   - '*.yml'
