@@ -477,7 +477,7 @@ end)
 -- - https://www.hammerspoon.org/go/#winfilters
 -- - https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 
-function isIncognitoWindow(browserWin)
+local function isIncognitoWindow(browserWin)
 	if browserWin:title():match("%(Private%)$") then return true
 	else return false end
 end
