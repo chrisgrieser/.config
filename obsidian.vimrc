@@ -60,12 +60,8 @@ vmap K 6k
 map [ {
 map ] }
 
-" " Goto Mark
-" nmap ä `
-" Create Mark
-noremap ` m
 " Goto Mark
-noremap m M
+nmap ä `
 
 " Add to Dictionary (not directly accessible, only via Context Menu)
 exmap contextMenu obcommand editor:context-menu
@@ -150,8 +146,8 @@ nmap Ä dawelpb
 " can't remap to J, cause there is no noremap;
 " also the merge from Code Editor Shortcuts plugin is smarter than J
 exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
-" nmap M :mergeLines
-" vmap M :mergeLines
+nmap M :mergeLines
+vmap M :mergeLines
 
 " Add Blank Line above/below
 nmap = mzO<Esc>`z
