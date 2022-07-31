@@ -19,6 +19,11 @@ covidLocationCode = "BE"
 fileHubLocation = os.getenv("HOME").."/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 dotfileLocation = os.getenv("HOME").."/dotfiles/"
 
+covidIcon ="🦠"
+draftsIcon ="☑️"
+fileHubIcon ="📂"
+syncIcon ="🔁"
+
 --------------------------------------------------------------------------------
 
 weatherStatusBar = hs.menubar.new()
@@ -73,7 +78,7 @@ function updateDotfileSyncStatusMenuBar()
 		dotfileSyncMenuBar:removeFromMenuBar() -- also removed clickcallback, which therefore has to be set again
 	else
 		dotfileSyncMenuBar:returnToMenuBar()
-		dotfileSyncMenuBar:setTitle("🔁 "..changes)
+		dotfileSyncMenuBar:setTitle(syncIcon.." "..changes)
 		dotfileSyncMenuBar:setClickCallback(function ()
 			local lastCommit = hs.execute('git log -1 --format=%ar')
 			lastCommit = trim(lastCommit)
@@ -102,7 +107,7 @@ function updateDraftsMenubar()
 		draftsCounterMenuBar:removeFromMenuBar()
 	else
 		draftsCounterMenuBar:returnToMenuBar()
-		draftsCounterMenuBar:setTitle("🟦 "..numberOfDrafts)
+		draftsCounterMenuBar:setTitle(draftsIcon.." "..numberOfDrafts)
 	end
 end
 
@@ -135,42 +140,13 @@ function setFileHubCountMenuBar()
 		fileHubCountMenuBar:removeFromMenuBar()
 	else
 		fileHubCountMenuBar:returnToMenuBar()
-		fileHubCountMenuBar:setTitle("📂 "..numberOfFiles)
+		fileHubCountMenuBar:setTitle(fileHubIcon.." "..numberOfFiles)
 	end
 end
 
 -- update when folder changes
 fileHubMenuBarWatcher = hs.pathwatcher.new(fileHubLocation, setFileHubCountMenuBar)
 fileHubMenuBarWatcher:start()
-
---------------------------------------------------------------------------------
-
--- finderGitRepoBar = hs.menubar.new()
--- function finderGitRepoUpdate ()
--- 	local _, currentFinderPath = hs.osascript.applescript([[
--- 		tell application "Finder"
--- 			if (count windows) is 0 then return ""
--- 			set currentDir to target of Finder window 1 as alias
--- 			return POSIX path of currentDir
--- 		end tell
--- 	]])
--- 	local _, isGitRepo = hs.execute(' cd "'..currentFinderPath..'" ; git rev-parse --git-dir')
-
--- 	if isGitRepo and currentFinderPath and frontapp() == "Finder" then
--- 		local changes = hs.execute(' cd "'..currentFinderPath..'" ; git status --porcelain | wc -l')
--- 		changes = trim(changes)
--- 		finderGitRepoBar:returnToMenuBar()
--- 		finderGitRepoBar:setTitle("✴️ "..changes)
--- 	else
--- 		finderGitRepoBar:removeFromMenuBar()
--- 	end
--- end
--- wf = hs.window.filter
--- wf_finder2 = wf.new("Finder")
--- wf_finder2:subscribe(wf.windowFocused, finderGitRepoUpdate)
--- wf_finder2:subscribe(wf.windowCreated, finderGitRepoUpdate)
--- wf_finder2:subscribe(wf.windowTitleChanged, finderGitRepoUpdate)
--- wf_finder2:subscribe(wf.windowUnfocused, function() finderGitRepoBar:removeFromMenuBar() end)
 
 --------------------------------------------------------------------------------
 -- obsidianStatusBar = hs.menubar.new()
