@@ -14,7 +14,7 @@ else
 fi
 msg="$changeType, $device_name"
 
-git add -A && git commit -m "$msg" --author="automated <73286100+chrisgrieser@users.noreply.github.com>"
+git add -A && git commit -m "$msg" --author="🤖🕒<automated@cron.job>"
 git pull
 git push
 
