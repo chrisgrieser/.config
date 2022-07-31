@@ -10,8 +10,6 @@ alias .="open ."
 alias ..="z .."
 alias ...="z ../.."
 alias ....="z ../../.."
-alias wd='cd "$WD"' # Working Directory
-alias d='cd "$DOTFILE_FOLDER"' # dotfiles repo
 alias ov='cd "$VAULT_PATH"' # Obsidian Vault
 
 # utils

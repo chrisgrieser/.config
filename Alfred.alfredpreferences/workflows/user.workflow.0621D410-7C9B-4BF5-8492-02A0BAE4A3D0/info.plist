@@ -742,6 +742,8 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 	<dict>
 		<key>download_location</key>
 		<string>~/RomComs/-new</string>
+		<key>working_directory</key>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/</string>
 		<key>youtube_link_folder</key>
 		<string>~/Video/Downloaded</string>
 	</dict>
@@ -749,6 +751,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 	<array>
 		<string>youtube_link_folder</string>
 		<string>download_location</string>
+		<string>working_directory</string>
 	</array>
 	<key>version</key>
 	<string></string>
