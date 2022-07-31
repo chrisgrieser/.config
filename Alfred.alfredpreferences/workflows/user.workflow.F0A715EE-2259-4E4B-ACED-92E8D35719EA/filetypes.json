@@ -1,0 +1,111 @@
+{"items": [
+   {
+      "title":"JavaScript",
+      "arg":"js",
+      "uid": "1",
+      "match": "js javascript"
+   },
+   {
+      "title":"XML",
+      "arg":"xml",
+      "uid": "2",
+      "match": "xml"
+   },
+   {
+      "title":"HTML",
+      "arg":"html",
+      "uid": "3"
+   },
+   {
+      "title":"Markdown",
+      "arg":"md",
+      "uid": "4",
+      "match": "markdown md text txt"
+   },
+   {
+      "title":"AppleScript",
+      "arg":"applescript",
+      "uid": "5",
+      "match": "applescript as"
+   },
+   {
+      "title":"AppleScript",
+      "arg":"se-applescript",
+      "uid": "6",
+      "match": "applescript as script editor",
+	  "icon": { "path": "script-editor.png" }
+   },
+   {
+      "title":"Shell Script",
+      "arg":"sh",
+      "uid": "7",
+      "match": "bash zsh shell fish"
+   },
+   {
+      "title":"Python",
+      "arg":"py",
+      "uid": "8"
+   },
+   {
+      "title":"CSS",
+      "arg":"css",
+      "uid": "9"
+   },
+   {
+      "title":"Plain Text",
+      "arg":"txt",
+      "uid": "10",
+      "match": "plain text txt"
+   },
+   {
+      "title":"Rich Text",
+      "arg":"rtf",
+      "uid": "12",
+      "match": "rtf rich text",
+      "icon": { "path": "textedit.png" }
+   },
+   {
+      "title":"BibTeX",
+      "arg":"bib",
+      "uid": "13",
+      "match": "bibtex latex tex bibdesk"
+   },
+    {
+      "title":"JSON",
+      "arg":"json",
+      "uid": "14"
+   },
+   {
+      "title":"Mermaid Markdown",
+      "match":"mermaid markdown mmd gantt chart pie",
+      "arg":"mmd",
+      "uid": "15"
+   },
+   {
+      "title":"CSV",
+      "arg":"csv",
+      "uid": "16"
+   },
+   {
+      "title":"TypeScript",
+      "arg":"ts",
+      "uid": "16",
+      "match": "ts typescript javascript"
+   },
+   {
+      "title":"YAML",
+      "arg":"yaml",
+      "uid": "17",
+	  "match": "yaml yml"
+   },
+   {
+      "title":"plist",
+      "arg":"plist",
+      "uid": "18"
+   },
+   {
+      "title":"Lua",
+      "arg":"lua",
+      "uid": "19"
+   }
+]}

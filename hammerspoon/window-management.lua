@@ -545,7 +545,7 @@ wf_zoom:subscribe(wf.windowCreated, function ()
 end)
 
 -- SUBLIME
-wf_sublime = wf.new("Sublime Text")
+wf_sublime = wf.new("Sublime Text"):setOverrideFilter{allowRoles='AXStandardWindow'}
 wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 	-- if new window is a settings window, maximize it
 	if newWindow:title():match("sublime%-settings$") or newWindow:title():match("sublime%-keymap$") then
