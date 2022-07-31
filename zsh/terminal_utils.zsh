@@ -33,17 +33,6 @@ function z () {
 }
 alias zi='__zoxide_zi'
 
-# Cycle through base directories
-bindkey -M viins "^[[27;5;9~" dir-cycler
-bindkey -M vicmd "^[[27;5;9~" dir-cycler
-bindkey -M vicmd "^R" dir-cycler
-bindkey -M viins "^R" dir-cycler
-function dir-cycler () {
-	osascript -e "beep"
-}
-zle -N dir-cycler
-
-
 # settings (zshrc)
 alias ,="settings"
 function settings () {
