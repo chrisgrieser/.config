@@ -92,7 +92,8 @@
               "bundle_identifiers": [
                 "^com\\.mimestream\\.Mimestream$",
                 "^com\\.brave\\.Browser$",
-                "^com\\.brave\\.Browser\\.app.\\w+$"
+                "^com\\.brave\\.Browser\\.app.\\w+$",
+                "^com\\.apple\\.finder$"
               ]
             }
           ]
@@ -131,6 +132,28 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.mimestream\\.Mimestream$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to": [
+            {
+              "key_code": "up_arrow",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
               ]
             }
           ]

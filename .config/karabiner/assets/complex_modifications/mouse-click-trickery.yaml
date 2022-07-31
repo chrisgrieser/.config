@@ -54,6 +54,7 @@ rules:
              - ^com\.mimestream\.Mimestream$
              - ^com\.brave\.Browser$
              - ^com\.brave\.Browser\.app.\w+$ # PWAs
+             - ^com\.apple\.finder$
       # Brave: Back
       - type: basic
         from:
@@ -81,6 +82,18 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
+      # Finder: go up
+      - type: basic
+        from:
+          pointing_button: button4
+        to:
+          - key_code: up_arrow
+            modifiers:
+              - command
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.apple\.finder$
       # YouTube: Go Home
       - type: basic
         from:
@@ -153,7 +166,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.agiletortoise\.Drafts-OSX$
-      # archive in Mimestream
+      # Archive in Mimestream
       - type: basic
         from:
           pointing_button: button5
