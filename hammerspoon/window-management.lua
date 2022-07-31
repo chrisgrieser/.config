@@ -477,14 +477,16 @@ end)
 -- - https://www.hammerspoon.org/go/#winfilters
 -- - https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 
-function isIncognitoWindow(browserWin)
-	if browserWin:title():match("%(Private%)$") then return true
-	else return false end
-end
+
 
 -- BROWSER
-wf_browser = wf.new("Brave Browser")
+wf_browser = wf.new("Brave Browser"):setOverrideFilter{allowRoles='AXStandardWindow'}
 wf_browser:subscribe(wf.windowCreated, function (newWindow)
+	local function isIncognitoWindow(browserWin)
+		if browserWin:title():match("%(Private%)$") then return true
+		else return false end
+	end
+
 	-- split when second window is opened
 	if #wf_browser:getWindows() == 2 then
 		local win1 = wf_browser:getWindows()[1]
