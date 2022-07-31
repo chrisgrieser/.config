@@ -1,4 +1,4 @@
-# shellcheck disable=SC2086
+# shellcheck disable=SC2086,SC2164
 
 # built-in zle functions
 bindkey -M viins "^A" beginning-of-line
@@ -25,6 +25,9 @@ bindEverywhere '^F' edit-command-line
 # zsh-autosuggest
 bindkey -M viins '^X' autosuggest-execute # e[x]ecute
 bindkey -M viins '^[[Z' autosuggest-accept # shift+tab
+
+# shift+tab: Cycle through base directories
+bindEverywhere "^[[Z" dir-cycler
 
 #-------------------------------------------------------------------------------
 # INFO: use ctrl-v and then a key combination to get the shell binding
@@ -53,3 +56,15 @@ quote-all-args() {
 	fi
 }
 zle -N quote-all-args
+
+function dir-cycler () {
+	if [[ "$PWD" == "$WD" ]]; then
+		cd "$DOTFILE_FOLDER"
+	else
+		cd "$WD"
+	fi
+	zle reset-prompt
+}
+zle -N dir-cycler
+
+

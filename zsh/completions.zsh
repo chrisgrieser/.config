@@ -52,9 +52,11 @@ autoload -U +X bashcompinit && bashcompinit
 eval "$(pandoc --bash-completion)"
 
 # pip
-eval "$(pip completion --zsh)"
-compctl -K _pip_completion pip3
-
+if which pip &> /dev/null; then
+	# eval "$(pip completion --zsh)"
+	# compctl -K _pip_completion pip3
+	echo test
+fi
 # NPM - https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/npm/npm.plugin.zsh
 # shellcheck disable=SC2154
 (( $+commands[npm] )) && {
