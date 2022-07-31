@@ -8,9 +8,9 @@ cd "$dir" || exit 1
 
 # backup old version, in case not commited
 git add "$FULL_PATH"
-git commit -m "'$file' before restoring"
+git commit -m "Backup of $file" --author="🤖💾<version-history@alfred-workflow.com>"
 
 # restore & open old version
 git checkout "$hash" -- "$file"
-git commit -m "Restored $file from: $hash"
+git commit -m "Restored $file (from $hash)"  --author="🤖⤵️<version-history@alfred-workflow.com>"
 open "$file"
