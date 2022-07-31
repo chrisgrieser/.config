@@ -3,17 +3,17 @@
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
-      "description": "⚒️ k+l (simultaneously): ↵",
+      "description": "⚒️ f+j (simultaneously): ↵",
       "manipulators": [
         {
           "type": "basic",
           "from": {
             "simultaneous": [
               {
-                "key_code": "k"
+                "key_code": "f"
               },
               {
-                "key_code": "l"
+                "key_code": "j"
               }
             ]
           },
@@ -22,7 +22,7 @@
           },
           "to": [
             {
-              "key_code": "delete_or_backspace"
+              "key_code": "return_or_enter"
             }
           ]
         }
