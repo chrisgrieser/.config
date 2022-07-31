@@ -23,7 +23,7 @@
     },
     {
       "pattern": "https?://www.youtube.com/*",
-      "passKeys": "cm0123456789lNP/,.ti"
+      "passKeys": "cm0123456789lNP/,.ti?"
     },
     {
       "pattern": "https?://github.com/*/issues(\\?q=*)?",
