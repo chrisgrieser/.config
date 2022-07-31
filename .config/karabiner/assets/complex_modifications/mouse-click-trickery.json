@@ -143,10 +143,7 @@
           },
           "to": [
             {
-              "key_code": "up_arrow",
-              "modifiers": [
-                "command"
-              ]
+              "shell_command": "osascript -e '\n  tell application \"System Events\"\n  tell process \"Finder\"\n    set frontmost to true\n    click menu item \"Back\" of menu \"Go\" of menu bar 1\n  end tell\nend tell'\n"
             }
           ],
           "conditions": [

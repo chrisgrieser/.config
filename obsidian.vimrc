@@ -202,7 +202,6 @@ nmap ,y 3ggA
 " complete a Markdown task
 exmap toggleTask obcommand editor:toggle-checklist-status
 nmap ,x :toggleTask
-" nmap ,x mz^lllrx`z
 
 " [g]oto [d]efiniton ~= footnotes
 " requires Footnotes Shortcut Plugin
@@ -220,7 +219,7 @@ nmap ,> :toggleBlockquote
 vmap ,> :toggleBlockquote
 
 " turn bolded bullet points to h2 (##)
-" has to be done this complicated way cause vim substitutes called in maps can't
+" has to be done this complicated way cause vim substitutes called here can't
 " properly process spaces
 nmap &§&#a :.s/\*\*//g
 nmap &§&#b :.s/^-/##/
@@ -229,7 +228,7 @@ nmap ,+ mz&§&#a&§&#bO<Esc>`z
 """"""""""""""""""""""
 " << Indentation
 """"""""""""""""""""""
-" Tab as indentation is already implemented in Obsidian
+" <Tab> as indentation is already implemented in Obsidian
 
 """"""""""""""""""""""
 " < Text Objects

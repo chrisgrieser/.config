@@ -39,7 +39,7 @@ ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 SUBLIME_USER_DIR=~"/Library/Application Support/Sublime Text/Packages/User"
 [[ -e "$SUBLIME_USER_DIR" ]] && rm -rf "$SUBLIME_USER_DIR"
 ln -sf "$DOTFILE_FOLDER/Sublime User Folder/" "$SUBLIME_USER_DIR"
-rm -rf ~"/Library/Application Support/Sublime Text/Installed Packages/CSS3.sublime-package"
+[[ -e ~"/Library/Application Support/Sublime Text/Installed Packages/CSS3.sublime-package" ]] && rm -rf ~"/Library/Application Support/Sublime Text/Installed Packages/CSS3.sublime-package"
 ln -sf "$DOTFILE_FOLDER/Sublime Packages/CSS3.sublime-package" ~"/Library/Application Support/Sublime Text/Installed Packages"
 
 # Brave
