@@ -2,9 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>device</key>
-	<string>Wohnzimmer Echo</string>
 	<key>format</key>
 	<string>🎵 %t – %a (%f)</string>
+	<key>vol_increment</key>
+	<string>5</string>
 </dict>
 </plist>

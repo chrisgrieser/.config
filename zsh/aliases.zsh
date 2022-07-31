@@ -15,7 +15,6 @@ alias ov='cd "$VAULT_PATH"' # Obsidian Vault
 # utils
 alias q='exit'
 alias notify="osascript -e 'display notification \"\" with title \"Terminal Process finished.\" subtitle \"\" sound name \"\"'"
-alias urlencode='node --eval "console.log(encodeURIComponent(process.argv[1]))"'
 alias t="alacritty-theme-switch"
 
 # colorize by default
