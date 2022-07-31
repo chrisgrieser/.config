@@ -48,31 +48,35 @@ setopt MENU_COMPLETE
 
 # Pandoc - https://groups.google.com/g/pandoc-discuss/c/Ot019yRiJFQ/m/VPchuJRkBQAJ
 # (bashcompinit requires compinit, so compinit has to be autoloaded unless some other completion script has already done so.)
-autoload -U +X bashcompinit && bashcompinit
-eval "$(pandoc --bash-completion)"
+
+if which pandoc &> /dev/null; then
+	autoload -U +X bashcompinit && bashcompinit
+	eval "$(pandoc --bash-completion)"
+fi
 
 # pip
 if which pip &> /dev/null; then
-	# eval "$(pip completion --zsh)"
-	# compctl -K _pip_completion pip3
-	echo test
+	eval "$(pip completion --zsh)"
+	compctl -K _pip_completion pip3
 fi
-# NPM - https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/npm/npm.plugin.zsh
-# shellcheck disable=SC2154
-(( $+commands[npm] )) && {
-  rm -f "${ZSH_CACHE_DIR:-$ZSH/cache}/npm_completion"
 
-  _npm_completion() {
-    local si=$IFS
-    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
-                 COMP_LINE=$BUFFER \
-                 COMP_POINT=0 \
-                 npm completion -- "${words[@]}" \
-                 2>/dev/null)
-    IFS=$si
-  }
-  compdef _npm_completion npm
-}
+# NPM - https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/npm/npm.plugin.zsh
+if which npm &> /dev/null; then
+	(( $+commands[npm] )) && {
+	  rm -f "${ZSH_CACHE_DIR:-$ZSH/cache}/npm_completion"
+
+	  _npm_completion() {
+	    local si=$IFS
+	    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+	                 COMP_LINE=$BUFFER \
+	                 COMP_POINT=0 \
+	                 npm completion -- "${words[@]}" \
+	                 2>/dev/null)
+	    IFS=$si
+	  }
+	  compdef _npm_completion npm
+	}
+fi
 
 # Homebrew Completions have to be added in .zprofile
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh

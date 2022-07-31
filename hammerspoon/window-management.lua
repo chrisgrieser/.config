@@ -305,7 +305,7 @@ function mainScreenWindows()
 	else mainScreen = hs.screen.mainScreen() end
 
 	for i = 1, #winArr do
-		if winArr[i]:screen() == mainScreen and winArr[i]:isStandard() then
+		if winArr[i]:screen() == mainScreen and winArr[i]:isStandard() and winArr[i]:isVisible() then
 			out[j] = winArr[i]
 			j = j+1
 		end
