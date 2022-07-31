@@ -70,7 +70,7 @@
           },
           "to_if_alone": [
             {
-              "key_code": "f13"
+              "pointing_button": "button4"
             }
           ],
           "to_if_held_down": [
@@ -90,7 +90,75 @@
             {
               "type": "frontmost_application_unless",
               "bundle_identifiers": [
-                "^com\\.sublimetext"
+                "^com\\.mimestream\\.Mimestream$",
+                "^com\\.brave\\.Browser$",
+                "^com\\.brave\\.Browser\\.app.\\w+$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e '\n  tell application \"System Events\"\n  tell process \"Brave Browser\"\n    set frontmost to true\n    click menu item \"Back\" of menu \"History\" of menu bar 1\n  end tell\nend tell'\n"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to": [
+            {
+              "key_code": "non_us_pound"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.mimestream\\.Mimestream$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e '\n  tell application \"System Events\"\n  tell process \"YouTube\"\n    set frontmost to true\n    click menu item \"Exit Full Screen\" of menu \"View\" of menu bar 1\n  end tell\nend tell'\n"
+            },
+            {
+              "key_code": "g"
+            },
+            {
+              "key_code": "u",
+              "modifiers": [
+                "shift"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser\\.app.\\w+$"
               ]
             }
           ]
@@ -157,7 +225,51 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.brave\\.Browser$",
-                "^com\\.apple\\.finder$"
+                "^com\\.apple\\.finder$",
+                "^com\\.agiletortoise\\.Drafts-OSX",
+                "^com\\.mimestream\\.Mimestream$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button5"
+          },
+          "to": [
+            {
+              "key_code": "a",
+              "modifiers": [
+                "command",
+                "shift"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.agiletortoise\\.Drafts-OSX$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button5"
+          },
+          "to": [
+            {
+              "key_code": "e"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.mimestream\\.Mimestream$"
               ]
             }
           ]
