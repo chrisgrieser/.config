@@ -3,8 +3,8 @@
 function cc () {
 	QUERY=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
 	CHEAT_INFO=$(curl -s "https://cht.sh/$QUERY") # https://cht.sh/:help
-	CHEAT_CODE_ONLY=$(curl -s "https://cht.sh/$QUERY?TQ")
-	echo "$CHEAT_INFO" | "$PAGER"
+	CHEAT_CODE_ONLY=$(curl -s "https://cht.sh/$QUERY?T")
+	echo "$CHEAT_INFO" | less
 	echo "$CHEAT_CODE_ONLY" | pbcopy
 }
 

@@ -140,6 +140,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>ED094C98-7908-44AB-9B7A-E3A1DF6D1C21</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6E78179A-324B-4AEF-AB9E-446547E28489</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F0068510-5EA9-467B-8CAB-E5A736B52AE8</key>
 		<array>
 			<dict>
@@ -609,6 +622,71 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>killall "Karabiner-Elements"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6E78179A-324B-4AEF-AB9E-446547E28489</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>ke</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❌ Quit Karabiner</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>ED094C98-7908-44AB-9B7A-E3A1DF6D1C21</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://espanso.org/docs/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>146B762A-3BFD-4073-8111-EB3BDFFF45A1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -654,27 +732,6 @@
 			<string>20AA6DBE-F597-47FF-B059-314D7D83B612</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://espanso.org/docs/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>146B762A-3BFD-4073-8111-EB3BDFFF45A1</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -866,6 +923,15 @@ window_name</string>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
+		<key>6E78179A-324B-4AEF-AB9E-446547E28489</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>465</real>
+		</dict>
 		<key>936424AC-32E2-4193-B07C-DDB804AEF807</key>
 		<dict>
 			<key>colorindex</key>
@@ -936,6 +1002,17 @@ window_name</string>
 			<real>535</real>
 			<key>ypos</key>
 			<real>150</real>
+		</dict>
+		<key>ED094C98-7908-44AB-9B7A-E3A1DF6D1C21</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>quit</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>465</real>
 		</dict>
 		<key>F0068510-5EA9-467B-8CAB-E5A736B52AE8</key>
 		<dict>
