@@ -362,35 +362,14 @@ rules:
             modifiers:
               - option
 
-      # change word
+      # delete word (use ⌘J from utility hotkeys for changing a word)
       - type: basic
         from:
           key_code: spacebar
           modifiers:
             mandatory:
-              - option
-              - right_shift  # only hyper
-              - command
-              - control
-        to:
-          - key_code: right_arrow
-            modifiers:
-              - option
-          - key_code: left_arrow
-            modifiers:
               - option
               - shift
-          - key_code: delete_or_backspace  # delete the selection
-
-      # delete word
-      - type: basic
-        from:
-          key_code: spacebar
-          modifiers:
-            mandatory:
-              - option
-              - left_shift  # hyper + shift
-              - right_shift
               - command
               - control
         to:
