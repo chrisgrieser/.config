@@ -58,8 +58,10 @@ noremap K 7k
 noremap [ {
 noremap ] }
 
+" Create Mark
+noremap ` m
 " Goto Mark
-nnoremap ä `
+noremap m M
 
 " Next/Previous Sublime Linter Errors
 nnoremap gl ]l

@@ -307,6 +307,7 @@ rules:
               - control
         to:
           - key_code: return_or_enter
+
       # n: backspace/delete
       - type: basic
         from:
@@ -331,6 +332,7 @@ rules:
               - control
         to:
           - key_code: delete_forward
+
       # word to the left
       - type: basic
         from:
@@ -360,6 +362,26 @@ rules:
             modifiers:
               - option
 
+      # change word
+      - type: basic
+        from:
+          key_code: spacebar
+          modifiers:
+            mandatory:
+              - option
+              - right_shift  # only hyper
+              - command
+              - control
+        to:
+          - key_code: right_arrow
+            modifiers:
+              - option
+          - key_code: left_arrow
+            modifiers:
+              - option
+              - shift
+          - key_code: delete_or_backspace  # delete the selection
+
       # delete word
       - type: basic
         from:
@@ -367,7 +389,8 @@ rules:
           modifiers:
             mandatory:
               - option
-              - shift
+              - left_shift  # hyper + shift
+              - right_shift
               - command
               - control
         to:
@@ -380,6 +403,7 @@ rules:
               - shift
           - key_code: delete_or_backspace  # delete the selection
           - key_code: delete_or_backspace  # delete the space
+          - key_code: right_arrow  # go to next word
 
       # ö (German Keyboard) → transpose
       - type: basic

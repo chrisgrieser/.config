@@ -659,7 +659,40 @@
             "modifiers": {
               "mandatory": [
                 "option",
-                "shift",
+                "right_shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": [
+                "option"
+              ]
+            },
+            {
+              "key_code": "left_arrow",
+              "modifiers": [
+                "option",
+                "shift"
+              ]
+            },
+            {
+              "key_code": "delete_or_backspace"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "spacebar",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "left_shift",
+                "right_shift",
                 "command",
                 "control"
               ]
@@ -684,6 +717,9 @@
             },
             {
               "key_code": "delete_or_backspace"
+            },
+            {
+              "key_code": "right_arrow"
             }
           ]
         },
