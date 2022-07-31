@@ -95,6 +95,7 @@ set ttimeoutlen=40	" don't wait when switching from insert to esc mode
 " https://github.com/neoclide/coc.nvim
 " https://github.com/svermeulen/vim-subversive
 " https://github.com/svermeulen/vim-cutlass
+" https://github.com/tkhren/vim-textobj-numeral
 " startify
 
 " call plug#end()
