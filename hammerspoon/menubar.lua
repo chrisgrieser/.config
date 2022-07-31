@@ -102,7 +102,7 @@ function updateDraftsMenubar()
 		draftsCounterMenuBar:removeFromMenuBar()
 	else
 		draftsCounterMenuBar:returnToMenuBar()
-		draftsCounterMenuBar:setTitle("🔷 "..numberOfDrafts)
+		draftsCounterMenuBar:setTitle("🟦 "..numberOfDrafts)
 	end
 end
 
