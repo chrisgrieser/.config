@@ -33,6 +33,9 @@ function z () {
 }
 alias zi='__zoxide_zi'
 
+# Cycle through base directories
+
+
 # settings (zshrc)
 alias ,="settings"
 function settings () {
