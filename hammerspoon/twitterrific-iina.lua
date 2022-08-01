@@ -68,7 +68,7 @@ end
 
 -- IINA: Full Screen when on projector
 function iinaLaunch(appName, eventType, appObject)
-	if (eventType == hs.application.watcher.launched) then
+	if (eventType == aw.launched) then
 		if (appName == "IINA") then
 			local isProjector = hs.screen.primaryScreen():name() == "ViewSonic PJ"
 			if isProjector then
@@ -80,7 +80,7 @@ function iinaLaunch(appName, eventType, appObject)
 		end
 	end
 end
-iinaAppLauncher = hs.application.watcher.new(iinaLaunch)
+iinaAppLauncher = aw.new(iinaLaunch)
 iinaAppLauncher:start()
 
 --------------------------------------------------------------------------------
@@ -88,24 +88,30 @@ iinaAppLauncher:start()
 -- open both windows on launch
 -- only active in office & when not using twitterrificScrollUp()
 function twitterificAppActivated(appName, eventType, appObject)
-	if twitterrificScrolling or appName ~= "Twitterrific" then return end
-	if (eventType == hs.application.watcher.launching) then
-		runDelayed(1, function ()
-			twitterrific = hs.application("Twitterrific")
-			if #(twitterrific:allWindows()) > 1 then return end
-			-- switch to list view has (to be done via keystroke, since headless)
-			keystroke({"cmd"}, "T", twitterrific)
-			keystroke({"cmd"}, "5", twitterrific)
-			keystroke({}, "down", twitterrific)
-			keystroke({}, "return", twitterrific)
-		end)
-	elseif (eventType == hs.application.watcher.activated) then
-		appObject:getWindow("@pseudo_meta - List"):raise()
-		appObject:getWindow("@pseudo_meta - Home"):focus()
+	if appName ~= "Twitterrific" or twitterrificScrolling then return end
+
+	if isAtOffice() then
+		if (eventType == aw.launched) then
+			runDelayed(1, function ()
+				twitterrific = hs.application("Twitterrific")
+				-- switch to list view has (to be done via keystroke, since headless)
+				keystroke({"cmd"}, "T", twitterrific)
+				keystroke({"cmd"}, "5", twitterrific)
+				keystroke({}, "down", twitterrific)
+				keystroke({}, "return", twitterrific)
+			end)
+		elseif (eventType == aw.activated) then
+			appObject:getWindow("@pseudo_meta - List"):raise()
+			appObject:getWindow("@pseudo_meta - Home"):focus()
+		end
+
+	elseif isIMacAtHome() and (eventType == aw.launched) then
+		runDelayed(1, twitterrificScrollUp)
 	end
+
 end
 twitterrificScrolling = false
-twitterificAppWatcher = hs.application.watcher.new(twitterificAppActivated)
+twitterificAppWatcher = aw.new(twitterificAppActivated)
 if isAtOffice() then twitterificAppWatcher:start() end
 
 --------------------------------------------------------------------------------
