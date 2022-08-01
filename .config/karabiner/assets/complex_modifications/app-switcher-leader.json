@@ -653,7 +653,7 @@
             },
             {
               "key_code": "vk_none",
-              "hold_down_milliseconds": 150
+              "hold_down_milliseconds": 250
             },
             {
               "key_code": "t",
