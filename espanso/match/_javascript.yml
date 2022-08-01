@@ -13,3 +13,9 @@ matches:
     label: 🏝 Quicker Block
   - replace: "[...new Set(myArray)]"
     label: 🏝 Filter Duplicates / Keep Uniques in Array
+  - trigger: "!capitalize"
+    replace: |
+      String.prototype.capitalizeWords = function () {
+        return this.replace(/\w+/g, word => word.charAt(0).toUpperCase() + word.slice(1));
+      };
+    label: 🏝 Capitalize Words
