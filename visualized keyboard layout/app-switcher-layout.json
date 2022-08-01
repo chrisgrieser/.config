@@ -75,14 +75,11 @@
     },
     "↹",
     {
-      "c": "#CCCCCC",
+      "c": "#FFF9A7",
       "a": 5,
       "f": 2
     },
-    "Q",
-    {
-      "c": "#FFF9A7"
-    },
+    "Q\nScript Editor",
     "W\nWhats-App",
     "E\nSublime",
     "R\nDrafts",
@@ -143,10 +140,10 @@
     },
     "K\nKara-biner",
     "L\nFinder",
-    "Ö\nTwitter-rific",
     {
       "c": "#CCCCCC"
     },
+    "Ö",
     "Ä",
     {
       "c": "#FFF9A7"

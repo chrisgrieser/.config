@@ -82,7 +82,6 @@ end
 -- Redirects FROM File Hub
 function fromFileHub(files)
 	for _,file in pairs(files) do
-
 		if isInSubdirectory(file, fileHub) then return end
 		fileName = file:gsub(".*/","")
 
@@ -92,10 +91,14 @@ function fromFileHub(files)
 					'tell application "Finder" to delete toDelete')
 			end)
 		elseif fileName == "vimium-options.json" then
-			hs.execute("mv -f '"..file.."' \"$HOME/dotfiles/Browser Extension Settings/\"")
+			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/Browser Extension Settings/"')
+		elseif fileName == "keyboard-layout.png" or fileName == "keyboard-layout.json" then
+			hs.execute('mv "'..file..'" "$HOME/dotfiles/visualized keyboard layout/"')
+			hs.execute('open "$HOME/dotfiles/visualized keyboard layout/"')
 		end
 	end
 end
 fileHubWatcher = hs.pathwatcher.new(fileHub, fromFileHub)
 fileHubWatcher:start()
+
 
