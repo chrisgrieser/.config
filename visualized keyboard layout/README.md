@@ -17,6 +17,6 @@ Activated with a single press of `left-ctrl` as leader key, followed by a letter
 ![Hyper Bindings Layout](hyper-bindings-layout.png)
 
 [^1]: Can also be implemented with various other methods; on macOS for example:
-- [using Hyperkey](https://hyperkey.app/)
-- [using BetterTouchTool](https://thesweetsetup.com/macos-hyper-key-bettertouchtool/)
-- [using Hammerspoon (Advanced)](https://evantravers.com/articles/2020/06/08/hammerspoon-a-better-better-hyper-key/)
+	- [using Hyperkey](https://hyperkey.app/)
+	- [using BetterTouchTool](https://thesweetsetup.com/macos-hyper-key-bettertouchtool/)
+	- [using Hammerspoon (Advanced)](https://evantravers.com/articles/2020/06/08/hammerspoon-a-better-better-hyper-key/)
