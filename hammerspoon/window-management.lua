@@ -444,13 +444,13 @@ function controlSpace ()
 	moveResizeCurWin(size)
 end
 
-hotkey(hyper, "Up", function() moveResizeCurWin("up") end)
-hotkey(hyper, "Down", function() moveResizeCurWin("down") end)
-hotkey(hyper, "Right", function() moveResizeCurWin("right") end)
-hotkey(hyper, "Left", function() moveResizeCurWin("left") end)
+hotkey(hyper, "up", function() moveResizeCurWin("up") end)
+hotkey(hyper, "down", function() moveResizeCurWin("down") end)
+hotkey(hyper, "right", function() moveResizeCurWin("right") end)
+hotkey(hyper, "left", function() moveResizeCurWin("left") end)
 hotkey(hyper, "pagedown", moveToOtherDisplay)
 hotkey(hyper, "pageup", moveToOtherDisplay)
-hotkey({"ctrl"}, "Space", controlSpace)
+hotkey({"ctrl"}, "space", controlSpace)
 
 hotkey(hyper, "home", function()
 	if isAtOffice() then officeModeLayout()

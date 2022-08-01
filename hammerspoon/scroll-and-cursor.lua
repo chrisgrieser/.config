@@ -56,24 +56,34 @@ end
 -- when Alacritty activates, hide cursor
 -- when Brave activates and j or k is pressed for the first time, hide cursor
 function hidingCursorInBrowser(key)
-	keystroke({}, key, 1, hs.application("Brave Browser"))
-	pseudoHideCursor()
 	jHidesCursor:disable() -- so it only works the first time
 	kHidesCursor:disable()
+	alfredDisablesJKCursorHider:disable()
+
+	if key == "Alfred" then -- wordaroudn necessary, since Alfred isn't considered a window
+		keystroke({"cmd"}, "space", 1, hs.application("Brave Browser"))
+	else
+		keystroke({}, key, 1, hs.application("Brave Browser"))
+		pseudoHideCursor()
+	end
 end
 jHidesCursor = hotkey({},"j", function() hidingCursorInBrowser("J") end)
 kHidesCursor = hotkey({},"k", function() hidingCursorInBrowser("K") end)
+alfredDisablesJKCursorHider = hotkey({"cmd"}, "space", function() hidingCursorInBrowser("Alfred") end)
 jHidesCursor:disable()
 kHidesCursor:disable()
+alfredDisablesJKCursorHider:disable()
 
 function jkWatcher(appName, eventType)
 	if (eventType == hs.application.watcher.activated) then
 		if (appName == "Brave Browser") then
 			jHidesCursor:enable()
 			kHidesCursor:enable()
+			alfredDisablesJKCursorHider:enable()
 		else
 			jHidesCursor:disable()
 			kHidesCursor:disable()
+			alfredDisablesJKCursorHider:disable()
 		end
 		if (appName:lower() == "alacritty") then
 			local screen = hs.mouse.getCurrentScreen()
