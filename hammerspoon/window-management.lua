@@ -22,7 +22,9 @@ function isPseudoMaximized (win)
 	if not(win) then return false end
 	local max = hs.screen.mainScreen():frame()
 	local dif = win:frame().w - pseudoMaximized.w*max.w
-	return (dif > -15 and dif < 15) -- leeway for some apps
+	local widthOkay = (dif > -15 and dif < 15) -- leeway for some apps
+	local positionOkay = (win:frame().x == 0 and win:frame().y == 0)
+	return widthOkay and positionOkay
 end
 
 function isHalf (win)
