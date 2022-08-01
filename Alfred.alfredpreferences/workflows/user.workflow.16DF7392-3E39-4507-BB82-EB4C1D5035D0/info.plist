@@ -60,6 +60,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CB65D45F-7395-42CF-BAD3-78053CA8C9CF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8156A4E8-CD3A-4F25-B22F-86B73348C077</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D33641C6-9931-4B9A-8E22-E49496723AFD</key>
 		<array>
 			<dict>
@@ -162,54 +175,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>paths</key>
-				<array>
-					<string>/System/Applications/Utilities/Screenshot.app</string>
-				</array>
-				<key>toggle</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.launchfiles</string>
-			<key>uid</key>
-			<string>010166A2-5769-42B4-8975-19AB9F0B46A1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>23</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>5</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>67CDEE43-E332-44C8-A989-E51A7D6EB1E3</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -288,6 +253,108 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/System/Applications/Utilities/Screenshot.app</string>
+				</array>
+				<key>toggle</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>010166A2-5769-42B4-8975-19AB9F0B46A1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>23</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>5</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>67CDEE43-E332-44C8-A989-E51A7D6EB1E3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>79</integer>
+				<key>hotmod</key>
+				<integer>10354688</integer>
+				<key>hotstring</key>
+				<string>F18</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>CB65D45F-7395-42CF-BAD3-78053CA8C9CF</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>tell application "System Events" to key code 53 using {command down, control down}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>8156A4E8-CD3A-4F25-B22F-86B73348C077</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Dependency: Tesseract
@@ -319,7 +386,7 @@ IMAGE_BASE_NAME needs to be `Pasted image ` for the paste image renamer Obsidian
 		<key>67CDEE43-E332-44C8-A989-E51A7D6EB1E3</key>
 		<dict>
 			<key>note</key>
-			<string>Screenshot Options</string>
+			<string>Screenshot Recording</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -329,6 +396,13 @@ IMAGE_BASE_NAME needs to be `Pasted image ` for the paste image renamer Obsidian
 		<dict>
 			<key>note</key>
 			<string>needs tesseract &amp; tesseract-lang</string>
+			<key>xpos</key>
+			<real>730</real>
+			<key>ypos</key>
+			<real>65</real>
+		</dict>
+		<key>8156A4E8-CD3A-4F25-B22F-86B73348C077</key>
+		<dict>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
@@ -352,21 +426,30 @@ Press SPACE to toggle to window capture</string>
 			<key>ypos</key>
 			<real>60</real>
 		</dict>
-		<key>D33641C6-9931-4B9A-8E22-E49496723AFD</key>
+		<key>CB65D45F-7395-42CF-BAD3-78053CA8C9CF</key>
 		<dict>
 			<key>note</key>
-			<string>Screenshot to OCR to Clipboard</string>
+			<string>Stop Recording (Capslock + Esc)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
 			<real>400</real>
 		</dict>
+		<key>D33641C6-9931-4B9A-8E22-E49496723AFD</key>
+		<dict>
+			<key>note</key>
+			<string>Screenshot to OCR to Clipboard</string>
+			<key>xpos</key>
+			<real>555</real>
+			<key>ypos</key>
+			<real>65</real>
+		</dict>
 		<key>E0911C39-BD31-4E5A-813F-15611D205CB6</key>
 		<dict>
 			<key>xpos</key>
-			<real>355</real>
+			<real>880</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>65</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
