@@ -25,30 +25,6 @@ rules:
           - key_code: e
             modifiers:
               - control
-  # - description: "⚒️ R/L-⇧ (tap): go to prev/next word"
-  #   manipulators:
-  #     - type: basic
-  #       from:
-  #         key_code: right_shift
-  #       to:
-  #         - key_code: right_shift
-  #       parameters:
-  #         basic.to_if_alone_timeout_milliseconds: 200
-  #       to_if_alone:
-  #         - key_code: right_arrow
-  #           modifiers:
-  #             - option
-  #     - type: basic
-  #       from:
-  #         key_code: left_shift
-  #       to:
-  #         - key_code: left_shift
-  #       parameters:
-  #         basic.to_if_alone_timeout_milliseconds: 200
-  #       to_if_alone:
-  #         - key_code: left_arrow
-  #           modifiers:
-  #             - option
   - description: "⚒️ {}@^~|: German to US layout"
     manipulators:
       - type: basic
@@ -198,8 +174,32 @@ rules:
         to_after_key_up:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
-  - description: "⚒️ ß´ → [] (+ German to US Layout), ß (hold) → ß"
+  - description: "⚒️ ß´ → [] (+ German to US Layout), ⌥+ß → ß"
     manipulators:
+      # ⌥ß → ß
+      - type: basic
+        from:
+          key_code: hyphen
+          modifiers:
+            mandatory:
+              - option
+        conditions:
+          - type: input_source_if
+            input_sources:
+              - language: ^de$
+          - type: frontmost_application_if
+            file_paths:
+              - alacritty$
+              - ^/System/Applications/Utilities/Terminal.app
+              - ^/Applications/Obsidian\.app
+              - ^/Applications/Sublime Text\.app
+              - ^/Applications/Discord\.app
+              - ^/Applications/Brave Browser\.app
+              - ^/Applications/Hammerspoon\.app
+        to:
+          - key_code: hyphen
+
+      # ß to [
       - type: basic
         from:
           key_code: hyphen
@@ -216,24 +216,17 @@ rules:
               - ^/Applications/Discord\.app
               - ^/Applications/Brave Browser\.app
               - ^/Applications/Hammerspoon\.app
-        to_if_alone:
+        to:
           - select_input_source:
-              input_source_id: ^com\.apple\.keylayout\.US$
-            repeat: false
+            input_source_id: ^com\.apple\.keylayout\.US$
           - key_code: vk_none
-            hold_down_milliseconds: 60
-            repeat: false
+            hold_down_milliseconds: 20
           - key_code: open_bracket
-            repeat: false
-        parameters:
-          basic.to_if_held_down_threshold_milliseconds: 250
-          basic.to_if_alone_timeout_milliseconds: 250
-        to_if_held_down:
-          - key_code: hyphen
-            repeat: false
         to_after_key_up:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+
+      # forward tick to ]
       - type: basic
         from:
           key_code: equal_sign
