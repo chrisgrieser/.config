@@ -73,10 +73,19 @@ end
 systemDlFolderWatcher = hs.pathwatcher.new(systemDownloadFolder, systemDlFolderMove)
 systemDlFolderWatcher:start()
 
+function isInSubdirectory (file, folder) -- (instead of directly in the folder)
+	local _, fileSlashes = file:gsub("/", "")
+	local _, folderSlashes = folder:gsub("/", "")
+	return fileSlashes > folderSlashes
+end
+
 -- Redirects FROM File Hub
 function fromFileHub(files)
 	for _,file in pairs(files) do
+
+		if isInSubdirectory(file, fileHub) then return end
 		fileName = file:gsub(".*/","")
+
 		if fileName:sub(-15) == ".alfredworkflow" or fileName:sub(-4) == ".ics" then
 			runDelayed(3, function ()
 				hs.applescript('set toDelete to "'..file..'" as POSIX file\n'..
