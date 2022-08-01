@@ -538,12 +538,7 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "q",
-            "modifiers": {
-              "mandatory": [
-                "shift"
-              ]
-            }
+            "key_code": "q"
           },
           "conditions": [
             {
