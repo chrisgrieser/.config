@@ -104,7 +104,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>Created by @pseudometa aka [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>37A318E5-64F8-4A6A-8042-5F5C4CEF28D4</key>
@@ -130,6 +130,10 @@
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

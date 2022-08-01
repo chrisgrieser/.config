@@ -574,6 +574,7 @@ wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 	else
 		moveResizeCurWin("pseudo-maximized")
 		runDelayed(0.2, function () moveResizeCurWin("pseudo-maximized") end)
+		runDelayed(0.4, function () moveResizeCurWin("pseudo-maximized") end)
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)

@@ -77,9 +77,9 @@ function highlightsWatcher(appName, eventType)
 		end tell
 	]])
 	if isAtOffice() then
-		runDelayed(0.2, function () moveAndResize("maximized") end)
+		runDelayed(0.2, function () moveResizeCurWin("maximized") end)
 	else
-		runDelayed(0.2, function () moveAndResize("pseudo-maximized") end)
+		runDelayed(0.2, function () moveResizeCurWin("pseudo-maximized") end)
 	end
 end
 highlightsAppWatcher = aw.new(highlightsWatcher)
@@ -141,7 +141,10 @@ youtubeWatcher:start()
 function scriptEditorLaunch (appName, eventType)
 	if not(appName == "Script Editor" and eventType == aw.launched) then return end
 	runDelayed (0.3, function () keystroke({"cmd"}, "n") end)
-	runDelayed (0.6, function () keystroke({"cmd"}, "v") end)
+	runDelayed (0.6, function ()
+		keystroke({"cmd"}, "v")
+		moveResizeCurWin("centered")
+	end)
 	runDelayed (0.9, function () keystroke({"cmd"}, "k") end)
 end
 scriptEditorWatcher = aw.new(scriptEditorLaunch)

@@ -4,7 +4,7 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const alfredMatcher = (str) => str.replace (/[-()_/.]/g, " ") + " " + str + " ";
 
-String.prototype.capitalize = function () {
+String.prototype.capitalizeWords = function () {
 	return this.replace(/\w+/g, word => word.charAt(0).toUpperCase() + word.slice(1));
 };
 
@@ -19,13 +19,13 @@ const workArray = JSON.parse(app.doShellScript('curl -s "https://api.github.com/
 
 		const displayTitle = subsitePath
 			.replace(/.*\//, "") // show only file name
-			.capitalize()
+			.capitalizeWords()
 			.replaceAll("-", " ");
 
 		const category = subsitePath
 			.replace(/(.*)\/.*/, "$1") // only parent
-			.replaceAll ("/", " → ")
-			.capitalize()
+			.replaceAll ("/", " → ") // nicer tree
+			.capitalizeWords()
 			.replaceAll("-", " ");
 
 		return {
