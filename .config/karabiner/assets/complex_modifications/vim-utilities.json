@@ -368,8 +368,46 @@
       ]
     },
     {
-      "description": "⚒️ ß´ → [] (+ German to US Layout), ß (hold) → ß",
+      "description": "⚒️ ß´ → [] (+ German to US Layout), ⌥+ß → ß",
       "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "hyphen",
+            "modifiers": {
+              "mandatory": [
+                "option"
+              ]
+            }
+          },
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "language": "^de$"
+                }
+              ]
+            },
+            {
+              "type": "frontmost_application_if",
+              "file_paths": [
+                "alacritty$",
+                "^/System/Applications/Utilities/Terminal.app",
+                "^/Applications/Obsidian\\.app",
+                "^/Applications/Sublime Text\\.app",
+                "^/Applications/Discord\\.app",
+                "^/Applications/Brave Browser\\.app",
+                "^/Applications/Hammerspoon\\.app"
+              ]
+            }
+          ],
+          "to": [
+            {
+              "key_code": "hyphen"
+            }
+          ]
+        },
         {
           "type": "basic",
           "from": {
@@ -397,31 +435,17 @@
               ]
             }
           ],
-          "to_if_alone": [
+          "to": [
             {
-              "select_input_source": {
-                "input_source_id": "^com\\.apple\\.keylayout\\.US$"
-              },
-              "repeat": false
+              "select_input_source": null,
+              "input_source_id": "^com\\.apple\\.keylayout\\.US$"
             },
             {
               "key_code": "vk_none",
-              "hold_down_milliseconds": 60,
-              "repeat": false
+              "hold_down_milliseconds": 20
             },
             {
-              "key_code": "open_bracket",
-              "repeat": false
-            }
-          ],
-          "parameters": {
-            "basic.to_if_held_down_threshold_milliseconds": 250,
-            "basic.to_if_alone_timeout_milliseconds": 250
-          },
-          "to_if_held_down": [
-            {
-              "key_code": "hyphen",
-              "repeat": false
+              "key_code": "open_bracket"
             }
           ],
           "to_after_key_up": [
