@@ -12,7 +12,7 @@ Activated with a single press of `left-ctrl` as leader key, followed by a letter
 ![App Switcher Layout](app-switcher-layout.png)
 
 ## Hyper Bindings
-`Hyper` is an artificial "fifth" modifier key equivalent to `⌘⌥⌃⇧`. Used for global, system-wide bindings.[^1] 
+`Hyper` is an artificial "fifth" modifier key equivalent to `⌘⌥⌃⇧`, bound to `Caps Lock`. Used for global, system-wide bindings.[^1] 
 
 ![Hyper Bindings Layout](hyper-bindings-layout.png)
 
