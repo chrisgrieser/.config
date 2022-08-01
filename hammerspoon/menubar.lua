@@ -49,7 +49,7 @@ function setCovidBar()
 		covidBar:setTitle("–")
 		return
 	end
-	local nationalNumbers = hs.json.decode(nationalDataJSON)
+	nationalNumbers = hs.json.decode(nationalDataJSON)
 	local national_7D_incidence = math.floor(nationalNumbers.weekIncidence)
 	local nationalR = nationalNumbers.r.rValue7Days.value
 	covidBar:setTitle(covidIcon.." "..national_7D_incidence.." ("..nationalR..")")

@@ -101,7 +101,7 @@ rules:
               text: ""
   - description: 🔺 App Switcher Actions
     manipulators:
-      # Cancel (Esc)
+      # Cancel (Esc/Hyper)
       - type: basic
         description: Leader Cancel
         from:
@@ -117,7 +117,6 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
-      # Cancel (Hyper)
       - type: basic
         description: 'Hyper (Esc): Leader Cancel'
         from:
@@ -281,10 +280,10 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
-      # [S]cript Editor (Shift)
+      # Script Editor [Q]
       - type: basic
         from:
-          key_code: s
+          key_code: q
           modifiers:
             mandatory:
               - shift
@@ -489,24 +488,6 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
-      # [ö] Twitterrific
-      - type: basic
-        description: ö → Twitterific (with scrolling fix)
-        from:
-          key_code: semicolon
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-        to:
-          - shell_command: open -a 'Twitterrific'
-          - key_code: down_arrow
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
       # [P]DF Reader: Highlights
       - type: basic
         from:
@@ -565,25 +546,6 @@ rules:
             value: true
         to:
           - shell_command: open -a 'Color Picker'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      # Better[T]ouchTool (shift)
-      - type: basic
-        from:
-          key_code: t
-          modifiers:
-            mandatory:
-              - shift
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-        to:
-          - shell_command: open -a 'BetterTouchTool'
           - set_variable:
               name: LEADER_ACTIVE
               value: false
