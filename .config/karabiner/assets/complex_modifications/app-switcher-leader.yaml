@@ -284,9 +284,6 @@ rules:
       - type: basic
         from:
           key_code: q
-          modifiers:
-            mandatory:
-              - shift
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
