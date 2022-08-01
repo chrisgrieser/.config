@@ -460,7 +460,6 @@ hotkey(hyper, "home", function()
 	twitterrificScrollUp()
 end)
 
-
 hotkey(hyper, "X", function() vsplit("switch") end)
 hotkey(hyper, "C", function() vsplit("unsplit") end)
 hotkey(hyper, "V", function()
