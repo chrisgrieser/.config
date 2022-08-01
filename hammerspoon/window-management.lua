@@ -136,8 +136,7 @@ function moveResize(win, pos)
 
 	win:moveToUnit(pos)
 	-- has to repeat due to bug for some apps... >:(
-	hs.timer.delayed.new(0.2, function () win:moveToUnit(pos) end):start()
-	hs.timer.delayed.new(0.4, function () win:moveToUnit(pos) end):start()
+	hs.timer.delayed.new(0.3, function () win:moveToUnit(pos) end):start()
 end
 
 --------------------------------------------------------------------------------
@@ -296,7 +295,7 @@ end
 -- SPLITS
 -- gets the Windows on the main screen, in order of the stack
 function mainScreenWindows()
-	local winArr = hs.window.orderedWindows()
+	local wins = hs.window.orderedWindows()
 	local out = {}
 	local j = 1
 	local mainScreen
@@ -304,9 +303,9 @@ function mainScreenWindows()
 	if isIMacAtHome() then mainScreen = iMacDisplay
 	else mainScreen = hs.screen.mainScreen() end
 
-	for i = 1, #winArr do
-		if winArr[i]:screen() == mainScreen and winArr[i]:isStandard() and winArr[i]:isVisible() then
-			out[j] = winArr[i]
+	for i = 1, #wins do
+		if wins[i]:screen() == mainScreen and wins[i]:isStandard() and wins[i]:isVisible() then
+			out[j] = wins[i]
 			j = j+1
 		end
 	end
@@ -482,6 +481,7 @@ end)
 -- BROWSER
 wf_browser = wf.new("Brave Browser"):setOverrideFilter{allowRoles='AXStandardWindow'}
 wf_browser:subscribe(wf.windowCreated, function (newWindow)
+
 	local function isIncognitoWindow(browserWin)
 		if browserWin:title():match("%(Private%)$") then return true
 		else return false end
@@ -571,8 +571,10 @@ wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 	-- https://github.com/sublimehq/sublime_text/issues/5237
 	elseif isAtOffice() then
 		moveResizeCurWin("maximized")
+		runDelayed(0.2, function () moveResizeCurWin("maximized") end)
 	else
 		moveResizeCurWin("pseudo-maximized")
+		runDelayed(0.2, function () moveResizeCurWin("pseudo-maximized") end)
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
