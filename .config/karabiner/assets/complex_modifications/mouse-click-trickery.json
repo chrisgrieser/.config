@@ -61,7 +61,7 @@
       ]
     },
     {
-      "description": "🐁 4 (hold): Look up word under cursor, (tap): mouse4",
+      "description": "🐁 4",
       "manipulators": [
         {
           "type": "basic",
@@ -71,6 +71,16 @@
           "to_if_alone": [
             {
               "pointing_button": "button4"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser$",
+                "^com\\.apple\\.finder$",
+                "^com\\.mimestream\\.Mimestream$"
+              ]
             }
           ],
           "to_if_held_down": [
@@ -83,27 +93,16 @@
             }
           ],
           "parameters": {
-            "basic.to_if_alone_timeout_milliseconds": 300,
-            "basic.to_if_held_down_threshold_milliseconds": 300
-          },
-          "conditions": [
-            {
-              "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^com\\.mimestream\\.Mimestream$",
-                "^com\\.brave\\.Browser$",
-                "^com\\.brave\\.Browser\\.app.\\w+$",
-                "^com\\.apple\\.finder$"
-              ]
-            }
-          ]
+            "basic.to_if_alone_timeout_milliseconds": 250,
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          }
         },
         {
           "type": "basic",
           "from": {
             "pointing_button": "button4"
           },
-          "to": [
+          "to_if_alone": [
             {
               "shell_command": "osascript -e '\n  tell application \"System Events\"\n  tell process \"Brave Browser\"\n    set frontmost to true\n    click menu item \"Back\" of menu \"History\" of menu bar 1\n  end tell\nend tell'\n"
             }
@@ -115,14 +114,27 @@
                 "^com\\.brave\\.Browser$"
               ]
             }
-          ]
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "d",
+              "modifiers": [
+                "command",
+                "control"
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250,
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          }
         },
         {
           "type": "basic",
           "from": {
             "pointing_button": "button4"
           },
-          "to": [
+          "to_if_alone": [
             {
               "key_code": "non_us_pound"
             }
@@ -134,14 +146,27 @@
                 "^com\\.mimestream\\.Mimestream$"
               ]
             }
-          ]
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "d",
+              "modifiers": [
+                "command",
+                "control"
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250,
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          }
         },
         {
           "type": "basic",
           "from": {
             "pointing_button": "button4"
           },
-          "to": [
+          "to_if_alone": [
             {
               "shell_command": "osascript -e '\n  tell application \"System Events\"\n  tell process \"Finder\"\n    set frontmost to true\n    click menu item \"Back\" of menu \"Go\" of menu bar 1\n  end tell\nend tell'\n"
             }
@@ -153,40 +178,25 @@
                 "^com\\.apple\\.finder$"
               ]
             }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "pointing_button": "button4"
-          },
-          "to": [
+          ],
+          "to_if_held_down": [
             {
-              "shell_command": "osascript -e '\n  tell application \"System Events\"\n  tell process \"YouTube\"\n    set frontmost to true\n    click menu item \"Exit Full Screen\" of menu \"View\" of menu bar 1\n  end tell\nend tell'\n"
-            },
-            {
-              "key_code": "g"
-            },
-            {
-              "key_code": "u",
+              "key_code": "d",
               "modifiers": [
-                "shift"
+                "command",
+                "control"
               ]
             }
           ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^com\\.brave\\.Browser\\.app.\\w+$"
-              ]
-            }
-          ]
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250,
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          }
         }
       ]
     },
     {
-      "description": "🐁 5 (hold): search selected text/URL, (tap): mouse5",
+      "description": "🐁 5",
       "manipulators": [
         {
           "type": "basic",
@@ -196,6 +206,17 @@
           "to_if_alone": [
             {
               "pointing_button": "button5"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser$",
+                "^com\\.apple\\.finder$",
+                "^com\\.mimestream\\.Mimestream$",
+                "^com\\.agiletortoise\\.Drafts-OSX$"
+              ]
             }
           ],
           "to_if_held_down": [
@@ -216,23 +237,14 @@
           "parameters": {
             "basic.to_if_alone_timeout_milliseconds": 250,
             "basic.to_if_held_down_threshold_milliseconds": 250
-          },
-          "conditions": [
-            {
-              "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^com\\.brave\\.Browser$",
-                "^com\\.apple\\.finder$"
-              ]
-            }
-          ]
+          }
         },
         {
           "type": "basic",
           "from": {
             "pointing_button": "button5"
           },
-          "to": [
+          "to_if_alone": [
             {
               "key_code": "w",
               "modifiers": [
@@ -245,19 +257,36 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.brave\\.Browser$",
-                "^com\\.apple\\.finder$",
-                "^com\\.agiletortoise\\.Drafts-OSX",
-                "^com\\.mimestream\\.Mimestream$"
+                "^com\\.apple\\.finder$"
               ]
             }
-          ]
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "c",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 75
+            },
+            {
+              "shell_command": "osascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.plain-text-utilities\"'"
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250,
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          }
         },
         {
           "type": "basic",
           "from": {
             "pointing_button": "button5"
           },
-          "to": [
+          "to_if_alone": [
             {
               "key_code": "a",
               "modifiers": [
@@ -273,14 +302,33 @@
                 "^com\\.agiletortoise\\.Drafts-OSX$"
               ]
             }
-          ]
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "c",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 75
+            },
+            {
+              "shell_command": "osascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.plain-text-utilities\"'"
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250,
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          }
         },
         {
           "type": "basic",
           "from": {
             "pointing_button": "button5"
           },
-          "to": [
+          "to_if_alone": [
             {
               "key_code": "e"
             }
@@ -292,7 +340,26 @@
                 "^com\\.mimestream\\.Mimestream$"
               ]
             }
-          ]
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "c",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 75
+            },
+            {
+              "shell_command": "osascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.plain-text-utilities\"'"
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250,
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          }
         }
       ]
     },

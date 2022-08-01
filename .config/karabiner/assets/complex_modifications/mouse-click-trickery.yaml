@@ -4,6 +4,7 @@ maintainers:
   - pseudometa
 import-url: karabiner://karabiner/assets/complex_modifications/import?url=https://github.com/chrisgrieser/dotfiles/blob/main/.config/karabiner/assets/complex_modifications/mouse-click-trickery.json
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
+# Sublime Keymaps for Mouse4 and Mouse5 defined in `Default (OSX).sublime-mousemap`
 rules:
   - description: "🐁 3: Quit app"
     manipulators:
@@ -33,33 +34,34 @@ rules:
               - ^com\.apple\.finder$
               - ^com\.hegenberg\.BetterTouchTool$
               - ^org\.hammerspoon\.Hammerspoon$
-  - description: "🐁 4 (hold): Look up word under cursor, (tap): mouse4"
+  - description: "🐁 4"
     manipulators:
+      # held-down: Dictionary Lookup
       - type: basic
         from:
           pointing_button: button4
         to_if_alone:
           - pointing_button: button4
+        conditions:
+          - type: frontmost_application_unless
+            bundle_identifiers:
+              - ^com\.brave\.Browser$
+              - ^com\.apple\.finder$
+              - ^com\.mimestream\.Mimestream$
         to_if_held_down:
           - key_code: d
             modifiers:
               - command
               - control
         parameters:
-          basic.to_if_alone_timeout_milliseconds: 300
-          basic.to_if_held_down_threshold_milliseconds: 300
-        conditions:
-          - type: frontmost_application_unless # Sublime allows assignment of mouse keys
-            bundle_identifiers:
-             - ^com\.mimestream\.Mimestream$
-             - ^com\.brave\.Browser$
-             - ^com\.brave\.Browser\.app.\w+$ # PWAs
-             - ^com\.apple\.finder$
+          basic.to_if_alone_timeout_milliseconds: 250
+          basic.to_if_held_down_threshold_milliseconds: 250
+
       # Brave: Back
       - type: basic
         from:
           pointing_button: button4
-        to:
+        to_if_alone:
           - shell_command: |
               osascript -e '
                 tell application "System Events"
@@ -72,21 +74,39 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.brave\.Browser$
+        to_if_held_down:
+          - key_code: d
+            modifiers:
+              - command
+              - control
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 250
+          basic.to_if_held_down_threshold_milliseconds: 250
+
       # Mimestream: Delete
       - type: basic
         from:
           pointing_button: button4
-        to:
+        to_if_alone:
           - key_code: non_us_pound # "#"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
+        to_if_held_down:
+          - key_code: d
+            modifiers:
+              - command
+              - control
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 250
+          basic.to_if_held_down_threshold_milliseconds: 250
+
       # Finder: go back
       - type: basic
         from:
           pointing_button: button4
-        to:
+        to_if_alone:
           - shell_command: |
               osascript -e '
                 tell application "System Events"
@@ -99,34 +119,29 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.apple\.finder$
-      # YouTube: Go Home
-      - type: basic
-        from:
-          pointing_button: button4
-        to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events"
-                tell process "YouTube"
-                  set frontmost to true
-                  click menu item "Exit Full Screen" of menu "View" of menu bar 1
-                end tell
-              end tell'
-          - key_code: g # gU defined in Vimium as going to root
-          - key_code: u
+        to_if_held_down:
+          - key_code: d
             modifiers:
-              - shift
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser\.app.\w+$ # PWAs
-  - description: "🐁 5 (hold): search selected text/URL, (tap): mouse5"
+              - command
+              - control
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 250
+          basic.to_if_held_down_threshold_milliseconds: 250
+  - description: "🐁 5"
     manipulators:
+      # held-down: universal-search
       - type: basic
         from:
           pointing_button: button5
         to_if_alone:
           - pointing_button: button5
+        conditions:
+          - type: frontmost_application_unless
+            bundle_identifiers:
+              - ^com\.brave\.Browser$
+              - ^com\.apple\.finder$
+              - ^com\.mimestream\.Mimestream$
+              - ^com\.agiletortoise\.Drafts-OSX$
         to_if_held_down:
           - key_code: c
             modifiers:
@@ -138,31 +153,37 @@ rules:
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
+
+      # close window in Brave & Finder
+      - type: basic
+        from:
+          pointing_button: button5
+        to_if_alone:
+          - key_code: w
+            modifiers:
+              - command
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.brave\.Browser$
               - ^com\.apple\.finder$
-              - ^com\.agiletortoise\.Drafts-OSX
-              - ^com\.mimestream\.Mimestream$
-      # close window in Brave & Finder
-      - type: basic
-        from:
-          pointing_button: button5
-        to:
-          - key_code: w
+        to_if_held_down:
+          - key_code: c
             modifiers:
               - command
-        conditions:
-          - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-              - ^com\.apple\.finder$
+          - key_code: vk_none
+            hold_down_milliseconds: 75
+          - shell_command:
+              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 250
+          basic.to_if_held_down_threshold_milliseconds: 250
+
       # Archive in Drafts
       - type: basic
         from:
           pointing_button: button5
-        to:
+        to_if_alone:
           - key_code: a
             modifiers:
               - command
@@ -171,16 +192,39 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.agiletortoise\.Drafts-OSX$
+        to_if_held_down:
+          - key_code: c
+            modifiers:
+              - command
+          - key_code: vk_none
+            hold_down_milliseconds: 75
+          - shell_command:
+              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 250
+          basic.to_if_held_down_threshold_milliseconds: 250
+
       # Archive in Mimestream
       - type: basic
         from:
           pointing_button: button5
-        to:
+        to_if_alone:
           - key_code: e
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
+        to_if_held_down:
+          - key_code: c
+            modifiers:
+              - command
+          - key_code: vk_none
+            hold_down_milliseconds: 75
+          - shell_command:
+              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 250
+          basic.to_if_held_down_threshold_milliseconds: 250
   - description: "🐁 6: ⌘↹"
     manipulators:
       - type: basic
