@@ -139,10 +139,12 @@ rules:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
         conditions:
-          - type: frontmost_application_unless
+          - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.brave\.Browser$
               - ^com\.apple\.finder$
+              - ^com\.agiletortoise\.Drafts-OSX
+              - ^com\.mimestream\.Mimestream$
       # close window in Brave & Finder
       - type: basic
         from:
@@ -152,12 +154,10 @@ rules:
             modifiers:
               - command
         conditions:
-          - type: frontmost_application_if
+          - type: frontmost_application_unless
             bundle_identifiers:
               - ^com\.brave\.Browser$
               - ^com\.apple\.finder$
-              - ^com\.agiletortoise\.Drafts-OSX
-              - ^com\.mimestream\.Mimestream$
       # Archive in Drafts
       - type: basic
         from:
