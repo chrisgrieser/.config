@@ -60,8 +60,8 @@ function hidingCursorInBrowser(key)
 	kHidesCursor:disable()
 	alfredDisablesJKCursorHider:disable()
 
-	if key == "Alfred" then -- wordaroudn necessary, since Alfred isn't considered a window
-		keystroke({"cmd"}, "space", 1, hs.application("Brave Browser"))
+	if key == "Alfred" then -- wordaround necessary, since Alfred isn't considered a window
+		hs.osascript.applescript('tell application id "com.runningwithcrayons.Alfred" to search ""')
 	else
 		keystroke({}, key, 1, hs.application("Brave Browser"))
 		pseudoHideCursor()

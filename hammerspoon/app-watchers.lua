@@ -104,10 +104,7 @@ draftsWatcher3:start()
 -- MACPASS: properly show when activated
 function macPassActivate(appName, eventType, appObject)
 	if not(appName == "MacPass") or not(eventType == aw.launched) then return end
-
-	runDelayed(0.3, function ()
-		appObject:activate()
-	end)
+	runDelayed(0.3, function () appObject:activate() end)
 end
 macPassWatcher = aw.new(macPassActivate)
 macPassWatcher:start()
