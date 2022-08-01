@@ -10,8 +10,8 @@
 	interactive = auto
 	ui = true
 [core]
-	editor = subl -n -w
-	excludesfile = /Users/chrisgrieser/.gitignore_global
+	editor = subl --new-window --wait
+	excludesfile = /Users/chrisgrieser/.config/git/gitignore_global
 # https://www.git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_formatting_and_whitespace
 	autocrlf = input
 [pager]
