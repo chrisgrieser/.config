@@ -596,6 +596,7 @@ wf_sublime:subscribe(wf.windowDestroyed, function ()
 end)
 wf_sublime:subscribe(wf.windowFocused, function (focusedWin)
 	-- editing command line: paired activation of both windows
+	if not(appIsRunning("alacritty")) then return end
 	local alacrittyWin = hs.application("alacritty"):mainWindow()
 	if focusedWin:title():match("^zsh%w+$") and isHalf(alacrittyWin) then
 		alacrittyWin:raise()

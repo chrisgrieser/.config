@@ -1,0 +1,7 @@
+{
+    "scope": "source.lua",
+    "completions": [
+        "hs.application",
+        "hs.screen.primaryScreen()",
+    ]
+}
