@@ -7,10 +7,9 @@
 # separate config file for it
 # --------------------------------------------------
 
-# prompt in general
 add_newline = false
 continuation_prompt = "❯"
-format = "[$directory${custom.folder_number}${custom.file_number}$git_branch$git_status$git_metrics$git_commit$git_state$sudo](bg:black)[](black)$cmd_duration$status$character"
+format = "[$directory${custom.folder_number}$git_branch$git_status$git_metrics$git_commit$git_state$sudo](bg:black)[](black)$cmd_duration$status$character"
 right_format="$package${custom.alfred}$nodejs$python$jobs$memory_usage"
 
 # ⏼⏻⟐ﰉﰊ
@@ -39,24 +38,17 @@ style = "fg:bright-blue bg:black bold" # terminus different
 format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
+"/dotfiles" = "/ "
 "/Library/Mobile Documents/iCloud~md~obsidian/Documents" = "/ "
 "/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
-"/File Hub" = "/ "
+"/File Hub" = "/柳 "
 "Configs/Alfred.alfredpreferences/workflows" = "AlfredPrefs"
 
-[custom.file_number]
-command = "find . -maxdepth 1 -type f -not -name '.DS_Store' | wc -l"
-when = "true" # run always
-symbol = " "
-description = "Number of files in the current working directory"
-format = '[$symbol$output]($style) '
-style = "fg:yellow bg:black bold" # terminus different
-
 [custom.folder_number]
-command = "find . -maxdepth 1 -type d -not -name '.git' -not -name '.' | wc -l"
+command = "find . -maxdepth 1 -not -name '.git' -not -name '.' -not -name '.DS_Store' | wc -l"
 when = "true"
 symbol = " "
-description = "Number of folders in the current working directory"
+description = "Number of files (and folders) in the current working directory"
 format = '[$symbol$output]($style) '
 style = "fg:yellow bg:black bold" # terminus different
 
