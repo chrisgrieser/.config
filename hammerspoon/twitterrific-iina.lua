@@ -10,7 +10,7 @@ function twitterrificAction (type)
 	elseif type == "thread" then
 		keystroke({}, "left")
 	elseif type == "scrollup" then
-		local previousApp = frontapp():name()
+		local previousApp = frontapp()
 		local prevMousePos = hs.mouse.absolutePosition()
 		local twitterrificWins = twitterrific:allWindows()
 
