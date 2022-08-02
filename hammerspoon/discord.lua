@@ -21,7 +21,7 @@ function discordWatcher(appName, eventType)
 	local clipb = hs.pasteboard.getContents()
 	if not (clipb) then return end
 
-	if eventType == hs.application.watcher.activated then
+	if eventType == aw.activated then
 		local hasURL = clipb:match('^https?:%S+$')
 		local hasObsidianURL = clipb:match('^obsidian:%S+$')
 		if hasURL or hasObsidianURL then
@@ -36,6 +36,6 @@ function discordWatcher(appName, eventType)
 		end
 	end
 end
-discordAppWatcher = hs.application.watcher.new(discordWatcher)
+discordAppWatcher = aw.new(discordWatcher)
 discordAppWatcher:start()
 

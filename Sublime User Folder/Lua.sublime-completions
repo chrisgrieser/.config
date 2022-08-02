@@ -35,6 +35,9 @@
         "hs.mouse.getCurrentScreen()",
         "hs.mouse.setRelativePosition(pos, screen)",
         "hs.pathwatcher.new()",
+        "hs.pasteboard.setContents()",
+        "hs.pasteboard.getContents()",
+        "hs.urlevent.bind(\"foobar\", function)\thammerspoon://foobar",
 
         "hotkey({}, \"\")",
         "keystroke({}, \"\")",
