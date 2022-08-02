@@ -218,7 +218,7 @@ rules:
               - ^/Applications/Hammerspoon\.app
         to:
           - select_input_source:
-            input_source_id: ^com\.apple\.keylayout\.US$
+              input_source_id: ^com\.apple\.keylayout\.US$
           - key_code: vk_none
             hold_down_milliseconds: 20
           - key_code: open_bracket
@@ -226,7 +226,7 @@ rules:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
 
-      # forward tick to ]
+      # forward tick to
       - type: basic
         from:
           key_code: equal_sign

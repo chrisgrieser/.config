@@ -99,7 +99,6 @@ rules:
       to_after_key_up:
         - select_input_source:
             input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
-
   - description: "🔘 ° → \\ (+ US Layout); ⌥^ for ° Symbol"
     manipulators:
       - type: basic
@@ -135,7 +134,6 @@ rules:
           - key_code: non_us_backslash
             modifiers:
               - shift
-
   - description: "🔘1️⃣ One Stroke ^`~ (German Layout)"
     manipulators:
       # backtick
