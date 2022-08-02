@@ -47,7 +47,7 @@ function setCovidBar()
 	_, nationalDataJSON = hs.http.get("https://api.corona-zahlen.org/germany", nil)
 	local nationalNumbers = hs.json.decode(nationalDataJSON)
 	if not(nationalNumbers.weekIncidence) then
-		covidBar:setTitle(covidIcon.." 🚫")
+		covidBar:setTitle(covidIcon.." –")
 		covidBar:setClickCallback(setCovidBar) -- i.e. self-update
 		return
 	end
