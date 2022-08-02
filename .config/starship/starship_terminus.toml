@@ -17,7 +17,7 @@ right_format="$package${custom.alfred}$nodejs$python$jobs$memory_usage"
 [character]
 success_symbol = " [ﰉ ](bold green)"
 error_symbol = " [ ](bold red)" # terminus needs extra space
-vimcmd_symbol = " [ﰊ ](bold blue)"
+vimcmd_symbol = " [ ](bold blue)"
 # https://starship.rs/config/#character
 # those don't work due to upstream zsh bug
 # vimcmd_visual_symbol = " [V](bold blue)"

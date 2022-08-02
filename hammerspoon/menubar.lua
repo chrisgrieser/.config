@@ -44,16 +44,22 @@ weatherTimer:start()
 -- German Covid-Numbers by the RKI → https://api.corona-zahlen.org/docs/
 covidBar = hs.menubar.new()
 function setCovidBar()
-	local _, nationalDataJSON = hs.http.get("https://api.corona-zahlen.org/germany", nil)
+	covidBar:setClickCallback(function ()hs.urlevent.openURL("https://data.lageso.de/lageso/corona/corona.html#start") end)
+
+	_, nationalDataJSON = hs.http.get("https://api.corona-zahlen.org/germany", nil)
 	if not (nationalDataJSON) then
-		covidBar:setTitle("–")
+		covidBar:setTitle(covidIcon.." ".."–")
 		return
 	end
+
 	local nationalNumbers = hs.json.decode(nationalDataJSON)
+	if not(nationalNumbers.weekIncidence) then
+		covidBar:setTitle(covidIcon.." ".."🚫")
+		return
+	end
 	local national_7D_incidence = math.floor(nationalNumbers.weekIncidence)
 	local nationalR = nationalNumbers.r.rValue7Days.value
 	covidBar:setTitle(covidIcon.." "..national_7D_incidence.." ("..nationalR..")")
-	covidBar:setClickCallback(function ()hs.urlevent.openURL("https://data.lageso.de/lageso/corona/corona.html#start") end)
 
 	-- local _, stateDataJSON = hs.http.get("https://api.corona-zahlen.org/states/" .. covidLocationCode, nil)
 	-- if not (stateDataJSON) then
