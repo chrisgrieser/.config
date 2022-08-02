@@ -1,4 +1,8 @@
 [
+  {
+    "name": "vimrc remapping",
+    "author": "pseudometa"
+  },
   [
     {
       "c": "#999999",
@@ -36,20 +40,32 @@
   ],
   [
     {
-      "c": "#CCCCCC",
+      "c": "#fad4d4",
       "a": 5,
       "f": 2
     },
     "^\n=",
     "!\ninsert space",
+    {
+      "c": "#CCCCCC"
+    },
     "\"",
+    {
+      "c": "#fad4d4"
+    },
     "|\ndelete alias",
+    {
+      "c": "#CCCCCC"
+    },
     "$",
     "%",
     "&",
     "/",
     "(",
     ")",
+    {
+      "c": "#fad4d4"
+    },
     "=\n blank above",
     "[\n{",
     "]\n}",
@@ -67,22 +83,40 @@
   ],
   [
     {
-      "c": "#CCCCCC",
+      "c": "#fad4d4",
       "a": 5,
       "f": 2,
       "w": 1.5
     },
     "↹&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;S-↹\n>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<",
     "Q\nleft scroll",
+    {
+      "c": "#CCCCCC"
+    },
     "W",
     "E",
+    {
+      "c": "#fad4d4"
+    },
     "R\nviwp",
+    {
+      "c": "#CCCCCC"
+    },
     "T",
     "Z",
+    {
+      "c": "#fad4d4"
+    },
     "U\nredo",
+    {
+      "c": "#CCCCCC"
+    },
     "I",
     "O",
     "P",
+    {
+      "c": "#fad4d4"
+    },
     "Üü\ncap word ~",
     "+\n*",
     {
@@ -103,23 +137,38 @@
   ],
   [
     {
-      "c": "#CCCCCC",
+      "c": "#fad4d4",
       "a": 5,
       "f": 2,
       "w": 1.75
     },
     "⇪\nEsc",
-    "Aa\nAa",
+    "Aa",
     "Ss\nSneak",
+    {
+      "c": "#CCCCCC"
+    },
     "D",
+    {
+      "n": true
+    },
     "F",
     "G",
+    {
+      "c": "#fad4d4"
+    },
     "H\n0^",
+    {
+      "n": true
+    },
     "J\n6j",
     "K\n6k",
     "L\n$",
     "ö\nxp",
     "ä\n`",
+    {
+      "c": "#CCCCCC"
+    },
     "#",
     {
       "x": 1.25,
@@ -132,6 +181,7 @@
   [
     {
       "c": "#CCCCCC",
+      "f": 7,
       "w": 1.25
     },
     "⇧",
@@ -140,24 +190,47 @@
       "f": 2
     },
     "<",
+    {
+      "c": "#fad4d4"
+    },
     "Y\ny$",
     "X\nrm last char",
-    "Cc\nCc",
+    {
+      "c": "#CCCCCC"
+    },
+    "C",
+    {
+      "c": "#fad4d4"
+    },
     "V\nj (for VV)",
+    {
+      "c": "#CCCCCC"
+    },
     "B",
     "N",
+    {
+      "c": "#fad4d4"
+    },
     "M\nJ",
     ",\nleader",
+    {
+      "c": "#CCCCCC"
+    },
     ".",
+    {
+      "c": "#fad4d4"
+    },
     "-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_\n/&nbsp;&nbsp;&nbsp;blank below",
     {
+      "c": "#CCCCCC",
       "a": 7,
       "f": 7,
       "w": 1.75
     },
     "⇧",
     {
-      "c": "#999999"
+      "c": "#999999",
+      "n": true
     },
     "↑",
     {
@@ -180,7 +253,7 @@
     },
     "⌘",
     {
-      "c": "#CCCCCC",
+      "c": "#fad4d4",
       "a": 5,
       "f": 3,
       "w": 6.25

@@ -1,4 +1,9 @@
 [
+  {
+    "name": "Single Keystroke Bindings",
+    "author": "pseudometa",
+    "pcb": true
+  },
   [
     {
       "c": "#CDFDDC",
@@ -19,13 +24,7 @@
     "F11\nVol. Down",
     "F12\nVol. Up",
     "⌱\nScreen-shot",
-    {
-      "c": "#CCCCCC"
-    },
-    "del",
-    {
-      "c": "#CDFDDC"
-    },
+    "del\nDark Mode",
     "◎\nKeyb. Light"
   ],
   [
@@ -116,9 +115,15 @@
     "A",
     "S",
     "D",
+    {
+      "n": true
+    },
     "F",
     "G",
     "H",
+    {
+      "n": true
+    },
     "J",
     "K",
     "L",
@@ -162,7 +167,8 @@
     {
       "c": "#999999",
       "a": 7,
-      "f": 7
+      "f": 7,
+      "n": true
     },
     "↑",
     {
@@ -170,7 +176,7 @@
       "a": 5,
       "f": 2
     },
-    "end\nDark Mode"
+    "end\nOpen Tweet"
   ],
   [
     {

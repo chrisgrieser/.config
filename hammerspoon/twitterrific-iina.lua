@@ -56,14 +56,18 @@ function homeAction ()
 		twitterrificScrollUp()
 	end
 end
-
 function endAction ()
 	if appIsRunning("zoom.us") then
 		alert("📹/⬛️") -- toggle video
 		keystroke({"shift", "command"}, "V", 1, hs.application("zoom.us"))
 	else
-		hs.application("Twitterrific"):activate()
+		-- open link
+		keystroke({}, "right", 1, hs.application("Twitterrific"))
 	end
+end
+function shiftEndAction ()
+	-- open thread/conversation
+	keystroke({}, "left", 1, hs.application("Twitterrific"))
 end
 
 -- IINA: Full Screen when on projector
@@ -120,4 +124,5 @@ hotkey({}, "pagedown", pagedownAction, nil, pagedownAction)
 hotkey({}, "pageup", pageupAction, nil, pageupAction)
 hotkey({}, "home", homeAction)
 hotkey({}, "end", endAction)
+hotkey({"shift"}, "end", shiftEndAction)
 

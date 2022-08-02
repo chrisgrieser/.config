@@ -92,9 +92,6 @@ function fromFileHub(files)
 			end)
 		elseif fileName == "vimium-options.json" then
 			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/Browser Extension Settings/"')
-		elseif fileName == "keyboard-layout.png" or fileName == "keyboard-layout.json" then
-			hs.execute('mv "'..file..'" "$HOME/dotfiles/visualized keyboard layout/"')
-			hs.execute('open "$HOME/dotfiles/visualized keyboard layout/"')
 		end
 	end
 end
