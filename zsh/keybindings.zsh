@@ -62,7 +62,6 @@ function dir-cycler () {
 		cd "$DOTFILE_FOLDER"
 	else
 		cd "$WD"
-		echo
 	fi
 	zle reset-prompt
 }
