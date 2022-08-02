@@ -48,13 +48,13 @@ function setCovidBar()
 
 	_, nationalDataJSON = hs.http.get("https://api.corona-zahlen.org/germany", nil)
 	if not (nationalDataJSON) then
-		covidBar:setTitle(covidIcon.." ".."–")
+		covidBar:setTitle(covidIcon.." –")
 		return
 	end
 
 	local nationalNumbers = hs.json.decode(nationalDataJSON)
 	if not(nationalNumbers.weekIncidence) then
-		covidBar:setTitle(covidIcon.." ".."🚫")
+		covidBar:setTitle(covidIcon.." 🚫")
 		return
 	end
 	local national_7D_incidence = math.floor(nationalNumbers.weekIncidence)

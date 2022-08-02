@@ -1,4 +1,8 @@
 [
+  {
+    "name": "App Switcher Layout",
+    "author": "pseudometa"
+  },
   [
     {
       "c": "#999999",
@@ -128,11 +132,15 @@
     "A\nAlfred Prefs",
     "S\nSlack",
     "D\nDiscord",
+    {
+      "n": true
+    },
     "F\nF. Mes-senger",
     "G\nGoogle Docs",
     "H\nHammer-spoon",
     {
-      "c": "#CCCCCC"
+      "c": "#CCCCCC",
+      "n": true
     },
     "J",
     {
@@ -197,6 +205,9 @@
       "w": 1.75
     },
     "⇧",
+    {
+      "n": true
+    },
     "↑",
     {
       "f": 4

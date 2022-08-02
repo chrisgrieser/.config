@@ -4,7 +4,7 @@ Created with the fantastic [Keyboard Layout Editor](http://www.keyboard-layout-e
 
 - [App Switcher](#app-switcher)
 - [Hyper Bindings](#hyper-bindings)
-- [Single Keystroke Layout](#single-keystroke-layout)
+- [Single Keystroke Bindings](#single-keystroke-bindings)
 - [vimrc Remappings](#vimrc-remappings)
 - [Base Layout](#base-layout)
 
@@ -20,10 +20,10 @@ Activated with a single press of `left-ctrl` as leader key, followed by a letter
 
 ![Hyper Bindings Layout](hyper-bindings-layout.png)
 
-## Single Keystroke Layout
+## Single Keystroke Bindings
 Since heavily relying and Vim Bindings, the keys at the periphery of the keyboard are practically never used. This enables the remapping of them for specific single keystroke bindings of actions that occur to rarely to justify a center spot in the keyboard, but often enough that they earn a separate key.
 
- ![Single Keystroke Layout](single-keystroke-layout.png)
+ ![Single Keystroke Bindings](single-keystroke-bindings.png)
 
 ## vimrc Remappings
 A summary of the remappings in my `.vimrc`(s).
