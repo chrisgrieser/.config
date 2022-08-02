@@ -29,9 +29,20 @@ export MAGIC_ENTER_OTHER_COMMAND="exa"
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
+export EDITOR='subl --new-window --wait'
 
 # OPTIONS --- (`man zshoptions` to see all options)
 setopt AUTO_CD # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypasting)
 
-export EDITOR='subl --new-window --wait'
+# exa after switching to directory with more than 15 items - https://blog.meain.io/2019/automatically-ls-after-cd/
+function ls_on_cd() {
+	emulate -L zsh
+	[[ $(ls -A | wc -l | tr -d ' ') -gt 15 ]] && return
+
+	# cannot use aliases since emulated zsh
+	exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store --ignore-glob=.git --git-ignore
+}
+if [[ ${chpwd_functions[(r)ls_on_cd]} != "ls_on_cd" ]];then
+	chpwd_functions=(${chpwd_functions[@]} "ls_on_cd")
+fi
