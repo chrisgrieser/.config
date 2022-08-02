@@ -10,7 +10,7 @@ function twitterrificAction (type)
 	elseif type == "thread" then
 		keystroke({}, "left")
 	elseif type == "scrollup" then
-		local previousApp = hs.application.frontmostApplication():name()
+		local previousApp = frontapp():name()
 		local prevMousePos = hs.mouse.absolutePosition()
 		local twitterrificWins = twitterrific:allWindows()
 
@@ -76,9 +76,9 @@ function iinaLaunch(appName, eventType, appObject)
 			local isProjector = hs.screen.primaryScreen():name() == "ViewSonic PJ"
 			if isProjector then
 				-- going full screen apparently needs a small delay
-				hs.timer.delayed.new(0.8, function()
+				runDelayed(0.8, function()
 					appObject:selectMenuItem({"Video", "Enter Full Screen"})
-				end):start()
+				end)
 			end
 		end
 	end
