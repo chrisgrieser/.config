@@ -220,4 +220,4 @@ hs.urlevent.bind("toggle-darkmode", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
-hotkey({}, "end", manualToggleDarkmode)
+hotkey({}, "forwarddelete", manualToggleDarkmode)

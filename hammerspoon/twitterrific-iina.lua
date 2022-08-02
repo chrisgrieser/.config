@@ -57,7 +57,7 @@ function homeAction ()
 	end
 end
 
-function shiftedHomeAction ()
+function endAction ()
 	if appIsRunning("zoom.us") then
 		alert("📹/⬛️") -- toggle video
 		keystroke({"shift", "command"}, "V", 1, hs.application("zoom.us"))
@@ -119,5 +119,5 @@ if isAtOffice() then twitterificAppWatcher:start() end
 hotkey({}, "pagedown", pagedownAction, nil, pagedownAction)
 hotkey({}, "pageup", pageupAction, nil, pageupAction)
 hotkey({}, "home", homeAction)
-hotkey({"shift"}, "home", shiftedHomeAction)
+hotkey({}, "end", endAction)
 
