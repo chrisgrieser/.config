@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>format</key>
-	<string>🎵 %t – %a (%f)</string>
+	<string>🎵 %t – %a  %f</string>
 	<key>vol_increment</key>
-	<string>5</string>
+	<string>7</string>
 </dict>
 </plist>

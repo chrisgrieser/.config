@@ -38,10 +38,10 @@ style = "fg:bright-blue bg:black bold" # terminus different
 format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
-"/dotfiles" = "/ "
 "/Library/Mobile Documents/iCloud~md~obsidian/Documents" = "/ "
 "/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
 "/File Hub" = "/柳 "
+"dotfiles" = " "
 "Configs/Alfred.alfredpreferences/workflows" = "AlfredPrefs"
 
 [custom.folder_number]

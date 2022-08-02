@@ -12,7 +12,9 @@ function cc () {
 # first arg: command
 # second arg: search term
 function man () {
-	if ! which "$1" &> /dev/null; then
+	if ! which alacritty &> /dev/null; then
+		echo "Not using Alacritty." ; return 1
+	elif ! which "$1" &> /dev/null; then
 		echo "Command '$1' not installed." ; return 1
  	fi
 
@@ -20,27 +22,14 @@ function man () {
  	[[ "$(which "$1")" =~ "built-in" ]] && isBuiltIn=true
 
 	# run in subshell to surpress output
-
-	if ! which alacritty &> /dev/null; then
-	 	if [[ $isBuiltIn == true ]] && [[ -z "$2" ]] ; then
-	 		(alacritty --option=window.decorations=full --title="built-in help: $1" --command less /usr/share/zsh/*/help/$1 &)
-	 	elif [[ $isBuiltIn == true ]] && [[ -n "$2" ]] ; then
-	 		(alacritty --option=window.decorations=full --title="built-in help: $1" --command less --pattern=$2 /usr/share/zsh/*/help/$1 &)
-		elif [[ $isBuiltIn == false ]] && [[ -z "$2" ]] ; then
-			(alacritty --option=window.decorations=full --title="man: $1" --command man "$1" &)
-		else
-			(alacritty --option=window.decorations=full --title="man: $1" --command man "$1" -P "/usr/bin/less -is --pattern=$2" &)
-		fi
+ 	if [[ $isBuiltIn == true ]] && [[ -z "$2" ]] ; then
+ 		(alacritty --option=window.decorations=full --title="built-in help: $1" --command less /usr/share/zsh/*/help/$1 &)
+ 	elif [[ $isBuiltIn == true ]] && [[ -n "$2" ]] ; then
+ 		(alacritty --option=window.decorations=full --title="built-in help: $1" --command less --pattern=$2 /usr/share/zsh/*/help/$1 &)
+	elif [[ $isBuiltIn == false ]] && [[ -z "$2" ]] ; then
+		(alacritty --option=window.decorations=full --title="man: $1" --command man "$1" &)
 	else
-		if [[ $isBuiltIn == true ]] && [[ -z "$2" ]] ; then
-			less "/usr/share/zsh/*/help/$1"
-		elif [[ $isBuiltIn == true ]] && [[ -n "$2" ]] ; then
-			less --pattern=$2 "/usr/share/zsh/*/help/$1"
-		elif [[ $isBuiltIn == false ]] && [[ -z "$2" ]] ; then
-			builtin man "$1"
-		else
-			builtin man "$1" -P "/usr/bin/less -is --pattern=$2"
-		fi
+		(alacritty --option=window.decorations=full --title="man: $1" --command man "$1" -P "/usr/bin/less -is --pattern=$2" &)
 	fi
 }
 

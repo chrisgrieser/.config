@@ -14,7 +14,7 @@ alias .="open ."
 alias ..="z .."
 alias ...="z ../.."
 alias ....="z ../../.."
-alias ov='cd "$VAULT_PATH"' # Obsidian Vault
+alias v='cd "$VAULT_PATH"' # Obsidian Vault
 
 # utils
 alias q='exit'
@@ -26,9 +26,10 @@ alias grep='grep --color'
 alias ls='ls -G'
 
 # Safety nets
-alias rm='rm -i'
-alias mv='mv -i'
-alias ln='ln -i'
+alias rm='rm -vI' # -I only asks when more then 3 files are being deleted
+alias mv='mv -vi'
+alias ln='ln -v'
+alias cp='cp -v'
 
 # defaults
 alias which='which -a'
