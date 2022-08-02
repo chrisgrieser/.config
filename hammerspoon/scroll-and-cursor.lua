@@ -75,7 +75,7 @@ kHidesCursor:disable()
 alfredDisablesJKCursorHider:disable()
 
 function jkWatcher(appName, eventType)
-	if (eventType == hs.application.watcher.activated) then
+	if (eventType == aw.activated) then
 		if (appName == "Brave Browser") then
 			jHidesCursor:enable()
 			kHidesCursor:enable()
@@ -95,5 +95,5 @@ function jkWatcher(appName, eventType)
 		end
 	end
 end
-jk_watcher = hs.application.watcher.new(jkWatcher)
+jk_watcher = aw.new(jkWatcher)
 jk_watcher:start()

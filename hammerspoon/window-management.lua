@@ -135,7 +135,6 @@ end
 
 -- replaces `win:moveToUnit(pos)`
 function moveResize(win, pos)
-
 	win:moveToUnit(pos)
 	-- has to repeat due to bug for some apps... >:(
 	hs.timer.delayed.new(0.3, function () win:moveToUnit(pos) end):start()
@@ -476,8 +475,6 @@ end)
 -- APP-SPECIFIC WINDOW BEHAVIOR
 -- - https://www.hammerspoon.org/go/#winfilters
 -- - https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
-
-
 
 -- BROWSER
 wf_browser = wf.new("Brave Browser"):setOverrideFilter{allowRoles='AXStandardWindow'}
