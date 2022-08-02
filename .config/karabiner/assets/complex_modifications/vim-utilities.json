@@ -437,8 +437,9 @@
           ],
           "to": [
             {
-              "select_input_source": null,
-              "input_source_id": "^com\\.apple\\.keylayout\\.US$"
+              "select_input_source": {
+                "input_source_id": "^com\\.apple\\.keylayout\\.US$"
+              }
             },
             {
               "key_code": "vk_none",
