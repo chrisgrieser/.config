@@ -131,9 +131,9 @@ function bi (){
 
 # helper function for `update` and `report`
 function print-section () {
-	echo ""
+	echo
 	echo "$*"
-	echo "---------------"
+	separator
 }
 
 function dump () {

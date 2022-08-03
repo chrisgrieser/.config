@@ -37,10 +37,15 @@ alias mkdir='mkdir -p'
 alias pip="pip3"
 
 # exa
-alias exall='exa --all --long --git --icons --group-directories-first --sort=modified'
+# these two as functions, so they can be called by other functions
+function exa (){
+	command exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
+}
+function exagit (){
+	git status --short; echo; exa --long --grid --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git
+}
+
 alias ll='exa --all --long --git --icons --group-directories-first --sort=modified'
-alias exa='exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store'
-alias exagit='git status --short; echo; exa --long --grid --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git'
 alias tree='exa --tree -L2'
 alias treee='exa --tree -L3'
 alias treeee='exa --tree -L4'

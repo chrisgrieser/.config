@@ -1,11 +1,20 @@
 function runMagicEnter (){
-	if command git rev-parse --is-inside-work-tree &>/dev/null; then
-		"$MAGIC_ENTER_GIT_COMMAND"
+	command git rev-parse --is-inside-work-tree &>/dev/null;
+	if [[ $? -eq 0 ]] ; then
+		exagit
 	else
-		"$MAGIC_ENTER_OTHER_COMMAND"
+		exa
 	fi
 }
 
+function separator (){
+	local SEP=""
+	terminal_width=$(tput cols)
+	for (( i = 0; i < terminal_width; i++ )); do
+		SEP="$SEP─"
+	done
+	echo "$SEP"
+}
 
 # Quick Open File
 # (or change directory if a folder is selected)
