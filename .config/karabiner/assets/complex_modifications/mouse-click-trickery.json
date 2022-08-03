@@ -81,6 +81,79 @@
           "parameters": {
             "basic.to_if_held_down_threshold_milliseconds": 100
           }
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button2"
+          },
+          "to": [
+            {
+              "pointing_button": "button2"
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 10
+            },
+            {
+              "key_code": "o"
+            },
+            {
+              "key_code": "return_or_enter"
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 600
+            },
+            {
+              "key_code": "h",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.agiletortoise\\.Drafts-OSX$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button1",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "pointing_button": "button2"
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 10
+            },
+            {
+              "key_code": "o"
+            },
+            {
+              "key_code": "return_or_enter"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.agiletortoise\\.Drafts-OSX$"
+              ]
+            }
+          ]
         }
       ]
     },
