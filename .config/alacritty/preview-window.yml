@@ -19,9 +19,11 @@ font:
     'y': 3
 cursor:
   style:
-    shape: Beam
-    blinking: Never
     unfocused_hollow: true
+bell:
+  animation: Ease
+  duration: 300
+  color: '#dddddd'
 window:
   decorations: buttonless
   dimensions:
