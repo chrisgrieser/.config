@@ -220,4 +220,5 @@ hs.urlevent.bind("toggle-darkmode", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
-hotkey({}, "forwarddelete", manualToggleDarkmode)
+-- f13 = del (via) karabiner elements
+hotkey({}, "f13", manualToggleDarkmode)
