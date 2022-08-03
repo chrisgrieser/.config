@@ -70,6 +70,9 @@ matches:
     propagate_case: true
   - trigger: msot
     replace: most
+  - trigger: oyu
+    replace: you
+    word: true
   - trigger: mti
     replace: mit
     word: true
