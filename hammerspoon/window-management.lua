@@ -148,6 +148,7 @@ function movieModeLayout()
 	iMacDisplay:setBrightness(0)
 
 	openIfNotRunning("YouTube")
+	openIfNotRunning("BetterTouchTool")
 
 	killIfRunning("Obsidian")
 	killIfRunning("Drafts")
@@ -172,6 +173,7 @@ function homeModeLayout ()
 	openIfNotRunning("Twitterrific")
 	openIfNotRunning("Drafts")
 
+	killIfRunning("BetterTouchTool")
 	killIfRunning("YouTube")
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
