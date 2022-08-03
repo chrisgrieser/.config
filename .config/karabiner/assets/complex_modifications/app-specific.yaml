@@ -303,6 +303,25 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.hnc\.Discord$
+      # emo[o]ji reaction to msg above
+      - type: basic
+        from:
+          key_code: o
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: tab
+          - key_code: vk_none
+            hold_down_milliseconds: 40
+          - key_code: up_arrow
+          - key_code: vk_none
+            hold_down_milliseconds: 40
+          - key_code: close_bracket
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.hnc\.Discord$
       # go 3 up [t]
       - type: basic
         from:
