@@ -403,6 +403,10 @@ rules:
           - key_code: c
             modifiers:
               - command
+          # # to remove file on cutting, uncomment this
+          # - key_code: delete_or_backspace
+          #   modifiers:
+          #     - command
           - set_variable:
               name: CUT_ACTIVE
               value: true
