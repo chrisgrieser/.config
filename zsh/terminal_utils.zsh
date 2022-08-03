@@ -1,3 +1,12 @@
+function runMagicEnter (){
+	if command git rev-parse --is-inside-work-tree &>/dev/null; then
+		"$MAGIC_ENTER_GIT_COMMAND"
+	else
+		"$MAGIC_ENTER_OTHER_COMMAND"
+	fi
+}
+
+
 # Quick Open File
 # (or change directory if a folder is selected)
 function o (){
@@ -5,7 +14,7 @@ function o (){
 
 	# skip `fzf` if file is fully named (e.g. through tab-completion)
 	[[ -f "$INPUT" ]] && { open "$INPUT" ; return }
-	[[ -d "$INPUT" ]] && { z "$INPUT" ; return }
+	[[ -d "$INPUT" ]] && { z "$INPUT" ; runMagicEnter ; return }
 
 	local SELECTED
 	SELECTED=$(fd --hidden | fzf \
@@ -16,13 +25,15 @@ function o (){
 	[[ -z "$SELECTED" ]] && return 130 # abort if no selection
 
 	if [[ -d "$SELECTED" ]] ; then
-		z "$SELECTED" || return 1
+		z "$SELECTED"
+		runMagicEnter
 	else
 		open "$SELECTED"
 	fi
 }
 
 # smarter z/cd
+# (also alternative to https://blog.meain.io/2019/automatically-ls-after-cd/)
 eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
 function z () {
 	if [[ -f  "$1" ]] ; then
@@ -30,8 +41,21 @@ function z () {
 	else
 		__zoxide_z "$1"
 	fi
+	runMagicEnter
 }
-alias zi='__zoxide_zi'
+function zi (){
+	__zoxide_zi &&	runMagicEnter
+}
+
+# exa after switching to directory with more than 15 items -
+function ls_on_cd() {
+	emulate -L zsh
+	[[ $(ls -A | wc -l | tr -d ' ') -lt 15 ]] && exa
+}
+if [[ ${chpwd_functions[(r)ls_on_cd]} != "ls_on_cd" ]];then
+	chpwd_functions=(${chpwd_functions[@]} "ls_on_cd")
+fi
+
 
 # settings (zshrc)
 alias ,="settings"

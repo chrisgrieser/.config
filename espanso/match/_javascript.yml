@@ -2,8 +2,6 @@
 # ------------------------------------------
 
 matches:
-  - replace: const todayISO = (new Date()).toISOString().slice(0,10);
-    label: '🏝 today ISOdate'
   - trigger: "!hr"
     replace: "//------------------------------------------------------------------------------"
   - trigger: ".rr"
@@ -19,3 +17,10 @@ matches:
         return this.replace(/\w+/g, word => word.charAt(0).toUpperCase() + word.slice(1));
       };
     label: 🏝 Capitalize Words
+  - replace: |
+      function toIso8601 (date: Date): string {
+        return date
+          .toLocaleString("en-GB")
+          .replace(/(\d{2})\/(\d{2})\/(\d{4}).*/, "$3-$2-$1");
+      }
+    label: 🏝 Date → ISO-8601-string
