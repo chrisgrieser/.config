@@ -434,7 +434,7 @@
       ]
     },
     {
-      "description": "🅰️💬 Discord: Various Hotkeys",
+      "description": "🅰️💬 Discord",
       "manipulators": [
         {
           "type": "basic",
@@ -736,6 +736,30 @@
               "bundle_identifiers": [
                 "^com\\.hnc\\.Discord$"
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "🅰️📂 Finder",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "command",
+                "shift",
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open \"$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/\""
             }
           ]
         }

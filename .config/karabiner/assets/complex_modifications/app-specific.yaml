@@ -214,7 +214,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^org\.hammerspoon\.Hammerspoon$
-  - description: "🅰️💬 Discord: Various Hotkeys"
+  - description: "🅰️💬 Discord"
     manipulators:
       # ctrl-h & ctrl-l to go back / forward a channel
       # to circumvent Discord's weird keybindings, which seem to capture things
@@ -378,3 +378,55 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.hnc\.Discord$
+  - description: "🅰️📂 Finder"
+    manipulators:
+      # Hyper-F: Open $WD
+      - type: basic
+        from:
+          key_code: f
+          modifiers:
+            mandatory:
+              - control
+              - command
+              - shift
+              - option
+        to:
+          - shell_command: open "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+      # Cut & Paste Workaround
+      - type: basic
+        from:
+          key_code: x
+          modifiers:
+            mandatory:
+              - command
+        conditions:
+          - type: variable_unless
+            name: CUT_ACTIVE
+            value: true
+        to:
+          - key_code: c
+            modifiers:
+              - command
+          - set_variable:
+              name: CUT_ACTIVE
+              value: true
+          - set_notification_message:
+              id: cut-notice
+              text: "✂️ Cut"
+      - type: basic
+        from:
+          key_code: v
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: v
+            modifiers:
+              - command
+              - option
+          - set_variable:
+              name: CUT_ACTIVE
+              value: false
+          - set_notification_message:
+              id: cut-notice
+              text: ""

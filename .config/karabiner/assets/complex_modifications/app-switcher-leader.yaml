@@ -369,25 +369,6 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
-      # Open default [L]ocation with Finder
-      - type: basic
-        from:
-          key_code: l
-          modifiers:
-            mandatory:
-              - shift
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-        to:
-          - shell_command: open "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
       # [H]ammerspoon
       - type: basic
         from:

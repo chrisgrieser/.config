@@ -60,6 +60,7 @@ zle -N quote-all-args
 function dir-cycler () {
 	if [[ "$PWD" == "$WD" ]]; then
 		cd "$DOTFILE_FOLDER"
+		echo
 	else
 		cd "$WD"
 	fi
