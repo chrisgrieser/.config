@@ -1,5 +1,7 @@
 require("utils")
 
+highlightsScrollAmount = 20
+
 --------------------------------------------------------------------------------
 -- global pageup/dwon keys
 -- have to be done here, since when send from Karabiner, gets caught by the
@@ -39,7 +41,6 @@ hotkey({"alt"}, "K", scrollUp, nil, scrollUp)
 --------------------------------------------------------------------------------
 
 -- HIGHLIGHTS Scroll
-highlightsScrollAmount = 16
 function highlightsAppScroll (amount)
 		local highlightsWin = hs.application("Highlights"):mainWindow():frame()
 		local centerPos = {
