@@ -5,18 +5,12 @@ rules:
     manipulators:
       - type: basic
         from:
-          key_code:
+          key_code: delete_or_backspace
           modifiers:
             mandatory:
-              - command
-        to:
-          - key_code: right_arrow
-            modifiers:
-              - option
-          - key_code: left_arrow
-            modifiers:
-              - option
               - shift
+        to:
+          - key_code: delete_forward
   - description: '🔘 ⌘+J → Expand Word'
     manipulators:
       - type: basic

@@ -3,6 +3,27 @@
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
+      "description": "🔘 ⇧+⌫ → ⌦ ",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "delete_or_backspace",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_forward"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "description": "🔘 ⌘+J → Expand Word",
       "manipulators": [
         {
