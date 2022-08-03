@@ -31,6 +31,7 @@ function setWeather()
 	local _, weather = hs.http.get("https://wttr.in/" .. weatherLocation .. "?format=1", nil)
 	if not(weather) or weather:find("Unknown") then
 		weatherStatusBar:setTitle("🌦 –")
+		weatherStatusBar:setClickCallback(setWeather) -- i.e. self-update
 		return
 	end
 	weather = (trim(weather)):gsub("+", "")
@@ -44,7 +45,7 @@ weatherTimer:start()
 -- German Covid-Numbers by the RKI → https://api.corona-zahlen.org/docs/
 covidBar = hs.menubar.new()
 function setCovidBar()
-	_, nationalDataJSON = hs.http.get("https://api.corona-zahlen.org/germany", nil)
+	local _, nationalDataJSON = hs.http.get("https://api.corona-zahlen.org/germany", nil)
 	local nationalNumbers = hs.json.decode(nationalDataJSON)
 	if not(nationalNumbers.weekIncidence) then
 		covidBar:setTitle(covidIcon.." –")
