@@ -107,6 +107,10 @@ cursor:
   vi_mode_style:
     shape: Underline
 live_config_reload: true
+bell:
+  animation: Ease
+  duration: 300
+  color: '#dddddd'
 selection:
   save_to_clipboard: true
 key_bindings:

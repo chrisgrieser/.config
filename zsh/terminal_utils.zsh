@@ -7,6 +7,7 @@ function runMagicEnter (){
 	fi
 }
 
+# draws a separator line with terminal width
 function separator (){
 	local SEP=""
 	terminal_width=$(tput cols)
@@ -145,11 +146,6 @@ function lr (){
 	echo -n "$(eval "$last_command")" | pbcopy
 	echo "Copied."
 }
-
-function view () {
-	qlmanage -p "$*" &> /dev/null
-}
-
 # extract function
 ex () {
 	if [[ -f $1 ]] ; then

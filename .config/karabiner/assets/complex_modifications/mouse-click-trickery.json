@@ -38,7 +38,7 @@
             }
           ],
           "parameters": {
-            "basic.to_if_held_down_threshold_milliseconds": 100
+            "basic.to_if_held_down_threshold_milliseconds": 300
           }
         },
         {
@@ -79,7 +79,7 @@
             }
           ],
           "parameters": {
-            "basic.to_if_held_down_threshold_milliseconds": 100
+            "basic.to_if_held_down_threshold_milliseconds": 300
           }
         },
         {
