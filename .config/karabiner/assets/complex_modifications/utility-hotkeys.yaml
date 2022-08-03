@@ -1,6 +1,22 @@
 title: 🔘 Utility Shortcuts
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
+  - description: '🔘 ⇧+⌫ → ⌦ '
+    manipulators:
+      - type: basic
+        from:
+          key_code:
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: right_arrow
+            modifiers:
+              - option
+          - key_code: left_arrow
+            modifiers:
+              - option
+              - shift
   - description: '🔘 ⌘+J → Expand Word'
     manipulators:
       - type: basic
