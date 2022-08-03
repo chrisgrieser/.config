@@ -35,6 +35,7 @@ alias cp='cp -v'
 alias which='which -a'
 alias mkdir='mkdir -p'
 alias pip="pip3"
+alias curl="curl -s"
 
 # exa
 # these two as functions, so they can be called by other functions
