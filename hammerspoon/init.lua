@@ -26,11 +26,11 @@ require("discord")
 require("twitterrific-iina")
 
 --------------------------------------------------------------------------------
+reloadAllMenubarItems()
+gitDotfileSync("wake")
 notify("Config reloaded")
 
 -- Startup
-reloadAllMenubarItems()
-gitDotfileSync("wake")
 if isAtOffice() then systemWake() end
 
 
