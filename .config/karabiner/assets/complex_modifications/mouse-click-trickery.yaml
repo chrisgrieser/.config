@@ -25,8 +25,7 @@ rules:
               - ^com\.brave\.Browser$
               - ^com\.apple\.Safari$
         parameters:
-          # very short, so mouse gestures requiring held right button still work
-          basic.to_if_held_down_threshold_milliseconds: 30
+          basic.to_if_held_down_threshold_milliseconds: 100
       - type: basic
         from:
           pointing_button: button2
@@ -50,8 +49,7 @@ rules:
               - ^com\.brave\.Browser.+$
               - ^com\.mimestream\.Mimestream$
         parameters:
-          # very short, so mouse gestures requiring held right button still work
-          basic.to_if_held_down_threshold_milliseconds: 30
+          basic.to_if_held_down_threshold_milliseconds: 100
   - description: "🐁 3: Quit app"
     manipulators:
       - type: basic

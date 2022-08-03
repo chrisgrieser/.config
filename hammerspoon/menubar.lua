@@ -30,7 +30,7 @@ weatherStatusBar = hs.menubar.new()
 function setWeather()
 	local _, weather = hs.http.get("https://wttr.in/" .. weatherLocation .. "?format=1", nil)
 	if not(weather) or weather:find("Unknown") then
-		weatherStatusBar:setTitle("–")
+		weatherStatusBar:setTitle("🌦 –")
 		return
 	end
 	weather = (trim(weather)):gsub("+", "")

@@ -792,6 +792,14 @@
                 "text": "✂️ Cut"
               }
             }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            }
           ]
         },
         {
@@ -809,6 +817,12 @@
               "type": "variable_if",
               "name": "CUT_ACTIVE",
               "value": true
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
             }
           ],
           "to": [
@@ -836,6 +850,39 @@
         {
           "type": "basic",
           "from": {
+            "key_code": "caps_lock"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "CUT_ACTIVE",
+              "value": true
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            }
+          ],
+          "to": [
+            {
+              "set_variable": {
+                "name": "CUT_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "cut-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
             "key_code": "escape"
           },
           "conditions": [
@@ -843,6 +890,12 @@
               "type": "variable_if",
               "name": "CUT_ACTIVE",
               "value": true
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
             }
           ],
           "to": [
