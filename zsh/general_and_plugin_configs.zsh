@@ -38,8 +38,7 @@ setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypast
 # exa after switching to directory with more than 15 items - https://blog.meain.io/2019/automatically-ls-after-cd/
 function ls_on_cd() {
 	emulate -L zsh
-	[[ $(ls -A | wc -l | tr -d ' ') -gt 15 ]] && return
-	exa
+	[[ $(ls -A | wc -l | tr -d ' ') -lt 15 ]] && exa
 }
 if [[ ${chpwd_functions[(r)ls_on_cd]} != "ls_on_cd" ]];then
 	chpwd_functions=(${chpwd_functions[@]} "ls_on_cd")

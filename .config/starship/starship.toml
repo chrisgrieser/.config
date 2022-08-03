@@ -40,7 +40,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 [directory.substitutions]
 "/Library/Mobile Documents/iCloud~md~obsidian/Documents" = "/ "
 "/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
-"/File Hub" = "/柳 "
+"/File Hub" = "/柳"
 "dotfiles" = " "
 "Configs/Alfred.alfredpreferences/workflows" = "AlfredPrefs"
 
