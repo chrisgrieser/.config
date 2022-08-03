@@ -399,10 +399,6 @@ rules:
           modifiers:
             mandatory:
               - command
-        conditions:
-          - type: variable_unless
-            name: CUT_ACTIVE
-            value: true
         to:
           - key_code: c
             modifiers:
@@ -419,11 +415,29 @@ rules:
           modifiers:
             mandatory:
               - command
+        conditions:
+          - type: variable_if
+            name: CUT_ACTIVE
+            value: true
         to:
           - key_code: v
             modifiers:
               - command
               - option
+          - set_variable:
+              name: CUT_ACTIVE
+              value: false
+          - set_notification_message:
+              id: cut-notice
+              text: ""
+      - type: basic
+        from:
+          key_code: escape
+        conditions:
+          - type: variable_if
+            name: CUT_ACTIVE
+            value: true
+        to:
           - set_variable:
               name: CUT_ACTIVE
               value: false
