@@ -437,6 +437,7 @@ rules:
           - set_notification_message:
               id: cut-notice
               text: ""
+      # Abort with Hyper/Esc
       - type: basic
         from:
           key_code: caps_lock
@@ -465,6 +466,30 @@ rules:
             bundle_identifiers:
               - ^com\.apple\.finder$
         to:
+          - set_variable:
+              name: CUT_ACTIVE
+              value: false
+          - set_notification_message:
+              id: cut-notice
+              text: ""
+      # Abort when deciding to copy instead
+      - type: basic
+        from:
+          key_code: c
+          modifiers:
+            mandatory:
+              - command
+        conditions:
+          - type: variable_if
+            name: CUT_ACTIVE
+            value: true
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.apple\.finder$
+        to:
+          - key_code: c
+            modifiers:
+              - command
           - set_variable:
               name: CUT_ACTIVE
               value: false
