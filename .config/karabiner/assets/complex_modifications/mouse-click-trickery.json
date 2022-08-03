@@ -229,7 +229,8 @@
               "bundle_identifiers": [
                 "^com\\.brave\\.Browser$",
                 "^com\\.apple\\.finder$",
-                "^com\\.mimestream\\.Mimestream$"
+                "^com\\.mimestream\\.Mimestream$",
+                "^net\\.highlightsapp\\.universal$"
               ]
             }
           ],
@@ -318,6 +319,49 @@
           },
           "to_if_alone": [
             {
+              "key_code": "n",
+              "modifiers": [
+                "command",
+                "control"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^net\\.highlightsapp\\.universal$"
+              ]
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "d",
+              "modifiers": [
+                "command",
+                "control"
+              ]
+            },
+            {
+              "key_code": "3",
+              "modifiers": [
+                "command",
+                "control"
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250,
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          }
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to_if_alone": [
+            {
               "shell_command": "osascript -e '\n  tell application \"System Events\"\n  tell process \"Finder\"\n    set frontmost to true\n    click menu item \"Back\" of menu \"Go\" of menu bar 1\n  end tell\nend tell'\n"
             }
           ],
@@ -365,7 +409,8 @@
                 "^com\\.brave\\.Browser$",
                 "^com\\.apple\\.finder$",
                 "^com\\.mimestream\\.Mimestream$",
-                "^com\\.agiletortoise\\.Drafts-OSX$"
+                "^com\\.agiletortoise\\.Drafts-OSX$",
+                "^net\\.highlightsapp\\.universal$"
               ]
             }
           ],
@@ -450,6 +495,55 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.agiletortoise\\.Drafts-OSX$"
+              ]
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "key_code": "c",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 75
+            },
+            {
+              "shell_command": "osascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.plain-text-utilities\"'"
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250,
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          }
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button5"
+          },
+          "to_if_alone": [
+            {
+              "key_code": "h",
+              "modifiers": [
+                "command",
+                "control"
+              ]
+            },
+            {
+              "key_code": "3",
+              "modifiers": [
+                "command",
+                "control"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^net\\.highlightsapp\\.universal$"
               ]
             }
           ],
