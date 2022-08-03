@@ -38,7 +38,7 @@
 	<key>ignoreConcealed</key>
 	<false/>
 	<key>persistFor</key>
-	<integer>2</integer>
+	<integer>3</integer>
 	<key>snipKeywordRestoreClipboard</key>
 	<true/>
 	<key>snippetKeyword</key>

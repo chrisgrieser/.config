@@ -148,13 +148,9 @@
     "S\nSave in Scratch.",
     "D\nSave in Drafts",
     {
-      "c": "#CCCCCC",
       "n": true
     },
-    "F",
-    {
-      "c": "#AAB7FF"
-    },
+    "F\nopen \"$WD\"",
     "G\nGoogle Selecti.",
     "H\n←",
     {

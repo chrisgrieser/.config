@@ -6,6 +6,52 @@ import-url: karabiner://karabiner/assets/complex_modifications/import?url=https:
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 # Sublime Keymaps for Mouse4 and Mouse5 defined in `Default (OSX).sublime-mousemap`
 rules:
+  - description: "🐁 R (tap): Open link in background (when in Browser)"
+    # this basically emulations the "Right-Click Open Link in new Background tab" Chrome extension
+    manipulators:
+      - type: basic
+        from:
+          pointing_button: button2
+        to_if_held_down:
+          - pointing_button: button2
+        to:
+          - pointing_button: button3
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.vivaldi\.Vivaldi$
+              - ^org\.chromium\.Chromium$
+              - ^com\.google\.Chrome$
+              - ^com\.brave\.Browser$
+              - ^com\.apple\.Safari$
+        parameters:
+          # very short, so mouse gestures requiring held right button still work
+          basic.to_if_held_down_threshold_milliseconds: 30
+      - type: basic
+        from:
+          pointing_button: button2
+        to_if_held_down:
+          - pointing_button: button2
+        to:
+          # workaround necessary, cause opening links in background in *to* Chromium buggy
+          - pointing_button: button3
+          - key_code: vk_none
+            hold_down_milliseconds: 200
+          - key_code: h
+            modifiers:
+              - command
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              # .+ so that the browser isn't matched, but PWAs are
+              - ^com\.vivaldi\.Vivaldi.+$
+              - ^org\.chromium\.Chromium.+$
+              - ^com\.google\.Chrome.+$
+              - ^com\.brave\.Browser.+$
+              - ^com\.mimestream\.Mimestream$
+        parameters:
+          # very short, so mouse gestures requiring held right button still work
+          basic.to_if_held_down_threshold_milliseconds: 30
   - description: "🐁 3: Quit app"
     manipulators:
       - type: basic

@@ -762,6 +762,103 @@
               "shell_command": "open \"$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/\""
             }
           ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "x",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "c",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "CUT_ACTIVE",
+                "value": true
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "cut-notice",
+                "text": "✂️ Cut"
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "v",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "CUT_ACTIVE",
+              "value": true
+            }
+          ],
+          "to": [
+            {
+              "key_code": "v",
+              "modifiers": [
+                "command",
+                "option"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "CUT_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "cut-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "escape"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "CUT_ACTIVE",
+              "value": true
+            }
+          ],
+          "to": [
+            {
+              "set_variable": {
+                "name": "CUT_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "cut-notice",
+                "text": ""
+              }
+            }
+          ]
         }
       ]
     }
