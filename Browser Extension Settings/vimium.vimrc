@@ -7,7 +7,7 @@ map wv moveTabToNewWindow
 map ww closeOtherTabs
 map u removeTab
 map x removeTab
-map U restoreTab
+map z restoreTab
 map W removeTab count=19
 map T Vomnibar.activateTabSelection
 map b previousTab
