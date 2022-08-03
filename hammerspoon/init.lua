@@ -27,8 +27,8 @@ require("twitterrific-iina")
 
 --------------------------------------------------------------------------------
 -- Startup
-reloadAllMenubarItems()
 gitDotfileSync("wake")
+reloadAllMenubarItems()
 if isAtOffice() then systemWake() end
 
 notify("Config reloaded")

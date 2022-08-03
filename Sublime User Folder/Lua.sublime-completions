@@ -28,6 +28,7 @@
         ":setOverrideFilter()\twindow filters",
         ":returnToMenuBar()\ths.menubar",
         ":removeFromMenuBar()\ths.menubar",
+        ":setClickCallback()\ths.menubar",
         ":setTitle(\"\")\ths.menubar",
         "hs.timer.localTime()\tin seconds since midnight",
         "hs.urlevent.openURL(\"\")",
@@ -37,7 +38,9 @@
         "hs.pathwatcher.new()",
         "hs.pasteboard.setContents()",
         "hs.pasteboard.getContents()",
-        "hs.urlevent.bind(\"foobar\", function)\thammerspoon://foobar",
+        "hs.json.decode()",
+        "hs.http.get()\tcurl equivalent",
+        "hs.urlevent.bind(\"foobar\", function)\t→ hammerspoon://foobar",
 
         "hotkey({}, \"\")",
         "keystroke({}, \"\")",
