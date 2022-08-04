@@ -1,0 +1,20 @@
+* {
+	font-size: 27pt;
+}
+
+th {
+	font-size: 20pt;
+}
+
+.statusbar {
+	font-size: 20pt;
+}
+
+.quicksearch-query,
+.quicksearch-item-title {
+	font-size: 20pt;
+}
+
+.quicksearch-item-hint {
+	font-size: 22pt;
+}
