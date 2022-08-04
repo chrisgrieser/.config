@@ -319,28 +319,20 @@ end
 splitStatusMenubar = hs.menubar.new()
 splitStatusMenubar:removeFromMenuBar() -- hide at beginning
 function pairedActivation(start)
-	if start then
-		pairedWinWatcher = aw.new(function (_, eventType)
-			-- if one of the two is activated, also activate the other
-			local currentWindow = hs.window.focusedWindow()
-			if eventType == aw.activated and currentWindow then
-				if currentWindow:id() == SPLIT_RIGHT:id() then SPLIT_LEFT:raise() -- not using :focus(), since that causes infinite recursion
-				elseif currentWindow:id() == SPLIT_LEFT:id() then SPLIT_RIGHT:raise() end
-			-- unsplit if one of the two apps has been terminated
-			elseif eventType == aw.terminated and (not SPLIT_LEFT:application() or not SPLIT_RIGHT:application()) then
-				vsplit("unsplit")
-			end
-		end)
-		pairedWinWatcher:start()
-		splitStatusMenubar:returnToMenuBar()
-		splitStatusMenubar:setTitle("2️⃣")
-	end
-
-	-- end the paired activation
-	if not (start) then
-		pairedWinWatcher:stop()
-		splitStatusMenubar:removeFromMenuBar()
-	end
+	pairedWinWatcher = aw.new(function (_, eventType)
+		-- if one of the two is activated, also activate the other
+		local currentWindow = hs.window.focusedWindow()
+		if eventType == aw.activated and currentWindow then
+			if currentWindow:id() == SPLIT_RIGHT:id() then SPLIT_LEFT:raise() -- not using :focus(), since that causes infinite recursion
+			elseif currentWindow:id() == SPLIT_LEFT:id() then SPLIT_RIGHT:raise() end
+		-- unsplit if one of the two apps has been terminated
+		elseif eventType == aw.terminated and (not SPLIT_LEFT:application() or not SPLIT_RIGHT:application()) then
+			vsplit("unsplit")
+		end
+	end)
+	pairedWinWatcher:start()
+	splitStatusMenubar:returnToMenuBar()
+	splitStatusMenubar:setTitle("2️⃣")
 end
 
 function vsplit (mode)
@@ -380,6 +372,8 @@ function vsplit (mode)
 		pairedActivation(false)
 		f1 = baseLayout
 		f2 = baseLayout
+		pairedWinWatcher:stop()
+		splitStatusMenubar:removeFromMenuBar()
 	elseif mode == "switch" then
 		if (f1.w == f2.w) then
 			f1 = hs.layout.right50
@@ -394,12 +388,18 @@ function vsplit (mode)
 	moveResize(SPLIT_LEFT, f2)
 	SPLIT_RIGHT:raise()
 	SPLIT_LEFT:raise()
-	if SPLIT_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(SPLIT_RIGHT)
-	elseif SPLIT_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(SPLIT_LEFT) end
-	if SPLIT_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(SPLIT_RIGHT)
-	elseif SPLIT_LEFT:application():name() == "Obsidian" then toggleObsidianSidebar(SPLIT_LEFT) end
-	if SPLIT_RIGHT:application():name() == "Highlights" then toggleHighlightsSidebar(SPLIT_RIGHT)
-	elseif SPLIT_LEFT:application():name() == "Highlights" then toggleHighlightsSidebar(SPLIT_LEFT) end
+	if SPLIT_RIGHT:application() then
+		if SPLIT_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(SPLIT_RIGHT)
+		elseif SPLIT_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(SPLIT_RIGHT)
+		elseif SPLIT_RIGHT:application():name() == "Highlights" then toggleHighlightsSidebar(SPLIT_RIGHT)
+		end
+	end
+	if SPLIT_LEFT:application() then
+		if SPLIT_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(SPLIT_LEFT)
+		elseif SPLIT_LEFT:application():name() == "Obsidian" then toggleObsidianSidebar(SPLIT_LEFT)
+		elseif SPLIT_LEFT:application():name() == "Highlights" then toggleHighlightsSidebar(SPLIT_LEFT)
+		end
+	end
 
 	if mode == "unsplit" then
 		SPLIT_RIGHT = nil
