@@ -124,7 +124,7 @@ biiweeklyTimer = hs.timer.doAt("02:00", "03d", function()
 			run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles" with argument "no sound"
 		end tell
 	]])
-	log ("2️⃣ biweekly ("..deviceName()..")", "./logs/some.log")
+	log ("🕝2️⃣ biweekly ("..deviceName()..")", "./logs/some.log")
 end, true)
 
 catchTimer = hs.timer.doAt("02:00", "12h", function()
@@ -133,9 +133,8 @@ catchTimer = hs.timer.doAt("02:00", "12h", function()
 	log ("🫴 Catch Torrents ("..deviceName()..")", "./logs/some.log")
 end, true)
 
-dailyEveningTimer = hs.timer.doAt("21:00", "24h", function ()
+dailyEveningTimer = hs.timer.doAt("21:00", "01d", function ()
 	setDarkmode(false)
-	log ("🕑🫴 Catch Torrents ("..deviceName()..")", "./logs/some.log")
 end)
 
 function projectorScreensaverStop (eventType)
