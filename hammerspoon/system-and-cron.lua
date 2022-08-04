@@ -64,7 +64,7 @@ function systemWake (eventType)
 
 	-- set light mode if waking between 6:00 and 19:00
 	local currentTimeHours = hs.timer.localTime() / 60 / 60
-	if currentTimeHours < 19 and currentTimeHours > 6 then
+	if currentTimeHours < 20 and currentTimeHours > 6 then
 		setDarkmode(false)
 	else
 		setDarkmode(true)
@@ -134,7 +134,7 @@ catchTimer = hs.timer.doAt("02:00", "12h", function()
 end, true)
 
 dailyEveningTimer = hs.timer.doAt("21:00", "01d", function ()
-	setDarkmode(false)
+	setDarkmode(true)
 end)
 
 function projectorScreensaverStop (eventType)
