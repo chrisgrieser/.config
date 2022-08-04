@@ -1,5 +1,6 @@
 * {
 	font-size: 27pt;
+	background: #555555 !important;
 }
 
 th {
@@ -17,4 +18,10 @@ th {
 
 .quicksearch-item-hint {
 	font-size: 22pt;
+}
+
+
+
+.QTableView {
+	alternate-background-color: #293024;
 }
