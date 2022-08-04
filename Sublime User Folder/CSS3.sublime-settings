@@ -8,6 +8,6 @@
 	"auto_complete_use_history": false,
 	"auto_complete_use_index": false,
 
-	"extensions": ["css", "scss"],
+	"extensions": ["css", "scss", "qss"],
 	"draw_white_space": ["selection", "isolated_mixed"],
 }

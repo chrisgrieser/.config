@@ -1,0 +1,3 @@
+[
+	{ "keys": ["Shift+u"], "command": "duplicate_file_dir" }
+]

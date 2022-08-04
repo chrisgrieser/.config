@@ -366,7 +366,7 @@ end if</string>
 					<string>io.fman.fman</string>
 				</array>
 				<key>relatedAppsMode</key>
-				<integer>1</integer>
+				<integer>2</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>

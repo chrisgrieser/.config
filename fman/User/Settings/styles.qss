@@ -1,0 +1,243 @@
+QTableView, QMessageBox, QDialog, QListView {
+	background-color: #2E3440;
+	border: none;
+}
+
+QHeaderView, QHeaderView::section {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2E3440, stop: 1 #2E3440);
+}
+
+QHeaderView::section {
+	color: #EBCB8B;
+	border: none;
+	padding: 1ex;
+	border-style: solid;
+	border-left-width: 1px;
+	border-left-color: #434C5E;
+	border-right-color: #434C5E;
+	border-right-width: 1px;
+}
+
+QTableView::item {
+	color: #8FBCBB;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+/*
+ * Hack: Unlike QTreeView::item, QTableView::item has no :first and :last
+ * selectors. To work around this, our backend sets State_Children and
+ * State_Open, which we can catch here as :has-children and :open, respectively.
+ */
+QTableView::item:has-children {
+	color: #D8DEE9;
+	padding-left: 0.25em;
+	/* The padding directive has no effect unless we specify a background: */
+	background: transparent;
+}
+QTableView::item:open {
+	padding-right: 0.25em;
+}
+
+QTableView::item:selected {
+	color: #BF616A;
+	/* Avoid the ugly default blue background color for selected cells: */
+	background-color: #2E3440;
+}
+
+QTableView::item:focus {
+	background-color: #4C566A;
+}
+
+QTableView #editor {
+	/*
+	 * The Qt "editor" when renaming a file. It's a QLineEdit, which has a
+	 * border (see below). On Windows, this border shifts the file name down so
+	 * much that underscores "_" are obscured. Prevent this:
+	 */
+	border-top: none;
+	border-bottom: none;
+}
+
+QLabel, QRadioButton, QCheckBox {
+	color: #D8DEE9;
+}
+
+QMessageBox QLabel {
+	font-weight: normal;
+}
+
+QLineEdit {
+	color: #D8DEE9;
+	background-color: #434C5E;
+	border: 3px solid #434C5E;
+	border-left-color: #434C5E;
+	border-top-color: #434C5E;
+}
+
+Prompt QLineEdit {
+	min-width: 20em;
+}
+
+Quicksearch {
+	background-color: #2E3440;
+	color: #D8DEE9;
+}
+
+Quicksearch #query-container {
+	/*
+	 * The sole purpose of this Div is to draw an extra border at the bottom.
+	 */
+	padding: 0;
+	margin: 3px;
+	border: 1px solid #2E3440;
+	border-bottom-color: #2E3440;
+}
+
+Quicksearch #query-container > Div {
+	padding: 0;
+	border: 1px solid #2E3440;
+}
+
+Quicksearch QLineEdit {
+	color: #D8DEE9;
+	background-color: #434C5E;
+	border: 1px solid #434C5E;
+	border-top-color: #434C5E;
+	border-left-color: #434C5E;
+	border-right-color: #434C5E;
+}
+
+Quicksearch #items-container {
+	margin-bottom: 4px;
+}
+
+Quicksearch QListView {
+	min-width: 40em;
+	background-color: #2E3440;
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+Quicksearch QListView::item:selected {
+	background-color: #434C5E;
+}
+
+QLineEdit:read-only {
+	color: #88C0D0;
+}
+
+QStatusBar {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #434C5E, stop: 1 #434C5E);
+	border-top: 1px solid #434C5E;
+}
+
+QStatusBar, QStatusBar QLabel {
+	color: #88C0D0;
+}
+
+QStatusBar QLabel {
+	padding-left: .1ex;
+}
+
+SplashScreen QPushButton {
+	max-width: 4em;
+	color: #2E3440;
+	background-color: #EBCB8B;
+	border: 1px solid #EBCB8B;
+}
+
+Overlay {
+	min-width: 20em;
+	max-width: 22em;
+	background-color: #2E3440;
+	border: 1px solid #434C5E;
+}
+
+Overlay QPushButton {
+	max-width: 10em;
+}
+
+FilterBar {
+	background-color: #2E3440;
+	border: 1px solid #434C5E;
+	min-width: 8em;
+}
+
+FilterBar QLineEdit {
+	font-size: 9pt;
+	width: 7em;
+	margin: 0 .25em;
+}
+
+NonexistentShortcutDialog {
+	min-width: 15em;
+}
+
+NonexistentShortcutDialog QPushButton{
+	max-width: 4em;
+	color: #2E3440;
+	background-color: #EBCB8B;
+	border: 1px solid #EBCB8B;
+}
+
+NonexistentShortcutDialog QRadioButton {
+	margin-left: 1em;
+}
+
+NonexistentShortcutDialog QLineEdit {
+	margin-left: 2.25em;
+	margin-right: 1em;
+	border: 3px solid #434C5E;
+}
+
+QRadioButton::checked {
+	color: #8FBCBB;
+}
+
+ProgressDialog {
+	min-width: 25em;
+	/*
+	 * Make max-width at least a little wider than min-width.
+	 * Otherwise, there sometimes seem to be visual artifacts.
+	 */
+	max-width: 30em;
+}
+
+/*scrollbar preferences*/
+
+QScrollBar {
+	color: #D8DEE9;
+	background-color: #434C5E;
+}
+
+QScrollBar {
+	border: none;
+	background: #2E3440;
+	width: 10px;
+	margin: 22px 0 22px 0;
+}
+
+QScrollBar::handle {
+	background: #434C5E;
+}
+
+QScrollBar::add-line {
+  border: none;
+  background: #434C5E;
+  height: 20px;
+  subcontrol-position: bottom;
+  subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line {
+  border: none;
+  background: #434C5E;
+  height: 20px;
+  subcontrol-position: top;
+  subcontrol-origin: margin;
+}
+
+QSplitter {
+	background: #434C5E;
+}
