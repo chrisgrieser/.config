@@ -30,6 +30,10 @@ ln -sf "$DOTFILE_FOLDER/.config/" ~/.config
 [[ -e ~/.hammerspoon ]] && rm -rf ~/.hammerspoon
 ln -sf "$DOTFILE_FOLDER/hammerspoon" ~/.hammerspoon
 
+# fman
+[[ -e ~"/Library/Application Support/fman/Plugins" ]] && rm -rf ~"/Library/Application Support/fman/Plugins"
+ln -sf "$DOTFILE_FOLDER/fman" ~"/Library/Application Support/fman/Plugins"
+
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"
 [[ -e "$ESPANSO_DIR" ]] && rm -rf "$ESPANSO_DIR"
@@ -53,10 +57,10 @@ ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.l
 #-------------------------------------------------------------------------------
 
 # # to keep private stuff out of the dotfile repo
-ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/hammerspoon-private.lua" "$DOTFILE_FOLDER/hammerspoon/private.lua"
-ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/espanso-private.yml" "$DOTFILE_FOLDER/espanso/match/private.yml"
-ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify-tui-client.yml" "$DOTFILE_FOLDER/.config/spotify-tui/client.yml"
-ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify_token_cache.json" "$DOTFILE_FOLDER/.config/spotify-tui/.spotify_token_cache.json"
+# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/hammerspoon-private.lua" "$DOTFILE_FOLDER/hammerspoon/private.lua"
+# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/espanso-private.yml" "$DOTFILE_FOLDER/espanso/match/private.yml"
+# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify-tui-client.yml" "$DOTFILE_FOLDER/.config/spotify-tui/client.yml"
+# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify_token_cache.json" "$DOTFILE_FOLDER/.config/spotify-tui/.spotify_token_cache.json"
 
 # Obsidian vimrc
 # OBSI_ICLOUD=~'/Library/Mobile Documents/iCloud~md~obsidian/Documents/'
