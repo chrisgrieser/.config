@@ -1,1 +1,1 @@
-{"null://": {"column": "fman.impl.plugins.builtin.NullColumn", "is_ascending": false}}
+{"file:///Users/chrisgrieser/dotfiles": {"column": "core.Size", "is_ascending": false}, "null://": {"column": "fman.impl.plugins.builtin.NullColumn", "is_ascending": false}}

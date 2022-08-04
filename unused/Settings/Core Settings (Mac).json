@@ -1,8 +1,0 @@
-{
-	"terminal": {
-		"args": ["/usr/bin/open", "-a", "Terminal", "{curr_dir}"]
-	},
-	"native_file_manager": {
-		"args": ["/usr/bin/open", "-a", "Finder", "{curr_dir}"]
-	}
-}
