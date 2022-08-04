@@ -145,6 +145,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>39B71402-41AF-4087-AFBB-86D0ABEDD89E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DE14F947-C048-4758-B263-7BC06297F371</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3AA97555-4630-4AB5-A2F3-900B154E50A7</key>
 		<array>
 			<dict>
@@ -480,6 +493,16 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>39B71402-41AF-4087-AFBB-86D0ABEDD89E</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Reveal in Finder</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1954,20 +1977,15 @@ md2docx "$*" 2&gt;&amp;1</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>on run argv
-	set itemID to item 1 of argv
-	tell application "System Events" to tell (process 1 where frontmost is true)
-		click menu item itemID of menu of menu item "Recent Items" of menu "Apple" of menu bar 1
-	end tell
-end run</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>open-recent-item.applescript</string>
 				<key>type</key>
-				<integer>6</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -1975,6 +1993,14 @@ end run</string>
 			<string>DE14F947-C048-4758-B263-7BC06297F371</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>39B71402-41AF-4087-AFBB-86D0ABEDD89E</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -2079,6 +2105,13 @@ end run</string>
 			<real>300</real>
 			<key>ypos</key>
 			<real>915</real>
+		</dict>
+		<key>39B71402-41AF-4087-AFBB-86D0ABEDD89E</key>
+		<dict>
+			<key>xpos</key>
+			<real>235</real>
+			<key>ypos</key>
+			<real>1745</real>
 		</dict>
 		<key>3AA97555-4630-4AB5-A2F3-900B154E50A7</key>
 		<dict>
@@ -2394,7 +2427,7 @@ end run</string>
 		<key>DE14F947-C048-4758-B263-7BC06297F371</key>
 		<dict>
 			<key>xpos</key>
-			<real>210</real>
+			<real>355</real>
 			<key>ypos</key>
 			<real>1665</real>
 		</dict>
