@@ -20,6 +20,8 @@ font:
 cursor:
   style:
     unfocused_hollow: true
+mouse:
+  hide_when_typing: true
 bell:
   animation: Ease
   duration: 300

@@ -94,8 +94,10 @@ window:
     x: 6
     'y': 6
   opacity: 0.96
+  title: alacritty
+  dynamic_title: true
 scrolling:
-  history: 5000
+  history: 2000
   multiplier: 3
 working_directory: /Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File Hub/
 cursor:
