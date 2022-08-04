@@ -471,6 +471,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E0D28C3D-F986-4491-9594-54FEA3344924</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DE14F947-C048-4758-B263-7BC06297F371</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E201FA64-F088-49FF-8FD1-DCFB806FCF6E</key>
 		<array/>
 		<key>E4E3E773-9062-4B65-9CC9-ED1AB35D0170</key>
@@ -1886,6 +1899,83 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>rr</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>recent-items.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Recent Items</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>E0D28C3D-F986-4491-9594-54FEA3344924</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on run argv
+	set itemID to item 1 of argv
+	tell application "System Events" to tell (process 1 where frontmost is true)
+		click menu item itemID of menu of menu item "Recent Items" of menu "Apple" of menu bar 1
+	end tell
+end run</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DE14F947-C048-4758-B263-7BC06297F371</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -2301,6 +2391,13 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>ypos</key>
 			<real>90</real>
 		</dict>
+		<key>DE14F947-C048-4758-B263-7BC06297F371</key>
+		<dict>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>1665</real>
+		</dict>
 		<key>DF6BC461-1649-44AA-B495-1C2040D63A65</key>
 		<dict>
 			<key>colorindex</key>
@@ -2344,6 +2441,13 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<real>960</real>
 			<key>ypos</key>
 			<real>475</real>
+		</dict>
+		<key>E0D28C3D-F986-4491-9594-54FEA3344924</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1665</real>
 		</dict>
 		<key>E201FA64-F088-49FF-8FD1-DCFB806FCF6E</key>
 		<dict>
