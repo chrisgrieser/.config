@@ -127,11 +127,16 @@ biiweeklyTimer = hs.timer.doAt("02:00", "03d", function()
 	log ("2️⃣ biweekly ("..deviceName()..")", "./logs/some.log")
 end, true)
 
-dailyMorningTimer = hs.timer.doAt("02:00", "12h", function()
+catchTimer = hs.timer.doAt("02:00", "12h", function()
 	openIfNotRunning("Catch")
 	runDelayed(10, function () killIfRunning("Catch") end)
 	log ("🫴 Catch Torrents ("..deviceName()..")", "./logs/some.log")
 end, true)
+
+dailyEveningTimer = hs.timer.doAt("21:00", "24h", function ()
+	setDarkmode(false)
+	log ("🕑🫴 Catch Torrents ("..deviceName()..")", "./logs/some.log")
+end)
 
 function projectorScreensaverStop (eventType)
 	if isProjector() and (eventType == hs.caffeinate.watcher.screensaverDidStop or eventType == hs.caffeinate.watcher.screensaverDidStart) then
@@ -141,7 +146,8 @@ end
 projectorScreensaverWatcher = hs.caffeinate.watcher.new(projectorScreensaverStop)
 
 if isIMacAtHome() then
-	dailyMorningTimer:start()
+	catchTimer:start()
+	dailyEveningTimer:start()
 	sleepTimer:start()
 	sleepTimer2:start()
 	biiweeklyTimer:start()
@@ -159,7 +165,7 @@ function toggleDarkMode ()
 			end if
 			if ((count of window) is 0) then
 				open location "chrome://newtab/"
-				delay 0.2
+				delay 0.4
 				set tabOpened to true
 			else
 				set tabOpened to false
