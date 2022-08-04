@@ -54,7 +54,6 @@ function highlightsAppScroll (amount)
 end
 
 -- CURSOR HIDING in Brave
--- when Alacritty activates, hide cursor
 -- when Brave activates and j or k is pressed for the first time, hide cursor
 function hidingCursorInBrowser(key)
 	jHidesCursor:disable() -- so it only works the first time
@@ -85,14 +84,6 @@ function jkWatcher(appName, eventType)
 			jHidesCursor:disable()
 			kHidesCursor:disable()
 			alfredDisablesJKCursorHider:disable()
-		end
-		if (appName:lower() == "alacritty") then
-			local screen = hs.mouse.getCurrentScreen()
-			local pos = {
-				x = screen:frame().w - 1, -- -1 to keep it on the current screen
-				y = screen:frame().h * 0.75,
-			}
-			hs.mouse.setRelativePosition(pos, screen)
 		end
 	end
 end

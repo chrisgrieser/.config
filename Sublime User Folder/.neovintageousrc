@@ -46,6 +46,8 @@ nnoremap Q mz0`z
 " Have j and k navigate visual lines rather than logical ones
 nnoremap j gj
 nnoremap k gk
+nnoremap gj j
+nnoremap gk k
 
 " HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
 " h 0^ ensures scrolling to the left (when there is no wrapping)
@@ -103,7 +105,7 @@ nnoremap g; u<C-r>
 """"""""""""""""""""""
 
 " don't pollute the register
-nnoremap x "_x
+noremap x "_x
 nnoremap c "_c
 nnoremap C "_C
 
@@ -218,7 +220,6 @@ vnoremap <Space> "_c
 " Delete Word/Selection
 nnoremap <S-Space> "_daw
 vnoremap <S-Space> "_d
-vnoremap x "_d
 
 " [R]eplace Word with register content
 nnoremap R viw"0p
