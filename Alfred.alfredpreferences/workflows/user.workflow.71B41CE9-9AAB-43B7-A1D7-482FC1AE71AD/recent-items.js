@@ -38,10 +38,13 @@ const recentAll = [...recentItemsMap, ...recentFolders]
 	.map(item => {
 		// type: [f]ile, [d]irectory, [p]arent directory
 		let revealArg;
+		let iconPath;
 		if (item.type === "f") {
 			revealArg = item.type + (item.id + 1).toString(); // id + 1 = reveal in Finder
+			iconPath = "file.png";
 		} else {
 			revealArg = "p" + item.id.toString();
+			iconPath = "folder.png";
 		}
 
 		return {
@@ -53,9 +56,9 @@ const recentAll = [...recentItemsMap, ...recentFolders]
 					"arg": revealArg,
 				},
 			},
+			"icon": { "path": iconPath },
 			"arg": item.type + item.id.toString(),
 		};
 	});
 
 JSON.stringify({ items: recentAll });
-

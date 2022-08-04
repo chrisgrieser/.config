@@ -11,14 +11,19 @@ on run argv
 		else
 			set frontmost to true
 			click menu item itemID of menu of menu item "Recent Folders" of menu "Go" of menu bar 1
-			-- click menu item "Enclosing Folder" of menu "Go" of menu bar 1
-			if (type is "p") then
-				click menu item "Enclosing Folder" of menu "Go" of menu bar 1
-			end if
 		end if
 	end tell
 
-	return type is "p"
+	-- for whatever reason, this only works reliably when separated from the if clauses above m(
+	if (type is "p") then
+		tell application "System Events"
+			tell process "Finder"
+				set frontmost to true
+				click menu item "Enclosing Folder" of menu "Go" of menu bar 1
+			end tell
+		end tell
+	end if
+
 
 end run
 
