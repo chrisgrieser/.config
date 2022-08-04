@@ -459,18 +459,7 @@
 			</dict>
 		</array>
 		<key>DE14F947-C048-4758-B263-7BC06297F371</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>731E347D-BF06-4006-8A64-A505693B5EF9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>E00804D3-F5B4-4AB0-8139-B95BD4ED379B</key>
 		<array>
 			<dict>
