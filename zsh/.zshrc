@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
 # shellcheck disable=SC1091
 
 export DOTFILE_FOLDER=~/dotfiles
@@ -20,3 +22,6 @@ source "$DOTFILE_FOLDER/zsh/docs_man.zsh"
 source "$DOTFILE_FOLDER/zsh/git_github.zsh"
 source "$DOTFILE_FOLDER/zsh/homebrew.zsh"
 source "$DOTFILE_FOLDER/zsh/../pandoc/pandoc.zsh"
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
