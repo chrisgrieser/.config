@@ -11,16 +11,16 @@ ln -sf "$DOTFILE_FOLDER/zsh/.zlogin" ~
 
 # other dotfiles
 ln -sf "$DOTFILE_FOLDER/.searchlink" ~
-ln -sf "$DOTFILE_FOLDER/.shellcheckrc" ~
-ln -sf "$DOTFILE_FOLDER/.stylelintrc.json" ~
-ln -sf "$DOTFILE_FOLDER/.gitconfig" ~
-ln -sf "$DOTFILE_FOLDER/.eslintrc.json" ~
-ln -sf "$DOTFILE_FOLDER/.gitignore_global" ~
-ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
-ln -sf "$DOTFILE_FOLDER/.markdownlintrc" ~
-ln -sf "$DOTFILE_FOLDER/.pylintrc" ~
-ln -sf "$DOTFILE_FOLDER/.flake8" ~
 ln -sf "$DOTFILE_FOLDER/.vimrc" ~
+ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
+
+# linter rcfiles
+ln -sf "$DOTFILE_FOLDER/linter rcfiles/.stylelintrc.json" ~
+ln -sf "$DOTFILE_FOLDER/linter rcfiles/.eslintrc.json" ~
+ln -sf "$DOTFILE_FOLDER/linter rcfiles/.markdownlintrc" ~
+ln -sf "$DOTFILE_FOLDER/linter rcfiles/.pylintrc" ~
+ln -sf "$DOTFILE_FOLDER/linter rcfiles/.shellcheckrc" ~
+ln -sf "$DOTFILE_FOLDER/linter rcfiles/.flake8" ~
 
 # .config
 [[ -e ~/.config ]] && rm -rf ~/.config
@@ -53,18 +53,18 @@ ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.l
 #-------------------------------------------------------------------------------
 
 # # to keep private stuff out of the dotfile repo
-# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/hammerspoon-private.lua" "$DOTFILE_FOLDER/hammerspoon/private.lua"
-# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/espanso-private.yml" "$DOTFILE_FOLDER/espanso/match/private.yml"
-# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify-tui-client.yml" "$DOTFILE_FOLDER/.config/spotify-tui/client.yml"
-# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify_token_cache.json" "$DOTFILE_FOLDER/.config/spotify-tui/.spotify_token_cache.json"
+ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/hammerspoon-private.lua" "$DOTFILE_FOLDER/hammerspoon/private.lua"
+ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/espanso-private.yml" "$DOTFILE_FOLDER/espanso/match/private.yml"
+ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify-tui-client.yml" "$DOTFILE_FOLDER/.config/spotify-tui/client.yml"
+ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify_token_cache.json" "$DOTFILE_FOLDER/.config/spotify-tui/.spotify_token_cache.json"
 
 # Obsidian vimrc
 # OBSI_ICLOUD=~'/Library/Mobile Documents/iCloud~md~obsidian/Documents/'
-# ln -sf "$DOTFILE_FOLDER/obsidian.vimrc" "$OBSI_ICLOUD/Main Vault/Meta"
-# ln -sf "$DOTFILE_FOLDER/obsidian-vim-helpers.js" "$OBSI_ICLOUD/Main Vault/Meta"
-# ln -sf "$DOTFILE_FOLDER/obsidian.vimrc" "$OBSI_ICLOUD/Development/Meta"
-# ln -sf "$DOTFILE_FOLDER/obsidian-vim-helpers.js" "$OBSI_ICLOUD/Development/Meta"
-# ln -sf "$DOTFILE_FOLDER/pandoc/README.md" "$OBSI_ICLOUD/Main Vault/Knowledge Base/Pandoc.md"
+# ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian.vimrc" "$OBSI_ICLOUD/Main Vault/Meta"
+# ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian-vim-helpers.js" "$OBSI_ICLOUD/Main Vault/Meta"
+# ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian.vimrc" "$OBSI_ICLOUD/Development/Meta"
+# ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian-vim-helpers.js" "$OBSI_ICLOUD/Development/Meta"
+# ln -sf "$DOTFILE_FOLDER/Obsidian vim/pandoc/README.md" "$OBSI_ICLOUD/Main Vault/Knowledge Base/Pandoc.md"
 
 # YAMLlint
 # ln -sf "$DOTFILE_FOLDER/.config/yamllint/config/.yamllint.yaml" "$DOTFILE_FOLDER/.config/karabiner/assets/complex_modifications"
