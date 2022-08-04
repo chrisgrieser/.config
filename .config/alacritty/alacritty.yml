@@ -106,6 +106,8 @@ cursor:
     unfocused_hollow: true
   vi_mode_style:
     shape: Underline
+mouse:
+  hide_when_typing: true
 live_config_reload: true
 bell:
   animation: Ease
