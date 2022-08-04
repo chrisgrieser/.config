@@ -36,23 +36,23 @@ const recentItemsMap = recentItems
 
 const recentAll = [...recentItemsMap, ...recentFolders]
 	.map(item => {
-		let altMod;
+		// type: [f]ile, [d]irectory, [p]arent directory
+		let revealArg;
 		if (item.type === "f") {
-			altMod = {
-				"valid": true,
-				"arg": item.id + 1 // id + 1 = reveal in Finder
-			};
+			revealArg = item.type + (item.id + 1).toString(); // id + 1 = reveal in Finder
 		} else {
-			altMod = {
-				"valid": false,
-			};
+			revealArg = "p" + item.id.toString();
 		}
 
 		return {
 			"title": item.name,
 			"uid": item.name,
 			"match": alfredMatcher (item.name),
-			"mods": { "alt": altMod },
+			"mods": {
+				"alt": {
+					"arg": revealArg,
+				},
+			},
 			"arg": item.type + item.id.toString(),
 		};
 	});
