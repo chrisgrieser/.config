@@ -399,18 +399,6 @@ rules:
               - ^com\.hnc\.Discord$
   - description: "🅰️📂 Finder"
     manipulators:
-      # Hyper-F: Open $WD
-      - type: basic
-        from:
-          key_code: f
-          modifiers:
-            mandatory:
-              - control
-              - command
-              - shift
-              - option
-        to:
-          - shell_command: open "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
       # Cut & Paste Workaround
       - type: basic
         from:
@@ -519,3 +507,33 @@ rules:
           - set_notification_message:
               id: cut-notice
               text: ""
+  - description: "🅰️📂 Marta"
+    manipulators:
+  # Hyper-F: Open $WD
+  - type: basic
+    from:
+      key_code: f
+      modifiers:
+        mandatory:
+          - control
+          - command
+          - shift
+          - option
+    to:
+      - shell_command: marta "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+  - type: basic
+    from:
+      # ?
+      key_code: hyphen
+      modifiers:
+        mandatory:
+          - shift
+    to:
+      - key_code: open_bracket
+    conditions:
+      - type: input_source_if
+        input_sources:
+          - language: ^de$
+      - type: frontmost_application_if
+        bundle_identifiers:
+          - ^org\.yanex\.marta$
