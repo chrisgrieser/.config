@@ -45,7 +45,7 @@ fonts {
     statusBar [ "Default Light" 24 ]
     tableHeader [ "Default" 20 ]
     tabs [ "Default" 22 ]
-    preferences [ "Input" 24 ]
+    preferences [ "Input" 23 ]
 }
 
 etty {
@@ -65,10 +65,15 @@ keyBindings {
     "Shift+G" "core.move.end"
     "Shift+J" "core.move.half.page.down"
     "Shift+K" "core.move.half.page.up"
+    "Shift+A" "core.select.all.after"
+    "Shift+I" "core.select.all.before"
+    "y" "core.move.inactive"
+    "Shift+Y" "core.copy.inactive"
     
     "Cmd+Return" "core.open"
     "Ctrl+H" "core.back"
     "Ctrl+L" "core.forward"
+    "Ctrl+X" "core.pane.swap"
     "Return" "core.rename"
     "M" "core.favorites"
     "Shift+M" "core.favorites.add"
@@ -77,6 +82,7 @@ keyBindings {
     
     "Cmd+Shift+M" "core.move"
     "Cmd+F" "core.lookup.here"
+    "Cmd+L" "core.finder.reveal"
     "Cmd+Shift+N" "core.new.folder"
     "Cmd+U" "core.hierarchy"
     "Cmd+N" "core.new.file"
@@ -86,4 +92,7 @@ keyBindings {
     "F20" "core.documentation"
     "Cmd+R" "core.refresh"
     "Cmd+Shift+D" "core.duplicate"
+    
+    "Cmd+Shift+," "core.open.config.folder"
+    "Ctrl+Opt+Shift+T" "core.theme"
 }
