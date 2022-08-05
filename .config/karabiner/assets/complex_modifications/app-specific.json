@@ -785,25 +785,6 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "f",
-            "modifiers": {
-              "mandatory": [
-                "control",
-                "command",
-                "shift",
-                "option"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "open \"$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/\""
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
             "key_code": "x",
             "modifiers": {
               "mandatory": [
@@ -992,6 +973,62 @@
                 "id": "cut-notice",
                 "text": ""
               }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "🅰️📂 Marta",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "command",
+                "shift",
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Applications/Marta.app/Contents/Resources/launcher \"$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/\" \"$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/\""
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "hyphen",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "open_bracket"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "language": "^de$"
+                }
+              ]
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^org\\.yanex\\.marta$"
+              ]
             }
           ]
         }

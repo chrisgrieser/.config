@@ -1,0 +1,83 @@
+
+environment {
+    terminal "Alacritty"
+}
+
+behavior {
+    theme "Kon"
+    
+    layout {
+        showActionBar false
+    }
+    files {
+        defaultLocation "~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+    }
+    setCurrentPathAsWindowTitle true
+    preselectFirstMenuItem true
+    
+    table {
+        iconSize 20
+        verticalPadding 3
+        
+        colorHighlighting true
+        
+        showGoUpFolder false
+    }
+    
+    action {
+        core.delete.confirm false
+        core.open.openApplicationsAsFolders true
+        core.preferences.use.text.editor true
+    }
+    
+    quickSelect {
+        activateOnAnyCharacter false
+        filterMatchedItems true
+    }
+
+}
+
+fonts {
+    breadcrumbs [ "Default" 23 ]
+    virtualTabs [ "Default Bold" 20 ]
+    files [ "Default" 23 ]
+    statusBar [ "Default Light" 23 ]
+    tableHeader [ "Default" 23 ]
+    tabs [ "Default" 20 ]
+    preferences [ "Input" 23 ]
+}
+
+
+keyBindings {
+    
+    "H" "core.go.up"
+    "L" "core.open"
+    "K" "core.move.up"
+    "J" "core.move.down"
+    "G" "core.move.home"
+    
+    "Shift+G" "core.move.end"
+    "Shift+J" "core.move.half.page.down"
+    "Shift+K" "core.move.half.page.up"
+    
+    "Ctrl+H" "core.back"
+    "Ctrl+L" "core.forward"
+    "Return" "core.rename"
+    "M" "core.favorites"
+    "Shift+M" "core.favorites.add"
+    "Shift+Space" "core.select.move.down"
+    
+    "." "core.display.hidden"
+    
+    "Cmd+Shift+M" "core.move"
+    "Cmd+F" "core.lookup.here"
+    "Cmd+Shift+N" "core.new.folder"
+    "Cmd+U" "core.hierarchy"
+    "Cmd+P" "core.actions"
+    "Cmd+O" "core.go"
+    "Ctrl+P" "core.path"
+    "Shift+ß" "core.documentation"
+    "Cmd+R" "core.refresh"
+    "Cmd+Shift+D" "core.duplicate"
+    "Cmd+Shift+Opt+Ctrl+T" "core.ext.terminal.open"
+}

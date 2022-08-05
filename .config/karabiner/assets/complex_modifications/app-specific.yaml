@@ -410,10 +410,6 @@ rules:
           - key_code: c
             modifiers:
               - command
-          # # to remove file on cutting, uncomment this
-          # - key_code: delete_or_backspace
-          #   modifiers:
-          #     - command
           - set_variable:
               name: CUT_ACTIVE
               value: true
@@ -510,30 +506,30 @@ rules:
   - description: "🅰️📂 Marta"
     manipulators:
   # Hyper-F: Open $WD
-  - type: basic
-    from:
-      key_code: f
-      modifiers:
-        mandatory:
-          - control
-          - command
-          - shift
-          - option
-    to:
-      - shell_command: marta "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-  - type: basic
-    from:
-      # ?
-      key_code: hyphen
-      modifiers:
-        mandatory:
-          - shift
-    to:
-      - key_code: open_bracket
-    conditions:
-      - type: input_source_if
-        input_sources:
-          - language: ^de$
-      - type: frontmost_application_if
-        bundle_identifiers:
-          - ^org\.yanex\.marta$
+    - type: basic
+      from:
+        key_code: f
+        modifiers:
+          mandatory:
+            - control
+            - command
+            - shift
+            - option
+      to:
+        - shell_command: /Applications/Marta.app/Contents/Resources/launcher "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+    - type: basic
+      from:
+        # ?
+        key_code: hyphen
+        modifiers:
+          mandatory:
+            - shift
+      to:
+        - key_code: open_bracket
+      conditions:
+        - type: input_source_if
+          input_sources:
+            - language: ^de$
+        - type: frontmost_application_if
+          bundle_identifiers:
+            - ^org\.yanex\.marta$

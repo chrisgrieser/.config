@@ -34,6 +34,11 @@ ln -sf "$DOTFILE_FOLDER/hammerspoon" ~/.hammerspoon
 [[ -e ~"/Library/Application Support/fman/Plugins" ]] && rm -rf ~"/Library/Application Support/fman/Plugins"
 ln -sf "$DOTFILE_FOLDER/fman" ~"/Library/Application Support/fman/Plugins"
 
+# Marta
+ln -fs /Applications/Marta.app/Contents/Resources/launcher /opt/homebrew/bin/marta
+
+marta "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"
 [[ -e "$ESPANSO_DIR" ]] && rm -rf "$ESPANSO_DIR"
