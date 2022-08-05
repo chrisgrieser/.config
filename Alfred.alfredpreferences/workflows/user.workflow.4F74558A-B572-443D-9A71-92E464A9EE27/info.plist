@@ -363,6 +363,7 @@ end if</string>
 				<integer>2</integer>
 				<key>relatedApps</key>
 				<array>
+					<string>org.yanex.marta</string>
 					<string>io.fman.fman</string>
 				</array>
 				<key>relatedAppsMode</key>
