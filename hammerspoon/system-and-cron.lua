@@ -168,12 +168,20 @@ function toggleDarkMode ()
 			else
 				if ((URL of active tab of front window) starts with "chrome://") then set openBlank to true
 			end if
-			if (openBlank) then
+			if (openBlank)
 				open location "https://www.blank.org/"
-				delay 0.5
-				close active tab of front window
+				delay 0.3
 			end if
 		end tell
+
+		# toggle dark mode
+		tell application "System Events"
+			tell appearance preferences to set dark mode to not dark mode
+		end tell
+
+		if (openBlank)
+			tell application "Brave Browser" to close active tab of front window
+		end if
 
 		# Make Highlights.app get the same mode as the OS mode (if running)
 		tell application "System Events"
