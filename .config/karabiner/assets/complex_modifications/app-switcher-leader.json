@@ -685,7 +685,7 @@
           ],
           "to": [
             {
-              "shell_command": "open -a \"Finder\""
+              "shell_command": "open -a \"Marta\""
             },
             {
               "set_variable": {
