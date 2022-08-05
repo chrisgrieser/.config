@@ -15,6 +15,14 @@ behavior {
     setCurrentPathAsWindowTitle true
     preselectFirstMenuItem true
     
+    dateFormat {
+        normal "%d. %b %y"
+    }
+    
+    timeFormat {
+        separator ", "
+    }
+    
     table {
         iconSize 23
         verticalPadding 3
@@ -22,7 +30,13 @@ behavior {
         colorHighlighting true
         
         showGoUpFolder false
-        rightClickSelect true
+        
+        defaults {
+            ordering {
+                column "modified"
+                isAscending false
+            }
+        }
     }
     
     action {
@@ -89,10 +103,11 @@ keyBindings {
     "Cmd+P" "core.actions"
     "Cmd+O" "core.go"
     "Ctrl+P" "core.path"
+    "Cmd+8" "core.terminal.toggle"
+    "Cmd+K" "core.terminal.clear.buffer"
     "F20" "core.documentation"
     "Cmd+R" "core.refresh"
     "Cmd+Shift+D" "core.duplicate"
     
-    "Cmd+Shift+," "core.open.config.folder"
     "Ctrl+Opt+Shift+T" "core.theme"
 }
