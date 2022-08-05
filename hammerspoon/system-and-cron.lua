@@ -170,7 +170,7 @@ function toggleDarkMode ()
 			end if
 			if (openBlank) then
 				open location "https://www.blank.org/"
-				delay 0.2
+				delay 0.5
 				close active tab of front window
 			end if
 		end tell
