@@ -16,7 +16,7 @@ behavior {
     preselectFirstMenuItem true
     
     table {
-        iconSize 20
+        iconSize 23
         verticalPadding 3
         
         colorHighlighting true
@@ -39,48 +39,47 @@ behavior {
 }
 
 fonts {
-    breadcrumbs [ "Default" 19 ]
+    breadcrumbs [ "Default" 16 ]
     virtualTabs [ "Default Bold" 20 ]
-    files [ "Default" 22 ]
+    files [ "Default" 23 ]
     statusBar [ "Default Light" 24 ]
     tableHeader [ "Default" 20 ]
     tabs [ "Default" 22 ]
-    preferences [ "Input" 23 ]
+    preferences [ "Input" 24 ]
 }
 
 etty {
     fonts {
-        normal [ "JetBrainsMonoNL Nerd Font" 19 ]
+        normal [ "JetBrainsMonoNL Nerd Font" 18 ]
     }
 }
 
 
 keyBindings {
-    
     "H" "core.go.up"
     "L" "core.open"
     "K" "core.move.up"
     "J" "core.move.down"
     "G" "core.move.home"
     "O" "core.open.with"
-    
     "Shift+G" "core.move.end"
     "Shift+J" "core.move.half.page.down"
     "Shift+K" "core.move.half.page.up"
     
+    "Cmd+Return" "core.open"
     "Ctrl+H" "core.back"
     "Ctrl+L" "core.forward"
     "Return" "core.rename"
     "M" "core.favorites"
     "Shift+M" "core.favorites.add"
     "Shift+Space" "core.select.move.down"
-    
     "." "core.display.hidden"
     
     "Cmd+Shift+M" "core.move"
     "Cmd+F" "core.lookup.here"
     "Cmd+Shift+N" "core.new.folder"
     "Cmd+U" "core.hierarchy"
+    "Cmd+N" "core.new.file"
     "Cmd+P" "core.actions"
     "Cmd+O" "core.go"
     "Ctrl+P" "core.path"
