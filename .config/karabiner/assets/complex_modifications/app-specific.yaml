@@ -516,7 +516,7 @@ rules:
             - shift
             - option
       to:
-        - shell_command: /Applications/Marta.app/Contents/Resources/launcher "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+        - shell_command: /Applications/Marta.app/Contents/Resources/launcher --existing-tab "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
     - type: basic
       from:
         # ?
