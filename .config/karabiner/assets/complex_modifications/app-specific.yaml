@@ -525,7 +525,7 @@ rules:
           mandatory:
             - shift
       to:
-        - key_code: open_bracket
+        - key_code: "f20"
       conditions:
         - type: input_source_if
           input_sources:
