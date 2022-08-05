@@ -54,11 +54,11 @@ behavior {
 }
 
 fonts {
-    breadcrumbs [ "Recursive" 16 ]
-    virtualTabs [ "Input" 20 ]
+    breadcrumbs [ "Recursive" 15 ]
+    virtualTabs [ "Input" 19 ]
     files [ "Recursive" 23 ]
     statusBar [ "iA Writer Quattro V" 21 ]
-    tableHeader [ "Input" 20 ]
+    tableHeader [ "Input" 19 ]
     tabs [ "Input" 22 ]
     preferences [ "Input" 23 ]
 }
@@ -90,24 +90,28 @@ keyBindings {
     "Shift+Y" "core.copy.inactive"
     "t" "core.tab.next"
     "Shift+T" "core.tab.next"
-    "Q" "core.queue"
-    "D" "core.trash"
-    "X" "core.trash"
-    "C" "core.rename"
-    "M" "core.favorites"
+    "q" "core.queue"
+    "d" "core.trash"
+    "x" "core.pane.swap"
+    "c" "core.rename"
+    "m" "core.favorites"
     "Shift+M" "core.favorites.add"
     "." "core.display.hidden"
-    
+    "," "core.open.config.folder"
+    "Shift+." "core.actions"
+    "u" "core.hierarchy"
+    "r" "core.refresh"
+    "f" "core.flatten"
+    "shift+=" "core.flatten"
     
     "Cmd+Return" "core.open"
     "Ctrl+H" "core.back"
     "Ctrl+L" "core.forward"
-    "Ctrl+X" "core.pane.swap"
     "Return" "core.rename"
     "Shift+Space" "core.select.move.down"
     
-    
     "Cmd+Shift+M" "core.move"
+    "Cmd+Shift+C" "core.copy"
     "Cmd+F" "core.lookup.here"
     "Cmd+L" "core.finder.reveal"
     "Cmd+Shift+N" "core.new.folder"
@@ -122,5 +126,7 @@ keyBindings {
     "Cmd+R" "core.refresh"
     "Cmd+Shift+D" "core.duplicate"
     
+    
     "Ctrl+Opt+Shift+T" "core.theme"
+    "Cmd+Q" "core.state.reset"
 }
