@@ -169,7 +169,7 @@ function toggleDarkMode ()
 				if ((URL of active tab of front window) starts with "chrome://") then set openBlank to true
 			end if
 			if (openBlank)
-				open location "https://www.blank.org/"
+				open location "https://example.com/"
 				delay 2
 			end if
 		end tell
