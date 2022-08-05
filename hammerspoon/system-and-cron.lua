@@ -157,31 +157,24 @@ end
 -- DARK MODE
 function toggleDarkMode ()
 	hs.osascript.applescript([[
-		tell application "Brave Browser"
-			if application "Brave Browser" is not running then
-				launch
-				delay 3
-			end if
-			if ((count of window) is 0) then
-				open location "chrome://newtab/"
-				delay 0.4
-				set tabOpened to true
-			else
-				set tabOpened to false
-			end if
-		end tell
-
-		# toggle dark mode
-		tell application "System Events"
-			tell appearance preferences to set dark mode to not dark mode
-			keystroke "d" using {shift down, option down} -- Dark Reader global hotkey
-		end tell
-
-		# close tab again
-		if (tabOpened)
-			delay 0.1
-			tell application "Brave Browser" to close active tab of front window
+		if application "Brave Browser" is not running then
+			launch
+			delay 3
 		end if
+		set openBlank to false
+		tell application "Brave Browser"
+			if ((count of window) is 0) then
+				set openBlank to true
+			else
+				if ((URL of active tab of front window) starts with "chrome://") then set openBlank to true
+			end if
+
+			if (openBlank) then
+				open location "https://www.blank.org/"
+				delay 0.2
+				close active tab of front window
+			end if
+		end tell
 
 		# Make Highlights.app get the same mode as the OS mode (if running)
 		tell application "System Events"
