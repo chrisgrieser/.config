@@ -170,7 +170,7 @@ function toggleDarkMode ()
 			end if
 			if (openBlank)
 				open location "https://www.blank.org/"
-				delay 0.2
+				delay 0.1
 			end if
 		end tell
 
@@ -180,7 +180,7 @@ function toggleDarkMode ()
 		end tell
 
 		if (openBlank)
-			delay 0.2
+			delay 0.1
 			tell application "Brave Browser" to close active tab of front window
 		end if
 
