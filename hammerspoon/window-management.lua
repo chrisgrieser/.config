@@ -23,7 +23,6 @@ function isPseudoMaximized (win)
 	local max = hs.screen.mainScreen():frame()
 	local dif = win:frame().w - pseudoMaximized.w*max.w
 	local widthOkay = (dif > -15 and dif < 15) -- leeway for some apps
-	local positionOkay = (win:frame().x == 0 and win:frame().y < 60) -- leeway for menubar
 	return widthOkay and positionOkay
 end
 

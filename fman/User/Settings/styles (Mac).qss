@@ -3,6 +3,12 @@ QTableView, QMessageBox, QDialog, QListView {
 	border: none;
 }
 
+/* alternating row colors */
+QTableView {
+	alternate-background-color: #293024;
+}
+
+
 QHeaderView, QHeaderView::section {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2E3440, stop: 1 #2E3440);
 }
