@@ -23,7 +23,7 @@ function isPseudoMaximized (win)
 	local max = hs.screen.mainScreen():frame()
 	local dif = win:frame().w - pseudoMaximized.w*max.w
 	local widthOkay = (dif > -15 and dif < 15) -- leeway for some apps
-	return widthOkay and positionOkay
+	return widthOkay
 end
 
 function isHalf (win)
