@@ -77,7 +77,7 @@ function systemWake (eventType)
 	reloadAllMenubarItems()
 	gitDotfileSync("wake")
 
-	twitterrificScrollUp()
+	runDelayed(1, twitterrificScrollUp)
 end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
@@ -117,7 +117,7 @@ end
 sleepTimer = hs.timer.doAt("03:00", "01d", sleepYouTube, true)
 sleepTimer2 = hs.timer.doAt("05:00", "01d", sleepYouTube, true)
 
-biiweeklyTimer = hs.timer.doAt("02:00", "03d", function()
+biiweeklyTimer = hs.timer.doAt("02:00", "02d", function()
 	hs.osascript.applescript([[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
