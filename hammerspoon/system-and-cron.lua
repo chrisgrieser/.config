@@ -180,7 +180,7 @@ function toggleDarkMode ()
 		end tell
 
 		if (openBlank)
-			delay 0.1
+			delay 0.2
 			tell application "Brave Browser" to close active tab of front window
 		end if
 
