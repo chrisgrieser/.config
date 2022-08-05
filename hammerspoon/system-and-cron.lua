@@ -170,7 +170,7 @@ function toggleDarkMode ()
 			end if
 			if (openBlank)
 				open location "https://www.blank.org/"
-				delay 0.5
+				delay 0.9
 			end if
 		end tell
 
