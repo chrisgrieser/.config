@@ -16,11 +16,11 @@ behavior {
     preselectFirstMenuItem true
     
     dateFormat {
-        normal "%d. %b %y"
+        normal "%d %b %y"
     }
     
     timeFormat {
-        separator ", "
+        separator " "
     }
     
     table {
@@ -32,6 +32,7 @@ behavior {
         showGoUpFolder false
         
         defaults {
+            columns ">size:100,modified:150"
             ordering {
                 column "modified"
                 isAscending false
@@ -40,7 +41,7 @@ behavior {
     }
     
     action {
-        core.delete.confirm false
+        core.trash.confirm false
         core.open.openApplicationsAsFolders true
         core.preferences.use.text.editor true
     }
@@ -53,46 +54,58 @@ behavior {
 }
 
 fonts {
-    breadcrumbs [ "Default" 16 ]
-    virtualTabs [ "Default Bold" 20 ]
-    files [ "Default" 23 ]
-    statusBar [ "Default Light" 24 ]
-    tableHeader [ "Default" 20 ]
-    tabs [ "Default" 22 ]
+    breadcrumbs [ "Recursive" 16 ]
+    virtualTabs [ "Input" 20 ]
+    files [ "Recursive" 23 ]
+    statusBar [ "iA Writer Quattro V" 21 ]
+    tableHeader [ "Input" 20 ]
+    tabs [ "Input" 22 ]
     preferences [ "Input" 23 ]
 }
 
 etty {
     fonts {
-        normal [ "JetBrainsMonoNL Nerd Font" 18 ]
+        normal [ "JetBrainsMonoNL Nerd Font" 21 ]
     }
 }
 
 
 keyBindings {
-    "H" "core.go.up"
-    "L" "core.open"
-    "K" "core.move.up"
-    "J" "core.move.down"
-    "G" "core.move.home"
-    "O" "core.open.with"
+    "h" "core.go.up"
+    "l" "core.open"
+    "k" "core.move.up"
+    "j" "core.move.down"
+    "g" "core.move.home"
+    "Shift+O" "core.open.with"
+    "o" "core.open"
     "Shift+G" "core.move.end"
     "Shift+J" "core.move.half.page.down"
     "Shift+K" "core.move.half.page.up"
-    "Shift+A" "core.select.all.after"
-    "Shift+I" "core.select.all.before"
-    "y" "core.move.inactive"
+    "Shift+V" "core.select.all.after"
+    "v" "core.select.all.before"
+    "a" "core.edit"
+    "i" "core.edit"
+    "Shift+A" "core.edit.folder"
+    "Y" "core.move.inactive"
     "Shift+Y" "core.copy.inactive"
+    "t" "core.tab.next"
+    "Shift+T" "core.tab.next"
+    "Q" "core.queue"
+    "D" "core.trash"
+    "X" "core.trash"
+    "C" "core.rename"
+    "M" "core.favorites"
+    "Shift+M" "core.favorites.add"
+    "." "core.display.hidden"
+    
     
     "Cmd+Return" "core.open"
     "Ctrl+H" "core.back"
     "Ctrl+L" "core.forward"
     "Ctrl+X" "core.pane.swap"
     "Return" "core.rename"
-    "M" "core.favorites"
-    "Shift+M" "core.favorites.add"
     "Shift+Space" "core.select.move.down"
-    "." "core.display.hidden"
+    
     
     "Cmd+Shift+M" "core.move"
     "Cmd+F" "core.lookup.here"
