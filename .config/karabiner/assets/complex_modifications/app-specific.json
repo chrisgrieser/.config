@@ -1012,7 +1012,7 @@
           },
           "to": [
             {
-              "key_code": "open_bracket"
+              "key_code": "f20"
             }
           ],
           "conditions": [

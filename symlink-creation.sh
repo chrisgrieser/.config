@@ -30,14 +30,10 @@ ln -sf "$DOTFILE_FOLDER/.config/" ~/.config
 [[ -e ~/.hammerspoon ]] && rm -rf ~/.hammerspoon
 ln -sf "$DOTFILE_FOLDER/hammerspoon" ~/.hammerspoon
 
-# fman
-[[ -e ~"/Library/Application Support/fman/Plugins" ]] && rm -rf ~"/Library/Application Support/fman/Plugins"
-ln -sf "$DOTFILE_FOLDER/fman" ~"/Library/Application Support/fman/Plugins"
-
 # Marta
-ln -fs /Applications/Marta.app/Contents/Resources/launcher /opt/homebrew/bin/marta
-
-marta "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+ln -sf /Applications/Marta.app/Contents/Resources/launcher /opt/homebrew/bin/marta
+[[ -e ~"/Library/Application Support/org.yanex.marta" ]] && rm -rf ~"/Library/Application Support/org.yanex.marta"
+ln -sf ~"/dotfiles/Marta" ~"/Library/Application Support/org.yanex.marta"
 
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"
