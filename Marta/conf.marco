@@ -43,11 +43,11 @@ behavior {
         core.open.openApplicationsAsFolders true
         core.disk.usage.completionSound "Submarine"
         core.lookup.mode "substring"
+        core.tab.new.useDefaults true
     }
 
     quickSelect {
         activateOnAnyCharacter false
-        filterMatchedItems false
     }
 
 }
@@ -76,6 +76,15 @@ gadgets [
 
         executable "/opt/homebrew/bin/alacritty"
         args ["--working-directory=${active.folder.path}"]
+    }
+    
+    {
+        id "gadget.action.open.console"
+        name "Open Console"
+        type "executable"
+
+        executable "/opt/homebrew/bin/alacritty"
+        args ["--command='/Applications/Marta.app/Contents/MacOS/Marta'"]
     }
 ]
 
@@ -132,6 +141,7 @@ keyBindings {
     "Shift+Z" "core.extract"
     "Shift+Space" "core.select.move.down"
 
+    "Ctrl+F18" "gadget.action.open.alacritty"
     "Cmd+Shift+Opt+Ctrl+T" "gadget.action.open.alacritty"
     "Ctrl+H" "core.back"
     "Ctrl+O" "core.back"
