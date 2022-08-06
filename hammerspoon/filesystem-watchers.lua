@@ -99,3 +99,16 @@ fileHubWatcher = hs.pathwatcher.new(fileHub, fromFileHub)
 fileHubWatcher:start()
 
 
+--------------------------------------------------------------------------------
+-- Trash Watcher
+-- touch files added to the trash, so they can be retrieved via theri modification date
+-- https://discussions.apple.com/thread/4509102
+
+function enteredTrash(files)
+	for _,file in pairs(files) do
+		if isInSubdirectory(file, fileHub) then return end
+		hs.execute('touch "'..file..'"')
+	end
+end
+trashWatcher = hs.pathwatcher.new(os.getenv("HOME").."/.Trash", enteredTrash)
+trashWatcher:start()
