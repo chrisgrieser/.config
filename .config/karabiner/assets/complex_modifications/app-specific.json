@@ -999,38 +999,6 @@
               "shell_command": "/Applications/Marta.app/Contents/Resources/launcher --existing-tab \"$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/\""
             }
           ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "hyphen",
-            "modifiers": {
-              "mandatory": [
-                "shift"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "f20"
-            }
-          ],
-          "conditions": [
-            {
-              "type": "input_source_if",
-              "input_sources": [
-                {
-                  "language": "^de$"
-                }
-              ]
-            },
-            {
-              "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^org\\.yanex\\.marta$"
-              ]
-            }
-          ]
         }
       ]
     }
