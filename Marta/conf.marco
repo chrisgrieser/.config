@@ -47,7 +47,7 @@ behavior {
 
     quickSelect {
         activateOnAnyCharacter false
-        filterMatchedItems true
+        filterMatchedItems false
     }
 
 }
@@ -59,7 +59,7 @@ fonts {
     statusBar [ "Recursive" 21 ]
     tableHeader [ "Default" 19 ]
     tabs [ "Recursive" 20 ]
-    preferences [ "Input" 23 ]
+    preferences [ "Input" 24 ]
 }
 
 etty {
