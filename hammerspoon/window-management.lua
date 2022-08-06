@@ -600,3 +600,18 @@ wf_sublime:subscribe(wf.windowFocused, function (focusedWin)
 		alacrittyWin:raise()
 	end
 end)
+
+
+-- MARTA
+wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow'}
+wf_marta:subscribe(wf.windowCreated, function (newWindow)
+	-- workaround for Window positioning issue
+	if isAtOffice() then
+		moveResizeCurWin("maximized")
+		runDelayed(0.2, function () moveResizeCurWin("maximized") end)
+	else
+		moveResizeCurWin("pseudo-maximized")
+		runDelayed(0.2, function () moveResizeCurWin("pseudo-maximized") end)
+		hs.application("Twitterrific"):mainWindow():raise()
+	end
+end)
