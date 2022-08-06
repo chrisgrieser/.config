@@ -147,7 +147,6 @@ function movieModeLayout()
 	iMacDisplay:setBrightness(0)
 
 	openIfNotRunning("YouTube")
-	openIfNotRunning("BetterTouchTool")
 	openIfNotRunning("Finder")
 
 	killIfRunning("Obsidian")
@@ -174,7 +173,6 @@ function homeModeLayout ()
 	openIfNotRunning("Twitterrific")
 	openIfNotRunning("Drafts")
 
-	killIfRunning("BetterTouchTool")
 	killIfRunning("YouTube")
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
@@ -573,7 +571,7 @@ wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 
 	-- workaround for Window positioning issue, will be fixed with build 4130 being released
 	-- https://github.com/sublimehq/sublime_text/issues/5237
-	elseif isAtOffice() then
+	elseif isAtOffice() or isProjector() then
 		moveResizeCurWin("maximized")
 		runDelayed(0.2, function () moveResizeCurWin("maximized") end)
 	else
@@ -606,11 +604,10 @@ wf_sublime:subscribe(wf.windowFocused, function (focusedWin)
 	end
 end)
 
-
 -- MARTA
 wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow'}
 wf_marta:subscribe(wf.windowCreated, function ()
-	if isAtOffice() then
+	if isAtOffice() or isProjector() then
 		moveResizeCurWin("maximized")
 	else
 		moveResizeCurWin("pseudo-maximized")
