@@ -30,7 +30,7 @@ behavior {
         showGoUpFolder false
 
         defaults {
-            columns "modified:180"
+            columns "modified:200"
             ordering {
                 column "modified"
                 isAscending false
@@ -84,7 +84,7 @@ gadgets [
         type "executable"
 
         executable "/opt/homebrew/bin/alacritty"
-        args ["--command='/Applications/Marta.app/Contents/MacOS/Marta'"]
+        args ["--command=/Applications/Marta.app/Contents/MacOS/Marta"]
     }
 ]
 
@@ -132,6 +132,7 @@ keyBindings {
     "u" "core.hierarchy"
     "r" "core.recent"
     "i" "core.finder.showInfo"
+    "Shift+I" "marta.example.fileinfo.show"
     "f" "core.navigate.original"
     "Shift+F" "core.navigate.original.tab"
     "s" "core.disk.usage"
@@ -141,7 +142,7 @@ keyBindings {
     "Shift+Z" "core.extract"
     "Shift+Space" "core.select.move.down"
 
-    "Ctrl+F18" "gadget.action.open.alacritty"
+    "Ctrl+F18" "gadget.action.open.console"
     "Cmd+Shift+Opt+Ctrl+T" "gadget.action.open.alacritty"
     "Ctrl+H" "core.back"
     "Ctrl+O" "core.back"
