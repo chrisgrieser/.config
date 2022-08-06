@@ -42,6 +42,7 @@ behavior {
         core.trash.confirm false
         core.open.openApplicationsAsFolders true
         core.disk.usage.completionSound "Submarine"
+        core.lookup.mode "substring"
     }
 
     quickSelect {

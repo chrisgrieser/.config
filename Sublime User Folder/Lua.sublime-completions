@@ -8,7 +8,7 @@
         "hs.screen.mainScreen()",
         "hs.window.focusedWindow()",
         "hs.window.orderedWindows()",
-        "hs.execute()\treturn\treturns string: STDOUT, boolean: success",
+        "hs.execute()\treturns string: STDOUT, boolean: success",
         "hs.osascript.applescript()\treturns boolean: success, string: output",
         ":getWindow()\ths.application",
         ":mainWindow()\ths.application",
