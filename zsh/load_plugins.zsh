@@ -11,9 +11,13 @@ fi
 # INFO zoxide loading in terminal-utils, cause needs to be loaded with configuration
 # parameters
 
+
 # `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
 source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# has to be loaded *after* zsh syntax highlighting
+source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
 eval "$(starship init zsh)"
 source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"

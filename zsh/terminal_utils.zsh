@@ -1,12 +1,3 @@
-function runMagicEnter (){
-	command git rev-parse --is-inside-work-tree &>/dev/null;
-	if [[ $? -eq 0 ]] ; then
-		exagit
-	else
-		exa
-	fi
-}
-
 # draws a separator line with terminal width
 function separator (){
 	local SEP=""
@@ -36,7 +27,6 @@ function o (){
 
 	if [[ -d "$SELECTED" ]] ; then
 		z "$SELECTED"
-		runMagicEnter
 	else
 		open "$SELECTED"
 	fi
@@ -51,11 +41,8 @@ function z () {
 	else
 		__zoxide_z "$1"
 	fi
-	runMagicEnter
 }
-function zi (){
-	__zoxide_zi &&	runMagicEnter
-}
+alias zi="__zoxide_zi"
 
 # exa after switching to directory with more than 15 items -
 function ls_on_cd() {
