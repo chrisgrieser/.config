@@ -84,6 +84,13 @@ gadgets [
         executable "/bin/chmod"
         args ["+x" "${active.selection.paths}"]
     }
+    {
+        id "gadget.action.git.acp"
+        name "Git: Add – Commit – Push"
+        type "executable"
+        executable "${user.home}/dotfiles/Marta/scripts/git-acp.sh"
+        workingDirectory "${active.folder.path}"
+    }
 ]
 
 
@@ -154,6 +161,7 @@ keyBindings {
     "Shift+Space" "core.select.move.down"
 
     "Ctrl+F18" "gadget.action.open.console"
+    "Cmd+G" "gadget.action.git.acp"
     "Cmd+Shift+Opt+Ctrl+T" "gadget.action.open.alacritty"
     "Ctrl+H" "core.back"
     "Ctrl+O" "core.back"
