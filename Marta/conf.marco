@@ -25,6 +25,7 @@ behavior {
         verticalPadding 3
 
         colorHighlighting true
+        rightClickSelect true
 
         showGoUpFolder false
 
@@ -72,14 +73,13 @@ gadgets [
         type "executable"
 
         executable "/opt/homebrew/bin/alacritty"
-        args ["--working-directory='${user.home}'"]
+        args ["--working-directory=${user.home}"]
         workingDirectory "${user.home}"
     }
 ]
 
 
 keyBindings {
-    "Cmd+Shift+T" "gadget.action.open.alacritty"
     "h" "core.go.up"
     "Shift+H" "core.clone.left"
     "Shift+L" "core.clone.right"
@@ -92,10 +92,12 @@ keyBindings {
     "Shift+G" "core.move.end"
     "Shift+J" "core.move.half.page.down"
     "Shift+K" "core.move.half.page.up"
+    
     "Shift+V" "core.select.all.after"
     "v" "core.select.all.before"
     "a" "core.edit"
     "Shift+A" "core.edit.folder"
+    
     "y" "core.clipboard.copy"
     "p" "core.clipboard.paste"
     "Shift+P" "core.move.inactive"
@@ -106,6 +108,7 @@ keyBindings {
     "d" "core.trash"
     "x" "core.pane.swap"
     "c" "core.rename"
+    
     "m" "core.favorites"
     "Shift+M" "core.favorites.add"
     "." "core.display.hidden"
@@ -119,19 +122,21 @@ keyBindings {
     "Shift+F" "core.navigate.original.tab"
     "s" "core.disk.usage"
     "0" "core.flatten"
+    "z" "core.compress"
 
-    "Cmd+Return" "core.open"
+    "Cmd+Shift+T" "gadget.action.open.alacritty"
     "Ctrl+H" "core.back"
     "Ctrl+O" "core.back"
     "Ctrl+I" "core.forward"
     "Ctrl+L" "core.forward"
-    "Return" "core.rename"
+    
     "Shift+Space" "core.select.move.down"
 
     "Cmd+Shift+M" "core.move"
     "Cmd+Shift+C" "core.copy"
     "Cmd+F" "core.lookup.here"
-    "Cmd+L" "core.finder.reveal"
+    "Cmd+Shift+F" "core.lookup"
+    "Shift+Ctrl+Opt+L" "core.finder.reveal"
     "Cmd+Shift+N" "core.new.folder"
     "Cmd+U" "core.hierarchy"
     "Cmd+N" "core.new.file"
@@ -145,7 +150,7 @@ keyBindings {
     "Shift+Cmd+Ctrl+S" "core.edit.folder"
 
     "Ctrl+Opt+Shift+T" "core.theme"
-    "Cmd+Q" "core.state.reset"
+   
 
     "F1" null
     "F2" null

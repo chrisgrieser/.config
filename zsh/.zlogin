@@ -21,8 +21,8 @@ if [[ "$TERMINAL" == "Alacritty" ]] ; then
 	separator
 	echo
 
-	# show files if there are any
-	if [[ $(ls | wc -l) -gt 0 ]] ; then
+	# show files if there are any, and only if less than 30
+	if [[ $(ls | wc -l) -gt 0 ]] && [[ $(ls | wc -l) -lt 30 ]] ; then
 		exa
 		echo
 	fi
