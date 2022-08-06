@@ -1,3 +1,5 @@
+-- https://marta.sh/api/tutorials/your-first-marta-plugin/
+
 plugin {
 	id = "de.chris-grieser.sample-plugin",
 	name = "Sample Plugin",
