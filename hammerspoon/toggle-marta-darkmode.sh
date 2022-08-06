@@ -3,7 +3,7 @@ DARK_THEME=Kon
 LIGHT_THEME=Classic
 TARGET_MODE=$1
 
-if test "$TARGET_MODE" = "dark" ; then
+if [[ "$TARGET_MODE" == "dark" ]] ; then
 	grep -q "theme \"$DARK_THEME\"" "$MARTA_CONFIG" && return
 	sed -i '' "s/ theme \"$LIGHT_THEME\"/ theme \"$DARK_THEME\"/" "$MARTA_CONFIG"
 else
@@ -12,7 +12,11 @@ else
 fi
 
 if pgrep "Marta" &> /dev/null ; then
+	IS_FRONT_MOST=$(osascript -e 'frontmost of application "Marta"')
 	killall "Marta"
 	sleep 0.2
 	open -a "Marta"
+	if [[ "$IS_FRONT_MOST" == "false" ]] ; then
+		osascript -e 'tell application "System Events" to tell process "Marta" to set visible to false'
+	fi
 fi
