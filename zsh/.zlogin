@@ -16,14 +16,10 @@ if [[ "$TERMINAL" == "Alacritty" ]] ; then
 	else
 		echo
 		echo "> $(fortune -n270 -s)"
-		echo
+	echo
 	fi
 	separator
 	echo
 
-	# show files if there are any, and only if less than 30
-	if [[ $(ls | wc -l) -gt 0 ]] && [[ $(ls | wc -l) -lt 30 ]] ; then
-		exa
-		echo
-	fi
+	directoryInspect
 fi
