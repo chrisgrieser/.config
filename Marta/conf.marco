@@ -1,6 +1,6 @@
 
 behavior {
-    theme "Kon"
+    theme "Classic"
 
     layout {
         showActionBar false
@@ -158,7 +158,7 @@ keyBindings {
     "x" "core.pane.swap"
     "c" "core.rename"
     "/" "core.lookup.here"
-    "_" "core.documentation"
+    "Shift+-" "core.documentation"
     
     "m" "core.favorites"
     "Shift+M" "core.favorites.add"
