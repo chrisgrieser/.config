@@ -43,6 +43,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write -g PMPrintingExpandedStateForPrint -bool true
 defaults write -g PMPrintingExpandedStateForPrint2 -bool true
 
+
 #=========================================
 # System Prefs
 #=========================================

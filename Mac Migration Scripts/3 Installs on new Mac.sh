@@ -3,9 +3,6 @@ sudo -v
 # Install Homebrew itself
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# needed for php installation, php needed for Spotify workflow
-xcode-select --install
-
 sudo gem install anystyle-cli
 pip3 install pdfannots
 
@@ -63,3 +60,17 @@ espanso service register
 
 # Hammerspoon
 defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
+
+# Marta
+defaults write -g NSFileViewer -string org.yanex.marta
+defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="org.yanex.marta";}'
+# then restart mac
+
+# to restore Finder as default
+# defaults delete -g NSFileViewer
+# defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="com.apple.finder";}'
+
+# Reference
+# https://binarynights.com/manual#fileviewer
+# https://github.com/marta-file-manager/marta-issues/issues/861
+
