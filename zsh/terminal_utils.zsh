@@ -47,6 +47,7 @@ alias zi="__zoxide_zi"
 # exa after switching to directory with more than 15 items
 function ls_on_cd() {
 	emulate -L zsh
+	git status --short 2&> /dev/null
 	[[ $(ls -A | wc -l | tr -d ' ') -lt 15 ]] && exa
 }
 if [[ ${chpwd_functions[(r)ls_on_cd]} != "ls_on_cd" ]];then

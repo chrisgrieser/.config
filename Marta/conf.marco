@@ -30,7 +30,7 @@ behavior {
         showGoUpFolder false
 
         defaults {
-            columns ">size:100,modified:150"
+            columns "size:100,modified:150"
             ordering {
                 column "modified"
                 isAscending false
@@ -41,6 +41,7 @@ behavior {
     actions {
         core.trash.confirm false
         core.open.openApplicationsAsFolders true
+        core.disk.usage.completionSound "Submarine"
     }
 
     quickSelect {
@@ -73,8 +74,7 @@ gadgets [
         type "executable"
 
         executable "/opt/homebrew/bin/alacritty"
-        args ["--working-directory=${user.home}"]
-        workingDirectory "${user.home}"
+        args ["--working-directory=${active.folder.path}"]
     }
 ]
 
@@ -123,14 +123,14 @@ keyBindings {
     "s" "core.disk.usage"
     "0" "core.flatten"
     "z" "core.compress"
+    "Shift+Z" "core.extract"
+    "Shift+Space" "core.select.move.down"
 
-    "Cmd+Shift+T" "gadget.action.open.alacritty"
+    "Cmd+Shift+Opt+Ctrl+T" "gadget.action.open.alacritty"
     "Ctrl+H" "core.back"
     "Ctrl+O" "core.back"
     "Ctrl+I" "core.forward"
     "Ctrl+L" "core.forward"
-    
-    "Shift+Space" "core.select.move.down"
 
     "Cmd+Shift+M" "core.move"
     "Cmd+Shift+C" "core.copy"
