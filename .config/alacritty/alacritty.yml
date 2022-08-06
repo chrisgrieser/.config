@@ -154,9 +154,6 @@ key_bindings:
   - key: 22
     mods: Alt
     chars: ']'
-  # - key: "N"
-  #   mods: Alt
-  #   chars: '~'
   - key: W
     mods: Command
     chars: "\x04"

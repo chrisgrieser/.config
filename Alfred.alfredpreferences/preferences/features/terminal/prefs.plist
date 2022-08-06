@@ -6,29 +6,22 @@
 	<integer>1</integer>
 	<key>custom</key>
 	<string>on alfred_script(q)
+	set prevClipboard to the clipboard
+	set the clipboard to q
 
-	if q starts with "cd " then
-		set target to ((characters 4 thru -1 of filename) as string)  --trim first 3
-		do shell script "/opt/homebrew/bin/alacritty --working-directory=" &amp; target
-	else
-		set prevClipboard to the clipboard
-		set the clipboard to q
-
-		tell application "Alacritty" to activate
-		tell application "System Events"
-			-- Alacritty's process name is lowercased
-			repeat while (name of first application process whose frontmost is true) is not "alacritty"
-				delay 0.1
-			end repeat
+	tell application "Alacritty" to activate
+	tell application "System Events"
+		repeat while (name of first application process whose frontmost is true) is not "alacritty"
 			delay 0.1
-			keystroke "v" using {command down}
-			delay 0.1
-			key code 36
-		end tell
+		end repeat
+		delay 0.1
+		keystroke "v" using {command down}
+		delay 0.1
+		key code 36
+		if q starts with "cd " then keystroke "l" using {control down} # clear screen in zsh
 
 		set the clipboard to prevClipboard
-	end if
-
+	end tell
 end alfred_script</string>
 	<key>prefix</key>
 	<integer>1</integer>

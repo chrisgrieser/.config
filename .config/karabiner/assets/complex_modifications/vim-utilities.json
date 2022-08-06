@@ -279,14 +279,6 @@
                   "language": "^de$"
                 }
               ]
-            },
-            {
-              "type": "frontmost_application_if",
-              "file_path": [
-                "alacritty$",
-                "Obsidian\\.app",
-                "Sublime Text\\.app"
-              ]
             }
           ],
           "to": [
