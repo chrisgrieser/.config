@@ -1,19 +1,6 @@
 #!/bin/zsh
 
 INPUT="$*"
-if [[ -z "$INPUT" ]] ; then
-	# get path of current Finder Selection/Window
-	FINDER_SEL=$(osascript -e 'tell application "Finder"
-		if ((count windows) is 0) then return "no window"
-		set sel to selection
-		if ((count sel) > 1) then return POSIX path of ((item 1 of sel) as text)
-		if ((count sel) = 1) then return POSIX path of (sel as text)
-		if ((count sel) = 0) then return POSIX path of (target of window 1 as alias)
-	end tell')
-	[[ "$FINDER_SEL" == "no window" ]] && exit 1 # no finder window
-	INPUT="$FINDER_SEL"
-fi
-
 FOLDER=$(dirname "$INPUT")
 FILE=$(basename "$INPUT")
 

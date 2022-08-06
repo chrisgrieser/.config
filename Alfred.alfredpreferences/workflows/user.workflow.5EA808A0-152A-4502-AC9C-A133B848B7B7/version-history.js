@@ -5,12 +5,6 @@ function run (argv) {
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
 
-	function finderSelection () {
-		const sel = decodeURI(Application("Finder").selection()[0]?.url());
-		if (sel === "undefined") return ""; // = no selection
-		return sel.slice(7);
-	}
-
 	const filePathRegex = /(\/.*)\/(.*\.(\w+))$/;
 
 	function alfredErrorDisplay (text) {
@@ -23,13 +17,8 @@ function run (argv) {
 	const query = argv.join("");
 	const gitAuthor = $.getenv("git_author");
 
-	let FULL_PATH;
-	try {
-		FULL_PATH = $.getenv("input");
-	} catch (error) {
-		FULL_PATH = finderSelection();
-		if (!FULL_PATH) return alfredErrorDisplay("No selection");
-	}
+	const FULL_PATH = $.getenv("input");
+	if (!FULL_PATH) return alfredErrorDisplay("No selection");
 
 	const isRegularFile = FULL_PATH.match(filePathRegex);
 	if (!isRegularFile) return alfredErrorDisplay("Not a regular file");

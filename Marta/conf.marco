@@ -17,7 +17,7 @@ behavior {
     }
 
     timeFormat {
-        separator " "
+        separator ", "
     }
 
     table {
@@ -77,7 +77,6 @@ gadgets [
         executable "/opt/homebrew/bin/alacritty"
         args ["--working-directory=${active.folder.path}"]
     }
-
     {
         id "gadget.action.open.console"
         name "Open Console"
@@ -111,7 +110,7 @@ keyBindings {
     }
     "f" {
         id "core.select.group"
-        pattern ".app$"
+        pattern "."
     }
 
     "e" "core.edit"

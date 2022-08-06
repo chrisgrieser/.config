@@ -40,7 +40,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C7CDBB63-914B-4E57-8643-E8D751667BF6</string>
+				<string>C21186A4-BFA2-43DB-8893-567B30CBA24D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -395,7 +395,7 @@
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -413,6 +413,7 @@
 				<key>relatedApps</key>
 				<array>
 					<string>com.apple.finder</string>
+					<string>org.yanex.marta</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -709,7 +710,7 @@ open $(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | c
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -727,6 +728,7 @@ open $(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | c
 				<key>relatedApps</key>
 				<array>
 					<string>com.apple.finder</string>
+					<string>org.yanex.marta</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -1399,7 +1401,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>200</real>
 			<key>ypos</key>
 			<real>555</real>
 		</dict>
