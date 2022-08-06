@@ -97,7 +97,6 @@ rules:
         conditions:
           - type: frontmost_application_unless
             bundle_identifiers:
-              - ^com\.apple\.finder$
               - ^com\.hegenberg\.BetterTouchTool$
               - ^org\.hammerspoon\.Hammerspoon$
       - type: basic
@@ -110,7 +109,6 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
-              - ^com\.apple\.finder$
               - ^com\.hegenberg\.BetterTouchTool$
               - ^org\.hammerspoon\.Hammerspoon$
   - description: "🐁 4"

@@ -17,6 +17,7 @@ function bindEverywhere () {
 bindEverywhere "^P" copy-location
 bindEverywhere "^B" copy-buffer
 bindEverywhere '“' quote-all-args # “=alt+2
+bindEverywhere '…' insert-last-word # “=alt+.
 
 # [f]orward to editor
 autoload edit-command-line; zle -N edit-command-line
