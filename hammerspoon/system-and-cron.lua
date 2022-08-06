@@ -210,7 +210,6 @@ function toggleDarkMode ()
 		TO_DARK=]].."true"..[[
 
 		if test "$TO_DARK" = "true" ; then
-			grep -q "theme \"$DARK_THEME\"" "$MARTA_CONFIG" && return
 			sed -i '' "s/ theme \"$LIGHT_THEME\"/ theme \"$DARK_THEME\"/" "$MARTA_CONFIG"
 		else
 			grep -q "theme \"$LIGHT_THEME\"" "$MARTA_CONFIG" && return
