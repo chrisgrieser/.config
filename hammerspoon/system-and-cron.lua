@@ -205,11 +205,13 @@ function toggleDarkMode ()
 		end tell
 	]])
 
-	targetMode = "dark"
-	if isDarkMode() then targetMode = "light" end
-	print ("targetMode: "..targetMode)
-	local stdout, _ = hs.execute("zsh toggle-marta-darkmode.sh "..targetMode)
-	print ("stdout: "..stdout)
+
+	-- since darkMode has already been switched via AppleScript, light & dark
+	-- have to be switched here
+	targetMode = "light"
+	if isDarkMode() then targetMode = "dark" end
+
+	hs.execute("zsh toggle-marta-darkmode.sh "..targetMode)
 end
 
 function isDarkMode()
