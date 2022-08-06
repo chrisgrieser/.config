@@ -90,42 +90,6 @@ gadgets [
 
 
 keyBindings {
-    "1" {
-        id "core.ordering"
-        ordering "modified"
-        isAscending true
-        showFoldersOnTop true
-    }
-    "Shift+1" {
-        id "core.ordering"
-        ordering "modified"
-        isAscending false
-        showFoldersOnTop true
-    }
-    "2" {
-        id "core.ordering"
-        ordering "extension"
-        isAscending true
-        showFoldersOnTop false
-    }
-    "Shift+2" {
-        id "core.ordering"
-        ordering "extension"
-        isAscending false
-        showFoldersOnTop false
-    }
-    "3" {
-        id "core.ordering"
-        ordering "size"
-        isAscending true
-        showFoldersOnTop false
-    }
-    "Shift+3" {
-        id "core.ordering"
-        ordering "size"
-        isAscending false
-        showFoldersOnTop false
-    }
     
     "h" "core.go.up"
     "Shift+H" "core.clone.left"
@@ -142,13 +106,15 @@ keyBindings {
     
     "Shift+V" "core.select.all.after"
     "v" "core.select.all.before"
-    "a" "core.edit"
-    "Shift+A" "core.edit.folder"
+    "e" "core.edit"
+    "Shift+E" "core.edit.folder"
+    "]" "core.new.file"
     
     "y" "core.clipboard.copy"
+    "Shift+Y" "core.duplicate"
     "p" "core.clipboard.paste"
-    "Shift+P" "core.move.inactive"
-    "Shift+Y" "core.copy.inactive"
+    "n" "core.move.inactive"
+    "a" "core.copy.inactive"
     "t" "core.tab.next"
     "Shift+T" "core.tab.next"
     "q" "core.queue"
@@ -172,8 +138,7 @@ keyBindings {
     "Shift+I" "marta.example.fileinfo.show"
     "f" "core.navigate.original"
     "Shift+F" "core.navigate.original.tab"
-    "s" "core.disk.usage"
-    "0" "core.flatten"
+    "Shift+5" "core.disk.usage"
     "Shift+0" "core.flatten"
     "z" "core.compress"
     "Shift+Z" "core.extract"
@@ -186,24 +151,61 @@ keyBindings {
     "Ctrl+I" "core.forward"
     "Ctrl+L" "core.forward"
 
-    "Cmd+Shift+M" "core.move"
-    "Cmd+Shift+C" "core.copy"
     "Cmd+F" "core.lookup.here"
     "Cmd+Shift+F" "core.lookup"
     "Shift+Ctrl+Opt+L" "core.finder.reveal"
     "Cmd+Shift+N" "core.new.folder"
-    "Cmd+U" "core.hierarchy"
     "Cmd+N" "core.new.file"
     "Cmd+P" "core.actions"
     "Ctrl+P" "core.path"
     "Cmd+8" "core.terminal.toggle"
     "Cmd+K" "core.terminal.clear.buffer"
-    "F20" "core.documentation"
-    "Cmd+R" "core.refresh"
     "Cmd+Shift+D" "core.duplicate"
     "Shift+Cmd+Ctrl+S" "core.edit.folder"
-
     "Ctrl+Opt+Shift+T" "core.theme"
+    
+    "'" "core.move.right"
+    ";" "core.move.left"
+    "\\" ""
+    "|" ""
+    
+   
+   "1" {
+       id "core.ordering"
+       ordering "modified"
+       isAscending false
+       showFoldersOnTop true
+   }
+   "Shift+1" {
+       id "core.ordering"
+       ordering "modified"
+       isAscending true
+       showFoldersOnTop true
+   }
+   "2" {
+       id "core.ordering"
+       ordering "extension"
+       isAscending true
+       showFoldersOnTop false
+   }
+   "Shift+2" {
+       id "core.ordering"
+       ordering "extension"
+       isAscending false
+       showFoldersOnTop false
+   }
+   "3" {
+       id "core.ordering"
+       ordering "size"
+       isAscending true
+       showFoldersOnTop false
+   }
+   "Shift+3" {
+       id "core.ordering"
+       ordering "size"
+       isAscending false
+       showFoldersOnTop false
+   }
    
 
     "F1" null
