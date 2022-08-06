@@ -34,11 +34,6 @@ CLEAN_QUERY=$(echo "$*" | tr "/" " ")
 CACHE="/tmp/$CLEAN_QUERY" # will be displayed in less prompt line at start
 echo "$CHEAT_INFO" > "$CACHE"
 
-# kill previous cheatsheet
-# grep uses this trick to prevent reading itself https://unix.stackexchange.com/a/74186
-CHEATSHEET_PID=$(ps eo pid,command | grep "[l]ess" | cut -d" " -f1)
-kill $CHEATSHEET_PID
-
 alacritty \
 	--config-file="$PREVIEW_CONFIG" \
 	--title="cheatsheet" \
