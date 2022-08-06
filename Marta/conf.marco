@@ -1,11 +1,7 @@
 
-environment {
-    terminal "Alacritty"
-}
-
 behavior {
     theme "Kon"
-    
+
     layout {
         showActionBar false
     }
@@ -15,23 +11,23 @@ behavior {
     setCurrentPathAsWindowTitle true
     preselectFirstMenuItem true
     completionSoundCondition "always"
-    
+
     dateFormat {
         normal "%d %b %y"
     }
-    
+
     timeFormat {
         separator " "
     }
-    
+
     table {
         iconSize 23
         verticalPadding 3
-        
+
         colorHighlighting true
-        
+
         showGoUpFolder false
-        
+
         defaults {
             columns ">size:100,modified:150"
             ordering {
@@ -40,13 +36,12 @@ behavior {
             }
         }
     }
-    
-    action {
+
+    actions {
         core.trash.confirm false
         core.open.openApplicationsAsFolders true
-        core.preferences.use.text.editor true
     }
-    
+
     quickSelect {
         activateOnAnyCharacter false
         filterMatchedItems true
@@ -75,9 +70,9 @@ gadgets [
         id "gadget.action.open.alacritty"
         name "Open Alacritty"
         type "executable"
-        
+
         executable "/opt/homebrew/bin/alacritty"
-        args ["--working-directory" "${user.home}"]
+        args ["--working-directory='${user.home}'"]
         workingDirectory "${user.home}"
     }
 ]
@@ -114,7 +109,8 @@ keyBindings {
     "m" "core.favorites"
     "Shift+M" "core.favorites.add"
     "." "core.display.hidden"
-    "," "core.open.config.folder"
+    "Shift+," "core.open.config.folder"
+    "," "core.preferences"
     "Shift+." "core.actions"
     "u" "core.hierarchy"
     "r" "core.recent"
@@ -123,7 +119,7 @@ keyBindings {
     "Shift+F" "core.navigate.original.tab"
     "s" "core.disk.usage"
     "0" "core.flatten"
-    
+
     "Cmd+Return" "core.open"
     "Ctrl+H" "core.back"
     "Ctrl+O" "core.back"
@@ -131,7 +127,7 @@ keyBindings {
     "Ctrl+L" "core.forward"
     "Return" "core.rename"
     "Shift+Space" "core.select.move.down"
-    
+
     "Cmd+Shift+M" "core.move"
     "Cmd+Shift+C" "core.copy"
     "Cmd+F" "core.lookup.here"
@@ -140,7 +136,6 @@ keyBindings {
     "Cmd+U" "core.hierarchy"
     "Cmd+N" "core.new.file"
     "Cmd+P" "core.actions"
-    "Cmd+O" "core.go"
     "Ctrl+P" "core.path"
     "Cmd+8" "core.terminal.toggle"
     "Cmd+K" "core.terminal.clear.buffer"
@@ -148,10 +143,10 @@ keyBindings {
     "Cmd+R" "core.refresh"
     "Cmd+Shift+D" "core.duplicate"
     "Shift+Cmd+Ctrl+S" "core.edit.folder"
-    
+
     "Ctrl+Opt+Shift+T" "core.theme"
     "Cmd+Q" "core.state.reset"
-    
+
     "F1" null
     "F2" null
     "F3" null
@@ -164,4 +159,16 @@ keyBindings {
     "F10" null
     "F11" null
     "F12" null
+    "Shift+F1" null
+    "Shift+F2" null
+    "Shift+F3" null
+    "Shift+F4" null
+    "Shift+F5" null
+    "Shift+F6" null
+    "Shift+F7" null
+    "Shift+F8" null
+    "Shift+F9" null
+    "Shift+F10" null
+    "Shift+F11" null
+    "Shift+F12" null
 }
