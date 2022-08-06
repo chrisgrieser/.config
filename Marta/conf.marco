@@ -21,7 +21,7 @@ behavior {
     }
 
     table {
-        iconSize 23
+        iconSize 30
         verticalPadding 3
 
         colorHighlighting true
@@ -30,7 +30,7 @@ behavior {
         showGoUpFolder false
 
         defaults {
-            columns ">size:100,modified:160"
+            columns "modified:180"
             ordering {
                 column "modified"
                 isAscending false
@@ -55,7 +55,7 @@ behavior {
 fonts {
     breadcrumbs [ "Recursive" 15 ]
     virtualTabs [ "Recursive" 19 ]
-    files [ "Default" 23 ]
+    files [ "Default" 27 ]
     statusBar [ "Recursive" 21 ]
     tableHeader [ "Default" 19 ]
     tabs [ "Recursive" 20 ]

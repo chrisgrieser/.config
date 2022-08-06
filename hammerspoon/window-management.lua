@@ -435,9 +435,7 @@ end
 --------------------------------------------------------------------------------
 -- HOTKEYS
 function controlSpace ()
-	if frontapp() == "Marta" then
-		size = "maximized"
-	elseif frontapp() == "Finder" or frontapp() == "Script Editor" then
+	if frontapp() == "Finder" or frontapp() == "Script Editor" then
 		size = "centered"
 	elseif isIMacAtHome() then
 		local currentWin = hs.window.focusedWindow()
