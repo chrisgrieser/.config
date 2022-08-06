@@ -205,7 +205,7 @@ function toggleDarkMode ()
 		end tell
 	]])
 
-	local arg1 = tostring(not(isDarkMode()))
+	local arg1 = tostring( isDarkMode())
 	hs.execute("zsh toggle-marta-darkmode.sh "..arg1)
 end
 
