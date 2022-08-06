@@ -16,8 +16,8 @@ if [[ "$TERMINAL" == "Alacritty" ]] ; then
 	else
 		echo
 		echo "> $(fortune -n270 -s)"
+		echo
 	fi
-	echo
 	separator
 	echo
 

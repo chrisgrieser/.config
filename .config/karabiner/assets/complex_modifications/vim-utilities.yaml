@@ -135,11 +135,6 @@ rules:
           - type: input_source_if
             input_sources:
               - language: ^de$
-          - type: frontmost_application_if
-            file_path:
-              - alacritty$
-              - Obsidian\.app
-              - Sublime Text\.app
         to:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.US$

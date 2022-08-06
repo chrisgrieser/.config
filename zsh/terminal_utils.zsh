@@ -1,3 +1,12 @@
+function runMagicEnter (){
+	command git rev-parse --is-inside-work-tree &>/dev/null;
+	if [[ $? -eq 0 ]] ; then
+		exagit
+	else
+		exa
+	fi
+}
+
 # draws a separator line with terminal width
 function separator (){
 	local SEP=""

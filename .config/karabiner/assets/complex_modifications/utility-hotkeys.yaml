@@ -144,7 +144,7 @@ rules:
           - key_code: non_us_backslash
             modifiers:
               - shift
-  - description: "🔘1️⃣ One Stroke ^`~ (German Layout)"
+  - description: "🔘1️⃣ One Stroke ^` (German Layout)"
     manipulators:
       # backtick
       - type: basic
@@ -182,27 +182,6 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.sublimetext\.4$
-      # tilde ~
-      - type: basic
-        from:
-          key_code: "n"
-          modifiers:
-            mandatory:
-              - option
-        to:
-          - key_code: "n"
-            modifiers:
-              - option
-          - key_code: spacebar
-        conditions:
-          - type: input_source_if
-            input_sources:
-              - language: ^de$
-          - type: frontmost_application_unless
-            file_path:
-              - alacritty$
-              - Obsidian\.app
-              - Sublime Text\.app
       - description: ^
         type: basic
         from:
@@ -216,6 +195,5 @@ rules:
               - language: ^de$
           - type: frontmost_application_unless
             bundle_identifiers:
-              - ^com\.apple\.Terminal$
               - ^md\.obsidian$
               - ^com\.sublimetext\.4$
