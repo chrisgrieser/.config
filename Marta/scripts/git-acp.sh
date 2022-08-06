@@ -14,3 +14,5 @@ msg="$changeType, $device_name"
 git add -A && git commit -m "$msg" --author="🤖📂<marta@file.explorer>"
 git pull
 git push
+
+osascript -e "display notification \"\" with title \"Git\" subtitle \"$msg\" sound name \"Submarine\""
