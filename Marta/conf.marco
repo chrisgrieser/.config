@@ -84,6 +84,13 @@ gadgets [
         executable "${user.home}/Library/Application Support/org.yanex.marta/pseudo-undo.sh"
         workingDirectory "${active.folder.path}"
     }
+    {
+        id "gadget.action.chmod.x"
+        name "Chmod + X"
+        type "executable"
+        executable "/bin/chmod"
+        args ["+x" "${active.selection.paths}"]
+    }
 ]
 
 
@@ -127,11 +134,8 @@ keyBindings {
     "w" "core.tab.close"
     "Shift+W" "core.tab.close.other"
     "d" "core.trash"
+    "Cmd+Z" "gadget.action.pseudo.undo"
     "Shift+D" {
-        id "core.open.folder"
-        src "~/.Trash"
-    }
-    "Cmd+Z" {
         id "core.open.folder"
         src "~/.Trash"
     }
@@ -170,6 +174,7 @@ keyBindings {
     "Cmd+Shift+D" "core.duplicate"
     "Shift+Cmd+Ctrl+S" "core.edit.folder"
     "Ctrl+Opt+Shift+T" "core.theme"
+    "Ctrl+Opt+Shift+X" "gadget.action.chmod.x"
 
     "'" "core.move.right"
     ";" "core.move.left"
