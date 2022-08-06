@@ -988,6 +988,7 @@ end tell</string>
 				<key>relatedApps</key>
 				<array>
 					<string>com.apple.finder</string>
+					<string>org.yanex.marta</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>

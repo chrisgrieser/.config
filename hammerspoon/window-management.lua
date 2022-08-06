@@ -148,8 +148,10 @@ function movieModeLayout()
 
 	openIfNotRunning("YouTube")
 	openIfNotRunning("BetterTouchTool")
+	openIfNotRunning("Finder")
 
 	killIfRunning("Obsidian")
+	killIfRunning("Marta")
 	killIfRunning("Drafts")
 	killIfRunning("Slack")
 	killIfRunning("Discord")
@@ -176,11 +178,13 @@ function homeModeLayout ()
 	killIfRunning("YouTube")
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
+	killIfRunning("Finder")
 	privateClosers()
 
 	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
 	local homeLayout = {
 		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
+		{"Marta", nil, iMacDisplay, maximized, nil, nil},
 		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Slack", nil, iMacDisplay, pseudoMaximized, nil, nil},
@@ -226,6 +230,7 @@ function officeModeLayout ()
 		{"Slack", nil, screen2, bottom, nil, nil},
 		-- screen 1
 		{"Brave Browser", nil, screen1, maximized, nil, nil},
+		{"Marta", nil, screen1, maximized, nil, nil},
 		{"Sublime Text", nil, screen1, maximized, nil, nil},
 		{"Obsidian", nil, screen1, maximized, nil, nil},
 		{"Drafts", nil, screen1, maximized, nil, nil},
@@ -430,7 +435,9 @@ end
 --------------------------------------------------------------------------------
 -- HOTKEYS
 function controlSpace ()
-	if (frontapp() == "Finder") then
+	if frontapp() == "Marta" then
+		size = "maximized"
+	elseif frontapp() == "Finder" or frontapp() == "Script Editor" then
 		size = "centered"
 	elseif isIMacAtHome() then
 		local currentWin = hs.window.focusedWindow()
@@ -605,13 +612,5 @@ end)
 -- MARTA
 wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow'}
 wf_marta:subscribe(wf.windowCreated, function (newWindow)
-	-- workaround for Window positioning issue
-	if isAtOffice() then
-		moveResizeCurWin("maximized")
-		runDelayed(0.2, function () moveResizeCurWin("maximized") end)
-	else
-		moveResizeCurWin("pseudo-maximized")
-		runDelayed(0.2, function () moveResizeCurWin("pseudo-maximized") end)
-		hs.application("Twitterrific"):mainWindow():raise()
-	end
+	moveResizeCurWin("maximized")
 end)

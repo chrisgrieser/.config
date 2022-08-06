@@ -1,9 +1,8 @@
-function runMagicEnter (){
-	command git rev-parse --is-inside-work-tree &>/dev/null;
-	if [[ $? -eq 0 ]] ; then
-		exagit
-	else
+function directoryInspect (){
+	command git rev-parse --is-inside-work-tree &>/dev/null && git status --short
+	if [[ $(ls | wc -l) -gt 0 ]] && [[ $(ls | wc -l) -lt 30 ]] ; then
 		exa
+		echo
 	fi
 }
 
@@ -50,19 +49,12 @@ function z () {
 	else
 		__zoxide_z "$1"
 	fi
+	directoryInspect
 }
-alias zi="__zoxide_zi"
-
-# exa after switching to directory with more than 15 items
-function ls_on_cd() {
-	emulate -L zsh
-	git status --short 2&> /dev/null
-	[[ $(ls -A | wc -l | tr -d ' ') -lt 15 ]] && exa
+function zi () {
+	__zoxide_zi
+	directoryInspect
 }
-if [[ ${chpwd_functions[(r)ls_on_cd]} != "ls_on_cd" ]];then
-	chpwd_functions=(${chpwd_functions[@]} "ls_on_cd")
-fi
-
 
 # settings (zshrc)
 alias ,="settings"
