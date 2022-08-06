@@ -1,6 +1,6 @@
 
 behavior {
-    theme "Classic"
+    theme "Kon"
 
     layout {
         showActionBar false
@@ -30,7 +30,7 @@ behavior {
         showGoUpFolder false
 
         defaults {
-            columns "size:100,modified:150"
+            columns ">size:100,modified:160"
             ordering {
                 column "modified"
                 isAscending false
@@ -54,9 +54,9 @@ behavior {
 fonts {
     breadcrumbs [ "Recursive" 15 ]
     virtualTabs [ "Recursive" 19 ]
-    files [ "Recursive" 23 ]
-    statusBar [ "iA Writer Quattro V" 21 ]
-    tableHeader [ "Input" 19 ]
+    files [ "Default" 23 ]
+    statusBar [ "Recursive" 21 ]
+    tableHeader [ "Default" 19 ]
     tabs [ "Recursive" 20 ]
     preferences [ "Input" 23 ]
 }
