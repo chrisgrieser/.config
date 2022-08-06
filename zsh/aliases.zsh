@@ -46,11 +46,11 @@ function exagit (){
 	git status --short; echo; exa --long --grid --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git
 }
 
-alias ll='exa --all --long --git --icons --group-directories-first --sort=modified'
-alias tree='exa --tree -L2'
-alias treee='exa --tree -L3'
-alias treeee='exa --tree -L4'
-alias treeeee='exa --tree -L5'
+alias ll='command exa --all --long --git --icons --group-directories-first --sort=modified'
+alias tree='command exa --tree -L2 --icons'
+alias treee='command exa --tree -L3 --icons'
+alias treeee='command exa --tree -L4 --icons'
+alias treeeee='command exa --tree -L5 --icons'
 alias size="du -sh ./* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 
 # Suffix Aliases
