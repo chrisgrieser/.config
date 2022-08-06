@@ -20,6 +20,10 @@ function man () {
 
  	local isBuiltIn=false
  	[[ "$(which "$1")" =~ "built-in" ]] && isBuiltIn=true
+ 	# builtIn command which *do* have a man page
+ 	if [[ "$1" == "test" ]] || [[ "$1" == "kill" ]] ; then
+ 		isBuiltIn=false
+ 	fi
 
 	# run in subshell to surpress output
  	if [[ $isBuiltIn == true ]] && [[ -z "$2" ]] ; then

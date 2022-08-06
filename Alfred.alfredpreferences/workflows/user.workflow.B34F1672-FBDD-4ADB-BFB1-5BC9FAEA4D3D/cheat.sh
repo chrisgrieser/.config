@@ -34,8 +34,12 @@ CLEAN_QUERY=$(echo "$*" | tr "/" " ")
 CACHE="/tmp/$CLEAN_QUERY" # will be displayed in less prompt line at start
 echo "$CHEAT_INFO" > "$CACHE"
 
+# kill previous cheatsheet
+
 alacritty \
 	--config-file="$PREVIEW_CONFIG" \
+	--option=window.decorations=full \
+	--title="Cheatsheet: $CLEAN_QUERY" \
 	--option="colors.primary.background='$BG_COLOR'" \
 	--option="colors.primary.foreground='$STATUSLINE_COLOR'" \
 	--option="window.position.x=$X" \
