@@ -2,6 +2,11 @@
 {
 	"settings": {
 		"Lua.diagnostics.globals": [
+			// Marta
+			"martax",
+			"action",
+			"plugin",
+
 			// Hammerspoon Core
 			"hs",
 			"spoon",

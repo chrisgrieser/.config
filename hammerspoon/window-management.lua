@@ -609,8 +609,6 @@ end)
 
 -- MARTA
 wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow'}
--- MARTA
-wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow'}
 wf_marta:subscribe(wf.windowCreated, function ()
 	if isAtOffice() then
 		moveResizeCurWin("maximized")
