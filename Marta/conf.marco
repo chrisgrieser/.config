@@ -211,13 +211,13 @@ keyBindings {
     "3" {
         id "core.ordering"
         ordering "name"
-        isAscending false
+        isAscending true
         showFoldersOnTop false
     }
     "Shift+3" {
         id "core.ordering"
         ordering "name"
-        isAscending true
+        isAscending false
         showFoldersOnTop false
     }
     "4" {
@@ -230,9 +230,8 @@ keyBindings {
         id "core.ordering"
         ordering "extension"
         isAscending false
-        showFoldersOnTop false
+        showFoldersOnTop true
     }
-
 
 
     "F1" null
