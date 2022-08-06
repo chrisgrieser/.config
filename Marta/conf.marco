@@ -90,6 +90,43 @@ gadgets [
 
 
 keyBindings {
+    "1" {
+        id "core.ordering"
+        ordering "modified"
+        isAscending true
+        showFoldersOnTop true
+    }
+    "Shift+1" {
+        id "core.ordering"
+        ordering "modified"
+        isAscending false
+        showFoldersOnTop true
+    }
+    "2" {
+        id "core.ordering"
+        ordering "extension"
+        isAscending true
+        showFoldersOnTop false
+    }
+    "Shift+2" {
+        id "core.ordering"
+        ordering "extension"
+        isAscending false
+        showFoldersOnTop false
+    }
+    "3" {
+        id "core.ordering"
+        ordering "size"
+        isAscending true
+        showFoldersOnTop false
+    }
+    "Shift+3" {
+        id "core.ordering"
+        ordering "size"
+        isAscending false
+        showFoldersOnTop false
+    }
+    
     "h" "core.go.up"
     "Shift+H" "core.clone.left"
     "Shift+L" "core.clone.right"
