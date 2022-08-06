@@ -207,7 +207,7 @@ function toggleDarkMode ()
 		MARTA_CONFIG=~"/Library/Application Support/org.yanex.marta/conf.marco"
 		DARK_THEME=Kon
 		LIGHT_THEME=Classic
-		TO_DARK=$1
+		TO_DARK=]].."true"..[[
 
 		if test "$TO_DARK" = "true" ; then
 			grep -q "theme \"$DARK_THEME\"" "$MARTA_CONFIG" && return
