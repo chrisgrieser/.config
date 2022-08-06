@@ -61,10 +61,14 @@ espanso service register
 # Hammerspoon
 defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
 
-# Marta
+# MARTA
 defaults write -g NSFileViewer -string org.yanex.marta
 defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="org.yanex.marta";}'
 # then restart mac
+
+# make finder quittable
+defaults write com.apple.finder QuitMenuItem -bool true
+killall Finder
 
 # to restore Finder as default
 # defaults delete -g NSFileViewer
