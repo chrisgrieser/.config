@@ -205,9 +205,8 @@ function toggleDarkMode ()
 		end tell
 	]])
 
-	local arg1 = true
-	if isDarkMode() then arg1 = false end
-	hs.task.new(toggleMartaDarkMode, nil, {false}):start()
+	local arg1 = tostring(not(isDarkMode()))
+	hs.execute("toggle-marta-darkmode.sh "..arg1)
 end
 
 function isDarkMode()
