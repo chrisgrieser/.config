@@ -131,6 +131,10 @@ keyBindings {
         id "core.open.directory"
         src "~/.Trash"
     }
+    "Cmd+Z" {
+        id "core.open.directory"
+        src "~/.Trash"
+    }
     "x" "core.pane.swap"
     "c" "core.rename"
     "/" "core.lookup.here"
@@ -195,33 +199,33 @@ keyBindings {
     }
     "2" {
         id "core.ordering"
-        ordering "name"
-        isAscending true
+        ordering "added"
+        isAscending false
         showFoldersOnTop false
     }
     "Shift+2" {
         id "core.ordering"
-        ordering "name"
-        isAscending false
-        showFoldersOnTop false
-    }
-    "3" {
-        id "core.ordering"
         ordering "added"
         isAscending true
         showFoldersOnTop false
     }
+    "3" {
+        id "core.ordering"
+        ordering "name"
+        isAscending false
+        showFoldersOnTop false
+    }
     "Shift+3" {
         id "core.ordering"
-        ordering "added"
-        isAscending false
+        ordering "name"
+        isAscending true
         showFoldersOnTop false
     }
     "4" {
         id "core.ordering"
         ordering "extension"
         isAscending true
-        showFoldersOnTop false
+        showFoldersOnTop true
     }
     "Shift+4" {
         id "core.ordering"
