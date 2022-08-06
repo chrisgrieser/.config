@@ -1,6 +1,6 @@
 
 behavior {
-    theme "Kon"
+    theme "Classic"
 
     layout {
         showActionBar false
@@ -55,7 +55,7 @@ behavior {
 fonts {
     breadcrumbs [ "Recursive" 15 ]
     virtualTabs [ "Recursive" 19 ]
-    files [ "Default" 27 ]
+    files [ "Default" 25 ]
     statusBar [ "Recursive" 21 ]
     tableHeader [ "Default" 19 ]
     tabs [ "Recursive" 20 ]

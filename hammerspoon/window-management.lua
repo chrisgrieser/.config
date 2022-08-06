@@ -609,6 +609,13 @@ end)
 
 -- MARTA
 wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow'}
-wf_marta:subscribe(wf.windowCreated, function (newWindow)
-	moveResizeCurWin("maximized")
+-- MARTA
+wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow'}
+wf_marta:subscribe(wf.windowCreated, function ()
+	if isAtOffice() then
+		moveResizeCurWin("maximized")
+	else
+		moveResizeCurWin("pseudo-maximized")
+		hs.application("Twitterrific"):mainWindow():raise()
+	end
 end)
