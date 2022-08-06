@@ -44,7 +44,7 @@ function z () {
 }
 alias zi="__zoxide_zi"
 
-# exa after switching to directory with more than 15 items -
+# exa after switching to directory with more than 15 items
 function ls_on_cd() {
 	emulate -L zsh
 	[[ $(ls -A | wc -l | tr -d ' ') -lt 15 ]] && exa
@@ -70,26 +70,6 @@ function settings () {
 		[[ $SELECTED != .z* ]] && SELECTED="$SELECTED.zsh"
 		open "$SELECTED"
 	fi )
-}
-
-# Move to trash via Finder (allows retrievability)
-# no arg = all files in folder will be deleted
-function del () {
-	if [[ $# == 0 ]]; then
-		IFS=$'\n'
-		# shellcheck disable=SC2207
-		ALL_FILES=($(find . -not -name ".*"))
-		unset IFS
-	else
-		ALL_FILES=( "$@" ) # save as array
-	fi
-	for ARG in "${ALL_FILES[@]}"; do
-		ABSOLUTE_PATH="$(cd "$(dirname "$ARG")" || return 1; pwd -P)/$(basename "$ARG")"
-		osascript -e "
-			set toDelete to \"$ABSOLUTE_PATH\" as POSIX file
-			tell application \"Finder\" to delete toDelete
-		" >/dev/null
-	done
 }
 
 # Make directory and cd there
@@ -133,6 +113,7 @@ function lr (){
 	echo -n "$(eval "$last_command")" | pbcopy
 	echo "Copied."
 }
+
 # extract function
 ex () {
 	if [[ -f $1 ]] ; then
