@@ -21,7 +21,7 @@ behavior {
     }
 
     table {
-        iconSize 30
+        iconSize 33
         verticalPadding 3
 
         colorHighlighting true
@@ -104,10 +104,7 @@ keyBindings {
 
     "Shift+V" "core.select.all"
     "v" "core.select.all.after"
-    "b" {
-        id "core.select.group"
-        pattern ".app"
-    }
+    "b" "core.select.all"
     "f" {
         id "core.select.group"
         pattern "."
@@ -130,6 +127,10 @@ keyBindings {
     "w" "core.tab.close"
     "Shift+W" "core.tab.close.other"
     "d" "core.trash"
+    "Shift+D" {
+        id "core.open.directory"
+        src "~/.Trash"
+    }
     "x" "core.pane.swap"
     "c" "core.rename"
     "/" "core.lookup.here"
@@ -138,13 +139,11 @@ keyBindings {
     "m" "core.favorites"
     "Shift+M" "core.favorites.add"
     "." "core.display.hidden"
-    "Shift+," "core.open.config.folder"
     "," "core.preferences"
     "Shift+." "core.actions"
     "u" "core.hierarchy"
     "r" "core.recent"
     "i" "core.finder.showInfo"
-    "Shift+5" "core.disk.usage"
     "Shift+0" "core.flatten"
     "z" "core.compress"
     "Shift+Z" "core.extract"
@@ -196,37 +195,37 @@ keyBindings {
     }
     "2" {
         id "core.ordering"
-        ordering "extension"
+        ordering "name"
         isAscending true
         showFoldersOnTop false
     }
     "Shift+2" {
         id "core.ordering"
-        ordering "extension"
+        ordering "name"
         isAscending false
         showFoldersOnTop false
     }
     "3" {
         id "core.ordering"
-        ordering "size"
+        ordering "added"
         isAscending true
         showFoldersOnTop false
     }
     "Shift+3" {
         id "core.ordering"
-        ordering "size"
+        ordering "added"
         isAscending false
         showFoldersOnTop false
     }
     "4" {
         id "core.ordering"
-        ordering "name"
+        ordering "extension"
         isAscending true
         showFoldersOnTop false
     }
     "Shift+4" {
         id "core.ordering"
-        ordering "name"
+        ordering "extension"
         isAscending false
         showFoldersOnTop false
     }
