@@ -22,10 +22,6 @@ cursor:
     unfocused_hollow: true
 mouse:
   hide_when_typing: true
-bell:
-  animation: Ease
-  duration: 300
-  color: '#dddddd'
 window:
   decorations: buttonless
   dimensions:
