@@ -11,11 +11,9 @@ behavior {
     setCurrentPathAsWindowTitle true
     preselectFirstMenuItem true
     completionSoundCondition "always"
-
     dateFormat {
         normal "%d %b %y"
     }
-
     timeFormat {
         separator ", "
     }
@@ -23,12 +21,9 @@ behavior {
     table {
         iconSize 33
         verticalPadding 3
-
         colorHighlighting true
         rightClickSelect true
-
         showGoUpFolder false
-
         defaults {
             columns "modified:200"
             ordering {
@@ -49,7 +44,6 @@ behavior {
     quickSelect {
         activateOnAnyCharacter false
     }
-
 }
 
 fonts {
@@ -73,7 +67,6 @@ gadgets [
         id "gadget.action.open.alacritty"
         name "Open Alacritty"
         type "executable"
-
         executable "/opt/homebrew/bin/alacritty"
         args ["--working-directory=${active.folder.path}"]
     }
@@ -81,9 +74,15 @@ gadgets [
         id "gadget.action.open.console"
         name "Open Console"
         type "executable"
-
         executable "/opt/homebrew/bin/alacritty"
         args ["--command=/Applications/Marta.app/Contents/MacOS/Marta"]
+    }
+    {
+        id "gadget.action.pseudo.undo"
+        name "Pseudo-Undo"
+        type "executable"
+        executable "${user.home}/Library/Application Support/org.yanex.marta/pseudo-undo.sh"
+        workingDirectory "${active.folder.path}"
     }
 ]
 
@@ -104,7 +103,7 @@ keyBindings {
 
     "Shift+V" "core.select.all"
     "v" "core.select.all.after"
-    "b" "core.select.all"
+    "a" "core.select.all"
     "f" {
         id "core.select.group"
         pattern "."
@@ -120,7 +119,8 @@ keyBindings {
     "Shift+Y" "core.duplicate"
     "p" "core.clipboard.paste"
     "n" "core.move.inactive"
-    "a" "core.copy.inactive"
+    "Shift+N" "core.move"
+    "b" "core.copy.inactive"
     "t" "core.tab.next"
     "Shift+T" "core.tab.next"
     "q" "core.queue"
@@ -128,11 +128,11 @@ keyBindings {
     "Shift+W" "core.tab.close.other"
     "d" "core.trash"
     "Shift+D" {
-        id "core.open.directory"
+        id "core.open.folder"
         src "~/.Trash"
     }
     "Cmd+Z" {
-        id "core.open.directory"
+        id "core.open.folder"
         src "~/.Trash"
     }
     "x" "core.pane.swap"
@@ -157,8 +157,6 @@ keyBindings {
     "Cmd+Shift+Opt+Ctrl+T" "gadget.action.open.alacritty"
     "Ctrl+H" "core.back"
     "Ctrl+O" "core.back"
-    "Ctrl+I" "core.forward"
-    "Ctrl+L" "core.forward"
 
     "Cmd+F" "core.lookup.here"
     "Cmd+Shift+F" "core.lookup"
