@@ -3,6 +3,7 @@ DARK_THEME=Kon
 LIGHT_THEME=Classic
 TO_DARK=$1
 
+
 if test "$TO_DARK" = "true" ; then
 	grep -q "theme \"$DARK_THEME\"" "$MARTA_CONFIG" && return
 	sed -i '' "s/ theme \"$LIGHT_THEME\"/ theme \"$DARK_THEME\"/" "$MARTA_CONFIG"

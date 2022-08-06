@@ -156,7 +156,7 @@ end
 --------------------------------------------------------------------------------
 -- DARK MODE
 
-toggleMartaDarkMode = "toggle-marta-darkmode.sh"
+toggleMartaDarkMode = os.getenv("HOME").."/dotfiles/hammerspoon/toggle-marta-darkmode.sh"
 function toggleDarkMode ()
 	hs.osascript.applescript([[
 		if application "Brave Browser" is not running then
@@ -207,7 +207,7 @@ function toggleDarkMode ()
 
 	local arg1 = true
 	if isDarkMode() then arg1 = false end
-	hs.task.new(toggleMartaDarkMode, nil, {arg1}):start()
+	hs.task.new(toggleMartaDarkMode, nil, {false}):start()
 end
 
 function isDarkMode()
