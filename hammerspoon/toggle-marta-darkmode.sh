@@ -6,9 +6,11 @@ TARGET_MODE=$1
 if [[ "$TARGET_MODE" == "dark" ]] ; then
 	grep -q "theme \"$DARK_THEME\"" "$MARTA_CONFIG" && return
 	sed -i '' "s/ theme \"$LIGHT_THEME\"/ theme \"$DARK_THEME\"/" "$MARTA_CONFIG"
+	echo "to dark"
 else
 	grep -q "theme \"$LIGHT_THEME\"" "$MARTA_CONFIG" && return
 	sed -i '' "s/ theme \"$DARK_THEME\"/ theme \"$LIGHT_THEME\"/" "$MARTA_CONFIG"
+	echo "to light"
 fi
 
 if pgrep "Marta" &> /dev/null ; then

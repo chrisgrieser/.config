@@ -207,7 +207,8 @@ function toggleDarkMode ()
 
 	local arg1 = "light"
 	if isDarkMode() then arg1 = "dark" end
-	hs.execute("zsh toggle-marta-darkmode.sh "..arg1)
+	local stdout, _ = hs.execute("zsh toggle-marta-darkmode.sh "..arg1)
+	notify (stdout)
 end
 
 function isDarkMode()
