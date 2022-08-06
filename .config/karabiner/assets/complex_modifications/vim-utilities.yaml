@@ -124,6 +124,7 @@ rules:
         to_after_key_up:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+      # Tilde ~
       - type: basic
         from:
           key_code: "n"
@@ -135,9 +136,10 @@ rules:
             input_sources:
               - language: ^de$
           - type: frontmost_application_if
-            bundle_identifiers:
-              - ^md\.obsidian$
-              - ^com\.sublimetext\.4$
+            file_path:
+              - alacritty$
+              - Obsidian\.app
+              - Sublime Text\.app
         to:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.US$
