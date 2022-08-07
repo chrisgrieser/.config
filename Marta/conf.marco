@@ -125,27 +125,25 @@ keyBindings {
     "Shift+G" "core.move.end"
     "Shift+J" "core.move.half.page.down"
     "Shift+K" "core.move.half.page.up"
-    "x" "gadget.action.pseudo.cut"
-
-    "Shift+V" "core.select.all"
-    "v" "core.select.all.after"
+    
+    "f" "gadget.action.pseudo.cut"
+    
     "a" "core.select.all"
-    "f" {
+    "Shift+A" {
         id "core.select.group"
         pattern "."
     }
-
     "e" "core.edit"
     "Shift+E" "core.edit.folder"
-    "]" "core.new.file"
     "s" "core.symlink"
     "Shift+S" "core.navigate.original"
+    "Shift+N" "core.new.folder"
+    "n" "core.new.file"
 
     "y" "core.clipboard.copy"
     "Shift+Y" "core.duplicate"
     "p" "core.clipboard.paste"
-    "n" "core.move.inactive"
-    "Shift+N" "core.move"
+    "v" "core.move.inactive"
     "b" "core.copy.inactive"
     "t" "core.tab.next"
     "Shift+T" "core.tab.next"
@@ -163,9 +161,10 @@ keyBindings {
         src "~/.Trash"
         mode "newTab"
     }
-    "Ctrl+x" "core.pane.swap"
+    "x" "core.pane.swap"
     "c" "core.rename"
     "/" "core.lookup.here"
+    "Shift+/" "core.lookup"
     "Shift+-" "core.documentation"
     "-" "gadget.action.cheatsheet"
 

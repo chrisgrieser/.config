@@ -116,12 +116,10 @@
       "c": "#CCCCCC"
     },
     "Ü",
-    {
-      "c": "#c7a6ff"
-    },
-    "+\nnew file",
+    "+",
     {
       "x": 0.25,
+      "c": "#c7a6ff",
       "w": 1.25,
       "h": 2,
       "w2": 1.5,
@@ -144,7 +142,13 @@
       "w": 1.75
     },
     "⇪\ndeselect",
-    "a\nselect all",
+    {
+      "f": 1
+    },
+    "a A\nselect all / files",
+    {
+      "f": 2
+    },
     "s S\nsymlink",
     {
       "f": 1
@@ -154,7 +158,7 @@
       "f": 2,
       "n": true
     },
-    "f\nselect files",
+    "f\npseudo-cut",
     {
       "f": 1
     },
@@ -200,17 +204,11 @@
       "c": "#c7a6ff"
     },
     "y Y\ncopy / ducplic.",
-    "x\npseudo-cut",
+    "x\nswap panes",
     "c\nrename",
-    {
-      "c": "#CCCCCC"
-    },
-    "V",
-    {
-      "c": "#c7a6ff"
-    },
+    "v\nmove to pane",
     "b\ncopy to pane",
-    "n\nmove to pane",
+    "n\nnew file / folder",
     "m M\nfavorites",
     ",\nconfig",
     ".\nhidden files",
