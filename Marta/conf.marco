@@ -91,6 +91,13 @@ gadgets [
         executable "${user.home}/dotfiles/Marta/scripts/git-acp.sh"
         workingDirectory "${active.folder.path}"
     }
+    {
+        id "gadget.action.pseudo.cut"
+        name "Pseudo Cut"
+        type "executable"
+        executable "${user.home}/dotfiles/Marta/scripts/pseudo-cut.applescript"
+        args ["${active.selection.paths}"]
+    }
 ]
 
 
