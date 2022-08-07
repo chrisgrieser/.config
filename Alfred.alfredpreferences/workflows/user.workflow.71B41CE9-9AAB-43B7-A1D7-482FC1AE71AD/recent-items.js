@@ -12,17 +12,18 @@ const start = recentItems.indexOf("Documents") + 1;
 const end = recentItems.indexOf("Servers") - 1;
 let i = 0;
 
-// eslint-disable-next-line quotes
-const recentFolders = app.doShellScript(`osascript -e 'tell application "System Events" to tell (process "Finder") to set allItems to every menu item of menu of menu item "Recent Folders" of menu "Go" of menu bar 1'`)
-	.split(", ")
-	.slice(0, -2)
-	.map(item => item.slice(10).split(" of ")[0])
-	.map(item => {
-		i++;
-		return { "name": item, "id": i, "type": "d" };
-	});
+// DEACTIVATED SINCE NOT USING FINDER ANYMORE
+// const recentFolders = app.doShellScript(`osascript -e 'tell application "System Events" to tell (process "Finder") to set allItems to every menu item of menu of menu item "Recent Folders" of menu "Go" of menu bar 1'`)
+// 	.split(", ")
+// 	.slice(0, -2)
+// 	.map(item => item.slice(10).split(" of ")[0])
+// 	.map(item => {
+// 		i++;
+// 		return { "name": item, "id": i, "type": "d" };
+// 	});
+// i = 0;
+const recentFolders = [];
 
-i = 0;
 const recentItemsMap = recentItems
 	.map(item => {
 		// workaround with id necessary, since only file names, but not file paths are
