@@ -52,6 +52,10 @@ BROWSER="Brave Browser"
 [[ -e ~"/Applications/$BROWSER Apps.localized" ]] && rm -rf ~"/Applications/$BROWSER Apps.localized"
 ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
 
+# Übersicht
+[[ -e ~"/Library/Application Support/Übersicht/widgets/" ]] && rm -rf ~"/Library/Application Support/Übersicht/widgets/"
+ln -sf "$DOTFILE_FOLDER/ubersicht" ~"/Library/Application Support/Übersicht/widgets"
+
 #-------------------------------------------------------------------------------
 # already set up, no need to run again.
 # Only left here for reference, or when dotfile folder location changes

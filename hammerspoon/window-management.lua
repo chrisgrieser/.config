@@ -148,6 +148,7 @@ function movieModeLayout()
 
 	openIfNotRunning("YouTube")
 	openIfNotRunning("Finder")
+	openIfNotRunning("Übersicht")
 
 	killIfRunning("Obsidian")
 	killIfRunning("Marta")
@@ -174,6 +175,7 @@ function homeModeLayout ()
 	openIfNotRunning("Drafts")
 
 	killIfRunning("YouTube")
+	killIfRunning("Übersicht")
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
 	killIfRunning("Finder")
