@@ -1,0 +1,26 @@
+background #000000
+cursor #ffa460
+cursorText #ffffff
+foreground #bbbbbb
+name "Pastel"
+selectedText #f1f1f1
+selection #353883
+
+ansiColors [
+    #4e4e4e
+    #ff6b60
+    #a7ff60
+    #ffffb6
+    #96cafd
+    #ff73fd
+    #c6c4fd
+    #eeeeee
+    #7b7b7b
+    #ffb6b0
+    #ceffab
+    #ffffcb
+    #b5dcfe
+    #ff9cfe
+    #dfdffe
+    #ffffff
+]

@@ -1,0 +1,126 @@
+name "Classic"
+
+base {
+    appearance "light"
+    background #fefffe
+    separator #d7d7d7
+    text #1d1c1c
+}
+
+actionBar {
+    button {
+        background #e7e7e7
+        hotkey #585656
+    }
+}
+
+asyncProgressBar {
+    border #8d8d8d
+    progress #4e4c4c
+    itemProgress #868383
+}
+
+breadcrumbs {
+    color1 #fefffe
+    color2 #eaebea
+    color3 #d8d9d8
+    separator #8d8d8d
+}
+
+files {
+    background {
+        alternate #f4f4f3
+        current #0950d1
+        currentSelected #0950d1
+        selected #00000000
+    }
+
+    dragDropSelection {
+        width 1
+    }
+
+    text {
+        current #fffeff
+        currentSelected #ffc890
+        hidden #666666
+        matched #ff4db2
+        selected #ff8000
+
+        highlighting1 #07468d
+        highlighting2 #0c6600
+        highlighting3 #b25a05
+        highlighting4 #9931ff
+    }
+}
+
+searchBar {
+    material "light"
+
+    query {
+        background #f4f4f3
+        placeholder #aba8aa
+        text #000008
+    }
+
+    results {
+        highlighting #000000
+        selection #7eacff
+        subtitle #666666
+        text #323232
+    }
+
+    rowSeparator {
+        color #c2c4cc
+        show true
+    }
+}
+
+statusBar {
+    quickSelectNoResultsHighlighting #fc4b4f
+}
+
+tableHeader {
+    pressed {
+        background #e5e5e5
+    }
+}
+
+tabs {
+    background #b4b4b5
+
+    active {
+        text #42444c
+    }
+
+    inactive {
+        background #e7e7e7
+        text #5f616d
+    }
+}
+
+terminal {
+    caret {
+        background #454545
+        text #fffeff
+    }
+}
+
+
+textEditor {
+    error #db4b41
+    warning #bf8c26
+    keyword #800040
+    comment #808080
+    identifier #dfbe95
+
+    literal {
+        string #108040
+        number #074080
+        color #6897bb
+    }
+
+    gutter {
+        background #eaeaea
+        text #991d1c1c
+    }
+}

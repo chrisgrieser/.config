@@ -1,0 +1,126 @@
+name "Sakura"
+
+base {
+    appearance "light"
+    background #fefffe
+    separator #d7d7d7
+    text #1d1c1c
+}
+
+actionBar {
+    button {
+        background #f7eaea
+        hotkey #720608
+    }
+}
+
+asyncProgressBar {
+    border #8d8d8d
+    progress #670607
+    itemProgress #99090c
+}
+
+
+breadcrumbs {
+    color1 #fefffe
+    color2 #eff0ef
+    color3 #e0e1e0
+    separator #99090c
+}
+
+files {
+    background {
+        alternate #fdf3f3
+        current #ce2072
+        currentSelected #ce2072
+        selected #00000000
+    }
+
+    dragDropSelection {
+        width 1
+    }
+
+    text {
+        current #fffeff
+        currentSelected #ff0000
+        hidden #666666
+        matched #007bff
+        selected #ff0000
+
+        highlighting1 #98427d
+        highlighting2 #0c67cd
+        highlighting3 #800040
+        highlighting4 #7b27cd
+    }
+}
+
+searchBar {
+    material "light"
+
+    query {
+        placeholder #aba8aa
+        text #000008
+    }
+
+    results {
+        highlighting #26161d
+        selection #e98ab4
+        subtitle #666666
+        text #323232
+    }
+
+    rowSeparator {
+        color #aeb0b7
+        show true
+    }
+}
+
+statusBar {
+    quickSelectNoResultsHighlighting #cb0167
+}
+
+tableHeader {
+    pressed {
+        background #ffe6e6
+    }
+}
+
+tabs {
+    background #f7f8f7
+
+    active {
+        background #fefffe
+        text #42444c
+    }
+
+    inactive {
+        background #ffe7e7
+        text #5f616d
+    }
+}
+
+terminal {
+    caret {
+        background #fbb0b1
+        text #fffeff
+    }
+}
+
+textEditor {
+    error #db4b41
+    warning #bf8c26
+    keyword #930b4c
+    comment #808080
+    identifier #dfbe95
+
+    literal {
+        string #b80a5e
+        number #074080
+        color #6897bb
+    }
+
+    gutter {
+        background #eaeaea
+        text #991d1c1c
+    }
+}

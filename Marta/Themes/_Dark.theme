@@ -1,0 +1,129 @@
+name "Dark"
+
+base {
+    appearance "dark"
+    background #161713
+    separator #282925
+    text #b7b8a7
+}
+
+actionBar {
+    separator #333431
+
+    button {
+        background #20221c
+        hotkey #b7b8a6
+        text #cfd2b9
+    }
+}
+
+asyncProgressBar {
+    border #838478
+    progress #b7b8a7
+    itemProgress #e9ead5
+}
+
+breadcrumbs {
+    color1 #161613
+    color2 #23231e
+    color3 #3a3a32
+    separator #666657
+    text #98998a
+}
+
+files {
+    background {
+        alternate #181913
+        current #2d2d25
+        currentSelected #272720
+        selected #10100c
+    }
+
+    dragDropSelection {
+        width 1
+    }
+
+    text {
+        current #e0e2cd
+        currentSelected #fd6b08
+        hidden #535352
+        matched #fc503f
+        selected #fd6a08
+
+        highlighting1 #a5e1ff
+        highlighting2 #e1ffa4
+        highlighting3 #ffa5e1
+        highlighting4 #e2a6ff
+    }
+}
+
+searchBar {
+    query {
+        text #b7b8a7
+        placeholder #88b7b8a7
+    }
+
+    results {
+        highlighting #fc6a09
+        selection #40403d
+        subtitle #797a6e
+        text #b7b8a7
+    }
+
+    rowSeparator {
+        color #35342e
+        show true
+    }
+}
+
+statusBar {
+    border #343331
+    text #aeaeae
+    quickSelectNoResultsHighlighting #a60b02
+}
+
+tableHeader {
+    separator #20221b
+    text #999da2
+
+    pressed {
+        background #20221b
+    }
+}
+
+tabs {
+    active {
+        text #98998a
+    }
+
+    inactive {
+        background #10110e
+        text #606056
+    }
+}
+
+terminal {
+    caret {
+        background #36372c
+        text #ffffff
+    }
+}
+
+textEditor {
+    error #b40b00
+    warning #402f0d
+    keyword #8aad46
+    comment #808080
+    identifier #dfbe95
+
+    literal {
+        string #98b884
+        number #6897bb
+        color #6897bb
+    }
+
+    gutter {
+        background #24261f
+        text #99b7b8a7
+    }
+}
