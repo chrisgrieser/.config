@@ -97,10 +97,6 @@ if isAtOffice() then screenWakeWatcher:start() end
 -- CRONJOBS AT HOME
 
 function sleepYouTube ()
-	-- abort on delayed run
-	local currentTimeHours = hs.timer.localTime() / 60 / 60
-	if currentTimeHours < 2.9 and currentTimeHours > 5.1 then return end
-
 	killIfRunning("YouTube")
 	hs.osascript.applescript([[
 		tell application "Brave Browser"

@@ -26,10 +26,10 @@ require("discord")
 require("twitterrific-iina")
 
 --------------------------------------------------------------------------------
--- Startup
+-- System Startup
 gitDotfileSync("wake")
 reloadAllMenubarItems()
-if isAtOffice() then systemWake() end
+hs.application("Finder"):kill() -- fewer items in the app switcher when Marta is used anyway
 
 notify("Config reloaded")
 
