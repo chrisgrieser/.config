@@ -517,7 +517,6 @@ wf_browser:subscribe(wf.windowDestroyed, function ()
 	end
 end)
 
-
 -- FINDER: hide when no window
 wf_finder = wf.new("Finder")
 wf_finder:subscribe(wf.windowDestroyed, function ()
@@ -525,7 +524,6 @@ wf_finder:subscribe(wf.windowDestroyed, function ()
 		hs.application("Finder"):hide()
 	end
 end)
-
 
 -- keep TWITTERRIFIC visible, when active window is pseudomaximized
 function twitterrificNextToPseudoMax(_, eventType)
@@ -579,7 +577,7 @@ wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 	else
 		moveResizeCurWin("pseudo-maximized")
 		runDelayed(0.2, function () moveResizeCurWin("pseudo-maximized") end)
-		runDelayed(0.4, function () moveResizeCurWin("pseudo-maximized") end)
+		runDelayed(0.5, function () moveResizeCurWin("pseudo-maximized") end)
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
@@ -609,6 +607,7 @@ end)
 -- MARTA
 wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow'}
 wf_marta:subscribe(wf.windowCreated, function ()
+	killIfRunning("Finder")
 	if isAtOffice() or isProjector() then
 		moveResizeCurWin("maximized")
 	else
