@@ -2,14 +2,6 @@
 
 clear # messages when launching via Alfred
 
-if [[ "$TERM_PROGRAM" == "Terminus-Sublime" ]] ; then
-	TERMINAL="Terminus-Sublime"
-elif [[ ${TERM:l} == "alacritty" ]] ; then
-	TERMINAL="Alacritty"
-elif [[ "$TERM" == "xterm-256color" ]]; then
-	TERMINAL="Marta"
-fi
-
 if [[ "$TERMINAL" == "Alacritty" ]] ; then
 	# clear
 	# 33% art, 66% fortune
