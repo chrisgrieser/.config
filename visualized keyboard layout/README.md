@@ -6,6 +6,7 @@ Created with the fantastic [Keyboard Layout Editor](http://www.keyboard-layout-e
 - [Hyper Bindings](#hyper-bindings)
 - [Single Keystroke Bindings](#single-keystroke-bindings)
 - [vimrc Remappings](#vimrc-remappings)
+- [Marta Key Bindings](#marta-key-bindings)
 - [Base Layout](#base-layout)
 
 <!-- /MarkdownTOC -->
@@ -29,6 +30,11 @@ Since heavily relying and Vim Bindings, the keys at the periphery of the keyboar
 A summary of the remappings in my `.vimrc`(s).
 
 ![vimrc remapping](vimrc-remapping.png)
+
+## Marta Key Bindings
+Vim bindings for the [file manager Marta](http://marta.sh/).
+
+![marta key bindings](marta-key-bindings.png)
 
 ## Base Layout
 The basic look of my keyboard for reference. _Keychron K3 v.2 (70%), blue switches, ISO-de macOS Layout._

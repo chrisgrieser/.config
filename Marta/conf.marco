@@ -102,6 +102,13 @@ gadgets [
         executable "${user.home}/dotfiles/Marta/scripts/cut.sh"
         args ["${active.selection.paths}"]
     }
+    {
+        id "gadget.action.cheatsheet"
+        name "Marta Keybinding Cheatsheet"
+        type "executable"
+        executable "/usr/bin/qlmanage"
+        args ["-p" "${user.home}/dotfiles/visualized keyboard layout/marta-key-bindings.png"]
+    }
 ]
 
 
@@ -149,15 +156,18 @@ keyBindings {
     "Shift+D" {
         id "core.open.folder"
         src "~/.Trash"
+        mode "newTab"
     }
     "Cmd+Z" {
         id "core.open.folder"
         src "~/.Trash"
+        mode "newTab"
     }
     "Ctrl+x" "core.pane.swap"
     "c" "core.rename"
     "/" "core.lookup.here"
     "Shift+-" "core.documentation"
+    "-" "gadget.action.cheatsheet"
 
     "m" "core.favorites"
     "Shift+M" "core.favorites.add"
