@@ -23,8 +23,18 @@ eval "$(starship init zsh)"
 source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
 source "$DOTFILE_FOLDER/zsh/plugins/obsidian-vault-navigation.sh"
 
-# fix for Starship-Terminus issue, https://github.com/starship/starship/issues/3627
+#-------------------------------------------------------------------------------
+
 if [[ "$TERM_PROGRAM" == "Terminus-Sublime" ]] ; then
+	TERMINAL="Terminus-Sublime"
+elif [[ ${TERM:l} == "alacritty" ]] ; then
+	TERMINAL="Alacritty"
+elif [[ "$TERM" == "xterm-256color" ]]; then
+	TERMINAL="Marta"
+fi
+
+# fix for Starship-Terminus issue, https://github.com/starship/starship/issues/3627
+if [[ "$TERMINAL" == "Terminus-Sublime" ]] ; then
 	export STARSHIP_CONFIG=~/.config/starship/starship_terminus.toml
 else
 	export STARSHIP_CONFIG=~/.config/starship/starship.toml
