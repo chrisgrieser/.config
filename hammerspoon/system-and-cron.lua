@@ -127,11 +127,11 @@ biiweeklyTimer = hs.timer.doAt("02:00", "02d", function()
 	log ("🕝2️⃣ biweekly ("..deviceName()..")", "./logs/some.log")
 end, true)
 
-catchTimer = hs.timer.doAt("02:00", "12h", function()
-	openIfNotRunning("Catch")
-	runDelayed(10, function () killIfRunning("Catch") end)
-	log ("🫴 Catch Torrents ("..deviceName()..")", "./logs/some.log")
-end, true)
+-- catchTimer = hs.timer.doAt("02:00", "12h", function()
+-- 	openIfNotRunning("Catch")
+-- 	runDelayed(10, function () killIfRunning("Catch") end)
+-- 	log ("🫴 Catch Torrents ("..deviceName()..")", "./logs/some.log")
+-- end, true)
 
 dailyEveningTimer = hs.timer.doAt("21:00", "01d", function ()
 	setDarkmode(true)
@@ -145,7 +145,7 @@ end
 projectorScreensaverWatcher = hs.caffeinate.watcher.new(projectorScreensaverStop)
 
 if isIMacAtHome() then
-	catchTimer:start()
+	-- catchTimer:start()
 	dailyEveningTimer:start()
 	sleepTimer:start()
 	sleepTimer2:start()
@@ -204,7 +204,6 @@ function toggleDarkMode ()
 			end if
 		end tell
 	]])
-
 
 	-- since darkMode has already been switched via AppleScript, light & dark
 	-- have to be switched here

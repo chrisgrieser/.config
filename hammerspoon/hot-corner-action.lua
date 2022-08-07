@@ -7,25 +7,25 @@ function hotcornerWatcher(appName, eventType)
 	if (eventType == hs.application.watcher.activated) then
 		if (appName == "Notes") then
 			hs.application("Notes"):kill9()
-			shortcutsChooser:show()
+			hs.shortcuts.run("Keyboard on-screen")
 		end
 	end
 end
 hotcornerEmulation = hs.application.watcher.new(hotcornerWatcher)
 hotcornerEmulation:start()
 
-function listShortcuts()
-	local shortcuts = hs.shortcuts.list()
-	for i = 1, #shortcuts do
-		shortcuts[i].text = shortcuts[i].name
-		shortcuts[i].name = nil
-	end
-	return shortcuts
-end
+-- function listShortcuts()
+-- 	local shortcuts = hs.shortcuts.list()
+-- 	for i = 1, #shortcuts do
+-- 		shortcuts[i].text = shortcuts[i].name
+-- 		shortcuts[i].name = nil
+-- 	end
+-- 	return shortcuts
+-- end
 
-shortcutsChooser = hs.chooser.new(function(selectedItem)
-	hs.shortcuts.run(selectedItem.text)
-	notify (selectedItem.text)
-end)
-shortcutsChooser:choices(listShortcuts)
+-- shortcutsChooser = hs.chooser.new(function(selectedItem)
+-- 	hs.shortcuts.run(selectedItem.text)
+-- 	notify (selectedItem.text)
+-- end)
+-- shortcutsChooser:choices(listShortcuts)
 
