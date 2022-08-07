@@ -408,7 +408,8 @@
                 "^com\\.apple\\.finder$",
                 "^com\\.mimestream\\.Mimestream$",
                 "^com\\.agiletortoise\\.Drafts-OSX$",
-                "^net\\.highlightsapp\\.universal$"
+                "^net\\.highlightsapp\\.universal$",
+                "^org\\.yanex\\.marta$"
               ]
             }
           ],
@@ -450,7 +451,8 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.brave\\.Browser$",
-                "^com\\.apple\\.finder$"
+                "^com\\.apple\\.finder$",
+                "^org\\.yanex\\.marta$"
               ]
             }
           ],

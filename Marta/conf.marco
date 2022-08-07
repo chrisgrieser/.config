@@ -36,13 +36,17 @@ behavior {
     actions {
         core.trash.confirm false
         core.open.openApplicationsAsFolders true
-        core.disk.usage.completionSound "Submarine"
+        core.disk.usage.completionSound "Glass"
         core.lookup.mode "substring"
         core.tab.new.useDefaults true
     }
 
     quickSelect {
         activateOnAnyCharacter false
+    }
+    
+    volumeSpace {
+        show "external"
     }
 }
 
@@ -95,7 +99,7 @@ gadgets [
         id "gadget.action.pseudo.cut"
         name "Pseudo Cut"
         type "executable"
-        executable "${user.home}/dotfiles/Marta/scripts/pseudo-cut.applescript"
+        executable "${user.home}/dotfiles/Marta/scripts/cut.sh"
         args ["${active.selection.paths}"]
     }
 ]
@@ -114,6 +118,7 @@ keyBindings {
     "Shift+G" "core.move.end"
     "Shift+J" "core.move.half.page.down"
     "Shift+K" "core.move.half.page.up"
+    "x" "gadget.action.pseudo.cut"
 
     "Shift+V" "core.select.all"
     "v" "core.select.all.after"
@@ -149,7 +154,7 @@ keyBindings {
         id "core.open.folder"
         src "~/.Trash"
     }
-    "x" "core.pane.swap"
+    "Ctrl+x" "core.pane.swap"
     "c" "core.rename"
     "/" "core.lookup.here"
     "Shift+-" "core.documentation"
