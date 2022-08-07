@@ -23,6 +23,9 @@ function listShortcuts()
 	return shortcuts
 end
 
-shortcutsChooser = hs.chooser.new(function(selectedItem) hs.shortcuts.run(selectedItem) end)
+shortcutsChooser = hs.chooser.new(function(selectedItem)
+	hs.shortcuts.run(selectedItem)
+	notify (selectedItem)
+end)
 shortcutsChooser:choices(listShortcuts)
 
