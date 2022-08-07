@@ -25,7 +25,7 @@ behavior {
         rightClickSelect true
         showGoUpFolder false
         defaults {
-            columns "modified:200"
+            columns ">modified:200"
             ordering {
                 column "modified"
                 isAscending false
