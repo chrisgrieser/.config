@@ -588,6 +588,7 @@ wf_sublime:subscribe(wf.windowDestroyed, function ()
 	end
 
 	-- editing command line finished
+	if not(hs.application("alacritty")) then return end
 	local alacrittyWin = hs.application("alacritty"):mainWindow()
 	if isHalf(alacrittyWin) then
 		moveResize(alacrittyWin, baseLayout)
