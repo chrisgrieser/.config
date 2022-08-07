@@ -1,5 +1,7 @@
 # shellcheck disable=SC2164,SC1009,SC1073,SC1056
 
+clear # messages when launching via Alfred
+
 if [[ "$TERM_PROGRAM" == "Terminus-Sublime" ]] ; then
 	TERMINAL="Terminus-Sublime"
 elif [[ ${TERM:l} == "alacritty" ]] ; then
