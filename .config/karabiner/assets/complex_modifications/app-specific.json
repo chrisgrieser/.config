@@ -531,6 +531,23 @@
           },
           "to": [
             {
+              "shell_command": "pbcopy < /dev/null"
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 50
+            },
+            {
+              "key_code": "c",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 20
+            },
+            {
               "key_code": "equal_sign",
               "modifiers": [
                 "shift"
@@ -544,6 +561,12 @@
             },
             {
               "key_code": "left_arrow"
+            },
+            {
+              "key_code": "v",
+              "modifiers": [
+                "command"
+              ]
             }
           ],
           "conditions": [

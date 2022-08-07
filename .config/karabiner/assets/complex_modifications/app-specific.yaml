@@ -273,6 +273,14 @@ rules:
             mandatory:
               - command
         to:
+          - shell_command: pbcopy < /dev/null # empty the clipboard
+          - key_code: vk_none
+            hold_down_milliseconds: 50
+          - key_code: c
+            modifiers:
+              - command
+          - key_code: vk_none
+            hold_down_milliseconds: 20
           - key_code: equal_sign
             modifiers:
               - shift
@@ -280,6 +288,9 @@ rules:
             modifiers:
               - shift
           - key_code: left_arrow
+          - key_code: v
+            modifiers:
+              - command
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
