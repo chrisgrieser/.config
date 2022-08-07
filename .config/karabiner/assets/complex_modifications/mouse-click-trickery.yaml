@@ -370,3 +370,15 @@ rules:
           - key_code: tab
             modifiers:
               - command
+  - description: "🐁 1+2 (simultaneously): Mission Control"
+    manipulators:
+      - type: basic
+        from:
+          simultaneous:
+            - pointing_button: button1
+            - pointing_button: button2
+        to:
+          - shell_command: open -a 'Mission Control'
+        parameters:
+          basic.simultaneous_threshold_milliseconds: 100
+
