@@ -1,0 +1,134 @@
+name "Kon"
+
+base {
+    appearance "dark"
+    background #1c2229
+    separator #282e36
+    text #c0c5c8
+}
+
+actionBar {
+    separator #252729
+
+    button {
+        background #222932
+        hotkey #a4aca1
+        text #5e6672
+    }
+}
+
+asyncProgressBar {
+    border #757871
+    progress #a7aba2
+    itemProgress #d9ded3
+}
+
+breadcrumbs {
+    color1 #1c2229
+    color2 #2c3641
+    color3 #3c4958
+    separator #5f6265
+    text #989da2
+}
+
+files {
+    background {
+        alternate #1a2027
+        current #1945a5
+        currentSelected #1945a5
+        selected #14191f
+    }
+
+    dragDropSelection {
+        color #bababa
+        width 1
+    }
+
+    text {
+        current #ffffff
+        currentSelected #fc6c08
+        hidden #757676
+        matched #fb4f3e
+        selected #fc6a09
+
+        highlighting1 #7fd5ff
+        highlighting2 #d5ff7f
+        highlighting3 #ff7fd5
+        highlighting4 #d47eff
+    }
+}
+
+searchBar {
+    query {
+        border #363731
+        placeholder #66c0c5c8
+    }
+
+    results {
+        highlighting #ffffff
+        selection #1945a5
+        subtitle #757675
+    }
+
+    rowSeparator {
+        color #313437
+        show true
+    }
+}
+
+statusBar {
+    background #15191e
+    border #1f2429
+    text #989da1
+    quickSelectNoResultsHighlighting #a60b02
+}
+
+tableHeader {
+    separator #282e36
+    text #999da2
+
+    pressed {
+        background #282e36
+    }
+}
+
+tabs {
+    active {
+        text #989da2
+    }
+
+    inactive {
+        background #171b20
+        text #656666
+    }
+}
+
+terminal {
+    caret {
+        background #3a424a
+        text #ffffff
+    }
+}
+
+textEditor {
+    error #b40b00
+    warning #402f0d
+    keyword #8ba558
+    comment #808080
+    identifier #dfbe95
+
+    literal {
+        string #98b884
+        number #6897bb
+        color #6897bb
+    }
+
+    gutter {
+        background #2d3743
+        text #99c0c5c8
+    }
+}
+
+titleBar {
+    text #a7aba2
+}

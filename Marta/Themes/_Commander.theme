@@ -1,0 +1,131 @@
+name "Commander"
+
+base {
+    appearance "dark"
+    background #000380
+    separator #008888
+    text #d8d9d8
+}
+
+actionBar {
+    button {
+        background #00bcbc
+        hotkey #0f0f0f
+        text #000000
+    }
+}
+
+asyncProgressBar {
+    border #008888
+    progress #008081
+    itemProgress #00b5b5
+}
+
+breadcrumbs {
+    color1 #000380
+    color2 #00026d
+    color3 #00015d
+    text #cfcfcf
+    separator #008888
+}
+
+files {
+    background {
+        alternate #000176
+        current #008081
+        currentSelected #008081
+        selected #213bca
+    }
+
+    dragDropSelection {
+        width 1
+    }
+
+    text {
+        hidden #77fefffe
+        matched #a1ff00
+        selected #ffff00
+
+        highlighting1 #fec03f
+        highlighting2 #c0ff41
+        highlighting3 #fc57ab
+        highlighting4 #66ffa8
+    }
+}
+
+searchBar {
+    query {
+        border #33ffffff
+        placeholder #66d8d9d8
+        text #d8d9d8
+    }
+
+    results {
+        highlighting #ffffff
+        selection #008081
+        subtitle #d0d0d0
+        text #d8d9d8
+    }
+
+    rowSeparator {
+        color #4c4b3e
+        show true
+    }
+}
+
+statusBar {
+    text #00ffff
+    quickSelectNoResultsHighlighting #660404
+}
+
+tableHeader {
+    text #00aaaa
+
+    pressed {
+        background #00005b
+    }
+}
+
+tabs {
+    active {
+        background #008888
+        text #efefef
+    }
+
+    inactive {
+        text #cfcfcf
+    }
+}
+
+terminal {
+    caret {
+        background #00bcbc
+        text #010031
+    }
+}
+
+textEditor {
+    text #efefef
+
+    error #b40b00
+    warning #402f0d
+    keyword #fd8008
+    comment #808080
+    identifier #dfbe95
+
+    literal {
+        string #ccff66
+        number #66ccff
+        color #ffff0a
+    }
+
+    gutter {
+        background #0000bc
+        text #99fefffe
+    }
+}
+
+titleBar {
+    text #cfcfcf
+    separator #008888
+}

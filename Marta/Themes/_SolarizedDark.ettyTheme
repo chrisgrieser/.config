@@ -1,0 +1,26 @@
+background #001e26
+cursor #708183
+cursorText #002731
+foreground #708183
+name "Solarized Dark"
+selectedText #81908f
+selection #002731
+
+ansiColors [
+    #002731
+    #d01b24
+    #728905
+    #a57705
+    #2075c7
+    #c61b6e
+    #259185
+    #e9e2cb
+    #001e26
+    #bd3612
+    #465a61
+    #52676f
+    #708183
+    #5856b9
+    #81908f
+    #fcf4dc
+]

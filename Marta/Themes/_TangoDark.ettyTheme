@@ -1,0 +1,26 @@
+background #000000
+cursor #ffffff
+cursorText #000000
+foreground #ffffff
+name "Tango Dark"
+selectedText #000000
+selection #b4d5ff
+
+ansiColors [
+    #000000
+    #cc0000
+    #4e9a05
+    #c4a000
+    #3464a4
+    #74507a
+    #05989a
+    #d3d7ce
+    #545753
+    #ee2828
+    #8ae134
+    #fce94e
+    #719ece
+    #ad7ea7
+    #34e1e1
+    #ededec
+]
