@@ -1,11 +1,12 @@
 #!/bin/zsh
 # shellcheck disable=SC2012
 
+#-------------------------------------------------------------------------------
+
 # to be triggered on finishing a torrent download, e.g. via Transmission.app
 
-#-------------------------------------------------------------------------------
 # Config
-VIDEO_DIR=~'/Video/Downloaded'
+VIDEO_DIR=~'/Downloaded'
 SUB_LANG='en'
 #-------------------------------------------------------------------------------
 
