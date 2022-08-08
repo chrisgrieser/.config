@@ -8,10 +8,10 @@ function openSwimAdded (device)
 	hs.task.new(podcastSyncScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		if exitCode == 0 then
 			notify ("✅ podcast sync finished")
-			log("✅ podcast sync finished", "$HOME/dotfiles/Cron Jobs/some.log")
+			log("✅ podcast sync finished", "./logs/some.log")
 		else
 			notify("⚠️️ podcast sync error"..stdErr)
-			log("⚠️️ podcast sync error"..stdErr, "$HOME/dotfiles/Cron Jobs/some.log")
+			log("⚠️️ podcast sync error"..stdErr, "./logs/some.log")
 		end
 	end):start()
 end
