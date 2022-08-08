@@ -114,8 +114,8 @@ gadgets [
 
 keyBindings {
     "h" "core.go.up"
-    "Shift+H" "core.clone.left"
-    "Shift+L" "core.clone.right"
+    "Shift+H" "core.clone.left.folder"
+    "Shift+L" "core.clone.right.folder"
     "l" "core.open"
     "k" "core.move.up"
     "j" "core.move.down"
