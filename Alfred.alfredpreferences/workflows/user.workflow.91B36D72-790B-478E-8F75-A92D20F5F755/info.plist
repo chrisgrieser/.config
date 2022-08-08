@@ -242,6 +242,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>BB756276-AFBC-4841-90E2-B916E8B1A637</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FBBA4624-420A-4836-BA15-6EF90AE9ED3B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>BCAE773E-2CD3-4CBF-B877-3F90B0534A11</key>
 		<array>
 			<dict>
@@ -1001,6 +1014,21 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>soundname</key>
+				<string>Purr</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>FBBA4624-420A-4836-BA15-6EF90AE9ED3B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1267,11 +1295,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>62DAD5FB-2A2B-49ED-B725-F8018A3AA61A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>4</integer>
 			<key>note</key>
 			<string>Add to Clipboard</string>
 			<key>xpos</key>
-			<real>490</real>
+			<real>480</real>
 			<key>ypos</key>
 			<real>690</real>
 		</dict>
@@ -1347,6 +1375,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>BB756276-AFBC-4841-90E2-B916E8B1A637</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
 			<key>xpos</key>
 			<real>640</real>
 			<key>ypos</key>
@@ -1439,6 +1469,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>415</real>
 			<key>ypos</key>
 			<real>545</real>
+		</dict>
+		<key>FBBA4624-420A-4836-BA15-6EF90AE9ED3B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>xpos</key>
+			<real>790</real>
+			<key>ypos</key>
+			<real>690</real>
 		</dict>
 		<key>FC446DFD-7C61-4B21-A8B4-507671FA6CB8</key>
 		<dict>
