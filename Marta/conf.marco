@@ -120,13 +120,12 @@ keyBindings {
     "k" "core.move.up"
     "j" "core.move.down"
     "g" "core.move.home"
-    "Shift+O" "core.open.with"
-    "o" "core.open"
+    "o" "core.lookup"
     "Shift+G" "core.move.end"
     "Shift+J" "core.move.half.page.down"
     "Shift+K" "core.move.half.page.up"
     
-    "f" "gadget.action.pseudo.cut"
+    "c" "gadget.action.pseudo.cut"
     
     "a" "core.select.all"
     "Shift+A" {
@@ -162,9 +161,9 @@ keyBindings {
         mode "newTab"
     }
     "x" "core.pane.swap"
-    "c" "core.rename"
+    "Return" "core.rename"
     "/" "core.lookup.here"
-    "Shift+/" "core.lookup"
+
     "Shift+-" "core.documentation"
     "-" "gadget.action.cheatsheet"
 
@@ -188,8 +187,6 @@ keyBindings {
     "Ctrl+O" "core.back"
 
     "Cmd+O" "core.go"
-    "Cmd+F" "core.lookup.here"
-    "Cmd+Shift+F" "core.lookup"
     "Shift+Ctrl+Opt+L" "core.finder.reveal"
     "Cmd+Shift+N" "core.new.folder"
     "Cmd+N" "core.new.file"
