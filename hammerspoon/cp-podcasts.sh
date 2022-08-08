@@ -15,4 +15,4 @@ done
 
 # -n = do not overwrite existing file
 cp -n "$PODCAST_LOCATION"/*.mp3 "$PODCAST_TARGET" || true
-open "$PODCAST_TARGET"
+open "$PODCAST_TARGET" -a "Marta"
