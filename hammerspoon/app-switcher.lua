@@ -6,6 +6,6 @@ switcher.ui.showTitles = false
 switcher.ui.showSelectedTitle = true
 switcher.ui.showSelectedThumbnail = false
 
-hotkey({"alt"}, "tab", function() switcher:next() end)
+hotkey({"cmd"}, "tab", function() switcher:next() end)
 hotkey({"alt", "shift"}, "tab", function() switcher:next() end)
 
