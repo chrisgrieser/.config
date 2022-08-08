@@ -1,6 +1,6 @@
 function directoryInspect (){
 	command git rev-parse --is-inside-work-tree &>/dev/null && git status --short
-	if [[ $(ls | wc -l) -gt 0 ]] && [[ $(ls | wc -l) -lt 30 ]] ; then
+	if [[ $(ls | wc -l) -gt 0 ]] && [[ $(ls | wc -l) -lt 20 ]] ; then
 		exa
 	fi
 }
