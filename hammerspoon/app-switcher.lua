@@ -5,7 +5,7 @@ switcher.ui.showThumbnails = false
 switcher.ui.showTitles = false
 switcher.ui.showSelectedTitle = true
 switcher.ui.showSelectedThumbnail = false
-switcher.ui.onlyActiveApplication = false
+switcher.ui.onlyActiveApplication = true
 
 hotkey({"alt"}, "tab", function() switcher:next() end)
 hotkey({"alt", "shift"}, "tab", function() switcher:next() end)
