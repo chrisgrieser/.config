@@ -123,11 +123,7 @@ biiweeklyTimer = hs.timer.doAt("02:00", "02d", function()
 	log ("🕝2️⃣ biweekly ("..deviceName()..")", "./logs/some.log")
 end, true)
 
--- catchTimer = hs.timer.doAt("02:00", "12h", function()
--- 	openIfNotRunning("Catch")
--- 	runDelayed(10, function () killIfRunning("Catch") end)
--- 	log ("🫴 Catch Torrents ("..deviceName()..")", "./logs/some.log")
--- end, true)
+
 
 dailyEveningTimer = hs.timer.doAt("21:00", "01d", function ()
 	setDarkmode(true)
@@ -149,10 +145,15 @@ if isIMacAtHome() then
 	projectorScreensaverWatcher:start()
 end
 
+-- catchTimer = hs.timer.doAt("02:00", "12h", function()
+-- 	openIfNotRunning("Catch")
+-- 	runDelayed(10, function () killIfRunning("Catch") end)
+-- 	log ("🫴 Catch Torrents ("..deviceName()..")", "./logs/some.log")
+-- end, true)
+
 --------------------------------------------------------------------------------
 -- DARK MODE
 
-toggleMartaDarkMode = os.getenv("HOME").."/dotfiles/hammerspoon/toggle-marta-darkmode.sh"
 function toggleDarkMode ()
 	hs.osascript.applescript([[
 		if application "Brave Browser" is not running then
@@ -205,7 +206,6 @@ function toggleDarkMode ()
 	-- have to be switched here
 	targetMode = "light"
 	if isDarkMode() then targetMode = "dark" end
-
 	hs.execute("zsh toggle-marta-darkmode.sh "..targetMode)
 end
 
