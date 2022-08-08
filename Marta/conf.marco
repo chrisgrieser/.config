@@ -180,13 +180,14 @@ keyBindings {
     "Shift+Z" "core.extract"
     "Shift+Space" "core.select.move.down"
 
-    "Ctrl+F18" "gadget.action.open.console"
+    
     "Cmd+G" "gadget.action.git.acp"
     "Cmd+Shift+Opt+Ctrl+T" "gadget.action.open.alacritty"
     "Ctrl+H" "core.back"
     "Ctrl+O" "core.back"
 
     "Cmd+O" "core.go"
+    "Cmd+E" "core.unmount"
     "Shift+Ctrl+Opt+L" "core.finder.reveal"
     "Cmd+Shift+N" "core.new.folder"
     "Cmd+N" "core.new.file"
@@ -197,6 +198,7 @@ keyBindings {
     "Cmd+Shift+D" "core.duplicate"
     "Shift+Cmd+Ctrl+S" "core.edit.folder"
     "Ctrl+Opt+Shift+T" "core.theme"
+    "Ctrl+F18" "gadget.action.open.console"
     "Ctrl+Opt+Shift+X" "gadget.action.chmod.x"
 
     "'" "core.move.right"
