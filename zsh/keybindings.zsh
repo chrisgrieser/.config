@@ -61,10 +61,10 @@ zle -N quote-all-args
 function dir-cycler () {
 	if [[ "$PWD" == "$WD" ]]; then
 		echo
-		cd "$DOTFILE_FOLDER"
+		z "$DOTFILE_FOLDER"
 	else
 		echo
-		cd "$WD"
+		z "$WD"
 	fi
 	zle reset-prompt
 }
