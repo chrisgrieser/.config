@@ -22,6 +22,10 @@
 	</array>
 	<key>clearKeywordEnabled</key>
 	<false/>
+	<key>fastAppend</key>
+	<true/>
+	<key>fastAppendBackToClipboard</key>
+	<true/>
 	<key>fastAppendSeparator</key>
 	<integer>1</integer>
 	<key>hotkey</key>
