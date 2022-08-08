@@ -1,8 +1,9 @@
 require("utils")
 
 function toggleDarkMode ()
-	targetMode = "dark"
+	local targetMode = "dark"
 	if isDarkMode() then targetMode = "light" end
+	local prevApp = frontapp()
 
 	hs.execute("zsh toggle-marta-darkmode.sh "..targetMode)
 
@@ -52,6 +53,8 @@ function toggleDarkMode ()
 			end if
 		end tell
 	]])
+
+	hs.application(prevApp):activate()
 end
 
 function isDarkMode()
