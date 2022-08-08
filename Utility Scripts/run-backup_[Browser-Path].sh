@@ -35,10 +35,10 @@ bkp ~'/Library/Preferences/' ./Preferences
 bkp ~'/Library/Fonts/' ./Fonts
 mkdir -p ./Homefolder
 bkp ~'/Games/' ./Homefolder/Games
-bkp ~'/Video/' ./Homefolder/Video
+bkp ~'/Downloaded/' ./Homefolder/Video
 bkp ~'/RomComs/' ./Homefolder/RomComs
 bkp ~'/Library/Mobile Documents/com~apple~CloudDocs/' ./iCloud-Folder
-bkp ~'/dotfiles/' ./dotfiles
+bkp ~'/dotfiles/' ./Homefolder/dotfiles
 
 # =========================
 

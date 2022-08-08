@@ -25,7 +25,7 @@ function downloadFolderBadge ()
 	-- requires "fileicon" being installed
 	hs.execute([[
 		export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
-		folder="$HOME/Video/Downloaded"
+		folder="$HOME/Downloaded"
 		icons_path="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Custom Icons/Download Folder"
 		itemCount=$(ls "$folder" | wc -l)
 		itemCount=$((itemCount-1)) # reduced by one to account for the "?Icon" file in the folder

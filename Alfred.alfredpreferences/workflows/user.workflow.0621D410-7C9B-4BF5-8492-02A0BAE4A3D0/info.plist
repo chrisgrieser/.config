@@ -745,7 +745,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 		<key>working_directory</key>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/</string>
 		<key>youtube_link_folder</key>
-		<string>~/Video/Downloaded</string>
+		<string>~/Downloaded</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
