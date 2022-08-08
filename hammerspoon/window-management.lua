@@ -139,6 +139,10 @@ function moveResize(win, pos)
 	hs.timer.delayed.new(0.3, function () win:moveToUnit(pos) end):start()
 end
 
+function dockSwitcher (targetMode)
+	hs.execute("zsh ./dock-swiching/dock-switcher.sh "..targetMode)
+end
+
 --------------------------------------------------------------------------------
 -- LAYOUTS & DISPLAYS
 
@@ -161,6 +165,8 @@ function movieModeLayout()
 	killIfRunning("alacritty")
 	killIfRunning("Alacritty")
 	runDelayed(1, function () openIfNotRunning("YouTube") end) -- safety redundancy
+
+	dockSwitcher("movie")
 end
 
 function homeModeLayout ()
@@ -180,6 +186,8 @@ function homeModeLayout ()
 	killIfRunning("IINA")
 	killIfRunning("Finder")
 	privateClosers()
+
+	dockSwitcher("home")
 
 	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
 	local homeLayout = {
