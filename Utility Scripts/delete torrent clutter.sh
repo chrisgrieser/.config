@@ -22,6 +22,9 @@ find "$VIDEO_DIR" \
 	-or -name '*.jpeg' -delete \
 	-or -name '*.png' -delete
 
+# delete flag does not work for directories
+find "$VIDEO_DIR" -name "Sample" -print0 | xargs -0 rm -r
+
 # download subtitles in newest folder
 NEW_FOLDER="$VIDEO_DIR/$(ls -tc "$VIDEO_DIR" | head -n1)"
 subliminal download --language "$SUB_LANG" "$NEW_FOLDER"
