@@ -65,12 +65,11 @@ function toggleHighlightsSidebar (highlightsWin)
 	runDelayed(0.4, function ()
 		local highlights_w = highlightsWin:frame().w
 		local screen_w = highlightsWin:screen():frame().w
-		local highlightsApp
+		local highlightsApp = hs.application("Highlights")
 		highlightsApp:activate()
 		notify("test")
 		if (highlights_w / screen_w > 0.6) then
 			highlightsApp:selectMenuItem({"View", "Show Sidebar"})
-			notify("test")
 		else
 			highlightsApp:selectMenuItem({"View", "Hide Sidebar"})
 		end
