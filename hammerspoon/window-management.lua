@@ -69,6 +69,7 @@ function toggleHighlightsSidebar (highlightsWin)
 		highlightsApp:activate()
 		if (highlights_w / screen_w > 0.6) then
 			highlightsApp:selectMenuItem({"View", "Show Sidebar"})
+			notify("test")
 		else
 			highlightsApp:selectMenuItem({"View", "Hide Sidebar"})
 		end
