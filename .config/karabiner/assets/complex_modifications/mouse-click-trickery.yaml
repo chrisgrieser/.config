@@ -127,10 +127,10 @@ rules:
               - ^com\.mimestream\.Mimestream$
               - ^net\.highlightsapp\.universal$
         to_if_held_down:
-          - key_code: d
+          - key_code: tab
             modifiers:
               - command
-              - control
+            repeat: false
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
@@ -370,7 +370,7 @@ rules:
           - key_code: tab
             modifiers:
               - command
-  - description: "🐁 1+2 (simultaneously): Mission Control"
+  - description: "🐁 1+2 (simultaneously): Dictionary Lookup"
     manipulators:
       - type: basic
         from:
@@ -378,7 +378,10 @@ rules:
             - pointing_button: button1
             - pointing_button: button2
         to:
-          - shell_command: open -a 'Mission Control'
+          - key_code: d
+            modifiers:
+              - command
+              - control
         parameters:
           basic.simultaneous_threshold_milliseconds: 100
 
