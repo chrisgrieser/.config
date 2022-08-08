@@ -13,7 +13,13 @@
     "⎋\nClip-board",
     "F1\nScreen darker",
     "F2\nScreen brighter",
-    "F3\nShuffle",
+    {
+      "c": "#CCCCCC"
+    },
+    "F3",
+    {
+      "c": "#CDFDDC"
+    },
     "F4\nLike",
     "F5\nKeyb. Backl.",
     "F6\nKeyb. Backl.",

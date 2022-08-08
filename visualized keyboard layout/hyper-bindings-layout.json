@@ -95,9 +95,13 @@
     },
     "Q",
     "W",
-    "E",
     {
-      "c": "#AAB7FF"
+      "c": "#AAB7FF",
+      "f": 1
+    },
+    "E\nAppend to last Draft",
+    {
+      "f": 2
     },
     "R\nRestart App",
     "T\nTerminal",
@@ -145,9 +149,13 @@
       "f": 2
     },
     "A\nAlfred Action",
-    "S\nSave in Scratch.",
-    "D\nSave in Drafts",
     {
+      "f": 1
+    },
+    "S\nSave in Obsidian Scratch.",
+    "D\nSave as new Draft",
+    {
+      "f": 2,
       "n": true
     },
     "F\nopen \"$WD\"",
@@ -185,10 +193,10 @@
       "f": 2
     },
     ">",
-    "Y",
     {
       "c": "#AAB7FF"
     },
+    "Y\nAppend to clipb.",
     "X\nSwitch Split",
     "C\nEnd Split",
     "V\nVertical Split",
@@ -250,6 +258,7 @@
     "──────\nDelete Word (daw)",
     {
       "c": "#999999",
+      "a": 7,
       "f": 7
     },
     "⌘",
@@ -257,6 +266,7 @@
     "⌃",
     {
       "c": "#AAB7FF",
+      "a": 5,
       "f": 2
     },
     "←\nLeft Half",

@@ -223,7 +223,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>71FBE1C5-BC7B-43A4-BCB9-727D69B6383C</string>
+				<string>D4EB437D-EC28-4418-966D-F823452D9A44</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -375,6 +375,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D4EB437D-EC28-4418-966D-F823452D9A44</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>71FBE1C5-BC7B-43A4-BCB9-727D69B6383C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>78A52CE9-2DAF-4C58-97EC-B4687CF31E4D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>DD67A894-ED1C-4DAA-84B7-113B91E18326</key>
 		<array>
 			<dict>
@@ -405,7 +428,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>71FBE1C5-BC7B-43A4-BCB9-727D69B6383C</string>
+				<string>D4EB437D-EC28-4418-966D-F823452D9A44</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -931,9 +954,9 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 				<key>argument</key>
 				<integer>1</integer>
 				<key>focusedappvariable</key>
-				<false/>
+				<true/>
 				<key>focusedappvariablename</key>
-				<string></string>
+				<string>focusedapp</string>
 				<key>hotkey</key>
 				<integer>2</integer>
 				<key>hotmod</key>
@@ -1435,6 +1458,14 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>D4EB437D-EC28-4418-966D-F823452D9A44</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>browser</key>
@@ -1483,6 +1514,29 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<string>AD1B0D13-F18C-41AB-BCD9-8C00E6A632A2</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application id (system attribute "focusedapp") to activate</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>78A52CE9-2DAF-4C58-97EC-B4687CF31E4D</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1815,11 +1869,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>71FBE1C5-BC7B-43A4-BCB9-727D69B6383C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>705</real>
 			<key>ypos</key>
-			<real>690</real>
+			<real>720</real>
 		</dict>
 		<key>74B62267-C649-4561-93C7-DCBDD98B8D63</key>
 		<dict>
@@ -1842,6 +1896,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>705</real>
 			<key>ypos</key>
 			<real>430</real>
+		</dict>
+		<key>78A52CE9-2DAF-4C58-97EC-B4687CF31E4D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>refocus last app</string>
+			<key>xpos</key>
+			<real>705</real>
+			<key>ypos</key>
+			<real>845</real>
 		</dict>
 		<key>79405FF0-A2F1-462E-8A8F-AC1F83CC4C1A</key>
 		<dict>
@@ -1917,7 +1982,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>530</real>
+			<real>475</real>
 			<key>ypos</key>
 			<real>925</real>
 		</dict>
@@ -1946,7 +2011,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>405</real>
+			<real>395</real>
 			<key>ypos</key>
 			<real>835</real>
 		</dict>
@@ -2021,6 +2086,15 @@ Recommended Hotkey: ⇧⌘2</string>
 			<key>ypos</key>
 			<real>240</real>
 		</dict>
+		<key>D4EB437D-EC28-4418-966D-F823452D9A44</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>630</real>
+			<key>ypos</key>
+			<real>795</real>
+		</dict>
 		<key>DD67A894-ED1C-4DAA-84B7-113B91E18326</key>
 		<dict>
 			<key>colorindex</key>
@@ -2055,7 +2129,7 @@ Recommended Hotkey: ⇧⌘2</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>530</real>
+			<real>475</real>
 			<key>ypos</key>
 			<real>805</real>
 		</dict>
