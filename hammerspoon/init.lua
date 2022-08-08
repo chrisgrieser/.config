@@ -29,7 +29,7 @@ require("twitterrific-iina")
 -- System Startup
 gitDotfileSync("wake")
 reloadAllMenubarItems()
-hs.application("Finder"):kill() -- fewer items in the app switcher when Marta is used anyway
+killIfRunning("Finder") -- fewer items in the app switcher when Marta is used anyway
 
 notify("Config reloaded")
 
