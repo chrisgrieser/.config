@@ -964,7 +964,7 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>xpos</key>
 			<real>1015</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>475</real>
 		</dict>
 		<key>1B6838B5-A98F-4E36-B645-F289BA31A5F8</key>
 		<dict>
@@ -986,6 +986,8 @@ md2docx "$*" 2&gt;&amp;1</string>
 		</dict>
 		<key>39B71402-41AF-4087-AFBB-86D0ABEDD89E</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
 			<real>615</real>
 			<key>ypos</key>
@@ -1168,6 +1170,8 @@ md2docx "$*" 2&gt;&amp;1</string>
 		</dict>
 		<key>DE14F947-C048-4758-B263-7BC06297F371</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
 			<real>735</real>
 			<key>ypos</key>
@@ -1175,6 +1179,8 @@ md2docx "$*" 2&gt;&amp;1</string>
 		</dict>
 		<key>E0D28C3D-F986-4491-9594-54FEA3344924</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
 			<real>410</real>
 			<key>ypos</key>

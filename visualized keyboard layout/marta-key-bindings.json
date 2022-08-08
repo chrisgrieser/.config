@@ -108,7 +108,7 @@
       "f": 2
     },
     "z Z\n(un)zip",
-    "u U\nhier-archy",
+    "u\nhier-archy",
     "i\ninfo",
     "o O\nopen (with)",
     "P\npaste",
@@ -126,7 +126,7 @@
       "h2": 1,
       "x2": -0.25
     },
-    "↵\nopen",
+    "↵\nrename",
     {
       "c": "#999999",
       "a": 7,
@@ -155,11 +155,13 @@
     },
     "d D\ndelete / show Trash",
     {
+      "c": "#cccccc",
       "f": 2,
       "n": true
     },
-    "f\npseudo-cut",
+    "f",
     {
+      "c": "#c7a6ff",
       "f": 1
     },
     "g G\nscroll top / bottom",
@@ -205,7 +207,7 @@
     },
     "y Y\ncopy / ducplic.",
     "x\nswap panes",
-    "c\nrename",
+    "c\npseudo-cut",
     "v\nmove to pane",
     "b\ncopy to pane",
     "n\nnew file / folder",
