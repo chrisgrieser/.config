@@ -126,10 +126,7 @@ draftsMenuBarWatcher2 = hs.application.watcher.new(draftsWatcher)
 draftsMenuBarWatcher2:start()
 
 -- `hammerspoon://update-drafts-menubar` for Alfred when adding Drafts in the background
-hs.urlevent.bind("update-drafts-menubar", function()
-	updateDraftsMenubar()
-	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
-end)
+hs.urlevent.bind("update-drafts-menubar", updateDraftsMenubar)
 
 --------------------------------------------------------------------------------
 

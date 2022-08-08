@@ -1,7 +1,6 @@
 #!/usr/bin/env osascript
 on run argv
-	set AppleScript's text item delimiters to ""
-	set input to argv as string
+	set input to item 1 of argv
 	set output to ""
 	set notif_msg to "🛑 No Input provided."
 
