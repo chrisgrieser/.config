@@ -19,8 +19,8 @@ require("window-management")
 require("filesystem-watchers")
 require("usb-watchers")
 require("dark-mode")
+require("app-switcher")
 -- require("hot-corner-action")
--- require("app-switcher")
 
 -- app-specific
 require("app-watchers")
