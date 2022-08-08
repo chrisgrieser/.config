@@ -16,7 +16,7 @@ end
 function isIMacAtHome ()
 	local iMacFirstScreen = hs.screen.primaryScreen():name() == "Built-in Retina Display"
 	local iMacSecondScreen
-	if numberOfScreens() > 1 then
+	if #hs.screen.allScreens() > 1 then
 		iMacSecondScreen = hs.screen.allScreens()[2]:name() == "Built-in Retina Display"
 	else
 		iMacSecondScreen = false
