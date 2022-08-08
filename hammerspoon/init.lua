@@ -17,10 +17,10 @@ require("menubar")
 require("system-and-cron")
 require("window-management")
 require("filesystem-watchers")
-require("hot-corner-action")
 require("usb-watchers")
 require("dark-mode")
-require("app-switcher")
+-- require("hot-corner-action")
+-- require("app-switcher")
 
 -- app-specific
 require("app-watchers")
