@@ -234,11 +234,7 @@
           ],
           "to_if_held_down": [
             {
-              "key_code": "tab",
-              "modifiers": [
-                "command"
-              ],
-              "repeat": false
+              "shell_command": "open -a \"Mission Control\""
             }
           ],
           "parameters": {
@@ -266,11 +262,7 @@
           ],
           "to_if_held_down": [
             {
-              "key_code": "d",
-              "modifiers": [
-                "command",
-                "control"
-              ]
+              "shell_command": "open -a \"Mission Control\""
             }
           ],
           "parameters": {
@@ -322,6 +314,13 @@
                 "command",
                 "control"
               ]
+            },
+            {
+              "key_code": "3",
+              "modifiers": [
+                "command",
+                "control"
+              ]
             }
           ],
           "conditions": [
@@ -334,18 +333,7 @@
           ],
           "to_if_held_down": [
             {
-              "key_code": "d",
-              "modifiers": [
-                "command",
-                "control"
-              ]
-            },
-            {
-              "key_code": "3",
-              "modifiers": [
-                "command",
-                "control"
-              ]
+              "shell_command": "open -a \"Mission Control\""
             }
           ],
           "parameters": {
@@ -373,11 +361,7 @@
           ],
           "to_if_held_down": [
             {
-              "key_code": "d",
-              "modifiers": [
-                "command",
-                "control"
-              ]
+              "shell_command": "open -a \"Mission Control\""
             }
           ],
           "parameters": {
