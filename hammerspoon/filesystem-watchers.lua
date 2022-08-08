@@ -60,18 +60,24 @@ if isIMacAtHome() then downloadFolderWatcher:start() end
 
 -- Redirects TO File Hub
 scanFolder = home.."/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
-function scanFolderMove()
+scanFolderWatcher = hs.pathwatcher.new(scanFolder, function ()
 	hs.execute("mv '"..scanFolder.."'/* '"..fileHub.."'")
-end
-scanFolderWatcher = hs.pathwatcher.new(scanFolder, scanFolderMove)
+end)
 scanFolderWatcher:start()
 
 systemDownloadFolder = home.."/Downloads/"
-function systemDlFolderMove()
+systemDlFolderWatcher = hs.pathwatcher.new(systemDownloadFolder, function ()
 	hs.execute("mv '"..systemDownloadFolder.."'/* '"..fileHub.."'")
-end
-systemDlFolderWatcher = hs.pathwatcher.new(systemDownloadFolder, systemDlFolderMove)
+end)
 systemDlFolderWatcher:start()
+
+draftsIcloud = home.."/Downloads/"
+draftsIcloudWatcher = hs.pathwatcher.new(draftsIcloud, function ()
+	hs.execute("mv '"..draftsIcloud.."'/*.md '"..fileHub.."'")
+end)
+draftsIcloudWatcher:start()
+
+--------------------------------------------------------------------------------
 
 function isInSubdirectory (file, folder) -- (instead of directly in the folder)
 	local _, fileSlashes = file:gsub("/", "")
