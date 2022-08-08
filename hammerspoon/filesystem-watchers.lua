@@ -71,7 +71,7 @@ systemDlFolderWatcher = hs.pathwatcher.new(systemDownloadFolder, function ()
 end)
 systemDlFolderWatcher:start()
 
-draftsIcloud = home.."/Downloads/"
+draftsIcloud = home.."/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
 draftsIcloudWatcher = hs.pathwatcher.new(draftsIcloud, function ()
 	hs.execute("mv '"..draftsIcloud.."'/*.md '"..fileHub.."'")
 end)
