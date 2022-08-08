@@ -17,20 +17,16 @@ matches:
     label: 🍏 Check whether app is running
   - trigger: '!menu'
     replace: |
-      tell application "System Events"
-      	tell process "$|$"
-      		set frontmost to true
-      		click menu item "" of menu "File" of menu bar 1
-      	end tell
+      tell application "System Events" to tell process "$|$"
+      	set frontmost to true
+      	click menu item "" of menu "File" of menu bar 1
       end tell
     label: 🍏 Click Menubar Item
   - trigger: '!submenu'
     replace: |
-      tell application "System Events"
-      	tell process "$|$"
-      		set frontmost to true
-      		click menu item "" of menu of menu item "Share" of menu "Edit" of menu bar 1
-      	end tell
+      tell application "System Events" to tell process "$|$"
+      	set frontmost to true
+      	click menu item "" of menu of menu item "Share" of menu "Edit" of menu bar 1
       end tell
     label: 🍏 Click Submenu Item of Menubar
   - replace: |
@@ -92,15 +88,6 @@ matches:
       set AppleScript's text item delimiters to "-"
       set strWithReplacement to theTextItems as string
     label: 🍏 Replace in String
-  - replace: |
-      "-- when app name and menu item name are the same, this can be applied to multiple apps\n\nset ServiceName to "Scrivener: Make New Clipping (Unformatted)"
-      tell application "System Events"
-      	tell process "Brave Browser"
-      		set frontmost to true
-      		click menu item ServiceName of menu of menu item "Services" of menu "Brave" of menu bar 1
-      	end tell
-      end tell"
-    label: 🍏 Run Services
   - trigger: '!shortcut'
     replace: tell application "Shortcuts" to run shortcut "$|$"
     label: 🍏 Run Shortcut
