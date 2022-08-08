@@ -43,7 +43,7 @@
         "hs.http.get()\tcurl equivalent",
         "hs.urlevent.bind(\"foobar\", function)\t→ hammerspoon://foobar",
 
-        "hotkey({}, \"\")",
+        "hotkey({}, \"\", function() end)",
         "keystroke({}, \"\")",
 
         "os.getenv(\"HOME\")",
