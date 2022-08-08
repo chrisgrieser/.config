@@ -1,6 +1,11 @@
 require("utils")
 
 function toggleDarkMode ()
+	targetMode = "dark"
+	if isDarkMode() then targetMode = "light" end
+
+	hs.execute("zsh toggle-marta-darkmode.sh "..targetMode)
+
 	hs.osascript.applescript([[
 		if application "Brave Browser" is not running then
 			launch
@@ -47,12 +52,6 @@ function toggleDarkMode ()
 			end if
 		end tell
 	]])
-
-	-- since darkMode has already been switched via AppleScript, light & dark
-	-- have to be switched here
-	targetMode = "light"
-	if isDarkMode() then targetMode = "dark" end
-	hs.execute("zsh toggle-marta-darkmode.sh "..targetMode)
 end
 
 function isDarkMode()
