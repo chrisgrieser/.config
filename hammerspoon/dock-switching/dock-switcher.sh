@@ -2,6 +2,6 @@
 
 rm ~/Library/Preferences/com.apple.dock.plist
 cp -a "./$1.plist" ~/Library/Preferences/com.apple.dock.plist
-defaults read com.apple.dock &> /dev/null # needed to refresh properly
+defaults import com.apple.dock ~/Library/Preferences/com.apple.dock.plist
 sleep 0.1
 killall Dock

@@ -187,6 +187,7 @@ keyBindings {
     "Ctrl+H" "core.back"
     "Ctrl+O" "core.back"
 
+    "Cmd+O" "core.go"
     "Cmd+F" "core.lookup.here"
     "Cmd+Shift+F" "core.lookup"
     "Shift+Ctrl+Opt+L" "core.finder.reveal"
