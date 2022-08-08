@@ -12,13 +12,7 @@ else
 fi
 
 if pgrep "Marta" &> /dev/null ; then
-	IS_FRONT_MOST=$(osascript -e 'frontmost of application "Marta"')
 	killall "Marta"
 	sleep 0.2
-	if [[ "$IS_FRONT_MOST" =~ "true" ]] ; then
-		open -a "Marta"
-	else
-		osascript -e "beep"
-		open -a "Marta" -j
-	fi
+	open -a "Marta" -j
 fi
