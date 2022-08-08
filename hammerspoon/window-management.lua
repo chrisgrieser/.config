@@ -225,6 +225,7 @@ function officeModeLayout ()
 	openIfNotRunning("Obsidian")
 	openIfNotRunning("Twitterrific")
 	openIfNotRunning("Drafts")
+	killIfRunning("Finder")
 
 	local bottom = {x=0, y=0.5, w=1, h=0.5}
 	local topLeft = {x=0, y=0, w=0.515, h=0.5}
