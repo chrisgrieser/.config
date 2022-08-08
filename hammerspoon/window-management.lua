@@ -50,7 +50,7 @@ function toggleDraftsSidebar (draftsWin)
 		end
 	end)
 	-- repetitation for some rare cases with lag needed
-	runDelayed(0.3, function ()
+	runDelayed(0.2, function ()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
 		if (drafts_w / screen_w > 0.6) then
@@ -91,7 +91,7 @@ function toggleObsidianSidebar (obsiWin)
 			hs.urlevent.openURL("obsidian://sidebar?showLeft=false&showRight=false")
 		end
 	end)
-	runDelayed(0.3, function ()
+	runDelayed(0.2, function ()
 		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
 		if (numberOfObsiWindows > 1) then return end
 
