@@ -113,7 +113,7 @@ rules:
               - ^org\.hammerspoon\.Hammerspoon$
   - description: "🐁 4"
     manipulators:
-      # held-down: Dictionary Lookup
+      # held-down: Mission Control
       - type: basic
         from:
           pointing_button: button4
@@ -127,10 +127,7 @@ rules:
               - ^com\.mimestream\.Mimestream$
               - ^net\.highlightsapp\.universal$
         to_if_held_down:
-          - key_code: tab
-            modifiers:
-              - command
-            repeat: false
+          - shell_command: open -a "Mission Control"
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
@@ -153,10 +150,7 @@ rules:
             bundle_identifiers:
               - ^com\.brave\.Browser$
         to_if_held_down:
-          - key_code: d
-            modifiers:
-              - command
-              - control
+          - shell_command: open -a "Mission Control"
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
@@ -189,19 +183,16 @@ rules:
             modifiers:
               - command
               - control
+          - key_code: "3"
+            modifiers:
+              - command
+              - control
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^net\.highlightsapp\.universal$
         to_if_held_down:
-          - key_code: d
-            modifiers:
-              - command
-              - control
-          - key_code: "3"
-            modifiers:
-              - command
-              - control
+          - shell_command: open -a "Mission Control"
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
@@ -224,10 +215,7 @@ rules:
             bundle_identifiers:
               - ^com\.apple\.finder$
         to_if_held_down:
-          - key_code: d
-            modifiers:
-              - command
-              - control
+          - shell_command: open -a "Mission Control"
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
