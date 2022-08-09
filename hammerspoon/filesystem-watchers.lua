@@ -98,6 +98,8 @@ function fromFileHub(files)
 			end)
 		elseif fileName == "vimium-options.json" then
 			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/Browser Extension Settings/"')
+		elseif fileName:match("base-keyboard-layout%.%w*") or fileName:match("app-switcher-layout%.%w*") or fileName:match("vimrc-remapping%.%w*") or fileName:match("%.%w*") then
+			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/visualized keyboard layout/"')
 		end
 	end
 end
