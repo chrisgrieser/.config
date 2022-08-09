@@ -14479,7 +14479,7 @@
 	author = {Grieser, Christopher},
 	year = 2018,
 	location = {TU Berlin},
-	url = {https://www.researchgate.net/publication/325538304\_The\_Influence\_of\_Companies\_on\_Scientific\_Communities\_A\_Qualitative\_Study\_of\_German\_Automotive\_Engineering},
+	url = {https://www.researchgate.net/publication/325538304_The_Influence_of_Companies_on_Scientific_Communities_A_Qualitative_Study_of_German_Automotive_Engineering},
 	howpublished = {Master Thesis},
 	keywords = {Wissenschaft,Mechanismen,scientific communities,Wissenschaft und Wirtschaft},
 	type = {Master Thesis}
@@ -22491,10 +22491,10 @@
 	year = 2017,
 	journal = {Research in Organizational Behavior},
 	volume = 37,
+	keywords = {Organisationssoziologie, Formalität, Hierarchie, StartUps, Demokratie, Partizipation, Review},
 	pages = {35--58},
 	doi = {10.1016/j.riob.2017.10.002},
-	url = {https://linkinghub.elsevier.com/retrieve/pii/S0191308517300059},
-	keywords = {Organisationssoziologie, Formalit\"{a}t, Hierarchie, StartUps, Demokratie, Partizipation, Review}
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0191308517300059}
 }
 @article{LeekPeng2015,
 	title = {Statistics: {{P}} Values Are Just the Tip of the Iceberg},
@@ -26417,7 +26417,7 @@
 @article{Moore1993,
 	title = {Predators and Prey: A New Ecology of Competition},
 	author = {Moore, J. F.},
-	year = 1993,
+	year = {1993},
 	journal = {Harvard Business Review},
 	volume = 71,
 	number = 3,
@@ -38462,7 +38462,7 @@
 @unpublished{Walter2000,
 	title = {Utopien der {{Vergangenheit}}: {{Visionen}} Einer Besseren {{Zukunft}}?},
 	author = {Walter, Tillman},
-	year = 2000
+	year = 2000,
 }
 @incollection{Walters2012,
 	title = {Governmentality 3.4.7},
@@ -40469,10 +40469,10 @@
 	year = 2022,
 	journal = {Academy of Management Journal},
 	publisher = {Academy of Management},
-	volume = 65,
-	number = 3,
-	pages = {1055–-1082},
 	doi = {10.5465/amj.2020.1583},
+	pages = {1055–-1082},
+	volume = {65},
+	number = {3},
 	url = {https://doi.org/10.5465/amj.2020.1583},
 	keywords = {hype, Zukunft, Erwartung, Wirtschaftssoziologie, Silicon Valley, StartUps}
 }
@@ -40522,70 +40522,57 @@
 	editor = {Werber, Niels}
 }
 @article{OzkulaEtAl2022,
-	title = {When {URLs} on social networks become invisible},
-	author = {Suay Melisa \"{O}zkula and Maria Lompe and Mariangela Vespa and Estrid S{\o}rensen and Tianshi Zhao},
-	year = 2022,
-	journal = {First Monday},
-	publisher = {University of Illinois Libraries},
 	doi = {10.5210/fm.v27i6.12568},
-	url = {https://doi.org/10.5210\%2Ffm.v27i6.12568},
-	keywords = {Digitalwirtschaft, App-Studies}
+	url = {https://doi.org/10.5210%2Ffm.v27i6.12568},
+	year = 2022,
+	publisher = {University of Illinois Libraries},
+	author = {Suay Melisa Özkula and Maria Lompe and Mariangela Vespa and Estrid S{\o}rensen and Tianshi Zhao},
+	title = {When {URLs} on social networks become invisible},
+	keywords = {Digitalwirtschaft, App-Studies},
+	journal = {First Monday}
 }
 @article{SandersonUzumeri1995,
-	title = {Managing product families: The case of the Sony Walkman},
-	author = {Susan Sanderson and Mustafa Uzumeri},
-	year = 1995,
-	journal = {Research Policy},
-	publisher = {Elsevier {BV}},
-	volume = 24,
-	number = 5,
-	pages = {761--782},
 	doi = {10.1016/0048-7333(94)00797-b},
-	url = {https://doi.org/10.1016\%2F0048-7333\%2894\%2900797-b},
+	url = {https://doi.org/10.1016%2F0048-7333%2894%2900797-b},
+	year = 1995,
+	publisher = {Elsevier {BV}},
+	volume = {24},
+	number = {5},
+	pages = {761--782},
+	author = {Susan Sanderson and Mustafa Uzumeri},
+	title = {Managing product families: The case of the Sony Walkman},
+	keywords = {},
+	journal = {Research Policy}
 }
 @article{DrewlaniSeibt2018,
-	title = {Configuring the independent developer},
-	author = {Drewlani, Tobias and Seibt, David},
-	year = 2018,
-	journal = {Journal of Peer Production},
-	number = 12,
-	pages = {96--114}
+	title={Configuring the independent developer},
+	author={Drewlani, Tobias and Seibt, David},
+	journal={Journal of Peer Production},
+	number={12},
+	pages={96--114},
+	year=2018
 }
 @incollection{AlbertEtAl2010,
-	title = {Extreme Cases},
-	author = {Mills, Albert, and Durepos, Gabrielle and Wiebe, Elden},
-	year = 2010,
-	booktitle = {Encyclopedia of Case Study Research},
-	publisher = {{SAGE} Publications, Inc.},
+	author={Mills, Albert, and Durepos, Gabrielle and Wiebe, Elden},
 	doi = {10.4135/9781412957397.n142},
 	url = {http://dx.doi.org/10.4135/9781412957397.n142},
-	keywords = {qualitative-Methode, Fallauswahl}
+	year = 2010,
+	publisher = {{SAGE} Publications, Inc.},
+	keywords = {qualitative-Methode, Fallauswahl},
+	title = {Extreme Cases},
+	booktitle = {Encyclopedia of Case Study Research}
 }
 @book{Patton2015,
-	title = {Qualitative Research \& Evaluation Methods},
 	author = {Patton, Michael Quinn},
-	year = 2015,
+	title = {Qualitative Research & Evaluation Methods},
 	publisher = {Sage},
-	isbn = 1412972124,
-	url = {https://us.sagepub.com/en-us/nam/qualitative-research-evaluation-methods/book232962},
+	year = {2015},
+	isbn = {1412972124},
 	keywords = {Qualitative-Methoden},
-	edition = 4
+	edition = {4},
+	url = {https://us.sagepub.com/en-us/nam/qualitative-research-evaluation-methods/book232962}
 }
-@article{GritsenkoEtAl2022,
-	doi = {10.1177/14614448221079037},
-	url = {https://doi.org/10.1177%2F14614448221079037},
-	year = 2022,
-	publisher = {{SAGE} Publications},
-	volume = {24},
-	number = {4},
-	pages = {835--844},
-	author = {Daria Gritsenko and Annette Markham and Holger Pötzsch and Mariëlle Wijermars},
-	title = {Algorithms, contexts, governance: An introduction to the special issue},
-	keywords = {algorithms, review},
-	journal = {New Media {\&}amp$\mathsemicolon$ Society}
-}
-
-@article{BurrellFourcade2021a,
+@article{BurrellFourcade2021,
 	doi = {10.1146/annurev-soc-090820-020800},
 	url = {https://doi.org/10.1146%2Fannurev-soc-090820-020800},
 	year = 2021,
@@ -40595,7 +40582,6 @@
 	pages = {213--237},
 	author = {Jenna Burrell and Marion Fourcade},
 	title = {The Society of Algorithms},
-	keywords = {algorithms, review},
+	keywords = {},
 	journal = {Annual Review of Sociology}
 }
-

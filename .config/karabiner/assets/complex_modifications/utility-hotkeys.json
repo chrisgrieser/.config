@@ -190,38 +190,6 @@
       ]
     },
     {
-      "description": "🔘 fn (alone) → \\ (+ US Layout)",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "apple_vendor_top_case_key_code": "keyboard_fn"
-          },
-          "to_if_alone": [
-            {
-              "select_input_source": {
-                "input_source_id": "^com\\.apple\\.keylayout\\.US$"
-              }
-            },
-            {
-              "key_code": "vk_none",
-              "hold_down_milliseconds": 50
-            },
-            {
-              "key_code": "non_us_pound"
-            }
-          ],
-          "to_after_key_up": [
-            {
-              "select_input_source": {
-                "input_source_id": "^com\\.apple\\.keylayout\\.ABC-QWERTZ$"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
       "description": "🔘 ° → \\ (+ US Layout); ⌥^ for ° Symbol",
       "manipulators": [
         {

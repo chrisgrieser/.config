@@ -52,5 +52,4 @@ osascript -e "tell application id \"com.runningwithcrayons.Alfred\" to set confi
 echo "Backup: $(date '+%Y-%m-%d %H:%M')" >> last_backup.log
 
 # Notify on Completion
-osascript -e 'display notification "" with title "Backup finished."'
-afplay "/System/Library/Sounds/Blow.aiff"
+osascript -e 'display notification "" with title "Backup finished." sound name "Blow"'
