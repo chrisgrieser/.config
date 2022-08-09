@@ -103,7 +103,7 @@ function fromFileHub(files)
 			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/Browser Extension Settings/"')
 
 		-- visualised keyboard layouts
-		elseif fileName:match("base-keyboard-layout%.%w*") or fileName:match("app-switcher-layout%.%w*") or fileName:match("vimrc-remapping%.%w*") or fileName:match("marta-key-bindings%.%w*") or fileName:match("hyper-bindings-layout%.%w*") or fileName:match("single-keystroke-bindings%.%w*") then
+		elseif fileName:match("base%-keyboard%-layout%.%w+") or fileName:match("app%-switcher%-layout%.%w+") or fileName:match("vimrc%-remapping%.%w+") or fileName:match("marta%-key%-bindings%.%w+") or fileName:match("hyper%-bindings%-layout%.%w+") or fileName:match("single%-keystroke%-bindings%.%w+") then
 			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/visualized keyboard layout/"')
 		end
 	end
