@@ -41,6 +41,19 @@
 				<true/>
 			</dict>
 		</array>
+		<key>0F67F602-B51A-4A3F-A884-72389E1D1FF9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EC5DBDBD-F5AC-476A-8757-5C1577F33D11</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<array>
 			<dict>
@@ -147,6 +160,19 @@
 		</array>
 		<key>56CD69F0-DA3F-4EF1-809F-78543F4459A1</key>
 		<array/>
+		<key>7A18F376-D5B6-4AA1-8F1E-8244A9EC44C5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0F67F602-B51A-4A3F-A884-72389E1D1FF9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7B43FD68-D463-4626-BE13-7D1C65B12ECF</key>
 		<array>
 			<dict>
@@ -288,6 +314,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>EC5DBDBD-F5AC-476A-8757-5C1577F33D11</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A3E89738-7B65-4537-AE1B-55F8E4046D3D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -296,7 +335,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>File Explorer</string>
+	<string>File Manager (Marta)</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -351,46 +390,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-recent-item.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DE14F947-C048-4758-B263-7BC06297F371</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>jumpto</key>
-				<string>alfred.action.move</string>
-				<key>path</key>
-				<string></string>
-				<key>type</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.actioninalfred</string>
-			<key>uid</key>
-			<string>56CD69F0-DA3F-4EF1-809F-78543F4459A1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -421,6 +420,46 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>993B0563-52D6-4547-B1D7-97E70FF55DB2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>jumpto</key>
+				<string>alfred.action.move</string>
+				<key>path</key>
+				<string></string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.actioninalfred</string>
+			<key>uid</key>
+			<string>56CD69F0-DA3F-4EF1-809F-78543F4459A1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>open-recent-item.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DE14F947-C048-4758-B263-7BC06297F371</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -525,21 +564,6 @@ open .</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>DC23B294-25E4-4CEA-841A-71546D15BD89</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -587,6 +611,46 @@ open .</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>DC23B294-25E4-4CEA-841A-71546D15BD89</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>cd "${default_folder/#\~/$HOME}" || exit 1
+
+echo -n $(ls | wc -l | tr -d " ")</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -612,31 +676,6 @@ open .</string>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>3AA97555-4630-4AB5-A2F3-900B154E50A7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>cd "${default_folder/#\~/$HOME}" || exit 1
-
-echo -n $(ls | wc -l | tr -d " ")</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -692,6 +731,24 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+	set toDelete to q as POSIX file
+	tell application "Finder" to delete toDelete
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>49C1CB43-3C55-4085-BBF5-A406476E7309</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>externaltriggerid</key>
 				<string>file-hub-cycle</string>
 				<key>passinputasargument</key>
@@ -709,78 +766,10 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>applescript</key>
-				<string>on alfred_script(q)
-	set toDelete to q as POSIX file
-	tell application "Finder" to delete toDelete
-end alfred_script</string>
-				<key>cachescript</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.applescript</string>
-			<key>uid</key>
-			<string>49C1CB43-3C55-4085-BBF5-A406476E7309</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
 			<string>5CCD4941-B4C3-444A-8318-2DDBF741229A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>'{var:tabName}'</string>
-				<key>title</key>
-				<string>🌐 Link File created</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>1B6838B5-A98F-4E36-B645-F289BA31A5F8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>adduuid</key>
-				<false/>
-				<key>allowemptyfiles</key>
-				<false/>
-				<key>createintermediatefolders</key>
-				<false/>
-				<key>filename</key>
-				<string>{var:default_folder}/{var:tabName}.url</string>
-				<key>filetext</key>
-				<string>[InternetShortcut]
-URL={var:url}
-IconIndex=0</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>relativepathmode</key>
-				<integer>0</integer>
-				<key>type</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.writefile</string>
-			<key>uid</key>
-			<string>B1A3DB54-4F96-4E6E-9CF1-E7721DA58232</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -812,6 +801,27 @@ echo -n "$title"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>'{var:tabName}'</string>
+				<key>title</key>
+				<string>🌐 Link File created</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>1B6838B5-A98F-4E36-B645-F289BA31A5F8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -827,6 +837,35 @@ echo -n "$title"</string>
 			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
 			<string>9536809F-DBBD-4982-90BC-427C6D115A14</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>adduuid</key>
+				<false/>
+				<key>allowemptyfiles</key>
+				<false/>
+				<key>createintermediatefolders</key>
+				<false/>
+				<key>filename</key>
+				<string>{var:default_folder}/{var:tabName}.url</string>
+				<key>filetext</key>
+				<string>[InternetShortcut]
+URL={var:url}
+IconIndex=0</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>relativepathmode</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.writefile</string>
+			<key>uid</key>
+			<string>B1A3DB54-4F96-4E6E-9CF1-E7721DA58232</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -869,35 +908,6 @@ echo -n "$title"</string>
 			<string>EA84A1D9-5B40-48C6-B910-0E4E2E12B31C</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>731E347D-BF06-4006-8A64-A505693B5EF9</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -945,6 +955,132 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>731E347D-BF06-4006-8A64-A505693B5EF9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>EC5DBDBD-F5AC-476A-8757-5C1577F33D11</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>45</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>N</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+					<string>org.yanex.marta</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>7A18F376-D5B6-4AA1-8F1E-8244A9EC44C5</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A3E89738-7B65-4537-AE1B-55F8E4046D3D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>.*\/(.+)</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string>$1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>0F67F602-B51A-4A3F-A884-72389E1D1FF9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -958,6 +1094,15 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<real>585</real>
 			<key>ypos</key>
 			<real>350</real>
+		</dict>
+		<key>0F67F602-B51A-4A3F-A884-72389E1D1FF9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>840</real>
 		</dict>
 		<key>11D8554B-846B-40DD-9CA0-C73F5736472F</key>
 		<dict>
@@ -1031,7 +1176,7 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>colorindex</key>
 			<integer>4</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>220</real>
 			<key>ypos</key>
 			<real>675</real>
 		</dict>
@@ -1076,9 +1221,20 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>colorindex</key>
 			<integer>4</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>425</real>
 			<key>ypos</key>
 			<real>675</real>
+		</dict>
+		<key>7A18F376-D5B6-4AA1-8F1E-8244A9EC44C5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>copy file name</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>810</real>
 		</dict>
 		<key>7B43FD68-D463-4626-BE13-7D1C65B12ECF</key>
 		<dict>
@@ -1124,6 +1280,15 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>20</real>
+		</dict>
+		<key>A3E89738-7B65-4537-AE1B-55F8E4046D3D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>425</real>
+			<key>ypos</key>
+			<real>810</real>
 		</dict>
 		<key>B1A3DB54-4F96-4E6E-9CF1-E7721DA58232</key>
 		<dict>
@@ -1194,6 +1359,15 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<real>370</real>
 			<key>ypos</key>
 			<real>565</real>
+		</dict>
+		<key>EC5DBDBD-F5AC-476A-8757-5C1577F33D11</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>275</real>
+			<key>ypos</key>
+			<real>810</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

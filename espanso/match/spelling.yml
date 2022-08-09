@@ -142,3 +142,6 @@ matches:
     replace: replace
   - trigger: algorithmsich
     replace: algorithmisch
+  - trigger: mroe
+    replace: more
+    word: true
