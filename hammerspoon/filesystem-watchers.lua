@@ -79,26 +79,31 @@ draftsIcloudWatcher:start()
 
 --------------------------------------------------------------------------------
 
-function isInSubdirectory (file, folder) -- (instead of directly in the folder)
-	local _, fileSlashes = file:gsub("/", "")
-	local _, folderSlashes = folder:gsub("/", "")
-	return fileSlashes > folderSlashes
-end
-
 -- Redirects FROM File Hub
 function fromFileHub(files)
 	for _,file in pairs(files) do
+		local function isInSubdirectory (f, folder) -- (instead of directly in the folder)
+			local _, fileSlashes = f:gsub("/", "")
+			local _, folderSlashes = folder:gsub("/", "")
+			return fileSlashes > folderSlashes
+		end
+
 		if isInSubdirectory(file, fileHub) then return end
 		fileName = file:gsub(".*/","")
 
+		-- delete alfredworkflows and ics
 		if fileName:sub(-15) == ".alfredworkflow" or fileName:sub(-4) == ".ics" then
 			runDelayed(3, function ()
 				hs.applescript('set toDelete to "'..file..'" as POSIX file\n'..
 					'tell application "Finder" to delete toDelete')
 			end)
+
+		-- vimium backup
 		elseif fileName == "vimium-options.json" then
 			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/Browser Extension Settings/"')
-		elseif fileName:match("base-keyboard-layout%.%w*") or fileName:match("app-switcher-layout%.%w*") or fileName:match("vimrc-remapping%.%w*") or fileName:match("%.%w*") then
+
+		-- visualised keyboard layouts
+		elseif fileName:match("base-keyboard-layout%.%w*") or fileName:match("app-switcher-layout%.%w*") or fileName:match("vimrc-remapping%.%w*") or fileName:match("marta-key-bindings%.%w*") or fileName:match("hyper-bindings-layout%.%w*") or fileName:match("single-keystroke-bindings%.%w*") then
 			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/visualized keyboard layout/"')
 		end
 	end
