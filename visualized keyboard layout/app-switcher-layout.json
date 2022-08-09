@@ -5,12 +5,14 @@
   },
   [
     {
+      "c": "#FFF9A7",
+      "a": 5,
+      "f": 2
+    },
+    "⎋ (f18)\nActivity Monitor",
+    {
       "c": "#999999",
       "a": 7,
-      "f": 7
-    },
-    "⎋",
-    {
       "f": 4
     },
     "F1",
@@ -51,7 +53,13 @@
     "1",
     "2",
     "3",
-    "4",
+    {
+      "c": "#FFF9A7"
+    },
+    "4\nMoney-money",
+    {
+      "c": "#CCCCCC"
+    },
     "5",
     "6",
     "7",
@@ -135,7 +143,7 @@
     {
       "n": true
     },
-    "F\nF. Mes-senger",
+    "F\nFaceb. Mess.",
     "G\nGoogle Docs",
     "H\nHammer-spoon",
     {
