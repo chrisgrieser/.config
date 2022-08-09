@@ -110,8 +110,8 @@
     "z Z\n(un)zip",
     "u\nhier-archy",
     "i\ninfo",
-    "o O\nopen (with)",
-    "P\npaste",
+    "o\nopen directory",
+    "p\npaste",
     {
       "c": "#CCCCCC"
     },
@@ -146,13 +146,7 @@
       "f": 1
     },
     "a A\nselect all / files",
-    {
-      "f": 2
-    },
-    "s S\nsymlink",
-    {
-      "f": 1
-    },
+    "s S\ncreate / follow symlink",
     "d D\ndelete / show Trash",
     {
       "c": "#cccccc",
@@ -211,10 +205,16 @@
     "v\nmove to pane",
     "b\ncopy to pane",
     "n\nnew file / folder",
-    "m M\nfavorites",
+    {
+      "f": 1
+    },
+    "m M\nselect / add favorite",
+    {
+      "f": 2
+    },
     ",\nconfig",
     ".\nhidden files",
-    "-\nlookup",
+    "-\nlookup here",
     {
       "c": "#999999",
       "a": 7,
