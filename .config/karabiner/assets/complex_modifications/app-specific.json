@@ -1002,38 +1002,6 @@
       ]
     },
     {
-      "description": "🅰️⌨️ Karabiner EventViewer",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "q",
-            "modifiers": {
-              "mandatory": [
-                "command"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "killall \"Karabiner-EventViewer\""
-            },
-            {
-              "key_code": "a"
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "file_paths": [
-                "Karabiner-EventViewer.app$"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
       "description": "🅰️📂 Marta",
       "manipulators": [
         {
