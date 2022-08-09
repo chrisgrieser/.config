@@ -1001,7 +1001,7 @@ IconIndex=0</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>720</real>
 		</dict>
 		<key>11D8554B-846B-40DD-9CA0-C73F5736472F</key>
 		<dict>
@@ -1106,7 +1106,7 @@ IconIndex=0</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>690</real>
 		</dict>
 		<key>7B43FD68-D463-4626-BE13-7D1C65B12ECF</key>
 		<dict>
@@ -1160,7 +1160,7 @@ IconIndex=0</string>
 			<key>xpos</key>
 			<real>425</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>690</real>
 		</dict>
 		<key>B1A3DB54-4F96-4E6E-9CF1-E7721DA58232</key>
 		<dict>
@@ -1239,7 +1239,7 @@ IconIndex=0</string>
 			<key>xpos</key>
 			<real>275</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>690</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

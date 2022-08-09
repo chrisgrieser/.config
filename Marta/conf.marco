@@ -97,7 +97,7 @@ gadgets [
     }
     {
         id "gadget.action.pseudo.cut"
-        name "Pseudo Cut"
+        name "Pseudo-Cut"
         type "executable"
         executable "${user.home}/dotfiles/Marta/scripts/cut.sh"
         args ["${active.selection.paths}"]
@@ -108,6 +108,13 @@ gadgets [
         type "executable"
         executable "/usr/bin/qlmanage"
         args ["-p" "${user.home}/dotfiles/visualized keyboard layout/marta-key-bindings.png"]
+    }
+    {
+        id "gadget.action.print"
+        name "Print"
+        type "executable"
+        executable "/usr/bin/lpr"
+        args ["${active.selection.paths}"]
     }
 ]
 
@@ -190,6 +197,7 @@ keyBindings {
     "Cmd+E" "core.unmount"
     "Shift+Ctrl+Opt+L" "core.finder.reveal"
     "Cmd+Shift+N" "core.new.folder"
+    "Cmd+Shift+P" "gadget.action.print"
     "Cmd+N" "core.new.file"
     "Cmd+P" "core.actions"
     "Ctrl+P" "core.path"
