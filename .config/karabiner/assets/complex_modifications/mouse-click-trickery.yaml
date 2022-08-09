@@ -99,7 +99,6 @@ rules:
             bundle_identifiers:
               - ^com\.hegenberg\.BetterTouchTool$
               - ^org\.hammerspoon\.Hammerspoon$
-              - ^org\.pqrs\.Karabiner-EventViewer$
       - type: basic
         from:
           pointing_button: button3
@@ -112,15 +111,6 @@ rules:
             bundle_identifiers:
               - ^com\.hegenberg\.BetterTouchTool$
               - ^org\.hammerspoon\.Hammerspoon$
-      - type: basic
-        from:
-          pointing_button: button3
-        to:
-          - shell_command: killall "Karabiner-EventViewer"
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^org\.pqrs\.Karabiner-EventViewer$
   - description: "🐁 4"
     manipulators:
       # held-down: Mission Control

@@ -1017,13 +1017,16 @@
           "to": [
             {
               "shell_command": "killall \"Karabiner-EventViewer\""
+            },
+            {
+              "key_code": "a"
             }
           ],
           "conditions": [
             {
               "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^org\\.pqrs\\.Karabiner-EventViewer$"
+              "file_paths": [
+                "Karabiner-EventViewer.app$"
               ]
             }
           ]
