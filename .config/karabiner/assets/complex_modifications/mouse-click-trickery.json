@@ -178,7 +178,8 @@
               "type": "frontmost_application_unless",
               "bundle_identifiers": [
                 "^com\\.hegenberg\\.BetterTouchTool$",
-                "^org\\.hammerspoon\\.Hammerspoon$"
+                "^org\\.hammerspoon\\.Hammerspoon$",
+                "^org\\.pqrs\\.Karabiner-EventViewer$"
               ]
             }
           ]
@@ -202,6 +203,25 @@
               "bundle_identifiers": [
                 "^com\\.hegenberg\\.BetterTouchTool$",
                 "^org\\.hammerspoon\\.Hammerspoon$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button3"
+          },
+          "to": [
+            {
+              "shell_command": "killall \"Karabiner-EventViewer\""
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^org\\.pqrs\\.Karabiner-EventViewer$"
               ]
             }
           ]

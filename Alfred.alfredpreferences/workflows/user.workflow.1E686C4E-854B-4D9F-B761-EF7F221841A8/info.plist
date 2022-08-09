@@ -8,19 +8,6 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
-		<key>0E76B185-230E-4B1E-9EA6-5D7073AD8E0D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>17F2357F-62B8-4268-9F9C-4CB273D1BA1E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>16D38DFC-CFE4-4CC7-8A25-EA604410CD5A</key>
 		<array>
 			<dict>
@@ -400,108 +387,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>killall "Karabiner-EventViewer"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>17F2357F-62B8-4268-9F9C-4CB273D1BA1E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>12</integer>
-				<key>hotmod</key>
-				<integer>262144</integer>
-				<key>hotstring</key>
-				<string>Q</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>org.pqrs.Karabiner-EventViewer</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>0E76B185-230E-4B1E-9EA6-5D7073AD8E0D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>ep</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🔁 Toggle Espanso</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>387E93E5-B099-4784-8538-0CE2E9086D86</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>toggle-espanso.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>CF8FBA0E-7BB8-46F0-9240-13ACB11C3D74</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alignment</key>
 				<integer>0</integer>
 				<key>backgroundcolor</key>
@@ -574,6 +459,50 @@ window_name</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>ep</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔁 Toggle Espanso</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>387E93E5-B099-4784-8538-0CE2E9086D86</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>toggle-espanso.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CF8FBA0E-7BB8-46F0-9240-13ACB11C3D74</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -826,17 +755,6 @@ window_name</string>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>0E76B185-230E-4B1E-9EA6-5D7073AD8E0D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>Quit Event Viewer via Hotkey</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>160</real>
-		</dict>
 		<key>0E91D870-C8B9-49BA-B676-8E4DE6AF892F</key>
 		<dict>
 			<key>colorindex</key>
@@ -862,7 +780,7 @@ window_name</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>180</real>
 		</dict>
 		<key>16D38DFC-CFE4-4CC7-8A25-EA604410CD5A</key>
 		<dict>
@@ -874,15 +792,6 @@ window_name</string>
 			<real>535</real>
 			<key>ypos</key>
 			<real>430</real>
-		</dict>
-		<key>17F2357F-62B8-4268-9F9C-4CB273D1BA1E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>160</real>
 		</dict>
 		<key>20AA6DBE-F597-47FF-B059-314D7D83B612</key>
 		<dict>
@@ -973,7 +882,7 @@ window_name</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>180</real>
 		</dict>
 		<key>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</key>
 		<dict>
@@ -984,7 +893,7 @@ window_name</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>180</real>
 		</dict>
 		<key>C7ED6E37-4843-4FF9-AC29-6A764A9ADB67</key>
 		<dict>

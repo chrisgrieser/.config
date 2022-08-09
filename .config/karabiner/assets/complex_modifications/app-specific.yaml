@@ -514,9 +514,24 @@ rules:
           - set_notification_message:
               id: cut-notice
               text: ""
+  - description: "🅰️⌨️ Karabiner EventViewer"
+    manipulators:
+    # Fix missing ⌘Q
+    - type: basic
+      from:
+        key_code: q
+        modifiers:
+          mandatory:
+            - command
+      to:
+        - shell_command: killall "Karabiner-EventViewer"
+      conditions:
+        - type: frontmost_application_if
+          bundle_identifiers:
+            - ^org\.pqrs\.Karabiner-EventViewer$
   - description: "🅰️📂 Marta"
     manipulators:
-  # Hyper-F: Open $WD
+    # Hyper-F: Open $WD
     - type: basic
       from:
         key_code: f
