@@ -47,6 +47,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>269DAF1B-E1BB-4181-83FB-55889EFD70C6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CA2BC0F1-C6A9-45A0-A24A-1D0A68E7F187</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>9F1771E6-E1F3-439B-8A10-1F6C57391AC9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>387E93E5-B099-4784-8538-0CE2E9086D86</key>
 		<array>
 			<dict>
@@ -692,14 +715,35 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Spell Correction added</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>CA2BC0F1-C6A9-45A0-A24A-1D0A68E7F187</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>ep</string>
+				<string>spell</string>
 				<key>subtext</key>
-				<string>misspelling: {query}</string>
+				<string></string>
 				<key>text</key>
-				<string>❇️ Add Spelling Correction</string>
+				<string>❌ Misspelling: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -716,19 +760,20 @@ window_name</string>
 				<key>adduuid</key>
 				<false/>
 				<key>allowemptyfiles</key>
-				<true/>
-				<key>createintermediatefolders</key>
 				<false/>
+				<key>createintermediatefolders</key>
+				<true/>
 				<key>filename</key>
-				<string></string>
+				<string>~/dotfiles/espanso/match/spelling.yml</string>
 				<key>filetext</key>
-				<string>{query}</string>
+				<string>  - trigger: {var:misspelling}
+    replace: {query}</string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
 				<key>relativepathmode</key>
 				<integer>0</integer>
 				<key>type</key>
-				<integer>1</integer>
+				<integer>2</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.writefile</string>
@@ -743,9 +788,9 @@ window_name</string>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>subtext</key>
-				<string>correct spelling: {query}</string>
+				<string></string>
 				<key>text</key>
-				<string>❇️ Add Spelling Correction</string>
+				<string>✅ Correct spelling: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -912,8 +957,12 @@ window_name</string>
 		</dict>
 		<key>9F1771E6-E1F3-439B-8A10-1F6C57391AC9</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>append</string>
 			<key>xpos</key>
-			<real>885</real>
+			<real>935</real>
 			<key>ypos</key>
 			<real>710</real>
 		</dict>
@@ -947,6 +996,15 @@ window_name</string>
 			<real>530</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>CA2BC0F1-C6A9-45A0-A24A-1D0A68E7F187</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>935</real>
+			<key>ypos</key>
+			<real>585</real>
 		</dict>
 		<key>CF8FBA0E-7BB8-46F0-9240-13ACB11C3D74</key>
 		<dict>
