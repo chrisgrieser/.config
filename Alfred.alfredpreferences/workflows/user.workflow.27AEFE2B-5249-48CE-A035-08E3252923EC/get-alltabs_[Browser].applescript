@@ -4,8 +4,7 @@
 # https://gist.github.com/NoahCardoza/fa060f434a7eda2fc040619a25a8f136
 
 set i to 0
-# "result" is a reserved keyword
-set _result to ""
+set output to ""
 tell application "Brave Browser"
 		set window_list to every window
 		repeat with the_window in window_list
@@ -14,12 +13,10 @@ tell application "Brave Browser"
 				set i to (i+1)
 				set the_url to the URL of the_tab
 				set the_title to the title of the_tab
-				set _result to _result & "- [" & the_title & "](" & the_url & ")\n"
+				set output to output & "- [" & the_title & "](" & the_url & ")\n"
 			end repeat
 		end repeat
 end tell
+set the clipboard to output
 
-set the clipboard to _result
-
-# return for notification
-i
+i -- return for notification
