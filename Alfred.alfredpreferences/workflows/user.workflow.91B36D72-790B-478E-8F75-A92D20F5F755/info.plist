@@ -34,32 +34,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>17075203-C3A2-4EFE-89B4-75AC60FEB68D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>78FC612D-9025-4276-9C40-E2C6A9E2EA1B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>212F522C-B1E9-44AE-9169-75477701F1A0</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BB08D528-65F7-4390-B425-68AF26A9C776</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>22CE272A-A695-4C98-8ADF-E1B98667D3B6</key>
 		<array>
 			<dict>
@@ -177,37 +151,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>78FC612D-9025-4276-9C40-E2C6A9E2EA1B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C9554704-41EA-4FCF-AD2C-B0D64C2D655E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>8A722688-3EC5-4916-8756-69A85D1F0C06</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>4681D85D-478B-484A-95A4-D7540690A8CB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>BB08D528-65F7-4390-B425-68AF26A9C776</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C9554704-41EA-4FCF-AD2C-B0D64C2D655E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -592,40 +540,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Lowercase</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>17075203-C3A2-4EFE-89B4-75AC60FEB68D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>type</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.transform</string>
-			<key>uid</key>
-			<string>78FC612D-9025-4276-9C40-E2C6A9E2EA1B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -643,25 +557,6 @@
 			<string>22CE272A-A695-4C98-8ADF-E1B98667D3B6</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>C9554704-41EA-4FCF-AD2C-B0D64C2D655E</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -716,27 +611,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Uppercase</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>212F522C-B1E9-44AE-9169-75477701F1A0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -754,19 +628,6 @@
 			<string>E061C2C7-8263-4964-9AA9-D56F54C5CCD4</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>type</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.transform</string>
-			<key>uid</key>
-			<string>BB08D528-65F7-4390-B425-68AF26A9C776</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1125,24 +986,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>575</real>
 		</dict>
-		<key>17075203-C3A2-4EFE-89B4-75AC60FEB68D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>700</real>
-			<key>ypos</key>
-			<real>255</real>
-		</dict>
-		<key>212F522C-B1E9-44AE-9169-75477701F1A0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>700</real>
-			<key>ypos</key>
-			<real>380</real>
-		</dict>
 		<key>22CE272A-A695-4C98-8ADF-E1B98667D3B6</key>
 		<dict>
 			<key>colorindex</key>
@@ -1221,9 +1064,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1035</real>
+			<real>940</real>
 			<key>ypos</key>
-			<real>30</real>
+			<real>40</real>
 		</dict>
 		<key>62DAD5FB-2A2B-49ED-B725-F8018A3AA61A</key>
 		<dict>
@@ -1249,15 +1092,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>170</real>
 			<key>ypos</key>
 			<real>575</real>
-		</dict>
-		<key>78FC612D-9025-4276-9C40-E2C6A9E2EA1B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>860</real>
-			<key>ypos</key>
-			<real>285</real>
 		</dict>
 		<key>8A722688-3EC5-4916-8756-69A85D1F0C06</key>
 		<dict>
@@ -1288,15 +1122,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>370</real>
 		</dict>
-		<key>BB08D528-65F7-4390-B425-68AF26A9C776</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>860</real>
-			<key>ypos</key>
-			<real>410</real>
-		</dict>
 		<key>BB756276-AFBC-4841-90E2-B916E8B1A637</key>
 		<dict>
 			<key>colorindex</key>
@@ -1324,25 +1149,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
-		<key>C9554704-41EA-4FCF-AD2C-B0D64C2D655E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>paste</string>
-			<key>xpos</key>
-			<real>960</real>
-			<key>ypos</key>
-			<real>310</real>
-		</dict>
 		<key>CB80323E-4F47-48B2-9747-9E4135EC73CB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>860</real>
+			<real>765</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>90</real>
 		</dict>
 		<key>D08CA8F9-2C11-41A6-BDFA-428DB06F4222</key>
 		<dict>
@@ -1367,9 +1181,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1035</real>
+			<real>940</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>155</real>
 		</dict>
 		<key>E97CFCEF-F6E3-4176-9B8A-11B67D5EAB7D</key>
 		<dict>
@@ -1383,9 +1197,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>700</real>
+			<real>590</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>90</real>
 		</dict>
 		<key>EF402CBD-8784-45BE-9715-E3F97EDABA3D</key>
 		<dict>
