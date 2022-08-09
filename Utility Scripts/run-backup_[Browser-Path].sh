@@ -31,11 +31,12 @@ function bkp () {
 
 # ⚠️ each command has to sync to individual folders, since otherwise
 # the --delete option will override the previous contents
-bkp ~'/Library/Preferences/' ./Preferences
-bkp ~'/Library/Fonts/' ./Fonts
+mkdir -p ./Library
+bkp ~'/Library/Preferences/' ./Library/Preferences
+bkp ~'/Library/Fonts/' ./Library/Fonts
 mkdir -p ./Homefolder
 bkp ~'/Games/' ./Homefolder/Games
-bkp ~'/Downloaded/' ./Homefolder/Video
+bkp ~'/Downloaded/' ./Homefolder/Downloaded
 bkp ~'/RomComs/' ./Homefolder/RomComs
 bkp ~'/Library/Mobile Documents/com~apple~CloudDocs/' ./iCloud-Folder
 bkp ~'/dotfiles/' ./Homefolder/dotfiles
