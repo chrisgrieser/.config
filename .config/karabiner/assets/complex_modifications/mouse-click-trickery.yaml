@@ -237,11 +237,6 @@ rules:
               - ^net\.highlightsapp\.universal$
               - ^org\.yanex\.marta$
         to_if_held_down:
-          - key_code: c
-            modifiers:
-              - command
-          - key_code: vk_none
-            hold_down_milliseconds: 75
           - shell_command:
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
         parameters:
@@ -263,11 +258,6 @@ rules:
               - ^com\.apple\.finder$
               - ^org\.yanex\.marta$
         to_if_held_down:
-          - key_code: c
-            modifiers:
-              - command
-          - key_code: vk_none
-            hold_down_milliseconds: 75
           - shell_command:
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
         parameters:
@@ -288,11 +278,6 @@ rules:
             bundle_identifiers:
               - ^com\.agiletortoise\.Drafts-OSX$
         to_if_held_down:
-          - key_code: c
-            modifiers:
-              - command
-          - key_code: vk_none
-            hold_down_milliseconds: 75
           - shell_command:
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
         parameters:
@@ -317,11 +302,6 @@ rules:
             bundle_identifiers:
               - ^net\.highlightsapp\.universal$
         to_if_held_down:
-          - key_code: c
-            modifiers:
-              - command
-          - key_code: vk_none
-            hold_down_milliseconds: 75
           - shell_command:
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
         parameters:
@@ -339,11 +319,6 @@ rules:
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
         to_if_held_down:
-          - key_code: c
-            modifiers:
-              - command
-          - key_code: vk_none
-            hold_down_milliseconds: 75
           - shell_command:
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
         parameters:

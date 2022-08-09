@@ -8,7 +8,7 @@
 # some other text: google it
 # empty: do nothing
 
-
+# if no input, copy selection
 SEL="$*"
 if [[ -z "$SEL" ]] ; then
 	PREV_CLIPBOARD=$(pbpaste)
@@ -17,9 +17,11 @@ if [[ -z "$SEL" ]] ; then
 	SEL=$(pbpaste)
 fi
 
+# clean up
 SEL=$(echo "$SEL" | xargs echo -n) # trims whitespace
 SEL="${SEL/#\~/$HOME}" # resolve ~
 
+# openers
 if [[ -f "$SEL" ]]; then
 	open -R "$SEL"
 elif [[ -d "$SEL" ]]; then
@@ -33,6 +35,7 @@ elif [[ -n "$SEL" ]]; then
 	open "https://www.google.com/search?q=$SEL"
 fi
 
+# restore clipboard
 if [[ -n "$PREV_CLIPBOARD" ]] ; then
 	echo "$PREV_CLIPBOARD" | pbcopy
 fi

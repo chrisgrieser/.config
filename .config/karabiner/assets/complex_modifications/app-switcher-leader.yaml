@@ -578,3 +578,35 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+      # [4] (mnenic: $ sign)
+      - type: basic
+        from:
+          key_code: "4"
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: true
+        to:
+          - shell_command: open -a 'MoneyMoney'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: false
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      # [esc] (f18) Activity Monitor
+      - type: basic
+        from:
+          key_code: "f18"
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: true
+        to:
+          - shell_command: open -a 'MoneyMoney'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: false
+          - set_notification_message:
+              id: leader-notice
+              text: ""

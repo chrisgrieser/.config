@@ -178,8 +178,7 @@
               "type": "frontmost_application_unless",
               "bundle_identifiers": [
                 "^com\\.hegenberg\\.BetterTouchTool$",
-                "^org\\.hammerspoon\\.Hammerspoon$",
-                "^org\\.pqrs\\.Karabiner-EventViewer$"
+                "^org\\.hammerspoon\\.Hammerspoon$"
               ]
             }
           ]
@@ -203,25 +202,6 @@
               "bundle_identifiers": [
                 "^com\\.hegenberg\\.BetterTouchTool$",
                 "^org\\.hammerspoon\\.Hammerspoon$"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "pointing_button": "button3"
-          },
-          "to": [
-            {
-              "shell_command": "killall \"Karabiner-EventViewer\""
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^org\\.pqrs\\.Karabiner-EventViewer$"
               ]
             }
           ]
@@ -419,16 +399,6 @@
           ],
           "to_if_held_down": [
             {
-              "key_code": "c",
-              "modifiers": [
-                "command"
-              ]
-            },
-            {
-              "key_code": "vk_none",
-              "hold_down_milliseconds": 75
-            },
-            {
               "shell_command": "osascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.plain-text-utilities\"'"
             }
           ],
@@ -462,16 +432,6 @@
           ],
           "to_if_held_down": [
             {
-              "key_code": "c",
-              "modifiers": [
-                "command"
-              ]
-            },
-            {
-              "key_code": "vk_none",
-              "hold_down_milliseconds": 75
-            },
-            {
               "shell_command": "osascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.plain-text-utilities\"'"
             }
           ],
@@ -503,16 +463,6 @@
             }
           ],
           "to_if_held_down": [
-            {
-              "key_code": "c",
-              "modifiers": [
-                "command"
-              ]
-            },
-            {
-              "key_code": "vk_none",
-              "hold_down_milliseconds": 75
-            },
             {
               "shell_command": "osascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.plain-text-utilities\"'"
             }
@@ -553,16 +503,6 @@
           ],
           "to_if_held_down": [
             {
-              "key_code": "c",
-              "modifiers": [
-                "command"
-              ]
-            },
-            {
-              "key_code": "vk_none",
-              "hold_down_milliseconds": 75
-            },
-            {
               "shell_command": "osascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.plain-text-utilities\"'"
             }
           ],
@@ -590,16 +530,6 @@
             }
           ],
           "to_if_held_down": [
-            {
-              "key_code": "c",
-              "modifiers": [
-                "command"
-              ]
-            },
-            {
-              "key_code": "vk_none",
-              "hold_down_milliseconds": 75
-            },
             {
               "shell_command": "osascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.plain-text-utilities\"'"
             }
