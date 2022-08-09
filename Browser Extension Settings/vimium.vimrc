@@ -4,11 +4,11 @@ unmapAll
 map wq closeTabsOnLeft
 map we closeTabsOnRight
 map wv moveTabToNewWindow
-map ww closeOtherTabs
+map W closeOtherTabs
 map u removeTab
 map x removeTab
 map z restoreTab
-map W removeTab count=19
+map ww removeTab count=19
 map b previousTab
 map e nextTab
 map gT previousTab
