@@ -154,7 +154,7 @@ function movieModeLayout()
 
 	openIfNotRunning("YouTube")
 	openIfNotRunning("Finder")
-	openIfNotRunning("Übersicht")
+	openIfNotRunning("Übersicht") -- this works works in spite of diacritic
 
 	killIfRunning("Obsidian")
 	killIfRunning("Marta")
@@ -183,7 +183,7 @@ function homeModeLayout ()
 	openIfNotRunning("Drafts")
 
 	killIfRunning("YouTube")
-	killIfRunning("Übersicht")
+	hs.osascript.applescript('tell application "Übersicht" to quit') -- can't use shell or hammerspoon due to diacritic in app name m(
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
 	killIfRunning("Finder")
