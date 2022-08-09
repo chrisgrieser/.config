@@ -145,3 +145,5 @@ matches:
   - trigger: mroe
     replace: more
     word: true
+  - trigger: blabb
+    replace: blubb
