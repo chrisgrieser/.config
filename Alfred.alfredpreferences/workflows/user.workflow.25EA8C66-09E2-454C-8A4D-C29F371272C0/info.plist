@@ -213,7 +213,7 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>270</real>
 		</dict>
 		<key>63E17115-8286-4949-8310-163DA8FD650B</key>
 		<dict>
@@ -231,7 +231,7 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>270</real>
 		</dict>
 		<key>B3E11222-6F3D-4FF4-9EE8-9CE2374899BC</key>
 		<dict>
