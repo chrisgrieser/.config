@@ -19,6 +19,7 @@ function twitterrificAction (type)
 		for i = 1, #twitterrificWins do
 			-- properly up (to avoid clicking on tweet content)
 			local title = twitterrificWins[i]:title()
+			notify(tostring(title:find("Home")))
 			if title:find("Home") then
 				keystroke({"cmd"}, "1")
 			elseif title:find("Mentions") then
