@@ -142,7 +142,7 @@ function moveResize(win, pos)
 end
 
 function dockSwitcher (targetMode)
-	hs.execute("zsh ./dock-switching/dock-switcher.sh "..targetMode)
+	hs.execute("zsh ./dock-switching/dock-switcher.sh --load "..targetMode)
 end
 
 --------------------------------------------------------------------------------
