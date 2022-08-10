@@ -73,7 +73,7 @@ ln -sf "$DOTFILE_FOLDER/ubersicht" ~"/Library/Application Support/Übersicht/wi
 # ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian-vim-helpers.js" "$OBSI_ICLOUD/Main Vault/Meta"
 # ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian.vimrc" "$OBSI_ICLOUD/Development/Meta"
 # ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian-vim-helpers.js" "$OBSI_ICLOUD/Development/Meta"
-# ln -sf "$DOTFILE_FOLDER/Obsidian vim/pandoc/README.md" "$OBSI_ICLOUD/Main Vault/Knowledge Base/Pandoc.md"
+# ln -sf "$DOTFILE_FOLDER/pandoc/README.md" "$OBSI_ICLOUD/Main Vault/Knowledge Base/Pandoc.md"
 
 # YAMLlint
 # ln -sf "$DOTFILE_FOLDER/.config/yamllint/config/.yamllint.yaml" "$DOTFILE_FOLDER/.config/karabiner/assets/complex_modifications"
