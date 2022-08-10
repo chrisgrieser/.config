@@ -15,8 +15,19 @@ function twitterrificAction (type)
 		local twitterrificWins = twitterrific:allWindows()
 
 		for i = 1, #twitterrificWins do
+			-- properly up (to avoid clicking on tweet content)
+			local title = twitterrificWins[i]:title()
+			if (title():find("Home")) then
+				keystroke({"cmd"}, "1")
+			elseif (title():find("Mentions")) then
+				keystroke({"cmd"}, "2")
+			elseif (title():find("Search")) then
+				keystroke({"cmd"}, "7")
+			elseif (title:find("List")) then
+				keystroke({"cmd"}, "5")
+			end
+
 			local f = twitterrificWins[i]:frame()
-			keystroke({"cmd"}, "1") -- properly up (to avoid clicking on tweet content)
 			hs.eventtap.leftClick({ x = f.x + f.w * 0.09, y = f.y + 140 })
 			keystroke({"cmd"}, "k") -- mark all as red
 			keystroke({"cmd"}, "j") -- scroll up
@@ -113,7 +124,7 @@ function twitterificAppActivated(appName, eventType, appObject)
 				keystroke({}, "return", twitterrific)
 			end)
 		elseif (eventType == aw.activated) then
-			appObject:getWindow("@pseudo_meta - List"):raise()
+			appObject:getWindow("@pseudo_meta - List: _PKM & Obsidian Community"):raise()
 			appObject:getWindow("@pseudo_meta - Home"):focus()
 		end
 
