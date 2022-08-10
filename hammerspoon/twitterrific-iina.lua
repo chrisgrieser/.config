@@ -23,7 +23,7 @@ function twitterrificAction (type)
 				keystroke({"cmd"}, "1")
 			else
 				keystroke({"cmd"}, "2")
-				notify ("bla``")
+				notify ("bla")
 			end
 
 			local f = twitterrificWins[i]:frame()
