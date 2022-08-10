@@ -17,7 +17,7 @@ function twitterrificAction (type)
 
 		local f = twitterrific:mainWindow():frame()
 		keystroke({"cmd"}, "1") -- properly up (to avoid clicking on tweet content)
-		hs.eventtap.leftClick({ x = f.x + f.w * 0.04, y = f.y + 140 })
+		hs.eventtap.leftClick({ x = f.x + f.w * 0.04, y = f.y + 150 })
 		keystroke({"cmd"}, "k") -- mark all as red
 		keystroke({"cmd"}, "j") -- scroll up
 		keystroke({}, "down") -- enable j/k movement
