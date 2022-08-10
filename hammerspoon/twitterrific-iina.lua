@@ -32,9 +32,9 @@ function twitterrificAction (type)
 			keystroke({"cmd"}, "j") -- scroll up
 			keystroke({}, "down") -- enable j/k movement
 		end
-		if #twitterrificWins > 1 then -- so the main window is controlled by the pagedown/up/shift-home actions
-			twitterrific:getWindow("@pseudo_meta - Home"):focus()
-		end
+		-- if #twitterrificWins > 1 then -- so the main window is controlled by the pagedown/up/shift-home actions
+		-- 	twitterrific:getWindow("@pseudo_meta - Home"):focus()
+		-- end
 
 		hs.mouse.absolutePosition(prevMousePos)
 		hs.application(previousApp):activate()
