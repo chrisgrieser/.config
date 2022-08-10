@@ -9,6 +9,8 @@ function twitterrificAction (type)
 		keystroke({}, "right")
 	elseif type == "thread" then
 		keystroke({}, "left")
+	elseif type == "retweet" then
+		keystroke({"cmd"}, "e")
 	elseif type == "scrollup" then
 		local previousApp = frontapp()
 		local prevMousePos = hs.mouse.absolutePosition()
@@ -79,6 +81,9 @@ end
 function shiftEndAction ()
 	twitterrificAction("thread")
 end
+function shiftHomeAction ()
+	twitterrificAction("retweet")
+end
 
 -- IINA: Full Screen when on projector
 function iinaLaunch(appName, eventType, appObject)
@@ -102,6 +107,7 @@ iinaAppLauncher:start()
 hotkey({}, "pagedown", pagedownAction, nil, pagedownAction)
 hotkey({}, "pageup", pageupAction, nil, pageupAction)
 hotkey({}, "home", homeAction)
+hotkey({"shift"}, "home", shiftHomeAction)
 hotkey({}, "end", endAction)
 hotkey({"shift"}, "end", shiftEndAction)
 
