@@ -21,6 +21,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>312B23B5-ED5C-4D40-9A96-B52BC742B891</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>912E9A88-C5CA-47E8-9A5D-E9B80D66847D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4F2102DA-A82A-42C3-B70D-D0AEBD9C9375</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>912E9A88-C5CA-47E8-9A5D-E9B80D66847D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<array>
 			<dict>
@@ -86,14 +112,45 @@
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>on run argv	-- workaround, since apple's float ("real") interpret , or . differently	-- depending on system language m( ...	set delayAmount to (system attribute "delay_ms") as number	set delayAmount to delayAmount / 1000		set langArg to item 1 of argv	#----------------------------------------------------------------------------	set prevClipboard to ""	try		set prevClipboard to the clipboard	end try	delay delayAmount	tell application "System Events"		key code 123 -- char left		key code 124 using {option down} -- word right		key code 123 using {option down, shift down} -- word left selection		keystroke "c" using {command down} -- copy	end tell	delay delayAmount	set theWord to the clipboard	delay delayAmount		-- http://aspell.net/man-html/Through-A-Pipe.html	set theFixedWord to do shell script "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-	echo '" &amp; theWord &amp; "' | aspell pipe " &amp; langArg &amp; " | sed -n 2p | cut -d, -f1 | cut -d: -f2 | cut -c2-"		set the clipboard to theFixedWord	delay delayAmount	tell application "System Events" to keystroke "v" using {command down}	delay delayAmount		set the clipboard to prevClipboard	end run</string>
+				<string>on run argv
+	-- workaround, since apple's float ("real") interpret , or . differently
+	-- depending on system language m( ...
+	set delayAmount to (system attribute "delay_ms") as number
+	set delayAmount to delayAmount/1000
+
+	set langArg to item 1 of argv
+	#----------------------------------------------------------------------------
+
+	set prevClipboard to the clipboard
+	delay delayAmount
+	tell application "System Events"
+		key code 123 -- char left
+		key code 124 using {option down} -- word right
+		key code 123 using {option down, shift down} -- word left selection
+		keystroke "c" using {command down} -- copy
+	end tell
+	delay delayAmount
+	set theWord to the clipboard
+	delay delayAmount
+
+	-- http://aspell.net/man-html/Through-A-Pipe.html
+	set theFixedWord to do shell script "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+	echo '" &amp; theWord &amp; "' | aspell pipe " &amp; langArg &amp; " | sed -n 2p | cut -d, -f1 | cut -d: -f2 | cut -c2-"
+
+	set the clipboard to theFixedWord
+	delay delayAmount
+	tell application "System Events" to keystroke "v" using {command down}
+	delay delayAmount
+
+	set the clipboard to prevClipboard
+
+end run</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>fix-word-under-cursor.applescript</string>
 				<key>type</key>
-				<integer>6</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -135,6 +192,96 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>--lang={var:second_lang}</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>33</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>Ü</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>312B23B5-ED5C-4D40-9A96-B52BC742B891</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on run argv	-- workaround, since apple's float ("real") interpret , or . differently	-- depending on system language m( ...	set delayAmount to (system attribute "delay_ms") as number	set delayAmount to delayAmount / 1000		set langArg to item 1 of argv	#----------------------------------------------------------------------------	set prevClipboard to ""	try		set prevClipboard to the clipboard	end try	delay delayAmount	tell application "System Events"		key code 123 -- char left		key code 124 using {option down} -- word right		key code 123 using {option down, shift down} -- word left selection		keystroke "c" using {command down} -- copy	end tell	delay delayAmount	set theWord to the clipboard	delay delayAmount		-- http://aspell.net/man-html/Through-A-Pipe.html	set theFixedWord to do shell script "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+	echo '" &amp; theWord &amp; "' | aspell pipe " &amp; langArg &amp; " | sed -n 2p | cut -d, -f1 | cut -d: -f2 | cut -c2-"		set the clipboard to theFixedWord	delay delayAmount	tell application "System Events" to keystroke "v" using {command down}	delay delayAmount		set the clipboard to prevClipboard	end run</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>capitalize-word-under-cursor.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>912E9A88-C5CA-47E8-9A5D-E9B80D66847D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>--lang={var:second_lang}</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>33</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>Ü</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>4F2102DA-A82A-42C3-B70D-D0AEBD9C9375</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>requires "aspell" to be installed on the system. (`brew install aspell`)
@@ -153,6 +300,28 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
+		<key>312B23B5-ED5C-4D40-9A96-B52BC742B891</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>second language (defined in settings)</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>315</real>
+		</dict>
+		<key>4F2102DA-A82A-42C3-B70D-D0AEBD9C9375</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>second language (defined in settings)</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>465</real>
+		</dict>
 		<key>812123A0-13FF-4E57-A76C-6EB0EDF2A55D</key>
 		<dict>
 			<key>colorindex</key>
@@ -161,6 +330,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>235</real>
 			<key>ypos</key>
 			<real>80</real>
+		</dict>
+		<key>912E9A88-C5CA-47E8-9A5D-E9B80D66847D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>235</real>
+			<key>ypos</key>
+			<real>385</real>
 		</dict>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<dict>

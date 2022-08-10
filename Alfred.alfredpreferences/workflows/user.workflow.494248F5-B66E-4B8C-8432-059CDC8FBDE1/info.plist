@@ -8,19 +8,6 @@
 	<string>Mini-Apps</string>
 	<key>connections</key>
 	<dict>
-		<key>39A74B4A-BAFE-46CF-B1D6-FBEB89F75E62</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>81C89C2D-C4E6-48F4-8DDB-1F05B9FC732B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>76D8EFBB-E5E6-4AB7-B87A-D8F4B640CAF8</key>
 		<array>
 			<dict>
@@ -36,6 +23,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>877F0442-FBA7-4EDC-8027-D3EF6BA936E5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7A140D1B-5E6B-447B-9253-FB45006555D2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>81C89C2D-C4E6-48F4-8DDB-1F05B9FC732B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -167,37 +167,23 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>33</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>Ü</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.brave.Browser</string>
-				</array>
-				<key>relatedAppsMode</key>
+				<key>argumenttype</key>
 				<integer>1</integer>
+				<key>keyword</key>
+				<string>rl</string>
+				<key>subtext</key>
+				<string>Browser Tab</string>
+				<key>text</key>
+				<string>Read Later</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>39A74B4A-BAFE-46CF-B1D6-FBEB89F75E62</string>
+			<string>7A140D1B-5E6B-447B-9253-FB45006555D2</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -323,56 +309,56 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 			<key>note</key>
 			<string>open item &amp; check as read</string>
 			<key>xpos</key>
-			<integer>245</integer>
+			<real>245</real>
 			<key>ypos</key>
-			<integer>265</integer>
-		</dict>
-		<key>39A74B4A-BAFE-46CF-B1D6-FBEB89F75E62</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>Add to Read Later</string>
-			<key>xpos</key>
-			<integer>75</integer>
-			<key>ypos</key>
-			<integer>120</integer>
+			<real>265</real>
 		</dict>
 		<key>651E12CB-A815-41F4-AB78-58F5F8D6B131</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>565</integer>
+			<real>565</real>
 			<key>ypos</key>
-			<integer>55</integer>
+			<real>55</real>
 		</dict>
 		<key>76D8EFBB-E5E6-4AB7-B87A-D8F4B640CAF8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>395</integer>
+			<real>395</real>
 			<key>ypos</key>
-			<integer>150</integer>
+			<real>150</real>
+		</dict>
+		<key>7A140D1B-5E6B-447B-9253-FB45006555D2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>add</string>
+			<key>xpos</key>
+			<real>75</real>
+			<key>ypos</key>
+			<real>120</real>
 		</dict>
 		<key>81C89C2D-C4E6-48F4-8DDB-1F05B9FC732B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>245</integer>
+			<real>245</real>
 			<key>ypos</key>
-			<integer>120</integer>
+			<real>120</real>
 		</dict>
 		<key>877F0442-FBA7-4EDC-8027-D3EF6BA936E5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>565</integer>
+			<real>565</real>
 			<key>ypos</key>
-			<integer>210</integer>
+			<real>210</real>
 		</dict>
 		<key>A1B93FF7-3569-48A8-8CC8-E1A71AC85EDA</key>
 		<dict>
@@ -381,20 +367,22 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 			<key>note</key>
 			<string>Strip Markdown</string>
 			<key>xpos</key>
-			<integer>485</integer>
+			<real>485</real>
 			<key>ypos</key>
-			<integer>85</integer>
+			<real>85</real>
 		</dict>
 		<key>D223A211-45A1-481D-A981-9632A2E18CC5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<integer>75</integer>
+			<real>75</real>
 			<key>ypos</key>
-			<integer>265</integer>
+			<real>265</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>variables</key>
 	<dict>
 		<key>feedreaderURL</key>

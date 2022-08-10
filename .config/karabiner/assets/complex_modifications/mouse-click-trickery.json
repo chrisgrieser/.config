@@ -227,7 +227,8 @@
                 "^com\\.brave\\.Browser$",
                 "^com\\.apple\\.finder$",
                 "^com\\.mimestream\\.Mimestream$",
-                "^net\\.highlightsapp\\.universal$"
+                "^net\\.highlightsapp\\.universal$",
+                "^org\\.yanex\\.marta$"
               ]
             }
           ],
@@ -248,6 +249,9 @@
           },
           "to_if_alone": [
             {
+              "key_code": "escape"
+            },
+            {
               "key_code": "left_arrow",
               "modifiers": [
                 "command"
@@ -259,6 +263,37 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.brave\\.Browser$"
+              ]
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "shell_command": "open -a \"Mission Control\""
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250,
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          }
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to_if_alone": [
+            {
+              "key_code": "h",
+              "modifiers": [
+                "control"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^org\\.yanex\\.marta$"
               ]
             }
           ],
