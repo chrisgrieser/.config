@@ -64,13 +64,13 @@ on run argv
 	delay delayAmount
 
 	-- AppleScript string comparisons ignore case by default
-	ignoring case
-	if theWord is equal to theLowercaseWord then
-		set theFixedWord to capitalize(theWord)
-	else
-		set theFixedWord to theLowercaseWord
-	end if
-	end ignoring
+	considering case
+		if theWord is equal to lowercase(theWord) then
+			set theFixedWord to capitalize(theWord)
+		else
+			set theFixedWord to lowercase(theWord)
+		end if
+	end considering
 
 	set the clipboard to theFixedWord
 	delay delayAmount
