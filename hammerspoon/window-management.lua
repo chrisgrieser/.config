@@ -153,9 +153,9 @@ function movieModeLayout()
 	iMacDisplay:setBrightness(0)
 
 	openIfNotRunning("YouTube")
-	openIfNotRunning("Finder")
-	openIfNotRunning("Übersicht") -- this works works in spite of diacritic
+	openIfNotRunning("Übersicht") -- this works in spite of diacritic
 
+	killIfRunning("Finder")
 	killIfRunning("Obsidian")
 	killIfRunning("Marta")
 	killIfRunning("Drafts")
@@ -186,6 +186,7 @@ function homeModeLayout ()
 	hs.osascript.applescript('tell application "Übersicht" to quit') -- can't use shell or hammerspoon due to diacritic in app name m(
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
+	killIfRunning("Twitch")
 	killIfRunning("Finder")
 	privateClosers()
 
