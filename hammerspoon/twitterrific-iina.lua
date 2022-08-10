@@ -17,24 +17,25 @@ function twitterrificAction (type)
 		local twitterrificWins = twitterrific:allWindows()
 
 		for i = 1, #twitterrificWins do
-			-- properly up (to avoid clicking on tweet content)
-			local title = twitterrificWins[i]:title()
-			if title:find("Home") then
-				keystroke({"cmd"}, "1")
-			else
-				keystroke({"cmd"}, "2")
-				notify ("bla")
-			end
-
-			local f = twitterrificWins[i]:frame()
-			hs.eventtap.leftClick({ x = f.x + f.w * 0.09, y = f.y + 170 })
-			keystroke({"cmd"}, "k") -- mark all as red
-			keystroke({"cmd"}, "j") -- scroll up
-			keystroke({}, "down") -- enable j/k movement
+			local delay = (i - 1) * 0.2
+			runDelayed(delay, function ()
+				-- properly up (to avoid clicking on tweet content)
+				local title = twitterrificWins[i]:title()
+				if title:find("Home") then
+					keystroke({"cmd"}, "1")
+				else
+					keystroke({"cmd"}, "5")
+				end
+				local f = twitterrificWins[i]:frame()
+				hs.eventtap.leftClick({ x = f.x + f.w * 0.09, y = f.y + 170 })
+				keystroke({"cmd"}, "k") -- mark all as red
+				keystroke({"cmd"}, "j") -- scroll up
+				keystroke({}, "down") -- enable j/k movement
+			end)
 		end
-		-- if #twitterrificWins > 1 then -- so the main window is controlled by the pagedown/up/shift-home actions
-		-- 	twitterrific:getWindow("@pseudo_meta - Home"):focus()
-		-- end
+		if #twitterrificWins > 1 then -- so the main window is controlled by the pagedown/up/shift-home actions
+			twitterrific:getWindow("@pseudo_meta - Home"):focus()
+		end
 
 		hs.mouse.absolutePosition(prevMousePos)
 		hs.application(previousApp):activate()
