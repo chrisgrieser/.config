@@ -73,8 +73,7 @@
                 "^com\\.vivaldi\\.Vivaldi.+$",
                 "^org\\.chromium\\.Chromium.+$",
                 "^com\\.google\\.Chrome.+$",
-                "^com\\.brave\\.Browser.+$",
-                "^com\\.mimestream\\.Mimestream$"
+                "^com\\.brave\\.Browser.+$"
               ]
             }
           ],
