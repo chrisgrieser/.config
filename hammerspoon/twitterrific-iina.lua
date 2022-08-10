@@ -14,25 +14,13 @@ function twitterrificAction (type)
 	elseif type == "scrollup" then
 		local previousApp = frontapp()
 		local prevMousePos = hs.mouse.absolutePosition()
-		local twitterrificWins = twitterrific:allWindows()
 
-		for i = 1, #twitterrificWins do
-			-- properly up (to avoid clicking on tweet content)
-			if i == 1 then
-				keystroke({"cmd"}, "1")
-			else
-				runDelayed (0.1, function () keystroke({"cmd"}, "5") end)
-			end
-
-			local f = twitterrificWins[i]:frame()
-			hs.eventtap.leftClick({ x = f.x + f.w * 0.09, y = f.y + 170 })
-			keystroke({"cmd"}, "k") -- mark all as red
-			keystroke({"cmd"}, "j") -- scroll up
-			keystroke({}, "down") -- enable j/k movement
-		end
-		if #twitterrificWins > 1 then -- so the main window is controlled by the pagedown/up/shift-home actions
-			twitterrific:getWindow("@pseudo_meta - Home"):focus()
-		end
+		local f = twitterrific:mainWindow():frame()
+		keystroke({"cmd"}, "1") -- properly up (to avoid clicking on tweet content)
+		hs.eventtap.leftClick({ x = f.x + f.w * 0.09, y = f.y + 140 })
+		keystroke({"cmd"}, "k") -- mark all as red
+		keystroke({"cmd"}, "j") -- scroll up
+		keystroke({}, "down") -- enable j/k movement
 
 		hs.mouse.absolutePosition(prevMousePos)
 		hs.application(previousApp):activate()
