@@ -42,7 +42,7 @@ open "/System/Library/CoreServices/Applications/Archive Utility.app"
 # Twitterific: run headless http://support.iconfactory.com/kb/twitterrific/advanced-settings-using-the-command-line-macos
 defaults write com.iconfactory.Twitterrific5 advancedShowDockIcon -bool NO
 
-# change font size of Portfolio Performance
+# Portfolio Performance
 font_size=19
 c_css_location=~'/Library/Application Support/name.abuchen.portfolio.product/workspace/.metadata/.plugins/name.abuchen.portfolio.ui/'
 mkdir -p "$c_css_location"
@@ -58,6 +58,9 @@ echo ":root { zoom: \"1.5\"; }" > "$newSkinPath"/resource/webkit.css
 # Espanso
 espanso service register
 
+# Sublime
+echo '{"save_selections": false}' > ~"/dotfiles/Sublime User Folder/AutoFoldCode.sublime-settings"
+
 # Hammerspoon
 defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
 
@@ -66,7 +69,7 @@ defaults write -g NSFileViewer -string org.yanex.marta
 defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="org.yanex.marta";}'
 # then restart mac
 
-# make finder quittable
+# make Finder quittable
 defaults write com.apple.finder QuitMenuItem -bool true
 killall Finder
 
