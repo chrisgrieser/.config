@@ -19,11 +19,11 @@ function twitterrificAction (type)
 		for i = 1, #twitterrificWins do
 			-- properly up (to avoid clicking on tweet content)
 			local title = twitterrificWins[i]:title()
-			if (title():find("Home")) then
+			if (title:find("Home")) then
 				keystroke({"cmd"}, "1")
-			elseif (title():find("Mentions")) then
+			elseif (title:find("Mentions")) then
 				keystroke({"cmd"}, "2")
-			elseif (title():find("Search")) then
+			elseif (title:find("Search")) then
 				keystroke({"cmd"}, "7")
 			elseif (title:find("List")) then
 				keystroke({"cmd"}, "5")
