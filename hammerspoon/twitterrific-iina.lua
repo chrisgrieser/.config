@@ -27,10 +27,11 @@ function twitterrificAction (type)
 				keystroke({"cmd"}, "7")
 			elseif title:find("List") then
 				keystroke({"cmd"}, "5")
+				notify ("bla")
 			end
 
 			local f = twitterrificWins[i]:frame()
-			hs.eventtap.leftClick({ x = f.x + f.w * 0.09, y = f.y + 160 })
+			hs.eventtap.leftClick({ x = f.x + f.w * 0.09, y = f.y + 170 })
 			keystroke({"cmd"}, "k") -- mark all as red
 			keystroke({"cmd"}, "j") -- scroll up
 			keystroke({}, "down") -- enable j/k movement
