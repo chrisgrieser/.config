@@ -226,7 +226,7 @@ function officeModeLayout ()
 	openIfNotRunning("Slack")
 	openIfNotRunning("Brave Browser")
 	openIfNotRunning("Obsidian")
-	openIfNotRunning("Twitterrific")
+	openIfNotRunning("Tweeten")
 	openIfNotRunning("Drafts")
 	killIfRunning("Finder")
 
@@ -235,7 +235,7 @@ function officeModeLayout ()
 
 	local officeLayout = {
 		-- screen 2
-		{"Twitterrific", "@pseudo_meta - Home", screen2, top, nil, nil},
+		{"Tweeten", nil, screen2, top, nil, nil},
 		{"Discord", nil, screen2, bottom, nil, nil},
 		{"Slack", nil, screen2, bottom, nil, nil},
 		-- screen 1
