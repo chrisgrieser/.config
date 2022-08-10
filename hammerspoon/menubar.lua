@@ -46,6 +46,11 @@ weatherTimer:start()
 covidBar = hs.menubar.new()
 function setCovidBar()
 	local _, nationalDataJSON = hs.http.get("https://api.corona-zahlen.org/germany", nil)
+	if not(nationalDataJSON) then
+		covidBar:setTitle(covidIcon.." –")
+		covidBar:setClickCallback(setCovidBar) -- i.e. self-update
+		return
+	end
 	local nationalNumbers = hs.json.decode(nationalDataJSON)
 	if not(nationalNumbers.weekIncidence) then
 		covidBar:setTitle(covidIcon.." –")
@@ -56,16 +61,6 @@ function setCovidBar()
 	local nationalR = nationalNumbers.r.rValue7Days.value
 	covidBar:setTitle(covidIcon.." "..national_7D_incidence.." ("..nationalR..")")
 	covidBar:setClickCallback(function ()hs.urlevent.openURL("https://data.lageso.de/lageso/corona/corona.html#start") end)
-
-	-- local _, stateDataJSON = hs.http.get("https://api.corona-zahlen.org/states/" .. covidLocationCode, nil)
-	-- if not (stateDataJSON) then
-	-- 	covidBar:setTooltip("not available")
-	-- 	return
-	-- end
-	-- local stateNumbers = hs.json.decode(stateDataJSON)
-	-- local stateName = stateNumbers.data[covidLocationCode].name
-	-- local state_7D_incidence = math.floor(stateNumbers.data[covidLocationCode].weekIncidence)
-	-- covidBar:setTooltip(stateName..": "..state_7D_incidence)
 end
 covidTimer = hs.timer.doEvery(covidUpdateHours * 60 * 60, setCovidBar)
 covidTimer:start()
