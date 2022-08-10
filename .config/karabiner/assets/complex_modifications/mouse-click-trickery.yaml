@@ -136,14 +136,9 @@ rules:
         from:
           pointing_button: button4
         to_if_alone:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events"
-                tell process "Brave Browser"
-                  set frontmost to true
-                  click menu item "Back" of menu "History" of menu bar 1
-                end tell
-              end tell'
+          - key_code: left_arrow
+            modifiers:
+              - command
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:

@@ -248,7 +248,10 @@
           },
           "to_if_alone": [
             {
-              "shell_command": "osascript -e '\n  tell application \"System Events\"\n  tell process \"Brave Browser\"\n    set frontmost to true\n    click menu item \"Back\" of menu \"History\" of menu bar 1\n  end tell\nend tell'\n"
+              "key_code": "left_arrow",
+              "modifiers": [
+                "command"
+              ]
             }
           ],
           "conditions": [
