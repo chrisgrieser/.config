@@ -47,7 +47,6 @@ rules:
               - ^org\.chromium\.Chromium.+$
               - ^com\.google\.Chrome.+$
               - ^com\.brave\.Browser.+$
-              - ^com\.mimestream\.Mimestream$
         parameters:
           basic.to_if_held_down_threshold_milliseconds: 300
       # R-Click opens link in background, ⌘+L-Click in foreground
