@@ -28,7 +28,6 @@ function twitterrificAction (type)
 				keystroke({"cmd"}, "7")
 			elseif title:find("List") then
 				keystroke({"cmd"}, "5")
-				notify ("bla")
 			end
 
 			local f = twitterrificWins[i]:frame()
