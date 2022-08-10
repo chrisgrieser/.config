@@ -1,25 +1,46 @@
 #!/usr/bin/env osascript
-on changeCaseOfText(theText, theCaseToSwitchTo)
-	if theCaseToSwitchTo contains "lower" then
-		set theComparisonCharacters to "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-		set theSourceCharacters to "abcdefghijklmnopqrstuvwxyz"
-	else if theCaseToSwitchTo contains "upper" then
-		set theComparisonCharacters to "abcdefghijklmnopqrstuvwxyz"
-		set theSourceCharacters to "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	else
-		return theText
-	end if
-	set theAlteredText to ""
-	repeat with aCharacter in theText
-		set theOffset to offset of aCharacter in theComparisonCharacters
+on lowercase(theText)
+	set uppercaseChars to "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	set lowercaseChars to "abcdefghijklmnopqrstuvwxyz"
+	set output to ""
+	repeat with aChar in theText
+		set theOffset to offset of aChar in uppercaseChars
 		if theOffset is not 0 then
-			set theAlteredText to (theAlteredText & character theOffset of theSourceCharacters) as string
+			set output to (output & character theOffset of lowercaseChars) as string
 		else
-			set theAlteredText to (theAlteredText & aCharacter) as string
+			set output to (output & aChar) as string
 		end if
 	end repeat
-	return theAlteredText
-end changeCaseOfText
+	return output
+end lowercase
+
+on capitalize(theText)
+	set uppercaseChars to "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	set lowercaseChars to "abcdefghijklmnopqrstuvwxyz"
+	set output to ""
+	set isFirstChar to true
+	repeat with aChar in theText
+		if (isFirstChar is true) then
+			# uppercase
+			set theOffset to offset of aChar in lowercaseChars
+			if theOffset is not 0 then
+				set output to (output & character theOffset of uppercaseChars) as string
+			else
+				set output to (output & aChar) as string
+			end if
+			set isFirstChar to false
+		else
+			# lowercase
+			set theOffset to offset of aChar in uppercaseChars
+			if theOffset is not 0 then
+				set output to (output & character theOffset of lowercaseChars) as string
+			else
+				set output to (output & aChar) as string
+			end if
+		end if
+	end repeat
+	return output
+end lowercase
 
 
 on run argv
@@ -28,7 +49,6 @@ on run argv
 	set delayAmount to (system attribute "delay_ms") as number
 	set delayAmount to delayAmount/1000
 
-	set langArg to item 1 of argv
 	#----------------------------------------------------------------------------
 
 	set prevClipboard to the clipboard
@@ -43,11 +63,12 @@ on run argv
 	set theWord to the clipboard
 	delay delayAmount
 
-
-
-	-- http://aspell.net/man-html/Through-A-Pipe.html
-	set theFixedWord to do shell script "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-	echo '" & theWord & "' | aspell pipe " & langArg & " | sed -n 2p | cut -d, -f1 | cut -d: -f2 | cut -c2-"
+	set theLowercaseWord to lowercase(theWord)
+	if theWord is theLowercaseWord then
+		set theFixedWord to capitalize(theWord)
+	else
+		set theFixedWord to theLowercaseWord
+	end if
 
 	set the clipboard to theFixedWord
 	delay delayAmount
