@@ -34,6 +34,8 @@ function pagedownAction ()
 		keystroke({}, "right", 1, hs.application("IINA"))
 	elseif appIsRunning("Twitterrific") then
 		keystroke({}, "down", 1, hs.application("Twitterrific"))
+	elseif appIsRunning("Tweeten") then
+		keystroke({}, "down", 1, hs.application("Tweeten"))
 	end
 end
 function pageupAction ()
@@ -41,6 +43,8 @@ function pageupAction ()
 		keystroke({}, "left", 1, hs.application("IINA"))
 	elseif appIsRunning("Twitterrific") then
 		keystroke({}, "up", 1, hs.application("Twitterrific"))
+	elseif appIsRunning("Tweeten") then
+		keystroke({}, "up", 1, hs.application("Tweeten"))
 	end
 end
 function homeAction ()
