@@ -55,6 +55,8 @@ function homeAction ()
 		keystroke({"shift", "command"}, "A", 1, hs.application("zoom.us"))
 	elseif appIsRunning("Twitterrific") then
 		twitterrificAction("scrollup")
+	elseif appIsRunning("Tweeten") then
+		keystroke({}, "left", 1, hs.application("Tweeten"))
 	end
 end
 function endAction ()
@@ -63,13 +65,19 @@ function endAction ()
 		keystroke({"shift", "command"}, "V", 1, hs.application("zoom.us"))
 	elseif appIsRunning("Twitterrific") then
 		twitterrificAction("link")
+	elseif appIsRunning("Tweeten") then
+		keystroke({}, "right", 1, hs.application("Tweeten"))
 	end
 end
 function shiftEndAction ()
 	twitterrificAction("thread")
 end
 function shiftHomeAction ()
-	twitterrificAction("retweet")
+	if appIsRunning("Twitterrific") then
+		twitterrificAction("retweet")
+	elseif appIsRunning("Tweeten") then
+		keystroke({}, "t", 1, hs.application("Tweeten")) -- retweet
+	end
 end
 
 -- IINA: Full Screen when on projector
