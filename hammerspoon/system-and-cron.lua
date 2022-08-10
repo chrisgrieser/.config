@@ -78,7 +78,9 @@ function systemWake (eventType)
 	reloadAllMenubarItems()
 	gitDotfileSync("wake")
 
-	runDelayed(1, twitterrificScrollUp)
+	if isIMacAtHome() then
+		runDelayed(1, function() twitterrificAction("scrollup") end)
+	end
 end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()

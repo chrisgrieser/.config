@@ -102,6 +102,10 @@ function fromFileHub(files)
 		elseif fileName == "vimium-options.json" then
 			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/Browser Extension Settings/"')
 
+		-- watch later .urls from the office
+		elseif fileName:sub(-4) == ".url" then
+			hs.execute('mv -f "'..file..'" "$HOME/Downloaded/" ')
+
 		-- visualised keyboard layouts
 		elseif fileName:match("base%-keyboard%-layout%.%w+") or fileName:match("app%-switcher%-layout%.%w+") or fileName:match("vimrc%-remapping%.%w+") or fileName:match("marta%-key%-bindings%.%w+") or fileName:match("hyper%-bindings%-layout%.%w+") or fileName:match("single%-keystroke%-bindings%.%w+") then
 			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/visualized keyboard layout/"')
