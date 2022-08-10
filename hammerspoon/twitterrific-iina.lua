@@ -22,7 +22,7 @@ function twitterrificAction (type)
 			if title:find("Home") then
 				keystroke({"cmd"}, "1")
 			else
-				keystroke({"cmd"}, "5")
+				keystroke({"cmd"}, "2")
 			end
 
 			local f = twitterrificWins[i]:frame()
