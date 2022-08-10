@@ -21,13 +21,8 @@ function twitterrificAction (type)
 			local title = twitterrificWins[i]:title()
 			if title:find("Home") then
 				keystroke({"cmd"}, "1")
-				notify("bla")
-			-- elseif title:find("Mentions") then
-			-- 	keystroke({"cmd"}, "2")
-			-- elseif title:find("Search") then
-			-- 	keystroke({"cmd"}, "7")
-			-- elseif title:find("List") then
-			-- 	keystroke({"cmd"}, "5")
+			else
+				keystroke({"cmd"}, "5")
 			end
 
 			local f = twitterrificWins[i]:frame()
