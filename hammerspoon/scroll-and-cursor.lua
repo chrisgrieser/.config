@@ -69,6 +69,8 @@ function hidingCursorInBrowser(key)
 end
 jHidesCursor = hotkey({},"j", function() hidingCursorInBrowser("J") end)
 kHidesCursor = hotkey({},"k", function() hidingCursorInBrowser("K") end)
+-- registering this shortcut requires disabling cmd+space in the macOS keyboard
+-- settings (requires temporarily enabling the hotkey to do so)
 alfredDisablesJKCursorHider = hotkey({"cmd"}, "space", function() hidingCursorInBrowser("Alfred") end)
 jHidesCursor:disable()
 kHidesCursor:disable()
