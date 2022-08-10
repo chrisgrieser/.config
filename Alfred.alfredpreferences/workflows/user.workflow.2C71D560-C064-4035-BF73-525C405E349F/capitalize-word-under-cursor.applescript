@@ -63,12 +63,14 @@ on run argv
 	set theWord to the clipboard
 	delay delayAmount
 
-	set theLowercaseWord to lowercase(theWord)
-	if theWord is theLowercaseWord then
+	-- AppleScript string comparisons ignore case by default
+	ignoring case
+	if theWord is equal to theLowercaseWord then
 		set theFixedWord to capitalize(theWord)
 	else
 		set theFixedWord to theLowercaseWord
 	end if
+	end ignoring
 
 	set the clipboard to theFixedWord
 	delay delayAmount
