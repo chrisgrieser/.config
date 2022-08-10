@@ -21,7 +21,7 @@ function twitterrificAction (type)
 			if i == 1 then
 				keystroke({"cmd"}, "1")
 			else
-				runDelayed (0.3, function () keystroke({"cmd"}, "2") end)
+				runDelayed (0.1, function () keystroke({"cmd"}, "5") end)
 			end
 
 			local f = twitterrificWins[i]:frame()
