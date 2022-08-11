@@ -488,7 +488,7 @@ end)
 -- Automatically hide Browser when no window
 wf_browser_all = wf.new("Brave Browser"):setOverrideFilter{allowRoles='AXStandardWindow'}
 wf_browser_all:subscribe(wf.windowDestroyed, function ()
-	if #wf_browser:getWindows() == 0 then
+	if #wf_browser_all:getWindows() == 0 then
 		hs.application("Brave Browser"):hide()
 	end
 end)
