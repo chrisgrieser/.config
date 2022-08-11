@@ -1,5 +1,4 @@
-env:
-  TERM: cheatsheet
+title: cheatsheet
 font:
   normal:
     family: Input
