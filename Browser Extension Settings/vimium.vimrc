@@ -5,9 +5,9 @@ map wq closeTabsOnLeft
 map we closeTabsOnRight
 map wv moveTabToNewWindow
 map W closeOtherTabs
-map u removeTab
+map i removeTab
 map x removeTab
-map z restoreTab
+map u restoreTab
 map ww removeTab count=19
 map b previousTab
 map e nextTab
@@ -54,7 +54,6 @@ map a passNextKey
 map gf nextFrame
 
 " Modes
-map i enterInsertMode
 map v enterVisualMode
 map V enterVisualLineMode
 

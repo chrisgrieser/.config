@@ -1,5 +1,4 @@
 #!/usr/bin/env osascript
-# shows all url+titles of Chrome along with front window+tab url+title
 # https://gist.github.com/samyk/65c12468686707b388ec43710430a421
 # https://gist.github.com/NoahCardoza/fa060f434a7eda2fc040619a25a8f136
 
