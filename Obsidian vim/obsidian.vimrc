@@ -47,14 +47,10 @@ nmap g0 :startOfVisualLine
 nmap g$ :endOfVisualLine
 
 " HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
-nmap H g0
-vmap H g0
-nmap L g$
-vmap L g$
-nmap J 6j
-vmap J 6j
-nmap K 6k
-vmap K 6k
+map H g0
+map L g$
+map J 6j
+map K 6k
 
 " cause easier to press, lol
 map [ {
