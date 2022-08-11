@@ -1,4 +1,3 @@
-# by @UlraInstinct05 on Discord
 import sublime
 import sublime_plugin
 
@@ -7,6 +6,7 @@ class RemoveTabBarListener(sublime_plugin.EventListener):
 
 	def on_load_async(self, view):
 		self.close_tab_bar(view, len(view.window().views()))
+
 	on_new_async = on_load_async
 
 	def on_pre_close(self, view):
@@ -18,4 +18,3 @@ class RemoveTabBarListener(sublime_plugin.EventListener):
 			view.window().set_tabs_visible(False)
 		else:
 			view.window().set_tabs_visible(True)
-
