@@ -388,9 +388,9 @@
 				<key>relatedApps</key>
 				<array>
 					<string>com.vivaldi.Vivaldi</string>
-					<string>com.brave.Browser.app.fmajbmdokmecmpllfhcamihghgoablgg</string>
-					<string>org.chromium.Chromium</string>
 					<string>com.brave.Browser</string>
+					<string>org.chromium.Chromium</string>
+					<string>com.brave.Browser.app.fmajbmdokmecmpllfhcamihghgoablgg</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -587,9 +587,9 @@
 				<key>keyword</key>
 				<string>alltabs</string>
 				<key>subtext</key>
-				<string></string>
+				<string>of front window, as markdown links</string>
 				<key>text</key>
-				<string>Copy the Title and URL of ALL tabs</string>
+				<string>Copy ALL tabs</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
