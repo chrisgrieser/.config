@@ -174,7 +174,6 @@ function movieModeLayout()
 	killIfRunning("Alfred Preferences")
 	killIfRunning("Sublime Text")
 	killIfRunning("alacritty")
-	killIfRunning("Alacritty")
 
 	dockSwitcher("movie")
 
@@ -214,7 +213,6 @@ function homeModeLayout ()
 		{"Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
 	}
 
 	hs.layout.apply(homeLayout)
@@ -256,7 +254,6 @@ function officeModeLayout ()
 		{"Drafts", nil, screen1, maximized, nil, nil},
 		{"Mimestream", nil, screen1, maximized, nil, nil},
 		{"alacritty", nil, screen1, maximized, nil, nil},
-		{"Alacritty", nil, screen1, maximized, nil, nil},
 	}
 
 	hs.layout.apply(officeLayout)
@@ -342,7 +339,7 @@ end
 -- Watcher, that raises win2 when win1 activates and vice versa
 splitStatusMenubar = hs.menubar.new()
 splitStatusMenubar:removeFromMenuBar() -- hide at beginning
-function pairedActivation(start)
+function pairedActivation()
 	pairedWinWatcher = aw.new(function (_, eventType)
 		-- if one of the two is activated, also activate the other
 		local currentWindow = hs.window.focusedWindow()
@@ -383,7 +380,7 @@ function vsplit (mode)
 	local f2 = SPLIT_LEFT:frame()
 
 	if mode == "split" then
-		pairedActivation(true)
+		pairedActivation()
 		local max = hs.screen.mainScreen():frame()
 		if (f1.w ~= f2.w or f1.w > 0.7*max.w) then
 			f1 = hs.layout.left50
@@ -393,7 +390,6 @@ function vsplit (mode)
 			f2 = hs.layout.right30
 		end
 	elseif mode == "unsplit" then
-		pairedActivation(false)
 		f1 = baseLayout
 		f2 = baseLayout
 		pairedWinWatcher:stop()
@@ -571,7 +567,6 @@ wf_sublime:subscribe(wf.windowDestroyed, function ()
 	if #wf_sublime:getWindows() == 0 and appIsRunning("Sublime Text") then
 		hs.application("Sublime Text"):kill()
 	end
-
 	-- editing command line finished
 	if not(hs.application("alacritty")) then return end
 	local alacrittyWin = hs.application("alacritty"):mainWindow()
