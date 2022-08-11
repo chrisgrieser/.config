@@ -467,11 +467,10 @@ hotkey(hyper, "V", function() vsplit("split") end)
 -- - https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 
 -- BROWSER
--- do not count in incognito windows or PiP windows
+-- split when second window is opened
+-- change sizing back, when back to one window
 wf_browser = wf.new("Brave Browser"):setOverrideFilter{rejectTitles={"%(Private%)$","Picture in Picture"}, allowRoles='AXStandardWindow'}
 wf_browser:subscribe(wf.windowCreated, function (newWindow)
-
-	-- split when second window is opened
 	if #wf_browser:getWindows() == 2 then
 		local win1 = wf_browser:getWindows()[1]
 		local win2 = wf_browser:getWindows()[2]
@@ -480,14 +479,17 @@ wf_browser:subscribe(wf.windowCreated, function (newWindow)
 	end
 end)
 wf_browser:subscribe(wf.windowDestroyed, function ()
-	-- Automatically hide Browser when no window
-	if #wf_browser:getWindows() == 0 then
-		hs.application("Brave Browser"):hide()
-
-	-- change sizing back, when back to one window
-	elseif #wf_browser:getWindows() == 1 then
+	if #wf_browser:getWindows() == 1 then
 		local win = wf_browser:getWindows()[1]
 		moveResize(win, baseLayout)
+	end
+end)
+
+-- Automatically hide Browser when no window
+wf_browser_all = wf.new("Brave Browser"):setOverrideFilter{allowRoles='AXStandardWindow'}
+wf_browser_all:subscribe(wf.windowDestroyed, function ()
+	if #wf_browser:getWindows() == 0 then
+		hs.application("Brave Browser"):hide()
 	end
 end)
 
