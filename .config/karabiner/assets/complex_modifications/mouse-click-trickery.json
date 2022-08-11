@@ -208,7 +208,7 @@
       ]
     },
     {
-      "description": "🐁 4",
+      "description": "🐁 4 (bottom)",
       "manipulators": [
         {
           "type": "basic",
@@ -225,6 +225,7 @@
               "type": "frontmost_application_unless",
               "bundle_identifiers": [
                 "^com\\.brave\\.Browser$",
+                "^com\\.brave\\.Browser.+",
                 "^com\\.apple\\.finder$",
                 "^com\\.mimestream\\.Mimestream$",
                 "^net\\.highlightsapp\\.universal$",
@@ -263,6 +264,37 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.brave\\.Browser$"
+              ]
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "shell_command": "open -a \"Mission Control\""
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250,
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          }
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to_if_alone": [
+            {
+              "key_code": "escape"
+            },
+            {
+              "shell_command": "osascript -e 'tell application \"Brave Browser\" to set URL of active tab of front window to \"https://www.youtube.com\"'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser.+"
               ]
             }
           ],
@@ -409,7 +441,7 @@
       ]
     },
     {
-      "description": "🐁 5",
+      "description": "🐁 5 (top)",
       "manipulators": [
         {
           "type": "basic",

@@ -32,7 +32,7 @@ rules:
         to_if_held_down:
           - pointing_button: button2
         to:
-          # workaround necessary, cause opening links in background in *to* Chromium buggy
+          # workaround necessary, cause opening links in background in *to* Chromium is buggy
           - pointing_button: button3
           - key_code: vk_none
             hold_down_milliseconds: 200
@@ -110,7 +110,7 @@ rules:
             bundle_identifiers:
               - ^com\.hegenberg\.BetterTouchTool$
               - ^org\.hammerspoon\.Hammerspoon$
-  - description: "🐁 4"
+  - description: "🐁 4 (bottom)"
     manipulators:
       # held-down: Mission Control
       - type: basic
@@ -122,6 +122,7 @@ rules:
           - type: frontmost_application_unless
             bundle_identifiers:
               - ^com\.brave\.Browser$
+              - ^com\.brave\.Browser.+ # PWAs
               - ^com\.apple\.finder$
               - ^com\.mimestream\.Mimestream$
               - ^net\.highlightsapp\.universal$
@@ -145,6 +146,23 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.brave\.Browser$
+        to_if_held_down:
+          - shell_command: open -a "Mission Control"
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 250
+          basic.to_if_held_down_threshold_milliseconds: 250
+
+      # YouTube: Home
+      - type: basic
+        from:
+          pointing_button: button4
+        to_if_alone:
+          - key_code: escape # to leave full screen
+          - shell_command: osascript -e 'tell application "Brave Browser" to set URL of active tab of front window to "https://www.youtube.com"'
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.brave\.Browser.+ # PWAs
         to_if_held_down:
           - shell_command: open -a "Mission Control"
         parameters:
@@ -233,7 +251,7 @@ rules:
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
-  - description: "🐁 5"
+  - description: "🐁 5 (top)"
     manipulators:
       # held-down: universal-search
       - type: basic
@@ -355,6 +373,7 @@ rules:
             - pointing_button: button1
             - pointing_button: button2
         to:
+          - pointing_button: button1 # in case it's not the front window
           - key_code: d
             modifiers:
               - command

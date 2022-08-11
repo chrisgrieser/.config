@@ -469,7 +469,7 @@ hotkey(hyper, "V", function() vsplit("split") end)
 -- BROWSER
 -- split when second window is opened
 -- change sizing back, when back to one window
-wf_browser = wf.new("Brave Browser"):setOverrideFilter{rejectTitles={"%(Private%)$","Picture in Picture"}, allowRoles='AXStandardWindow'}
+wf_browser = wf.new("Brave Browser"):setOverrideFilter{rejectTitles={" %(Private%)$","^Picture in Picture$"}, allowRoles='AXStandardWindow'}
 wf_browser:subscribe(wf.windowCreated, function ()
 	if #wf_browser:getWindows() == 2 then
 		local win1 = wf_browser:getWindows()[1]
