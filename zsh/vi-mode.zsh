@@ -40,9 +40,8 @@ bindkey -M vicmd 'Ü' vi-swap-case
 # history substring search
 bindkey -M vicmd 'K' history-substring-search-up
 bindkey -M vicmd 'J' history-substring-search-down
-bindkey -M viins '^[[A' history-substring-search-up
-bindkey -M viins '^[[B' history-substring-search-down
-
+bindkey -M viins '^[[A' history-substring-search-up # up-arrow
+bindkey -M viins '^[[B' history-substring-search-down # down-arrow
 
 # to prevent accidentally going to the beginning of the history (which is never
 # a desired behavior...) Not implemented for 'G', since going down the history

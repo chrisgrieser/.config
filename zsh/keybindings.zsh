@@ -3,10 +3,8 @@
 # built-in zle functions
 bindkey -M viins "^A" beginning-of-line
 bindkey -M viins "^E" end-of-line
-bindkey -M viins "^Z" undo
 bindkey -M viins "^Y" redo
 bindkey -M viins "^K" kill-line
-bindkey -M viins "^U" kill-whole-line
 
 # custom ZLE funtions
 function bindEverywhere () {
@@ -14,13 +12,16 @@ function bindEverywhere () {
 	bindkey -M viins "$1" $2
 	bindkey -M vicmd "$1" $2
 }
+bindEverywhere "^Z" undo
+bindEverywhere "^U" kill-whole-line
 bindEverywhere "^P" copy-location
 bindEverywhere "^B" copy-buffer
 bindEverywhere '“' quote-all-args # “=alt+2
-bindEverywhere '…' insert-last-word # “=alt+.
+bindEverywhere '…' insert-last-word # …=alt+.
 
 # [f]orward to editor
-autoload edit-command-line; zle -N edit-command-line
+autoload edit-command-line
+zle -N edit-command-line
 bindEverywhere '^F' edit-command-line
 
 # zsh-autosuggest
