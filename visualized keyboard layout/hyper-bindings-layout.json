@@ -106,11 +106,11 @@
     "R\nRestart App",
     "T\nTerminal",
     {
-      "c": "#CCCCCC"
+      "f": 1
     },
-    "Z",
+    "Z\nJoin next Meeting",
     {
-      "c": "#AAB7FF"
+      "f": 2
     },
     "U\nBoL",
     "I\nPrev. Word",
