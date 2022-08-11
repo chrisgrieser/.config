@@ -21,7 +21,8 @@ elif [[ "$MODE" == "--save" ]]; then
 		LAYOUT=$(ls "$DATA_DIR" | grep "current_" | cut -c9-)
 		echo "Saved Layout '$LAYOUT'"
 	fi
-	cp -fa ~/Library/Preferences/com.apple.dock.plist "$LAYOUT.plist"
+	cp -f ~/Library/Preferences/com.apple.dock.plist "$LAYOUT.plist"
+	touch "$DATA_DIR/current_$LAYOUT"
 else
 	echo "Not a valid option."
 	exit 1
