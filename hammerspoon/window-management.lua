@@ -421,26 +421,6 @@ function vsplit (mode)
 	end
 end
 
-function finderVsplit ()
-	hs.osascript.applescript([[
-		use framework "AppKit"
-		set allFrames to (current application's NSScreen's screens()'s valueForKey:"frame") as list
-		set screenWidth to item 1 of item 2 of item 1 of allFrames
-		set screenHeight to item 2 of item 2 of item 1 of allFrames
-
-		set vsplit to {{0, 0, 0.5 * screenWidth, screenHeight}, {0.5 * screenWidth, 0, screenWidth, screenHeight} }
-
-		tell application "Finder"
-			if ((count windows) is 0) then return
-			if ((count windows) is 1) then
-				set currentWindow to target of window 1 as alias
-				make new Finder window to folder currentWindow
-			end if
-			set bounds of window 1 to item 2 of vsplit
-			set bounds of window 2 to item 1 of vsplit
-		end tell
-	]])
-end
 
 --------------------------------------------------------------------------------
 -- HOTKEYS
@@ -474,19 +454,12 @@ hotkey(hyper, "home", function()
 	elseif isProjector() then movieModeLayout()
 	else homeModeLayout()
 	end
-
 	twitterrificAction("scrollup")
 end)
 
 hotkey(hyper, "X", function() vsplit("switch") end)
 hotkey(hyper, "C", function() vsplit("unsplit") end)
-hotkey(hyper, "V", function()
-	if (frontapp() == "Finder") then
-		finderVsplit()
-	else
-		vsplit("split")
-	end
-end)
+hotkey(hyper, "V", function() vsplit("split") end)
 
 --------------------------------------------------------------------------------
 -- APP-SPECIFIC WINDOW BEHAVIOR
