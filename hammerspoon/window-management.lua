@@ -589,7 +589,7 @@ end)
 wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow'}
 wf_marta:subscribe(wf.windowCreated, function ()
 	killIfRunning("Finder")
-	runDelayed(0.5, function () -- close other windows
+	runDelayed(0.3, function () -- close other windows
 		keystroke({"shift"}, "w", 1, hs.application("Marta"))
 	end)
 	if isAtOffice() or isProjector() then
