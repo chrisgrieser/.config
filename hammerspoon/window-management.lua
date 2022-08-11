@@ -143,7 +143,6 @@ end
 
 function dockSwitcher (targetMode)
 	hs.execute("zsh ./dock-switching/dock-switcher.sh --load "..targetMode)
-	hs.execute("zsh ./dock-switching/dock-switcher.sh --load movie")
 end
 
 --------------------------------------------------------------------------------
@@ -473,9 +472,10 @@ hotkey({"ctrl"}, "space", controlSpace)
 hotkey(hyper, "home", function()
 	if isAtOffice() then officeModeLayout()
 	elseif isProjector() then movieModeLayout()
-	else homeModeLayout() end
+	else homeModeLayout()
+	end
 
-	twitterrificScrollUp()
+	twitterrificAction("scrollup")
 end)
 
 hotkey(hyper, "X", function() vsplit("switch") end)
