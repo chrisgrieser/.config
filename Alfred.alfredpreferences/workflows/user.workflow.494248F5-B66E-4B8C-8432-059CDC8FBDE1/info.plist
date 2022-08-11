@@ -174,7 +174,7 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 				<key>subtext</key>
 				<string>Browser Tab</string>
 				<key>text</key>
-				<string>Read Later</string>
+				<string>⬇️ Read Later</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
