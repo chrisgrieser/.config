@@ -103,7 +103,7 @@ function fromFileHub(files)
 			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/Browser Extension Settings/"')
 
 		-- watch later .urls from the office
-		elseif fileName:sub(-4) == ".url" then
+		elseif fileName:sub(-4) == ".url" and isIMacAtHome() then
 			hs.execute('mv -f "'..file..'" "$HOME/Downloaded/" ')
 
 		-- visualised keyboard layouts
