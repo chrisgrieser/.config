@@ -114,6 +114,10 @@ live_config_reload: true
 selection:
   save_to_clipboard: true
 key_bindings:
+  - key: V
+    mods: Alt
+    mode: ~Search
+    action: ToggleViMode
   - key: 43
     mods: Command
     command:
