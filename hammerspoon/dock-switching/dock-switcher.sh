@@ -7,7 +7,7 @@ DOCK_PLIST=~"/Library/Preferences/com.apple.dock.plist"
 
 if [[ "$MODE" == "--load" ]]; then
 	rm "$DOCK_PLIST"
-	cp -a "$PLIST_LOCATION/$1.plist" "$DOCK_PLIST"
+	cp -a "$PLIST_LOCATION/$LAYOUT.plist" "$DOCK_PLIST"
 	defaults import com.apple.dock "$DOCK_PLIST"
 	sleep 0.1
 	killall Dock

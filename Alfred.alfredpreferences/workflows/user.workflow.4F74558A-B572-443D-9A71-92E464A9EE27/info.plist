@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C8135108-B86E-49C6-81FB-5601CFB5BF9A</string>
+				<string>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -137,26 +137,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>BD16A75F-DC81-47C0-99A3-8A4360CCEA08</key>
+		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>36AE7CE2-D6D2-4287-A06D-A57442C43FF4</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C8135108-B86E-49C6-81FB-5601CFB5BF9A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BD16A75F-DC81-47C0-99A3-8A4360CCEA08</string>
+				<string>2DB304DA-9F01-4DBF-A53C-6A03040DD154</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -316,33 +301,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>if application "Alacritty" is not running 
-	return "is not running"
-else
-	tell application "Alacritty" to activate
-end if</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C8135108-B86E-49C6-81FB-5601CFB5BF9A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -364,6 +322,7 @@ end if</string>
 				<key>relatedApps</key>
 				<array>
 					<string>org.yanex.marta</string>
+					<string>io.alacritty</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>
@@ -401,34 +360,31 @@ end if</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>is not running\n</string>
-						<key>outputlabel</key>
-						<string>not running</string>
-						<key>uid</key>
-						<string>36AE7CE2-D6D2-4287-A06D-A57442C43FF4</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>--</string>
-				<key>hideelse</key>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
 				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
+			<string>alfred.workflow.output.largetype</string>
 			<key>uid</key>
-			<string>BD16A75F-DC81-47C0-99A3-8A4360CCEA08</string>
+			<string>2DB304DA-9F01-4DBF-A53C-6A03040DD154</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -680,6 +636,13 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>575</real>
 		</dict>
+		<key>2DB304DA-9F01-4DBF-A53C-6A03040DD154</key>
+		<dict>
+			<key>xpos</key>
+			<real>425</real>
+			<key>ypos</key>
+			<real>280</real>
+		</dict>
 		<key>3ADE22C7-10D2-4528-9298-22A616F276B1</key>
 		<dict>
 			<key>xpos</key>
@@ -773,7 +736,7 @@ echo "$backup"</string>
 			<key>note</key>
 			<string>open Alacritty with config</string>
 			<key>xpos</key>
-			<real>490</real>
+			<real>240</real>
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
@@ -794,20 +757,6 @@ echo "$backup"</string>
 			<real>545</real>
 			<key>ypos</key>
 			<real>20</real>
-		</dict>
-		<key>BD16A75F-DC81-47C0-99A3-8A4360CCEA08</key>
-		<dict>
-			<key>xpos</key>
-			<real>365</real>
-			<key>ypos</key>
-			<real>295</real>
-		</dict>
-		<key>C8135108-B86E-49C6-81FB-5601CFB5BF9A</key>
-		<dict>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>275</real>
 		</dict>
 		<key>E91BA4CB-B708-47B1-B606-EC119ECC9301</key>
 		<dict>
