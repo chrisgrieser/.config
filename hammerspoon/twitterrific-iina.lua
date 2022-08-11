@@ -87,9 +87,8 @@ function iinaLaunch(appName, eventType, appObject)
 			local isProjector = hs.screen.primaryScreen():name() == "ViewSonic PJ"
 			if isProjector then
 				-- going full screen apparently needs a small delay
-				runDelayed(0.8, function()
-					appObject:selectMenuItem({"Video", "Enter Full Screen"})
-				end)
+				runDelayed(0.4, function() appObject:selectMenuItem({"Video", "Enter Full Screen"}) end)
+				runDelayed(0.8, function() appObject:selectMenuItem({"Video", "Enter Full Screen"}) end)
 			end
 		end
 	end
