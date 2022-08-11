@@ -12,16 +12,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8146B782-E941-42AB-9FE2-FF9FBB89456E</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Move to frontmost Finder Window</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>DC23B294-25E4-4CEA-841A-71546D15BD89</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -309,7 +299,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>File Manager (Marta)</string>
+	<string>File Manager – Marta</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -500,29 +490,6 @@ open .</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>move-to-frontmost-Finder-window.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>8146B782-E941-42AB-9FE2-FF9FBB89456E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>availableviaurlhandler</key>
 				<false/>
 				<key>triggerid</key>
@@ -708,7 +675,10 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 				<key>applescript</key>
 				<string>on alfred_script(q)
 	set toDelete to q as POSIX file
-	tell application "Finder" to delete toDelete
+	tell application "Finder" 
+		delete toDelete
+		quit
+	end tell
 end alfred_script</string>
 				<key>cachescript</key>
 				<false/>
@@ -1116,15 +1086,6 @@ IconIndex=0</string>
 			<real>520</real>
 			<key>ypos</key>
 			<real>380</real>
-		</dict>
-		<key>8146B782-E941-42AB-9FE2-FF9FBB89456E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>865</real>
-			<key>ypos</key>
-			<real>225</real>
 		</dict>
 		<key>9536809F-DBBD-4982-90BC-427C6D115A14</key>
 		<dict>

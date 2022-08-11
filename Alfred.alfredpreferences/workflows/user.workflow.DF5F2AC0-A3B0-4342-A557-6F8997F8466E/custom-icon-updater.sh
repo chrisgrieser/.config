@@ -63,13 +63,6 @@ case $APP_TO_UPDATE in
 		cp "$CUSTOM_ICON_FOLDER/Discord Black.icns" 'Discord.app/Contents/Resources/electron.icns'
 		touch "Discord.app" ;;
 
-	"LimeChat")
-		osascript -e "tell application \"Finder\"
-			open information window of (\"/Applications/LimeChat.app\" as POSIX file as alias)
-			activate
-		end tell
-		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/LimeChat.icns\""
-		INFO_WINDOW=1 ;;
 	"Microsoft Word")
 		osascript -e "tell application \"Finder\"
 			open information window of (\"/Applications/Microsoft Word.app\" as POSIX file as alias)
@@ -115,7 +108,7 @@ case $APP_TO_UPDATE in
 	"Twitch")
 		iconsur set ~"/Video/Twitch.app" ;;
 	"BunnyFap")
-		iconsur --input "$CUSTOM_ICON_FOLDER/BunnyFap.png" --scale 1.1 set ~"/Video/BunnyFap.app" ;;
+		iconsur --input "$CUSTOM_ICON_FOLDER/BunnyFap.png" --scale 1.1 set "$PWA_FOLDER/BunnyFap.app" ;;
 	"all PWAs")
 		PWA_FOLDER=~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Brave Browser Apps.localized/"
 		CUSTOM_ICON_FOLDER=~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Custom Icons/"
@@ -123,11 +116,11 @@ case $APP_TO_UPDATE in
 		touch "$PWA_FOLDER/Google Docs.app"
 		iconsur -k "Unread" set "$PWA_FOLDER/Inoreader.app"
 		cp "$CUSTOM_ICON_FOLDER/YouTube.icns" ~"/Video/YouTube.app/Contents/Resources/app.icns"
-		touch ~"/Video/YouTube.app"
-		iconsur set ~"/Video/Netflix.app"
-		iconsur set ~"/Video/Twitch.app"
-		iconsur set ~"/Video/Tagesschau.app"
-		iconsur --input "$CUSTOM_ICON_FOLDER/BunnyFap.png" --scale 1.1 set ~"/Video/BunnyFap.app"
+		touch "$PWA_FOLDER/YouTube.app"
+		iconsur set "$PWA_FOLDER/Netflix.app"
+		iconsur set "$PWA_FOLDER/Twitch.app"
+		iconsur set "$PWA_FOLDER/Tagesschau.app"
+		iconsur --input "$CUSTOM_ICON_FOLDER/BunnyFap.png" --scale 1.1 set "$PWA_FOLDER/BunnyFap.app"
 		;;
 
    *)
