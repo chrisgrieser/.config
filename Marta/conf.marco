@@ -1,6 +1,6 @@
 
 behavior {
-    theme "Classic"
+    theme "Kon"
 
     layout {
         showActionBar false
@@ -120,11 +120,7 @@ gadgets [
 
 
 keyBindings {
-    "Ctrl+J" {
-        id "core.run.actions"
-        actions [ "core.move.down" "core.move.down" ]
-    }
-    
+    "Cmd+Q" "core.state.reset"
     "h" "core.go.up"
     "Shift+H" "core.clone.left.folder"
     "Shift+L" "core.clone.right.folder"
