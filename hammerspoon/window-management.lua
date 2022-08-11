@@ -467,26 +467,16 @@ hotkey(hyper, "V", function() vsplit("split") end)
 -- - https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 
 -- BROWSER
-wf_browser = wf.new("Brave Browser"):setOverrideFilter{allowRoles='AXStandardWindow'}
+-- do not count in incognito windows or PiP windows
+wf_browser = wf.new("Brave Browser"):setOverrideFilter{rejectTitles={"%(Private%)$","Picture in Picture"}, allowRoles='AXStandardWindow'}
 wf_browser:subscribe(wf.windowCreated, function (newWindow)
-
-	local function isIncognitoWindow(browserWin)
-		if browserWin:title():match("%(Private%)$") then return true
-		else return false end
-	end
 
 	-- split when second window is opened
 	if #wf_browser:getWindows() == 2 then
 		local win1 = wf_browser:getWindows()[1]
 		local win2 = wf_browser:getWindows()[2]
-		if isIncognitoWindow(win1) or isIncognitoWindow(win2) then return end -- do not effect switch to inkognito windows
 		moveResize(win1, hs.layout.left50)
 		moveResize(win2, hs.layout.right50)
-	end
-
-	-- if new window is incognito window, position it to the left
-	if isIncognitoWindow(newWindow) then
-		moveResize(newWindow, baseLayout)
 	end
 end)
 wf_browser:subscribe(wf.windowDestroyed, function ()
