@@ -1,5 +1,4 @@
 {
-	// Neovintageous
 	// https://github.com/NeoVintageous/NeoVintageous/blob/master/Preferences.sublime-settings
 	"vintageous_use_sys_clipboard": true, // = set clipboard=unnamed
 
