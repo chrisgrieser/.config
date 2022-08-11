@@ -4,9 +4,9 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #-------------------------------------------------------------------------------
 # CONFIG
 
-PREVIEW_CONFIG=~/.config/alacritty/preview-window.yml
+PREVIEW_CONFIG=~/.config/alacritty/cheatsheet.yml
 BG_COLOR=#303643
-STATUSLINE_COLOR=#6E7581
+STATUSLINE_COLOR=#8F9DB5
 STYLE=paraiso-dark # https://cheat.sh/:styles-demo
 if [[ "$(scutil --get ComputerName)" =~ "Mac mini" ]]; then
 	X=200

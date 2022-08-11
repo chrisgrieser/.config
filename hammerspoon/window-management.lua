@@ -601,3 +601,15 @@ wf_marta:subscribe(wf.windowCreated, function ()
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
+
+-- ALACRITTY
+wf_alacritty = wf.new("alacritty"):setOverrideFilter{rejectTitles="^cheatsheet$"}
+wf_alacritty:subscribe(wf.windowCreated, function ()
+	killIfRunning("Finder")
+	if isAtOffice() or isProjector() then
+		moveResizeCurWin("maximized")
+	else
+		moveResizeCurWin("pseudo-maximized")
+		hs.application("Twitterrific"):mainWindow():raise()
+	end
+end)
