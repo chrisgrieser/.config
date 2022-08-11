@@ -587,7 +587,7 @@ end)
 
 -- MARTA
 wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow'}
-wf_marta:subscribe(wf.windowCreated, function ()
+wf_marta:subscribe(wf.windowCreated, function (newWindow)
 	killIfRunning("Finder")
 	if isAtOffice() or isProjector() then
 		moveResizeCurWin("maximized")
@@ -595,6 +595,7 @@ wf_marta:subscribe(wf.windowCreated, function ()
 		moveResizeCurWin("pseudo-maximized")
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
+	if newWindow:title() == "Tutorial" then newWindow:close() end
 end)
 
 -- ALACRITTY
