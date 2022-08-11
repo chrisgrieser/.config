@@ -583,7 +583,7 @@ echo "$backup"</string>
 			<key>note</key>
 			<string>Quake Mode</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
@@ -608,7 +608,7 @@ echo "$backup"</string>
 			<key>note</key>
 			<string>open dotfile</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>70</real>
 		</dict>

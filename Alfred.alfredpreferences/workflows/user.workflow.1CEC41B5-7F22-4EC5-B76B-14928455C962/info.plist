@@ -47,6 +47,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9D5597E5-0D91-4F10-BB91-4EBF72B9D99E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B21D8A5B-86D0-4A3C-AAE3-92A696B250DD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A25DDA0D-DA11-46FF-9CCB-41D3D338B420</key>
 		<array>
 			<dict>
@@ -65,6 +78,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B21D8A5B-86D0-4A3C-AAE3-92A696B250DD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>51E1346B-74CA-4649-A4CA-3FC9477B1A0E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -480,6 +506,71 @@ fi</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>zsh ~"/dotfiles/hammerspoon/dock-switching/dock-switcher.sh" --save</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B21D8A5B-86D0-4A3C-AAE3-92A696B250DD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>51E1346B-74CA-4649-A4CA-3FC9477B1A0E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>dock</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Save Current Dock Layout</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>9D5597E5-0D91-4F10-BB91-4EBF72B9D99E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -510,6 +601,13 @@ fi</string>
 			<key>ypos</key>
 			<real>515</real>
 		</dict>
+		<key>51E1346B-74CA-4649-A4CA-3FC9477B1A0E</key>
+		<dict>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>665</real>
+		</dict>
 		<key>7E7254FB-7761-400D-887B-162AB242F68E</key>
 		<dict>
 			<key>xpos</key>
@@ -525,6 +623,13 @@ fi</string>
 			<real>330</real>
 			<key>ypos</key>
 			<real>130</real>
+		</dict>
+		<key>9D5597E5-0D91-4F10-BB91-4EBF72B9D99E</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>665</real>
 		</dict>
 		<key>A25DDA0D-DA11-46FF-9CCB-41D3D338B420</key>
 		<dict>
@@ -550,6 +655,13 @@ fi</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>515</real>
+		</dict>
+		<key>B21D8A5B-86D0-4A3C-AAE3-92A696B250DD</key>
+		<dict>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>665</real>
 		</dict>
 		<key>C129402F-060A-4E14-A919-D21FCE15A4A4</key>
 		<dict>

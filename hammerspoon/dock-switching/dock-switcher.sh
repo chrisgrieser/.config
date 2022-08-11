@@ -18,7 +18,8 @@ if [[ "$MODE" == "--load" ]]; then
 	touch "$DATA_DIR/current_$LAYOUT"
 elif [[ "$MODE" == "--save" ]]; then
 	if [[ -z "$LAYOUT" ]] ; then
-		LAYOUT=$(ls "$DATA_DIR" | grep "current" | cut -c9-)
+		LAYOUT=$(ls "$DATA_DIR" | grep "current_" | cut -c9-)
+		echo "Saved Layout '$LAYOUT'"
 	fi
 	cp -fa ~/Library/Preferences/com.apple.dock.plist "$LAYOUT.plist"
 else
