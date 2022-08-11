@@ -161,7 +161,8 @@ function movieModeLayout()
 	iMacDisplay:setBrightness(0)
 
 	openIfNotRunning("YouTube")
-	openIfNotRunning("Übersicht") -- this works in spite of diacritic
+	runDelayed(1, function () openIfNotRunning("YouTube") end) -- safety redundancy
+	openIfNotRunning("Übersicht") -- this works in spite of diacritic ¯\_(ツ)_/¯
 
 	killIfRunning("Finder")
 	killIfRunning("Obsidian")
@@ -174,9 +175,9 @@ function movieModeLayout()
 	killIfRunning("Sublime Text")
 	killIfRunning("alacritty")
 	killIfRunning("Alacritty")
-	runDelayed(1, function () openIfNotRunning("YouTube") end) -- safety redundancy
 
 	dockSwitcher("movie")
+
 end
 
 function homeModeLayout ()
@@ -199,8 +200,7 @@ function homeModeLayout ()
 	privateClosers()
 
 	dockSwitcher("home")
-
-
+	sublimeFontSize(15)
 
 	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
 	local homeLayout = {
@@ -239,10 +239,10 @@ function officeModeLayout ()
 	openIfNotRunning("Tweeten")
 	openIfNotRunning("Drafts")
 	killIfRunning("Finder")
+	sublimeFontSize(13)
 
 	local bottom = {x=0, y=0.5, w=1, h=0.5}
 	local top = {x=0, y=0, w=1, h=0.5}
-
 	local officeLayout = {
 		-- screen 2
 		{"Tweeten", nil, screen2, top, nil, nil},
