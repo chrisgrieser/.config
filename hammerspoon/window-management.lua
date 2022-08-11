@@ -143,6 +143,7 @@ end
 
 function dockSwitcher (targetMode)
 	hs.execute("zsh ./dock-switching/dock-switcher.sh --load "..targetMode)
+	hs.execute("zsh ./dock-switching/dock-switcher.sh --load movie")
 end
 
 --------------------------------------------------------------------------------
