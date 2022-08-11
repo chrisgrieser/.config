@@ -145,6 +145,14 @@ function dockSwitcher (targetMode)
 	hs.execute("zsh ./dock-switching/dock-switcher.sh --load "..targetMode)
 end
 
+function sublimeFontSize (size)
+	local toSize = tostring(size)
+	hs.execute("VALUE="..toSize..[[
+		SUBLIME_CONFIG="$HOME/Library/Application Support/Sublime Text/Packages/User/Preferences.sublime-settings"
+		sed -i '' "s/\"font_size\": .*,/\"font_size\": $VALUE,/" "$SUBLIME_CONFIG"
+	]])
+end
+
 --------------------------------------------------------------------------------
 -- LAYOUTS & DISPLAYS
 
@@ -192,10 +200,12 @@ function homeModeLayout ()
 
 	dockSwitcher("home")
 
+
+
 	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
 	local homeLayout = {
 		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
-		{"Marta", nil, iMacDisplay, maximized, nil, nil},
+		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Slack", nil, iMacDisplay, pseudoMaximized, nil, nil},
