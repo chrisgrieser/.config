@@ -1,8 +1,6 @@
 {
 	"draw_white_space": ["selection", "isolated"],
 
-	"color_scheme": "Nord.sublime-color-scheme",
-
 	"extensions":
 	[
 		"sublime-settings",
