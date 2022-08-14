@@ -35,7 +35,6 @@ function gitVaultBackup()
 	end):start()
 end
 
-
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
 	gitDotfileSync()
 	if isIMacAtHome() then gitVaultBackup() end
@@ -55,21 +54,14 @@ shutDownWatcher:start()
 
 function systemWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemDidWake or eventType == hs.caffeinate.watcher.screensDidWake) then return end
-
+	if not isIMacAtHome() then return end
 	if appIsRunning("Obsidian") and appIsRunning("Discord") then
 		hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
 	end
 
-	if isIMacAtHome() and isProjector() then movieModeLayout()
-	elseif isIMacAtHome and not(isProjector()) then homeModeLayout() end
+	if isProjector() then movieModeLayout()
+	else homeModeLayout() end
 
-	-- set light mode if waking between 6:00 and 19:00
-	local currentTimeHours = hs.timer.localTime() / 60 / 60
-	if currentTimeHours < 20 and currentTimeHours > 6 then
-		setDarkmode(false)
-	else
-		setDarkmode(true)
-	end
 	-- get reminders after 6:00
 	if currentTimeHours > 6 then
 		hs.shortcuts.run("Send Reminders due today to Drafts")
@@ -78,9 +70,16 @@ function systemWake (eventType)
 	reloadAllMenubarItems()
 	gitDotfileSync("wake")
 
-	if isIMacAtHome() then
-		runDelayed(1, function() twitterrificAction("scrollup") end)
-	end
+	runDelayed(1, function()
+		twitterrificAction("scrollup")
+		-- set light mode if waking between 6:00 and 19:00
+		local currentTimeHours = hs.timer.localTime() / 60 / 60
+		if currentTimeHours < 20 and currentTimeHours > 6 then
+			setDarkmode(false)
+		else
+			setDarkmode(true)
+		end
+	end)
 end
 wakeWatcher = hs.caffeinate.watcher.new(systemWake)
 wakeWatcher:start()
@@ -98,7 +97,6 @@ if isAtOffice() then screenWakeWatcher:start() end
 
 --------------------------------------------------------------------------------
 -- CRONJOBS AT HOME
-
 function sleepYouTube ()
 	killIfRunning("YouTube")
 	hs.osascript.applescript([[
@@ -116,7 +114,7 @@ end
 sleepTimer = hs.timer.doAt("03:00", "01d", sleepYouTube, true)
 sleepTimer2 = hs.timer.doAt("05:00", "01d", sleepYouTube, true)
 
-biiweeklyTimer = hs.timer.doAt("02:00", "02d", function()
+biweeklyTimer = hs.timer.doAt("02:00", "02d", function()
 	hs.osascript.applescript([[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
@@ -144,7 +142,7 @@ if isIMacAtHome() then
 	dailyEveningTimer:start()
 	sleepTimer:start()
 	sleepTimer2:start()
-	biiweeklyTimer:start()
+	biweeklyTimer:start()
 	projectorScreensaverWatcher:start()
 end
 
