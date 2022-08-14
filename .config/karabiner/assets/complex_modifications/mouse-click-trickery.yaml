@@ -1,5 +1,5 @@
 title: "🐁 Mouse Click Trickery"
-version: "0.1"
+version: "1.2"
 maintainers:
   - pseudometa
 import-url: karabiner://karabiner/assets/complex_modifications/import?url=https://github.com/chrisgrieser/dotfiles/blob/main/.config/karabiner/assets/complex_modifications/mouse-click-trickery.json
