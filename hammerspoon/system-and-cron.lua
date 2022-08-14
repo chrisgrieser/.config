@@ -52,9 +52,18 @@ end
 shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
 shutDownWatcher:start()
 
-function systemWake (eventType)
+
+--------------------------------------------------------------------------------
+-- SYSTEM WAKE
+function officeWake (eventType)
+	if not(eventType == hs.caffeinate.watcher.screensDidWake) then return end
+	officeModeLayout()
+	reloadAllMenubarItems()
+	gitDotfileSync("wake")
+end
+
+function homeWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemDidWake or eventType == hs.caffeinate.watcher.screensDidWake) then return end
-	if not isIMacAtHome() then return end
 	if appIsRunning("Obsidian") and appIsRunning("Discord") then
 		hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
 	end
@@ -81,19 +90,13 @@ function systemWake (eventType)
 		end
 	end)
 end
-wakeWatcher = hs.caffeinate.watcher.new(systemWake)
+if isIMacAtHome() then
+	wakeWatcher = hs.caffeinate.watcher.new(homeWake)
+else
+	wakeWatcher = hs.caffeinate.watcher.new(officeWake)
+end
 wakeWatcher:start()
 
---------------------------------------------------------------------------------
--- OFFICE
-function screenWake (eventType)
-	if not(eventType == hs.caffeinate.watcher.screensDidWake or hs.caffeinate.watcher.screensaverWillStop) then return end
-	officeModeLayout()
-	reloadAllMenubarItems()
-	gitDotfileSync("wake")
-end
-screenWakeWatcher = hs.caffeinate.watcher.new(screenWake)
-if isAtOffice() then screenWakeWatcher:start() end
 
 --------------------------------------------------------------------------------
 -- CRONJOBS AT HOME
@@ -124,8 +127,6 @@ biweeklyTimer = hs.timer.doAt("02:00", "02d", function()
 	log ("🕝2️⃣ biweekly ("..deviceName()..")", "./logs/some.log")
 end, true)
 
-
-
 dailyEveningTimer = hs.timer.doAt("21:00", "01d", function ()
 	setDarkmode(true)
 end)
@@ -138,18 +139,10 @@ end
 projectorScreensaverWatcher = hs.caffeinate.watcher.new(projectorScreensaverStop)
 
 if isIMacAtHome() then
-	-- catchTimer:start()
 	dailyEveningTimer:start()
 	sleepTimer:start()
 	sleepTimer2:start()
 	biweeklyTimer:start()
 	projectorScreensaverWatcher:start()
 end
-
--- catchTimer = hs.timer.doAt("02:00", "12h", function()
--- 	openIfNotRunning("Catch")
--- 	runDelayed(10, function () killIfRunning("Catch") end)
--- 	log ("🫴 Catch Torrents ("..deviceName()..")", "./logs/some.log")
--- end, true)
-
 
