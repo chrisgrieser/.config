@@ -21,28 +21,23 @@ bookmarkWatcher:start()
 --------------------------------------------------------------------------------
 
 -- Download Folder Badge
+downloadFolder=home.."Downloaded"
 function downloadFolderBadge ()
 	-- requires "fileicon" being installed
-	hs.execute([[
-		export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
-		folder="$HOME/Downloaded"
+	hs.execute("folder='"..downloadFolder.."' ; "..
+		[[export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 		icons_path="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Custom Icons/Download Folder"
 		itemCount=$(ls "$folder" | wc -l)
 		itemCount=$((itemCount-1)) # reduced by one to account for the "?Icon" file in the folder
 
-		# cache necessary to prevent recursion of icon change triggering pathwatcher again
-		cache_location="/Library/Caches/dlFolderLastChange"
-		if test ! -e "$cache_location" ; then
-			if test $itemCount -gt 0 ; then
-				echo "badge" > "$cache_location"
-			else
-				touch "$cache_location"
-			fi
+		cache_location="/Library/Caches/dlFolderLastChange"  # cache necessary to prevent recursion of icon change triggering pathwatcher again
+		test ! -e "$cache_location" || touch "$cache_location"
+		if test $itemCount -gt 0 ; then
+			echo "badge" > "$cache_location"
 		fi
 		last_change=$(cat "$cache_location")
 
-		# using test instead of square brackets cause lua
-		if test $itemCount -gt 0 && test -z "$last_change" ; then
+		if test $itemCount -gt 0 && test -z "$last_change" ; then  # using test instead of square brackets cause lua
 			fileicon set "$folder" "$icons_path/with Badge.icns"
 			echo "badge" > "$cache_location"
 			killall Dock
@@ -53,7 +48,7 @@ function downloadFolderBadge ()
 		fi
 	]])
 end
-downloadFolderWatcher = hs.pathwatcher.new(home.."/Downloaded", downloadFolderBadge)
+downloadFolderWatcher = hs.pathwatcher.new(home.."Downloaded", downloadFolderBadge)
 if isIMacAtHome() then downloadFolderWatcher:start() end
 
 --------------------------------------------------------------------------------
