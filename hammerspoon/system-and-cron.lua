@@ -82,6 +82,7 @@ function homeWake (eventType)
 		-- set light mode if waking between 6:00 and 19:00
 		if currentTimeHours < 20 and currentTimeHours > 6 then
 			setDarkmode(false)
+			notify("bla")
 		else
 			setDarkmode(true)
 		end
