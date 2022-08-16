@@ -64,9 +64,7 @@ end
 
 function homeWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemDidWake or eventType == hs.caffeinate.watcher.screensDidWake) then return end
-	if appIsRunning("Obsidian") and appIsRunning("Discord") then
-		hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
-	end
+	local currentTimeHours = hs.timer.localTime() / 60 / 60
 
 	if isProjector() then movieModeLayout()
 	else homeModeLayout() end
@@ -82,7 +80,6 @@ function homeWake (eventType)
 	runDelayed(1, function()
 		twitterrificAction("scrollup")
 		-- set light mode if waking between 6:00 and 19:00
-		local currentTimeHours = hs.timer.localTime() / 60 / 60
 		if currentTimeHours < 20 and currentTimeHours > 6 then
 			setDarkmode(false)
 		else
