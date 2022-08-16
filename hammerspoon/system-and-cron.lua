@@ -63,30 +63,23 @@ function officeWake (eventType)
 end
 
 function homeWake (eventType)
-	if not(eventType == hs.caffeinate.watcher.systemDidWake or eventType == hs.caffeinate.watcher.screensDidWake) then return end
+	if not(eventType == hs.caffeinate.watcher.systemDidWake) then return end
 	local currentTimeHours = hs.timer.localTime() / 60 / 60
 
 	if isProjector() then movieModeLayout()
 	else homeModeLayout() end
 
-	-- get reminders after 6:00
-	if currentTimeHours > 6 then
+	if currentTimeHours < 20 and currentTimeHours > 6 then
 		hs.shortcuts.run("Send Reminders due today to Drafts")
+		setDarkmode(false)
+	else
+		setDarkmode(true)
 	end
 
 	reloadAllMenubarItems()
 	gitDotfileSync("wake")
 
-	runDelayed(1, function()
-		twitterrificAction("scrollup")
-		-- set light mode if waking between 6:00 and 19:00
-		if currentTimeHours < 20 and currentTimeHours > 6 then
-			setDarkmode(false)
-			notify("bla")
-		else
-			setDarkmode(true)
-		end
-	end)
+	runDelayed(1, function() twitterrificAction("scrollup") end)
 end
 if isIMacAtHome() then
 	wakeWatcher = hs.caffeinate.watcher.new(homeWake)
