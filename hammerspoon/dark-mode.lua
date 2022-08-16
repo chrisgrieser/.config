@@ -65,7 +65,7 @@ end
 function setDarkmode (toDark)
 	if not(isDarkMode()) and toDark then toggleDarkMode() end
 	if isDarkMode() and not(toDark) then toggleDarkMode() end
-	log("🌒 Dark Mode: "..(isDarkMode()).." ("..deviceName()..")", "./logs/some.log")
+	log("🌒 Dark Mode: "..(tostring(isDarkMode())).." ("..deviceName()..")", "./logs/some.log")
 end
 
 function manualToggleDarkmode()
