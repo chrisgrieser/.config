@@ -54,6 +54,7 @@ map a passNextKey
 map gf nextFrame
 
 " Modes
+map I enterInsertMode
 map v enterVisualMode
 map V enterVisualLineMode
 
