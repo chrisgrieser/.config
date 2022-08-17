@@ -50,7 +50,7 @@ function downloadFolderBadge ()
 	]])
 end
 downloadFolderWatcher = hs.pathwatcher.new(downloadFolder, downloadFolderBadge)
-if isIMacAtHome() then downloadFolderWatcher:start() end
+downloadFolderWatcher:start()
 
 --------------------------------------------------------------------------------
 
