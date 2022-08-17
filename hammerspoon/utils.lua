@@ -21,7 +21,7 @@ function isAtMother()
 	end
 end
 
-function isIMacAtHome ()
+function isIMacAtHome()
 	local iMacFirstScreen = hs.screen.primaryScreen():name() == "Built-in Retina Display"
 	local iMacSecondScreen
 	if #hs.screen.allScreens() > 1 then
@@ -34,7 +34,9 @@ end
 
 
 function isProjector()
-	return hs.screen.primaryScreen():name() == "ViewSonic PJ"
+	local projectorHelmholtz = hs.screen.primaryScreen():name() == "ViewSonic PJ"
+	local tvLeuthinger = hs.screen.primaryScreen():name() == "sonic"
+	return projectorHelmholtz or tvLeuthinger
 end
 
 function isAtOffice()
