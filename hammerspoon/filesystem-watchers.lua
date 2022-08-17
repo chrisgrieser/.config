@@ -6,16 +6,16 @@ fileHub = home.."/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 --------------------------------------------------------------------------------
 
 -- BRAVE Bookmarks synced to Chrome Bookmarks (needed for Alfred)
+browserFolder=os.getenv("HOME").."/Library/Application Support/BraveSoftware/Brave-Browser/"
 function bookmarkSync()
-	hs.execute([[
-		BROWSER="BraveSoftware/Brave-Browser"
-		mkdir -p "$HOME/Library/Application Support/Google/Chrome/Default"
-		cp "$HOME/Library/Application Support/$BROWSER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
-		cp "$HOME/Library/Application Support/$BROWSER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
+	hs.execute("BROWSER_FOLDER='"..browserFolder.."' ; "..
+		[[mkdir -p "$HOME/Library/Application Support/Google/Chrome/Default"
+		cp "$BROWSER_FOLDER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
+		cp "$BROWSER_FOLDER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
 	]])
+	log ("🔖 Bookmark Sync ("..deviceName()..")", "./logs/some.log")
 end
-BrowserBookmarks = home.."/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks"
-bookmarkWatcher = hs.pathwatcher.new(BrowserBookmarks, bookmarkSync)
+bookmarkWatcher = hs.pathwatcher.new(browserFolder.."Default/Bookmarks", bookmarkSync)
 bookmarkWatcher:start()
 
 --------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ function downloadFolderBadge ()
 		fi
 	]])
 end
-downloadFolderWatcher = hs.pathwatcher.new(home.."Downloaded", downloadFolderBadge)
+downloadFolderWatcher = hs.pathwatcher.new(downloadFolder, downloadFolderBadge)
 if isIMacAtHome() then downloadFolderWatcher:start() end
 
 --------------------------------------------------------------------------------
@@ -82,15 +82,12 @@ function fromFileHub(files)
 			local _, folderSlashes = folder:gsub("/", "")
 			return fileSlashes > folderSlashes
 		end
-
 		if isInSubdirectory(file, fileHub) then return end
-		fileName = file:gsub(".*/","")
+		local fileName = file:gsub(".*/","")
 
 		-- delete alfredworkflows and ics
 		if fileName:sub(-15) == ".alfredworkflow" or fileName:sub(-4) == ".ics" then
-			runDelayed(3, function ()
-				hs.execute('mv -f "'..file..'" "$HOME/.Trash"')
-			end)
+			runDelayed(3, function () hs.execute('mv -f "'..file..'" "$HOME/.Trash"') end)
 
 		-- vimium backup
 		elseif fileName == "vimium-options.json" then
@@ -103,6 +100,7 @@ function fromFileHub(files)
 		-- visualised keyboard layouts
 		elseif fileName:match("base%-keyboard%-layout%.%w+") or fileName:match("app%-switcher%-layout%.%w+") or fileName:match("vimrc%-remapping%.%w+") or fileName:match("marta%-key%-bindings%.%w+") or fileName:match("hyper%-bindings%-layout%.%w+") or fileName:match("single%-keystroke%-bindings%.%w+") then
 			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/visualized keyboard layout/"')
+
 		end
 	end
 end
