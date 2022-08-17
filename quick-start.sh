@@ -8,9 +8,8 @@ git clone git@github.com:chrisgrieser/shimmering-obsidian.git
 git clone git@github.com:chrisgrieser/alfred-bibtex-citation-picker.git
 git clone git@github.com:chrisgrieser/pdf-annotation-extractor-alfred.git
 
-#-------------------------------------------------------------------------------
 
-# create all symlinks in the appropriate locations for everything
+# CREATE ALL SYMLINKS IN THE APPROPRIATE LOCATIONS
 #-------------------------------------------------------------------------------
 DOTFILE_FOLDER="$(dirname "$0")"
 
