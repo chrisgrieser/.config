@@ -35,7 +35,7 @@ end
 
 function isProjector()
 	local projectorHelmholtz = hs.screen.primaryScreen():name() == "ViewSonic PJ"
-	local tvLeuthinger = hs.screen.primaryScreen():name() == "sonic"
+	local tvLeuthinger = hs.screen.primaryScreen():name() == "TV_MONITOR"
 	return projectorHelmholtz or tvLeuthinger
 end
 
