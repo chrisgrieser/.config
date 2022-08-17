@@ -478,7 +478,7 @@ end
 function controlSpace ()
 	if frontapp() == "Finder" or frontapp() == "Script Editor" then
 		size = "centered"
-	elseif isIMacAtHome() then
+	elseif isIMacAtHome() or isAtMother() then
 		local currentWin = hs.window.focusedWindow()
 		if isPseudoMaximized(currentWin) then
 			size = "maximized"
