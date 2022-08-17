@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>279C338C-5842-421C-A857-FBD9552F5A2C</string>
+				<string>D6F7AD54-C4BD-4B8F-8D32-D5680EECB192</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -26,31 +26,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>669EC31A-C9B1-4515-85BA-4809329A85F8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>279C338C-5842-421C-A857-FBD9552F5A2C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4610619C-F64A-42DF-B3B5-F2E14447FA42</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>F0F9EB21-50B8-4C2D-BCDD-AF1F38D448BB</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>D6F7AD54-C4BD-4B8F-8D32-D5680EECB192</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -516,27 +491,6 @@ return "{query}"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⛔️ No Custom icon defined</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>4610619C-F64A-42DF-B3B5-F2E14447FA42</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -552,6 +506,27 @@ return "{query}"</string>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>787AA6A6-CD07-447C-8D73-F4FCD1FEC10D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<true/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Icon updated</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D6F7AD54-C4BD-4B8F-8D32-D5680EECB192</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -600,38 +575,6 @@ return "{query}"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string></string>
-						<key>outputlabel</key>
-						<string>none</string>
-						<key>uid</key>
-						<string>F0F9EB21-50B8-4C2D-BCDD-AF1F38D448BB</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>updated</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>279C338C-5842-421C-A857-FBD9552F5A2C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -647,27 +590,6 @@ return "{query}"</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>1DEB7DC6-BC1F-4E24-8930-2D157EF66CE1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<true/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Icon updated</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>D6F7AD54-C4BD-4B8F-8D32-D5680EECB192</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -695,6 +617,21 @@ return "{query}"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>custom-icon-updater.sh</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>5E00EB78-1FAB-400E-B437-E867401108F0</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -712,21 +649,6 @@ return "{query}"</string>
 			<string>ADC0722C-95D6-4BDE-B235-615784A424DA</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>custom-icon-updater.sh</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>5E00EB78-1FAB-400E-B437-E867401108F0</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -907,7 +829,7 @@ brew install folderify</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>605</real>
 			<key>ypos</key>
 			<real>415</real>
 		</dict>
@@ -938,15 +860,6 @@ brew install folderify</string>
 			<key>ypos</key>
 			<real>475</real>
 		</dict>
-		<key>279C338C-5842-421C-A857-FBD9552F5A2C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>800</real>
-			<key>ypos</key>
-			<real>435</real>
-		</dict>
 		<key>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</key>
 		<dict>
 			<key>colorindex</key>
@@ -957,15 +870,6 @@ brew install folderify</string>
 			<real>690</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>4610619C-F64A-42DF-B3B5-F2E14447FA42</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>925</real>
-			<key>ypos</key>
-			<real>350</real>
 		</dict>
 		<key>4CA334D9-5DCD-4CEF-986C-3ED4283F6C55</key>
 		<dict>
@@ -990,9 +894,9 @@ brew install folderify</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>570</real>
 		</dict>
 		<key>669EC31A-C9B1-4515-85BA-4809329A85F8</key>
 		<dict>
@@ -1136,9 +1040,9 @@ brew install folderify</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>925</real>
+			<real>765</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>415</real>
 		</dict>
 		<key>DF4BD673-F9B0-471E-9562-239EA93A628A</key>
 		<dict>
