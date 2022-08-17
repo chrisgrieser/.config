@@ -214,6 +214,23 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^org\.hammerspoon\.Hammerspoon$
+  - description: "🅰️💬 Slack"
+    manipulators:
+      - type: basic
+        from:
+          key_code: u
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: down_arrow
+            modifiers:
+              - option
+              - shift
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.tinyspeck\.slackmacgap$
   - description: "🅰️💬 Discord"
     manipulators:
       # ctrl-h & ctrl-l to go back / forward a channel
