@@ -21,7 +21,7 @@ bookmarkWatcher:start()
 --------------------------------------------------------------------------------
 
 -- Download Folder Badge
-downloadFolder=home.."Downloaded"
+downloadFolder=home.."/Downloaded"
 function downloadFolderBadge ()
 	-- requires "fileicon" being installed
 	hs.execute("folder='"..downloadFolder.."' ; "..
