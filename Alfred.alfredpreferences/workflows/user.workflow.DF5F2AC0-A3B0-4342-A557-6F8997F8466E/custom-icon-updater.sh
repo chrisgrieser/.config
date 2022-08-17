@@ -8,9 +8,8 @@ PWA_FOLDER="${pwa_folder/#\~/$HOME}"
 cd "/Applications/" || exit 1
 export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 
-# ----------------------
+#-------------------------------------------------------------------------------
 
-# only app name
 APP_TO_UPDATE=$(basename "$*")
 APP_TO_UPDATE="${APP_TO_UPDATE%.*}" # no extension
 NONE_FOUND=0
@@ -18,13 +17,9 @@ INFO_WINDOW=0
 
 case $APP_TO_UPDATE in
 	"Steam")
-		iconsur set "Steam.app" ;;
+		iconsur set "Steam.app" &> /dev/null ;;
    "zoom.us")
-		iconsur set "zoom.us.app" ;;
-   "PDF Expert")
-		iconsur set "PDF Expert.app" ;;
-	"Subtitles")
-		iconsur -l set "Subtitles.app" ;;
+		iconsur set "zoom.us.app" &> /dev/null ;;
 
    "Transmission")
 		cp "$CUSTOM_ICON_FOLDER/Transmission 2.icns" '/Transmission.app/Contents/Resources/Transmission.icns'
@@ -38,16 +33,13 @@ case $APP_TO_UPDATE in
 		INFO_WINDOW=1 ;;
 		# cp "$CUSTOM_ICON_FOLDER/Alfred Prefs.icns" 'Alfred 4.app/Contents/Preferences/Alfred Preferences.app/Contents/Resources/appicon.icns'
 		# touch 'Alfred 4.app/Contents/Preferences/Alfred Preferences.app/Contents/Resources/appicon.icns' ;;
-	"VLC")
-		cp "$CUSTOM_ICON_FOLDER/VLC.icns" 'VLC.app/Contents/Resources/VLC.icns'
-		touch "VLC.app" ;;
 	"Cryptomator")
 		cp "$CUSTOM_ICON_FOLDER/Cryptomator.icns" 'Cryptomator.app/Contents/Resources/Cryptomator.icns'
 		touch "Cryptomator.app" ;;
 	"Alacritty")
 		cp "$CUSTOM_ICON_FOLDER/Alacritty.icns" 'Alacritty.app/Contents/Resources/alacritty.icns'
 		touch "Alacritty.app" ;;
-	"Sublime")
+	"Sublime Text")
 		cp "$CUSTOM_ICON_FOLDER/Sublime Text Brown.icns" 'Sublime Text.app/Contents/Resources/Sublime Text.icns'
 		touch "Sublime Text.app" ;;
 	"AppCleaner")
@@ -94,35 +86,20 @@ case $APP_TO_UPDATE in
 		cp "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Google Docs.app/Contents/Resources/app.icns"
 		touch "$PWA_FOLDER/Google Docs.app" ;;
 	"Inoreader")
-		iconsur -k "Unread" set "$PWA_FOLDER/Inoreader.app" ;;
+		iconsur -k "Unread" set "$PWA_FOLDER/Inoreader.app" &> /dev/null ;;
 	"Excalidraw")
-		iconsur -l set "$PWA_FOLDER/Excalidraw.app" ;;
-
+		iconsur -l set "$PWA_FOLDER/Excalidraw.app" &> /dev/null ;;
 	"YouTube")
 		cp "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/-YouTube.app/Contents/Resources/app.icns"
 		touch ~"/Video/YouTube.app" ;;
 	"Tagesschau")
-		iconsur set ~"/Video/Tagesschau.app" ;;
+		iconsur set ~"/Video/Tagesschau.app" &> /dev/null ;;
 	"Netflix")
-		iconsur set ~"/Video/Netflix.app" ;;
+		iconsur set ~"/Video/Netflix.app" &> /dev/null ;;
 	"Twitch")
-		iconsur set ~"/Video/Twitch.app" ;;
+		iconsur set ~"/Video/Twitch.app" &> /dev/null ;;
 	"BunnyFap")
-		iconsur --input "$CUSTOM_ICON_FOLDER/BunnyFap.png" --scale 1.1 set "$PWA_FOLDER/BunnyFap.app" ;;
-	"all PWAs")
-		PWA_FOLDER=~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Brave Browser Apps.localized/"
-		CUSTOM_ICON_FOLDER=~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Custom Icons/"
-		cp "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Google Docs.app/Contents/Resources/app.icns"
-		touch "$PWA_FOLDER/Google Docs.app"
-		iconsur -k "Unread" set "$PWA_FOLDER/Inoreader.app"
-		cp "$CUSTOM_ICON_FOLDER/YouTube.icns" ~"/Video/YouTube.app/Contents/Resources/app.icns"
-		touch "$PWA_FOLDER/YouTube.app"
-		iconsur set "$PWA_FOLDER/Netflix.app"
-		iconsur set "$PWA_FOLDER/Twitch.app"
-		iconsur set "$PWA_FOLDER/Tagesschau.app"
-		iconsur --input "$CUSTOM_ICON_FOLDER/BunnyFap.png" --scale 1.1 set "$PWA_FOLDER/BunnyFap.app"
-		;;
-
+		iconsur --input "$CUSTOM_ICON_FOLDER/BunnyFap.png" --scale 1.1 set "$PWA_FOLDER/BunnyFap.app" &> /dev/null ;;
    *)
 		NONE_FOUND=1 ;;
 esac
@@ -131,7 +108,7 @@ if [[ $NONE_FOUND == 0 ]]; then
 	killall "$APP_TO_UPDATE"
 	if [[ $INFO_WINDOW == 0 ]]; then
 		killall "Dock"
-		sleep 2.5
+		sleep 2
 		open -a "$APP_TO_UPDATE"
 		echo -n "$APP_TO_UPDATE" # pass for notification
 	fi

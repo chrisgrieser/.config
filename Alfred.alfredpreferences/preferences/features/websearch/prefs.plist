@@ -63,11 +63,9 @@
 			<key>keyword</key>
 			<string>st</string>
 			<key>text</key>
-			<string>Steam (App)</string>
+			<string>🖥 Steam (App)</string>
 			<key>url</key>
 			<string>steam://openurl/https://store.steampowered.com/search/?term={query}</string>
-			<key>utf8</key>
-			<true/>
 		</dict>
 		<key>627B0197-448D-44B9-A7D0-937AF6872376</key>
 		<dict>
@@ -232,11 +230,9 @@
 			<key>keyword</key>
 			<string>st</string>
 			<key>text</key>
-			<string>Steam (Browser)</string>
+			<string>🌐 Steam (Browser)</string>
 			<key>url</key>
 			<string>https://store.steampowered.com/search/?term={query}</string>
-			<key>utf8</key>
-			<true/>
 		</dict>
 	</dict>
 	<key>onlyShowEnabledInPrefs</key>
