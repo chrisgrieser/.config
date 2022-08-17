@@ -215,7 +215,9 @@ rules:
             bundle_identifiers:
               - ^org\.hammerspoon\.Hammerspoon$
   - description: "🅰️💬 Slack"
+    # https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
     manipulators:
+      # go to next unread message
       - type: basic
         from:
           key_code: u
@@ -227,6 +229,82 @@ rules:
             modifiers:
               - option
               - shift
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.tinyspeck\.slackmacgap$
+      # toggle sidebar
+      - type: basic
+        from:
+          key_code: "1"
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: d
+            modifiers:
+              - command
+              - shift
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.tinyspeck\.slackmacgap$
+      # back in history
+      - type: basic
+        from:
+          key_code: h
+          modifiers:
+            mandatory:
+              - control
+        to:
+          - key_code: semicolon
+            modifiers:
+              - command
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.tinyspeck\.slackmacgap$
+      # forward in history
+      - type: basic
+        from:
+          key_code: l
+          modifiers:
+            mandatory:
+              - control
+        to:
+          - key_code: quote
+            modifiers:
+              - command
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.tinyspeck\.slackmacgap$
+      # next channel
+      - type: basic
+        from:
+          key_code: j
+          modifiers:
+            mandatory:
+              - control
+        to:
+          - key_code: down_arrow
+            modifiers:
+              - option
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.tinyspeck\.slackmacgap$
+      # prev channel
+      - type: basic
+        from:
+          key_code: k
+          modifiers:
+            mandatory:
+              - control
+        to:
+          - key_code: up_arrow
+            modifiers:
+              - option
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -331,7 +409,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.hnc\.Discord$
-      # emo[o]ji reaction to msg above
+      # em[o]ji reaction to msg above
       - type: basic
         from:
           key_code: o
