@@ -147,6 +147,9 @@ matches:
     word: true
   - trigger: blabb
     replace: blubb
-
   - trigger: woudl
     replace: would
+  - trigger: calender
+    replace: calendar
+    propagate_case: true
+
