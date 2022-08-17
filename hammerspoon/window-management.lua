@@ -4,7 +4,12 @@ require("private")
 
 --------------------------------------------------------------------------------
 -- WINDOW MANAGEMENT UTILS
-pseudoMaximized = {x=0, y=0, w=0.815, h=1}
+if (isIMacAtHome()) then
+	pseudoMaximized = {x=0, y=0, w=0.815, h=1}
+else
+	pseudoMaximized = {x=0, y=0, w=0.7875, h=1}
+end
+
 maximized = hs.layout.maximized
 wf = hs.window.filter
 if isAtOffice() then
@@ -176,7 +181,42 @@ function movieModeLayout()
 	killIfRunning("alacritty")
 
 	dockSwitcher("movie")
+end
 
+function motherMovieModeLayout()
+	if not(isProjector()) then return end
+	iMacDisplay:setBrightness(0)
+
+	openIfNotRunning("YouTube")
+	runDelayed(1, function () openIfNotRunning("YouTube") end) -- safety redundancy
+
+	killIfRunning("Finder")
+	killIfRunning("Obsidian")
+	killIfRunning("Marta")
+	killIfRunning("Drafts")
+	killIfRunning("Slack")
+	killIfRunning("Discord")
+	killIfRunning("Mimestream")
+	killIfRunning("Alfred Preferences")
+	killIfRunning("Sublime Text")
+	killIfRunning("alacritty")
+end
+
+function motherHomeModeLayout()
+	if not(isAtMother()) or isProjector() then return end
+
+	openIfNotRunning("Discord")
+	openIfNotRunning("Mimestream")
+	openIfNotRunning("Brave Browser")
+	openIfNotRunning("Twitterrific")
+	openIfNotRunning("Drafts")
+	killIfRunning("YouTube")
+	killIfRunning("Netflix")
+	killIfRunning("IINA")
+	killIfRunning("Twitch")
+	killIfRunning("Finder")
+
+	sublimeFontSize(15)
 end
 
 function homeModeLayout ()
@@ -265,17 +305,23 @@ function officeModeLayout ()
 	end)
 end
 
---------------------------------------------------------------------------------
--- MULTI DISPLAY
-function displayCountWatcher()
-	if (isProjector()) then
+function setLayout()
+	if isAtOffice() then
+		officeModeLayout()
+	elseif isProjector() and isIMacAtHome() then
 		movieModeLayout()
-	elseif (isIMacAtHome()) then
+	elseif isIMacAtHome() and not(isProjector()) then
 		homeModeLayout()
+	elseif isAtMother()() and isProjector() then
+		motherHomeModeLayout()
+	elseif isAtMother()() and not(isProjector()) then
+		motherMovieModeLayout()
 	end
 end
-displayWatcher = hs.screen.watcher.new(displayCountWatcher)
-displayWatcher:start()
+--------------------------------------------------------------------------------
+-- MULTI DISPLAY
+displayCountWatcher = hs.screen.watcher.new(setLayout)
+displayCountWatcher:start()
 
 -- Open windows always on the screen where the mouse is
 function moveWindowToMouseScreen(win)
@@ -453,14 +499,7 @@ hotkey(hyper, "left", function() moveResizeCurWin("left") end)
 hotkey(hyper, "pagedown", moveToOtherDisplay)
 hotkey(hyper, "pageup", moveToOtherDisplay)
 hotkey({"ctrl"}, "space", controlSpace)
-
-hotkey(hyper, "home", function()
-	if isAtOffice() then officeModeLayout()
-	elseif isProjector() then movieModeLayout()
-	else homeModeLayout()
-	end
-	twitterrificAction("scrollup")
-end)
+hotkey(hyper, "home", setLayout)
 
 hotkey(hyper, "X", function() vsplit("switch") end)
 hotkey(hyper, "C", function() vsplit("unsplit") end)

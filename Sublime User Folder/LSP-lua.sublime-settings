@@ -31,6 +31,7 @@
 			"killIfRunning",
 			"isAtOffice",
 			"isProjector",
+			"isAtMother",
 		],
       "Lua.diagnostics.disable": ["lowercase-global"],
 	}
