@@ -203,8 +203,6 @@ function motherMovieModeLayout()
 end
 
 function motherHomeModeLayout()
-	if not(isAtMother()) or isProjector() then return end
-
 	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
 	openIfNotRunning("Brave Browser")
@@ -220,8 +218,6 @@ function motherHomeModeLayout()
 end
 
 function homeModeLayout ()
-	if not(isIMacAtHome()) or isProjector() then return end
-
 	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
 	openIfNotRunning("Slack")
