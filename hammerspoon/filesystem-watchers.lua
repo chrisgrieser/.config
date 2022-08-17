@@ -89,8 +89,7 @@ function fromFileHub(files)
 		-- delete alfredworkflows and ics
 		if fileName:sub(-15) == ".alfredworkflow" or fileName:sub(-4) == ".ics" then
 			runDelayed(3, function ()
-				hs.applescript('set toDelete to "'..file..'" as POSIX file\n'..
-					'tell application "Finder" to delete toDelete')
+				hs.execute('mv -f "'..file..'" "$HOME/.Trash"')
 			end)
 
 		-- vimium backup
