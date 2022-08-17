@@ -151,19 +151,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>52A3B43D-E2BB-4CB2-9CED-9FD7917F57DF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6A8148B6-930D-4213-9DC4-2E33F591F8BD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>543BDD79-857B-47FF-B16B-66E2D0B7E8F5</key>
 		<array>
 			<dict>
@@ -586,50 +573,6 @@ tell application "System Preferences"	activate	reveal pane id "com.apple.prefe
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>--based on https://apple.stackexchange.com/questions/217117/applescript-for-specific-system-preferences-panetell application "System Preferences"	activate	-- get the name of every anchor of pane id "com.apple.preference.security"	reveal anchor "General" of pane id "com.apple.preference.security"end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>6A8148B6-930D-4213-9DC4-2E33F591F8BD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>permission</string>
-				<key>subtext</key>
-				<string>System Preferences.app</string>
-				<key>text</key>
-				<string>👨‍💻Grant Script Permission</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>52A3B43D-E2BB-4CB2-9CED-9FD7917F57DF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -702,7 +645,7 @@ tell application "System Preferences"	activate	reveal pane id "com.apple.prefe
 				<key>subtext</key>
 				<string>System Preferences.app</string>
 				<key>text</key>
-				<string>🍏 Grant App Permissions – Accessibility</string>
+				<string>Grant Permissions</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -2044,15 +1987,6 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
-		<key>52A3B43D-E2BB-4CB2-9CED-9FD7917F57DF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
 		<key>543BDD79-857B-47FF-B16B-66E2D0B7E8F5</key>
 		<dict>
 			<key>colorindex</key>
@@ -2122,15 +2056,6 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<real>235</real>
 			<key>ypos</key>
 			<real>940</real>
-		</dict>
-		<key>6A8148B6-930D-4213-9DC4-2E33F591F8BD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>235</real>
-			<key>ypos</key>
-			<real>15</real>
 		</dict>
 		<key>6C3D67FF-3F64-41B4-A2E2-095301BD8267</key>
 		<dict>
