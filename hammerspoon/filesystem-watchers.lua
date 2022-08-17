@@ -23,6 +23,7 @@ bookmarkWatcher:start()
 -- Download Folder Badge
 downloadFolder=home.."/Downloaded"
 function downloadFolderBadge ()
+	notify("tst")
 	-- requires "fileicon" being installed
 	hs.execute("folder='"..downloadFolder.."' ; "..
 		[[export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
