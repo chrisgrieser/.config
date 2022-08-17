@@ -53,8 +53,8 @@ BROWSER="Brave Browser"
 ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
 
 # Übersicht
-[[ -e ~"/Library/Application Support/Übersicht/widgets/" ]] && rm -rf ~"/Library/Application Support/Übersicht/widgets/"
-ln -sf "$DOTFILE_FOLDER/ubersicht" ~"/Library/Application Support/Übersicht/widgets"
+# [[ -e ~"/Library/Application Support/Übersicht/widgets/" ]] && rm -rf ~"/Library/Application Support/Übersicht/widgets/"
+# ln -sf "$DOTFILE_FOLDER/ubersicht" ~"/Library/Application Support/Übersicht/widgets"
 
 #-------------------------------------------------------------------------------
 # already set up, no need to run again.
