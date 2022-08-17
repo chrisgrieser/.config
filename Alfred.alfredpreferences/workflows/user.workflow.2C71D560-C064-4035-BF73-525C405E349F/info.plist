@@ -173,11 +173,11 @@ end run</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>41</integer>
+				<integer>47</integer>
 				<key>hotmod</key>
-				<integer>1048576</integer>
+				<integer>262144</integer>
 				<key>hotstring</key>
-				<string>Ö</string>
+				<string>.</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
