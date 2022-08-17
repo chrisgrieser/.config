@@ -7,6 +7,7 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
+		"NeoVintageous",
 	],
 	"installed_packages":
 	[
@@ -38,7 +39,6 @@
 		"Package Control",
 		"Status Bar JsonPath",
 		"SublimeLinter",
-		"SublimeLinter-annotations",
 		"SublimeLinter-contrib-markdownlint",
 		"SublimeLinter-contrib-yamllint",
 		"SublimeLinter-eslint",

@@ -4,13 +4,12 @@
 <dict>
 	<key>scope</key>
 	<array>
+		<string>~/dotfiles</string>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia</string>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente</string>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder</string>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/PDFs</string>
 		<string>~/RomComs/-new</string>
-		<string>~/Video</string>
 	</array>
 </dict>
 </plist>
