@@ -400,10 +400,10 @@ rules:
         to:
           - key_code: tab
           - key_code: vk_none
-            hold_down_milliseconds: 40
+            hold_down_milliseconds: 50
           - key_code: up_arrow
           - key_code: vk_none
-            hold_down_milliseconds: 40
+            hold_down_milliseconds: 50
           - key_code: r
         conditions:
           - type: frontmost_application_if
@@ -419,10 +419,10 @@ rules:
         to:
           - key_code: tab
           - key_code: vk_none
-            hold_down_milliseconds: 40
+            hold_down_milliseconds: 50
           - key_code: up_arrow
           - key_code: vk_none
-            hold_down_milliseconds: 40
+            hold_down_milliseconds: 50
           - key_code: close_bracket
         conditions:
           - type: frontmost_application_if
