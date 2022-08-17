@@ -13,6 +13,14 @@ function deviceName()
 	return name
 end
 
+function isAtMother()
+	if (deviceName():find("Leuthingerweg")) then
+		return true
+	else
+		return false
+	end
+end
+
 function isIMacAtHome ()
 	local iMacFirstScreen = hs.screen.primaryScreen():name() == "Built-in Retina Display"
 	local iMacSecondScreen
@@ -21,8 +29,9 @@ function isIMacAtHome ()
 	else
 		iMacSecondScreen = false
 	end
-	return iMacFirstScreen or iMacSecondScreen
+	return (iMacFirstScreen or iMacSecondScreen) and not(isAtMother())
 end
+
 
 function isProjector()
 	return hs.screen.primaryScreen():name() == "ViewSonic PJ"
