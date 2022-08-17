@@ -4,7 +4,9 @@
 <dict>
 	<key>scope</key>
 	<array>
+		<string>~/Applications/Brave Browser Apps.localized</string>
 		<string>~/dotfiles</string>
+		<string>~/Downloaded</string>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia</string>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente</string>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder</string>
