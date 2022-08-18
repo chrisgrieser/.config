@@ -81,9 +81,11 @@ function nuke {
 	cd ..
 
 	rm -rf "$LOCAL_REPO"
+	echo "---"
 	echo "Local repo removed."
 	echo
 	echo "Downloading repo again from remote…"
+	echo "---"
 
 	git clone "$SSH_REMOTE"
 	cd "$LOCAL_REPO" || return 1
