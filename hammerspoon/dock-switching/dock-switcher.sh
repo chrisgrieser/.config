@@ -11,8 +11,11 @@ if [[ "$MODE" == "--load" ]]; then
 	if [[ -z "$LAYOUT" ]] ; then
 		echo "Layout to load is missing."
 		exit 1
+	elif [[ ! -e "$DATA_DIR/$LAYOUT.plist" ]]; then
+		echo "Layout '$LAYOUT' does not exist."
+		exit 1
 	fi
-	rm "$DOCK_PLIST"
+	rm "$DOCK_PLIST" || exit 1
 	cp -a "$DATA_DIR/$LAYOUT.plist" "$DOCK_PLIST"
 	defaults import com.apple.dock "$DOCK_PLIST"
 	sleep 0.1
