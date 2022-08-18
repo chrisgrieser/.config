@@ -92,6 +92,8 @@ end
 dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
 dotfilesWatcher:start()
 
+--------------------------------------------------------------------------------
+
 vaultSyncMenuBar = hs.menubar.new()
 function updateVaultSyncStatusMenuBar()
 	local changes, success = hs.execute('cd "'..vaultLocation..'" ; git status --porcelain | wc -l | tr -d " "')
