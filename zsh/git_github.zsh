@@ -46,7 +46,7 @@ alias push="git push"
 alias pull="git pull"
 alias ignored="git status --ignored"
 alias status='git status --short'
-alias log="git log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset%s %Cgreen(%cr) %C(bold blue)<%an> %Creset' --abbrev-commit --date=human"
+alias log="git log --graph --pretty=format:'%C(red)%h%C(reset)%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=human"
 
 # go to git root https://stackoverflow.com/a/38843585
 alias g='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
