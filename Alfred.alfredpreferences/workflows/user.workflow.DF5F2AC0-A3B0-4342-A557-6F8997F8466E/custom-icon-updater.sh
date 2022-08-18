@@ -4,6 +4,8 @@
 
 CUSTOM_ICON_FOLDER="${custom_icon_folder/#\~/$HOME}"
 PWA_FOLDER="${pwa_folder/#\~/$HOME}"
+DEVICE_NAME=$(scutil --get ComputerName | cut -d" " -f2-)
+[[ "$DEVICE_NAME" =~ "Leuthinger" ]] && PWA_FOLDER="$HOME/Applications/Brave Browser Apps.localized"
 
 cd "/Applications/" || exit 1
 export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
@@ -36,7 +38,7 @@ case $APP_TO_UPDATE in
 	"Cryptomator")
 		cp "$CUSTOM_ICON_FOLDER/Cryptomator.icns" 'Cryptomator.app/Contents/Resources/Cryptomator.icns'
 		touch "Cryptomator.app" ;;
-	"Alacritty")
+	"Alacritty"|"alacritty")
 		cp "$CUSTOM_ICON_FOLDER/Alacritty.icns" 'Alacritty.app/Contents/Resources/alacritty.icns'
 		touch "Alacritty.app" ;;
 	"Sublime Text")
@@ -79,26 +81,23 @@ case $APP_TO_UPDATE in
 		# cp "$CUSTOM_ICON_FOLDER/Mail_fancy.icns" 'Mimestream.app/Contents/Resources/AppIcon.icns'
 		# touch "Mimestream.app" ;;
 
-	"Docs")
+	"Docs"|"Google Docs")
 		cp "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Docs.app/Contents/Resources/app.icns"
 		touch "$PWA_FOLDER/Docs.app" ;;
-	"Google Docs")
-		cp "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Google Docs.app/Contents/Resources/app.icns"
-		touch "$PWA_FOLDER/Google Docs.app" ;;
 	"Inoreader")
 		iconsur -k "Unread" set "$PWA_FOLDER/Inoreader.app" &> /dev/null ;;
 	"Excalidraw")
 		iconsur -l set "$PWA_FOLDER/Excalidraw.app" &> /dev/null ;;
-	"YouTube")
-		cp "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/-YouTube.app/Contents/Resources/app.icns"
-		touch ~"/Video/YouTube.app" ;;
+	"YouTube"|"Youtube")
+		cp "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
+		touch "$PWA_FOLDER/YouTube.app" ;;
 	"Tagesschau")
-		iconsur set ~"/Video/Tagesschau.app" &> /dev/null ;;
+		iconsur set "$PWA_FOLDER/Tagesschau.app" &> /dev/null ;;
 	"Netflix")
-		iconsur set ~"/Video/Netflix.app" &> /dev/null ;;
-	"Twitch")
-		iconsur set ~"/Video/Twitch.app" &> /dev/null ;;
-	"BunnyFap")
+		iconsur set "$PWA_FOLDER/Netflix.app" &> /dev/null ;;
+	"Twitch"|"Twitch.tv")
+		iconsur set "$PWA_FOLDER/Twitch.app" &> /dev/null ;;
+	"BunnyFap"|"Bunnyfap")
 		iconsur --input "$CUSTOM_ICON_FOLDER/BunnyFap.png" --scale 1.1 set "$PWA_FOLDER/BunnyFap.app" &> /dev/null ;;
    *)
 		NONE_FOUND=1 ;;
