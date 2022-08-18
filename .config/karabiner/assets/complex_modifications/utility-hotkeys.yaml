@@ -11,6 +11,18 @@ rules:
               - shift
         to:
           - key_code: delete_forward
+  - description: 'fn+space → ctrl+space (for Apple Keyboards)'
+    manipulators:
+      - type: basic
+        from:
+          key_code: spacebar
+          modifiers:
+            mandatory:
+              - fn
+        to:
+          - key_code: spacebar
+            modifiers:
+              - control
   - description: '🔘 ⌘+J → Expand Word'
     manipulators:
       - type: basic
