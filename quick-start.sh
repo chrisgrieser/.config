@@ -1,4 +1,29 @@
-# to get the config started
+#!/usr/bin/env zsh
+# shellcheck disable=SC2034
+
+#-------------------------------------------------------------------------------
+# ESSENTIAL INSTALLS
+
+# ask for credentials upfront
+sudo -v
+
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew install --no-quarantine macpass alfred hammerspoon sublime-text karabiner-elements brave-browser alacritty
+
+#-------------------------------------------------------------------------------
+# ESSENTIAL SETTINGS
+
+# Sublime
+echo '{"save_selections": false}' > ~"/dotfiles/Sublime User Folder/AutoFoldCode.sublime-settings"
+
+# Hammerspoon
+defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
+
+
+#-------------------------------------------------------------------------------
+# GET DOTFILES
 
 cd ~ || exit 1
 git clone git@github.com:chrisgrieser/dotfiles.git
@@ -9,8 +34,9 @@ git clone git@github.com:chrisgrieser/alfred-bibtex-citation-picker.git
 git clone git@github.com:chrisgrieser/pdf-annotation-extractor-alfred.git
 
 
-# CREATE ALL SYMLINKS IN THE APPROPRIATE LOCATIONS
 #-------------------------------------------------------------------------------
+# CREATE ALL SYMLINKS IN THE APPROPRIATE LOCATIONS
+
 DOTFILE_FOLDER="$(dirname "$0")"
 
 # zsh
@@ -43,34 +69,57 @@ ln -sf "$DOTFILE_FOLDER/hammerspoon" ~/.hammerspoon
 
 # Marta
 ln -sf /Applications/Marta.app/Contents/Resources/launcher /opt/homebrew/bin/marta
-[[ -e ~"/Library/Application Support/org.yanex.marta" ]] && rm -rf ~"/Library/Application Support/org.yanex.marta"
-ln -sf ~"/dotfiles/Marta" ~"/Library/Application Support/org.yanex.marta"
+MARTA_DIR=~"/Library/Application Support/org.yanex.marta"
+if [[ -e "$MARTA_DIR" ]] ; then
+	rm -rf "$MARTA_DIR"
+else
+	mkdir -p "$MARTA_DIR"
+fi
+ln -sf ~"/dotfiles/Marta" "$MARTA_DIR"
 
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"
-[[ -e "$ESPANSO_DIR" ]] && rm -rf "$ESPANSO_DIR"
+if [[ -e "$ESPANSO_DIR" ]] ; then
+	rm -rf "$ESPANSO_DIR"
+else
+	mkdir -p "$ESPANSO_DIR"
+fi
 ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 
 # Sublime
 SUBLIME_USER_DIR=~"/Library/Application Support/Sublime Text/Packages/User"
-[[ -e "$SUBLIME_USER_DIR" ]] && rm -rf "$SUBLIME_USER_DIR"
+SUBLIME_PACKAGES=~"/Library/Application Support/Sublime Text/Installed Packages"
+
+if [[ -e "$SUBLIME_USER_DIR" ]] ; then
+	rm -rf "$SUBLIME_USER_DIR"
+else
+	mkdir -p "$SUBLIME_USER_DIR"
+fi
 ln -sf "$DOTFILE_FOLDER/Sublime User Folder/" "$SUBLIME_USER_DIR"
-[[ -e ~"/Library/Application Support/Sublime Text/Installed Packages/CSS3.sublime-package" ]] && rm -rf ~"/Library/Application Support/Sublime Text/Installed Packages/CSS3.sublime-package"
-ln -sf "$DOTFILE_FOLDER/Sublime Packages/CSS3.sublime-package" ~"/Library/Application Support/Sublime Text/Installed Packages"
+
+[[ -e "$SUBLIME_PACKAGES/CSS3.sublime-package" ]] && rm -rf "$SUBLIME_PACKAGES/CSS3.sublime-package"
+ln -sf "$DOTFILE_FOLDER/Sublime Packages/CSS3.sublime-package" "$SUBLIME_PACKAGES"
 
 # Brave
 BROWSER="Brave Browser"
-[[ -e ~"/Applications/$BROWSER Apps.localized" ]] && rm -rf ~"/Applications/$BROWSER Apps.localized"
+if [[ -e ~"/Applications/$BROWSER Apps.localized" ]] ; then
+	rm -rf ~"/Applications/$BROWSER Apps.localized"
+else
+	mkdir -p ~"/Applications/$BROWSER Apps.localized"
+fi
 ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
 
 # Übersicht
-# [[ -e ~"/Library/Application Support/Übersicht/widgets/" ]] && rm -rf ~"/Library/Application Support/Übersicht/widgets/"
-# ln -sf "$DOTFILE_FOLDER/ubersicht" ~"/Library/Application Support/Übersicht/widgets"
+[[ -e ~"/Library/Application Support/Übersicht/widgets/" ]] && rm -rf ~"/Library/Application Support/Übersicht/widgets/"
+mkdir -p ~"/Library/Application Support/Übersicht/widgets"
+ln -sf "$DOTFILE_FOLDER/ubersicht" ~"/Library/Application Support/Übersicht/widgets"
 
 #-------------------------------------------------------------------------------
-# already set up, no need to run again.
-# Only left here for reference, or when dotfile folder location changes
 #-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+# INFO: already set up, no need to run again.
+# Only left here for reference, or when dotfile folder location changes
 
 # # to keep private stuff out of the dotfile repo
 # ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/hammerspoon-private.lua" "$DOTFILE_FOLDER/hammerspoon/private.lua"
