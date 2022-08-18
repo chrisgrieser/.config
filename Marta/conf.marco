@@ -269,7 +269,6 @@ keyBindings {
         showFoldersOnTop true
     }
 
-
     "F1" null
     "F2" null
     "F3" null

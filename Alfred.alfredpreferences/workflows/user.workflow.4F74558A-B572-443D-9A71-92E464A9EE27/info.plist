@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B289F214-07B2-46B4-9133-5D801C2974FC</string>
+				<string>E0C75078-1F39-43D8-9A91-F93AA5784104</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -83,11 +83,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>58A1FE66-73E0-4673-9D76-9D892B346040</key>
+		<key>616AF66D-17DC-445B-8F58-EBC80A1556CE</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B73E03B4-BBA4-432C-96BE-15E67AEB8A45</string>
+				<string>7715FAE1-9F26-411B-B95B-7D9D41BAA899</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -111,6 +111,31 @@
 		</array>
 		<key>64C686C1-E836-4CB7-AAD4-52E72832714C</key>
 		<array/>
+		<key>7715FAE1-9F26-411B-B95B-7D9D41BAA899</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8E587366-49C7-4513-BFAB-3841D8E89D79</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>00127089-715B-4B70-8A81-BAEAF6AD6CF2</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>97B7CF87-4080-4394-87B8-2074B83B59A7</key>
 		<array>
 			<dict>
@@ -152,36 +177,11 @@
 		</array>
 		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
 		<array/>
-		<key>B289F214-07B2-46B4-9133-5D801C2974FC</key>
+		<key>E0C75078-1F39-43D8-9A91-F93AA5784104</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>58A1FE66-73E0-4673-9D76-9D892B346040</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>B73E03B4-BBA4-432C-96BE-15E67AEB8A45</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8E587366-49C7-4513-BFAB-3841D8E89D79</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>00127089-715B-4B70-8A81-BAEAF6AD6CF2</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</string>
+				<string>616AF66D-17DC-445B-8F58-EBC80A1556CE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -324,6 +324,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/macOS/app.running</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>E0C75078-1F39-43D8-9A91-F93AA5784104</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -362,21 +377,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/macOS/app.running</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>B289F214-07B2-46B4-9133-5D801C2974FC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -402,7 +402,7 @@
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>B73E03B4-BBA4-432C-96BE-15E67AEB8A45</string>
+			<string>7715FAE1-9F26-411B-B95B-7D9D41BAA899</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -423,7 +423,7 @@
 			<key>type</key>
 			<string>alfred.workflow.utility.replace</string>
 			<key>uid</key>
-			<string>58A1FE66-73E0-4673-9D76-9D892B346040</string>
+			<string>616AF66D-17DC-445B-8F58-EBC80A1556CE</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -768,12 +768,12 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>705</real>
 		</dict>
-		<key>58A1FE66-73E0-4673-9D76-9D892B346040</key>
+		<key>616AF66D-17DC-445B-8F58-EBC80A1556CE</key>
 		<dict>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>345</real>
+			<real>335</real>
 			<key>ypos</key>
 			<real>305</real>
 		</dict>
@@ -794,6 +794,13 @@ echo "$backup"</string>
 			<real>240</real>
 			<key>ypos</key>
 			<real>430</real>
+		</dict>
+		<key>7715FAE1-9F26-411B-B95B-7D9D41BAA899</key>
+		<dict>
+			<key>xpos</key>
+			<real>400</real>
+			<key>ypos</key>
+			<real>295</real>
 		</dict>
 		<key>8E587366-49C7-4513-BFAB-3841D8E89D79</key>
 		<dict>
@@ -856,13 +863,6 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>555</real>
 		</dict>
-		<key>B289F214-07B2-46B4-9133-5D801C2974FC</key>
-		<dict>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>275</real>
-		</dict>
 		<key>B49ADC0D-7CDD-4567-A6DE-E7D97662B343</key>
 		<dict>
 			<key>colorindex</key>
@@ -872,12 +872,12 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>790</real>
 		</dict>
-		<key>B73E03B4-BBA4-432C-96BE-15E67AEB8A45</key>
+		<key>E0C75078-1F39-43D8-9A91-F93AA5784104</key>
 		<dict>
 			<key>xpos</key>
-			<real>410</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>275</real>
 		</dict>
 		<key>E91BA4CB-B708-47B1-B606-EC119ECC9301</key>
 		<dict>

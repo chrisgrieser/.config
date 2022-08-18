@@ -16,6 +16,7 @@ bindEverywhere "^Z" undo
 bindEverywhere "^U" kill-whole-line
 bindEverywhere "^P" copy-location
 bindEverywhere "^B" copy-buffer
+bindEverywhere "^V" yank # (the emacs-yank which can be used to re-paste a line killed)
 bindEverywhere '“' quote-all-args # “=alt+2
 bindEverywhere '…' insert-last-word # …=alt+.
 

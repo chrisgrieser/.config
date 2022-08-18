@@ -112,6 +112,7 @@ wf_alacritty:subscribe(wf.windowCreated, function ()
 		moveResizeCurWin("maximized")
 	else
 		moveResizeCurWin("pseudo-maximized")
+		runDelayed(1, function () moveResizeCurWin("pseudo-maximized") end)
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
