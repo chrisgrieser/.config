@@ -154,10 +154,14 @@ wf_finder:subscribe(wf.windowDestroyed, function ()
 end)
 
 -- MARTA
+-- - (pseudo)maximize
+-- - close other tabs when reopening
+-- - quit finder
+-- - quit Marta when no window remaining
 wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow'}
 wf_marta:subscribe(wf.windowCreated, function ()
 	killIfRunning("Finder")
-	runDelayed(0.1, function () -- close other tabs, needed cause: https://github.com/marta-file-manager/marta-issues/issues/896
+	runDelayed(0.1, function () -- close other tabs, needed because: https://github.com/marta-file-manager/marta-issues/issues/896
 		keystroke({"shift"}, "w", 1, hs.application("Marta"))
 	end)
 	if isAtOffice() or isProjector() then
@@ -165,6 +169,11 @@ wf_marta:subscribe(wf.windowCreated, function ()
 	else
 		moveResizeCurWin("pseudo-maximized")
 		hs.application("Twitterrific"):mainWindow():raise()
+	end
+end)
+wf_marta:subscribe(wf.windowDestroyed, function ()
+	if #wf_marta:getWindows() == 0 then
+		hs.application("Marta"):kill()
 	end
 end)
 
