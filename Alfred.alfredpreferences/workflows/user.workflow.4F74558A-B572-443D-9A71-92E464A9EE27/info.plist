@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</string>
+				<string>B289F214-07B2-46B4-9133-5D801C2974FC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -83,6 +83,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>58A1FE66-73E0-4673-9D76-9D892B346040</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B73E03B4-BBA4-432C-96BE-15E67AEB8A45</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>6434A449-59F1-4AD1-B616-B22CC2FC4A6D</key>
 		<array>
 			<dict>
@@ -139,6 +152,44 @@
 		</array>
 		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
 		<array/>
+		<key>B289F214-07B2-46B4-9133-5D801C2974FC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>58A1FE66-73E0-4673-9D76-9D892B346040</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B73E03B4-BBA4-432C-96BE-15E67AEB8A45</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8E587366-49C7-4513-BFAB-3841D8E89D79</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>00127089-715B-4B70-8A81-BAEAF6AD6CF2</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E91BA4CB-B708-47B1-B606-EC119ECC9301</key>
 		<array>
 			<dict>
@@ -256,10 +307,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>paths</key>
+				<array>
+					<string>/System/Volumes/Data/Applications/Alacritty.app</string>
+				</array>
+				<key>toggle</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>8E587366-49C7-4513-BFAB-3841D8E89D79</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>0</integer>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>alacritty</string>
 				<key>focusedappvariable</key>
 				<true/>
 				<key>focusedappvariablename</key>
@@ -276,8 +346,8 @@
 				<integer>2</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>org.yanex.marta</string>
 					<string>io.alacritty</string>
+					<string>org.yanex.marta</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>
@@ -286,6 +356,74 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>01443011-3B15-41D0-8772-EFD75B0FE5B8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/macOS/app.running</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>B289F214-07B2-46B4-9133-5D801C2974FC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>true</string>
+						<key>outputlabel</key>
+						<string>true</string>
+						<key>uid</key>
+						<string>00127089-715B-4B70-8A81-BAEAF6AD6CF2</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>false</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>B73E03B4-BBA4-432C-96BE-15E67AEB8A45</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>58A1FE66-73E0-4673-9D76-9D892B346040</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -359,44 +497,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>timestamp=`date '+%Y-%m-%d_%H-%M'`
-resolved_bkp_dest=~`echo -n $backup_location | sed -e "s/~//"`
-backup="$resolved_bkp_dest""/Alfred-Backup_""$timestamp"".zip"
-vault=~`echo -n $vault_path | sed -e "s/~//"`
-
-# directory change necessary to avoid zipping root folder
-# https://unix.stackexchange.com/questions/245856/zip-a-file-without-including-the-parent-directory
-cd $vault
-zip -r --quiet $backup ./*
-
-# restrict number of backups
-actual_number=$((max_number_of_bkps + 1))
-cd $resolved_bkp_dest
-ls -t | tail -n +$actual_number | tr '\n' '\0' | xargs -0 rm
-
-echo "$backup"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>dotfile-bkp.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A0F4AE0E-4A85-4D7A-AAF1-54C04E9DE25D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -412,6 +512,21 @@ echo "$backup"</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>4852BD0B-45FE-4BD1-9B24-75D32B5EAA7D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Blow</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>A91C3D48-6860-4B50-B5E9-83B5ACFF6C05</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -460,17 +575,40 @@ echo "$backup"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>soundname</key>
-				<string>Blow</string>
-				<key>systemsound</key>
-				<true/>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>timestamp=`date '+%Y-%m-%d_%H-%M'`
+resolved_bkp_dest=~`echo -n $backup_location | sed -e "s/~//"`
+backup="$resolved_bkp_dest""/Alfred-Backup_""$timestamp"".zip"
+vault=~`echo -n $vault_path | sed -e "s/~//"`
+
+# directory change necessary to avoid zipping root folder
+# https://unix.stackexchange.com/questions/245856/zip-a-file-without-including-the-parent-directory
+cd $vault
+zip -r --quiet $backup ./*
+
+# restrict number of backups
+actual_number=$((max_number_of_bkps + 1))
+cd $resolved_bkp_dest
+ls -t | tail -n +$actual_number | tr '\n' '\0' | xargs -0 rm
+
+echo "$backup"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>dotfile-bkp.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>A91C3D48-6860-4B50-B5E9-83B5ACFF6C05</string>
+			<string>A0F4AE0E-4A85-4D7A-AAF1-54C04E9DE25D</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -630,6 +768,15 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>705</real>
 		</dict>
+		<key>58A1FE66-73E0-4673-9D76-9D892B346040</key>
+		<dict>
+			<key>note</key>
+			<string>remove \n</string>
+			<key>xpos</key>
+			<real>345</real>
+			<key>ypos</key>
+			<real>305</real>
+		</dict>
 		<key>6434A449-59F1-4AD1-B616-B22CC2FC4A6D</key>
 		<dict>
 			<key>colorindex</key>
@@ -647,6 +794,13 @@ echo "$backup"</string>
 			<real>240</real>
 			<key>ypos</key>
 			<real>430</real>
+		</dict>
+		<key>8E587366-49C7-4513-BFAB-3841D8E89D79</key>
+		<dict>
+			<key>xpos</key>
+			<real>495</real>
+			<key>ypos</key>
+			<real>190</real>
 		</dict>
 		<key>97B7CF87-4080-4394-87B8-2074B83B59A7</key>
 		<dict>
@@ -689,9 +843,9 @@ echo "$backup"</string>
 			<key>note</key>
 			<string>open Alacritty with config</string>
 			<key>xpos</key>
-			<real>240</real>
+			<real>495</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>330</real>
 		</dict>
 		<key>A91C3D48-6860-4B50-B5E9-83B5ACFF6C05</key>
 		<dict>
@@ -702,6 +856,13 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>555</real>
 		</dict>
+		<key>B289F214-07B2-46B4-9133-5D801C2974FC</key>
+		<dict>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>275</real>
+		</dict>
 		<key>B49ADC0D-7CDD-4567-A6DE-E7D97662B343</key>
 		<dict>
 			<key>colorindex</key>
@@ -710,6 +871,13 @@ echo "$backup"</string>
 			<real>210</real>
 			<key>ypos</key>
 			<real>790</real>
+		</dict>
+		<key>B73E03B4-BBA4-432C-96BE-15E67AEB8A45</key>
+		<dict>
+			<key>xpos</key>
+			<real>410</real>
+			<key>ypos</key>
+			<real>295</real>
 		</dict>
 		<key>E91BA4CB-B708-47B1-B606-EC119ECC9301</key>
 		<dict>

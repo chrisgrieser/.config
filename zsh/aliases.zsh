@@ -38,12 +38,9 @@ alias pip="pip3"
 alias curl="curl -s"
 
 # exa
-# these two as functions, so they can be called by other functions
+# as function, so they can be called by other functions
 function exa (){
 	command exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
-}
-function exagit (){
-	git status --short; echo; exa --long --grid --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git
 }
 
 alias ll='command exa --all --long --git --icons --group-directories-first --sort=modified'
