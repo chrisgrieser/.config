@@ -176,6 +176,7 @@ end
 displayCountWatcher = hs.screen.watcher.new(setLayout)
 displayCountWatcher:start()
 hotkey(hyper, "home", setLayout)
+hotkey({}, "f5", setLayout) -- for apple keyboard
 
 --------------------------------------------------------------------------------
 
@@ -204,4 +205,4 @@ function alwaysOpenOnMouseDisplay(appName, eventType, appObject)
 	end
 end
 launchWhileMultiScreenWatcher = aw.new(alwaysOpenOnMouseDisplay)
-if not(isAtOffice()) then launchWhileMultiScreenWatcher:start() end
+if isIMacAtHome() then launchWhileMultiScreenWatcher:start() end
