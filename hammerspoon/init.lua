@@ -22,8 +22,7 @@ require("usb-watchers")
 require("dark-mode")
 
 -- app-specific
-require("app-watchers")
-require("discord")
+require("app-specific-behavior")
 require("twitterrific-iina")
 
 -- unused
