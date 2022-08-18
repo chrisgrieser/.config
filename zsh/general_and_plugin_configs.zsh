@@ -33,13 +33,15 @@ setopt AUTO_CD # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypasting)
 
 # MAGIC ENTER
-export MAGIC_ENTER_GIT_COMMAND="git status --short"
+export MAGIC_ENTER_GIT_COMMAND="exagit"
 export MAGIC_ENTER_OTHER_COMMAND="exa"
 
 function directoryInspect (){
 	if command git rev-parse --is-inside-work-tree &>/dev/null ; then
 		git status --short
-	elif [[ $(ls | wc -l) -lt 20 ]] ; then
+		echo
+	fi
+	if [[ $(ls | wc -l) -lt 20 ]] ; then
 		exa
 	fi
 }
