@@ -2,6 +2,7 @@ hyper = {"cmd", "alt", "ctrl", "shift"}
 hotkey = hs.hotkey.bind
 keystroke = hs.eventtap.keyStroke
 aw = hs.application.watcher
+wf = hs.window.filter
 
 function trim(str)
 	return (str:gsub("^%s*(.-)%s*$", "%1"))
