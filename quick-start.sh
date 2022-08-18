@@ -43,10 +43,12 @@ osascript -e '
 	end tell' &> /dev/null
 
 #-------------------------------------------------------------------------------
-# DOTFILES
+# DOTFILES / VAULT
 
 cd ~
 git clone git@github.com:chrisgrieser/dotfiles.git
+git clone git@github.com:chrisgrieser/main-vault-backup.git
+mv "main-vault-backup" "Main Vault"
 
 cd ~/dotfiles/Alfred.alfredpreferences/workflows/ || exit 1
 git clone git@github.com:chrisgrieser/shimmering-obsidian.git
