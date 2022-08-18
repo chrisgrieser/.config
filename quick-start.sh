@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034
 
 #-------------------------------------------------------------------------------
-# ESSENTIAL INSTALLS
+# ESSENTIAL
 
 # ask for credentials upfront
 sudo -v
@@ -10,20 +10,38 @@ sudo -v
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew install --no-quarantine macpass alfred hammerspoon sublime-text karabiner-elements brave-browser alacritty
-
-#-------------------------------------------------------------------------------
-# ESSENTIAL SETTINGS
+# Install Essential Apps
+brew install --no-quarantine macpass alfred hammerspoon sublime-text alacritty karabiner-elements brave-browser
 
 # Sublime
+# (file is gitignored as it also saves folding information)
 echo '{"save_selections": false}' > ~"/dotfiles/Sublime User Folder/AutoFoldCode.sublime-settings"
 
 # Hammerspoon
 defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
+defaults write "org.hammerspoon.Hammerspoon" "HSUploadCrashData" 0
+defaults write "org.hammerspoon.Hammerspoon" "MJKeepConsoleOnTopKey" 1
+defaults write "org.hammerspoon.Hammerspoon" "SUEnableAutomaticChecks" 1
 
+# Disable Spotlight cmd+space shortcut
+osascript -e 'tell application "System Preferences"
+	activate
+	reveal anchor "shortcutsTab" of pane id "com.apple.preference.keyboard"
+end tell
+tell application "System Events"
+	tell application process "System Preferences"
+		repeat until (window 1 exists)
+		end repeat
+		tell window 1
+			repeat until (rows of table 1 of scroll area 1 of splitter group 1 of tab group 1 exists)
+			end repeat
+			select (first row of table 1 of scroll area 1 of splitter group 1 of tab group 1 whose value of static text 1 is equal to "Spotlight")
+		end tell
+	end tell
+end tell' &> /dev/null
 
 #-------------------------------------------------------------------------------
-# GET DOTFILES
+# DOTFILES
 
 cd ~ || exit 1
 git clone git@github.com:chrisgrieser/dotfiles.git
@@ -33,9 +51,11 @@ git clone git@github.com:chrisgrieser/shimmering-obsidian.git
 git clone git@github.com:chrisgrieser/alfred-bibtex-citation-picker.git
 git clone git@github.com:chrisgrieser/pdf-annotation-extractor-alfred.git
 
+# load dock from dotfiles
+zsh "$HOME/dotfiles/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
 #-------------------------------------------------------------------------------
-# CREATE ALL SYMLINKS IN THE APPROPRIATE LOCATIONS
+# CREATE SYMLINKS
 
 DOTFILE_FOLDER="$(dirname "$0")"
 
@@ -45,6 +65,10 @@ ln -sf "$DOTFILE_FOLDER/zsh/.zshrc" ~
 [[ -e ~/.zprofile ]] && rm -rf ~/.zprofile
 ln -sf "$DOTFILE_FOLDER/zsh/.zprofile" ~
 ln -sf "$DOTFILE_FOLDER/zsh/.zlogin" ~
+
+# .config
+[[ -e ~/.config ]] && rm -rf ~/.config
+ln -sf "$DOTFILE_FOLDER/.config/" ~/.config
 
 # other dotfiles
 ln -sf "$DOTFILE_FOLDER/.searchlink" ~
@@ -58,10 +82,6 @@ ln -sf "$DOTFILE_FOLDER/linter rcfiles/.markdownlintrc" ~
 ln -sf "$DOTFILE_FOLDER/linter rcfiles/.pylintrc" ~
 ln -sf "$DOTFILE_FOLDER/linter rcfiles/.shellcheckrc" ~
 ln -sf "$DOTFILE_FOLDER/linter rcfiles/.flake8" ~
-
-# .config
-[[ -e ~/.config ]] && rm -rf ~/.config
-ln -sf "$DOTFILE_FOLDER/.config/" ~/.config
 
 # Hammerspoon
 [[ -e ~/.hammerspoon ]] && rm -rf ~/.hammerspoon
@@ -88,8 +108,6 @@ ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 
 # Sublime
 SUBLIME_USER_DIR=~"/Library/Application Support/Sublime Text/Packages/User"
-SUBLIME_PACKAGES=~"/Library/Application Support/Sublime Text/Installed Packages"
-
 if [[ -e "$SUBLIME_USER_DIR" ]] ; then
 	rm -rf "$SUBLIME_USER_DIR"
 else
@@ -97,10 +115,12 @@ else
 fi
 ln -sf "$DOTFILE_FOLDER/Sublime User Folder/" "$SUBLIME_USER_DIR"
 
+SUBLIME_PACKAGES=~"/Library/Application Support/Sublime Text/Installed Packages"
+[[ ! -e "$SUBLIME_PACKAGES" ]] && mkdir -p "$SUBLIME_PACKAGES"
 [[ -e "$SUBLIME_PACKAGES/CSS3.sublime-package" ]] && rm -rf "$SUBLIME_PACKAGES/CSS3.sublime-package"
 ln -sf "$DOTFILE_FOLDER/Sublime Packages/CSS3.sublime-package" "$SUBLIME_PACKAGES"
 
-# Brave
+# Brave PWAs
 BROWSER="Brave Browser"
 if [[ -e ~"/Applications/$BROWSER Apps.localized" ]] ; then
 	rm -rf ~"/Applications/$BROWSER Apps.localized"
@@ -110,9 +130,13 @@ fi
 ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
 
 # Übersicht
-[[ -e ~"/Library/Application Support/Übersicht/widgets/" ]] && rm -rf ~"/Library/Application Support/Übersicht/widgets/"
-mkdir -p ~"/Library/Application Support/Übersicht/widgets"
-ln -sf "$DOTFILE_FOLDER/ubersicht" ~"/Library/Application Support/Übersicht/widgets"
+UEBRSICHT_DIR=~"/Library/Application Support/Übersicht/widgets/"
+if [[ -e "$UEBRSICHT_DIR" ]] ; then
+	rm -rf "$UEBRSICHT_DIR"
+else
+	mkdir -p "$UEBRSICHT_DIR"
+fi
+ln -sf "$DOTFILE_FOLDER/ubersicht" "$UEBRSICHT_DIR"
 
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------

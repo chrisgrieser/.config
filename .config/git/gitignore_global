@@ -16,6 +16,7 @@ node_modules
 *.kdbx
 *.pfx
 *.key
+pw.*
 
 # created with sync issues
 *.icloud

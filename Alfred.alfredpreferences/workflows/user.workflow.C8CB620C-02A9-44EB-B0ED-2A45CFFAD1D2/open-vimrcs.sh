@@ -3,7 +3,7 @@ export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 
 cd ../../..
 
-subl "obsidian.vimrc"
+subl "Obsidian vim/obsidian.vimrc"
 subl "Sublime User Folder/.neovintageousrc"
 
 sleep 2.0

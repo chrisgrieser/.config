@@ -1,7 +1,9 @@
-sudo -v
+#!/usr/bin/env zsh
+# this script assumes Homebrew is already installed
+#-------------------------------------------------------------------------------
 
-# Install Homebrew itself
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# INSTALLS
+sudo -v
 
 sudo gem install anystyle-cli
 pip3 install pdfannots
@@ -10,10 +12,6 @@ pip3 install pdfannots
 # Sign in Bug: https://github.com/mas-cli/mas#-sign-in
 # ➞ sign in manually to start download
 open '/System/Applications/App Store.app'
-
-#-------------------------------------------------------------------------------
-# INSTALLS
-#-------------------------------------------------------------------------------
 
 # shellcheck disable=SC2034
 HOMEBREW_CASK_OPTS="--no-quarantine"
