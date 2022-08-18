@@ -16,16 +16,19 @@ require("scroll-and-cursor")
 require("menubar")
 require("system-and-cron")
 require("window-management")
+require("layout")
 require("filesystem-watchers")
 require("usb-watchers")
 require("dark-mode")
--- require("app-switcher")
--- require("hot-corner-action")
 
 -- app-specific
 require("app-watchers")
 require("discord")
 require("twitterrific-iina")
+
+-- unused
+-- require("app-switcher")
+-- require("hot-corner-action")
 
 --------------------------------------------------------------------------------
 -- System Startup
