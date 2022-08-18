@@ -182,6 +182,6 @@ hotkey(hyper, "right", function() moveResizeCurWin("right") end)
 hotkey(hyper, "left", function() moveResizeCurWin("left") end)
 hotkey(hyper, "pagedown", moveToOtherDisplay)
 hotkey(hyper, "pageup", moveToOtherDisplay)
-hotkey({"ctrl"}, "space", controlSpace)
+hotkey({"ctrl"}, "space", controlSpace) -- fn+space also bound to ctrl+space via Karabiner
 
 

@@ -57,6 +57,8 @@ function motherMovieModeLayout()
 	killIfRunning("Sublime Text")
 	killIfRunning("alacritty")
 	killIfRunning("Twitterrific")
+
+	dockSwitcher("mother-movie")
 end
 
 function motherHomeModeLayout()
@@ -72,6 +74,7 @@ function motherHomeModeLayout()
 	killIfRunning("Finder")
 
 	sublimeFontSize(14)
+	dockSwitcher("home")
 end
 
 function homeModeLayout ()
