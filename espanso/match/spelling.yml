@@ -153,3 +153,6 @@ matches:
     replace: calendar
     propagate_case: true
 
+
+  - trigger: coudl
+    replace: could
