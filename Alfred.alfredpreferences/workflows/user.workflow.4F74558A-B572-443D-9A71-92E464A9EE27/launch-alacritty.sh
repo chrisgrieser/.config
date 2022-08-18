@@ -10,7 +10,7 @@ if [[ "$FRONT_APP" =~ "Finder" ]]; then
 		if (count windows) is not 0 then set pathToOpen to target of window 1 as alias
 		return POSIX path of pathToOpen
 	end tell')
-	[[ -d "$WD" ]] && exit 1
+	[[ -d "$WD" ]] || exit 1
 elif [[ "$FRONT_APP" =~ "sublime_text" ]]; then
 	# using full path makes this work even if `subl` hasn't been added to PATH
 	"/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" --command copy_path
@@ -21,3 +21,4 @@ else
 fi
 
 nohup alacritty --working-directory="$WD" &
+exit
