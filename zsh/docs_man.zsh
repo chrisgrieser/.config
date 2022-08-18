@@ -45,5 +45,5 @@ export LESS_TERMCAP_us=$'\E[1;34m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 # Pager-specific settings
-export LESS='-R --incsearch --ignore-case --HILITE-UNREAD --window=-3 --quit-if-one-screen --no-init --tilde'
+export LESS='-R --ignore-case --HILITE-UNREAD --window=-3 --quit-if-one-screen --no-init --tilde'
 
