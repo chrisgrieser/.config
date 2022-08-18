@@ -7,6 +7,8 @@ killall Obsidian
 
 cd "$OBSI_CONFIG_PATH" || return 1
 ASAR=$(ls obsidian-*.asar)
+# if missing
+# get `obsidian-0.15.9.asar.gz` from https://github.com/obsidianmd/obsidian-releases/releases/tag/v0.15.9
 
 npx asar extract "$ASAR" obsiasar
 rm -f "$ASAR"
