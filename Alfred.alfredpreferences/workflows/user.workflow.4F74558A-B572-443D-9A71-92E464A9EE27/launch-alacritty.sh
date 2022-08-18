@@ -2,12 +2,6 @@
 # shellcheck disable=SC2154,SC2009
 export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 
-# Alacritty already open (pgrep does not work here)
-if pgrep "alacritty" &> /dev/null ; then
-	osascript -e 'tell application "Alacritty" to activate'
-	exit 0
-fi
-
 # if Finder or Sublime are frontmost, use those paths as working directory
 # (same is done from inside Marta, so not needed to be done here)
 FRONT_APP=$(osascript -e 'tell application "System Events" to set frontApp to (name of first process where it is frontmost)')

@@ -1,12 +1,3 @@
-function directoryInspect (){
-	if command git rev-parse --is-inside-work-tree &>/dev/null ; then
-		git status --short
-		echo
-	fi
-	if [[ $(ls | wc -l) -lt 20 ]] ; then
-		exa
-	fi
-}
 
 # draws a separator line with terminal width
 function separator (){
