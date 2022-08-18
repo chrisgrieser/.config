@@ -161,16 +161,11 @@ end
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
 function setLayout()
-	if isAtOffice() then
-		officeModeLayout()
-	elseif isProjector() and isIMacAtHome() then
-		movieModeLayout()
-	elseif isIMacAtHome() and not(isProjector()) then
-		homeModeLayout()
-	elseif isAtMother()() and isProjector() then
-		motherHomeModeLayout()
-	elseif isAtMother()() and not(isProjector()) then
-		motherMovieModeLayout()
+	if isAtOffice() then officeModeLayout()
+	elseif isProjector() and isIMacAtHome() then movieModeLayout()
+	elseif isIMacAtHome() and not(isProjector()) then homeModeLayout()
+	elseif isAtMother()() and isProjector() then motherHomeModeLayout()
+	elseif isAtMother()() and not(isProjector()) then motherMovieModeLayout()
 	end
 end
 

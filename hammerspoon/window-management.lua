@@ -183,6 +183,6 @@ hotkey(hyper, "left", function() moveResizeCurWin("left") end)
 hotkey(hyper, "pagedown", moveToOtherDisplay)
 hotkey(hyper, "pageup", moveToOtherDisplay)
 hotkey({"ctrl"}, "space", controlSpace)
-hotkey({"fn"}, "space", controlSpace) -- for Apple Keyboards
+-- hotkey({"fn"}, "space", controlSpace) -- for Apple Keyboards
 
 
