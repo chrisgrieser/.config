@@ -158,7 +158,7 @@ end)
 -- - close other tabs when reopening
 -- - quit finder
 -- - quit Marta when no window remaining
-wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow'}
+wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow', rejectTitles="^Preferences$"}
 wf_marta:subscribe(wf.windowCreated, function ()
 	killIfRunning("Finder")
 	runDelayed(0.1, function () -- close other tabs, needed because: https://github.com/marta-file-manager/marta-issues/issues/896

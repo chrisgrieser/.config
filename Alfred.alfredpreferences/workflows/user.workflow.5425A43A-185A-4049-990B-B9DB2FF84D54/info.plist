@@ -566,6 +566,21 @@ zsh build.sh "$*"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>soundname</key>
+				<string>Blow</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>440612A1-D74A-4799-A0D6-F88760AF14CF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -581,21 +596,6 @@ zsh build.sh "$*"</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>532ED943-AA0D-43A0-BBCF-3EBEA97FFD31</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Blow</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>440612A1-D74A-4799-A0D6-F88760AF14CF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -678,21 +678,21 @@ lineNo="$*"
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>svg</string>
-				<key>subtext</key>
-				<string></string>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
 				<key>text</key>
-				<string></string>
-				<key>withspace</key>
-				<true/>
+				<string>copied to the clipboard</string>
+				<key>title</key>
+				<string>✅ SVG converted to Data URI</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>D96BC2AD-EC81-4B13-B499-1B0FFC9EB952</string>
+			<string>9E30D1B8-EBD0-418C-B6A3-6E326DAA6032</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -722,21 +722,21 @@ lineNo="$*"
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>svg</string>
+				<key>subtext</key>
+				<string></string>
 				<key>text</key>
-				<string>copied to the clipboard</string>
-				<key>title</key>
-				<string>✅ SVG converted to Data URI</string>
+				<string></string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>9E30D1B8-EBD0-418C-B6A3-6E326DAA6032</string>
+			<string>D96BC2AD-EC81-4B13-B499-1B0FFC9EB952</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -950,7 +950,7 @@ lineNo="$*"
 		<key>shimmering_focus_repo_path</key>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Code/shimmering-focus</string>
 		<key>vault_path</key>
-		<string>~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/</string>
+		<string>~/Main Vault/</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
