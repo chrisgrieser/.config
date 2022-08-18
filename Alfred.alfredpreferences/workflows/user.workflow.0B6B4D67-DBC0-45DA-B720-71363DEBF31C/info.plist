@@ -30,6 +30,16 @@
 				<key>vitoclose</key>
 				<true/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A754B482-7724-4CDE-BA29-B129D0E34709</string>
+				<key>modifiers</key>
+				<integer>8388608</integer>
+				<key>modifiersubtext</key>
+				<string>fn: delete</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
 		</array>
 		<key>0F67F602-B51A-4A3F-A884-72389E1D1FF9</key>
 		<array>
@@ -168,6 +178,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>56CD69F0-DA3F-4EF1-809F-78543F4459A1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A754B482-7724-4CDE-BA29-B129D0E34709</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>49C1CB43-3C55-4085-BBF5-A406476E7309</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -718,6 +741,14 @@ end alfred_script</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>A754B482-7724-4CDE-BA29-B129D0E34709</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>concurrently</key>
@@ -745,27 +776,6 @@ echo -n "$title"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>'{var:tabName}'</string>
-				<key>title</key>
-				<string>🌐 Link File created</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>1B6838B5-A98F-4E36-B645-F289BA31A5F8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -781,6 +791,27 @@ echo -n "$title"</string>
 			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
 			<string>9536809F-DBBD-4982-90BC-427C6D115A14</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>'{var:tabName}'</string>
+				<key>title</key>
+				<string>🌐 Link File created</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>1B6838B5-A98F-4E36-B645-F289BA31A5F8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1122,6 +1153,15 @@ IconIndex=0</string>
 			<real>425</real>
 			<key>ypos</key>
 			<real>690</real>
+		</dict>
+		<key>A754B482-7724-4CDE-BA29-B129D0E34709</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>735</real>
+			<key>ypos</key>
+			<real>485</real>
 		</dict>
 		<key>B1A3DB54-4F96-4E6E-9CF1-E7721DA58232</key>
 		<dict>

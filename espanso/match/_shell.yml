@@ -28,7 +28,6 @@ matches:
   - triggers: ["!zsh", "#!"]
     replace: "#!/usr/bin/env zsh\n"
     label: 🐚 zsh Shebang
-
   - replace: '[[ "$LONG_STRING" =~ "$SHORT_STRING" ]]'
     label: 🐚 String contains other string
   - trigger: "!sed"
@@ -48,7 +47,9 @@ matches:
     replace: "#-------------------------------------------------------------------------------"
   - label: "🐚 Number of Displays (on macOS)"
     replace: "system_profiler SPDisplaysDataType | grep -c resolution"
-
+  - trigger: "!gc"
+    label: "🐚 Guard Clause"
+    replace: '[[ -e "$$|$" ]] && exit 1'
   - label: "🐚 Check whether process is running"
     replace: |
       if pgrep -x "app$|$" > /dev/null; then

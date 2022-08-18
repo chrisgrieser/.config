@@ -20,14 +20,10 @@ require("layouts")
 require("filesystem-watchers")
 require("usb-watchers")
 require("dark-mode")
-
--- unused
--- require("app-switcher")
--- require("hot-corner-action")
-
--- app-specific
 require("app-specific-behavior")
 require("twitterrific-controls")
+if isAtMother() then require("hot-corner-action") end
+-- require("app-switcher")
 
 --------------------------------------------------------------------------------
 -- SYSTEM STARTUP

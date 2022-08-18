@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034,SC2164
 
 #-------------------------------------------------------------------------------
 # ESSENTIAL
@@ -9,6 +9,7 @@ sudo -v
 
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+xcode-select --install
 
 # Install Essential Apps
 brew install --no-quarantine macpass alfred hammerspoon sublime-text alacritty karabiner-elements brave-browser
@@ -24,26 +25,27 @@ defaults write "org.hammerspoon.Hammerspoon" "MJKeepConsoleOnTopKey" 1
 defaults write "org.hammerspoon.Hammerspoon" "SUEnableAutomaticChecks" 1
 
 # Disable Spotlight cmd+space shortcut
-osascript -e 'tell application "System Preferences"
-	activate
-	reveal anchor "shortcutsTab" of pane id "com.apple.preference.keyboard"
-end tell
-tell application "System Events"
-	tell application process "System Preferences"
-		repeat until (window 1 exists)
-		end repeat
-		tell window 1
-			repeat until (rows of table 1 of scroll area 1 of splitter group 1 of tab group 1 exists)
-			end repeat
-			select (first row of table 1 of scroll area 1 of splitter group 1 of tab group 1 whose value of static text 1 is equal to "Spotlight")
-		end tell
+osascript -e '
+	tell application "System Preferences"
+		activate
+		reveal anchor "shortcutsTab" of pane id "com.apple.preference.keyboard"
 	end tell
-end tell' &> /dev/null
+	tell application "System Events"
+		tell application process "System Preferences"
+			repeat until (window 1 exists)
+			end repeat
+			tell window 1
+				repeat until (rows of table 1 of scroll area 1 of splitter group 1 of tab group 1 exists)
+				end repeat
+				select (first row of table 1 of scroll area 1 of splitter group 1 of tab group 1 whose value of static text 1 is equal to "Spotlight")
+			end tell
+		end tell
+	end tell' &> /dev/null
 
 #-------------------------------------------------------------------------------
 # DOTFILES
 
-cd ~ || exit 1
+cd ~
 git clone git@github.com:chrisgrieser/dotfiles.git
 
 cd ~/dotfiles/Alfred.alfredpreferences/workflows/ || exit 1

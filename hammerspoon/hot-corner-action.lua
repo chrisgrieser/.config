@@ -3,13 +3,12 @@
 
 -- HOT CORNER Use "Quick Note" as Pseudo Hot Corner Action
 -- to trigger something else instead
+hs.execute("defaults write com.apple.dock wvous-br-corner -int 14")
 function hotcornerWatcher(appName, eventType)
-	if (eventType == hs.application.watcher.activated) then
-		if (appName == "Notes") then
-			hs.application("Notes"):kill9()
-			hs.shortcuts.run("Keyboard on-screen")
-		end
-	end
+	if not(eventType == aw.activated and appName == "Notes") then return end
+
+	hs.application("Notes"):kill9()
+	hs.shortcuts.run("Keyboard on-screen")
 end
 hotcornerEmulation = hs.application.watcher.new(hotcornerWatcher)
 hotcornerEmulation:start()
