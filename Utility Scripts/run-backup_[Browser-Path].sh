@@ -40,6 +40,7 @@ bkp ~'/Downloaded/' ./Homefolder/Downloaded
 bkp ~'/RomComs/' ./Homefolder/RomComs
 bkp ~'/Library/Mobile Documents/com~apple~CloudDocs/' ./iCloud-Folder
 bkp ~'/dotfiles/' ./Homefolder/dotfiles
+bkp ~'/Main Vault/' "./Homefolder/Main Vault"
 
 # =========================
 
