@@ -10,6 +10,7 @@ function reloadAllMenubarItems ()
 	updateDraftsMenubar()
 	setFileHubCountMenuBar()
 	updateDotfileSyncStatusMenuBar()
+	updateVaultSyncStatusMenuBar()
 end
 
 weatherUpdateMin = 15
@@ -18,11 +19,13 @@ covidUpdateHours = 12
 covidLocationCode = "BE"
 fileHubLocation = os.getenv("HOME").."/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 dotfileLocation = os.getenv("HOME").."/dotfiles/"
+vaultLocation = os.getenv("HOME").."/Main Vault/"
 
 covidIcon ="🦠"
 draftsIcon ="☑️"
 fileHubIcon ="📂"
 syncIcon ="🔁"
+vaultSyncIcon = "🟪"
 
 --------------------------------------------------------------------------------
 
@@ -68,6 +71,7 @@ covidTimer:start()
 --------------------------------------------------------------------------------
 dotfileSyncMenuBar = hs.menubar.new()
 function updateDotfileSyncStatusMenuBar()
+	-- no cd necessary cause hammerspoon is already in dotfile repo
 	local changes, success = hs.execute('git status --porcelain | wc -l | tr -d " "')
 	changes = trim(changes)
 
@@ -85,9 +89,31 @@ function updateDotfileSyncStatusMenuBar()
 	end
 end
 
-
 dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
 dotfilesWatcher:start()
+
+vaultSyncMenuBar = hs.menubar.new()
+function updateVaultSyncStatusMenuBar()
+	local changes, success = hs.execute('cd "'..vaultLocation..'" ; git status --porcelain | wc -l | tr -d " "')
+	changes = trim(changes)
+
+	if tonumber(changes) == 0 or not(success) then
+		vaultSyncMenuBar:removeFromMenuBar() -- also removed clickcallback, which therefore has to be set again
+	else
+		vaultSyncMenuBar:returnToMenuBar()
+		vaultSyncMenuBar:setTitle(vaultSyncIcon.." "..changes)
+		vaultSyncMenuBar:setClickCallback(function ()
+			local lastCommit = hs.execute('cd "'..vaultLocation..'" ; git log -1 --format=%ar')
+			lastCommit = trim(lastCommit)
+			local nextSync = math.floor(repoSyncTimer:nextTrigger() / 60)
+			notify("last commit: "..lastCommit.."\n".."next sync: in "..tostring(nextSync).." min")
+		end)
+	end
+end
+
+vaultWatcher = hs.pathwatcher.new(vaultLocation, updateVaultSyncStatusMenuBar)
+vaultWatcher:start()
+
 
 --------------------------------------------------------------------------------
 draftsCounterMenuBar = hs.menubar.new()

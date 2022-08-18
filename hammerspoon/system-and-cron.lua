@@ -2,11 +2,13 @@ require("menubar")
 require("utils")
 require("window-management")
 require("dark-mode")
+
 --------------------------------------------------------------------------------
+
 -- SYNC
 repoSyncFrequencyMin = 20
 gitDotfileScript = os.getenv("HOME").."/dotfiles/git-dotfile-sync.sh"
-gitVaultScript = os.getenv("HOME").."/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/git vault backup.sh"
+gitVaultScript = os.getenv("HOME").."/Main Vault/Meta/git vault backup.sh"
 
 function gitDotfileSync(arg)
 	if arg then arg = {arg}
@@ -37,7 +39,7 @@ end
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
 	gitDotfileSync()
-	if isIMacAtHome() then gitVaultBackup() end
+	gitVaultBackup()
 end)
 repoSyncTimer:start()
 --------------------------------------------------------------------------------
