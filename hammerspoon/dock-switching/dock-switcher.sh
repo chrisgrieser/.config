@@ -5,6 +5,8 @@ MODE="$1"
 LAYOUT="$2"
 DOCK_PLIST=~"/Library/Preferences/com.apple.dock.plist"
 
+#-------------------------------------------------------------------------------
+
 if [[ "$MODE" == "--load" ]]; then
 	if [[ -z "$LAYOUT" ]] ; then
 		echo "Layout to load is missing."
@@ -15,13 +17,14 @@ if [[ "$MODE" == "--load" ]]; then
 	defaults import com.apple.dock "$DOCK_PLIST"
 	sleep 0.1
 	killall Dock
-	echo "$LAYOUT" > "$DATA_DIR/current"
+	echo "Loaded layout '$LAYOUT'"
 elif [[ "$MODE" == "--save" ]]; then
 	if [[ -z "$LAYOUT" ]] ; then
-		echo "Layout to save to is missing."
+		echo "No layout to save is missing."
 		exit 1
 	fi
-	cp -f ~/Library/Preferences/com.apple.dock.plist "$LAYOUT.plist"
+	cp -f "$DOCK_PLIST" "$DATA_DIR/$LAYOUT.plist"
+	echo "Saved as '$LAYOUT'"
 else
 	echo "Not a valid option."
 	exit 1
