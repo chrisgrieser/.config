@@ -94,8 +94,8 @@ draftsCounterMenuBar = hs.menubar.new()
 function updateDraftsMenubar()
 	local excludeTag1 = "tasklist"
 	local excludeTag2
-	if isIMacAtHome() then excludeTag2 = "office"
-	else excludeTag2 = "home" end
+	if isAtOffice() then excludeTag2 = "home"
+	else excludeTag2 = "office" end
 
 	local numberOfDrafts, success = hs.execute("python3 numberOfDrafts.py "..excludeTag1.." "..excludeTag2)
 	numberOfDrafts = trim(numberOfDrafts)
