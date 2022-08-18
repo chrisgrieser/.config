@@ -353,6 +353,38 @@
       ]
     },
     {
+      "description": "🅰️♠️ Bartender: ⌘Q → Close instead of Quit",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "q",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "w",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com.surteesstudios.Bartender$"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "description": "🅰️🔨 Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command",
       "manipulators": [
         {
