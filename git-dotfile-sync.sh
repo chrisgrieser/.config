@@ -1,5 +1,12 @@
 #!/bin/zsh
 
+# safeguard against accidental pushing of large files
+NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -size +10M | wc -l | xargs)
+if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
+	echo -n "$NUMBER_LARGE_FILES Large files detected, aborting automatic git sync."
+	exit 1
+fi
+
 cd "$(dirname "$0")" || exit 1
 
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
