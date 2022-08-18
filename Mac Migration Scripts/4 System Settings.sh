@@ -207,7 +207,7 @@ defaults write com.apple.helpviewer DevMode -bool true
 defaults write com.apple.dock wvous-tr-corner -int 12
 defaults write com.apple.dock wvous-tr-modifier -int 0
 # Bottom right → Quick Notes (Trigger for Hammerspoon)
-defaults write com.apple.dock wvous-br-corner -int 14
+defaults write com.apple.dock wvous-br-corner -int 0
 defaults write com.apple.dock wvous-br-modifier -int 0
 
 killall Dock
