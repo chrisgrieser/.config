@@ -62,6 +62,7 @@ function officeWake (eventType)
 	officeModeLayout()
 	reloadAllMenubarItems()
 	gitDotfileSync("wake")
+	gitVaultBackup()
 end
 
 function homeWake (eventType)
@@ -80,6 +81,7 @@ function homeWake (eventType)
 
 	reloadAllMenubarItems()
 	gitDotfileSync("wake")
+	gitVaultBackup()
 
 	runDelayed(1, function() twitterrificAction("scrollup") end)
 end
@@ -137,5 +139,11 @@ if isIMacAtHome() then
 	sleepTimer2:start()
 	biweeklyTimer:start()
 	projectorScreensaverWatcher:start()
+end
+
+if isAtMother() then
+	dailyEveningTimer:start()
+	sleepTimer:start()
+	sleepTimer2:start()
 end
 
