@@ -11,9 +11,9 @@ pip3 install pdfannots
 # ➞ sign in manually to start download
 open '/System/Applications/App Store.app'
 
-# -------------
+#-------------------------------------------------------------------------------
 # INSTALLS
-# -------------
+#-------------------------------------------------------------------------------
 
 # shellcheck disable=SC2034
 HOMEBREW_CASK_OPTS="--no-quarantine"
@@ -32,9 +32,30 @@ open -a "Appcleaner" \
 cat ~'/Desktop/NPMfile' | xargs npm install --location=global --force
 npm list --location=global
 
-# -----------
+#-------------------------------------------------------------------------------
 # SETTINGS
-# -----------
+#-------------------------------------------------------------------------------
+
+# Espanso
+espanso service register
+
+# MARTA
+defaults write -g NSFileViewer -string org.yanex.marta
+defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="org.yanex.marta";}'
+# then restart mac
+
+# make Finder quittable
+defaults write com.apple.finder QuitMenuItem -bool true
+killall Finder
+
+# to restore Finder as default
+# defaults delete -g NSFileViewer
+# defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="com.apple.finder";}'
+
+# Reference
+# https://binarynights.com/manual#fileviewer
+# https://github.com/marta-file-manager/marta-issues/issues/861
+
 
 # change setting of archive utility
 open "/System/Library/CoreServices/Applications/Archive Utility.app"
@@ -54,30 +75,4 @@ newSkinPath="$steamDataPath""/skins/Bigger UI"
 mkdir -p "$newSkinPath"/resource/styles/
 cp "$steamDataPath"/resource/styles/steam.styles "$newSkinPath"/resource/styles/
 echo ":root { zoom: \"1.5\"; }" > "$newSkinPath"/resource/webkit.css
-
-# Espanso
-espanso service register
-
-# Sublime
-echo '{"save_selections": false}' > ~"/dotfiles/Sublime User Folder/AutoFoldCode.sublime-settings"
-
-# Hammerspoon
-defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
-
-# MARTA
-defaults write -g NSFileViewer -string org.yanex.marta
-defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="org.yanex.marta";}'
-# then restart mac
-
-# make Finder quittable
-defaults write com.apple.finder QuitMenuItem -bool true
-killall Finder
-
-# to restore Finder as default
-# defaults delete -g NSFileViewer
-# defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="com.apple.finder";}'
-
-# Reference
-# https://binarynights.com/manual#fileviewer
-# https://github.com/marta-file-manager/marta-issues/issues/861
 
