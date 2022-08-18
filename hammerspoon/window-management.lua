@@ -1,28 +1,24 @@
 require("utils")
-require("twitterrific-iina")
+require("twitterrific-controls")
 require("private")
 
 --------------------------------------------------------------------------------
 -- WINDOW MANAGEMENT UTILS
-if (isIMacAtHome()) then
-	pseudoMaximized = {x=0, y=0, w=0.815, h=1}
-else
-	pseudoMaximized = {x=0, y=0, w=0.7875, h=1}
-end
-
 maximized = hs.layout.maximized
-wf = hs.window.filter
-if isAtOffice() then
-	baseLayout = maximized
-else
-	baseLayout = pseudoMaximized
-end
 iMacDisplay = hs.screen("Built%-in") -- % to escape hyphen (is a quantifier in lua patterns)
 
-function numberOfScreens()
-	return #(hs.screen.allScreens())
+-- device-specific parameters
+if (isIMacAtHome()) then
+	pseudoMaximized = {x=0, y=0, w=0.815, h=1}
+	baseLayout = pseudoMaximized
+elseif isAtMother then
+	pseudoMaximized = {x=0, y=0, w=0.7875, h=1}
+	baseLayout = pseudoMaximized
+elseif isAtOffice() then
+	baseLayout = maximized
 end
 
+-- window size checks
 function isPseudoMaximized (win)
 	if not(win) then return false end
 	local max = hs.screen.mainScreen():frame()
@@ -39,9 +35,9 @@ function isHalf (win)
 end
 
 --------------------------------------------------------------------------------
--- WINDOW BASE MOVEMENT & SIDEBARS
+-- SIDEBARS
 
--- requires these two actiosn beeing installed:
+-- requires these two actions beeing installed:
 -- https://directory.getdrafts.com/a/2BS & https://directory.getdrafts.com/a/2BR
 function toggleDraftsSidebar (draftsWin)
 	runDelayed(0.05, function ()
@@ -110,6 +106,9 @@ function toggleObsidianSidebar (obsiWin)
 	end)
 end
 
+--------------------------------------------------------------------------------
+-- WINDOW MOVEMENT
+
 function moveResizeCurWin(direction)
 	local win = hs.window.focusedWindow()
 	local position
@@ -145,19 +144,6 @@ function moveResize(win, pos)
 	-- has to repeat due to bug for some apps... >:(
 	hs.timer.delayed.new(0.3, function () win:moveToUnit(pos) end):start()
 end
-
-function dockSwitcher (targetMode)
-	hs.execute("zsh ./dock-switching/dock-switcher.sh --load "..targetMode)
-end
-
-function sublimeFontSize (size)
-	local toSize = tostring(size)
-	hs.execute("VALUE="..toSize..[[
-		SUBLIME_CONFIG="$HOME/Library/Application Support/Sublime Text/Packages/User/Preferences.sublime-settings"
-		sed -i '' "s/\"font_size\": .*,/\"font_size\": $VALUE,/" "$SUBLIME_CONFIG"
-	]])
-end
-
 
 function moveToOtherDisplay ()
 	local win = hs.window.focusedWindow()

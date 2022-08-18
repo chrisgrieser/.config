@@ -1,7 +1,22 @@
 require("utils")
 require("window-management")
---------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------
+-- HELPERS
+function dockSwitcher (targetMode)
+	hs.execute("zsh ./dock-switching/dock-switcher.sh --load "..targetMode)
+end
+
+function sublimeFontSize (size)
+	local toSize = tostring(size)
+	hs.execute("VALUE="..toSize..[[
+		SUBLIME_CONFIG="$HOME/Library/Application Support/Sublime Text/Packages/User/Preferences.sublime-settings"
+		sed -i '' "s/\"font_size\": .*,/\"font_size\": $VALUE,/" "$SUBLIME_CONFIG"
+	]])
+end
+
+--------------------------------------------------------------------------------
+-- LAYOUTS
 function movieModeLayout()
 	if not(isProjector()) then return end
 	iMacDisplay:setBrightness(0)
@@ -144,7 +159,7 @@ function officeModeLayout ()
 end
 
 --------------------------------------------------------------------------------
-
+-- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
 function setLayout()
 	if isAtOffice() then
 		officeModeLayout()
@@ -164,8 +179,9 @@ displayCountWatcher = hs.screen.watcher.new(setLayout)
 displayCountWatcher:start()
 hotkey(hyper, "home", setLayout)
 
+--------------------------------------------------------------------------------
 
--- Open windows always on the screen where the mouse is
+-- OPEN WINDOWS ALWAYS ON THE SCREEN WHERE THE MOUSE IS
 function alwaysOpenOnMouseDisplay(appName, eventType, appObject)
 	if not (isProjector()) then return end
 

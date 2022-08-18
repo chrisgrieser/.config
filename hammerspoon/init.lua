@@ -1,36 +1,36 @@
 -- https://www.hammerspoon.org/go/
 
 --------------------------------------------------------------------------------
-
+-- SETTINGS
 hs.window.animationDuration = 0
 
 --------------------------------------------------------------------------------
--- Hammerspoon itself & Helper Utilities
+-- IMPORTS
+
+-- Helpers
 require("meta")
 require("utils")
-
---------------------------------------------------------------------------------
 
 -- Base
 require("scroll-and-cursor")
 require("menubar")
 require("system-and-cron")
 require("window-management")
-require("layout")
+require("layouts")
 require("filesystem-watchers")
 require("usb-watchers")
 require("dark-mode")
-
--- app-specific
-require("app-specific-behavior")
-require("twitterrific-iina")
 
 -- unused
 -- require("app-switcher")
 -- require("hot-corner-action")
 
+-- app-specific
+require("app-specific-behavior")
+require("twitterrific-controls")
+
 --------------------------------------------------------------------------------
--- System Startup
+-- SYSTEM STARTUP
 gitDotfileSync("wake")
 reloadAllMenubarItems()
 killIfRunning("Finder") -- fewer items in the app switcher when Marta is used anyway
