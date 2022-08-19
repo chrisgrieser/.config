@@ -76,15 +76,17 @@ function updateDotfileSyncStatusMenuBar()
 	changes = trim(changes)
 
 	if tonumber(changes) == 0 or not(success) then
-		dotfileSyncMenuBar:removeFromMenuBar() -- also removed clickcallback, which therefore has to be set again
+		dotfileSyncMenuBar:removeFromMenuBar() -- also removes clickcallback, which therefore has to be set again
 	else
 		dotfileSyncMenuBar:returnToMenuBar()
 		dotfileSyncMenuBar:setTitle(syncIcon.." "..changes)
 		dotfileSyncMenuBar:setClickCallback(function ()
 			local lastCommit = hs.execute('git log -1 --format=%ar')
 			lastCommit = trim(lastCommit)
+			local changedFiles = hs.execute('git status --short')
+			changedFiles = trim(changedFiles)
 			local nextSync = math.floor(repoSyncTimer:nextTrigger() / 60)
-			notify("last commit: "..lastCommit.."\n".."next sync: in "..tostring(nextSync).." min")
+			notify(changedFiles.."\n".."last commit: "..lastCommit.."\n".."next sync: in "..tostring(nextSync).." min")
 		end)
 	end
 end
@@ -100,7 +102,7 @@ function updateVaultSyncStatusMenuBar()
 	changes = trim(changes)
 
 	if tonumber(changes) == 0 or not(success) then
-		vaultSyncMenuBar:removeFromMenuBar() -- also removed clickcallback, which therefore has to be set again
+		vaultSyncMenuBar:removeFromMenuBar() -- also removes clickcallback, which therefore has to be set again
 	else
 		vaultSyncMenuBar:returnToMenuBar()
 		vaultSyncMenuBar:setTitle(vaultSyncIcon.." "..changes)
@@ -109,9 +111,8 @@ function updateVaultSyncStatusMenuBar()
 			lastCommit = trim(lastCommit)
 			local changedFiles = hs.execute('cd "'..vaultLocation..'" ; git status --short')
 			changedFiles = trim(changedFiles)
-
 			local nextSync = math.floor(repoSyncTimer:nextTrigger() / 60)
-			notify("last commit: "..lastCommit.."\n".."next sync: in "..tostring(nextSync).." min".."\n"..changedFiles)
+			notify(changedFiles.."\n".."last commit: "..lastCommit.."\n".."next sync: in "..tostring(nextSync).." min")
 		end)
 	end
 end
