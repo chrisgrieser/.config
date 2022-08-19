@@ -1,17 +1,13 @@
 # shellcheck disable=SC2086,SC2164
 
-# built-in zle functions
-bindkey -M viins "^A" beginning-of-line
-bindkey -M viins "^E" end-of-line
-bindkey -M viins "^Y" redo
-bindkey -M viins "^K" kill-line
-
-# custom ZLE funtions
 function bindEverywhere () {
 	bindkey -M emacs "$1" $2
 	bindkey -M viins "$1" $2
 	bindkey -M vicmd "$1" $2
 }
+bindEverywhere "^A" beginning-of-line
+bindEverywhere "^E" end-of-line
+bindEverywhere "^K" kill-line
 bindEverywhere "^Z" undo
 bindEverywhere "^U" kill-whole-line
 bindEverywhere "^P" copy-location
