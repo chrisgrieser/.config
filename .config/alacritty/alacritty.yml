@@ -58,6 +58,8 @@ colors:
   vi_mode_cursor:
     text: '#2e3440'
     cursor: '#d8dee9'
+  line_indicator:
+    background: '#E5CFB3'
   selection:
     text: CellForeground
     background: '#4c566a'
@@ -108,6 +110,7 @@ cursor:
     unfocused_hollow: true
   vi_mode_style:
     shape: Underline
+    blinking: Always
 mouse:
   hide_when_typing: true
 live_config_reload: true
