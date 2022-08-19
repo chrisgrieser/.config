@@ -62,6 +62,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D5F86957-1352-4B11-BF61-059C2CF716BC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>66A6B203-4D92-418E-9D90-D4815DA05E8F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>EA3DF9A8-C9B9-4A5B-BE23-02A376F9B128</key>
 		<array>
 			<dict>
@@ -333,6 +346,48 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>so/q/</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Stackoverflow: {query}</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D5F86957-1352-4B11-BF61-059C2CF716BC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://stackoverflow.com/questions/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>66A6B203-4D92-418E-9D90-D4815DA05E8F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -367,6 +422,13 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>ypos</key>
 			<real>85</real>
 		</dict>
+		<key>66A6B203-4D92-418E-9D90-D4815DA05E8F</key>
+		<dict>
+			<key>xpos</key>
+			<real>250</real>
+			<key>ypos</key>
+			<real>600</real>
+		</dict>
 		<key>7E6054B0-3785-45A2-A92E-9896CFEBA420</key>
 		<dict>
 			<key>colorindex</key>
@@ -397,6 +459,13 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>165</real>
+		</dict>
+		<key>D5F86957-1352-4B11-BF61-059C2CF716BC</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>600</real>
 		</dict>
 		<key>EA3DF9A8-C9B9-4A5B-BE23-02A376F9B128</key>
 		<dict>
