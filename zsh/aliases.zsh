@@ -38,17 +38,12 @@ alias pip="pip3"
 alias curl="curl -s"
 
 # exa
-# these two as functions, so they can be called by other functions
-function exa (){
-	command exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
-}
 alias ll='command exa --all --long --git --icons --group-directories-first --sort=modified'
 alias tre='command exa --tree -L1 --icons'
 alias tree='command exa --tree -L2 --icons'
 alias treee='command exa --tree -L3 --icons'
 alias treeee='command exa --tree -L4 --icons'
-# alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
-alias size="broot --whale-spotting" # size of files in current directory
+alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 
 # Suffix Aliases
 # = default command to act upon the filetype, when is is entered

@@ -1,3 +1,15 @@
+function directoryInspect (){
+	if command git rev-parse --is-inside-work-tree &>/dev/null ; then
+		git status --short
+		echo
+	fi
+	if [[ $(ls | wc -l) -lt 20 ]] ; then
+		exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
+	elif [[ $(ls -d */ | wc -l) -lt 20 ]] ; then
+		exa --all --icons --sort=modified -d */ # only directories
+	fi
+}
+
 # Move to trash via Finder (allows retrievability)
 # no arg = all files in folder will be deleted
 function d () {
@@ -33,8 +45,8 @@ function o (){
 	local INPUT="$*"
 
 	if [[ -e "$INPUT" ]] ; then   # skip `fzf` if file is fully named
-		[[ -d "$INPUT" ]] &&  z "$INPUT"
-		[[ -f "$INPUT" ]] &&  open "$INPUT"
+		[[ -d "$INPUT" ]] && z "$INPUT"
+		[[ -f "$INPUT" ]] && open "$INPUT"
 		return 0
 	fi
 
@@ -44,11 +56,11 @@ function o (){
 	           --query "$INPUT" \
 	           --preview "if [[ -d {} ]] ; then exa  --icons --oneline; else ; bat --color=always --style=snip --wrap=never --tabs=1 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
 	           )
-	[[ -z "$SELECTED" ]] && return 130 # abort if no selection
-
-	if [[ -d "$SELECTED" ]] ; then
+	if [[ -z "$SELECTED" ]] ; then
+		return 130 # abort if no selection
+	elif [[ -d "$SELECTED" ]] ; then
 		z "$SELECTED"
-	else
+	elif [[ -f "$SELECTED" ]] ; then
 		open "$SELECTED"
 	fi
 }

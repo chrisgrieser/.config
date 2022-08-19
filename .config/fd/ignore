@@ -16,6 +16,3 @@ Icon
 
 # Backup folder
 Dotfolder/Backups/
-
-# zsh raw plugins
-zsh/plugins/
