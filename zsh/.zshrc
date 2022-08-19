@@ -19,6 +19,3 @@ source "$DOTFILE_FOLDER/zsh/docs_man.zsh"
 source "$DOTFILE_FOLDER/zsh/git_github.zsh"
 source "$DOTFILE_FOLDER/zsh/homebrew.zsh"
 source "$DOTFILE_FOLDER/zsh/../pandoc/pandoc.zsh"
-
-
-source /Users/chrisgrieser/.config/broot/launcher/bash/br

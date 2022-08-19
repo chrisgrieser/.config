@@ -27,9 +27,11 @@ if [[ "$TERM" == "alacritty" ]] ; then
 		say_or_think="cowthink"
 	fi
 
-	echo "$(fortune -n270 -s)" | $say_or_think -W$width $random_emotion | lolcat --freq=0.15
+	# shellcheck disable=SC2248
+	fortune -n270 -s | tr -d "\t" | $say_or_think -W$width $random_emotion | lolcat --freq=0.15
 	echo
 
+	# shellcheck disable=SC2012
 	if [[ $(ls | wc -l) -lt 20 ]] && [[ $(ls | wc -l) -gt 0 ]] ; then
 		separator
 		exa
