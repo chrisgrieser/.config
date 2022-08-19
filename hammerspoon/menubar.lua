@@ -24,7 +24,7 @@ vaultLocation = os.getenv("HOME").."/Main Vault/"
 covidIcon ="🦠"
 draftsIcon ="☑️"
 fileHubIcon ="📂"
-syncIcon ="🔁"
+dotfileSyncIcon ="⏺"
 vaultSyncIcon = "🟪"
 
 --------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ function updateDotfileSyncStatusMenuBar()
 		dotfileSyncMenuBar:removeFromMenuBar() -- also removes clickcallback, which therefore has to be set again
 	else
 		dotfileSyncMenuBar:returnToMenuBar()
-		dotfileSyncMenuBar:setTitle(syncIcon.." "..changes)
+		dotfileSyncMenuBar:setTitle(dotfileSyncIcon.." "..changes)
 		dotfileSyncMenuBar:setClickCallback(function ()
 			local lastCommit = hs.execute('git log -1 --format=%ar')
 			lastCommit = trim(lastCommit)

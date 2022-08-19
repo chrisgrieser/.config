@@ -76,11 +76,13 @@ function motherHomeModeLayout()
 	openIfNotRunning("Brave Browser")
 	openIfNotRunning("Twitterrific")
 	openIfNotRunning("Drafts")
+
 	killIfRunning("YouTube")
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
 	killIfRunning("Twitch")
 	killIfRunning("Finder")
+	privateClosers()
 
 	sublimeFontSize(14)
 	dockSwitcher("home")

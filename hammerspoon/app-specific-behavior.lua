@@ -37,7 +37,7 @@ end)
 -- keep TWITTERRIFIC visible, when active window is pseudomaximized
 function twitterrificNextToPseudoMax(_, eventType)
 	if not(eventType == aw.activated or eventType == aw.launching) then return end
-	if not(appIsRunning("Twitterrific")) then return end
+	if not (hs.application("Twitterrific")) then return end
 
 	local currentWin = hs.window.focusedWindow()
 	if isPseudoMaximized(currentWin) then
