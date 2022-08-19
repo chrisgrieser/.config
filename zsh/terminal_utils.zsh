@@ -54,6 +54,7 @@ function o (){
 	SELECTED=$(fd --hidden | fzf \
 	           -0 -1 \
 	           --query "$INPUT" \
+	           --bind=tab: \
 	           --preview "if [[ -d {} ]] ; then exa  --icons --oneline; else ; bat --color=always --style=snip --wrap=never --tabs=1 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
 	           )
 	if [[ -z "$SELECTED" ]] ; then
