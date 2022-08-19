@@ -1,24 +1,13 @@
 # https://dystroy.org/broot
 #-------------------------------------------------------------------------------
 
-# vim-like controls
-modal = false
-
-# You can usually cancel the last state change on escape. If you want the escape
-# key to quit broot when there's nothing to cancel (for example when you just
-# opened broot), uncomment this parameter
+modal = false # vim-like controls
 quit_on_last_cancel = true
-
-default_flags = "ig"
-# i = show git-ignored files
-# g = show git status
-
+default_flags = "igh" # i = show git-ignored, g = show git status, h = show hidden
 show_selection_mark = false
 
-#-------------------------------------------------------------------------------
-
-# Switch Enter and alt+enter from the default config
 [[verbs]]
+# Switch Enter and alt+enter from the default config
 key = "enter"
 internal = ":open_leave"
 apply_to = "file"
@@ -27,7 +16,29 @@ key = "alt-enter"
 internal = ":open_stay"
 apply_to = "file"
 
+# copy path/name
+[[verbs]]
+key = "ctrl-p"
+external = "echo \"{file}\" | pbcopy"
+from_shell = true
+[[verbs]]
+key = "ctrl-n"
+external = "echo \"{file-name}\" | pbcopy"
+from_shell = true
 
+# preview panel
+[[verbs]]
+invocation = "preview"
+shortcut = "p"
+key = "tab"
+internal = ":panel_right"
+[[verbs]]
+invocation = "preview"
+shortcut = "p"
+key = "shift-tab"
+internal = ":panel_left"
+
+# exact search by default
 [search_modes]
 "<empty>"= "exact name"
 "/"= "fuzzy name"

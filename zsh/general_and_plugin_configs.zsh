@@ -33,8 +33,8 @@ setopt AUTO_CD # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypasting)
 
 # MAGIC ENTER
-export MAGIC_ENTER_GIT_COMMAND="git status --short ; br"
-export MAGIC_ENTER_OTHER_COMMAND="br"
+export MAGIC_ENTER_GIT_COMMAND="git status --short ; broot"
+export MAGIC_ENTER_OTHER_COMMAND="broot"
 
 function directoryInspect (){
 	if command git rev-parse --is-inside-work-tree &>/dev/null ; then
