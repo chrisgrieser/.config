@@ -1,31 +1,46 @@
 # https://dystroy.org/broot
+#-------------------------------------------------------------------------------
 
-# enable vim-like controls
+# VIM-LIKE CONTROLS
 # note that this must be near the start of the configuration file
 modal = true
 
-# Quit on last cancel You can usually cancel the last state change on escape. If
-# you want the escape key to quit broot when there's nothing to cancel
-# (for example when you just opened broot), uncomment this parameter
+# QUIT ON LAST CANCEL
+# You can usually cancel the last state change on escape. If you want the escape
+# key to quit broot when there's nothing to cancel(for example when you just
+# opened broot), uncomment this parameter
 quit_on_last_cancel = true
 
-###############################################################
+default_flags = "ig"
+# i = show git-ignored files
+# g = show git status
+
+show_selection_mark = false
+
+#-------------------------------------------------------------------------------
+
+# Switch Enter and alt+enter from the default config
+[[verbs]]
+key = "enter"
+internal = ":open_leave"
+apply_to = "file"
+[[verbs]]
+key = "alt-enter"
+internal = ":open_stay"
+apply_to = "file"
+
 # If $EDITOR isn't set on your computer, you should either set it or just
 # replace it with your editor of choice in the 'execution' pattern.
 # Example: execution = "/usr/bin/nvim {file}"
-[[verbs]]
-invocation = "edit"
-key = "F2"
-shortcut = "e"
-execution = "$EDITOR {file}"
+# [[verbs]]
+# invocation = "edit"
+# key = "F2"
+# shortcut = "e"
+# execution = "$EDITOR {file}"
 
-[[verbs]]
-invocation = "create {subpath}"
-execution = "$EDITOR {directory}/{subpath}"
 
+#-------------------------------------------------------------------------------
 # File Extension Colors
-###############################################################
-
 # uncomment and modify the next section if you want to color
 # file name depending on their extension
 #
@@ -34,17 +49,8 @@ execution = "$EDITOR {directory}/{subpath}"
 #     rs: yellow
 # }
 
-###############################################################
-# Default flags
-# You can set up flags you want broot to start with by
-# default, for example `default_flags="ihp"` if you usually want
-# to see hidden and gitignored files and the permissions (then
-# if you don't want the hidden files you can launch `br -H`)
-# A popular flag is the `g` one which displays git related info.
-#
-# default_flags:
 
-###############################################################
+#-------------------------------------------------------------------------------
 # Date/Time format
 # If you want to change the format for date/time, uncomment the
 # following line and change it according to
@@ -52,12 +58,7 @@ execution = "$EDITOR {directory}/{subpath}"
 #
 # date_time_format: %Y/%m/%d %R
 
-###############################################################
-# Whether to mark the selected line with a triangle
-#
-# show_selection_mark: true
-
-###############################################################
+#-------------------------------------------------------------------------------
 # Column order
 # cols_order, if specified, must be a permutation of the following
 # array. You should keep the name column at the end as it has a
@@ -74,7 +75,7 @@ execution = "$EDITOR {directory}/{subpath}"
 #     name
 # ]
 
-###############################################################
+#-------------------------------------------------------------------------------
 # True Colors
 # If this parameter isn't set, broot tries to automatically
 # determine whether true colors (24 bits) are available.
@@ -84,7 +85,7 @@ execution = "$EDITOR {directory}/{subpath}"
 #
 # true_colors: false
 
-###############################################################
+#-------------------------------------------------------------------------------
 # Icons
 # If you want to display icons in broot, uncomment this line
 # (see https://dystroy.org/broot/icons for installation and
@@ -92,7 +93,7 @@ execution = "$EDITOR {directory}/{subpath}"
 #
 # icon_theme: vscode
 
-###############################################################
+#-------------------------------------------------------------------------------
 # Special paths
 # If some paths must be handled specially, uncomment (and change
 # this section as per the examples)
@@ -103,7 +104,7 @@ execution = "$EDITOR {directory}/{subpath}"
 #     "/home/dys/my-link-I-want-to-explore"    : enter
 # }
 
-###############################################################
+#-------------------------------------------------------------------------------
 # Quit on last cancel
 # You can usually cancel the last state change on escape.
 # If you want the escape key to quit broot when there's nothing
@@ -112,7 +113,7 @@ execution = "$EDITOR {directory}/{subpath}"
 #
 # quit_on_last_cancel: true
 
-###############################################################
+#-------------------------------------------------------------------------------
 # Search modes
 #
 # broot allows many search modes.
@@ -140,7 +141,7 @@ execution = "$EDITOR {directory}/{subpath}"
 #     /: regex name
 # }
 
-###############################################################
+#-------------------------------------------------------------------------------
 # File Extension Colors
 #
 # uncomment and modify the next section if you want to color
@@ -152,11 +153,11 @@ execution = "$EDITOR {directory}/{subpath}"
 # }
 
 
-###############################################################
+#-------------------------------------------------------------------------------
 # Max Panels Count
 #
 # Change this if you sometimes want to have more than 2 panels
 # open
 # max_panels_count: 2
 
-###############################################################
+#-------------------------------------------------------------------------------

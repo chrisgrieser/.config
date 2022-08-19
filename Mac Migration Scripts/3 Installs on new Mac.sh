@@ -34,6 +34,9 @@ npm list --location=global
 # SETTINGS
 #-------------------------------------------------------------------------------
 
+# br shell
+broot --install
+
 # Espanso
 espanso service register
 
