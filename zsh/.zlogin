@@ -3,17 +3,23 @@
 clear # messages for when launching via Alfred
 
 if [[ "$TERMINAL" == "Alacritty" ]] ; then
-	# clear
-	# 33% art, 66% fortune
-	if [[ $((RANDOM%3)) == 1 ]] ; then
-		bash "$DOTFILE_FOLDER/zsh/plugins/colorscript.bash" --random
-	else
-		echo
-		echo "> $(fortune -n270 -s)" | lolcat
+	arr[1]=""   # standard
+	arr[2]="-b" # Borg Mode
+	arr[3]="-d" # dead
+	arr[4]="-g" # greedy
+	arr[5]="-p" # paranoia
+	arr[6]="-s" # stoned
+	arr[7]="-r" # tired
+	arr[8]="-w" # wake/wired
+	arr[9]="-y" # youthful
+	rand=$((RANDOM % ${#arr[@]}))
+	random_cow=${arr[$rand]}
+
 	echo
-	fi
-	separator
+	echo "$(fortune -n270 -s)" | cowsay -W=70 $random_cow
 	echo
 
+	separator
+	echo
 	directoryInspect
 fi
