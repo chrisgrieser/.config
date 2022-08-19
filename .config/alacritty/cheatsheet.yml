@@ -19,9 +19,6 @@ font:
     'y': 6
   glyph_offset:
     'y': 3
-cursor:
-  style:
-    unfocused_hollow: true
 mouse:
   hide_when_typing: true
 window:
@@ -33,12 +30,53 @@ window:
     'y': 15
   opacity: 0.99
 live_config_reload: true
+cursor:
+  style:
+    shape: Block
+    blinking: Always
+    blink_interval: 500
+    unfocused_hollow: true
+  vi_mode_style:
+    shape: Underline
+    blinking: Always
+  thickness: 0.2
+hints:
+  enabled:
+  - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
+            [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+    hyperlinks: true
+    command: open
+    post_processing: true
+    mouse:
+      enabled: true
+      mods: None
+    binding:
+      key: U
+      mods: Command
+  - regex: "so/[qa]/\\w+"
+    action: Select
+    mouse:
+      enabled: true
+      mods: None
+    binding:
+      key: S
+      mods: Command
+  - regex: "/Users/.*/.*\\.\\w+"
+    command: open
+    mouse:
+      enabled: true
+      mods: None
+    binding:
+      key: O
+      mods: Command
 selection:
   save_to_clipboard: true
 key_bindings:
   - key: V
     mods: Alt
-    mode: ~Search
+    action: ToggleViMode
+  - key: Escape
+    mode: Vi
     action: ToggleViMode
   - key: 43
     mods: Command
