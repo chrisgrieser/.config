@@ -11,10 +11,6 @@ show_selection_mark = false
 key = "enter"
 internal = ":open_leave"
 apply_to = "file"
-[[verbs]]
-key = "alt-enter"
-internal = ":open_stay"
-apply_to = "file"
 
 # copy path/name
 [[verbs]]
@@ -25,29 +21,21 @@ from_shell = true
 key = "ctrl-n"
 external = "echo \"{file-name}\" | pbcopy"
 from_shell = true
+[[verbs]]
+key = "ctrl-r"
+internal = ":rename"
+auto_exec = false
 
-# preview panel
 [[verbs]]
-invocation = "preview"
-shortcut = "p"
-key = "tab"
-internal = ":panel_right"
-[[verbs]]
-invocation = "preview"
-shortcut = "p"
-key = "shift-tab"
-internal = ":panel_left"
+key = "alt-enter"
+internal = ":open_preview"
+
 
 # exact search by default
 [search_modes]
 "<empty>"= "exact name"
 "/"= "fuzzy name"
 
-#-------------------------------------------------------------------------------
-# File Extension Colors
-# uncomment and modify the next section if you want to color
-# file name depending on their extension
-#
 # ext_colors: {
 #     png: rgb(255, 128, 75)
 #     rs: yellow
