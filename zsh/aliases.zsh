@@ -4,6 +4,8 @@
 # configurations
 alias .star='open $STARSHIP_CONFIG'
 
+alias o='broot --git-ignored --show-git-info'
+
 # beautify JSON in the terminal (yq = better jq)
 # e.g.: curl -s "https://api.corona-zahlen.org/germany" | yq -p=yaml -o=json
 alias jq='yq -p=yaml -o=json'
