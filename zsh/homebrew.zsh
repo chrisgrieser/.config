@@ -58,7 +58,7 @@ function post-install () {
 	open -a "$NEWEST_APP"
 }
 
-function br () {
+function bre () {
 	if [[ $1 != "" ]] && brew list "$1" ; then
 		brew reinstall "$1"
 		return

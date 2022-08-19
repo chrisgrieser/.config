@@ -110,7 +110,13 @@
     "z Z\n(un)zip",
     "u\nhier-archy",
     "i\ninfo",
-    "o\nopen directory",
+    {
+      "f": 1
+    },
+    "o\nopen dir / with",
+    {
+      "f": 2
+    },
     "p\npaste",
     {
       "c": "#CCCCCC"
@@ -126,7 +132,7 @@
       "h2": 1,
       "x2": -0.25
     },
-    "↵\nrename",
+    "↵: rename\n\n\n\n\n\n⇧↵: open",
     {
       "c": "#999999",
       "a": 7,

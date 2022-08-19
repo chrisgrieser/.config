@@ -115,8 +115,10 @@ selection:
   save_to_clipboard: true
 key_bindings:
   - key: V
-    mods: Alt
-    mode: ~Search
+    mods: Alt|Shift|Control
+    action: ToggleViMode
+  - key: Escape
+    mode: Vi
     action: ToggleViMode
   - key: 43
     mods: Command

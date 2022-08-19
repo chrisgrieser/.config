@@ -1,8 +1,8 @@
 # https://dystroy.org/broot
 #-------------------------------------------------------------------------------
 
-# vim-like controls: note that this must be near the start of the config file
-modal = true
+# vim-like controls
+modal = false
 
 # You can usually cancel the last state change on escape. If you want the escape
 # key to quit broot when there's nothing to cancel (for example when you just
