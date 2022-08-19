@@ -41,6 +41,7 @@ function separator (){
 }
 
 # Quick Open File/Folder
+# requires: exa, bat, zoxide, fd, fzf
 function o (){
 	local INPUT="$*"
 
@@ -49,18 +50,20 @@ function o (){
 		[[ -f "$INPUT" ]] && open "$INPUT"
 		return 0
 	fi
+	local prev_clipb=$(pbpaste)
 
 	local SELECTED
 	SELECTED=$(fd --hidden | fzf \
 	           -0 -1 \
 	           --query "$INPUT" \
-	           --bind="tab:execute(TEMP={})+abort" \
+	           --bind="tab:execute(echo {} | pbcopy)+abort" \
+	           --bind="alt+enter:execute-silent(echo {})+abort" \
 	           --preview "if [[ -d {} ]] ; then exa  --icons --oneline; else ; bat --color=always --style=snip --wrap=never --tabs=1 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
 	           )
-	if [[ -n "$TEMP" ]] ; then
-		print -z "$TEMP" # write back to buffer
-	elif [[ -z "$SELECTED" ]] ; then
-		return 130 # abort if no selection
+	if [[ -z "$SELECTED" ]] ; then
+		[[ "$prev_clipb" == "$(pbpaste)" ]] && return 0  # abort if no selection
+		printf -z "$(pbpaste)"
+		return 0 # abort if no selection
 	elif [[ -d "$SELECTED" ]] ; then
 		z "$SELECTED"
 	elif [[ -f "$SELECTED" ]] ; then
