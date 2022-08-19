@@ -56,14 +56,15 @@ function o (){
 	SELECTED=$(fd --hidden | fzf \
 	           -0 -1 \
 	           --query "$INPUT" \
-	           --bind="tab:execute(echo {} | pbcopy)+abort" \
-	           --bind="alt+enter:execute-silent(echo {})+abort" \
-	           --preview "if [[ -d {} ]] ; then exa  --icons --oneline; else ; bat --color=always --style=snip --wrap=never --tabs=1 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
+	           --bind="tab:execute-silent(echo {} | pbcopy)+abort" \
+	           --preview "if [[ -d {} ]] ; then exa  --icons --oneline; else ; bat --color=always --style=snip --wrap=never --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
 	           )
-	if [[ -z "$SELECTED" ]] ; then
-		[[ "$prev_clipb" == "$(pbpaste)" ]] && return 0  # abort if no selection
-		printf -z "$(pbpaste)"
+	if [[ -z "$SELECTED" ]] && [[ "$prev_clipb" == "$(pbpaste)" ]] ; then
 		return 0 # abort if no selection
+	elif [[ -z "$SELECTED" ]] ; then
+		print -z "$(pbpaste)" # write to buffer
+		echo "$prev_clipb" | pbcopy # restore old clipboard
+		zle beginning-of-line
 	elif [[ -d "$SELECTED" ]] ; then
 		z "$SELECTED"
 	elif [[ -f "$SELECTED" ]] ; then
