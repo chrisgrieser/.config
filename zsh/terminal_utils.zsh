@@ -32,33 +32,17 @@ function separator (){
 function o (){
 	local INPUT="$*"
 
-	# skip `fzf` if file is fully named (e.g. through tab-completion)
-	[[ -e "$INPUT" ]] && { open "$INPUT" ; return }
-
-	local SELECTED
-	SELECTED=$(fd --hidden | fzf \
-	           -0 -1 \
-	           --query "$INPUT" \
-	           --preview "if [[ -d {} ]] ; then exa --icon --oneline; else ; bat --color=always --style=snip --wrap=character --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
-	           )
-	[[ -z "$SELECTED" ]] && return 130 # abort if no selection
-
-	open "$SELECTED"
-}
-function o (){
-	local INPUT="$*"
-
 	if [[ -e "$INPUT" ]] ; then   # skip `fzf` if file is fully named
 		[[ -d "$INPUT" ]] &&  z "$INPUT"
 		[[ -f "$INPUT" ]] &&  open "$INPUT"
-		return
+		return 0
 	fi
 
 	local SELECTED
 	SELECTED=$(fd --hidden | fzf \
 	           -0 -1 \
 	           --query "$INPUT" \
-	           --preview "if [[ -d {} ]] ; then exa  --icon --oneline; else ; bat --color=always --style=snip --wrap=character --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
+	           --preview "if [[ -d {} ]] ; then exa  --icons --oneline; else ; bat --color=always --style=snip --wrap=never --tabs=1 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
 	           )
 	[[ -z "$SELECTED" ]] && return 130 # abort if no selection
 
@@ -97,7 +81,7 @@ function settings () {
 	           --layout=reverse \
 	           --info=hidden \
 	           )
-	if [[ $SELECTED != "" ]] ; then
+	if [[ -n $SELECTED ]] ; then
 		[[ $SELECTED != .z* ]] && SELECTED="$SELECTED.zsh"
 		open "$SELECTED"
 	fi )
@@ -158,7 +142,7 @@ ex () {
 			*.tgz)       tar -xzf "$1"     ;;
 			*.zip)       unzip "$1"       ;;
 			*.Z)         uncompress "$1"  ;;
-			*)     echo "'$1' cannot be extracted via extract()" ;;
+			*)     echo "'$1' cannot be extracted via ex()" ;;
 		esac
 	else
 		echo "'$1' is not a valid file"

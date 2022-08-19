@@ -42,9 +42,6 @@ alias curl="curl -s"
 function exa (){
 	command exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
 }
-function exagit (){
-	git status --short; echo; exa --long --grid --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git
-}
 alias ll='command exa --all --long --git --icons --group-directories-first --sort=modified'
 alias tre='command exa --tree -L1 --icons'
 alias tree='command exa --tree -L2 --icons'
