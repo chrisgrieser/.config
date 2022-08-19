@@ -22,11 +22,10 @@ zle -N edit-command-line
 bindEverywhere '^F' edit-command-line
 
 # zsh-autosuggest
-bindkey -M viins '^X' autosuggest-execute
+bindkey -M viins '^[[32;5~' autosuggest-execute # ctrl+esc (with esc remapped to f18)
 
 # shift+tab: Cycle through base directories
 bindEverywhere "^[[Z" dir-cycler
-
 
 
 #-------------------------------------------------------------------------------

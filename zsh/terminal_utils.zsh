@@ -64,7 +64,6 @@ function o (){
 	elif [[ -z "$SELECTED" ]] ; then
 		print -z "$(pbpaste)" # write to buffer
 		echo "$prev_clipb" | pbcopy # restore old clipboard
-		zle beginning-of-line
 	elif [[ -d "$SELECTED" ]] ; then
 		z "$SELECTED"
 	elif [[ -f "$SELECTED" ]] ; then
@@ -149,7 +148,7 @@ function lr (){
 }
 
 # extract function
-ex () {
+function ex () {
 	if [[ -f $1 ]] ; then
 		case $1 in
 			*.tar.bz2)   tar -xjf "$1"     ;;
