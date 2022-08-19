@@ -36,12 +36,4 @@ setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypast
 export MAGIC_ENTER_GIT_COMMAND="git status -s ; o"
 export MAGIC_ENTER_OTHER_COMMAND="o"
 
-function directoryInspect (){
-	if command git rev-parse --is-inside-work-tree &>/dev/null ; then
-		git status --short
-		echo
-	fi
-	if [[ $(ls | wc -l) -lt 20 ]] ; then
-		exa
-	fi
-}
+
