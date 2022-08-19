@@ -1,8 +1,10 @@
 require("utils")
 require("window-management")
+require("private")
 
 --------------------------------------------------------------------------------
 -- HELPERS
+
 function dockSwitcher (targetMode)
 	hs.execute("zsh ./dock-switching/dock-switcher.sh --load "..targetMode)
 end
@@ -13,6 +15,13 @@ function sublimeFontSize (size)
 		SUBLIME_CONFIG="$HOME/Library/Application Support/Sublime Text/Packages/User/Preferences.sublime-settings"
 		sed -i '' "s/\"font_size\": .*,/\"font_size\": $VALUE,/" "$SUBLIME_CONFIG"
 	]])
+end
+
+function showAllSidebars()
+	-- because of the use of URL schemes, leaves Drafts as the focused app
+	if appIsRunning("Highlights") then hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"}) end
+	hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
+	hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
 
 --------------------------------------------------------------------------------
@@ -75,6 +84,26 @@ function motherHomeModeLayout()
 
 	sublimeFontSize(14)
 	dockSwitcher("home")
+
+	local toTheSide = {x=0.7875, y=0, w=0.2125, h=1}
+	local motherHomeLayout = {
+		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
+		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Slack", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Discord", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
+	}
+
+	hs.layout.apply(motherHomeLayout)
+	runDelayed(0.3, function ()
+		hs.layout.apply(motherHomeLayout)
+		showAllSidebars()
+	end)
 end
 
 function homeModeLayout ()
@@ -114,9 +143,7 @@ function homeModeLayout ()
 	hs.layout.apply(homeLayout)
 	runDelayed(0.3, function ()
 		hs.layout.apply(homeLayout)
-		if appIsRunning("Highlights") then hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"}) end
-		hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
-		hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
+		showAllSidebars()
 	end)
 end
 
@@ -155,9 +182,7 @@ function officeModeLayout ()
 	hs.layout.apply(officeLayout)
 	runDelayed(0.3, function ()
 		hs.layout.apply(officeLayout)
-		if appIsRunning("Highlights") then hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"}) end
-		hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
-		hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
+		showAllSidebars()
 	end)
 end
 

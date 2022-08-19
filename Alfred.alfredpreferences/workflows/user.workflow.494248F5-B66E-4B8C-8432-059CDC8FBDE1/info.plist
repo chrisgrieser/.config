@@ -388,7 +388,7 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 		<key>feedreaderURL</key>
 		<string>https://www.inoreader.com/</string>
 		<key>read_later_file</key>
-		<string>~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/📚 Read Later.md</string>
+		<string>~/Main Vault/Meta/📚 Read Later.md</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
