@@ -1,3 +1,22 @@
+# Move to trash via Finder (allows retrievability)
+# no arg = all files in folder will be deleted
+function d () {
+	if [[ $# == 0 ]]; then
+		IFS=$'\n'
+		# shellcheck disable=SC2207
+		ALL_FILES=($(find . -not -name ".*"))
+		unset IFS
+	else
+		ALL_FILES=( "$@" ) # save as array
+	fi
+	for ARG in "${ALL_FILES[@]}"; do
+		ABSOLUTE_PATH="$(cd "$(dirname "$ARG")" || return 1; pwd -P)/$(basename "$ARG")"
+		osascript -e "
+			set toDelete to \"$ABSOLUTE_PATH\" as POSIX file
+			tell application \"Finder\" to delete toDelete
+		" >/dev/null
+	done
+}
 
 # draws a separator line with terminal width
 function separator (){
@@ -11,27 +30,27 @@ function separator (){
 
 # Quick Open File
 # (or change directory if a folder is selected)
-# function o (){
-# 	local INPUT="$*"
+function o (){
+	local INPUT="$*"
 
-# 	# skip `fzf` if file is fully named (e.g. through tab-completion)
-# 	[[ -f "$INPUT" ]] && { open "$INPUT" ; return }
-# 	[[ -d "$INPUT" ]] && { z "$INPUT" ; runMagicEnter ; return }
+	# skip `fzf` if file is fully named (e.g. through tab-completion)
+	[[ -f "$INPUT" ]] && { open "$INPUT" ; return }
+	[[ -d "$INPUT" ]] && { z "$INPUT" ; directoryInspect ; return }
 
-# 	local SELECTED
-# 	SELECTED=$(fd --hidden | fzf \
-# 	           -0 -1 \
-# 	           --query "$INPUT" \
-# 	           --preview "if [[ -d {} ]] ; then exa ; else ; bat --color=always --style=snip --wrap=character --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
-# 	           )
-# 	[[ -z "$SELECTED" ]] && return 130 # abort if no selection
+	local SELECTED
+	SELECTED=$(fd --hidden | fzf \
+	           -0 -1 \
+	           --query "$INPUT" \
+	           --preview "if [[ -d {} ]] ; then exa ; else ; bat --color=always --style=snip --wrap=character --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
+	           )
+	[[ -z "$SELECTED" ]] && return 130 # abort if no selection
 
-# 	if [[ -d "$SELECTED" ]] ; then
-# 		z "$SELECTED"
-# 	else
-# 		open "$SELECTED"
-# 	fi
-# }
+	if [[ -d "$SELECTED" ]] ; then
+		z "$SELECTED"
+	else
+		open "$SELECTED"
+	fi
+}
 
 # smarter z/cd
 # (also alternative to https://blog.meain.io/2019/automatically-ls-after-cd/)
