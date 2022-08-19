@@ -1,15 +1,19 @@
-require("menubar")
 require("utils")
 require("window-management")
 require("dark-mode")
 
 --------------------------------------------------------------------------------
-
--- SYNC
+-- CONFIG
+dotfileLocation = os.getenv("HOME").."/dotfiles"
+vaultLocation = os.getenv("HOME").."/Main Vault"
+dotfileIcon ="⏺"
+vaultIcon = "🟪"
 repoSyncFrequencyMin = 20
-gitDotfileScript = os.getenv("HOME").."/dotfiles/git-dotfile-sync.sh"
-gitVaultScript = os.getenv("HOME").."/Main Vault/Meta/git vault backup.sh"
 
+--------------------------------------------------------------------------------
+
+
+gitDotfileScript = dotfileLocation.."/git-dotfile-sync.sh"
 function gitDotfileSync(arg)
 	if arg then arg = {arg}
 	else arg = {} end
@@ -17,22 +21,23 @@ function gitDotfileSync(arg)
 	hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode == 0 then
-			log ("✅ dotfiles sync ("..deviceName()..")", "./logs/sync.log")
+			log (dotfileIcon.."✅ dotfiles sync ("..deviceName()..")", "./logs/sync.log")
 		else
-			notify("⚠️️ dotfiles "..stdErr)
-			log ("⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
+			notify(dotfileIcon.."⚠️️ dotfiles "..stdErr)
+			log (dotfileIcon.."⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
 		end
 	end, arg):start()
 end
 
+gitVaultScript = vaultLocation.."/Meta/git vault backup.sh"
 function gitVaultBackup()
 	hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
 		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode == 0 then
-			log ("🟪 vault sync ("..deviceName()..")", "./logs/sync.log")
+			log (vaultIcon.."✅ vault sync ("..deviceName()..")", "./logs/sync.log")
 		else
-			notify("⚠️️ vault "..stdErr)
-			log ("⚠️ vault sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
+			notify(vaultIcon.."⚠️️ vault "..stdErr)
+			log (vaultIcon.."⚠️ vault sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
 		end
 	end):start()
 end
@@ -85,13 +90,12 @@ function homeWake (eventType)
 
 	runDelayed(1, function() twitterrificAction("scrollup") end)
 end
-if isIMacAtHome() then
+if isIMacAtHome() or isAtMother() then
 	wakeWatcher = hs.caffeinate.watcher.new(homeWake)
-else
+elseif isAtOffice() then
 	wakeWatcher = hs.caffeinate.watcher.new(officeWake)
 end
 wakeWatcher:start()
-
 
 --------------------------------------------------------------------------------
 -- CRONJOBS AT HOME
