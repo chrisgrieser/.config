@@ -163,9 +163,3 @@ key_bindings:
   - key: W
     mods: Command
     chars: "\x04"
-  - key: Left
-    mods: Command
-    chars: "\eOH"
-  - key: Right
-    mods: Command
-    chars: "\eOF"

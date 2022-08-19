@@ -39,11 +39,34 @@ function o (){
 	SELECTED=$(fd --hidden | fzf \
 	           -0 -1 \
 	           --query "$INPUT" \
-	           --preview "if [[ -d {} ]] ; then exa --icon -1; else ; bat --color=always --style=snip --wrap=character --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
+	           --preview "if [[ -d {} ]] ; then exa --icon --oneline; else ; bat --color=always --style=snip --wrap=character --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
 	           )
 	[[ -z "$SELECTED" ]] && return 130 # abort if no selection
 
 	open "$SELECTED"
+}
+function o (){
+	local INPUT="$*"
+
+	if [[ -e "$INPUT" ]] ; then   # skip `fzf` if file is fully named
+		[[ -d "$INPUT" ]] &&  z "$INPUT"
+		[[ -f "$INPUT" ]] &&  open "$INPUT"
+		return
+	fi
+
+	local SELECTED
+	SELECTED=$(fd --hidden | fzf \
+	           -0 -1 \
+	           --query "$INPUT" \
+	           --preview "if [[ -d {} ]] ; then exa  --icon --oneline; else ; bat --color=always --style=snip --wrap=character --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
+	           )
+	[[ -z "$SELECTED" ]] && return 130 # abort if no selection
+
+	if [[ -d "$SELECTED" ]] ; then
+		z "$SELECTED"
+	else
+		open "$SELECTED"
+	fi
 }
 
 # smarter z/cd

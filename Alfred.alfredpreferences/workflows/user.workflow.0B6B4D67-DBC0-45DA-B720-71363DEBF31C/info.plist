@@ -8,6 +8,19 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
+		<key>034A18C3-9F44-4A99-9FB4-5109EEE25D52</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D5103819-BE47-447C-8880-FB1D3986CAE8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<array>
 			<dict>
@@ -455,6 +468,59 @@
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
 			<string>39B71402-41AF-4087-AFBB-86D0ABEDD89E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>2</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>D</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+					<string>org.yanex.marta</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>034A18C3-9F44-4A99-9FB4-5109EEE25D52</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>jumpto</key>
+				<string>alfred.action.copy</string>
+				<key>path</key>
+				<string></string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.actioninalfred</string>
+			<key>uid</key>
+			<string>D5103819-BE47-447C-8880-FB1D3986CAE8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -986,6 +1052,15 @@ IconIndex=0</string>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>034A18C3-9F44-4A99-9FB4-5109EEE25D52</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>140</real>
+		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
 			<key>colorindex</key>
@@ -1132,9 +1207,9 @@ IconIndex=0</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>590</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>170</real>
 		</dict>
 		<key>993B0563-52D6-4547-B1D7-97E70FF55DB2</key>
 		<dict>
@@ -1184,7 +1259,16 @@ IconIndex=0</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>410</real>
+			<key>ypos</key>
+			<real>170</real>
+		</dict>
+		<key>D5103819-BE47-447C-8880-FB1D3986CAE8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>210</real>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
