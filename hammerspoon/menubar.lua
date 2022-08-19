@@ -86,7 +86,7 @@ function updateDotfileSyncStatusMenuBar()
 			local changedFiles = hs.execute('git status --short')
 			changedFiles = trim(changedFiles)
 			local nextSync = math.floor(repoSyncTimer:nextTrigger() / 60)
-			notify(changedFiles.."\n".."last commit: "..lastCommit.."\n".."next sync: in "..tostring(nextSync).." min")
+			notify(changedFiles.."\n\n".."last commit: "..lastCommit.."\n".."next sync: in "..tostring(nextSync).." min")
 		end)
 	end
 end
@@ -112,7 +112,7 @@ function updateVaultSyncStatusMenuBar()
 			local changedFiles = hs.execute('cd "'..vaultLocation..'" ; git status --short')
 			changedFiles = trim(changedFiles)
 			local nextSync = math.floor(repoSyncTimer:nextTrigger() / 60)
-			notify(changedFiles.."\n".."last commit: "..lastCommit.."\n".."next sync: in "..tostring(nextSync).." min")
+			notify(changedFiles.."\n\n".."last commit: "..lastCommit.."\n".."next sync: in "..tostring(nextSync).." min")
 		end)
 	end
 end
