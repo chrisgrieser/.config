@@ -4,8 +4,6 @@
 # configurations
 alias .star='open $STARSHIP_CONFIG'
 
-alias b='broot'
-
 # beautify JSON in the terminal (yq = better jq)
 # e.g.: curl -s "https://api.corona-zahlen.org/germany" | yq -p=yaml -o=json
 alias jq='yq -p=yaml -o=json'
@@ -52,8 +50,8 @@ alias tre='command exa --tree -L1 --icons'
 alias tree='command exa --tree -L2 --icons'
 alias treee='command exa --tree -L3 --icons'
 alias treeee='command exa --tree -L4 --icons'
-alias treeeee='command exa --tree -L5 --icons'
-alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
+# alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
+alias size="command br --whale-spotting" # size of files in current directory
 
 # Suffix Aliases
 # = default command to act upon the filetype, when is is entered

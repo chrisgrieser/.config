@@ -27,12 +27,12 @@ if [[ "$TERM" == "alacritty" ]] ; then
 		say_or_think="cowthink"
 	fi
 
-	echo
 	echo "$(fortune -n270 -s)" | $say_or_think -W$width $random_emotion | lolcat --freq=0.15
 	echo
 
 	if [[ $(ls | wc -l) -lt 20 ]] && [[ $(ls | wc -l) -gt 0 ]] ; then
 		separator
 		exa
+		echo
 	fi
 fi

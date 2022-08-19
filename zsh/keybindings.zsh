@@ -26,11 +26,12 @@ zle -N edit-command-line
 bindEverywhere '^F' edit-command-line
 
 # zsh-autosuggest
-bindkey -M viins '^X' autosuggest-execute # e[x]ecute
-bindkey -M viins '^[[Z' autosuggest-accept # shift+tab
+bindkey -M viins '^X' autosuggest-execute
 
 # shift+tab: Cycle through base directories
 bindEverywhere "^[[Z" dir-cycler
+
+
 
 #-------------------------------------------------------------------------------
 # INFO: use ctrl-v and then a key combination to get the shell binding
@@ -71,5 +72,3 @@ function dir-cycler () {
 	zle reset-prompt
 }
 zle -N dir-cycler
-
-
