@@ -128,6 +128,7 @@ keyBindings {
     "j" "core.move.down"
     "g" "core.move.home"
     "o" "core.lookup"
+    "Shift+O" "core.open.with"
     "Shift+G" "core.move.end"
     "Shift+J" "core.move.half.page.down"
     "Shift+K" "core.move.half.page.up"
@@ -169,6 +170,7 @@ keyBindings {
     }
     "x" "core.pane.swap"
     "Return" "core.rename"
+    "Cmd+Return" "core.open"
     "/" "core.lookup.here"
 
     "Shift+-" "core.documentation"
