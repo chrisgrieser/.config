@@ -1,13 +1,11 @@
 # https://dystroy.org/broot
 #-------------------------------------------------------------------------------
 
-# VIM-LIKE CONTROLS
-# note that this must be near the start of the configuration file
+# vim-like controls: note that this must be near the start of the config file
 modal = true
 
-# QUIT ON LAST CANCEL
 # You can usually cancel the last state change on escape. If you want the escape
-# key to quit broot when there's nothing to cancel(for example when you just
+# key to quit broot when there's nothing to cancel (for example when you just
 # opened broot), uncomment this parameter
 quit_on_last_cancel = true
 
@@ -48,7 +46,6 @@ apply_to = "file"
 #     png: rgb(255, 128, 75)
 #     rs: yellow
 # }
-
 
 #-------------------------------------------------------------------------------
 # Date/Time format
@@ -105,15 +102,6 @@ apply_to = "file"
 # }
 
 #-------------------------------------------------------------------------------
-# Quit on last cancel
-# You can usually cancel the last state change on escape.
-# If you want the escape key to quit broot when there's nothing
-# to cancel (for example when you just opened broot), uncomment
-# this parameter
-#
-# quit_on_last_cancel: true
-
-#-------------------------------------------------------------------------------
 # Search modes
 #
 # broot allows many search modes.
@@ -140,19 +128,6 @@ apply_to = "file"
 #     <empty>: fuzzy name
 #     /: regex name
 # }
-
-#-------------------------------------------------------------------------------
-# File Extension Colors
-#
-# uncomment and modify the next section if you want to color
-# file name depending on their extension
-#
-# ext_colors: {
-#     png: rgb(255, 128, 75)
-#     rs: yellow
-# }
-
-
 #-------------------------------------------------------------------------------
 # Max Panels Count
 #
@@ -160,4 +135,3 @@ apply_to = "file"
 # open
 # max_panels_count: 2
 
-#-------------------------------------------------------------------------------

@@ -28,14 +28,12 @@ function separator (){
 	echo "$SEP"
 }
 
-# Quick Open File
-# (or change directory if a folder is selected)
+# Quick Open File/Folder
 function o (){
 	local INPUT="$*"
 
 	# skip `fzf` if file is fully named (e.g. through tab-completion)
-	[[ -f "$INPUT" ]] && { open "$INPUT" ; return }
-	[[ -d "$INPUT" ]] && { z "$INPUT" ; directoryInspect ; return }
+	[[ -e "$INPUT" ]] && { open "$INPUT" ; return }
 
 	local SELECTED
 	SELECTED=$(fd --hidden | fzf \
@@ -45,11 +43,7 @@ function o (){
 	           )
 	[[ -z "$SELECTED" ]] && return 130 # abort if no selection
 
-	if [[ -d "$SELECTED" ]] ; then
-		z "$SELECTED"
-	else
-		open "$SELECTED"
-	fi
+	open "$SELECTED"
 }
 
 # smarter z/cd
