@@ -5,6 +5,7 @@ clear # messages for when launching via Alfred
 # requirements:
 # - cowsay
 # - fortune
+# - lolcat
 if [[ "$TERM" == "alacritty" ]] ; then
 	arr[1]=""   # standard
 	arr[2]="-b" # Borg Mode
@@ -27,10 +28,11 @@ if [[ "$TERM" == "alacritty" ]] ; then
 	fi
 
 	echo
-	echo "$(fortune -n270 -s)" | $say_or_think -W$width $random_emotion
+	echo "$(fortune -n270 -s)" | $say_or_think -W$width $random_emotion | lolcat --freq=0.15
 	echo
 
-	separator
-	echo
-	directoryInspect
+	if [[ $(ls | wc -l) -lt 20 ]] && [[ $(ls | wc -l) -gt 0 ]] ; then
+		separator
+		exa
+	fi
 fi
