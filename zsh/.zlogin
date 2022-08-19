@@ -19,7 +19,8 @@ if [[ "$TERM" == "alacritty" ]] ; then
 	rand=$((RANDOM % ${#arr[@]}))
 	random_emotion=${arr[$rand]}
 
-	width=$(($(tput cols) - 15))
+	width=$(($(tput cols) - 10))
+	[[ $width -gt 60 ]] && width=60
 
 	if [[ $((RANDOM%2)) == 1 ]] ; then
 		say_or_think="cowsay"
