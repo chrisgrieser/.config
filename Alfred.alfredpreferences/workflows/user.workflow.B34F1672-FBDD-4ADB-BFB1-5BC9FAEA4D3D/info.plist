@@ -352,7 +352,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>so/q/</string>
+				<string>so/</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -379,7 +379,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://stackoverflow.com/questions/{query}</string>
+				<string>https://stackoverflow.com/{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>

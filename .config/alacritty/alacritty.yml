@@ -126,7 +126,7 @@ hints:
     binding:
       key: U
       mods: Command
-  - regex: "so/q/\\w+"
+  - regex: "so/[qa]/\\w+"
     action: Select
     mouse:
       enabled: true
@@ -134,11 +134,14 @@ hints:
     binding:
       key: S
       mods: Command
-  - regex: ".*.png"
-    action: Select
+  - regex: "/Users/.*/.*\\.\\w+"
+    command: open
     mouse:
       enabled: true
       mods: None
+    binding:
+      key: O
+      mods: Command
 selection:
   save_to_clipboard: true
 key_bindings:
