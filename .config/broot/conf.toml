@@ -12,6 +12,11 @@ key = "enter"
 internal = ":open_leave"
 apply_to = "file"
 
+# ignore paths
+[special-paths]
+"*/.git" = "hide"
+"*/.DS_Store" = "hide"
+
 # copy path/name
 [[verbs]]
 key = "ctrl-p"
@@ -21,84 +26,18 @@ from_shell = true
 key = "ctrl-n"
 external = "echo \"{file-name}\" | pbcopy"
 from_shell = true
-[[verbs]]
-key = "ctrl-r"
-internal = ":rename"
-auto_exec = false
 
+# preview panel
 [[verbs]]
 key = "alt-enter"
 internal = ":open_preview"
-
+apply_to = "file"
+[[verbs]]
+key = "ctrl-w"
+internal = ":close_preview"
 
 # exact search by default
 [search_modes]
 "<empty>"= "exact name"
 "/"= "fuzzy name"
-
-# ext_colors: {
-#     png: rgb(255, 128, 75)
-#     rs: yellow
-# }
-
-#-------------------------------------------------------------------------------
-# Date/Time format
-# If you want to change the format for date/time, uncomment the
-# following line and change it according to
-# https://docs.rs/chrono/0.4.11/chrono/format/strftime/index.html
-#
-# date_time_format: %Y/%m/%d %R
-
-#-------------------------------------------------------------------------------
-# Column order
-# cols_order, if specified, must be a permutation of the following
-# array. You should keep the name column at the end as it has a
-# variable length.
-#
-# cols_order: [
-#     mark
-#     git
-#     size
-#     permission
-#     date
-#     count
-#     branch
-#     name
-# ]
-
-#-------------------------------------------------------------------------------
-# True Colors
-# If this parameter isn't set, broot tries to automatically
-# determine whether true colors (24 bits) are available.
-# As this process is unreliable, you may uncomment this setting
-# and set it to false or true if you notice the colors in
-# previewed images are too off.
-#
-# true_colors: false
-
-#-------------------------------------------------------------------------------
-# Icons
-# If you want to display icons in broot, uncomment this line
-# (see https://dystroy.org/broot/icons for installation and
-# troubleshooting)
-#
-# icon_theme: vscode
-
-#-------------------------------------------------------------------------------
-# Special paths
-# If some paths must be handled specially, uncomment (and change
-# this section as per the examples)
-#
-# special_paths: {
-#     "/media/slow-backup-disk"    : no-enter
-#     "/home/dys/useless"    : hide
-#     "/home/dys/my-link-I-want-to-explore"    : enter
-# }
-
-#-------------------------------------------------------------------------------
-# Max Panels Count
-#
-# Change this if you sometimes want to have more than 2 panels
-# open
-# max_panels_count: 2
 
