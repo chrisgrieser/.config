@@ -1,6 +1,7 @@
 -- https://www.hammerspoon.org/docs/hs.menubar.html
 -- https://www.hammerspoon.org/go/#simplemenubar
 require("utils")
+require("system-and-cron")
 --------------------------------------------------------------------------------
 
 -- this also determines the order of menubar items
@@ -18,14 +19,11 @@ weatherLocation = "Berlin"
 covidUpdateHours = 12
 covidLocationCode = "BE"
 fileHubLocation = os.getenv("HOME").."/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-dotfileLocation = os.getenv("HOME").."/dotfiles/"
-vaultLocation = os.getenv("HOME").."/Main Vault/"
 
 covidIcon ="🦠"
 draftsIcon ="☑️"
 fileHubIcon ="📂"
-dotfileSyncIcon ="⏺"
-vaultSyncIcon = "🟪"
+-- dotfiles and vault icon defined in system-and-cron.lua
 
 --------------------------------------------------------------------------------
 
@@ -79,7 +77,7 @@ function updateDotfileSyncStatusMenuBar()
 		dotfileSyncMenuBar:removeFromMenuBar() -- also removes clickcallback, which therefore has to be set again
 	else
 		dotfileSyncMenuBar:returnToMenuBar()
-		dotfileSyncMenuBar:setTitle(dotfileSyncIcon.." "..changes)
+		dotfileSyncMenuBar:setTitle(dotfileIcon.." "..changes)
 		dotfileSyncMenuBar:setClickCallback(function ()
 			local lastCommit = hs.execute('git log -1 --format=%ar')
 			lastCommit = trim(lastCommit)
@@ -105,7 +103,7 @@ function updateVaultSyncStatusMenuBar()
 		vaultSyncMenuBar:removeFromMenuBar() -- also removes clickcallback, which therefore has to be set again
 	else
 		vaultSyncMenuBar:returnToMenuBar()
-		vaultSyncMenuBar:setTitle(vaultSyncIcon.." "..changes)
+		vaultSyncMenuBar:setTitle(vaultIcon.." "..changes)
 		vaultSyncMenuBar:setClickCallback(function ()
 			local lastCommit = hs.execute('cd "'..vaultLocation..'" ; git log -1 --format=%ar')
 			lastCommit = trim(lastCommit)
