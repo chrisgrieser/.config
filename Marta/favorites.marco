@@ -3,5 +3,8 @@ dotfiles "~/dotfiles"
 Applications "/Applications"
 Home "~"
 "Main Vault" "/Users/chrisgrieser/Main Vault"
+Dotfolder "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
+Academia "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Academia"
+"Development Vault" "/Users/chrisgrieser/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development"
 
 
