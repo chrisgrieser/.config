@@ -49,7 +49,8 @@ alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in 
 # = default command to act upon the filetype, when is is entered
 # without preceding command (analogous to `setopt AUTO_CD` but for files)
 alias -s {css,ts,js,yml,json,plist,xml,md}='bat'
-alias -s {pdf,png,jpg,jpeg}="qlmanage -p &> /dev/null"
+# alias -s {pdf,png,jpg,jpeg}="qlmanage -p &> /dev/null"
+alias -s {pdf,png,jpg,jpeg}="open"
 
 # open log files in less and scrolled to the bottom
 alias -s log="less +G"

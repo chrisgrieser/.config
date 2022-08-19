@@ -123,12 +123,19 @@ hints:
     mouse:
       enabled: true
       mods: None
+    binding:
+      key: U
+      mods: Command
   - regex: "so/q/\\w+"
-    command:
-      program: sh
-      args:
-        - '-c'
-        - open "https://stackoverflow.com/questions/"
+    action: Select
+    mouse:
+      enabled: true
+      mods: None
+    binding:
+      key: S
+      mods: Command
+  - regex: ".*.png"
+    action: Select
     mouse:
       enabled: true
       mods: None
