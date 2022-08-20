@@ -8,6 +8,7 @@ function directoryInspect (){
 	elif [[ $(ls -d */ | wc -l) -lt 20 ]] ; then
 		command exa --all --icons --sort=modified -d */ # only directories
 	fi
+}
 
 # Move to trash via Finder (allows retrievability)
 # no arg = all files in folder will be deleted
@@ -103,13 +104,7 @@ function settings () {
 	fi )
 }
 
-# Make directory and cd there
-function mkcd () {
-	mkdir -p "$1"
-	cd "$1" || return 1
-}
-
-# get path of file
+# copies path of file
 function p () {
 	# shellcheck disable=SC2164
 	ABSOLUTE_PATH="$(cd "$(dirname "$1")"; pwd -P)/$(basename "$1")"
@@ -121,7 +116,7 @@ function p () {
 function lc (){
 	number="$*"
 	if [[ "$number" == "" ]] ; then
-		echo -n "$(history | tail -n1 | cut -c8-)" | pbcopy
+		history | tail -n1 | cut -c8- | pbcopy
 	else
 		history | tail -n"$number" | cut -c8- | pbcopy
 	fi
@@ -149,23 +144,23 @@ function lr (){
 function ex () {
 	if [[ -f $1 ]] ; then
 		case $1 in
-			*.tar.bz2)   tar -xjf "$1"     ;;
-			*.tar.gz)    tar -xzf "$1"     ;;
-			*.rar)       unrar -e "$1"     ;;
-			*.gz)        gunzip "$1"      ;;
-			*.tar)       tar -xf "$1"      ;;
-			*.tbz2)      tar -xjf "$1"     ;;
-			*.tgz)       tar -xzf "$1"     ;;
-			*.zip)       unzip "$1"       ;;
-			*.Z)         uncompress "$1"  ;;
-			*)     echo "'$1' cannot be extracted via ex()" ;;
+			*.tar.bz2)   tar -xjf "$1"   ;;
+			*.tar.gz)    tar -xzf "$1"   ;;
+			*.rar)       unrar -e "$1"   ;;
+			*.gz)        gunzip "$1"     ;;
+			*.tar)       tar -xf "$1"    ;;
+			*.tbz2)      tar -xjf "$1"   ;;
+			*.tgz)       tar -xzf "$1"   ;;
+			*.zip)       unzip "$1"      ;;
+			*.Z)         uncompress "$1" ;;
+			*) echo "'$1' cannot be extracted via ex()" ;;
 		esac
 	else
 		echo "'$1' is not a valid file"
 	fi
 }
 
-# appid
+# appid of macOS apps
 function appid () {
 	local id
 	id=$(osascript -e "id of app \"$1\"")
