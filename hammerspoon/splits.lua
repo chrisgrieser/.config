@@ -21,29 +21,35 @@ function mainScreenWindows()
 	return out
 end
 
--- Watcher, that raises win2 when win1 activates and vice versa
+-- if one of the two is activated, also activate the other
+-- unsplit if one of the two apps has been terminated
 splitStatusMenubar = hs.menubar.new()
 splitStatusMenubar:removeFromMenuBar() -- hide at beginning
-function pairedActivation()
-	pairedWinWatcher = aw.new(function (_, eventType)
-		-- if one of the two is activated, also activate the other
-		local currentWindow = hs.window.focusedWindow()
-		if eventType == aw.activated and currentWindow then
-			if currentWindow:id() == SPLIT_RIGHT:id() then SPLIT_LEFT:raise() -- not using :focus(), since that causes infinite recursion
-			elseif currentWindow:id() == SPLIT_LEFT:id() then SPLIT_RIGHT:raise() end
-		-- unsplit if one of the two apps has been terminated
-		elseif eventType == aw.terminated and (not SPLIT_LEFT:application() or not SPLIT_RIGHT:application()) then
-			vsplit("unsplit")
-		end
-	end)
-	pairedWinWatcher:start()
-	splitStatusMenubar:returnToMenuBar()
-	splitStatusMenubar:setTitle("2️⃣")
+function pairedActivation(mode)
+	if mode == "start" then
+		pairedWinWatcher = wf.
+		-- pairedWinWatcher = aw.new(function (_, eventType)
+		-- 	local currentWindow = hs.window.focusedWindow()
+		-- 	if eventType == aw.activated and currentWindow then
+		-- 		if currentWindow:id() == SPLIT_RIGHT:id() then SPLIT_LEFT:raise() -- not using :focus(), since that causes infinite recursion
+		-- 		elseif currentWindow:id() == SPLIT_LEFT:id() then SPLIT_RIGHT:raise() end
+		-- 	elseif eventType == aw.terminated and (not SPLIT_LEFT:application() or not SPLIT_RIGHT:application()) then
+		-- 		vsplit("unsplit")
+		-- 	end
+		-- end)
+		pairedWinWatcher:start()
+		splitStatusMenubar:returnToMenuBar()
+		splitStatusMenubar:setTitle("2️⃣")
+	elseif mode == "stop" then
+		pairedWinWatcher:stop()
+		splitStatusMenubar:removeFromMenuBar()
+	end
 end
 
 function vsplit (mode)
-	local noSplitActive = true
-	if SPLIT_RIGHT then noSplitActive = false end
+	local noSplitActive
+	if SPLIT_RIGHT then noSplitActive = false
+	else noSplitActive = true end
 
 	if noSplitActive and (mode == "switch" or mode == "unsplit") then
 		notify ("No split active")
@@ -65,7 +71,7 @@ function vsplit (mode)
 	local f2 = SPLIT_LEFT:frame()
 
 	if mode == "split" then
-		pairedActivation()
+		pairedActivation("start")
 		local max = hs.screen.mainScreen():frame()
 		if (f1.w ~= f2.w or f1.w > 0.7*max.w) then
 			f1 = hs.layout.left50
@@ -77,8 +83,7 @@ function vsplit (mode)
 	elseif mode == "unsplit" then
 		f1 = baseLayout
 		f2 = baseLayout
-		pairedWinWatcher:stop()
-		splitStatusMenubar:removeFromMenuBar()
+		pairedActivation("stop")
 	elseif mode == "switch" then
 		if (f1.w == f2.w) then
 			f1 = hs.layout.right50
