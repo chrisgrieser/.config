@@ -108,7 +108,7 @@ hotkey({"shift"}, "end", shiftEndAction)
 -- open both windows on launch
 -- only active in office & when not using twitterrificScrollUp()
 function twitterificAppActivated(appName, eventType)
-	if not(appName == "Twitterrific" or eventType == aw.launched) then return end
+	if not(appName == "Twitterrific" and eventType == aw.launched) then return end
 	runDelayed(1, function() twitterrificAction("scrollup") end)
 end
 twitterificAppWatcher = aw.new(twitterificAppActivated)
