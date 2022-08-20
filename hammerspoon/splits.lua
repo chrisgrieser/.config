@@ -34,13 +34,13 @@ function pairedActivation(mode)
 		local app2 = SPLIT_RIGHT:application():name()
 		wf_pairedActivation = wf.new{app1, app2}
 		wf_pairedActivation:subscribe(wf.windowFocused, function(focusedWin)
-			runDelayed (0.1, function ()
-				if focusedWin:id() == SPLIT_RIGHT:id() then
-					SPLIT_LEFT:raise() -- not using :focus(), since that causes infinite recursion
-				elseif focusedWin:id() == SPLIT_LEFT:id() then
-					SPLIT_RIGHT:raise()
-				end
-			end)
+			if focusedWin:id() == SPLIT_RIGHT:id() then
+				-- not using :focus(), since that would cause infinite recursion
+				-- raising needs small delay, so that focussed window is already at front
+				runDelayed (0.05, function ()	SPLIT_LEFT:raise() end)
+			elseif focusedWin:id() == SPLIT_LEFT:id() then
+				runDelayed (0.05, function ()	SPLIT_RIGHT:raise() end)
+			end
 		end)
 		wf_pairedActivation:subscribe(wf.windowDestroyed, function(closedWin)
 			if closedWin:id() == SPLIT_RIGHT:id() or closedWin:id() == SPLIT_LEFT:id() then
