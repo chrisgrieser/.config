@@ -171,6 +171,17 @@
 			<key>utf8</key>
 			<true/>
 		</dict>
+		<key>CFD350B4-6201-41ED-93FE-EE2199EC6FAC</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>us</string>
+			<key>text</key>
+			<string>User Scripts: '{query}'</string>
+			<key>url</key>
+			<string>https://www.userscript.zone/search?q={query}</string>
+		</dict>
 		<key>D6907991-DE8D-4739-B770-96C9744BD863</key>
 		<dict>
 			<key>enabled</key>
