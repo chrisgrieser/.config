@@ -22,27 +22,35 @@ function mainScreenWindows()
 end
 
 -- if one of the two is activated, also activate the other
--- unsplit if one of the two apps has been terminated
+-- unsplit if one of the two windows has been closed
 splitStatusMenubar = hs.menubar.new()
 splitStatusMenubar:removeFromMenuBar() -- hide at beginning
 function pairedActivation(mode)
 	if mode == "start" then
-		pairedWinWatcher = wf.
-		-- pairedWinWatcher = aw.new(function (_, eventType)
-		-- 	local currentWindow = hs.window.focusedWindow()
-		-- 	if eventType == aw.activated and currentWindow then
-		-- 		if currentWindow:id() == SPLIT_RIGHT:id() then SPLIT_LEFT:raise() -- not using :focus(), since that causes infinite recursion
-		-- 		elseif currentWindow:id() == SPLIT_LEFT:id() then SPLIT_RIGHT:raise() end
-		-- 	elseif eventType == aw.terminated and (not SPLIT_LEFT:application() or not SPLIT_RIGHT:application()) then
-		-- 		vsplit("unsplit")
-		-- 	end
-		-- end)
-		pairedWinWatcher:start()
 		splitStatusMenubar:returnToMenuBar()
 		splitStatusMenubar:setTitle("2️⃣")
+
+		local app1 = SPLIT_LEFT:application():name()
+		local app2 = SPLIT_RIGHT:application():name()
+		wf_pairedActivation = wf.new{app1, app2}
+		wf_pairedActivation:subscribe(wf.windowFocused, function(focusedWin)
+			if focusedWin:id() == SPLIT_RIGHT:id() then
+				SPLIT_LEFT:raise() -- not using :focus(), since that causes infinite recursion
+			elseif focusedWin:id() == SPLIT_LEFT:id() then
+				SPLIT_RIGHT:raise()
+			end
+		end)
+		wf_pairedActivation:subscribe(wf.windowDestroyed, function(closedWin)
+			if  closedWin:id() == SPLIT_RIGHT:id() or closedWin:id() == SPLIT_LEFT:id() then
+				vsplit("unsplit")
+			end
+		end)
+
 	elseif mode == "stop" then
-		pairedWinWatcher:stop()
 		splitStatusMenubar:removeFromMenuBar()
+
+		wf_pairedActivation:unsubscribeAll()
+		wf_pairedActivation = nil
 	end
 end
 
