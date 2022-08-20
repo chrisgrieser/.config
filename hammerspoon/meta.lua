@@ -2,7 +2,7 @@ require("utils")
 
 -- `hammerspoon://hs-reload` for reloading via Sublime Build System
 hs.urlevent.bind("hs-reload", function()
-	print("Reloading Config...")
+	if SPLIT_RIGHT then vsplit("unsplit") end -- unsplit, if there is a split
 	if hs.console.hswindow() then hs.console.hswindow():close() end -- close console
 	hs.reload()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
