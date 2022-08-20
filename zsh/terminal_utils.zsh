@@ -61,9 +61,8 @@ function o (){
 	           )
 	if [[ -z "$SELECTED" ]] && [[ "$prev_clipb" == "$(pbpaste)" ]] ; then
 		return 0 # abort if no selection
-	elif [[ -z "$SELECTED" ]] ; then
+	elif [[ -z "$SELECTED" ]] && [[ "$prev_clipb" != "$(pbpaste)" ]] ; then
 		print -z "$(pbpaste)" # write to buffer
-		echo "$prev_clipb" | pbcopy # restore old clipboard
 	elif [[ -d "$SELECTED" ]] ; then
 		z "$SELECTED"
 	elif [[ -f "$SELECTED" ]] ; then
@@ -123,9 +122,9 @@ function p () {
 function lc (){
 	number="$*"
 	if [[ "$number" == "" ]] ; then
-		echo -n "$(history | tail -n 1 | cut -c 8-)" | pbcopy
+		echo -n "$(history | tail -n1 | cut -c8-)" | pbcopy
 	else
-		history | tail -n "$number" | cut -c 8- | pbcopy
+		history | tail -n"$number" | cut -c8- | pbcopy
 	fi
 	echo "Copied."
 }
