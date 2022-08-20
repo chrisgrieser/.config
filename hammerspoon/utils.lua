@@ -4,6 +4,7 @@ alert = hs.alert.show
 keystroke = hs.eventtap.keyStroke
 aw = hs.application.watcher
 wf = hs.window.filter
+runDelayed = hs.timer.doAfter
 
 function trim(str)
 	return (str:gsub("^%s*(.-)%s*$", "%1"))
@@ -85,12 +86,3 @@ function killIfRunning (appName)
 		if runs then runs:kill9() end
 	end)
 end
-
--- function runDelayed (delaySecs, fn)
--- 	hs.timer.doAfter(delaySecs, function () fn() end)
--- end
-
-runDelayed = hs.timer.doAfter
-
-
-
