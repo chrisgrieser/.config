@@ -4,9 +4,9 @@ function directoryInspect (){
 		echo
 	fi
 	if [[ $(ls | wc -l) -lt 20 ]] ; then
-		exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
+		e
 	elif [[ $(ls -d */ | wc -l) -lt 20 ]] ; then
-		exa --all --icons --sort=modified -d */ # only directories
+		command exa --all --icons --sort=modified -d */ # only directories
 	fi
 }
 

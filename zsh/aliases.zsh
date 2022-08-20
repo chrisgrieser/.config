@@ -38,6 +38,9 @@ alias pip="pip3"
 alias curl="curl -s"
 
 # exa
+function e(){
+	exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
+}
 alias ll='command exa --all --long --git --icons --group-directories-first --sort=modified'
 alias tre='command exa --tree -L1 --icons'
 alias tree='command exa --tree -L2 --icons'
