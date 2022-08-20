@@ -231,8 +231,6 @@
 			<string>Inoreader RSS</string>
 			<key>url</key>
 			<string>https://www.inoreader.com/search/feeds/{query}</string>
-			<key>utf8</key>
-			<true/>
 		</dict>
 		<key>E6EBE234-58DF-42AE-B019-B2941D2B424F</key>
 		<dict>
