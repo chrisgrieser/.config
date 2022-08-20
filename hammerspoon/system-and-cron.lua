@@ -12,7 +12,6 @@ repoSyncFrequencyMin = 20
 
 --------------------------------------------------------------------------------
 
-
 gitDotfileScript = dotfileLocation.."/git-dotfile-sync.sh"
 function gitDotfileSync(arg)
 	if arg then arg = {arg}
