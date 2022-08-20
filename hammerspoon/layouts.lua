@@ -82,7 +82,7 @@ function motherHomeModeLayout()
 	killIfRunning("IINA")
 	killIfRunning("Twitch")
 	killIfRunning("Finder")
-	privateClosers()
+	privateClosers() ---@diagnostic disable-line: undefined-global
 
 	sublimeFontSize(14)
 	dockSwitcher("home")
@@ -202,7 +202,7 @@ function setLayout()
 		local numberOfScreens = #hs.screen.allScreens()
 		runDelayed (1, function ()
 			local screenNumberChanged = #hs.screen.allScreens() ~= numberOfScreens
-			if screenNumberChanged then return end -- prevent double triggering when screen number changed in between
+			if screenNumberChanged then return end -- only execute when not double triggered
 			if isProjector() then motherMovieModeLayout()
 			else motherHomeModeLayout() end
 		end)

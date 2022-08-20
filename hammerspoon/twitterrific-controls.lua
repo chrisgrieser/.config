@@ -1,7 +1,6 @@
 require("utils")
 
 function twitterrificAction (type)
-	twitterrificActionRunning = true
 	local twitterrific = hs.application("Twitterrific")
 	twitterrific:activate() -- needs activation, cause sending to app in background doesn't work w/ cmd
 
@@ -25,8 +24,6 @@ function twitterrificAction (type)
 		hs.mouse.absolutePosition(prevMousePos)
 		hs.application(previousApp):activate()
 	end
-
-	twitterrificActionRunning = false
 end
 
 function pagedownAction ()
@@ -101,38 +98,18 @@ iinaAppLauncher:start()
 hotkey({}, "pagedown", pagedownAction, nil, pagedownAction)
 hotkey({}, "pageup", pageupAction, nil, pageupAction)
 hotkey({}, "home", homeAction)
+hotkey({}, "f5", homeAction) -- for Apple Keyboards
 hotkey({"shift"}, "home", shiftHomeAction)
 hotkey({}, "end", endAction)
 hotkey({"shift"}, "end", shiftEndAction)
 
-
 --------------------------------------------------------------------------------
--- raise all windows on activation,
+-- scroll up on launch
 -- open both windows on launch
 -- only active in office & when not using twitterrificScrollUp()
-function twitterificAppActivated(appName, eventType, appObject)
-	if appName ~= "Twitterrific" or twitterrificActionRunning then return end
-
-	if isAtOffice() then
-		if (eventType == aw.launched) then
-			runDelayed(1, function ()
-				twitterrific = hs.application("Twitterrific")
-				-- switch to list view has (to be done via keystroke, since headless)
-				keystroke({"cmd"}, "T", twitterrific)
-				keystroke({"cmd"}, "5", twitterrific)
-				keystroke({}, "down", twitterrific)
-				keystroke({}, "return", twitterrific)
-			end)
-		elseif (eventType == aw.activated) then
-			appObject:getWindow("@pseudo_meta - List: _PKM & Obsidian Community"):raise()
-			appObject:getWindow("@pseudo_meta - Home"):focus()
-		end
-
-	elseif isIMacAtHome() and (eventType == aw.launched) then
-		runDelayed(1, function() twitterrificAction("scrollup") end)
-	end
-
+function twitterificAppActivated(appName, eventType)
+	if not(appName == "Twitterrific" or eventType == aw.launched) then return end
+	runDelayed(1, function() twitterrificAction("scrollup") end)
 end
-twitterrificActionRunning = false
 twitterificAppWatcher = aw.new(twitterificAppActivated)
-if isAtOffice() then twitterificAppWatcher:start() end
+twitterificAppWatcher:start()
