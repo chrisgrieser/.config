@@ -33,11 +33,16 @@ setopt AUTO_CD # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypasting)
 
 # MAGIC ENTER
+# in git directory: first enter = git status, second = opener
 function gito(){
-history | tail -n 1 | cut -c 8-
+	if [[ "$(history | tail -n1 | cut -c8-)" != "gito" ]]; then
+		git status -s
+	else
+		o
+	fi
 }
 
-export MAGIC_ENTER_GIT_COMMAND="git status -s ; o"
+export MAGIC_ENTER_GIT_COMMAND="gito"
 export MAGIC_ENTER_OTHER_COMMAND="o"
 
 
