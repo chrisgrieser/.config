@@ -48,10 +48,6 @@
 	{ "keys": ["shift+control+alt+9"], "command": "fold_by_level", "args": {"level": 9} },
 	{ "keys": ["shift+control+alt+f"], "command": "unfold_all" },
 
-
-	{ "keys": ["super+6"], "command": "open_context_url" },
-
-
 	// ------------------------------------
 
 	// to avoid `Esc` leaving insert mode and autocomplete
@@ -128,6 +124,7 @@
 
 	// Comment
 	{ "keys": ["super+7"], "command": "toggle_comment", "args": { "block": false } },
+	{ "keys": ["super+u"], "command": "toggle_comment", "args": { "block": false } },
 
    // Disable Accidental Triggering of Saving Modal
    { "keys": ["super+shift+s"], "command": "noop" },
