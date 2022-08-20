@@ -33,6 +33,10 @@ setopt AUTO_CD # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypasting)
 
 # MAGIC ENTER
+function gito(){
+history | tail -n 1 | cut -c 8-
+}
+
 export MAGIC_ENTER_GIT_COMMAND="git status -s ; o"
 export MAGIC_ENTER_OTHER_COMMAND="o"
 
