@@ -106,6 +106,8 @@ function motherHomeModeLayout()
 		hs.layout.apply(motherHomeLayout)
 		showAllSidebars()
 	end)
+	runDelayed(0.6, function () hs.layout.apply(motherHomeLayout) end)
+	runDelayed(0.9, function () hs.layout.apply(motherHomeLayout) end)
 end
 
 function homeModeLayout ()
