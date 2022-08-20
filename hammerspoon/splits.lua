@@ -36,10 +36,10 @@ function pairedActivation(mode)
 		wf_pairedActivation:subscribe(wf.windowFocused, function(focusedWin)
 			if focusedWin:id() == SPLIT_RIGHT:id() then
 				-- not using :focus(), since that would cause infinite recursion
-				-- raising needs small delay, so that focussed window is already at front
-				runDelayed (0.05, function ()	SPLIT_LEFT:raise() end)
+				-- raising needs small delay, so that focused window is already at front
+				runDelayed (0.02, function ()	SPLIT_LEFT:raise() end)
 			elseif focusedWin:id() == SPLIT_LEFT:id() then
-				runDelayed (0.05, function ()	SPLIT_RIGHT:raise() end)
+				runDelayed (0.02, function ()	SPLIT_RIGHT:raise() end)
 			end
 		end)
 		wf_pairedActivation:subscribe(wf.windowDestroyed, function(closedWin)
