@@ -1,5 +1,6 @@
 hyper = {"cmd", "alt", "ctrl", "shift"}
 hotkey = hs.hotkey.bind
+alert = hs.alert.show
 keystroke = hs.eventtap.keyStroke
 aw = hs.application.watcher
 wf = hs.window.filter
@@ -23,7 +24,7 @@ function isAtMother()
 end
 
 function isIMacAtHome()
-	if (deviceName():find("Leuthingerweg")) then
+	if deviceName():find("iMac") and not(deviceName():find("Leuthingerweg")) then
 		return true
 	else
 		return false
@@ -47,10 +48,6 @@ function notify (text)
 	text = (trim(text))
 	hs.notify.new({title="Hammerspoon", informativeText=text}):send()
 	print("notify: "..text) -- for the console
-end
-
-function alert (text)
-	hs.alert.show(text)
 end
 
 function log (text, location)
@@ -89,9 +86,11 @@ function killIfRunning (appName)
 	end)
 end
 
-function runDelayed (delaySecs, fn)
-	hs.timer.doAfter(delaySecs, function () fn() end)
-end
+-- function runDelayed (delaySecs, fn)
+-- 	hs.timer.doAfter(delaySecs, function () fn() end)
+-- end
+
+runDelayed = hs.timer.doAfter
 
 
 
