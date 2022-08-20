@@ -1,5 +1,5 @@
--- - https://www.hammerspoon.org/go/#winfilters
--- - https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
+-- https://www.hammerspoon.org/go/#winfilters
+-- https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 require("utils")
 require("window-management")
 
@@ -10,6 +10,14 @@ require("window-management")
 -- change sizing back, when back to one window
 wf_browser = wf.new("Brave Browser"):setOverrideFilter{rejectTitles={" %(Private%)$","^Picture in Picture$"}, allowRoles='AXStandardWindow', hasTitlebar=true}
 wf_browser:subscribe(wf.windowCreated, function ()
+	if #wf_browser:getWindows() == 1 then
+		if isAtOffice() or isProjector() then
+			moveResizeCurWin("maximized")
+		else
+			moveResizeCurWin("pseudo-maximized")
+			hs.application("Twitterrific"):mainWindow():raise()
+		end
+	end
 	if #wf_browser:getWindows() == 2 then
 		local win1 = wf_browser:getWindows()[1]
 		local win2 = wf_browser:getWindows()[2]
