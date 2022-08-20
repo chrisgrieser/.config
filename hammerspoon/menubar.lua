@@ -166,16 +166,3 @@ end
 -- update when folder changes
 fileHubMenuBarWatcher = hs.pathwatcher.new(fileHubLocation, setFileHubCountMenuBar)
 fileHubMenuBarWatcher:start()
-
---------------------------------------------------------------------------------
--- obsidianStatusBar = hs.menubar.new()
--- obsiWorkspaceJSON = os.getenv("HOME") .. "/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/.obsidian/workspace"
--- function obsidianCurrentFile()
--- 	local filename = hs.json.read(obsiWorkspaceJSON).lastOpenFiles[1]
--- 		:sub(0, -4) -- remove extension
--- 		:gsub(".*/", "") -- remove path
--- 	obsidianStatusBar:setTitle(filename)
--- end
--- obsidianCurrentFile()
--- obsiWatcher = hs.pathwatcher.new(obsiWorkspaceJSON, obsidianCurrentFile)
--- obsiWatcher:start()
