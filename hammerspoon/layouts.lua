@@ -194,10 +194,18 @@ end
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
 function setLayout()
 	if isAtOffice() then officeModeLayout()
-	elseif isProjector() and isIMacAtHome() then movieModeLayout()
-	elseif isIMacAtHome() and not(isProjector()) then homeModeLayout()
-	elseif isAtMother() and isProjector() then motherMovieModeLayout()
-	elseif isAtMother() and not(isProjector()) then motherHomeModeLayout()
+	elseif isIMacAtHome() then
+		if isProjector() then movieModeLayout()
+		else homeModeLayout() end
+	elseif isAtMother() then
+		-- delay necessary since tv monitor is recognized only a bit later
+		local numberOfScreens = #hs.screen.allScreens()
+		runDelayed (1, function ()
+			local screenNumberChanged = #hs.screen.allScreens() ~= numberOfScreens
+			if screenNumberChanged then return end -- prevent double triggering when screen number changed in between
+			if isProjector() then motherMovieModeLayout()
+			else motherHomeModeLayout() end
+		end)
 	end
 end
 

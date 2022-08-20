@@ -1,6 +1,7 @@
 // Settings in here override those in "LSP-lua/LSP-lua.sublime-settings"
 {
 	"settings": {
+		"Lua.diagnostics.libraryFiles": "Enable",
 		"Lua.diagnostics.globals": [
 			// Marta
 			"martax",
