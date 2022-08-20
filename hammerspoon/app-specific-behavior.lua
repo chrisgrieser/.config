@@ -4,19 +4,12 @@ require("utils")
 require("window-management")
 
 -- always activate windows together
-function twitterrificNextToPseudoMax(_, eventType)
-	if not(eventType == aw.activated or eventType == aw.launching) then return end
-	if not (hs.application("Twitterrific")) then return end
-
-	local currentWin = hs.window.focusedWindow()
-	if isPseudoMaximized(currentWin) then
-		hs.application("Twitterrific"):mainWindow():raise()
-	end
+function allWindowsActivation(_, eventType, appObject)
+	if not(eventType == aw.activated) then return end
+	appObject:selectMenuItem({"Window", "Bring All to Front"})
 end
-anyAppActivationWatcher = aw.new(twitterrificNextToPseudoMax)
-anyAppActivationWatcher:start()
-
-
+appWatcher = aw.new(allWindowsActivation)
+appWatcher:start()
 
 --------------------------------------------------------------------------------
 
