@@ -35,10 +35,12 @@ setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypast
 # MAGIC ENTER
 # in git directory: first enter = git status, second = opener
 function gito(){
-	if [[ "$(history | tail -n1 | cut -c8-)" != "gito" ]]; then
+	if [[ "$GIT_REPO_MAGIC_ENTER_FIRST_RUN" -eq 0 ]]; then
 		git status -s
+		GIT_REPO_MAGIC_ENTER_FIRST_RUN=1
 	else
 		o
+		GIT_REPO_MAGIC_ENTER_FIRST_RUN=0
 	fi
 }
 
