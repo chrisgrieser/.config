@@ -23,14 +23,11 @@ function isAtMother()
 end
 
 function isIMacAtHome()
-	local iMacFirstScreen = hs.screen.primaryScreen():name() == "Built-in Retina Display"
-	local iMacSecondScreen
-	if #hs.screen.allScreens() > 1 then
-		iMacSecondScreen = hs.screen.allScreens()[2]:name() == "Built-in Retina Display"
+	if (deviceName():find("Leuthingerweg")) then
+		return true
 	else
-		iMacSecondScreen = false
+		return false
 	end
-	return (iMacFirstScreen or iMacSecondScreen) and not(isAtMother())
 end
 
 
@@ -68,7 +65,7 @@ end
 
 function appIsRunning (appName)
 	-- can't use ":isRunning()", since the application object is nil when it
-	-- wasn't wasn't running before
+	-- wasn't running before
 	local runs = hs.application.get(appName)
 	if runs then return true
 	else return false	end
