@@ -8,7 +8,6 @@ function directoryInspect (){
 	elif [[ $(ls -d */ | wc -l) -lt 20 ]] ; then
 		command exa --all --icons --sort=modified -d */ # only directories
 	fi
-}
 
 # Move to trash via Finder (allows retrievability)
 # no arg = all files in folder will be deleted
