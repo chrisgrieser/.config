@@ -38,7 +38,10 @@ alias pip="pip3"
 alias curl="curl -s"
 
 # exa
-alias e='exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store'
+# in function for directoryInspect function
+function e(){
+	exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
+}
 alias s='exa --long --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git --tree --color=always | grep -v "\--"'
 alias l='command exa --all --long --git --icons --group-directories-first --sort=modified'
 alias tree='command exa --tree --icons'
