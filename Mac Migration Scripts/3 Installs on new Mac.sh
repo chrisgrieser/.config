@@ -40,11 +40,6 @@ broot --install
 # Espanso
 espanso service register
 
-# MARTA
-defaults write -g NSFileViewer -string org.yanex.marta
-defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="org.yanex.marta";}'
-# then restart mac
-
 # make Finder quittable
 defaults write com.apple.finder QuitMenuItem -bool true
 killall Finder
@@ -56,7 +51,6 @@ killall Finder
 # Reference
 # https://binarynights.com/manual#fileviewer
 # https://github.com/marta-file-manager/marta-issues/issues/861
-
 
 # change setting of archive utility
 open "/System/Library/CoreServices/Applications/Archive Utility.app"
