@@ -56,7 +56,8 @@ function o (){
 	SELECTED=$(fd --hidden | fzf \
 	           -0 -1 \
 	           --query "$INPUT" \
-	           --bind="alt-enter:execute-silent(echo {} | pbcopy)+abort" \
+	           --bind="tab:reload(fd --hidden --type=directory)" \
+	           --bind="btab:reload(fd --hidden)" \
 	           --preview "if [[ -d {} ]] ; then exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
 	           )
 	if [[ -z "$SELECTED" ]] && [[ "$prev_clipb" == "$(pbpaste)" ]] ; then

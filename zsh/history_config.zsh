@@ -31,7 +31,6 @@ function hs {
 	           --info=hidden \
 	           --query "$*" \
 	           --height=60% \
-	           --bind "tab:execute-silent(echo {} | cut -c\"$TO_CUT\"- | pbcopy)+abort" \
 	          )
 	COMMAND=$(echo "$SELECTED" | cut -c"$TO_CUT"-)
 	print -z "$COMMAND" # print to buffer
