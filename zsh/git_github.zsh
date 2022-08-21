@@ -1,16 +1,18 @@
-
 # list git files changed in commit
 function changed (){
 	local COMMIT
-	COMMIT=$(git log --color=always --pretty=format:'%C(yellow)%h%C(reset) %s' | \
+	COMMIT=$(git log --color=always --pretty=format:'%C(yellow)%h%C(blue) %s' | \
 	   fzf -0 -1 \
 		--ansi \
 		--query="$1" \
-		--preview="echo {} | cut -d' ' -f1 | xargs git show --name-only --pretty=''"\
+		--preview="echo {} | cut -d' ' -f1 | xargs git show --name-only"\
 	)
-
 	[[ -z "$COMMIT" ]] && return 0
-	echo "$COMMIT"
+	# output hash
+	local hash
+	hash=$(echo "$COMMIT" | cut -d' ' -f1)
+	echo "$hash" | pbcopy
+	echo "$hash copied."
 }
 
 # git add, commit, (pull) & push
