@@ -121,6 +121,7 @@ function motherHomeModeLayout()
 		showAllSidebars()
 	end)
 	runDelayed(0.6, function () hs.layout.apply(motherHomeLayout) end)
+	runDelayed(1, function () hs.layout.apply(motherHomeLayout) end)
 	spotifyTUI("pause") ---@diagnostic disable-line: undefined-global
 end
 
