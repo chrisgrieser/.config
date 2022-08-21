@@ -4,6 +4,11 @@
 matches:
   - trigger: '!hr'
     replace: "--------------------------------------------------------------------------------\n"
-  - $trigger: "!resolve"
+  - trigger: "!resolve"
     replace: 'os.getenv("HOME")'
     label: resolve ~
+  - trigger: "!ignore"
+    replace: '---@diagnostic disable-line: undefined-global'
+    label: Ignore in LUA LSP
+  - trigger: "!utils"
+    replace: 'require("utils")'

@@ -320,17 +320,17 @@ macPassWatcher:start()
 -- YOUTUBE + SPOTIFY
 -- Pause Spotify on launch
 -- Resume Spotify on quit
+function spotifyTUI (toStatus)
+	local currentStatus = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s")
+	currentStatus = trim(currentStatus)
+	if (currentStatus == "▶️" and toStatus == "pause") or (currentStatus == "⏸" and toStatus == "play") then
+		local stdout = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle")
+		if (toStatus == "play") then notify(stdout) end
+	end
+end
 function youtubeSpotify (appName, eventType)
 	if not(appName == "YouTube") then return end
 
-	local function spotifyTUI (toStatus)
-		local currentStatus = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s")
-		currentStatus = trim(currentStatus)
-		if (currentStatus == "▶️" and toStatus == "pause") or (currentStatus == "⏸" and toStatus == "play") then
-			local stdout = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle")
-			if (toStatus == "play") then notify(stdout) end
-		end
-	end
 
 	if (eventType == aw.launched) then
 		spotifyTUI("pause")

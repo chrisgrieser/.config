@@ -39,13 +39,12 @@
         "hs.pasteboard.setContents()",
         "hs.pasteboard.getContents()",
         "hs.json.decode()",
-        "require(\"utils\")",
         "hs.http.get()\tcurl equivalent",
         "hs.urlevent.bind(\"foobar\", function)\t→ hammerspoon://foobar",
-
         "hotkey({}, \"\", function() end)",
         "keystroke({}, \"\")",
 
+        "require(\"utils\")",
         "os.getenv(\"HOME\")",
     ]
 }
