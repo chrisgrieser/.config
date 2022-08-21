@@ -56,6 +56,9 @@ case $APP_TO_UPDATE in
 	"Discord")
 		cp "$CUSTOM_ICON_FOLDER/Discord Black.icns" 'Discord.app/Contents/Resources/electron.icns'
 		touch "Discord.app" ;;
+	"MailMate"|"Mailmate")
+		cp "$CUSTOM_ICON_FOLDER/Mailmate.icns" 'MailMate.app/Contents/Resources/MailMate.icns'
+		touch "MailMate.app" ;;
 
 	"Microsoft Word")
 		osascript -e "tell application \"Finder\"
