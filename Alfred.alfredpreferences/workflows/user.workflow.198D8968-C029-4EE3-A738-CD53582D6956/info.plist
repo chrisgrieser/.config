@@ -8,6 +8,57 @@
 	<string>Searches</string>
 	<key>connections</key>
 	<dict>
+		<key>356A558A-9F47-4BC6-A163-1B181A26172F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8F8D0C2B-6F15-4221-AC84-99F32AD3D6FF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4E319915-599F-4E1B-9EAF-DC26ABA4DD94</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8DF09D83-DE5C-452E-8828-081440C474C1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>A0F0B5C6-F4E5-4CBE-9347-39167006FE92</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>FCB360D0-4069-4209-AA65-9223BAF14BF1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>8DF09D83-DE5C-452E-8828-081440C474C1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>356A558A-9F47-4BC6-A163-1B181A26172F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>8F8D0C2B-6F15-4221-AC84-99F32AD3D6FF</key>
 		<array>
 			<dict>
@@ -38,7 +89,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FCB360D0-4069-4209-AA65-9223BAF14BF1</string>
+				<string>4E319915-599F-4E1B-9EAF-DC26ABA4DD94</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -47,6 +98,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E12B7653-FF5A-4098-94BF-9D5AADB84EA9</key>
+		<array/>
 		<key>E23B3A58-D13E-4884-BF4B-388B51EC21C6</key>
 		<array>
 			<dict>
@@ -87,6 +140,49 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>delimiter</key>
+				<string>/</string>
+				<key>discardemptyarguments</key>
+				<true/>
+				<key>outputas</key>
+				<integer>0</integer>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>split</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>8DF09D83-DE5C-452E-8828-081440C474C1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>flags</key>
+					<string>{var:split2}</string>
+					<key>regex</key>
+					<string>{var:split1}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>356A558A-9F47-4BC6-A163-1B181A26172F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -117,7 +213,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://regex101.com/?regex={var:regex}&amp;testString={query}</string>
+				<string>https://regex101.com/?regex={var:regex}&amp;testString={query}&amp;flags={var:flags}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -148,26 +244,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>regex</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>FCB360D0-4069-4209-AA65-9223BAF14BF1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -176,17 +252,17 @@
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>0</integer>
+						<integer>4</integer>
 						<key>matchstring</key>
-						<string></string>
+						<string>\/(.*)\/([gmis]+)</string>
 						<key>outputlabel</key>
-						<string></string>
+						<string>w/ flags</string>
 						<key>uid</key>
 						<string>A0F0B5C6-F4E5-4CBE-9347-39167006FE92</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>else</string>
+				<string>w/o flags</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
@@ -200,21 +276,22 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
+				<key>argument</key>
 				<string></string>
-				<key>skipqueryencode</key>
+				<key>passthroughargument</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://gitspartv.github.io/lua-patterns/?pattern={query}</string>
+				<key>variables</key>
+				<dict>
+					<key>flags</key>
+					<string></string>
+					<key>regex</key>
+					<string>{query}</string>
+				</dict>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>020F67A2-C0F9-4885-BA64-234E98631EF3</string>
+			<string>FCB360D0-4069-4209-AA65-9223BAF14BF1</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -256,7 +333,7 @@
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>1C6AF733-2996-43F9-9B7E-10619617C92D</string>
+			<string>020F67A2-C0F9-4885-BA64-234E98631EF3</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -281,6 +358,27 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://gitspartv.github.io/lua-patterns/?pattern={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>1C6AF733-2996-43F9-9B7E-10619617C92D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -293,37 +391,57 @@
 			<key>xpos</key>
 			<real>290</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>275</real>
 		</dict>
 		<key>1C6AF733-2996-43F9-9B7E-10619617C92D</key>
 		<dict>
 			<key>xpos</key>
 			<real>290</real>
 			<key>ypos</key>
-			<real>520</real>
+			<real>410</real>
+		</dict>
+		<key>356A558A-9F47-4BC6-A163-1B181A26172F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>125</real>
 		</dict>
 		<key>4E319915-599F-4E1B-9EAF-DC26ABA4DD94</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>160</real>
+		</dict>
+		<key>8DF09D83-DE5C-452E-8828-081440C474C1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>310</real>
+			<key>ypos</key>
+			<real>125</real>
 		</dict>
 		<key>8F8D0C2B-6F15-4221-AC84-99F32AD3D6FF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>410</real>
+			<real>460</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>145</real>
 		</dict>
 		<key>CF556896-A43C-464A-8E0B-35233C55CCE8</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>520</real>
+			<real>410</real>
 		</dict>
 		<key>D357791A-7C1A-45F4-9FE6-210C217ADDD5</key>
 		<dict>
@@ -341,9 +459,9 @@
 			<key>note</key>
 			<string>https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url</string>
 			<key>xpos</key>
-			<real>620</real>
+			<real>630</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>145</real>
 		</dict>
 		<key>E23B3A58-D13E-4884-BF4B-388B51EC21C6</key>
 		<dict>
@@ -352,16 +470,16 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>275</real>
 		</dict>
 		<key>FCB360D0-4069-4209-AA65-9223BAF14BF1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>230</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>210</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
