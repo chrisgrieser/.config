@@ -204,7 +204,7 @@ keyBindings {
     "Ctrl+P" "core.path"
     "Cmd+8" "core.terminal.toggle"
     "Cmd+K" "core.terminal.clear.buffer"
-    "Cmd+Shift+D" "core.duplicate"
+    "Ctrl+Y" "core.duplicate"
     "Shift+Cmd+Ctrl+S" "core.edit.folder"
     "Ctrl+Opt+Shift+T" "core.theme"
     "Ctrl+F18" "gadget.action.open.console"
