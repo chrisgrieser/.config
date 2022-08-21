@@ -26,8 +26,8 @@ alias grep='grep --color'
 alias ls='ls -G'
 
 # Safety nets
-alias rm='rm -vi' # -I only asks when more then 3 files are being deleted
-alias mv='mv -vi'
+alias rm='rm -i'
+alias mv='mv -i'
 alias ln='ln -v'
 alias cp='cp -v'
 

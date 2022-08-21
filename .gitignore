@@ -12,11 +12,6 @@ some.log
 
 # -------------------------------------------------------------
 
-# Git Repos (already backed up & git can't handle nested repos)
-shimmering-obsidian
-alfred-bibtex-citation-picker
-pdf-annotation-extractor-alfred
-
 # in case of accidental saving of such files in the repo
 *.mp4
 *.part
