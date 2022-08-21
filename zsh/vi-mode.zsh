@@ -27,7 +27,7 @@ for m in visual viopp; do
 done
 
 #-------------------------------------------------------------------------------
-# INFO:Display all commands for Normal/Insert Mode
+# INFO: Display all commands for Normal/Insert Mode
 # bindkey -M [vicmd|viins|visual]
 # use ctrl-v and then a key combination to get the shell binding for the
 #-------------------------------------------------------------------------------
@@ -59,6 +59,15 @@ bindkey -M vicmd -s ' ' 'ciw'
 # shift-space has to be bound to daw via Karabiner, since the shell does not understand <S-Space>
 
 bindkey -M vicmd -s '?' "ibindkey -M vicmd;bindkey -M viins^M" # this properly re-shows the prompt after execution
+
+# yank to system clipboard – https://stackoverflow.com/a/37411340
+# equivalent to `set clipboard=unnamed` (but only for y)
+function vi-yank-pbcopy {
+	zle vi-yank
+	echo "$CUTBUFFER" | pbcopy
+}
+zle -N vi-yank-pbcopy
+bindkey -M vicmd 'y' vi-yank-pbcopy
 
 #-------------------------------------------------------------------------------
 
