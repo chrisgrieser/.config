@@ -57,7 +57,7 @@ case $APP_TO_UPDATE in
 		cp "$CUSTOM_ICON_FOLDER/Discord Black.icns" 'Discord.app/Contents/Resources/electron.icns'
 		touch "Discord.app" ;;
 	"MailMate"|"Mailmate")
-		cp "$CUSTOM_ICON_FOLDER/Mailmate.icns" 'MailMate.app/Contents/Resources/MailMate.icns'
+		cp "$CUSTOM_ICON_FOLDER/mailmate.icns" 'MailMate.app/Contents/Resources/MailMate.icns'
 		touch "MailMate.app" ;;
 
 	"Microsoft Word")

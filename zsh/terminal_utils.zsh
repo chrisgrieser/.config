@@ -79,7 +79,7 @@ function z () {
 	else
 		__zoxide_z "$1"
 	fi
-	directoryInspect
+	[[ $? -eq 0 ]] && directoryInspect
 }
 function zi () {
 	__zoxide_zi
