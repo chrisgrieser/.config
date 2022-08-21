@@ -99,6 +99,10 @@ wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 	if newWindow:title():match("sublime%-settings$") or newWindow:title():match("sublime%-keymap$") then
 		moveResizeCurWin("maximized")
 
+	-- subl cli
+	elseif newWindow:title() == "stdin" then
+		moveResizeCurWin("centered")
+
 	-- command-line-edit window = split with alacritty (using EDITOR='subl --new-window --wait')
 	elseif newWindow:title():match("^zsh%w+$") then
 		local alacrittyWin = hs.application("alacritty"):mainWindow()
