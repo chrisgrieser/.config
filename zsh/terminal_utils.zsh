@@ -57,7 +57,7 @@ function o (){
 	           -0 -1 \
 	           --query "$INPUT" \
 	           --bind="tab:execute-silent(echo {} | pbcopy)+abort" \
-	           --preview "if [[ -d {} ]] ; then exa  --icons --oneline; else ; bat --color=always --style=snip --wrap=never --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
+	           --preview "if [[ -d {} ]] ; then exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
 	           )
 	if [[ -z "$SELECTED" ]] && [[ "$prev_clipb" == "$(pbpaste)" ]] ; then
 		return 0 # abort if no selection
