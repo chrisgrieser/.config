@@ -94,9 +94,11 @@
       "f": 2
     },
     "Q",
-    "W",
     {
-      "c": "#AAB7FF",
+      "c": "#AAB7FF"
+    },
+    "W\n\n\n\n\n\nedit in $EDITOR",
+    {
       "f": 1
     },
     "E\nAppend to last Draft",
