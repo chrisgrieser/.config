@@ -215,6 +215,7 @@ end
 displayCountWatcher = hs.screen.watcher.new(setLayout)
 displayCountWatcher:start()
 hotkey(hyper, "home", setLayout)
+hotkey(hyper, "f5", setLayout) -- for Apple Keyboard
 
 --------------------------------------------------------------------------------
 
