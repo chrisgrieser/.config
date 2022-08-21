@@ -44,14 +44,6 @@ espanso service register
 defaults write com.apple.finder QuitMenuItem -bool true
 killall Finder
 
-# to restore Finder as default
-# defaults delete -g NSFileViewer
-# defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="com.apple.finder";}'
-
-# Reference
-# https://binarynights.com/manual#fileviewer
-# https://github.com/marta-file-manager/marta-issues/issues/861
-
 # change setting of archive utility
 open "/System/Library/CoreServices/Applications/Archive Utility.app"
 

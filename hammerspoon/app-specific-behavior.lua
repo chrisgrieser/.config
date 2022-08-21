@@ -4,8 +4,9 @@ require("utils")
 require("window-management")
 
 -- always activate windows together
-function allWindowsActivation(_, eventType, appObject)
+function allWindowsActivation(appName, eventType, appObject)
 	if not(eventType == aw.activated) then return end
+	if not(appName == "Brave Browser") then return end
 	appObject:selectMenuItem({"Window", "Bring All to Front"})
 end
 appWatcher = aw.new(allWindowsActivation)
