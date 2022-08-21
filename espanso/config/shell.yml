@@ -6,3 +6,4 @@ filter_title: sh$|^\.z
 
 extra_includes:
   - "../match/_shell.yml"
+  - "../match/_applescript.yml" # for when osascript is called

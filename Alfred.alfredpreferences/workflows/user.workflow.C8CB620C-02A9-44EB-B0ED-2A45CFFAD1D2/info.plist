@@ -86,6 +86,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A35ABB1B-C585-40EC-8F84-E5DBF92FEF3A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9701F0BA-7E85-49A3-AF07-E0644F7DF71D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CDDD44C0-E8E4-4F89-8ED9-3DB266215A4B</key>
 		<array>
 			<dict>
@@ -441,6 +454,60 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>13</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>W</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>A35ABB1B-C585-40EC-8F84-E5DBF92FEF3A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>edit-in-vim.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>9701F0BA-7E85-49A3-AF07-E0644F7DF71D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -676,6 +743,20 @@
 			<real>230</real>
 			<key>ypos</key>
 			<real>485</real>
+		</dict>
+		<key>9701F0BA-7E85-49A3-AF07-E0644F7DF71D</key>
+		<dict>
+			<key>xpos</key>
+			<real>575</real>
+			<key>ypos</key>
+			<real>370</real>
+		</dict>
+		<key>A35ABB1B-C585-40EC-8F84-E5DBF92FEF3A</key>
+		<dict>
+			<key>xpos</key>
+			<real>400</real>
+			<key>ypos</key>
+			<real>370</real>
 		</dict>
 		<key>CDDD44C0-E8E4-4F89-8ED9-3DB266215A4B</key>
 		<dict>
