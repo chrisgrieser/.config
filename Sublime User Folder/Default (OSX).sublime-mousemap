@@ -1,5 +1,5 @@
 [
-	// Multi-cursor
+	// Spawn Multi-cursor with alt+click for consistency with Obsidian
 	{
 		"button": "button1", "count": 1, "modifiers": ["alt"],
 		"press_command": "drag_select",
