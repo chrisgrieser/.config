@@ -46,7 +46,7 @@ function isAtOffice()
 end
 
 function notify (text)
-	text = (trim(text))
+	text= text:gsub("^[\n\t]*(.-)%s*$", "%1")
 	hs.notify.new({title="Hammerspoon", informativeText=text}):send()
 	print("notify: "..text) -- for the console
 end
