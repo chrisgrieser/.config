@@ -21,11 +21,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CF556896-A43C-464A-8E0B-35233C55CCE8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1C6AF733-2996-43F9-9B7E-10619617C92D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D357791A-7C1A-45F4-9FE6-210C217ADDD5</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>FCB360D0-4069-4209-AA65-9223BAF14BF1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E23B3A58-D13E-4884-BF4B-388B51EC21C6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>020F67A2-C0F9-4885-BA64-234E98631EF3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -64,7 +90,7 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>reg</string>
+				<string>rg</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -142,10 +168,31 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://gitspartv.github.io/lua-patterns/?pattern={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>020F67A2-C0F9-4885-BA64-234E98631EF3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>reg</string>
+				<string>rg</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -172,12 +219,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string></string>
+				<string>https://gitspartv.github.io/lua-patterns/?pattern={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>020F67A2-C0F9-4885-BA64-234E98631EF3</string>
+			<string>1C6AF733-2996-43F9-9B7E-10619617C92D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -187,7 +234,7 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>reg</string>
+				<string>rg</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -209,10 +256,19 @@
 	<dict>
 		<key>020F67A2-C0F9-4885-BA64-234E98631EF3</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
-			<real>415</real>
+			<real>385</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>255</real>
+		</dict>
+		<key>1C6AF733-2996-43F9-9B7E-10619617C92D</key>
+		<dict>
+			<key>xpos</key>
+			<real>385</real>
+			<key>ypos</key>
+			<real>390</real>
 		</dict>
 		<key>8F8D0C2B-6F15-4221-AC84-99F32AD3D6FF</key>
 		<dict>
@@ -225,8 +281,6 @@
 		</dict>
 		<key>CF556896-A43C-464A-8E0B-35233C55CCE8</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
 			<key>xpos</key>
 			<real>125</real>
 			<key>ypos</key>
@@ -255,7 +309,7 @@
 		<key>E23B3A58-D13E-4884-BF4B-388B51EC21C6</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>125</real>
 			<key>ypos</key>

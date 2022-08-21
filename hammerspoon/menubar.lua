@@ -81,7 +81,7 @@ function updateDotfileSyncStatusMenuBar()
 		dotfileSyncMenuBar:setClickCallback(function ()
 			local changedFiles = hs.execute('git status --porcelain') -- no need for cd, since hammerspoon config is inside dotfile directory already
 				:gsub('"','')
-				:gsub("(.. ).+/(.+)", "%1%2") -- only filenames and git status
+				:gsub("(.. )[^\n]+/(.-)\n", "%1%2\n") -- only filenames and git status
 			notify(changedFiles)
 		end)
 	end
@@ -105,7 +105,7 @@ function updateVaultSyncStatusMenuBar()
 		vaultSyncMenuBar:setClickCallback(function ()
 			local changedFiles = hs.execute('cd "'..vaultLocation..'" ; git status --porcelain')
 				:gsub('"','')
-				:gsub("(.. ).+/(.+)", "%1%2") -- only filenames and git status
+				:gsub("(.. )[^\n]+/(.-)\n", "%1%2\n") -- only filenames and git status
 			notify(changedFiles)
 		end)
 	end
