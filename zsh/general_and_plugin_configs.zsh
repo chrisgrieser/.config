@@ -1,5 +1,15 @@
 # shellcheck disable=SC2190
 
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+
+# OPTIONS --- (`man zshoptions` to see all options)
+setopt AUTO_CD # pure directory = cd into it
+setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypasting)
+
+#-------------------------------------------------------------
+
 # zsh syntax highlighting
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp root)
 
@@ -11,7 +21,6 @@ typeset -A ZSH_HIGHLIGHT_REGEXP
 ZSH_HIGHLIGHT_REGEXP+=('^(git commit -m|acp|amend) .{50,}' 'fg=white,bold,bg=red') # commit msgs too long
 ZSH_HIGHLIGHT_REGEXP+=('(git reset --hard|rm -r?f) .*' 'fg=white,bold,bg=red') # dangerous stuff
 
-#-------------------------------------------------------------
 
 export BAT_THEME='Sublime Snazzy'
 
@@ -23,15 +32,7 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( "${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-
 export FZF_DEFAULT_COMMAND='fd --hidden'
 export FZF_DEFAULT_OPTS='-0 --pointer=⟐ --prompt="❱ "'
 
-export LC_ALL="en_US.UTF-8"
-export LANG="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
-
-# OPTIONS --- (`man zshoptions` to see all options)
-setopt AUTO_CD # pure directory = cd into it
-setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypasting)
-
-export MAGIC_ENTER_GIT_COMMAND="o"
-export MAGIC_ENTER_OTHER_COMMAND="o"
+export MAGIC_ENTER_GIT_COMMAND="exagit"
+export MAGIC_ENTER_OTHER_COMMAND="exa"
 
 

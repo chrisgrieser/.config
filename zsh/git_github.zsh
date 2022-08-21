@@ -66,6 +66,7 @@ alias log="git log --pretty=format:'%C(red)%h%C(reset)%C(yellow)%d%C(reset) %s %
 
 # go to git root https://stackoverflow.com/a/38843585
 alias g='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
+alias s='git status --short'
 alias ss='git status'
 
 # open GitHub repo

@@ -76,7 +76,7 @@ format = "[$symbol$branch]($style) "
 
 # files
 [git_status]
-ignore_submodules=true
+ignore_submodules=false
 untracked = '[+$count ](fg:green bg:black)'
 deleted = '[-$count ](fg:red bg:black)'
 modified = '[*$count ](fg:cyan bg:black)'

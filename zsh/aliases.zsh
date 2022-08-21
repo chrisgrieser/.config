@@ -39,10 +39,12 @@ alias curl="curl -s"
 
 # exa
 # in function for directoryInspect function
-function e(){
-	exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
+function exa(){
+	command exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
 }
-alias s='exa --long --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git --tree --color=always | grep -v "\--"'
+
+alias exagit='git status --short; echo; exa --long --grid --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git'
+alias gittree='command exa --long --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git --tree --color=always | grep -v "\--"'
 alias l='command exa --all --long --git --icons --group-directories-first --sort=modified'
 alias tree='command exa --tree --icons'
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
