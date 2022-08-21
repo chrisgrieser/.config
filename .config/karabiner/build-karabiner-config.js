@@ -20,36 +20,41 @@ function writeToFile(text, file) {
 karabinerJSON = karabinerJSON.replace(/^~/, app.pathTo("home folder"));
 customRulesJSONlocation = customRulesJSONlocation.replace(/^~/, app.pathTo("home folder"));
 
-// convert yaml to json (requires `yq`)
-app.doShellScript(`
-	export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-	cd "$HOME/.config/karabiner/assets/complex_modifications/" || exit 1
-	for f in *.yaml ; do
-		f=$(basename "$f" .yaml)
-		yq -o=json '.' "$f.yaml" > "$f.json"
-	done
-`);
+const yqNotInstalled = app.doShellScript("command yq || echo false") === "false";
+if (yqNotInstalled) {
+	app.displayNotification("", { withTitle: "❌ yq is not installed.", subtitle: "Karabiner Config" });
+	throw "";
+} else {
+	// convert yaml to json (requires `yq`)
+	app.doShellScript(`
+		export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+		cd "$HOME/.config/karabiner/assets/complex_modifications/" || exit 1
+		for f in *.yaml ; do
+			f=$(basename "$f" .yaml)
+			yq -o=json '.' "$f.yaml" > "$f.json"
+		done
+	`);
 
-// built new karabiner.json out of single jsons
-const customRules = [];
-app.doShellScript(`ls "${customRulesJSONlocation}" | grep ".json"`)
-	.split("\r")
-	.forEach(fileName => {
-		const filePath = customRulesJSONlocation + fileName;
-		const ruleSet = JSON.parse(readFile(filePath)).rules;
-		ruleSet.forEach(rule => customRules.push(rule) );
-	});
+	// built new karabiner.json out of single jsons
+	const customRules = [];
+	app.doShellScript(`ls "${customRulesJSONlocation}" | grep ".json"`)
+		.split("\r")
+		.forEach(fileName => {
+			const filePath = customRulesJSONlocation + fileName;
+			const ruleSet = JSON.parse(readFile(filePath)).rules;
+			ruleSet.forEach(rule => customRules.push(rule) );
+		});
 
-const complexRules = JSON.parse(readFile(karabinerJSON));
+	const complexRules = JSON.parse(readFile(karabinerJSON));
 
-// INFO: the rules are added to the *first* profile in the profile list from Karabiner.
-complexRules.profiles[0].complex_modifications.rules = customRules;
+	// INFO: the rules are added to the *first* profile in the profile list from Karabiner.
+	complexRules.profiles[0].complex_modifications.rules = customRules;
 
-writeToFile(JSON.stringify(complexRules), karabinerJSON);
+	writeToFile(JSON.stringify(complexRules), karabinerJSON);
 
-// validate
-const lintStatus = app.doShellScript(`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJSON}"`).trim();
-const msg = lintStatus === "ok" ? "✅ Build Success" : "🛑 Build Error";
+	// validate
+	const lintStatus = app.doShellScript(`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJSON}"`).trim();
+	const msg = lintStatus === "ok" ? "✅ Build Success" : "🛑 Config Invalid";
 
-app.displayNotification("", { withTitle: msg, subtitle: "Karabiner Config" });
-
+	app.displayNotification("", { withTitle: msg, subtitle: "Karabiner Config" });
+}
