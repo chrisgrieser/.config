@@ -99,6 +99,7 @@ window:
 scrolling:
   history: 2000
   multiplier: 3
+alt_send_esc: false
 working_directory: /Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File Hub/
 cursor:
   style:
