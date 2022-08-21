@@ -4,26 +4,24 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
-const currentlyPlaying = app.doShellScript("spt playback --status --format=%p").trim();
-// INFO: currently, the display of the current playlist is broken
-
+const currentDevice = app.doShellScript("spt playback --status --format=%d").trim();
 const activeIcon = "🔊";
-const playlists = app.doShellScript("spt list --playlists --limit=50")
+const devices = app.doShellScript("spt list --devices")
 	.split("\r")
-	.map(playlist => {
-		const id = playlist.match(/\w+(?=\))/)[0];
-		const name = playlist.split(" (")[0];
+	.map(device => {
+		const name = device.replace(/\d+% /, "");
+		const volume = device.replace(/(\d+%) .*/, "$1");
 		let suffix = "";
-		if (playlist === currentlyPlaying) suffix = " " + activeIcon;
+		if (name === currentDevice) suffix = " " + activeIcon;
 		return {
 			"title": name + suffix,
+			"subtitle": volume,
 			"match": alfredMatcher (name),
-			"mods": { "cmd": { "arg": id } },
 			"arg": name,
-			"uid": id,
+			"uid": name,
 		};
 	})
-	// sort playing playlist up top
+	// sort selected device up top
 	.sort((a, b) => {
 		const icon = " " + activeIcon;
 		if (a.title.endsWith(icon) && !b.title.endsWith(icon)) return -1;
@@ -31,6 +29,6 @@ const playlists = app.doShellScript("spt list --playlists --limit=50")
 		return 0;
 	});
 
-JSON.stringify({ items: playlists });
+JSON.stringify({ items: devices });
 
 
