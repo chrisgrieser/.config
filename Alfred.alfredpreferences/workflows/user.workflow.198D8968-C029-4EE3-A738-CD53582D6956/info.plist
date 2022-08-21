@@ -130,7 +130,7 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -162,6 +162,38 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>FCB360D0-4069-4209-AA65-9223BAF14BF1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string></string>
+						<key>uid</key>
+						<string>A0F0B5C6-F4E5-4CBE-9347-39167006FE92</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>4E319915-599F-4E1B-9EAF-DC26ABA4DD94</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -259,41 +291,48 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>385</real>
+			<real>290</real>
 			<key>ypos</key>
-			<real>255</real>
+			<real>385</real>
 		</dict>
 		<key>1C6AF733-2996-43F9-9B7E-10619617C92D</key>
 		<dict>
 			<key>xpos</key>
-			<real>385</real>
+			<real>290</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>520</real>
+		</dict>
+		<key>4E319915-599F-4E1B-9EAF-DC26ABA4DD94</key>
+		<dict>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>235</real>
 		</dict>
 		<key>8F8D0C2B-6F15-4221-AC84-99F32AD3D6FF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>410</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>140</real>
 		</dict>
 		<key>CF556896-A43C-464A-8E0B-35233C55CCE8</key>
 		<dict>
 			<key>xpos</key>
-			<real>125</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>520</real>
 		</dict>
 		<key>D357791A-7C1A-45F4-9FE6-210C217ADDD5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>125</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>140</real>
 		</dict>
 		<key>E12B7653-FF5A-4098-94BF-9D5AADB84EA9</key>
 		<dict>
@@ -302,27 +341,27 @@
 			<key>note</key>
 			<string>https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url</string>
 			<key>xpos</key>
-			<real>590</real>
+			<real>620</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>140</real>
 		</dict>
 		<key>E23B3A58-D13E-4884-BF4B-388B51EC21C6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>125</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>255</real>
+			<real>385</real>
 		</dict>
 		<key>FCB360D0-4069-4209-AA65-9223BAF14BF1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>295</real>
+			<real>230</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>170</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
