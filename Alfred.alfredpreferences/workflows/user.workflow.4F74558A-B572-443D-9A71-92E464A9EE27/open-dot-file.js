@@ -16,7 +16,6 @@ const workArray = app.doShellScript (
 	fd --hidden --no-ignore \
 	-E "Alfred.alfredpreferences" \
 	-E ".config/alacritty/themes/" \
-	-E "zsh/plugins/colorscripts" \
 	-E ".config/karabiner/assets/complex_modifications/*.json" \
 	-E "FileHistory*.json" \
 	-E "Mac Migration Scripts/to do*" \
