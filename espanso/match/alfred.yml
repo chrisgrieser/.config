@@ -114,6 +114,9 @@ matches:
   - trigger: qqq
     replace: '{query}'
     label: "🎩 {query}"
+  - trigger: QQQ
+    replace: '{var:$|$}'
+    label: "🎩 {var:}"
   - trigger: "!mods"
     replace: |
       "mods": {
