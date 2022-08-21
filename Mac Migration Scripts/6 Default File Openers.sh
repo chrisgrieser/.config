@@ -30,6 +30,7 @@ duti -s com.colliderli.iina m4a all
 # duti -s com.apple.Preview icns all
 
 # text
+duti -s com.sublimetext.4 public.data all # dotfiles do not have a UTI or file extensions
 duti -s com.apple.automator.Obsidian-Opener md all
 duti -s sh com.sublimetext.4 all
 duti -s bib com.sublimetext.4 all
