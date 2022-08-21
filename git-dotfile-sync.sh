@@ -22,7 +22,7 @@ if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
 fi
 
 msg="$changeType, $device_name"
-git add -A && git commit -m "$msg" --author="🤖🕒<automated@cron.job>"
+git add -A && git commit -m "$msg" --author="🤖<automated@cron.job>"
 git pull
 git push
 
