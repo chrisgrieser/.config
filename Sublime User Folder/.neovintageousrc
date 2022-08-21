@@ -78,6 +78,9 @@ nnoremap gZ [s
 nnoremap gd :LspSymbolDefinition side_by_side=false<CR>
 nnoremap gD :LspSymbolReferences<CR>
 
+" [h]over popup
+nnoremap <leader>h :LspHover<CR>
+
 " [g]oto [s]ymbol
 noremap gs :ShowOverlay overlay=goto text=@<CR>
 
