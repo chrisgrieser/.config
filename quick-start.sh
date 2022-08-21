@@ -69,6 +69,7 @@ ln -sf "$DOTFILE_FOLDER/zsh/.zshrc" ~
 [[ -e ~/.zprofile ]] && rm -rf ~/.zprofile
 ln -sf "$DOTFILE_FOLDER/zsh/.zprofile" ~
 ln -sf "$DOTFILE_FOLDER/zsh/.zlogin" ~
+ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
 
 # .config
 [[ -e ~/.config ]] && rm -rf ~/.config

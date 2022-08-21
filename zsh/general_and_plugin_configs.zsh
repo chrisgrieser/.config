@@ -26,7 +26,6 @@ export FZF_DEFAULT_OPTS='-0 --pointer=⟐ --prompt="❱ "'
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
-export EDITOR='subl --new-window --wait'
 
 # OPTIONS --- (`man zshoptions` to see all options)
 setopt AUTO_CD # pure directory = cd into it

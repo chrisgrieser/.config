@@ -1,11 +1,5 @@
 # shellcheck disable=SC1091
 
-export DOTFILE_FOLDER=~/dotfiles
-export WD=~"/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
-export VAULT_PATH=~'/Main Vault'
-
-#-------------------------------------------------------------------------------
-
 source "$DOTFILE_FOLDER/zsh/load_plugins.zsh"
 source "$DOTFILE_FOLDER/zsh/terminal_utils.zsh"
 source "$DOTFILE_FOLDER/zsh/aliases.zsh"
