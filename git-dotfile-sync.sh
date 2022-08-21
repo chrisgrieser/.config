@@ -23,13 +23,6 @@ fi
 
 msg="$changeType, $device_name"
 git add -A && git commit -m "$msg" --author="🤖<automated@cron.job>"
-git pull
+git pull --recurse-submodule
+git submodule update --init
 git push
-
-# Alfred Repos pullen
-if [[ "$1" == "wake" ]] ; then
-	cd "Alfred.alfredpreferences/workflows" || exit 1
-	cd "./shimmering-obsidian" && git pull
-	cd "../alfred-bibtex-citation-picker" && git pull
-	cd "../pdf-annotation-extractor-alfred" && git pull
-fi
