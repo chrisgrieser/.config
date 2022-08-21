@@ -538,7 +538,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Display Window Title</string>
+				<string>Display Window Properties</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -969,7 +969,7 @@ window_name</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>300</real>
 		</dict>
