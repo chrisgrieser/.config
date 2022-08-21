@@ -6,7 +6,12 @@ require("window-management")
 -- always activate windows together
 function allWindowsActivation(appName, eventType, appObject)
 	if not(eventType == aw.activated) then return end
-	if not(appName == "Brave Browser") then return end
+
+	if not(appName == "Brave Browser" or appName == "Mimestream") then return end
+
+	--don't interfere with split
+	if (appName == SPLIT_RIGHT:application():name() or SPLIT_LEFT:application():name()) then return end ---@diagnostic disable-line: undefined-global
+
 	appObject:selectMenuItem({"Window", "Bring All to Front"})
 end
 appWatcher = aw.new(allWindowsActivation)
