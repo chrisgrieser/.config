@@ -71,7 +71,10 @@ function motherMovieModeLayout()
 end
 
 function motherHomeModeLayout()
+	iMacDisplay:setBrightness(70)
 	openIfNotRunning("Discord")
+	openIfNotRunning("Slack")
+	openIfNotRunning("Obsidian")
 	openIfNotRunning("Mimestream")
 	openIfNotRunning("Brave Browser")
 	openIfNotRunning("Twitterrific")
@@ -107,7 +110,6 @@ function motherHomeModeLayout()
 		showAllSidebars()
 	end)
 	runDelayed(0.6, function () hs.layout.apply(motherHomeLayout) end)
-	runDelayed(0.9, function () hs.layout.apply(motherHomeLayout) end)
 end
 
 function homeModeLayout ()
@@ -125,7 +127,7 @@ function homeModeLayout ()
 	killIfRunning("IINA")
 	killIfRunning("Twitch")
 	killIfRunning("Finder")
-	privateClosers()
+	privateClosers() ---@diagnostic disable-line: undefined-global
 
 	dockSwitcher("home")
 	sublimeFontSize(15)
