@@ -83,6 +83,7 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - YouTube
+              - Brave Browser
   - description: "🅰️📖 Inoreader: v opens in background, switch jk & np"
     manipulators:
       - type: basic
@@ -175,6 +176,8 @@ rules:
               - command
   - description: "🅰️♠️ Bartender: ⌘Q → Close instead of Quit"
     manipulators:
+      # does not work 100% cause Bartender seems to overlay a window sometimes
+      # to cover parts of the menubar
       - type: basic
         from:
           key_code: q

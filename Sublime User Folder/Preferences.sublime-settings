@@ -44,7 +44,6 @@
 	"font_options": ["no_liga", "no_italic", "no_bold"],
 
 	// Appearance
-	"fade_fold_buttons": false,
 	"highlight_line": true,
 	"match_selection": true,
 	"indent_guide_options": ["draw_normal", "solid"],
@@ -107,6 +106,11 @@
 	"show_full_path": false,
 	"show_rel_path": true,
 	"show_project_first": true, // necessary for espanso trigger to work correctly
+
+	// Gutter
+	"fold_buttons": false,
+	"gutter": true,
+	"fade_fold_buttons": false,
 
 	// Build
 	"show_panel_on_build": false,
