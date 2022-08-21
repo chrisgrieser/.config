@@ -1,11 +1,12 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("stdlib");
+
+const activeIcon = "🔊";
+
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
 const currentDevice = app.doShellScript("spt playback --status --format=%d").trim();
-const activeIcon = "🔊";
 const devices = app.doShellScript("spt list --devices")
 	.split("\r")
 	.map(device => {

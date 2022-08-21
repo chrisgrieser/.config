@@ -1,13 +1,14 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
+
+//------------------------------------------------------------------------------
+const activeIcon = "▶️";
 const currentlyPlaying = app.doShellScript("spt playback --status --format=%p").trim();
 // INFO: currently, the display of the current playlist is broken
 
-const activeIcon = "🔊";
 const playlists = app.doShellScript("spt list --playlists --limit=50")
 	.split("\r")
 	.map(playlist => {

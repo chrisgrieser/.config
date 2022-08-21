@@ -174,6 +174,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E8813A0D-4FC1-45E3-9DDC-5DE9E8D3223C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>14B98205-01E6-4375-8D18-8EDD31DA86B0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>FA94C925-E85B-4BD2-9D19-C26F2CF06358</key>
 		<array>
 			<dict>
@@ -227,70 +240,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>devices</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>spotify-devices.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Spotify Connect Devices</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>E8813A0D-4FC1-45E3-9DDC-5DE9E8D3223C</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>spt</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
-			<key>uid</key>
-			<string>CE90C0E2-6FA5-4C58-B04A-13569886DBD8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -306,6 +255,21 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>3A983C30-3CA9-4BBD-8D1B-BAABCCFA0F38</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>spt</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>CE90C0E2-6FA5-4C58-B04A-13569886DBD8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -500,6 +464,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>302BBA3D-DF8C-4F50-959F-F4EB6DE213D8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -519,27 +504,6 @@
 			<string>38EBCA09-3B03-4DEB-A7FC-4177C1AABD60</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>302BBA3D-DF8C-4F50-959F-F4EB6DE213D8</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -662,6 +626,31 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+spt play --playlist --random --name="$*" --format="$format"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B8F7B396-5251-46CD-84A6-97B424BEC02E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -687,31 +676,6 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>14DF7AF2-4381-4FFD-BAD2-E76C91A4FBF2</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-spt play --playlist --random --name="$*" --format="$format"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B8F7B396-5251-46CD-84A6-97B424BEC02E</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -757,6 +721,80 @@ spt play --playlist --random --name="$*" --format="$format"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+spt play --device="$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>14B98205-01E6-4375-8D18-8EDD31DA86B0</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>devices</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>spotify-devices.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Spotify Connect Devices</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>E8813A0D-4FC1-45E3-9DDC-5DE9E8D3223C</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Requires the [Spotify-TUI](https://github.com/Rigellute/spotify-tui).
@@ -783,6 +821,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>45</real>
 			<key>ypos</key>
 			<real>560</real>
+		</dict>
+		<key>14B98205-01E6-4375-8D18-8EDD31DA86B0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>1085</real>
 		</dict>
 		<key>14DF7AF2-4381-4FFD-BAD2-E76C91A4FBF2</key>
 		<dict>
@@ -840,7 +887,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
-			<real>935</real>
+			<real>945</real>
 		</dict>
 		<key>73BD8961-0B9D-42B7-8B23-EDAEBD6949DF</key>
 		<dict>
@@ -888,6 +935,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
+			<key>note</key>
+			<string>🔊</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
@@ -916,11 +965,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>E8813A0D-4FC1-45E3-9DDC-5DE9E8D3223C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>9</integer>
+			<key>note</key>
+			<string>select Spotify Connect Device</string>
 			<key>xpos</key>
-			<real>390</real>
+			<real>45</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>1085</real>
 		</dict>
 		<key>FA94C925-E85B-4BD2-9D19-C26F2CF06358</key>
 		<dict>
@@ -940,7 +991,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>380</real>
 		</dict>
 		<key>FCA6E55A-96BE-499D-A55E-8DFE4F752FE4</key>
 		<dict>
@@ -949,7 +1000,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>45</real>
 			<key>ypos</key>
-			<real>955</real>
+			<real>945</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
