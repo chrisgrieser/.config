@@ -39,6 +39,30 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
+
+      # hyper+w → edit line in $EDITOR
+      - type: basic
+        from:
+          key_code: w
+          modifiers:
+            mandatory:
+              - command
+              - shift
+              - control
+              - option
+        # in zshrc:
+        # autoload edit-command-line
+        # zle -N edit-command-line
+        # bindkey -M viins '^F' edit-command-line
+        # bindkey -M vicmd '^F' edit-command-line
+        to:
+          - key_code: f
+            modifiers:
+              - control
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - alacritty$
       # for vi mode: map <S-Space> daw
       - type: basic
         from:

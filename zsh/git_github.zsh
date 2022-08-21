@@ -50,6 +50,7 @@ alias log="git log --graph --pretty=format:'%C(red)%h%C(reset)%C(yellow)%d%C(res
 
 # go to git root https://stackoverflow.com/a/38843585
 alias g='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
+alias ss='git status'
 
 # open GitHub repo
 alias gh="open \$(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//' );"

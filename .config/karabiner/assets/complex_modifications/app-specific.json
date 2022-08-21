@@ -79,6 +79,36 @@
         {
           "type": "basic",
           "from": {
+            "key_code": "w",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "shift",
+                "control",
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f",
+              "modifiers": [
+                "control"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "file_paths": [
+                "alacritty$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
             "key_code": "spacebar",
             "modifiers": {
               "mandatory": [

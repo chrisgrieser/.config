@@ -38,15 +38,15 @@ alias pip="pip3"
 alias curl="curl -s"
 
 # exa
-function e(){
-	exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
-}
-alias ll='command exa --all --long --git --icons --group-directories-first --sort=modified'
-alias tre='command exa --tree -L1 --icons'
-alias tree='command exa --tree -L2 --icons'
-alias treee='command exa --tree -L3 --icons'
-alias treeee='command exa --tree -L4 --icons'
+alias e='exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store'
+alias s='exa --long --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git --tree --color=always | grep -v "\--"'
+alias l='command exa --all --long --git --icons --group-directories-first --sort=modified'
+alias tree='command exa --tree --icons'
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
+
+# Global Alias
+alias -g H="--help"
+alias -g G="| grep --color"
 
 # Suffix Aliases
 # = default command to act upon the filetype, when is is entered

@@ -31,19 +31,7 @@ export LC_CTYPE="en_US.UTF-8"
 setopt AUTO_CD # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypasting)
 
-# MAGIC ENTER
-# in git directory: first enter = git status, second = opener
-function gito(){
-	if [[ "$GIT_REPO_MAGIC_ENTER_FIRST_RUN" -eq 0 ]]; then
-		git status -s
-		GIT_REPO_MAGIC_ENTER_FIRST_RUN=1
-	else
-		o
-		GIT_REPO_MAGIC_ENTER_FIRST_RUN=0
-	fi
-}
-
-export MAGIC_ENTER_GIT_COMMAND="gito"
+export MAGIC_ENTER_GIT_COMMAND="o"
 export MAGIC_ENTER_OTHER_COMMAND="o"
 
 

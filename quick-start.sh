@@ -55,7 +55,7 @@ git clone git@github.com:chrisgrieser/shimmering-obsidian.git
 git clone git@github.com:chrisgrieser/alfred-bibtex-citation-picker.git
 git clone git@github.com:chrisgrieser/pdf-annotation-extractor-alfred.git
 
-# load dock from dotfiles
+# load Dock from dotfiles
 zsh "$HOME/dotfiles/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
 #-------------------------------------------------------------------------------
