@@ -1,4 +1,17 @@
-# git add, commit & push
+function log (){
+	git log --color=always --pretty=format:'%C(always,red)%h%C(reset)%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%Creset'
+}
+
+# list git files changed in commit
+function changed (){
+	log | fzf \
+		--ansi \
+		--0 -1 \
+		--query \
+		--preview=
+}
+
+# git add, commit, (pull) & push
 function acp (){
 	local COMMIT_MSG="$*"
 	local MSG_LENGTH=${#COMMIT_MSG}
@@ -45,8 +58,6 @@ alias commit="git commit -m"
 alias push="git push"
 alias pull="git pull"
 alias ignored="git status --ignored"
-alias status='git status --short'
-alias log="git log --graph --pretty=format:'%C(red)%h%C(reset)%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=human"
 
 # go to git root https://stackoverflow.com/a/38843585
 alias g='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
