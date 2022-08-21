@@ -46,14 +46,9 @@ osascript -e '
 # DOTFILES / VAULT
 
 cd ~
-git clone git@github.com:chrisgrieser/dotfiles.git
+git clone --recurse-submodules git@github.com:chrisgrieser/dotfiles.git
 git clone git@github.com:chrisgrieser/main-vault-backup.git
 mv "main-vault-backup" "Main Vault"
-
-cd ~/dotfiles/Alfred.alfredpreferences/workflows/ || exit 1
-git clone git@github.com:chrisgrieser/shimmering-obsidian.git
-git clone git@github.com:chrisgrieser/alfred-bibtex-citation-picker.git
-git clone git@github.com:chrisgrieser/pdf-annotation-extractor-alfred.git
 
 # load Dock from dotfiles
 zsh "$HOME/dotfiles/hammerspoon/dock-switching/dock-switcher.sh" --load home
