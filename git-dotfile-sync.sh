@@ -6,7 +6,8 @@ device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
 
 if [[ "$filesChanged" == 0 ]] ; then
-	git pull
+	git pull --recurse-submodule
+	git submodule update --init --recursive
 	exit 0
 elif [[ "$filesChanged" == 1 ]] ; then
 	changeType="$filesChanged file"
@@ -24,5 +25,5 @@ fi
 msg="$changeType, $device_name"
 git add -A && git commit -m "$msg" --author="🤖<automated@cron.job>"
 git pull --recurse-submodule
-git submodule update --init
+git submodule update --init --recursive
 git push
