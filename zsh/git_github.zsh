@@ -1,5 +1,5 @@
 # git log
-alias gl="git log --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)'"
+alias gl="git log --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'"
 
 # git log, interactive
 function gli (){
@@ -8,7 +8,8 @@ function gli (){
 	   fzf -0 -1 \
 		--ansi \
 		--query="$1" \
-		--preview="echo {} | cut -d' ' -f1 | xargs git show --name-only --color=always --pretty=format:'%C(yellow)%h%C(red)%d %n%C(reset)%s %n%C(green)(%cr) %C(bold blue)<%an> %n%C(cyan)'"\
+		--preview-window="wrap" \
+		--preview="echo {} | cut -d' ' -f1 | xargs git show --name-only --color=always --pretty=format:'%C(yellow)%h%C(green)(%ch) %n%C(red)%d %n%n%C(reset)%C(bold)%s %n%C(blue)<%an> %n%C(reset)%C(magenta)'"\
 	)
 	[[ -z "$COMMIT" ]] && return 0
 	# output hash
