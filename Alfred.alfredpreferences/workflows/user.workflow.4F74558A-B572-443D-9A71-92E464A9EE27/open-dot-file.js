@@ -21,7 +21,9 @@ const workArray = app.doShellScript (
 	-E "Mac Migration Scripts/to do*" \
 	-E "unused/*" \
 	-E ".DS_Store" \
-	-E ".git/"'
+	-E ".git/" ; \
+	cd "$HOME/Main Vault/Meta/" ; \
+	fd --hidden --no-ignore'
 ).split("\r");
 /* eslint-enable no-multi-str, quotes */
 

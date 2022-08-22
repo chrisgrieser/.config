@@ -4,7 +4,7 @@ function directoryInspect (){
 		echo
 	fi
 	if [[ $(ls | wc -l) -lt 20 ]] ; then
-		e
+		exa
 	elif [[ $(ls -d */ | wc -l) -lt 20 ]] ; then
 		command exa --all --icons --sort=modified -d */ # only directories
 	fi
