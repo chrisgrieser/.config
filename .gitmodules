@@ -1,12 +1,12 @@
 [submodule "Alfred.alfredpreferences/workflows/alfred-bibtex-citation-picker"]
 	path = Alfred.alfredpreferences/workflows/alfred-bibtex-citation-picker
 	url = git@github.com:chrisgrieser/alfred-bibtex-citation-picker.git
-	branch = origin/main
+	branch = main
 [submodule "Alfred.alfredpreferences/workflows/shimmering-obsidian"]
 	path = Alfred.alfredpreferences/workflows/shimmering-obsidian
 	url = git@github.com:chrisgrieser/shimmering-obsidian.git
-	branch = origin/main
+	branch = main
 [submodule "Alfred.alfredpreferences/workflows/pdf-annotation-extractor-alfred"]
 	path = Alfred.alfredpreferences/workflows/pdf-annotation-extractor-alfred
 	url = git@github.com:chrisgrieser/pdf-annotation-extractor-alfred.git
-	branch = origin/main
+	branch = main
