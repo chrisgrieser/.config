@@ -213,14 +213,8 @@ function setLayout()
 		if isProjector() then movieModeLayout()
 		else homeModeLayout() end
 	elseif isAtMother() then
-		-- delay necessary since tv monitor is recognized only a bit later
-		local numberOfScreens = #hs.screen.allScreens()
-		runDelayed (1, function ()
-			local screenNumberChanged = #hs.screen.allScreens() ~= numberOfScreens
-			if screenNumberChanged then return end -- only execute when not double triggered
-			if isProjector() then motherMovieModeLayout()
-			else motherHomeModeLayout() end
-		end)
+		if isProjector() then motherMovieModeLayout()
+		else motherHomeModeLayout() end
 	end
 end
 
