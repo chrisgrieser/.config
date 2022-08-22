@@ -3,6 +3,7 @@
 
 # configurations
 alias .star='open $STARSHIP_CONFIG'
+alias r='source ~/.zshrc ; echo ".zshrc reloaded"'
 
 # beautify JSON in the terminal (yq = better jq)
 # e.g.: curl -s "https://api.corona-zahlen.org/germany" | yq -p=yaml -o=json

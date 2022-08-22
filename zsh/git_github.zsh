@@ -1,11 +1,14 @@
-# list git files changed in commit
-function changed (){
+# git log
+alias gl="git log --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)'"
+
+# git log, interactive
+function gli (){
 	local COMMIT
-	COMMIT=$(git log --color=always --pretty=format:'%C(yellow)%h%C(blue) %s' | \
+	COMMIT=$(git log --color=always --pretty=format:'%C(yellow)%h%C(reset) %s' | \
 	   fzf -0 -1 \
 		--ansi \
 		--query="$1" \
-		--preview="echo {} | cut -d' ' -f1 | xargs git show --name-only"\
+		--preview="echo {} | cut -d' ' -f1 | xargs git show --name-only --color=always --pretty=format:'%C(yellow)%h%C(red)%d %n%C(reset)%s %n%C(green)(%cr) %C(bold blue)<%an> %n%C(cyan)'"\
 	)
 	[[ -z "$COMMIT" ]] && return 0
 	# output hash
@@ -13,6 +16,7 @@ function changed (){
 	hash=$(echo "$COMMIT" | cut -d' ' -f1)
 	echo "$hash" | pbcopy
 	echo "$hash copied."
+	git checkout "$hash"
 }
 
 # git add, commit, (pull) & push
@@ -77,7 +81,6 @@ alias commit="git commit -m"
 alias push="git push"
 alias pull="git pull"
 alias ignored="git status --ignored"
-alias gl="git log --graph --pretty=format:'%C(red)%h%C(reset)%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%Creset'"
 
 # go to git root https://stackoverflow.com/a/38843585
 alias g='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
