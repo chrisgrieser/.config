@@ -2,8 +2,8 @@
 # shellcheck disable=SC2012
 export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 
+echo "$PWD"
 cd "$(dirname "$0")" || exit 1
-
 folder="$1"
 cache_location="dlFolderLastChange"  # cache necessary to prevent recursion of icon change triggering pathwatcher again
 
