@@ -10,6 +10,8 @@ matches:
     replace: 🆕
   - trigger: '!square'
     replace: ▪︎
+  - trigger: '!warn'
+    replace: ⚠️
   - trigger: '!yes'
     replace: ✅
   - trigger: '->'
