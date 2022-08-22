@@ -28,7 +28,7 @@ function hs {
 	SELECTED=$(history -t "$HIST_DATE_FORMAT" 1 | cut -c8- | fzf\
 	           --tac --no-sort \
 	           --layout=reverse \
-	           --info=hidden \
+	           --no-info \
 	           --query "$*" \
 	           --height=60% \
 	          )
