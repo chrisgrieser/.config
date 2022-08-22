@@ -1,12 +1,7 @@
--- https://www.hammerspoon.org/go/
-
---------------------------------------------------------------------------------
 -- SETTINGS
 hs.window.animationDuration = 0
 
---------------------------------------------------------------------------------
 -- IMPORTS
-
 -- Helpers
 require("meta")
 require("utils")
@@ -26,15 +21,8 @@ require("twitterrific-controls")
 if isAtMother() then require("hot-corner-action") end
 -- require("app-switcher")
 
---------------------------------------------------------------------------------
--- SYSTEM STARTUP
-gitDotfileSync("wake")
-gitVaultBackup()
-reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
-killIfRunning("Finder") -- fewer items in the app switcher when Marta is used anyway
-
+-- START
+systemStart()
 notify("Config reloaded")
-
---------------------------------------------------------------------------------
 
 
