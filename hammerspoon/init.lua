@@ -28,9 +28,9 @@ if isAtMother() then require("hot-corner-action") end
 
 --------------------------------------------------------------------------------
 -- SYSTEM STARTUP
-gitDotfileSync()
+gitDotfileSync("wake")
 gitVaultBackup()
-reloadAllMenubarItems()
+reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
 killIfRunning("Finder") -- fewer items in the app switcher when Marta is used anyway
 
 notify("Config reloaded")
