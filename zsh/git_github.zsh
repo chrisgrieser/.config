@@ -64,6 +64,7 @@ function amend () {
 	git push --force
 }
 
+alias co="git checkout"
 alias add="git add -A"
 alias commit="git commit -m"
 alias push="git push"
