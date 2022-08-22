@@ -1,6 +1,7 @@
 require("utils")
 require("window-management")
 require("dark-mode")
+require("layouts")
 
 --------------------------------------------------------------------------------
 -- CONFIG
