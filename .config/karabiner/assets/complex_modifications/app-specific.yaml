@@ -564,6 +564,22 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.apple\.finder$
+      # goto
+      - type: basic
+        from:
+          key_code: o
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: g
+            modifiers:
+              - command
+              - shift
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.apple\.finder$
       # Cut & Paste Workaround
       - type: basic
         from:
