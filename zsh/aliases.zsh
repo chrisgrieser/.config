@@ -44,7 +44,6 @@ function exa(){
 }
 
 alias exagit='git status --short; echo; exa --long --grid --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git'
-alias gittree='command exa --long --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git --tree --color=always | grep -v "\--"'
 alias l='command exa --all --long --git --icons --group-directories-first --sort=modified'
 alias tree='command exa --tree --icons'
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
