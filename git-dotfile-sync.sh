@@ -22,8 +22,8 @@ if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
 	exit 1
 fi
 
-msg="$device_name, $changeType"
-git add -A && git commit -m "$msg" --author="🤖<automated@cron.job>"
+msg="$device_name ($changeType)"
+git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
 git pull
 [[ "$1" == "wake" ]] && git submodule update --remote
 git push
