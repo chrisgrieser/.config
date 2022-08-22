@@ -75,11 +75,12 @@ function updateDotfileSyncStatusMenuBar()
 		dotfileSyncMenuBar:removeFromMenuBar() -- also removes clickcallback, which therefore has to be set again
 	else
 		dotfileSyncMenuBar:returnToMenuBar()
-		dotfileSyncMenuBar:setTitle(dotfileIcon.." "..changes)
+		dotfileSyncMenuBar:setTitle(dotfileIcon.." "..changes) ---@diagnostic disable-line: undefined-global
 		dotfileSyncMenuBar:setClickCallback(function ()
 			local changedFiles = hs.execute('git status --porcelain') -- no need for cd, since hammerspoon config is inside dotfile directory already
 				:gsub('"','')
 				:gsub("(.. )[^\n]+/(.-)\n", "%1%2\n") -- only filenames and git status
+				:sub("^M", " M")
 			notify(changedFiles)
 		end)
 	end
@@ -99,17 +100,18 @@ function updateVaultSyncStatusMenuBar()
 		vaultSyncMenuBar:removeFromMenuBar() -- also removes clickcallback, which therefore has to be set again
 	else
 		vaultSyncMenuBar:returnToMenuBar()
-		vaultSyncMenuBar:setTitle(vaultIcon.." "..changes)
+		vaultSyncMenuBar:setTitle(vaultIcon.." "..changes) ---@diagnostic disable-line: undefined-global
 		vaultSyncMenuBar:setClickCallback(function ()
 			local changedFiles = hs.execute('cd "'..vaultLocation..'" ; git status --porcelain')
 				:gsub('"','')
 				:gsub("(.. )[^\n]+/(.-)\n", "%1%2\n") -- only filenames and git status
+				:sub("^M", " M")
 			notify(changedFiles)
 		end)
 	end
 end
 
-vaultWatcher = hs.pathwatcher.new(vaultLocation, updateVaultSyncStatusMenuBar)
+vaultWatcher = hs.pathwatcher.new(vaultLocation, updateVaultSyncStatusMenuBar) ---@diagnostic disable-line: undefined-global
 vaultWatcher:start()
 
 --------------------------------------------------------------------------------
