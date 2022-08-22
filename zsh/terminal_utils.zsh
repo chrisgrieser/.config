@@ -58,6 +58,7 @@ function o (){
 	           --query "$INPUT" \
 	           --bind="tab:reload(fd --hidden --type=directory)" \
 	           --bind="btab:reload(fd --hidden)" \
+	           --preview-window="wrap" \
 	           --preview "if [[ -d {} ]] ; then exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=2 --line-range=:\$FZF_PREVIEW_LINES --terminal-width=\$FZF_PREVIEW_COLUMNS {} ; fi" \
 	           )
 	if [[ -z "$SELECTED" ]] && [[ "$prev_clipb" == "$(pbpaste)" ]] ; then
