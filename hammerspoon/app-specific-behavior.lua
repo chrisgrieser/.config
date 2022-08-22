@@ -10,7 +10,9 @@ function allWindowsActivation(appName, eventType, appObject)
 	if not(appName == "Brave Browser" or appName == "Mimestream") then return end
 
 	--don't interfere with split
-	if (appName == SPLIT_RIGHT:application():name() or SPLIT_LEFT:application():name()) then return end ---@diagnostic disable-line: undefined-global
+	if SPLIT_RIGHT then ---@diagnostic disable-line: undefined-global
+		if (appName == SPLIT_RIGHT:application():name() or SPLIT_LEFT:application():name()) then return end ---@diagnostic disable-line: undefined-global
+	end
 
 	appObject:selectMenuItem({"Window", "Bring All to Front"})
 end
