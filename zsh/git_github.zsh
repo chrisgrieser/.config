@@ -8,13 +8,14 @@ function gli (){
 	COMMIT=$(git log --color=always --pretty=format:'%C(yellow)%h%C(reset) %s' | \
 	   fzf -0 -1 \
 		--ansi \
+		--layout=reverse \
 		--no-sort \
 		--query="$1" \
 		--no-info \
-		--header-first --header="↵ : checkout   ^H: copy hash" \
+		--header-first --header="↵ : checkout   ^H: copy [h]ash" \
 		--preview-window="wrap" \
 		--bind="ctrl-h:execute-silent(echo {} | cut -d' ' -f1 | pbcopy)+abort" \
-		--preview="echo {} | cut -d' ' -f1 | xargs git show --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)%ch %n%n%C(reset)%C(bold)%s %n%C(reset)%C(magenta)'"\
+		--preview="echo {} | cut -d' ' -f1 | xargs git show --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch) %n%n%C(reset)%C(bold)%s %n%C(reset)%C(magenta)'"\
 	)
 	[[ -z "$COMMIT" ]] && return 0
 	# output hash
