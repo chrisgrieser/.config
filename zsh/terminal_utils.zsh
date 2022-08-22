@@ -1,3 +1,35 @@
+# Quick Open File/Folder
+# requires: exa, bat, zoxide, fd, fzf
+function o (){
+	local INPUT="$*"
+
+	if [[ -e "$INPUT" ]] ; then   # skip `fzf` if file is fully named
+		[[ -d "$INPUT" ]] && z "$INPUT"
+		[[ -f "$INPUT" ]] && open "$INPUT"
+		return 0
+	fi
+	local prev_clipb=$(pbpaste)
+
+	local SELECTED
+	SELECTED=$(fd --hidden | fzf \
+	           -0 -1 \
+	           --query "$INPUT" \
+	           --header-first --header="↵ : open/cd   [⇧]↹ : only dirs" \
+	           --bind="tab:reload(fd --hidden --type=directory)" \
+	           --bind="btab:reload(fd --hidden)" \
+	           --preview "if [[ -d {} ]] ; then exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=2 {} ; fi" \
+	           )
+	if [[ -z "$SELECTED" ]] && [[ "$prev_clipb" == "$(pbpaste)" ]] ; then
+		return 0 # abort if no selection
+	elif [[ -z "$SELECTED" ]] && [[ "$prev_clipb" != "$(pbpaste)" ]] ; then
+		print -z "$(pbpaste)" # write to buffer
+	elif [[ -d "$SELECTED" ]] ; then
+		z "$SELECTED"
+	elif [[ -f "$SELECTED" ]] ; then
+		open "$SELECTED"
+	fi
+}
+
 function directoryInspect (){
 	if command git rev-parse --is-inside-work-tree &>/dev/null ; then
 		git status --short
@@ -38,37 +70,6 @@ function separator (){
 		SEP="$SEP─"
 	done
 	echo "$SEP"
-}
-
-# Quick Open File/Folder
-# requires: exa, bat, zoxide, fd, fzf
-function o (){
-	local INPUT="$*"
-
-	if [[ -e "$INPUT" ]] ; then   # skip `fzf` if file is fully named
-		[[ -d "$INPUT" ]] && z "$INPUT"
-		[[ -f "$INPUT" ]] && open "$INPUT"
-		return 0
-	fi
-	local prev_clipb=$(pbpaste)
-
-	local SELECTED
-	SELECTED=$(fd --hidden | fzf \
-	           -0 -1 \
-	           --query "$INPUT" \
-	           --bind="tab:reload(fd --hidden --type=directory)" \
-	           --bind="btab:reload(fd --hidden)" \
-	           --preview "if [[ -d {} ]] ; then exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=2 {} ; fi" \
-	           )
-	if [[ -z "$SELECTED" ]] && [[ "$prev_clipb" == "$(pbpaste)" ]] ; then
-		return 0 # abort if no selection
-	elif [[ -z "$SELECTED" ]] && [[ "$prev_clipb" != "$(pbpaste)" ]] ; then
-		print -z "$(pbpaste)" # write to buffer
-	elif [[ -d "$SELECTED" ]] ; then
-		z "$SELECTED"
-	elif [[ -f "$SELECTED" ]] ; then
-		open "$SELECTED"
-	fi
 }
 
 # smarter z/cd
