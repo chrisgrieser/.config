@@ -14,7 +14,10 @@ repoSyncFrequencyMin = 20
 --------------------------------------------------------------------------------
 
 gitDotfileScript = dotfileLocation.."/git-dotfile-sync.sh"
-function gitDotfileSync()
+function gitDotfileSync(arg)
+	-- calling with "wake" as argument also updates submodules
+	if arg then arg = {arg}
+	else arg = {} end
 
 	hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		stdErr = stdErr:gsub("\n", " –– ")
@@ -24,8 +27,9 @@ function gitDotfileSync()
 			notify(dotfileIcon.."⚠️️ dotfiles "..stdErr)
 			log (dotfileIcon.."⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
 		end
-	end):start()
+	end, arg):start()
 end
+
 
 gitVaultScript = vaultLocation.."/Meta/git vault backup.sh"
 function gitVaultBackup()
@@ -64,7 +68,7 @@ function officeWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.screensDidWake) then return end
 	officeModeLayout()
 	reloadAllMenubarItems()
-	gitDotfileSync()
+	gitDotfileSync("wake")
 	gitVaultBackup()
 end
 
@@ -83,7 +87,7 @@ function homeWake (eventType)
 	end
 
 	reloadAllMenubarItems()
-	gitDotfileSync()
+	gitDotfileSync("wake")
 	gitVaultBackup()
 
 	runDelayed(1, function() twitterrificAction("scrollup") end)
@@ -94,6 +98,13 @@ elseif isAtOffice() then
 	wakeWatcher = hs.caffeinate.watcher.new(officeWake)
 end
 wakeWatcher:start()
+
+function systemStart()
+	gitDotfileSync("wake")
+	gitVaultBackup()
+	reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
+	killIfRunning("Finder") -- fewer items in the app switcher when Marta is used anyway
+end
 
 --------------------------------------------------------------------------------
 -- CRONJOBS AT HOME
