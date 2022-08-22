@@ -25,29 +25,7 @@ downloadFolder=home.."/Downloaded"
 function downloadFolderBadge ()
 	notify ("test")
 	-- requires "fileicon" being installed
-	hs.execute("folder='"..downloadFolder.."' ; "..
-		[[export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
-		icons_path="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Custom Icons/Download Folder"
-		itemCount=$(ls "$folder" | wc -l)
-		itemCount=$((itemCount-1)) # reduced by one to account for the "?Icon" file in the folder
-
-		cache_location="/Library/Caches/dlFolderLastChange"  # cache necessary to prevent recursion of icon change triggering pathwatcher again
-		test ! -e "$cache_location" || touch "$cache_location"
-		if test $itemCount -gt 0 ; then
-			echo "badge" > "$cache_location"
-		fi
-		last_change=$(cat "$cache_location")
-
-		if test $itemCount -gt 0 && test -z "$last_change" ; then  # using test instead of square brackets cause lua
-			fileicon set "$folder" "$icons_path/with Badge.icns"
-			echo "badge" > "$cache_location"
-			killall Dock
-		elif test $itemCount -eq 0 && test -n "$last_change" ; then
-			fileicon set "$folder" "$icons_path/without Badge.icns"
-			echo "" > "$cache_location"
-			killall Dock
-		fi
-	]])
+	hs.execute("zsh ./download-folder-icon.sh "..downloadFolder)
 end
 downloadFolderWatcher = hs.pathwatcher.new(downloadFolder, downloadFolderBadge)
 downloadFolderWatcher:start()
