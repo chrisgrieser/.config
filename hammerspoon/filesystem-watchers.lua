@@ -25,7 +25,7 @@ downloadFolder=home.."/Downloaded"
 function downloadFolderBadge ()
 	-- requires "fileicon" being installed
 	local stdout, status = hs.execute("zsh ./download-folder-icon.sh "..downloadFolder)
-	notify (stdout.."\n"..status)
+	notify (stdout.."\n"..tostring(status))
 end
 downloadFolderWatcher = hs.pathwatcher.new(downloadFolder, downloadFolderBadge)
 downloadFolderWatcher:start()
