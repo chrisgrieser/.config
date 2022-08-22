@@ -64,18 +64,25 @@ function amend () {
 	git push --force
 }
 
-alias co="git checkout"
+function gittree(){
+	(
+		r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
+		command exa --long --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git --tree --color=always | grep -v "\--"
+	)
+}
+
+alias gc="git checkout"
 alias add="git add -A"
 alias commit="git commit -m"
 alias push="git push"
 alias pull="git pull"
 alias ignored="git status --ignored"
-alias log="git log --graph --pretty=format:'%C(red)%h%C(reset)%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%Creset'"
+alias gl="git log --graph --pretty=format:'%C(red)%h%C(reset)%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%Creset'"
 
 # go to git root https://stackoverflow.com/a/38843585
 alias g='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
-alias s='git status --short'
-alias ss='git status'
+alias gs='git status'
+alias gt='gittree'
 
 # open GitHub repo
 alias gh="open \$(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//' );"
