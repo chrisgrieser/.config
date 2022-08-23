@@ -16,12 +16,7 @@ repoSyncFrequencyMin = 20
 -- calling with "--submodules" also updates submodules
 gitDotfileScript = dotfileLocation.."/git-dotfile-sync.sh"
 function gitDotfileSync(arg)
-	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then
-		if gitDotfileSyncTask:isRunning() then
-			print ("still running")
-			return
-		end
-	end -- abort if still running
+	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then return end
 
 	gitDotfileSyncTask = hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		stdErr = stdErr:gsub("\n", " –– ")
@@ -36,7 +31,8 @@ end
 
 gitVaultScript = vaultLocation.."/Meta/git-vault-sync.sh"
 function gitVaultSync()
-	if gitVaultSyncTask then return end
+	if gitVaultSyncTask and gitVaultSyncTask:isRunning() then return end
+
 	gitVaultSyncTask = hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
 		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode == 0 then
@@ -46,7 +42,6 @@ function gitVaultSync()
 			log (vaultIcon.."⚠️ vault sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
 		end
 	end):start()
-	gitVaultSyncTask = nil
 end
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
