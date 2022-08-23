@@ -24,8 +24,7 @@ bookmarkWatcher:start()
 downloadFolder=home.."/Downloaded"
 function downloadFolderBadge ()
 	-- requires "fileicon" being installed
-	local stdout = hs.execute("zsh ./download-folder-badge/download-folder-icon.sh "..downloadFolder)
-	notify (stdout)
+	hs.execute("zsh ./download-folder-badge/download-folder-icon.sh "..downloadFolder)
 end
 downloadFolderWatcher = hs.pathwatcher.new(downloadFolder, downloadFolderBadge)
 downloadFolderWatcher:start()
