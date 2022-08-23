@@ -21,7 +21,7 @@ function gitDotfileSync(arg)
 	gitDotfileSyncTask = hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode == 0 then
-			log (dotfileIcon.."✅ dotfiles sync ("..deviceName()..")", "./logs/sync.log")
+			log (dotfileIcon.." ✅ dotfiles sync ("..deviceName()..")", "./logs/sync.log")
 		else
 			notify(dotfileIcon.."⚠️️ dotfiles "..stdErr)
 			log (dotfileIcon.."⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
@@ -50,6 +50,7 @@ repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
 	gitVaultSync()
 end)
 repoSyncTimer:start()
+
 --------------------------------------------------------------------------------
 
 function screenSleep (eventType)
