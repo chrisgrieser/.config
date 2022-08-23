@@ -17,8 +17,10 @@ repoSyncFrequencyMin = 20
 gitDotfileScript = dotfileLocation.."/git-dotfile-sync.sh"
 function gitDotfileSync(arg)
 	if gitDotfileSyncTask then
-		print ("still running")
-		return
+		if gitDotfileSyncTask:isRunning() then
+			print ("still running")
+			return
+		end
 	end -- abort if still running
 
 	gitDotfileSyncTask = hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
@@ -30,7 +32,6 @@ function gitDotfileSync(arg)
 			log (dotfileIcon.."⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
 		end
 	end, {arg}):start()
-	gitDotfileSyncTask = nil -- new task necessary, cause tasks can only run once
 end
 
 gitVaultScript = vaultLocation.."/Meta/git-vault-sync.sh"
