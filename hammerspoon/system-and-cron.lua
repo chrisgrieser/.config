@@ -9,7 +9,7 @@ dotfileLocation = os.getenv("HOME").."/dotfiles"
 vaultLocation = os.getenv("HOME").."/Main Vault"
 dotfileIcon ="⏺"
 vaultIcon = "🟪"
-repoSyncFrequencyMin = 20
+repoSyncFrequencyMin = 30
 
 --------------------------------------------------------------------------------
 
@@ -101,10 +101,11 @@ end
 wakeWatcher:start()
 
 function systemStart()
+	local _, isReloading = hs.execute('[[ -e "./is-reloading" ]]')
+	if isReloading then return end
+
 	gitDotfileSync("--submodules")
 	gitVaultSync()
-	reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
-	killIfRunning("Finder") -- fewer items in the app switcher when Marta is used anyway
 end
 
 --------------------------------------------------------------------------------
