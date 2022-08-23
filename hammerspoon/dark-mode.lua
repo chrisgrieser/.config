@@ -81,3 +81,4 @@ end)
 
 -- del mapped to f13 (so ⇧+⌫ can still be used for forward-deleting)
 hotkey({}, "f13", manualToggleDarkmode)
+hotkey({}, "f5", manualToggleDarkmode) -- for Apple Keyboards

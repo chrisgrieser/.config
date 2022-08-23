@@ -141,8 +141,10 @@ end
 -- replaces `win:moveToUnit(pos)`
 function moveResize(win, pos)
 	win:moveToUnit(pos)
-	-- has to repeat due to bug for some apps... >:(
+	-- has to repeat due window creation delay for some apps
 	hs.timer.delayed.new(0.3, function () win:moveToUnit(pos) end):start()
+	hs.timer.delayed.new(0.6, function () win:moveToUnit(pos) end):start()
+	hs.timer.delayed.new(0.9, function () win:moveToUnit(pos) end):start()
 end
 
 function moveToOtherDisplay ()

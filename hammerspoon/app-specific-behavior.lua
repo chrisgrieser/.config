@@ -123,11 +123,8 @@ wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 	-- https://github.com/sublimehq/sublime_text/issues/5237
 	elseif isAtOffice() or isProjector() then
 		moveResizeCurWin("maximized")
-		runDelayed(0.2, function () moveResizeCurWin("maximized") end)
 	else
 		moveResizeCurWin("pseudo-maximized")
-		runDelayed(0.2, function () moveResizeCurWin("pseudo-maximized") end)
-		runDelayed(0.5, function () moveResizeCurWin("pseudo-maximized") end)
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
@@ -161,7 +158,6 @@ wf_alacritty:subscribe(wf.windowCreated, function ()
 		moveResizeCurWin("maximized")
 	else
 		moveResizeCurWin("pseudo-maximized")
-		runDelayed(1, function () moveResizeCurWin("pseudo-maximized") end)
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
@@ -281,11 +277,8 @@ function highlightsWatcher(appName, eventType)
 			end tell
 		end tell
 	]])
-	if isAtOffice() then
-		runDelayed(0.2, function () moveResizeCurWin("maximized") end)
-	else
-		runDelayed(0.2, function () moveResizeCurWin("pseudo-maximized") end)
-	end
+	if isAtOffice() then moveResizeCurWin("maximized")
+	else moveResizeCurWin("pseudo-maximized") end
 end
 highlightsAppWatcher = aw.new(highlightsWatcher)
 highlightsAppWatcher:start()
@@ -297,7 +290,7 @@ function draftsLaunchWake(appName, eventType, appObject)
 	if not(appName == "Drafts") then return end
 
 	if (eventType == aw.launched) then
-		runDelayed(1, function ()
+		runDelayed(0.5, function ()
 			appObject:selectMenuItem({"View", "Hide Toolbar"})
 		end)
 	elseif (eventType == aw.activated) then
