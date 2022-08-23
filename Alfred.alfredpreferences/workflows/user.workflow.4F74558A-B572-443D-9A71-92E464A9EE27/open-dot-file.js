@@ -18,7 +18,7 @@ const workArray = app.doShellScript (
 	-E ".config/alacritty/themes/" \
 	-E ".config/karabiner/assets/complex_modifications/*.json" \
 	-E "FileHistory*.json" \
-	-E "ffff*.json" \
+	-E "visualized keyboard layout/*.json" \
 	-E "Mac Migration Scripts/to do*" \
 	-E "unused/*" \
 	-E ".DS_Store" \

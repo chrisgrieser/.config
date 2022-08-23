@@ -202,13 +202,7 @@
     "X\nSwitch Split",
     "C\nEnd Split",
     "V\nVertical Split",
-    {
-      "c": "#CCCCCC"
-    },
-    "B",
-    {
-      "c": "#AAB7FF"
-    },
+    "B\nAlfred Browse",
     "N\n⌫",
     "M\n↵",
     {
