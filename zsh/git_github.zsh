@@ -1,12 +1,11 @@
 # git log
 alias gl="git log --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'"
 
-# git log, interactive
-# select to checkout, ctrl+h to copy the hash
+# git log (interactive)
 function gli (){
 	local COMMIT
 	COMMIT=$(git log --color=always --pretty=format:'%C(yellow)%h%C(reset) %s' | \
-	   fzf -0 -1 \
+	   fzf -0 \
 		--ansi \
 		--layout=reverse \
 		--no-sort \
@@ -21,8 +20,6 @@ function gli (){
 	# output hash
 	local hash
 	hash=$(echo "$COMMIT" | cut -d' ' -f1)
-	echo "$hash" | pbcopy
-	echo "$hash copied."
 	git checkout "$hash"
 }
 

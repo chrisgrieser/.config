@@ -183,7 +183,7 @@ end)
 -- - Bring all windows forward
 -- - hide sidebar
 -- - enlarge window if it's too small
--- - hide Finder when no window
+-- - quit Finder when no window
 function finderWatcher(appName, eventType, appObject)
 	if not(eventType == aw.activated and appName == "Finder") then return end
 
@@ -209,9 +209,7 @@ finderAppWatcher:start()
 
 wf_finder = wf.new("Finder")
 wf_finder:subscribe(wf.windowDestroyed, function ()
-	if #wf_finder:getWindows() == 0 then
-		hs.application("Finder"):hide()
-	end
+	if #wf_finder:getWindows() == 0 then killIfRunning("Finder") end
 end)
 
 -- MARTA
