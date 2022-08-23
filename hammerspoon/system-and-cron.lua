@@ -16,7 +16,7 @@ repoSyncFrequencyMin = 20
 -- calling with "--submodules" also updates submodules
 gitDotfileScript = dotfileLocation.."/git-dotfile-sync.sh"
 function gitDotfileSync(arg)
-	if gitDotfileSyncTask then
+	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then
 		if gitDotfileSyncTask:isRunning() then
 			print ("still running")
 			return
