@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+[[ "$1" == "--submodules" ]] && osascript -e "beep"
+
 cd "$(dirname "$0")" || exit 1
 
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
