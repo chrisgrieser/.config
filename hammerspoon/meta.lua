@@ -8,9 +8,13 @@ hs.urlevent.bind("hs-reload", function()
 
 	hs.reload()
 
-	-- hs.execute("rm ./is-reloading")
+	hs.execute("rm ./is-reloading")
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
+
+
+
+-- test
 
 --------------------------------------------------------------------------------
 -- CONSOLE
