@@ -16,7 +16,10 @@ repoSyncFrequencyMin = 20
 -- calling with "--submodules" also updates submodules
 gitDotfileScript = dotfileLocation.."/git-dotfile-sync.sh"
 function gitDotfileSync(arg)
-	if gitDotfileSyncTask then return end -- abort if still running
+	if gitDotfileSyncTask then
+		print ("still running")
+		return
+	end -- abort if still running
 
 	gitDotfileSyncTask = hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		stdErr = stdErr:gsub("\n", " –– ")
