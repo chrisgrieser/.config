@@ -23,6 +23,7 @@ if isAtMother() then require("hot-corner-action") end
 
 -- START
 systemStart()
+reloadAllMenubarItems()
 notify("Config reloaded")
 
 

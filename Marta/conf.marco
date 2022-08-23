@@ -22,7 +22,6 @@ behavior {
         iconSize 33
         verticalPadding 3
         colorHighlighting true
-        rightClickSelect true
         showGoUpFolder false
         defaults {
             columns ">modified:200"

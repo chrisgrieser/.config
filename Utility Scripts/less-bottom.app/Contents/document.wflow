@@ -59,14 +59,18 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+					<string>#!/bin/zsh
+# open .log files from Finder via this script, wrapped in the app `less-bottom`.
+
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+# less ignore-case is actually smart case
 alacritty --command less -R \
 	--long-prompt \
 	+G \
 	--window=-4 \
 	--incsearch \
 	--ignore-case \
-	--HILITE-UNREAD \
 	--tilde \
 	-- "$1"
 </string>
@@ -182,7 +186,7 @@ alacritty --command less -R \
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>591.500000:252.000000</string>
+				<string>309.000000:252.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
