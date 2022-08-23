@@ -102,11 +102,14 @@ wakeWatcher:start()
 
 function systemStart()
 	local _, isReloading = hs.execute('[[ -e "./is-reloading" ]]')
-	if isReloading then return end
-
-	notify ("systemstart runs")
-	gitDotfileSync("--submodules")
-	gitVaultSync()
+	if isReloading then
+		hs.execute("rm ./is-reloading")
+		return
+	else
+		notify ("systemstart runs")
+		gitDotfileSync("--submodules")
+		gitVaultSync()
+	end
 end
 
 --------------------------------------------------------------------------------
