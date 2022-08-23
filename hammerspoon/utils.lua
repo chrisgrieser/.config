@@ -46,13 +46,13 @@ function isAtOffice()
 end
 
 function notify (text)
-	text= text:gsub("^[\n\t]*(.-)%s*$", "%1")
+	text = trim(text)
 	hs.notify.new({title="Hammerspoon", informativeText=text}):send()
 	print("notify: "..text) -- for the console
 end
 
 function log (text, location)
-	text = (trim(text))
+	text = trim(text)
 	hs.execute('echo "$(date "+%Y-%m-%d %H:%M")" "'..text..'" >> "'..location..'"')
 	print ("log: "..text) -- for the console
 end
