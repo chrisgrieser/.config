@@ -64,7 +64,7 @@ shutDownWatcher:start()
 
 
 --------------------------------------------------------------------------------
--- SYSTEM WAKE
+-- SYSTEM WAKE/START
 function officeWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.screensDidWake) then return end
 	officeModeLayout()
