@@ -2,6 +2,9 @@
 -- https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 require("utils")
 require("window-management")
+require("system-and-cron")
+
+--------------------------------------------------------------------------------
 
 -- always activate windows together
 function allWindowsActivation(appName, eventType, appObject)
@@ -18,6 +21,18 @@ function allWindowsActivation(appName, eventType, appObject)
 end
 appWatcher = aw.new(allWindowsActivation)
 appWatcher:start()
+--------------------------------------------------------------------------------
+
+-- OBSIDIAN
+-- Sync on Vault close
+function obsidianSync (appName, eventType)
+	if not(eventType == aw.launching or eventType == aw.terminated) then return end
+	if not(appName == "Obsidian") then return end
+	gitVaultSync() ---@diagnostic disable-line: undefined-global
+end
+
+anyAppActivationWatcher = aw.new(obsidianSync )
+anyAppActivationWatcher:start()
 
 --------------------------------------------------------------------------------
 

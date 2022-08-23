@@ -7,7 +7,7 @@ filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
 
 if [[ "$filesChanged" == 0 ]] ; then
 	git pull
-	[[ "$1" == "wake" ]] && git submodule update --remote --rebase
+	[[ "$1" == "--submodules" ]] && git submodule update --remote --rebase
 	exit 0
 elif [[ "$filesChanged" == 1 ]] ; then
 	changeType="$filesChanged file"
@@ -25,5 +25,5 @@ fi
 msg="$device_name ($changeType)"
 git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
 git pull
-[[ "$1" == "wake" ]] && git submodule update --remote
+[[ "$1" == "--submodules" ]] && git submodule update --remote
 git push

@@ -13,13 +13,12 @@ repoSyncFrequencyMin = 20
 
 --------------------------------------------------------------------------------
 
+-- calling with "--submodules" also updates submodules
 gitDotfileScript = dotfileLocation.."/git-dotfile-sync.sh"
 function gitDotfileSync(arg)
-	-- calling with "wake" as argument also updates submodules
-	if arg then arg = {arg}
-	else arg = {} end
+	if gitDotfileSyncTask then return end -- abort if still running
 
-	hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
+	gitDotfileSyncTask = hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode == 0 then
 			log (dotfileIcon.."✅ dotfiles sync ("..deviceName()..")", "./logs/sync.log")
@@ -27,13 +26,14 @@ function gitDotfileSync(arg)
 			notify(dotfileIcon.."⚠️️ dotfiles "..stdErr)
 			log (dotfileIcon.."⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
 		end
-	end, arg):start()
+	end, {arg}):start()
+	gitDotfileSyncTask = nil -- new task necessary, cause tasks can only run once
 end
 
-
-gitVaultScript = vaultLocation.."/Meta/git vault backup.sh"
-function gitVaultBackup()
-	hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
+gitVaultScript = vaultLocation.."/Meta/git-vault-sync.sh"
+function gitVaultSync()
+	if gitVaultSyncTask then return end
+	gitVaultSyncTask = hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
 		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode == 0 then
 			log (vaultIcon.."✅ vault sync ("..deviceName()..")", "./logs/sync.log")
@@ -42,11 +42,12 @@ function gitVaultBackup()
 			log (vaultIcon.."⚠️ vault sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
 		end
 	end):start()
+	gitVaultSyncTask = nil
 end
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
 	gitDotfileSync()
-	gitVaultBackup()
+	gitVaultSync()
 end)
 repoSyncTimer:start()
 --------------------------------------------------------------------------------
@@ -68,8 +69,8 @@ function officeWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.screensDidWake) then return end
 	officeModeLayout()
 	reloadAllMenubarItems()
-	gitDotfileSync("wake")
-	gitVaultBackup()
+	gitDotfileSync("--submodules")
+	gitVaultSync()
 end
 
 function homeWake (eventType)
@@ -87,8 +88,8 @@ function homeWake (eventType)
 	end
 
 	reloadAllMenubarItems()
-	gitDotfileSync("wake")
-	gitVaultBackup()
+	gitDotfileSync("--submodules")
+	gitVaultSync()
 
 	runDelayed(1, function() twitterrificAction("scrollup") end)
 end
@@ -100,8 +101,8 @@ end
 wakeWatcher:start()
 
 function systemStart()
-	gitDotfileSync("wake")
-	gitVaultBackup()
+	gitDotfileSync("--submodules")
+	gitVaultSync()
 	reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
 	killIfRunning("Finder") -- fewer items in the app switcher when Marta is used anyway
 end
