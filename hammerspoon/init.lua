@@ -1,6 +1,6 @@
 -- SETTINGS
 hs.window.animationDuration = 0
-
+--
 -- IMPORTS
 -- Helpers
 require("meta")
