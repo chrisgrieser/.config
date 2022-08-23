@@ -53,6 +53,7 @@ end
 
 function log (text, location)
 	text = trim(text)
+	hs.execute('mkdir -p "'..location..'"')
 	hs.execute('echo "$(date "+%Y-%m-%d %H:%M")" "'..text..'" >> "'..location..'"')
 	print ("log: "..text) -- for the console
 end
