@@ -97,7 +97,7 @@
     {
       "c": "#AAB7FF"
     },
-    "W\n\n\n\n\n\nedit in $EDITOR",
+    "W\nedit in $EDITOR",
     {
       "f": 1
     },
@@ -202,7 +202,13 @@
     "X\nSwitch Split",
     "C\nEnd Split",
     "V\nVertical Split",
-    "B\nAlfred Browse",
+    {
+      "c": "#CCCCCC"
+    },
+    "B",
+    {
+      "c": "#AAB7FF"
+    },
     "N\n⌫",
     "M\n↵",
     {
