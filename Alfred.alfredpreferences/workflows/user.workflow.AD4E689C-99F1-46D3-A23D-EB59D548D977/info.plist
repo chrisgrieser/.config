@@ -22,31 +22,9 @@
 			</dict>
 		</array>
 		<key>38D89DF4-F068-4134-A21A-34EAADA5246E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FC8D25C0-57F5-4305-B668-16C344FA2211</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>3E23500C-DCBF-48D6-879D-3087EA14DFA7</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FC8D25C0-57F5-4305-B668-16C344FA2211</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>4475FDC5-1AA5-4794-A478-36A8DD3D6D43</key>
 		<array>
 			<dict>
@@ -100,44 +78,11 @@
 			</dict>
 		</array>
 		<key>811D21FB-47D1-4DBA-8E32-981AE6B69B7B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FC8D25C0-57F5-4305-B668-16C344FA2211</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>AB2CFA84-74F7-4C3E-B9C0-1F0D2DF0DDFA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FC8D25C0-57F5-4305-B668-16C344FA2211</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>B6351950-8536-46AD-A832-D23A7B8DC2C1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FC8D25C0-57F5-4305-B668-16C344FA2211</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>B8D43BC5-BE16-495E-B193-81D0E2B04BDC</key>
 		<array>
 			<dict>
@@ -312,6 +257,10 @@
 			<dict>
 				<key>delimiter</key>
 				<string>,</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
+				<integer>0</integer>
 				<key>trimarguments</key>
 				<true/>
 				<key>variableprefix</key>
@@ -369,6 +318,10 @@
 			<dict>
 				<key>delimiter</key>
 				<string>,</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
+				<integer>0</integer>
 				<key>trimarguments</key>
 				<true/>
 				<key>variableprefix</key>
@@ -418,7 +371,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>pp</string>
+				<string>po</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -473,99 +426,12 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string># THESE VARIABLES MUST BE SET. SEE THE ONEUPDATER README FOR AN EXPLANATION OF EACH.
-readonly remote_info_plist='hhttps://raw.githubusercontent.com/chrisgrieser/portfolio-performance-alfred/main/info.plist'
-readonly workflow_url='chrisgrieser/portfolio-performance-alfred'
-readonly download_type='github_release'
-readonly frequency_check='1'
-
-# FROM HERE ON, CODE SHOULD BE LEFT UNTOUCHED!
-function abort {
-  echo "${1}" &gt;&amp;2
-  exit 1
-}
-
-function url_exists {
-  curl --silent --location --output /dev/null --fail --range 0-0 "${1}"
-}
-
-function notification {
-  local -r notificator="$(find . -type d -name 'Notificator.app')"
-  if [[ -n "${notificator}" ]]; then
-    "${notificator}/Contents/Resources/Scripts/notificator" --message "${1}" --title "${alfred_workflow_name}" --subtitle 'A new version is available'
-    return
-  fi
-
-  local -r terminal_notifier="$(find . -type f -name 'terminal-notifier')"
-  if [[ -n "${terminal_notifier}" ]]; then
-    "${terminal_notifier}" -title "${alfred_workflow_name}" -subtitle 'A new version is available' -message "${1}"
-    return
-  fi
-
-  osascript -e "display notification \"${1}\" with title \"${alfred_workflow_name}\" subtitle \"A new version is available\""
-}
-
-# Local sanity checks
-readonly local_info_plist='info.plist'
-readonly local_version="$(/usr/libexec/PlistBuddy -c 'print version' "${local_info_plist}")"
-
-[[ -n "${local_version}" ]] || abort 'You need to set a workflow version in the configuration sheet.'
-[[ "${download_type}" =~ ^(direct|page|github_release)$ ]] || abort "'download_type' (${download_type}) needs to be one of 'direct', 'page', or 'github_release'."
-[[ "${frequency_check}" =~ ^[0-9]+$ ]] || abort "'frequency_check' (${frequency_check}) needs to be a number."
-
-# Check for updates
-if [[ $(find "${local_info_plist}" -mtime +"${frequency_check}"d) ]]; then
-  if ! url_exists "${remote_info_plist}"; then abort "'remote_info_plist' (${remote_info_plist}) appears to not be reachable."; fi # Remote sanity check
-
-  readonly tmp_file="$(mktemp)"
-  curl --silent --location --output "${tmp_file}" "${remote_info_plist}"
-  readonly remote_version="$(/usr/libexec/PlistBuddy -c 'print version' "${tmp_file}")"
-
-  if [[ "${local_version}" == "${remote_version}" ]]; then
-    touch "${local_info_plist}" # Reset timer by touching local file
-    exit 0
-  fi
-
-  if [[ "${download_type}" == 'page' ]]; then
-    notification 'Opening download page…'
-    open "${workflow_url}"
-    exit 0
-  fi
-
-  download_url="$([[ "${download_type}" == 'github_release' ]] &amp;&amp; curl --silent "https://api.github.com/repos/${workflow_url}/releases/latest" | grep 'browser_download_url' | head -1 | sed -E 's/.*browser_download_url": "(.*)"/\1/' || echo "${workflow_url}")"
-
-  if url_exists "${download_url}"; then
-    notification 'Downloading and installing…'
-    curl --silent --location --output "${HOME}/Downloads/${alfred_workflow_name}.alfredworkflow" "${download_url}"
-    open "${HOME}/Downloads/${alfred_workflow_name}.alfredworkflow"
-  else
-    abort "'workflow_url' (${download_url}) appears to not be reachable."
-  fi
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>FC8D25C0-57F5-4305-B668-16C344FA2211</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>delimiter</key>
 				<string>,</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
+				<integer>0</integer>
 				<key>trimarguments</key>
 				<true/>
 				<key>variableprefix</key>
@@ -623,6 +489,10 @@ fi</string>
 			<dict>
 				<key>delimiter</key>
 				<string>,</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
+				<integer>0</integer>
 				<key>trimarguments</key>
 				<true/>
 				<key>variableprefix</key>
@@ -680,6 +550,10 @@ fi</string>
 			<dict>
 				<key>delimiter</key>
 				<string>,</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
+				<integer>0</integer>
 				<key>trimarguments</key>
 				<true/>
 				<key>variableprefix</key>
@@ -748,36 +622,36 @@ This workflow has been created by [Chris Grieser](https://chris-grieser.de/).</s
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>295</integer>
+			<real>295</real>
 			<key>ypos</key>
-			<integer>330</integer>
+			<real>330</real>
 		</dict>
 		<key>38D89DF4-F068-4134-A21A-34EAADA5246E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>535</integer>
+			<real>535</real>
 			<key>ypos</key>
-			<integer>455</integer>
+			<real>455</real>
 		</dict>
 		<key>3E23500C-DCBF-48D6-879D-3087EA14DFA7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>535</integer>
+			<real>535</real>
 			<key>ypos</key>
-			<integer>25</integer>
+			<real>25</real>
 		</dict>
 		<key>4475FDC5-1AA5-4794-A478-36A8DD3D6D43</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>295</integer>
+			<real>295</real>
 			<key>ypos</key>
-			<integer>625</integer>
+			<real>625</real>
 		</dict>
 		<key>48C01841-219C-4405-961D-A33BF7FC98BE</key>
 		<dict>
@@ -786,18 +660,18 @@ This workflow has been created by [Chris Grieser](https://chris-grieser.de/).</s
 			<key>note</key>
 			<string>copy WKN</string>
 			<key>xpos</key>
-			<integer>365</integer>
+			<real>365</real>
 			<key>ypos</key>
-			<integer>455</integer>
+			<real>455</real>
 		</dict>
 		<key>4D0F59AA-8220-4B94-9BDA-6AA2834799FD</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>295</integer>
+			<real>295</real>
 			<key>ypos</key>
-			<integer>55</integer>
+			<real>55</real>
 		</dict>
 		<key>5764C2E0-6B01-4410-A431-1B17CD6C0A71</key>
 		<dict>
@@ -806,54 +680,54 @@ This workflow has been created by [Chris Grieser](https://chris-grieser.de/).</s
 			<key>note</key>
 			<string>copy Name</string>
 			<key>xpos</key>
-			<integer>365</integer>
+			<real>365</real>
 			<key>ypos</key>
-			<integer>595</integer>
+			<real>595</real>
 		</dict>
 		<key>811D21FB-47D1-4DBA-8E32-981AE6B69B7B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>535</integer>
+			<real>535</real>
 			<key>ypos</key>
-			<integer>300</integer>
+			<real>300</real>
 		</dict>
 		<key>AB2CFA84-74F7-4C3E-B9C0-1F0D2DF0DDFA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>535</integer>
+			<real>535</real>
 			<key>ypos</key>
-			<integer>595</integer>
+			<real>595</real>
 		</dict>
 		<key>B6351950-8536-46AD-A832-D23A7B8DC2C1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>535</integer>
+			<real>535</real>
 			<key>ypos</key>
-			<integer>160</integer>
+			<real>160</real>
 		</dict>
 		<key>B8D43BC5-BE16-495E-B193-81D0E2B04BDC</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>55</integer>
+			<real>55</real>
 			<key>ypos</key>
-			<integer>300</integer>
+			<real>300</real>
 		</dict>
 		<key>C08CBDAC-8DFC-4E6E-BF1D-ED4E6B14BDEA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>295</integer>
+			<real>295</real>
 			<key>ypos</key>
-			<integer>190</integer>
+			<real>190</real>
 		</dict>
 		<key>CBD365BF-74F4-4326-91CB-5BBD9722F21B</key>
 		<dict>
@@ -862,9 +736,9 @@ This workflow has been created by [Chris Grieser](https://chris-grieser.de/).</s
 			<key>note</key>
 			<string>copy Symbol</string>
 			<key>xpos</key>
-			<integer>365</integer>
+			<real>365</real>
 			<key>ypos</key>
-			<integer>160</integer>
+			<real>160</real>
 		</dict>
 		<key>E134D3E9-9391-4703-8A58-28C22635069F</key>
 		<dict>
@@ -873,9 +747,9 @@ This workflow has been created by [Chris Grieser](https://chris-grieser.de/).</s
 			<key>note</key>
 			<string>copy ISIN</string>
 			<key>xpos</key>
-			<integer>365</integer>
+			<real>365</real>
 			<key>ypos</key>
-			<integer>300</integer>
+			<real>300</real>
 		</dict>
 		<key>FBC05DED-4A46-46B7-8DBB-C03D3E4011AC</key>
 		<dict>
@@ -884,31 +758,22 @@ This workflow has been created by [Chris Grieser](https://chris-grieser.de/).</s
 			<key>note</key>
 			<string>copy Name &amp; ISIN</string>
 			<key>xpos</key>
-			<integer>365</integer>
+			<real>365</real>
 			<key>ypos</key>
-			<integer>25</integer>
-		</dict>
-		<key>FC8D25C0-57F5-4305-B668-16C344FA2211</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>OneUpdater (automatic update function)</string>
-			<key>xpos</key>
-			<integer>755</integer>
-			<key>ypos</key>
-			<integer>300</integer>
+			<real>25</real>
 		</dict>
 		<key>FEBE6935-198A-4272-A17F-CC24C44391D8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>295</integer>
+			<real>295</real>
 			<key>ypos</key>
-			<integer>485</integer>
+			<real>485</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>variables</key>
 	<dict>
 		<key>portfolio_file</key>

@@ -884,7 +884,7 @@ echo "$backup"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>430</real>
 		</dict>
