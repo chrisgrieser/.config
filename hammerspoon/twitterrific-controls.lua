@@ -79,14 +79,11 @@ end
 
 -- IINA: Full Screen when on projector
 function iinaLaunch(appName, eventType, appObject)
-	if (eventType == aw.launched) then
-		if (appName == "IINA") then
-			local isProjector = hs.screen.primaryScreen():name() == "ViewSonic PJ"
-			if isProjector then
-				-- going full screen apparently needs a small delay
-				runDelayed(0.4, function() appObject:selectMenuItem({"Video", "Enter Full Screen"}) end)
-				runDelayed(0.8, function() appObject:selectMenuItem({"Video", "Enter Full Screen"}) end)
-			end
+	if not (eventType == aw.launched and appName == "IINA") then
+		if isProjector() then
+			-- going full screen needs a small delay
+			runDelayed(0.4, function() appObject:selectMenuItem({"Video", "Enter Full Screen"}) end)
+			runDelayed(0.8, function() appObject:selectMenuItem({"Video", "Enter Full Screen"}) end)
 		end
 	end
 end
@@ -97,8 +94,7 @@ iinaAppLauncher:start()
 -- Hotkeys
 hotkey({}, "pagedown", pagedownAction, nil, pagedownAction)
 hotkey({}, "pageup", pageupAction, nil, pageupAction)
-hotkey({}, "home", homeAction)
-hotkey({}, "f5", homeAction) -- for Apple Keyboards
+hotkey({}, "home", homeAction) -- also eject key for Apple Keyboards (via Karabiner)
 hotkey({"shift"}, "home", shiftHomeAction)
 hotkey({}, "end", endAction)
 hotkey({"shift"}, "end", shiftEndAction)
