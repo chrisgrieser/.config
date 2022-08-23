@@ -51,10 +51,10 @@ function notify (text)
 	print("notify: "..text) -- for the console
 end
 
-function log (text, location)
+function log (text, logpath)
 	text = trim(text)
-	hs.execute('mkdir -p "'..location..'"')
-	hs.execute('echo "$(date "+%Y-%m-%d %H:%M")" "'..text..'" >> "'..location..'"')
+	hs.execute('mkdir -p "$(dirname "'..logpath..'")"')
+	hs.execute('echo "$(date "+%Y-%m-%d %H:%M")" "'..text..'" >> "'..logpath..'"')
 	print ("log: "..text) -- for the console
 end
 
