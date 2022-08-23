@@ -59,72 +59,6 @@ function movieModeLayout()
 	dockSwitcher("movie")
 end
 
-function motherMovieModeLayout()
-	if not(isProjector()) then return end
-	iMacDisplay:setBrightness(0)
-
-	openIfNotRunning("YouTube")
-	runDelayed(1, function () openIfNotRunning("YouTube") end) -- safety redundancy
-
-	killIfRunning("Finder")
-	killIfRunning("Obsidian")
-	killIfRunning("Marta")
-	killIfRunning("Drafts")
-	killIfRunning("Slack")
-	killIfRunning("Discord")
-	killIfRunning("Mimestream")
-	killIfRunning("Alfred Preferences")
-	killIfRunning("Sublime Text")
-	killIfRunning("alacritty")
-	killIfRunning("Twitterrific")
-
-	dockSwitcher("mother-movie")
-end
-
-function motherHomeModeLayout()
-	iMacDisplay:setBrightness(70)
-	openIfNotRunning("Discord")
-	openIfNotRunning("Slack")
-	openIfNotRunning("Obsidian")
-	openIfNotRunning("Mimestream")
-	openIfNotRunning("Brave Browser")
-	openIfNotRunning("Twitterrific")
-	openIfNotRunning("Drafts")
-
-	killIfRunning("YouTube")
-	killIfRunning("Netflix")
-	killIfRunning("IINA")
-	killIfRunning("Twitch")
-	killIfRunning("Finder")
-	privateClosers() ---@diagnostic disable-line: undefined-global
-
-	sublimeFontSize(14)
-	dockSwitcher("home")
-
-	local toTheSide = {x=0.7875, y=0, w=0.2125, h=1}
-	local motherHomeLayout = {
-		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
-		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Slack", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Discord", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
-	}
-
-	hs.layout.apply(motherHomeLayout)
-	runDelayed(0.3, function ()
-		hs.layout.apply(motherHomeLayout)
-		showAllSidebars()
-	end)
-	runDelayed(0.6, function () hs.layout.apply(motherHomeLayout) end)
-	runDelayed(1, function () hs.layout.apply(motherHomeLayout) end)
-	spotifyTUI("pause") ---@diagnostic disable-line: undefined-global
-end
-
 function homeModeLayout ()
 	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
@@ -205,6 +139,71 @@ function officeModeLayout ()
 	end)
 end
 
+function motherMovieModeLayout()
+	if not(isProjector()) then return end
+	iMacDisplay:setBrightness(0)
+
+	openIfNotRunning("YouTube")
+	runDelayed(1, function () openIfNotRunning("YouTube") end) -- safety redundancy
+
+	killIfRunning("Finder")
+	killIfRunning("Obsidian")
+	killIfRunning("Marta")
+	killIfRunning("Drafts")
+	killIfRunning("Slack")
+	killIfRunning("Discord")
+	killIfRunning("Mimestream")
+	killIfRunning("Alfred Preferences")
+	killIfRunning("Sublime Text")
+	killIfRunning("alacritty")
+	killIfRunning("Twitterrific")
+
+	dockSwitcher("mother-movie")
+end
+
+function motherHomeModeLayout()
+	iMacDisplay:setBrightness(0.8)
+	openIfNotRunning("Discord")
+	openIfNotRunning("Slack")
+	openIfNotRunning("Obsidian")
+	openIfNotRunning("Mimestream")
+	openIfNotRunning("Brave Browser")
+	openIfNotRunning("Twitterrific")
+	openIfNotRunning("Drafts")
+
+	killIfRunning("YouTube")
+	killIfRunning("Netflix")
+	killIfRunning("IINA")
+	killIfRunning("Twitch")
+	killIfRunning("Finder")
+	privateClosers() ---@diagnostic disable-line: undefined-global
+
+	sublimeFontSize(14)
+	dockSwitcher("home")
+
+	local toTheSide = {x=0.7875, y=0, w=0.2125, h=1}
+	local motherHomeLayout = {
+		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
+		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Slack", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Discord", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
+	}
+
+	hs.layout.apply(motherHomeLayout)
+	runDelayed(0.3, function ()
+		hs.layout.apply(motherHomeLayout)
+		showAllSidebars()
+	end)
+	runDelayed(0.6, function () hs.layout.apply(motherHomeLayout) end)
+	runDelayed(1, function () hs.layout.apply(motherHomeLayout) end)
+	spotifyTUI("pause") ---@diagnostic disable-line: undefined-global
+end
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
 function setLayout()
