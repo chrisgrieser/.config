@@ -1,3 +1,5 @@
+# shellcheck disable=SC2164
+
 # git log
 alias gl="git log --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'"
 
@@ -103,6 +105,7 @@ function clone(){
 	grep -q "obsidian" package.json &> /dev/null && npm i # if it's an Obsidian plugin
 }
 
+# shallow clone
 function sclone(){
 	git clone --depth=1 "$*"
 	# shellcheck disable=SC2012
@@ -115,7 +118,6 @@ function nuke {
 	SSH_REMOTE=$(git remote -v | head -n1 | cut -d" " -f1 | cut -d$'	' -f2)
 
 	# go to git repo root
-	# shellcheck disable=SC2164
 	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
 	LOCAL_REPO=$(pwd)
 	cd ..

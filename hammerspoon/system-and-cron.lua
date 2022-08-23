@@ -62,7 +62,6 @@ end
 shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
 shutDownWatcher:start()
 
-
 --------------------------------------------------------------------------------
 -- SYSTEM WAKE/START
 function officeWake (eventType)
@@ -101,6 +100,7 @@ end
 wakeWatcher:start()
 
 function systemStart()
+	-- prevent commit spam when updating hammerspoon config regularly
 	local _, isReloading = hs.execute('[[ -e "./is-reloading" ]]')
 	if isReloading then
 		hs.execute("rm ./is-reloading")
