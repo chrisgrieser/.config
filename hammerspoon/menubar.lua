@@ -80,20 +80,20 @@ function updateDotfileSyncStatusMenuBar()
 			local changedFiles = hs.execute('git status --porcelain') -- no need for cd, since hammerspoon config is inside dotfile directory already
 				:gsub('"','')
 				:gsub("(.. )[^\n]+/(.-)\n", "%1%2\n") -- only filenames and git status
-				:gsub("^M", " M", 1)
+				:gsub("\n ", "\n") -- remove leading spaces
 			notify(changedFiles)
 		end)
 	end
 end
 
-dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar)
+dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateDotfileSyncStatusMenuBar) ---@diagnostic disable-line: undefined-global
 dotfilesWatcher:start()
 
 --------------------------------------------------------------------------------
 
 vaultSyncMenuBar = hs.menubar.new()
 function updateVaultSyncStatusMenuBar()
-	local changes, success = hs.execute('cd "'..vaultLocation..'" ; git status --porcelain | wc -l | tr -d " "')
+	local changes, success = hs.execute('cd "'..vaultLocation..'" ; git status --porcelain | wc -l | tr -d " "') ---@diagnostic disable-line: undefined-global
 	changes = trim(changes)
 
 	if tonumber(changes) == 0 or not(success) then
@@ -102,10 +102,10 @@ function updateVaultSyncStatusMenuBar()
 		vaultSyncMenuBar:returnToMenuBar()
 		vaultSyncMenuBar:setTitle(vaultIcon.." "..changes) ---@diagnostic disable-line: undefined-global
 		vaultSyncMenuBar:setClickCallback(function ()
-			local changedFiles = hs.execute('cd "'..vaultLocation..'" ; git status --porcelain')
+			local changedFiles = hs.execute('cd "'..vaultLocation..'" ; git status --porcelain') ---@diagnostic disable-line: undefined-global
 				:gsub('"','')
 				:gsub("(.. )[^\n]+/(.-)\n", "%1%2\n") -- only filenames and git status
-				:gsub("^M", " M", 1)
+				:gsub("\n ", "\n") -- remove leading spaces
 			notify(changedFiles)
 		end)
 	end
