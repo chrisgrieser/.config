@@ -356,6 +356,9 @@ youtubeWatcher:start()
 -- SCRIPT EDITOR
 function scriptEditorLaunch (appName, eventType)
 	if not(appName == "Script Editor" and eventType == aw.launched) then return end
+	-- to not run for dictionary windows
+	if hs.window.focusedWindow():title():sub(-5) == ".sdef" then return end
+
 	runDelayed (0.2, function () keystroke({"cmd"}, "n") end)
 	runDelayed (0.4, function ()
 		keystroke({"cmd"}, "v")
