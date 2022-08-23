@@ -104,6 +104,7 @@ function systemStart()
 	local _, isReloading = hs.execute('[[ -e "./is-reloading" ]]')
 	if isReloading then return end
 
+	notify ("systemstart runs")
 	gitDotfileSync("--submodules")
 	gitVaultSync()
 end
