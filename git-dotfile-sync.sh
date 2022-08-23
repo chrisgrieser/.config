@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-[[ "$1" == "--submodules" ]] && osascript -e "beep"
+[[ "$1" == "--submodules" ]] || osascript -e "beep"
 
 cd "$(dirname "$0")" || exit 1
 
