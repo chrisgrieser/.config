@@ -1,17 +1,16 @@
-#=========================================
+#-------------------------------------------------------------------------------
 # sources for mac default settings
 # https://github.com/herrbischoff/awesome-macos-command-line
 # https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 # https://macos-defaults.com/
-#=========================================
-#=========================================
+#-------------------------------------------------------------------------------
 
 # ask for permissions upfront
 sudo -v
 
-#=========================================
+#-------------------------------------------------------------------------------
 # Global Prefs
-#=========================================
+#-------------------------------------------------------------------------------
 # these three need restart
 # mouse speed: 3 = max speed from System Preferences
 # https://mac-os-key-repeat.vercel.app/
@@ -44,9 +43,9 @@ defaults write -g PMPrintingExpandedStateForPrint -bool true
 defaults write -g PMPrintingExpandedStateForPrint2 -bool true
 
 
-#=========================================
+#-------------------------------------------------------------------------------
 # System Prefs
-#=========================================
+#-------------------------------------------------------------------------------
 
 # Network
 # pw.md generated via keychain read before
@@ -169,7 +168,7 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 
 #screenshots
-defaults write com.apple.screencapture disable-shadow -bool false
+defaults write com.apple.screencapture disable-shadow -bool true
 defaults write com.apple.screencapture location -string "${HOME}/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
 defaults write com.apple.screencapture type -string "png"
 killall SystemUIServer
