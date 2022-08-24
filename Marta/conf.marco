@@ -19,7 +19,7 @@ behavior {
     }
 
     table {
-        iconSize 33
+        iconSize 35
         verticalPadding 3
         colorHighlighting true
         showGoUpFolder false

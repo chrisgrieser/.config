@@ -9,9 +9,9 @@ elif [[ "$filesChanged" == 1 ]] ; then
 else
 	changeType="$filesChanged files"
 fi
-msg="$changeType, $device_name"
+msg="$device_name ($changeType)"
 
-git add -A && git commit -m "$msg" --author="🤖📂<marta@file.explorer>"
+git add -A && git commit -m "$msg" --author="📂<marta@file.explorer>"
 git pull
 git push
 
