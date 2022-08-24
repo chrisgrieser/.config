@@ -34,6 +34,31 @@
 				<false/>
 			</dict>
 		</array>
+		<key>0F55C68E-C6D6-4629-B28B-1E323E3CC867</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7E7254FB-7761-400D-887B-162AB242F68E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>0AFB82C2-9EEE-4164-A0EF-F87F65EE719F</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6BF4A116-C3FE-4B51-BFF9-65DE98E2EAD1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4368A1F1-8F24-42E0-B65E-454E60471269</key>
 		<array>
 			<dict>
@@ -61,7 +86,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7E7254FB-7761-400D-887B-162AB242F68E</string>
+				<string>0F55C68E-C6D6-4629-B28B-1E323E3CC867</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -441,6 +466,21 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>command</key>
+				<integer>8</integer>
+				<key>confirm</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemcommand</string>
+			<key>uid</key>
+			<string>7E7254FB-7761-400D-887B-162AB242F68E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -491,17 +531,55 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>command</key>
-				<integer>8</integer>
-				<key>confirm</key>
-				<true/>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>success</string>
+						<key>outputlabel</key>
+						<string>success</string>
+						<key>uid</key>
+						<string>0AFB82C2-9EEE-4164-A0EF-F87F65EE719F</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>error</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.systemcommand</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>7E7254FB-7761-400D-887B-162AB242F68E</string>
+			<string>0F55C68E-C6D6-4629-B28B-1E323E3CC867</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>⚠️ Sync Issue</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>6BF4A116-C3FE-4B51-BFF9-65DE98E2EAD1</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -591,6 +669,13 @@ fi</string>
 			<key>ypos</key>
 			<real>245</real>
 		</dict>
+		<key>0F55C68E-C6D6-4629-B28B-1E323E3CC867</key>
+		<dict>
+			<key>xpos</key>
+			<real>365</real>
+			<key>ypos</key>
+			<real>535</real>
+		</dict>
 		<key>4368A1F1-8F24-42E0-B65E-454E60471269</key>
 		<dict>
 			<key>xpos</key>
@@ -605,12 +690,19 @@ fi</string>
 			<key>ypos</key>
 			<real>515</real>
 		</dict>
+		<key>6BF4A116-C3FE-4B51-BFF9-65DE98E2EAD1</key>
+		<dict>
+			<key>xpos</key>
+			<real>495</real>
+			<key>ypos</key>
+			<real>580</real>
+		</dict>
 		<key>7E7254FB-7761-400D-887B-162AB242F68E</key>
 		<dict>
 			<key>xpos</key>
-			<real>335</real>
+			<real>495</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>440</real>
 		</dict>
 		<key>879D1A48-3BFC-4DB9-9453-E03B25E63B51</key>
 		<dict>
