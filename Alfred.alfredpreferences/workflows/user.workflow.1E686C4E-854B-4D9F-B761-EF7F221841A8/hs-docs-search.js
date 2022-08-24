@@ -19,11 +19,11 @@ const workArray = [];
 
 const categoryArr = JSON.parse(readFile(hammerspoonDocsJson));
 categoryArr.forEach(category => {
-
-	// push categories
+	const children = category.items.length;
+	// categories
 	workArray.push({
 		"title": category.name,
-		"subtitle": "Category. " + category.desc,
+		"subtitle": `${children} ▪︎ ${category.desc}`,
 		"match": alfredMatcher (category.name),
 		"arg": `https://www.hammerspoon.org/docs/${category.name}.html`,
 		"uid": category.name,
@@ -41,7 +41,7 @@ categoryArr.forEach(category => {
 		workArray.push({
 			"title": catItem.def,
 			"subtitle": catItem.desc,
-			"match": alfredMatcher (catItem.def),
+			"match": alfredMatcher (shortdef),
 			"arg": `https://www.hammerspoon.org/docs/${category.name}.html#${catItem.name}`,
 			"uid": `${category.name}_${catItem.name}`,
 			"mods": {
