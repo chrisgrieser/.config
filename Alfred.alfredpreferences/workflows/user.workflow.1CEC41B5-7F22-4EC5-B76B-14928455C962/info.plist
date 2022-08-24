@@ -59,29 +59,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>4368A1F1-8F24-42E0-B65E-454E60471269</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D773FACB-1CD9-4278-8BEB-540CD4AE2CA3</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>879D1A48-3BFC-4DB9-9453-E03B25E63B51</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<array>
 			<dict>
@@ -331,6 +308,35 @@ echo | last reboot | head -n 10 | cut -c 37-</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string>Menlo</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>FDF63B46-8376-4578-B3D1-6AF2ECC6ABFE</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -358,35 +364,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<string>08FF165B-3950-4760-9A48-5996704B1C65</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string>Menlo</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>FDF63B46-8376-4578-B3D1-6AF2ECC6ABFE</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -581,71 +558,6 @@ fi</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ Saved as '{query}'</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>D773FACB-1CD9-4278-8BEB-540CD4AE2CA3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>dock</string>
-				<key>subtext</key>
-				<string>as: '{query}'</string>
-				<key>text</key>
-				<string>Save Current Dock Layout</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>4368A1F1-8F24-42E0-B65E-454E60471269</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>zsh ~'/dotfiles/hammerspoon/dock-switching/dock-switcher.sh' --save "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>879D1A48-3BFC-4DB9-9453-E03B25E63B51</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -676,13 +588,6 @@ fi</string>
 			<key>ypos</key>
 			<real>535</real>
 		</dict>
-		<key>4368A1F1-8F24-42E0-B65E-454E60471269</key>
-		<dict>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>680</real>
-		</dict>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<dict>
 			<key>xpos</key>
@@ -703,13 +608,6 @@ fi</string>
 			<real>495</real>
 			<key>ypos</key>
 			<real>440</real>
-		</dict>
-		<key>879D1A48-3BFC-4DB9-9453-E03B25E63B51</key>
-		<dict>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>760</real>
 		</dict>
 		<key>8B8645C1-776A-41E4-B093-DF59FEF6D696</key>
 		<dict>
@@ -771,13 +669,6 @@ fi</string>
 			<real>185</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>D773FACB-1CD9-4278-8BEB-540CD4AE2CA3</key>
-		<dict>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>640</real>
 		</dict>
 		<key>DB66B929-10AD-4715-A5A6-D4B43B43CECC</key>
 		<dict>
