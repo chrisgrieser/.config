@@ -4,7 +4,6 @@
 <dict>
 	<key>scope</key>
 	<array>
-		<string>~/dotfiles</string>
 		<string>~/Downloaded</string>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia</string>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente</string>

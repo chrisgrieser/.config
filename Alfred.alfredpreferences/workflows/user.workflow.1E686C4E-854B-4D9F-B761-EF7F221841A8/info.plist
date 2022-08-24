@@ -878,7 +878,7 @@ window_name</string>
 		<key>269DAF1B-E1BB-4181-83FB-55889EFD70C6</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>correct spelling</string>
 			<key>xpos</key>
@@ -927,7 +927,7 @@ window_name</string>
 		<key>5B16416E-7040-457E-9EE2-18414694BA80</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>Add Spelling correction</string>
 			<key>xpos</key>
@@ -956,7 +956,7 @@ window_name</string>
 		<key>9F1771E6-E1F3-439B-8A10-1F6C57391AC9</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>append</string>
 			<key>xpos</key>
@@ -991,14 +991,14 @@ window_name</string>
 			<key>note</key>
 			<string>docs</string>
 			<key>xpos</key>
-			<real>530</real>
+			<real>535</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
 		<key>CA2BC0F1-C6A9-45A0-A24A-1D0A68E7F187</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>935</real>
 			<key>ypos</key>
@@ -1027,7 +1027,7 @@ window_name</string>
 		<key>EBB0231A-8BF9-409A-B9E7-C13D3C4A2AC2</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>695</real>
 			<key>ypos</key>

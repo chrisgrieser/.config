@@ -1,5 +1,6 @@
 {
 	"draw_white_space": ["selection", "isolated"],
+	"tab_size": 2,
 
 	"extensions":
 	[

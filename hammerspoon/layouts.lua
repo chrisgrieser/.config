@@ -84,7 +84,7 @@ function homeModeLayout ()
 
 	dockSwitcher("home")
 	sublimeFontSize(15)
-	alacrittyFontSize(24)
+	alacrittyFontSize(26)
 
 	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
 	local homeLayout = {
@@ -121,7 +121,7 @@ function officeModeLayout ()
 	openIfNotRunning("Drafts")
 	killIfRunning("Finder")
 	sublimeFontSize(13)
-	alacrittyFontSize(22)
+	alacrittyFontSize(24)
 
 	local bottom = {x=0, y=0.5, w=1, h=0.5}
 	local top = {x=0, y=0, w=1, h=0.5}
@@ -187,7 +187,7 @@ function motherHomeModeLayout()
 	privateClosers() ---@diagnostic disable-line: undefined-global
 
 	sublimeFontSize(14)
-	alacrittyFontSize(23)
+	alacrittyFontSize(25)
 	dockSwitcher("home")
 
 	local toTheSide = {x=0.7875, y=0, w=0.2125, h=1}

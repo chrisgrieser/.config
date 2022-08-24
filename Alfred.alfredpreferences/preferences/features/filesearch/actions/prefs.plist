@@ -60,6 +60,8 @@
 	<false/>
 	<key>showWithFn</key>
 	<false/>
+	<key>showWithRightArrow</key>
+	<false/>
 	<key>showWithTab</key>
 	<true/>
 	<key>sortByUsage</key>

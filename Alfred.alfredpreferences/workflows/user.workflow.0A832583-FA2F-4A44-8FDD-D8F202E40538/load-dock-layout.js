@@ -6,29 +6,21 @@ const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
 
 // fill in here
 const dockSwitcherDir = $.getenv("dock_switcher_path")
-	.replace(/(.*\/).*$/g, "$1");
+	.replace(/^~/, app.pathTo("home folder"))
+	.replace(/(.*\/).*$/, "$1");
 
 const layoutArr = app.doShellScript(`ls -1 '${dockSwitcherDir}'`)
 	.split("\r")
-	.filter()
-
-const jsonArray = [] // fill in here
-	// .filter(f => true)
-	.map(item => {
-		// fill in here
+	.filter(item => item.endsWith(".plist"))
+	.map(layout => {
+		layout = layout.replace(".plist", "");
 		return {
-			"title": item,
-			"match": alfredMatcher (item),
-			"subtitle": item,
-			"type": "file:skipcheck",
-			"icon": {
-				"type": "fileicon",
-				"path": item
-			},
-			"arg": item,
-			"uid": item,
+			"title": layout,
+			"match": alfredMatcher (layout),
+			"arg": layout,
+			"uid": layout,
 		};
 	});
 
-JSON.stringify({ items: jsonArray });
+JSON.stringify({ items: layoutArr });
 
