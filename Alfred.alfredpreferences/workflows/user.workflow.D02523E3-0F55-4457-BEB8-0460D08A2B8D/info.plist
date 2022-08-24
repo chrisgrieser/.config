@@ -1363,7 +1363,7 @@ open "$(dirname "$script_location")"/backup.log</string>
 	<key>variables</key>
 	<dict>
 		<key>backup_destination</key>
-		<string>/Volumes/Externe C</string>
+		<string>/Volumes/Externe A</string>
 		<key>last_backup</key>
 		<string>2022-08-17 09:21</string>
 		<key>script_location</key>

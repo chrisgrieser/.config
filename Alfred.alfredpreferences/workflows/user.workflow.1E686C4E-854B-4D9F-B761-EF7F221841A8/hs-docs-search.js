@@ -3,8 +3,17 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
+ObjC.import("Foundation");
+function readFile (path, encoding) {
+	if (!encoding) encoding = $.NSUTF8StringEncoding;
+	const fm = $.NSFileManager.defaultManager;
+	const data = fm.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
+	return ObjC.unwrap(str);
+}
 
-const workArray = JSON.parse(app.doShellScript('curl -s "https://api.github.com/repos/Hammerspoon/hammerspoon.github.io/git/trees/master?recursive=1"'))
+
+const workArray = JSON.parse(readFile("/Applications/Hammerspoon.app/Contents/Resources/docs.json"))
 	.tree
 	.filter(file => file.path.startsWith("docs/hs"))
 	.map(file => {
