@@ -11,8 +11,8 @@ function trim(str)
 end
 
 function deviceName()
-	local name = hs.execute('scutil --get ComputerName | cut -d" " -f2-')
-	name = name:gsub("\n", "")
+	-- similar to `scutil --get ComputerName`, only native to hammerspoon and therefore a bit more reliable
+	local name, _ = hs.host.localizedName():gsub(".- ", "", 1)
 	return name
 end
 
