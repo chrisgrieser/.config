@@ -5,7 +5,7 @@ if [[ -n "$(git status --porcelain)" ]] ; then
 	zsh ~"/dotfiles/git-dotfile-sync.sh"
 
 	if [[ -n "$(git status --porcelain)" ]] ; then
-		echo "Dotfile-Repo not clean."
+		echo "Dotfile-Repo not clean." # f
 		exit 1
 	fi
 fi
