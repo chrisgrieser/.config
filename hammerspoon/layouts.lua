@@ -4,7 +4,6 @@ require("private")
 
 --------------------------------------------------------------------------------
 -- HELPERS
-
 function dockSwitcher (targetMode)
 	hs.execute("zsh ./dock-switching/dock-switcher.sh --load "..targetMode)
 end
@@ -14,6 +13,14 @@ function sublimeFontSize (size)
 	hs.execute("VALUE="..toSize..[[
 		SUBLIME_CONFIG="$HOME/Library/Application Support/Sublime Text/Packages/User/Preferences.sublime-settings"
 		sed -i '' "s/\"font_size\": .*,/\"font_size\": $VALUE,/" "$SUBLIME_CONFIG"
+	]])
+end
+
+function alacrittyFontSize (size)
+	local toSize = tostring(size)
+	hs.execute("VALUE="..toSize..[[
+		ALACRITTY_CONFIG="$HOME/.config/alacritty/alacritty.yml"
+		sed -i '' "s/size: .*/size: $VALUE/" "$ALACRITTY_CONFIG"
 	]])
 end
 
@@ -77,6 +84,7 @@ function homeModeLayout ()
 
 	dockSwitcher("home")
 	sublimeFontSize(15)
+	alacrittyFontSize(24)
 
 	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
 	local homeLayout = {
@@ -113,6 +121,7 @@ function officeModeLayout ()
 	openIfNotRunning("Drafts")
 	killIfRunning("Finder")
 	sublimeFontSize(13)
+	alacrittyFontSize(22)
 
 	local bottom = {x=0, y=0.5, w=1, h=0.5}
 	local top = {x=0, y=0, w=1, h=0.5}
@@ -178,6 +187,7 @@ function motherHomeModeLayout()
 	privateClosers() ---@diagnostic disable-line: undefined-global
 
 	sublimeFontSize(14)
+	alacrittyFontSize(23)
 	dockSwitcher("home")
 
 	local toTheSide = {x=0.7875, y=0, w=0.2125, h=1}
@@ -201,7 +211,6 @@ function motherHomeModeLayout()
 	end)
 	runDelayed(0.6, function () hs.layout.apply(motherHomeLayout) end)
 	runDelayed(1, function () hs.layout.apply(motherHomeLayout) end)
-	spotifyTUI("pause") ---@diagnostic disable-line: undefined-global
 end
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
