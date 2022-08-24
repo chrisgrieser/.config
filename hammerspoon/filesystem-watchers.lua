@@ -71,6 +71,10 @@ function fromFileHub(files)
 		elseif fileName == "vimium-options.json" then
 			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/Browser Extension Settings/"')
 
+		-- tampermonkey backup
+		elseif fileName:match("tampermonkey-backup-.+%.txt") then
+			hs.execute('mv -f "'..file..'" "$HOME/dotfiles/Browser Extension Settings/tampermonkey-settings.json"')
+
 		-- watch later .urls from the office
 		elseif fileName:sub(-4) == ".url" and isIMacAtHome() then
 			hs.execute('mv -f "'..file..'" "$HOME/Downloaded/" ')
