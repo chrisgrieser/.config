@@ -573,27 +573,6 @@ tell application "System Preferences"	activate	reveal pane id "com.apple.prefe
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>icloud</string>
-				<key>subtext</key>
-				<string>System Preferences.app</string>
-				<key>text</key>
-				<string>⚙️ iCloud</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>8F0B3994-FF74-4C0E-98E6-6525CD5854F1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -620,27 +599,6 @@ tell application "System Preferences"	activate	reveal pane id "com.apple.prefe
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>login</string>
-				<key>subtext</key>
-				<string>System Preferences.app</string>
-				<key>text</key>
-				<string>Login Items</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>367C4960-7056-4DC7-AF1F-E3B676CD28ED</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
 				<string>permission</string>
 				<key>subtext</key>
 				<string>System Preferences.app</string>
@@ -653,6 +611,48 @@ tell application "System Preferences"	activate	reveal pane id "com.apple.prefe
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>7F84BB82-B76D-434A-B196-47FB5A533FAB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>icloud</string>
+				<key>subtext</key>
+				<string>System Preferences.app</string>
+				<key>text</key>
+				<string>⚙️ iCloud</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>8F0B3994-FF74-4C0E-98E6-6525CD5854F1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>login</string>
+				<key>subtext</key>
+				<string>System Preferences.app</string>
+				<key>text</key>
+				<string>Login Items</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>367C4960-7056-4DC7-AF1F-E3B676CD28ED</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -684,6 +684,51 @@ tell application "System Preferences"	activate	reveal anchor "startupItemsPref
 			<string>9F38CA08-5A82-48A8-B719-5FA9C7BA5CBF</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>--based on https://apple.stackexchange.com/questions/217117/applescript-for-specific-system-preferences-panetell application "System Preferences"	activate
+	-- get the name of every anchor of pane id "com.apple.preference.keyboard"	reveal anchor "shortcutsTab" of pane id "com.apple.preference.keyboard"end telltell application "System Events"	tell application process "System Preferences"		repeat until (window 1 exists)		end repeat		tell window 1						repeat until (rows of table 1 of scroll area 1 of splitter group 1 of tab group 1 exists)			end repeat						select (first row of table 1 of scroll area 1 of splitter group 1 of tab group 1 whose value of static text 1 is equal to "App Shortcuts")		end tell	end tellend tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>82CAA0B6-576C-4648-953F-A0A3E49502AF</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>keyboard</string>
+				<key>subtext</key>
+				<string>Mac OS System Settings</string>
+				<key>text</key>
+				<string>Keyboard</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>4283F2DD-6679-49EB-9D37-D642CB353C50</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -724,51 +769,6 @@ tell application "System Preferences"	activate	reveal anchor "startupItemsPref
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>--based on https://apple.stackexchange.com/questions/217117/applescript-for-specific-system-preferences-panetell application "System Preferences"	activate
-	-- get the name of every anchor of pane id "com.apple.preference.keyboard"	reveal anchor "shortcutsTab" of pane id "com.apple.preference.keyboard"end telltell application "System Events"	tell application process "System Preferences"		repeat until (window 1 exists)		end repeat		tell window 1						repeat until (rows of table 1 of scroll area 1 of splitter group 1 of tab group 1 exists)			end repeat						select (first row of table 1 of scroll area 1 of splitter group 1 of tab group 1 whose value of static text 1 is equal to "App Shortcuts")		end tell	end tellend tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>82CAA0B6-576C-4648-953F-A0A3E49502AF</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>keyboard</string>
-				<key>subtext</key>
-				<string>Mac OS System Settings</string>
-				<key>text</key>
-				<string>Custom Keyboard Shortcuts</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>4283F2DD-6679-49EB-9D37-D642CB353C50</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -801,6 +801,51 @@ tell application "System Preferences"	activate	reveal anchor "startupItemsPref
 			<string>35ABB653-F2CC-4D65-8468-06F6E7C9E8D9</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>services</string>
+				<key>subtext</key>
+				<string>Mac OS System Settings</string>
+				<key>text</key>
+				<string>Services</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>6C3D67FF-3F64-41B4-A2E2-095301BD8267</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>--based on https://apple.stackexchange.com/questions/217117/applescript-for-specific-system-preferences-panetell application "System Preferences"	activate
+	-- get the name of every anchor of pane id "com.apple.preference.keyboard"	reveal anchor "shortcutsTab" of pane id "com.apple.preference.keyboard"end telltell application "System Events"	tell application process "System Preferences"		repeat until (window 1 exists)		end repeat		tell window 1						repeat until (rows of table 1 of scroll area 1 of splitter group 1 of tab group 1 exists)			end repeat						select (first row of table 1 of scroll area 1 of splitter group 1 of tab group 1 whose value of static text 1 is equal to "Services")		end tell	end tellend tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C83E96A2-2B6B-4B7F-9978-E373B263ADC0</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -880,18 +925,18 @@ tell application "System Preferences"	activate	reveal anchor "startupItemsPref
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>services</string>
+				<string>text replacements</string>
 				<key>subtext</key>
-				<string>Mac OS System Settings</string>
+				<string>at the Mac OS System Settings</string>
 				<key>text</key>
-				<string>Services</string>
+				<string>Text Replacements</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>6C3D67FF-3F64-41B4-A2E2-095301BD8267</string>
+			<string>086ADC51-1C36-4239-80FE-EAE5EB50BE61</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -903,8 +948,7 @@ tell application "System Preferences"	activate	reveal anchor "startupItemsPref
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>--based on https://apple.stackexchange.com/questions/217117/applescript-for-specific-system-preferences-panetell application "System Preferences"	activate
-	-- get the name of every anchor of pane id "com.apple.preference.keyboard"	reveal anchor "shortcutsTab" of pane id "com.apple.preference.keyboard"end telltell application "System Events"	tell application process "System Preferences"		repeat until (window 1 exists)		end repeat		tell window 1						repeat until (rows of table 1 of scroll area 1 of splitter group 1 of tab group 1 exists)			end repeat						select (first row of table 1 of scroll area 1 of splitter group 1 of tab group 1 whose value of static text 1 is equal to "Services")		end tell	end tellend tell</string>
+				<string>tell application "System Preferences"	activate	reveal anchor "Text" of pane id "com.apple.preference.keyboard"end tell</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -915,7 +959,7 @@ tell application "System Preferences"	activate	reveal anchor "startupItemsPref
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>C83E96A2-2B6B-4B7F-9978-E373B263ADC0</string>
+			<string>A8839C83-5688-44AC-B24A-F8957F9DFEE8</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -987,50 +1031,6 @@ tell application "System Preferences"	activate	reveal anchor "startupItemsPref
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>text replacements</string>
-				<key>subtext</key>
-				<string>at the Mac OS System Settings</string>
-				<key>text</key>
-				<string>Text Replacements</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>086ADC51-1C36-4239-80FE-EAE5EB50BE61</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "System Preferences"	activate	reveal anchor "Text" of pane id "com.apple.preference.keyboard"end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A8839C83-5688-44AC-B24A-F8957F9DFEE8</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -1069,21 +1069,6 @@ tell application "System Preferences"	activate	reveal anchor "startupItemsPref
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>/System/Library/PreferencePanes/ScreenTime.prefPane</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>5D5F7838-7272-47F3-8C81-0D7E4BB0547C</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -1101,6 +1086,21 @@ tell application "System Preferences"	activate	reveal anchor "startupItemsPref
 			<string>836425AF-AD28-427E-BDC6-D30843E9FDB7</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>/System/Library/PreferencePanes/ScreenTime.prefPane</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>5D5F7838-7272-47F3-8C81-0D7E4BB0547C</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1183,6 +1183,27 @@ tell application "System Preferences"	activate	reveal anchor "startupItemsPref
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>accessibility keyboard</string>
+				<key>subtext</key>
+				<string>Mac OS System Settings</string>
+				<key>text</key>
+				<string>⌨️ Accessibility Keyboard</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>CA8A2A7F-193A-400B-B0CB-DD420D4E8D75</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -1194,6 +1215,29 @@ tell application "System Preferences"	activate	reveal anchor "startupItemsPref
 			<string>3A77F772-F984-4955-A08C-DD7AF18524CB</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "System Preferences"	activate	reveal anchor "Keyboard" of pane id "com.apple.preference.universalaccess"end tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DFCEAF51-C114-4F04-9A73-39E563A7808E</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1255,33 +1299,12 @@ tell application "System Preferences"	activate	reveal anchor "startupItemsPref
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>accessibility keyboard</string>
-				<key>subtext</key>
-				<string>Mac OS System Settings</string>
-				<key>text</key>
-				<string>⌨️ Accessibility Keyboard</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>CA8A2A7F-193A-400B-B0CB-DD420D4E8D75</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>tell application "System Preferences"	activate	reveal anchor "Keyboard" of pane id "com.apple.preference.universalaccess"end tell</string>
+				<string>tell application "System Preferences"	activate	reveal anchor "Seeing_Display" of pane id "com.apple.preference.universalaccess"end tell</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1292,9 +1315,30 @@ tell application "System Preferences"	activate	reveal anchor "startupItemsPref
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>DFCEAF51-C114-4F04-9A73-39E563A7808E</string>
+			<string>64807789-BCE9-4593-91B6-270CFEF00D5B</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>accessibility display</string>
+				<key>subtext</key>
+				<string>Mac OS System Settings</string>
+				<key>text</key>
+				<string>🖥 Accessibility Display</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>30E018C2-606F-4133-A2FD-6CFE36EF700D</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1385,46 +1429,38 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "System Preferences"	activate	reveal anchor "Seeing_Display" of pane id "com.apple.preference.universalaccess"end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>64807789-BCE9-4593-91B6-270CFEF00D5B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>keyword</key>
-				<string>accessibility display</string>
+				<string>application support</string>
 				<key>subtext</key>
-				<string>Mac OS System Settings</string>
+				<string>~/Library/Application Support</string>
 				<key>text</key>
-				<string>🖥 Accessibility Display</string>
+				<string>Application Support</string>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>30E018C2-606F-4133-A2FD-6CFE36EF700D</string>
+			<string>88E9FFE7-4616-49EF-BE3F-71A86AE4F74E</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library/Application Support</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>13E3EAD9-B10B-4042-BAE9-4CE466218B91</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1468,18 +1504,18 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>application support</string>
+				<string>library</string>
 				<key>subtext</key>
-				<string>~/Library/Application Support</string>
+				<string>~/Library/</string>
 				<key>text</key>
-				<string>Application Support</string>
+				<string>Library</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>88E9FFE7-4616-49EF-BE3F-71A86AE4F74E</string>
+			<string>B5CCCF47-D817-4059-95F2-496EA3C510C2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1489,12 +1525,12 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
-				<string>~/Library/Application Support</string>
+				<string>~/Library</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>13E3EAD9-B10B-4042-BAE9-4CE466218B91</string>
+			<string>B2C13A68-FC87-4C88-A98E-CB1989CE5DBE</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1531,42 +1567,6 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
 			<string>969DAF4D-7ABD-4021-96C5-DC37C9EE1C3E</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>library</string>
-				<key>subtext</key>
-				<string>~/Library/</string>
-				<key>text</key>
-				<string>Library</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B5CCCF47-D817-4059-95F2-496EA3C510C2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>B2C13A68-FC87-4C88-A98E-CB1989CE5DBE</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1738,27 +1738,6 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>screensaver</string>
-				<key>subtext</key>
-				<string>System Preferences.app</string>
-				<key>text</key>
-				<string>Desktop &amp; Screensaver</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>543BDD79-857B-47FF-B16B-66E2D0B7E8F5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -1796,6 +1775,27 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>screensaver</string>
+				<key>subtext</key>
+				<string>System Preferences.app</string>
+				<key>text</key>
+				<string>Desktop &amp; Screensaver</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>543BDD79-857B-47FF-B16B-66E2D0B7E8F5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
 				<string>chrisgrieser</string>
@@ -1825,7 +1825,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>1425</real>
+			<real>1320</real>
 		</dict>
 		<key>02B3F5B3-C592-4D21-888D-0801F4A00D65</key>
 		<dict>
@@ -1850,7 +1850,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>370</real>
 		</dict>
 		<key>0EE83D3D-F498-4D17-828B-0515A844BAA1</key>
 		<dict>
@@ -1877,7 +1877,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>1060</real>
+			<real>955</real>
 		</dict>
 		<key>1FB8C120-8C9C-436F-A539-4E3F409C6B71</key>
 		<dict>
@@ -1904,7 +1904,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>485</real>
 		</dict>
 		<key>30E018C2-606F-4133-A2FD-6CFE36EF700D</key>
 		<dict>
@@ -1913,7 +1913,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>940</real>
+			<real>835</real>
 		</dict>
 		<key>34899617-63CA-4A4C-9FF7-D1457B153E35</key>
 		<dict>
@@ -1922,7 +1922,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>1305</real>
+			<real>1200</real>
 		</dict>
 		<key>35ABB653-F2CC-4D65-8468-06F6E7C9E8D9</key>
 		<dict>
@@ -1967,7 +1967,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>240</real>
+			<real>135</real>
 		</dict>
 		<key>48D350AC-1ADF-41B3-91E8-1FD782539E17</key>
 		<dict>
@@ -1985,7 +1985,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>20</real>
 		</dict>
 		<key>543BDD79-857B-47FF-B16B-66E2D0B7E8F5</key>
 		<dict>
@@ -2055,7 +2055,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>940</real>
+			<real>835</real>
 		</dict>
 		<key>6C3D67FF-3F64-41B4-A2E2-095301BD8267</key>
 		<dict>
@@ -2064,7 +2064,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>255</real>
 		</dict>
 		<key>6C74BAFE-1896-4ED0-B627-B167DCBC77AD</key>
 		<dict>
@@ -2073,7 +2073,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1675</real>
+			<real>1570</real>
 		</dict>
 		<key>757EB6E2-E046-4FD7-A585-14086DA1F869</key>
 		<dict>
@@ -2091,7 +2091,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>1550</real>
+			<real>1445</real>
 		</dict>
 		<key>7F0B2953-8162-4E8B-9916-BE313A221630</key>
 		<dict>
@@ -2109,7 +2109,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>20</real>
 		</dict>
 		<key>80B034D1-EDE3-4047-9C79-98301A84185A</key>
 		<dict>
@@ -2118,7 +2118,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>710</real>
+			<real>605</real>
 		</dict>
 		<key>820435AC-7A43-49C1-9D56-243015F2F4BC</key>
 		<dict>
@@ -2136,7 +2136,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>240</real>
+			<real>135</real>
 		</dict>
 		<key>836425AF-AD28-427E-BDC6-D30843E9FDB7</key>
 		<dict>
@@ -2145,7 +2145,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>485</real>
 		</dict>
 		<key>88E9FFE7-4616-49EF-BE3F-71A86AE4F74E</key>
 		<dict>
@@ -2154,7 +2154,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1060</real>
+			<real>955</real>
 		</dict>
 		<key>8DC78E24-A4CD-49D8-A3A5-003F8404EA75</key>
 		<dict>
@@ -2206,7 +2206,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1425</real>
+			<real>1320</real>
 		</dict>
 		<key>A8341D96-DC9A-41AA-B560-59C687781B14</key>
 		<dict>
@@ -2224,7 +2224,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>370</real>
 		</dict>
 		<key>B1370196-7C2F-491A-BDF7-6CA8572FF894</key>
 		<dict>
@@ -2242,7 +2242,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>1180</real>
+			<real>1075</real>
 		</dict>
 		<key>B5CCCF47-D817-4059-95F2-496EA3C510C2</key>
 		<dict>
@@ -2251,7 +2251,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1180</real>
+			<real>1075</real>
 		</dict>
 		<key>BD6929CA-26E0-4810-9DDC-5109B990A8EC</key>
 		<dict>
@@ -2287,7 +2287,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>255</real>
 		</dict>
 		<key>CA8A2A7F-193A-400B-B0CB-DD420D4E8D75</key>
 		<dict>
@@ -2296,7 +2296,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>825</real>
+			<real>720</real>
 		</dict>
 		<key>CB5F5417-EDC6-433F-B9CB-111F9F0F3AA0</key>
 		<dict>
@@ -2341,7 +2341,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>825</real>
+			<real>720</real>
 		</dict>
 		<key>E1B1747E-34E3-4657-924C-DF3CEF96294B</key>
 		<dict>
@@ -2395,7 +2395,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1550</real>
+			<real>1445</real>
 		</dict>
 		<key>FD0018BF-877B-44BC-8869-23CC3FF21278</key>
 		<dict>
@@ -2413,7 +2413,7 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1305</real>
+			<real>1200</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

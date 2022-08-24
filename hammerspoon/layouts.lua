@@ -43,7 +43,6 @@ function movieModeLayout()
 
 	openIfNotRunning("YouTube")
 	runDelayed(1, function () openIfNotRunning("YouTube") end) -- safety redundancy
-	openIfNotRunning("Übersicht") -- this works in spite of diacritic ¯\_(ツ)_/¯
 
 	killIfRunning("Finder")
 	killIfRunning("Obsidian")
