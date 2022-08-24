@@ -10,6 +10,11 @@
 # Config
 VIDEO_DIR=~'/Downloaded'
 SUB_LANG='en'
+
+# for testing purposes, to see if "TR_TORRENT_DIR" works
+echo "$TR_TORRENT_DIR" >> "$VIDEO_DIR/clutter-deletion-info.txt"
+echo "$TR_TORRENT_NAME" >> "$VIDEO_DIR/clutter-deletion-info.txt"
+
 #-------------------------------------------------------------------------------
 
 export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
@@ -23,9 +28,7 @@ find "$VIDEO_DIR" \
 	-or -name '*.jpg' -delete \
 	-or -name '*.jpeg' -delete \
 	-or -name '*.png' -delete
-
-# delete flag does not work for directories
-find "$VIDEO_DIR" -name "Sample" -print0 | xargs -0 rm -r
+find "$VIDEO_DIR" -name "Sample" -print0 | xargs -0 rm -r # `-delete` does not work for directories, therefore done this way
 
 # download subtitles in newest folder
 NEW_FOLDER="$VIDEO_DIR/$(ls -tc "$VIDEO_DIR" | head -n1)"
@@ -38,5 +41,7 @@ if [[ $FILES_IN_FOLDER == 1 ]]; then
 	rmdir "$NEW_FOLDER"
 fi
 
-# quit Transmission
-osascript -e 'tell application "Transmission" to quit'
+# quit Transmission, if there are no other torrents
+STATUS=$(transmission-remote --list | grep -Ev '^( *ID|Sum:) ')
+[[ -z "$STATUS" ]] && osascript -e 'tell application "Transmission" to quit'
+
