@@ -256,25 +256,25 @@ zsh "$dock_switcher_path" --load "$1"</string>
 		<key>71149DFC-88DE-4E74-9FDA-F9336F759485</key>
 		<dict>
 			<key>xpos</key>
-			<real>245</real>
+			<real>315</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>150</real>
 		</dict>
 		<key>79DED58A-3D58-4E4A-A77D-EC3AE4C80916</key>
 		<dict>
 			<key>note</key>
 			<string>save as</string>
 			<key>xpos</key>
-			<real>90</real>
+			<real>100</real>
 			<key>ypos</key>
 			<real>200</real>
 		</dict>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<dict>
 			<key>xpos</key>
-			<real>240</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>270</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

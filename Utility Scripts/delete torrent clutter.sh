@@ -1,6 +1,8 @@
 #!/bin/zsh
 # shellcheck disable=SC2012
 
+# https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
+
 #-------------------------------------------------------------------------------
 
 # to be triggered on finishing a torrent download, e.g. via Transmission.app
