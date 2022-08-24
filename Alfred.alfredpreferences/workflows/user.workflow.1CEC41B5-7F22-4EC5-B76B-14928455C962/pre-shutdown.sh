@@ -20,5 +20,5 @@ if [[ -n "$(git status --porcelain)" ]] ; then
 	fi
 fi
 
-echo "success"
+echo -n "success"
 
