@@ -12,38 +12,47 @@ function readFile (path, encoding) {
 	return ObjC.unwrap(str);
 }
 
+// run `hs.docstrings_json_file` in hammerspoon console to get the docs path
+const hammerspoonDocsJson = "/Applications/Hammerspoon.app/Contents/Resources/docs.json";
 
-const workArray = JSON.parse(readFile("/Applications/Hammerspoon.app/Contents/Resources/docs.json"))
-	.tree
-	.filter(file => file.path.startsWith("docs/hs"))
-	.map(file => {
-		const subsite = file.path.slice(5, -5); // remove "/docs" and ".html"
-		return {
-			"title": subsite,
-			"match": alfredMatcher (subsite),
-			"arg": `https://www.hammerspoon.org/docs/${subsite}.html`,
-			"uid": subsite,
-		};
+const workArray = [];
+
+const categoryArr = JSON.parse(readFile(hammerspoonDocsJson));
+categoryArr.forEach(category => {
+
+	// push categories
+	workArray.push({
+		"title": category.name,
+		"subtitle": "Category. " + category.desc,
+		"match": alfredMatcher (category.name),
+		"arg": `https://www.hammerspoon.org/docs/${category.name}.html`,
+		"uid": category.name,
+		"mods": {
+			"cmd": {
+				"arg": category.name,
+				"subtitle": `⌘: Copy '${category.name}'`
+			},
+		},
 	});
 
-// individual pages
-workArray.push({
-	"title": "Getting Started",
-	"match": "getting started examples",
-	"arg": "https://www.hammerspoon.org/go/",
-	"uid": "getting-started",
-});
-workArray.push({
-	"title": "Hammerspoon Keymaps",
-	"match": "keymaps keycode hotkey",
-	"arg": "https://www.hammerspoon.org/docs/hs.keycodes.html#map",
-	"uid": "keymaps",
-});
-workArray.push({
-	"title": "hs.execute",
-	"match": "shell execute hs hs.execute",
-	"arg": "https://www.hammerspoon.org/docs/hs.html#execute",
-	"uid": "execute",
+	// categories items
+	category.items.forEach(catItem => {
+		const shortdef = category.name + "." + catItem.name;
+		workArray.push({
+			"title": catItem.def,
+			"subtitle": catItem.desc,
+			"match": alfredMatcher (catItem.def),
+			"arg": `https://www.hammerspoon.org/docs/${category.name}.html#${catItem.name}`,
+			"uid": `${category.name}_${catItem.name}`,
+			"mods": {
+				"cmd": {
+					"arg": shortdef,
+					"subtitle": `⌘: Copy '${shortdef}'`
+				},
+			},
+
+		});
+	});
 });
 
 JSON.stringify({ items: workArray });
