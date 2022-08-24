@@ -17,7 +17,7 @@ function deviceName()
 end
 
 function isAtMother()
-	if (deviceName():find("Leuthingerweg")) then
+	if deviceName():find("Leuthingerweg") then
 		return true
 	else
 		return false
@@ -25,13 +25,12 @@ function isAtMother()
 end
 
 function isIMacAtHome()
-	if deviceName():find("iMac") and not(deviceName():find("Leuthingerweg")) then
+	if deviceName():find("iMac") and deviceName():find("Helmholtz") then
 		return true
 	else
 		return false
 	end
 end
-
 
 function isProjector()
 	local projectorHelmholtz = hs.screen.primaryScreen():name() == "ViewSonic PJ"

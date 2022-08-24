@@ -13,4 +13,3 @@ spt playback --volume="$newVolume" &> /dev/null
 # for notification
 currentVolume=$(spt playback --format=%v)
 echo -n "$currentVolume% 🔊"
-
