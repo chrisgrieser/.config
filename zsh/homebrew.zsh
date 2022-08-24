@@ -45,7 +45,7 @@ function post-install () {
 		osascript -e "beep"
 	fi
 
-	[[ "$BREW_INFO" =~ "cask" ]] || return 0
+	[[ "$2" == "--formula" ]] && return 0
 
 	# shellcheck disable=SC2012
 	local NEWEST_APP="$(ls -tc /Applications | head -n1)"
@@ -126,7 +126,7 @@ function bi (){
 	fi
 
 	brew install "$TO_INSTALL" $TYPE # quotes would add empty 2nd arg if empty
-	post-install "$TO_INSTALL"
+	post-install "$TO_INSTALL" $TYPE
 }
 
 # helper function for `update` and `report`
