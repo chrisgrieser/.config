@@ -63,3 +63,5 @@ mkdir -p "$newSkinPath"/resource/styles/
 cp "$steamDataPath"/resource/styles/steam.styles "$newSkinPath"/resource/styles/
 echo ":root { zoom: \"1.5\"; }" > "$newSkinPath"/resource/webkit.css
 
+echo "https://raw.githubusercontent.com/chrisgrieser/dotfiles/main/Browser%20Extension%20Settings/tampermonkey-settings.json" | pbcopy
+open -a "Brave Browser" "chrome-extension://dhdgffkkebhmkfjojejmpbldmpobfkfo/options.html#nav=utils"
