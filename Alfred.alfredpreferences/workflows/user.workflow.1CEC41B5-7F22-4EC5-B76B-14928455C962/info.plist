@@ -486,7 +486,7 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 				<key>keyword</key>
 				<string>shutdown</string>
 				<key>subtext</key>
-				<string>run dotfiles sync before</string>
+				<string>run dotfiles &amp; vault sync before</string>
 				<key>text</key>
 				<string>Shutdown</string>
 				<key>withspace</key>
