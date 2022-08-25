@@ -50,7 +50,7 @@ function toggleDraftsSidebar (draftsWin)
 			hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=hide-sidebar")
 		end
 	end)
-	-- repetitation for some rare cases with lag needed
+	-- repetition for some rare cases with lag needed
 	runDelayed(0.2, function ()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
@@ -142,9 +142,9 @@ end
 function moveResize(win, pos)
 	win:moveToUnit(pos)
 	-- has to repeat due window creation delay for some apps
-	hs.timer.delayed.new(0.3, function () win:moveToUnit(pos) end):start()
-	hs.timer.delayed.new(0.6, function () win:moveToUnit(pos) end):start()
-	hs.timer.delayed.new(0.9, function () win:moveToUnit(pos) end):start()
+	runDelayed(0.3, function () win:moveToUnit(pos) end):start()
+	runDelayed(0.6, function () win:moveToUnit(pos) end):start()
+	runDelayed(0.9, function () win:moveToUnit(pos) end):start()
 end
 
 function moveToOtherDisplay ()

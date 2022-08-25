@@ -53,14 +53,8 @@
     "2\nsort: added",
     "3\nsort: name",
     "4\nsort: ext",
-    "5\nview: table",
-    {
-      "c": "#CCCCCC"
-    },
-    "6",
-    {
-      "c": "#c7a6ff"
-    },
+    "5\nsort: size",
+    "6\nview: table",
     "/\nquick select",
     {
       "c": "#CCCCCC"
