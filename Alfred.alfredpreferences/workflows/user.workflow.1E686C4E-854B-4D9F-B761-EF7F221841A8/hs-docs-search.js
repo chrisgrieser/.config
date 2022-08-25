@@ -2,7 +2,7 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
+const alfredMatcher = (str) => str.replace (/[-()_.:]/g, " ") + " " + str + " ";
 ObjC.import("Foundation");
 function readFile (path, encoding) {
 	if (!encoding) encoding = $.NSUTF8StringEncoding;

@@ -176,14 +176,27 @@ wf_alacritty:subscribe(wf.windowCreated, function ()
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
+wf_alacritty:subscribe(wf.windowFocused, function ()
 
-function finderWatcher(appName, eventType, appObject)
+end)
+
+-- hide all other windows, to get nice Desktop Background
+function alacrittyWatcher(appName, eventType)
 	if not(eventType == aw.activated and appName == "alacritty") then return end
-	hs.application.runningApplications()
 
+	wins = hs.window.orderedWindows() -- as opposed to :allWindows(), this *excludes* headless Twitterrific
+	for i = 2, #wins do -- starting at two to exclude alacritty itself
+		print(wins[i]:application():name())
+		wins[i]:application():hide()
+	end
+
+	if not(isPseudoMaximized(hs.window.focusedWindow())) then
+		hs.application("Twitterrific"):hide()
+	end
 end
-finderAppWatcher = aw.new(finderWatcher)
-finderAppWatcher:start()
+alacrittyAppWatcher = aw.new(alacrittyWatcher)
+alacrittyAppWatcher:start()
+
 
 --------------------------------------------------------------------------------
 
