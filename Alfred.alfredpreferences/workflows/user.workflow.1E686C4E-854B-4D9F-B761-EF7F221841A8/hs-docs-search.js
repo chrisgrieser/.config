@@ -28,16 +28,16 @@ categoryArr.forEach(category => {
 		"arg": `https://www.hammerspoon.org/docs/${category.name}.html`,
 		"uid": category.name,
 		"mods": {
-			"cmd": {
+			"alt": {
 				"arg": category.name,
-				"subtitle": `⌘: Copy '${category.name}'`
+				"subtitle": `⌘: Copy ${category.name}`
 			},
 		},
 	});
 
 	// categories items
 	category.items.forEach(catItem => {
-		const shortdef = category.name + "." + catItem.name;
+		const shortdef = catItem.def.split("->")[0].trim();
 		workArray.push({
 			"title": catItem.def,
 			"subtitle": catItem.desc,
@@ -45,9 +45,9 @@ categoryArr.forEach(category => {
 			"arg": `https://www.hammerspoon.org/docs/${category.name}.html#${catItem.name}`,
 			"uid": `${category.name}_${catItem.name}`,
 			"mods": {
-				"cmd": {
+				"alt": {
 					"arg": shortdef,
-					"subtitle": `⌘: Copy '${shortdef}'`
+					"subtitle": `⌘: Copy ${shortdef}`
 				},
 			},
 

@@ -101,7 +101,7 @@
 				<key>destinationuid</key>
 				<string>260CA812-9BC4-4225-87A1-9058C437559D</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -163,9 +163,9 @@
 				<key>destinationuid</key>
 				<string>260CA812-9BC4-4225-87A1-9058C437559D</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Copy</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
