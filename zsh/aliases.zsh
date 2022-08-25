@@ -3,7 +3,8 @@
 
 # configurations
 alias .star='open $STARSHIP_CONFIG'
-alias r='source ~/.zshrc ; echo ".zshrc reloaded"'
+alias r='exec zsh'
+# do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 
 # beautify JSON in the terminal (yq = better jq)
 # e.g.: curl -s "https://api.corona-zahlen.org/germany" | yq -p=yaml -o=json

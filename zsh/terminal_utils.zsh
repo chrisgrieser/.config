@@ -42,6 +42,11 @@ function directoryInspect (){
 	fi
 }
 
+# measure zsh loading time, https://blog.jonlu.ca/posts/speeding-up-zsh
+function timezsh(){
+	for i in $(seq 1 10); do /usr/bin/time $SHELL -i -c exit; done
+}
+
 # Move to trash via Finder (allows retrievability)
 # no arg = all files in folder will be deleted
 function d () {
