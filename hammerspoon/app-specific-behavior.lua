@@ -176,33 +176,18 @@ wf_alacritty:subscribe(wf.windowCreated, function ()
 		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
-wf_alacritty:subscribe(wf.windowFocused, function ()
 
-end)
-
--- hide all other windows, so the Desktop Wallpaper is visible
-function alacrittyWatcher(appName, eventType)
-	if not(eventType == aw.activated and appName == "alacritty") then return end
-
-	local alacrittyWin = hs.application("alacritty"):focusedWindow()
-
-	if SPLIT_RIGHT == alacrittyWin or SPLIT_LEFT == alacrittyWin then
-		return
-	end
-
+wf_alacritty:subscribe(wf.windowFocused, function (focusedWindow)
 	wins = hs.window.orderedWindows() -- as opposed to :allWindows(), this *excludes* headless Twitterrific
 	for i = 2, #wins do -- starting at two to exclude alacritty itself
 		print(wins[i]:application():name())
 		wins[i]:application():hide()
 	end
-
-	if not(isPseudoMaximized(hs.window.focusedWindow())) then
+	if not(isPseudoMaximized(focusedWindow)) then
 		hs.application("Twitterrific"):hide()
 	end
+end)
 
-end
-alacrittyAppWatcher = aw.new(alacrittyWatcher)
-alacrittyAppWatcher:start()
 
 
 --------------------------------------------------------------------------------
@@ -382,8 +367,7 @@ youtubeWatcher:start()
 -- SCRIPT EDITOR
 function scriptEditorLaunch (appName, eventType)
 	if not(appName == "Script Editor" and eventType == aw.launched) then return end
-	-- to not run for dictionary windows
-	if hs.window.focusedWindow():title():sub(-5) == ".sdef" then return end
+	if hs.window.focusedWindow():title() ~= "Untitled" then return end
 
 	runDelayed (0.2, function () keystroke({"cmd"}, "n") end)
 	runDelayed (0.4, function ()
