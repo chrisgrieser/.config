@@ -2,13 +2,12 @@
 # "--submodules" → also pull submodules
 
 cd "$(dirname "$0")" || exit 1
-
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
 
 if [[ "$filesChanged" == 0 ]] ; then
 	git pull
-	[[ "$1" == "--submodules" ]] && git submodule update --remote --rebase
+	[[ "$1" == "--submodules" ]] && git submodule update --remote --rebase # --rebase ensures that there is no detached head in the submodules
 	exit 0
 elif [[ "$filesChanged" == 1 ]] ; then
 	changeType="$filesChanged file"
@@ -23,6 +22,7 @@ if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
 	exit 1
 fi
 
+# git add-commit-pull-push sequence
 msg="$device_name ($changeType)"
 git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
 git pull
