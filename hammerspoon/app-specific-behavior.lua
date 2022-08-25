@@ -209,17 +209,18 @@ finderAppWatcher:start()
 
 wf_finder = wf.new("Finder")
 wf_finder:subscribe(wf.windowDestroyed, function ()
-	if #wf_finder:getWindows() == 0 then hs.application("Finder"):hide() end
+	if #wf_finder:getWindows() == 0 then
+		-- not via kill, so in-progress-oprations do not get aborted
+		hs.osascript.applescript('tell application "Finder" to quit')
+	end
 end)
 
 -- MARTA
 -- - (pseudo)maximize
 -- - close other tabs when reopening
--- - quit finder
 -- - quit Marta when no window remaining
 wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow', rejectTitles="^Preferences$"}
 wf_marta:subscribe(wf.windowCreated, function ()
-	killIfRunning("Finder")
 	runDelayed(0.1, function () -- close other tabs, needed because: https://github.com/marta-file-manager/marta-issues/issues/896
 		keystroke({"shift"}, "w", 1, hs.application("Marta"))
 	end)
