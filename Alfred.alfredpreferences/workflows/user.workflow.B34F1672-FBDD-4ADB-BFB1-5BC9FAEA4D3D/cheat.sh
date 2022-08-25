@@ -34,6 +34,7 @@ CLEAN_QUERY=$(echo "$*" | tr "/" " ")
 CACHE="/tmp/$CLEAN_QUERY" # will be displayed in less prompt line at start
 echo "$CHEAT_INFO" > "$CACHE"
 
+# title needs to be set for window manager
 alacritty \
 	--config-file="$PREVIEW_CONFIG" \
 	--title="cheatsheet" \

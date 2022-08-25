@@ -1,5 +1,4 @@
-title: cheatsheet
-dynamic_title: false
+# https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 font:
   normal:
     family: Input
@@ -28,7 +27,7 @@ window:
   padding:
     x: 20
     'y': 15
-  opacity: 0.99
+  opacity: 0.96
 live_config_reload: true
 cursor:
   style:
