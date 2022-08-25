@@ -14,7 +14,6 @@ CONFIG+=('git_github')
 CONFIG+=('homebrew')
 CONFIG+=('../pandoc/pandoc')
 
-for config_file in CONFIG; do
+for config_file in "${CONFIG[@]}"; do
 	source "$DOTFILE_FOLDER/zsh/$config_file.zsh"
 done
-
