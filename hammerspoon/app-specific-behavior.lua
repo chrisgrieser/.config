@@ -180,9 +180,15 @@ wf_alacritty:subscribe(wf.windowFocused, function ()
 
 end)
 
--- hide all other windows, to get nice Desktop Background
+-- hide all other windows, so the Desktop Wallpaper is visible
 function alacrittyWatcher(appName, eventType)
 	if not(eventType == aw.activated and appName == "alacritty") then return end
+
+	local alacrittyWin = hs.application("alacritty"):focusedWindow()
+
+	if SPLIT_RIGHT == alacrittyWin or SPLIT_LEFT == alacrittyWin then
+		return
+	end
 
 	wins = hs.window.orderedWindows() -- as opposed to :allWindows(), this *excludes* headless Twitterrific
 	for i = 2, #wins do -- starting at two to exclude alacritty itself
@@ -193,6 +199,7 @@ function alacrittyWatcher(appName, eventType)
 	if not(isPseudoMaximized(hs.window.focusedWindow())) then
 		hs.application("Twitterrific"):hide()
 	end
+
 end
 alacrittyAppWatcher = aw.new(alacrittyWatcher)
 alacrittyAppWatcher:start()

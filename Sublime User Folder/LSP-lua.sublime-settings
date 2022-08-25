@@ -18,6 +18,8 @@
 			// Hammerspoon utils.lua
 			"notify",
 			"alert",
+			"SPLIT_RIGHT",
+			"SPLIT_LEFT",
 			"log",
 			"hotkey",
 			"maximized",
