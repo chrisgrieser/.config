@@ -211,7 +211,7 @@ keyBindings {
 
     "'" "core.move.right"
     ";" "core.move.left"
-    "5" {
+    "6" {
         id "core.display.mode"
         mode "table"
     }
@@ -267,6 +267,18 @@ keyBindings {
         id "core.ordering"
         ordering "extension"
         isAscending false
+        showFoldersOnTop true
+    }
+    "5" {
+        id "core.ordering"
+        ordering "size"
+        isAscending false
+        showFoldersOnTop true
+    }
+    "Shift+5" {
+        id "core.ordering"
+        ordering "size"
+        isAscending true
         showFoldersOnTop true
     }
 

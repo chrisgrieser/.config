@@ -1,11 +1,10 @@
 # shellcheck disable=SC2164,SC1009,SC1073,SC1056
 
-clear # messages for when launching via Alfred
-
 # requirements:
 # - cowsay
 # - fortune
 # - lolcat
+
 if [[ "$TERM" == "alacritty" ]] ; then
 	arr[1]=""   # standard
 	arr[2]="-b" # Borg Mode
@@ -19,8 +18,10 @@ if [[ "$TERM" == "alacritty" ]] ; then
 	rand=$((RANDOM % ${#arr[@]}))
 	random_emotion=${arr[$rand]}
 
+	# cow maxwidth
+	maxwidth=70
 	width=$(($(tput cols) - 10))
-	[[ $width -gt 60 ]] && width=60
+	[[ $width -gt $maxwidth ]] && width=$maxwidth
 
 	if [[ $((RANDOM%2)) == 1 ]] ; then
 		say_or_think="cowsay"

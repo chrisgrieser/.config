@@ -7,21 +7,23 @@
 	<key>custom</key>
 	<string>on alfred_script(q)
 	set prevClipboard to the clipboard
+	delay 0.05
 	set the clipboard to q
 
 	tell application "Alacritty" to activate
 	tell application "System Events"
 		repeat while (name of first application process whose frontmost is true) is not "alacritty"
-			delay 0.1
+			delay 0.05
 		end repeat
-		delay 0.1
-		keystroke "v" using {command down}
-		delay 0.1
-		key code 36
+		delay 0.05
+		keystroke "v" using {command down} # paste query
+		delay 0.05
+		key code 36 # return
 		if q starts with "cd " then keystroke "l" using {control down} # clear screen in zsh
-
-		set the clipboard to prevClipboard
 	end tell
+
+	delay 0.05
+	set the clipboard to prevClipboard
 end alfred_script</string>
 	<key>prefix</key>
 	<integer>1</integer>
