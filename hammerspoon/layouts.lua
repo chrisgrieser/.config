@@ -66,6 +66,7 @@ function movieModeLayout()
 end
 
 function homeModeLayout ()
+	iMacDisplay:setBrightness(0.9)
 	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
 	openIfNotRunning("Slack")
