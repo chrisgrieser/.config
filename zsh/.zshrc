@@ -1,15 +1,20 @@
-# shellcheck disable=SC1091
+# shellcheck disable=SC1091,SC1090
 
-source "$DOTFILE_FOLDER/zsh/load_plugins.zsh"
-source "$DOTFILE_FOLDER/zsh/terminal_utils.zsh"
-source "$DOTFILE_FOLDER/zsh/aliases.zsh"
-source "$DOTFILE_FOLDER/zsh/history_config.zsh"
-source "$DOTFILE_FOLDER/zsh/general_and_plugin_configs.zsh"
-source "$DOTFILE_FOLDER/zsh/completions.zsh"
-source "$DOTFILE_FOLDER/zsh/keybindings.zsh"
-source "$DOTFILE_FOLDER/zsh/vi-mode.zsh"
-source "$DOTFILE_FOLDER/zsh/docs_man.zsh"
+CONFIG=()
+CONFIG+=('load_plugins')
+CONFIG+=('terminal_utils')
+CONFIG+=('aliases')
+CONFIG+=('history_config')
+CONFIG+=('general_and_plugin_configs')
+CONFIG+=('completions')
+CONFIG+=('keybindings')
+CONFIG+=('vi-mode')
+CONFIG+=('docs_man')
+CONFIG+=('git_github')
+CONFIG+=('homebrew')
+CONFIG+=('../pandoc/pandoc')
 
-source "$DOTFILE_FOLDER/zsh/git_github.zsh"
-source "$DOTFILE_FOLDER/zsh/homebrew.zsh"
-source "$DOTFILE_FOLDER/zsh/../pandoc/pandoc.zsh"
+for config_file in CONFIG; do
+	source "$DOTFILE_FOLDER/zsh/$config_file.zsh"
+done
+

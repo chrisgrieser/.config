@@ -2,6 +2,7 @@ require("utils")
 
 function twitterrificAction (type)
 	local twitterrific = hs.application("Twitterrific")
+	local previousApp = frontapp()
 	twitterrific:activate() -- needs activation, cause sending to app in background doesn't work w/ cmd
 
 	if type == "link" then
@@ -11,7 +12,6 @@ function twitterrificAction (type)
 	elseif type == "retweet" then
 		keystroke({"cmd"}, "e")
 	elseif type == "scrollup" then
-		local previousApp = frontapp()
 		local prevMousePos = hs.mouse.absolutePosition()
 
 		local f = twitterrific:mainWindow():frame()

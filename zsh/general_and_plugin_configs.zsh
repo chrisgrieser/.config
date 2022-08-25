@@ -23,8 +23,8 @@ ZSH_HIGHLIGHT_REGEXP+=('^(git commit -m|acp|amend) .{50,}' 'fg=white,bold,bg=red
 # dangerous stuff
 ZSH_HIGHLIGHT_REGEXP+=('(git reset --hard|rm -r?f) .*' 'fg=white,bold,bg=red')
 # global aliases
-ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=white,bold,bg=magenta')
-ZSH_HIGHLIGHT_REGEXP+=(' H ' 'fg=white,bold,bg=magenta')
+ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=white,bold,bg=magenta')
 
 export BAT_THEME='Sublime Snazzy'
 
