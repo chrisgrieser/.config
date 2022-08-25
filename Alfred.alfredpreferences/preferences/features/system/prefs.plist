@@ -19,6 +19,8 @@
 	<true/>
 	<key>emptytrashKeyword</key>
 	<string>trash</string>
+	<key>emptytrashKeywordEnabled</key>
+	<false/>
 	<key>forcequitKeyword</key>
 	<string>kill</string>
 	<key>forcequitKeywordEnabled</key>
