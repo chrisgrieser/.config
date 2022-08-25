@@ -1,10 +1,11 @@
 #!/bin/zsh
 # "--submodules" → also pull submodules
 
-cd "$(dirname "$0")" || exit 1
+MAX_FILE_SIZE_MB=10
+cd "$(dirname "$0")" || exit 1 # go to location of this script, i.e. cd'ing into the git repo
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
-filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
 
+filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
 if [[ "$filesChanged" == 0 ]] ; then
 	git pull
 	[[ "$1" == "--submodules" ]] && git submodule update --remote --rebase # --rebase ensures that there is no detached head in the submodules
@@ -16,7 +17,8 @@ else
 fi
 
 # safeguard against accidental pushing of large files
-NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -size +10M | wc -l | xargs)
+# shellcheck disable=SC2248
+NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -size +${MAX_FILE_SIZE_MB}M | wc -l | xargs)
 if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
 	echo -n "$NUMBER_LARGE_FILES Large files detected, aborting automatic git sync."
 	exit 1
@@ -29,7 +31,7 @@ git pull
 [[ "$1" == "--submodules" ]] && git submodule update --remote
 git push
 
-# check that everything worked (e.g. submodules are dirty)
+# check that everything worked (e.g. submodules are still dirty)
 DIRTY=$(git status --porcelain)
 if [[ -n "$DIRTY" ]]; then
 	echo "Dotfile Repo still dirty."
