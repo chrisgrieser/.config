@@ -28,3 +28,11 @@ git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
 git pull
 [[ "$1" == "--submodules" ]] && git submodule update --remote
 git push
+
+# check that everything worked (e.g. submodules are dirty)
+DIRTY=$(git status --porcelain)
+if [[ -n "$DIRTY" ]]; then
+	echo "Dotfile Repo still dirty."
+	echo "$DIRTY"
+	exit 1
+fi

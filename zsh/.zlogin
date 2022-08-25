@@ -3,7 +3,6 @@
 # requirements:
 # - cowsay
 # - fortune
-# - lolcat
 
 if [[ "$TERM" == "alacritty" ]] ; then
 	arr[1]=""   # standard
@@ -30,7 +29,7 @@ if [[ "$TERM" == "alacritty" ]] ; then
 	fi
 
 	# shellcheck disable=SC2248
-	fortune -n270 -s | sed 's/--/\n--/g' | $say_or_think -W$width $random_emotion | lolcat --freq=0.15
+	fortune -n270 -s | sed 's/--/\n--/g' | $say_or_think -W$width $random_emotion
 	echo
 
 	# shellcheck disable=SC2012
