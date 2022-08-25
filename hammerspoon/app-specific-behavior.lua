@@ -177,6 +177,14 @@ wf_alacritty:subscribe(wf.windowCreated, function ()
 	end
 end)
 
+function finderWatcher(appName, eventType, appObject)
+	if not(eventType == aw.activated and appName == "alacritty") then return end
+	hs.application.runningApplications()
+
+end
+finderAppWatcher = aw.new(finderWatcher)
+finderAppWatcher:start()
+
 --------------------------------------------------------------------------------
 
 -- FINDER: when activated
@@ -202,7 +210,6 @@ function finderWatcher(appName, eventType, appObject)
 	if (win_h / max_h) < 0.7 then
 		finderWin:setSize({w = target_w, h = target_h})
 	end
-
 end
 finderAppWatcher = aw.new(finderWatcher)
 finderAppWatcher:start()
