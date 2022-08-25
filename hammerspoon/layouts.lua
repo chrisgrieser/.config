@@ -75,7 +75,6 @@ function homeModeLayout ()
 	openIfNotRunning("Drafts")
 
 	killIfRunning("YouTube")
-	hs.osascript.applescript('tell application "Übersicht" to quit') -- can't use shell or hammerspoon due to diacritic in app name m(
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
 	killIfRunning("Twitch")
