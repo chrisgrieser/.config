@@ -140,7 +140,8 @@ function dump () {
 	local device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 	brew bundle dump --force --file "$BREWDUMP_PATH/Brewfile_$device_name"
 	npm list --location=global --parseable | sed "1d" | sed -E "s/.*\///" > "$BREWDUMP_PATH/NPMfile_$device_name"
-	echo "Brewfile & NPM-File dumped at \"$BREWDUMP_PATH\""
+	pip3 list --not-required | tail -n+3 | grep -vE "Pillow|pip|pybind|setuptools|six|wheel" | cut -d" " -f1 > "$BREWDUMP_PATH/Pip3file_$device_name"
+	echo "Brewfile, Pip3File & NPM-File dumped at \"$BREWDUMP_PATH\""
 }
 
 function update (){
