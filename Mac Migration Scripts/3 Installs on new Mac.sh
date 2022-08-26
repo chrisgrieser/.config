@@ -7,6 +7,7 @@ sudo -v
 
 sudo gem install anystyle-cli
 pip3 install pdfannots
+pip3 install alacritty-colorscheme
 
 # MAS CLI sign in currently broken due to Apple API change
 # Sign in Bug: https://github.com/mas-cli/mas#-sign-in
@@ -14,7 +15,6 @@ pip3 install pdfannots
 open '/System/Applications/App Store.app'
 
 # shellcheck disable=SC2034
-HOMEBREW_CASK_OPTS="--no-quarantine"
 brew bundle install --no-quarantine --verbose --no-lock --file ~'/Desktop/Brewfile'
 
 # Uninstall unneeded Mac Default apps
@@ -33,9 +33,6 @@ npm list --location=global
 #-------------------------------------------------------------------------------
 # SETTINGS
 #-------------------------------------------------------------------------------
-
-# br shell
-broot --install
 
 # Espanso
 espanso service register
