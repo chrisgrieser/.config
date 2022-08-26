@@ -12,27 +12,27 @@ if [[ "$DEVICE_NAME" =~ "Mac mini" ]]; then
 	X=200
 	Y=40
 	LINES=22
-else
-	X=600
+	FONT_SIZE=23
+elif [[ "$DEVICE_NAME" =~ "Helmholtz" ]] ; then
+	X=550
 	Y=100
-	LINES=28
+	LINES=25
+	FONT_SIZE=24
 fi
 
 #-------------------------------------------------------------------------------
 
 QUERY=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
-CHEAT_INFO=$(curl -s "https://cht.sh/$QUERY?style=$STYLE") # https://cht.sh/:help
-CHEAT_CODE_ONLY=$(curl -s "https://cht.sh/$QUERY?TQ")
-
-# if empty string, copy the full info instead
-if [[ -z "$CHEAT_CODE_ONLY" ]]; then
-	CHEAT_CODE_ONLY=$(curl -s "https://cht.sh/$QUERY?T")
-fi
-echo "$CHEAT_CODE_ONLY" | pbcopy
-
 CLEAN_QUERY=$(echo "$*" | tr "/" " ")
 CACHE="/tmp/$CLEAN_QUERY"
-echo "$CHEAT_INFO" > "$CACHE"
+
+if [[ ! -e "$CACHE" ]] ; then
+	CHEAT_INFO=$(curl -s "https://cht.sh/$QUERY?style=$STYLE") # https://cht.sh/:help
+	echo "$CHEAT_INFO" > "$CACHE"
+fi
+CHEAT_CODE_ONLY=$(curl -s "https://cht.sh/$QUERY?TQ")
+[[ -z "$CHEAT_CODE_ONLY" ]] && CHEAT_CODE_ONLY=$(curl -s "https://cht.sh/$QUERY?T")
+echo "$CHEAT_CODE_ONLY" | pbcopy
 
 # title needs to be set for window manager
 alacritty \
@@ -42,11 +42,12 @@ alacritty \
 	--option="window.position.x=$X" \
 	--option="window.position.y=$Y" \
 	--option="window.dimensions.lines=$LINES" \
+	--option="window.font.size=$FONT_SIZE" \
 	--command less -R \
-		--window=-4 \
+		--long-prompt \
+		--window=-3 \
 		--incsearch \
 		--ignore-case \
 		--HILITE-UNREAD \
 		--tilde \
 		-- "$CACHE"
-

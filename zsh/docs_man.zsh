@@ -8,16 +8,16 @@ function cc () {
 	echo "$CHEAT_CODE_ONLY" | pbcopy
 }
 
-# Be a Better Man
+# Better Man
 # first arg: command, second arg: search term
 function man () {
+ 	CONFIG=~"/.config/alacritty/man-page.yml"
+
 	if ! which alacritty &> /dev/null; then
 		echo "Not using Alacritty." ; return 1
 	elif ! which "$1" &> /dev/null; then
 		echo "Command '$1' not installed." ; return 1
  	fi
-
- 	CONFIG=~"/.config/alacritty/man-page.yml"
 
  	local isBuiltIn=false
  	[[ "$(which "$1")" =~ "built-in" ]] && isBuiltIn=true
@@ -41,10 +41,10 @@ function man () {
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
 export LESS_TERMCAP_md=$'\E[1;33m'     # begin blink = YELLOW
 export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-export LESS_TERMCAP_us=$'\E[1;35m'     # begin underline = BLUE
+export LESS_TERMCAP_us=$'\E[1;34m'     # begin underline = GREEN
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 # Pager-specific settings
 # (INFO: less ignore-case is actually smart case)
-export LESS='-R --ignore-case --HILITE-UNREAD --window=-3 --quit-if-one-screen --no-init --tilde'
+export LESS='-R --ignore-case --long-prompt --HILITE-UNREAD --window=-3 --quit-if-one-screen --no-init --tilde'
 
