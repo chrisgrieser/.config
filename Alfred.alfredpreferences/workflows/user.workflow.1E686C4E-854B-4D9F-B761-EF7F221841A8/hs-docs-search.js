@@ -54,5 +54,17 @@ categoryArr.forEach(category => {
 		});
 	});
 });
+workArray.push({
+	"title": "Getting Started",
+	"match": "getting started examples",
+	"arg": "https://www.hammerspoon.org/go/",
+	"uid": "getting-started",
+	"mods": {
+		"alt": {
+			"valid": false,
+			"subtitle": "❌"
+		},
+	},
+});
 
 JSON.stringify({ items: workArray });
