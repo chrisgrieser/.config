@@ -355,21 +355,28 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>spell</string>
-				<key>subtext</key>
-				<string>add to espanso</string>
-				<key>text</key>
-				<string>❌ Misspelling: {query}</string>
-				<key>withspace</key>
+				<key>adduuid</key>
+				<false/>
+				<key>allowemptyfiles</key>
+				<false/>
+				<key>createintermediatefolders</key>
 				<true/>
+				<key>filename</key>
+				<string>~/dotfiles/espanso/match/spelling.yml</string>
+				<key>filetext</key>
+				<string>  - trigger: {var:misspelling}
+    replace: {query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>relativepathmode</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>2</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.output.writefile</string>
 			<key>uid</key>
-			<string>A3AB158D-877A-451A-85CA-39C230762B3C</string>
+			<string>31B90C66-3259-4EF7-8EDC-7495CC5146FF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -395,28 +402,21 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>adduuid</key>
-				<false/>
-				<key>allowemptyfiles</key>
-				<false/>
-				<key>createintermediatefolders</key>
-				<true/>
-				<key>filename</key>
-				<string>~/dotfiles/espanso/match/spelling.yml</string>
-				<key>filetext</key>
-				<string>  - trigger: {var:misspelling}
-    replace: {query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>relativepathmode</key>
+				<key>argumenttype</key>
 				<integer>0</integer>
-				<key>type</key>
-				<integer>2</integer>
+				<key>keyword</key>
+				<string>spell</string>
+				<key>subtext</key>
+				<string>add to espanso</string>
+				<key>text</key>
+				<string>❌ Misspelling: {query}</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.writefile</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>31B90C66-3259-4EF7-8EDC-7495CC5146FF</string>
+			<string>A3AB158D-877A-451A-85CA-39C230762B3C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
