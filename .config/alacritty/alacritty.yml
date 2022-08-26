@@ -97,7 +97,7 @@ window:
   padding:
     x: 6
     y: 6
-  opacity: 0.97 # transparency
+  opacity: 0.92 # transparency
 scrolling:
   history: 2000
   multiplier: 3
@@ -129,6 +129,15 @@ hints:
         mods: None
       binding:
         key: U
+        mods: Command
+    # stack overflow shortlink
+    - regex: "so/[qa]/\\w+"
+      action: Copy
+      mouse:
+        enabled: true
+        mods: None
+      binding:
+        key: S
         mods: Command
     # file path
     - regex: /Users/.*/.*\.\w+

@@ -34,29 +34,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>269DAF1B-E1BB-4181-83FB-55889EFD70C6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CA2BC0F1-C6A9-45A0-A24A-1D0A68E7F187</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>9F1771E6-E1F3-439B-8A10-1F6C57391AC9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>387E93E5-B099-4784-8538-0CE2E9086D86</key>
 		<array>
 			<dict>
@@ -102,19 +79,6 @@
 				<string>260CA812-9BC4-4225-87A1-9058C437559D</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5B16416E-7040-457E-9EE2-18414694BA80</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EBB0231A-8BF9-409A-B9E7-C13D3C4A2AC2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -201,19 +165,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>EBB0231A-8BF9-409A-B9E7-C13D3C4A2AC2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>269DAF1B-E1BB-4181-83FB-55889EFD70C6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -389,27 +340,6 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Spell Correction added</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>CA2BC0F1-C6A9-45A0-A24A-1D0A68E7F187</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -495,94 +425,6 @@ window_name</string>
 			<string>260CA812-9BC4-4225-87A1-9058C437559D</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>✅ Correct spelling: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>269DAF1B-E1BB-4181-83FB-55889EFD70C6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>adduuid</key>
-				<false/>
-				<key>allowemptyfiles</key>
-				<false/>
-				<key>createintermediatefolders</key>
-				<true/>
-				<key>filename</key>
-				<string>~/dotfiles/espanso/match/spelling.yml</string>
-				<key>filetext</key>
-				<string>  - trigger: {var:misspelling}
-    replace: {query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>relativepathmode</key>
-				<integer>0</integer>
-				<key>type</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.writefile</string>
-			<key>uid</key>
-			<string>9F1771E6-E1F3-439B-8A10-1F6C57391AC9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>spell</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>❌ Misspelling: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>5B16416E-7040-457E-9EE2-18414694BA80</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>misspelling</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>EBB0231A-8BF9-409A-B9E7-C13D3C4A2AC2</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -738,27 +580,6 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>ep</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>❗️Restart Espanso</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>16D38DFC-CFE4-4CC7-8A25-EA604410CD5A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -778,6 +599,27 @@ window_name</string>
 			<string>F0068510-5EA9-467B-8CAB-E5A736B52AE8</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>ep</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗️Restart Espanso</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>16D38DFC-CFE4-4CC7-8A25-EA604410CD5A</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1040,17 +882,6 @@ window_name</string>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
-		<key>269DAF1B-E1BB-4181-83FB-55889EFD70C6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>correct spelling</string>
-			<key>xpos</key>
-			<real>260</real>
-			<key>ypos</key>
-			<real>190</real>
-		</dict>
 		<key>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</key>
 		<dict>
 			<key>colorindex</key>
@@ -1109,17 +940,6 @@ window_name</string>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
-		<key>5B16416E-7040-457E-9EE2-18414694BA80</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>Add Spelling correction</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>190</real>
-		</dict>
 		<key>936424AC-32E2-4193-B07C-DDB804AEF807</key>
 		<dict>
 			<key>colorindex</key>
@@ -1137,17 +957,6 @@ window_name</string>
 			<real>545</real>
 			<key>ypos</key>
 			<real>720</real>
-		</dict>
-		<key>9F1771E6-E1F3-439B-8A10-1F6C57391AC9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>append</string>
-			<key>xpos</key>
-			<real>495</real>
-			<key>ypos</key>
-			<real>190</real>
 		</dict>
 		<key>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</key>
 		<dict>
@@ -1180,15 +989,6 @@ window_name</string>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
-		<key>CA2BC0F1-C6A9-45A0-A24A-1D0A68E7F187</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>500</real>
-			<key>ypos</key>
-			<real>20</real>
-		</dict>
 		<key>CF8FBA0E-7BB8-46F0-9240-13ACB11C3D74</key>
 		<dict>
 			<key>colorindex</key>
@@ -1217,15 +1017,6 @@ window_name</string>
 			<real>675</real>
 			<key>ypos</key>
 			<real>460</real>
-		</dict>
-		<key>EBB0231A-8BF9-409A-B9E7-C13D3C4A2AC2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>220</real>
 		</dict>
 		<key>F0068510-5EA9-467B-8CAB-E5A736B52AE8</key>
 		<dict>

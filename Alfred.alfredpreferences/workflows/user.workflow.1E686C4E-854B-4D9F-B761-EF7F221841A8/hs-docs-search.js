@@ -30,7 +30,7 @@ categoryArr.forEach(category => {
 		"mods": {
 			"alt": {
 				"arg": category.name,
-				"subtitle": `⌘: Copy ${category.name}`
+				"subtitle": `⌥: Copy ${category.name}`
 			},
 		},
 	});
@@ -47,7 +47,7 @@ categoryArr.forEach(category => {
 			"mods": {
 				"alt": {
 					"arg": shortdef,
-					"subtitle": `⌘: Copy ${shortdef}`
+					"subtitle": `⌥: Copy ${shortdef}`
 				},
 			},
 
