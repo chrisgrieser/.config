@@ -34,11 +34,60 @@
 				<false/>
 			</dict>
 		</array>
+		<key>43A1BB6E-C6B9-46CE-9C19-BDDD4402BC2C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A4FE82F7-E7A7-42AE-89B9-C301653084C7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4F2102DA-A82A-42C3-B70D-D0AEBD9C9375</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>912E9A88-C5CA-47E8-9A5D-E9B80D66847D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A3AB158D-877A-451A-85CA-39C230762B3C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>43A1BB6E-C6B9-46CE-9C19-BDDD4402BC2C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A4FE82F7-E7A7-42AE-89B9-C301653084C7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3462B360-C953-4132-9E86-672BE709F90E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>31B90C66-3259-4EF7-8EDC-7495CC5146FF</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -282,6 +331,115 @@ end run</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Spell Correction added</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>3462B360-C953-4132-9E86-672BE709F90E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>spell</string>
+				<key>subtext</key>
+				<string>add to espanso</string>
+				<key>text</key>
+				<string>❌ Misspelling: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A3AB158D-877A-451A-85CA-39C230762B3C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>✅ Correct spelling: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A4FE82F7-E7A7-42AE-89B9-C301653084C7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>adduuid</key>
+				<false/>
+				<key>allowemptyfiles</key>
+				<false/>
+				<key>createintermediatefolders</key>
+				<true/>
+				<key>filename</key>
+				<string>~/dotfiles/espanso/match/spelling.yml</string>
+				<key>filetext</key>
+				<string>  - trigger: {var:misspelling}
+    replace: {query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>relativepathmode</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.writefile</string>
+			<key>uid</key>
+			<string>31B90C66-3259-4EF7-8EDC-7495CC5146FF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>misspelling</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>43A1BB6E-C6B9-46CE-9C19-BDDD4402BC2C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>requires "aspell" to be installed on the system. (`brew install aspell`)
@@ -311,6 +469,35 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>315</real>
 		</dict>
+		<key>31B90C66-3259-4EF7-8EDC-7495CC5146FF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>append</string>
+			<key>xpos</key>
+			<real>495</real>
+			<key>ypos</key>
+			<real>650</real>
+		</dict>
+		<key>3462B360-C953-4132-9E86-672BE709F90E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>500</real>
+			<key>ypos</key>
+			<real>480</real>
+		</dict>
+		<key>43A1BB6E-C6B9-46CE-9C19-BDDD4402BC2C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>680</real>
+		</dict>
 		<key>4F2102DA-A82A-42C3-B70D-D0AEBD9C9375</key>
 		<dict>
 			<key>colorindex</key>
@@ -339,6 +526,28 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>235</real>
 			<key>ypos</key>
 			<real>385</real>
+		</dict>
+		<key>A3AB158D-877A-451A-85CA-39C230762B3C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Add Spelling correction</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>650</real>
+		</dict>
+		<key>A4FE82F7-E7A7-42AE-89B9-C301653084C7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>correct spelling</string>
+			<key>xpos</key>
+			<real>260</real>
+			<key>ypos</key>
+			<real>650</real>
 		</dict>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<dict>

@@ -1,6 +1,5 @@
 require("utils")
 require("twitterrific-controls")
-require("private")
 
 --------------------------------------------------------------------------------
 -- WINDOW MANAGEMENT UTILS
@@ -8,14 +7,15 @@ maximized = hs.layout.maximized
 iMacDisplay = hs.screen("Built%-in") -- % to escape hyphen (is a quantifier in lua patterns)
 
 -- device-specific parameters
-if (isIMacAtHome()) then
+if isIMacAtHome() then
 	pseudoMaximized = {x=0, y=0, w=0.815, h=1}
 	baseLayout = pseudoMaximized
-elseif isAtMother then
+elseif isAtMother() then
 	pseudoMaximized = {x=0, y=0, w=0.7875, h=1}
 	baseLayout = pseudoMaximized
 elseif isAtOffice() then
 	baseLayout = maximized
+	pseudoMaximized = maximized
 end
 
 -- window size checks

@@ -55,6 +55,7 @@ function toggleDarkMode ()
 	]])
 
 	hs.application(prevApp):activate()
+	menubarLine() ---@diagnostic disable-line: undefined-global
 end
 
 function isDarkMode()

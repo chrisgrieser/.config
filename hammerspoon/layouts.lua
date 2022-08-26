@@ -63,10 +63,12 @@ function movieModeLayout()
 	killIfRunning("alacritty")
 
 	dockSwitcher("movie")
+	menubarLine("delete") ---@diagnostic disable-line: undefined-global
 end
 
 function homeModeLayout ()
 	iMacDisplay:setBrightness(0.9)
+	menubarLine("") ---@diagnostic disable-line: undefined-global
 	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
 	openIfNotRunning("Slack")
