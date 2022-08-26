@@ -17,9 +17,8 @@ function o (){
 					--expect=ctrl-b \
 					--cycle \
 					--delimiter=/ --with-nth=-2.. --nth=-2.. \
-					--header-first --header="↵ : open/cd, ^B: buffer, [⇧]↹ : only dirs" \
-					--bind="tab:reload(fd --hidden --color=always --type=directory)" \
-					--bind="btab:reload(fd --hidden --color=always)" \
+					--header-first --header="↵ : open/cd, ^B: buffer, ↹ : only dirs" \
+					--bind="tab:reload(fd --hidden --color=always --type=directory)+change-prompt(↪ )" \
 					--preview "if [[ -d {} ]] ; then exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=1 {} ; fi" \
 	         )
 	[[ -z "$selected" ]] && return 0
@@ -35,12 +34,13 @@ function o (){
 	fi
 }
 
-# switch alacritty color scheme. requires `alacritty-colorscheme` (pip package)
+# switch alacritty color scheme. requires `fzf` and `alacritty-colorscheme`
+# (pip package). save alacritty themes in ~/.config/alacritty/colors, download
+# from https://github.com/eendroroy/alacritty-theme
 function t(){
-	local selected colordemo
+	local selected colordemo header original
 	local alacritty_color_schemes=~/.config/alacritty/colors
-	local orignal=$(alacritty-colorscheme status | cut -d. -f1)
-	local input="$*"
+	original=$(alacritty-colorscheme status | cut -d. -f1)
 	read -r -d '' colordemo << EOM
 \033[1;30mblack  \033[0m  \033[1;40mblack   \033[0m
 \033[1;31mred    \033[0m  \033[1;41mred     \033[0m
@@ -56,28 +56,35 @@ EOM
 	# command still taking effect. together, they create a "live-switch" effect
 	selected=$(ls "$alacritty_color_schemes" | cut -d. -f1 | fzf \
 					-0 -1 \
-					--query="$input" \
-					--expect=ctrl-y \
+					--query="$*" \
+					--expect=ctrl-y,ctrl-e \
 					--cycle \
 					--ansi \
-					--height=8 \
+					--height=10 \
+					--border=sharp \
+					--header-first --header="at start: $original ▪︎ ⌃E: edit, ⌃Y: copy, ⌃D: del" \
 					--layout=reverse \
 					--info=inline \
-					--preview-window="right,70%,border-left" \
-					--preview="alacritty-colorscheme apply {}.yaml || alacritty-colorscheme apply {}.yml ;echo \"\n$colordemo\"" \
+					--preview-window="left,16,border-right" \
+					--preview="alacritty-colorscheme apply {}.yaml || alacritty-colorscheme apply {}.yml ; echo \"$colordemo\"" \
 	         )
 
 	# re-apply original color scheme when aborting
 	if [[ -z "$selected" ]] ; then
-		alacritty-colorscheme apply "$orignal.yaml" || alacritty-colorscheme apply "$orignal.yml"
+		alacritty-colorscheme apply "$original.yaml" || alacritty-colorscheme apply "$orignal.yml"
 		return 0
 	fi
 
 	key_pressed=$(echo "$selected" | head -n1)
 	selected=$(echo "$selected" | tail -n+2)
+	theme_path="$alacritty_color_schemes/$selected"
 
 	if [[ "$key_pressed" == "ctrl-y" ]] ; then
-		cat "$selected" | pbcopy
+		cat "$theme_path" | pbcopy
+	elif [[ "$key_pressed" == "ctrl-e" ]] ; then
+		open "$theme_path"
+	elif [[ "$key_pressed" == "ctrl-d" ]] ; then
+		mv "$theme_path" ~/.Trash
 	else
 		alacritty-colorscheme apply "$selected.yaml" || alacritty-colorscheme apply "$selected.yml"
 	fi

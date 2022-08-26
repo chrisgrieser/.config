@@ -8,7 +8,7 @@ export HOMEBREW_INSTALL_BADGE=✅
 export HOMEBREW_CASK_OPTS="--no-quarantine"
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 
-local BREWDUMP_PATH="$DOTFILE_FOLDER/Homebrew & NPM Installs/"
+BREWDUMP_PATH="$DOTFILE_FOLDER/Installed Apps and Packages/"
 
 alias bh='brew home'
 alias bl='brew list'
