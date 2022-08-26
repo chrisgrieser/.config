@@ -7,6 +7,9 @@ behavior {
     }
     files {
         defaultLocation "~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+        globalFilter {
+            name [ "\\.git" ]
+        }
     }
     setCurrentPathAsWindowTitle true
     preselectFirstMenuItem true
