@@ -24,7 +24,7 @@ function o (){
 	         )
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
-	selected=$(echo "$selected" | tail -n+1)
+	selected=$(echo "$selected" | tail -n+2)
 
 	if [[ "$key_pressed" == "ctrl-b" ]] ; then
 		print -z "$selected"
@@ -36,9 +36,10 @@ function o (){
 }
 
 # switch alacritty color scheme. requires `alacritty-colorscheme` (pip package)
-ALACRITTY_COLOR_SCHEMES=~/dotfiles/.config/alacritty/colors
 function t(){
 	local selected colordemo
+	local alacritty_color_schemes=~/.config/alacritty/colors
+	local orignal=$(alacritty-colorscheme status | cut -d. -f1)
 	local input="$*"
 	read -r -d '' colordemo << EOM
 \033[1;30mblack  \033[0m  \033[1;40mblack\033[0m
@@ -53,7 +54,7 @@ EOM
 
 	# --preview-window=0 results in a hidden preview window, with the preview
 	# command still taking effect. together, they create a "live-switch" effect
-	selected=$(ls "$ALACRITTY_COLOR_SCHEMES" | cut -d"." -f1 | fzf \
+	selected=$(ls "$alacritty_color_schemes" | cut -d. -f1 | fzf \
 					-0 -1 \
 					--query="$input" \
 					--expect=ctrl-y \
@@ -61,11 +62,17 @@ EOM
 					--ansi \
 					--height=8 \
 					--layout=reverse \
-					--info=hidden \
+					--info=inline \
 					--preview-window="right,70%,border-left" \
-					--preview="alacritty-colorscheme apply {}.yaml ;echo \"\n$colordemo\"" \
+					--preview="alacritty-colorscheme apply {}.yaml || alacritty-colorscheme apply {}yml ;echo \"\n$colordemo\"" \
 	         )
-	[[ -z "$selected" ]] && return 0
+
+	# re-apply original color scheme when aborting
+	if [[ -z "$selected" ]] ; then
+		alacritty-colorscheme apply "$orignal.yaml" || alacritty-colorscheme apply "$orignal.yml"
+		return 0
+	fi
+
 	key_pressed=$(echo "$selected" | head -n1)
 	selected=$(echo "$selected" | tail -n+2)
 
@@ -75,6 +82,7 @@ EOM
 		alacritty-colorscheme apply "$selected.yaml" || alacritty-colorscheme apply "$selected.yml"
 	fi
 }
+
 function directoryInspect (){
 	if command git rev-parse --is-inside-work-tree &>/dev/null ; then
 		git status --short
