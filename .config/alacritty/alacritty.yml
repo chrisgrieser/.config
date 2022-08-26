@@ -36,14 +36,14 @@ colors:
 
   # Normal colors
   dim:
-    black: '0x232323'
-    red: '0x74423f'
-    green: '0x5e6547'
-    yellow: '0x8b7653'
-    blue: '0x556b79'
-    magenta: '0x6e4962'
-    cyan: '0x5c8482'
-    white: '0x828282'
+    black: '0x31363b'
+    red: '0x783228'
+    green: '0x17a262'
+    yellow: '0xb65619'
+    blue: '0x1b668f'
+    magenta: '0x614a73'
+    cyan: '0x186c60'
+    white: '0x63686d'
   indexed_colors:
     - {index: 16, color: '0xF8BD96'}
     - {index: 17, color: '0xF5E0DC'}
@@ -131,7 +131,7 @@ hints:
         key: U
         mods: Command
     # stack overflow shortlink
-    - regex: "so/[qa]/\\w+"
+    - regex: so/[qa]/\w+
       action: Copy
       mouse:
         enabled: true
