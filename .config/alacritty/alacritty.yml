@@ -1,43 +1,54 @@
 colors:
-  # COLORSCHEME: snazzy.yaml
+  # COLORSCHEME: argonaut.yaml
   # Default colors
   primary:
-    background: '0x282a36'
-    foreground: '0xeff0eb'
+    background: '0x292C3E'
+    foreground: '0xEBEBEB'
 
-  # Normal colors
+  # Cursor colors
   normal:
-    black: '0x282a36'
-    red: '0xff5c57'
-    green: '0x5af78e'
-    yellow: '0xf3f99d'
-    blue: '0x57c7ff'
-    magenta: '0xff6ac1'
-    cyan: '0x9aedfe'
-    white: '0xf1f1f0'
+    black: '0x0d0d0d'
+    red: '0xFF301B'
+    green: '0xA0E521'
+    yellow: '0xFFC620'
+    blue: '0x1BA6FA'
+    magenta: '0x8763B8'
+    cyan: '0x21DEEF'
+    white: '0xEBEBEB'
 
   # Bright colors
   bright:
-    black: '0x686868'
-    red: '0xff5c57'
-    green: '0x5af78e'
-    yellow: '0xf3f99d'
-    blue: '0x57c7ff'
-    magenta: '0xff6ac1'
-    cyan: '0x9aedfe'
-    white: '0xf1f1f0'
+    black: '0x6D7070'
+    red: '0xFF4352'
+    green: '0xB8E466'
+    yellow: '0xFFD750'
+    blue: '0x1BA6FA'
+    magenta: '0xA578EA'
+    cyan: '0x73FBF1'
+    white: '0xFEFEF8'
   cursor:
-    text: '0xeeeeee'
-    cursor: '0x878787'
+    text: '0xFF261E'
+    # cursor: '0xFF261E'
+
+  # Normal colors
   dim:
-    black: '0x000000'
-    red: '0xa90000'
-    green: '0x049f2b'
-    yellow: '0xa3b106'
-    blue: '0x530aba'
-    magenta: '0xbb006b'
-    cyan: '0x433364'
-    white: '0x5f5f5f'
+    black: '0x232323'
+    red: '0x74423f'
+    green: '0x5e6547'
+    yellow: '0x8b7653'
+    blue: '0x556b79'
+    magenta: '0x6e4962'
+    cyan: '0x5c8482'
+    white: '0x828282'
+  indexed_colors:
+    - index: 16
+      color: '0xF8BD96'
+    - index: 17
+      color: '0xF5E0DC'
+    - index: 16
+      color: '0xF8BD96'
+    - index: 17
+      color: '0xF5E0DC'
   search:
     matches:
       foreground: CellBackground
@@ -45,6 +56,9 @@ colors:
     focused_match:
       foreground: CellBackground
       background: CellForeground
+    bar:
+      background: '#434c5e'
+      foreground: '#d8dee9'
   vi_mode_cursor:
     text: '#2e3440'
     cursor: '#d8dee9'
@@ -83,10 +97,11 @@ window:
   padding:
     x: 6
     y: 6
-  opacity: 0.93
+  opacity: 0.9
 scrolling:
   history: 2000
   multiplier: 3
+alt_send_esc: false
 working_directory: /Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File
   Hub/
 cursor:
@@ -114,6 +129,14 @@ hints:
         mods: None
       binding:
         key: U
+        mods: Command
+    - regex: so/[qa]/\w+
+      action: Select
+      mouse:
+        enabled: true
+        mods: None
+      binding:
+        key: S
         mods: Command
     - regex: /Users/.*/.*\.\w+
       command: open
@@ -150,6 +173,7 @@ key_bindings:
       args:
         - -c
         - open .
+  - {key: Space, mods: shift, chars: '^]'}
   - key: 28
     mods: Alt
     chars: '{'

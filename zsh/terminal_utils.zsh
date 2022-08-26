@@ -39,7 +39,7 @@ function t(){
 	local selected
 	local input="$*"
 
-	selected=$(ls ~"/dotfiles/.config/alacritty/colors" | fzf \
+	selected=$(ls ~"/dotfiles/.config/alacritty/colors" | cut -d. -f1 | fzf \
 					-0 -1 \
 					--query "$input" \
 					--expect=ctrl-y \
@@ -48,13 +48,20 @@ function t(){
 	         )
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
-	selected=$(echo "$selected" | tail -n+1)
+	selected=$(echo "$selected" | tail -n+2)
 
 	if [[ "$key_pressed" == "ctrl-y" ]] ; then
 		cat "$selected" | pbcopy
 	else
-		alacritty-colorscheme apply "$selected"
+		alacritty-colorscheme apply "$selected.yaml"
 	fi
+}
+
+function tn (){
+	local current next
+	current=$(alacritty-colorscheme status)
+	next=$(cd ~"/dotfiles/.config/alacritty/colors" ; ls | grep -A1 "$current" | tail -n1)
+	alacritty-colorscheme apply "$next"
 }
 
 function directoryInspect (){

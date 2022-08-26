@@ -59,4 +59,9 @@ matches:
       fi
   - regex: " ?!!"  # so this works whether prepended with space or not
     replace: " {\n"
-    label: 🏝 Quicker Block
+  - trigger: "!rename"
+    replace: |
+      for file in * ; do
+        mv "$file" "${file/text/replacement}"
+      done
+    label: "Bulk Rename"

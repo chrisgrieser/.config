@@ -7,9 +7,6 @@ behavior {
     }
     files {
         defaultLocation "~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-        globalFilter {
-            name [ "\\.git" ]
-        }
     }
     setCurrentPathAsWindowTitle true
     preselectFirstMenuItem true
@@ -28,6 +25,7 @@ behavior {
         showGoUpFolder false
         defaults {
             columns ">modified:200"
+            showHiddenFiles true
             ordering {
                 column "modified"
                 isAscending false
