@@ -1,38 +1,37 @@
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 colors:
-  # COLORSCHEME: dracula.yaml
+  # COLORSCHEME: challenger_deep.yaml
   # Default colors
   primary:
     # hard contrast: background = '0x1d2021'
-    background: '0x282a36'
-    foreground: '0xf8f8f2'
-
-  # Normal colors
+    background: '0x1e1c31'
+    foreground: '0xcbe1e7'
+  # Colors the cursor will use if `custom_cursor_colors` is true
   normal:
-    black: '0x000000'
-    red: '0xff5555'
-    green: '0x50fa7b'
-    yellow: '0xf1fa8c'
-    blue: '0xbd93f9'
-    magenta: '0xff79c6'
-    cyan: '0x8be9fd'
-    white: '0xbbbbbb'
-
+  # Bright colors
+    black: '0x141228'
+    red: '0xff5458'
+    green: '0x62d196'
+    yellow: '0xffb378'
+    blue: '0x65b2ff'
+    magenta: '0x906cff'
+    cyan: '0x63f2f1'
+    white: '0xa6b3cc'
   # Bright colors
   bright:
-    black: '0x555555'
-    red: '0xff5555'
-    green: '0x50fa7b'
-    yellow: '0xf1fa8c'
-    blue: '0xcaa9fa'
-    magenta: '0xff79c6'
-    cyan: '0x8be9fd'
-    white: '0xffffff'
-  cursor:
-    text: '0x000b1e'
-    cursor: '0x0abdc6'
+    black: '0x565575'
+    red: '0xff8080'
+    green: '0x95ffa4'
+    yellow: '0xffe9aa'
+    blue: '0x91ddff'
+    magenta: '0xc991e1'
+    cyan: '0xaaffe4'
+    white: '0xcbe3e7'
 
+  cursor:
+    text: '0xff271d'
+    cursor: '0xfbfcfc'
   # Normal colors
   dim:
     black: '0x31363b'
@@ -48,22 +47,20 @@ colors:
     - {index: 17, color: '0xF5E0DC'}
   search:
     matches:
-      foreground: CellBackground
-      background: '#88c0d0'
+      foreground: '0xb2b2b2'
+      background: '0xb26818'
     focused_match:
       foreground: CellBackground
       background: CellForeground
-    bar:
-      background: '#434c5e'
-      foreground: '#d8dee9'
+
   vi_mode_cursor:
     text: '#2e3440'
     cursor: '#d8dee9'
   selection:
-    text: CellForeground
-    background: '#4c566a'
+    text: '#ffe9d7'
+    background: '#265b75'
 
-
+  # Normal colors
 font:
   size: 26
 
@@ -98,7 +95,7 @@ window:
   padding:
     x: 6
     y: 6
-  opacity: 0.9 # transparency
+  opacity: 1 # transparency
 scrolling:
   history: 2000
   multiplier: 3

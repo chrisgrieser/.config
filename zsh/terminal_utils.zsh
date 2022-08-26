@@ -40,25 +40,15 @@ ALACRITTY_COLOR_SCHEMES=~/dotfiles/.config/alacritty/colors
 function t(){
 	local selected colordemo
 	local input="$*"
-
 	read -r -d '' colordemo << EOM
-\033[1;30mblack
-\033[1;31mred
-\033[1;32mgreen
-\033[1;33myellow
-\033[1;34mblue
-\033[1;35mmagenta
-\033[1;36mcyan
-\033[1;37mwhite
-
-\033[1;40mblack\033[0m
-\033[1;41mred\033[0m
-\033[1;42mgreen\033[0m
-\033[1;43m\033[1;30myellow\033[0m
-\033[1;44mblue\033[0m
-\033[1;45mmagenta\033[0m
-\033[1;46m\033[1;30mcyan\033[0m
-\033[1;47m\033[1;30mwhite\033[0m
+\033[1;30mblack  \033[0m  \033[1;40mblack\033[0m
+\033[1;31mred    \033[0m  \033[1;41mred\033[0m
+\033[1;32mgreen  \033[0m  \033[1;42mgreen\033[0m
+\033[1;33myellow \033[0m  \033[1;43m\033[1;30myellow\033[0m
+\033[1;34mblue   \033[0m  \033[1;44mblue\033[0m
+\033[1;35mmagenta\033[0m  \033[1;45mmagenta\033[0m
+\033[1;36mcyan   \033[0m  \033[1;46m\033[1;30mcyan\033[0m
+\033[1;37mwhite  \033[0m  \033[1;47m\033[1;30mwhite\033[0m
 EOM
 
 	# --preview-window=0 results in a hidden preview window, with the preview
@@ -69,11 +59,11 @@ EOM
 					--expect=ctrl-y \
 					--cycle \
 					--ansi \
-					--border=left \
-	            --info=hidden \
-					--header-first --header="↵ : apply, ^Y: copy yaml" \
-					--preview-window="20%" \
-					--preview="alacritty-colorscheme apply {};echo \"$colordemo\"" \
+					--height=8 \
+					--layout=reverse \
+					--info=hidden \
+					--preview-window="right,70%,border-left" \
+					--preview="alacritty-colorscheme apply {}.yaml ;echo \"\n$colordemo\"" \
 	         )
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
@@ -82,36 +72,9 @@ EOM
 	if [[ "$key_pressed" == "ctrl-y" ]] ; then
 		cat "$selected" | pbcopy
 	else
-		alacritty-colorscheme apply "$selected"
+		alacritty-colorscheme apply "$selected.yaml" || alacritty-colorscheme apply "$selected.yml"
 	fi
 }
-
-# next theme
-function tn (){
-	local current prev all
-	all=$(cd "$ALACRITTY_COLOR_SCHEMES" ; ls -1)
-	current=$(alacritty-colorscheme status)
-	[[ -z "$current" ]] && current=$(echo "$all" | tail -n1)
-
-	next=$(cd "$ALACRITTY_COLOR_SCHEMES" ; ls | grep -A1 "$current" | sed '1d')
-	[[ -z "$next" ]] && next=$(cd "$ALACRITTY_COLOR_SCHEMES" ; ls | head -n1)
-
-	alacritty-colorscheme apply "$next"
-}
-
-# previous theme
-function tp (){
-	local current prev all
-	all=$(cd "$ALACRITTY_COLOR_SCHEMES" ; ls -1)
-	current=$(alacritty-colorscheme status)
-	[[ -z "$current" ]] && current=$(echo "$all" | tail -n1)
-
-	prev=$(echo "$all" | grep -B1 "$current" | sed '$d')
-	[[ -z "$prev" ]] && prev=$(echo "$all" | tail -n1)
-
-	alacritty-colorscheme apply "$prev"
-}
-
 function directoryInspect (){
 	if command git rev-parse --is-inside-work-tree &>/dev/null ; then
 		git status --short
