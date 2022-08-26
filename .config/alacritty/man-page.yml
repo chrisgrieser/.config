@@ -38,7 +38,9 @@ colors:
     cyan: '0x433364'
 #-------------------------------------------------------------------------------
 window:
-  decorations: full
+  position:
+    x: 0
+    'y': 0
   dimensions:
     columns: 80
     lines: 40

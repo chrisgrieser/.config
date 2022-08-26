@@ -1,48 +1,51 @@
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 colors:
-  # COLORSCHEME: primary_dark.yaml
+  # COLORSCHEME: blood_moon.yaml
+  # Default colors
   primary:
-    background: '#231E1A'
-    foreground: '#E5CFB3'
+    # hard contrast: background = '0x1d2021'
+    background: '0x10100E'
+    foreground: '0xC6C6C4'
+
+  # Normal colors
   normal:
-    black: '#000000'
-    red: '#F54E42'
-    green: '#38B27D'
-    yellow: '#EBC400'
-    blue: '#4DADD5'
-    magenta: '#9F78DD'
-    cyan: '#3399C1'
-    white: '#F6E7D5'
+    black: '0x10100E'
+    red: '0xC40233'
+    green: '0x009F6B'
+    yellow: '0xFFD700'
+    blue: '0x0087BD'
+    magenta: '0x9A4EAE'
+    cyan: '0x20B2AA'
+    white: '0xC6C6C4'
+
+  # Bright colors
   bright:
-    black: '#000000'
-    yellow: '#F8D668'
-    red: '#FF675C'
-    green: '#38D687'
-    magenta: '#A993E6'
-    white: '#F6E7D5'
+    black: '0x696969'
+    red: '0xFF2400'
+    green: '0x03C03C'
+    yellow: '0xFDFF00'
+    blue: '0x007FFF'
+    magenta: '0xFF1493'
+    cyan: '0x00CCCC'
+    white: '0xFFFAFA'
   cursor:
-    text: '0xFF261E'
+    text: '0xaaaaaa'
+    cursor: '0xffffff'
 
   # Normal colors
   dim:
-    black: '0x232323'
-    red: '0x74423f'
-    green: '0x5e6547'
-    yellow: '0x8b7653'
-    blue: '0x556b79'
-    magenta: '0x6e4962'
-    cyan: '0x5c8482'
-    white: '0x828282'
+    black: '0x31363b'
+    red: '0x783228'
+    green: '0x17a262'
+    yellow: '0xb65619'
+    blue: '0x1b668f'
+    magenta: '0x614a73'
+    cyan: '0x186c60'
+    white: '0x63686d'
   indexed_colors:
-    - index: 16
-      color: '0xF8BD96'
-    - index: 17
-      color: '0xF5E0DC'
-    - index: 16
-      color: '0xF8BD96'
-    - index: 17
-      color: '0xF5E0DC'
+    - {index: 16, color: '0xF8BD96'}
+    - {index: 17, color: '0xF5E0DC'}
   search:
     matches:
       foreground: CellBackground

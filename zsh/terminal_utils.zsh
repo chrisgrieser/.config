@@ -9,17 +9,17 @@ function o (){
 		[[ -f "$input" ]] && open "$input"
 		return 0
 	fi
-
-	selected=$(fd --hidden --color=always | cut -c1-10 -c13- | fzf \
+	# --delimiter and --nth options ensure only file name and parent folder are displayed
+	selected=$(fd --hidden --color=always | fzf \
 					-0 -1 \
 					--ansi \
-					--query "$input" \
+					--query="$input" \
 					--expect=ctrl-b \
 					--cycle \
-					--delimiter=/ --with-nth=-2.. \
+					--delimiter=/ --with-nth=-2.. --nth=-2.. \
 					--header-first --header="↵ : open/cd, ^B: buffer, [⇧]↹ : only dirs" \
-					--bind="tab:reload(fd --hidden --color=always --type=directory | cut -c1-10 -c13-)" \
-					--bind="btab:reload(fd --hidden --color=always | cut -c1-10 -c13-)" \
+					--bind="tab:reload(fd --hidden --color=always --type=directory)" \
+					--bind="btab:reload(fd --hidden --color=always)" \
 					--preview "if [[ -d {} ]] ; then exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=1 {} ; fi" \
 	         )
 	[[ -z "$selected" ]] && return 0
@@ -41,14 +41,14 @@ function t(){
 	local selected
 	local input="$*"
 
-	# --delimiter and --nth options ensure file extension is not displayed
-	selected=$(ls "$ALACRITTY_COLOR_SCHEMES" | fzf \
+	# --preview-window=0 results in a hidden preview window, with the preview
+	# command still taking effect. together, they create a "live-switch" effect
+	selected=$(ls "$ALACRITTY_COLOR_SCHEMES" | cut -d" " -f1 | fzf \
 					-0 -1 \
-					--query "$input" \
+					--query="$input" \
 					--expect=ctrl-y \
-					--delimiter=. --nth=1 --with-nth=1 \
 					--cycle \
-					--preview="" \
+					--preview-window=0 --preview="alacritty-colorscheme apply {}" \
 					--header-first --header="↵ : apply, ^Y: copy yaml" \
 	         )
 	[[ -z "$selected" ]] && return 0
