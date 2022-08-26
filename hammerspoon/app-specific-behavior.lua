@@ -369,14 +369,17 @@ youtubeWatcher:start()
 -- SCRIPT EDITOR
 function scriptEditorLaunch (appName, eventType)
 	if not(appName == "Script Editor" and eventType == aw.launched) then return end
-	if hs.window.focusedWindow():title() ~= "Untitled" then return end
 
-	runDelayed (0.2, function () keystroke({"cmd"}, "n") end)
-	runDelayed (0.4, function ()
+	runDelayed (0.2, function ()
+		if not(hs.window.focusedWindow():title() == "Open") then return end
+		keystroke({"cmd"}, "n")
+		runDelayed (0.2, function ()
 		keystroke({"cmd"}, "v")
 		moveResizeCurWin("centered")
+		end)
+		runDelayed (0.4, function () keystroke({"cmd"}, "k") end)
 	end)
-	runDelayed (0.6, function () keystroke({"cmd"}, "k") end)
+
 end
 scriptEditorWatcher = aw.new(scriptEditorLaunch)
 scriptEditorWatcher:start()
