@@ -1,34 +1,28 @@
+# https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+
 colors:
-  # COLORSCHEME: argonaut.yaml
-  # Default colors
+  # COLORSCHEME: primary_dark.yaml
   primary:
-    background: '0x292C3E'
-    foreground: '0xEBEBEB'
-
-  # Cursor colors
+    background: '#231E1A'
+    foreground: '#E5CFB3'
   normal:
-    black: '0x0d0d0d'
-    red: '0xFF301B'
-    green: '0xA0E521'
-    yellow: '0xFFC620'
-    blue: '0x1BA6FA'
-    magenta: '0x8763B8'
-    cyan: '0x21DEEF'
-    white: '0xEBEBEB'
-
-  # Bright colors
+    black: '#000000'
+    red: '#F54E42'
+    green: '#38B27D'
+    yellow: '#EBC400'
+    blue: '#4DADD5'
+    magenta: '#9F78DD'
+    cyan: '#3399C1'
+    white: '#F6E7D5'
   bright:
-    black: '0x6D7070'
-    red: '0xFF4352'
-    green: '0xB8E466'
-    yellow: '0xFFD750'
-    blue: '0x1BA6FA'
-    magenta: '0xA578EA'
-    cyan: '0x73FBF1'
-    white: '0xFEFEF8'
+    black: '#000000'
+    yellow: '#F8D668'
+    red: '#FF675C'
+    green: '#38D687'
+    magenta: '#A993E6'
+    white: '#F6E7D5'
   cursor:
     text: '0xFF261E'
-    # cursor: '0xFF261E'
 
   # Normal colors
   dim:
@@ -65,6 +59,8 @@ colors:
   selection:
     text: CellForeground
     background: '#4c566a'
+
+
 font:
   normal:
     family: JetBrainsMonoNL Nerd Font
@@ -86,22 +82,21 @@ font:
     x: 2
     y: 6
   glyph_offset:
-    y: 3
+    y: 3 # roughly equivalent to increasing line height
 window:
   decorations: buttonless
   position:
-    x: 0
+    x: 0 # move completly to the left
   dimensions:
     columns: 94
     lines: 50
   padding:
     x: 6
     y: 6
-  opacity: 0.9
+  opacity: 0.9 # transparency
 scrolling:
   history: 2000
   multiplier: 3
-alt_send_esc: false
 working_directory: /Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File
   Hub/
 cursor:
@@ -110,7 +105,7 @@ cursor:
     blinking: Always
     blink_interval: 500
     unfocused_hollow: true
-  vi_mode_style:
+  vi_mode_style: # alacritty's vi mode, not the zsh vi mode
     shape: Underline
     blinking: Always
   thickness: 0.2
@@ -119,6 +114,7 @@ mouse:
 live_config_reload: true
 hints:
   enabled:
+    # urls
     - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\0\
         -\x1F\x7F-\x9F<>\"\\s{-}\\^⟨⟩`]+"
       hyperlinks: true
@@ -130,14 +126,7 @@ hints:
       binding:
         key: U
         mods: Command
-    - regex: so/[qa]/\w+
-      action: Select
-      mouse:
-        enabled: true
-        mods: None
-      binding:
-        key: S
-        mods: Command
+    # file path
     - regex: /Users/.*/.*\.\w+
       command: open
       mouse:
@@ -148,13 +137,19 @@ hints:
         mods: Command
 selection:
   save_to_clipboard: true
+
+# ------------------------------------------------------------------------------
+
 key_bindings:
+  # toggle alacritty's vi mode
   - key: V
     mods: Alt
     action: ToggleViMode
   - key: Escape
     mode: Vi
     action: ToggleViMode
+
+  # settings
   - key: 43
     mods: Command
     command:
@@ -162,10 +157,14 @@ key_bindings:
       args:
         - -c
         - open ~/.config/alacritty/alacritty.yml
+
+  # clear
   - key: K
     mods: Command
     mode: ~Vi|~Search
     chars: "\f"
+
+    # open location in GUI file explorer
   - key: L
     mods: Command
     command:
@@ -173,7 +172,7 @@ key_bindings:
       args:
         - -c
         - open .
-  - {key: Space, mods: shift, chars: '^]'}
+  # fix various special characters for the German keyboard
   - key: 28
     mods: Alt
     chars: '{'
@@ -195,6 +194,3 @@ key_bindings:
   - key: 22
     mods: Alt
     chars: ']'
-  - key: W
-    mods: Command
-    chars: "\x04"

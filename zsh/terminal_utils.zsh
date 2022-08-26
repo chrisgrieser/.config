@@ -16,6 +16,7 @@ function o (){
 					--query "$input" \
 					--expect=ctrl-b \
 					--cycle \
+					--delimiter=/ --with-nth=-2.. \
 					--header-first --header="↵ : open/cd, ^B: buffer, [⇧]↹ : only dirs" \
 					--bind="tab:reload(fd --hidden --color=always --type=directory | cut -c1-10 -c13-)" \
 					--bind="btab:reload(fd --hidden --color=always | cut -c1-10 -c13-)" \
@@ -35,15 +36,19 @@ function o (){
 }
 
 # switch alacritty color scheme. requires `alacritty-colorscheme` (pip package)
+ALACRITTY_COLOR_SCHEMES=~/dotfiles/.config/alacritty/colors
 function t(){
 	local selected
 	local input="$*"
 
-	selected=$(ls ~"/dotfiles/.config/alacritty/colors" | cut -d. -f1 | fzf \
+	# --delimiter and --nth options ensure file extension is not displayed
+	selected=$(ls "$ALACRITTY_COLOR_SCHEMES" | fzf \
 					-0 -1 \
 					--query "$input" \
 					--expect=ctrl-y \
+					--delimiter=. --nth=1 --with-nth=1 \
 					--cycle \
+					--preview="" \
 					--header-first --header="↵ : apply, ^Y: copy yaml" \
 	         )
 	[[ -z "$selected" ]] && return 0
@@ -53,15 +58,34 @@ function t(){
 	if [[ "$key_pressed" == "ctrl-y" ]] ; then
 		cat "$selected" | pbcopy
 	else
-		alacritty-colorscheme apply "$selected.yaml"
+		alacritty-colorscheme apply "$selected"
 	fi
 }
 
+# next theme
 function tn (){
-	local current next
+	local current prev all
+	all=$(cd "$ALACRITTY_COLOR_SCHEMES" ; ls -1)
 	current=$(alacritty-colorscheme status)
-	next=$(cd ~"/dotfiles/.config/alacritty/colors" ; ls | grep -A1 "$current" | tail -n1)
+	[[ -z "$current" ]] && current=$(echo "$all" | tail -n1)
+
+	next=$(cd "$ALACRITTY_COLOR_SCHEMES" ; ls | grep -A1 "$current" | sed '1d')
+	[[ -z "$next" ]] && next=$(cd "$ALACRITTY_COLOR_SCHEMES" ; ls | head -n1)
+
 	alacritty-colorscheme apply "$next"
+}
+
+# previous theme
+function tp (){
+	local current prev all
+	all=$(cd "$ALACRITTY_COLOR_SCHEMES" ; ls -1)
+	current=$(alacritty-colorscheme status)
+	[[ -z "$current" ]] && current=$(echo "$all" | tail -n1)
+
+	prev=$(echo "$all" | grep -B1 "$current" | sed '$d')
+	[[ -z "$prev" ]] && prev=$(echo "$all" | tail -n1)
+
+	alacritty-colorscheme apply "$prev"
 }
 
 function directoryInspect (){
