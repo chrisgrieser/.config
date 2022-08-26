@@ -138,6 +138,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>45D5F636-9E17-424F-976B-7AE803E23004</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E8028C2C-4991-40FB-BDB1-77F13666355A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>48D350AC-1ADF-41B3-91E8-1FD782539E17</key>
 		<array>
 			<dict>
@@ -1702,21 +1715,6 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>/System/Library/PreferencePanes/DesktopScreenEffectsPref.prefPane</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>E8028C2C-4991-40FB-BDB1-77F13666355A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -1774,6 +1772,21 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>/System/Library/PreferencePanes/DesktopScreenEffectsPref.prefPane</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>E8028C2C-4991-40FB-BDB1-77F13666355A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -1810,6 +1823,27 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>6C74BAFE-1896-4ED0-B627-B167DCBC77AD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>wallpaper</string>
+				<key>subtext</key>
+				<string>System Preferences.app</string>
+				<key>text</key>
+				<string>Desktop &amp; Screensaver</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>45D5F636-9E17-424F-976B-7AE803E23004</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1968,6 +2002,15 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<real>30</real>
 			<key>ypos</key>
 			<real>135</real>
+		</dict>
+		<key>45D5F636-9E17-424F-976B-7AE803E23004</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>390</real>
+			<key>ypos</key>
+			<real>1665</real>
 		</dict>
 		<key>48D350AC-1ADF-41B3-91E8-1FD782539E17</key>
 		<dict>
@@ -2366,9 +2409,9 @@ tell application "System Preferences"	activate	reveal anchor "privacy" of pane
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>585</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>1430</real>
+			<real>1545</real>
 		</dict>
 		<key>EC27AB7E-AFD2-4C8C-BF78-3E6284F59FD2</key>
 		<dict>

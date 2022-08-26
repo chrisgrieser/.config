@@ -2,6 +2,21 @@ require("utils")
 require("system-and-cron")
 --------------------------------------------------------------------------------
 
+-- visual fix of the menubar line shining through
+function refreshMenubarLine ()
+	local max = hs.screen.mainScreen():frame()
+
+	-- delete old menubar
+	menubarLine:delete()
+	menubarLine = nil
+
+	menubarLine = hs.drawing.rectangle({x=0, y=24, w=max.w, h=1})
+	menubarLine:setStrokeColor(hs.drawing.color.black)
+	menubarLine:setFill(true)
+	menubarLine:setStrokeWidth(2)
+	menubarLine:show()
+end
+
 -- this also determines the order of menubar items
 function reloadAllMenubarItems ()
 	setWeather()

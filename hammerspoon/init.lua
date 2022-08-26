@@ -26,10 +26,3 @@ systemStart() ---@diagnostic disable-line: undefined-global
 notify("Config reloaded")
 
 
-menubarSubline = hs.drawing.rectangle({x=0, y=24, w=1920, h=1})
-menubarSubline:setStrokeColor(hs.drawing.color.black)
-menubarSubline:setFill(true)
-menubarSubline:setStrokeWidth(2)
-menubarSubline:show()
--- menubarSubline:delete()
-menubarSubline = nill
