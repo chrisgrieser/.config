@@ -1,7 +1,7 @@
 # Quick Open File/Folder
 # requires: exa, bat, zoxide, fd, fzf
 function o (){
-	local selected command
+	local selected
 	local input="$*"
 
 	if [[ -e "$input" ]] ; then   # skip `fzf` if file is fully named, e.g. through tab completion
@@ -23,14 +23,37 @@ function o (){
 	         )
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
+	selected=$(echo "$selected" | tail -n+1)
 
-	fpath=$(echo "$selected" | tail -n1)
 	if [[ "$key_pressed" == "ctrl-b" ]] ; then
-		print -z "$fpath"
-	elif [[ -d "$fpath" ]] ; then
-		z "$fpath"
-	elif [[ -f "$fpath" ]] ; then
-		open "$fpath"
+		print -z "$selected"
+	elif [[ -d "$selected" ]] ; then
+		z "$selected"
+	elif [[ -f "$selected" ]] ; then
+		open "$selected"
+	fi
+}
+
+# switch alacritty color scheme. requires `alacritty-colorscheme` (pip package)
+function t(){
+	local selected
+	local input="$*"
+
+	selected=$(ls ~"/dotfiles/.config/alacritty/colors" | fzf \
+					-0 -1 \
+					--query "$input" \
+					--expect=ctrl-y \
+					--cycle \
+					--header-first --header="↵ : apply, ^Y: copy yaml" \
+	         )
+	[[ -z "$selected" ]] && return 0
+	key_pressed=$(echo "$selected" | head -n1)
+	selected=$(echo "$selected" | tail -n+1)
+
+	if [[ "$key_pressed" == "ctrl-y" ]] ; then
+		cat "$selected" | pbcopy
+	else
+		alacritty-colorscheme apply "$selected"
 	fi
 }
 

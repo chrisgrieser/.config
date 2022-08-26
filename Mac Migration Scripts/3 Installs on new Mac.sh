@@ -6,6 +6,7 @@
 sudo -v
 
 sudo gem install anystyle-cli
+
 pip3 install pdfannots
 pip3 install alacritty-colorscheme
 
@@ -29,6 +30,10 @@ open -a "Appcleaner" \
 # shellcheck disable=SC2002
 cat ~'/Desktop/NPMfile' | xargs npm install --location=global --force
 npm list --location=global
+
+# shellcheck disable=SC2002
+cat ~'/Desktop/Pip3File' | xargs pip3 install
+pip list --not-required
 
 #-------------------------------------------------------------------------------
 # SETTINGS

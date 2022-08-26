@@ -57,3 +57,6 @@ matches:
       else
       	echo "Not running"
       fi
+  - regex: " ?!!"  # so this works whether prepended with space or not
+    replace: " {\n"
+    label: 🏝 Quicker Block

@@ -22,8 +22,8 @@ function gli (){
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
+	hash=$(echo "$selected" | cut -d' ' -f1 | tail -n+1)
 
-	hash=$(echo "$selected" | cut -d' ' -f1 | tail -n1)
 	if [[ "$key_pressed" == "ctrl-h" ]] ; then
 		echo "$hash" | pbcopy
 		echo "$hash copied."

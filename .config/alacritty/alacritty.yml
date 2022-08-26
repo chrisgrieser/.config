@@ -1,29 +1,31 @@
 colors:
+  # COLORSCHEME: snazzy.yaml
+  # Default colors
   primary:
-    background: '0x1b2b34'
-    foreground: '0xd8dee9'
-    dim_foreground: '#a5abb6'
-    bright_foreground: '0xffffff'
-    dim_background: '0x31363b'
-    bright_background: '0x000000'
+    background: '0x282a36'
+    foreground: '0xeff0eb'
+
+  # Normal colors
   normal:
-    black: '0x29414f'
-    red: '0xec5f67'
-    green: '0x99c794'
-    yellow: '0xfac863'
-    blue: '0x6699cc'
-    magenta: '0xc594c5'
-    cyan: '0x5fb3b3'
-    white: '0x65737e'
+    black: '0x282a36'
+    red: '0xff5c57'
+    green: '0x5af78e'
+    yellow: '0xf3f99d'
+    blue: '0x57c7ff'
+    magenta: '0xff6ac1'
+    cyan: '0x9aedfe'
+    white: '0xf1f1f0'
+
+  # Bright colors
   bright:
-    black: '0x405860'
-    yellow: '0xfac863'
-    red: '0xec5f67'
-    green: '0x99c794'
-    magenta: '0xc594c5'
-    white: '0xadb5c0'
-    blue: '0x6699cc'
-    cyan: '0x5fb3b3'
+    black: '0x686868'
+    red: '0xff5c57'
+    green: '0x5af78e'
+    yellow: '0xf3f99d'
+    blue: '0x57c7ff'
+    magenta: '0xff6ac1'
+    cyan: '0x9aedfe'
+    white: '0xf1f1f0'
   cursor:
     text: '0xeeeeee'
     cursor: '0x878787'
@@ -68,9 +70,9 @@ font:
   builtin_box_drawing: true
   offset:
     x: 2
-    'y': 6
+    y: 6
   glyph_offset:
-    'y': 3
+    y: 3
 window:
   decorations: buttonless
   position:
@@ -80,12 +82,13 @@ window:
     lines: 50
   padding:
     x: 6
-    'y': 6
+    y: 6
   opacity: 0.93
 scrolling:
   history: 2000
   multiplier: 3
-working_directory: /Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File Hub/
+working_directory: /Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File
+  Hub/
 cursor:
   style:
     shape: Block
@@ -101,7 +104,8 @@ mouse:
 live_config_reload: true
 hints:
   enabled:
-    - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\0-\x1F\x7F-\x9F<>\"\\s{-}\\^⟨⟩`]+"
+    - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\0\
+        -\x1F\x7F-\x9F<>\"\\s{-}\\^⟨⟩`]+"
       hyperlinks: true
       command: open
       post_processing: true
@@ -133,7 +137,7 @@ key_bindings:
     command:
       program: sh
       args:
-        - '-c'
+        - -c
         - open ~/.config/alacritty/alacritty.yml
   - key: K
     mods: Command
@@ -144,7 +148,7 @@ key_bindings:
     command:
       program: sh
       args:
-        - '-c'
+        - -c
         - open .
   - key: 28
     mods: Alt
