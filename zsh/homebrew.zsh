@@ -45,7 +45,7 @@ function post-install () {
 		osascript -e "beep"
 	fi
 
-	[[ "$2" == "--formula" ]] && return 0
+	[[ "$2" != "--cask" ]] && return 0
 
 	# shellcheck disable=SC2012
 	local NEWEST_APP="$(ls -tc /Applications | head -n1)"

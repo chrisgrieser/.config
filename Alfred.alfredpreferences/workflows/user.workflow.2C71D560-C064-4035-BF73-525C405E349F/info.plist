@@ -353,14 +353,50 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
-	<key>variables</key>
-	<dict>
-		<key>delay_ms</key>
-		<string>70</string>
-		<key>second_lang</key>
-		<string>de</string>
-	</dict>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>70</string>
+				<key>placeholder</key>
+				<string>70</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>in ms</string>
+			<key>label</key>
+			<string>Delay</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>delay_ms</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>de</string>
+				<key>placeholder</key>
+				<string>de</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>needs to be shortcode from aspell</string>
+			<key>label</key>
+			<string>2nd language</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>second_lang</string>
+		</dict>
+	</array>
 	<key>version</key>
 	<string>0.2</string>
 	<key>webaddress</key>
