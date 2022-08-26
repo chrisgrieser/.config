@@ -38,18 +38,42 @@ function o (){
 # switch alacritty color scheme. requires `alacritty-colorscheme` (pip package)
 ALACRITTY_COLOR_SCHEMES=~/dotfiles/.config/alacritty/colors
 function t(){
-	local selected
+	local selected colordemo
 	local input="$*"
+
+	read -r -d '' colordemo << EOM
+\033[1;30mblack
+\033[1;31mred
+\033[1;32mgreen
+\033[1;33myellow
+\033[1;34mblue
+\033[1;35mmagenta
+\033[1;36mcyan
+\033[1;37mwhite
+
+\033[1;40mblack\033[0m
+\033[1;41mred\033[0m
+\033[1;42mgreen\033[0m
+\033[1;43m\033[1;30myellow\033[0m
+\033[1;44mblue\033[0m
+\033[1;45mmagenta\033[0m
+\033[1;46m\033[1;30mcyan\033[0m
+\033[1;47m\033[1;30mwhite\033[0m
+EOM
 
 	# --preview-window=0 results in a hidden preview window, with the preview
 	# command still taking effect. together, they create a "live-switch" effect
-	selected=$(ls "$ALACRITTY_COLOR_SCHEMES" | cut -d" " -f1 | fzf \
+	selected=$(ls "$ALACRITTY_COLOR_SCHEMES" | cut -d"." -f1 | fzf \
 					-0 -1 \
 					--query="$input" \
 					--expect=ctrl-y \
 					--cycle \
-					--preview-window=0 --preview="alacritty-colorscheme apply {}" \
+					--ansi \
+					--border=left \
+	            --info=hidden \
 					--header-first --header="↵ : apply, ^Y: copy yaml" \
+					--preview-window="20%" \
+					--preview="alacritty-colorscheme apply {};echo \"$colordemo\"" \
 	         )
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)

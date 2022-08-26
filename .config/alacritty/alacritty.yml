@@ -1,37 +1,37 @@
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 colors:
-  # COLORSCHEME: blood_moon.yaml
+  # COLORSCHEME: dracula.yaml
   # Default colors
   primary:
     # hard contrast: background = '0x1d2021'
-    background: '0x10100E'
-    foreground: '0xC6C6C4'
+    background: '0x282a36'
+    foreground: '0xf8f8f2'
 
   # Normal colors
   normal:
-    black: '0x10100E'
-    red: '0xC40233'
-    green: '0x009F6B'
-    yellow: '0xFFD700'
-    blue: '0x0087BD'
-    magenta: '0x9A4EAE'
-    cyan: '0x20B2AA'
-    white: '0xC6C6C4'
+    black: '0x000000'
+    red: '0xff5555'
+    green: '0x50fa7b'
+    yellow: '0xf1fa8c'
+    blue: '0xbd93f9'
+    magenta: '0xff79c6'
+    cyan: '0x8be9fd'
+    white: '0xbbbbbb'
 
   # Bright colors
   bright:
-    black: '0x696969'
-    red: '0xFF2400'
-    green: '0x03C03C'
-    yellow: '0xFDFF00'
-    blue: '0x007FFF'
-    magenta: '0xFF1493'
-    cyan: '0x00CCCC'
-    white: '0xFFFAFA'
+    black: '0x555555'
+    red: '0xff5555'
+    green: '0x50fa7b'
+    yellow: '0xf1fa8c'
+    blue: '0xcaa9fa'
+    magenta: '0xff79c6'
+    cyan: '0x8be9fd'
+    white: '0xffffff'
   cursor:
-    text: '0xaaaaaa'
-    cursor: '0xffffff'
+    text: '0x000b1e'
+    cursor: '0x0abdc6'
 
   # Normal colors
   dim:
@@ -65,6 +65,8 @@ colors:
 
 
 font:
+  size: 26
+
   normal:
     family: JetBrainsMonoNL Nerd Font
     style: Regular
@@ -77,7 +79,6 @@ font:
   bold_italic:
     family: JetBrainsMonoNL Nerd Font
     style: Bold Italic
-  size: 26
   use_thin_strokes: true
   draw_bold_text_with_bright_colors: true
   builtin_box_drawing: true
@@ -89,7 +90,8 @@ font:
 window:
   decorations: buttonless
   position:
-    x: 0 # move completly to the left
+    x: 0 # move completely to the left
+    y: 0
   dimensions:
     columns: 94
     lines: 50

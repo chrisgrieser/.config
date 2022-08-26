@@ -42,14 +42,16 @@ window:
     x: 0
     'y': 0
   dimensions:
-    columns: 80
-    lines: 40
+    columns: 93
+    lines: 50
   padding:
     x: 15
     'y': 10
-  opacity: 0.98
-#-------------------------------------------------------------------------------
+  opacity: 0.93
+  decorations: buttonless
 font:
+  size: 25
+#-------------------------------------------------------------------------------
   normal:
     family: Input
     style: Regular
@@ -59,8 +61,6 @@ font:
   italic:
     family: Input
     style: Italic
-  size: 25
-
   use_thin_strokes: true
   draw_bold_text_with_bright_colors: true
   builtin_box_drawing: true

@@ -7,7 +7,7 @@ window:
   padding:
     x: 20
     'y': 15
-  opacity: 0.98
+  opacity: 0.99
   decorations: buttonless
 font:
   normal:
@@ -19,7 +19,6 @@ font:
   italic:
     family: Input
     style: Italic
-  size: 25
   use_thin_strokes: true
   draw_bold_text_with_bright_colors: true
   builtin_box_drawing: true

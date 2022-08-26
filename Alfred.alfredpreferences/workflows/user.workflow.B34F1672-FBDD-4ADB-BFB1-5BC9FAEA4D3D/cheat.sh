@@ -7,6 +7,8 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 CONFIG=~/.config/alacritty/cheatsheet.yml
 BG_COLOR=#303643
 STYLE=paraiso-dark # https://cheat.sh/:styles-demo
+STATUSLINE_COLOR=#8F9DB5
+
 DEVICE_NAME="$(scutil --get ComputerName)"
 if [[ "$DEVICE_NAME" =~ "Mac mini" ]]; then
 	X=200
@@ -16,7 +18,7 @@ if [[ "$DEVICE_NAME" =~ "Mac mini" ]]; then
 elif [[ "$DEVICE_NAME" =~ "Helmholtz" ]] ; then
 	X=550
 	Y=100
-	LINES=25
+	LINES=28
 	FONT_SIZE=24
 fi
 
@@ -39,10 +41,11 @@ alacritty \
 	--config-file="$CONFIG" \
 	--title="cheatsheet: $QUERY" \
 	--option="colors.primary.background='$BG_COLOR'" \
+	--option="colors.primary.foreground='$STATUSLINE_COLOR'" \
 	--option="window.position.x=$X" \
 	--option="window.position.y=$Y" \
 	--option="window.dimensions.lines=$LINES" \
-	--option="window.font.size=$FONT_SIZE" \
+	--option="font.size=$FONT_SIZE" \
 	--command less -R \
 		--long-prompt \
 		--window=-3 \
