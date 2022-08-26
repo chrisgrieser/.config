@@ -8,9 +8,8 @@ function cc () {
 	echo "$CHEAT_CODE_ONLY" | pbcopy
 }
 
-# Better Man
-# first arg: command
-# second arg: search term
+# Be a Better Man
+# first arg: command, second arg: search term
 function man () {
 	if ! which alacritty &> /dev/null; then
 		echo "Not using Alacritty." ; return 1
@@ -18,20 +17,19 @@ function man () {
 		echo "Command '$1' not installed." ; return 1
  	fi
 
- 	CONFIG=~"/.config/alacritty/alacritty.yml"
+ 	CONFIG=~"/.config/alacritty/man-page.yml"
 
  	local isBuiltIn=false
  	[[ "$(which "$1")" =~ "built-in" ]] && isBuiltIn=true
- 	# builtIn command which *do* have a man page
- 	if [[ "$1" == "test" ]] || [[ "$1" == "kill" ]] ; then
+ 	if [[ "$1" == "test" ]] || [[ "$1" == "kill" ]] ; then # builtIn command which *do* have a man page
  		isBuiltIn=false
  	fi
 
 	# run in subshell to surpress output
  	if [[ $isBuiltIn == true ]] && [[ -z "$2" ]] ; then
- 		(alacritty --config-file="$CONFIG" --title="built-in help: $1" --command less /usr/share/zsh/*/help/$1 &)
+ 		(alacritty --config-file="$CONFIG" --title="built-in help: $1" --command less /usr/share/zsh/*/help/"$1" &)
  	elif [[ $isBuiltIn == true ]] && [[ -n "$2" ]] ; then
- 		(alacritty --config-file="$CONFIG" --title="built-in help: $1" --command less --pattern=$2 /usr/share/zsh/*/help/$1 &)
+ 		(alacritty --config-file="$CONFIG" --title="built-in help: $1" --command less --pattern="$2" /usr/share/zsh/*/help/"$1" &)
 	elif [[ $isBuiltIn == false ]] && [[ -z "$2" ]] ; then
 		(alacritty --config-file="$CONFIG" --title="man: $1" --command man "$1" &)
 	else
@@ -41,12 +39,12 @@ function man () {
 
 # colorize less https://wiki.archlinux.org/index.php/Color_output_in_console#less .
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
-export LESS_TERMCAP_md=$'\E[1;33m'     # begin blink
+export LESS_TERMCAP_md=$'\E[1;33m'     # begin blink = YELLOW
 export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-export LESS_TERMCAP_us=$'\E[1;34m'     # begin underline
+export LESS_TERMCAP_us=$'\E[1;35m'     # begin underline = BLUE
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 # Pager-specific settings
-# (less ignore-case is actually smart case)
+# (INFO: less ignore-case is actually smart case)
 export LESS='-R --ignore-case --HILITE-UNREAD --window=-3 --quit-if-one-screen --no-init --tilde'
 
