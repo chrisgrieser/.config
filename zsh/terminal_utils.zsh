@@ -11,17 +11,18 @@ function o (){
 	fi
 	# --delimiter and --nth options ensure only file name and parent folder are displayed
 	selected=$(fd --hidden --color=always | fzf \
-					-0 -1 \
+					-0 \
 					--ansi \
 					--query="$input" \
 					--expect=ctrl-b \
 					--cycle \
 					--info=inline \
 					--delimiter=/ --with-nth=-2.. --nth=-2.. \
-					--header-first --header="↵ : open/cd, ^B: buffer, ↹ : only dirs" \
+					--header-first \
+					--header="↵ : open/cd, ^B: buffer, ↹ : only dirs" \
 					--bind="tab:reload(fd --hidden --color=always --type=directory)+change-prompt(↪ )" \
-					--preview-window="border-sharp,45%" \
-					--preview "if [[ -d {} ]] ; then exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=1 {} ; fi" \
+					--preview-window="border-left" \
+					--preview 'if [[ -d {} ]] ; then echo "\\033[1;33m"{}"\\033[0m" ; echo ; exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=1 {} ; fi' \
 	         )
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
@@ -56,7 +57,7 @@ EOM
 
 	# --preview-window=0 results in a hidden preview window, with the preview
 	# command still taking effect. together, they create a "live-switch" effect
-	selected=$(ls "$alacritty_color_schemes" | cut -d. -f1 | fzf \
+	selected=$(ls "$alacritty_color_schemes"  | sort --random-sort | cut -d. -f1 | fzf \
 					-0 -1 \
 					--query="$*" \
 					--expect=ctrl-y,ctrl-e \
@@ -64,7 +65,8 @@ EOM
 					--ansi \
 					--height=10 \
 					--border=sharp \
-					--header-first --header="at start: $original ▪︎ ⌃E: edit, ⌃Y: copy, ⌃D: del" \
+					--bind='ctrl-d:reload(ls "$alacritty_color_schemes"  | sort --random-sort | cut -d. -f1)' \
+					--header-first --header="original: $original // ⌃E: edit, ⌃Y: copy, ⌃D: del, esc: keep original" \
 					--layout=reverse \
 					--info=inline \
 					--preview-window="left,16,border-right" \
@@ -82,11 +84,10 @@ EOM
 	theme_path="$alacritty_color_schemes/$selected"
 
 	if [[ "$key_pressed" == "ctrl-y" ]] ; then
-		cat "$theme_path" | pbcopy
+		echo "Yaml for '$selected' copied."
+		cat "$theme_path.yaml" | cat "$theme_path.yml" | pbcopy
 	elif [[ "$key_pressed" == "ctrl-e" ]] ; then
-		open "$theme_path"
-	elif [[ "$key_pressed" == "ctrl-d" ]] ; then
-		mv "$theme_path" ~/.Trash
+		open "$theme_path.yaml" | open "$theme_path.yml"
 	else
 		alacritty-colorscheme apply "$selected.yaml" || alacritty-colorscheme apply "$selected.yml"
 	fi
