@@ -120,7 +120,7 @@
 	"console_max_history_lines": 1000,
 
 	// Side Bar
-	"file_exclude_patterns": ["*-*-*-*-*.png", "info.plist", "*.alfredworkflow", ".DS_Store", ".editorconfig", "tsconfig.json", "versions.json", "LICENSE", "main.js", "package*.json", "Changelog.md", "esbuild.config.mjs", ".eslintignore"],
+	"file_exclude_patterns": ["*-*-*-*-*.png", "info.plist", "*.alfredworkflow", ".DS_Store", ".editorconfig", "tsconfig.json", "versions.json", "LICENSE", "main.js", "package*.json", "Changelog.md", "esbuild.config.mjs"],
 	"folder_exclude_patterns": [".git", ".Trash", "node_modules", "List Filter Images", "*.pxd"],
 	"bold_folder_labels": true,
 	"show_git_status": true,

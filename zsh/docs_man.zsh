@@ -27,13 +27,13 @@ function man () {
 
 	# run in subshell to surpress output
  	if [[ $isBuiltIn == true ]] && [[ -z "$2" ]] ; then
- 		(alacritty --option=window.decorations=full --title="built-in help: $1" --command less /usr/share/zsh/*/help/$1 &)
+ 		(alacritty --title="built-in help: $1" --command less /usr/share/zsh/*/help/$1 &)
  	elif [[ $isBuiltIn == true ]] && [[ -n "$2" ]] ; then
- 		(alacritty --option=window.decorations=full --title="built-in help: $1" --command less --pattern=$2 /usr/share/zsh/*/help/$1 &)
+ 		(alacritty --title="built-in help: $1" --command less --pattern=$2 /usr/share/zsh/*/help/$1 &)
 	elif [[ $isBuiltIn == false ]] && [[ -z "$2" ]] ; then
-		(alacritty --option=window.decorations=full --title="man: $1" --command man "$1" &)
+		(alacritty --title="man: $1" --command man "$1" &)
 	else
-		(alacritty --option=window.decorations=full --title="man: $1" --command man "$1" -P "/usr/bin/less -is --pattern=$2" &)
+		(alacritty --title="man: $1" --command man "$1" -P "/usr/bin/less -is --pattern=$2" &)
 	fi
 }
 

@@ -167,7 +167,7 @@ wf_sublime:subscribe(wf.windowFocused, function (focusedWin)
 end)
 
 -- ALACRITTY
-wf_alacritty = wf.new("alacritty"):setOverrideFilter{rejectTitles="^cheatsheet$"}
+wf_alacritty = wf.new("alacritty"):setOverrideFilter{rejectTitles={"^cheatsheet","^man: "}}
 wf_alacritty:subscribe(wf.windowCreated, function ()
 	if isAtOffice() or isProjector() then
 		moveResizeCurWin("maximized")
@@ -178,11 +178,13 @@ wf_alacritty:subscribe(wf.windowCreated, function ()
 end)
 
 wf_alacritty:subscribe(wf.windowFocused, function (focusedWindow)
-	wins = hs.window.orderedWindows() -- as opposed to :allWindows(), this *excludes* headless Twitterrific
-	for i = 2, #wins do -- starting at two to exclude alacritty itself
-		print(wins[i]:application():name())
-		wins[i]:application():hide()
-	end
+	runDelayed (0.01, function ()
+		wins = hs.window.orderedWindows() -- as opposed to :allWindows(), this *excludes* headless Twitterrific
+		for i = 1, #wins do
+			local app = wins[i]:application()
+			if not(app:name() == "alacritty") then app:hide() end
+		end
+	end)
 	if not(isPseudoMaximized(focusedWindow)) then
 		hs.application("Twitterrific"):hide()
 	end

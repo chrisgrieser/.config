@@ -1,32 +1,36 @@
 # Quick Open File/Folder
 # requires: exa, bat, zoxide, fd, fzf
 function o (){
-	local INPUT="$*"
+	local selected command
+	local input="$*"
 
-	if [[ -e "$INPUT" ]] ; then   # skip `fzf` if file is fully named
-		[[ -d "$INPUT" ]] && z "$INPUT"
-		[[ -f "$INPUT" ]] && open "$INPUT"
+	if [[ -e "$input" ]] ; then   # skip `fzf` if file is fully named
+		[[ -d "$input" ]] && z "$input"
+		[[ -f "$input" ]] && open "$input"
 		return 0
 	fi
-	local prev_clipb=$(pbpaste)
 
-	local SELECTED
-	SELECTED=$(fd --hidden | fzf \
-	           -0 -1 \
-	           --query "$INPUT" \
-	           --header-first --header="↵ : open/cd   [⇧]↹ : only dirs" \
-	           --bind="tab:reload(fd --hidden --type=directory)" \
-	           --bind="btab:reload(fd --hidden)" \
-	           --preview "if [[ -d {} ]] ; then exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=2 {} ; fi" \
-	           )
-	if [[ -z "$SELECTED" ]] && [[ "$prev_clipb" == "$(pbpaste)" ]] ; then
-		return 0 # abort if no selection
-	elif [[ -z "$SELECTED" ]] && [[ "$prev_clipb" != "$(pbpaste)" ]] ; then
-		print -z "$(pbpaste)" # write to buffer
-	elif [[ -d "$SELECTED" ]] ; then
-		z "$SELECTED"
-	elif [[ -f "$SELECTED" ]] ; then
-		open "$SELECTED"
+	selected=$(fd --hidden --color=always | cut -c1-10 -c13- | fzf \
+					-0 -1 \
+					--ansi \
+					--query "$input" \
+					--expect=ctrl-b \
+					--cycle \
+					--header-first --header="↵ : open/cd, ^B: buffer, [⇧]↹ : only dirs" \
+					--bind="tab:reload(fd --hidden --color=always --type=directory | cut -c1-10 -c13-)" \
+					--bind="btab:reload(fd --hidden --color=always | cut -c1-10 -c13-)" \
+					--preview "if [[ -d {} ]] ; then exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=1 {} ; fi" \
+	         )
+	[[ -z "$selected" ]] && return 0
+	key_pressed=$(echo "$selected" | head -n1)
+
+	fpath=$(echo "$selected" | tail -n1)
+	if [[ "$key_pressed" == "ctrl-b" ]] ; then
+		print -z "$fpath"
+	elif [[ -d "$fpath" ]] ; then
+		z "$fpath"
+	elif [[ -f "$fpath" ]] ; then
+		open "$fpath"
 	fi
 }
 

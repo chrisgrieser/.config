@@ -1,4 +1,11 @@
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+window:
+  dimensions:
+    columns: 75
+  padding:
+    x: 20
+    'y': 15
+  opacity: 0.98
 font:
   normal:
     family: Input
@@ -18,16 +25,9 @@ font:
     'y': 6
   glyph_offset:
     'y': 3
+
 mouse:
   hide_when_typing: true
-window:
-  decorations: buttonless
-  dimensions:
-    columns: 75
-  padding:
-    x: 20
-    'y': 15
-  opacity: 0.96
 live_config_reload: true
 cursor:
   style:
@@ -83,4 +83,4 @@ key_bindings:
       program: sh
       args:
         - '-c'
-        - open ~/.config/alacritty/preview-window.yml
+        - open ~/.config/alacritty/cheatsheet.yml
