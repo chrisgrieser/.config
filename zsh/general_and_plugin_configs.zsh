@@ -34,7 +34,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( "${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}" )
 
 export FZF_DEFAULT_COMMAND='fd --hidden'
-export FZF_DEFAULT_OPTS='-0 --bind="ctrl-f:jump" --pointer=⟐ --prompt="❱ " '
+export FZF_DEFAULT_OPTS='--bind="ctrl-f:jump" --pointer=⟐ --prompt="❱ " --ellipsis=… --tabstop=3'
 
 export MAGIC_ENTER_GIT_COMMAND="exagit"
 export MAGIC_ENTER_OTHER_COMMAND="exa"
