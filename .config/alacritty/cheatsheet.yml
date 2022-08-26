@@ -1,4 +1,5 @@
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+# colors defined via cht.sh color scheme
 window:
   decorations: full
   dimensions:
