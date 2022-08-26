@@ -1,29 +1,35 @@
 # shellcheck disable=SC2164
 
 # git log
-alias gl="git log --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'"
+alias gl="git log --graph --pretty=format:'%C(yellow)%h%C(red)%D%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'"
 
 # git log (interactive)
 function gli (){
-	local COMMIT
-	COMMIT=$(git log --color=always --pretty=format:'%C(yellow)%h%C(reset) %s' | \
+	local hash key_pressed selected
+
+	selected=$(git log --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' | \
 	   fzf -0 \
-		--ansi \
-		--layout=reverse \
-		--no-sort \
-		--expect=
 		--query="$1" \
+		--ansi \
+		--nth=2.. \
+		--with-nth=2.. \
+		--no-sort \
 		--no-info \
 		--header-first --header="↵ : checkout   ^H: copy [h]ash" \
+		--expect=ctrl-h \
 		--preview-window="wrap" \
-		--bind="ctrl-h:execute-silent(echo {} | cut -d' ' -f1 | pbcopy)+abort" \
-		--preview="echo {} | cut -d' ' -f1 | xargs git show --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch) %n%n%C(reset)%C(bold)%s %n%C(reset)%C(magenta)'"\
+		--preview="git show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%C(magenta)'"\
 	)
-	[[ -z "$COMMIT" ]] && return 0
-	# output hash
-	local hash
-	hash=$(echo "$COMMIT" | cut -d' ' -f1)
-	git checkout "$hash"
+	[[ -z "$selected" ]] && return 0
+	key_pressed=$(echo "$selected" | head -n1)
+
+	hash=$(echo "$selected" | cut -d' ' -f1 | tail -n1)
+	if [[ "$key_pressed" == "ctrl-h" ]] ; then
+		echo "$hash" | pbcopy
+		echo "$hash copied."
+	else
+		git checkout "$hash"
+	fi
 }
 
 # git add, commit, (pull) & push

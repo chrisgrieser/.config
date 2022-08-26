@@ -3,6 +3,7 @@ device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
 
 if [[ "$filesChanged" == 0 ]] ; then
+	git pull
 	exit 0
 elif [[ "$filesChanged" == 1 ]] ; then
 	changeType="$filesChanged file"
@@ -11,7 +12,7 @@ else
 fi
 msg="$device_name ($changeType)"
 
-git add -A && git commit -m "$msg" --author="📂<marta@file.explorer>"
+git add -A && git commit -m "$msg" --author="📂 File Explorer<marta@file.explorer>"
 git pull
 git push
 

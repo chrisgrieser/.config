@@ -94,8 +94,6 @@ window:
     x: 6
     'y': 6
   opacity: 0.9
-  title: alacritty
-  dynamic_title: true
 scrolling:
   history: 2000
   multiplier: 3

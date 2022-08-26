@@ -12,7 +12,17 @@ Icon
 *.sublime-workspace
 
 # git
-**/.git/
+**/.git
 
 # Backup folder
 Dotfolder/Backups/
+
+# useless stuff inside pseudo-apps
+*.popclipext/*
+*.app/*
+*.pxd/*
+
+# inside Alfred prefs
+Alfred.alfredpreferences/**
+!Alfred.alfredpreferences/workflows/
+*-*-*-*-*.png
