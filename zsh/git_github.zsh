@@ -11,6 +11,7 @@ function gli (){
 		--ansi \
 		--layout=reverse \
 		--no-sort \
+		--expect=
 		--query="$1" \
 		--no-info \
 		--header-first --header="↵ : checkout   ^H: copy [h]ash" \
