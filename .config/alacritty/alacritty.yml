@@ -11,7 +11,7 @@ colors:
   # Normal colors
   normal:
   # Bright colors
-    black: '0x181a26'
+    black: '0x080a16'
     red: '0xff5c57'
     green: '0x5af78e'
     yellow: '0xf3f99d'
@@ -95,7 +95,7 @@ window:
   padding:
     x: 6
     y: 6
-  opacity: 0.95 # transparency
+  opacity: .95
 scrolling:
   history: 2000
   multiplier: 3

@@ -20,7 +20,7 @@ function alacrittyFontSize (size)
 	local toSize = tostring(size)
 	hs.execute("VALUE="..toSize..[[
 		ALACRITTY_CONFIG="$HOME/.config/alacritty/alacritty.yml"
-		MAN_PAGE_CONFIG="$HOME/.config/alacritty/man_page.yml"
+		MAN_PAGE_CONFIG="$HOME/.config/alacritty/man-page.yml"
 		sed -i '' "s/size: .*/size: $VALUE/" "$ALACRITTY_CONFIG"
 		sed -i '' "s/size: .*/size: $VALUE/" "$MAN_PAGE_CONFIG"
 	]])

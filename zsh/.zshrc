@@ -12,6 +12,7 @@ CONFIG+=('vi-mode')
 CONFIG+=('docs_man')
 CONFIG+=('git_github')
 CONFIG+=('homebrew')
+CONFIG+=('alacritty_theme_utilities')
 CONFIG+=('../pandoc/pandoc')
 
 for config_file in "${CONFIG[@]}"; do
