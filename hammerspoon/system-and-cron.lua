@@ -50,6 +50,13 @@ repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
 end)
 repoSyncTimer:start()
 
+-- manual sync for Alfred: `hammerspoon://sync-repos`
+hs.urlevent.bind("sync-repos", function()
+	gitDotfileSync()
+	gitVaultSync()
+	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
+end)
+
 --------------------------------------------------------------------------------
 
 function screenSleep (eventType)
