@@ -18,9 +18,9 @@ Icon
 Dotfolder/Backups/
 
 # useless stuff inside pseudo-apps
-*.popclipext/*
-*.app/*
-*.pxd/*
+**/*.popclipext/*
+**/*.app/*
+**/*.pxd/*
 
 # inside Alfred prefs
 Alfred.alfredpreferences/**
