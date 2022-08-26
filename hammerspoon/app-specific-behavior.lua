@@ -167,7 +167,7 @@ wf_sublime:subscribe(wf.windowFocused, function (focusedWin)
 end)
 
 -- ALACRITTY
-wf_alacritty = wf.new("alacritty"):setOverrideFilter{rejectTitles={"^cheatsheet","^man: "}}
+wf_alacritty = wf.new("alacritty"):setOverrideFilter{rejectTitles={"^cheatsheet: ","^man: ", "^builtin: "}, hasTitlebar=true}
 wf_alacritty:subscribe(wf.windowCreated, function ()
 	if isAtOffice() or isProjector() then
 		moveResizeCurWin("maximized")

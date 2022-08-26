@@ -2,7 +2,7 @@
 window:
   decorations: full
   dimensions:
-    columns: 75
+    columns: 80
   padding:
     x: 20
     'y': 15
@@ -53,14 +53,14 @@ hints:
     binding:
       key: U
       mods: Command
-  - regex: "so/[qa]/\\w+" # stack overflow shortlink
-    action: Copy
+  - regex: "--\\w"  # option
+    action: Select
     mouse:
       enabled: true
       mods: None
     binding:
       key: S
-      mods: Command
+      mods: copy
   - regex: "/Users/.*/.*\\.\\w+"
     command: open
     mouse:

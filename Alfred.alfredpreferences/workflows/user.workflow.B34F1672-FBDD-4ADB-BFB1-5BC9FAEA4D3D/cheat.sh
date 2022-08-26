@@ -4,9 +4,8 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #-------------------------------------------------------------------------------
 # CONFIG
 
-PREVIEW_CONFIG=~/.config/alacritty/cheatsheet.yml
+CONFIG=~/.config/alacritty/cheatsheet.yml
 BG_COLOR=#303643
-STATUSLINE_COLOR=#8F9DB5
 STYLE=paraiso-dark # https://cheat.sh/:styles-demo
 if [[ "$(scutil --get ComputerName)" =~ "Mac mini" ]]; then
 	X=200
@@ -31,20 +30,18 @@ fi
 echo "$CHEAT_CODE_ONLY" | pbcopy
 
 CLEAN_QUERY=$(echo "$*" | tr "/" " ")
-CACHE="/tmp/$CLEAN_QUERY" # will be displayed in less prompt line at start
+CACHE="/tmp/$CLEAN_QUERY"
 echo "$CHEAT_INFO" > "$CACHE"
 
 # title needs to be set for window manager
 alacritty \
-	--config-file="$PREVIEW_CONFIG" \
-	--title="cheatsheet" \
+	--config-file="$CONFIG" \
+	--title="cheatsheet: $QUERY" \
 	--option="colors.primary.background='$BG_COLOR'" \
-	--option="colors.primary.foreground='$STATUSLINE_COLOR'" \
 	--option="window.position.x=$X" \
 	--option="window.position.y=$Y" \
 	--option="window.dimensions.lines=$LINES" \
 	--command less -R \
-		--long-prompt \
 		--window=-4 \
 		--incsearch \
 		--ignore-case \

@@ -18,6 +18,8 @@ function man () {
 		echo "Command '$1' not installed." ; return 1
  	fi
 
+ 	CONFIG=~"/.config/alacritty/alacritty.yml"
+
  	local isBuiltIn=false
  	[[ "$(which "$1")" =~ "built-in" ]] && isBuiltIn=true
  	# builtIn command which *do* have a man page
@@ -27,13 +29,13 @@ function man () {
 
 	# run in subshell to surpress output
  	if [[ $isBuiltIn == true ]] && [[ -z "$2" ]] ; then
- 		(alacritty --title="built-in help: $1" --command less /usr/share/zsh/*/help/$1 &)
+ 		(alacritty --config-file="$CONFIG" --title="built-in help: $1" --command less /usr/share/zsh/*/help/$1 &)
  	elif [[ $isBuiltIn == true ]] && [[ -n "$2" ]] ; then
- 		(alacritty --title="built-in help: $1" --command less --pattern=$2 /usr/share/zsh/*/help/$1 &)
+ 		(alacritty --config-file="$CONFIG" --title="built-in help: $1" --command less --pattern=$2 /usr/share/zsh/*/help/$1 &)
 	elif [[ $isBuiltIn == false ]] && [[ -z "$2" ]] ; then
-		(alacritty --title="man: $1" --command man "$1" &)
+		(alacritty --config-file="$CONFIG" --title="man: $1" --command man "$1" &)
 	else
-		(alacritty --title="man: $1" --command man "$1" -P "/usr/bin/less -is --pattern=$2" &)
+		(alacritty --config-file="$CONFIG" --title="man: $1" --command man "$1" -P "/usr/bin/less -is --pattern=$2" &)
 	fi
 }
 
