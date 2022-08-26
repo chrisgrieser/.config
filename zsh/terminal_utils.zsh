@@ -16,9 +16,11 @@ function o (){
 					--query="$input" \
 					--expect=ctrl-b \
 					--cycle \
+					--info=inline \
 					--delimiter=/ --with-nth=-2.. --nth=-2.. \
 					--header-first --header="↵ : open/cd, ^B: buffer, ↹ : only dirs" \
 					--bind="tab:reload(fd --hidden --color=always --type=directory)+change-prompt(↪ )" \
+					--preview-window="border-sharp,45%" \
 					--preview "if [[ -d {} ]] ; then exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=1 {} ; fi" \
 	         )
 	[[ -z "$selected" ]] && return 0
