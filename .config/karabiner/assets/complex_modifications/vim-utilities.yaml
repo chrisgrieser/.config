@@ -181,6 +181,9 @@ rules:
             mandatory:
               - option
         conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: false
           - type: input_source_if
             input_sources:
               - language: ^de$

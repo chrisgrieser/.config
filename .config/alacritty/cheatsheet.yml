@@ -1,4 +1,5 @@
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+
 # colors defined via cht.sh color scheme
 window:
   dimensions:
@@ -9,6 +10,7 @@ window:
     'y': 15
   opacity: 0.99
   decorations: buttonless
+
 font:
   normal:
     family: Input

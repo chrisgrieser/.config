@@ -190,7 +190,10 @@ wf_alacritty:subscribe(wf.windowFocused, function (focusedWindow)
 	end
 end)
 
+-- ALACRITTY Man / cheat sheet leaader hotkey
+hs.urlevent.bind("focus-help", function()
 
+end)
 
 --------------------------------------------------------------------------------
 
@@ -365,24 +368,20 @@ youtubeWatcher = aw.new(youtubeSpotify)
 youtubeWatcher:start()
 
 --------------------------------------------------------------------------------
-
 -- SCRIPT EDITOR
-function scriptEditorLaunch (appName, eventType)
-	if not(appName == "Script Editor" and eventType == aw.launched) then return end
-
-	runDelayed (0.2, function ()
-		if not(hs.window.focusedWindow():title() == "Open") then return end
+wf_script_editor = wf.new("Script Editor")
+wf_script_editor:subscribe(wf.windowCreated, function (newWindow)
+	if newWindow:title() == "Open" then
 		keystroke({"cmd"}, "n")
 		runDelayed (0.2, function ()
-		keystroke({"cmd"}, "v")
-		moveResizeCurWin("centered")
+			keystroke({"cmd"}, "v")
+			moveResizeCurWin("centered")
 		end)
-		runDelayed (0.4, function () keystroke({"cmd"}, "k") end)
-	end)
-
-end
-scriptEditorWatcher = aw.new(scriptEditorLaunch)
-scriptEditorWatcher:start()
+		runDelayed (0.4, function ()
+			keystroke({"cmd"}, "k")
+		end)
+	end
+end)
 
 --------------------------------------------------------------------------------
 

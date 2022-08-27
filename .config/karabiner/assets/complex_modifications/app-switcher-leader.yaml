@@ -578,7 +578,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
-      # [4] (mnenic: $ sign)
+      # [4] (mnenic: $ sign) MoneyMoney
       - type: basic
         from:
           key_code: "4"
@@ -588,6 +588,25 @@ rules:
             value: true
         to:
           - shell_command: open -a 'MoneyMoney'
+          - set_variable:
+              name: LEADER_ACTIVE
+              value: false
+          - set_notification_message:
+              id: leader-notice
+              text: ""
+      # [?] (w/o shift, German keyboard) man page or cheatsheet
+      - type: basic
+        from:
+          key_code: hyphen
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: true
+          - type: input_source_if
+            input_sources:
+              - language: ^de$
+        to:
+          - shell_command: open 'hammerspoon://focus-help'
           - set_variable:
               name: LEADER_ACTIVE
               value: false
