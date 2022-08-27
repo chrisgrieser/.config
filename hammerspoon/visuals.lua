@@ -67,8 +67,6 @@ function menubarLine ()
 		menubarOverlay = nil
 	end
 
-	if isProjector() then return end
-
 	local bgColor
 	local menuBarColor
 	local max = hs.screen.mainScreen():frame()
@@ -83,7 +81,7 @@ function menubarLine ()
 	corner1 = hs.drawing.rectangle({x=max.w-8, y=23, w=8, h=11})
 	corner2 = hs.drawing.rectangle({x=0, y=23, w=8, h=11})
 	thinLine = hs.drawing.rectangle({x=0, y=24, w=max.w, h=1}) -- wallpaper shining through
-	menubarOverlay = hs.drawing.rectangle({x=45, y=0, w=max.w/2, h=24}) --x=45 = show apple symbol
+	menubarOverlay = hs.drawing.rectangle({x=0, y=0, w=max.w/2, h=24})
 
 	corner1:setFillColor(bgColor)
 	corner1:sendToBack()
@@ -107,7 +105,7 @@ function menubarLine ()
 	menubarOverlay:setStrokeColor(menuBarColor)
 	menubarOverlay:show()
 
-	if isAtOffice() then return end
+	if isAtOffice() or isProjector() then return end
 
 	-- pseudoMaxPoints
 	asdf1 = hs.drawing.rectangle({x=pseudoMaximized.w*max.w-8, y=24, w=18, h=3})
