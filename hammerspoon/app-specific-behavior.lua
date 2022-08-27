@@ -1,5 +1,3 @@
--- https://www.hammerspoon.org/go/#winfilters
--- https://github.com/dmgerman/hs_select_window.spoon/blob/main/init.lua
 require("utils")
 require("window-management")
 require("system-and-cron")
@@ -39,7 +37,7 @@ anyAppActivationWatcher:start()
 -- BRAVE BROWSER
 -- split when second window is opened
 -- change sizing back, when back to one window
-wf_browser = wf.new("Brave Browser"):setOverrideFilter{rejectTitles={" %(Private%)$","^Picture in Picture$"}, allowRoles='AXStandardWindow', hasTitlebar=true}
+wf_browser = wf.new("Brave Browser"):setOverrideFilter{rejectTitles={" %(Private%)$","^Picture in Picture$", "^Task Manager$"}, allowRoles='AXStandardWindow', hasTitlebar=true}
 wf_browser:subscribe(wf.windowCreated, function ()
 	if #wf_browser:getWindows() == 1 then
 		if isAtOffice() or isProjector() then
