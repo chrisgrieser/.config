@@ -19,37 +19,12 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
-              - ^com\.vivaldi\.Vivaldi$
               - ^org\.chromium\.Chromium$
-              - ^com\.google\.Chrome$
               - ^com\.brave\.Browser$
               - ^com\.apple\.Safari$
         parameters:
           basic.to_if_held_down_threshold_milliseconds: 300
-      - type: basic
-        from:
-          pointing_button: button2
-        to_if_held_down:
-          - pointing_button: button2
-        to:
-          # workaround necessary, cause opening links in background in *to* Chromium is buggy
-          - pointing_button: button3
-          - key_code: vk_none
-            hold_down_milliseconds: 200
-          - key_code: h
-            modifiers:
-              - command
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              # .+ so that the browser isn't matched, but PWAs are
-              - ^com\.vivaldi\.Vivaldi.+$
-              - ^org\.chromium\.Chromium.+$
-              - ^com\.google\.Chrome.+$
-              - ^com\.brave\.Browser.+$
-        parameters:
-          basic.to_if_held_down_threshold_milliseconds: 300
-      # R-Click opens link in background, ⌘+L-Click in foreground
+      # Drafts: R-Click opens link in background, ⌘+L-Click in foreground
       - type: basic
         from:
           pointing_button: button2
