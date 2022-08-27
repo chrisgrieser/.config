@@ -57,8 +57,22 @@ EOM
 }
 
 function opacity {
-	ALACRITTY_CONFIG="$HOME/.config/alacritty/alacritty.yml"
-	current=$(grep --max-count=1 "opacity" "$ALACRITTY_CONFIG" | cut -d: -f2)
+	local current
+	local alacritty_config="$HOME/.config/alacritty/alacritty.yml"
+	current=$(grep --max-count=1 "opacity" "$alacritty_config" | cut -d: -f2)
+	local values=$(for i in $(seq 50 100); do echo $i | bc ; done)
+
+
+	selected=$(echo "$values" | fzf \
+					--query="$*" \
+					--cycle \
+					--height=10 \
+					--border=sharp \
+					--layout=reverse \
+					--info=hidden \
+					--preview-window="0" \
+					--preview="sed -i '' 's/opacity: .*/opacity: {}/' '$alacritty_config'" \
+	         )
 
 	if [[ "$1" == "--add" ]] || [[ "$1" == "+" ]] ; then
 		direction="+"
