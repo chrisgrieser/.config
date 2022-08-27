@@ -1,5 +1,6 @@
 require("utils")
 require("window-management")
+require("dark-mode")
 --------------------------------------------------------------------------------
 
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
@@ -7,6 +8,10 @@ require("window-management")
 roundedCorners = hs.loadSpoon("RoundedCorners")
 roundedCorners.radius = 8
 roundedCorners:start()
+
+
+hs.window.highlight.start({} ,wf.new(true))
+hs.window.highlight.ui.flashDuration = 0.6
 
 -- visual fix of the wallpaper line shining through
 function menubarLine (arg)
