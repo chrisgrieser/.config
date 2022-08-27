@@ -1,7 +1,8 @@
 [
   {
     "name": "App Switcher Layout",
-    "author": "pseudometa"
+    "author": "pseudometa",
+    "notes": "* implemented partially via Hammerspoon, since alacritty creates multiple instances, i.e. multiple applications all with the name \"alacritty\", preventing conventional methods for focussing a window via AppleScript"
   },
   [
     {
@@ -66,7 +67,13 @@
     "8",
     "9",
     "0",
-    "ß",
+    {
+      "c": "#FFF9A7"
+    },
+    "ß/?\nman / cheat*",
+    {
+      "c": "#CCCCCC"
+    },
     "`",
     {
       "c": "#999999",

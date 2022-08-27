@@ -2,9 +2,8 @@ require("utils")
 require("window-management")
 --------------------------------------------------------------------------------
 
-hs.window.animationDuration = 0
-
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
+-- this mostly round the corners in the bottom
 roundedCorners = hs.loadSpoon("RoundedCorners")
 roundedCorners.radius = 8
 roundedCorners:start()
