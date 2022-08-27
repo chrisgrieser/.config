@@ -57,32 +57,29 @@ EOM
 }
 
 function opacity {
-	local current
-	local alacritty_config="$HOME/.config/alacritty/alacritty.yml"
-	current=$(grep --max-count=1 "opacity" "$alacritty_config" | cut -d: -f2)
-	local values=$(for i in $(seq 50 100); do echo $i | bc ; done)
+	local original values alacritty_config
+	alacritty_config="$HOME/.config/alacritty/alacritty.yml"
+	original=$(grep --max-count=1 "opacity" "$alacritty_config" | cut -d: -f2 | xargs)
+	values=$(for i in $(seq 99 70); do echo "scale=2 ; $i / 100" | bc ; done)
+	values="1.0\n$values"
 
-
+	# --preview-window=0 → don't show a preview window, bur run `--preview`
+	# --disabled and --bind → don't search, but use vim bindings instead
 	selected=$(echo "$values" | fzf \
-					--query="$*" \
-					--cycle \
+					--disabled --bind="k:up,j:down,g:first,G:last" \
 					--height=10 \
-					--border=sharp \
+					--header-first --header="at start: $original" \
 					--layout=reverse \
 					--info=hidden \
-					--preview-window="0" \
+					--preview-window=0 \
 					--preview="sed -i '' 's/opacity: .*/opacity: {}/' '$alacritty_config'" \
 	         )
 
-	if [[ "$1" == "--add" ]] || [[ "$1" == "+" ]] ; then
-		direction="+"
-	elif [[ "$1" == "--sub" ]] || [[ "$1" == "-" ]] ; then
-		direction="-"
-	else
-		echo "currently:$current"
+	if [[ -z "$selected" ]]; then
+		sed -i '' "s/opacity: .*/opacity: $original/" "$alacritty_config"
 		return 0
 	fi
-	new=$(echo "$current $direction 0.01" | bc)
-	sed -i '' "s/opacity: .*/opacity: $new/" "$ALACRITTY_CONFIG"
-	echo "$new"
+
+	sed -i '' "s/opacity: .*/opacity: $selected/" "$alacritty_config"
+	echo "now: $selected"
 }

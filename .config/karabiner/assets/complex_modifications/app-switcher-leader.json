@@ -1124,6 +1124,44 @@
         {
           "type": "basic",
           "from": {
+            "key_code": "hyphen"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            },
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "language": "^de$"
+                }
+              ]
+            }
+          ],
+          "to": [
+            {
+              "shell_command": "open 'hammerspoon://focus-help'"
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
             "key_code": "f18"
           },
           "conditions": [
