@@ -191,8 +191,19 @@ wf_alacritty:subscribe(wf.windowFocused, function (focusedWindow)
 end)
 
 -- ALACRITTY Man / cheat sheet leaader hotkey
+-- work around necessary, cause alacritty creates multiple instances, i.e.
+-- multiple applications all with the name "alacritty", preventing conventional
+-- methods for focussing a window via AppleScript
 hs.urlevent.bind("focus-help", function()
+	local win = hs.window.find("man:")
+	if not(win) then win = hs.window.find("builtin:") end
+	if not(win) then win = hs.window.find("cheatsheet:") end
 
+	if win then
+		win:focus()
+	else
+		notify ("none open.")
+	end
 end)
 
 --------------------------------------------------------------------------------

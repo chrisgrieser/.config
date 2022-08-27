@@ -1,13 +1,20 @@
 require("utils")
+--------------------------------------------------------------------------------
+-- settings
+hs.allowAppleScript(false)
+hs.consoleOnTop(true)
+hs.autoLaunch(true)
+hs.automaticallyCheckForUpdates(true)
+hs.window.animationDuration = 0
+
+--------------------------------------------------------------------------------
 
 -- `hammerspoon://hs-reload` for reloading via Sublime Build System
 hs.urlevent.bind("hs-reload", function()
 	if SPLIT_RIGHT then vsplit("unsplit") end ---@diagnostic disable-line: undefined-global
 	if hs.console.hswindow() then hs.console.hswindow():close() end -- close console
 	hs.execute("touch ./is-reloading")
-
 	hs.reload()
-
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
