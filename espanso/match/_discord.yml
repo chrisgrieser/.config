@@ -1,7 +1,9 @@
 matches:
   - trigger: "roadmap"
     replace: "ro*dmap [auto-censored]"
-  - $trigger: "!update"
+  - trigger: "eee"
+    replace: "s/$|$/"
+  - trigger: "!update"
     replace: |
       **Shimmering Focus Update ⟡**
 
