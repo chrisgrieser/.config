@@ -202,7 +202,7 @@ hs.urlevent.bind("focus-help", function()
 	if win then
 		win:focus()
 	else
-		notify ("none open.")
+		notify ("none open")
 	end
 end)
 
