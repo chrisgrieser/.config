@@ -12,6 +12,17 @@ function reloadAllMenubarItems ()
 	updateVaultSyncStatusMenuBar()
 end
 
+-- ununsed, but these two can be used to style the emojis in the menubar
+function notoEmoji(emojiStr)
+	return hs.styledtext.new(emojiStr, {font="Noto Emoji"})
+end
+
+function helvetica(str)
+	return hs.styledtext.new(str, {font="Helvetica"})
+end
+
+--------------------------------------------------------------------------------
+
 weatherUpdateMin = 15
 weatherLocation = "Berlin"
 covidUpdateHours = 12
@@ -27,7 +38,7 @@ fileHubIcon ="📂"
 
 weatherStatusBar = hs.menubar.new()
 function setWeather()
-	local _, weather = hs.http.get("https://wttr.in/" .. weatherLocation .. "?format=1", nil)
+	local _, weather = hs.http.get("https://wttr.in/"..weatherLocation.."?format=1", nil)
 	if not(weather) or weather:find("Unknown") then
 		weatherStatusBar:setTitle("🌦 –")
 		weatherStatusBar:setClickCallback(setWeather) -- i.e. self-update
@@ -59,7 +70,8 @@ function setCovidBar()
 	end
 	local national_7D_incidence = math.floor(nationalNumbers.weekIncidence)
 	local nationalR = nationalNumbers.r.rValue7Days.value
-	covidBar:setTitle(covidIcon.." "..national_7D_incidence.." ("..nationalR..")")
+	local displayText = " "..national_7D_incidence.." ("..nationalR..")"
+	covidBar:setTitle(covidIcon..displayText)
 	covidBar:setClickCallback(function ()hs.urlevent.openURL("https://data.lageso.de/lageso/corona/corona.html#start") end)
 end
 covidTimer = hs.timer.doEvery(covidUpdateHours * 60 * 60, setCovidBar)
