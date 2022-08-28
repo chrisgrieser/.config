@@ -8,6 +8,19 @@
 	<string>Development</string>
 	<key>connections</key>
 	<dict>
+		<key>02F28B03-22B6-4EEA-BB3C-3C0702AC2A08</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>18EB4593-F6DE-48D6-B571-67058B35EC18</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0D13B12B-0868-4F46-BFB7-52A432ED5AF1</key>
 		<array>
 			<dict>
@@ -25,6 +38,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>B3464F95-B489-4113-82A7-9CCB3300B0E1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>18EB4593-F6DE-48D6-B571-67058B35EC18</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>681793A7-1E5D-456D-8593-88828D1E5C40</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -566,6 +592,21 @@ zsh build.sh "$*"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>soundname</key>
+				<string>Blow</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>440612A1-D74A-4799-A0D6-F88760AF14CF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -581,21 +622,6 @@ zsh build.sh "$*"</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>532ED943-AA0D-43A0-BBCF-3EBEA97FFD31</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Blow</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>440612A1-D74A-4799-A0D6-F88760AF14CF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -651,6 +677,41 @@ zsh build.sh "$*"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>12</integer>
+				<key>hotmod</key>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>Q</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.sublimetext.4</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>02F28B03-22B6-4EEA-BB3C-3C0702AC2A08</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -678,21 +739,17 @@ lineNo="$*"
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>svg</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string></string>
-				<key>withspace</key>
-				<true/>
+				<key>argument</key>
+				<string> </string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>D96BC2AD-EC81-4B13-B499-1B0FFC9EB952</string>
+			<string>18EB4593-F6DE-48D6-B571-67058B35EC18</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -740,11 +797,41 @@ lineNo="$*"
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>svg</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string></string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D96BC2AD-EC81-4B13-B499-1B0FFC9EB952</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>02F28B03-22B6-4EEA-BB3C-3C0702AC2A08</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>415</real>
+		</dict>
 		<key>0D13B12B-0868-4F46-BFB7-52A432ED5AF1</key>
 		<dict>
 			<key>colorindex</key>
@@ -753,6 +840,15 @@ lineNo="$*"
 			<real>225</real>
 			<key>ypos</key>
 			<real>60</real>
+		</dict>
+		<key>18EB4593-F6DE-48D6-B571-67058B35EC18</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>170</real>
+			<key>ypos</key>
+			<real>445</real>
 		</dict>
 		<key>26D32329-094D-4EE5-98BE-7D4B1C5BFA95</key>
 		<dict>
@@ -806,9 +902,9 @@ lineNo="$*"
 			<key>note</key>
 			<string>Open Shimmering Focus at line</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>230</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>415</real>
 		</dict>
 		<key>6C82BEC8-E24E-4C35-9066-32FE30D50429</key>
 		<dict>
@@ -835,9 +931,9 @@ lineNo="$*"
 			<key>note</key>
 			<string>open at line</string>
 			<key>xpos</key>
-			<real>245</real>
+			<real>445</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>415</real>
 		</dict>
 		<key>8627A802-741F-4477-A445-AA3EA82ED4C8</key>
 		<dict>
@@ -873,9 +969,9 @@ lineNo="$*"
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>385</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>560</real>
 		</dict>
 		<key>B3464F95-B489-4113-82A7-9CCB3300B0E1</key>
 		<dict>
@@ -902,7 +998,7 @@ lineNo="$*"
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>560</real>
 		</dict>
 		<key>DDC3D252-6578-4A57-A511-7C45C64C2CA1</key>
 		<dict>
@@ -929,9 +1025,9 @@ lineNo="$*"
 			<key>note</key>
 			<string>svg converting</string>
 			<key>xpos</key>
-			<real>245</real>
+			<real>230</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>560</real>
 		</dict>
 		<key>F50EE2DE-822A-4F52-915D-9312B6BD4582</key>
 		<dict>
