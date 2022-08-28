@@ -3,7 +3,7 @@
 # switch alacritty color scheme. requires `fzf` and `alacritty-colorscheme`
 # (pip package). save alacritty themes in ~/.config/alacritty/colors, download
 # from https://github.com/eendroroy/alacritty-theme
-function theme(){
+function t(){
 	local selected colordemo original
 	local alacritty_color_schemes=~/.config/alacritty/colors
 	original=$(alacritty-colorscheme status | cut -d. -f1)
@@ -29,7 +29,7 @@ EOM
 					--height=10 \
 					--border=sharp \
 					--bind='ctrl-d:reload(ls "$alacritty_color_schemes"  | sort --random-sort | cut -d. -f1)' \
-					--header-first --header="original: $original // ⌃E: edit, ⌃Y: copy, ⌃D: del, esc: keep original" \
+					--header-first --header="[$original]  ⌃E: edit, ⌃Y: copy, ⌃D: del, esc: keep original" \
 					--layout=reverse \
 					--info=inline \
 					--preview-window="left,16,border-right" \
@@ -56,7 +56,7 @@ EOM
 	fi
 }
 
-function opacity {
+function opa {
 	local original values alacritty_config
 	alacritty_config="$HOME/.config/alacritty/alacritty.yml"
 	original=$(grep --max-count=1 "opacity" "$alacritty_config" | cut -d: -f2 | xargs)

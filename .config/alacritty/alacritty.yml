@@ -31,10 +31,8 @@ colors:
     cyan: '0x9aedfe'
     white: '0xf1f1f0'
   cursor:
-    text: '0x122637'
-    cursor: '0xf0cb09'
-
-  # Normal colors
+    text: '0x000000'
+    cursor: '0xfefffe'
   dim:
     black: '0x000000'
     red: '0xa90000'
@@ -59,8 +57,8 @@ colors:
     text: '#2e3440'
     cursor: '#d8dee9'
   selection:
-    background: '#f2f2f2'
-    text: '#403f53'
+    text: '0x000000'
+    background: '0xb3d7ff'
 font:
   size: 26
 
