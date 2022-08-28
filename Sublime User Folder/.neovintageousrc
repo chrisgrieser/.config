@@ -84,9 +84,6 @@ nnoremap <leader>h :LspHover<CR>
 " [g]oto [s]ymbol
 noremap gs :ShowOverlay overlay=goto text=@<CR>
 
-" [g]oto [r]egion (via comment marks plugin)
-noremap gr :GotoComment<CR>
-
 " [g]oto [o]pen file (= Quick Switcher)
 noremap go :OpenBrowse<CR>
 
