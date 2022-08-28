@@ -17,6 +17,7 @@ require("app-specific-behavior")
 require("twitterrific-controls")
 if isAtMother() then require("hot-corner-action") end
 
+menubarLine() ---@diagnostic disable-line: undefined-global
 reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
 systemStart() ---@diagnostic disable-line: undefined-global
 notify("Config reloaded")
