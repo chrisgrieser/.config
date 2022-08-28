@@ -162,4 +162,3 @@ function menubarLine ()
 	bsdf3:show()
 end
 
-menubarLine()
