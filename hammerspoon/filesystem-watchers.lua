@@ -1,6 +1,5 @@
 require("utils")
 
-home = os.getenv("HOME")
 fileHub = home.."/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 
 --------------------------------------------------------------------------------

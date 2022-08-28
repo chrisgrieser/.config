@@ -5,8 +5,8 @@ require("layouts")
 
 --------------------------------------------------------------------------------
 -- CONFIG
-dotfileLocation = os.getenv("HOME").."/dotfiles"
-vaultLocation = os.getenv("HOME").."/Main Vault"
+dotfileLocation = home.."/dotfiles"
+vaultLocation = home.."/Main Vault"
 dotfileIcon ="⏺"
 vaultIcon = "🟪"
 repoSyncFrequencyMin = 30

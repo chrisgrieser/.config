@@ -17,6 +17,7 @@
 			"spoon",
 			// Hammerspoon utils.lua
 			"notify",
+			"home",
 			"alert",
 			"SPLIT_RIGHT",
 			"SPLIT_LEFT",

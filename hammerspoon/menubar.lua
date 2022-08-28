@@ -16,7 +16,7 @@ weatherUpdateMin = 15
 weatherLocation = "Berlin"
 covidUpdateHours = 12
 covidLocationCode = "BE"
-fileHubLocation = os.getenv("HOME").."/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+fileHubLocation = home.."/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 
 covidIcon ="🦠"
 draftsIcon ="☑️"
@@ -39,6 +39,7 @@ function setWeather()
 end
 weatherTimer = hs.timer.doEvery(weatherUpdateMin * 60, setWeather)
 weatherTimer:start()
+
 --------------------------------------------------------------------------------
 
 -- German Covid-Numbers by the RKI → https://api.corona-zahlen.org/docs/
