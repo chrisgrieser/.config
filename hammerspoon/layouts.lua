@@ -237,29 +237,15 @@ hotkey(hyper, "f5", setLayout) -- for Apple Keyboard
 
 --------------------------------------------------------------------------------
 
--- OPEN WINDOWS ALWAYS ON THE SCREEN WHERE THE MOUSE IS
-function alwaysOpenOnMouseDisplay(appName, eventType, appObject)
-	if not (isProjector()) then return end
-
-	local function moveWindowToMouseScreen(win)
-		local mouseScreen = hs.mouse.getCurrentScreen()
-		local screenOfWindow = win:screen()
-		if (mouseScreen:name() == screenOfWindow:name()) then return end
-		win:moveToScreen(mouseScreen)
+-- Open at Mouse Screen
+wf_appsOnMouseScreen = wf.new(true) -- affect all windows
+wf_appsOnMouseScreen:subscribe(wf.windowCreated, function (newWindow)
+	local mouseScreen = hs.mouse.getCurrentScreen()
+	local screenOfWindow = newWindow:screen()
+	if isProjector() and not(mouseScreen:name() == screenOfWindow:name()) then
+		newWindow:moveToScreen(mouseScreen)
+		runDelayed (0.2, function () newWindow:moveToScreen(mouseScreen) end)
 	end
+end)
 
-	if (eventType == aw.launched) then
-		-- delayed, to ensure window has launched properly
-		runDelayed(0.5, function ()
-			local appWindow = appObject:focusedWindow()
-			moveWindowToMouseScreen(appWindow)
-		end)
-	elseif (appName == "Brave Browser" or appName == "Finder") and aw.activated and isProjector() then
-		runDelayed(0.5, function ()
-			local appWindow = appObject:focusedWindow()
-			moveWindowToMouseScreen(appWindow)
-		end)
-	end
-end
-launchWhileMultiScreenWatcher = aw.new(alwaysOpenOnMouseDisplay)
-if isIMacAtHome() then launchWhileMultiScreenWatcher:start() end
+
