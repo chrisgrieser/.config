@@ -2,5 +2,6 @@
     "scope": "source.js.jxa",
     "completions": [
         "app.doShellScript(\"\");",
+        "app.openLocation(\"\");",
     ]
 }
