@@ -1,7 +1,7 @@
 # shellcheck disable=SC2164
 
 # git log
-alias gl="git log --graph --pretty=format:'%C(yellow)%h%C(red)%D%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'"
+alias gl="git log --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'"
 
 # git log (interactive)
 function gli (){

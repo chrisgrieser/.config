@@ -16,10 +16,10 @@
 			delay 0.05
 		end repeat
 		delay 0.05
-		keystroke "v" using {command down} # paste query
+		keystroke "v" using {command down}
 		delay 0.05
-		key code 36 # return
-		if q starts with "cd " then keystroke "l" using {control down} # clear screen in zsh
+		key code 36 -- return
+		if q starts with "cd " then keystroke "l" using {control down} -- clear screen
 	end tell
 
 	delay 0.05
