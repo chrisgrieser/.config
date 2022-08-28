@@ -1,5 +1,7 @@
 # shellcheck disable=SC2164,SC1009,SC1073,SC1056
 
+clear # for Alfred
+
 # requirements:
 # - cowsay
 # - fortune
