@@ -397,7 +397,8 @@ end)
 -- DISCORD
 function discordWatcher(appName, eventType)
 	if appName ~= "Discord" then return end
-
+	obsiPlugins = hs.json.read(home.."/Main Vault/.obsidian/community-plugins.json")
+	discordrpcInstalled = obsiPlugins.find("obsidian-discordrpc")
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	-- and reconnect Obsidian's Discord Rich Presence (Obsidian launch already covered by RP Plugin)
 	if eventType == hs.application.watcher.launched then

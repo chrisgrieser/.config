@@ -1,5 +1,6 @@
 hyper = {"cmd", "alt", "ctrl", "shift"}
 hotkey = hs.hotkey.bind
+home = os.getenv("HOME")
 alert = hs.alert.show
 keystroke = hs.eventtap.keyStroke
 aw = hs.application.watcher
