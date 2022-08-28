@@ -1,0 +1,27 @@
+{
+  "name" : "Run JavaScript",
+  "data" : {
+    "items" : [
+      {
+        "workflowobjecttype" : "alfred.workflow.action.script",
+        "uid" : "11CD2255-4E07-4648-8E5C-A59346A63EC0",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "script" : "",
+          "scriptfile" : ".js",
+          "escaping" : 0,
+          "scriptargtype" : 1,
+          "type" : 8,
+          "concurrently" : false
+        },
+        "colorindex" : 0,
+        "ypos" : 5,
+        "xpos" : 20
+      }
+    ],
+    "connections" : [
+
+    ]
+  },
+  "description" : "external"
+}

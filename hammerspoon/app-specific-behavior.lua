@@ -19,6 +19,7 @@ function allWindowsActivation(appName, eventType, appObject)
 end
 appWatcher = aw.new(allWindowsActivation)
 appWatcher:start()
+
 --------------------------------------------------------------------------------
 
 -- OBSIDIAN
@@ -164,6 +165,8 @@ wf_sublime:subscribe(wf.windowFocused, function (focusedWin)
 	end
 end)
 
+--------------------------------------------------------------------------------
+
 -- ALACRITTY
 wf_alacritty = wf.new("alacritty"):setOverrideFilter{rejectTitles={"^cheatsheet: "}}
 wf_alacritty:subscribe(wf.windowCreated, function ()
@@ -175,6 +178,7 @@ wf_alacritty:subscribe(wf.windowCreated, function ()
 	end
 end)
 
+-- for nicer background pictures together with gransparency
 wf_alacritty:subscribe(wf.windowFocused, function (focusedWindow)
 	runDelayed (0.01, function ()
 		wins = hs.window.orderedWindows() -- as opposed to :allWindows(), this *excludes* headless Twitterrific
@@ -186,6 +190,9 @@ wf_alacritty:subscribe(wf.windowFocused, function (focusedWindow)
 	if not(isPseudoMaximized(focusedWindow)) then
 		hs.application("Twitterrific"):hide()
 	end
+end)
+wf_alacritty:subscribe(wf.windowDestroyed, function ()
+	keystroke({"cmd"}, "tab") -- to prevent empty window left behind
 end)
 
 -- ALACRITTY Man / cheat sheet leaader hotkey
@@ -397,11 +404,11 @@ end)
 -- DISCORD
 function discordWatcher(appName, eventType)
 	if appName ~= "Discord" then return end
-	obsiPlugins = hs.json.read(home.."/Main Vault/.obsidian/community-plugins.json")
-	discordrpcInstalled = obsiPlugins.find("obsidian-discordrpc")
+	_, discordrpcInstalled = hs.execute('grep "obsidian-discordrpc" "$HOME/Main Vault/.obsidian/community-plugins.json"')
+
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	-- and reconnect Obsidian's Discord Rich Presence (Obsidian launch already covered by RP Plugin)
-	if eventType == hs.application.watcher.launched then
+	if eventType == hs.application.watcher.launched and discordrpcInstalled then
 		hs.urlevent.openURL("discord://discord.com/channels/686053708261228577/700466324840775831")
 		if appIsRunning("Obsidian") then
 			runDelayed(3, function()
