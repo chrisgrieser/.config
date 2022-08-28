@@ -432,11 +432,11 @@
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>0</integer>
+				<integer>43</integer>
 				<key>hotmod</key>
-				<integer>0</integer>
+				<integer>262144</integer>
 				<key>hotstring</key>
-				<string></string>
+				<string>,</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -644,7 +644,7 @@
 			<key>xpos</key>
 			<real>40</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>605</real>
 		</dict>
 		<key>2C3AD0F5-2D56-474A-B922-8340DD8E20DF</key>
 		<dict>
@@ -758,7 +758,7 @@
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>690</real>
+			<real>655</real>
 		</dict>
 		<key>969689CD-BF5D-466B-AA0C-5FC5F536B880</key>
 		<dict>
@@ -783,7 +783,7 @@
 			<key>xpos</key>
 			<real>40</real>
 			<key>ypos</key>
-			<real>780</real>
+			<real>740</real>
 		</dict>
 		<key>E56FB083-4DE7-4650-A497-30E811525588</key>
 		<dict>
