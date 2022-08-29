@@ -73,8 +73,8 @@ shutDownWatcher:start()
 -- SYSTEM WAKE/START
 function officeWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.screensDidWake) then return end
-	officeModeLayout()
-	reloadAllMenubarItems()
+	officeModeLayout() ---@diagnostic disable-line: undefined-global
+	reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
 	gitDotfileSync("--submodules")
 	gitVaultSync()
 end
@@ -83,8 +83,8 @@ function homeWake (eventType)
 	if not(eventType == hs.caffeinate.watcher.systemDidWake) then return end
 	local currentTimeHours = hs.timer.localTime() / 60 / 60
 
-	if isProjector() then movieModeLayout()
-	else homeModeLayout() end
+	if isProjector() then movieModeLayout() ---@diagnostic disable-line: undefined-global
+	else homeModeLayout() end ---@diagnostic disable-line: undefined-global
 
 	if currentTimeHours < 20 and currentTimeHours > 6 then
 		hs.shortcuts.run("Send Reminders due today to Drafts")
@@ -93,11 +93,11 @@ function homeWake (eventType)
 		setDarkmode(true)
 	end
 
-	reloadAllMenubarItems()
+	reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
 	gitDotfileSync("--submodules")
 	gitVaultSync()
 
-	runDelayed(1, function() twitterrificAction("scrollup") end)
+	runDelayed(1, function() twitterrificAction("scrollup") end) ---@diagnostic disable-line: undefined-global
 end
 if isIMacAtHome() or isAtMother() then
 	wakeWatcher = hs.caffeinate.watcher.new(homeWake)
@@ -151,6 +151,10 @@ dailyEveningTimer = hs.timer.doAt("21:00", "01d", function ()
 	setDarkmode(true)
 end)
 
+dailyMorningTimer = hs.timer.doAt("08:00", "01d", function ()
+	setDarkmode(false)
+end)
+
 function projectorScreensaverStop (eventType)
 	if isProjector() and (eventType == hs.caffeinate.watcher.screensaverDidStop or eventType == hs.caffeinate.watcher.screensaverDidStart) then
 		iMacDisplay:setBrightness(0)
@@ -159,6 +163,7 @@ end
 projectorScreensaverWatcher = hs.caffeinate.watcher.new(projectorScreensaverStop)
 
 if isIMacAtHome() then
+	dailyMorningTimer:start()
 	dailyEveningTimer:start()
 	sleepTimer:start()
 	sleepTimer2:start()
@@ -167,6 +172,7 @@ if isIMacAtHome() then
 end
 
 if isAtMother() then
+	dailyMorningTimer:start()
 	dailyEveningTimer:start()
 	sleepTimer:start()
 	sleepTimer2:start()
