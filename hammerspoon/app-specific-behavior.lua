@@ -191,7 +191,7 @@ wf_alacritty:subscribe(wf.windowFocused, function (focusedWindow)
 	end
 end)
 wf_alacritty:subscribe(wf.windowDestroyed, function ()
-	keystroke({"cmd"}, "tab") -- to prevent empty window left behind
+	if #wf_alacritty:getWindows() == 0 then keystroke({"cmd"}, "tab") end -- to prevent empty window left behind
 end)
 
 -- ALACRITTY Man / cheat sheet leaader hotkey
