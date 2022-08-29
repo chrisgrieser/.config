@@ -36,7 +36,7 @@ alias cp='cp -v'
 alias which='which -a'
 alias mkdir='mkdir -p'
 alias pip="pip3"
-alias curl="curl -s"
+alias curl="curl -sL"
 
 # exa
 # in function for directoryInspect function
