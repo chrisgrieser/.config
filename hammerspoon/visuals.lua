@@ -20,7 +20,7 @@ if isAtOffice() then activationHighlight() end
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
 -- this mostly round the corners in the bottom
 roundedCorners = hs.loadSpoon("RoundedCorners")
-roundedCorners.radius = 8
+roundedCorners.radius = 10
 roundedCorners:start()
 
 -- for whatever reason, passing rectangles into a function does not work,
