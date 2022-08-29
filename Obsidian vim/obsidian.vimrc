@@ -89,7 +89,7 @@ nmap gF :followLinkInNewPane
 vmap gF :followLinkInNewPane
 
 " [g]oto [o]pen file (= Quick Switcher)
-exmap quickSwitcher obcommand obsidian-another-quick-switcher:filename-recent-search
+exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_Recent search
 nmap go :quickSwitcher
 vmap go :quickSwitcher
 

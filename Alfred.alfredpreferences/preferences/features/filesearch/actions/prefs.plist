@@ -12,8 +12,6 @@
 		<true/>
 		<key>alfred.action.findsimilar</key>
 		<true/>
-		<key>alfred.action.getinfo</key>
-		<true/>
 		<key>alfred.action.mixed.email</key>
 		<true/>
 		<key>alfred.action.mixed.emailto</key>
@@ -25,8 +23,6 @@
 		<key>alfred.action.openwith</key>
 		<true/>
 		<key>alfred.action.recent</key>
-		<true/>
-		<key>alfred.action.revealinfinder</key>
 		<true/>
 		<key>alfred.action.showaslargetype</key>
 		<true/>
