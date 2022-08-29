@@ -95,7 +95,7 @@ hints:
     binding:
       key: U
       mods: Command
-  - regex: "-{1,2}[^,\\s]+"  # flags for copypasting
+  - regex: "\\s-{1,2}[^,\\s]+"  # flags for copypasting
     action: copy
     mouse:
       enabled: true
