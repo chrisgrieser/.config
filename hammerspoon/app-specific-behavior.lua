@@ -7,8 +7,7 @@ require("system-and-cron")
 -- always activate windows together
 function allWindowsActivation(appName, eventType, appObject)
 	if not(eventType == aw.activated) then return end
-
-	if not(appName == "Brave Browser" or appName == "Mimestream") then return end
+	if not(appName == "Finder" or appName == "Brave Browser" or appName == "Mimestream") then return end
 
 	--don't interfere with split
 	if SPLIT_RIGHT then ---@diagnostic disable-line: undefined-global
@@ -221,7 +220,6 @@ end)
 function finderWatcher(appName, eventType, appObject)
 	if not(eventType == aw.activated and appName == "Finder") then return end
 
-	appObject:selectMenuItem({"Window", "Bring All to Front"})
 	appObject:selectMenuItem({"View", "Hide Sidebar"})
 
 	local finderWin = appObject:focusedWindow()
