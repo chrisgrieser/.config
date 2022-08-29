@@ -62,29 +62,6 @@
 		</array>
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<array/>
-		<key>54DD79AC-88EF-4676-B834-350F40797C6B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>936424AC-32E2-4193-B07C-DDB804AEF807</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>260CA812-9BC4-4225-87A1-9058C437559D</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</key>
 		<array>
 			<dict>
@@ -361,57 +338,8 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>hs.</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>hs-docs-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Hammerspoon Docs Search...</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>54DD79AC-88EF-4676-B834-350F40797C6B</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
-				<false/>
+				<true/>
 				<key>clipboardtext</key>
 				<string>{query}</string>
 				<key>ignoredynamicplaceholders</key>
@@ -517,27 +445,6 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>0E91D870-C8B9-49BA-B676-8E4DE6AF892F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -574,6 +481,27 @@ window_name</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>0E91D870-C8B9-49BA-B676-8E4DE6AF892F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -878,18 +806,18 @@ window_name</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>945</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>145</real>
 		</dict>
 		<key>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>825</real>
+			<real>685</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>405</real>
 		</dict>
 		<key>387E93E5-B099-4784-8538-0CE2E9086D86</key>
 		<dict>
@@ -925,27 +853,16 @@ window_name</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>825</real>
+			<real>685</real>
 			<key>ypos</key>
-			<real>320</real>
-		</dict>
-		<key>54DD79AC-88EF-4676-B834-350F40797C6B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>to also match "hs.window" (above only matches "hs window")</string>
-			<key>xpos</key>
-			<real>675</real>
-			<key>ypos</key>
-			<real>155</real>
+			<real>265</real>
 		</dict>
 		<key>936424AC-32E2-4193-B07C-DDB804AEF807</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1015</real>
+			<real>685</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -985,7 +902,7 @@ window_name</string>
 			<key>note</key>
 			<string>docs</string>
 			<key>xpos</key>
-			<real>675</real>
+			<real>540</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -1005,18 +922,18 @@ window_name</string>
 			<key>note</key>
 			<string>restart</string>
 			<key>xpos</key>
-			<real>675</real>
+			<real>535</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>265</real>
 		</dict>
 		<key>E9FF31BC-709C-4387-975A-0B1410418161</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>675</real>
+			<real>535</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>405</real>
 		</dict>
 		<key>F0068510-5EA9-467B-8CAB-E5A736B52AE8</key>
 		<dict>

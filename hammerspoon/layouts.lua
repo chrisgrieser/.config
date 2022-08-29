@@ -238,7 +238,11 @@ hotkey(hyper, "f5", setLayout) -- for Apple Keyboard
 --------------------------------------------------------------------------------
 
 -- Open at Mouse Screen
-wf_appsOnMouseScreen = wf.new(true) -- affect all windows
+wf_appsOnMouseScreen = wf.new(true) -- include all windows (except for some expections causing problems)
+	:rejectApp("IINA") -- issues with fullscreen window
+	:rejectApp("Hammerspoon"):setOverrideFilter{allowTitles="Hammerspoon Console"} -- hs.drawings
+	:rejectApp("BetterTouchTool") -- issues with overlays
+
 wf_appsOnMouseScreen:subscribe(wf.windowCreated, function (newWindow)
 	local mouseScreen = hs.mouse.getCurrentScreen()
 	local screenOfWindow = newWindow:screen()
