@@ -2,7 +2,9 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-const alfredMatcher = (str) => str.replace (/[-()_.:]/g, " ") + " " + str + " ";
+const alfredMatcher = (str) => str.replace (/[-()_.:]/g, " ")
+	+ " " + str + " "
+	+ str.replace(/([A-Z])/g, " $1"); // match parts of CamelCase
 ObjC.import("Foundation");
 function readFile (path, encoding) {
 	if (!encoding) encoding = $.NSUTF8StringEncoding;
@@ -12,12 +14,13 @@ function readFile (path, encoding) {
 	return ObjC.unwrap(str);
 }
 
+//------------------------------------------------------------------------------
+
 // run `hs.docstrings_json_file` in hammerspoon console to get the docs path
 const hammerspoonDocsJson = "/Applications/Hammerspoon.app/Contents/Resources/docs.json";
-
 const workArray = [];
-
 const categoryArr = JSON.parse(readFile(hammerspoonDocsJson));
+
 categoryArr.forEach(category => {
 	const children = category.items.length;
 	// categories
@@ -30,7 +33,7 @@ categoryArr.forEach(category => {
 		"mods": {
 			"alt": {
 				"arg": category.name,
-				"subtitle": `⌥: Copy ${category.name}`
+				"subtitle": `⌥: Paste ${category.name}`
 			},
 		},
 	});
@@ -47,7 +50,7 @@ categoryArr.forEach(category => {
 			"mods": {
 				"alt": {
 					"arg": shortdef,
-					"subtitle": `⌥: Copy ${shortdef}`
+					"subtitle": `⌥: Paste ${shortdef}`
 				},
 			},
 

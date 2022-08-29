@@ -15,7 +15,7 @@ matches:
           cmd: "pbpaste | sed 's/^\t/  /g'"
           shell: bash
 
-  - trigger: ttt
+  - trigger: TTT
     replace: '- [ ] '
     label: Markdown Task
 
