@@ -1,21 +1,15 @@
-# Specify desired highlighting theme (e.g. "TwoDark"). Run `bat --list-themes`
-# for a list of all available themes
-#--theme="TwoDark"
+# `bat --list-themes`
+--theme="Sublime Snazzy"
 
-# Enable this to use italic text on the terminal. This is not supported on all
-# terminal emulators (like tmux, by default):
-#--italic-text=always
+--italic-text=never
+--wrap=never
+--tabs=2
+--terminal-width="-1"
 
-# Uncomment the following line to disable automatic paging:
-#--paging=never
+# Possible values: *default*, full, auto, plain, changes, header,
+# header-filename, header-filesize, grid, rule, numbers, snip.
+--style="header-filesize,header-filename,grid,snip"
 
-# Uncomment the following line if you are using less version >= 551 and want to
-# enable mouse scrolling support in `bat` when running inside tmux. This might
-# disable text selection, unless you press shift.
-#--pager="less --RAW-CONTROL-CHARS --quit-if-one-screen --mouse"
+# show percentage indicator
+--pager="less -RF --long-prompt +Gg"
 
-# Syntax mappings: map a certain filename pattern to a language.
-#   Example 1: use the C++ syntax for Arduino .ino files
-#   Example 2: Use ".gitignore"-style highlighting for ".ignore" files
-#--map-syntax "*.ino:C++"
-#--map-syntax ".ignore:Git Ignore"

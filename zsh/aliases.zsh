@@ -52,7 +52,7 @@ alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in 
 # Global Alias
 alias -g H="--help"
 alias -g G="| grep --color"
-alias -g B="| bat --wrap=never"
+alias -g B="| bat"
 
 # Suffix Aliases
 # = default command to act upon the filetype, when is is entered

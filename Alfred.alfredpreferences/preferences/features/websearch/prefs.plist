@@ -43,6 +43,17 @@
 			<key>utf8</key>
 			<true/>
 		</dict>
+		<key>510A0ED4-31D4-48D5-9318-92A081DCF445</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>st</string>
+			<key>text</key>
+			<string>SteamDB</string>
+			<key>url</key>
+			<string>https://steamdb.info/search/?a=app&amp;q={query}</string>
+		</dict>
 		<key>5E85686A-D841-453C-9974-E22F5241FA40</key>
 		<dict>
 			<key>enabled</key>
