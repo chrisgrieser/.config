@@ -114,8 +114,8 @@
 		"dot-notation": "error"
 	},
 
-	// for Common globals in JXA / Obsidian
 	"globals": {
+		// JXA
 		"ObjC": "readonly",
 		"delay": "readonly",
 		"Application": "readonly",
@@ -123,7 +123,10 @@
 		"Set": "readonly",
 		"Path": "readonly",
 		"console": "readonly",
+
+		// Obsidian
 		"tp": "readonly",
+		"request": "readonly",
 		"dv": "readonly"
 	}
 
