@@ -24,9 +24,8 @@ ZSH_HIGHLIGHT_REGEXP+=('^(git commit -m|acp|amend) .{50,}' 'fg=white,bold,bg=red
 ZSH_HIGHLIGHT_REGEXP+=('(git reset --hard|rm -r?f) .*' 'fg=white,bold,bg=red')
 # global aliases
 ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=white,bold,bg=magenta')
-
-export BAT_THEME='Sublime Snazzy'
+ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
