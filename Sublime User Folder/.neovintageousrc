@@ -79,8 +79,8 @@ nnoremap gZ [s
 " nnoremap zg zg
 
 " [g]oto [d]efinition
-nnoremap gd :LspSymbolDefinition side_by_side=false<CR>
-nnoremap gD :LspSymbolReferences<CR>
+nnoremap gd :LspSymbolDefinition fallback=true<CR>
+nnoremap gD :LspSymbolReferences fallback=true<CR>
 
 " [h]over popup
 nnoremap <leader>h :LspHover<CR>
