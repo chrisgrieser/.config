@@ -27,8 +27,8 @@ alias grep='grep --color'
 alias ls='ls -G'
 
 # Safety nets
-alias rm='rm -i'
-alias mv='mv -i'
+alias rm='rm -v'
+alias mv='mv -v'
 alias ln='ln -v'
 alias cp='cp -v'
 

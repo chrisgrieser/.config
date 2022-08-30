@@ -9,14 +9,14 @@
 
 add_newline = false
 continuation_prompt = "❯"
-format = "[$directory${custom.folder_number}$git_branch$git_status$git_metrics$git_commit$git_state](bg:black)[](black)$cmd_duration$status$character"
+format = "[$directory${custom.folder_number}$git_branch$git_status$git_metrics$git_commit$git_state$sudo](bg:black)[](black)$cmd_duration$status$character"
 right_format="$package${custom.alfred}$nodejs$python$jobs$memory_usage"
 
 # ⏼⏻⟐ﰉﰊ
 [character]
 success_symbol = " [ﰉ ](bold green)"
 error_symbol = " [ ](bold red)" # terminus needs extra space
-vimcmd_symbol = " [ ](bold blue)"
+vimcmd_symbol = " [ ](bold blue)" # using vim symbol here, since Terminus cursor does not switch
 # https://starship.rs/config/#character
 # those don't work due to upstream zsh bug
 # vimcmd_visual_symbol = " [V](bold blue)"
@@ -96,7 +96,7 @@ format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$de
 disabled = false
 added_style = "fg:green bg:black"
 deleted_style = "fg:red bg:black"
-format = '([\(](dimmed bg:black)[+$added]($added_style)[/](dimmed bg:black)[-$deleted]($deleted_style)[\)](dimmed bg:black))'
+format = '([\(](dimmed bg:black)[+$added]($added_style)[/](dimmed bg:black)[-$deleted]($deleted_style)[\)](dimmed bg:black)) '
 
 # -------------
 # right side
