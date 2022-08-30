@@ -291,21 +291,19 @@ nmap gT :prevTab
 """"""""""""""""""""""
 " < Folding
 """"""""""""""""""""""
-" Emulate Folding https://vimhelp.org/fold.txt.html#fold-commands
+" Emulate Original Folding command https://vimhelp.org/fold.txt.html#fold-commands
+exmap unfoldall obcommand editor:unfold-all
 exmap togglefold obcommand editor:toggle-fold
+exmap foldall obcommand editor:fold-all
+exmap foldless obcommand editor:fold-less
+exmap foldmore obcommand editor:fold-more
 nmap zo :togglefold
 nmap zc :togglefold
 nmap za :togglefold
-
-exmap unfoldall obcommand editor:unfold-all
-nmap zR :unfoldall
-exmap foldall obcommand editor:fold-all
-exmap foldall obcommand editor:fold-all
+nmap zm :foldmore
 nmap zM :foldall
-
-
-editor:fold-less
-editor:fold-more
+nmap zr :foldless
+nmap zR :unfoldall
 
 """"""""""""""""""""""
 " < Sneak
