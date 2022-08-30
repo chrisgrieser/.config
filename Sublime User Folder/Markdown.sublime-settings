@@ -7,7 +7,7 @@
 	"mde.list_align_text": false,
 
 	// Markdown specific theme
-	"light_color_scheme": "MarkdownEditor-ArcDark.sublime-color-scheme",
+	"light_color_scheme": "Celeste.sublime-color-scheme",
 	"dark_color_scheme": "Packages/User/MarkdownEditor-MonokaiC.tmTheme",
 
 	"spell_check": true,

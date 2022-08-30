@@ -38,7 +38,6 @@ style = "fg:bright-blue bg:black bold" # terminus different
 format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
-"/Library/Mobile Documents/iCloud~md~obsidian/Documents" = "/ "
 "/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
 "/File Hub" = "/柳"
 "dotfiles" = " "
@@ -94,7 +93,7 @@ format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$de
 disabled = false
 added_style = "fg:green bg:black"
 deleted_style = "fg:red bg:black"
-format = '([\(](dimmed bg:black)[+$added]($added_style)[/](dimmed bg:black)[-$deleted]($deleted_style)[\)](dimmed bg:black))'
+format = '([\(](dimmed bg:black)[+$added]($added_style)[/](dimmed bg:black)[-$deleted]($deleted_style)[\)](dimmed bg:black)) '
 
 # -------------
 # right side
