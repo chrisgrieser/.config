@@ -13,21 +13,19 @@
   // hint: 4
 
   // Panel
-  "show_diagnostics_panel_on_save": 0,
+  "show_diagnostics_panel_on_save": 1,
   "diagnostics_panel_include_severity_level": 4,
-  "show_diagnostics_severity_level": 4,
+  "show_diagnostics_severity_level": 3,
 
   // Gutter
   "diagnostics_gutter_marker": "dot",
 
   // Code Action
-  "show_code_actions": "annotation",
+  "show_code_actions": "bulb",
   "show_code_actions_in_hover": true,
 
-  // Autocomplete
-  "inhibit_snippet_completions": false,
-
-  // hover
+  // Extra Features
   "show_references_in_quick_panel": true,
-
+  "show_inlay_hints": true,
+  "semantic_highlighting": true,
 }
