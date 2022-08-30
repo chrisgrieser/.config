@@ -1,50 +1,50 @@
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 colors:
-  # COLORSCHEME: snazzy.yaml
-  # Default colors
+  # COLORSCHEME: horizon-dark.yaml
+  # Primary colors
   primary:
     # hard contrast: background = '0x1d2021'
-    background: '0x282a36'
-    foreground: '0xeff0eb'
+    background: '0x1c1e26'
+    foreground: '0xe0e0e0'
 
   # Normal colors
   normal:
   # Bright colors
-    black: '0x080a16'
-    red: '0xff5c57'
-    green: '0x5af78e'
-    yellow: '0xf3f99d'
-    blue: '0x57c7ff'
-    magenta: '0xff6ac1'
-    cyan: '0x9aedfe'
-    white: '0xf1f1f0'
+    black: '0x16161c'
+    red: '0xe95678'
+    green: '0x29d398'
+    yellow: '0xfab795'
+    blue: '0x26bbd9'
+    magenta: '0xee64ac'
+    cyan: '0x59e1e3'
+    white: '0xd5d8da'
 
   # Bright colors
   bright:
-    black: '0x686868'
-    red: '0xff5c57'
-    green: '0x5af78e'
-    yellow: '0xf3f99d'
-    blue: '0x57c7ff'
-    magenta: '0xff6ac1'
-    cyan: '0x9aedfe'
-    white: '0xf1f1f0'
+    black: '0x5b5858'
+    red: '0xec6a88'
+    green: '0x3fdaa4'
+    yellow: '0xfbc3a7'
+    blue: '0x3fc4de'
+    magenta: '0xf075b5'
+    cyan: '0x6be4e6'
+    white: '0xd5d8da'
   cursor:
-    text: '0x000000'
-    cursor: '0xfefffe'
+    text: '0xf9e7c4'
+    cursor: '0xf9e7c4'
+
+  # Normal colors
   dim:
-    black: '0x000000'
-    red: '0xa90000'
-    green: '0x049f2b'
-    yellow: '0xa3b106'
-    blue: '0x530aba'
-    magenta: '0xbb006b'
-    cyan: '0x433364'
-    white: '0x5f5f5f'
-  indexed_colors:
-    - {index: 16, color: '0xF8BD96'}
-    - {index: 17, color: '0xF5E0DC'}
+    black: '0x232323'
+    red: '0x74423f'
+    green: '0x5e6547'
+    yellow: '0x8b7653'
+    blue: '0x556b79'
+    magenta: '0x6e4962'
+    cyan: '0x5c8482'
+    white: '0x828282'
+  indexed_colors: []
   search:
     matches:
       foreground: '0xb2b2b2'
@@ -93,7 +93,7 @@ window:
   padding:
     x: 6
     y: 6
-  opacity: .96
+  opacity: .95
 scrolling:
   history: 2000
   multiplier: 3
