@@ -69,8 +69,8 @@ nnoremap gl ]l
 nnoremap gL [l
 
 " Sublime Linter hover and quick action
-nnoremap <leader>l :sublimeLinterLineReport<CR>
-nnoremap <leader>L :sublimeLinterQuickActions<CR>
+nnoremap <leader>l :SublimeLinterLineReport<CR>
+nnoremap <leader>L :SublimeLinterQuickActions<CR>
 
 " [g]oto [z]pelling Errors (Spelling)
 nnoremap gz ]s
