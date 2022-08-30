@@ -87,6 +87,7 @@
 	"file_tab_style": "rounded", // "angled" does not support inactive pane dimming
 	"highlight_modified_tabs": true,
 	"hide_new_tab_button": true,
+	"show_tab_close_buttons": false,
 
 	// Startup & Exit
 	"save_on_focus_lost": true,
