@@ -12,5 +12,5 @@ git commit -m "Backup of $file" --author="🤖💾<version-history@alfred-workfl
 
 # restore & open old version
 git checkout "$hash" -- "$file"
-git commit -m "Restored $file (from $hash)"  --author="🤖⤵️<version-history@alfred-workflow.com>"
+git commit -m "Restored $file (from $hash)"  --author="🤖❇️<version-history@alfred-workflow.com>"
 open "$file"

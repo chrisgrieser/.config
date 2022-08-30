@@ -144,7 +144,7 @@ rules:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
 
-      # Marta: Back
+      # Marta & Obsidian: Back
       - type: basic
         from:
           pointing_button: button4
@@ -156,6 +156,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^org\.yanex\.marta$
+              - ^md\.obsidian$
         to_if_held_down:
           - shell_command: open -a "Mission Control"
         parameters:
@@ -204,7 +205,7 @@ rules:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
 
-      # Finder: go back
+      # Finder: back
       - type: basic
         from:
           pointing_button: button4
@@ -250,7 +251,7 @@ rules:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
 
-      # close window in Brave & Finder
+      # Brave & Finder & Obsidian & Marta: Close Window
       - type: basic
         from:
           pointing_button: button5
@@ -263,6 +264,7 @@ rules:
             bundle_identifiers:
               - ^com\.brave\.Browser$
               - ^com\.apple\.finder$
+              - ^md\.obsidian$
               - ^org\.yanex\.marta$
         to_if_held_down:
           - shell_command:
