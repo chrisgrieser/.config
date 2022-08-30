@@ -1,35 +1,28 @@
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 colors:
-  # COLORSCHEME: horizon-dark.yaml
-  # Primary colors
+  # COLORSCHEME: primary_dark.yaml
   primary:
     # hard contrast: background = '0x1d2021'
-    background: '0x1c1e26'
-    foreground: '0xe0e0e0'
-
-  # Normal colors
+    background: '#231E1A'
+    foreground: '#E5CFB3'
   normal:
   # Bright colors
-    black: '0x16161c'
-    red: '0xe95678'
-    green: '0x29d398'
-    yellow: '0xfab795'
-    blue: '0x26bbd9'
-    magenta: '0xee64ac'
-    cyan: '0x59e1e3'
-    white: '0xd5d8da'
-
-  # Bright colors
+    black: '#000000'
+    red: '#F54E42'
+    green: '#38B27D'
+    yellow: '#EBC400'
+    blue: '#4DADD5'
+    magenta: '#9F78DD'
+    cyan: '#3399C1'
+    white: '#F6E7D5'
   bright:
-    black: '0x5b5858'
-    red: '0xec6a88'
-    green: '0x3fdaa4'
-    yellow: '0xfbc3a7'
-    blue: '0x3fc4de'
-    magenta: '0xf075b5'
-    cyan: '0x6be4e6'
-    white: '0xd5d8da'
+    black: '#000000'
+    yellow: '#F8D668'
+    red: '#FF675C'
+    green: '#38D687'
+    magenta: '#A993E6'
+    white: '#F6E7D5'
   cursor:
     text: '0xf9e7c4'
     cursor: '0xf9e7c4'

@@ -282,36 +282,6 @@ exmap close obcommand workspace:close
 nmap <C-w>q :close
 nmap <C-w>c :close
 
-" Original gt and gT https://vimhelp.org/tabpage.txt.html#gt
-" requires Pane Relief Plugin
-exmap nextPane obcommand pane-relief:go-next
-exmap prevPane obcommand pane-relief:go-prev
-nmap gt :nextPane
-nmap gT :prevPane
-
-" Cycle Window (Original Vim Bindings)
-" requires Pane Relief Plugin
-nmap <C-w><C-w> :nextPane
-nmap <C-w>w :nextPane
-
-" [g]oto next/prev [w]indow (in Obsidian essentially the same as gt)
-" requires Pane Relief Plugin
-nmap gw :nextPane
-vmap gw :nextPane
-nmap gW :prevPane
-vmap gW :prevPane
-
-" swap pane position (Original Vim Bindings)
-" requires Pane Relief Plugin
-exmap swapPane obcommand pane-relief:swap-next
-exmap movePaneToFarLeft obcommand pane-relief:put-1st
-exmap movePaneToFarRight obcommand pane-relief:put-last
-nmap <C-w>x :swapPane
-vmap <C-w>x :swapPane
-nmap <C-w>H :movePaneToFarLeft
-vmap <C-w>H :movePaneToFarLeft
-nmap <C-w>L :movePaneToFarRight
-vmap <C-w>L :movePaneToFarRight
 
 """"""""""""""""""""""
 " < Folding
@@ -326,17 +296,6 @@ exmap unfoldall obcommand editor:unfold-all
 nmap zR :unfoldall
 exmap foldall obcommand editor:fold-all
 nmap zM :foldall
-
-" more folding things available when using the Creases plugin
-" https://discord.com/channels/686053708261228577/716028884885307432/979141099878760449
-" exmap foldCurrent obcommand creases:increase-fold-level-at-cursor
-" exmap unfoldCurrent obcommand creases:decrease-fold-level-at-cursor
-" exmap increaseFolding obcommand creases:decrease-fold-level
-" exmap reduceFolding obcommand creases:increase-fold-level
-" nmap zc :foldCurrent
-" nmap zo :unfoldCurrent
-" nmap zm :increaseFolding
-" nmap zr :reduceFolding
 
 """"""""""""""""""""""
 " < Sneak
