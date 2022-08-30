@@ -193,6 +193,9 @@ nnoremap <leader>> mzI> <Esc>`z
 " Markdown: [g]oto footnote [d]efinition (and back)
 noremap g<M-d> :MdeMagicFootnotes<CR>h<Esc>
 
+" Markdown: check tasks
+nnoremap <leader>x mz^lllrx`z
+
 " CSS: double/remove [c]lass under cursor
 nnoremap <leader>c mzlEF.yEEp`z
 nnoremap <leader>C lF.d/[.\s]<CR>
