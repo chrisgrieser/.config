@@ -240,5 +240,8 @@
 		{ "key": "selector", "operator": "equal", "operand": "text.html.markdown" },
 		{ "key": "auto_complete_visible", "operator": "equal", "operand": false }
 	] },
+	{ "keys": ["super+k"], "command": "goto_comment", "context": [
+		{ "key": "selector", "operator": "equal", "operand": "source.css" },
+	] },
 ]
 
