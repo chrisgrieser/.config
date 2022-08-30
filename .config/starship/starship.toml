@@ -14,7 +14,7 @@ right_format="$package${custom.alfred}$nodejs$python$jobs$memory_usage"
 
 # ⏼⏻⟐ﰉﰊ
 [character]
-success_symbol = " [ﰉ](bold green)"
+success_symbol = " [★](bold green)"
 error_symbol = " [](bold red)"
 # vimcmd_symbol = " [Normal](bold blue)" # doesn't work as long as cursor styling snippet is active
 
@@ -91,10 +91,10 @@ format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$de
 # lines
 [git_metrics]
 disabled = false
+# only_nonzero_diffs = false
 added_style = "fg:green bg:black"
 deleted_style = "fg:red bg:black"
-format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
-# format = '\([+$added]($added_style)/[-$deleted]($deleted_style)\) '
+format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\) )'
 
 # -------------
 # right side
