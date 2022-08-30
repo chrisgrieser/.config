@@ -1420,6 +1420,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>restore</string>
 			<key>xpos</key>
 			<real>475</real>
 			<key>ypos</key>
