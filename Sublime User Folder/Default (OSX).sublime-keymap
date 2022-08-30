@@ -17,6 +17,10 @@
 [
 	// MEH Bindings (shift+control+alt = meh)
 
+	    { "keys": ["super+alt+a"],
+	      "command": "sublime_linter_quick_actions"
+	    },
+
 	// Change Color Scheme
 	{ "keys": ["shift+control+alt+t"], "command": "select_color_scheme" },
 	// Installation / Uninstallation
