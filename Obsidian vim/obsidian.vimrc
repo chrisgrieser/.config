@@ -82,14 +82,14 @@ vmap gs :gotoHeading
 
 " [g]oto [f]ile (= Follow Link under cursor)
 exmap followLinkUnderCursor obcommand editor:follow-link
-exmap followLinkInNewPane obcommand editor:open-link-in-new-leaf
+exmap followLinkInTab obcommand editor:open-link-in-new-leaf
 nmap gf :followLinkUnderCursor
 vmap gf :followLinkUnderCursor
-nmap gF :followLinkInNewPane
-vmap gF :followLinkInNewPane
+nmap gF :followLinkInTab
+vmap gF :followLinkInTab
 
 " [g]oto [o]pen file (= Quick Switcher)
-exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_Recent search
+exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_Recent
 nmap go :quickSwitcher
 vmap go :quickSwitcher
 
@@ -282,6 +282,11 @@ exmap close obcommand workspace:close
 nmap <C-w>q :close
 nmap <C-w>c :close
 
+" Emulate Original gt and gT https://vimhelp.org/tabpage.txt.html#gt
+exmap nextTab obcommand workspace:next-tab
+exmap prevTab obcommand workspace:previous-tab
+nmap gt :nextTab
+nmap gT :prevTab
 
 """"""""""""""""""""""
 " < Folding
@@ -295,7 +300,12 @@ nmap za :togglefold
 exmap unfoldall obcommand editor:unfold-all
 nmap zR :unfoldall
 exmap foldall obcommand editor:fold-all
+exmap foldall obcommand editor:fold-all
 nmap zM :foldall
+
+
+editor:fold-less
+editor:fold-more
 
 """"""""""""""""""""""
 " < Sneak
