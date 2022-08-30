@@ -12,21 +12,21 @@ continuation_prompt = "❯"
 format = "[$directory${custom.folder_number}$git_branch$git_status$git_metrics$git_commit$git_state$sudo](bg:black)[](black)$cmd_duration$status$character"
 right_format="$package${custom.alfred}$nodejs$python$jobs$memory_usage"
 
-# ⏼⏻⟐ﰉﰊ
+# ⏼⏻⟐ﰉﰊ★ﮊגּﮏ﫜ﲮﲭﱬﳄﯖﴣﯟﯢﳝﯶﯾ卵擄勞ﮧ閭ﴯﰪﭾ璉ﲅ晴ﲊ羽⚡
 [character]
-success_symbol = " [★](bold green)"
-error_symbol = " [](bold red)"
+success_symbol = " [](bold green)"
+error_symbol = " [](bold red)"
 # vimcmd_symbol = " [Normal](bold blue)" # doesn't work as long as cursor styling snippet is active
 
 [sudo]
 style = 'fg:blue bg:black'
-symbol = " "
+symbol = " "
 format = " [$symbol]($style)"
 disabled = false
 
 [cmd_duration]
 min_time = 2500
-format = " [ $duration](bold cyan)"
+format = " [羽 $duration](bold cyan)"
 
 [directory]
 truncation_length = 2
@@ -125,7 +125,7 @@ symbol = " "
 os = "macos"
 description = "Version number of Alfred Workflow"
 style = "dimmed 208"
-format = '[Alfred](purple) [$symbol$output]($style)'
+format = '[](purple) [$symbol$output]($style)'
 
 [nodejs]
 format = " [$symbol$version]($style)"
