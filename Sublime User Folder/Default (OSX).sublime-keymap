@@ -76,11 +76,10 @@
 
 	//---------------------------------------------------------------------------
 
-	// Build System
 	// Build Selection
 	{ "keys": ["super+shift+r"], "command": "build", "args": {"select": true} },
 	// Lint (using Build System)
-	{ "keys": ["shift+alt+ctrl+l"], "command": "build", "args": { "variant": "Lint Autofix" } },
+		{ "keys": ["super+shift+s"], "command": "build", "args": { "variant": "Lint Autofix" } },
 	// Executable (using Build System)
 	{ "keys": ["shift+alt+ctrl+x"], "command": "build", "args": { "variant": "Make Executable" } },
 	// Quick Build
@@ -126,9 +125,6 @@
 	// Comment
 	{ "keys": ["super+7"], "command": "toggle_comment", "args": { "block": false } },
 	{ "keys": ["super+u"], "command": "toggle_comment", "args": { "block": false } },
-
-   // Disable Accidental Triggering of Saving Modal
-   { "keys": ["super+shift+s"], "command": "noop" },
 
 	// Expand Selection
 	{ "keys": ["super+j"], "command": "find_under_expand",
