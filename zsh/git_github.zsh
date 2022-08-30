@@ -35,10 +35,12 @@ function gli (){
 # git add, commit, (pull) & push
 function acp (){
 	# safeguard against accidental pushing of large files
-	NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -size +10M | wc -l | xargs)
+	NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -size +10M | wc -l | xargs)
 	if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
-		echo -n "$NUMBER_LARGE_FILES Large files detected, aborting automatic git sync."
-		exit 1
+		echo "$NUMBER_LARGE_FILES large file(s) detected, aborting."
+		find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -size +10M
+		echo
+		return 1
 	fi
 
 	local COMMIT_MSG="$*"
