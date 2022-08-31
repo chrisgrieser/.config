@@ -152,7 +152,8 @@ matches:
   - trigger: calender
     replace: calendar
     propagate_case: true
-
-
   - trigger: coudl
     replace: could
+  - trigger: jsut
+    replace: just
+    word: true
