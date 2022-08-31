@@ -8,21 +8,19 @@
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
-      "description": "🐁 R (tap): Open link in background (when in Browser)",
+      "description": "🐁 R (tap): Open link in new background tab (when in Browser or Obsidian)",
       "manipulators": [
         {
           "type": "basic",
           "from": {
             "pointing_button": "button2"
           },
-          "to_if_held_down": [
+          "to_if_alone": [
             {
-              "pointing_button": "button2"
-            }
-          ],
-          "to": [
-            {
-              "pointing_button": "button3"
+              "pointing_button": "button1",
+              "modifiers": [
+                "command"
+              ]
             }
           ],
           "conditions": [
@@ -31,13 +29,11 @@
               "bundle_identifiers": [
                 "^org\\.chromium\\.Chromium$",
                 "^com\\.brave\\.Browser$",
-                "^com\\.apple\\.Safari$"
+                "^com\\.apple\\.Safari$",
+                "^md\\.obsidian$"
               ]
             }
-          ],
-          "parameters": {
-            "basic.to_if_held_down_threshold_milliseconds": 300
-          }
+          ]
         },
         {
           "type": "basic",
@@ -67,40 +63,6 @@
               "modifiers": [
                 "command"
               ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^com\\.agiletortoise\\.Drafts-OSX$"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "pointing_button": "button1",
-            "modifiers": {
-              "mandatory": [
-                "command"
-              ]
-            }
-          },
-          "to": [
-            {
-              "pointing_button": "button2"
-            },
-            {
-              "key_code": "vk_none",
-              "hold_down_milliseconds": 10
-            },
-            {
-              "key_code": "o"
-            },
-            {
-              "key_code": "return_or_enter"
             }
           ],
           "conditions": [
