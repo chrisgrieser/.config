@@ -41,6 +41,7 @@ duti -s py com.sublimetext.4 all
 duti -s js com.sublimetext.4 all
 duti -s ts com.sublimetext.4 all
 duti -s css com.sublimetext.4 all
+duti -s scss com.sublimetext.4 all
 duti -s txt com.sublimetext.4 all
 duti -s applescript com.sublimetext.4 all
 duti -s lua com.sublimetext.4 all
