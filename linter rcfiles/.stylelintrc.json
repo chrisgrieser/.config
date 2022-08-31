@@ -224,7 +224,7 @@
 
 		"length-zero-no-unit": [true, {"severity": "warning", "ignore": ["custom-properties"]} ],
 		"number-leading-zero": ["always", {"severity": "warning"} ],
-		"number-max-precision": [2, {"ignoreProperties": ["letter-spacing"] }],
+		"number-max-precision": [2, {"ignoreProperties": ["letter-spacing"], "ignoreUnits":["em", "rem"] }],
 		"time-min-milliseconds": [200, {"severity": "warning"}],
 
 		"shorthand-property-no-redundant-values": [true, {"severity": "warning"} ],
