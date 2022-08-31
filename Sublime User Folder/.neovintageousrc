@@ -275,12 +275,10 @@ vnoremap <C-w>s <C-w>s<C-w>k<C-w>c<C-w>j
 nnoremap gw :FocusNeighboringGroup<CR>
 vnoremap gw :FocusNeighboringGroup<CR>
 nnoremap gW :FocusNeighboringGroup forward=false<CR>
-vnoremap gW :FocusNeighboringGroup forward=false<CR>
+vnoremap gW :FocusNeighboringGroup forward=false<CR>J
 
-" using Origami Commands
-" https://github.com/SublimeText/Origami/blob/master/Origami.sublime-commands
+" maximize
 nnoremap <C-w>+ :ZoomPane fraction=0.9<CR>
-" this is essentially nnoremap <C-w>+ <C-w>_
 
 """"""""""""""""""""""
 " < Options
