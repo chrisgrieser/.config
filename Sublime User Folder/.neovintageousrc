@@ -277,8 +277,9 @@ vnoremap gw :FocusNeighboringGroup<CR>
 nnoremap gW :FocusNeighboringGroup forward=false<CR>
 vnoremap gW :FocusNeighboringGroup forward=false<CR>J
 
-" maximize
+" orginal vim: <C-w>_ for vertical maximizing, <C-w>= for equal size
 nnoremap <C-w>+ :ZoomPane fraction=0.9<CR>
+" nnoremap <C-w>= unzoom
 
 """"""""""""""""""""""
 " < Options

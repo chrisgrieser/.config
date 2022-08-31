@@ -282,30 +282,18 @@ exmap close obcommand workspace:close
 nmap ZZ :close
 nmap ZQ :close
 
-pane-relief:maximize
-
 " Emulate Original gt and gT https://vimhelp.org/tabpage.txt.html#gt
 exmap nextTab obcommand workspace:next-tab
 exmap prevTab obcommand workspace:previous-tab
 nmap gt :nextTab
 nmap gT :prevTab
 
-workspace:undo-close-pane
-templater-obsidian:Meta/Templater/> Send to Next Pane.md
-pane-relief:swap-prev
-pane-relief:swap-next
-pane-relief:go-prev
-pane-relief:go-next
-pane-relief:win-prev
-pane-relief:win-next
-pane-relief:put-7th
-pane-relief:put-8th
-pane-relief:put-last
-pane-relief:maximize
-pane-relief:ordered-close
-pane-relief:open-new-window
-pane-relief:toggle-sliding
-pane-relief:focus-lock
+" orginal vim: <C-w>_ for vertical maximizing, <C-w>= for equal size
+exmap toggle-maximize-pane obcommand pane-relief:maximize
+nmap <C-w>+ :toggle-maximize-pane
+vmap <C-w>+ :toggle-maximize-pane
+nmap <C-w>= :toggle-maximize-pane
+vmap <C-w>= :toggle-maximize-pane
 
 " swap pane position (Original Vim Bindings)
 " requires Pane Relief Plugin
