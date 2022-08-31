@@ -147,6 +147,7 @@
                 "^com\\.brave\\.Browser$",
                 "^com\\.brave\\.Browser.+",
                 "^com\\.apple\\.finder$",
+                "^md\\.obsidian$",
                 "^com\\.mimestream\\.Mimestream$",
                 "^net\\.highlightsapp\\.universal$",
                 "^org\\.yanex\\.marta$"
@@ -380,6 +381,7 @@
               "bundle_identifiers": [
                 "^com\\.brave\\.Browser$",
                 "^com\\.apple\\.finder$",
+                "^md\\.obsidian$",
                 "^com\\.mimestream\\.Mimestream$",
                 "^com\\.agiletortoise\\.Drafts-OSX$",
                 "^net\\.highlightsapp\\.universal$",
@@ -412,7 +414,7 @@
           ],
           "conditions": [
             {
-              "type": null,
+              "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.brave\\.Browser$",
                 "^com\\.apple\\.finder$",

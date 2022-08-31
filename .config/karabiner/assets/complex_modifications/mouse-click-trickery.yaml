@@ -82,6 +82,7 @@ rules:
               - ^com\.brave\.Browser$
               - ^com\.brave\.Browser.+ # PWAs
               - ^com\.apple\.finder$
+              - ^md\.obsidian$
               - ^com\.mimestream\.Mimestream$
               - ^net\.highlightsapp\.universal$
               - ^org\.yanex\.marta$
@@ -223,6 +224,7 @@ rules:
             bundle_identifiers:
               - ^com\.brave\.Browser$
               - ^com\.apple\.finder$
+              - ^md\.obsidian$
               - ^com\.mimestream\.Mimestream$
               - ^com\.agiletortoise\.Drafts-OSX$
               - ^net\.highlightsapp\.universal$
@@ -243,7 +245,7 @@ rules:
             modifiers:
               - command
         conditions:
-          - type:
+          - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.brave\.Browser$
               - ^com\.apple\.finder$
