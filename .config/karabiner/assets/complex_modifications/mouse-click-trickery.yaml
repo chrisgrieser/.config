@@ -6,25 +6,24 @@ import-url: karabiner://karabiner/assets/complex_modifications/import?url=https:
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 # Sublime Keymaps for Mouse4 and Mouse5 defined in `Default (OSX).sublime-mousemap`
 rules:
-  - description: "🐁 R (tap): Open link in background (when in Browser)"
     # this basically emulations the "Right-Click Open Link in new Background tab" Chrome extension
+  - description: "🐁 R (tap): Open link in new background tab (when in Browser or Obsidian)"
     manipulators:
       - type: basic
         from:
           pointing_button: button2
-        to_if_held_down:
-          - pointing_button: button2
-        to:
-          - pointing_button: button3
+        to_if_alone:
+          - pointing_button: button1
+            modifiers:
+              - command
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^org\.chromium\.Chromium$
               - ^com\.brave\.Browser$
               - ^com\.apple\.Safari$
-        parameters:
-          basic.to_if_held_down_threshold_milliseconds: 300
-      # Drafts: R-Click opens link in background, ⌘+L-Click in foreground
+              - ^md\.obsidian$
+      # Drafts: R-Click opens link in background
       - type: basic
         from:
           pointing_button: button2
@@ -39,22 +38,6 @@ rules:
           - key_code: h
             modifiers:
               - command
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.agiletortoise\.Drafts-OSX$
-      - type: basic
-        from:
-          pointing_button: button1
-          modifiers:
-            mandatory:
-              - command
-        to:
-          - pointing_button: button2
-          - key_code: vk_none
-            hold_down_milliseconds: 10
-          - key_code: o
-          - key_code: return_or_enter
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:

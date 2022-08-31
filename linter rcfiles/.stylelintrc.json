@@ -301,7 +301,7 @@
 
 		"value-list-comma-newline-after": "never-multi-line",
 		"value-list-comma-space-after": "always-single-line",
-		"value-list-comma-space-before": "never",
+		"value-list-comma-space-before": ["never", {"severity": "warning"} ],
 		"value-list-max-empty-lines": 1
 	}
 }
