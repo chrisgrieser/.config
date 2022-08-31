@@ -4,23 +4,6 @@ require("system-and-cron")
 
 --------------------------------------------------------------------------------
 
--- always activate windows together
-function allWindowsActivation(appName, eventType, appObject)
-	if not(eventType == aw.activated) then return end
-	if not(appName == "Finder" or appName == "Brave Browser" or appName == "Mimestream") then return end
-
-	--don't interfere with split
-	if SPLIT_RIGHT then ---@diagnostic disable-line: undefined-global
-		if (appName == SPLIT_RIGHT:application():name() or SPLIT_LEFT:application():name()) then return end ---@diagnostic disable-line: undefined-global
-	end
-
-	appObject:selectMenuItem({"Window", "Bring All to Front"})
-end
-appWatcher = aw.new(allWindowsActivation)
-appWatcher:start()
-
---------------------------------------------------------------------------------
-
 -- OBSIDIAN
 -- Sync on Vault close
 function obsidianSync (appName, eventType)
