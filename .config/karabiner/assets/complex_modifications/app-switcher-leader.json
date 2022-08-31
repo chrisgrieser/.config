@@ -17,7 +17,7 @@
           },
           "to": [
             {
-              "shell_command": "killall Finder"
+              "shell_command": "true"
             },
             {
               "key_code": "tab",
