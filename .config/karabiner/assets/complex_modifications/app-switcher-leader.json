@@ -3,33 +3,6 @@
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
-      "description": "🔺💣 Forced App Switcher",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "tab",
-            "modifiers": {
-              "mandatory": [
-                "command"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "true"
-            },
-            {
-              "key_code": "tab",
-              "modifiers": [
-                "command"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
       "description": "🔺 L-Ctrl (Non-Apple) / fn (Apple)",
       "manipulators": [
         {
