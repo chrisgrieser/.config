@@ -13,6 +13,8 @@
 	"neovintageous_search_inc_style": "outine",
 	"highlightedyank_style": "fill",
 
+	"vintageous_i_escape_jj": true,
+
 	"line_numbers": false,
 	"relative_line_numbers": true, // = set relativenumber
 	"scroll_context_lines": 12, // = scroll offset
