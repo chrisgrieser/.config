@@ -294,7 +294,7 @@
 		"selector-combinator-space-before": "always",
 		"selector-descendant-combinator-no-non-space": [true, {"severity": "warning"} ],
 		"selector-list-comma-newline-after": "always",
-		"selector-list-comma-space-before": "never",
+		"selector-list-comma-space-before": ["never", {"severity": "warning"} ],
 		"selector-max-empty-lines": 0,
 		"selector-pseudo-class-parentheses-space-inside": "never",
 		"selector-pseudo-element-colon-notation": "double",

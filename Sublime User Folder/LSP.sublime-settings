@@ -13,7 +13,7 @@
   // hint: 4
 
   // Panel
-  "show_diagnostics_panel_on_save": 1,
+  "show_diagnostics_panel_on_save": 0,
   "diagnostics_panel_include_severity_level": 4,
   "show_diagnostics_severity_level": 3,
 
