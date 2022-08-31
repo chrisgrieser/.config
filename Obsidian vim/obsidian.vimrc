@@ -279,8 +279,10 @@ nmap <C-w>s :splitHorizontal
 exmap only obcommand workspace:close-others
 nmap <C-w>o :only
 exmap close obcommand workspace:close
-nmap <C-w>q :close
-nmap <C-w>c :close
+nmap ZZ :close
+nmap ZQ :close
+
+pane-relief:maximize
 
 " Emulate Original gt and gT https://vimhelp.org/tabpage.txt.html#gt
 exmap nextTab obcommand workspace:next-tab
