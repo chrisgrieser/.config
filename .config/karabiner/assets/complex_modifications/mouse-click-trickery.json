@@ -412,7 +412,7 @@
           ],
           "conditions": [
             {
-              "type": "frontmost_application_if",
+              "type": null,
               "bundle_identifiers": [
                 "^com\\.brave\\.Browser$",
                 "^com\\.apple\\.finder$",
