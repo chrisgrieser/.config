@@ -238,13 +238,12 @@ hotkey(hyper, "f5", setLayout) -- for Apple Keyboard
 --------------------------------------------------------------------------------
 
 -- Open at Mouse Screen
-wf_appsOnMouseScreen = wf.new({"Drafts","Brave Browser", "Mimestream", "Obsidian", "Sublime Text", "alacritty", "Slack", "Discord", "Marta"}) -- include all windows (except for some expections causing problems)
+wf_appsOnMouseScreen = wf.new({"Drafts", "Brave Browser", "Mimestream", "Obsidian", "Sublime Text", "alacritty", "Slack", "Discord", "Marta", "BusyCal", "Alfred Preferences", "Finder"})
 
 wf_appsOnMouseScreen:subscribe(wf.windowCreated, function (newWindow)
 	local mouseScreen = hs.mouse.getCurrentScreen()
 	local screenOfWindow = newWindow:screen()
 	if isProjector() and not(mouseScreen:name() == screenOfWindow:name()) then
-		print ("move-to-mousescreen was triggered")
 		newWindow:moveToScreen(mouseScreen)
 		runDelayed (0.2, function () newWindow:moveToScreen(mouseScreen) end)
 		runDelayed (0.4, function () newWindow:moveToScreen(mouseScreen) end)
