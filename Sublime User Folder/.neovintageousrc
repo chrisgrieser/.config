@@ -64,30 +64,6 @@ noremap ] }
 " Goto Mark
 nnoremap ä `
 
-" Next/Previous Sublime Linter Errors
-nnoremap gl ]l
-nnoremap gL [l
-
-" Sublime Linter hover and quick action
-nnoremap <leader>l :SublimeLinterLineReport<CR>
-nnoremap <leader>L :SublimeLinterQuickActions<CR>
-
-" [g]oto [z]pelling Errors (Spelling)
-nnoremap gz ]s
-nnoremap gZ [s
-" add word to dictionary/undo adding to dictionary (already built in)
-" nnoremap zg zg
-
-" [g]oto [d]efinition
-nnoremap gd :LspSymbolDefinition fallback=true<CR>
-nnoremap gD :LspSymbolReferences fallback=true<CR>
-
-" [h]over popup
-nnoremap <leader>h :LspHover<CR>
-
-" [g]oto [s]ymbol
-noremap gs :ShowOverlay overlay=goto text=@<CR>
-
 " [g]oto [o]pen file (= Quick Switcher)
 noremap go :OpenBrowse<CR>
 
@@ -100,6 +76,38 @@ nnoremap <M-Left> b
 
 " go to last change - https://vimhelp.org/motion.txt.html#g%3B
 nnoremap g; u<C-r>
+
+"""""""""""""""""""""""""
+" < Linter, LSP, Spelling
+"""""""""""""""""""""""""
+
+" Next/Previous Sublime Linter Errors
+nnoremap gl ]l
+nnoremap gL [l
+
+" Sublime Linter: hover popup
+nnoremap <leader>l :SublimeLinterLineReport<CR>
+" Sublime Linter: Ignore-Action
+nnoremap <leader>i :SublimeLinterQuickActions<CR>
+
+" [g]oto next/prev [z]pelling Errors (Spelling)
+nnoremap gz ]s
+nnoremap gZ [s
+" add word to dictionary/undo adding to dictionary (already built in)
+" nnoremap zg zg
+
+" LSP: [g]oto [d]efinition/Reference
+nnoremap gd :LspSymbolDefinition fallback=true<CR>
+nnoremap gD :LspSymbolReferences fallback=true<CR>
+
+" LSP: [h]over popup
+nnoremap <leader>h :LspHover<CR>
+
+" LSP: code [a]ction
+nnoremap <leader>a :LspCodeAction<CR>
+
+" [g]oto [s]ymbol
+noremap gs :ShowOverlay overlay=goto text=@<CR>
 
 """"""""""""""""""""""
 " < Editing

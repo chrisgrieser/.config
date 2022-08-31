@@ -20,11 +20,9 @@ function gitDotfileSync(arg)
 
 	gitDotfileSyncTask = hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		stdErr = stdErr:gsub("\n", " –– ")
-		if exitCode == 0 then
-			log (dotfileIcon.."✅ dotfiles sync ("..deviceName()..")", "./logs/sync.log")
-		else
-			notify(dotfileIcon.."⚠️️ dotfiles "..stdErr)
-			log (dotfileIcon.."⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
+		if exitCode ~= 0 then
+			notify(dotfileIcon.." ⚠️️ dotfiles "..stdErr)
+			log (dotfileIcon.." ⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
 		end
 	end, {arg}):start()
 end
@@ -35,11 +33,9 @@ function gitVaultSync()
 
 	gitVaultSyncTask = hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
 		stdErr = stdErr:gsub("\n", " –– ")
-		if exitCode == 0 then
-			log (vaultIcon.."✅ vault sync ("..deviceName()..")", "./logs/sync.log")
-		else
-			notify(vaultIcon.."⚠️️ vault "..stdErr)
-			log (vaultIcon.."⚠️ vault sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
+		if exitCode ~= 0 then
+			notify(vaultIcon.." ⚠️️ vault "..stdErr)
+			log (vaultIcon.." ⚠️ vault sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
 		end
 	end):start()
 end
