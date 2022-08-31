@@ -288,6 +288,35 @@ exmap prevTab obcommand workspace:previous-tab
 nmap gt :nextTab
 nmap gT :prevTab
 
+workspace:undo-close-pane
+templater-obsidian:Meta/Templater/> Send to Next Pane.md
+pane-relief:swap-prev
+pane-relief:swap-next
+pane-relief:go-prev
+pane-relief:go-next
+pane-relief:win-prev
+pane-relief:win-next
+pane-relief:put-7th
+pane-relief:put-8th
+pane-relief:put-last
+pane-relief:maximize
+pane-relief:ordered-close
+pane-relief:open-new-window
+pane-relief:toggle-sliding
+pane-relief:focus-lock
+
+" swap pane position (Original Vim Bindings)
+" requires Pane Relief Plugin
+exmap swapPane obcommand pane-relief:swap-next
+map <C-w>x :swapPane
+
+" [g]oto next/prev [w]indow (= pane)
+" requires Pane Relief Plugin
+exmap nextPane obcommand pane-relief:go-next
+exmap prevPane obcommand pane-relief:go-prev
+map gw :nextPane
+map gW :prevPane
+
 """"""""""""""""""""""
 " < Folding
 """"""""""""""""""""""
