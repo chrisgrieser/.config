@@ -97,7 +97,7 @@ fileHubWatcher:start()
 alphaDownloadFolder = fileHub
 function installObsiAlpha (files)
 	for _,file in pairs(files) do
-		if not(file:match("^obsidian%-.*%.asar%.gz$")) then return end
+		if not(file:match("/obsidian%-.*%.asar%.gz$")) then return end
 		hs.execute(
 			'cd "'..alphaDownloadFolder..[[" || exit 1
 			gunzip obsidian-*.*.*.asar.gz
