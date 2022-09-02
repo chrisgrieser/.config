@@ -91,3 +91,23 @@ function fromFileHub(files)
 end
 fileHubWatcher = hs.pathwatcher.new(fileHub, fromFileHub)
 fileHubWatcher:start()
+
+--------------------------------------------------------------------------------
+-- auto-install Obsidian Alpha builds as soon as the file is downloaded
+alphaDownloadFolder = fileHub
+function installObsiAlpha (files)
+	for _,file in pairs(files) do
+		if not(file:match("^obsidian%-.*%.asar%.gz$")) then return end
+		hs.execute(
+			'cd "'..alphaDownloadFolder..[[" || exit 1
+			gunzip obsidian-*.*.*.asar.gz
+			mv obsidian-*.*.*.asar "$HOME/Library/Application Support/obsidian/"
+
+			killall "Obsidian"
+			sleep 1
+			open -a "Obsidian" ]]
+		)
+	end
+end
+obsiAlphaWatcher = hs.pathwatcher.new(alphaDownloadFolder, installObsiAlpha)
+obsiAlphaWatcher:start()
