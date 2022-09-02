@@ -66,10 +66,6 @@ function menubarLine ()
 		menubarOverlay:delete()
 		menubarOverlay = nil
 	end
-	if controlCenterOverlay then
-		controlCenterOverlay:delete()
-		controlCenterOverlay = nil
-	end
 
 	local bgColor
 	local menuBarColor
@@ -86,7 +82,6 @@ function menubarLine ()
 	corner2 = hs.drawing.rectangle({x=0, y=23, w=8, h=11})
 	thinLine = hs.drawing.rectangle({x=0, y=24, w=max.w, h=1}) -- wallpaper shining through
 	menubarOverlay = hs.drawing.rectangle({x=50, y=0, w=max.w/2, h=24}) -- x=50 to keep apple logo
-	controlCenterOverlay = hs.drawing.rectangle({x=max.w-195, y=0, w=25, h=24})
 
 	corner1:setFillColor(bgColor)
 	corner1:sendToBack()
@@ -104,11 +99,6 @@ function menubarLine ()
 	thinLine:setFill(true)
 	thinLine:setStrokeColor(bgColor)
 	thinLine:show()
-
-	controlCenterOverlay:setFillColor(menuBarColor)
-	controlCenterOverlay:setFill(true)
-	controlCenterOverlay:setStrokeColor(menuBarColor)
-	controlCenterOverlay:show()
 
 	menubarOverlay:setFillColor(menuBarColor)
 	menubarOverlay:setFill(true)

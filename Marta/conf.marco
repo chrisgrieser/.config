@@ -127,7 +127,7 @@ keyBindings {
     "k" "core.move.up"
     "j" "core.move.down"
     "g" "core.move.home"
-    "o" "core.go"
+    "o" "core.lookup"
     "Shift+O" "core.open.with"
     "Shift+G" "core.move.end"
     "Shift+J" "core.move.half.page.down"
