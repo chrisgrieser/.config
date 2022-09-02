@@ -426,11 +426,10 @@ discordAppWatcher:start()
 
 --------------------------------------------------------------------------------
 
--- test to find out what keeps restarting Finder
--- MACPASS: properly show when activated
+-- quit Finder, when it was launched it wasn't launched manually
 function finderLaunchNotice(appName, eventType, appObject)
 	if not(appName == "Finder") or not(eventType == aw.launched) then return end
-	notify("Finder launched")
+	if not(frontapp("Finder")) then appObject:kill() end
 end
 finderLaunchWatcher = aw.new(finderLaunchNotice)
 finderLaunchWatcher:start()
