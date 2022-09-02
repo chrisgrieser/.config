@@ -77,6 +77,9 @@ matches:
   - trigger: '!carl'
     replace: pins help
     label: Where are the pins in Discord?
+  - trigger: '!carl'
+    replace: insider is beta
+    label: Reminder that Insider builds are meant to be betas
 
   # Utilities
   - trigger: '!carl'
