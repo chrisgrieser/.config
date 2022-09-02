@@ -94,20 +94,37 @@ fileHubWatcher:start()
 
 --------------------------------------------------------------------------------
 -- auto-install Obsidian Alpha builds as soon as the file is downloaded
-alphaDownloadFolder = fileHub
 function installObsiAlpha (files)
 	for _,file in pairs(files) do
-		if not(file:match("/obsidian%-.*%.asar%.gz$")) then return end
-		hs.execute(
-			'cd "'..alphaDownloadFolder..[[" || exit 1
-			gunzip obsidian-*.*.*.asar.gz
-			mv obsidian-*.*.*.asar "$HOME/Library/Application Support/obsidian/"
+		print(file)
 
-			killall "Obsidian"
-			sleep 1
-			open -a "Obsidian" ]]
-		)
+		-- needs delay and crdownload check, since the renaming is sometimes not picked up by hammerspoon
+		if not(file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
+		runDelayed(0.5, function ()
+			hs.execute(
+				'cd "'..fileHub..[[" || exit 1
+				test -f obsidian-*.*.*.asar.gz || exit 1
+				gunzip obsidian-*.*.*.asar.gz
+				mv obsidian-*.*.*.asar "$HOME/Library/Application Support/obsidian/"
+				killall "Obsidian" && sleep 1 && open -a "Obsidian" ]]
+			)
+			-- close the created tab
+			hs.osascript.applescript([[
+				tell application "Brave Browser"
+					set window_list to every window
+					repeat with the_window in window_list
+						set tab_list to every tab in the_window
+						repeat with the_tab in tab_list
+							set the_url to the url of the_tab
+							if the_url contains ("https://cdn.discordapp.com/attachments") then
+								close the_tab
+							end if
+						end repeat
+					end repeat
+				end tell
+			]])
+		end)
 	end
 end
-obsiAlphaWatcher = hs.pathwatcher.new(alphaDownloadFolder, installObsiAlpha)
+obsiAlphaWatcher = hs.pathwatcher.new(fileHub, installObsiAlpha)
 obsiAlphaWatcher:start()
