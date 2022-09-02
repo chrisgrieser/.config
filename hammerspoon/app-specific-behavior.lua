@@ -429,7 +429,9 @@ discordAppWatcher:start()
 -- quit Finder, when it was launched it wasn't launched manually
 function finderLaunchNotice(appName, eventType, appObject)
 	if not(appName == "Finder") or not(eventType == aw.launched) then return end
-	if not(frontapp("Finder")) then appObject:kill() end
+	runDelayed(1, function ()
+		if not(frontapp("Finder")) then hs.application("Finder"):kill() end
+	end)
 end
 finderLaunchWatcher = aw.new(finderLaunchNotice)
 finderLaunchWatcher:start()
