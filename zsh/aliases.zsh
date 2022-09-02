@@ -55,6 +55,7 @@ alias -g G="| grep --color"
 alias -g B="| bat"
 alias -g C="| pbcopy"
 alias -g J="| yq -p=yaml -o=json" # beatify in JSON
+alias -g L="| less" # beatify in JSON
 
 # Suffix Aliases
 # = default command to act upon the filetype, when is is entered
