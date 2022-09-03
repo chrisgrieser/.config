@@ -213,9 +213,6 @@ nnoremap <leader>x mz^lllrx`z
 nnoremap <leader>c mzlEF.yEEp`z
 nnoremap <leader>C lF.d/[.\s]<CR>
 
-" CSS: Important Switcher
-noremap <leader>i :ImportantSwitcher<CR>
-
 " CSS: change [v]alue key
 nnoremap <leader>v ^Ellct;
 
