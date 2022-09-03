@@ -432,6 +432,9 @@ function finderLaunchNotice(appName, eventType, appObject)
 	runDelayed(1, function ()
 		if not(frontapp("Finder")) then hs.application("Finder"):kill() end
 	end)
+	runDelayed(10, function ()
+		if not(frontapp("Finder")) then hs.application("Finder"):kill() end
+	end)
 end
 finderLaunchWatcher = aw.new(finderLaunchNotice)
 finderLaunchWatcher:start()

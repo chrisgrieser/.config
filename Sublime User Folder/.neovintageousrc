@@ -107,7 +107,11 @@ nnoremap <leader>h :LspHover<CR>
 nnoremap <leader>a :LspCodeAction<CR>
 
 " [g]oto [s]ymbol
-noremap gs :ShowOverlay overlay=goto text=@<CR>
+noremap gs :LspDocumentSymbols<CR>
+
+" [g]oto [r]egion
+noremap gr :GotoComment<CR>
+
 
 """"""""""""""""""""""
 " < Editing
