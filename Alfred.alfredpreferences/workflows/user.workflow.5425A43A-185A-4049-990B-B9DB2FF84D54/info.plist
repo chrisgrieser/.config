@@ -149,6 +149,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>930B8E8C-235F-4629-9DDA-7F04ABDE4ED2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A0FAE938-AC0D-4352-B187-8CE398415693</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A0FAE938-AC0D-4352-B187-8CE398415693</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>846A75D1-67B5-4DFC-A2B0-8F8276CA4423</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B3464F95-B489-4113-82A7-9CCB3300B0E1</key>
 		<array>
 			<dict>
@@ -566,6 +592,21 @@ zsh build.sh "$*"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>soundname</key>
+				<string>Blow</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>440612A1-D74A-4799-A0D6-F88760AF14CF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -581,21 +622,6 @@ zsh build.sh "$*"</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>532ED943-AA0D-43A0-BBCF-3EBEA97FFD31</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Blow</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>440612A1-D74A-4799-A0D6-F88760AF14CF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -678,44 +704,86 @@ lineNo="$*"
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>var</string>
+				<string>va</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>definition-shimmering-focus.js</string>
 				<key>subtext</key>
 				<string></string>
-				<key>text</key>
-				<string></string>
+				<key>title</key>
+				<string>🔍 Shimmering Focus Variable</string>
+				<key>type</key>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>69A20D8D-E66E-4B85-AA46-1939C95167DB</string>
+			<string>A0FAE938-AC0D-4352-B187-8CE398415693</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
+				<key>action</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>svg</string>
-				<key>subtext</key>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
 				<string></string>
-				<key>text</key>
-				<string></string>
-				<key>withspace</key>
-				<true/>
+				<key>hotkey</key>
+				<integer>12</integer>
+				<key>hotmod</key>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>Q</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.sublimetext.4</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>D96BC2AD-EC81-4B13-B499-1B0FFC9EB952</string>
+			<string>930B8E8C-235F-4629-9DDA-7F04ABDE4ED2</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -760,6 +828,27 @@ lineNo="$*"
 			<string>F3EA6027-C734-4625-9ECD-2FE2DA83829F</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>svg</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string></string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D96BC2AD-EC81-4B13-B499-1B0FFC9EB952</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -831,13 +920,6 @@ lineNo="$*"
 			<key>ypos</key>
 			<real>360</real>
 		</dict>
-		<key>69A20D8D-E66E-4B85-AA46-1939C95167DB</key>
-		<dict>
-			<key>xpos</key>
-			<real>60</real>
-			<key>ypos</key>
-			<real>510</real>
-		</dict>
 		<key>6C82BEC8-E24E-4C35-9066-32FE30D50429</key>
 		<dict>
 			<key>colorindex</key>
@@ -863,9 +945,9 @@ lineNo="$*"
 			<key>note</key>
 			<string>open at line</string>
 			<key>xpos</key>
-			<real>245</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>425</real>
 		</dict>
 		<key>8627A802-741F-4477-A445-AA3EA82ED4C8</key>
 		<dict>
@@ -887,6 +969,13 @@ lineNo="$*"
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
+		<key>930B8E8C-235F-4629-9DDA-7F04ABDE4ED2</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>525</real>
+		</dict>
 		<key>9D9FB4C3-2338-4F5E-BAB8-DEFB91716031</key>
 		<dict>
 			<key>colorindex</key>
@@ -903,7 +992,18 @@ lineNo="$*"
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>680</real>
+		</dict>
+		<key>A0FAE938-AC0D-4352-B187-8CE398415693</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>Open Shimmering Focus at Variable Defintion</string>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>525</real>
 		</dict>
 		<key>B3464F95-B489-4113-82A7-9CCB3300B0E1</key>
 		<dict>
@@ -930,7 +1030,7 @@ lineNo="$*"
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>680</real>
 		</dict>
 		<key>DDC3D252-6578-4A57-A511-7C45C64C2CA1</key>
 		<dict>
@@ -959,7 +1059,7 @@ lineNo="$*"
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>680</real>
 		</dict>
 		<key>F50EE2DE-822A-4F52-915D-9312B6BD4582</key>
 		<dict>
@@ -974,18 +1074,49 @@ lineNo="$*"
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
-	<key>variables</key>
-	<dict>
-		<key>shimmering_focus_repo_path</key>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Code/shimmering-focus</string>
-		<key>vault_path</key>
-		<string>~/Main Vault/</string>
-	</dict>
-	<key>variablesdontexport</key>
 	<array>
-		<string>shimmering_focus_repo_path</string>
-		<string>vault_path</string>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Code/shimmering-focus</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>to Shimmering Focus CSS File</string>
+			<key>label</key>
+			<string>CSS Path</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>shimmering_focus_repo_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/Main Vault/</string>
+				<key>placeholder</key>
+				<string>~/Main Vault/</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>absolute path</string>
+			<key>label</key>
+			<string>Vault Path</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>vault_path</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string></string>

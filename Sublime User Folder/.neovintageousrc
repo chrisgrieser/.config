@@ -104,7 +104,7 @@ nnoremap gD :LspSymbolReferences fallback=true<CR>
 nnoremap <leader>h :LspHover<CR>
 
 " LSP: code [a]ction
-nnoremap <leader>a :LspCodeAction<CR>
+nnoremap <leader>a :LspCodeActions<CR>
 
 " [g]oto [s]ymbol
 noremap gs :LspDocumentSymbols<CR>
