@@ -35,14 +35,12 @@ const cssVariables = readFile(sfPath)
 	.map(line => {
 		const varName = line.content.replace(cssVarRegex, "$1");
 		const varValue = line.content.replace(cssVarRegex, "$2");
-		let varComment = line.content.replace(cssVarRegex, "$3");
-		if (varComment) varComment = " – " + varComment;
-
+		const varComment = line.content.replace(cssVarRegex, "$3");
 
 		return {
 			"title": varName,
-			"subtitle": `${varValue} ${varComment}`,
-			"match": alfredMatcher (varName),
+			"subtitle": `${varValue}   ${varComment}`,
+			"match": alfredMatcher (varName) + alfredMatcher(varValue),
 			"uid": varName,
 			"arg": line.number,
 		};

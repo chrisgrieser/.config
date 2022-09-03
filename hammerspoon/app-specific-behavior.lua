@@ -430,10 +430,7 @@ discordAppWatcher:start()
 function finderLaunchNotice(appName, eventType, appObject)
 	if not(appName == "Finder") or not(eventType == aw.launched) then return end
 	runDelayed(1, function ()
-		if not(frontapp("Finder")) then hs.application("Finder"):kill() end
-	end)
-	runDelayed(10, function ()
-		if not(frontapp("Finder")) then hs.application("Finder"):kill() end
+		if not(frontapp() == "Finder") then hs.application("Finder"):kill() end
 	end)
 end
 finderLaunchWatcher = aw.new(finderLaunchNotice)
