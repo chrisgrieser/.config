@@ -109,23 +109,23 @@ end
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
-function moveResizeCurWin(direction)
+function moveResizeCurWin(mode)
 	local win = hs.window.focusedWindow()
 	local position
 
-	if (direction == "left") then
+	if (mode == "left") then
 		position = hs.layout.left50
-	elseif (direction == "right") then
+	elseif (mode == "right") then
 		position = hs.layout.right50
-	elseif (direction == "up") then
+	elseif (mode == "up") then
 		position = {x=0, y=0, w=1, h=0.5}
-	elseif (direction == "down") then
+	elseif (mode == "down") then
 		position = {x=0, y=0.5, w=1, h=0.5}
-	elseif (direction == "pseudo-maximized") then
+	elseif (mode == "pseudo-maximized") then
 		position = pseudoMaximized
-	elseif (direction == "maximized") then
+	elseif (mode == "maximized") then
 		position = maximized
-	elseif (direction == "centered") then
+	elseif (mode == "centered") then
 		position = {x=0.2, y=0.1, w=0.6, h=0.8}
 	end
 
@@ -136,6 +136,13 @@ function moveResizeCurWin(direction)
 	elseif win:application():name() == "Obsidian" then toggleObsidianSidebar(win)
 	elseif win:application():name() == "Highlights" then toggleHighlightsSidebar(win)
 	end
+
+	if mode == "pseudo-maximized" then
+		hs.application("Twitterrific"):mainWindow():raise()
+	else
+		hs.application("Twitterrific"):hide()
+	end
+
 end
 
 -- replaces `win:moveToUnit(pos)`
