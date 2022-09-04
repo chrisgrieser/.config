@@ -20,6 +20,7 @@ if isAtMother() then require("hot-corner-action") end
 menubarLine() ---@diagnostic disable-line: undefined-global
 reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
 systemStart() ---@diagnostic disable-line: undefined-global
+killIfRunning("Finder")
 notify("Config reloaded")
 
 

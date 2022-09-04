@@ -27,7 +27,6 @@ wf_browser:subscribe(wf.windowCreated, function ()
 			moveResizeCurWin("maximized")
 		else
 			moveResizeCurWin("pseudo-maximized")
-			hs.application("Twitterrific"):mainWindow():raise()
 		end
 	end
 	if #wf_browser:getWindows() == 2 then
@@ -121,7 +120,6 @@ wf_sublime:subscribe(wf.windowCreated, function (newWindow)
 		moveResizeCurWin("maximized")
 	else
 		moveResizeCurWin("pseudo-maximized")
-		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
 wf_sublime:subscribe(wf.windowDestroyed, function ()
@@ -156,7 +154,6 @@ wf_alacritty:subscribe(wf.windowCreated, function ()
 		moveResizeCurWin("maximized")
 	else
 		moveResizeCurWin("pseudo-maximized")
-		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
 
@@ -186,9 +183,6 @@ wf_alacritty:subscribe(wf.windowFocused, function (focusedWindow)
 			if not(app:name() == "alacritty") then app:hide() end
 		end
 	end)
-	if not(isPseudoMaximized(focusedWindow)) then
-		hs.application("Twitterrific"):hide()
-	end
 end)
 
 --------------------------------------------------------------------------------
@@ -201,9 +195,6 @@ wf_obsidian:subscribe(wf.windowFocused, function (focusedWindow)
 	for i = 1, #wins do
 		local app = wins[i]:application()
 		if not(app:name() == "Obsidian") then app:hide() end
-	end
-	if not(isPseudoMaximized(focusedWindow)) then
-		hs.application("Twitterrific"):hide()
 	end
 end)
 
@@ -256,7 +247,6 @@ wf_marta:subscribe(wf.windowCreated, function ()
 		moveResizeCurWin("maximized")
 	else
 		moveResizeCurWin("pseudo-maximized")
-		hs.application("Twitterrific"):mainWindow():raise()
 	end
 end)
 wf_marta:subscribe(wf.windowDestroyed, function ()
