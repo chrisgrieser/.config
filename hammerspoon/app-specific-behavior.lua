@@ -160,22 +160,6 @@ wf_alacritty:subscribe(wf.windowCreated, function ()
 	end
 end)
 
--- for nicer background pictures together with gransparency
-wf_alacritty:subscribe(wf.windowFocused, function (focusedWindow)
-	runDelayed (0.01, function ()
-		wins = hs.window.orderedWindows() -- as opposed to :allWindows(), this *excludes* headless Twitterrific
-		for i = 1, #wins do
-			local app = wins[i]:application()
-			if not(app:name() == "alacritty") then app:hide() end
-		end
-	end)
-	if not(isPseudoMaximized(focusedWindow)) then
-		hs.application("Twitterrific"):hide()
-	end
-end)
-wf_alacritty:subscribe(wf.windowDestroyed, function ()
-	if #wf_alacritty:getWindows() == 0 then keystroke({"cmd"}, "tab") end -- to prevent empty window left behind
-end)
 
 -- ALACRITTY Man / cheat sheet leaader hotkey
 -- work around necessary, cause alacritty creates multiple instances, i.e.
@@ -190,6 +174,36 @@ hs.urlevent.bind("focus-help", function()
 		win:focus()
 	else
 		notify ("none open")
+	end
+end)
+
+-- for nicer background pictures together with transparency
+wf_alacritty:subscribe(wf.windowFocused, function (focusedWindow)
+	runDelayed (0.01, function ()
+		wins = hs.window.orderedWindows() -- as opposed to :allWindows(), this *excludes* headless Twitterrific
+		for i = 1, #wins do
+			local app = wins[i]:application()
+			if not(app:name() == "alacritty") then app:hide() end
+		end
+	end)
+	if not(isPseudoMaximized(focusedWindow)) then
+		hs.application("Twitterrific"):hide()
+	end
+end)
+
+--------------------------------------------------------------------------------
+
+-- OBSIDIAN
+-- for nicer background pictures together with transparency
+wf_obsidian = wf.new("Obsidian")
+wf_obsidian:subscribe(wf.windowFocused, function (focusedWindow)
+	wins = hs.window.orderedWindows() -- as opposed to :allWindows(), this *excludes* headless Twitterrific
+	for i = 1, #wins do
+		local app = wins[i]:application()
+		if not(app:name() == "Obsidian") then app:hide() end
+	end
+	if not(isPseudoMaximized(focusedWindow)) then
+		hs.application("Twitterrific"):hide()
 	end
 end)
 
