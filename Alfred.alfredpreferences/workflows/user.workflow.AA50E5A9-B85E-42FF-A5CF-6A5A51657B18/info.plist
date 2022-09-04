@@ -60,19 +60,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>3A983C30-3CA9-4BBD-8D1B-BAABCCFA0F38</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CE90C0E2-6FA5-4C58-B04A-13569886DBD8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>48D47FC0-C103-4E74-8DFB-5FA68969DBFD</key>
 		<array>
 			<dict>
@@ -139,7 +126,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>CE90C0E2-6FA5-4C58-B04A-13569886DBD8</string>
+				<string>B5509DDA-D7FD-4F86-B58F-383D0CA69124</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -253,48 +240,10 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>spotify</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Open Spotify-TUI</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>3A983C30-3CA9-4BBD-8D1B-BAABCCFA0F38</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>spt</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
-			<key>uid</key>
-			<string>CE90C0E2-6FA5-4C58-B04A-13569886DBD8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
 				<integer>3</integer>
-				<key>argumenttext</key>
-				<string>like</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -316,6 +265,29 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>9252F241-AE86-432E-A741-75227B1E851B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>alacritty --command spt</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B5509DDA-D7FD-4F86-B58F-383D0CA69124</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -863,9 +835,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>45</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>845</real>
+			<real>695</real>
 		</dict>
 		<key>0C89E83F-2EBC-475C-868A-BDF5E26BF097</key>
 		<dict>
@@ -874,18 +846,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>⏭</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>710</real>
+			<real>560</real>
 		</dict>
 		<key>14B98205-01E6-4375-8D18-8EDD31DA86B0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>1250</real>
+			<real>1100</real>
 		</dict>
 		<key>14DF7AF2-4381-4FFD-BAD2-E76C91A4FBF2</key>
 		<dict>
@@ -894,18 +866,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Play Playlist</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>965</real>
+			<real>815</real>
 		</dict>
 		<key>302BBA3D-DF8C-4F50-959F-F4EB6DE213D8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>690</real>
+			<real>685</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>550</real>
 		</dict>
 		<key>38EBCA09-3B03-4DEB-A7FC-4177C1AABD60</key>
 		<dict>
@@ -914,36 +886,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Playback</string>
 			<key>xpos</key>
-			<real>330</real>
+			<real>325</real>
 			<key>ypos</key>
-			<real>700</real>
-		</dict>
-		<key>3A983C30-3CA9-4BBD-8D1B-BAABCCFA0F38</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>45</real>
-			<key>ypos</key>
-			<real>15</real>
+			<real>550</real>
 		</dict>
 		<key>48D47FC0-C103-4E74-8DFB-5FA68969DBFD</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>215</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>965</real>
+			<real>815</real>
 		</dict>
 		<key>5398DB90-D630-4DBA-86DF-B44D5ECD3F6C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>375</real>
 			<key>ypos</key>
-			<real>1095</real>
+			<real>945</real>
 		</dict>
 		<key>5F660508-CAA5-4E8B-AEC0-D9AE086D1C73</key>
 		<dict>
@@ -952,9 +915,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Play Playlist</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>1115</real>
+			<real>965</real>
 		</dict>
 		<key>73BD8961-0B9D-42B7-8B23-EDAEBD6949DF</key>
 		<dict>
@@ -963,9 +926,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>⏮</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>285</real>
 		</dict>
 		<key>76A5622F-175B-4AB2-8D64-41B97D60EEE5</key>
 		<dict>
@@ -974,20 +937,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>💚</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>150</real>
 		</dict>
 		<key>9252F241-AE86-432E-A741-75227B1E851B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>💚</string>
+			<string>🎤</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>15</real>
 		</dict>
 		<key>A0FE43DC-98A7-4B5C-A2DA-AEE17890B84F</key>
 		<dict>
@@ -996,18 +959,29 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>⏯</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>420</real>
+		</dict>
+		<key>B5509DDA-D7FD-4F86-B58F-383D0CA69124</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>open spt</string>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>B8F7B396-5251-46CD-84A6-97B424BEC02E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>375</real>
 			<key>ypos</key>
-			<real>965</real>
+			<real>815</real>
 		</dict>
 		<key>C94155F1-0E40-46D9-AFC3-21C739F8B557</key>
 		<dict>
@@ -1016,29 +990,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>🔊</string>
 			<key>xpos</key>
-			<real>330</real>
-			<key>ypos</key>
-			<real>395</real>
-		</dict>
-		<key>CE90C0E2-6FA5-4C58-B04A-13569886DBD8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>run spt</string>
-			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>245</real>
 		</dict>
 		<key>E3B9EB88-8AF7-4B8E-9F6A-DF8223E62AC9</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>875</real>
+			<real>725</real>
 		</dict>
 		<key>E8813A0D-4FC1-45E3-9DDC-5DE9E8D3223C</key>
 		<dict>
@@ -1047,9 +1010,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>select Spotify Connect Device</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>1250</real>
+			<real>1100</real>
 		</dict>
 		<key>FA94C925-E85B-4BD2-9D19-C26F2CF06358</key>
 		<dict>
@@ -1058,18 +1021,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Volume</string>
 			<key>xpos</key>
-			<real>530</real>
+			<real>525</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>305</real>
 		</dict>
 		<key>FB42D01D-8AF3-4993-ADB7-DFA8AE7EDE47</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>330</real>
+			<real>325</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>380</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
