@@ -63,8 +63,11 @@ symbol = ""
 [git_state] # mostly conflicts
 style = 'fg:blue bg:black'
 
+# checkout
 [git_commit]
-style = "fg:yellow bg:black"
+style = "fg:purple bg:black"
+only_detached = true
+format = "[$hash]($style) "
 
 # branch
 [git_branch]
