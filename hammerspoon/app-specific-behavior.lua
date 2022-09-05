@@ -267,25 +267,34 @@ wf_zoom:subscribe(wf.windowCreated, function ()
 		runDelayed (1.3, function()
 			hs.application("zoom.us"):findWindow("^Zoom$"):close()
 		end)
-	elseif numberOfZoomWindows == 1 then
-		runDelayed(2, function ()
-			hs.osascript.applescript([[
-				tell application "Brave Browser"
-					set window_list to every window
-					repeat with the_window in window_list
-						set tab_list to every tab in the_window
-						repeat with the_tab in tab_list
-							set the_url to the url of the_tab
-							if the_url contains ("zoom.us") then
-								close the_tab
-							end if
-						end repeat
-					end repeat
-				end tell
-			]])
-		end)
 	end
 end)
+
+function zoomWatcher(appName, eventType)
+	if not(eventType == aw.launched and appName == "zoom.us") then return end
+	spotifyTUI("pause")
+
+	runDelayed(2, function ()
+		hs.osascript.applescript([[
+			tell application "Brave Browser"
+				set window_list to every window
+				repeat with the_window in window_list
+					set tab_list to every tab in the_window
+					repeat with the_tab in tab_list
+						set the_url to the url of the_tab
+						if the_url contains ("zoom.us") then
+							close the_tab
+						end if
+					end repeat
+				end repeat
+			end tell
+		]])
+	end)
+
+end
+zoomAppWatcher = aw.new(zoomWatcher)
+zoomAppWatcher:start()
+
 
 --------------------------------------------------------------------------------
 
