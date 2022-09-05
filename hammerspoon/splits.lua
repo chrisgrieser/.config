@@ -92,7 +92,6 @@ function vsplit (mode)
 		f1 = baseLayout
 		f2 = baseLayout
 		pairedActivation("stop")
-		if hs.application("Twitterrific") then hs.application("Twitterrific"):raise() end
 	elseif mode == "switch" then
 		if (f1.w == f2.w) then
 			f1 = hs.layout.right50
