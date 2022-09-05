@@ -23,15 +23,16 @@ end
 
 -- OBSIDIAN
 -- Sync on Vault close
-function obsidianSync (appName, eventType)
+function obsidianSync (appName, eventType, appObject)
 	if not(appName == "Obsidian") then return end
 	if eventType == aw.launching or eventType == aw.terminated then
 		gitVaultSync() ---@diagnostic disable-line: undefined-global
 	end
 
-	if eventType == aw.activated then
+	local obsiWin = appObject:mainWindow()
+	if eventType == aw.activated and isPseudoMaximized(obsiWin) then
 		hideAllExcept("Obsidian")
-	elseif eventType == aw.deactivated or eventType == aw.terminated then
+	elseif eventType == aw.terminated then
 		unHideAll()
 	end
 end
@@ -198,11 +199,13 @@ hs.urlevent.bind("focus-help", function()
 end)
 
 -- Hide other Apps for nicer background
-function alacrittyWatch (appName, eventType)
+function alacrittyWatch (appName, eventType, appObject)
 	if not(appName == "alacritty") then return end
-	if eventType == aw.activated then
+
+	local alacrittyWin = appObject:mainWindow()
+	if eventType == aw.activated and isPseudoMaximized(alacrittyWin) then
 		hideAllExcept("alacritty")
-	elseif eventType == aw.deactivated or eventType == aw.terminated then
+	elseif eventType == aw.terminated then
 		unHideAll()
 	end
 end
