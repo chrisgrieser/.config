@@ -25,7 +25,6 @@ behavior {
         showGoUpFolder false
         defaults {
             columns ">modified:200"
-            showHiddenFiles true
             ordering {
                 column "modified"
                 isAscending false
