@@ -8,6 +8,19 @@
 	<string>Mini-Apps</string>
 	<key>connections</key>
 	<dict>
+		<key>2245D209-C890-481A-AC66-F6D5B015FA02</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3A2C4213-C10F-4517-856A-17B41D519A7C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>67CDEE43-E332-44C8-A989-E51A7D6EB1E3</key>
 		<array>
 			<dict>
@@ -52,6 +65,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8B5E6418-AE7E-4E95-B133-CC53C1208C8B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BB68E4B1-FF2A-4F66-B37B-14D2A943B776</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2245D209-C890-481A-AC66-F6D5B015FA02</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -288,6 +314,71 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>shadow</string>
+				<key>subtext</key>
+				<string>only affects Screenshot.app itself</string>
+				<key>text</key>
+				<string>Toggle Shadow for Window Screenshots</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>BB68E4B1-FF2A-4F66-B37B-14D2A943B776</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>toggle-screenshot-dropshadow.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2245D209-C890-481A-AC66-F6D5B015FA02</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>3A2C4213-C10F-4517-856A-17B41D519A7C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Dependency: Tesseract
@@ -302,15 +393,35 @@ IMAGE_BASE_NAME needs to be `Pasted image ` for the paste image renamer Obsidian
 	<dict>
 		<key>010166A2-5769-42B4-8975-19AB9F0B46A1</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
 			<real>255</real>
 		</dict>
-		<key>6683D7DE-D787-45CD-9433-8941FCB0F178</key>
+		<key>2245D209-C890-481A-AC66-F6D5B015FA02</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>440</real>
+		</dict>
+		<key>3A2C4213-C10F-4517-856A-17B41D519A7C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>440</real>
+		</dict>
+		<key>6683D7DE-D787-45CD-9433-8941FCB0F178</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
@@ -318,6 +429,8 @@ IMAGE_BASE_NAME needs to be `Pasted image ` for the paste image renamer Obsidian
 		</dict>
 		<key>67CDEE43-E332-44C8-A989-E51A7D6EB1E3</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>note</key>
 			<string>Screenshot Recording</string>
 			<key>xpos</key>
@@ -327,6 +440,8 @@ IMAGE_BASE_NAME needs to be `Pasted image ` for the paste image renamer Obsidian
 		</dict>
 		<key>73FB998B-A01C-4934-961B-430CAA7F9D84</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>note</key>
 			<string>needs tesseract &amp; tesseract-lang</string>
 			<key>xpos</key>
@@ -336,6 +451,8 @@ IMAGE_BASE_NAME needs to be `Pasted image ` for the paste image renamer Obsidian
 		</dict>
 		<key>8B5E6418-AE7E-4E95-B133-CC53C1208C8B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
@@ -343,6 +460,8 @@ IMAGE_BASE_NAME needs to be `Pasted image ` for the paste image renamer Obsidian
 		</dict>
 		<key>AFF0129A-6583-46C6-B35A-42161011F210</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>note</key>
 			<string>Screenshot to Clipboard (compressed)
 
@@ -352,8 +471,19 @@ Press SPACE to toggle to window capture</string>
 			<key>ypos</key>
 			<real>60</real>
 		</dict>
+		<key>BB68E4B1-FF2A-4F66-B37B-14D2A943B776</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>440</real>
+		</dict>
 		<key>D33641C6-9931-4B9A-8E22-E49496723AFD</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>note</key>
 			<string>Screenshot to OCR to Clipboard</string>
 			<key>xpos</key>
@@ -363,6 +493,8 @@ Press SPACE to toggle to window capture</string>
 		</dict>
 		<key>E0911C39-BD31-4E5A-813F-15611D205CB6</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>880</real>
 			<key>ypos</key>
