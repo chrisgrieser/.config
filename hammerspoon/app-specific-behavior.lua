@@ -2,18 +2,41 @@ require("utils")
 require("window-management")
 require("system-and-cron")
 
+function hideAllExcept(appNotToHide)
+	-- for nicer background pictures together with transparency
+	wins = hs.window.orderedWindows() -- `orderedWindows()` ignores headless apps like Twitterrific
+	for i = 1, #wins do
+		local app = wins[i]:application()
+		if not(app:name() == appNotToHide) then app:hide() end
+	end
+end
+
+function unHideAll()
+	wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
+	for i = 1, #wins do
+		local app = wins[i]:application()
+		if app:isHidden() then app:unhide() end
+	end
+end
+
 --------------------------------------------------------------------------------
 
 -- OBSIDIAN
 -- Sync on Vault close
 function obsidianSync (appName, eventType)
-	if not(eventType == aw.launching or eventType == aw.terminated) then return end
 	if not(appName == "Obsidian") then return end
-	gitVaultSync() ---@diagnostic disable-line: undefined-global
-end
+	if eventType == aw.launching or eventType == aw.terminated then
+		gitVaultSync() ---@diagnostic disable-line: undefined-global
+	end
 
-anyAppActivationWatcher = aw.new(obsidianSync )
-anyAppActivationWatcher:start()
+	if eventType == aw.activated then
+		hideAllExcept("Obsidian")
+	elseif eventType == aw.deactivated or eventType == aw.terminated then
+		unHideAll()
+	end
+end
+obsidianWatcher = aw.new(obsidianSync)
+obsidianWatcher:start()
 
 --------------------------------------------------------------------------------
 
@@ -174,29 +197,17 @@ hs.urlevent.bind("focus-help", function()
 	end
 end)
 
--- for nicer background pictures together with transparency
-wf_alacritty:subscribe(wf.windowFocused, function (focusedWindow)
-	runDelayed (0.01, function ()
-		wins = hs.window.orderedWindows() -- as opposed to :allWindows(), this *excludes* headless Twitterrific
-		for i = 1, #wins do
-			local app = wins[i]:application()
-			if not(app:name() == "alacritty") then app:hide() end
-		end
-	end)
-end)
-
---------------------------------------------------------------------------------
-
--- OBSIDIAN
--- for nicer background pictures together with transparency
-wf_obsidian = wf.new("Obsidian")
-wf_obsidian:subscribe(wf.windowFocused, function (focusedWindow)
-	wins = hs.window.orderedWindows() -- as opposed to :allWindows(), this *excludes* headless Twitterrific
-	for i = 1, #wins do
-		local app = wins[i]:application()
-		if not(app:name() == "Obsidian") then app:hide() end
+-- Hide other Apps for nicer background
+function alacrittyWatch (appName, eventType)
+	if not(appName == "alacritty") then return end
+	if eventType == aw.activated then
+		hideAllExcept("alacritty")
+	elseif eventType == aw.deactivated or eventType == aw.terminated then
+		unHideAll()
 	end
-end)
+end
+alacrittyAppWatcher = aw.new(alacrittyWatch)
+alacrittyAppWatcher:start()
 
 --------------------------------------------------------------------------------
 

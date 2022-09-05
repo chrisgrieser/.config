@@ -763,14 +763,14 @@
           },
           "to": [
             {
-              "shell_command": "pbcopy < /dev/null"
+              "shell_command": "pbpaste | pbcopy -pboard ruler # move to alt clipboard\nsleep 0.1\npbcopy < /dev/null # empty the standard clipboard\n"
             },
             {
               "key_code": "vk_none",
               "hold_down_milliseconds": 50
             },
             {
-              "key_code": "c",
+              "key_code": "x",
               "modifiers": [
                 "command"
               ]
@@ -799,6 +799,13 @@
               "modifiers": [
                 "command"
               ]
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 100
+            },
+            {
+              "shell_command": "pbpaste -pboard ruler | pbcopy # restore previous clipboard\n"
             }
           ],
           "conditions": [

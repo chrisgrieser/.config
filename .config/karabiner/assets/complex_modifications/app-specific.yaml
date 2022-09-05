@@ -411,10 +411,13 @@ rules:
             mandatory:
               - command
         to:
-          - shell_command: pbcopy < /dev/null # empty the clipboard
+          - shell_command: |
+              pbpaste | pbcopy -pboard ruler # move to alt clipboard
+              sleep 0.1
+              pbcopy < /dev/null # empty the standard clipboard
           - key_code: vk_none
             hold_down_milliseconds: 50
-          - key_code: c
+          - key_code: x
             modifiers:
               - command
           - key_code: vk_none
@@ -429,6 +432,10 @@ rules:
           - key_code: v
             modifiers:
               - command
+          - key_code: vk_none
+            hold_down_milliseconds: 100
+          - shell_command: |
+              pbpaste -pboard ruler | pbcopy # restore previous clipboard
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:

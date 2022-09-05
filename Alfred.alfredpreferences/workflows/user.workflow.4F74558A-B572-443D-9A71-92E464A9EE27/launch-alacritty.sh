@@ -12,6 +12,8 @@ if [[ "$FRONT_APP" =~ "Finder" ]]; then
 	end tell')
 	[[ -d "$WD" ]] || exit 1
 elif [[ "$FRONT_APP" =~ "sublime_text" ]]; then
+	prevClipboard="$(pbpaste)"
+	sleep 0.05
 	"/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" --command copy_path # using full path makes this work even if `subl` hasn't been added to PATH
 	sleep 0.1
 	WD=$(dirname "$(pbpaste)")
@@ -20,4 +22,6 @@ else
 fi
 
 nohup alacritty --working-directory="$WD" &
-exit
+
+# restore previous clipboard
+[[ "$FRONT_APP" =~ "sublime_text" ]] && echo -n "$prevClipboard" | pbcopy
