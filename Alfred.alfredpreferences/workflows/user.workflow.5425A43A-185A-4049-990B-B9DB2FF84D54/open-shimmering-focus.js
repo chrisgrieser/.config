@@ -18,7 +18,7 @@ const getEnv = (path) => $.getenv(path).replace(/^~/, app.pathTo("home folder"))
 
 const jsonArray = [];
 let i = 0;
-const sfPath = getEnv("vault_path") + "/.obsidian/themes/Shimmering Focus.css";
+const sfPath = getEnv("vault_path") + "/.obsidian/themes/Shimmering Focus/theme.css";
 const navigationMarkers = readFile(sfPath)
 	.split("\n")
 	.map(nm => { i++; return [nm, i] } )

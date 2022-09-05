@@ -149,19 +149,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>930B8E8C-235F-4629-9DDA-7F04ABDE4ED2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A0FAE938-AC0D-4352-B187-8CE398415693</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A0FAE938-AC0D-4352-B187-8CE398415693</key>
 		<array>
 			<dict>
@@ -684,7 +671,7 @@ zsh build.sh "$*"</string>
 				<key>script</key>
 				<string>export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 
-sf_path="${vault_path/#\~/$HOME}""/.obsidian/themes/Shimmering Focus.css"
+sf_path="${vault_path/#\~/$HOME}""/.obsidian/themes/Shimmering Focus/theme.css"
 lineNo="$*"
 "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "$sf_path:$lineNo"</string>
 				<key>scriptargtype</key>
@@ -717,7 +704,7 @@ lineNo="$*"
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>va</string>
+				<string>var</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -749,41 +736,6 @@ lineNo="$*"
 			<string>A0FAE938-AC0D-4352-B187-8CE398415693</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>12</integer>
-				<key>hotmod</key>
-				<integer>917504</integer>
-				<key>hotstring</key>
-				<string>Q</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.sublimetext.4</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>930B8E8C-235F-4629-9DDA-7F04ABDE4ED2</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -945,9 +897,9 @@ lineNo="$*"
 			<key>note</key>
 			<string>open at line</string>
 			<key>xpos</key>
-			<real>395</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>435</real>
 		</dict>
 		<key>8627A802-741F-4477-A445-AA3EA82ED4C8</key>
 		<dict>
@@ -968,13 +920,6 @@ lineNo="$*"
 			<real>170</real>
 			<key>ypos</key>
 			<real>275</real>
-		</dict>
-		<key>930B8E8C-235F-4629-9DDA-7F04ABDE4ED2</key>
-		<dict>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>525</real>
 		</dict>
 		<key>9D9FB4C3-2338-4F5E-BAB8-DEFB91716031</key>
 		<dict>
@@ -1001,9 +946,9 @@ lineNo="$*"
 			<key>note</key>
 			<string>Open Shimmering Focus at Variable Defintion</string>
 			<key>xpos</key>
-			<real>190</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>505</real>
 		</dict>
 		<key>B3464F95-B489-4113-82A7-9CCB3300B0E1</key>
 		<dict>
