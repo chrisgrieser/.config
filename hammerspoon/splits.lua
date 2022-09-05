@@ -34,24 +34,22 @@ function pairedActivation(mode)
 		local app2 = SPLIT_RIGHT:application():name()
 		wf_pairedActivation = wf.new{app1, app2}
 		wf_pairedActivation:subscribe(wf.windowFocused, function(focusedWin)
+			-- not using :focus(), since that would cause infinite recursion
+			-- raising needs small delay, so that focused window is already at front
 			if focusedWin:id() == SPLIT_RIGHT:id() then
-				-- not using :focus(), since that would cause infinite recursion
-				-- raising needs small delay, so that focused window is already at front
 				runDelayed (0.02, function ()	SPLIT_LEFT:raise() end)
 			elseif focusedWin:id() == SPLIT_LEFT:id() then
 				runDelayed (0.02, function ()	SPLIT_RIGHT:raise() end)
 			end
 		end)
 		wf_pairedActivation:subscribe(wf.windowDestroyed, function(closedWin)
-			if closedWin:id() == SPLIT_RIGHT:id() or closedWin:id() == SPLIT_LEFT:id() then
-				vsplit("unsplit")
-			end
+			if not(SPLIT_LEFT and SPLIT_RIGHT) then vsplit("unsplit") end
 		end)
 
 	elseif mode == "stop" then
 		splitStatusMenubar:removeFromMenuBar()
 
-		wf_pairedActivation:unsubscribeAll()
+		if wf_pairedActivation then wf_pairedActivation:unsubscribeAll() end
 		wf_pairedActivation = nil
 	end
 end
