@@ -221,7 +221,7 @@ nnoremap <leader>C lF.d/[.\s]<CR>
 nnoremap <leader>v ^Ellct;
 
 " JS: make template string variable
-nnoremap <leader>t ysiw}i$<Esc>l
+nnoremap <leader>t ysiw}i$<Esc>f}
 
 """"""""""""""""""""""
 " < Visual Mode
