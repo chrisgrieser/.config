@@ -69,6 +69,14 @@ function vi-yank-pbcopy {
 zle -N vi-yank-pbcopy
 bindkey -M vicmd 'y' vi-yank-pbcopy
 
+# q in normal mode exists the Terminal
+function normal-mode-exit {
+	exit
+}
+zle -N normal-mode-exit
+bindkey -M vicmd 'q' normal-mode-exit
+
+
 #-------------------------------------------------------------------------------
 
 # INFO: prompt styling based on vi mode in starship config
