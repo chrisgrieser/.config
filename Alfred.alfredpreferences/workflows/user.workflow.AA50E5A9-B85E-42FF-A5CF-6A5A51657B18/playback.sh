@@ -8,6 +8,9 @@ notification=$(spt playback --$1 --format="$format" 2>&1)
 if [[ "$?" != "0" ]] ; then
 	echo -n "$notification"
 	exit 1
+elif [[ -z "$notification" ]] ; then
+	echo -n "⛔️ Unknown Error"
+	exit 1
 fi
 
 # if shuffle isn't active, activate it
