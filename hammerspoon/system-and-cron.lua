@@ -29,15 +29,15 @@ end
 
 gitVaultScript = vaultLocation.."/Meta/git-vault-sync.sh"
 function gitVaultSync()
-	if gitVaultSyncTask and gitVaultSyncTask:isRunning() then return end
+	-- if gitVaultSyncTask and gitVaultSyncTask:isRunning() then return end
 
-	gitVaultSyncTask = hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
-		stdErr = stdErr:gsub("\n", " –– ")
-		if exitCode ~= 0 then
-			notify(vaultIcon.." ⚠️️ vault "..stdErr)
-			log (vaultIcon.." ⚠️ vault sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
-		end
-	end):start()
+	-- gitVaultSyncTask = hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
+	-- 	stdErr = stdErr:gsub("\n", " –– ")
+	-- 	if exitCode ~= 0 then
+	-- 		notify(vaultIcon.." ⚠️️ vault "..stdErr)
+	-- 		log (vaultIcon.." ⚠️ vault sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
+	-- 	end
+	-- end):start()
 end
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
