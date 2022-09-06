@@ -4,6 +4,7 @@
 
 CUSTOM_ICON_FOLDER="${custom_icon_folder/#\~/$HOME}"
 PWA_FOLDER="${pwa_folder/#\~/$HOME}"
+
 DEVICE_NAME=$(scutil --get ComputerName | cut -d" " -f2-)
 [[ "$DEVICE_NAME" =~ "Leuthinger" ]] && PWA_FOLDER="$HOME/Applications/Brave Browser Apps.localized"
 
@@ -106,14 +107,22 @@ case $APP_TO_UPDATE in
 		NONE_FOUND=1 ;;
 esac
 
+if [[ $INFO_WINDOW == 1 ]]; then
+	sleep 0.1
+	osascript -e 'tell application "System Events"
+	keystroke "v" using {command down}
+	delay 0.1
+	keystroke "w" using {command down}
+end tell'
+sleep 0.05
+fi
+
 if [[ $NONE_FOUND == 0 ]]; then
 	killall "$APP_TO_UPDATE"
-	if [[ $INFO_WINDOW == 0 ]]; then
-		killall "Dock"
-		sleep 2
-		open -a "$APP_TO_UPDATE"
-		echo -n "$APP_TO_UPDATE" # pass for notification
-	fi
+	killall "Dock"
+	sleep 2
+	open -a "$APP_TO_UPDATE"
+	echo -n "$APP_TO_UPDATE" # pass for notification
 else
 	echo -n "No icon set up for $APP_TO_UPDATE."
 fi
