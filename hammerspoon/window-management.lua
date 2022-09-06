@@ -139,8 +139,6 @@ function moveResizeCurWin(mode)
 
 	if mode == "pseudo-maximized" then
 		hs.application("Twitterrific"):mainWindow():raise()
-	else
-		hs.application("Twitterrific"):hide()
 	end
 
 end
