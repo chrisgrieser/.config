@@ -21,7 +21,7 @@ const getEnv = (path) => $.getenv(path).replace(/^~/, app.pathTo("home folder"))
 const cssVarRegex = /^\s+(--[\w-]+): (.+);(\s*\/\*\s?(.*)\s?\*\/)?/;
 
 let lineNo = 0;
-const sfPath = getEnv("vault_path") + "/.obsidian/themes/Shimmering Focus.css";
+const sfPath = getEnv("vault_path") + "/.obsidian/themes/Shimmering Focus/theme.css";
 const cssVariables = readFile(sfPath)
 	.split("\n")
 	.map(line => {
