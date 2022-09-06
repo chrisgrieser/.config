@@ -109,6 +109,9 @@ function homeModeLayout ()
 		hs.layout.apply(homeLayout)
 		showAllSidebars()
 	end)
+	runDelayed(0.4, function ()
+		hs.application("Drafts"):activate()
+	end)
 end
 
 function officeModeLayout ()
