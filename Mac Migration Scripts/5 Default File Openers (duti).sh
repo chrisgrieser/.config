@@ -20,15 +20,6 @@ duti -s com.colliderli.iina m3u8 all
 duti -s com.colliderli.iina mkv all
 duti -s com.colliderli.iina m4a all
 
-# images
-# duti -s com.apple.Preview png all
-# duti -s com.apple.Preview jpg all
-# duti -s com.apple.Preview jpeg all
-# duti -s com.apple.Preview tiff all
-# duti -s com.apple.Preview webp all
-# duti -s com.apple.Preview ico all
-# duti -s com.apple.Preview icns all
-
 # text
 duti -s com.sublimetext.4 public.data all # dotfiles do not have a UTI or file extensions
 duti -s com.apple.automator.Obsidian-Opener md all
@@ -64,12 +55,11 @@ duti -s org.yanex.marta file             # file links
 duti -s marco com.sublimetext.4 all      # marta config files
 defaults write -g NSFileViewer -string org.yanex.marta
 defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="org.yanex.marta";}'
-# ACT then restart mac
+# TODO then restart mac
 
 # to restore Finder as default
 # defaults delete -g NSFileViewer
 # defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="com.apple.finder";}'
-
 # Reference
 # https://binarynights.com/manual#fileviewer
 # https://github.com/marta-file-manager/marta-issues/issues/861

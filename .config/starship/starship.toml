@@ -21,7 +21,7 @@ error_symbol = " [](bold red)"
 [sudo]
 style = 'fg:blue bg:black'
 symbol = " "
-format = " [$symbol]($style)"
+format = "[$symbol]($style)"
 disabled = false
 
 [cmd_duration]

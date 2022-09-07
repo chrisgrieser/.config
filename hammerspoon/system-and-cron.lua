@@ -7,6 +7,8 @@ require("layouts")
 -- CONFIG
 dotfileLocation = home.."/dotfiles"
 vaultLocation = home.."/Main Vault"
+gitDotfileScript = dotfileLocation.."/git-dotfile-sync.sh"
+gitVaultScript = vaultLocation.."/Meta/git-vault-sync.sh"
 dotfileIcon ="⏺"
 vaultIcon = "🟪"
 repoSyncFrequencyMin = 30
@@ -14,7 +16,6 @@ repoSyncFrequencyMin = 30
 --------------------------------------------------------------------------------
 
 -- calling with "--submodules" also updates submodules
-gitDotfileScript = dotfileLocation.."/git-dotfile-sync.sh"
 function gitDotfileSync(arg)
 	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then return end
 
@@ -27,7 +28,8 @@ function gitDotfileSync(arg)
 	end, {arg}):start()
 end
 
-gitVaultScript = vaultLocation.."/Meta/git-vault-sync.sh"
+
+
 function gitVaultSync()
 	if gitVaultSyncTask and gitVaultSyncTask:isRunning() then return end
 
@@ -56,11 +58,11 @@ end)
 --------------------------------------------------------------------------------
 
 function screenSleep (eventType)
-	if not(eventType == hs.caffeinate.watcher.screensDidSleep or eventType == hs.caffeinate.watcher.screensDidLock) then return end
-
-	log ("💤 sleep ("..deviceName()..")", "./logs/sync.log")
-	log ("💤 sleep ("..deviceName()..")", "./logs/some.log")
-	gitDotfileSync()
+	if eventType == hs.caffeinate.watcher.screensDidSleep then
+		log ("💤 sleep ("..deviceName()..")", "./logs/sync.log")
+		log ("💤 sleep ("..deviceName()..")", "./logs/some.log")
+		gitDotfileSync()
+	end
 end
 shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
 shutDownWatcher:start()
@@ -68,33 +70,38 @@ shutDownWatcher:start()
 --------------------------------------------------------------------------------
 -- SYSTEM WAKE/START
 function officeWake (eventType)
-	if not(eventType == hs.caffeinate.watcher.screensDidWake) then return end
-	officeModeLayout() ---@diagnostic disable-line: undefined-global
-	reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
-	gitDotfileSync("--submodules")
-	gitVaultSync()
+	if eventType == hs.caffeinate.watcher.screensDidWake then
+		reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
+		gitDotfileSync("--submodules")
+		gitVaultSync()
+		officeModeLayout() ---@diagnostic disable-line: undefined-global
+	end
 end
 
 function homeWake (eventType)
-	if not(eventType == hs.caffeinate.watcher.systemDidWake) then return end
+	local loggedIn = hs.caffeinate.sessionProperties().kCGSessionLoginDoneKey
+	local unlocked = eventType == hs.caffeinate.watcher.screensDidUnlock
+	local systemWokeUp = eventType == hs.caffeinate.watcher.systemDidWake
 	local currentTimeHours = hs.timer.localTime() / 60 / 60
 
-	if isProjector() then movieModeLayout() ---@diagnostic disable-line: undefined-global
-	else homeModeLayout() end ---@diagnostic disable-line: undefined-global
+	if (systemWokeUp and loggedIn) or unlocked then
 
-	if currentTimeHours < 20 and currentTimeHours > 6 then
-		hs.shortcuts.run("Send Reminders due today to Drafts")
-		setDarkmode(false)
-	else
-		setDarkmode(true)
+		if currentTimeHours < 20 and currentTimeHours > 6 then
+			hs.shortcuts.run("Send Reminders due today to Drafts")
+			setDarkmode(false)
+		else
+			setDarkmode(true)
+		end
+		reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
+		gitDotfileSync("--submodules")
+		gitVaultSync()
+
+		-- should run after git sync, to avoid conflicts
+		if isProjector() then movieModeLayout() ---@diagnostic disable-line: undefined-global
+		else homeModeLayout() end ---@diagnostic disable-line: undefined-global
 	end
-
-	reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
-	gitDotfileSync("--submodules")
-	gitVaultSync()
-
-	runDelayed(1, function() twitterrificAction("scrollup") end) ---@diagnostic disable-line: undefined-global
 end
+
 if isIMacAtHome() or isAtMother() then
 	wakeWatcher = hs.caffeinate.watcher.new(homeWake)
 elseif isAtOffice() then

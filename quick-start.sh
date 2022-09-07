@@ -90,6 +90,7 @@ ln -sf "$DOTFILE_FOLDER/linter rcfiles/.flake8" ~
 ln -sf "$DOTFILE_FOLDER/hammerspoon" ~/.hammerspoon
 
 # Marta
+# Marta as default folder opener set in Duti Script
 ln -sf /Applications/Marta.app/Contents/Resources/launcher /opt/homebrew/bin/marta
 MARTA_DIR=~"/Library/Application Support/org.yanex.marta"
 if [[ -e "$MARTA_DIR" ]] ; then
@@ -98,9 +99,6 @@ else
 	mkdir -p "$MARTA_DIR"
 fi
 ln -sf ~"/dotfiles/Marta" "$MARTA_DIR"
-
-defaults write -g NSFileViewer -string org.yanex.marta
-defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="org.yanex.marta";}'
 
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"

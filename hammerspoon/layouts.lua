@@ -87,8 +87,6 @@ function homeModeLayout ()
 	privateClosers() ---@diagnostic disable-line: undefined-global
 
 	dockSwitcher("home")
-	sublimeFontSize(15)
-	alacrittyFontSize(26)
 
 	local toTheSide = {x=0.815, y=0, w=0.185, h=1}
 	local homeLayout = {
@@ -110,8 +108,18 @@ function homeModeLayout ()
 		showAllSidebars()
 	end)
 	runDelayed(0.4, function ()
+		twitterrificAction("scrollup") ---@diagnostic disable-line: undefined-global
 		hs.application("Drafts"):activate()
 	end)
+
+	-- wait until sync is finished, to avoid merge conflict
+	hs.timer.waitUntil (
+		function () return gitDotfileSyncTask and gitDotfileSyncTask:isRunning() end,
+		function()
+			sublimeFontSize(15)
+			alacrittyFontSize(26)
+		end
+	):start()
 end
 
 function officeModeLayout ()
@@ -127,8 +135,7 @@ function officeModeLayout ()
 	openIfNotRunning("Tweeten")
 	openIfNotRunning("Drafts")
 	killIfRunning("Finder")
-	sublimeFontSize(13)
-	alacrittyFontSize(24)
+
 	dockSwitcher("office") -- includes "Tweeten"
 
 	local bottom = {x=0, y=0.5, w=1, h=0.5}
@@ -156,6 +163,15 @@ function officeModeLayout ()
 	runDelayed(0.4, function ()
 		hs.application("Drafts"):activate()
 	end)
+
+	-- wait until sync is finished, to avoid merge conflict
+	hs.timer.waitUntil (
+		function () return gitDotfileSyncTask and gitDotfileSyncTask:isRunning() end,
+		function()
+			sublimeFontSize(13)
+			alacrittyFontSize(24)
+		end
+	):start()
 end
 
 function motherMovieModeLayout()
