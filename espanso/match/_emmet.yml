@@ -46,14 +46,29 @@ matches:
     replace: "position:relative;"
   - trigger: "posa "
     replace: "position:absolute;"
-  - regex: "tt(?P<value>\\d+) "
+  # accepts negative values
+  - regex: "tt(?P<value>[\\d-]+) "
     replace: "top:{{value}}px;"
-  - regex: "bb(?P<value>\\d+) "
+  - regex: "bb(?P<value>[\\d-]+) "
     replace: "bottom:{{value}}px;"
-  - regex: "rr(?P<value>\\d+) "
+  - regex: "rr(?P<value>[\\d-]+) "
     replace: "right:{{value}}px;"
-  - regex: "ll(?P<value>\\d+) "
+  - regex: "ll(?P<value>[\\d-]+) "
     replace: "left:{{value}}px;"
+
+  # Font
+  - regex: "fs(?P<value>\\d+) "
+    replace: "font-size:{{value}}px;"
+  - regex: "lh(?P<value>[\\d.]+) "
+    replace: "line-height:{{value}};" # accepts float
+
+  # Colors
+  - trigger: "hsl "
+    replace: 'hsl(0$|$ 0% 0%)'
+  - trigger: "rgb "
+    replace: 'rgb(0$|$ 0% 0%)'
+  - regex: "o(?P<value>[\\d.]+) "
+    replace: "opacity:{{value}};" # accepts float
 
   # Misc
   - trigger: "con "
