@@ -47,19 +47,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>3F97A252-A8D5-4A38-9390-01C5E83ADC07</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C2B85F6A-73F7-448A-BD84-A430AC0E230D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4CB01888-1BBF-43A3-B369-5C65420EA7C4</key>
 		<array>
 			<dict>
@@ -413,42 +400,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>brew services restart svim</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
-			<key>uid</key>
-			<string>C2B85F6A-73F7-448A-BD84-A430AC0E230D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>svim</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Restart svim</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>3F97A252-A8D5-4A38-9390-01C5E83ADC07</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -731,13 +682,6 @@
 			<key>ypos</key>
 			<real>485</real>
 		</dict>
-		<key>3F97A252-A8D5-4A38-9390-01C5E83ADC07</key>
-		<dict>
-			<key>xpos</key>
-			<real>430</real>
-			<key>ypos</key>
-			<real>325</real>
-		</dict>
 		<key>49BF37B2-3037-4978-954E-E89973D38B6D</key>
 		<dict>
 			<key>colorindex</key>
@@ -824,13 +768,6 @@
 			<real>230</real>
 			<key>ypos</key>
 			<real>485</real>
-		</dict>
-		<key>C2B85F6A-73F7-448A-BD84-A430AC0E230D</key>
-		<dict>
-			<key>xpos</key>
-			<real>585</real>
-			<key>ypos</key>
-			<real>325</real>
 		</dict>
 		<key>CDDD44C0-E8E4-4F89-8ED9-3DB266215A4B</key>
 		<dict>

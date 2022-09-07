@@ -71,7 +71,6 @@ shutDownWatcher:start()
 -- SYSTEM WAKE/START
 function officeWake (eventType)
 	if eventType == hs.caffeinate.watcher.screensDidWake then
-		reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
 		gitDotfileSync("--submodules")
 		gitVaultSync()
 		officeModeLayout() ---@diagnostic disable-line: undefined-global
@@ -92,7 +91,6 @@ function homeWake (eventType)
 		else
 			setDarkmode(true)
 		end
-		reloadAllMenubarItems() ---@diagnostic disable-line: undefined-global
 		gitDotfileSync("--submodules")
 		gitVaultSync()
 

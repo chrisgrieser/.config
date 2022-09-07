@@ -75,12 +75,6 @@ function menubarLine (menubarVisible)
 	menubarOverlay = hs.drawing.rectangle({x=50, y=0, w=max.w*0.4, h=24}) -- x=50 to keep apple logo
 
 	if menubarVisible == "visible" then
-		corner1:setFillColor(bgColor)
-		corner1:sendToBack()
-		corner1:setFill(true)
-		corner1:setStrokeColor(bgColor)
-		corner1:show()
-
 		corner2:setFillColor(bgColor)
 		corner2:sendToBack()
 		corner2:setFill(true)
@@ -98,6 +92,12 @@ function menubarLine (menubarVisible)
 		menubarOverlay:show()
 	end
 
+	corner1:setFillColor(bgColor)
+	corner1:sendToBack()
+	corner1:setFill(true)
+	corner1:setStrokeColor(bgColor)
+	corner1:show()
+
 
 	if isAtOffice() or isProjector() then return end
 
@@ -105,9 +105,9 @@ function menubarLine (menubarVisible)
 	asdf1 = hs.drawing.rectangle({x=pseudoMaximized.w*max.w-8, y=24, w=18, h=3})
 	asdf2 = hs.drawing.rectangle({x=pseudoMaximized.w*max.w-6, y=27, w=12, h=3})
 	asdf3 = hs.drawing.rectangle({x=pseudoMaximized.w*max.w-3, y=30, w=6, h=3})
-	bsdf3 = hs.drawing.rectangle({x=pseudoMaximized.w*max.w-3, y=max.h+25-9, w=6, h=3})
-	bsdf2 = hs.drawing.rectangle({x=pseudoMaximized.w*max.w-6, y=max.h+25-6, w=12, h=3})
-	bsdf1 = hs.drawing.rectangle({x=pseudoMaximized.w*max.w-8, y=max.h+25-3, w=18, h=3})
+	bsdf3 = hs.drawing.rectangle({x=pseudoMaximized.w*max.w-3, y=max.h-9, w=6, h=3})
+	bsdf2 = hs.drawing.rectangle({x=pseudoMaximized.w*max.w-6, y=max.h-6, w=12, h=3})
+	bsdf1 = hs.drawing.rectangle({x=pseudoMaximized.w*max.w-8, y=max.h-3, w=18, h=3})
 
 	asdf1:setFillColor(bgColor)
 	asdf1:sendToBack()
