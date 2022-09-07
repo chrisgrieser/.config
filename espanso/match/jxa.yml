@@ -84,3 +84,6 @@ matches:
     replace: |
       const vaultPath = $.getenv("vault_path").replace(/^~/, app.pathTo("home folder"));
     label: '🏗 Resolve ~'
+  - trigger: "!browser"
+    replace: const url = Application("Brave Browser").windows[0].activeTab.url();
+    label: '🏗 get Browser URL'

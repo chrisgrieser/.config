@@ -742,6 +742,8 @@ rules:
         - key_code: tab
         - key_code: tab
         - key_code: tab
+        - key_code: vk_none
+          hold_down_milliseconds: 50
         - key_code: spacebar
       conditions:
         - type: frontmost_application_if
