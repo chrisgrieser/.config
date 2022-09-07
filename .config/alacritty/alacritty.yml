@@ -53,7 +53,7 @@ colors:
     text: '0x000000'
     background: '0xb3d7ff'
 font:
-  size: 24
+  size: 26
 
   normal:
     family: JetBrainsMonoNL Nerd Font

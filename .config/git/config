@@ -16,7 +16,7 @@
 [pager]
 	branch = false
 [pull]
-	rebase = true
+	rebase = false
 [status]
 	showUntrackedFiles = all
 [advice]
