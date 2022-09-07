@@ -74,7 +74,7 @@ function menubarLine (menubarVisible)
 	thinLine = hs.drawing.rectangle({x=0, y=24, w=max.w, h=1}) -- wallpaper shining through
 	menubarOverlay = hs.drawing.rectangle({x=50, y=0, w=max.w*0.4, h=24}) -- x=50 to keep apple logo
 
-	if menubarVisible == true then
+	if menubarVisible == "visible" then
 		corner1:setFillColor(bgColor)
 		corner1:sendToBack()
 		corner1:setFill(true)
