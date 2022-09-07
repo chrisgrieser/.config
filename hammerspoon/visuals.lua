@@ -16,7 +16,7 @@ roundedCorners:start()
 
 -- for whatever reason, passing rectangles into a function does not work,
 -- therefore the unrolled madness :(
-function menubarLine ()
+function menubarLine (menubarVisible)
 	if corner1 then
 		corner1:delete()
 		corner1 = nil
@@ -74,27 +74,30 @@ function menubarLine ()
 	thinLine = hs.drawing.rectangle({x=0, y=24, w=max.w, h=1}) -- wallpaper shining through
 	menubarOverlay = hs.drawing.rectangle({x=50, y=0, w=max.w*0.4, h=24}) -- x=50 to keep apple logo
 
-	corner1:setFillColor(bgColor)
-	corner1:sendToBack()
-	corner1:setFill(true)
-	corner1:setStrokeColor(bgColor)
-	corner1:show()
+	if menubarVisible == true then
+		corner1:setFillColor(bgColor)
+		corner1:sendToBack()
+		corner1:setFill(true)
+		corner1:setStrokeColor(bgColor)
+		corner1:show()
 
-	corner2:setFillColor(bgColor)
-	corner2:sendToBack()
-	corner2:setFill(true)
-	corner2:setStrokeColor(bgColor)
-	corner2:show()
+		corner2:setFillColor(bgColor)
+		corner2:sendToBack()
+		corner2:setFill(true)
+		corner2:setStrokeColor(bgColor)
+		corner2:show()
 
-	thinLine:setFillColor(bgColor)
-	thinLine:setFill(true)
-	thinLine:setStrokeColor(bgColor)
-	thinLine:show()
+		thinLine:setFillColor(bgColor)
+		thinLine:setFill(true)
+		thinLine:setStrokeColor(bgColor)
+		thinLine:show()
 
-	menubarOverlay:setFillColor(menuBarColor)
-	menubarOverlay:setFill(true)
-	menubarOverlay:setStrokeColor(menuBarColor)
-	menubarOverlay:show()
+		menubarOverlay:setFillColor(menuBarColor)
+		menubarOverlay:setFill(true)
+		menubarOverlay:setStrokeColor(menuBarColor)
+		menubarOverlay:show()
+	end
+
 
 	if isAtOffice() or isProjector() then return end
 
