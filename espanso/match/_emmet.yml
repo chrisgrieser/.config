@@ -1,0 +1,63 @@
+# https://docs.emmet.io/css-abbreviations/
+# https://espanso.org/docs/matches/regex-triggers
+# ------------------------------------------
+
+# Emmet inspired expansions using regex triggers
+
+matches:
+  # Margin (accepts negative values)
+  - regex: "mr(?P<value>[\\d-]+) "
+    replace: "margin-right:{{value}}px;"
+  - regex: "ml(?P<value>[\\d-]+) "
+    replace: "margin-left:{{value}}px;"
+  - regex: "mt(?P<value>[\\d-]+) "
+    replace: "margin-top:{{value}}px;"
+  - regex: "md(?P<value>[\\d-]+) "
+    replace: "margin-down:{{value}}px;"
+  - regex: "m(?P<value>\\d+) "
+    replace: "margin:{{value}}px$|$;"
+
+  # Padding
+  - regex: "pr(?P<value>\\d+) "
+    replace: "padding-right:{{value}}px;"
+  - regex: "pl(?P<value>\\d+) "
+    replace: "padding-left:{{value}}px;"
+  - regex: "pt(?P<value>\\d+) "
+    replace: "padding-top:{{value}}px;"
+  - regex: "pd(?P<value>\\d+) "
+    replace: "padding-down:{{value}}px;"
+  - regex: "p(?P<value>\\d+) "
+    replace: "padding:{{value}}px$|$;"
+
+  # Border
+  - regex: "br(?P<value>\\d+) "
+    replace: "border-radius:{{value}}px;"
+  - regex: "bo(?P<value>\\d+) "
+    replace: "border:{{value}}px solid black$|$;"
+
+  # Sizes (accepts %)
+  - regex: "w(?P<value>[\\d%]+) "
+    replace: "width:{{value}}px;"
+  - regex: "h(?P<value>[\\d%]+) "
+    replace: "height:{{value}}px;"
+
+  # Position
+  - triggers: ["pos ", "posr"]
+    replace: "position:relative;"
+  - trigger: "posa "
+    replace: "position:absolute;"
+  - regex: "tt(?P<value>\\d+) "
+    replace: "top:{{value}}px;"
+  - regex: "bb(?P<value>\\d+) "
+    replace: "bottom:{{value}}px;"
+  - regex: "rr(?P<value>\\d+) "
+    replace: "right:{{value}}px;"
+  - regex: "ll(?P<value>\\d+) "
+    replace: "left:{{value}}px;"
+
+  # Misc
+  - trigger: "con "
+    replace: 'content: "$|$";'
+  - trigger: "vv "
+    replace: "var(--$|$);"
+
