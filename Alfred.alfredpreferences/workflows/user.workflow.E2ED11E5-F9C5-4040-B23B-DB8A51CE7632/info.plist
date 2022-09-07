@@ -591,7 +591,7 @@ tell application "System Preferences"	activate	reveal pane id "com.apple.prefe
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>--based on https://apple.stackexchange.com/questions/217117/applescript-for-specific-system-preferences-panetell application "System Preferences"	activate	-- get the name of every anchor of pane id "com.apple.preference.security"	reveal anchor "Privacy" of pane id "com.apple.preference.security"end tell</string>
+				<string>--based on https://apple.stackexchange.com/questions/217117/applescript-for-specific-system-preferences-panetell application "System Preferences"	activate		set accessibilityPane to pane id "com.apple.preference.security"		if current pane is not accessibilityPane then				set current pane to accessibilityPane				repeat while current pane is not accessibilityPane			delay 0.25		end repeat				delay 0.25			end if		tell accessibilityPane to reveal anchor "Privacy_Accessibility"	end tell</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
