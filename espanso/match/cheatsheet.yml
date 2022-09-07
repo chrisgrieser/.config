@@ -1,0 +1,13 @@
+# https://github.com/bradyjoslin/espanso-package-cht
+# ------------------------------------------
+
+matches:
+  - regex: "cc (?P<query>.+) cc"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: 'curl "https://cht.sh/$ESPANSO_QUERY?TQ"'
+          shell: bash
+

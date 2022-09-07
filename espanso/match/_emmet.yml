@@ -16,6 +16,16 @@ matches:
     replace: "margin-down:{{value}}px;"
   - regex: "m(?P<value>\\d+) "
     replace: "margin:{{value}}px$|$;"
+  - trigger: "mrv "
+    replace: "margin-right:var(-"
+  - trigger: "mlv "
+    replace: "margin-left:var(-"
+  - trigger: "mtv "
+    replace: "margin-top:var(-"
+  - trigger: "mbv "
+    replace: "margin-bottom:var(-"
+  - trigger: "mv "
+    replace: "margin:var(-"
 
   # Padding
   - regex: "pr(?P<value>\\d+) "
@@ -28,18 +38,36 @@ matches:
     replace: "padding-down:{{value}}px;"
   - regex: "p(?P<value>\\d+) "
     replace: "padding:{{value}}px$|$;"
+  - trigger: "prv "
+    replace: "padding-right:var(-"
+  - trigger: "plv "
+    replace: "padding-left:var(-"
+  - trigger: "ptv "
+    replace: "padding-top:var(-"
+  - trigger: "pbv "
+    replace: "padding-bottom:var(-"
+  - trigger: "pv "
+    replace: "padding:var(-"
 
   # Border
   - regex: "br(?P<value>\\d+) "
     replace: "border-radius:{{value}}px;"
   - regex: "bo(?P<value>\\d+) "
     replace: "border:{{value}}px solid black$|$;"
+  - trigger: "brv "
+    replace: "border-radius:var(-"
+  - trigger: "bov "
+    replace: "border:var(-"
 
   # Sizes (accepts %)
   - regex: "w(?P<value>[\\d%]+) "
     replace: "width:{{value}}px;"
   - regex: "h(?P<value>[\\d%]+) "
     replace: "height:{{value}}px;"
+  - trigger: "wv "
+    replace: "width:var(-"
+  - trigger: "hv "
+    replace: "height:var(-"
 
   # Position
   - triggers: ["pos ", "posr"]
@@ -55,12 +83,24 @@ matches:
     replace: "right:{{value}}px;"
   - regex: "ll(?P<value>[\\d-]+) "
     replace: "left:{{value}}px;"
+  - trigger: "rrv "
+    replace: "right:var(-"
+  - trigger: "llv "
+    replace: "left:var(-"
+  - trigger: "ttv "
+    replace: "top:var(-"
+  - trigger: "bbv "
+    replace: "bottom:var(-"
 
   # Font
   - regex: "fs(?P<value>\\d+) "
     replace: "font-size:{{value}}px;"
   - regex: "lh(?P<value>[\\d.]+) "
     replace: "line-height:{{value}};" # accepts float
+  - trigger: "fsv "
+    replace: "font-size:var(-"
+  - trigger: "lhv "
+    replace: "line-height:var(-"
 
   # Colors
   - trigger: "hsl "
@@ -69,10 +109,10 @@ matches:
     replace: 'rgb(0$|$ 0% 0%)'
   - regex: "o(?P<value>[\\d.]+) "
     replace: "opacity:{{value}};" # accepts float
+  - trigger: "ov "
+    replace: "opacity:var(-"
 
   # Misc
   - trigger: "con "
     replace: 'content: "$|$";'
-  - trigger: "vv "
-    replace: "var(--$|$);"
 
