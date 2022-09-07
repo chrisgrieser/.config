@@ -33,9 +33,6 @@ noremap + *
 " quicker find mode (by mirroring American keyboard layout on German keyboard layout)
 noremap - /
 
-" [M]ute search highlights
-nnoremap <C-m> :nohlsearch<CR>
-
 """"""""""""""""""""""
 " < Nagivation
 """"""""""""""""""""""
@@ -151,7 +148,8 @@ nnoremap Ä dawelpb
 """"""""""""""""""""""
 
 " [M]erge lines
-noremap M J
+nnoremap M J
+vnoremap M J
 
 " Add Blank Line above/below
 nnoremap = mzO<Esc>`z

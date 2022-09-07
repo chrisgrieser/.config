@@ -99,6 +99,9 @@ else
 fi
 ln -sf ~"/dotfiles/Marta" "$MARTA_DIR"
 
+defaults write -g NSFileViewer -string org.yanex.marta
+defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="org.yanex.marta";}'
+
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"
 if [[ -e "$ESPANSO_DIR" ]] ; then
@@ -130,6 +133,7 @@ else
 	mkdir -p ~"/Applications/$BROWSER Apps.localized"
 fi
 ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
+
 
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------

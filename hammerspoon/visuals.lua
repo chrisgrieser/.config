@@ -1,19 +1,6 @@
 require("utils")
 require("window-management")
 require("dark-mode")
---------------------------------------------------------------------------------
-
--- since
-function activationHighlight()
-	local allWins=wf.new(true):setOverrideFilter{allowRoles='AXStandardWindow'}
-
-	-- overlay deactivated by default, so this way *only* the flash is in effect
-	-- however, it only triggers on window creation, not window activation
-	hs.window.highlight.start({} ,allWins)
-	hs.window.highlight.ui.flashDuration = 0.1
-end
-
-if isAtOffice() then activationHighlight() end
 
 --------------------------------------------------------------------------------
 

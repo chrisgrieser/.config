@@ -16,6 +16,7 @@ const layoutArr = app.doShellScript(`ls -1 '${dockSwitcherDir}'`)
 		layout = layout.replace(".plist", "");
 		return {
 			"title": layout,
+			"subtitle": "load",
 			"match": alfredMatcher (layout),
 			"arg": layout,
 			"uid": layout,

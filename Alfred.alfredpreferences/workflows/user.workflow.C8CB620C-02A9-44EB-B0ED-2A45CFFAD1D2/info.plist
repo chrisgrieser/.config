@@ -47,6 +47,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3F97A252-A8D5-4A38-9390-01C5E83ADC07</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C2B85F6A-73F7-448A-BD84-A430AC0E230D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4CB01888-1BBF-43A3-B369-5C65420EA7C4</key>
 		<array>
 			<dict>
@@ -198,6 +211,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>searcher</key>
+				<integer>1635215215</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemwebsearch</string>
+			<key>uid</key>
+			<string>03A61E61-611A-4555-B4F6-30ED79850890</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -213,21 +241,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>6893CDFD-0423-4258-A2EC-B278E825E37C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>searcher</key>
-				<integer>1635215215</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.systemwebsearch</string>
-			<key>uid</key>
-			<string>03A61E61-611A-4555-B4F6-30ED79850890</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -400,25 +413,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-vimrcs.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<string>brew services restart svim</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.terminalcommand</string>
 			<key>uid</key>
-			<string>52E4440D-A985-49F4-913B-DB43D6AED740</string>
+			<string>C2B85F6A-73F7-448A-BD84-A430AC0E230D</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>svim</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Restart svim</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>3F97A252-A8D5-4A38-9390-01C5E83ADC07</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -454,6 +480,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>open-vimrcs.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>52E4440D-A985-49F4-913B-DB43D6AED740</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -471,29 +520,6 @@
 			<string>F34C6943-91F1-4BAD-BAE1-6037B7259020</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>pseudo-firenvim.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>3E8D2030-485F-4B83-975A-2FC01DF2E73C</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -528,6 +554,29 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>6F22BB26-70F0-4240-AEDD-55C5C0011370</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>pseudo-firenvim.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>3E8D2030-485F-4B83-975A-2FC01DF2E73C</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -682,6 +731,13 @@
 			<key>ypos</key>
 			<real>485</real>
 		</dict>
+		<key>3F97A252-A8D5-4A38-9390-01C5E83ADC07</key>
+		<dict>
+			<key>xpos</key>
+			<real>430</real>
+			<key>ypos</key>
+			<real>325</real>
+		</dict>
 		<key>49BF37B2-3037-4978-954E-E89973D38B6D</key>
 		<dict>
 			<key>colorindex</key>
@@ -768,6 +824,13 @@
 			<real>230</real>
 			<key>ypos</key>
 			<real>485</real>
+		</dict>
+		<key>C2B85F6A-73F7-448A-BD84-A430AC0E230D</key>
+		<dict>
+			<key>xpos</key>
+			<real>585</real>
+			<key>ypos</key>
+			<real>325</real>
 		</dict>
 		<key>CDDD44C0-E8E4-4F89-8ED9-3DB266215A4B</key>
 		<dict>

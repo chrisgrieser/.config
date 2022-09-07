@@ -2,21 +2,12 @@ cd ~/Desktop || return
 
 # -------------------
 
-#Application Support
-mkdir -p ~'/Library/Application Support/Alfred/Workflow Data/com.vdesabou.spotify.mini.player/'
-mv -v 'Spotify-Mini-Player/' ~'/Library/Application Support/Alfred/Workflow Data/com.vdesabou.spotify.mini.player/'
-
 # Fonts
 mkdir -p ~'/Library/Fonts'
 mv -v 'Fonts/'* ~'/Library/Fonts'
 
 # iCloud
 mv -vR 'iCloud-Folder/'*(D) ~"/Library/Mobile Documents/com~apple~CloudDocs"
-
-# Browser-Default-Folder
-mkdir -p ~"/Library/Application Support/BraveSoftware/Brave-Browser/Default/"
-mv ~"/Library/Application Support/BraveSoftware/Brave-Browser/Default/" ~/.Trash
-mv -vR 'Browser-Default-Folder/'* ~"/Library/Application Support/BraveSoftware/Brave-Browser/Default/"
 
 # -------------------
 

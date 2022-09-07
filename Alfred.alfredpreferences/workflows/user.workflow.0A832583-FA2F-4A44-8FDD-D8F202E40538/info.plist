@@ -92,9 +92,9 @@
 				<key>keyword</key>
 				<string>dock</string>
 				<key>subtext</key>
-				<string>as: '{query}'</string>
+				<string>current Dock Layout</string>
 				<key>text</key>
-				<string>Save Current Dock Layout</string>
+				<string>Save as '{query}'</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
