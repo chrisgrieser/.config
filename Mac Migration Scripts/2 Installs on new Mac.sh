@@ -44,7 +44,6 @@ espanso service register
 
 # sketchy
 brew services start felixkratz/formulae/sketchybar
-brew services start felixkratz/formulae/svim
 
 # make Finder quittable
 defaults write com.apple.finder QuitMenuItem -bool true

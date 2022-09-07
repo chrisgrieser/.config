@@ -12,15 +12,6 @@ function reloadAllMenubarItems ()
 	updateVaultSyncStatusMenuBar()
 end
 
--- ununsed, but these two can be used to style the emojis in the menubar
--- function notoEmoji(emojiStr)
--- 	return hs.styledtext.new(emojiStr, {font="Noto Emoji"})
--- end
-
--- function helvetica(str)
--- 	return hs.styledtext.new(str, {font="Helvetica"})
--- end
-
 --------------------------------------------------------------------------------
 
 weatherUpdateMin = 15
