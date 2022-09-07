@@ -10,6 +10,6 @@ matches:
         # first space → /, all other spaces "+" for url
         params:
           cmd: |
-            QUERY=$(echo "$ESPANSO_QUERY" | sed 's/ /\//' | tr " " "+"')
+            QUERY=$(echo "$ESPANSO_QUERY" | sed 's/ /\//' | tr " " "+")
             curl "https://cht.sh/$QUERY?TQ"
 
