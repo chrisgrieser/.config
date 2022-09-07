@@ -5,15 +5,11 @@ matches:
   # ",,lang,," will create a code block of the respective language and prefill
   # it with the clipboard content, e.g. `,,js,,`
   - regex: ",,(?P<lang>\\w*),,"
-    replace: "```{{lang}}\n{{clipboard}}\n```"
+    replace: "$|$```{{lang}}\n{{clipboard}}\n```"
     label: Markdown Codeblock
     vars:
-      - name: clipboard
-        type: shell
-        params:
-          # non-macs will require a different command
-          cmd: "pbpaste | sed 's/^\t/  /g'"
-          shell: bash
+    - name: clipboard
+      type: clipboard
 
   - trigger: TTT
     replace: '- [ ] '
