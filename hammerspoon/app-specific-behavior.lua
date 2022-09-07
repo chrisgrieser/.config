@@ -4,15 +4,20 @@ require("system-and-cron")
 
 function hideAllExcept(appNotToHide)
 	-- for nicer background pictures together with transparency
-	wins = hs.window.orderedWindows() -- `orderedWindows()` ignores headless apps like Twitterrific
+	local mainScreen = hs.screen.mainScreen()
+	local wins = hs.window.orderedWindows() -- `orderedWindows()` ignores headless apps like Twitterrific
 	for i = 1, #wins do
 		local app = wins[i]:application()
-		if not(app:name() == appNotToHide) then app:hide() end
+		local winScreen = wins[i]:screen()
+		-- main screen as condition for two-screen setups
+		if not(app:name() == appNotToHide) and winScreen == mainScreen then
+			app:hide()
+		end
 	end
 end
 
 function unHideAll()
-	wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
+	local wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
 	for i = 1, #wins do
 		local app = wins[i]:application()
 		if app:isHidden() then app:unhide() end
