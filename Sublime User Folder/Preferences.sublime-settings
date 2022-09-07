@@ -15,7 +15,7 @@
 
 	"vintageous_i_escape_jj": true,
 
-	"line_numbers": false,
+	"line_numbers": true,
 	"relative_line_numbers": true, // = set relativenumber
 	"scroll_context_lines": 12, // = scroll offset
 
@@ -90,6 +90,9 @@
 	"highlight_modified_tabs": true,
 	"hide_new_tab_button": true,
 	"show_tab_close_buttons": true, // tab headings look off otherwise
+	"auto_hide_tabs": true,
+	"reveal_tabs_with_timeout": true,
+
 
 	// Startup & Exit
 	"save_on_focus_lost": true,
@@ -132,7 +135,7 @@
 	"index_exclude_gitignore": true,
 
 	// Status Bar
-	"auto_hide_status_bar": false,
+	"auto_hide_status_bar": true,
 	"show_sidebar_button": false,
 	"show_indentation": true,
 	"show_syntax": true,
