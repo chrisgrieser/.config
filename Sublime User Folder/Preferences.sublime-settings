@@ -90,8 +90,8 @@
 	"highlight_modified_tabs": true,
 	"hide_new_tab_button": true,
 	"show_tab_close_buttons": true, // tab headings look off otherwise
-	"auto_hide_tabs": true,
-	"reveal_tabs_with_timeout": false, // only in effect if auto-hiding tabs
+	"auto_hide_tabs": false,
+	"reveal_tabs_with_timeout": true, // only in effect if auto-hiding tabs
 
 	// Startup & Exit
 	"save_on_focus_lost": true,

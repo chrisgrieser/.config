@@ -131,63 +131,107 @@ nnoremap <M-Right> e
 nnoremap <M-Left> b
 
 """"""""""""""""""""""
-" Clipboard
+" Base Config
 """"""""""""""""""""""
 
 " yank to system clipboard
 set clipboard=unnamed
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
 
-" show register (i.e., clipboard history)
-nnoremap <C-y> :reg<CR>
-
-" Y consistent with D and C to the end of line
-nnoremap Y y$
-
-" always paste what was yanked (y), not what was deleted (d or c)
-" (gets syntax highlighting of comments, but does work though)
-nnoremap P "0p
-
-""""""""""""""""""""""
-" Search
-""""""""""""""""""""""
-" no modifier key for jumping to next word
-nnoremap + *
+" no modfier key for jumping to next word
+noremap + *
 
 " quicker find mode (by mirroring American keyboard layout on German keyboard layout)
-nnoremap - /
+noremap - /
 
-" Quickly remove search highlights
-nnoremap <C-m> :nohlsearch<CR>
+nnoremap Y y$
 
-""""""""""""""""""""""
-" Editing
-""""""""""""""""""""""
+" Have j and k navigate visual lines rather than logical ones
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
 
-" backspace works in normal mode like in insert mode & consistent with <del>
-nnoremap <BS> X
-vnoremap <BS> xh
+" HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
+" h 0^ ensures scrolling to the left (when there is no wrapping)
+nnoremap H 0^
+vnoremap H ^
+noremap L $
+noremap J 7j
+noremap K 7k
 
-" allows Double Enter to add new line and indent
-nnoremap <CR> A
+" cause easier to press, lol
+noremap [ {
+noremap ] }
 
-" More logical undo
-nnoremap U <C-r>
+" Goto Mark
+nnoremap ä `
 
-" quicker way to change word
-nnoremap <Space> ciw
-nnoremap <S-Space> daw
-vnoremap <Space> c
+" Consistent with Insert Mode Selection
+vnoremap <BS> "_d
 
-""""""""""""""""""""""
-" Insert Mode
-""""""""""""""""""""""
+" CASE SWITCH (added h for vertical navigation)
+nnoremap Ü ~h
+" Switch Case of first letter of the word = (toggle between Capital and lower case)
+nnoremap ü mzlblgueh~`z
 
-" Kill line
-inoremap <C-k> <Esc>C
+" TRANSPOSE
+" current & next char
+nnoremap ö xp
+" current & previous char
+nnoremap Ö xhhp
+" current & next word
+nnoremap Ä dawelpb
 
+" [M]erge lines
+nnoremap M J
 
-""""""""""""""""""""""
-" Misc
-""""""""""""""""""""""
-" quicker access to help command-ids
-nnoremap ? :help
+" Add Blank Line above/below
+nnoremap = mzO<Esc>`z
+nnoremap _ mzo<Esc>`z
+" these require cursor being on the right end of the selection though...
+vnoremap = <Esc>O<Esc>gv
+vnoremap _ <Esc>o<Esc>gv
+
+" Append punctuation to end of line
+nnoremap <leader>, mzA,<Esc>`z
+nnoremap <leader>; mzA;<Esc>`z
+nnoremap <leader>. mzA.<Esc>`z
+nnoremap <leader>" mzA"<Esc>`z
+nnoremap <leader>' mzA'<Esc>`z
+nnoremap <leader>: mzA:<Esc>`z
+nnoremap <leader>) mzA)<Esc>`z
+nnoremap <leader>( mzA(<Esc>`z
+nnoremap <leader>] mzA]<Esc>`z
+nnoremap <leader>[ mzA[<Esc>`z
+nnoremap <leader>{ mzA{<Esc>`z
+nnoremap <leader>} mzA}<Esc>`z
+nnoremap <leader>} mzA}<Esc>`z
+
+" append space
+nnoremap ! a <Esc>hh
+
+" Remove last character from line
+nnoremap X mz$"_x`z
+
+" Make indention work like in other editors
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+" Change Word/Selection
+nnoremap <Space> "_ciw
+nmap <Space> ciw
+vnoremap <Space> "_c
+
+" Delete Word/Selection
+nnoremap <S-Space> "_daw
+vnoremap <S-Space> "_d
+
+" [R]eplace Word with register content
+nnoremap R viw"0p
+vnoremap R "0P
