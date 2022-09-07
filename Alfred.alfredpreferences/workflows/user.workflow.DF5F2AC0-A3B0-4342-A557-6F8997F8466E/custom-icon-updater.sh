@@ -54,6 +54,9 @@ case $APP_TO_UPDATE in
 	"MacPass")
 		cp "$CUSTOM_ICON_FOLDER/MacPass.icns" 'MacPass.app/Contents/Resources/MacPassAppIcon.icns'
 		touch "MacPass.app" ;;
+	"Tweeten")
+		cp "$CUSTOM_ICON_FOLDER/Twitter.icns" 'Tweeten.app/Contents/Resources/Tweeten.icns'
+		touch "Tweeten.app" ;;
 	"Discord")
 		cp "$CUSTOM_ICON_FOLDER/Discord Black.icns" 'Discord.app/Contents/Resources/electron.icns'
 		touch "Discord.app" ;;
@@ -108,13 +111,15 @@ case $APP_TO_UPDATE in
 esac
 
 if [[ $INFO_WINDOW == 1 ]]; then
-	sleep 0.1
+	sleep 0.2
 	osascript -e 'tell application "System Events"
+	keystroke tab
+	delay 0.1
 	keystroke "v" using {command down}
 	delay 0.1
 	keystroke "w" using {command down}
 end tell'
-sleep 0.05
+sleep 0.2
 fi
 
 if [[ $NONE_FOUND == 0 ]]; then
