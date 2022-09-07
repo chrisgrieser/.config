@@ -3,11 +3,13 @@
 
 matches:
   - regex: "cc (?P<query>.+) cc"
-    replace: "{{output}}"
+    replace: "\n{{output}}"
     vars:
       - name: output
         type: shell
+        # first space → /, all other spaces "+" for url
         params:
-          cmd: 'curl "https://cht.sh/$ESPANSO_QUERY?TQ"'
-          shell: bash
+          cmd: |
+            QUERY=$(echo "$ESPANSO_QUERY" | sed 's/ /\//' | tr " " "+"')
+            curl "https://cht.sh/$QUERY?TQ"
 
