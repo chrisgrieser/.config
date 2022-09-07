@@ -129,6 +129,7 @@ function officeModeLayout ()
 	killIfRunning("Finder")
 	sublimeFontSize(13)
 	alacrittyFontSize(24)
+	dockSwitcher("office") -- includes "Tweeten"
 
 	local bottom = {x=0, y=0.5, w=1, h=0.5}
 	local top = {x=0, y=0, w=1, h=0.5}
@@ -151,6 +152,9 @@ function officeModeLayout ()
 	runDelayed(0.3, function ()
 		hs.layout.apply(officeLayout)
 		showAllSidebars()
+	end)
+	runDelayed(0.4, function ()
+		hs.application("Drafts"):activate()
 	end)
 end
 

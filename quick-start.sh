@@ -46,8 +46,10 @@ osascript -e '
 # DOTFILES / VAULT
 
 cd ~
-git clone --recurse-submodules git@github.com:chrisgrieser/dotfiles.git
 git clone git@github.com:chrisgrieser/main-vault-backup.git
+git clone --recurse-submodules git@github.com:chrisgrieser/dotfiles.git
+cd ~/dotfiles
+git submodule foreach git checkout main
 mv "main-vault-backup" "Main Vault"
 
 # load Dock from dotfiles
@@ -128,15 +130,6 @@ else
 	mkdir -p ~"/Applications/$BROWSER Apps.localized"
 fi
 ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
-
-# Übersicht
-UEBRSICHT_DIR=~"/Library/Application Support/Übersicht/widgets/"
-if [[ -e "$UEBRSICHT_DIR" ]] ; then
-	rm -rf "$UEBRSICHT_DIR"
-else
-	mkdir -p "$UEBRSICHT_DIR"
-fi
-ln -sf "$DOTFILE_FOLDER/ubersicht" "$UEBRSICHT_DIR"
 
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
