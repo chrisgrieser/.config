@@ -157,3 +157,8 @@ matches:
   - trigger: jsut
     replace: just
     word: true
+  - trigger: ntoes
+    replace: notes
+    word: true
+  - trigger: int eh
+    replace: in the
