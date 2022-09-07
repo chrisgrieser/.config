@@ -34,9 +34,9 @@ sketchybar --bar height=25        \
 
 sketchybar --default updates=when_shown                    \
                      drawing=on                            \
-                     icon.font="Input:Bold:15.0"  \
+                     icon.font="Helvetica:Bold:13.0"  \
                      icon.color=0xffffffff                 \
-                     label.font="Input:Bold:14.0" \
+                     label.font="Recursive:Bold:14.0" \
                      label.color=0xffffffff                \
                      label.padding_left=4                  \
                      label.padding_right=4                 \
@@ -57,15 +57,19 @@ sketchybar --default updates=when_shown                    \
 sketchybar --add item clock right                        \
            --set clock   update_freq=1                   \
                          script="$PLUGIN_DIR/clock.sh"   \
+                         y_offset=2                       \
            --add item weather right                      \
            --set weather update_freq=900                 \
                          script="$PLUGIN_DIR/weather.sh" \
+                         y_offset=2                       \
            --add item covid-stats right                  \
            --set covid-stats update_freq=43200           \
                          script="$PLUGIN_DIR/covid-stats.sh" \
+                         y_offset=2                       \
            --add item git-sync right                     \
-           --set git-sync update_freq=60                 \
-                         script="$PLUGIN_DIR/git-sync.sh"
+           --set git-sync update_freq=90                 \
+                         script="$PLUGIN_DIR/git-sync.sh" \
+                         y_offset=2
 
 ##### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration and
