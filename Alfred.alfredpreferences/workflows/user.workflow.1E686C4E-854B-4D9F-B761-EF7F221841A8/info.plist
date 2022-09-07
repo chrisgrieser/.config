@@ -445,21 +445,21 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>skipvarencode</key>
+				<key>onlyshowifquerypopulated</key>
 				<false/>
-				<key>spaces</key>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
 				<string></string>
-				<key>url</key>
-				<string>hammerspoon://sync-repos</string>
+				<key>title</key>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
+			<string>0E91D870-C8B9-49BA-B676-8E4DE6AF892F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -487,21 +487,21 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
+				<key>browser</key>
 				<string></string>
-				<key>title</key>
-				<string>{query}</string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>hammerspoon://sync-repos</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>0E91D870-C8B9-49BA-B676-8E4DE6AF892F</string>
+			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -806,9 +806,9 @@ window_name</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>690</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>150</real>
 		</dict>
 		<key>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</key>
 		<dict>
@@ -817,7 +817,7 @@ window_name</string>
 			<key>xpos</key>
 			<real>685</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>440</real>
 		</dict>
 		<key>387E93E5-B099-4784-8538-0CE2E9086D86</key>
 		<dict>
@@ -855,7 +855,7 @@ window_name</string>
 			<key>xpos</key>
 			<real>685</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>300</real>
 		</dict>
 		<key>936424AC-32E2-4193-B07C-DDB804AEF807</key>
 		<dict>
@@ -924,7 +924,7 @@ window_name</string>
 			<key>xpos</key>
 			<real>535</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>300</real>
 		</dict>
 		<key>E9FF31BC-709C-4387-975A-0B1410418161</key>
 		<dict>
@@ -933,7 +933,7 @@ window_name</string>
 			<key>xpos</key>
 			<real>535</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>440</real>
 		</dict>
 		<key>F0068510-5EA9-467B-8CAB-E5A736B52AE8</key>
 		<dict>
