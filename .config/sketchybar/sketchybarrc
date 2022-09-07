@@ -1,0 +1,68 @@
+# This is a demo config to show some of the most important commands more easily.
+# This is meant to be changed and configured, as it is intentionally kept sparse.
+# For a more advanced configuration example see my dotfiles:
+# https://github.com/FelixKratz/dotfiles
+
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+
+##### Bar Appearance #####
+# Configuring the general appearance of the bar, these are only some of the
+# options available. For all options see:
+# https://felixkratz.github.io/SketchyBar/config/bar
+# If you are looking for other colors, see the color picker:
+# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+
+sketchybar --bar height=25        \
+                 position=top     \
+                 padding_left=10  \
+                 padding_right=10 \
+                 color=0xff4a4a4a
+
+##### Changing Defaults #####
+# We now change some default values that are applied to all further items
+# For a full list of all available item properties see:
+# https://felixkratz.github.io/SketchyBar/config/items
+
+sketchybar --default updates=when_shown                    \
+                     drawing=on                            \
+                     icon.font="JetbrainsMonoNL Nerd Font:Bold:19.0"  \
+                     icon.color=0xffffffff                 \
+                     label.font="JetbrainsMonoNL Nerd Font:Bold:17.0" \
+                     label.color=0xffffffff                \
+                     label.padding_left=4                  \
+                     label.padding_right=4                 \
+                     icon.padding_left=4                   \
+                     icon.padding_right=4
+
+
+##### Adding Left Items #####
+# We add some regular items to the left side of the bar
+# only the properties deviating from the current defaults need to be set
+
+sketchybar --add item space_separator left                            \
+           --set space_separator icon=                               \
+                                 background.padding_left=15           \
+                                 background.padding_right=15          \
+                                 label.drawing=off                    \
+                                                                      \
+           --add item window_title left                               \
+           --set window_title    script="$PLUGIN_DIR/window_title.sh" \
+                                 icon.drawing=off                     \
+           --subscribe window_title front_app_switched
+
+##### Adding Right Items #####
+# In the same way as the left items we can add items to the right side.
+# Additional position (e.g. center) are available, see:
+# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
+
+sketchybar --add item clock right                        \
+           --set clock   update_freq=10                  \
+                         script="$PLUGIN_DIR/clock.sh"
+
+##### Finalizing Setup #####
+# The below command is only needed at the end of the initial configuration and
+# should never be run in an item script.
+
+sketchybar --update
+
+echo "sketchybar configuration loaded.."
