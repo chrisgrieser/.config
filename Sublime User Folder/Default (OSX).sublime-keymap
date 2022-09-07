@@ -16,6 +16,13 @@
 // ----------------------------------------------------------------------------
 [
 
+	// emmet
+	{
+	    "keys": ["shift+control+alt+space"],
+	    "command": "emmet_expand_abbreviation"
+	},
+
+
 	// MEH Bindings (shift+control+alt = meh)
 
 	// Change Color Scheme
