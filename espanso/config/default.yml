@@ -4,7 +4,7 @@
 toggle_key: OFF  # yamllint disable-line rule:truthy
 search_shortcut: META+ALT+SPACE
 
-show_icon: false
+# show_icon: false
 show_notifications: true
 
 # Enable/disable the config auto-reload after a file change is detected.
