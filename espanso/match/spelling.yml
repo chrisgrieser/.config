@@ -145,8 +145,6 @@ matches:
   - trigger: mroe
     replace: more
     word: true
-  - trigger: blabb
-    replace: blubb
   - trigger: woudl
     replace: would
   - trigger: calender
@@ -154,6 +152,7 @@ matches:
     propagate_case: true
   - trigger: coudl
     replace: could
+    word: true
   - trigger: jsut
     replace: just
     word: true
@@ -162,3 +161,6 @@ matches:
     word: true
   - trigger: int eh
     replace: in the
+  - trigger: nwo
+    replace: now
+    word: true
