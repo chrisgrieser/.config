@@ -22,12 +22,8 @@ typeset -A ZSH_HIGHLIGHT_REGEXP
 ZSH_HIGHLIGHT_REGEXP+=('^(git commit -m|acp|amend) .{50,}' 'fg=white,bold,bg=red')
 # dangerous stuff
 ZSH_HIGHLIGHT_REGEXP+=('(git reset --hard|rm -r?f) .*' 'fg=white,bold,bg=red')
-# global aliases
-ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
+# NOTE: There are also some custom highlights for global aliases int eh aliases.zsh
+
 
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)

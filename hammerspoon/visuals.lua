@@ -81,7 +81,7 @@ function menubarLine ()
 	corner1 = hs.drawing.rectangle({x=max.w-8, y=23, w=8, h=11})
 	corner2 = hs.drawing.rectangle({x=0, y=23, w=8, h=11})
 	thinLine = hs.drawing.rectangle({x=0, y=24, w=max.w, h=1}) -- wallpaper shining through
-	menubarOverlay = hs.drawing.rectangle({x=50, y=0, w=max.w/2, h=24}) -- x=50 to keep apple logo
+	menubarOverlay = hs.drawing.rectangle({x=50, y=0, w=max.w/3, h=24}) -- x=50 to keep apple logo
 
 	corner1:setFillColor(bgColor)
 	corner1:sendToBack()

@@ -54,8 +54,16 @@ alias -g H="--help"
 alias -g G="| grep --color"
 alias -g B="| bat"
 alias -g C="| pbcopy"
-alias -g J="| yq -p=yaml -o=json" # beatify in JSON
-alias -g L="| less" # beatify in JSON
+alias -g J="| yq -p=yaml -o=json" # beautify in JSON
+alias -g L="| less"
+
+# highlights for them
+ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' L$' 'fg=magenta,bold')
 
 # Suffix Aliases
 # = default command to act upon the filetype, when is is entered
