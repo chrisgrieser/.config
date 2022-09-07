@@ -159,6 +159,8 @@
 	// Sidebar
 	{ "keys": ["super+1"], "command": "toggle_side_bar" },
 	{ "keys": ["super+0"], "command": "toggle_tabs" },
+	{ "keys": ["super+9"], "command": "toggle_status_bar" },
+
 
 	// FILE MANAGEMENT
 	{ "keys": ["super+n"], "command": "advanced_new_file_new"},
