@@ -29,6 +29,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>18F1473F-54DE-48F6-B18D-838C540701AF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>986C033D-6BCE-4098-9098-F4A46BF1703B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>79DED58A-3D58-4E4A-A77D-EC3AE4C80916</key>
 		<array>
 			<dict>
@@ -60,7 +73,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Dock Switcher</string>
+	<string>Dock &amp; Menu Bar</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -225,6 +238,52 @@ zsh "$dock_switcher_path" --load "$1"</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+brew services restart felixkratz/formulae/sketchybar</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>986C033D-6BCE-4098-9098-F4A46BF1703B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>bar</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Reload SketchyBar</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>18F1473F-54DE-48F6-B18D-838C540701AF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -238,6 +297,13 @@ zsh "$dock_switcher_path" --load "$1"</string>
 			<real>100</real>
 			<key>ypos</key>
 			<real>450</real>
+		</dict>
+		<key>18F1473F-54DE-48F6-B18D-838C540701AF</key>
+		<dict>
+			<key>xpos</key>
+			<real>100</real>
+			<key>ypos</key>
+			<real>670</real>
 		</dict>
 		<key>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</key>
 		<dict>
@@ -268,6 +334,13 @@ zsh "$dock_switcher_path" --load "$1"</string>
 			<real>100</real>
 			<key>ypos</key>
 			<real>200</real>
+		</dict>
+		<key>986C033D-6BCE-4098-9098-F4A46BF1703B</key>
+		<dict>
+			<key>xpos</key>
+			<real>315</real>
+			<key>ypos</key>
+			<real>670</real>
 		</dict>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<dict>
