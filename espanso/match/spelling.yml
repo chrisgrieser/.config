@@ -166,3 +166,7 @@ matches:
     word: true
   - trigger: hwo
     replace: how
+    word: true
+  - trigger: ot
+    replace: to
+    word: true
