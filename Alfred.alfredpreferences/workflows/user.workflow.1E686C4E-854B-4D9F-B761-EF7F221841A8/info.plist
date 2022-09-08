@@ -445,6 +445,27 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>hammerspoon://sync-repos</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -481,27 +502,6 @@ window_name</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>hammerspoon://sync-repos</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -931,7 +931,7 @@ window_name</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>535</real>
+			<real>530</real>
 			<key>ypos</key>
 			<real>440</real>
 		</dict>
