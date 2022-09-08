@@ -4,7 +4,6 @@
 
 ################################################################################
 
-
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 
 ##### Bar Appearance #####
@@ -14,16 +13,17 @@ PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-IS_DARK_MODE=$(osascript -e 'tell application "System Events" to return dark mode of appearance preferences')
-if [[ "$IS_DARK_MODE" == "true" ]]; then
-	BG_COLOR="0xff333333"
-else
-	BG_COLOR="0xffcdcdcd"
-fi
+BG_COLOR="0xff333333"
+# IS_DARK_MODE=$(osascript -e 'tell application "System Events" to return dark mode of appearance preferences')
+# if [[ "$IS_DARK_MODE" == "true" ]]; then
+# 	BG_COLOR="0xff333333"
+# else
+# 	BG_COLOR="0xffcdcdcd"
+# fi
 
 sketchybar --bar height=25        \
                  position=top     \
-                 padding_left=10  \
+                 padding_left=7  \
                  padding_right=7 \
                  color="$BG_COLOR"
 
@@ -55,7 +55,7 @@ sketchybar --default updates=when_shown                    \
 # https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
 
 sketchybar --add item clock right                        \
-           --set clock   update_freq=1                   \
+           --set clock   update_freq=60                   \
                          script="$PLUGIN_DIR/clock.sh"   \
                          y_offset=2                       \
            --add item weather right                      \
