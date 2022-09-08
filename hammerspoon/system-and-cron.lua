@@ -94,7 +94,7 @@ function homeWake (eventType)
 
 	if (systemWokeUp and loggedIn) or unlocked then
 
-		if currentTimeHours < 20 and currentTimeHours > 6 then
+		if currentTimeHours < 19 and currentTimeHours > 7 then
 			hs.shortcuts.run("Send Reminders due today to Drafts")
 			setDarkmode(false)
 		else
