@@ -52,7 +52,7 @@ function movieModeLayout()
 	iMacDisplay:setBrightness(0)
 
 	openIfNotRunning("YouTube")
-	runDelayed(1, function () openIfNotRunning("YouTube") end) -- safety redundancy
+	runDelayed(0.5, function () openIfNotRunning("YouTube") end) -- safety redundancy
 
 	killIfRunning("Finder")
 	killIfRunning("Obsidian")
@@ -66,6 +66,9 @@ function movieModeLayout()
 	killIfRunning("alacritty")
 
 	dockSwitcher("movie")
+
+	local twitterrificWin = hs.application("Twitterrific"):mainWindow()
+	moveResize(twitterrificWin, toTheSide)
 end
 
 function homeModeLayout ()
@@ -88,7 +91,6 @@ function homeModeLayout ()
 
 	dockSwitcher("home")
 
-	local toTheSide = {x=0.815, y=0.025, w=0.185, h=0.975}
 	local homeLayout = {
 		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
 		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
@@ -103,12 +105,14 @@ function homeModeLayout ()
 	}
 
 	hs.layout.apply(homeLayout)
-	runDelayed(0.3, function ()
+	runDelayed(0.25, function ()
 		hs.layout.apply(homeLayout)
 		showAllSidebars()
 	end)
-	runDelayed(0.4, function ()
+	runDelayed(0.35, function ()
 		twitterrificAction("scrollup") ---@diagnostic disable-line: undefined-global
+	end)
+	runDelayed(0.45, function ()
 		hs.application("Drafts"):activate()
 	end)
 

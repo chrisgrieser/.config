@@ -5,6 +5,7 @@ require("twitterrific-controls")
 -- WINDOW MANAGEMENT UTILS
 maximized = hs.layout.maximized
 iMacDisplay = hs.screen("Built%-in") -- % to escape hyphen (is a quantifier in lua patterns)
+toTheSide = {x=0.815, y=0.025, w=0.185, h=0.975}
 
 -- device-specific parameters
 if isIMacAtHome() then
@@ -129,8 +130,7 @@ function moveResizeCurWin(mode)
 		position = {x=0.2, y=0.1, w=0.6, h=0.8}
 	end
 
-	-- workaround for https://github.com/Hammerspoon/hammerspoon/issues/2316
-	moveResize(win, position)
+	moveResize(win, position) -- workaround for https://github.com/Hammerspoon/hammerspoon/issues/2316
 
 	if win:application():name() == "Drafts" then toggleDraftsSidebar(win)
 	elseif win:application():name() == "Obsidian" then toggleObsidianSidebar(win)
@@ -147,9 +147,8 @@ end
 function moveResize(win, pos)
 	win:moveToUnit(pos)
 	-- has to repeat due window creation delay for some apps
-	runDelayed(0.3, function () win:moveToUnit(pos) end):start()
-	runDelayed(0.6, function () win:moveToUnit(pos) end):start()
-	runDelayed(0.9, function () win:moveToUnit(pos) end):start()
+	runDelayed(0.25, function () win:moveToUnit(pos) end):start()
+	runDelayed(0.5, function () win:moveToUnit(pos) end):start()
 end
 
 function moveToOtherDisplay ()

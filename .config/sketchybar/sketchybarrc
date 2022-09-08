@@ -41,7 +41,7 @@ sketchybar --bar height=35                              \
 # https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
 
 sketchybar --add item clock right                            \
-           --set clock   update_freq=60                      \
+           --set clock   update_freq=1                       \
                          script="$PLUGIN_DIR/clock.sh"       \
                          y_offset="$ITEM_Y_OFFSET"           \
                          width=120                           \
