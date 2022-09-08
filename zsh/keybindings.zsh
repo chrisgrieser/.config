@@ -60,6 +60,9 @@ function dir-cycler () {
 	if [[ "$PWD" == "$WD" ]]; then
 		echo
 		z "$DOTFILE_FOLDER"
+	elif [[ "$PWD" == "$DOTFILE_FOLDER" ]]; then
+		echo
+		z "$VAULT_PATH"
 	else
 		echo
 		z "$WD"
