@@ -129,7 +129,7 @@ hints:
         key: S
         mods: Command
     # file path
-    - regex: (/Users/.*|~)/.*\.\w+
+    - regex: (/Users/.*|~)/.*(/|\.\w+)
       command: open
       mouse:
         enabled: true
