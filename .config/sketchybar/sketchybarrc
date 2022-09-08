@@ -7,68 +7,53 @@
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 
 ##### Bar Appearance #####
-# Configuring the general appearance of the bar, these are only some of the
-# options available. For all options see:
 # https://felixkratz.github.io/SketchyBar/config/bar
-# If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-BG_COLOR="0xff333333"
-# IS_DARK_MODE=$(osascript -e 'tell application "System Events" to return dark mode of appearance preferences')
-# if [[ "$IS_DARK_MODE" == "true" ]]; then
-# 	BG_COLOR="0xff333333"
-# else
-# 	BG_COLOR="0xffcdcdcd"
-# fi
+IS_DARK_MODE=$(osascript -e 'tell application "System Events" to return dark mode of appearance preferences')
+if [[ "$IS_DARK_MODE" == "true" ]]; then
+	BG_COLOR="0xff333333"
+	FONT_COLOR="0xffffffff"
+else
+	BG_COLOR="0xffcdcdcd"
+	FONT_COLOR="0xff000000"
+fi
 
-sketchybar --bar height=25        \
-                 position=top     \
-                 padding_left=7  \
-                 padding_right=7 \
-                 color="$BG_COLOR"
-
-##### Changing Defaults #####
-# We now change some default values that are applied to all further items
-# For a full list of all available item properties see:
-# https://felixkratz.github.io/SketchyBar/config/items
-
-sketchybar --default updates=when_shown                    \
-                     drawing=on                            \
+sketchybar --bar height=25                            \
+                 position=top                         \
+                 padding_left=7                       \
+                 padding_right=7                      \
+                 color="$BG_COLOR"                    \
+			  --default updates=when_shown               \
+                     drawing=on                       \
                      icon.font="Helvetica:Bold:13.0"  \
-                     icon.color=0xffffffff                 \
-                     label.font="Recursive:Bold:14.0" \
-                     label.color=0xffffffff                \
-                     label.padding_left=4                  \
-                     label.padding_right=4                 \
-                     icon.padding_left=4                   \
+                     icon.color="$FONT_COLOR"         \
+                     label.font="San Francisco:Bold:14.0" \
+                     label.color="$FONT_COLOR"        \
+                     label.padding_left=4             \
+                     label.padding_right=4            \
+                     icon.padding_left=4              \
                      icon.padding_right=4
 
 
-##### Adding Left Items #####
-# We add some regular items to the left side of the bar
-# only the properties deviating from the current defaults need to be set
-
-
-##### Adding Right Items #####
-# In the same way as the left items we can add items to the right side.
-# Additional position (e.g. center) are available, see:
+##### Adding Items #####
 # https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
 
-sketchybar --add item clock right                        \
-           --set clock   update_freq=60                   \
-                         script="$PLUGIN_DIR/clock.sh"   \
-                         y_offset=2                       \
-           --add item weather right                      \
-           --set weather update_freq=900                 \
-                         script="$PLUGIN_DIR/weather.sh" \
-                         y_offset=2                       \
-           --add item covid-stats right                  \
-           --set covid-stats update_freq=43200           \
+sketchybar --add item clock right                            \
+           --set clock   update_freq=60                      \
+                         script="$PLUGIN_DIR/clock.sh"       \
+                         y_offset=2                          \
+           --add item weather right                          \
+           --set weather update_freq=900                     \
+                         script="$PLUGIN_DIR/weather.sh"     \
+                         y_offset=2                          \
+           --add item covid-stats right                      \
+           --set covid-stats update_freq=43200               \
                          script="$PLUGIN_DIR/covid-stats.sh" \
-                         y_offset=2                       \
-           --add item git-sync right                     \
-           --set git-sync update_freq=90                 \
-                         script="$PLUGIN_DIR/git-sync.sh" \
+                         y_offset=2                          \
+           --add item git-sync right                         \
+           --set git-sync update_freq=90                     \
+                         script="$PLUGIN_DIR/git-sync.sh"    \
                          y_offset=2
 
 ##### Finalizing Setup #####

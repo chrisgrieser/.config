@@ -383,13 +383,13 @@ function spotifyTUI (toStatus)
 		if (toStatus == "play") then notify(stdout) end
 	end
 end
+
 function youtubeSpotify (appName, eventType)
 	if not(appName == "YouTube") then return end
 
-
-	if (eventType == aw.launched) then
+	if eventType == aw.launched and not(isProjector()) then
 		spotifyTUI("pause")
-	elseif (eventType == aw.terminated) then
+	elseif eventType == aw.terminated then
 		spotifyTUI("play")
 	end
 end
