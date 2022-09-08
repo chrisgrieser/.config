@@ -1,0 +1,17 @@
+title: 🥾 Foot Pedal Remappings
+homepage: https://github.com/chrisgrieser/dotfiles/karabiner
+rules:
+  - description: "🥾 Pedals"
+    manipulators:
+      - type: basic
+        from:
+          key_code: tab
+        to_if_alone:
+          - key_code: tab
+            modifiers:
+              - command
+        conditions:
+          - type: "device_if"
+            identifiers:
+              - vendor_id: 16701
+
