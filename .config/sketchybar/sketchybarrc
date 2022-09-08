@@ -18,21 +18,21 @@ else
 	FONT_COLOR="0xff000000"
 fi
 
-sketchybar --bar height=25                            \
-                 position=top                         \
-                 padding_left=7                       \
-                 padding_right=7                      \
-                 color="$BG_COLOR"                    \
-			  --default updates=when_shown               \
-                     drawing=on                       \
-                     icon.font="Helvetica:Bold:13.0"  \
-                     icon.color="$FONT_COLOR"         \
+sketchybar --bar height=25                              \
+                 position=top                           \
+                 padding_left=7                         \
+                 padding_right=7                        \
+                 color="$BG_COLOR"                      \
+			  --default updates=when_shown                 \
+                     drawing=on                         \
+                     icon.font="Helvetica:Bold:13.0"    \
+                     icon.color="$FONT_COLOR"           \
                      label.font="Recursive:Medium:14.0" \
-                     label.color="$FONT_COLOR"        \
-                     label.padding_left=4             \
-                     label.padding_right=4            \
-                     icon.padding_left=4              \
-                     icon.padding_right=4
+                     label.color="$FONT_COLOR"          \
+                     label.padding_left=4               \
+                     label.padding_right=4              \
+                     icon.padding_left=2                \
+                     icon.padding_right=2
 
 
 ##### Adding Items #####
@@ -42,6 +42,8 @@ sketchybar --add item clock right                            \
            --set clock   update_freq=60                      \
                          script="$PLUGIN_DIR/clock.sh"       \
                          y_offset=1                          \
+                         width=120                           \
+           --add alias "Stats,CPU_Bar chart" right           \
            --add item weather right                          \
            --set weather update_freq=1800                    \
                          script="$PLUGIN_DIR/weather.sh"     \
@@ -55,8 +57,11 @@ sketchybar --add item clock right                            \
                          script="$PLUGIN_DIR/git-sync.sh"    \
                          y_offset=2
 
-# NOTE: git-sync is also updated via `sketchybar --update` using hammerspoon's
-# file watcher, so there is no need for a high update frequency here
+# NOTE:
+# - git-sync is also updated via `sketchybar --update` using hammerspoon's
+#   file watcher, so there is no need for a high update frequency here
+# - clock only needs the fixed width to fix the whitespace bug of the item next
+#   to it (stats alias)
 
 ##### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration and
