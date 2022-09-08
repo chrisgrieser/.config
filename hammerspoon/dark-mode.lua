@@ -54,6 +54,7 @@ function toggleDarkMode ()
 		end tell
 	]])
 
+	hs.execute("brew services restart sketchybar") -- restart instead of reload to load colors
 	hs.application(prevApp):activate()
 	menubarLine() ---@diagnostic disable-line: undefined-global
 end
@@ -69,17 +70,13 @@ function setDarkmode (toDark)
 	log("🌒 Dark Mode: "..(tostring(isDarkMode())).." ("..deviceName()..")", "./logs/some.log")
 end
 
-function manualToggleDarkmode()
-	toggleDarkMode()
-	log ("🌒 Manual Toggle Darkmode ("..deviceName()..")", "./logs/some.log")
-end
-
 -- `hammerspoon://toggle-darkmode` for toggling via Shortcuts
 hs.urlevent.bind("toggle-darkmode", function()
-	manualToggleDarkmode()
+	toggleDarkMode()
+	log ("🌒 Manual Toggle Darkmode ("..deviceName()..")", "./logs/some.log")
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
 -- del mapped to f13 (so ⇧+⌫ can still be used for forward-deleting)
-hotkey({}, "f13", manualToggleDarkmode)
-hotkey({}, "f5", manualToggleDarkmode) -- for Apple Keyboards
+hotkey({}, "f13", toggleDarkMode)
+hotkey({}, "f5", toggleDarkMode) -- for Apple Keyboards

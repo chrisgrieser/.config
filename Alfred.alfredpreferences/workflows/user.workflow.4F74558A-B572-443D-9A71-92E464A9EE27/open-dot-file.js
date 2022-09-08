@@ -15,7 +15,9 @@ const workArray = app.doShellScript (
 	cd "' + dotfileFolder + '" ; \
 	fd --hidden --no-ignore \
 	-E "Alfred.alfredpreferences" \
-	-E ".config/alacritty/themes/" \
+	-E ".config/alacritty/colors/*" \
+	-E "Marta/Themes/*" \
+	-E "hammerspoon/Spoons/*" \
 	-E ".config/karabiner/assets/complex_modifications/*.json" \
 	-E "FileHistory*.json" \
 	-E "visualized keyboard layout/*.json" \

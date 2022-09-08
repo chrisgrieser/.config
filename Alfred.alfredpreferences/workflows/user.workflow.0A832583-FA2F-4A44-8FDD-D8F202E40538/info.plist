@@ -65,6 +65,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C4032949-EEE7-4394-B24E-63A22580686F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6CB17263-F5F7-4400-9735-3662C2962CDD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -248,7 +261,7 @@ zsh "$dock_switcher_path" --load "$1"</string>
 				<key>script</key>
 				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
-brew services restart felixkratz/formulae/sketchybar</string>
+sketchybar --update</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -271,9 +284,9 @@ brew services restart felixkratz/formulae/sketchybar</string>
 				<key>keyword</key>
 				<string>bar</string>
 				<key>subtext</key>
-				<string></string>
+				<string>only updates items</string>
 				<key>text</key>
-				<string>Reload SketchyBar</string>
+				<string>🔁 Reload SketchyBar</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -284,6 +297,52 @@ brew services restart felixkratz/formulae/sketchybar</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>bar</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗️ Restart SketchyBar</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C4032949-EEE7-4394-B24E-63A22580686F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+brew services restart sketchybar</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6CB17263-F5F7-4400-9735-3662C2962CDD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -291,63 +350,101 @@ brew services restart felixkratz/formulae/sketchybar</string>
 	<dict>
 		<key>15B1A722-85AB-4042-B9F7-B755D027674F</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>load</string>
 			<key>xpos</key>
-			<real>100</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>315</real>
 		</dict>
 		<key>18F1473F-54DE-48F6-B18D-838C540701AF</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>reload</string>
 			<key>xpos</key>
-			<real>100</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>535</real>
 		</dict>
 		<key>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>305</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>390</real>
 		</dict>
 		<key>55DFA247-EA56-4F3F-ADE4-39260BE8F5FD</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>310</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>270</real>
+		</dict>
+		<key>6CB17263-F5F7-4400-9735-3662C2962CDD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>240</real>
+			<key>ypos</key>
+			<real>665</real>
 		</dict>
 		<key>71149DFC-88DE-4E74-9FDA-F9336F759485</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>315</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>15</real>
 		</dict>
 		<key>79DED58A-3D58-4E4A-A77D-EC3AE4C80916</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>save as</string>
 			<key>xpos</key>
-			<real>100</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>200</real>
+			<real>65</real>
 		</dict>
 		<key>986C033D-6BCE-4098-9098-F4A46BF1703B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>315</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>535</real>
+		</dict>
+		<key>C4032949-EEE7-4394-B24E-63A22580686F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>restart</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>665</real>
 		</dict>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>310</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>135</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
