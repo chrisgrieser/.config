@@ -7,13 +7,13 @@
 matches:
   # Margin (accepts negative values)
   - regex: "mr(?P<value>[\\d-]+) "
-    replace: "margin-right:{{value}}px;"
+    replace: "margin-right:{{value}}px; "
   - regex: "ml(?P<value>[\\d-]+) "
-    replace: "margin-left:{{value}}px;"
+    replace: "margin-left:{{value}}px; "
   - regex: "mt(?P<value>[\\d-]+) "
-    replace: "margin-top:{{value}}px;"
+    replace: "margin-top:{{value}}px; "
   - regex: "md(?P<value>[\\d-]+) "
-    replace: "margin-down:{{value}}px;"
+    replace: "margin-down:{{value}}px; "
   - regex: "m(?P<value>\\d+) "
     replace: "margin:{{value}}px$|$;"
   - trigger: "mrv "
@@ -29,13 +29,13 @@ matches:
 
   # Padding
   - regex: "pr(?P<value>\\d+) "
-    replace: "padding-right:{{value}}px;"
+    replace: "padding-right:{{value}}px; "
   - regex: "pl(?P<value>\\d+) "
-    replace: "padding-left:{{value}}px;"
+    replace: "padding-left:{{value}}px; "
   - regex: "pt(?P<value>\\d+) "
-    replace: "padding-top:{{value}}px;"
+    replace: "padding-top:{{value}}px; "
   - regex: "pd(?P<value>\\d+) "
-    replace: "padding-down:{{value}}px;"
+    replace: "padding-down:{{value}}px; "
   - regex: "p(?P<value>\\d+) "
     replace: "padding:{{value}}px$|$;"
   - trigger: "prv "
@@ -51,7 +51,7 @@ matches:
 
   # Border
   - regex: "br(?P<value>\\d+) "
-    replace: "border-radius:{{value}}px;"
+    replace: "border-radius:{{value}}px; "
   - regex: "bo(?P<value>\\d+) "
     replace: "border:{{value}}px solid black$|$;"
   - trigger: "brv "
@@ -61,9 +61,9 @@ matches:
 
   # Sizes (accepts %)
   - regex: "w(?P<value>[\\d%]+) "
-    replace: "width:{{value}}px;"
+    replace: "width:{{value}}px; "
   - regex: "h(?P<value>[\\d%]+) "
-    replace: "height:{{value}}px;"
+    replace: "height:{{value}}px; "
   - trigger: "wv "
     replace: "width:var(-"
   - trigger: "hv "
@@ -71,18 +71,18 @@ matches:
 
   # Position
   - triggers: ["pos ", "posr"]
-    replace: "position:relative;"
+    replace: "position:relative; "
   - trigger: "posa "
-    replace: "position:absolute;"
+    replace: "position:absolute; "
   # accepts negative values
   - regex: "tt(?P<value>[\\d-]+) "
     replace: "top:{{value}}px;"
   - regex: "bb(?P<value>[\\d-]+) "
-    replace: "bottom:{{value}}px;"
+    replace: "bottom:{{value}}px; "
   - regex: "rr(?P<value>[\\d-]+) "
-    replace: "right:{{value}}px;"
+    replace: "right:{{value}}px; "
   - regex: "ll(?P<value>[\\d-]+) "
-    replace: "left:{{value}}px;"
+    replace: "left:{{value}}px; "
   - trigger: "rrv "
     replace: "right:var(-"
   - trigger: "llv "
@@ -94,9 +94,9 @@ matches:
 
   # Font
   - regex: "fs(?P<value>\\d+) "
-    replace: "font-size:{{value}}px;"
+    replace: "font-size: {{value}}px; "
   - regex: "lh(?P<value>[\\d.]+) "
-    replace: "line-height:{{value}};" # accepts float
+    replace: "line-height:{{value}}; " # accepts float
   - trigger: "fsv "
     replace: "font-size:var(-"
   - trigger: "lhv "
@@ -108,7 +108,7 @@ matches:
   - trigger: "rgb "
     replace: 'rgb(0$|$ 0% 0%)'
   - regex: "o(?P<value>[\\d.]+) "
-    replace: "opacity:{{value}};" # accepts float
+    replace: "opacity:{{value}}; " # accepts float
   - trigger: "ov "
     replace: "opacity:var(-"
 
