@@ -89,10 +89,10 @@ matches:
     replace: '!star stats @username'
     label: Starboard Statistics for a user
   - trigger: '!carl'
-    replace: '!plugin {query}'
+    replace: '!plugins query'
     label: Create a Plugin Search Link
   - trigger: '!carl'
-    replace: 'sudo info {username}'
+    replace: 'sudo info username'
     label: Info on the user
 
   # Memes

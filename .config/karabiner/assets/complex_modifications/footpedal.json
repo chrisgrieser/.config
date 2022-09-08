@@ -3,19 +3,20 @@
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
-      "description": "🥾 Pedals",
+      "description": "🥾 Pedal",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "key_code": "tab"
+            "key_code": "b"
           },
-          "to_if_alone": [
+          "to": [
             {
               "key_code": "tab",
               "modifiers": [
-                "command"
-              ]
+                "control"
+              ],
+              "repeat": false
             }
           ],
           "conditions": [
@@ -23,7 +24,7 @@
               "type": "device_if",
               "identifiers": [
                 {
-                  "vendor_id": 16701
+                  "vendor_id": 6790
                 }
               ]
             }
