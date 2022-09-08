@@ -387,14 +387,14 @@ end
 function youtubeSpotify (appName, eventType)
 	if not(appName == "YouTube") then return end
 
-	if eventType == aw.launched and not(isProjector()) then
+	if eventType == aw.launched then
 		spotifyTUI("pause")
-	elseif eventType == aw.terminated then
+	elseif eventType == aw.terminated and not(isProjector()) then
 		spotifyTUI("play")
 	end
 end
 youtubeWatcher = aw.new(youtubeSpotify)
-youtubeWatcher:start()
+if not(isAtOffice()) then youtubeWatcher:start() end
 
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR

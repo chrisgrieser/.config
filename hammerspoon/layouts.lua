@@ -48,7 +48,7 @@ end
 -- LAYOUTS
 function movieModeLayout()
 	if not(isProjector()) then return end
-	menubarLine() ---@diagnostic disable-line: undefined-global
+	holeCover() ---@diagnostic disable-line: undefined-global
 	iMacDisplay:setBrightness(0)
 
 	openIfNotRunning("YouTube")
@@ -70,7 +70,7 @@ end
 
 function homeModeLayout ()
 	iMacDisplay:setBrightness(0.9)
-	menubarLine() ---@diagnostic disable-line: undefined-global
+	holeCover() ---@diagnostic disable-line: undefined-global
 	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
 	openIfNotRunning("Slack")
@@ -88,7 +88,7 @@ function homeModeLayout ()
 
 	dockSwitcher("home")
 
-	local toTheSide = {x=0.815, y=0.024, w=0.185, h=1}
+	local toTheSide = {x=0.815, y=0.025, w=0.185, h=0.975}
 	local homeLayout = {
 		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
 		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},

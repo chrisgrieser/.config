@@ -56,7 +56,7 @@ function toggleDarkMode ()
 
 	hs.execute("brew services restart sketchybar") -- restart instead of reload to load colors
 	hs.application(prevApp):activate()
-	menubarLine() ---@diagnostic disable-line: undefined-global
+	holeCover() ---@diagnostic disable-line: undefined-global
 end
 
 function isDarkMode()

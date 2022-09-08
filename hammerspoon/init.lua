@@ -17,7 +17,7 @@ require("twitterrific-controls")
 if isAtMother() then require("hot-corner-action") end
 --------------------------------------------------------------------------------
 
-menubarLine() ---@diagnostic disable-line: undefined-global
+holeCover() ---@diagnostic disable-line: undefined-global
 systemStart() ---@diagnostic disable-line: undefined-global
 
 --------------------------------------------------------------------------------
