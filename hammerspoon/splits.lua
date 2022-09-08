@@ -23,13 +23,8 @@ end
 
 -- if one of the two is activated, also activate the other
 -- unsplit if one of the two windows has been closed
-splitStatusMenubar = hs.menubar.new()
-splitStatusMenubar:removeFromMenuBar() -- hide at beginning
 function pairedActivation(mode)
 	if mode == "start" then
-		splitStatusMenubar:returnToMenuBar()
-		splitStatusMenubar:setTitle("2️⃣")
-
 		local app1 = SPLIT_LEFT:application():name()
 		local app2 = SPLIT_RIGHT:application():name()
 		wf_pairedActivation = wf.new{app1, app2}
@@ -45,10 +40,7 @@ function pairedActivation(mode)
 		wf_pairedActivation:subscribe(wf.windowDestroyed, function(closedWin)
 			if not(SPLIT_LEFT and SPLIT_RIGHT) then vsplit("unsplit") end
 		end)
-
 	elseif mode == "stop" then
-		splitStatusMenubar:removeFromMenuBar()
-
 		if wf_pairedActivation then wf_pairedActivation:unsubscribeAll() end
 		wf_pairedActivation = nil
 	end
