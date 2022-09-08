@@ -97,8 +97,9 @@ function gg(){
 }
 
 alias gc="git checkout"
-alias gg="git checkout -" # go to last branch, analogues to `zz` switching to last directory
-alias add="git add -A"
+alias gs='git status'
+alias gt='gittree'
+alias add="git add"
 alias commit="git commit -m"
 alias push="git push"
 alias pull="git pull"
@@ -106,8 +107,8 @@ alias ignored="git status --ignored"
 
 # go to git root https://stackoverflow.com/a/38843585
 alias g='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
-alias gs='git status'
-alias gt='gittree'
+alias gg="git checkout -" # go to last branch, analogues to `zz` switching to last directory
+
 
 # open GitHub repo
 alias gh="open \$(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//' );"
@@ -152,9 +153,12 @@ function nuke {
 # runs a release scripts placed at the git root
 function rel(){
 	# shellcheck disable=SC2164
-	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
 	if [[ -f .release.sh ]] ; then
 		zsh .release.sh "$*"
+	elif [[ -f ../.release.sh ]] ; then
+		zsh ../.release.sh "$*"
+	elif [[ -f ../../.release.sh ]] ; then
+		zsh ../../.release.sh "$*"
 	else
 		echo "No '.release.sh' found."
 	fi
