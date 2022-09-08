@@ -33,17 +33,6 @@ function showAllSidebars()
 	hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
 
--- ununsed, use only if spt does not remember the correct output device
-function spotifyDevice(targetDevice)
-	local currentDevice = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%d")
-	currentDevice = trim(currentDevice)
-	if currentDevice == targetDevice then
-		return
-	else
-		hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt play --device='"..targetDevice.."'")
-	end
-end
-
 --------------------------------------------------------------------------------
 -- LAYOUTS
 function movieModeLayout()
@@ -73,7 +62,7 @@ function movieModeLayout()
 end
 
 function homeModeLayout ()
-	iMacDisplay:setBrightness(0.9)
+	iMacDisplay:setBrightness(0.85)
 	holeCover() ---@diagnostic disable-line: undefined-global
 	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
