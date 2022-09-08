@@ -164,3 +164,5 @@ matches:
   - trigger: nwo
     replace: now
     word: true
+  - trigger: hwo
+    replace: how
