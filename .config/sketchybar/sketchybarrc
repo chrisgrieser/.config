@@ -1,6 +1,5 @@
-# restart sketchybar with:
-# brew services restart felixkratz/formulae/sketchybar
-
+# restart: `brew services restart sketchybar`
+# reload (does only update items, not the look of the bar): `sketchybar --update`
 
 ################################################################################
 
@@ -28,7 +27,7 @@ sketchybar --bar height=25                            \
                      drawing=on                       \
                      icon.font="Helvetica:Bold:13.0"  \
                      icon.color="$FONT_COLOR"         \
-                     label.font="San Francisco:Bold:14.0" \
+                     label.font="Recursive:Medium:14.0" \
                      label.color="$FONT_COLOR"        \
                      label.padding_left=4             \
                      label.padding_right=4            \
@@ -42,19 +41,22 @@ sketchybar --bar height=25                            \
 sketchybar --add item clock right                            \
            --set clock   update_freq=60                      \
                          script="$PLUGIN_DIR/clock.sh"       \
-                         y_offset=2                          \
+                         y_offset=1                          \
            --add item weather right                          \
-           --set weather update_freq=900                     \
+           --set weather update_freq=1800                    \
                          script="$PLUGIN_DIR/weather.sh"     \
-                         y_offset=2                          \
+                         y_offset=1                          \
            --add item covid-stats right                      \
            --set covid-stats update_freq=43200               \
                          script="$PLUGIN_DIR/covid-stats.sh" \
-                         y_offset=2                          \
+                         y_offset=1                          \
            --add item git-sync right                         \
-           --set git-sync update_freq=90                     \
+           --set git-sync update_freq=900                    \
                          script="$PLUGIN_DIR/git-sync.sh"    \
                          y_offset=2
+
+# NOTE: git-sync is also updated via `sketchybar --update` using hammerspoon's
+# file watcher, so there is no need for a high update frequency here
 
 ##### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration and

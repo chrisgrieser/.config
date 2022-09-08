@@ -4,7 +4,7 @@
 # configurations
 alias .star='open $STARSHIP_CONFIG'
 alias r='exec zsh'
-alias bar='brew services restart felixkratz/formulae/sketchybar'
+alias bar='sketchybar --update'
 # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 
 # beautify JSON in the terminal (yq = better jq)

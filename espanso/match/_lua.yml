@@ -12,3 +12,6 @@ matches:
     label: Ignore in LUA LSP
   - trigger: "!utils"
     replace: 'require("utils")'
+  - trigger: "!!"
+    replace: "()\n$|$\nend"
+    label: Quicker Block
