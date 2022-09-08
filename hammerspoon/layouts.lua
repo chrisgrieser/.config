@@ -63,12 +63,13 @@ function movieModeLayout()
 	killIfRunning("Mimestream")
 	killIfRunning("Alfred Preferences")
 	killIfRunning("Sublime Text")
+	killIfRunning("Alacritty")
 	killIfRunning("alacritty")
 
 	dockSwitcher("movie")
 
 	local twitterrificWin = hs.application("Twitterrific"):mainWindow()
-	moveResize(twitterrificWin, toTheSide)
+	moveResize(twitterrificWin, toTheSide) ---@diagnostic disable-line: undefined-global
 end
 
 function homeModeLayout ()
@@ -92,7 +93,7 @@ function homeModeLayout ()
 	dockSwitcher("home")
 
 	local homeLayout = {
-		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
+		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil}, ---@diagnostic disable-line: undefined-global
 		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil},
@@ -118,7 +119,9 @@ function homeModeLayout ()
 
 	-- wait until sync is finished, to avoid merge conflict
 	hs.timer.waitUntil (
-		function () return gitDotfileSyncTask and gitDotfileSyncTask:isRunning() end, ---@diagnostic disable-line: undefined-global
+		function ()
+			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())  ---@diagnostic disable-line: undefined-global
+		end,
 		function()
 			sublimeFontSize(15)
 			alacrittyFontSize(26)
