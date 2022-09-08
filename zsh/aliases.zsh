@@ -17,7 +17,6 @@ alias .="open ."
 alias ..="z .."
 alias ...="z ../.."
 alias ....="z ../../.."
-alias v='cd "$VAULT_PATH"' # Obsidian Vault
 
 # utils
 alias q='exit'
