@@ -34,19 +34,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>31B90C66-3259-4EF7-8EDC-7495CC5146FF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>20B68019-4162-4DDE-9E2B-1E8D9D5DACD8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4F2102DA-A82A-42C3-B70D-D0AEBD9C9375</key>
 		<array>
 			<dict>
@@ -61,7 +48,18 @@
 			</dict>
 		</array>
 		<key>A3AB158D-877A-451A-85CA-39C230762B3C</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C6041485-5CE5-467D-A8AA-FBE386D8D2E3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<array>
 			<dict>
@@ -300,70 +298,6 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>spell</string>
-				<key>subtext</key>
-				<string>$1: Misspelling $2: Correct Spelling</string>
-				<key>text</key>
-				<string>Spelling: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A3AB158D-877A-451A-85CA-39C230762B3C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>adduuid</key>
-				<false/>
-				<key>allowemptyfiles</key>
-				<false/>
-				<key>createintermediatefolders</key>
-				<true/>
-				<key>filename</key>
-				<string>~/dotfiles/espanso/match/spelling.yml</string>
-				<key>filetext</key>
-				<string>  - trigger: {var:misspelling}
-    replace: {query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>relativepathmode</key>
-				<integer>0</integer>
-				<key>type</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.writefile</string>
-			<key>uid</key>
-			<string>31B90C66-3259-4EF7-8EDC-7495CC5146FF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>20B68019-4162-4DDE-9E2B-1E8D9D5DACD8</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -384,6 +318,27 @@ end run</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>spell</string>
+				<key>subtext</key>
+				<string>$1: Misspelling $2: Correct Spelling</string>
+				<key>text</key>
+				<string>Spelling: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A3AB158D-877A-451A-85CA-39C230762B3C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>requires "aspell" to be installed on the system. (`brew install aspell`)
@@ -402,15 +357,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
-		<key>20B68019-4162-4DDE-9E2B-1E8D9D5DACD8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>615</real>
-			<key>ypos</key>
-			<real>650</real>
-		</dict>
 		<key>312B23B5-ED5C-4D40-9A96-B52BC742B891</key>
 		<dict>
 			<key>colorindex</key>
@@ -421,17 +367,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>315</real>
-		</dict>
-		<key>31B90C66-3259-4EF7-8EDC-7495CC5146FF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>note</key>
-			<string>append</string>
-			<key>xpos</key>
-			<real>450</real>
-			<key>ypos</key>
-			<real>650</real>
 		</dict>
 		<key>4F2102DA-A82A-42C3-B70D-D0AEBD9C9375</key>
 		<dict>
@@ -486,10 +421,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>C6041485-5CE5-467D-A8AA-FBE386D8D2E3</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>650</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
