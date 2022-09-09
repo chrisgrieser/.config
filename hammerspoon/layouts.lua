@@ -94,12 +94,12 @@ function homeModeLayout ()
 		{"alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
 	}
 
+	showAllSidebars()
 	hs.layout.apply(homeLayout)
-	runDelayed(0.25, function ()
+	runDelayed(0.3, function ()
 		hs.layout.apply(homeLayout)
-		showAllSidebars()
 	end)
-	runDelayed(0.45, function ()
+	runDelayed(0.5, function ()
 		twitterrificAction("scrollup") ---@diagnostic disable-line: undefined-global
 		hs.application("Drafts"):activate()
 	end)

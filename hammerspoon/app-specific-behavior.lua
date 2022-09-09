@@ -28,6 +28,7 @@ end
 
 -- OBSIDIAN
 -- Sync on Vault close
+-- hide other apps for wallpaper
 function obsidianSync (appName, eventType, appObject)
 	if not(appName == "Obsidian") then return end
 	if eventType == aw.launching or eventType == aw.terminated then
