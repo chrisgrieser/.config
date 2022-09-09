@@ -8,6 +8,19 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
+		<key>047436B3-E2EB-43B9-94DA-19303EC62159</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CDB7E2DC-E7D2-4059-B903-A348C134C523</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>07C9BA35-3528-4685-92EE-687F95448B30</key>
 		<array>
 			<dict>
@@ -26,6 +39,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>FAE9825B-FFCC-45A9-8F91-485535506CFC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>2B552BA8-0C59-435F-BDBD-098DE6AFEEEC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>50269231-2406-4275-B09D-C8C56303345C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -60,11 +86,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>59D9B736-8554-4EA2-8960-591B4400DF1B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A0DD7429-3BAA-45F5-9905-252E0AABEE20</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>661DA836-A4F2-4671-80FE-4F378B93EAD0</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>28A37FE2-DC32-454F-9F4A-5EA7B7302518</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>910D559A-3716-434C-8BAB-91AD98EB0E50</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E0D8A61D-BE3E-49D5-9A20-336421C90A72</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -194,7 +246,7 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>fm</string>
+				<string>soren</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -257,7 +309,7 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>tg</string>
+				<string>oli</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -278,39 +330,18 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>fm</string>
+				<string>ola</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Kevin</string>
+				<string>Sören &amp; Ola</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>07C9BA35-3528-4685-92EE-687F95448B30</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://www.messenger.com/t/100000235382471</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>2234A5C0-FDE3-435A-83A4-6CC19FA4480C</string>
+			<string>047436B3-E2EB-43B9-94DA-19303EC62159</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -341,7 +372,7 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>tg</string>
+				<string>matthias</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -382,6 +413,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>kevin</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Kevin</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>07C9BA35-3528-4685-92EE-687F95448B30</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -391,12 +443,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.messenger.com/t/661762054</string>
+				<string>https://www.messenger.com/t/100000235382471</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>B652A706-A1B3-4356-8EA2-962BC3DDB92D</string>
+			<string>2234A5C0-FDE3-435A-83A4-6CC19FA4480C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -406,28 +458,7 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>fm</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Joseph</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>91F5DAE9-7EA4-4520-AE5A-A24674BDAAC7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>tg</string>
+				<string>vivi</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -460,6 +491,90 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>661DA836-A4F2-4671-80FE-4F378B93EAD0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://www.messenger.com/t/661762054</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>B652A706-A1B3-4356-8EA2-962BC3DDB92D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>joseph</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Joseph</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>91F5DAE9-7EA4-4520-AE5A-A24674BDAAC7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>kordian</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Kordian</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>ED11D17A-FF62-4970-AA48-CFE0C253BABF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://web.telegram.org/z/#58908103</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>E8CC14AC-2115-4AD9-9732-73890756EFEE</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -508,27 +623,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>tg</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Kordian</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>ED11D17A-FF62-4970-AA48-CFE0C253BABF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -538,12 +632,33 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://web.telegram.org/z/#58908103</string>
+				<string>slack://sosimexil.slack.com/archives/D0109R1G1C7</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>E8CC14AC-2115-4AD9-9732-73890756EFEE</string>
+			<string>A0DD7429-3BAA-45F5-9905-252E0AABEE20</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>markus</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Markus</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>59D9B736-8554-4EA2-8960-591B4400DF1B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -589,6 +704,90 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>slack://sosimexil.slack.com/archives/DVBSWTWDP</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>50269231-2406-4275-B09D-C8C56303345C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>suse</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Suse</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>2B552BA8-0C59-435F-BDBD-098DE6AFEEEC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>vips</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>#vips only</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>910D559A-3716-434C-8BAB-91AD98EB0E50</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>slack://sosimexil.slack.com/archives/C02BV2AE1SN</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>E0D8A61D-BE3E-49D5-9A20-336421C90A72</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>use Telegram Web Z
@@ -596,6 +795,17 @@
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>047436B3-E2EB-43B9-94DA-19303EC62159</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>Sören &amp; Ola</string>
+			<key>xpos</key>
+			<real>625</real>
+			<key>ypos</key>
+			<real>145</real>
+		</dict>
 		<key>07C9BA35-3528-4685-92EE-687F95448B30</key>
 		<dict>
 			<key>colorindex</key>
@@ -605,16 +815,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>625</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>285</real>
 		</dict>
 		<key>14890ADC-5B86-4B56-8205-31DD925BF275</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>12</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>625</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>670</real>
 		</dict>
 		<key>2234A5C0-FDE3-435A-83A4-6CC19FA4480C</key>
 		<dict>
@@ -623,7 +833,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>805</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>285</real>
 		</dict>
 		<key>28A37FE2-DC32-454F-9F4A-5EA7B7302518</key>
 		<dict>
@@ -635,6 +845,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>430</real>
 			<key>ypos</key>
 			<real>235</real>
+		</dict>
+		<key>2B552BA8-0C59-435F-BDBD-098DE6AFEEEC</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>705</real>
 		</dict>
 		<key>37395496-78FC-403F-9082-9A707DCD9ABF</key>
 		<dict>
@@ -658,6 +875,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>50269231-2406-4275-B09D-C8C56303345C</key>
+		<dict>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>705</real>
+		</dict>
+		<key>59D9B736-8554-4EA2-8960-591B4400DF1B</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>585</real>
+		</dict>
 		<key>661DA836-A4F2-4671-80FE-4F378B93EAD0</key>
 		<dict>
 			<key>colorindex</key>
@@ -666,6 +897,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>210</real>
 			<key>ypos</key>
 			<real>310</real>
+		</dict>
+		<key>910D559A-3716-434C-8BAB-91AD98EB0E50</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>820</real>
 		</dict>
 		<key>91F5DAE9-7EA4-4520-AE5A-A24674BDAAC7</key>
 		<dict>
@@ -676,7 +914,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>625</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>415</real>
+		</dict>
+		<key>A0DD7429-3BAA-45F5-9905-252E0AABEE20</key>
+		<dict>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>585</real>
 		</dict>
 		<key>A537988D-4030-4E88-82B4-D20AEE30FA86</key>
 		<dict>
@@ -694,7 +939,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>805</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>415</real>
 		</dict>
 		<key>BECF02B0-2BD7-406C-AA20-3048BD449818</key>
 		<dict>
@@ -703,7 +948,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>625</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>545</real>
 		</dict>
 		<key>CDB7E2DC-E7D2-4059-B903-A348C134C523</key>
 		<dict>
@@ -721,7 +966,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>805</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>545</real>
+		</dict>
+		<key>E0D8A61D-BE3E-49D5-9A20-336421C90A72</key>
+		<dict>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>820</real>
 		</dict>
 		<key>E8CC14AC-2115-4AD9-9732-73890756EFEE</key>
 		<dict>
@@ -777,11 +1029,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>FAE9825B-FFCC-45A9-8F91-485535506CFC</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>12</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>805</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>670</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
