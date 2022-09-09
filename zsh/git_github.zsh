@@ -171,7 +171,14 @@ function rel(){
 function gdf() {
 	local deleted_path deletion_commit
 	deleted_path=$(git log --diff-filter=D --summary | grep delete | grep -i "$*" | cut -d" " -f5-)
-	deletion_commit=$(git log --format=%h --follow -- "$deleted_path" | head -n1)
-	echo "checking out last version of: '$deleted_path'"
-	git checkout "$deletion_commit^" -- "$deleted_path"
+	deletion_commit=$(git log --format='%h' --follow -- "$deleted_path" | head -n1)
+	last_commit=$(git show --format='%h' "$deletion_commit^" | head -n1)
+	echo "last version found: '$deleted_path' ($last_commit)"
+
+	echo "Checkout File? (y/n)"
+	read -r -k 1 DECISION
+	# shellcheck disable=SC2193
+	[[ "$DECISION:l" != "y" ]] && return 0
+
+	git checkout "$last_commit" -- "$deleted_path"
 }
