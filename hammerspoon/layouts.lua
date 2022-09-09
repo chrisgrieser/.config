@@ -277,7 +277,7 @@ wf_appsOnMouseScreen:subscribe(wf.windowCreated, function (newWindow)
 	local screenOfWindow = newWindow:screen()
 	if isProjector() and not(mouseScreen:name() == screenOfWindow:name()) then
 		newWindow:moveToScreen(mouseScreen)
-		runDelayed (0.2, function () newWindow:moveToScreen(mouseScreen) end)
-		runDelayed (0.4, function () newWindow:moveToScreen(mouseScreen) end)
+		runDelayed (0.3, function () newWindow:moveToScreen(mouseScreen) end)
+		runDelayed (0.6, function () newWindow:moveToScreen(mouseScreen) end)
 	end
 end)
