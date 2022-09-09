@@ -1347,67 +1347,6 @@
           ]
         }
       ]
-    },
-    {
-      "description": "🅰️👨‍💻 Script Editor",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "q",
-            "modifiers": {
-              "mandatory": [
-                "command"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "q",
-              "modifiers": [
-                "command"
-              ]
-            },
-            {
-              "key_code": "vk_none",
-              "hold_down_milliseconds": 600
-            },
-            {
-              "key_code": "tab"
-            },
-            {
-              "key_code": "tab"
-            },
-            {
-              "key_code": "tab"
-            },
-            {
-              "key_code": "tab"
-            },
-            {
-              "key_code": "tab"
-            },
-            {
-              "key_code": "tab"
-            },
-            {
-              "key_code": "vk_none",
-              "hold_down_milliseconds": 100
-            },
-            {
-              "key_code": "spacebar"
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^com\\.apple\\.ScriptEditor"
-              ]
-            }
-          ]
-        }
-      ]
     }
   ]
 }
