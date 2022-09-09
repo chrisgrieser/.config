@@ -174,13 +174,17 @@ function gdf() {
 	if [[ $(echo "$deleted_path" | wc -l) -gt 1 ]] ; then
 		echo "🔍 multiple files found: "
 		echo "$deleted_path"
+		echo
+		echo "ℹ️ narrow down query so only one file is selected."
 		return 0
 	elif [[ -z "$deleted_path" ]] ; then
 		echo "🔍 no deleted file found"
 		return 1
 	fi
+
 	deletion_commit=$(git log --format='%h' --follow -- "$deleted_path" | head -n1)
 	last_commit=$(git show --format='%h' "$deletion_commit^" | head -n1)
+
 	echo "🔍 last version found: '$deleted_path' ($last_commit)"
 	echo
 	echo "c: checkout file, o: open file"

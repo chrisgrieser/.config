@@ -147,8 +147,9 @@ function sleepYouTube ()
 	]])
 	log ("😴 sleepTimer ("..deviceName()..")", "./logs/some.log")
 end
-sleepTimer = hs.timer.doAt("03:00", "01d", sleepYouTube, true)
-sleepTimer2 = hs.timer.doAt("05:00", "01d", sleepYouTube, true)
+sleepTimer1 = hs.timer.doAt("03:00", "01d", sleepYouTube, true)
+sleepTimer2 = hs.timer.doAt("04:00", "01d", sleepYouTube, true)
+sleepTimer3 = hs.timer.doAt("05:00", "01d", sleepYouTube, true)
 
 biweeklyTimer = hs.timer.doAt("02:00", "02d", function()
 	hs.osascript.applescript([[
@@ -178,8 +179,9 @@ projectorScreensaverWatcher = hs.caffeinate.watcher.new(projectorScreensaverStop
 if isIMacAtHome() then
 	dailyMorningTimer:start()
 	dailyEveningTimer:start()
-	sleepTimer:start()
+	sleepTimer1:start()
 	sleepTimer2:start()
+	sleepTimer3:start()
 	biweeklyTimer:start()
 	projectorScreensaverWatcher:start()
 end
@@ -187,7 +189,8 @@ end
 if isAtMother() then
 	dailyMorningTimer:start()
 	dailyEveningTimer:start()
-	sleepTimer:start()
+	sleepTimer1:start()
 	sleepTimer2:start()
+	sleepTimer3:start()
 end
 
