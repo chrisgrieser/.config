@@ -74,8 +74,7 @@ matches:
     replace: "position:relative; "
   - trigger: "posa "
     replace: "position:absolute; "
-  # accepts negative values
-  - regex: "tt(?P<value>[\\d-]+) "
+  - regex: "tt(?P<value>[\\d-]+) " # accepts negative values
     replace: "top:{{value}}px;"
   - regex: "bb(?P<value>[\\d-]+) "
     replace: "bottom:{{value}}px; "
@@ -94,7 +93,9 @@ matches:
 
   # Font
   - regex: "fs(?P<value>\\d+) "
-    replace: "font-size: {{value}}px; "
+    replace: "font-size:{{value}}px; "
+  - regex: "fw(?P<value>\\d+) "
+    replace: "font-weight:{{value}}; "
   - regex: "lh(?P<value>[\\d.]+) "
     replace: "line-height:{{value}}; " # accepts float
   - trigger: "fsv "

@@ -1,7 +1,7 @@
 # https://www.soberkoder.com/better-zsh-history/
 
-export HISTSIZE=3000
-export SAVEHIST=3000
+export HISTSIZE=1000
+export SAVEHIST=$HISTSIZE
 
 export HISTFILE=~"/.zsh_history" # so it isn't saved in the dotfile repo
 

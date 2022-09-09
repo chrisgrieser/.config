@@ -9,7 +9,7 @@ rules:
             - key_code: f
             - key_code: j
         parameters:
-          basic.simultaneous_threshold_milliseconds: 60
+          basic.simultaneous_threshold_milliseconds: 100
         to:
           - key_code: return_or_enter
   - description: "⚒️ R-⌘ (tap): go to end of line"

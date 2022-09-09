@@ -1370,7 +1370,7 @@
             },
             {
               "key_code": "vk_none",
-              "hold_down_milliseconds": 500
+              "hold_down_milliseconds": 600
             },
             {
               "key_code": "tab"
@@ -1392,7 +1392,7 @@
             },
             {
               "key_code": "vk_none",
-              "hold_down_milliseconds": 50
+              "hold_down_milliseconds": 100
             },
             {
               "key_code": "spacebar"

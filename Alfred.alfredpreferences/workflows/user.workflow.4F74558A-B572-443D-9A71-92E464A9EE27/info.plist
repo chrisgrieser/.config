@@ -256,6 +256,55 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>tt</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>search-zsh-history.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search .zsh_history</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>BEEB649C-6EAF-4A61-9DF8-313D315C8330</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
 				<string>.</string>
@@ -872,6 +921,15 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>790</real>
 		</dict>
+		<key>BEEB649C-6EAF-4A61-9DF8-313D315C8330</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>725</real>
+			<key>ypos</key>
+			<real>35</real>
+		</dict>
 		<key>E0C75078-1F39-43D8-9A91-F93AA5784104</key>
 		<dict>
 			<key>xpos</key>
@@ -906,10 +964,10 @@ echo "$backup"</string>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/dotfile bkp/</string>
 		<key>dotfile_folder</key>
 		<string>~/dotfiles/</string>
+		<key>history_path</key>
+		<string>~/.zsh_history</string>
 		<key>max_number_of_bkps</key>
 		<string>20</string>
-		<key>vault_path</key>
-		<string>~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/</string>
 		<key>working_directory</key>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/</string>
 	</dict>
@@ -917,7 +975,7 @@ echo "$backup"</string>
 	<array>
 		<string>working_directory</string>
 		<string>dotfile_bkp_destination</string>
-		<string>vault_path</string>
+		<string>history_path</string>
 		<string>dotfile_folder</string>
 	</array>
 	<key>version</key>
