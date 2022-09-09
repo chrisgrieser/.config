@@ -3,7 +3,7 @@
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
-      "description": "🥾 Pedal",
+      "description": "🥾 Pedal: Switch Tabs",
       "manipulators": [
         {
           "type": "basic",

@@ -253,6 +253,18 @@ wf_finder:subscribe(wf.windowDestroyed, function ()
 	end
 end)
 
+-- quit Finder, when it was launched it wasn't launched manually
+function finderLaunchNoticed(appName, eventType, appObject)
+	if not(appName == "Finder") or not(eventType == aw.launched) then return end
+	runDelayed(10, function ()
+		if not(frontapp() == "Finder") then hs.application("Finder"):kill() end
+	end)
+end
+finderLaunchWatcher = aw.new(finderLaunchNoticed)
+finderLaunchWatcher:start()
+
+--------------------------------------------------------------------------------
+
 -- MARTA
 -- - (pseudo)maximize
 -- - close other tabs when reopening
@@ -456,15 +468,15 @@ end
 discordAppWatcher = aw.new(discordWatcher)
 discordAppWatcher:start()
 
+
 --------------------------------------------------------------------------------
 
--- quit Finder, when it was launched it wasn't launched manually
-function finderLaunchNotice(appName, eventType, appObject)
-	if not(appName == "Finder") or not(eventType == aw.launched) then return end
-	runDelayed(1, function ()
-		if not(frontapp() == "Finder") then hs.application("Finder"):kill() end
-	end)
-end
-finderLaunchWatcher = aw.new(finderLaunchNotice)
-finderLaunchWatcher:start()
+-- SHOTTR: Auto-select Arrow
+wf_shottr = wf.new("Shottr")
+wf_shottr:subscribe(wf.windowCreated, function (newWindow)
+	if newWindow:title() == "Preferences" then return end
 
+	runDelayed (0.1, function ()
+		keystroke({}, "a")
+	end)
+end)

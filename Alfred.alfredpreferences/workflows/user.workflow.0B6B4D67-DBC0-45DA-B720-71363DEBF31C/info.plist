@@ -541,7 +541,6 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 	set toDelete to q as POSIX file
 	tell application "Finder" 
 		delete toDelete
-		quit
 	end tell
 end alfred_script</string>
 				<key>cachescript</key>

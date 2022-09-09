@@ -170,3 +170,6 @@ matches:
   - trigger: ot
     replace: to
     word: true
+  - trigger: si
+    replace: is
+    word: true
