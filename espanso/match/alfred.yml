@@ -85,13 +85,21 @@ matches:
       app.includeStandardAdditions = true;
       const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
 
-      // fill in here
-      const VAR = $.getenv("");
+      function readFile (path, encoding) {
+        if (!encoding) encoding = $.NSUTF8StringEncoding;
+        const fm = $.NSFileManager.defaultManager;
+        const data = fm.contentsAtPath(path);
+        const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
+        return ObjC.unwrap(str);
+      }
 
-      const jsonArray = [] // fill in here
-      	// .filter(f => true)
+      //------------------------------------------------------------------------------
+
+      const VAR = $.getenv("VAR").replace(/^~/, app.pathTo("home folder"));
+
+      const jsonArray = []
       	.map(item => {
-      		// fill in here
+
       		return {
       			"title": item,
       			"match": alfredMatcher (item),

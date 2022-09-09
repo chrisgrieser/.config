@@ -131,6 +131,9 @@ end
 --------------------------------------------------------------------------------
 -- CRONJOBS AT HOME
 function sleepYouTube ()
+	local minIdle = hs.host.idleTime() / 60
+	if minIdle > 30 then return end
+
 	killIfRunning("YouTube")
 	hs.osascript.applescript([[
 		tell application "Brave Browser"

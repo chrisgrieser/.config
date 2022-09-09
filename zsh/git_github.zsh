@@ -1,4 +1,4 @@
-# shellcheck disable=SC2164
+# shellcheck disable=SC2164,SC2030,SC2012
 
 # git log
 # append `true` to avoid exit code 141: https://www.ingeniousmalarkey.com/2016/07/git-log-exit-code-141.html
@@ -119,16 +119,19 @@ function clone(){
 	# shellcheck disable=SC2012
 	z "$(ls -1 -t | head -n1)" || return
 
-	grep -q "obsidian" package.json &> /dev/null && npm i # if it's an Obsidian plugin
+	if grep -q "obsidian" package.json ; then
+		npm i # if it's an Obsidian plugin
+	fi
 }
 
 # shallow clone
 function sclone(){
 	git clone --depth=1 "$*"
-	# shellcheck disable=SC2012
 	z "$(ls -1 -t | head -n1)" || return
 
-	grep -q "obsidian" package.json &> /dev/null && npm i # if it's an Obsidian plugin
+	if grep -q "obsidian" package.json ; then
+		npm i # if it's an Obsidian plugin
+	fi
 }
 
 function nuke {
