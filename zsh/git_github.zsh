@@ -167,18 +167,28 @@ function rel(){
 	fi
 }
 
-# search for [g]it [d]eleted [f]ile https://stackoverflow.com/a/42582877
+# search for [g]it [d]eleted [f]ile -> https://stackoverflow.com/a/42582877
 function gdf() {
 	local deleted_path deletion_commit
 	deleted_path=$(git log --diff-filter=D --summary | grep delete | grep -i "$*" | cut -d" " -f5-)
+	if [[ $(echo "$deleted_path" | wc -l) -gt 1 ]] ; then
+		echo "🔍 multiple files found: "
+		echo "$deleted_path"
+		return 0
+	elif [[ -z "$deleted_path" ]] ; then
+		echo "🔍 no deleted file found"
+		return 1
+	fi
 	deletion_commit=$(git log --format='%h' --follow -- "$deleted_path" | head -n1)
 	last_commit=$(git show --format='%h' "$deletion_commit^" | head -n1)
-	echo "last version found: '$deleted_path' ($last_commit)"
-
-	echo "Checkout File? (y/n)"
+	echo "🔍 last version found: '$deleted_path' ($last_commit)"
+	echo
+	echo "c: checkout file, o: open file"
 	read -r -k 1 DECISION
 	# shellcheck disable=SC2193
-	[[ "$DECISION:l" != "y" ]] && return 0
-
-	git checkout "$last_commit" -- "$deleted_path"
+	if [[ "$DECISION:l" == "c" ]] ; then
+		git checkout "$last_commit" -- "$deleted_path"
+	elif [[ "$DECISION:l" == "o" ]] ; then
+		git show "$last_commit:$deleted_path" | less
+	fi
 }
