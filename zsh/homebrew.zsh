@@ -150,8 +150,6 @@ function update (){
 	brew upgrade
 	print-section "Cleanup"
 	brew cleanup
-	print-section "Autoremove"
-	brew autoremove # remove unneeded dependencies (`brew leaves --installed-as-dependency``)
 
 	print-section "MAC APP STORE"
 	mas upgrade
