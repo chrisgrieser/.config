@@ -167,3 +167,11 @@ function rel(){
 	fi
 }
 
+# search for [g]it [d]eleted [f]ile https://stackoverflow.com/a/42582877
+function gdf() {
+	local deleted_path deletion_commit
+	deleted_path=$(git log --diff-filter=D --summary | grep delete | grep -i "$*" | cut -d" " -f5-)
+	deletion_commit=$(git log --format=%h --follow -- "$deleted_path" | head -n1)
+	echo "checking out last version of: '$deleted_path'"
+	git checkout "$deletion_commit^" -- "$deleted_path"
+}
