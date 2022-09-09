@@ -150,7 +150,8 @@
                 "^md\\.obsidian$",
                 "^com\\.mimestream\\.Mimestream$",
                 "^net\\.highlightsapp\\.universal$",
-                "^org\\.yanex\\.marta$"
+                "^org\\.yanex\\.marta$",
+                "^cc\\.ffitch\\.shottr$"
               ]
             }
           ],
@@ -268,6 +269,37 @@
           },
           "to_if_alone": [
             {
+              "key_code": "p",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^cc\\.ffitch\\.shottr$"
+              ]
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "shell_command": "open -a \"Mission Control\""
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250,
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          }
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to_if_alone": [
+            {
               "key_code": "non_us_pound"
             }
           ],
@@ -281,11 +313,7 @@
           ],
           "to_if_held_down": [
             {
-              "key_code": "d",
-              "modifiers": [
-                "command",
-                "control"
-              ]
+              "shell_command": "open -a \"Mission Control\""
             }
           ],
           "parameters": {
@@ -385,7 +413,8 @@
                 "^com\\.mimestream\\.Mimestream$",
                 "^com\\.agiletortoise\\.Drafts-OSX$",
                 "^net\\.highlightsapp\\.universal$",
-                "^org\\.yanex\\.marta$"
+                "^org\\.yanex\\.marta$",
+                "^cc\\.ffitch\\.shottr$"
               ]
             }
           ],
@@ -420,6 +449,37 @@
                 "^com\\.apple\\.finder$",
                 "^md\\.obsidian$",
                 "^org\\.yanex\\.marta$"
+              ]
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "shell_command": "osascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.plain-text-utilities\"'"
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250,
+            "basic.to_if_held_down_threshold_milliseconds": 250
+          }
+        },
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button5"
+          },
+          "to_if_alone": [
+            {
+              "key_code": "escape"
+            },
+            {
+              "key_code": "escape"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^cc\\.ffitch\\.shottr$"
               ]
             }
           ],

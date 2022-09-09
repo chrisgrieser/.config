@@ -86,6 +86,7 @@ rules:
               - ^com\.mimestream\.Mimestream$
               - ^net\.highlightsapp\.universal$
               - ^org\.yanex\.marta$
+              - ^cc\.ffitch\.shottr$
         to_if_held_down:
           - shell_command: open -a "Mission Control"
         parameters:
@@ -147,6 +148,24 @@ rules:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
 
+      # Shottr: Pin
+      - type: basic
+        from:
+          pointing_button: button4
+        to_if_alone:
+          - key_code: p
+            modifiers:
+              - command
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^cc\.ffitch\.shottr$
+        to_if_held_down:
+          - shell_command: open -a "Mission Control"
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 250
+          basic.to_if_held_down_threshold_milliseconds: 250
+
       # Mimestream: Delete
       - type: basic
         from:
@@ -158,10 +177,7 @@ rules:
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
         to_if_held_down:
-          - key_code: d
-            modifiers:
-              - command
-              - control
+          - shell_command: open -a "Mission Control"
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
@@ -229,6 +245,7 @@ rules:
               - ^com\.agiletortoise\.Drafts-OSX$
               - ^net\.highlightsapp\.universal$
               - ^org\.yanex\.marta$
+              - ^cc\.ffitch\.shottr$
         to_if_held_down:
           - shell_command:
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
@@ -258,7 +275,25 @@ rules:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
 
-      # Archive in Drafts
+      # Shottr: finish
+      - type: basic
+        from:
+          pointing_button: button5
+        to_if_alone:
+          - key_code: escape
+          - key_code: escape
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^cc\.ffitch\.shottr$
+        to_if_held_down:
+          - shell_command:
+              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 250
+          basic.to_if_held_down_threshold_milliseconds: 250
+
+      # Drafts: Archive
       - type: basic
         from:
           pointing_button: button5
@@ -318,6 +353,7 @@ rules:
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
+
   - description: "🐁 6: ⌘↹"
     manipulators:
       - type: basic
