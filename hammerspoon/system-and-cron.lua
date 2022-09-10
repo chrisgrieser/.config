@@ -53,6 +53,16 @@ hs.urlevent.bind("sync-repos", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
+
+-- update icons for sketchybar
+function updateSketchybar()
+	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --trigger repo-files-update")
+end
+dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateSketchybar)
+dotfilesWatcher:start()
+vaultWatcher = hs.pathwatcher.new(vaultLocation, updateSketchybar)
+vaultWatcher:start()
+
 --------------------------------------------------------------------------------
 
 function screenSleep (eventType)
