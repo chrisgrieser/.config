@@ -40,12 +40,6 @@ nmap Q mz0`z
 nmap j gj
 nmap k gk
 
-" g0 and g$ fix by @koala
-exmap endOfVisualLine jsfile Meta/obsidian-vim-helpers.js {goToEnd()}
-exmap startOfVisualLine jsfile Meta/obsidian-vim-helpers.js {goToStart()}
-nmap g0 :startOfVisualLine
-nmap g$ :endOfVisualLine
-
 " HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
 map H g0
 map L g$
