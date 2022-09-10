@@ -20,19 +20,4 @@ if isAtMother() then require("hot-corner-action") end
 holeCover() ---@diagnostic disable-line: undefined-global
 systemStart() ---@diagnostic disable-line: undefined-global
 
---------------------------------------------------------------------------------
--- https://github.com/dbalatero/VimMode.spoon#configuration
-
-VimMode = hs.loadSpoon('VimMode')
-vim = VimMode:new()
-
-vim
-	:disableForApp('Sublime Text')
-	:disableForApp('alacritty')
-	:disableForApp('Obsidian')
-	:setAlertFont('Recursive')
-	:bindHotKeys({ enter = {{'cmd'}, 'f19'} }) -- Karabiner: tap left-opt
-	:enableBetaFeature('block_cursor_overlay')
-
---------------------------------------------------------------------------------
 notify("Config reloaded")

@@ -36,7 +36,6 @@ end
 --------------------------------------------------------------------------------
 -- LAYOUTS
 function movieModeLayout()
-	if not(isProjector()) then return end
 	holeCover() ---@diagnostic disable-line: undefined-global
 	iMacDisplay:setBrightness(0)
 
@@ -56,6 +55,7 @@ function movieModeLayout()
 	killIfRunning("alacritty")
 
 	dockSwitcher("movie")
+	setDarkmode(true)
 
 	local twitterrificWin = hs.application("Twitterrific"):mainWindow()
 	moveResize(twitterrificWin, toTheSide) ---@diagnostic disable-line: undefined-global
@@ -119,7 +119,6 @@ function homeModeLayout ()
 end
 
 function officeModeLayout ()
-	if not(isAtOffice()) then return end
 	local screen1 = hs.screen.allScreens()[1]
 	local screen2 = hs.screen.allScreens()[2]
 
@@ -132,7 +131,7 @@ function officeModeLayout ()
 	openIfNotRunning("Drafts")
 	killIfRunning("Finder")
 
-	dockSwitcher("office") -- includes "Tweeten"
+	dockSwitcher("office") -- separate layout to include "Tweeten"
 
 	local bottom = {x=0, y=0.5, w=1, h=0.5}
 	local top = {x=0, y=0, w=1, h=0.5}
@@ -152,17 +151,19 @@ function officeModeLayout ()
 	}
 
 	hs.layout.apply(officeLayout)
+	showAllSidebars()
 	runDelayed(0.3, function ()
 		hs.layout.apply(officeLayout)
-		showAllSidebars()
 	end)
-	runDelayed(0.4, function ()
+	runDelayed(0.5, function ()
 		hs.application("Drafts"):activate()
 	end)
 
 	-- wait until sync is finished, to avoid merge conflict
 	hs.timer.waitUntil (
-		function () return gitDotfileSyncTask and gitDotfileSyncTask:isRunning() end,
+		function ()
+			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())  ---@diagnostic disable-line: undefined-global
+		end,
 		function()
 			sublimeFontSize(13)
 			alacrittyFontSize(24)

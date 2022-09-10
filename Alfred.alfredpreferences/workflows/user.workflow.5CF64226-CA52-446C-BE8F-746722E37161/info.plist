@@ -8,37 +8,11 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
-		<key>095DAABB-7146-49D6-9576-FBFD99A8284C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>34F0D200-70BB-44B0-AC91-0F1A260C8B61</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>0C4A60F1-B26F-48F1-A319-28F15EAD057C</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>34F0D200-70BB-44B0-AC91-0F1A260C8B61</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>1F6474D0-0938-450F-BA57-1B6283F3B41E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>095DAABB-7146-49D6-9576-FBFD99A8284C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -177,17 +151,19 @@
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>drafts://runaction?text=urlscheme&amp;action=Workspace-Tasklists</string>
-				<key>utf8</key>
-				<true/>
+				<string>drafts://x-callback-url/append?uuid={query}&amp;text=- [ ] {var:item.trim.capitalcase}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>FF55F6D9-2CAA-457F-8BCE-56FDD2E26034</string>
+			<string>34F0D200-70BB-44B0-AC91-0F1A260C8B61</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -196,17 +172,19 @@
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>drafts://x-callback-url/append?uuid={query}&amp;text=- [ ] {var:item.trim.capitalcase}</string>
-				<key>utf8</key>
-				<true/>
+				<string>drafts://runaction?text=urlscheme&amp;action=Workspace-Tasklists</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>34F0D200-70BB-44B0-AC91-0F1A260C8B61</string>
+			<string>FF55F6D9-2CAA-457F-8BCE-56FDD2E26034</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -230,105 +208,46 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ein</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Asia-Laden: "{query}"</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>1F6474D0-0938-450F-BA57-1B6283F3B41E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>D51C27D4-F5B4-43A7-912F-97F5BD72AD80</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>item</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>095DAABB-7146-49D6-9576-FBFD99A8284C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>095DAABB-7146-49D6-9576-FBFD99A8284C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<integer>205</integer>
-			<key>ypos</key>
-			<integer>320</integer>
-		</dict>
 		<key>0C4A60F1-B26F-48F1-A319-28F15EAD057C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>210</integer>
+			<real>210</real>
 			<key>ypos</key>
-			<integer>180</integer>
-		</dict>
-		<key>1F6474D0-0938-450F-BA57-1B6283F3B41E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<integer>35</integer>
-			<key>ypos</key>
-			<integer>290</integer>
+			<real>180</real>
 		</dict>
 		<key>30B7A51F-FBCF-4F7B-9D9B-E9B17EF78FAC</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>210</integer>
+			<real>210</real>
 			<key>ypos</key>
-			<integer>50</integer>
+			<real>50</real>
 		</dict>
 		<key>34F0D200-70BB-44B0-AC91-0F1A260C8B61</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>345</integer>
+			<real>345</real>
 			<key>ypos</key>
-			<integer>150</integer>
+			<real>150</real>
 		</dict>
 		<key>BC0BC947-8F45-4C9C-A64C-688408AD1402</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>35</integer>
+			<real>35</real>
 			<key>ypos</key>
-			<integer>150</integer>
+			<real>150</real>
 		</dict>
 		<key>E68655D6-4F4F-4B8D-B3E8-FA0254A53EFE</key>
 		<dict>
@@ -337,20 +256,22 @@
 			<key>note</key>
 			<string>add to shopping list</string>
 			<key>xpos</key>
-			<integer>35</integer>
+			<real>35</real>
 			<key>ypos</key>
-			<integer>10</integer>
+			<real>15</real>
 		</dict>
 		<key>FF55F6D9-2CAA-457F-8BCE-56FDD2E26034</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<integer>495</integer>
+			<real>495</real>
 			<key>ypos</key>
-			<integer>150</integer>
+			<real>150</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>
