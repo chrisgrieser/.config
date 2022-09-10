@@ -48,7 +48,7 @@ defaults write -g PMPrintingExpandedStateForPrint2 -bool true
 #-------------------------------------------------------------------------------
 
 # Network
-# pw.md generated via keychain read before
+# pw.md generated via keychain reading before
 WIFI=$(grep -i -A1 "WiFi" pw.md | tail -n1)
 WIFI_NAME=$(echo "$WIFI" | cut -d" " -f1)
 WIFI_PW=$(echo "$WIFI" | cut -d" " -f2)

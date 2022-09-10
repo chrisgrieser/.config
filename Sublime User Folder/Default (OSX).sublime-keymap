@@ -16,11 +16,9 @@
 // ----------------------------------------------------------------------------
 [
 
-	// emmet
-	{
-	    "keys": ["shift+control+alt+space"],
-	    "command": "emmet_expand_abbreviation"
-	},
+	// for the footpedal
+	{ "keys": ["control+tab"], "command": "next_view" },
+	{ "keys": ["control+shift+tab"], "command": "prev_view" },
 
 
 	// MEH Bindings (shift+control+alt = meh)
@@ -171,6 +169,7 @@
 
 	// FILE MANAGEMENT
 	{ "keys": ["super+n"], "command": "advanced_new_file_new"},
+	{ "keys": ["super+t"], "command": "advanced_new_file_new"},
 	{ "keys": ["super+shift+n"], "command": "new_file" },
 	{ "keys": ["ctrl+d"], "command": "advanced_new_file_copy"},
 	{ "keys": ["super+backspace"], "command": "delete_current_file" },

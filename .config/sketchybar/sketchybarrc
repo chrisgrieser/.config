@@ -18,9 +18,11 @@ else
 	FONT_COLOR="0xff000000"
 fi
 ITEM_Y_OFFSET="5"
+HEIGHT=35
+[[ "$(scutil --get ComputerName)" =~ "mini" ]] && HEIGHT=25
 
 # 10px using extra height to cover the holes at the corner where the wallpaper shines through
-sketchybar --bar height=35                              \
+sketchybar --bar height="$HEIGHT"                              \
                  position=top                           \
                  padding_left=7                         \
                  padding_right=7                        \
@@ -33,12 +35,13 @@ sketchybar --bar height=35                              \
                      label.color="$FONT_COLOR"          \
                      label.padding_left=4               \
                      label.padding_right=4              \
-                     icon.padding_left=1                \
-                     icon.padding_right=1
+                     icon.padding_left=0                \
+                     icon.padding_right=0
 
 
 ##### Items #####
 # https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
+# get names of original menubar items to add as alias: `sketchybar --query default_menu_items`
 
 sketchybar --add item clock right                            \
            --set clock   update_freq=1                       \
@@ -48,6 +51,10 @@ sketchybar --add item clock right                            \
            --add alias "Stats,CPU_Bar chart" right           \
            --set       "Stats,CPU_Bar chart"                 \
                          y_offset=$((ITEM_Y_OFFSET + 2))     \
+                         width=45                            \
+           --add alias "Stats,Network_Network chart" right   \
+           --set       "Stats,Network_Network chart"         \
+                         y_offset=$((ITEM_Y_OFFSET + 0))     \
            --add item weather right                          \
            --set weather update_freq=1800                    \
                          script="$PLUGIN_DIR/weather.sh"     \
