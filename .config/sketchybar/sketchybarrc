@@ -65,9 +65,10 @@ sketchybar --add item clock right                            \
                          script="$PLUGIN_DIR/covid-stats.sh" \
                          y_offset="$ITEM_Y_OFFSET"           \
            --add item git-sync right                         \
-           --set git-sync update_freq=90	                   \
+           --set git-sync update_freq=9001                   \
                          script="$PLUGIN_DIR/git-sync.sh"    \
-                         y_offset=$((ITEM_Y_OFFSET + 1))
+                         y_offset=$((ITEM_Y_OFFSET + 1))     \
+           --subscribe git-sync repo-files-update
 
 # NOTE:
 # - clock only needs the fixed width to fix the whitespace bug of the item next
