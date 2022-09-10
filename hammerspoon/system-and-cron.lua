@@ -57,7 +57,6 @@ end)
 -- update icons for sketchybar
 function updateSketchybar()
 	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --trigger repo-files-update")
-	notify("update sketchybar")
 end
 dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateSketchybar)
 dotfilesWatcher:start()
