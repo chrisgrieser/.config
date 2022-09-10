@@ -47,7 +47,7 @@ sketchybar --add item clock right                            \
                          width=120                           \
            --add alias "Stats,CPU_Bar chart" right           \
            --set       "Stats,CPU_Bar chart"                 \
-                         y_offset=$((ITEM_Y_OFFSET + 3))     \
+                         y_offset=$((ITEM_Y_OFFSET + 2))     \
            --add item weather right                          \
            --set weather update_freq=1800                    \
                          script="$PLUGIN_DIR/weather.sh"     \
@@ -57,13 +57,11 @@ sketchybar --add item clock right                            \
                          script="$PLUGIN_DIR/covid-stats.sh" \
                          y_offset="$ITEM_Y_OFFSET"           \
            --add item git-sync right                         \
-           --set git-sync update_freq=900                    \
+           --set git-sync update_freq=90	                   \
                          script="$PLUGIN_DIR/git-sync.sh"    \
                          y_offset=$((ITEM_Y_OFFSET + 1))
 
 # NOTE:
-# - git-sync is also updated via `sketchybar --update` using hammerspoon's
-#   file watcher, so there is no need for a high update frequency here
 # - clock only needs the fixed width to fix the whitespace bug of the item next
 #   to it (stats alias)
 

@@ -64,6 +64,8 @@ end
 function homeModeLayout ()
 	iMacDisplay:setBrightness(0.85)
 	holeCover() ---@diagnostic disable-line: undefined-global
+	hs.execute("brew services restart sketchybar") -- restart instead of reload to load colors
+
 	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
 	openIfNotRunning("Slack")

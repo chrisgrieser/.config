@@ -14,10 +14,6 @@ xcode-select --install
 # Install Essential Apps
 brew install --no-quarantine macpass alfred hammerspoon sublime-text alacritty karabiner-elements brave-browser
 
-# Sublime
-# (file is gitignored as it also saves folding information)
-echo '{"save_selections": false}' > ~"/dotfiles/Sublime User Folder/AutoFoldCode.sublime-settings"
-
 # Hammerspoon
 defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
 defaults write "org.hammerspoon.Hammerspoon" "HSUploadCrashData" 0

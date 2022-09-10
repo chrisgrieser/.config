@@ -2,11 +2,8 @@
 .DS_Store
 
 # Activity Data
-Sublime User Folder/FileHistory*.json
-Sublime User Folder/AutoFoldCode.sublime-settings
 sync.log
 some.log
-.zsh_history
 dlFolderLastChange
 # redundant
 .config/karabiner/automatic_backups
