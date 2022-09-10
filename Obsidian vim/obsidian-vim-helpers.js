@@ -1,37 +1,6 @@
-/* global app, editor, Notice */
+/* global app, Notice */
 //------------------------------------------------------------------------------
 
-// g0 and g$
-function movementHelper() {
-	// eslint-disable-next-line no-shadow
-	const editor = app.workspace.activeLeaf.view.editor;
-	const pos = {
-		from: editor.posToOffset(editor.getCursor("from")),
-		to: editor.posToOffset(editor.getCursor("to")),
-		head: editor.posToOffset(editor.getCursor("head")),
-		anchor: editor.posToOffset(editor.getCursor("anchor")),
-		empty: true
-	};
-	return pos;
-}
-
-// eslint-disable-next-line no-unused-vars
-function goToEnd() {
-	const pos = movementHelper();
-	// move to end of visual line
-	const endOfLine = editor.cm.moveToLineBoundary(pos, true);
-	editor.setCursor(editor.offsetToPos(endOfLine.from - 1));
-}
-
-// eslint-disable-next-line no-unused-vars
-function goToStart() {
-	const pos = movementHelper();
-	// move to beginning of visual line
-	const startOfLine = editor.cm.moveToLineBoundary(pos, false);
-	editor.setCursor(editor.offsetToPos(startOfLine.from));
-}
-
-//------------------------------------------------------------------------------
 // VIM SNEAK
 function extractRegexp(text, chars, currentCursor, forward) {
 	const textFromCursor = forward ? text.substring(currentCursor + 1) : text.substring(0, currentCursor + 1);
