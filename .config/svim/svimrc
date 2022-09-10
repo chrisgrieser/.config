@@ -1,2 +1,34 @@
+set clipboard=unnamed
+noremap + *
 
-nnoremap <Space> ciw
+nnoremap Y y$
+
+nnoremap U <C-r>
+vnoremap U <C-r>
+
+noremap H ^
+noremap L $
+noremap J 5j
+noremap K 5k
+
+noremap [ {
+noremap ] }
+
+noremap ä `
+
+vnoremap <BS> "_d
+
+nnoremap ü mzlblgueh~`z
+nnoremap ö xp
+nnoremap Ö xhhp
+nnoremap Ä dawelpb
+
+nnoremap M J
+
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+nnoremap <S-Space> "_daw
+vnoremap <S-Space> "_d
