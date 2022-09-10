@@ -19,6 +19,7 @@ else
 fi
 ITEM_Y_OFFSET="5"
 HEIGHT=35
+# full menubar at the office
 [[ "$(scutil --get ComputerName)" =~ "mini" ]] && HEIGHT=25
 
 # 10px using extra height to cover the holes at the corner where the wallpaper shines through
@@ -33,8 +34,8 @@ sketchybar --bar height="$HEIGHT"                              \
                      icon.color="$FONT_COLOR"           \
                      label.font="Recursive:Medium:15.0" \
                      label.color="$FONT_COLOR"          \
-                     label.padding_left=4               \
-                     label.padding_right=4              \
+                     label.padding_left=3               \
+                     label.padding_right=3              \
                      icon.padding_left=0                \
                      icon.padding_right=0
 
