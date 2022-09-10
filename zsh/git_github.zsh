@@ -60,6 +60,11 @@ function acp (){
 	git add -A && git commit -m "$COMMIT_MSG"
 	git pull
 	git push
+
+	# update sketchybar
+	if [[ "$(git remote -v)" =~ "dotfiles" || "$(git remote -v)" =~ "vault" ]] ; then
+		sketchybar --update
+	fi
 }
 
 function amend () {
