@@ -58,7 +58,7 @@ function toggleDarkMode ()
 
 	hs.application(prevApp):activate()
 	holeCover() ---@diagnostic disable-line: undefined-global
-	hs.execute("brew services restart sketchybar") -- restart instead of reload to load colors
+	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar") -- restart instead of reload to load colors
 end
 
 function isDarkMode()

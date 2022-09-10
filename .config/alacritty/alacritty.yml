@@ -1,42 +1,42 @@
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 colors:
-  # COLORSCHEME: primary_dark.yaml
+  # COLORSCHEME: rose-pine-moon.yaml
   primary:
     # hard contrast: background = '0x1d2021'
-    background: '#231E1A'
-    foreground: '#E5CFB3'
+    background: '0x232136'
+    foreground: '0xe0def4'
   normal:
   # Bright colors
-    black: '#000000'
-    red: '#F54E42'
-    green: '#38B27D'
-    yellow: '#EBC400'
-    blue: '#4DADD5'
-    magenta: '#9F78DD'
-    cyan: '#3399C1'
-    white: '#F6E7D5'
+    black: '0x393552'
+    red: '0xeb6f92'
+    green: '0x3e8fb0'
+    yellow: '0xf6c177'
+    blue: '0x9ccfd8'
+    magenta: '0xc4a7e7'
+    cyan: '0xea9a97'
+    white: '0xe0def4'
   bright:
-    black: '#000000'
-    yellow: '#F8D668'
-    red: '#FF675C'
-    green: '#38D687'
-    magenta: '#A993E6'
-    white: '#F6E7D5'
+    black: '0x6e6a86'
+    red: '0xeb6f92'
+    green: '0x3e8fb0'
+    yellow: '0xf6c177'
+    blue: '0x9ccfd8'
+    magenta: '0xc4a7e7'
+    cyan: '0xea9a97'
+    white: '0xe0def4'
   cursor:
-    text: '0xf9e7c4'
-    cursor: '0xf9e7c4'
-
-  # Normal colors
+    text: '0xe0def4'
+    cursor: '0x56526e'
   dim:
-    black: '0x232323'
-    red: '0x74423f'
-    green: '0x5e6547'
-    yellow: '0x8b7653'
-    blue: '0x556b79'
-    magenta: '0x6e4962'
-    cyan: '0x5c8482'
-    white: '0x828282'
+    black: '0x31363b'
+    red: '0x783228'
+    green: '0x17a262'
+    yellow: '0xb65619'
+    blue: '0x1b668f'
+    magenta: '0x614a73'
+    cyan: '0x186c60'
+    white: '0x63686d'
   indexed_colors: []
   search:
     matches:
@@ -47,11 +47,21 @@ colors:
       background: CellForeground
 
   vi_mode_cursor:
-    text: '#2e3440'
-    cursor: '#d8dee9'
+    text: '0xe0def4'
+    cursor: '0x56526e'
   selection:
-    text: '0x000000'
-    background: '0xb3d7ff'
+    text: '0xe0def4'
+    background: '0x44415a'
+  line_indicator:
+    foreground: None
+    background: None
+  hints:
+    start:
+      foreground: '#908caa'
+      background: '#2a273f'
+    end:
+      foreground: '#6e6a86'
+      background: '#2a273f'
 font:
   size: 26
 
@@ -86,7 +96,7 @@ window:
   padding:
     x: 6
     y: 6
-  opacity: .95
+  opacity: .96
 scrolling:
   history: 2000
   multiplier: 3
