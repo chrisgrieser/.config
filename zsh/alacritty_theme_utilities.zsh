@@ -38,7 +38,7 @@ EOM
 
 	# re-apply original color scheme when aborting
 	if [[ -z "$selected" ]] ; then
-		alacritty-colorscheme apply "$original.yaml" || alacritty-colorscheme apply "$original.yml"
+		alacritty-colorscheme apply "$original.yaml" &> /dev/null || alacritty-colorscheme apply "$original.yml" &> /dev/null
 		return 0
 	fi
 

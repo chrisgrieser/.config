@@ -1,6 +1,6 @@
 
 behavior {
-    theme "Classic"
+    theme "Kon"
 
     layout {
         showActionBar false
@@ -224,13 +224,13 @@ keyBindings {
     "1" {
         id "core.ordering"
         ordering "modified"
-        isAscending false
+        isAscending true
         showFoldersOnTop true
     }
     "Shift+1" {
         id "core.ordering"
         ordering "modified"
-        isAscending true
+        isAscending false
         showFoldersOnTop true
     }
     "2" {

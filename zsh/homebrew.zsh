@@ -157,6 +157,11 @@ function update (){
 	print-section "NPM"
 	npm update --location=global
 
+	print-section "Pip3"
+	pip3 install --upgrade "pdfannots"
+	pip3 install --upgrade "pdfminer.six"
+	pip3 install --upgrade "alacritty-colorscheme"
+
 	print-section "DUMP INSTALLS"
 	dump
 }
