@@ -6,8 +6,22 @@
 	"rules":
 	[
 		{
-		"class": "quick_panel_label",
-		"font.size": 15,
-		}
+			"class": "quick_panel_label",
+			"font.size": 16,
+		},
+		{
+			"class": "tab_label",
+			"font.size": 13,
+		},
+		{
+			"class": "tab_control",
+			"content_margin": [11, 2, 10, 1],
+		},
+		{
+			"class": "tabset_control",
+			"content_margin": [0, 0, 0, 1],
+			"tab_height": 25,
+			"tab_min_width": 100
+		},
 	]
 }

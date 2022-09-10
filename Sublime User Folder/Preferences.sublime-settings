@@ -86,10 +86,10 @@
 	// Tab Bar
 	"hide_tab_scrolling_buttons": true,
 	"enable_tab_scrolling": false,
-	"file_tab_style": "rounded", // "angled" does not support inactive pane dimming
+	"file_tab_style": "square", // "angled" does not support inactive pane dimming
 	"highlight_modified_tabs": true,
 	"hide_new_tab_button": true,
-	"show_tab_close_buttons": true, // tab headings look off otherwise
+	"show_tab_close_buttons": false,
 	"auto_hide_tabs": false,
 	"reveal_tabs_with_timeout": true, // only in effect if auto-hiding tabs
 
