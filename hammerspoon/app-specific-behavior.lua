@@ -2,15 +2,16 @@ require("utils")
 require("window-management")
 require("system-and-cron")
 
+--------------------------------------------------------------------------------
+-- TRANSPARENT background for Obsidian & Alacritty
+
 function hideAllExcept(appNotToHide)
-	-- for nicer background pictures together with transparency
 	local mainScreen = hs.screen.mainScreen()
 	local wins = hs.window.orderedWindows() -- `orderedWindows()` ignores headless apps like Twitterrific
 	for i = 1, #wins do
 		local app = wins[i]:application()
 		local winScreen = wins[i]:screen()
-		-- main screen as condition for two-screen setups
-		if not(app:name() == appNotToHide) and winScreen == mainScreen then
+		if not(isHalf(wins[i])) and not(app:name() == appNotToHide) and winScreen == mainScreen then -- main screen as condition for two-screen setups
 			app:hide()
 		end
 	end
@@ -24,22 +25,33 @@ function unHideAll()
 	end
 end
 
+function transBackgroundApp (appName, eventType, appObject)
+	if not(appName == "Obsidian" or appName == "alacritty") then return end
+
+	-- browserIsLoading as workaround for Alfred's Compatibility Mode, where
+	-- opening URLs first activates the previous frontmost app (like Obsidian
+	-- or Alacritty) before opening the browser
+	local _, browserIsLoading = hs.osascript.applescript('tell application "Brave Browser" to return loading of active tab of front window')
+	local win = appObject:mainWindow()
+	local sublimeWin = hs.application("Sublime Text"):mainWindow()
+	if not(browserIsLoading) and eventType == aw.activated and (isPseudoMaximized(win) or isMaximized(win)) then
+		hideAllExcept(appName)
+	elseif eventType == aw.terminated then
+		unHideAll()
+	end
+end
+transBgAppWatcher = aw.new(transBackgroundApp)
+transBgAppWatcher:start()
+
 --------------------------------------------------------------------------------
 
 -- OBSIDIAN
 -- Sync on Vault close
--- hide other apps for wallpaper
 function obsidianSync (appName, eventType, appObject)
 	if not(appName == "Obsidian") then return end
+
 	if eventType == aw.launching or eventType == aw.terminated then
 		gitVaultSync() ---@diagnostic disable-line: undefined-global
-	end
-
-	local obsiWin = appObject:mainWindow()
-	if eventType == aw.activated and isPseudoMaximized(obsiWin) then
-		hideAllExcept("Obsidian")
-	elseif eventType == aw.terminated then
-		unHideAll()
 	end
 end
 obsidianWatcher = aw.new(obsidianSync)
@@ -203,20 +215,6 @@ hs.urlevent.bind("focus-help", function()
 		notify ("none open")
 	end
 end)
-
--- Hide other Apps for nicer background
-function alacrittyWatch (appName, eventType, appObject)
-	if not(appName == "alacritty") then return end
-
-	local alacrittyWin = appObject:mainWindow()
-	if eventType == aw.activated and isPseudoMaximized(alacrittyWin) then
-		hideAllExcept("alacritty")
-	elseif eventType == aw.terminated then
-		unHideAll()
-	end
-end
-alacrittyAppWatcher = aw.new(alacrittyWatch)
-alacrittyAppWatcher:start()
 
 --------------------------------------------------------------------------------
 

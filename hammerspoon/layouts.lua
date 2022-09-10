@@ -268,6 +268,7 @@ wf_appsOnMouseScreen = wf.new({
 	"Slack",
 	"Discord",
 	"Marta",
+	"Espanso",
 	"BusyCal",
 	"Alfred Preferences",
 	"System Preferences",

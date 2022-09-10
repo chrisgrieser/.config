@@ -22,9 +22,16 @@ elseif isAtOffice() then
 end
 
 -- window size checks
+function isMaximized (win)
+	if not(win) then return false end
+	local max = win:screen():frame()
+	return win:frame().w == max.w
+end
+
+-- window size checks
 function isPseudoMaximized (win)
 	if not(win) then return false end
-	local max = hs.screen.mainScreen():frame()
+	local max = win:screen():frame()
 	local dif = win:frame().w - pseudoMaximized.w*max.w
 	local widthOkay = (dif > -15 and dif < 15) -- leeway for some apps
 	return widthOkay
@@ -32,7 +39,7 @@ end
 
 function isHalf (win)
 	if not(win) then return false end
-	local max = hs.screen.mainScreen():frame()
+	local max = win:screen():frame()
 	local dif = win:frame().w - 0.5*max.w
 	return (dif > -15 and dif < 15) -- leeway for some apps
 end
