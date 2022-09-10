@@ -23,11 +23,12 @@ HEIGHT=35
 [[ "$(scutil --get ComputerName)" =~ "mini" ]] && HEIGHT=25
 
 # 10px using extra height to cover the holes at the corner where the wallpaper shines through
-sketchybar --bar height="$HEIGHT"                              \
+sketchybar --bar height="$HEIGHT"                       \
                  position=top                           \
                  padding_left=7                         \
                  padding_right=7                        \
                  color="$BG_COLOR"                      \
+                 display=main                           \
 			  --default updates=when_shown                 \
                      drawing=on                         \
                      icon.font="Helvetica:Bold:12.0"    \
@@ -37,7 +38,8 @@ sketchybar --bar height="$HEIGHT"                              \
                      label.padding_left=4               \
                      label.padding_right=4              \
                      icon.padding_left=0                \
-                     icon.padding_right=0
+                     icon.padding_right=0               \
+                     y_offset="$ITEM_Y_OFFSET"
 
 
 ##### Items #####
@@ -47,7 +49,6 @@ sketchybar --bar height="$HEIGHT"                              \
 sketchybar --add item clock right                            \
            --set clock   update_freq=1                       \
                          script="$PLUGIN_DIR/clock.sh"       \
-                         y_offset="$ITEM_Y_OFFSET"           \
                          width=120                           \
            --add alias "Stats,CPU_Bar chart" right           \
            --set       "Stats,CPU_Bar chart"                 \
@@ -55,15 +56,12 @@ sketchybar --add item clock right                            \
                          width=45                            \
            --add alias "Stats,Network_Network chart" right   \
            --set       "Stats,Network_Network chart"         \
-                         y_offset=$((ITEM_Y_OFFSET + 0))     \
            --add item weather right                          \
            --set weather update_freq=1800                    \
                          script="$PLUGIN_DIR/weather.sh"     \
-                         y_offset="$ITEM_Y_OFFSET"           \
            --add item covid-stats right                      \
            --set covid-stats update_freq=43200               \
                          script="$PLUGIN_DIR/covid-stats.sh" \
-                         y_offset="$ITEM_Y_OFFSET"           \
            --add item git-sync right                         \
            --set git-sync update_freq=9001                   \
                          script="$PLUGIN_DIR/git-sync.sh"    \
