@@ -85,7 +85,7 @@ function homeWake (eventType)
 
 		if currentTimeHours < 19 and currentTimeHours > 7 then
 			hs.shortcuts.run("Send Reminders due today to Drafts")
-			setDarkmode(false)
+			if not(isProjector()) then setDarkmode(false) end
 		else
 			setDarkmode(true)
 		end

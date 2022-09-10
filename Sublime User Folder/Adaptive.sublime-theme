@@ -11,11 +11,11 @@
 		},
 		{
 			"class": "tab_label",
-			"font.size": 13,
+			"font.size": 12,
 		},
 		{
 			"class": "tab_control",
-			"content_margin": [11, 2, 10, 1],
+			"content_margin": [11, 2, 0, 1],
 		},
 		{
 			"class": "tabset_control",
