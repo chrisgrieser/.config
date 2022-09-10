@@ -43,7 +43,6 @@ end
 repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
 	gitDotfileSync()
 	gitVaultSync()
-	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --update")
 end)
 repoSyncTimer:start()
 
@@ -51,7 +50,6 @@ repoSyncTimer:start()
 hs.urlevent.bind("sync-repos", function()
 	gitDotfileSync()
 	gitVaultSync()
-	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --update")
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
