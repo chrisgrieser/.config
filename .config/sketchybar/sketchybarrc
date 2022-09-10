@@ -68,6 +68,7 @@ sketchybar --add item clock right                            \
            --set git-sync update_freq=9001                   \
                          script="$PLUGIN_DIR/git-sync.sh"    \
                          y_offset=$((ITEM_Y_OFFSET + 1))     \
+           --add event repo-files-update                     \
            --subscribe git-sync repo-files-update
 
 # NOTE:
