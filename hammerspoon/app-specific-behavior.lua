@@ -11,7 +11,7 @@ function hideAllExcept(appNotToHide)
 	for i = 1, #wins do
 		local app = wins[i]:application()
 		local winScreen = wins[i]:screen()
-		if not(isHalf(wins[i])) and not(app:name() == appNotToHide) and winScreen == mainScreen then -- main screen as condition for two-screen setups
+		if not(app:name() == appNotToHide) and winScreen == mainScreen then -- main screen as condition for two-screen setups
 			app:hide()
 		end
 	end
@@ -33,7 +33,6 @@ function transBackgroundApp (appName, eventType, appObject)
 	-- or Alacritty) before opening the browser
 	local _, browserIsLoading = hs.osascript.applescript('tell application "Brave Browser" to return loading of active tab of front window')
 	local win = appObject:mainWindow()
-	local sublimeWin = hs.application("Sublime Text"):mainWindow()
 	if not(browserIsLoading) and eventType == aw.activated and (isPseudoMaximized(win) or isMaximized(win)) then
 		hideAllExcept(appName)
 	elseif eventType == aw.terminated then

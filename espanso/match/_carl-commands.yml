@@ -80,6 +80,9 @@ matches:
   - trigger: '!carl'
     replace: insider is beta
     label: Reminder that Insider builds are meant to be betas
+  - trigger: '!carl'
+    replace: open sourcing of Obsidian
+    label: Explainer why Obsidian is not open source
 
   # Utilities
   - trigger: '!carl'
