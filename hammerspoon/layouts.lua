@@ -96,15 +96,16 @@ function homeModeLayout ()
 		{"alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
 	}
 
+	twitterrificAction("scrollup") ---@diagnostic disable-line: undefined-global
 	showAllSidebars()
 	hs.layout.apply(homeLayout)
 	runDelayed(0.3, function ()
 		hs.layout.apply(homeLayout)
 	end)
-	runDelayed(0.5, function ()
-		twitterrificAction("scrollup") ---@diagnostic disable-line: undefined-global
-		hs.application("Drafts"):activate()
-	end)
+	runDelayed(1.3, function () hs.application("Drafts"):activate() end)
+	runDelayed(1.6, function () hs.application("Drafts"):activate() end)
+	runDelayed(1.9, function () hs.application("Drafts"):activate() end)
+	runDelayed(2.5, function () hs.application("Drafts"):activate() end)
 
 	-- wait until sync is finished, to avoid merge conflict
 	hs.timer.waitUntil (

@@ -37,6 +37,7 @@
 			"moveResizeCurWin",
 			"frontapp",
 			"isHalf",
+			"pseudoMaximized",
 			"isPseudoMaximized",
 			"isMaximized",
 			"moveResize",
