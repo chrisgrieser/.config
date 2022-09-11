@@ -48,9 +48,7 @@ transBgAppWatcher:start()
 -- OBSIDIAN
 -- Sync on Vault close
 function obsidianSync (appName, eventType, appObject)
-	if not(appName == "Obsidian") then return end
-
-	if eventType == aw.launching or eventType == aw.terminated then
+	if appName == "Obsidian" and (eventType == aw.launching or eventType == aw.terminated) then
 		gitVaultSync() ---@diagnostic disable-line: undefined-global
 	end
 end

@@ -201,12 +201,46 @@
       ]
     },
     {
-      "description": "🅰️📖 Inoreader: v opens in background, switch jk & np",
+      "description": "🅰️📖 Reeder: b opens in background",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "key_code": "v"
+            "key_code": "b"
+          },
+          "to": [
+            {
+              "key_code": "v"
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 300
+            },
+            {
+              "key_code": "h",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.reederapp\\.\\d\\.macOS$"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "🅰️📖 Inoreader: b opens in background, switch jk & np",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "b"
           },
           "to": [
             {
