@@ -14,7 +14,7 @@ if isIMacAtHome() then require("usb-watchers") end
 
 require("app-specific-behavior")
 require("twitterrific-controls")
-if isAtMother() then require("hot-corner-action") end
+require("hot-corner-action")
 --------------------------------------------------------------------------------
 
 holeCover() ---@diagnostic disable-line: undefined-global
