@@ -1,8 +1,9 @@
 require("utils")
 
 function twitterrificAction (type)
-	local twitterrific = hs.application("Twitterrific")
 	local previousApp = frontapp()
+	openIfNotRunning("Twitterrific")
+	local twitterrific = hs.application("Twitterrific")
 	twitterrific:activate() -- needs activation, cause sending to app in background doesn't work w/ cmd
 
 	if type == "link" then
