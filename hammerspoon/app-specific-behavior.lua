@@ -428,20 +428,10 @@ end)
 -- DISCORD
 function discordWatcher(appName, eventType)
 	if appName ~= "Discord" then return end
-	_, discordrpcInstalled = hs.execute('grep "obsidian-discordrpc" "$HOME/Main Vault/.obsidian/community-plugins.json"')
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
-	-- and reconnect Obsidian's Discord Rich Presence (Obsidian launch already covered by RP Plugin)
 	if eventType == hs.application.watcher.launched then
 		hs.urlevent.openURL("discord://discord.com/channels/686053708261228577/700466324840775831")
-
-		if appIsRunning("Obsidian") and discordrpcInstalled then
-			runDelayed(3, function()
-				if not appIsRunning("Obsidian") or not appIsRunning("Discord") then return end -- app(s) could have been closed in the meantime
-				hs.urlevent.openURL("obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian-discordrpc%253Areconnect-discord")
-				hs.application("Discord"):activate()
-			end)
-		end
 	end
 
 	-- when Discord is focused, enclose URL in clipboard with <>
@@ -455,7 +445,7 @@ function discordWatcher(appName, eventType)
 		if hasURL or hasObsidianURL then
 			hs.pasteboard.setContents("<"..clipb..">")
 		end
-	elseif eventType == hs.application.watcher.deactivated then
+	elseif eventType == aw.deactivated then
 		local hasEnclosedURL = clipb:match('^<https?:%S+>$')
 		local hasEnclosedObsidianURL = clipb:match('^<obsidian:%S+>$')
 		if hasEnclosedURL or hasEnclosedObsidianURL then
