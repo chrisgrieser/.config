@@ -291,8 +291,8 @@ vmap <C-w>= :toggle-maximize-pane
 
 " swap pane position (Original Vim Bindings)
 " requires Pane Relief Plugin
-exmap swapPane obcommand pane-relief:swap-next
-map <C-w>x :swapPane
+" exmap swapPane obcommand pane-relief:swap-next
+" map <C-w>x :swapPane
 
 " [g]oto next/prev [w]indow (= pane)
 " requires Pane Relief Plugin
