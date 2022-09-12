@@ -49,7 +49,7 @@ sketchybar --bar height="$HEIGHT"                       \
 sketchybar --add item clock right                            \
            --set clock   update_freq=1                       \
                          script="$PLUGIN_DIR/clock.sh"       \
-                         width=125                           \
+                         width=130                           \
            --add alias "Stats,CPU_Bar chart" right           \
            --set       "Stats,CPU_Bar chart"                 \
                          y_offset=$((ITEM_Y_OFFSET + 2))     \

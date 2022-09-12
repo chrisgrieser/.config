@@ -23,9 +23,6 @@ colors:
     green: '#38D687'
     magenta: '#A993E6'
     white: '#F6E7D5'
-  cursor:
-    text: '0xe0def4'
-    cursor: '0x56526e'
   dim:
     black: '0x31363b'
     red: '0x783228'
