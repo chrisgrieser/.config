@@ -31,12 +31,12 @@ sketchybar --bar height="$HEIGHT"                       \
                  display=main                           \
 			  --default updates=when_shown                 \
                      drawing=on                         \
-                     icon.font="Helvetica:Bold:12.0"    \
+                     icon.font="JetBrainsMonoNL Nerd Font:Bold:18.0"    \
                      icon.color="$FONT_COLOR"           \
                      label.font="Recursive:Medium:15.0" \
                      label.color="$FONT_COLOR"          \
-                     label.padding_left=4               \
-                     label.padding_right=4              \
+                     label.padding_left=3               \
+                     label.padding_right=3              \
                      icon.padding_left=0                \
                      icon.padding_right=0               \
                      y_offset="$ITEM_Y_OFFSET"
@@ -68,16 +68,21 @@ sketchybar --add item clock right                            \
            --add event repo-files-update                     \
            --subscribe git-sync repo-files-update            \
            --subscribe git-sync system_woke                  \
+           --add item svim.mode right                                  \
+           --set svim.mode icon=""                                     \
+                           script="sketchybar --set svim.mode icon=''" \
+           --subscribe svim.mode front_app_switched window_focus       \
 
 # NOTES:
 # - `repo-files-update` gets triggered via Hammerspoon path watcher
 # - clock only needs the fixed width to fix the whitespace bug of the item next
 #   to it (stats alias)
+# - the svim mode icon gets set by the svim.sh script, and app switching removes
+#   the icon again
 
 ##### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration and
 # should never be run in an item script.
 
 sketchybar --update
-
 echo "Sketchybar configuration loaded."
