@@ -2,22 +2,15 @@
 
 cd "$HOME/dotfiles" || exit 1
 dotfiles=$(git status --porcelain)
-if [[ -n "$dotfiles" ]] ; then
-	dotfiles="⏺ "
+cd "$HOME/Main Vault" || exit 1
+vaultfiles=$(git status --porcelain)
+if [[ -n "$dotfiles" ]] || [[ -n "$vaultfiles" ]] ; then
+	icon="ﮛ"
 else
 	dotfiles=""
 fi
 
-cd "$HOME/Main Vault" || exit 1
-vaultfiles=$(git status --porcelain)
-if [[ -n "$vaultfiles" ]] ; then
-	vaultfiles="🟪 "
-else
-	vaultfiles=""
-fi
-
-
-sketchybar --set "$NAME" icon="$dotfiles $vaultfiles"
+sketchybar --set "$NAME" icon="$icon"
 
 
 
