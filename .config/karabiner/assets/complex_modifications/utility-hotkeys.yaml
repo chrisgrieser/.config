@@ -1,18 +1,6 @@
 title: 🔘 Utility Shortcuts
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
-  - description: "⚒️ L-⌥ (tap): F20 (= Show Menu Bar)"
-    manipulators:
-      - type: basic
-        from:
-          key_code: left_option
-        to:
-          - key_code: left_option
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 200
-        to_if_alone:
-          - key_code: f19
-            modifiers: command
   - description: '🔘 ⇧+⌫ → ⌦ '
     manipulators:
       - type: basic
@@ -192,8 +180,8 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.sublimetext\.4$
-      - description: ^
-        type: basic
+      # the ^
+      - type: basic
         from:
           key_code: non_us_backslash
         to:
