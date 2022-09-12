@@ -6,3 +6,4 @@ filter_title: applescript$|scpt$|^Untitled
 
 extra_includes:
   - "../match/_applescript.yml"
+  - "../match/_alfred.yml"

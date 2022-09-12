@@ -6,3 +6,4 @@ filter_title: .js$|.ts$
 
 extra_includes:
   - "../match/_javascript.yml"
+  - "../match/_alfred.yml"

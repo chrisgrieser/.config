@@ -7,3 +7,4 @@ filter_title: sh$|^\.z|alacritty
 extra_includes:
   - "../match/_shell.yml"
   - "../match/_applescript.yml" # for when osascript is called
+  - "../match/_alfred.yml"
