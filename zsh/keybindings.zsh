@@ -27,6 +27,10 @@ bindkey -M viins '^[[32;5~' autosuggest-execute # ctrl+esc (with esc remapped to
 # shift+tab: Cycle through base directories
 bindEverywhere "^[[Z" dir-cycler
 
+# [alt+arrow] - move word forward or backward (like on Mac)
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+
 
 #-------------------------------------------------------------------------------
 # INFO: use ctrl-v and then a key combination to get the shell binding
