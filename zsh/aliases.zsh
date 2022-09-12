@@ -80,3 +80,6 @@ alias -s {pdf,png,jpg,jpeg,tiff}\'="qlmanage -p &> /dev/null"
 alias -s log="less +G"
 alias -s log\'="less +G"
 alias -s log\"="less +G"
+
+# Misc
+alias tetris="tetris --ascii-only"
