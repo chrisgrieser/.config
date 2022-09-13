@@ -74,7 +74,7 @@ function amend () {
 		print -z "\"$COMMIT_MSG\""
 		return 1
 	fi
-	if [[ "$COMMIT_MSG" == "" ]] ; then
+	if [[ -z "$COMMIT_MSG" ]] ; then
 		# prefile last commit message
 		print -z "amend \"$LAST_COMMIT_MSG\""
 		return 0

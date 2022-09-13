@@ -44,3 +44,8 @@ matches:
       similar:
       ---
     label: Base YAML Header
+
+  # citation source in block quotes
+  - trigger: '!cite'
+    replace: "  \n> *– $|$*"
+    label: Base YAML Header
