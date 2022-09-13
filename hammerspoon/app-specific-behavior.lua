@@ -26,7 +26,7 @@ function unHideAll()
 end
 
 function transBackgroundApp (appName, eventType, appObject)
-	if not(appName == "Obsidian" or appName:lower() == "alacritty") then return end
+	if not(appName == "Obsidian" or appName == "alacritty" or appName == "Alacritty") then return end
 
 	-- browserIsLoading as workaround for Alfred's Compatibility Mode, where
 	-- opening URLs first activates the previous frontmost app (like Obsidian
