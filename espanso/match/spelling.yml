@@ -148,3 +148,6 @@ matches:
   - trigger: si
     replace: is
     word: true
+  - trigger: ntoe
+    replace: note
+    word: true
