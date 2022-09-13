@@ -51,12 +51,12 @@ sketchybar --add item clock right                            \
            --set clock   update_freq=1                       \
                          script="$PLUGIN_DIR/clock.sh"       \
                          width=130                           \
-           --add alias "Stats,CPU_Bar chart" right           \
-           --set       "Stats,CPU_Bar chart"                 \
+           --add alias "Stats,CPU_bar_chart" right           \
+           --set       "Stats,CPU_bar_chart"                 \
                          y_offset=$((ITEM_Y_OFFSET + 1))     \
                          width=17                            \
-           --add alias "Stats,Network_Network chart" right   \
-           --set       "Stats,Network_Network chart"         \
+           --add alias "Stats,Network_network_chart" right   \
+           --set       "Stats,Network_network_chart"         \
                          width=42                            \
            --add item weather right                          \
            --set weather update_freq=1800                    \
