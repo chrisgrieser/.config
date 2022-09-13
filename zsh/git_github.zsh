@@ -16,10 +16,10 @@ function gli (){
 		--with-nth=2.. \
 		--no-sort \
 		--no-info \
-		--header-first --header="↵ : checkout   ^H: copy [h]ash" \
+		--header-first --header="↵ : checkout  ^H: copy [h]ash  ^R: reset" \
 		--expect=ctrl-h \
 		--preview-window="wrap" \
-		--preview="git show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%C(magenta)'"\
+		--preview="git show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"\
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
@@ -28,6 +28,8 @@ function gli (){
 	if [[ "$key_pressed" == "ctrl-h" ]] ; then
 		echo "$hash" | pbcopy
 		echo "$hash copied."
+	elif [[ "$key_pressed" == "ctrl-r" ]] ; then
+		git reset "$hash"
 	else
 		git checkout "$hash"
 	fi
@@ -159,9 +161,14 @@ function rel(){
 	if [[ -f .release.sh ]] ; then
 		zsh .release.sh "$*"
 	elif [[ -f ../.release.sh ]] ; then
-		zsh ../.release.sh "$*"
+		cd ..
+		zsh .release.sh "$*"
 	elif [[ -f ../../.release.sh ]] ; then
-		zsh ../../.release.sh "$*"
+		cd ../..
+		zsh .release.sh "$*"
+	elif [[ -f ../../../.release.sh ]] ; then
+		cd ../../..
+		zsh .release.sh "$*"
 	else
 		echo "No '.release.sh' found."
 	fi

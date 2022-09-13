@@ -16,7 +16,10 @@ nnoremap Y y$
 
 " always paste what was yanked, not what was deleted
 nnoremap gp "0p
-vnoremap gp "0p
+
+" do not override register when pasting on selection
+" (still able to do so with P)
+vnoremap p "_dP
 
 """"""""""""""""""""""
 " < Search
