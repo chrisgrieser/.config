@@ -42,6 +42,8 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write -g PMPrintingExpandedStateForPrint -bool true
 defaults write -g PMPrintingExpandedStateForPrint2 -bool true
 
+# set highlight color, also relevant for sketchyvim's block cursor
+defaults write NSGlobalDomain AppleHighlightColor -string "0.968627 0.831373 1.000000 Purple"
 
 #-------------------------------------------------------------------------------
 # System Prefs
