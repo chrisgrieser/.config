@@ -28,10 +28,10 @@ __What are "dotfiles"?__
 - Here is an interesting [report on common contents of dotfiles](https://github.com/Kharacternyk/dotcommon).
 
 __How this repository works__
-- These files are symlinked into iCloud for synchronization.
+- These files are symlinked into this repo for synchronization.
 - `Hammerspoon` [is configured](hammerspoon/system-states.lua) to run the script [git-dotfile-sync.sh](git-dotfile-sync.sh) every 15 minutes, or on wake/sleep. In addition, the Alfred keyword `shutdown` will trigger the script before shutting down. 
-- The git repos that are nested inside this dotfile repository (i.e. Alfred git repositories, because the nesting can't be avoided in this case) are gitignored and pulled individually. 
-- [git-dotfile-backup.sh](git-dotfile-backup.sh) checks whether there have been any changes in dot files. If there are, it creates somewhat useful commit messages and runs the `git add commit pull push` sequence.
+- The git repos that are nested inside this dotfile repository (i.e. Alfred git repositories, because the nesting can't be avoided in this case) are configured as git submodules. 
+- [git-dotfile-sync.sh](git-dotfile-sync.sh) checks whether there have been any changes in dot files. If there are, it automatically runs the `git add commit pull push` sequence.
 - [.gitignore](.gitignore) contains a list of files not to backups for various reasons, e.g. redundancy, privacy, or simply because they are too big for a git repo.
 
 ## Got an idea for an improvement?
