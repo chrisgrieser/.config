@@ -33,7 +33,7 @@ function transBackgroundApp (appName, eventType, appObject)
 	-- or Alacritty) before opening the browser
 	local _, browserIsLoading = hs.osascript.applescript('tell application "Brave Browser" to return loading of active tab of front window')
 	local win = appObject:mainWindow()
-	if not(browserIsLoading) and eventType == aw.activated and (isPseudoMaximized(win) or isMaximized(win)) then
+	if not(browserIsLoading) and (eventType == aw.activated or eventType == aw.launching) and (isPseudoMaximized(win) or isMaximized(win)) then
 		hideAllExcept(appName)
 	elseif eventType == aw.terminated then
 		unHideAll()
@@ -47,7 +47,7 @@ transBgAppWatcher:start()
 -- OBSIDIAN
 -- Sync on Vault close
 function obsidianSync (appName, eventType, appObject)
-	if appName == "Obsidian" and (eventType == aw.launching or eventType == aw.terminated) then
+	if appName == "Obsidian" and (eventType == aw.launched or eventType == aw.terminated) then
 		gitVaultSync() ---@diagnostic disable-line: undefined-global
 	end
 end
