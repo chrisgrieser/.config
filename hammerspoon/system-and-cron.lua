@@ -26,7 +26,7 @@ function gitDotfileSync(arg)
 			local submodulesStillDirty = stdout:match(" m ")
 			if submodulesStillDirty then
 				local modules = stdout:gsub(".*/", "")
-				notify(dotfileIcon.."⚠️️ dotfiles submodules still dirty\n"..modules)
+				notify(dotfileIcon.."⚠️️ dotfiles submodules still dirty\n\n"..modules)
 				log(dotfileIcon.." ⚠️️ dotfiles submodules still dirty ("..deviceName().."):\n"..modules)
 			else
 				notify(dotfileIcon.."⚠️️ dotfiles "..stdErr)
