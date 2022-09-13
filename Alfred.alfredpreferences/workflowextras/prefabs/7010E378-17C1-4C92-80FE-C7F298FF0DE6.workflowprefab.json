@@ -1,0 +1,77 @@
+{
+  "name" : "Test Output",
+  "data" : {
+    "items" : [
+      {
+        "workflowobjecttype" : "alfred.workflow.input.keyword",
+        "uid" : "6F60D342-DCC2-4223-953F-989C35602B7E",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "withspace" : false,
+          "argumenttype" : 2,
+          "text" : "{const:alfred_workflow_name}",
+          "subtext" : "test",
+          "keyword" : "test"
+        },
+        "colorindex" : 0,
+        "ypos" : 5,
+        "xpos" : 20
+      },
+      {
+        "workflowobjecttype" : "alfred.workflow.utility.argument",
+        "uid" : "51653073-7A77-445F-BCDC-4F25D44B32F1",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "argument" : "test value",
+          "passthroughargument" : false,
+          "variables" : {
+
+          }
+        },
+        "colorindex" : 0,
+        "ypos" : 35,
+        "xpos" : 185
+      },
+      {
+        "workflowobjecttype" : "alfred.workflow.output.largetype",
+        "uid" : "E1703883-FB71-424E-B68A-6E6B6A8B8D45",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "wrapat" : 50,
+          "textcolor" : "",
+          "backgroundcolor" : "",
+          "ignoredynamicplaceholders" : false,
+          "largetypetext" : "{query}",
+          "alignment" : 0,
+          "fadespeed" : 0,
+          "font" : "",
+          "fillmode" : 0
+        },
+        "colorindex" : 0,
+        "ypos" : 5,
+        "xpos" : 270
+      }
+    ],
+    "connections" : [
+      {
+        "sourceuid" : "6F60D342-DCC2-4223-953F-989C35602B7E",
+        "config" : {
+          "destinationuid" : "51653073-7A77-445F-BCDC-4F25D44B32F1",
+          "modifiers" : 0,
+          "modifiersubtext" : "",
+          "vitoclose" : false
+        }
+      },
+      {
+        "sourceuid" : "51653073-7A77-445F-BCDC-4F25D44B32F1",
+        "config" : {
+          "destinationuid" : "E1703883-FB71-424E-B68A-6E6B6A8B8D45",
+          "modifiers" : 0,
+          "modifiersubtext" : "",
+          "vitoclose" : false
+        }
+      }
+    ]
+  },
+  "description" : ""
+}

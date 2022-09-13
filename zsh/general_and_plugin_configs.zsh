@@ -19,7 +19,7 @@ ZSH_HIGHLIGHT_STYLES[root]='bg=red' # highlight red when currently root
 # # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
 typeset -A ZSH_HIGHLIGHT_REGEXP
 # commit msgs too long
-ZSH_HIGHLIGHT_REGEXP+=('^(git commit -m|acp|amend) .{50,}' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_REGEXP+=('^(git commit -m|acp|amend) "?.{50,}"?' 'fg=white,bold,bg=red')
 # dangerous stuff
 ZSH_HIGHLIGHT_REGEXP+=('(git reset --hard|rm -r?f) .*' 'fg=white,bold,bg=red')
 # NOTE: There are also some custom highlights for global aliases int eh aliases.zsh

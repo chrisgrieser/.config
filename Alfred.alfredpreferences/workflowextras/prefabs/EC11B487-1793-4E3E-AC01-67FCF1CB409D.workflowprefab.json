@@ -1,0 +1,33 @@
+{
+  "name" : "Check for Alfred version 5",
+  "data" : {
+    "items" : [
+      {
+        "workflowobjecttype" : "alfred.workflow.utility.conditional",
+        "uid" : "C40836B7-DDAC-4B46-9BE9-865728523B9D",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "elselabel" : "version <= 4",
+          "conditions" : [
+            {
+              "matchstring" : "^5\\.",
+              "outputlabel" : "version >= 5",
+              "uid" : "0FE84C8E-C444-4461-AC9F-30CD4B47058C",
+              "matchcasesensitive" : false,
+              "matchmode" : 4,
+              "inputstring" : "{const:alfred_version}"
+            }
+          ],
+          "hideelse" : false
+        },
+        "colorindex" : 0,
+        "ypos" : 5,
+        "xpos" : 20
+      }
+    ],
+    "connections" : [
+
+    ]
+  },
+  "description" : ""
+}
