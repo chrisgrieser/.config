@@ -113,8 +113,6 @@ esac
 if [[ $INFO_WINDOW == 1 ]]; then
 	sleep 0.2
 	osascript -e 'tell application "System Events"
-	keystroke tab
-	delay 0.1
 	keystroke "v" using {command down}
 	delay 0.1
 	keystroke "w" using {command down}
