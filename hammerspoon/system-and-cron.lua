@@ -22,8 +22,16 @@ function gitDotfileSync(arg)
 	gitDotfileSyncTask = hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode ~= 0 then
-			notify(dotfileIcon.." ⚠️️ dotfiles "..stdErr)
-			log (dotfileIcon.." ⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
+			local stdout = hs.execute("git status --short")
+			local submodulesStillDirty = stdout:matches(" m ")
+			if submodulesStillDirty then
+				local modules = stdout:gsub(".*/", "")
+				notify(dotfileIcon.."⚠️️ dotfiles submodules still dirty\n"..modules)
+				log(dotfileIcon.." ⚠️️ dotfiles submodules still dirty ("..deviceName().."):\n"..modules)
+			else
+				notify(dotfileIcon.."⚠️️ dotfiles "..stdErr)
+				log (dotfileIcon.." ⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
+			end
 		end
 	end, {arg}):start()
 end
@@ -34,7 +42,7 @@ function gitVaultSync()
 	gitVaultSyncTask = hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
 		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode ~= 0 then
-			notify(vaultIcon.." ⚠️️ vault "..stdErr)
+			notify(vaultIcon.."⚠️️ vault "..stdErr)
 			log (vaultIcon.." ⚠️ vault sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
 		end
 	end):start()
@@ -67,7 +75,6 @@ vaultWatcher:start()
 
 function screenSleep (eventType)
 	if eventType == hs.caffeinate.watcher.screensDidSleep then
-		log ("💤 sleep ("..deviceName()..")", "./logs/sync.log")
 		log ("💤 sleep ("..deviceName()..")", "./logs/some.log")
 		gitDotfileSync()
 	end
