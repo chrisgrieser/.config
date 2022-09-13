@@ -30,7 +30,8 @@ git push
 # check that everything worked (e.g. submodules are still dirty)
 DIRTY=$(git status --porcelain)
 if [[ -n "$DIRTY" ]]; then
-	echo "Dotfile Repo still dirty."
+	echo
+	echo "\033[1;33mDotfile Repo still dirty."
 	echo "$DIRTY"
 	exit 1
 fi

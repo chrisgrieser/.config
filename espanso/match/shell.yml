@@ -69,51 +69,51 @@ matches:
   - triggers: ["!color", "!reset"]
     replace: "\\033[0m"
     label: reset
-  - trigger: "!color"
+  - triggers: ["!color", "!black"]
     replace: "\\033[1;30m"
     label: fg black
-  - trigger: "!color"
+  - triggers: ["!color", "!red"]
     replace: "\\033[1;31m"
     label: fg red
-  - trigger: "!color"
+  - triggers: ["!color", "!green"]
     replace: "\\033[1;32m"
     label: fg green
-  - trigger: "!color"
+  - triggers: ["!color", "!yellow"]
     replace: "\\033[1;33m"
     label: fg yellow
-  - trigger: "!color"
+  - triggers: ["!color", "!blue"]
     replace: "\\033[1;34m"
     label: fg blue
-  - trigger: "!color"
+  - triggers: ["!color", "!magenta"]
     replace: "\\033[1;35m"
     label: fg magenta
-  - trigger: "!color"
+  - triggers: ["!color", "!cyan"]
     replace: "\\033[1;36m"
     label: fg cyan
-  - trigger: "!color"
+  - triggers: ["!color", "!white"]
     replace: "\\033[1;37m"
     label: fg white
-  - trigger: "!color"
+  - triggers: ["!color", "!bg"]
     replace: "\\033[1;40m"
     label: bg black
-  - trigger: "!color"
+  - triggers: ["!color", "!bg"]
     replace: "\\033[1;41m"
     label: bg red
-  - trigger: "!color"
+  - triggers: ["!color", "!bg"]
     replace: "\\033[1;42m"
     label: bg green
-  - trigger: "!color"
+  - triggers: ["!color", "!bg"]
     replace: "\\033[1;43m"
     label: bg yellow
-  - trigger: "!color"
+  - triggers: ["!color", "!bg"]
     replace: "\\033[1;44m"
     label: bg blue
-  - trigger: "!color"
+  - triggers: ["!color", "!bg"]
     replace: "\\033[1;45m"
     label: bg magenta
-  - trigger: "!color"
+  - triggers: ["!color", "!bg"]
     replace: "\\033[1;46m"
     label: bg cyan
-  - trigger: "!color"
+  - triggers: ["!color", "!bg"]
     replace: "\\033[1;47m"
     label: bg white
