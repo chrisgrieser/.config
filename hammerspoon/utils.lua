@@ -19,7 +19,7 @@ function deviceName()
 end
 
 function isAtMother()
-	if deviceName():find("Leuthingerweg") then
+	if deviceName():find("Mother") then
 		return true
 	else
 		return false
@@ -27,7 +27,7 @@ function isAtMother()
 end
 
 function isIMacAtHome()
-	if deviceName():find("iMac") and deviceName():find("Helmholtz") then
+	if deviceName():find("iMac") and deviceName():find("Home") then
 		return true
 	else
 		return false
