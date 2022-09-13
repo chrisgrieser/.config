@@ -151,3 +151,6 @@ matches:
   - trigger: ntoe
     replace: note
     word: true
+  - trigger: fiel
+    replace: file
+    word: true

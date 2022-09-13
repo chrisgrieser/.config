@@ -1,7 +1,7 @@
 #!/bin/zsh
-# shellcheck disable=SC2028
+# shellcheck disable=SC2028,SC2248
 
-# input args / config
+# input args / Config
 URL="$1"
 OUTPUT_FOLDER="$2"
 [[ -z "$URL" ]] && exit 1
@@ -42,7 +42,7 @@ fi
 
 # Mercury Reader Version
 parsed_data=$(mercury-parser "$URL")
-echo "$parsed_data" | yq .content | markdownlint --fix --quiet --stdin > temp.html
+echo "$parsed_data" | yq .content > temp.html
 
 title=$(echo "$parsed_data" | yq .title)
 safe_title=$(echo "$title" | tr "/:;.\\" "-----" | cut -c-$MAX_TITLE_LENGTH)
@@ -57,27 +57,35 @@ output1=$(cat temp.md)
 rm temp.html temp.md
 
 # Gather Version
-output2=$(gather --inline-links --no-include-source "$URL" | markdownlint --fix --quiet --stdin)
+output2=$(gather --inline-links --no-include-source "$URL")
 
-# Output & Quality Control
-count1=$(echo "$output1" | wc -c)
-count2=$(echo "$output2" | wc -c)
+# Quality Control
+if [[ ! -e "$REPORT_FILE" ]] ; then
+	echo "Tolerance: $TOLERANCE Words Difference" > "$REPORT_FILE"
+	echo "--------------------------------------" >> "$REPORT_FILE"
+fi
+
+count1=$(echo "$output1" | wc -w) # counting words instead of characters since less prone to variation due to whitespace or formatting style
+count2=$(echo "$output2" | wc -w)
 count_diff=$((count1 - count2))
-[[ $count_diff -lt 0 ]] && count_diff=$((count_diff * -1 ))
+[[ $count_diff -lt 0 ]] && count_diff=$((count_diff * -1 )) # absolute value
 
 if [[ $count_diff -gt $TOLERANCE ]]; then
-	echo "\033[1;33m Difference of $count_diff characters."
-	[[ ! -e "$REPORT_FILE" ]] && echo "Tolerance: $TOLERANCE characters difference" > "$REPORT_FILE"
-	echo "$count_diff – $URL" >> "$REPORT_FILE"
-else
-	if [[ $count_diff -eq 0 ]]; then
-		echo "\033[1;32mNo Difference."
-	elif [[ $count_diff -eq 1 ]]; then
-		echo "\033[1;32mDifference of 1 character."
-	else
-		echo "\033[1;32mDifference of $count_diff characters."
-	fi
-	echo "\033[0m" # reset coloring
-	echo "$frontmatter\n$output1" > "$OUTPUT_FOLDER/${safe_title}.md"
-	echo "Saved as '${safe_title}.md'"
+	echo "\033[1;33m Difference of $count_diff words"
+	echo "$count_diff;$URL" >> "$REPORT_FILE"
+	exit 0 # don't write output if over the tolerance level
 fi
+
+if [[ $count_diff -eq 0 ]]; then
+	echo "\033[1;32mNo Difference."
+elif [[ $count_diff -eq 1 ]]; then
+	echo "\033[1;32mDifference of 1 word."
+else
+	echo "\033[1;32mDifference of $count_diff words."
+fi
+echo -n "\033[0m" # reset coloring
+
+# Cleaning & Saving Output
+content=$(echo "$output1"  | markdownlint --fix --quiet --stdin)
+echo "$frontmatter\n$content" > "$OUTPUT_FOLDER/${safe_title}.md"
+echo "✅ Article saved as '${safe_title}.md'"
