@@ -33,7 +33,7 @@ sketchybar --bar height="$HEIGHT"                       \
                      drawing=on                         \
                      icon.font="JetBrainsMonoNL Nerd Font:Bold:20.0"    \
                      icon.color="$FONT_COLOR"           \
-                     label.font="Recursive:Medium:15.0" \
+                     label.font="Recursive:Medium:15.5"   \
                      label.color="$FONT_COLOR"          \
                      label.padding_left=3               \
                      label.padding_right=3              \
@@ -44,7 +44,8 @@ sketchybar --bar height="$HEIGHT"                       \
 
 ##### Items #####
 # https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
-# get names of original menubar items to add as alias: `sketchybar --query default_menu_items`
+# get names of original menubar items to add as alias:
+# `sketchybar --query default_menu_items`
 
 sketchybar --add item clock right                            \
            --set clock   update_freq=1                       \
@@ -52,12 +53,15 @@ sketchybar --add item clock right                            \
                          width=130                           \
            --add alias "Stats,CPU_Bar chart" right           \
            --set       "Stats,CPU_Bar chart"                 \
-                         y_offset=$((ITEM_Y_OFFSET + 2))     \
-                         width=20                            \
+                         y_offset=$((ITEM_Y_OFFSET + 1))     \
+                         width=17                            \
            --add alias "Stats,Network_Network chart" right   \
+           --set       "Stats,Network_Network chart"         \
+                         width=42                            \
            --add item weather right                          \
            --set weather update_freq=1800                    \
                          script="$PLUGIN_DIR/weather.sh"     \
+           					 icon.font="Noto Emoji:Bold:16"      \
            --add item covid-stats right                      \
            --set covid-stats update_freq=43200               \
                          script="$PLUGIN_DIR/covid-stats.sh" \
@@ -75,8 +79,8 @@ sketchybar --add item clock right                            \
 
 # NOTES:
 # - `repo-files-update` gets triggered via Hammerspoon path watcher
-# - clock only needs the fixed width to fix the whitespace bug of the item next
-#   to it (stats alias)
+# - clock and alias items needs the fixed-width to fix whitespace bug of the
+#   item next to it (stats alias)
 # - the svim mode icon gets set by the svim.sh script, and app switching removes
 #   the icon again
 
