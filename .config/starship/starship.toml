@@ -19,7 +19,7 @@ error_symbol = " [](bold red)"
 # vimcmd_symbol = " [Normal](bold blue)" # doesn't work as long as cursor styling snippet is active
 
 [sudo]
-style = 'fg:blue bg:black'
+style = 'fg:green bg:black'
 symbol = " "
 format = "[$symbol]($style)"
 disabled = false
