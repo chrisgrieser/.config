@@ -23,7 +23,7 @@ function gitDotfileSync(arg)
 		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode ~= 0 then
 			local stdout = hs.execute("git status --short")
-			local submodulesStillDirty = stdout:matches(" m ")
+			local submodulesStillDirty = stdout:match(" m ")
 			if submodulesStillDirty then
 				local modules = stdout:gsub(".*/", "")
 				notify(dotfileIcon.."⚠️️ dotfiles submodules still dirty\n"..modules)
