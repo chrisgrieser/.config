@@ -11,7 +11,7 @@ fi
 [[ -z "$OUTPUT_FOLDER" ]] && OUTPUT_FOLDER="."
 TOLERANCE=15 # number of words treshhold
 MAX_TITLE_LENGTH=45
-REPORT_FILE="$OUTPUT_FOLDER/report.csv"
+ERROR_LOG="$OUTPUT_FOLDER/errors.log"
 DESTINATION="$OUTPUT_FOLDER/files/"
 mkdir -p "$DESTINATION"
 
@@ -41,14 +41,15 @@ if ! command gather &> /dev/null ; then
 fi
 
 # Report file
-echo "Tolerance: $TOLERANCE Words Difference" > "$REPORT_FILE"
-echo "------------------------------" >> "$REPORT_FILE"
+echo "URL Parsing Failues" > "$ERROR_LOG"
+echo "-------------------" >> "$ERROR_LOG"
 
 #-------------------------------------------------------------------------------
 
 PROGRESS_COUNT=0
 SUCCESS_COUNT=0
-FAILURE_COUNT=0
+ERROR_COUNT=0
+WARNING_COUNT=0
 
 # skip comments & empty lines
 INPUT=$(cat "$INPUT_FILE" | grep -vE "^$" | grep -vE "^#")
@@ -63,8 +64,8 @@ echo "$INPUT" | while read -r line ; do
 	HTTP_CODE=$(curl -sI "$URL" | head -n1 | sed -E 's/[[:space:]]*$//g')
 	if [[ "$HTTP_CODE" != "HTTP/2 200" ]]; then
 		echo "\033[1;31mURL is dead: $HTTP_CODE\033[0m"
-		echo "$HTTP_CODE;$URL" >> "$REPORT_FILE"
-		FAILURE_COUNT=$((FAILURE_COUNT + 1))
+		echo "$HTTP_CODE;$URL" >> "$ERROR_LOG"
+		ERROR_COUNT=$((ERROR_COUNT + 1))
 		continue
 	fi
 
@@ -98,39 +99,49 @@ echo "$INPUT" | while read -r line ; do
 	output_gather=$(gather --inline-links --no-include-source --no-include-title "$URL" | sed 's/---?/–/g' | tr -s " ")
 
 	# Quality Control
-	# using word count instead of diff for performance
+	# (using word count instead of diff for performance)
 	count_mercury=$(echo "$output_mercury" | wc -w) # counting words instead of characters since less prone to variation due to whitespace or formatting style
 	count_gather=$(echo "$output_gather" | wc -w)
 	count_diff=$((count_mercury - count_gather))
 	[[ $count_diff -lt 0 ]] && count_diff=$((count_diff * -1 )) # absolute value
 
 	if [[ $count_diff -gt $TOLERANCE ]]; then
-		echo "\033[1;33mDifference of $count_diff words"
-		echo "${count_diff} w_diff;$URL" >> "$REPORT_FILE"
-		FAILURE_COUNT=$((FAILURE_COUNT + 1))
-		continue # don't write output if above the tolerance threshhold
-	fi
-
-	echo -n "\033[1;32m" # green
-	if [[ $count_diff -eq 0 ]]; then
-		echo -n "No Difference"
-	elif [[ $count_diff -eq 1 ]]; then
-		echo -n "Difference of 1 word."
+		echo -n "\033[1;33mDifference of $count_diff words"
+		WARNING_COUNT=$((WARNING_COUNT + 1))
 	else
-		echo -n "Difference of $count_diff words."
+		echo -n "\033[1;32m" # green
+		if [[ $count_diff -eq 0 ]]; then
+			echo -n "No Difference"
+		elif [[ $count_diff -eq 1 ]]; then
+			echo -n "Difference of 1 word."
+		else
+			echo -n "Difference of $count_diff words."
+		fi
+		SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
 	fi
-	echo "\033[0m → Article saved as '$file_name'"
+	echo "\033[0m → '$file_name'"
 
-	SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
-
-	# Cleaning & Saving Output
-
-	# use content from the parser which seems to get more content
+	# Saving Output
+	# (use content from the parser which seems to get more content)
+	# for using OSX sed to insert lines: https://stackoverflow.com/a/25632073
 	if [[ $count_gather -gt $count_mercury ]]; then
 		content="$output_mercury"
+		frontmatter=$(echo "$frontmatter" | sed '6i\
+		              parser: Mercury')
 	else
 		content="$output_gather"
+		frontmatter=$(echo "$frontmatter" | sed '6i\
+		              parser: Gather')
 	fi
+
+	if [[ $count_diff -gt $TOLERANCE ]]; then
+		frontmatter=$(echo "$frontmatter" | sed "7i\\
+		              parser-diff: $count_diff words")
+	else
+		frontmatter=$(echo "$frontmatter" | sed '7i\
+		              parser-diff: ok')
+	fi
+
 	echo "$frontmatter\n\n$content" > "$DESTINATION/$file_name"
 done
 
@@ -138,4 +149,6 @@ done
 
 # Summary
 echo "\033[0m---"
-echo "\033[1;32m$SUCCESS_COUNT\033[0m article(s) scrapped, \033[1;31m$FAILURE_COUNT\033[0m article(s) failed."
+echo "\033[1;32m$SUCCESS_COUNT\033[0m articles scrapped"
+echo "\033[1;33m$WARNING_COUNT\033[0m articles with significant parser difference"
+echo "\033[1;31m$ERROR_COUNT\033[0m articles failed"
