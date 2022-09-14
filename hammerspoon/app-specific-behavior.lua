@@ -261,17 +261,6 @@ wf_finder:subscribe(wf.windowDestroyed, function ()
 	end
 end)
 
--- quit Finder, when it was launched it wasn't launched manually
-function finderLaunchNoticed(appName, eventType)
-	if appName == "Finder" and eventType == aw.launched then
-		runDelayed(3, function ()
-			if not(frontapp() == "Finder") then hs.application("Finder"):kill() end
-		end)
-	end
-end
-finderLaunchWatcher = aw.new(finderLaunchNoticed)
-finderLaunchWatcher:start()
-
 --------------------------------------------------------------------------------
 
 -- MARTA

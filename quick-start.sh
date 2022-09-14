@@ -125,12 +125,11 @@ ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.l
 # ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify_token_cache.json" "$DOTFILE_FOLDER/.config/spotify-tui/.spotify_token_cache.json"
 
 # Obsidian vimrc
-# OBSI_ICLOUD=~'/Library/Mobile Documents/iCloud~md~obsidian/Documents/'
-# ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian.vimrc" "$OBSI_ICLOUD/Main Vault/Meta"
-# ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian-vim-helpers.js" "$OBSI_ICLOUD/Main Vault/Meta"
-# ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian.vimrc" "$OBSI_ICLOUD/Development/Meta"
-# ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian-vim-helpers.js" "$OBSI_ICLOUD/Development/Meta"
-# ln -sf "$DOTFILE_FOLDER/pandoc/README.md" "$OBSI_ICLOUD/Main Vault/Knowledge Base/Pandoc.md"
+# ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian.vimrc" "$HOME/Main Vault/Meta"
+# ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian-vim-helpers.js" "$HOME/Main Vault/Meta"
+# ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian.vimrc" "$HOME/Development/Meta"
+# ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian-vim-helpers.js" "$HOME/Development/Meta"
+# ln -sf "$DOTFILE_FOLDER/pandoc/README.md" "$HOME/Main Vault/Knowledge Base/Pandoc.md"
 
 # YAMLlint
 # ln -sf "$DOTFILE_FOLDER/.config/yamllint/config/.yamllint.yaml" "$DOTFILE_FOLDER/.config/karabiner/assets/complex_modifications"
