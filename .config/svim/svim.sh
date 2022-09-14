@@ -8,7 +8,7 @@
 
 if [[ "$MODE" == "N" ]] ; then
 	ICON="" # nerd font vim icon
-elif [[ "$MODE" == "I" ]] ; then
+elif [[ "$MODE" == "I" ]] || [[ -z "$MODE" ]] ; then
 	ICON=""
 else
 	ICON=" $MODE"

@@ -28,12 +28,8 @@ end
 function transBackgroundApp (appName, eventType, appObject)
 	if not(appName == "Obsidian" or appName == "alacritty" or appName == "Alacritty") then return end
 
-	-- browserIsLoading as workaround for Alfred's Compatibility Mode, where
-	-- opening URLs first activates the previous frontmost app (like Obsidian
-	-- or Alacritty) before opening the browser
-	local _, browserIsLoading = hs.osascript.applescript('tell application "Brave Browser" to return loading of active tab of front window')
 	local win = appObject:mainWindow()
-	if not(browserIsLoading) and (eventType == aw.activated or eventType == aw.launching) and (isPseudoMaximized(win) or isMaximized(win)) then
+	if not(alfredActive) and (eventType == aw.activated or eventType == aw.launching) and (isPseudoMaximized(win) or isMaximized(win)) then
 		hideAllExcept(appName)
 	elseif eventType == aw.terminated then
 		unHideAll()
@@ -41,6 +37,22 @@ function transBackgroundApp (appName, eventType, appObject)
 end
 transBgAppWatcher = aw.new(transBackgroundApp)
 transBgAppWatcher:start()
+
+-- workaround for Alfred's Compatibility Mode, where opening URLs first
+-- activates the previous frontmost app (like Obsidian or Alacritty) before
+-- opening the browser
+alfredActive = false
+function alfredActivated (appName, eventType)
+	if not(appName == "Alfred") then return end
+
+	if eventType == aw.activated then
+		alfredActive = true
+	elseif eventType == aw.deactivated then
+		runDelayed(0.5, function () alfredActive = false end)
+	end
+end
+alfredWatcher = aw.new(alfredActivated)
+alfredWatcher:start()
 
 --------------------------------------------------------------------------------
 

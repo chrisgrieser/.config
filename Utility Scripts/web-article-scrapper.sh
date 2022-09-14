@@ -6,7 +6,7 @@ URL="$1"
 OUTPUT_FOLDER="$2"
 [[ -z "$URL" ]] && exit 1
 [[ -z "$OUTPUT_FOLDER" ]] && OUTPUT_FOLDER="."
-TOLERANCE=20
+TOLERANCE=10 # number of words to trigger creating a report
 MAX_TITLE_LENGTH=50
 REPORT_FILE="$OUTPUT_FOLDER/report.csv"
 
@@ -28,15 +28,10 @@ if ! command yq &> /dev/null; then
 	echo "install: brew install yq"
 	exit 1
 fi
-if ! command markdownlint &> /dev/null ; then
-	echo "markdownlint not installed."
-	echo "install: brew markdownlint-cli"
-	exit 1
-fi
 if ! command gather &> /dev/null ; then
 	echo "gather-cli not installed."
 	echo "Install from here: https://github.com/ttscoff/gather-cli"
-	echo "(brew tap requires 12gb Xcode install, so download the package instead…)"
+	echo "(brew-tap requires 12gb Xcode install, so download the package instead…)"
 	exit 1
 fi
 
@@ -51,15 +46,18 @@ date_published=$(echo "$parsed_data" | yq .date_published | cut -d"T" -f1)
 excerpt=$(echo "$parsed_data" | yq .excerpt)
 article_word_count=$(echo "$parsed_data" | yq .word_count)
 
-frontmatter=$(echo "---" ; echo "title: $title" ; echo "author: $author" ; echo "date: $date_published" ; echo "excerpt: $excerpt" echo "word: $article_word_count" ; echo "source: $URL" ; echo "---" ; echo)
+frontmatter=$(echo "---" ; echo "title: $title" ; echo "author: $author" ; echo "date: $date_published" ; echo "excerpt: $excerpt" ; echo "word: $article_word_count" ; echo "source: $URL" ; echo "---")
 turndown-cli --head=2 --hr=2 --bullet=2 --code=2 temp.html &> /dev/null
-output1=$(cat temp.md)
+# shellcheck disable=SC1111
+output1=$(tr "’“”" "'\"\"" < temp.md | sed 's/\\\. /. /g' | tr -s " ")
 rm temp.html temp.md
 
 # Gather Version
-output2=$(gather --inline-links --no-include-source "$URL")
+# settings options to mirror the output from Mercury Parser
+output2=$(gather --inline-links --no-include-source --no-include-title "$URL" | sed 's/---?/–/g' | tr -s " ")
 
 # Quality Control
+# using word count instead of diff for performance
 if [[ ! -e "$REPORT_FILE" ]] ; then
 	echo "Tolerance: $TOLERANCE Words Difference" > "$REPORT_FILE"
 	echo "--------------------------------------" >> "$REPORT_FILE"
@@ -73,7 +71,7 @@ count_diff=$((count1 - count2))
 if [[ $count_diff -gt $TOLERANCE ]]; then
 	echo "\033[1;33m Difference of $count_diff words"
 	echo "$count_diff;$URL" >> "$REPORT_FILE"
-	exit 0 # don't write output if over the tolerance level
+	exit 0 # don't write output if above the tolerance threshhold
 fi
 
 if [[ $count_diff -eq 0 ]]; then
@@ -86,6 +84,6 @@ fi
 echo -n "\033[0m" # reset coloring
 
 # Cleaning & Saving Output
-content=$(echo "$output1"  | markdownlint --fix --quiet --stdin)
-echo "$frontmatter\n$content" > "$OUTPUT_FOLDER/${safe_title}.md"
+content="$output1"
+echo "$frontmatter\n\n$content" > "$OUTPUT_FOLDER/${safe_title}.md"
 echo "✅ Article saved as '${safe_title}.md'"
