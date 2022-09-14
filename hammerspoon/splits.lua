@@ -38,11 +38,14 @@ function pairedActivation(mode)
 			end
 		end)
 		wf_pairedActivation:subscribe(wf.windowDestroyed, function(closedWin)
-			if not(SPLIT_LEFT and SPLIT_RIGHT) then vsplit("unsplit") end
+			if not(SPLIT_LEFT) or not(SPLIT_RIGHT) or (SPLIT_RIGHT:id() == closedWin:id()) or (SPLIT_LEFT:id() == closedWin:id()) then
+				vsplit("unsplit")
+			end
 		end)
 	elseif mode == "stop" then
 		if wf_pairedActivation then wf_pairedActivation:unsubscribeAll() end
 		wf_pairedActivation = nil
+		notify("Split terminated")
 	end
 end
 
