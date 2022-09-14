@@ -31,7 +31,7 @@ sketchybar --bar height="$HEIGHT"                       \
                  display=main                           \
 			  --default updates=when_shown                 \
                      drawing=on                         \
-                     icon.font="JetBrainsMonoNL Nerd Font:Bold:20.0"    \
+                     icon.font="JetBrainsMonoNL Nerd Font:Bold:21.0"    \
                      icon.color="$FONT_COLOR"           \
                      label.font="Recursive:Medium:15.5"   \
                      label.color="$FONT_COLOR"          \
@@ -50,14 +50,13 @@ sketchybar --bar height="$HEIGHT"                       \
 sketchybar --add item clock right                            \
            --set clock   update_freq=1                       \
                          script="$PLUGIN_DIR/clock.sh"       \
-                         width=130                           \
+                         width=135                           \
            --add alias "Stats,CPU_bar_chart" right           \
            --set       "Stats,CPU_bar_chart"                 \
-                         y_offset=$((ITEM_Y_OFFSET + 1))     \
-                         width=17                            \
+                         width=16                            \
            --add alias "Stats,Network_network_chart" right   \
            --set       "Stats,Network_network_chart"         \
-                         width=42                            \
+                         width=41                            \
            --add item weather right                          \
            --set weather update_freq=1800                    \
                          script="$PLUGIN_DIR/weather.sh"     \
@@ -68,14 +67,13 @@ sketchybar --add item clock right                            \
            --add item git-sync right                         \
            --set git-sync update_freq=9001                   \
                          script="$PLUGIN_DIR/git-sync.sh"    \
-                         y_offset=$((ITEM_Y_OFFSET + 1))     \
            --add event repo-files-update                     \
            --subscribe git-sync repo-files-update            \
            --subscribe git-sync system_woke                  \
            --add item svim.mode right                                  \
            --set svim.mode icon=""                                     \
                            script="sketchybar --set svim.mode icon=''" \
-           --subscribe svim.mode front_app_switched window_focus       \
+           --subscribe svim.mode front_app_switched          \
 
 # NOTES:
 # - `repo-files-update` gets triggered via Hammerspoon path watcher

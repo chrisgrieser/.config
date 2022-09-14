@@ -6,7 +6,7 @@ URL="$1"
 OUTPUT_FOLDER="$2"
 [[ -z "$URL" ]] && exit 1
 [[ -z "$OUTPUT_FOLDER" ]] && OUTPUT_FOLDER="."
-TOLERANCE=10 # number of words to trigger creating a report
+TOLERANCE=15 # number of words treshhold
 MAX_TITLE_LENGTH=50
 REPORT_FILE="$OUTPUT_FOLDER/report.csv"
 
@@ -35,7 +35,19 @@ if ! command gather &> /dev/null ; then
 	exit 1
 fi
 
-# Mercury Reader Version
+# Report file
+echo "Tolerance: $TOLERANCE Words Difference" > "$REPORT_FILE"
+echo "--------------------------------------" >> "$REPORT_FILE"
+
+# Check URL whether is alive
+HTTP_CODE=$(curl -I "$URL" | head -n1)
+if [[ "$HTTP_CODE" != "HTTP/2 200" ]]; then
+	echo "\033[1;31mURL is dead: $HTTP_CODE\033[0m"
+	echo "$HTTP_CODE;$URL" >> "$REPORT_FILE"
+	return 1
+fi
+
+# Scrapping via Mercury Reader
 parsed_data=$(mercury-parser "$URL")
 echo "$parsed_data" | yq .content > temp.html
 
@@ -52,17 +64,12 @@ turndown-cli --head=2 --hr=2 --bullet=2 --code=2 temp.html &> /dev/null
 output1=$(tr "’“”" "'\"\"" < temp.md | sed 's/\\\. /. /g' | tr -s " ")
 rm temp.html temp.md
 
-# Gather Version
-# settings options to mirror the output from Mercury Parser
+# Scrapping via Gather
+# (options to mirror the output from Mercury Parser)
 output2=$(gather --inline-links --no-include-source --no-include-title "$URL" | sed 's/---?/–/g' | tr -s " ")
 
 # Quality Control
 # using word count instead of diff for performance
-if [[ ! -e "$REPORT_FILE" ]] ; then
-	echo "Tolerance: $TOLERANCE Words Difference" > "$REPORT_FILE"
-	echo "--------------------------------------" >> "$REPORT_FILE"
-fi
-
 count1=$(echo "$output1" | wc -w) # counting words instead of characters since less prone to variation due to whitespace or formatting style
 count2=$(echo "$output2" | wc -w)
 count_diff=$((count1 - count2))
@@ -70,8 +77,8 @@ count_diff=$((count1 - count2))
 
 if [[ $count_diff -gt $TOLERANCE ]]; then
 	echo "\033[1;33m Difference of $count_diff words"
-	echo "$count_diff;$URL" >> "$REPORT_FILE"
-	exit 0 # don't write output if above the tolerance threshhold
+	echo "${count_diff}w_diff;$URL" >> "$REPORT_FILE"
+	return 0 # don't write output if above the tolerance threshhold
 fi
 
 if [[ $count_diff -eq 0 ]]; then
