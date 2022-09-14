@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 input="$1"
-[[ -d "$input" ]] && return 1 # applescript does not work for folders
+[[ -f "$input" ]] || return 1 # this script does not work for folders or multiple files
 
 file_name=$(basename "$input")
 cp "$input" "/tmp/"

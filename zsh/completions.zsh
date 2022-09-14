@@ -45,40 +45,34 @@ setopt MENU_COMPLETE
 
 #-------------------------------------------------------------------------------
 # CLI-SPECIFIC COMPLETIONS
-# INFO deactivated, because they increase the zsh loading time by 200ms without me really using them
-
-
-# Pandoc - https://groups.google.com/g/pandoc-discuss/c/Ot019yRiJFQ/m/VPchuJRkBQAJ
-# (bashcompinit requires compinit, so compinit has to be autoloaded unless some other completion script has already done so.)
-
-# if which pandoc &> /dev/null; then
-# 	autoload -U +X bashcompinit && bashcompinit
-# 	eval "$(pandoc --bash-completion)"
-# fi
-
-# # pip
-# if which pip &> /dev/null; then
-# 	eval "$(pip completion --zsh)"
-# 	compctl -K _pip_completion pip3
-# fi
-
-# # NPM - https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/npm/npm.plugin.zsh
-# if which npm &> /dev/null; then
-# 	(( $+commands[npm] )) && {
-# 	  rm -f "${ZSH_CACHE_DIR:-$ZSH/cache}/npm_completion"
-
-# 	  _npm_completion() {
-# 	    local si=$IFS
-# 	    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
-# 	                 COMP_LINE=$BUFFER \
-# 	                 COMP_POINT=0 \
-# 	                 npm completion -- "${words[@]}" \
-# 	                 2>/dev/null)
-# 	    IFS=$si
-# 	  }
-# 	  compdef _npm_completion npm
-# 	}
-# fi
 
 # Homebrew Completions have to be added in .zprofile
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+
+# Lazy loading to decrease loading time:
+# https://frederic-hemberger.de/notes/shell/speed-up-initial-zsh-startup-with-lazy-loading/)
+if which npm &> /dev/null; then
+	npm() {
+		unfunction "$0" # Remove this function, subsequent calls will execute 'kubectl' directly
+		$0 "$@" # Execute binary
+		npm completion # https://docs.npmjs.com/cli/v8/commands/npm-completion
+	}
+fi
+
+if which pip3 &> /dev/null; then
+	pip3(){
+		unfunction "$0"
+		$0 "$@"
+		eval "$(pip3 completion --zsh)"# https://askubuntu.com/a/1026594
+	}
+fi
+
+if which pandoc &> /dev/null; then
+	pandoc(){
+		unfunction "$0"
+		$0 "$@"
+		autoload -U +X bashcompinit && bashcompinit # (bashcompinit requires compinit, so compinit has to be autoloaded unless some other completion script has already done so.)
+		eval "$(pandoc --bash-completion)" # https://groups.google.com/g/pandoc-discuss/c/Ot019yRiJFQ/m/VPchuJRkBQAJ
+	}
+fi
+
