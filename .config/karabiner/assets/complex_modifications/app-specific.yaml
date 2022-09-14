@@ -13,10 +13,12 @@ rules:
           - software_function:
               set_mouse_cursor_position:
                 x: 45%
-                y: 4%
+                y: 1% # assuming hidden menubar, otherwise 3-4%
                 screen: 0
           - pointing_button: button2
+          - key_code: vk_none
           - key_code: down_arrow
+          - key_code: down_arrow # assuming hidden menubar, otherwise only 1x arrow down
           - key_code: return_or_enter
         conditions:
           - type: frontmost_application_if
