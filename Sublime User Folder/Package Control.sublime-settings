@@ -38,8 +38,6 @@
 		"Package Control",
 		"SublimeLinter",
 		"SublimeLinter-eslint",
-		"SublimeLinter-flake8",
-		"SublimeLinter-pylint",
 		"SublimeLinter-shellcheck",
 		"SublimeLinter-stylelint",
 		"Terminus",
