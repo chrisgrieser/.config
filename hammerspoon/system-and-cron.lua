@@ -94,11 +94,11 @@ end
 
 function homeWake (eventType)
 	local loggedIn = hs.caffeinate.sessionProperties().kCGSessionLoginDoneKey
-	local unlocked = eventType == hs.caffeinate.watcher.screensDidUnlock
+	local screensWoke = eventType == hs.caffeinate.watcher.screensDidWake
 	local systemWokeUp = eventType == hs.caffeinate.watcher.systemDidWake
 	local currentTimeHours = hs.timer.localTime() / 60 / 60
 
-	if (systemWokeUp and loggedIn) or unlocked then
+	if (systemWokeUp and loggedIn) or screensWoke then
 
 		if currentTimeHours < 19 and currentTimeHours > 7 then
 			hs.shortcuts.run("Send Reminders due today to Drafts")
