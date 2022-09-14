@@ -1,15 +1,16 @@
 #!/bin/zsh
-# shellcheck disable=SC2028,SC2248
+# shellcheck disable=SC2028,SC2248,SC2030,SC2031
 
 # input args / Config
 INPUT_FILE="$1"
 OUTPUT_FOLDER="$2"
-[[ -z "$URL" ]] && exit 1
+[[ -z "$INPUT_FILE" ]] && exit 1
 [[ -z "$OUTPUT_FOLDER" ]] && OUTPUT_FOLDER="."
 TOLERANCE=15 # number of words treshhold
 MAX_TITLE_LENGTH=45
 REPORT_FILE="$OUTPUT_FOLDER/report.csv"
 DESTINATION="$OUTPUT_FOLDER/files/"
+mkdir -p "$DESTINATION"
 
 #-------------------------------------------------------------------------------
 
@@ -41,12 +42,17 @@ echo "Tolerance: $TOLERANCE Words Difference" > "$REPORT_FILE"
 echo "------------------------------" >> "$REPORT_FILE"
 
 #-------------------------------------------------------------------------------
+echo
+SUCCESS_COUNT=0
+FAILURE_COUNT=0
+# shellcheck disable=SC2002
+cat "$INPUT_FILE" | while read -r line ; do
 
-LINES=$(cat "$INPUT_FILE")
-for  line in $LINES ; do
 	# skip comments & empty lines
 	if [[ -z "$line" ]] || [[ "$line" == \#* ]] ; then
 		continue
+	else
+		URL="$line"
 	fi
 
 	# Check whether URL is alive
@@ -54,6 +60,7 @@ for  line in $LINES ; do
 	if [[ "$HTTP_CODE" != "HTTP/2 200" ]]; then
 		echo "\033[1;31mURL is dead: $HTTP_CODE\033[0m"
 		echo "$HTTP_CODE;$URL" >> "$REPORT_FILE"
+		FAILURE_COUNT=$((FAILURE_COUNT + 1))
 		continue
 	fi
 
@@ -95,24 +102,28 @@ for  line in $LINES ; do
 	[[ $count_diff -lt 0 ]] && count_diff=$((count_diff * -1 )) # absolute value
 
 	if [[ $count_diff -gt $TOLERANCE ]]; then
-		echo "\033[1;33m Difference of $count_diff words"
+		echo "\033[1;33mDifference of $count_diff words"
 		echo "${count_diff}w_diff;$URL" >> "$REPORT_FILE"
+		FAILURE_COUNT=$((FAILURE_COUNT + 1))
 		continue # don't write output if above the tolerance threshhold
 	fi
 
+	echo -n "\033[1;32m" # green
 	if [[ $count_diff -eq 0 ]]; then
-		echo "\033[1;32mNo Difference."
+		echo -n "No Difference"
 	elif [[ $count_diff -eq 1 ]]; then
-		echo "\033[1;32mDifference of 1 word."
+		echo -n "Difference of 1 word."
 	else
-		echo "\033[1;32mDifference of $count_diff words."
+		echo -n "Difference of $count_diff words."
 	fi
-	echo -n "\033[0m" # reset coloring
+	echo "\033[0m → Article saved as '$file_name'"
+
+	SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
 
 	# Cleaning & Saving Output
 	content="$output1" # use content from Mercury Reader (doesn't matter much)
 	echo "$frontmatter\n\n$content" > "$DESTINATION/$file_name"
-	echo "✅ Article saved as '$file_name'"
 done
 
-
+echo "---"
+echo "\033[1;32m$SUCCESS_COUNT\033[0m articles scrapped, \033[1;31m$FAILURE_COUNT\033[0m articles failed."
