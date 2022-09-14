@@ -55,6 +55,9 @@ title=$(echo "$parsed_data" | yq .title)
 safe_title=$(echo "$title" | tr "/:;.\\" "-----" | cut -c-$MAX_TITLE_LENGTH)
 author=$(echo "$parsed_data" | yq .author)
 date_published=$(echo "$parsed_data" | yq .date_published | cut -d"T" -f1)
+if [[ "$date_published" == "null" ]]; then
+	date_published=$(echo "$URL" | grep -oE '\/[[:digit:]]{4}\/[[:digit:]]{2}\/[[:digit:]]{2}\/' )
+fi
 excerpt=$(echo "$parsed_data" | yq .excerpt)
 article_word_count=$(echo "$parsed_data" | yq .word_count)
 
