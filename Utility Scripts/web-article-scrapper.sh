@@ -8,7 +8,7 @@ OUTPUT_FOLDER="$2"
 [[ -z "$OUTPUT_FOLDER" ]] && OUTPUT_FOLDER="."
 TOLERANCE=20
 MAX_TITLE_LENGTH=50
-REPORT_FILE="$OUTPUT_FOLDER/report.log"
+REPORT_FILE="$OUTPUT_FOLDER/report.csv"
 
 #-------------------------------------------------------------------------------
 
