@@ -20,24 +20,6 @@ defaults write "org.hammerspoon.Hammerspoon" "HSUploadCrashData" 0
 defaults write "org.hammerspoon.Hammerspoon" "MJKeepConsoleOnTopKey" 1
 defaults write "org.hammerspoon.Hammerspoon" "SUEnableAutomaticChecks" 1
 
-# Disable Spotlight cmd+space shortcut
-osascript -e '
-	tell application "System Preferences"
-		activate
-		reveal anchor "shortcutsTab" of pane id "com.apple.preference.keyboard"
-	end tell
-	tell application "System Events"
-		tell application process "System Preferences"
-			repeat until (window 1 exists)
-			end repeat
-			tell window 1
-				repeat until (rows of table 1 of scroll area 1 of splitter group 1 of tab group 1 exists)
-				end repeat
-				select (first row of table 1 of scroll area 1 of splitter group 1 of tab group 1 whose value of static text 1 is equal to "Spotlight")
-			end tell
-		end tell
-	end tell' &> /dev/null
-
 #-------------------------------------------------------------------------------
 # DOTFILES / VAULT
 
