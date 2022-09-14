@@ -4,7 +4,10 @@
 # input args / Config
 INPUT_FILE="$1"
 OUTPUT_FOLDER="$2"
-[[ -z "$INPUT_FILE" ]] && exit 1
+if [[ ! -f "$INPUT_FILE" ]] ; then
+	echo "Incorrect input file."
+	exit 1
+fi
 [[ -z "$OUTPUT_FOLDER" ]] && OUTPUT_FOLDER="."
 TOLERANCE=15 # number of words treshhold
 MAX_TITLE_LENGTH=45
@@ -42,7 +45,6 @@ echo "Tolerance: $TOLERANCE Words Difference" > "$REPORT_FILE"
 echo "------------------------------" >> "$REPORT_FILE"
 
 #-------------------------------------------------------------------------------
-echo
 SUCCESS_COUNT=0
 FAILURE_COUNT=0
 # shellcheck disable=SC2002
@@ -125,5 +127,8 @@ cat "$INPUT_FILE" | while read -r line ; do
 	echo "$frontmatter\n\n$content" > "$DESTINATION/$file_name"
 done
 
-echo "---"
-echo "\033[1;32m$SUCCESS_COUNT\033[0m articles scrapped, \033[1;31m$FAILURE_COUNT\033[0m articles failed."
+#-------------------------------------------------------------------------------
+
+# Summary
+echo "\033[0m---"
+echo "\033[1;32m$SUCCESS_COUNT\033[0m article(s) scrapped, \033[1;31m$FAILURE_COUNT\033[0m article(s) failed."
