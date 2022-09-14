@@ -1,7 +1,7 @@
 ---
 aliases: 
 tags: pandoc, citation, css, coding
-similar: 
+similar:
 - [[Citation Styles]]
 - [[Bibliography Creation]]
 obsidianUIMode: preview
@@ -13,7 +13,6 @@ obsidianUIMode: preview
 
 ## Table of Contents
 <!-- MarkdownTOC -->
-
 - [Tutorials](#tutorials)
 - [Tools](#tools)
 - [Priority of Options](#priority-of-options)
@@ -21,7 +20,6 @@ obsidianUIMode: preview
 - [Useful Snippets](#useful-snippets)
 - [Templates](#templates)
 - [Filters](#filters)
-
 <!-- /MarkdownTOC -->
 
 ## Tutorials
@@ -104,9 +102,11 @@ geometry: "margin=2cm"
 ---
 ```
 
+- [GitHub - Wandmalfarbe/pandoc-latex-template: A pandoc LaTeX template to convert markdown files to PDF or LaTeX.](https://github.com/Wandmalfarbe/pandoc-latex-template)
+
 ## Filters
 - [raghur/mermaid-filter: Pandoc filter for creating diagrams in mermaid syntax blocks in markdown docs](https://github.com/raghur/mermaid-filter)
--Tools for Automatic References
+- Tools for Automatic References
 	- [url2cite](https://github.com/phiresky/pandoc-url2cite/) ([usage with normal citekeys](https://github.com/phiresky/pandoc-url2cite/issues/10#issuecomment-899101361))
 	- [manubot](https://github.com/manubot)
 - filters can be written in [[Lua]]
@@ -114,6 +114,13 @@ geometry: "margin=2cm"
 > [!INFO] Priority of Filters
 > Filters, Lua-filters, and citeproc processing are applied in the order specified on the command line.
 > – [Pandoc Docs](https://pandoc.org/MANUAL.html#option--filter)
+
+### Why Lua Filters?
+> Although traditional filters are very flexible, they have a couple of disadvantages. First, there is some overhead in writing JSON to stdout and reading it from stdin (twice, once on each side of the filter). Second, whether a filter will work will depend on details of the user’s environment. A filter may require an interpreter for a certain programming language to be available, as well as a library for manipulating the pandoc AST in JSON form. One cannot simply provide a filter that can be used by anyone who has a certain version of the pandoc executable.
+>
+> Starting with version 2.0, pandoc makes it possible to write filters in Lua without any external dependencies at all. A Lua interpreter (version 5.3) and a Lua library for creating pandoc filters is built into the pandoc executable. Pandoc data types are marshaled to Lua directly, avoiding the overhead of writing JSON to stdout and reading it from stdin.
+
+- [Pandoc - Pandoc Lua Filters](https://pandoc.org/lua-filters.html)
 
 ## References without Citations
 Add this to the yaml to add references without citing them in text.

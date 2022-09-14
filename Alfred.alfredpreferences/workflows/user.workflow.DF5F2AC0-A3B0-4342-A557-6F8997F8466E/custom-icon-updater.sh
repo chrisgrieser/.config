@@ -43,7 +43,7 @@ case $APP_TO_UPDATE in
 		cp "$CUSTOM_ICON_FOLDER/Alacritty.icns" 'Alacritty.app/Contents/Resources/alacritty.icns'
 		touch "Alacritty.app" ;;
 	"Sublime Text")
-		cp "$CUSTOM_ICON_FOLDER/Sublime Text Brown.icns" 'Sublime Text.app/Contents/Resources/Sublime Text.icns'
+		cp "$CUSTOM_ICON_FOLDER/Sublime_alt.icns" 'Sublime Text.app/Contents/Resources/Sublime Text.icns'
 		touch "Sublime Text.app" ;;
 	"AppCleaner")
 		cp "$CUSTOM_ICON_FOLDER/AppCleaner.icns" 'AppCleaner.app/Contents/Resources/AppCleaner.icns'
