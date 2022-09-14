@@ -1,5 +1,5 @@
 #!/bin/zsh
-# shellcheck disable=SC2028,SC2248,SC2030,SC2031
+# shellcheck disable=SC2028,SC2248,SC2030,SC2031,SC2002
 
 # input args / Config
 INPUT_FILE="$1"
@@ -45,17 +45,19 @@ echo "Tolerance: $TOLERANCE Words Difference" > "$REPORT_FILE"
 echo "------------------------------" >> "$REPORT_FILE"
 
 #-------------------------------------------------------------------------------
+
+PROGRESS_COUNT=0
 SUCCESS_COUNT=0
 FAILURE_COUNT=0
-# shellcheck disable=SC2002
-cat "$INPUT_FILE" | while read -r line ; do
 
-	# skip comments & empty lines
-	if [[ -z "$line" ]] || [[ "$line" == \#* ]] ; then
-		continue
-	else
-		URL="$line"
-	fi
+# skip comments & empty lines
+INPUT=$(cat "$INPUT_FILE" | grep -vE "^$" | grep -vE "^#")
+LINE_COUNT=$(echo "$INPUT" | wc -l | tr -d " ")
+
+echo "$INPUT" | while read -r line ; do
+	URL="$line"
+	PROGRESS_COUNT=$((PROGRESS_COUNT + 1))
+	echo -n "\033[0m$PROGRESS_COUNT/$LINE_COUNT: "
 
 	# Check whether URL is alive
 	HTTP_CODE=$(curl -sI "$URL" | head -n1 | sed -E 's/[[:space:]]*$//g')
@@ -69,11 +71,10 @@ cat "$INPUT_FILE" | while read -r line ; do
 	# Scrapping via Mercury Reader
 	parsed_data=$(mercury-parser "$URL")
 	echo "$parsed_data" | yq .content > temp.html
-
 	turndown-cli --head=2 --hr=2 --bullet=2 --code=2 temp.html &> /dev/null
 	# shellcheck disable=SC1111
-	output1=$(tr "’“”" "'\"\"" < temp.md | sed 's/\\\. /. /g' | tr -s " ")
-	rm temp.html temp.md
+	output_mercury=$(tr "’“”" "'\"\"" < temp.md | sed 's/\\\. /. /g' | tr -s " ")
+	# rm temp.html temp.md
 
 	# Metadata via Mercury Reader
 	title=$(echo "$parsed_data" | yq .title)
@@ -94,18 +95,18 @@ cat "$INPUT_FILE" | while read -r line ; do
 
 	# Scrapping via Gather
 	# (options to mirror the output from Mercury Parser)
-	output2=$(gather --inline-links --no-include-source --no-include-title "$URL" | sed 's/---?/–/g' | tr -s " ")
+	output_gather=$(gather --inline-links --no-include-source --no-include-title "$URL" | sed 's/---?/–/g' | tr -s " ")
 
 	# Quality Control
 	# using word count instead of diff for performance
-	count1=$(echo "$output1" | wc -w) # counting words instead of characters since less prone to variation due to whitespace or formatting style
-	count2=$(echo "$output2" | wc -w)
-	count_diff=$((count1 - count2))
+	count_mercury=$(echo "$output_mercury" | wc -w) # counting words instead of characters since less prone to variation due to whitespace or formatting style
+	count_gather=$(echo "$output_gather" | wc -w)
+	count_diff=$((count_mercury - count_gather))
 	[[ $count_diff -lt 0 ]] && count_diff=$((count_diff * -1 )) # absolute value
 
 	if [[ $count_diff -gt $TOLERANCE ]]; then
 		echo "\033[1;33mDifference of $count_diff words"
-		echo "${count_diff}w_diff;$URL" >> "$REPORT_FILE"
+		echo "${count_diff} w_diff;$URL" >> "$REPORT_FILE"
 		FAILURE_COUNT=$((FAILURE_COUNT + 1))
 		continue # don't write output if above the tolerance threshhold
 	fi
@@ -123,7 +124,13 @@ cat "$INPUT_FILE" | while read -r line ; do
 	SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
 
 	# Cleaning & Saving Output
-	content="$output1" # use content from Mercury Reader (doesn't matter much)
+
+	# use content from the parser which seems to get more content
+	if [[ $count_gather -gt $count_mercury ]]; then
+		content="$output_mercury"
+	else
+		content="$output_gather"
+	fi
 	echo "$frontmatter\n\n$content" > "$DESTINATION/$file_name"
 done
 
