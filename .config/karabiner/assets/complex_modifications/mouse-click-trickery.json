@@ -157,7 +157,12 @@
           ],
           "to_if_held_down": [
             {
-              "shell_command": "open -a \"Mission Control\""
+              "key_code": "tab",
+              "modifiers": [
+                "command",
+                "option"
+              ],
+              "repeat": false
             }
           ],
           "parameters": {
@@ -191,7 +196,12 @@
           ],
           "to_if_held_down": [
             {
-              "shell_command": "open -a \"Mission Control\""
+              "key_code": "tab",
+              "modifiers": [
+                "command",
+                "option"
+              ],
+              "repeat": false
             }
           ],
           "parameters": {
@@ -222,7 +232,12 @@
           ],
           "to_if_held_down": [
             {
-              "shell_command": "open -a \"Mission Control\""
+              "key_code": "tab",
+              "modifiers": [
+                "command",
+                "option"
+              ],
+              "repeat": false
             }
           ],
           "parameters": {
@@ -254,7 +269,12 @@
           ],
           "to_if_held_down": [
             {
-              "shell_command": "open -a \"Mission Control\""
+              "key_code": "tab",
+              "modifiers": [
+                "command",
+                "option"
+              ],
+              "repeat": false
             }
           ],
           "parameters": {
@@ -285,7 +305,12 @@
           ],
           "to_if_held_down": [
             {
-              "shell_command": "open -a \"Mission Control\""
+              "key_code": "tab",
+              "modifiers": [
+                "command",
+                "option"
+              ],
+              "repeat": false
             }
           ],
           "parameters": {
@@ -313,7 +338,12 @@
           ],
           "to_if_held_down": [
             {
-              "shell_command": "open -a \"Mission Control\""
+              "key_code": "tab",
+              "modifiers": [
+                "command",
+                "option"
+              ],
+              "repeat": false
             }
           ],
           "parameters": {
@@ -352,7 +382,12 @@
           ],
           "to_if_held_down": [
             {
-              "shell_command": "open -a \"Mission Control\""
+              "key_code": "tab",
+              "modifiers": [
+                "command",
+                "option"
+              ],
+              "repeat": false
             }
           ],
           "parameters": {
@@ -380,7 +415,12 @@
           ],
           "to_if_held_down": [
             {
-              "shell_command": "open -a \"Mission Control\""
+              "key_code": "tab",
+              "modifiers": [
+                "command",
+                "option"
+              ],
+              "repeat": false
             }
           ],
           "parameters": {
