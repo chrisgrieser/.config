@@ -41,8 +41,9 @@
 
 	// Font & Spacing
 	"ui_scale": 1.7,
-	"font_size": 15,
-	"font_face": "Input",
+	"font_size": 15.5,
+	"font_face": "SF Mono",
+	// "font_face": "Input",
 	"font_options": ["no_liga", "no_italic", "no_bold"],
 
 	// Appearance
