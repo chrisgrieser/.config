@@ -1,4 +1,4 @@
-title: 🅰️ App-Specific
+title: 🅰️ App-Specific-Bindings
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
   - description: "🅰️🖊 Highlights: ⌘+L → Show PDF in Finder"
@@ -216,7 +216,7 @@ rules:
           - key_code: h
             modifiers:
               - command
-  - description: "🅰️♠️ Bartender: ⌘Q → Close instead of Quit"
+  - description: "🅰️♠️ Bartender & Alt-Tab: ⌘Q → Close instead of Quit"
     manipulators:
       # does not work 100% cause Bartender seems to overlay a window sometimes
       # to cover parts of the menubar
@@ -234,6 +234,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com.surteesstudios.Bartender$
+              - ^com.lwouis.alt-tab-macos$
   - description: "🅰️🔨 Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
       - type: basic

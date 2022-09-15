@@ -1,5 +1,5 @@
 matches:
-  - trigger: "::"
+  - regex: "::\b"
     replace: ":innen"
 
   # https://espanso.org/docs/matches/regex-triggers/#advanced-examples two

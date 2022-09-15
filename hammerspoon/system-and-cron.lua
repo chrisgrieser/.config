@@ -93,25 +93,29 @@ function officeWake (eventType)
 end
 
 function homeWake (eventType)
-	local loggedIn = hs.caffeinate.sessionProperties().kCGSessionLoginDoneKey
+	local function loggedIn()
+		return hs.caffeinate.sessionProperties().kCGSessionLoginDoneKey
+	end
 	local screensWoke = eventType == hs.caffeinate.watcher.screensDidWake
 	local systemWokeUp = eventType == hs.caffeinate.watcher.systemDidWake
 	local currentTimeHours = hs.timer.localTime() / 60 / 60
 
-	if (systemWokeUp and loggedIn) or screensWoke then
+	if systemWokeUp or screensWoke then
+		hs.timer.waitUntil(loggedIn, function ()
+			if currentTimeHours < 19 and currentTimeHours > 7 then
+				hs.shortcuts.run("Send Reminders due today to Drafts")
+				if not(isProjector()) then setDarkmode(false) end
+			else
+				setDarkmode(true)
+			end
+			gitDotfileSync("--submodules")
+			gitVaultSync()
 
-		if currentTimeHours < 19 and currentTimeHours > 7 then
-			hs.shortcuts.run("Send Reminders due today to Drafts")
-			if not(isProjector()) then setDarkmode(false) end
-		else
-			setDarkmode(true)
-		end
-		gitDotfileSync("--submodules")
-		gitVaultSync()
+			-- should run after git sync, to avoid conflicts
+			if isProjector() then movieModeLayout() ---@diagnostic disable-line: undefined-global
+			else homeModeLayout() end ---@diagnostic disable-line: undefined-global
+		end):start()
 
-		-- should run after git sync, to avoid conflicts
-		if isProjector() then movieModeLayout() ---@diagnostic disable-line: undefined-global
-		else homeModeLayout() end ---@diagnostic disable-line: undefined-global
 	end
 end
 
@@ -141,9 +145,9 @@ function sleepYouTube ()
 	if minutesIdle < 30 then return end
 
 	killIfRunning("YouTube")
-	killIfRunning("Netflix")
 	killIfRunning("Twitch")
 	-- no need to quit IINA, since it autoquits on finishing playback
+	-- Netflix also automatically stops after some idle time
 	hs.osascript.applescript([[
 		tell application "Brave Browser"
 			if ((count of window) is not 0)
