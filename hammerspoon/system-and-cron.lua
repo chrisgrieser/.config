@@ -132,10 +132,10 @@ function systemStart()
 	if isReloading then
 		hs.execute("rm ./is-reloading")
 		return
-	else
-		gitDotfileSync("--submodules")
-		gitVaultSync()
 	end
+
+	gitDotfileSync("--submodules")
+	gitVaultSync()
 end
 
 --------------------------------------------------------------------------------
