@@ -89,6 +89,10 @@ rules:
               - ^cc\.ffitch\.shottr$
         to_if_held_down:
           - shell_command: open -a "Mission Control"
+          - key_code: tab # persistent app-switcher in AltTab.app
+            modifiers:
+              - command
+              - option
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
