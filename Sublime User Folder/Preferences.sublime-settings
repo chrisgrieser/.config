@@ -565,6 +565,8 @@
 		"Blazingly",
 		"grieser",
 		"symlink",
+		"stdout",
+		"stdin",
 	],
 
 	"neovintageous_build_version": 11100,

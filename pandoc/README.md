@@ -11,8 +11,7 @@ obsidianUIMode: preview
 > [!INFO]
 > This note is a symlink to `pandoc/README.md` in [my dotfile directory](https://github.com/chrisgrieser/dotfiles)
 
-## Table of Contents
-<!-- MarkdownTOC -->
+<!--toc:start-->
 - [Tutorials](#tutorials)
 - [Tools](#tools)
 - [Priority of Options](#priority-of-options)
@@ -20,14 +19,16 @@ obsidianUIMode: preview
 - [Useful Snippets](#useful-snippets)
 - [Templates](#templates)
 - [Filters](#filters)
-<!-- /MarkdownTOC -->
+- [Why Lua Filters?](#why-lua-filters)
+- [References without Citations](#references-without-citations)
+<!--toc:end-->
 
 ## Tutorials
 - [Pandoc and Obsidian - Create slideshows, PDFs and Word documents - Obsidian Publish](https://publish.obsidian.md/hub/04+-+Guides%2C+Workflows%2C+%26+Courses/Community+Talks/YT+-+Pandoc+and+Obsidian+-+Create+slideshows%2C+PDFs+and+Word+documents)
 
 ## Tools
 - Most user-friendly: [docdown](https://github.com/lowercasename/docdown)
-- via [Shell Commands Plugin in Obsidian](https://github.com/Taitava/obsidian-shellcommands) and this code:
+- [Shell Commands Plugin in Obsidian](https://github.com/Taitava/obsidian-shellcommands) with this code:
 
 ```bash
 export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; {{folder_path:absolute}}/{{file_name}} -o {{folder_path:absolute}}/{{title}}.docx --citeproc --bibliography=/Users/matt/Documents/zotero.bib --csl=/Users/matt/Documents/apa.csl --reference-doc=/Users/matt/Documents/essay-template2.docx
@@ -96,13 +97,14 @@ pandoc "my file.docx" --track-changes=all -t markdown | grep -C3 "{\."
 ```
 
 ## Templates
+- [GitHub - Wandmalfarbe/pandoc-latex-template: A pandoc LaTeX template to convert markdown files to PDF or LaTeX.](https://github.com/Wandmalfarbe/pandoc-latex-template)
+- [GitHub - kjhealy/pandoc-templates: Some templates for Pandoc.](https://github.com/kjhealy/pandoc-templates)
+
 ```yaml
 ---
 geometry: "margin=2cm"
 ---
 ```
-
-- [GitHub - Wandmalfarbe/pandoc-latex-template: A pandoc LaTeX template to convert markdown files to PDF or LaTeX.](https://github.com/Wandmalfarbe/pandoc-latex-template)
 
 ## Filters
 - [raghur/mermaid-filter: Pandoc filter for creating diagrams in mermaid syntax blocks in markdown docs](https://github.com/raghur/mermaid-filter)
@@ -119,7 +121,6 @@ geometry: "margin=2cm"
 > Although traditional filters are very flexible, they have a couple of disadvantages. First, there is some overhead in writing JSON to stdout and reading it from stdin (twice, once on each side of the filter). Second, whether a filter will work will depend on details of the user’s environment. A filter may require an interpreter for a certain programming language to be available, as well as a library for manipulating the pandoc AST in JSON form. One cannot simply provide a filter that can be used by anyone who has a certain version of the pandoc executable.
 >
 > Starting with version 2.0, pandoc makes it possible to write filters in Lua without any external dependencies at all. A Lua interpreter (version 5.3) and a Lua library for creating pandoc filters is built into the pandoc executable. Pandoc data types are marshaled to Lua directly, avoiding the overhead of writing JSON to stdout and reading it from stdin.
-
 - [Pandoc - Pandoc Lua Filters](https://pandoc.org/lua-filters.html)
 
 ## References without Citations
