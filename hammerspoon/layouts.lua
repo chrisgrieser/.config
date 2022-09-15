@@ -235,6 +235,20 @@ function motherHomeModeLayout()
 	runDelayed(0.6, function () hs.layout.apply(motherHomeLayout) end)
 	runDelayed(1, function () hs.layout.apply(motherHomeLayout) end)
 end
+
+function obsiDevModeLayout()
+	hs.application("Obsidian"):activate()
+	keystroke({"cmd", "alt"}, "i") -- open chrome dev tools
+	keystroke({"cmd", "shift"}, "c") -- element picker
+
+	hs.open(os.getenv("HOME").."/Main Vault/.obsidian/themes/Shimmering Focus/theme.css")
+	local sublimeWin = hs.application("Sublime Text"):mainWindow()
+	moveResize(sublimeWin, hs.layout.right50)
+	runDelayed(0.5, function()
+		hs.application("Sublime Text"):activate()
+		keystroke({"cmd"}, "k") -- Table of Comments Plugin
+	end)
+end
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
 function setLayout()
@@ -253,6 +267,7 @@ displayCountWatcher = hs.screen.watcher.new(setLayout)
 displayCountWatcher:start()
 hotkey(hyper, "home", setLayout)
 hotkey(hyper, "f5", setLayout) -- for Apple Keyboard
+hotkey(hyper, "f18", obsiDevModeLayout) -- esc key remapped via Karabiner
 
 --------------------------------------------------------------------------------
 

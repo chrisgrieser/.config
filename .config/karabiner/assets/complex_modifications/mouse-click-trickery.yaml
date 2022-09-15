@@ -88,11 +88,11 @@ rules:
               - ^org\.yanex\.marta$
               - ^cc\.ffitch\.shottr$
         to_if_held_down:
-          - shell_command: open -a "Mission Control"
           - key_code: tab # persistent app-switcher in AltTab.app
             modifiers:
               - command
               - option
+            repeat: false
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
@@ -111,7 +111,11 @@ rules:
             bundle_identifiers:
               - ^com\.brave\.Browser$
         to_if_held_down:
-          - shell_command: open -a "Mission Control"
+          - key_code: tab # persistent app-switcher in AltTab.app
+            modifiers:
+              - command
+              - option
+            repeat: false
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
@@ -128,7 +132,11 @@ rules:
             bundle_identifiers:
               - ^com\.brave\.Browser.+ # PWAs
         to_if_held_down:
-          - shell_command: open -a "Mission Control"
+          - key_code: tab # persistent app-switcher in AltTab.app
+            modifiers:
+              - command
+              - option
+            repeat: false
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
@@ -147,7 +155,11 @@ rules:
               - ^org\.yanex\.marta$
               - ^md\.obsidian$
         to_if_held_down:
-          - shell_command: open -a "Mission Control"
+          - key_code: tab # persistent app-switcher in AltTab.app
+            modifiers:
+              - command
+              - option
+            repeat: false
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
@@ -165,7 +177,11 @@ rules:
             bundle_identifiers:
               - ^cc\.ffitch\.shottr$
         to_if_held_down:
-          - shell_command: open -a "Mission Control"
+          - key_code: tab # persistent app-switcher in AltTab.app
+            modifiers:
+              - command
+              - option
+            repeat: false
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
@@ -181,7 +197,11 @@ rules:
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
         to_if_held_down:
-          - shell_command: open -a "Mission Control"
+          - key_code: tab # persistent app-switcher in AltTab.app
+            modifiers:
+              - command
+              - option
+            repeat: false
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
@@ -204,7 +224,11 @@ rules:
             bundle_identifiers:
               - ^net\.highlightsapp\.universal$
         to_if_held_down:
-          - shell_command: open -a "Mission Control"
+          - key_code: tab # persistent app-switcher in AltTab.app
+            modifiers:
+              - command
+              - option
+            repeat: false
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
@@ -227,7 +251,11 @@ rules:
             bundle_identifiers:
               - ^com\.apple\.finder$
         to_if_held_down:
-          - shell_command: open -a "Mission Control"
+          - key_code: tab # persistent app-switcher in AltTab.app
+            modifiers:
+              - command
+              - option
+            repeat: false
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
