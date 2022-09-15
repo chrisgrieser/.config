@@ -55,7 +55,7 @@ alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in 
 alias -g H="--help"
 alias -g G="| grep --color"
 alias -g B="| bat"
-alias -g C="| pbcopy"
+alias -g C="| pbcopy ; echo 'Copied.'"
 alias -g J="| yq -p=yaml -o=json" # beautify in JSON
 alias -g L="| less"
 

@@ -228,7 +228,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>cc</string>
+				<string>dev</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -246,25 +246,70 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>alfredfiltersresults</key>
 				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>qlmanage -p "{query}"</string>
-				<key>scriptargtype</key>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
-				<key>scriptfile</key>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>mdn</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
 				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>mdn-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>MDN Search</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>FA89C66A-A9E5-4D5A-BD31-C17F3285EE74</string>
+			<string>F244FBB2-D206-4A08-9404-12E9A2DB8944</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string></string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C75F4E85-EFB8-4056-AE77-9D8DAFC519C8</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -349,6 +394,29 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>qlmanage -p "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>FA89C66A-A9E5-4D5A-BD31-C17F3285EE74</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -400,9 +468,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>note</key>
 			<string>custom cheatsheets</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>600</real>
 		</dict>
 		<key>2F0710E7-D440-4B8E-BD7F-FB7FA8670039</key>
 		<dict>
@@ -425,9 +493,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		<key>66A6B203-4D92-418E-9D90-D4815DA05E8F</key>
 		<dict>
 			<key>xpos</key>
-			<real>250</real>
+			<real>255</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>755</real>
 		</dict>
 		<key>7E6054B0-3785-45A2-A92E-9896CFEBA420</key>
 		<dict>
@@ -460,12 +528,19 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>ypos</key>
 			<real>165</real>
 		</dict>
+		<key>C75F4E85-EFB8-4056-AE77-9D8DAFC519C8</key>
+		<dict>
+			<key>xpos</key>
+			<real>115</real>
+			<key>ypos</key>
+			<real>455</real>
+		</dict>
 		<key>D5F86957-1352-4B11-BF61-059C2CF716BC</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>755</real>
 		</dict>
 		<key>EA3DF9A8-C9B9-4A5B-BE23-02A376F9B128</key>
 		<dict>
@@ -476,6 +551,13 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>ypos</key>
 			<real>115</real>
 		</dict>
+		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
+		<dict>
+			<key>xpos</key>
+			<real>365</real>
+			<key>ypos</key>
+			<real>450</real>
+		</dict>
 		<key>FA89C66A-A9E5-4D5A-BD31-C17F3285EE74</key>
 		<dict>
 			<key>colorindex</key>
@@ -483,9 +565,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>note</key>
 			<string>Quicklook</string>
 			<key>xpos</key>
-			<real>250</real>
+			<real>255</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>600</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
