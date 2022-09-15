@@ -2,7 +2,7 @@
 # ------------------------------------------------------------------------------
 # only activates code snippets when a file of the right language is open
 
-filter_title: .s?css$
+filter_title: css$
 
 extra_includes:
   - "../match/_css.yml"
