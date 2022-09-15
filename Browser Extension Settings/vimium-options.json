@@ -7,7 +7,7 @@
     },
     {
       "pattern": "https?://www.inoreader.com/*",
-      "passKeys": "vo?a1dnpjkgM<C-m>"
+      "passKeys": "vo?a1dnpjkgM<C-m>t"
     },
     {
       "pattern": "https?://excalidraw.com/*",
@@ -19,23 +19,23 @@
     },
     {
       "pattern": "https?://github.com/*",
-      "passKeys": "?o"
+      "passKeys": "?"
     },
     {
       "pattern": "https?://www.youtube.com/*",
-      "passKeys": "cm0123456789lNP/,.ti?"
-    },
-    {
-      "pattern": "https?://github.com/*/issues(\\?q=*)?",
-      "passKeys": "jk"
-    },
-    {
-      "pattern": "https?://github.com/*/pulls(\\?q=*)?",
-      "passKeys": "jk"
+      "passKeys": "cm0123456789lNP/,.t?"
     },
     {
       "pattern": "https?://devdocs.io/*",
       "passKeys": "?/"
+    },
+    {
+      "pattern": "https?://neovide.dev/*",
+      "passKeys": "s"
+    },
+    {
+      "pattern": "https?://docs.google.com/*",
+      "passKeys": ""
     }
   ],
   "filterLinkHints": false,

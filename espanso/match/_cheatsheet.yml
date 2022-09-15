@@ -2,8 +2,8 @@
 # ------------------------------------------
 
 matches:
-  - regex: "cc (?P<query>.+) cc"
-    replace: "\n{{output}}"
+  - regex: "ccc(?P<query>.+)ccc"
+    replace: "\n{{output}}\n"
     vars:
       - name: output
         type: shell
