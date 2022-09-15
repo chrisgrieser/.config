@@ -60067,13 +60067,9 @@
 			"0x98e6c071":
 			[
 				[
-					445,
-					745
-				],
-				[
 					7572,
 					11797
-				]
+				],
 			],
 		},
 		"/Users/chrisgrieser/dotfiles/Alfred.alfredpreferences/workflows/user.workflow.1E686C4E-854B-4D9F-B761-EF7F221841A8/build-karabiner-config.js":
@@ -344683,7 +344679,7 @@
 		},
 		"/Users/chrisgrieser/dotfiles/.config/karabiner/assets/complex_modifications/utility-hotkeys.yaml":
 		{
-			"0x30f35bbd":
+			/*"0x30f35bbd":
 			[
 				[
 					610,
@@ -344708,6 +344704,60 @@
 				[
 					4359,
 					5755
+				]
+			],*/
+			/*"0xb3fdfd89":
+			[
+				[
+					656,
+					890
+				],
+				[
+					929,
+					1513
+				],
+				[
+					1561,
+					2328
+				],
+				[
+					2394,
+					3346
+				],
+				[
+					3405,
+					4351
+				],
+				[
+					4405,
+					5801
+				]
+			],*/
+			"0x20672478":
+			[
+				[
+					730,
+					964
+				],
+				[
+					1003,
+					1587
+				],
+				[
+					1635,
+					2402
+				],
+				[
+					2468,
+					3420
+				],
+				[
+					3479,
+					4425
+				],
+				[
+					4479,
+					5875
 				]
 			],
 		},
