@@ -50,8 +50,8 @@ SUCCESS_COUNT=0
 ERROR_COUNT=0
 WARNING_COUNT=0
 
-# skip comments & empty lines
-INPUT=$(cat "$INPUT_FILE" | grep -vE "^$" | grep -vE "^#")
+# grep only URLs
+INPUT=$(cat "$INPUT_FILE" | grep -Eo "http[^ )]*")
 LINE_COUNT=$(echo "$INPUT" | wc -l | tr -d " ")
 
 echo "$INPUT" | while read -r line ; do
