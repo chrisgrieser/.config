@@ -3,7 +3,7 @@
 
 ################################################################################
 
-PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+PLUGIN_DIR="$HOME/.config/sketchybar/"
 
 ##### Bar Appearance #####
 # https://felixkratz.github.io/SketchyBar/config/bar
@@ -17,7 +17,7 @@ else
 	BG_COLOR="0xffcdcdcd"
 	FONT_COLOR="0xff000000"
 fi
-ITEM_Y_OFFSET="5"
+ITEM_Y_OFFSET=5
 HEIGHT=35
 # full menubar at the office
 [[ "$(scutil --get ComputerName)" =~ "mini" ]] && HEIGHT=25
@@ -33,9 +33,9 @@ sketchybar --bar height="$HEIGHT"                       \
                      drawing=on                         \
                      icon.font="JetBrainsMonoNL Nerd Font:Bold:21.0"    \
                      icon.color="$FONT_COLOR"           \
-                     label.font="Recursive:Medium:15.5"   \
+                     label.font="Recursive:Medium:15.5" \
                      label.color="$FONT_COLOR"          \
-                     label.padding_left=0               \
+                     label.padding_left=1               \
                      label.padding_right=8              \
                      icon.padding_left=1                \
                      icon.padding_right=0               \
