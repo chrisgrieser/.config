@@ -58,8 +58,8 @@ alfredWatcher:start()
 
 -- OBSIDIAN
 -- Sync on Vault close
-function obsidianSync (appName, eventType, appObject)
-	if appName == "Obsidian" and (eventType == aw.launched or eventType == aw.terminated) then
+function obsidianSync (appName, eventType)
+	if appName == "Obsidian" and eventType == aw.launched then
 		gitVaultSync() ---@diagnostic disable-line: undefined-global
 	end
 end
