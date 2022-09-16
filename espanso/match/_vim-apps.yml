@@ -9,11 +9,11 @@ matches:
         params:
           cmd: "echo $ESPANSO_ONE$(echo $ESPANSO_TWO | tr [A-Z] [a-z])$ESPANSO_THREE"
           shell: bash
-  - regex: '(?P<prefix>[ "-])(?P<one>[A-Z])(?P<two>[A-Z])(?P<three>[a-z])'
+  - regex: ' (?P<one>[A-Z])(?P<two>[A-Z])(?P<three>[a-z])'
     replace: " {{CapitalCased}}"
     vars:
       - name: CapitalCased
         type: shell
         params:
-          cmd: "echo $ESPANSO_PREFIX$ESPANSO_ONE$(echo $ESPANSO_TWO | tr [A-Z] [a-z])$ESPANSO_THREE"
+          cmd: "echo $ESPANSO_ONE$(echo $ESPANSO_TWO | tr [A-Z] [a-z])$ESPANSO_THREE"
           shell: bash

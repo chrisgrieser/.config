@@ -1,10 +1,8 @@
 # https://espanso.org/docs/configuration/app-specific-configurations/
-filter_class: "md.obsidian|com.sublimetext"
-
-# excluding these, since they contain trigger that can interfere with vim bindings
+filter_exec: Obsidian
 
 extra_exclude:
-  - "../match/private.yml"
+  # - "../match/private.yml"
   - "../match/non-vim-apps.yml"
   - "../match/email.yml"
 
