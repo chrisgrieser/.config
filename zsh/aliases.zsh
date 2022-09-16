@@ -7,18 +7,13 @@ alias r='exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmy
 alias bar='sketchybar --update && echo sketchybar updated'
 alias barr='brew services restart sketchybar'
 
-alias fixvim='sudo rm -rf /tmp/svim.lock ; brew services restart svim' # https://github.com/FelixKratz/SketchyVim/issues/23
-
-# beautify JSON in the terminal (yq = better jq)
-# e.g.: curl -s "https://api.corona-zahlen.org/germany" | yq -p=yaml -o=json
-alias jq='yq -p=yaml -o=json'
-
 # z & cd
 alias zz='z -' # back
 alias .="open ."
 alias ..="z .."
 alias ...="z ../.."
 alias ....="z ../../.."
+alias .....="z ../../../.."
 
 # utils
 alias q='exit'
