@@ -98,7 +98,6 @@ function homeModeLayout ()
 	showAllSidebars()
 	hs.layout.apply(homeLayout)
 	twitterrificAction("scrollup") ---@diagnostic disable-line: undefined-global
-	runDelayed(0.3, function ()
 	runDelayed(1.0, function () hs.application("Drafts"):activate() end)
 	runDelayed(1.5, function () hs.application("Drafts"):activate() end)
 
