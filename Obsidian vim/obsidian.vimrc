@@ -43,8 +43,8 @@ nmap k gk
 " HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
 map H g0
 map L g$
-map J 6j
-map K 6k
+map J 7j
+map K 7k
 
 " cause easier to press, lol
 map [ {
