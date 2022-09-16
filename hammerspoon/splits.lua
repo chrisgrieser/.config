@@ -58,7 +58,6 @@ function vsplit (mode)
 	end
 
 	if noSplitActive and (mode == "switch" or mode == "unsplit") then
-		notify ("No split active")
 		return
 	end
 
