@@ -7,8 +7,10 @@ alias r='exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmy
 alias bar='sketchybar --update && echo sketchybar updated'
 alias barr='brew services restart sketchybar'
 
+alias fixvim="sudo rm -rf /tmp/svim.lock ; brew services restart svim"
+
 # z & cd
-alias zz='z -' # back
+alias zz='z -' # back to last dir
 alias .="open ."
 alias ..="z .."
 alias ...="z ../.."
