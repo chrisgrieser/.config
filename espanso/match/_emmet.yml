@@ -129,7 +129,3 @@ matches:
   - trigger: "ov "
     replace: "opacity:var(-"
 
-  # Misc
-  - trigger: "con "
-    replace: 'content: "$|$";'
-
