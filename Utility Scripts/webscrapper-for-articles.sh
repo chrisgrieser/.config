@@ -1,20 +1,6 @@
 #!/bin/zsh
 # shellcheck disable=SC2028,SC2248,SC2030,SC2031,SC2002
 
-# input args / Config
-INPUT_FILE="$1"
-OUTPUT_FOLDER="$2"
-if [[ ! -f "$INPUT_FILE" ]] ; then
-	echo "Incorrect input file."
-	exit 1
-fi
-[[ -z "$OUTPUT_FOLDER" ]] && OUTPUT_FOLDER="."
-TOLERANCE=15 # number of words treshhold
-MAX_TITLE_LENGTH=45
-ERROR_LOG="$OUTPUT_FOLDER/errors.log"
-DESTINATION="$OUTPUT_FOLDER/files/"
-mkdir -p "$DESTINATION"
-
 #-------------------------------------------------------------------------------
 
 # check presence of dependencies
@@ -45,13 +31,29 @@ echo "-------------------" >> "$ERROR_LOG"
 
 #-------------------------------------------------------------------------------
 
+# input args / Config
+INPUT_FILE="$1"
+OUTPUT_FOLDER="$2"
+if [[ ! -f "$INPUT_FILE" ]] ; then
+	echo "Incorrect input file."
+	exit 1
+fi
+[[ -z "$OUTPUT_FOLDER" ]] && OUTPUT_FOLDER="."
+TOLERANCE=15 # number of words treshhold
+MAX_TITLE_LENGTH=45
+ERROR_LOG="$OUTPUT_FOLDER/errors.log"
+DESTINATION="$OUTPUT_FOLDER/files/"
+mkdir -p "$DESTINATION"
+
+#-------------------------------------------------------------------------------
+
 PROGRESS_COUNT=0
 SUCCESS_COUNT=0
 ERROR_COUNT=0
 WARNING_COUNT=0
 
 # grep only URLs
-INPUT=$(cat "$INPUT_FILE" | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*")
+INPUT=$(cat "$INPUT_FILE" | grep -Eo "https?://[a-zA-Z0-9./?=_%:-]*")
 LINE_COUNT=$(echo "$INPUT" | wc -l | tr -d " ")
 
 echo "$INPUT" | while read -r line ; do
