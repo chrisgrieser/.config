@@ -123,7 +123,7 @@ fi
 if [[ $NONE_FOUND == 0 ]]; then
 	killall "$APP_TO_UPDATE"
 	killall "Dock"
-	sleep 2
+	sleep 3
 	open -a "$APP_TO_UPDATE"
 	echo -n "$APP_TO_UPDATE" # pass for notification
 else

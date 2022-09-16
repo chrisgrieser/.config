@@ -42,7 +42,6 @@ function movieModeLayout()
 	openIfNotRunning("YouTube")
 	runDelayed(0.5, function () openIfNotRunning("YouTube") end) -- safety redundancy
 
-	killIfRunning("Finder")
 	killIfRunning("Obsidian")
 	killIfRunning("Marta")
 	killIfRunning("Drafts")
@@ -78,7 +77,6 @@ function homeModeLayout ()
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
 	killIfRunning("Twitch")
-	killIfRunning("Finder")
 	privateClosers() ---@diagnostic disable-line: undefined-global
 
 	dockSwitcher("home")
@@ -94,14 +92,13 @@ function homeModeLayout ()
 		{"Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
 	}
 
 	showAllSidebars()
 	hs.layout.apply(homeLayout)
 	twitterrificAction("scrollup") ---@diagnostic disable-line: undefined-global
 	runDelayed(0.3, function ()
-		hs.layout.apply(homeLayout)
-	end)
 	runDelayed(1.0, function () hs.application("Drafts"):activate() end)
 	runDelayed(1.5, function () hs.application("Drafts"):activate() end)
 
@@ -128,7 +125,6 @@ function officeModeLayout ()
 	openIfNotRunning("Obsidian")
 	openIfNotRunning("Tweeten")
 	openIfNotRunning("Drafts")
-	killIfRunning("Finder")
 
 	dockSwitcher("office") -- separate layout to include "Tweeten"
 
@@ -147,6 +143,7 @@ function officeModeLayout ()
 		{"Drafts", nil, screen1, maximized, nil, nil},
 		{"Mimestream", nil, screen1, maximized, nil, nil},
 		{"alacritty", nil, screen1, maximized, nil, nil},
+		{"Alacritty", nil, screen1, maximized, nil, nil},
 	}
 
 	hs.layout.apply(officeLayout)
@@ -177,7 +174,6 @@ function motherMovieModeLayout()
 	openIfNotRunning("YouTube")
 	runDelayed(1, function () openIfNotRunning("YouTube") end) -- safety redundancy
 
-	killIfRunning("Finder")
 	killIfRunning("Obsidian")
 	killIfRunning("Marta")
 	killIfRunning("Drafts")
@@ -206,7 +202,6 @@ function motherHomeModeLayout()
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
 	killIfRunning("Twitch")
-	killIfRunning("Finder")
 	privateClosers() ---@diagnostic disable-line: undefined-global
 
 	sublimeFontSize(14)
@@ -278,6 +273,7 @@ wf_appsOnMouseScreen = wf.new({
 	"Mimestream",
 	"Obsidian",
 	"Sublime Text",
+	"Alacritty",
 	"alacritty",
 	"Slack",
 	"Discord",

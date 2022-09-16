@@ -24,7 +24,7 @@ systemStart() ---@diagnostic disable-line: undefined-global
 
 VimMode = hs.loadSpoon('VimMode')
 vim = VimMode:new()
-vim:setAlertFont('Recursive')
+vim:setAlertFont('SF Mono')
 	:bindHotKeys({ enter = {{'cmd'}, 'f19'} }) -- Karabiner: tap left-opt
 	:enableBetaFeature('block_cursor_overlay')
 
@@ -32,6 +32,11 @@ vim:disableForApp('Sublime Text')
 	:disableForApp('alacritty')
 	:disableForApp('Alacritty')
 	:disableForApp('Obsidian')
+	:disableForApp('ShortCat')
+	:disableForApp('espanso')
+	:disableForApp('Marta')
+	:disableForApp('Finder')
+	:disableForApp('Alfred 5')
 
 --------------------------------------------------------------------------------
 
