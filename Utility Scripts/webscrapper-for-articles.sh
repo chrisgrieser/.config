@@ -21,22 +21,21 @@ mkdir -p "$DESTINATION"
 if ! command mercury-parser &> /dev/null; then
 	echo "mercury-parser not installed."
 	echo "install: npm -g install @postlight/mercury-parser"
-	exit 1
 fi
-if ! command turndown-cli &> /dev/null ; then
+if ! command turndown-cli &> /dev/null; then
 	echo "turndown-cli not installed."
 	echo "install: npm -g install turndown-cli"
-	exit 1
 fi
 if ! command yq &> /dev/null; then
 	echo "yq not installed."
 	echo "install: brew install yq"
-	exit 1
 fi
-if ! command gather &> /dev/null ; then
+if ! command gather &> /dev/null; then
 	echo "gather-cli not installed."
 	echo "Install from here: https://github.com/ttscoff/gather-cli"
 	echo "(brew-tap requires 12gb Xcode install, so download the package instead…)"
+fi
+if ! command mercury-parser &> /dev/null && ! command turndown-cli &> /dev/null && ! command yq &> /dev/null; ! command gather &> /dev/null; then
 	exit 1
 fi
 
