@@ -135,7 +135,7 @@
 	"index_exclude_gitignore": true,
 
 	// Status Bar
-	"auto_hide_status_bar": false,
+	"auto_hide_status_bar": true,
 	"show_sidebar_button": false,
 	"show_indentation": true,
 	"show_syntax": true,
