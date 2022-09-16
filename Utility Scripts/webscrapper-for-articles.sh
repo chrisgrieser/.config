@@ -51,7 +51,7 @@ ERROR_COUNT=0
 WARNING_COUNT=0
 
 # grep only URLs
-INPUT=$(cat "$INPUT_FILE" | grep -Eo "http[^ )]*")
+INPUT=$(cat "$INPUT_FILE" | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*")
 LINE_COUNT=$(echo "$INPUT" | wc -l | tr -d " ")
 
 echo "$INPUT" | while read -r line ; do
