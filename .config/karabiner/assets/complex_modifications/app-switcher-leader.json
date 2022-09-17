@@ -1220,6 +1220,659 @@
           ]
         }
       ]
+    },
+    {
+      "description": "🅰️🗂 Browser/Obsidian/Sublime: Tab Switching",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "1"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser$"
+              ]
+            }
+          ],
+          "to": [
+            {
+              "key_code": "1",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "2"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser$"
+              ]
+            }
+          ],
+          "to": [
+            {
+              "key_code": "2",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "3"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser$"
+              ]
+            }
+          ],
+          "to": [
+            {
+              "key_code": "3",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "4"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser$"
+              ]
+            }
+          ],
+          "to": [
+            {
+              "key_code": "4",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "5"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser$"
+              ]
+            }
+          ],
+          "to": [
+            {
+              "key_code": "5",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "6"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser$"
+              ]
+            }
+          ],
+          "to": [
+            {
+              "key_code": "6",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "7"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser$"
+              ]
+            }
+          ],
+          "to": [
+            {
+              "key_code": "7",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "8"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser$"
+              ]
+            }
+          ],
+          "to": [
+            {
+              "key_code": "8",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "9"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.brave\\.Browser$"
+              ]
+            }
+          ],
+          "to": [
+            {
+              "key_code": "9",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "1"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            }
+          ],
+          "to": [
+            {
+              "key_code": "1",
+              "modifiers": [
+                "control"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "2"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            }
+          ],
+          "to": [
+            {
+              "key_code": "2",
+              "modifiers": [
+                "control"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "3"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            }
+          ],
+          "to": [
+            {
+              "key_code": "3",
+              "modifiers": [
+                "control"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "4"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            }
+          ],
+          "to": [
+            {
+              "key_code": "4",
+              "modifiers": [
+                "control"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "5"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            }
+          ],
+          "to": [
+            {
+              "key_code": "5",
+              "modifiers": [
+                "control"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "6"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            }
+          ],
+          "to": [
+            {
+              "key_code": "6",
+              "modifiers": [
+                "control"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "7"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            }
+          ],
+          "to": [
+            {
+              "key_code": "7",
+              "modifiers": [
+                "control"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "8"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            }
+          ],
+          "to": [
+            {
+              "key_code": "8",
+              "modifiers": [
+                "control"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "9"
+          },
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            }
+          ],
+          "to": [
+            {
+              "key_code": "9",
+              "modifiers": [
+                "control"
+              ]
+            },
+            {
+              "set_variable": {
+                "name": "LEADER_ACTIVE",
+                "value": false
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "leader-notice",
+                "text": ""
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }
