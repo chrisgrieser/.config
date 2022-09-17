@@ -83,7 +83,7 @@ rules:
               - ^com\.apple\.finder$
               - ^com\.agiletortoise\.Drafts-OSX$
               - ^com\.runningwithcrayons\.Alfred-Preferences$
-  - description: "🔘 § → | (+ US Layout); ⌥3 for Paragraph Symbol"
+  - description: "🔘 § → | (+ US Layout)"
     manipulators:
       - type: basic
         from:
@@ -106,20 +106,6 @@ rules:
         to_after_key_up:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
-      - type: basic
-        from:
-          key_code: "3"
-          modifiers:
-            mandatory:
-              - option
-        conditions:
-          - type: input_source_if
-            input_sources:
-              - language: ^de$
-        to:
-          - key_code: "3"
-            modifiers:
-              - shift
   - description: "🔘 ° → \\ (+ US Layout); ⌥^ for ° Symbol"
     manipulators:
       - type: basic

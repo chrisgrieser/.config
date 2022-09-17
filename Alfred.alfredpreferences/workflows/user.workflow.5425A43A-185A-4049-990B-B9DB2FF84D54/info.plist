@@ -579,21 +579,6 @@ zsh build.sh "$*"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>soundname</key>
-				<string>Blow</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>440612A1-D74A-4799-A0D6-F88760AF14CF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -609,6 +594,21 @@ zsh build.sh "$*"</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>532ED943-AA0D-43A0-BBCF-3EBEA97FFD31</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Blow</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>440612A1-D74A-4799-A0D6-F88760AF14CF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -740,6 +740,27 @@ lineNo="$*"
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>svg</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string></string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D96BC2AD-EC81-4B13-B499-1B0FFC9EB952</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -780,27 +801,6 @@ lineNo="$*"
 			<string>F3EA6027-C734-4625-9ECD-2FE2DA83829F</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>svg</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string></string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>D96BC2AD-EC81-4B13-B499-1B0FFC9EB952</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -1024,20 +1024,18 @@ lineNo="$*"
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Code/shimmering-focus</string>
-				<key>placeholder</key>
 				<string></string>
+				<key>filtermode</key>
+				<integer>1</integer>
 				<key>required</key>
-				<true/>
-				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>to Shimmering Focus CSS File</string>
+			<string></string>
 			<key>label</key>
-			<string>CSS Path</string>
+			<string>Shimmering Focus Repo</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>filepicker</string>
 			<key>variable</key>
 			<string>shimmering_focus_repo_path</string>
 		</dict>
@@ -1045,20 +1043,18 @@ lineNo="$*"
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>~/Main Vault/</string>
-				<key>placeholder</key>
-				<string>~/Main Vault/</string>
+				<string>~/Main Vault</string>
+				<key>filtermode</key>
+				<integer>1</integer>
 				<key>required</key>
-				<true/>
-				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>absolute path</string>
+			<string></string>
 			<key>label</key>
 			<string>Vault Path</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>filepicker</string>
 			<key>variable</key>
 			<string>vault_path</string>
 		</dict>

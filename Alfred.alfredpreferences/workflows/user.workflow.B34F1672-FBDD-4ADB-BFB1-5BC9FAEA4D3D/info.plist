@@ -386,7 +386,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<string></string>
 				<key>scopes</key>
 				<array>
-					<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Code/Cheatsheets</string>
+					<string>~/dotfiles/Cheatsheets</string>
 				</array>
 				<key>sortmode</key>
 				<integer>0</integer>
