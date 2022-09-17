@@ -63,6 +63,8 @@ etty {
     fonts {
         normal [ "JetBrainsMonoNL Nerd Font" 21 ]
     }
+    theme "TangoDark"
+    useMainThemeColors false
 }
 
 gadgets [
