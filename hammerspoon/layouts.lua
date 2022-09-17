@@ -47,6 +47,7 @@ function movieModeLayout()
 	killIfRunning("Drafts")
 	killIfRunning("Slack")
 	killIfRunning("Discord")
+	killIfRunning("BusyCal")
 	killIfRunning("Mimestream")
 	killIfRunning("Alfred Preferences")
 	killIfRunning("Sublime Text")
@@ -97,9 +98,12 @@ function homeModeLayout ()
 
 	showAllSidebars()
 	hs.layout.apply(homeLayout)
-	twitterrificAction("scrollup") ---@diagnostic disable-line: undefined-global
 	runDelayed(1.0, function () hs.application("Drafts"):activate() end)
-	runDelayed(1.5, function () hs.application("Drafts"):activate() end)
+	runDelayed(1.6, function () hs.application("Drafts"):activate() end)
+
+	if screenIsUnlocked() then ---@diagnostic disable-line: undefined-global
+		twitterrificAction("scrollup") ---@diagnostic disable-line: undefined-global
+	end
 
 	-- wait until sync is finished, to avoid merge conflict
 	hs.timer.waitUntil (
