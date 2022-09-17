@@ -2,7 +2,7 @@
 # ------------------------------------------
 
 matches:
-  - regex: "cc(?P<query>.+)cc"
+  - regex: "cc (?P<query>.+) cc"
     replace: "\n{{output}}\n"
     vars:
       - name: output
