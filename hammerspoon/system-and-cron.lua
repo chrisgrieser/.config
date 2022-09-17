@@ -93,15 +93,16 @@ function officeWake (eventType)
 end
 
 function homeWake (eventType)
-	local function loggedIn()
-		return hs.caffeinate.sessionProperties().kCGSessionLoginDoneKey
+	local function screenIsUnlocked()
+		_, success = hs.execute('[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ] && return 0 || return 1')
+		return success
 	end
 	local screensWoke = eventType == hs.caffeinate.watcher.screensDidWake
 	local systemWokeUp = eventType == hs.caffeinate.watcher.systemDidWake
 	local currentTimeHours = hs.timer.localTime() / 60 / 60
 
 	if systemWokeUp or screensWoke then
-		hs.timer.waitUntil(loggedIn, function ()
+		hs.timer.waitUntil(screenIsUnlocked, function ()
 			if currentTimeHours < 19 and currentTimeHours > 7 then
 				hs.shortcuts.run("Send Reminders due today to Drafts")
 				if not(isProjector()) then setDarkmode(false) end
