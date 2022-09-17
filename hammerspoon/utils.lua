@@ -12,6 +12,11 @@ function trim(str)
 	return (str:gsub("^%s*(.-)%s*$", "%1"))
 end
 
+function screenIsUnlocked()
+	local _, success = hs.execute('[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]] && exit 0 || exit 1')
+	return success
+end
+
 function deviceName()
 	-- similar to `scutil --get ComputerName`, only native to hammerspoon and therefore a bit more reliable
 	local name, _ = hs.host.localizedName():gsub(".- ", "", 1)
