@@ -4,7 +4,5 @@
 <dict>
 	<key>mapURL</key>
 	<string>https://maps.google.com/?q={query}</string>
-	<key>showNotes</key>
-	<false/>
 </dict>
 </plist>

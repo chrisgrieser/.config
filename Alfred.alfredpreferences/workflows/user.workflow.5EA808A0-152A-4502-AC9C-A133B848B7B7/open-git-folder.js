@@ -13,7 +13,7 @@ const finderApp = Application("Finder");
 const pathsToSearch = [
 	$.getenv("working_folder").replace("~", home),
 	home + "/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development",
-	home + "/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Code",
+	home + "/Library/Mobile Documents/com~apple~CloudDocs/shimmering-focus",
 	home + "/dotfiles" // folder also includes Alfred Preferences folder, which is therefore omitted here
 ];
 
