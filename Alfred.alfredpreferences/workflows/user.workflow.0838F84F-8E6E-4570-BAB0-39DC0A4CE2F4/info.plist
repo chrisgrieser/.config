@@ -86,6 +86,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4DD8C2F3-33DA-4B96-BACC-5EF07A80A6D0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F105C65A-56CD-48FE-9989-E134447AAE17</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>59D9B736-8554-4EA2-8960-591B4400DF1B</key>
 		<array>
 			<dict>
@@ -749,6 +762,64 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>discord-channel-repo-opener.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F105C65A-56CD-48FE-9989-E134447AAE17</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>5</integer>
+				<key>hotmod</key>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>G</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.hnc.Discord</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>4DD8C2F3-33DA-4B96-BACC-5EF07A80A6D0</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -874,6 +945,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>625</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>4DD8C2F3-33DA-4B96-BACC-5EF07A80A6D0</key>
+		<dict>
+			<key>xpos</key>
+			<real>625</real>
+			<key>ypos</key>
+			<real>805</real>
 		</dict>
 		<key>50269231-2406-4275-B09D-C8C56303345C</key>
 		<dict>
@@ -1025,6 +1103,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>30</real>
+		</dict>
+		<key>F105C65A-56CD-48FE-9989-E134447AAE17</key>
+		<dict>
+			<key>xpos</key>
+			<real>800</real>
+			<key>ypos</key>
+			<real>805</real>
 		</dict>
 		<key>FAE9825B-FFCC-45A9-8F91-485535506CFC</key>
 		<dict>
