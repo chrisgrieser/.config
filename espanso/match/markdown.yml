@@ -49,3 +49,7 @@ matches:
   - trigger: '!cite'
     replace: "  \n> *– $|$*"
     label: Base YAML Header
+
+  - trigger: "!github"
+    replace: "> **Note**  \n> "
+    label: GitHub Callout
