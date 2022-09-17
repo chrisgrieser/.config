@@ -1,6 +1,6 @@
 
 behavior {
-    theme "Classic"
+    theme "Kon"
 
     layout {
         showActionBar false

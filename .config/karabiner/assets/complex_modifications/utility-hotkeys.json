@@ -162,7 +162,7 @@
       ]
     },
     {
-      "description": "🔘 § → | (+ US Layout); ⌥3 for Paragraph Symbol",
+      "description": "🔘 § → | (+ US Layout)",
       "manipulators": [
         {
           "type": "basic",
@@ -206,35 +206,6 @@
               "select_input_source": {
                 "input_source_id": "^com\\.apple\\.keylayout\\.ABC-QWERTZ$"
               }
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "3",
-            "modifiers": {
-              "mandatory": [
-                "option"
-              ]
-            }
-          },
-          "conditions": [
-            {
-              "type": "input_source_if",
-              "input_sources": [
-                {
-                  "language": "^de$"
-                }
-              ]
-            }
-          ],
-          "to": [
-            {
-              "key_code": "3",
-              "modifiers": [
-                "shift"
-              ]
             }
           ]
         }
