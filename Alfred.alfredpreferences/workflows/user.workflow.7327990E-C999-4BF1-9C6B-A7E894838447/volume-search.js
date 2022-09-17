@@ -25,7 +25,7 @@ if (singleVolumes.length) {
 		+ " (" + diskSpace[3] + ")";
 
 		volumeArray.push ({
-			"title": element,
+			"title": "📂 " + element,
 			"subtitle": spaceInfo,
 			"arg": "/Volumes/"+ element
 		});

@@ -1365,7 +1365,7 @@ open "$(dirname "$script_location")"/backup.log</string>
 		<key>backup_destination</key>
 		<string>/Volumes/Externe A</string>
 		<key>last_backup</key>
-		<string>2022-08-24 22:08</string>
+		<string>2022-09-17 23:26</string>
 		<key>script_location</key>
 		<string>~/dotfiles/Utility Scripts/run-backup_[Browser-Path].sh</string>
 	</dict>
