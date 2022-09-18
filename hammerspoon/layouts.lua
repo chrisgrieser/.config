@@ -102,7 +102,9 @@ function homeModeLayout ()
 	runDelayed(1.6, function () hs.application("Drafts"):activate() end)
 
 	if screenIsUnlocked() then ---@diagnostic disable-line: undefined-global
-		twitterrificAction("scrollup") ---@diagnostic disable-line: undefined-global
+		runDelayed (1.5, function()
+			twitterrificAction("scrollup") ---@diagnostic disable-line: undefined-global
+		end)
 	end
 
 	-- wait until sync is finished, to avoid merge conflict
