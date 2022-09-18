@@ -53,10 +53,10 @@ map ] }
 " Goto Mark
 nmap ä `
 
-" Add to Dictionary (not directly accessible, only via Context Menu)
+" Emulate `z=` (and bind it zo `zl` because more convenient; mnemonic: [z]pelling [l]ist)
 exmap contextMenu obcommand editor:context-menu
-nmap zg :contextMenu
-vmap zg :contextMenu
+nmap zl :contextMenu
+vmap zl :contextMenu
 
 " Navigate headings, requires Code Editor Shortcuts plugin
 exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
