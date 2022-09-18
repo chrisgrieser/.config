@@ -62,6 +62,7 @@ sketchybar --add item clock right                            \
            --set weather update_freq=1800                    \
                          script="$PLUGIN_DIR/weather.sh"     \
            					 icon.font="Noto Emoji:Bold:16"      \
+           					 icon.padding_right=3                \
            --add item covid-stats right                      \
            --set covid-stats update_freq=43200               \
                          script="$PLUGIN_DIR/covid-stats.sh" \
