@@ -1,11 +1,11 @@
 # https://espanso.org/docs/configuration/options/
 # -----------------------------------------------------
 
-toggle_key: OFF  # yamllint disable-line rule:truthy
+toggle_key: OFF
 search_trigger: off
 search_shortcut: META+ALT+SPACE
 
-show_icon: false
+show_icon: true
 show_notifications: true
 
 # Enable/disable the config auto-reload after a file change is detected.
