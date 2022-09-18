@@ -2,13 +2,12 @@
 # ------------------------------------------
 
 matches:
-  - regex: "cc (?P<query>.+) cc"
-    replace: "\n{{output}}\n"
+  - regex: "cc (?P<query>.+)\\r" # macOS requires `\r` instead of `\n` as line break here
+    replace: "{{output}}\n"
     vars:
       - name: output
         type: shell
-        # first space → /, all other spaces "+" for url
-        params:
+        params: # first space → /, all other spaces "+" for url
           cmd: |
             QUERY=$(echo "$ESPANSO_QUERY" | sed 's/ /\//' | tr " " "+")
             curl "https://cht.sh/$QUERY?TQ"
