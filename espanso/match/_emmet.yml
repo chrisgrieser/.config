@@ -76,13 +76,13 @@ matches:
     replace: "border-radius:var(-"
 
   # Sizes (accepts %)
-  - regex: "w(?P<value>[\\d%]+) "
+  - regex: "ww(?P<value>[\\d%]+) "
     replace: "width:{{value}}px; "
-  - regex: "h(?P<value>[\\d%]+) "
+  - regex: "hh(?P<value>[\\d%]+) "
     replace: "height:{{value}}px; "
-  - trigger: "wv "
+  - trigger: "wwv "
     replace: "width:var(-"
-  - trigger: "hv "
+  - trigger: "hhv "
     replace: "height:var(-"
 
   # Position
