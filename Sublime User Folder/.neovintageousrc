@@ -77,6 +77,9 @@ nnoremap <M-Left> b
 " go to last change - https://vimhelp.org/motion.txt.html#g%3B
 nnoremap g; u<C-r>
 
+" consistent with insert mode / emacs bindings
+nnoremap <C-e> A
+
 """""""""""""""""""""""""
 " < Linter, LSP, Spelling
 """""""""""""""""""""""""
