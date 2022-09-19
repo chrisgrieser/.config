@@ -71,68 +71,72 @@ obsidianWatcher:start()
 -- BRAVE BROWSER
 -- split when second window is opened
 -- change sizing back, when back to one window
-wf_browser = wf.new("Brave Browser"):setOverrideFilter{rejectTitles={" %(Private%)$","^Picture in Picture$", "^Task Manager$"}, allowRoles='AXStandardWindow', hasTitlebar=true}
-wf_browser:subscribe(wf.windowCreated, function ()
-	if #wf_browser:getWindows() == 1 then
-		if isAtOffice() or isProjector() then
-			moveResizeCurWin("maximized")
-		else
-			moveResizeCurWin("pseudo-maximized")
+wf_browser = wf.new("Brave Browser")
+	:setOverrideFilter{rejectTitles={" %(Private%)$","^Picture in Picture$", "^Task Manager$"}, allowRoles='AXStandardWindow', hasTitlebar=true}
+	:subscribe(wf.windowCreated, function ()
+		if #wf_browser:getWindows() == 1 then
+			if isAtOffice() or isProjector() then
+				moveResizeCurWin("maximized")
+			else
+				moveResizeCurWin("pseudo-maximized")
+			end
+		elseif #wf_browser:getWindows() == 2 then
+			local win1 = wf_browser:getWindows()[1]
+			local win2 = wf_browser:getWindows()[2]
+			moveResize(win1, hs.layout.left50)
+			moveResize(win2, hs.layout.right50)
 		end
-	end
-	if #wf_browser:getWindows() == 2 then
-		local win1 = wf_browser:getWindows()[1]
-		local win2 = wf_browser:getWindows()[2]
-		moveResize(win1, hs.layout.left50)
-		moveResize(win2, hs.layout.right50)
-	end
-end)
-wf_browser:subscribe(wf.windowDestroyed, function ()
-	if #wf_browser:getWindows() == 1 then
-		local win = wf_browser:getWindows()[1]
-		moveResize(win, baseLayout)
-	end
-end)
+	end)
+	:subscribe(wf.windowDestroyed, function ()
+		if #wf_browser:getWindows() == 1 then
+			local win = wf_browser:getWindows()[1]
+			moveResize(win, baseLayout)
+		end
+	end)
 
 -- Automatically hide Browser when no window
-wf_browser_all = wf.new("Brave Browser"):setOverrideFilter{allowRoles='AXStandardWindow'}
-wf_browser_all:subscribe(wf.windowDestroyed, function ()
-	if #wf_browser_all:getWindows() == 0 then
-		hs.application("Brave Browser"):hide()
-	end
-end)
+wf_browser_all = wf.new("Brave Browser")
+	:setOverrideFilter{allowRoles='AXStandardWindow'}
+	:subscribe(wf.windowDestroyed, function ()
+		if #wf_browser_all:getWindows() == 0 then
+			hs.application("Brave Browser"):hide()
+		end
+	end)
 
 --------------------------------------------------------------------------------
 
 -- MIMESTREAM
 -- split when second window is opened
 -- change sizing back, when back to one window
-wf_mimestream = wf.new("Mimestream"):setOverrideFilter{allowRoles='AXStandardWindow', rejectTitles={"General", "Accounts", "Sidebar & List", "Viewing", "Composing", "Templates", "Signatures", "Labs"}}
-wf_mimestream:subscribe(wf.windowCreated, function ()
-	if #wf_mimestream:getWindows() == 2 then
-		local win1 = wf_mimestream:getWindows()[1]
-		local win2 = wf_mimestream:getWindows()[2]
-		moveResize(win1, hs.layout.left50)
-		moveResize(win2, hs.layout.right50)
-	end
-end)
-wf_mimestream:subscribe(wf.windowDestroyed, function ()
-	if #wf_mimestream:getWindows() == 1 then
-		local win = wf_mimestream:getWindows()[1]
-		moveResize(win, baseLayout)
-	end
-end)
+wf_mimestream = wf.new("Mimestream")
+	:setOverrideFilter{allowRoles='AXStandardWindow', rejectTitles={"General", "Accounts", "Sidebar & List", "Viewing", "Composing", "Templates", "Signatures", "Labs"}}
+	:subscribe(wf.windowCreated, function ()
+		if #wf_mimestream:getWindows() == 2 then
+			local win1 = wf_mimestream:getWindows()[1]
+			local win2 = wf_mimestream:getWindows()[2]
+			moveResize(win1, hs.layout.left50)
+			moveResize(win2, hs.layout.right50)
+		end
+	end)
+	:subscribe(wf.windowDestroyed, function ()
+		if #wf_mimestream:getWindows() == 1 then
+			local win = wf_mimestream:getWindows()[1]
+			moveResize(win, baseLayout)
+		end
+	end)
+	:subscribe(wf.windowFocused, function ()
+		hs.application("Mimestream"):selectMenuItem({"Window", "Bring All to Front"})
+	end)
 
 --------------------------------------------------------------------------------
 
 -- keep TWITTERRIFIC visible, when active window is pseudomaximized
 function twitterrificNextToPseudoMax(_, eventType)
-	if not(eventType == aw.activated or eventType == aw.launching) then return end
-	if not (hs.application("Twitterrific")) then return end
-
-	local currentWin = hs.window.focusedWindow()
-	if isPseudoMaximized(currentWin) then
-		hs.application("Twitterrific"):mainWindow():raise()
+	if appIsRunning("Twitterrific") and (eventType == aw.activated or eventType == aw.launching) then
+		local currentWin = hs.window.focusedWindow()
+		if isPseudoMaximized(currentWin) then
+			hs.application("Twitterrific"):mainWindow():raise()
+		end
 	end
 end
 anyAppActivationWatcher = aw.new(twitterrificNextToPseudoMax)
@@ -141,72 +145,74 @@ anyAppActivationWatcher:start()
 --------------------------------------------------------------------------------
 
 -- SUBLIME
-wf_sublime = wf.new("Sublime Text"):setOverrideFilter{allowRoles='AXStandardWindow'}
-wf_sublime:subscribe(wf.windowCreated, function (newWindow)
-	-- if new window is a settings window, maximize it
-	if newWindow:title():match("sublime%-settings$") or newWindow:title():match("sublime%-keymap$") then
-		moveResizeCurWin("maximized")
+wf_sublime = wf.new("Sublime Text")
+	:setOverrideFilter{allowRoles='AXStandardWindow'}
+	:subscribe(wf.windowCreated, function (newWindow)
+		-- if new window is a settings window, maximize it
+		if newWindow:title():match("sublime%-settings$") or newWindow:title():match("sublime%-keymap$") then
+			moveResizeCurWin("maximized")
 
-	-- subl cli
-	elseif newWindow:title() == "stdin" then
-		moveResizeCurWin("centered")
+		-- subl cli
+		elseif newWindow:title() == "stdin" then
+			moveResizeCurWin("centered")
 
-	-- command-line-edit window = split with alacritty (using EDITOR='subl --new-window --wait')
-	elseif newWindow:title():match("^zsh%w+$") then
-		local alacrittyWin = hs.application("alacritty"):mainWindow()
-		moveResize(alacrittyWin, hs.layout.left50)
-		moveResize(newWindow, hs.layout.right50)
-		newWindow:becomeMain() -- so cmd-tabbing activates this window and not any other one
-		hs.osascript.applescript([[
-			tell application "System Events"
-				tell process "Sublime Text"
-					click menu item "Bash" of menu of menu item "Syntax" of menu "View" of menu bar 1
+		-- command-line-edit window = split with alacritty (using EDITOR='subl --new-window --wait')
+		elseif newWindow:title():match("^zsh%w+$") then
+			local alacrittyWin = hs.application("alacritty"):mainWindow()
+			moveResize(alacrittyWin, hs.layout.left50)
+			moveResize(newWindow, hs.layout.right50)
+			newWindow:becomeMain() -- so cmd-tabbing activates this window and not any other one
+			hs.osascript.applescript([[
+				tell application "System Events"
+					tell process "Sublime Text"
+						click menu item "Bash" of menu of menu item "Syntax" of menu "View" of menu bar 1
+					end tell
 				end tell
-			end tell
-		]])
+			]])
 
-	-- workaround for Window positioning issue, will be fixed with build 4130 being released
-	-- https://github.com/sublimehq/sublime_text/issues/5237
-	elseif isAtOffice() or isProjector() then
-		moveResizeCurWin("maximized")
-	else
-		moveResizeCurWin("pseudo-maximized")
-	end
-end)
-wf_sublime:subscribe(wf.windowDestroyed, function ()
-	-- don't leave windowless app behind
-	if #wf_sublime:getWindows() == 0 and appIsRunning("Sublime Text") then
-		hs.application("Sublime Text"):kill()
-	end
-	-- editing command line finished
-	if not(hs.application("alacritty")) then return end
-	local alacrittyWin = hs.application("alacritty"):mainWindow()
-	if isHalf(alacrittyWin) then
-		moveResize(alacrittyWin, baseLayout)
-		alacrittyWin:focus()
-		keystroke({}, "space") -- to redraw zsh-syntax highlighting of the buffer
-	end
-end)
-wf_sublime:subscribe(wf.windowFocused, function (focusedWin)
-	-- editing command line: paired activation of both windows
-	if not(appIsRunning("alacritty")) then return end
-	local alacrittyWin = hs.application("alacritty"):mainWindow()
-	if focusedWin:title():match("^zsh%w+$") and isHalf(alacrittyWin) then
-		alacrittyWin:raise()
-	end
-end)
+		-- workaround for Window positioning issue, will be fixed with build 4130 being released
+		-- https://github.com/sublimehq/sublime_text/issues/5237
+		elseif isAtOffice() or isProjector() then
+			moveResizeCurWin("maximized")
+		else
+			moveResizeCurWin("pseudo-maximized")
+		end
+	end)
+	:subscribe(wf.windowDestroyed, function ()
+		-- don't leave windowless app behind
+		if #wf_sublime:getWindows() == 0 and appIsRunning("Sublime Text") then
+			hs.application("Sublime Text"):kill()
+		end
+		-- editing command line finished
+		if not(appIsRunning("alacritty")) then return end
+		local alacrittyWin = hs.application("alacritty"):mainWindow()
+		if isHalf(alacrittyWin) then
+			moveResize(alacrittyWin, baseLayout)
+			alacrittyWin:focus()
+			keystroke({}, "space") -- to redraw zsh-syntax highlighting of the buffer
+		end
+	end)
+	:subscribe(wf.windowFocused, function (focusedWin)
+		-- editing command line: paired activation of both windows
+		if not(appIsRunning("alacritty")) then return end
+		local alacrittyWin = hs.application("alacritty"):mainWindow()
+		if focusedWin:title():match("^zsh%w+$") and isHalf(alacrittyWin) then
+			alacrittyWin:raise()
+		end
+	end)
 
 --------------------------------------------------------------------------------
 
 -- ALACRITTY
-wf_alacritty = wf.new("alacritty"):setOverrideFilter{rejectTitles={"^cheatsheet: "}}
-wf_alacritty:subscribe(wf.windowCreated, function ()
-	if isAtOffice() or isProjector() then
-		moveResizeCurWin("maximized")
-	else
-		moveResizeCurWin("pseudo-maximized")
-	end
-end)
+wf_alacritty = wf.new("alacritty")
+	:setOverrideFilter{rejectTitles={"^cheatsheet: "}}
+	:subscribe(wf.windowCreated, function ()
+		if isAtOffice() or isProjector() then
+			moveResizeCurWin("maximized")
+		else
+			moveResizeCurWin("pseudo-maximized")
+		end
+	end)
 
 
 -- ALACRITTY Man / cheat sheet leaader hotkey
@@ -254,12 +260,12 @@ finderAppWatcher = aw.new(finderWatcher)
 finderAppWatcher:start()
 
 wf_finder = wf.new("Finder")
-wf_finder:subscribe(wf.windowDestroyed, function ()
-	if #wf_finder:getWindows() == 0 then
-		-- not via kill, so in-progress-oprations do not get aborted
-		hs.osascript.applescript('tell application "Finder" to quit')
-	end
-end)
+	:subscribe(wf.windowDestroyed, function ()
+		if #wf_finder:getWindows() == 0 then
+			-- not via kill, so in-progress-oprations do not get aborted
+			hs.osascript.applescript('tell application "Finder" to quit')
+		end
+	end)
 
 --------------------------------------------------------------------------------
 
@@ -267,22 +273,23 @@ end)
 -- - (pseudo)maximize
 -- - close other tabs when reopening
 -- - quit Marta when no window remaining
-wf_marta = wf.new("Marta"):setOverrideFilter{allowRoles='AXStandardWindow', rejectTitles="^Preferences$"}
-wf_marta:subscribe(wf.windowCreated, function ()
-	runDelayed(0.1, function () -- close other tabs, needed because: https://github.com/marta-file-manager/marta-issues/issues/896
-		keystroke({"shift"}, "w", 1, hs.application("Marta"))
+wf_marta = wf.new("Marta")
+	:setOverrideFilter{allowRoles='AXStandardWindow', rejectTitles="^Preferences$"}
+	:subscribe(wf.windowCreated, function ()
+		runDelayed(0.1, function () -- close other tabs, needed because: https://github.com/marta-file-manager/marta-issues/issues/896
+			keystroke({"shift"}, "w", 1, hs.application("Marta"))
+		end)
+		if isAtOffice() or isProjector() then
+			moveResizeCurWin("maximized")
+		else
+			moveResizeCurWin("pseudo-maximized")
+		end
 	end)
-	if isAtOffice() or isProjector() then
-		moveResizeCurWin("maximized")
-	else
-		moveResizeCurWin("pseudo-maximized")
-	end
-end)
-wf_marta:subscribe(wf.windowDestroyed, function ()
-	if #wf_marta:getWindows() == 0 then
-		hs.application("Marta"):kill()
-	end
-end)
+	:subscribe(wf.windowDestroyed, function ()
+		if #wf_marta:getWindows() == 0 then
+			hs.application("Marta"):kill()
+		end
+	end)
 
 --------------------------------------------------------------------------------
 
@@ -290,14 +297,14 @@ end)
 -- close first window, when second is open
 -- don't leave tab behind when opening zoom
 wf_zoom = wf.new("zoom.us")
-wf_zoom:subscribe(wf.windowCreated, function ()
-	local numberOfZoomWindows = #wf_zoom:getWindows();
-	if numberOfZoomWindows == 2 then
-		runDelayed (1.3, function()
-			hs.application("zoom.us"):findWindow("^Zoom$"):close()
-		end)
-	end
-end)
+	:subscribe(wf.windowCreated, function ()
+		local numberOfZoomWindows = #wf_zoom:getWindows();
+		if numberOfZoomWindows == 2 then
+			runDelayed (1.3, function()
+				hs.application("zoom.us"):findWindow("^Zoom$"):close()
+			end)
+		end
+	end)
 
 function zoomWatcher(appName, eventType)
 	if not(eventType == aw.launched and appName == "zoom.us") then return end
@@ -367,8 +374,8 @@ function draftsLaunchWake(appName, eventType, appObject)
 		appObject:selectMenuItem({"View", "Hide Toolbar"})
 	end
 end
-draftsWatcher3 = aw.new(draftsLaunchWake)
-draftsWatcher3:start()
+draftsWatcher = aw.new(draftsLaunchWake)
+draftsWatcher:start()
 
 --------------------------------------------------------------------------------
 
@@ -409,18 +416,18 @@ if not(isAtOffice()) then youtubeWatcher:start() end
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR
 wf_script_editor = wf.new("Script Editor")
-wf_script_editor:subscribe(wf.windowCreated, function (newWindow)
-	if newWindow:title() == "Open" then
-		keystroke({"cmd"}, "n")
-		runDelayed (0.2, function ()
-			keystroke({"cmd"}, "v")
-			moveResizeCurWin("centered")
-		end)
-		runDelayed (0.4, function ()
-			keystroke({"cmd"}, "k")
-		end)
-	end
-end)
+	:subscribe(wf.windowCreated, function (newWindow)
+		if newWindow:title() == "Open" then
+			keystroke({"cmd"}, "n")
+			runDelayed (0.2, function ()
+				keystroke({"cmd"}, "v")
+				moveResizeCurWin("centered")
+			end)
+			runDelayed (0.4, function ()
+				keystroke({"cmd"}, "k")
+			end)
+		end
+	end)
 
 --------------------------------------------------------------------------------
 
@@ -456,15 +463,14 @@ end
 discordAppWatcher = aw.new(discordWatcher)
 discordAppWatcher:start()
 
-
 --------------------------------------------------------------------------------
 
 -- SHOTTR: Auto-select Arrow
 wf_shottr = wf.new("Shottr")
-wf_shottr:subscribe(wf.windowCreated, function (newWindow)
-	if newWindow:title() == "Preferences" then return end
+	:subscribe(wf.windowCreated, function (newWindow)
+		if newWindow:title() == "Preferences" then return end
 
-	runDelayed (0.1, function ()
-		keystroke({}, "a")
+		runDelayed (0.1, function ()
+			keystroke({}, "a")
+		end)
 	end)
-end)
