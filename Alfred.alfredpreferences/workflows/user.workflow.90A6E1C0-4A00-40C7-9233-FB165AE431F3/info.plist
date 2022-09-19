@@ -303,70 +303,72 @@ Updated to Python 3
 
 enter (↩️) copies word to clipboard
 CMD+enter (⌘↩️) opens synonyms in browser
-CTRL+enter (^↩️) opens antonyms in browser</string>
+CTRL+enter (^↩️) opens antonyms in browser
+
+https://github.com/giovannicoppola/alfred-powerthesaurus</string>
 	<key>uidata</key>
 	<dict>
 		<key>3BDFA2EA-F8AA-4E1D-BACD-9578AA20FCF0</key>
 		<dict>
 			<key>xpos</key>
-			<integer>110</integer>
+			<real>110</real>
 			<key>ypos</key>
-			<integer>440</integer>
+			<real>440</real>
 		</dict>
 		<key>76D80E62-E346-4FE5-87F5-0F588660706B</key>
 		<dict>
 			<key>note</key>
 			<string>Open Antonyms in browser</string>
 			<key>xpos</key>
-			<integer>650</integer>
+			<real>650</real>
 			<key>ypos</key>
-			<integer>460</integer>
+			<real>460</real>
 		</dict>
 		<key>819E593B-43C3-4EBF-9000-3D3C0F5AB6D2</key>
 		<dict>
 			<key>xpos</key>
-			<integer>110</integer>
+			<real>110</real>
 			<key>ypos</key>
-			<integer>115</integer>
+			<real>115</real>
 		</dict>
 		<key>AF3183AB-C171-409C-9900-649D4136A7D1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>440</integer>
+			<real>440</real>
 			<key>ypos</key>
-			<integer>440</integer>
+			<real>440</real>
 		</dict>
 		<key>B08999FE-6061-49C9-997E-42C21568C633</key>
 		<dict>
 			<key>note</key>
 			<string>Open Synonims in browser</string>
 			<key>xpos</key>
-			<integer>650</integer>
+			<real>650</real>
 			<key>ypos</key>
-			<integer>40</integer>
+			<real>40</real>
 		</dict>
 		<key>C8E90027-C7BF-4358-A235-F56E58D80D55</key>
 		<dict>
 			<key>xpos</key>
-			<integer>440</integer>
+			<real>440</real>
 			<key>ypos</key>
-			<integer>160</integer>
+			<real>160</real>
 		</dict>
 		<key>EA0FCBB9-3119-4821-A1D9-58B6780D5C37</key>
 		<dict>
 			<key>xpos</key>
-			<integer>650</integer>
+			<real>650</real>
 			<key>ypos</key>
-			<integer>260</integer>
+			<real>260</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>variables</key>
 	<dict>
 		<key>ALFRED_PT_SSL_VERIFICATION</key>
 		<string>True</string>
 	</dict>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
 	<string>3.0</string>
 	<key>webaddress</key>
