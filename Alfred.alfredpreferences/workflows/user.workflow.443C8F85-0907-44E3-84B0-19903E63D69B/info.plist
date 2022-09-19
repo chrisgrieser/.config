@@ -536,7 +536,6 @@ Chris</string>
 				<integer>2</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.agiletortoise.Drafts-OSX</string>
 					<string>com.brave.Browser</string>
 				</array>
 				<key>relatedAppsMode</key>
@@ -986,7 +985,7 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>Mail the current Browser Tab</string>
+			<string>new Mail</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
