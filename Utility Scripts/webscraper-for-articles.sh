@@ -35,6 +35,27 @@ echo "-------------------" >> "$REPORT_FILE"
 
 #-------------------------------------------------------------------------------
 
+# Helper Function
+function maxOfThree() {
+	if [[ $1 -gt $2 ]] && [[ $1 -gt $3 ]] ; then
+		echo "one"
+	elif [[ $2 -gt $1 ]] && [[ $2 -gt $3 ]] ; then
+		echo "two"
+	else
+		echo "three"
+	fi
+}
+
+function minOfThree() {
+	if [[ $1 -lt $2 ]] && [[ $1 -lt $3 ]] ; then
+		echo "one"
+	elif [[ $2 -lt $1 ]] && [[ $2 -lt $3 ]] ; then
+		echo "two"
+	else
+		echo "three"
+	fi
+}
+
 # input args / Config
 INPUT_FILE="$1"
 OUTPUT_FOLDER="$2"
@@ -56,7 +77,7 @@ SUCCESS_COUNT=0
 ERROR_COUNT=0
 WARNING_COUNT=0
 
-# grep only URLs
+# GREP ONLY URLS
 INPUT=$(cat "$INPUT_FILE" | grep -Eo "https?://[a-zA-Z0-9./?=_%:-]*")
 LINE_COUNT=$(echo "$INPUT" | wc -l | tr -d " ")
 
@@ -65,7 +86,7 @@ echo "$INPUT" | while read -r line ; do
 	PROGRESS_COUNT=$((PROGRESS_COUNT + 1))
 	echo -n "\033[0m$PROGRESS_COUNT/$LINE_COUNT: "
 
-	# Check whether URL is alive
+	# CHECK WHETHER URL IS ALIVE
 	HTTP_CODE=$(curl -sI "$URL" | head -n1 | sed -E 's/[[:space:]]*$//g')
 	if [[ "$HTTP_CODE" != "HTTP/2 200" ]]; then
 		echo "\033[1;31mURL is dead: $HTTP_CODE\033[0m"
@@ -74,15 +95,24 @@ echo "$INPUT" | while read -r line ; do
 		continue
 	fi
 
-	# Scrapping via Mercury Reader
+	# SCRAPPING VIA GATHER
+	# (options to mirror the output from Mercury Parser)
+	output_gather=$(gather --inline-links --no-include-source --no-include-title "$URL" | sed 's/---?/–/g' | tr -s " ")
+
+	# SCRAPPING VIA READABILITY-CLI
+	readable --quite "$URL" | tr -s " " > temp.html
+	turndown-cli --head=2 --hr=2 --bullet=2 --code=2 temp.html &> /dev/null
+	output_readable=$(tr -s " "  < temp.md)
+
+	# SCRAPPING VIA MERCURY READER
 	parsed_data=$(mercury-parser "$URL")
 	echo "$parsed_data" | yq .content > temp.html
 	turndown-cli --head=2 --hr=2 --bullet=2 --code=2 temp.html &> /dev/null
 	# shellcheck disable=SC1111
 	output_mercury=$(tr "’“”" "'\"\"" < temp.md | sed 's/\\\. /. /g' | tr -s " ")
-	# rm temp.html temp.md
+	rm temp.html temp.md
 
-	# Metadata via Mercury Reader
+	# METADATA VIA MERCURY READER
 	title=$(echo "$parsed_data" | yq .title)
 	author=$(echo "$parsed_data" | yq .author | sed 's/^[Bb]y //' )
 	excerpt=$(echo "$parsed_data" | yq .excerpt)
@@ -99,11 +129,7 @@ echo "$INPUT" | while read -r line ; do
 	year=$(echo "$date_published" | grep -Eo "\d{4}")
 	file_name="${year}_${safe_title}.md"
 
-	# Scrapping via Gather
-	# (options to mirror the output from Mercury Parser)
-	output_gather=$(gather --inline-links --no-include-source --no-include-title "$URL" | sed 's/---?/–/g' | tr -s " ")
-
-	# Quality Control
+	# QUALITY CONTROL
 	# (using word count instead of diff for performance)
 	count_mercury=$(echo "$output_mercury" | wc -w) # counting words instead of characters since less prone to variation due to whitespace or formatting style
 	count_gather=$(echo "$output_gather" | wc -w)
@@ -125,10 +151,11 @@ echo "$INPUT" | while read -r line ; do
 			echo -n "Difference of $count_diff words."
 		fi
 		SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
+		echo "🟩;Mercury: $count_mercury;Gather: $count_gather;Readable: $count_readable;$URL" >> "$REPORT_FILE"
 	fi
 	echo "\033[0m → '$file_name'"
 
-	# Saving Output
+	# SAVING OUTPUT
 	# (use content from the parser which seems to get more content)
 	# for using OSX sed to insert lines: https://stackoverflow.com/a/25632073
 	if [[ $count_gather -gt $count_mercury ]]; then
@@ -141,20 +168,12 @@ echo "$INPUT" | while read -r line ; do
 		              parser: Gather')
 	fi
 
-	if [[ $count_diff -gt $TOLERANCE ]]; then
-		frontmatter=$(echo "$frontmatter" | sed "7i\\
-		              parser-diff: $count_diff words")
-	else
-		frontmatter=$(echo "$frontmatter" | sed '7i\
-		              parser-diff: ok')
-	fi
-
 	echo "$frontmatter\n\n$content" > "$DESTINATION/$file_name"
 done
 
 #-------------------------------------------------------------------------------
 
-# Summary
+# SUMMARY
 echo "\033[0m---"
 echo "\033[1;32m$SUCCESS_COUNT\033[0m articles scrapped"
 echo "\033[1;33m$WARNING_COUNT\033[0m articles with significant parser difference"

@@ -55,7 +55,7 @@ if which npm &> /dev/null; then
 	npm() {
 		unfunction "$0" # Remove this function, subsequent calls will execute 'kubectl' directly
 		$0 "$@" # Execute binary
-		npm completion # https://docs.npmjs.com/cli/v8/commands/npm-completion
+		eval "$(npm completion)" # https://docs.npmjs.com/cli/v8/commands/npm-completion
 	}
 fi
 
