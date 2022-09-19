@@ -134,8 +134,26 @@ echo "$INPUT" | while read -r line ; do
 	count_mercury=$(echo "$output_mercury" | wc -w) # counting words instead of characters since less prone to variation due to whitespace or formatting style
 	count_gather=$(echo "$output_gather" | wc -w)
 	count_readable=$(echo "$output_readable" | wc -w)
-	count_diff=$((count_mercury - count_gather))
-	[[ $count_diff -lt 0 ]] && count_diff=$((count_diff * -1 )) # absolute value
+
+	# shellcheck disable=SC2086
+	highest=$(maxOfThree $count_gather $count_readable $count_mercury)
+	# shellcheck disable=SC2086
+	lowest=$(maxOfThree $count_gather $count_readable $count_mercury)
+	if [[ "$highest" == "one" ]]; then
+		highest_count=$count_gather
+	elif [[ "$highest" == "two" ]]; then
+		highest_count=$count_readable
+	else
+		highest_count=$count_mercury
+	fi
+	if [[ "$lowest" == "one" ]]; then
+		lowest_count=$count_gather
+	elif [[ "$lowest" == "two" ]]; then
+		lowest_count=$count_readable
+	else
+		lowest_count=$count_mercury
+	fi
+	count_diff=$((highest_count - lowest_count))
 
 	if [[ $count_diff -gt $TOLERANCE ]]; then
 		echo -n "\033[1;33mDifference of $count_diff words"
@@ -158,14 +176,20 @@ echo "$INPUT" | while read -r line ; do
 	# SAVING OUTPUT
 	# (use content from the parser which seems to get more content)
 	# for using OSX sed to insert lines: https://stackoverflow.com/a/25632073
-	if [[ $count_gather -gt $count_mercury ]]; then
-		content="$output_mercury"
-		frontmatter=$(echo "$frontmatter" | sed '6i\
-		              parser: Mercury')
-	else
+	# shellcheck disable=SC2086
+
+	if [[ "$highest" == "one" ]]; then
 		content="$output_gather"
 		frontmatter=$(echo "$frontmatter" | sed '6i\
 		              parser: Gather')
+	elif [[ "$highest" == "two" ]]; then
+		content="$output_readable"
+		frontmatter=$(echo "$frontmatter" | sed '6i\
+		              parser: Readability')
+	else
+		content="$output_mercury"
+		frontmatter=$(echo "$frontmatter" | sed '6i\
+		              parser: Mercury')
 	fi
 
 	echo "$frontmatter\n\n$content" > "$DESTINATION/$file_name"
