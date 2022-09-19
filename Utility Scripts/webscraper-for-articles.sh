@@ -21,13 +21,17 @@ if ! command gather &> /dev/null; then
 	echo "Install from here: https://github.com/ttscoff/gather-cli"
 	echo "(brew-tap requires 12gb Xcode install, so download the package instead…)"
 fi
-if ! command mercury-parser &> /dev/null && ! command turndown-cli &> /dev/null && ! command yq &> /dev/null; ! command gather &> /dev/null; then
+if ! command readable &> /dev/null; then
+	echo "readability-cli not installed."
+	echo "install: npm install -g readability-cli"
+fi
+if ! command readable &> /dev/null || ! command mercury-parser &> /dev/null || ! command turndown-cli &> /dev/null || ! command yq &> /dev/null || ! command gather &> /dev/null; then
 	exit 1
 fi
 
 # Report file
-echo "URL Parsing Failues" > "$ERROR_LOG"
-echo "-------------------" >> "$ERROR_LOG"
+echo "REPORT" > "$REPORT_FILE"
+echo "-------------------" >> "$REPORT_FILE"
 
 #-------------------------------------------------------------------------------
 
@@ -41,7 +45,7 @@ fi
 [[ -z "$OUTPUT_FOLDER" ]] && OUTPUT_FOLDER="."
 TOLERANCE=15 # number of words treshhold
 MAX_TITLE_LENGTH=45
-ERROR_LOG="$OUTPUT_FOLDER/errors.log"
+REPORT_FILE="$OUTPUT_FOLDER/report.csv"
 DESTINATION="$OUTPUT_FOLDER/files/"
 mkdir -p "$DESTINATION"
 
@@ -65,7 +69,7 @@ echo "$INPUT" | while read -r line ; do
 	HTTP_CODE=$(curl -sI "$URL" | head -n1 | sed -E 's/[[:space:]]*$//g')
 	if [[ "$HTTP_CODE" != "HTTP/2 200" ]]; then
 		echo "\033[1;31mURL is dead: $HTTP_CODE\033[0m"
-		echo "$HTTP_CODE;$URL" >> "$ERROR_LOG"
+		echo "🟥;$HTTP_CODE;;;$URL" >> "$REPORT_FILE"
 		ERROR_COUNT=$((ERROR_COUNT + 1))
 		continue
 	fi
@@ -103,12 +107,14 @@ echo "$INPUT" | while read -r line ; do
 	# (using word count instead of diff for performance)
 	count_mercury=$(echo "$output_mercury" | wc -w) # counting words instead of characters since less prone to variation due to whitespace or formatting style
 	count_gather=$(echo "$output_gather" | wc -w)
+	count_readable=$(echo "$output_readable" | wc -w)
 	count_diff=$((count_mercury - count_gather))
 	[[ $count_diff -lt 0 ]] && count_diff=$((count_diff * -1 )) # absolute value
 
 	if [[ $count_diff -gt $TOLERANCE ]]; then
 		echo -n "\033[1;33mDifference of $count_diff words"
 		WARNING_COUNT=$((WARNING_COUNT + 1))
+		echo "🟨;Mercury: $count_mercury;Gather: $count_gather;Readable: $count_readable;$URL" >> "$REPORT_FILE"
 	else
 		echo -n "\033[1;32m" # green
 		if [[ $count_diff -eq 0 ]]; then
