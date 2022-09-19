@@ -302,35 +302,23 @@ wf_zoom = wf.new("zoom.us")
 		if numberOfZoomWindows == 2 then
 			runDelayed (1.3, function()
 				hs.application("zoom.us"):findWindow("^Zoom$"):close()
+				hs.osascript.applescript([[
+					tell application "Brave Browser"
+						set window_list to every window
+						repeat with the_window in window_list
+							set tab_list to every tab in the_window
+							repeat with the_tab in tab_list
+								set the_url to the url of the_tab
+								if the_url contains ("zoom.us") then
+									close the_tab
+								end if
+							end repeat
+						end repeat
+					end tell
+				]])
 			end)
 		end
 	end)
-
-function zoomWatcher(appName, eventType)
-	if not(eventType == aw.launched and appName == "zoom.us") then return end
-	spotifyTUI("pause")
-
-	runDelayed(2, function ()
-		hs.osascript.applescript([[
-			tell application "Brave Browser"
-				set window_list to every window
-				repeat with the_window in window_list
-					set tab_list to every tab in the_window
-					repeat with the_tab in tab_list
-						set the_url to the url of the_tab
-						if the_url contains ("zoom.us") then
-							close the_tab
-						end if
-					end repeat
-				end repeat
-			end tell
-		]])
-	end)
-
-end
-zoomAppWatcher = aw.new(zoomWatcher)
-zoomAppWatcher:start()
-
 
 --------------------------------------------------------------------------------
 
@@ -389,7 +377,7 @@ macPassWatcher:start()
 
 --------------------------------------------------------------------------------
 
--- YOUTUBE + SPOTIFY
+-- SPOTIFY
 -- Pause Spotify on launch
 -- Resume Spotify on quit
 function spotifyTUI (toStatus)
@@ -401,17 +389,17 @@ function spotifyTUI (toStatus)
 	end
 end
 
-function youtubeSpotify (appName, eventType)
-	if not(appName == "YouTube") then return end
-
-	if eventType == aw.launched then
-		spotifyTUI("pause")
-	elseif eventType == aw.terminated and not(isProjector()) then
-		spotifyTUI("play")
+function SpotifyToggler (appName, eventType)
+	if appName == "YouTube" or appName == "zoom.us" or appName == "FaceTime" then
+		if eventType == aw.launched then
+			spotifyTUI("pause")
+		elseif eventType == aw.terminated and not(isProjector()) then
+			spotifyTUI("play")
+		end
 	end
 end
-youtubeWatcher = aw.new(youtubeSpotify)
-if not(isAtOffice()) then youtubeWatcher:start() end
+spotifyAppWatcher = aw.new(SpotifyToggler)
+if not(isAtOffice()) then spotifyAppWatcher:start() end
 
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR
@@ -467,10 +455,8 @@ discordAppWatcher:start()
 
 -- SHOTTR: Auto-select Arrow
 wf_shottr = wf.new("Shottr")
-	:subscribe(wf.windowCreated, function (newWindow)
+	:subscribe(wf.windowCreated, function(newWindow)
 		if newWindow:title() == "Preferences" then return end
 
-		runDelayed (0.1, function ()
-			keystroke({}, "a")
-		end)
+		runDelayed (0.1, function () keystroke({}, "a") end)
 	end)
