@@ -53,7 +53,7 @@ case $APP_TO_UPDATE in
 		cp "$CUSTOM_ICON_FOLDER/AppCleaner.icns" 'AppCleaner.app/Contents/Resources/AppCleaner.icns'
 		touch "AppCleaner.app" ;;
 	"Obsidian")
-		cp "$CUSTOM_ICON_FOLDER/Obsidian Square Realistic.icns" 'Obsidian.app/Contents/Resources/icon.icns'
+		cp "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" 'Obsidian.app/Contents/Resources/icon.icns'
 		touch "Obsidian.app" ;;
 	"MacPass")
 		cp "$CUSTOM_ICON_FOLDER/MacPass.icns" 'MacPass.app/Contents/Resources/MacPassAppIcon.icns'
@@ -131,7 +131,7 @@ fi
 if [[ $NONE_FOUND == 0 ]]; then
 	killall "$APP_TO_UPDATE"
 	killall "Dock"
-	sleep 3
+	sleep 2
 	open -a "$APP_TO_UPDATE"
 	echo -n "$APP_TO_UPDATE" # pass for notification
 else
