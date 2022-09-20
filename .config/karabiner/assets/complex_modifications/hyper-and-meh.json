@@ -107,6 +107,40 @@
           "type": "basic"
         }
       ]
+    },
+    {
+      "description": "Esc Rebindings",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "escape"
+          },
+          "to_if_alone": [
+            {
+              "key_code": "f18"
+            }
+          ],
+          "to": [
+            {
+              "key_code": "escape"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "variable_unless",
+              "name": "LEADER_ACTIVE",
+              "value": true
+            },
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com.runningwithcrayons.Alfred$"
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
