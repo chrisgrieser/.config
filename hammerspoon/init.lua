@@ -25,7 +25,8 @@ vim = VimMode:new()
 vim:setAlertFont('SF Mono')
 	:bindHotKeys({ enter = {{'cmd'}, 'f19'} }) -- Karabiner: tap left-opt
 	:enableBetaFeature('block_cursor_overlay')
-	:disableForApp('Sublime Text')
+
+vim:disableForApp('Sublime Text')
 	:disableForApp('alacritty')
 	:disableForApp('Alacritty')
 	:disableForApp('Obsidian')
