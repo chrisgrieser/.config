@@ -820,8 +820,7 @@ return "{query}"</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>brew install iconsur
-brew install folderify</string>
+	<string></string>
 	<key>uidata</key>
 	<dict>
 		<key>05B2913E-95E3-4E72-A4C1-93E1A7A0C889</key>
@@ -977,7 +976,7 @@ brew install folderify</string>
 			<key>note</key>
 			<string>edit preferences file</string>
 			<key>xpos</key>
-			<real>435</real>
+			<real>430</real>
 			<key>ypos</key>
 			<real>570</real>
 		</dict>
@@ -1077,9 +1076,9 @@ brew install folderify</string>
 	<key>variables</key>
 	<dict>
 		<key>custom_icon_folder</key>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Custom Icons</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Custom App Icons</string>
 		<key>icon_folder</key>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Icon Collections</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Icon Collection</string>
 		<key>pwa_folder</key>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Brave Browser Apps.localized/</string>
 	</dict>

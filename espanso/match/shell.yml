@@ -38,6 +38,13 @@ matches:
     label: 🐚 dev/null
   - replace: 'system_profiler SPDisplaysDataType | grep -c "Resolution"'
     label: 🐚 Screen count
+  - trigger: "!cli"
+    label: "🐚 CLI Availability Guard Clause"
+    replace: |
+      if ! which $|$ &> /dev/null ; then
+        echo "XXX not installed."
+        exit 1
+      fi
   - trigger: "!resolve"
     replace: |
       resolved_path="${file_path/#\~/$HOME}"
