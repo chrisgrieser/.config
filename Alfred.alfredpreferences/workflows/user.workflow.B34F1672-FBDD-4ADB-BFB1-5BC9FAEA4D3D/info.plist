@@ -260,7 +260,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<false/>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -284,17 +284,17 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string></string>
+				<string>./mdn-search.js "css"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>mdn-search.js</string>
+				<string></string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
 				<string>MDN Search</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>5</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -483,9 +483,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>note</key>
 			<string>custom cheatsheets</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>705</real>
 		</dict>
 		<key>2F0710E7-D440-4B8E-BD7F-FB7FA8670039</key>
 		<dict>
@@ -510,9 +510,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>255</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>860</real>
 		</dict>
 		<key>7E6054B0-3785-45A2-A92E-9896CFEBA420</key>
 		<dict>
@@ -559,9 +559,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>860</real>
 		</dict>
 		<key>EA3DF9A8-C9B9-4A5B-BE23-02A376F9B128</key>
 		<dict>
@@ -588,9 +588,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>note</key>
 			<string>Quicklook</string>
 			<key>xpos</key>
-			<real>255</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>705</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
