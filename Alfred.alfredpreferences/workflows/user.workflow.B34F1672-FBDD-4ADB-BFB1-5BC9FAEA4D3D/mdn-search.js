@@ -9,11 +9,16 @@ function run (argv) {
 
 	//------------------------------------------------------------------------------
 
-	const query = argv.join("");
+	const input = argv.join("").split(" ");
+	const lang = input.shift();
+	const query = input.join(" ");
+	console.log(lang + " " + query);
 	const baseURL = "https://developer.mozilla.org";
 	const searchAPI = "https://developer.mozilla.org/api/v1/search?q=";
 
-	const resultsArr = onlineJSON(searchAPI + query).documents;
+	const resultsArr = onlineJSON(searchAPI + query)
+		.documents
+		.filter(result => result.mdn_url.includes(lang));
 	let output = [];
 
 	if (resultsArr.length === 0) {
