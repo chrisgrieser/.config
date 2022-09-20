@@ -35,27 +35,6 @@ echo "-------------------" >> "$REPORT_FILE"
 
 #-------------------------------------------------------------------------------
 
-# Helper Function
-function maxOfThree() {
-	if [[ $1 -gt $2 ]] && [[ $1 -gt $3 ]] ; then
-		echo "one"
-	elif [[ $2 -gt $1 ]] && [[ $2 -gt $3 ]] ; then
-		echo "two"
-	else
-		echo "three"
-	fi
-}
-
-function minOfThree() {
-	if [[ $1 -lt $2 ]] && [[ $1 -lt $3 ]] ; then
-		echo "one"
-	elif [[ $2 -lt $1 ]] && [[ $2 -lt $3 ]] ; then
-		echo "two"
-	else
-		echo "three"
-	fi
-}
-
 # input args / Config
 INPUT_FILE="$1"
 OUTPUT_FOLDER="$2"
@@ -135,20 +114,16 @@ echo "$INPUT" | while read -r line ; do
 	count_gather=$(echo "$output_gather" | wc -w)
 	count_readable=$(echo "$output_readable" | wc -w)
 
-	# shellcheck disable=SC2086
-	highest=$(maxOfThree $count_gather $count_readable $count_mercury)
-	# shellcheck disable=SC2086
-	lowest=$(maxOfThree $count_gather $count_readable $count_mercury)
-	if [[ "$highest" == "one" ]]; then
+	if [[ $count_gather -gt $count_readable ]] && [[ $count_gather -gt $count_mercury ]] ; then
 		highest_count=$count_gather
-	elif [[ "$highest" == "two" ]]; then
+	elif [[ $count_readable -gt $count_mercury ]] ; then
 		highest_count=$count_readable
 	else
 		highest_count=$count_mercury
 	fi
-	if [[ "$lowest" == "one" ]]; then
+	if [[ $count_gather -lt $count_readable ]] && [[ $count_gather -lt $count_mercury ]] ; then
 		lowest_count=$count_gather
-	elif [[ "$lowest" == "two" ]]; then
+	elif [[ $count_readable -lt $count_mercury ]] ; then
 		lowest_count=$count_readable
 	else
 		lowest_count=$count_mercury
@@ -177,12 +152,11 @@ echo "$INPUT" | while read -r line ; do
 	# (use content from the parser which seems to get more content)
 	# for using OSX sed to insert lines: https://stackoverflow.com/a/25632073
 	# shellcheck disable=SC2086
-
-	if [[ "$highest" == "one" ]]; then
+	if [[ $count_gather -gt $count_readable ]] && [[ $count_gather -gt $count_mercury ]] ; then
 		content="$output_gather"
 		frontmatter=$(echo "$frontmatter" | sed '6i\
 		              parser: Gather')
-	elif [[ "$highest" == "two" ]]; then
+	elif [[ $count_readable -gt $count_mercury ]] ; then
 		content="$output_readable"
 		frontmatter=$(echo "$frontmatter" | sed '6i\
 		              parser: Readability')
