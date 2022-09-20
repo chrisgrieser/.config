@@ -125,11 +125,14 @@ function systemStart()
 	local _, isReloading = hs.execute('[[ -e "./is-reloading" ]]')
 	if isReloading then
 		hs.execute("rm ./is-reloading")
+		notify("Config reloaded.")
 		return
 	end
 
+	notify("Hammerspoon started.")
 	gitDotfileSync("--submodules")
 	gitVaultSync()
+	notify("Sync finished.")
 end
 
 --------------------------------------------------------------------------------
