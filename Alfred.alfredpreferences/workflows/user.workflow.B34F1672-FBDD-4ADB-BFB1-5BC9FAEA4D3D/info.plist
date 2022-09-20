@@ -272,7 +272,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>mdn</string>
+				<string>css</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -292,7 +292,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>MDN Search</string>
+				<string>MDN Search (CSS)</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
