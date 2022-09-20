@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2F0710E7-D440-4B8E-BD7F-FB7FA8670039</key>
 		<array>
 			<dict>
@@ -260,7 +273,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -284,7 +297,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string>./mdn-search.js "css"</string>
+				<string>./mdn-search.js "CSS $*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -325,6 +338,55 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>js</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>./mdn-search.js "JavaScript $*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>MDN Search (JS)</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -486,6 +548,15 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>705</real>
+		</dict>
+		<key>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>570</real>
 		</dict>
 		<key>2F0710E7-D440-4B8E-BD7F-FB7FA8670039</key>
 		<dict>
