@@ -50,15 +50,17 @@ sketchybar --bar height="$HEIGHT"                       \
 # get names of original menubar items to add as alias:
 # `sketchybar --query default_menu_items`
 
-network_bar_item=$(sketchybar --query default_menu_items | grep -i "Stats*network" | cut -d\" -f2)
+# necessary, since the exact name of the menubar item changes a bit depending on installation 🙈
+network_bar_item=$(sketchybar --query default_menu_items | grep -Ei "Stats.*network" | cut -d\" -f2)
+cpu_bar_item=$(sketchybar --query default_menu_items | grep -Ei "Stats.*cpu" | cut -d\" -f2)
 
 sketchybar --add item clock right                            \
            --set clock   update_freq=1                       \
                          script="$PLUGIN_DIR/clock.sh"       \
-                         width=125                           \
+                         width=130                           \
                          label.padding_right=3               \
-           --add alias "Stats,CPU_Bar chart" right           \
-           --set       "Stats,CPU_Bar chart"                 \
+           --add alias "$cpu_bar_item" right                 \
+           --set       "$cpu_bar_item"                       \
                          width=18                            \
            --add alias "$network_bar_item" right             \
            --set       "$network_bar_item"                   \
