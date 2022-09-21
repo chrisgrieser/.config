@@ -10,10 +10,6 @@ function toggleDarkMode ()
 	hs.execute("zsh toggle-marta-darkmode.sh "..targetMode)
 
 	hs.osascript.applescript([[
-		if application "Brave Browser" is not running then
-			launch
-			delay 3
-		end if
 		set openBlank to false
 		tell application "Brave Browser"
 			if ((count of window) is 0) then

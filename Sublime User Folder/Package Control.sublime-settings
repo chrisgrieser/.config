@@ -7,8 +7,6 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
-		"LSP-marksman",
-		"LSP-typescript",
 	],
 	"installed_packages":
 	[
