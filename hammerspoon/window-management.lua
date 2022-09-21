@@ -5,18 +5,16 @@ require("twitterrific-controls")
 -- WINDOW MANAGEMENT UTILS
 iMacDisplay = hs.screen("Built%-in") -- % to escape hyphen (is a quantifier in lua patterns)
 toTheSide = {x=0.815, y=0.025, w=0.185, h=0.975}
+maximized = hs.layout.maximized
 
 -- device-specific parameters
 if isIMacAtHome() then
-	maximized = hs.layout.maximized
 	pseudoMaximized = {x=0, y=0, w=0.815, h=1}
 	baseLayout = pseudoMaximized
 elseif isAtMother() then
-	maximized = hs.layout.maximized
 	pseudoMaximized = {x=0, y=0, w=0.7875, h=1}
 	baseLayout = pseudoMaximized
 elseif isAtOffice() then
-	maximized = {x=0, y=0, w=1, h=0.975} -- slightly lower height for sketchybar
 	baseLayout = maximized
 	pseudoMaximized = maximized
 end

@@ -133,8 +133,8 @@ function officeModeLayout ()
 
 	dockSwitcher("office") -- separate layout to include "Tweeten"
 
-	local bottom = {x=0, y=0.5, w=1, h=0.5}
-	local top = {x=0, y=0, w=1, h=0.5}
+	local top = {x=0, y=0.015, w=1, h=0.485}
+	local bottom = {x=0, y=0.51, w=1, h=0.49}
 	local officeLayout = {
 		-- screen 2
 		{"Tweeten", nil, screen2, top, nil, nil},

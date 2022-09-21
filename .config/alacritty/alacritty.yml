@@ -58,7 +58,7 @@ colors:
       foreground: '#6e6a86'
       background: '#2a273f'
 font:
-  size: 26
+  size: 24
 
   normal:
     family: JetBrainsMonoNL Nerd Font
