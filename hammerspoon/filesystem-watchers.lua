@@ -30,6 +30,18 @@ downloadFolderWatcher:start()
 
 --------------------------------------------------------------------------------
 
+-- FONT rsync (for both directions)
+-- - symlinking the Folder somehow does not work properly, therefore rsync
+-- - target folder is needs to be parent
+fontsWatcher1 = hs.pathwatcher.new(home.."/Library/Fonts", function()
+	hs.execute('rsync --archive --delete "$HOME/Library/Fonts" "$HOME/dotfiles/"')
+end)
+fontsWatcher2 = hs.pathwatcher.new(home.."/dotfiles/Fonts", function()
+	hs.execute('rsync --archive --delete "$HOME/dotfiles/Fonts" "$HOME/Library/"')
+end)
+
+--------------------------------------------------------------------------------
+
 -- Redirects TO File Hub
 scanFolder = home.."/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 scanFolderWatcher = hs.pathwatcher.new(scanFolder, function ()
