@@ -50,7 +50,7 @@ window:
   opacity: 0.93
   decorations: buttonless
 font:
-  size: 24
+  size: 26
 #-------------------------------------------------------------------------------
   normal:
     family: Input
