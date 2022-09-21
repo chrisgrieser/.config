@@ -10,12 +10,12 @@ STYLE=paraiso-dark # https://cheat.sh/:styles-demo
 STATUSLINE_COLOR=#8F9DB5
 
 DEVICE_NAME="$(scutil --get ComputerName)"
-if [[ "$DEVICE_NAME" =~ "Mac mini" ]]; then
+if [[ "$DEVICE_NAME" =~ "Office" ]]; then
 	X=200
 	Y=40
 	LINES=22
 	FONT_SIZE=23
-elif [[ "$DEVICE_NAME" =~ "Helmholtz" ]] ; then
+elif [[ "$DEVICE_NAME" =~ "Home" ]] ; then
 	X=550
 	Y=100
 	LINES=28

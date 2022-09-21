@@ -32,13 +32,17 @@ downloadFolderWatcher:start()
 
 -- FONT rsync (for both directions)
 -- - symlinking the Folder somehow does not work properly, therefore rsync
--- - target folder is needs to be parent
+-- - source folder needs trailing "/" to copy contents (instead of the folder)
 fontsWatcher1 = hs.pathwatcher.new(home.."/Library/Fonts", function()
-	hs.execute('rsync --archive --delete "$HOME/Library/Fonts" "$HOME/dotfiles/"')
+	hs.execute('rsync --archive --update --delete "$HOME/Library/Fonts/" "$HOME/dotfiles/Fonts"')
+	notify ("Fonts synced.")
 end)
 fontsWatcher2 = hs.pathwatcher.new(home.."/dotfiles/Fonts", function()
-	hs.execute('rsync --archive --delete "$HOME/dotfiles/Fonts" "$HOME/Library/"')
+	hs.execute('rsync --archive --update --delete "$HOME/dotfiles/Fonts/" "$HOME/Library/Fonts"')
+	notify ("Fonts synced.")
 end)
+fontsWatcher1:start()
+fontsWatcher2:start()
 
 --------------------------------------------------------------------------------
 
