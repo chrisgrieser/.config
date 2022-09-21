@@ -21,7 +21,7 @@ duti -s com.colliderli.iina mkv all
 duti -s com.colliderli.iina m4a all
 
 # text
-duti -s com.sublimetext.4 public.data all # dotfiles do not have a UTI or file extensions
+duti -s com.sublimetext.4 public.data all # dotfiles without extension
 duti -s com.apple.automator.Obsidian-Opener md all
 duti -s sh com.sublimetext.4 all
 duti -s bib com.sublimetext.4 all
@@ -47,15 +47,23 @@ duti -s org.m0k.transmission magnet
 duti -s com.mimestream.Mimestream mailto # = default mail client
 duti -s com.brave.Browser http           # = default browser
 duti -s com.brave.Browser https
-duti -s com.brave.Browser webloc all
-duti -s com.brave.Browser url all
+duti -s com.brave.Browser chrome-extension
+
+duti -s com.brave.Browser webloc all     # link files
+duti -s com.brave.Browser url all     # link files
 
 # Marta
 duti -s org.yanex.marta file             # file links
 duti -s marco com.sublimetext.4 all      # marta config files
 defaults write -g NSFileViewer -string org.yanex.marta
 defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="org.yanex.marta";}'
-# TODO then restart mac
+
+brew uninstall duti
+# -> then restart mac
+
+
+
+
 
 # to restore Finder as default
 # defaults delete -g NSFileViewer
