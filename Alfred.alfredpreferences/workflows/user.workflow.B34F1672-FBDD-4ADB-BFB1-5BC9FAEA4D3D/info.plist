@@ -247,7 +247,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>cc</string>
+				<string>ch</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -352,7 +352,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>cc</string>
+				<string>ch</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>

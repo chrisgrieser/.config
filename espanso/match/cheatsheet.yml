@@ -2,7 +2,7 @@
 # ------------------------------------------
 
 matches:
-  - regex: "cc (?P<query>.+)\\r" # macOS requires `\r` instead of `\n` as line break here
+  - regex: "ch (?P<query>.+)\\r" # macOS requires `\r` instead of `\n` as line break here
     replace: "{{output}}\n"
     vars:
       - name: output
