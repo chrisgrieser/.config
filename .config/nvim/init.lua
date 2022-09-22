@@ -1,16 +1,14 @@
 -- https://bryankegley.me/posts/nvim-getting-started/
+-- https://neovim.io/doc/user/vim_diff.html
 --------------------------------------------------------------------------------
 
 -- SETTINGS
 local opt = vim.opt
 
 -- search
-opt.incsearch = true
 opt.showmatch = true
-opt.hlsearch = true
 
 -- tabs & indentation
-opt.autoindent = true
 opt.smartindent = true
 opt.tabstop = 3
 opt.softtabstop = 3
@@ -71,10 +69,9 @@ keymap("n", "gk", "k")
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 keymap("", "H", "0^") -- ensures scrolling to the left
-keymap("", "L", "$")
+keymap("", "L", "g$")
 keymap("", "J", "7j")
 keymap("", "K", "7k")
-keymap("", "L", "$")
 keymap("", "[", "{") -- easier to press
 keymap("", "]", "}")
 
@@ -123,13 +120,23 @@ for i = 1, #trailingKeys do
 	keymap("n", "<leader>"..trailingKeys[i], "mzA"..trailingKeys[i].."<Esc>`z")
 end
 
+
 --------------------------------------------------------------------------------
--- EMULATING MAC BINDINGS (for consistency)
+-- LANGUAGE-SPECIFIC BINDINGS
+
+-- Markdown
+keymap("n", "<CR>", 'A') -- So Double return keeps list syntax
+
+--------------------------------------------------------------------------------
+-- EMULATING MAC BINDINGS (requires GUI app like Neovide)
 keymap("", "<D-v>", "p") -- cmd+v
 keymap("n", "<D-c>", "yy") -- cmd+c: copy line
 keymap("v", "<D-c>", "y") -- cmd+c: copy selection
 keymap("n", "<D-x>", "dd") -- cmd+x: cut line
 keymap("v", "<D-x>", "d") -- cmd+x: cut selection
+
+keymap("n", "<D-n>", ":tabnew") -- cmd+n
+keymap("n", "<D-t>", ":tabnew") -- cmd+t
 keymap("n", "<D-s>", ":write<CR>") -- cmd+s
 keymap("n", "<D-a>", "ggvG") -- cmd+a
 keymap("n", "<D-w>", ":bd") -- cmd+w
