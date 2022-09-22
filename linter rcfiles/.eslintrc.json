@@ -47,7 +47,7 @@
 
 		// Line Breaks
 		"object-curly-newline": ["warn", { "multiline": true }],
-		"newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
+		"newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }],
 		"no-multiple-empty-lines": ["warn", { "max": 2 } ],
 
 		// Brackets
