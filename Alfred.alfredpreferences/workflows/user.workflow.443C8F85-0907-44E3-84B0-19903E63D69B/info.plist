@@ -114,19 +114,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>9577CE61-7D83-4CFB-8A73-725A73FF6DE3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E076428F-6694-4CAF-B669-ADE646F328F7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>9BF84B32-0217-4A0F-9F75-E541FFDA268D</key>
 		<array>
 			<dict>
@@ -580,11 +567,11 @@ Chris</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>18</integer>
+				<integer>25</integer>
 				<key>hotmod</key>
 				<integer>1048576</integer>
 				<key>hotstring</key>
-				<string>1</string>
+				<string>9</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -599,7 +586,7 @@ Chris</string>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>9577CE61-7D83-4CFB-8A73-725A73FF6DE3</string>
+			<string>A253620F-FFA6-4E80-8C60-CE220D4D50DD</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -609,18 +596,18 @@ Chris</string>
 				<key>count</key>
 				<integer>1</integer>
 				<key>keychar</key>
-				<string>s</string>
+				<string>t</string>
 				<key>keycode</key>
 				<integer>-1</integer>
 				<key>keymod</key>
-				<integer>1310720</integer>
+				<integer>1572864</integer>
 				<key>overridewithargument</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.dispatchkeycombo</string>
 			<key>uid</key>
-			<string>E076428F-6694-4CAF-B669-ADE646F328F7</string>
+			<string>98959A8A-01E4-411D-93B6-00D953F6B889</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -699,62 +686,6 @@ end tell</string>
 			<string>50B66C20-4163-4A8A-A8C9-AFC175AEA52D</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>25</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>9</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.mimestream.Mimestream</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>A253620F-FFA6-4E80-8C60-CE220D4D50DD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>t</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1572864</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>98959A8A-01E4-411D-93B6-00D953F6B889</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1049,21 +980,12 @@ end tell</string>
 			<key>ypos</key>
 			<real>165</real>
 		</dict>
-		<key>9577CE61-7D83-4CFB-8A73-725A73FF6DE3</key>
-		<dict>
-			<key>note</key>
-			<string>toggle sidebar</string>
-			<key>xpos</key>
-			<real>550</real>
-			<key>ypos</key>
-			<real>315</real>
-		</dict>
 		<key>98959A8A-01E4-411D-93B6-00D953F6B889</key>
 		<dict>
 			<key>xpos</key>
-			<real>725</real>
+			<real>720</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>300</real>
 		</dict>
 		<key>9BF84B32-0217-4A0F-9F75-E541FFDA268D</key>
 		<dict>
@@ -1079,11 +1001,11 @@ end tell</string>
 		<key>A253620F-FFA6-4E80-8C60-CE220D4D50DD</key>
 		<dict>
 			<key>note</key>
-			<string>toggle sidebar</string>
+			<string>toggle toolbar</string>
 			<key>xpos</key>
-			<real>550</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>300</real>
 		</dict>
 		<key>C0DA5B2B-624A-4F09-956B-68158231988A</key>
 		<dict>
@@ -1124,13 +1046,6 @@ end tell</string>
 			<real>200</real>
 			<key>ypos</key>
 			<real>480</real>
-		</dict>
-		<key>E076428F-6694-4CAF-B669-ADE646F328F7</key>
-		<dict>
-			<key>xpos</key>
-			<real>725</real>
-			<key>ypos</key>
-			<real>315</real>
 		</dict>
 		<key>F1646853-4BE7-44BE-985F-9282246BAFCA</key>
 		<dict>
