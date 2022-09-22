@@ -742,7 +742,7 @@ rules:
         - shell_command: /Applications/Marta.app/Contents/Resources/launcher --existing-tab "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
   - description: "🅰️👨‍💻 Script Editor"
     manipulators:
-    # Quick Closing skipping save
+    # Quick Closing skipping save prompt
     # for movement with tab required: `defaults write NSGlobalDomain AppleKeyboardUIMode -int 3`
     - type: basic
       from:
