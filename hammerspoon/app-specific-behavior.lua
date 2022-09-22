@@ -259,14 +259,6 @@ end
 finderAppWatcher = aw.new(finderWatcher)
 finderAppWatcher:start()
 
-wf_finder = wf.new("Finder")
-	:subscribe(wf.windowDestroyed, function ()
-		if #wf_finder:getWindows() == 0 then
-			-- not via kill, so in-progress-oprations do not get aborted
-			hs.osascript.applescript('tell application "Finder" to quit')
-		end
-	end)
-
 --------------------------------------------------------------------------------
 
 -- MARTA
