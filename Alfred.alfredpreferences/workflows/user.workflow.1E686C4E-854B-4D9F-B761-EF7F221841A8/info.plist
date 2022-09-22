@@ -8,19 +8,6 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
-		<key>16D38DFC-CFE4-4CC7-8A25-EA604410CD5A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F0068510-5EA9-467B-8CAB-E5A736B52AE8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>20AA6DBE-F597-47FF-B059-314D7D83B612</key>
 		<array>
 			<dict>
@@ -39,6 +26,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>CF8FBA0E-7BB8-46F0-9240-13ACB11C3D74</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3FF35894-CFA2-419B-9E42-F55573EF95B9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F6DAF10C-E8B5-49CA-B86B-DE30E7C70191</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -142,19 +142,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F0068510-5EA9-467B-8CAB-E5A736B52AE8</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0E91D870-C8B9-49BA-B676-8E4DE6AF892F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -358,50 +345,6 @@ window_name</string>
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>hs</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>❗️Restart Hammerspoon</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E8066503-E298-4023-9E9F-3FBA20E03748</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>restart-hammerspoon.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>4F748E27-E0FA-42A5-9B83-B58EF498DC15</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
 				<string>ep</string>
@@ -416,6 +359,27 @@ window_name</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>387E93E5-B099-4784-8538-0CE2E9086D86</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>0E91D870-C8B9-49BA-B676-8E4DE6AF892F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -445,130 +409,27 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>hammerspoon://sync-repos</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>0E91D870-C8B9-49BA-B676-8E4DE6AF892F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>sync</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🔁 Sync Dotfiles &amp; Vault</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>102</integer>
 				<key>script</key>
-				<string></string>
+				<string># using full path makes this work even if `subl` hasn't been added to PATH
+
+"/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>restart-espanso.sh</string>
+				<string></string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>F0068510-5EA9-467B-8CAB-E5A736B52AE8</string>
+			<string>F6DAF10C-E8B5-49CA-B86B-DE30E7C70191</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>ep</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>❗️Restart Espanso</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>16D38DFC-CFE4-4CC7-8A25-EA604410CD5A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://karabiner-elements.pqrs.org/docs/json/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>3ADD88AD-97C0-461E-8E11-82570C8A25B2</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -582,11 +443,11 @@ window_name</string>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>ke</string>
+				<string>hh</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -602,20 +463,20 @@ window_name</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>karabiner-docs-search.js</string>
+				<string>hs-functions-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Karabiner Docs Search...</string>
+				<string>Hammerspoon Functions Search...</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>F6ED9B13-8573-48B0-AE15-1717CFBE61C6</string>
+			<string>3FF35894-CFA2-419B-9E42-F55573EF95B9</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -692,6 +553,162 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>hs</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗️Restart Hammerspoon</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E8066503-E298-4023-9E9F-3FBA20E03748</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>restart-hammerspoon.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4F748E27-E0FA-42A5-9B83-B58EF498DC15</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://karabiner-elements.pqrs.org/docs/json/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3ADD88AD-97C0-461E-8E11-82570C8A25B2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ke</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>karabiner-docs-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Karabiner Docs Search...</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>F6ED9B13-8573-48B0-AE15-1717CFBE61C6</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>hammerspoon://sync-repos</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>sync</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔁 Sync Dotfiles &amp; Vault</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -757,9 +774,9 @@ window_name</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>355</real>
+			<real>340</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>170</real>
 		</dict>
 		<key>146B762A-3BFD-4073-8111-EB3BDFFF45A1</key>
 		<dict>
@@ -768,7 +785,7 @@ window_name</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>305</real>
 		</dict>
 		<key>16D2C4F3-A099-4D2C-A0C8-03E587C8968A</key>
 		<dict>
@@ -779,17 +796,6 @@ window_name</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>16D38DFC-CFE4-4CC7-8A25-EA604410CD5A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>restart</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>520</real>
-		</dict>
 		<key>20AA6DBE-F597-47FF-B059-314D7D83B612</key>
 		<dict>
 			<key>colorindex</key>
@@ -799,7 +805,7 @@ window_name</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>305</real>
 		</dict>
 		<key>260CA812-9BC4-4225-87A1-9058C437559D</key>
 		<dict>
@@ -815,9 +821,9 @@ window_name</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>685</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>555</real>
 		</dict>
 		<key>387E93E5-B099-4784-8538-0CE2E9086D86</key>
 		<dict>
@@ -828,34 +834,45 @@ window_name</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>170</real>
 		</dict>
 		<key>3ADD88AD-97C0-461E-8E11-82570C8A25B2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>440</real>
+		</dict>
+		<key>3FF35894-CFA2-419B-9E42-F55573EF95B9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>functions</string>
+			<key>xpos</key>
+			<real>540</real>
+			<key>ypos</key>
+			<real>280</real>
 		</dict>
 		<key>414F4CCD-4FC3-4D8E-ABB4-FEC5C548CC4D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>390</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>580</real>
 		</dict>
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>685</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>415</real>
 		</dict>
 		<key>936424AC-32E2-4193-B07C-DDB804AEF807</key>
 		<dict>
@@ -871,9 +888,9 @@ window_name</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>580</real>
 		</dict>
 		<key>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</key>
 		<dict>
@@ -913,7 +930,7 @@ window_name</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>170</real>
 		</dict>
 		<key>E8066503-E298-4023-9E9F-3FBA20E03748</key>
 		<dict>
@@ -922,27 +939,27 @@ window_name</string>
 			<key>note</key>
 			<string>restart</string>
 			<key>xpos</key>
-			<real>535</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>415</real>
 		</dict>
 		<key>E9FF31BC-709C-4387-975A-0B1410418161</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>530</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>555</real>
 		</dict>
-		<key>F0068510-5EA9-467B-8CAB-E5A736B52AE8</key>
+		<key>F6DAF10C-E8B5-49CA-B86B-DE30E7C70191</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>520</real>
+			<real>280</real>
 		</dict>
 		<key>F6ED9B13-8573-48B0-AE15-1717CFBE61C6</key>
 		<dict>
@@ -951,9 +968,9 @@ window_name</string>
 			<key>note</key>
 			<string>docs</string>
 			<key>xpos</key>
-			<real>390</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>440</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
