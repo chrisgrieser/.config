@@ -14,34 +14,3 @@ noremap <D-3> ]e
 nnoremap <M-Right> e
 nnoremap <M-Left> b
 
-" Goto Mark
-nnoremap ä `
-
-" CASE SWITCH (added h for vertical navigation)
-nnoremap Ü ~h
-" Switch Case of first letter of the word = (toggle between Capital and lower case)
-nnoremap ü mzlblgueh~`z
-
-" TRANSPOSE
-" current & next char
-nnoremap ö xp
-" current & previous char
-nnoremap Ö xhhp
-" current & next word
-nnoremap Ä dawelpb
-
-" Append punctuation to end of line
-nnoremap <leader>, mzA,<Esc>`z
-nnoremap <leader>; mzA;<Esc>`z
-nnoremap <leader>. mzA.<Esc>`z
-nnoremap <leader>" mzA"<Esc>`z
-nnoremap <leader>' mzA'<Esc>`z
-nnoremap <leader>: mzA:<Esc>`z
-nnoremap <leader>) mzA)<Esc>`z
-nnoremap <leader>( mzA(<Esc>`z
-nnoremap <leader>] mzA]<Esc>`z
-nnoremap <leader>[ mzA[<Esc>`z
-nnoremap <leader>{ mzA{<Esc>`z
-nnoremap <leader>} mzA}<Esc>`z
-nnoremap <leader>} mzA}<Esc>`z
-

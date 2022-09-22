@@ -2,39 +2,40 @@
 --------------------------------------------------------------------------------
 
 -- SETTINGS
+local opt = vim.opt
+
 -- search
-vim.opt.smartcase = true
-vim.opt.incsearch = true
-vim.opt.showmatch = true
-vim.opt.hlsearch = true
+opt.incsearch = true
+opt.showmatch = true
+opt.hlsearch = true
 
 -- tabs & indentation
-vim.opt.autoindent = true
-vim.opt.smartindent = true
-vim.opt.tabstop = 3
-vim.opt.softtabstop = 3
-vim.opt.shiftwidth = 3
+opt.autoindent = true
+opt.smartindent = true
+opt.tabstop = 3
+opt.softtabstop = 3
+opt.shiftwidth = 3
 
 -- gutter
-vim.opt.relativenumber = true
-vim.opt.signcolumn = 'yes'
-vim.opt.fillchars = 'eob: ' -- hide the ~
+opt.relativenumber = true
+opt.signcolumn = 'yes'
+opt.fillchars = 'eob: ' -- hide the ~
 
 -- ruler
-vim.opt.colorcolumn = '80'
-vim.opt.textwidth = 80 -- mostly used by `gq`
+opt.colorcolumn = '80'
+opt.textwidth = 80 -- mostly used by `gq`
 
 -- editor
--- vim.opt.cursorline = true -- doesn't look good, investigate later
-vim.opt.autowrite = true
-vim.opt.scrolloff = 12
+-- opt.cursorline = true -- doesn't look good, investigate later
+opt.autowrite = true
+opt.scrolloff = 12
 
 -- status bar
-vim.opt.showcmd = true
-vim.opt.showmode = true
+opt.showcmd = true
+opt.showmode = true
 
 -- clipboard
-vim.opt.clipboard = 'unnamedplus'
+opt.clipboard = 'unnamedplus'
 
 
 --------------------------------------------------------------------------------
@@ -59,6 +60,7 @@ keymap("n", "<leader>r", ":source $MYVIMRC<CR>")
 -- NAVIGATION
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("", "+", "*") -- no more modifier key on German Keyboard
+keymap("", "ä", "`") -- Goto Mark
 
 -- Have j and k navigate visual lines rather than logical ones
 -- (useful if wrapping is on)
@@ -77,14 +79,15 @@ keymap("", "[", "{") -- easier to press
 keymap("", "]", "}")
 
 
+--------------------------------------------------------------------------------
+
 -- EDITING
 keymap("n", "<Space>", '"_ciw')
 keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
+
 keymap("v", "<BS>", '"_d') -- consistent with insert mode selection
-
-
 keymap("n", "!", "a <Esc>h") -- append space
 keymap("n", "X", 'mz$"_x`z') -- Remove last character from line
 
@@ -106,8 +109,29 @@ keymap("n", "<S-Tab>", "<<")
 keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
 
--- Append punctuation to end of line
-trailingKeys = {",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}"}
+-- Switch Case of first letter of the word = (toggle between Capital and lower case)
+keymap("n", "ü", "mzlblgueh~`z")
+
+-- Transpose
+keymap("n", "ö", "xp") -- current & next char
+keymap("n", "Ö", "xhhp") -- current & previous char
+keymap("n", "Ä", "dawelpb") -- current & next word
+
+-- <leader>{punctuation-char} → Append punctuation to end of line
+trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`" }
 for i = 1, #trailingKeys do
 	keymap("n", "<leader>"..trailingKeys[i], "mzA"..trailingKeys[i].."<Esc>`z")
 end
+
+--------------------------------------------------------------------------------
+-- EMULATING MAC BINDINGS (for consistency)
+keymap("", "<D-v>", "p") -- cmd+v
+keymap("n", "<D-c>", "yy") -- cmd+c: copy line
+keymap("v", "<D-c>", "y") -- cmd+c: copy selection
+keymap("n", "<D-x>", "dd") -- cmd+x: cut line
+keymap("v", "<D-x>", "d") -- cmd+x: cut selection
+keymap("n", "<D-s>", ":write<CR>") -- cmd+s
+keymap("n", "<D-a>", "ggvG") -- cmd+a
+keymap("n", "<D-w>", ":bd") -- cmd+w
+keymap("n", "<D-2>", "[e") -- move line up (vim.unimpaired)
+keymap("n", "<D-3>", "]e") -- move line down (vim.unimpaired)
