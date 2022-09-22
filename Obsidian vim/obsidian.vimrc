@@ -78,7 +78,9 @@ vmap gs :gotoHeading
 exmap followLinkUnderCursor obcommand editor:follow-link
 exmap followLinkInTab obcommand editor:open-link-in-new-leaf
 nmap gf :followLinkUnderCursor
+nmap gx :followLinkUnderCursor
 vmap gf :followLinkUnderCursor
+vmap gx :followLinkUnderCursor
 nmap gF :followLinkInTab
 vmap gF :followLinkInTab
 
