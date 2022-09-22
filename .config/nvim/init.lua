@@ -80,7 +80,9 @@ keymap("", "[", "{") -- easier to press
 keymap("", "]", "}")
 
 -- Misc
-keymap("n", "gf", "gx") -- [f]ollow link under cursor
+--
+-- TODO: investigate why this one isn't working
+-- keymap("n", "gf", "gx") -- [f]ollow link under cursor
 
 --------------------------------------------------------------------------------
 
