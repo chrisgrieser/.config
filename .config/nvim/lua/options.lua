@@ -21,7 +21,8 @@ opt.colorcolumn = '+1' -- column next to text-line
 vim.cmd[[highlight ColorColumn ctermbg=0 guibg=black]] -- https://www.reddit.com/r/neovim/comments/me35u9/lua_config_to_set_highlight/
 
 -- editor
--- opt.cursorline = true -- doesn't look good, investigate later
+opt.cursorline = true -- by default underline
+vim.cmd[[highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black ]]
 opt.autowrite = true
 opt.scrolloff = 10
 opt.wrap = false
