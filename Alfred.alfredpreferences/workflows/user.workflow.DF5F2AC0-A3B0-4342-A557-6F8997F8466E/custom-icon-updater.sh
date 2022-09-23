@@ -11,7 +11,7 @@ CUSTOM_ICON_FOLDER="${custom_icon_folder/#\~/$HOME}"
 PWA_FOLDER="${pwa_folder/#\~/$HOME}"
 
 DEVICE_NAME=$(scutil --get ComputerName | cut -d" " -f2-)
-[[ "$DEVICE_NAME" =~ "Leuthinger" ]] && PWA_FOLDER="$HOME/Applications/Brave Browser Apps.localized"
+[[ "$DEVICE_NAME" =~ "Mother" ]] && PWA_FOLDER="$HOME/Applications/Brave Browser Apps.localized"
 
 
 #-------------------------------------------------------------------------------
