@@ -10,7 +10,7 @@ local function keymap (mode, key, result)
 end
 
 -- reload vimrc
-keymap("n", "<leader>r", ":w<CR> :source $MYVIMRC<CR>")
+keymap("n", "<leader>r", ":w<CR>:source $MYVIMRC<CR>")
 
 --------------------------------------------------------------------------------
 
