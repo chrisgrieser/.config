@@ -73,6 +73,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>70259B27-6F2A-4DC9-BCFA-DEC79846F801</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1278F56A-47AF-437E-BDCB-ACCB62E3E300</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>85ED60B5-47C7-4A5C-8E14-F838BDEFFE0B</key>
 		<array>
 			<dict>
@@ -141,6 +154,48 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>6893CDFD-0423-4258-A2EC-B278E825E37C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>vim</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Neovim Docs Search</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>70259B27-6F2A-4DC9-BCFA-DEC79846F801</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://www.google.de/search?q=site:https://neovim.io/doc/user/%20{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>1278F56A-47AF-437E-BDCB-ACCB62E3E300</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -295,27 +350,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>vim codemirror</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>CM6 Vim</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>F34C6943-91F1-4BAD-BAE1-6037B7259020</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -396,6 +430,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>vim codemirror</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>CM6 Vim</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F34C6943-91F1-4BAD-BAE1-6037B7259020</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -469,6 +524,13 @@
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>1278F56A-47AF-437E-BDCB-ACCB62E3E300</key>
+		<dict>
+			<key>xpos</key>
+			<real>230</real>
+			<key>ypos</key>
+			<real>45</real>
+		</dict>
 		<key>27B379BB-1B88-4D59-9ECE-96DFFF88322F</key>
 		<dict>
 			<key>colorindex</key>
@@ -557,6 +619,13 @@
 			<real>430</real>
 			<key>ypos</key>
 			<real>485</real>
+		</dict>
+		<key>70259B27-6F2A-4DC9-BCFA-DEC79846F801</key>
+		<dict>
+			<key>xpos</key>
+			<real>45</real>
+			<key>ypos</key>
+			<real>45</real>
 		</dict>
 		<key>85ED60B5-47C7-4A5C-8E14-F838BDEFFE0B</key>
 		<dict>

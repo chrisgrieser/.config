@@ -25,7 +25,14 @@ vim.cmd[[highlight ColorColumn ctermbg=0 guibg=black]] -- https://www.reddit.com
 opt.autowrite = true
 opt.scrolloff = 10
 opt.wrap = false
-opt.formatoptions:remove("o")
+
+-- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
+-- overwritten by the ftplugins having the o option. therefore needs to be set
+-- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
+-- - "o" options adds comment syntax when using `o` or `O` https://neovim.io/doc/user/change.html#fo-table
+vim.api.nvim_create_autocmd("BufEnter", { callback = function()
+	vim.opt.formatoptions = vim.opt.formatoptions - {"o"}
+end })
 
 -- status bar
 opt.showcmd = true
