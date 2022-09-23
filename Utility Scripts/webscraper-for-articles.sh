@@ -4,9 +4,9 @@
 #-------------------------------------------------------------------------------
 
 # check presence of dependencies
-if ! command mercury-parser &> /dev/null; then
-	echo "mercury-parser not installed."
-	echo "install: npm -g install @postlight/mercury-parser"
+if ! command postlight-parser &> /dev/null; then
+	echo "postlight-parser not installed."
+	echo "install: npm -g install @postlight/parser"
 fi
 if ! command turndown-cli &> /dev/null; then
 	echo "turndown-cli not installed."
@@ -25,7 +25,7 @@ if ! command readable &> /dev/null; then
 	echo "readability-cli not installed."
 	echo "install: npm install -g readability-cli"
 fi
-if ! command readable &> /dev/null || ! command mercury-parser &> /dev/null || ! command turndown-cli &> /dev/null || ! command yq &> /dev/null || ! command gather &> /dev/null; then
+if ! command readable &> /dev/null || ! command postlight-parser &> /dev/null || ! command turndown-cli &> /dev/null || ! command yq &> /dev/null || ! command gather &> /dev/null; then
 	exit 1
 fi
 
@@ -75,7 +75,7 @@ echo "$INPUT" | while read -r line ; do
 	fi
 
 	# SCRAPPING VIA GATHER
-	# (options to mirror the output from Mercury Parser)
+	# (options to mirror the output from Postlight Parser)
 	output_gather=$(gather --inline-links --no-include-source --no-include-title "$URL" | sed 's/---?/–/g' | tr -s " ")
 
 	# SCRAPPING VIA READABILITY-CLI
@@ -83,15 +83,15 @@ echo "$INPUT" | while read -r line ; do
 	turndown-cli --head=2 --hr=2 --bullet=2 --code=2 temp.html &> /dev/null
 	output_readable=$(tr -s " "  < temp.md)
 
-	# SCRAPPING VIA MERCURY READER
-	parsed_data=$(mercury-parser "$URL")
+	# SCRAPPING VIA POSTLIGHT READER
+	parsed_data=$(postlight-parser "$URL")
 	echo "$parsed_data" | yq .content > temp.html
 	turndown-cli --head=2 --hr=2 --bullet=2 --code=2 temp.html &> /dev/null
 	# shellcheck disable=SC1111
-	output_mercury=$(tr "’“”" "'\"\"" < temp.md | sed 's/\\\. /. /g' | tr -s " ")
+	output_postlight=$(tr "’“”" "'\"\"" < temp.md | sed 's/\\\. /. /g' | tr -s " ")
 	rm temp.html temp.md
 
-	# METADATA VIA MERCURY READER
+	# METADATA VIA POSTLIGHT READER
 	title=$(echo "$parsed_data" | yq .title)
 	author=$(echo "$parsed_data" | yq .author | sed 's/^[Bb]y //' )
 	excerpt=$(echo "$parsed_data" | yq .excerpt)
@@ -110,30 +110,30 @@ echo "$INPUT" | while read -r line ; do
 
 	# QUALITY CONTROL
 	# (using word count instead of diff for performance)
-	count_mercury=$(echo "$output_mercury" | wc -w) # counting words instead of characters since less prone to variation due to whitespace or formatting style
+	count_postlight=$(echo "$output_postlight" | wc -w) # counting words instead of characters since less prone to variation due to whitespace or formatting style
 	count_gather=$(echo "$output_gather" | wc -w)
 	count_readable=$(echo "$output_readable" | wc -w)
 
-	if [[ $count_gather -gt $count_readable ]] && [[ $count_gather -gt $count_mercury ]] ; then
+	if [[ $count_gather -gt $count_readable ]] && [[ $count_gather -gt $count_postlight ]] ; then
 		highest_count=$count_gather
-	elif [[ $count_readable -gt $count_mercury ]] ; then
+	elif [[ $count_readable -gt $count_postlight ]] ; then
 		highest_count=$count_readable
 	else
-		highest_count=$count_mercury
+		highest_count=$count_postlight
 	fi
-	if [[ $count_gather -lt $count_readable ]] && [[ $count_gather -lt $count_mercury ]] ; then
+	if [[ $count_gather -lt $count_readable ]] && [[ $count_gather -lt $count_postlight ]] ; then
 		lowest_count=$count_gather
-	elif [[ $count_readable -lt $count_mercury ]] ; then
+	elif [[ $count_readable -lt $count_postlight ]] ; then
 		lowest_count=$count_readable
 	else
-		lowest_count=$count_mercury
+		lowest_count=$count_postlight
 	fi
 	count_diff=$((highest_count - lowest_count))
 
 	if [[ $count_diff -gt $TOLERANCE ]]; then
 		echo -n "\033[1;33mDifference of $count_diff words"
 		WARNING_COUNT=$((WARNING_COUNT + 1))
-		echo "🟨;Mercury: $count_mercury;Gather: $count_gather;Readable: $count_readable;$URL" >> "$REPORT_FILE"
+		echo "🟨;Postlight: $count_postlight;Gather: $count_gather;Readable: $count_readable;$URL" >> "$REPORT_FILE"
 	else
 		echo -n "\033[1;32m" # green
 		if [[ $count_diff -eq 0 ]]; then
@@ -144,7 +144,7 @@ echo "$INPUT" | while read -r line ; do
 			echo -n "Difference of $count_diff words."
 		fi
 		SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
-		echo "🟩;Mercury: $count_mercury;Gather: $count_gather;Readable: $count_readable;$URL" >> "$REPORT_FILE"
+		echo "🟩;Postlight: $count_postlight;Gather: $count_gather;Readable: $count_readable;$URL" >> "$REPORT_FILE"
 	fi
 	echo "\033[0m → '$file_name'"
 
@@ -152,18 +152,18 @@ echo "$INPUT" | while read -r line ; do
 	# (use content from the parser which seems to get more content)
 	# for using OSX sed to insert lines: https://stackoverflow.com/a/25632073
 	# shellcheck disable=SC2086
-	if [[ $count_gather -gt $count_readable ]] && [[ $count_gather -gt $count_mercury ]] ; then
+	if [[ $count_gather -gt $count_readable ]] && [[ $count_gather -gt $count_postlight ]] ; then
 		content="$output_gather"
 		frontmatter=$(echo "$frontmatter" | sed '6i\
 		              parser: Gather')
-	elif [[ $count_readable -gt $count_mercury ]] ; then
+	elif [[ $count_readable -gt $count_postlight ]] ; then
 		content="$output_readable"
 		frontmatter=$(echo "$frontmatter" | sed '6i\
 		              parser: Readability')
 	else
-		content="$output_mercury"
+		content="$output_postlight"
 		frontmatter=$(echo "$frontmatter" | sed '6i\
-		              parser: Mercury')
+		              parser: Postlight')
 	fi
 
 	echo "$frontmatter\n\n$content" > "$DESTINATION/$file_name"
