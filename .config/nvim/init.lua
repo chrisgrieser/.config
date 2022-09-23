@@ -87,7 +87,7 @@ keymap("", "]", "}")
 --------------------------------------------------------------------------------
 
 -- EDITING
--- 
+--
 -- don't pollute the register
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
@@ -105,7 +105,6 @@ keymap("v", "<S-Space>", '"_d')
 -- Misc
 keymap("v", "<BS>", '"_d') -- consistent with insert mode selection
 keymap("n", "!", "a <Esc>h") -- append space
-keymap("n", "X", 'mz$"_x`z') -- Remove last character from line
 keymap("n", "U", "<C-r>") -- undo consistent
 keymap("v", "U", "<C-r>")
 keymap("v", "p", "_dP") -- do not override register when pasting on selection (still able to do so with P)
@@ -139,6 +138,9 @@ trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|",
 for i = 1, #trailingKeys do
 	keymap("n", "<leader>"..trailingKeys[i], "mzA"..trailingKeys[i].."<Esc>`z")
 end
+
+-- Remove last character from line
+keymap("n", "X", 'mz$"_x`z')
 
 --------------------------------------------------------------------------------
 -- INSERT MODE
