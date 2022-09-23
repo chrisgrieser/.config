@@ -147,6 +147,12 @@ keymap("n", "X", 'mz$"_x`z')
 -- consistent with insert mode / emacs bindings
 keymap("i", "<C-e>", '<Esc>A')
 keymap("i", "<C-a>", '<Esc>I')
+keymap("i", "<C-k>", '<Esc>Di')
+
+
+--------------------------------------------------------------------------------
+-- VISUAL MODE
+keymap ("v", "V", "j") -- so double "V" selects two lines
 
 --------------------------------------------------------------------------------
 -- LANGUAGE-SPECIFIC BINDINGS
@@ -176,14 +182,17 @@ keymap("n", "<D-t>", ":tabnew") -- cmd+t
 keymap("n", "<D-s>", ":write<CR>") -- cmd+s
 keymap("n", "<D-a>", "ggvG") -- cmd+a
 keymap("n", "<D-w>", ":bd") -- cmd+w
+
 keymap("n", "<D-2>", "[e") -- move line up (vim.unimpaired)
 keymap("n", "<D-3>", "]e") -- move line down (vim.unimpaired)
+keymap("n", "<D-l>", ":!open %:h <CR>") -- show file in default GUI file explorer
 keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 
 keymap("n", "<C-p>", ":let @+=@%<CR>") -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")') -- copy name of current file
 keymap("n", "<C-r>", ':Rename') -- rename of current file, requires eunuch.vim
+keymap("n", "<C-l>", ":!open %:h <CR>") -- show file in default GUI file explorer
 
 --------------------------------------------------------------------------------
 -- MISC
