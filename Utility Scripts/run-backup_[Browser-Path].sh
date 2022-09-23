@@ -39,7 +39,7 @@ mkdir -p "$BREWDUMP_PATH"
 brew bundle dump --force --file "$BREWDUMP_PATH/Brewfile_$DEVICE_NAME"
 npm list -g --parseable | sed "1d" | sed -E "s/.*\///" > "$BREWDUMP_PATH/NPMfile_$DEVICE_NAME"
 pip3 list --not-required | tail -n+3 | grep -vE "Pillow|pip|pybind|setuptools|six|wheel" | cut -d" " -f1 > "$BREWDUMP_PATH/Pip3file_$DEVICE_NAME"
-echo "Brewfile and NPM-File dumped at \"$BREWDUMP_PATH\""
+echo "Brewfile, NPM-File, and Pip3-File dumped at \"$BREWDUMP_PATH\""
 
 # =========================
 
@@ -57,6 +57,7 @@ osascript -e'
 	set nextDate to today + (60 * 60 * 24) * 14
 	tell application "Reminders" to tell (list "General")
 		make new reminder at end with properties {name: "Backup", due date: nextDate}
+		quit
 	end tell
 ' &> /dev/null
 
