@@ -25,6 +25,7 @@ vim.cmd[[highlight ColorColumn ctermbg=0 guibg=black]] -- https://www.reddit.com
 opt.autowrite = true
 opt.scrolloff = 10
 opt.wrap = false
+opt.formatoptions:remove("o")
 
 -- status bar
 opt.showcmd = true
@@ -33,3 +34,4 @@ opt.laststatus = 0
 
 -- clipboard
 opt.clipboard = 'unnamedplus'
+
