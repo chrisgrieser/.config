@@ -2,7 +2,9 @@
 -- https://neovim.io/doc/user/vim_diff.html
 --------------------------------------------------------------------------------
 
-vim.opt.rtp:append(', "~/.config/nvim/lua"') -- needed for homebrew installs of nvim
+-- required for homebrew installs (where the runtimepath is in the homebrew dir)
+vim.opt.runtimepath:append(', "~/.config/nvim/lua"') 
+
 require("options")
 require("keybindings")
 require("plugins")
