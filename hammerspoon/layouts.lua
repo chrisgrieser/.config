@@ -194,7 +194,7 @@ function motherMovieModeLayout()
 end
 
 function motherHomeModeLayout()
-	iMacDisplay:setBrightness(0.8)
+	iMacDisplay:setBrightness(0.85)
 	openIfNotRunning("Discord")
 	openIfNotRunning("Slack")
 	openIfNotRunning("Obsidian")
@@ -213,7 +213,6 @@ function motherHomeModeLayout()
 	alacrittyFontSize(25)
 	dockSwitcher("home")
 
-	local toTheSide = {x=0.7875, y=0, w=0.2125, h=1}
 	local motherHomeLayout = {
 		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
 		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
@@ -265,8 +264,7 @@ end
 -- watcher + hotkey
 displayCountWatcher = hs.screen.watcher.new(setLayout)
 displayCountWatcher:start()
-hotkey(hyper, "home", setLayout)
-hotkey(hyper, "f5", setLayout) -- for Apple Keyboard
+hotkey(hyper, "home", setLayout) -- hyper + eject on Apple Keyboard
 hotkey(hyper, "f18", obsiDevModeLayout) -- esc key remapped via Karabiner
 
 --------------------------------------------------------------------------------
