@@ -43,7 +43,7 @@ function exa(){
 	command exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
 }
 
-alias exagit='git status --short; echo; exa --long --grid --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git'
+alias exagit='git status --short; command echo; exa --long --grid --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git'
 alias l='command exa --all --long --git --icons --group-directories-first --sort=modified'
 alias tree='command exa --tree --icons'
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
@@ -53,7 +53,7 @@ alias -g H="--help"
 alias -g G="| grep --color"
 alias -g B="| bat"
 alias -g C="| pbcopy ; echo 'Copied.'"
-alias -g J="| yq -p=yaml -o=json" # beautify in JSON
+alias -g J="| yq --prettyPrint --output-format=json --colors | less" # beautify in JSON
 alias -g L="| less"
 
 # highlights for them

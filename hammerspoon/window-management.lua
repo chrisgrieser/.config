@@ -14,7 +14,7 @@ if isIMacAtHome() then
 elseif isAtMother() then
 	pseudoMaximized = {x=0, y=0, w=0.7875, h=1}
 	baseLayout = pseudoMaximized
-	toTheSide = {x=0.7875, y=0.025, w=0.2125, h=0.975}
+	toTheSide = {x=0.7875, y=0.03, w=0.2125, h=0.97}
 elseif isAtOffice() then
 	baseLayout = maximized
 	pseudoMaximized = maximized
