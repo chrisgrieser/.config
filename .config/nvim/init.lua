@@ -177,14 +177,18 @@ keymap("v", "<D-c>", "y") -- cmd+c: copy selection
 keymap("n", "<D-x>", "dd") -- cmd+x: cut line
 keymap("v", "<D-x>", "d") -- cmd+x: cut selection
 
-keymap("n", "<D-n>", ":tabnew") -- cmd+n
-keymap("n", "<D-t>", ":tabnew") -- cmd+t
+keymap("n", "<D-n>", ":tabnew<CR>") -- cmd+n
+keymap("n", "<D-t>", ":tabnew<CR>") -- cmd+t
 keymap("n", "<D-s>", ":write<CR>") -- cmd+s
 keymap("n", "<D-a>", "ggvG") -- cmd+a
-keymap("n", "<D-w>", ":bd") -- cmd+w
+keymap("n", "<D-w>", ":bd<CR>") -- cmd+w
 
-keymap("n", "<D-2>", "[e") -- move line up (vim.unimpaired)
-keymap("n", "<D-3>", "]e") -- move line down (vim.unimpaired)
+keymap("n", "<D-D>", "yyp") -- cmd+shift+d: duplicate lines
+keymap("v", "<D-D>", "yp") -- cmd+shift+d: duplicate selected lines
+keymap("n", "<D-2>", "ddkkp") -- move line up
+keymap("n", "<D-3>", "ddp") -- move line down
+keymap("v", "<D-2>", "dkkp") -- move selected lines up
+keymap("v", "<D-3>", "dp") -- move selected lines down
 keymap("n", "<D-l>", ":!open %:h <CR>") -- show file in default GUI file explorer
 keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
@@ -193,13 +197,10 @@ keymap("n", "<C-p>", ":let @+=@%<CR>") -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")') -- copy name of current file
 keymap("n", "<C-r>", ':Rename') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-l>", ":!open %:h <CR>") -- show file in default GUI file explorer
+keymap("n", "<C-d>", ":saveas %:h/Untitled.%:e<CR>") -- duplicate current file
 
 --------------------------------------------------------------------------------
 -- MISC
--- Shortcuts from vim.unimpaired
-keymap("n", "<leader>on", "yon") -- [O]ption: line [n]umbers
-keymap("n", "<leader>os", "yos") -- [O]ption: [s]pellcheck
-keymap("n", "<leader>ow", "yow") -- [O]ption: line [w]rap
 
 -- Sorting
 keymap("n", "<leader>ss", ":'<,'>sort<CR>") -- [s]ort [s]election
