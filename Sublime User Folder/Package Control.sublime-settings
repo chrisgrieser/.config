@@ -7,6 +7,7 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
+		"LSP-marksman",
 	],
 	"installed_packages":
 	[

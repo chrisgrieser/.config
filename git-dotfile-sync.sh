@@ -5,10 +5,11 @@ MAX_FILE_SIZE_MB=10
 cd "$(dirname "$0")" || exit 1 # go to location of this script, i.e. cd'ing into the git repo
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 
+git pull
+[[ "$1" == "--submodules" ]] && git submodule update --remote --rebase # --rebase ensures that there is no detached head in the submodules
+
 filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
 if [[ "$filesChanged" == 0 ]] ; then
-	git pull
-	[[ "$1" == "--submodules" ]] && git submodule update --remote --rebase # --rebase ensures that there is no detached head in the submodules
 	exit 0
 fi
 
