@@ -32,7 +32,7 @@ keymap("", "]", "}")
 
 -- Misc
 --
--- TODO: investigate why this one isn't working
+-- TODO: investigate why this isn't working
 -- keymap("n", "gf", "gx") -- [f]ollow link under cursor
 
 --------------------------------------------------------------------------------
@@ -118,10 +118,12 @@ keymap("n", "<leader>c", 'mzlEF.yEEp`z') -- double [c]lass under cursor
 keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>') -- remove [C]lass under cursor
 
 -- JS
-keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable
+keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, requires vim.surround
 
 --------------------------------------------------------------------------------
--- EMULATING MAC BINDINGS (requires GUI app like Neovide)
+-- EMULATING MAC BINDINGS
+-- - requires GUI app like Neovide
+-- - mostly done for consistency with other apps
 keymap("", "<D-v>", "p") -- cmd+v
 keymap("n", "<D-c>", "yy") -- cmd+c: copy line
 keymap("v", "<D-c>", "y") -- cmd+c: copy selection
@@ -146,6 +148,7 @@ keymap("n", "<D-l>", ":!open %:h <CR>") -- show file in default GUI file explore
 keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 
+keymap("", "<C-Tab>", "gt") -- switch tab
 keymap("n", "<C-p>", ":let @+=@%<CR>") -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")') -- copy name of current file
 keymap("n", "<C-r>", ':Rename') -- rename of current file, requires eunuch.vim

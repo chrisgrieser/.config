@@ -34,7 +34,7 @@ vim:disableForApp('Sublime Text')
 	:disableForApp('espanso')
 	:disableForApp('Marta')
 	:disableForApp('Finder')
-	:disableForApp('Alfred 5')
+	:disableForApp('Alfred')
 
 --------------------------------------------------------------------------------
 
