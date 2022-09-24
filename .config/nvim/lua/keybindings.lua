@@ -141,10 +141,12 @@ keymap("n", "<D-w>", ":bd<CR>") -- cmd+w
 
 keymap("n", "<D-D>", "yyp") -- cmd+shift+d: duplicate lines
 keymap("v", "<D-D>", "yp") -- cmd+shift+d: duplicate selected lines
-keymap("n", "<D-2>", "ddkkp") -- move line up
-keymap("n", "<D-3>", "ddp") -- move line down
-keymap("v", "<D-2>", "dkkp") -- move selected lines up
-keymap("v", "<D-3>", "dp") -- move selected lines down
+keymap("n", "<D-2>", "ddkkp") -- line up
+keymap("n", "<D-3>", "ddp") -- line down
+keymap("v", "<D-2>", "dkkp") -- selected lines up
+keymap("v", "<D-3>", "dp") -- selected lines down
+keymap("n", "<D-7>", "gcc") -- comment line
+keymap("v", "<D-7>", "gc") -- comment selection
 keymap("n", "<D-l>", ":!open %:h <CR>") -- show file in default GUI file explorer
 keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
