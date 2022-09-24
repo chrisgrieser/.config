@@ -4,6 +4,16 @@ local function keymap (mode, key, result)
 	vim.keymap.set(mode, key, result, {noremap = true} )
 end
 
+-- https://www.reddit.com/r/neovim/comments/puuskh/how_to_reload_my_lua_config_while_using_neovim/
+function reloadConfig()
+	for name,_ in pairs(package.loaded) do
+		package.loaded[name] = nil
+	end
+	dofile(vim.env.MYVIMRC)
+	vim.notify("Neovim config reloaded.", vim.log.levels.INFO)
+end
+keymap("n", "<leader>r", ":lua reloadConfig()<CR>")
+
 --------------------------------------------------------------------------------
 
 -- NAVIGATION
@@ -147,18 +157,18 @@ keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 
 --------------------------------------------------------------------------------
--- File Operations
+-- Buffers & Windows
 keymap("n", "go", ":Ex<CR>") -- open a different file in folder
+keymap("", "<C-Tab>", ":bn<CR>")
+keymap("n", "gt", ":bn<CR>")
+keymap("n", "gT", ":bp<CR>")
 
-keymap("", "<C-Tab>", "gt") -- switch tab
+-- File Operations
 keymap("n", "<C-p>", ":let @+=@%<CR>") -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")') -- copy name of current file
 keymap("n", "<C-r>", ':Rename') -- rename of current file, requires eunuch.vim
-keymap("n", "<C-l>", ":!open %:h <CR>") -- show file in default GUI file explorer
+keymap("n", "<C-l>", ":!open %:h<CR>") -- show file in default GUI file explorer
 keymap("n", "<C-d>", ":saveas %:h/Untitled.%:e<CR>") -- duplicate current file
-
---------------------------------------------------------------------------------
--- MISC
 
 -- Sorting
 keymap("n", "<leader>ss", ":'<,'>sort<CR>") -- [s]ort [s]election
