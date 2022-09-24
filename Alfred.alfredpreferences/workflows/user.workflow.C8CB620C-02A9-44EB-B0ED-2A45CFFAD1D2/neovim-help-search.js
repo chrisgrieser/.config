@@ -14,22 +14,33 @@ function readFile (path, encoding) {
 
 //------------------------------------------------------------------------------
 
-const VAR = $.getenv("VAR").replace(/^~/, app.pathTo("home folder"));
 
-const jsonArray = []
-	.map(item => {
+const jsonArray = readFile("url-list.txt")
+	.split("\n")
+	.map(url => {
+
+		const site = url
+			.split("/").pop()
+			.split(".").shift(); // eslint-disable-line newline-per-chained-call
+		let name = url.split("#").pop();
+		let subtitle;
+
+		if (url.includes("'")) {
+			subtitle = "option";
+			name = name.replaceAll("'", "");
+		} else if (url.includes(" ")) {
+			subtitle = "section";
+			url = url.split(" ").shift();
+		} else {
+			subtitle = site;
+		}
 
 		return {
-			"title": item,
-			"match": alfredMatcher (item),
-			"subtitle": item,
-			"type": "file:skipcheck",
-			"icon": {
-				"type": "fileicon",
-				"path": item
-			},
-			"arg": item,
-			"uid": item,
+			"title": name,
+			"match": alfredMatcher(name),
+			"subtitle": subtitle,
+			"arg": url,
+			"uid": url,
 		};
 	});
 
