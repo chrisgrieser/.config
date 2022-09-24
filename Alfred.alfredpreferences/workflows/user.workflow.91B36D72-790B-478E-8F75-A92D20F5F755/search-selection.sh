@@ -18,7 +18,7 @@ if [[ -z "$SEL" ]] ; then
 fi
 
 # clean up
-SEL=$(echo "$SEL" | xargs echo -n) # trims whitespace
+SEL=$(echo -n "$SEL" | xargs echo -n) # trims whitespace
 SEL="${SEL/#\~/$HOME}" # resolve ~
 
 # openers
@@ -32,7 +32,8 @@ elif [[ "$SEL" =~ ^http.* ]]; then
 elif [[ "$SEL" =~ "@" ]]; then
 	open "mailto:$SEL"
 elif [[ -n "$SEL" ]]; then
-	open "https://www.google.com/search?q=$SEL"
+	URL_ENCODED_SEL=$(node -p "encodeURIComponent('$SEL')")
+	open "https://www.google.com/search?q=$URL_ENCODED_SEL"
 fi
 
 # restore clipboard
