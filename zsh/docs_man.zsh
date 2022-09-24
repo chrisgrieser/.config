@@ -37,6 +37,11 @@ function man () {
 	fi
 }
 
+# simpler version for people reading my dotfiles to snatch
+function man () {
+	command man "$1" -P "/usr/bin/less -is --pattern=$2"
+}
+
 # colorize less https://wiki.archlinux.org/index.php/Color_output_in_console#less .
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
 export LESS_TERMCAP_md=$'\E[1;33m'     # begin blink = YELLOW
