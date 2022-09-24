@@ -52,8 +52,8 @@ opt.laststatus = 0
 opt.clipboard = 'unnamedplus'
 
 -- Mini-Linting
--- autocmd BufWritePre * :%s/\s\+$//e
-vim.api.nvim_create_autocmd("BufEnter", { callback = function()
-	vim.opt.formatoptions = vim.opt.formatoptions - {"o"}
-end })
+autocmd("BufWritePre",  function()
+	vim.cmd[[%s/\s\+$//e]] -- remove trailing whitespaces
+	vim.cmd[[$s/\(.\)$/\1\r/e]] -- add line break at end if there is none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
+end )
 
