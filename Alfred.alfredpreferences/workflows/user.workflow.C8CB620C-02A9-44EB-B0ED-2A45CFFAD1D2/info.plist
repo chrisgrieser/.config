@@ -34,6 +34,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5D30F5EE-1D16-4E0F-805C-6E562039F501</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>712B8F85-1FE8-4A1A-BCF0-B095B956160E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>C553B131-22D2-46D9-80B2-7ABEFE63F039</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>6893CDFD-0423-4258-A2EC-B278E825E37C</key>
 		<array>
 			<dict>
@@ -52,6 +75,32 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>3E8D2030-485F-4B83-975A-2FC01DF2E73C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B5EEA968-43D3-4306-A888-A10107AD11AF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FBF1A28B-5703-46B5-BCA2-6FC4E6B987D8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C553B131-22D2-46D9-80B2-7ABEFE63F039</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EEAA8DF8-5C28-4332-BE30-663D3E0B97B4</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -144,6 +193,76 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>vim</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>neovim-help-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search neovim :help</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>B5EEA968-43D3-4306-A888-A10107AD11AF</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>FBF1A28B-5703-46B5-BCA2-6FC4E6B987D8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -179,51 +298,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>vim</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>neovim-help-search.js</string>
-				<key>subtext</key>
-				<string></string>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>This may take up to a minute.</string>
 				<key>title</key>
-				<string></string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
+				<string>⏳Re-Creating Index</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>B5EEA968-43D3-4306-A888-A10107AD11AF</string>
+			<string>712B8F85-1FE8-4A1A-BCF0-B095B956160E</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -263,6 +354,65 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/obsidian.vimrc</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>87FAFB82-BA4C-4B86-BFB7-42F829F37218</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>neovim-docs-index-creation.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C553B131-22D2-46D9-80B2-7ABEFE63F039</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ Index created</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>EEAA8DF8-5C28-4332-BE30-663D3E0B97B4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -284,21 +434,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/obsidian.vimrc</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>87FAFB82-BA4C-4B86-BFB7-42F829F37218</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -314,48 +449,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>D3317886-6B6B-4FAB-8FF0-7AAB24B3390D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>vim codemirror</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>CM6 Vim</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>F34C6943-91F1-4BAD-BAE1-6037B7259020</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://github.com/replit/codemirror-vim/blob/master/src/vim.js</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>969689CD-BF5D-466B-AA0C-5FC5F536B880</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -418,6 +511,48 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>codemirror</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>CM6 Vim</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F34C6943-91F1-4BAD-BAE1-6037B7259020</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://github.com/replit/codemirror-vim/blob/master/src/vim.js</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>969689CD-BF5D-466B-AA0C-5FC5F536B880</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -430,7 +565,7 @@
 			<key>note</key>
 			<string>vimrc</string>
 			<key>xpos</key>
-			<real>450</real>
+			<real>490</real>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
@@ -439,16 +574,16 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>640</real>
+			<real>215</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>515</real>
 		</dict>
 		<key>49BF37B2-3037-4978-954E-E89973D38B6D</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>630</real>
+			<real>670</real>
 			<key>ypos</key>
 			<real>70</real>
 		</dict>
@@ -459,23 +594,27 @@
 			<key>note</key>
 			<string>vimium settings</string>
 			<key>xpos</key>
-			<real>455</real>
+			<real>495</real>
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
 		<key>5D30F5EE-1D16-4E0F-805C-6E562039F501</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>recreate index</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>365</real>
 		</dict>
 		<key>6893CDFD-0423-4258-A2EC-B278E825E37C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>455</real>
+			<real>495</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -486,16 +625,25 @@
 			<key>note</key>
 			<string>vim-like text editor</string>
 			<key>xpos</key>
-			<real>455</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>515</real>
+		</dict>
+		<key>712B8F85-1FE8-4A1A-BCF0-B095B956160E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>250</real>
 		</dict>
 		<key>87FAFB82-BA4C-4B86-BFB7-42F829F37218</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>640</real>
+			<real>680</real>
 			<key>ypos</key>
 			<real>315</real>
 		</dict>
@@ -504,7 +652,7 @@
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>640</real>
+			<real>680</real>
 			<key>ypos</key>
 			<real>520</real>
 		</dict>
@@ -513,25 +661,50 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>100</real>
+		</dict>
+		<key>C553B131-22D2-46D9-80B2-7ABEFE63F039</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>365</real>
 		</dict>
 		<key>D3317886-6B6B-4FAB-8FF0-7AAB24B3390D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>450</real>
+			<real>490</real>
 			<key>ypos</key>
 			<real>400</real>
+		</dict>
+		<key>EEAA8DF8-5C28-4332-BE30-663D3E0B97B4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>365</real>
 		</dict>
 		<key>F34C6943-91F1-4BAD-BAE1-6037B7259020</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>450</real>
+			<real>490</real>
 			<key>ypos</key>
 			<real>520</real>
+		</dict>
+		<key>FBF1A28B-5703-46B5-BCA2-6FC4E6B987D8</key>
+		<dict>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>100</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
