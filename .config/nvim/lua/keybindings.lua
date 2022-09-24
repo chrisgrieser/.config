@@ -4,9 +4,6 @@ local function keymap (mode, key, result)
 	vim.keymap.set(mode, key, result, {noremap = true} )
 end
 
--- reload vimrc
-keymap("n", "<leader>r", ":w<CR>:source $MYVIMRC<CR>")
-
 --------------------------------------------------------------------------------
 
 -- NAVIGATION
