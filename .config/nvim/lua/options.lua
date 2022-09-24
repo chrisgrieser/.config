@@ -22,8 +22,8 @@ opt.fillchars = 'eob: ' -- hide the "~" marking non-existent lines
 
 -- ruler
 opt.textwidth = 80 -- used by `gq`
-opt.colorcolumn = '+1' -- column next to textwidth option
-vim.cmd[[highlight ColorColumn ctermbg=0 guibg=black]] -- https://www.reddit.com/r/neovim/comments/me35u9/lua_config_to_set_highlight/
+opt.colorcolumn = '+1' -- column next to textwidth option length
+vim.cmd('highlight ColorColumn ctermbg=0 guibg=black') -- https://www.reddit.com/r/neovim/comments/me35u9/lua_config_to_set_highlight/
 
 -- files
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
@@ -31,7 +31,7 @@ opt.autowrite = true -- automatically saves on switching buffer
 
 -- editor
 opt.cursorline = true -- by default underline
-vim.cmd[[highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black ]]
+vim.cmd('highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black')
 opt.scrolloff = 11
 opt.wrap = false
 
@@ -40,7 +40,7 @@ opt.wrap = false
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
 autocmd("BufEnter", function ()
 	-- "o" adds comment syntax when using `o` or `O` https://neovim.io/doc/user/change.html#fo-table
-	vim.opt.formatoptions = vim.opt.formatoptions - {"o"}
+	opt.formatoptions = opt.formatoptions - {"o"}
 end)
 
 -- status bar
@@ -51,7 +51,7 @@ opt.laststatus = 0
 -- clipboard
 opt.clipboard = 'unnamedplus'
 
--- Mini-Linting
+-- Mini-Linting on save
 autocmd("BufWritePre",  function()
 	vim.cmd[[%s/\s\+$//e]] -- remove trailing whitespaces
 	vim.cmd[[$s/\(.\)$/\1\r/e]] -- add line break at end if there is none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim

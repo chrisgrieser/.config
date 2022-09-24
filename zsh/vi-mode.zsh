@@ -35,7 +35,8 @@ done
 bindkey -M vicmd 'L' vi-end-of-line
 bindkey -M vicmd 'H' vi-first-non-blank
 bindkey -M vicmd 'U' redo
-bindkey -M vicmd 'Ü' vi-swap-case
+bindkey -M vicmd 'ü' vi-swap-case
+bindkey -M vicmd 'M' vi-join
 bindkey -M vicmd -s 'ü' 'mzlblgueh~`z' # switch between capitalized and lowercased
 
 # history substring search

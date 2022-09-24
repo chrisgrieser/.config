@@ -63,7 +63,6 @@ keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
 keymap("n", "Q", '"_ci"') -- change quote content
 keymap("n", "R", 'viw"0p') -- [R]eplace Word with register content
-keymap("v", "R", '"0p')
 
 -- Misc
 keymap("v", "<BS>", '"_d') -- consistent with insert mode selection
