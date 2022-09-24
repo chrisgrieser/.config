@@ -33,7 +33,7 @@ keymap("", "]", "}")
 -- Misc
 --
 -- TODO: investigate why this isn't working
--- keymap("n", "gf", "gx") -- [f]ollow link under cursor
+keymap("n", "gf", "gx") -- [f]ollow link under cursor
 
 --------------------------------------------------------------------------------
 
@@ -95,11 +95,12 @@ keymap("n", "X", 'mz$"_x`z')
 
 --------------------------------------------------------------------------------
 -- INSERT MODE
+keymap("i", "jj", '<Esc>')
+
 -- consistent with insert mode / emacs bindings
 keymap("i", "<C-e>", '<Esc>A')
 keymap("i", "<C-a>", '<Esc>I')
 keymap("i", "<C-k>", '<Esc>Di')
-
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
@@ -147,6 +148,10 @@ keymap("v", "<D-7>", "gc") -- comment selection
 keymap("n", "<D-l>", ":!open %:h <CR>") -- show file in default GUI file explorer
 keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
+
+--------------------------------------------------------------------------------
+-- File Operations
+keymap("n", "go", ":Ex<CR>") -- open a different file in folder
 
 keymap("", "<C-Tab>", "gt") -- switch tab
 keymap("n", "<C-p>", ":let @+=@%<CR>") -- copy path of current file

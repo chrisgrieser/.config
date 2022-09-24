@@ -13,7 +13,7 @@ opt.shiftwidth = 3
 -- gutter
 opt.relativenumber = false
 opt.signcolumn = 'no'
-opt.fillchars = 'eob: ' -- hide the "~" marking non-existend lines
+opt.fillchars = 'eob: ' -- hide the "~" marking non-existent lines
 
 -- ruler
 opt.textwidth = 80 -- used by `gq`
@@ -22,16 +22,16 @@ vim.cmd[[highlight ColorColumn ctermbg=0 guibg=black]] -- https://www.reddit.com
 
 -- editor
 opt.cursorline = true -- by default underline
-vim.cmd[[highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black ]]
+vim.cmd[[highlight CursorLine guibg=black ctermbg=black ]]
 opt.autowrite = true
-opt.scrolloff = 10
+opt.scrolloff = 11
 opt.wrap = false
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
--- - "o" options adds comment syntax when using `o` or `O` https://neovim.io/doc/user/change.html#fo-table
 vim.api.nvim_create_autocmd("BufEnter", { callback = function()
+	-- "o" adds comment syntax when using `o` or `O` https://neovim.io/doc/user/change.html#fo-table
 	vim.opt.formatoptions = vim.opt.formatoptions - {"o"}
 end })
 
