@@ -1,12 +1,7 @@
 vim.g.mapleader = ','
 
 local function keymap (mode, key, result)
-	vim.keymap.set(
-			mode,
-			key,
-			result,
-			{noremap = true}
-		)
+	vim.keymap.set(mode, key, result, {noremap = true} )
 end
 
 -- reload vimrc
