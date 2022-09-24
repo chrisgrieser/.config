@@ -1,3 +1,5 @@
+-- Default vim settings: https://neovim.io/doc/user/vim_diff.html
+-------------------------------------------------------------------------------
 local opt = vim.opt
 
 -- search
@@ -17,13 +19,16 @@ opt.fillchars = 'eob: ' -- hide the "~" marking non-existent lines
 
 -- ruler
 opt.textwidth = 80 -- used by `gq`
-opt.colorcolumn = '+1' -- column next to text-line
+opt.colorcolumn = '+1' -- column next to textwidth option
 vim.cmd[[highlight ColorColumn ctermbg=0 guibg=black]] -- https://www.reddit.com/r/neovim/comments/me35u9/lua_config_to_set_highlight/
+
+-- files
+opt.hidden = true -- inactive buffers are only hidden, not unloaded
+opt.autowrite = true -- automatically saves on switching buffer
 
 -- editor
 opt.cursorline = true -- by default underline
-vim.cmd[[highlight CursorLine guibg=black ctermbg=black ]]
-opt.autowrite = true
+vim.cmd[[highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black ]]
 opt.scrolloff = 11
 opt.wrap = false
 
