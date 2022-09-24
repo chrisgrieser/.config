@@ -67,7 +67,7 @@ nmap <C-k> :prevHeading
 
 " [g]oto [s]ymbol
 " requires Another Quick Switcher Plugin
-exmap gotoHeading obcommand obsidian-another-quick-switcher:header-search-in-file
+exmap gotoHeading obcommand obsidian-another-quick-switcher:header-floating-search-in-file
 nmap gs :gotoHeading
 vmap gs :gotoHeading
 
