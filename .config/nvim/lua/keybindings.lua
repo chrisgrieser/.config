@@ -166,6 +166,7 @@ keymap("", "<C-Tab>", ":bn<CR>")
 keymap("n", "gt", ":bn<CR>") -- use vim's buffer model instead of tabs
 keymap("n", "gT", ":bp<CR>")
 keymap("n", "gl", ":ls<CR>")
+keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 
 -- File Operations
 keymap("n", "<C-p>", ":let @+=@%<CR>") -- copy path of current file
