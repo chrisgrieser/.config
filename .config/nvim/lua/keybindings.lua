@@ -12,7 +12,10 @@ function reloadConfig()
 	dofile(vim.env.MYVIMRC)
 	vim.notify("Neovim config reloaded.", vim.log.levels.INFO)
 end
-keymap("n", "<leader>r", ":lua reloadConfig()<CR>")
+keymap("n", "<leader>r", ":w<CR>:lua reloadConfig()<CR>")
+
+-- TODO figure out why this needs to be double-pressed
+keymap("n", "<C-q>", ":wa<CR>:q<CR>") -- save all & quit
 
 --------------------------------------------------------------------------------
 
@@ -20,7 +23,6 @@ keymap("n", "<leader>r", ":lua reloadConfig()<CR>")
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
-keymap("", "Q", "mz0`z") -- Scroll horizontally back
 
 -- Have j and k navigate visual lines rather than logical ones
 -- (useful if wrapping is on)
@@ -38,7 +40,7 @@ keymap("", "[", "{") -- easier to press
 keymap("", "]", "}")
 
 -- Misc
---
+
 -- TODO: investigate why this isn't working
 keymap("n", "gf", "gx") -- [f]ollow link under cursor
 
@@ -54,11 +56,14 @@ keymap("v", "c", '"_c')
 keymap("v", "C", '"_C')
 keymap("v", "x", '"_x')
 
--- Spacebar
-keymap("n", "<Space>", '"_ciw')
+-- Text Objects
+keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
+keymap("n", "Q", '"_ci"') -- change quote content
+keymap("n", "R", 'viw"0p') -- [R]eplace Word with register content
+keymap("v", "R", '"0p')
 
 -- Misc
 keymap("v", "<BS>", '"_d') -- consistent with insert mode selection
@@ -72,10 +77,6 @@ keymap("v", "M", "J")
 -- Add Blank Line above/below
 keymap("n", "=", "mzO<Esc>`z")
 keymap("n", "_", "mzo<Esc>`z")
-
--- [R]eplace Word with register content
-keymap("n", "R", 'viw"0p')
-keymap("v", "R", '"0p')
 
 -- Make indention work like in other editors
 keymap("n", "<Tab>", ">>")
@@ -106,7 +107,9 @@ keymap("i", "jj", '<Esc>')
 
 -- consistent with insert mode / emacs bindings
 keymap("i", "<C-e>", '<Esc>A')
+keymap("n", "<C-e>", 'A')
 keymap("i", "<C-a>", '<Esc>I')
+keymap("n", "<C-a>", 'I')
 keymap("i", "<C-k>", '<Esc>Di')
 
 --------------------------------------------------------------------------------
@@ -160,8 +163,9 @@ keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 -- Buffers & Windows
 keymap("n", "go", ":Ex<CR>") -- open a different file in folder
 keymap("", "<C-Tab>", ":bn<CR>")
-keymap("n", "gt", ":bn<CR>")
+keymap("n", "gt", ":bn<CR>") -- use vim's buffer model instead of tabs
 keymap("n", "gT", ":bp<CR>")
+keymap("n", "gl", ":ls<CR>")
 
 -- File Operations
 keymap("n", "<C-p>", ":let @+=@%<CR>") -- copy path of current file

@@ -33,9 +33,6 @@ map - /
 " < Nagivation
 """"""""""""""""""""""
 
-" Scroll horizontally back (for when there is no wrapping, e.g. when working with tables)
-nmap Q mz0`z
-
 " Have j and k navigate visual lines rather than logical ones
 nmap j gj
 nmap k gk
@@ -94,6 +91,7 @@ nmap g; u<C-r>
 
 " consistent with insert mode / emacs bindings
 nmap <C-e> A
+nmap <C-a> I
 
 """"""""""""""""""""""
 " < Editing
@@ -127,7 +125,6 @@ vmap ü :caseSwitch
 " (can't use x, cause it sends to black hole registry, due to missing noremap)
 " current & next char
 nmap ö dlp
-imap <C-t> <Esc>dlpi
 " current & previous char
 nmap Ö dlhhp
 " current & next word
@@ -240,6 +237,9 @@ vmap <S-Space> "_d
 " [R]eplace Word with register content
 nmap R viw"0p
 vmap R "0P
+
+" Change Quote Content
+nmap Q "_ci"
 
 """"""""""""""""""""""
 " < Mode

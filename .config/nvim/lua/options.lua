@@ -1,6 +1,9 @@
 -- Default vim settings: https://neovim.io/doc/user/vim_diff.html
 -------------------------------------------------------------------------------
 local opt = vim.opt
+local function autocmd(eventName, callbackFunction)
+	vim.api.nvim_create_autocmd(eventName, { callback = callbackFunction })
+end
 
 -- search
 opt.showmatch = true
@@ -35,10 +38,10 @@ opt.wrap = false
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
-vim.api.nvim_create_autocmd("BufEnter", { callback = function()
+autocmd("BufEnter", function ()
 	-- "o" adds comment syntax when using `o` or `O` https://neovim.io/doc/user/change.html#fo-table
 	vim.opt.formatoptions = vim.opt.formatoptions - {"o"}
-end })
+end)
 
 -- status bar
 opt.showcmd = true
@@ -47,4 +50,10 @@ opt.laststatus = 0
 
 -- clipboard
 opt.clipboard = 'unnamedplus'
+
+-- Mini-Linting
+-- autocmd BufWritePre * :%s/\s\+$//e
+vim.api.nvim_create_autocmd("BufEnter", { callback = function()
+	vim.opt.formatoptions = vim.opt.formatoptions - {"o"}
+end })
 
