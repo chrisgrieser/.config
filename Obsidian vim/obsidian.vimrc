@@ -85,7 +85,7 @@ nmap gF :followLinkInTab
 vmap gF :followLinkInTab
 
 " [g]oto [o]pen file (= Quick Switcher)
-exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_Recent
+exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_recent-search
 nmap go :quickSwitcher
 vmap go :quickSwitcher
 
