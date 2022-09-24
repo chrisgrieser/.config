@@ -130,7 +130,7 @@ function p () {
 function lc (){
 	number="$*"
 	if [[ "$number" == "" ]] ; then
-		history | tail -n1 | cut -c8- | pbcopy
+		history | tail -n1 | cut -c8- | xargs echo -n | pbcopy
 	else
 		history | tail -n"$number" | cut -c8- | pbcopy
 	fi
