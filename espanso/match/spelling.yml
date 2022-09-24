@@ -10,6 +10,8 @@ matches:
     replace: ich
     word: true
     propagate_case: true
+  - trigger: cih
+    replace: ich
   - trigger: eien
     replace: eine
     word: true
@@ -19,11 +21,9 @@ matches:
   - trigger: fo
     replace: of
     word: true
-  - trigger: Forshcung
-    replace: Forschung
-    word: true
   - trigger: forshcung
     replace: forschung
+    propagate_case: true
   - trigger: gnaz
     replace: ganz
   - trigger: innovaiton

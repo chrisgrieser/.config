@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>14C11AAF-4BA7-4F10-8AE5-C5BF378187DE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D14B4522-0A25-4F4D-9985-FF8B04E43832</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>15777E56-7AC1-41E6-99AA-BB38854CDB0A</key>
 		<array>
 			<dict>
@@ -218,6 +231,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D1AFFF36-7CC6-4D2F-8728-863C85053348</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>14C11AAF-4BA7-4F10-8AE5-C5BF378187DE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E51DFA56-3523-4840-8EF6-40FC832EE3BB</key>
 		<array>
 			<dict>
@@ -268,27 +294,6 @@
 	<string>Brave Browser</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>sw</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Switch to Private Window</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E51DFA56-3523-4840-8EF6-40FC832EE3BB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -359,6 +364,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>sw</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Switch to Private Window</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E51DFA56-3523-4840-8EF6-40FC832EE3BB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>count</key>
 				<integer>1</integer>
 				<key>keychar</key>
@@ -400,10 +426,10 @@
 				<integer>2</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.brave.Browser.app.fmajbmdokmecmpllfhcamihghgoablgg</string>
 					<string>com.vivaldi.Vivaldi</string>
-					<string>org.chromium.Chromium</string>
 					<string>com.brave.Browser</string>
+					<string>org.chromium.Chromium</string>
+					<string>com.brave.Browser.app.fmajbmdokmecmpllfhcamihghgoablgg</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -500,6 +526,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>alltabs</string>
+				<key>subtext</key>
+				<string>of front window, as markdown links</string>
+				<key>text</key>
+				<string>Copy ALL tabs</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>BE7EDFB7-052F-45E8-BC4B-5448613EE413</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -540,27 +587,6 @@
 			<string>46A0180C-0144-4433-8238-86DD95349753</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>alltabs</string>
-				<key>subtext</key>
-				<string>of front window, as markdown links</string>
-				<key>text</key>
-				<string>Copy ALL tabs</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>BE7EDFB7-052F-45E8-BC4B-5448613EE413</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -909,6 +935,71 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>cp "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/" &amp;&amp; echo yes</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>14C11AAF-4BA7-4F10-8AE5-C5BF378187DE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ Bookmarks backuped</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D14B4522-0A25-4F4D-9985-FF8B04E43832</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>bkp</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Backup: Browser Bookmarks</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D1AFFF36-7CC6-4D2F-8728-863C85053348</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -936,6 +1027,8 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>4</integer>
+			<key>note</key>
+			<string>git history</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -949,6 +1042,13 @@
 			<real>205</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>14C11AAF-4BA7-4F10-8AE5-C5BF378187DE</key>
+		<dict>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>865</real>
 		</dict>
 		<key>15777E56-7AC1-41E6-99AA-BB38854CDB0A</key>
 		<dict>
@@ -1130,6 +1230,20 @@
 			<real>340</real>
 			<key>ypos</key>
 			<real>350</real>
+		</dict>
+		<key>D14B4522-0A25-4F4D-9985-FF8B04E43832</key>
+		<dict>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>865</real>
+		</dict>
+		<key>D1AFFF36-7CC6-4D2F-8728-863C85053348</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>865</real>
 		</dict>
 		<key>D596C401-9181-448B-B8EF-6139469B23EF</key>
 		<dict>
