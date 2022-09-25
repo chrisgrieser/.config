@@ -21,10 +21,10 @@ echo
 echo "Parsing doc files..."
 
 # Example: options.html#'formatoptions'
-vimoptions=$(grep -Eo "'[A-Za-z]{2,}'" options.txt | sort -u | xargs -I {} echo "${baseHelpURL}options.html#'{}'")
+vimoptions=$(grep -Eo "'[.A-Za-z-]{2,}'" options.txt | sort -u | xargs -I {} echo "${baseHelpURL}options.html#'{}'")
 
 # Example: map.html#mapleader
-anchors=$(grep -REo "\*[:A-Za-z]+\*" | sort -u | tr -d "*" | sed 's/txt:/html#/' | cut -c3- | xargs -I {} echo "${baseHelpURL}{}")
+anchors=$(grep -REo "\*[.:A-Za-z-]+\*" | sort -u | tr -d "*" | sed 's/txt:/html#/' | cut -c3- | xargs -I {} echo "${baseHelpURL}{}")
 
 # Example: usr_04.html#04.1
 sections=$(grep -Eo "\|[.0-9]*\|.*" usr_toc.txt | tr -d "|" | while read -r line ; do
@@ -38,5 +38,6 @@ echo "$vimoptions" > ../url-list.txt
 echo "$anchors" >> ../url-list.txt
 echo "$sections" >> ../url-list.txt
 
+echo "$(wc -l ../url-list.txt | tr -d ' ') entries."
 cd ..
 rm -r "./neovim-help"

@@ -122,6 +122,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>EEAA8DF8-5C28-4332-BE30-663D3E0B97B4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>990F1D10-D985-440B-AAEA-D67AEA39754C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F34C6943-91F1-4BAD-BAE1-6037B7259020</key>
 		<array>
 			<dict>
@@ -395,7 +408,7 @@
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<true/>
+				<false/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
@@ -407,6 +420,21 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>EEAA8DF8-5C28-4332-BE30-663D3E0B97B4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Blow</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>990F1D10-D985-440B-AAEA-D67AEA39754C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -565,7 +593,7 @@
 			<key>note</key>
 			<string>vimrc</string>
 			<key>xpos</key>
-			<real>490</real>
+			<real>625</real>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
@@ -583,7 +611,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>670</real>
+			<real>805</real>
 			<key>ypos</key>
 			<real>70</real>
 		</dict>
@@ -594,7 +622,7 @@
 			<key>note</key>
 			<string>vimium settings</string>
 			<key>xpos</key>
-			<real>495</real>
+			<real>630</real>
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
@@ -614,7 +642,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>495</real>
+			<real>630</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -643,7 +671,7 @@
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>680</real>
+			<real>815</real>
 			<key>ypos</key>
 			<real>315</real>
 		</dict>
@@ -652,9 +680,18 @@
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>680</real>
+			<real>815</real>
 			<key>ypos</key>
 			<real>520</real>
+		</dict>
+		<key>990F1D10-D985-440B-AAEA-D67AEA39754C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>475</real>
+			<key>ypos</key>
+			<real>365</real>
 		</dict>
 		<key>B5EEA968-43D3-4306-A888-A10107AD11AF</key>
 		<dict>
@@ -677,7 +714,7 @@
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>490</real>
+			<real>625</real>
 			<key>ypos</key>
 			<real>400</real>
 		</dict>
@@ -695,7 +732,7 @@
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>490</real>
+			<real>625</real>
 			<key>ypos</key>
 			<real>520</real>
 		</dict>

@@ -160,12 +160,12 @@ keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 
 --------------------------------------------------------------------------------
 -- Buffers & Windows
-keymap("n", "go", ":Ex<CR>") -- open a different file in folder
+keymap("n", "go", ":Texplore<CR>") -- File explorer in new tab
 keymap("", "<C-Tab>", ":bn<CR>")
-keymap("n", "gt", ":bn<CR>") -- use vim's buffer model instead of tabs
-keymap("n", "gT", ":bp<CR>")
 keymap("n", "gl", ":ls<CR>")
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
+-- keymap("n", "gt", ":bn<CR>") -- use vim's buffer model instead of tabs
+-- keymap("n", "gT", ":bp<CR>")
 
 -- File Operations
 keymap("n", "<C-p>", ":let @+=@%<CR>") -- copy path of current file
