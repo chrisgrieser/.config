@@ -23,16 +23,13 @@ const jsonArray = readFile("url-list.txt")
 			.split("/").pop()
 			.split(".").shift(); // eslint-disable-line newline-per-chained-call
 		let name = url.split("#").pop();
-		let subtitle;
+		let subtitle = site;
 
 		if (url.includes("'")) {
-			subtitle = "option";
 			name = name.replaceAll("'", "");
 		} else if (url.includes(" ")) {
 			subtitle = "section";
 			url = url.split(" ").shift();
-		} else {
-			subtitle = site;
 		}
 
 		return {

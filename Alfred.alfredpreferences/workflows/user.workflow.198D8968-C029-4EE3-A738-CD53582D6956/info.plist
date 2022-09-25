@@ -188,7 +188,7 @@
 				<key>keyword</key>
 				<string>rg</string>
 				<key>subtext</key>
-				<string></string>
+				<string>Expression</string>
 				<key>text</key>
 				<string>Regex101: '{query}'</string>
 				<key>withspace</key>
