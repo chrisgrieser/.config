@@ -28,7 +28,11 @@ vimoptions=$(grep -Eo "\*'[.A-Za-z-]{2,}'\*(.*'.*')?" options.txt | tr -d "*'" |
 done)
 
 # Example: map.html#mapleader
-anchors=$(grep -REo "\*([.:A-Za-z-]+|[0-9E]+)\*" | tr -d "*" | sed 's/txt:/html#/' | cut -c3- | sed 's/ /,/' | xargs -I {} echo "${baseHelpURL}{}")
+anchors=$(grep -REo "\*([.:A-Za-z-]+|[0-9E]+)\*(.*\*.*\*)" | tr -d "*" | sed 's/txt:/html#/' | cut -c3- | while read -r line ; do
+	url=$(echo "$line" | cut -d" " -f1)
+	synonyms=$(echo "$line" | cut -d" " -f2-)
+	echo "${baseHelpURL}$url,$synonyms"
+done)
 
 # Example: usr_04.html#04.1
 sections=$(grep -Eo "\|[.0-9]*\|.*" usr_toc.txt | tr -d "|" | while read -r line ; do
@@ -44,4 +48,4 @@ echo "$sections" >> ../url-list.txt
 
 echo "$(wc -l ../url-list.txt | tr -d ' ') entries."
 cd ..
-# rm -r "./neovim-help"
+rm -r "./neovim-help"
