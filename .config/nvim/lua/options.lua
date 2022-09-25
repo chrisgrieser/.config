@@ -51,7 +51,6 @@ opt.laststatus = 0
 
 -- tab bar
 opt.guitablabel = "[%N] %t %M"
-opt.tabline = "%1T %1t %M %T %2T"
 opt.switchbuf = "useopen,usetab"
 
 -- clipboard

@@ -21,16 +21,20 @@ echo
 echo "Parsing doc files..."
 
 # Example: options.html#'formatoptions'
-vimoptions=$(grep -Eo "'[.A-Za-z-]{2,}'" options.txt | sort -u | xargs -I {} echo "${baseHelpURL}options.html#'{}'")
+vimoptions=$(grep -Eo "\*'[.A-Za-z-]{2,}'\*(.*'.*')?" options.txt | tr -d "*'" | while read -r line ; do
+	opt=$(echo "$line" | cut -d" " -f1)
+	synonyms=$(echo "$line" | cut -d" " -f2-)
+	echo "${baseHelpURL}options.html#'$opt',$synonyms"
+done)
 
 # Example: map.html#mapleader
-anchors=$(grep -REo "\*[.:A-Za-z-]+\*" | sort -u | tr -d "*" | sed 's/txt:/html#/' | cut -c3- | xargs -I {} echo "${baseHelpURL}{}")
+anchors=$(grep -REo "\*([.:A-Za-z-]+|[0-9E]+)\*" | tr -d "*" | sed 's/txt:/html#/' | cut -c3- | sed 's/ /,/' | xargs -I {} echo "${baseHelpURL}{}")
 
 # Example: usr_04.html#04.1
 sections=$(grep -Eo "\|[.0-9]*\|.*" usr_toc.txt | tr -d "|" | while read -r line ; do
 	file=$(echo "$line" | cut -c-2)
-	sec=$(echo "$line" | tr $'\t' " ")
-	echo "${baseHelpURL}usr_$file.html#$sec"
+	title="$line"
+	echo "${baseHelpURL}usr_$file.html#$title"
 done)
 
 echo "Writing Index & cleaning up..."
@@ -40,4 +44,4 @@ echo "$sections" >> ../url-list.txt
 
 echo "$(wc -l ../url-list.txt | tr -d ' ') entries."
 cd ..
-rm -r "./neovim-help"
+# rm -r "./neovim-help"
