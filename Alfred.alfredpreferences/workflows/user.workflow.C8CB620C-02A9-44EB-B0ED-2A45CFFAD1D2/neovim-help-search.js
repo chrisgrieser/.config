@@ -14,7 +14,6 @@ function readFile (path, encoding) {
 
 //------------------------------------------------------------------------------
 
-
 const jsonArray = readFile("url-list.txt")
 	.split("\n")
 	.map(url => {
