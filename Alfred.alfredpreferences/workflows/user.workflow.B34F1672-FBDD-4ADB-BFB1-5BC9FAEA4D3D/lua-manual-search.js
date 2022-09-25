@@ -2,7 +2,7 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
+const alfredMatcher = (str) => str.replace (/[-()_#.]/g, " ") + " " + str + " ";
 
 //------------------------------------------------------------------------------
 
@@ -16,12 +16,16 @@ const luaManual = app.doShellScript(`curl -sL '${luaManualBaseURL}'`)
 	.filter(line => line.includes("HREF"))
 	.map(line => {
 		const subsite = line.replace(ahrefRegex, "$1");
-		const title = line
+		let title = line
 			.replace(ahrefRegex, "$2")
 			.replaceAll("&ndash; ", "");
+		let type = "";
+		if (title.match(/\d/)) type = "chapter";
+		title = title.replace(/^[.0-9]+ /, "");
 
 		return {
 			"title": title,
+			"subtitle": type,
 			"match": alfredMatcher (title),
 			"arg": luaManualBaseURL + subsite,
 			"uid": subsite,
