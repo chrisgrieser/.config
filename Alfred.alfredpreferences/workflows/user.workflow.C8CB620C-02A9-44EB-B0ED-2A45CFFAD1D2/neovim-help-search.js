@@ -22,19 +22,25 @@ const jsonArray = readFile("url-list.txt")
 		const site = url
 			.split("/").pop()
 			.split(".").shift(); // eslint-disable-line newline-per-chained-call
-		let name = url.split("#").pop();
-		let subtitle = site;
+		let name = url.split("#").pop().replaceAll("'", "");
+		const subtitle = site;
+		let synonyms = "";
+		let synonymDisplay = "";
 
-		if (url.includes("'")) {
-			name = name.replaceAll("'", "");
-		} else if (url.includes(" ")) {
-			subtitle = "section";
-			url = url.split(" ").shift();
+		const hasSynonyms = url.includes(",");
+		const isSectionTitle = url.includes("\t");
+		if (hasSynonyms) {
+			synonyms = url.split(",").pop();
+			synonymDisplay = " (" + synonyms + ")";
+			url = url.split(",").shift();
+			name = name.split(",").shift();
+		} else if (isSectionTitle) {
+			name = url.split("\t").pop();
 		}
 
 		return {
-			"title": name,
-			"match": alfredMatcher(name),
+			"title": name + synonymDisplay,
+			"match": alfredMatcher(name) + " " + site + " " + synonyms,
 			"subtitle": subtitle,
 			"arg": url,
 			"uid": url,

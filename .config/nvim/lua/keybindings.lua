@@ -15,7 +15,7 @@ end
 keymap("n", "<leader>r", ":w<CR>:lua reloadConfig()<CR>")
 
 -- TODO figure out why this needs to be double-pressed
-keymap("n", "<C-q>", ":wa<CR>:q<CR>") -- save all & quit
+keymap("n", "<C-q>", ":wa<CR>:qa<CR>") -- save all & quit all
 
 --------------------------------------------------------------------------------
 
