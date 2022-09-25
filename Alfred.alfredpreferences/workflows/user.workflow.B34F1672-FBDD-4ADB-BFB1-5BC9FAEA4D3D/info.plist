@@ -417,27 +417,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -633,6 +612,27 @@
 			<string>D8D7E65D-1523-47A4-9964-845E4D2C0927</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1100,8 +1100,6 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
-			<key>note</key>
-			<string>search docs</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1177,7 +1175,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		<key>5320A9D6-5BED-4AC3-B729-7E0FCA44A54B</key>
 		<dict>
 			<key>xpos</key>
-			<real>675</real>
+			<real>655</real>
 			<key>ypos</key>
 			<real>465</real>
 		</dict>
@@ -1185,12 +1183,10 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
-			<key>note</key>
-			<string>docs</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>1005</real>
+			<real>955</real>
 		</dict>
 		<key>66A6B203-4D92-418E-9D90-D4815DA05E8F</key>
 		<dict>
@@ -1206,9 +1202,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>215</real>
+			<real>220</real>
 			<key>ypos</key>
-			<real>1005</real>
+			<real>955</real>
 		</dict>
 		<key>852FEFE2-6998-4254-985C-75A2E3AEB5B2</key>
 		<dict>
@@ -1230,12 +1226,10 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
 			<key>xpos</key>
-			<real>260</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>365</real>
 		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>
@@ -1269,7 +1263,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		<key>EA3DF9A8-C9B9-4A5B-BE23-02A376F9B128</key>
 		<dict>
 			<key>xpos</key>
-			<real>600</real>
+			<real>585</real>
 			<key>ypos</key>
 			<real>495</real>
 		</dict>
@@ -1297,34 +1291,28 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
-			<key>note</key>
-			<string>search vim docs</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>595</real>
 		</dict>
 		<key>FE8C5299-418B-45DE-A554-50495EF4EE22</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
-			<key>note</key>
-			<string>docs</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>875</real>
+			<real>835</real>
 		</dict>
 		<key>FE9038EA-F174-44C3-96CF-EED8F400E783</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
-			<key>note</key>
-			<string>docs</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>720</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
