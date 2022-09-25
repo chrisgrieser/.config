@@ -112,6 +112,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5D96EBD5-462F-42CC-9F18-90C09B20AC0D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C17E0178-04B7-4A54-A81F-3D0C3A1D8A18</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>62DAD5FB-2A2B-49ED-B725-F8018A3AA61A</key>
 		<array>
 			<dict>
@@ -933,6 +946,65 @@ fi</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>13</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>W</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>io.alacritty</string>
+					<string>com.sublimetext.4</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>5D96EBD5-462F-42CC-9F18-90C09B20AC0D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>pseudo-firenvim.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C17E0178-04B7-4A54-A81F-3D0C3A1D8A18</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>---
@@ -1068,6 +1140,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>40</real>
 		</dict>
+		<key>5D96EBD5-462F-42CC-9F18-90C09B20AC0D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>vim-like text editor</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1100</real>
+		</dict>
 		<key>62DAD5FB-2A2B-49ED-B725-F8018A3AA61A</key>
 		<dict>
 			<key>colorindex</key>
@@ -1139,6 +1222,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>330</real>
+		</dict>
+		<key>C17E0178-04B7-4A54-A81F-3D0C3A1D8A18</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>215</real>
+			<key>ypos</key>
+			<real>1100</real>
 		</dict>
 		<key>C5DF79E9-E309-4B48-A029-30B3AB0FEF13</key>
 		<dict>

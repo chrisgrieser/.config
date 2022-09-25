@@ -12,12 +12,13 @@ const workArray = JSON.parse(app.doShellScript('curl -s "https://api.github.com/
 		const site = file.path.slice(15, -11); // remove "docs/docs/json/" and "/index.html"
 		const parts = site.split("/");
 		const subsite = parts.pop();
-		const parentsite = parts.join("/") + "/";
+		const parentSite = parts.join("/") + "/";
+		const url = "https://karabiner-elements.pqrs.org/docs/json/" + site;
 		return {
 			"title": subsite,
 			"match": alfredMatcher (site),
-			"subtitle": parentsite,
-			"arg": site,
+			"subtitle": parentSite,
+			"arg": url,
 			"uid": site,
 		};
 	});
