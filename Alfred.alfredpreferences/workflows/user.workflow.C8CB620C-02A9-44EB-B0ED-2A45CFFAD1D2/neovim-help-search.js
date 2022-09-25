@@ -24,13 +24,11 @@ const jsonArray = readFile("url-list.txt")
 		let name = url.split("#").pop().replaceAll("'", "");
 		const subtitle = site;
 		let synonyms = "";
-		let synonymDisplay = "";
 
 		const hasSynonyms = url.includes(",");
 		const isSection = url.includes("\t");
 		if (hasSynonyms) {
-			synonyms = url.split(",").pop();
-			synonymDisplay = " (" + synonyms + ")";
+			synonyms = " " + url.split(",").pop();
 			url = url.split(",").shift();
 			name = name.split(",").shift();
 		} else if (isSection) {
@@ -39,7 +37,7 @@ const jsonArray = readFile("url-list.txt")
 		}
 
 		return {
-			"title": name + synonymDisplay,
+			"title": name + synonyms,
 			"match": alfredMatcher(name) + " " + site + " " + alfredMatcher(synonyms),
 			"subtitle": subtitle,
 			"arg": url,

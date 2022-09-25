@@ -51,5 +51,5 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 # Pager-specific settings
 # (INFO: less ignore-case is actually smart case)
-export LESS='-R --ignore-case --window=-3 --quit-if-one-screen --no-init --tilde'
+export LESS='-R --incsearch --ignore-case --window=-3 --quit-if-one-screen --no-init --tilde'
 
