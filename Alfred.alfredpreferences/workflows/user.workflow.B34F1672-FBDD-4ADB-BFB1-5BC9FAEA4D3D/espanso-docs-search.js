@@ -14,12 +14,14 @@ const workArray = JSON.parse(app.doShellScript('curl -s "https://api.github.com/
 			.replace(/\.mdx?$/, ""); // remove file extension
 		const parts = site.split("/");
 		const subsite = parts.pop().replaceAll("-", " ");
-		const parentsite = parts.join("/");
+		const parentSite = parts.join("/");
+		const url = "https://espanso.org/docs/" + site;
+
 		return {
 			"title": subsite,
-			"subtitle": parentsite,
+			"subtitle": parentSite,
 			"match": alfredMatcher (site),
-			"arg": site,
+			"arg": url,
 			"uid": site,
 		};
 	});

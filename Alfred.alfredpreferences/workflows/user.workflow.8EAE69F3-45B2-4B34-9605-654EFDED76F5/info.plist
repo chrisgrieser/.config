@@ -8,6 +8,19 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
+		<key>43F710C6-44A2-45FF-9B24-38734C701EEB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>85137F9B-F432-4120-BDD0-2204B4843B53</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7A86B5B1-E60C-4A6C-A220-0893F3D48599</key>
 		<array>
 			<dict>
@@ -21,11 +34,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>86AFF9A1-7DD6-443E-BD1C-151917586042</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DD7DC249-E9DE-4C30-AD48-25F1884C1D6D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>945ED155-23DF-4F0F-B90C-DBDDB2C715A9</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>3B3913A5-94C6-45E5-847A-BB2600F1B1C2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A5F44C9A-4E8B-4985-B4F3-0D71BB64D89E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DD7DC249-E9DE-4C30-AD48-25F1884C1D6D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -87,27 +126,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>obsidian://advanced-uri?settingid=obsidian-style-settings</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>3B3913A5-94C6-45E5-847A-BB2600F1B1C2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -137,6 +155,50 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>945ED155-23DF-4F0F-B90C-DBDDB2C715A9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>obsidian://advanced-uri?settingid=obsidian-style-settings</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3B3913A5-94C6-45E5-847A-BB2600F1B1C2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "System Events"	keystroke "i" using {command down, option down}	delay 0.4	keystroke "c" using {command down, shift down}end tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>616A791C-515F-4771-BD72-6BCF32748B88</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -181,20 +243,20 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>tell application "System Events"	keystroke "i" using {command down, option down}	delay 0.4	keystroke "c" using {command down, shift down}end tell</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>get-obsidian-path.js</string>
 				<key>type</key>
-				<integer>6</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>616A791C-515F-4771-BD72-6BCF32748B88</string>
+			<string>EECD8B98-E934-4325-A613-8673D7A2FB7D</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -255,29 +317,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-obsidian-path.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>EECD8B98-E934-4325-A613-8673D7A2FB7D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -296,6 +335,119 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>43</integer>
+				<key>hotmod</key>
+				<integer>655360</integer>
+				<key>hotstring</key>
+				<string>,</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>md.obsidian</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>A5F44C9A-4E8B-4985-B4F3-0D71BB64D89E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/obsidian.vimrc</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>DD7DC249-E9DE-4C30-AD48-25F1884C1D6D</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>vimrc</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>obsidian.vimrc</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>86AFF9A1-7DD6-443E-BD1C-151917586042</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://github.com/replit/codemirror-vim/blob/master/src/vim.js</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>85137F9B-F432-4120-BDD0-2204B4843B53</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>codemirror</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>CM6 Vim</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>43F710C6-44A2-45FF-9B24-38734C701EEB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -307,6 +459,15 @@
 			<real>245</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>43F710C6-44A2-45FF-9B24-38734C701EEB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>695</real>
 		</dict>
 		<key>616A791C-515F-4771-BD72-6BCF32748B88</key>
 		<dict>
@@ -326,6 +487,24 @@
 			<key>ypos</key>
 			<real>320</real>
 		</dict>
+		<key>85137F9B-F432-4120-BDD0-2204B4843B53</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>695</real>
+		</dict>
+		<key>86AFF9A1-7DD6-443E-BD1C-151917586042</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>575</real>
+		</dict>
 		<key>945ED155-23DF-4F0F-B90C-DBDDB2C715A9</key>
 		<dict>
 			<key>note</key>
@@ -334,6 +513,17 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>A5F44C9A-4E8B-4985-B4F3-0D71BB64D89E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>vimrc</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>440</real>
 		</dict>
 		<key>B018F2BE-3E56-4A4C-BA46-7853812AD54B</key>
 		<dict>
@@ -363,6 +553,15 @@
 			<real>505</real>
 			<key>ypos</key>
 			<real>290</real>
+		</dict>
+		<key>DD7DC249-E9DE-4C30-AD48-25F1884C1D6D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>490</real>
 		</dict>
 		<key>EECD8B98-E934-4325-A613-8673D7A2FB7D</key>
 		<dict>

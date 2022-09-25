@@ -283,7 +283,7 @@
 				<key>variables</key>
 				<dict>
 					<key>flags</key>
-					<string></string>
+					<string>gm</string>
 					<key>regex</key>
 					<string>{query}</string>
 				</dict>

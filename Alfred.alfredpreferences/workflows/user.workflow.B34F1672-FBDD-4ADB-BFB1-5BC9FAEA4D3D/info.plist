@@ -8,6 +8,42 @@
 	<string>Development</string>
 	<key>connections</key>
 	<dict>
+		<key>03C8A38F-8577-483D-8E18-B31886F2113F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>0B1E6AA4-1922-4203-943D-62AA02786451</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>516A8D31-7193-47FD-AD28-ADAE49601D02</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D8D7E65D-1523-47A4-9964-845E4D2C0927</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>150AD279-99E1-4CB0-9F90-F4395A3A116A</key>
 		<array>
 			<dict>
@@ -47,11 +83,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>2F0710E7-D440-4B8E-BD7F-FB7FA8670039</key>
+		<key>4DEABEE2-4999-4872-A75E-DCBD98C663E1</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7E6054B0-3785-45A2-A92E-9896CFEBA420</string>
+				<string>2ACE5555-5735-4C32-AB12-52AF7B05D8B1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -62,6 +98,29 @@
 		</array>
 		<key>5320A9D6-5BED-4AC3-B729-7E0FCA44A54B</key>
 		<array/>
+		<key>5B4488F5-41D3-4E76-A00D-E7878BC0BC40</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>852FEFE2-6998-4254-985C-75A2E3AEB5B2</key>
 		<array>
 			<dict>
@@ -88,11 +147,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D5F86957-1352-4B11-BF61-059C2CF716BC</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>66A6B203-4D92-418E-9D90-D4815DA05E8F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D8D7E65D-1523-47A4-9964-845E4D2C0927</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4DEABEE2-4999-4872-A75E-DCBD98C663E1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -127,6 +212,45 @@
 				<false/>
 			</dict>
 		</array>
+		<key>FA98F18D-55A1-40A3-A635-ACE7396D22C2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FE8C5299-418B-45DE-A554-50495EF4EE22</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FE9038EA-F174-44C3-96CF-EED8F400E783</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -135,7 +259,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Docs &amp; Cheatsheets</string>
+	<string>Documentation Searches</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -244,6 +368,324 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>css</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>./mdn-search.js "CSS $*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>MDN Search (CSS)</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>F244FBB2-D206-4A08-9404-12E9A2DB8944</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>js</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>./mdn-search.js "JavaScript $*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>MDN Search (JS)</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>This may take up to a minute.</string>
+				<key>title</key>
+				<string>⏳Re-Creating Index</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>516A8D31-7193-47FD-AD28-ADAE49601D02</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>html</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>./mdn-search.js "HTML $*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>MDN Search (HTML)</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>1CA4905C-0482-4517-93A3-656ACFA985CD</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ Index created</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>4DEABEE2-4999-4872-A75E-DCBD98C663E1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Blow</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>2ACE5555-5735-4C32-AB12-52AF7B05D8B1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>:vim</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Update Neovim :help Index</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0B1E6AA4-1922-4203-943D-62AA02786451</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>neovim-docs-index-creation.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D8D7E65D-1523-47A4-9964-845E4D2C0927</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>lua</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>lua-manual-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Lua Manual Search</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C4E99850-BA50-4D06-A11F-D09AEC8481A0</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -287,52 +729,59 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<integer>2</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>git</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>git-doc-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Git Docs</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>03C8A38F-8577-483D-8E18-B31886F2113F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
 			<string>EA3DF9A8-C9B9-4A5B-BE23-02A376F9B128</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>so/</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Stackoverflow: {query}</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>D5F86957-1352-4B11-BF61-059C2CF716BC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://stackoverflow.com/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>66A6B203-4D92-418E-9D90-D4815DA05E8F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -388,23 +837,51 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>vim</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
 				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>neovim-help-search.js</string>
+				<key>subtext</key>
 				<string></string>
-				<key>url</key>
-				<string>https://devdocs.io/#q={query}</string>
+				<key>title</key>
+				<string>Search neovim :help</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>7E6054B0-3785-45A2-A92E-9896CFEBA420</string>
+			<string>FA98F18D-55A1-40A3-A635-ACE7396D22C2</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -412,118 +889,20 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>dev</string>
+				<string>so/</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Devdocs: '{query}'</string>
+				<string>Stackoverflow: {query}</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>2F0710E7-D440-4B8E-BD7F-FB7FA8670039</string>
+			<string>D5F86957-1352-4B11-BF61-059C2CF716BC</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>css</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>Searching...</string>
-				<key>script</key>
-				<string>./mdn-search.js "CSS $*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>MDN Search (CSS)</string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>F244FBB2-D206-4A08-9404-12E9A2DB8944</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>js</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>Searching...</string>
-				<key>script</key>
-				<string>./mdn-search.js "JavaScript $*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>MDN Search (JS)</string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -537,12 +916,12 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string></string>
+				<string>https://stackoverflow.com/{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+			<string>66A6B203-4D92-418E-9D90-D4815DA05E8F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -550,7 +929,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<false/>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -562,36 +941,153 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>html</string>
+				<string>ep</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Searching...</string>
+				<string>loading...</string>
 				<key>script</key>
-				<string>./mdn-search.js "HTML $*"</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>espanso-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>MDN Search (HTML)</string>
+				<string>Espanso Docs Search...</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>FE9038EA-F174-44C3-96CF-EED8F400E783</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ke</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>karabiner-docs-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Karabiner Docs Search...</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>FE8C5299-418B-45DE-A554-50495EF4EE22</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>hs</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>hs-docs-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Hammerspoon Docs Search...</string>
+				<key>type</key>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>1CA4905C-0482-4517-93A3-656ACFA985CD</string>
+			<string>5B4488F5-41D3-4E76-A00D-E7878BC0BC40</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -600,6 +1096,28 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>03C8A38F-8577-483D-8E18-B31886F2113F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>search docs</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>475</real>
+		</dict>
+		<key>0B1E6AA4-1922-4203-943D-62AA02786451</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>(re)create index</string>
+			<key>xpos</key>
+			<real>435</real>
+			<key>ypos</key>
+			<real>270</real>
+		</dict>
 		<key>150AD279-99E1-4CB0-9F90-F4395A3A116A</key>
 		<dict>
 			<key>colorindex</key>
@@ -618,7 +1136,16 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>245</real>
+		</dict>
+		<key>2ACE5555-5735-4C32-AB12-52AF7B05D8B1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>880</real>
+			<key>ypos</key>
+			<real>270</real>
 		</dict>
 		<key>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</key>
 		<dict>
@@ -627,65 +1154,79 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>130</real>
 		</dict>
-		<key>2F0710E7-D440-4B8E-BD7F-FB7FA8670039</key>
+		<key>4DEABEE2-4999-4872-A75E-DCBD98C663E1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>11</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>270</real>
+		</dict>
+		<key>516A8D31-7193-47FD-AD28-ADAE49601D02</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>600</real>
+			<key>ypos</key>
+			<real>155</real>
 		</dict>
 		<key>5320A9D6-5BED-4AC3-B729-7E0FCA44A54B</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
 			<key>xpos</key>
-			<real>270</real>
+			<real>675</real>
 			<key>ypos</key>
-			<real>85</real>
+			<real>465</real>
+		</dict>
+		<key>5B4488F5-41D3-4E76-A00D-E7878BC0BC40</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>docs</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1005</real>
 		</dict>
 		<key>66A6B203-4D92-418E-9D90-D4815DA05E8F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>655</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>680</real>
 		</dict>
-		<key>7E6054B0-3785-45A2-A92E-9896CFEBA420</key>
+		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>250</real>
+			<real>215</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>1005</real>
 		</dict>
 		<key>852FEFE2-6998-4254-985C-75A2E3AEB5B2</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
 			<key>note</key>
 			<string>search for question</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>435</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>405</real>
 		</dict>
 		<key>9F684AD8-A54B-461A-A897-B3CC1713BCFA</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
 			<key>note</key>
 			<string>search for cheatsheet</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>435</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>545</real>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
@@ -694,25 +1235,43 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>260</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>130</real>
+		</dict>
+		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>365</real>
 		</dict>
 		<key>D5F86957-1352-4B11-BF61-059C2CF716BC</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>Open StackOverflow ShortURL</string>
 			<key>xpos</key>
-			<real>430</real>
+			<real>435</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>680</real>
+		</dict>
+		<key>D8D7E65D-1523-47A4-9964-845E4D2C0927</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>595</real>
+			<key>ypos</key>
+			<real>270</real>
 		</dict>
 		<key>EA3DF9A8-C9B9-4A5B-BE23-02A376F9B128</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>600</real>
 			<key>ypos</key>
-			<real>115</real>
+			<real>495</real>
 		</dict>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<dict>
@@ -721,7 +1280,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>15</real>
 		</dict>
 		<key>FA89C66A-A9E5-4D5A-BD31-C17F3285EE74</key>
 		<dict>
@@ -733,6 +1292,39 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<real>650</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>FA98F18D-55A1-40A3-A635-ACE7396D22C2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>search vim docs</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>600</real>
+		</dict>
+		<key>FE8C5299-418B-45DE-A554-50495EF4EE22</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>docs</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>875</real>
+		</dict>
+		<key>FE9038EA-F174-44C3-96CF-EED8F400E783</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>docs</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>740</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
