@@ -32,21 +32,27 @@ opt.autowrite = true -- automatically saves on switching buffer
 -- editor
 opt.cursorline = true -- by default underline
 vim.cmd('highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black')
-opt.scrolloff = 11
 opt.wrap = false
+opt.scrolloff = 11
+opt.sidescrolloff = 4
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
 autocmd("BufEnter", function ()
 	-- "o" adds comment syntax when using `o` or `O` https://neovim.io/doc/user/change.html#fo-table
-	opt.formatoptions = opt.formatoptions - {"o"}
+	opt.formatoptions = opt.formatoptions - {"o", "c"}
 end)
 
 -- status bar
 opt.showcmd = true
 opt.showmode = true
 opt.laststatus = 0
+
+-- tab bar
+opt.guitablabel = "[%N] %t %M"
+opt.tabline = "%1T %1t %M %T %2T"
+opt.switchbuf = "useopen,usetab"
 
 -- clipboard
 opt.clipboard = 'unnamedplus'
