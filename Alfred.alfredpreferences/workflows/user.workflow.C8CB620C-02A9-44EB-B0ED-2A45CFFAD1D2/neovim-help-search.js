@@ -2,7 +2,7 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
+const alfredMatcher = (str) => str.replace (/[-()_.:]/g, " ") + " " + str + " ";
 
 function readFile (path, encoding) {
 	if (!encoding) encoding = $.NSUTF8StringEncoding;
@@ -28,19 +28,20 @@ const jsonArray = readFile("url-list.txt")
 		let synonymDisplay = "";
 
 		const hasSynonyms = url.includes(",");
-		const isSectionTitle = url.includes("\t");
+		const isSection = url.includes("\t");
 		if (hasSynonyms) {
 			synonyms = url.split(",").pop();
 			synonymDisplay = " (" + synonyms + ")";
 			url = url.split(",").shift();
 			name = name.split(",").shift();
-		} else if (isSectionTitle) {
-			name = url.split("\t").pop();
+		} else if (isSection) {
+			url = url.split("\t").shift();
+			name = name.replace("\t", " ");
 		}
 
 		return {
 			"title": name + synonymDisplay,
-			"match": alfredMatcher(name) + " " + site + " " + synonyms,
+			"match": alfredMatcher(name) + " " + site + " " + alfredMatcher(synonyms),
 			"subtitle": subtitle,
 			"arg": url,
 			"uid": url,
