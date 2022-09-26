@@ -102,6 +102,55 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>tell application "System Events" to set frontAppProcess to first application process whose frontmost is true# Tell the *process* to count its windows and return its front window's name.tell frontAppProcess	if (count of windows) &gt; 0 then		set window_name to name of front window	end ifend tell
+
+set the clipboard to window_name
+
+# direct return for displaying in Alfred
+window_name</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-window-title.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>win</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Display Window Properties</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alignment</key>
 				<integer>0</integer>
 				<key>backgroundcolor</key>
@@ -152,27 +201,6 @@
 			<string>F6DAF10C-E8B5-49CA-B86B-DE30E7C70191</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>win</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Display Window Properties</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -229,25 +257,20 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>tell application "System Events" to set frontAppProcess to first application process whose frontmost is true# Tell the *process* to count its windows and return its front window's name.tell frontAppProcess	if (count of windows) &gt; 0 then		set window_name to name of front window	end ifend tell
-
-set the clipboard to window_name
-
-# direct return for displaying in Alfred
-window_name</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>get-window-title.applescript</string>
+				<string>restart-hammerspoon.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</string>
+			<string>4F748E27-E0FA-42A5-9B83-B58EF498DC15</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -271,29 +294,6 @@ window_name</string>
 			<string>E8066503-E298-4023-9E9F-3FBA20E03748</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>restart-hammerspoon.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>4F748E27-E0FA-42A5-9B83-B58EF498DC15</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>

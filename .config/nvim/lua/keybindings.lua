@@ -1,12 +1,16 @@
 -- leader
 vim.g.mapleader = ','
 
-local function rkeymap (mode, key, result)
-	vim.keymap.set(mode, key, result, {noremap = false} )
-end
-
 local function keymap (mode, key, result)
-	vim.keymap.set(mode, key, result, {noremap = true} )
+	if #mode < 2 then -- < 2 to account for empty mode (= ":map")
+		vim.keymap.set(mode, key, result)
+	else
+		-- set for every mode in the mode-arg
+		for i=1, #mode do
+			local char = mode:sub(i, i)
+			vim.keymap.set(char, key, result)
+		end
+	end
 end
 
 -- reload current file
@@ -15,7 +19,7 @@ keymap("n", "<leader>r", ":write<CR>:source %<CR>") -- alternative: https://www.
 -- Update Plugins
 keymap("n", "<leader>p", ":PackerSync<CR>")
 
--- copy [l]ast ex[c]ommand
+-- copy [l]ast [c]ommand
 keymap("n", "<leader>lc", ":let @+=@:<CR>")
 
 --------------------------------------------------------------------------------
@@ -37,28 +41,28 @@ keymap("", "H", "0^") -- 0^ ensures scrolling to the left on long lines
 keymap("", "L", "$")
 keymap("", "J", "7j")
 keymap("", "K", "7k")
-keymap("", "[", "{") -- easier to press
-keymap("", "]", "}")
+-- quicker to press + on home row
+keymap("", "s", "}")
+keymap("", "S", "{")
 
 --------------------------------------------------------------------------------
 
 -- EDITING
 
 -- don't pollute the register
-rkeymap("n", "x", '"_x')
-rkeymap("v", "x", '"_x')
-rkeymap("n", "c", '"_c')
-rkeymap("v", "c", '"_c')
-keymap("n", "C", '"_C')
-keymap("v", "C", '"_C')
+keymap("nv", "x", '"_x')
+keymap("nv", "c", '"_c')
+keymap("nv", "C", '"_C')
 
 -- Text Objects
+-- for some reason, recursive remap does not seem to work properly, therefore
+-- the text-objects below need "_
 keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
-keymap("n", "Q", '"_ci"') -- change double quote content
-keymap("n", "q", '"_ci\'') -- change single quote content
+keymap("n", "Q", '"_ci"') -- change double [q]uote content
+keymap("n", "q", '"_ci\'') -- change single [q]uote content
 keymap("n", "R", 'viw"0p') -- [R]eplace Word with register content
 
 -- Macros
@@ -67,10 +71,8 @@ keymap("n", "<leader>q" ,"q")
 -- Misc
 keymap("v", "<BS>", '"_d') -- consistent with insert mode selection
 keymap("n", "!", "a <Esc>h") -- append space
-keymap("n", "U", "<C-r>") -- undo consistent
-keymap("v", "U", "<C-r>")
-keymap("n", "M", "J") -- [M]erge Lines
-keymap("v", "M", "J")
+keymap("nv", "U", "<C-r>") -- undo consistent on one key
+keymap("nv", "M", "J") -- [M]erge Lines
 
 -- Blank Line above/below
 keymap("n", "=", "mzO<Esc>`z")
@@ -81,8 +83,7 @@ keymap("n", "<Tab>", ">>")
 keymap("n", "<S-Tab>", "<<")
 keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
-keymap("n", "^", "=") -- auto-indent
-keymap("v", "^", "=") -- auto-indent
+keymap("nv", "^", "=") -- auto-indent
 
 -- Switch Case of first letter of the word (= toggle between Capital and lower case)
 keymap("n", "ü", "mzlblgueh~`z")

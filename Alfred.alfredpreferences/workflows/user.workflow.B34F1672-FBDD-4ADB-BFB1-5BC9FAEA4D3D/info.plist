@@ -346,6 +346,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
@@ -785,7 +795,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>vp</string>
+				<string>va</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -812,7 +822,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://github.com/search?q=topic%3Avim-plugin+{query}</string>
+				<string>https://vimawesome.com/?q={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -1409,7 +1419,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>710</real>
+			<real>700</real>
 			<key>ypos</key>
 			<real>410</real>
 		</dict>

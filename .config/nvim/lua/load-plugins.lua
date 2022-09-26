@@ -23,13 +23,17 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 --------------------------------------------------------------------------------
+-- Protected call to make sure that packer is installed
+local status_ok, packer = pcall(require, "packer")
+if (not status_ok) then return end
 
-return require('packer').startup(function(use)
+packer.startup(function(use)
 	use 'wbthomason/packer.nvim' -- packer manages itself
 
 	-- Appearance
 	use 'folke/tokyonight.nvim' -- color scheme
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
+	use "unblevable/quick-scope" -- highlight for f and t movements
 
 	-- Utility
 	use 'farmergreg/vim-lastplace' -- remember cursor position
@@ -39,11 +43,21 @@ return require('packer').startup(function(use)
 	use 'tpope/vim-surround'
 	use 'michaeljsmith/vim-indent-object'
 
+	-- CHECK OUT LATER?
+	-- use {
+	-- 	'AckslD/nvim-whichkey-setup.lua',
+	-- 	requires = {'liuchengxu/vim-which-key'},
+	-- }
+	-- use {
+	-- 	'nvim-treesitter/nvim-treesitter-context',
+	-- 	requires = {'nvim-treesitter/nvim-treesitter'},
+	-- }
+
 	-- https://github.com/wbthomason/packer.nvim#performing-plugin-management-operations
 	if packer_bootstrap then
-		require('packer').sync() -- install, sync & update plugins on bootstraping
+		packer.sync() -- install, sync & update plugins on bootstraping
 	else
-		require('packer').install() -- auto-install missing plugins
+		packer.install() -- auto-install missing plugins
 	end
 end)
 
