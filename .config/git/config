@@ -10,7 +10,7 @@
 	interactive = auto
 	ui = true
 [core]
-	editor = subl --new-window --wait
+	editor = nvim
 	excludesfile = /Users/chrisgrieser/.config/git/gitignore_global
 	autocrlf = input
 [pager]

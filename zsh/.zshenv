@@ -1,4 +1,4 @@
-export EDITOR='subl --new-window --wait'
+export EDITOR=nvim
 export PAGER=less
 
 export DOTFILE_FOLDER=~/dotfiles
