@@ -11,7 +11,12 @@ end
 
 -- reload current file
 keymap("n", "<leader>r", ":write<CR>:source %<CR>") -- alternative: https://www.reddit.com/r/neovim/comments/puuskh/how_to_reload_my_lua_config_while_using_neovim/
+
+-- Update Plugins
 keymap("n", "<leader>p", ":PackerSync<CR>")
+
+-- copy [l]ast ex[c]ommand
+keymap("n", "<leader>lc", ":let @+=@:<CR>")
 
 --------------------------------------------------------------------------------
 
@@ -48,12 +53,12 @@ keymap("n", "C", '"_C')
 keymap("v", "C", '"_C')
 
 -- Text Objects
-keymap("n", "<Space>", 'ciw') -- change word
+keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<S-Space>", '"_daw')
-keymap("v", "<Space>", 'c')
+keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
-keymap("n", "Q", 'ci"') -- change double quote content
-keymap("n", "q", "ci'") -- change single quote content
+keymap("n", "Q", '"_ci"') -- change double quote content
+keymap("n", "q", '"_ci\'') -- change single quote content
 keymap("n", "R", 'viw"0p') -- [R]eplace Word with register content
 
 -- Macros
@@ -67,15 +72,17 @@ keymap("v", "U", "<C-r>")
 keymap("n", "M", "J") -- [M]erge Lines
 keymap("v", "M", "J")
 
--- Add Blank Line above/below
+-- Blank Line above/below
 keymap("n", "=", "mzO<Esc>`z")
 keymap("n", "_", "mzo<Esc>`z")
 
--- Make indention work like in other editors
+-- Indention
 keymap("n", "<Tab>", ">>")
 keymap("n", "<S-Tab>", "<<")
 keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
+keymap("n", "^", "=") -- auto-indent
+keymap("v", "^", "=") -- auto-indent
 
 -- Switch Case of first letter of the word (= toggle between Capital and lower case)
 keymap("n", "ü", "mzlblgueh~`z")
@@ -118,7 +125,7 @@ keymap("n", "<CR>", 'A') -- So Double return keeps list syntax
 keymap("n", "<leader>x", 'mz^lllrx`z') -- check tasks
 
 -- CSS
-keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key
+keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key (also works for JSON, actually)
 keymap("n", "<leader>c", 'mzlEF.yEEp`z') -- double [c]lass under cursor
 keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>') -- remove [C]lass under cursor
 

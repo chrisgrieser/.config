@@ -27,9 +27,14 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim' -- packer manages itself
 
+	-- Appearance
 	use 'folke/tokyonight.nvim' -- color scheme
+	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 
-	-- Editing Plugin
+	-- Utility
+	use 'farmergreg/vim-lastplace' -- remember cursor position
+
+	-- Editing
 	use 'tpope/vim-commentary'
 	use 'tpope/vim-surround'
 	use 'michaeljsmith/vim-indent-object'
