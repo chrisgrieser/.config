@@ -1,22 +1,22 @@
 -- leader
 vim.g.mapleader = ','
 
-local function keymap (mode, key, result)
-	if #mode < 2 then -- < 2 to account for empty mode (= ":map")
-		vim.keymap.set(mode, key, result)
+local function keymap (modes, key, result)
+	if #modes < 2 then -- < 2 to account for empty mode (= ":map")
+		vim.keymap.set(modes, key, result)
 	else
 		-- set for every mode in the mode-arg
-		for i=1, #mode do
-			local char = mode:sub(i, i)
-			vim.keymap.set(char, key, result)
+		for i=1, #modes do
+			local mode = modes:sub(i, i)
+			vim.keymap.set(mode, key, result)
 		end
 	end
 end
 
--- reload current file
+-- [r]eload current config file
 keymap("n", "<leader>r", ":write<CR>:source %<CR>") -- alternative: https://www.reddit.com/r/neovim/comments/puuskh/how_to_reload_my_lua_config_while_using_neovim/
 
--- Update Plugins
+-- Update [P]lugins
 keymap("n", "<leader>p", ":PackerSync<CR>")
 
 -- copy [l]ast [c]ommand
@@ -88,7 +88,7 @@ keymap("n", "ö", "xp") -- current & next char
 keymap("n", "Ö", "xhhp") -- current & previous char
 keymap("n", "Ä", "dawelpb") -- current & next word
 
--- <leader>{char} → Append char to end of line
+-- <leader>{char} → Append {char} to end of line
 trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`" }
 for i = 1, #trailingKeys do
 	keymap("n", "<leader>"..trailingKeys[i], "mzA"..trailingKeys[i].."<Esc>`z")
@@ -168,13 +168,13 @@ keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 local function telescope(picker)
 	return ':lua require("telescope.builtin").'..picker..'()<CR>'
 end
-keymap("n", "go", telescope("find_files")) -- File explorer in new tab
-keymap("n", "gr", telescope("oldfiles")) -- recent files
-keymap("n", "gb", telescope("buffers")) -- quicker switcher for open buffer
+keymap("n", "go", telescope("find_files")) -- [o]pen file in current directory (should be used with 'autochdir' option)
+keymap("n", "gr", telescope("oldfiles")) -- [r]ecent files
+keymap("n", "gb", telescope("buffers")) -- open [b]uffer
 
 -- Using built-in vim commands
--- keymap("n", "go", ":Explore<CR>") -- File explorer in new tab
--- keymap("n", "gb", ":ls<CR>:buffer<Space>") -- quicker switcher for open buffer
+-- keymap("n", "go", ":Explore<CR>")
+-- keymap("n", "gb", ":ls<CR>:buffer<Space>")
 
 -- Buffers
 keymap("", "<C-Tab>", ":bn<CR>")
