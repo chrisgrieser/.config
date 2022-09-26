@@ -16,13 +16,17 @@ BREWDUMP_PATH="$DOTFILE_FOLDER/Installed Apps and Packages/"
 
 alias bh='brew home'
 alias bl='brew list'
-compdef bh
+alias bi='brew install'
+alias br='brew reinstall'
+alias bu='brew --zap uninstall'
+# aliases already get tab-completion
 
 # -----------------------------------------------------
 
 # Uninstaller for Mac App Store Apps
 function un () {
 	local APP="$*"
+	# shellcheck disable=SC2296
 	APP="${(C)APP}" # capitalize input
 	if [[ -e "/Applications/$APP.app" ]]; then
 		open -a "AppCleaner" "/Applications/$APP.app/"
@@ -30,111 +34,17 @@ function un () {
 	fi
 
 	local SELECTED=""
-	local SELECTED=$( mas list | cut -c13- | cut -d"(" -f1 | sed 's/ *$//g' | fzf \
+	SELECTED=$( mas list | cut -c13- | cut -d"(" -f1 | sed 's/ *$//g' | fzf \
 	           -0 \
 	           --query "$1" \
 	           --height=80% \
 	           --preview-window=right:70% \
 	           )
 	[[ "$SELECTED" == "" ]] && return 130
-	open -a "AppCleaner" "/Applications/$SELECTED.app/"
 	killall "$SELECTED" || true
+	open -a "AppCleaner" "/Applications/$SELECTED.app/"
 }
 
-# helper function for `br` and `bi`
-function post-install () {
-	local BREW_INFO=$(brew info "$1")
-
-	if [[ "$BREW_INFO" =~ "Caveats" ]] ; then
-		echo '\033[1;33m⚠️ Caveats'
-		osascript -e "beep"
-	fi
-
-	[[ "$2" != "--cask" ]] && return 0
-
-	# shellcheck disable=SC2012
-	local NEWEST_APP="$(ls -tc /Applications | head -n1)"
-	echo "Open \"$NEWEST_APP\"? (y/n)" # offer to open
-
-	# stop when decision not yes
-	read -r -k 1 DECISION
-	[[ "$DECISION:l" != "y" ]] && return 0 # ":l" = lowercase https://scriptingosx.com/2019/12/upper-or-lower-casing-strings-in-bash-and-zsh/
-
-	open -a "$NEWEST_APP"
-}
-
-function br () {
-	if [[ $1 != "" ]] && brew list "$1" ; then
-		brew reinstall "$1"
-		return
-	fi
-
-	local SELECTED=""
-	# shellcheck disable=SC1009,SC1056,SC1072,SC1073
-	local SELECTED=$( { brew list --casks ; brew leaves --installed-on-request } | fzf \
-	           -0 \
-	           --query "$1" \
-	           --preview 'HOMEBREW_COLOR=true brew info {}' \
-	           --bind 'alt-enter:execute(brew home {})+abort' \
-	           --height=80% \
-	           --preview-window=right:70% \
-	           )
-	[[ "$SELECTED" == "" ]] && return 130
-	brew reinstall "$SELECTED"
-
-	post-install "$SELECTED"
-}
-function bu () {
-	if [[ $1 != "" ]] && brew list "$1" ; then
-		brew uninstall --zap "$1"
-		return
-	fi
-
-	local SELECTED=""
-	# shellcheck disable=SC1009,SC1056,SC1072,SC1073
-	local SELECTED=$( { brew list --casks ; brew leaves --installed-on-request } | fzf \
-	           -0 \
-	           --query "$1" \
-	           --preview 'HOMEBREW_COLOR=true brew info {}' \
-	           --bind 'alt-enter:execute(brew home {})+abort' \
-	           --height=80% \
-	           --preview-window=right:70% \
-	           )
-	[[ "$SELECTED" == "" ]] && return 130
-	brew uninstall --zap "$SELECTED"
-	killall "$SELECTED" &> /dev/null || true
-}
-
-function bi (){
-	local TO_INSTALL="$1"
-	local TYPE="$2" # formula or cask
-
-	# abort if already installed
-	brew list "$TO_INSTALL" &> /dev/null && echo "Already installed." && return 0
-
-	# if package does not exist, search for it via fzf
-	brew info "$TO_INSTALL" &> /dev/null
-	if [[ $? == 1 ]] ; then
-		local SELECTED=""
-		SELECTED=$( { brew formulae ; brew casks } | fzf \
-		           -0\
-		           --query "$TO_INSTALL" \
-		           --preview 'HOMEBREW_COLOR=true brew info {}' \
-		           --bind 'alt-enter:execute(brew home {})+abort' \
-		           --preview-window=right:70% \
-		           ) ;
-
-		# abort if no selection made
-		[[ $SELECTED == "" ]] && return 130
-
-		local TO_INSTALL="$SELECTED"
-	fi
-
-	brew install "$TO_INSTALL" $TYPE # quotes would add empty 2nd arg if empty
-	post-install "$TO_INSTALL" $TYPE
-}
-
-# helper function for `update` and `report`
 function print-section () {
 	echo
 	echo "$*"
@@ -142,7 +52,8 @@ function print-section () {
 }
 
 function dump () {
-	local device_name=$(scutil --get ComputerName | cut -d" " -f2-)
+	local device_name
+	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 	brew bundle dump --force --file "$BREWDUMP_PATH/Brewfile_$device_name"
 	command npm list --location=global --parseable | sed "1d" | sed -E "s/.*\///" > "$BREWDUMP_PATH/NPMfile_$device_name"
 	pip3 list --not-required | tail -n+3 | grep -vE "Pillow|pip|pybind|setuptools|six|wheel" | cut -d" " -f1 > "$BREWDUMP_PATH/Pip3file_$device_name"

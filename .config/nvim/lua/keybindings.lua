@@ -1,21 +1,15 @@
 vim.g.mapleader = ','
 
+local function rkeymap (mode, key, result)
+	vim.keymap.set(mode, key, result, {noremap = false} )
+end
+
 local function keymap (mode, key, result)
 	vim.keymap.set(mode, key, result, {noremap = true} )
 end
 
--- https://www.reddit.com/r/neovim/comments/puuskh/how_to_reload_my_lua_config_while_using_neovim/
-function reloadConfig()
-	for name,_ in pairs(package.loaded) do
-		package.loaded[name] = nil
-	end
-	dofile(vim.env.MYVIMRC)
-	vim.notify("Neovim config reloaded.", vim.log.levels.INFO)
-end
-keymap("n", "<leader>r", ":w<CR>:lua reloadConfig()<CR>")
-
--- TODO figure out why this needs to be double-pressed
-keymap("n", "<C-q>", ":wa<CR>:qa<CR>") -- save all & quit all
+-- reload current file
+keymap("n", "<leader>r", ":write<CR>:source %<CR>") -- alternative: https://www.reddit.com/r/neovim/comments/puuskh/how_to_reload_my_lua_config_while_using_neovim/
 
 --------------------------------------------------------------------------------
 
@@ -39,15 +33,10 @@ keymap("", "K", "7k")
 keymap("", "[", "{") -- easier to press
 keymap("", "]", "}")
 
--- Misc
-
--- TODO: investigate why this isn't working
-keymap("n", "gf", "gx") -- [f]ollow link under cursor
-
 --------------------------------------------------------------------------------
 
 -- EDITING
---
+
 -- don't pollute the register
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
@@ -57,11 +46,11 @@ keymap("v", "C", '"_C')
 keymap("v", "x", '"_x')
 
 -- Text Objects
-keymap("n", "<Space>", '"_ciw') -- change word
+keymap("n", "<Space>", 'ciw') -- change word
 keymap("n", "<S-Space>", '"_daw')
-keymap("v", "<Space>", '"_c')
+keymap("v", "<Space>", 'c')
 keymap("v", "<S-Space>", '"_d')
-keymap("n", "Q", '"_ci"') -- change quote content
+keymap("n", "Q", 'ci"') -- change quote content
 keymap("n", "R", 'viw"0p') -- [R]eplace Word with register content
 
 -- Misc
@@ -83,7 +72,7 @@ keymap("n", "<S-Tab>", "<<")
 keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
 
--- Switch Case of first letter of the word = (toggle between Capital and lower case)
+-- Switch Case of first letter of the word (= toggle between Capital and lower case)
 keymap("n", "ü", "mzlblgueh~`z")
 
 -- Transpose
@@ -91,7 +80,7 @@ keymap("n", "ö", "xp") -- current & next char
 keymap("n", "Ö", "xhhp") -- current & previous char
 keymap("n", "Ä", "dawelpb") -- current & next word
 
--- <leader>{punctuation-char} → Append punctuation to end of line
+-- <leader>{char} → Append char to end of line
 trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`" }
 for i = 1, #trailingKeys do
 	keymap("n", "<leader>"..trailingKeys[i], "mzA"..trailingKeys[i].."<Esc>`z")
@@ -160,12 +149,12 @@ keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 
 --------------------------------------------------------------------------------
 -- Buffers & Windows
-keymap("n", "go", ":Texplore<CR>") -- File explorer in new tab
+keymap("n", "go", ":Explore<CR>") -- File explorer in new tab
 keymap("", "<C-Tab>", ":bn<CR>")
 keymap("n", "gl", ":ls<CR>")
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
--- keymap("n", "gt", ":bn<CR>") -- use vim's buffer model instead of tabs
--- keymap("n", "gT", ":bp<CR>")
+keymap("n", "gt", ":bn<CR>") -- use vim's buffer model instead of tabs
+keymap("n", "gT", ":bp<CR>")
 
 -- File Operations
 keymap("n", "<C-p>", ":let @+=@%<CR>") -- copy path of current file
@@ -179,3 +168,4 @@ keymap("n", "<leader>ss", ":'<,'>sort<CR>") -- [s]ort [s]election
 keymap("n", "<leader>sa", "vi]:sort u<CR>") -- [s]ort [a]rray, if multi-line (+ remove duplicates)
 keymap("n", "<leader>sg", ":sort<CR>") -- [s]ort [g]lobally
 keymap("n", "<leader>sp", "vip:sort<CR>") -- [s]ort [p]aragraph
+
