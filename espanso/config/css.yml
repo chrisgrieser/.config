@@ -6,4 +6,3 @@ filter_title: css$
 
 extra_includes:
   - "../match/_css.yml"
-  - "../match/_emmet.yml"
