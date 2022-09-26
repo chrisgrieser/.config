@@ -150,8 +150,9 @@ keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 --------------------------------------------------------------------------------
 -- Buffers & Windows
 keymap("n", "go", ":Explore<CR>") -- File explorer in new tab
+keymap("n", "gr", ":filter /\\.\\w*$/ browse oldfiles<CR>") -- recent files
 keymap("", "<C-Tab>", ":bn<CR>")
-keymap("n", "gl", ":ls<CR>")
+keymap("n", "gb", ":ls<CR>:buffer<Space>") -- quicker switcher for open buffer
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 keymap("n", "gt", ":bn<CR>") -- use vim's buffer model instead of tabs
 keymap("n", "gT", ":bp<CR>")

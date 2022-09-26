@@ -30,14 +30,11 @@ if not status_ok then return end
 
 return packer.startup(function(use)
 	use 'wbthomason/packer.nvim' -- packer manages itself
-	-- color scheme
-	use 'folke/tokyonight.nvim'
+	use 'folke/tokyonight.nvim' -- color scheme
 
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
-	if packer_bootstrap then
-		packer.sync()
-	end
+	-- https://github.com/wbthomason/packer.nvim#performing-plugin-management-operations
+	if packer_bootstrap then packer.sync() end -- install, sync & update plugins on bootstraping
+	packer.install() -- auto-install missing plugins
 end)
 
 

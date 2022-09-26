@@ -83,6 +83,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>39F3E0B0-7C6A-48D6-AFF6-395C7D35D544</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ABD27862-56E3-4A86-8F79-1552B8C665C3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4DEABEE2-4999-4872-A75E-DCBD98C663E1</key>
 		<array>
 			<dict>
@@ -689,6 +702,97 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
+				<string>vp</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Vim Plugin Search: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>39F3E0B0-7C6A-48D6-AFF6-395C7D35D544</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://github.com/search?q=topic%3Avim-plugin+{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>ABD27862-56E3-4A86-8F79-1552B8C665C3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>git</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>git-doc-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Git Docs</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>03C8A38F-8577-483D-8E18-B31886F2113F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
 				<string>ch</string>
 				<key>subtext</key>
 				<string></string>
@@ -740,11 +844,11 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>102</integer>
 				<key>keyword</key>
-				<string>git</string>
+				<string>vim</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -760,11 +864,11 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>git-doc-search.js</string>
+				<string>neovim-help-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Git Docs</string>
+				<string>Search neovim :help</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -773,7 +877,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>03C8A38F-8577-483D-8E18-B31886F2113F</string>
+			<string>FA98F18D-55A1-40A3-A635-ACE7396D22C2</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -846,11 +950,11 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>keyword</key>
-				<string>vim</string>
+				<string>ep</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -866,20 +970,20 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>neovim-help-search.js</string>
+				<string>espanso-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Search neovim :help</string>
+				<string>Espanso Docs Search...</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>FA98F18D-55A1-40A3-A635-ACE7396D22C2</string>
+			<string>FE9038EA-F174-44C3-96CF-EED8F400E783</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -924,55 +1028,6 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<string>66A6B203-4D92-418E-9D90-D4815DA05E8F</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ep</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>espanso-docs-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Espanso Docs Search...</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>FE9038EA-F174-44C3-96CF-EED8F400E783</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1154,6 +1209,15 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
+		<key>39F3E0B0-7C6A-48D6-AFF6-395C7D35D544</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>435</real>
+			<key>ypos</key>
+			<real>405</real>
+		</dict>
 		<key>4DEABEE2-4999-4872-A75E-DCBD98C663E1</key>
 		<dict>
 			<key>colorindex</key>
@@ -1177,14 +1241,14 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>655</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>585</real>
 		</dict>
 		<key>5B4488F5-41D3-4E76-A00D-E7878BC0BC40</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>955</real>
 		</dict>
@@ -1195,7 +1259,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>655</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>800</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
@@ -1213,7 +1277,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>525</real>
 		</dict>
 		<key>9F684AD8-A54B-461A-A897-B3CC1713BCFA</key>
 		<dict>
@@ -1222,7 +1286,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>665</real>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
@@ -1230,6 +1294,15 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<real>265</real>
 			<key>ypos</key>
 			<real>365</real>
+		</dict>
+		<key>ABD27862-56E3-4A86-8F79-1552B8C665C3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>605</real>
+			<key>ypos</key>
+			<real>405</real>
 		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>
@@ -1249,7 +1322,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>800</real>
 		</dict>
 		<key>D8D7E65D-1523-47A4-9964-845E4D2C0927</key>
 		<dict>
@@ -1265,7 +1338,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>585</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>615</real>
 		</dict>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<dict>

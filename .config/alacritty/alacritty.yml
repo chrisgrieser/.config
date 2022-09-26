@@ -1,11 +1,11 @@
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 colors:
-  # COLORSCHEME: tokyo-night.yaml
+  # COLORSCHEME: tokyo-night-storm.yaml
   # Default colors
   primary:
     # hard contrast: background = '0x1d2021'
-    background: '0x1a1b26'
+    background: '0x24283b'
     foreground: '0xa9b1d6'
 
   # Normal colors
@@ -18,7 +18,7 @@ colors:
     blue: '0x7aa2f7'
     magenta: '0xad8ee6'
     cyan: '0x449dab'
-    white: '0x787c99'
+    white: '0x9699a8'
 
   # Bright colors
   bright:
@@ -64,6 +64,11 @@ colors:
     end:
       foreground: '#6e6a86'
       background: '#2a273f'
+  cursor:
+    text: '0x1d1f21'
+    cursor: '0xffffff'
+
+  # Normal colors
 font:
   size: 26
 
