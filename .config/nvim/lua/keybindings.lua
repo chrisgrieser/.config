@@ -23,11 +23,7 @@ keymap("n", "<leader>p", ":PackerSync<CR>")
 keymap("n", "<leader>lc", ":let @+=@:<CR>")
 
 --------------------------------------------------------------------------------
-
 -- NAVIGATION
-keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
-keymap("", "+", "*") -- no more modifier key on German Keyboard
-keymap("", "ä", "`") -- Goto Mark
 
 -- Have j and k navigate visual lines rather than logical ones
 -- (useful if wrapping is on)
@@ -45,8 +41,12 @@ keymap("", "K", "7k")
 keymap("", "s", "}")
 keymap("", "S", "{")
 
---------------------------------------------------------------------------------
+-- Misc
+keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
+keymap("", "+", "*") -- no more modifier key on German Keyboard
+keymap("", "ä", "`") -- Goto Mark
 
+--------------------------------------------------------------------------------
 -- EDITING
 
 -- don't pollute the register
@@ -68,15 +68,10 @@ keymap("n", "R", 'viw"0p') -- [R]eplace Word with register content
 -- Macros
 keymap("n", "<leader>q" ,"q")
 
--- Misc
-keymap("v", "<BS>", '"_d') -- consistent with insert mode selection
+-- Whitespace
 keymap("n", "!", "a <Esc>h") -- append space
-keymap("nv", "U", "<C-r>") -- undo consistent on one key
-keymap("nv", "M", "J") -- [M]erge Lines
-
--- Blank Line above/below
-keymap("n", "=", "mzO<Esc>`z")
-keymap("n", "_", "mzo<Esc>`z")
+keymap("n", "=", "mzO<Esc>`z") -- add blank above
+keymap("n", "_", "mzo<Esc>`z") -- add blank below
 
 -- Indention
 keymap("n", "<Tab>", ">>")
@@ -102,6 +97,10 @@ end
 -- Remove last character from line
 keymap("n", "X", 'mz$"_x`z')
 
+-- Misc
+keymap("nv", "U", "<C-r>") -- undo consistent on one key
+keymap("nv", "M", "J") -- [M]erge Lines
+
 --------------------------------------------------------------------------------
 -- INSERT MODE
 keymap("i", "jj", '<Esc>')
@@ -117,6 +116,7 @@ keymap("i", "<C-k>", '<Esc>Dli')
 -- VISUAL MODE
 keymap("v", "V", "j") -- so double "V" selects two lines
 keymap("v", "p", '"_dP') -- do not override register when pasting on selection (still able to do so with P)
+keymap("v", "<BS>", '"_d') -- consistent with insert mode selection
 
 --------------------------------------------------------------------------------
 -- LANGUAGE-SPECIFIC BINDINGS
@@ -135,7 +135,7 @@ keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, req
 
 --------------------------------------------------------------------------------
 -- EMULATING MAC BINDINGS
--- - requires GUI app like Neovide
+-- - requires GUI app like Neovide (called "Logo Key" there)
 -- - mostly done for consistency with other apps
 keymap("", "<D-v>", "p") -- cmd+v
 keymap("n", "<D-c>", "yy") -- cmd+c: copy line
@@ -162,11 +162,17 @@ keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 
 --------------------------------------------------------------------------------
--- Buffers & Windows
-keymap("n", "go", ":Explore<CR>") -- File explorer in new tab
+-- File Switching
+keymap('n', 'go', ':lua require("telescope.builtin").find_files()<CR>') -- File explorer in new tab
 keymap("n", "gr", ":filter /\\.\\w*$/ browse oldfiles<CR>") -- recent files
+keymap("n", "gb", ':lua require"telescope.builtin".buffers()<CR>') -- quicker switcher for open buffer
+
+-- Using built-in vim commands
+-- keymap("n", "go", ":Explore<CR>") -- File explorer in new tab
+-- keymap("n", "gb", ":ls<CR>:buffer<Space>") -- quicker switcher for open buffer
+
+-- Buffers
 keymap("", "<C-Tab>", ":bn<CR>")
-keymap("n", "gb", ":ls<CR>:buffer<Space>") -- quicker switcher for open buffer
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 keymap("n", "gt", ":bn<CR>") -- use vim's buffer model instead of tabs
 keymap("n", "gT", ":bp<CR>")

@@ -18,7 +18,7 @@ local packer_bootstrap = ensure_packer()
 local group = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePost", {
 	command = "source <afile> | PackerSync",
-	pattern = "plugins.lua", -- the name of your plugins file
+	pattern = "load-plugins.lua", -- the name of your plugins file
 	group = group,
 })
 
@@ -37,6 +37,10 @@ packer.startup(function(use)
 
 	-- Utility
 	use 'farmergreg/vim-lastplace' -- remember cursor position
+	use {
+		'nvim-telescope/telescope.nvim',
+		requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
+	}
 
 	-- Editing
 	use 'tpope/vim-commentary'
