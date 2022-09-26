@@ -16,6 +16,7 @@ BREWDUMP_PATH="$DOTFILE_FOLDER/Installed Apps and Packages/"
 
 alias bh='brew home'
 alias bl='brew list'
+compdef bh
 
 # -----------------------------------------------------
 
