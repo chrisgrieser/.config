@@ -38,12 +38,13 @@ keymap("", "]", "}")
 -- EDITING
 
 -- don't pollute the register
-keymap("n", "x", '"_x')
-keymap("n", "c", '"_c')
+rkeymap("n", "x", '"_x')
+rkeymap("v", "x", '"_x')
+
+rkeymap("n", "c", '"_c')
+rkeymap("v", "c", '"_c')
 keymap("n", "C", '"_C')
-keymap("v", "c", '"_c')
 keymap("v", "C", '"_C')
-keymap("v", "x", '"_x')
 
 -- Text Objects
 keymap("n", "<Space>", 'ciw') -- change word
