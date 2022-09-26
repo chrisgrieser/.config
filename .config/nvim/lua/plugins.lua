@@ -16,15 +16,10 @@ packer.init({
 	package_root = util.join_paths(vim.fn.stdpath('data'), 'site', 'pack')
 })
 
+--------------------------------------------------------------------------------
+
 packer.startup(function (use)
-	-- add you plugins here like:
-	-- use 'neovim/nvim-lspconfig'
+	use 'folke/tokyonight.nvim'
 end )
 
---------------------------------------------------------------------------------
--- CRUCIAL PLUGINS
-
-
---------------------------------------------------------------------------------
--- MORE PLUGINS
 
