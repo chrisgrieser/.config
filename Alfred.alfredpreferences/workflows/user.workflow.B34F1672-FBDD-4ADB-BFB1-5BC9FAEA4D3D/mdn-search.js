@@ -4,7 +4,9 @@ function run (argv) {
 	ObjC.import("stdlib");
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
-	const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
+	const alfredMatcher = (str) => str.replace (/[-()_.:#]/g, " ")
+		+ " " + str + " "
+		+ str.replace(/([A-Z])/g, " $1"); // match parts of CamelCase
 	const onlineJSON = (url) => JSON.parse (app.doShellScript(`curl -sL '${url}'`));
 
 	//------------------------------------------------------------------------------

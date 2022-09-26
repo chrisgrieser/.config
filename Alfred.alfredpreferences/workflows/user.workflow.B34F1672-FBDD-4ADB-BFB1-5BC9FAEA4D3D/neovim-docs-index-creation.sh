@@ -5,7 +5,6 @@ baseRawURL="https://raw.githubusercontent.com/neovim/neovim/master/runtime/doc/"
 #-------------------------------------------------------------------------------
 
 echo "Downloading doc files..."
-
 mkdir "./neovim-help"
 curl -s 'https://api.github.com/repos/neovim/neovim/git/trees/master?recursive=1' \
 	| grep -Eo "runtime/doc/.*.txt" \
@@ -16,21 +15,22 @@ curl -s 'https://api.github.com/repos/neovim/neovim/git/trees/master?recursive=1
 	done
 
 cd "./neovim-help" || exit 1
-
 echo
-echo "Parsing doc files..."
 
+echo "Parsing doc files..."
 # Example: options.html#'formatoptions'
-vimoptions=$(grep -Eo "\*'[.A-Za-z-]{2,}'\*(.*'.*')?" options.txt | tr -d "*'" | while read -r line ; do
+vimoptions=$(grep -Eo "\*'[()_.A-Za-z-]{2,}'\*(.*'.*')?" options.txt | tr -d "*'" | while read -r line ; do
 	opt=$(echo "$line" | cut -d" " -f1)
 	synonyms=$(echo "$line" | cut -d" " -f2-)
 	echo "${baseHelpURL}options.html#'$opt',$synonyms"
 done)
 
 # Example: map.html#mapleader
-anchors=$(grep -REo "\*([.:A-Za-z-]+|[0-9E]+)\*(.*\*.*\*)" | tr -d "*" | sed 's/txt:/html#/' | cut -c3- | while read -r line ; do
+anchors=$(grep -REo "\*([.:A-Za-z-]+|[0-9E]+)\*(.*\*.*\*)?" | tr -d "*" | sed 's/txt:/html#/' | cut -c3- | while read -r line ; do
 	url=$(echo "$line" | cut -d" " -f1)
-	synonyms=$(echo "$line" | cut -d" " -f2-)
+	if [[ "$line" =~ " " ]]; then
+		synonyms=",$(echo "$line" | cut -d" " -f2-)"
+	fi
 	echo "${baseHelpURL}$url,$synonyms"
 done)
 
@@ -48,4 +48,4 @@ echo "$sections" >> ../url-list.txt
 
 echo "$(wc -l ../url-list.txt | tr -d ' ') entries."
 cd ..
-rm -r "./neovim-help"
+# rm -r "./neovim-help"
