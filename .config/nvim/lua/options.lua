@@ -26,11 +26,12 @@ opt.colorcolumn = '+1' -- column next to textwidth option length
 
 -- files
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
-opt.autowrite = true -- automatically saves on switching buffer
 vim.cmd[[ let g:netrw_banner = 0 ]] -- no ugly menu for netrw
+opt.autochdir = true -- useful for telescope
 
+opt.autowrite = true -- automatically saves on switching buffer
 opt.updatetime = 5000 -- ms
-autocmd({"CursorHoldI", "CursorHold"}, function () -- autosave files
+autocmd({"CursorHold"}, function () -- autosave files
 	vim.cmd("update")
 end)
 
