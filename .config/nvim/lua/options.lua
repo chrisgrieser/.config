@@ -68,3 +68,6 @@ autocmd("BufWritePre",  function()
 	vim.cmd[[$s/\(.\)$/\1\r/e]] -- add line break at end if there is none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
 end )
 
+
+-- treat _ as word boundary https://superuser.com/a/244070
+opt.iskeyword = opt.iskeyword - {"_"}
