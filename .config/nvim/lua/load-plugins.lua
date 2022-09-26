@@ -49,19 +49,17 @@ packer.startup(function(use)
 
 	-- CHECK OUT LATER?
 	-- use {
-	-- 	'AckslD/nvim-whichkey-setup.lua',
-	-- 	requires = {'liuchengxu/vim-which-key'},
-	-- }
-	-- use {
 	-- 	'nvim-treesitter/nvim-treesitter-context',
 	-- 	requires = {'nvim-treesitter/nvim-treesitter'},
 	-- }
 
 	-- https://github.com/wbthomason/packer.nvim#performing-plugin-management-operations
 	if packer_bootstrap then
-		packer.sync() -- install, sync & update plugins on bootstraping
+		packer.sync() -- install, clean & update plugins on bootstraping
 	else
 		packer.install() -- auto-install missing plugins
+		packer.clean() -- remove unused plugins
+		-- TODO: add a function to occasionally auto-update
 	end
 end)
 

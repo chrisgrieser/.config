@@ -162,10 +162,15 @@ keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 
 --------------------------------------------------------------------------------
--- File Switching
-keymap('n', 'go', ':lua require("telescope.builtin").find_files()<CR>') -- File explorer in new tab
-keymap("n", "gr", ":filter /\\.\\w*$/ browse oldfiles<CR>") -- recent files
-keymap("n", "gb", ':lua require"telescope.builtin".buffers()<CR>') -- quicker switcher for open buffer
+-- FILES AND WINDOWS
+
+-- Telescope
+local function telescope(picker)
+	return ':lua require("telescope.builtin").'..picker..'()<CR>'
+end
+keymap("n", "go", telescope("find_files")) -- File explorer in new tab
+keymap("n", "gr", telescope("oldfiles")) -- recent files
+keymap("n", "gb", telescope("buffers")) -- quicker switcher for open buffer
 
 -- Using built-in vim commands
 -- keymap("n", "go", ":Explore<CR>") -- File explorer in new tab
@@ -179,7 +184,7 @@ keymap("n", "gT", ":bp<CR>")
 
 -- File Operations
 keymap("n", "<C-p>", ":let @+=@%<CR>") -- copy path of current file
-keymap("n", "<C-n>", ':let @+ = expand("%:t")') -- copy name of current file
+keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>') -- copy name of current file
 keymap("n", "<C-r>", ':Rename') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-l>", ":!open %:h<CR>") -- show file in default GUI file explorer
 keymap("n", "<C-d>", ":saveas %:h/Untitled.%:e<CR>") -- duplicate current file
