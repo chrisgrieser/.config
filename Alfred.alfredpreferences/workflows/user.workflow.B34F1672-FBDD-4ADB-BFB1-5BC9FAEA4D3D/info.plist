@@ -20,6 +20,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>0B1E6AA4-1922-4203-943D-62AA02786451</key>
 		<array>
@@ -69,6 +79,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</key>
 		<array>
@@ -79,6 +99,16 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -129,6 +159,19 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
+				<string>⌥: Copy to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>147B74A7-0701-400F-9336-3E942E809AB8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
 				<false/>
@@ -169,6 +212,16 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -224,6 +277,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>FA98F18D-55A1-40A3-A635-ACE7396D22C2</key>
 		<array>
@@ -237,6 +300,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>FE8C5299-418B-45DE-A554-50495EF4EE22</key>
 		<array>
@@ -247,6 +320,16 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -275,6 +358,55 @@
 	<string>Documentation Searches</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>css</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>./mdn-search.js "CSS $*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>MDN Search (CSS)</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>F244FBB2-D206-4A08-9404-12E9A2DB8944</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -377,55 +509,6 @@
 			<string>FA89C66A-A9E5-4D5A-BD31-C17F3285EE74</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>css</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>Searching...</string>
-				<key>script</key>
-				<string>./mdn-search.js "CSS $*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>MDN Search (CSS)</string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>F244FBB2-D206-4A08-9404-12E9A2DB8944</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -835,6 +918,25 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -990,6 +1092,27 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>147B74A7-0701-400F-9336-3E942E809AB8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -1127,25 +1250,6 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -1167,9 +1271,16 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>note</key>
 			<string>(re)create index</string>
 			<key>xpos</key>
-			<real>435</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>275</real>
+		</dict>
+		<key>147B74A7-0701-400F-9336-3E942E809AB8</key>
+		<dict>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>760</real>
 		</dict>
 		<key>150AD279-99E1-4CB0-9F90-F4395A3A116A</key>
 		<dict>
@@ -1178,9 +1289,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>note</key>
 			<string>custom cheatsheets</string>
 			<key>xpos</key>
-			<real>430</real>
+			<real>535</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>20</real>
 		</dict>
 		<key>1CA4905C-0482-4517-93A3-656ACFA985CD</key>
 		<dict>
@@ -1196,9 +1307,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>880</real>
+			<real>985</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>275</real>
 		</dict>
 		<key>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</key>
 		<dict>
@@ -1214,34 +1325,34 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>435</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>410</real>
 		</dict>
 		<key>4DEABEE2-4999-4872-A75E-DCBD98C663E1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>845</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>275</real>
 		</dict>
 		<key>516A8D31-7193-47FD-AD28-ADAE49601D02</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>600</real>
+			<real>705</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>160</real>
 		</dict>
 		<key>5320A9D6-5BED-4AC3-B729-7E0FCA44A54B</key>
 		<dict>
 			<key>xpos</key>
-			<real>655</real>
+			<real>760</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>590</real>
 		</dict>
 		<key>5B4488F5-41D3-4E76-A00D-E7878BC0BC40</key>
 		<dict>
@@ -1257,41 +1368,39 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>655</real>
+			<real>760</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>805</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>955</real>
+			<real>595</real>
 		</dict>
 		<key>852FEFE2-6998-4254-985C-75A2E3AEB5B2</key>
 		<dict>
 			<key>note</key>
 			<string>search for question</string>
 			<key>xpos</key>
-			<real>435</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>530</real>
 		</dict>
 		<key>9F684AD8-A54B-461A-A897-B3CC1713BCFA</key>
 		<dict>
 			<key>note</key>
 			<string>search for cheatsheet</string>
 			<key>xpos</key>
-			<real>435</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>670</real>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
 			<key>xpos</key>
-			<real>265</real>
+			<real>315</real>
 			<key>ypos</key>
 			<real>365</real>
 		</dict>
@@ -1300,9 +1409,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>710</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>410</real>
 		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>
@@ -1320,25 +1429,25 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>note</key>
 			<string>Open StackOverflow ShortURL</string>
 			<key>xpos</key>
-			<real>435</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>805</real>
 		</dict>
 		<key>D8D7E65D-1523-47A4-9964-845E4D2C0927</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>595</real>
+			<real>700</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>275</real>
 		</dict>
 		<key>EA3DF9A8-C9B9-4A5B-BE23-02A376F9B128</key>
 		<dict>
 			<key>xpos</key>
-			<real>585</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>620</real>
 		</dict>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<dict>
@@ -1356,9 +1465,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>note</key>
 			<string>Quicklook</string>
 			<key>xpos</key>
-			<real>650</real>
+			<real>755</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>20</real>
 		</dict>
 		<key>FA98F18D-55A1-40A3-A635-ACE7396D22C2</key>
 		<dict>
