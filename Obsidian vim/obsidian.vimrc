@@ -43,9 +43,9 @@ map L g$
 map J 7j
 map K 7k
 
-" cause easier to press, lol
-map [ {
-map ] }
+" quicker to press
+map s }
+map S }
 
 " Goto Mark
 nmap ä `
@@ -240,6 +240,7 @@ vmap R "0P
 
 " Change Quote Content
 nmap Q "_ci"
+nmap q "_ci'
 
 """"""""""""""""""""""
 " < Mode
@@ -328,10 +329,10 @@ nmap zR :unfoldall
 """"""""""""""""""""""
 " emulate vim-sneak (somewhat)
 " vim sneak
-exmap nextTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(true)}
-exmap prevTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(false)}
-nmap s :nextTwoCharMatch
-nmap S :prevTwoCharMatch
+" exmap nextTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(true)}
+" exmap prevTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(false)}
+" nmap s :nextTwoCharMatch
+" nmap S :prevTwoCharMatch
 
 """"""""""""""""""""""
 " < Sorting
