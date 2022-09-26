@@ -1,13 +1,10 @@
---------------------------------------------------------------------------------
 -- PACKER SETUP
 
--- https://bryankegley.me/posts/nvim-getting-started/
-
--- ensure that packer is installed
-local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+-- ensure that packer is installed https://bryankegley.me/posts/nvim-getting-started/
+local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	vim.api.nvim_command('!git clone --depth=1 https://github.com/wbthomason/packer.nvim '..install_path)
-	vim.api.nvim_command 'packadd packer.nvim'
+	vim.notify("Packer not installed. Installing Packer...", vim.log.levels.INFO)
+	vim.cmd('!git clone --depth=1 https://github.com/wbthomason/packer.nvim '..install_path)
 end
 vim.cmd('packadd packer.nvim')
 local packer = require('packer')
@@ -19,7 +16,10 @@ packer.init({
 --------------------------------------------------------------------------------
 
 packer.startup(function (use)
-	use 'folke/tokyonight.nvim'
+
+	use 'wbthomason/packer.nvim' -- packer manages itself
+
+	use 'folke/tokyonight.nvim' -- color scheme
 end )
 
 
