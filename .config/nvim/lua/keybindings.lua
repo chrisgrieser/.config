@@ -1,3 +1,4 @@
+-- leader
 vim.g.mapleader = ','
 
 local function rkeymap (mode, key, result)
@@ -10,6 +11,7 @@ end
 
 -- reload current file
 keymap("n", "<leader>r", ":write<CR>:source %<CR>") -- alternative: https://www.reddit.com/r/neovim/comments/puuskh/how_to_reload_my_lua_config_while_using_neovim/
+keymap("n", "<leader>p", ":PackerSync<CR>")
 
 --------------------------------------------------------------------------------
 
@@ -40,7 +42,6 @@ keymap("", "]", "}")
 -- don't pollute the register
 rkeymap("n", "x", '"_x')
 rkeymap("v", "x", '"_x')
-
 rkeymap("n", "c", '"_c')
 rkeymap("v", "c", '"_c')
 keymap("n", "C", '"_C')
@@ -51,15 +52,18 @@ keymap("n", "<Space>", 'ciw') -- change word
 keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", 'c')
 keymap("v", "<S-Space>", '"_d')
-keymap("n", "Q", 'ci"') -- change quote content
+keymap("n", "Q", 'ci"') -- change double quote content
+keymap("n", "q", "ci'") -- change single quote content
 keymap("n", "R", 'viw"0p') -- [R]eplace Word with register content
+
+-- Macros
+keymap("n", "<leader>q" ,"q")
 
 -- Misc
 keymap("v", "<BS>", '"_d') -- consistent with insert mode selection
 keymap("n", "!", "a <Esc>h") -- append space
 keymap("n", "U", "<C-r>") -- undo consistent
 keymap("v", "U", "<C-r>")
-keymap("v", "p", "_dP") -- do not override register when pasting on selection (still able to do so with P)
 keymap("n", "M", "J") -- [M]erge Lines
 keymap("v", "M", "J")
 
@@ -103,7 +107,8 @@ keymap("i", "<C-k>", '<Esc>Dli')
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
-keymap ("v", "V", "j") -- so double "V" selects two lines
+keymap("v", "V", "j") -- so double "V" selects two lines
+keymap("v", "p", '"_dP') -- do not override register when pasting on selection (still able to do so with P)
 
 --------------------------------------------------------------------------------
 -- LANGUAGE-SPECIFIC BINDINGS

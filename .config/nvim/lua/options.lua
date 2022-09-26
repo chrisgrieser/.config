@@ -65,10 +65,14 @@ opt.clipboard = 'unnamedplus'
 -- Mini-Linting on save
 autocmd("BufWritePre",  function()
 	vim.cmd[[%s/\s\+$//e]] -- remove trailing whitespaces
-	vim.cmd[[$s/\(.\)$/\1\r/e]] -- add line break at end if there is none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
+	vim.cmd[[$s/\(.\)$/\1\r\r/e]] -- add line break at end if there is none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
 end )
 
-
--- treat _ as word boundary https://superuser.com/a/244070
+-- treat _ as word boundary – https://superuser.com/a/244070
 opt.iskeyword = opt.iskeyword - {"_"}
+
+-- folding
+opt.foldmethod = "indent"
+
+
 
