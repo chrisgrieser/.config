@@ -28,10 +28,10 @@ vim.cmd('highlight ColorColumn ctermbg=0 guibg=black') -- https://www.reddit.com
 -- files
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.autowrite = true -- automatically saves on switching buffer
+vim.cmd[[ let g:netrw_banner = 0]] -- no menu for netrw
 
--- autosave
 opt.updatetime = 5000 -- ms
-autocmd({"CursorHoldI", "CursorHold"}, function ()
+autocmd({"CursorHoldI", "CursorHold"}, function () -- autosave files
 	vim.cmd("update")
 end)
 
@@ -71,3 +71,4 @@ end )
 
 -- treat _ as word boundary https://superuser.com/a/244070
 opt.iskeyword = opt.iskeyword - {"_"}
+

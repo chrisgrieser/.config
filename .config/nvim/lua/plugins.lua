@@ -22,19 +22,24 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	group = group,
 })
 
--- Protected call to make sure that packer is installed
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then return end
-
 --------------------------------------------------------------------------------
 
-return packer.startup(function(use)
+return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim' -- packer manages itself
+
 	use 'folke/tokyonight.nvim' -- color scheme
 
+	-- Editing Plugin
+	use 'tpope/vim-commentary'
+	use 'tpope/vim-surround'
+	use 'michaeljsmith/vim-indent-object'
+
 	-- https://github.com/wbthomason/packer.nvim#performing-plugin-management-operations
-	if packer_bootstrap then packer.sync() end -- install, sync & update plugins on bootstraping
-	packer.install() -- auto-install missing plugins
+	if packer_bootstrap then
+		require('packer').sync() -- install, sync & update plugins on bootstraping
+	else
+		require('packer').install() -- auto-install missing plugins
+	end
 end)
 
 
