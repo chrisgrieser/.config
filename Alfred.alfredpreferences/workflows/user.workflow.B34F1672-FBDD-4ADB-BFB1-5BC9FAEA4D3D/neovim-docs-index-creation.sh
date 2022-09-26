@@ -16,25 +16,31 @@ curl -s 'https://api.github.com/repos/neovim/neovim/git/trees/master?recursive=1
 
 cd "./neovim-help" || exit 1
 echo
-
 echo "Parsing doc files..."
-# Example: options.html#'formatoptions'
-vimoptions=$(grep -Eo "\*'[()_.A-Za-z-]{2,}'\*(.*'.*')?" options.txt | tr -d "*'" | while read -r line ; do
+
+# OPTIONS
+vimoptions=$(grep -Eo "\*'[.A-Za-z-]{2,}'\*(.*'.*')?" options.txt | tr -d "*'" | while read -r line ; do
 	opt=$(echo "$line" | cut -d" " -f1)
-	synonyms=$(echo "$line" | cut -d" " -f2-)
+	if [[ "$line" =~ " " ]]; then
+		synonyms=",$(echo "$line" | cut -d" " -f2-)"
+	else
+		synonyms=""
+	fi
 	echo "${baseHelpURL}options.html#'$opt',$synonyms"
 done)
 
-# Example: map.html#mapleader
-anchors=$(grep -REo "\*([.:A-Za-z-]+|[0-9E]+)\*(.*\*.*\*)?" | tr -d "*" | sed 's/txt:/html#/' | cut -c3- | while read -r line ; do
+# ANCHORS
+anchors=$(grep -REo "\*([()_.:A-Za-z-]+|[0-9E]+)\*(.*\*.*\*)?" | tr -d "*" | sed 's/txt:/html#/' | cut -c3- | while read -r line ; do
 	url=$(echo "$line" | cut -d" " -f1)
 	if [[ "$line" =~ " " ]]; then
 		synonyms=",$(echo "$line" | cut -d" " -f2-)"
+	else
+		synonyms=""
 	fi
 	echo "${baseHelpURL}$url,$synonyms"
 done)
 
-# Example: usr_04.html#04.1
+# SECTIONS
 sections=$(grep -Eo "\|[.0-9]*\|.*" usr_toc.txt | tr -d "|" | while read -r line ; do
 	file=$(echo "$line" | cut -c-2)
 	title="$line"

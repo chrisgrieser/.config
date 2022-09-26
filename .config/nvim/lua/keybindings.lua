@@ -98,7 +98,7 @@ keymap("i", "<C-e>", '<Esc>A')
 keymap("n", "<C-e>", 'A')
 keymap("i", "<C-a>", '<Esc>I')
 keymap("n", "<C-a>", 'I')
-keymap("i", "<C-k>", '<Esc>Di')
+keymap("i", "<C-k>", '<Esc>Dli')
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE

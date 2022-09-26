@@ -10,7 +10,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>55DFA247-EA56-4F3F-ADE4-39260BE8F5FD</string>
+				<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -20,11 +20,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
+				<string>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌘: Save</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -42,21 +42,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>79DED58A-3D58-4E4A-A77D-EC3AE4C80916</key>
+		<key>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</string>
+				<string>55DFA247-EA56-4F3F-ADE4-39260BE8F5FD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -70,6 +60,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>6CB17263-F5F7-4400-9735-3662C2962CDD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -92,48 +95,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ Saved as '{query}'</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>dock</string>
-				<key>subtext</key>
-				<string>current Dock Layout</string>
-				<key>text</key>
-				<string>Save as '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>79DED58A-3D58-4E4A-A77D-EC3AE4C80916</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -141,7 +102,9 @@
 				<key>script</key>
 				<string>dock_switcher_path="${dock_switcher_path/#\~/$HOME}"
 
-zsh "$dock_switcher_path" --save "$1"</string>
+zsh "$dock_switcher_path" --load "$1"
+
+echo "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -152,7 +115,7 @@ zsh "$dock_switcher_path" --save "$1"</string>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</string>
+			<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -229,6 +192,27 @@ zsh "$dock_switcher_path" --save "$1"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ Saved as '{query}'</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -236,7 +220,9 @@ zsh "$dock_switcher_path" --save "$1"</string>
 				<key>script</key>
 				<string>dock_switcher_path="${dock_switcher_path/#\~/$HOME}"
 
-zsh "$dock_switcher_path" --load "$1"</string>
+zsh "$dock_switcher_path" --save "$1"
+
+echo "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -247,7 +233,7 @@ zsh "$dock_switcher_path" --load "$1"</string>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
+			<string>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -355,9 +341,9 @@ brew services restart sketchybar</string>
 			<key>note</key>
 			<string>load</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>100</real>
 		</dict>
 		<key>18F1473F-54DE-48F6-B18D-838C540701AF</key>
 		<dict>
@@ -366,65 +352,54 @@ brew services restart sketchybar</string>
 			<key>note</key>
 			<string>reload</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>290</real>
 		</dict>
 		<key>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>240</real>
+			<real>220</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>15</real>
 		</dict>
 		<key>55DFA247-EA56-4F3F-ADE4-39260BE8F5FD</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>375</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>15</real>
 		</dict>
 		<key>6CB17263-F5F7-4400-9735-3662C2962CDD</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>240</real>
+			<real>235</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>420</real>
 		</dict>
 		<key>71149DFC-88DE-4E74-9FDA-F9336F759485</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>250</real>
+			<real>375</real>
 			<key>ypos</key>
-			<real>15</real>
-		</dict>
-		<key>79DED58A-3D58-4E4A-A77D-EC3AE4C80916</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>save as</string>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>65</real>
+			<real>150</real>
 		</dict>
 		<key>986C033D-6BCE-4098-9098-F4A46BF1703B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>240</real>
+			<real>235</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>290</real>
 		</dict>
 		<key>C4032949-EEE7-4394-B24E-63A22580686F</key>
 		<dict>
@@ -433,18 +408,18 @@ brew services restart sketchybar</string>
 			<key>note</key>
 			<string>restart</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>420</real>
 		</dict>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>220</real>
 			<key>ypos</key>
-			<real>135</real>
+			<real>150</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

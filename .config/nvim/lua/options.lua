@@ -29,19 +29,25 @@ vim.cmd('highlight ColorColumn ctermbg=0 guibg=black') -- https://www.reddit.com
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.autowrite = true -- automatically saves on switching buffer
 
+-- autosave
+opt.updatetime = 5000 -- ms
+autocmd({"CursorHoldI", "CursorHold"}, function ()
+	vim.cmd("update")
+end)
+
 -- editor
 opt.cursorline = true -- by default underline
 vim.cmd('highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black')
 opt.wrap = false
 opt.scrolloff = 11
-opt.sidescrolloff = 4
+opt.sidescrolloff = 5
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
 autocmd("BufEnter", function ()
 	-- "o" adds comment syntax when using `o` or `O` https://neovim.io/doc/user/change.html#fo-table
-	opt.formatoptions = opt.formatoptions - {"o", "c"}
+	opt.formatoptions = opt.formatoptions - {"o", "r"}
 end)
 
 -- status bar
