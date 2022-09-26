@@ -1,28 +1,35 @@
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 colors:
-  # COLORSCHEME: primary_dark.yaml
+  # COLORSCHEME: tokyo-night.yaml
+  # Default colors
   primary:
     # hard contrast: background = '0x1d2021'
-    background: '#231E1A'
-    foreground: '#E5CFB3'
+    background: '0x1a1b26'
+    foreground: '0xa9b1d6'
+
+  # Normal colors
   normal:
   # Bright colors
-    black: '#000000'
-    red: '#F54E42'
-    green: '#38B27D'
-    yellow: '#EBC400'
-    blue: '#4DADD5'
-    magenta: '#9F78DD'
-    cyan: '#3399C1'
-    white: '#F6E7D5'
+    black: '0x32344a'
+    red: '0xf7768e'
+    green: '0x9ece6a'
+    yellow: '0xe0af68'
+    blue: '0x7aa2f7'
+    magenta: '0xad8ee6'
+    cyan: '0x449dab'
+    white: '0x787c99'
+
+  # Bright colors
   bright:
-    black: '#000000'
-    yellow: '#F8D668'
-    red: '#FF675C'
-    green: '#38D687'
-    magenta: '#A993E6'
-    white: '#F6E7D5'
+    black: '0x444b6a'
+    red: '0xff7a93'
+    green: '0xb9f27c'
+    yellow: '0xff9e64'
+    blue: '0x7da6ff'
+    magenta: '0xbb9af7'
+    cyan: '0x0db9d7'
+    white: '0xacb0d0'
   dim:
     black: '0x31363b'
     red: '0x783228'
@@ -76,8 +83,8 @@ font:
   draw_bold_text_with_bright_colors: true
   builtin_box_drawing: true
   offset:
-    x: 2
-    y: 6
+    x: 0
+    y: 0
   glyph_offset:
     y: 3 # roughly equivalent to increasing line height
 window:
@@ -93,7 +100,7 @@ window:
     y: 6
   opacity: .96
 scrolling:
-  history: 2000
+  history: 4000
   multiplier: 3
 working_directory: /Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File
   Hub/
