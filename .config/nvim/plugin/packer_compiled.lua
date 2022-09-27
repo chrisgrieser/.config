@@ -139,7 +139,7 @@ if _G._packer.needs_bufread == true then
 end
 _G._packer.needs_bufread = false
 
-if should_profile then save_profiles() end
+if should_profile then save_profiles(1) end
 
 end)
 
