@@ -1,0 +1,18 @@
+---@meta
+
+---@class unknown
+---@class any
+---@class nil
+---@class boolean
+---@class number
+---#if VERSION >= 5.3 then
+---@class integer
+---#else
+---@alias integer number
+---#end
+---@class thread
+---@class table
+---@class string
+---@class userdata
+---@class lightuserdata
+---@class function

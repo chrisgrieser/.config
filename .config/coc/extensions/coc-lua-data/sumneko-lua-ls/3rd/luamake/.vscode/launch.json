@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lua",
+            "request": "launch",
+            "name": "Launch",
+            "luaexe": "luamake",
+            "path": null,
+            "cpath": null,
+            "program": "init"
+        }
+    ]
+}

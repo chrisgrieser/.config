@@ -1,0 +1,209 @@
+builddir = build/msvc
+bin = $builddir/bin
+obj = $builddir/obj
+luamake = luamake
+rule c_source_bee
+  command = cl /nologo /showIncludes -c $in /Fo$out /EHsc /Zc:__cplusplus $
+    /permissive- /O2 /GL /Zc:inline /W3 /WX /MD /I3rd/bee.lua/3rd/lua $
+    /I3rd/bee.lua/3rd/lua-seri /D_WIN32_WINNT=0x0601 /DNDEBUG 
+  description = Compile C   $out
+  deps = msvc
+build $obj/source_bee/lua-seri.obj: c_source_bee $
+    3rd/bee.lua/3rd/lua-seri/lua-seri.c
+rule cxx_source_bee
+  command = cl /nologo /showIncludes -c $in /Fo$out /EHsc /Zc:__cplusplus $
+    /permissive- /O2 /GL /Zc:inline /W3 /WX /MD /I3rd/bee.lua/bee/nonstd $
+    /I3rd/bee.lua /DBEE_INLINE /D_WIN32_WINNT=0x0601 /DNDEBUG /std:c++17
+  description = Compile C++ $out
+  deps = msvc
+build $obj/source_bee/error.obj: cxx_source_bee 3rd/bee.lua/bee/error.cpp
+build $obj/source_bee/fsevent_win.obj: cxx_source_bee $
+    3rd/bee.lua/bee/fsevent/fsevent_win.cpp
+build $obj/source_bee/endpoint.obj: cxx_source_bee $
+    3rd/bee.lua/bee/net/endpoint.cpp
+build $obj/source_bee/socket.obj: cxx_source_bee $
+    3rd/bee.lua/bee/net/socket.cpp
+build $obj/source_bee/format.obj: cxx_source_bee $
+    3rd/bee.lua/bee/nonstd/fmt/format.cc
+build $obj/source_bee/os.obj: cxx_source_bee 3rd/bee.lua/bee/nonstd/fmt/os.cc
+build $obj/source_bee/version_win.obj: cxx_source_bee $
+    3rd/bee.lua/bee/platform/version_win.cpp
+build $obj/source_bee/subprocess_win.obj: cxx_source_bee $
+    3rd/bee.lua/bee/subprocess/subprocess_win.cpp
+build $obj/source_bee/simplethread_win.obj: cxx_source_bee $
+    3rd/bee.lua/bee/thread/simplethread_win.cpp
+build $obj/source_bee/file_helper.obj: cxx_source_bee $
+    3rd/bee.lua/bee/utility/file_helper.cpp
+build $obj/source_bee/module_version_win.obj: cxx_source_bee $
+    3rd/bee.lua/bee/utility/module_version_win.cpp
+build $obj/source_bee/path_helper.obj: cxx_source_bee $
+    3rd/bee.lua/bee/utility/path_helper.cpp
+build $obj/source_bee/unicode_win.obj: cxx_source_bee $
+    3rd/bee.lua/bee/utility/unicode_win.cpp
+rule cxx_source_bee_1
+  command = cl /nologo /showIncludes -c $in /Fo$out /EHsc /Zc:__cplusplus $
+    /permissive- /O2 /GL /Zc:inline /W3 /WX /MD /I3rd/bee.lua/3rd/lua $
+    /I3rd/bee.lua/3rd/lua-seri /I3rd/bee.lua/bee/nonstd /I3rd/bee.lua $
+    /DBEE_INLINE /DBEE_STATIC /D_WIN32_WINNT=0x0601 $
+    /D_CRT_SECURE_NO_WARNINGS /DNDEBUG /std:c++17
+  description = Compile C++ $out
+  deps = msvc
+build $obj/source_bee/lua_filesystem.obj: cxx_source_bee_1 $
+    3rd/bee.lua/binding/lua_filesystem.cpp
+build $obj/source_bee/lua_filewatch.obj: cxx_source_bee_1 $
+    3rd/bee.lua/binding/lua_filewatch.cpp
+build $obj/source_bee/lua_platform.obj: cxx_source_bee_1 $
+    3rd/bee.lua/binding/lua_platform.cpp
+build $obj/source_bee/lua_serialization.obj: cxx_source_bee_1 $
+    3rd/bee.lua/binding/lua_serialization.cpp
+build $obj/source_bee/lua_socket.obj: cxx_source_bee_1 $
+    3rd/bee.lua/binding/lua_socket.cpp
+build $obj/source_bee/lua_subprocess.obj: cxx_source_bee_1 $
+    3rd/bee.lua/binding/lua_subprocess.cpp
+build $obj/source_bee/lua_thread.obj: cxx_source_bee_1 $
+    3rd/bee.lua/binding/lua_thread.cpp
+build $obj/source_bee/lua_time.obj: cxx_source_bee_1 $
+    3rd/bee.lua/binding/lua_time.cpp
+build $obj/source_bee/lua_unicode.obj: cxx_source_bee_1 $
+    3rd/bee.lua/binding/lua_unicode.cpp
+rule c_source_lua
+  command = cl /nologo /showIncludes -c $in /Fo$out /EHsc /Zc:__cplusplus $
+    /permissive- /O2 /GL /Zc:inline /W3 /WX /wd4267 /MD $
+    /D_WIN32_WINNT=0x0601 /DLUA_BUILD_AS_DLL /DNDEBUG 
+  description = Compile C   $out
+  deps = msvc
+build $obj/source_lua/lapi.obj: c_source_lua 3rd/bee.lua/3rd/lua/lapi.c
+build $obj/source_lua/lauxlib.obj: c_source_lua 3rd/bee.lua/3rd/lua/lauxlib.c
+build $obj/source_lua/lbaselib.obj: c_source_lua $
+    3rd/bee.lua/3rd/lua/lbaselib.c
+build $obj/source_lua/lcode.obj: c_source_lua 3rd/bee.lua/3rd/lua/lcode.c
+build $obj/source_lua/lcorolib.obj: c_source_lua $
+    3rd/bee.lua/3rd/lua/lcorolib.c
+build $obj/source_lua/lctype.obj: c_source_lua 3rd/bee.lua/3rd/lua/lctype.c
+build $obj/source_lua/ldblib.obj: c_source_lua 3rd/bee.lua/3rd/lua/ldblib.c
+build $obj/source_lua/ldebug.obj: c_source_lua 3rd/bee.lua/3rd/lua/ldebug.c
+build $obj/source_lua/ldo.obj: c_source_lua 3rd/bee.lua/3rd/lua/ldo.c
+build $obj/source_lua/ldump.obj: c_source_lua 3rd/bee.lua/3rd/lua/ldump.c
+build $obj/source_lua/lfunc.obj: c_source_lua 3rd/bee.lua/3rd/lua/lfunc.c
+build $obj/source_lua/lgc.obj: c_source_lua 3rd/bee.lua/3rd/lua/lgc.c
+build $obj/source_lua/linit.obj: c_source_lua 3rd/bee.lua/3rd/lua/linit.c
+build $obj/source_lua/liolib.obj: c_source_lua 3rd/bee.lua/3rd/lua/liolib.c
+build $obj/source_lua/llex.obj: c_source_lua 3rd/bee.lua/3rd/lua/llex.c
+build $obj/source_lua/lmathlib.obj: c_source_lua $
+    3rd/bee.lua/3rd/lua/lmathlib.c
+build $obj/source_lua/lmem.obj: c_source_lua 3rd/bee.lua/3rd/lua/lmem.c
+build $obj/source_lua/loadlib.obj: c_source_lua 3rd/bee.lua/3rd/lua/loadlib.c
+build $obj/source_lua/lobject.obj: c_source_lua 3rd/bee.lua/3rd/lua/lobject.c
+build $obj/source_lua/lopcodes.obj: c_source_lua $
+    3rd/bee.lua/3rd/lua/lopcodes.c
+build $obj/source_lua/loslib.obj: c_source_lua 3rd/bee.lua/3rd/lua/loslib.c
+build $obj/source_lua/lparser.obj: c_source_lua 3rd/bee.lua/3rd/lua/lparser.c
+build $obj/source_lua/lstate.obj: c_source_lua 3rd/bee.lua/3rd/lua/lstate.c
+build $obj/source_lua/lstring.obj: c_source_lua 3rd/bee.lua/3rd/lua/lstring.c
+build $obj/source_lua/lstrlib.obj: c_source_lua 3rd/bee.lua/3rd/lua/lstrlib.c
+build $obj/source_lua/ltable.obj: c_source_lua 3rd/bee.lua/3rd/lua/ltable.c
+build $obj/source_lua/ltablib.obj: c_source_lua 3rd/bee.lua/3rd/lua/ltablib.c
+build $obj/source_lua/ltm.obj: c_source_lua 3rd/bee.lua/3rd/lua/ltm.c
+build $obj/source_lua/lundump.obj: c_source_lua 3rd/bee.lua/3rd/lua/lundump.c
+build $obj/source_lua/lutf8lib.obj: c_source_lua $
+    3rd/bee.lua/3rd/lua/lutf8lib.c
+build $obj/source_lua/lvm.obj: c_source_lua 3rd/bee.lua/3rd/lua/lvm.c
+build $obj/source_lua/lzio.obj: c_source_lua 3rd/bee.lua/3rd/lua/lzio.c
+rule c_source_bootstrap
+  command = cl /nologo /showIncludes -c $in /Fo$out /EHsc /Zc:__cplusplus $
+    /permissive- /O2 /GL /Zc:inline /W3 /WX /MD /I3rd/bee.lua/3rd/lua $
+    /I3rd/bee.lua /D_WIN32_WINNT=0x0601 /DNDEBUG 
+  description = Compile C   $out
+  deps = msvc
+build $obj/source_bootstrap/utf8_crt.obj: c_source_bootstrap $
+    3rd/bee.lua/3rd/lua/utf8_crt.c
+rule cxx_source_bootstrap
+  command = cl /nologo /showIncludes -c $in /Fo$out /EHsc /Zc:__cplusplus $
+    /permissive- /O2 /GL /Zc:inline /W3 /WX /MD /I3rd/bee.lua/3rd/lua $
+    /I3rd/bee.lua /D_WIN32_WINNT=0x0601 /DNDEBUG /std:c++17
+  description = Compile C++ $out
+  deps = msvc
+build $obj/source_bootstrap/main.obj: cxx_source_bootstrap $
+    3rd/bee.lua/bootstrap/main.cpp
+build $obj/source_bootstrap/progdir.obj: cxx_source_bootstrap $
+    3rd/bee.lua/bootstrap/progdir.cpp
+rule link_luamake
+  command = cl /nologo $in /link /IMPLIB:$obj/luamake.lib advapi32.lib $
+    ws2_32.lib ole32.lib user32.lib version.lib wbemuuid.lib oleAut32.lib $
+    shell32.lib /DEBUG:NONE /LTCG /out:$out
+  description = Link    Exe $out
+build $bin/luamake.exe: link_luamake $obj/source_bootstrap/utf8_crt.obj $
+    $obj/source_bootstrap/main.obj $obj/source_bootstrap/progdir.obj $
+    $obj/source_bee/lua-seri.obj $obj/source_bee/error.obj $
+    $obj/source_bee/fsevent_win.obj $obj/source_bee/endpoint.obj $
+    $obj/source_bee/socket.obj $obj/source_bee/format.obj $
+    $obj/source_bee/os.obj $obj/source_bee/version_win.obj $
+    $obj/source_bee/subprocess_win.obj $obj/source_bee/simplethread_win.obj $
+    $obj/source_bee/file_helper.obj $obj/source_bee/module_version_win.obj $
+    $obj/source_bee/path_helper.obj $obj/source_bee/unicode_win.obj $
+    $obj/source_bee/lua_filesystem.obj $obj/source_bee/lua_filewatch.obj $
+    $obj/source_bee/lua_platform.obj $obj/source_bee/lua_serialization.obj $
+    $obj/source_bee/lua_socket.obj $obj/source_bee/lua_subprocess.obj $
+    $obj/source_bee/lua_thread.obj $obj/source_bee/lua_time.obj $
+    $obj/source_bee/lua_unicode.obj $obj/source_lua/lapi.obj $
+    $obj/source_lua/lauxlib.obj $obj/source_lua/lbaselib.obj $
+    $obj/source_lua/lcode.obj $obj/source_lua/lcorolib.obj $
+    $obj/source_lua/lctype.obj $obj/source_lua/ldblib.obj $
+    $obj/source_lua/ldebug.obj $obj/source_lua/ldo.obj $
+    $obj/source_lua/ldump.obj $obj/source_lua/lfunc.obj $
+    $obj/source_lua/lgc.obj $obj/source_lua/linit.obj $
+    $obj/source_lua/liolib.obj $obj/source_lua/llex.obj $
+    $obj/source_lua/lmathlib.obj $obj/source_lua/lmem.obj $
+    $obj/source_lua/loadlib.obj $obj/source_lua/lobject.obj $
+    $obj/source_lua/lopcodes.obj $obj/source_lua/loslib.obj $
+    $obj/source_lua/lparser.obj $obj/source_lua/lstate.obj $
+    $obj/source_lua/lstring.obj $obj/source_lua/lstrlib.obj $
+    $obj/source_lua/ltable.obj $obj/source_lua/ltablib.obj $
+    $obj/source_lua/ltm.obj $obj/source_lua/lundump.obj $
+    $obj/source_lua/lutf8lib.obj $obj/source_lua/lvm.obj $
+    $obj/source_lua/lzio.obj
+rule copy
+  command = powershell -NonInteractive -Command Copy-Item -Path $in$input $
+    -Destination $out | Out-Null
+  description = Copy $in$input $out
+  restat = 1
+build $bin/main.lua: copy | $bin/luamake.exe
+  input = 3rd/bee.lua/bootstrap/main.lua
+rule build_test
+  command = $bin/luamake.exe 3rd/bee.lua/test/test.lua
+build $builddir/_/test: build_test | $bin/luamake.exe copy_script
+  pool = console
+build luamake.exe: copy | $bin/luamake.exe
+  input = $bin/luamake.exe
+rule build_forward_lua
+  command = $luamake lua 3rd/bee.lua/bootstrap/forward_lua.lua $
+    3rd/bee.lua/3rd/lua $out luamake.exe msvc
+build 3rd/bee.lua/bootstrap/forward_lua.h: build_forward_lua $
+    3rd/bee.lua/bootstrap/forward_lua.lua 3rd/bee.lua/3rd/lua/lua.h $
+    3rd/bee.lua/3rd/lua/lauxlib.h 3rd/bee.lua/3rd/lua/lualib.h | copy_luamake
+rule c_lua54
+  command = cl /nologo /showIncludes -c $in /Fo$out /EHsc /Zc:__cplusplus $
+    /permissive- /O2 /GL /Zc:inline /W3 /WX /MD /I3rd/bee.lua/bootstrap $
+    /D_WIN32_WINNT=0x0601 /DNDEBUG 
+  description = Compile C   $out
+  deps = msvc
+build $obj/lua54/forward_lua.obj: c_lua54 3rd/bee.lua/bootstrap/forward_lua.c
+rule link_lua54
+  command = cl /nologo $in /link $obj/luamake.lib /DEBUG:NONE /LTCG $
+    /out:$out /DLL /IMPLIB:$obj/lua54/lua54.lib
+  description = Link    Dll $out
+  restat = 1
+build $bin/lua54.dll | $obj/lua54/lua54.lib: link_lua54 $
+    $obj/lua54/forward_lua.obj | forward_lua $bin/luamake.exe
+build tools/lua54.dll: copy | $obj/lua54/lua54.lib $bin/lua54.dll
+  input = $bin/lua54.dll
+build luamake: phony $bin/luamake.exe
+build copy_script: phony $bin/main.lua
+build test: phony $builddir/_/test
+build copy_luamake: phony luamake.exe
+build forward_lua: phony 3rd/bee.lua/bootstrap/forward_lua.h
+build 3rd/bee.lua/bootstrap/forward_lua.c: phony $
+    3rd/bee.lua/bootstrap/forward_lua.h
+build lua54: phony $bin/lua54.dll
+build copy_lua54: phony tools/lua54.dll
+default test copy_luamake copy_lua54

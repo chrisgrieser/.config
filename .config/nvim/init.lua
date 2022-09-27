@@ -9,4 +9,5 @@ require("packer-setup")
 
 require("appearance")
 require("plugin-specific")
+require("lsp-setup")
 
