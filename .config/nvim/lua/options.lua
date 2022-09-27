@@ -26,8 +26,7 @@ opt.colorcolumn = '+1' -- column next to textwidth option length
 
 -- files
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
-vim.cmd[[ let g:netrw_banner = 0 ]] -- no ugly menu for netrw
-opt.autochdir = true -- useful for telescope
+-- opt.autochdir = true -- makes telescope more usable
 
 opt.autowrite = true -- automatically saves on switching buffer
 opt.updatetime = 5000 -- ms

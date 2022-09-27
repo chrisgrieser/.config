@@ -113,19 +113,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>39F3E0B0-7C6A-48D6-AFF6-395C7D35D544</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>ABD27862-56E3-4A86-8F79-1552B8C665C3</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4DEABEE2-4999-4872-A75E-DCBD98C663E1</key>
 		<array>
 			<dict>
@@ -792,48 +779,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>va</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Vim Plugin Search: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>39F3E0B0-7C6A-48D6-AFF6-395C7D35D544</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://vimawesome.com/?q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>ABD27862-56E3-4A86-8F79-1552B8C665C3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1330,15 +1275,6 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
-		<key>39F3E0B0-7C6A-48D6-AFF6-395C7D35D544</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>540</real>
-			<key>ypos</key>
-			<real>410</real>
-		</dict>
 		<key>4DEABEE2-4999-4872-A75E-DCBD98C663E1</key>
 		<dict>
 			<key>colorindex</key>
@@ -1413,15 +1349,6 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<real>315</real>
 			<key>ypos</key>
 			<real>365</real>
-		</dict>
-		<key>ABD27862-56E3-4A86-8F79-1552B8C665C3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>700</real>
-			<key>ypos</key>
-			<real>410</real>
 		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>

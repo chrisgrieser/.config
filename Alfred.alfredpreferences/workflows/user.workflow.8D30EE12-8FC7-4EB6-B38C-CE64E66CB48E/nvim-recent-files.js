@@ -11,14 +11,13 @@ const jsonArray = app.doShellScript("zsh ./nvim-recent-files.sh")
 	.filter(line => line.startsWith("/")) // remove some buggy output
 	.map(filepath => {
 
-		const temp = filepath.split("/");
-		const fileName = temp.pop();
-		const parentFolder = temp.pop();
+		const fileName = filepath.split("/").pop();
+		const twoParents = filepath.replace(/.*\/(.*\/.*)\/.*$/, "$1");
 
 		return {
 			"title": fileName,
 			"match": alfredMatcher (fileName),
-			"subtitle": "▸ " + parentFolder,
+			"subtitle": "▸ " + twoParents,
 			"type": "file:skipcheck",
 			"icon": {
 				"type": "fileicon",
