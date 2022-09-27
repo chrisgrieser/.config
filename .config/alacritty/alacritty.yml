@@ -63,7 +63,7 @@ colors:
 
   # Normal colors
 font:
-  size: 26
+  size: 25
 
   normal:
     family: JetBrainsMonoNL Nerd Font
