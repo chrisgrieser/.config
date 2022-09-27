@@ -42,6 +42,10 @@ function update (){
 	print-section "NEOVIM"
 	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' # https://github.com/wbthomason/packer.nvim#bootstrapping
 
+	print-section "OBSIDIAN"
+	open "obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian42-brat%253ABRAT-checkForUpdatesAndUpdate"
+	open "obsidian://advanced-uri?vault=Main%20Vault&updateplugins=true"
+
 	print-section "HOMEBREW"
 	print-section "update"
 	brew update

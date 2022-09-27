@@ -30,8 +30,8 @@ keymap("n", "<leader>p", ":PackerSync<CR>")
 keymap("n", "<leader>lc", ":let @+=@:<CR>")
 
 -- search options and their values
-keymap("n", "<leader>o", telescope("vim_options()"))
-keymap("n", "<leader>T", telescope("colorscheme()"))
+keymap("n", "<leader>o", telescope("vim_options{prompt_prefix='⚙️'}"))
+keymap("n", "<leader>T", telescope("colorscheme{enable_preview = true, prompt_prefix='🎨'}"))
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -179,10 +179,10 @@ keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 -- FILES AND WINDOWS
 
 -- file switchers
-keymap("n", "go", telescope("find_files({cwd='%:p:h'})")) -- [o]pen file in parent-directory
-keymap("n", "gO", telescope("find_files({cwd='%:p:h:h'})")) -- [o]pen file in grandparent-directory
-keymap("n", "gr", telescope("oldfiles()")) -- [r]ecent files
-keymap("n", "gb", telescope("buffers()")) -- open [b]uffer
+keymap("n", "go", telescope("find_files{cwd='%:p:h', prompt_prefix='📂'}")) -- [o]pen file in parent-directory
+keymap("n", "gO", telescope("find_files{cwd='%:p:h:h', prompt_prefix='🆙📂'}")) -- [o]pen file in grandparent-directory
+keymap("n", "gr", telescope("oldfiles{prompt_prefix='🕔'}")) -- [r]ecent files
+keymap("n", "gb", telescope("buffers{prompt_prefix='📑'}")) -- open [b]uffer
 
 -- Buffers
 keymap("", "<C-Tab>", ":bn<CR>")

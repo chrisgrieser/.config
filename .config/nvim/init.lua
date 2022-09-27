@@ -3,7 +3,7 @@ vim.opt.runtimepath:append(', "~/.config/nvim/lua"') -- apparently required for 
 
 require("options")
 require("keybindings")
-require("load-plugins")
+require("packer-setup")
 
 require("appearance")
 require("plugin-specific")

@@ -17,9 +17,10 @@ function pluginList (use)
 	}
 
 	-- Editing
-	use 'tpope/vim-commentary' -- gcc
-	use 'tpope/vim-surround' -- ysiw"
-	use 'michaeljsmith/vim-indent-object' -- ii & ai text objects
+	use 'tpope/vim-commentary' -- comments
+	use 'tpope/vim-surround' -- surround with punctuation
+	use 'wellle/targets.vim' -- various text object improvements
+	use 'michaeljsmith/vim-indent-object' -- indention-based text objects
 
 	-- check out later?
 	-- use {
