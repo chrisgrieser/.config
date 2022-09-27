@@ -166,15 +166,12 @@ keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 
 -- Telescope
 local function telescope(picker)
-	return ':lua require("telescope.builtin").'..picker..'()<CR>'
+	return ':lua require("telescope.builtin").'..picker..'<CR>'
 end
-keymap("n", "go", telescope("find_files")) -- [o]pen file in current directory (should be used with 'autochdir' option)
-keymap("n", "gr", telescope("oldfiles")) -- [r]ecent files
-keymap("n", "gb", telescope("buffers")) -- open [b]uffer
-
--- Using built-in vim commands
--- keymap("n", "go", ":Explore<CR>")
--- keymap("n", "gb", ":ls<CR>:buffer<Space>")
+keymap("n", "go", telescope("find_files({cwd='%:h'})")) -- [o]pen file in current directory (should be used with 'autochdir' option)
+keymap("n", "gO", telescope("find_files({cwd='%:p:h'})")) -- [o]pen file in current directory (should be used with 'autochdir' option)
+keymap("n", "gr", telescope("oldfiles()")) -- [r]ecent files
+keymap("n", "gb", telescope("buffers()")) -- open [b]uffer
 
 -- Buffers
 keymap("", "<C-Tab>", ":bn<CR>")
