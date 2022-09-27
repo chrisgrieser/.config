@@ -14,36 +14,14 @@ export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 
 BREWDUMP_PATH="$DOTFILE_FOLDER/Installed Apps and Packages/"
 
+# aliases already get tab-completion
 alias bh='brew home'
 alias bl='brew list'
 alias bi='brew install'
 alias br='brew reinstall'
 alias bu='brew --zap uninstall'
-# aliases already get tab-completion
 
 # -----------------------------------------------------
-
-# Uninstaller for Mac App Store Apps
-function un () {
-	local APP="$*"
-	# shellcheck disable=SC2296
-	APP="${(C)APP}" # capitalize input
-	if [[ -e "/Applications/$APP.app" ]]; then
-		open -a "AppCleaner" "/Applications/$APP.app/"
-		return 0
-	fi
-
-	local SELECTED=""
-	SELECTED=$( mas list | cut -c13- | cut -d"(" -f1 | sed 's/ *$//g' | fzf \
-	           -0 \
-	           --query "$1" \
-	           --height=80% \
-	           --preview-window=right:70% \
-	           )
-	[[ "$SELECTED" == "" ]] && return 130
-	killall "$SELECTED" || true
-	open -a "AppCleaner" "/Applications/$SELECTED.app/"
-}
 
 function print-section () {
 	echo
@@ -61,10 +39,15 @@ function dump () {
 }
 
 function update (){
+	print-section "NEOVIM"
+	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' # https://github.com/wbthomason/packer.nvim#bootstrapping
+
 	print-section "HOMEBREW"
+	print-section "update"
 	brew update
+	print-section "upgrade"
 	brew upgrade
-	print-section "Cleanup"
+	print-section "cleanup"
 	brew cleanup
 
 	print-section "MAC APP STORE"

@@ -30,7 +30,15 @@ if (not status_ok) then return end
 --------------------------------------------------------------------------------
 
 require("plugin-list")
-packer.startup(pluginList) -- load all the plugins
+packer.startup({
+	pluginList, -- load all the plugins
+	config = {
+		profile = {
+			enable = true,
+			threshold = 1
+		},
+	}
+})
 
 -- https://github.com/wbthomason/packer.nvim#performing-plugin-management-operations
 packer.install() -- auto-install missing plugins

@@ -31,7 +31,7 @@ keymap("n", "<leader>lc", ":let @+=@:<CR>")
 
 -- search options and their values
 keymap("n", "<leader>o", telescope("vim_options()"))
-keymap("n", "<leader>o", telescope("color_scheme()"))
+keymap("n", "<leader>T", telescope("colorscheme()"))
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -56,7 +56,7 @@ keymap("", "S", "{")
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
-keymap("n", "gs", telescope("current_buffer_fuzzy_find()"))
+keymap("n", "g-", telescope("current_buffer_fuzzy_find()")) -- alternative search
 
 --------------------------------------------------------------------------------
 -- EDITING

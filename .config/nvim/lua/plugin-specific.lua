@@ -5,5 +5,5 @@ local g = vim.g
 g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
 
 -- netrw
-g.netrw_list_hide= '.*\\.DS_Store$,./$'
+g.netrw_list_hide= '.*\\.DS_Store$,^./$' -- hide files createed by macOS & current directory
 g.netrw_banner = 0 -- no ugly menu for netrw
