@@ -20,15 +20,20 @@ vim.cmd('highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black')
 -- LUA LINE
 
 local function alternateFile()
-	local buffers = vim.cmd("ls")
-	return [[hello world]]
+	local altFile = vim.api.nvim_exec('echo expand("#:t")', true)
+	local currentFile = vim.api.nvim_exec('echo expand("%:t")', true)
+	if altFile ~= currentFile then
+		return altFile
+	else
+		return ""
+	end
 end
 
 require('lualine').setup {
 	sections = {
 		lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
 		lualine_b = {
-			{'filetype', icon_only = true, colored = false, icon = { align = "left"}  },
+			{'filetype', icon_only = true, colored = false  },
 			{'filename', symbols = {modified = "+"}, padding = 0 }
 		},
 		lualine_c = {{ alternateFile }},

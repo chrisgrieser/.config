@@ -51,7 +51,7 @@ end)
 
 -- status bar
 opt.showcmd = true
-opt.laststatus = 3 -- show always but only on last window
+opt.laststatus = 2 -- show always
 -- opt.cmdheight = 0 -- TODO: uncomment with neovim 0.8 adding support for it
 
 -- tab bar
@@ -73,6 +73,6 @@ opt.iskeyword = opt.iskeyword + {"-"} -- so ciw changes kebap-base vars as well
 
 -- folding
 opt.foldmethod = "indent"
-opt.nofoldenable = true
+opt.foldenable = false
 
 
