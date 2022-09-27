@@ -95,33 +95,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>dock_switcher_path="${dock_switcher_path/#\~/$HOME}"
-
-zsh "$dock_switcher_path" --load "$1"
-
-echo "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -139,6 +112,31 @@ echo "$1"</string>
 			<string>55DFA247-EA56-4F3F-ADE4-39260BE8F5FD</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>dock_switcher_path="${dock_switcher_path/#\~/$HOME}"
+
+zsh "$dock_switcher_path" --load "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -220,9 +218,7 @@ echo "$1"</string>
 				<key>script</key>
 				<string>dock_switcher_path="${dock_switcher_path/#\~/$HOME}"
 
-zsh "$dock_switcher_path" --save "$1"
-
-echo "$1"</string>
+zsh "$dock_switcher_path" --save "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>

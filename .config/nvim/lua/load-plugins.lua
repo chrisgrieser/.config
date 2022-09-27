@@ -18,7 +18,7 @@ local packer_bootstrap = ensure_packer()
 local group = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePost", {
 	command = "source <afile> | PackerSync",
-	pattern = "load-plugins.lua", -- the name of your plugins file
+	pattern = "plugins-list.lua", -- the name of the plugins file
 	group = group,
 })
 
@@ -27,40 +27,13 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 local status_ok, packer = pcall(require, "packer")
 if (not status_ok) then return end
 
-packer.startup(function(use)
-	use 'wbthomason/packer.nvim' -- packer manages itself
+--------------------------------------------------------------------------------
 
-	-- Appearance
-	use 'folke/tokyonight.nvim' -- color scheme
-	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
-	use "unblevable/quick-scope" -- highlight for f and t movements
+require("plugin-list")
+packer.startup(pluginList) -- load all the plugins
 
-	-- Utility
-	use 'farmergreg/vim-lastplace' -- remember cursor position
-	use {
-		'nvim-telescope/telescope.nvim',
-		requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
-	}
-
-	-- Editing
-	use 'tpope/vim-commentary'
-	use 'tpope/vim-surround'
-	use 'michaeljsmith/vim-indent-object'
-
-	-- CHECK OUT LATER?
-	-- use {
-	-- 	'nvim-treesitter/nvim-treesitter-context',
-	-- 	requires = {'nvim-treesitter/nvim-treesitter'},
-	-- }
-
-	-- https://github.com/wbthomason/packer.nvim#performing-plugin-management-operations
-	if packer_bootstrap then
-		packer.sync() -- install, clean & update plugins on bootstraping
-	else
-		packer.install() -- auto-install missing plugins
-		packer.clean() -- remove unused plugins
-		-- TODO: add a function to occasionally auto-update
-	end
-end)
+-- https://github.com/wbthomason/packer.nvim#performing-plugin-management-operations
+packer.install() -- auto-install missing plugins
+packer.clean() -- remove unused plugins
 
 

@@ -15,7 +15,7 @@ if [[ "$DEVICE_NAME" =~ "Office" ]]; then
 	Y=40
 	LINES=22
 	FONT_SIZE=23
-elif [[ "$DEVICE_NAME" =~ "Home" ]] ; then
+else
 	X=550
 	Y=100
 	LINES=28

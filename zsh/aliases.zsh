@@ -3,11 +3,10 @@
 
 # configurations
 alias .star='open $STARSHIP_CONFIG'
-alias .nvim='nvim $HOME/.config/nvim/init.lua'
+alias .nv='nvim $HOME/.config/nvim/lua'
 alias r='exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias bar='sketchybar --update && echo sketchybar updated'
 alias barr='brew services restart sketchybar'
-
 
 # z & cd
 alias zz='z -' # back to last dir
@@ -16,6 +15,10 @@ alias ..="z .."
 alias ...="z ../.."
 alias ....="z ../../.."
 alias .....="z ../../../.."
+
+# vim
+alias vim='nvim'
+alias nv='nvim'
 
 # utils
 alias q='exit'

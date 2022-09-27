@@ -1072,7 +1072,7 @@ subl --command toggle_side_bar</string>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>gr</string>
+				<string>configs</string>
 				<key>subtext</key>
 				<string>Enter GitHub Topic</string>
 				<key>text</key>
@@ -1119,7 +1119,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
-			<real>960</real>
+			<real>885</real>
 		</dict>
 		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
 		<dict>
@@ -1148,7 +1148,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>845</real>
+			<real>770</real>
 		</dict>
 		<key>2272192E-81AD-4662-A0D4-58300A23360E</key>
 		<dict>
@@ -1204,7 +1204,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>960</real>
+			<real>885</real>
 		</dict>
 		<key>7788A2EF-46C7-48E7-A073-C7938913B87D</key>
 		<dict>
@@ -1215,7 +1215,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>960</real>
+			<real>885</real>
 		</dict>
 		<key>78077732-42EB-4967-885E-DF4366FAB695</key>
 		<dict>

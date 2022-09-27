@@ -100,6 +100,7 @@ matches:
       const VAR = $.getenv("VAR").replace(/^~/, app.pathTo("home folder"));
 
       const jsonArray = JSON.parse(readFile(VAR))
+      	.split("\r")
       	.map(item => {
 
       		return {
