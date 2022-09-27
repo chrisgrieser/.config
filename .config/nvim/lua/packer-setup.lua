@@ -27,6 +27,7 @@ packer.clean() -- remove unused plugins
 -- Keymaps: Update [P]lugins
 keymap("n", "<leader>P", ":PackerStatus<CR>")
 keymap("n", "<leader>p", function()
+	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	require("plugin-list")
 	packer.startup(pluginList)
 	packer.sync()

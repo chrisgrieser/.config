@@ -194,11 +194,12 @@ keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 keymap("nv", "gt", "<C-^>") -- switch to alt-file (use vim's buffer model instead of tabs)
 
 -- File Operations
+-- <C-R>=expand("%:t")<CR> -> expands the current filename in the command line
 keymap("n", "<C-p>", ':let @+=@%<CR>:echo "Copied:"expand("%")<CR>') -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
-keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
+keymap("n", "<C-r>", ':Rename <C-R>=expand("%:t")<CR>') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-l>", ":!open %:h<CR>") -- show file in default GUI file explorer
-keymap("n", "<C-d>", ":Duplicate ") -- duplicate current file
+keymap("n", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
 keymap("n", "<leader>X", ":Chmod +x<CR>") -- execution permission
 
 -- Sorting
