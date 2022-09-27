@@ -1,37 +1,19 @@
--- leader
+-- META
+require("utils")
 vim.g.mapleader = ','
 
-local function keymap (modes, key, result)
-	if #modes < 2 then -- < 2 to account for empty mode (= ":map")
-		vim.keymap.set(modes, key, result)
-	else
-		-- set for every mode in the mode-arg
-		for i=1, #modes do
-			local mode = modes:sub(i, i)
-			vim.keymap.set(mode, key, result)
-		end
-	end
-end
-
-local function telescope(picker)
-	return ':lua require("telescope.builtin").'..picker..'<CR>'
-end
-
---------------------------------------------------------------------------------
--- META
-
 -- [r]eload current config file
-keymap("n", "<leader>r", ":write<CR>:source %<CR>") -- alternative: https://www.reddit.com/r/neovim/comments/puuskh/how_to_reload_my_lua_config_while_using_neovim/
-
--- Update [P]lugins
-keymap("n", "<leader>p", ":PackerSync<CR>")
+keymap("n", "<leader>r", ':write<CR>:source %<CR>:echo "Reloaded."<CR>') -- alternative: https://www.reddit.com/r/neovim/comments/puuskh/how_to_reload_my_lua_config_while_using_neovim/
 
 -- copy [l]ast ex[c]ommand
-keymap("n", "<leader>lc", ":let @+=@:<CR>")
+keymap("n", "<leader>lc", ':let @+=@:<CR>:echo @:<CR>')
 
 -- search options and their values
 keymap("n", "<leader>o", telescope("vim_options{prompt_prefix='⚙️'}"))
 keymap("n", "<leader>T", telescope("colorscheme{enable_preview = true, prompt_prefix='🎨'}"))
+
+-- quicker quitting
+keymap("n", "ZZ", ":wall<CR>:q<CR>")
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -52,10 +34,18 @@ keymap("", "K", "7k")
 keymap("", "s", "}")
 keymap("", "S", "{")
 
+-- Multi-Cursor, https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
+-- changing these seems to require full restart (not only re-sourcing)
+vim.cmd[[
+	let g:VM_maps = {}
+	let g:VM_maps['Find Under'] = '*'
+]]
+
 -- Misc
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
+keymap("", "<leader>m", ":nohl<CR>") -- [m]ute highlights
 keymap("n", "g-", telescope("current_buffer_fuzzy_find{prompt_prefix='🔍'}")) -- alternative search
 
 --------------------------------------------------------------------------------
@@ -73,8 +63,10 @@ keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
-keymap("n", "Q", 'ciq') -- change [Q]uote content (vim.target)
-keymap("n", "0", '"_cib') -- change parenthesis content (vim.target)
+keymap("n", "Q", "\"_ci'") -- change single [Q]uote content
+keymap("n", "q", '"_ci"') -- change double [q]uote content
+keymap("n", "P", '"_ci)') -- change [p]arenthesis
+keymap("n", "0", '"_ci}') -- change braces
 keymap("n", "R", 'viwP') -- [R]eplace Word with register content
 
 -- Macros
@@ -183,12 +175,12 @@ keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 keymap("n", "go", telescope("find_files{cwd='%:p:h', prompt_prefix='📂', hidden=true}")) -- [o]pen file in parent-directory
 keymap("n", "gO", telescope("find_files{cwd='%:p:h:h', prompt_prefix='🆙📂'}")) -- [o]pen file in grandparent-directory
 keymap("n", "gr", telescope("oldfiles{prompt_prefix='🕔'}")) -- [r]ecent files
-keymap("n", "gb", telescope("buffers{prompt_prefix='📑'}")) -- open [b]uffer
+keymap("n", "gb", telescope("buffers{prompt_prefix='📑',ignore_current_buffer = true}")) -- open [b]uffer
 
 -- Buffers
 keymap("", "<C-Tab>", "<C-^>")
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
-keymap("nv", "gt", "<C-^>") -- switch to alt-file, use vim's buffer model instead of tabs
+keymap("nv", "gt", "<C-^>") -- switch to alt-file (use vim's buffer model instead of tabs)
 
 -- File Operations
 keymap("n", "<C-p>", ":let @+=@%<CR>") -- copy path of current file

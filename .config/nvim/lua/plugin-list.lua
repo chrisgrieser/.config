@@ -1,15 +1,11 @@
-return function (use)
+function pluginList (use)
 	use 'wbthomason/packer.nvim' -- packer manages itself
 
 	-- Appearance
 	use 'folke/tokyonight.nvim' -- color scheme
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use "unblevable/quick-scope" -- highlight for f and t movements
-
-	use {
-		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons' }
-	}
+	use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
 
 	-- Utility
 	use 'farmergreg/vim-lastplace' -- remember last cursor position on file re-opening
@@ -24,9 +20,9 @@ return function (use)
 
 	-- Editing
 	use 'tpope/vim-commentary' -- comments
-	-- use 'tpope/vim-commentary' -- comments
+	use 'tpope/vim-abolish' -- used for the case conversions
+	use 'mg979/vim-visual-multi' -- multi-cursor
 	use 'tpope/vim-surround' -- surround with punctuation
-	use 'wellle/targets.vim' -- various text object improvements
 	use 'michaeljsmith/vim-indent-object' -- indention-based text objects
 
 	-- check out later?
@@ -36,6 +32,5 @@ return function (use)
 	-- }
 
 end
-
 
 

@@ -1,9 +1,6 @@
 -- Default vim settings: https://neovim.io/doc/user/vim_diff.html
+require("utils")
 -------------------------------------------------------------------------------
-local opt = vim.opt
-local function autocmd(eventName, callbackFunction)
-	vim.api.nvim_create_autocmd(eventName, { callback = callbackFunction })
-end
 
 -- search
 opt.showmatch = true
@@ -32,7 +29,7 @@ opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.autowrite = true -- automatically saves on switching buffer
 opt.updatetime = 5000 -- ms
 autocmd({"CursorHold"}, function () -- autosave files
-	vim.cmd("update")
+	cmd("update")
 end)
 
 -- editor
@@ -50,29 +47,30 @@ autocmd("BufEnter", function ()
 end)
 
 -- status bar
-opt.showcmd = true
+opt.showcmd = true -- keychords pressed
+opt.showmode = false -- don't show "-- Insert --"
 opt.laststatus = 2 -- show always
 -- opt.cmdheight = 0 -- TODO: uncomment with neovim 0.8 adding support for it
 
--- tab bar
-opt.guitablabel = "[%N] %t %M"
-opt.switchbuf = "useopen,usetab"
-
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
-vim.cmd[[au TextYankPost * silent! lua vim.highlight.on_yank{timeout = 3000} ]] -- highlighted yank
+cmd[[au TextYankPost * silent! lua vim.highlight.on_yank{timeout = 3000} ]] -- highlighted yank
 
 -- Mini-Linting on save
 autocmd("BufWritePre",  function()
-	vim.cmd[[%s/\s\+$//e]] -- remove trailing whitespaces
-	vim.cmd[[$s/\(.\)$/\1\r/e]] -- add line breaks at end if there is-none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
+	cmd[[%s/\s\+$//e]] -- remove trailing whitespaces
+	cmd[[$s/\(.\)$/\1\r/e]] -- add line breaks at end if there is-none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
 end )
 
--- treat "_" as word boundary – https://superuser.com/a/244070
-opt.iskeyword = opt.iskeyword + {"-"} -- so ciw changes kebap-base vars as well
+-- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070
+opt.iskeyword = opt.iskeyword + {"-"}
 
 -- folding
 opt.foldmethod = "indent"
 opt.foldenable = false
+
+-- title (for Window Managers and Espanso)
+opt.title = true
+
 
 

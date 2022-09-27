@@ -104,11 +104,6 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/quick-scope",
     url = "https://github.com/unblevable/quick-scope"
   },
-  ["targets.vim"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/targets.vim",
-    url = "https://github.com/wellle/targets.vim"
-  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -118,6 +113,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
+  },
+  ["vim-abolish"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-abolish",
+    url = "https://github.com/tpope/vim-abolish"
   },
   ["vim-commentary"] = {
     loaded = true,
@@ -134,10 +134,20 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-lastplace",
     url = "https://github.com/farmergreg/vim-lastplace"
   },
+  ["vim-startuptime"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-startuptime",
+    url = "https://github.com/dstein64/vim-startuptime"
+  },
   ["vim-surround"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
+  },
+  ["vim-visual-multi"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
+    url = "https://github.com/mg979/vim-visual-multi"
   }
 }
 
