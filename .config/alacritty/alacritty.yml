@@ -84,7 +84,7 @@ font:
     x: 0
     y: 0
   glyph_offset:
-    y: 3 # roughly equivalent to increasing line height
+    y: 0 # roughly equivalent to increasing line height
 window:
   decorations: buttonless
   position:

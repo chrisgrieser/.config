@@ -50,8 +50,7 @@ end)
 
 -- status bar
 opt.showcmd = true
-opt.showmode = true
-opt.laststatus = 0
+opt.laststatus = 3
 
 -- tab bar
 opt.guitablabel = "[%N] %t %M"
