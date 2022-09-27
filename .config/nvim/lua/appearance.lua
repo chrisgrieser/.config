@@ -25,7 +25,7 @@ local function alternateFile()
 	local altFile = api.nvim_exec('echo expand("#:t")', true)
 	local thisFile = api.nvim_exec('echo expand("%:t")', true)
 	if altFile ~= thisFile then
-		return "#"..altFile
+		return "# "..altFile
 	else
 		return ""
 	end
@@ -33,13 +33,13 @@ end
 
 local function currentFile()
 	local thisFile = api.nvim_exec('echo expand("%:t")', true)
-	return "%"..thisFile
+	return "%% "..thisFile
 end
 
 require('lualine').setup {
 	sections = {
 		lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
-		-- lualine_b = {{ currentFile }},
+		lualine_b = {{ currentFile }},
 		lualine_c = {{ alternateFile }},
 		lualine_x = {''},
 		lualine_y = {'diagnostics'},

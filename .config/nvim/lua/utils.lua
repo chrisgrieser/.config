@@ -5,7 +5,7 @@ api = vim.api
 fn = vim.fn
 cmd = vim.cmd
 
--- common function
+-- common functions
 function keymap (modes, key, result)
 	if #modes < 2 then -- < 2 to account for empty mode (= ":map")
 		vim.keymap.set(modes, key, result)

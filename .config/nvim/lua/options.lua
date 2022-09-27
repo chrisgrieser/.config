@@ -24,7 +24,7 @@ opt.colorcolumn = '+1' -- column next to textwidth option length
 
 -- files
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
--- opt.autochdir = true -- makes telescope more usable
+opt.autochdir = true -- always current directory
 
 opt.autowrite = true -- automatically saves on switching buffer
 opt.updatetime = 5000 -- ms
