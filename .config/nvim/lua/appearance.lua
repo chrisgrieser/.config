@@ -23,25 +23,27 @@ cmd('highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black')
 
 local function alternateFile()
 	local altFile = api.nvim_exec('echo expand("#:t")', true)
-	local currentFile = api.nvim_exec('echo expand("%:t")', true)
-	if altFile ~= currentFile then
-		return altFile
+	local thisFile = api.nvim_exec('echo expand("%:t")', true)
+	if altFile ~= thisFile then
+		return "#"..altFile
 	else
 		return ""
 	end
 end
 
+local function currentFile()
+	local thisFile = api.nvim_exec('echo expand("%:t")', true)
+	return "%"..thisFile
+end
+
 require('lualine').setup {
 	sections = {
 		lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
-		lualine_b = {
-			{'filetype', icon_only = true, colored = false  },
-			{'filename', show_modified_status = false, padding = 0 }
-		},
+		-- lualine_b = {{ currentFile }},
 		lualine_c = {{ alternateFile }},
 		lualine_x = {''},
 		lualine_y = {'diagnostics'},
-		lualine_z = { 'location', 'progress' }
+		lualine_z = {'location', 'progress'}
 	},
 	options = {
 		theme  = 'auto',

@@ -1,12 +1,13 @@
--- META
 require("utils")
+--------------------------------------------------------------------------------
+-- META
 vim.g.mapleader = ','
 
 -- [r]eload current config file
 keymap("n", "<leader>r", ':write<CR>:source %<CR>:echo "Reloaded."<CR>') -- alternative: https://www.reddit.com/r/neovim/comments/puuskh/how_to_reload_my_lua_config_while_using_neovim/
 
 -- copy [l]ast ex[c]ommand
-keymap("n", "<leader>lc", ':let @+=@:<CR>:echo @:<CR>')
+keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
 
 -- search options and their values
 keymap("n", "<leader>o", telescope("vim_options{prompt_prefix='⚙️'}"))
@@ -36,7 +37,7 @@ keymap("", "S", "{")
 
 -- Multi-Cursor, https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 -- changing these seems to require full restart (not only re-sourcing)
-vim.cmd[[
+cmd[[
 	let g:VM_maps = {}
 	let g:VM_maps['Find Under'] = '*'
 ]]
@@ -65,12 +66,11 @@ keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
 keymap("n", "Q", "\"_ci'") -- change single [Q]uote content
 keymap("n", "q", '"_ci"') -- change double [q]uote content
-keymap("n", "P", '"_ci)') -- change [p]arenthesis
-keymap("n", "0", '"_ci}') -- change braces
+keymap("n", "0", '"_ci)') -- change parenthesis. mnemonic: () looks like a 0
 keymap("n", "R", 'viwP') -- [R]eplace Word with register content
 
 -- Macros
-keymap("n", "<leader>q" ,"q")
+keymap("n", "<leader>q" ,"q") -- needs to be remapped, since used as text object
 
 -- Whitespace
 keymap("n", "!", "a <Esc>h") -- append space
@@ -105,6 +105,7 @@ keymap("n", "X", 'mz$"_x`z')
 -- Misc
 keymap("nv", "U", "<C-r>") -- undo consistent on one key
 keymap("nv", "M", "J") -- [M]erge Lines
+keymap("n", "P", '"0p') -- paste what was yanked
 
 --------------------------------------------------------------------------------
 -- INSERT MODE
@@ -183,11 +184,12 @@ keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 keymap("nv", "gt", "<C-^>") -- switch to alt-file (use vim's buffer model instead of tabs)
 
 -- File Operations
-keymap("n", "<C-p>", ":let @+=@%<CR>") -- copy path of current file
-keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>') -- copy name of current file
+keymap("n", "<C-p>", ':let @+=@%<CR>:echo "Copied:"expand("%")<CR>') -- copy path of current file
+keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
 keymap("n", "<C-r>", ':Rename') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-l>", ":!open %:h<CR>") -- show file in default GUI file explorer
-keymap("n", "<C-d>", ":saveas %:h/Untitled.%:e<CR>") -- duplicate current file
+keymap("n", "<C-d>", ":Duplicate") -- duplicate current file
+keymap("n", "<leader>X", ":Chmod +x<CR>") -- execution permission
 
 -- Sorting
 keymap("n", "<leader>ss", ":'<,'>sort<CR>") -- [s]ort [s]election
