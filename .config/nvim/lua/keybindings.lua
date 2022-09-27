@@ -56,7 +56,7 @@ keymap("", "S", "{")
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
-keymap("n", "g-", telescope("current_buffer_fuzzy_find")) -- alternative search
+keymap("n", "g-", telescope("current_buffer_fuzzy_find{prompt_prefix='🔍'}")) -- alternative search
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -144,7 +144,7 @@ keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key (also works for JSON, 
 keymap("n", "<leader>c", 'mzlEF.yEEp`z') -- double [c]lass under cursor
 keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>') -- remove [C]lass under cursor
 
-keymap("n", "gS", telescope("current_buffer_fuzzy_find{default_text='<< '}")) -- Navigation Markers
+keymap("n", "gS", telescope("current_buffer_fuzzy_find{default_text='<< ', prompt_prefix='🪧'}")) -- Navigation Markers
 
 -- JS
 keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, requires vim.surround
@@ -175,7 +175,6 @@ keymap("n", "<D-7>", "gcc") -- comment line
 keymap("v", "<D-7>", "gc") -- comment selection
 keymap("n", "<D-l>", ":!open %:h <CR>") -- show file in default GUI file explorer
 keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
-keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 
 --------------------------------------------------------------------------------
 -- FILES AND WINDOWS

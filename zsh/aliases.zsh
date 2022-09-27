@@ -3,7 +3,7 @@
 
 # configurations
 alias .star='open $STARSHIP_CONFIG'
-alias .nv='nvim $HOME/.config/nvim/lua'
+alias .nv='nvim -c "Telescope find_files cwd=~/.config/nvim" prompt_prefix='⚙️''
 alias r='exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias bar='sketchybar --update && echo sketchybar updated'
 alias barr='brew services restart sketchybar'
