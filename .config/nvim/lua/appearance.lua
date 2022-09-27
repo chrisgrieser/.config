@@ -20,12 +20,12 @@ vim.cmd('highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black')
 -- LUA LINE
 require('lualine').setup {
 	sections = {
-		lualine_a = {'mode'},
-		lualine_b = {'branch', 'diff', 'diagnostics'},
-		lualine_c = {'filename'},
-		lualine_x = {''},
+		lualine_a = {'location'},
+		lualine_b = {'branch', 'filename'},
+		lualine_c = {'diagnostics'},
+		lualine_x = {'buffers'},
 		lualine_y = {''},
-		lualine_z = {'location', 'progress'}
+		lualine_z = {'progress'}
 	},
 	options = {
 		theme  = 'auto',

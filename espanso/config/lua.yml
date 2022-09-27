@@ -2,7 +2,7 @@
 # ------------------------------------------------------------------------------
 # only activates code snippets when a file of the right language is open
 
-filter_title: \.lua$
+filter_title: \.lua
 
 extra_includes:
   - "../match/_lua.yml"

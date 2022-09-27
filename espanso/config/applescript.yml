@@ -2,7 +2,7 @@
 # ------------------------------------------------------------------------------
 # only activates code snippets when a file of the right language is open
 
-filter_title: applescript$|scpt$|^Untitled
+filter_title: \.applescript|scpt$|^Untitled
 
 extra_includes:
   - "../match/_applescript.yml"
