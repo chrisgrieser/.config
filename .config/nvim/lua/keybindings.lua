@@ -13,14 +13,25 @@ local function keymap (modes, key, result)
 	end
 end
 
+local function telescope(picker)
+	return ':lua require("telescope.builtin").'..picker..'<CR>'
+end
+
+--------------------------------------------------------------------------------
+-- META
+
 -- [r]eload current config file
 keymap("n", "<leader>r", ":write<CR>:source %<CR>") -- alternative: https://www.reddit.com/r/neovim/comments/puuskh/how_to_reload_my_lua_config_while_using_neovim/
 
 -- Update [P]lugins
 keymap("n", "<leader>p", ":PackerSync<CR>")
 
--- copy [l]ast [c]ommand
+-- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", ":let @+=@:<CR>")
+
+-- search options and their values
+keymap("n", "<leader>o", telescope("vim_options()"))
+keymap("n", "<leader>o", telescope("color_scheme()"))
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -45,6 +56,7 @@ keymap("", "S", "{")
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
+keymap("n", "gs", telescope("current_buffer_fuzzy_find()"))
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -130,6 +142,8 @@ keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key (also works for JSON, 
 keymap("n", "<leader>c", 'mzlEF.yEEp`z') -- double [c]lass under cursor
 keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>') -- remove [C]lass under cursor
 
+keymap("n", "gS", telescope("current_buffer_fuzzy_find{default_text='<< '}")) -- Navigation Markers
+
 -- JS
 keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, requires vim.surround
 
@@ -164,12 +178,9 @@ keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 --------------------------------------------------------------------------------
 -- FILES AND WINDOWS
 
--- Telescope
-local function telescope(picker)
-	return ':lua require("telescope.builtin").'..picker..'<CR>'
-end
-keymap("n", "go", telescope("find_files({cwd='%:h'})")) -- [o]pen file in current directory (should be used with 'autochdir' option)
-keymap("n", "gO", telescope("find_files({cwd='%:p:h'})")) -- [o]pen file in current directory (should be used with 'autochdir' option)
+-- file switchers
+keymap("n", "go", telescope("find_files({cwd='%:p:h'})")) -- [o]pen file in parent-directory
+keymap("n", "gO", telescope("find_files({cwd='%:p:h:h'})")) -- [o]pen file in grandparent-directory
 keymap("n", "gr", telescope("oldfiles()")) -- [r]ecent files
 keymap("n", "gb", telescope("buffers()")) -- open [b]uffer
 
