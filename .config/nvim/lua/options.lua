@@ -14,6 +14,7 @@ opt.ignorecase = true
 opt.tabstop = 3
 opt.softtabstop = 3
 opt.shiftwidth = 3
+opt.shiftround = 3
 
 -- gutter
 opt.relativenumber = false
@@ -50,7 +51,8 @@ end)
 
 -- status bar
 opt.showcmd = true
-opt.laststatus = 3
+opt.laststatus = 3 -- show always but only on last window
+-- opt.cmdheight = 0 -- TODO: uncomment with neovim 0.8 adding support for it
 
 -- tab bar
 opt.guitablabel = "[%N] %t %M"
@@ -63,11 +65,11 @@ vim.cmd[[au TextYankPost * silent! lua vim.highlight.on_yank{timeout = 3000} ]] 
 -- Mini-Linting on save
 autocmd("BufWritePre",  function()
 	vim.cmd[[%s/\s\+$//e]] -- remove trailing whitespaces
-	vim.cmd[[$s/\(.\)$/\1\r\r\r/e]] -- add line breaks at end if there is none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
+	vim.cmd[[$s/\(.\)$/\1\r/e]] -- add line breaks at end if there is-none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
 end )
 
 -- treat "_" as word boundary – https://superuser.com/a/244070
-opt.iskeyword = opt.iskeyword - {"_"}
+opt.iskeyword = opt.iskeyword + {"-"} -- so ciw changes kebap-base vars as well
 
 -- folding
 opt.foldmethod = "indent"

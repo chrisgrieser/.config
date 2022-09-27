@@ -186,10 +186,9 @@ keymap("n", "gr", telescope("oldfiles{prompt_prefix='🕔'}")) -- [r]ecent files
 keymap("n", "gb", telescope("buffers{prompt_prefix='📑'}")) -- open [b]uffer
 
 -- Buffers
-keymap("", "<C-Tab>", ":bn<CR>")
+keymap("", "<C-Tab>", "<C-^>")
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
-keymap("n", "gt", ":bn<CR>") -- use vim's buffer model instead of tabs
-keymap("n", "gT", ":bp<CR>")
+keymap("nv", "gt", "<C-^>") -- switch to alt-file, use vim's buffer model instead of tabs
 
 -- File Operations
 keymap("n", "<C-p>", ":let @+=@%<CR>") -- copy path of current file

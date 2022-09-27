@@ -2,7 +2,7 @@
 # ------------------------------------------------------------------------------
 # only activates code snippets when a file of the right language is open
 
-filter_title: .js$|.ts$
+filter_title: \.js|\.ts
 
 extra_includes:
   - "../match/_javascript.yml"
