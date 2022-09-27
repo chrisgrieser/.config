@@ -13,7 +13,7 @@ return function (use)
 
 	-- Utility
 	use 'farmergreg/vim-lastplace' -- remember last cursor position on file re-opening
-	-- use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
+	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
 	use {
 		'nvim-telescope/telescope.nvim', -- fuzzy finder
 		requires = {
@@ -24,6 +24,7 @@ return function (use)
 
 	-- Editing
 	use 'tpope/vim-commentary' -- comments
+	-- use 'tpope/vim-commentary' -- comments
 	use 'tpope/vim-surround' -- surround with punctuation
 	use 'wellle/targets.vim' -- various text object improvements
 	use 'michaeljsmith/vim-indent-object' -- indention-based text objects

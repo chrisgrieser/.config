@@ -73,7 +73,7 @@ keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
-keymap("n", "q", '"_ciq') -- change [q]uote content (vim.target)
+keymap("n", "Q", 'ciq') -- change [Q]uote content (vim.target)
 keymap("n", "0", '"_cib') -- change parenthesis content (vim.target)
 keymap("n", "R", 'viwP') -- [R]eplace Word with register content
 
