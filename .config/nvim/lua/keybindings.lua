@@ -11,6 +11,11 @@ keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
 
 -- search options and their values
 keymap("n", "<leader>o", telescope("vim_options{prompt_prefix='⚙️'}"))
+
+-- search normal mode mappings
+keymap("n", "?", telescope("keymaps{prompt_prefix='❓'}"))
+
+-- Theme Picker
 keymap("n", "<leader>T", telescope("colorscheme{enable_preview = true, prompt_prefix='🎨'}"))
 
 -- quicker quitting
@@ -102,6 +107,11 @@ end
 -- Remove last character from line
 keymap("n", "X", 'mz$"_x`z')
 
+-- Spellling
+keymap("n", "zl", telescope("spell_suggest{prompt_prefix='🖍  '}"))
+keymap("n", "gz", "]s") -- next misspelling
+keymap("n", "gZ", "[s") -- prev misspelling
+
 -- Misc
 keymap("nv", "U", "<C-r>") -- undo consistent on one key
 keymap("nv", "M", "J") -- [M]erge Lines
@@ -146,17 +156,16 @@ keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, req
 -- EMULATING MAC BINDINGS
 -- - requires GUI app like Neovide (called "Logo Key" there)
 -- - mostly done for consistency with other apps
-keymap("", "<D-v>", "p") -- cmd+v
+keymap("nv", "<D-v>", "p") -- cmd+v
 keymap("n", "<D-c>", "yy") -- cmd+c: copy line
 keymap("v", "<D-c>", "y") -- cmd+c: copy selection
 keymap("n", "<D-x>", "dd") -- cmd+x: cut line
 keymap("v", "<D-x>", "d") -- cmd+x: cut selection
 
-keymap("n", "<D-n>", ":tabnew<CR>") -- cmd+n
-keymap("n", "<D-t>", ":tabnew<CR>") -- cmd+t
+keymap("n", "<D-n>", ":e ") -- cmd+n
 keymap("n", "<D-s>", ":write<CR>") -- cmd+s
-keymap("n", "<D-a>", "ggvG") -- cmd+a
-keymap("n", "<D-w>", ":bd<CR>") -- cmd+w
+keymap("n", "<D-a>", "mzggvGy`z") -- cmd+a & cmd+c
+keymap("n", "<D-w>", ":w<CR>:bd<CR>") -- cmd+w
 
 keymap("n", "<D-D>", "yyp") -- cmd+shift+d: duplicate lines
 keymap("v", "<D-D>", "yp") -- cmd+shift+d: duplicate selected lines
@@ -177,6 +186,7 @@ keymap("n", "go", telescope("find_files{cwd='%:p:h', prompt_prefix='📂', hidde
 keymap("n", "gO", telescope("find_files{cwd='%:p:h:h', prompt_prefix='🆙📂'}")) -- [o]pen file in grandparent-directory
 keymap("n", "gr", telescope("oldfiles{prompt_prefix='🕔'}")) -- [r]ecent files
 keymap("n", "gb", telescope("buffers{prompt_prefix='📑',ignore_current_buffer = true}")) -- open [b]uffer
+keymap("n", "gF", telescope("live_grep{cwd='%:p:h', disable_coordinates=true, prompt_prefix='🔎'}")) -- open [b]uffer
 
 -- Buffers
 keymap("", "<C-Tab>", "<C-^>")
@@ -186,9 +196,9 @@ keymap("nv", "gt", "<C-^>") -- switch to alt-file (use vim's buffer model instea
 -- File Operations
 keymap("n", "<C-p>", ':let @+=@%<CR>:echo "Copied:"expand("%")<CR>') -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
-keymap("n", "<C-r>", ':Rename') -- rename of current file, requires eunuch.vim
+keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-l>", ":!open %:h<CR>") -- show file in default GUI file explorer
-keymap("n", "<C-d>", ":Duplicate") -- duplicate current file
+keymap("n", "<C-d>", ":Duplicate ") -- duplicate current file
 keymap("n", "<leader>X", ":Chmod +x<CR>") -- execution permission
 
 -- Sorting
