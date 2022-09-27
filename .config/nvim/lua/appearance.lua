@@ -18,18 +18,27 @@ vim.cmd('highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black')
 
 --------------------------------------------------------------------------------
 -- LUA LINE
+
+local function alternateFile()
+	local buffers = vim.cmd("ls")
+	return [[hello world]]
+end
+
 require('lualine').setup {
 	sections = {
-		lualine_a = {'location'},
-		lualine_b = {'branch', 'filename'},
-		lualine_c = {'diagnostics'},
-		lualine_x = {'buffers'},
-		lualine_y = {''},
-		lualine_z = {'progress'}
+		lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
+		lualine_b = {
+			{'filetype', icon_only = true, colored = false, icon = { align = "left"}  },
+			{'filename', symbols = {modified = "+"}, padding = 0 }
+		},
+		lualine_c = {{ alternateFile }},
+		lualine_x = {''},
+		lualine_y = {'diagnostics'},
+		lualine_z = { {'location', padding = {left = 0, right = 1}}, 'progress' }
 	},
 	options = {
 		theme  = 'auto',
-		component_separators = { left = '', right = ''},
+		component_separators = { left = '', right = ''},
 		section_separators = { left = '', right = '' },
 	},
 }

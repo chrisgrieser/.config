@@ -14,7 +14,7 @@ opt.ignorecase = true
 opt.tabstop = 3
 opt.softtabstop = 3
 opt.shiftwidth = 3
-opt.shiftround = 3
+opt.shiftround = true
 
 -- gutter
 opt.relativenumber = false
@@ -73,6 +73,6 @@ opt.iskeyword = opt.iskeyword + {"-"} -- so ciw changes kebap-base vars as well
 
 -- folding
 opt.foldmethod = "indent"
-opt.foldlevelstart = 5
+opt.nofoldenable = true
 
 
