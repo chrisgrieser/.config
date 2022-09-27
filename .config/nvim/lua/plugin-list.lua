@@ -10,6 +10,7 @@ function pluginList (use)
 	-- Utility
 	use 'farmergreg/vim-lastplace' -- remember last cursor position on file re-opening
 	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
+	use 'tpope/vim-eunuch' -- file operation utilities
 	use {
 		'nvim-telescope/telescope.nvim', -- fuzzy finder
 		requires = {

@@ -15,7 +15,7 @@ local status_ok, packer = pcall(require, "packer")
 if (not status_ok) then return end
 
 --------------------------------------------------------------------------------
--- load all the plugins
+-- load all plugins
 require("plugin-list")
 packer.startup(pluginList)
 
