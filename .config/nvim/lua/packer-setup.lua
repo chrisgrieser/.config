@@ -23,7 +23,6 @@ if (not status_ok) then return end
 
 --------------------------------------------------------------------------------
 
-
 packer.startup(require("plugin-list")) -- load all the plugins
 
 -- https://github.com/wbthomason/packer.nvim#performing-plugin-management-operations
