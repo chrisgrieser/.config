@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F5FCFE38-5C42-4335-BD61-3B4658A9C8F8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4C8471ED-D799-4D45-B9DD-EEA5E5B94EA0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -32,21 +45,6 @@
 	<string>Neovim</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>F178F3ED-E855-4DC9-A178-D839E9C2C48D</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -96,11 +94,77 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>F178F3ED-E855-4DC9-A178-D839E9C2C48D</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>va</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Vim Awesome: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F5FCFE38-5C42-4335-BD61-3B4658A9C8F8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://vimawesome.com/?q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>4C8471ED-D799-4D45-B9DD-EEA5E5B94EA0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>4C8471ED-D799-4D45-B9DD-EEA5E5B94EA0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>255</real>
+		</dict>
 		<key>6EBCF2CC-4936-48C4-BCD8-42A7B39BDEDC</key>
 		<dict>
 			<key>note</key>
@@ -116,6 +180,15 @@
 			<real>215</real>
 			<key>ypos</key>
 			<real>95</real>
+		</dict>
+		<key>F5FCFE38-5C42-4335-BD61-3B4658A9C8F8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>50</real>
+			<key>ypos</key>
+			<real>255</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

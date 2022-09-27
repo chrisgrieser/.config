@@ -18,6 +18,7 @@ const workArray = app.doShellScript (
 	-E ".config/alacritty/colors/*" \
 	-E "Marta/Themes/*" \
 	-E "hammerspoon/Spoons/*" \
+	-E ".config/karabiner/automatic_backups/*" \
 	-E ".config/karabiner/assets/complex_modifications/*.json" \
 	-E "FileHistory*.json" \
 	-E "visualized keyboard layout/*.json" \
@@ -29,22 +30,18 @@ const workArray = app.doShellScript (
 /* eslint-enable no-multi-str, quotes */
 
 workArray.forEach(file => {
-	const fPath = dotfileFolder + file.slice(1);
+	const filePath = dotfileFolder + file.slice(1);
 	const parts = file.split("/");
 	const isFolder = file.endsWith("/");
-	let name;
-	if (isFolder) {
-		parts.pop();
-		name = parts.pop();
-	}
-	else name = parts.pop();
+	if (isFolder) parts.pop();
+	const fileName = parts.pop();
 
-	let ext = name.split(".").pop();
+	let twoParents = filePath.replace(/.*\/(.*\/.*)\/.*$/, "$1");
+	if (twoParents === ".") twoParents = "";
+
+	let ext = fileName.split(".").pop();
 	if (ext.includes("rc")) ext = "rc"; // rc files
 	else if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
-
-	let parentFolder = parts.pop();
-	if (parentFolder === ".") parentFolder = "";
 
 	let iconObject;
 	switch (ext) {
@@ -67,17 +64,17 @@ workArray.forEach(file => {
 			break;
 		case "": // = folder
 		default:
-			iconObject = { "type": "fileicon", "path": fPath }; // by default, use file icon
+			iconObject = { "type": "fileicon", "path": filePath }; // by default, use file icon
 	}
 
 	jsonArray.push({
-		"title": name,
-		"subtitle": "▸ " + parentFolder,
-		"match": alfredMatcher (name),
+		"title": fileName,
+		"subtitle": "▸ " + twoParents,
+		"match": alfredMatcher (fileName),
 		"icon": iconObject,
 		"type": "file:skipcheck",
-		"uid": fPath,
-		"arg": fPath,
+		"uid": filePath,
+		"arg": filePath,
 	});
 });
 
