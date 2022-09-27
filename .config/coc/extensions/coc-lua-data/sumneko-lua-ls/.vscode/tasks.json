@@ -1,0 +1,48 @@
+{
+    "version": "2.0.0",
+    "type": "shell",
+    "windows": {
+        "options": {
+            "shell": {
+                "executable": "C:\\Windows\\System32\\cmd.exe",
+                "args": [
+                    "/c"
+                ]
+            }
+        }
+    },
+    "options": {
+        "cwd": "${workspaceFolder}"
+    },
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "PreCompile",
+            "windows": {
+                "command": "chcp 65001 && compile\\install.bat"
+            },
+            "linux": {
+                "command": "compile/install.sh"
+            },
+            "osx": {
+                "command": "compile/install.sh"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/3rd/luamake"
+            },
+        },
+        {
+            "type": "shell",
+            "label": "Compile",
+            "windows": {
+                "command": "chcp 65001 && ${workspaceFolder}/3rd/luamake/luamake rebuild"
+            },
+            "linux": {
+                "command": "${workspaceFolder}/3rd/luamake/luamake rebuild"
+            },
+            "osx": {
+                "command": "${workspaceFolder}/3rd/luamake/luamake rebuild"
+            }
+        },
+    ]
+}

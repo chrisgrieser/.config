@@ -5,7 +5,10 @@ function pluginList (use)
 	use 'folke/tokyonight.nvim' -- color scheme
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use "unblevable/quick-scope" -- highlight for f and t movements
-	use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
+	use 'nvim-lualine/lualine.nvim' -- statusbar (w/o requiring icons, since I don't use them)
+
+	-- IntelliSense
+	use {'neoclide/coc.nvim', branch = 'release'} -- LSP
 
 	-- Utility
 	use 'farmergreg/vim-lastplace' -- remember last cursor position on file re-opening

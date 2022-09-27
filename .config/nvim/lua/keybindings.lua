@@ -74,13 +74,11 @@ keymap("n", "q", '"_ci"') -- change double [q]uote content
 keymap("n", "0", '"_ci)') -- change parenthesis. mnemonic: () looks like a 0
 keymap("n", "R", 'viwP') -- [R]eplace Word with register content
 
--- Macros
-keymap("n", "<leader>q" ,"q") -- needs to be remapped, since used as text object
-
--- Whitespace
+-- Whitespace Control
 keymap("n", "!", "a <Esc>h") -- append space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
+keymap("n", "<BS>", "dipO<Esc>") -- reduce multiple blank lines to one
 
 -- Indention
 keymap("n", "<Tab>", ">>")
@@ -94,18 +92,18 @@ keymap("n", "^p", "`[v`]=") -- auto-indent last paste
 keymap("n", "ü", "mzlblgueh~`z")
 
 -- Transpose
+-- (meant to be pressed repeatedly to move characters)
 keymap("n", "ö", "xp") -- current & next char
 keymap("n", "Ö", "xhhp") -- current & previous char
 keymap("n", "Ä", "dawelpb") -- current & next word
 
 -- <leader>{char} → Append {char} to end of line
-trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`" }
+local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`" }
 for i = 1, #trailingKeys do
 	keymap("n", "<leader>"..trailingKeys[i], "mzA"..trailingKeys[i].."<Esc>`z")
 end
 
--- Remove last character from line
-keymap("n", "X", 'mz$"_x`z')
+keymap("n", "X", 'mz$"_x`z') -- Remove last character from line
 
 -- Spellling
 keymap("n", "zl", telescope("spell_suggest{prompt_prefix='🖍  '}"))
@@ -114,8 +112,10 @@ keymap("n", "gZ", "[s") -- prev misspelling
 
 -- Misc
 keymap("nv", "U", "<C-r>") -- undo consistent on one key
-keymap("nv", "M", "J") -- [M]erge Lines
+keymap("nv", "M", "J") -- [M]erge Lines up
+keymap("nv", "gm", "ddpkJ") -- [M]erge Lines down
 keymap("n", "P", '"0p') -- paste what was yanked
+keymap("n", "<leader>q" ,"q") -- needs to be remapped, since used as text object
 
 --------------------------------------------------------------------------------
 -- INSERT MODE
@@ -133,14 +133,13 @@ keymap("i", "<C-k>", '<Esc>Dli')
 keymap("v", "V", "j") -- so double "V" selects two lines
 keymap("v", "p", 'P') -- do not override register when pasting
 keymap("v", "P", 'p') -- override register when pasting
-keymap("v", "<BS>", '"_d') -- consistent with insert mode selection
 
 --------------------------------------------------------------------------------
 -- LANGUAGE-SPECIFIC BINDINGS
 
 -- Markdown
-keymap("n", "<CR>", 'A') -- So Double return keeps list syntax
-keymap("n", "<leader>x", 'mz^lllrx`z') -- check tasks
+keymap("n", "<CR>", 'A') -- So double return keeps markdown list syntax
+keymap("n", "<leader>x", 'mz^lllrx`z') -- check markdown tasks
 
 -- CSS
 keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key (also works for JSON, actually)

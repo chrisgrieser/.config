@@ -27,8 +27,7 @@ opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.autochdir = true -- always current directory
 
 opt.autowrite = true -- automatically saves on switching buffer
-opt.updatetime = 5000 -- ms
-autocmd({"CursorHold"}, function () -- autosave files
+autocmd({"CursorHold"}, function () -- autosave files with the duration from 'updatetime' (which, in turn, has to be set to ~300ms for vim.coc)
 	cmd("update")
 end)
 
@@ -36,7 +35,7 @@ end)
 opt.cursorline = true -- by default underline
 opt.wrap = false
 opt.scrolloff = 11
-opt.sidescrolloff = 5
+opt.sidescrolloff = 8
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set

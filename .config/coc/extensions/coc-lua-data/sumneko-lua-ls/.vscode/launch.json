@@ -1,0 +1,57 @@
+// A launch configuration that compiles the extension and then opens it inside a new window
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "🍺test",
+			"type": "lua",
+			"request": "launch",
+			"stopOnEntry": false,
+			"program": "${workspaceRoot}/test.lua",
+			"luaexe": "${workspaceFolder}/bin/Windows/lua-language-server.exe",
+			"cpath": null,
+			"arg": [
+			],
+			"luaVersion": "5.4",
+			"consoleCoding": "utf8",
+			"sourceCoding": "utf8",
+			"outputCapture": [
+				"print",
+				"stderr",
+			],
+		},
+		{
+			"name": "attach",
+			"type": "lua",
+			"request": "attach",
+			"stopOnEntry": false,
+			"address": "127.0.0.1:11413",
+			"outputCapture": [
+			],
+			"sourceMaps": [
+				[
+					"./*",
+					"${workspaceFolder}/*"
+				]
+			]
+		},
+		{
+			"name": "build-3rd-meta",
+			"type": "lua",
+			"request": "launch",
+			"stopOnEntry": false,
+			"luaexe": "${workspaceFolder}/bin/Windows/lua-language-server.exe",
+			"program": "${workspaceRoot}/tools/build-3rd-meta.lua",
+			"cpath": "${workspaceFolder}/bin/Windows/?.dll",
+			"arg": [
+			],
+			"luaVersion": "latest",
+			"consoleCoding": "utf8",
+			"sourceCoding": "utf8",
+			"outputCapture": [
+				"print",
+				"stderr",
+			],
+		},
+	]
+}

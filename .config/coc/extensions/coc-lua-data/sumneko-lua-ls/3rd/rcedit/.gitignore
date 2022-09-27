@@ -1,0 +1,10 @@
+Default/
+ipch/
+
+*.swp
+*.sdf
+*.opensdf
+*.suo
+*.vcxproj.user
+*.VC.db
+*.VC.VC.opendb
