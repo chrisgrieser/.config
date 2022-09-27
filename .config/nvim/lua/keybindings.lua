@@ -56,7 +56,7 @@ keymap("", "S", "{")
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
-keymap("n", "g-", telescope("current_buffer_fuzzy_find()")) -- alternative search
+keymap("n", "g-", telescope("current_buffer_fuzzy_find")) -- alternative search
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -73,9 +73,9 @@ keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
-keymap("n", "Q", '"_ci"') -- change double [q]uote content
-keymap("n", "q", '"_ci\'') -- change single [q]uote content
-keymap("n", "R", 'viw"0p') -- [R]eplace Word with register content
+keymap("n", "q", '"_ciq') -- change [q]uote content (vim.target)
+keymap("n", "0", '"_cib') -- change parenthesis content (vim.target)
+keymap("n", "R", 'viwP') -- [R]eplace Word with register content
 
 -- Macros
 keymap("n", "<leader>q" ,"q")
@@ -91,6 +91,7 @@ keymap("n", "<S-Tab>", "<<")
 keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
 keymap("nv", "^", "=") -- auto-indent
+keymap("n", "^p", "`[v`]=") -- auto-indent last paste
 
 -- Switch Case of first letter of the word (= toggle between Capital and lower case)
 keymap("n", "ü", "mzlblgueh~`z")
@@ -127,7 +128,8 @@ keymap("i", "<C-k>", '<Esc>Dli')
 --------------------------------------------------------------------------------
 -- VISUAL MODE
 keymap("v", "V", "j") -- so double "V" selects two lines
-keymap("v", "p", '"_dP') -- do not override register when pasting on selection (still able to do so with P)
+keymap("v", "p", 'P') -- do not override register when pasting
+keymap("v", "P", 'p') -- override register when pasting
 keymap("v", "<BS>", '"_d') -- consistent with insert mode selection
 
 --------------------------------------------------------------------------------
@@ -178,8 +180,8 @@ keymap("n", "<D-;>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+shift+,
 --------------------------------------------------------------------------------
 -- FILES AND WINDOWS
 
--- file switchers
-keymap("n", "go", telescope("find_files{cwd='%:p:h', prompt_prefix='📂'}")) -- [o]pen file in parent-directory
+-- File switchers
+keymap("n", "go", telescope("find_files{cwd='%:p:h', prompt_prefix='📂', hidden=true}")) -- [o]pen file in parent-directory
 keymap("n", "gO", telescope("find_files{cwd='%:p:h:h', prompt_prefix='🆙📂'}")) -- [o]pen file in grandparent-directory
 keymap("n", "gr", telescope("oldfiles{prompt_prefix='🕔'}")) -- [r]ecent files
 keymap("n", "gb", telescope("buffers{prompt_prefix='📑'}")) -- open [b]uffer
