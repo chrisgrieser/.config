@@ -9,11 +9,8 @@ keymap("n", "<leader>r", ':write<CR>:source %<CR>:echo "Reloaded."<CR>') -- alte
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
 
--- search options and their values
-keymap("n", "<leader>o", function() telescope.vim_options{prompt_prefix='⚙️'} end)
-
 -- search normal mode mappings
-keymap("n", "?", function() telescope.keymaps{prompt_prefix='❓'} end)
+keymap("n", "?", function() telescope.keymaps{prompt_prefix='N'} end)
 
 -- search vim docs
 keymap("n", "<leader>?", function() telescope.help_tags{prompt_prefix='❓'} end)
@@ -23,6 +20,12 @@ keymap("n", "<leader>T", function() telescope.colorscheme{enable_preview = true,
 
 -- quicker quitting
 keymap("n", "ZZ", ":wall<CR>:q<CR>")
+
+-- Command Palette
+keymap("n", "<leader>p", function() telescope.commands{prompt_prefix=':'} end)
+
+-- Version History of current file
+keymap("n", "<leader>V", function() telescope.git_bcommits{prompt_prefix='🔙'} end)
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
