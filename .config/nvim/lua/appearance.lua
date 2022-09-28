@@ -18,9 +18,11 @@ cmd('highlight ColorColumn ctermbg=0 guibg=black') -- https://www.reddit.com/r/n
 -- Active Line
 cmd('highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black')
 
+-- Sign Column
+cmd('highlight SignColumn guibg=black ctermbg=black')
+
 --------------------------------------------------------------------------------
 -- LUA LINE
-
 local function alternateFile()
 	local altFile = api.nvim_exec('echo expand("#:t")', true)
 	local thisFile = api.nvim_exec('echo expand("%:t")', true)

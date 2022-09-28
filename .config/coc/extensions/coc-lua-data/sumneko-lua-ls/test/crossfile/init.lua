@@ -1,6 +1,0 @@
-require 'crossfile.definition'
-require 'crossfile.references'
-require 'crossfile.allreferences'
-require 'crossfile.hover'
-require 'crossfile.completion'
-require 'crossfile.diagnostic'

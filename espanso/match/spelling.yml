@@ -154,3 +154,5 @@ matches:
   - trigger: fiel
     replace: file
     word: true
+  - trigger: int he
+    replace: in the

@@ -11,12 +11,12 @@ noremap L $
 noremap J 5j
 noremap K 5k
 
-noremap [ {
-noremap ] }
+noremap s {
+noremap s }
 
 noremap ä `
 
-vnoremap <BS> "_d
+vnoremap V j
 
 nnoremap ü mzlblgueh~`z
 nnoremap ö xp
@@ -24,11 +24,6 @@ nnoremap Ö xhhp
 nnoremap Ä dawelpb
 
 nnoremap M J
-
-nnoremap <Tab> >>
-nnoremap <S-Tab> <<
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
 
 nnoremap <Space> "_ciw
 vnoremap <Space> "_c
