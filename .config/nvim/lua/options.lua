@@ -66,9 +66,9 @@ opt.iskeyword = opt.iskeyword + {"-"}
 
 -- folding
 opt.foldmethod = "indent"
-opt.foldenable = false
+opt.foldenable = false -- do not fold on start
 
--- title (for Window Managers and Espanso)
+-- title (for Window Managers and espanso)
 opt.title = true
 
 

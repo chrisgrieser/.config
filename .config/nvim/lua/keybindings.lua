@@ -54,6 +54,7 @@ keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
 keymap("", "<leader>m", ":nohl<CR>") -- [m]ute highlights
 keymap("n", "g-", telescope("current_buffer_fuzzy_find{prompt_prefix='🔍'}")) -- alternative search
+keymap("", "<leader>m", ":nohl<CR>") -- [m]ute highlights
 
 --------------------------------------------------------------------------------
 -- EDITING
