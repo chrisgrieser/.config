@@ -41,7 +41,7 @@
 
 	// Font & Spacing
 	"ui_scale": 1.7,
-	"font_size": 14,
+	"font_size": 15,
 	"font_face": "Input",
 	"font_options": ["no_liga", "no_italic", "no_bold"],
 
@@ -574,5 +574,5 @@
 		"Ungarbles",
 	],
 
-	"neovintageous_build_version": 11100,
+	"neovintageous_build_version": 12700,
 }
