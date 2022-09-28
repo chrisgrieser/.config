@@ -1,4 +1,4 @@
-function pluginlist () ---@diagnostic disable-line: lowercase-global
+function pluginList () ---@diagnostic disable-line: lowercase-global
 	use 'wbthomason/packer.nvim' -- packer manages itself
 
 	-- Themes
