@@ -2,7 +2,7 @@ require("utils")
 --------------------------------------------------------------------------------
 
 g.coc_global_extensions = {
-	"coc-sumneko-lua"
+	"coc-lua"
 }
 
 --------------------------------------------------------------------------------
@@ -19,14 +19,6 @@ function _G.check_back_space()
 	local col = vim.fn.col('.') - 1
 	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
 end
-
--- Highlight the symbol and its references when holding the cursor.
-vim.api.nvim_create_augroup("CocGroup", {})
-vim.api.nvim_create_autocmd("CursorHold", {
-	group = "CocGroup",
-	command = "silent call CocActionAsync('highlight')",
-	desc = "Highlight symbol under cursor on CursorHold"
-})
 
 --------------------------------------------------------------------------------
 -- KEYMAPS
@@ -50,14 +42,17 @@ end
 keyset("n", "<leader>h", '<CMD>lua _G.show_docs()<CR>', {silent = true})
 
 -- Error Navigation & Actions
+local opts = {silent = true, nowait = true}
 keyset("n", "<leader>f", "<Plug>(coc-fix-current)", {silent = true, nowait = true})
 keyset("n", "ge", "<Plug>(coc-diagnostic-next)", {silent = true, nowait = true})
 keyset("n", "gE", "<Plug>(coc-diagnostic-prev)", {silent = true, nowait = true})
 -- Applying codeAction to the selected region. Example: `<leader>aap` for current paragraph
-local opts = {silent = true, nowait = true}
 keyset("x", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
 keyset("n", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
 
+--------------------------------------------------------------------------------
+
+-- PASSIVE AUTOCOMPLETION
 -- Use tab for trigger completion with characters ahead and navigate.
 -- NOTE: There's always complete item selected by default, you may want to enable
 -- no select by `"suggest.noselect": true` in your configuration file.
@@ -69,9 +64,9 @@ keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 -- <C-g>u breaks current undo, please make your own choice.
 keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
 
--- Formatting selected code.
-keyset("x", "<leader>^", "<Plug>(coc-format-selected)", {silent = true})
-keyset("n", "<leader>^", "<Plug>(coc-format-selected)", {silent = true})
+--------------------------------------------------------------------------------
+
+-- PASSIVE IMPROVEMENTS
 
 -- Update signature help on jump placeholder.
 vim.api.nvim_create_autocmd("User", {
@@ -89,5 +84,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "Setup formatexpr specified filetype(s)."
 })
 
+
+-- Highlight the symbol and its references when holding the cursor.
+vim.api.nvim_create_augroup("CocGroup", {})
+vim.api.nvim_create_autocmd("CursorHold", {
+	group = "CocGroup",
+	command = "silent call CocActionAsync('highlight')",
+	desc = "Highlight symbol under cursor on CursorHold"
+})
 
 
