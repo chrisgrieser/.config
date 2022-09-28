@@ -4,11 +4,15 @@
 # Activity Data
 sync.log
 some.log
+
+# device specific
 dlFolderLastChange
+
 # redundant
 .config/karabiner/automatic_backups
 
-# -------------------------------------------------------------
+# coc.vim extensions quite big
+.config/coc/extensions
 
 # in case of accidental saving of such files in the repo
 *.mp4
