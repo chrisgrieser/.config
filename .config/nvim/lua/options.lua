@@ -32,10 +32,10 @@ autocmd({"CursorHold"}, function () -- autosave files with the duration from 'up
 end)
 
 -- editor
-opt.cursorline = true -- by default underline
+opt.cursorline = true -- by default underline, look changed in appearnce
 opt.wrap = false
 opt.scrolloff = 11
-opt.sidescrolloff = 8
+opt.sidescrolloff = 10
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
@@ -43,6 +43,11 @@ opt.sidescrolloff = 8
 autocmd("BufEnter", function ()
 	-- "o" adds comment syntax when using `o` or `O` https://neovim.io/doc/user/change.html#fo-table
 	opt.formatoptions = opt.formatoptions - {"o", "r"}
+end)
+
+-- Remember Cursor Position
+autocmd ("BufReadPost", function()
+   cmd[[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' |  exe "normal! g`\"" | endif]]
 end)
 
 -- status bar

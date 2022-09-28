@@ -4,7 +4,8 @@
         "redefined-local"
     ],
     "Lua.diagnostics.globals": [
-        "locffal"
+        "locffal",
+        "vim"
     ],
     "Lua.workspace.maxPreload": 2000
 }
