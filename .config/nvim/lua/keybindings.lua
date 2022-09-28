@@ -14,6 +14,7 @@ keymap("n", "<leader>o", telescope("vim_options{prompt_prefix='⚙️'}"))
 
 -- search normal mode mappings
 keymap("n", "?", telescope("keymaps{prompt_prefix='❓'}"))
+keymap("n", "<leader>?", telescope("help_tags{prompt_prefix='❓'}"))
 
 -- Theme Picker
 keymap("n", "<leader>T", telescope("colorscheme{enable_preview = true, prompt_prefix='🎨'}"))

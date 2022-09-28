@@ -1,4 +1,10 @@
 {
     "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "Lua.diagnostics.disable": [
+        "redefined-local"
+    ],
+    "Lua.diagnostics.globals": [
+        "locffal"
+    ],
     "Lua.workspace.maxPreload": 2000
 }
