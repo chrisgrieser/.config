@@ -70,7 +70,6 @@ function homeModeLayout ()
 	openIfNotRunning("Mimestream")
 	openIfNotRunning("Slack")
 	openIfNotRunning("Brave Browser")
-	openIfNotRunning("Obsidian")
 	openIfNotRunning("Twitterrific")
 	openIfNotRunning("Drafts")
 
