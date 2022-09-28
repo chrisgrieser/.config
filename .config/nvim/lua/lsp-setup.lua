@@ -10,7 +10,7 @@ g.coc_global_extensions = {
 opt.backup = false -- Some servers have issues with backup files, see #649.
 opt.writebackup = false
 opt.updatetime = 300 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
-opt.signcolumn = "auto:1" -- hide signcolumn when no issue
+opt.signcolumn = "yes:1"
 
 local keyset = vim.keymap.set
 
@@ -67,10 +67,10 @@ keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r
 --------------------------------------------------------------------------------
 
 -- PASSIVE IMPROVEMENTS
-vim.api.nvim_create_augroup("CocGroup", {})
+augroup("CocGroup", {})
 
 -- Update signature help on jump placeholder.
-vim.api.nvim_create_autocmd("User", {
+autocmd("User", {
 	group = "CocGroup",
 	pattern = "CocJumpPlaceholder",
 	command = "call CocActionAsync('showSignatureHelp')",
@@ -78,16 +78,15 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 -- Setup formatexpr specified filetype(s).
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
 	group = "CocGroup",
 	pattern = "typescript,json",
 	command = "setl formatexpr=CocAction('formatSelected')",
 	desc = "Setup formatexpr specified filetype(s)."
 })
 
-
 -- Highlight the symbol and its references when holding the cursor.
-vim.api.nvim_create_autocmd("CursorHold", {
+autocmd("CursorHold", {
 	group = "CocGroup",
 	command = "silent call CocActionAsync('highlight')",
 	desc = "Highlight symbol under cursor on CursorHold"
