@@ -13,7 +13,7 @@ const ahrefRegex = /.*?"(.*)">(.*?)<.*/;
 
 const luaManual = app.doShellScript(`curl -sL '${luaManualBaseURL}'`)
 	.split("\r")
-	.filter(line => line.includes("HREF"))
+	.filter(line => line.includes("HREF") && !line.includes("css"))
 	.map(line => {
 		const subsite = line.replace(ahrefRegex, "$1");
 		let title = line

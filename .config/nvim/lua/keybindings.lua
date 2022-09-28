@@ -1,7 +1,7 @@
 require("utils")
 --------------------------------------------------------------------------------
 -- META
-vim.g.mapleader = ','
+g.mapleader = ','
 
 -- [r]eload current config file
 keymap("n", "<leader>r", ':write<CR>:source %<CR>:echo "Reloaded."<CR>') -- alternative: https://www.reddit.com/r/neovim/comments/puuskh/how_to_reload_my_lua_config_while_using_neovim/
@@ -10,14 +10,16 @@ keymap("n", "<leader>r", ':write<CR>:source %<CR>:echo "Reloaded."<CR>') -- alte
 keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
 
 -- search options and their values
-keymap("n", "<leader>o", telescope("vim_options{prompt_prefix='⚙️'}"))
+keymap("n", "<leader>o", function() telescope.vim_options{prompt_prefix='⚙️'} end)
 
 -- search normal mode mappings
-keymap("n", "?", telescope("keymaps{prompt_prefix='❓'}"))
-keymap("n", "<leader>?", telescope("help_tags{prompt_prefix='❓'}"))
+keymap("n", "?", function() telescope.keymaps{prompt_prefix='❓'} end)
+
+-- search vim docs
+keymap("n", "<leader>?", function() telescope.help_tags{prompt_prefix='❓'} end)
 
 -- Theme Picker
-keymap("n", "<leader>T", telescope("colorscheme{enable_preview = true, prompt_prefix='🎨'}"))
+keymap("n", "<leader>T", function() telescope.colorscheme{enable_preview = true, prompt_prefix='🎨'} end)
 
 -- quicker quitting
 keymap("n", "ZZ", ":wall<CR>:q<CR>")
@@ -31,6 +33,8 @@ keymap("n", "j", "gj")
 keymap("n", "k", "gk")
 keymap("n", "gj", "j")
 keymap("n", "gk", "k")
+
+keymap("nv", "G", "Gzz") -- "overscroll" when going to bottom of editor
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 keymap("", "H", "0^") -- 0^ ensures scrolling to the left on long lines
@@ -48,13 +52,12 @@ cmd[[
 	let g:VM_maps['Find Under'] = '*'
 ]]
 
--- Misc
+-- Search
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
 keymap("", "<leader>m", ":nohl<CR>") -- [m]ute highlights
-keymap("n", "g-", telescope("current_buffer_fuzzy_find{prompt_prefix='🔍'}")) -- alternative search
-keymap("", "<leader>m", ":nohl<CR>") -- [m]ute highlights
+keymap("n", "g-", function() telescope.current_buffer_fuzzy_find{prompt_prefix='🔍'} end) -- alternative search
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -108,7 +111,7 @@ end
 keymap("n", "X", 'mz$"_x`z') -- Remove last character from line
 
 -- Spellling
-keymap("n", "zl", telescope("spell_suggest{prompt_prefix='🖍  '}"))
+keymap("n", "zl", function() telescope.spell_suggest{prompt_prefix='🖍  '} end)
 keymap("n", "gz", "]s") -- next misspelling
 keymap("n", "gZ", "[s") -- prev misspelling
 
@@ -128,7 +131,7 @@ keymap("i", "<C-e>", '<Esc>A')
 keymap("n", "<C-e>", 'A')
 keymap("i", "<C-a>", '<Esc>I')
 keymap("n", "<C-a>", 'I')
-keymap("i", "<C-k>", '<Esc>Dli')
+keymap("i", "<C-k>", '<Esc>lDi')
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
@@ -148,7 +151,7 @@ keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key (also works for JSON, 
 keymap("n", "<leader>c", 'mzlEF.yEEp`z') -- double [c]lass under cursor
 keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>') -- remove [C]lass under cursor
 
-keymap("n", "gS", telescope("current_buffer_fuzzy_find{default_text='<< ', prompt_prefix='🪧'}")) -- Navigation Markers
+keymap("n", "gS", function() telescope.current_buffer_fuzzy_find{default_text='< ', prompt_prefix='🪧'} end) -- Navigation Markers
 
 -- JS
 keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, requires vim.surround
@@ -183,11 +186,11 @@ keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 -- FILES AND WINDOWS
 
 -- File switchers
-keymap("n", "go", telescope("find_files{cwd='%:p:h', prompt_prefix='📂', hidden=true}")) -- [o]pen file in parent-directory
-keymap("n", "gO", telescope("find_files{cwd='%:p:h:h', prompt_prefix='🆙📂'}")) -- [o]pen file in grandparent-directory
-keymap("n", "gr", telescope("oldfiles{prompt_prefix='🕔'}")) -- [r]ecent files
-keymap("n", "gb", telescope("buffers{prompt_prefix='📑',ignore_current_buffer = true}")) -- open [b]uffer
-keymap("n", "gF", telescope("live_grep{cwd='%:p:h', disable_coordinates=true, prompt_prefix='🔎'}")) -- open [b]uffer
+keymap("n", "go", function() telescope.find_files{cwd='%:p:h', prompt_prefix='📂', hidden=true} end) -- [o]pen file in parent-directory
+keymap("n", "gO", function() telescope.find_files{cwd='%:p:h:h', prompt_prefix='🆙📂'} end) -- [o]pen file in grandparent-directory
+keymap("n", "gr", function() telescope.oldfiles{prompt_prefix='🕔'} end) -- [r]ecent files
+keymap("n", "gb", function() telescope.buffers{prompt_prefix='📑',ignore_current_buffer = true} end) -- open [b]uffer
+keymap("n", "gF", function() telescope.live_grep{cwd='%:p:h', disable_coordinates=true, prompt_prefix='🔎'} end) -- open [b]uffer
 
 -- Buffers
 keymap("", "<C-Tab>", "<C-^>")
