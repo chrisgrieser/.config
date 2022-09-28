@@ -67,6 +67,7 @@ keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r
 --------------------------------------------------------------------------------
 
 -- PASSIVE IMPROVEMENTS
+vim.api.nvim_create_augroup("CocGroup", {})
 
 -- Update signature help on jump placeholder.
 vim.api.nvim_create_autocmd("User", {
@@ -86,7 +87,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 -- Highlight the symbol and its references when holding the cursor.
-vim.api.nvim_create_augroup("CocGroup", {})
 vim.api.nvim_create_autocmd("CursorHold", {
 	group = "CocGroup",
 	command = "silent call CocActionAsync('highlight')",
