@@ -13,7 +13,7 @@ end
 -- partially overriden when using a theme
 
 -- Ruler
-cmd('highlight ColorColumn ctermbg=0 guibg=black') -- https://www.reddit.com/r/neovim/comments/me35u9/lua_config_to_set_highlight/
+cmd('highlight ColorColumn ctermbg=DarkGrey guibg=black') -- https://www.reddit.com/r/neovim/comments/me35u9/lua_config_to_set_highlight/
 
 -- Active Line
 cmd('highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black')
@@ -24,18 +24,16 @@ cmd('highlight clear SignColumn') -- transparent
 --------------------------------------------------------------------------------
 -- LUA LINE
 local function alternateFile()
+	local bufferCount = fn.bufnr("$")
+	if bufferCount == 1 then return "" end
+
 	local altFile = api.nvim_exec('echo expand("#:t")', true)
-	local thisFile = api.nvim_exec('echo expand("%:t")', true)
-	if altFile ~= thisFile then
-		return "# "..altFile
-	else
-		return ""
-	end
+	return "# "..altFile
 end
 
 local function currentFile()
 	local thisFile = api.nvim_exec('echo expand("%:t")', true)
-	return "%% "..thisFile
+	return "%% "..thisFile -- "%" is lua's escape character and therefore needs to be escaped itself
 end
 
 require('lualine').setup {

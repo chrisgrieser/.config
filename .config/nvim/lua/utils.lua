@@ -6,6 +6,8 @@ g = vim.g
 api = vim.api
 fn = vim.fn
 cmd = vim.cmd
+augroup = vim.api.nvim_create_augroup
+autocmd = vim.api.nvim_create_autocmd
 telescope = require("telescope.builtin") -- requires loading extensions first
 
 -- common functions
@@ -21,7 +23,4 @@ function keymap (modes, key, result)
 	end
 end
 
-function autocmd(eventName, callbackFunction)
-	vim.api.nvim_create_autocmd(eventName, { callback = callbackFunction })
-end
 
