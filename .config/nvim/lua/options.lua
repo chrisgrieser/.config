@@ -25,11 +25,7 @@ opt.colorcolumn = '+1' -- column next to textwidth option length
 -- files
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.autochdir = true -- always current directory
-
 opt.autowrite = true -- automatically saves on switching buffer
-autocmd({"CursorHold"}, function () -- autosave files with the duration from 'updatetime' (which, in turn, has to be set to ~300ms for vim.coc)
-	cmd("update")
-end)
 
 -- editor
 opt.cursorline = true -- by default underline, look changed in appearnce

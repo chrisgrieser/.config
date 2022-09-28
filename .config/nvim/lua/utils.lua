@@ -6,7 +6,6 @@ g = vim.g
 api = vim.api
 fn = vim.fn
 cmd = vim.cmd
-telescope = require("telescope.builtin")
 
 -- common functions
 function keymap (modes, key, result)

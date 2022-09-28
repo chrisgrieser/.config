@@ -5,7 +5,9 @@
     ],
     "Lua.diagnostics.globals": [
         "locffal",
-        "vim"
+        "vim",
+        "use",
+        "pluginList"
     ],
     "Lua.workspace.maxPreload": 2000
 }
