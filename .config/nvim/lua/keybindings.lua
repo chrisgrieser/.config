@@ -20,6 +20,7 @@ keymap("n", "<leader>T", function() telescope.colorscheme() end)
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
+	cmd[[write!]]
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	require("plugin-list")
 	local packer = require("packer")

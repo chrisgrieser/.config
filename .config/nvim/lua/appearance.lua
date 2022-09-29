@@ -14,13 +14,21 @@ end
 -- partially overriden when using a theme
 
 -- Ruler
-cmd('highlight ColorColumn ctermbg=DarkGrey guibg=black') -- https://www.reddit.com/r/neovim/comments/me35u9/lua_config_to_set_highlight/
+cmd[[highlight ColorColumn ctermbg=DarkGrey guibg=black]] -- https://www.reddit.com/r/neovim/comments/me35u9/lua_config_to_set_highlight/
 
 -- Active Line
-cmd('highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black')
+cmd[[highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black]]
+
+--------------------------------------------------------------------------------
 
 -- Sign Column (Gutter)
-cmd('highlight clear SignColumn') -- transparent
+cmd[[highlight clear SignColumn]] -- transparent
+
+-- GIT GUTTER
+-- https://github.com/airblade/vim-gitgutter#signs-colours-and-symbols
+cmd[[highlight GitGutterAdd    guifg=#009900 ctermfg=Green]]
+cmd[[highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow]]
+cmd[[highlight GitGutterDelete guifg=#ff2222 ctermfg=Red]]
 
 --------------------------------------------------------------------------------
 -- LUA LINE
