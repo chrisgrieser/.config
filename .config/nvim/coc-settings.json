@@ -1,0 +1,23 @@
+// vim: filetype=jsonc
+
+{
+	// Coc
+	"diagnostic.errorSign": "•",
+	"diagnostic.warningSign": "•",
+	"diagnostic.infoSign": "•",
+	"diagnostic.hintSign": "•",
+	"coc.preferences.extensionUpdateCheck": "weekly",
+
+	// Lua
+	"Lua.diagnostics.globals": ["hs", "vim"],
+	"Lua.diagnostics.disable": ["trailing-space"],
+	"Lua.workspace.library": [
+		"/Users/chrisgrieser/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
+		"/Users/chrisgrieser/.config/nvim/lua"
+	],
+
+	// CSS
+	"css.lint.vendorPrefix": "ignore",
+	"css.lint.duplicateProperties": "error"
+}
+

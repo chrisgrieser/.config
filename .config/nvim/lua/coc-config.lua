@@ -2,7 +2,12 @@ require("utils")
 --------------------------------------------------------------------------------
 
 g.coc_global_extensions = {
-	"coc-lua"
+	"coc-lua",
+	"coc-css",
+	"coc-sh",
+	"coc-yaml",
+	"coc-tsserver", -- typescript/javascript
+	"coc-json"
 }
 
 --------------------------------------------------------------------------------
@@ -12,21 +17,13 @@ opt.writebackup = false
 opt.updatetime = 300 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
 opt.signcolumn = "yes:1"
 
-local keyset = vim.keymap.set
-
--- Auto complete
-function _G.check_back_space()
-	local col = vim.fn.col('.') - 1
-	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
-end
-
 --------------------------------------------------------------------------------
 -- KEYMAPS
 
 -- Navigation
-keyset("n", "gd", "<Plug>(coc-definition)", {silent = true})
-keyset("n", "gy", "<Plug>(coc-type-definition)", {silent = true})
-keyset("n", "gD", "<Plug>(coc-references)", {silent = true})
+keymap("n", "gd", "<Plug>(coc-definition)", {silent = true})
+keymap("n", "gy", "<Plug>(coc-type-definition)", {silent = true})
+keymap("n", "gD", "<Plug>(coc-references)", {silent = true})
 
 -- [H]over Info
 function _G.show_docs()
@@ -39,34 +36,37 @@ function _G.show_docs()
 		vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
 	end
 end
-keyset("n", "<leader>h", '<CMD>lua _G.show_docs()<CR>', {silent = true})
+keymap("n", "<leader>h", '<CMD>lua _G.show_docs()<CR>', {silent = true})
 
 -- Error Navigation & Actions
 local opts = {silent = true, nowait = true}
-keyset("n", "<leader>f", "<Plug>(coc-fix-current)", {silent = true, nowait = true})
-keyset("n", "ge", "<Plug>(coc-diagnostic-next)", {silent = true, nowait = true})
-keyset("n", "gE", "<Plug>(coc-diagnostic-prev)", {silent = true, nowait = true})
+keymap("n", "<leader>f", "<Plug>(coc-fix-current)", opts)
+keymap("n", "ge", "<Plug>(coc-diagnostic-next)", opts)
+keymap("n", "gE", "<Plug>(coc-diagnostic-prev)", opts)
+
 -- Applying codeAction to the selected region. Example: `<leader>aap` for current paragraph
-keyset("x", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
-keyset("n", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
+keymap("x", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
+keymap("n", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
+
+-- LSP Rename
+keymap("n", "<leader>R", "<Plug>(coc-rename)")
 
 --------------------------------------------------------------------------------
 
--- PASSIVE AUTOCOMPLETION
+-- AUTOCOMPLETION
 -- Use tab for trigger completion with characters ahead and navigate.
 -- NOTE: There's always complete item selected by default, you may want to enable
 -- no select by `"suggest.noselect": true` in your configuration file.
-local opts = {silent = true, noremap = true, expr = true}
-keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
-keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 
--- Make <CR> to accept selected completion item or notify coc.nvim to format
--- <C-g>u breaks current undo, please make your own choice.
-keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
+local opts = {silent = true, noremap = true, expr = true}
+
+-- Make `return` and `tab` to accept selected completion item
+keymap("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
+keymap("i", "<Tab>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
 
 --------------------------------------------------------------------------------
 
--- PASSIVE IMPROVEMENTS
+-- PASSIVES
 augroup("CocGroup", {})
 
 -- Update signature help on jump placeholder.
@@ -91,5 +91,25 @@ autocmd("CursorHold", {
 	command = "silent call CocActionAsync('highlight')",
 	desc = "Highlight symbol under cursor on CursorHold"
 })
+
+--------------------------------------------------------------------------------
+
+-- Function Text Object
+-- NOTE: Requires 'textDocument.documentSymbol' support from the language server
+local opts = {silent = true, nowait = true}
+keymap("x", "if", "<Plug>(coc-funcobj-i)", opts)
+keymap("o", "if", "<Plug>(coc-funcobj-i)", opts)
+keymap("x", "af", "<Plug>(coc-funcobj-a)", opts)
+keymap("o", "af", "<Plug>(coc-funcobj-a)", opts)
+
+-- Remap <C-f> and <C-b> for scroll float windows/popups.
+local opts = {silent = true, nowait = true, expr = true}
+keymap("n", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
+keymap("n", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
+keymap("i", "<C-f>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
+keymap("i", "<C-b>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
+keymap("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
+keymap("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
+
 
 

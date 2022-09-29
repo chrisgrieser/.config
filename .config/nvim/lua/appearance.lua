@@ -1,4 +1,5 @@
 require("utils")
+
 --------------------------------------------------------------------------------
 
 -- THEME
@@ -31,15 +32,10 @@ local function alternateFile()
 	return "# "..altFile
 end
 
-local function currentFile()
-	local thisFile = api.nvim_exec('echo expand("%:t")', true)
-	return "%% "..thisFile -- "%" is lua's escape character and therefore needs to be escaped itself
-end
-
 require('lualine').setup {
 	sections = {
 		lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
-		lualine_b = {{ currentFile }},
+		lualine_b = {{'filename', file_status = false, fmt = function(str) return "%% "..str end}}, -- "%" is lua's escape character and therefore needs to be escaped itself
 		lualine_c = {{ alternateFile }},
 		lualine_x = {''},
 		lualine_y = {'diagnostics'},

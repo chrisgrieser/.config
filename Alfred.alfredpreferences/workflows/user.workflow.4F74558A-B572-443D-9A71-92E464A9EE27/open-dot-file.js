@@ -24,6 +24,7 @@ const workArray = app.doShellScript (
 	-E "visualized keyboard layout/*.json" \
 	-E "Mac Migration Scripts/to do*" \
 	-E "unused/*" \
+	-E "Fonts/*" \
 	-E ".config/coc/*" \
 	-E ".DS_Store" \
 	-E ".git/"'

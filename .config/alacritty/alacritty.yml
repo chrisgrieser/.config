@@ -84,7 +84,8 @@ font:
     x: 0
     y: 0
   glyph_offset:
-    y: 0 # roughly equivalent to increasing line height
+    y: 20 # roughly equivalent to increasing line height
+    x: 10 # roughly equivalent to increasing line height
 window:
   decorations: buttonless
   position:
@@ -94,8 +95,8 @@ window:
     columns: 94
     lines: 50
   padding:
-    x: 6
-    y: 6
+    x: 5
+    y: 5
   opacity: .96
 scrolling:
   history: 4000

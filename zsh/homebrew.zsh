@@ -41,6 +41,7 @@ function dump () {
 function update (){
 	print-section "NEOVIM"
 	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' # https://github.com/wbthomason/packer.nvim#bootstrapping
+	nvim --headless -c 'CocUpdateSync|q'
 
 	print-section "OBSIDIAN"
 	open "obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian42-brat%253ABRAT-checkForUpdatesAndUpdate"
