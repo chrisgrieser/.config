@@ -29,10 +29,10 @@ function PluginList ()
 
 	-- Editing
 	use 'tpope/vim-commentary' -- comments operator & text object
-	use 'tpope/vim-abolish' -- the case conversions
+	use 'tpope/vim-abolish' -- various case conversions
 	use 'mg979/vim-visual-multi' -- multi-cursor
-	use 'tpope/vim-surround' -- surround with punctuation
-	use 'Raimondi/delimitMate' -- auto-close brackets & quotes. Alternative: cohama/lexima.vim
+	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'} -- surround with punctuation
+	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (Alternative: cohama/lexima.vim)
 	use 'michaeljsmith/vim-indent-object' -- indention-based text objects
 	use 'svermeulen/vim-subversive' -- replacement operator
 	use 't9md/vim-textmanip' -- line swapping & duplication
