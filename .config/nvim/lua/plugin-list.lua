@@ -8,8 +8,7 @@ function PluginList ()
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use "unblevable/quick-scope" -- highlight for f & t
 	use 'nvim-lualine/lualine.nvim' -- statusbar (w/o requiring icons, since I don't use them)
-	use 'itchyny/vim-highlighturl' -- highlight urls
-	use 'airblade/vim-gitgutter' -- Nomen est omen
+	use 'airblade/vim-gitgutter'
 	-- use 'nvim-treesitter/nvim-treesitter'
 	-- use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 
@@ -33,7 +32,7 @@ function PluginList ()
 	use 'mg979/vim-visual-multi' -- multi-cursor
 	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'} -- surround with punctuation
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (Alternative: cohama/lexima.vim)
-	use 'michaeljsmith/vim-indent-object' -- indention-based text objects
+	use 'michaeljsmith/vim-indent-object' -- indention text objects
 	use 'svermeulen/vim-subversive' -- replacement operator
 	use 't9md/vim-textmanip' -- line swapping & duplication
 
