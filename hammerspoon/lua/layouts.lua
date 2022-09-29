@@ -1,11 +1,11 @@
-require("utils")
-require("window-management")
-require("private")
+require("lua.utils")
+require("lua.window-management")
+require("lua.private")
 
 --------------------------------------------------------------------------------
 -- HELPERS
 function dockSwitcher (targetMode)
-	hs.execute("zsh ./dock-switching/dock-switcher.sh --load "..targetMode)
+	hs.execute("zsh ./helpers/dock-switching/dock-switcher.sh --load "..targetMode)
 end
 
 function sublimeFontSize (size)

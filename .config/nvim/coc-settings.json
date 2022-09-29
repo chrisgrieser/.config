@@ -9,7 +9,7 @@
 	"coc.preferences.extensionUpdateCheck": "weekly",
 
 	// Lua
-	"Lua.diagnostics.globals": ["hs", "vim"],
+	"Lua.diagnostics.globals": ["hs", "vim", "martax"],
 	"Lua.diagnostics.disable": ["trailing-space"],
 	"Lua.workspace.library": [
 		"/Users/chrisgrieser/.hammerspoon/Spoons/EmmyLua.spoon/annotations",

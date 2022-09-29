@@ -1,4 +1,4 @@
-require("utils")
+require("lua.utils")
 
 fileHub = home.."/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 
@@ -23,7 +23,7 @@ bookmarkWatcher:start()
 downloadFolder=home.."/Downloaded"
 function downloadFolderBadge ()
 	-- requires "fileicon" being installed
-	hs.execute("zsh ./download-folder-badge/download-folder-icon.sh "..downloadFolder)
+	hs.execute("zsh ./helpers/download-folder-badge/download-folder-icon.sh "..downloadFolder)
 end
 downloadFolderWatcher = hs.pathwatcher.new(downloadFolder, downloadFolderBadge)
 downloadFolderWatcher:start()
@@ -112,8 +112,6 @@ fileHubWatcher:start()
 -- auto-install Obsidian Alpha builds as soon as the file is downloaded
 function installObsiAlpha (files)
 	for _,file in pairs(files) do
-		print(file)
-
 		-- needs delay and crdownload check, since the renaming is sometimes not picked up by hammerspoon
 		if not(file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
 		runDelayed(0.5, function ()

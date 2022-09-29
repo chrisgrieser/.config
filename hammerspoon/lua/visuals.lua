@@ -1,6 +1,6 @@
-require("utils")
-require("window-management")
-require("dark-mode")
+require("lua.utils")
+require("lua.window-management")
+require("lua.dark-mode")
 
 --------------------------------------------------------------------------------
 

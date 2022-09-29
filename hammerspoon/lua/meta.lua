@@ -1,4 +1,4 @@
-require("utils")
+require("lua.utils")
 --------------------------------------------------------------------------------
 -- settings
 hs.allowAppleScript(false)
@@ -7,11 +7,7 @@ hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
 hs.window.animationDuration = 0
 
---------------------------------------------------------------------------------
-
--- autocompletions for the LSP
-hs.loadSpoon('EmmyLua')
-
+hs.loadSpoon('EmmyLua') -- runs lazy, i.e. only updates when there have been changes
 --------------------------------------------------------------------------------
 
 -- `hammerspoon://hs-reload` for reloading via Sublime Build System
@@ -29,7 +25,7 @@ end)
 hs.console.titleVisibility("hidden")
 hs.console.toolbar(nil)
 
-hs.console.consoleFont({name = "JetBrainsMonoNL Nerd Font", size = 17})
+hs.console.consoleFont({name = "JetBrainsMonoNL Nerd Font", size = 18})
 
 hs.console.darkMode(false)
 hs.console.outputBackgroundColor{ white = 0.92 }
