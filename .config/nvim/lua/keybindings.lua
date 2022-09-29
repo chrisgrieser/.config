@@ -57,7 +57,7 @@ cmd[[
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
-keymap("", "<leader>m", ":nohl<CR>") -- [m]ute highlights
+keymap("n", "<Esc>", ":nohl<CR>", {silent = true}) -- [m]ute highlights with Esc
 keymap("n", "g-", function() telescope.current_buffer_fuzzy_find() end) -- alternative search
 
 --------------------------------------------------------------------------------
@@ -91,6 +91,7 @@ end)
 
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h") -- append space
+keymap("n", "\\", "i <Esc>l", {nowait = true}) -- prepend space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
 keymap("n", "<BS>", "dipO<Esc>") -- reduce multiple blank lines to exactly one
@@ -103,7 +104,7 @@ keymap("v", "<S-Tab>", "<gv")
 keymap("nv", "^", "=") -- auto-indent
 keymap("n", "^p", "`[v`]=") -- auto-indent last paste
 
--- Switch Case of first letter of the word (= toggle between Capital and lower case)
+-- toggle word between Capital and lower case
 keymap("n", "ü", "mzlblgueh~`z")
 
 -- Transpose
@@ -138,10 +139,7 @@ keymap("n", "ss", "<plug>(SubversiveSubstituteLine)")
 keymap("n", "S", "<plug>(SubversiveSubstituteToEndOfLine)")
 
 --------------------------------------------------------------------------------
--- INSERT MODE
-keymap("i", "jj", '<Esc>')
-
--- consistent with insert mode / emacs bindings
+-- INSERT & COMMAND MODE
 keymap("i", "<C-e>", '<Esc>A') -- EoL
 keymap("i", "<C-k>", '<Esc>lDi') -- kill line
 keymap("i", "<C-a>", '<Esc>I') -- BoL
@@ -150,6 +148,9 @@ keymap("n", "<C-a>", 'I')
 keymap("c", "<C-a>", '<Home>')
 keymap("c", "<C-e>", '<End>')
 keymap("c", "<C-u>", '<C-e><C-u>') -- clear
+
+-- quicker block
+keymap("i", "!!", '{}<Left><CR><Esc>O') -- more convenient to type
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
