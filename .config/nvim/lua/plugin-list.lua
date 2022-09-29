@@ -9,6 +9,12 @@ function PluginList ()
 	use "unblevable/quick-scope" -- highlight for f & t
 	use 'nvim-lualine/lualine.nvim' -- statusbar (w/o requiring icons, since I don't use them)
 	use 'itchyny/vim-highlighturl' -- highlight urls
+	use 'airblade/vim-gitgutter' -- Nomen est omen
+
+	-- check out later?
+	-- use 'nvim-treesitter/nvim-treesitter'
+	-- use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'},
+	-- }
 
 	-- LSP & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
@@ -29,12 +35,8 @@ function PluginList ()
 	use 'tpope/vim-abolish' -- the case conversions
 	use 'mg979/vim-visual-multi' -- multi-cursor
 	use 'tpope/vim-surround' -- surround with punctuation
+	use 'Raimondi/delimitMate' -- auto-close brakcets & quotes. Alternative: cohama/lexima.vim
 	use 'michaeljsmith/vim-indent-object' -- indention-based text objects
-
-	-- check out later?
-	-- use 'nvim-treesitter/nvim-treesitter'
-	-- use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'},
-	-- }
 
 end
 
