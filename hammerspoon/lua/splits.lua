@@ -1,5 +1,5 @@
-require("utils")
-require("window-management")
+require("lua.utils")
+require("lua.window-management")
 --------------------------------------------------------------------------------
 
 -- gets the Windows on the main screen, in order of the stack

@@ -1,6 +1,6 @@
-require("utils")
-require("window-management")
-require("system-and-cron")
+require("lua.utils")
+require("lua.window-management")
+require("lua.system-and-cron")
 
 --------------------------------------------------------------------------------
 -- TRANSPARENT background for Obsidian & Alacritty

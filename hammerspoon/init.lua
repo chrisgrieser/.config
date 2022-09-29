@@ -1,20 +1,22 @@
-require("meta")
-require("utils")
-require("visuals")
-holeCover() ---@diagnostic disable-line: undefined-global
+require("lua.meta")
+require("lua.utils")
+require("lua.visuals")
+holeCover()
 
-require("window-management")
-require("dark-mode")
-require("layouts")
-require("splits")
+require("lua.window-management")
+require("lua.dark-mode")
+require("lua.layouts")
+require("lua.splits")
 
-require("scroll-and-cursor")
-require("system-and-cron")
-require("filesystem-watchers")
-if isIMacAtHome() then require("usb-watchers") end
+require("lua.scroll-and-cursor")
+require("lua.system-and-cron")
+require("lua.filesystem-watchers")
+if isIMacAtHome() then require("lua.usb-watchers") end
 
-require("app-specific-behavior")
-require("twitterrific-controls")
-require("hot-corner-action")
+require("lua.app-specific-behavior")
+if not (isAtOffice()) then
+	require("lua.twitterrific-controls")
+	require("lua.hot-corner-action")
+end
 
-systemStart() ---@diagnostic disable-line: undefined-global
+systemStart()

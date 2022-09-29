@@ -1,4 +1,4 @@
-require("utils")
+require("lua.utils")
 
 function twitterrificAction (type)
 	local previousApp = frontapp()

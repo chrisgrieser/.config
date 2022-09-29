@@ -1,4 +1,4 @@
-require("utils")
+require("lua.utils")
 
 highlightsScrollAmount = 20
 

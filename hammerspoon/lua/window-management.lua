@@ -1,5 +1,5 @@
-require("utils")
-require("twitterrific-controls")
+require("lua.utils")
+require("lua.twitterrific-controls")
 
 --------------------------------------------------------------------------------
 -- WINDOW MANAGEMENT UTILS

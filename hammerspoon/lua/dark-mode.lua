@@ -1,4 +1,4 @@
-require("utils")
+require("lua.utils")
 
 --------------------------------------------------------------------------------
 
@@ -7,7 +7,7 @@ function toggleDarkMode ()
 	if isDarkMode() then targetMode = "light" end
 	local prevApp = frontapp()
 
-	hs.execute("zsh toggle-marta-darkmode.sh "..targetMode)
+	hs.execute("zsh ./helpers/toggle-marta-darkmode.sh "..targetMode)
 
 	hs.osascript.applescript([[
 		set openBlank to false

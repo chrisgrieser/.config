@@ -1,6 +1,6 @@
-require("utils")
+require("lua.utils")
 --------------------------------------------------------------------------------
-podcastSyncScript = os.getenv("HOME").."/dotfiles/hammerspoon/cp-podcasts.sh"
+podcastSyncScript = "./helpers/cp-podcasts.sh"
 function openSwimAdded (device)
 	if not(device.eventType == "added" and device.productName == "LC8234xx_17S EVK") then return end
 

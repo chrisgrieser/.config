@@ -83,9 +83,9 @@ font:
   offset:
     x: 0
     y: 0
-  glyph_offset:
-    y: 20 # roughly equivalent to increasing line height
-    x: 10 # roughly equivalent to increasing line height
+  glyph_offset: # needs restart
+    y: 1 # equivalent to line height. However, some nerdfont and starship deco looks off with it.
+    x: 0 # equivalent to letter spacing
 window:
   decorations: buttonless
   position:

@@ -1,57 +1,18 @@
 // Settings in here override those in "LSP-lua/LSP-lua.sublime-settings"
 {
 	"settings": {
-		"Lua.diagnostics.libraryFiles": "Enable",
-      "Lua.diagnostics.disable": [
-      	"lowercase-global",
-      	"trailing-space" // fixed by Sublime
-      ],
+		"Lua.workspace.library": [
+			"/Users/chrisgrieser/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
+			"/Users/chrisgrieser/.config/nvim/lua"
+		],
+		"Lua.diagnostics.disable": [
+			"lowercase-global",
+      "trailing-space" // fixed by Sublime
+    ],
 		"Lua.diagnostics.globals": [
-			// nvim
 			"vim",
-
-			// Marta
-			"martax",
-			"action",
-			"plugin",
-
-			// Hammerspoon Core
 			"hs",
-			"spoon",
-			// Hammerspoon utils.lua
-			"notify",
-			"home",
-			"alert",
-			"SPLIT_RIGHT",
-			"SPLIT_LEFT",
-			"log",
-			"hotkey",
-			"maximized",
-			"trim",
-			"aw",
-			"wf",
-			"hyper",
-			"deviceName",
-			"iMacDisplay",
-			"setDarkmode",
-			"keystroke",
-			"appIsRunning",
-			"runDelayed",
-			"moveResizeCurWin",
-			"frontapp",
-			"isHalf",
-			"pseudoMaximized",
-			"isPseudoMaximized",
-			"isMaximized",
-			"moveResize",
-			"baseLayout",
-			"isIMacAtHome",
-			"isDarkMode",
-			"openIfNotRunning",
-			"killIfRunning",
-			"isAtOffice",
-			"isProjector",
-			"isAtMother",
+			"martax", // Marta
 		]
 	}
 }

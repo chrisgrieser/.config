@@ -1,7 +1,7 @@
-require("utils")
-require("window-management")
-require("dark-mode")
-require("layouts")
+require("lua.utils")
+require("lua.window-management")
+require("lua.dark-mode")
+require("lua.layouts")
 
 --------------------------------------------------------------------------------
 -- CONFIG
