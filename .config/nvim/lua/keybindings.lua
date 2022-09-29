@@ -79,11 +79,13 @@ keymap("n", "Q", "\"_ci'") -- change single [Q]uote content
 keymap("n", "q", '"_ci"') -- change double [q]uote content
 keymap("n", "0", '"_ci)') -- change parenthesis. mnemonic: () looks like a 0
 keymap("n", "R", 'viwP') -- [R]eplace Word with register content
--- change small word / variable segment
+
+-- change small word (i.e. a simpler version of vim-textobj-variable-segment
+-- (not supporting CamelCase though)
 keymap("n", "<leader><Space>", function ()
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
-	cmd[[normal! "_diw]] -- :Normal does not allow to end in insert mode
-	cmd[[startinsert]]
+	cmd[[normal! "_diw]]
+	cmd[[startinsert]] -- :Normal does not allow to end in insert mode
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
 end)
 

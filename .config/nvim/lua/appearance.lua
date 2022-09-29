@@ -19,19 +19,24 @@ cmd[[highlight ColorColumn ctermbg=DarkGrey guibg=black]] -- https://www.reddit.
 -- Active Line
 cmd[[highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black]]
 
---------------------------------------------------------------------------------
+cmd[[syn match matchURL '/http[s]\?:\/\/[[:alnum:]%\/_#.-]*/'
+hi matchURL ctermfg=14]]
 
--- Sign Column (Gutter)
+--------------------------------------------------------------------------------
+-- GUTTER
+-- Sign Column ( = Gutter)
 cmd[[highlight clear SignColumn]] -- transparent
 
--- GIT GUTTER
+-- Git Gutter
 -- https://github.com/airblade/vim-gitgutter#signs-colours-and-symbols
-cmd[[highlight GitGutterAdd    guifg=#009900 ctermfg=Green]]
-cmd[[highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow]]
-cmd[[highlight GitGutterDelete guifg=#ff2222 ctermfg=Red]]
+cmd[[highlight GitGutterAdd    guifg=Green ctermfg=Green]]
+cmd[[highlight GitGutterChange guifg=Yellow ctermfg=Yellow]]
+cmd[[highlight GitGutterDelete guifg=Red ctermfg=Red]]
+
+-- INFO: Look of the Coc Gutter indicators is set in coc-settings.json
 
 --------------------------------------------------------------------------------
--- LUA LINE
+-- STATUS LINE (Lua Line)
 local function alternateFile()
 	local bufferCount = fn.bufnr("$")
 	if bufferCount == 1 then return "" end
