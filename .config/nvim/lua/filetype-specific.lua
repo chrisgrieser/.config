@@ -23,3 +23,34 @@ autocmd( "FileType", {
 	command = [[ syntax match Comment +\/\/.\+$+ ]]
 })
 
+-----
+
+-- types of hr
+g.hrComment = "---"
+keymap("n", "=", ":call setline('.', '"..g.hrComment.."')<CR>", {buffer = true, silent = true})
+
+autocmd( "FileType", {
+	pattern = {"json", "js", "ts"},
+	callback = function() g.hrComment = "//──────────────────────────────────────────────────────────────────────────────" end
+})
+
+autocmd( "FileType", {
+	pattern = {"sh", "zsh", "yaml", "yml"},
+	callback = function() g.hrComment = "#───────────────────────────────────────────────────────────────────────────────" end
+})
+
+autocmd( "FileType", {
+	pattern = {"lua", "applescript"},
+	callback = function() g.hrComment = "────────────────────────────────────────────────────────────────────────────────" end
+})
+
+autocmd( "FileType", {
+	pattern = {"css"},
+	callback = function() g.hrComment = "/* ───────────────────────────────────────────────── */\n/* << XXX\n──────────────────────────────────────────────────── */" end
+})
+
+
+
+
+
+
