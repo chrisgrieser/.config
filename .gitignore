@@ -11,7 +11,7 @@ dlFolderLastChange
 # redundant
 .config/karabiner/automatic_backups
 
-# coc.vim extensions quite big
+# coc.vim extensions quite, lsp servers auto-installed anyway
 .config/coc/extensions
 
 # in case of accidental saving of such files in the repo

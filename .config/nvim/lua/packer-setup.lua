@@ -1,3 +1,8 @@
+-- INFO: file should *not* be named "packer.lua", since then `require("packer")`
+-- is ambigious
+
+--------------------------------------------------------------------------------
+
 -- auto-install packer if not installed https://github.com/wbthomason/packer.nvim#bootstrapping
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -12,7 +17,7 @@ if (not status_ok) then return end
 
 -- load all plugins
 require("plugin-list")
-packer.startup(pluginList)
+packer.startup(PluginList)
 
 -- https://github.com/wbthomason/packer.nvim#performing-plugin-management-operations
 packer.install() -- auto-install missing plugins
@@ -24,8 +29,9 @@ vim.keymap.set("n", "<leader>p", function()
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	require("plugin-list")
 	local packer = require("packer")
-	packer.startup(pluginList)
+	packer.startup(PluginList)
 	packer.sync()
+
 end)
 
 

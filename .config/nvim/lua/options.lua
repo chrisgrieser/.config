@@ -16,7 +16,7 @@ opt.shiftround = true
 -- gutter
 opt.relativenumber = false
 opt.signcolumn = 'no'
-opt.fillchars = 'eob: ' -- hide the "~" marking non-existent lines
+opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
 
 -- ruler
 opt.textwidth = 80 -- used by `gq`
@@ -26,25 +26,27 @@ opt.colorcolumn = '+1' -- column next to textwidth option length
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.autochdir = true -- always current directory
 opt.autowrite = true -- automatically saves on switching buffer
+opt.undofile = true -- persistent undo history
 
 -- editor
 opt.cursorline = true -- by default underline, look changed in appearnce
 opt.wrap = false
 opt.scrolloff = 11
-opt.sidescrolloff = 10
+opt.sidescrolloff = 15
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
-autocmd("BufEnter", function ()
-	-- "o" adds comment syntax when using `o` or `O` https://neovim.io/doc/user/change.html#fo-table
-	opt.formatoptions = opt.formatoptions - {"o", "r"}
-end)
+autocmd("BufEnter", {
+	callback = function ()
+		opt.formatoptions = opt.formatoptions - {"o", "r"}
+	end
+})
 
 -- Remember Cursor Position
-autocmd ("BufReadPost", function()
-   cmd[[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' |  exe "normal! g`\"" | endif]]
-end)
+autocmd ("BufReadPost", {
+	command = [[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' |  exe "normal! g`\"" | endif]]
+})
 
 -- status bar
 opt.showcmd = true -- keychords pressed
@@ -54,13 +56,15 @@ opt.laststatus = 2 -- show always
 
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
-cmd[[au TextYankPost * silent! lua vim.highlight.on_yank{timeout = 3000} ]] -- highlighted yank
+autocmd("TextYankPost", { command = "silent! lua vim.highlight.on_yank{timeout = 2500}", }) -- = highlighted yank
 
 -- Mini-Linting on save
-autocmd("BufWritePre",  function()
-	cmd[[%s/\s\+$//e]] -- remove trailing whitespaces
-	cmd[[$s/\(.\)$/\1\r/e]] -- add line breaks at end if there is-none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
-end )
+autocmd("BufWritePre", {
+	callback = function()
+		cmd[[%s/\s\+$//e]] -- remove trailing whitespaces
+		cmd[[$s/\(.\)$/\1\r/e]] -- add line breaks at end if there is-none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
+	end
+})
 
 -- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070
 opt.iskeyword = opt.iskeyword + {"-"}

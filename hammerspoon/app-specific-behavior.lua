@@ -259,6 +259,14 @@ end
 finderAppWatcher = aw.new(finderWatcher)
 finderAppWatcher:start()
 
+-- hide when last window closed
+wf_finder = wf.new("Finder")
+wf_finder:subscribe(wf.windowDestroyed, function ()
+	if #wf_finder:getWindows() == 0 then
+		hs.application("Finder"):hide()
+	end
+end)
+
 --------------------------------------------------------------------------------
 
 -- MARTA

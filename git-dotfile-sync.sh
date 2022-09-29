@@ -13,8 +13,9 @@ if [[ "$filesChanged" == 0 ]] ; then
 fi
 
 # safeguard against accidental pushing of large files
+# coc/extension is large, but already gitignored
 # shellcheck disable=SC2248
-NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -size +${MAX_FILE_SIZE_MB}M | wc -l | xargs)
+NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -not -path "**/coc/extensions/**" -size +${MAX_FILE_SIZE_MB}M | wc -l | xargs)
 if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
 	echo -n "$NUMBER_LARGE_FILES Large files detected, aborting automatic git sync."
 	exit 1

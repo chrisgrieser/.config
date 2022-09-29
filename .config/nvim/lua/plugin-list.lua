@@ -1,4 +1,4 @@
-function pluginList () ---@diagnostic disable-line: lowercase-global
+function PluginList ()
 	use 'wbthomason/packer.nvim' -- packer manages itself
 
 	-- Themes
@@ -6,12 +6,12 @@ function pluginList () ---@diagnostic disable-line: lowercase-global
 
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
-	use "unblevable/quick-scope" -- highlight for f and t movements
+	use "unblevable/quick-scope" -- highlight for f & t
 	use 'nvim-lualine/lualine.nvim' -- statusbar (w/o requiring icons, since I don't use them)
 	use 'itchyny/vim-highlighturl' -- highlight urls
 
-	-- IntelliSense
-	use {'neoclide/coc.nvim', branch = 'release'} -- LSP
+	-- LSP & Syntax
+	use {'neoclide/coc.nvim', branch = 'release'}
 
 	-- Utility
 	-- use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
@@ -30,11 +30,11 @@ function pluginList () ---@diagnostic disable-line: lowercase-global
 	use 'mg979/vim-visual-multi' -- multi-cursor
 	use 'tpope/vim-surround' -- surround with punctuation
 	use 'michaeljsmith/vim-indent-object' -- indention-based text objects
+	use { 'julian/vim-textobj-variable-segment', requires = { 'kana/vim-textobj-user' }}
 
 	-- check out later?
-	-- use {
-	-- 	'nvim-treesitter/nvim-treesitter-context',
-	-- 	requires = {'nvim-treesitter/nvim-treesitter'},
+	-- use 'nvim-treesitter/nvim-treesitter'
+	-- use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'},
 	-- }
 
 end
