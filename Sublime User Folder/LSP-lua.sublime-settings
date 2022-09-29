@@ -3,6 +3,7 @@
 	"settings": {
 		"Lua.workspace.library": [
 			"/Users/chrisgrieser/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
+			"/Users/chrisgrieser/.hammerspoon/lua",
 			"/Users/chrisgrieser/.config/nvim/lua"
 		],
 		"Lua.diagnostics.disable": [
