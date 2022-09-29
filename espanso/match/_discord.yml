@@ -4,7 +4,7 @@ matches:
   - trigger: "legacy editor"
     replace: "legacy edit0r [auto-censored]"
   - trigger: "eee"
-    replace: "s/$|$/"
+    replace: "s/$|$//"
   - trigger: "!update"
     replace: |
       **Shimmering Focus Update ⟡**
