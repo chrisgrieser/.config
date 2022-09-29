@@ -37,20 +37,17 @@ cmd[[highlight clear SignColumn]] -- transparent
 cmd[[highlight GitGutterAdd    guifg=Green ctermfg=Green]]
 cmd[[highlight GitGutterChange guifg=Yellow ctermfg=Yellow]]
 cmd[[highlight GitGutterDelete guifg=Red ctermfg=Red]]
-g.gitgutter_sign_allow_clobber = 1
-g.gitgutter_sign_priority = 9
+g.gitgutter_sign_priority = 9 -- lower to not overwrite when in conflict with other icons
 
 -- INFO: Look of the Coc Gutter indicators is set in coc-settings.json
 
 --------------------------------------------------------------------------------
 -- STATUS LINE (Lua Line)
 local function alternateFile()
-	local bufferCount = fn.bufnr("$")
+	-- local bufferCount = fn.bufnr("$")
 	local altFile = api.nvim_exec('echo expand("#:t")', true)
 	local curFile = api.nvim_exec('echo expand("%:t")', true)
-
-	if bufferCount == 1 then return "" end
-
+	if altFile == curFile then return "" end
 	return "# "..altFile
 end
 

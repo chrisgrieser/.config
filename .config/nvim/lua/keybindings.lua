@@ -78,7 +78,7 @@ keymap("v", "<S-Space>", '"_d')
 keymap("n", "Q", "\"_ci'") -- change single [Q]uote content
 keymap("n", "q", '"_ci"') -- change double [q]uote content
 keymap("n", "0", '"_ci)') -- change parenthesis. mnemonic: () looks like a 0
-keymap("n", "R", 'viwP') -- [R]eplace Word with register content
+keymap("o", "r", '}') -- [r]est of the paragraph
 
 -- change small word (i.e. a simpler version of vim-textobj-variable-segment
 -- (not supporting CamelCase though)
@@ -93,7 +93,7 @@ end)
 keymap("n", "!", "a <Esc>h") -- append space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
-keymap("n", "<BS>", "dipO<Esc>") -- reduce multiple blank lines to one
+keymap("n", "<BS>", "dipO<Esc>") -- reduce multiple blank lines to exactly one
 
 -- Indention
 keymap("n", "<Tab>", ">>")
@@ -142,12 +142,14 @@ keymap("n", "S", "<plug>(SubversiveSubstituteToEndOfLine)")
 keymap("i", "jj", '<Esc>')
 
 -- consistent with insert mode / emacs bindings
-keymap("i", "<C-e>", '<Esc>A')
+keymap("i", "<C-e>", '<Esc>A') -- EoL
+keymap("i", "<C-k>", '<Esc>lDi') -- kill line
+keymap("i", "<C-a>", '<Esc>I') -- BoL
 keymap("n", "<C-e>", 'A')
-keymap("i", "<C-a>", '<Esc>I')
 keymap("n", "<C-a>", 'I')
-keymap("i", "<C-k>", '<Esc>lDi')
-
+keymap("c", "<C-a>", '<Home>')
+keymap("c", "<C-e>", '<End>')
+keymap("c", "<C-u>", '<C-e><C-u>') -- clear
 --------------------------------------------------------------------------------
 -- VISUAL MODE
 keymap("v", "V", "j") -- so double "V" selects two lines
