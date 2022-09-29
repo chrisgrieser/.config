@@ -29,7 +29,6 @@ function PluginList ()
 	use 'tpope/vim-abolish' -- the case conversions
 	use 'mg979/vim-visual-multi' -- multi-cursor
 	use 'tpope/vim-surround' -- surround with punctuation
-	use 'michaeljsmith/vim-indent-object' -- indention-based text objects
 	use { 'julian/vim-textobj-variable-segment', requires = { 'kana/vim-textobj-user' }}
 
 	-- check out later?

@@ -31,7 +31,6 @@ vim.keymap.set("n", "<leader>p", function()
 	local packer = require("packer")
 	packer.startup(PluginList)
 	packer.sync()
-
 end)
 
 
