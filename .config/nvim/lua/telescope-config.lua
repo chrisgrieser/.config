@@ -4,7 +4,7 @@ require("telescope").setup {
 	defaults = {
 		selection_caret = "⟐ ",
 		prompt_prefix = "❱ ",
-		path_display = { "smart" },
+		path_display = { "tail" },
 		file_ignore_patterns = { "packer_compiled.lua" },
 		mappings = {
 			i = {
