@@ -48,10 +48,7 @@ matches:
   - trigger: "!resolve"
     replace: |
       resolved_path="${file_path/#\~/$HOME}"
-
     label: '🐚 Resolve ~'
-  - trigger: "!hr"
-    replace: "#-------------------------------------------------------------------------------"
   - label: "🐚 Number of Displays (on macOS)"
     replace: "system_profiler SPDisplaysDataType | grep -c resolution"
   - trigger: "!gc"
@@ -64,8 +61,6 @@ matches:
       else
       	echo "Not running"
       fi
-  - regex: " ?!!"  # so this works whether prepended with space or not
-    replace: " {\n"
   - trigger: "!rename"
     replace: |
       for file in * ; do

@@ -2,8 +2,6 @@
 # ------------------------------------------
 
 matches:
-  - trigger: "!hr"
-    replace: "//------------------------------------------------------------------------------"
   - trigger: ".rr"
     replace: ".replace(/$|$/g, \"\");"
   # - regex: " ?!!"  # so this works whether prepended with space or not
