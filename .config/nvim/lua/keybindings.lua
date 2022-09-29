@@ -150,6 +150,7 @@ keymap("n", "<C-a>", 'I')
 keymap("c", "<C-a>", '<Home>')
 keymap("c", "<C-e>", '<End>')
 keymap("c", "<C-u>", '<C-e><C-u>') -- clear
+
 --------------------------------------------------------------------------------
 -- VISUAL MODE
 keymap("v", "V", "j") -- so double "V" selects two lines

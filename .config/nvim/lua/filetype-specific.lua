@@ -23,11 +23,17 @@ autocmd( "FileType", {
 	command = [[ syntax match Comment +\/\/.\+$+ ]]
 })
 
------
+--------------------------------------------------------------------------------
 
--- types of hr
-g.hrComment = "---"
-keymap("n", "=", ":call setline('.', '"..g.hrComment.."')<CR>", {buffer = true, silent = true})
+-- inserts an [h]r approriate for the filetype
+g.hrComment = ""
+keymap("n", "gh", function()
+	if g.hrComment == "" then
+		print("No hr for this filetype defined.")
+	else
+		fn.setline('.', g.hrComment)
+	end
+end)
 
 autocmd( "FileType", {
 	pattern = {"json", "js", "ts"},
@@ -41,7 +47,12 @@ autocmd( "FileType", {
 
 autocmd( "FileType", {
 	pattern = {"lua", "applescript"},
-	callback = function() g.hrComment = "────────────────────────────────────────────────────────────────────────────────" end
+	callback = function() g.hrComment = "--------------------------------------------------------------------------------" end
+})
+
+autocmd( "FileType", {
+	pattern = {"md"},
+	callback = function() g.hrComment = "---" end
 })
 
 autocmd( "FileType", {
