@@ -53,12 +53,17 @@ cmd[[
 	let g:VM_maps['Find Under'] = '*'
 ]]
 
+-- Jump History
+keymap("n", "<Left>", "<C-o>") -- Back
+keymap("n", "<Right>", "<C-i>") -- Forward
+
 -- Search
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
 keymap("n", "<Esc>", ":nohl<CR>", {silent = true}) -- [m]ute highlights with Esc
 keymap("n", "g-", function() telescope.current_buffer_fuzzy_find() end) -- alternative search
+keymap("n", "gs", ":CocList outline<CR>") -- equivalent to Sublime's goto-symbol
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -139,7 +144,7 @@ keymap("n", "ss", "<plug>(SubversiveSubstituteLine)")
 keymap("n", "S", "<plug>(SubversiveSubstituteToEndOfLine)")
 
 --------------------------------------------------------------------------------
--- INSERT & COMMAND MODE
+-- INSERT MODE & COMMAND MODE
 keymap("i", "<C-e>", '<Esc>A') -- EoL
 keymap("i", "<C-k>", '<Esc>lDi') -- kill line
 keymap("i", "<C-a>", '<Esc>I') -- BoL
@@ -149,8 +154,9 @@ keymap("c", "<C-a>", '<Home>')
 keymap("c", "<C-e>", '<End>')
 keymap("c", "<C-u>", '<C-e><C-u>') -- clear
 
--- quicker block
-keymap("i", "!!", '{}<Left><CR><Esc>O') -- more convenient to type
+-- quicker typing
+keymap("i", "!!", '{}<Left><CR><Esc>O') -- {}
+
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
@@ -169,8 +175,7 @@ keymap("n", "<leader>x", 'mz^lllrx`z') -- check markdown tasks
 keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key (also works for JSON, actually)
 keymap("n", "<leader>c", 'mzlEF.yEEp`z') -- double [c]lass under cursor
 keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>') -- remove [C]lass under cursor
-
-keymap("n", "gs", function() telescope.current_buffer_fuzzy_find{default_text='< ', prompt_prefix='🪧'} end) -- Navigation Markers
+keymap("n", "gS", function() telescope.current_buffer_fuzzy_find{default_text='< ', prompt_prefix='🪧'} end) -- Navigation Markers
 
 -- JS
 keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, requires vim.surround
