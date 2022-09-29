@@ -18,14 +18,15 @@ keymap("n", "<leader>?", function() telescope.help_tags() end)
 -- Theme Picker
 keymap("n", "<leader>T", function() telescope.colorscheme() end)
 
--- quicker quitting
-keymap("n", "ZZ", ":wall<CR>:q<CR>")
-
--- Command Palette
-keymap("n", "<leader>:", function() telescope.commands() end)
-
--- Version History of current file
-keymap("n", "<leader>V", function() telescope.git_bcommits() end)
+-- Update [P]lugins
+keymap("n", "<leader>p", function()
+	package.loaded["plugin-list"] = nil -- empty the cache for lua
+	require("plugin-list")
+	local packer = require("packer")
+	packer.startup(PluginList)
+	packer.sync()
+end)
+keymap("n", "<leader>P", ":PackerStatus<CR>")
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -43,9 +44,6 @@ keymap("", "H", "0^") -- 0^ ensures scrolling to the left on long lines
 keymap("", "L", "$")
 keymap("", "J", "7j")
 keymap("", "K", "7k")
--- quicker to press + on home row
-keymap("", "s", "}")
-keymap("", "S", "{")
 
 -- Multi-Cursor, https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 -- changing these seems to require full restart (not only re-sourcing)
@@ -161,7 +159,7 @@ keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key (also works for JSON, 
 keymap("n", "<leader>c", 'mzlEF.yEEp`z') -- double [c]lass under cursor
 keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>') -- remove [C]lass under cursor
 
-keymap("n", "gS", function() telescope.current_buffer_fuzzy_find{default_text='< ', prompt_prefix='🪧'} end) -- Navigation Markers
+keymap("n", "gs", function() telescope.current_buffer_fuzzy_find{default_text='< ', prompt_prefix='🪧'} end) -- Navigation Markers
 
 -- JS
 keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, requires vim.surround
@@ -201,6 +199,7 @@ keymap("n", "gO", function() telescope.find_files{cwd='%:p:h:h', prompt_prefix='
 keymap("n", "gr", function() telescope.oldfiles() end) -- [r]ecent files
 keymap("n", "gb", function() telescope.buffers() end) -- open [b]uffer
 keymap("n", "gF", function() telescope.live_grep() end) -- open [b]uffer
+keymap("n", "<leader>V", function() telescope.git_bcommits() end) -- Version History of current file
 
 -- Buffers
 keymap("", "<C-Tab>", "<C-^>")
@@ -211,10 +210,13 @@ keymap("nv", "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file (use
 -- <C-R>=expand("%:t")<CR> -> expands the current filename in the command line
 keymap("n", "<C-p>", ':let @+=@%<CR>:echo "Copied:"expand("%")<CR>') -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
-keymap("n", "<C-r>", ':Rename <C-R>=expand("%:t")<CR>') -- rename of current file, requires eunuch.vim
+keymap("n", "<C-r>", ':Rename <CR>') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-l>", ":!open %:h<CR><CR>") -- show file in default GUI file explorer
 keymap("n", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
 keymap("n", "<leader>X", ":Chmod +x<CR>") -- execution permission
+keymap("n", "<leader><BS>", ":Remove") -- undoable deletion of the file
+
+keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
 
 -- Sorting
 keymap("n", "<leader>ss", ":'<,'>sort<CR>") -- [s]ort [s]election

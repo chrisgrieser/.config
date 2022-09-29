@@ -9,6 +9,11 @@ hs.window.animationDuration = 0
 
 --------------------------------------------------------------------------------
 
+-- autocompletions for the LSP
+hs.loadSpoon('EmmyLua')
+
+--------------------------------------------------------------------------------
+
 -- `hammerspoon://hs-reload` for reloading via Sublime Build System
 hs.urlevent.bind("hs-reload", function()
 	if SPLIT_RIGHT then vsplit("unsplit") end ---@diagnostic disable-line: undefined-global
