@@ -3,7 +3,7 @@
 {
 	// Coc
 	"diagnostic.errorSign": "●",
-	"diagnostic.warningSign": "●",
+	"diagnostic.warningSign": "○",
 	"diagnostic.infoSign": "•",
 	"diagnostic.hintSign": "•",
 	"coc.preferences.extensionUpdateCheck": "weekly",
@@ -13,6 +13,7 @@
 	"Lua.diagnostics.disable": ["trailing-space"],
 	"Lua.workspace.library": [
 		"/Users/chrisgrieser/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
+		"/Users/chrisgrieser/.hammerspoon/lua",
 		"/Users/chrisgrieser/.config/nvim/lua"
 	],
 
