@@ -79,7 +79,6 @@ keymap("n", "Q", "\"_ci'") -- change single [Q]uote content
 keymap("n", "q", '"_ci"') -- change double [q]uote content
 keymap("n", "0", '"_ci)') -- change parenthesis. mnemonic: () looks like a 0
 keymap("n", "R", 'viwP') -- [R]eplace Word with register content
-
 -- change small word / variable segment
 keymap("n", "<leader><Space>", function ()
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
@@ -126,10 +125,15 @@ keymap("n", "gZ", "[s") -- prev misspelling
 
 -- Misc
 keymap("nv", "U", "<C-r>") -- undo consistent on one key
-keymap("nv", "M", "J") -- [M]erge Lines up
-keymap("nv", "gm", "ddpkJ") -- [M]erge Lines down
+keymap("nv", "M", "J") -- [M]erge line up
+keymap("nv", "gm", "ddpkJ") -- [m]erge line down
 keymap("n", "P", '"0p') -- paste what was yanked
 keymap("n", "<leader>q" ,"q") -- needs to be remapped, since used as text object
+
+-- s for substitute (vim.subversive)
+keymap("n", "s", "<plug>(SubversiveSubstitute)")
+keymap("n", "ss", "<plug>(SubversiveSubstituteLine)")
+keymap("n", "S", "<plug>(SubversiveSubstituteToEndOfLine)")
 
 --------------------------------------------------------------------------------
 -- INSERT MODE
