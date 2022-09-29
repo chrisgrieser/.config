@@ -2,8 +2,8 @@
 
 {
 	// Coc
-	"diagnostic.errorSign": "•",
-	"diagnostic.warningSign": "•",
+	"diagnostic.errorSign": "●",
+	"diagnostic.warningSign": "●",
 	"diagnostic.infoSign": "•",
 	"diagnostic.hintSign": "•",
 	"coc.preferences.extensionUpdateCheck": "weekly",
