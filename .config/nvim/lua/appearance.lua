@@ -19,8 +19,13 @@ cmd[[highlight ColorColumn ctermbg=DarkGrey guibg=black]] -- https://www.reddit.
 -- Active Line
 cmd[[highlight CursorLine term=bold cterm=bold guibg=black ctermbg=black]]
 
-cmd[[syn match matchURL '/http[s]\?:\/\/[[:alnum:]%\/_#.-]*/'
-hi matchURL ctermfg=14]]
+-- Underline URLs
+cmd[[match urls /http[s]\?:\/\/[[:alnum:]%\/_#.-]*/ ]]
+cmd[[highlight urls cterm=underline]]
+
+-- Annotations
+cmd[[match myAnnotations /INFO/ ]]
+cmd[[highlight def link myAnnotations Todo]] -- use same color as "TODO"
 
 --------------------------------------------------------------------------------
 -- GUTTER
