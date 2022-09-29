@@ -10,7 +10,7 @@ augroup = vim.api.nvim_create_augroup
 autocmd = vim.api.nvim_create_autocmd
 telescope = require("telescope.builtin") -- requires loading extensions first
 
--- common functions
+-- improved keymap assignment
 function keymap (modes, key, result, options)
 	if #modes < 2 then -- < 2 to account for empty mode (= :map)
 		vim.keymap.set(modes, key, result, options)

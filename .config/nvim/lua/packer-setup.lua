@@ -23,14 +23,3 @@ packer.startup(PluginList)
 packer.install() -- auto-install missing plugins
 packer.clean() -- remove unused plugins
 
--- Keymaps: Update [P]lugins
-vim.keymap.set("n", "<leader>P", ":PackerStatus<CR>")
-vim.keymap.set("n", "<leader>p", function()
-	package.loaded["plugin-list"] = nil -- empty the cache for lua
-	require("plugin-list")
-	local packer = require("packer")
-	packer.startup(PluginList)
-	packer.sync()
-end)
-
-
