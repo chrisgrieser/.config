@@ -5,6 +5,7 @@ app.includeStandardAdditions = true;
 const alfredMatcher = (str) => str.replace (/[-()_.:]/g, " ")
 	+ " " + str + " "
 	+ str.replace(/([A-Z])/g, " $1"); // match parts of CamelCase
+
 ObjC.import("Foundation");
 function readFile (path, encoding) {
 	if (!encoding) encoding = $.NSUTF8StringEncoding;
