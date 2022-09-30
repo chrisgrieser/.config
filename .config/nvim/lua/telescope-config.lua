@@ -9,6 +9,7 @@ require("telescope").setup {
 		mappings = {
 			i = {
 				["<esc>"] = require('telescope.actions').close, -- close w/ one esc
+				["?"] = "which_key",
 			},
 		}
 	},
@@ -16,7 +17,7 @@ require("telescope").setup {
 		keymaps = { prompt_prefix='N' },
 		help_tags = { prompt_prefix=':h' },
 		commands = { prompt_prefix=':' },
-		git_bcommits = { prompt_prefix='' },
+		git_bcommits = { prompt_prefix=' ' },
 		oldfiles = { prompt_prefix='🕔' },
 		buffers = {prompt_prefix='📑',ignore_current_buffer = true},
 		live_grep = {cwd='%:p:h', disable_coordinates=true, prompt_prefix='🔎'},
