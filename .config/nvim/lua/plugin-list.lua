@@ -1,4 +1,4 @@
-function PluginList ()
+function PluginList (use)
 	use 'wbthomason/packer.nvim' -- packer manages itself
 
 	-- Themes
@@ -11,6 +11,7 @@ function PluginList ()
 	use 'airblade/vim-gitgutter'
 	-- use 'nvim-treesitter/nvim-treesitter'
 	-- use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
+	-- use { 'nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
 
 	-- LSP & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
@@ -18,12 +19,8 @@ function PluginList ()
 	-- Utility
 	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
 	use 'tpope/vim-eunuch' -- file operation utilities
-	use {
-		'nvim-telescope/telescope.nvim', -- fuzzy finder
-		requires = {
-			'nvim-lua/plenary.nvim', -- requirement
-			'kyazdani42/nvim-web-devicons' -- filetype icons
-		}
+	use { 'nvim-telescope/telescope.nvim', -- fuzzy finder
+		requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
 	}
 
 	-- Editing
