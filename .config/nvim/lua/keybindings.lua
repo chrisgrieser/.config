@@ -38,7 +38,7 @@ keymap("n", "j", "gj")
 keymap("n", "k", "gk")
 keymap("n", "gj", "j")
 keymap("n", "gk", "k")
-keymap("nv", "G", "Gzz") -- "overscroll" when going to bottom of editor
+keymap({"n", "v"}, "G", "Gzz") -- "overscroll" when going to bottom of editor
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 keymap("", "H", "0^") -- 0^ ensures scrolling to the left on long lines
@@ -69,9 +69,9 @@ keymap("n", "gs", ":CocList outline<CR>") -- equivalent to Sublime's goto-symbol
 -- EDITING
 
 -- don't pollute the register
-keymap("nv", "x", '"_x')
-keymap("nv", "c", '"_c')
-keymap("nv", "C", '"_C')
+keymap({"n", "v"}, "x", '"_x')
+keymap({"n", "v"}, "c", '"_c')
+keymap({"n", "v"}, "C", '"_C')
 
 -- Text Objects
 -- for some reason, recursive remap does not seem to work properly, therefore
@@ -106,7 +106,7 @@ keymap("n", "<Tab>", ">>")
 keymap("n", "<S-Tab>", "<<")
 keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
-keymap("nv", "^", "=") -- auto-indent
+keymap({"n", "v"}, "^", "=") -- auto-indent
 keymap("n", "^p", "`[v`]=") -- auto-indent last paste
 
 -- toggle word between Capital and lower case
@@ -132,9 +132,9 @@ keymap("n", "gz", "]s") -- next misspelling
 keymap("n", "gZ", "[s") -- prev misspelling
 
 -- Misc
-keymap("nv", "U", "<C-r>") -- undo consistent on one key
-keymap("nv", "M", "J") -- [M]erge line up
-keymap("nv", "gm", "ddpkJ") -- [m]erge line down
+keymap({"n", "v"}, "U", "<C-r>") -- undo consistent on one key
+keymap({"n", "v"}, "M", "J") -- [M]erge line up
+keymap({"n", "v"}, "gm", "ddpkJ") -- [m]erge line down
 keymap("n", "P", '"0p') -- paste what was yanked
 keymap("n", "<leader>q" ,"q") -- needs to be remapped, since used as text object
 
@@ -184,7 +184,7 @@ keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, req
 -- EMULATING MAC BINDINGS
 -- - requires GUI app like Neovide (called "Logo Key" there)
 -- - mostly done for consistency with other apps
-keymap("nv", "<D-v>", "p") -- cmd+v
+keymap({"n", "v"}, "<D-v>", "p") -- cmd+v
 keymap("n", "<D-c>", "yy") -- cmd+c: copy line
 keymap("v", "<D-c>", "y") -- cmd+c: copy selection
 keymap("n", "<D-x>", "dd") -- cmd+x: cut line
@@ -220,7 +220,7 @@ keymap("n", "<leader>V", function() telescope.git_bcommits() end) -- Version His
 -- Buffers
 keymap("", "<C-Tab>", "<C-^>")
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
-keymap("nv", "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
+keymap({"n", "v"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
 
 -- File Operations
 -- <C-R>=expand("%:t")<CR> -> expands the current filename in the command line
