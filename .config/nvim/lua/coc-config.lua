@@ -1,14 +1,20 @@
 require("utils")
 --------------------------------------------------------------------------------
 
+-- by default in ~.config, where it gets included in the dotfiles git repo,
+-- unecessarily bloating it (badly affecting git sync & dotfiles backups)
+g.coc_data_home = "~/.local/share/nvim/coc/"
+
 g.coc_global_extensions = {
 	"coc-lua",
 	"coc-css",
 	"coc-sh",
 	"coc-yaml",
-	"coc-tsserver", -- typescript/javascript
-	"coc-json"
+	"coc-tsserver", -- ts and js
+	"coc-json",
+	"coc-diagnostic" -- linter integration
 }
+
 
 --------------------------------------------------------------------------------
 

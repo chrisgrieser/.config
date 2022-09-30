@@ -174,7 +174,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>📂 Neovim Extension Folder</string>
+				<string>📂 Neovim Data Folder</string>
 				<key>withspace</key>
 				<true/>
 			</dict>

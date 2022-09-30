@@ -4,15 +4,13 @@
 # Activity Data
 sync.log
 some.log
-
-# device specific
 dlFolderLastChange
 
 # redundant
 .config/karabiner/automatic_backups
 
-# coc.vim extensions quite, lsp servers auto-installed anyway
-.config/coc/extensions
+# default location of (large) coc extensions; actually not necessary because of `g.coc_data_home` is changed in the coc-config, but still put here as a safety net
+.config/coc
 
 # in case of accidental saving of such files in the repo
 *.mp4
