@@ -29,14 +29,14 @@ end
 function showAllSidebars()
 	-- because of the use of URL schemes, leaves Drafts as the focused app
 	if appIsRunning("Highlights") then hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"}) end
-	hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
-	hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
+	openLinkInBackground("obsidian://sidebar?showLeft=true&showRight=false")
+	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
 
 --------------------------------------------------------------------------------
 -- LAYOUTS
 function movieModeLayout()
-	holeCover() ---@diagnostic disable-line: undefined-global
+	holeCover()
 	iMacDisplay:setBrightness(0)
 
 	openIfNotRunning("YouTube")
@@ -63,7 +63,7 @@ end
 
 function homeModeLayout ()
 	iMacDisplay:setBrightness(0.85)
-	holeCover() ---@diagnostic disable-line: undefined-global
+	holeCover()
 	hs.execute("brew services restart sketchybar") -- restart instead of reload to load colors
 
 	openIfNotRunning("Discord")
@@ -98,18 +98,15 @@ function homeModeLayout ()
 	showAllSidebars()
 	hs.layout.apply(homeLayout)
 	runDelayed(1.0, function () hs.application("Drafts"):activate() end)
-	runDelayed(1.6, function () hs.application("Drafts"):activate() end)
 
-	if screenIsUnlocked() then ---@diagnostic disable-line: undefined-global
-		runDelayed (1.5, function()
-			twitterrificAction("scrollup") ---@diagnostic disable-line: undefined-global
-		end)
+	if screenIsUnlocked() then
+		runDelayed (1.5, function()twitterrificAction("scrollup") end)
 	end
 
 	-- wait until sync is finished, to avoid merge conflict
 	hs.timer.waitUntil (
 		function ()
-			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())  ---@diagnostic disable-line: undefined-global
+			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
 		end,
 		function()
 			sublimeFontSize(15)
@@ -226,27 +223,14 @@ function motherHomeModeLayout()
 	}
 
 	hs.layout.apply(motherHomeLayout)
+	showAllSidebars()
 	runDelayed(0.3, function ()
 		hs.layout.apply(motherHomeLayout)
-		showAllSidebars()
 	end)
 	runDelayed(0.6, function () hs.layout.apply(motherHomeLayout) end)
 	runDelayed(1, function () hs.layout.apply(motherHomeLayout) end)
 end
 
-function obsiDevModeLayout()
-	hs.application("Obsidian"):activate()
-	keystroke({"cmd", "alt"}, "i") -- open chrome dev tools
-	keystroke({"cmd", "shift"}, "c") -- element picker
-
-	hs.open(os.getenv("HOME").."/Main Vault/.obsidian/themes/Shimmering Focus/theme.css")
-	local sublimeWin = hs.application("Sublime Text"):mainWindow()
-	moveResize(sublimeWin, hs.layout.right50)
-	runDelayed(0.5, function()
-		hs.application("Sublime Text"):activate()
-		keystroke({"cmd"}, "k") -- Table of Comments Plugin
-	end)
-end
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
 function setLayout()
@@ -264,7 +248,6 @@ end
 displayCountWatcher = hs.screen.watcher.new(setLayout)
 displayCountWatcher:start()
 hotkey(hyper, "home", setLayout) -- hyper + eject on Apple Keyboard
-hotkey(hyper, "f18", obsiDevModeLayout) -- esc key remapped via Karabiner
 
 --------------------------------------------------------------------------------
 

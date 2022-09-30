@@ -93,6 +93,13 @@ wf_browser = wf.new("Brave Browser")
 			moveResize(win, baseLayout)
 		end
 	end)
+	:subscribe(wf.windowTitleChanged, function (win)
+		local hasSound = win:title():find("Audio playing")
+		-- not working properly when the tab stays the same, but at least works
+		-- with tab change. Since background tabs do have "audio playing" as
+		-- title, there is no good trigger for starting again.
+		if hasSound then spotifyTUI("pause") end
+	end)
 
 -- Automatically hide Browser when no window
 wf_browser_all = wf.new("Brave Browser")
