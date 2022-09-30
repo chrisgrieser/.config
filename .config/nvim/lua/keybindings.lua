@@ -100,6 +100,7 @@ keymap("n", "\\", "i <Esc>l", {nowait = true}) -- prepend space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
 keymap("n", "<BS>", "dipO<Esc>") -- reduce multiple blank lines to exactly one
+keymap("n", "|", "i<CR><Esc>k$") -- Split line here
 
 -- Indention
 keymap("n", "<Tab>", ">>")
