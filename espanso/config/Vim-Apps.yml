@@ -6,3 +6,4 @@ filter_class: obsidian|sublime
 
 extra_exclude:
   - "../match/private.yml"
+  - "../match/email.yml"
