@@ -1,5 +1,3 @@
-// vim: filetype=jsonc
-
 {
 	// Coc
 	"diagnostic.errorSign": "●",
