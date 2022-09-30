@@ -80,8 +80,12 @@ keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
-keymap("n", "q", '"_ci"') -- change double [q]uote
 keymap("o", "p", '}') -- rest of the [p]aragraph
+
+-- these three together change the inner quote (single or double) the various plugins which offer such a text obj are buggy, hence this workaround
+g.wildfire_objects = {"i'", 'i"'}
+keymap("o", "&", '<Plug>(wildfire-fuel)')
+keymap("n", "q", '&"_c')
 
 -- change small word (i.e. a simpler version of vim-textobj-variable-segment,
 -- but not supporting CamelCase)
@@ -137,10 +141,14 @@ keymap({"n", "v"}, "gm", "ddpkJ") -- [m]erge line down
 keymap("n", "P", '"0p') -- paste what was yanked
 keymap("n", "<leader>q" ,"q") -- needs to be remapped, since used as text object
 
--- s for substitute (vim.subversive)
-keymap("n", "s", "<plug>(SubversiveSubstitute)")
-keymap("n", "ss", "<plug>(SubversiveSubstituteLine)")
-keymap("n", "S", "<plug>(SubversiveSubstituteToEndOfLine)")
+-- Operators
+-- [s]ubstitute (vim.subversive)
+keymap("n", "s", "<Plug>(SubversiveSubstitute)")
+keymap("n", "ss", "<Plug>(SubversiveSubstituteLine)")
+keymap("n", "S", "<Plug>(SubversiveSubstituteToEndOfLine)")
+
+keymap("n", "<D-D>", "yyp") -- cmd+shift+d: duplicate lines
+keymap("v", "<D-D>", "yp") -- cmd+shift+d: duplicate selected lines
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
@@ -161,7 +169,10 @@ keymap("i", "!!", '{}<Left><CR><Esc>O') -- {}
 keymap("v", "V", "j") -- so double "V" selects two lines
 keymap("v", "p", 'P') -- do not override register when pasting
 keymap("v", "P", 'p') -- override register when pasting
-keymap({"n", "v"}, "v", '<Plug>(wildfire-fuel)') -- start visual mode with a sensitve selection
+
+-- start visual mode with a sensitve selection (using this alt method to be able
+-- to bind main command to sth else
+cmd[[call wildfire#triggers#Add("v", { "html,xml" : ["iw", "iW", "i'", 'i"', "i)", "i]", "i}", "ii", "aI", "ip"], }) ]]
 
 --------------------------------------------------------------------------------
 -- LANGUAGE-SPECIFIC BINDINGS
