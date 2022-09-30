@@ -17,7 +17,10 @@ require("telescope").setup {
 		keymaps = { prompt_prefix='N' },
 		help_tags = { prompt_prefix=':h' },
 		commands = { prompt_prefix=':' },
-		git_bcommits = { prompt_prefix=' ' },
+		git_bcommits = {
+			prompt_prefix=' ',
+			scroll_strategy="limit"
+		},
 		oldfiles = { prompt_prefix='🕔' },
 		buffers = {prompt_prefix='📑',ignore_current_buffer = true},
 		live_grep = {cwd='%:p:h', disable_coordinates=true, prompt_prefix='🔎'},
