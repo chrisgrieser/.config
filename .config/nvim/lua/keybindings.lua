@@ -73,23 +73,21 @@ keymap({"n", "v"}, "x", '"_x')
 keymap({"n", "v"}, "c", '"_c')
 keymap({"n", "v"}, "C", '"_C')
 
--- Text Objects
+-- TEXT OBJECTS
 -- for some reason, recursive remap does not seem to work properly, therefore
 -- the text-objects below need "_
 keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
-keymap("o", "p", '}') -- rest of the [p]aragraph
 
--- these three together change the inner quote (single or double) the various plugins which offer such a text obj are buggy, hence this workaround
-g.wildfire_objects = {"i'", 'i"'}
-keymap("o", "&", '<Plug>(wildfire-fuel)')
-keymap("n", "q", '&"_c')
+keymap("n", "q", '"_ci"')
+keymap("n", "Q", '"_ci\'')
+keymap("o", "p", '}') -- rest of the [p]aragraph
 
 -- change small word (i.e. a simpler version of vim-textobj-variable-segment,
 -- but not supporting CamelCase)
-keymap("n", "<leader><Space>", function ()
+keymap("n", '<leader><Space>', function ()
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
 	cmd[[normal! "_diw]]
 	cmd[[startinsert]] -- :Normal does not allow to end in insert mode
@@ -139,7 +137,7 @@ keymap({"n", "v"}, "U", "<C-r>") -- undo consistent on one key
 keymap({"n", "v"}, "M", "J") -- [M]erge line up
 keymap({"n", "v"}, "gm", "ddpkJ") -- [m]erge line down
 keymap("n", "P", '"0p') -- paste what was yanked
-keymap("n", "<leader>q" ,"q") -- needs to be remapped, since used as text object
+keymap({"n", "v"}, "<leader>q" ,"q") -- needs to be remapped, since used as text object
 
 -- Operators
 -- [s]ubstitute (vim.subversive)
@@ -170,9 +168,7 @@ keymap("v", "V", "j") -- so double "V" selects two lines
 keymap("v", "p", 'P') -- do not override register when pasting
 keymap("v", "P", 'p') -- override register when pasting
 
--- start visual mode with a sensitve selection (using this alt method to be able
--- to bind main command to sth else
-cmd[[call wildfire#triggers#Add("v", { "html,xml" : ["iw", "iW", "i'", 'i"', "i)", "i]", "i}", "ii", "aI", "ip"], }) ]]
+keymap({"n", "v"}, "v", '<Plug>(wildfire-fuel)') -- start visual mode with a sensitve selection
 
 --------------------------------------------------------------------------------
 -- LANGUAGE-SPECIFIC BINDINGS
