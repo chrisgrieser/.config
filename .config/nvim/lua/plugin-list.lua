@@ -28,7 +28,6 @@ function PluginList (use)
 	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'} -- surround with punctuation
 	use 'tpope/vim-commentary' -- comments operator & text object
 	use 'tpope/vim-abolish' -- various case conversions
-	use 't9md/vim-textmanip' -- line swapping & duplication
 	use 'svermeulen/vim-subversive' -- replacement operator
 
 	-- Objects
