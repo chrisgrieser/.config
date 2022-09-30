@@ -80,14 +80,12 @@ keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
-keymap("n", "Q", "\"_ci'") -- change single [Q]uote content
-keymap("n", "q", '"_ci"') -- change double [q]uote content
-keymap("n", "0", '"_ci)') -- change parenthesis. mnemonic: () looks like a 0
-
+keymap("n", "q", "cib") -- requires vim-textobj-anyblock
+keymap("n", "Q", "cab") -- vim vim-textobj-anyblock
 keymap("o", "r", '}') -- [r]est of the paragraph
 
 
--- change small word (i.e. a simpler version of vim-textobj-variable-segment
+-- change small word (i.e. a simpler version of vim-textobj-variable-segment)
 -- (not supporting CamelCase though)
 keymap("n", "<leader><Space>", function ()
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
@@ -211,6 +209,7 @@ keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 
 --------------------------------------------------------------------------------
 -- FILES AND WINDOWS
+keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
 
 -- File switchers
 keymap("n", "go", function() telescope.find_files() end) -- [o]pen file in parent-directory
@@ -229,13 +228,11 @@ keymap({"n", "v"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-fil
 -- <C-R>=expand("%:t")<CR> -> expands the current filename in the command line
 keymap("n", "<C-p>", ':let @+=@%<CR>:echo "Copied:"expand("%")<CR>') -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
-keymap("n", "<C-r>", ':Rename <CR>') -- rename of current file, requires eunuch.vim
+keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-l>", ":!open %:h<CR><CR>") -- show file in default GUI file explorer
 keymap("n", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
-keymap("n", "<leader>X", ":Chmod +x<CR>") -- execution permission
-keymap("n", "<leader><BS>", ":Remove") -- undoable deletion of the file
-
-keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
+keymap("n", "<leader>X", ":Chmod +x<CR>") -- execution permission, requires eunuch.vim
+keymap("n", "<leader><BS>", ":Remove") -- undoable deletion of the file, requires eunuch.vim
 
 -- Sorting
 keymap("n", "<leader>ss", ":'<,'>sort<CR>") -- [s]ort [s]election

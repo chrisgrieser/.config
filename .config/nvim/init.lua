@@ -10,6 +10,6 @@ require("appearance")
 require("telescope-config")
 require("keybindings")
 require("appearance")
-require("small-plugins")
+require("remaining-plugins")
 require("filetype-specific")
 
