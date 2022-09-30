@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 weather=$(curl "https://wttr.in/Berlin?format=1" | tr -d "C ")
-if [[ "$weather" =~ "Unknown" ]] ; then
+if [[ "$weather" =~ Unknown|Sorry ]] ; then
 	icon=""
 	temp="–"
 else
