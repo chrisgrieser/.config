@@ -9,12 +9,12 @@ function PluginList (use)
 	use "unblevable/quick-scope" -- highlight for f & t
 	use 'nvim-lualine/lualine.nvim' -- statusbar (w/o requiring icons, since I don't use them)
 	use 'airblade/vim-gitgutter'
-	-- use 'nvim-treesitter/nvim-treesitter'
-	-- use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
-	-- use { 'nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
 
 	-- LSP & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
+	-- use 'nvim-treesitter/nvim-treesitter'
+	-- use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
+	-- use { 'nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
 
 	-- Utility
 	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
@@ -22,16 +22,20 @@ function PluginList (use)
 	use { 'nvim-telescope/telescope.nvim', -- fuzzy finder
 		requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
 	}
+	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
 
-	-- Editing
+	-- Operators
+	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'} -- surround with punctuation
 	use 'tpope/vim-commentary' -- comments operator & text object
 	use 'tpope/vim-abolish' -- various case conversions
-	use 'mg979/vim-visual-multi' -- multi-cursor
-	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'} -- surround with punctuation
-	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (Alternative: cohama/lexima.vim)
-	use 'michaeljsmith/vim-indent-object' -- indention text objects
-	use 'svermeulen/vim-subversive' -- replacement operator
 	use 't9md/vim-textmanip' -- line swapping & duplication
+	use 'svermeulen/vim-subversive' -- replacement operator
+
+	-- Objects
+	use 'mg979/vim-visual-multi' -- multi-cursor
+	use 'michaeljsmith/vim-indent-object' -- indention text objects
+	use {'rhysd/vim-textobj-anyblock', requires = 'kana/vim-textobj-user'} -- any type of block
+	use 'gcmt/wildfire.vim' -- incrementally expanding objects (alternative: terryma/vim-expand-region)
 
 end
 

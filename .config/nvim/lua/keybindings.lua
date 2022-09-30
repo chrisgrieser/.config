@@ -83,7 +83,9 @@ keymap("v", "<S-Space>", '"_d')
 keymap("n", "Q", "\"_ci'") -- change single [Q]uote content
 keymap("n", "q", '"_ci"') -- change double [q]uote content
 keymap("n", "0", '"_ci)') -- change parenthesis. mnemonic: () looks like a 0
+
 keymap("o", "r", '}') -- [r]est of the paragraph
+
 
 -- change small word (i.e. a simpler version of vim-textobj-variable-segment
 -- (not supporting CamelCase though)
@@ -158,12 +160,12 @@ keymap("c", "<C-u>", '<C-e><C-u>') -- clear
 -- quicker typing
 keymap("i", "!!", '{}<Left><CR><Esc>O') -- {}
 
-
 --------------------------------------------------------------------------------
 -- VISUAL MODE
 keymap("v", "V", "j") -- so double "V" selects two lines
 keymap("v", "p", 'P') -- do not override register when pasting
 keymap("v", "P", 'p') -- override register when pasting
+keymap({"n", "v"}, "v", '<Plug>(wildfire-fuel)') -- start visual mode with a sensitve selection
 
 --------------------------------------------------------------------------------
 -- LANGUAGE-SPECIFIC BINDINGS
