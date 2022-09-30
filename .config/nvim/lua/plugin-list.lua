@@ -34,6 +34,7 @@ function PluginList (use)
 	-- Objects
 	use 'mg979/vim-visual-multi' -- multi-cursor
 	use 'michaeljsmith/vim-indent-object' -- indention text objects
+	use {'beloglazov/vim-textobj-quotes', requires = 'kana/vim-textobj-user'} -- inside any type of quote
 	use 'gcmt/wildfire.vim' -- incrementally expanding objects (alternative: terryma/vim-expand-region)
 
 end

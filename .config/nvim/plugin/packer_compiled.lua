@@ -174,10 +174,10 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-textmanip",
     url = "https://github.com/t9md/vim-textmanip"
   },
-  ["vim-textobj-anyblock"] = {
+  ["vim-textobj-quotes"] = {
     loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-textobj-anyblock",
-    url = "https://github.com/rhysd/vim-textobj-anyblock"
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-textobj-quotes",
+    url = "https://github.com/beloglazov/vim-textobj-quotes"
   },
   ["vim-textobj-user"] = {
     loaded = true,
