@@ -80,13 +80,11 @@ keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
-keymap("n", "q", "cib") -- requires vim-textobj-anyblock
-keymap("n", "Q", "cab") -- vim vim-textobj-anyblock
-keymap("o", "r", '}') -- [r]est of the paragraph
+keymap("n", "q", '"_ci"') -- change double [q]uote
+keymap("o", "p", '}') -- rest of the [p]aragraph
 
-
--- change small word (i.e. a simpler version of vim-textobj-variable-segment)
--- (not supporting CamelCase though)
+-- change small word (i.e. a simpler version of vim-textobj-variable-segment,
+-- but not supporting CamelCase)
 keymap("n", "<leader><Space>", function ()
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
 	cmd[[normal! "_diw]]
@@ -100,7 +98,7 @@ keymap("n", "\\", "i <Esc>l", {nowait = true}) -- prepend space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
 keymap("n", "<BS>", "dipO<Esc>") -- reduce multiple blank lines to exactly one
-keymap("n", "|", "i<CR><Esc>k$") -- Split line here
+keymap("n", "|", "i<CR><Esc>k$") -- Split line at cursor
 
 -- Indention
 keymap("n", "<Tab>", ">>")

@@ -15,7 +15,6 @@ g.coc_global_extensions = {
 	"coc-diagnostic" -- linter integration
 }
 
-
 --------------------------------------------------------------------------------
 
 opt.backup = false -- Some servers have issues with backup files, see #649.
