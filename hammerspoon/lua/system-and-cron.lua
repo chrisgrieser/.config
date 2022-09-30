@@ -169,6 +169,7 @@ biweeklyTimer = hs.timer.doAt("02:00", "02d", function()
 		end tell
 	]])
 	log ("🕝2️⃣ biweekly ("..deviceName()..")", "./logs/some.log")
+	hs.loadSpoon('EmmyLua') -- so it runs not as often
 end, true)
 
 dailyEveningTimer = hs.timer.doAt("21:00", "01d", function ()

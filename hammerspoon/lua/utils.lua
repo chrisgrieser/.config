@@ -93,3 +93,8 @@ function killIfRunning (appName)
 		if runs then runs:kill9() end
 	end)
 end
+
+-- won't work with Chromium browsers due to widespread bug though
+function openLinkInBackground (url)
+	hs.execute('open -g "'..url..'"')
+end

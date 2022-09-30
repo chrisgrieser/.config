@@ -46,29 +46,20 @@ end
 --------------------------------------------------------------------------------
 -- SIDEBARS
 
--- requires these two actions beeing installed:
+-- requires these two helper actions for Drafts installed:
 -- https://directory.getdrafts.com/a/2BS & https://directory.getdrafts.com/a/2BR
 function toggleDraftsSidebar (draftsWin)
-	runDelayed(0.05, function ()
+	local function toggle ()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
 		if (drafts_w / screen_w > 0.6) then
-			-- using URI scheme since they are more reliable than the menu item
-			hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
+			openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 		else
-			hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=hide-sidebar")
+			openLinkInBackground("drafts://x-callback-url/runAction?text=&action=hide-sidebar")
 		end
-	end)
-	-- repetition for some rare cases with lag needed
-	runDelayed(0.2, function ()
-		local drafts_w = draftsWin:frame().w
-		local screen_w = draftsWin:screen():frame().w
-		if (drafts_w / screen_w > 0.6) then
-			hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=show-sidebar")
-		else
-			hs.urlevent.openURL("drafts://x-callback-url/runAction?text=&action=hide-sidebar")
-		end
-	end)
+	end
+	runDelayed(0.05, toggle)
+	runDelayed(0.2, toggle) -- repetition for some rare cases with lag needed
 end
 
 function toggleHighlightsSidebar (highlightsWin)
@@ -88,31 +79,19 @@ end
 -- requires Obsidian Sidebar Toggler Plugin
 -- https://github.com/chrisgrieser/obsidian-sidebar-toggler
 function toggleObsidianSidebar (obsiWin)
-	runDelayed(0.05, function ()
-		-- prevent popout window resizing to affect sidebars
+	local function toggle ()
 		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
-		if (numberOfObsiWindows > 1) then return end
-
+		if (numberOfObsiWindows > 1) then return end -- prevent popout window resizing to affect sidebars
 		local obsi_width = obsiWin:frame().w
 		local screen_width = obsiWin:screen():frame().w
 		if (obsi_width / screen_width > 0.6) then
-			hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
+			openLinkInBackground("obsidian://sidebar?showLeft=true&showRight=false")
 		else
-			hs.urlevent.openURL("obsidian://sidebar?showLeft=false&showRight=false")
+			openLinkInBackground("obsidian://sidebar?showLeft=false&showRight=false")
 		end
-	end)
-	runDelayed(0.2, function ()
-		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
-		if (numberOfObsiWindows > 1) then return end
-
-		local obsi_width = obsiWin:frame().w
-		local screen_width = obsiWin:screen():frame().w
-		if (obsi_width / screen_width > 0.6) then
-			hs.urlevent.openURL("obsidian://sidebar?showLeft=true&showRight=false")
-		else
-			hs.urlevent.openURL("obsidian://sidebar?showLeft=false&showRight=false")
-		end
-	end)
+	end
+	runDelayed(0.05, toggle)
+	runDelayed(0.2, toggle)
 end
 
 --------------------------------------------------------------------------------

@@ -1,13 +1,12 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
--- settings
+-- Hammerspoon settings
 hs.allowAppleScript(false)
 hs.consoleOnTop(true)
 hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
 hs.window.animationDuration = 0
 
-hs.loadSpoon('EmmyLua') -- runs lazy, i.e. only updates when there have been changes
 --------------------------------------------------------------------------------
 
 -- `hammerspoon://hs-reload` for reloading via Sublime Build System
@@ -41,7 +40,4 @@ hs.urlevent.bind("copy-last-command", function()
 end)
 
 -- `hammerspoon://clear-console` for Karabiner Elements (⌘K)
-hs.urlevent.bind("clear-console", function()
-	hs.console.clearConsole()
-	-- no hiding needed, since Hammerspoon already frontmost
-end)
+hs.urlevent.bind("clear-console",hs.console.clearConsole)
