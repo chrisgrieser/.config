@@ -81,8 +81,8 @@ keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
 
-keymap("n", "q", '"_ci"')
-keymap("n", "Q", '"_ci\'')
+keymap("n", "q", '"_ci"') -- change single [q]uote
+keymap("n", "Q", '"_ci\'') -- change double [q]uote
 keymap("o", "p", '}') -- rest of the [p]aragraph
 
 -- change small word (i.e. a simpler version of vim-textobj-variable-segment,
@@ -127,7 +127,7 @@ end
 
 keymap("n", "X", 'mz$"_x`z') -- Remove last character from line
 
--- Spellling
+-- Spelling
 keymap("n", "zl", function() telescope.spell_suggest() end)
 keymap("n", "gz", "]s") -- next misspelling
 keymap("n", "gZ", "[s") -- prev misspelling
@@ -145,8 +145,9 @@ keymap("n", "s", "<Plug>(SubversiveSubstitute)")
 keymap("n", "ss", "<Plug>(SubversiveSubstituteLine)")
 keymap("n", "S", "<Plug>(SubversiveSubstituteToEndOfLine)")
 
-keymap("n", "<D-D>", "yyp") -- cmd+shift+d: duplicate lines
-keymap("v", "<D-D>", "yp") -- cmd+shift+d: duplicate selected lines
+-- [R]eplicate (duplicate) down
+keymap("n", "R", '"zyy"zp') -- current line
+keymap("v", "R", '"zy`]"zp') -- selection
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
@@ -164,11 +165,15 @@ keymap("i", "!!", '{}<Left><CR><Esc>O') -- {}
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
-keymap("v", "V", "j") -- so double "V" selects two lines
 keymap("v", "p", 'P') -- do not override register when pasting
 keymap("v", "P", 'p') -- override register when pasting
 
+keymap("v", "V", "j") -- so double "V" selects two lines
 keymap({"n", "v"}, "v", '<Plug>(wildfire-fuel)') -- start visual mode with a sensitve selection
+-- -> together, these two bindings make it possible to repeatedly press v or V
+-- to increase the current selection
+
+keymap("v", "y", "ygv<Esc>") -- yanking in visual mode keeps position https://stackoverflow.com/a/3806683#comment10788861_3806683
 
 --------------------------------------------------------------------------------
 -- LANGUAGE-SPECIFIC BINDINGS
@@ -201,8 +206,8 @@ keymap("n", "<D-s>", ":write<CR>") -- cmd+s
 keymap("n", "<D-a>", "mzggvGy`z") -- cmd+a & cmd+c
 keymap("n", "<D-w>", ":w<CR>:bd<CR>") -- cmd+w
 
-keymap("n", "<D-D>", "yyp") -- cmd+shift+d: duplicate lines
-keymap("v", "<D-D>", "yp") -- cmd+shift+d: duplicate selected lines
+keymap("n", "<D-D>", '"zyy"zp') -- cmd+shift+d: duplicate lines
+keymap("v", "<D-D>", '"zy"zp') -- cmd+shift+d: duplicate selected lines
 keymap("n", "<D-2>", "ddkkp") -- line up
 keymap("n", "<D-3>", "ddp") -- line down
 keymap("v", "<D-2>", "dkkp") -- selected lines up
