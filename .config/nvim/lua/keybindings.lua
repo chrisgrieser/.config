@@ -23,7 +23,7 @@ keymap("n", "<leader>S", ":TSToggle highlight<CR>")
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
-	cmd[[update!]]
+	cmd[[update! ~/.config/nvim/lua/plugin-list.lua]]
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	require("plugin-list")
 	local packer = require("packer")
@@ -232,7 +232,6 @@ keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 -- Utils
 keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
 keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR><CR>') -- open terminal at current location
--- :Duplicate <C-R>=expand("%:t")<CR>
 
 -- File switchers
 keymap("n", "go", function() telescope.find_files() end) -- [o]pen file in parent-directory
@@ -248,7 +247,7 @@ keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 keymap({"n", "v"}, "gt", "<C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
 
 -- File Operations
--- <C-R>=expand("%:t")<CR> -> expands the current filename in the command line
+-- INFO: <C-R>=expand("%:t")<CR> -> expands the current filename in the command line
 keymap("n", "<C-p>", ':let @+=@%:p<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
 keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim

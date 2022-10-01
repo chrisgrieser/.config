@@ -8,7 +8,7 @@ function PluginList (use)
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use 'nvim-lualine/lualine.nvim' -- statusbar (w/o requiring icons, since I don't use them)
-	use 'airblade/vim-gitgutter'
+	use 'airblade/vim-gitgutter' -- changes
 
 	-- -- LSP & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}

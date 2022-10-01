@@ -121,15 +121,6 @@ nmap ü :caseSwitch
 " to CapitalCase without the plugin, use: nmap Ü mzlblgueh~`z
 vmap ü :caseSwitch
 
-" TRANSPOSE
-" (can't use x, cause it sends to black hole registry, due to missing noremap)
-" current & next char
-nmap ö dlp
-" current & previous char
-nmap Ö dlhhp
-" current & next word
-nmap Ä dawelpb
-
 """"""""""""""""""""""
 " << Line-Based Editing
 """"""""""""""""""""""

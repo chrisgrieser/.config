@@ -7,10 +7,12 @@ opt.showmatch = true
 opt.smartcase = true
 opt.ignorecase = true
 
+-- command line
 -- since smartcase and ignorecase also apply to command completion, deactivate
 -- the former to make camelcased command completion easier
 autocmd("CmdlineEnter", { callback = function () opt.smartcase = false end })
-autocmd("CmdlineLeave", { callback = function ()opt.smartcase = true end })
+autocmd("CmdlineLeave", { callback = function () opt.smartcase = true end })
+opt.wildmenu = true -- display all matching files when tab completing
 
 -- tabs & indentation
 opt.tabstop = 3
@@ -30,7 +32,8 @@ opt.colorcolumn = '+1' -- column next to textwidth option length
 -- files
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.autochdir = true -- always current directory
-opt.autowrite = true -- automatically saves on switching buffer
+opt.autowrite = true -- automatically saves
+opt.autowriteall = true
 opt.undofile = true -- persistent undo history
 
 -- editor
