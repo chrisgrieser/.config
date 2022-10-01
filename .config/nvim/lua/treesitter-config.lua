@@ -33,6 +33,20 @@ require('nvim-treesitter.configs').setup {
 		disable = {}, -- NOTE: these are the names of the parsers and not the filetype
 	},
 
+	textobjects = {
+		move = {
+			enable = true,
+			set_jumps = true,
+			lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+			goto_next_start = {
+				["<leader>c"] = "@comment.outer",
+			},
+			goto_previous_start = {
+				["<leader>C"] = "@comment.outer",
+			},
+		}
+	},
+
 	rainbow = {
 		enable = true,
 		disable = {}, -- list of languages you want to disable the plugin for

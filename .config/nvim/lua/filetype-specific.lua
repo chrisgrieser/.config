@@ -8,6 +8,40 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+-- BINDINGS
+
+-- Markdown
+keymap("n", "<CR>", 'A') -- So double return keeps markdown list syntax
+keymap("n", "<leader>x", 'mz^lllrx`z') -- check markdown tasks
+keymap("n", ",1", ":GenTocGFM<CR>") --markdown toc
+
+-- CSS
+keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key (also works for JSON, actually)
+keymap("n", "<leader>d", 'mzlEF.yEEp`z') -- [d]ouble class under cursor
+keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>') -- [D]uplicate Class under cursor
+keymap("n", "gS", function() telescope.current_buffer_fuzzy_find{default_text='< ', prompt_prefix='🪧'} end) -- Navigation Markers
+
+-- JS
+keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, requires vim.surround
+
+--------------------------------------------------------------------------------
+
+-- Build System
+g.buildCommand = ""
+keymap("n", "<leader>b", function()
+	if g.buildCommand == "" then
+		print("No build command set.")
+	else
+		os.execute(g.buildCommand)
+	end
+end)
+
+autocmd( "FileType", {
+	pattern = {"json", "js", "ts"},
+	callback = function() g.hrComment = "//──────────────────────────────────────────────────────────────────────────────" end
+})
+
+--------------------------------------------------------------------------------
 
 -- Skeletons (Templates)
 augroup("Templates", {})

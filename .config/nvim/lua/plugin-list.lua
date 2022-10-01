@@ -42,6 +42,7 @@ function PluginList (use)
 	use 'mg979/vim-visual-multi' -- multi-cursor
 	use 'michaeljsmith/vim-indent-object' -- indention text objects
 	use 'gcmt/wildfire.vim' -- incrementally expanding objects (alternative: terryma/vim-expand-region)
+	use{ 'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter'}
 
 end
 

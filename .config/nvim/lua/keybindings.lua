@@ -180,23 +180,6 @@ keymap({"n", "v"}, "v", '<Plug>(wildfire-fuel)') -- start visual mode with a sen
 keymap("v", "y", "ygv<Esc>") -- yanking in visual mode keeps position https://stackoverflow.com/a/3806683#comment10788861_3806683
 
 --------------------------------------------------------------------------------
--- LANGUAGE-SPECIFIC BINDINGS
-
--- Markdown
-keymap("n", "<CR>", 'A') -- So double return keeps markdown list syntax
-keymap("n", "<leader>x", 'mz^lllrx`z') -- check markdown tasks
-keymap("n", ",1", ":GenTocGFM<CR>") --markdown toc
-
--- CSS
-keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key (also works for JSON, actually)
-keymap("n", "<leader>c", 'mzlEF.yEEp`z') -- double [c]lass under cursor
-keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>') -- remove [C]lass under cursor
-keymap("n", "gS", function() telescope.current_buffer_fuzzy_find{default_text='< ', prompt_prefix='🪧'} end) -- Navigation Markers
-
--- JS
-keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, requires vim.surround
-
---------------------------------------------------------------------------------
 -- EMULATING MAC BINDINGS
 -- - requires GUI app like Neovide (called "Logo Key" there)
 -- - mostly done for consistency with other apps
