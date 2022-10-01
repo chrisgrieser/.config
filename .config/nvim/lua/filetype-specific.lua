@@ -4,15 +4,22 @@ require("utils")
 -- General
 autocmd("FileType", {
 	pattern = { "help", "startuptime", "qf", "lspinfo" },
-	command = [[nnoremap <buffer><silent> q :close<CR>]]
+	-- command = [[nnoremap <buffer><silent> q :close<CR>]]
+	callback = function ()
+		keymap("n", "q", ":close<CR>", {buffer = true, silent = true})
+	end
 })
 
 --------------------------------------------------------------------------------
 
 -- Markdown
 autocmd("FileType", {
-	pattern = {"md"},
-	command = [[set wrap<CR>]]
+	pattern = {"markdown"},
+	callback = function ()
+		bo.wrap = false
+		bo.textwidth = false
+		bo.conceallevel = 2
+	end
 })
 
 --------------------------------------------------------------------------------
@@ -37,26 +44,25 @@ keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, req
 --------------------------------------------------------------------------------
 
 -- Build Systems
-g.buildCommand = ""
 keymap("n", "<leader>b", function()
-	if g.buildCommand == "" then
+	if not(b.buildCommand)then
 		print("No build command set.")
 	else
-		os.execute(g.buildCommand)
+		os.execute(b.buildCommand)
 	end
 end)
 
 autocmd( "FileType", {
 	pattern = {"yaml"}, -- karabiner config
-	callback = function() g.buildCommand = 'osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"' end
+	callback = function() b.buildCommand = 'osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"' end
 })
 autocmd( "FileType", {
 	pattern = {"lua"}, -- hammerspoon config
-	callback = function() g.buildCommand = 'open "hammerspoon://hs-reload"' end
+	callback = function() b.buildCommand = 'open "hammerspoon://hs-reload"' end
 })
 autocmd( "FileType", {
-	pattern = {"ts"}, -- typescript build
-	callback = function() g.buildCommand = 'npm run build' end
+	pattern = {"typescript"}, -- typescript build
+	callback = function() b.buildCommand = 'npm run build' end
 })
 
 --------------------------------------------------------------------------------
@@ -82,34 +88,33 @@ autocmd("BufNewFile", {
 --------------------------------------------------------------------------------
 
 -- [H]orizontal Ruler
-g.hrComment = ""
 keymap("n", "gh", function()
-	if g.hrComment == "" then
+	if b.hrComment then
 		print("No hr for this filetype defined.")
 	else
-		fn.setline('.', g.hrComment)
+		fn.setline('.', b.hrComment)
 	end
 end)
 
 autocmd( "FileType", {
-	pattern = {"json", "js", "ts"},
-	callback = function() g.hrComment = "//──────────────────────────────────────────────────────────────────────────────" end
+	pattern = {"json", "javascript", "typescript"},
+	callback = function() b.hrComment = "//──────────────────────────────────────────────────────────────────────────────" end
 })
 autocmd( "FileType", {
-	pattern = {"sh", "zsh", "yaml", "yml"},
-	callback = function() g.hrComment = "#───────────────────────────────────────────────────────────────────────────────" end
+	pattern = {"bash", "zsh", "yaml"},
+	callback = function() b.hrComment = "#───────────────────────────────────────────────────────────────────────────────" end
 })
 autocmd( "FileType", {
 	pattern = {"lua", "applescript"},
-	callback = function() g.hrComment = "--------------------------------------------------------------------------------" end
+	callback = function() b.hrComment = "--------------------------------------------------------------------------------" end
 })
 autocmd( "FileType", {
-	pattern = {"md"},
-	callback = function() g.hrComment = "---" end
+	pattern = {"markdown"},
+	callback = function() b.hrComment = "---" end
 })
 autocmd( "FileType", {
 	pattern = {"css"},
-	callback = function() g.hrComment = "/* ───────────────────────────────────────────────── */\n/* << XXX\n──────────────────────────────────────────────────── */" end
+	callback = function() b.hrComment = "/* ───────────────────────────────────────────────── */\n/* << XXX\n──────────────────────────────────────────────────── */" end
 })
 
 

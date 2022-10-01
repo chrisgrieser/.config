@@ -26,7 +26,7 @@ opt.signcolumn = 'no'
 opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
 
 -- ruler
-opt.textwidth = 80 -- used by `gq`
+opt.textwidth = 80 -- used by `gq` and wrap
 opt.colorcolumn = '+1' -- column next to textwidth option length
 
 -- files
