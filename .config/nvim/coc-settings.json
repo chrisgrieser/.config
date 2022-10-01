@@ -1,11 +1,12 @@
 // vim: filetype=jsonc
 
 {
-	"diagnostic.errorSign": " ",
-	"diagnostic.warningSign": " ",
-	"diagnostic.infoSign": " ",
-	"diagnostic.hintSign": "•",
 	"coc.preferences.extensionUpdateCheck": "weekly",
+
+	"diagnostic.errorSign": "▴",
+	"diagnostic.warningSign": "▴",
+	"diagnostic.infoSign": "•",
+	"diagnostic.hintSign": "•",
 
 	"Lua.diagnostics.globals": ["vim", "martax"],
 	"Lua.diagnostics.disable": ["trailing-space"],

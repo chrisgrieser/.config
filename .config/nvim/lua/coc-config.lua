@@ -6,7 +6,7 @@ require("utils")
 g.coc_data_home = "~/.local/share/nvim/coc/"
 
 g.coc_global_extensions = {
-	-- "coc-lua",
+	"coc-lua",
 	"coc-css",
 	"coc-sh",
 	"coc-yaml",
@@ -63,14 +63,11 @@ keymap("n", "<leader>R", "<Plug>(coc-rename)")
 -- Use tab for trigger completion with characters ahead and navigate.
 -- NOTE: There's always complete item selected by default, you may want to enable
 -- no select by `"suggest.noselect": true` in your configuration file.
-
 local opts = {silent = true, noremap = true, expr = true}
 
 -- Make `return` and `tab` to accept selected completion item
-keymap("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
-keymap("i", "<Tab>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
-
---------------------------------------------------------------------------------
+keymap("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], opts)
+keymap("i", "<Tab>", [[coc#pum#visible() ? coc#pum#confirm() : "<Tab>"]], opts)
 
 -- PASSIVES
 augroup("CocGroup", {})
