@@ -38,22 +38,6 @@ end
 transBgAppWatcher = aw.new(transBackgroundApp)
 transBgAppWatcher:start()
 
--- workaround for Alfred's Compatibility Mode, where opening URLs first
--- activates the previous frontmost app (like Obsidian or Alacritty) before
--- opening the browser
-alfredActive = false
-function alfredActivated (appName, eventType)
-	if not(appName == "Alfred") then return end
-
-	if eventType == aw.activated then
-		alfredActive = true
-	elseif eventType == aw.deactivated then
-		runDelayed(0.5, function () alfredActive = false end)
-	end
-end
-alfredWatcher = aw.new(alfredActivated)
-alfredWatcher:start()
-
 --------------------------------------------------------------------------------
 
 -- OBSIDIAN
