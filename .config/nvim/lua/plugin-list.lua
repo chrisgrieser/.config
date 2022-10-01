@@ -3,14 +3,14 @@ function PluginList (use)
 	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
 
 	-- Themes
-	use 'folke/tokyonight.nvim' -- color scheme
+	use 'folke/tokyonight.nvim'
 
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use 'nvim-lualine/lualine.nvim' -- statusbar (w/o requiring icons, since I don't use them)
 	use 'airblade/vim-gitgutter'
 
-	-- LSP & Syntax
+	-- -- LSP & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
 	use {
 		'nvim-treesitter/nvim-treesitter',

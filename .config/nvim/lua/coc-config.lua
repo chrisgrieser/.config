@@ -6,7 +6,7 @@ require("utils")
 g.coc_data_home = "~/.local/share/nvim/coc/"
 
 g.coc_global_extensions = {
-	"coc-lua",
+	-- "coc-lua",
 	"coc-css",
 	"coc-sh",
 	"coc-yaml",
