@@ -142,9 +142,19 @@ keymap("n", "ö", "<Plug>(SubversiveSubstitute)")
 keymap("n", "öö", "<Plug>(SubversiveSubstituteLine)")
 keymap("n", "Ö", "<Plug>(SubversiveSubstituteToEndOfLine)")
 
+
+
+keymap("v", "R", '"zy`]"zp') -- selection
 -- [R]eplicate (duplicate) down
 keymap("n", "R", '"zyy"zp') -- current line
-keymap("v", "R", '"zy`]"zp') -- selection
+
+
+
+-- Line Movement
+keymap("n", "<Up>", "ddkkp") -- line up
+keymap("n", "<Down>", "ddp") -- line down
+keymap("v", "<Up>", "dkkp`[v`]") -- selected lines up
+keymap("v", "<Down>", "dp`[v`]") -- selected lines down
 
 -- Misc
 keymap({"n", "v"}, "U", "<C-r>") -- undo consistent on one key
@@ -165,7 +175,8 @@ keymap("c", "<C-e>", '<End>')
 keymap("c", "<C-u>", '<C-e><C-u>') -- clear
 
 -- quicker typing
-keymap("i", "!!", '{}<Left><CR><Esc>O') -- {}
+keymap("i", "!!", ' {}<Left><CR><Esc>O') -- {} with proper linebreak
+keymap("i", ",,", "<Plug>(emmet-expand-abbr)", {silent = true})
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE

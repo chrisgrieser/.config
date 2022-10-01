@@ -4,12 +4,12 @@ function PluginList (use)
 
 	-- Themes
 	use 'folke/tokyonight.nvim'
+	use 'rakr/vim-two-firewatch'
 
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use 'nvim-lualine/lualine.nvim'
 	use 'airblade/vim-gitgutter'
-	use 'rcarriga/nvim-notify'
 
 	-- -- LSP & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
@@ -40,10 +40,13 @@ function PluginList (use)
 	use{ 'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter'}
 	use 'justinmk/vim-sneak'
 
-	-- Misc
+	-- Completion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
+	use 'mattn/emmet-vim' -- Emmet for CSS
+
+	-- Misc
 	use 'mzlogin/vim-markdown-toc'
-	use 'preservim/vim-markdown' -- conceal (fold) markdown URLs
+	use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 
 end
 
