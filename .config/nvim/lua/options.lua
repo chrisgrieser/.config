@@ -59,7 +59,8 @@ autocmd ("BufReadPost", {
 opt.showcmd = true -- keychords pressed
 opt.showmode = false -- don't show "-- Insert --"
 opt.laststatus = 2 -- show always
-opt.cmdheight = 0 -- hide message line if there is no content (requires nvim 0.8)
+-- opt.cmdheight = 0 -- hide message line if there is no content (requires nvim 0.8)
+-- glitches: https://github.com/nvim-lualine/lualine.nvim/issues/853
 
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'

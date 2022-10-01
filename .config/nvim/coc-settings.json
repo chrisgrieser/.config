@@ -1,22 +1,22 @@
 // vim: filetype=jsonc
 
 {
-	"coc.preferences.extensionUpdateCheck": "weekly",
+  "coc.preferences.extensionUpdateCheck": "weekly",
 
-	"diagnostic.errorSign": "▴",
-	"diagnostic.warningSign": "▴",
-	"diagnostic.infoSign": "•",
-	"diagnostic.hintSign": "•",
+  "diagnostic.errorSign": "▴",
+  "diagnostic.warningSign": "▴",
+  "diagnostic.infoSign": "•",
+  "diagnostic.hintSign": "•",
 
-	"Lua.diagnostics.globals": ["vim", "martax"],
-	"Lua.diagnostics.disable": ["trailing-space"],
-	"Lua.workspace.library": [
-		"/Users/chrisgrieser/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
-		"/Users/chrisgrieser/.hammerspoon/lua",
-		"/Users/chrisgrieser/.config/nvim/lua"
-	],
+  "Lua.diagnostics.globals": ["vim", "martax"],
+  "Lua.diagnostics.disable": ["trailing-space"],
+  "Lua.workspace.library": [
+    "/Users/chrisgrieser/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
+    "/Users/chrisgrieser/.hammerspoon/lua",
+    "/Users/chrisgrieser/.config/nvim/lua"
+  ],
 
-	"css.lint.vendorPrefix": "ignore",
-	"css.lint.duplicateProperties": "error"
+  "css.lint.vendorPrefix": "ignore",
+  "css.lint.duplicateProperties": "error"
 }
 

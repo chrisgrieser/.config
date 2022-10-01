@@ -30,10 +30,15 @@ cmd[[highlight def link myAnnotations Todo]] -- use same color as "TODO"
 cmd[[highlight CocHighlightText term=underdotted cterm=underdotted]]
 
 -- TreeSitter Context Line
-cmd[[highlight TreesitterContext ctermbg=black]]
+cmd[[highlight TreesitterContext ctermbg=black guibg=black]]
 
 -- Indentation Lines
 cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey guifg=DarkGrey]]
+
+-- leading spaces
+-- https://vi.stackexchange.com/questions/26825/conceal-markdown-links-and-extensions
+cmd[[highlight WhiteSpaceBol guibg=DarkGrey ctermbg=DarkGrey]]
+cmd[[match WhiteSpaceBol /^ \+/]]
 
 --------------------------------------------------------------------------------
 
