@@ -4,9 +4,6 @@
 matches:
   - trigger: ".rr"
     replace: ".replace(/$|$/g, \"\");"
-  # - regex: " ?!!"  # so this works whether prepended with space or not
-  #   replace: " {\n"
-  #   label: 🏝 Quicker Block
   - replace: "[...new Set(myArray)]"
     label: 🏝 Filter Duplicates / Keep Uniques in Array
   - trigger: "!capitalize"
