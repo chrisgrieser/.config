@@ -12,13 +12,10 @@ require('nvim-treesitter.configs').setup {
 		"markdown_inline",
 	},
 
-	auto_install = true, -- ensure the above are actually installed
-
 	highlight = {
-		-- NOTE: these are the names of the parsers and not the filetype. (for
-		-- example if you want to disable highlighting for the `tex` filetype, you
-		-- need to include `latex` in this list as this is the name of the parser)
-		disable = { "c", "rust" },
+		enable = true,
+
+		disable = {}, -- NOTE: these are the names of the parsers and not the filetype
 
 		-- Setting this to true will run `:h syntax` and tree-sitter at the same
 		-- time. Set this to `true` if you depend on 'syntax' being enabled (like
@@ -27,5 +24,10 @@ require('nvim-treesitter.configs').setup {
 		-- list of languages
 		additional_vim_regex_highlighting = false,
 	},
+
+	indentation = {
+		enable = true,
+		disable = {}, -- NOTE: these are the names of the parsers and not the filetype
+	}
 }
 

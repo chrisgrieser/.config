@@ -12,4 +12,5 @@ require("keybindings")
 require("appearance")
 require("remaining-plugins")
 require("filetype-specific")
+require("treesitter-config")
 
