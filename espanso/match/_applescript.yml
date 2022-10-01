@@ -102,9 +102,6 @@ matches:
       	end repeat
       end tell
     label: 🍏 Wait till tab is loaded
-  - trigger: "!as"
-    replace: "#!/usr/bin/env osascript\n"
-    label: 🍏 AppleScript Shebang
   - trigger: "!resolve"
     replace: |
       # resolve ~
@@ -121,7 +118,5 @@ matches:
       	end tell
       end tell
     label: 🍏 Name of front window of a process
-  - trigger: "!hr"
-    replace: "#-------------------------------------------------------------------------------"
   - label: "cut string"
     replace: set window_name to (characters 12 thru -2 of window_name as string)

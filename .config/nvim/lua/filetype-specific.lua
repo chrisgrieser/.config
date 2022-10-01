@@ -1,10 +1,15 @@
 require("utils")
+--------------------------------------------------------------------------------
 
 -- close helper windows with q
 autocmd( "FileType", {
 	pattern = { "help", "startuptime", "qf", "lspinfo" },
 	command = [[nnoremap <buffer><silent> q :close<CR>]]
 })
+
+augroup templates
+    autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
+augroup END
 
 --------------------------------------------------------------------------------
 
