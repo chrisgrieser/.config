@@ -53,29 +53,41 @@ function highlightsAppScroll (amount)
 	pseudoHideCursor()
 end
 
--- CURSOR HIDING in Brave and Reeder
--- when activated and j/k is pressed for the first time, hide cursor
+--------------------------------------------------------------------------------
+
+-- CURSOR HIDING in Brave
+-- when Brave activates and j or k is pressed for the first time, hide cursor
 function hidingCursorInBrowser(key)
 	jHidesCursor:disable() -- so it only works the first time
 	kHidesCursor:disable()
+	alfredDisablesJKCursorHider:disable()
 
-	local frontmostApp = hs.application.frontmostApplication()
-	keystroke({}, key, 1, frontmostApp)
-	pseudoHideCursor()
+	if key == "Alfred" then -- wordaround necessary, since Alfred isn't considered a window
+		hs.osascript.applescript('tell application id "com.runningwithcrayons.Alfred" to search ""')
+	else
+		keystroke({}, key, 1, hs.application("Brave Browser"))
+		pseudoHideCursor()
+	end
 end
 jHidesCursor = hotkey({},"j", function() hidingCursorInBrowser("J") end)
 kHidesCursor = hotkey({},"k", function() hidingCursorInBrowser("K") end)
+-- registering this shortcut requires disabling cmd+space in the macOS keyboard
+-- settings (requires temporarily enabling the hotkey to do so)
+alfredDisablesJKCursorHider = hotkey({"cmd"}, "space", function() hidingCursorInBrowser("Alfred") end)
 jHidesCursor:disable()
 kHidesCursor:disable()
+alfredDisablesJKCursorHider:disable()
 
 function jkWatcher(appName, eventType)
 	if (eventType == aw.activated) then
 		if appName == "Brave Browser" or appName == "Reeder" or appName == "Inoreader" then
 			jHidesCursor:enable()
 			kHidesCursor:enable()
+			alfredDisablesJKCursorHider:enable()
 		else
 			jHidesCursor:disable()
 			kHidesCursor:disable()
+			alfredDisablesJKCursorHider:disable()
 		end
 	end
 end
