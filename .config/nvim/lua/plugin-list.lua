@@ -27,10 +27,6 @@ function PluginList (use)
 	}
 	-- use 'ThePrimeagen/harpoon' -- switching regularly between multiple files
 
-	-- Insert Mode
-	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
-	use 'mzlogin/vim-markdown-toc'
-
 	-- Operators
 	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'}
 	use 'tpope/vim-commentary' -- comments operator & text object
@@ -43,6 +39,11 @@ function PluginList (use)
 	use 'gcmt/wildfire.vim' -- incrementally expanding objects (alternative: terryma/vim-expand-region)
 	use{ 'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter'}
 	use 'justinmk/vim-sneak'
+
+	-- Misc
+	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
+	use 'mzlogin/vim-markdown-toc'
+	use 'preservim/vim-markdown' -- conceal (fold) markdown URLs
 
 end
 
