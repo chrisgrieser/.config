@@ -10,7 +10,7 @@ require("filetype-specific")
 require("remaining-plugins")
 
 if g.started_by_firenvim then
-	opt.laststatus = 0
+	require("firenvim-config")
 else
 	require("appearance")
 	require("coc-config")

@@ -137,6 +137,7 @@ keymap("n", "X", 'mz$"_x`z') -- Remove last character from line
 keymap("n", "zl", function() telescope.spell_suggest() end)
 keymap("n", "gz", "]s") -- next misspelling
 keymap("n", "gZ", "[s") -- prev misspelling
+keymap("n", "za", "1z=") -- Autocorrect word under cursor (= select 1st suggestion)
 
 -- [O]verride (vim.subversive)
 keymap("n", "ö", "<Plug>(SubversiveSubstitute)")

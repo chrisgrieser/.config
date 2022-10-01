@@ -68,7 +68,15 @@ autocmd("BufWritePre", {
 })
 
 -- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070
+-- (see also the respective "change small word" keybinding <leader><space>)
 opt.iskeyword = opt.iskeyword + {"-"}
+
+-- status bar
+opt.showcmd = true -- keychords pressed
+opt.showmode = false -- don't show "-- Insert --"
+opt.laststatus = 2
+-- opt.cmdheight = 0 -- hide message line if there is no content (requires nvim 0.8)
+-- glitches: https://github.com/nvim-lualine/lualine.nvim/issues/853
 
 -- folding
 opt.foldmethod = "indent"
