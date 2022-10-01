@@ -4,7 +4,14 @@ require("utils")
 g.mapleader = ','
 
 -- [r]eload current config file
-keymap("n", "<leader>r", ':write<CR>:source %<CR>:echo "Reloaded."<CR>') -- alternative: https://www.reddit.com/r/neovim/comments/puuskh/how_to_reload_my_lua_config_while_using_neovim/
+keymap("n", "<leader>r", function ()
+	for name,_ in pairs(package.loaded) do
+		package.loaded[name] = nil -- needed cause of lua's caching
+	end
+	dofile(vim.env.MYVIMRC)
+	vim.notify("Neovim config reloaded.", vim.log.levels.INFO)
+end)
+-- single file alternative: keymap("n", "<leader>r", ':write<CR>:source %<CR>:echo "Reloaded."<CR>')
 
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
@@ -59,6 +66,12 @@ cmd[[
 -- Jump History
 keymap("n", "<Left>", "<C-o>") -- Back
 keymap("n", "<Right>", "<C-i>") -- Forward
+
+-- Sneak: enable clever-f style movement
+keymap("", "f", "<Plug>Sneak_f")
+keymap("", "F", "<Plug>Sneak_F")
+keymap("", "t", "<Plug>Sneak_t")
+keymap("", "T", "<Plug>Sneak_T")
 
 -- Search
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
@@ -240,7 +253,7 @@ keymap({"n", "v"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-fil
 
 -- File Operations
 -- <C-R>=expand("%:t")<CR> -> expands the current filename in the command line
-keymap("n", "<C-p>", ':let @+=@%<CR>:echo "Copied:"expand("%")<CR>') -- copy path of current file
+keymap("n", "<C-p>", ':let @+=@%:p<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
 keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-l>", ":!open %:h<CR><CR>") -- show file in default GUI file explorer
