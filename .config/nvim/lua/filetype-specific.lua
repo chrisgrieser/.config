@@ -37,8 +37,16 @@ keymap("n", "<leader>b", function()
 end)
 
 autocmd( "FileType", {
-	pattern = {"json", "js", "ts"},
-	callback = function() g.hrComment = "//──────────────────────────────────────────────────────────────────────────────" end
+	pattern = {"yaml"}, -- karabiner config
+	callback = function() g.buildCommand = 'osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"' end
+})
+autocmd( "FileType", {
+	pattern = {"lua"}, -- hammerspoon config
+	callback = function() g.buildCommand = 'open "hammerspoon://hs-reload"' end
+})
+autocmd( "FileType", {
+	pattern = {"ts"}, -- typescript build
+	callback = function() g.buildCommand = 'npm run build' end
 })
 
 --------------------------------------------------------------------------------

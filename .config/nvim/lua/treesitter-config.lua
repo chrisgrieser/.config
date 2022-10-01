@@ -33,11 +33,10 @@ require('nvim-treesitter.configs').setup {
 		disable = {}, -- NOTE: these are the names of the parsers and not the filetype
 	},
 
-	textobjects = {
+	textobjects = { -- textobj plugin
 		move = {
 			enable = true,
 			set_jumps = true,
-			lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
 			goto_next_start = {
 				["<leader>c"] = "@comment.outer",
 			},
@@ -47,19 +46,19 @@ require('nvim-treesitter.configs').setup {
 		}
 	},
 
-	rainbow = {
+	rainbow = { -- rainbow plugin
 		enable = true,
 		disable = {}, -- list of languages you want to disable the plugin for
 		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-		max_file_lines = nil, -- Do not enable for files with more than n lines, int
+		max_file_lines = 1000, -- Do not enable for files with more than n lines, int
 	}
 }
 
 -- https://github.com/nvim-treesitter/nvim-treesitter-context#configuration
 require'treesitter-context'.setup{
 	enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-	max_lines = 1, -- How many lines the window should span. Values <= 0 mean no limit.
+	max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
 	trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-	min_window_height = 15, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+	min_window_height = 20, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
 }
 
