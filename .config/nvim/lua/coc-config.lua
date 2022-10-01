@@ -10,6 +10,7 @@ g.coc_global_extensions = {
 	"coc-css",
 	"coc-sh",
 	"coc-yaml",
+	"coc-toml",
 	"coc-tsserver", -- ts and js
 	"coc-json",
 	"coc-diagnostic" -- linter integration
