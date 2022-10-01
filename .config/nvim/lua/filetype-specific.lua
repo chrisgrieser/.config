@@ -10,17 +10,11 @@ autocmd( "FileType", {
 autocmd( "FileType", {
 	pattern = { "yml", "yaml", "json"},
 	command = [[
-		set tabstop = 2
-		set softtabstop = 2
-		set shiftwidth = 2
+		set tabstop 2
+		set softtabstop 2
+		set shiftwidth 2
 		set expandtab
 	]]
-})
-
--- comments for jsonc
-autocmd( "FileType", {
-	pattern = {"json"},
-	command = [[ syntax match Comment +\/\/.\+$+ ]]
 })
 
 --------------------------------------------------------------------------------
