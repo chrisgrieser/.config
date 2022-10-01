@@ -203,23 +203,32 @@ end)
 -- - Bring all windows forward
 -- - hide sidebar
 -- - enlarge window if it's too small
--- - quit Finder when no window
 function finderWatcher(appName, eventType, appObject)
-	if not(eventType == aw.activated and appName == "Finder") then return end
+	if not(appName == "Finder") then return end
 
-	appObject:selectMenuItem({"View", "Hide Sidebar"})
+	if eventType == aw.activated then
+		appObject:selectMenuItem({"View", "Hide Sidebar"})
 
-	local finderWin = appObject:focusedWindow()
-	local isInfoWindow = finderWin:title():match(" Info$")
-	if isInfoWindow then return end
+		local finderWin = appObject:focusedWindow()
+		local isInfoWindow = finderWin:title():match(" Info$")
+		if isInfoWindow then return end
 
-	local win_h = finderWin:frame().h
-	local max_h = finderWin:screen():frame().h
-	local max_w = finderWin:screen():frame().w
-	local target_w = 0.6 * max_w
-	local target_h = 0.8 * max_h
-	if (win_h / max_h) < 0.7 then
-		finderWin:setSize({w = target_w, h = target_h})
+		local win_h = finderWin:frame().h
+		local max_h = finderWin:screen():frame().h
+		local max_w = finderWin:screen():frame().w
+		local target_w = 0.6 * max_w
+		local target_h = 0.8 * max_h
+		if (win_h / max_h) < 0.7 then
+			finderWin:setSize({w = target_w, h = target_h})
+		end
+	elseif eventType == aw.launched then
+		-- quit finder if it was started as a helper, but has no window
+		runDelayed(10, function ()
+			if not(appObject) then return end
+			if #appObject:allWindows() == 0 then
+				appObject:kill()
+			end
+		end)
 	end
 end
 finderAppWatcher = aw.new(finderWatcher)
