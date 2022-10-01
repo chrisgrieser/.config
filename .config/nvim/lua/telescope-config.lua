@@ -8,7 +8,7 @@ require("telescope").setup {
 		file_ignore_patterns = { "packer_compiled.lua", ".DS_Store", ".git/" },
 		mappings = {
 			i = {
-				["<esc>"] = require('telescope.actions').close, -- close w/ one esc
+				["<Esc>"] = require('telescope.actions').close, -- close w/ one esc
 				["?"] = "which_key",
 			},
 		}
