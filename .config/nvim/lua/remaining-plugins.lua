@@ -11,3 +11,11 @@ cmd[[let g:sneak#s_next = 1]] -- "s" repeats, like with clever-f
 cmd[[let g:sneak#use_ic_scs = 1]] -- smart case
 cmd[[let g:sneak#prompt = '👟']] -- the sneak in command line :P
 
+-- Emmet: use only in CSS insert mode
+g.user_emmet_install_global = 0
+autocmd("FileType", {
+	pattern = "css",
+	command = "EmmetInstall"
+})
+g.user_emmet_mode='i'
+

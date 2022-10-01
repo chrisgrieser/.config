@@ -1,9 +1,8 @@
 require("utils")
 --------------------------------------------------------------------------------
 
--- THEME
--- keep using terminal colorscheme in the Terminal, for consistency with
--- Alacritty looks
+-- GUI
+-- keep using terminal colorscheme in the Terminal, for consistency with Alacritty
 if fn.has('gui_running') == 1 then -- https://www.reddit.com/r/neovim/comments/u1998d/comment/i4asi0h/?utm_source=share&utm_medium=web2x&context=3
 	cmd[[colorscheme tokyonight]]
 end
@@ -17,10 +16,6 @@ cmd[[highlight ColorColumn ctermbg=DarkGrey guibg=black]] -- https://www.reddit.
 
 -- Active Line
 cmd[[highlight CursorLine term=none cterm=none guibg=black ctermbg=black]]
-
--- Underline URLs
-cmd[[match urls /http[s]\?:\/\/[[:alnum:]%\/_#.-]*/ ]]
-cmd[[highlight urls cterm=underline]]
 
 -- Annotations
 cmd[[match myAnnotations /INFO/ ]]
@@ -40,6 +35,16 @@ cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey guifg=DarkGrey]]
 cmd[[highlight WhiteSpaceBol guibg=DarkGrey ctermbg=DarkGrey]]
 cmd[[match WhiteSpaceBol /^ \+/]]
 
+-- Comments
+cmd[[highlight Comment ctermfg=grey]] -- since they badly colored in the terminal with some themes
+
+-- Underline URLs
+cmd[[match urls /http[s]\?:\/\/[[:alnum:]%\/_#.-]*/ ]]
+cmd[[highlight urls cterm=underline]]
+
+-- Popups
+cmd[[highlight Pmenu ctermbg=Grey]]
+
 --------------------------------------------------------------------------------
 
 -- GUTTER
@@ -57,9 +62,22 @@ g.gitgutter_sign_priority = 9 -- lower to not overwrite when in conflict with ot
 
 --------------------------------------------------------------------------------
 
--- STATUS LINE (Lua Line)
+-- STATUS LINE
+-- status bar
+opt.showcmd = true -- keychords pressed
+opt.showmode = false -- don't show "-- Insert --"
+-- opt.cmdheight = 0 -- hide message line if there is no content (requires nvim 0.8)
+-- glitches: https://github.com/nvim-lualine/lualine.nvim/issues/853
+
+-- deactivate in firenvim
+if g.started_by_firenvim then
+	opt.laststatus = 0
+else
+	opt.laststatus = 2
+end
+
+-- Lua Line
 local function alternateFile()
-	-- local bufferCount = fn.bufnr("$")
 	local altFile = api.nvim_exec('echo expand("#:t")', true)
 	local curFile = api.nvim_exec('echo expand("%:t")', true)
 	if altFile == curFile then return "" end
@@ -81,6 +99,4 @@ require('lualine').setup {
 		section_separators = { left = '', right = ''},
 	},
 }
-
-
 
