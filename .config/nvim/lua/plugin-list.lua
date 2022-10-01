@@ -37,8 +37,10 @@ function PluginList (use)
 	use 'mg979/vim-visual-multi' -- multi-cursor
 	use 'michaeljsmith/vim-indent-object'
 	use 'gcmt/wildfire.vim' -- incrementally expanding objects (alternative: terryma/vim-expand-region)
-	use{ 'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter'}
+	use {'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter'}
 	use 'justinmk/vim-sneak'
+	use 'inkarkat/vim-LineJuggler' -- move & duplicate lines
+	use 'matze/vim-move' -- move lines
 
 	-- Completion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)

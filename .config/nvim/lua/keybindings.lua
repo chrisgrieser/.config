@@ -120,6 +120,7 @@ keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
 keymap({"n", "v"}, "^", "=") -- auto-indent
 keymap("n", "^p", "`[v`]=") -- auto-indent last paste
+keymap("n", "^A", "mzgg=G`z") -- auto-indent entire file
 
 -- toggle word between Capital and lower case
 keymap("n", "ü", "mzlblgueh~`z")
@@ -142,19 +143,16 @@ keymap("n", "ö", "<Plug>(SubversiveSubstitute)")
 keymap("n", "öö", "<Plug>(SubversiveSubstituteLine)")
 keymap("n", "Ö", "<Plug>(SubversiveSubstituteToEndOfLine)")
 
-
-
-keymap("v", "R", '"zy`]"zp') -- selection
 -- [R]eplicate (duplicate) down
 keymap("n", "R", '"zyy"zp') -- current line
-
-
+keymap("v", "R", '"zy`]"zp') -- selection (best used with Visual Line Mode)
 
 -- Line Movement
-keymap("n", "<Up>", "ddkkp") -- line up
-keymap("n", "<Down>", "ddp") -- line down
-keymap("v", "<Up>", "dkkp`[v`]") -- selected lines up
-keymap("v", "<Down>", "dp`[v`]") -- selected lines down
+g.move_map_keys = 0 -- disable automatic keymaps of vim.move
+keymap("n", "<Down>", "<Plug>MoveLineDown")
+keymap("n", "<Up>", "<Plug>MoveLineUp")
+keymap("v", "<Down>", "<Plug>MoveBlockDown")
+keymap("v", "<Up>", "<Plug>MoveBlockUp")
 
 -- Misc
 keymap({"n", "v"}, "U", "<C-r>") -- undo consistent on one key
@@ -176,7 +174,6 @@ keymap("c", "<C-u>", '<C-e><C-u>') -- clear
 
 -- quicker typing
 keymap("i", "!!", ' {}<Left><CR><Esc>O') -- {} with proper linebreak
-keymap("i", ",,", "<Plug>(emmet-expand-abbr)", {silent = true})
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
@@ -200,19 +197,11 @@ keymap("v", "<D-c>", "y") -- cmd+c: copy selection
 keymap("n", "<D-x>", "dd") -- cmd+x: cut line
 keymap("v", "<D-x>", "d") -- cmd+x: cut selection
 
-keymap("n", "<D-n>", ":e ") -- cmd+n
-keymap("n", "<D-s>", ":write<CR>") -- cmd+s
+keymap("n", "<D-n>", ":new ") -- cmd+n
+keymap("n", "<D-s>", ":write!<CR>") -- cmd+s
 keymap("n", "<D-a>", "mzggvGy`z") -- cmd+a & cmd+c
 keymap("n", "<D-w>", ":w<CR>:bd<CR>") -- cmd+w
 
-keymap("n", "<D-D>", '"zyy"zp') -- cmd+shift+d: duplicate lines
-keymap("v", "<D-D>", '"zy"zp') -- cmd+shift+d: duplicate selected lines
-keymap("n", "<D-2>", "ddkkp") -- line up
-keymap("n", "<D-3>", "ddp") -- line down
-keymap("v", "<D-2>", "dkkp") -- selected lines up
-keymap("v", "<D-3>", "dp") -- selected lines down
-keymap("n", "<D-7>", "gcc") -- comment line
-keymap("v", "<D-7>", "gc") -- comment selection
 keymap("n", "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 

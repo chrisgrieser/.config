@@ -39,6 +39,7 @@ cmd[[match WhiteSpaceBol /^ \+/]]
 cmd[[highlight Comment ctermfg=grey]] -- since they badly colored in the terminal with some themes
 
 -- Underline URLs
+-- (must come after Comments so URLs in comments are displayed correctly)
 cmd[[match urls /http[s]\?:\/\/[[:alnum:]%\/_#.-]*/ ]]
 cmd[[highlight urls cterm=underline]]
 
