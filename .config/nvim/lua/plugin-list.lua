@@ -24,7 +24,13 @@ function PluginList (use)
 	use { 'nvim-telescope/telescope.nvim', -- fuzzy finder
 		requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
 	}
+
+	-- Insert Mode
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
+
+	-- Motions
+	use 'unblevable/quick-scope' -- highlight f/t (better horizontal movement)
+	use 'ggandor/lightspeed.nvim' -- better vertical movement
 
 	-- Operators
 	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'} -- surround with punctuation
@@ -38,5 +44,4 @@ function PluginList (use)
 	use 'gcmt/wildfire.vim' -- incrementally expanding objects (alternative: terryma/vim-expand-region)
 
 end
-
 
