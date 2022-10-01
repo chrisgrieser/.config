@@ -6,3 +6,6 @@ g.netrw_banner = 0 -- no ugly top banner
 -- https://github.com/gcmt/wildfire.vim#advanced-usage
 g.wildfire_objects = {"iw", "iW", "i'", 'i"', "i)", "i]", "i}", "ii", "aI", "ip"}
 
+-- Quick Scope: only highlight on key presses
+g.qs_highlight_on_keys = {'f', 'F'}
+

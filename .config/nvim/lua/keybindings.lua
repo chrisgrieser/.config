@@ -62,12 +62,13 @@ keymap("n", "<Right>", "<C-i>") -- Forward
 
 -- Search
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
-keymap("", "+", "*") -- no more modifier key on German Keyboard
-keymap("", "ä", "`") -- Goto Mark
 keymap("n", "<Esc>", ":nohl<CR>", {silent = true}) -- [m]ute highlights with Esc
 keymap("n", "g-", function() telescope.current_buffer_fuzzy_find() end) -- alternative search
 keymap("n", "gs", ":CocList outline<CR>") -- equivalent to Sublime's goto-symbol
 
+-- Misc
+keymap("", "+", "*") -- no more modifier key on German Keyboard
+keymap("", "ä", "`") -- Goto Mark
 --------------------------------------------------------------------------------
 -- EDITING
 
@@ -136,22 +137,21 @@ keymap("n", "zl", function() telescope.spell_suggest() end)
 keymap("n", "gz", "]s") -- next misspelling
 keymap("n", "gZ", "[s") -- prev misspelling
 
+-- [O]verride (vim.subversive)
+keymap("n", "ö", "<Plug>(SubversiveSubstitute)")
+keymap("n", "öö", "<Plug>(SubversiveSubstituteLine)")
+keymap("n", "Ö", "<Plug>(SubversiveSubstituteToEndOfLine)")
+
+-- [R]eplicate (duplicate) down
+keymap("n", "R", '"zyy"zp') -- current line
+keymap("v", "R", '"zy`]"zp') -- selection
+
 -- Misc
 keymap({"n", "v"}, "U", "<C-r>") -- undo consistent on one key
 keymap({"n", "v"}, "M", "J") -- [M]erge line up
 keymap({"n", "v"}, "gm", "ddpkJ") -- [m]erge line down
 keymap("n", "P", '"0p') -- paste what was yanked
 keymap({"n", "v"}, "<leader>q" ,"q") -- needs to be remapped, since used as text object
-
--- Operators
--- [s]ubstitute (vim.subversive)
-keymap("n", "s", "<Plug>(SubversiveSubstitute)")
-keymap("n", "ss", "<Plug>(SubversiveSubstituteLine)")
-keymap("n", "S", "<Plug>(SubversiveSubstituteToEndOfLine)")
-
--- [R]eplicate (duplicate) down
-keymap("n", "R", '"zyy"zp') -- current line
-keymap("v", "R", '"zy`]"zp') -- selection
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE

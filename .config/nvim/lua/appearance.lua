@@ -27,7 +27,7 @@ cmd[[match myAnnotations /INFO/ ]]
 cmd[[highlight def link myAnnotations Todo]] -- use same color as "TODO"
 
 -- TreeSitter Context Line
-cmd[[highlight TreesitterContext ctermbg=DarkGrey]]
+cmd[[highlight TreesitterContext ctermbg=black]]
 
 --------------------------------------------------------------------------------
 -- GUTTER
