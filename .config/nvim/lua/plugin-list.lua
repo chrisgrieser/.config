@@ -6,7 +6,6 @@ function PluginList (use)
 
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
-	use "unblevable/quick-scope" -- highlight for f & t
 	use 'nvim-lualine/lualine.nvim' -- statusbar (w/o requiring icons, since I don't use them)
 	use 'airblade/vim-gitgutter'
 
@@ -37,7 +36,6 @@ function PluginList (use)
 	use 'mg979/vim-visual-multi' -- multi-cursor
 	use 'michaeljsmith/vim-indent-object' -- indention text objects
 	use 'gcmt/wildfire.vim' -- incrementally expanding objects (alternative: terryma/vim-expand-region)
-	use 'terryma/vim-expand-region' -- incrementally expanding objects, used for second keybinding
 
 end
 

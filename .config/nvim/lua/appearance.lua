@@ -1,5 +1,4 @@
 require("utils")
-
 --------------------------------------------------------------------------------
 
 -- THEME
@@ -27,6 +26,9 @@ cmd[[highlight urls cterm=underline]]
 cmd[[match myAnnotations /INFO/ ]]
 cmd[[highlight def link myAnnotations Todo]] -- use same color as "TODO"
 
+-- TreeSitter Context Line
+cmd[[highlight TreesitterContext ctermbg=DarkGrey]]
+
 --------------------------------------------------------------------------------
 -- GUTTER
 -- Sign Column ( = Gutter)
@@ -42,6 +44,7 @@ g.gitgutter_sign_priority = 9 -- lower to not overwrite when in conflict with ot
 -- INFO: Look of the Coc Gutter indicators is set in coc-settings.json
 
 --------------------------------------------------------------------------------
+
 -- STATUS LINE (Lua Line)
 local function alternateFile()
 	-- local bufferCount = fn.bufnr("$")
