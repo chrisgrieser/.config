@@ -30,7 +30,7 @@ function PluginList (use)
 
 	-- Motions
 	use 'unblevable/quick-scope' -- highlight f/t (better horizontal movement)
-	use 'ggandor/lightspeed.nvim' -- better vertical movement
+	use 'justinmk/vim-sneak' -- better vertical movement
 
 	-- Operators
 	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'} -- surround with punctuation

@@ -42,15 +42,15 @@ hotkey({"alt"}, "K", scrollUp, nil, scrollUp)
 
 -- HIGHLIGHTS Scroll
 function highlightsAppScroll (amount)
-		local highlightsWin = hs.application("Highlights"):mainWindow():frame()
-		local centerPos = {
-			x = highlightsWin.x + highlightsWin.w * 0.5,
-			y = highlightsWin.y + highlightsWin.h * 0.5,
-		}
-		hs.mouse.setRelativePosition(centerPos)
+	local highlightsWin = hs.application("Highlights"):mainWindow():frame()
+	local centerPos = {
+		x = highlightsWin.x + highlightsWin.w * 0.5,
+		y = highlightsWin.y + highlightsWin.h * 0.5,
+	}
+	hs.mouse.setRelativePosition(centerPos)
 
-		hs.eventtap.scrollWheel({0, amount}, {})
-		pseudoHideCursor()
+	hs.eventtap.scrollWheel({0, amount}, {})
+	pseudoHideCursor()
 end
 
 -- CURSOR HIDING in Brave and Reeder

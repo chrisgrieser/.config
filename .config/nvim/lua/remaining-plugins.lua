@@ -9,3 +9,6 @@ g.wildfire_objects = {"iw", "iW", "i'", 'i"', "i)", "i]", "i}", "ii", "aI", "ip"
 -- Quick Scope: only highlight on key presses
 g.qs_highlight_on_keys = {'f', 'F'}
 
+-- Sneak
+cmd[[let g:sneak#s_next = 1]]
+
