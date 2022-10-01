@@ -7,6 +7,11 @@ opt.showmatch = true
 opt.smartcase = true
 opt.ignorecase = true
 
+-- since smartcase and ignorecase also apply to command completion, deactivate
+-- the former to make camelcased command completion easier
+autocmd("CmdlineEnter", { callback = function () opt.smartcase = false end })
+autocmd("CmdlineLeave", { callback = function ()opt.smartcase = true end })
+
 -- tabs & indentation
 opt.tabstop = 3
 opt.softtabstop = 3
