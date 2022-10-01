@@ -227,7 +227,7 @@ keymap({"n", "v"}, "gt", "<C-^>", {silent = true}) -- switch to alt-file (use vi
 
 -- File Operations
 -- INFO: <C-R>=expand("%:t")<CR> -> expands the current filename in the command line
-keymap("n", "<C-p>", ':let @+=@%:p<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
+keymap("n", "<C-p>", ':let @+=@%<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
 keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-l>", ":!open %:h<CR><CR>") -- show file in default GUI file explorer
