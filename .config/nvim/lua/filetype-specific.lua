@@ -1,26 +1,7 @@
 require("utils")
---------------------------------------------------------------------------------
 
--- General
-autocmd("FileType", {
-	pattern = { "help", "startuptime", "qf", "lspinfo" },
-	-- command = [[nnoremap <buffer><silent> q :close<CR>]]
-	callback = function ()
-		keymap("n", "q", ":close<CR>", {buffer = true, silent = true})
-	end
-})
-
---------------------------------------------------------------------------------
-
--- Markdown
-autocmd("FileType", {
-	pattern = {"markdown"},
-	callback = function ()
-		bo.wrap = false
-		bo.textwidth = false
-		bo.conceallevel = 2
-	end
-})
+-- INFO: Options are mostly set in the after/ftplugins
+cmd[[filetype plugin on]] -- required to use the ftplugins
 
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
@@ -40,6 +21,14 @@ keymap("n", "gS", function() telescope.current_buffer_fuzzy_find{default_text='<
 
 -- JS / TS / Shell
 keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, requires vim.surround
+
+-- neovim special windows
+autocmd("FileType", {
+	pattern = { "help", "startuptime", "qf", "lspinfo" },
+	callback = function ()
+		keymap("n", "q", ":close<CR>", {buffer = true, silent = true})
+	end
+})
 
 --------------------------------------------------------------------------------
 
@@ -89,7 +78,7 @@ autocmd("BufNewFile", {
 
 -- [H]orizontal Ruler
 keymap("n", "gh", function()
-	if b.hrComment then
+	if not(b.hrComment) then
 		print("No hr for this filetype defined.")
 	else
 		fn.setline('.', b.hrComment)

@@ -2,7 +2,7 @@
 require("utils")
 -------------------------------------------------------------------------------
 
--- search
+-- Search
 opt.showmatch = true
 opt.smartcase = true
 opt.ignorecase = true
@@ -22,7 +22,6 @@ opt.shiftround = true
 
 -- gutter
 opt.relativenumber = false
-opt.signcolumn = 'no'
 opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
 
 -- ruler
