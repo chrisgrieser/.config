@@ -1,7 +1,7 @@
 require("utils")
 
 -- INFO: Options are mostly set in the after/ftplugins
-cmd[[filetype plugin on]] -- required to use the ftplugins
+-- cmd[[filetype plugin on]] -- required to use the ftplugins
 
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
