@@ -17,7 +17,8 @@ require('nvim-treesitter.configs').setup {
 	highlight = {
 		enable = true,
 
-		disable = {}, -- NOTE: these are the names of the parsers and not the filetype
+		-- NOTE: these are the names of the parsers and not the filetype
+		disable = {"lua"}, -- lua disable since comments and variables get the same color, at least in the terminal
 
 		-- Setting this to true will run `:h syntax` and tree-sitter at the same
 		-- time. Set this to `true` if you depend on 'syntax' being enabled (like
@@ -30,6 +31,21 @@ require('nvim-treesitter.configs').setup {
 	indentation = {
 		enable = true,
 		disable = {}, -- NOTE: these are the names of the parsers and not the filetype
+	},
+
+	rainbow = {
+		enable = true,
+		disable = {}, -- list of languages you want to disable the plugin for
+		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+		max_file_lines = nil, -- Do not enable for files with more than n lines, int
 	}
+}
+
+-- https://github.com/nvim-treesitter/nvim-treesitter-context#configuration
+require'treesitter-context'.setup{
+	enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+	max_lines = 1, -- How many lines the window should span. Values <= 0 mean no limit.
+	trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+	min_window_height = 15, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
 }
 

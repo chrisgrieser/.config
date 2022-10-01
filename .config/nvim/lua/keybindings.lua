@@ -18,6 +18,9 @@ keymap("n", "<leader>?", function() telescope.help_tags() end)
 -- Theme Picker
 keymap("n", "<leader>T", function() telescope.colorscheme() end)
 
+-- Tree Sitter toggle
+keymap("n", "<leader>S", ":TSToggle highlight<CR>")
+
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
 	cmd[[write!]]
@@ -99,6 +102,7 @@ keymap("n", "!", "a <Esc>h") -- append space
 keymap("n", "\\", "i <Esc>l", {nowait = true}) -- prepend space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
+
 keymap("n", "<BS>", "dipO<Esc>") -- reduce multiple blank lines to exactly one
 keymap("n", "|", "i<CR><Esc>k$") -- Split line at cursor
 
