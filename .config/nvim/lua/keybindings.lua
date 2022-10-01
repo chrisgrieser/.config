@@ -239,9 +239,9 @@ keymap("n", "gF", function() telescope.live_grep() end) -- open [b]uffer
 keymap("n", "<leader>V", function() telescope.git_bcommits() end) -- Version History of current file
 
 -- Buffers
-keymap("", "<C-Tab>", "<C-^>")
+keymap("", "<C-Tab>", "<C-^>") -- for footpedal
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
-keymap({"n", "v"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
+keymap({"n", "v"}, "gt", "<C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
 
 -- File Operations
 -- <C-R>=expand("%:t")<CR> -> expands the current filename in the command line
@@ -251,7 +251,7 @@ keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-l>", ":!open %:h<CR><CR>") -- show file in default GUI file explorer
 keymap("n", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
 keymap("n", "<leader>X", ":Chmod +x<CR>") -- execution permission, requires eunuch.vim
-keymap("n", "<leader><BS>", ":Remove") -- undoable deletion of the file, requires eunuch.vim
+keymap("n", "<leader><BS>", ":Remove<CR>:bd<CR>") -- undoable deletion of the file, requires eunuch.vim
 
 -- Sorting
 keymap("n", "<leader>ss", ":'<,'>sort<CR>") -- [s]ort [s]election
