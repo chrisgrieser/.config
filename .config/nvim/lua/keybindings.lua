@@ -75,6 +75,7 @@ keymap("n", "gs", function () telescope.treesitter() end) -- equivalent to Subli
 -- Misc
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
+
 --------------------------------------------------------------------------------
 -- EDITING
 
@@ -122,12 +123,6 @@ keymap("n", "^p", "`[v`]=") -- auto-indent last paste
 
 -- toggle word between Capital and lower case
 keymap("n", "ü", "mzlblgueh~`z")
-
--- Transpose
--- (meant to be pressed repeatedly to move characters)
-keymap("n", "ö", "xp") -- current & next char
-keymap("n", "Ö", "xhhp") -- current & previous char
-keymap("n", "Ä", "dawelpb") -- current & next word
 
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`" }
@@ -190,6 +185,7 @@ keymap("v", "y", "ygv<Esc>") -- yanking in visual mode keeps position https://st
 -- Markdown
 keymap("n", "<CR>", 'A') -- So double return keeps markdown list syntax
 keymap("n", "<leader>x", 'mz^lllrx`z') -- check markdown tasks
+keymap("n", ",1", ":GenTocGFM<CR>") --markdown toc
 
 -- CSS
 keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key (also works for JSON, actually)
