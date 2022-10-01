@@ -25,7 +25,7 @@ function PluginList (use)
 	use { 'nvim-telescope/telescope.nvim', -- fuzzy finder
 		requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
 	}
-	-- use 'ThePrimeagen/harpoon' -- switching regularly between multiple files
+	-- use 'ThePrimeagen/harpoon' -- for switching regularly between multiple files
 
 	-- Operators
 	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'}
@@ -39,8 +39,7 @@ function PluginList (use)
 	use 'gcmt/wildfire.vim' -- incrementally expanding objects (alternative: terryma/vim-expand-region)
 	use {'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter'}
 	use 'justinmk/vim-sneak'
-	use 'inkarkat/vim-LineJuggler' -- move & duplicate lines
-	use 'matze/vim-move' -- move lines
+	use 'matze/vim-move' -- move lines with auto-indention (alternative: vim.unimpaired)
 
 	-- Completion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)

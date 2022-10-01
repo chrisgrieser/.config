@@ -73,6 +73,7 @@ opt.showmode = false -- don't show "-- Insert --"
 -- deactivate in firenvim
 if g.started_by_firenvim then
 	opt.laststatus = 0
+	return
 else
 	opt.laststatus = 2
 end

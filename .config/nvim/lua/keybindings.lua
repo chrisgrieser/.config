@@ -57,8 +57,8 @@ cmd[[
 ]]
 
 -- Jump History
-keymap("n", "<Left>", "<C-o>") -- Back
-keymap("n", "<Right>", "<C-i>") -- Forward
+keymap("n", "<C-h>", "<C-o>") -- Back
+keymap("n", "<C-l>", "<C-i>") -- Forward
 
 -- Sneak: enable clever-f-style movement
 keymap("", "f", "<Plug>Sneak_f")
@@ -149,10 +149,12 @@ keymap("v", "R", '"zy`]"zp') -- selection (best used with Visual Line Mode)
 
 -- Line Movement
 g.move_map_keys = 0 -- disable automatic keymaps of vim.move
-keymap("n", "<Down>", "<Plug>MoveLineDown")
+keymap("n", "<Down>", "<Plug>MoveLineDown") -- also auto-indents O_O
 keymap("n", "<Up>", "<Plug>MoveLineUp")
 keymap("v", "<Down>", "<Plug>MoveBlockDown")
 keymap("v", "<Up>", "<Plug>MoveBlockUp")
+keymap("v", "<Right>", "<Plug>MoveBlockRight")
+keymap("v", "<Left>", "<Plug>MoveBlockLeft")
 
 -- Misc
 keymap({"n", "v"}, "U", "<C-r>") -- undo consistent on one key
@@ -191,19 +193,12 @@ keymap("v", "y", "ygv<Esc>") -- yanking in visual mode keeps position https://st
 -- EMULATING MAC BINDINGS
 -- - requires GUI app like Neovide (called "Logo Key" there)
 -- - mostly done for consistency with other apps
-keymap({"n", "v"}, "<D-v>", "p") -- cmd+v
-keymap("n", "<D-c>", "yy") -- cmd+c: copy line
-keymap("v", "<D-c>", "y") -- cmd+c: copy selection
-keymap("n", "<D-x>", "dd") -- cmd+x: cut line
-keymap("v", "<D-x>", "d") -- cmd+x: cut selection
-
 keymap("n", "<D-n>", ":new ") -- cmd+n
 keymap("n", "<D-s>", ":write!<CR>") -- cmd+s
 keymap("n", "<D-a>", "mzggvGy`z") -- cmd+a & cmd+c
 keymap("n", "<D-w>", ":w<CR>:bd<CR>") -- cmd+w
 
 keymap("n", "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
-keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 
 --------------------------------------------------------------------------------
 -- FILES AND WINDOWS
@@ -218,7 +213,6 @@ keymap("n", "gO", function() telescope.find_files{cwd='%:p:h:h', prompt_prefix='
 keymap("n", "gr", function() telescope.oldfiles() end) -- [r]ecent files
 keymap("n", "gb", function() telescope.buffers() end) -- open [b]uffer
 keymap("n", "gF", function() telescope.live_grep() end) -- open [b]uffer
-keymap("n", "<leader>V", function() telescope.git_bcommits() end) -- Version History of current file
 
 -- Buffers
 keymap("", "<C-Tab>", "<C-^>") -- for footpedal
@@ -230,7 +224,6 @@ keymap({"n", "v"}, "gt", "<C-^>", {silent = true}) -- switch to alt-file (use vi
 keymap("n", "<C-p>", ':let @+=@%<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
 keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
-keymap("n", "<C-l>", ":!open %:h<CR><CR>") -- show file in default GUI file explorer
 keymap("n", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
 keymap("n", "<leader>X", ":Chmod +x<CR>") -- execution permission, requires eunuch.vim
 keymap("n", "<leader><BS>", ":Remove<CR>:bd<CR>") -- undoable deletion of the file, requires eunuch.vim

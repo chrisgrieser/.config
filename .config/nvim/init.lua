@@ -5,12 +5,16 @@ require("packer-setup") -- must be 1st
 require("utils") -- must be 2nd
 
 require("options")
-require("coc-config")
-require("appearance")
-require("telescope-config")
 require("keybindings")
-require("appearance")
-require("remaining-plugins")
 require("filetype-specific")
-require("treesitter-config")
+require("remaining-plugins")
+
+if g.started_by_firenvim then
+	opt.laststatus = 0
+else
+	require("appearance")
+	require("coc-config")
+	require("telescope-config")
+	require("treesitter-config")
+end
 
