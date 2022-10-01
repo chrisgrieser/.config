@@ -9,7 +9,6 @@ function PluginList (use)
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use 'nvim-lualine/lualine.nvim' -- statusbar (w/o requiring icons, since I don't use them)
 	use 'airblade/vim-gitgutter' -- changes
-	use 'rcarriga/nvim-notify' -- notifications
 
 	-- -- LSP & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
@@ -25,13 +24,11 @@ function PluginList (use)
 	use { 'nvim-telescope/telescope.nvim', -- fuzzy finder
 		requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
 	}
+	-- use 'ThePrimeagen/harpoon' -- switching regularly between multiple files
 
 	-- Insert Mode
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
 	use 'mzlogin/vim-markdown-toc' -- markdown toc
-
-	-- Motions
-	use 'justinmk/vim-sneak' -- better vertical movement
 
 	-- Operators
 	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'} -- surround with punctuation
@@ -39,11 +36,12 @@ function PluginList (use)
 	use 'tpope/vim-abolish' -- various case conversions
 	use 'svermeulen/vim-subversive' -- replacement operator
 
-	-- Objects
+	-- Objects & Motions
 	use 'mg979/vim-visual-multi' -- multi-cursor
 	use 'michaeljsmith/vim-indent-object' -- indention text objects
 	use 'gcmt/wildfire.vim' -- incrementally expanding objects (alternative: terryma/vim-expand-region)
 	use{ 'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter'}
+	use 'justinmk/vim-sneak' -- better vertical movement
 
 end
 
