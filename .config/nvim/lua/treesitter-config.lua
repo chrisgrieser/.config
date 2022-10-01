@@ -10,6 +10,8 @@ require('nvim-treesitter.configs').setup {
 		"yaml",
 		"markdown",
 		"markdown_inline",
+		"regex",
+		"toml",
 	},
 
 	highlight = {

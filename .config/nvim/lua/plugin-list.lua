@@ -16,8 +16,8 @@ function PluginList (use)
 		'nvim-treesitter/nvim-treesitter',
 		run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
 	}
-	-- use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
-	-- use { 'nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
+	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
+	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
 
 	-- Utility
 	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
