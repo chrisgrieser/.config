@@ -29,7 +29,7 @@ function transBackgroundApp (appName, eventType, appObject)
 	if not(appName == "Obsidian" or appName == "alacritty" or appName == "Alacritty") then return end
 
 	local win = appObject:mainWindow()
-	if not(alfredActive) and (eventType == aw.activated or eventType == aw.launching) and (isPseudoMaximized(win) or isMaximized(win)) then
+	if (eventType == aw.activated or eventType == aw.launching) and (isPseudoMaximized(win) or isMaximized(win)) then
 		hideAllExcept(appName)
 	elseif eventType == aw.terminated then
 		unHideAll()
@@ -143,24 +143,6 @@ wf_sublime = wf.new("Sublime Text")
 		if newWindow:title():match("sublime%-settings$") or newWindow:title():match("sublime%-keymap$") then
 			moveResizeCurWin("maximized")
 
-		-- subl cli
-		elseif newWindow:title() == "stdin" then
-			moveResizeCurWin("centered")
-
-		-- command-line-edit window = split with alacritty (using EDITOR='subl --new-window --wait')
-		elseif newWindow:title():match("^zsh%w+$") then
-			local alacrittyWin = hs.application("alacritty"):mainWindow()
-			moveResize(alacrittyWin, hs.layout.left50)
-			moveResize(newWindow, hs.layout.right50)
-			newWindow:becomeMain() -- so cmd-tabbing activates this window and not any other one
-			hs.osascript.applescript([[
-				tell application "System Events"
-					tell process "Sublime Text"
-						click menu item "Bash" of menu of menu item "Syntax" of menu "View" of menu bar 1
-					end tell
-				end tell
-			]])
-
 		-- workaround for Window positioning issue, will be fixed with build 4130 being released
 		-- https://github.com/sublimehq/sublime_text/issues/5237
 		elseif isAtOffice() or isProjector() then
@@ -169,6 +151,7 @@ wf_sublime = wf.new("Sublime Text")
 			moveResizeCurWin("pseudo-maximized")
 		end
 	end)
+
 	:subscribe(wf.windowDestroyed, function ()
 		-- don't leave windowless app behind
 		if #wf_sublime:getWindows() == 0 and appIsRunning("Sublime Text") then
@@ -181,14 +164,6 @@ wf_sublime = wf.new("Sublime Text")
 			moveResize(alacrittyWin, baseLayout)
 			alacrittyWin:focus()
 			keystroke({}, "space") -- to redraw zsh-syntax highlighting of the buffer
-		end
-	end)
-	:subscribe(wf.windowFocused, function (focusedWin)
-		-- editing command line: paired activation of both windows
-		if not(appIsRunning("alacritty")) then return end
-		local alacrittyWin = hs.application("alacritty"):mainWindow()
-		if focusedWin:title():match("^zsh%w+$") and isHalf(alacrittyWin) then
-			alacrittyWin:raise()
 		end
 	end)
 
@@ -250,11 +225,11 @@ end
 finderAppWatcher = aw.new(finderWatcher)
 finderAppWatcher:start()
 
--- hide when last window closed
+-- quit when last window closed
 wf_finder = wf.new("Finder")
 wf_finder:subscribe(wf.windowDestroyed, function ()
 	if #wf_finder:getWindows() == 0 then
-		hs.application("Finder"):hide()
+		hs.application("Finder"):kill()
 	end
 end)
 

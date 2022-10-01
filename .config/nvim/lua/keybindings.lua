@@ -228,7 +228,11 @@ keymap("n", "<D-,>", ":e $HOME/.config/nvim/init.lua <CR>") -- cmd+,
 
 --------------------------------------------------------------------------------
 -- FILES AND WINDOWS
+
+-- Utils
 keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
+keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR><CR>') -- open terminal at current location
+-- :Duplicate <C-R>=expand("%:t")<CR>
 
 -- File switchers
 keymap("n", "go", function() telescope.find_files() end) -- [o]pen file in parent-directory
