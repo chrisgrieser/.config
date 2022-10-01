@@ -64,19 +64,6 @@ g.gitgutter_sign_priority = 9 -- lower to not overwrite when in conflict with ot
 --------------------------------------------------------------------------------
 
 -- STATUS LINE
--- status bar
-opt.showcmd = true -- keychords pressed
-opt.showmode = false -- don't show "-- Insert --"
--- opt.cmdheight = 0 -- hide message line if there is no content (requires nvim 0.8)
--- glitches: https://github.com/nvim-lualine/lualine.nvim/issues/853
-
--- deactivate in firenvim
-if g.started_by_firenvim then
-	opt.laststatus = 0
-	return
-else
-	opt.laststatus = 2
-end
 
 -- Lua Line
 local function alternateFile()
