@@ -19,7 +19,7 @@ function PluginList (use)
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
 
-	-- File Operations
+	-- File Releated
 	use 'tpope/vim-eunuch' -- file operation utilities
 	use { 'nvim-telescope/telescope.nvim', -- fuzzy finder
 		requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
@@ -27,6 +27,7 @@ function PluginList (use)
 
 	-- Insert Mode
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
+	use 'mzlogin/vim-markdown-toc' -- markdown toc
 
 	-- Motions
 	use 'justinmk/vim-sneak' -- better vertical movement
