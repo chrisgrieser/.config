@@ -1,5 +1,6 @@
 function PluginList (use)
 	use 'wbthomason/packer.nvim' -- packer manages itself
+	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
 
 	-- Themes
 	use 'folke/tokyonight.nvim' -- color scheme
@@ -18,8 +19,7 @@ function PluginList (use)
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
 
-	-- Utility
-	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
+	-- File Operations
 	use 'tpope/vim-eunuch' -- file operation utilities
 	use { 'nvim-telescope/telescope.nvim', -- fuzzy finder
 		requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
@@ -29,7 +29,6 @@ function PluginList (use)
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
 
 	-- Motions
-	use 'unblevable/quick-scope' -- highlight f/t (better horizontal movement)
 	use 'justinmk/vim-sneak' -- better vertical movement
 
 	-- Operators
