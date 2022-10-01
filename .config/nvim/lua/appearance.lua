@@ -27,12 +27,16 @@ cmd[[match myAnnotations /INFO/ ]]
 cmd[[highlight def link myAnnotations Todo]] -- use same color as "TODO"
 
 -- Current Word Highlight (from Coc)
-cmd[[highlight CocHighlightText term=underdot cterm=underdot]]
+cmd[[highlight CocHighlightText term=underdotted cterm=underdotted]]
 
 -- TreeSitter Context Line
 cmd[[highlight TreesitterContext ctermbg=black]]
 
+-- Indentation Lines
+cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey guifg=DarkGrey]]
+
 --------------------------------------------------------------------------------
+
 -- GUTTER
 -- Sign Column ( = Gutter)
 cmd[[highlight clear SignColumn]] -- transparent

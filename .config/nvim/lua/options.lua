@@ -59,7 +59,7 @@ autocmd ("BufReadPost", {
 opt.showcmd = true -- keychords pressed
 opt.showmode = false -- don't show "-- Insert --"
 opt.laststatus = 2 -- show always
--- opt.cmdheight = 0 -- TODO: uncomment with neovim 0.8 adding support for it
+opt.cmdheight = 0 -- hide message line if there is no content (requires nvim 0.8)
 
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
