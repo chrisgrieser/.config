@@ -1,9 +1,9 @@
 // vim: filetype=jsonc
 
 {
-	"diagnostic.errorSign": "●",
-	"diagnostic.warningSign": "○",
-	"diagnostic.infoSign": "•",
+	"diagnostic.errorSign": " ",
+	"diagnostic.warningSign": " ",
+	"diagnostic.infoSign": " ",
 	"diagnostic.hintSign": "•",
 	"coc.preferences.extensionUpdateCheck": "weekly",
 

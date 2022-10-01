@@ -4,14 +4,7 @@ require("utils")
 g.mapleader = ','
 
 -- [r]eload current config file
-keymap("n", "<leader>r", function ()
-	for name,_ in pairs(package.loaded) do
-		package.loaded[name] = nil -- needed cause of lua's caching
-	end
-	dofile(vim.env.MYVIMRC)
-	vim.notify("Neovim config reloaded.", vim.log.levels.INFO)
-end)
--- single file alternative: keymap("n", "<leader>r", ':write<CR>:source %<CR>:echo "Reloaded."<CR>')
+keymap("n", "<leader>r", ':write<CR>:source %<CR>:echo "Reloaded."<CR>')
 
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
@@ -30,7 +23,7 @@ keymap("n", "<leader>S", ":TSToggle highlight<CR>")
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
-	cmd[[write!]]
+	cmd[[update!]]
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	require("plugin-list")
 	local packer = require("packer")
@@ -67,7 +60,7 @@ cmd[[
 keymap("n", "<Left>", "<C-o>") -- Back
 keymap("n", "<Right>", "<C-i>") -- Forward
 
--- Sneak: enable clever-f style movement
+-- Sneak: enable clever-f-style movement
 keymap("", "f", "<Plug>Sneak_f")
 keymap("", "F", "<Plug>Sneak_F")
 keymap("", "t", "<Plug>Sneak_t")
@@ -77,7 +70,7 @@ keymap("", "T", "<Plug>Sneak_T")
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "<Esc>", ":nohl<CR>", {silent = true}) -- [m]ute highlights with Esc
 keymap("n", "g-", function() telescope.current_buffer_fuzzy_find() end) -- alternative search
-keymap("n", "gs", ":CocList outline<CR>") -- equivalent to Sublime's goto-symbol
+keymap("n", "gs", function () telescope.treesitter() end) -- equivalent to Sublime's goto-symbol
 
 -- Misc
 keymap("", "+", "*") -- no more modifier key on German Keyboard
@@ -116,7 +109,6 @@ keymap("n", "!", "a <Esc>h") -- append space
 keymap("n", "\\", "i <Esc>l", {nowait = true}) -- prepend space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
-
 keymap("n", "<BS>", "dipO<Esc>") -- reduce multiple blank lines to exactly one
 keymap("n", "|", "i<CR><Esc>k$") -- Split line at cursor
 
