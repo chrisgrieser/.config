@@ -40,9 +40,10 @@ function PluginList (use)
 	use 'justinmk/vim-sneak'
 	use 'matze/vim-move' -- move lines with auto-indention (alternative: vim.unimpaired)
 
-	-- Completion
+	-- Completion / Suggestion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
 	use 'mattn/emmet-vim' -- Emmet for CSS
+	use 'gelguy/wilder.nvim' -- suggestions for command line mode (: and /)
 
 	-- Misc
 	use 'mzlogin/vim-markdown-toc'

@@ -65,9 +65,8 @@ keymap("n", "<leader>R", "<Plug>(coc-rename)")
 -- no select by `"suggest.noselect": true` in your configuration file.
 local opts = {silent = true, noremap = true, expr = true} ---@diagnostic disable-line: redefined-local
 
--- `return` and `tab` accept selected completion item
+-- `return` accept selected completion item
 keymap("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], opts)
-keymap("i", "<Tab>", [[coc#pum#visible() ? coc#pum#confirm() : "<Tab>"]], opts)
 
 --------------------------------------------------------------------------------
 
@@ -81,12 +80,12 @@ keymap("o", "af", "<Plug>(coc-funcobj-a)", opts)
 
 -- Remap <C-f> and <C-b> for scroll float windows/popups.
 local opts = {silent = true, nowait = true, expr = true} ---@diagnostic disable-line: redefined-local
-keymap("n", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
-keymap("n", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
-keymap("i", "<C-f>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
-keymap("i", "<C-b>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
-keymap("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
-keymap("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
+keymap("n", "<C-Down>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-Down>"', opts)
+keymap("n", "<C-Up>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-Up>"', opts)
+keymap("i", "<C-Down>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
+keymap("i", "<C-Up>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
+keymap("v", "<C-Down>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-Down>"', opts)
+keymap("v", "<C-Up>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-Up>"', opts)
 
 --------------------------------------------------------------------------------
 

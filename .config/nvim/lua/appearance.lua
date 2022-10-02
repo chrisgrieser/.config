@@ -37,8 +37,8 @@ cmd[[highlight Comment ctermfg=grey]]
 cmd[[highlight WhiteSpaceBol guibg=DarkGrey ctermbg=DarkGrey]]
 cmd[[call matchadd('WhiteSpaceBol', '^ \+')]]
 
--- Annotations INFO TODO
-cmd[[highlight def link myAnnotations Todo]] -- use same color as "TODO"
+-- Annotations
+cmd[[highlight def link myAnnotations Todo]] -- use same styling as "TODO"
 cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE') ]]
 
 -- Underline URLs
