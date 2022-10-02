@@ -48,17 +48,21 @@ keymap("n", "<leader>b", function()
 	end
 end)
 
+augroup("buildSystem", {})
 autocmd( "FileType", {
 	pattern = {"yaml"}, -- karabiner config
-	callback = function() b.buildCommand = 'osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"' end
+	callback = function() b.buildCommand = 'osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"' end,
+	group = "buildSystem",
 })
 autocmd( "FileType", {
 	pattern = {"lua"}, -- hammerspoon config
-	callback = function() b.buildCommand = 'open "hammerspoon://hs-reload"' end
+	callback = function() b.buildCommand = 'open "hammerspoon://hs-reload"' end,
+	group = "buildSystem",
 })
 autocmd( "FileType", {
 	pattern = {"typescript"}, -- typescript build
-	callback = function() b.buildCommand = 'npm run build' end
+	callback = function() b.buildCommand = 'npm run build' end,
+	group = "buildSystem",
 })
 
 --------------------------------------------------------------------------------
@@ -92,23 +96,29 @@ keymap("n", "gh", function()
 	end
 end)
 
+augroup("horizontalRuler", {})
 autocmd( "FileType", {
+	group = "horizontalRuler",
 	pattern = {"json", "javascript", "typescript"},
 	callback = function() b.hrComment = "//──────────────────────────────────────────────────────────────────────────────" end
 })
 autocmd( "FileType", {
+	group = "horizontalRuler",
 	pattern = {"bash", "zsh", "yaml"},
 	callback = function() b.hrComment = "#───────────────────────────────────────────────────────────────────────────────" end
 })
 autocmd( "FileType", {
+	group = "horizontalRuler",
 	pattern = {"lua", "applescript"},
 	callback = function() b.hrComment = "--------------------------------------------------------------------------------" end
 })
 autocmd( "FileType", {
+	group = "horizontalRuler",
 	pattern = {"markdown"},
 	callback = function() b.hrComment = "---" end
 })
 autocmd( "FileType", {
+	group = "horizontalRuler",
 	pattern = {"css"},
 	callback = function() b.hrComment = "/* ───────────────────────────────────────────────── */\n/* << XXX\n──────────────────────────────────────────────────── */" end
 })
