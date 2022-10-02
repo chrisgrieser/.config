@@ -77,7 +77,7 @@ opt.laststatus = 2
 -- folding
 opt.foldmethod = "indent"
 opt.foldenable = false -- do not fold on start
-opt.foldminlines = 3
+opt.foldminlines = 2
 
 -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
 augroup("rememberFolds", {})
