@@ -19,27 +19,7 @@ autocmd("FileType", {
 })
 g.user_emmet_mode='i'
 
--- Wilder
--- INFO: "UpdateRemotePlugins" may be necessary https://github.com/gelguy/wilder.nvim/issues/158
-
-local wilder = require('wilder')
-wilder.setup({modes = {':', '/', '?'}})
-wilder.set_option('renderer', wilder.popupmenu_renderer(
-	wilder.popupmenu_border_theme({
-		highlighter = wilder.basic_highlighter(),
-		min_width = '30%',
-		min_height = '50%',
-		max_height = '50%',
-		left = {' ', wilder.popupmenu_devicons()},
-		reverse = 0,
-		border = 'rounded',
-		highlights = {
-			accent = wilder.make_hl('WilderAccent', 'Pmenu', {{foreground = 'Magenta'}, {foreground = 'Magenta'}, {foreground = '#f4468f'}}),
-		},
-	})
-))
-
-cmd[[highlight WilderAccent ctermfg=LightMagenta]]
-
-
+-- cheat.sh
+keymap("n", "<leader>k", [[:call cheat#cheat("", getcurpos()[1], getcurpos()[1], 0, 0, '!')<CR>]], {script = true, silent = true})
+keymap("v", "<leader>k", [[:call cheat#cheat("", -1, -1, 2, 0, '!')<CR>]], {script = true, silent = true})
 
