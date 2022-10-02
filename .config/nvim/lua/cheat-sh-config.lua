@@ -13,12 +13,12 @@ keymap("v", "<leader>k",
 	{script = true, silent = true}
 )
 
-autocmd("BufEnter", {
-	pattern = g.CheatSheetBufferName,
-	callback = function ()
-		bo.syntax="ON" -- needed cause treesitter turns syntax off
-		keymap({"n", "v"}, "q", ":quit<CR>", {silent = true, buffer = true}) -- since it's effectively a read only mode
-		keymap({"n", "v"}, "<leader>k", ":call cheat#navigate(1,'Q')<CR>", {silent = true, buffer = true, script = true})
-	end
-})
+-- autocmd("BufWinEnter", {
+-- 	pattern = g.CheatSheetBufferName,
+-- 	callback = function ()
+-- 		bo.syntax="ON" -- needed cause treesitter turns syntax off
+-- 		keymap({"n", "v"}, "q", ":quit<CR>", {silent = true, buffer = true}) -- since it's effectively a read only mode
+-- 		keymap({"n", "v"}, "<leader>k", ":call cheat#navigate(1,'Q')<CR>", {silent = true, buffer = true, script = true})
+-- 	end
+-- })
 

@@ -38,16 +38,11 @@ opt.cursorline = true -- by default underline, look changed in appearnce
 opt.wrap = false
 opt.scrolloff = 11
 opt.sidescrolloff = 15
-opt.scrolljump = 5
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
-autocmd("BufEnter", {
-	callback = function ()
-		opt.formatoptions = opt.formatoptions - {"o", "r"}
-	end
-})
+autocmd("BufEnter", { callback = function () opt.formatoptions = opt.formatoptions - {"o", "r"} end })
 
 -- Remember Cursor Position
 autocmd ("BufReadPost", {
@@ -56,7 +51,9 @@ autocmd ("BufReadPost", {
 
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
-autocmd("TextYankPost", { command = "silent! lua vim.highlight.on_yank{timeout = 2500}", }) -- = highlighted yank
+autocmd("TextYankPost", { -- = highlighted yank
+	command = "silent! lua vim.highlight.on_yank{timeout = 2500}",
+})
 
 -- Mini-Linting on save
 autocmd("BufWritePre", {
@@ -80,6 +77,20 @@ opt.laststatus = 2
 -- folding
 opt.foldmethod = "indent"
 opt.foldenable = false -- do not fold on start
+opt.foldminlines = 3
+
+-- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
+augroup("rememberFolds", {})
+autocmd("BufWinLeave", {
+	pattern = "?*",
+	group = "rememberFolds",
+	command = "silent! mkview"
+})
+autocmd("BufWinEnter", {
+	pattern = "?*",
+	group = "rememberFolds",
+	command = "silent! loadview"
+})
 
 -- title (for Window Managers and espanso)
 opt.title = true
