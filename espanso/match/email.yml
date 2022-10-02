@@ -18,7 +18,7 @@ matches:
     replace: "Sehr geehrte $|$,\n\n"
 
   # Signatures
-  - regex: "\bvvv"
+  - regex: "ggg"
     replace: |-
       $|$
 

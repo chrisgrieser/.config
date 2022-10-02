@@ -18,32 +18,32 @@ cmd[[highlight ColorColumn ctermbg=DarkGrey guibg=black]] -- https://www.reddit.
 -- Active Line
 cmd[[highlight CursorLine term=none cterm=none guibg=black ctermbg=black]]
 
--- Annotations
-cmd[[match myAnnotations /INFO/ ]]
-cmd[[highlight def link myAnnotations Todo]] -- use same color as "TODO"
-
 -- Current Word Highlight (from Coc)
 cmd[[highlight CocHighlightText term=underdotted cterm=underdotted]]
 
 -- TreeSitter Context Line
-cmd[[highlight TreesitterContext ctermbg=black guibg=black]]
+cmd[[highlight TreesitterContext guibg=black]]
 
 -- Indentation Lines
 cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey guifg=DarkGrey]]
+
+-- Comments
+cmd[[highlight Comment ctermfg=grey]]
 
 -- leading spaces
 -- https://vi.stackexchange.com/questions/26825/conceal-markdown-links-and-extensions
 cmd[[highlight WhiteSpaceBol guibg=DarkGrey ctermbg=DarkGrey]]
 cmd[[match WhiteSpaceBol /^ \+/]]
 
--- Comments
-cmd[[highlight Comment ctermfg=grey]]
+-- Annotations INFO
+cmd[[highlight def link myAnnotations Todo]] -- use same color as "TODO"
+cmd[[2match myAnnotations /INFO/ ]]
 
 -- Underline URLs
--- (must come after Comments so URLs in comments are displayed correctly)
-cmd[[match urls /http[s]\?:\/\/[[:alnum:]%\/_#.-]*/ ]]
 cmd[[highlight urls cterm=underline]]
+cmd[[3match urls /http[s]\?:\/\/[[:alnum:]%\/_#.-]*/ ]]
 
+-- TODO: figure out how to use multiple match patterns, not
 --------------------------------------------------------------------------------
 
 -- GUTTER
@@ -51,14 +51,14 @@ cmd[[highlight urls cterm=underline]]
 cmd[[highlight clear SignColumn]] -- transparent
 
 -- Git Gutter
-cmd[[highlight GitGutterAdd    guifg=Green ctermfg=Green]]
+cmd[[highlight GitGutterAdd    guifg=Green  ctermfg=Green]]
 cmd[[highlight GitGutterChange guifg=Yellow ctermfg=Yellow]]
-cmd[[highlight GitGutterDelete guifg=Red ctermfg=Red]]
+cmd[[highlight GitGutterDelete guifg=Red    ctermfg=Red]]
 g.gitgutter_sign_added = '│'
 g.gitgutter_sign_modified = '│'
-g.gitgutter_sign_removed = '│'
-g.gitgutter_sign_removed_first_line = '⎺'
-g.gitgutter_sign_removed_above_and_below = '='
+g.gitgutter_sign_removed = '␥'
+g.gitgutter_sign_removed_first_line = '␥'
+g.gitgutter_sign_removed_above_and_below = '␥'
 g.gitgutter_sign_modified_removed = '│'
 g.gitgutter_sign_priority = 9 -- lower to not overwrite when in conflict with other icons
 
