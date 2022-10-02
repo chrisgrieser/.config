@@ -6,7 +6,14 @@ autocmd("BufNewFile", {
 	pattern = "*",
 	command = "start"
 })
--- autocmd BufRead,BufNewFile * start
+
+-- autosaving the text field
+autocmd({"TextChangedI", "TextChanged"}, {
+	pattern = "*",
+	command = "silent update"
+})
+
+keymap("", "<D-s>", ":write!<CR>") -- manual saving
 
 -- spelling
 opt.spell = true

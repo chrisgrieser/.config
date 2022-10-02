@@ -19,3 +19,6 @@ autocmd("FileType", {
 })
 g.user_emmet_mode='i'
 
+-- Wilder
+cmd[[call wilder#setup({'modes': [':', '/', '?']})]]
+

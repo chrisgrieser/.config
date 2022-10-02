@@ -32,6 +32,10 @@ keymap("n", "<leader>p", function()
 end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
 
+-- Utils
+keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
+keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR><CR>')
+
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
@@ -112,7 +116,7 @@ keymap("n", "\\", "i <Esc>l", {nowait = true}) -- prepend space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
 keymap("n", "<BS>", "dipO<Esc>") -- reduce multiple blank lines to exactly one
-keymap("n", "|", "i<CR><Esc>k$") -- Split line at cursor
+keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 
 -- Indention
 keymap("n", "<Tab>", ">>")
@@ -204,10 +208,6 @@ keymap("n", "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file exp
 
 --------------------------------------------------------------------------------
 -- FILES AND WINDOWS
-
--- Utils
-keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
-keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR><CR>') -- open terminal at current location
 
 -- File switchers
 keymap("n", "go", function() telescope.find_files() end) -- [o]pen file in parent-directory
