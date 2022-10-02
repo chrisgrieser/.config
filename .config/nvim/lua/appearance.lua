@@ -22,7 +22,7 @@ cmd[[highlight CursorLine term=none cterm=none guibg=black ctermbg=black]]
 cmd[[highlight CocHighlightText term=underdotted cterm=underdotted]]
 
 -- TreeSitter Context Line
-cmd[[highlight TreesitterContext guibg=black]]
+cmd[[highlight TreesitterContext ctermbg=black guibg=black]]
 
 -- Indentation Lines
 cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey guifg=DarkGrey]]
@@ -81,12 +81,13 @@ require('lualine').setup {
 		lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
 		lualine_b = {{'filename', file_status = false, fmt = function(str) return "%% "..str end}}, -- "%" is lua's escape character and therefore needs to be escaped itself
 		lualine_c = {{ alternateFile }},
-		lualine_x = {''},
-		lualine_y = {'diagnostics'},
+		lualine_x = {'diff'},
+		lualine_y = {{'diagnostics', sources = { 'nvim_diagnostic', 'coc', 'ale' }}},
 		lualine_z = {'location', 'progress'}
 	},
 	options = {
 		theme  = 'auto',
+		globalstatus = true,
 		component_separators = { left = '', right = ''},
 		section_separators = { left = '', right = ''},
 	},
