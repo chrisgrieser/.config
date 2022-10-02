@@ -1,6 +1,7 @@
 // vim: filetype=jsonc
 
 {
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
   "coc.preferences.extensionUpdateCheck": "weekly",
 
   "diagnostic.errorSign": "▪︎",

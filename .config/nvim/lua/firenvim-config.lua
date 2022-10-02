@@ -1,6 +1,13 @@
 require("utils")
 --------------------------------------------------------------------------------
 
+-- start in insert mode
+autocmd("BufNewFile", {
+	pattern = "*",
+	command = "start"
+})
+-- autocmd BufRead,BufNewFile * start
+
 -- spelling
 opt.spell = true
 opt.spelllang = "en_us"
