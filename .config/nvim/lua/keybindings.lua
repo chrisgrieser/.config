@@ -37,7 +37,16 @@ keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
 keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR><CR>')
 
 -- Overscroll
-cmd[[nnoremap <expr> j line(".") == line('$') ? '<C-e>':'j']] -- j at bottom scrolls
+keymap("n", "j", function ()
+	local curLine = fn.line(".")
+	local lastLine = fn.line("$")
+	if curLine == lastLine then
+		cmd[[exe "normal \<C-e>"]]
+	else
+		cmd[[normal! j]]
+	end
+end)
+-- cmd[[nnoremap <expr> j line(".") == line('$') ? '<C-e>':'j']] -- j at bottom scrolls
 keymap({"n", "v"}, "G", "Gzz") -- when going to bottom of editor
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
@@ -167,8 +176,6 @@ keymap({"n", "v"}, "<leader>q" ,"q") -- needs to be remapped, since used as text
 keymap("i", "<C-e>", '<Esc>A') -- EoL
 keymap("i", "<C-k>", '<Esc>lDi') -- kill line
 keymap("i", "<C-a>", '<Esc>I') -- BoL
-keymap("n", "<C-e>", 'A')
-keymap("n", "<C-a>", 'I')
 keymap("c", "<C-a>", '<Home>')
 keymap("c", "<C-e>", '<End>')
 keymap("c", "<C-u>", '<C-e><C-u>') -- clear

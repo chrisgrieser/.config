@@ -38,6 +38,7 @@ opt.cursorline = true -- by default underline, look changed in appearnce
 opt.wrap = false
 opt.scrolloff = 11
 opt.sidescrolloff = 15
+opt.scrolljump = 5
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
