@@ -92,9 +92,10 @@ keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", '"_c')
 keymap("v", "<S-Space>", '"_d')
 
-keymap("n", "q", '"_ci"') -- change single [q]uote
-keymap("n", "Q", '"_ci\'') -- change double [q]uote
+keymap("n", "q", '"_ci"') -- change double [q]uote
+keymap("n", "Q", '"_ci\'') -- change single [Q]uote
 keymap("o", "p", '}') -- rest of the [p]aragraph
+keymap("o", "P", '{') -- beginning of the [P]aragraph
 
 -- change small word (i.e. a simpler version of vim-textobj-variable-segment,
 -- but not supporting CamelCase)
@@ -213,7 +214,7 @@ keymap("n", "go", function() telescope.find_files() end) -- [o]pen file in paren
 keymap("n", "gO", function() telescope.find_files{cwd='%:p:h:h', prompt_prefix='🆙📂'} end) -- [o]pen file in grandparent-directory
 keymap("n", "gr", function() telescope.oldfiles() end) -- [r]ecent files
 keymap("n", "gb", function() telescope.buffers() end) -- open [b]uffer
-keymap("n", "gF", function() telescope.live_grep() end) -- open [b]uffer
+keymap("n", "gF", function() telescope.live_grep() end) -- search in [f]iles
 
 -- Buffers
 keymap("", "<C-Tab>", "<C-^>") -- for footpedal
@@ -221,7 +222,7 @@ keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 keymap({"n", "v"}, "gt", "<C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
 
 -- File Operations
--- INFO: <C-R>=expand("%:t")<CR> -> expands the current filename in the command line
+-- INFO: "<C-R>=expand("%:t")<CR>" -> expands the current filename in the command line
 keymap("n", "<C-p>", ':let @+=@%<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
 keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim

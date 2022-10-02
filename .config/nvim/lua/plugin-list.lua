@@ -1,6 +1,5 @@
 function PluginList (use)
 	use 'wbthomason/packer.nvim' -- packer manages itself
-	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
 
 	-- Themes
 	use 'folke/tokyonight.nvim'
@@ -47,6 +46,8 @@ function PluginList (use)
 
 	-- Misc
 	use 'mzlogin/vim-markdown-toc'
+	use 'dbeniamine/cheat.sh-vim'
+	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
 	use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 
 end

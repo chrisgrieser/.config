@@ -3,7 +3,7 @@
 {
   "coc.preferences.extensionUpdateCheck": "weekly",
 
-  "diagnostic.errorSign": "▴",
+  "diagnostic.errorSign": "▪︎",
   "diagnostic.warningSign": "▴",
   "diagnostic.infoSign": "•",
   "diagnostic.hintSign": "•",
