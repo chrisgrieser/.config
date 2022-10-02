@@ -17,7 +17,6 @@ keymap("n", "<leader>?", function() telescope.help_tags() end)
 
 -- Theme Picker
 keymap("n", "<leader>T", function() telescope.colorscheme() end)
-
 -- Tree Sitter toggle
 keymap("n", "<leader>S", ":TSToggle highlight<CR>")
 
