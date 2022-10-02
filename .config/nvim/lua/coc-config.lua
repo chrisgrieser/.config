@@ -5,6 +5,7 @@ require("utils")
 -- unecessarily bloating it (badly affecting git sync & dotfiles backups)
 g.coc_data_home = "~/.local/share/nvim/coc/"
 
+-- https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#implemented-coc-extensions
 g.coc_global_extensions = {
 	"coc-lua",
 	"coc-css",
@@ -13,7 +14,9 @@ g.coc_global_extensions = {
 	"coc-toml",
 	"coc-tsserver", -- ts and js
 	"coc-json",
-	"coc-diagnostic" -- linter integration
+	"coc-git",
+	"coc-diagnostic", -- linter integration
+	"coc-emmet", -- only completion, therefore used in addition to vim.emmet
 }
 
 --------------------------------------------------------------------------------
