@@ -8,6 +8,10 @@ opt.smartcase = true
 opt.ignorecase = true
 opt.wildmenu = true -- display all matching files when tab completing
 
+-- Split
+opt.splitright = true -- vsplit to the right instead of to the left
+opt.splitbelow = true -- split down instead of up
+
 -- tabs & indentation
 opt.tabstop = 3
 opt.softtabstop = 3
