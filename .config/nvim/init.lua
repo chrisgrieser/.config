@@ -16,5 +16,6 @@ else
 	require("coc-config")
 	require("telescope-config")
 	require("treesitter-config")
+	require("wilder-config")
 end
 

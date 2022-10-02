@@ -36,16 +36,9 @@ keymap("n", "<leader>P", ":PackerStatus<CR>")
 keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
 keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR><CR>')
 
---------------------------------------------------------------------------------
--- NAVIGATION
-
--- Have j and k navigate visual lines rather than logical ones
--- (useful if wrapping is on)
-keymap("n", "j", "gj")
-keymap("n", "k", "gk")
-keymap("n", "gj", "j")
-keymap("n", "gk", "k")
-keymap({"n", "v"}, "G", "Gzz") -- "overscroll" when going to bottom of editor
+-- Overscroll
+cmd[[nnoremap <expr> j line(".") == line('$') ? '<C-e>':'j']] -- j at bottom scrolls
+keymap({"n", "v"}, "G", "Gzz") -- when going to bottom of editor
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 keymap("", "H", "0^") -- 0^ ensures scrolling to the left on long lines
@@ -72,9 +65,9 @@ keymap("", "T", "<Plug>Sneak_T")
 
 -- Search
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
-keymap("n", "<Esc>", ":nohl<CR>", {silent = true}) -- [m]ute highlights with Esc
+keymap("n", "<Esc>", ":nohl<CR>:echo<CR>", {silent = true}) -- clear highlights & shortmessage
 keymap("n", "g-", function() telescope.current_buffer_fuzzy_find() end) -- alternative search
-keymap("n", "gs", function () telescope.treesitter() end) -- equivalent to Sublime's goto-symbol
+keymap("n", "gs", function() telescope.treesitter() end) -- equivalent to Sublime's goto-symbol
 
 -- Misc
 keymap("", "+", "*") -- no more modifier key on German Keyboard
@@ -229,6 +222,7 @@ keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
 keymap("n", "<leader>X", ":Chmod +x<CR>") -- execution permission, requires eunuch.vim
 keymap("n", "<leader><BS>", ":Remove<CR>:bd<CR>") -- undoable deletion of the file, requires eunuch.vim
+keymap("v", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>") -- refactor selection into new file
 
 -- Sorting
 keymap("n", "<leader>ss", ":'<,'>sort<CR>") -- [s]ort [s]election
