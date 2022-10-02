@@ -22,6 +22,9 @@ Dotfolder/Backups/
 **/*.app/*
 **/*.pxd/*
 
+# vim spellcheck binary
+*.spl
+
 # inside Alfred prefs
 Alfred.alfredpreferences/**
 !Alfred.alfredpreferences/workflows/

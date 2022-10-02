@@ -6,12 +6,6 @@ require("utils")
 opt.showmatch = true
 opt.smartcase = true
 opt.ignorecase = true
-
--- command line
--- since smartcase and ignorecase also apply to command completion, deactivate
--- the former to make camelcased command completion easier
-autocmd("CmdlineEnter", { callback = function () opt.smartcase = false end })
-autocmd("CmdlineLeave", { callback = function () opt.smartcase = true end })
 opt.wildmenu = true -- display all matching files when tab completing
 
 -- tabs & indentation

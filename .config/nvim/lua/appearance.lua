@@ -1,10 +1,11 @@
 require("utils")
 --------------------------------------------------------------------------------
-
 -- GUI
 -- keep using terminal colorscheme in the Terminal, for consistency with Alacritty
 if fn.has('gui_running') == 1 then -- https://www.reddit.com/r/neovim/comments/u1998d/comment/i4asi0h/?utm_source=share&utm_medium=web2x&context=3
 	cmd[[colorscheme tokyonight]]
+else
+	cmd[[highlight clear Pmenu]]
 end
 
 --------------------------------------------------------------------------------
@@ -36,15 +37,12 @@ cmd[[highlight WhiteSpaceBol guibg=DarkGrey ctermbg=DarkGrey]]
 cmd[[match WhiteSpaceBol /^ \+/]]
 
 -- Comments
-cmd[[highlight Comment ctermfg=grey]] -- since they badly colored in the terminal with some themes
+cmd[[highlight Comment ctermfg=grey]]
 
 -- Underline URLs
 -- (must come after Comments so URLs in comments are displayed correctly)
 cmd[[match urls /http[s]\?:\/\/[[:alnum:]%\/_#.-]*/ ]]
 cmd[[highlight urls cterm=underline]]
-
--- Popups
-cmd[[highlight Pmenu ctermbg=Grey]]
 
 --------------------------------------------------------------------------------
 
@@ -53,13 +51,18 @@ cmd[[highlight Pmenu ctermbg=Grey]]
 cmd[[highlight clear SignColumn]] -- transparent
 
 -- Git Gutter
--- https://github.com/airblade/vim-gitgutter#signs-colours-and-symbols
 cmd[[highlight GitGutterAdd    guifg=Green ctermfg=Green]]
 cmd[[highlight GitGutterChange guifg=Yellow ctermfg=Yellow]]
 cmd[[highlight GitGutterDelete guifg=Red ctermfg=Red]]
+g.gitgutter_sign_added = '│'
+g.gitgutter_sign_modified = '│'
+g.gitgutter_sign_removed = '│'
+g.gitgutter_sign_removed_first_line = '⎺'
+g.gitgutter_sign_removed_above_and_below = '='
+g.gitgutter_sign_modified_removed = '│'
 g.gitgutter_sign_priority = 9 -- lower to not overwrite when in conflict with other icons
 
--- INFO: Look of the Coc Gutter indicators is set in coc-settings.json
+-- INFO: Coc Gutter indicators set in coc-settings.json
 
 --------------------------------------------------------------------------------
 

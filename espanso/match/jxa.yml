@@ -7,6 +7,9 @@ matches:
       const app = Application.currentApplication();
       app.includeStandardAdditions = true;
     label: "🏗 Define App"
+  - trigger: "!running"
+    replace: 'Application("Obsidian").running()'
+    label: "🏗 Check whether App is running"
   - replace: |
       ObjC.import("stdlib");
       const app = Application.currentApplication();
