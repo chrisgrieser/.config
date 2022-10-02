@@ -25,7 +25,6 @@ packer.startup({
 	}
 })
 
--- https://github.com/wbthomason/packer.nvim#performing-plugin-management-operations
 packer.install() -- auto-install missing plugins
 packer.clean() -- remove unused plugins
 
