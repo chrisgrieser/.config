@@ -30,20 +30,21 @@ cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey guifg=DarkGrey]]
 -- Comments
 cmd[[highlight Comment ctermfg=grey]]
 
--- leading spaces
--- https://vi.stackexchange.com/questions/26825/conceal-markdown-links-and-extensions
-cmd[[highlight WhiteSpaceBol guibg=DarkGrey ctermbg=DarkGrey]]
-cmd[[match WhiteSpaceBol /^ \+/]]
+--------------------------------------------------------------------------------
+-- custom highlights
 
--- Annotations INFO
+-- leading spaces
+cmd[[highlight WhiteSpaceBol guibg=DarkGrey ctermbg=DarkGrey]]
+cmd[[call matchadd('WhiteSpaceBol', '^ \+')]]
+
+-- Annotations INFO TODO
 cmd[[highlight def link myAnnotations Todo]] -- use same color as "TODO"
-cmd[[2match myAnnotations /INFO/ ]]
+cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE') ]]
 
 -- Underline URLs
 cmd[[highlight urls cterm=underline]]
-cmd[[3match urls /http[s]\?:\/\/[[:alnum:]%\/_#.-]*/ ]]
+cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-]*') ]]
 
--- TODO: figure out how to use multiple match patterns, not
 --------------------------------------------------------------------------------
 
 -- GUTTER
@@ -56,12 +57,11 @@ cmd[[highlight GitGutterChange guifg=Yellow ctermfg=Yellow]]
 cmd[[highlight GitGutterDelete guifg=Red    ctermfg=Red]]
 g.gitgutter_sign_added = '│'
 g.gitgutter_sign_modified = '│'
-g.gitgutter_sign_removed = '␥'
-g.gitgutter_sign_removed_first_line = '␥'
+g.gitgutter_sign_removed = '–'
+g.gitgutter_sign_removed_first_line = '⎺'
 g.gitgutter_sign_removed_above_and_below = '␥'
 g.gitgutter_sign_modified_removed = '│'
 g.gitgutter_sign_priority = 9 -- lower to not overwrite when in conflict with other icons
-
 -- INFO: Coc Gutter indicators set in coc-settings.json
 
 --------------------------------------------------------------------------------
