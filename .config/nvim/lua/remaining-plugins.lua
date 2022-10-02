@@ -20,5 +20,24 @@ autocmd("FileType", {
 g.user_emmet_mode='i'
 
 -- Wilder
-cmd[[call wilder#setup({'modes': [':', '/', '?']})]]
+local wilder = require('wilder')
+wilder.setup({modes = {':', '/', '?'}})
+
+wilder.set_option('pipeline', {
+	wilder.branch(
+		wilder.cmdline_pipeline(),
+		wilder.search_pipeline()
+	),
+})
+
+wilder.set_option('renderer', wilder.popupmenu_renderer(
+	wilder.popupmenu_border_theme({
+		highlighter = wilder.basic_highlighter(),
+		min_width = '30%',
+		left = {' ', wilder.popupmenu_devicons()},
+		min_height = '50%',
+		reverse = 0,
+		border = 'rounded',
+	})
+))
 
