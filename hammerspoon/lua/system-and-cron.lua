@@ -11,7 +11,7 @@ gitDotfileScript = dotfileLocation.."/git-dotfile-sync.sh"
 gitVaultScript = vaultLocation.."/Meta/git-vault-sync.sh"
 dotfileIcon ="⏺"
 vaultIcon = "🟪"
-repoSyncFrequencyMin = 30
+repoSyncFrequencyMin = 20
 
 --------------------------------------------------------------------------------
 
