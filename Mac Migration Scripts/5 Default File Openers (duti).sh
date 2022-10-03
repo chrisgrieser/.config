@@ -21,26 +21,27 @@ duti -s com.colliderli.iina mkv all
 duti -s com.colliderli.iina m4a all
 
 # text
-duti -s com.sublimetext.4 public.data all # dotfiles without extension
 duti -s com.apple.automator.Obsidian-Opener md all
-duti -s sh com.sublimetext.4 all
-duti -s bib com.sublimetext.4 all
-duti -s html com.sublimetext.4 all
-duti -s zsh com.sublimetext.4 all
-duti -s bash com.sublimetext.4 all
-duti -s py com.sublimetext.4 all
-duti -s js com.sublimetext.4 all
-duti -s ts com.sublimetext.4 all
-duti -s css com.sublimetext.4 all
-duti -s scss com.sublimetext.4 all
-duti -s txt com.sublimetext.4 all
-duti -s applescript com.sublimetext.4 all
-duti -s lua com.sublimetext.4 all
-duti -s json com.sublimetext.4 all
-duti -s yml com.sublimetext.4 all
-duti -s yaml com.sublimetext.4 all
-duti -s xml com.sublimetext.4 all
-duti -s plist com.sublimetext.4 all
+
+duti -s com.sublimetext.4 public.data all # dotfiles without extension
+duti -s com.sublimetext.4 sh all
+duti -s com.sublimetext.4 bib all
+duti -s com.sublimetext.4 html all
+duti -s com.sublimetext.4 zsh all
+duti -s com.sublimetext.4 bash all
+duti -s com.sublimetext.4 py all
+duti -s com.sublimetext.4 js all
+duti -s com.sublimetext.4 ts all
+duti -s com.sublimetext.4 css all
+duti -s com.sublimetext.4 scss all
+duti -s com.sublimetext.4 txt all
+duti -s com.sublimetext.4 applescript all
+duti -s com.sublimetext.4 lua all
+duti -s com.sublimetext.4 json all
+duti -s com.sublimetext.4 yml all
+duti -s com.sublimetext.4 yaml all
+duti -s com.sublimetext.4 xml all
+duti -s com.sublimetext.4 plist all
 
 # URI Schemes
 duti -s org.m0k.transmission magnet

@@ -5,6 +5,7 @@ function PluginList (use)
 	use 'folke/tokyonight.nvim'
 	use 'rakr/vim-two-firewatch'
 	use 'navarasu/onedark.nvim'
+	use 'Mofiqul/dracula.nvim'
 
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
