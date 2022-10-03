@@ -19,17 +19,20 @@
   "coc.source.emoji.shortcut": "",
   "coc.source.emoji.filetypes": [ "markdown", "css", "javascript", "typescript", "lua", "toml", "json", "yaml" ],
 
+  "sumneko-lua.enableNvimLuaDev": true,
+  "Lua.hint.paramName": "Disable",
+  "Lua.hint.setType": true,
   "Lua.diagnostics.globals": ["vim", "martax"],
   "Lua.diagnostics.disable": ["trailing-space"],
   "Lua.workspace.library": [
     "/Users/chrisgrieser/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
     "/Users/chrisgrieser/.hammerspoon/lua",
-    "/opt/homebrew/Cellar/neovim/0.8.0/share/nvim/runtime/lua",
     "/Users/chrisgrieser/.config/nvim/lua"
   ],
 
   "css.lint.vendorPrefix": "ignore",
   "css.lint.duplicateProperties": "error",
-  "css.colorDecorators.enable": true
+  "css.colorDecorators.enable": true,
+  "Lua.telemetry.enable": false
 }
 
