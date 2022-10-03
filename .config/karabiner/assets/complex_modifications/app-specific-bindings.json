@@ -1449,6 +1449,38 @@
           ]
         }
       ]
+    },
+    {
+      "description": "🅰️👨‍💻 GoNeovim",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "q",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "q",
+              "modifiers": [
+                "control"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.ident\\.goneovim$"
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

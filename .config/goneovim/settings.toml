@@ -1,18 +1,19 @@
 # https://github.com/akiyosi/goneovim/wiki/Usage#configuration
 
-# [Editor]
-# RestoreWindowGeometry = true
-# BorderlessWindow = true
-# Margin = 3
+[Editor]
+RestoreWindowGeometry = true
+BorderlessWindow = true
+Margin = 3
 
-# FontFamily = "JetBrainsMonoNL Nerd Font"
-# FontSize = 25
-# Letterspace = 0
-# DisableLigatures = true
+FontFamily =  "Input" # only external UI
+FontSize = 25
 
-# Macmeta = false
-# SmoothScroll = true
+Letterspace = 0
+DisableLigatures = true
 
-# [Cursor]
-# SmoothMove = true
-# Duration = 30
+Macmeta = false
+SmoothScroll = true
+
+[Cursor]
+SmoothMove = true
+Duration = 30
