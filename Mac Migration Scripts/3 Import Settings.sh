@@ -26,3 +26,4 @@ done
 for d in */ ; do
 	mv -v "$d" ~/Library/Preferences/
 done
+
