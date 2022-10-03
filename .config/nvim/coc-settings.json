@@ -23,7 +23,10 @@
   "Lua.hint.paramName": "Disable",
   "Lua.hint.setType": true,
   "Lua.diagnostics.globals": ["vim", "martax"],
-  "Lua.diagnostics.disable": ["trailing-space"],
+  "Lua.diagnostics.disable": [
+    "trailing-space",
+    "lowercase-global"
+  ],
   "Lua.workspace.library": [
     "/Users/chrisgrieser/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
     "/Users/chrisgrieser/.hammerspoon/lua",

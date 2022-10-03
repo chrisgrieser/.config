@@ -6,7 +6,7 @@ require("utils")
 
 -- cursor
 opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor20"
-opt.linespace = 1 -- px, similar to line height
+opt.linespace = 3 -- px, similar to line height
 
 -- Ruler
 cmd[[highlight ColorColumn ctermbg=DarkGrey guibg=black]] -- https://www.reddit.com/r/neovim/comments/me35u9/lua_config_to_set_highlight/
@@ -72,13 +72,13 @@ g.gitgutter_sign_priority = 9 -- lower to not overwrite when in conflict with ot
 local function alternateFile()
 	local altFile = api.nvim_exec('echo expand("#:t")', true)
 	local curFile = api.nvim_exec('echo expand("%:t")', true)
-	if altFile == curFile then return "" end
+	if altFile == curFile or altFile == "" then return "" end
 	return "# "..altFile
 end
 
 local function currentFile() -- using this function instead of default filename, since this does not show "[No Name]" for Telescope
 	local curFile = api.nvim_exec('echo expand("%:t")', true)
-	if not(curFile) then return "" end
+	if not(curFile) or curFile == "" then return "" end
 	return "%% "..curFile -- "%" is lua's escape character and therefore needs to be escaped itself
 end
 
@@ -111,7 +111,7 @@ wilder.set_option('renderer', wilder.popupmenu_renderer(
 	wilder.popupmenu_border_theme({
 		highlighter = wilder.basic_highlighter(),
 		min_width = '30%',
-		min_height = '30%',
+		min_height = '15%',
 		max_height = '50%',
 		left = {' ', wilder.popupmenu_devicons()},
 		reverse = 0,

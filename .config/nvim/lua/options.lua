@@ -60,10 +60,7 @@ autocmd("TextYankPost", { command = "silent! lua vim.highlight.on_yank{timeout =
 
 -- Mini-Linting on save
 autocmd("BufWritePre", {
-	callback = function()
-		cmd[[%s/\s\+$//e]] -- remove trailing whitespaces
-		cmd[[$s/\(.\)$/\1\r/e]] -- add line breaks at end if there is-none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
-	end
+	command = [[%s/\s\+$//e | normal! ``]] -- remove trailing whitespaces
 })
 
 -- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070
