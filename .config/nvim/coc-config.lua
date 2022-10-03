@@ -18,25 +18,6 @@ g.coc_global_extensions = {
 	"coc-diagnostic", -- linter integration
 }
 
-vim.fn["coc#config"]('languageserver', {
-	-- your  previous configuration
-	settings = {
-		Lua = {
-			runtime = {
-				version = "LuaJIT",
-				path = vim.split(package.path, ';'), },
-				workspace = {
-					library = {
-						[vim.fn.expand("$VIMRUNTIME/lua")] = true, -- add as many lib you want
-					},
-				}
-			}
-		}
-	}
-)
-
-
-
 --------------------------------------------------------------------------------
 
 opt.backup = false -- Some servers have issues with backup files, see #649.

@@ -125,7 +125,7 @@ keymap("n", "<S-Tab>", "<<")
 keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
 keymap({"n", "v"}, "^", "=") -- auto-indent
-keymap("n", "^^", "^ip") -- auto-indenting paragraph is for more common
+keymap("n", "^^", "=ip") -- auto-indenting paragraph is for more common
 keymap("n", "^p", "`[v`]=") -- last paste
 keymap("n", "^A", "mzgg=G`z") -- entire file
 
@@ -151,7 +151,6 @@ keymap("n", "ö", "<Plug>(SubversiveSubstitute)")
 keymap("n", "öö", "<Plug>(SubversiveSubstituteLine)")
 keymap("n", "Ö", "<Plug>(SubversiveSubstituteToEndOfLine)")
 
--- [R]eplicate (duplicate) down
 -- [R]eplicate (duplicate) down
 keymap("n", "R", ':noautocmd normal!"zyy"zp<CR>') -- current line, ":noautocmd" to disable highlighted yank for this
 keymap("v", "R", '"zy`]"zp') -- selection (best used with Visual Line Mode)
