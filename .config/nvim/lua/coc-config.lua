@@ -14,7 +14,6 @@ g.coc_global_extensions = {
 	"coc-toml",
 	"coc-tsserver", -- ts and js
 	"coc-json",
-	"coc-git",
 	"coc-diagnostic", -- linter integration
 	"coc-emmet", -- only completion, therefore used in addition to vim.emmet
 }
