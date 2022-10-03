@@ -4,11 +4,13 @@ require("utils")
 
 cmd[[colorscheme dracula]]
 opt.title = true -- title (for Window Managers and espanso)
-opt.titlestring = " " -- completely hide title
 
+
+--------------------------------------------------------------------------------
+
+-- Mac Keybindings
 keymap({"n", "v", "i"}, "<D-w>", ":w<CR>:bd<CR>") -- cmd+w
 keymap({"n", "v", "i"}, "<D-q>", ":wall!<CR>:quitall!<CR>") -- cmd+q
-keymap({"n", "v", "i"}, "<C-q>", ":wall!<CR>:quitall!<CR>") -- workaround for goneovim cmd+q not working: https://github.com/akiyosi/goneovim/issues/416
 
 keymap({"n", "v"}, "<M-l>", "@") -- needed when alt is turned into meta key
 keymap({"n", "v"}, "<M-9>", "}")
@@ -26,10 +28,6 @@ keymap("v", "<D-a>", "ggG")
 keymap({"n", "v", "i"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 cmd[[let g:VM_maps['Find Under'] = '<D-j>']] -- cmd+j for jumping selection
 
-keymap("n", "<D-v>", "p")
-keymap("v", "<D-v>", "P") -- capital P to not switch register content
-keymap("i", "<D-v>", ":put<CR>")
-
 keymap("n", "<D-c>", "yy") -- no selection = line
 keymap("v", "<D-c>", "y")
 
@@ -39,7 +37,7 @@ keymap("v", "<D-x>", "d")
 
 -- font resizing font size
 -- https://neovide.dev/faq.html#how-can-i-dynamically-change-the-font-size-at-runtime
-g.gui_font_default_size = 24
+g.gui_font_default_size = 25
 g.gui_font_face = "JetBrainsMonoNL Nerd Font"
 
 g.gui_font_size = g.gui_font_default_size
@@ -60,6 +58,7 @@ ResetGuiFont() -- Call function on startup to set default value
 -- Keymaps
 keymap({'n','v','i'}, '<D-+>', function() ResizeGuiFont(1)  end, {silent = true})
 keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true})
+
 
 --------------------------------------------------------------------------------
 

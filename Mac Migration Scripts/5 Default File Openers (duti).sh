@@ -23,6 +23,7 @@ duti -s "$videoplayerID" m4a all
 
 # text
 editorID="com.apple.automator.Neovim"
+duti -s "$editorID" toml all
 duti -s "$editorID" public.data all # dotfiles without extension
 duti -s "$editorID" sh all
 duti -s "$editorID" bib all
