@@ -41,7 +41,7 @@ autocmd({"BufLeave", "FocusLost"}, {
 
 -- editor
 opt.cursorline = true -- by default underline, look changed in appearnce
-opt.scrolloff = 13
+opt.scrolloff = 10
 opt.sidescrolloff = 15
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
@@ -60,6 +60,7 @@ opt.mousemodel="extend" -- deacvitate context menu, right mouse instead expands 
 autocmd("TextYankPost", { command = "silent! lua vim.highlight.on_yank{timeout = 2500}" })
 
 -- Mini-Linting on save
+augroup("Mini-Lint",{})
 autocmd("BufWritePre", {
 	callback = function ()
 		local save_view = fn.winsaveview()
@@ -67,7 +68,6 @@ autocmd("BufWritePre", {
 		-- add line breaks at end if there is-none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
 		cmd[[$s/\(.\)$/\1\r/e | %s/\s\+$//e]]
 		fn.winrestview(save_view)
-		save_view = nil
 	end
 })
 

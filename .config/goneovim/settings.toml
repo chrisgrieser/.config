@@ -5,7 +5,6 @@ RestoreWindowGeometry = true
 BorderlessWindow = true
 Margin = 3
 Transparent = 0.97
-DrawBorderForFloatWindow = false
 
 FontFamily =  "Recursive" # only external UI
 FontSize = 1

@@ -7,7 +7,7 @@
   "suggest.selection": "recentlyUsedByPrefix",
   "suggest.labelMaxLength": 50,
   "suggest.lowPrioritySourceLimit": 20,
-  "suggest.floatConfig": {"border": true, "maxHeight": 20},
+  "suggest.floatConfig": {"border": true},
 
   "diagnostic.errorSign": "▪︎",
   "diagnostic.warningSign": "▴",
