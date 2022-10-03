@@ -84,7 +84,7 @@ font:
     x: 0
     y: 0
   glyph_offset: # needs restart
-    y: 1 # equivalent to line height. However, some nerdfont and starship deco looks off with it.
+    y: 3 # equivalent to line height. However, some nerdfont and starship deco looks off with it.
     x: 0 # equivalent to letter spacing
 window:
   decorations: buttonless
@@ -97,7 +97,7 @@ window:
   padding:
     x: 5
     y: 5
-  opacity: .96
+  opacity: .97
 scrolling:
   history: 4000
   multiplier: 3
@@ -175,7 +175,7 @@ key_bindings:
   - key: K
     mods: Command
     mode: ~Vi|~Search
-    chars: "\f"
+    chars: "\\f"
 
     # open location in GUI file explorer
   - key: L
@@ -207,3 +207,4 @@ key_bindings:
   - key: 22
     mods: Alt
     chars: ']'
+

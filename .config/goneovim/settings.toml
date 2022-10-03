@@ -3,9 +3,11 @@
 [Editor]
 RestoreWindowGeometry = true
 BorderlessWindow = true
-Margin = 4
+Margin = 3
 Transparent = 0.97
-DrawBorderForFloatWindow = false
+DrawBorderForFloatWindow = true
+
+IndentGuide = true
 
 FontFamily =  "Recursive" # only external UI
 FontSize = 1

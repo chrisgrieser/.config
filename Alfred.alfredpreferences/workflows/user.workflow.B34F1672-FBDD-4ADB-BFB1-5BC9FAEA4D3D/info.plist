@@ -1296,7 +1296,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		<key>5320A9D6-5BED-4AC3-B729-7E0FCA44A54B</key>
 		<dict>
 			<key>xpos</key>
-			<real>760</real>
+			<real>795</real>
 			<key>ypos</key>
 			<real>590</real>
 		</dict>
@@ -1314,7 +1314,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>760</real>
+			<real>795</real>
 			<key>ypos</key>
 			<real>805</real>
 		</dict>
@@ -1330,7 +1330,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>note</key>
 			<string>search for question</string>
 			<key>xpos</key>
-			<real>540</real>
+			<real>575</real>
 			<key>ypos</key>
 			<real>530</real>
 		</dict>
@@ -1339,7 +1339,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>note</key>
 			<string>search for cheatsheet</string>
 			<key>xpos</key>
-			<real>540</real>
+			<real>575</real>
 			<key>ypos</key>
 			<real>670</real>
 		</dict>
@@ -1366,7 +1366,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>note</key>
 			<string>Open StackOverflow ShortURL</string>
 			<key>xpos</key>
-			<real>540</real>
+			<real>575</real>
 			<key>ypos</key>
 			<real>805</real>
 		</dict>
@@ -1382,7 +1382,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		<key>EA3DF9A8-C9B9-4A5B-BE23-02A376F9B128</key>
 		<dict>
 			<key>xpos</key>
-			<real>690</real>
+			<real>725</real>
 			<key>ypos</key>
 			<real>620</real>
 		</dict>
