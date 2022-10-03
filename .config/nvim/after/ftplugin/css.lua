@@ -4,6 +4,7 @@ cmd[[highlight clear WhiteSpaceBol]]
 
 b.coc_disabled_sources = {'around', 'buffer', 'file'}
 b.coc_additional_keywords = {"-", "#"}
+b.syntax = "ON"
 
 -- comment marks more useful than symbols for theme development
 keymap("n", "gs", function() telescope.current_buffer_fuzzy_find{
@@ -14,4 +15,5 @@ keymap("n", "gs", function() telescope.current_buffer_fuzzy_find{
 
 
 -- kebab-case variables, #hex color codes, & percentage values
-bo.iskeyword = bo.iskeyword + {"#", "-", "%"}
+-- bo.iskeyword = bo.iskeyword.."#,-,%" -- opt.iskeyword is table, but bo.iskeyword is a string... 🙈
+

@@ -51,8 +51,10 @@ autocmd ("BufReadPost", {
 
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
-autocmd("TextYankPost", { -- = highlighted yank
+augroup("HighlightedYank", {})
+autocmd("TextYankPost", {
 	command = "silent! lua vim.highlight.on_yank{timeout = 2500}",
+	group = "HighlightedYank"
 })
 
 -- Mini-Linting on save
