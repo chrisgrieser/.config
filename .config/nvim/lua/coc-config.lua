@@ -72,6 +72,15 @@ local opts = {silent = true, noremap = true, expr = true} ---@diagnostic disable
 -- `return` accept selected completion item
 keymap("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], opts)
 
+function _G.check_back_space()
+	local col = vim.fn.col('.') - 1
+	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
+end
+
+-- coc-snippets
+g.coc_snippet_next = '<Tab>'
+keymap("i", "<C-j>", "<Plug>(coc-snippets-expand-jump)")
+
 --------------------------------------------------------------------------------
 
 -- Function Text Object
