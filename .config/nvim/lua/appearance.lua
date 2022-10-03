@@ -1,27 +1,11 @@
 require("utils")
---------------------------------------------------------------------------------
--- GUI (Neovide)
-g.neovide_transparency = 0.97
-g.neovide_confirm_quit = false
-g.neovide_scroll_animation_length = 0.1
-g.neovide_cursor_animation_length = 0.08
-g.neovide_cursor_trail_size = 0.4
-g.neovide_remember_window_size = true
-g.neovide_hide_mouse_when_typing = true
-g.neovide_input_use_logo = true -- cmd key on macOS
-g.neovide_input_macos_alt_is_meta = false -- makes alt usable on mac (TODO: but needs to remap @)
-opt.guifont = "JetBrainsMonoNL Nerd Font:h28"
-
-if fn.has('gui_running') or g.neovide then
-	-- keep using terminal colorscheme in the Terminal, for consistency with Alacritty
-	cmd[[colorscheme onedark]]
-else
-	cmd[[highlight clear Pmenu]]
-end
 
 --------------------------------------------------------------------------------
 -- UI ELEMENTS
 -- partially overriden when using a theme
+
+-- cursor
+opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor20"
 
 -- Ruler
 cmd[[highlight ColorColumn ctermbg=DarkGrey guibg=black]] -- https://www.reddit.com/r/neovim/comments/me35u9/lua_config_to_set_highlight/
@@ -40,6 +24,10 @@ cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey guifg=DarkGrey]]
 
 -- Comments
 cmd[[highlight Comment ctermfg=grey]]
+
+if not(fn.has('gui_running') or g.neovide) then
+	cmd[[highlight clear Pmenu]]
+end
 
 --------------------------------------------------------------------------------
 -- custom highlights
