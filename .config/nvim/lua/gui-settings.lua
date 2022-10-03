@@ -7,6 +7,7 @@ opt.title = true -- title (for Window Managers and espanso)
 
 keymap({"n", "v", "i"}, "<D-w>", ":w<CR>:bd<CR>") -- cmd+w
 keymap({"n", "v", "i"}, "<D-q>", ":wall!<CR>:quitall!<CR>") -- cmd+q
+keymap({"n", "v", "i"}, "<C-q>", ":wall!<CR>:quitall!<CR>") -- workaround for goneovim cmd+q not working: https://github.com/akiyosi/goneovim/issues/416
 
 keymap({"n", "v"}, "<M-l>", "@") -- needed when alt is turned into meta key
 keymap({"n", "v"}, "<M-9>", "}")
@@ -58,8 +59,8 @@ keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true}
 
 --------------------------------------------------------------------------------
 
--- Neovide 0.10.1 not working: https://github.com/neovide/neovide/issues/1582
---------------------------------------------------------------------------------
+-- NEOVIDE 0.10.1
+-- not working: https://github.com/neovide/neovide/issues/1582
 
 -- g.neovide_cursor_animation_length = 0.04
 -- g.neovide_cursor_trail_size = 0.7

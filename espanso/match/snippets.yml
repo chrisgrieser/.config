@@ -52,26 +52,28 @@ matches:
           format: "%d.%m.%Y"
 
   - trigger: "!version"
-    replace: "{{version}}"
+    replace: "macOS {{version}} (M1)"
     vars:
       - name: version
         type: shell
         params:
-          cmd: "echo -n macOS $(sw_vers -productVersion)"
+          cmd: "sw_vers -productVersion"
 
   - trigger: "!nversion"
     replace: |
-      {{OSversion}}
-      {{neovimVersion}}
+      ```
+      macOS {{OSversion}} (M1)
+      neovim {{neovimVersion}} (homebrew install)
+      ```
     vars:
       - name: OSversion
         type: shell
         params:
-          cmd: "echo -n macOS $(sw_vers -productVersion)"
+          cmd: "sw_vers -productVersion"
       - name: neovimVersion
         type: shell
         params:
-          cmd: "echo -n macOS $(sw_vers -productVersion)"
+          cmd: "nvim --version | head -n1 | cut -dv -f2"
 
   - trigger: "!oversion"
     replace: "Obsidian {{version}}"
