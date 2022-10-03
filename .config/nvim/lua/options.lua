@@ -32,7 +32,7 @@ opt.autochdir = true -- always current directory
 opt.undofile = true -- persistent undo history
 
 -- auto-save
-autocmd({"TextChanged", "FocusLost"}, {
+autocmd({"BufLeave", "FocusLost"}, {
 	pattern = "?*",
 	command = "silent! update"
 })
@@ -40,7 +40,7 @@ autocmd({"TextChanged", "FocusLost"}, {
 -- editor
 opt.cursorline = true -- by default underline, look changed in appearnce
 opt.wrap = false
-opt.scrolloff = 11
+opt.scrolloff = 13
 opt.sidescrolloff = 15
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's

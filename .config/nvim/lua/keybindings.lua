@@ -35,19 +35,6 @@ keymap("n", "<leader>P", ":PackerStatus<CR>")
 keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
 keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR>>', {silent = true})
 
--- Overscroll
-keymap("n", "j", function ()
-	local curLine = fn.line(".")
-	local lastLine = fn.line("$")
-	if curLine == lastLine then
-		cmd[[exe "normal \<C-e>"]]
-	else
-		cmd[[normal! j]]
-	end
-end, {silent = true})
--- cmd[[nnoremap <expr> j line(".") == line('$') ? '<C-e>':'j']] -- j at bottom scrolls
-keymap({"n", "v"}, "G", "Gzz") -- when going to bottom of editor
-
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 keymap("", "H", "0^") -- 0^ ensures scrolling to the left on long lines
 keymap("", "L", "$")
@@ -80,6 +67,7 @@ keymap("n", "gs", function() telescope.treesitter() end) -- equivalent to Sublim
 -- Misc
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
+keymap({"n", "v"}, "G", "Gzz") -- when going to bottom of editor
 
 --------------------------------------------------------------------------------
 -- EDITING

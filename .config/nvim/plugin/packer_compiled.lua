@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/cheat.sh-vim",
     url = "https://github.com/dbeniamine/cheat.sh-vim"
   },
+  ["coc-nvim-lua"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/coc-nvim-lua",
+    url = "https://github.com/rafcamlet/coc-nvim-lua"
+  },
   ["coc.nvim"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/coc.nvim",
@@ -103,11 +108,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
-  },
-  ["lua-dev.nvim"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/lua-dev.nvim",
-    url = "https://github.com/folke/lua-dev.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,

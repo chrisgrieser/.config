@@ -19,4 +19,3 @@ else
 	require("cheat-sh-config")
 end
 
-
