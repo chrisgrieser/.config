@@ -41,8 +41,22 @@ keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 keymap("", "H", "0^") -- 0^ ensures scrolling to the left on long lines
 keymap("", "L", "$")
-keymap("", "J", "7j", {silent = true})
-keymap("", "K", "7k", {silent = true})
+keymap({"v", "o"}, "J", "7j")
+keymap("", "K", "7k")
+
+-- when reaching the last line, scroll down (scrolloff does not work at EOF)
+function overscroll (action)
+	local curLine = fn.line(".")
+	local lastLine = fn.line("$")
+	if curLine == lastLine then
+		cmd[[normal! zz]]
+	else
+		cmd("normal! "..action)
+	end
+end
+keymap("n", "j", function () overscroll("j") end)
+keymap("n", "J", function () overscroll("7j") end)
+keymap({"n", "v"}, "G", "Gzz")
 
 -- Multi-Cursor, https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 -- changing these seems to require full restart (not only re-sourcing)
@@ -66,18 +80,6 @@ keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "<Esc>", ":nohl<CR>:echo<CR>", {silent = true}) -- clear highlights & shortmessage
 keymap("n", "g-", function() telescope.current_buffer_fuzzy_find() end) -- alternative search
 keymap("n", "gs", function() telescope.treesitter() end) -- equivalent to Sublime's goto-symbol
-
--- Overscroll
-keymap("n", "j", function ()
-	local curLine = fn.line(".")
-	local lastLine = fn.line("$")
-	if curLine == lastLine then
-		cmd[[normal! zt]]
-	else
-		cmd[[normal! j]]
-	end
-end, {silent = true})
-keymap({"n", "v"}, "G", "Gzz")
 
 -- Misc
 keymap("", "+", "*") -- no more modifier key on German Keyboard

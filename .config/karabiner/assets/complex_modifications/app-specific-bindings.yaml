@@ -74,10 +74,10 @@ rules:
               - shift
         to:
           - key_code: "2"
-            modifiers: 
+            modifiers:
             - shift
           - key_code: slash
-            modifiers: 
+            modifiers:
             - shift
           - key_code: d
           - key_code: a
@@ -87,6 +87,7 @@ rules:
             file_paths:
               - alacritty$
               - goneovim$
+              - neovide$
   - description: "🅰️🏞 YouTube: ⌘+P → Picture-in-Picture Mode"
     manipulators:
       - type: basic
@@ -776,21 +777,4 @@ rules:
         - type: frontmost_application_if
           bundle_identifiers:
             - ^com\.apple\.ScriptEditor
-  - description: "🅰️👨‍💻 GoNeovim"
-  # Fix for: https://github.com/akiyosi/goneovim/issues/416
-  # requires `keymap({"n", "v", "i"}, "<C-q>", ":wall!<CR>:quitall!<CR>")` in vim config
-    manipulators:
-    - type: basic
-      from:
-        key_code: q
-        modifiers:
-          mandatory:
-            - command
-      to:
-        - key_code: q
-          modifiers:
-            - control
-      conditions:
-        - type: frontmost_application_if
-          bundle_identifiers:
-            - ^com\.ident\.goneovim$
+

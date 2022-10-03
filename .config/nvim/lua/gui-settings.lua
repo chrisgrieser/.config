@@ -3,11 +3,6 @@ require("utils")
 
 -- general
 cmd[[colorscheme tokyonight-moon]]
-opt.title = true -- title (for Window Managers and espanso)
-
--- goneovim
--- opt.titlestring = " " -- completely hide title
--- keymap({"n", "v", "i"}, "<C-q>", ":wall!<CR>:quitall!<CR>") -- workaround for goneovim cmd+q not working: https://github.com/akiyosi/goneovim/issues/416
 
 --------------------------------------------------------------------------------
 
@@ -68,19 +63,24 @@ keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true}
 -- NEOVIDE
 -- https://neovide.dev/configuration.html
 
-g.neovide_cursor_animation_length = 0.02
+g.neovide_cursor_animation_length = 0.015
 g.neovide_cursor_trail_size = 0.9
 g.neovide_scroll_animation_length = 0.4
 g.neovide_transparency = 0.96
-g.neovide_hide_mouse_when_typing = true
-g.neovide_confirm_quit = false
 g.neovide_floating_blur_amount_x = 5.0
 g.neovide_floating_blur_amount_y = 5.0
+g.neovide_cursor_unfocused_outline_width = 0.3
 
-g.neovide_remember_window_size = false
+g.neovide_cursor_vfx_mode = "railgun"
+g.neovide_cursor_vfx_particle_lifetime=1.3
+g.neovide_cursor_vfx_particle_density=17.0
+g.neovide_cursor_vfx_particle_speed=17.0
+g.neovide_cursor_vfx_particle_phase=1.3 -- only railgun
+g.neovide_cursor_vfx_particle_curl=1.3 -- only railgun
 
+g.neovide_confirm_quit = false
 g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
+g.neovide_hide_mouse_when_typing = true
+g.neovide_remember_window_size = true
 g.neovide_input_macos_alt_is_meta = false -- makes `opt` usable on mac
-
--- frameless mode is set via `$NEOVIDE_FRAME` in the .zshenv
 

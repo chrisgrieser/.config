@@ -57,7 +57,7 @@ rules:
             bundle_identifiers:
               - ^md\.obsidian$
               - ^com\.sublimetext
-              - ^com\.ident\.goneovim$
+              - ^com\.neovide\.neovide$
               - ^com\.apple\.finder$
               - ^com\.iconfactory\.Twitterrific
   - description: '🔘 ⌘+D → Delete (Visual) Line'
@@ -81,7 +81,7 @@ rules:
             bundle_identifiers:
               - ^md\.obsidian$
               - ^com\.sublimetext
-              - ^com\.ident\.goneovim$
+              - ^com\.neovide\.neovide$
               - ^com\.apple\.finder$
               - ^com\.agiletortoise\.Drafts-OSX$
               - ^com\.runningwithcrayons\.Alfred-Preferences$
@@ -165,8 +165,8 @@ rules:
             bundle_identifiers:
               - ^com\.apple\.Terminal$
               - ^md\.obsidian$
-              - ^com\.ident\.goneovim$
               - ^com\.sublimetext\.4$
+              - ^com\.neovide\.neovide$
       - type: basic
         from:
           key_code: equal_sign
@@ -182,7 +182,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.sublimetext\.4$
-              - ^com\.ident\.goneovim$
+              - ^com\.neovide\.neovide$
       # the ^
       - type: basic
         from:
@@ -198,5 +198,5 @@ rules:
             bundle_identifiers:
               - ^md\.obsidian$
               - ^com\.sublimetext\.4$
-              - ^com\.ident\.goneovim$
+              - ^com\.neovide\.neovide$
 
