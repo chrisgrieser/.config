@@ -5,4 +5,5 @@ export DOTFILE_FOLDER=~/dotfiles
 export WD=~"/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
 export VAULT_PATH=~'/Main Vault'
 
-export NEOVIDE_FRAME="transparent" # https://neovide.dev/command-line-reference.html#frame
+export NEOVIDE_FRAME="buttonless" # https://neovide.dev/command-line-referencehtml#frame
+

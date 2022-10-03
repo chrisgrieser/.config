@@ -6,8 +6,8 @@ cmd[[colorscheme tokyonight-moon]]
 opt.title = true -- title (for Window Managers and espanso)
 
 -- goneovim
-opt.titlestring = " " -- completely hide title
-keymap({"n", "v", "i"}, "<C-q>", ":wall!<CR>:quitall!<CR>") -- workaround for goneovim cmd+q not working: https://github.com/akiyosi/goneovim/issues/416
+-- opt.titlestring = " " -- completely hide title
+-- keymap({"n", "v", "i"}, "<C-q>", ":wall!<CR>:quitall!<CR>") -- workaround for goneovim cmd+q not working: https://github.com/akiyosi/goneovim/issues/416
 
 --------------------------------------------------------------------------------
 
@@ -69,13 +69,13 @@ keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true}
 -- https://neovide.dev/configuration.html
 -- not working: https://github.com/neovide/neovide/issues/1582
 
--- g.neovide_cursor_animation_length = 0.04
--- g.neovide_cursor_trail_size = 0.7
--- g.neovide_scroll_animation_length = 0.1
--- g.neovide_transparency = 0.95
--- g.neovide_hide_mouse_when_typing = true
--- g.neovide_confirm_quit = false
--- g.neovide_remember_window_size = true
--- g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
--- g.neovide_input_macos_alt_is_meta = false -- makes `opt` usable on mac
+g.neovide_cursor_animation_length = 0.04
+g.neovide_cursor_trail_size = 0.7
+g.neovide_scroll_animation_length = 0.1
+g.neovide_transparency = 0.95
+g.neovide_hide_mouse_when_typing = true
+g.neovide_confirm_quit = false
+g.neovide_remember_window_size = true
+g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
+g.neovide_input_macos_alt_is_meta = false -- makes `opt` usable on mac
 
