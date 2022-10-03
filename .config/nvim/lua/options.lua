@@ -31,6 +31,7 @@ opt.wrap = false
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.autochdir = true -- always current directory
 opt.undofile = true -- persistent undo history
+opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
 
 -- auto-save
 autocmd({"BufLeave", "FocusLost"}, {
@@ -60,7 +61,14 @@ autocmd("TextYankPost", { command = "silent! lua vim.highlight.on_yank{timeout =
 
 -- Mini-Linting on save
 autocmd("BufWritePre", {
-	command = [[%s/\s\+$//e | normal! ``]] -- remove trailing whitespaces
+	callback = function ()
+		local save_view = fn.winsaveview()
+		-- remove trailing whitespaces
+		-- add line breaks at end if there is-none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
+		cmd[[$s/\(.\)$/\1\r/e | %s/\s\+$//e]]
+		fn.winrestview(save_view)
+		save_view = nil
+	end
 })
 
 -- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070
