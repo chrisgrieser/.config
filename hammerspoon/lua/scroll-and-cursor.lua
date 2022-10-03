@@ -9,6 +9,7 @@ highlightsScrollAmount = 20
 
 function pseudoHideCursor ()
 	local screen = hs.mouse.getCurrentScreen()
+	if not(screen) then return end
 	local pos = {
 		x = screen:frame().w - 1, -- -1 to keep it on the current screen
 		y = screen:frame().h * 0.75,
@@ -52,6 +53,16 @@ function highlightsAppScroll (amount)
 	hs.eventtap.scrollWheel({0, amount}, {})
 	pseudoHideCursor()
 end
+
+--------------------------------------------------------------------------------
+
+-- CURSOR HIDING in Neovim
+function neovimGUIstart(appName, eventType)
+	if not(appName == "goneovim") or not(eventType == aw.activated) then return end
+	pseudoHideCursor()
+end
+neovimGuiWatcher = aw.new(neovimGUIstart)
+neovimGuiWatcher:start()
 
 --------------------------------------------------------------------------------
 

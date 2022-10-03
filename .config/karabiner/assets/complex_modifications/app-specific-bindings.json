@@ -124,6 +124,18 @@
           },
           "to": [
             {
+              "key_code": "2",
+              "modifiers": [
+                "shift"
+              ]
+            },
+            {
+              "key_code": "slash",
+              "modifiers": [
+                "shift"
+              ]
+            },
+            {
               "key_code": "d"
             },
             {
@@ -137,7 +149,8 @@
             {
               "type": "frontmost_application_if",
               "file_paths": [
-                "alacritty$"
+                "alacritty$",
+                "goneovim$"
               ]
             }
           ]

@@ -65,7 +65,7 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
-      # for vi mode: map <S-Space> daw
+      # for vi mode: map <S-Space> "_daw
       - type: basic
         from:
           key_code: spacebar
@@ -73,6 +73,12 @@ rules:
             mandatory:
               - shift
         to:
+          - key_code: "2"
+            modifiers: 
+            - shift
+          - key_code: slash
+            modifiers: 
+            - shift
           - key_code: d
           - key_code: a
           - key_code: w
@@ -80,6 +86,7 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
+              - goneovim$
   - description: "🅰️🏞 YouTube: ⌘+P → Picture-in-Picture Mode"
     manipulators:
       - type: basic

@@ -103,3 +103,15 @@ autocmd("BufWinEnter", {
 -- loads it as interactive session, so that zshrc is loaded https://stackoverflow.com/a/4642855
 opt.shellcmdflag="-ic"
 
+
+
+
+
+
+
+
+
+
+
+
+
