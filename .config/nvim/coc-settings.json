@@ -1,8 +1,16 @@
 // vim: filetype=jsonc
 
 {
-  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
   "coc.preferences.extensionUpdateCheck": "weekly",
+  "coc.source.around.disableSyntaxes": ["comment"],
+  "coc.source.buffer.enable": false,
+  "suggest.selection": "recentlyUsed",
+  "suggest.ignoreRegexps": [
+    ".{50,}"
+  ],
+  "suggest.labelMaxLength": 70,
+  "suggest.lowPrioritySourceLimit": 20,
+  "suggest.virtualText": true,
 
   "diagnostic.errorSign": "▪︎",
   "diagnostic.warningSign": "▴",
