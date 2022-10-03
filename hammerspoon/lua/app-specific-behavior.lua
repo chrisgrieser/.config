@@ -137,41 +137,21 @@ anyAppActivationWatcher:start()
 
 --------------------------------------------------------------------------------
 
--- SUBLIME
-wf_sublime = wf.new("Sublime Text")
-	:setOverrideFilter{allowRoles='AXStandardWindow'}
-	:subscribe(wf.windowCreated, function (newWindow)
-		-- if new window is a settings window, maximize it
-		if newWindow:title():match("sublime%-settings$") or newWindow:title():match("sublime%-keymap$") then
-			moveResizeCurWin("maximized")
-
-		-- workaround for Window positioning issue, will be fixed with build 4130 being released
-		-- https://github.com/sublimehq/sublime_text/issues/5237
-		elseif isAtOffice() or isProjector() then
+-- NEOVIM
+-- pseudomaximized window
+wf_neovim = wf.new("goneovim")
+	:subscribe(wf.windowCreated, function ()
+		if isAtOffice() or isProjector() then
 			moveResizeCurWin("maximized")
 		else
 			moveResizeCurWin("pseudo-maximized")
 		end
 	end)
 
-	:subscribe(wf.windowDestroyed, function ()
-		-- don't leave windowless app behind
-		if #wf_sublime:getWindows() == 0 and appIsRunning("Sublime Text") then
-			hs.application("Sublime Text"):kill()
-		end
-		-- editing command line finished
-		if not(appIsRunning("alacritty")) then return end
-		local alacrittyWin = hs.application("alacritty"):mainWindow()
-		if isHalf(alacrittyWin) then
-			moveResize(alacrittyWin, baseLayout)
-			alacrittyWin:focus()
-			keystroke({}, "space") -- to redraw zsh-syntax highlighting of the buffer
-		end
-	end)
-
 --------------------------------------------------------------------------------
 
 -- ALACRITTY
+-- pseudomaximized window
 wf_alacritty = wf.new("alacritty")
 	:setOverrideFilter{rejectTitles={"^cheatsheet: "}}
 	:subscribe(wf.windowCreated, function ()
@@ -437,3 +417,4 @@ wf_shottr = wf.new("Shottr")
 
 		runDelayed (0.1, function () keystroke({}, "a") end)
 	end)
+
