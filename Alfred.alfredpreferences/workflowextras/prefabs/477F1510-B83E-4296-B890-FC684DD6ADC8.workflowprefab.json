@@ -1,0 +1,39 @@
+{
+  "name" : "My Script Filter",
+  "data" : {
+    "items" : [
+      {
+        "workflowobjecttype" : "alfred.workflow.input.scriptfilter",
+        "uid" : "8127B148-9FE8-4316-B662-180B5338BCEC",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "argumenttrimmode" : 0,
+          "scriptargtype" : 1,
+          "escaping" : 0,
+          "queuedelayimmediatelyinitially" : true,
+          "argumenttype" : 1,
+          "queuedelaymode" : 0,
+          "type" : 8,
+          "script" : "",
+          "title" : "Search",
+          "runningsubtext" : "",
+          "queuemode" : 1,
+          "argumenttreatemptyqueryasnil" : true,
+          "subtext" : "",
+          "alfredfiltersresultsmatchmode" : 0,
+          "scriptfile" : "search.js",
+          "alfredfiltersresults" : true,
+          "queuedelaycustom" : 3,
+          "withspace" : true
+        },
+        "colorindex" : 0,
+        "ypos" : 5,
+        "xpos" : 20
+      }
+    ],
+    "connections" : [
+
+    ]
+  },
+  "description" : "preconfigured with my settings"
+}

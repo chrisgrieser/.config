@@ -1,0 +1,15 @@
+UCD/
+UCD.*/
+ucd/
+ucd.*/
+*.dll
+
+luautf8-*.zip
+luautf8-*.rock
+
+*.gcov
+*.gcda
+*.gcno
+
+test_*.lua
+*.o
