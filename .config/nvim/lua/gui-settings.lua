@@ -4,6 +4,7 @@ require("utils")
 
 cmd[[colorscheme dracula]]
 opt.title = true -- title (for Window Managers and espanso)
+opt.titlestring = " " -- completely hide title
 
 keymap({"n", "v", "i"}, "<D-w>", ":w<CR>:bd<CR>") -- cmd+w
 keymap({"n", "v", "i"}, "<D-q>", ":wall!<CR>:quitall!<CR>") -- cmd+q
@@ -13,9 +14,12 @@ keymap({"n", "v"}, "<M-l>", "@") -- needed when alt is turned into meta key
 keymap({"n", "v"}, "<M-9>", "}")
 keymap({"n", "v"}, "<M-8>", "{")
 
-keymap({"n", "v", "i"}, "<D-z>", ":undo<CR>") -- cmd+z
-keymap({"n", "v", "i"}, "<D-Z>", ":redo<CR>") -- cmd+shift+z
-keymap({"n", "v", "i"}, "<D-s>", ":write!<CR>") -- cmd+s
+keymap({"n", "v"}, "<D-z>", ":undo<CR>") -- cmd+z
+keymap({"n", "v"}, "<D-Z>", ":redo<CR>") -- cmd+shift+z
+keymap({"n", "v"}, "<D-s>", ":write!<CR>") -- cmd+s
+keymap("i", "<D-s>", "<Esc>:write!<CR>a")
+keymap("i", "<D-z>", "<Esc>:undo<CR>a")
+keymap("i", "<D-Z>", "<Esc>:redo<CR>a")
 keymap("n", "<D-a>", "ggvG") -- cmd+a
 keymap("i", "<D-a>", "<Esc>ggvG")
 keymap("v", "<D-a>", "ggG")
@@ -35,7 +39,7 @@ keymap("v", "<D-x>", "d")
 
 -- font resizing font size
 -- https://neovide.dev/faq.html#how-can-i-dynamically-change-the-font-size-at-runtime
-g.gui_font_default_size = 27
+g.gui_font_default_size = 24
 g.gui_font_face = "JetBrainsMonoNL Nerd Font"
 
 g.gui_font_size = g.gui_font_default_size
@@ -71,3 +75,4 @@ keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true}
 -- g.neovide_remember_window_size = true
 -- g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
 -- g.neovide_input_macos_alt_is_meta = false -- makes `opt` usable on mac
+
