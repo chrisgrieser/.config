@@ -51,6 +51,8 @@ function movieModeLayout()
 	killIfRunning("Mimestream")
 	killIfRunning("Alfred Preferences")
 	killIfRunning("Sublime Text")
+	killIfRunning("Neovide")
+	killIfRunning("Finder")
 	killIfRunning("Alacritty")
 	killIfRunning("alacritty")
 
@@ -73,6 +75,7 @@ function homeModeLayout ()
 	openIfNotRunning("Twitterrific")
 	openIfNotRunning("Drafts")
 
+	killIfRunning("Finder")
 	killIfRunning("YouTube")
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
@@ -86,6 +89,7 @@ function homeModeLayout ()
 		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Neovide", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Slack", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Discord", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil},
@@ -110,7 +114,7 @@ function homeModeLayout ()
 		end,
 		function()
 			sublimeFontSize(15)
-			alacrittyFontSize(26)
+			alacrittyFontSize(25)
 		end
 	):start()
 end

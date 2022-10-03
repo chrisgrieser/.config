@@ -1,5 +1,18 @@
 require("utils")
 --------------------------------------------------------------------------------
+cmd[[
+let g:firenvim_config = {
+	\ 'localSettings': {
+		\ '.*': {
+			\ 'takeover': 'always',
+			\ },
+		\ }
+	\ }
+]]
+
+
+--------------------------------------------------------------------------------
+
 
 -- start in insert mode
 autocmd("BufNewFile", {
@@ -10,7 +23,7 @@ autocmd("BufNewFile", {
 -- autosaving the text field
 autocmd({"TextChangedI", "TextChanged"}, {
 	pattern = "*",
-	command = "silent update"
+	command = "silent! update"
 })
 
 keymap("", "<D-s>", ":write!<CR>") -- manual saving
