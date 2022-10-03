@@ -18,7 +18,6 @@ g.coc_global_extensions = {
 	"coc-snippets",
 }
 
-
 --------------------------------------------------------------------------------
 
 opt.backup = false -- Some servers have issues with backup files, see #649.
