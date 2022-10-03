@@ -152,7 +152,8 @@ keymap("n", "öö", "<Plug>(SubversiveSubstituteLine)")
 keymap("n", "Ö", "<Plug>(SubversiveSubstituteToEndOfLine)")
 
 -- [R]eplicate (duplicate) down
-keymap("n", "R", '"zyy"zp') -- current line
+-- [R]eplicate (duplicate) down
+keymap("n", "R", ':noautocmd normal!"zyy"zp<CR>') -- current line, ":noautocmd" to disable highlighted yank for this
 keymap("v", "R", '"zy`]"zp') -- selection (best used with Visual Line Mode)
 
 -- Line Movement

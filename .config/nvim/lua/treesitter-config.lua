@@ -18,9 +18,7 @@ require('nvim-treesitter.configs').setup {
 		enable = true,
 
 		-- NOTE: these are the names of the parsers and not the filetype
-		disable = {
-			"css",
-		},
+		disable = {},
 
 		-- Setting this to true will run `:h syntax` and tree-sitter at the same
 		-- time. Set this to `true` if you depend on 'syntax' being enabled (like
