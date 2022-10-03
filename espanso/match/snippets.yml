@@ -58,6 +58,21 @@ matches:
         type: shell
         params:
           cmd: "echo -n macOS $(sw_vers -productVersion)"
+
+  - trigger: "!nversion"
+    replace: |
+      {{OSversion}}
+      {{neovimVersion}}
+    vars:
+      - name: OSversion
+        type: shell
+        params:
+          cmd: "echo -n macOS $(sw_vers -productVersion)"
+      - name: neovimVersion
+        type: shell
+        params:
+          cmd: "echo -n macOS $(sw_vers -productVersion)"
+
   - trigger: "!oversion"
     replace: "Obsidian {{version}}"
     vars:
