@@ -1,9 +1,20 @@
 require("utils")
 --------------------------------------------------------------------------------
--- GUI
--- keep using terminal colorscheme in the Terminal, for consistency with Alacritty
-if fn.has('gui_running') == 1 then -- https://www.reddit.com/r/neovim/comments/u1998d/comment/i4asi0h/?utm_source=share&utm_medium=web2x&context=3
-	cmd[[colorscheme tokyonight]]
+-- GUI (Neovide)
+g.neovide_transparency = 0.97
+g.neovide_confirm_quit = false
+g.neovide_scroll_animation_length = 0.1
+g.neovide_cursor_animation_length = 0.08
+g.neovide_cursor_trail_size = 0.4
+g.neovide_remember_window_size = true
+g.neovide_hide_mouse_when_typing = true
+g.neovide_input_use_logo = true -- cmd key on macOS
+g.neovide_input_macos_alt_is_meta = false -- makes alt usable on mac (TODO: but needs to remap @)
+opt.guifont = "JetBrainsMonoNL Nerd Font:h28"
+
+if fn.has('gui_running') or g.neovide then
+	-- keep using terminal colorscheme in the Terminal, for consistency with Alacritty
+	cmd[[colorscheme onedark]]
 else
 	cmd[[highlight clear Pmenu]]
 end
@@ -48,7 +59,6 @@ cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-]*') ]]
 --------------------------------------------------------------------------------
 
 -- GUTTER
--- Sign Column ( = Gutter)
 cmd[[highlight clear SignColumn]] -- transparent
 
 -- Git Gutter
@@ -66,8 +76,7 @@ g.gitgutter_sign_priority = 9 -- lower to not overwrite when in conflict with ot
 
 --------------------------------------------------------------------------------
 
--- STATUS LINE
--- Lua Line
+-- STATUS LINE (LuaLine)
 local function alternateFile()
 	local altFile = api.nvim_exec('echo expand("#:t")', true)
 	local curFile = api.nvim_exec('echo expand("%:t")', true)
