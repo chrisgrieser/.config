@@ -15,7 +15,7 @@ function PluginList (use)
 	-- use 'ap/vim-css-color'
 	--	use 'norcalli/nvim-colorizer.lua'
 
-	-- -- LSP & Syntax
+	-- LSP & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
 	use {
 		'nvim-treesitter/nvim-treesitter',
@@ -23,7 +23,7 @@ function PluginList (use)
 	}
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
-	use 'folke/lua-dev.nvim'
+	use 'rafcamlet/coc-nvim-lua'
 	-- use 'hail2u/vim-css3-syntax' -- not used, since using treesitter for now
 
 	-- File Releated
