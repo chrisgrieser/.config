@@ -187,7 +187,7 @@
 	<key>description</key>
 	<string></string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>Sublime Text</string>
 	<key>objects</key>
