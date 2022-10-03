@@ -16,7 +16,6 @@ keymap("n", "<leader>>", "mzI> <Esc>`z") -- Turn into blockquote
 keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key
 keymap("n", "<leader>d", 'mzlEF.yEEp`z') -- [d]ouble class under cursor
 keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>') -- [D]uplicate Class under cursor
-keymap("n", "gS", function() telescope.current_buffer_fuzzy_find{default_text='< ', prompt_prefix='🪧'} end) -- Navigation Markers
 
 -- JS / TS / Shell
 keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, requires vim.surround

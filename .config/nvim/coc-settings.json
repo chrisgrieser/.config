@@ -4,19 +4,29 @@
   "coc.preferences.extensionUpdateCheck": "weekly",
   "coc.source.around.disableSyntaxes": ["comment"],
   "coc.source.buffer.enable": false,
-  "suggest.selection": "recentlyUsed",
-  "suggest.ignoreRegexps": [
-    ".{50,}"
-  ],
+  "suggest.selection": "recentlyUsedByPrefix",
   "suggest.labelMaxLength": 50,
   "suggest.lowPrioritySourceLimit": 20,
-  "suggest.floatConfig": {"border": true, "shadow": false},
-  "suggest.virtualText": true,
+  "suggest.floatConfig": {"border": true, "maxHeight": 20},
 
   "diagnostic.errorSign": "▪︎",
   "diagnostic.warningSign": "▴",
   "diagnostic.infoSign": "•",
   "diagnostic.hintSign": "•",
+
+  "coc.source.emoji.enable": true,
+  "coc.source.emoji.triggerCharacters": [":"],
+  "coc.source.emoji.shortcut": "",
+  "coc.source.emoji.filetypes": [
+    "markdown",
+    "css",
+    "javascript",
+    "typescript",
+    "lua",
+    "toml",
+    "json",
+    "yaml"
+  ],
 
   "Lua.diagnostics.globals": ["vim", "martax"],
   "Lua.diagnostics.disable": ["trailing-space"],
@@ -27,6 +37,7 @@
   ],
 
   "css.lint.vendorPrefix": "ignore",
-  "css.lint.duplicateProperties": "error"
+  "css.lint.duplicateProperties": "error",
+  "css.colorDecorators.enable": true
 }
 

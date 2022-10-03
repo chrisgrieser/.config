@@ -18,6 +18,11 @@ function PluginList (use)
 	}
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
+	use 'hail2u/vim-css3-syntax'
+
+	-- these do not seem to work for hsl :/
+	-- use 'gko/vim-coloresque'
+	-- use 'ap/vim-css-color'
 
 	-- File Releated
 	use 'tpope/vim-eunuch' -- file operation utilities

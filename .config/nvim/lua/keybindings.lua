@@ -33,7 +33,7 @@ keymap("n", "<leader>P", ":PackerStatus<CR>")
 
 -- Utils
 keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
-keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR><CR>')
+keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR>>', {silent = true})
 
 -- Overscroll
 keymap("n", "j", function ()
@@ -44,15 +44,15 @@ keymap("n", "j", function ()
 	else
 		cmd[[normal! j]]
 	end
-end)
+end, {silent = true})
 -- cmd[[nnoremap <expr> j line(".") == line('$') ? '<C-e>':'j']] -- j at bottom scrolls
 keymap({"n", "v"}, "G", "Gzz") -- when going to bottom of editor
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 keymap("", "H", "0^") -- 0^ ensures scrolling to the left on long lines
 keymap("", "L", "$")
-keymap("", "J", "7j")
-keymap("", "K", "7k")
+keymap("", "J", "7j", {silent = true})
+keymap("", "K", "7k", {silent = true})
 
 -- Multi-Cursor, https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 -- changing these seems to require full restart (not only re-sourcing)

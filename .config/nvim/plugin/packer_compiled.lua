@@ -159,10 +159,20 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-abolish",
     url = "https://github.com/tpope/vim-abolish"
   },
+  ["vim-coloresque"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-coloresque",
+    url = "https://github.com/gko/vim-coloresque"
+  },
   ["vim-commentary"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-commentary",
     url = "https://github.com/tpope/vim-commentary"
+  },
+  ["vim-css3-syntax"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-css3-syntax",
+    url = "https://github.com/hail2u/vim-css3-syntax"
   },
   ["vim-eunuch"] = {
     loaded = true,
