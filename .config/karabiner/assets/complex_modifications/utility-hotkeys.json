@@ -108,7 +108,7 @@
               "bundle_identifiers": [
                 "^md\\.obsidian$",
                 "^com\\.sublimetext",
-                "^com\\.ident\\.goneovim$",
+                "^com\\.neovide\\.neovide$",
                 "^com\\.apple\\.finder$",
                 "^com\\.iconfactory\\.Twitterrific"
               ]
@@ -153,7 +153,7 @@
               "bundle_identifiers": [
                 "^md\\.obsidian$",
                 "^com\\.sublimetext",
-                "^com\\.ident\\.goneovim$",
+                "^com\\.neovide\\.neovide$",
                 "^com\\.apple\\.finder$",
                 "^com\\.agiletortoise\\.Drafts-OSX$",
                 "^com\\.runningwithcrayons\\.Alfred-Preferences$"
@@ -327,8 +327,8 @@
               "bundle_identifiers": [
                 "^com\\.apple\\.Terminal$",
                 "^md\\.obsidian$",
-                "^com\\.ident\\.goneovim$",
-                "^com\\.sublimetext\\.4$"
+                "^com\\.sublimetext\\.4$",
+                "^com\\.neovide\\.neovide$"
               ]
             }
           ]
@@ -359,7 +359,7 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.sublimetext\\.4$",
-                "^com\\.ident\\.goneovim$"
+                "^com\\.neovide\\.neovide$"
               ]
             }
           ]
@@ -391,7 +391,7 @@
               "bundle_identifiers": [
                 "^md\\.obsidian$",
                 "^com\\.sublimetext\\.4$",
-                "^com\\.ident\\.goneovim$"
+                "^com\\.neovide\\.neovide$"
               ]
             }
           ]

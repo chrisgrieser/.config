@@ -103,3 +103,7 @@ autocmd("BufWinEnter", {
 -- loads it as interactive session, so that zshrc is loaded https://stackoverflow.com/a/4642855
 opt.shellcmdflag="-ic"
 
+-- Window Mangers
+opt.title = true -- title (for Window Managers and espanso)
+opt.titlestring = "" -- empty = default, TODO: figure out how to set that properly
+

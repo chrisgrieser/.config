@@ -28,7 +28,7 @@ function unHideAll()
 end
 
 function transBackgroundApp (appName, eventType, appObject)
-	if not(appName == "goneovim" or appName == "Obsidian" or appName == "alacritty" or appName == "Alacritty") then return end
+	if not(appName == "Neovide" or appName == "Obsidian" or appName:lower() == "alacritty") then return end
 
 	local win = appObject:mainWindow()
 	if (eventType == aw.activated or eventType == aw.launching) and (isPseudoMaximized(win) or isMaximized(win)) then
@@ -139,7 +139,7 @@ anyAppActivationWatcher:start()
 
 -- NEOVIM
 -- pseudomaximized window
-wf_neovim = wf.new("goneovim")
+wf_neovim = wf.new("Neovide")
 	:subscribe(wf.windowCreated, function ()
 		if isAtOffice() or isProjector() then
 			moveResizeCurWin("maximized")

@@ -1,4 +1,4 @@
-export EDITOR=nvim
+export EDITOR=neovide
 export PAGER=less
 
 export DOTFILE_FOLDER=~/dotfiles

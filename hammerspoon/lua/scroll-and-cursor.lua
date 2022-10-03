@@ -56,16 +56,6 @@ end
 
 --------------------------------------------------------------------------------
 
--- CURSOR HIDING in Neovim
-function neovimGUIstart(appName, eventType)
-	if not(appName == "goneovim") or not(eventType == aw.activated) then return end
-	pseudoHideCursor()
-end
-neovimGuiWatcher = aw.new(neovimGUIstart)
-neovimGuiWatcher:start()
-
---------------------------------------------------------------------------------
-
 -- CURSOR HIDING in Brave
 -- when Brave activates and j or k is pressed for the first time, hide cursor
 function hidingCursorInBrowser(key)

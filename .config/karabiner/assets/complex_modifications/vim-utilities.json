@@ -81,7 +81,8 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^md\\.obsidian$",
-                "^com\\.sublimetext\\.4$"
+                "^com\\.sublimetext\\.4$",
+                "^com\\.neovide\\.neovide$"
               ]
             }
           ],
@@ -133,7 +134,8 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^md\\.obsidian$",
-                "^com\\.sublimetext\\.4$"
+                "^com\\.sublimetext\\.4$",
+                "^com\\.neovide\\.neovide$"
               ]
             }
           ],
@@ -185,7 +187,8 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^md\\.obsidian$",
-                "^com\\.sublimetext\\.4$"
+                "^com\\.sublimetext\\.4$",
+                "^com\\.neovide\\.neovide$"
               ]
             }
           ],
@@ -232,7 +235,8 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^md\\.obsidian$",
-                "^com\\.sublimetext\\.4$"
+                "^com\\.sublimetext\\.4$",
+                "^com\\.neovide\\.neovide$"
               ]
             }
           ],
@@ -329,7 +333,8 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^md\\.obsidian$",
-                "^com\\.sublimetext\\.4$"
+                "^com\\.sublimetext\\.4$",
+                "^com\\.neovide\\.neovide$"
               ]
             }
           ],
@@ -394,6 +399,7 @@
                 "^/System/Applications/Utilities/Terminal.app",
                 "^/Applications/Obsidian\\.app",
                 "^/Applications/Sublime Text\\.app",
+                "^/Applications/Neovide\\.app",
                 "^/Applications/Discord\\.app",
                 "^/Applications/Brave Browser\\.app",
                 "^/Applications/Hammerspoon\\.app"
@@ -427,6 +433,7 @@
                 "^/System/Applications/Utilities/Terminal.app",
                 "^/Applications/Obsidian\\.app",
                 "^/Applications/Sublime Text\\.app",
+                "^/Applications/Neovide\\.app",
                 "^/Applications/Discord\\.app",
                 "^/Applications/Brave Browser\\.app",
                 "^/Applications/Hammerspoon\\.app"

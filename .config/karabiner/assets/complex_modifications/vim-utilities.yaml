@@ -41,6 +41,7 @@ rules:
             bundle_identifiers:
               - ^md\.obsidian$
               - ^com\.sublimetext\.4$
+              - ^com\.neovide\.neovide$
         to:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.US$
@@ -66,6 +67,7 @@ rules:
             bundle_identifiers:
               - ^md\.obsidian$
               - ^com\.sublimetext\.4$
+              - ^com\.neovide\.neovide$
         to:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.US$
@@ -91,6 +93,7 @@ rules:
             bundle_identifiers:
               - ^md\.obsidian$
               - ^com\.sublimetext\.4$
+              - ^com\.neovide\.neovide$
         to:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.US$
@@ -113,6 +116,7 @@ rules:
             bundle_identifiers:
               - ^md\.obsidian$
               - ^com\.sublimetext\.4$
+              - ^com\.neovide\.neovide$
         to:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.US$
@@ -160,6 +164,7 @@ rules:
             bundle_identifiers:
               - ^md\.obsidian$
               - ^com\.sublimetext\.4$
+              - ^com\.neovide\.neovide$
         to:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.US$
@@ -193,6 +198,7 @@ rules:
               - ^/System/Applications/Utilities/Terminal.app
               - ^/Applications/Obsidian\.app
               - ^/Applications/Sublime Text\.app
+              - ^/Applications/Neovide\.app
               - ^/Applications/Discord\.app
               - ^/Applications/Brave Browser\.app
               - ^/Applications/Hammerspoon\.app
@@ -213,6 +219,7 @@ rules:
               - ^/System/Applications/Utilities/Terminal.app
               - ^/Applications/Obsidian\.app
               - ^/Applications/Sublime Text\.app
+              - ^/Applications/Neovide\.app
               - ^/Applications/Discord\.app
               - ^/Applications/Brave Browser\.app
               - ^/Applications/Hammerspoon\.app
@@ -428,3 +435,4 @@ rules:
           - key_code: left_arrow
             modifiers:
               - command
+
