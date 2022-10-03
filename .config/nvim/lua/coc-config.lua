@@ -14,6 +14,7 @@ g.coc_global_extensions = {
 	"coc-toml",
 	"coc-tsserver", -- ts and js
 	"coc-json",
+	"coc-emoji",
 	"coc-diagnostic", -- linter integration
 }
 
@@ -81,12 +82,12 @@ keymap("o", "af", "<Plug>(coc-funcobj-a)", opts)
 
 -- Remap <C-f> and <C-b> for scroll float windows/popups.
 local opts = {silent = true, nowait = true, expr = true} ---@diagnostic disable-line: redefined-local
-keymap("n", "<C-Down>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-Down>"', opts)
-keymap("n", "<C-Up>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-Up>"', opts)
-keymap("i", "<C-Down>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
-keymap("i", "<C-Up>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
-keymap("v", "<C-Down>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-Down>"', opts)
-keymap("v", "<C-Up>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-Up>"', opts)
+keymap("n", "<S-Down>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<S-Down>"', opts)
+keymap("n", "<S-Up>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<S-Up>"', opts)
+keymap("i", "<S-Down>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
+keymap("i", "<S-Up>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
+keymap("v", "<S-Down>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<S-Down>"', opts)
+keymap("v", "<S-Up>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<S-Up>"', opts)
 
 --------------------------------------------------------------------------------
 
