@@ -69,6 +69,7 @@ keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
 keymap({"n", "v"}, "G", "Gzz") -- when going to bottom of editor
 
+
 --------------------------------------------------------------------------------
 -- EDITING
 

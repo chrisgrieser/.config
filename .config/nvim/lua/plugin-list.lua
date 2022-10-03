@@ -23,7 +23,6 @@ function PluginList (use)
 	}
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
-	use 'rafcamlet/coc-nvim-lua'
 	-- use 'hail2u/vim-css3-syntax' -- not used, since using treesitter for now
 
 	-- File Releated
@@ -51,6 +50,7 @@ function PluginList (use)
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
 	use 'mattn/emmet-vim' -- Emmet for CSS
 	use 'gelguy/wilder.nvim' -- suggestions for command line mode (: and /)
+	use 'rafamadriz/friendly-snippets' -- collection of common snippets
 
 	-- Misc
 	use 'mzlogin/vim-markdown-toc'

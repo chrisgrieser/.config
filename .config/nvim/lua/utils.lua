@@ -13,4 +13,3 @@ autocmd = vim.api.nvim_create_autocmd
 telescope = require("telescope.builtin") -- requires loading extensions first
 keymap = vim.keymap.set
 
-

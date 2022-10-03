@@ -7,7 +7,7 @@ g.coc_data_home = "~/.local/share/nvim/coc/"
 
 -- https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#implemented-coc-extensions
 g.coc_global_extensions = {
-	"coc-lua",
+	"coc-sumneko-lua", -- better than coc-lua, since it includes folke/lua-dev.nvim
 	"coc-css",
 	"coc-sh",
 	"coc-yaml",
@@ -15,6 +15,7 @@ g.coc_global_extensions = {
 	"coc-tsserver", -- ts and js
 	"coc-json",
 	"coc-emoji",
+	"coc-snippets",
 	"coc-diagnostic", -- linter integration
 }
 
