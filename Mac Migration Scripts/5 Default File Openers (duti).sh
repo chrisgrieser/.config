@@ -9,39 +9,39 @@ duti -s org.m0k.transmission torrent all
 duti -s com.sublimetext.4 csv all
 duti -s com.busymac.busycal3 ics all
 duti -s com.colliderli.iina mp3 all
-duti -s org.yanex.marta zip all
-
-# video
-duti -s com.colliderli.iina mp4 all
-duti -s com.colliderli.iina vid all
-duti -s com.colliderli.iina mov all
-duti -s com.colliderli.iina m3u all
-duti -s com.colliderli.iina m3u8 all
-duti -s com.colliderli.iina mkv all
-duti -s com.colliderli.iina m4a all
-
-# text
 duti -s com.apple.automator.Obsidian-Opener md all
 
-duti -s com.sublimetext.4 public.data all # dotfiles without extension
-duti -s com.sublimetext.4 sh all
-duti -s com.sublimetext.4 bib all
-duti -s com.sublimetext.4 html all
-duti -s com.sublimetext.4 zsh all
-duti -s com.sublimetext.4 bash all
-duti -s com.sublimetext.4 py all
-duti -s com.sublimetext.4 js all
-duti -s com.sublimetext.4 ts all
-duti -s com.sublimetext.4 css all
-duti -s com.sublimetext.4 scss all
-duti -s com.sublimetext.4 txt all
-duti -s com.sublimetext.4 applescript all
-duti -s com.sublimetext.4 lua all
-duti -s com.sublimetext.4 json all
-duti -s com.sublimetext.4 yml all
-duti -s com.sublimetext.4 yaml all
-duti -s com.sublimetext.4 xml all
-duti -s com.sublimetext.4 plist all
+# video
+videoplayerID="com.colliderli.iina"
+duti -s "$videoplayerID" mp4 all
+duti -s "$videoplayerID" vid all
+duti -s "$videoplayerID" mov all
+duti -s "$videoplayerID" m3u all
+duti -s "$videoplayerID" m3u8 all
+duti -s "$videoplayerID" mkv all
+duti -s "$videoplayerID" m4a all
+
+# text
+editorID="com.apple.automator.Neovim"
+duti -s "$editorID" public.data all # dotfiles without extension
+duti -s "$editorID" sh all
+duti -s "$editorID" bib all
+duti -s "$editorID" html all
+duti -s "$editorID" zsh all
+duti -s "$editorID" bash all
+duti -s "$editorID" py all
+duti -s "$editorID" js all
+duti -s "$editorID" ts all
+duti -s "$editorID" css all
+duti -s "$editorID" scss all
+duti -s "$editorID" txt all
+duti -s "$editorID" applescript all
+duti -s "$editorID" lua all
+duti -s "$editorID" json all
+duti -s "$editorID" yml all
+duti -s "$editorID" yaml all
+duti -s "$editorID" xml all
+duti -s "$editorID" plist all
 
 # URI Schemes
 duti -s org.m0k.transmission magnet
