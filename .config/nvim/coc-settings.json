@@ -8,8 +8,9 @@
   "suggest.ignoreRegexps": [
     ".{50,}"
   ],
-  "suggest.labelMaxLength": 70,
+  "suggest.labelMaxLength": 50,
   "suggest.lowPrioritySourceLimit": 20,
+  "suggest.floatConfig": {"border": true, "shadow": false},
   "suggest.virtualText": true,
 
   "diagnostic.errorSign": "▪︎",
