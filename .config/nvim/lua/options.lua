@@ -29,9 +29,13 @@ opt.colorcolumn = '+1' -- column next to textwidth option length
 -- files
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.autochdir = true -- always current directory
-opt.autowrite = true -- automatically saves
-opt.autowriteall = true
 opt.undofile = true -- persistent undo history
+
+-- auto-save
+autocmd({"TextChanged", "FocusLost"}, {
+	pattern = "?*",
+	command = "silent! update"
+})
 
 -- editor
 opt.cursorline = true -- by default underline, look changed in appearnce
@@ -51,11 +55,7 @@ autocmd ("BufReadPost", {
 
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
-augroup("HighlightedYank", {})
-autocmd("TextYankPost", {
-	command = "silent! lua vim.highlight.on_yank{timeout = 2500}",
-	group = "HighlightedYank"
-})
+autocmd("TextYankPost", { command = "silent! lua vim.highlight.on_yank{timeout = 2500}" })
 
 -- Mini-Linting on save
 autocmd("BufWritePre", {

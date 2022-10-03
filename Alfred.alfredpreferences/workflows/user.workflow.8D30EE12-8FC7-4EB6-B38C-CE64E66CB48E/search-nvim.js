@@ -9,7 +9,6 @@ const alfredMatcher = (str) => str.replace (/[-/()_.:]/g, " ")
 //------------------------------------------------------------------------------
 
 const searchURL = "https://nvim.sh/s";
-const baseURL = "https://github.com/";
 
 const jsonArray = app.doShellScript(`curl -sL '${searchURL}'`)
 	.split("\r")
@@ -27,7 +26,7 @@ const jsonArray = app.doShellScript(`curl -sL '${searchURL}'`)
 			"title": name,
 			"match": alfredMatcher (repo),
 			"subtitle": `★ ${stars}  ${desc}`,
-			"arg": `${baseURL}${repo}`,
+			"arg": repo,
 			"uid": repo,
 		};
 	});
