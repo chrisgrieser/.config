@@ -17,9 +17,8 @@ else
 	require("telescope-config")
 	require("treesitter-config")
 	require("cheat-sh-config")
-end
-
-if (fn.has('gui_running') or g.neovide) and not(g.started_by_firenvim) then
-	require("gui-settings")
+	if (fn.has('gui_running') or g.neovide) then
+		require("gui-settings")
+	end
 end
 

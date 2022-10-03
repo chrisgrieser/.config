@@ -6,6 +6,7 @@ require("utils")
 
 -- cursor
 opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor20"
+opt.linespace = 1 -- px, similar to line height
 
 -- Ruler
 cmd[[highlight ColorColumn ctermbg=DarkGrey guibg=black]] -- https://www.reddit.com/r/neovim/comments/me35u9/lua_config_to_set_highlight/
@@ -14,7 +15,7 @@ cmd[[highlight ColorColumn ctermbg=DarkGrey guibg=black]] -- https://www.reddit.
 cmd[[highlight CursorLine term=none cterm=none guibg=black ctermbg=black]]
 
 -- Current Word Highlight (from Coc)
-cmd[[highlight CocHighlightText term=underdotted cterm=underdotted]]
+cmd[[highlight CocHighlightText term=underline cterm=underline]]
 
 -- TreeSitter Context Line
 cmd[[highlight TreesitterContext ctermbg=black guibg=black]]
@@ -25,9 +26,12 @@ cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey guifg=DarkGrey]]
 -- Comments
 cmd[[highlight Comment ctermfg=grey]]
 
-if not(fn.has('gui_running') or g.neovide) then
-	cmd[[highlight clear Pmenu]]
-end
+-- Popupmenus
+cmd[[highlight Pmenu ctermbg=DarkGrey]]
+
+-- if not(fn.has('gui_running') or g.neovide) then
+-- 	cmd[[highlight clear Pmenu]]
+-- end
 
 --------------------------------------------------------------------------------
 -- custom highlights

@@ -55,6 +55,7 @@ autocmd ("BufReadPost", {
 
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
+opt.mousemodel="extend" -- deacvitate context menu, right mouse instead expands selection
 autocmd("TextYankPost", { command = "silent! lua vim.highlight.on_yank{timeout = 2500}" })
 
 -- Mini-Linting on save

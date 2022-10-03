@@ -8,6 +8,32 @@
 	<string>Development</string>
 	<key>connections</key>
 	<dict>
+		<key>047C811F-B411-4DB8-B5E8-1474F6491A52</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1105B81B-CDCA-4C49-B9DE-E9BAB84A19EF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1105B81B-CDCA-4C49-B9DE-E9BAB84A19EF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EDD440AB-B1FE-4E58-BBB2-8ED201A0D215</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>5A271BE0-443A-43F2-A9FA-C01047FE0F58</key>
 		<array>
 			<dict>
@@ -26,6 +52,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>F178F3ED-E855-4DC9-A178-D839E9C2C48D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>70E74AEC-3911-4701-9878-1DC4FC6E54B9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E07EDE78-1A9E-44CC-B193-8EBB35976A0D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -63,6 +102,19 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy GitHub URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E07EDE78-1A9E-44CC-B193-8EBB35976A0D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>047C811F-B411-4DB8-B5E8-1474F6491A52</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -158,21 +210,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/.local/share/nvim</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>09E95958-33BA-4403-A120-ED77024AAB7E</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -190,6 +227,21 @@
 			<string>5A271BE0-443A-43F2-A9FA-C01047FE0F58</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/.local/share/nvim</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>09E95958-33BA-4403-A120-ED77024AAB7E</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -257,21 +309,164 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
+				<key>concurrently</key>
 				<false/>
-				<key>clipboardtext</key>
-				<string>use '{query}'</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>set filetype to (system attribute "filetype")
+set content to "{query}"
+
+-- resolve home folder
+set working_folder to do shell script "echo " &amp; quoted form of (system attribute "working_folder") &amp; " | iconv -f UTF-8-MAC -t MACROMAN"set AppleScript's text item delimiters to "~/"set theTextItems to every text item of working_folderset AppleScript's text item delimiters to (POSIX path of (path to home folder as string))set resolved_path to theTextItems as string
+
+-- prepend certain shebangs
+if (filetype is "js") then 
+	set content to "#!/usr/bin/env osascript -l JavaScript" &amp;  "\n" &amp; content
+else if (filetype is "applescript")
+	set content to "#!/usr/bin/env osascript" &amp;  "\n" &amp; content
+else if (filetype is "sh")
+	set content to "#!/bin/zsh" &amp;  "\n" &amp; content 
+end if
+
+-- generate random name
+set filename to ((random number from 100000 to 999999) as text)
+
+-- create document
+tell application "BBEdit"
+	activate
+	set newDoc to make new document
+	set contents of newDoc to content
+	set file2save to (resolved_path &amp; "/" &amp; filename &amp; "." &amp; filetype)
+	save newDoc to file2save
+end tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>new-text-document.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</string>
+			<string>EDD440AB-B1FE-4E58-BBB2-8ED201A0D215</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>nv</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string># https://www.alfredapp.com/help/workflows/inputs/script-filter/json/
+cat "filetypes.json"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>with clipboard content</string>
+				<key>title</key>
+				<string>New File in Neovim</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>70E74AEC-3911-4701-9878-1DC4FC6E54B9</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>current-or-default-finder-window.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>047C811F-B411-4DB8-B5E8-1474F6491A52</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>1105B81B-CDCA-4C49-B9DE-E9BAB84A19EF</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>ext</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>E07EDE78-1A9E-44CC-B193-8EBB35976A0D</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -328,6 +523,25 @@
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
+				<string>use '{query}'</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
 				<string>https://github.com/{query}</string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
@@ -346,12 +560,32 @@
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>047C811F-B411-4DB8-B5E8-1474F6491A52</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>get Finder Window</string>
+			<key>xpos</key>
+			<real>650</real>
+			<key>ypos</key>
+			<real>415</real>
+		</dict>
 		<key>09E95958-33BA-4403-A120-ED77024AAB7E</key>
 		<dict>
 			<key>xpos</key>
 			<real>580</real>
 			<key>ypos</key>
 			<real>100</real>
+		</dict>
+		<key>1105B81B-CDCA-4C49-B9DE-E9BAB84A19EF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>800</real>
+			<key>ypos</key>
+			<real>445</real>
 		</dict>
 		<key>4C8471ED-D799-4D45-B9DD-EEA5E5B94EA0</key>
 		<dict>
@@ -387,6 +621,17 @@
 			<key>ypos</key>
 			<real>95</real>
 		</dict>
+		<key>70E74AEC-3911-4701-9878-1DC4FC6E54B9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>new Doc</string>
+			<key>xpos</key>
+			<real>435</real>
+			<key>ypos</key>
+			<real>415</real>
+		</dict>
 		<key>799F31B4-F294-42FD-B4F4-2D190B6C7A33</key>
 		<dict>
 			<key>colorindex</key>
@@ -407,6 +652,15 @@
 			<key>ypos</key>
 			<real>635</real>
 		</dict>
+		<key>E07EDE78-1A9E-44CC-B193-8EBB35976A0D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>585</real>
+			<key>ypos</key>
+			<real>445</real>
+		</dict>
 		<key>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</key>
 		<dict>
 			<key>colorindex</key>
@@ -415,6 +669,17 @@
 			<real>215</real>
 			<key>ypos</key>
 			<real>510</real>
+		</dict>
+		<key>EDD440AB-B1FE-4E58-BBB2-8ED201A0D215</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>create new file</string>
+			<key>xpos</key>
+			<real>875</real>
+			<key>ypos</key>
+			<real>415</real>
 		</dict>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<dict>
