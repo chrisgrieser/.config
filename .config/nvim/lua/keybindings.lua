@@ -74,13 +74,11 @@ keymap({"n", "v"}, "G", "Gzz") -- when going to bottom of editor
 -- EDITING
 
 -- CLIPBOARD
--- don't pollute the register
 keymap({"n", "v"}, "x", '"_x')
 keymap({"n", "v"}, "c", '"_c')
 keymap({"n", "v"}, "C", '"_C')
 keymap("n", "P", '"0p') -- paste what was yanked
 keymap("n", "P", '"0p') -- paste what was yanked
-
 
 -- TEXT OBJECTS
 -- for some reason, recursive remap does not seem to work properly, therefore

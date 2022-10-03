@@ -16,7 +16,6 @@ g.coc_global_extensions = {
 	"coc-json",
 	"coc-emoji",
 	"coc-snippets",
-	"coc-diagnostic", -- linter integration
 }
 
 
@@ -37,7 +36,7 @@ keymap("n", "gD", "<Plug>(coc-references)", {silent = true})
 
 -- [H]over Info
 function _G.show_docs()
-	local cw = vim.fn.expand('<cword>')
+	local cw = vim.fn.expand('<cword>') ---@diagnostic disable-line: missing-parameter
 	if vim.fn.index({'vim', 'help'}, vim.bo.filetype) >= 0 then
 		vim.api.nvim_command('h ' .. cw)
 	elseif vim.api.nvim_eval('coc#rpc#ready()') then
