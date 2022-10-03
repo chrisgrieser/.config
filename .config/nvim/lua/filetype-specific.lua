@@ -39,13 +39,24 @@ autocmd("FileType", {
 --------------------------------------------------------------------------------
 
 -- Build Systems
-keymap("n", "<leader>b", function()
+keymap("n", "<leader>r", function()
 	if not(b.buildCommand)then
 		print("No build command set.")
 	else
-		os.execute(b.buildCommand)
+		if b.buildCommand == "lua" then
+			local parentFolder = fn.expand("%:p:h") ---@diagnostic disable-line: missing-parameter
+			if not(parentFolder) then return end
+			if parentFolder.find("neovim") then
+				cmd[[write<CR>:source %<CR>:echo "Reloaded."<CR>]]
+			else
+				os.execute('open "hammerspoon://hs-reload"')
+			end
+		else
+			os.execute(b.buildCommand)
+		end
 	end
 end)
+
 
 augroup("buildSystem", {})
 autocmd( "FileType", {
@@ -54,13 +65,13 @@ autocmd( "FileType", {
 	group = "buildSystem",
 })
 autocmd( "FileType", {
-	pattern = {"lua"}, -- hammerspoon config
-	callback = function() b.buildCommand = 'open "hammerspoon://hs-reload"' end,
+	pattern = {"typescript"}, -- typescript build
+	callback = function() b.buildCommand = 'npm run build' end,
 	group = "buildSystem",
 })
 autocmd( "FileType", {
-	pattern = {"typescript"}, -- typescript build
-	callback = function() b.buildCommand = 'npm run build' end,
+	pattern = {"lua"}, -- hammerspoon config
+	callback = function() b.buildCommand = 'lua' end,
 	group = "buildSystem",
 })
 

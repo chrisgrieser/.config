@@ -12,7 +12,7 @@ rules:
           basic.simultaneous_threshold_milliseconds: 100
         to:
           - key_code: return_or_enter
-  - description: "⚒️ R-⌘ (tap): go to end of line"
+  - description: "⚒️ R-J (tap): go to end of line"
     manipulators:
       - type: basic
         from:
@@ -38,10 +38,10 @@ rules:
             input_sources:
               - language: ^de$
           - type: frontmost_application_if
-            bundle_identifiers:
-              - ^md\.obsidian$
-              - ^com\.sublimetext\.4$
-              - ^com\.neovide\.neovide$
+            file_paths:
+              - ^/Applications/Obsidian\.app
+              - ^/Applications/Sublime Text\.app
+              - "[Nn]eovide"
         to:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.US$
@@ -64,10 +64,10 @@ rules:
             input_sources:
               - language: ^de$
           - type: frontmost_application_if
-            bundle_identifiers:
-              - ^md\.obsidian$
-              - ^com\.sublimetext\.4$
-              - ^com\.neovide\.neovide$
+            file_paths:
+              - ^/Applications/Obsidian\.app
+              - ^/Applications/Sublime Text\.app
+              - "[Nn]eovide"
         to:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.US$
@@ -90,10 +90,10 @@ rules:
             input_sources:
               - language: ^de$
           - type: frontmost_application_if
-            bundle_identifiers:
-              - ^md\.obsidian$
-              - ^com\.sublimetext\.4$
-              - ^com\.neovide\.neovide$
+            file_paths:
+              - ^/Applications/Obsidian\.app
+              - ^/Applications/Sublime Text\.app
+              - "[Nn]eovide"
         to:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.US$
@@ -113,10 +113,10 @@ rules:
             input_sources:
               - language: ^de$
           - type: frontmost_application_if
-            bundle_identifiers:
-              - ^md\.obsidian$
-              - ^com\.sublimetext\.4$
-              - ^com\.neovide\.neovide$
+            file_paths:
+              - ^/Applications/Obsidian\.app
+              - ^/Applications/Sublime Text\.app
+              - "[Nn]eovide"
         to:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.US$
@@ -161,10 +161,10 @@ rules:
             input_sources:
               - language: ^de$
           - type: frontmost_application_if
-            bundle_identifiers:
-              - ^md\.obsidian$
-              - ^com\.sublimetext\.4$
-              - ^com\.neovide\.neovide$
+            file_paths:
+              - ^/Applications/Obsidian\.app
+              - ^/Applications/Sublime Text\.app
+              - "[Nn]eovide"
         to:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.US$
@@ -194,18 +194,18 @@ rules:
               - language: ^de$
           - type: frontmost_application_if
             file_paths:
-              - alacritty$
-              - ^/System/Applications/Utilities/Terminal.app
               - ^/Applications/Obsidian\.app
               - ^/Applications/Sublime Text\.app
-              - ^/Applications/Neovide\.app
+              - "[Nn]eovide"
+              - alacritty$
+              - ^/System/Applications/Utilities/Terminal.app
               - ^/Applications/Discord\.app
               - ^/Applications/Brave Browser\.app
               - ^/Applications/Hammerspoon\.app
         to:
           - key_code: hyphen
 
-      # ß to [
+      # ß to [ 
       - type: basic
         from:
           key_code: hyphen
@@ -219,7 +219,7 @@ rules:
               - ^/System/Applications/Utilities/Terminal.app
               - ^/Applications/Obsidian\.app
               - ^/Applications/Sublime Text\.app
-              - ^/Applications/Neovide\.app
+              - "[Nn]eovide"
               - ^/Applications/Discord\.app
               - ^/Applications/Brave Browser\.app
               - ^/Applications/Hammerspoon\.app

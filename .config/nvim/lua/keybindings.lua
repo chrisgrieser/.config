@@ -3,9 +3,6 @@ require("utils")
 -- META
 g.mapleader = ','
 
--- [r]eload current config file
-keymap("n", "<leader>r", ':write<CR>:source %<CR>:echo "Reloaded."<CR>')
-
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
 
@@ -206,7 +203,7 @@ keymap("n", "go", function() telescope.find_files() end) -- [o]pen file in paren
 keymap("n", "gO", function() telescope.find_files{cwd='%:p:h:h', prompt_prefix='🆙📂'} end) -- [o]pen file in grandparent-directory
 keymap("n", "gr", function() telescope.oldfiles() end) -- [r]ecent files
 keymap("n", "gb", function() telescope.buffers() end) -- open [b]uffer
-keymap("n", "gF", function() telescope.live_grep() end) -- search in [f]iles
+keymap("n", "gf", function() telescope.live_grep() end) -- search in [f]iles
 
 -- Buffers
 keymap("", "<C-Tab>", "<C-^>") -- for footpedal
