@@ -3,4 +3,15 @@
 cmd[[highlight clear WhiteSpaceBol]]
 
 b.coc_disabled_sources = {'around', 'buffer', 'file'}
-b.coc_additional_keywords = {"-"}
+b.coc_additional_keywords = {"-", "#"}
+
+-- comment marks more useful than symbols for theme development
+keymap("n", "gs", function() telescope.current_buffer_fuzzy_find{
+	default_text='< ',
+	prompt_prefix='🪧',
+	prompt_title = 'Navigation Markers',
+} end, {buffer = true})
+
+
+-- kebab-case variables, #hex color codes, & percentage values
+bo.iskeyword = bo.iskeyword + {"#", "-", "%"}
