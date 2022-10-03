@@ -32,8 +32,7 @@
   "Lua.diagnostics.disable": ["trailing-space"],
   "Lua.workspace.library": [
     "/Users/chrisgrieser/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
-    "/Users/chrisgrieser/.hammerspoon/lua",
-    "/Users/chrisgrieser/.config/nvim/lua"
+    "/Users/chrisgrieser/.hammerspoon/lua"
   ],
 
   "css.lint.vendorPrefix": "ignore",

@@ -156,3 +156,6 @@ matches:
     word: true
   - trigger: int he
     replace: in the
+  - trigger: vllt
+    replace: vielleicht
+    word: true

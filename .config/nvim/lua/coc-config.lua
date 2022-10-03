@@ -1,6 +1,8 @@
 require("utils")
 --------------------------------------------------------------------------------
 
+require("lua-dev").setup({}) -- needs to be loaded before lsp stuff
+
 -- by default in ~.config, where it gets included in the dotfiles git repo,
 -- unecessarily bloating it (badly affecting git sync & dotfiles backups)
 g.coc_data_home = "~/.local/share/nvim/coc/"

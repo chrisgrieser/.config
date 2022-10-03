@@ -67,7 +67,6 @@ g.gitgutter_sign_priority = 9 -- lower to not overwrite when in conflict with ot
 --------------------------------------------------------------------------------
 
 -- STATUS LINE
-
 -- Lua Line
 local function alternateFile()
 	local altFile = api.nvim_exec('echo expand("#:t")', true)
@@ -76,10 +75,16 @@ local function alternateFile()
 	return "# "..altFile
 end
 
+local function currentFile() -- using this function instead of default filename, since this does not show "[No Name]" for Telescope
+	local curFile = api.nvim_exec('echo expand("%:t")', true)
+	if not(curFile) then return "" end
+	return "%% "..curFile -- "%" is lua's escape character and therefore needs to be escaped itself
+end
+
 require('lualine').setup {
 	sections = {
 		lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
-		lualine_b = {{'filename', file_status = false, fmt = function(str) return "%% "..str end}}, -- "%" is lua's escape character and therefore needs to be escaped itself
+		lualine_b = {{ currentFile }},
 		lualine_c = {{ alternateFile }},
 		lualine_x = {'diff'},
 		lualine_y = {{'diagnostics', sources = { 'nvim_diagnostic', 'coc', 'ale' }}},

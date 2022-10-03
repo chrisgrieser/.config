@@ -23,6 +23,7 @@ function PluginList (use)
 	}
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
+	use 'folke/lua-dev.nvim'
 	-- use 'hail2u/vim-css3-syntax' -- not used, since using treesitter for now
 
 	-- File Releated
