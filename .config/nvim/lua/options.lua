@@ -25,6 +25,7 @@ opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
 -- ruler
 opt.textwidth = 80 -- used by `gq` and wrap
 opt.colorcolumn = '+1' -- column next to textwidth option length
+opt.wrap = false
 
 -- files
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
@@ -39,7 +40,6 @@ autocmd({"BufLeave", "FocusLost"}, {
 
 -- editor
 opt.cursorline = true -- by default underline, look changed in appearnce
-opt.wrap = false
 opt.scrolloff = 13
 opt.sidescrolloff = 15
 
@@ -81,8 +81,7 @@ opt.foldmethod = "indent"
 opt.foldenable = false -- do not fold on start
 opt.foldminlines = 2
 
--- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
-augroup("rememberFolds", {})
+augroup("rememberFolds", {}) -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
 autocmd("BufWinLeave", {
 	pattern = "?*",
 	group = "rememberFolds",
@@ -94,11 +93,7 @@ autocmd("BufWinEnter", {
 	command = "silent! loadview"
 })
 
--- title (for Window Managers and espanso)
-opt.title = true
-
 -- Mini-Terminal with `:!`
 -- loads it as interactive session, so that zshrc is loaded https://stackoverflow.com/a/4642855
 opt.shellcmdflag="-ic"
-
 

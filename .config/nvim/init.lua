@@ -19,3 +19,7 @@ else
 	require("cheat-sh-config")
 end
 
+if (fn.has('gui_running') or g.neovide) and not(g.started_by_firenvim) then
+	require("gui-settings")
+end
+

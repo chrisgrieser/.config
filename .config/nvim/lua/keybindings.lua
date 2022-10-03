@@ -126,23 +126,23 @@ local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}"
 for i = 1, #trailingKeys do
 	keymap("n", "<leader>"..trailingKeys[i], "mzA"..trailingKeys[i].."<Esc>`z")
 end
+ -- Remove last character from line
+keymap("n", "X", 'mz$"_x`z')
 
-keymap("n", "X", 'mz$"_x`z') -- Remove last character from line
-
--- Spelling
+-- Spelling (mnemonic: [z]pelling)
 keymap("n", "zl", function() telescope.spell_suggest() end)
 keymap("n", "gz", "]s") -- next misspelling
 keymap("n", "gZ", "[s") -- prev misspelling
 keymap("n", "za", "1z=") -- Autocorrect word under cursor (= select 1st suggestion)
 
--- [O]verride (vim.subversive)
+-- [O]verride Operator (vim.subversive)
 keymap("n", "ö", "<Plug>(SubversiveSubstitute)")
 keymap("n", "öö", "<Plug>(SubversiveSubstituteLine)")
 keymap("n", "Ö", "<Plug>(SubversiveSubstituteToEndOfLine)")
 
--- [R]eplicate (duplicate) down
-keymap("n", "R", ':noautocmd normal!"zyy"zp<CR>') -- current line, ":noautocmd" to disable highlighted yank for this
-keymap("v", "R", '"zy`]"zp') -- selection (best used with Visual Line Mode)
+-- Duplicate Line / Selection (mnemonic: [r]eplicate)
+keymap("n", "R", ':noautocmd normal!mz"zyy"zp`zj<CR>', {silent = true}) -- current line, ":noautocmd" to disable highlighted yank for this
+keymap("v", "R", '"zy`]"zp', {silent = true}) -- selection (best used with Visual Line Mode)
 
 -- Line Movement
 g.move_map_keys = 0 -- disable automatic keymaps of vim.move
@@ -185,17 +185,6 @@ keymap({"n", "v"}, "v", '<Plug>(wildfire-fuel)') -- start visual mode with a sen
 keymap("v", "y", "ygv<Esc>") -- yanking in visual mode keeps position https://stackoverflow.com/a/3806683#comment10788861_3806683
 
 --------------------------------------------------------------------------------
--- EMULATING MAC BINDINGS
--- - requires GUI app like Neovide (called "Logo Key" there)
--- - mostly done for consistency with other apps
-keymap("n", "<D-n>", ":new ") -- cmd+n
-keymap("n", "<D-s>", ":write!<CR>") -- cmd+s
-keymap("n", "<D-a>", "mzggvGy`z") -- cmd+a & cmd+c
-keymap("n", "<D-w>", ":w<CR>:bd<CR>") -- cmd+w
-
-keymap("n", "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
-
---------------------------------------------------------------------------------
 -- FILES AND WINDOWS
 
 -- File switchers
@@ -218,7 +207,7 @@ keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
 keymap("n", "<leader>X", ":Chmod +x<CR>") -- execution permission, requires eunuch.vim
 keymap("n", "<leader><BS>", ":Remove<CR>:bd<CR>") -- undoable deletion of the file, requires eunuch.vim
-keymap("v", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>") -- refactor selection into new file
+keymap("v", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
 
 -- Sorting
 keymap("n", "<leader>ss", ":'<,'>sort<CR>") -- [s]ort [s]election
