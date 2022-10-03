@@ -3,17 +3,16 @@
 [Editor]
 RestoreWindowGeometry = true
 BorderlessWindow = true
-Margin = 3
+Margin = 4
+Transparent = 0.97
+DrawBorderForFloatWindow = false
 
-FontFamily =  "Input" # only external UI
-FontSize = 25
-
-Letterspace = 0
-DisableLigatures = true
+FontFamily =  "Recursive" # only external UI
+FontSize = 1
 
 Macmeta = false
-SmoothScroll = true
+SmoothScroll = false # glitchy
 
 [Cursor]
-SmoothMove = true
-Duration = 30
+SmoothMove = false #glitchy
+Duration = 20

@@ -25,13 +25,13 @@ INFO_WINDOW=0
 case $APP_TO_UPDATE in
 	"Steam")
 		iconsur set "Steam.app" &> /dev/null ;;
-   "zoom.us")
+	"zoom.us")
 		iconsur set "zoom.us.app" &> /dev/null ;;
 
-   "Transmission")
+	"Transmission")
 		cp "$CUSTOM_ICON_FOLDER/Transmission 2.icns" '/Transmission.app/Contents/Resources/Transmission.icns'
 		touch "Transmission.app" ;;
-   "Alfred Preferences")
+	"Alfred Preferences")
 		osascript -e "tell application \"Finder\"
 			open information window of (\"Alfred 5.app/Contents/Preferences/Alfred Preferences.app\" as POSIX file as alias)
 			activate
@@ -67,6 +67,9 @@ case $APP_TO_UPDATE in
 	"Neovide")
 		cp "$CUSTOM_ICON_FOLDER/Neovide alt.icns" 'Neovide.app/Contents/Resources/Neovide.icns'
 		touch "Neovide.app" ;;
+	"goneovim")
+		cp "$CUSTOM_ICON_FOLDER/Neovide alt.icns" 'goneovim.app/Contents/Resources/goneovim.icns'
+		touch "goneovim.app" ;;
 
 	"Microsoft Word")
 		osascript -e "tell application \"Finder\"
