@@ -35,6 +35,9 @@ keymap("n", "<leader>P", ":PackerStatus<CR>")
 keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
 keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR>>', {silent = true})
 
+--------------------------------------------------------------------------------
+-- NAVIGATION
+
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 keymap("", "H", "0^") -- 0^ ensures scrolling to the left on long lines
 keymap("", "L", "$")
@@ -64,11 +67,21 @@ keymap("n", "<Esc>", ":nohl<CR>:echo<CR>", {silent = true}) -- clear highlights 
 keymap("n", "g-", function() telescope.current_buffer_fuzzy_find() end) -- alternative search
 keymap("n", "gs", function() telescope.treesitter() end) -- equivalent to Sublime's goto-symbol
 
+-- Overscroll
+keymap("n", "j", function ()
+	local curLine = fn.line(".")
+	local lastLine = fn.line("$")
+	if curLine == lastLine then
+		cmd[[normal! zt]]
+	else
+		cmd[[normal! j]]
+	end
+end, {silent = true})
+keymap({"n", "v"}, "G", "Gzz")
+
 -- Misc
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("", "ä", "`") -- Goto Mark
-keymap({"n", "v"}, "G", "Gzz") -- when going to bottom of editor
-
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -81,12 +94,10 @@ keymap("n", "P", '"0p') -- paste what was yanked
 keymap("n", "P", '"0p') -- paste what was yanked
 
 -- TEXT OBJECTS
--- for some reason, recursive remap does not seem to work properly, therefore
 -- the text-objects below need "_
 keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<S-Space>", '"_daw')
 keymap("v", "<Space>", '"_c')
-keymap("v", "<S-Space>", '"_d')
 
 keymap("n", "q", '"_ci"') -- change double [q]uote
 keymap("n", "Q", '"_ci\'') -- change single [Q]uote
