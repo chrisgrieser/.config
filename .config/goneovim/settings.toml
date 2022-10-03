@@ -9,7 +9,8 @@ FontFamily =  "Recursive" # only external UI
 FontSize = 1
 Macmeta = false
 SmoothScroll = false # glitchy
-HideMouseWhenTyping=true
+HideMouseWhenTyping = true
+ExtPopupmenu = true
 
 [Cursor]
 SmoothMove = false #glitchy
