@@ -4,11 +4,16 @@ function PluginList (use)
 	-- Themes
 	use 'folke/tokyonight.nvim'
 	use 'rakr/vim-two-firewatch'
+	use 'navarasu/onedark.nvim'
 
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use 'nvim-lualine/lualine.nvim'
 	use 'airblade/vim-gitgutter'
+	-- these do not seem to work for properly... :/
+	-- use 'gko/vim-coloresque'
+	-- use 'ap/vim-css-color'
+	--	use 'norcalli/nvim-colorizer.lua'
 
 	-- -- LSP & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
@@ -18,11 +23,7 @@ function PluginList (use)
 	}
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
-	use 'hail2u/vim-css3-syntax'
-
-	-- these do not seem to work for hsl :/
-	-- use 'gko/vim-coloresque'
-	-- use 'ap/vim-css-color'
+	-- use 'hail2u/vim-css3-syntax' -- not used, since using treesitter for now
 
 	-- File Releated
 	use 'tpope/vim-eunuch' -- file operation utilities

@@ -1,2 +1,2 @@
-b.coc_suggest_blacklist = {"end"}
+b.coc_suggest_blacklist = {"end", "--"}
 
