@@ -1,14 +1,16 @@
 require("utils")
--- https://neovide.dev/configuration.html
 --------------------------------------------------------------------------------
 
-cmd[[colorscheme dracula]]
+-- general
+cmd[[colorscheme tokyonight-moon]]
 opt.title = true -- title (for Window Managers and espanso)
 
+-- goneovim
+opt.titlestring = " " -- completely hide title
+keymap({"n", "v", "i"}, "<C-q>", ":wall!<CR>:quitall!<CR>") -- workaround for goneovim cmd+q not working: https://github.com/akiyosi/goneovim/issues/416
 
 --------------------------------------------------------------------------------
 
--- Mac Keybindings
 keymap({"n", "v", "i"}, "<D-w>", ":w<CR>:bd<CR>") -- cmd+w
 keymap({"n", "v", "i"}, "<D-q>", ":wall!<CR>:quitall!<CR>") -- cmd+q
 
@@ -25,15 +27,17 @@ keymap("i", "<D-Z>", "<Esc>:redo<CR>a")
 keymap("n", "<D-a>", "ggvG") -- cmd+a
 keymap("i", "<D-a>", "<Esc>ggvG")
 keymap("v", "<D-a>", "ggG")
-keymap({"n", "v", "i"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
+keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 cmd[[let g:VM_maps['Find Under'] = '<D-j>']] -- cmd+j for jumping selection
 
+-- cut copy paste
+keymap({"n", "v"}, "<D-v>", "p")
+keymap("i", "<D-v>", "<C-r>*")
 keymap("n", "<D-c>", "yy") -- no selection = line
 keymap("v", "<D-c>", "y")
-
+keymap("i", "<D-v>", "<Esc>pa")
 keymap("n", "<D-x>", "dd") -- no selection = line
 keymap("v", "<D-x>", "d")
-
 
 -- font resizing font size
 -- https://neovide.dev/faq.html#how-can-i-dynamically-change-the-font-size-at-runtime
@@ -59,10 +63,10 @@ ResetGuiFont() -- Call function on startup to set default value
 keymap({'n','v','i'}, '<D-+>', function() ResizeGuiFont(1)  end, {silent = true})
 keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true})
 
-
 --------------------------------------------------------------------------------
 
 -- NEOVIDE 0.10.1
+-- https://neovide.dev/configuration.html
 -- not working: https://github.com/neovide/neovide/issues/1582
 
 -- g.neovide_cursor_animation_length = 0.04

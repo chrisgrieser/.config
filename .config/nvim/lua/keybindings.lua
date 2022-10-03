@@ -73,10 +73,12 @@ keymap({"n", "v"}, "G", "Gzz") -- when going to bottom of editor
 --------------------------------------------------------------------------------
 -- EDITING
 
+-- CLIPBOARD
 -- don't pollute the register
 keymap({"n", "v"}, "x", '"_x')
 keymap({"n", "v"}, "c", '"_c')
 keymap({"n", "v"}, "C", '"_C')
+keymap("n", "P", '"0p') -- paste what was yanked
 
 -- TEXT OBJECTS
 -- for some reason, recursive remap does not seem to work properly, therefore
@@ -157,7 +159,6 @@ keymap("v", "<Left>", "<Plug>MoveBlockLeft")
 keymap({"n", "v"}, "U", "<C-r>") -- undo consistent on one key
 keymap({"n", "v"}, "M", "J") -- [M]erge line up
 keymap({"n", "v"}, "gm", "ddpkJ") -- [m]erge line down
-keymap("n", "P", '"0p') -- paste what was yanked
 keymap({"n", "v"}, "<leader>q" ,"q") -- needs to be remapped, since used as text object
 
 --------------------------------------------------------------------------------

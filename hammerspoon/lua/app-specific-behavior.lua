@@ -3,13 +3,14 @@ require("lua.window-management")
 require("lua.system-and-cron")
 
 --------------------------------------------------------------------------------
--- TRANSPARENT background for Obsidian & Alacritty
+-- TRANSPARENT background for Obsidian & Alacritty & Neovim
 
 function hideAllExcept(appNotToHide)
 	local mainScreen = hs.screen.mainScreen()
 	local wins = hs.window.orderedWindows() -- `orderedWindows()` ignores headless apps like Twitterrific
 	for i = 1, #wins do
 		local app = wins[i]:application()
+		if not(app) then break end
 		local winScreen = wins[i]:screen()
 		if not(app:name() == appNotToHide) and winScreen == mainScreen then -- main screen as condition for two-screen setups
 			app:hide()
@@ -21,12 +22,13 @@ function unHideAll()
 	local wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
 	for i = 1, #wins do
 		local app = wins[i]:application()
+		if not(app) then break end
 		if app:isHidden() then app:unhide() end
 	end
 end
 
 function transBackgroundApp (appName, eventType, appObject)
-	if not(appName == "Obsidian" or appName == "alacritty" or appName == "Alacritty") then return end
+	if not(appName == "goneovim" or appName == "Obsidian" or appName == "alacritty" or appName == "Alacritty") then return end
 
 	local win = appObject:mainWindow()
 	if (eventType == aw.activated or eventType == aw.launching) and (isPseudoMaximized(win) or isMaximized(win)) then
