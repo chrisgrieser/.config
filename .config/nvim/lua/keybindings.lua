@@ -125,8 +125,9 @@ keymap("n", "<S-Tab>", "<<")
 keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
 keymap({"n", "v"}, "^", "=") -- auto-indent
-keymap("n", "^p", "`[v`]=") -- auto-indent last paste
-keymap("n", "^A", "mzgg=G`z") -- auto-indent entire file
+keymap("n", "^^", "^ip") -- auto-indenting paragraph is for more common
+keymap("n", "^p", "`[v`]=") -- last paste
+keymap("n", "^A", "mzgg=G`z") -- entire file
 
 -- toggle word between Capital and lower case
 keymap("n", "ü", "mzlblgueh~`z")

@@ -1,7 +1,6 @@
 require("lua.meta")
 require("lua.utils")
 require("lua.visuals")
-holeCover()
 
 require("lua.window-management")
 require("lua.dark-mode")
@@ -19,4 +18,28 @@ if not (isAtOffice()) then
 	require("lua.hot-corner-action")
 end
 
+
+--------------------------------------------------------------------------------
+-- https://github.com/dbalatero/VimMode.spoon#configuration
+
+VimMode = hs.loadSpoon('VimMode')
+vim = VimMode:new()
+vim:setAlertFont('Input')
+	:bindHotKeys({ enter = {{'cmd'}, 'f19'} }) -- Karabiner: tap left-opt
+	:enableBetaFeature('block_cursor_overlay')
+
+vim:disableForApp('Sublime Text')
+	:disableForApp('alacritty')
+	:disableForApp('Alacritty')
+	:disableForApp('Obsidian')
+	:disableForApp('ShortCat')
+	:disableForApp('espanso')
+	:disableForApp('Marta')
+	:disableForApp('Finder')
+	:disableForApp('Alfred')
+	:disableForApp('Neovide')
+
+--------------------------------------------------------------------------------
+
+holeCover()
 systemStart()
