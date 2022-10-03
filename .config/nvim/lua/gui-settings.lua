@@ -65,17 +65,22 @@ keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true}
 
 --------------------------------------------------------------------------------
 
--- NEOVIDE 0.10.1
+-- NEOVIDE
 -- https://neovide.dev/configuration.html
--- not working: https://github.com/neovide/neovide/issues/1582
 
-g.neovide_cursor_animation_length = 0.04
-g.neovide_cursor_trail_size = 0.7
-g.neovide_scroll_animation_length = 0.1
-g.neovide_transparency = 0.95
+g.neovide_cursor_animation_length = 0.02
+g.neovide_cursor_trail_size = 0.9
+g.neovide_scroll_animation_length = 0.4
+g.neovide_transparency = 0.96
 g.neovide_hide_mouse_when_typing = true
 g.neovide_confirm_quit = false
-g.neovide_remember_window_size = true
+g.neovide_floating_blur_amount_x = 5.0
+g.neovide_floating_blur_amount_y = 5.0
+
+g.neovide_remember_window_size = false
+
 g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
 g.neovide_input_macos_alt_is_meta = false -- makes `opt` usable on mac
+
+-- frameless mode is set via `$NEOVIDE_FRAME` in the .zshenv
 

@@ -60,7 +60,7 @@
 				<dict>
 					<key>COMMAND_STRING</key>
 					<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-nohup goneovim "$1" &amp;&gt; /dev/null &amp;</string>
+neovide "$1"</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
