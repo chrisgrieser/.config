@@ -50,18 +50,18 @@ function pairedActivation(mode)
 end
 
 function vsplit (mode)
-	local noSplitActive
+	local splitActive
 	if SPLIT_RIGHT and SPLIT_LEFT then
-		noSplitActive = false
+		splitActive = true
 	else
-		noSplitActive = true
+		splitActive = false
 	end
 
-	if noSplitActive and (mode == "switch" or mode == "unsplit") then
+	if not(splitActive) and (mode == "switch" or mode == "unsplit") then
 		return
 	end
 
-	if mode == "split" and noSplitActive then
+	if mode == "split" and not(splitActive) then
 		local wins = mainScreenWindows()	-- to not split windows on second screen
 		SPLIT_RIGHT = wins[1] -- save in global variables, so they are not garbage-collected
 		SPLIT_LEFT = wins[2]
