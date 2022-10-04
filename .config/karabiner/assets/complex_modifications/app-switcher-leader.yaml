@@ -232,7 +232,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
-      # [E]ditor: Sublime Text
+      # [E]ditor: Neovim
       - type: basic
         from:
           key_code: e
@@ -241,7 +241,7 @@ rules:
             name: LEADER_ACTIVE
             value: true
         to:
-          - shell_command: open -a 'Sublime Text'
+          - shell_command: open -a 'Neovide'
           - set_variable:
               name: LEADER_ACTIVE
               value: false
@@ -980,3 +980,4 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+

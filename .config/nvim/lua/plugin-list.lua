@@ -11,7 +11,6 @@ function PluginList (use)
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use 'nvim-lualine/lualine.nvim'
 	use 'airblade/vim-gitgutter'
-	use 'cormacrelf/dark-notify'
 	-- these do not seem to work for properly... :/
 	-- use 'gko/vim-coloresque'
 	-- use 'ap/vim-css-color'

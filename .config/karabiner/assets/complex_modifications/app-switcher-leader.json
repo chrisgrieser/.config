@@ -459,7 +459,7 @@
           ],
           "to": [
             {
-              "shell_command": "open -a 'Sublime Text'"
+              "shell_command": "open -a 'Neovide'"
             },
             {
               "set_variable": {
