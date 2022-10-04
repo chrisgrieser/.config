@@ -105,12 +105,12 @@
           "conditions": [
             {
               "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^md\\.obsidian$",
-                "^com\\.sublimetext",
-                "^com\\.neovide\\.neovide$",
-                "^com\\.apple\\.finder$",
-                "^com\\.iconfactory\\.Twitterrific"
+              "file_paths": [
+                "^/Applications/Obsidian\\.app",
+                "^/Applications/Sublime Text\\.app",
+                "[Nn]eovide",
+                "Finder\\.app$",
+                "^/Applications/Twitterrific\\.app"
               ]
             }
           ]
@@ -150,13 +150,12 @@
           "conditions": [
             {
               "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^md\\.obsidian$",
-                "^com\\.sublimetext",
-                "^com\\.neovide\\.neovide$",
-                "^com\\.apple\\.finder$",
-                "^com\\.agiletortoise\\.Drafts-OSX$",
-                "^com\\.runningwithcrayons\\.Alfred-Preferences$"
+              "file_paths": [
+                "^/Applications/Obsidian\\.app",
+                "^/Applications/Sublime Text\\.app",
+                "^/Applications/Drafts\\.app",
+                "^/Applications/Alfred\\.app",
+                "[Nn]eovide"
               ]
             }
           ]
@@ -324,11 +323,10 @@
             },
             {
               "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^com\\.apple\\.Terminal$",
-                "^md\\.obsidian$",
-                "^com\\.sublimetext\\.4$",
-                "^com\\.neovide\\.neovide$"
+              "file_paths": [
+                "^/Applications/Obsidian\\.app",
+                "^/Applications/Sublime Text\\.app",
+                "[Nn]eovide"
               ]
             }
           ]
@@ -357,9 +355,9 @@
           "conditions": [
             {
               "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^com\\.sublimetext\\.4$",
-                "^com\\.neovide\\.neovide$"
+              "file_paths": [
+                "^/Applications/Sublime Text\\.app",
+                "[Nn]eovide"
               ]
             }
           ]
@@ -388,10 +386,10 @@
             },
             {
               "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^md\\.obsidian$",
-                "^com\\.sublimetext\\.4$",
-                "^com\\.neovide\\.neovide$"
+              "file_paths": [
+                "^/Applications/Obsidian\\.app",
+                "^/Applications/Sublime Text\\.app",
+                "[Nn]eovide"
               ]
             }
           ]

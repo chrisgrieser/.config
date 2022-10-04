@@ -38,28 +38,42 @@ autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
--- Build System
+-- Build Systems
 keymap("n", "<leader>r", function()
-
-	if bo.filetype == "lua" then
-		local parentFolder = fn.expand("%:p:h") ---@diagnostic disable-line: missing-parameter
-		if not(parentFolder) then return end
-		if parentFolder:find("nvim") then
-			cmd[[write | source % | echo "Reloaded."]]
-		else
-			os.execute('open "hammerspoon://hs-reload"')
-		end
-
-	elseif bo.filetype == "yaml" then
-		os.execute[[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"']]
-
-	elseif bo.filetype == "typescript" then
-		os.execute[[npm run build]]
-
+	if not(b.buildCommand)then
+		print("No build command set.")
 	else
-		print("No build system set.")
+		if b.buildCommand == "lua" then
+			local parentFolder = fn.expand("%:p:h") ---@diagnostic disable-line: missing-parameter
+			if not(parentFolder) then return end
+			if parentFolder:find("nvim") then
+				cmd[[write | source % | echo "Reloaded."]]
+			else
+				os.execute('open "hammerspoon://hs-reload"')
+			end
+		else
+			os.execute(b.buildCommand)
+		end
 	end
 end)
+
+
+augroup("buildSystem", {})
+autocmd( "FileType", {
+	pattern = {"yaml"}, -- karabiner config
+	callback = function() b.buildCommand = 'osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"' end,
+	group = "buildSystem",
+})
+autocmd( "FileType", {
+	pattern = {"typescript"}, -- typescript build
+	callback = function() b.buildCommand = 'npm run build' end,
+	group = "buildSystem",
+})
+autocmd( "FileType", {
+	pattern = {"lua"}, -- hammerspoon config
+	callback = function() b.buildCommand = 'lua' end,
+	group = "buildSystem",
+})
 
 --------------------------------------------------------------------------------
 

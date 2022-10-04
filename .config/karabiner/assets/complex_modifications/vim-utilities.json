@@ -29,7 +29,7 @@
       ]
     },
     {
-      "description": "⚒️ R-⌘ (tap): go to end of line",
+      "description": "⚒️ R-J (tap): go to end of line",
       "manipulators": [
         {
           "type": "basic",
@@ -79,10 +79,10 @@
             },
             {
               "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^md\\.obsidian$",
-                "^com\\.sublimetext\\.4$",
-                "^com\\.neovide\\.neovide$"
+              "file_paths": [
+                "^/Applications/Obsidian\\.app",
+                "^/Applications/Sublime Text\\.app",
+                "[Nn]eovide"
               ]
             }
           ],
@@ -132,10 +132,10 @@
             },
             {
               "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^md\\.obsidian$",
-                "^com\\.sublimetext\\.4$",
-                "^com\\.neovide\\.neovide$"
+              "file_paths": [
+                "^/Applications/Obsidian\\.app",
+                "^/Applications/Sublime Text\\.app",
+                "[Nn]eovide"
               ]
             }
           ],
@@ -185,10 +185,10 @@
             },
             {
               "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^md\\.obsidian$",
-                "^com\\.sublimetext\\.4$",
-                "^com\\.neovide\\.neovide$"
+              "file_paths": [
+                "^/Applications/Obsidian\\.app",
+                "^/Applications/Sublime Text\\.app",
+                "[Nn]eovide"
               ]
             }
           ],
@@ -233,10 +233,10 @@
             },
             {
               "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^md\\.obsidian$",
-                "^com\\.sublimetext\\.4$",
-                "^com\\.neovide\\.neovide$"
+              "file_paths": [
+                "^/Applications/Obsidian\\.app",
+                "^/Applications/Sublime Text\\.app",
+                "[Nn]eovide"
               ]
             }
           ],
@@ -331,10 +331,10 @@
             },
             {
               "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^md\\.obsidian$",
-                "^com\\.sublimetext\\.4$",
-                "^com\\.neovide\\.neovide$"
+              "file_paths": [
+                "^/Applications/Obsidian\\.app",
+                "^/Applications/Sublime Text\\.app",
+                "[Nn]eovide"
               ]
             }
           ],
@@ -395,11 +395,11 @@
             {
               "type": "frontmost_application_if",
               "file_paths": [
-                "alacritty$",
-                "^/System/Applications/Utilities/Terminal.app",
                 "^/Applications/Obsidian\\.app",
                 "^/Applications/Sublime Text\\.app",
-                "^/Applications/Neovide\\.app",
+                "[Nn]eovide",
+                "alacritty$",
+                "^/System/Applications/Utilities/Terminal.app",
                 "^/Applications/Discord\\.app",
                 "^/Applications/Brave Browser\\.app",
                 "^/Applications/Hammerspoon\\.app"
@@ -433,7 +433,7 @@
                 "^/System/Applications/Utilities/Terminal.app",
                 "^/Applications/Obsidian\\.app",
                 "^/Applications/Sublime Text\\.app",
-                "^/Applications/Neovide\\.app",
+                "[Nn]eovide",
                 "^/Applications/Discord\\.app",
                 "^/Applications/Brave Browser\\.app",
                 "^/Applications/Hammerspoon\\.app"
