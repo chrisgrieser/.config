@@ -47,15 +47,15 @@ keymap("n", "<leader>r", function()
 		local parentFolder = fn.expand("%:p:h") ---@diagnostic disable-line: missing-parameter
 		if not(parentFolder) then return end
 		if parentFolder:find("nvim") then
-			cmd[[write | source % | echo "Reloaded neovim config."]]
+			cmd[[write | source % | echo "Neovim config reloaded."]]
 		else
 			os.execute('open "hammerspoon://hs-reload"')
-			print("Reloading Hammerspoon config.")
+			print("Reloading Hammerspoon config…")
 		end
 
 	elseif bo.filetype == "yaml" then
 		os.execute[[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
-		print("Compiling Karabiner config.")
+		print("Compiling Karabiner config…")
 
 	elseif bo.filetype == "typescript" then
 		os.execute[[npm run build]]
