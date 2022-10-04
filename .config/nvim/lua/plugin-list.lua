@@ -11,10 +11,11 @@ function PluginList (use)
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use 'nvim-lualine/lualine.nvim'
 	use 'airblade/vim-gitgutter'
+	use 'cormacrelf/dark-notify'
 	-- these do not seem to work for properly... :/
 	-- use 'gko/vim-coloresque'
 	-- use 'ap/vim-css-color'
-	--	use 'norcalli/nvim-colorizer.lua'
+	-- use 'norcalli/nvim-colorizer.lua'
 
 	-- LSP & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
@@ -24,7 +25,6 @@ function PluginList (use)
 	}
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
-	-- use 'hail2u/vim-css3-syntax' -- not used, since using treesitter for now
 
 	-- File Releated
 	use 'tpope/vim-eunuch' -- file operation utilities
@@ -51,7 +51,8 @@ function PluginList (use)
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
 	use 'mattn/emmet-vim' -- Emmet for CSS
 	use 'gelguy/wilder.nvim' -- suggestions for command line mode (: and /)
-	use 'rafamadriz/friendly-snippets' -- collection of common snippets
+	use {'rafamadriz/friendly-snippets', -- collection of common snippets
+		requires = 'neoclide/coc.nvim' } -- coc.snippet is the actual requirement
 
 	-- Misc
 	use 'mzlogin/vim-markdown-toc'
