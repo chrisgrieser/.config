@@ -5,6 +5,14 @@ require("utils")
 darkTheme = "tokyonight-moon"
 lightTheme = "tokyonight-day"
 
+-- set theme on start properly
+local isDarkMode = fn.system([[osascript -e 'tell application "System Events" to return dark mode of appearance preferences']])
+if isDarkMode:find("true") then -- using :find() since shorter than trimming whitespace in lua...
+	cmd("colorscheme "..darkTheme)
+else
+	cmd("colorscheme "..lightTheme)
+end
+
 -- toggle theme with OS
 local auto_dark_mode = require('auto-dark-mode')
 auto_dark_mode.setup({

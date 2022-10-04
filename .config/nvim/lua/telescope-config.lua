@@ -11,7 +11,13 @@ require("telescope").setup {
 				["<Esc>"] = require('telescope.actions').close, -- close w/ one esc
 				["?"] = "which_key",
 			},
-		}
+		},
+		layout_strategy = 'vertical',
+      layout_config = {
+			height = 0.9,
+			width = 0.8,
+			preview_cutoff = 30,
+		},
 	},
 	pickers = {
 		keymaps = { prompt_prefix='N' },
