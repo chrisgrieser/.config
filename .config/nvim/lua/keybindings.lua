@@ -6,11 +6,8 @@ g.mapleader = ','
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
 
--- search normal mode mappings
+-- search keymaps
 keymap("n", "?", function() telescope.keymaps() end)
-
--- search vim docs
-keymap("n", "<leader>?", function() telescope.help_tags() end)
 
 -- Theme Picker
 keymap("n", "<leader>T", function() telescope.colorscheme() end)
@@ -30,7 +27,8 @@ keymap("n", "<leader>P", ":PackerStatus<CR>")
 
 -- Utils
 keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
-keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR>>', {silent = true})
+keymap("n", "zz", ":! acp ")
+-- keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR>>', {silent = true})
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
