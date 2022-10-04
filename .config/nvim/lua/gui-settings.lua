@@ -1,8 +1,15 @@
 require("utils")
 --------------------------------------------------------------------------------
 
--- general
-cmd[[colorscheme tokyonight-moon]]
+-- THEME
+local lightTheme = "tokyonight-storm"
+local darkTheme = "tokyonight-moon"
+local isDarkMode = fn.system([[osascript -e 'tell application "System Events" to return dark mode of appearance preferences']])
+if isDarkMode:find("true") then -- using :find() to avoid dealing with pesky whitespace
+	cmd("colorscheme "..darkTheme)
+else
+	cmd("colorscheme "..lightTheme)
+end
 
 --------------------------------------------------------------------------------
 
