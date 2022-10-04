@@ -41,7 +41,7 @@ autocmd({"BufLeave", "BufWinLeave", "FocusLost"}, {
 
 -- editor
 opt.cursorline = true -- by default underline, look changed in appearnce
-opt.scrolloff = 10
+opt.scrolloff = 12
 opt.sidescrolloff = 15
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's

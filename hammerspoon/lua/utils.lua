@@ -52,7 +52,11 @@ function isAtOffice()
 end
 
 function notify (text)
-	text = trim(text)
+	if text then
+		text = trim(text) 
+	else
+		text = "empty string"
+	end
 	hs.notify.new({title="Hammerspoon", informativeText=text}):send()
 	print("notify: "..text) -- for the console
 end

@@ -23,6 +23,8 @@
 		</array>
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<array/>
+		<key>5B39FA3E-033D-4E8E-A929-20601496C43E</key>
+		<array/>
 		<key>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</key>
 		<array>
 			<dict>
@@ -75,6 +77,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>EADA65E7-C43A-42E6-9D82-00786F1BC5B9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5B39FA3E-033D-4E8E-A929-20601496C43E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -86,55 +101,6 @@
 	<string>Hammerspoon Utilities</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>tell application "System Events" to set frontAppProcess to first application process whose frontmost is true# Tell the *process* to count its windows and return its front window's name.tell frontAppProcess	if (count of windows) &gt; 0 then		set window_name to name of front window	end ifend tell
-
-set the clipboard to window_name
-
-# direct return for displaying in Alfred
-window_name</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-window-title.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>win</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Display Window Properties</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -163,31 +129,6 @@ window_name</string>
 			<string>16D2C4F3-A099-4D2C-A0C8-03E587C8968A</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># using full path makes this work even if `subl` hasn't been added to PATH
-
-"/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "$*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>F6DAF10C-E8B5-49CA-B86B-DE30E7C70191</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -241,6 +182,101 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>win</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Display Window Properties</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>tell application "System Events" to set frontAppProcess to first application process whose frontmost is true# Tell the *process* to count its windows and return its front window's name.tell frontAppProcess	if (count of windows) &gt; 0 then		set window_name to name of front window	end ifend tell
+
+set the clipboard to window_name
+
+# direct return for displaying in Alfred
+window_name</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-window-title.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># using full path makes this work even if `subl` hasn't been added to PATH
+
+"/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F6DAF10C-E8B5-49CA-B86B-DE30E7C70191</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>hs</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗️Restart Hammerspoon</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E8066503-E298-4023-9E9F-3FBA20E03748</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -264,21 +300,50 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>hs</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>❗️Restart Hammerspoon</string>
-				<key>withspace</key>
+				<key>concurrently</key>
 				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo "$*" | sed -E 's/\/Application\/(.*).app/\1/' | sed 
+
+open -g "hammerspoon://split?app=$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>pass-app-to-hammerspoon.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>E8066503-E298-4023-9E9F-3FBA20E03748</string>
+			<string>5B39FA3E-033D-4E8E-A929-20601496C43E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>split</string>
+				<key>outputprefix</key>
+				<string>Split with: </string>
+				<key>outputtype</key>
+				<integer>1</integer>
+				<key>subtext</key>
+				<string>with current Window</string>
+				<key>title</key>
+				<string>Window to Split</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.runningappsfilter</string>
+			<key>uid</key>
+			<string>EADA65E7-C43A-42E6-9D82-00786F1BC5B9</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -367,6 +432,15 @@ window_name</string>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
+		<key>5B39FA3E-033D-4E8E-A929-20601496C43E</key>
+		<dict>
+			<key>note</key>
+			<string>pass app name to Hammerspoon for Splitting</string>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>190</real>
+		</dict>
 		<key>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</key>
 		<dict>
 			<key>colorindex</key>
@@ -406,6 +480,13 @@ window_name</string>
 			<real>515</real>
 			<key>ypos</key>
 			<real>290</real>
+		</dict>
+		<key>EADA65E7-C43A-42E6-9D82-00786F1BC5B9</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>190</real>
 		</dict>
 		<key>F6DAF10C-E8B5-49CA-B86B-DE30E7C70191</key>
 		<dict>

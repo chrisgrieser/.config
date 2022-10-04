@@ -49,7 +49,7 @@ keymap("n", "<leader>r", function()
 		if parentFolder:find("nvim") then
 			cmd[[write | source % | echo "Neovim config reloaded."]]
 		else
-			os.execute('open "hammerspoon://hs-reload"')
+			os.execute('open -g "hammerspoon://hs-reload"')
 			print("Reloading Hammerspoon config…")
 		end
 

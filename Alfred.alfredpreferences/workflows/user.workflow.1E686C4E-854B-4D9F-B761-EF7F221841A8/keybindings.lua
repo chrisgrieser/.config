@@ -214,7 +214,7 @@ keymap("n", "<C-p>", ':let @+=@%<CR>:echo "Copied:"expand("%:p")<CR>') -- copy p
 keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
 keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
-keymap("n", "<leader>X", ':Chmod +x<CR>') -- execution permission, requires eunuch.vim
+keymap("n", "<leader>X", ":Chmod +x | echo<CR>") -- execution permission, requires eunuch.vim
 keymap("n", "<leader><BS>", ":Remove<CR>:bd<CR>") -- undoable deletion of the file, requires eunuch.vim
 keymap("v", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
 
