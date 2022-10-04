@@ -25,9 +25,9 @@ keymap("v", "<D-a>", "ggG")
 keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 cmd[[let g:VM_maps['Find Under'] = '<D-j>']] -- cmd+j for jumping selection
 
--- cut copy paste
+-- cut, copy & paste
 keymap({"n", "v"}, "<D-v>", "p")
-keymap("i", "<D-v>", "<C-r>*")
+keymap({"i", "c"}, "<D-v>", "<C-r>*")
 keymap("n", "<D-c>", "yy") -- no selection = line
 keymap("v", "<D-c>", "y")
 keymap("i", "<D-v>", "<Esc>pa")
@@ -73,7 +73,7 @@ g.neovide_cursor_unfocused_outline_width = 0.3
 
 g.neovide_cursor_vfx_mode = "railgun"
 g.neovide_cursor_vfx_particle_lifetime=1.3
-g.neovide_cursor_vfx_particle_density=17.0
+g.neovide_cursor_vfx_particle_density=24.0
 g.neovide_cursor_vfx_particle_speed=17.0
 g.neovide_cursor_vfx_particle_phase=1.3 -- only railgun
 g.neovide_cursor_vfx_particle_curl=1.3 -- only railgun
