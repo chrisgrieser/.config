@@ -5,24 +5,26 @@ require("utils")
 darkTheme = "tokyonight-moon"
 lightTheme = "tokyonight-day"
 
+local function light()
+	cmd("colorscheme "..lightTheme)
+	api.nvim_set_option('background', 'light')
+end
+local function dark()
+	cmd("colorscheme "..lightTheme)
+	api.nvim_set_option('background', 'dark')
+end
+
 -- set theme on start properly
 local isDarkMode = fn.system([[osascript -e 'tell application "System Events" to return dark mode of appearance preferences']])
-if isDarkMode:find("true") then -- using :find() since shorter than trimming whitespace in lua...
-	cmd("colorscheme "..darkTheme)
-else
-	cmd("colorscheme "..lightTheme)
-end
+if isDarkMode:find("true") then dark() -- using :find() since shorter than trimming whitespace in lua...
+else light() end
 
 -- toggle theme with OS
 local auto_dark_mode = require('auto-dark-mode')
 auto_dark_mode.setup({
 	update_interval = 3000,
-	set_dark_mode = function()
-		cmd('colorscheme '..darkTheme)
-	end,
-	set_light_mode = function()
-		cmd('colorscheme '..lightTheme)
-	end,
+	set_dark_mode = dark,
+	set_light_mode = light,
 })
 auto_dark_mode.init()
 
@@ -86,7 +88,7 @@ keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true}
 g.neovide_cursor_animation_length = 0.015
 g.neovide_cursor_trail_size = 0.9
 g.neovide_scroll_animation_length = 0.4
-g.neovide_transparency = 0.96
+g.neovide_transparency = 0.97
 g.neovide_floating_blur_amount_x = 5.0
 g.neovide_floating_blur_amount_y = 5.0
 g.neovide_cursor_unfocused_outline_width = 0.3
