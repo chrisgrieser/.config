@@ -2,24 +2,12 @@ require("lua.utils")
 require("lua.window-management")
 --------------------------------------------------------------------------------
 
--- gets the Windows on the main screen, in order of the stack
-function mainScreenWindows()
-	local wins = hs.window.orderedWindows()
-	local out = {}
-	local j = 1
-	local mainScreen
-	-- safety net, since sometimes the projector is still regarded as mainscreen even though disconnected
-	if isIMacAtHome() then mainScreen = iMacDisplay
-	else mainScreen = hs.screen.mainScreen() end
-
-	for i = 1, #wins do
-		if wins[i]:screen() == mainScreen and wins[i]:isStandard() and wins[i]:isVisible() then
-			out[j] = wins[i]
-			j = j+1
-		end
-	end
-	return out
-end
+-- to trigger window splits via Alfred
+hs.urlevent.bind("split", function (_, params)
+	local appName = params.app
+	local secondWinForSplit = hs.application(appName):mainWindow()
+	vsplit("split", secondWinForSplit)
+end)
 
 -- if one of the two is activated, also activate the other
 -- unsplit if one of the two windows has been closed
@@ -49,7 +37,7 @@ function pairedActivation(mode)
 	end
 end
 
-function vsplit (mode)
+function vsplit (mode, secondWin)
 	local splitActive
 	if SPLIT_RIGHT and SPLIT_LEFT then
 		splitActive = true
@@ -57,17 +45,16 @@ function vsplit (mode)
 		splitActive = false
 	end
 
-	if not(splitActive) and (mode == "switch" or mode == "unsplit") then
+	if not(splitActive) and (mode == "change-split" or mode == "unsplit") then
 		return
 	end
 
 	if mode == "split" and not(splitActive) then
-		local wins = mainScreenWindows()	-- to not split windows on second screen
-		SPLIT_RIGHT = wins[1] -- save in global variables, so they are not garbage-collected
-		SPLIT_LEFT = wins[2]
+		SPLIT_LEFT = hs.window.focusedWindow()
+		SPLIT_RIGHT = secondWin
 	end
 
-	if (SPLIT_RIGHT:frame().x > SPLIT_LEFT:frame().x) then -- ensure that WIN_RIGHT is really the right
+	if mode == "change-split" and (SPLIT_RIGHT:frame().x > SPLIT_LEFT:frame().x) then -- ensure that WIN_RIGHT is really the right
 		local temp = SPLIT_RIGHT
 		SPLIT_RIGHT = SPLIT_LEFT
 		SPLIT_LEFT = temp
@@ -77,26 +64,15 @@ function vsplit (mode)
 
 	if mode == "split" then
 		pairedActivation("start")
-		local max = hs.screen.mainScreen():frame()
-		if (f1.w ~= f2.w or f1.w > 0.7*max.w) then
-			f1 = hs.layout.left50
-			f2 = hs.layout.right50
-		else
-			f1 = hs.layout.left70
-			f2 = hs.layout.right30
-		end
+		f1 = hs.layout.left50
+		f2 = hs.layout.right50
 	elseif mode == "unsplit" then
 		f1 = baseLayout
 		f2 = baseLayout
 		pairedActivation("stop")
-	elseif mode == "switch" then
-		if (f1.w == f2.w) then
-			f1 = hs.layout.right50
-			f2 = hs.layout.left50
-		else
-			f1 = hs.layout.right30
-			f2 = hs.layout.left70
-		end
+	elseif mode == "change-split" then
+		f1 = hs.layout.right50
+		f2 = hs.layout.left50
 	end
 
 	moveResize(SPLIT_RIGHT, f1)
@@ -126,7 +102,7 @@ end
 
 --------------------------------------------------------------------------------
 -- HOTKEYS
-hotkey(hyper, "X", function() vsplit("switch") end)
+hotkey(hyper, "X", function() vsplit("change-split") end)
 hotkey(hyper, "C", function() vsplit("unsplit") end)
-hotkey(hyper, "V", function() vsplit("split") end)
+
 

@@ -9,13 +9,12 @@ hs.window.animationDuration = 0
 
 --------------------------------------------------------------------------------
 
--- `hammerspoon://hs-reload` for reloading via Sublime Build System
+-- `hammerspoon://hs-reload` for reloading via Build System
 hs.urlevent.bind("hs-reload", function()
 	if SPLIT_RIGHT then vsplit("unsplit") end ---@diagnostic disable-line: undefined-global
 	if hs.console.hswindow() then hs.console.hswindow():close() end -- close console
 	hs.execute("touch ./is-reloading")
 	hs.reload()
-	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
 --------------------------------------------------------------------------------
@@ -24,10 +23,10 @@ end)
 hs.console.titleVisibility("hidden")
 hs.console.toolbar(nil)
 
-hs.console.consoleFont({name = "JetBrainsMonoNL Nerd Font", size = 18})
+hs.console.consoleFont({name = "JetBrainsMonoNL Nerd Font", size = 19})
 
 hs.console.darkMode(false)
-hs.console.outputBackgroundColor{ white = 0.92 }
+hs.console.outputBackgroundColor{ white = 0.9 }
 
 -- copy last command to clipboard
 -- `hammerspoon://copy-last-command` for Karabiner Elements (⌘⇧C)
@@ -41,3 +40,4 @@ end)
 
 -- `hammerspoon://clear-console` for Karabiner Elements (⌘K)
 hs.urlevent.bind("clear-console",hs.console.clearConsole)
+
