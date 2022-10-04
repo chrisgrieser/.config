@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>62F7FD14-3DF1-4FBC-9C3B-B99132F28919</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6DA05A81-0D56-4CD6-A247-5D15F1F24D8F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>6EBCF2CC-4936-48C4-BCD8-42A7B39BDEDC</key>
 		<array>
 			<dict>
@@ -188,6 +201,42 @@
 			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
 			<string>09E95958-33BA-4403-A120-ED77024AAB7E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>:vim</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>📂 Neovim Swap Files</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>62F7FD14-3DF1-4FBC-9C3B-B99132F28919</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/.local/state/nvim/swap</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>6DA05A81-0D56-4CD6-A247-5D15F1F24D8F</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -369,6 +418,13 @@
 			<key>ypos</key>
 			<real>100</real>
 		</dict>
+		<key>62F7FD14-3DF1-4FBC-9C3B-B99132F28919</key>
+		<dict>
+			<key>xpos</key>
+			<real>415</real>
+			<key>ypos</key>
+			<real>225</real>
+		</dict>
 		<key>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</key>
 		<dict>
 			<key>colorindex</key>
@@ -377,6 +433,13 @@
 			<real>215</real>
 			<key>ypos</key>
 			<real>395</real>
+		</dict>
+		<key>6DA05A81-0D56-4CD6-A247-5D15F1F24D8F</key>
+		<dict>
+			<key>xpos</key>
+			<real>580</real>
+			<key>ypos</key>
+			<real>225</real>
 		</dict>
 		<key>6EBCF2CC-4936-48C4-BCD8-42A7B39BDEDC</key>
 		<dict>

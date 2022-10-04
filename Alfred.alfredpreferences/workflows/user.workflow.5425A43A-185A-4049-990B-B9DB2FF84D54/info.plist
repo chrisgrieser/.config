@@ -650,7 +650,11 @@ zsh build.sh "$*"</string>
 sf_path="${vault_path/#\~/$HOME}""/.obsidian/themes/Shimmering Focus/theme.css"
 lineNo="$*"
 
-open "$sf_path:$lineNo"</string>
+open "$sf_path"
+
+sleep 0.3
+osascript -e 'tell application "System Events" to keystroke ":'$lineNo'"'
+osascript -e 'tell application "System Events" to keystroke return'</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
