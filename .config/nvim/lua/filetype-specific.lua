@@ -8,7 +8,7 @@ require("utils")
 -- Markdown
 keymap("n", "<CR>", 'A') -- So double return keeps markdown list syntax
 keymap("n", "<leader>x", 'mz^lllrx`z') -- check markdown tasks
-keymap("n", "<leader>1", ":GenTocGFM<CR>") --markdown toc
+keymap("n", "<leader>1", ":GenTocGFM<CR>") --markdown toc (markdown-toc plugin)
 keymap("n", "<leader>-", "mzI- <Esc>`z") -- Add bullet point
 keymap("n", "<leader>>", "mzI> <Esc>`z") -- Turn into blockquote
 

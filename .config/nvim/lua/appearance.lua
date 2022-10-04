@@ -18,7 +18,7 @@ cmd[[highlight CursorLine term=none cterm=none guibg=black ctermbg=black]]
 cmd[[highlight CocHighlightText term=underline cterm=underline]]
 
 -- TreeSitter Context Line
-cmd[[highlight TreesitterContext ctermbg=black guibg=black]]
+cmd[[highlight TreesitterContext ctermbg=black, guibg=DarkGrey]]
 
 -- Indentation Lines
 cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey guifg=DarkGrey]]
@@ -28,10 +28,6 @@ cmd[[highlight Comment ctermfg=grey]]
 
 -- Popupmenus
 cmd[[highlight Pmenu ctermbg=DarkGrey]]
-
--- if not(fn.has('gui_running') or g.neovide) then
--- 	cmd[[highlight clear Pmenu]]
--- end
 
 --------------------------------------------------------------------------------
 -- custom highlights
@@ -45,7 +41,7 @@ cmd[[highlight def link myAnnotations Todo]] -- use same styling as "TODO"
 cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE') ]]
 
 -- Underline URLs
-cmd[[highlight urls cterm=underline]]
+cmd[[highlight urls cterm=underline, gui=underline]]
 cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-]*') ]]
 
 --------------------------------------------------------------------------------

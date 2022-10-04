@@ -7,7 +7,6 @@ g.coc_data_home = "~/.local/share/nvim/coc/"
 
 -- https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#implemented-coc-extensions
 g.coc_global_extensions = {
-	"coc-sumneko-lua", -- better than coc-lua, since it includes folke/lua-dev.nvim
 	"coc-css",
 	"coc-sh",
 	"coc-yaml",
@@ -15,6 +14,7 @@ g.coc_global_extensions = {
 	"coc-json",
 	"coc-emoji",
 	"coc-snippets",
+	"coc-sumneko-lua", -- better than coc-lua, since it includes folke/lua-dev.nvim
 }
 
 --------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ local opts = {silent = true, expr = true, noremap = true, replace_keycodes = fal
 
 function _G.check_back_space()
 	local col = vim.fn.col('.') - 1
-	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
+	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ---@diagnostic disable-line: undefined-field
 end
 
 keymap("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
@@ -79,14 +79,6 @@ g.coc_snippet_next = '<Tab>'
 keymap("i", "<C-j>", "<Plug>(coc-snippets-expand-jump)")
 
 --------------------------------------------------------------------------------
-
--- Function Text Object -- could also be done with Treesitter later
--- NOTE: Requires 'textDocument.documentSymbol' support from the language server
-local opts = {silent = true, nowait = true} ---@diagnostic disable-line: redefined-local
-keymap("x", "if", "<Plug>(coc-funcobj-i)", opts)
-keymap("o", "if", "<Plug>(coc-funcobj-i)", opts)
-keymap("x", "af", "<Plug>(coc-funcobj-a)", opts)
-keymap("o", "af", "<Plug>(coc-funcobj-a)", opts)
 
 -- Remap <C-f> and <C-b> for scroll float windows/popups.
 local opts = {silent = true, nowait = true, expr = true} ---@diagnostic disable-line: redefined-local
