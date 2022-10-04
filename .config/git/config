@@ -10,7 +10,7 @@
 	interactive = auto
 	ui = true
 [core]
-	editor = nvim
+	editor = neovide
 	excludesfile = /Users/chrisgrieser/.config/git/gitignore_global
 	autocrlf = input
 [pager]
@@ -21,3 +21,4 @@
 	showUntrackedFiles = all
 [advice]
 	detachedHead = false
+
