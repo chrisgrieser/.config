@@ -9,8 +9,9 @@ function PluginList (use)
 
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
-	use 'nvim-lualine/lualine.nvim'
-	use 'airblade/vim-gitgutter'
+	use 'nvim-lualine/lualine.nvim' -- status bar
+	use 'airblade/vim-gitgutter' -- changes in gutter
+	use 'f-person/auto-dark-mode.nvim' -- auto-toggle themes with OS dark/light mode
 	-- these do not seem to work for properly... :/
 	-- use 'gko/vim-coloresque'
 	-- use 'ap/vim-css-color'
