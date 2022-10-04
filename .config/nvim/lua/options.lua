@@ -32,10 +32,9 @@ opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
 opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
 opt.autochdir = true -- always current directory
-autocmd({"BufWinEnter"}, { -- since autochdir is not always reliable...
+autocmd({"BufWinEnter"}, { -- since autochdir is not always reliable...?
 	command = "cd %:p:h"
 })
-
 
 -- auto-save
 autocmd({"BufWinLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
