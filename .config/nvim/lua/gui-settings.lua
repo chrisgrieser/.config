@@ -73,7 +73,7 @@ g.neovide_cursor_unfocused_outline_width = 0.3
 
 g.neovide_cursor_vfx_mode = "railgun"
 g.neovide_cursor_vfx_particle_lifetime=1.3
-g.neovide_cursor_vfx_particle_density=31.0
+g.neovide_cursor_vfx_particle_density=20.0
 g.neovide_cursor_vfx_particle_speed=17.0
 g.neovide_cursor_vfx_particle_phase=1.3 -- only railgun
 g.neovide_cursor_vfx_particle_curl=1.3 -- only railgun
