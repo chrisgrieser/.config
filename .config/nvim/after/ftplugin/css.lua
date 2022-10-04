@@ -16,6 +16,7 @@ keymap("n", "gs", function() telescope.current_buffer_fuzzy_find{
 -- kebab-case variables, #hex color codes, & percentage values
 cmd[[setlocal iskeyword+=#]] -- for whatever reason, appending to "bo.iskeyword" does not work...
 cmd[[setlocal iskeyword+=%]]
+cmd[[setlocal iskeyword+=-]]
 
 
 -- INFO: fix syntax highlighting with ':syntax sync fromstart'
