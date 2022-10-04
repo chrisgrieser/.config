@@ -167,7 +167,7 @@ function ex () {
 			*.tgz)       tar -xzf "$1"   ;;
 			*.zip)       unzip "$1"      ;;
 			*.Z)         uncompress "$1" ;;
-			*) echo "'$1' cannot be extracted via ex()" ;;
+			*) echo "'$1' cannot be extracted via ´ex´" ;;
 		esac
 	else
 		echo "'$1' is not a valid file"

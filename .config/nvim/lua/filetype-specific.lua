@@ -14,6 +14,7 @@ keymap("n", "<leader>>", "mzI> <Esc>`z") -- Turn into blockquote
 
 -- CSS / JSON / YAML
 keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key
+-- CSS
 keymap("n", "<leader>d", 'mzlEF.yEEp`z') -- [d]ouble class under cursor
 keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>') -- [D]uplicate Class under cursor
 
@@ -118,9 +119,3 @@ autocmd( "FileType", {
 	pattern = {"css"},
 	callback = function() b.hrComment = "/* ───────────────────────────────────────────────── */\n/* << XXX\n──────────────────────────────────────────────────── */" end
 })
-
-
-
-
-
-

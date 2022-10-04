@@ -139,14 +139,24 @@ anyAppActivationWatcher:start()
 
 -- NEOVIM
 -- pseudomaximized window
-wf_neovim = wf.new("Neovide")
-	:subscribe(wf.windowCreated, function ()
-		if isAtOffice() or isProjector() then
-			moveResizeCurWin("maximized")
-		else
-			moveResizeCurWin("pseudo-maximized")
-		end
-	end)
+local function resizeNeovide ()
+	if isAtOffice() or isProjector() then
+		moveResizeCurWin("maximized")
+	else
+		moveResizeCurWin("pseudo-maximized")
+	end
+end
+
+wf_neovim = wf.new("neovide")
+	:subscribe(wf.windowCreated, resizeNeovide)
+
+function neovimLaunch(appName, eventType)
+	if (appName:lower() == "neovide") and (eventType == aw.launched) then
+		resizeNeovide()
+	end
+end
+neovimWatcher = aw.new(neovimLaunch)
+neovimWatcher:start()
 
 --------------------------------------------------------------------------------
 
