@@ -60,13 +60,7 @@
 				<dict>
 					<key>COMMAND_STRING</key>
 					<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-if [[ "$1" =~ : ]] ; then
-	filePath=$(echo "$1" | cut -d: -f1)
-	lineNo=$(echo "$1" | cut -d: -f2)
-	neovide "$filePath" +$lineNo
-else
-	neovide "$1"
-fi</string>
+neovide "$1"</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>

@@ -54,7 +54,7 @@ keymap("n", "<leader>r", function()
 		end
 
 	elseif bo.filetype == "yaml" then
-		os.execute[[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"']]
+		os.execute[[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
 
 	elseif bo.filetype == "typescript" then
 		os.execute[[npm run build]]
