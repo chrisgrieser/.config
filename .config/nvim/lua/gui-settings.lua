@@ -1,15 +1,24 @@
 require("utils")
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
--- THEME
-local lightTheme = "tokyonight-storm"
-local darkTheme = "tokyonight-moon"
-local isDarkMode = fn.system([[osascript -e 'tell application "System Events" to return dark mode of appearance preferences']])
-if isDarkMode:find("true") then -- using :find() to avoid dealing with pesky whitespace
-	cmd("colorscheme "..darkTheme)
-else
-	cmd("colorscheme "..lightTheme)
-end
+ -- THEME
+
+lightTheme = "tokyonight-storm"
+darkTheme = "tokyonight-moon"
+
+local auto_dark_mode = require('auto-dark-mode')
+auto_dark_mode.setup({
+	update_interval = 3000,
+	set_dark_mode = function()
+		api.nvim_set_option('background', 'dark')
+		cmd('colorscheme'..darkTheme)
+	end,
+	set_light_mode = function()
+		api.nvim_set_option('background', 'light')
+		cmd('colorscheme'..lightTheme)
+	end,
+})
+auto_dark_mode.init()
 
 --------------------------------------------------------------------------------
 
