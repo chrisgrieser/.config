@@ -14,7 +14,9 @@ function PluginList (use)
 	use 'ray-x/aurora'
 	use 'shaunsingh/moonlight.nvim'
 	use 'yashguptaz/calvera-dark.nvim'
-	
+	use 'kyazdani42/blue-moon'
+	use 'Yazeed1s/minimal.nvim'
+	use 'kvrohit/rasmus.nvim'
 
 	-- LSP, Linting & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
