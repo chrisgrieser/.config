@@ -19,24 +19,11 @@ source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # has to be loaded *after* zsh syntax highlighting
 source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
+# StarShip
 eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
 source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
 source "$DOTFILE_FOLDER/zsh/plugins/obsidian-vault-navigation.sh"
 
-#-------------------------------------------------------------------------------
-
-if [[ "$TERM_PROGRAM" == "Terminus-Sublime" ]] ; then
-	TERMINAL="Terminus-Sublime"
-elif [[ ${TERM:l} == "alacritty" ]] ; then
-	TERMINAL="Alacritty"
-elif [[ "$TERM" == "xterm-256color" ]]; then
-	TERMINAL="Marta"
-fi
-
-# fix for Starship-Terminus issue, https://github.com/starship/starship/issues/3627
-if [[ "$TERMINAL" == "Terminus-Sublime" ]] ; then
-	export STARSHIP_CONFIG=~/.config/starship/starship_terminus.toml
-else
-	export STARSHIP_CONFIG=~/.config/starship/starship.toml
-fi
 
