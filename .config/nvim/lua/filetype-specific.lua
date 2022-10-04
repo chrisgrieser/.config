@@ -55,9 +55,11 @@ keymap("n", "<leader>r", function()
 
 	elseif bo.filetype == "yaml" then
 		os.execute[[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
+		print("Compiling Karabiner config.")
 
 	elseif bo.filetype == "typescript" then
 		os.execute[[npm run build]]
+		print("Building with npm…")
 
 	else
 		print("No build system set.")

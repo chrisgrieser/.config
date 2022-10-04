@@ -154,7 +154,7 @@
                 "^/Applications/Obsidian\\.app",
                 "^/Applications/Sublime Text\\.app",
                 "^/Applications/Drafts\\.app",
-                "^/Applications/Alfred\\.app",
+                "^/Applications/Alfred \\d\\.app",
                 "[Nn]eovide"
               ]
             }
