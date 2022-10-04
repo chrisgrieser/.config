@@ -40,7 +40,7 @@ if (fileExists("url-list.txt")) {
 				url = url.split("\t").shift();
 				name = name.replace("\t", " ");
 			}
-			const encodedURL = url.replace(":", "%3A"); // new docs format partially encoded
+			const encodedURL = url.replace("#:", "#%3A"); // new docs format partially encoded
 
 			return {
 				"title": name + synonyms,
