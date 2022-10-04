@@ -1,33 +1,29 @@
 require("utils")
 ------------------------------------------------------------------------------
 
- -- THEME
-
-lightTheme = "tokyonight-storm"
+-- THEME
 darkTheme = "tokyonight-moon"
+lightTheme = "tokyonight-day"
 
+-- toggle theme with OS
 local auto_dark_mode = require('auto-dark-mode')
 auto_dark_mode.setup({
 	update_interval = 3000,
 	set_dark_mode = function()
-		api.nvim_set_option('background', 'dark')
-		cmd('colorscheme'..darkTheme)
+		cmd('colorscheme '..darkTheme)
 	end,
 	set_light_mode = function()
-		api.nvim_set_option('background', 'light')
-		cmd('colorscheme'..lightTheme)
+		cmd('colorscheme '..lightTheme)
 	end,
 })
 auto_dark_mode.init()
 
 --------------------------------------------------------------------------------
 
-keymap({"n", "v", "i"}, "<D-w>", ":w<CR>:bd<CR>") -- cmd+w
+keymap({"n", "v", "i"}, "<D-w>", ":bd<CR>") -- cmd+w
 keymap({"n", "v", "i"}, "<D-q>", ":wall!<CR>:quitall!<CR>") -- cmd+q
 
-keymap({"n", "v"}, "<M-l>", "@") -- needed when alt is turned into meta key
-keymap({"n", "v"}, "<M-9>", "}")
-keymap({"n", "v"}, "<M-8>", "{")
+keymap({"n", "v", "i"}, "<M-l>", "@") -- needed when alt is turned into meta key
 
 keymap({"n", "v"}, "<D-z>", ":undo<CR>") -- cmd+z
 keymap({"n", "v"}, "<D-Z>", ":redo<CR>") -- cmd+shift+z
@@ -36,7 +32,7 @@ keymap("i", "<D-s>", "<Esc>:write!<CR>a")
 keymap("i", "<D-z>", "<Esc>:undo<CR>a")
 keymap("i", "<D-Z>", "<Esc>:redo<CR>a")
 keymap("n", "<D-a>", "ggVG") -- cmd+a
-keymap("i", "<D-a>", "<Esc>ggvG")
+keymap("i", "<D-a>", "<Esc>ggVG")
 keymap("v", "<D-a>", "ggG")
 keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 cmd[[let g:VM_maps['Find Under'] = '<D-j>']] -- cmd+j for jumping selection

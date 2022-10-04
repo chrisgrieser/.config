@@ -25,8 +25,8 @@ map yt duplicateTab
 " Scrolling
 map j scrollDown
 map k scrollUp
-map J scrollDown count=3
-map K scrollUp count=3
+map J scrollDown count=4
+map K scrollUp count=4
 map gl scrollRight
 map gh scrollLeft
 map gg scrollToTop
