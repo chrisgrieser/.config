@@ -3,9 +3,18 @@ function PluginList (use)
 
 	-- Themes
 	use 'folke/tokyonight.nvim'
-	use 'rakr/vim-two-firewatch'
-	use 'navarasu/onedark.nvim'
+	use 'sainnhe/edge'
 	use 'Mofiqul/dracula.nvim'
+	use 'EdenEast/nightfox.nvim'
+	use 'catppuccin/nvim'
+	use "rebelot/kanagawa.nvim"
+	use "bluz71/vim-moonfly-colors"
+	use 'frenzyexists/aquarium-vim'
+	use 'glepnir/zephyr-nvim'
+	use 'ray-x/aurora'
+	use 'shaunsingh/moonlight.nvim'
+	use 'yashguptaz/calvera-dark.nvim'
+	
 
 	-- LSP, Linting & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
