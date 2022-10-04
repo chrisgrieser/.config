@@ -69,7 +69,7 @@ autocmd("BufWritePre", {
 		local save_view = fn.winsaveview()
 		-- remove trailing whitespaces
 		-- add line breaks at end if there is-none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
-		cmd[[$s/\(.\)$/\1\r/e | %s/\s\+$//e]]
+		cmd[[%s/\s\+$//e]]
 		fn.winrestview(save_view)
 	end
 })
@@ -108,5 +108,5 @@ opt.shellcmdflag="-ic"
 
 -- Window Mangers
 opt.title = true -- title (for Window Managers and espanso)
-opt.titlestring = "" -- empty = default, TODO: figure out how to set that properly
+-- opt.titlestring = "" -- TODO: figure out how to set that properly
 

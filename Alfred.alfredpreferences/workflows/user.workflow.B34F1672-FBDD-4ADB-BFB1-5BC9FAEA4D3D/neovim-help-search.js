@@ -40,12 +40,13 @@ if (fileExists("url-list.txt")) {
 				url = url.split("\t").shift();
 				name = name.replace("\t", " ");
 			}
+			const encodedURL = url.replace(":", "%3A"); // new docs format partially encoded
 
 			return {
 				"title": name + synonyms,
 				"match": alfredMatcher(name) + " " + site + " " + alfredMatcher(synonyms),
 				"subtitle": subtitle,
-				"arg": url,
+				"arg": encodedURL,
 				"uid": url,
 			};
 		});
