@@ -7,7 +7,24 @@ function PluginList (use)
 	use 'navarasu/onedark.nvim'
 	use 'Mofiqul/dracula.nvim'
 
+	-- LSP, Linting & Syntax
+	use {'neoclide/coc.nvim', branch = 'release'}
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+	}
+	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
+	use 'dense-analysis/ale'
+
+	-- Completion & Suggestion
+	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
+	use 'mattn/emmet-vim' -- Emmet for CSS
+	use 'gelguy/wilder.nvim' -- suggestions for command line mode (: and /)
+	use {'rafamadriz/friendly-snippets', -- collection of common snippets
+		requires = 'neoclide/coc.nvim' } -- coc.snippet is the actual requirement
+
 	-- Appearance
+	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} } -- colored brackets
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use 'nvim-lualine/lualine.nvim' -- status bar
 	use 'airblade/vim-gitgutter' -- changes in gutter
@@ -16,15 +33,6 @@ function PluginList (use)
 	-- use 'gko/vim-coloresque'
 	-- use 'ap/vim-css-color'
 	-- use 'norcalli/nvim-colorizer.lua'
-
-	-- LSP & Syntax
-	use {'neoclide/coc.nvim', branch = 'release'}
-	use {
-		'nvim-treesitter/nvim-treesitter',
-		run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-	}
-	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
-	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} }
 
 	-- File Releated
 	use 'tpope/vim-eunuch' -- file operation utilities
@@ -46,13 +54,6 @@ function PluginList (use)
 	use {'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter'}
 	use 'justinmk/vim-sneak'
 	use 'matze/vim-move' -- move lines with auto-indention (alternative: vim.unimpaired)
-
-	-- Completion / Suggestion
-	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
-	use 'mattn/emmet-vim' -- Emmet for CSS
-	use 'gelguy/wilder.nvim' -- suggestions for command line mode (: and /)
-	use {'rafamadriz/friendly-snippets', -- collection of common snippets
-		requires = 'neoclide/coc.nvim' } -- coc.snippet is the actual requirement
 
 	-- Misc
 	use 'mzlogin/vim-markdown-toc'
