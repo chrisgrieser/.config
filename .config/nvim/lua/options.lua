@@ -34,7 +34,7 @@ opt.undofile = true -- persistent undo history
 opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
 
 -- auto-save
-autocmd({"BufLeave", "BufWinLeave", "FocusLost"}, {
+autocmd({"BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
 	pattern = "?*",
 	command = "silent! update"
 })

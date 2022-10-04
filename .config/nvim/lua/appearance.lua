@@ -54,6 +54,8 @@ cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-]*') ]]
 cmd[[highlight clear SignColumn]] -- transparent
 
 -- Git Gutter
+g.gitgutter_map_keys = 0 -- disable gitgutter mappings I don't use anyway
+
 cmd[[highlight GitGutterAdd    guifg=Green  ctermfg=Green]]
 cmd[[highlight GitGutterChange guifg=Yellow ctermfg=Yellow]]
 cmd[[highlight GitGutterDelete guifg=Red    ctermfg=Red]]
@@ -63,7 +65,8 @@ g.gitgutter_sign_removed = '–'
 g.gitgutter_sign_removed_first_line = '⎺'
 g.gitgutter_sign_removed_above_and_below = '␥'
 g.gitgutter_sign_modified_removed = '│'
-g.gitgutter_sign_priority = 9 -- lower to not overwrite when in conflict with other icons
+g.gitgutter_sign_priority = 9 -- lower to not overwrite when in conflict with other icon
+
 -- INFO: Coc Gutter indicators set in coc-settings.json
 
 --------------------------------------------------------------------------------

@@ -44,17 +44,15 @@ function _G.show_docs()
 		vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
 	end
 end
-keymap("n", "<leader>h", '<CMD>lua _G.show_docs()<CR>', {silent = true})
+keymap("n", "<leader>h", function () show_docs() end, {silent = true, nowait = true})
 
 -- Error Navigation & Actions
 local opts = {silent = true, nowait = true}
-keymap("n", "<leader>f", "<Plug>(coc-fix-current)", opts)
 keymap("n", "ge", "<Plug>(coc-diagnostic-next)", opts)
 keymap("n", "gE", "<Plug>(coc-diagnostic-prev)", opts)
-
--- Applying codeAction to the selected region. Example: `<leader>aap` for current paragraph
+keymap("n", "<leader>f", "<Plug>(coc-fix-current)", opts)
 keymap("x", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
-keymap("n", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
+keymap("n", "<leader>a", "<Plug>(coc-codeaction-cursor)", opts)
 
 -- LSP Rename
 keymap("n", "<leader>R", "<Plug>(coc-rename)")
@@ -79,7 +77,7 @@ keymap("i", "<C-j>", "<Plug>(coc-snippets-expand-jump)")
 
 --------------------------------------------------------------------------------
 
--- Function Text Object
+-- Function Text Object -- could also be done with Treesitter later
 -- NOTE: Requires 'textDocument.documentSymbol' support from the language server
 local opts = {silent = true, nowait = true} ---@diagnostic disable-line: redefined-local
 keymap("x", "if", "<Plug>(coc-funcobj-i)", opts)
