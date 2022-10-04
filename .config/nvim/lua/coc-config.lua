@@ -11,7 +11,6 @@ g.coc_global_extensions = {
 	"coc-css",
 	"coc-sh",
 	"coc-yaml",
-	"coc-toml",
 	"coc-tsserver", -- ts and js
 	"coc-json",
 	"coc-emoji",
@@ -63,14 +62,17 @@ keymap("n", "<leader>R", "<Plug>(coc-rename)")
 -- Use tab for trigger completion with characters ahead and navigate.
 -- NOTE: There's always complete item selected by default, you may want to enable
 -- no select by `"suggest.noselect": true` in your configuration file.
-local opts = {silent = true, expr = true, noremap = true, replace_keycodes = true} ---@diagnostic disable-line: redefined-local
+local opts = {silent = true, expr = true, noremap = true, replace_keycodes = false} ---@diagnostic disable-line: redefined-local
 
+function _G.check_back_space()
+	local col = vim.fn.col('.') - 1
+	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
+end
+
+keymap("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
+keymap("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 keymap("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "<CR>"]], opts)
-keymap("i", "<Esc>", [[coc#pum#visible() ? coc#pum#cancel() : "<Esc>"]], opts)
-keymap("i", "<TAB>", [[ coc#pum#visible() ? coc#pum#next(1) : "<TAB>"]], opts)
-
-
-
+keymap("i", "<Esc>", [[coc#pum#visible() ? coc#pum#cancel() : "\<Esc>"]], opts)
 
 -- coc-snippets
 g.coc_snippet_next = '<Tab>'
