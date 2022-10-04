@@ -9,10 +9,8 @@ function PluginList (use)
 
 	-- LSP, Linting & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
-	use {
-		'nvim-treesitter/nvim-treesitter',
-		run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-	}
+	use { 'nvim-treesitter/nvim-treesitter',
+		run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use 'dense-analysis/ale'
 
@@ -34,7 +32,7 @@ function PluginList (use)
 	-- use 'ap/vim-css-color'
 	-- use 'norcalli/nvim-colorizer.lua'
 
-	-- File Releated
+	-- File Management & Switching
 	use 'tpope/vim-eunuch' -- file operation utilities
 	use { 'nvim-telescope/telescope.nvim', -- fuzzy finder
 		requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }

@@ -21,14 +21,6 @@ keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>') -- [D]uplicate Class under cursor
 -- JS / TS / Shell
 keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, requires vim.surround
 
--- neovim special windows
-autocmd("FileType", {
-	pattern = { "help", "startuptime", "qf", "lspinfo" },
-	callback = function ()
-		keymap("n", "q", ":close<CR>", {buffer = true, silent = true})
-	end
-})
-
 -- Emmet
 autocmd("FileType", {
 	pattern = {"css"},
