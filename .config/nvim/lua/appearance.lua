@@ -61,15 +61,18 @@ g.gitgutter_sign_removed = '–'
 g.gitgutter_sign_removed_first_line = '⎺'
 g.gitgutter_sign_removed_above_and_below = '␥'
 g.gitgutter_sign_modified_removed = '│'
-g.gitgutter_sign_priority = 9 -- lower to not overwrite when in conflict with other icon
 
--- g.ale_sign_error
--- g.ale_sign_warning
--- g.ale_sign_info
--- g.ale_sign_style_error
--- g.ale_sign_style_warning
+g.ale_sign_error = "▪︎"
+g.ale_sign_warning = "▴"
+g.ale_sign_info = "•"
+g.ale_sign_style_error = "▪︎"
+g.ale_sign_style_warning = "▴"
 
 -- INFO: Coc Gutter indicators set in coc-settings.json
+
+g.gitgutter_sign_priority = 9
+-- coc sign priority should be 10
+g.ale_sign_priority = 30
 
 --------------------------------------------------------------------------------
 

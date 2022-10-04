@@ -13,6 +13,7 @@
   "diagnostic.warningSign": "▴",
   "diagnostic.infoSign": "•",
   "diagnostic.hintSign": "•",
+  "diagnostic.displayByAle": true, // INFO: redirects everything to ALE
 
   "coc.source.emoji.enable": true,
   "coc.source.emoji.triggerCharacters": [":"],
