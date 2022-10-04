@@ -63,12 +63,13 @@ keymap("n", "<leader>R", "<Plug>(coc-rename)")
 -- Use tab for trigger completion with characters ahead and navigate.
 -- NOTE: There's always complete item selected by default, you may want to enable
 -- no select by `"suggest.noselect": true` in your configuration file.
-local opts = {silent = true, expr = true} ---@diagnostic disable-line: redefined-local
+local opts = {silent = true, expr = true, noremap = true, replace_keycodes = true} ---@diagnostic disable-line: redefined-local
 
--- `return` accept selected completion item
 keymap("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "<CR>"]], opts)
--- keymap("i", "<Esc>", [[coc#pum#visible() ? coc#pum#cancel() : "\<Esc>"]], opts)
--- keymap("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : "<TAB>" ', opts)
+keymap("i", "<Esc>", [[coc#pum#visible() ? coc#pum#cancel() : "<Esc>"]], opts)
+keymap("i", "<TAB>", [[ coc#pum#visible() ? coc#pum#next(1) : "<TAB>"]], opts)
+
+
 
 
 -- coc-snippets
