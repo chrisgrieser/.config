@@ -4,7 +4,7 @@
 matches:
   # ",,lang,," will create a code block of the respective language and prefill
   # it with the clipboard content, e.g. `,,js,,`
-  - regex: "\\n,,(?P<lang>\\w*),,"
+  - regex: "\\r,,(?P<lang>\\w*),," # mac requires \r instead of \n
     replace: "```{{lang}}\n{{clipboard}}\n```"
     label: Markdown Codeblock
     vars:
@@ -53,3 +53,4 @@ matches:
   - trigger: "!github"
     replace: "> **Note**  \n> "
     label: GitHub Callout
+

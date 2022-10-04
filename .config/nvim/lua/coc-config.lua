@@ -68,15 +68,10 @@ keymap("n", "<leader>R", "<Plug>(coc-rename)")
 local opts = {silent = true, expr = true} ---@diagnostic disable-line: redefined-local
 
 -- `return` accept selected completion item
-keymap("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], opts)
+keymap("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "<CR>"]], opts)
 -- keymap("i", "<Esc>", [[coc#pum#visible() ? coc#pum#cancel() : "\<Esc>"]], opts)
+-- keymap("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : "<TAB>" ', opts)
 
-
-
-function _G.check_back_space()
-	local col = vim.fn.col('.') - 1
-	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ---@diagnostic disable-line: undefined-field
-end
 
 -- coc-snippets
 g.coc_snippet_next = '<Tab>'
