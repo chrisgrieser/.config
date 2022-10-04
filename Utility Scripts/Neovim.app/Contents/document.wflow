@@ -60,7 +60,13 @@
 				<dict>
 					<key>COMMAND_STRING</key>
 					<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-neovide "$1"</string>
+if [[ "$1" =~ : ]] ; then
+	filePath=$(echo "$1" | cut -d: -f1)
+	lineNo=$(echo "$1" | cut -d: -f2)
+	neovide "$filePath" +$lineNo
+else
+	neovide "$1"
+fi</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
@@ -173,7 +179,7 @@ neovide "$1"</string>
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>312.500000:252.000000</string>
+				<string>591.000000:252.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>

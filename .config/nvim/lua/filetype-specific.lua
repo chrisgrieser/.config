@@ -41,14 +41,16 @@ autocmd("FileType", {
 
 -- Build System
 keymap("n", "<leader>r", function()
+	cmd[[write]]
 
 	if bo.filetype == "lua" then
 		local parentFolder = fn.expand("%:p:h") ---@diagnostic disable-line: missing-parameter
 		if not(parentFolder) then return end
 		if parentFolder:find("nvim") then
-			cmd[[write | source % | echo "Reloaded."]]
+			cmd[[write | source % | echo "Reloaded neovim config."]]
 		else
 			os.execute('open "hammerspoon://hs-reload"')
+			print("Reloading Hammerspoon config.")
 		end
 
 	elseif bo.filetype == "yaml" then
@@ -119,3 +121,4 @@ autocmd( "FileType", {
 	pattern = {"css"},
 	callback = function() b.hrComment = "/* ───────────────────────────────────────────────── */\n/* << XXX\n──────────────────────────────────────────────────── */" end
 })
+

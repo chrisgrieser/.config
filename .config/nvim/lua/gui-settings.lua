@@ -19,7 +19,7 @@ keymap({"n", "v"}, "<D-s>", ":write!<CR>") -- cmd+s
 keymap("i", "<D-s>", "<Esc>:write!<CR>a")
 keymap("i", "<D-z>", "<Esc>:undo<CR>a")
 keymap("i", "<D-Z>", "<Esc>:redo<CR>a")
-keymap("n", "<D-a>", "ggvG") -- cmd+a
+keymap("n", "<D-a>", "ggVG") -- cmd+a
 keymap("i", "<D-a>", "<Esc>ggvG")
 keymap("v", "<D-a>", "ggG")
 keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer

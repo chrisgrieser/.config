@@ -28,7 +28,7 @@ function unHideAll()
 end
 
 function transBackgroundApp (appName, eventType, appObject)
-	if not(appName == "Neovide" or appName == "Obsidian" or appName:lower() == "alacritty") then return end
+	if not(appName == "neovide" or appName == "Neovide" or appName == "Obsidian" or appName == "alacritty" or appName == "Alacritty") then return end
 
 	local win = appObject:mainWindow()
 	if (eventType == aw.activated or eventType == aw.launching) and (isPseudoMaximized(win) or isMaximized(win)) then

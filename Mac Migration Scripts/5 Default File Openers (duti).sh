@@ -64,7 +64,6 @@ brew uninstall duti
 # -> then restart mac
 
 
-
 # to restore Finder as default
 # defaults delete -g NSFileViewer
 # defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="com.apple.finder";}'
