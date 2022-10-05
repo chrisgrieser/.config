@@ -34,14 +34,25 @@ require('nvim-treesitter.configs').setup {
 	},
 
 	textobjects = { -- textobj plugin
-		move = {
+		move = { -- move to next comment / function
 			enable = true,
 			set_jumps = true,
 			goto_next_start = {
 				["<leader>c"] = "@comment.outer",
+				["<C-j>"] = "@function.outer",
 			},
 			goto_previous_start = {
 				["<leader>C"] = "@comment.outer",
+				["<C-k>"] = "@function.outer",
+			},
+		},
+		swap = { -- swap parameters
+			enable = true,
+			swap_next = {
+				["<leader>s"] = "@parameter.inner",
+			},
+			swap_previous = {
+				["<leader>S"] = "@parameter.inner",
 			},
 		},
 		select = {

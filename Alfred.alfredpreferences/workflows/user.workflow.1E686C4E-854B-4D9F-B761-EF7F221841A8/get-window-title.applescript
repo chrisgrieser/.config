@@ -1,7 +1,7 @@
 #!/usr/bin/env osascript
-set output to ""
 tell application "System Events"
 	set frontApp to first application process whose frontmost is true
+	set output to frontapp & "\n\n"
 	tell frontApp
 		repeat with win in (every window)
 			set win_name to "\"" & (name of win) & "\""
