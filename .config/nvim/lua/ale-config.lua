@@ -14,7 +14,13 @@ g.ale_use_global_executables = 1 -- globally installed listers
 
 g.ale_echo_msg_format = '[%linter%] %severity% %code: %%s'
 g.ale_linters_ignore = {lua = {'selene'}} -- https://github.com/dense-analysis/ale/issues/4329
+--------------------------------------------------------------------------------
+g.ale_sh_shellcheck_executable = '/opt/homebrew/bin/shellcheck'
+g.ale_sh_shellcheck_options = '-x'
 
+let g:ale_linters = {
+    \ 'sh': ['language_server'],
+    \ }
 --------------------------------------------------------------------------------
 
 keymap("n", "<leader>f","<Plug>(ale_fix)") -- fix single instance

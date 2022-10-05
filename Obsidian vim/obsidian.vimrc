@@ -249,15 +249,6 @@ vmap V j
 """"""""""""""""""""""
 
 " https://vimhelp.org/index.txt.html#CTRL-W
-exmap focusRight obcommand editor:focus-right
-exmap focusLeft obcommand editor:focus-left
-exmap focusTop obcommand editor:focus-top
-exmap focusBottom obcommand editor:focus-bottom
-nmap <C-w>h :focusLeft
-nmap <C-w>j :focusBottom
-nmap <C-w>k :focusTop
-nmap <C-w>l :focusRight
-
 exmap splitVertical obcommand workspace:split-vertical
 nmap <C-w>v :splitVertical
 exmap splitHorizontal obcommand workspace:split-horizontal
@@ -275,12 +266,12 @@ exmap prevTab obcommand workspace:previous-tab
 nmap gt :nextTab
 nmap gT :prevTab
 
-" orginal vim: <C-w>_ for vertical maximizing, <C-w>= for equal size
-exmap toggle-maximize-pane obcommand pane-relief:maximize
-nmap <C-w>+ :toggle-maximize-pane
-vmap <C-w>+ :toggle-maximize-pane
-nmap <C-w>= :toggle-maximize-pane
-vmap <C-w>= :toggle-maximize-pane
+" " orginal vim: <C-w>_ for vertical maximizing, <C-w>= for equal size
+" exmap toggle-maximize-pane obcommand pane-relief:maximize
+" nmap <C-w>+ :toggle-maximize-pane
+" vmap <C-w>+ :toggle-maximize-pane
+" nmap <C-w>= :toggle-maximize-pane
+" vmap <C-w>= :toggle-maximize-pane
 
 " swap pane position (Original Vim Bindings)
 " requires Pane Relief Plugin
