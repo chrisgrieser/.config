@@ -24,14 +24,12 @@ duti -s "$videoplayerID" m4a all
 # text
 editorID="com.apple.automator.Neovim"
 duti -s "$editorID" toml all
-duti -s "$editorID" public.data all # dotfiles without extension
 duti -s "$editorID" sh all
 duti -s "$editorID" bib all
 duti -s "$editorID" html all
 duti -s "$editorID" zsh all
 duti -s "$editorID" bash all
 duti -s "$editorID" py all
-duti -s "$editorID" vimrc all
 duti -s "$editorID" js all
 duti -s "$editorID" ts all
 duti -s "$editorID" css all
@@ -44,6 +42,9 @@ duti -s "$editorID" yml all
 duti -s "$editorID" yaml all
 duti -s "$editorID" xml all
 duti -s "$editorID" plist all
+duti -s "$editorID" public.data all # dotfiles without extension
+duti -s "$editorID" vimrc all
+duti -s "$editorID" sketchybarrc all
 
 # URI Schemes
 duti -s org.m0k.transmission magnet

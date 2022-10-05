@@ -17,7 +17,6 @@ nmap Y y$
 
 " always paste what was yanked, not what was deleted
 nmap P "0p
-vmap P "0p
 
 """"""""""""""""""""""
 " < Search
@@ -156,7 +155,6 @@ nmap ,: mz&§&:`z
 nmap ,) mz&§&)`z
 nmap ,] mz&§&]`z
 nmap ,} mz&§&}`z
-" nmap ! a <Esc>hh does not work, cause insert mode keystrokes aren't supported
 
 " Remove last character from line
 nmap X mz$"_x`z
@@ -221,9 +219,10 @@ vmap <Space> "_c
 nmap <S-Space> "_daw
 vmap <S-Space> "_d
 
-" [R]eplace Word with register content
-nmap R viw"0p
-vmap R "0P
+" [R]eplicate (duplicate)
+exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
+nmap R :duplicate
+vmap R :duplicate
 
 " Change Quote Content
 nmap Q "_ci"
@@ -232,8 +231,6 @@ nmap q "_ci'
 """"""""""""""""""""""
 " < Mode
 """"""""""""""""""""""
-imap jj <Esc>
-
 " move to BOL/EOL
 imap <C-a> <Esc>I
 imap <C-e> <Esc>A
@@ -278,12 +275,12 @@ nmap gT :prevTab
 " exmap swapPane obcommand pane-relief:swap-next
 " map <C-w>x :swapPane
 
-" [g]oto next/prev [w]indow (= pane)
-" requires Pane Relief Plugin
-exmap nextPane obcommand pane-relief:go-next
-exmap prevPane obcommand pane-relief:go-prev
-map gw :nextPane
-map gW :prevPane
+" " [g]oto next/prev [w]indow (= pane)
+" " requires Pane Relief Plugin
+" exmap nextPane obcommand pane-relief:go-next
+" exmap prevPane obcommand pane-relief:go-prev
+" map gw :nextPane
+" map gW :prevPane
 
 """"""""""""""""""""""
 " < Folding
@@ -305,12 +302,12 @@ nmap zR :unfoldall
 """"""""""""""""""""""
 " < Sneak
 """"""""""""""""""""""
-" emulate vim-sneak (somewhat)
-" vim sneak
-" exmap nextTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(true)}
-" exmap prevTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(false)}
-" nmap s :nextTwoCharMatch
-" nmap S :prevTwoCharMatch
+
+" emulate vim-sneak
+exmap nextTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(true)}
+exmap prevTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(false)}
+nmap s :nextTwoCharMatch
+nmap S :prevTwoCharMatch
 
 """"""""""""""""""""""
 " < Sorting
@@ -323,19 +320,4 @@ nmap ,sg :sort
 
 " [s]ort [p]aragraph
 nmap ,sp vip,ss
-
-""""""""""""""""""""""
-" < Options
-""""""""""""""""""""""
-
-" emulate shortcuts from vim.unimpaired, requires smarter MD hotkeys plugin
-exmap number obcommand obsidian-smarter-md-hotkeys:toggle-line-numbers
-exmap readableLineLength obcommand obsidian-smarter-md-hotkeys:toggle-readable-line-length
-exmap spellcheck obcommand editor:toggle-spellcheck
-" [O]ption: line [n]umbers
-map ,on :number
-" [O]ption: [s]pellcheck
-map ,os :spellcheck
-" [O]ption: line [w]rap
-map ,ow :readableLineLength
 
