@@ -559,18 +559,18 @@ open -g "hammerspoon://split?app=$*"</string>
 			<key>note</key>
 			<string>quit Karabiner-EventViewer</string>
 			<key>xpos</key>
-			<real>125</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>335</real>
 		</dict>
 		<key>9734FC1B-0242-4229-B9BF-4A809F59C81E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>290</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>335</real>
 		</dict>
 		<key>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</key>
 		<dict>

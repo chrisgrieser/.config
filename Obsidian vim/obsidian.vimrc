@@ -228,8 +228,8 @@ exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
 nmap R :duplicate
 vmap R :duplicate
 
-" Change Quote Content
-nmap Q "_ci"
+" Change Quote/Wikilink Content
+nmap Q "_ci]
 nmap q "_ci'
 
 """"""""""""""""""""""
@@ -312,16 +312,3 @@ exmap nextTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(true)}
 exmap prevTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(false)}
 nmap s :nextTwoCharMatch
 nmap S :prevTwoCharMatch
-
-""""""""""""""""""""""
-" < Sorting
-""""""""""""""""""""""
-" [s]ort [s]election
-vmap ,ss :'<,'>sort
-
-" [s]ort [g]lobally
-nmap ,sg :sort
-
-" [s]ort [p]aragraph
-nmap ,sp vip,ss
-
