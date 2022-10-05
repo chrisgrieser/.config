@@ -16,7 +16,7 @@ end
 if g.started_by_firenvim then
 	require("firenvim-config")
 else
-	require("appearance")
+	require("appearance") -- should come after gui settings
 	require("coc-config")
 	require("telescope-config")
 	require("treesitter-config")

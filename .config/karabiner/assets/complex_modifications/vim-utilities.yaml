@@ -1,6 +1,17 @@
 title: "⚒️ Vim Utilities"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
+  - description: "⚒️ Fix <S-Space> for neovim"
+    manipulators:
+      - type: basic
+        from:
+          - key_code: spacebar
+  -modi
+          - key_code: j
+        parameters:
+          basic.simultaneous_threshold_milliseconds: 100
+        to:
+          - key_code: return_or_enter
   - description: "⚒️ f+j (simultaneously): ↵"
     manipulators:
       - type: basic

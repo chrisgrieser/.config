@@ -41,7 +41,7 @@ cmd[[highlight def link myAnnotations Todo]] -- use same styling as "TODO"
 cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE') ]]
 
 -- Underline URLs
-cmd[[highlight urls cterm=underline gui=underline]]
+cmd[[highlight urls cterm=underline term=underline gui=underline]]
 cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-]*') ]]
 
 --------------------------------------------------------------------------------

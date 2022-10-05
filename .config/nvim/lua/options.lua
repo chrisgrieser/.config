@@ -108,6 +108,6 @@ opt.shellcmdflag="-ic"
 
 -- Window Managers
 opt.title = true -- title (for Window Managers and espanso)
-opt.titlestring='%{expand(\"%:p\")} [%{mode(\"full\")}]'
+opt.titlestring='%{expand(\"%:p\")} [%{mode()}]'
 
 
