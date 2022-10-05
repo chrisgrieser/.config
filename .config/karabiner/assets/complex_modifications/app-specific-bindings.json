@@ -1463,6 +1463,32 @@
           ]
         }
       ]
+    },
+    {
+      "description": "🅰️ 📫 Mimestream",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "s",
+              "modifiers": [
+                "command",
+                "option"
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

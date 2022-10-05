@@ -13,12 +13,12 @@ rules:
           - software_function:
               set_mouse_cursor_position:
                 x: 45%
-                y: 1% # assuming hidden menubar, otherwise 3-4%
+                y: 1%  # assuming hidden menubar, otherwise 3-4%
                 screen: 0
           - pointing_button: button2
           - key_code: vk_none
           - key_code: down_arrow
-          - key_code: down_arrow # assuming hidden menubar, otherwise only 1x arrow down
+          - key_code: down_arrow  # assuming hidden menubar, otherwise only 1x arrow down
           - key_code: return_or_enter
         conditions:
           - type: frontmost_application_if
@@ -29,7 +29,7 @@ rules:
       # ⌘Z → ⌃Z (zle-widget: undo)
       - type: basic
         from:
-          key_code: "y" # z and y switched
+          key_code: "y"  # z and y switched
           modifiers:
             mandatory:
               - command
@@ -736,44 +736,59 @@ rules:
               text: ""
   - description: "🅰️📂 Marta"
     manipulators:
-    # Hyper-F: Open $WD
-    - type: basic
-      from:
-        key_code: f
-        modifiers:
-          mandatory:
-            - control
-            - command
-            - shift
-            - option
-      to:
-        - shell_command: /Applications/Marta.app/Contents/Resources/launcher --existing-tab "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+      # Hyper-F: Open $WD
+      - type: basic
+        from:
+          key_code: f
+          modifiers:
+            mandatory:
+              - control
+              - command
+              - shift
+              - option
+        to:
+          - shell_command: /Applications/Marta.app/Contents/Resources/launcher --existing-tab "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
   - description: "🅰️👨‍💻 Script Editor"
     manipulators:
-    # Quick Closing skipping save prompt
-    # for movement with tab required: `defaults write NSGlobalDomain AppleKeyboardUIMode -int 3`
-    - type: basic
-      from:
-        key_code: q
-        modifiers:
-          mandatory:
-            - command
-      to:
-        - key_code: q
+      # Quick Closing skipping save prompt
+      # for movement with tab required: `defaults write NSGlobalDomain AppleKeyboardUIMode -int 3`
+      - type: basic
+        from:
+          key_code: q
           modifiers:
-            - command
-        - key_code: vk_none
-          hold_down_milliseconds: 500
-        - key_code: tab
-        - key_code: tab
-        - key_code: tab
-        - key_code: tab
-        - key_code: tab
-        - key_code: tab
-        - key_code: vk_none
-          hold_down_milliseconds: 100
-        - key_code: spacebar
-      conditions:
-        - type: frontmost_application_if
-          bundle_identifiers:
-            - ^com\.apple\.ScriptEditor
+            mandatory:
+              - command
+        to:
+          - key_code: q
+            modifiers:
+              - command
+          - key_code: vk_none
+            hold_down_milliseconds: 500
+          - key_code: tab
+          - key_code: tab
+          - key_code: tab
+          - key_code: tab
+          - key_code: tab
+          - key_code: tab
+          - key_code: vk_none
+            hold_down_milliseconds: 100
+          - key_code: spacebar
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.apple\.ScriptEditor
+  - description: "🅰️ 📫 Mimestream"
+    manipulators:
+      # snoozing consistent with snoozing in Drafts
+      - type: basic
+        from:
+          key_code: s
+          modifiers:
+            mandatory:
+              - command
+              - shift
+        to:
+          - key_code: s
+            modifiers:
+              - command
+              - option
