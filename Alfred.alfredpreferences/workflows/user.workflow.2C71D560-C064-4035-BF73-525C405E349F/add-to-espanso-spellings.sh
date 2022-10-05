@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 spell_config="$HOME/dotfiles/espanso/match/spelling.yml"
-sublcli="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
 
 wrong=$(echo "$*" | cut -d" " -f1)
 correct=$(echo "$*" | cut -d" " -f2)
@@ -12,4 +11,4 @@ correct=$(echo "$*" | cut -d" " -f2)
 
 lines=$(wc -l "$spell_config")
 
-"$sublcli" "$spell_config:$lines"
+alacritty --command nvim +$LINE_NO "$spell_config"
