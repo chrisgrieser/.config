@@ -97,7 +97,6 @@ else
 fi
 ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
 
-
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
 

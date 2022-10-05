@@ -15,12 +15,34 @@ g.ale_use_global_executables = 1 -- globally installed listers
 g.ale_echo_msg_format = '[%linter%] %severity% %code: %%s'
 g.ale_linters_ignore = {lua = {'selene'}} -- https://github.com/dense-analysis/ale/issues/4329
 --------------------------------------------------------------------------------
-g.ale_sh_shellcheck_executable = '/opt/homebrew/bin/shellcheck'
-g.ale_sh_shellcheck_options = '-x'
 
-let g:ale_linters = {
-    \ 'sh': ['language_server'],
-    \ }
+-- force shellcheck to also lint zsh files
+g.ale_sh_shellcheck_options = '-x --shell=bash' -- https://scriptingosx.com/2019/08/shellcheck-and-zsh/
+g.ale_linters = {
+	zsh = {'shellcheck', 'shell', 'language-server'}
+}
+
+-- linter-specific config from SublimeLinter
+--[[
+// this ensures that markdownlint's rc is found. also no ~ is needed
+// trailing spaces and single trailing new line disabled as Sublime already does take care of that
+"markdownlint": {
+	"args": ["--config", "/.markdownlintrc", "--disable=no-trailing-spaces", "--disable=single-trailing-newline"]
+},
+"stylelint": {
+	"filter_errors": "warning: ",
+},
+"yamllint": {
+	"args": ["--config-file", "/.config/yamllint/config/.yamllint.yaml"]
+},
+"eslint": {
+	// "filter_errors": "warning: ",
+},
+// https://scriptingosx.com/2019/08/shellcheck-and-zsh/
+"shellcheck": {
+	"args": ["--shell=bash"]
+},
+]]
 --------------------------------------------------------------------------------
 
 keymap("n", "<leader>f","<Plug>(ale_fix)") -- fix single instance

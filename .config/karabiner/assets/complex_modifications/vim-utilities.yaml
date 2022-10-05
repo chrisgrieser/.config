@@ -22,6 +22,7 @@ rules:
         parameters:
           basic.to_if_alone_timeout_milliseconds: 200
         to_if_alone:
+
           - key_code: e
             modifiers:
               - control
