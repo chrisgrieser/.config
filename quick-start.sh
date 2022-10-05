@@ -88,20 +88,6 @@ else
 fi
 ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 
-# Sublime
-SUBLIME_USER_DIR=~"/Library/Application Support/Sublime Text/Packages/User"
-if [[ -e "$SUBLIME_USER_DIR" ]] ; then
-	rm -rf "$SUBLIME_USER_DIR"
-else
-	mkdir -p "$SUBLIME_USER_DIR"
-fi
-ln -sf "$DOTFILE_FOLDER/Sublime User Folder/" "$SUBLIME_USER_DIR"
-
-SUBLIME_PACKAGES=~"/Library/Application Support/Sublime Text/Installed Packages"
-[[ ! -e "$SUBLIME_PACKAGES" ]] && mkdir -p "$SUBLIME_PACKAGES"
-[[ -e "$SUBLIME_PACKAGES/CSS3.sublime-package" ]] && rm -rf "$SUBLIME_PACKAGES/CSS3.sublime-package"
-ln -sf "$DOTFILE_FOLDER/Sublime Packages/CSS3.sublime-package" "$SUBLIME_PACKAGES"
-
 # Brave PWAs
 BROWSER="Brave Browser"
 if [[ -e ~"/Applications/$BROWSER Apps.localized" ]] ; then
@@ -130,8 +116,3 @@ ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.l
 # ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian.vimrc" "$HOME/Development/Meta"
 # ln -sf "$DOTFILE_FOLDER/Obsidian vim/obsidian-vim-helpers.js" "$HOME/Development/Meta"
 # ln -sf "$DOTFILE_FOLDER/pandoc/README.md" "$HOME/Main Vault/Knowledge Base/Pandoc.md"
-
-# YAMLlint
-# ln -sf "$DOTFILE_FOLDER/.config/yamllint/config/.yamllint.yaml" "$DOTFILE_FOLDER/.config/karabiner/assets/complex_modifications"
-# ln -sf "$DOTFILE_FOLDER/.config/yamllint/config/.yamllint.yaml" "$DOTFILE_FOLDER/espanso/config/"
-# ln -sf "$DOTFILE_FOLDER/.config/yamllint/config/.yamllint.yaml" "$DOTFILE_FOLDER/espanso/match/"

@@ -52,8 +52,6 @@ bindkey -M vicmd 'gg' vi-beginning-of-line
 
 bindkey "^?" backward-delete-char # fix backspace
 bindkey -M vicmd -s 'Y' 'y$' # -s flag sends direct keystrokes, to allow for remappings
-bindkey -M vicmd -s 'ö' 'xp' # transpose (move character to the right)
-bindkey -M vicmd -s 'Ö' 'xhhp' # reversed transpose (move character to the left)
 bindkey -M vicmd -s 'X' 'mz$"_x`z' # Remove last character from line
 
 bindkey -M vicmd -s ' ' 'ciw'

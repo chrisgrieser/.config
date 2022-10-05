@@ -12,7 +12,8 @@ g.ale_set_balloons = 1 -- hover
 
 g.ale_use_global_executables = 1 -- globally installed listers
 
--- https://github.com/dense-analysis/ale/blob/master/doc/ale-sh.txt
+g.ale_echo_msg_format = '[%linter%] %severity% %code: %%s'
+g.ale_linters_ignore = {lua = {'selene'}} -- https://github.com/dense-analysis/ale/issues/4329
 
 --------------------------------------------------------------------------------
 
