@@ -268,11 +268,7 @@
           },
           "to": [
             {
-              "key_code": "spacebar",
-              "modifiers": [
-                "right_command",
-                "right_control"
-              ]
+              "key_code": "fn"
             },
             {
               "set_variable": {
