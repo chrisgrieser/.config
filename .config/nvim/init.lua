@@ -17,6 +17,7 @@ else
 	require("telescope-config")
 	require("treesitter-config")
 	require("cheat-sh-config")
+	require("ale-config")
 end
 
 if (g.neovide or g.goneovim) then
