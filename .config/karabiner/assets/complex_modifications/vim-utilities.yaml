@@ -5,13 +5,16 @@ rules:
     manipulators:
       - type: basic
         from:
-          - key_code: spacebar
-  -modi
-          - key_code: j
-        parameters:
-          basic.simultaneous_threshold_milliseconds: 100
+          key_code: spacebar
+          modifiers:
+            mandatory:
+              - shift
         to:
-          - key_code: return_or_enter
+          - key_code: spacebar
+            modifiers:
+              - command
+              - control
+
   - description: "⚒️ f+j (simultaneously): ↵"
     manipulators:
       - type: basic
@@ -217,7 +220,7 @@ rules:
         to:
           - key_code: hyphen
 
-      # ß to [ 
+      # ß to [
       - type: basic
         from:
           key_code: hyphen

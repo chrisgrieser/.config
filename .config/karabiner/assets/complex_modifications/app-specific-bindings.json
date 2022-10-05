@@ -85,36 +85,6 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "w",
-            "modifiers": {
-              "mandatory": [
-                "command",
-                "shift",
-                "control",
-                "option"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "f",
-              "modifiers": [
-                "control"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "file_paths": [
-                "alacritty$"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
             "key_code": "spacebar",
             "modifiers": {
               "mandatory": [
@@ -123,18 +93,6 @@
             }
           },
           "to": [
-            {
-              "key_code": "2",
-              "modifiers": [
-                "shift"
-              ]
-            },
-            {
-              "key_code": "slash",
-              "modifiers": [
-                "shift"
-              ]
-            },
             {
               "key_code": "d"
             },
@@ -149,9 +107,7 @@
             {
               "type": "frontmost_application_if",
               "file_paths": [
-                "alacritty$",
-                "goneovim$",
-                "neovide$"
+                "alacritty$"
               ]
             }
           ]
@@ -1484,6 +1440,14 @@
               "modifiers": [
                 "command",
                 "option"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.mimestream\\.Mimestream$"
               ]
             }
           ]

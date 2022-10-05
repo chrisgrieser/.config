@@ -74,12 +74,13 @@ keymap("", "T", "<Plug>Sneak_T")
 -- Search
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "<Esc>", ":nohl<CR>:echo<CR>", {silent = true}) -- clear highlights & shortmessage
+keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("n", "g-", function() telescope.current_buffer_fuzzy_find() end) -- alternative search
 keymap("n", "gs", function() telescope.treesitter() end) -- equivalent to Sublime's goto-symbol
 
--- Misc
-keymap("", "+", "*") -- no more modifier key on German Keyboard
+-- Marks
 keymap("", "ä", "`") -- Goto Mark
+keymap("n", "<leader>m", function() telescope.marks() end) -- search marks
 
 --------------------------------------------------------------------------------
 -- EDITING

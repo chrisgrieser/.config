@@ -3,6 +3,31 @@
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
+      "description": "⚒️ Fix <S-Space> for neovim",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "spacebar",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "spacebar",
+              "modifiers": [
+                "command",
+                "control"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "description": "⚒️ f+j (simultaneously): ↵",
       "manipulators": [
         {
