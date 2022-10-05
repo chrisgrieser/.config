@@ -103,7 +103,7 @@ g.neovide_cursor_vfx_particle_curl=1.3 -- only railgun
 g.neovide_confirm_quit = false
 g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
 g.neovide_hide_mouse_when_typing = true
-g.neovide_remember_window_size = false
+g.neovide_remember_window_size = true
 
 g.neovide_input_macos_alt_is_meta = false -- makes `opt` usable on mac
 -- needed if line above enabled
