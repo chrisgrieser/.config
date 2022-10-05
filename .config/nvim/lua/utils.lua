@@ -1,6 +1,5 @@
 ---@diagnostic disable: lowercase-global
 
--- shorthands
 opt = vim.opt -- global option
 g = vim.g -- global variable
 api = vim.api
@@ -13,3 +12,4 @@ autocmd = vim.api.nvim_create_autocmd
 telescope = require("telescope.builtin") -- requires loading extensions first
 keymap = vim.keymap.set
 
+pp = vim.pretty_print

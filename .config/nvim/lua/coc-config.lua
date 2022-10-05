@@ -8,7 +8,6 @@ g.coc_data_home = "~/.local/share/nvim/coc/"
 -- https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#implemented-coc-extensions
 g.coc_global_extensions = {
 	"coc-css",
-	"coc-sh",
 	"coc-yaml",
 	"coc-tsserver", -- ts and js
 	"coc-json",
