@@ -75,11 +75,10 @@ keymap("i", "<Esc>", [[coc#pum#visible() ? coc#pum#cancel() : "\<Esc>"]], opts)
 
 -- coc-snippets
 g.coc_snippet_next = '<Tab>'
-keymap("i", "<C-j>", "<Plug>(coc-snippets-expand-jump)")
 
 --------------------------------------------------------------------------------
 
--- Remap <C-f> and <C-b> for scroll float windows/popups.
+-- for scroll float windows/popups
 local opts = {silent = true, nowait = true, expr = true} ---@diagnostic disable-line: redefined-local
 keymap("n", "<S-Down>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<S-Down>"', opts)
 keymap("n", "<S-Up>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<S-Up>"', opts)
@@ -90,27 +89,21 @@ keymap("v", "<S-Up>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<S-Up>"',
 
 --------------------------------------------------------------------------------
 
--- PASSIVES
+-- Autocmds
 augroup("CocGroup", {})
-
--- Update signature help on jump placeholder.
-autocmd("User", {
+autocmd("User", { -- Update signature help on jump placeholder.
 	group = "CocGroup",
 	pattern = "CocJumpPlaceholder",
 	command = "call CocActionAsync('showSignatureHelp')",
 	desc = "Update signature help on jump placeholder"
 })
-
--- Setup formatexpr specified filetype(s).
-autocmd("FileType", {
+autocmd("FileType", { -- Setup formatexpr specified filetype(s).
 	group = "CocGroup",
 	pattern = "typescript,json",
 	command = "setl formatexpr=CocAction('formatSelected')",
 	desc = "Setup formatexpr specified filetype(s)."
 })
-
--- Highlight the symbol and its references when holding the cursor.
-autocmd("CursorHold", {
+autocmd("CursorHold", { -- Highlight the symbol and its references when holding the cursor.
 	group = "CocGroup",
 	command = "silent call CocActionAsync('highlight')",
 	desc = "Highlight symbol under cursor on CursorHold"

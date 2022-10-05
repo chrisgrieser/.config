@@ -73,12 +73,12 @@ augroup("Templates", {})
 autocmd("BufNewFile", {
 	group = "Templates",
 	pattern = "*.js",
-	command = "0r ~/.config/.nvim/templates/skeleton.js",
+	command = "0r ~/.config/nvim/templates/skeleton.js",
 })
 autocmd("BufNewFile", {
 	group = "Templates",
 	pattern = "*.applescript",
-	command = "0r ~/.config/.nvim/templates/skeleton.applescript",
+	command = "0r ~/.config/nvim/templates/skeleton.applescript",
 })
 autocmd("BufNewFile", {
 	group = "Templates",

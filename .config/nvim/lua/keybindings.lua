@@ -156,12 +156,15 @@ keymap("n", "Ö", "<Plug>(SubversiveSubstituteToEndOfLine)")
 keymap("n", "R", ':noautocmd normal!mz"zyy"zp`zj<CR>', {silent = true}) -- current line, ":noautocmd" to disable highlighted yank for this
 keymap("v", "R", '"zy`]"zp', {silent = true}) -- selection (best used with Visual Line Mode)
 
--- Line Movement
+-- Line & Character Movement
 g.move_map_keys = 0 -- disable automatic keymaps of vim.move
-keymap("n", "<Down>", "<Plug>MoveLineDown") -- also auto-indents O_O
+keymap("n", "<Down>", "<Plug>MoveLineDown") -- also auto-indents
 keymap("n", "<Up>", "<Plug>MoveLineUp")
 keymap("v", "<Down>", "<Plug>MoveBlockDown")
 keymap("v", "<Up>", "<Plug>MoveBlockUp")
+
+keymap("n", "<Right>", "<Plug>MoveCharRight")
+keymap("n", "<Left>", "<Plug>MoveCharLeft")
 keymap("v", "<Right>", "<Plug>MoveBlockRight")
 keymap("v", "<Left>", "<Plug>MoveBlockLeft")
 

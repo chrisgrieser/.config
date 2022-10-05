@@ -50,15 +50,19 @@ exmap contextMenu obcommand editor:context-menu
 nmap zl :contextMenu
 vmap zl :contextMenu
 
-" Navigate headings, requires Code Editor Shortcuts plugin
-exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
-exmap prevHeading obcommand obsidian-editor-shortcuts:goToPrevHeading
-nmap <C-j> :nextHeading
-nmap <C-k> :prevHeading
-
 " History done via Obsdian Hotkeys, so they also work in Preview Mode
 " nmap <C-h> :back
 " nmap <C-l> :forward
+" nmap <C-j> :nextHeading
+" nmap <C-k> :prevHeading
+
+" line movement
+exmap lineUp obcommand editor:swap-line-up
+exmap lineDown obcommand editor:swap-line-down
+nmap <Up> lineUp
+nmap <Down> lineDown
+nmap <Right> xp
+nmap <left> xhhp
 
 " [g]oto [s]ymbol
 " requires Another Quick Switcher Plugin
