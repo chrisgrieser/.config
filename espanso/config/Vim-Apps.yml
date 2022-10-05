@@ -2,7 +2,7 @@
 # ------------------------------------------------------------------------------
 # only activates code snippets when a file of the right language is open
 
-filter_class: obsidian|sublime
+filter_exex: Obsidian|Neovide|neovide
 
 extra_exclude:
   - "../match/private.yml"

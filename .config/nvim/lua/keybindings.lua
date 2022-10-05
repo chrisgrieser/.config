@@ -94,7 +94,7 @@ keymap("n", "P", '"0p') -- paste what was yanked
 -- TEXT OBJECTS
 -- the text-objects below need "_
 keymap("n", "<Space>", '"_ciw') -- change word
-keymap("n", "<S-Space>", '"_daw')
+keymap("n", "<C-D-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
 keymap("v", "<Space>", '"_c')
 
 keymap("n", "q", '"_ci"') -- change double [q]uote

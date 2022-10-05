@@ -1,0 +1,5 @@
+# disable while in normal (or visual) mode
+
+filter_title: \[[nv]\]
+
+enable: false
