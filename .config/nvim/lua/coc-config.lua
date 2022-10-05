@@ -69,7 +69,7 @@ function _G.check_back_space()
 	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ---@diagnostic disable-line: undefined-field
 end
 
-keymap("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
+keymap("i", "<TAB>", [[coc#pum#visible() ? coc#pum#next(1) : "<TAB>"]], opts)
 keymap("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 keymap("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "<CR>"]], opts)
 keymap("i", "<Esc>", [[coc#pum#visible() ? coc#pum#cancel() : "\<Esc>"]], opts)

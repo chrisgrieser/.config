@@ -29,6 +29,14 @@ autocmd("FileType", {
 	end
 })
 
+-- neovim special windows
+autocmd("FileType", {
+	pattern = { "help", "startuptime", "qf", "lspinfo" },
+	callback = function ()
+		keymap("n", "q", ":close<CR>", {buffer = true, silent = true})
+	end
+})
+
 --------------------------------------------------------------------------------
 
 -- Build System
