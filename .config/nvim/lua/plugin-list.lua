@@ -20,10 +20,9 @@ function PluginList (use)
 
 	-- LSP, Linting & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
-	use { 'nvim-treesitter/nvim-treesitter',
-		run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
+	use { 'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
-	use 'dense-analysis/ale'
+	use 'dense-analysis/ale' -- linter integration
 
 	-- Completion & Suggestion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
@@ -33,7 +32,7 @@ function PluginList (use)
 		requires = 'neoclide/coc.nvim' } -- coc.snippet is the actual requirement
 
 	use { "tversteeg/registers.nvim", -- visualise registers on ´"´
-		config = function() require("registers").setup() end, }
+		config = function() require("registers").setup() end }
 
 	-- Appearance
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} } -- colored brackets
