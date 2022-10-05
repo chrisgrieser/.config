@@ -223,9 +223,3 @@ keymap("n", "<leader>X", ':Chmod +x<CR>') -- execution permission, requires eunu
 keymap("n", "<leader><BS>", ":Remove<CR>:bd<CR>") -- undoable deletion of the file, requires eunuch.vim
 keymap("v", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
 
--- Sorting
-keymap("n", "<leader>ss", ":'<,'>sort<CR>") -- [s]ort [s]election
-keymap("n", "<leader>sa", "vi]:sort u<CR>") -- [s]ort [a]rray, if multi-line (+ remove duplicates)
-keymap("n", "<leader>sg", ":sort<CR>") -- [s]ort [g]lobally
-keymap("n", "<leader>sp", "vip:sort<CR>") -- [s]ort [p]aragraph
-

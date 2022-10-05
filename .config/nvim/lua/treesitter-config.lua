@@ -51,9 +51,6 @@ require('nvim-treesitter.configs').setup {
 			swap_next = {
 				["<leader>s"] = "@parameter.inner",
 			},
-			swap_previous = {
-				["<leader>S"] = "@parameter.inner",
-			},
 		},
 		select = {
 			enable = true,

@@ -31,7 +31,7 @@ autocmd("FileType", {
 
 -- neovim special windows
 autocmd("FileType", {
-	pattern = { "help", "startuptime", "qf", "lspinfo" },
+	pattern = { "help", "startuptime", "qf", "lspinfo", "AppleScriptRunOutput" },
 	callback = function ()
 		keymap("n", "q", ":close<CR>", {buffer = true, silent = true})
 	end
@@ -61,7 +61,10 @@ keymap("n", "<leader>r", function()
 		os.execute[[npm run build]]
 		print("Building with npm…")
 
+	elseif bo.filetype == "applescript" then
+		cmd[[:AppleScriptRun]]
 	else
+
 		print("No build system set.")
 	end
 end)
