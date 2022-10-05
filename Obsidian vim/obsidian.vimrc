@@ -59,10 +59,10 @@ vmap zl :contextMenu
 " line movement
 exmap lineUp obcommand editor:swap-line-up
 exmap lineDown obcommand editor:swap-line-down
-nmap <Up> lineUp
-nmap <Down> lineDown
-nmap <Right> xp
-nmap <left> xhhp
+nmap <Up> :lineUp
+nmap <Down> :lineDown
+nmap <Right> dlp
+nmap <Left> dlhhp
 
 " [g]oto [s]ymbol
 " requires Another Quick Switcher Plugin
