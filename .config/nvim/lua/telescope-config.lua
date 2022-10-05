@@ -22,7 +22,7 @@ require("telescope").setup {
 		},
 	},
 	pickers = {
-		keymaps = { prompt_prefix='N' },
+		keymaps = { prompt_prefix='🔘' },
 		help_tags = { prompt_prefix=':h' },
 		commands = { prompt_prefix=':' },
 		oldfiles = { prompt_prefix='🕔' },
