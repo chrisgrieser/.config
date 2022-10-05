@@ -20,8 +20,7 @@ function PluginList (use)
 
 	-- LSP, Linting & Syntax
 	use {'neoclide/coc.nvim', branch = 'release'}
-	use { 'nvim-treesitter/nvim-treesitter',
-		run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
+	use { 'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use 'dense-analysis/ale'
 
@@ -29,17 +28,8 @@ function PluginList (use)
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
 	use 'mattn/emmet-vim' -- Emmet for CSS
 	use 'gelguy/wilder.nvim' -- suggestions for command line mode (: and /)
-	use {'rafamadriz/friendly-snippets', -- collection of common snippets
-		requires = 'neoclide/coc.nvim' } -- coc.snippet is the actual requirement
-
-	use {
-		"tversteeg/registers.nvim", -- visualise registers on ´"´
-		config = function()
-			require("registers").setup()
-		end,
-	}
-
-	-- 
+	use {'rafamadriz/friendly-snippets', requires = 'neoclide/coc.nvim' } -- collection of common snippets (coc.snippet is the actual requirement)
+	use 'tversteeg/registers.nvim'-- visualise registers on ´"´
 
 	-- Appearance
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} } -- colored brackets
@@ -55,29 +45,29 @@ function PluginList (use)
 	-- File Management & Switching
 	use 'tpope/vim-eunuch' -- file operation utilities
 	use { 'nvim-telescope/telescope.nvim', -- fuzzy finder
-		requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
-	}
-	-- use 'ThePrimeagen/harpoon' -- for switching regularly between multiple files
+	requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
+}
+-- use 'ThePrimeagen/harpoon' -- for switching regularly between multiple files
 
-	-- Operators
-	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'}
-	use 'tpope/vim-commentary' -- comments operator & text object
-	use 'tpope/vim-abolish' -- various case conversions
-	use 'svermeulen/vim-subversive' -- substitution operator
+-- Operators
+use {'tpope/vim-surround', requires = 'tpope/vim-repeat'}
+use 'tpope/vim-commentary' -- comments operator & text object
+use 'tpope/vim-abolish' -- various case conversions
+use 'svermeulen/vim-subversive' -- substitution operator
 
-	-- Objects & Motions
-	use 'mg979/vim-visual-multi' -- multi-cursor
-	use 'michaeljsmith/vim-indent-object'
-	use 'gcmt/wildfire.vim' -- incrementally expanding objects (alternative: terryma/vim-expand-region)
-	use {'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter'}
-	use 'justinmk/vim-sneak'
-	use 'matze/vim-move' -- move lines with auto-indention (alternative: vim.unimpaired)
+-- Objects & Motions
+use 'mg979/vim-visual-multi' -- multi-cursor
+use 'michaeljsmith/vim-indent-object'
+use 'gcmt/wildfire.vim' -- incrementally expanding objects (alternative: terryma/vim-expand-region)
+use {'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter'}
+use 'justinmk/vim-sneak'
+use 'matze/vim-move' -- move lines with auto-indention (alternative: vim.unimpaired)
 
-	-- Misc
-	use 'mzlogin/vim-markdown-toc'
-	use 'dbeniamine/cheat.sh-vim'
-	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
-	use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
+-- Misc
+use 'mzlogin/vim-markdown-toc'
+use 'dbeniamine/cheat.sh-vim'
+use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
+use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 
 end
 

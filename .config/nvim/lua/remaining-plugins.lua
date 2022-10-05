@@ -20,4 +20,13 @@ autocmd("FileType", {
 g.user_emmet_mode='i'
 
 
+require("registers").setup({
+	show = '*"0123456789abcdefghijklmnopqrstuvwxy',
+	show_empty = false,
+	window = {
+		max_width = 200,
+		border = "rounded",
+		transparency = 0,
+	},
+})
 
