@@ -27,7 +27,7 @@ end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
 
 -- Utils
-keymap("n", "ZZ", ":wall<CR>:q<CR>") -- quicker quitting
+keymap("n", "ZZ", ":w<CR>:q<CR>") -- quicker quitting
 keymap("n", "zz", ":! acp ")
 -- keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR>>', {silent = true})
 
