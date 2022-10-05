@@ -8,7 +8,6 @@ g.ale_disable_lsp = 1
 --------------------------------------------------------------------------------
 g.ale_cursor_detail = 0 -- open popup instead msg
 g.ale_detail_to_floating_preview = 0 -- bottom panel
-g.ale_set_balloons = 1 -- hover
 
 g.ale_use_global_executables = 1 -- globally installed listers
 
@@ -17,12 +16,14 @@ g.ale_linters_ignore = {lua = {'selene'}} -- https://github.com/dense-analysis/a
 --------------------------------------------------------------------------------
 
 -- force shellcheck to also lint zsh files
-g.ale_sh_shellcheck_options = '-x --shell=bash' -- https://scriptingosx.com/2019/08/shellcheck-and-zsh/
+g.ale_sh_shellcheck_options = '-x'
+g.ale_sh_shell_default_exclusions = ''
+
+-- force shellcheck to be used in zsh files
+g.ale_sh_shellcheck_dialect = 'bash'
 g.ale_linters = {
 	zsh = {'shellcheck', 'shell'}
 }
-
-
 
 -- linter-specific config from SublimeLinter
 --[[
