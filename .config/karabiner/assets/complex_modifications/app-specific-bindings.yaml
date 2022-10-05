@@ -75,10 +75,10 @@ rules:
         to:
           - key_code: "2"
             modifiers:
-            - shift
+              - shift
           - key_code: slash
             modifiers:
-            - shift
+              - shift
           - key_code: d
           - key_code: a
           - key_code: w
@@ -777,4 +777,3 @@ rules:
         - type: frontmost_application_if
           bundle_identifiers:
             - ^com\.apple\.ScriptEditor
-
