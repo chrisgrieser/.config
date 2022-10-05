@@ -977,4 +977,3 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
-

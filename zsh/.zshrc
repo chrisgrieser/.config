@@ -14,8 +14,10 @@ CONFIG+=('git_github')
 CONFIG+=('homebrew')
 CONFIG+=('alacritty_theme_utilities')
 CONFIG+=('../pandoc/pandoc')
+CONFIG+=('intro-messages')
 
 for config_file in "${CONFIG[@]}"; do
 	source "$DOTFILE_FOLDER/zsh/$config_file.zsh"
 done
+
 
