@@ -31,6 +31,7 @@ duti -s "$editorID" html all
 duti -s "$editorID" zsh all
 duti -s "$editorID" bash all
 duti -s "$editorID" py all
+duti -s "$editorID" vimrc all
 duti -s "$editorID" js all
 duti -s "$editorID" ts all
 duti -s "$editorID" css all

@@ -337,11 +337,10 @@ nmap ,sp vip,ss
 " < Options
 """"""""""""""""""""""
 
-" emulate shortcuts from vim.unimpaired
+" emulate shortcuts from vim.unimpaired, requires smarter MD hotkeys plugin
 exmap number obcommand obsidian-smarter-md-hotkeys:toggle-line-numbers
 exmap readableLineLength obcommand obsidian-smarter-md-hotkeys:toggle-readable-line-length
 exmap spellcheck obcommand editor:toggle-spellcheck
-
 " [O]ption: line [n]umbers
 map ,on :number
 " [O]ption: [s]pellcheck
