@@ -32,6 +32,15 @@ function PluginList (use)
 	use {'rafamadriz/friendly-snippets', -- collection of common snippets
 		requires = 'neoclide/coc.nvim' } -- coc.snippet is the actual requirement
 
+	use {
+		"tversteeg/registers.nvim", -- visualise registers on ´"´
+		config = function()
+			require("registers").setup()
+		end,
+	}
+
+	-- 
+
 	-- Appearance
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} } -- colored brackets
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides

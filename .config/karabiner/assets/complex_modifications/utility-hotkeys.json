@@ -320,45 +320,6 @@
                   "language": "^de$"
                 }
               ]
-            },
-            {
-              "type": "frontmost_application_unless",
-              "file_paths": [
-                "^/Applications/Obsidian\\.app",
-                "^/Applications/Sublime Text\\.app",
-                "[Nn]eovide"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "equal_sign",
-            "modifiers": {
-              "mandatory": [
-                "shift"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "equal_sign",
-              "modifiers": [
-                "shift"
-              ]
-            },
-            {
-              "key_code": "escape"
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "file_paths": [
-                "^/Applications/Sublime Text\\.app",
-                "[Nn]eovide"
-              ]
             }
           ]
         },
