@@ -11,7 +11,7 @@ g.ale_detail_to_floating_preview = 0 -- bottom panel
 
 g.ale_use_global_executables = 1 -- globally installed listers
 
-g.ale_echo_msg_format = '[%linter%] %severity% %code: %%s'
+g.ale_echo_msg_format = '[%linter%] %code: %%s'
 g.ale_linters_ignore = {lua = {'selene'}} -- https://github.com/dense-analysis/ale/issues/4329
 --------------------------------------------------------------------------------
 
@@ -21,9 +21,8 @@ g.ale_sh_shell_default_exclusions = ''
 
 -- force shellcheck to be used in zsh files
 g.ale_sh_shellcheck_dialect = 'bash'
-g.ale_linters = {
-	zsh = {'shellcheck', 'shell'}
-}
+g.ale_sh_shell_default_shell = 'zsh'
+g.ale_linters = { zsh = {'shellcheck', 'shell'} }
 
 -- linter-specific config from SublimeLinter
 --[[
