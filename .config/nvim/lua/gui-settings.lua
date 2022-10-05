@@ -106,4 +106,4 @@ g.neovide_remember_window_size = false
 
 g.neovide_input_macos_alt_is_meta = false -- makes `opt` usable on mac
 -- needed if line above enabled
-keymap({"n", "v", "i"}, "<M-l>", "@") -- needed when alt is turned into meta key
+-- keymap({"n", "v", "i"}, "<M-l>", "@") -- needed when alt is turned into meta key

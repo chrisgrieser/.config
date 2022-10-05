@@ -5,7 +5,7 @@ require("utils")
 -- partially overriden when using a theme
 
 -- cursor
-opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor20"
+opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor20,a:blinkwait300-blinkoff400-blinkon600"
 opt.linespace = 3 -- px, similar to line height
 
 -- Ruler

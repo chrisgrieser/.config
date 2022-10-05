@@ -25,6 +25,19 @@
 		<array/>
 		<key>5B39FA3E-033D-4E8E-A929-20601496C43E</key>
 		<array/>
+		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9734FC1B-0242-4229-B9BF-4A809F59C81E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</key>
 		<array>
 			<dict>
@@ -389,6 +402,60 @@ open -g "hammerspoon://split?app=$*"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>12</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>Q</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "Karabiner-EventViewer" to if it is running then quit</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>9734FC1B-0242-4229-B9BF-4A809F59C81E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -439,7 +506,27 @@ open -g "hammerspoon://split?app=$*"</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>170</real>
+		</dict>
+		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>quit Karabiner-EventViewer</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>360</real>
+		</dict>
+		<key>9734FC1B-0242-4229-B9BF-4A809F59C81E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>360</real>
 		</dict>
 		<key>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</key>
 		<dict>
@@ -486,7 +573,7 @@ open -g "hammerspoon://split?app=$*"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>170</real>
 		</dict>
 		<key>F6DAF10C-E8B5-49CA-B86B-DE30E7C70191</key>
 		<dict>
