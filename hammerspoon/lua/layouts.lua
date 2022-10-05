@@ -114,7 +114,7 @@ function homeModeLayout ()
 		end,
 		function()
 			sublimeFontSize(15)
-			alacrittyFontSize(25)
+			alacrittyFontSize(26)
 		end
 	):start()
 end
@@ -163,7 +163,7 @@ function officeModeLayout ()
 	-- wait until sync is finished, to avoid merge conflict
 	hs.timer.waitUntil (
 		function ()
-			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())  ---@diagnostic disable-line: undefined-global
+			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
 		end,
 		function()
 			sublimeFontSize(13)
