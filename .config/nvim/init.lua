@@ -9,6 +9,10 @@ require("keybindings")
 require("filetype-specific")
 require("remaining-plugins")
 
+if (g.neovide or g.goneovim) then
+	require("gui-settings")
+end
+
 if g.started_by_firenvim then
 	require("firenvim-config")
 else
@@ -18,9 +22,5 @@ else
 	require("treesitter-config")
 	require("cheat-sh-config")
 	require("ale-config")
-end
-
-if (g.neovide or g.goneovim) then
-	require("gui-settings")
 end
 

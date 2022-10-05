@@ -12,20 +12,12 @@ if [[ "$FRONT_APP" =~ "Finder" ]]; then
 		return POSIX path of pathToOpen
 	end tell')
 	[[ -d "$WD" ]] || exit 1
-elif [[ "$FRONT_APP" =~ "sublime_text" ]]; then
-	prevClipboard="$(pbpaste)"
-	sleep 0.05
-	"/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" --command copy_path # using full path makes this work even if `subl` hasn't been added to PATH
-	sleep 0.1
-	WD=$(dirname "$(pbpaste)")
 elif [[ "$FRONT_APP" =~ "neovide" ]]; then
-	full_path=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
+	title=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
+	full_path=$(echo "$title" | sed 's///g' )
 	WD=$(dirname "$full_path")
 else
 	WD="${working_directory/#\~/$HOME}"
 fi
 
 nohup alacritty --working-directory="$WD" &
-
-# restore previous clipboard
-[[ "$FRONT_APP" =~ "sublime_text" ]] && echo -n "$prevClipboard" | pbcopy

@@ -14,10 +14,10 @@ require("telescope").setup {
 		},
 		layout_strategy = 'flex',
 		layout_config = {
-			height = 0.95,
-			width = 0.99,
+			height = 0.9,
+			width = 0.9,
 			preview_cutoff = 30,
-			horizontal = { preview_width = 40 },
+			horizontal = { preview_width = 45 },
 			vertical = { preview_height = 30 },
 		},
 	},
