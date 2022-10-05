@@ -145,7 +145,6 @@ wf_neovim = wf.new("neovide")
 			moveResizeCurWin("maximized")
 		else
 			moveResizeCurWin("pseudo-maximized")
-			runDelayed(0.3, function () moveResizeCurWin("pseudo-maximized") end)
 		end
 	end)
 

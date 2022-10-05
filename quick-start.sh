@@ -12,7 +12,8 @@ sudo -v
 xcode-select --install
 
 # Install Essential Apps
-brew install --no-quarantine macpass alfred hammerspoon sublime-text alacritty karabiner-elements brave-browser
+brew install --no-quarantine macpass alfred hammerspoon neovim alacritty karabiner-elements brave-browser
+brew install --no-quarantine neovide --cask
 
 # Hammerspoon
 defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
@@ -44,7 +45,6 @@ DOTFILE_FOLDER="$(dirname "$0")"
 ln -sf "$DOTFILE_FOLDER/zsh/.zshrc" ~
 [[ -e ~/.zprofile ]] && rm -rf ~/.zprofile
 ln -sf "$DOTFILE_FOLDER/zsh/.zprofile" ~
-ln -sf "$DOTFILE_FOLDER/zsh/.zlogin" ~
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
 
 # .config
@@ -112,7 +112,6 @@ fi
 ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
 
 
-#-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
 
