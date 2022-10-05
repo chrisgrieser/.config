@@ -19,8 +19,10 @@ g.ale_linters_ignore = {lua = {'selene'}} -- https://github.com/dense-analysis/a
 -- force shellcheck to also lint zsh files
 g.ale_sh_shellcheck_options = '-x --shell=bash' -- https://scriptingosx.com/2019/08/shellcheck-and-zsh/
 g.ale_linters = {
-	zsh = {'shellcheck', 'shell', 'language-server'}
+	zsh = {'shellcheck', 'shell'}
 }
+
+
 
 -- linter-specific config from SublimeLinter
 --[[
