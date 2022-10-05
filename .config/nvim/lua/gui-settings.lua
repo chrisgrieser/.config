@@ -14,10 +14,11 @@ local function dark()
 	api.nvim_set_option('background', 'dark')
 end
 
--- set theme on start properly
-local isDarkMode = fn.system([[osascript -e 'tell application "System Events" to return dark mode of appearance preferences']])
-if isDarkMode:find("true") then dark() -- using :find() since shorter than trimming whitespace in lua...
-else light() end
+-- set theme on start properly – this is blocking and can therefore make Neovide
+-- hang...
+-- local isDarkMode = fn.system([[osascript -e 'tell application "System Events" to return dark mode of appearance preferences']])
+-- if isDarkMode:find("true") then dark() -- using :find() since shorter than trimming whitespace in lua...
+-- else light() end
 
 -- toggle theme with OS
 local auto_dark_mode = require('auto-dark-mode')

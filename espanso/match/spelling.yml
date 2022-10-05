@@ -159,3 +159,5 @@ matches:
   - trigger: vllt
     replace: vielleicht
     word: true
+  - regex: " ign\\b"
+    replace: " ing"
