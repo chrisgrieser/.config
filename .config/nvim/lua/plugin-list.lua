@@ -41,8 +41,8 @@ function PluginList (use)
 	use 'nvim-lualine/lualine.nvim' -- status bar
 	use 'airblade/vim-gitgutter' -- changes in gutter
 	use 'f-person/auto-dark-mode.nvim' -- auto-toggle themes with OS dark/light mode
-	-- use 'norcalli/nvim-colorizer.lua' -- color previews
-	use 'brenoprata10/nvim-highlight-colors'
+	-- use 'brenoprata10/nvim-highlight-colors'-- color previews
+	use 'uga-rosa/ccc.nvim'
 
 	-- File Management & Switching
 	use 'tpope/vim-eunuch' -- file operation utilities
