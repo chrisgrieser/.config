@@ -79,6 +79,7 @@
 				<key>filetypes</key>
 				<array>
 					<string>dyn.ah62d4rv4ge8043a</string>
+					<string>net.daringfireball.markdown</string>
 				</array>
 				<key>name</key>
 				<string>Convert with Pandoc</string>
