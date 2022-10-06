@@ -56,8 +56,10 @@ require('nvim-treesitter.configs').setup {
 			enable = true,
 			lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
 			keymaps = {
-				["af"] = "@function.outer", 
+				["af"] = "@function.outer",
 				["if"] = "@function.inner",
+				["aa"] = "@parameter.outer", -- [a]argument text object
+				["ia"] = "@parameter.inner",
 			},
 			-- If you set this to `true` (default is `false`) then any textobject is
 			-- extended to include preceding xor succeeding whitespace. Succeeding
