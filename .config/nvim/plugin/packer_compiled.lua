@@ -110,6 +110,11 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/calvera-dark.nvim",
     url = "https://github.com/yashguptaz/calvera-dark.nvim"
   },
+  ["ccc.nvim"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/ccc.nvim",
+    url = "https://github.com/uga-rosa/ccc.nvim"
+  },
   ["cheat.sh-vim"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/cheat.sh-vim",
@@ -184,11 +189,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim",
     url = "https://github.com/catppuccin/nvim"
-  },
-  ["nvim-highlight-colors"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim-highlight-colors",
-    url = "https://github.com/brenoprata10/nvim-highlight-colors"
   },
   ["nvim-treesitter"] = {
     loaded = true,
