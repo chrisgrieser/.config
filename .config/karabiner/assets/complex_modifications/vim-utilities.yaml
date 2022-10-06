@@ -14,7 +14,10 @@ rules:
             modifiers:
               - option
               - control
-
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - "[Nn]eovide"
   - description: "⚒️ f+j (simultaneously): ↵"
     manipulators:
       - type: basic

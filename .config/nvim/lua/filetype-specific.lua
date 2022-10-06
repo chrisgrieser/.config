@@ -19,8 +19,12 @@ keymap("n", "<leader>d", 'mzlEF.yEEp`z') -- [d]ouble class under cursor
 keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>') -- [D]uplicate Class under cursor
 
 keymap("n", "<leader>i", function ()
-	
-		fn.getline('.', b.hrComment)
+	local lineContent = fn.getline('.')
+	if lineContent.find("!important") then
+		lineContent = lineContent:gsub("!important", "")
+	else
+	end
+
 end)
 
 -- JS / TS / Shell

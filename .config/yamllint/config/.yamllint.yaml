@@ -1,7 +1,6 @@
 # https://yamllint.readthedocs.io/en/stable/configuration.html#extending-the-default-configuration
 extends: default
 
-
 yaml-files:
   - '*.yaml'
   - '*.yml'
@@ -9,6 +8,3 @@ yaml-files:
 rules:
   line-length: disable
   document-start: disable
-  # Sublime already takes care of that
-  trailing-spaces: disable
-  new-line-at-end-of-file: disable

@@ -11,11 +11,11 @@ g.ale_cursor_detail = 0 -- open popup instead of msg
 g.ale_echo_msg_format = '[%linter%] %code: %%s' -- add linter so it's clearer from which linter the error comes
 
 g.ale_virtualtext_cursor = 1
-g.ale_virtualtext_delay = 200
+g.ale_virtualtext_delay = 1000
 g.ale_virtualtext_prefix = ' ↞ '
 cmd[[highlight ALEVirtualTextError ctermfg=red guifg=red]]
 cmd[[highlight ALEVirtualTextWarning ctermfg=yellow guifg=yellow]]
-cmd[[highlight ALEVirtualTextInfo ctermfg=blue guifg=blue]]
+cmd[[highlight ALEVirtualTextInfo ctermfg=magenta guifg=magenta]]
 
 --------------------------------------------------------------------------------
 
@@ -42,7 +42,10 @@ g.ale_markdown_markdownlint_options = "--disable=no-trailing-spaces --disable=si
 -- css
 g.ale_css_stylelint_options = '--quiet'-- ignore warnings
 
--- lua:
+-- yaml
+g.ale_yaml_yamllint_options = 'yamllint --config-file="$HOME/.config/.yamllint.yaml"'
+
+-- lua
 g.ale_linters_ignore = {lua = {'selene'}} -- disable selene since buggy: https://github.com/dense-analysis/ale/issues/4329
 g.ale_css_selene_options = ''
 
