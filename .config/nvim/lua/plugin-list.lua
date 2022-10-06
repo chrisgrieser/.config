@@ -57,7 +57,8 @@ function PluginList (use)
 	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'}
 	use 'tpope/vim-abolish' -- various case conversions
 	use 'svermeulen/vim-subversive' -- substitution operator
-	use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
+	use { 'numToStr/Comment.nvim', -- better comment operators than commentary; comment text object by tree-sitter text objects
+		config = function() require('Comment').setup() end }
 
 	-- Objects & Motions
 	use 'mg979/vim-visual-multi' -- multi-cursor

@@ -13,9 +13,9 @@ g.ale_echo_msg_format = '[%linter%] %code: %%s' -- add linter so it's clearer fr
 g.ale_virtualtext_cursor = 1
 g.ale_virtualtext_delay = 1000
 g.ale_virtualtext_prefix = ' ↞ '
-cmd[[highlight ALEVirtualTextError ctermfg=red guifg=red]]
-cmd[[highlight ALEVirtualTextWarning ctermfg=yellow guifg=yellow]]
-cmd[[highlight ALEVirtualTextInfo ctermfg=magenta guifg=magenta]]
+cmd[[highlight ALEVirtualTextError ctermfg=red guibg=red]]
+cmd[[highlight ALEVirtualTextWarning ctermfg=yellow guibg=yellow]]
+cmd[[highlight ALEVirtualTextInfo ctermfg=magenta guibg=magenta]]
 
 --------------------------------------------------------------------------------
 
@@ -53,8 +53,7 @@ g.ale_css_selene_options = ''
 
 -- keybindings
 keymap("n", "<leader>f","<Plug>(ale_fix)") -- fix single instance
-keymap("n", "<leader>L","<Plug>(ale_lint)") -- line current file
+keymap("n", "<leader>L","<Plug>(ale_lint)") -- lint current file
 
-keymap("n", "gl","<Plug>(ale_next_wrap)")
-keymap("n", "gL","<Plug>(ale_previous_wrap)")
+keymap("n", "ge","<Plug>(ale_next_wrap)") -- goto [e]rror
 
