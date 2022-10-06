@@ -1,10 +1,16 @@
 require("utils")
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
--- THEME
+-- BASE CONFIG
 darkTheme = "tokyonight-moon"
 lightTheme = "tokyonight-day"
 
+g.gui_font_default_size = 26
+g.gui_font_face = "JetBrainsMonoNL Nerd Font"
+
+--------------------------------------------------------------------------------
+
+-- THEME
 local function light()
 	cmd("colorscheme "..lightTheme)
 	api.nvim_set_option('background', 'light')
@@ -13,7 +19,7 @@ end
 local function dark()
 	cmd("colorscheme "..darkTheme)
 	api.nvim_set_option('background', 'dark')
-	cmd[[highlight TreesitterContext guibg=DarkGrey]]
+	cmd[[highlight TreesitterContext guibg=Black]]
 end
 
 -- toggle theme with OS
@@ -39,8 +45,11 @@ keymap("i", "<D-Z>", "<Esc>:redo<CR>a")
 keymap("n", "<D-a>", "ggVG") -- cmd+a
 keymap("i", "<D-a>", "<Esc>ggVG")
 keymap("v", "<D-a>", "ggG")
+
 keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 cmd[[let g:VM_maps['Find Under'] = '<D-j>']] -- cmd+j for jumping selection
+keymap("i", "<D-j>", "<C-o>ghiw")
+
 
 -- cut, copy & paste
 keymap({"n", "v"}, "<D-v>", "p")
@@ -53,8 +62,6 @@ keymap("v", "<D-x>", "d")
 
 -- font resizing font size
 -- https://neovide.dev/faq.html#how-can-i-dynamically-change-the-font-size-at-runtime
-g.gui_font_default_size = 25
-g.gui_font_face = "JetBrainsMonoNL Nerd Font"
 
 g.gui_font_size = g.gui_font_default_size
 RefreshGuiFont = function()
@@ -68,7 +75,6 @@ ResetGuiFont = function()
 	g.gui_font_size = g.gui_font_default_size
 	RefreshGuiFont()
 end
-
 ResetGuiFont() -- Call function on startup to set default value
 
 -- Keymaps
@@ -102,4 +108,4 @@ g.neovide_hide_mouse_when_typing = true
 g.neovide_remember_window_size = true
 
 g.neovide_input_macos_alt_is_meta = true -- makes `opt` usable on macOS
-keymap({"n", "v", "i"}, "<M-l>", "@") -- needed when alt is turned into meta key
+keymap({"n", "v"}, "<M-l>", "@") -- needed when alt is turned into meta key
