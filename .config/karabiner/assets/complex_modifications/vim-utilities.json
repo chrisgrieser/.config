@@ -19,7 +19,7 @@
             {
               "key_code": "spacebar",
               "modifiers": [
-                "command",
+                "option",
                 "control"
               ]
             }

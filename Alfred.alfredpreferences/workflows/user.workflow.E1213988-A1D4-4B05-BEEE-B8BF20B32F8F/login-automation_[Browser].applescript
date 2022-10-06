@@ -13,6 +13,6 @@ tell application "System Events"
 	keystroke tab
 	keystroke space
 	delay 0.7
-	keystroke return
+	-- keystroke return
 end tell
 

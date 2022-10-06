@@ -8,17 +8,13 @@ lightTheme = "tokyonight-day"
 local function light()
 	cmd("colorscheme "..lightTheme)
 	api.nvim_set_option('background', 'light')
+	cmd[[highlight TreesitterContext guibg=DarkGrey]]
 end
 local function dark()
-	cmd("colorscheme "..lightTheme)
+	cmd("colorscheme "..darkTheme)
 	api.nvim_set_option('background', 'dark')
+	cmd[[highlight TreesitterContext guigb=DarkGrey]]
 end
-
--- set theme on start properly – this is blocking and can therefore make Neovide
--- hang...
--- local isDarkMode = fn.system([[osascript -e 'tell application "System Events" to return dark mode of appearance preferences']])
--- if isDarkMode:find("true") then dark() -- using :find() since shorter than trimming whitespace in lua...
--- else light() end
 
 -- toggle theme with OS
 local auto_dark_mode = require('auto-dark-mode')
@@ -105,6 +101,5 @@ g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
 g.neovide_hide_mouse_when_typing = true
 g.neovide_remember_window_size = true
 
-g.neovide_input_macos_alt_is_meta = false -- makes `opt` usable on mac
--- needed if line above enabled
--- keymap({"n", "v", "i"}, "<M-l>", "@") -- needed when alt is turned into meta key
+g.neovide_input_macos_alt_is_meta = true -- makes `opt` usable on macOS
+keymap({"n", "v", "i"}, "<M-l>", "@") -- needed when alt is turned into meta key

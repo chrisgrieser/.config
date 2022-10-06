@@ -18,7 +18,7 @@ cmd[[highlight CursorLine term=none cterm=none guibg=black ctermbg=black]]
 cmd[[highlight CocHighlightText term=underline cterm=underline]]
 
 -- TreeSitter Context Line
-cmd[[highlight TreesitterContext ctermbg=black guibg=DarkGrey]]
+cmd[[highlight TreesitterContext ctermbg=black]]
 
 -- Indentation Lines
 cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey guifg=DarkGrey]]
