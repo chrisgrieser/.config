@@ -137,7 +137,10 @@ rules:
         from:
           key_code: period
         to:
-          - key_code: fn
+          - key_code: spacebar
+            modifiers:
+              - control
+              - command
           - set_variable:
               name: LEADER_ACTIVE
               value: false

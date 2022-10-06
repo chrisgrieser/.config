@@ -12,7 +12,7 @@ rules:
         to:
           - key_code: spacebar
             modifiers:
-              - command
+              - option
               - control
 
   - description: "⚒️ f+j (simultaneously): ↵"
