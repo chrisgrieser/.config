@@ -125,6 +125,7 @@ keymap("n", "<Tab>", ">>")
 keymap("n", "<S-Tab>", "<<")
 keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
+
 keymap({"n", "v"}, "^", "=") -- auto-indent
 keymap("n", "^^", "=ip") -- auto-indenting paragraph is for more common
 keymap("n", "^p", "`[v`]=") -- last paste

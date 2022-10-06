@@ -2,9 +2,10 @@
 function run(input) {
 
 	// 👉 Config: Enter your Default non-Obsidian Markdown App here
-	const markdownApp = "Sublime Text";
+	const markdownApp = "Neovim";
 
-	// -----------------------
+	//───────────────────────────────────────────────────────────────────────────
+
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
 	const pathArray = input.toString().split(",");
