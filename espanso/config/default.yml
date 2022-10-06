@@ -12,7 +12,6 @@ auto_restart: true
 # --- Clipboard threshold
 # Because injecting long texts char-by-char is a slow operation, espanso automatically
 # uses the clipboard if the text is longer than 'clipboard_threshold' characters.
-clipboard_threshold: 1
 preserve_clipboard: true
 restore_clipboard_delay: 300
 
@@ -21,5 +20,5 @@ restore_clipboard_delay: 300
 # them has its quirks, therefore you may want to change it if you are having problems.
 # By default, espanso uses the "Auto" backend which should work well in most cases,
 # but you may want to try the "Clipboard" or "Inject" backend in case of issues.
-backend: Auto
+backend: Clipboard
 

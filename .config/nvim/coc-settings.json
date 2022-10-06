@@ -26,6 +26,7 @@
   "Lua.diagnostics.globals": ["vim", "martax"],
   "Lua.diagnostics.disable": [
     "trailing-space",
+    "undefined-field", // https://github.com/sumneko/lua-language-server/issues/1615
     "lowercase-global"
   ],
   "Lua.workspace.library": [
