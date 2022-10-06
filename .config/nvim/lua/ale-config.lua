@@ -10,13 +10,6 @@ g.ale_disable_lsp = 1
 g.ale_cursor_detail = 0 -- open popup instead of msg
 g.ale_echo_msg_format = '[%linter%] %code: %%s' -- add linter so it's clearer from which linter the error comes
 
-g.ale_virtualtext_cursor = 1
-g.ale_virtualtext_delay = 1000
-g.ale_virtualtext_prefix = ' ↞ '
-cmd[[highlight ALEVirtualTextError ctermfg=red guibg=red]]
-cmd[[highlight ALEVirtualTextWarning ctermfg=yellow guibg=yellow]]
-cmd[[highlight ALEVirtualTextInfo ctermfg=magenta guibg=magenta]]
-
 --------------------------------------------------------------------------------
 
 -- LINTING OPTIONS
