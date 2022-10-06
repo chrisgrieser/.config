@@ -9,16 +9,16 @@
   "suggest.lowPrioritySourceLimit": 20,
   "suggest.floatConfig": {"border": true},
 
-  "diagnostic.errorSign": "▪︎",
-  "diagnostic.warningSign": "▴",
-  "diagnostic.infoSign": "•",
-  "diagnostic.hintSign": "•",
+  "diagnostic.errorSign": "■",
+  "diagnostic.warningSign": "▲",
+  "diagnostic.infoSign": "●",
+  "diagnostic.hintSign": "●",
   "diagnostic.displayByAle": true, // INFO: redirects everything to ALE
 
   "coc.source.emoji.enable": true,
   "coc.source.emoji.triggerCharacters": [":"],
   "coc.source.emoji.shortcut": "",
-  "coc.source.emoji.filetypes": [ "markdown", "css", "javascript", "typescript", "lua", "toml", "json", "yaml" ],
+  "coc.source.emoji.filetypes": ["*"],
 
   "sumneko-lua.enableNvimLuaDev": true,
   "Lua.hint.paramName": "Disable",
