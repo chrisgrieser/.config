@@ -18,6 +18,11 @@ keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key
 keymap("n", "<leader>d", 'mzlEF.yEEp`z') -- [d]ouble class under cursor
 keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>') -- [D]uplicate Class under cursor
 
+keymap("n", "<leader>i", function ()
+	
+		fn.getline('.', b.hrComment)
+end)
+
 -- JS / TS / Shell
 keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, requires vim.surround
 
