@@ -27,7 +27,6 @@ function isMaximized (win)
 	return win:frame().w == max.w
 end
 
--- window size checks
 function isPseudoMaximized (win)
 	if not(win) then return false end
 	local max = win:screen():frame()
@@ -68,7 +67,7 @@ function toggleHighlightsSidebar (highlightsWin)
 		local screen_w = highlightsWin:screen():frame().w
 		local highlightsApp = hs.application("Highlights")
 		highlightsApp:activate()
-		if (highlights_w / screen_w > 0.6) then
+		if (highlights_w / screen_w < 0.6) then
 			highlightsApp:selectMenuItem({"View", "Show Sidebar"})
 		else
 			highlightsApp:selectMenuItem({"View", "Hide Sidebar"})
@@ -84,7 +83,10 @@ function toggleObsidianSidebar (obsiWin)
 		if (numberOfObsiWindows > 1) then return end -- prevent popout window resizing to affect sidebars
 		local obsi_width = obsiWin:frame().w
 		local screen_width = obsiWin:screen():frame().w
-		if (obsi_width / screen_width > 0.6) then
+
+		-- if pseudo-maximized, hide sidebar, if half or full show sidebar
+		-- (full = used as split pane)
+		if (obsi_width / screen_width > 0.6) and (obsi_width / screen_width < 0.99) then
 			openLinkInBackground("obsidian://sidebar?showLeft=true&showRight=false")
 		else
 			openLinkInBackground("obsidian://sidebar?showLeft=false&showRight=false")
