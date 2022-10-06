@@ -19,6 +19,7 @@ opt.shiftwidth = 3
 opt.shiftround = true
 
 -- gutter
+opt.number = true
 opt.relativenumber = true
 opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
 
