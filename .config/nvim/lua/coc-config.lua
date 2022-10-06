@@ -46,8 +46,6 @@ keymap("n", "<leader>h", function () show_docs() end, {silent = true, nowait = t
 
 -- Error Navigation & Actions
 local opts = {silent = true, nowait = true}
-keymap("n", "ge", "<Plug>(coc-diagnostic-next)", opts)
-keymap("n", "gE", "<Plug>(coc-diagnostic-prev)", opts)
 keymap("n", "<leader>f", "<Plug>(coc-fix-current)", opts)
 keymap("x", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
 keymap("n", "<leader>a", "<Plug>(coc-codeaction-cursor)", opts)

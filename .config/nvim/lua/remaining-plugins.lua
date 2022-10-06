@@ -30,3 +30,7 @@ require("registers").setup({
 	},
 })
 
+-- comments.nvim
+require("Comment").setup({
+	extra = { eol = "gca" } -- so the binding does not require a shift...
+})
