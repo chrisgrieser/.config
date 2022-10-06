@@ -55,9 +55,9 @@ function PluginList (use)
 
 	-- Operators
 	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'}
-	use 'tpope/vim-commentary' -- comments operator & text object
 	use 'tpope/vim-abolish' -- various case conversions
 	use 'svermeulen/vim-subversive' -- substitution operator
+	use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
 
 	-- Objects & Motions
 	use 'mg979/vim-visual-multi' -- multi-cursor

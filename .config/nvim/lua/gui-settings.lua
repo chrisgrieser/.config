@@ -47,9 +47,9 @@ keymap("i", "<D-a>", "<Esc>ggVG")
 keymap("v", "<D-a>", "ggG")
 
 keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
-cmd[[let g:VM_maps['Find Under'] = '<D-j>']] -- cmd+j for jumping selection
-keymap("i", "<D-j>", "<C-o>ghiw")
 
+cmd[[let g:VM_maps['Find Under'] = '<D-j>']] -- cmd+j for jumping selection
+keymap("i", "<D-j>", '<C-o>"_ciw')
 
 -- cut, copy & paste
 keymap({"n", "v"}, "<D-v>", "p")
@@ -62,7 +62,6 @@ keymap("v", "<D-x>", "d")
 
 -- font resizing font size
 -- https://neovide.dev/faq.html#how-can-i-dynamically-change-the-font-size-at-runtime
-
 g.gui_font_size = g.gui_font_default_size
 RefreshGuiFont = function()
 	opt.guifont = string.format("%s:h%s",g.gui_font_face, g.gui_font_size)
@@ -76,8 +75,6 @@ ResetGuiFont = function()
 	RefreshGuiFont()
 end
 ResetGuiFont() -- Call function on startup to set default value
-
--- Keymaps
 keymap({'n','v','i'}, '<D-+>', function() ResizeGuiFont(1)  end, {silent = true})
 keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true})
 
