@@ -3,7 +3,7 @@
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
-      "description": "⚒️ Fix <S-Space> for neovim",
+      "description": "⚒️ Fix <S-Space> for neovim and terminal",
       "manipulators": [
         {
           "type": "basic",
@@ -29,6 +29,36 @@
               "type": "frontmost_application_if",
               "file_paths": [
                 "[Nn]eovide"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "spacebar",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "d"
+            },
+            {
+              "key_code": "a"
+            },
+            {
+              "key_code": "w"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "file_paths": [
+                "alacritty$"
               ]
             }
           ]

@@ -4,7 +4,7 @@
 matches:
   # ",,lang,," will create a code block of the respective language and prefill
   # it with the clipboard content, e.g. `,,js,,`
-  - regex: "\\r,,(?P<lang>\\w*),," # mac requires \r instead of \n
+  - regex: ",,(?P<lang>\\w*),,"
     replace: "```{{lang}}\n{{clipboard}}\n```"
     label: Markdown Codeblock
     vars:
@@ -43,11 +43,6 @@ matches:
       tags: seedling, $|$
       similar:
       ---
-    label: Base YAML Header
-
-  # citation source in block quotes
-  - trigger: '!cite'
-    replace: "  \n> *– $|$*"
     label: Base YAML Header
 
   - trigger: "!github"

@@ -8,3 +8,4 @@ yaml-files:
 rules:
   line-length: disable
   document-start: disable
+  trailing-spaces: disable

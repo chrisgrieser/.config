@@ -18,13 +18,15 @@ keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key
 keymap("n", "<leader>d", 'mzlEF.yEEp`z') -- [d]ouble class under cursor
 keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>') -- [D]uplicate Class under cursor
 
+-- CSS: toggle !important
 keymap("n", "<leader>i", function ()
 	local lineContent = fn.getline('.')
-	if lineContent.find("!important") then
-		lineContent = lineContent:gsub("!important", "")
+	if lineContent:find("!important") then
+		lineContent = lineContent:gsub(" !important", "")
 	else
+		lineContent = lineContent:gsub(";", " !important;")
 	end
-
+	fn.setline(".", lineContent)
 end)
 
 -- JS / TS / Shell
