@@ -57,9 +57,9 @@ cmd[[highlight GitGutterChange guifg=Yellow ctermfg=Yellow]]
 cmd[[highlight GitGutterDelete guifg=Red    ctermfg=Red]]
 g.gitgutter_sign_added = '│'
 g.gitgutter_sign_modified = '│'
-g.gitgutter_sign_removed = '–'
-g.gitgutter_sign_removed_first_line = '⎺'
-g.gitgutter_sign_removed_above_and_below = '␥'
+g.gitgutter_sign_removed = '╌'
+g.gitgutter_sign_removed_first_line = '╌'
+g.gitgutter_sign_removed_above_and_below = '╌'
 g.gitgutter_sign_modified_removed = '│'
 
 g.ale_sign_error = "■"
