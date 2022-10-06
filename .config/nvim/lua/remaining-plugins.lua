@@ -36,8 +36,15 @@ require("Comment").setup({
 })
 
 --------------------------------------------------------------------------------
--- required for colorizer plugins
--- opt.termguicolors = true
--- require("nvim-highlight-colors").setup{}
+opt.termguicolors = true
+require("colorizer").setup {
+	user_default_options = { css = true },
+}
 
+autocmd("FileType", {
+	pattern = {"css"},
+	callback = function ()
+		require("colorizer").attach_to_buffer(0, { mode = "background", css = true})
+	end
+})
 
