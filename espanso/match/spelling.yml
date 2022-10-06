@@ -159,5 +159,6 @@ matches:
   - trigger: vllt
     replace: vielleicht
     word: true
-  - regex: "\\Bign\\b"
-    replace: "ing"
+  # words ending with "ing", but not "sign"
+  - regex: "(?P<prefix>\\w{2})ign\\b"
+    replace: "{{prefix}}ing"

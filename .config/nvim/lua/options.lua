@@ -37,7 +37,7 @@ autocmd({"BufWinEnter"}, { -- since autochdir is not always reliable...?
 })
 
 -- auto-save
-autocmd({"BufWinLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
+autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
 	pattern = "?*",
 	command = "silent! update"
 })
@@ -81,7 +81,7 @@ opt.iskeyword = opt.iskeyword + {"-"}
 -- status bar
 opt.showcmd = true -- keychords pressed
 opt.showmode = false -- don't show "-- Insert --"
-opt.laststatus = 2
+opt.laststatus = 3 -- show one status line for all splits
 -- opt.cmdheight = 0 -- hide message line if there is no content (requires nvim 0.8)
 -- glitches: https://github.com/nvim-lualine/lualine.nvim/issues/853
 
