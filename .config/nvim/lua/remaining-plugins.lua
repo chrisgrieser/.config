@@ -36,15 +36,17 @@ require("Comment").setup({
 })
 
 --------------------------------------------------------------------------------
-opt.termguicolors = true
-require("colorizer").setup {
-	user_default_options = { css = true },
-}
+opt.termguicolors = true -- required for colorizer plugins
+
+require("colorizer").setup {}
 
 autocmd("FileType", {
 	pattern = {"css"},
 	callback = function ()
-		require("colorizer").attach_to_buffer(0, { mode = "background", css = true})
+		require("colorizer").attach_to_buffer(0, {
+			mode = "background",
+			css = true,
+		})
 	end
 })
 
