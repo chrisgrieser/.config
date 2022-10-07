@@ -41,6 +41,10 @@ function PluginList (use)
 	use 'f-person/auto-dark-mode.nvim' -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 
+	use({ 'mvllow/modes.nvim',
+		config = function() require('modes').setup() end
+	})
+
 	-- File Management & Switching
 	use 'tpope/vim-eunuch' -- file operation utilities
 	use { 'nvim-telescope/telescope.nvim', -- fuzzy finder

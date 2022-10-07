@@ -99,8 +99,8 @@ require('lualine').setup {
 		lualine_b = {{ currentFile }},
 		lualine_c = {{ alternateFile }},
 		lualine_x = {'diff'},
-		lualine_y = {{'diagnostics', sources = { 'nvim_diagnostic', 'coc', 'ale' }}},
-		lualine_z = {'location', 'progress'}
+		lualine_y = {'location', 'progress'},
+		lualine_z = {{'diagnostics', sources = { 'nvim_diagnostic', 'coc', 'ale' }}}
 	},
 	options = {
 		theme  = 'auto',

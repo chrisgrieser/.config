@@ -106,39 +106,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>80C79CA2-09FA-4745-B7A0-56A4453C42C5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Copy Packer Line</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy GitHub URL</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A750B10D-2695-481F-B660-F29C241C6727</key>
 		<array>
 			<dict>
@@ -629,55 +596,6 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>vt</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>search-vim-colorschemes.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search Neovim Plugin</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>80C79CA2-09FA-4745-B7A0-56A4453C42C5</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -780,17 +698,6 @@
 			<key>ypos</key>
 			<real>510</real>
 		</dict>
-		<key>80C79CA2-09FA-4745-B7A0-56A4453C42C5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>plugin search</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>770</real>
-		</dict>
 		<key>8C279CF4-80F0-4D28-B0BA-137130AC177A</key>
 		<dict>
 			<key>colorindex</key>
@@ -827,9 +734,9 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>345</real>
+			<real>350</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>615</real>
 		</dict>
 		<key>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</key>
 		<dict>

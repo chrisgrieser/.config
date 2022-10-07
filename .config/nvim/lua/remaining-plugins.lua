@@ -28,14 +28,17 @@ require("Comment").setup({
 	mappings = { basic = false } -- since the basic one's are done with commentary
 })
 
+-- indention lines
+g.indent_blankline_filetype_exclude = {"undotree"}
+
 -- undotree
-g.undotree_WindowLayout = 3
+-- also requires persistent undos in the options
+g.undotree_WindowLayout = 3 -- split to the right
 g.undotree_SplitWidth = 30
 g.undotree_DiffAutoOpen = 0
 g.undotree_SetFocusWhenToggle = 1
-g.undotree_ShortIndicators = 1
+g.undotree_ShortIndicators = 1 -- for the relative date
 g.undotree_HelpLine = 0 -- 0 hides the "Press ? for help"
-
 cmd[[ function g:Undotree_CustomMap()
 	nmap <buffer> <C-j> <plug>UndotreePreviousState
 	nmap <buffer> <C-k> <plug>UndotreeNextState
@@ -43,3 +46,29 @@ cmd[[ function g:Undotree_CustomMap()
 	nmap <buffer> K 7k
 endfunc ]]
 
+require('modes').setup({
+
+	colors = {
+		copy = "#f5c359",
+		delete = "#c75c6a",
+		insert = "#78ccc5",
+		visual = "#9745be",
+	},
+
+	-- Set opacity for cursorline and number background
+	line_opacity = 0.15,
+
+	-- Enable cursor highlights
+	set_cursor = true,
+
+	-- Enable cursorline initially, and disable cursorline for inactive windows
+	-- or ignored filetypes
+	set_cursorline = true,
+
+	-- Enable line number highlights to match cursorline
+	set_number = true,
+
+	-- Disable modes highlights in specified filetypes
+	-- Please PR commonly ignored filetypes
+	ignore_filetypes = { 'NvimTree', 'TelescopePrompt' }
+})
