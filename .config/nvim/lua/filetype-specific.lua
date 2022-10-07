@@ -14,11 +14,12 @@ keymap("n", "<leader>>", "mzI> <Esc>`z") -- Turn into blockquote
 
 -- CSS / JSON / YAML
 keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key
+
 -- CSS
 keymap("n", "<leader>d", 'mzlEF.yEEp`z') -- [d]ouble class under cursor
 keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>') -- [D]uplicate Class under cursor
 
--- CSS: toggle !important
+-- toggle !important
 keymap("n", "<leader>i", function ()
 	local lineContent = fn.getline('.')
 	if lineContent:find("!important") then
@@ -47,6 +48,8 @@ autocmd("FileType", {
 		keymap("n", "q", ":close<CR>", {buffer = true, silent = true})
 	end
 })
+
+keymap("n", "gca", 'A<C-r>=expand("%:p:h")<CR>')
 
 --------------------------------------------------------------------------------
 

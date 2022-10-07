@@ -67,7 +67,7 @@ g.gitgutter_sign_removed_first_line = '–'
 g.gitgutter_sign_removed_above_and_below = '–'
 g.gitgutter_sign_modified_removed = '│'
 
--- ▪︎▴• 
+-- ▪︎▴•  
 g.ale_sign_error = " "
 g.ale_sign_warning = " "
 g.ale_sign_info = " "
