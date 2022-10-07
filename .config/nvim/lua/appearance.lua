@@ -67,10 +67,10 @@ g.gitgutter_sign_removed_first_line = '–'
 g.gitgutter_sign_removed_above_and_below = '–'
 g.gitgutter_sign_modified_removed = '│'
 
--- ▪︎▴• 
-g.ale_sign_error = ""
-g.ale_sign_warning = ""
-g.ale_sign_info = ""
+-- ▪︎▴• 
+g.ale_sign_error = " "
+g.ale_sign_warning = " "
+g.ale_sign_info = " "
 g.ale_sign_style_error = g.ale_sign_error
 g.ale_sign_style_warning = g.ale_sign_warning
 
@@ -95,7 +95,7 @@ end
 
 require('lualine').setup {
 	sections = {
-		lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
+		lualine_a = {{ 'mode', fmt = function(str) return str end }},
 		lualine_b = {{ currentFile }},
 		lualine_c = {{ alternateFile }},
 		lualine_x = {'diff'},

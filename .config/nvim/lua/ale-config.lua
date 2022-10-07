@@ -9,12 +9,17 @@ g.ale_disable_lsp = 1
 -- DISPLAY OPTIONS
 g.ale_cursor_detail = 0 -- open popup instead of msg
 g.ale_echo_msg_format = '[%linter%] %code: %%s' -- add linter so it's clearer from which linter the error comes
-g.ale_echo_delay = 1
+g.ale_echo_delay = 100
 
+local fsfsf
 g.ale_cursor_detail = 1 -- preview popup
 g.ale_detail_to_floating_preview = 1
-g.ale_floating_window_border = {'│', '─', '╭', '╮', '╯', '╰', '│', '─'}
-fsfsf
+g.ale_floating_window_border = {}
+g.ale_floating_preview_popup_opts = {
+	border = "rounded",
+	abort = {title = "blubb"}
+}
+
 --------------------------------------------------------------------------------
 
 -- LINTING OPTIONS
