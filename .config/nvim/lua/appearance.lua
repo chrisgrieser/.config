@@ -62,23 +62,19 @@ cmd[[highlight GitGutterChange guifg=Yellow ctermfg=Yellow]]
 cmd[[highlight GitGutterDelete guifg=Red    ctermfg=Red]]
 g.gitgutter_sign_added = '│'
 g.gitgutter_sign_modified = '│'
-g.gitgutter_sign_removed = '╌'
-g.gitgutter_sign_removed_first_line = '╌'
-g.gitgutter_sign_removed_above_and_below = '╌'
+g.gitgutter_sign_removed = '–'
+g.gitgutter_sign_removed_first_line = '–'
+g.gitgutter_sign_removed_above_and_below = '–'
 g.gitgutter_sign_modified_removed = '│'
 
-g.ale_sign_error = "■"
-g.ale_sign_warning = "▲"
-g.ale_sign_info = "○"
-g.ale_sign_style_error = "■"
-g.ale_sign_style_warning = "▲"
+-- ▪︎▴•
+g.ale_sign_error = "▪︎"
+g.ale_sign_warning = "▴"
+g.ale_sign_info = "•"
+g.ale_sign_style_error = g.ale_sign_error
+g.ale_sign_style_warning = g.ale_sign_warning
 
-fsfsf
-
--- INFO: Coc Gutter indicators set in coc-settings.json
-
-g.gitgutter_sign_priority = 9
--- coc sign priority should be 10
+g.gitgutter_sign_priority = 10
 g.ale_sign_priority = 30
 
 --------------------------------------------------------------------------------
