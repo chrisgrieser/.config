@@ -183,12 +183,13 @@ keymap("n", "<Left>", "<Plug>MoveCharLeft")
 keymap("v", "<Right>", "<Plug>MoveBlockRight")
 keymap("v", "<Left>", "<Plug>MoveBlockLeft")
 
--- Merging Lines
+-- Merging / Splitting Lines
 keymap({"n", "v"}, "M", "J") -- [M]erge line up
 keymap({"n", "v"}, "gm", "ddpkJ") -- [m]erge line down
 g.splitjoin_split_mapping = '' -- disable default mappings
 g.splitjoin_join_mapping  = ''
-
+keymap("n", "zj", ":SplitjoinJoin<CR>")
+keymap("n", "zs", ":SplitjoinSplit<CR>")
 
 -- Undo
 keymap({"n", "v"}, "U", "<C-r>") -- redo
