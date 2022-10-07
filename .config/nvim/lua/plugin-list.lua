@@ -40,7 +40,6 @@ function PluginList (use)
 	use 'airblade/vim-gitgutter' -- changes in gutter
 	use 'f-person/auto-dark-mode.nvim' -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	-- use 'norcalli/nvim-colorizer.lua' -- color previews
 
 	-- File Management & Switching
 	use 'tpope/vim-eunuch' -- file operation utilities
@@ -65,8 +64,11 @@ function PluginList (use)
 	use 'justinmk/vim-sneak'
 	use 'matze/vim-move' -- move lines with auto-indention (alternative: vim.unimpaired)
 
-	-- Misc
+	-- Markdown
 	use 'mzlogin/vim-markdown-toc'
+	use 'gaoDean/autolist.nvim'
+
+	-- Misc
 	use 'dbeniamine/cheat.sh-vim'
 	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
 	use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
