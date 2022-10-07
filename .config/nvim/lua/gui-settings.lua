@@ -20,7 +20,7 @@ end
 local function dark()
 	cmd("colorscheme "..darkTheme)
 	api.nvim_set_option('background', 'dark')
-	cmd[[highlight TreesitterContext guibg=Black]]
+	cmd[[highlight TreesitterContext guibg=#191726]]
 end
 
 -- toggle theme with OS

@@ -180,11 +180,6 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/minimal.nvim",
     url = "https://github.com/Yazeed1s/minimal.nvim"
   },
-  ["moonlight.nvim"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/moonlight.nvim",
-    url = "https://github.com/shaunsingh/moonlight.nvim"
-  },
   ["nightfox.nvim"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
@@ -234,6 +229,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/rasmus.nvim",
     url = "https://github.com/kvrohit/rasmus.nvim"
+  },
+  ["splitjoin.vim"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/splitjoin.vim",
+    url = "https://github.com/AndrewRadev/splitjoin.vim"
   },
   ["telescope.nvim"] = {
     loaded = true,

@@ -4,16 +4,15 @@ function PluginList (use)
 	-- Themes
 	use 'folke/tokyonight.nvim'
 	use 'Mofiqul/dracula.nvim'
+	use 'EdenEast/nightfox.nvim'
 
 	use 'sainnhe/edge'
-	use 'EdenEast/nightfox.nvim'
 	use 'catppuccin/nvim'
 	use "rebelot/kanagawa.nvim"
 	use "bluz71/vim-moonfly-colors"
 	use 'frenzyexists/aquarium-vim'
 	use 'glepnir/zephyr-nvim'
 	use 'ray-x/aurora'
-	use 'shaunsingh/moonlight.nvim'
 	use 'yashguptaz/calvera-dark.nvim'
 	use 'kyazdani42/blue-moon'
 	use 'Yazeed1s/minimal.nvim'
@@ -70,6 +69,7 @@ function PluginList (use)
 
 	-- Misc
 	use 'dbeniamine/cheat.sh-vim' -- docs search
+	use 'AndrewRadev/splitjoin.vim'
 	use 'mbbill/undotree' -- undo history nagivation
 	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
 	use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
