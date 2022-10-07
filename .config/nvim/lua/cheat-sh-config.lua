@@ -13,12 +13,12 @@ keymap("v", "<leader>k",
 	[[:call cheat#cheat("", -1, -1, 2, 0, '!')<CR>]],
 	{script = true, silent = true}
 )
-
+-- increase int by one
 augroup("cheatsheet", {})
 autocmd("BufWinEnter", {
 	pattern = g.CheatSheetBufferName,
 	callback = function ()
-		bo.syntax="ON" -- needed cause treesitter turns syntax off
+		bo.syntax="ON" -- needed cause treesitter turns syntax off?
 		keymap({"n", "v"}, "q", ":quit<CR>", {silent = true, buffer = true}) -- since it's effectively a read only mode
 		keymap({"n", "v"}, "<leader>k", ":call cheat#navigate(1,'Q')<CR><CR>", {silent = true, buffer = true, script = true})
 	end,
