@@ -2,7 +2,7 @@ require("utils")
 --------------------------------------------------------------------------------
 
 -- BASE CONFIG
-darkTheme = "moonlight"
+darkTheme = "duskfox"
 lightTheme = "tokyonight-day"
 
 g.gui_font_default_size = 26
@@ -21,9 +21,6 @@ local function dark()
 	cmd("colorscheme "..darkTheme)
 	api.nvim_set_option('background', 'dark')
 	cmd[[highlight TreesitterContext guibg=Black]]
-
-	cmd[[highlight ColorLine guibg=#383649]] -- for moonlight theme
-	cmd[[highlight CursorColumn guibg=#2b2937]]
 end
 
 -- toggle theme with OS
