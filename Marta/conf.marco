@@ -22,12 +22,12 @@ behavior {
     }
 
     table {
-        iconSize 35
+        iconSize 40
         verticalPadding 3
         colorHighlighting true
         showGoUpFolder false
         defaults {
-            columns ">size:130"
+            columns ">size:130,modified:160"
             ordering {
                 column "modified"
                 isAscending false
@@ -53,12 +53,12 @@ behavior {
 }
 
 fonts {
-    breadcrumbs [ "Recursive" 15 ]
-    virtualTabs [ "Recursive" 19 ]
-    files [ "Default" 25 ]
-    statusBar [ "Recursive" 21 ]
-    tableHeader [ "Default" 19 ]
-    tabs [ "Recursive" 20 ]
+    breadcrumbs [ "Recursive" 16 ]
+    virtualTabs [ "Recursive" 20 ]
+    files [ "Default" 27 ]
+    statusBar [ "Recursive" 23 ]
+    tableHeader [ "Default" 20 ]
+    tabs [ "Recursive" 21 ]
     preferences [ "Input" 24 ]
 }
 
