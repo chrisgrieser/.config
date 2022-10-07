@@ -91,7 +91,6 @@ keymap({"n", "v"}, "x", '"_x')
 keymap({"n", "v"}, "c", '"_c')
 keymap({"n", "v"}, "C", '"_C')
 keymap("n", "P", '"0p') -- paste what was yanked
-keymap("n", "P", '"0p') -- paste what was yanked
 
 -- TEXT OBJECTS
 -- the text-objects below need "_

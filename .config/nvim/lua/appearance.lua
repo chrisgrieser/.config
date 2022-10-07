@@ -9,10 +9,10 @@ opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinko
 opt.linespace = 3 -- px, similar to line height
 
 -- Ruler
-cmd[[highlight ColorColumn ctermbg=DarkGrey guibg=black]] -- https://www.reddit.com/r/neovim/comments/me35u9/lua_config_to_set_highlight/
+cmd[[highlight ColorColumn ctermbg=DarkGrey]] 
 
 -- Active Line
-cmd[[highlight CursorLine term=none cterm=none guibg=black ctermbg=black]]
+cmd[[highlight CursorLine term=none cterm=none  ctermbg=black]]
 
 -- Current Word Highlight (from Coc)
 cmd[[highlight CocHighlightText term=underline cterm=underline]]
