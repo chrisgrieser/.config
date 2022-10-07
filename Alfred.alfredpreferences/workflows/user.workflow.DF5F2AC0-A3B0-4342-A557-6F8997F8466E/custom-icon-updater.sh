@@ -44,7 +44,7 @@ case $APP_TO_UPDATE in
 		cp "$CUSTOM_ICON_FOLDER/Cryptomator.icns" 'Cryptomator.app/Contents/Resources/Cryptomator.icns'
 		touch "Cryptomator.app" ;;
 	"Alacritty"|"alacritty")
-		cp "$CUSTOM_ICON_FOLDER/Alacritty.icns" 'Alacritty.app/Contents/Resources/alacritty.icns'
+		cp "$CUSTOM_ICON_FOLDER/alacritty alt.icns" 'Alacritty.app/Contents/Resources/alacritty.icns'
 		touch "Alacritty.app" ;;
 	"Sublime Text")
 		cp "$CUSTOM_ICON_FOLDER/Sublime Text Black.icns" 'Sublime Text.app/Contents/Resources/Sublime Text.icns'
