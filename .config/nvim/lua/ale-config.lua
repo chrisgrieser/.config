@@ -13,10 +13,10 @@ g.ale_echo_msg_error_str = ""
 g.ale_echo_msg_warning_str = ""
 g.ale_echo_msg_info_str = ""
 
-g.ale_cursor_detail = 1 -- preview popup
-g.ale_detail_to_floating_preview = 1
-g.ale_floating_window_border = {}
-g.ale_floating_preview_popup_opts = { border = "rounded", }
+-- g.ale_cursor_detail = 1 -- preview popup
+-- g.ale_detail_to_floating_preview = 1
+-- g.ale_floating_window_border = {}
+-- g.ale_floating_preview_popup_opts = { border = "rounded", }
 
 --------------------------------------------------------------------------------
 
