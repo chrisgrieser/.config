@@ -30,3 +30,8 @@ require("registers").setup({
 	},
 })
 
+-- comments.nvim
+require("Comment").setup({
+	mappings = { basic = false } -- since the basic one's are done with commentary
+})
+
