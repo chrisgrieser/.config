@@ -3,8 +3,9 @@ function PluginList (use)
 
 	-- Themes
 	use 'folke/tokyonight.nvim'
-	use 'sainnhe/edge'
 	use 'Mofiqul/dracula.nvim'
+
+	use 'sainnhe/edge'
 	use 'EdenEast/nightfox.nvim'
 	use 'catppuccin/nvim'
 	use "rebelot/kanagawa.nvim"
@@ -30,10 +31,7 @@ function PluginList (use)
 	use 'mattn/emmet-vim' -- Emmet for CSS
 	use 'gelguy/wilder.nvim' -- suggestions for command line mode (: and /)
 	use {'rafamadriz/friendly-snippets', -- collection of common snippets
-		requires = 'neoclide/coc.nvim' } -- coc.snippet is the actual requirement
-
-	use { "tversteeg/registers.nvim", -- visualise registers on ´"´
-		config = function() require("registers").setup() end }
+		requires = 'neoclide/coc.nvim' } -- (coc.snippet is the actual requirement)
 
 	-- Appearance
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} } -- colored brackets
@@ -41,9 +39,8 @@ function PluginList (use)
 	use 'nvim-lualine/lualine.nvim' -- status bar
 	use 'airblade/vim-gitgutter' -- changes in gutter
 	use 'f-person/auto-dark-mode.nvim' -- auto-toggle themes with OS dark/light mode
+	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 	-- use 'norcalli/nvim-colorizer.lua' -- color previews
-
-	use "uga-rosa/ccc.nvim"
 
 	-- File Management & Switching
 	use 'tpope/vim-eunuch' -- file operation utilities
@@ -59,8 +56,6 @@ function PluginList (use)
 	use { 'numToStr/Comment.nvim', -- better comment operators than commentary; comment text object by tree-sitter text objects
 		config = function() require('Comment').setup() end }
 	use 'tpope/vim-commentary' -- comment text object
-
-
 
 	-- Objects & Motions
 	use 'mg979/vim-visual-multi' -- multi-cursor
