@@ -24,7 +24,7 @@ require("registers").setup({
 	show = '*"0123456789abcdefghijklmnopqrstuvwxy',
 	show_empty = false,
 	window = {
-		max_width = 50,
+		max_width = 30,
 		border = "rounded",
 		transparency = 0,
 	},
