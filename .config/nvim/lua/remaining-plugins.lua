@@ -28,3 +28,10 @@ require("Comment").setup({
 	mappings = { basic = false } -- since the basic one's are done with commentary
 })
 
+-- undotree
+g.undotree_WindowLayout = 3
+g.undotree_SplitWidth = 40
+g.undotree_DiffAutoOpen = 0 
+g.undotree_SetFocusWhenToggle = 1
+g.undotree_ShortIndicators = 1
+g.undotree_HelpLine = 1 -- 0 hides the "Press ? for help"

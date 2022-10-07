@@ -31,7 +31,6 @@ keymap("n", "<leader>P", ":PackerStatus<CR>")
 -- Utils
 keymap("n", "ZZ", ":w<CR>:q<CR>") -- quicker quitting
 keymap("n", "zz", ":! acp ")
--- keymap("n", "zz", ':!nohup alacritty --working-directory="<C-r>=expand("%:p:h")<CR>" &<CR>>', {silent = true})
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -102,6 +101,7 @@ keymap("v", "<Space>", '"_c')
 
 keymap("n", "q", '"_ci"') -- change double [q]uote
 keymap("n", "Q", '"_ci\'') -- change single [Q]uote
+keymap({"n", "v"}, "<leader>q" ,"q") -- needs to be remapped, since used as text object
 keymap("o", "p", '}') -- rest of the [p]aragraph
 keymap("o", "P", '{') -- beginning of the [P]aragraph
 
@@ -171,11 +171,14 @@ keymap("n", "<Left>", "<Plug>MoveCharLeft")
 keymap("v", "<Right>", "<Plug>MoveBlockRight")
 keymap("v", "<Left>", "<Plug>MoveBlockLeft")
 
--- Misc
-keymap({"n", "v"}, "U", "<C-r>") -- undo consistent on one key
+-- Merging Lines
 keymap({"n", "v"}, "M", "J") -- [M]erge line up
 keymap({"n", "v"}, "gm", "ddpkJ") -- [m]erge line down
-keymap({"n", "v"}, "<leader>q" ,"q") -- needs to be remapped, since used as text object
+
+-- Undo
+keymap({"n", "v"}, "U", "<C-r>") -- redo
+keymap("n", "<C-u>", "U") -- undo line
+keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
