@@ -99,9 +99,8 @@ keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<C-A-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
 keymap("v", "<Space>", '"_c')
 
-keymap("n", "q", '"_ci"') -- change double [q]uote
-keymap("n", "Q", '"_ci\'') -- change single [Q]uote
-keymap({"n", "v"}, "<leader>q" ,"q") -- needs to be remapped, since used as text object
+keymap("o", "q", '"_ci"') -- change double [q]uote
+keymap("o", "Q", '"_ci\'') -- change single [Q]uote
 keymap("o", "p", '}') -- rest of the [p]aragraph
 keymap("o", "P", '{') -- beginning of the [P]aragraph
 
@@ -178,6 +177,20 @@ keymap({"n", "v"}, "gm", "ddpkJ") -- [m]erge line down
 keymap({"n", "v"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", "U") -- undo line
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
+
+-- Comments (mnemonic: [q]uiet text)
+keymap({"n", "v"}, "q" ,"<Plug>Commentary")
+keymap("n", "qq" ,"<Plug>CommentaryLine")
+keymap("o", "aq" ,"<Plug>Commentary") -- [a] [c]omment
+
+require("Comment").setup({ -- comments.nvim
+	mappings = { basic = false }, -- since the basic one's are done with commentary
+	extra = { 
+		above = '<leader>q', -- above
+		eol = 'Q', -- after
+	},
+})
+keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
