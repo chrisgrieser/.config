@@ -26,6 +26,7 @@ require("telescope").setup {
 		help_tags = { prompt_prefix=':h' },
 		commands = { prompt_prefix=':' },
 		oldfiles = { prompt_prefix='🕔' },
+		highlights = { prompt_prefix='🎨' },
 		marks = { prompt_prefix="'" },
 		buffers = {prompt_prefix='📑',ignore_current_buffer = true},
 		live_grep = {cwd='%:p:h', disable_coordinates=true, prompt_prefix='🔎'},

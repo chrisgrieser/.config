@@ -30,26 +30,3 @@ require("registers").setup({
 	},
 })
 
--- comments.nvim
-require("Comment").setup({
-	extra = { eol = "gcA" } -- so the binding does not require a shift...
-})
-
---------------------------------------------------------------------------------
-opt.termguicolors = true
-
-local ccc = require("ccc")
-ccc.setup({
-	highlighter = { auto_enable = true },
-	inputs = { ccc.input.hsl, ccc.input.rgb },
-	outputs = { ccc.output.css_hsl, ccc.output.css_rgb }
-	convert = {
-	{ ccc.picker.hex, ccc.output.css_rgb },
-	{ ccc.picker.css_rgb, ccc.output.css_hsl },
-	{ ccc.picker.css_hsl, ccc.output.hex },
-}
-
-})
-
-keymap("n", "<leader>#", ":CccPick<CR>")
--- #355048 

@@ -1,0 +1,43 @@
+// vim: filetype=jsonc
+
+{
+  "coc.preferences.extensionUpdateCheck": "weekly",
+  "coc.source.around.disableSyntaxes": ["comment"],
+  "coc.source.buffer.enable": false,
+  "suggest.selection": "recentlyUsedByPrefix",
+  "suggest.labelMaxLength": 50,
+  "suggest.lowPrioritySourceLimit": 20,
+  "suggest.floatConfig": {"border": true},
+
+  "diagnostic.errorSign": "■",
+  "diagnostic.warningSign": "▲",
+  "diagnostic.infoSign": "●",
+  "diagnostic.hintSign": "●",
+  "diagnostic.displayByAle": true, // INFO: redirects everything to ALE
+
+  "coc.source.emoji.enable": true,
+  "coc.source.emoji.triggerCharacters": [":"],
+  "coc.source.emoji.shortcut": "",
+  "coc.source.emoji.filetypes": ["markdown", "yaml", "json", "lua"],
+
+  "sumneko-lua.enableNvimLuaDev": true,
+  "Lua.hint.paramName": "Disable",
+  "Lua.hint.setType": true,
+  "Lua.diagnostics.globals": ["vim", "martax"],
+  "Lua.diagnostics.disable": [
+    "trailing-space",
+    "undefined-field", // https://github.com/sumneko/lua-language-server/issues/1615
+    "lowercase-global"
+  ],
+  "Lua.workspace.library": [
+    "/Users/chrisgrieser/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
+    "/Users/chrisgrieser/.hammerspoon/lua",
+    "/Users/chrisgrieser/.config/nvim/lua"
+  ],
+
+  "css.lint.vendorPrefix": "ignore",
+  "css.lint.duplicateProperties": "error",
+  "css.colorDecorators.enable": true,
+  "Lua.telemetry.enable": false
+}
+

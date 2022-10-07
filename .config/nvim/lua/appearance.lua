@@ -26,8 +26,13 @@ cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey guifg=DarkGrey]]
 -- Comments
 cmd[[highlight Comment ctermfg=grey]]
 
--- Popupmenus
+-- Popup menus
 cmd[[highlight Pmenu ctermbg=DarkGrey]]
+
+-- Line Numbers
+cmd[[highlight LineNr ctermfg=DarkGrey]]
+cmd[[highlight CursorLineNr ctermfg=Grey]]
+
 
 --------------------------------------------------------------------------------
 -- custom highlights
@@ -64,9 +69,11 @@ g.gitgutter_sign_modified_removed = '│'
 
 g.ale_sign_error = "■"
 g.ale_sign_warning = "▲"
-g.ale_sign_info = "●"
+g.ale_sign_info = "○"
 g.ale_sign_style_error = "■"
 g.ale_sign_style_warning = "▲"
+
+fsfsf
 
 -- INFO: Coc Gutter indicators set in coc-settings.json
 
