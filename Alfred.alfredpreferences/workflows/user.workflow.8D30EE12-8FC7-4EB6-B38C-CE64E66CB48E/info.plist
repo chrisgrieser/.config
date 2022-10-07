@@ -106,6 +106,39 @@
 				<false/>
 			</dict>
 		</array>
+		<key>80C79CA2-09FA-4745-B7A0-56A4453C42C5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Copy Packer Line</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy GitHub URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A750B10D-2695-481F-B660-F29C241C6727</key>
 		<array>
 			<dict>
@@ -356,6 +389,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://github.com/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -414,23 +468,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>autopaste</key>
 				<false/>
-				<key>skipvarencode</key>
+				<key>clipboardtext</key>
+				<string>use '{query}'</string>
+				<key>ignoredynamicplaceholders</key>
 				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://github.com/{query}</string>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
+			<string>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -464,7 +516,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>search-nvim.js</string>
+				<string>search-nvim-plugins.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -478,25 +530,6 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>799F31B4-F294-42FD-B4F4-2D190B6C7A33</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>use '{query}'</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -596,6 +629,55 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>vt</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>search-vim-colorschemes.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search Neovim Plugin</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>80C79CA2-09FA-4745-B7A0-56A4453C42C5</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -608,7 +690,7 @@
 			<key>note</key>
 			<string>get path from Sublime</string>
 			<key>xpos</key>
-			<real>560</real>
+			<real>820</real>
 			<key>ypos</key>
 			<real>535</real>
 		</dict>
@@ -626,7 +708,7 @@
 			<key>note</key>
 			<string>get path from Sublime</string>
 			<key>xpos</key>
-			<real>560</real>
+			<real>820</real>
 			<key>ypos</key>
 			<real>390</real>
 		</dict>
@@ -651,7 +733,7 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>710</real>
+			<real>970</real>
 			<key>ypos</key>
 			<real>535</real>
 		</dict>
@@ -667,9 +749,9 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>215</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>390</real>
 		</dict>
 		<key>6DA05A81-0D56-4CD6-A247-5D15F1F24D8F</key>
 		<dict>
@@ -698,12 +780,23 @@
 			<key>ypos</key>
 			<real>510</real>
 		</dict>
+		<key>80C79CA2-09FA-4745-B7A0-56A4453C42C5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>plugin search</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>770</real>
+		</dict>
 		<key>8C279CF4-80F0-4D28-B0BA-137130AC177A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>710</real>
+			<real>970</real>
 			<key>ypos</key>
 			<real>390</real>
 		</dict>
@@ -714,7 +807,7 @@
 			<key>note</key>
 			<string>Version history</string>
 			<key>xpos</key>
-			<real>415</real>
+			<real>675</real>
 			<key>ypos</key>
 			<real>535</real>
 		</dict>
@@ -725,7 +818,7 @@
 			<key>note</key>
 			<string>Open History (GitHub Workflow)</string>
 			<key>xpos</key>
-			<real>415</real>
+			<real>675</real>
 			<key>ypos</key>
 			<real>390</real>
 		</dict>
@@ -734,18 +827,18 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>345</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>720</real>
 		</dict>
 		<key>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>215</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>505</real>
 		</dict>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<dict>

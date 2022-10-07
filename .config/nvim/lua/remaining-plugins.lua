@@ -19,19 +19,12 @@ autocmd("FileType", {
 })
 g.user_emmet_mode='i'
 
--- registers.nvim
-require("registers").setup({
-	show = '*"0123456789abcdefghijklmnopqrstuvwxy',
-	show_empty = false,
-	window = {
-		max_width = 30,
-		border = "rounded",
-		transparency = 0,
-	},
-})
-
 -- comments.nvim
 require("Comment").setup({
+	extra = {
+		above = 'gab', -- [ab]ove
+		eol = 'gaf', -- [af]ter
+	},
 	mappings = { basic = false } -- since the basic one's are done with commentary
 })
 
