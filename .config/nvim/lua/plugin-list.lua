@@ -69,7 +69,8 @@ function PluginList (use)
 	use 'gaoDean/autolist.nvim'
 
 	-- Misc
-	use 'dbeniamine/cheat.sh-vim'
+	use 'dbeniamine/cheat.sh-vim' -- docs search
+	use 'mbbill/undotree' -- undo history nagivation
 	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
 	use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 
