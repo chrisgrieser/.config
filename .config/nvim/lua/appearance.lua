@@ -1,11 +1,11 @@
 require("utils")
+-- see also gui-settings.lua
 
 --------------------------------------------------------------------------------
 -- UI ELEMENTS
--- partially overriden when using a theme
 
 -- cursor
-opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor20,a:blinkwait400-blinkoff500-blinkon700"
+opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinkoff500-blinkon700"
 opt.linespace = 3 -- px, similar to line height
 
 -- Ruler
@@ -98,9 +98,9 @@ require('lualine').setup {
 		lualine_a = {{ 'mode', fmt = function(str) return str end }},
 		lualine_b = {{ currentFile }},
 		lualine_c = {{ alternateFile }},
-		lualine_x = {'diff'},
-		lualine_y = {'location', 'progress'},
-		lualine_z = {{'diagnostics', sources = { 'nvim_diagnostic', 'coc', 'ale' }}}
+		lualine_x = {{'diagnostics', sources = { 'nvim_diagnostic', 'coc', 'ale' }}},
+		lualine_y = {'diff'},
+		lualine_z = {'location', 'progress'},
 	},
 	options = {
 		theme  = 'auto',

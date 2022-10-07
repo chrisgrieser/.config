@@ -36,16 +36,3 @@ cmd[[ function g:Undotree_CustomMap()
 	nmap <buffer> J jjjjjjj
 	nmap <buffer> K 7k
 endfunc ]]
-
-require('modes').setup({
-
-	-- line_opacity = 0.15, -- Set opacity for cursorline and number background
-	-- set_cursor = true, -- Enable cursor highlights
-	-- set_cursorline = true, -- Enable cursorline initially, and disable cursorline for inactive windows or ignored filetypes
-
-	-- Enable line number highlights to match cursorline
-	set_number = true,
-
-	-- Disable modes highlights in specified filetypes Please PR commonly ignored filetypes
-	-- ignore_filetypes = { 'NvimTree', 'TelescopePrompt' }
-})

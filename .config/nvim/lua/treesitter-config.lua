@@ -38,11 +38,11 @@ require('nvim-treesitter.configs').setup {
 			enable = true,
 			set_jumps = true,
 			goto_next_start = {
-				["<leader>c"] = "@comment.outer",
+				["gq"] = "@comment.outer",
 				["<C-j>"] = "@function.outer",
 			},
 			goto_previous_start = {
-				["<leader>C"] = "@comment.outer",
+				["gQ"] = "@comment.outer",
 				["<C-k>"] = "@function.outer",
 			},
 		},

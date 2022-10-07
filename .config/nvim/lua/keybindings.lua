@@ -99,11 +99,6 @@ keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<C-A-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
 keymap("v", "<Space>", '"_c')
 
-keymap("o", "q", '"_ci"') -- change double [q]uote
-keymap("o", "Q", '"_ci\'') -- change single [Q]uote
-keymap("o", "p", '}') -- rest of the [p]aragraph
-keymap("o", "P", '{') -- beginning of the [P]aragraph
-
 -- change small word (i.e. a simpler version of vim-textobj-variable-segment,
 -- but not supporting CamelCase)
 keymap("n", '<leader><Space>', function ()
@@ -112,6 +107,26 @@ keymap("n", '<leader><Space>', function ()
 	cmd[[startinsert]] -- :Normal does not allow to end in insert mode
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
 end)
+
+keymap("o", "q", 'i"') -- change double [q]uote
+keymap("o", "Q", "i'") -- change single [Q]uote
+keymap("o", "p", '}') -- rest of the [p]aragraph
+keymap("o", "P", '{') -- beginning of the [P]aragraph
+
+-- Comments (mnemonic: [q]uiet text)
+keymap({"n", "v"}, "q" ,"<Plug>Commentary")
+keymap("n", "qq" ,"<Plug>CommentaryLine")
+keymap("n", "qu" ,"<Plug>Commentary<Plug>Commentary") -- undo comment
+keymap("o", "aq" ,"<Plug>Commentary")
+-- INFO gq and gQ mapped as goto next/prev comment via treesitter text obj
+require("Comment").setup({ -- comments.nvim
+	mappings = { basic = false }, -- since the basic one's are done with commentary
+	extra = {
+		above = '<leader>q', -- above
+		eol = 'Q', -- after
+	},
+})
+keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
 
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h") -- append space
@@ -177,20 +192,6 @@ keymap({"n", "v"}, "gm", "ddpkJ") -- [m]erge line down
 keymap({"n", "v"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", "U") -- undo line
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
-
--- Comments (mnemonic: [q]uiet text)
-keymap({"n", "v"}, "q" ,"<Plug>Commentary")
-keymap("n", "qq" ,"<Plug>CommentaryLine")
-keymap("o", "aq" ,"<Plug>Commentary") -- [a] [c]omment
-
-require("Comment").setup({ -- comments.nvim
-	mappings = { basic = false }, -- since the basic one's are done with commentary
-	extra = { 
-		above = '<leader>q', -- above
-		eol = 'Q', -- after
-	},
-})
-keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
