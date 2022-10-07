@@ -129,7 +129,7 @@ keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
 
 keymap({"n", "v"}, "^", "=") -- auto-indent
-keymap("n", "^^", "=ip") -- auto-indenting paragraph is for more common
+keymap("n", "^^", "mz=ip`z") -- since indenting paragraph more common than line
 keymap("n", "^p", "`[v`]=") -- last paste
 keymap("n", "^A", "mzgg=G`z") -- entire file
 

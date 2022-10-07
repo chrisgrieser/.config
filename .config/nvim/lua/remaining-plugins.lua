@@ -13,11 +13,11 @@ cmd[[let g:sneak#prompt = '👟']] -- the sneak in command line :P
 
 -- Emmet: use only in CSS insert mode
 g.user_emmet_install_global = 0
+g.user_emmet_mode='i'
 autocmd("FileType", {
 	pattern = "css",
 	command = "EmmetInstall"
 })
-g.user_emmet_mode='i'
 
 -- comments.nvim
 require("Comment").setup({
@@ -30,8 +30,16 @@ require("Comment").setup({
 
 -- undotree
 g.undotree_WindowLayout = 3
-g.undotree_SplitWidth = 40
-g.undotree_DiffAutoOpen = 0 
+g.undotree_SplitWidth = 30
+g.undotree_DiffAutoOpen = 0
 g.undotree_SetFocusWhenToggle = 1
 g.undotree_ShortIndicators = 1
-g.undotree_HelpLine = 1 -- 0 hides the "Press ? for help"
+g.undotree_HelpLine = 0 -- 0 hides the "Press ? for help"
+
+cmd[[ function g:Undotree_CustomMap()
+	nmap <buffer> <C-j> <plug>UndotreePreviousState
+	nmap <buffer> <C-k> <plug>UndotreeNextState
+	nmap <buffer> J jjjjjjj
+	nmap <buffer> K 7k
+endfunc ]]
+
