@@ -58,6 +58,9 @@ function PluginList (use)
 	use 'svermeulen/vim-subversive' -- substitution operator
 	use { 'numToStr/Comment.nvim', -- better comment operators than commentary; comment text object by tree-sitter text objects
 		config = function() require('Comment').setup() end }
+	use 'tpope/vim-commentary' -- comment text object
+
+
 
 	-- Objects & Motions
 	use 'mg979/vim-visual-multi' -- multi-cursor

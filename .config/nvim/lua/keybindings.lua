@@ -14,6 +14,8 @@ keymap("n", "<leader>?", "K") -- help page for word under cursor
 keymap("n", "<leader>T", function() telescope.colorscheme() end)
 -- Tree Sitter toggle
 keymap("n", "<leader>S", ":TSToggle highlight<CR>")
+-- Highlights
+keymap("n", "<leader>H", function() telescope.highlights() end)
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()

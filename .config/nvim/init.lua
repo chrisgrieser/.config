@@ -11,6 +11,7 @@ require("remaining-plugins")
 
 if (g.neovide or g.goneovim) then
 	require("gui-settings")
+	require("color-utilities")
 end
 
 if g.started_by_firenvim then
