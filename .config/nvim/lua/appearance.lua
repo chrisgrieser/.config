@@ -5,7 +5,7 @@ require("utils")
 -- partially overriden when using a theme
 
 -- cursor
-opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor20,a:blinkwait300-blinkoff400-blinkon600"
+opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor20,a:blinkwait400-blinkoff500-blinkon700"
 opt.linespace = 3 -- px, similar to line height
 
 -- Ruler
@@ -26,7 +26,7 @@ cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey guifg=DarkGrey]]
 -- Comments
 cmd[[highlight Comment ctermfg=grey]]
 
--- Popup menus
+-- Popup Menus
 cmd[[highlight Pmenu ctermbg=DarkGrey]]
 
 -- Line Numbers
@@ -67,10 +67,10 @@ g.gitgutter_sign_removed_first_line = '–'
 g.gitgutter_sign_removed_above_and_below = '–'
 g.gitgutter_sign_modified_removed = '│'
 
--- ▪︎▴•
-g.ale_sign_error = "▪︎"
-g.ale_sign_warning = "▴"
-g.ale_sign_info = "•"
+-- ▪︎▴• 
+g.ale_sign_error = ""
+g.ale_sign_warning = ""
+g.ale_sign_info = ""
 g.ale_sign_style_error = g.ale_sign_error
 g.ale_sign_style_warning = g.ale_sign_warning
 
@@ -106,7 +106,7 @@ require('lualine').setup {
 		theme  = 'auto',
 		globalstatus = true,
 		component_separators = { left = '', right = ''},
-		section_separators = { left = '', right = ''},
+		section_separators = { left = ' ', right = ' '}, -- nerd font: 'nf-ple'
 	},
 }
 

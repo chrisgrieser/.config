@@ -56,7 +56,6 @@ require('nvim-treesitter.configs').setup {
 			enable = true,
 			lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
 			keymaps = {
-				["ac"] = "@comment.outer", -- comment text object (since comment.nvim does not include them)
 				["af"] = "@function.outer",
 				["if"] = "@function.inner",
 				["aa"] = "@parameter.outer", -- [a]rgument text obj
