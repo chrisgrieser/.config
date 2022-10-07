@@ -9,7 +9,7 @@ opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinko
 opt.linespace = 3 -- px, similar to line height
 
 -- Ruler
-cmd[[highlight ColorColumn ctermbg=DarkGrey]] 
+cmd[[highlight ColorColumn ctermbg=DarkGrey]]
 
 -- Active Line
 cmd[[highlight CursorLine term=none cterm=none  ctermbg=black]]

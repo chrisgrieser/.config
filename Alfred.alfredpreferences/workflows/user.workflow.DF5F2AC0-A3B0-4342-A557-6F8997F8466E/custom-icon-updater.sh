@@ -65,7 +65,7 @@ case $APP_TO_UPDATE in
 		cp "$CUSTOM_ICON_FOLDER/Discord Black.icns" 'Discord.app/Contents/Resources/electron.icns'
 		touch "Discord.app" ;;
 	"Neovide")
-		cp "$CUSTOM_ICON_FOLDER/Vimari.icns" 'Neovide.app/Contents/Resources/Neovide.icns'
+		cp "$CUSTOM_ICON_FOLDER/Spline.icns" 'Neovide.app/Contents/Resources/Neovide.icns'
 		touch "Neovide.app" ;;
 	"goneovim")
 		cp "$CUSTOM_ICON_FOLDER/Neovide alt.icns" 'goneovim.app/Contents/Resources/goneovim.icns'
