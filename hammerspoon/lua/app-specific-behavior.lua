@@ -102,7 +102,7 @@ wf_browser_all = wf.new("Brave Browser")
 -- split when second window is opened
 -- change sizing back, when back to one window
 wf_mimestream = wf.new("Mimestream")
-	:setOverrideFilter{allowRoles='AXStandardWindow', rejectTitles={"General", "Accounts", "Sidebar & List", "Viewing", "Composing", "Templates", "Signatures", "Labs"}}
+	:setOverrideFilter{allowRoles='AXStandardWindow', rejectTitles={"General", "Accounts", "Sidebar & List", "Viewing", "Composing", "Templates", "Signatures", "Labs", "Updating Mimestream"}}
 	:subscribe(wf.windowCreated, function ()
 		if #wf_mimestream:getWindows() == 2 then
 			local win1 = wf_mimestream:getWindows()[1]
