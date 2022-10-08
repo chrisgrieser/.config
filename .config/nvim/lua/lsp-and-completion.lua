@@ -63,7 +63,10 @@ cmp.setup({
 	experimental = { ghost_text = true },
 	window = {
 		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
+		documentation = {
+			max_height = 30,
+			max_width = 50,
+		}
 	},
 	mapping = cmp.mapping.preset.insert({
 		['<Esc>'] = cmp.mapping.abort(),
@@ -71,7 +74,7 @@ cmp.setup({
 		['<S-Tab>'] = cmp.mapping.select_prev_item(),
 		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
-		['<C-Down>'] = cmp.mapping.scroll_docs(4),
+		['<S-Down>'] = cmp.mapping.scroll_docs(4),
 	}),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
@@ -113,6 +116,7 @@ cmp.setup.cmdline(':', {
 })
 
 --------------------------------------------------------------------------------
+
 -- LSP-SERVER-SPECIFIC SETUP
 local lspConfig = require('lspconfig')
 local home = fn.expand("~") ---@diagnostic disable-line: missing-parameter

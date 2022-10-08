@@ -16,10 +16,10 @@ end
 if g.started_by_firenvim then
 	require("firenvim-config")
 else
-	require("appearance") -- should come after gui settings
 	require("telescope-config")
 	require("treesitter-config")
 	require("cheat-sh-config")
 	require("lsp-and-completion")
+	require("appearance") -- should come after gui settings
 end
 
