@@ -27,7 +27,7 @@ behavior {
         colorHighlighting true
         showGoUpFolder false
         defaults {
-            columns ">size:130,modified:210"
+            columns ">size:130,>modified:210"
             ordering {
                 column "modified"
                 isAscending false

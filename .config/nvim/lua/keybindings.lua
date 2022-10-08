@@ -118,13 +118,20 @@ keymap("n", "qq" ,"<Plug>CommentaryLine")
 keymap("n", "qu" ,"<Plug>Commentary<Plug>Commentary") -- undo comment
 keymap("o", "aq" ,"<Plug>Commentary")
 -- INFO gq and gQ mapped as goto next/prev comment via treesitter text obj
-require("Comment").setup({ -- comments.nvim
-	mappings = { basic = false }, -- since the basic one's are done with commentary
-	extra = {
-		above = '<leader>q', -- above
-		eol = 'Q', -- after
-	},
-})
+keymap("n", "Q" , function(
+	local lineContent = fn.getline(".")
+
+	-- move cursor to EoL (necessary in case line has an "%s" already)
+	local lineNum = api.nvim_win_get_cursor(0)[1]
+	local eolCol = #lineContent
+	api.nvim_win_set_cursor(0, {lineNum, eolCol})
+
+	-- append commentstring & put cursor there
+	fn.setline(".", lineContent..bo.commentstring) 
+	cmd[[normal! /%s<CR>cgn]]
+))
+
+
 keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
 
 -- Whitespace Control

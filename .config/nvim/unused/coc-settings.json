@@ -18,7 +18,7 @@
   "coc.source.emoji.enable": true,
   "coc.source.emoji.triggerCharacters": [":"],
   "coc.source.emoji.shortcut": "",
-  "coc.source.emoji.filetypes": ["markdown", "yaml", "json", "lua"],
+  "coc.source.emoji.filetypes": ["*"],
 
   "sumneko-lua.enableNvimLuaDev": true,
   "Lua.hint.paramName": "Disable",
