@@ -59,7 +59,7 @@ cmp.setup({
 	snippet = { -- REQUIRED a snippet engine must be specified and installed
 		expand = function(args) require('luasnip').lsp_expand(args.body) end,
 	},
-	experimental = { ghost_text = true },
+	--experimental = { ghost_text = true },
 
 	window = {
 		completion = cmp.config.window.bordered(),
@@ -123,14 +123,18 @@ cmp.setup.filetype ("css", {
 	}
 })
 
+--
+
+
 
 
 
 cmp.setup.filetype ("lua", {
 	completion = {
-		keyword_pattern = "[^-]" -- do not match the start of comments
+		keyword_pattern = "[[:alpha:]]" -- do not match the start of comments
 	},
 })
+
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
 	mapping = cmp.mapping.preset.cmdline(),
