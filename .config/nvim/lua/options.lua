@@ -81,7 +81,7 @@ autocmd("BufWritePre", {
 
 -- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070
 -- (see also the respective "change small word" keybinding <leader><space>)
-opt.iskeyword = opt.iskeyword + {"-"}
+opt.iskeyword = opt.iskeyword + {"-", "_"}
 
 -- status bar
 opt.showcmd = true -- keychords pressed
