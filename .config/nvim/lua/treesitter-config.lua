@@ -40,7 +40,7 @@ select = {
 	keymaps = {
 		["af"] = "@function.outer",
 		["if"] = "@function.inner",
-		["aa"] = "@parameter.outer", -- [a]rgument text obj
+		["aa"] = "@parameter.outer", -- [a]rgument
 		["ia"] = "@parameter.inner",
 	},
 	-- If you set this to `true` (default is `false`) then any textobject is

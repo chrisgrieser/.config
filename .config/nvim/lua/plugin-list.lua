@@ -3,8 +3,6 @@ function PluginList (use)
 	-- Package Management
 	use 'wbthomason/packer.nvim' -- packer manages itself
 	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
-	use {'williamboman/mason.nvim', requires = 'williamboman/mason-lspconfig.nvim' } -- neovim lsp/linter installer
-	use 'neovim/nvim-lspconfig'
 
 	-- Themes
 	use 'folke/tokyonight.nvim'
@@ -23,21 +21,28 @@ function PluginList (use)
 	use 'Yazeed1s/minimal.nvim'
 	use 'kvrohit/rasmus.nvim'
 
-	-- LSP, Linting & Syntax
+	-- Syntax
 	use { 'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use 'mityu/vim-applescript' -- applescript syntax highlighting
+
+	-- LSP
+	use {'neovim/nvim-lspconfig', requires = 'williamboman/mason-lspconfig.nvim' } -- neovim lsp/linter installer
+	use 'williamboman/mason.nvim'
+	use 'hrsh7th/nvim-cmp' -- LSP source for nvim-cmp
+	use {'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp' }
 
 	-- Completion & Suggestion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
 	use 'mattn/emmet-vim' -- Emmet for CSS
 	use 'gelguy/wilder.nvim' -- suggestions for command line mode (: and /)
+	use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
 
 	-- Appearance
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} } -- colored brackets
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
-	use 'nvim-lualine/lualine.nvim' -- status bar
-	use 'airblade/vim-gitgutter' -- changes in gutter
+	use 'nvim-lualine/lualine.nvim' -- status line
+	use 'airblade/vim-gitgutter'
 	use 'f-person/auto-dark-mode.nvim' -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 
