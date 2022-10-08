@@ -120,25 +120,23 @@ keymap("o", "aq" ,"<Plug>Commentary")
 keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
 -- INFO gq and gQ mapped as goto next/prev comment via treesitter text obj
 
--- append comment to current line
+-- append comment to current line (equivalent to gcA from comments.nvim)
 keymap("n", "Q" , function()
 	local lineContent = fn.getline(".")
 	local newLineContent = lineContent.." "..bo.commentstring
+	if lineContent == "" then newLineContent = bo.commentstring end -- avoid leading spaces on empty lines
 
 	local lineNum = api.nvim_win_get_cursor(0)[1]
 	local eolCol = #lineContent
 	local newCol, _ = newLineContent:find("%%s", eolCol) -- begin searching at eol to not match an existing "%s"
 
-	local placeholderReplacement = " "
-	if lineContent == "" then placeholderReplacement = "" end -- avoids leading space when commenting empty lines
-	newLineContent = newLineContent:gsub("%%s", placeholderReplacement)
+	newLineContent = newLineContent:gsub("%%s", " ")
 	fn.setline(".", newLineContent)
 
 	api.nvim_win_set_cursor(0, {lineNum, newCol + 1}) -- +1 so it works like a, not i
 	cmd[[startinsert]]
 end)
 
-local fsfsfsf
 
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h") -- append space

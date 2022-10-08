@@ -6,9 +6,9 @@ cd "$HOME/Main Vault" || exit 1
 vaultfiles=$(git status --porcelain)
 
 if [[ "$dotfiles" =~ " m " ]] ; then # changes in submodules
-	icon="* ﮛ"
+	icon="*🔁"
 elif [[ -n "$dotfiles" ]] || [[ -n "$vaultfiles" ]] ; then
-	icon="ﮛ"
+	icon="🔁"
 else
 	dotfiles=""
 fi

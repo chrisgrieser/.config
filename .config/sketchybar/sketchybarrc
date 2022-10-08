@@ -34,14 +34,14 @@ sketchybar --bar height="$HEIGHT"                       \
                  display=all                            \
 			  --default updates=when_shown                 \
                      drawing=on                         \
-                     icon.font="JetBrainsMonoNL Nerd Font:Bold:21.0"    \
+							icon.font="Noto Emoji:Bold:16"     \
                      icon.color="$FONT_COLOR"           \
                      label.font="Recursive:Medium:15.5" \
                      label.color="$FONT_COLOR"          \
                      label.padding_left=1               \
                      label.padding_right=8              \
                      icon.padding_left=1                \
-                     icon.padding_right=0               \
+                     icon.padding_right=3               \
                      y_offset="$ITEM_Y_OFFSET"
 
 
@@ -68,14 +68,13 @@ sketchybar --add item clock right                            \
            --add item weather right                          \
            --set weather update_freq=1800                    \
                          script="$PLUGIN_DIR/weather.sh"     \
-           					 icon.font="Noto Emoji:Bold:16"      \
-           					 icon.padding_right=3                \
            --add item covid-stats right                      \
            --set covid-stats update_freq=43200               \
                          script="$PLUGIN_DIR/covid-stats.sh" \
            --add item git-sync right                         \
            --set git-sync update_freq=9001                   \
                          script="$PLUGIN_DIR/git-sync.sh"    \
+								 icon.font="Noto Emoji:Bold:15"      \
            --add event repo-files-update                     \
            --subscribe git-sync repo-files-update            \
            --subscribe git-sync system_woke                  \
