@@ -1,5 +1,17 @@
 function PluginList (use)
+
+	-- Package Management
 	use 'wbthomason/packer.nvim' -- packer manages itself
+	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
+
+	use {'neovim/nvim-lspconfig', config = function() require("config.lsp").setup() end, }
+	use {'williamboman/mason.nvim', -- neovim lsp/linter installer
+		requires = {
+			'WhoIsSethDaniel/mason-tool-installer.nvim',
+			'williamboman/mason-lspconfig.nvim',
+		}
+	}
+
 
 	-- Themes
 	use 'folke/tokyonight.nvim'
@@ -22,9 +34,6 @@ function PluginList (use)
 	use { 'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use 'mityu/vim-applescript' -- applescript syntax highlighting
-
-	use 'williamboman/mason.nvim' -- neovim lsp/linter installer
-	use {'WhoIsSethDaniel/mason-tool-installer.nvim', requires = {'williamboman/mason.nvim'} }
 
 	-- Completion & Suggestion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
@@ -63,7 +72,6 @@ function PluginList (use)
 	use 'dbeniamine/cheat.sh-vim' -- docs search
 	use 'AndrewRadev/splitjoin.vim'
 	use 'mbbill/undotree' -- undo history nagivation
-	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
 	use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 
 end
