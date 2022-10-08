@@ -31,6 +31,7 @@ function PluginList ()
 	use 'williamboman/mason.nvim'
 	use {'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp' }
 	use 'mfussenegger/nvim-lint'
+	use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
 
 	-- Completion & Suggestion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)

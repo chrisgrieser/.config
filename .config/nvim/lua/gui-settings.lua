@@ -2,7 +2,7 @@ require("utils")
 --------------------------------------------------------------------------------
 
 -- BASE CONFIG
-darkTheme = "duskfox"
+darkTheme = "tokyonight-moon"
 lightTheme = "tokyonight-day"
 
 g.gui_font_default_size = 26
@@ -91,7 +91,7 @@ g.neovide_transparency = 0.97
 g.neovide_floating_blur_amount_x = 5.0
 g.neovide_floating_blur_amount_y = 5.0
 g.neovide_cursor_unfocused_outline_width = 0.9
-g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
+g.neovide_underline_automatic_scaling = false -- slightly unstable according to docs
 
 g.neovide_cursor_vfx_mode = "railgun"
 g.neovide_cursor_vfx_particle_lifetime=1.3
@@ -106,4 +106,6 @@ g.neovide_hide_mouse_when_typing = true
 g.neovide_remember_window_size = true
 
 g.neovide_input_macos_alt_is_meta = true -- makes `opt` usable on macOS
-keymap({"n", "v"}, "<M-l>", "@") -- needed when alt is turned into meta key
+-- needed when alt is turned into meta key
+keymap({"n", "v"}, "<M-l>", "@")
+keymap("i", "<M-.>", "…")
