@@ -199,8 +199,8 @@ keymap({"n", "v"}, "M", "J") -- [M]erge line up
 keymap({"n", "v"}, "gm", "ddpkJ") -- [m]erge line down
 g.splitjoin_split_mapping = '' -- disable default mappings
 g.splitjoin_join_mapping  = ''
-keymap("n", "zj", ":SplitjoinJoin<CR>")
-keymap("n", "zs", ":SplitjoinSplit<CR>")
+keymap("n", "<leader>j", ":SplitjoinJoin<CR>")
+keymap("n", "<leader>s", ":SplitjoinSplit<CR>")
 
 -- Undo
 keymap({"n", "v"}, "U", "<C-r>") -- redo
@@ -224,10 +224,8 @@ keymap("i", "!!", ' {}<Left><CR><Esc>O') -- {} with proper linebreak
 keymap("v", "p", 'P') -- do not override register when pasting
 keymap("v", "P", 'p') -- override register when pasting
 
-keymap("v", "V", "j") -- so double "V" selects two lines
-keymap({"n", "v"}, "v", '<Plug>(wildfire-fuel)') -- start visual mode with a sensitve selection
--- -> together, these two bindings make it possible to repeatedly press v or V
--- to increase the current selection
+keymap("n", "V", "Vj") -- visual line mode starts with two lines selected
+keymap("v", "V", "j") -- repeatedly pressing "V" selects more lines
 
 keymap("v", "y", "ygv<Esc>") -- yanking in visual mode keeps position https://stackoverflow.com/a/3806683#comment10788861_3806683
 

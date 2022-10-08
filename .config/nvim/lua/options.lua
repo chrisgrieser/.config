@@ -9,7 +9,7 @@ opt.ignorecase = true
 opt.wildmenu = true -- display all matching files when tab completing
 
 -- Split
-opt.splitright = true -- vsplit to the right instead of to the left
+opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
 
 -- tabs & indentation
@@ -46,12 +46,16 @@ autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
 -- editor
 opt.cursorline = true -- by default underline, look changed in appearnce
 opt.scrolloff = 12
-opt.sidescrolloff = 15
+opt.sidescrolloff = 17
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
-autocmd("BufEnter", { callback = function () opt.formatoptions = opt.formatoptions - {"o", "r"} end })
+autocmd("BufEnter", {
+	callback = function ()
+		opt.formatoptions = opt.formatoptions - {"o", "r"}
+	end
+})
 
 -- Remember Cursor Position
 autocmd ("BufReadPost", {
@@ -87,10 +91,10 @@ opt.laststatus = 3 -- show one status line for all splits
 -- glitches: https://github.com/nvim-lualine/lualine.nvim/issues/853
 
 -- folding
-opt.foldmethod = "indent"
+opt.foldmethod = "expr"
+cmd[[set foldexpr=nvim_treesitter#foldexpr()]] -- use treesitter for folding https://github.com/nvim-treesitter/nvim-treesitter
 opt.foldenable = false -- do not fold on start
 opt.foldminlines = 2
-
 augroup("rememberFolds", {}) -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
 autocmd("BufWinLeave", {
 	pattern = "?*",
@@ -104,7 +108,7 @@ autocmd("BufWinEnter", {
 })
 
 -- Mini-Terminal with `:!`
--- loads it as interactive session, so that zshrc is loaded https://stackoverflow.com/a/4642855
+-- loads it as interactive session, so that zshrc (and aliases) are loaded https://stackoverflow.com/a/4642855
 opt.shellcmdflag="-ic"
 
 -- Window Managers
