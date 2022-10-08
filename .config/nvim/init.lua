@@ -20,5 +20,6 @@ else
 	require("telescope-config")
 	require("treesitter-config")
 	require("cheat-sh-config")
+	require("lsp-config")
 end
 
