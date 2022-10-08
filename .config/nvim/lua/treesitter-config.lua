@@ -1,18 +1,5 @@
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { -- A list of parser names, or "all"
-		"javascript",
-		"typescript",
-		"bash",
-		"css",
-		"json",
-		"jsonc",
-		"lua",
-		"yaml",
-		"markdown",
-		"markdown_inline",
-		"regex",
-		"toml",
-	},
+	ensure_installed = "all",
 
 	highlight = {
 		enable = true,
@@ -34,47 +21,41 @@ require('nvim-treesitter.configs').setup {
 	},
 
 	textobjects = { -- textobj plugin
-		move = { -- move to next comment / function
-			enable = true,
-			set_jumps = true,
-			goto_next_start = {
-				["gq"] = "@comment.outer",
-				["<C-j>"] = "@function.outer",
-			},
-			goto_previous_start = {
-				["gQ"] = "@comment.outer",
-				["<C-k>"] = "@function.outer",
-			},
-		},
-		swap = { -- swap parameters
-			enable = true,
-			swap_next = {
-				["<leader>s"] = "@parameter.inner",
-			},
-		},
-		select = {
-			enable = true,
-			lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-			keymaps = {
-				["af"] = "@function.outer",
-				["if"] = "@function.inner",
-				["aa"] = "@parameter.outer", -- [a]rgument text obj
-				["ia"] = "@parameter.inner",
-			},
-			-- If you set this to `true` (default is `false`) then any textobject is
-			-- extended to include preceding xor succeeding whitespace. Succeeding
-			-- whitespace has priority in order to act similarly to eg the built-in
-			-- `ap`.
-			include_surrounding_whitespace = false,
-		},
+	move = { -- move to next comment / function
+	enable = true,
+	set_jumps = true,
+	goto_next_start = {
+		["gq"] = "@comment.outer",
+		["<C-j>"] = "@function.outer",
+	},
+	goto_previous_start = {
+		["gQ"] = "@comment.outer",
+		["<C-k>"] = "@function.outer",
+	},
+},
+select = {
+	enable = true,
+	lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+	keymaps = {
+		["af"] = "@function.outer",
+		["if"] = "@function.inner",
+		["aa"] = "@parameter.outer", -- [a]rgument text obj
+		["ia"] = "@parameter.inner",
+	},
+	-- If you set this to `true` (default is `false`) then any textobject is
+	-- extended to include preceding xor succeeding whitespace. Succeeding
+	-- whitespace has priority in order to act similarly to eg the built-in
+	-- `ap`.
+	include_surrounding_whitespace = false,
+},
 	},
 
 	rainbow = { -- rainbow plugin
-		enable = true,
-		disable = {}, -- list of languages you want to disable the plugin for
-		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-		max_file_lines = 1000, -- Do not enable for files with more than n lines, int
-	}
+	enable = true,
+	disable = {}, -- list of languages you want to disable the plugin for
+	extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+	max_file_lines = 2000,
+}
 }
 
 -- https://github.com/nvim-treesitter/nvim-treesitter-context#configuration
