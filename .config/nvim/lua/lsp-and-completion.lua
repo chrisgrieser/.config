@@ -34,9 +34,6 @@ keymap('n', 'gE', vim.diagnostic.goto_prev, opts)
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-local
 
-	-- Enable completion triggered by <c-x><c-o>
-	api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
 	-- Mappings (See `:help vim.lsp.*` for documentation on any of the below functions)
 	local bufopts = { silent=true, buffer=true }
 	keymap('n', 'gd', function() telescope.lsp_definitions() end,  bufopts)
@@ -56,10 +53,8 @@ end
 --Enable snippet capability for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-
 local cmp = require('cmp')
--- :see
+
 cmp.setup({
 	snippet = {
 		-- REQUIRED a snippet engine must be specified and installed
@@ -91,6 +86,7 @@ cmp.setup({
 cmp.setup.filetype ("css", {
 	sources = {
 		{ name = 'nvim_lsp' },
+		{ name = 'cmp-nvim-lsp-signature-help' },
 		{ name = 'luasnip' },
 	}, {
 		{ name = 'emoji' },
@@ -105,13 +101,14 @@ cmp.setup.cmdline({ '/', '?' }, {
 	}
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- Use cmdline & path source for
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = 'path' }
 	}, {
-		{ name = 'cmdline' }
+		{ name = 'cmdline' },
+		{ name = 'cmdline_history' },
 	})
 })
 

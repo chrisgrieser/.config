@@ -30,6 +30,7 @@ function PluginList ()
 	use {'neovim/nvim-lspconfig', requires = 'williamboman/mason-lspconfig.nvim' } -- neovim lsp/linter installer
 	use 'williamboman/mason.nvim'
 	use {'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp' }
+	use 'mfussenegger/nvim-lint'
 
 	-- Completion & Suggestion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
@@ -39,10 +40,12 @@ function PluginList ()
 			'hrsh7th/cmp-buffer',
 			'hrsh7th/cmp-path',
 			'hrsh7th/cmp-cmdline',
+			'dmitmel/cmp-cmdline-history',
 			'hrsh7th/cmp-emoji',
 
-			'folke/lua-dev.nvim', -- nvim itself
 			'hrsh7th/cmp-nvim-lsp', -- lsp
+			'hrsh7th/cmp-nvim-lsp-signature-help', -- lsp
+			'folke/lua-dev.nvim', -- nvim itself
 
 			'saadparwaiz1/cmp_luasnip',
 			'L3MON4D3/LuaSnip', -- snippet engine
