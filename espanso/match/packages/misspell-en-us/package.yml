@@ -1,0 +1,6477 @@
+matches:
+  - trigger: "institutionalisation"
+    replace: "institutionalization"
+    propagate_case: true
+    word: true
+  - trigger: "internationalisation"
+    replace: "internationalization"
+    propagate_case: true
+    word: true
+  - trigger: "professionalisation"
+    replace: "professionalization"
+    propagate_case: true
+    word: true
+  - trigger: "compartmentalising"
+    replace: "compartmentalizing"
+    propagate_case: true
+    word: true
+  - trigger: "institutionalising"
+    replace: "institutionalizing"
+    propagate_case: true
+    word: true
+  - trigger: "internationalising"
+    replace: "internationalizing"
+    propagate_case: true
+    word: true
+  - trigger: "compartmentalised"
+    replace: "compartmentalized"
+    propagate_case: true
+    word: true
+  - trigger: "compartmentalises"
+    replace: "compartmentalizes"
+    propagate_case: true
+    word: true
+  - trigger: "decriminalisation"
+    replace: "decriminalization"
+    propagate_case: true
+    word: true
+  - trigger: "denationalisation"
+    replace: "denationalization"
+    propagate_case: true
+    word: true
+  - trigger: "fictionalisations"
+    replace: "fictionalizations"
+    propagate_case: true
+    word: true
+  - trigger: "institutionalised"
+    replace: "institutionalized"
+    propagate_case: true
+    word: true
+  - trigger: "institutionalises"
+    replace: "institutionalizes"
+    propagate_case: true
+    word: true
+  - trigger: "intellectualising"
+    replace: "intellectualizing"
+    propagate_case: true
+    word: true
+  - trigger: "internationalised"
+    replace: "internationalized"
+    propagate_case: true
+    word: true
+  - trigger: "internationalises"
+    replace: "internationalizes"
+    propagate_case: true
+    word: true
+  - trigger: "pedestrianisation"
+    replace: "pedestrianization"
+    propagate_case: true
+    word: true
+  - trigger: "professionalising"
+    replace: "professionalizing"
+    propagate_case: true
+    word: true
+  - trigger: "archaeologically"
+    replace: "archeologically"
+    propagate_case: true
+    word: true
+  - trigger: "compartmentalise"
+    replace: "compartmentalize"
+    propagate_case: true
+    word: true
+  - trigger: "decentralisation"
+    replace: "decentralization"
+    propagate_case: true
+    word: true
+  - trigger: "demilitarisation"
+    replace: "demilitarization"
+    propagate_case: true
+    word: true
+  - trigger: "externalisations"
+    replace: "externalizations"
+    propagate_case: true
+    word: true
+  - trigger: "fictionalisation"
+    replace: "fictionalization"
+    propagate_case: true
+    word: true
+  - trigger: "institutionalise"
+    replace: "institutionalize"
+    propagate_case: true
+    word: true
+  - trigger: "intellectualised"
+    replace: "intellectualized"
+    propagate_case: true
+    word: true
+  - trigger: "intellectualises"
+    replace: "intellectualizes"
+    propagate_case: true
+    word: true
+  - trigger: "internationalise"
+    replace: "internationalize"
+    propagate_case: true
+    word: true
+  - trigger: "nationalisations"
+    replace: "nationalizations"
+    propagate_case: true
+    word: true
+  - trigger: "palaeontologists"
+    replace: "paleontologists"
+    propagate_case: true
+    word: true
+  - trigger: "professionalised"
+    replace: "professionalized"
+    propagate_case: true
+    word: true
+  - trigger: "professionalises"
+    replace: "professionalizes"
+    propagate_case: true
+    word: true
+  - trigger: "rationalisations"
+    replace: "rationalizations"
+    propagate_case: true
+    word: true
+  - trigger: "sensationalising"
+    replace: "sensationalizing"
+    propagate_case: true
+    word: true
+  - trigger: "sentimentalising"
+    replace: "sentimentalizing"
+    propagate_case: true
+    word: true
+  - trigger: "acclimatisation"
+    replace: "acclimatization"
+    propagate_case: true
+    word: true
+  - trigger: "bougainvillaeas"
+    replace: "bougainvilleas"
+    propagate_case: true
+    word: true
+  - trigger: "commercialising"
+    replace: "commercializing"
+    propagate_case: true
+    word: true
+  - trigger: "conceptualising"
+    replace: "conceptualizing"
+    propagate_case: true
+    word: true
+  - trigger: "contextualising"
+    replace: "contextualizing"
+    propagate_case: true
+    word: true
+  - trigger: "crystallisation"
+    replace: "crystallization"
+    propagate_case: true
+    word: true
+  - trigger: "decriminalising"
+    replace: "decriminalizing"
+    propagate_case: true
+    word: true
+  - trigger: "democratisation"
+    replace: "democratization"
+    propagate_case: true
+    word: true
+  - trigger: "denationalising"
+    replace: "denationalizing"
+    propagate_case: true
+    word: true
+  - trigger: "depersonalising"
+    replace: "depersonalizing"
+    propagate_case: true
+    word: true
+  - trigger: "desensitisation"
+    replace: "desensitization"
+    propagate_case: true
+    word: true
+  - trigger: "destabilisation"
+    replace: "destabilization"
+    propagate_case: true
+    word: true
+  - trigger: "disorganisation"
+    replace: "disorganization"
+    propagate_case: true
+    word: true
+  - trigger: "extemporisation"
+    replace: "extemporization"
+    propagate_case: true
+    word: true
+  - trigger: "externalisation"
+    replace: "externalization"
+    propagate_case: true
+    word: true
+  - trigger: "familiarisation"
+    replace: "familiarization"
+    propagate_case: true
+    word: true
+  - trigger: "generalisations"
+    replace: "generalizations"
+    propagate_case: true
+    word: true
+  - trigger: "hospitalisation"
+    replace: "hospitalization"
+    propagate_case: true
+    word: true
+  - trigger: "individualising"
+    replace: "individualizing"
+    propagate_case: true
+    word: true
+  - trigger: "industrialising"
+    replace: "industrializing"
+    propagate_case: true
+    word: true
+  - trigger: "intellectualise"
+    replace: "intellectualize"
+    propagate_case: true
+    word: true
+  - trigger: "internalisation"
+    replace: "internalization"
+    propagate_case: true
+    word: true
+  - trigger: "manoeuvrability"
+    replace: "maneuverability"
+    propagate_case: true
+    word: true
+  - trigger: "marginalisation"
+    replace: "marginalization"
+    propagate_case: true
+    word: true
+  - trigger: "materialisation"
+    replace: "materialization"
+    propagate_case: true
+    word: true
+  - trigger: "miniaturisation"
+    replace: "miniaturization"
+    propagate_case: true
+    word: true
+  - trigger: "nationalisation"
+    replace: "nationalization"
+    propagate_case: true
+    word: true
+  - trigger: "neighbourliness"
+    replace: "neighborliness"
+    propagate_case: true
+    word: true
+  - trigger: "overemphasising"
+    replace: "overemphasizing"
+    propagate_case: true
+    word: true
+  - trigger: "palaeontologist"
+    replace: "paleontologist"
+    propagate_case: true
+    word: true
+  - trigger: "particularising"
+    replace: "particularizing"
+    propagate_case: true
+    word: true
+  - trigger: "pedestrianising"
+    replace: "pedestrianizing"
+    propagate_case: true
+    word: true
+  - trigger: "professionalise"
+    replace: "professionalize"
+    propagate_case: true
+    word: true
+  - trigger: "psychoanalysing"
+    replace: "psychoanalyzing"
+    propagate_case: true
+    word: true
+  - trigger: "rationalisation"
+    replace: "rationalization"
+    propagate_case: true
+    word: true
+  - trigger: "reorganisations"
+    replace: "reorganizations"
+    propagate_case: true
+    word: true
+  - trigger: "revolutionising"
+    replace: "revolutionizing"
+    propagate_case: true
+    word: true
+  - trigger: "sensationalised"
+    replace: "sensationalized"
+    propagate_case: true
+    word: true
+  - trigger: "sensationalises"
+    replace: "sensationalizes"
+    propagate_case: true
+    word: true
+  - trigger: "sentimentalised"
+    replace: "sentimentalized"
+    propagate_case: true
+    word: true
+  - trigger: "sentimentalises"
+    replace: "sentimentalizes"
+    propagate_case: true
+    word: true
+  - trigger: "specialisations"
+    replace: "specializations"
+    propagate_case: true
+    word: true
+  - trigger: "standardisation"
+    replace: "standardization"
+    propagate_case: true
+    word: true
+  - trigger: "synchronisation"
+    replace: "synchronization"
+    propagate_case: true
+    word: true
+  - trigger: "systematisation"
+    replace: "systematization"
+    propagate_case: true
+    word: true
+  - trigger: "aggrandisement"
+    replace: "aggrandizement"
+    propagate_case: true
+    word: true
+  - trigger: "anaesthetising"
+    replace: "anesthetizing"
+    propagate_case: true
+    word: true
+  - trigger: "archaeological"
+    replace: "archeological"
+    propagate_case: true
+    word: true
+  - trigger: "archaeologists"
+    replace: "archeologists"
+    propagate_case: true
+    word: true
+  - trigger: "bougainvillaea"
+    replace: "bougainvillea"
+    propagate_case: true
+    word: true
+  - trigger: "characterising"
+    replace: "characterizing"
+    propagate_case: true
+    word: true
+  - trigger: "collectivising"
+    replace: "collectivizing"
+    propagate_case: true
+    word: true
+  - trigger: "commercialised"
+    replace: "commercialized"
+    propagate_case: true
+    word: true
+  - trigger: "commercialises"
+    replace: "commercializes"
+    propagate_case: true
+    word: true
+  - trigger: "conceptualised"
+    replace: "conceptualized"
+    propagate_case: true
+    word: true
+  - trigger: "conceptualises"
+    replace: "conceptualizes"
+    propagate_case: true
+    word: true
+  - trigger: "contextualised"
+    replace: "contextualized"
+    propagate_case: true
+    word: true
+  - trigger: "contextualises"
+    replace: "contextualizes"
+    propagate_case: true
+    word: true
+  - trigger: "decentralising"
+    replace: "decentralizing"
+    propagate_case: true
+    word: true
+  - trigger: "decriminalised"
+    replace: "decriminalized"
+    propagate_case: true
+    word: true
+  - trigger: "decriminalises"
+    replace: "decriminalizes"
+    propagate_case: true
+    word: true
+  - trigger: "dehumanisation"
+    replace: "dehumanization"
+    propagate_case: true
+    word: true
+  - trigger: "demilitarising"
+    replace: "demilitarizing"
+    propagate_case: true
+    word: true
+  - trigger: "demobilisation"
+    replace: "demobilization"
+    propagate_case: true
+    word: true
+  - trigger: "demoralisation"
+    replace: "demoralization"
+    propagate_case: true
+    word: true
+  - trigger: "denationalised"
+    replace: "denationalized"
+    propagate_case: true
+    word: true
+  - trigger: "denationalises"
+    replace: "denationalizes"
+    propagate_case: true
+    word: true
+  - trigger: "depersonalised"
+    replace: "depersonalized"
+    propagate_case: true
+    word: true
+  - trigger: "depersonalises"
+    replace: "depersonalizes"
+    propagate_case: true
+    word: true
+  - trigger: "disembowelling"
+    replace: "disemboweling"
+    propagate_case: true
+    word: true
+  - trigger: "dramatisations"
+    replace: "dramatizations"
+    propagate_case: true
+    word: true
+  - trigger: "editorialising"
+    replace: "editorializing"
+    propagate_case: true
+    word: true
+  - trigger: "encyclopaedias"
+    replace: "encyclopedias"
+    propagate_case: true
+    word: true
+  - trigger: "fictionalising"
+    replace: "fictionalizing"
+    propagate_case: true
+    word: true
+  - trigger: "fraternisation"
+    replace: "fraternization"
+    propagate_case: true
+    word: true
+  - trigger: "generalisation"
+    replace: "generalization"
+    propagate_case: true
+    word: true
+  - trigger: "gynaecological"
+    replace: "gynecological"
+    propagate_case: true
+    word: true
+  - trigger: "gynaecologists"
+    replace: "gynecologists"
+    propagate_case: true
+    word: true
+  - trigger: "haematological"
+    replace: "hematological"
+    propagate_case: true
+    word: true
+  - trigger: "haematologists"
+    replace: "hematologists"
+    propagate_case: true
+    word: true
+  - trigger: "immobilisation"
+    replace: "immobilization"
+    propagate_case: true
+    word: true
+  - trigger: "individualised"
+    replace: "individualized"
+    propagate_case: true
+    word: true
+  - trigger: "individualises"
+    replace: "individualizes"
+    propagate_case: true
+    word: true
+  - trigger: "industrialised"
+    replace: "industrialized"
+    propagate_case: true
+    word: true
+  - trigger: "industrialises"
+    replace: "industrializes"
+    propagate_case: true
+    word: true
+  - trigger: "liberalisation"
+    replace: "liberalization"
+    propagate_case: true
+    word: true
+  - trigger: "monopolisation"
+    replace: "monopolization"
+    propagate_case: true
+    word: true
+  - trigger: "naturalisation"
+    replace: "naturalization"
+    propagate_case: true
+    word: true
+  - trigger: "neighbourhoods"
+    replace: "neighborhoods"
+    propagate_case: true
+    word: true
+  - trigger: "neutralisation"
+    replace: "neutralization"
+    propagate_case: true
+    word: true
+  - trigger: "organisational"
+    replace: "organizational"
+    propagate_case: true
+    word: true
+  - trigger: "outmanoeuvring"
+    replace: "outmaneuvering"
+    propagate_case: true
+    word: true
+  - trigger: "overemphasised"
+    replace: "overemphasized"
+    propagate_case: true
+    word: true
+  - trigger: "overemphasises"
+    replace: "overemphasizes"
+    propagate_case: true
+    word: true
+  - trigger: "paediatricians"
+    replace: "pediatricians"
+    propagate_case: true
+    word: true
+  - trigger: "particularised"
+    replace: "particularized"
+    propagate_case: true
+    word: true
+  - trigger: "particularises"
+    replace: "particularizes"
+    propagate_case: true
+    word: true
+  - trigger: "pasteurisation"
+    replace: "pasteurization"
+    propagate_case: true
+    word: true
+  - trigger: "pedestrianised"
+    replace: "pedestrianized"
+    propagate_case: true
+    word: true
+  - trigger: "pedestrianises"
+    replace: "pedestrianizes"
+    propagate_case: true
+    word: true
+  - trigger: "philosophising"
+    replace: "philosophizing"
+    propagate_case: true
+    word: true
+  - trigger: "politicisation"
+    replace: "politicization"
+    propagate_case: true
+    word: true
+  - trigger: "popularisation"
+    replace: "popularization"
+    propagate_case: true
+    word: true
+  - trigger: "pressurisation"
+    replace: "pressurization"
+    propagate_case: true
+    word: true
+  - trigger: "prioritisation"
+    replace: "prioritization"
+    propagate_case: true
+    word: true
+  - trigger: "privatisations"
+    replace: "privatizations"
+    propagate_case: true
+    word: true
+  - trigger: "propagandising"
+    replace: "propagandizing"
+    propagate_case: true
+    word: true
+  - trigger: "psychoanalysed"
+    replace: "psychoanalyzed"
+    propagate_case: true
+    word: true
+  - trigger: "psychoanalyses"
+    replace: "psychoanalyzes"
+    propagate_case: true
+    word: true
+  - trigger: "regularisation"
+    replace: "regularization"
+    propagate_case: true
+    word: true
+  - trigger: "reorganisation"
+    replace: "reorganization"
+    propagate_case: true
+    word: true
+  - trigger: "revolutionised"
+    replace: "revolutionized"
+    propagate_case: true
+    word: true
+  - trigger: "revolutionises"
+    replace: "revolutionizes"
+    propagate_case: true
+    word: true
+  - trigger: "secularisation"
+    replace: "secularization"
+    propagate_case: true
+    word: true
+  - trigger: "sensationalise"
+    replace: "sensationalize"
+    propagate_case: true
+    word: true
+  - trigger: "sentimentalise"
+    replace: "sentimentalize"
+    propagate_case: true
+    word: true
+  - trigger: "serialisations"
+    replace: "serializations"
+    propagate_case: true
+    word: true
+  - trigger: "specialisation"
+    replace: "specialization"
+    propagate_case: true
+    word: true
+  - trigger: "sterilisations"
+    replace: "sterilizations"
+    propagate_case: true
+    word: true
+  - trigger: "stigmatisation"
+    replace: "stigmatization"
+    propagate_case: true
+    word: true
+  - trigger: "transistorised"
+    replace: "transistorized"
+    propagate_case: true
+    word: true
+  - trigger: "unrecognisable"
+    replace: "unrecognizable"
+    propagate_case: true
+    word: true
+  - trigger: "visualisations"
+    replace: "visualizations"
+    propagate_case: true
+    word: true
+  - trigger: "westernisation"
+    replace: "westernization"
+    propagate_case: true
+    word: true
+  - trigger: "accessorising"
+    replace: "accessorizing"
+    propagate_case: true
+    word: true
+  - trigger: "acclimatising"
+    replace: "acclimatizing"
+    propagate_case: true
+    word: true
+  - trigger: "amortisations"
+    replace: "amortizations"
+    propagate_case: true
+    word: true
+  - trigger: "amphitheatres"
+    replace: "amphitheaters"
+    propagate_case: true
+    word: true
+  - trigger: "anaesthetised"
+    replace: "anesthetized"
+    propagate_case: true
+    word: true
+  - trigger: "anaesthetises"
+    replace: "anesthetizes"
+    propagate_case: true
+    word: true
+  - trigger: "anaesthetists"
+    replace: "anesthetists"
+    propagate_case: true
+    word: true
+  - trigger: "archaeologist"
+    replace: "archeologist"
+    propagate_case: true
+    word: true
+  - trigger: "backpedalling"
+    replace: "backpedaling"
+    propagate_case: true
+    word: true
+  - trigger: "behaviourists"
+    replace: "behaviorists"
+    propagate_case: true
+    word: true
+  - trigger: "breathalysers"
+    replace: "breathalyzers"
+    propagate_case: true
+    word: true
+  - trigger: "breathalysing"
+    replace: "breathalyzing"
+    propagate_case: true
+    word: true
+  - trigger: "callisthenics"
+    replace: "calisthenics"
+    propagate_case: true
+    word: true
+  - trigger: "cannibalising"
+    replace: "cannibalizing"
+    propagate_case: true
+    word: true
+  - trigger: "characterised"
+    replace: "characterized"
+    propagate_case: true
+    word: true
+  - trigger: "characterises"
+    replace: "characterizes"
+    propagate_case: true
+    word: true
+  - trigger: "circularising"
+    replace: "circularizing"
+    propagate_case: true
+    word: true
+  - trigger: "clarinettists"
+    replace: "clarinetists"
+    propagate_case: true
+    word: true
+  - trigger: "collectivised"
+    replace: "collectivized"
+    propagate_case: true
+    word: true
+  - trigger: "collectivises"
+    replace: "collectivizes"
+    propagate_case: true
+    word: true
+  - trigger: "commercialise"
+    replace: "commercialize"
+    propagate_case: true
+    word: true
+  - trigger: "computerising"
+    replace: "computerizing"
+    propagate_case: true
+    word: true
+  - trigger: "conceptualise"
+    replace: "conceptualize"
+    propagate_case: true
+    word: true
+  - trigger: "contextualise"
+    replace: "contextualize"
+    propagate_case: true
+    word: true
+  - trigger: "criminalising"
+    replace: "criminalizing"
+    propagate_case: true
+    word: true
+  - trigger: "crystallising"
+    replace: "crystallizing"
+    propagate_case: true
+    word: true
+  - trigger: "decentralised"
+    replace: "decentralized"
+    propagate_case: true
+    word: true
+  - trigger: "decentralises"
+    replace: "decentralizes"
+    propagate_case: true
+    word: true
+  - trigger: "decriminalise"
+    replace: "decriminalize"
+    propagate_case: true
+    word: true
+  - trigger: "demilitarised"
+    replace: "demilitarized"
+    propagate_case: true
+    word: true
+  - trigger: "demilitarises"
+    replace: "demilitarizes"
+    propagate_case: true
+    word: true
+  - trigger: "democratising"
+    replace: "democratizing"
+    propagate_case: true
+    word: true
+  - trigger: "denationalise"
+    replace: "denationalize"
+    propagate_case: true
+    word: true
+  - trigger: "depersonalise"
+    replace: "depersonalize"
+    propagate_case: true
+    word: true
+  - trigger: "desensitising"
+    replace: "desensitizing"
+    propagate_case: true
+    word: true
+  - trigger: "destabilising"
+    replace: "destabilizing"
+    propagate_case: true
+    word: true
+  - trigger: "disembowelled"
+    replace: "disemboweled"
+    propagate_case: true
+    word: true
+  - trigger: "dishonourable"
+    replace: "dishonorable"
+    propagate_case: true
+    word: true
+  - trigger: "dishonourably"
+    replace: "dishonorably"
+    propagate_case: true
+    word: true
+  - trigger: "dramatisation"
+    replace: "dramatization"
+    propagate_case: true
+    word: true
+  - trigger: "editorialised"
+    replace: "editorialized"
+    propagate_case: true
+    word: true
+  - trigger: "editorialises"
+    replace: "editorializes"
+    propagate_case: true
+    word: true
+  - trigger: "encyclopaedia"
+    replace: "encyclopedia"
+    propagate_case: true
+    word: true
+  - trigger: "encyclopaedic"
+    replace: "encyclopedic"
+    propagate_case: true
+    word: true
+  - trigger: "extemporising"
+    replace: "extemporizing"
+    propagate_case: true
+    word: true
+  - trigger: "externalising"
+    replace: "externalizing"
+    propagate_case: true
+    word: true
+  - trigger: "familiarising"
+    replace: "familiarizing"
+    propagate_case: true
+    word: true
+  - trigger: "fertilisation"
+    replace: "fertilization"
+    propagate_case: true
+    word: true
+  - trigger: "fictionalised"
+    replace: "fictionalized"
+    propagate_case: true
+    word: true
+  - trigger: "fictionalises"
+    replace: "fictionalizes"
+    propagate_case: true
+    word: true
+  - trigger: "formalisation"
+    replace: "formalization"
+    propagate_case: true
+    word: true
+  - trigger: "fossilisation"
+    replace: "fossilization"
+    propagate_case: true
+    word: true
+  - trigger: "globalisation"
+    replace: "globalization"
+    propagate_case: true
+    word: true
+  - trigger: "gynaecologist"
+    replace: "gynecologist"
+    propagate_case: true
+    word: true
+  - trigger: "haematologist"
+    replace: "hematologist"
+    propagate_case: true
+    word: true
+  - trigger: "haemophiliacs"
+    replace: "hemophiliacs"
+    propagate_case: true
+    word: true
+  - trigger: "haemorrhaging"
+    replace: "hemorrhaging"
+    propagate_case: true
+    word: true
+  - trigger: "harmonisation"
+    replace: "harmonization"
+    propagate_case: true
+    word: true
+  - trigger: "hospitalising"
+    replace: "hospitalizing"
+    propagate_case: true
+    word: true
+  - trigger: "hypothesising"
+    replace: "hypothesizing"
+    propagate_case: true
+    word: true
+  - trigger: "immortalising"
+    replace: "immortalizing"
+    propagate_case: true
+    word: true
+  - trigger: "individualise"
+    replace: "individualize"
+    propagate_case: true
+    word: true
+  - trigger: "industrialise"
+    replace: "industrialize"
+    propagate_case: true
+    word: true
+  - trigger: "internalising"
+    replace: "internalizing"
+    propagate_case: true
+    word: true
+  - trigger: "marginalising"
+    replace: "marginalizing"
+    propagate_case: true
+    word: true
+  - trigger: "materialising"
+    replace: "materializing"
+    propagate_case: true
+    word: true
+  - trigger: "mechanisation"
+    replace: "mechanization"
+    propagate_case: true
+    word: true
+  - trigger: "memorialising"
+    replace: "memorializing"
+    propagate_case: true
+    word: true
+  - trigger: "miniaturising"
+    replace: "miniaturizing"
+    propagate_case: true
+    word: true
+  - trigger: "miscatalogued"
+    replace: "miscataloged"
+    propagate_case: true
+    word: true
+  - trigger: "misdemeanours"
+    replace: "misdemeanors"
+    propagate_case: true
+    word: true
+  - trigger: "multicoloured"
+    replace: "multicolored"
+    propagate_case: true
+    word: true
+  - trigger: "nationalising"
+    replace: "nationalizing"
+    propagate_case: true
+    word: true
+  - trigger: "neighbourhood"
+    replace: "neighborhood"
+    propagate_case: true
+    word: true
+  - trigger: "normalisation"
+    replace: "normalization"
+    propagate_case: true
+    word: true
+  - trigger: "organisations"
+    replace: "organizations"
+    propagate_case: true
+    word: true
+  - trigger: "outmanoeuvred"
+    replace: "outmaneuvered"
+    propagate_case: true
+    word: true
+  - trigger: "outmanoeuvres"
+    replace: "outmaneuvers"
+    propagate_case: true
+    word: true
+  - trigger: "overemphasise"
+    replace: "overemphasize"
+    propagate_case: true
+    word: true
+  - trigger: "paediatrician"
+    replace: "pediatrician"
+    propagate_case: true
+    word: true
+  - trigger: "palaeontology"
+    replace: "paleontology"
+    propagate_case: true
+    word: true
+  - trigger: "particularise"
+    replace: "particularize"
+    propagate_case: true
+    word: true
+  - trigger: "passivisation"
+    replace: "passivization"
+    propagate_case: true
+    word: true
+  - trigger: "patronisingly"
+    replace: "patronizingly"
+    propagate_case: true
+    word: true
+  - trigger: "pedestrianise"
+    replace: "pedestrianize"
+    propagate_case: true
+    word: true
+  - trigger: "personalising"
+    replace: "personalizing"
+    propagate_case: true
+    word: true
+  - trigger: "philosophised"
+    replace: "philosophized"
+    propagate_case: true
+    word: true
+  - trigger: "philosophises"
+    replace: "philosophizes"
+    propagate_case: true
+    word: true
+  - trigger: "privatisation"
+    replace: "privatization"
+    propagate_case: true
+    word: true
+  - trigger: "propagandised"
+    replace: "propagandized"
+    propagate_case: true
+    word: true
+  - trigger: "propagandises"
+    replace: "propagandizes"
+    propagate_case: true
+    word: true
+  - trigger: "proselytisers"
+    replace: "proselytizers"
+    propagate_case: true
+    word: true
+  - trigger: "proselytising"
+    replace: "proselytizing"
+    propagate_case: true
+    word: true
+  - trigger: "psychoanalyse"
+    replace: "psychoanalyze"
+    propagate_case: true
+    word: true
+  - trigger: "pulverisation"
+    replace: "pulverization"
+    propagate_case: true
+    word: true
+  - trigger: "rationalising"
+    replace: "rationalizing"
+    propagate_case: true
+    word: true
+  - trigger: "reconnoitring"
+    replace: "reconnoitering"
+    propagate_case: true
+    word: true
+  - trigger: "revolutionise"
+    replace: "revolutionize"
+    propagate_case: true
+    word: true
+  - trigger: "romanticising"
+    replace: "romanticizing"
+    propagate_case: true
+    word: true
+  - trigger: "serialisation"
+    replace: "serialization"
+    propagate_case: true
+    word: true
+  - trigger: "socialisation"
+    replace: "socialization"
+    propagate_case: true
+    word: true
+  - trigger: "stabilisation"
+    replace: "stabilization"
+    propagate_case: true
+    word: true
+  - trigger: "standardising"
+    replace: "standardizing"
+    propagate_case: true
+    word: true
+  - trigger: "sterilisation"
+    replace: "sterilization"
+    propagate_case: true
+    word: true
+  - trigger: "subsidisation"
+    replace: "subsidization"
+    propagate_case: true
+    word: true
+  - trigger: "synchronising"
+    replace: "synchronizing"
+    propagate_case: true
+    word: true
+  - trigger: "systematising"
+    replace: "systematizing"
+    propagate_case: true
+    word: true
+  - trigger: "tantalisingly"
+    replace: "tantalizingly"
+    propagate_case: true
+    word: true
+  - trigger: "underutilised"
+    replace: "underutilized"
+    propagate_case: true
+    word: true
+  - trigger: "victimisation"
+    replace: "victimization"
+    propagate_case: true
+    word: true
+  - trigger: "visualisation"
+    replace: "visualization"
+    propagate_case: true
+    word: true
+  - trigger: "vocalisations"
+    replace: "vocalizations"
+    propagate_case: true
+    word: true
+  - trigger: "vulgarisation"
+    replace: "vulgarization"
+    propagate_case: true
+    word: true
+  - trigger: "accessorised"
+    replace: "accessorized"
+    propagate_case: true
+    word: true
+  - trigger: "accessorises"
+    replace: "accessorizes"
+    propagate_case: true
+    word: true
+  - trigger: "acclimatised"
+    replace: "acclimatized"
+    propagate_case: true
+    word: true
+  - trigger: "acclimatises"
+    replace: "acclimatizes"
+    propagate_case: true
+    word: true
+  - trigger: "amortisation"
+    replace: "amortization"
+    propagate_case: true
+    word: true
+  - trigger: "amphitheatre"
+    replace: "amphitheater"
+    propagate_case: true
+    word: true
+  - trigger: "anaesthetics"
+    replace: "anesthetics"
+    propagate_case: true
+    word: true
+  - trigger: "anaesthetise"
+    replace: "anesthetize"
+    propagate_case: true
+    word: true
+  - trigger: "anaesthetist"
+    replace: "anesthetist"
+    propagate_case: true
+    word: true
+  - trigger: "antagonising"
+    replace: "antagonizing"
+    propagate_case: true
+    word: true
+  - trigger: "appetisingly"
+    replace: "appetizingly"
+    propagate_case: true
+    word: true
+  - trigger: "backpedalled"
+    replace: "backpedaled"
+    propagate_case: true
+    word: true
+  - trigger: "bastardising"
+    replace: "bastardizing"
+    propagate_case: true
+    word: true
+  - trigger: "behaviourism"
+    replace: "behaviorism"
+    propagate_case: true
+    word: true
+  - trigger: "behaviourist"
+    replace: "behaviorist"
+    propagate_case: true
+    word: true
+  - trigger: "bowdlerising"
+    replace: "bowdlerizing"
+    propagate_case: true
+    word: true
+  - trigger: "breathalysed"
+    replace: "breathalyzed"
+    propagate_case: true
+    word: true
+  - trigger: "breathalyser"
+    replace: "breathalyzer"
+    propagate_case: true
+    word: true
+  - trigger: "breathalyses"
+    replace: "breathalyzes"
+    propagate_case: true
+    word: true
+  - trigger: "cannibalised"
+    replace: "cannibalized"
+    propagate_case: true
+    word: true
+  - trigger: "cannibalises"
+    replace: "cannibalizes"
+    propagate_case: true
+    word: true
+  - trigger: "capitalising"
+    replace: "capitalizing"
+    propagate_case: true
+    word: true
+  - trigger: "caramelising"
+    replace: "caramelizing"
+    propagate_case: true
+    word: true
+  - trigger: "categorising"
+    replace: "categorizing"
+    propagate_case: true
+    word: true
+  - trigger: "centigrammes"
+    replace: "centigrams"
+    propagate_case: true
+    word: true
+  - trigger: "centralising"
+    replace: "centralizing"
+    propagate_case: true
+    word: true
+  - trigger: "centrepieces"
+    replace: "centerpieces"
+    propagate_case: true
+    word: true
+  - trigger: "characterise"
+    replace: "characterize"
+    propagate_case: true
+    word: true
+  - trigger: "circularised"
+    replace: "circularized"
+    propagate_case: true
+    word: true
+  - trigger: "circularises"
+    replace: "circularizes"
+    propagate_case: true
+    word: true
+  - trigger: "clarinettist"
+    replace: "clarinetist"
+    propagate_case: true
+    word: true
+  - trigger: "collectivise"
+    replace: "collectivize"
+    propagate_case: true
+    word: true
+  - trigger: "colonisation"
+    replace: "colonization"
+    propagate_case: true
+    word: true
+  - trigger: "computerised"
+    replace: "computerized"
+    propagate_case: true
+    word: true
+  - trigger: "computerises"
+    replace: "computerizes"
+    propagate_case: true
+    word: true
+  - trigger: "criminalised"
+    replace: "criminalized"
+    propagate_case: true
+    word: true
+  - trigger: "criminalises"
+    replace: "criminalizes"
+    propagate_case: true
+    word: true
+  - trigger: "crystallised"
+    replace: "crystallized"
+    propagate_case: true
+    word: true
+  - trigger: "crystallises"
+    replace: "crystallizes"
+    propagate_case: true
+    word: true
+  - trigger: "decentralise"
+    replace: "decentralize"
+    propagate_case: true
+    word: true
+  - trigger: "dehumanising"
+    replace: "dehumanizing"
+    propagate_case: true
+    word: true
+  - trigger: "demilitarise"
+    replace: "demilitarize"
+    propagate_case: true
+    word: true
+  - trigger: "demobilising"
+    replace: "demobilizing"
+    propagate_case: true
+    word: true
+  - trigger: "democratised"
+    replace: "democratized"
+    propagate_case: true
+    word: true
+  - trigger: "democratises"
+    replace: "democratizes"
+    propagate_case: true
+    word: true
+  - trigger: "demoralising"
+    replace: "demoralizing"
+    propagate_case: true
+    word: true
+  - trigger: "desensitised"
+    replace: "desensitized"
+    propagate_case: true
+    word: true
+  - trigger: "desensitises"
+    replace: "desensitizes"
+    propagate_case: true
+    word: true
+  - trigger: "destabilised"
+    replace: "destabilized"
+    propagate_case: true
+    word: true
+  - trigger: "destabilises"
+    replace: "destabilizes"
+    propagate_case: true
+    word: true
+  - trigger: "discolouring"
+    replace: "discoloring"
+    propagate_case: true
+    word: true
+  - trigger: "dishonouring"
+    replace: "dishonoring"
+    propagate_case: true
+    word: true
+  - trigger: "disorganised"
+    replace: "disorganized"
+    propagate_case: true
+    word: true
+  - trigger: "editorialise"
+    replace: "editorialize"
+    propagate_case: true
+    word: true
+  - trigger: "endeavouring"
+    replace: "endeavoring"
+    propagate_case: true
+    word: true
+  - trigger: "equalisation"
+    replace: "equalization"
+    propagate_case: true
+    word: true
+  - trigger: "evangelising"
+    replace: "evangelizing"
+    propagate_case: true
+    word: true
+  - trigger: "extemporised"
+    replace: "extemporized"
+    propagate_case: true
+    word: true
+  - trigger: "extemporises"
+    replace: "extemporizes"
+    propagate_case: true
+    word: true
+  - trigger: "externalised"
+    replace: "externalized"
+    propagate_case: true
+    word: true
+  - trigger: "externalises"
+    replace: "externalizes"
+    propagate_case: true
+    word: true
+  - trigger: "familiarised"
+    replace: "familiarized"
+    propagate_case: true
+    word: true
+  - trigger: "familiarises"
+    replace: "familiarizes"
+    propagate_case: true
+    word: true
+  - trigger: "fictionalise"
+    replace: "fictionalize"
+    propagate_case: true
+    word: true
+  - trigger: "finalisation"
+    replace: "finalization"
+    propagate_case: true
+    word: true
+  - trigger: "fraternising"
+    replace: "fraternizing"
+    propagate_case: true
+    word: true
+  - trigger: "generalising"
+    replace: "generalizing"
+    propagate_case: true
+    word: true
+  - trigger: "haemophiliac"
+    replace: "hemophiliac"
+    propagate_case: true
+    word: true
+  - trigger: "haemorrhaged"
+    replace: "hemorrhaged"
+    propagate_case: true
+    word: true
+  - trigger: "haemorrhages"
+    replace: "hemorrhages"
+    propagate_case: true
+    word: true
+  - trigger: "haemorrhoids"
+    replace: "hemorrhoids"
+    propagate_case: true
+    word: true
+  - trigger: "homoeopathic"
+    replace: "homeopathic"
+    propagate_case: true
+    word: true
+  - trigger: "homogenising"
+    replace: "homogenizing"
+    propagate_case: true
+    word: true
+  - trigger: "hospitalised"
+    replace: "hospitalized"
+    propagate_case: true
+    word: true
+  - trigger: "hospitalises"
+    replace: "hospitalizes"
+    propagate_case: true
+    word: true
+  - trigger: "hypothesised"
+    replace: "hypothesized"
+    propagate_case: true
+    word: true
+  - trigger: "hypothesises"
+    replace: "hypothesizes"
+    propagate_case: true
+    word: true
+  - trigger: "idealisation"
+    replace: "idealization"
+    propagate_case: true
+    word: true
+  - trigger: "immobilisers"
+    replace: "immobilizers"
+    propagate_case: true
+    word: true
+  - trigger: "immobilising"
+    replace: "immobilizing"
+    propagate_case: true
+    word: true
+  - trigger: "immortalised"
+    replace: "immortalized"
+    propagate_case: true
+    word: true
+  - trigger: "immortalises"
+    replace: "immortalizes"
+    propagate_case: true
+    word: true
+  - trigger: "immunisation"
+    replace: "immunization"
+    propagate_case: true
+    word: true
+  - trigger: "initialising"
+    replace: "initializing"
+    propagate_case: true
+    word: true
+  - trigger: "internalised"
+    replace: "internalized"
+    propagate_case: true
+    word: true
+  - trigger: "internalises"
+    replace: "internalizes"
+    propagate_case: true
+    word: true
+  - trigger: "jeopardising"
+    replace: "jeopardizing"
+    propagate_case: true
+    word: true
+  - trigger: "legalisation"
+    replace: "legalization"
+    propagate_case: true
+    word: true
+  - trigger: "legitimising"
+    replace: "legitimizing"
+    propagate_case: true
+    word: true
+  - trigger: "liberalising"
+    replace: "liberalizing"
+    propagate_case: true
+    word: true
+  - trigger: "manoeuvrable"
+    replace: "maneuverable"
+    propagate_case: true
+    word: true
+  - trigger: "manoeuvrings"
+    replace: "maneuverings"
+    propagate_case: true
+    word: true
+  - trigger: "marginalised"
+    replace: "marginalized"
+    propagate_case: true
+    word: true
+  - trigger: "marginalises"
+    replace: "marginalizes"
+    propagate_case: true
+    word: true
+  - trigger: "marvellously"
+    replace: "marvelously"
+    propagate_case: true
+    word: true
+  - trigger: "materialised"
+    replace: "materialized"
+    propagate_case: true
+    word: true
+  - trigger: "materialises"
+    replace: "materializes"
+    propagate_case: true
+    word: true
+  - trigger: "maximisation"
+    replace: "maximization"
+    propagate_case: true
+    word: true
+  - trigger: "memorialised"
+    replace: "memorialized"
+    propagate_case: true
+    word: true
+  - trigger: "memorialises"
+    replace: "memorializes"
+    propagate_case: true
+    word: true
+  - trigger: "metabolising"
+    replace: "metabolizing"
+    propagate_case: true
+    word: true
+  - trigger: "militarising"
+    replace: "militarizing"
+    propagate_case: true
+    word: true
+  - trigger: "milligrammes"
+    replace: "milligrams"
+    propagate_case: true
+    word: true
+  - trigger: "miniaturised"
+    replace: "miniaturized"
+    propagate_case: true
+    word: true
+  - trigger: "miniaturises"
+    replace: "miniaturizes"
+    propagate_case: true
+    word: true
+  - trigger: "misbehaviour"
+    replace: "misbehavior"
+    propagate_case: true
+    word: true
+  - trigger: "misdemeanour"
+    replace: "misdemeanor"
+    propagate_case: true
+    word: true
+  - trigger: "mobilisation"
+    replace: "mobilization"
+    propagate_case: true
+    word: true
+  - trigger: "moisturisers"
+    replace: "moisturizers"
+    propagate_case: true
+    word: true
+  - trigger: "moisturising"
+    replace: "moisturizing"
+    propagate_case: true
+    word: true
+  - trigger: "monopolising"
+    replace: "monopolizing"
+    propagate_case: true
+    word: true
+  - trigger: "moustachioed"
+    replace: "mustachioed"
+    propagate_case: true
+    word: true
+  - trigger: "nationalised"
+    replace: "nationalized"
+    propagate_case: true
+    word: true
+  - trigger: "nationalises"
+    replace: "nationalizes"
+    propagate_case: true
+    word: true
+  - trigger: "naturalising"
+    replace: "naturalizing"
+    propagate_case: true
+    word: true
+  - trigger: "neighbouring"
+    replace: "neighboring"
+    propagate_case: true
+    word: true
+  - trigger: "neutralising"
+    replace: "neutralizing"
+    propagate_case: true
+    word: true
+  - trigger: "oesophaguses"
+    replace: "esophaguses"
+    propagate_case: true
+    word: true
+  - trigger: "organisation"
+    replace: "organization"
+    propagate_case: true
+    word: true
+  - trigger: "orthopaedics"
+    replace: "orthopedics"
+    propagate_case: true
+    word: true
+  - trigger: "outmanoeuvre"
+    replace: "outmaneuver"
+    propagate_case: true
+    word: true
+  - trigger: "palaeolithic"
+    replace: "paleolithic"
+    propagate_case: true
+    word: true
+  - trigger: "pasteurising"
+    replace: "pasteurizing"
+    propagate_case: true
+    word: true
+  - trigger: "personalised"
+    replace: "personalized"
+    propagate_case: true
+    word: true
+  - trigger: "personalises"
+    replace: "personalizes"
+    propagate_case: true
+    word: true
+  - trigger: "philosophise"
+    replace: "philosophize"
+    propagate_case: true
+    word: true
+  - trigger: "plagiarising"
+    replace: "plagiarizing"
+    propagate_case: true
+    word: true
+  - trigger: "ploughshares"
+    replace: "plowshares"
+    propagate_case: true
+    word: true
+  - trigger: "polarisation"
+    replace: "polarization"
+    propagate_case: true
+    word: true
+  - trigger: "politicising"
+    replace: "politicizing"
+    propagate_case: true
+    word: true
+  - trigger: "popularising"
+    replace: "popularizing"
+    propagate_case: true
+    word: true
+  - trigger: "pressurising"
+    replace: "pressurizing"
+    propagate_case: true
+    word: true
+  - trigger: "prioritising"
+    replace: "prioritizing"
+    propagate_case: true
+    word: true
+  - trigger: "propagandise"
+    replace: "propagandize"
+    propagate_case: true
+    word: true
+  - trigger: "proselytised"
+    replace: "proselytized"
+    propagate_case: true
+    word: true
+  - trigger: "proselytiser"
+    replace: "proselytizer"
+    propagate_case: true
+    word: true
+  - trigger: "proselytises"
+    replace: "proselytizes"
+    propagate_case: true
+    word: true
+  - trigger: "radicalising"
+    replace: "radicalizing"
+    propagate_case: true
+    word: true
+  - trigger: "rationalised"
+    replace: "rationalized"
+    propagate_case: true
+    word: true
+  - trigger: "rationalises"
+    replace: "rationalizes"
+    propagate_case: true
+    word: true
+  - trigger: "realisations"
+    replace: "realizations"
+    propagate_case: true
+    word: true
+  - trigger: "recognisable"
+    replace: "recognizable"
+    propagate_case: true
+    word: true
+  - trigger: "recognisably"
+    replace: "recognizably"
+    propagate_case: true
+    word: true
+  - trigger: "recognisance"
+    replace: "recognizance"
+    propagate_case: true
+    word: true
+  - trigger: "reconnoitred"
+    replace: "reconnoitered"
+    propagate_case: true
+    word: true
+  - trigger: "reconnoitres"
+    replace: "reconnoiters"
+    propagate_case: true
+    word: true
+  - trigger: "regularising"
+    replace: "regularizing"
+    propagate_case: true
+    word: true
+  - trigger: "reorganising"
+    replace: "reorganizing"
+    propagate_case: true
+    word: true
+  - trigger: "revitalising"
+    replace: "revitalizing"
+    propagate_case: true
+    word: true
+  - trigger: "rhapsodising"
+    replace: "rhapsodizing"
+    propagate_case: true
+    word: true
+  - trigger: "romanticised"
+    replace: "romanticized"
+    propagate_case: true
+    word: true
+  - trigger: "romanticises"
+    replace: "romanticizes"
+    propagate_case: true
+    word: true
+  - trigger: "scandalising"
+    replace: "scandalizing"
+    propagate_case: true
+    word: true
+  - trigger: "scrutinising"
+    replace: "scrutinizing"
+    propagate_case: true
+    word: true
+  - trigger: "secularising"
+    replace: "secularizing"
+    propagate_case: true
+    word: true
+  - trigger: "specialising"
+    replace: "specializing"
+    propagate_case: true
+    word: true
+  - trigger: "squirrelling"
+    replace: "squirreling"
+    propagate_case: true
+    word: true
+  - trigger: "standardised"
+    replace: "standardized"
+    propagate_case: true
+    word: true
+  - trigger: "standardises"
+    replace: "standardizes"
+    propagate_case: true
+    word: true
+  - trigger: "stigmatising"
+    replace: "stigmatizing"
+    propagate_case: true
+    word: true
+  - trigger: "sympathisers"
+    replace: "sympathizers"
+    propagate_case: true
+    word: true
+  - trigger: "sympathising"
+    replace: "sympathizing"
+    propagate_case: true
+    word: true
+  - trigger: "synchronised"
+    replace: "synchronized"
+    propagate_case: true
+    word: true
+  - trigger: "synchronises"
+    replace: "synchronizes"
+    propagate_case: true
+    word: true
+  - trigger: "synthesisers"
+    replace: "synthesizers"
+    propagate_case: true
+    word: true
+  - trigger: "synthesising"
+    replace: "synthesizing"
+    propagate_case: true
+    word: true
+  - trigger: "systematised"
+    replace: "systematized"
+    propagate_case: true
+    word: true
+  - trigger: "systematises"
+    replace: "systematizes"
+    propagate_case: true
+    word: true
+  - trigger: "technicolour"
+    replace: "technicolor"
+    propagate_case: true
+    word: true
+  - trigger: "theatregoers"
+    replace: "theatergoers"
+    propagate_case: true
+    word: true
+  - trigger: "traumatising"
+    replace: "traumatizing"
+    propagate_case: true
+    word: true
+  - trigger: "trivialising"
+    replace: "trivializing"
+    propagate_case: true
+    word: true
+  - trigger: "unauthorised"
+    replace: "unauthorized"
+    propagate_case: true
+    word: true
+  - trigger: "uncatalogued"
+    replace: "uncataloged"
+    propagate_case: true
+    word: true
+  - trigger: "unfavourable"
+    replace: "unfavorable"
+    propagate_case: true
+    word: true
+  - trigger: "unfavourably"
+    replace: "unfavorably"
+    propagate_case: true
+    word: true
+  - trigger: "unionisation"
+    replace: "unionization"
+    propagate_case: true
+    word: true
+  - trigger: "unrecognised"
+    replace: "unrecognized"
+    propagate_case: true
+    word: true
+  - trigger: "untrammelled"
+    replace: "untrammeled"
+    propagate_case: true
+    word: true
+  - trigger: "urbanisation"
+    replace: "urbanization"
+    propagate_case: true
+    word: true
+  - trigger: "vaporisation"
+    replace: "vaporization"
+    propagate_case: true
+    word: true
+  - trigger: "vocalisation"
+    replace: "vocalization"
+    propagate_case: true
+    word: true
+  - trigger: "watercolours"
+    replace: "watercolors"
+    propagate_case: true
+    word: true
+  - trigger: "westernising"
+    replace: "westernizing"
+    propagate_case: true
+    word: true
+  - trigger: "accessorise"
+    replace: "accessorize"
+    propagate_case: true
+    word: true
+  - trigger: "acclimatise"
+    replace: "acclimatize"
+    propagate_case: true
+    word: true
+  - trigger: "agonisingly"
+    replace: "agonizingly"
+    propagate_case: true
+    word: true
+  - trigger: "amortisable"
+    replace: "amortizable"
+    propagate_case: true
+    word: true
+  - trigger: "anaesthesia"
+    replace: "anesthesia"
+    propagate_case: true
+    word: true
+  - trigger: "anaesthetic"
+    replace: "anesthetic"
+    propagate_case: true
+    word: true
+  - trigger: "anglicising"
+    replace: "anglicizing"
+    propagate_case: true
+    word: true
+  - trigger: "antagonised"
+    replace: "antagonized"
+    propagate_case: true
+    word: true
+  - trigger: "antagonises"
+    replace: "antagonizes"
+    propagate_case: true
+    word: true
+  - trigger: "apologising"
+    replace: "apologizing"
+    propagate_case: true
+    word: true
+  - trigger: "archaeology"
+    replace: "archeology"
+    propagate_case: true
+    word: true
+  - trigger: "authorising"
+    replace: "authorizing"
+    propagate_case: true
+    word: true
+  - trigger: "bastardised"
+    replace: "bastardized"
+    propagate_case: true
+    word: true
+  - trigger: "bastardises"
+    replace: "bastardizes"
+    propagate_case: true
+    word: true
+  - trigger: "bedevilling"
+    replace: "bedeviling"
+    propagate_case: true
+    word: true
+  - trigger: "behavioural"
+    replace: "behavioral"
+    propagate_case: true
+    word: true
+  - trigger: "belabouring"
+    replace: "belaboring"
+    propagate_case: true
+    word: true
+  - trigger: "bowdlerised"
+    replace: "bowdlerized"
+    propagate_case: true
+    word: true
+  - trigger: "bowdlerises"
+    replace: "bowdlerizes"
+    propagate_case: true
+    word: true
+  - trigger: "breathalyse"
+    replace: "breathalyze"
+    propagate_case: true
+    word: true
+  - trigger: "brutalising"
+    replace: "brutalizing"
+    propagate_case: true
+    word: true
+  - trigger: "cannibalise"
+    replace: "cannibalize"
+    propagate_case: true
+    word: true
+  - trigger: "capitalised"
+    replace: "capitalized"
+    propagate_case: true
+    word: true
+  - trigger: "capitalises"
+    replace: "capitalizes"
+    propagate_case: true
+    word: true
+  - trigger: "caramelised"
+    replace: "caramelized"
+    propagate_case: true
+    word: true
+  - trigger: "caramelises"
+    replace: "caramelizes"
+    propagate_case: true
+    word: true
+  - trigger: "carbonising"
+    replace: "carbonizing"
+    propagate_case: true
+    word: true
+  - trigger: "cataloguing"
+    replace: "cataloging"
+    propagate_case: true
+    word: true
+  - trigger: "categorised"
+    replace: "categorized"
+    propagate_case: true
+    word: true
+  - trigger: "categorises"
+    replace: "categorizes"
+    propagate_case: true
+    word: true
+  - trigger: "cauterising"
+    replace: "cauterizing"
+    propagate_case: true
+    word: true
+  - trigger: "centigramme"
+    replace: "centigram"
+    propagate_case: true
+    word: true
+  - trigger: "centilitres"
+    replace: "centiliters"
+    propagate_case: true
+    word: true
+  - trigger: "centimetres"
+    replace: "centimeters"
+    propagate_case: true
+    word: true
+  - trigger: "centralised"
+    replace: "centralized"
+    propagate_case: true
+    word: true
+  - trigger: "centralises"
+    replace: "centralizes"
+    propagate_case: true
+    word: true
+  - trigger: "centrefolds"
+    replace: "centerfolds"
+    propagate_case: true
+    word: true
+  - trigger: "centrepiece"
+    replace: "centerpiece"
+    propagate_case: true
+    word: true
+  - trigger: "channelling"
+    replace: "channeling"
+    propagate_case: true
+    word: true
+  - trigger: "chequebooks"
+    replace: "checkbooks"
+    propagate_case: true
+    word: true
+  - trigger: "circularise"
+    replace: "circularize"
+    propagate_case: true
+    word: true
+  - trigger: "colourfully"
+    replace: "colorfully"
+    propagate_case: true
+    word: true
+  - trigger: "colourizing"
+    replace: "colorizing"
+    propagate_case: true
+    word: true
+  - trigger: "computerise"
+    replace: "computerize"
+    propagate_case: true
+    word: true
+  - trigger: "councillors"
+    replace: "councilors"
+    propagate_case: true
+    word: true
+  - trigger: "counselling"
+    replace: "counseling"
+    propagate_case: true
+    word: true
+  - trigger: "counsellors"
+    replace: "counselors"
+    propagate_case: true
+    word: true
+  - trigger: "criminalise"
+    replace: "criminalize"
+    propagate_case: true
+    word: true
+  - trigger: "criticising"
+    replace: "criticizing"
+    propagate_case: true
+    word: true
+  - trigger: "crystallise"
+    replace: "crystallize"
+    propagate_case: true
+    word: true
+  - trigger: "customising"
+    replace: "customizing"
+    propagate_case: true
+    word: true
+  - trigger: "defenceless"
+    replace: "defenseless"
+    propagate_case: true
+    word: true
+  - trigger: "dehumanised"
+    replace: "dehumanized"
+    propagate_case: true
+    word: true
+  - trigger: "dehumanises"
+    replace: "dehumanizes"
+    propagate_case: true
+    word: true
+  - trigger: "demobilised"
+    replace: "demobilized"
+    propagate_case: true
+    word: true
+  - trigger: "demobilises"
+    replace: "demobilizes"
+    propagate_case: true
+    word: true
+  - trigger: "democratise"
+    replace: "democratize"
+    propagate_case: true
+    word: true
+  - trigger: "demoralised"
+    replace: "demoralized"
+    propagate_case: true
+    word: true
+  - trigger: "demoralises"
+    replace: "demoralizes"
+    propagate_case: true
+    word: true
+  - trigger: "deodorising"
+    replace: "deodorizing"
+    propagate_case: true
+    word: true
+  - trigger: "desensitise"
+    replace: "desensitize"
+    propagate_case: true
+    word: true
+  - trigger: "destabilise"
+    replace: "destabilize"
+    propagate_case: true
+    word: true
+  - trigger: "discoloured"
+    replace: "discolored"
+    propagate_case: true
+    word: true
+  - trigger: "dishevelled"
+    replace: "disheveled"
+    propagate_case: true
+    word: true
+  - trigger: "dishonoured"
+    replace: "dishonored"
+    propagate_case: true
+    word: true
+  - trigger: "dramatising"
+    replace: "dramatizing"
+    propagate_case: true
+    word: true
+  - trigger: "economising"
+    replace: "economizing"
+    propagate_case: true
+    word: true
+  - trigger: "empathising"
+    replace: "empathizing"
+    propagate_case: true
+    word: true
+  - trigger: "emphasising"
+    replace: "emphasizing"
+    propagate_case: true
+    word: true
+  - trigger: "endeavoured"
+    replace: "endeavored"
+    propagate_case: true
+    word: true
+  - trigger: "epitomising"
+    replace: "epitomizing"
+    propagate_case: true
+    word: true
+  - trigger: "evangelised"
+    replace: "evangelized"
+    propagate_case: true
+    word: true
+  - trigger: "evangelises"
+    replace: "evangelizes"
+    propagate_case: true
+    word: true
+  - trigger: "extemporise"
+    replace: "extemporize"
+    propagate_case: true
+    word: true
+  - trigger: "externalise"
+    replace: "externalize"
+    propagate_case: true
+    word: true
+  - trigger: "factorising"
+    replace: "factorizing"
+    propagate_case: true
+    word: true
+  - trigger: "familiarise"
+    replace: "familiarize"
+    propagate_case: true
+    word: true
+  - trigger: "fantasising"
+    replace: "fantasizing"
+    propagate_case: true
+    word: true
+  - trigger: "favouritism"
+    replace: "favoritism"
+    propagate_case: true
+    word: true
+  - trigger: "fertilisers"
+    replace: "fertilizers"
+    propagate_case: true
+    word: true
+  - trigger: "fertilising"
+    replace: "fertilizing"
+    propagate_case: true
+    word: true
+  - trigger: "flavourings"
+    replace: "flavorings"
+    propagate_case: true
+    word: true
+  - trigger: "flavourless"
+    replace: "flavorless"
+    propagate_case: true
+    word: true
+  - trigger: "flavoursome"
+    replace: "flavorsome"
+    propagate_case: true
+    word: true
+  - trigger: "formalising"
+    replace: "formalizing"
+    propagate_case: true
+    word: true
+  - trigger: "fossilising"
+    replace: "fossilizing"
+    propagate_case: true
+    word: true
+  - trigger: "fraternised"
+    replace: "fraternized"
+    propagate_case: true
+    word: true
+  - trigger: "fraternises"
+    replace: "fraternizes"
+    propagate_case: true
+    word: true
+  - trigger: "galvanising"
+    replace: "galvanizing"
+    propagate_case: true
+    word: true
+  - trigger: "generalised"
+    replace: "generalized"
+    propagate_case: true
+    word: true
+  - trigger: "generalises"
+    replace: "generalizes"
+    propagate_case: true
+    word: true
+  - trigger: "ghettoising"
+    replace: "ghettoizing"
+    propagate_case: true
+    word: true
+  - trigger: "globalising"
+    replace: "globalizing"
+    propagate_case: true
+    word: true
+  - trigger: "gruellingly"
+    replace: "gruelingly"
+    propagate_case: true
+    word: true
+  - trigger: "gynaecology"
+    replace: "gynecology"
+    propagate_case: true
+    word: true
+  - trigger: "haematology"
+    replace: "hematology"
+    propagate_case: true
+    word: true
+  - trigger: "haemoglobin"
+    replace: "hemoglobin"
+    propagate_case: true
+    word: true
+  - trigger: "haemophilia"
+    replace: "hemophilia"
+    propagate_case: true
+    word: true
+  - trigger: "haemorrhage"
+    replace: "hemorrhage"
+    propagate_case: true
+    word: true
+  - trigger: "harmonising"
+    replace: "harmonizing"
+    propagate_case: true
+    word: true
+  - trigger: "homoeopaths"
+    replace: "homeopaths"
+    propagate_case: true
+    word: true
+  - trigger: "homoeopathy"
+    replace: "homeopathy"
+    propagate_case: true
+    word: true
+  - trigger: "homogenised"
+    replace: "homogenized"
+    propagate_case: true
+    word: true
+  - trigger: "homogenises"
+    replace: "homogenizes"
+    propagate_case: true
+    word: true
+  - trigger: "hospitalise"
+    replace: "hospitalize"
+    propagate_case: true
+    word: true
+  - trigger: "hybridising"
+    replace: "hybridizing"
+    propagate_case: true
+    word: true
+  - trigger: "hypnotising"
+    replace: "hypnotizing"
+    propagate_case: true
+    word: true
+  - trigger: "hypothesise"
+    replace: "hypothesize"
+    propagate_case: true
+    word: true
+  - trigger: "immobilised"
+    replace: "immobilized"
+    propagate_case: true
+    word: true
+  - trigger: "immobiliser"
+    replace: "immobilizer"
+    propagate_case: true
+    word: true
+  - trigger: "immobilises"
+    replace: "immobilizes"
+    propagate_case: true
+    word: true
+  - trigger: "immortalise"
+    replace: "immortalize"
+    propagate_case: true
+    word: true
+  - trigger: "impanelling"
+    replace: "impaneling"
+    propagate_case: true
+    word: true
+  - trigger: "imperilling"
+    replace: "imperiling"
+    propagate_case: true
+    word: true
+  - trigger: "initialised"
+    replace: "initialized"
+    propagate_case: true
+    word: true
+  - trigger: "initialises"
+    replace: "initializes"
+    propagate_case: true
+    word: true
+  - trigger: "initialling"
+    replace: "initialing"
+    propagate_case: true
+    word: true
+  - trigger: "instalments"
+    replace: "installments"
+    propagate_case: true
+    word: true
+  - trigger: "internalise"
+    replace: "internalize"
+    propagate_case: true
+    word: true
+  - trigger: "italicising"
+    replace: "italicizing"
+    propagate_case: true
+    word: true
+  - trigger: "jeopardised"
+    replace: "jeopardized"
+    propagate_case: true
+    word: true
+  - trigger: "jeopardises"
+    replace: "jeopardizes"
+    propagate_case: true
+    word: true
+  - trigger: "kilogrammes"
+    replace: "kilograms"
+    propagate_case: true
+    word: true
+  - trigger: "legitimised"
+    replace: "legitimized"
+    propagate_case: true
+    word: true
+  - trigger: "legitimises"
+    replace: "legitimizes"
+    propagate_case: true
+    word: true
+  - trigger: "liberalised"
+    replace: "liberalized"
+    propagate_case: true
+    word: true
+  - trigger: "liberalises"
+    replace: "liberalizes"
+    propagate_case: true
+    word: true
+  - trigger: "lionisation"
+    replace: "lionization"
+    propagate_case: true
+    word: true
+  - trigger: "liquidisers"
+    replace: "liquidizers"
+    propagate_case: true
+    word: true
+  - trigger: "liquidising"
+    replace: "liquidizing"
+    propagate_case: true
+    word: true
+  - trigger: "magnetising"
+    replace: "magnetizing"
+    propagate_case: true
+    word: true
+  - trigger: "manoeuvring"
+    replace: "maneuvering"
+    propagate_case: true
+    word: true
+  - trigger: "marginalise"
+    replace: "marginalize"
+    propagate_case: true
+    word: true
+  - trigger: "marshalling"
+    replace: "marshaling"
+    propagate_case: true
+    word: true
+  - trigger: "materialise"
+    replace: "materialize"
+    propagate_case: true
+    word: true
+  - trigger: "mechanising"
+    replace: "mechanizing"
+    propagate_case: true
+    word: true
+  - trigger: "memorialise"
+    replace: "memorialize"
+    propagate_case: true
+    word: true
+  - trigger: "mesmerising"
+    replace: "mesmerizing"
+    propagate_case: true
+    word: true
+  - trigger: "metabolised"
+    replace: "metabolized"
+    propagate_case: true
+    word: true
+  - trigger: "metabolises"
+    replace: "metabolizes"
+    propagate_case: true
+    word: true
+  - trigger: "micrometres"
+    replace: "micrometers"
+    propagate_case: true
+    word: true
+  - trigger: "militarised"
+    replace: "militarized"
+    propagate_case: true
+    word: true
+  - trigger: "militarises"
+    replace: "militarizes"
+    propagate_case: true
+    word: true
+  - trigger: "milligramme"
+    replace: "milligram"
+    propagate_case: true
+    word: true
+  - trigger: "millilitres"
+    replace: "milliliters"
+    propagate_case: true
+    word: true
+  - trigger: "millimetres"
+    replace: "millimeters"
+    propagate_case: true
+    word: true
+  - trigger: "miniaturise"
+    replace: "miniaturize"
+    propagate_case: true
+    word: true
+  - trigger: "modernising"
+    replace: "modernizing"
+    propagate_case: true
+    word: true
+  - trigger: "moisturised"
+    replace: "moisturized"
+    propagate_case: true
+    word: true
+  - trigger: "moisturiser"
+    replace: "moisturizer"
+    propagate_case: true
+    word: true
+  - trigger: "moisturises"
+    replace: "moisturizes"
+    propagate_case: true
+    word: true
+  - trigger: "monopolised"
+    replace: "monopolized"
+    propagate_case: true
+    word: true
+  - trigger: "monopolises"
+    replace: "monopolizes"
+    propagate_case: true
+    word: true
+  - trigger: "nationalise"
+    replace: "nationalize"
+    propagate_case: true
+    word: true
+  - trigger: "naturalised"
+    replace: "naturalized"
+    propagate_case: true
+    word: true
+  - trigger: "naturalises"
+    replace: "naturalizes"
+    propagate_case: true
+    word: true
+  - trigger: "neighbourly"
+    replace: "neighborly"
+    propagate_case: true
+    word: true
+  - trigger: "neutralised"
+    replace: "neutralized"
+    propagate_case: true
+    word: true
+  - trigger: "neutralises"
+    replace: "neutralizes"
+    propagate_case: true
+    word: true
+  - trigger: "normalising"
+    replace: "normalizing"
+    propagate_case: true
+    word: true
+  - trigger: "orthopaedic"
+    replace: "orthopedic"
+    propagate_case: true
+    word: true
+  - trigger: "ostracising"
+    replace: "ostracizing"
+    propagate_case: true
+    word: true
+  - trigger: "oxidisation"
+    replace: "oxidization"
+    propagate_case: true
+    word: true
+  - trigger: "paediatrics"
+    replace: "pediatrics"
+    propagate_case: true
+    word: true
+  - trigger: "paedophiles"
+    replace: "pedophiles"
+    propagate_case: true
+    word: true
+  - trigger: "paedophilia"
+    replace: "pedophilia"
+    propagate_case: true
+    word: true
+  - trigger: "passivising"
+    replace: "passivizing"
+    propagate_case: true
+    word: true
+  - trigger: "pasteurised"
+    replace: "pasteurized"
+    propagate_case: true
+    word: true
+  - trigger: "pasteurises"
+    replace: "pasteurizes"
+    propagate_case: true
+    word: true
+  - trigger: "patronising"
+    replace: "patronizing"
+    propagate_case: true
+    word: true
+  - trigger: "personalise"
+    replace: "personalize"
+    propagate_case: true
+    word: true
+  - trigger: "plagiarised"
+    replace: "plagiarized"
+    propagate_case: true
+    word: true
+  - trigger: "plagiarises"
+    replace: "plagiarizes"
+    propagate_case: true
+    word: true
+  - trigger: "ploughshare"
+    replace: "plowshare"
+    propagate_case: true
+    word: true
+  - trigger: "politicised"
+    replace: "politicized"
+    propagate_case: true
+    word: true
+  - trigger: "politicises"
+    replace: "politicizes"
+    propagate_case: true
+    word: true
+  - trigger: "popularised"
+    replace: "popularized"
+    propagate_case: true
+    word: true
+  - trigger: "popularises"
+    replace: "popularizes"
+    propagate_case: true
+    word: true
+  - trigger: "praesidiums"
+    replace: "presidiums"
+    propagate_case: true
+    word: true
+  - trigger: "pressurised"
+    replace: "pressurized"
+    propagate_case: true
+    word: true
+  - trigger: "pressurises"
+    replace: "pressurizes"
+    propagate_case: true
+    word: true
+  - trigger: "prioritised"
+    replace: "prioritized"
+    propagate_case: true
+    word: true
+  - trigger: "prioritises"
+    replace: "prioritizes"
+    propagate_case: true
+    word: true
+  - trigger: "privatising"
+    replace: "privatizing"
+    propagate_case: true
+    word: true
+  - trigger: "proselytise"
+    replace: "proselytize"
+    propagate_case: true
+    word: true
+  - trigger: "publicising"
+    replace: "publicizing"
+    propagate_case: true
+    word: true
+  - trigger: "pulverising"
+    replace: "pulverizing"
+    propagate_case: true
+    word: true
+  - trigger: "quarrelling"
+    replace: "quarreling"
+    propagate_case: true
+    word: true
+  - trigger: "radicalised"
+    replace: "radicalized"
+    propagate_case: true
+    word: true
+  - trigger: "radicalises"
+    replace: "radicalizes"
+    propagate_case: true
+    word: true
+  - trigger: "randomising"
+    replace: "randomizing"
+    propagate_case: true
+    word: true
+  - trigger: "rationalise"
+    replace: "rationalize"
+    propagate_case: true
+    word: true
+  - trigger: "realisation"
+    replace: "realization"
+    propagate_case: true
+    word: true
+  - trigger: "recognising"
+    replace: "recognizing"
+    propagate_case: true
+    word: true
+  - trigger: "reconnoitre"
+    replace: "reconnoiter"
+    propagate_case: true
+    word: true
+  - trigger: "regularised"
+    replace: "regularized"
+    propagate_case: true
+    word: true
+  - trigger: "regularises"
+    replace: "regularizes"
+    propagate_case: true
+    word: true
+  - trigger: "remodelling"
+    replace: "remodeling"
+    propagate_case: true
+    word: true
+  - trigger: "reorganised"
+    replace: "reorganized"
+    propagate_case: true
+    word: true
+  - trigger: "reorganises"
+    replace: "reorganizes"
+    propagate_case: true
+    word: true
+  - trigger: "revitalised"
+    replace: "revitalized"
+    propagate_case: true
+    word: true
+  - trigger: "revitalises"
+    replace: "revitalizes"
+    propagate_case: true
+    word: true
+  - trigger: "rhapsodised"
+    replace: "rhapsodized"
+    propagate_case: true
+    word: true
+  - trigger: "rhapsodises"
+    replace: "rhapsodizes"
+    propagate_case: true
+    word: true
+  - trigger: "romanticise"
+    replace: "romanticize"
+    propagate_case: true
+    word: true
+  - trigger: "scandalised"
+    replace: "scandalized"
+    propagate_case: true
+    word: true
+  - trigger: "scandalises"
+    replace: "scandalizes"
+    propagate_case: true
+    word: true
+  - trigger: "sceptically"
+    replace: "skeptically"
+    propagate_case: true
+    word: true
+  - trigger: "scrutinised"
+    replace: "scrutinized"
+    propagate_case: true
+    word: true
+  - trigger: "scrutinises"
+    replace: "scrutinizes"
+    propagate_case: true
+    word: true
+  - trigger: "secularised"
+    replace: "secularized"
+    propagate_case: true
+    word: true
+  - trigger: "secularises"
+    replace: "secularizes"
+    propagate_case: true
+    word: true
+  - trigger: "sensitising"
+    replace: "sensitizing"
+    propagate_case: true
+    word: true
+  - trigger: "serialising"
+    replace: "serializing"
+    propagate_case: true
+    word: true
+  - trigger: "sermonising"
+    replace: "sermonizing"
+    propagate_case: true
+    word: true
+  - trigger: "shrivelling"
+    replace: "shriveling"
+    propagate_case: true
+    word: true
+  - trigger: "signalising"
+    replace: "signalizing"
+    propagate_case: true
+    word: true
+  - trigger: "snorkelling"
+    replace: "snorkeling"
+    propagate_case: true
+    word: true
+  - trigger: "snowploughs"
+    replace: "snowplow"
+    propagate_case: true
+    word: true
+  - trigger: "socialising"
+    replace: "socializing"
+    propagate_case: true
+    word: true
+  - trigger: "solemnising"
+    replace: "solemnizing"
+    propagate_case: true
+    word: true
+  - trigger: "specialised"
+    replace: "specialized"
+    propagate_case: true
+    word: true
+  - trigger: "specialises"
+    replace: "specializes"
+    propagate_case: true
+    word: true
+  - trigger: "squirrelled"
+    replace: "squirreled"
+    propagate_case: true
+    word: true
+  - trigger: "stabilisers"
+    replace: "stabilizers"
+    propagate_case: true
+    word: true
+  - trigger: "stabilising"
+    replace: "stabilizing"
+    propagate_case: true
+    word: true
+  - trigger: "standardise"
+    replace: "standardize"
+    propagate_case: true
+    word: true
+  - trigger: "stencilling"
+    replace: "stenciling"
+    propagate_case: true
+    word: true
+  - trigger: "sterilisers"
+    replace: "sterilizers"
+    propagate_case: true
+    word: true
+  - trigger: "sterilising"
+    replace: "sterilizing"
+    propagate_case: true
+    word: true
+  - trigger: "stigmatised"
+    replace: "stigmatized"
+    propagate_case: true
+    word: true
+  - trigger: "stigmatises"
+    replace: "stigmatizes"
+    propagate_case: true
+    word: true
+  - trigger: "subsidisers"
+    replace: "subsidizers"
+    propagate_case: true
+    word: true
+  - trigger: "subsidising"
+    replace: "subsidizing"
+    propagate_case: true
+    word: true
+  - trigger: "summarising"
+    replace: "summarizing"
+    propagate_case: true
+    word: true
+  - trigger: "symbolising"
+    replace: "symbolizing"
+    propagate_case: true
+    word: true
+  - trigger: "sympathised"
+    replace: "sympathized"
+    propagate_case: true
+    word: true
+  - trigger: "sympathiser"
+    replace: "sympathizer"
+    propagate_case: true
+    word: true
+  - trigger: "sympathises"
+    replace: "sympathizes"
+    propagate_case: true
+    word: true
+  - trigger: "synchronise"
+    replace: "synchronize"
+    propagate_case: true
+    word: true
+  - trigger: "synthesised"
+    replace: "synthesized"
+    propagate_case: true
+    word: true
+  - trigger: "synthesiser"
+    replace: "synthesizer"
+    propagate_case: true
+    word: true
+  - trigger: "synthesises"
+    replace: "synthesizes"
+    propagate_case: true
+    word: true
+  - trigger: "systematise"
+    replace: "systematize"
+    propagate_case: true
+    word: true
+  - trigger: "tantalising"
+    replace: "tantalizing"
+    propagate_case: true
+    word: true
+  - trigger: "temporising"
+    replace: "temporizing"
+    propagate_case: true
+    word: true
+  - trigger: "tenderising"
+    replace: "tenderizing"
+    propagate_case: true
+    word: true
+  - trigger: "terrorising"
+    replace: "terrorizing"
+    propagate_case: true
+    word: true
+  - trigger: "theatregoer"
+    replace: "theatergoer"
+    propagate_case: true
+    word: true
+  - trigger: "traumatised"
+    replace: "traumatized"
+    propagate_case: true
+    word: true
+  - trigger: "traumatises"
+    replace: "traumatizes"
+    propagate_case: true
+    word: true
+  - trigger: "trivialised"
+    replace: "trivialized"
+    propagate_case: true
+    word: true
+  - trigger: "trivialises"
+    replace: "trivializes"
+    propagate_case: true
+    word: true
+  - trigger: "tyrannising"
+    replace: "tyrannizing"
+    propagate_case: true
+    word: true
+  - trigger: "uncivilised"
+    replace: "uncivilized"
+    propagate_case: true
+    word: true
+  - trigger: "unorganised"
+    replace: "unorganized"
+    propagate_case: true
+    word: true
+  - trigger: "unravelling"
+    replace: "unraveling"
+    propagate_case: true
+    word: true
+  - trigger: "utilisation"
+    replace: "utilization"
+    propagate_case: true
+    word: true
+  - trigger: "vandalising"
+    replace: "vandalizing"
+    propagate_case: true
+    word: true
+  - trigger: "verbalising"
+    replace: "verbalizing"
+    propagate_case: true
+    word: true
+  - trigger: "victimising"
+    replace: "victimizing"
+    propagate_case: true
+    word: true
+  - trigger: "visualising"
+    replace: "visualizing"
+    propagate_case: true
+    word: true
+  - trigger: "vulgarising"
+    replace: "vulgarizing"
+    propagate_case: true
+    word: true
+  - trigger: "watercolour"
+    replace: "watercolor"
+    propagate_case: true
+    word: true
+  - trigger: "westernised"
+    replace: "westernized"
+    propagate_case: true
+    word: true
+  - trigger: "westernises"
+    replace: "westernizes"
+    propagate_case: true
+    word: true
+  - trigger: "worshipping"
+    replace: "worshiping"
+    propagate_case: true
+    word: true
+  - trigger: "aeroplanes"
+    replace: "airplanes"
+    propagate_case: true
+    word: true
+  - trigger: "amortising"
+    replace: "amortizing"
+    propagate_case: true
+    word: true
+  - trigger: "anglicised"
+    replace: "anglicized"
+    propagate_case: true
+    word: true
+  - trigger: "anglicises"
+    replace: "anglicizes"
+    propagate_case: true
+    word: true
+  - trigger: "annualised"
+    replace: "annualized"
+    propagate_case: true
+    word: true
+  - trigger: "antagonise"
+    replace: "antagonize"
+    propagate_case: true
+    word: true
+  - trigger: "apologised"
+    replace: "apologized"
+    propagate_case: true
+    word: true
+  - trigger: "apologises"
+    replace: "apologizes"
+    propagate_case: true
+    word: true
+  - trigger: "appetisers"
+    replace: "appetizers"
+    propagate_case: true
+    word: true
+  - trigger: "appetising"
+    replace: "appetizing"
+    propagate_case: true
+    word: true
+  - trigger: "authorised"
+    replace: "authorized"
+    propagate_case: true
+    word: true
+  - trigger: "authorises"
+    replace: "authorizes"
+    propagate_case: true
+    word: true
+  - trigger: "bannisters"
+    replace: "banisters"
+    propagate_case: true
+    word: true
+  - trigger: "bastardise"
+    replace: "bastardize"
+    propagate_case: true
+    word: true
+  - trigger: "bedevilled"
+    replace: "bedeviled"
+    propagate_case: true
+    word: true
+  - trigger: "behaviours"
+    replace: "behaviors"
+    propagate_case: true
+    word: true
+  - trigger: "bejewelled"
+    replace: "bejeweled"
+    propagate_case: true
+    word: true
+  - trigger: "belaboured"
+    replace: "belabored"
+    propagate_case: true
+    word: true
+  - trigger: "bowdlerise"
+    replace: "bowdlerize"
+    propagate_case: true
+    word: true
+  - trigger: "brutalised"
+    replace: "brutalized"
+    propagate_case: true
+    word: true
+  - trigger: "brutalises"
+    replace: "brutalizes"
+    propagate_case: true
+    word: true
+  - trigger: "canalising"
+    replace: "canalizing"
+    propagate_case: true
+    word: true
+  - trigger: "cancelling"
+    replace: "canceling"
+    propagate_case: true
+    word: true
+  - trigger: "canonising"
+    replace: "canonizing"
+    propagate_case: true
+    word: true
+  - trigger: "capitalise"
+    replace: "capitalize"
+    propagate_case: true
+    word: true
+  - trigger: "caramelise"
+    replace: "caramelize"
+    propagate_case: true
+    word: true
+  - trigger: "carbonised"
+    replace: "carbonized"
+    propagate_case: true
+    word: true
+  - trigger: "carbonises"
+    replace: "carbonizes"
+    propagate_case: true
+    word: true
+  - trigger: "catalogued"
+    replace: "cataloged"
+    propagate_case: true
+    word: true
+  - trigger: "catalogues"
+    replace: "catalogs"
+    propagate_case: true
+    word: true
+  - trigger: "catalysing"
+    replace: "catalyzing"
+    propagate_case: true
+    word: true
+  - trigger: "categorise"
+    replace: "categorize"
+    propagate_case: true
+    word: true
+  - trigger: "cauterised"
+    replace: "cauterized"
+    propagate_case: true
+    word: true
+  - trigger: "cauterises"
+    replace: "cauterizes"
+    propagate_case: true
+    word: true
+  - trigger: "centilitre"
+    replace: "centiliter"
+    propagate_case: true
+    word: true
+  - trigger: "centimetre"
+    replace: "centimeter"
+    propagate_case: true
+    word: true
+  - trigger: "centralise"
+    replace: "centralize"
+    propagate_case: true
+    word: true
+  - trigger: "centrefold"
+    replace: "centerfold"
+    propagate_case: true
+    word: true
+  - trigger: "channelled"
+    replace: "channeled"
+    propagate_case: true
+    word: true
+  - trigger: "chequebook"
+    replace: "checkbook"
+    propagate_case: true
+    word: true
+  - trigger: "chiselling"
+    replace: "chiseling"
+    propagate_case: true
+    word: true
+  - trigger: "civilising"
+    replace: "civilizing"
+    propagate_case: true
+    word: true
+  - trigger: "clamouring"
+    replace: "clamoring"
+    propagate_case: true
+    word: true
+  - trigger: "colonisers"
+    replace: "colonizers"
+    propagate_case: true
+    word: true
+  - trigger: "colonising"
+    replace: "colonizing"
+    propagate_case: true
+    word: true
+  - trigger: "colourants"
+    replace: "colorants"
+    propagate_case: true
+    word: true
+  - trigger: "colourized"
+    replace: "colorized"
+    propagate_case: true
+    word: true
+  - trigger: "colourizes"
+    replace: "colorizes"
+    propagate_case: true
+    word: true
+  - trigger: "colourless"
+    replace: "colorless"
+    propagate_case: true
+    word: true
+  - trigger: "connexions"
+    replace: "connections"
+    propagate_case: true
+    word: true
+  - trigger: "councillor"
+    replace: "councilor"
+    propagate_case: true
+    word: true
+  - trigger: "counselled"
+    replace: "counseled"
+    propagate_case: true
+    word: true
+  - trigger: "counsellor"
+    replace: "counselor"
+    propagate_case: true
+    word: true
+  - trigger: "criticised"
+    replace: "criticized"
+    propagate_case: true
+    word: true
+  - trigger: "criticises"
+    replace: "criticizes"
+    propagate_case: true
+    word: true
+  - trigger: "cudgelling"
+    replace: "cudgeling"
+    propagate_case: true
+    word: true
+  - trigger: "customised"
+    replace: "customized"
+    propagate_case: true
+    word: true
+  - trigger: "customises"
+    replace: "customizes"
+    propagate_case: true
+    word: true
+  - trigger: "dehumanise"
+    replace: "dehumanize"
+    propagate_case: true
+    word: true
+  - trigger: "demobilise"
+    replace: "demobilize"
+    propagate_case: true
+    word: true
+  - trigger: "demonising"
+    replace: "demonizing"
+    propagate_case: true
+    word: true
+  - trigger: "demoralise"
+    replace: "demoralize"
+    propagate_case: true
+    word: true
+  - trigger: "deodorised"
+    replace: "deodorized"
+    propagate_case: true
+    word: true
+  - trigger: "deodorises"
+    replace: "deodorizes"
+    propagate_case: true
+    word: true
+  - trigger: "deputising"
+    replace: "deputizing"
+    propagate_case: true
+    word: true
+  - trigger: "digitising"
+    replace: "digitizing"
+    propagate_case: true
+    word: true
+  - trigger: "discolours"
+    replace: "discolors"
+    propagate_case: true
+    word: true
+  - trigger: "dishonours"
+    replace: "dishonors"
+    propagate_case: true
+    word: true
+  - trigger: "dramatised"
+    replace: "dramatized"
+    propagate_case: true
+    word: true
+  - trigger: "dramatises"
+    replace: "dramatizes"
+    propagate_case: true
+    word: true
+  - trigger: "drivelling"
+    replace: "driveling"
+    propagate_case: true
+    word: true
+  - trigger: "economised"
+    replace: "economized"
+    propagate_case: true
+    word: true
+  - trigger: "economises"
+    replace: "economizes"
+    propagate_case: true
+    word: true
+  - trigger: "empathised"
+    replace: "empathized"
+    propagate_case: true
+    word: true
+  - trigger: "empathises"
+    replace: "empathizes"
+    propagate_case: true
+    word: true
+  - trigger: "emphasised"
+    replace: "emphasized"
+    propagate_case: true
+    word: true
+  - trigger: "emphasises"
+    replace: "emphasizes"
+    propagate_case: true
+    word: true
+  - trigger: "enamelling"
+    replace: "enameling"
+    propagate_case: true
+    word: true
+  - trigger: "endeavours"
+    replace: "endeavors"
+    propagate_case: true
+    word: true
+  - trigger: "energising"
+    replace: "energizing"
+    propagate_case: true
+    word: true
+  - trigger: "epaulettes"
+    replace: "epaulets"
+    propagate_case: true
+    word: true
+  - trigger: "epicentres"
+    replace: "epicenters"
+    propagate_case: true
+    word: true
+  - trigger: "epitomised"
+    replace: "epitomized"
+    propagate_case: true
+    word: true
+  - trigger: "epitomises"
+    replace: "epitomizes"
+    propagate_case: true
+    word: true
+  - trigger: "equalisers"
+    replace: "equalizers"
+    propagate_case: true
+    word: true
+  - trigger: "equalising"
+    replace: "equalizing"
+    propagate_case: true
+    word: true
+  - trigger: "eulogising"
+    replace: "eulogizing"
+    propagate_case: true
+    word: true
+  - trigger: "evangelise"
+    replace: "evangelize"
+    propagate_case: true
+    word: true
+  - trigger: "factorised"
+    replace: "factorized"
+    propagate_case: true
+    word: true
+  - trigger: "factorises"
+    replace: "factorizes"
+    propagate_case: true
+    word: true
+  - trigger: "fantasised"
+    replace: "fantasized"
+    propagate_case: true
+    word: true
+  - trigger: "fantasises"
+    replace: "fantasizes"
+    propagate_case: true
+    word: true
+  - trigger: "favourable"
+    replace: "favorable"
+    propagate_case: true
+    word: true
+  - trigger: "favourably"
+    replace: "favorably"
+    propagate_case: true
+    word: true
+  - trigger: "favourites"
+    replace: "favorites"
+    propagate_case: true
+    word: true
+  - trigger: "feminising"
+    replace: "feminizing"
+    propagate_case: true
+    word: true
+  - trigger: "fertilised"
+    replace: "fertilized"
+    propagate_case: true
+    word: true
+  - trigger: "fertiliser"
+    replace: "fertilizer"
+    propagate_case: true
+    word: true
+  - trigger: "fertilises"
+    replace: "fertilizes"
+    propagate_case: true
+    word: true
+  - trigger: "fibreglass"
+    replace: "fiberglass"
+    propagate_case: true
+    word: true
+  - trigger: "finalising"
+    replace: "finalizing"
+    propagate_case: true
+    word: true
+  - trigger: "flavouring"
+    replace: "flavoring"
+    propagate_case: true
+    word: true
+  - trigger: "formalised"
+    replace: "formalized"
+    propagate_case: true
+    word: true
+  - trigger: "formalises"
+    replace: "formalizes"
+    propagate_case: true
+    word: true
+  - trigger: "fossilised"
+    replace: "fossilized"
+    propagate_case: true
+    word: true
+  - trigger: "fossilises"
+    replace: "fossilizes"
+    propagate_case: true
+    word: true
+  - trigger: "fraternise"
+    replace: "fraternize"
+    propagate_case: true
+    word: true
+  - trigger: "fulfilment"
+    replace: "fulfillment"
+    propagate_case: true
+    word: true
+  - trigger: "funnelling"
+    replace: "funneling"
+    propagate_case: true
+    word: true
+  - trigger: "galvanised"
+    replace: "galvanized"
+    propagate_case: true
+    word: true
+  - trigger: "galvanises"
+    replace: "galvanizes"
+    propagate_case: true
+    word: true
+  - trigger: "gambolling"
+    replace: "gamboling"
+    propagate_case: true
+    word: true
+  - trigger: "gaolbreaks"
+    replace: "jailbreaks"
+    propagate_case: true
+    word: true
+  - trigger: "generalise"
+    replace: "generalize"
+    propagate_case: true
+    word: true
+  - trigger: "ghettoised"
+    replace: "ghettoized"
+    propagate_case: true
+    word: true
+  - trigger: "ghettoises"
+    replace: "ghettoizes"
+    propagate_case: true
+    word: true
+  - trigger: "globalised"
+    replace: "globalized"
+    propagate_case: true
+    word: true
+  - trigger: "globalises"
+    replace: "globalizes"
+    propagate_case: true
+    word: true
+  - trigger: "gonorrhoea"
+    replace: "gonorrhea"
+    propagate_case: true
+    word: true
+  - trigger: "grovelling"
+    replace: "groveling"
+    propagate_case: true
+    word: true
+  - trigger: "harbouring"
+    replace: "harboring"
+    propagate_case: true
+    word: true
+  - trigger: "harmonised"
+    replace: "harmonized"
+    propagate_case: true
+    word: true
+  - trigger: "harmonises"
+    replace: "harmonizes"
+    propagate_case: true
+    word: true
+  - trigger: "homoeopath"
+    replace: "homeopath"
+    propagate_case: true
+    word: true
+  - trigger: "homogenise"
+    replace: "homogenize"
+    propagate_case: true
+    word: true
+  - trigger: "honourable"
+    replace: "honorable"
+    propagate_case: true
+    word: true
+  - trigger: "honourably"
+    replace: "honorably"
+    propagate_case: true
+    word: true
+  - trigger: "humanising"
+    replace: "humanizing"
+    propagate_case: true
+    word: true
+  - trigger: "humourless"
+    replace: "humorless"
+    propagate_case: true
+    word: true
+  - trigger: "hybridised"
+    replace: "hybridized"
+    propagate_case: true
+    word: true
+  - trigger: "hybridises"
+    replace: "hybridizes"
+    propagate_case: true
+    word: true
+  - trigger: "hypnotised"
+    replace: "hypnotized"
+    propagate_case: true
+    word: true
+  - trigger: "hypnotises"
+    replace: "hypnotizes"
+    propagate_case: true
+    word: true
+  - trigger: "idealising"
+    replace: "idealizing"
+    propagate_case: true
+    word: true
+  - trigger: "immobilise"
+    replace: "immobilize"
+    propagate_case: true
+    word: true
+  - trigger: "immunising"
+    replace: "immunizing"
+    propagate_case: true
+    word: true
+  - trigger: "impanelled"
+    replace: "impaneled"
+    propagate_case: true
+    word: true
+  - trigger: "imperilled"
+    replace: "imperiled"
+    propagate_case: true
+    word: true
+  - trigger: "inflexions"
+    replace: "inflections"
+    propagate_case: true
+    word: true
+  - trigger: "initialise"
+    replace: "initialize"
+    propagate_case: true
+    word: true
+  - trigger: "initialled"
+    replace: "initialed"
+    propagate_case: true
+    word: true
+  - trigger: "instalment"
+    replace: "installment"
+    propagate_case: true
+    word: true
+  - trigger: "ionisation"
+    replace: "ionization"
+    propagate_case: true
+    word: true
+  - trigger: "italicised"
+    replace: "italicized"
+    propagate_case: true
+    word: true
+  - trigger: "italicises"
+    replace: "italicizes"
+    propagate_case: true
+    word: true
+  - trigger: "jeopardise"
+    replace: "jeopardize"
+    propagate_case: true
+    word: true
+  - trigger: "kilogramme"
+    replace: "kilogram"
+    propagate_case: true
+    word: true
+  - trigger: "kilometres"
+    replace: "kilometers"
+    propagate_case: true
+    word: true
+  - trigger: "lacklustre"
+    replace: "lackluster"
+    propagate_case: true
+    word: true
+  - trigger: "legalising"
+    replace: "legalizing"
+    propagate_case: true
+    word: true
+  - trigger: "legitimise"
+    replace: "legitimize"
+    propagate_case: true
+    word: true
+  - trigger: "liberalise"
+    replace: "liberalize"
+    propagate_case: true
+    word: true
+  - trigger: "liquidised"
+    replace: "liquidized"
+    propagate_case: true
+    word: true
+  - trigger: "liquidiser"
+    replace: "liquidizer"
+    propagate_case: true
+    word: true
+  - trigger: "liquidises"
+    replace: "liquidizes"
+    propagate_case: true
+    word: true
+  - trigger: "localising"
+    replace: "localizing"
+    propagate_case: true
+    word: true
+  - trigger: "magnetised"
+    replace: "magnetized"
+    propagate_case: true
+    word: true
+  - trigger: "magnetises"
+    replace: "magnetizes"
+    propagate_case: true
+    word: true
+  - trigger: "manoeuvred"
+    replace: "maneuvered"
+    propagate_case: true
+    word: true
+  - trigger: "manoeuvres"
+    replace: "maneuvers"
+    propagate_case: true
+    word: true
+  - trigger: "marshalled"
+    replace: "marshaled"
+    propagate_case: true
+    word: true
+  - trigger: "marvelling"
+    replace: "marveling"
+    propagate_case: true
+    word: true
+  - trigger: "marvellous"
+    replace: "marvelous"
+    propagate_case: true
+    word: true
+  - trigger: "maximising"
+    replace: "maximizing"
+    propagate_case: true
+    word: true
+  - trigger: "mechanised"
+    replace: "mechanized"
+    propagate_case: true
+    word: true
+  - trigger: "mechanises"
+    replace: "mechanizes"
+    propagate_case: true
+    word: true
+  - trigger: "memorising"
+    replace: "memorizing"
+    propagate_case: true
+    word: true
+  - trigger: "mesmerised"
+    replace: "mesmerized"
+    propagate_case: true
+    word: true
+  - trigger: "mesmerises"
+    replace: "mesmerizes"
+    propagate_case: true
+    word: true
+  - trigger: "metabolise"
+    replace: "metabolize"
+    propagate_case: true
+    word: true
+  - trigger: "micrometre"
+    replace: "micrometer"
+    propagate_case: true
+    word: true
+  - trigger: "militarise"
+    replace: "militarize"
+    propagate_case: true
+    word: true
+  - trigger: "millilitre"
+    replace: "milliliter"
+    propagate_case: true
+    word: true
+  - trigger: "millimetre"
+    replace: "millimeter"
+    propagate_case: true
+    word: true
+  - trigger: "minimising"
+    replace: "minimizing"
+    propagate_case: true
+    word: true
+  - trigger: "mobilising"
+    replace: "mobilizing"
+    propagate_case: true
+    word: true
+  - trigger: "modernised"
+    replace: "modernized"
+    propagate_case: true
+    word: true
+  - trigger: "modernises"
+    replace: "modernizes"
+    propagate_case: true
+    word: true
+  - trigger: "moisturise"
+    replace: "moisturize"
+    propagate_case: true
+    word: true
+  - trigger: "monopolise"
+    replace: "monopolize"
+    propagate_case: true
+    word: true
+  - trigger: "moralising"
+    replace: "moralizing"
+    propagate_case: true
+    word: true
+  - trigger: "mouldering"
+    replace: "moldering"
+    propagate_case: true
+    word: true
+  - trigger: "moustached"
+    replace: "mustached"
+    propagate_case: true
+    word: true
+  - trigger: "moustaches"
+    replace: "mustaches"
+    propagate_case: true
+    word: true
+  - trigger: "naturalise"
+    replace: "naturalize"
+    propagate_case: true
+    word: true
+  - trigger: "neighbours"
+    replace: "neighbors"
+    propagate_case: true
+    word: true
+  - trigger: "neutralise"
+    replace: "neutralize"
+    propagate_case: true
+    word: true
+  - trigger: "normalised"
+    replace: "normalized"
+    propagate_case: true
+    word: true
+  - trigger: "normalises"
+    replace: "normalizes"
+    propagate_case: true
+    word: true
+  - trigger: "oesophagus"
+    replace: "esophagus"
+    propagate_case: true
+    word: true
+  - trigger: "optimising"
+    replace: "optimizing"
+    propagate_case: true
+    word: true
+  - trigger: "organisers"
+    replace: "organizers"
+    propagate_case: true
+    word: true
+  - trigger: "organising"
+    replace: "organizing"
+    propagate_case: true
+    word: true
+  - trigger: "ostracised"
+    replace: "ostracized"
+    propagate_case: true
+    word: true
+  - trigger: "ostracises"
+    replace: "ostracizes"
+    propagate_case: true
+    word: true
+  - trigger: "paederasts"
+    replace: "pederasts"
+    propagate_case: true
+    word: true
+  - trigger: "paediatric"
+    replace: "pediatric"
+    propagate_case: true
+    word: true
+  - trigger: "paedophile"
+    replace: "pedophile"
+    propagate_case: true
+    word: true
+  - trigger: "panellists"
+    replace: "panelists"
+    propagate_case: true
+    word: true
+  - trigger: "paralysing"
+    replace: "paralyzing"
+    propagate_case: true
+    word: true
+  - trigger: "parcelling"
+    replace: "parceling"
+    propagate_case: true
+    word: true
+  - trigger: "passivised"
+    replace: "passivized"
+    propagate_case: true
+    word: true
+  - trigger: "passivises"
+    replace: "passivizes"
+    propagate_case: true
+    word: true
+  - trigger: "pasteurise"
+    replace: "pasteurize"
+    propagate_case: true
+    word: true
+  - trigger: "patronised"
+    replace: "patronized"
+    propagate_case: true
+    word: true
+  - trigger: "patronises"
+    replace: "patronizes"
+    propagate_case: true
+    word: true
+  - trigger: "penalising"
+    replace: "penalizing"
+    propagate_case: true
+    word: true
+  - trigger: "pencilling"
+    replace: "penciling"
+    propagate_case: true
+    word: true
+  - trigger: "plagiarise"
+    replace: "plagiarize"
+    propagate_case: true
+    word: true
+  - trigger: "polarising"
+    replace: "polarizing"
+    propagate_case: true
+    word: true
+  - trigger: "politicise"
+    replace: "politicize"
+    propagate_case: true
+    word: true
+  - trigger: "popularise"
+    replace: "popularize"
+    propagate_case: true
+    word: true
+  - trigger: "practising"
+    replace: "practicing"
+    propagate_case: true
+    word: true
+  - trigger: "praesidium"
+    replace: "presidium"
+    propagate_case: true
+    word: true
+  - trigger: "pressurise"
+    replace: "pressurize"
+    propagate_case: true
+    word: true
+  - trigger: "prioritise"
+    replace: "prioritize"
+    propagate_case: true
+    word: true
+  - trigger: "privatised"
+    replace: "privatized"
+    propagate_case: true
+    word: true
+  - trigger: "privatises"
+    replace: "privatizes"
+    propagate_case: true
+    word: true
+  - trigger: "programmes"
+    replace: "programs"
+    propagate_case: true
+    word: true
+  - trigger: "publicised"
+    replace: "publicized"
+    propagate_case: true
+    word: true
+  - trigger: "publicises"
+    replace: "publicizes"
+    propagate_case: true
+    word: true
+  - trigger: "pulverised"
+    replace: "pulverized"
+    propagate_case: true
+    word: true
+  - trigger: "pulverises"
+    replace: "pulverizes"
+    propagate_case: true
+    word: true
+  - trigger: "pummelling"
+    replace: "pummeled"
+    propagate_case: true
+    word: true
+  - trigger: "quarrelled"
+    replace: "quarreled"
+    propagate_case: true
+    word: true
+  - trigger: "radicalise"
+    replace: "radicalize"
+    propagate_case: true
+    word: true
+  - trigger: "randomised"
+    replace: "randomized"
+    propagate_case: true
+    word: true
+  - trigger: "randomises"
+    replace: "randomizes"
+    propagate_case: true
+    word: true
+  - trigger: "realisable"
+    replace: "realizable"
+    propagate_case: true
+    word: true
+  - trigger: "recognised"
+    replace: "recognized"
+    propagate_case: true
+    word: true
+  - trigger: "recognises"
+    replace: "recognizes"
+    propagate_case: true
+    word: true
+  - trigger: "refuelling"
+    replace: "refueling"
+    propagate_case: true
+    word: true
+  - trigger: "regularise"
+    replace: "regularize"
+    propagate_case: true
+    word: true
+  - trigger: "remodelled"
+    replace: "remodeled"
+    propagate_case: true
+    word: true
+  - trigger: "remoulding"
+    replace: "remolding"
+    propagate_case: true
+    word: true
+  - trigger: "reorganise"
+    replace: "reorganize"
+    propagate_case: true
+    word: true
+  - trigger: "revitalise"
+    replace: "revitalize"
+    propagate_case: true
+    word: true
+  - trigger: "rhapsodise"
+    replace: "rhapsodize"
+    propagate_case: true
+    word: true
+  - trigger: "ritualised"
+    replace: "ritualized"
+    propagate_case: true
+    word: true
+  - trigger: "sanitising"
+    replace: "sanitizing"
+    propagate_case: true
+    word: true
+  - trigger: "satirising"
+    replace: "satirizing"
+    propagate_case: true
+    word: true
+  - trigger: "scandalise"
+    replace: "scandalize"
+    propagate_case: true
+    word: true
+  - trigger: "scepticism"
+    replace: "skepticism"
+    propagate_case: true
+    word: true
+  - trigger: "scrutinise"
+    replace: "scrutinize"
+    propagate_case: true
+    word: true
+  - trigger: "secularise"
+    replace: "secularize"
+    propagate_case: true
+    word: true
+  - trigger: "sensitised"
+    replace: "sensitized"
+    propagate_case: true
+    word: true
+  - trigger: "sensitises"
+    replace: "sensitizes"
+    propagate_case: true
+    word: true
+  - trigger: "sepulchres"
+    replace: "sepulchers"
+    propagate_case: true
+    word: true
+  - trigger: "serialised"
+    replace: "serialized"
+    propagate_case: true
+    word: true
+  - trigger: "serialises"
+    replace: "serializes"
+    propagate_case: true
+    word: true
+  - trigger: "sermonised"
+    replace: "sermonized"
+    propagate_case: true
+    word: true
+  - trigger: "sermonises"
+    replace: "sermonizes"
+    propagate_case: true
+    word: true
+  - trigger: "shovelling"
+    replace: "shoveling"
+    propagate_case: true
+    word: true
+  - trigger: "shrivelled"
+    replace: "shriveled"
+    propagate_case: true
+    word: true
+  - trigger: "signalised"
+    replace: "signalized"
+    propagate_case: true
+    word: true
+  - trigger: "signalises"
+    replace: "signalizes"
+    propagate_case: true
+    word: true
+  - trigger: "signalling"
+    replace: "signaling"
+    propagate_case: true
+    word: true
+  - trigger: "snivelling"
+    replace: "sniveling"
+    propagate_case: true
+    word: true
+  - trigger: "snorkelled"
+    replace: "snorkeled"
+    propagate_case: true
+    word: true
+  - trigger: "snowplough"
+    replace: "snowplow"
+    propagate_case: true
+    word: true
+  - trigger: "socialised"
+    replace: "socialized"
+    propagate_case: true
+    word: true
+  - trigger: "socialises"
+    replace: "socializes"
+    propagate_case: true
+    word: true
+  - trigger: "sodomising"
+    replace: "sodomizing"
+    propagate_case: true
+    word: true
+  - trigger: "solemnised"
+    replace: "solemnized"
+    propagate_case: true
+    word: true
+  - trigger: "solemnises"
+    replace: "solemnizes"
+    propagate_case: true
+    word: true
+  - trigger: "specialise"
+    replace: "specialize"
+    propagate_case: true
+    word: true
+  - trigger: "spiralling"
+    replace: "spiraling"
+    propagate_case: true
+    word: true
+  - trigger: "splendours"
+    replace: "splendors"
+    propagate_case: true
+    word: true
+  - trigger: "stabilised"
+    replace: "stabilized"
+    propagate_case: true
+    word: true
+  - trigger: "stabiliser"
+    replace: "stabilizer"
+    propagate_case: true
+    word: true
+  - trigger: "stabilises"
+    replace: "stabilizes"
+    propagate_case: true
+    word: true
+  - trigger: "stencilled"
+    replace: "stenciled"
+    propagate_case: true
+    word: true
+  - trigger: "sterilised"
+    replace: "sterilized"
+    propagate_case: true
+    word: true
+  - trigger: "steriliser"
+    replace: "sterilizer"
+    propagate_case: true
+    word: true
+  - trigger: "sterilises"
+    replace: "sterilizes"
+    propagate_case: true
+    word: true
+  - trigger: "stigmatise"
+    replace: "stigmatize"
+    propagate_case: true
+    word: true
+  - trigger: "subsidised"
+    replace: "subsidized"
+    propagate_case: true
+    word: true
+  - trigger: "subsidiser"
+    replace: "subsidizer"
+    propagate_case: true
+    word: true
+  - trigger: "subsidises"
+    replace: "subsidizes"
+    propagate_case: true
+    word: true
+  - trigger: "succouring"
+    replace: "succoring"
+    propagate_case: true
+    word: true
+  - trigger: "sulphurous"
+    replace: "sulfurous"
+    propagate_case: true
+    word: true
+  - trigger: "summarised"
+    replace: "summarized"
+    propagate_case: true
+    word: true
+  - trigger: "summarises"
+    replace: "summarizes"
+    propagate_case: true
+    word: true
+  - trigger: "swivelling"
+    replace: "swiveling"
+    propagate_case: true
+    word: true
+  - trigger: "symbolised"
+    replace: "symbolized"
+    propagate_case: true
+    word: true
+  - trigger: "symbolises"
+    replace: "symbolizes"
+    propagate_case: true
+    word: true
+  - trigger: "sympathise"
+    replace: "sympathize"
+    propagate_case: true
+    word: true
+  - trigger: "synthesise"
+    replace: "synthesize"
+    propagate_case: true
+    word: true
+  - trigger: "tantalised"
+    replace: "tantalized"
+    propagate_case: true
+    word: true
+  - trigger: "tantalises"
+    replace: "tantalizes"
+    propagate_case: true
+    word: true
+  - trigger: "temporised"
+    replace: "temporized"
+    propagate_case: true
+    word: true
+  - trigger: "temporises"
+    replace: "temporizes"
+    propagate_case: true
+    word: true
+  - trigger: "tenderised"
+    replace: "tenderized"
+    propagate_case: true
+    word: true
+  - trigger: "tenderises"
+    replace: "tenderizes"
+    propagate_case: true
+    word: true
+  - trigger: "terrorised"
+    replace: "terrorized"
+    propagate_case: true
+    word: true
+  - trigger: "terrorises"
+    replace: "terrorizes"
+    propagate_case: true
+    word: true
+  - trigger: "theorising"
+    replace: "theorizing"
+    propagate_case: true
+    word: true
+  - trigger: "traumatise"
+    replace: "traumatize"
+    propagate_case: true
+    word: true
+  - trigger: "travellers"
+    replace: "travelers"
+    propagate_case: true
+    word: true
+  - trigger: "travelling"
+    replace: "traveling"
+    propagate_case: true
+    word: true
+  - trigger: "tricolours"
+    replace: "tricolors"
+    propagate_case: true
+    word: true
+  - trigger: "trivialise"
+    replace: "trivialize"
+    propagate_case: true
+    word: true
+  - trigger: "tunnelling"
+    replace: "tunneling"
+    propagate_case: true
+    word: true
+  - trigger: "tyrannised"
+    replace: "tyrannized"
+    propagate_case: true
+    word: true
+  - trigger: "tyrannises"
+    replace: "tyrannizes"
+    propagate_case: true
+    word: true
+  - trigger: "unequalled"
+    replace: "unequaled"
+    propagate_case: true
+    word: true
+  - trigger: "unionising"
+    replace: "unionizing"
+    propagate_case: true
+    word: true
+  - trigger: "unravelled"
+    replace: "unraveled"
+    propagate_case: true
+    word: true
+  - trigger: "unrivalled"
+    replace: "unrivaled"
+    propagate_case: true
+    word: true
+  - trigger: "urbanising"
+    replace: "urbanizing"
+    propagate_case: true
+    word: true
+  - trigger: "utilisable"
+    replace: "utilizable"
+    propagate_case: true
+    word: true
+  - trigger: "vandalised"
+    replace: "vandalized"
+    propagate_case: true
+    word: true
+  - trigger: "vandalises"
+    replace: "vandalizes"
+    propagate_case: true
+    word: true
+  - trigger: "vaporising"
+    replace: "vaporizing"
+    propagate_case: true
+    word: true
+  - trigger: "verbalised"
+    replace: "verbalized"
+    propagate_case: true
+    word: true
+  - trigger: "verbalises"
+    replace: "verbalizes"
+    propagate_case: true
+    word: true
+  - trigger: "victimised"
+    replace: "victimized"
+    propagate_case: true
+    word: true
+  - trigger: "victimises"
+    replace: "victimizes"
+    propagate_case: true
+    word: true
+  - trigger: "visualised"
+    replace: "visualized"
+    propagate_case: true
+    word: true
+  - trigger: "visualises"
+    replace: "visualizes"
+    propagate_case: true
+    word: true
+  - trigger: "vocalising"
+    replace: "vocalizing"
+    propagate_case: true
+    word: true
+  - trigger: "vulcanised"
+    replace: "vulcanized"
+    propagate_case: true
+    word: true
+  - trigger: "vulgarised"
+    replace: "vulgarized"
+    propagate_case: true
+    word: true
+  - trigger: "vulgarises"
+    replace: "vulgarizes"
+    propagate_case: true
+    word: true
+  - trigger: "weaselling"
+    replace: "weaseling"
+    propagate_case: true
+    word: true
+  - trigger: "westernise"
+    replace: "westernize"
+    propagate_case: true
+    word: true
+  - trigger: "womanisers"
+    replace: "womanizers"
+    propagate_case: true
+    word: true
+  - trigger: "womanising"
+    replace: "womanizing"
+    propagate_case: true
+    word: true
+  - trigger: "worshipped"
+    replace: "worshiped"
+    propagate_case: true
+    word: true
+  - trigger: "worshipper"
+    replace: "worshiper"
+    propagate_case: true
+    word: true
+  - trigger: "aeroplane"
+    replace: "airplane"
+    propagate_case: true
+    word: true
+  - trigger: "aetiology"
+    replace: "etiology"
+    propagate_case: true
+    word: true
+  - trigger: "agonising"
+    replace: "agonizing"
+    propagate_case: true
+    word: true
+  - trigger: "almanacks"
+    replace: "almanacs"
+    propagate_case: true
+    word: true
+  - trigger: "aluminium"
+    replace: "aluminum"
+    propagate_case: true
+    word: true
+  - trigger: "amortised"
+    replace: "amortized"
+    propagate_case: true
+    word: true
+  - trigger: "amortises"
+    replace: "amortizes"
+    propagate_case: true
+    word: true
+  - trigger: "analogues"
+    replace: "analogs"
+    propagate_case: true
+    word: true
+  - trigger: "analysing"
+    replace: "analyzing"
+    propagate_case: true
+    word: true
+  - trigger: "anglicise"
+    replace: "anglicize"
+    propagate_case: true
+    word: true
+  - trigger: "apologise"
+    replace: "apologize"
+    propagate_case: true
+    word: true
+  - trigger: "appetiser"
+    replace: "appetizer"
+    propagate_case: true
+    word: true
+  - trigger: "armourers"
+    replace: "armorers"
+    propagate_case: true
+    word: true
+  - trigger: "armouries"
+    replace: "armories"
+    propagate_case: true
+    word: true
+  - trigger: "artefacts"
+    replace: "artifacts"
+    propagate_case: true
+    word: true
+  - trigger: "authorise"
+    replace: "authorize"
+    propagate_case: true
+    word: true
+  - trigger: "baptising"
+    replace: "baptizing"
+    propagate_case: true
+    word: true
+  - trigger: "behaviour"
+    replace: "behavior"
+    propagate_case: true
+    word: true
+  - trigger: "belabours"
+    replace: "belabors"
+    propagate_case: true
+    word: true
+  - trigger: "brutalise"
+    replace: "brutalize"
+    propagate_case: true
+    word: true
+  - trigger: "callipers"
+    replace: "calipers"
+    propagate_case: true
+    word: true
+  - trigger: "canalised"
+    replace: "canalized"
+    propagate_case: true
+    word: true
+  - trigger: "canalises"
+    replace: "canalizes"
+    propagate_case: true
+    word: true
+  - trigger: "cancelled"
+    replace: "canceled"
+    propagate_case: true
+    word: true
+  - trigger: "canonised"
+    replace: "canonized"
+    propagate_case: true
+    word: true
+  - trigger: "canonises"
+    replace: "canonizes"
+    propagate_case: true
+    word: true
+  - trigger: "carbonise"
+    replace: "carbonize"
+    propagate_case: true
+    word: true
+  - trigger: "carolling"
+    replace: "caroling"
+    propagate_case: true
+    word: true
+  - trigger: "catalogue"
+    replace: "catalog"
+    propagate_case: true
+    word: true
+  - trigger: "catalysed"
+    replace: "catalyzed"
+    propagate_case: true
+    word: true
+  - trigger: "catalyses"
+    replace: "catalyzes"
+    propagate_case: true
+    word: true
+  - trigger: "cauterise"
+    replace: "cauterize"
+    propagate_case: true
+    word: true
+  - trigger: "cavilling"
+    replace: "caviling"
+    propagate_case: true
+    word: true
+  - trigger: "chequered"
+    replace: "checkered"
+    propagate_case: true
+    word: true
+  - trigger: "chiselled"
+    replace: "chiseled"
+    propagate_case: true
+    word: true
+  - trigger: "civilised"
+    replace: "civilized"
+    propagate_case: true
+    word: true
+  - trigger: "civilises"
+    replace: "civilizes"
+    propagate_case: true
+    word: true
+  - trigger: "clamoured"
+    replace: "clamored"
+    propagate_case: true
+    word: true
+  - trigger: "colonised"
+    replace: "colonized"
+    propagate_case: true
+    word: true
+  - trigger: "coloniser"
+    replace: "colonizer"
+    propagate_case: true
+    word: true
+  - trigger: "colonises"
+    replace: "colonizes"
+    propagate_case: true
+    word: true
+  - trigger: "colourant"
+    replace: "colorant"
+    propagate_case: true
+    word: true
+  - trigger: "coloureds"
+    replace: "coloreds"
+    propagate_case: true
+    word: true
+  - trigger: "colourful"
+    replace: "colorful"
+    propagate_case: true
+    word: true
+  - trigger: "colouring"
+    replace: "coloring"
+    propagate_case: true
+    word: true
+  - trigger: "colourize"
+    replace: "colorize"
+    propagate_case: true
+    word: true
+  - trigger: "connexion"
+    replace: "connection"
+    propagate_case: true
+    word: true
+  - trigger: "criticise"
+    replace: "criticize"
+    propagate_case: true
+    word: true
+  - trigger: "cruellest"
+    replace: "cruelest"
+    propagate_case: true
+    word: true
+  - trigger: "cudgelled"
+    replace: "cudgeled"
+    propagate_case: true
+    word: true
+  - trigger: "customise"
+    replace: "customize"
+    propagate_case: true
+    word: true
+  - trigger: "demeanour"
+    replace: "demeanor"
+    propagate_case: true
+    word: true
+  - trigger: "demonised"
+    replace: "demonized"
+    propagate_case: true
+    word: true
+  - trigger: "demonises"
+    replace: "demonizes"
+    propagate_case: true
+    word: true
+  - trigger: "deodorise"
+    replace: "deodorize"
+    propagate_case: true
+    word: true
+  - trigger: "deputised"
+    replace: "deputized"
+    propagate_case: true
+    word: true
+  - trigger: "deputises"
+    replace: "deputizes"
+    propagate_case: true
+    word: true
+  - trigger: "dialogues"
+    replace: "dialogs"
+    propagate_case: true
+    word: true
+  - trigger: "diarrhoea"
+    replace: "diarrhea"
+    propagate_case: true
+    word: true
+  - trigger: "digitised"
+    replace: "digitized"
+    propagate_case: true
+    word: true
+  - trigger: "digitises"
+    replace: "digitizes"
+    propagate_case: true
+    word: true
+  - trigger: "discolour"
+    replace: "discolor"
+    propagate_case: true
+    word: true
+  - trigger: "disfavour"
+    replace: "disfavor"
+    propagate_case: true
+    word: true
+  - trigger: "dishonour"
+    replace: "dishonor"
+    propagate_case: true
+    word: true
+  - trigger: "dramatise"
+    replace: "dramatize"
+    propagate_case: true
+    word: true
+  - trigger: "drivelled"
+    replace: "driveled"
+    propagate_case: true
+    word: true
+  - trigger: "economise"
+    replace: "economize"
+    propagate_case: true
+    word: true
+  - trigger: "empathise"
+    replace: "empathize"
+    propagate_case: true
+    word: true
+  - trigger: "emphasise"
+    replace: "emphasize"
+    propagate_case: true
+    word: true
+  - trigger: "enamelled"
+    replace: "enameled"
+    propagate_case: true
+    word: true
+  - trigger: "enamoured"
+    replace: "enamored"
+    propagate_case: true
+    word: true
+  - trigger: "endeavour"
+    replace: "endeavor"
+    propagate_case: true
+    word: true
+  - trigger: "energised"
+    replace: "energized"
+    propagate_case: true
+    word: true
+  - trigger: "energises"
+    replace: "energizes"
+    propagate_case: true
+    word: true
+  - trigger: "epaulette"
+    replace: "epaulet"
+    propagate_case: true
+    word: true
+  - trigger: "epicentre"
+    replace: "epicenter"
+    propagate_case: true
+    word: true
+  - trigger: "epitomise"
+    replace: "epitomize"
+    propagate_case: true
+    word: true
+  - trigger: "equalised"
+    replace: "equalized"
+    propagate_case: true
+    word: true
+  - trigger: "equaliser"
+    replace: "equalizer"
+    propagate_case: true
+    word: true
+  - trigger: "equalises"
+    replace: "equalizes"
+    propagate_case: true
+    word: true
+  - trigger: "eulogised"
+    replace: "eulogized"
+    propagate_case: true
+    word: true
+  - trigger: "eulogises"
+    replace: "eulogizes"
+    propagate_case: true
+    word: true
+  - trigger: "factorise"
+    replace: "factorize"
+    propagate_case: true
+    word: true
+  - trigger: "fantasise"
+    replace: "fantasize"
+    propagate_case: true
+    word: true
+  - trigger: "favouring"
+    replace: "favoring"
+    propagate_case: true
+    word: true
+  - trigger: "favourite"
+    replace: "favorite"
+    propagate_case: true
+    word: true
+  - trigger: "feminised"
+    replace: "feminized"
+    propagate_case: true
+    word: true
+  - trigger: "feminises"
+    replace: "feminizes"
+    propagate_case: true
+    word: true
+  - trigger: "fertilise"
+    replace: "fertilize"
+    propagate_case: true
+    word: true
+  - trigger: "finalised"
+    replace: "finalized"
+    propagate_case: true
+    word: true
+  - trigger: "finalises"
+    replace: "finalizes"
+    propagate_case: true
+    word: true
+  - trigger: "flautists"
+    replace: "flutists"
+    propagate_case: true
+    word: true
+  - trigger: "flavoured"
+    replace: "flavored"
+    propagate_case: true
+    word: true
+  - trigger: "formalise"
+    replace: "formalize"
+    propagate_case: true
+    word: true
+  - trigger: "fossilise"
+    replace: "fossilize"
+    propagate_case: true
+    word: true
+  - trigger: "funnelled"
+    replace: "funneled"
+    propagate_case: true
+    word: true
+  - trigger: "galvanise"
+    replace: "galvanize"
+    propagate_case: true
+    word: true
+  - trigger: "gambolled"
+    replace: "gamboled"
+    propagate_case: true
+    word: true
+  - trigger: "gaolbirds"
+    replace: "jailbirds"
+    propagate_case: true
+    word: true
+  - trigger: "gaolbreak"
+    replace: "jailbreak"
+    propagate_case: true
+    word: true
+  - trigger: "ghettoise"
+    replace: "ghettoize"
+    propagate_case: true
+    word: true
+  - trigger: "globalise"
+    replace: "globalize"
+    propagate_case: true
+    word: true
+  - trigger: "gravelled"
+    replace: "graveled"
+    propagate_case: true
+    word: true
+  - trigger: "grovelled"
+    replace: "groveled"
+    propagate_case: true
+    word: true
+  - trigger: "gruelling"
+    replace: "grueling"
+    propagate_case: true
+    word: true
+  - trigger: "harboured"
+    replace: "harbored"
+    propagate_case: true
+    word: true
+  - trigger: "harmonise"
+    replace: "harmonize"
+    propagate_case: true
+    word: true
+  - trigger: "honouring"
+    replace: "honoring"
+    propagate_case: true
+    word: true
+  - trigger: "humanised"
+    replace: "humanized"
+    propagate_case: true
+    word: true
+  - trigger: "humanises"
+    replace: "humanizes"
+    propagate_case: true
+    word: true
+  - trigger: "humouring"
+    replace: "humoring"
+    propagate_case: true
+    word: true
+  - trigger: "hybridise"
+    replace: "hybridize"
+    propagate_case: true
+    word: true
+  - trigger: "hypnotise"
+    replace: "hypnotize"
+    propagate_case: true
+    word: true
+  - trigger: "idealised"
+    replace: "idealized"
+    propagate_case: true
+    word: true
+  - trigger: "idealises"
+    replace: "idealizes"
+    propagate_case: true
+    word: true
+  - trigger: "idolising"
+    replace: "idolizing"
+    propagate_case: true
+    word: true
+  - trigger: "immunised"
+    replace: "immunized"
+    propagate_case: true
+    word: true
+  - trigger: "immunises"
+    replace: "immunizes"
+    propagate_case: true
+    word: true
+  - trigger: "inflexion"
+    replace: "inflection"
+    propagate_case: true
+    word: true
+  - trigger: "italicise"
+    replace: "italicize"
+    propagate_case: true
+    word: true
+  - trigger: "itemising"
+    replace: "itemizing"
+    propagate_case: true
+    word: true
+  - trigger: "jewellers"
+    replace: "jewelers"
+    propagate_case: true
+    word: true
+  - trigger: "jewellery"
+    replace: "jewelry"
+    propagate_case: true
+    word: true
+  - trigger: "kilometre"
+    replace: "kilometer"
+    propagate_case: true
+    word: true
+  - trigger: "labelling"
+    replace: "labeling"
+    propagate_case: true
+    word: true
+  - trigger: "labourers"
+    replace: "laborers"
+    propagate_case: true
+    word: true
+  - trigger: "labouring"
+    replace: "laboring"
+    propagate_case: true
+    word: true
+  - trigger: "legalised"
+    replace: "legalized"
+    propagate_case: true
+    word: true
+  - trigger: "legalises"
+    replace: "legalizes"
+    propagate_case: true
+    word: true
+  - trigger: "leukaemia"
+    replace: "leukemia"
+    propagate_case: true
+    word: true
+  - trigger: "levellers"
+    replace: "levelers"
+    propagate_case: true
+    word: true
+  - trigger: "levelling"
+    replace: "leveling"
+    propagate_case: true
+    word: true
+  - trigger: "libelling"
+    replace: "libeling"
+    propagate_case: true
+    word: true
+  - trigger: "libellous"
+    replace: "libelous"
+    propagate_case: true
+    word: true
+  - trigger: "licencing"
+    replace: "licensing"
+    propagate_case: true
+    word: true
+  - trigger: "lionising"
+    replace: "lionizing"
+    propagate_case: true
+    word: true
+  - trigger: "liquidise"
+    replace: "liquidize"
+    propagate_case: true
+    word: true
+  - trigger: "localised"
+    replace: "localized"
+    propagate_case: true
+    word: true
+  - trigger: "localises"
+    replace: "localizes"
+    propagate_case: true
+    word: true
+  - trigger: "magnetise"
+    replace: "magnetize"
+    propagate_case: true
+    word: true
+  - trigger: "manoeuvre"
+    replace: "maneuver"
+    propagate_case: true
+    word: true
+  - trigger: "marvelled"
+    replace: "marveled"
+    propagate_case: true
+    word: true
+  - trigger: "maximised"
+    replace: "maximized"
+    propagate_case: true
+    word: true
+  - trigger: "maximises"
+    replace: "maximizes"
+    propagate_case: true
+    word: true
+  - trigger: "mechanise"
+    replace: "mechanize"
+    propagate_case: true
+    word: true
+  - trigger: "mediaeval"
+    replace: "medieval"
+    propagate_case: true
+    word: true
+  - trigger: "memorised"
+    replace: "memorized"
+    propagate_case: true
+    word: true
+  - trigger: "memorises"
+    replace: "memorizes"
+    propagate_case: true
+    word: true
+  - trigger: "mesmerise"
+    replace: "mesmerize"
+    propagate_case: true
+    word: true
+  - trigger: "minimised"
+    replace: "minimized"
+    propagate_case: true
+    word: true
+  - trigger: "minimises"
+    replace: "minimizes"
+    propagate_case: true
+    word: true
+  - trigger: "mobilised"
+    replace: "mobilized"
+    propagate_case: true
+    word: true
+  - trigger: "mobilises"
+    replace: "mobilizes"
+    propagate_case: true
+    word: true
+  - trigger: "modellers"
+    replace: "modelers"
+    propagate_case: true
+    word: true
+  - trigger: "modelling"
+    replace: "modeling"
+    propagate_case: true
+    word: true
+  - trigger: "modernise"
+    replace: "modernize"
+    propagate_case: true
+    word: true
+  - trigger: "moralised"
+    replace: "moralized"
+    propagate_case: true
+    word: true
+  - trigger: "moralises"
+    replace: "moralizes"
+    propagate_case: true
+    word: true
+  - trigger: "motorised"
+    replace: "motorized"
+    propagate_case: true
+    word: true
+  - trigger: "mouldered"
+    replace: "moldered"
+    propagate_case: true
+    word: true
+  - trigger: "mouldiest"
+    replace: "moldiest"
+    propagate_case: true
+    word: true
+  - trigger: "mouldings"
+    replace: "moldings"
+    propagate_case: true
+    word: true
+  - trigger: "moustache"
+    replace: "mustache"
+    propagate_case: true
+    word: true
+  - trigger: "neighbour"
+    replace: "neighbor"
+    propagate_case: true
+    word: true
+  - trigger: "normalise"
+    replace: "normalize"
+    propagate_case: true
+    word: true
+  - trigger: "odourless"
+    replace: "odorless"
+    propagate_case: true
+    word: true
+  - trigger: "oestrogen"
+    replace: "estrogen"
+    propagate_case: true
+    word: true
+  - trigger: "optimised"
+    replace: "optimized"
+    propagate_case: true
+    word: true
+  - trigger: "optimises"
+    replace: "optimizes"
+    propagate_case: true
+    word: true
+  - trigger: "organised"
+    replace: "organized"
+    propagate_case: true
+    word: true
+  - trigger: "organiser"
+    replace: "organizer"
+    propagate_case: true
+    word: true
+  - trigger: "organises"
+    replace: "organizes"
+    propagate_case: true
+    word: true
+  - trigger: "ostracise"
+    replace: "ostracize"
+    propagate_case: true
+    word: true
+  - trigger: "oxidising"
+    replace: "oxidizing"
+    propagate_case: true
+    word: true
+  - trigger: "paederast"
+    replace: "pederast"
+    propagate_case: true
+    word: true
+  - trigger: "panelling"
+    replace: "paneling"
+    propagate_case: true
+    word: true
+  - trigger: "panellist"
+    replace: "panelist"
+    propagate_case: true
+    word: true
+  - trigger: "paralysed"
+    replace: "paralyzed"
+    propagate_case: true
+    word: true
+  - trigger: "paralyses"
+    replace: "paralyzes"
+    propagate_case: true
+    word: true
+  - trigger: "parcelled"
+    replace: "parceled"
+    propagate_case: true
+    word: true
+  - trigger: "passivise"
+    replace: "passivize"
+    propagate_case: true
+    word: true
+  - trigger: "patronise"
+    replace: "patronize"
+    propagate_case: true
+    word: true
+  - trigger: "pedalling"
+    replace: "pedaling"
+    propagate_case: true
+    word: true
+  - trigger: "penalised"
+    replace: "penalized"
+    propagate_case: true
+    word: true
+  - trigger: "penalises"
+    replace: "penalizes"
+    propagate_case: true
+    word: true
+  - trigger: "pencilled"
+    replace: "penciled"
+    propagate_case: true
+    word: true
+  - trigger: "ploughing"
+    replace: "plowing"
+    propagate_case: true
+    word: true
+  - trigger: "ploughman"
+    replace: "plowman"
+    propagate_case: true
+    word: true
+  - trigger: "ploughmen"
+    replace: "plowmen"
+    propagate_case: true
+    word: true
+  - trigger: "polarised"
+    replace: "polarized"
+    propagate_case: true
+    word: true
+  - trigger: "polarises"
+    replace: "polarizes"
+    propagate_case: true
+    word: true
+  - trigger: "practised"
+    replace: "practiced"
+    propagate_case: true
+    word: true
+  - trigger: "practises"
+    replace: "practices"
+    propagate_case: true
+    word: true
+  - trigger: "pretences"
+    replace: "pretenses"
+    propagate_case: true
+    word: true
+  - trigger: "primaeval"
+    replace: "primeval"
+    propagate_case: true
+    word: true
+  - trigger: "privatise"
+    replace: "privatize"
+    propagate_case: true
+    word: true
+  - trigger: "programme"
+    replace: "program"
+    propagate_case: true
+    word: true
+  - trigger: "publicise"
+    replace: "publicize"
+    propagate_case: true
+    word: true
+  - trigger: "pulverise"
+    replace: "pulverize"
+    propagate_case: true
+    word: true
+  - trigger: "pummelled"
+    replace: "pummel"
+    propagate_case: true
+    word: true
+  - trigger: "randomise"
+    replace: "randomize"
+    propagate_case: true
+    word: true
+  - trigger: "ravelling"
+    replace: "raveling"
+    propagate_case: true
+    word: true
+  - trigger: "realising"
+    replace: "realizing"
+    propagate_case: true
+    word: true
+  - trigger: "recognise"
+    replace: "recognize"
+    propagate_case: true
+    word: true
+  - trigger: "refuelled"
+    replace: "refueled"
+    propagate_case: true
+    word: true
+  - trigger: "remoulded"
+    replace: "remolded"
+    propagate_case: true
+    word: true
+  - trigger: "revellers"
+    replace: "revelers"
+    propagate_case: true
+    word: true
+  - trigger: "revelling"
+    replace: "reveling"
+    propagate_case: true
+    word: true
+  - trigger: "rivalling"
+    replace: "rivaling"
+    propagate_case: true
+    word: true
+  - trigger: "saltpetre"
+    replace: "saltpeter"
+    propagate_case: true
+    word: true
+  - trigger: "sanitised"
+    replace: "sanitized"
+    propagate_case: true
+    word: true
+  - trigger: "sanitises"
+    replace: "sanitizes"
+    propagate_case: true
+    word: true
+  - trigger: "satirised"
+    replace: "satirized"
+    propagate_case: true
+    word: true
+  - trigger: "satirises"
+    replace: "satirizes"
+    propagate_case: true
+    word: true
+  - trigger: "savouries"
+    replace: "savories"
+    propagate_case: true
+    word: true
+  - trigger: "savouring"
+    replace: "savoring"
+    propagate_case: true
+    word: true
+  - trigger: "sceptical"
+    replace: "skeptical"
+    propagate_case: true
+    word: true
+  - trigger: "sensitise"
+    replace: "sensitize"
+    propagate_case: true
+    word: true
+  - trigger: "sepulchre"
+    replace: "sepulcher"
+    propagate_case: true
+    word: true
+  - trigger: "serialise"
+    replace: "serialize"
+    propagate_case: true
+    word: true
+  - trigger: "sermonise"
+    replace: "sermonize"
+    propagate_case: true
+    word: true
+  - trigger: "shovelled"
+    replace: "shoveled"
+    propagate_case: true
+    word: true
+  - trigger: "signalise"
+    replace: "signalize"
+    propagate_case: true
+    word: true
+  - trigger: "signalled"
+    replace: "signaled"
+    propagate_case: true
+    word: true
+  - trigger: "snivelled"
+    replace: "sniveled"
+    propagate_case: true
+    word: true
+  - trigger: "socialise"
+    replace: "socialize"
+    propagate_case: true
+    word: true
+  - trigger: "sodomised"
+    replace: "sodomized"
+    propagate_case: true
+    word: true
+  - trigger: "sodomises"
+    replace: "sodomizes"
+    propagate_case: true
+    word: true
+  - trigger: "solemnise"
+    replace: "solemnize"
+    propagate_case: true
+    word: true
+  - trigger: "spiralled"
+    replace: "spiraled"
+    propagate_case: true
+    word: true
+  - trigger: "splendour"
+    replace: "splendor"
+    propagate_case: true
+    word: true
+  - trigger: "stabilise"
+    replace: "stabilize"
+    propagate_case: true
+    word: true
+  - trigger: "sterilise"
+    replace: "sterilize"
+    propagate_case: true
+    word: true
+  - trigger: "subsidise"
+    replace: "subsidize"
+    propagate_case: true
+    word: true
+  - trigger: "succoured"
+    replace: "succored"
+    propagate_case: true
+    word: true
+  - trigger: "sulphates"
+    replace: "sulfates"
+    propagate_case: true
+    word: true
+  - trigger: "sulphides"
+    replace: "sulfides"
+    propagate_case: true
+    word: true
+  - trigger: "summarise"
+    replace: "summarize"
+    propagate_case: true
+    word: true
+  - trigger: "swivelled"
+    replace: "swiveled"
+    propagate_case: true
+    word: true
+  - trigger: "symbolise"
+    replace: "symbolize"
+    propagate_case: true
+    word: true
+  - trigger: "syphoning"
+    replace: "siphoning"
+    propagate_case: true
+    word: true
+  - trigger: "tantalise"
+    replace: "tantalize"
+    propagate_case: true
+    word: true
+  - trigger: "tasselled"
+    replace: "tasseled"
+    propagate_case: true
+    word: true
+  - trigger: "temporise"
+    replace: "temporize"
+    propagate_case: true
+    word: true
+  - trigger: "tenderise"
+    replace: "tenderize"
+    propagate_case: true
+    word: true
+  - trigger: "terrorise"
+    replace: "terrorize"
+    propagate_case: true
+    word: true
+  - trigger: "theorised"
+    replace: "theorized"
+    propagate_case: true
+    word: true
+  - trigger: "theorises"
+    replace: "theorizes"
+    propagate_case: true
+    word: true
+  - trigger: "towelling"
+    replace: "toweling"
+    propagate_case: true
+    word: true
+  - trigger: "travelled"
+    replace: "traveled"
+    propagate_case: true
+    word: true
+  - trigger: "traveller"
+    replace: "traveler"
+    propagate_case: true
+    word: true
+  - trigger: "trialling"
+    replace: "trialing"
+    propagate_case: true
+    word: true
+  - trigger: "tricolour"
+    replace: "tricolor"
+    propagate_case: true
+    word: true
+  - trigger: "tunnelled"
+    replace: "tunneled"
+    propagate_case: true
+    word: true
+  - trigger: "tyrannise"
+    replace: "tyrannize"
+    propagate_case: true
+    word: true
+  - trigger: "unionised"
+    replace: "unionized"
+    propagate_case: true
+    word: true
+  - trigger: "unionises"
+    replace: "unionizes"
+    propagate_case: true
+    word: true
+  - trigger: "unsavoury"
+    replace: "unsavory"
+    propagate_case: true
+    word: true
+  - trigger: "urbanised"
+    replace: "urbanized"
+    propagate_case: true
+    word: true
+  - trigger: "urbanises"
+    replace: "urbanizes"
+    propagate_case: true
+    word: true
+  - trigger: "utilising"
+    replace: "utilizing"
+    propagate_case: true
+    word: true
+  - trigger: "vandalise"
+    replace: "vandalize"
+    propagate_case: true
+    word: true
+  - trigger: "vaporised"
+    replace: "vaporized"
+    propagate_case: true
+    word: true
+  - trigger: "vaporises"
+    replace: "vaporizes"
+    propagate_case: true
+    word: true
+  - trigger: "verbalise"
+    replace: "verbalize"
+    propagate_case: true
+    word: true
+  - trigger: "victimise"
+    replace: "victimize"
+    propagate_case: true
+    word: true
+  - trigger: "visualise"
+    replace: "visualize"
+    propagate_case: true
+    word: true
+  - trigger: "vocalised"
+    replace: "vocalized"
+    propagate_case: true
+    word: true
+  - trigger: "vocalises"
+    replace: "vocalizes"
+    propagate_case: true
+    word: true
+  - trigger: "vulgarise"
+    replace: "vulgarize"
+    propagate_case: true
+    word: true
+  - trigger: "weaselled"
+    replace: "weaseled"
+    propagate_case: true
+    word: true
+  - trigger: "womanised"
+    replace: "womanized"
+    propagate_case: true
+    word: true
+  - trigger: "womaniser"
+    replace: "womanizer"
+    propagate_case: true
+    word: true
+  - trigger: "womanises"
+    replace: "womanizes"
+    propagate_case: true
+    word: true
+  - trigger: "yodelling"
+    replace: "yodeling"
+    propagate_case: true
+    word: true
+  - trigger: "yoghourts"
+    replace: "yogurts"
+    propagate_case: true
+    word: true
+  - trigger: "agonised"
+    replace: "agonized"
+    propagate_case: true
+    word: true
+  - trigger: "agonises"
+    replace: "agonizes"
+    propagate_case: true
+    word: true
+  - trigger: "almanack"
+    replace: "almanac"
+    propagate_case: true
+    word: true
+  - trigger: "amortise"
+    replace: "amortize"
+    propagate_case: true
+    word: true
+  - trigger: "analogue"
+    replace: "analog"
+    propagate_case: true
+    word: true
+  - trigger: "analysed"
+    replace: "analyzed"
+    propagate_case: true
+    word: true
+  - trigger: "analyses"
+    replace: "analyzes"
+    propagate_case: true
+    word: true
+  - trigger: "armoured"
+    replace: "armored"
+    propagate_case: true
+    word: true
+  - trigger: "armourer"
+    replace: "armorer"
+    propagate_case: true
+    word: true
+  - trigger: "artefact"
+    replace: "artifact"
+    propagate_case: true
+    word: true
+  - trigger: "baptised"
+    replace: "baptized"
+    propagate_case: true
+    word: true
+  - trigger: "baptises"
+    replace: "baptizes"
+    propagate_case: true
+    word: true
+  - trigger: "baulking"
+    replace: "balking"
+    propagate_case: true
+    word: true
+  - trigger: "belabour"
+    replace: "belabor"
+    propagate_case: true
+    word: true
+  - trigger: "bevelled"
+    replace: "beveled"
+    propagate_case: true
+    word: true
+  - trigger: "calibres"
+    replace: "calibers"
+    propagate_case: true
+    word: true
+  - trigger: "calliper"
+    replace: "caliper"
+    propagate_case: true
+    word: true
+  - trigger: "canalise"
+    replace: "canalize"
+    propagate_case: true
+    word: true
+  - trigger: "canonise"
+    replace: "canonize"
+    propagate_case: true
+    word: true
+  - trigger: "carolled"
+    replace: "caroled"
+    propagate_case: true
+    word: true
+  - trigger: "catalyse"
+    replace: "catalyze"
+    propagate_case: true
+    word: true
+  - trigger: "cavilled"
+    replace: "caviled"
+    propagate_case: true
+    word: true
+  - trigger: "civilise"
+    replace: "civilize"
+    propagate_case: true
+    word: true
+  - trigger: "clamours"
+    replace: "clamors"
+    propagate_case: true
+    word: true
+  - trigger: "clangour"
+    replace: "clangor"
+    propagate_case: true
+    word: true
+  - trigger: "colonise"
+    replace: "colonize"
+    propagate_case: true
+    word: true
+  - trigger: "coloured"
+    replace: "colored"
+    propagate_case: true
+    word: true
+  - trigger: "cosiness"
+    replace: "coziness"
+    propagate_case: true
+    word: true
+  - trigger: "crueller"
+    replace: "crueler"
+    propagate_case: true
+    word: true
+  - trigger: "defences"
+    replace: "defenses"
+    propagate_case: true
+    word: true
+  - trigger: "demonise"
+    replace: "demonize"
+    propagate_case: true
+    word: true
+  - trigger: "deputise"
+    replace: "deputize"
+    propagate_case: true
+    word: true
+  - trigger: "dialling"
+    replace: "dialing"
+    propagate_case: true
+    word: true
+  - trigger: "dialogue"
+    replace: "dialog"
+    propagate_case: true
+    word: true
+  - trigger: "digitise"
+    replace: "digitize"
+    propagate_case: true
+    word: true
+  - trigger: "draughty"
+    replace: "drafty"
+    propagate_case: true
+    word: true
+  - trigger: "duelling"
+    replace: "dueling"
+    propagate_case: true
+    word: true
+  - trigger: "energise"
+    replace: "energize"
+    propagate_case: true
+    word: true
+  - trigger: "enthrals"
+    replace: "enthralls"
+    propagate_case: true
+    word: true
+  - trigger: "equalise"
+    replace: "equalize"
+    propagate_case: true
+    word: true
+  - trigger: "eulogise"
+    replace: "eulogize"
+    propagate_case: true
+    word: true
+  - trigger: "favoured"
+    replace: "favored"
+    propagate_case: true
+    word: true
+  - trigger: "feminise"
+    replace: "feminize"
+    propagate_case: true
+    word: true
+  - trigger: "finalise"
+    replace: "finalize"
+    propagate_case: true
+    word: true
+  - trigger: "flautist"
+    replace: "flutist"
+    propagate_case: true
+    word: true
+  - trigger: "flavours"
+    replace: "flavors"
+    propagate_case: true
+    word: true
+  - trigger: "foetuses"
+    replace: "fetuses"
+    propagate_case: true
+    word: true
+  - trigger: "fuelling"
+    replace: "fueling"
+    propagate_case: true
+    word: true
+  - trigger: "gaolbird"
+    replace: "jailbird"
+    propagate_case: true
+    word: true
+  - trigger: "gryphons"
+    replace: "griffins"
+    propagate_case: true
+    word: true
+  - trigger: "harbours"
+    replace: "harbors"
+    propagate_case: true
+    word: true
+  - trigger: "honoured"
+    replace: "honored"
+    propagate_case: true
+    word: true
+  - trigger: "humanise"
+    replace: "humanize"
+    propagate_case: true
+    word: true
+  - trigger: "humoured"
+    replace: "humored"
+    propagate_case: true
+    word: true
+  - trigger: "idealise"
+    replace: "idealize"
+    propagate_case: true
+    word: true
+  - trigger: "idolised"
+    replace: "idolized"
+    propagate_case: true
+    word: true
+  - trigger: "idolises"
+    replace: "idolizes"
+    propagate_case: true
+    word: true
+  - trigger: "immunise"
+    replace: "immunize"
+    propagate_case: true
+    word: true
+  - trigger: "ionisers"
+    replace: "ionizers"
+    propagate_case: true
+    word: true
+  - trigger: "ionising"
+    replace: "ionizing"
+    propagate_case: true
+    word: true
+  - trigger: "itemised"
+    replace: "itemized"
+    propagate_case: true
+    word: true
+  - trigger: "itemises"
+    replace: "itemizes"
+    propagate_case: true
+    word: true
+  - trigger: "jewelled"
+    replace: "jeweled"
+    propagate_case: true
+    word: true
+  - trigger: "jeweller"
+    replace: "jeweler"
+    propagate_case: true
+    word: true
+  - trigger: "labelled"
+    replace: "labeled"
+    propagate_case: true
+    word: true
+  - trigger: "laboured"
+    replace: "labored"
+    propagate_case: true
+    word: true
+  - trigger: "labourer"
+    replace: "laborer"
+    propagate_case: true
+    word: true
+  - trigger: "legalise"
+    replace: "legalize"
+    propagate_case: true
+    word: true
+  - trigger: "levelled"
+    replace: "leveled"
+    propagate_case: true
+    word: true
+  - trigger: "leveller"
+    replace: "leveler"
+    propagate_case: true
+    word: true
+  - trigger: "libelled"
+    replace: "libeled"
+    propagate_case: true
+    word: true
+  - trigger: "licenced"
+    replace: "licensed"
+    propagate_case: true
+    word: true
+  - trigger: "licences"
+    replace: "licenses"
+    propagate_case: true
+    word: true
+  - trigger: "lionised"
+    replace: "lionized"
+    propagate_case: true
+    word: true
+  - trigger: "lionises"
+    replace: "lionizes"
+    propagate_case: true
+    word: true
+  - trigger: "localise"
+    replace: "localize"
+    propagate_case: true
+    word: true
+  - trigger: "maximise"
+    replace: "maximize"
+    propagate_case: true
+    word: true
+  - trigger: "memorise"
+    replace: "memorize"
+    propagate_case: true
+    word: true
+  - trigger: "minimise"
+    replace: "minimize"
+    propagate_case: true
+    word: true
+  - trigger: "misspelt"
+    replace: "misspelled"
+    propagate_case: true
+    word: true
+  - trigger: "mobilise"
+    replace: "mobilize"
+    propagate_case: true
+    word: true
+  - trigger: "modelled"
+    replace: "modeled"
+    propagate_case: true
+    word: true
+  - trigger: "modeller"
+    replace: "modeler"
+    propagate_case: true
+    word: true
+  - trigger: "moralise"
+    replace: "moralize"
+    propagate_case: true
+    word: true
+  - trigger: "moulders"
+    replace: "molders"
+    propagate_case: true
+    word: true
+  - trigger: "mouldier"
+    replace: "moldier"
+    propagate_case: true
+    word: true
+  - trigger: "moulding"
+    replace: "molding"
+    propagate_case: true
+    word: true
+  - trigger: "moulting"
+    replace: "molting"
+    propagate_case: true
+    word: true
+  - trigger: "offences"
+    replace: "offenses"
+    propagate_case: true
+    word: true
+  - trigger: "optimise"
+    replace: "optimize"
+    propagate_case: true
+    word: true
+  - trigger: "organise"
+    replace: "organize"
+    propagate_case: true
+    word: true
+  - trigger: "oxidised"
+    replace: "oxidized"
+    propagate_case: true
+    word: true
+  - trigger: "oxidises"
+    replace: "oxidizes"
+    propagate_case: true
+    word: true
+  - trigger: "panelled"
+    replace: "paneled"
+    propagate_case: true
+    word: true
+  - trigger: "paralyse"
+    replace: "paralyze"
+    propagate_case: true
+    word: true
+  - trigger: "parlours"
+    replace: "parlors"
+    propagate_case: true
+    word: true
+  - trigger: "pedalled"
+    replace: "pedaled"
+    propagate_case: true
+    word: true
+  - trigger: "penalise"
+    replace: "penalize"
+    propagate_case: true
+    word: true
+  - trigger: "philtres"
+    replace: "filters"
+    propagate_case: true
+    word: true
+  - trigger: "ploughed"
+    replace: "plowed"
+    propagate_case: true
+    word: true
+  - trigger: "polarise"
+    replace: "polarize"
+    propagate_case: true
+    word: true
+  - trigger: "practise"
+    replace: "practice"
+    propagate_case: true
+    word: true
+  - trigger: "pretence"
+    replace: "pretense"
+    propagate_case: true
+    word: true
+  - trigger: "ravelled"
+    replace: "raveled"
+    propagate_case: true
+    word: true
+  - trigger: "realised"
+    replace: "realized"
+    propagate_case: true
+    word: true
+  - trigger: "realises"
+    replace: "realizes"
+    propagate_case: true
+    word: true
+  - trigger: "remoulds"
+    replace: "remolds"
+    propagate_case: true
+    word: true
+  - trigger: "revelled"
+    replace: "reveled"
+    propagate_case: true
+    word: true
+  - trigger: "reveller"
+    replace: "reveler"
+    propagate_case: true
+    word: true
+  - trigger: "rivalled"
+    replace: "rivaled"
+    propagate_case: true
+    word: true
+  - trigger: "rumoured"
+    replace: "rumored"
+    propagate_case: true
+    word: true
+  - trigger: "sanitise"
+    replace: "sanitize"
+    propagate_case: true
+    word: true
+  - trigger: "satirise"
+    replace: "satirize"
+    propagate_case: true
+    word: true
+  - trigger: "saviours"
+    replace: "saviors"
+    propagate_case: true
+    word: true
+  - trigger: "savoured"
+    replace: "savored"
+    propagate_case: true
+    word: true
+  - trigger: "sceptics"
+    replace: "skeptics"
+    propagate_case: true
+    word: true
+  - trigger: "sceptres"
+    replace: "scepters"
+    propagate_case: true
+    word: true
+  - trigger: "sodomise"
+    replace: "sodomize"
+    propagate_case: true
+    word: true
+  - trigger: "spectres"
+    replace: "specters"
+    propagate_case: true
+    word: true
+  - trigger: "succours"
+    replace: "succors"
+    propagate_case: true
+    word: true
+  - trigger: "sulphate"
+    replace: "sulfate"
+    propagate_case: true
+    word: true
+  - trigger: "sulphide"
+    replace: "sulfide"
+    propagate_case: true
+    word: true
+  - trigger: "syphoned"
+    replace: "siphoned"
+    propagate_case: true
+    word: true
+  - trigger: "theatres"
+    replace: "theaters"
+    propagate_case: true
+    word: true
+  - trigger: "theorise"
+    replace: "theorize"
+    propagate_case: true
+    word: true
+  - trigger: "towelled"
+    replace: "toweled"
+    propagate_case: true
+    word: true
+  - trigger: "toxaemia"
+    replace: "toxemia"
+    propagate_case: true
+    word: true
+  - trigger: "trialled"
+    replace: "trialed"
+    propagate_case: true
+    word: true
+  - trigger: "unionise"
+    replace: "unionize"
+    propagate_case: true
+    word: true
+  - trigger: "urbanise"
+    replace: "urbanize"
+    propagate_case: true
+    word: true
+  - trigger: "utilised"
+    replace: "utilized"
+    propagate_case: true
+    word: true
+  - trigger: "utilises"
+    replace: "utilizes"
+    propagate_case: true
+    word: true
+  - trigger: "vaporise"
+    replace: "vaporize"
+    propagate_case: true
+    word: true
+  - trigger: "vocalise"
+    replace: "vocalize"
+    propagate_case: true
+    word: true
+  - trigger: "womanise"
+    replace: "womanize"
+    propagate_case: true
+    word: true
+  - trigger: "yodelled"
+    replace: "yodeled"
+    propagate_case: true
+    word: true
+  - trigger: "yoghourt"
+    replace: "yogurt"
+    propagate_case: true
+    word: true
+  - trigger: "yoghurts"
+    replace: "yogurts"
+    propagate_case: true
+    word: true
+  - trigger: "agonise"
+    replace: "agonize"
+    propagate_case: true
+    word: true
+  - trigger: "anaemia"
+    replace: "anemia"
+    propagate_case: true
+    word: true
+  - trigger: "anaemic"
+    replace: "anemic"
+    propagate_case: true
+    word: true
+  - trigger: "analyse"
+    replace: "analyze"
+    propagate_case: true
+    word: true
+  - trigger: "arbours"
+    replace: "arbors"
+    propagate_case: true
+    word: true
+  - trigger: "armoury"
+    replace: "armory"
+    propagate_case: true
+    word: true
+  - trigger: "baptise"
+    replace: "baptize"
+    propagate_case: true
+    word: true
+  - trigger: "baulked"
+    replace: "balked"
+    propagate_case: true
+    word: true
+  - trigger: "behoved"
+    replace: "behooved"
+    propagate_case: true
+    word: true
+  - trigger: "behoves"
+    replace: "behooves"
+    propagate_case: true
+    word: true
+  - trigger: "calibre"
+    replace: "caliber"
+    propagate_case: true
+    word: true
+  - trigger: "candour"
+    replace: "candor"
+    propagate_case: true
+    word: true
+  - trigger: "centred"
+    replace: "centered"
+    propagate_case: true
+    word: true
+  - trigger: "centres"
+    replace: "centers"
+    propagate_case: true
+    word: true
+  - trigger: "cheques"
+    replace: "checks"
+    propagate_case: true
+    word: true
+  - trigger: "clamour"
+    replace: "clamor"
+    propagate_case: true
+    word: true
+  - trigger: "colours"
+    replace: "colors"
+    propagate_case: true
+    word: true
+  - trigger: "cosiest"
+    replace: "coziest"
+    propagate_case: true
+    word: true
+  - trigger: "defence"
+    replace: "defense"
+    propagate_case: true
+    word: true
+  - trigger: "dialled"
+    replace: "dialed"
+    propagate_case: true
+    word: true
+  - trigger: "distils"
+    replace: "distills"
+    propagate_case: true
+    word: true
+  - trigger: "duelled"
+    replace: "dueled"
+    propagate_case: true
+    word: true
+  - trigger: "enthral"
+    replace: "enthrall"
+    propagate_case: true
+    word: true
+  - trigger: "favours"
+    replace: "favors"
+    propagate_case: true
+    word: true
+  - trigger: "fervour"
+    replace: "fervor"
+    propagate_case: true
+    word: true
+  - trigger: "flavour"
+    replace: "flavor"
+    propagate_case: true
+    word: true
+  - trigger: "fuelled"
+    replace: "fueled"
+    propagate_case: true
+    word: true
+  - trigger: "fulfils"
+    replace: "fulfills"
+    propagate_case: true
+    word: true
+  - trigger: "gaolers"
+    replace: "jailers"
+    propagate_case: true
+    word: true
+  - trigger: "gaoling"
+    replace: "jailing"
+    propagate_case: true
+    word: true
+  - trigger: "gipsies"
+    replace: "gypsies"
+    propagate_case: true
+    word: true
+  - trigger: "glueing"
+    replace: "gluing"
+    propagate_case: true
+    word: true
+  - trigger: "goitres"
+    replace: "goiters"
+    propagate_case: true
+    word: true
+  - trigger: "grammes"
+    replace: "grams"
+    propagate_case: true
+    word: true
+  - trigger: "groynes"
+    replace: "groins"
+    propagate_case: true
+    word: true
+  - trigger: "gryphon"
+    replace: "griffin"
+    propagate_case: true
+    word: true
+  - trigger: "harbour"
+    replace: "harbor"
+    propagate_case: true
+    word: true
+  - trigger: "honours"
+    replace: "honors"
+    propagate_case: true
+    word: true
+  - trigger: "humours"
+    replace: "humors"
+    propagate_case: true
+    word: true
+  - trigger: "idolise"
+    replace: "idolize"
+    propagate_case: true
+    word: true
+  - trigger: "instals"
+    replace: "installs"
+    propagate_case: true
+    word: true
+  - trigger: "instils"
+    replace: "instills"
+    propagate_case: true
+    word: true
+  - trigger: "ionised"
+    replace: "ionized"
+    propagate_case: true
+    word: true
+  - trigger: "ioniser"
+    replace: "ionizer"
+    propagate_case: true
+    word: true
+  - trigger: "ionises"
+    replace: "ionizes"
+    propagate_case: true
+    word: true
+  - trigger: "itemise"
+    replace: "itemize"
+    propagate_case: true
+    word: true
+  - trigger: "labours"
+    replace: "labors"
+    propagate_case: true
+    word: true
+  - trigger: "licence"
+    replace: "license"
+    propagate_case: true
+    word: true
+  - trigger: "lionise"
+    replace: "lionize"
+    propagate_case: true
+    word: true
+  - trigger: "louvred"
+    replace: "louvered"
+    propagate_case: true
+    word: true
+  - trigger: "louvres"
+    replace: "louvers"
+    propagate_case: true
+    word: true
+  - trigger: "moulded"
+    replace: "molded"
+    propagate_case: true
+    word: true
+  - trigger: "moulder"
+    replace: "molder"
+    propagate_case: true
+    word: true
+  - trigger: "moulted"
+    replace: "molted"
+    propagate_case: true
+    word: true
+  - trigger: "offence"
+    replace: "offense"
+    propagate_case: true
+    word: true
+  - trigger: "oxidise"
+    replace: "oxidize"
+    propagate_case: true
+    word: true
+  - trigger: "parlour"
+    replace: "parlor"
+    propagate_case: true
+    word: true
+  - trigger: "philtre"
+    replace: "filter"
+    propagate_case: true
+    word: true
+  - trigger: "ploughs"
+    replace: "plows"
+    propagate_case: true
+    word: true
+  - trigger: "pyjamas"
+    replace: "pajamas"
+    propagate_case: true
+    word: true
+  - trigger: "rancour"
+    replace: "rancor"
+    propagate_case: true
+    word: true
+  - trigger: "realise"
+    replace: "realize"
+    propagate_case: true
+    word: true
+  - trigger: "remould"
+    replace: "remold"
+    propagate_case: true
+    word: true
+  - trigger: "rigours"
+    replace: "rigors"
+    propagate_case: true
+    word: true
+  - trigger: "rumours"
+    replace: "rumors"
+    propagate_case: true
+    word: true
+  - trigger: "saviour"
+    replace: "savior"
+    propagate_case: true
+    word: true
+  - trigger: "savours"
+    replace: "savors"
+    propagate_case: true
+    word: true
+  - trigger: "savoury"
+    replace: "savory"
+    propagate_case: true
+    word: true
+  - trigger: "sceptic"
+    replace: "skeptic"
+    propagate_case: true
+    word: true
+  - trigger: "sceptre"
+    replace: "scepter"
+    propagate_case: true
+    word: true
+  - trigger: "spectre"
+    replace: "specter"
+    propagate_case: true
+    word: true
+  - trigger: "storeys"
+    replace: "stories"
+    propagate_case: true
+    word: true
+  - trigger: "succour"
+    replace: "succor"
+    propagate_case: true
+    word: true
+  - trigger: "sulphur"
+    replace: "sulfur"
+    propagate_case: true
+    word: true
+  - trigger: "syphons"
+    replace: "siphons"
+    propagate_case: true
+    word: true
+  - trigger: "theatre"
+    replace: "theater"
+    propagate_case: true
+    word: true
+  - trigger: "tumours"
+    replace: "tumors"
+    propagate_case: true
+    word: true
+  - trigger: "utilise"
+    replace: "utilize"
+    propagate_case: true
+    word: true
+  - trigger: "vapours"
+    replace: "vapors"
+    propagate_case: true
+    word: true
+  - trigger: "waggons"
+    replace: "wagons"
+    propagate_case: true
+    word: true
+  - trigger: "yoghurt"
+    replace: "yogurt"
+    propagate_case: true
+    word: true
+  - trigger: "ageing"
+    replace: "aging"
+    propagate_case: true
+    word: true
+  - trigger: "appals"
+    replace: "appalls"
+    propagate_case: true
+    word: true
+  - trigger: "arbour"
+    replace: "arbor"
+    propagate_case: true
+    word: true
+  - trigger: "ardour"
+    replace: "ardor"
+    propagate_case: true
+    word: true
+  - trigger: "baulks"
+    replace: "balks"
+    propagate_case: true
+    word: true
+  - trigger: "behove"
+    replace: "behoove"
+    propagate_case: true
+    word: true
+  - trigger: "centre"
+    replace: "center"
+    propagate_case: true
+    word: true
+  - trigger: "cheque"
+    replace: "check"
+    propagate_case: true
+    word: true
+  - trigger: "chilli"
+    replace: "chili"
+    propagate_case: true
+    word: true
+  - trigger: "colour"
+    replace: "color"
+    propagate_case: true
+    word: true
+  - trigger: "cosier"
+    replace: "cozier"
+    propagate_case: true
+    word: true
+  - trigger: "cosies"
+    replace: "cozies"
+    propagate_case: true
+    word: true
+  - trigger: "cosily"
+    replace: "cozily"
+    propagate_case: true
+    word: true
+  - trigger: "distil"
+    replace: "distill"
+    propagate_case: true
+    word: true
+  - trigger: "edoema"
+    replace: "edema"
+    propagate_case: true
+    word: true
+  - trigger: "enrols"
+    replace: "enrolls"
+    propagate_case: true
+    word: true
+  - trigger: "faecal"
+    replace: "fecal"
+    propagate_case: true
+    word: true
+  - trigger: "faeces"
+    replace: "feces"
+    propagate_case: true
+    word: true
+  - trigger: "favour"
+    replace: "favor"
+    propagate_case: true
+    word: true
+  - trigger: "fibres"
+    replace: "fibers"
+    propagate_case: true
+    word: true
+  - trigger: "foetal"
+    replace: "fetal"
+    propagate_case: true
+    word: true
+  - trigger: "foetid"
+    replace: "fetid"
+    propagate_case: true
+    word: true
+  - trigger: "foetus"
+    replace: "fetus"
+    propagate_case: true
+    word: true
+  - trigger: "fulfil"
+    replace: "fulfill"
+    propagate_case: true
+    word: true
+  - trigger: "gaoled"
+    replace: "jailed"
+    propagate_case: true
+    word: true
+  - trigger: "gaoler"
+    replace: "jailer"
+    propagate_case: true
+    word: true
+  - trigger: "goitre"
+    replace: "goiter"
+    propagate_case: true
+    word: true
+  - trigger: "gramme"
+    replace: "gram"
+    propagate_case: true
+    word: true
+  - trigger: "groyne"
+    replace: "groin"
+    propagate_case: true
+    word: true
+  - trigger: "honour"
+    replace: "honor"
+    propagate_case: true
+    word: true
+  - trigger: "humour"
+    replace: "humor"
+    propagate_case: true
+    word: true
+  - trigger: "instal"
+    replace: "install"
+    propagate_case: true
+    word: true
+  - trigger: "instil"
+    replace: "instill"
+    propagate_case: true
+    word: true
+  - trigger: "ionise"
+    replace: "ionize"
+    propagate_case: true
+    word: true
+  - trigger: "labour"
+    replace: "labor"
+    propagate_case: true
+    word: true
+  - trigger: "litres"
+    replace: "liters"
+    propagate_case: true
+    word: true
+  - trigger: "lustre"
+    replace: "luster"
+    propagate_case: true
+    word: true
+  - trigger: "meagre"
+    replace: "meager"
+    propagate_case: true
+    word: true
+  - trigger: "metres"
+    replace: "meters"
+    propagate_case: true
+    word: true
+  - trigger: "mitres"
+    replace: "miters"
+    propagate_case: true
+    word: true
+  - trigger: "moulds"
+    replace: "molds"
+    propagate_case: true
+    word: true
+  - trigger: "mouldy"
+    replace: "moldy"
+    propagate_case: true
+    word: true
+  - trigger: "moults"
+    replace: "molts"
+    propagate_case: true
+    word: true
+  - trigger: "odours"
+    replace: "odors"
+    propagate_case: true
+    word: true
+  - trigger: "plough"
+    replace: "plow"
+    propagate_case: true
+    word: true
+  - trigger: "pyjama"
+    replace: "pajama"
+    propagate_case: true
+    word: true
+  - trigger: "rigour"
+    replace: "rigor"
+    propagate_case: true
+    word: true
+  - trigger: "rumour"
+    replace: "rumor"
+    propagate_case: true
+    word: true
+  - trigger: "savour"
+    replace: "savor"
+    propagate_case: true
+    word: true
+  - trigger: "storey"
+    replace: "story"
+    propagate_case: true
+    word: true
+  - trigger: "syphon"
+    replace: "siphon"
+    propagate_case: true
+    word: true
+  - trigger: "tumour"
+    replace: "tumor"
+    propagate_case: true
+    word: true
+  - trigger: "valour"
+    replace: "valor"
+    propagate_case: true
+    word: true
+  - trigger: "vapour"
+    replace: "vapor"
+    propagate_case: true
+    word: true
+  - trigger: "vigour"
+    replace: "vigor"
+    propagate_case: true
+    word: true
+  - trigger: "waggon"
+    replace: "wagon"
+    propagate_case: true
+    word: true
+  - trigger: "appal"
+    replace: "appall"
+    propagate_case: true
+    word: true
+  - trigger: "baulk"
+    replace: "balk"
+    propagate_case: true
+    word: true
+  - trigger: "enrol"
+    replace: "enroll"
+    propagate_case: true
+    word: true
+  - trigger: "fibre"
+    replace: "fiber"
+    propagate_case: true
+    word: true
+  - trigger: "gaols"
+    replace: "jails"
+    propagate_case: true
+    word: true
+  - trigger: "litre"
+    replace: "liter"
+    propagate_case: true
+    word: true
+  - trigger: "metre"
+    replace: "meter"
+    propagate_case: true
+    word: true
+  - trigger: "mitre"
+    replace: "miter"
+    propagate_case: true
+    word: true
+  - trigger: "mould"
+    replace: "mold"
+    propagate_case: true
+    word: true
+  - trigger: "moult"
+    replace: "molt"
+    propagate_case: true
+    word: true
+  - trigger: "odour"
+    replace: "odor"
+    propagate_case: true
+    word: true
+  - trigger: "tyres"
+    replace: "tires"
+    propagate_case: true
+    word: true
+  - trigger: "cosy"
+    replace: "cozy"
+    propagate_case: true
+    word: true
+  - trigger: "gaol"
+    replace: "jail"
+    propagate_case: true
+    word: true
+  - trigger: "tyre"
+    replace: "tire"
+    propagate_case: true
+    word: true
