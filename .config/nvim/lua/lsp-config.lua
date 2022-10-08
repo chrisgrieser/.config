@@ -10,12 +10,11 @@ require("mason").setup({
 	}
 })
 require("mason-lspconfig").setup({
-	-- this plugin uses the lspconfig servernames, not mason servernames https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
-	ensure_installed = {
+	ensure_installed = { -- this plugin uses the lspconfig servernames, not mason servernames https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
 		"sumneko_lua",
 		"yamlls",
-		"tsserver",
-		"marksman",
+		"tsserver", -- ts/js
+		"marksman", -- markdown
 		"jsonls",
 		"cssls",
 		"bashls",
