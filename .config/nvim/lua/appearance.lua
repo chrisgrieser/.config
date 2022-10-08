@@ -99,7 +99,7 @@ require('lualine').setup {
 		lualine_a = {{ 'mode', fmt = function(str) return str end }},
 		lualine_b = {{ currentFile }},
 		lualine_c = {{ alternateFile }},
-		lualine_x = {{'diagnostics', sources = { 'nvim_diagnostic', 'coc', 'ale' }}},
+		lualine_x = {{'diagnostics', sources = { 'nvim_diagnostic'}}},
 		lualine_y = {'diff'},
 		lualine_z = {'location', 'progress'},
 	},
