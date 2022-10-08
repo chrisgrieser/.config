@@ -50,7 +50,7 @@ function PluginList ()
 
 			'saadparwaiz1/cmp_luasnip',
 			'L3MON4D3/LuaSnip', -- snippet engine
-			-- 'rafamadriz/friendly-snippets', -- collection of common snippets
+			'rafamadriz/friendly-snippets', -- collection of common snippets
 		}
 	}
 

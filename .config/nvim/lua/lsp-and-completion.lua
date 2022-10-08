@@ -87,7 +87,7 @@ cmp.setup({
 	}),
 	formatting = {
 		format = require('lspkind').cmp_format({
-			mode = "symbol_text",
+			mode = "symbol",
 			maxwidth = 40,
 			ellipsis_char = '…',
 			menu = {
@@ -120,6 +120,12 @@ cmp.setup.filetype ("css", {
 		{ name = 'luasnip' },
 	}, {
 		{ name = 'emoji', keyword_length = 2 },
+	}
+})
+
+cmp.setup.filetype ("lua", {
+	completion = {
+		keyword_pattern = "[%a]" -- do not match the start of comments
 	}
 })
 
