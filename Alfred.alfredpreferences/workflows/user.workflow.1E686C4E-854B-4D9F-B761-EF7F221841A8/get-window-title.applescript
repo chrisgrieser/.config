@@ -2,12 +2,7 @@
 tell application "System Events"
 	set frontApp to first application process whose frontmost is true
 	set appName to the name of frontApp
-	set appID to "-"
-	try
-		set appID to the id of the application appName
-	end try
-
-	set output to appName & "\n" & appID & "\n\n"
+	set output to appName & "\n\n"
 
 	tell frontApp
 		repeat with win in (every window)

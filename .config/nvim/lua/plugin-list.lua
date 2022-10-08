@@ -34,8 +34,16 @@ function PluginList ()
 	-- Completion & Suggestion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
 	use 'mattn/emmet-vim' -- Emmet for CSS
-	use 'gelguy/wilder.nvim' -- suggestions for command line mode (: and /)
-	use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+	-- use 'gelguy/wilder.nvim' -- suggestions for command line mode (: and /)
+	use {'hrsh7th/nvim-cmp', -- autocompletion
+		requires = { -- completion sources
+			'hrsh7th/cmp-buffer', -- current file
+			'hrsh7th/cmp-path', -- files
+			'hrsh7th/cmp-cmdline', -- command mode
+			'folke/lua-dev.nvim', -- nvim itself
+			'hrsh7th/cmp-nvim-lsp', -- lsp
+		}
+	}
 
 	-- Appearance
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} } -- colored brackets
