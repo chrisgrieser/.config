@@ -42,14 +42,31 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', '<leader>,', vim.lsp.buf.code_action, bufopts)
 end
 
-local lsp_flags = {
-	debounce_text_changes = 150, -- This is the default in Nvim 0.7+
-}
-require('lspconfig')['tsserver'].setup{
+local lspConfig = require('lspconfig')
+
+--------------------------------------------------------------------------------
+-- LANGUAGE-SPJJKFIC SETUP
+
+lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
-	flags = lsp_flags,
 }
-require('lspconfig')['sumneko_lua'].setup{
+
+lspConfig['tsserver'].setup{
 	on_attach = on_attach,
-	flags = lsp_flags,
+}
+
+lspConfig['marksman'].setup{
+	on_attach = on_attach,
+}
+
+lspConfig['bashls'].setup{
+	on_attach = on_attach,
+}
+
+lspConfig['jsonls'].setup{
+	on_attach = on_attach,
+}
+
+lspConfig['cssls'].setup{
+	on_attach = on_attach,
 }
