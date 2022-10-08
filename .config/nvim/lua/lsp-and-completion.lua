@@ -65,7 +65,7 @@ cmp.setup({
 		completion = cmp.config.window.bordered(),
 		documentation = {
 			max_height = 20,
-			max_width = 40,
+			max_width = 60,
 		}
 	},
 
@@ -123,12 +123,14 @@ cmp.setup.filetype ("css", {
 	}
 })
 
+
+
+
 cmp.setup.filetype ("lua", {
 	completion = {
-		keyword_pattern = "[%a]" -- do not match the start of comments
-	}
+		keyword_pattern = "[^-]" -- do not match the start of comments
+	},
 })
-
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
 	mapping = cmp.mapping.preset.cmdline(),
