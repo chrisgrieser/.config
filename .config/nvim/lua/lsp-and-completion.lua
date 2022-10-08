@@ -9,6 +9,16 @@ require("mason").setup({
 		}
 	}
 })
+
+cmd[[highlight LspDiagnosticsVirtualTextHint guifg=#554400 ctermfg=Blue]]
+cmd[[highlight DiagnosticHint guifg=#554400 ctermfg=Blue]]
+ffsf
+
+vim.fn.sign_define(
+  "LspDiagnosticsSignError",
+  { texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError" }
+)
+--------------------------------------------------------------------------------
 require("mason-lspconfig").setup({
 	ensure_installed = { -- this plugin uses the lspconfig servernames, not mason servernames https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
 		"sumneko_lua",
@@ -21,7 +31,7 @@ require("mason-lspconfig").setup({
 	},
 })
 
--- Mappings.
+-- Diagnotics
 local opts = { noremap=true, silent=true }
 keymap('n', 'ge', vim.diagnostic.goto_next, opts)
 keymap('n', 'gE', vim.diagnostic.goto_prev, opts)
@@ -91,7 +101,7 @@ lspConfig['cssls'].setup{
 				vendorPrefix = "ignore",
 				duplicateProperties = "error",
 			},
-			colorDecorators = { enable = true }, -- does not seem to work? 
+			colorDecorators = { enable = true }, -- does not seem to work?
 		}
 	}
 }
