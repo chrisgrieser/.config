@@ -1,4 +1,4 @@
-function PluginList (use)
+function PluginList ()
 
 	-- Package Management
 	use 'wbthomason/packer.nvim' -- packer manages itself
@@ -29,7 +29,6 @@ function PluginList (use)
 	-- LSP
 	use {'neovim/nvim-lspconfig', requires = 'williamboman/mason-lspconfig.nvim' } -- neovim lsp/linter installer
 	use 'williamboman/mason.nvim'
-	use 'hrsh7th/nvim-cmp' -- LSP source for nvim-cmp
 	use {'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp' }
 
 	-- Completion & Suggestion
@@ -51,7 +50,6 @@ function PluginList (use)
 	use { 'nvim-telescope/telescope.nvim', -- fuzzy finder
 		requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
 	}
-	-- use 'ThePrimeagen/harpoon' -- for switching regularly between multiple files
 
 	-- Operators
 	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'}
