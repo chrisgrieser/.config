@@ -34,12 +34,13 @@ function PluginList ()
 	-- Completion & Suggestion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
 	use 'mattn/emmet-vim' -- Emmet for CSS
-	-- use 'gelguy/wilder.nvim' -- suggestions for command line mode (: and /)
+	-- use 'gelguy/wilder.nvim' -- suggestions for command line mode
 	use {'hrsh7th/nvim-cmp', -- autocompletion
 		requires = { -- completion sources
-			'hrsh7th/cmp-buffer', -- current file
-			'hrsh7th/cmp-path', -- files
-			'hrsh7th/cmp-cmdline', -- command mode
+			'hrsh7th/cmp-buffer',
+			'hrsh7th/cmp-path',
+			'hrsh7th/cmp-cmdline',
+			'hrsh7th/cmp-emoji',
 			'folke/lua-dev.nvim', -- nvim itself
 			'hrsh7th/cmp-nvim-lsp', -- lsp
 		}
