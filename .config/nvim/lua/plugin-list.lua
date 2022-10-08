@@ -19,11 +19,12 @@ function PluginList (use)
 	use 'kvrohit/rasmus.nvim'
 
 	-- LSP, Linting & Syntax
-	use {'neoclide/coc.nvim', branch = 'release'}
 	use { 'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
-	use 'dense-analysis/ale' -- linter integration
 	use 'mityu/vim-applescript' -- applescript syntax highlighting
+
+	-- use {'neoclide/coc.nvim', branch = 'release'}
+	-- use 'dense-analysis/ale' -- linter integration
 
 	-- Completion & Suggestion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
@@ -51,14 +52,11 @@ function PluginList (use)
 	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'}
 	use 'tpope/vim-abolish' -- various case conversions
 	use 'svermeulen/vim-subversive' -- substitution operator
-	use { 'numToStr/Comment.nvim', -- better comment operators than commentary; comment text object by tree-sitter text objects
-		config = function() require('Comment').setup() end }
 	use 'tpope/vim-commentary' -- comment text object
 
 	-- Objects & Motions
 	use 'mg979/vim-visual-multi' -- multi-cursor
 	use 'michaeljsmith/vim-indent-object'
-	use 'gcmt/wildfire.vim' -- incrementally expanding objects (alternative: terryma/vim-expand-region)
 	use {'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter'}
 	use 'justinmk/vim-sneak'
 	use 'matze/vim-move' -- move lines with auto-indention (alternative: vim.unimpaired)
