@@ -22,6 +22,7 @@ function PluginList (use)
 	use { 'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use 'mityu/vim-applescript' -- applescript syntax highlighting
+	use 'williamboman/mason.nvim' -- neovim lsp installer
 
 	-- use {'neoclide/coc.nvim', branch = 'release'}
 	-- use 'dense-analysis/ale' -- linter integration

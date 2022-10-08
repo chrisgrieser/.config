@@ -11,8 +11,18 @@ function hideAllExcept(appNotToHide)
 	for i = 1, #wins do
 		local app = wins[i]:application()
 		if not(app) then break end
+
 		local winScreen = wins[i]:screen()
-		if not(app:name() == appNotToHide) and winScreen == mainScreen then -- main screen as condition for two-screen setups
+
+		local isPip = false
+		if app:name() == "Brave Browser" or app:name() == "YouTube" then -- if Browser has PiP window, do not hide it
+			local browserWins = app:allWindows()
+			for j = 1, #browserWins do
+				if browserWins[j]:title() == "Picture in Picture" then isPip = true end
+			end
+		end
+
+		if not(app:name() == appNotToHide) and not(isPip) and winScreen == mainScreen then -- main screen as condition for two-screen setups
 			app:hide()
 		end
 	end
