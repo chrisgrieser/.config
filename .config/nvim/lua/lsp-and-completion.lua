@@ -145,28 +145,26 @@ lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = { -- https://github.com/sumneko/lua-language-server/wiki/Settings
-		Lua = {
-			runtime = {
-				version = 'LuaJIT', -- LuaJIT is used by neovim
-			},
-			completion = {
-				callSnippet = "both",
-				keywordSnippet = "both",
-			},
-			diagnostics = {
-				globals = {"vim", "use", "martax"},
-				disable = {"trailing-space", "lowercase-global"},
-			},
-			workspace = {
-				library =  {
-					home.."/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
-					home.."/.hammerspoon/lua",
-				}
-			},
-			telemetry = { enable = false },
-			hint = { settype = true },
-		}
+	Lua = {
+		runtime = { version = 'LuaJIT', },  -- LuaJIT is used by neovim
+		completion = {
+			callSnippet = "both",
+			keywordSnippet = "both",
+		},
+		diagnostics = {
+			globals = {"vim", "use", "martax"},
+			disable = {"trailing-space", "lowercase-global"},
+		},
+		workspace = {
+			library =  {
+				home.."/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
+				home.."/.hammerspoon/lua",
+			}
+		},
+		telemetry = { enable = false },
+		hint = { settype = true },
 	}
+}
 }
 
 lspConfig['cssls'].setup{
@@ -203,11 +201,4 @@ lspConfig['jsonls'].setup{
 	capabilities = capabilities,
 }
 
---------------------------------------------------------------------------------
 
-require("lsp_lines").setup()
-vim.diagnostic.config{ virtual_text = false } -- disable visual text since redundant
-
-
-
--- :

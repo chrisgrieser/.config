@@ -31,7 +31,6 @@ function PluginList ()
 	use 'williamboman/mason.nvim'
 	use {'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp' }
 	use 'mfussenegger/nvim-lint'
-	use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
 
 	-- Completion & Suggestion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
@@ -43,6 +42,7 @@ function PluginList ()
 			'hrsh7th/cmp-cmdline',
 			'dmitmel/cmp-cmdline-history',
 			'hrsh7th/cmp-emoji',
+			'onsails/lspkind.nvim', -- icons for the completion menu
 
 			'hrsh7th/cmp-nvim-lsp', -- lsp
 			'hrsh7th/cmp-nvim-lsp-signature-help', -- lsp
@@ -50,7 +50,7 @@ function PluginList ()
 
 			'saadparwaiz1/cmp_luasnip',
 			'L3MON4D3/LuaSnip', -- snippet engine
-			'rafamadriz/friendly-snippets', -- collection of common snippets
+			-- 'rafamadriz/friendly-snippets', -- collection of common snippets
 		}
 	}
 

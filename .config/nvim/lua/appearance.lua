@@ -68,13 +68,13 @@ g.gitgutter_sign_removed_above_and_below = '–'
 g.gitgutter_sign_modified_removed = '│'
 g.gitgutter_sign_priority = 10
 
--- ▪︎▴•  
+-- ▪︎▴• ▲  
 -- https://www.reddit.com/r/neovim/comments/qpymbb/lsp_sign_in_sign_columngutter/
-local signs = { 
+local signs = {
 	Error = "",
-	Warn = "",
-	Hint = "", 
-	Info = "" 
+	Warn = "▲",
+	Info = "" ,
+	Hint = "",
 }
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
@@ -102,8 +102,8 @@ require('lualine').setup {
 		lualine_a = {'mode'},
 		lualine_b = {{ currentFile }},
 		lualine_c = {{ alternateFile }},
-		lualine_x = {'diagnostics', 'diff'},
-		lualine_y = {'branch'},
+		lualine_x = {'diff'},
+		lualine_y = {'diagnostics'},
 		lualine_z = {'location', 'progress'},
 	},
 	options = {
