@@ -53,6 +53,9 @@ lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
 	settings = {
 		Lua = {
+			runtime = {
+				version = 'LuaJIT', -- Li
+			},
 			diagnostics = {
 				globals = {"vim", "use", "martax"},
 				disable = {"trailing-space", "lowercase-global"},
