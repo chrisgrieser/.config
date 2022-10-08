@@ -7,18 +7,16 @@ require("mason").setup({
 		}
 	}
 })
-
-require('mason-tool-installer').setup {
+require("mason-lspconfig").setup({
+	-- this plugin uses the lspconfig servernames, not mason servernames https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
 	ensure_installed = {
-		"lua-language-server",
-		"yaml-language-server",
-		"typescript-language-server",
+		"sumneko_lua",
+		"yamlls",
+		"tsserver",
 		"marksman",
-		"json-lsp",
-		"css-lsp",
-		"bash-language-server",
+		"jsonls",
+		"cssls",
+		"bashls",
 	},
-	auto_update = false,
-	run_on_start = true,
-	start_delay = 0, -- in ms
-}
+})
+

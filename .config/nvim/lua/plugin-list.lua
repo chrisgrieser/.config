@@ -3,15 +3,17 @@ function PluginList (use)
 	-- Package Management
 	use 'wbthomason/packer.nvim' -- packer manages itself
 	use 'dstein64/vim-startuptime' -- measure startup time with `:StartupTime`
-
-	use {'neovim/nvim-lspconfig', config = function() require("config.lsp").setup() end, }
+	use {'neovim/nvim-lspconfig', 
+		requires = {
+			'williamboman/mason-lspconfig.nvim',
+		}
+	}
 	use {'williamboman/mason.nvim', -- neovim lsp/linter installer
 		requires = {
 			'WhoIsSethDaniel/mason-tool-installer.nvim',
 			'williamboman/mason-lspconfig.nvim',
 		}
 	}
-
 
 	-- Themes
 	use 'folke/tokyonight.nvim'
