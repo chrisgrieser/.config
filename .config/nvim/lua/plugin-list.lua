@@ -30,8 +30,6 @@ function PluginList (use)
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
 	use 'mattn/emmet-vim' -- Emmet for CSS
 	use 'gelguy/wilder.nvim' -- suggestions for command line mode (: and /)
-	use {'rafamadriz/friendly-snippets', -- collection of common snippets
-		requires = 'neoclide/coc.nvim' } -- (coc.snippet is the actual requirement)
 
 	-- Appearance
 	use { 'p00f/nvim-ts-rainbow', requires = {'nvim-treesitter/nvim-treesitter'} } -- colored brackets

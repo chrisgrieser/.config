@@ -49,6 +49,14 @@ autocmd("FileType", {
 	end
 })
 
+-- Emmet
+autocmd("FileType", {
+	pattern = {"css"},
+	callback = function ()
+		keymap("i", ",,", "<Plug>(emmet-expand-abbr)", {silent = true})
+	end
+})
+
 --------------------------------------------------------------------------------
 
 -- Build System
