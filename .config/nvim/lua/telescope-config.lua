@@ -22,6 +22,9 @@ require("telescope").setup {
 		},
 	},
 	pickers = {
+		lsp_references = { prompt_prefix='⬅️', show_line=false, trim_text=true, include_declaration=false },
+		lsp_definitions = { prompt_prefix='➡️', show_line=false, trim_text=true },
+		lsp_document_symbols = { prompt_prefix='*', show_line=false},
 		keymaps = { prompt_prefix='🔘' },
 		help_tags = { prompt_prefix=':h' },
 		commands = { prompt_prefix=':' },

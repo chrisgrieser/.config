@@ -12,8 +12,7 @@ keymap("n", "<leader>?", "K") -- help page for word under cursor
 
 -- Theme Picker
 keymap("n", "<leader>T", function() telescope.colorscheme() end)
--- Tree Sitter toggle
-keymap("n", "<leader>S", ":TSToggle highlight<CR>")
+
 -- Highlights
 keymap("n", "<leader>H", function() telescope.highlights() end)
 
@@ -77,7 +76,7 @@ keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "<Esc>", ":nohl<CR>:echo<CR>", {silent = true}) -- clear highlights & shortmessage
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("n", "g-", function() telescope.current_buffer_fuzzy_find() end) -- alternative search
-keymap("n", "gs", function() telescope.treesitter() end) -- equivalent to Sublime's goto-symbol
+--keymap("n", "gs", function() telescope.treesitter() end) -- equivalent to Sublime's goto-symbol
 
 -- Marks
 keymap("", "ä", "`") -- Goto Mark

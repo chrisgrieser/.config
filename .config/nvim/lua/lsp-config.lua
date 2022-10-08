@@ -24,30 +24,31 @@ require("mason-lspconfig").setup({
 
 -- Mappings.
 local opts = { noremap=true, silent=true }
-vim.keymap.set('n', 'ge', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', 'gE', vim.diagnostic.goto_prev, opts)
+keymap('n', 'ge', vim.diagnostic.goto_next, opts)
+keymap('n', 'gE', vim.diagnostic.goto_prev, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-local
-	-- Enable completion triggered by <c-x><c-o>
-	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-	-- Mappings.
-	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	local bufopts = { noremap=true, silent=true, buffer=bufnr }
-	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-	vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set('n', 'gD', vim.lsp.buf.references, bufopts)
-	vim.keymap.set('n', '<leader>h', vim.lsp.buf.hover, bufopts)
-	vim.keymap.set('n', '<leader>R', vim.lsp.buf.rename, bufopts)
-	vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
+	-- Enable completion triggered by <c-x><c-o>
+	api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+	-- Mappings (See `:help vim.lsp.*` for documentation on any of the below functions)
+	local bufopts = { silent=true, buffer=true }
+	keymap('n', 'gd', function() telescope.lsp_definitions() end,  bufopts)
+	keymap('n', 'gD', function() telescope.lsp_references() end,  bufopts)
+	keymap('n', 'gs', function() telescope.lsp_document_symbols() end,  bufopts)
+	keymap('n', 'gy', vim.lsp.buf.type_definition, bufopts)
+	keymap('n', '<leader>h', vim.lsp.buf.hover, bufopts)
+	keymap('n', '<leader>R', vim.lsp.buf.rename, bufopts)
+	keymap('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
 end
 
-local lspConfig = require('lspconfig')
-local home = fn.expand("~")
 --------------------------------------------------------------------------------
 -- LANGUAGE-SPECIFIC SETUP
+local lspConfig = require('lspconfig')
+local home = fn.expand("~")
 
 lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
