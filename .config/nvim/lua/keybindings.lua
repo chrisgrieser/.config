@@ -41,7 +41,7 @@ keymap("", "L", "$")
 keymap({"v", "o"}, "J", "7j")
 keymap("", "K", "7k")
 
--- when reaching the last line, scroll down (scrolloff does not work at EOF)
+-- when reaching the last line, scroll down (since scrolloff does not work at EOF)
 function overscroll (action)
 	local curLine = fn.line(".")
 	local lastLine = fn.line("$")
@@ -117,22 +117,28 @@ keymap({"n", "v"}, "q" ,"<Plug>Commentary")
 keymap("n", "qq" ,"<Plug>CommentaryLine")
 keymap("n", "qu" ,"<Plug>Commentary<Plug>Commentary") -- undo comment
 keymap("o", "aq" ,"<Plug>Commentary")
+keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
 -- INFO gq and gQ mapped as goto next/prev comment via treesitter text obj
-keymap("n", "Q" , function(
-	local lineContent = fn.getline(".")
 
-	-- move cursor to EoL (necessary in case line has an "%s" already)
+-- append comment to current line
+keymap("n", "Q" , function()
+	local lineContent = fn.getline(".")
+	local newLineContent = lineContent.." "..bo.commentstring
+
 	local lineNum = api.nvim_win_get_cursor(0)[1]
 	local eolCol = #lineContent
-	api.nvim_win_set_cursor(0, {lineNum, eolCol})
+	local newCol, _ = newLineContent:find("%%s", eolCol) -- begin searching at eol to not match an existing "%s"
 
-	-- append commentstring & put cursor there
-	fn.setline(".", lineContent..bo.commentstring) 
-	cmd[[normal! /%s<CR>cgn]]
-))
+	local placeholderReplacement = " "
+	if lineContent == "" then placeholderReplacement = "" end -- avoids leading space when commenting empty lines
+	newLineContent = newLineContent:gsub("%%s", placeholderReplacement)
+	fn.setline(".", newLineContent)
 
+	api.nvim_win_set_cursor(0, {lineNum, newCol + 1}) -- +1 so it works like a, not i
+	cmd[[startinsert]]
+end)
 
-keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
+local fsfsfsf
 
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h") -- append space
