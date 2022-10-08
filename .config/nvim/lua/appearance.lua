@@ -52,6 +52,7 @@ cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-]*') ]]
 --------------------------------------------------------------------------------
 
 -- GUTTER
+opt.signcolumn = "yes:1"
 cmd[[highlight clear SignColumn]] -- transparent
 
 -- Git Gutter
