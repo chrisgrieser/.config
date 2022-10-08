@@ -38,6 +38,7 @@ vim:disableForApp('Sublime Text')
 	:disableForApp('Finder')
 	:disableForApp('Alfred')
 	:disableForApp('Neovide')
+	:disableForApp('neovide')
 
 --------------------------------------------------------------------------------
 

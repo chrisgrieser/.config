@@ -64,8 +64,8 @@ cmp.setup({
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = {
-			max_height = 30,
-			max_width = 50,
+			max_height = 20,
+			max_width = 40,
 		}
 	},
 	mapping = cmp.mapping.preset.insert({
@@ -82,7 +82,18 @@ cmp.setup({
 	}, {
 		{ name = 'emoji' },
 		{ name = 'buffer' },
-	})
+	}),
+	-- disable completion in comments https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-completion-in-certain-contexts-such-as-comments
+	enabled = function()
+		local context = require 'cmp.config.context'
+		-- keep command mode completion enabled when cursor is in a comment
+		if vim.api.nvim_get_mode().mode == 'c' then
+			return true
+		else
+			return not context.in_treesitter_capture("comment")
+			and not context.in_syntax_group("Comment")
+		end
+	end
 })
 
 -- don't use buffer in css completions
@@ -100,7 +111,7 @@ cmp.setup.filetype ("css", {
 cmp.setup.cmdline({ '/', '?' }, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
-		{ name = 'buffer' }
+		{ name = 'buffer', max_item_count = 20 }
 	}
 })
 
@@ -110,8 +121,8 @@ cmp.setup.cmdline(':', {
 	sources = cmp.config.sources({
 		{ name = 'path' }
 	}, {
-		{ name = 'cmdline' },
-		{ name = 'cmdline_history' },
+		{ name = 'cmdline', max_item_count = 15 },
+		{ name = 'cmdline_history', max_item_count = 5 },
 	})
 })
 
@@ -192,3 +203,11 @@ lspConfig['jsonls'].setup{
 	capabilities = capabilities,
 }
 
+--------------------------------------------------------------------------------
+
+require("lsp_lines").setup()
+vim.diagnostic.config{ virtual_text = false } -- disable visual text since redundant
+
+
+
+-- :

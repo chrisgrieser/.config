@@ -69,21 +69,17 @@ g.gitgutter_sign_modified_removed = '│'
 g.gitgutter_sign_priority = 10
 
 -- ▪︎▴•  
-local diagnosticIconError = ""
-local diagnosticIconWarning = ""
-local diagnosticIconInfo = ""
-
-local function lspSymbol(name, icon)
-	vim.fn.sign_define(
-		'DiagnosticSign' .. name,
-		{ text = icon, numhl = 'DiagnosticDefault' .. name }
-	)
+-- https://www.reddit.com/r/neovim/comments/qpymbb/lsp_sign_in_sign_columngutter/
+local signs = { 
+	Error = "",
+	Warn = "",
+	Hint = "", 
+	Info = "" 
+}
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-lspSymbol('Error', diagnosticIconError)
-lspSymbol('Warning', diagnosticIconWarning)
-lspSymbol('Information', diagnosticIconInfo)
-lspSymbol('Info', diagnosticIconInfo)
-lspSymbol('Hint', diagnosticIconInfo)
 
 --------------------------------------------------------------------------------
 
