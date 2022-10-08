@@ -67,16 +67,24 @@ g.gitgutter_sign_removed = '–'
 g.gitgutter_sign_removed_first_line = '–'
 g.gitgutter_sign_removed_above_and_below = '–'
 g.gitgutter_sign_modified_removed = '│'
+g.gitgutter_sign_priority = 10
 
 -- ▪︎▴•  
-g.ale_sign_error = " "
-g.ale_sign_warning = " "
-g.ale_sign_info = " "
-g.ale_sign_style_error = g.ale_sign_error
-g.ale_sign_style_warning = g.ale_sign_warning
+local diagnosticIconError = " "
+local diagnosticIconWarning = " "
+local diagnosticIconInfo = " "
 
-g.gitgutter_sign_priority = 10
-g.ale_sign_priority = 30
+local function lspSymbol(name, icon)
+	vim.fn.sign_define(
+		'DiagnosticSign' .. name,
+		{ text = icon, numhl = 'DiagnosticDefault' .. name }
+	)
+end
+lspSymbol('Error', diagnosticIconError)
+lspSymbol('Warning', diagnosticIconWarning)
+lspSymbol('Information', diagnosticIconInfo)
+lspSymbol('Info', diagnosticIconInfo)
+lspSymbol('Hint', diagnosticIconInfo)
 
 --------------------------------------------------------------------------------
 

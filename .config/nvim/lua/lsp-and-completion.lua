@@ -10,14 +10,6 @@ require("mason").setup({
 	}
 })
 
-cmd[[highlight LspDiagnosticsVirtualTextHint guifg=#554400 ctermfg=Blue]]
-cmd[[highlight DiagnosticHint guifg=#554400 ctermfg=Blue]]
-ffsf
-
-vim.fn.sign_define(
-  "LspDiagnosticsSignError",
-  { texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError" }
-)
 --------------------------------------------------------------------------------
 require("mason-lspconfig").setup({
 	ensure_installed = { -- this plugin uses the lspconfig servernames, not mason servernames https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
@@ -49,10 +41,12 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 	keymap('n', 'gD', function() telescope.lsp_references() end,  bufopts)
 	keymap('n', 'gs', function() telescope.lsp_document_symbols() end,  bufopts)
 	keymap('n', 'gy', vim.lsp.buf.type_definition, bufopts)
-	keymap('n', '<leader>h', vim.lsp.buf.hover, bufopts)
 	keymap('n', '<leader>R', vim.lsp.buf.rename, bufopts)
 	keymap('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
+	keymap('n', '<leader>f', vim.diagnostic.open_float, bufopts) -- diagnostic popup
+	keymap('n', '<leader>h', vim.lsp.buf.hover, bufopts) -- docs popup
 end
+
 
 --------------------------------------------------------------------------------
 -- AUTOCOMPLETION
@@ -61,12 +55,57 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
---------------------------------------------------------------------------------
--- LANGUAGE-SPECIFIC SETUP
-local lspConfig = require('lspconfig')
-local home = fn.expand("~")
+local cmp = require('cmp')
 
-require("lua-dev").setup() -- has to come before the configuration of sumneko-lua
+cmp.setup({
+	snippet = {
+		-- REQUIRED - you must specify a snippet engine
+		expand = function(args) require('luasnip').lsp_expand(args.body) end,
+	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
+	mapping = cmp.mapping.preset.insert({
+		['<C-b>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<Tab>'] = cmp.mapping.complete(),
+		['<Esc>'] = cmp.mapping.abort(),
+		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+	}),
+	sources = cmp.config.sources({
+		{ name = 'nvim_lsp' },
+		{ name = 'nvim_lua' },
+		{ name = 'luasnip' },
+	}, {
+		{ name = 'emoji' },
+		{ name = 'buffer' },
+	})
+})
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = 'buffer' }
+	}
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = 'path' }
+	}, {
+		{ name = 'cmdline' }
+	})
+})
+
+--------------------------------------------------------------------------------
+--  SETUP
+local lspConfig = require('lspconfig')
+local home = fn.expand("~") ---@diagnostic disable-line: missing-parameter
+
 lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
