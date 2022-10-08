@@ -69,9 +69,9 @@ g.gitgutter_sign_modified_removed = '│'
 g.gitgutter_sign_priority = 10
 
 -- ▪︎▴•  
-local diagnosticIconError = " "
-local diagnosticIconWarning = " "
-local diagnosticIconInfo = " "
+local diagnosticIconError = ""
+local diagnosticIconWarning = ""
+local diagnosticIconInfo = ""
 
 local function lspSymbol(name, icon)
 	vim.fn.sign_define(
@@ -103,11 +103,11 @@ end
 
 require('lualine').setup {
 	sections = {
-		lualine_a = {{ 'mode', fmt = function(str) return str end }},
+		lualine_a = {'mode'},
 		lualine_b = {{ currentFile }},
 		lualine_c = {{ alternateFile }},
-		lualine_x = {{'diagnostics', sources = { 'nvim_diagnostic'}}},
-		lualine_y = {'diff'},
+		lualine_x = {'diagnostics', 'diff'},
+		lualine_y = {'branch'},
 		lualine_z = {'location', 'progress'},
 	},
 	options = {
@@ -117,33 +117,4 @@ require('lualine').setup {
 		section_separators = { left = ' ', right = ' '}, -- nerd font: 'nf-ple'
 	},
 }
-
---------------------------------------------------------------------------------
--- WILDMENU
-
--- INFO: "UpdateRemotePlugins" may be necessary to make wilder work correctly
--- https://github.com/gelguy/wilder.nvim/issues/158
-
--- local wilder = require('wilder')
--- wilder.setup({modes = {':', '/', '?'}})
--- wilder.set_option('renderer', wilder.popupmenu_renderer(
--- 	wilder.popupmenu_border_theme({
--- 		highlighter = wilder.basic_highlighter(),
--- 		min_width = '30%',
--- 		min_height = '15%',
--- 		max_height = '50%',
--- 		left = {' ', wilder.popupmenu_devicons()},
--- 		reverse = 0,
--- 		border = 'rounded',
--- 		highlights = {
--- 			accent = wilder.make_hl('WilderAccent', 'Pmenu', {
--- 				{foreground = 'Magenta'}, -- term
--- 				{foreground = 'Magenta'}, -- cterm
--- 				{foreground = '#f4468f'} -- gui
--- 			}),
--- 		},
--- 	})
--- ))
-
-
 

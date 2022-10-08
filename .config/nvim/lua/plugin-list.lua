@@ -21,12 +21,12 @@ function PluginList ()
 	use 'Yazeed1s/minimal.nvim'
 	use 'kvrohit/rasmus.nvim'
 
-	-- Syntax
+	-- -- Syntax
 	use { 'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
 	use { 'nvim-treesitter/nvim-treesitter-context', requires = {'nvim-treesitter/nvim-treesitter'} }
 	use 'mityu/vim-applescript' -- applescript syntax highlighting
 
-	-- LSP
+	-- LSP & Linting
 	use {'neovim/nvim-lspconfig', requires = 'williamboman/mason-lspconfig.nvim' } -- neovim lsp/linter installer
 	use 'williamboman/mason.nvim'
 	use {'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp' }
@@ -34,20 +34,19 @@ function PluginList ()
 	-- Completion & Suggestion
 	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
 	use 'mattn/emmet-vim' -- Emmet for CSS
-	-- use 'gelguy/wilder.nvim' -- suggestions for command line mode
-
 	use {'hrsh7th/nvim-cmp', -- autocompletion
 		requires = { -- completion sources
 			'hrsh7th/cmp-buffer',
 			'hrsh7th/cmp-path',
 			'hrsh7th/cmp-cmdline',
 			'hrsh7th/cmp-emoji',
-			'rafamadriz/friendly-snippets', -- collection of common snippets
 
 			'folke/lua-dev.nvim', -- nvim itself
 			'hrsh7th/cmp-nvim-lsp', -- lsp
+
 			'saadparwaiz1/cmp_luasnip',
 			'L3MON4D3/LuaSnip', -- snippet engine
+			'rafamadriz/friendly-snippets', -- collection of common snippets
 		}
 	}
 

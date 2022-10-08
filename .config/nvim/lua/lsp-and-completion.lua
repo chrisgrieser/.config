@@ -12,7 +12,7 @@ require("mason").setup({
 
 --------------------------------------------------------------------------------
 require("mason-lspconfig").setup({
-	-- this plugin uses the lspconfig servernames, not mason servernames 
+	-- this plugin uses the lspconfig servernames, not mason servernames
 	-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
 	ensure_installed = {
 		"sumneko_lua",
@@ -57,8 +57,9 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local cmp = require('cmp')
 
+local cmp = require('cmp')
+-- :see
 cmp.setup({
 	snippet = {
 		-- REQUIRED a snippet engine must be specified and installed
@@ -71,6 +72,8 @@ cmp.setup({
 	},
 	mapping = cmp.mapping.preset.insert({
 		['<Esc>'] = cmp.mapping.abort(),
+		['<Tab>'] = cmp.mapping.select_next_item(),
+		['<S-Tab>'] = cmp.mapping.select_prev_item(),
 		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
 		['<C-Down>'] = cmp.mapping.scroll_docs(4),
@@ -91,7 +94,7 @@ cmp.setup.filetype ("css", {
 		{ name = 'luasnip' },
 	}, {
 		{ name = 'emoji' },
-	}	
+	}
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
