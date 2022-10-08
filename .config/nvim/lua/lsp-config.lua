@@ -45,10 +45,17 @@ end
 local lspConfig = require('lspconfig')
 
 --------------------------------------------------------------------------------
--- LANGUAGE-SPJJKFIC SETUP
+-- LANGUAGE-SPECIFIC SETUP
 
 lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = {"vim", "use"}
+			}
+		}
+	}
 }
 
 lspConfig['tsserver'].setup{
