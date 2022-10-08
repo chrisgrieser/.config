@@ -42,10 +42,12 @@ function PluginList ()
 			'hrsh7th/cmp-path',
 			'hrsh7th/cmp-cmdline',
 			'hrsh7th/cmp-emoji',
-			'hrsh7th/cmp-nvim-lua', -- nvim itself, similar to 'folke/lua-dev.nvim',
-			'hrsh7th/cmp-nvim-lsp', -- add nvim's lsp
-			'L3MON4D3/LuaSnip', -- snippet engine
+			'rafamadriz/friendly-snippets', -- collection of common snippets
+
+			'folke/lua-dev.nvim', -- nvim itself
+			'hrsh7th/cmp-nvim-lsp', -- lsp
 			'saadparwaiz1/cmp_luasnip',
+			'L3MON4D3/LuaSnip', -- snippet engine
 		}
 	}
 

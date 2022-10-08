@@ -55,7 +55,7 @@ matches:
     replace: nicht
   - trigger: ncoh
     replace: noch
-  - trigger: 'n#t '
+  - regex:   'n[#Ä]t '
     replace: "n't "
   - trigger: onyl
     replace: only
