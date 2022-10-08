@@ -87,7 +87,7 @@ cmp.setup({
 	}),
 	formatting = {
 		format = require('lspkind').cmp_format({
-			mode = "symbol",
+			mode = "symbol_text",
 			maxwidth = 40,
 			ellipsis_char = '…',
 			menu = {
@@ -123,16 +123,18 @@ cmp.setup.filetype ("css", {
 	}
 })
 
---
-
-
 
 
 
 cmp.setup.filetype ("lua", {
-	completion = {
-		keyword_pattern = "[[:alpha:]]" -- do not match the start of comments
-	},
+	source = {
+		{
+			name = 'nvim_lsp',
+			entry_filter = function(entry, _)
+				return entry:get_completion_item().insertText ~= "--#region"
+			end
+		},
+	}
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
