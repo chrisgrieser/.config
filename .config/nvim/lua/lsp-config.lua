@@ -45,16 +45,25 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 end
 
 --------------------------------------------------------------------------------
+-- AUTOCOMPLETION
+
+--Enable snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+--------------------------------------------------------------------------------
 -- LANGUAGE-SPECIFIC SETUP
 local lspConfig = require('lspconfig')
 local home = fn.expand("~")
 
+require("lua-dev").setup() -- has to come before the configuration of sumneko-lua
 lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
+	capabilities = capabilities,
 	settings = {
 		Lua = {
 			runtime = {
-				version = 'LuaJIT', -- Li
+				version = 'LuaJIT', -- LuaJIT is used by neovim
 			},
 			diagnostics = {
 				globals = {"vim", "use", "martax"},
@@ -75,29 +84,35 @@ lspConfig['sumneko_lua'].setup{
 
 lspConfig['cssls'].setup{
 	on_attach = on_attach,
+	capabilities = capabilities,
 	settings = {
 		css = {
 			lint = {
 				vendorPrefix = "ignore",
 				duplicateProperties = "error",
 			},
-			colorDecorators = { enable = true },
+			colorDecorators = { enable = true }, -- does not seem to work? 
 		}
 	}
 }
 
 lspConfig['tsserver'].setup{
 	on_attach = on_attach,
+	capabilities = capabilities,
 }
 
 lspConfig['marksman'].setup{
 	on_attach = on_attach,
+	capabilities = capabilities,
 }
 
 lspConfig['bashls'].setup{
 	on_attach = on_attach,
+	capabilities = capabilities,
 }
 
 lspConfig['jsonls'].setup{
 	on_attach = on_attach,
+	capabilities = capabilities,
 }
+
