@@ -56,11 +56,11 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 local cmp = require('cmp')
 
 cmp.setup({
-	snippet = {
-		-- REQUIRED a snippet engine must be specified and installed
+	snippet = { -- REQUIRED a snippet engine must be specified and installed
 		expand = function(args) require('luasnip').lsp_expand(args.body) end,
 	},
 	experimental = { ghost_text = true },
+
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = {
@@ -68,6 +68,7 @@ cmp.setup({
 			max_width = 40,
 		}
 	},
+
 	mapping = cmp.mapping.preset.insert({
 		['<Esc>'] = cmp.mapping.abort(),
 		['<Tab>'] = cmp.mapping.select_next_item(),
@@ -76,13 +77,28 @@ cmp.setup({
 		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
 		['<S-Down>'] = cmp.mapping.scroll_docs(4),
 	}),
+
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 	}, {
-		{ name = 'emoji' },
-		{ name = 'buffer' },
+		{ name = 'emoji', keyword_length = 2 },
+		{ name = 'buffer', keyword_length = 4 },
 	}),
+	formatting = {
+		format = require('lspkind').cmp_format({
+			mode = "symbol_text",
+			maxwidth = 40,
+			ellipsis_char = '…',
+			menu = {
+				buffer = "[B]",
+				nvim_lsp = "[LSP]",
+				luasnip = "[S]",
+				nvim_lua = "[Vim]",
+			}
+		}),
+	},
+
 	-- disable completion in comments https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-completion-in-certain-contexts-such-as-comments
 	enabled = function()
 		local context = require 'cmp.config.context'
@@ -103,7 +119,7 @@ cmp.setup.filetype ("css", {
 		{ name = 'cmp-nvim-lsp-signature-help' },
 		{ name = 'luasnip' },
 	}, {
-		{ name = 'emoji' },
+		{ name = 'emoji', keyword_length = 2 },
 	}
 })
 
@@ -111,7 +127,7 @@ cmp.setup.filetype ("css", {
 cmp.setup.cmdline({ '/', '?' }, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
-		{ name = 'buffer', max_item_count = 20 }
+		{ name = 'buffer', max_item_count = 20, keyword_length = 4 }
 	}
 })
 
@@ -121,8 +137,8 @@ cmp.setup.cmdline(':', {
 	sources = cmp.config.sources({
 		{ name = 'path' }
 	}, {
-		{ name = 'cmdline', max_item_count = 15 },
-		{ name = 'cmdline_history', max_item_count = 5 },
+		{ name = 'cmdline', max_item_count = 10 },
+		{ name = 'cmdline_history', max_item_count = 3 },
 	})
 })
 
@@ -162,7 +178,10 @@ lspConfig['sumneko_lua'].setup{
 			}
 		},
 		telemetry = { enable = false },
-		hint = { settype = true },
+		hint = {
+			enable = true,
+			settype = true
+		},
 	}
 }
 }
@@ -200,5 +219,4 @@ lspConfig['jsonls'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 }
-
 
