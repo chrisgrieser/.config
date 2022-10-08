@@ -92,7 +92,7 @@ opt.laststatus = 3 -- show one status line for all splits
 
 -- folding
 opt.foldmethod = "expr"
-cmd[[set foldexpr=nvim_treesitter#foldexpr()]] -- use treesitter for folding https://github.com/nvim-treesitter/nvim-treesitter
+opt.foldexpr = "nvim_treesitter#foldexpr()" -- use treesitter for folding https://github.com/nvim-treesitter/nvim-treesitter
 opt.foldenable = false -- do not fold on start
 opt.foldminlines = 2
 augroup("rememberFolds", {}) -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
