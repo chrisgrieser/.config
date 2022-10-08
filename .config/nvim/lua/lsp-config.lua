@@ -1,3 +1,5 @@
+require("utils")
+--------------------------------------------------------------------------------
 require("mason").setup({
 	ui = {
 		icons = {
@@ -27,7 +29,7 @@ vim.keymap.set('n', 'gE', vim.diagnostic.goto_prev, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-local
 	-- Enable completion triggered by <c-x><c-o>
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -39,11 +41,11 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', 'gD', vim.lsp.buf.references, bufopts)
 	vim.keymap.set('n', '<leader>h', vim.lsp.buf.hover, bufopts)
 	vim.keymap.set('n', '<leader>R', vim.lsp.buf.rename, bufopts)
-	vim.keymap.set('n', '<leader>,', vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
 end
 
 local lspConfig = require('lspconfig')
-
+local home = fn.expand("~")
 --------------------------------------------------------------------------------
 -- LANGUAGE-SPECIFIC SETUP
 
@@ -52,8 +54,31 @@ lspConfig['sumneko_lua'].setup{
 	settings = {
 		Lua = {
 			diagnostics = {
-				globals = {"vim", "use"}
-			}
+				globals = {"vim", "use", "martax"},
+				disable = {"trailing-space", "lowercase-global"},
+			},
+			workspace = {
+				library =  {
+					home.."/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
+					home.."/.hammerspoon/lua",
+					home.."/.config/nvim/lua"
+				}
+			},
+			telemetry = { enable = false },
+			hint = { settype = true },
+		}
+	}
+}
+
+lspConfig['cssls'].setup{
+	on_attach = on_attach,
+	settings = {
+		css = {
+			lint = {
+				vendorPrefix = "ignore",
+				duplicateProperties = "error",
+			},
+			colorDecorators = { enable = true },
 		}
 	}
 }
@@ -71,9 +96,5 @@ lspConfig['bashls'].setup{
 }
 
 lspConfig['jsonls'].setup{
-	on_attach = on_attach,
-}
-
-lspConfig['cssls'].setup{
 	on_attach = on_attach,
 }
