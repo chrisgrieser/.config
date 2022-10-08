@@ -12,7 +12,9 @@ require("mason").setup({
 
 --------------------------------------------------------------------------------
 require("mason-lspconfig").setup({
-	ensure_installed = { -- this plugin uses the lspconfig servernames, not mason servernames https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
+	-- this plugin uses the lspconfig servernames, not mason servernames 
+	-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
+	ensure_installed = {
 		"sumneko_lua",
 		"yamlls",
 		"tsserver", -- ts/js
@@ -59,28 +61,37 @@ local cmp = require('cmp')
 
 cmp.setup({
 	snippet = {
-		-- REQUIRED - you must specify a snippet engine
+		-- REQUIRED a snippet engine must be specified and installed
 		expand = function(args) require('luasnip').lsp_expand(args.body) end,
 	},
+	experimental = { ghost_text = true },
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
 	mapping = cmp.mapping.preset.insert({
-		['<C-b>'] = cmp.mapping.scroll_docs(-4),
-		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<Tab>'] = cmp.mapping.complete(),
 		['<Esc>'] = cmp.mapping.abort(),
 		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
+		['<C-Down>'] = cmp.mapping.scroll_docs(4),
 	}),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
-		{ name = 'nvim_lua' },
 		{ name = 'luasnip' },
 	}, {
 		{ name = 'emoji' },
 		{ name = 'buffer' },
 	})
+})
+
+-- don't use buffer in css completions
+cmp.setup.filetype ("css", {
+	sources = {
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
+	}, {
+		{ name = 'emoji' },
+	}	
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
@@ -102,17 +113,30 @@ cmp.setup.cmdline(':', {
 })
 
 --------------------------------------------------------------------------------
---  SETUP
+-- LSP-SERVER-SPECIFIC SETUP
 local lspConfig = require('lspconfig')
 local home = fn.expand("~") ---@diagnostic disable-line: missing-parameter
+
+require("lua-dev").setup({ -- INFO: this block must come before LSP setup
+library = {
+	enabled = true,
+	-- you can also specify the list of plugins to make available as a workspace library
+	-- plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
+	plugins = false,
+},
+})
 
 lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
-	settings = {
+	settings = { -- https://github.com/sumneko/lua-language-server/wiki/Settings
 		Lua = {
 			runtime = {
 				version = 'LuaJIT', -- LuaJIT is used by neovim
+			},
+			completion = {
+				callSnippet = "both",
+				keywordSnippet = "both",
 			},
 			diagnostics = {
 				globals = {"vim", "use", "martax"},
@@ -122,7 +146,6 @@ lspConfig['sumneko_lua'].setup{
 				library =  {
 					home.."/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
 					home.."/.hammerspoon/lua",
-					home.."/.config/nvim/lua"
 				}
 			},
 			telemetry = { enable = false },

@@ -43,9 +43,8 @@ cmd[[call matchadd('WhiteSpaceBol', '^ \+')]]
 
 -- Annotations
 cmd[[highlight def link myAnnotations Todo]] -- use same styling as "TODO"
-cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE') ]]
+cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED') ]]
 
--- Underline URLs
 cmd[[highlight urls cterm=underline term=underline gui=underline]]
 cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-]*') ]]
 
