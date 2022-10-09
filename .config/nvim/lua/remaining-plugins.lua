@@ -30,9 +30,21 @@ g.undotree_DiffAutoOpen = 0
 g.undotree_SetFocusWhenToggle = 1
 g.undotree_ShortIndicators = 1 -- for the relative date
 g.undotree_HelpLine = 0 -- 0 hides the "Press ? for help"
-cmd[[ function g:Undotree_CustomMap()
+cmd[[ function! g:Undotree_CustomMap()
 	nmap <buffer> <C-j> <plug>UndotreePreviousState
 	nmap <buffer> <C-k> <plug>UndotreeNextState
 	nmap <buffer> J jjjjjjj
 	nmap <buffer> K 7k
-endfunc ]]
+	endfunc ]]
+
+-- nvim-lint
+require('lint').linters_by_ft = {
+	css = {'styelint'},
+}
+
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+	callback = function()
+		require("lint").try_lint()
+	end,
+})
