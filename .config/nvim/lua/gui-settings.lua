@@ -6,7 +6,8 @@ darkTheme = "tokyonight-moon"
 lightTheme = "tokyonight-day"
 
 g.gui_font_default_size = 26
-g.gui_font_face = "JetBrainsMonoNL Nerd Font"
+g.gui_font_face = "Hack Nerd Font Mono"
+-- g.gui_font_face = "Input,JetBrainsMonoNL Nerd Font"
 
 --------------------------------------------------------------------------------
 

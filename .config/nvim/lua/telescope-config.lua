@@ -12,13 +12,12 @@ require("telescope").setup {
 				["?"] = "which_key",
 			},
 		},
-		layout_strategy = 'flex',
+		layout_strategy = 'horizontal',
 		layout_config = {
 			height = 0.92,
 			width = 0.97,
-			preview_cutoff = 30,
-			horizontal = { preview_width = 40 },
-			vertical = { preview_height = 30 },
+			preview_cutoff = 25,
+			preview_width = 40,
 		},
 	},
 	pickers = {

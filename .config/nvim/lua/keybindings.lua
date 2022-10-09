@@ -111,9 +111,9 @@ keymap("o", "Q", "i'") -- change single [Q]uote
 keymap("o", "p", '}') -- rest of the [p]aragraph
 keymap("o", "P", '{') -- beginning of the [P]aragraph
 
--- Comments (mnemonic: [q]uiet text)
+-- COMMENTS (mnemonic: [q]uiet text)
 keymap({"n", "v"}, "q" ,"<Plug>Commentary")
-keymap("n", "qq" ,"<Plug>CommentaryLine")
+keymap("n", "qq" ,"mz<Plug>CommentaryLine`z")
 keymap("n", "qu" ,"<Plug>Commentary<Plug>Commentary") -- undo comment
 keymap("o", "aq" ,"<Plug>Commentary")
 keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
