@@ -1,0 +1,5 @@
+# https://kampfkarren.github.io/selene/usage/configuration.html
+
+[rules]
+undefined_variable = "allow"
+unscoped_variables = "allow"
