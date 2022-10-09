@@ -26,8 +26,8 @@ table.insert(stylelintArgs, 1, "--quiet")
 
 -- fix yamllint config
 local yamllintArgs = require("lint.linters.yamllint").args
-table.insert(yamllintArgs, 1, '"$HOME/.config/.yamllint.yaml"')
-table.insert(yamllintArgs, 1, "--config-file")
+table.insert(yamllintArgs, "--config-file")
+table.insert(yamllintArgs, '"$HOME/.config/.yamllint.yaml"')
 
 -- force zsh linting
 local shellcheckArgs = require("lint.linters.shellcheck").args
@@ -36,6 +36,6 @@ table.insert(shellcheckArgs, 1, "--shell")
 
 -- selene
 local seleneArgs = require("lint.linters.selene").args
-table.insert(seleneArgs, 1, "bash")
-table.insert(seleneArgs, 1, "--shell")
+table.insert(seleneArgs, "--config")
+table.insert(seleneArgs, '"/Users/chrisgrieser/dotfiles/linter rclines/selene.toml"')
 
