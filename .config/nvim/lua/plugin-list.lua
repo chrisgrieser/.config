@@ -72,18 +72,23 @@ function PluginList ()
 	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'}
 	use 'tpope/vim-abolish' -- various case conversions
 	use 'svermeulen/vim-subversive' -- substitution operator
-	use 'tpope/vim-commentary' -- comment text object
+	use 'tpope/vim-commentary'
 
-	-- Objects & Motions
-	use 'mg979/vim-visual-multi' -- multi-cursor
+	-- Text Objects
+	use 'andrewferrier/textobj-diagnostic.nvim' -- nvim diagnostics as text object
 	use 'michaeljsmith/vim-indent-object'
 	use {'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter'}
+
+	-- Movements
+	use 'mg979/vim-visual-multi' -- multi-cursor
 	use 'justinmk/vim-sneak'
+
+	-- Line Editing
 	use 'matze/vim-move' -- move lines with auto-indention (alternative: vim.unimpaired)
+	use 'AndrewRadev/splitjoin.vim'
 
 	-- Misc
 	use 'dbeniamine/cheat.sh-vim' -- docs search
-	use 'AndrewRadev/splitjoin.vim'
 	use 'mbbill/undotree' -- undo history nagivation
 
 end

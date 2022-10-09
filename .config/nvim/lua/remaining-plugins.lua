@@ -37,3 +37,4 @@ cmd[[ function! g:Undotree_CustomMap()
 	nmap <buffer> K 7k
 	endfunc ]]
 
+
