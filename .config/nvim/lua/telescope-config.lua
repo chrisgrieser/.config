@@ -5,7 +5,7 @@ require("telescope").setup {
 		selection_caret = "⟐ ",
 		prompt_prefix = "❱ ",
 		path_display = { "tail" },
-		file_ignore_patterns = { "packer_compiled.lua", ".DS_Store", ".git/", ".spl" },
+		file_ignore_patterns = { "packer_compiled.lua", ".DS_Store", ".git/", ".spl", "node_modules" },
 		mappings = {
 			i = {
 				["<Esc>"] = require('telescope.actions').close, -- close w/ one esc
@@ -26,8 +26,8 @@ require("telescope").setup {
 		lsp_definitions = { prompt_prefix='➡️', show_line=false, trim_text=true },
 		lsp_document_symbols = { prompt_prefix='*', show_line=false},
 		keymaps = { prompt_prefix='🔘' },
-		help_tags = { prompt_prefix=':h' },
-		commands = { prompt_prefix=':' },
+		help_tags = { prompt_prefix=':h ' },
+		commands = { prompt_prefix=': ' },
 		oldfiles = { prompt_prefix='🕔' },
 		highlights = { prompt_prefix='🎨' },
 		marks = { prompt_prefix="'" },

@@ -8,7 +8,8 @@ keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
 
 -- search keymaps
 keymap("n", "?", function() telescope.keymaps() end)
-keymap("n", "<leader>?", "K") -- help page for word under cursor
+keymap("n", "g?", "K") -- help page for word under cursor
+keymap("n", "<leader>?", function() telescope.help_tags() end)
 
 -- Theme Picker
 keymap("n", "<leader>T", function() telescope.colorscheme() end)

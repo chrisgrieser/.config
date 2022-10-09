@@ -70,16 +70,13 @@ keymap("n", "<leader>r", function()
 			cmd[[write | source % | echo "Neovim config reloaded."]]
 		else
 			os.execute('open -g "hammerspoon://hs-reload"')
-			print("Reloading Hammerspoon config…")
 		end
 
 	elseif bo.filetype == "yaml" then
 		os.execute[[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
-		print("Compiling Karabiner config…")
 
 	elseif bo.filetype == "typescript" then
 		cmd[[!npm run build]]
-		print("Building with npm…")
 
 	elseif bo.filetype == "applescript" then
 		cmd[[:AppleScriptRun]]
