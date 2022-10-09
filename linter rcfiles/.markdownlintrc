@@ -1,5 +1,7 @@
 {
   "no-hard-tabs": false,
+  "single-trailing-newline": false,
+  "no-trailing-spaces": false,
   "line-length": false,
   "first-line-heading": false,
   "no-inline-html": false,
