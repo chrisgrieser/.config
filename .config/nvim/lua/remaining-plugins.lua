@@ -37,14 +37,3 @@ cmd[[ function! g:Undotree_CustomMap()
 	nmap <buffer> K 7k
 	endfunc ]]
 
--- nvim-lint
-require('lint').linters_by_ft = {
-	css = {'styelint'},
-}
-
-
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	callback = function()
-		require("lint").try_lint()
-	end,
-})
