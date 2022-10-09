@@ -112,8 +112,15 @@ autocmd("BufNewFile", {
 keymap("n", "gh", function()
 	if not(b.hrComment) then
 		print("No hr for this filetype defined.")
+	elseif type(b.hrComment) == "table" then
+		fn.append('.', b.hrComment) ---@diagnostic disable-line: param-type-mismatch
+
+		local lineNum = api.nvim_win_get_cursor(0)[1] + 2
+		local colNum = #b.hrComment[2] + 1
+		api.nvim_win_set_cursor(0, {lineNum, colNum})
+		cmd[[startinsert]]
 	else
-		fn.setline('.', b.hrComment)
+		fn.append('.', {b.hrComment, ""})
 	end
 end)
 
@@ -141,6 +148,11 @@ autocmd( "FileType", {
 autocmd( "FileType", {
 	group = "horizontalRuler",
 	pattern = {"css"},
-	callback = function() b.hrComment = "/* ───────────────────────────────────────────────── */\n/* << XXX\n──────────────────────────────────────────────────── */" end
+	callback = function() b.hrComment = {
+		"/* ───────────────────────────────────────────────── */",
+		"/* << ",
+		"──────────────────────────────────────────────────── */",
+		"",
+	} end,
 })
 
