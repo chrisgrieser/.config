@@ -8,10 +8,10 @@ function dockSwitcher (targetMode)
 	hs.execute("zsh ./helpers/dock-switching/dock-switcher.sh --load "..targetMode)
 end
 
-function sublimeFontSize (size)
+function neovideFontSize (size)
 	local toSize = tostring(size)
 	hs.execute("VALUE="..toSize..[[
-		SUBLIME_CONFIG="$HOME/Library/Application Support/Sublime Text/Packages/User/Preferences.sublime-settings"
+		SUBLIME_CONFIG="/Users/chrisgrieser/dotfiles/.config/nvim/lua/keybindings.lua"
 		sed -i '' "s/\"font_size\": .*,/\"font_size\": $VALUE,/" "$SUBLIME_CONFIG"
 	]])
 end
@@ -113,7 +113,7 @@ function homeModeLayout ()
 			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
 		end,
 		function()
-			sublimeFontSize(15)
+			neovideFontSize(15)
 			alacrittyFontSize(26)
 		end
 	):start()
@@ -166,7 +166,7 @@ function officeModeLayout ()
 			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
 		end,
 		function()
-			sublimeFontSize(13)
+			neovideFontSize(13)
 			alacrittyFontSize(24)
 		end
 	):start()
@@ -209,7 +209,7 @@ function motherHomeModeLayout()
 	killIfRunning("Twitch")
 	privateClosers() ---@diagnostic disable-line: undefined-global
 
-	sublimeFontSize(14)
+	neovideFontSize(14)
 	alacrittyFontSize(25)
 	dockSwitcher("home")
 
