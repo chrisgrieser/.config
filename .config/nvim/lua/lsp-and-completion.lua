@@ -68,9 +68,9 @@ cmp.setup({
 	mapping = {
 		['<Tab>'] = cmp.mapping.select_next_item(),
 		['<S-Tab>'] = cmp.mapping.select_prev_item(),
-		['<Up>'] = cmp.mapping.select_next_item(),
-		['<Down>'] = cmp.mapping.select_prev_item(),
-		['<Esc>'] = cmp.mapping.abort(),
+		['<Down>'] = cmp.mapping.select_next_item(),
+		['<Up>'] = cmp.mapping.select_prev_item(),
+		['<Esc>'] = cmp.mapping.close(), -- close() leaves the current text, abort() restores pre-completion situation
 		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
 		['<S-Down>'] = cmp.mapping.scroll_docs(4),
@@ -101,8 +101,6 @@ cmp.setup({
 		local context = require 'cmp.config.context'
 		if vim.api.nvim_get_mode().mode == 'c' then -- keep command mode completion enabled when cursor is in a comment
 			return true
-		elseif vim.fn.getline("."):match("%s*%-%-") then ---@diagnostic disable-line: undefined-field
-			return false
 		else
 			return not context.in_treesitter_capture("comment")
 			and not context.in_syntax_group("Comment")

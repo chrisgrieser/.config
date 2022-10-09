@@ -46,7 +46,7 @@ autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
 -- editor
 opt.cursorline = true -- by default underline, look changed in appearnce
 opt.scrolloff = 12
-opt.sidescrolloff = 17
+opt.sidescrolloff = 21
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set

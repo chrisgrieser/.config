@@ -9,16 +9,14 @@ function dockSwitcher (targetMode)
 end
 
 function neovideFontSize (size)
-	local toSize = tostring(size)
-	hs.execute("VALUE="..toSize..[[
-		SUBLIME_CONFIG="/Users/chrisgrieser/dotfiles/.config/nvim/lua/keybindings.lua"
-		sed -i '' "s/\"font_size\": .*,/\"font_size\": $VALUE,/" "$SUBLIME_CONFIG"
+	hs.execute("VALUE="..tostring(size)..[[
+		VIM_GUI_CONFIG="$HOME/dotfiles/.config/nvim/lua/gui-settings.lua"
+		sed -i '' "s/g.gui_font_default_size = .*/g.gui_font_default_size = $VALUE/" "$VIM_GUI_CONFIG"
 	]])
 end
 
 function alacrittyFontSize (size)
-	local toSize = tostring(size)
-	hs.execute("VALUE="..toSize..[[
+	hs.execute("VALUE="..tostring(size)..[[
 		ALACRITTY_CONFIG="$HOME/.config/alacritty/alacritty.yml"
 		MAN_PAGE_CONFIG="$HOME/.config/alacritty/man-page.yml"
 		sed -i '' "s/size: .*/size: $VALUE/" "$ALACRITTY_CONFIG"
@@ -277,6 +275,7 @@ wf_appsOnMouseScreen = wf.new({
 
 wf_appsOnMouseScreen:subscribe(wf.windowCreated, function (newWindow)
 	local mouseScreen = hs.mouse.getCurrentScreen()
+	if not(mouseScreen) then return end
 	local screenOfWindow = newWindow:screen()
 	if isProjector() and not(mouseScreen:name() == screenOfWindow:name()) then
 		newWindow:moveToScreen(mouseScreen)
