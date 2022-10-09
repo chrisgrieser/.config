@@ -45,6 +45,7 @@ ln -sf "$DOTFILE_FOLDER/zsh/.zshrc" ~
 [[ -e ~/.zprofile ]] && rm -rf ~/.zprofile
 ln -sf "$DOTFILE_FOLDER/zsh/.zprofile" ~
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
+ln -sf "$DOTFILE_FOLDER/.config/nano/nanorc" ~/.nanorc
 
 # .config
 [[ -e ~/.config ]] && rm -rf ~/.config
