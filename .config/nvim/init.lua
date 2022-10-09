@@ -13,14 +13,10 @@ if (g.neovide or g.goneovim) then
 	require("color-utilities")
 end
 
-if g.started_by_firenvim then
-	require("firenvim-config")
-else
-	require("telescope-config")
-	require("treesitter-config")
-	require("cheat-sh-config")
-	require("lsp-and-completion")
-	require("linter")
-	require("appearance") -- should come after gui settings
-end
+require("telescope-config")
+require("treesitter-config")
+require("cheat-sh-config")
+require("lsp-and-completion")
+require("linter")
+require("appearance") -- should come after gui settings
 
