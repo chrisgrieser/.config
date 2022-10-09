@@ -56,16 +56,19 @@ cmd[[highlight clear SignColumn]] -- transparent
 -- Git Gutter
 g.gitgutter_map_keys = 0 -- disable gitgutter mappings I don't use anyway
 
-cmd[[highlight GitGutterAdd    guifg=Green  ctermfg=Green]]
-cmd[[highlight GitGutterChange guifg=Yellow ctermfg=Yellow]]
-cmd[[highlight GitGutterDelete guifg=Red    ctermfg=Red]]
+cmd[[highlight GitGutterAdd    ctermfg=Green]]
+cmd[[highlight GitGutterChange ctermfg=Yellow]]
+cmd[[highlight GitGutterDelete ctermfg=Red]]
 g.gitgutter_sign_added = '│'
 g.gitgutter_sign_modified = '│'
 g.gitgutter_sign_removed = '–'
 g.gitgutter_sign_removed_first_line = '–'
 g.gitgutter_sign_removed_above_and_below = '–'
 g.gitgutter_sign_modified_removed = '│'
-g.gitgutter_sign_priority = 10
+g.gitgutter_sign_priority = 9 -- 10 is used by nvim diagnostics
+
+--------------------------------------------------------------------------------
+-- DIAGNOSTICS
 
 -- ▪︎▴• ▲  
 -- https://www.reddit.com/r/neovim/comments/qpymbb/lsp_sign_in_sign_columngutter/
@@ -79,6 +82,12 @@ for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+-- use straight underlines instead of curly underlines
+cmd[[highlight DiagnosticUnderlineError gui=underline]]
+cmd[[highlight DiagnosticUnderlineWarn gui=underline]]
+cmd[[highlight DiagnosticUnderlineHint gui=underline]]
+cmd[[highlight DiagnosticUnderlineInfo gui=underline]]
 
 --------------------------------------------------------------------------------
 
