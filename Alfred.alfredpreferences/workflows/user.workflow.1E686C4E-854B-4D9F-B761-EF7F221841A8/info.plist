@@ -8,19 +8,6 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
-		<key>3FF35894-CFA2-419B-9E42-F55573EF95B9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F6DAF10C-E8B5-49CA-B86B-DE30E7C70191</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<array/>
 		<key>5B39FA3E-033D-4E8E-A929-20601496C43E</key>
@@ -159,55 +146,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>hh</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>hs-functions-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Hammerspoon Functions Search...</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>3FF35894-CFA2-419B-9E42-F55573EF95B9</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -251,31 +189,6 @@ window_name</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># using full path makes this work even if `subl` hasn't been added to PATH
-
-"/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "$*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>F6DAF10C-E8B5-49CA-B86B-DE30E7C70191</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -523,17 +436,6 @@ open -g "hammerspoon://split?app=$*"</string>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
-		<key>3FF35894-CFA2-419B-9E42-F55573EF95B9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>functions</string>
-			<key>xpos</key>
-			<real>515</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<dict>
 			<key>colorindex</key>
@@ -625,15 +527,6 @@ open -g "hammerspoon://split?app=$*"</string>
 			<real>175</real>
 			<key>ypos</key>
 			<real>175</real>
-		</dict>
-		<key>F6DAF10C-E8B5-49CA-B86B-DE30E7C70191</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>670</real>
-			<key>ypos</key>
-			<real>15</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

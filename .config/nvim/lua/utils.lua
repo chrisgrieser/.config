@@ -1,5 +1,3 @@
----@diagnostic disable: lowercase-global
-
 opt = vim.opt -- global option
 g = vim.g -- global variable
 api = vim.api
