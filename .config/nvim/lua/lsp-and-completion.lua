@@ -13,8 +13,12 @@ keymap('n', 'gs', function() telescope.treesitter() end, {silent = true}) -- fal
 
 vim.diagnostic.config{
 	float = { border = "rounded" },
+	virtualtext = {
+		prefix = "a"
+		source = true
+	}
 }
-
+fsfs
 -- show diagnostic under cursor as float
 opt.updatetime = 1000 -- ms until float is shown
 augroup("diagnostic-float", {})
