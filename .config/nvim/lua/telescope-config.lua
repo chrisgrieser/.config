@@ -17,7 +17,6 @@ require("telescope").setup {
 			height = 0.92,
 			width = 0.97,
 			preview_cutoff = 25,
-			preview_width = 40,
 		},
 	},
 	pickers = {
@@ -37,7 +36,14 @@ require("telescope").setup {
 		colorscheme = { enable_preview = true, prompt_prefix='🎨' },
 		find_files = { cwd='%:p:h', prompt_prefix='📂', hidden=true },
 		treesitter = { show_line=false, prompt_prefix='🌳' },
+	},
+	extensions = {
+		["ui-select"] = {
+			require("telescope.themes").get_dropdown {
+			-- even more opts
+			}
+		}
 	}
 }
-
-
+fsfs
+require("telescope").load_extension("ui-select")
