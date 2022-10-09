@@ -16,7 +16,7 @@ vim.diagnostic.config{
 }
 
 -- show diagnostic under cursor as float
-opt.updatetime = 1500 -- ms until float is shown
+opt.updatetime = 1000 -- ms until float is shown
 augroup("diagnostic-float", {})
 autocmd("CursorHold", {
 	group = "diagnostic-float",
