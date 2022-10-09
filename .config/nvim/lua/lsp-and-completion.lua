@@ -4,21 +4,28 @@ require("utils")
 -- https://github.com/williamboman/mason-lspconfig.nvim#setup
 --------------------------------------------------------------------------------
 
--- DIAGNOTICS (in general, also applies to linters etc)
+-- DIAGNOTICS (in general, also applies to nvim-lint etc.)
 local opts = { noremap=true, silent=true }
 keymap('n', 'ge', vim.diagnostic.goto_next, opts)
 keymap('n', 'gE', vim.diagnostic.goto_prev, opts)
 keymap('n', 'gs', function() telescope.treesitter() end, {silent = true}) -- fallback for languages without an action LSP
 
 
+function formatDiagnosticMessage(diagnostic)
+	return diagnostic.message.." ("..tostring(diagnostic.code)..")"
+end
+
 vim.diagnostic.config{
-	float = { border = "rounded" },
-	virtualtext = {
-		prefix = "a"
-		source = true
+	virtual_text = {
+		format = formatDiagnosticMessage,
+	},
+	float = {
+		source = "if_many",
+		border = "rounded",
+		format = formatDiagnosticMessage,
 	}
 }
-fsfs
+
 -- show diagnostic under cursor as float
 opt.updatetime = 1000 -- ms until float is shown
 augroup("diagnostic-float", {})
@@ -61,7 +68,7 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 	keymap('n', 'gd', function() telescope.lsp_definitions() end, bufopts)
 	keymap('n', 'gD', function() telescope.lsp_references() end, bufopts)
 	keymap('n', 'gs', function() telescope.lsp_document_symbols() end, bufopts) -- overrides treesitter symbols browsing
-	keymap('n', 'gy', vim.lsp.buf.type_definition, bufopts)
+	keymap('n', 'gy', function() telescope.lsp_type_definitions() end, bufopts)
 	keymap('n', '<leader>R', vim.lsp.buf.rename, bufopts)
 	keymap('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
 	keymap('n', '<leader>h', vim.lsp.buf.hover, bufopts) -- docs popup
