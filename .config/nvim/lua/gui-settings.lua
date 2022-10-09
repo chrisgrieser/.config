@@ -5,10 +5,8 @@ require("utils")
 darkTheme = "tokyonight-moon"
 lightTheme = "tokyonight-day"
 
-g.gui_font_default_size = 15
--- g.gui_font_face = "Input,Symbols Nerd Font"
--- g.gui_font_face = "Hack Nerd Font Mono"
--- g.gui_font_face = "Input,JetBrainsMonoNL Nerd Font"
+g.gui_font_default_size = 25.5
+-- g.gui_font_face = "JetBrainsMonoNL Nerd Font"
 g.gui_font_face = "Input Nerd Font"
 
 --------------------------------------------------------------------------------
@@ -18,12 +16,14 @@ local function light()
 	cmd("colorscheme "..lightTheme)
 	api.nvim_set_option('background', 'light')
 	cmd[[highlight TreesitterContext guibg=DarkGrey]]
+	g.neovide_transparency = 0.92
 end
 
 local function dark()
 	cmd("colorscheme "..darkTheme)
 	api.nvim_set_option('background', 'dark')
 	cmd[[highlight TreesitterContext guibg=#191726]]
+	g.neovide_transparency = 0.97
 end
 
 -- toggle theme with OS
@@ -90,7 +90,6 @@ keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true}
 g.neovide_cursor_animation_length = 0.01
 g.neovide_cursor_trail_size = 0.9
 g.neovide_scroll_animation_length = 0.8
-g.neovide_transparency = 0.97
 g.neovide_floating_blur_amount_x = 5.0
 g.neovide_floating_blur_amount_y = 5.0
 g.neovide_cursor_unfocused_outline_width = 0.9

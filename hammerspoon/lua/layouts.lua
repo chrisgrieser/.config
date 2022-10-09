@@ -111,7 +111,7 @@ function homeModeLayout ()
 			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
 		end,
 		function()
-			neovideFontSize(15)
+			neovideFontSize(25.5)
 			alacrittyFontSize(26)
 		end
 	):start()
@@ -164,7 +164,7 @@ function officeModeLayout ()
 			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
 		end,
 		function()
-			neovideFontSize(13)
+			neovideFontSize(23)
 			alacrittyFontSize(24)
 		end
 	):start()
@@ -207,7 +207,7 @@ function motherHomeModeLayout()
 	killIfRunning("Twitch")
 	privateClosers() ---@diagnostic disable-line: undefined-global
 
-	neovideFontSize(14)
+	neovideFontSize(24)
 	alacrittyFontSize(25)
 	dockSwitcher("home")
 

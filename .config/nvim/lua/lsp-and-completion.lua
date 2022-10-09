@@ -155,7 +155,6 @@ cmp.setup.cmdline(':', {
 --------------------------------------------------------------------------------
 -- LSP-SERVER-SPECIFIC SETUP
 local lspConfig = require('lspconfig')
-local home = fn.expand("~") ---@diagnostic disable-line: missing-parameter
 
 require("lua-dev").setup({ -- INFO: this block must come before LSP setup
 library = { enabled = true, plugins = false } })
@@ -177,7 +176,6 @@ lspConfig['sumneko_lua'].setup{
 		workspace = {
 			library =  {
 				home.."/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
-				home.."/.hammerspoon/lua",
 			}
 		},
 		telemetry = { enable = false },
