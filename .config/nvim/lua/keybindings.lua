@@ -123,24 +123,30 @@ keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
 keymap("n", "Q" , function()
 	local lineContent = fn.getline(".")
 	local eolCol = #lineContent
-	local comStr = bo.commentstring
+	local emptyLine = lineContent == ""
 
-	local newLineContent = lineContent
-	if lineContent ~= "" then newLineContent = " " end -- avoid leading spaces on empty lines
+	local lineNum = api.nvim_win_get_cursor(0)[1]
+	local commentPos, _ = bo.commentstring:find("%%s")
+	local newCol = eolCol + commentPos + 1
 
 	if bo.filetype == "css" then
-		newLineContent = lineContent..comStr:gsub("%%s", "  ")
+		if emptyLine then
+			newLineContent = lineContent..bo.commentstring:gsub("%%s", "  ")
+			newCol = newCol - 2
+		else
+			newLineContent = lineContent.." "..bo.commentstring:gsub("%%s", "  ")
+			newCol = newCol - 1
+		end
 	else
-		newLineContent = lineContent..comStr:gsub("%%s", " ")
-		newCol = newCol + 1
+		if emptyLine then
+			newLineContent = lineContent..bo.commentstring:gsub("%%s", " ")
+		else
+			newLineContent = lineContent.." "..bo.commentstring:gsub("%%s", " ")
+		end
 	end
 
 	fn.setline(".", newLineContent)
-
-	local lineNum = api.nvim_win_get_cursor(0)[1]
-	local newCol = eolCol + comStr:find("%%s")
-
-	api.nvim_win_set_cursor(0, {lineNum, newCol})
+	api.nvim_win_set_cursor(0, {lineNum, newCol + 1})
 	cmd[[startinsert]]
 end)
 
