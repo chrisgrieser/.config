@@ -12,6 +12,16 @@ opt.wildmenu = true -- display all matching files when tab completing
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
 
+-- Command line
+opt.history = 777 -- do not save too much history to reduce noise for command line history search
+
+-- Mini-Terminal with `:!`
+-- loads it as interactive session, so that zshrc (and aliases) are loaded https://stackoverflow.com/a/4642855
+opt.shellcmdflag="-ic"
+
+-- Mouse
+opt.mousemodel="extend" -- deacvitate context menu, right mouse instead expands selection
+
 -- tabs & indentation
 opt.tabstop = 3
 opt.softtabstop = 3
@@ -64,7 +74,6 @@ autocmd ("BufReadPost", {
 
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
-opt.mousemodel="extend" -- deacvitate context menu, right mouse instead expands selection
 autocmd("TextYankPost", { command = "silent! lua vim.highlight.on_yank{timeout = 2500}" })
 
 -- Mini-Linting on save
@@ -87,8 +96,6 @@ opt.iskeyword = opt.iskeyword + {"-", "_"}
 opt.showcmd = true -- keychords pressed
 opt.showmode = false -- don't show "-- Insert --"
 opt.laststatus = 3 -- show one status line for all splits
--- opt.cmdheight = 0 -- hide message line if there is no content (requires nvim 0.8)
--- glitches: https://github.com/nvim-lualine/lualine.nvim/issues/853
 
 -- folding
 opt.foldmethod = "expr"
@@ -106,10 +113,6 @@ autocmd("BufWinEnter", {
 	group = "rememberFolds",
 	command = "silent! loadview"
 })
-
--- Mini-Terminal with `:!`
--- loads it as interactive session, so that zshrc (and aliases) are loaded https://stackoverflow.com/a/4642855
-opt.shellcmdflag="-ic"
 
 -- Window Managers
 opt.title = true -- title (for Window Managers and espanso)

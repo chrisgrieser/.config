@@ -6,7 +6,6 @@ require('lint').linters_by_ft = {
   js = { 'eslint' },
   ts = { 'eslint' },
   yaml = { 'yamllint' },
-  markdown = { 'markdownlint' },
   lua = { 'selene' },
 }
 
@@ -20,22 +19,22 @@ autocmd({ "BufEnter", "InsertLeave", "TextChanged" }, {
 --------------------------------------------------------------------------------
 -- LINTER-SPECIFIC OPTIONS
 
--- surpress warnings
+-- stylelint: surpress warnings
 local stylelintArgs = require("lint.linters.stylelint").args
 table.insert(stylelintArgs, 1, "--quiet")
+
+-- shellcheck: force zsh linting
+local shellcheckArgs = require("lint.linters.shellcheck").args
+table.insert(shellcheckArgs, 1, "bash")
+table.insert(shellcheckArgs, 1, "--shell")
+
+-- selene: use config
+local seleneArgs = require("lint.linters.selene").args
+table.insert(seleneArgs, "--config")
+table.insert(seleneArgs, '"$HOME/dotfiles/linter rclines/selene.toml"')
 
 -- fix yamllint config
 local yamllintArgs = require("lint.linters.yamllint").args
 table.insert(yamllintArgs, "--config-file")
 table.insert(yamllintArgs, '"$HOME/.config/.yamllint.yaml"')
-
--- force zsh linting
-local shellcheckArgs = require("lint.linters.shellcheck").args
-table.insert(shellcheckArgs, 1, "bash")
-table.insert(shellcheckArgs, 1, "--shell")
-
--- selene
-local seleneArgs = require("lint.linters.selene").args
-table.insert(seleneArgs, "--config")
-table.insert(seleneArgs, '"/Users/chrisgrieser/dotfiles/linter rclines/selene.toml"')
 
