@@ -118,7 +118,8 @@ cmp.setup({
 	}),
 	formatting = {
 		format = function(entry, vim_item)
-			vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+			vim_item.kind = kind_icons[vim_item.kind]
 			vim_item.menu = ({
 				buffer = "[B]",
 				nvim_lsp = "[LSP]",
@@ -189,7 +190,7 @@ cmp.setup.cmdline(':', {
 local lspConfig = require('lspconfig')
 
 require("lua-dev").setup { -- INFO: this block must come before LSP setup
-	library = { enabled = true, plugins = false } 
+	library = { enabled = true, plugins = false }
 }
 
 lspConfig['sumneko_lua'].setup{
