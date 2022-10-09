@@ -7,3 +7,4 @@ export VAULT_PATH=~'/Main Vault'
 
 export NEOVIDE_FRAME="buttonless" # https://neovide.dev/command-line-referencehtml#frame
 
+source "$DOTFILE_FOLDER/zsh/git_github.zsh"

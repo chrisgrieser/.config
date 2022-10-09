@@ -53,13 +53,13 @@ font:
   size: 26
 #-------------------------------------------------------------------------------
   normal:
-    family: Input
+    family: Input Nerd Font
     style: Regular
   bold:
-    family: Input
+    family: Input Nerd Font
     style: Bold
   italic:
-    family: Input
+    family: Input Nerd Font
     style: Italic
   use_thin_strokes: true
   draw_bold_text_with_bright_colors: true

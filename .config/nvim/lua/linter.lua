@@ -27,6 +27,7 @@ table.insert(stylelintArgs, 1, "--quiet")
 local shellcheckArgs = require("lint.linters.shellcheck").args
 table.insert(shellcheckArgs, 1, "bash")
 table.insert(shellcheckArgs, 1, "--shell")
+table.insert(shellcheckArgs, 1, "--external-sources")
 
 -- selene: use config
 local seleneArgs = require("lint.linters.selene").args

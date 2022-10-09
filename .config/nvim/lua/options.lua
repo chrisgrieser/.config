@@ -15,10 +15,6 @@ opt.splitbelow = true -- split down instead of up
 -- Command line
 opt.history = 777 -- do not save too much history to reduce noise for command line history search
 
--- Mini-Terminal with `:!`
--- loads it as interactive session, so that zshrc (and aliases) are loaded https://stackoverflow.com/a/4642855
-opt.shellcmdflag="-ic"
-
 -- Mouse
 opt.mousemodel="extend" -- deacvitate context menu, right mouse instead expands selection
 
