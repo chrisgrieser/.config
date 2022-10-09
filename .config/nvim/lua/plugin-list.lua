@@ -67,6 +67,7 @@ function PluginList ()
 	use { 'nvim-telescope/telescope.nvim', -- fuzzy finder
 		requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
 	}
+	use {'nvim-telescope/telescope-ui-select.nvim', requires = "nvim-telescope/telescope.nvim" }
 
 	-- Operators
 	use {'tpope/vim-surround', requires = 'tpope/vim-repeat'}

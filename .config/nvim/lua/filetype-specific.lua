@@ -78,7 +78,7 @@ keymap("n", "<leader>r", function()
 		print("Compiling Karabiner config…")
 
 	elseif bo.filetype == "typescript" then
-		os.execute[[npm run build]]
+		cmd[[!npm run build]]
 		print("Building with npm…")
 
 	elseif bo.filetype == "applescript" then
