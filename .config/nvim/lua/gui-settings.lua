@@ -5,7 +5,7 @@ require("utils")
 darkTheme = "tokyonight-moon"
 lightTheme = "tokyonight-day"
 
-g.gui_font_default_size = 25.5
+g.gui_font_default_size = 15
 -- g.gui_font_face = "Input,Symbols Nerd Font"
 -- g.gui_font_face = "Hack Nerd Font Mono"
 -- g.gui_font_face = "Input,JetBrainsMonoNL Nerd Font"
