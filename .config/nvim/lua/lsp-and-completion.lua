@@ -21,7 +21,6 @@ require("mason-lspconfig").setup({
 		"marksman", -- markdown
 		"jsonls",
 		"cssls",
-		"stylelint_lsp",
 		"bashls",
 	},
 })
@@ -225,16 +224,5 @@ lspConfig['bashls'].setup{
 lspConfig['jsonls'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
-}
-
-lspConfig['stylelint_lsp'].setup{
-	on_attach = on_attach,
-	capabilities = capabilities,
-	root_dir = function() return vim.fn.getcwd() end,
-	settings =  {
-		stylelintplus =  {
-			configFile = home.."/.stylelintrc.json",
-		}
-	}
 }
 
