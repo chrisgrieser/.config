@@ -122,11 +122,11 @@ keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
 -- append comment to current line (equivalent to gcA from comments.nvim)
 keymap("n", "Q" , function()
 	local lineContent = fn.getline(".")
+	local eolCol = #lineContent
 	local newLineContent = lineContent.." "..bo.commentstring
 	if lineContent == "" then newLineContent = bo.commentstring end -- avoid leading spaces on empty lines
 
 	local lineNum = api.nvim_win_get_cursor(0)[1]
-	local eolCol = #lineContent
 	local newCol, _ = newLineContent:find("%%s", eolCol) -- begin searching at eol to not match an existing "%s"
 
 	newLineContent = newLineContent:gsub("%%s", " ")

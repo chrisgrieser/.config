@@ -15,6 +15,7 @@ cmd[[setlocal iskeyword+=#]] -- for whatever reason, appending to "bo.iskeyword"
 cmd[[setlocal iskeyword+=%]]
 cmd[[setlocal iskeyword+=-]]
 
+bo.commentstring = "/* %s */"
 
 -- INFO: fix syntax highlighting with ':syntax sync fromstart'
 -- various other solutions are described here: https://github.com/vim/vim/issues/2790
