@@ -34,6 +34,12 @@ auto_dark_mode.setup({
 })
 auto_dark_mode.init()
 
+-- -- use straight underlines instead of curly underlines
+-- cmd[[highlight DiagnosticUnderlineError gui=underline]]
+-- cmd[[highlight DiagnosticUnderlineWarn gui=underline]]
+-- cmd[[highlight DiagnosticUnderlineHint gui=underline]]
+-- cmd[[highlight DiagnosticUnderlineInfo gui=underline]]
+
 --------------------------------------------------------------------------------
 
 keymap({"n", "v", "i"}, "<D-w>", ":bd<CR>") -- cmd+w
