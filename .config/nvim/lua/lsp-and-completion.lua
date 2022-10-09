@@ -2,6 +2,7 @@ require("utils")
 -- INFO: required order of setup() calls is
 -- mason, mason-config, nvim-deb, lspconfig
 -- https://github.com/williamboman/mason-lspconfig.nvim#setup
+
 --------------------------------------------------------------------------------
 
 -- DIAGNOTICS (in general, also applies to nvim-lint etc.)
@@ -34,7 +35,12 @@ autocmd("CursorHold", {
 	callback = vim.diagnostic.open_float
 })
 
+
+require("textobj-diagnostic").setup{create_default_keymaps = false}
+keymap({"x", "o"}, "id", function() require("textobj-diagnostic").next_diag_inclusive() end, { silent = true })
+
 --------------------------------------------------------------------------------
+
 require("mason").setup({
 	ui = {
 		icons = {
@@ -46,6 +52,7 @@ require("mason").setup({
 })
 
 --------------------------------------------------------------------------------
+
 require("mason-lspconfig").setup({
 	-- this plugin uses the lspconfig servernames, not mason servernames
 	-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
@@ -228,7 +235,11 @@ lspConfig['sumneko_lua'].setup{
 		},
 		diagnostics = {
 			globals = {"vim", "use", "martax"},
-			disable = {"trailing-space", "lowercase-global"},
+			disable = {
+				"trailing-space",
+				"lowercase-global",
+				"undefined-field", -- https://github.com/sumneko/lua-language-server/issues/1615
+			},
 		},
 		workspace = {
 			library =  {

@@ -121,6 +121,7 @@ keymap("n", "gh", function()
 		cmd[[startinsert]]
 	else
 		fn.append('.', {b.hrComment, ""})
+		cmd[[normal! j]]
 	end
 end)
 
