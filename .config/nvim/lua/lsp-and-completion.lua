@@ -3,6 +3,27 @@ require("utils")
 -- mason, mason-config, nvim-deb, lspconfig
 -- https://github.com/williamboman/mason-lspconfig.nvim#setup
 --------------------------------------------------------------------------------
+
+-- DIAGNOTICS (in general, also applies to linters etc)
+local opts = { noremap=true, silent=true }
+keymap('n', 'ge', vim.diagnostic.goto_next, opts)
+keymap('n', 'gE', vim.diagnostic.goto_prev, opts)
+keymap('n', 'gs', function() telescope.treesitter() end, {silent = true}) -- fallback for languages without an action LSP
+
+
+vim.diagnostic.config{
+	float = { border = "rounded" },
+}
+
+-- show diagnostic under cursor as float
+opt.updatetime = 1500 -- ms until float is shown
+augroup("diagnostic-float", {})
+autocmd("CursorHold", {
+	group = "diagnostic-float",
+	callback = vim.diagnostic.open_float
+})
+
+--------------------------------------------------------------------------------
 require("mason").setup({
 	ui = {
 		icons = {
@@ -27,11 +48,6 @@ require("mason-lspconfig").setup({
 	},
 })
 
--- Diagnotics
-local opts = { noremap=true, silent=true }
-keymap('n', 'ge', vim.diagnostic.goto_next, opts)
-keymap('n', 'gE', vim.diagnostic.goto_prev, opts)
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-local
@@ -40,16 +56,12 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 	local bufopts = { silent=true, buffer=true }
 	keymap('n', 'gd', function() telescope.lsp_definitions() end, bufopts)
 	keymap('n', 'gD', function() telescope.lsp_references() end, bufopts)
-	keymap('n', 'gs', function() telescope.lsp_document_symbols() end, bufopts)
+	keymap('n', 'gs', function() telescope.lsp_document_symbols() end, bufopts) -- overrides treesitter symbols browsing
 	keymap('n', 'gy', vim.lsp.buf.type_definition, bufopts)
 	keymap('n', '<leader>R', vim.lsp.buf.rename, bufopts)
 	keymap('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
-	keymap('n', '<leader>f', vim.diagnostic.open_float, bufopts) -- diagnostic popup
 	keymap('n', '<leader>h', vim.lsp.buf.hover, bufopts) -- docs popup
 end
-
--- fallback for languages without an action LSP
-keymap('n', 'gs', function() telescope.lsp_document_symbols() end, {silent = true})
 
 --------------------------------------------------------------------------------
 -- AUTOCOMPLETION

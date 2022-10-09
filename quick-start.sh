@@ -36,7 +36,6 @@ zsh "$HOME/dotfiles/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
 #-------------------------------------------------------------------------------
 # CREATE SYMLINKS
-
 DOTFILE_FOLDER="$(dirname "$0")"
 
 # zsh
