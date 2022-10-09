@@ -21,7 +21,6 @@ require("mason-lspconfig").setup({
 		"marksman", -- markdown
 		"jsonls",
 		"cssls",
-		"bashls",
 	},
 })
 
@@ -36,9 +35,9 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 
 	-- Mappings (See `:help vim.lsp.*` for documentation on any of the below functions)
 	local bufopts = { silent=true, buffer=true }
-	keymap('n', 'gd', function() telescope.lsp_definitions() end,  bufopts)
-	keymap('n', 'gD', function() telescope.lsp_references() end,  bufopts)
-	keymap('n', 'gs', function() telescope.lsp_document_symbols() end,  bufopts)
+	keymap('n', 'gd', function() telescope.lsp_definitions() end, bufopts)
+	keymap('n', 'gD', function() telescope.lsp_references() end, bufopts)
+	keymap('n', 'gs', function() telescope.lsp_document_symbols() end, bufopts)
 	keymap('n', 'gy', vim.lsp.buf.type_definition, bufopts)
 	keymap('n', '<leader>R', vim.lsp.buf.rename, bufopts)
 	keymap('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
@@ -212,11 +211,6 @@ lspConfig['tsserver'].setup{
 }
 
 lspConfig['marksman'].setup{
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
-
-lspConfig['bashls'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 }

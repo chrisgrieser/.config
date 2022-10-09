@@ -20,6 +20,7 @@ else
 	require("treesitter-config")
 	require("cheat-sh-config")
 	require("lsp-and-completion")
+	require("linter")
 	require("appearance") -- should come after gui settings
 end
 
