@@ -45,9 +45,39 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 	keymap('n', '<leader>h', vim.lsp.buf.hover, bufopts) -- docs popup
 end
 
+-- fallback for languages without an action LSP
+keymap('n', 'gs', function() telescope.lsp_document_symbols() end, {silent = true})
 
 --------------------------------------------------------------------------------
 -- AUTOCOMPLETION
+
+local kind_icons = {
+	Text = "",
+	Method = "",
+	Function = "",
+	Constructor = "",
+	Field = "",
+	Variable = "",
+	Class = "ﴯ",
+	Interface = "",
+	Module = "",
+	Property = "ﰠ",
+	Unit = "",
+	Value = "",
+	Enum = "",
+	Keyword = "",
+	Snippet = "",
+	Color = "",
+	File = "",
+	Reference = "",
+	Folder = "",
+	EnumMember = "",
+	Constant = "",
+	Struct = "",
+	Event = "",
+	Operator = "",
+	TypeParameter = ""
+}
 
 --Enable snippet capability for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -84,16 +114,15 @@ cmp.setup({
 		{ name = 'buffer', keyword_length = 4 },
 	}),
 	formatting = {
-		format = require('lspkind').cmp_format({
-			mode = "symbol",
-			-- maxwidth = 50,
-			ellipsis_char = '…',
-			menu = {
+		format = function(entry, vim_item)
+			vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+			vim_item.menu = ({
 				buffer = "[B]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[S]",
-			}
-		}),
+			})[entry.source.name]
+			return vim_item
+		end
 	},
 
 	-- disable completion in comments https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-completion-in-certain-contexts-such-as-comments
