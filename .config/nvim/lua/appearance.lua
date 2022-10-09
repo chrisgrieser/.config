@@ -118,7 +118,7 @@ require('lualine').setup {
 		theme  = 'auto',
 		globalstatus = true,
 		component_separators = { left = '', right = ''},
-		section_separators = { left = ' ', right = ' '}, -- nerd font: 'nf-ple'
+		section_separators = { left = ' ', right = ' '}, -- nerd font: 'nf-ple'
 	},
 }
 
