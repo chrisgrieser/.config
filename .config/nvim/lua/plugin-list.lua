@@ -85,6 +85,5 @@ function PluginList ()
 	use 'dbeniamine/cheat.sh-vim' -- docs search
 	use 'AndrewRadev/splitjoin.vim'
 	use 'mbbill/undotree' -- undo history nagivation
-	use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 
 end

@@ -6,7 +6,6 @@ require("utils")
 
 -- cursor
 opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinkoff500-blinkon700"
-opt.linespace = 5 -- px, similar to line height
 
 -- Ruler
 cmd[[highlight ColorColumn ctermbg=DarkGrey]]
@@ -110,8 +109,7 @@ require('lualine').setup {
 		theme  = 'auto',
 		globalstatus = true,
 		component_separators = { left = '', right = ''},
-		section_separators = { left = '', right = ''},
-		-- section_separators = { left = '', right = ''}, -- nerd font: 'nf-ple'
+		section_separators = { left = ' ', right = ' '}, -- nerd font: 'nf-ple'
 	},
 }
 
