@@ -59,14 +59,11 @@ cmp.setup({
 	snippet = { -- REQUIRED a snippet engine must be specified and installed
 		expand = function(args) require('luasnip').lsp_expand(args.body) end,
 	},
-	--experimental = { ghost_text = true },
+	experimental = { ghost_text = true },
 
 	window = {
 		completion = cmp.config.window.bordered(),
-		documentation = {
-			max_height = 20,
-			max_width = 60,
-		}
+		documentation = cmp.config.window.bordered(),
 	},
 
 	mapping = cmp.mapping.preset.insert({
@@ -87,14 +84,13 @@ cmp.setup({
 	}),
 	formatting = {
 		format = require('lspkind').cmp_format({
-			mode = "symbol_text",
-			maxwidth = 40,
+			mode = "symbol",
+			-- maxwidth = 50,
 			ellipsis_char = '…',
 			menu = {
 				buffer = "[B]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[S]",
-				nvim_lua = "[Vim]",
 			}
 		}),
 	},
@@ -102,9 +98,26 @@ cmp.setup({
 	-- disable completion in comments https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-completion-in-certain-contexts-such-as-comments
 	enabled = function()
 		local context = require 'cmp.config.context'
-		-- keep command mode completion enabled when cursor is in a comment
-		if vim.api.nvim_get_mode().mode == 'c' then
+		if vim.api.nvim_get_mode().mode == 'c' then -- keep command mode completion enabled when cursor is in a comment
 			return true
+		elseif vim.fn.getline("."):match("%s*%-%-") then ---@diagnostic disable-line: undefined-field
+			return false
+		else
+			return not context.in_treesitter_capture("comment")
+			and not context.in_syntax_group("Comment")
+		end
+	end
+})
+
+
+-- disable leading "-" and comments
+cmp.setup.filetype ("lua", {
+	enabled = function()
+		local context = require 'cmp.config.context'
+		if vim.api.nvim_get_mode().mode == 'c' then -- keep command mode completion enabled when cursor is in a comment
+			return true
+		elseif vim.fn.getline("."):match("%s*%-+") then ---@diagnostic disable-line: undefined-field
+			return false
 		else
 			return not context.in_treesitter_capture("comment")
 			and not context.in_syntax_group("Comment")
@@ -123,21 +136,6 @@ cmp.setup.filetype ("css", {
 	}
 })
 
-
-
-
-cmp.setup.filetype ("lua", {
-	source = {
-		{
-			name = 'nvim_lsp',
-			entry_filter = function(entry, _)
-				return entry:get_completion_item().insertText ~= "--#region"
-			end
-		},
-	}
-})
-
--- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
@@ -145,7 +143,6 @@ cmp.setup.cmdline({ '/', '?' }, {
 	}
 })
 
--- Use cmdline & path source for
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
@@ -157,19 +154,12 @@ cmp.setup.cmdline(':', {
 })
 
 --------------------------------------------------------------------------------
-
 -- LSP-SERVER-SPECIFIC SETUP
 local lspConfig = require('lspconfig')
 local home = fn.expand("~") ---@diagnostic disable-line: missing-parameter
 
 require("lua-dev").setup({ -- INFO: this block must come before LSP setup
-library = {
-	enabled = true,
-	-- you can also specify the list of plugins to make available as a workspace library
-	-- plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
-	plugins = false,
-},
-})
+library = { enabled = true, plugins = false } })
 
 lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
