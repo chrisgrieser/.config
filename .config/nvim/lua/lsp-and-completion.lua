@@ -1,4 +1,7 @@
 require("utils")
+-- INFO: required order of setup() calls is
+-- mason, mason-config, nvim-deb, lspconfig
+-- https://github.com/williamboman/mason-lspconfig.nvim#setup
 --------------------------------------------------------------------------------
 require("mason").setup({
 	ui = {
@@ -101,7 +104,7 @@ cmp.setup({
 		['<Down>'] = cmp.mapping.select_next_item(),
 		['<Up>'] = cmp.mapping.select_prev_item(),
 		['<Esc>'] = cmp.mapping.close(), -- close() leaves the current text, abort() restores pre-completion situation
-		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		['<CR>'] = cmp.mapping.confirm({ select = true }),
 		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
 		['<S-Down>'] = cmp.mapping.scroll_docs(4),
 	},
@@ -185,8 +188,9 @@ cmp.setup.cmdline(':', {
 -- LSP-SERVER-SPECIFIC SETUP
 local lspConfig = require('lspconfig')
 
-require("lua-dev").setup({ -- INFO: this block must come before LSP setup
-library = { enabled = true, plugins = false } })
+require("lua-dev").setup { -- INFO: this block must come before LSP setup
+	library = { enabled = true, plugins = false } 
+}
 
 lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
