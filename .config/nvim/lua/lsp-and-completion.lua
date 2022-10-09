@@ -21,6 +21,7 @@ require("mason-lspconfig").setup({
 		"marksman", -- markdown
 		"jsonls",
 		"cssls",
+		"stylelint_lsp",
 		"bashls",
 	},
 })
@@ -109,7 +110,6 @@ cmp.setup({
 	end
 })
 
-
 -- disable leading "-" and comments
 cmp.setup.filetype ("lua", {
 	enabled = function()
@@ -149,7 +149,7 @@ cmp.setup.cmdline(':', {
 		{ name = 'path' }
 	}, {
 		{ name = 'cmdline', max_item_count = 10 },
-		{ name = 'cmdline_history', max_item_count = 3 },
+		{ name = 'cmdline_history', max_item_count = 5 },
 	})
 })
 
@@ -222,5 +222,11 @@ lspConfig['bashls'].setup{
 lspConfig['jsonls'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
+}
+
+lspConfig['stylelint_lsp'].setup{
+	on_attach = on_attach,
+	capabilities = capabilities,
+	root_dir = function() return vim.fn.getcwd() end,
 }
 
