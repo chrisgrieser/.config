@@ -14,9 +14,11 @@ require("telescope").setup {
 		},
 		layout_strategy = 'horizontal',
 		layout_config = {
-			height = 0.92,
-			width = 0.97,
-			preview_cutoff = 25,
+			horizontal = {
+				height = 0.95,
+				preview_cutoff = 25,
+				width = 0.92
+			},
 		},
 	},
 	pickers = {
@@ -39,11 +41,10 @@ require("telescope").setup {
 	},
 	extensions = {
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown {
-			-- even more opts
-			}
+			require("telescope.themes").get_dropdown()
 		}
 	}
 }
-fsfs
+
+-- use telescope for selections like code actions
 require("telescope").load_extension("ui-select")

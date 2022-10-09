@@ -42,7 +42,6 @@ function PluginList ()
 			'hrsh7th/cmp-cmdline',
 			'dmitmel/cmp-cmdline-history',
 			'hrsh7th/cmp-emoji',
-			'onsails/lspkind.nvim', -- icons for the completion menu
 
 			'hrsh7th/cmp-nvim-lsp', -- lsp
 			'hrsh7th/cmp-nvim-lsp-signature-help', -- lsp
