@@ -67,14 +67,16 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 
-	mapping = cmp.mapping.preset.insert({
-		['<Esc>'] = cmp.mapping.abort(),
+	mapping = {
 		['<Tab>'] = cmp.mapping.select_next_item(),
 		['<S-Tab>'] = cmp.mapping.select_prev_item(),
+		['<Up>'] = cmp.mapping.select_next_item(),
+		['<Down>'] = cmp.mapping.select_prev_item(),
+		['<Esc>'] = cmp.mapping.abort(),
 		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
 		['<S-Down>'] = cmp.mapping.scroll_docs(4),
-	}),
+	},
 
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
@@ -148,8 +150,9 @@ cmp.setup.cmdline(':', {
 	sources = cmp.config.sources({
 		{ name = 'path' }
 	}, {
-		{ name = 'cmdline', max_item_count = 10 },
-		{ name = 'cmdline_history', max_item_count = 5 },
+		{ name = 'cmdline', max_item_count = 15 },
+	}, {
+		{ name = 'cmdline_history', max_item_count = 15 },
 	})
 })
 
@@ -228,5 +231,10 @@ lspConfig['stylelint_lsp'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 	root_dir = function() return vim.fn.getcwd() end,
+	settings =  {
+		stylelintplus =  {
+			configFile = home.."/.stylelintrc.json",
+		}
+	}
 }
 
