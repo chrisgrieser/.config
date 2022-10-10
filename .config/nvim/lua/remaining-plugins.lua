@@ -35,6 +35,7 @@ cmd[[ function! g:Undotree_CustomMap()
 	nmap <buffer> <C-k> <plug>UndotreeNextState
 	nmap <buffer> J jjjjjjj
 	nmap <buffer> K 7k
+	nmap <buffer> U <plug>UndotreeRedo
 	endfunc ]]
 
 

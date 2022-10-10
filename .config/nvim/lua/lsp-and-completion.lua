@@ -23,6 +23,7 @@ vim.diagnostic.config{
 	float = {
 		source = true,
 		border = "rounded",
+		max_width = 50,
 		format = formatDiagnosticMessage,
 	}
 }
@@ -275,12 +276,12 @@ lspConfig['cssls'].setup{
 lspConfig['stylelint_lsp'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
-	root_dir = function() return vim.fn.getcwd() end,
-	settings =  {
-		stylelintplus =  {
-			configFile = home.."/.stylelintrc.json",
-		}
-	}
+	root_dir = function() return vim.fn.getcwd() end, -- needs root-dir to work
+	-- settings =  {
+	-- 	stylelintplus =  {
+	-- 		configFile = home.."/.stylelintrc.json",
+	-- 	}
+	-- }
 }
 
 lspConfig['tsserver'].setup{

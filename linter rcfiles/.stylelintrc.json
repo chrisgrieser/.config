@@ -3,8 +3,7 @@
 
 	"plugins": [
 		"stylelint-order",
-		"stylelint-declaration-block-no-ignored-properties",
-		"stylelint-no-unsupported-browser-features"
+		"stylelint-declaration-block-no-ignored-properties"
 	],
 
 	"reportNeedlessDisables": [true, {"severity": "error"}],
@@ -19,13 +18,6 @@
 		"no-descending-specificity": null,
 
 		"plugin/declaration-block-no-ignored-properties": true,
-
-		"plugin/no-unsupported-browser-features": [true, {
-		  "browsers": ["last 10 Chrome versions", "last 2 iOS versions"],
-		  "ignore": ["css-masks", "css3-cursors-newer", "css3-cursors", "css-resize"],
-		  "ignorePartialSupport": true
-		}],
-
 
 		"order/properties-order": [
 			[
