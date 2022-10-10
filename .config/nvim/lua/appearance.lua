@@ -10,13 +10,14 @@ function customHighlights()
 	cmd[[highlight DiagnosticUnderlineHint gui=underline]]
 	cmd[[highlight DiagnosticUnderlineInfo gui=underline]]
 
-	-- leading spaces
-	cmd[[highlight WhiteSpaceBol guibg=DarkGrey ctermbg=DarkGrey]]
-	cmd[[call matchadd('WhiteSpaceBol', '^ \+')]]
+	-- mixed whitespace
+	cmd[[highlight MixedWhiteSpace guibg=DarkGrey ctermbg=DarkGrey]]
+	cmd[[call matchadd('MixedWhiteSpace', '^\(\\t+ \| +\\t\)[:space:]*')]]
+ 	  cmd[[highlight clear MixedWhiteSpace]]
 
 	-- URLs
 	cmd[[highlight urls cterm=underline term=underline gui=underline]]
-	cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-]*') ]]
+	cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-?]*') ]]
 
 	-- Annotations
 	cmd[[highlight def link myAnnotations Todo]] -- use same styling as "TODO"
@@ -24,23 +25,6 @@ function customHighlights()
 end
 
 customHighlights()
-
--- since overriden by some themes, also call after a colorscheme
--- has been loaded
-augroup("themeAdditions", {})
-autocmd("ColorScheme", {
-	group = "themeAdditions",
-	callback = customHighlights,
-})
-
-augroup("themeAdditions", {})
-autocmd("BufEnter", {
-	pattern = {"yaml", "json", "css" },
-	group = "themeAdditions",
-	callback = function ()
-		cmd[[highlight clear WhiteSpaceBol]]
-	end,
-})
 
 --------------------------------------------------------------------------------
 

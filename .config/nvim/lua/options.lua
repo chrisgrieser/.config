@@ -10,7 +10,7 @@ opt.wildmenu = true -- display all matching files when tab completing
 
 -- Gutter
 opt.number = true
-opt.numberwidth = 1
+opt.numberwidth = 2 -- minum width, save some space for shorter files
 opt.relativenumber = true
 opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
 
