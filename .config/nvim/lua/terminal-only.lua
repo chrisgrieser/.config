@@ -1,9 +1,6 @@
-
 -- terminal-only styling, since most of these are already handled when using by
 -- a color scheme
 --------------------------------------------------------------------------------
-
-customHighlights()
 
 -- Ruler
 cmd[[highlight ColorColumn ctermbg=DarkGrey]]
@@ -23,5 +20,4 @@ cmd[[highlight Pmenu ctermbg=DarkGrey]]
 -- Line Numbers
 cmd[[highlight LineNr ctermfg=DarkGrey]]
 cmd[[highlight CursorLineNr ctermfg=Grey]]
-
 
