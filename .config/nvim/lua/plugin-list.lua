@@ -51,6 +51,7 @@ function PluginList ()
 	use 'airblade/vim-gitgutter'
 	use 'f-person/auto-dark-mode.nvim' -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
+	use 'rcarriga/nvim-notify' -- nice notifications
 
 	-- File Management & Switching
 	use 'tpope/vim-eunuch' -- file operation utilities
@@ -73,6 +74,7 @@ function PluginList ()
 	-- Movements
 	use 'mg979/vim-visual-multi' -- multi-cursor
 	use 'justinmk/vim-sneak'
+	use 'simrat39/symbols-outline.nvim' -- outline view for symbols
 
 	-- Line Editing
 	use 'matze/vim-move' -- move lines with auto-indention (alternative: vim.unimpaired)

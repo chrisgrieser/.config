@@ -42,7 +42,7 @@ keymap({"v", "o"}, "J", "7j")
 keymap("", "K", "7k")
 
 -- when reaching the last line, scroll down (since scrolloff does not work at EOF)
-function overscroll (action)
+local function overscroll (action)
 	local curLine = fn.line(".")
 	local lastLine = fn.line("$")
 	if curLine == lastLine then
@@ -77,7 +77,6 @@ keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "<Esc>", ":nohl<CR>:echo<CR>", {silent = true}) -- clear highlights & shortmessage
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 keymap("n", "g-", function() telescope.current_buffer_fuzzy_find() end) -- alternative search
---keymap("n", "gs", function() telescope.treesitter() end) -- equivalent to Sublime's goto-symbol
 
 -- Marks
 keymap("", "ä", "`") -- Goto Mark
