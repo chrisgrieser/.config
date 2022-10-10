@@ -9,7 +9,6 @@ require("utils")
 local opts = { noremap=true, silent=true }
 keymap('n', 'ge', function () vim.diagnostic.goto_next({wrap=true, float=false}) end, opts)
 keymap('n', 'ge', function () vim.diagnostic.goto_prev({wrap=true, float=false}) end, opts)
-keymap('n', 'gs', function() telescope.treesitter() end, {silent = true}) -- fallback for languages without an action LSP
 
 -- add code/rule to the message
 function formatDiagnosticMessage(diagnostic)
@@ -69,6 +68,9 @@ require("mason-lspconfig").setup({
 	},
 })
 
+-- fallback for languages without an action LSP
+keymap('n', 'gs', function() telescope.treesitter() end, {silent = true})
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-local
@@ -78,6 +80,7 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 	keymap('n', 'gd', function() telescope.lsp_definitions() end, bufopts)
 	keymap('n', 'gD', function() telescope.lsp_references() end, bufopts)
 	keymap('n', 'gs', function() telescope.lsp_document_symbols() end, bufopts) -- overrides treesitter symbols browsing
+	keymap('n', 'gS', ":SymbolsOutline<CR>", bufopts)
 	keymap('n', 'gy', function() telescope.lsp_type_definitions() end, bufopts)
 	keymap('n', '<leader>R', vim.lsp.buf.rename, bufopts)
 	keymap('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
