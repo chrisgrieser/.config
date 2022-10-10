@@ -39,28 +39,21 @@ cmd[[ function! g:Undotree_CustomMap()
 vim.notify = require("notify")
 
 
-
 require("symbols-outline").setup{
-	highlight_hovered_item = true,
-	show_guides = false,
-	auto_preview = false,
-	position = 'right',
-	width = 30,
-	show_symbol_details = false,
-	autofold_depth = 1,
-	auto_unfold_hover = true,
-	wrap = false,
+	width = 40,
+	autofold_depth = 2,
 	keymaps = {
+		close = {"<Esc>", "q", "gS"},
 		goto_location = "<CR>",
 		focus_location = "f",
 		toggle_preview = "p",
 		rename_symbol = "r",
 		code_actions = "a",
-		fold = "l",
-		unfold = "h",
-		fold_all = "L",
-		unfold_all = "H",
+		fold = "h",
+		unfold = "l",
+		fold_all = "H",
+		unfold_all = "L",
 	},
 	lsp_blacklist = {},
-	symbol_blacklist = {},
+	symbol_blacklist = {"Enum", "EnumMember"},
 }
