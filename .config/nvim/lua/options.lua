@@ -12,7 +12,7 @@ opt.wildmenu = true -- display all matching files when tab completing
 opt.spell = false
 opt.spelllang = "en_us"
 
-cmd[[syntax match UrlNoSpell '\w\+:\/\/[:alnum:]\+' contains=@NoSpell")
+cmd[[syntax match UrlNoSpell 'http[s]\?:\/\/[[:alnum:]%\/_#.-?]*' contains=@NoSpell"]]
 
 -- Gutter
 opt.number = true
