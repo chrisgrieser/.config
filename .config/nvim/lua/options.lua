@@ -23,13 +23,13 @@ augroup("linenumberSplit", {})
 autocmd({"WinLeave", "WinEnter", "WinClosed"},{
 	group = "linenumberSplit",
 	callback = function ()
-		local isSingleWindow = fn.winlayout()[1] == "leaf" -- somehow fn.winnr() isn't reliable
-		if isSingleWindow then
-			opt.number = true
-			opt.relativenumber = true
-		else
+		local isVsplit = fn.winlayout()[1] == "row"
+		if isVsplit then
 			opt.number = false
 			opt.relativenumber = false
+		else
+			opt.number = true
+			opt.relativenumber = true
 		end
 	end
 })
