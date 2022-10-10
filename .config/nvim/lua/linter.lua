@@ -1,12 +1,12 @@
 -- nvim-lint
 require('lint').linters_by_ft = {
-  sh = { 'shellcheck' },
-  zsh = { 'shellcheck' },
-  css = { 'stylelint' },
-  js = { 'eslint' },
-  ts = { 'eslint' },
-  yaml = { 'yamllint' },
-  lua = { 'selene' },
+	sh = { 'shellcheck' },
+	zsh = { 'shellcheck' },
+	css = { 'stylelint' },
+	js = { 'eslint' },
+	ts = { 'eslint' },
+	yaml = { 'yamllint' },
+	lua = { 'selene' },
 }
 
 -- when to lint
@@ -22,6 +22,11 @@ autocmd({ "BufEnter", "InsertLeave", "TextChanged" }, {
 -- stylelint: surpress warnings
 local stylelintArgs = require("lint.linters.stylelint").args
 table.insert(stylelintArgs, 1, "--quiet")
+
+-- selene: use config
+local eslintArgs = require("lint.linters.eslint").args
+table.insert(eslintArgs, "--config")
+table.insert(eslintArgs, '"$HOME/dotfiles/linter rclines/.eslintrc.json"')
 
 -- shellcheck: force zsh linting
 local shellcheckArgs = require("lint.linters.shellcheck").args

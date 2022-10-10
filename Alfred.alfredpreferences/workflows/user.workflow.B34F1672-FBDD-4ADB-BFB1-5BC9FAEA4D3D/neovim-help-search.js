@@ -25,7 +25,7 @@ if (fileExists("url-list.txt")) {
 
 			const site = url
 				.split("/").pop()
-				.split(".").shift(); // eslint-disable-line newline-per-chained-call
+				.split(".").shift();
 			let name = url.split("#").pop().replaceAll("'", "");
 			const subtitle = site;
 			let synonyms = "";
@@ -40,7 +40,6 @@ if (fileExists("url-list.txt")) {
 				url = url.split("\t").shift();
 				name = name.replace("\t", " ");
 			}
-			const encodedURL = url.replace("#:", "#%3A"); // new docs format partially encoded
 
 			return {
 				"title": name + synonyms,
