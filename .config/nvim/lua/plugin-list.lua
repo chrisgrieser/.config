@@ -10,6 +10,7 @@ function PluginList ()
 	use 'EdenEast/nightfox.nvim'
 
 	use 'sainnhe/edge'
+	use 'marko-cerovac/material.nvim'
 	use 'catppuccin/nvim'
 	use "rebelot/kanagawa.nvim"
 	use "bluz71/vim-moonfly-colors"
