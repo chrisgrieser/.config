@@ -11,4 +11,8 @@ telescope = require("telescope.builtin") -- requires loading extensions first
 keymap = vim.keymap.set
 home = fn.expand("~") ---@diagnostic disable-line: missing-parameter
 
-pp = vim.pretty_print
+-- `:I` inspects the passed lua object
+function inspectFn(obj)
+	vim.pretty_print(fn.luaeval(obj))
+end
+cmd[[:command! -nargs=1 I lua inspectFn(<f-args>)]]

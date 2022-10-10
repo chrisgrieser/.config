@@ -24,12 +24,24 @@ function customHighlights()
 end
 
 
+
 -- since overriden by some themes, also call after a colorscheme
 -- has been loaded
 augroup("themeAdditions", {})
 autocmd("ColorScheme", {
 	group = "themeAdditions",
 	callback = customHighlights,
+})
+
+-- since overriden by some themes, also call after a colorscheme
+-- has been loaded
+augroup("themeAdditions", {})
+autocmd("BufEnter", {
+	pattern = {"yaml", "json"},
+	group = "themeAdditions",
+	callback = function ()
+		cmd[[highlight clear WhiteSpaceBol]]
+	end,
 })
 
 --------------------------------------------------------------------------------
