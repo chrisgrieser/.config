@@ -21,8 +21,7 @@ autocmd({ "BufEnter", "InsertLeave", "TextChanged" }, {
 
 -- shellcheck: force zsh linting
 local shellcheckArgs = require("lint.linters.shellcheck").args
-table.insert(shellcheckArgs, 1, "bash")
-table.insert(shellcheckArgs, 1, "--shell")
+table.insert(shellcheckArgs, 1, "--shell=bash")
 table.insert(shellcheckArgs, 1, "--external-sources")
 
 -- stylelint: surpress warnings
@@ -34,7 +33,7 @@ local seleneArgs = require("lint.linters.selene").args
 table.insert(seleneArgs, "--config")
 table.insert(seleneArgs, '"$HOME/dotfiles/linter rclines/selene.toml"')
 
--- fix yamllint config
+-- yamllint: use config
 local yamllintArgs = require("lint.linters.yamllint").args
 table.insert(yamllintArgs, "--config-file")
 table.insert(yamllintArgs, '"$HOME/.config/.yamllint.yaml"')
