@@ -20,6 +20,7 @@ keymap("n", "<leader>d", 'mzlEF.yEEp`z') -- [d]ouble class under cursor
 keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>') -- [D]uplicate Class under cursor
 
 -- toggle !important
+---@diagnostic disable: undefined-field
 keymap("n", "<leader>i", function ()
 	local lineContent = fn.getline('.')
 	if lineContent:find("!important") then

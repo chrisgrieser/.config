@@ -17,5 +17,7 @@ cmd[[setlocal iskeyword+=-]]
 
 -- INFO: fix syntax highlighting with ':syntax sync fromstart'
 -- various other solutions are described here: https://github.com/vim/vim/issues/2790
--- however, using treesitter, this is less of an issue
+-- however, using treesitter, this is less of an issue, but treesitter css
+-- highlighting isn't good yet, so...
+
 

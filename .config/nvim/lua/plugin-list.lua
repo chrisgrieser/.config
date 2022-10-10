@@ -9,14 +9,7 @@ function PluginList ()
 	use 'Mofiqul/dracula.nvim'
 	use 'EdenEast/nightfox.nvim'
 	use 'marko-cerovac/material.nvim'
-	use 'kvrohit/rasmus.nvim'
 	use 'sainnhe/edge'
-
-	use "rebelot/kanagawa.nvim"
-	use "bluz71/vim-moonfly-colors"
-	use 'glepnir/zephyr-nvim'
-	use 'yashguptaz/calvera-dark.nvim'
-	use 'kyazdani42/blue-moon'
 	use 'Yazeed1s/minimal.nvim'
 
 	-- -- Syntax
