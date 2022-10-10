@@ -5,7 +5,14 @@ require("telescope").setup {
 		selection_caret = "⟐ ",
 		prompt_prefix = "❱ ",
 		path_display = { "tail" },
-		file_ignore_patterns = { "packer_compiled.lua", ".DS_Store", ".git/", ".spl", "node_modules" },
+		file_ignore_patterns = { 
+			"packer_compiled.lua",
+			".DS_Store", 
+			".git/",
+			".spl",
+			"node_modules",
+			".png",
+		},
 		mappings = {
 			i = {
 				["<Esc>"] = require('telescope.actions').close, -- close w/ one esc

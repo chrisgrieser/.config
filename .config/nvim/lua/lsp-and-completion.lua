@@ -60,6 +60,7 @@ require("mason-lspconfig").setup({
 	ensure_installed = {
 		"sumneko_lua",
 		"yamlls",
+		"eslint",
 		"tsserver", -- ts/js
 		"marksman", -- markdown
 		"jsonls",
@@ -280,6 +281,11 @@ lspConfig['marksman'].setup{
 }
 
 lspConfig['jsonls'].setup{
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+lspConfig['eslint'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 }

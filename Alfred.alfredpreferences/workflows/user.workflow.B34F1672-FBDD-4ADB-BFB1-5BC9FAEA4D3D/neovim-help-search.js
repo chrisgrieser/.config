@@ -16,6 +16,7 @@ function readFile (path, encoding) {
 
 const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
 let jsonArray;
+
 //------------------------------------------------------------------------------
 
 if (fileExists("url-list.txt")) {
@@ -25,7 +26,7 @@ if (fileExists("url-list.txt")) {
 
 			const site = url
 				.split("/").pop()
-				.split(".").shift();
+				.split(".").shift();;
 			let name = url.split("#").pop()
 				.replaceAll("%3A", ":")
 				.replaceAll("'", "");
