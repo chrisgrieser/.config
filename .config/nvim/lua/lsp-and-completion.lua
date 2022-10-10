@@ -282,12 +282,6 @@ lspConfig['cssls'].setup{
 -- 	}
 -- }
 
--- lspConfig['bashls'].setup{
--- 	on_attach = on_attach,
--- 	capabilities = capabilities,
--- 	filetypes = {"sh", "zsh"}
--- }
-
 lspConfig['tsserver'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
