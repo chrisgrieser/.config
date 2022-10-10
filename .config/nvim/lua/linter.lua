@@ -3,8 +3,8 @@ require('lint').linters_by_ft = {
 	sh = { 'shellcheck' },
 	zsh = { 'shellcheck' },
 	css = { 'stylelint' },
-	js = { 'eslint' },
-	ts = { 'eslint' },
+	javascript = { 'eslint' },
+	typescript = { 'eslint' },
 	yaml = { 'yamllint' },
 	lua = { 'selene' },
 }

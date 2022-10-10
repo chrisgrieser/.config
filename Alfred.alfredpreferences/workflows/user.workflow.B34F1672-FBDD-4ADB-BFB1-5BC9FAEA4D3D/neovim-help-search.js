@@ -26,7 +26,7 @@ if (fileExists("url-list.txt")) {
 
 			const site = url
 				.split("/").pop()
-				.split(".").shift();;
+				.split(".").shift(); // eslint-disable-line newline-per-chained-call
 			let name = url.split("#").pop()
 				.replaceAll("%3A", ":")
 				.replaceAll("'", "");
