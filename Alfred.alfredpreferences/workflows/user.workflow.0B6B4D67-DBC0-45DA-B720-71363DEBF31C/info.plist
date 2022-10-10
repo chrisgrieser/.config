@@ -591,59 +591,6 @@ end alfred_script</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>jumpto</key>
-				<string>alfred.action.move</string>
-				<key>path</key>
-				<string></string>
-				<key>type</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.actioninalfred</string>
-			<key>uid</key>
-			<string>56CD69F0-DA3F-4EF1-809F-78543F4459A1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>46</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>M</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-					<string>org.yanex.marta</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>993B0563-52D6-4547-B1D7-97E70FF55DB2</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -714,6 +661,67 @@ end alfred_script</string>
 			<integer>2</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>39B71402-41AF-4087-AFBB-86D0ABEDD89E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>jumpto</key>
+				<string>alfred.action.move</string>
+				<key>path</key>
+				<string></string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.actioninalfred</string>
+			<key>uid</key>
+			<string>56CD69F0-DA3F-4EF1-809F-78543F4459A1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>46</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>M</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+					<string>org.yanex.marta</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>993B0563-52D6-4547-B1D7-97E70FF55DB2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>action</key>
@@ -763,14 +771,6 @@ end alfred_script</string>
 			<string>alfred.workflow.action.actioninalfred</string>
 			<key>uid</key>
 			<string>D5103819-BE47-447C-8880-FB1D3986CAE8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>39B71402-41AF-4087-AFBB-86D0ABEDD89E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1125,7 +1125,7 @@ open .</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>595</real>
 		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
@@ -1143,7 +1143,7 @@ open .</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>870</real>
 		</dict>
 		<key>11D8554B-846B-40DD-9CA0-C73F5736472F</key>
 		<dict>
@@ -1161,7 +1161,7 @@ open .</string>
 			<key>xpos</key>
 			<real>605</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>975</real>
 		</dict>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<dict>
@@ -1177,9 +1177,9 @@ open .</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>590</real>
+			<real>235</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>415</real>
 		</dict>
 		<key>3AA97555-4630-4AB5-A2F3-900B154E50A7</key>
 		<dict>
@@ -1201,7 +1201,7 @@ open .</string>
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>975</real>
 		</dict>
 		<key>49C1CB43-3C55-4085-BBF5-A406476E7309</key>
 		<dict>
@@ -1221,7 +1221,7 @@ open .</string>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>1005</real>
 		</dict>
 		<key>56CD69F0-DA3F-4EF1-809F-78543F4459A1</key>
 		<dict>
@@ -1230,7 +1230,7 @@ open .</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>220</real>
+			<real>480</real>
 		</dict>
 		<key>5CCD4941-B4C3-444A-8318-2DDBF741229A</key>
 		<dict>
@@ -1250,7 +1250,7 @@ open .</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>840</real>
 		</dict>
 		<key>7B43FD68-D463-4626-BE13-7D1C65B12ECF</key>
 		<dict>
@@ -1268,7 +1268,7 @@ open .</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>720</real>
 		</dict>
 		<key>9536809F-DBBD-4982-90BC-427C6D115A14</key>
 		<dict>
@@ -1277,7 +1277,7 @@ open .</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>975</real>
 		</dict>
 		<key>95E5B67E-7350-4876-B7DF-90F25BC4A121</key>
 		<dict>
@@ -1286,7 +1286,7 @@ open .</string>
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>845</real>
+			<real>1105</real>
 		</dict>
 		<key>993B0563-52D6-4547-B1D7-97E70FF55DB2</key>
 		<dict>
@@ -1295,7 +1295,7 @@ open .</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>220</real>
+			<real>480</real>
 		</dict>
 		<key>9AD51D41-A476-43A8-A50F-48F59D611848</key>
 		<dict>
@@ -1304,7 +1304,7 @@ open .</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>720</real>
 		</dict>
 		<key>A3E89738-7B65-4537-AE1B-55F8E4046D3D</key>
 		<dict>
@@ -1313,7 +1313,7 @@ open .</string>
 			<key>xpos</key>
 			<real>425</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>840</real>
 		</dict>
 		<key>A754B482-7724-4CDE-BA29-B129D0E34709</key>
 		<dict>
@@ -1331,7 +1331,7 @@ open .</string>
 			<key>xpos</key>
 			<real>450</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>975</real>
 		</dict>
 		<key>BF0AEAE4-89C0-4DFF-8F6D-4C1FE0DE091B</key>
 		<dict>
@@ -1349,7 +1349,7 @@ open .</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>845</real>
+			<real>1105</real>
 		</dict>
 		<key>D5103819-BE47-447C-8880-FB1D3986CAE8</key>
 		<dict>
@@ -1358,7 +1358,7 @@ open .</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>595</real>
 		</dict>
 		<key>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</key>
 		<dict>
@@ -1383,18 +1383,18 @@ open .</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>710</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>335</real>
 		</dict>
 		<key>E0D28C3D-F986-4491-9594-54FEA3344924</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>385</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>335</real>
 		</dict>
 		<key>EA84A1D9-5B40-48C6-B910-0E4E2E12B31C</key>
 		<dict>
@@ -1403,7 +1403,7 @@ open .</string>
 			<key>xpos</key>
 			<real>370</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>1005</real>
 		</dict>
 		<key>EC5DBDBD-F5AC-476A-8757-5C1577F33D11</key>
 		<dict>
@@ -1412,7 +1412,7 @@ open .</string>
 			<key>xpos</key>
 			<real>275</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>840</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
