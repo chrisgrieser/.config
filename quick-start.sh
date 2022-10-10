@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# shellcheck disable=SC2034,SC2164
+# shellcheck disable=SC2034,SC2164,SC1071
 
 #-------------------------------------------------------------------------------
 # ESSENTIAL
@@ -36,7 +36,6 @@ zsh "$HOME/dotfiles/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
 #-------------------------------------------------------------------------------
 # CREATE SYMLINKS
-cat "bla" | grep "-"
 DOTFILE_FOLDER="$(dirname "$0")"
 
 # zsh

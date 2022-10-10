@@ -33,7 +33,7 @@ opt.updatetime = 1000 -- ms until float is shown
 augroup("diagnostic-float", {})
 autocmd("CursorHold", {
 	group = "diagnostic-float",
-	callback = vim.diagnostic.open_float
+	callback = function () vim.diagnostic.open_float{focusable=false} end, -- allow focussable for other diagnostic floats like hover info
 })
 
 
@@ -67,7 +67,9 @@ require("mason-lspconfig").setup({
 		"remark_ls", -- markdown
 		"jsonls",
 		"cssls",
+		"bashls",
 		"stylelint_lsp", -- css
+		-- REQUIRED: new servers also need to be set up further below
 	},
 })
 
@@ -282,6 +284,12 @@ lspConfig['stylelint_lsp'].setup{
 	-- 		configFile = home.."/.stylelintrc.json",
 	-- 	}
 	-- }
+}
+
+lspConfig['bashls'].setup{
+	on_attach = on_attach,
+	capabilities = capabilities,
+	filetypes = {"sh", "zsh"}
 }
 
 lspConfig['tsserver'].setup{
