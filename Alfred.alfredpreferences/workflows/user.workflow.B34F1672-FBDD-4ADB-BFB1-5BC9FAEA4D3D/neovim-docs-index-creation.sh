@@ -54,4 +54,4 @@ echo "$sections" >> ../url-list.txt
 
 echo "$(wc -l ../url-list.txt | tr -d ' ') entries."
 cd ..
-# rm -r "./neovim-help"
+rm -r "./neovim-help"

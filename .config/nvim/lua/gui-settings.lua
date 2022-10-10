@@ -36,8 +36,9 @@ auto_dark_mode.setup({
 auto_dark_mode.init()
 
 --------------------------------------------------------------------------------
-
-keymap({"n", "v", "i"}, "<D-w>", ":bd<CR>") -- cmd+w
+-- Keybindings
+keymap({"n", "v"}, "<D-w>", ":close<CR>") -- cmd+w
+keymap("i", "<D-w>", "<Esc>:close<CR>")
 
 keymap({"n", "v"}, "<D-z>", ":undo<CR>") -- cmd+z
 keymap({"n", "v"}, "<D-Z>", ":redo<CR>") -- cmd+shift+z

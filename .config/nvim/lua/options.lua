@@ -17,12 +17,13 @@ opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
 -- Split
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
+
 -- hide line numbers on window split
 augroup("linenumberSplit", {})
-autocmd({"WinEnter", "WinClosed"},{
+autocmd({"WinLeave", "WinEnter", "WinClosed"},{
 	group = "linenumberSplit",
 	callback = function ()
-		local numOfWins = fn.winnr('$')
+		local numOfWins = #fn.winlayout()[1] -- somehow fn.winnr() isn't reliable
 		if numOfWins > 1 then
 			opt.number = false
 			opt.relativenumber = false
@@ -32,7 +33,6 @@ autocmd({"WinEnter", "WinClosed"},{
 		end
 	end
 })
-
 
 -- Command line
 opt.history = 777 -- do not save too much history to reduce noise for command line history search
