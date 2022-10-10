@@ -9,7 +9,7 @@
 # 1083: zsh accepts without ; at the end of oneline-functions
 # 1072: seems to be bug: https://github.com/koalaman/shellcheck/wiki/SC1072
 
-disable=SC1083,SC1072
+disable=SC1083,SC1072,SC1071
 
 # -----------------------------------------------------
 # Enable some Optional Rules
