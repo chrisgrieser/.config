@@ -19,5 +19,5 @@ cmd[[setlocal iskeyword+=-]]
 -- various other solutions are described here: https://github.com/vim/vim/issues/2790
 -- however, using treesitter, this is less of an issue, but treesitter css
 -- highlighting isn't good yet, so...
-
+keymap("n", "zz", ":syntax sync fromstart<CR>", {buffer = true})
 
