@@ -17,9 +17,7 @@ autocmd("FileType", {
 
 -- indention lines
 g.indent_blankline_filetype_exclude = {"undotree"}
-require("indent_blankline").setup {
-	show_current_context = true,
-}
+g.indent_blankline_strict_tabs = true
 
 -- undotree
 -- also requires persistent undos in the options
@@ -36,7 +34,6 @@ cmd[[ function! g:Undotree_CustomMap()
 	nmap <buffer> K 7k
 	nmap <buffer> U <plug>UndotreeRedo
 	endfunc ]]
-
 
 -- use vim.notify for all messages
 vim.notify = require("notify")

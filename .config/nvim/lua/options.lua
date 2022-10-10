@@ -20,9 +20,9 @@ opt.softtabstop = 3
 opt.shiftwidth = 3
 opt.shiftround = true
 opt.list = true
-opt.listchars = "lead:·,multispace:·,tab:  "
+opt.listchars = "multispace:··,tab:  "
 
- -- remove trailing whitespaces on save
+-- remove trailing whitespaces on save
 augroup("Mini-Lint",{})
 autocmd("BufWritePre", {
 	group = "Mini-Lint",
