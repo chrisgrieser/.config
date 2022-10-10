@@ -11,8 +11,8 @@ function customHighlights()
 	cmd[[highlight DiagnosticUnderlineInfo gui=underline]]
 
 	-- mixed whitespace
-	cmd[[highlight MixedWhiteSpace guibg=DarkGrey ctermbg=DarkGrey]]
-	cmd[[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
+	-- cmd[[highlight MixedWhiteSpace guibg=DarkGrey ctermbg=DarkGrey]]
+	-- cmd[[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 
 	-- URLs
 	cmd[[highlight urls cterm=underline term=underline gui=underline]]

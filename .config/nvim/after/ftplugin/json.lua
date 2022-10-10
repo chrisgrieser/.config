@@ -4,6 +4,8 @@ bo.tabstop = 2
 bo.softtabstop = 2
 bo.expandtab = true
 
+bo.listchars = "tab:>>"
+
 -- hides quotes in JSON, making it actually more readable
 opt.conceallevel = 2
 

@@ -10,9 +10,28 @@ opt.wildmenu = true -- display all matching files when tab completing
 
 -- Gutter
 opt.number = true
-opt.numberwidth = 2 -- minum width, save some space for shorter files
+opt.numberwidth = 3 -- minimum width, save some space for shorter files
 opt.relativenumber = true
 opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
+
+-- whitespace & indentation
+opt.tabstop = 3
+opt.softtabstop = 3
+opt.shiftwidth = 3
+opt.shiftround = true
+opt.list = true
+opt.listchars = "lead:·,multispace:·,tab:  "
+
+ -- remove trailing whitespaces on save
+augroup("Mini-Lint",{})
+autocmd("BufWritePre", {
+	group = "Mini-Lint",
+	callback = function ()
+		local save_view = fn.winsaveview() -- save cursor positon
+		cmd[[%s/\s\+$//e]]
+		fn.winrestview(save_view)
+	end
+})
 
 -- Split
 opt.splitright = true -- vsplit right instead of left
@@ -39,12 +58,6 @@ opt.history = 777 -- do not save too much history to reduce noise for command li
 
 -- Mouse
 opt.mousemodel="extend" -- deacvitate context menu, right mouse instead expands selection
-
--- tabs & indentation
-opt.tabstop = 3
-opt.softtabstop = 3
-opt.shiftwidth = 3
-opt.shiftround = true
 
 -- ruler
 opt.textwidth = 80 -- used by `gq` and wrap
@@ -88,18 +101,6 @@ autocmd ("BufReadPost", {
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
 autocmd("TextYankPost", { command = "silent! lua vim.highlight.on_yank{timeout = 2500}" })
-
--- Mini-Linting on save
-augroup("Mini-Lint",{})
-autocmd("BufWritePre", {
-	callback = function ()
-		local save_view = fn.winsaveview()
-		-- remove trailing whitespaces
-		-- add line breaks at end if there is-none, needs \r: https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
-		cmd[[%s/\s\+$//e]]
-		fn.winrestview(save_view)
-	end
-})
 
 -- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070
 -- (see also the respective "change small word" keybinding <leader><space>)
