@@ -8,9 +8,9 @@ function PluginList ()
 	use 'folke/tokyonight.nvim'
 	use 'Mofiqul/dracula.nvim'
 	use 'EdenEast/nightfox.nvim'
+	use 'marko-cerovac/material.nvim'
 
 	use 'sainnhe/edge'
-	use 'marko-cerovac/material.nvim'
 	use 'catppuccin/nvim'
 	use "rebelot/kanagawa.nvim"
 	use "bluz71/vim-moonfly-colors"
@@ -61,6 +61,7 @@ function PluginList ()
 	use 'airblade/vim-gitgutter'
 	use 'f-person/auto-dark-mode.nvim' -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
+	use 'RRethy/vim-illuminate' -- highlight current word
 
 	-- File Management & Switching
 	use 'tpope/vim-eunuch' -- file operation utilities
