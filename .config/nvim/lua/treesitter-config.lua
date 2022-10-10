@@ -34,6 +34,12 @@ require('nvim-treesitter.configs').setup {
 				["<C-k>"] = "@function.outer",
 			},
 		},
+		swap = {
+			enable = true,
+			swap_next = {
+				["<leader>S"] = "@parameter.inner",
+			},
+		},
 		select = {
 			enable = true,
 			lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim

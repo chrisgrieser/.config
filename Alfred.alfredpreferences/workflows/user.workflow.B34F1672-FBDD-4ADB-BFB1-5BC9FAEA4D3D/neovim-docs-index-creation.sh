@@ -31,7 +31,7 @@ done)
 
 # ANCHORS
 anchors=$(grep -REo "\*([()_.:A-Za-z-]+|[0-9E]+)\*(.*\*.*\*)?" | tr -d "*" | sed 's/txt:/html#/' | cut -c3- | while read -r line ; do
-	url=$(echo "$line" | cut -d" " -f1)
+	url=$(echo "$line" | cut -d" " -f1 | sed 's/:/%3A/')
 	if [[ "$line" =~ " " ]]; then
 		synonyms=",$(echo "$line" | cut -d" " -f2-)"
 	else

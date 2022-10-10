@@ -26,7 +26,9 @@ if (fileExists("url-list.txt")) {
 			const site = url
 				.split("/").pop()
 				.split(".").shift();
-			let name = url.split("#").pop().replaceAll("'", "");
+			let name = url.split("#").pop()
+				.replaceAll("%3A", ":")
+				.replaceAll("'", "");
 			const subtitle = site;
 			let synonyms = "";
 
@@ -45,7 +47,7 @@ if (fileExists("url-list.txt")) {
 				"title": name + synonyms,
 				"match": alfredMatcher(name) + " " + site + " " + alfredMatcher(synonyms),
 				"subtitle": subtitle,
-				"arg": encodedURL,
+				"arg": url,
 				"uid": url,
 			};
 		});
