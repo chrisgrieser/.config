@@ -1,3 +1,6 @@
+require("utils")
+--------------------------------------------------------------------------------
+
 -- comment marks more useful than symbols for theme development
 keymap("n", "gs", function() telescope.current_buffer_fuzzy_find{
 	default_text='/* < ',
@@ -16,3 +19,4 @@ cmd[[setlocal iskeyword+=-]]
 -- however, using treesitter, this is less of an issue, but treesitter css
 -- highlighting isn't good yet, so...
 keymap("n", "zz", ":syntax sync fromstart<CR>", {buffer = true})
+
