@@ -2,8 +2,9 @@ require("utils")
 --------------------------------------------------------------------------------
 
 -- BASE CONFIG
-darkTheme = "tokyonight-moon"
-lightTheme = "material"
+local darkTheme = "tokyonight-moon"
+local lightTheme = "dawnfox"
+local cssLightTheme = "tokyonight-day" -- dawnfox looks bad in css...
 
 g.gui_font_default_size = 25.2
 g.gui_font_face = "JetBrainsMonoNL Nerd Font"
@@ -11,16 +12,20 @@ opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinko
 
 --------------------------------------------------------------------------------
 
-require('material').setup{
-	lualine_style = "stealth",
-}
-
 -- THEME
 local function light()
-	cmd("colorscheme "..lightTheme)
-	-- api.nvim_set_option('background', 'light')
-	cmd[[highlight TreesitterContext guibg=#324f52]]
-	g.neovide_transparency = 0.97
+	if bo.filetype == "css" then
+		targetTheme = cssLightTheme
+	else
+		targetTheme = lightTheme
+	end
+	cmd("colorscheme "..targetTheme)
+
+	api.nvim_set_option('background', 'light')
+	cmd[[highlight TreesitterContext guibg=Grey]]
+	g.neovide_transparency = 0.93
+
+	cmd[[highlight IndentBlanklineChar guifg=DarkGrey]] -- increase contrast for dawnfox
 end
 
 local function dark()
