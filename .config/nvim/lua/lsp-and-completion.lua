@@ -7,10 +7,11 @@ require("utils")
 
 -- DIAGNOTICS (in general, also applies to nvim-lint etc.)
 local opts = { noremap=true, silent=true }
-keymap('n', 'ge', vim.diagnostic.goto_next, opts)
-keymap('n', 'gE', vim.diagnostic.goto_prev, opts)
+keymap('n', 'ge', function () vim.diagnostic.goto_next({wrap=true, float=false}) end, opts)
+keymap('n', 'ge', function () vim.diagnostic.goto_prev({wrap=true, float=false}) end, opts)
 keymap('n', 'gs', function() telescope.treesitter() end, {silent = true}) -- fallback for languages without an action LSP
 
+-- add code or the rule to the message
 function formatDiagnosticMessage(diagnostic)
 	return diagnostic.message.." ("..tostring(diagnostic.code)..")"
 end
@@ -20,7 +21,7 @@ vim.diagnostic.config{
 		format = formatDiagnosticMessage,
 	},
 	float = {
-		source = "if_many",
+		source = true,
 		border = "rounded",
 		format = formatDiagnosticMessage,
 	}

@@ -823,7 +823,8 @@
             {
               "type": "frontmost_application_if",
               "bundle_identifiers": [
-                "^com\\.hnc\\.Discord$"
+                "^com\\.hnc\\.Discord$",
+                "^com\\.tinyspeck\\.slackmacgap$"
               ]
             }
           ]

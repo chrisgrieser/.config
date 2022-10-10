@@ -255,6 +255,7 @@ rules:
               - ^org\.hammerspoon\.Hammerspoon$
   - description: "🅰️💬 Slack"
     # https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
+    # INFO: cmd+e for inline code is at the Discord-Section
     manipulators:
       # go to next unread message
       - type: basic
@@ -436,6 +437,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.hnc\.Discord$
+              - ^com\.tinyspeck\.slackmacgap$
       # [r]eply to msg above
       - type: basic
         from:
