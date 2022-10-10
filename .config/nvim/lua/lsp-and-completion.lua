@@ -74,12 +74,15 @@ keymap('n', 'gs', function() telescope.treesitter() end, {silent = true})
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-local
-
+	vim.pretty_print(client)
 	-- Mappings (See `:help vim.lsp.*` for documentation on any of the below functions)
 	local bufopts = { silent=true, buffer=true }
 	keymap('n', 'gd', function() telescope.lsp_definitions() end, bufopts)
 	keymap('n', 'gD', function() telescope.lsp_references() end, bufopts)
-	keymap('n', 'gs', function() telescope.lsp_document_symbols() end, bufopts) -- overrides treesitter symbols browsing
+
+	if client.cmd[1] ~= "vscode" then
+		keymap('n', 'gs', function() telescope.lsp_document_symbols() end, bufopts) -- overrides treesitter symbols browsing
+	end
 	keymap('n', 'gS', ":SymbolsOutline<CR>", bufopts)
 	keymap('n', 'gy', function() telescope.lsp_type_definitions() end, bufopts)
 	keymap('n', '<leader>R', vim.lsp.buf.rename, bufopts)
