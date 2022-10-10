@@ -2,11 +2,12 @@
 require('lint').linters_by_ft = {
 	sh = { 'shellcheck' },
 	zsh = { 'shellcheck' },
-	css = { 'stylelint' },
-	javascript = { 'eslint' },
-	typescript = { 'eslint' },
 	yaml = { 'yamllint' },
 	lua = { 'selene' },
+	-- available via lsp servers already (and better integrated there?)
+	-- css = { 'stylelint' },
+	-- javascript = { 'eslint' },
+	-- typescript = { 'eslint' },
 }
 
 -- when to lint

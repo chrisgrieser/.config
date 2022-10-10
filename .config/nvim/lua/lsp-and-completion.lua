@@ -60,11 +60,13 @@ require("mason-lspconfig").setup({
 	ensure_installed = {
 		"sumneko_lua",
 		"yamlls",
-		"eslint",
+		"eslint", -- ts/js
 		"tsserver", -- ts/js
 		"marksman", -- markdown
+		"remark_ls", -- markdown
 		"jsonls",
 		"cssls",
+		"stylelint_lsp", -- css
 	},
 })
 
@@ -270,6 +272,17 @@ lspConfig['cssls'].setup{
 	}
 }
 
+lspConfig['stylelint_lsp'].setup{
+	on_attach = on_attach,
+	capabilities = capabilities,
+	root_dir = function() return vim.fn.getcwd() end,
+	settings =  {
+		stylelintplus =  {
+			configFile = home.."/.stylelintrc.json",
+		}
+	}
+}
+
 lspConfig['tsserver'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -286,6 +299,11 @@ lspConfig['jsonls'].setup{
 }
 
 lspConfig['eslint'].setup{
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+lspConfig['remark_ls'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 }
