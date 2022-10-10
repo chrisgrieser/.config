@@ -1,10 +1,11 @@
 -- nvim-lint
 require('lint').linters_by_ft = {
-	sh = { 'shellcheck' },
+	sh = { 'shellcheck' }, -- bashls, diagnosticls both do not work for zsh shellcheck; efm depends on go
 	zsh = { 'shellcheck' },
+	lua = { 'selene' },
+	yaml = { 'yamllint' },
 	css = { 'stylelint' }, -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
-	-- available via lsp servers already (and better integrated there?)
-	-- javascript = { 'eslint' },
+	-- javascript = { 'eslint' }, available via lsp servers already and better integrated there
 	-- typescript = { 'eslint' },
 }
 
@@ -28,8 +29,12 @@ table.insert(shellcheckArgs, 1, "--external-sources")
 local stylelintArgs = require("lint.linters.stylelint").args
 table.insert(stylelintArgs, 1, "--quiet")
 
--- -- eslint: use config
--- local eslintArgs = require("lint.linters.eslint").args
--- table.insert(eslintArgs, "--config")
--- table.insert(eslintArgs, '"$HOME/dotfiles/linter rclines/.eslintrc.json"')
+-- selene: use config
+local seleneArgs = require("lint.linters.selene").args
+table.insert(seleneArgs, "--config")
+table.insert(seleneArgs, '"$HOME/dotfiles/linter rclines/selene.toml"')
 
+-- fix yamllint config
+local yamllintArgs = require("lint.linters.yamllint").args
+table.insert(yamllintArgs, "--config-file")
+table.insert(yamllintArgs, '"$HOME/.config/.yamllint.yaml"')
