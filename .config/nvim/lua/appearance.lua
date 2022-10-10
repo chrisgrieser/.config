@@ -2,25 +2,16 @@ require("utils")
 -- see also gui-settings.lua
 
 --------------------------------------------------------------------------------
--- UI ELEMENTS
-
--- cursor
-opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinkoff500-blinkon700"
+-- STYLING FOR VIM IN TERMINAL
 
 -- Ruler
 cmd[[highlight ColorColumn ctermbg=DarkGrey]]
 
 -- Active Line
-cmd[[highlight CursorLine term=none cterm=none  ctermbg=black]]
-
--- Current Word Highlight (from Coc)
-cmd[[highlight CocHighlightText term=underline cterm=underline]]
-
--- TreeSitter Context Line
-cmd[[highlight TreesitterContext ctermbg=black]]
+cmd[[highlight CursorLine term=none cterm=none ctermbg=black]]
 
 -- Indentation Lines
-cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey guifg=DarkGrey]]
+cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey]]
 
 -- Comments
 cmd[[highlight Comment ctermfg=grey]]
@@ -36,16 +27,35 @@ cmd[[highlight CursorLineNr ctermfg=Grey]]
 --------------------------------------------------------------------------------
 -- custom highlights
 
--- leading spaces
-cmd[[highlight WhiteSpaceBol guibg=DarkGrey ctermbg=DarkGrey]]
-cmd[[call matchadd('WhiteSpaceBol', '^ \+')]]
+function customHighlights()
+	-- Diagnostics: use straight underlines instead of curly underlines
+	cmd[[highlight DiagnosticUnderlineError gui=underline]]
+	cmd[[highlight DiagnosticUnderlineWarn gui=underline]]
+	cmd[[highlight DiagnosticUnderlineHint gui=underline]]
+	cmd[[highlight DiagnosticUnderlineInfo gui=underline]]
 
--- Annotations
-cmd[[highlight def link myAnnotations Todo]] -- use same styling as "TODO"
-cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED') ]]
+	-- leading spaces
+	cmd[[highlight WhiteSpaceBol guibg=DarkGrey ctermbg=DarkGrey]]
+	cmd[[call matchadd('WhiteSpaceBol', '^ \+')]]
 
-cmd[[highlight urls cterm=underline term=underline gui=underline]]
-cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-]*') ]]
+	-- URLs
+	cmd[[highlight urls cterm=underline term=underline gui=underline]]
+	cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-]*') ]]
+
+	-- Annotations
+	cmd[[highlight def link myAnnotations Todo]] -- use same styling as "TODO"
+	cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED') ]]
+end
+
+customHighlights() -- call once for startup / nvim in the Terminal
+
+-- since overriden by some themes, also call after a colorscheme
+-- has been loaded
+augroup("themeAdditions", {})
+autocmd("ColorScheme", {
+	group = "themeAdditions",
+	callback = customHighlights,
+})
 
 --------------------------------------------------------------------------------
 
@@ -82,12 +92,6 @@ for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-
--- use straight underlines instead of curly underlines
-cmd[[highlight DiagnosticUnderlineError gui=underline]]
-cmd[[highlight DiagnosticUnderlineWarn gui=underline]]
-cmd[[highlight DiagnosticUnderlineHint gui=underline]]
-cmd[[highlight DiagnosticUnderlineInfo gui=underline]]
 
 --------------------------------------------------------------------------------
 

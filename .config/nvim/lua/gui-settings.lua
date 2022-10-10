@@ -5,8 +5,9 @@ require("utils")
 darkTheme = "tokyonight-moon"
 lightTheme = "tokyonight-day"
 
-g.gui_font_default_size = 25.5
+g.gui_font_default_size = 25.2
 g.gui_font_face = "JetBrainsMonoNL Nerd Font"
+opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinkoff500-blinkon700"
 
 --------------------------------------------------------------------------------
 
@@ -34,23 +35,16 @@ auto_dark_mode.setup({
 })
 auto_dark_mode.init()
 
--- -- use straight underlines instead of curly underlines
--- cmd[[highlight DiagnosticUnderlineError gui=underline]]
--- cmd[[highlight DiagnosticUnderlineWarn gui=underline]]
--- cmd[[highlight DiagnosticUnderlineHint gui=underline]]
--- cmd[[highlight DiagnosticUnderlineInfo gui=underline]]
-
 --------------------------------------------------------------------------------
 
 keymap({"n", "v", "i"}, "<D-w>", ":bd<CR>") -- cmd+w
-keymap({"n", "v", "i"}, "<D-q>", ":wall!<CR>:quitall!<CR>") -- cmd+q
 
 keymap({"n", "v"}, "<D-z>", ":undo<CR>") -- cmd+z
 keymap({"n", "v"}, "<D-Z>", ":redo<CR>") -- cmd+shift+z
-keymap({"n", "v"}, "<D-s>", ":write!<CR>") -- cmd+s
-keymap("i", "<D-s>", "<Esc>:write!<CR>a")
 keymap("i", "<D-z>", "<Esc>:undo<CR>a")
 keymap("i", "<D-Z>", "<Esc>:redo<CR>a")
+keymap({"n", "v"}, "<D-s>", ":write!<CR>") -- cmd+s
+keymap("i", "<D-s>", "<Esc>:write!<CR>a")
 keymap("n", "<D-a>", "ggVG") -- cmd+a
 keymap("i", "<D-a>", "<Esc>ggVG")
 keymap("v", "<D-a>", "ggG")

@@ -36,6 +36,7 @@ autocmd("CursorHold", {
 })
 
 
+-- textobj diagnostic plugin
 require("textobj-diagnostic").setup{create_default_keymaps = false}
 keymap({"x", "o"}, "id", function() require("textobj-diagnostic").next_diag_inclusive() end, { silent = true })
 
@@ -227,32 +228,32 @@ lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = { -- https://github.com/sumneko/lua-language-server/wiki/Settings
-	Lua = {
-		runtime = { version = 'LuaJIT', },  -- LuaJIT is used by neovim
-		completion = {
-			callSnippet = "both",
-			keywordSnippet = "both",
-		},
-		diagnostics = {
-			globals = {"vim", "use", "martax"},
-			disable = {
-				"trailing-space",
-				"lowercase-global",
-				"undefined-field", -- https://github.com/sumneko/lua-language-server/issues/1615
+		Lua = {
+			runtime = { version = 'LuaJIT', },  -- LuaJIT is used by neovim
+			completion = {
+				callSnippet = "both",
+				keywordSnippet = "both",
 			},
-		},
-		workspace = {
-			library =  {
-				home.."/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
-			}
-		},
-		telemetry = { enable = false },
-		hint = {
-			enable = true,
-			settype = true
-		},
+			diagnostics = {
+				globals = {"vim", "use", "martax"},
+				disable = {
+					"trailing-space",
+					"lowercase-global",
+					"undefined-field", -- https://github.com/sumneko/lua-language-server/issues/1615
+				},
+			},
+			workspace = {
+				library =  {
+					home.."/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
+				}
+			},
+			telemetry = { enable = false },
+			hint = {
+				enable = true,
+				settype = true
+			},
+		}
 	}
-}
 }
 
 lspConfig['cssls'].setup{
