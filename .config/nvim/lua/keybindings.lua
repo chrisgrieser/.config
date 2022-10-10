@@ -81,7 +81,7 @@ keymap("n", "g-", function() telescope.current_buffer_fuzzy_find() end) -- alter
 
 -- Marks
 keymap("", "ä", "`") -- Goto Mark
-keymap("n", "<leader>m", function() telescope.marks() end) -- search marks
+keymap("n", "<leader>ä", function() telescope.marks() end) -- search marks
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -116,9 +116,9 @@ keymap("o", "P", '{') -- beginning of the [P]aragraph
 keymap({"n", "v"}, "q" ,"<Plug>Commentary")
 keymap("n", "qq" ,"mz<Plug>CommentaryLine`z")
 keymap("n", "qu" ,"<Plug>Commentary<Plug>Commentary") -- undo comment
-keymap("o", "aq" ,"<Plug>Commentary")
+keymap("o", "aq" ,"<Plug>Commentary") -- better text object than from treesitter
 keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
--- INFO gq and gQ mapped as goto next/prev comment via treesitter text obj
+-- INFO gq and gQ mapped as goto next/prev comment via treesitter textobj
 
 -- append comment to current line (equivalent to gcA from comments.nvim)
 keymap("n", "Q" , function()
@@ -196,9 +196,9 @@ keymap("n", "Ö", "<Plug>(SubversiveSubstituteToEndOfLine)")
 keymap("n", "R", ':noautocmd normal!mz"zyy"zp`zj<CR>', {silent = true}) -- current line, ":noautocmd" to disable highlighted yank for this
 keymap("v", "R", '"zy`]"zp', {silent = true}) -- selection (best used with Visual Line Mode)
 
--- Line & Character Movement
-g.move_map_keys = 0 -- disable automatic keymaps of vim.move
-keymap("n", "<Down>", "<Plug>MoveLineDown") -- also auto-indents
+-- Line & Character Movement (vim.move plugin)
+g.move_map_keys = 0 -- disable default keymaps of vim.move
+keymap("n", "<Down>", "<Plug>MoveLineDown")
 keymap("n", "<Up>", "<Plug>MoveLineUp")
 keymap("v", "<Down>", "<Plug>MoveBlockDown")
 keymap("v", "<Up>", "<Plug>MoveBlockUp")
@@ -213,7 +213,7 @@ keymap({"n", "v"}, "M", "J") -- [M]erge line up
 keymap({"n", "v"}, "gm", "ddpkJ") -- [m]erge line down
 g.splitjoin_split_mapping = '' -- disable default mappings
 g.splitjoin_join_mapping  = ''
-keymap("n", "<leader>j", ":SplitjoinJoin<CR>")
+keymap("n", "<leader>m", ":SplitjoinJoin<CR>")
 keymap("n", "<leader>s", ":SplitjoinSplit<CR>")
 
 -- Undo

@@ -20,7 +20,7 @@ require('nvim-treesitter.configs').setup {
 		"jsonc",
 	},
 
-	auto_install = true,	-- when entering a buffer
+	auto_install = true,	-- install missing parers when entering a buffer
 
 	highlight = {
 		enable = true,

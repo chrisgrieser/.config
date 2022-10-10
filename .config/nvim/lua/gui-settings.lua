@@ -2,8 +2,7 @@ require("utils")
 --------------------------------------------------------------------------------
 
 -- BASE CONFIG
-local darkTheme = "dracula"
--- local darkTheme = "tokyonight-moon"
+local darkTheme = "tokyonight-moon"
 local lightTheme = "dawnfox"
 
 g.gui_font_default_size = 25.2
