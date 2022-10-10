@@ -2,6 +2,8 @@
 require("utils")
 -------------------------------------------------------------------------------
 
+opt.redrawtime = 10000
+
 -- Search
 opt.showmatch = true
 opt.smartcase = true
