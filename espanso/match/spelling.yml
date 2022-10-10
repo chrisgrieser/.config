@@ -159,6 +159,6 @@ matches:
   - trigger: vllt
     replace: vielleicht
     word: true
-  # words ending with "ing", but not "sign" or "align"
-  - regex: "(?P<prefix>\\w{3})ign\\b"
-    replace: "{{prefix}}ing"
+      # words ending with "ing" but not "sign" or "align"
+  - regex: "(?P<prefix>\\w{3})ign "
+    replace: "{{prefix}}ing "
