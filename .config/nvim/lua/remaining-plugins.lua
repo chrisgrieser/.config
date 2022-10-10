@@ -5,7 +5,7 @@ g.netrw_banner = 0 -- no ugly top banner
 -- Sneak
 cmd[[let g:sneak#s_next = 1]] -- "s" repeats, like with clever-f
 cmd[[let g:sneak#use_ic_scs = 1]] -- smart case
-cmd[[let g:sneak#prompt = '👟']] -- the sneak in command line :P
+cmd[[let g:sneak#prompt = '👟 ']]
 
 -- Emmet: use only in CSS insert mode
 g.user_emmet_install_global = 0
