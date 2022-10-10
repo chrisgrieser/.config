@@ -8,6 +8,12 @@ opt.smartcase = true
 opt.ignorecase = true
 opt.wildmenu = true -- display all matching files when tab completing
 
+-- Spelling
+opt.spell = false
+opt.spelllang = "en_us"
+
+cmd[[syntax match UrlNoSpell '\w\+:\/\/[:alnum:]\+' contains=@NoSpell")
+
 -- Gutter
 opt.number = true
 opt.numberwidth = 3 -- minimum width, save some space for shorter files
