@@ -1,4 +1,5 @@
 require("utils")
+require("appearance")
 --------------------------------------------------------------------------------
 
 -- BASE CONFIG
@@ -16,16 +17,18 @@ local function light()
 	cmd("colorscheme "..lightTheme)
 	cmd[[highlight IndentBlanklineChar guifg=DarkGrey]] -- increase contrast for dawnfox
 
-	api.nvim_set_option('background', 'light')
+	opt.background = 'light'
 	cmd[[highlight TreesitterContext guibg=Grey]]
 	g.neovide_transparency = 0.93
+	customHighlights()
 end
 
 local function dark()
 	cmd("colorscheme "..darkTheme)
-	api.nvim_set_option('background', 'dark')
+	opt.background = 'dark'
 	cmd[[highlight TreesitterContext guibg=#191726]]
 	g.neovide_transparency = 0.97
+	customHighlights()
 end
 
 -- toggle theme with OS
