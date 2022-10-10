@@ -2,8 +2,8 @@
 require('lint').linters_by_ft = {
 	sh = { 'shellcheck' },
 	zsh = { 'shellcheck' },
+	css = { 'stylelint' }, -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 	-- available via lsp servers already (and better integrated there?)
-	-- css = { 'stylelint' },
 	-- javascript = { 'eslint' },
 	-- typescript = { 'eslint' },
 }
@@ -24,9 +24,9 @@ table.insert(shellcheckArgs, 1, "bash")
 table.insert(shellcheckArgs, 1, "--shell")
 table.insert(shellcheckArgs, 1, "--external-sources")
 
--- -- stylelint: surpress warnings
--- local stylelintArgs = require("lint.linters.stylelint").args
--- table.insert(stylelintArgs, 1, "--quiet")
+-- stylelint: surpress warnings
+local stylelintArgs = require("lint.linters.stylelint").args
+table.insert(stylelintArgs, 1, "--quiet")
 
 -- -- eslint: use config
 -- local eslintArgs = require("lint.linters.eslint").args

@@ -1,6 +1,6 @@
 require("utils")
 -- INFO: required order of setup() calls is
--- mason, mason-config, nvim-deb, lspconfig
+-- mason, mason-config, nvim-dev, lspconfig
 -- https://github.com/williamboman/mason-lspconfig.nvim#setup
 
 --------------------------------------------------------------------------------
@@ -11,7 +11,7 @@ keymap('n', 'ge', function () vim.diagnostic.goto_next({wrap=true, float=false})
 keymap('n', 'ge', function () vim.diagnostic.goto_prev({wrap=true, float=false}) end, opts)
 keymap('n', 'gs', function() telescope.treesitter() end, {silent = true}) -- fallback for languages without an action LSP
 
--- add code or the rule to the message
+-- add code/rule to the message
 function formatDiagnosticMessage(diagnostic)
 	return diagnostic.message.." ("..tostring(diagnostic.code)..")"
 end
@@ -45,11 +45,8 @@ keymap({"x", "o"}, "id", function() require("textobj-diagnostic").next_diag_incl
 
 require("mason").setup({
 	ui = {
-		icons = {
-			package_installed = "✓",
-			package_pending = "➜",
-			package_uninstalled = "✗"
-		}
+		border = "rounded",
+		icons = { package_installed = "✓", package_pending = "➜", package_uninstalled = "✗" }
 	}
 })
 
@@ -67,8 +64,7 @@ require("mason-lspconfig").setup({
 		"remark_ls", -- markdown
 		"jsonls",
 		"cssls",
-		"bashls",
-		"stylelint_lsp", -- css
+		-- "stylelint_lsp", -- not using lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 		-- REQUIRED: new servers also need to be set up further below
 	},
 })
@@ -275,22 +271,22 @@ lspConfig['cssls'].setup{
 	}
 }
 
-lspConfig['stylelint_lsp'].setup{
-	on_attach = on_attach,
-	capabilities = capabilities,
-	root_dir = function() return vim.fn.getcwd() end, -- needs root-dir to work
-	-- settings =  {
-	-- 	stylelintplus =  {
-	-- 		configFile = home.."/.stylelintrc.json",
-	-- 	}
-	-- }
-}
+-- lspConfig['stylelint_lsp'].setup{
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- 	root_dir = function() return vim.fn.getcwd() end, -- needs root-dir to work
+-- 	settings =  {
+-- 		stylelintplus =  {
+-- 			configFile = home.."/.stylelintrc.json",
+-- 		}
+-- 	}
+-- }
 
-lspConfig['bashls'].setup{
-	on_attach = on_attach,
-	capabilities = capabilities,
-	filetypes = {"sh", "zsh"}
-}
+-- lspConfig['bashls'].setup{
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- 	filetypes = {"sh", "zsh"}
+-- }
 
 lspConfig['tsserver'].setup{
 	on_attach = on_attach,
