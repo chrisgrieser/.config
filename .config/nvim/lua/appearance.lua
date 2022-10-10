@@ -12,11 +12,10 @@ function customHighlights()
 
 	-- mixed whitespace
 	cmd[[highlight MixedWhiteSpace guibg=DarkGrey ctermbg=DarkGrey]]
-	cmd[[call matchadd('MixedWhiteSpace', '^\(\\t+ \| +\\t\)[:space:]*')]]
- 	  cmd[[highlight clear MixedWhiteSpace]]
+	cmd[[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 
 	-- URLs
-	cmd[[highlight urls cterm=underline term=underline gui=underline]]
+   cmd[[highlight urls cterm=underline term=underline gui=underline]]
 	cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-?]*') ]]
 
 	-- Annotations
@@ -78,13 +77,22 @@ local function currentFile() -- using this function instead of default filename,
 	return "%% "..curFile -- "%" is lua's escape character and therefore needs to be escaped itself
 end
 
+local function mixedIndentation()
+	local hasTabs = fn.search("^\t", "nw") ~= 0
+	local hasSpaces = fn.search("^ ", "nw") ~= 0
+	if hasSpaces and hasTabs then
+		return " mixed indentation"
+	end
+	return ""
+end
+
 require('lualine').setup {
 	sections = {
 		lualine_a = {'mode'},
 		lualine_b = {{ currentFile }},
 		lualine_c = {{ alternateFile }},
 		lualine_x = {'diff'},
-		lualine_y = {'diagnostics'},
+		lualine_y = {'diagnostics', {mixedIndentation}},
 		lualine_z = {'location', 'progress'},
 	},
 	options = {
