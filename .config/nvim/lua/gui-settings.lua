@@ -3,7 +3,7 @@ require("utils")
 
 -- BASE CONFIG
 darkTheme = "tokyonight-moon"
-lightTheme = "tokyonight-day"
+lightTheme = "material"
 
 g.gui_font_default_size = 25.2
 g.gui_font_face = "JetBrainsMonoNL Nerd Font"
@@ -11,12 +11,16 @@ opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinko
 
 --------------------------------------------------------------------------------
 
+require('material').setup{
+	lualine_style = "stealth",
+}
+
 -- THEME
 local function light()
 	cmd("colorscheme "..lightTheme)
-	api.nvim_set_option('background', 'light')
-	cmd[[highlight TreesitterContext guibg=DarkGrey]]
-	g.neovide_transparency = 0.92
+	-- api.nvim_set_option('background', 'light')
+	cmd[[highlight TreesitterContext guibg=#324f52]]
+	g.neovide_transparency = 0.97
 end
 
 local function dark()
