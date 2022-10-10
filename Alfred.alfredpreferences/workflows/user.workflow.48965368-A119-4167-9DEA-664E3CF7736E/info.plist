@@ -8,6 +8,19 @@
 	<string>Tweaks</string>
 	<key>connections</key>
 	<dict>
+		<key>0640120B-5CE8-4A24-8E58-F9B252A5B827</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2D996A5F-76DB-4596-BAC7-C918B0EFD902</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2D996A5F-76DB-4596-BAC7-C918B0EFD902</key>
 		<array>
 			<dict>
@@ -81,6 +94,124 @@
 	<string>RenameAction</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>function run(argv) {
+  const fullPath = argv[0]
+  const dirname = $(fullPath).stringByDeletingLastPathComponent.js
+  const basenameNoExtension = $(fullPath).lastPathComponent.stringByDeletingPathExtension.js
+  const extension = $(fullPath).pathExtension.js
+
+  return JSON.stringify({
+    "alfredworkflow" : {
+      "arg": basenameNoExtension,
+      "variables": {
+        "origFullPath": fullPath,
+        "origDirname": dirname,
+        "origBasenameNoExtension": basenameNoExtension,
+        "origExtension": extension
+      }
+    }
+  })
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2D996A5F-76DB-4596-BAC7-C918B0EFD902</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Please wait…</string>
+				<key>script</key>
+				<string>ObjC.import('stdlib')
+
+function run(argv) {
+  const origExtension = $.getenv("origExtension") 
+  const newExtension = origExtension.length === 0 ? "" : "." + origExtension
+
+  const newBasenameNoExtension = argv[0]
+  const newFullPath = $.getenv("origDirname") + "/" + newBasenameNoExtension + newExtension
+  
+  if (newBasenameNoExtension === $.getenv("origBasenameNoExtension")) {
+    return JSON.stringify({ "items": [{
+      "title": "Rename to",
+      "subtitle": "File extension is preserved",
+      "valid": false
+    }]})
+  }
+  
+  if (Application('Finder').exists(Path(newFullPath))) {
+    return JSON.stringify({ "items": [{
+      "title": "Path already exists!",
+      "subtitle": newFullPath,
+      "valid": false
+    }]})
+  }
+  
+  return JSON.stringify({ "items": [{
+    "title": "Rename to",
+    "subtitle": newFullPath,
+    "valid": true,
+    "arg": newFullPath
+  }]})
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Path extension is preserved</string>
+				<key>title</key>
+				<string>Rename to</string>
+				<key>type</key>
+				<integer>7</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>D307CADD-36C3-4EF0-98C3-1CA47407436A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -198,124 +329,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Please wait…</string>
-				<key>script</key>
-				<string>ObjC.import('stdlib')
-
-function run(argv) {
-  const origExtension = $.getenv("origExtension") 
-  const newExtension = origExtension.length === 0 ? "" : "." + origExtension
-
-  const newBasenameNoExtension = argv[0]
-  const newFullPath = $.getenv("origDirname") + "/" + newBasenameNoExtension + newExtension
-  
-  if (newBasenameNoExtension === $.getenv("origBasenameNoExtension")) {
-    return JSON.stringify({ "items": [{
-      "title": "Rename to",
-      "subtitle": "File extension is preserved",
-      "valid": false
-    }]})
-  }
-  
-  if (Application('Finder').exists(Path(newFullPath))) {
-    return JSON.stringify({ "items": [{
-      "title": "Path already exists!",
-      "subtitle": newFullPath,
-      "valid": false
-    }]})
-  }
-  
-  return JSON.stringify({ "items": [{
-    "title": "Rename to",
-    "subtitle": newFullPath,
-    "valid": true,
-    "arg": newFullPath
-  }]})
-}</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Path extension is preserved</string>
-				<key>title</key>
-				<string>Rename to</string>
-				<key>type</key>
-				<integer>7</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>D307CADD-36C3-4EF0-98C3-1CA47407436A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>function run(argv) {
-  const fullPath = argv[0]
-  const dirname = $(fullPath).stringByDeletingLastPathComponent.js
-  const basenameNoExtension = $(fullPath).lastPathComponent.stringByDeletingPathExtension.js
-  const extension = $(fullPath).pathExtension.js
-
-  return JSON.stringify({
-    "alfredworkflow" : {
-      "arg": basenameNoExtension,
-      "variables": {
-        "origFullPath": fullPath,
-        "origDirname": dirname,
-        "origBasenameNoExtension": basenameNoExtension,
-        "origExtension": extension
-      }
-    }
-  })
-}</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>7</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2D996A5F-76DB-4596-BAC7-C918B0EFD902</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
@@ -351,6 +364,21 @@ function run(argv) {
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>rename</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>0640120B-5CE8-4A24-8E58-F9B252A5B827</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>File action to rename a file or folder, preserving the extension.
@@ -360,6 +388,13 @@ Use Alfred to pick what you want to rename and choose `Rename` as the action. Al
 ![](https://i.imgur.com/F3JNrZA.png)</string>
 	<key>uidata</key>
 	<dict>
+		<key>0640120B-5CE8-4A24-8E58-F9B252A5B827</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
 		<key>130D3F3F-2318-4073-A4A3-6AED97A70266</key>
 		<dict>
 			<key>colorindex</key>
@@ -367,48 +402,50 @@ Use Alfred to pick what you want to rename and choose `Rename` as the action. Al
 			<key>note</key>
 			<string>OneUpdater</string>
 			<key>xpos</key>
-			<integer>815</integer>
+			<real>815</real>
 			<key>ypos</key>
-			<integer>20</integer>
+			<real>20</real>
 		</dict>
 		<key>2D996A5F-76DB-4596-BAC7-C918B0EFD902</key>
 		<dict>
 			<key>xpos</key>
-			<integer>225</integer>
+			<real>225</real>
 			<key>ypos</key>
-			<integer>20</integer>
+			<real>20</real>
 		</dict>
 		<key>4B30C050-DEC1-4375-8B11-20FA04A89596</key>
 		<dict>
 			<key>xpos</key>
-			<integer>25</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>20</integer>
+			<real>20</real>
 		</dict>
 		<key>947A1C83-3935-488B-BBBC-A01B072DD9A0</key>
 		<dict>
 			<key>note</key>
 			<string>Select argument</string>
 			<key>xpos</key>
-			<integer>425</integer>
+			<real>425</real>
 			<key>ypos</key>
-			<integer>150</integer>
+			<real>150</real>
 		</dict>
 		<key>D307CADD-36C3-4EF0-98C3-1CA47407436A</key>
 		<dict>
 			<key>xpos</key>
-			<integer>425</integer>
+			<real>425</real>
 			<key>ypos</key>
-			<integer>20</integer>
+			<real>20</real>
 		</dict>
 		<key>D6AD9678-C017-40CD-BD91-5E4102C39AD3</key>
 		<dict>
 			<key>xpos</key>
-			<integer>625</integer>
+			<real>625</real>
 			<key>ypos</key>
-			<integer>20</integer>
+			<real>20</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>version</key>
 	<string>22.1</string>
 	<key>webaddress</key>
