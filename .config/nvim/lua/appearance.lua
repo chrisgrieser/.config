@@ -23,7 +23,7 @@ function customHighlights()
 	cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED') ]]
 end
 
-
+customHighlights()
 
 -- since overriden by some themes, also call after a colorscheme
 -- has been loaded
@@ -33,8 +33,6 @@ autocmd("ColorScheme", {
 	callback = customHighlights,
 })
 
--- since overriden by some themes, also call after a colorscheme
--- has been loaded
 augroup("themeAdditions", {})
 autocmd("BufEnter", {
 	pattern = {"yaml", "json"},
