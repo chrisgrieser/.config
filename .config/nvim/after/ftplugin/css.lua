@@ -1,9 +1,9 @@
 -- comment marks more useful than symbols for theme development
 keymap("n", "gs", function() telescope.current_buffer_fuzzy_find{
-	default_text='/* <',
+	default_text='/* < ',
 	prompt_prefix='🪧',
 	prompt_title = 'Navigation Markers',
-} end, {buffer = true})
+} end, {buffer = true, silent = true})
 
 
 -- kebab-case variables, #hex color codes, & percentage values
