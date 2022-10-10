@@ -159,3 +159,5 @@ matches:
   - trigger: vllt
     replace: vielleicht
     word: true
+  - trigger: tempalte
+    replace: template

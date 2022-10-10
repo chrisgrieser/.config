@@ -21,3 +21,5 @@ cmd[[highlight Pmenu ctermbg=DarkGrey]]
 cmd[[highlight LineNr ctermfg=DarkGrey]]
 cmd[[highlight CursorLineNr ctermfg=Grey]]
 
+-- Tree Sitter Context Line
+cmd[[highlight TreesitterContext ctermbg=Black]]
