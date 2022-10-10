@@ -17,6 +17,9 @@ autocmd("FileType", {
 
 -- indention lines
 g.indent_blankline_filetype_exclude = {"undotree"}
+require("indent_blankline").setup {
+	show_current_context = true,
+}
 
 -- undotree
 -- also requires persistent undos in the options
@@ -39,6 +42,7 @@ cmd[[ function! g:Undotree_CustomMap()
 vim.notify = require("notify")
 
 
+-- Symbol outline
 require("symbols-outline").setup{
 	width = 40,
 	autofold_depth = 2,
