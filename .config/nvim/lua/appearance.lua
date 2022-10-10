@@ -35,7 +35,7 @@ autocmd("ColorScheme", {
 
 augroup("themeAdditions", {})
 autocmd("BufEnter", {
-	pattern = {"yaml", "json"},
+	pattern = {"yaml", "json", "css" },
 	group = "themeAdditions",
 	callback = function ()
 		cmd[[highlight clear WhiteSpaceBol]]

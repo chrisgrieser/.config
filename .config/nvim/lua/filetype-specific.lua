@@ -20,8 +20,8 @@ keymap("n", "<leader>d", 'mzlEF.yEEp`z') -- [d]ouble class under cursor
 keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>') -- [D]uplicate Class under cursor
 
 -- toggle !important
----@diagnostic disable: undefined-field
 keymap("n", "<leader>i", function ()
+	---@diagnostic disable: undefined-field
 	local lineContent = fn.getline('.')
 	if lineContent:find("!important") then
 		lineContent = lineContent:gsub(" !important", "")
@@ -29,6 +29,7 @@ keymap("n", "<leader>i", function ()
 		lineContent = lineContent:gsub(";", " !important;")
 	end
 	fn.setline(".", lineContent)
+	---@diagnostic enable: undefined-field
 end)
 
 -- JS / TS / Shell
@@ -47,14 +48,6 @@ autocmd("FileType", {
 	pattern = { "help", "startuptime", "qf", "lspinfo", "AppleScriptRunOutput" },
 	callback = function ()
 		keymap("n", "q", ":close<CR>", {buffer = true, silent = true})
-	end
-})
-
--- Emmet
-autocmd("FileType", {
-	pattern = {"css"},
-	callback = function ()
-		keymap("i", ",,", "<Plug>(emmet-expand-abbr)", {silent = true})
 	end
 })
 
