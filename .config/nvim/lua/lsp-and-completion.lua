@@ -11,7 +11,6 @@ keymap('n', 'ge', vim.diagnostic.goto_next, opts)
 keymap('n', 'gE', vim.diagnostic.goto_prev, opts)
 keymap('n', 'gs', function() telescope.treesitter() end, {silent = true}) -- fallback for languages without an action LSP
 
-
 function formatDiagnosticMessage(diagnostic)
 	return diagnostic.message.." ("..tostring(diagnostic.code)..")"
 end
@@ -55,7 +54,7 @@ require("mason").setup({
 --------------------------------------------------------------------------------
 
 require("mason-lspconfig").setup({
-	-- this plugin uses the lspconfig servernames, not mason servernames
+	-- mason-lspconfig uses the lspconfig servernames, not mason servernames
 	-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
 	ensure_installed = {
 		"sumneko_lua",
@@ -176,9 +175,9 @@ cmp.setup({
 cmp.setup.filetype ("lua", {
 	enabled = function()
 		local context = require 'cmp.config.context'
-		if vim.api.nvim_get_mode().mode == 'c' then -- keep command mode completion enabled when cursor is in a comment
+		if api.nvim_get_mode().mode == 'c' then -- keep command mode completion enabled when cursor is in a comment
 			return true
-		elseif vim.fn.getline("."):match("%s*%-+") then ---@diagnostic disable-line: undefined-field
+		elseif fn.getline("."):match("%s*%-+") then ---@diagnostic disable-line: undefined-field
 			return false
 		else
 			return not context.in_treesitter_capture("comment")
@@ -239,7 +238,6 @@ lspConfig['sumneko_lua'].setup{
 				disable = {
 					"trailing-space",
 					"lowercase-global",
-					"undefined-field", -- https://github.com/sumneko/lua-language-server/issues/1615
 				},
 			},
 			workspace = {
