@@ -8,7 +8,6 @@ keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
 
 -- search keymaps
 keymap("n", "?", function() telescope.keymaps() end)
-keymap("n", "g?", "K") -- help page for word under cursor
 keymap("n", "<leader>?", function() telescope.help_tags() end)
 
 -- Theme Picker
@@ -30,7 +29,7 @@ keymap("n", "<leader>P", ":PackerStatus<CR>")
 
 -- Utils
 keymap("n", "ZZ", ":w<CR>:q<CR>") -- quicker quitting
-keymap("n", "zz", ":! acp ")
+keymap("n", "zz", ":w<CR>:!acp ")
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -76,11 +75,9 @@ keymap("", "T", "<Plug>Sneak_T")
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "<Esc>", ":nohl<CR>:echo<CR>", {silent = true}) -- clear highlights & shortmessage
 keymap("", "+", "*") -- no more modifier key on German Keyboard
-keymap("n", "g-", function() telescope.current_buffer_fuzzy_find() end) -- alternative search
 
 -- Marks
 keymap("", "ä", "`") -- Goto Mark
-keymap("n", "<leader>ä", function() telescope.marks() end) -- search marks
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -166,7 +163,7 @@ keymap("v", "<S-Tab>", "<gv")
 
 keymap({"n", "v"}, "^", "=") -- auto-indent
 keymap("n", "^^", "mz=ip`z") -- since indenting paragraph more common than line
-keymap("n", "^p", "`[v`]=") -- last paste
+keymap("n", "^p", "mz`[v`]=`z") -- last paste
 keymap("n", "^A", "mzgg=G`z") -- entire file
 
 -- toggle word between Capital and lower case
@@ -177,7 +174,7 @@ local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}"
 for i = 1, #trailingKeys do
 	keymap("n", "<leader>"..trailingKeys[i], "mzA"..trailingKeys[i].."<Esc>`z")
 end
- -- Remove last character from line
+-- Remove last character from line
 keymap("n", "X", 'mz$"_x`z')
 
 -- Spelling (mnemonic: [z]pelling)
@@ -211,7 +208,7 @@ keymap("v", "<Left>", "<Plug>MoveBlockLeft")
 keymap({"n", "v"}, "M", "J") -- [M]erge line up
 keymap({"n", "v"}, "gm", "ddpkJ") -- [m]erge line down
 g.splitjoin_split_mapping = '' -- disable default mappings
-g.splitjoin_join_mapping  = ''
+g.splitjoin_join_mapping = ''
 keymap("n", "<leader>m", ":SplitjoinJoin<CR>")
 keymap("n", "<leader>s", ":SplitjoinSplit<CR>")
 
@@ -258,7 +255,6 @@ keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 keymap({"n", "v"}, "gt", "<C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
 
 -- File Operations
--- INFO: "<C-R>=expand("%:t")<CR>" -> expands the current filename in the command line
 keymap("n", "<C-p>", ':let @+ = expand("%:p")<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
 keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
 keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim

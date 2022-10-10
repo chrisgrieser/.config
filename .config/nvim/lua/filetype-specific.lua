@@ -1,5 +1,4 @@
 require("utils")
-
 -- INFO: Options are mostly set in the after/ftplugins
 
 --------------------------------------------------------------------------------
@@ -48,9 +47,6 @@ autocmd("FileType", {
 	pattern = { "help", "startuptime", "qf", "lspinfo", "AppleScriptRunOutput", "Outline" },
 	callback = function ()
 		keymap("n", "q", ":close<CR>", {buffer = true, silent = true, nowait = true})
-		-- delete to avoid conflict waiting time
-		vim.keymap.del("n", "qu", {buffer = true})
-		vim.keymap.del({"n", "v"}, "q", {buffer = true})
 	end
 })
 
