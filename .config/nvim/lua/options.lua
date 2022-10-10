@@ -48,6 +48,7 @@ augroup("linenumberSplit", {})
 autocmd({"WinLeave", "WinEnter", "WinClosed"},{
 	group = "linenumberSplit",
 	callback = function ()
+		if bo.filetype == "" then return end -- ignore special windows like telescope
 		local isVsplit = fn.winlayout()[1] == "row"
 		if isVsplit then
 			opt.number = false
