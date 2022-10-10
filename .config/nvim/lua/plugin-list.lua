@@ -9,18 +9,15 @@ function PluginList ()
 	use 'Mofiqul/dracula.nvim'
 	use 'EdenEast/nightfox.nvim'
 	use 'marko-cerovac/material.nvim'
-
+	use 'kvrohit/rasmus.nvim'
 	use 'sainnhe/edge'
-	use 'catppuccin/nvim'
+
 	use "rebelot/kanagawa.nvim"
 	use "bluz71/vim-moonfly-colors"
-	use 'frenzyexists/aquarium-vim'
 	use 'glepnir/zephyr-nvim'
-	use 'ray-x/aurora'
 	use 'yashguptaz/calvera-dark.nvim'
 	use 'kyazdani42/blue-moon'
 	use 'Yazeed1s/minimal.nvim'
-	use 'kvrohit/rasmus.nvim'
 
 	-- -- Syntax
 	use { 'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
