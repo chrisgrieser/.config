@@ -1,7 +1,3 @@
--- doen't highlight leading spaces, since some are needed in the yaml part of
--- comments of the Shimmering Focus theme
-cmd[[highlight clear WhiteSpaceBol]]
-
 -- comment marks more useful than symbols for theme development
 keymap("n", "gs", function() telescope.current_buffer_fuzzy_find{
 	default_text='/* <',

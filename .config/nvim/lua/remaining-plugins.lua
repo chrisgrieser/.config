@@ -22,12 +22,6 @@ autocmd("FileType", {
 -- indention lines
 g.indent_blankline_filetype_exclude = {"undotree"}
 
--- vim.illuminate (current word highlights)
-require('illuminate').configure{
-	under_cursor = false, -- don't highlight the word itself
-}
-
-
 -- undotree
 -- also requires persistent undos in the options
 g.undotree_WindowLayout = 3 -- split to the right

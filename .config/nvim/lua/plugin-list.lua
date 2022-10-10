@@ -51,7 +51,6 @@ function PluginList ()
 	use 'airblade/vim-gitgutter'
 	use 'f-person/auto-dark-mode.nvim' -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	use 'RRethy/vim-illuminate' -- highlight current word
 
 	-- File Management & Switching
 	use 'tpope/vim-eunuch' -- file operation utilities
