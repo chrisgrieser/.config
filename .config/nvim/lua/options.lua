@@ -6,7 +6,6 @@ require("utils")
 opt.showmatch = true
 opt.smartcase = true
 opt.ignorecase = true
-opt.wildmenu = true -- display all matching files when tab completing
 
 -- Spelling
 opt.spell = false
@@ -135,8 +134,9 @@ autocmd("BufWinEnter", {
 	command = "silent! loadview"
 })
 
--- Window Managers
-opt.title = true -- title (for Window Managers and espanso)
+-- Window Managers/espanso: set title
+opt.title = true
+opt.titlelen = 0 -- do not shorten title
 opt.titlestring='%{expand(\"%:p\")} [%{mode()}]'
 
 

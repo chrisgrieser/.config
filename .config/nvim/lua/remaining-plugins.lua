@@ -44,7 +44,7 @@ require("symbols-outline").setup{
 	width = 40,
 	autofold_depth = 2,
 	keymaps = {
-		close = {"<Esc>", "q", "gS"},
+		close = {"<Esc>", "gS"}, -- q mapped via filetype-spefic binding for "nowait"
 		goto_location = "<CR>",
 		focus_location = "f",
 		toggle_preview = "p",
