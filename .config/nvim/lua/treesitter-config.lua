@@ -1,6 +1,26 @@
 require('nvim-treesitter.configs').setup {
-	ensure_installed = "all",
-	ignore_install = { "phpdoc" },
+	ensure_installed = {
+		"javascript",
+		"typescript",
+		"markdown",
+		"markdown_inline",
+		"html",
+		"css",
+		"scss",
+		"bash",
+		"bibtex",
+		"gitignore",
+		"lua",
+		"regex",
+		"python",
+		"toml",
+		"yaml",
+		"json",
+		"json5",
+		"jsonc",
+	},
+
+	auto_install = true,	-- when entering a buffer
 
 	highlight = {
 		enable = true,

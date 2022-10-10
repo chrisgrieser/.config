@@ -4,8 +4,7 @@
 <dict>
 	<key>fallbacks</key>
 	<array>
-		<string>features.websearch.custom.8943DD04-1006-4B0A-8BBB-08E7D79D8E62.fallback</string>
-		<string>features.websearch.custom.DF4242CE-C78F-4451-BE7C-B3F80DE78749.fallback</string>
+		<string>user.workflow.1BE4128D-9A7C-44E9-AE59-DFFFE5F1A879.987F8BB9-8E64-4E46-8ED2-14E1A4412805</string>
 	</array>
 	<key>showFolders</key>
 	<true/>
