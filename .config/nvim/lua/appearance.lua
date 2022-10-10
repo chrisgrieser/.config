@@ -15,7 +15,7 @@ function customHighlights()
 	cmd[[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 
 	-- URLs
-   cmd[[highlight urls cterm=underline term=underline gui=underline]]
+	cmd[[highlight urls cterm=underline term=underline gui=underline]]
 	cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-?]*') ]]
 
 	-- Annotations
@@ -80,8 +80,14 @@ end
 local function mixedIndentation()
 	local hasTabs = fn.search("^\t", "nw") ~= 0
 	local hasSpaces = fn.search("^ ", "nw") ~= 0
-	if hasSpaces and hasTabs then
+	local mixed = fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
+
+	if (hasSpaces and hasTabs) or mixed then
 		return " mixed indentation"
+	elseif hasSpaces and not(bo.expandtab) then
+		return " tabs expanded"
+	elseif hasTabs and bo.expandtab then
+		return " tabs not expanded"
 	end
 	return ""
 end
