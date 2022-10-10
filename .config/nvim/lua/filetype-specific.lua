@@ -116,7 +116,7 @@ keymap("n", "gh", function()
 		fn.append('.', b.hrComment) ---@diagnostic disable-line: param-type-mismatch
 
 		local lineNum = api.nvim_win_get_cursor(0)[1] + 2
-		local colNum = #b.hrComment[2] + 1
+		local colNum = #b.hrComment[2] + 2
 		api.nvim_win_set_cursor(0, {lineNum, colNum})
 		cmd[[startinsert]]
 	else
@@ -151,7 +151,7 @@ autocmd( "FileType", {
 	pattern = {"css"},
 	callback = function() b.hrComment = {
 		"/* ───────────────────────────────────────────────── */",
-		"/* << ",
+		"/* <<  ",
 		"──────────────────────────────────────────────────── */",
 		"",
 	} end,
