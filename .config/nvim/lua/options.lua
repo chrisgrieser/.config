@@ -11,8 +11,9 @@ opt.wildmenu = true -- display all matching files when tab completing
 -- Spelling
 opt.spell = false
 opt.spelllang = "en_us"
-
+-- no spellcheck in URLs and acronyms http://www.panozzaj.com/blog/2016/03/21/ignore-urls-and-acroynms-while-spell-checking-vim/
 cmd[[syntax match UrlNoSpell 'http[s]\?:\/\/[[:alnum:]%\/_#.-?]*' contains=@NoSpell"]]
+cmd[[syntax match AcronymNoSpell '\<\(\u\|\d\)\{3,}s\?\>' contains=@NoSpell]]
 
 -- Gutter
 opt.number = true
