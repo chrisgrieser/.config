@@ -7,16 +7,17 @@ require("options")
 require("keybindings")
 require("filetype-specific")
 require("remaining-plugins")
-
-if (g.neovide or g.goneovim) then
-	require("gui-settings")
-	require("color-utilities")
-end
-
+require("appearance")
 require("telescope-config")
 require("treesitter-config")
 require("cheat-sh-config")
 require("lsp-and-completion")
 require("linter")
-require("appearance") -- should come after gui settings
+
+if (g.neovide or g.goneovim) then
+	require("gui-settings")
+	require("color-utilities")
+else
+	require("terminal-only")
+end
 

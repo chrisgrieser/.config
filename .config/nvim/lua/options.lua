@@ -8,9 +8,31 @@ opt.smartcase = true
 opt.ignorecase = true
 opt.wildmenu = true -- display all matching files when tab completing
 
+-- Gutter
+opt.number = true
+opt.numberwidth = 1
+opt.relativenumber = true
+opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
+
 -- Split
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
+-- hide line numbers on window split
+augroup("linenumberSplit", {})
+autocmd({"WinEnter", "WinClosed"},{
+	group = "linenumberSplit",
+	callback = function ()
+		local numOfWins = fn.winnr('$')
+		if numOfWins > 1 then
+			opt.number = false
+			opt.relativenumber = false
+		else
+			opt.number = true
+			opt.relativenumber = true
+		end
+	end
+})
+
 
 -- Command line
 opt.history = 777 -- do not save too much history to reduce noise for command line history search
@@ -23,12 +45,6 @@ opt.tabstop = 3
 opt.softtabstop = 3
 opt.shiftwidth = 3
 opt.shiftround = true
-
--- gutter
-opt.number = true
-opt.numberwidth = 1
-opt.relativenumber = true
-opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
 
 -- ruler
 opt.textwidth = 80 -- used by `gq` and wrap

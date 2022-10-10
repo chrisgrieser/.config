@@ -1,28 +1,4 @@
 require("utils")
--- see also gui-settings.lua
-
---------------------------------------------------------------------------------
--- STYLING FOR VIM IN TERMINAL
-
--- Ruler
-cmd[[highlight ColorColumn ctermbg=DarkGrey]]
-
--- Active Line
-cmd[[highlight CursorLine term=none cterm=none ctermbg=black]]
-
--- Indentation Lines
-cmd[[highlight IndentBlanklineChar ctermfg=DarkGrey]]
-
--- Comments
-cmd[[highlight Comment ctermfg=grey]]
-
--- Popup Menus
-cmd[[highlight Pmenu ctermbg=DarkGrey]]
-
--- Line Numbers
-cmd[[highlight LineNr ctermfg=DarkGrey]]
-cmd[[highlight CursorLineNr ctermfg=Grey]]
-
 
 --------------------------------------------------------------------------------
 -- custom highlights
@@ -47,7 +23,6 @@ function customHighlights()
 	cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED') ]]
 end
 
-customHighlights() -- call once for startup / nvim in the Terminal
 
 -- since overriden by some themes, also call after a colorscheme
 -- has been loaded
