@@ -156,9 +156,8 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
-	}, {
 		{ name = 'emoji', keyword_length = 2 },
-		{ name = 'buffer', keyword_length = 4 },
+		{ name = 'buffer', keyword_length = 2 },
 	}),
 	formatting = {
 		format = function(entry, vim_item)
@@ -184,6 +183,15 @@ cmp.setup({
 		end
 	end
 })
+
+-- autopairs
+require("nvim-autopairs").setup {}
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done())
+-- 
+
+--------------------------------------------------------------------------------
+-- SPECIAL COMPLETION CASES
 
 -- disable leading "-" and comments
 cmp.setup.filetype ("lua", {
@@ -224,7 +232,6 @@ cmp.setup.cmdline(':', {
 		{ name = 'path' }
 	}, {
 		{ name = 'cmdline', max_item_count = 15 },
-	}, {
 		{ name = 'cmdline_history', max_item_count = 15 },
 	})
 })
@@ -242,7 +249,7 @@ lspConfig['sumneko_lua'].setup{
 	capabilities = capabilities,
 	settings = { -- https://github.com/sumneko/lua-language-server/wiki/Settings
 		Lua = {
-			runtime = { version = 'LuaJIT', },  -- LuaJIT is used by neovim
+			runtime = { version = 'LuaJIT', },  -- used by neovim
 			completion = {
 				callSnippet = "both",
 				keywordSnippet = "both",
