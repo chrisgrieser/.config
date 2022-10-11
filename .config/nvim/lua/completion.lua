@@ -129,12 +129,15 @@ cmp.setup.cmdline({ '/', '?' }, {
 	}
 })
 
+-- if a path can be matched, omit the rest. If a cmd can be matched, omit
+-- history
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = 'path' }
 	}, {
 		{ name = 'cmdline', max_item_count = 15 },
+	}, {
 		{ name = 'cmdline_history', max_item_count = 15 },
 	})
 })

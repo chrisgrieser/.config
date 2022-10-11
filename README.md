@@ -1,4 +1,4 @@
-<!-- # pseudometa's dotfiles -->
+# pseudometa's dotfiles
 
 ## Table of Contents
 <!-- MarkdownTOC -->
