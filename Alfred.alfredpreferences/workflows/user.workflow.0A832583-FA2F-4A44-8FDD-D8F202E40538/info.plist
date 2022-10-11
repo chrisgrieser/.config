@@ -55,19 +55,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C4032949-EEE7-4394-B24E-63A22580686F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6CB17263-F5F7-4400-9735-3662C2962CDD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<array>
 			<dict>
@@ -279,52 +266,6 @@ sketchybar --update</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>barr</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>❗️ Restart SketchyBar</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>C4032949-EEE7-4394-B24E-63A22580686F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-brew services restart sketchybar</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>6CB17263-F5F7-4400-9735-3662C2962CDD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -370,15 +311,6 @@ brew services restart sketchybar</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>6CB17263-F5F7-4400-9735-3662C2962CDD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>235</real>
-			<key>ypos</key>
-			<real>420</real>
-		</dict>
 		<key>71149DFC-88DE-4E74-9FDA-F9336F759485</key>
 		<dict>
 			<key>colorindex</key>
@@ -396,17 +328,6 @@ brew services restart sketchybar</string>
 			<real>235</real>
 			<key>ypos</key>
 			<real>290</real>
-		</dict>
-		<key>C4032949-EEE7-4394-B24E-63A22580686F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>restart</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>420</real>
 		</dict>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<dict>

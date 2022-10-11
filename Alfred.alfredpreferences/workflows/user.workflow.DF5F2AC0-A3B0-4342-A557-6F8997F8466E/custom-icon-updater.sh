@@ -13,7 +13,6 @@ PWA_FOLDER="${pwa_folder/#\~/$HOME}"
 DEVICE_NAME=$(scutil --get ComputerName | cut -d" " -f2-)
 [[ "$DEVICE_NAME" =~ "Mother" ]] && PWA_FOLDER="$HOME/Applications/Brave Browser Apps.localized"
 
-
 #-------------------------------------------------------------------------------
 
 cd "/Applications/" || exit 1
@@ -65,7 +64,7 @@ case $APP_TO_UPDATE in
 		cp "$CUSTOM_ICON_FOLDER/Discord Black.icns" 'Discord.app/Contents/Resources/electron.icns'
 		touch "Discord.app" ;;
 	"Neovide")
-		cp "$CUSTOM_ICON_FOLDER/Spline.icns" 'Neovide.app/Contents/Resources/Neovide.icns'
+		cp "$CUSTOM_ICON_FOLDER/Neovim-dark.icns" 'Neovide.app/Contents/Resources/Neovide.icns'
 		touch "Neovide.app" ;;
 	"goneovim")
 		cp "$CUSTOM_ICON_FOLDER/Neovide alt.icns" 'goneovim.app/Contents/Resources/goneovim.icns'
@@ -120,7 +119,7 @@ case $APP_TO_UPDATE in
 		iconsur set "$PWA_FOLDER/Twitch.app" &> /dev/null ;;
 	"BunnyFap"|"Bunnyfap")
 		iconsur --input "$CUSTOM_ICON_FOLDER/BunnyFap.png" --scale 1.1 set "$PWA_FOLDER/BunnyFap.app" &> /dev/null ;;
-   *)
+	*)
 		NONE_FOUND=1 ;;
 esac
 
