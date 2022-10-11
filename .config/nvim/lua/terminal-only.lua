@@ -2,6 +2,9 @@
 -- a color scheme
 --------------------------------------------------------------------------------
 
+-- Gutter transparent
+cmd[[highlight clear SignColumn]] 
+
 -- Ruler
 cmd[[highlight ColorColumn ctermbg=DarkGrey]]
 

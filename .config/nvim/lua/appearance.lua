@@ -29,22 +29,12 @@ customHighlights()
 
 -- GUTTER
 opt.signcolumn = "yes:1"
-cmd[[highlight clear SignColumn]] -- transparent
 
-require('gitsigns').setup()
-
--- -- Git Gutter
--- g.gitgutter_map_keys = 0 -- disable gitgutter mappings I don't use anyway
--- cmd[[highlight GitGutterAdd    ctermfg=Green]]
--- cmd[[highlight GitGutterChange ctermfg=Yellow]]
--- cmd[[highlight GitGutterDelete ctermfg=Red]]
--- g.gitgutter_sign_added = '│'
--- g.gitgutter_sign_modified = '│'
--- g.gitgutter_sign_removed = '–'
--- g.gitgutter_sign_removed_first_line = '–'
--- g.gitgutter_sign_removed_above_and_below = '–'
--- g.gitgutter_sign_modified_removed = '│'
--- g.gitgutter_sign_priority = 9 -- 10 is used by nvim diagnostics
+require('gitsigns').setup{
+	max_file_length = 15000,
+	preview_config	= { border = borderStyle },
+}
+keymap('n', '<leader>H', ":Gitsigns preview_hunk<CR>")
 
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS
@@ -79,7 +69,7 @@ local function currentFile() -- using this function instead of default filename,
 end
 
 local function mixedIndentation()
-	if bo.filetype == "css" then return "" end
+	if bo.filetype == "css" or bo.filetype == "startuptime" then return "" end
 	local hasTabs = fn.search("^\t", "nw") ~= 0
 	local hasSpaces = fn.search("^ ", "nw") ~= 0
 	local mixed = fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0

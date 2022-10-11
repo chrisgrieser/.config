@@ -17,3 +17,6 @@ function inspectFn(obj)
 	vim.pretty_print(fn.luaeval(obj))
 end
 cmd[[:command! -nargs=1 I lua inspectFn(<f-args>)]]
+
+-- Border Style
+borderStyle = "rounded"

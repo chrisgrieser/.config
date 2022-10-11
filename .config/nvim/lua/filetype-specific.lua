@@ -98,6 +98,11 @@ autocmd("BufNewFile", {
 	pattern = "*.sh",
 	command = "0r ~/.config/nvim/templates/skeleton.sh",
 })
+autocmd("BufNewFile", {
+	group = "Templates",
+	pattern = "*.lua",
+	command = "0r ~/.config/nvim/templates/skeleton.lua",
+})
 
 --------------------------------------------------------------------------------
 
