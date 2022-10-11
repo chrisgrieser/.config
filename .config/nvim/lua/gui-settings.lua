@@ -19,7 +19,7 @@ local function light()
 
 	opt.background = 'light'
 	cmd[[highlight TreesitterContext guibg=#e9ded2]] -- dawnfox
-	g.neovide_transparency = 0.92
+	g.neovide_transparency = 0.93
 	customHighlights()
 	cmd[[highlight IndentBlanklineChar guifg=DarkGrey]] -- dawnfox
 end
