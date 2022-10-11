@@ -3,6 +3,8 @@ vim.opt.runtimepath:append(', "~/.config/nvim/lua"') -- apparently required for 
 require("packer-setup") -- must be 1st
 require("utils") -- must be 2nd
 
+require('impatient') -- plugin, improve startuptime
+
 require("options")
 require("keybindings")
 require("filetype-specific")

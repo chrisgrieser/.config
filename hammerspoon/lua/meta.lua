@@ -41,3 +41,7 @@ end)
 -- `hammerspoon://clear-console` for Karabiner Elements (⌘K)
 hs.urlevent.bind("clear-console",hs.console.clearConsole)
 
+-- aliases
+i = hs.inspect -- to inspect tables in the console
+a = hs.application
+

@@ -6,7 +6,6 @@ keystroke = hs.eventtap.keyStroke
 aw = hs.application.watcher
 wf = hs.window.filter
 runDelayed = hs.timer.doAfter
-i = hs.inspect -- to inspect tables in the console
 
 function trim(str)
 	return (str:gsub("^%s*(.-)%s*$", "%1"))
