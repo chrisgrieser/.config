@@ -14,7 +14,7 @@ keymap("n", "<leader>?", function() telescope.help_tags() end)
 keymap("n", "<leader>T", function() telescope.colorscheme() end)
 
 -- Highlights
-keymap("n", "<leader>H", function() telescope.highlights() end)
+keymap("n", "<leader>G", function() telescope.highlights() end)
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()

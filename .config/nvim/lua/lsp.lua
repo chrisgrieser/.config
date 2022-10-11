@@ -66,7 +66,6 @@ require("mason-lspconfig").setup({
 		"eslint", -- ts/js
 		"tsserver", -- ts/js
 		"marksman", -- markdown
-		"remark_ls", -- markdown
 		"jsonls",
 		"cssls",
 		-- "stylelint_lsp", -- not using lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36

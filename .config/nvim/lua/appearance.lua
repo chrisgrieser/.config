@@ -2,13 +2,19 @@ require("utils")
 
 --------------------------------------------------------------------------------
 -- custom highlights
-
+-- have to wrapped in function and regularly called due to auto-dark-mode
+-- regularly resetting the theme
 function customHighlights()
-	-- Diagnostics: use straight underlines instead of curly underlines
+	-- Diagnostics/Spell: use straight underlines instead of curly underlines
 	cmd[[highlight DiagnosticUnderlineError gui=underline]]
 	cmd[[highlight DiagnosticUnderlineWarn gui=underline]]
 	cmd[[highlight DiagnosticUnderlineHint gui=underline]]
 	cmd[[highlight DiagnosticUnderlineInfo gui=underline]]
+
+	cmd[[highlight SpellLocal gui=underline]]
+	cmd[[highlight SpellRare gui=underline]]
+	cmd[[highlight SpellCap gui=underline]]
+	cmd[[highlight SpellBad gui=underline]]
 
 	-- mixed whitespace
 	cmd[[highlight MixedWhiteSpace guibg=DarkGrey ctermbg=DarkGrey]]
@@ -97,7 +103,7 @@ require('lualine').setup {
 		theme  = 'auto',
 		globalstatus = true,
 		component_separators = { left = '', right = ''},
-		section_separators = { left = ' ', right = ' '}, -- nerd font: 'nf-ple'
+		section_separators = { left = ' ', right = ' '}, -- nerdfont: 'nf-ple'
 	},
 }
 
