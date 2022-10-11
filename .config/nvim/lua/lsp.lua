@@ -21,7 +21,7 @@ vim.diagnostic.config{
 		end,
 	},
 	float = {
-		border = "rounded",
+		border = borderStyle,
 		max_width = 50,
 		format = function (diagnostic)
 			if diagnostic.source == "stylelint" then
@@ -50,7 +50,7 @@ keymap({"x", "o"}, "id", function() require("textobj-diagnostic").next_diag_incl
 
 require("mason").setup({
 	ui = {
-		border = "rounded",
+		border = borderStyle,
 		icons = { package_installed = "✓", package_pending = "➜", package_uninstalled = "✗" }
 	}
 })
