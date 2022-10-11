@@ -6,6 +6,8 @@
 matches:
   - triggers: ['!ctrl', "!control"]
     replace: ⌃
+  - trigger: '!space'
+    replace: ␣
   - trigger: '!shift'
     replace: ⇧
   - trigger: '!cmd'
