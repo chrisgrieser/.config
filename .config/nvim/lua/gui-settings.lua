@@ -6,7 +6,7 @@ require("appearance")
 local darkTheme = "tokyonight-moon"
 local lightTheme = "dawnfox"
 
-g.gui_font_default_size = 25.5
+g.gui_font_default_size = 25.2
 g.gui_font_face = "JetBrainsMonoNL Nerd Font"
 opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinkoff500-blinkon700"
 
@@ -15,12 +15,12 @@ opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinko
 -- THEME
 local function light()
 	cmd("colorscheme "..lightTheme)
-	cmd[[highlight IndentBlanklineChar guifg=DarkGrey]] -- increase contrast for dawnfox
 
 	opt.background = 'light'
-	cmd[[highlight TreesitterContext guibg=Grey]]
-	g.neovide_transparency = 0.93
+	cmd[[highlight TreesitterContext guibg=#dbc8b3]] -- dawnfox
+	g.neovide_transparency = 0.92
 	customHighlights()
+	cmd[[highlight IndentBlanklineChar guifg=DarkGrey]] -- dawnfox
 end
 
 local function dark()
@@ -93,15 +93,15 @@ keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true}
 -- https://neovide.dev/configuration.html
 
 g.neovide_cursor_animation_length = 0.01
-g.neovide_cursor_trail_size = 0.9
+g.neovide_cursor_trail_size = 0.99
 g.neovide_scroll_animation_length = 0.8
 g.neovide_floating_blur_amount_x = 5.0
 g.neovide_floating_blur_amount_y = 5.0
-g.neovide_cursor_unfocused_outline_width = 0.9
+g.neovide_cursor_unfocused_outline_width = 0.5
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
 
 g.neovide_cursor_vfx_mode = "railgun"
-g.neovide_cursor_vfx_particle_lifetime=1.3
+g.neovide_cursor_vfx_particle_lifetime=3
 g.neovide_cursor_vfx_particle_density=20.0
 g.neovide_cursor_vfx_particle_speed=25.0
 g.neovide_cursor_vfx_particle_phase=1.3 -- only railgun

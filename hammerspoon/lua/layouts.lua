@@ -111,7 +111,7 @@ function homeModeLayout ()
 			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
 		end,
 		function()
-			neovideFontSize(25.5)
+			neovideFontSize(25.2)
 			alacrittyFontSize(26)
 		end
 	):start()
