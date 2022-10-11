@@ -5,7 +5,8 @@ require("utils")
 -- have to wrapped in function and regularly called due to auto-dark-mode
 -- regularly resetting the theme
 function customHighlights()
-	-- Diagnostics/Spell: use straight underlines instead of curly underlines
+	-- Diagnostics/Spell: use straight underlines instead of curly underlines,
+	-- since the latter look weird with Neovide
 	cmd[[highlight DiagnosticUnderlineError gui=underline]]
 	cmd[[highlight DiagnosticUnderlineWarn gui=underline]]
 	cmd[[highlight DiagnosticUnderlineHint gui=underline]]
