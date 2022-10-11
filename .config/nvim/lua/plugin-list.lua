@@ -3,7 +3,7 @@ function PluginList ()
 	-- Package Management
 	use "wbthomason/packer.nvim" -- packer manages itself
 	use "dstein64/vim-startuptime" -- measure startup time with `:StartupTime`
-	use 'lewis6991/impatient.nvim' -- speed up startuptime, with current setup by ~30%
+	use 'lewis6991/impatient.nvim' -- reduces startup time by ~50%
 
 	-- Themes
 	use "folke/tokyonight.nvim"
@@ -28,7 +28,6 @@ function PluginList ()
 
 	-- Completion & Suggestion
 	use "mattn/emmet-vim" -- Emmet for CSS
-	use "folke/which-key.nvim"
 	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
 	use {"hrsh7th/nvim-cmp", requires = {
 		"hrsh7th/cmp-buffer", -- completion sources

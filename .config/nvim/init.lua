@@ -1,9 +1,11 @@
 vim.opt.runtimepath:append(', "~/.config/nvim/lua"') -- apparently required for homebrew installs where the runtimepath is missing the .config directory?!
 
+require('impatient') -- plugin, improve startuptime
+
 require("packer-setup") -- must be 1st
 require("utils") -- must be 2nd
 
-require('impatient') -- plugin, improve startuptime
+--------------------------------------------------------------------------------
 
 require("options")
 require("keybindings")
