@@ -5,6 +5,12 @@ require("utils")
 
 --------------------------------------------------------------------------------
 
+require "lsp_signature".setup{
+	floating_window_above_cur_line = false, -- avoids overlap with cmp window
+	handler_opts = { border = borderStyle },
+}
+
+--------------------------------------------------------------------------------
 -- DIAGNOTICS (in general, also applies to nvim-lint etc.)
 local opts = { noremap=true, silent=true }
 keymap('n', 'ge', function () vim.diagnostic.goto_next({wrap=true, float=false}) end, opts)

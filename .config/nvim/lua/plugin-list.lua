@@ -23,6 +23,7 @@ function PluginList ()
 		"williamboman/mason.nvim",
 	}}
 	use "mfussenegger/nvim-lint"
+	use "ray-x/lsp_signature.nvim"
 
 	-- Completion & Suggestion
 	use "mattn/emmet-vim" -- Emmet for CSS
