@@ -79,7 +79,7 @@ repoArray.forEach(localRepoFilePath => {
 		if (readme) {
 			repoName = readme
 				.split("\n")
-				.filter(line => line.startsWith("# "))[0]
+				.filter(line => line.startsWith("#"))[0]
 				.slice(2);
 		}
 		else repoName = localRepoFilePath;
