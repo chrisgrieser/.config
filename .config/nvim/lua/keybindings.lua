@@ -73,6 +73,7 @@ keymap("", "T", "<Plug>Sneak_T")
 
 -- Search
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
+keymap("n", "/", "/\v") -- more PCRE-like regex patterns (:h magic)
 keymap("n", "<Esc>", ":nohl<CR>:echo<CR>", {silent = true}) -- clear highlights & shortmessage
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 
@@ -152,7 +153,7 @@ end)
 keymap("n", "!", "a <Esc>h") -- append space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
-keymap("n", "<BS>", "dipO<Esc>") -- reduce multiple blank lines to exactly one
+keymap("n", "<BS>", '"_dipO<Esc>') -- reduce multiple blank lines to exactly one
 keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 
 -- Indention
@@ -252,7 +253,7 @@ keymap("n", "gf", function() telescope.live_grep() end) -- search in [f]iles
 -- Buffers
 keymap("", "<C-Tab>", "<C-^>") -- for footpedal
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
-keymap({"n", "v"}, "gt", "<C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
+keymap({"n", "v"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
 
 -- File Operations
 keymap("n", "<C-p>", ':let @+ = expand("%:p")<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file

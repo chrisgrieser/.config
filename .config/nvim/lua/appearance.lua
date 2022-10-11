@@ -16,7 +16,7 @@ function customHighlights()
 
 	-- URLs
 	cmd[[highlight urls cterm=underline term=underline gui=underline]]
-	cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.-?]*') ]]
+	cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.\-?]*') ]]
 
 	-- Annotations
 	cmd[[highlight def link myAnnotations Todo]] -- use same styling as "TODO"
@@ -31,19 +31,20 @@ customHighlights()
 opt.signcolumn = "yes:1"
 cmd[[highlight clear SignColumn]] -- transparent
 
--- Git Gutter
-g.gitgutter_map_keys = 0 -- disable gitgutter mappings I don't use anyway
+require('gitsigns').setup()
 
-cmd[[highlight GitGutterAdd    ctermfg=Green]]
-cmd[[highlight GitGutterChange ctermfg=Yellow]]
-cmd[[highlight GitGutterDelete ctermfg=Red]]
-g.gitgutter_sign_added = '│'
-g.gitgutter_sign_modified = '│'
-g.gitgutter_sign_removed = '–'
-g.gitgutter_sign_removed_first_line = '–'
-g.gitgutter_sign_removed_above_and_below = '–'
-g.gitgutter_sign_modified_removed = '│'
-g.gitgutter_sign_priority = 9 -- 10 is used by nvim diagnostics
+-- -- Git Gutter
+-- g.gitgutter_map_keys = 0 -- disable gitgutter mappings I don't use anyway
+-- cmd[[highlight GitGutterAdd    ctermfg=Green]]
+-- cmd[[highlight GitGutterChange ctermfg=Yellow]]
+-- cmd[[highlight GitGutterDelete ctermfg=Red]]
+-- g.gitgutter_sign_added = '│'
+-- g.gitgutter_sign_modified = '│'
+-- g.gitgutter_sign_removed = '–'
+-- g.gitgutter_sign_removed_first_line = '–'
+-- g.gitgutter_sign_removed_above_and_below = '–'
+-- g.gitgutter_sign_modified_removed = '│'
+-- g.gitgutter_sign_priority = 9 -- 10 is used by nvim diagnostics
 
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS

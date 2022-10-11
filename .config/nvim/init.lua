@@ -11,7 +11,8 @@ require("appearance")
 require("telescope-config")
 require("treesitter-config")
 require("cheat-sh-config")
-require("lsp-and-completion")
+require("lsp")
+require("completion")
 require("linter")
 
 if (g.neovide or g.goneovim) then

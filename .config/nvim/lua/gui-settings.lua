@@ -3,7 +3,8 @@ require("appearance")
 --------------------------------------------------------------------------------
 
 -- BASE CONFIG
-local darkTheme = "tokyonight-moon"
+-- local darkTheme = "tokyonight-moon"
+local darkTheme = "material"
 local lightTheme = "dawnfox"
 
 g.gui_font_default_size = 25.2
