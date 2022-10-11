@@ -182,8 +182,3 @@ lspConfig['eslint'].setup{
 	capabilities = capabilities,
 }
 
-lspConfig['remark_ls'].setup{
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
-

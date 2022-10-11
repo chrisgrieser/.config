@@ -12,13 +12,11 @@
 ## Configurations of Interest
 Most people tell me they find the following configurations useful:
 - [.zshrc setup](/zsh/)
-- Pandoc configs & my pointers on [how to use pandoc](/pandoc/#Pandoc)
+- [Starship Prompt](/.config/starship/starship.toml)
+- [Pandoc configs & pointers on how to use pandoc](/pandoc/#Pandoc)
 - [complex modifications for Karabiner Elements](/.config/karabiner)
-- [starship prompt](/.config/starship/starship.toml)
-- Various Vim Emulation Configs
-	- Browser: [Vimium configs](/Browser%20Extension%20Settings/vimium.vimrc) via [Vimium](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb)
-	- Obsidian: [.obsidian.vimrc](obsidian.vimrc) via [Vimrc Support Plugin](https://obsidian.md/plugins?id=obsidian-vimrc-support) 
-	- Sublime: [.neovintageousrc](Sublime%20User%20Folder/.neovintageousrc) via [Neovintageous](https://github.com/NeoVintageous/NeoVintageous)
+- [.obsidian.vimrc](Obsidian%20vim/obsidian.vimrc) via the [vimrc Support Plugin](https://obsidian.md/plugins?id=obsidian-vimrc-support)
+- [neovim config](.config/nvim)
 
 ## What is this repository?
 Essentially, it's all of my dotfiles, that I put online for backup, version history, and easy sharing with others.
@@ -29,8 +27,8 @@ __What are "dotfiles"?__
 
 __How this repository works__
 - These files are symlinked into iCloud for synchronization.
-- `Hammerspoon` [is configured](hammerspoon/system-states.lua) to run the script [git-dotfile-sync.sh](git-dotfile-sync.sh) every 15 minutes, or on wake/sleep. In addition, the Alfred keyword `shutdown` will trigger the script before shutting down. 
-- The git repos that are nested inside this dotfile repository (i.e. Alfred git repositories, because the nesting can't be avoided in this case) are gitignored and pulled individually. 
+- `Hammerspoon` [is configured](hammerspoon/system-states.lua) to run the script [git-dotfile-sync.sh](git-dotfile-sync.sh) every 15 minutes, or on wake/sleep. In addition, the Alfred keyword `shutdown` will trigger the script before shutting down.
+- The git repos that are nested inside this dotfile repository (i.e. Alfred git repositories, because the nesting can't be avoided in this case) are gitignored and pulled individually.
 - [git-dotfile-backup.sh](git-dotfile-backup.sh) checks whether there have been any changes in dot files. If there are, it creates somewhat useful commit messages and runs the `git add commit pull push` sequence.
 - [.gitignore](.gitignore) contains a list of files not to backups for various reasons, e.g. redundancy, privacy, or simply because they are too big for a git repo.
 
