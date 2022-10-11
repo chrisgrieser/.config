@@ -10,7 +10,6 @@ function PluginList ()
 	use 'EdenEast/nightfox.nvim'
 	use 'marko-cerovac/material.nvim'
 	use 'sainnhe/edge'
-	use 'Yazeed1s/minimal.nvim'
 
 	-- Syntax
 	use { 'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end }
@@ -26,11 +25,10 @@ function PluginList ()
 	use 'mfussenegger/nvim-lint'
 
 	-- Completion & Suggestion
-	use 'Raimondi/delimitMate' -- auto-close brackets & quotes in insert mode (alternative: cohama/lexima.vim)
 	use 'mattn/emmet-vim' -- Emmet for CSS
+	use {'windwp/nvim-autopairs', requires = 'hrsh7th/nvim-cmp'}
 	use {'hrsh7th/nvim-cmp', requires = {
 		'hrsh7th/cmp-buffer', -- completion sources
-		'amarakon/nvim-cmp-buffer-lines',
 		'hrsh7th/cmp-path',
 		'hrsh7th/cmp-cmdline',
 		'dmitmel/cmp-cmdline-history',
@@ -52,10 +50,6 @@ function PluginList ()
 	use 'airblade/vim-gitgutter'
 	use 'f-person/auto-dark-mode.nvim' -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	use {'folke/noice.nvim', requires = {  -- nice notifications
-		'rcarriga/nvim-notify',
-		'MunifTanjim/nui.nvim',
-	}}
 
 	-- File Management & Switching
 	use 'tpope/vim-eunuch' -- file operation utilities

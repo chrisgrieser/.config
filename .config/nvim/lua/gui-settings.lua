@@ -17,7 +17,7 @@ local function light()
 	cmd("colorscheme "..lightTheme)
 
 	opt.background = 'light'
-	cmd[[highlight TreesitterContext guibg=#dbc8b3]] -- dawnfox
+	cmd[[highlight TreesitterContext guibg=#e9ded2]] -- dawnfox
 	g.neovide_transparency = 0.92
 	customHighlights()
 	cmd[[highlight IndentBlanklineChar guifg=DarkGrey]] -- dawnfox

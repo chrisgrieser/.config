@@ -35,10 +35,6 @@ cmd[[ function! g:Undotree_CustomMap()
 	nmap <buffer> U <plug>UndotreeRedo
 	endfunc ]]
 
--- use vim.notify for all messages
-vim.notify = require("notify")
-
-
 -- Symbol outline
 require("symbols-outline").setup{
 	width = 40,
