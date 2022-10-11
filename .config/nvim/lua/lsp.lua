@@ -4,8 +4,8 @@ require("utils")
 -- https://github.com/williamboman/mason-lspconfig.nvim#setup
 
 --------------------------------------------------------------------------------
-
-require "lsp_signature".setup{
+-- https://github.com/ray-x/lsp_signature.nvim#full-configuration-with-default-values
+require"lsp_signature".setup{
 	floating_window_above_cur_line = false, -- avoids overlap with cmp window
 	handler_opts = { border = borderStyle },
 }

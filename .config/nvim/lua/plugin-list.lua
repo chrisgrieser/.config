@@ -3,6 +3,7 @@ function PluginList ()
 	-- Package Management
 	use "wbthomason/packer.nvim" -- packer manages itself
 	use "dstein64/vim-startuptime" -- measure startup time with `:StartupTime`
+	use 'lewis6991/impatient.nvim' -- speed up startuptime, with current setup by ~30%
 
 	-- Themes
 	use "folke/tokyonight.nvim"
