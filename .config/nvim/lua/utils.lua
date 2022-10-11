@@ -12,6 +12,12 @@ telescope = require("telescope.builtin") -- requires loading extensions first
 keymap = vim.keymap.set
 home = fn.expand("~") ---@diagnostic disable-line: missing-parameter
 
+-- :setlocal does not have a direct access via the vim-module, it seems https://neovim.io/doc/user/lua.html#lua-vim-setlocal
+function localOpt(option, value)
+	vim.api.nvim_set_option_value(option, value, {scope = "local"})
+end
+
+
 -- `:I` inspects the passed lua object
 function inspectFn(obj)
 	vim.pretty_print(fn.luaeval(obj))
