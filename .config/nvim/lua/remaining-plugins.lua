@@ -60,7 +60,7 @@ require("symbols-outline").setup{
 }
 
 -- whichkey
-opt.timeoutlen = 500
+opt.timeoutlen = 1000 -- controls when whichkey shows up
 require("which-key").setup {
 	plugins = {
 		marks = true, -- shows a list of your marks on ' and `
@@ -78,17 +78,18 @@ require("which-key").setup {
 	-- add operators that will trigger motion and text object completion
 	-- to enable all native operators, set the preset / operators plugin above
 	operators = {
-		q = "Comment",
+		gc = "Comment",
 		['ö'] = "Override",
 	},
 	key_labels = {
 		["<space>"] = "␣",
 		["<cr>"] = "↵",
 		["<tab>"] = "↹",
+		["<BS>"] = "⌫",
 	},
 	icons = {
-		breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-		separator = "➜", -- symbol used between a key and it's label
+		breadcrumb = "➜", -- symbol used in the command line area that shows your active key combo
+		separator = ":", -- symbol used between a key and it's label
 		group = "+", -- symbol prepended to a group
 	},
 	popup_mappings = {
@@ -96,15 +97,15 @@ require("which-key").setup {
 		scroll_up = '<c-u>', -- binding to scroll up inside the popup
 	},
 	window = {
-		border = borderStyle, -- none, single, double, shadow
+		border = borderStyle,
 		position = "bottom", -- bottom, top
-		margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-		padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+		margin = { 0, 0, 0, 0 },
+		padding = { 0, 0, 0, 0 },
 	},
 	layout = {
-		height = { min = 4, max = 25 }, -- min and max height of the columns
+		height = { min = 5, max = 20 }, -- min and max height of the columns
 		width = { min = 20, max = 50 }, -- min and max width of the columns
-		spacing = 3, -- spacing between columns
+		spacing = 2, -- spacing between columns
 		align = "left", -- align columns left, center or right
 	},
 	show_help = true, -- show help message on the command line when the popup is visible
