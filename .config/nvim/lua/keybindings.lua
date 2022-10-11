@@ -77,6 +77,10 @@ keymap("n", "/", "/\v") -- more PCRE-like regex patterns (:h magic)
 keymap("n", "<Esc>", ":nohl<CR>:echo<CR>", {silent = true}) -- clear highlights & shortmessage
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 
+-- URLs
+keymap("n", "gü", "/http.*<CR>") -- goto next
+keymap("n", "gÜ", "?http.*<CR>") -- goto prev
+
 -- Marks
 keymap("", "ä", "`") -- Goto Mark
 
@@ -264,3 +268,7 @@ keymap("n", "<leader>X", ':Chmod +x<CR>') -- execution permission, requires eunu
 keymap("n", "<leader><BS>", ":Remove<CR>:bd<CR>") -- undoable deletion of the file, requires eunuch.vim
 keymap("v", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
 
+-- Option Toggling
+keymap("n", "<leader>os", ":set spell!<CR>")
+keymap("n", "<leader>or", ":set number! relativenumber!<CR>")
+keymap("n", "<leader>ow", ":set wrap! relativenumber!<CR>")
