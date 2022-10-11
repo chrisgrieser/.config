@@ -32,16 +32,16 @@ sketchybar --bar height="$HEIGHT"                       \
                  padding_right=7                        \
                  color="$BG_COLOR"                      \
                  display=all                            \
-			  --default updates=when_shown                 \
+           --default updates=when_shown                 \
                      drawing=on                         \
 							icon.font="Noto Emoji:Bold:16"     \
                      icon.color="$FONT_COLOR"           \
                      label.font="Recursive:Medium:15.5" \
                      label.color="$FONT_COLOR"          \
                      label.padding_left=1               \
-                     label.padding_right=8              \
+                     label.padding_right=6              \
                      icon.padding_left=1                \
-                     icon.padding_right=3               \
+                     icon.padding_right=2               \
                      y_offset="$ITEM_Y_OFFSET"
 
 
@@ -64,7 +64,7 @@ sketchybar --add item clock right                            \
                          width=30                            \
            --add alias "$network_bar_item" right             \
            --set       "$network_bar_item"                   \
-                         width=43                            \
+                         width=40                            \
            --add item weather right                          \
            --set weather update_freq=1800                    \
                          script="$PLUGIN_DIR/weather.sh"     \

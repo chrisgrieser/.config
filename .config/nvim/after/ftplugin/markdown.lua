@@ -1,17 +1,20 @@
+require("utils")
+--------------------------------------------------------------------------------
+
 -- hide URLs and other formatting
 -- TODO: figure out how to *only* conceal markdown links
 -- https://www.reddit.com/r/vim/comments/h8pgor/til_conceal_in_vim/
-opt.conceallevel = 1
+localOpt("conceallevel", 1)
 
 -- spelling
-opt.spell = true
+localOpt("spell", true)
 
 -- wrapping and related options
-opt.wrap = true -- soft wrap
-opt.linebreak = true -- do not break words for soft wrap
-keymap({"n", "v"}, "j", "gj")
-keymap({"n", "v"}, "k", "gk")
-keymap({"n", "v"}, "H", "g^")
-keymap({"n", "v"}, "L", "g$")
-opt.colorcolumn = ''
+localOpt("wrap", true) -- soft wrap
+localOpt("linebreak", true) -- do not break words for soft wrap
+localOpt("colorcolumn", "") -- deactivate ruler
+keymap({"n", "v"}, "j", "gj", {buffer = true})
+keymap({"n", "v"}, "k", "gk", {buffer = true})
+keymap({"n", "v"}, "H", "g^", {buffer = true})
+keymap({"n", "v"}, "L", "g$", {buffer = true})
 

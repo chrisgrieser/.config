@@ -56,6 +56,10 @@ autocmd("FileType", {
 keymap("n", "<leader>r", function()
 	cmd[[write]]
 
+	-- keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
+	expand("%:t")
+	if
+
 	if bo.filetype == "lua" then
 		local parentFolder = fn.expand("%:p:h") ---@diagnostic disable-line: missing-parameter
 		if not(parentFolder) then return end
