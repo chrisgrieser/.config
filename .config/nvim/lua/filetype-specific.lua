@@ -56,11 +56,11 @@ autocmd("FileType", {
 keymap("n", "<leader>r", function()
 	cmd[[write]]
 
-	-- keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
-	expand("%:t")
-	if
+	local filename = fn.expand("%:t") ---@diagnostic disable-line: missing-parameter
+	if filename == "sketchybarrc" then
+		fn.system("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar")
 
-	if bo.filetype == "lua" then
+	elseif bo.filetype == "lua" then
 		local parentFolder = fn.expand("%:p:h") ---@diagnostic disable-line: missing-parameter
 		if not(parentFolder) then return end
 		if parentFolder:find("nvim") then
