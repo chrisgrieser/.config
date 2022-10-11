@@ -30,6 +30,7 @@ function PluginList ()
 	use 'mattn/emmet-vim' -- Emmet for CSS
 	use {'hrsh7th/nvim-cmp', requires = {
 		'hrsh7th/cmp-buffer', -- completion sources
+		'amarakon/nvim-cmp-buffer-lines',
 		'hrsh7th/cmp-path',
 		'hrsh7th/cmp-cmdline',
 		'dmitmel/cmp-cmdline-history',
@@ -51,7 +52,10 @@ function PluginList ()
 	use 'airblade/vim-gitgutter'
 	use 'f-person/auto-dark-mode.nvim' -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	use 'rcarriga/nvim-notify' -- nice notifications
+	use {'folke/noice.nvim', requires = {  -- nice notifications
+		'rcarriga/nvim-notify',
+		'MunifTanjim/nui.nvim',
+	}}
 
 	-- File Management & Switching
 	use 'tpope/vim-eunuch' -- file operation utilities

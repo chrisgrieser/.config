@@ -3,10 +3,10 @@ require('nvim-treesitter.configs').setup {
 		"javascript",
 		"typescript",
 		"markdown",
-		"markdown_inline",
+		"markdown_inline", -- markdown inline code
 		"html",
+		"help", -- vim help files
 		"css",
-		"scss",
 		"bash",
 		"bibtex",
 		"gitignore",

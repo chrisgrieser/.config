@@ -84,11 +84,11 @@ local function mixedIndentation()
 	local mixed = fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
 
 	if (hasSpaces and hasTabs) or mixed then
-		return " mixed indentation"
+		return " mixed indents"
 	elseif hasSpaces and not(bo.expandtab) then
-		return " tabs expanded"
+		return " expandtab"
 	elseif hasTabs and bo.expandtab then
-		return " tabs not expanded"
+		return " noexpandtab"
 	end
 	return ""
 end

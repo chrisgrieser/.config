@@ -61,7 +61,7 @@ sketchybar --add item clock right                            \
                          label.padding_right=3               \
            --add alias "$cpu_bar_item" right                 \
            --set       "$cpu_bar_item"                       \
-                         width=18                            \
+                         width=30                            \
            --add alias "$network_bar_item" right             \
            --set       "$network_bar_item"                   \
                          width=43                            \
@@ -70,11 +70,11 @@ sketchybar --add item clock right                            \
                          script="$PLUGIN_DIR/weather.sh"     \
            --add item covid-stats right                      \
            --set covid-stats update_freq=43200               \
-                         script="$PLUGIN_DIR/covid-stats.sh" \
+                        script="$PLUGIN_DIR/covid-stats.sh" \
            --add item git-sync right                         \
            --set git-sync update_freq=9001                   \
-                         script="$PLUGIN_DIR/git-sync.sh"    \
-								 icon.font="Noto Emoji:Bold:15"      \
+                        script="$PLUGIN_DIR/git-sync.sh"
+								icon.font="Noto Emoji:Bold:15"      \
            --add event repo-files-update                     \
            --subscribe git-sync repo-files-update            \
            --subscribe git-sync system_woke                  \
