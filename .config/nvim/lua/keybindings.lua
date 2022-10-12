@@ -106,6 +106,8 @@ keymap("o", "Q", "i'") -- change single [Q]uote
 keymap("o", "p", '}') -- rest of the [p]aragraph
 keymap("o", "P", '{') -- beginning of the [P]aragraph
 
+-- INFO: Various Text Objects are defined via treesitter textobj
+
 -- COMMENTS (mnemonic: [q]uiet text)
 keymap({"n", "v"}, "q" ,"<Plug>Commentary")
 keymap("n", "qq" ,"mz<Plug>CommentaryLine`z")
@@ -145,12 +147,17 @@ keymap("n", "Q" , function()
 	cmd[[startinsert]]
 end)
 
-
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h") -- append space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
-keymap("n", "<BS>", '"_dipO<Esc>') -- reduce multiple blank lines to exactly one
+keymap("n", "<BS>", function() -- reduce multiple blank lines to exactly one
+	if fn.getline(".") == "" then -- safety net to avoid accidental deletion of content
+		cmd[[normal! "_dipO]]
+	else
+		print("Line not empty.")
+	end
+end)
 keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 
 -- Indention
@@ -216,16 +223,6 @@ keymap("n", "<C-u>", "U") -- undo line
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
 --------------------------------------------------------------------------------
--- Window Management
-keymap("", "<C-w>v", ":vsplit #<CR>") -- open the alternate file in the split
-keymap("", "<C-w>h", ":split #<CR>")
-keymap("", "<C-Right>", "<C-w>>")
-keymap("", "<C-Left>", "<C-w><")
-keymap("", "<C-Up>", "<C-w>+")
-keymap("", "<C-Down>", "<C-w>-")
-
-
---------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
 keymap("i", "<C-e>", '<Esc>A') -- EoL
 keymap("i", "<C-k>", '<Esc>lDi') -- kill line
@@ -248,7 +245,21 @@ keymap("v", "V", "j") -- repeatedly pressing "V" selects more lines
 keymap("v", "y", "ygv<Esc>") -- yanking in visual mode keeps position https://stackoverflow.com/a/3806683#comment10788861_3806683
 
 --------------------------------------------------------------------------------
--- FILES AND WINDOWS
+-- WINDOW AND BUFFERS
+keymap("", "<C-w>v", ":vsplit #<CR>") -- open the alternate file in the split instead of the current file
+keymap("", "<C-w>h", ":split #<CR>")
+keymap("", "<C-Right>", "<C-w>>") -- resizing on one key for sanity
+keymap("", "<C-Left>", "<C-w><")
+keymap("", "<C-Up>", "<C-w>+")
+keymap("", "<C-Down>", "<C-w>-")
+keymap("n", "gw", "<C-w><C-w>") -- switch to next split
+
+-- Buffers
+keymap("", "<C-Tab>", "<C-^>") -- for footpedal
+keymap({"n", "v"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
+
+--------------------------------------------------------------------------------
+-- FILES
 
 -- File switchers
 keymap("n", "go", function() telescope.find_files() end) -- [o]pen file in parent-directory
@@ -256,11 +267,6 @@ keymap("n", "gO", function() telescope.find_files{cwd='%:p:h:h', prompt_prefix='
 keymap("n", "gr", function() telescope.oldfiles() end) -- [r]ecent files
 keymap("n", "gb", function() telescope.buffers() end) -- open [b]uffer
 keymap("n", "gf", function() telescope.live_grep() end) -- search in [f]iles
-
--- Buffers
-keymap("", "<C-Tab>", "<C-^>") -- for footpedal
-keymap("n", "gw", "<C-w><C-w>") -- switch to next split
-keymap({"n", "v"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
 
 -- File Operations
 keymap("n", "<C-p>", ':let @+ = expand("%:p")<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file

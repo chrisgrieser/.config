@@ -6,8 +6,16 @@ require("utils")
 --------------------------------------------------------------------------------
 -- https://github.com/ray-x/lsp_signature.nvim#full-configuration-with-default-values
 require"lsp_signature".setup{
+	floating_window = false, -- don't show by default
+	hint_enable = true, -- virtual text hint
+
 	floating_window_above_cur_line = false, -- avoids overlap with cmp window
+	max_width = 60,
+	max_height = 7,
 	handler_opts = { border = borderStyle },
+	toggle_key = "<C-h>", -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
+
+	hint_prefix = " ",
 }
 
 --------------------------------------------------------------------------------

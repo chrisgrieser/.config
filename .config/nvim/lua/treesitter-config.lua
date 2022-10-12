@@ -68,6 +68,8 @@ require('nvim-treesitter.configs').setup {
 				["if"] = "@function.inner",
 				["aa"] = "@parameter.outer", -- [a]rgument
 				["ia"] = "@parameter.inner",
+				["ac"] = "@conditional.outer", -- [c]onditional
+				["ic"] = "@conditional.inner",
 			},
 			-- If you set this to `true` (default is `false`) then any textobject is
 			-- extended to include preceding xor succeeding whitespace. Succeeding
