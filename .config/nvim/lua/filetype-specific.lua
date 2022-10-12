@@ -7,7 +7,6 @@ require("utils")
 -- Markdown
 keymap("n", "<CR>", 'A') -- So double return keeps markdown list syntax
 keymap("n", "<leader>x", 'mz^lllrx`z') -- check markdown tasks
-keymap("n", "<leader>1", ":GenTocGFM<CR>") --markdown toc (markdown-toc plugin)
 keymap("n", "<leader>-", "mzI- <Esc>`z") -- Add bullet point
 keymap("n", "<leader>>", "mzI> <Esc>`z") -- Turn into blockquote
 
@@ -30,9 +29,6 @@ keymap("n", "<leader>i", function ()
 	fn.setline(".", lineContent)
 	---@diagnostic enable: undefined-field
 end)
-
--- JS / TS / Shell
-keymap("n", "<leader>t", 'ysiw}i$<Esc>f}') -- make template string variable, requires vim.surround
 
 -- Emmet
 autocmd("FileType", {
