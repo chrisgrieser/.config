@@ -7,7 +7,7 @@ require("appearance")
 local darkTheme = "material"
 local lightTheme = "dawnfox"
 
-g.gui_font_default_size = 25.5
+g.gui_font_default_size = 25.2
 g.gui_font_face = "JetBrainsMonoNL Nerd Font"
 opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinkoff500-blinkon700"
 
@@ -21,7 +21,7 @@ local function light()
 	cmd[[highlight TreesitterContext guibg=#e9ded2]] -- dawnfox
 	g.neovide_transparency = 0.93
 	customHighlights()
-	cmd[[highlight IndentBlanklineChar guifg=DarkGrey]] -- dawnfox
+	cmd[[highlight IndentBlanklineChar guifg=#cdb398]] -- dawnfox
 end
 
 local function dark()
