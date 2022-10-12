@@ -63,7 +63,8 @@ matches:
     replace: |
       ```
       macOS {{OSversion}} (M1)
-      neovim {{neovimVersion}} (homebrew install)
+      neovim {{neovimVersion}} (homebrew)
+      Neovide {{neovideVersion}} (homebrew)
       ```
     vars:
       - name: OSversion
@@ -74,6 +75,10 @@ matches:
         type: shell
         params:
           cmd: "nvim --version | head -n1 | cut -dv -f2"
+      - name: neovideVersion
+        type: shell
+        params:
+          cmd: "neovide --version | cut -d' ' -f2"
 
   - trigger: "!oversion"
     replace: "Obsidian {{version}}"
