@@ -4,6 +4,7 @@ require("utils")
 -- https://github.com/williamboman/mason-lspconfig.nvim#setup
 
 --------------------------------------------------------------------------------
+-- LSP Signature
 -- https://github.com/ray-x/lsp_signature.nvim#full-configuration-with-default-values
 require"lsp_signature".setup{
 	floating_window = false, -- don't show by default
@@ -13,10 +14,11 @@ require"lsp_signature".setup{
 	max_width = 60,
 	max_height = 7,
 	handler_opts = { border = borderStyle },
-	toggle_key = "<C-h>", -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
 
 	hint_prefix = " ",
 }
+
+keymap({"n", "i"}, '<C-s>', function () vim.lsp.buf.signature_help() end)
 
 --------------------------------------------------------------------------------
 -- DIAGNOTICS (in general, also applies to nvim-lint etc.)
