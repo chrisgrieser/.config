@@ -50,7 +50,7 @@ exmap contextMenu obcommand editor:context-menu
 nmap zl :contextMenu
 vmap zl :contextMenu
 
-" History done via Obsdian Hotkeys, so they also work in Preview Mode
+" done via Obsdian Hotkeys, so they also work in Preview Mode
 " nmap <C-h> :back
 " nmap <C-l> :forward
 " nmap <C-j> :nextHeading
@@ -131,6 +131,9 @@ exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 nmap M :mergeLines
 vmap M :mergeLines
 
+" split line at cursor
+nmap | a<CR><Esc>k$
+
 " Add Blank Line above/below
 nmap = mzO<Esc>`z
 nmap _ mzo<Esc>`z
@@ -175,7 +178,7 @@ nmap <CR> A
 
 " delete alias part of next Wikilink
 " (or Link Homepage when using Auto Title Plugin)
-nmap | t|"_dt]
+nmap <leader>l t|"_dt]
 
 " append to [y]aml (line 3 = tags)
 nmap ,y 3ggA
@@ -233,16 +236,10 @@ nmap Q "_ci]
 nmap q "_ci'
 
 """"""""""""""""""""""
-" < Mode
+" < Visual Mode
 """"""""""""""""""""""
-" move to BOL/EOL
-imap <C-a> <Esc>I
-imap <C-e> <Esc>A
 
-" Kill line
-imap <C-k> <Esc>lC
-
-" so that VV... in normal mode just selects more lines
+" so that VV... in normal mode selects more lines
 vmap V j
 
 """"""""""""""""""""""

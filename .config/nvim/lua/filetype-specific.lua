@@ -19,7 +19,7 @@ keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>') -- [D]uplicate Class under cursor
 
 -- toggle !important
 keymap("n", "<leader>i", function ()
-	---@diagnostic disable: undefined-field
+	---@diagnostic disable: undefined-field, param-type-mismatch
 	local lineContent = fn.getline('.')
 	if lineContent:find("!important") then
 		lineContent = lineContent:gsub(" !important", "")
@@ -27,7 +27,7 @@ keymap("n", "<leader>i", function ()
 		lineContent = lineContent:gsub(";", " !important;")
 	end
 	fn.setline(".", lineContent)
-	---@diagnostic enable: undefined-field
+	---@diagnostic enable: undefined-field, param-type-mismatch
 end)
 
 -- Emmet
@@ -110,7 +110,7 @@ autocmd("BufNewFile", {
 keymap("n", "gh", function()
 	if not(b.hrComment) then
 		print("No hr for this filetype defined.")
-	elseif type(b.hrComment) == "table" then
+	elseif bo.filetype == "css" then
 		fn.append('.', b.hrComment) ---@diagnostic disable-line: param-type-mismatch
 
 		local lineNum = api.nvim_win_get_cursor(0)[1] + 2
@@ -131,7 +131,7 @@ autocmd( "FileType", {
 })
 autocmd( "FileType", {
 	group = "horizontalRuler",
-	pattern = {"bash", "zsh", "yaml"},
+	pattern = {"bash", "zsh", "sh", "yaml"},
 	callback = function() b.hrComment = "#───────────────────────────────────────────────────────────────────────────────" end
 })
 autocmd( "FileType", {

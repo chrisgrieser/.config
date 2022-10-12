@@ -118,7 +118,7 @@ keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
 
 -- append comment to current line (equivalent to gcA from comments.nvim)
 keymap("n", "Q" , function()
-	local lineContent = fn.getline(".")
+	local lineContent = fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
 	local eolCol = #lineContent
 	local emptyLine = lineContent == ""
 
@@ -142,7 +142,7 @@ keymap("n", "Q" , function()
 		end
 	end
 
-	fn.setline(".", newLineContent)
+	fn.setline(".", newLineContent) ---@diagnostic disable-line: param-type-mismatch
 	api.nvim_win_set_cursor(0, {lineNum, newCol + 1})
 	cmd[[startinsert]]
 end)
@@ -152,7 +152,7 @@ keymap("n", "!", "a <Esc>h") -- append space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
 keymap("n", "<BS>", function() -- reduce multiple blank lines to exactly one
-	if fn.getline(".") == "" then -- safety net to avoid accidental deletion of content
+	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
 		cmd[[normal! "_dipO]]
 	else
 		print("Line not empty.")
