@@ -8,7 +8,6 @@ keymap("n", "gs", function() telescope.current_buffer_fuzzy_find{
 	prompt_title = 'Navigation Markers',
 } end, {buffer = true, silent = true})
 
-
 -- kebab-case variables, #hex color codes, & percentage values
 cmd[[setlocal iskeyword+=#]] -- for whatever reason, appending to "bo.iskeyword" does not work...
 cmd[[setlocal iskeyword+=%]]
