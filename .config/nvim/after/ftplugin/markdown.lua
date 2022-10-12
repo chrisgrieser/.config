@@ -18,3 +18,8 @@ keymap({"n", "v"}, "k", "gk", {buffer = true})
 keymap({"n", "v"}, "H", "g^", {buffer = true})
 keymap({"n", "v"}, "L", "g$", {buffer = true})
 
+-- keybindings
+
+-- markdown link
+keymap("v", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp")
+keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp")
