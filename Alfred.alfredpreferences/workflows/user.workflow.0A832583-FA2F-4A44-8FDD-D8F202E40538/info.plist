@@ -6,6 +6,19 @@
 	<string>de.chris-grieser.</string>
 	<key>connections</key>
 	<dict>
+		<key>0EB9ED7D-4AE6-43BF-A788-F34C046B3732</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>335056B8-CF17-4C0A-AC12-6F8AD5A5D685</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>15B1A722-85AB-4042-B9F7-B755D027674F</key>
 		<array>
 			<dict>
@@ -266,11 +279,68 @@ sketchybar --update</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+brew services restart sketchybar</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>335056B8-CF17-4C0A-AC12-6F8AD5A5D685</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>barr</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗️ Restart SketchyBar</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0EB9ED7D-4AE6-43BF-A788-F34C046B3732</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0EB9ED7D-4AE6-43BF-A788-F34C046B3732</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>restart</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>445</real>
+		</dict>
 		<key>15B1A722-85AB-4042-B9F7-B755D027674F</key>
 		<dict>
 			<key>colorindex</key>
@@ -301,6 +371,15 @@ sketchybar --update</string>
 			<real>220</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>335056B8-CF17-4C0A-AC12-6F8AD5A5D685</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>235</real>
+			<key>ypos</key>
+			<real>445</real>
 		</dict>
 		<key>55DFA247-EA56-4F3F-ADE4-39260BE8F5FD</key>
 		<dict>
