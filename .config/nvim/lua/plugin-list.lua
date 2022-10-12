@@ -34,6 +34,7 @@ function PluginList ()
 		"hrsh7th/cmp-cmdline",
 		"dmitmel/cmp-cmdline-history",
 		"hrsh7th/cmp-emoji",
+		"petertriho/cmp-git",
 
 		"hrsh7th/cmp-nvim-lsp", -- lsp
 		"hrsh7th/cmp-nvim-lsp-signature-help", -- lsp

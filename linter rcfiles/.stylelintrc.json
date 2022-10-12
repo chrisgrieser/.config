@@ -16,6 +16,7 @@
 	"rules": {
 		"font-family-no-missing-generic-family-keyword": null,
 		"no-descending-specificity": null,
+		"no-empty-source": null,
 
 		"plugin/declaration-block-no-ignored-properties": true,
 
