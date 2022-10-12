@@ -1,6 +1,5 @@
 require("utils")
 --------------------------------------------------------------------------------
-
 local cmp = require('cmp')
 
 local kind_icons = {
@@ -58,6 +57,7 @@ cmp.setup({
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'emoji', keyword_length = 2 },
+		{ name = 'nerdfont', keyword_length = 2 },
 		{ name = 'buffer', keyword_length = 2 },
 	}),
 	formatting = {
@@ -70,6 +70,7 @@ cmp.setup({
 				nvim_lsp_signature_help = "[SIG]",
 				luasnip = "[S]",
 				emoji = "[E]",
+				nerdfont = "[N]",
 				cmdline = "[CMD]",
 				cmdline_history = "[CMD-H]",
 				path = "[F]",
