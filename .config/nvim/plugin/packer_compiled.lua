@@ -114,6 +114,11 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/cmp-emoji",
     url = "https://github.com/hrsh7th/cmp-emoji"
   },
+  ["cmp-nerdfont"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/cmp-nerdfont",
+    url = "https://github.com/chrisgrieser/cmp-nerdfont"
+  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
