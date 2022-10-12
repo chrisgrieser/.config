@@ -41,7 +41,7 @@ keymap({"v", "o"}, "J", "7j")
 keymap("", "K", "7k")
 
 -- when reaching the last line, scroll down (since scrolloff does not work at EOF)
-local function overscroll (action)
+function overscroll (action)
 	local curLine = fn.line(".")
 	local lastLine = fn.line("$")
 	if curLine == lastLine then

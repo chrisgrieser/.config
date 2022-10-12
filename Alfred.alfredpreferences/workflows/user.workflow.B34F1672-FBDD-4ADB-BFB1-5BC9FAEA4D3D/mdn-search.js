@@ -17,6 +17,7 @@ function run (argv) {
 	console.log(lang + " " + query);
 	const baseURL = "https://developer.mozilla.org";
 	const searchAPI = "https://developer.mozilla.org/api/v1/search?q=";
+	console.log(searchAPI + query);
 
 	const resultsArr = onlineJSON(searchAPI + query)
 		.documents
@@ -26,6 +27,7 @@ function run (argv) {
 	if (resultsArr.length === 0) {
 		output = [{
 			"title": "No documents found.",
+			"subtitle": "MDN search sometimes requires longer queries before results are shown.",
 			"valid": false,
 			"arg": "no"
 		}];
