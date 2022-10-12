@@ -9,7 +9,7 @@ function gli (){
 	local hash key_pressed selected
 
 	selected=$(git log --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' | \
-	   fzf -0 \
+		fzf -0 \
 		--query="$1" \
 		--ansi \
 		--nth=2.. \
@@ -117,10 +117,14 @@ alias gh="open \$(git remote -v | grep git@github.com | grep fetch | head -n1 | 
 alias ghi="open \$(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//' )/issues;"
 
 function clone(){
-	git clone "$*"
+	if	[[ "$*" =~ "http" ]] ; then # safety net to not accidentally use https
+		giturl="git@github.com:$(echo "$*" | sed 's/https:\/\/github.com\///').git"
+	else
+		giturl="$*"
+	fi
+	git clone "$giturl"
 	# shellcheck disable=SC2012
-	z "$(ls -1 -t | head -n1)" || return
-
+	cd "$(ls -1 -t | head -n1)" || return
 	if grep -q "obsidian" package.json ; then
 		npm i # if it's an Obsidian plugin
 	fi
@@ -128,13 +132,19 @@ function clone(){
 
 # shallow clone
 function sclone(){
-	git clone --depth=1 "$*"
-	z "$(ls -1 -t | head -n1)" || return
-
+	if	[[ "$*" =~ "http" ]] ; then # safety net to not accidentally use https
+		giturl="git@github.com:$(echo "$*" | sed 's/https:\/\/github.com\///').git"
+	else
+		giturl="$*"
+	fi
+	git clone --depth=1 "$giturl"
+	# shellcheck disable=SC2012
+	cd "$(ls -1 -t | head -n1)" || return
 	if grep -q "obsidian" package.json ; then
 		npm i # if it's an Obsidian plugin
 	fi
 }
+
 
 function nuke {
 	SSH_REMOTE=$(git remote -v | head -n1 | cut -d" " -f1 | cut -d$'	' -f2)

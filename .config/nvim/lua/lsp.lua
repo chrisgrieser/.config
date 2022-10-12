@@ -38,6 +38,7 @@ vim.diagnostic.config{
 		border = borderStyle,
 		max_width = 50,
 		format = function (diagnostic)
+			if not(diagnostic.source) then diagnostic.source = "" end
 			if diagnostic.source == "stylelint" then
 				return diagnostic.message.." ["..diagnostic.source.."]"
 			else
