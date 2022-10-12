@@ -95,7 +95,6 @@ function gittree(){
 
 function gg(){
 	git branch --format='%(refname:short)'
-
 }
 
 alias gc="git checkout"
