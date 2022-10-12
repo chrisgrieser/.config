@@ -127,7 +127,7 @@ cmp.setup.filetype ("css", {
 cmp.setup.cmdline({ '/', '?' }, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
-		{ name = 'buffer', max_item_count = 20, keyword_length = 4 }
+		{ name = 'buffer', max_item_count = 12, keyword_length = 4 }
 	}
 })
 
@@ -138,9 +138,9 @@ cmp.setup.cmdline(':', {
 	sources = cmp.config.sources({
 		{ name = 'path' }
 	}, {
-		{ name = 'cmdline', max_item_count = 15 },
+		{ name = 'cmdline', max_item_count = 12 },
 	}, {
-		{ name = 'cmdline_history', max_item_count = 15 },
+		{ name = 'cmdline_history', max_item_count = 12 },
 	})
 })
 
