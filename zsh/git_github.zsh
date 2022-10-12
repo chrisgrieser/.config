@@ -86,16 +86,10 @@ function amend () {
 	git push --force
 }
 
-function gittree(){
-	(
-		r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
-		command exa --long --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git --tree --color=always | grep -v "\--"
-	)
-}
-
-function gg(){
-	git branch --format='%(refname:short)'
-}
+function gittree(){ (
+	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
+	command exa --long --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git --tree --color=always | grep -v "\--"
+) }
 
 alias gc="git checkout"
 alias gs='git status'
@@ -116,30 +110,27 @@ alias gh="open \$(git remote -v | grep git@github.com | grep fetch | head -n1 | 
 alias ghi="open \$(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//' )/issues;"
 
 function clone(){
-	if	[[ "$*" =~ "http" ]] ; then # safety net to not accidentally use https
-		giturl="git@github.com:$(echo "$*" | sed 's/https:\/\/github.com\///').git"
-	else
-		giturl="$*"
-	fi
-	git clone "$giturl"
-	# shellcheck disable=SC2012
-	cd "$(ls -1 -t | head -n1)" || return
-	if grep -q "obsidian" package.json ; then
-		npm i # if it's an Obsidian plugin
-	fi
+	betterClone "$*" "normal"
 }
 
-# shallow clone
-function sclone(){
-	if	[[ "$*" =~ "http" ]] ; then # safety net to not accidentally use https
-		giturl="git@github.com:$(echo "$*" | sed 's/https:\/\/github.com\///').git"
+function sclone(){ # shallow clone
+	betterClone "$*" "shallow"
+}
+
+function betterClone() {
+	if	[[ "$1" =~ "http" ]] ; then # safety net to not accidentally use https
+		giturl="git@github.com:$(echo "$*" | sed 's/https:\/\/github.com\///' | sed 's/.git.git/.git/' )"
 	else
 		giturl="$*"
 	fi
-	git clone --depth=1 "$giturl"
+	if [[ "$2" == "shallow" ]] ; then
+		git clone --depth=1 "$giturl"
+	else
+		git clone "$giturl"
+	fi
 	# shellcheck disable=SC2012
 	cd "$(ls -1 -t | head -n1)" || return
-	if grep -q "obsidian" package.json ; then
+	if grep -q "obsidian" package.json &> /dev/null; then
 		npm i # if it's an Obsidian plugin
 	fi
 }
