@@ -2,8 +2,6 @@
 require("utils")
 -------------------------------------------------------------------------------
 
-opt.redrawtime = 10000
-
 -- Search
 opt.showmatch = true
 opt.smartcase = true
@@ -50,7 +48,7 @@ augroup("linenumberSplit", {})
 autocmd({"WinLeave", "WinEnter", "WinClosed"},{
 	group = "linenumberSplit",
 	callback = function ()
-		if bo.filetype == "" then return end -- ignore special windows like telescope
+		if bo.filetype == "" or bo.filetype == "mason" then return end -- ignore special windows like telescope
 		local isVsplit = fn.winlayout()[1] == "row"
 		if isVsplit then
 			opt.number = false
@@ -97,9 +95,8 @@ opt.sidescrolloff = 21
 -- overwritten by the ftplugins having the o option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
 autocmd("BufEnter", {
-	callback = function ()
-		opt.formatoptions = opt.formatoptions - {"o", "r"}
-	end
+	---@diagnostic disable-next-line: assign-type-mismatch
+	callback = function () opt.formatoptions = opt.formatoptions - {"o", "r"} end
 })
 
 -- Remember Cursor Position

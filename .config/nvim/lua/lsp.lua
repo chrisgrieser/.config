@@ -56,7 +56,6 @@ autocmd("CursorHold", {
 	callback = function () vim.diagnostic.open_float{focusable=false} end, -- allow focussable for other diagnostic floats like hover info
 })
 
-
 -- textobj diagnostic plugin
 require("textobj-diagnostic").setup{create_default_keymaps = false}
 keymap({"x", "o"}, "id", function() require("textobj-diagnostic").next_diag_inclusive() end, { silent = true })

@@ -9,7 +9,6 @@ function PluginList ()
 	use "folke/tokyonight.nvim"
 	use "Mofiqul/dracula.nvim"
 	use "EdenEast/nightfox.nvim"
-	use "marko-cerovac/material.nvim"
 	use "sainnhe/edge"
 
 	-- Syntax
