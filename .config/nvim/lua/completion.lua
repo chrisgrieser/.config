@@ -1,6 +1,5 @@
 require("utils")
 
-
 --------------------------------------------------------------------------------
 local cmp = require('cmp')
 
@@ -36,7 +35,7 @@ cmp.setup({
 	snippet = { -- REQUIRED a snippet engine must be specified and installed
 		expand = function(args) require('luasnip').lsp_expand(args.body) end,
 	},
-	experimental = { ghost_text = false },
+	experimental = { ghost_text = true },
 
 	window = {
 		completion = cmp.config.window.bordered(),
@@ -59,6 +58,7 @@ cmp.setup({
 		{ name = 'emoji', keyword_length = 2 },
 		{ name = 'buffer', keyword_length = 2 },
 	}),
+
 	formatting = {
 		format = function(entry, vim_item)
 			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
@@ -114,11 +114,11 @@ cmp.setup.filetype ("lua", {
 			and not context.in_syntax_group("Comment")
 		end
 	end,
-	
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
+		{ name = 'nerdfont', keyword_length = 2 }, -- also use nerdfont for nvim config
 		{ name = 'emoji', keyword_length = 2 },
 		{ name = 'buffer', keyword_length = 2 },
 	}),
@@ -131,8 +131,19 @@ cmp.setup.filetype ("css", {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'emoji', keyword_length = 2 },
-		{ name = 'nerdfont', keyword_length = 2 },
 	})
+})
+
+-- also use nerdfont for starship config
+cmp.setup.filetype ("toml", {
+	sources = cmp.config.sources({
+		{ name = 'nvim_lsp_signature_help' },
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
+		{ name = 'nerdfont', keyword_length = 2 },
+		{ name = 'emoji', keyword_length = 2 },
+		{ name = 'buffer', keyword_length = 2 },
+	}),
 })
 
 --------------------------------------------------------------------------------
@@ -141,7 +152,7 @@ cmp.setup.filetype ("css", {
 cmp.setup.cmdline({ '/', '?' }, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
-		{ name = 'buffer', max_item_count = 12, keyword_length = 4 }
+		{ name = 'buffer', keyword_length = 4 }
 	}
 })
 
@@ -150,11 +161,9 @@ cmp.setup.cmdline({ '/', '?' }, {
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = 'path' }
-	}, {
-		{ name = 'cmdline', max_item_count = 12 },
-	}, {
-		{ name = 'cmdline_history', max_item_count = 12 },
+		{ name = 'path' },
+		{ name = 'cmdline' },
+		{ name = 'cmdline_history' },
 	})
 })
 

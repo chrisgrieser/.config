@@ -7,6 +7,10 @@ opt.showmatch = true
 opt.smartcase = true
 opt.ignorecase = true
 
+-- Popup
+opt.pumheight = 15 -- max number of items in popup menu
+opt.pumwidth = 10 -- min width popup menu
+
 -- Spelling
 opt.spell = false
 opt.spelllang = "en_us"
