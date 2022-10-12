@@ -1,4 +1,6 @@
 require("utils")
+
+
 --------------------------------------------------------------------------------
 local cmp = require('cmp')
 
@@ -34,30 +36,27 @@ cmp.setup({
 	snippet = { -- REQUIRED a snippet engine must be specified and installed
 		expand = function(args) require('luasnip').lsp_expand(args.body) end,
 	},
-	experimental = { ghost_text = true },
+	experimental = { ghost_text = false },
 
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
 
-	mapping = {
+	mapping = cmp.mapping.preset.insert({
 		['<Tab>'] = cmp.mapping.select_next_item(),
 		['<S-Tab>'] = cmp.mapping.select_prev_item(),
-		['<Down>'] = cmp.mapping.select_next_item(),
-		['<Up>'] = cmp.mapping.select_prev_item(),
 		['<Esc>'] = cmp.mapping.close(), -- close() leaves the current text, abort() restores pre-completion situation
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
 		['<S-Down>'] = cmp.mapping.scroll_docs(4),
-	},
+	}),
 
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'emoji', keyword_length = 2 },
-		{ name = 'nerdfont', keyword_length = 2 },
 		{ name = 'buffer', keyword_length = 2 },
 	}),
 	formatting = {
@@ -70,7 +69,7 @@ cmp.setup({
 				nvim_lsp_signature_help = "[SIG]",
 				luasnip = "[S]",
 				emoji = "[E]",
-				nerdfont = "[N]",
+				nerdfont = "[NF]",
 				cmdline = "[CMD]",
 				cmdline_history = "[CMD-H]",
 				path = "[F]",
@@ -114,18 +113,26 @@ cmp.setup.filetype ("lua", {
 			return not context.in_treesitter_capture("comment")
 			and not context.in_syntax_group("Comment")
 		end
-	end
+	end,
+	
+	sources = cmp.config.sources({
+		{ name = 'nvim_lsp_signature_help' },
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
+		{ name = 'emoji', keyword_length = 2 },
+		{ name = 'buffer', keyword_length = 2 },
+	}),
 })
 
 -- don't use buffer in css completions
 cmp.setup.filetype ("css", {
-	sources = {
-		{ name = 'nvim_lsp' },
+	sources = cmp.config.sources({
 		{ name = 'nvim_lsp_signature_help' },
+		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
-	}, {
 		{ name = 'emoji', keyword_length = 2 },
-	}
+		{ name = 'nerdfont', keyword_length = 2 },
+	})
 })
 
 --------------------------------------------------------------------------------
