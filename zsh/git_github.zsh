@@ -119,9 +119,9 @@ function sclone(){ # shallow clone
 
 function betterClone() {
 	if	[[ "$1" =~ "http" ]] ; then # safety net to not accidentally use https
-		giturl="git@github.com:$(echo "$*" | sed 's/https:\/\/github.com\///' | sed 's/.git.git/.git/' )"
+		giturl="git@github.com:$(echo "$1" | sed 's/https:\/\/github.com\///' | sed 's/.git.git/.git/' )"
 	else
-		giturl="$*"
+		giturl="$1"
 	fi
 	if [[ "$2" == "shallow" ]] ; then
 		git clone --depth=1 "$giturl"
