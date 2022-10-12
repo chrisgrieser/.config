@@ -4,16 +4,14 @@ brew install duti
 
 # general
 duti -s net.highlightsapp.universal pdf all
-duti -s com.apple.automator.less-bottom pdf all
 duti -s org.m0k.transmission torrent all
-duti -s com.sublimetext.4 csv all
 duti -s com.busymac.busycal3 ics all
-duti -s com.colliderli.iina mp3 all
 duti -s com.apple.automator.Obsidian-Opener md all
 
-# video
+# video & mp3
 videoplayerID="com.colliderli.iina"
 duti -s "$videoplayerID" mp4 all
+duti -s "$videoplayerID" mp3 all
 duti -s "$videoplayerID" vid all
 duti -s "$videoplayerID" mov all
 duti -s "$videoplayerID" m3u all
@@ -23,6 +21,7 @@ duti -s "$videoplayerID" m4a all
 
 # text
 editorID="com.apple.automator.Neovim"
+duti -s "$editorID" csv all
 duti -s "$editorID" log all
 duti -s "$editorID" toml all
 duti -s "$editorID" sh all
