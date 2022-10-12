@@ -2,7 +2,6 @@ require("utils")
 --------------------------------------------------------------------------------
 
 local cmp = require('cmp')
-require("cmp_git").setup()
 
 local kind_icons = {
 	Text = "",
@@ -55,7 +54,7 @@ cmp.setup({
 	},
 
 	sources = cmp.config.sources({
-		{ name = "git" },
+		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'emoji', keyword_length = 2 },
@@ -68,8 +67,12 @@ cmp.setup({
 			vim_item.menu = ({
 				buffer = "[B]",
 				nvim_lsp = "[LSP]",
+				nvim_lsp_signature_help = "[SIG]",
 				luasnip = "[S]",
-				git = "[G]",
+				emoji = "[E]",
+				cmdline = "[CMD]",
+				cmdline_history = "[CMD-H]",
+				path = "[F]",
 			})[entry.source.name]
 			return vim_item
 		end
@@ -104,7 +107,7 @@ cmp.setup.filetype ("lua", {
 		local context = require 'cmp.config.context'
 		if api.nvim_get_mode().mode == 'c' then -- keep command mode completion enabled when cursor is in a comment
 			return true
-		elseif fn.getline("."):match("%s*%-+") then ---@diagnostic disable-line: undefined-field
+		elseif fn.getline("."):match("%s*%-+") then ---@diagnostic disable-line: undefined-field, param-type-mismatch
 			return false
 		else
 			return not context.in_treesitter_capture("comment")
@@ -117,7 +120,7 @@ cmp.setup.filetype ("lua", {
 cmp.setup.filetype ("css", {
 	sources = {
 		{ name = 'nvim_lsp' },
-		{ name = 'cmp-nvim-lsp-signature-help' },
+		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'luasnip' },
 	}, {
 		{ name = 'emoji', keyword_length = 2 },
