@@ -30,11 +30,14 @@ keymap("i", "<D-k>", "[]()<Left><Left><Left>", opts)
 -- cmd+b: bold
 keymap("n", "<D-b>", "bi__<Esc>ea__<Esc>", opts)
 keymap("v", "<D-b>", "<Esc>`<i__<Esc>`>lla__<Esc>", opts)
+keymap("i", "<D-b>", "____<Left><Left>", opts)
 
 -- cmd+i: italics
 keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", opts)
 keymap("v", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", opts)
+keymap("i", "<D-i>", "**<Left>", opts)
 
 -- cmd+e: inline code
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", opts)
 keymap("v", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", opts)
+keymap("i", "<D-e>", "``<Left>", opts)
