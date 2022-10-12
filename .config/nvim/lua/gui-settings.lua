@@ -46,6 +46,8 @@ auto_dark_mode.init()
 keymap({"n", "v"}, "<D-w>", ":close<CR>") -- cmd+w
 keymap("i", "<D-w>", "<Esc>:close<CR>")
 
+keymap({"n", "v"}, "<D-n>", ':e Untitled<CR>:w<CR>:Rename ') -- cmd+n
+
 keymap({"n", "v"}, "<D-z>", ":undo<CR>") -- cmd+z
 keymap({"n", "v"}, "<D-Z>", ":redo<CR>") -- cmd+shift+z
 keymap("i", "<D-z>", "<Esc>:undo<CR>a")
@@ -58,7 +60,12 @@ keymap("v", "<D-a>", "ggG")
 
 keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 
-cmd[[let g:VM_maps['Find Under'] = '<D-j>']] -- cmd+j for jumping selection
+-- Multi-Cursor with cmd+j https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
+cmd[[
+	let g:VM_maps = {}
+	let g:VM_maps['Find Under'] = '<D-j>'
+]]
+
 keymap("i", "<D-j>", '<C-o>"_ciw')
 
 -- cut, copy & paste
