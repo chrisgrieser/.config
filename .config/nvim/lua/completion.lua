@@ -2,6 +2,7 @@ require("utils")
 --------------------------------------------------------------------------------
 
 local cmp = require('cmp')
+require("cmp_git").setup()
 
 local kind_icons = {
 	Text = "",
@@ -54,6 +55,7 @@ cmp.setup({
 	},
 
 	sources = cmp.config.sources({
+		{ name = "git" },
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'emoji', keyword_length = 2 },
@@ -67,6 +69,7 @@ cmp.setup({
 				buffer = "[B]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[S]",
+				git = "[G]",
 			})[entry.source.name]
 			return vim_item
 		end
