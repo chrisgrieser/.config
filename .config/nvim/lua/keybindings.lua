@@ -54,13 +54,6 @@ keymap("n", "j", function () overscroll("j") end)
 keymap("n", "J", function () overscroll("7j") end)
 keymap({"n", "v"}, "G", "Gzz")
 
--- Multi-Cursor, https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
--- changing these seems to require full restart (not only re-sourcing)
-cmd[[
-	let g:VM_maps = {}
-	let g:VM_maps['Find Under'] = '*'
-]]
-
 -- Jump History
 keymap("n", "<C-h>", "<C-o>") -- Back
 keymap("n", "<C-l>", "<C-i>") -- Forward
@@ -221,6 +214,16 @@ keymap("n", "<leader>s", ":SplitjoinSplit<CR>")
 keymap({"n", "v"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", "U") -- undo line
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
+
+--------------------------------------------------------------------------------
+-- Window Management
+keymap("", "<C-w>v", ":vsplit #<CR>") -- open the alternate file in the split
+keymap("", "<C-w>h", ":split #<CR>")
+keymap("", "<C-Right>", "<C-w>>")
+keymap("", "<C-Left>", "<C-w><")
+keymap("", "<C-Up>", "<C-w>+")
+keymap("", "<C-Down>", "<C-w>-")
+
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
