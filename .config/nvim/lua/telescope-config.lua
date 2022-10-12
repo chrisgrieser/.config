@@ -5,11 +5,12 @@ require("telescope").setup {
 		selection_caret = "⟐ ",
 		prompt_prefix = "❱ ",
 		path_display = { "tail" },
-		file_ignore_patterns = { 
+		file_ignore_patterns = {
 			"packer_compiled.lua",
-			".DS_Store", 
+			".DS_Store",
 			".git/",
 			".spl",
+			".log",
 			"node_modules",
 			".png",
 		},
@@ -23,7 +24,7 @@ require("telescope").setup {
 		layout_config = {
 			horizontal = {
 				height = 0.95,
-				preview_cutoff = 25,
+				preview_cutoff = 70,
 				width = 0.92
 			},
 		},
@@ -31,7 +32,7 @@ require("telescope").setup {
 	pickers = {
 		lsp_references = { prompt_prefix='⬅️', show_line=false, trim_text=true, include_declaration=false },
 		lsp_definitions = { prompt_prefix='➡️', show_line=false, trim_text=true },
-		lsp_document_symbols = { prompt_prefix='*', show_line=false},
+		lsp_document_symbols = { prompt_prefix='* ', show_line=false},
 		keymaps = { prompt_prefix='🔘' },
 		help_tags = { prompt_prefix=':h ' },
 		commands = { prompt_prefix=': ' },
