@@ -1,6 +1,6 @@
 require("utils")
-
 --------------------------------------------------------------------------------
+
 local cmp = require('cmp')
 
 local kind_icons = {
@@ -45,7 +45,10 @@ cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		['<Tab>'] = cmp.mapping.select_next_item(),
 		['<S-Tab>'] = cmp.mapping.select_prev_item(),
-		['<Esc>'] = cmp.mapping.close(), -- close() leaves the current text, abort() restores pre-completion situation
+		-- by *not* using Esc, Esc closes closes and laves insert mode with one
+		-- keypress
+		-- ['<Esc>'] = cmp.mapping.close(), -- close() leaves the current text, abort() restores pre-completion situation
+		['<C-x>'] = cmp.mapping.close(), -- close() leaves the current text, abort() restores pre-completion situation
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
 		['<S-Down>'] = cmp.mapping.scroll_docs(4),
@@ -163,6 +166,7 @@ cmp.setup.cmdline(':', {
 	sources = cmp.config.sources({
 		{ name = 'path' },
 		{ name = 'cmdline' },
+	},{ -- additional arrays = second array only relevant when no source from the first matches
 		{ name = 'cmdline_history' },
 	})
 })
