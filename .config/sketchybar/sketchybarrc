@@ -3,6 +3,8 @@
 
 ################################################################################
 
+pgrep "Stats" || open -a "Stats" # ensure Stats.app is running
+
 PLUGIN_DIR="$HOME/.config/sketchybar/"
 
 ##### Bar Appearance #####

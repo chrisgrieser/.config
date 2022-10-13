@@ -7,50 +7,38 @@ const alfredMatcher = (str) => str.replace (/[-()_#.]/g, " ") + " " + str + " ";
 //------------------------------------------------------------------------------
 
 const luaManualBaseURL = "https://www.lua.org/manual/5.4/";
-const luaWikiBaseURL = "http://lua-users.org/wiki/LuaDirectory";
-const ahrefRegex = /.*?"(.*)">(.*?)<.*/;
+const luaWikiBaseURL = "http://lua-users.org/";
+const ahrefRegex = /.*?"(.*?)" ?>(.*?)<.*/;
 const jsonArr = [];
 //------------------------------------------------------------------------------
 
-app.doShellScript(`curl -sL '${luaManualBaseURL}'`)
-	.split("\r")
+const rawHTML = app.doShellScript(`curl -sL '${luaManualBaseURL}'`)
++ app.doShellScript(`curl -sL '${luaWikiBaseURL}wiki/LuaDirectory'`);
+
+rawHTML.split("\r")
 	.filter(line => line.toLowerCase().includes("href") && !line.includes("css"))
 	.forEach(line => {
 		const subsite = line.replace(ahrefRegex, "$1");
+		const isWiki = subsite.includes("wiki");
 		let title = line
 			.replace(ahrefRegex, "$2")
 			.replaceAll("&ndash; ", "");
-		let type = "";
-		if (title.match(/\d/)) type = "chapter";
+
+		let type = "manual";
+		if (isWiki) type = "wiki";
+		else if (title.match(/\d/)) type = "manual (chapter)";
+
 		title = title.replace(/^[.0-9]+ /, "");
+
+		let url = isWiki ? luaWikiBaseURL : luaManualBaseURL;
+		url += subsite;
 
 		jsonArr.push({
 			"title": title,
 			"subtitle": type,
 			"match": alfredMatcher (title),
-			"arg": luaManualBaseURL + subsite,
-			"uid": subsite,
-		});
-	});
-
-app.doShellScript(`curl -sL '${luaWikiBaseURL}'`)
-	.split("\r")
-	.filter(line => line.includes("HREF") && !line.includes("css"))
-	.forEach(line => {
-		const subsite = line.replace(ahrefRegex, "$1");
-		let title = line
-			.replace(ahrefRegex, "$2")
-			.replaceAll("&ndash; ", "");
-		let type = "";
-		if (title.match(/\d/)) type = "chapter";
-		title = title.replace(/^[.0-9]+ /, "");
-
-		jsonArr.push({
-			"title": title,
-			"subtitle": type,
-			"match": alfredMatcher (title),
-			"arg": luaManualBaseURL + subsite,
-			"uid": subsite,
+			"arg": url,
+			"uid": url,
 		});
 	});
 
