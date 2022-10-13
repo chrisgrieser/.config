@@ -12,8 +12,9 @@ const ahrefRegex = /.*?"(.*?)" ?>(.*?)<.*/;
 const jsonArr = [];
 //------------------------------------------------------------------------------
 
-const rawHTML = app.doShellScript(`curl -sL '${luaManualBaseURL}'`)
-+ app.doShellScript(`curl -sL '${luaWikiBaseURL}wiki/LuaDirectory'`);
+const rawHTML =
+	app.doShellScript(`curl -sL '${luaManualBaseURL}'`)
+	+ app.doShellScript(`curl -sL '${luaWikiBaseURL}wiki/LuaDirectory'`);
 
 rawHTML.split("\r")
 	.filter(line => line.toLowerCase().includes("href") && !line.includes("css"))

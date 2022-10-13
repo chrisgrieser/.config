@@ -761,9 +761,9 @@
 				<key>scriptfile</key>
 				<string>lua-manual-search.js</string>
 				<key>subtext</key>
-				<string></string>
+				<string>Manual + Wiki</string>
 				<key>title</key>
-				<string>Lua Manual Search</string>
+				<string>Lua Search</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
