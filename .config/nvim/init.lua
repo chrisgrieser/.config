@@ -1,10 +1,9 @@
 ---@diagnostic disable-next-line: undefined-field
 vim.opt.runtimepath:append(', "~/.config/nvim/lua"') -- apparently required for homebrew installs where the runtimepath is missing the .config directory?!
 
-require('impatient') -- plugin, improve startuptime
-
 require("packer-setup") -- must be 1st
-require("utils") -- must be 2nd
+require('impatient') -- must be 2nd (plugin, improve startuptime)
+require("utils") -- must be 3rd
 
 --------------------------------------------------------------------------------
 
@@ -20,7 +19,7 @@ require("lsp-and-diagnostics")
 require("completion")
 require("linter")
 
-if (g.neovide or g.goneovim) then
+if isGui() then
 	require("gui-settings")
 	require("color-utilities")
 else
