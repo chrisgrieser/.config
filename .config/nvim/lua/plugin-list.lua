@@ -10,6 +10,7 @@ function PluginList ()
 	use "Mofiqul/dracula.nvim"
 	use "EdenEast/nightfox.nvim"
 	use "sainnhe/edge"
+	use "rebelot/kanagawa.nvim"
 
 	-- Syntax
 	use { "nvim-treesitter/nvim-treesitter", run = function() require("nvim-treesitter.install").update({ with_sync = true }) end }
