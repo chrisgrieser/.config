@@ -47,7 +47,6 @@ cmp.setup({
 		['<S-Tab>'] = cmp.mapping.select_prev_item(),
 		-- by *not* using Esc, Esc closes closes and laves insert mode with one
 		-- keypress
-		-- ['<Esc>'] = cmp.mapping.close(), -- close() leaves the current text, abort() restores pre-completion situation
 		['<C-x>'] = cmp.mapping.close(), -- close() leaves the current text, abort() restores pre-completion situation
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
@@ -153,16 +152,20 @@ cmp.setup.filetype ("toml", {
 -- Command Line Completion
 
 cmp.setup.cmdline({ '/', '?' }, {
-	mapping = cmp.mapping.preset.cmdline(),
+	mapping = cmp.mapping.preset.cmdline{
+		['<Tab>'] = cmp.mapping.select_next_item(),
+		['<S-Tab>'] = cmp.mapping.select_prev_item(),
+	},
 	sources = {
 		{ name = 'buffer', keyword_length = 4 }
 	}
 })
 
--- if a path can be matched, omit the rest. If a cmd can be matched, omit
--- history
 cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline(),
+	mapping = cmp.mapping.preset.cmdline{
+		['<Tab>'] = cmp.mapping.select_next_item(),
+		['<S-Tab>'] = cmp.mapping.select_prev_item(),
+	},
 	sources = cmp.config.sources({
 		{ name = 'path' },
 		{ name = 'cmdline' },
