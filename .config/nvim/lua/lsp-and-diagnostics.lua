@@ -19,7 +19,7 @@ local opts = { noremap=true, silent=true }
 keymap('n', 'ge', function () vim.diagnostic.goto_next({wrap=true, float=false}) end, opts)
 keymap('n', 'gE', function () vim.diagnostic.goto_prev({wrap=true, float=false}) end, opts)
 
-local function diagnosticFormat(diagnostic, mode)
+function diagnosticFormat(diagnostic, mode)
 	local out
 	if diagnostic.source == "stylelint" then
 		out = diagnostic.message -- stylelint already includes the code in the message
@@ -34,12 +34,12 @@ end
 
 vim.diagnostic.config{
 	virtual_text = {
-		format = function (diagnostic) diagnosticFormat(diagnostic, "virtual_text") end,
+		format = function (diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
 	},
 	float = {
 		border = borderStyle,
 		max_width = 50,
-		format = function (diagnostic) diagnosticFormat(diagnostic, "float") end,
+		format = function (diagnostic) return diagnosticFormat(diagnostic, "float") end,
 	}
 }
 
