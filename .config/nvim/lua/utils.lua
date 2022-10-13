@@ -26,3 +26,7 @@ cmd[[:command! -nargs=1 I lua inspectFn(<f-args>)]]
 
 -- Border Style
 borderStyle = "rounded"
+
+function isGui()
+	return g.neovide or g.goneovim
+end

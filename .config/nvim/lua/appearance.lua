@@ -91,6 +91,13 @@ local function mixedIndentation()
 	return ""
 end
 
+local secSeparators
+if isGui() then
+	secSeparators = { left = ' ', right = ' '} -- nerdfont: 'nf-ple'
+else
+	secSeparators = { left = '', right = ''}
+end
+
 require('lualine').setup {
 	sections = {
 		lualine_a = {'mode'},
@@ -104,7 +111,7 @@ require('lualine').setup {
 		theme  = 'auto',
 		globalstatus = true,
 		component_separators = { left = '', right = ''},
-		section_separators = { left = ' ', right = ' '}, -- nerdfont: 'nf-ple'
+		section_separators = secSeparators,
 	},
 }
 
