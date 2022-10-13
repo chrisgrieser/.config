@@ -174,6 +174,29 @@ keymap("n", "^A", "mzgg=G`z") -- entire file
 -- toggle word between Capital and lower case
 keymap("n", "ü", "mzlblgueh~`z")
 
+-- switch direction of char, e.g. > to <
+keymap("n", "gü", function ()
+	local col = api.nvim_win_get_cursor(0)[2] + 1
+	local char = fn.getline("."):sub(col, col) ---@diagnostic disable-line: param-type-mismatch, undefined-field
+	local out = ""
+	if char == "<" then out = ">"
+	elseif char == ">" then out = "<"
+	elseif char == "(" then out = ")"
+	elseif char == ")" then out = "("
+	elseif char == "]" then out = "["
+	elseif char == "[" then out = "]"
+	elseif char == "{" then out = "}"
+	elseif char == "}" then out = "{"
+	elseif char == "/" then out = "\\"
+	elseif char == "\\" then out = "/"
+	elseif char == "'" then out = '"'
+	elseif char == '"' then out = "'"
+	elseif char == "," then out = "'"
+	end
+	if not(out) then return end
+	cmd("normal! r"..out)
+end)
+
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`" }
 for i = 1, #trailingKeys do
