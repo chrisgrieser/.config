@@ -61,6 +61,8 @@ exmap lineUp obcommand editor:swap-line-up
 exmap lineDown obcommand editor:swap-line-down
 nmap <Up> :lineUp
 nmap <Down> :lineDown
+vmap <Up> :lineUp
+vmap <Down> :lineDown
 nmap <Right> dlp
 nmap <Left> dlhhp
 
