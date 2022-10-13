@@ -13,7 +13,7 @@ keymap("v", "<leader>k",
 	[[:call cheat#cheat("", -1, -1, 2, 0, '!')<CR>]],
 	{script = true, silent = true}
 )
--- increase int by one
+
 augroup("cheatsheet", {})
 autocmd("BufWinEnter", {
 	pattern = g.CheatSheetBufferName,
@@ -24,5 +24,4 @@ autocmd("BufWinEnter", {
 	end,
 	group = "cheatsheet"
 })
--- find in array
 
