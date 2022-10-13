@@ -7,14 +7,7 @@ require("utils")
 -- LSP Signature
 -- https://github.com/ray-x/lsp_signature.nvim#full-configuration-with-default-values
 require"lsp_signature".setup{
-	floating_window = false, -- don't show by default
-	hint_enable = true, -- virtual text hint
-
-	floating_window_above_cur_line = false, -- avoids overlap with cmp window
-	max_width = 60,
-	max_height = 7,
-	handler_opts = { border = borderStyle },
-
+	floating_window = false,
 	hint_prefix = " ",
 }
 
@@ -171,8 +164,8 @@ lspConfig['cssls'].setup{
 -- 	on_attach = on_attach,
 -- 	capabilities = capabilities,
 -- 	root_dir = function() return vim.fn.getcwd() end, -- needs root-dir to work
--- 	settings =  {
--- 		stylelintplus =  {
+-- 	settings = {
+-- 		stylelintplus = {
 -- 			configFile = home.."/.stylelintrc.json",
 -- 		}
 -- 	}
