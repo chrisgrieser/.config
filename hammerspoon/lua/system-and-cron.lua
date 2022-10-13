@@ -23,6 +23,7 @@ function gitDotfileSync(arg)
 		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode ~= 0 then
 			local stdout = hs.execute("git status --short")
+			if not(stdout) then return end
 			local submodulesStillDirty = stdout:match(" m ")
 			if submodulesStillDirty then
 				local modules = stdout:gsub(".*/", "")
@@ -95,10 +96,9 @@ end
 function homeWake (eventType)
 	local screensWoke = eventType == hs.caffeinate.watcher.screensDidWake
 	local systemWokeUp = eventType == hs.caffeinate.watcher.systemDidWake
-	local currentTimeHours = hs.timer.localTime() / 60 / 60
 
 	if systemWokeUp or screensWoke then
-		if currentTimeHours < 19 and currentTimeHours > 7 then
+		if betweenTime(7, 19) then
 			hs.shortcuts.run("Send Reminders due today to Drafts")
 			if not(isProjector()) then setDarkmode(false) end
 		else

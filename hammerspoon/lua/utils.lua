@@ -60,6 +60,12 @@ function notify (text)
 	print("notify: "..text) -- for the console
 end
 
+
+function betweenTime(startTime, endTime)
+	local currentHour = hs.timer.localTime() / 60 / 60
+	return currentHour > startTime and currentHour < endTime
+end
+
 function log (text, logpath)
 	text = trim(text)
 	hs.execute('mkdir -p "$(dirname "'..logpath..'")"')
