@@ -191,7 +191,8 @@ keymap("n", "gü", function ()
 	elseif char == "\\" then out = "/"
 	elseif char == "'" then out = '"'
 	elseif char == '"' then out = "'"
-	elseif char == "," then out = "'"
+	elseif char == "," then out = ";"
+	elseif char == ";" then out = ","
 	end
 	if not(out) then return end
 	cmd("normal! r"..out)
