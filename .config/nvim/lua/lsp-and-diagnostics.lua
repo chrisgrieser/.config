@@ -27,7 +27,7 @@ local function diagnosticFormat(diagnostic, mode)
 		out = diagnostic.message.." ("..tostring(diagnostic.code)..")"
 	end
 	if diagnostic.source and mode == "float" then
-		out = out + ", "..diagnostic.source
+		out = out..", "..diagnostic.source
 	end
 	return out
 end
