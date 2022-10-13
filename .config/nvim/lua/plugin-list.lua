@@ -7,10 +7,14 @@ function PluginList ()
 
 	-- Themes
 	use "folke/tokyonight.nvim"
-	use "Mofiqul/dracula.nvim"
 	use "EdenEast/nightfox.nvim"
-	use "sainnhe/edge"
+
+	use "Mofiqul/dracula.nvim"
+	use "navarasu/onedark.nvim"
 	use "rebelot/kanagawa.nvim"
+	-- use "sainnhe/edge"
+	-- use "savq/melange"
+	-- use "Yazeed1s/minimal.nvim"
 
 	-- Syntax
 	use { "nvim-treesitter/nvim-treesitter", run = function() require("nvim-treesitter.install").update({ with_sync = true }) end }

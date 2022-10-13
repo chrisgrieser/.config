@@ -3,7 +3,8 @@ require("appearance")
 --------------------------------------------------------------------------------
 
 -- BASE CONFIG
-local darkTheme = "tokyonight-moon"
+-- local darkTheme = "tokyonight-moon"
+local darkTheme = "kanagawa"
 local lightTheme = "dawnfox"
 
 g.gui_font_default_size = 25.2
@@ -15,19 +16,22 @@ opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinko
 -- THEME
 local function light()
 	cmd("colorscheme "..lightTheme)
-
 	opt.background = 'light'
-	cmd[[highlight TreesitterContext guibg=#e9ded2]] -- dawnfox
 	g.neovide_transparency = 0.93
-	customHighlights()
+
+	cmd[[highlight TreesitterContext guibg=#e9ded2]] -- dawnfox
 	cmd[[highlight IndentBlanklineChar guifg=#cdb398]] -- dawnfox
+	customHighlights()
 end
 
 local function dark()
 	cmd("colorscheme "..darkTheme)
 	opt.background = 'dark'
-	cmd[[highlight TreesitterContext guibg=#191726]]
 	g.neovide_transparency = 0.97
+
+	cmd[[highlight TreesitterContext guibg=#191726]] -- tokyo night
+	cmd[[hi rainbowcol1 guifg=#7e8a95]] -- kanagawa
+
 	customHighlights()
 end
 
