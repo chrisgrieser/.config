@@ -62,6 +62,8 @@ function movieModeLayout()
 end
 
 function homeModeLayout ()
+
+	iMacDisplay:setBrightness(0)
 	iMacDisplay:setBrightness(0.85)
 	holeCover()
 	hs.execute("brew services restart sketchybar") -- restart instead of reload to load colors
