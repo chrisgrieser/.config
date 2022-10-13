@@ -7,3 +7,6 @@ filter_exex: Obsidian|Neovide|neovide
 extra_exclude:
   - "../match/private.yml"
   - "../match/email.yml"
+
+
+backend: Clipboard
