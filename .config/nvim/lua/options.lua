@@ -19,10 +19,27 @@ cmd[[syntax match UrlNoSpell 'http[s]\?:\/\/[[:alnum:]%\/_#.-?]*' contains=@NoSp
 cmd[[syntax match AcronymNoSpell '\<\(\u\|\d\)\{3,}s\?\>' contains=@NoSpell]]
 
 -- Gutter
-opt.number = true
-opt.numberwidth = 3 -- minimum width, save some space for shorter files
-opt.relativenumber = true
 opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
+opt.numberwidth = 3 -- minimum width, save some space for shorter files
+opt.number = false
+opt.relativenumber = false
+
+-- -- hide line numbers on window split
+-- augroup("linenumberSplit", {})
+-- autocmd({"WinLeave", "WinEnter", "WinClosed"},{
+-- 	group = "linenumberSplit",
+-- 	callback = function ()
+-- 		if bo.filetype == "" or bo.filetype == "mason" then return end -- ignore special windows like telescope
+-- 		local isVsplit = fn.winlayout()[1] == "row"
+-- 		if isVsplit then
+-- 			opt.number = false
+-- 			opt.relativenumber = false
+-- 		else
+-- 			opt.number = true
+-- 			opt.relativenumber = true
+-- 		end
+-- 	end
+-- })
 
 -- whitespace & indentation
 opt.tabstop = 3
@@ -46,23 +63,6 @@ autocmd("BufWritePre", {
 -- Split
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
-
--- hide line numbers on window split
-augroup("linenumberSplit", {})
-autocmd({"WinLeave", "WinEnter", "WinClosed"},{
-	group = "linenumberSplit",
-	callback = function ()
-		if bo.filetype == "" or bo.filetype == "mason" then return end -- ignore special windows like telescope
-		local isVsplit = fn.winlayout()[1] == "row"
-		if isVsplit then
-			opt.number = false
-			opt.relativenumber = false
-		else
-			opt.number = true
-			opt.relativenumber = true
-		end
-	end
-})
 
 -- Command line
 opt.history = 777 -- do not save too much history to reduce noise for command line history search

@@ -15,7 +15,7 @@ require"lsp_signature".setup{
 	max_height = 7,
 	handler_opts = { border = borderStyle },
 
-	hint_prefix = " ",
+	hint_prefix = " ",
 }
 
 keymap({"n", "i"}, '<C-s>', function () vim.lsp.buf.signature_help() end)

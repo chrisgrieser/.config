@@ -15,7 +15,7 @@ keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key
 
 -- CSS
 keymap("n", "<leader>d", 'mzlEF.yEEp`z') -- [d]ouble class under cursor
-keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>') -- [D]uplicate Class under cursor
+keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>:nohl<CR>') -- [D]uplicate Class under cursor
 
 -- toggle !important
 keymap("n", "<leader>i", function ()
