@@ -177,6 +177,8 @@ function rel(){
 # search for [g]it [d]eleted [f]ile -> https://stackoverflow.com/a/42582877
 function gdf() {
 	local deleted_path deletion_commit
+	# alternative method: `git rev-list -n 1 HEAD -- "**/*$1*"` to get the commit
+	# of a deleted file
 	deleted_path=$(git log --diff-filter=D --summary | grep delete | grep -i "$*" | cut -d" " -f5-)
 	if [[ $(echo "$deleted_path" | wc -l) -gt 1 ]] ; then
 		echo "🔍 multiple files found: "

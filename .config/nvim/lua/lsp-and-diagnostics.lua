@@ -15,7 +15,7 @@ require"lsp_signature".setup{
 	max_height = 7,
 	handler_opts = { border = borderStyle },
 
-	hint_prefix = " ",
+	hint_prefix = " ",
 }
 
 keymap({"n", "i"}, '<C-s>', function () vim.lsp.buf.signature_help() end)
@@ -26,27 +26,27 @@ local opts = { noremap=true, silent=true }
 keymap('n', 'ge', function () vim.diagnostic.goto_next({wrap=true, float=false}) end, opts)
 keymap('n', 'gE', function () vim.diagnostic.goto_prev({wrap=true, float=false}) end, opts)
 
+local function diagnosticFormat(diagnostic, mode)
+	local out
+	if diagnostic.source == "stylelint" then
+		out = diagnostic.message -- stylelint already includes the code in the message
+	else
+		out = diagnostic.message.." ("..tostring(diagnostic.code)..")"
+	end
+	if diagnostic.source and mode == "float" then
+		out = out + ", "..diagnostic.source
+	end
+	return out
+end
+
 vim.diagnostic.config{
 	virtual_text = {
-		format = function (diagnostic)
-			if diagnostic.source == "stylelint" then
-				return diagnostic.message -- stylelint already includes the code in the message
-			else
-				return diagnostic.message.." ("..tostring(diagnostic.code)..")"
-			end
-		end,
+		format = function (diagnostic) diagnosticFormat(diagnostic, "virtual_text") end,
 	},
 	float = {
 		border = borderStyle,
 		max_width = 50,
-		format = function (diagnostic)
-			if not(diagnostic.source) then diagnostic.source = "" end
-			if diagnostic.source == "stylelint" then
-				return diagnostic.message.." ["..diagnostic.source.."]"
-			else
-				return diagnostic.message.." ("..tostring(diagnostic.code)..", "..diagnostic.source..")"
-			end
-		end,
+		format = function (diagnostic) diagnosticFormat(diagnostic, "float") end,
 	}
 }
 
@@ -60,7 +60,7 @@ autocmd("CursorHold", {
 
 -- textobj diagnostic plugin
 require("textobj-diagnostic").setup{create_default_keymaps = false}
-keymap({"x", "o"}, "id", function() require("textobj-diagnostic").next_diag_inclusive() end, { silent = true })
+keymap({"x", "o"}, "id", function() require("textobj-diagnostic").next_diag_inclusive() end, opts)
 
 --------------------------------------------------------------------------------
 
