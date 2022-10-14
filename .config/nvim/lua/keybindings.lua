@@ -29,7 +29,6 @@ keymap("n", "<leader>P", ":PackerStatus<CR>")
 
 -- Utils
 keymap("n", "ZZ", ":w<CR>:q<CR>") -- quicker quitting
-keymap("n", "zz", ":w<CR>:!acp ")
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -316,4 +315,4 @@ keymap("n", "<leader>ow", ":set wrap! <CR>")
 
 -- TERMINAL MODE
 keymap("n", "zt", ":10split<CR>:term<CR>")
-
+keymap("n", "zz", ":w<CR>:!acp ")

@@ -7,11 +7,11 @@ require("utils")
 -- LSP Signature
 require"lsp_signature".setup{
 	floating_window = false,
-	hint_prefix = " ",
+	hint_prefix = "﬍ ",
 	hint_scheme = "Conditional", -- highlight group that is applied to the hint
 }
 
-keymap({"n", "i"}, '<C-s>', function () vim.lsp.buf.signature_help() end)
+keymap({"n", "i", "v"}, '<C-s>', function () vim.lsp.buf.signature_help() end)
 
 --------------------------------------------------------------------------------
 -- DIAGNOTICS (in general, also applies to nvim-lint etc.)
