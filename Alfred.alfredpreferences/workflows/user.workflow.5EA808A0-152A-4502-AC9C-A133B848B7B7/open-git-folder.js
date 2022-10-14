@@ -77,11 +77,10 @@ repoArray.forEach(localRepoFilePath => {
 	else {
 		const readme = readFile(localRepoFilePath + "/README.md");
 		if (readme) {
-			const headings = readme
+			repoName = readme
 				.split("\n")
-				.filter(line => line.startsWith("# "));
-			if (headings[0]) repoName = headings[0].slice(2);
-			else repoName = "Heading Missing";
+				.find(line => line.startsWith("# "));
+			if (!repoName) repoName = "Heading Missing";
 		}
 		else repoName = localRepoFilePath;
 	}

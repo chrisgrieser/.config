@@ -46,6 +46,8 @@ function overscroll (action)
 	local lastLine = fn.line("$")
 	if curLine == lastLine then
 		cmd[[normal! zz]]
+	elseif (lastLine - curLine) < 10 then
+		cmd[[normal! <C-e>]]
 	else
 		cmd("normal! "..action)
 	end

@@ -13,13 +13,13 @@ opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinko
 
 --------------------------------------------------------------------------------
 
+cmd[[highlight link def TreesitterContext LspFloatWinNormal]]
 -- THEME
 local function light()
 	cmd("colorscheme "..lightTheme)
 	opt.background = 'light'
 	g.neovide_transparency = 0.93
 
-	cmd[[highlight TreesitterContext guibg=#e9ded2]] -- dawnfox
 	cmd[[highlight IndentBlanklineChar guifg=#cdb398]] -- dawnfox
 	customHighlights()
 end
@@ -29,7 +29,7 @@ local function dark()
 	opt.background = 'dark'
 	g.neovide_transparency = 0.97
 
-	cmd[[highlight TreesitterContext guibg=#191726]] -- tokyo night
+	-- cmd[[highlight TreesitterContext guibg=#191726]] -- tokyo night
 	cmd[[hi rainbowcol1 guifg=#7e8a95]] -- kanagawa
 
 	customHighlights()
