@@ -5,7 +5,7 @@ require("utils")
 
 --------------------------------------------------------------------------------
 -- LSP Signature
--- https://github.com/ray-x/lsp_signature.nvim#full-configuration-with-default-values
+-- Alternative: https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
 require"lsp_signature".setup{
 	floating_window = false,
 	hint_prefix = " ",

@@ -2,7 +2,10 @@ opt.termguicolors = true -- required for color previewing, but also messes up lo
 
 local ccc = require("ccc")
 ccc.setup{
-	highlighter = { auto_enable = true },
+	highlighter = {
+		auto_enable = true,
+		excludes = {"packer"},
+	},
 	inputs = { ccc.input.hsl, ccc.input.rgb, ccc.input.hex },
 	outputs = { ccc.output.css_hsl, ccc.output.css_rgb, ccc.output.hex },
 	convert = {
