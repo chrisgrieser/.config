@@ -3,6 +3,7 @@
 
 function run (argv) {
 	ObjC.import("stdlib");
+	ObjC.import("Foundation");
 
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
@@ -19,6 +20,17 @@ function run (argv) {
 				exportable: false
 			});
 	}
+
+	
+	function readFile (path, encoding) {
+		if (!encoding) encoding = $.NSUTF8StringEncoding;
+		const fm = $.NSFileManager.defaultManager;
+		const data = fm.contentsAtPath(path);
+		const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
+		return ObjC.unwrap(str);
+	}
+
+	//──────────────────────────────────────────────────────────────────────────────
 
 	const dateFormatOption = { year: "numeric", month: "short", day: "2-digit" };
 	const language = $.getenv("lang");
@@ -38,14 +50,12 @@ function run (argv) {
 		weekCounter = 0;
 		startDate = new Date(dateInput);
 	} else {
-		weekCounter = parseInt($.getenv("week_no"));
-		weekCounter++; // one more week
+		console.log(parseInt($.getenv("week_no")));
+		console.log(parseInt($.getenv("week_no")) + 1);
+		weekCounter = parseInt($.getenv("week_no")) + 1;
 		startDate = new Date($.getenv("startdate"));
-		console.log("add to week");
 	}
 	setAlfredEnv ("week_no", weekCounter.toString()); // set week counter for next run
-	console.log(startDate);
-	console.log(weekCounter);
 
 	// calculate new date
 	const dayOne = startDate.getDate(); // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
