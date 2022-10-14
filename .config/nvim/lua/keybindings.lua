@@ -86,6 +86,7 @@ keymap({"n", "v"}, "C", '"_C')
 keymap("n", "P", '"0p') -- paste what was yanked
 
 -- TEXT OBJECTS
+-- INFO: Various Text Objects are defined via treesitter textobj
 -- the text-objects below need "_
 keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<C-A-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
@@ -100,18 +101,18 @@ keymap("n", '<leader><Space>', function ()
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
 end)
 
-keymap("o", "q", 'i"') -- change double [q]uote
-keymap("o", "Q", "i'") -- change single [Q]uote
+keymap("o", "iq", 'i"') -- change double [q]uote
+keymap("o", "aq", 'a"') 
+keymap("o", "iz", "i'") -- change single quote (mnemonic: [z]itation)
+keymap("o", "az", "a'")
 keymap("o", "p", '}') -- rest of the [p]aragraph
 keymap("o", "P", '{') -- beginning of the [P]aragraph
 
--- INFO: Various Text Objects are defined via treesitter textobj
-
 -- COMMENTS (mnemonic: [q]uiet text)
 keymap({"n", "v"}, "q" ,"<Plug>Commentary")
-keymap("n", "qq" ,"mz<Plug>CommentaryLine`z")
+keymap("n", "qq" ,"<Plug>CommentaryLine")
 keymap("n", "qu" ,"<Plug>Commentary<Plug>Commentary") -- undo comment
-keymap("o", "aq" ,"<Plug>Commentary") -- better text object than from treesitter
+keymap("o", "q" ,"<Plug>Commentary") -- better text object than from treesitter
 keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
 -- INFO gq and gQ mapped as goto next/prev comment via treesitter textobj
 
@@ -173,12 +174,12 @@ keymap("n", "^A", "mzgg=G`z") -- entire file
 -- toggle word between Capital and lower case
 keymap("n", "ü", "mzlblgueh~`z")
 
--- switch direction of char, e.g. > to <
+-- toggle case or switch direction of char (e.g. > to <)
 keymap("n", "Ü", function ()
 	local col = api.nvim_win_get_cursor(0)[2] + 1
 	local char = fn.getline("."):sub(col, col) ---@diagnostic disable-line: param-type-mismatch, undefined-field
 	local letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	if letters:find(char) then 
+	if letters:find(char) then
 		cmd[[normal! ~h]]
 		return
 	end
