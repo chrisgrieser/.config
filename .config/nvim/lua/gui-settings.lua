@@ -93,7 +93,7 @@ ResetGuiFont = function()
 	RefreshGuiFont()
 end
 ResetGuiFont() -- Call function on startup to set default value
-keymap({'n','v','i'}, '<D-+>', function() ResizeGuiFont(1)  end, {silent = true})
+keymap({'n','v','i'}, '<D-+>', function() ResizeGuiFont(1) end, {silent = true})
 keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true})
 
 --------------------------------------------------------------------------------

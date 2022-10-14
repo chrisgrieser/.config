@@ -63,6 +63,7 @@
 
 if pgrep "neovide" ; then
 	# workaround for https://github.com/neovide/neovide/issues/1586
+	prevClipboard=$(pbpaste)
 	echo "$1" | pbcopy
 	osascript -e 'tell application "Neovide" to activate
 		delay 0.05
@@ -72,9 +73,11 @@ if pgrep "neovide" ; then
 			keystroke "v" using {command down}
 			keystroke return
 		end tell'
+	echo "$prevClipboard" | pbcopy
 else
 	neovide "$1"
-fi</string>
+fi
+</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
