@@ -12,16 +12,6 @@ function run (argv) {
 		return JSON.parse (app.doShellScript('curl -s "' + url + '"'));
 	}
 
-	function setAlfredEnv (envVar, newValue) {
-		Application("com.runningwithcrayons.Alfred")
-			.setConfiguration(envVar, {
-				toValue: newValue,
-				inWorkflow: $.getenv("alfred_workflow_bundleid"),
-				exportable: false
-			});
-	}
-
-	
 	function readFile (path, encoding) {
 		if (!encoding) encoding = $.NSUTF8StringEncoding;
 		const fm = $.NSFileManager.defaultManager;
@@ -30,6 +20,15 @@ function run (argv) {
 		return ObjC.unwrap(str);
 	}
 
+	function ReadData (key, value) {
+
+	}
+
+	function writeData (key, newValue) {
+		const dataPath = $.getenv("alfred_workflow_data") + key;
+		const str = $.NSString.alloc.initWithUTF8String(newValue);
+		str.writeToFileAtomicallyEncodingError(dataPath, true, $.NSUTF8StringEncoding, null);
+	}
 	//──────────────────────────────────────────────────────────────────────────────
 
 	const dateFormatOption = { year: "numeric", month: "short", day: "2-digit" };
