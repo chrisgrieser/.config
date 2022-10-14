@@ -44,30 +44,27 @@ require("telescope").setup {
 		buffers = {prompt_prefix='📑',ignore_current_buffer = true},
 		live_grep = {cwd='%:p:h', disable_coordinates=true, prompt_prefix='🔎'},
 		current_buffer_fuzzy_find = { prompt_prefix='🔍' },
-		spell_suggest = {
-			require('telescope.themes').get_dropdown{
-				previewer = false
+		spell_suggest = ( require('telescope.themes').get_ivy{
+			layout_config = {
+				bottom_pane = {
+					height = 0.3
+				}
 			}
-		},
-		colorscheme = { enable_preview = true, prompt_prefix='🎨' },
+		} ),
+		colorscheme = { enable_preview = true, prompt_prefix='🎨', layout_strategy = "bottom_pane" },
 		find_files = { cwd='%:p:h', prompt_prefix=' ', hidden=true },
 	},
 	extensions = {
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown{
+			require("telescope.themes").get_ivy{
 				prompt_prefix = "  ",
 				initial_mode = "normal",
-				layout_config = {
-					center = {
-						height = 0.3,
-						width = 0.75,
-					}
-				}
+				results_title = false,
+				layout_config = { bottom_pane = { height = 0.25 } }
 			}
 		}
 	}
 }
-
 
 -- use telescope for selections like code actions
 require("telescope").load_extension("ui-select")
