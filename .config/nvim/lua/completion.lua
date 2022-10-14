@@ -1,7 +1,23 @@
 require("utils")
+local cmp = require('cmp')
 --------------------------------------------------------------------------------
 
-local cmp = require('cmp')
+require("registers").setup({
+	show = '*"0123456789abcdefghijklmnopqrstuvwxy',
+	show_empty = false,
+	window = {
+		max_width = 50,
+		border = borderStyle,
+		transparency = 0,
+	},
+})
+
+-- autopairs
+require("nvim-autopairs").setup {}
+local cmp_autopairs = require('nvim-autopairs.completion.cmp') -- add brackets to cmp
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done())
+
+--------------------------------------------------------------------------------
 
 local kind_icons = {
 	Text = "",
@@ -91,14 +107,6 @@ cmp.setup({
 		end
 	end
 })
-
---------------------------------------------------------------------------------
--- autopairs
-require("nvim-autopairs").setup {}
-
--- add brackets to cmp
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done())
 
 --------------------------------------------------------------------------------
 -- Filetype specific Completion
