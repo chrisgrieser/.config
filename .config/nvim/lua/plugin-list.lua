@@ -15,6 +15,7 @@ function PluginList ()
 	-- use "sainnhe/edge"
 	-- use "savq/melange"
 	-- use "Yazeed1s/minimal.nvim"
+	-- use "kaiuri/nvim-juliana"
 
 	-- Syntax
 	use { "nvim-treesitter/nvim-treesitter", run = function() require("nvim-treesitter.install").update({ with_sync = true }) end }
