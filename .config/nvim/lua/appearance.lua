@@ -17,10 +17,6 @@ function customHighlights()
 	cmd[[highlight SpellCap gui=underline]]
 	cmd[[highlight SpellBad gui=underline]]
 
-	-- mixed whitespace
-	cmd[[highlight MixedWhiteSpace guibg=DarkGrey ctermbg=DarkGrey]]
-	cmd[[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
-
 	-- URLs
 	cmd[[highlight urls cterm=underline term=underline gui=underline]]
 	cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.\-?]*') ]]
@@ -31,6 +27,10 @@ function customHighlights()
 end
 
 customHighlights()
+
+-- mixed whitespace
+cmd[[highlight def link MixedWhiteSpace Folded]]
+cmd[[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 
 --------------------------------------------------------------------------------
 
