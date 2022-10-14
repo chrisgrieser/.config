@@ -143,4 +143,15 @@ opt.title = true
 opt.titlelen = 0 -- do not shorten title
 opt.titlestring='%{expand(\"%:p\")} [%{mode()}]'
 
-
+-- Terminal Mode
+augroup("Terminal", {})
+autocmd("TermOpen", {
+	group = "Terminal",
+	pattern = "*",
+	command = "startinsert"
+})
+autocmd("TermClose", {
+	group = "Terminal",
+	pattern = "*",
+	command = "bd"
+})

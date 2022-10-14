@@ -5,10 +5,12 @@ local cmp = require('cmp')
 require("registers").setup({
 	show = '*"0123456789abcdefghijklmnopqrstuvwxy',
 	show_empty = false,
+	show_register_types = false,
 	window = {
-		max_width = 50,
+		max_width = 60,
 		border = borderStyle,
 		transparency = 0,
+		highlight_cursorline = false,
 	},
 })
 
