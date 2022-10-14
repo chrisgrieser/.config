@@ -33,10 +33,11 @@ require("telescope").setup {
 		lsp_references = { prompt_prefix='⬅️', show_line=false, trim_text=true, include_declaration=false },
 		lsp_definitions = { prompt_prefix='➡️', show_line=false, trim_text=true },
 		lsp_document_symbols = { prompt_prefix='* ', show_line=false},
+		treesitter = { show_line=false, prompt_prefix='🌳' },
 		keymaps = { prompt_prefix='🔘' },
 		help_tags = { prompt_prefix=':h ' },
 		commands = { prompt_prefix=': ' },
-		oldfiles = { prompt_prefix='🕔' },
+		oldfiles = { prompt_prefix=' ' },
 		highlights = { prompt_prefix='🎨' },
 		marks = { prompt_prefix="'" },
 		buffers = {prompt_prefix='📑',ignore_current_buffer = true},
@@ -44,15 +45,23 @@ require("telescope").setup {
 		current_buffer_fuzzy_find = { prompt_prefix='🔍' },
 		spell_suggest = { prompt_prefix='✏️' },
 		colorscheme = { enable_preview = true, prompt_prefix='🎨' },
-		find_files = { cwd='%:p:h', prompt_prefix='📂', hidden=true },
-		treesitter = { show_line=false, prompt_prefix='🌳' },
+		find_files = { cwd='%:p:h', prompt_prefix=' ', hidden=true },
 	},
 	extensions = {
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown()
+			require("telescope.themes").get_dropdown{
+				prompt_prefix = " ",
+				initial_mode = "normal",
+				mappings = {
+
+					["j"] = "move_selection_next",
+					["k"] = "move_selection_previous",
+				}
+			}
 		}
 	}
 }
+
 
 -- use telescope for selections like code actions
 require("telescope").load_extension("ui-select")

@@ -9,6 +9,7 @@ require("utils")
 require"lsp_signature".setup{
 	floating_window = false,
 	hint_prefix = " ",
+	hint_scheme = "Folded", -- highlight group that is applied to the hint
 }
 
 keymap({"n", "i"}, '<C-s>', function () vim.lsp.buf.signature_help() end)
