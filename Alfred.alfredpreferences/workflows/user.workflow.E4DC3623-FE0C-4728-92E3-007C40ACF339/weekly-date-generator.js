@@ -1,5 +1,4 @@
 #!/usr/bin/env osascript -l JavaScript
-
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
 
 function run (argv) {
@@ -23,7 +22,8 @@ function run (argv) {
 
 	const dateFormatOption = { year: "numeric", month: "short", day: "2-digit" };
 	const language = $.getenv("lang");
-	const resultInBrackets = $.getenv("in_brackets") === "true";
+	const resultInBrackets = $.getenv("in_brackets") === "1";
+	const addLineBreak = $.getenv("in_brackets") === "1";
 
 	const dateInput = argv.join("");
 	let weekCounter;
