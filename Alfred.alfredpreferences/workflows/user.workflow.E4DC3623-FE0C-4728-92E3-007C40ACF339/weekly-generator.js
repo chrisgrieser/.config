@@ -41,6 +41,7 @@ function run (argv) {
 		weekCounter = parseInt($.getenv("week_no"));
 		weekCounter++; // one more week
 		startDate = new Date($.getenv("startdate"));
+		console.log("add to week");
 	}
 	setAlfredEnv ("week_no", weekCounter.toString()); // set week counter for next run
 	console.log(startDate);

@@ -125,19 +125,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>54362C42-D049-45E7-B8AD-9F82A154B1BA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>931A201F-67BF-4D23-845D-15074A56A83D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>578C08D0-C681-4E8A-AC1A-63359A0F0C34</key>
 		<array>
 			<dict>
@@ -181,7 +168,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>54362C42-D049-45E7-B8AD-9F82A154B1BA</string>
+				<string>C73C4C50-6AAA-4294-929D-5C770E4E4E36</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -208,6 +195,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>C6DAAB1D-609E-4930-B1D7-F7D3F3D59BC6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C73C4C50-6AAA-4294-929D-5C770E4E4E36</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>931A201F-67BF-4D23-845D-15074A56A83D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -272,7 +272,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>54362C42-D049-45E7-B8AD-9F82A154B1BA</string>
+				<string>C73C4C50-6AAA-4294-929D-5C770E4E4E36</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -645,29 +645,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>weekly-date-generator.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>54362C42-D049-45E7-B8AD-9F82A154B1BA</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -693,6 +670,29 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>FFFCD856-9A0A-4D43-A899-CCA1AE5235BB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>weekly-generator.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C73C4C50-6AAA-4294-929D-5C770E4E4E36</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -936,15 +936,6 @@
 			<key>ypos</key>
 			<real>745</real>
 		</dict>
-		<key>54362C42-D049-45E7-B8AD-9F82A154B1BA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>805</real>
-			<key>ypos</key>
-			<real>630</real>
-		</dict>
 		<key>578C08D0-C681-4E8A-AC1A-63359A0F0C34</key>
 		<dict>
 			<key>colorindex</key>
@@ -1040,6 +1031,15 @@
 			<real>275</real>
 			<key>ypos</key>
 			<real>75</real>
+		</dict>
+		<key>C73C4C50-6AAA-4294-929D-5C770E4E4E36</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>800</real>
+			<key>ypos</key>
+			<real>630</real>
 		</dict>
 		<key>D2BD37F0-E419-4DDF-903A-45426C37155D</key>
 		<dict>
@@ -1184,13 +1184,13 @@
 	<key>variables</key>
 	<dict>
 		<key>startdate</key>
-		<string>2022-10-19</string>
-		<key>week_counter</key>
-		<string>4</string>
+		<string>2022-10-14</string>
+		<key>week_no</key>
+		<string>3</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
-		<string>week_counter</string>
+		<string>week_no</string>
 		<string>startdate</string>
 	</array>
 	<key>version</key>
