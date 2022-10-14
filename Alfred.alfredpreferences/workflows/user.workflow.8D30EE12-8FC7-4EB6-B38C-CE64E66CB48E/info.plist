@@ -337,25 +337,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>open-at-github</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>de.chris-grieser.github</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>8C279CF4-80F0-4D28-B0BA-137130AC177A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -371,6 +352,25 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>open-at-github</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>de.chris-grieser.github</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>8C279CF4-80F0-4D28-B0BA-137130AC177A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -421,7 +421,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>get-sublime-path.sh</string>
+				<string>get-neovide-path.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -431,25 +431,6 @@
 			<string>0EA98984-DD00-401D-96D7-C1FD7A879F4F</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>use '{query}'</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -497,6 +478,25 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>799F31B4-F294-42FD-B4F4-2D190B6C7A33</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>use "{query}"</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -566,7 +566,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>get-sublime-path.sh</string>
+				<string>get-neovide-path.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -606,11 +606,11 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>get path from Sublime</string>
+			<string>get path</string>
 			<key>xpos</key>
-			<real>820</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>550</real>
 		</dict>
 		<key>09E95958-33BA-4403-A120-ED77024AAB7E</key>
 		<dict>
@@ -624,11 +624,11 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>get path from Sublime</string>
+			<string>get path</string>
 			<key>xpos</key>
-			<real>820</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>405</real>
 		</dict>
 		<key>4C8471ED-D799-4D45-B9DD-EEA5E5B94EA0</key>
 		<dict>
@@ -651,9 +651,9 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>970</real>
+			<real>765</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>550</real>
 		</dict>
 		<key>62F7FD14-3DF1-4FBC-9C3B-B99132F28919</key>
 		<dict>
@@ -667,9 +667,9 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>355</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>400</real>
 		</dict>
 		<key>6DA05A81-0D56-4CD6-A247-5D15F1F24D8F</key>
 		<dict>
@@ -703,9 +703,9 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>970</real>
+			<real>765</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>405</real>
 		</dict>
 		<key>A750B10D-2695-481F-B660-F29C241C6727</key>
 		<dict>
@@ -714,9 +714,9 @@
 			<key>note</key>
 			<string>Version history</string>
 			<key>xpos</key>
-			<real>675</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>550</real>
 		</dict>
 		<key>D2DE689D-680B-4BE5-92C3-0372AFF1E0AD</key>
 		<dict>
@@ -725,27 +725,27 @@
 			<key>note</key>
 			<string>Open History (GitHub Workflow)</string>
 			<key>xpos</key>
-			<real>675</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>405</real>
 		</dict>
 		<key>D6E5E105-38E3-4BC1-90E3-52BEE556349D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>350</real>
+			<real>260</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>625</real>
 		</dict>
 		<key>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>355</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>515</real>
 		</dict>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<dict>
