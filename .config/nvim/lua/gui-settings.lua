@@ -17,7 +17,7 @@ cmd[[highlight def link TreesitterContext LspFloatWinNormal]]
 -- THEME
 local function light()
 	cmd("colorscheme "..lightTheme)
-	opt.background = 'light'
+	opt.background = 'light' ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.93
 
 	cmd[[highlight IndentBlanklineChar guifg=#cdb398]] -- dawnfox
@@ -26,7 +26,7 @@ end
 
 local function dark()
 	cmd("colorscheme "..darkTheme)
-	opt.background = 'dark'
+	opt.background = 'dark' ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.97
 
 	-- cmd[[highlight TreesitterContext guibg=#191726]] -- tokyo night
@@ -64,10 +64,8 @@ keymap("v", "<D-a>", "ggG")
 keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 
 -- Multi-Cursor with cmd+j https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
-cmd[[
-	let g:VM_maps = {}
-	let g:VM_maps['Find Under'] = '<D-j>'
-]]
+cmd[[ let g:VM_maps = {}
+let g:VM_maps['Find Under'] = '<D-j>' ]]
 
 keymap("i", "<D-j>", '<C-o>"_ciw')
 
@@ -84,7 +82,7 @@ keymap("v", "<D-x>", "d")
 -- https://neovide.dev/faq.html#how-can-i-dynamically-change-the-font-size-at-runtime
 g.gui_font_size = g.gui_font_default_size
 RefreshGuiFont = function()
-	opt.guifont = string.format("%s:h%s",g.gui_font_face, g.gui_font_size)
+	opt.guifont = string.format("%s:h%s",g.gui_font_face, g.gui_font_size) ---@diagnostic disable-line: assign-type-mismatch
 end
 ResizeGuiFont = function(delta)
 	g.gui_font_size = g.gui_font_size + delta
@@ -104,14 +102,14 @@ keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true}
 -- https://neovide.dev/configuration.html
 
 g.neovide_cursor_animation_length = 0.01
-g.neovide_cursor_trail_size = 0.8
+g.neovide_cursor_trail_size = 0.9
 g.neovide_scroll_animation_length = 0.8
 g.neovide_floating_blur_amount_x = 5.0
 g.neovide_floating_blur_amount_y = 5.0
 g.neovide_cursor_unfocused_outline_width = 0.1
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
 
-g.neovide_cursor_vfx_mode = "railgun"
+g.neovide_cursor_vfx_mode = "wireframe"
 g.neovide_cursor_vfx_particle_lifetime=3
 g.neovide_cursor_vfx_particle_density=20.0
 g.neovide_cursor_vfx_particle_speed=25.0
