@@ -139,8 +139,6 @@ cmp.setup.filetype ("css", {
 -- also use nerdfont for starship config
 cmp.setup.filetype ("toml", {
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp_signature_help' },
-		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'nerdfont', keyword_length = 2 },
 		{ name = 'emoji', keyword_length = 2 },
@@ -152,20 +150,14 @@ cmp.setup.filetype ("toml", {
 -- Command Line Completion
 
 cmp.setup.cmdline({ '/', '?' }, {
-	mapping = cmp.mapping.preset.cmdline{
-		['<Tab>'] = cmp.mapping.select_next_item(),
-		['<S-Tab>'] = cmp.mapping.select_prev_item(),
-	},
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
 		{ name = 'buffer', keyword_length = 4 }
 	}
 })
 
 cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline{
-		['<Tab>'] = cmp.mapping.select_next_item(),
-		['<S-Tab>'] = cmp.mapping.select_prev_item(),
-	},
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = 'path' },
 		{ name = 'cmdline' },
