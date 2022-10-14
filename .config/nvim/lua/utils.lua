@@ -17,15 +17,11 @@ function localOpt(option, value)
 	vim.api.nvim_set_option_value(option, value, {scope = "local"})
 end
 
-
 -- `:I` inspects the passed lua object
 function inspectFn(obj)
 	vim.pretty_print(fn.luaeval(obj))
 end
 cmd[[:command! -nargs=1 I lua inspectFn(<f-args>)]]
-
--- Border Style
-borderStyle = "rounded"
 
 function isGui()
 	return g.neovide or g.goneovim
