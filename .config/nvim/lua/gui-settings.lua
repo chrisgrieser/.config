@@ -110,7 +110,7 @@ g.neovide_cursor_unfocused_outline_width = 0.1
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
 
 g.neovide_cursor_vfx_mode = "railgun"
-g.neovide_cursor_vfx_particle_lifetime=3
+g.neovide_cursor_vfx_particle_lifetime=1
 g.neovide_cursor_vfx_particle_density=20.0
 g.neovide_cursor_vfx_particle_speed=25.0
 g.neovide_cursor_vfx_particle_phase=1.3 -- only railgun

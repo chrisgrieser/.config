@@ -108,6 +108,11 @@ autocmd ("BufReadPost", {
 	command = [[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' |  exe "normal! g`\"" | endif]]
 })
 
+-- clear cmdline on entering buffer
+autocmd ("BufReadPost", {
+	command = [[echo]]
+})
+
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
 autocmd("TextYankPost", { command = "silent! lua vim.highlight.on_yank{timeout = 2500}" })

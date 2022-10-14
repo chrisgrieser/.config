@@ -20,7 +20,11 @@ require("plugin-list")
 packer.startup({
 	PluginList,
 	config = {
-		display = { open_fn = require('packer.util').float }
+		display = {
+			open_fn = function()
+				return require('packer.util').float{border = borderStyle}
+			end
+		}
 	}
 })
 

@@ -9,8 +9,8 @@ function PluginList ()
 	use "folke/tokyonight.nvim"
 	use "EdenEast/nightfox.nvim"
 
-	use "Mofiqul/dracula.nvim"
-	use "navarasu/onedark.nvim"
+	-- use "Mofiqul/dracula.nvim"
+	-- use "navarasu/onedark.nvim"
 	use "rebelot/kanagawa.nvim"
 	-- use "sainnhe/edge"
 	-- use "savq/melange"
