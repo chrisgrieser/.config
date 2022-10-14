@@ -174,13 +174,13 @@ keymap("n", "^A", "mzgg=G`z") -- entire file
 keymap("n", "ü", "mzlblgueh~`z")
 
 -- switch direction of char, e.g. > to <
-keymap("n", "gü", function ()
+keymap("n", "Ü", function ()
 	local col = api.nvim_win_get_cursor(0)[2] + 1
 	local char = fn.getline("."):sub(col, col) ---@diagnostic disable-line: param-type-mismatch, undefined-field
 	local letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
 	if letters:find(char) then 
-		cmd[[normal! ~]]
+		cmd[[normal! ~h]]
+		return
 	end
 
 	local out = ""

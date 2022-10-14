@@ -44,7 +44,7 @@ function PluginList ()
 		"chrisgrieser/cmp-nerdfont",
 
 		"hrsh7th/cmp-nvim-lsp", -- lsp
-		"folke/lua-dev.nvim", -- nvim itself
+		"folke/neodev.nvim", -- lsp for nvim config
 
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip",
