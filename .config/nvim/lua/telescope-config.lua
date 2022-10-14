@@ -16,7 +16,7 @@ require("telescope").setup {
 		},
 		mappings = {
 			i = {
-				["<Esc>"] = require('telescope.actions').close, -- close w/ one esc
+				["<Esc>"] = "close", -- close w/ one esc
 				["?"] = "which_key",
 			},
 		},
@@ -34,30 +34,20 @@ require("telescope").setup {
 		lsp_definitions = { prompt_prefix='➡️', show_line=false, trim_text=true },
 		lsp_document_symbols = { prompt_prefix='* ', show_line=false},
 		treesitter = { show_line=false, prompt_prefix='🌳' },
+		find_files = { cwd='%:p:h', prompt_prefix=' ', hidden=true },
 		keymaps = { prompt_prefix='🔘' },
-		help_tags = { prompt_prefix=':h ' },
-		commands = { prompt_prefix=': ' },
 		oldfiles = { prompt_prefix=' ' },
 		highlights = { prompt_prefix='🎨' },
-		marks = { prompt_prefix="'" },
 		buffers = {prompt_prefix='📑',ignore_current_buffer = true},
 		live_grep = {cwd='%:p:h', disable_coordinates=true, prompt_prefix='🔎'},
-		current_buffer_fuzzy_find = { prompt_prefix='🔍' },
-		spell_suggest = { prompt_prefix='✏️' },
+		spell_suggest = {
+			require("telescope.themes").get_cursor{}
+		},
 		colorscheme = { enable_preview = true, prompt_prefix='🎨' },
-		find_files = { cwd='%:p:h', prompt_prefix=' ', hidden=true },
 	},
 	extensions = {
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown{
-				prompt_prefix = " ",
-				initial_mode = "normal",
-				mappings = {
-
-					["j"] = "move_selection_next",
-					["k"] = "move_selection_previous",
-				}
-			}
+			require("telescope.themes").get_cursor{}
 		}
 	}
 }
