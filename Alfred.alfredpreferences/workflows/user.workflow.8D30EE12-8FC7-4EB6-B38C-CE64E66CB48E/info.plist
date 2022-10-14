@@ -8,32 +8,6 @@
 	<string>Development</string>
 	<key>connections</key>
 	<dict>
-		<key>0308962B-8F9C-4AE4-99B9-B31DE27B52C6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5A849243-2DDC-4B87-9618-0B12BB0F7017</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>0EA98984-DD00-401D-96D7-C1FD7A879F4F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8C279CF4-80F0-4D28-B0BA-137130AC177A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>5A271BE0-443A-43F2-A9FA-C01047FE0F58</key>
 		<array>
 			<dict>
@@ -102,32 +76,6 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy GitHub URL</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>A750B10D-2695-481F-B660-F29C241C6727</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0308962B-8F9C-4AE4-99B9-B31DE27B52C6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>D2DE689D-680B-4BE5-92C3-0372AFF1E0AD</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0EA98984-DD00-401D-96D7-C1FD7A879F4F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -358,83 +306,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>open-at-github</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>de.chris-grieser.github</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>8C279CF4-80F0-4D28-B0BA-137130AC177A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>5</integer>
-				<key>hotmod</key>
-				<integer>917504</integer>
-				<key>hotstring</key>
-				<string>G</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.neovide.neovide</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>D2DE689D-680B-4BE5-92C3-0372AFF1E0AD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-neovide-path.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0EA98984-DD00-401D-96D7-C1FD7A879F4F</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -503,83 +374,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>9</integer>
-				<key>hotmod</key>
-				<integer>917504</integer>
-				<key>hotstring</key>
-				<string>V</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.neovide.neovide</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>A750B10D-2695-481F-B660-F29C241C6727</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>version-history</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>de.chris-grieser.github</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>5A849243-2DDC-4B87-9618-0B12BB0F7017</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-neovide-path.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0308962B-8F9C-4AE4-99B9-B31DE27B52C6</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -601,34 +395,12 @@
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>0308962B-8F9C-4AE4-99B9-B31DE27B52C6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>get path</string>
-			<key>xpos</key>
-			<real>615</real>
-			<key>ypos</key>
-			<real>550</real>
-		</dict>
 		<key>09E95958-33BA-4403-A120-ED77024AAB7E</key>
 		<dict>
 			<key>xpos</key>
 			<real>580</real>
 			<key>ypos</key>
 			<real>100</real>
-		</dict>
-		<key>0EA98984-DD00-401D-96D7-C1FD7A879F4F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>get path</string>
-			<key>xpos</key>
-			<real>615</real>
-			<key>ypos</key>
-			<real>405</real>
 		</dict>
 		<key>4C8471ED-D799-4D45-B9DD-EEA5E5B94EA0</key>
 		<dict>
@@ -645,15 +417,6 @@
 			<real>415</real>
 			<key>ypos</key>
 			<real>100</real>
-		</dict>
-		<key>5A849243-2DDC-4B87-9618-0B12BB0F7017</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>765</real>
-			<key>ypos</key>
-			<real>550</real>
 		</dict>
 		<key>62F7FD14-3DF1-4FBC-9C3B-B99132F28919</key>
 		<dict>
@@ -694,40 +457,9 @@
 			<key>note</key>
 			<string>plugin search</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>50</real>
 			<key>ypos</key>
-			<real>510</real>
-		</dict>
-		<key>8C279CF4-80F0-4D28-B0BA-137130AC177A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>765</real>
-			<key>ypos</key>
-			<real>405</real>
-		</dict>
-		<key>A750B10D-2695-481F-B660-F29C241C6727</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>Version history</string>
-			<key>xpos</key>
-			<real>470</real>
-			<key>ypos</key>
-			<real>550</real>
-		</dict>
-		<key>D2DE689D-680B-4BE5-92C3-0372AFF1E0AD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>Open History (GitHub Workflow)</string>
-			<key>xpos</key>
-			<real>470</real>
-			<key>ypos</key>
-			<real>405</real>
+			<real>505</real>
 		</dict>
 		<key>D6E5E105-38E3-4BC1-90E3-52BEE556349D</key>
 		<dict>
