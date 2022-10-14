@@ -56,6 +56,5 @@ require("telescope").setup {
 	}
 }
 
-
 -- use telescope for selections like code actions
 require("telescope").load_extension("ui-select")
