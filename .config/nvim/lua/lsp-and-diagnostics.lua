@@ -8,7 +8,7 @@ require("utils")
 -- https://github.com/ray-x/lsp_signature.nvim#full-configuration-with-default-values
 require"lsp_signature".setup{
 	floating_window = false,
-	hint_prefix = " ",
+	hint_prefix = " ",
 	hint_scheme = "Conditional", -- highlight group that is applied to the hint
 }
 

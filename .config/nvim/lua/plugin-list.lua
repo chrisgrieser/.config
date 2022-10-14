@@ -33,6 +33,7 @@ function PluginList ()
 
 	-- Completion & Suggestion
 	use "mattn/emmet-vim" -- Emmet for CSS
+	use "tversteeg/registers.nvim"
 	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
 	use {"hrsh7th/nvim-cmp", requires = {
 		"hrsh7th/cmp-buffer", -- completion sources

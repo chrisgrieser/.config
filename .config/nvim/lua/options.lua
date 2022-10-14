@@ -13,7 +13,7 @@ opt.pumwidth = 10 -- min width popup menu
 
 -- Spelling
 opt.spell = false
-opt.spelllang = "en_us"
+opt.spelllang = "en_us,de_de"
 -- no spellcheck in URLs and acronyms http://www.panozzaj.com/blog/2016/03/21/ignore-urls-and-acroynms-while-spell-checking-vim/
 cmd[[syntax match UrlNoSpell 'http[s]\?:\/\/[[:alnum:]%\/_#.-?]*' contains=@NoSpell"]]
 cmd[[syntax match AcronymNoSpell '\<\(\u\|\d\)\{3,}s\?\>' contains=@NoSpell]]
