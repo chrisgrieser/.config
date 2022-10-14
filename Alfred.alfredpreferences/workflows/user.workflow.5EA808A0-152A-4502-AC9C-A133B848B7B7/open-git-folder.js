@@ -57,8 +57,8 @@ repoArray.forEach(localRepoFilePath => {
 
 	// Dirty Repo
 	let dirtyIcon = "";
-	const filesChangedStr = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain | wc -l | tr -d " "`);
-	const dirtyRepo = parseInt(filesChangedStr) !== 0;
+	const filesChangedStr = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`);
+	const dirtyRepo = filesChangedStr !== "";
 	if (dirtyRepo) dirtyIcon = " ✴️";
 
 	// Alfred Workflow Repos
@@ -77,10 +77,11 @@ repoArray.forEach(localRepoFilePath => {
 	else {
 		const readme = readFile(localRepoFilePath + "/README.md");
 		if (readme) {
-			repoName = readme
+			const headings = readme
 				.split("\n")
-				.filter(line => line.startsWith("#"))[0]
-				.slice(2);
+				.filter(line => line.startsWith("# "));
+			if (headings[0]) repoName = headings[0].slice(2);
+			else repoName = "Heading Missing";
 		}
 		else repoName = localRepoFilePath;
 	}
