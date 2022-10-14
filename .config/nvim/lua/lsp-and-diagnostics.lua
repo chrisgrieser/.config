@@ -8,7 +8,7 @@ require("utils")
 require"lsp_signature".setup{
 	floating_window = false,
 	hint_prefix = "﬍ ",
-	hint_scheme = "Conditional", -- highlight group that is applied to the hint
+	hint_scheme = "Comment", -- highlight group that is applied to the hint
 }
 
 keymap({"n", "i", "v"}, '<C-s>', function () vim.lsp.buf.signature_help() end)
