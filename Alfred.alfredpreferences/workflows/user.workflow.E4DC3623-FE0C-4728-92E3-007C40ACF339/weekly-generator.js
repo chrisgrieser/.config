@@ -12,16 +12,13 @@ function run (argv) {
 		return JSON.parse (app.doShellScript('curl -s "' + url + '"'));
 	}
 
-	function readFile (path, encoding) {
-		if (!encoding) encoding = $.NSUTF8StringEncoding;
-		const fm = $.NSFileManager.defaultManager;
-		const data = fm.contentsAtPath(path);
-		const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
+	function readData (key) {
+		const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
+		const dataPath = $.getenv("alfred_workflow_data") + key;
+		if (!fileExists(dataPath)) return "data does not exist.";
+		const data = $.NSFileManager.defaultManager.contentsAtPath(dataPath);
+		const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 		return ObjC.unwrap(str);
-	}
-
-	function ReadData (key, value) {
-
 	}
 
 	function writeData (key, newValue) {
@@ -29,6 +26,7 @@ function run (argv) {
 		const str = $.NSString.alloc.initWithUTF8String(newValue);
 		str.writeToFileAtomicallyEncodingError(dataPath, true, $.NSUTF8StringEncoding, null);
 	}
+
 	//──────────────────────────────────────────────────────────────────────────────
 
 	const dateFormatOption = { year: "numeric", month: "short", day: "2-digit" };
@@ -41,20 +39,19 @@ function run (argv) {
 	let startDate;
 
 	// MAIN
-	// ------------------------
+	//──────────────────────────────────────────────────────────────────────────────
 
 	// date input → set startdate + reset week counter
 	if (dateInput) {
-		setAlfredEnv ("startdate", dateInput);
+		writeData ("startdate", dateInput);
 		weekCounter = 0;
 		startDate = new Date(dateInput);
 	} else {
-		console.log(parseInt($.getenv("week_no")));
-		console.log(parseInt($.getenv("week_no")) + 1);
-		weekCounter = parseInt($.getenv("week_no")) + 1;
-		startDate = new Date($.getenv("startdate"));
+		weekCounter = parseInt(readData("week_no"));
+		weekCounter++;
+		startDate = new Date(readData("startdate"));
 	}
-	setAlfredEnv ("week_no", weekCounter.toString()); // set week counter for next run
+	writeData ("week_no", weekCounter.toString()); // set week counter for next run
 
 	// calculate new date
 	const dayOne = startDate.getDate(); // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
