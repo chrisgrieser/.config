@@ -5,7 +5,6 @@ require("utils")
 
 --------------------------------------------------------------------------------
 -- LSP Signature
--- Alternative: https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
 require"lsp_signature".setup{
 	floating_window = false,
 	hint_prefix = " ",
@@ -112,8 +111,12 @@ local lspConfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require("lua-dev").setup { -- INFO: this block must come before LSP setup
-	library = { enabled = true, plugins = false }
+ -- INFO: this block must come before lua LSP setup
+require("neodev").setup {
+	library = {
+		enabled = true,
+		plugins = false,
+	}
 }
 
 lspConfig['sumneko_lua'].setup{

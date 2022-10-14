@@ -155,7 +155,14 @@ wf_neovim = wf.new("neovide")
 			moveResizeCurWin("maximized")
 		else
 			moveResizeCurWin("pseudo-maximized")
-	--		runDelayed(0.3, function () moveResizeCurWin("pseudo-maximized") end)
+		end
+	end)
+	-- bugfix for: https://github.com/neovide/neovide/issues/1595
+	:subscribe(wf.windowDestroyed, function ()
+		if #wf_neovim:getWindows() == 0 then
+			runDelayed(3, function ()
+				hs.execute("pgrep neovide || pkill nvim")
+			end)
 		end
 	end)
 
