@@ -60,7 +60,21 @@
 				<dict>
 					<key>COMMAND_STRING</key>
 					<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-neovide "$1"</string>
+
+if pgrep "neovide" ; then
+	# workaround for https://github.com/neovide/neovide/issues/1586
+	echo "$1" | pbcopy
+	osascript -e 'tell application "Neovide" to activate
+		delay 0.05
+		tell application "System Events"
+			key code 53 # esc, ensure normal mode
+			keystroke ":e "
+			keystroke "v" using {command down}
+			keystroke return
+		end tell'
+else
+	neovide "$1"
+fi</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
