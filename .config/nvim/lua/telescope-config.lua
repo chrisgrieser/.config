@@ -27,31 +27,61 @@ require("telescope").setup {
 				preview_cutoff = 70,
 				width = 0.92
 			},
+			bottom_pane = {
+				height = 12,
+				preview_cutoff = 70,
+			},
 		},
 	},
 	pickers = {
-		lsp_references = { prompt_prefix='⬅️', show_line=false, trim_text=true, include_declaration=false },
-		lsp_definitions = { prompt_prefix='➡️', show_line=false, trim_text=true },
+		lsp_references = {
+			prompt_prefix='⬅️',
+			show_line=false,
+			trim_text=true,
+			include_declaration=false,
+			initial_mode = "normal",
+		},
+		lsp_definitions = {
+			prompt_prefix='➡️',
+			show_line=false,
+			trim_text=true,
+			initial_mode = "normal",
+		},
 		lsp_document_symbols = { prompt_prefix='* ', show_line=false},
-		treesitter = { show_line=false, prompt_prefix='🌳' },
+		treesitter = { show_line=false, prompt_prefix=' ' },
 		find_files = { cwd='%:p:h', prompt_prefix=' ', hidden=true },
-		keymaps = { prompt_prefix='🔘' },
+		keymaps = { prompt_prefix='? ' },
 		oldfiles = { prompt_prefix=' ' },
 		highlights = { prompt_prefix='🎨' },
-		buffers = {prompt_prefix='📑',ignore_current_buffer = true},
-		live_grep = {cwd='%:p:h', disable_coordinates=true, prompt_prefix='🔎'},
-		spell_suggest = {
-			require("telescope.themes").get_cursor{}
+		buffers = {
+			prompt_prefix='﬘ ',
+			ignore_current_buffer = true,
+			initial_mode = "normal",
+			sort_mru = true,
 		},
-		colorscheme = { enable_preview = true, prompt_prefix='🎨' },
+		live_grep = {
+			cwd='%:p:h',
+			disable_coordinates=true,
+			prompt_prefix=' ',
+		},
+		spell_suggest = {
+			initial_mode = "normal",
+			prompt_prefix = "暈",
+			theme = "cursor",
+		},
+		colorscheme = {
+			enable_preview = true,
+			prompt_prefix='',
+			layout_strategy = "bottom_pane",
+		},
 	},
 	extensions = {
 		["ui-select"] = {
-			require("telescope.themes").get_cursor{}
+			initial_mode = "normal",
+			prompt_prefix = " ",
+			theme = "cursor",
 		}
 	}
 }
-
-
 -- use telescope for selections like code actions
 require("telescope").load_extension("ui-select")
