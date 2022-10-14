@@ -102,7 +102,7 @@ keymap("n", '<leader><Space>', function ()
 end)
 
 keymap("o", "iq", 'i"') -- change double [q]uote
-keymap("o", "aq", 'a"') 
+keymap("o", "aq", 'a"')
 keymap("o", "iz", "i'") -- change single quote (mnemonic: [z]itation)
 keymap("o", "az", "a'")
 keymap("o", "p", '}') -- rest of the [p]aragraph
@@ -311,3 +311,9 @@ keymap("v", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>:Rename ") -- re
 keymap("n", "<leader>os", ":set spell!<CR>")
 keymap("n", "<leader>or", ":set number! relativenumber!<CR>")
 keymap("n", "<leader>ow", ":set wrap! <CR>")
+
+--------------------------------------------------------------------------------
+
+-- TERMINAL MODE
+keymap("n", "zt", ":10split<CR>:term<CR>")
+

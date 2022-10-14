@@ -1,5 +1,8 @@
 -- https://github.com/nvim-telescope/telescope.nvim#telescope-setup-structure
 
+-- use telescope for selections like code actions
+require("telescope").load_extension("ui-select")
+
 require("telescope").setup {
 	defaults = {
 		selection_caret = "⟐ ",
@@ -92,15 +95,13 @@ require("telescope").setup {
 	},
 
 	extensions = {
-		["ui-select"] = {
+		["ui-select"] = { -- mostly code actions
 			initial_mode = "normal",
 			prompt_prefix = "  ",
 			results_title = '',
 			layout_strategy = "bottom_pane",
-			layout_config = { bottom_pane = { height = 8 } },
+			sorting_strategy = "ascending",
+			layout_config = { bottom_pane = { height = 7 } },
 		}
 	}
 }
-
--- use telescope for selections like code actions
-require("telescope").load_extension("ui-select")
