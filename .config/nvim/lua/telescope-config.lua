@@ -30,9 +30,11 @@ require("telescope").setup {
 			bottom_pane = {
 				height = 12,
 				preview_cutoff = 70,
+				prompt_position = "bottom",
 			},
 		},
 	},
+
 	pickers = {
 		lsp_references = {
 			prompt_prefix='⬅️',
@@ -47,9 +49,20 @@ require("telescope").setup {
 			trim_text=true,
 			initial_mode = "normal",
 		},
-		lsp_document_symbols = { prompt_prefix='* ', show_line=false},
-		treesitter = { show_line=false, prompt_prefix=' ' },
-		find_files = { cwd='%:p:h', prompt_prefix=' ', hidden=true },
+		lsp_document_symbols = {
+			prompt_prefix='* ',
+			show_line = false,
+		},
+		treesitter = {
+			prompt_prefix=' ',
+			show_line = false,
+		},
+		find_files = {
+			cwd='%:p:h',
+			prompt_prefix=' ',
+			hidden = true,
+			follow = true,
+		},
 		keymaps = { prompt_prefix='? ' },
 		oldfiles = { prompt_prefix=' ' },
 		highlights = { prompt_prefix='🎨' },
@@ -68,20 +81,26 @@ require("telescope").setup {
 			initial_mode = "normal",
 			prompt_prefix = "暈",
 			theme = "cursor",
+			layout_config = { cursor = { width = 0.3 } }
 		},
 		colorscheme = {
 			enable_preview = true,
-			prompt_prefix='',
+			prompt_prefix = '',
+			results_title = '',
 			layout_strategy = "bottom_pane",
 		},
 	},
+
 	extensions = {
 		["ui-select"] = {
 			initial_mode = "normal",
-			prompt_prefix = " ",
-			theme = "cursor",
+			prompt_prefix = "  ",
+			results_title = '',
+			layout_strategy = "bottom_pane",
+			layout_config = { bottom_pane = { height = 8 } },
 		}
 	}
 }
+
 -- use telescope for selections like code actions
 require("telescope").load_extension("ui-select")
