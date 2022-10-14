@@ -70,7 +70,6 @@ cmp.setup({
 	}),
 
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'emoji', keyword_length = 2 },
@@ -84,7 +83,6 @@ cmp.setup({
 			vim_item.menu = ({
 				buffer = "[B]",
 				nvim_lsp = "[LSP]",
-				nvim_lsp_signature_help = "[SIG]",
 				luasnip = "[S]",
 				emoji = "[E]",
 				nerdfont = "[NF]",
@@ -125,7 +123,6 @@ cmp.setup.filetype ("lua", {
 		end
 	end,
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'nerdfont', keyword_length = 2 }, -- also use nerdfont for nvim config
@@ -137,7 +134,6 @@ cmp.setup.filetype ("lua", {
 -- don't use buffer in css completions
 cmp.setup.filetype ("css", {
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'emoji', keyword_length = 2 },

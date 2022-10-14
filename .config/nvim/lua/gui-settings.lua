@@ -13,7 +13,7 @@ opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinko
 
 --------------------------------------------------------------------------------
 
-cmd[[highlight link def TreesitterContext LspFloatWinNormal]]
+cmd[[highlight def link TreesitterContext LspFloatWinNormal]]
 -- THEME
 local function light()
 	cmd("colorscheme "..lightTheme)

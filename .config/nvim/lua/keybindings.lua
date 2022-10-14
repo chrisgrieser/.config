@@ -44,13 +44,10 @@ keymap("", "K", "7k")
 function overscroll (action)
 	local curLine = fn.line(".")
 	local lastLine = fn.line("$")
-	if curLine == lastLine then
+	if (lastLine - curLine - 1) < wo.scrolloff then
 		cmd[[normal! zz]]
-	elseif (lastLine - curLine) < 10 then
-		cmd[[normal! <C-e>]]
-	else
-		cmd("normal! "..action)
 	end
+	cmd("normal! "..action)
 end
 keymap("n", "j", function () overscroll("j") end)
 keymap("n", "J", function () overscroll("7j") end)
@@ -180,6 +177,12 @@ keymap("n", "ü", "mzlblgueh~`z")
 keymap("n", "gü", function ()
 	local col = api.nvim_win_get_cursor(0)[2] + 1
 	local char = fn.getline("."):sub(col, col) ---@diagnostic disable-line: param-type-mismatch, undefined-field
+	local letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+	if letters:find(char) then 
+		cmd[[normal! ~]]
+	end
+
 	local out = ""
 	if char == "<" then out = ">"
 	elseif char == ">" then out = "<"
@@ -289,7 +292,7 @@ keymap({"n", "v"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-fil
 
 -- File switchers
 keymap("n", "go", function() telescope.find_files() end) -- [o]pen file in parent-directory
-keymap("n", "gO", function() telescope.find_files{cwd='%:p:h:h', prompt_prefix='🆙📂'} end) -- [o]pen file in grandparent-directory
+keymap("n", "gO", function() telescope.find_files{cwd='%:p:h:h', prompt_prefix=' '} end) -- [o]pen file in grandparent-directory
 keymap("n", "gr", function() telescope.oldfiles() end) -- [r]ecent files
 keymap("n", "gb", function() telescope.buffers() end) -- open [b]uffer
 keymap("n", "gf", function() telescope.live_grep() end) -- search in [f]iles
