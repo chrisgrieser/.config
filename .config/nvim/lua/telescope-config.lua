@@ -5,7 +5,6 @@ require("telescope").setup {
 		selection_caret = "⟐ ",
 		prompt_prefix = "❱ ",
 		path_display = { "tail" },
-		border = borderStyle,
 		file_ignore_patterns = {
 			"packer_compiled.lua",
 			".DS_Store",
@@ -40,28 +39,23 @@ require("telescope").setup {
 		commands = { prompt_prefix=': ' },
 		oldfiles = { prompt_prefix=' ' },
 		highlights = { prompt_prefix='🎨' },
-		marks = { prompt_prefix="' " },
+		marks = { prompt_prefix="'" },
 		buffers = {prompt_prefix='📑',ignore_current_buffer = true},
 		live_grep = {cwd='%:p:h', disable_coordinates=true, prompt_prefix='🔎'},
 		current_buffer_fuzzy_find = { prompt_prefix='🔍' },
-		spell_suggest = {
-			require('telescope.themes').get_dropdown{
-				previewer = false
-			}
-		},
+		spell_suggest = { prompt_prefix='✏️' },
 		colorscheme = { enable_preview = true, prompt_prefix='🎨' },
 		find_files = { cwd='%:p:h', prompt_prefix=' ', hidden=true },
 	},
 	extensions = {
 		["ui-select"] = {
 			require("telescope.themes").get_dropdown{
-				prompt_prefix = "  ",
+				prompt_prefix = " ",
 				initial_mode = "normal",
-				layout_config = {
-					center = {
-						height = 0.3,
-						width = 0.75,
-					}
+				mappings = {
+
+					["j"] = "move_selection_next",
+					["k"] = "move_selection_previous",
 				}
 			}
 		}
