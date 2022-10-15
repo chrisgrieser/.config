@@ -8,10 +8,9 @@ function PluginList ()
 	-- Themes
 	use "folke/tokyonight.nvim"
 	use "EdenEast/nightfox.nvim"
-
+	use "rebelot/kanagawa.nvim"
 	-- use "Mofiqul/dracula.nvim"
 	-- use "navarasu/onedark.nvim"
-	use "rebelot/kanagawa.nvim"
 	-- use "sainnhe/edge"
 	-- use "savq/melange"
 	-- use "Yazeed1s/minimal.nvim"
@@ -57,7 +56,7 @@ function PluginList ()
 	use "nvim-lualine/lualine.nvim" -- status line
 	use "lewis6991/gitsigns.nvim"
 	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
-	use "uga-rosa/ccc.nvim" -- color previews & color utilites
+	use {"uga-rosa/ccc.nvim", branch = "dev" } -- color previews & color utilites
 
 	-- File Management & Switching
 	use "tpope/vim-eunuch" -- file operation utilities
