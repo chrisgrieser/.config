@@ -1,0 +1,17 @@
+
+.dummy {
+	--color-red: hsl(358, 96%, 63%);
+	--color-red2: hsl(307, 96%, 63%);
+	--color-green:#468cce;
+	--color-orange: hsla(142 79% 58% / 100%);
+	--color-yellow:#71e0e0ff;
+	--color-purple: hsl(32, 29%, 6%);
+	--color-purple5: rgba(96 100% 75% / 0.4);
+	--color-purple2: hsla(96 100% 75% / 0.4);
+	--color-pink2: rgb(123 91 79);
+	--color-pink4: rgba(98, 91, 79, 1);
+	--color-pink: rgb(96, 91, 79);
+	color: rgb(123, 91, 79);
+	background-color: Blue;
+	--test2: #78a;
+}

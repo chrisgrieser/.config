@@ -19,6 +19,16 @@ local opts = { noremap=true, silent=true }
 keymap('n', 'ge', function () vim.diagnostic.goto_next({wrap=true, float=false}) end, opts)
 keymap('n', 'gE', function () vim.diagnostic.goto_prev({wrap=true, float=false}) end, opts)
 
+local diagnosticToggled = true;
+keymap('n', '<leader>D', function ()
+	if diagnosticToggled then
+		vim.diagnostic.hide()
+	else
+		vim.diagnostic.show()
+	end
+	diagnosticToggled = not(diagnosticToggled)
+end)
+
 function diagnosticFormat(diagnostic, mode)
 	local out
 	if diagnostic.source == "stylelint" then
