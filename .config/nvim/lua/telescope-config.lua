@@ -19,6 +19,9 @@ require("telescope").setup {
 				["<Esc>"] = "close", -- close w/ one esc
 				["?"] = "which_key",
 			},
+			n = {
+				q = "close",
+			},
 		},
 		layout_strategy = 'horizontal',
 		layout_config = {
