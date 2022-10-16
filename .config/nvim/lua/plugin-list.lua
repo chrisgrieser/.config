@@ -70,7 +70,7 @@ function PluginList ()
 	use {"tpope/vim-surround", requires = "tpope/vim-repeat"}
 	use "tpope/vim-abolish" -- various case conversions
 	use "svermeulen/vim-subversive" -- substitution operator
-	use "tpope/vim-commentary"
+	use "numToStr/Comment.nvim"
 
 	-- Text Objects
 	use "andrewferrier/textobj-diagnostic.nvim" -- nvim diagnostics as text object

@@ -112,43 +112,68 @@ keymap("o", "p", '}') -- rest of the [p]aragraph
 keymap("o", "P", '{') -- beginning of the [P]aragraph
 
 -- COMMENTS (mnemonic: [q]uiet text)
-keymap({"n", "v"}, "q" ,"<Plug>Commentary")
-keymap("n", "qq" ,"<Plug>CommentaryLine")
-keymap("n", "qu" ,"<Plug>Commentary<Plug>Commentary") -- undo comment
-keymap("o", "q" ,"<Plug>Commentary") -- better text object than from treesitter
-keymap({"n", "v"}, "Ä" ,"q") -- macro needs to be remapped as result
--- INFO gq and gQ mapped as goto next/prev comment via treesitter textobj
+require('Comment').setup{
+	padding = true,
+	sticky = true,
+	ignore = nil,
+	toggler = {
+		line = 'qq',
+		block = '<Nop>',
+	},
+	opleader = {
+		line = 'q',
+		block = '<Nop>',
+	},
+	extra = {
+		above = 'gcO',
+		below = 'gco',
+		eol = 'Q',
+	},
+	mappings = {
+		basic = true,
+		extra = true,
+	},
+	pre_hook = nil,
+	post_hook = nil,
+}
 
--- append comment to current line (equivalent to gcA from comments.nvim)
-keymap("n", "Q" , function()
-	local lineContent = fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
-	local eolCol = #lineContent
-	local emptyLine = lineContent == ""
+-- keymap({"n", "v"}, "q" ,"<Plug>Commentary")
+-- keymap("n", "qq" ,"<Plug>CommentaryLine")
+-- keymap("n", "qu" ,"<Plug>Commentary<Plug>Commentary") -- undo comment
+-- keymap({"n", "v"}, "Ä" ,"q") -- consequently macro needs to be remapped
+-- -- gq and gQ mapped as goto next/prev comment via treesitter textobj
+-- -- q mapped as text object for comments via treesitter
 
-	local lineNum = api.nvim_win_get_cursor(0)[1]
-	local commentPos, _ = bo.commentstring:find("%%s")
-	local newCol = eolCol + commentPos + 1
+-- -- append comment to current line (equivalent to gcA from comments.nvim)
+-- keymap("n", "Q" , function()
+-- 	local lineContent = fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
+-- 	local eolCol = #lineContent
+-- 	local emptyLine = lineContent == ""
 
-	if bo.filetype == "css" then
-		if emptyLine then
-			newLineContent = lineContent..bo.commentstring:gsub("%%s", "  ")
-			newCol = newCol - 2
-		else
-			newLineContent = lineContent.." "..bo.commentstring:gsub("%%s", "  ")
-			newCol = newCol - 1
-		end
-	else
-		if emptyLine then
-			newLineContent = lineContent..bo.commentstring:gsub("%%s", " ")
-		else
-			newLineContent = lineContent.." "..bo.commentstring:gsub("%%s", " ")
-		end
-	end
+-- 	local lineNum = api.nvim_win_get_cursor(0)[1]
+-- 	local commentPos, _ = bo.commentstring:find("%%s")
+-- 	local newCol = eolCol + commentPos + 1
 
-	fn.setline(".", newLineContent) ---@diagnostic disable-line: param-type-mismatch
-	api.nvim_win_set_cursor(0, {lineNum, newCol + 1})
-	cmd[[startinsert]]
-end)
+-- 	if bo.filetype == "css" then
+-- 		if emptyLine then
+-- 			newLineContent = lineContent..bo.commentstring:gsub("%%s", "  ")
+-- 			newCol = newCol - 2
+-- 		else
+-- 			newLineContent = lineContent.." "..bo.commentstring:gsub("%%s", "  ")
+-- 			newCol = newCol - 1
+-- 		end
+-- 	else
+-- 		if emptyLine then
+-- 			newLineContent = lineContent..bo.commentstring:gsub("%%s", " ")
+-- 		else
+-- 			newLineContent = lineContent.." "..bo.commentstring:gsub("%%s", " ")
+-- 		end
+-- 	end
+
+-- 	fn.setline(".", newLineContent) ---@diagnostic disable-line: param-type-mismatch
+-- 	api.nvim_win_set_cursor(0, {lineNum, newCol + 1})
+-- 	cmd[[startinsert]]
+-- end)
 
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h") -- append space
@@ -228,7 +253,7 @@ keymap("n", "Ö", "<Plug>(SubversiveSubstituteToEndOfLine)")
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", ':noautocmd normal!mz"zyy"zp`zj<CR>', {silent = true}) -- current line, ":noautocmd" to disable highlighted yank for this
-keymap("v", "R", '"zy`]"zp', {silent = true}) -- selection (best used with Visual Line Mode)
+keymap("v", "R", ':noautocmd normal!"zy`]"zp<CR>', {silent = true}) -- selection (best used with Visual Line Mode)
 
 -- Line & Character Movement (vim.move plugin)
 g.move_map_keys = 0 -- disable default keymaps of vim.move
