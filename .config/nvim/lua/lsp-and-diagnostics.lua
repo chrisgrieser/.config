@@ -96,6 +96,8 @@ require("mason-lspconfig").setup({
 -- fallback for languages without an action LSP
 keymap('n', 'gs', function() telescope.treesitter() end, {silent = true})
 
+keymap('n', '<leader>a', vim.lsp.buf.code_action, {silent=true})
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-local
@@ -106,13 +108,16 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 	keymap('n', 'gS', ":SymbolsOutline<CR>", bufopts)
 	keymap('n', 'gy', function() telescope.lsp_type_definitions() end, bufopts)
 	keymap('n', '<leader>R', vim.lsp.buf.rename, bufopts)
-	keymap('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
 	keymap('n', '<leader>h', vim.lsp.buf.hover, bufopts) -- docs popup
 
 	if client.name ~= "cssls" then -- to not override the navigation marker search for css files
 		keymap('n', 'gs', function() telescope.lsp_document_symbols() end, bufopts) -- overrides treesitter symbols browsing
 	end
 end
+
+--------------------------------------------------------------------------------
+-- LSP Info
+require('lspconfig.ui.windows').default_options.border = borderStyle
 
 --------------------------------------------------------------------------------
 -- LSP-SERVER-SPECIFIC SETUP
