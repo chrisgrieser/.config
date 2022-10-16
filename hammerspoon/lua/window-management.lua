@@ -31,8 +31,9 @@ function isPseudoMaximized (win)
 	if not(win) then return false end
 	local max = win:screen():frame()
 	local dif = win:frame().w - pseudoMaximized.w*max.w
+	local posOkay = win.frame().x == 0 and win.frame().y == 0
 	local widthOkay = (dif > -15 and dif < 15) -- leeway for some apps
-	return widthOkay
+	return widthOkay and posOkay
 end
 
 function isHalf (win)

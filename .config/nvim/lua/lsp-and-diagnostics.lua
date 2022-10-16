@@ -19,12 +19,13 @@ local opts = { noremap=true, silent=true }
 keymap('n', 'ge', function () vim.diagnostic.goto_next({wrap=true, float=false}) end, opts)
 keymap('n', 'gE', function () vim.diagnostic.goto_prev({wrap=true, float=false}) end, opts)
 
+-- toggle diagnostics nemonic: [q]uiet
 local diagnosticToggled = true;
-keymap('n', '<leader>D', function ()
+keymap('n', '<leader>q', function ()
 	if diagnosticToggled then
-		vim.diagnostic.hide()
+		vim.diagnostic.disable(0)
 	else
-		vim.diagnostic.show()
+		vim.diagnostic.enable(0)
 	end
 	diagnosticToggled = not(diagnosticToggled)
 end)

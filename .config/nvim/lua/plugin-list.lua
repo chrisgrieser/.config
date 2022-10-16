@@ -27,8 +27,8 @@ function PluginList ()
 		"williamboman/mason-lspconfig.nvim" ,
 		"williamboman/mason.nvim",
 	}}
-	use "mfussenegger/nvim-lint"
 	use "ray-x/lsp_signature.nvim"
+	use{ "jose-elias-alvarez/null-ls.nvim", requires =  "nvim-lua/plenary.nvim"}
 
 	-- Completion & Suggestion
 	use "mattn/emmet-vim" -- Emmet for CSS
