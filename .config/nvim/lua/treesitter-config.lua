@@ -68,8 +68,8 @@ require('nvim-treesitter.configs').setup {
 				["if"] = "@function.inner",
 				["aa"] = "@parameter.outer", -- [a]rgument
 				["ia"] = "@parameter.inner",
-				["ac"] = "@conditional.outer", -- [c]onditional
-				["ic"] = "@conditional.inner",
+				["aC"] = "@conditional.outer", -- [C]onditional (ac = a curly)
+				["iC"] = "@conditional.inner",
 				["aq"] = "@comment.outer",
 			},
 			-- If you set this to `true` (default is `false`) then any textobject is
