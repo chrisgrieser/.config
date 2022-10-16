@@ -143,8 +143,8 @@ function sleepYouTube ()
 
 	killIfRunning("YouTube")
 	killIfRunning("Twitch")
+	killIfRunning("Netflix")
 	-- no need to quit IINA, since it autoquits on finishing playback
-	-- Netflix also automatically stops after some idle time
 	hs.osascript.applescript([[
 		tell application "Brave Browser"
 			if ((count of window) is not 0)
@@ -161,7 +161,7 @@ sleepTimer1 = hs.timer.doAt("03:00", "01d", sleepYouTube, true)
 sleepTimer2 = hs.timer.doAt("04:00", "01d", sleepYouTube, true)
 sleepTimer3 = hs.timer.doAt("05:00", "01d", sleepYouTube, true)
 
-biweeklyTimer = hs.timer.doAt("02:00", "02d", function()
+biweeklyTimer = hs.timer.doAt("02:00", "03d", function()
 	hs.osascript.applescript([[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
