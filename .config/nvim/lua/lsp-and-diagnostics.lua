@@ -83,12 +83,10 @@ require("mason-lspconfig").setup({
 	ensure_installed = {
 		"sumneko_lua",
 		"yamlls",
-		"eslint", -- ts/js
 		"tsserver", -- ts/js
 		"marksman", -- markdown
 		"jsonls",
 		"cssls",
-		-- "stylelint_lsp", -- not using lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 		-- REQUIRED: new servers also need to be set up further below
 	},
 })
@@ -96,6 +94,7 @@ require("mason-lspconfig").setup({
 -- fallback for languages without an action LSP
 keymap('n', 'gs', function() telescope.treesitter() end, {silent = true})
 
+-- actions defined globally for null-ls
 keymap('n', '<leader>a', vim.lsp.buf.code_action, {silent=true})
 
 -- Use an on_attach function to only map the following keys
@@ -180,17 +179,6 @@ lspConfig['cssls'].setup{
 	}
 }
 
--- lspConfig['stylelint_lsp'].setup{
--- 	on_attach = on_attach,
--- 	capabilities = capabilities,
--- 	root_dir = function() return vim.fn.getcwd() end, -- needs root-dir to work
--- 	settings = {
--- 		stylelintplus = {
--- 			configFile = home.."/.stylelintrc.json",
--- 		}
--- 	}
--- }
-
 lspConfig['tsserver'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -202,11 +190,6 @@ lspConfig['marksman'].setup{
 }
 
 lspConfig['jsonls'].setup{
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
-
-lspConfig['eslint'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 }

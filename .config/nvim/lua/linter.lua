@@ -5,22 +5,37 @@ local null_ls = require("null-ls")
 
 null_ls.setup({
 	sources = {
+		null_ls.builtins.code_actions.stylelint,
 		null_ls.builtins.diagnostics.stylelint.with{ -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 			extra_args = { "--quiet" }, -- only errors, no warnings
 		},
+
+		null_ls.builtins.code_actions.eslint,
+		null_ls.builtins.diagnostics.eslint.with{
+			extra_args = { "--quiet" }, -- only errors, no warnings
+		},
+
+		null_ls.builtins.code_actions.selene,
 		null_ls.builtins.diagnostics.selene.with{
-			extra_args = {"config=$HOME/dotfiles/linter rclines/selene.toml"},
+			extra_args = {fn.expand("config=~/dotfiles/linter rclines/selene.toml")}, -- ~ requires expand
 		},
+
+		null_ls.builtins.code_actions.yamllint,
 		null_ls.builtins.diagnostics.yamllint.with{
-			extra_args = {"config=$HOME/.config/yamllint/config/.yamllint.yaml"},
+			extra_args = {fn.expand("config=~/.config/yamllint/config/.yamllint.yaml")},
 		},
-		null_ls.builtins.diagnostics.shellcheck.with{ -- bashls, diagnosticls both do not work for zsh shellcheck; efm depends on go
-			extra_filetypes = {"zsh"},
-			extra_args = { "--external-sources", "--shell=bash" },
+
+		-- bashls, diagnosticls both do not work for zsh shellcheck; efm depends on go
+		null_ls.builtins.code_actions.shellcheck.with{
+			extra_filetypes = {"zsh"}, -- force shellcheck to work with zsh as well
+			extra_args = { "--shell=bash" },
+		},
+		null_ls.builtins.diagnostics.shellcheck.with{ 
+			extra_filetypes = {"zsh"}, -- force shellcheck to work with zsh as well
+			extra_args = { "--shell=bash" },
 		},
 	},
 })
--- not using eslint with null_ls, since the lsp for is already works fine 
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
