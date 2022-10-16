@@ -113,9 +113,6 @@ keymap("o", "P", '{') -- beginning of the [P]aragraph
 
 -- COMMENTS (mnemonic: [q]uiet text)
 require('Comment').setup{
-	padding = true,
-	sticky = true,
-	ignore = nil,
 	toggler = {
 		line = 'qq',
 		block = '<Nop>',
@@ -125,55 +122,15 @@ require('Comment').setup{
 		block = '<Nop>',
 	},
 	extra = {
-		above = 'gcO',
-		below = 'gco',
+		above = 'qO',
+		below = 'qo',
 		eol = 'Q',
 	},
-	mappings = {
-		basic = true,
-		extra = true,
-	},
-	pre_hook = nil,
-	post_hook = nil,
 }
-
--- keymap({"n", "v"}, "q" ,"<Plug>Commentary")
--- keymap("n", "qq" ,"<Plug>CommentaryLine")
--- keymap("n", "qu" ,"<Plug>Commentary<Plug>Commentary") -- undo comment
--- keymap({"n", "v"}, "Ä" ,"q") -- consequently macro needs to be remapped
--- -- gq and gQ mapped as goto next/prev comment via treesitter textobj
--- -- q mapped as text object for comments via treesitter
-
--- -- append comment to current line (equivalent to gcA from comments.nvim)
--- keymap("n", "Q" , function()
--- 	local lineContent = fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
--- 	local eolCol = #lineContent
--- 	local emptyLine = lineContent == ""
-
--- 	local lineNum = api.nvim_win_get_cursor(0)[1]
--- 	local commentPos, _ = bo.commentstring:find("%%s")
--- 	local newCol = eolCol + commentPos + 1
-
--- 	if bo.filetype == "css" then
--- 		if emptyLine then
--- 			newLineContent = lineContent..bo.commentstring:gsub("%%s", "  ")
--- 			newCol = newCol - 2
--- 		else
--- 			newLineContent = lineContent.." "..bo.commentstring:gsub("%%s", "  ")
--- 			newCol = newCol - 1
--- 		end
--- 	else
--- 		if emptyLine then
--- 			newLineContent = lineContent..bo.commentstring:gsub("%%s", " ")
--- 		else
--- 			newLineContent = lineContent.." "..bo.commentstring:gsub("%%s", " ")
--- 		end
--- 	end
-
--- 	fn.setline(".", newLineContent) ---@diagnostic disable-line: param-type-mismatch
--- 	api.nvim_win_set_cursor(0, {lineNum, newCol + 1})
--- 	cmd[[startinsert]]
--- end)
+-- delete next comment (due to `aw`)
+keymap("n", "dq", function () cmd[[normal mzdaqm`z`]] end)
+-- uncomment current comment
+keymap("n", "dq", function () cmd[[normal mzdaqm`z`]] end)
 
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h") -- append space

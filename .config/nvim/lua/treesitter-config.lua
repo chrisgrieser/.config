@@ -70,7 +70,7 @@ require('nvim-treesitter.configs').setup {
 				["ia"] = "@parameter.inner",
 				["ac"] = "@conditional.outer", -- [c]onditional
 				["ic"] = "@conditional.inner",
-				["q"] = "@comment.outer",
+				["aq"] = "@comment.outer",
 			},
 			-- If you set this to `true` (default is `false`) then any textobject is
 			-- extended to include preceding xor succeeding whitespace. Succeeding
