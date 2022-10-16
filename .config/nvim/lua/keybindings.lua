@@ -127,10 +127,9 @@ require('Comment').setup{
 		eol = 'Q',
 	},
 }
--- delete next comment (due to `aw`)
-keymap("n", "dq", function () cmd[[normal mzdaqm`z`]] end)
--- uncomment current comment
-keymap("n", "dq", function () cmd[[normal mzdaqm`z`]] end)
+-- delete next comment (due to `aq` being a treesitter textobj, needs to be
+-- wrapped like this)
+keymap("n", "dq", function () cmd[[normal mzdaq`z]] end)
 
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h") -- append space
