@@ -104,10 +104,14 @@ keymap("n", '<leader><Space>', function ()
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
 end)
 
-keymap("o", "iq", 'i"') -- change double [q]uote
+keymap("o", "iq", 'i"') -- double [q]uote
 keymap("o", "aq", 'a"')
-keymap("o", "iz", "i'") -- change single quote (mnemonic: [z]itation)
+keymap("o", "iz", "i'") -- single quote (mnemonic: [z]itation)
 keymap("o", "az", "a'")
+keymap("o", "ir", "i]") -- [r]ectangular brackets
+keymap("o", "ar", "a]")
+keymap("o", "ic", "i}") -- [c]urly
+keymap("o", "ac", "a}")
 keymap("o", "p", '}') -- rest of the [p]aragraph
 keymap("o", "P", '{') -- beginning of the [P]aragraph
 
@@ -209,7 +213,7 @@ keymap("n", "Ö", "<Plug>(SubversiveSubstituteToEndOfLine)")
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", ':noautocmd normal!mz"zyy"zp`zj<CR>', {silent = true}) -- current line, ":noautocmd" to disable highlighted yank for this
-keymap("v", "R", ':noautocmd normal!"zy`]"zp<CR>', {silent = true}) -- selection (best used with Visual Line Mode)
+keymap("v", "R", '"zy`]"zp', {silent = true}) -- selection (best used with Visual Line Mode)
 
 -- Line & Character Movement (vim.move plugin)
 g.move_map_keys = 0 -- disable default keymaps of vim.move
