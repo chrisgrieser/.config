@@ -67,7 +67,8 @@ function PluginList ()
 	}}
 
 	-- Operators
-	use {"tpope/vim-surround", requires = "tpope/vim-repeat"}
+	-- use {"tpope/vim-surround", requires = "tpope/vim-repeat"}
+	use "kylechui/nvim-surround"
 	use "tpope/vim-abolish" -- various case conversions
 	use "svermeulen/vim-subversive" -- substitution operator
 	use "numToStr/Comment.nvim"

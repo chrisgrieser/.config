@@ -59,18 +59,19 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+					<string>
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 if pgrep "neovide" ; then
-	# workaround for https://github.com/neovide/neovide/issues/1586
-	prevClipboard=$(pbpaste)
+	prevClipboard="$(pbpaste)" 
 	echo "$1" | pbcopy
 	osascript -e 'tell application "Neovide" to activate
-		delay 0.05
+		delay 0.07
 		tell application "System Events"
-			key code 53 # esc, ensure normal mode
+			key code 53
 			keystroke ":e "
 			keystroke "v" using {command down}
+			delay 0.05
 			keystroke return
 		end tell'
 	echo "$prevClipboard" | pbcopy
@@ -190,7 +191,7 @@ fi
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>591.000000:252.000000</string>
+				<string>591.000000:432.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
