@@ -668,6 +668,11 @@ tell application "System Events"
 		set frontmost to true
 		click menu item "Message Search" of menu of menu item "Find" of menu "Edit" of menu bar 1
 	end tell
+	-- needs second find due to hidden toolbar
+	tell process "Mimestream"
+		set frontmost to true
+		click menu item "Message Search" of menu of menu item "Find" of menu "Edit" of menu bar 1
+	end tell
 	keystroke "{query}"
 	keystroke return
 	keystroke return

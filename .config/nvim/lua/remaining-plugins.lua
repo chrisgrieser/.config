@@ -59,3 +59,11 @@ require("symbols-outline").setup{
 	symbol_blacklist = {"Enum", "EnumMember"},
 }
 
+
+require("nvim-surround").setup{
+	move_cursor = false,
+	keymaps = {
+		insert = "<C-g>s",
+		visual = "s",
+	},
+}
