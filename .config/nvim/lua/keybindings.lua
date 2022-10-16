@@ -6,6 +6,9 @@ g.mapleader = ','
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
 
+-- re-run last [c]ommand
+keymap("n", "<leader>c", ':<C-r>:<CR>')
+
 -- search keymaps
 keymap("n", "?", function() telescope.keymaps() end)
 keymap("n", "<leader>?", function() telescope.help_tags() end)
@@ -82,6 +85,7 @@ keymap("", "ä", "`") -- Goto Mark
 keymap({"n", "v"}, "x", '"_x')
 keymap({"n", "v"}, "c", '"_c')
 keymap({"n", "v"}, "C", '"_C')
+keymap("n", "p", 'p`[') -- pasting does not move the cursor
 keymap("n", "P", '"0p') -- paste what was yanked
 
 -- TEXT OBJECTS
