@@ -17,7 +17,6 @@ require("remaining-plugins")
 require("appearance")
 require("telescope-config")
 require("treesitter-config")
-require("cheat-sh-config")
 require("lsp-and-diagnostics")
 require("completion") -- should come after lsp
 require("linter") -- should come after lsp

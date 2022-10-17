@@ -106,16 +106,31 @@ keymap("n", '<leader><Space>', function ()
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
 end)
 
-keymap("o", "iu", 'i"') -- double q[u]ote
-keymap("o", "au", 'a"')
+keymap("o", "iq", 'i"') -- double [q]uote
+keymap("o", "aq", 'a"')
 keymap("o", "iz", "i'") -- single quote (mnemonic: [z]itation)
 keymap("o", "az", "a'")
 keymap("o", "ir", "i]") -- [r]ectangular brackets
 keymap("o", "ar", "a]")
-keymap("o", "ic", "i}") -- [c]urly
+keymap("o", "ic", "i}") -- [c]urly brackets
 keymap("o", "ac", "a}")
 keymap("o", "p", '}') -- rest of the [p]aragraph
 keymap("o", "P", '{') -- beginning of the [P]aragraph
+
+require("nvim-surround").setup{
+	move_cursor = false,
+	keymaps = {
+		insert = "<C-g>s",
+		visual = "s",
+	},
+	aliases = { -- aliases should match the bindings above
+		["b"] = ")",
+		["c"] = "}",
+		["r"] = "]",
+		["q"] = '"',
+		["z"] = "'",
+	},
+}
 
 -- COMMENTS (mnemonic: [q]uiet text)
 require('Comment').setup{
@@ -135,7 +150,7 @@ require('Comment').setup{
 }
 -- delete next comment (due to `aq` being a treesitter textobj, needs to be
 -- wrapped like this)
-keymap("n", "dq", function () cmd[[normal mzdaq`z]] end)
+keymap("n", "dq", function () cmd[[normal mzdqq`z]] end)
 
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h") -- append space

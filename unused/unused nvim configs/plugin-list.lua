@@ -95,7 +95,6 @@ function PluginList ()
 	use "AndrewRadev/splitjoin.vim"
 
 	-- Misc
-	use "dbeniamine/cheat.sh-vim" -- docs search
+	use "ThePrimeagen/refactoring.nvim"
 	use "mbbill/undotree" -- undo history nagivation
-
 end

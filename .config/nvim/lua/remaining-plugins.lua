@@ -59,11 +59,9 @@ require("symbols-outline").setup{
 	symbol_blacklist = {"Enum", "EnumMember"},
 }
 
+--------------------------------------------------------------------------------
+require('refactoring').setup{}
 
-require("nvim-surround").setup{
-	move_cursor = false,
-	keymaps = {
-		insert = "<C-g>s",
-		visual = "s",
-	},
-}
+-- re[f]actor
+keymap("v", "<leader>f", function () require('refactoring').select_refactor() end, {silent = true})
+
