@@ -7,7 +7,15 @@ ccc.setup{
 		auto_enable = true,
 		excludes = {"packer"},
 	},
-	inputs = { ccc.input.hsl, ccc.input.rgb },
+	outputs = {
+		ccc.output.css_hsl,
+		ccc.output.css_rgb,
+		ccc.output.hex,
+	},
+	inputs = {
+		ccc.input.hsl,
+		ccc.input.rgb,
+	},
 	convert = {
 		{ ccc.picker.hex, ccc.output.css_hsl },
 		{ ccc.picker.css_rgb, ccc.output.css_hsl },
