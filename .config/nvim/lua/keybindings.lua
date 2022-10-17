@@ -27,6 +27,7 @@ keymap("n", "<leader>p", function()
 	local packer = require("packer")
 	packer.startup(PluginList)
 	packer.sync()
+	cmd[[TSUpdate]]
 end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
 
@@ -104,8 +105,8 @@ keymap("n", '<leader><Space>', function ()
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
 end)
 
-keymap("o", "iq", 'i"') -- double [q]uote
-keymap("o", "aq", 'a"')
+keymap("o", "iu", 'i"') -- double q[u]ote
+keymap("o", "au", 'a"')
 keymap("o", "iz", "i'") -- single quote (mnemonic: [z]itation)
 keymap("o", "az", "a'")
 keymap("o", "ir", "i]") -- [r]ectangular brackets

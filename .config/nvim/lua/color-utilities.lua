@@ -8,7 +8,6 @@ ccc.setup{
 		excludes = {"packer"},
 	},
 	inputs = { ccc.input.hsl, ccc.input.rgb },
-	outputs = { ccc.output.css_hsl, ccc.output.css_rgb, ccc.output.hex },
 	convert = {
 		{ ccc.picker.hex, ccc.output.css_hsl },
 		{ ccc.picker.css_rgb, ccc.output.css_hsl },
