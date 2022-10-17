@@ -19,8 +19,8 @@ require("telescope-config")
 require("treesitter-config")
 require("cheat-sh-config")
 require("lsp-and-diagnostics")
-require("completion")
-require("linter")
+require("completion") -- should come after lsp
+require("linter") -- should come after lsp
 
 if isGui() then
 	require("gui-settings")

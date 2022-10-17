@@ -42,6 +42,7 @@ function update (){
 	print-section "NEOVIM"
 	echo "Running in background..."
 	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' # https://github.com/wbthomason/packer.nvim#bootstrapping
+	nvim --headless -c 'autocmd User MasonUpdateAllComplete quitall' -c 'MasonUpdateAll' # https://github.com/RubixDev/mason-update-all#updating-from-cli
 
 	print-section "OBSIDIAN"
 	echo "Opening URIs..."

@@ -74,7 +74,7 @@ require("mason").setup({
 		icons = { package_installed = "✓", package_pending = "➜", package_uninstalled = "✗" }
 	}
 })
-
+require('mason-update-all').setup()
 --------------------------------------------------------------------------------
 
 require("mason-lspconfig").setup({
