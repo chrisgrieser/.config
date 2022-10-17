@@ -28,6 +28,7 @@ keymap("n", "<leader>p", function()
 	packer.startup(PluginList)
 	packer.sync()
 	cmd[[TSUpdate]]
+	cmd[[MasonUpdateAll]]
 end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
 
