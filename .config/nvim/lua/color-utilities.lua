@@ -7,9 +7,11 @@ ccc.setup{
 	highlighter = {
 		auto_enable = true,
 		excludes = {"packer"},
+		max_byte = 2 * 1024 * 1024, -- 2mb
+		lsp = false, -- https://github.com/uga-rosa/ccc.nvim/issues/60
 	},
 	inputs = { ccc.input.hsl },
-	-- outputs = { ccc.output.css_hsl, ccc.output.css_rgb, ccc.output.hex },
+	outputs = { ccc.output.css_hsl, ccc.output.css_rgb, ccc.output.hex },
 	convert = {
 		{ ccc.picker.hex, ccc.output.css_hsl },
 		{ ccc.picker.css_rgb, ccc.output.css_hsl },

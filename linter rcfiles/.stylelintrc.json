@@ -6,7 +6,7 @@
 		"stylelint-declaration-block-no-ignored-properties"
 	],
 
-	"reportNeedlessDisables": [true, {"severity": "error"}],
+	"reportNeedlessDisables": [true, {"severity": "warning"}],
 	"reportInvalidScopeDisables": [true, {"severity": "error"}],
 
 	"ignoreFiles": [
