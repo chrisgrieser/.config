@@ -11,13 +11,19 @@ local forceZshForShellcheck = {
 
 null_ls.setup{
 	sources = {
+
+		-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go
+		null_ls.builtins.diagnostics.zsh,
+		null_ls.builtins.diagnostics.shellcheck.with(forceZshForShellcheck),
+		null_ls.builtins.code_actions.shellcheck.with(forceZshForShellcheck),
+
 		null_ls.builtins.diagnostics.stylelint.with{ -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 			extra_args = { "--quiet" }, -- only errors, no warnings
 		},
 
 		null_ls.builtins.code_actions.eslint_d,
 		null_ls.builtins.diagnostics.eslint_d.with{
-			extra_args = { "--quiet" }, -- only errors, no warnings
+			-- extra_args = { "--quiet" },
 		},
 
 		null_ls.builtins.diagnostics.yamllint.with{
@@ -27,20 +33,19 @@ null_ls.setup{
 		null_ls.builtins.diagnostics.markdownlint.with{
 		},
 
-		-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go
-		null_ls.builtins.code_actions.shellcheck.with{forceZshForShellcheck},
-		null_ls.builtins.diagnostics.shellcheck.with{forceZshForShellcheck},
 	},
 }
 
 --------------------------------------------------------------------------------
--- null-ls-mason should be loaded after null-ls and mason https://github.com/jayp0521/mason-null-ls.nvim#setup
+-- mason-null-ls should be loaded after null-ls and mason https://github.com/jayp0521/mason-null-ls.nvim#setup
 
 require("mason-null-ls").setup{
 	-- these require the null-ls name, not the mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
 	ensure_installed = {
 		"eslint_d",
-		"shellcheck",
 		"markdownlint",
+		"shellcheck",
+		"yamllint",
+		-- stylelint not added here due to required extra plugins
 	}
 }

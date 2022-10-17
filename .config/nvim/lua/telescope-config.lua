@@ -2,7 +2,7 @@
 
 require("telescope").setup {
 	defaults = {
-		selection_caret = "⟐ ",
+		selection_caret = "  ",
 		prompt_prefix = "❱ ",
 		path_display = { "tail" },
 		file_ignore_patterns = {
@@ -68,7 +68,7 @@ require("telescope").setup {
 		},
 		keymaps = { prompt_prefix='? ' },
 		oldfiles = { prompt_prefix=' ' },
-		highlights = { prompt_prefix='🎨' },
+		highlights = { prompt_prefix=' ' },
 		buffers = {
 			prompt_prefix='﬘ ',
 			ignore_current_buffer = true,
@@ -101,7 +101,7 @@ require("telescope").setup {
 			results_title = '',
 			layout_strategy = "bottom_pane",
 			sorting_strategy = "ascending",
-			layout_config = { bottom_pane = { height = 7 } },
+			layout_config = { bottom_pane = { height = 6 } },
 		}
 	}
 }
