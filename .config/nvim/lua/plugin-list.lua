@@ -4,6 +4,9 @@ function PluginList ()
 	use "wbthomason/packer.nvim" -- packer manages itself
 	use "dstein64/vim-startuptime" -- measure startup time with `:StartupTime`
 	use 'lewis6991/impatient.nvim' -- reduces startup time by ~50%
+	use {"wqilliamboman/mason.nvim", requires = {
+		RubixDev/mason-update-all
+	}}
 
 	-- Themes
 	use "folke/tokyonight.nvim"
@@ -67,7 +70,6 @@ function PluginList ()
 	}}
 
 	-- Operators
-	-- use {"tpope/vim-surround", requires = "tpope/vim-repeat"}
 	use "kylechui/nvim-surround"
 	use "tpope/vim-abolish" -- various case conversions
 	use "svermeulen/vim-subversive" -- substitution operator
