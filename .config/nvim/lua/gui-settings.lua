@@ -13,7 +13,6 @@ opt.guicursor = "n-sm:block,i-ci-c-ve:ver25,r-cr-o-v:hor10,a:blinkwait400-blinko
 
 --------------------------------------------------------------------------------
 
-cmd[[highlight def link TreesitterContext LspFloatWinNormal]]
 -- THEME
 local function light()
 	cmd("colorscheme "..lightTheme)
@@ -29,7 +28,6 @@ local function dark()
 	opt.background = 'dark' ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.97
 
-	-- cmd[[highlight TreesitterContext guibg=#191726]] -- tokyo night
 	cmd[[hi rainbowcol1 guifg=#7e8a95]] -- kanagawa
 
 	customHighlights()

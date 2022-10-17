@@ -2,6 +2,17 @@ require("utils")
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
 --------------------------------------------------------------------------------
 
+local lintersAndFormatters = {
+	"eslint_d",
+	"markdownlint",
+	"shellcheck",
+	"yamllint",
+	-- stylelint not added due to extra plugins
+}
+-- INFO: linters also need to be added as source below
+
+--------------------------------------------------------------------------------
+
 local null_ls = require("null-ls")
 
 local forceZshForShellcheck = {
@@ -23,7 +34,6 @@ null_ls.setup{
 
 		null_ls.builtins.code_actions.eslint_d,
 		null_ls.builtins.diagnostics.eslint_d.with{
-			-- extra_args = { "--quiet" },
 		},
 
 		null_ls.builtins.diagnostics.yamllint.with{
@@ -41,11 +51,5 @@ null_ls.setup{
 
 require("mason-null-ls").setup{
 	-- these require the null-ls name, not the mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
-	ensure_installed = {
-		"eslint_d",
-		"markdownlint",
-		"shellcheck",
-		"yamllint",
-		-- stylelint not added here due to required extra plugins
-	}
+	ensure_installed = lintersAndFormatters
 }

@@ -2,6 +2,17 @@ require("utils")
 -- INFO: required order of setup() calls is
 -- mason, mason-config, nvim-dev, lspconfig
 -- https://github.com/williamboman/mason-lspconfig.nvim#setup
+--------------------------------------------------------------------------------
+
+local lsp_servers = {
+	"sumneko_lua",
+	"yamlls",
+	"tsserver", -- ts/js
+	"marksman", -- markdown
+	"jsonls",
+	"cssls",
+	-- REQUIRED: new servers also need to be set up further below
+}
 
 --------------------------------------------------------------------------------
 -- LSP Signature
@@ -80,15 +91,7 @@ require('mason-update-all').setup()
 require("mason-lspconfig").setup({
 	-- mason-lspconfig uses the lspconfig servernames, not mason servernames
 	-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
-	ensure_installed = {
-		"sumneko_lua",
-		"yamlls",
-		"tsserver", -- ts/js
-		"marksman", -- markdown
-		"jsonls",
-		"cssls",
-		-- REQUIRED: new servers also need to be set up further below
-	},
+	ensure_installed = lsp_servers,
 })
 
 -- fallback for languages without an action LSP

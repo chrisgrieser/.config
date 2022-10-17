@@ -21,18 +21,24 @@ function PluginList ()
 	-- use "kaiuri/nvim-juliana"
 
 	-- Syntax
-	use { "nvim-treesitter/nvim-treesitter", run = function() require("nvim-treesitter.install").update({ with_sync = true }) end }
-	use { "nvim-treesitter/nvim-treesitter-context", requires = {"nvim-treesitter/nvim-treesitter"} }
+	use {
+		"nvim-treesitter/nvim-treesitter",
+		run = function() -- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
+			require("nvim-treesitter.install").update({ with_sync = true })
+		end,
+		requires = {
+			"nvim-treesitter/nvim-treesitter-context",
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"p00f/nvim-ts-rainbow",
+		}
+	}
 	use "mityu/vim-applescript" -- applescript syntax highlighting
 	use "hail2u/vim-css3-syntax" -- better css syntax highlighting (until treesitter css looks decent…)
 
 	-- LSP & Linting
-	use {"neovim/nvim-lspconfig", requires = {
-		"williamboman/mason-lspconfig.nvim" ,
-		"williamboman/mason.nvim",
-	}}
+	use {"neovim/nvim-lspconfig", requires = "williamboman/mason-lspconfig.nvim" }
 	use "ray-x/lsp_signature.nvim"
-	use{ "jose-elias-alvarez/null-ls.nvim", requires =  "nvim-lua/plenary.nvim"}
+	use {"jose-elias-alvarez/null-ls.nvim", requires =  "nvim-lua/plenary.nvim"}
 
 	-- Completion & Suggestion
 	use "mattn/emmet-vim" -- Emmet for CSS
@@ -55,7 +61,6 @@ function PluginList ()
 	}}
 
 	-- Appearance
-	use { "p00f/nvim-ts-rainbow", requires = {"nvim-treesitter/nvim-treesitter"} } -- colored brackets
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use "nvim-lualine/lualine.nvim" -- status line
 	use "lewis6991/gitsigns.nvim"
@@ -79,7 +84,6 @@ function PluginList ()
 	-- Text Objects
 	use "andrewferrier/textobj-diagnostic.nvim" -- nvim diagnostics as text object
 	use "michaeljsmith/vim-indent-object"
-	use {"nvim-treesitter/nvim-treesitter-textobjects", requires = "nvim-treesitter/nvim-treesitter"}
 
 	-- Movements
 	use "mg979/vim-visual-multi" -- multi-cursor
