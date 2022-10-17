@@ -99,6 +99,7 @@ keymap('n', 'gs', function() telescope.treesitter() end, {silent = true})
 
 -- actions defined globally for null-ls
 keymap('n', '<leader>a', vim.lsp.buf.code_action, {silent=true})
+keymap('v', '<leader>a', ":'<,'>lua vim.lsp.buf.range_code_action()", {silent=true})
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
