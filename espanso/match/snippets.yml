@@ -74,11 +74,11 @@ matches:
       - name: neovimVersion
         type: shell
         params:
-          cmd: "nvim --version | head -n1 | cut -dv -f2"
+          cmd: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; nvim --version | head -n1 | cut -dv -f2"
       - name: neovideVersion
         type: shell
         params:
-          cmd: "neovide --version | cut -d' ' -f2"
+          cmd: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; neovide --version | cut -d' ' -f2"
 
   - trigger: "!oversion"
     replace: "Obsidian {{version}}"
