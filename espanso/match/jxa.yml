@@ -29,6 +29,9 @@ matches:
   - trigger: "!running"
     replace: 'Application("Obsidian").running()'
     label: "🏗 Check whether App is running"
+  - trigger: "!running"
+    replace: "Application('System Events').applicationProcesses.where({ backgroundOnly: false }).displayedName();"
+    label: "🏗 Array of all running apps"
   - replace: |
       ObjC.import("stdlib");
       const app = Application.currentApplication();
