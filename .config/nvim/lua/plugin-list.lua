@@ -7,6 +7,7 @@ function PluginList ()
 	use {"williamboman/mason.nvim", requires = {
 		'RubixDev/mason-update-all',
 		"jayp0521/mason-null-ls.nvim",
+		"williamboman/mason-lspconfig.nvim",
 	}}
 
 	-- Themes
@@ -36,7 +37,7 @@ function PluginList ()
 	use "hail2u/vim-css3-syntax" -- better css syntax highlighting (until treesitter css looks decent…)
 
 	-- LSP & Linting
-	use {"neovim/nvim-lspconfig", requires = "williamboman/mason-lspconfig.nvim" }
+	use "neovim/nvim-lspconfig"
 	use "ray-x/lsp_signature.nvim"
 	use {"jose-elias-alvarez/null-ls.nvim", requires =  "nvim-lua/plenary.nvim"}
 
@@ -95,6 +96,5 @@ function PluginList ()
 	use "AndrewRadev/splitjoin.vim"
 
 	-- Misc
-	use "ThePrimeagen/refactoring.nvim"
 	use "mbbill/undotree" -- undo history nagivation
 end
