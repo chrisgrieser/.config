@@ -27,7 +27,6 @@ keymap("n", "<leader>p", function()
 	local packer = require("packer")
 	packer.startup(PluginList)
 	packer.sync()
-	cmd[[TSUpdate]]
 	cmd[[MasonUpdateAll]]
 end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
