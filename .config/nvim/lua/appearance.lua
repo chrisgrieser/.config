@@ -20,10 +20,6 @@ function customHighlights()
 	-- URLs
 	cmd[[highlight urls cterm=underline term=underline gui=underline]]
 	cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.\-?]*') ]]
-
-	-- Annotations
-	cmd[[highlight def link myAnnotations Todo]] -- use same styling as "TODO"
-	cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED') ]]
 end
 
 customHighlights()
@@ -31,6 +27,10 @@ customHighlights()
 -- mixed whitespace
 cmd[[highlight def link MixedWhiteSpace Folded]]
 cmd[[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
+
+-- Annotations
+cmd[[highlight def link myAnnotations Todo]] -- use same styling as "TODO"
+cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED') ]]
 
 --------------------------------------------------------------------------------
 
