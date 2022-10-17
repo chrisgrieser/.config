@@ -22,8 +22,8 @@ local forceZshForShellcheck = {
 
 null_ls.setup{
 	sources = {
-		-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go
 		null_ls.builtins.diagnostics.zsh,
+		-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go
 		null_ls.builtins.diagnostics.shellcheck.with(forceZshForShellcheck),
 		null_ls.builtins.code_actions.shellcheck.with(forceZshForShellcheck),
 
@@ -33,10 +33,11 @@ null_ls.setup{
 
 		null_ls.builtins.code_actions.eslint_d,
 		null_ls.builtins.diagnostics.eslint_d.with{
+			-- extra_args = { "--quiet" }, -- only errors, no warnings
 		},
 
 		null_ls.builtins.diagnostics.yamllint.with{
-			extra_args = {"--config", fn.expand("~/.config/yamllint/config/.yamllint.yaml")},
+			extra_args = {"--config-file", fn.expand("~/.config/yamllint/config/.yamllint.yaml")},
 		},
 
 		null_ls.builtins.diagnostics.markdownlint.with{
