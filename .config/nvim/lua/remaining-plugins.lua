@@ -58,10 +58,3 @@ require("symbols-outline").setup{
 	lsp_blacklist = {},
 	symbol_blacklist = {"Enum", "EnumMember"},
 }
-
---------------------------------------------------------------------------------
-require('refactoring').setup{}
-
--- re[f]actor
-keymap("v", "<leader>f", function () require('refactoring').select_refactor() end, {silent = true})
-

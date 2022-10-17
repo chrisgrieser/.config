@@ -22,7 +22,6 @@ local forceZshForShellcheck = {
 
 null_ls.setup{
 	sources = {
-
 		-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go
 		null_ls.builtins.diagnostics.zsh,
 		null_ls.builtins.diagnostics.shellcheck.with(forceZshForShellcheck),
