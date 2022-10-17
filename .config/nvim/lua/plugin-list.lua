@@ -66,7 +66,7 @@ function PluginList ()
 	use "nvim-lualine/lualine.nvim" -- status line
 	use "lewis6991/gitsigns.nvim"
 	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
-	use {"uga-rosa/ccc.nvim", branch = "dev" } -- color previews & color utilites
+	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 
 	-- File Management & Switching
 	use "tpope/vim-eunuch" -- file operation utilities
