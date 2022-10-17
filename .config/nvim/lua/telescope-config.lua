@@ -2,9 +2,9 @@
 
 require("telescope").setup {
 	defaults = {
-		selection_caret = "  ",
+		selection_caret = " ",
 		prompt_prefix = "❱ ",
-		path_display = { "tail" },
+		path_display = { "smart" },
 		file_ignore_patterns = {
 			"packer_compiled.lua",
 			".DS_Store",
