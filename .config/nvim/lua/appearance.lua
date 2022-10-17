@@ -76,7 +76,7 @@ local function currentFile() -- using this function instead of default filename,
 end
 
 local function mixedIndentation()
-	if bo.filetype == "css" or bo.filetype == "startuptime" or bo.filetype == "undotree" then return "" end
+	if bo.filetype == "css" or bo.filetype == "startuptime" or bo.filetype == "packer" or bo.filetype == "undotree" then return "" end
 	local hasTabs = fn.search("^\t", "nw") ~= 0
 	local hasSpaces = fn.search("^ ", "nw") ~= 0
 	local mixed = fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0

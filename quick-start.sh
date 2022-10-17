@@ -1,8 +1,6 @@
 #!/usr/bin/env zsh
 # shellcheck disable=SC2034,SC2164,SC1071
 
-cat "fffa" | grep "b"
-
 #-------------------------------------------------------------------------------
 # ESSENTIAL
 
