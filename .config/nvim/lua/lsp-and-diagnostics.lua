@@ -30,9 +30,9 @@ local opts = { noremap=true, silent=true }
 keymap('n', 'ge', function () vim.diagnostic.goto_next({wrap=true, float=false}) end, opts)
 keymap('n', 'gE', function () vim.diagnostic.goto_prev({wrap=true, float=false}) end, opts)
 
--- toggle diagnostics nemonic: [q]uiet
+-- toggle diagnostics
 local diagnosticToggled = true;
-keymap('n', '<leader>q', function ()
+keymap('n', '<leader>D', function ()
 	if diagnosticToggled then
 		vim.diagnostic.disable(0)
 	else
@@ -65,13 +65,7 @@ vim.diagnostic.config{
 	}
 }
 
--- show diagnostic under cursor as float
-opt.updatetime = 1000 -- ms until float is shown
-augroup("diagnostic-float", {})
-autocmd("CursorHold", {
-	group = "diagnostic-float",
-	callback = function () vim.diagnostic.open_float{focusable=false} end, -- allow focussable for other diagnostic floats like hover info
-})
+keymap("n", "<leader>d", function () vim.diagnostic.open_float{focusable=false} end)
 
 -- textobj diagnostic plugin
 require("textobj-diagnostic").setup{create_default_keymaps = false}

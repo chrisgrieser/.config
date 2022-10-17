@@ -14,8 +14,8 @@ keymap("n", "<leader>>", "mzI> <Esc>`z") -- Turn into blockquote
 keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key
 
 -- CSS
-keymap("n", "<leader>d", 'mzlEF.yEEp`z') -- [d]ouble class under cursor
-keymap("n", "<leader>D", 'lF.d/[.\\s]<CR>:nohl<CR>') -- [D]uplicate Class under cursor
+keymap("n", "<leader>c", 'mzlEF.yEEp`z') -- double [c]lass under cursor
+keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>:nohl<CR>') -- delete class under cursor
 
 -- toggle !important
 keymap("n", "<leader>i", function ()
