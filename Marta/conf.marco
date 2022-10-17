@@ -3,7 +3,7 @@ environment {
 }
 
 behavior {
-    theme "Classic"
+    theme "Kon"
 
     layout {
         showActionBar false
@@ -59,7 +59,7 @@ fonts {
     statusBar [ "Recursive" 23 ]
     tableHeader [ "Default" 20 ]
     tabs [ "Recursive" 21 ]
-    preferences [ "Input" 24 ]
+    preferences [ "Input Nerd Font" 23 ]
 }
 
 etty {
@@ -91,13 +91,6 @@ gadgets [
         type "executable"
         executable "/bin/chmod"
         args ["+x" "${active.selection.paths}"]
-    }
-    {
-        id "gadget.action.git.acp"
-        name "Git: Add – Commit – Push"
-        type "executable"
-        executable "${user.home}/dotfiles/Marta/scripts/git-acp.sh"
-        workingDirectory "${active.folder.path}"
     }
     {
         id "gadget.action.pseudo.cut"
@@ -213,18 +206,6 @@ keyBindings {
     "Ctrl+Opt+Shift+T" "core.theme"
     "Ctrl+F18" "gadget.action.open.console"
     "Ctrl+Opt+Shift+X" "gadget.action.chmod.x"
-
-    "'" "core.move.right"
-    ";" "core.move.left"
-    "6" {
-        id "core.display.mode"
-        mode "table"
-    }
-    "\\" {
-        id "core.display.mode"
-        mode "3columns"
-    }
-
 
     "1" {
         id "core.ordering"
