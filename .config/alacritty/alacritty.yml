@@ -7,7 +7,7 @@ colors:
     background: '#231E1A'
     foreground: '#E5CFB3'
   normal:
-  # Bright colors
+    # Bright colors
     black: '#000000'
     red: '#F54E42'
     green: '#38B27D'
@@ -40,7 +40,6 @@ colors:
     focused_match:
       foreground: CellBackground
       background: CellForeground
-
   vi_mode_cursor:
     text: '0xe0def4'
     cursor: '0x56526e'
@@ -61,7 +60,6 @@ colors:
     text: '0x1d1f21'
     cursor: '0xffffff'
 
-  # Normal colors
 font:
   size: 26
 
@@ -82,13 +80,13 @@ font:
   offset:
     x: 0
     y: 0
-  glyph_offset: # needs restart
-    y: 3 # equivalent to line height. However, some nerdfont and starship deco looks off with it.
-    x: 0 # equivalent to letter spacing
+  glyph_offset:  # needs restart
+    y: 3  # equivalent to line height. However, some nerdfont and starship deco looks off with it.
+    x: 0  # equivalent to letter spacing
 window:
   decorations: buttonless
   position:
-    x: 0 # move completely to the left
+    x: 0  # move completely to the left
     y: 0
   dimensions:
     columns: 94
@@ -108,7 +106,7 @@ cursor:
     blinking: Always
     blink_interval: 500
     unfocused_hollow: true
-  vi_mode_style: # alacritty's vi mode, not the zsh vi mode
+  vi_mode_style:  # alacritty's vi mode, not the zsh vi mode
     shape: Underline
     blinking: Always
   thickness: 0.2
@@ -170,7 +168,7 @@ key_bindings:
         - -c
         - open ~/.config/alacritty/alacritty.yml
 
-    # open location in GUI file explorer
+  # open location in GUI file explorer
   - key: L
     mods: Command
     command:
@@ -206,4 +204,3 @@ key_bindings:
     mods: Command
     mode: ~Vi|~Search
     chars: "\f"
-
