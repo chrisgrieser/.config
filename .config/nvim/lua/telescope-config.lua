@@ -2,7 +2,7 @@
 
 require("telescope").setup {
 	defaults = {
-		selection_caret = " ",
+		selection_caret = "ﰉ ",
 		prompt_prefix = "❱ ",
 		path_display = { "smart" },
 		file_ignore_patterns = {

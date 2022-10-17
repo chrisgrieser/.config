@@ -115,9 +115,18 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 end
 
 --------------------------------------------------------------------------------
--- LSP Info
+-- Add borders to various lsp windows
 require('lspconfig.ui.windows').default_options.border = borderStyle
 
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+	vim.lsp.handlers.hover,
+	{border = borderStyle}
+)
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+	vim.lsp.handlers.signature_help,
+	{border = borderStyle}
+)
 --------------------------------------------------------------------------------
 -- LSP-SERVER-SPECIFIC SETUP
 local lspConfig = require('lspconfig')
@@ -126,7 +135,7 @@ local lspConfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
- -- INFO: this block must come before lua LSP setup
+-- INFO: this block must come before lua LSP setup
 require("neodev").setup {
 	library = {
 		enabled = true,
@@ -138,31 +147,31 @@ lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = { -- https://github.com/sumneko/lua-language-server/wiki/Settings
-		Lua = {
-			runtime = { version = 'LuaJIT', },  -- used by neovim
-			completion = {
-				callSnippet = "both",
-				keywordSnippet = "both",
+	Lua = {
+		runtime = { version = 'LuaJIT', },  -- used by neovim
+		completion = {
+			callSnippet = "both",
+			keywordSnippet = "both",
+		},
+		diagnostics = {
+			globals = {"vim", "use", "martax"},
+			disable = {
+				"trailing-space",
+				"lowercase-global",
 			},
-			diagnostics = {
-				globals = {"vim", "use", "martax"},
-				disable = {
-					"trailing-space",
-					"lowercase-global",
-				},
-			},
-			workspace = {
-				library =  {
-					home.."/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
-				}
-			},
-			telemetry = { enable = false },
-			hint = {
-				enable = true,
-				settype = true
-			},
-		}
+		},
+		workspace = {
+			library =  {
+				home.."/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
+			}
+		},
+		telemetry = { enable = false },
+		hint = {
+			enable = true,
+			settype = true
+		},
 	}
+}
 }
 
 lspConfig['cssls'].setup{
