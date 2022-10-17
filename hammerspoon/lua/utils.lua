@@ -52,7 +52,7 @@ end
 
 function notify (text)
 	if text then
-		text = trim(text) 
+		text = trim(text)
 	else
 		text = "empty string"
 	end
