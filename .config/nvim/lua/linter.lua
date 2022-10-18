@@ -23,6 +23,9 @@ local forceZshForShellcheck = {
 null_ls.setup{
 	sources = {
 		null_ls.builtins.code_actions.gitsigns, -- gitsings.nvim plugin
+		null_ls.builtins.completion.spell.with{ -- vim's built-in spell-suggestions
+			filetypes = { "markdown" },
+		},
 
 		null_ls.builtins.diagnostics.zsh,
 		-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go
@@ -35,7 +38,7 @@ null_ls.setup{
 
 		null_ls.builtins.code_actions.eslint_d,
 		null_ls.builtins.diagnostics.eslint_d.with{
-			-- extra_args = { "--quiet" }, -- only errors, no warnings
+			-- extra_args = { "--quiet" },
 		},
 
 		null_ls.builtins.diagnostics.yamllint.with{
@@ -43,6 +46,7 @@ null_ls.setup{
 		},
 
 		null_ls.builtins.diagnostics.markdownlint.with{
+			extra_args = {"--disable-rule", fn.expand("~/.config/yamllint/config/.yamllint.yaml")},
 		},
 
 	},
