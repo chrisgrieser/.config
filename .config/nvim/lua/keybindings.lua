@@ -60,6 +60,9 @@ keymap({"n", "v"}, "G", "Gzz")
 keymap("n", "<C-h>", "<C-o>") -- Back
 keymap("n", "<C-l>", "<C-i>") -- Forward
 
+-- Hunks
+keymap("n", "gh", "") 
+
 -- Sneak: enable clever-f-style movement
 keymap("", "f", "<Plug>Sneak_f")
 keymap("", "F", "<Plug>Sneak_F")
@@ -329,7 +332,7 @@ keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR
 keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
 keymap("n", "<leader>X", ':Chmod +x<CR>') -- execution permission, requires eunuch.vim
-keymap("n", "<leader><BS>", ":w!<CR>:Remove<CR>:bd<CR>", {silent = true}) -- undoable deletion of the file, requires eunuch.vim
+keymap("n", "<leader><BS>", ':w!<CR>:!mv "%:p" ~/.Trash/<CR><CR>:bd<CR>:echo "file deleted"<CR>') -- undoable deletion of the file
 keymap("v", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
 
 -- Option Toggling
@@ -340,5 +343,5 @@ keymap("n", "<leader>ow", ":set wrap! <CR>")
 --------------------------------------------------------------------------------
 
 -- TERMINAL MODE
-keymap("n", "zt", ":10split<CR>:term<CR>")
-keymap("n", "zz", ":w<CR>:!acp ")
+keymap("n", "zt", ":10split<CR>:terminal<CR>")
+keymap("n", "zz", ":w<CR>:!acp ") -- shell function, enabled via .zshenv

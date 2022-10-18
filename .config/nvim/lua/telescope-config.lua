@@ -13,6 +13,8 @@ require("telescope").setup {
 			".log",
 			"node_modules",
 			".png",
+			".zip",
+			".pxd",
 		},
 		mappings = {
 			i = {
