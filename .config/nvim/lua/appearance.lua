@@ -35,8 +35,12 @@ cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED')
 
 --------------------------------------------------------------------------------
 -- ruler
-
-
+require("virt-column").setup {
+	char = "┃",
+	virtcolumn = "+1",
+}
+cmd[[highlight VirtColumn guifg=#00FF00]]
+cmd[[highlight def link VirtColumn Comment]]
 
 --------------------------------------------------------------------------------
 

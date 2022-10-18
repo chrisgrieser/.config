@@ -354,10 +354,15 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
     url = "https://github.com/mg979/vim-visual-multi"
   },
-  ["virtual-column.nvim"] = {
+  ["virt-column.nvim"] = {
     loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/virtual-column.nvim",
-    url = "https://github.com/davepinto/virtual-column.nvim"
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/virt-column.nvim",
+    url = "https://github.com/lukas-reineke/virt-column.nvim"
+  },
+  ["virtual-types.nvim"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/virtual-types.nvim",
+    url = "https://github.com/jubnzv/virtual-types.nvim"
   }
 }
 
