@@ -116,6 +116,17 @@ keymap("o", "ac", "a}")
 keymap("o", "p", '}') -- rest of the [p]aragraph
 keymap("o", "P", '{') -- beginning of the [P]aragraph
 
+-- special plugin text objects
+require("textobj-diagnostic").setup{create_default_keymaps = false}
+keymap({"v", "o"}, "id", require("textobj-diagnostic").next_diag_inclusive, {silent = true})
+keymap({"v", "o"}, 'ih', ':<C-U>Gitsigns select_hunk<CR>', {silent = true})
+
+-- treesitter textobjects:
+-- af -> a function
+-- aC -> a condition
+-- c -> comment
+-- aa -> an argument
+
 require("nvim-surround").setup{
 	move_cursor = false,
 	keymaps = {
@@ -148,6 +159,9 @@ require('Comment').setup{
 	},
 }
 
+keymap("n", "dq", function () cmd[[normal mzdcom`z]]	end) -- wrapping in normal needed, as com is treesitter textobj
+keymap("n", "cq", function () cmd[[normal com]]	end) 
+
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h") -- append space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
@@ -179,7 +193,7 @@ keymap("n", "ü", "mzlblgueh~`z")
 keymap("n", "Ü", function ()
 	local col = api.nvim_win_get_cursor(0)[2] + 1
 	local char = fn.getline("."):sub(col, col) ---@diagnostic disable-line: param-type-mismatch, undefined-field
-	local letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	local letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZäöüÄÖÜ"
 	if letters:find(char) then
 		cmd[[normal! ~h]]
 		return

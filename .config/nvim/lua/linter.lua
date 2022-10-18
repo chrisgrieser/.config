@@ -22,7 +22,7 @@ local forceZshForShellcheck = {
 
 null_ls.setup{
 	sources = {
-		null_ls.builtins.code_actions.gitsigns, -- gitsings.nvim plugin
+		null_ls.builtins.code_actions.gitsigns, -- gitsings.nvim plugin, e.g. hunk previews
 		null_ls.builtins.completion.spell.with{ -- vim's built-in spell-suggestions
 			filetypes = { "markdown" },
 		},
@@ -46,7 +46,7 @@ null_ls.setup{
 		},
 
 		null_ls.builtins.diagnostics.markdownlint.with{
-			extra_args = {"--disable-rule", fn.expand("~/.config/yamllint/config/.yamllint.yaml")},
+			extra_args = {"--disable=trailing-spaces"},
 		},
 
 	},
