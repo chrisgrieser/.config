@@ -29,7 +29,6 @@ local function dark()
 	g.neovide_transparency = 0.97
 
 	cmd[[hi rainbowcol1 guifg=#7e8a95]] -- kanagawa
-
 	customHighlights()
 end
 
