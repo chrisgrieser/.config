@@ -123,7 +123,9 @@ keymap("o", "P", '{') -- beginning of the [P]aragraph
 -- special plugin text objects
 require("textobj-diagnostic").setup{create_default_keymaps = false}
 keymap({"v", "o"}, "id", require("textobj-diagnostic").next_diag_inclusive, {silent = true})
+keymap({"v", "o"}, "ad", require("textobj-diagnostic").next_diag_inclusive, {silent = true})
 keymap({"v", "o"}, 'ih', ':Gitsigns select_hunk<CR>', {silent = true})
+keymap({"v", "o"}, 'ah', ':Gitsigns select_hunk<CR>', {silent = true})
 
 -- treesitter textobjects:
 -- af -> a function
