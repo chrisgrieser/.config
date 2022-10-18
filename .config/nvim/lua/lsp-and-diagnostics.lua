@@ -89,7 +89,7 @@ require("mason-lspconfig").setup({
 })
 
 -- fallback for languages without an action LSP
-keymap('n', 'gs', function() telescope.treesitter() end, {silent = true})
+keymap('n', 'gs', telescope.treesitter, {silent = true})
 
 -- actions defined globally for null-ls
 keymap('n', '<leader>a', vim.lsp.buf.code_action, {silent=true})
@@ -99,16 +99,16 @@ keymap('v', '<leader>a', ":'<,'>lua vim.lsp.buf.range_code_action()", {silent=tr
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-local
 	local bufopts = { silent=true, buffer=true }
-	keymap('n', 'gd', function() telescope.lsp_definitions() end, bufopts)
-	keymap('n', 'gD', function() telescope.lsp_references() end, bufopts)
+	keymap('n', 'gd', telescope.lsp_definitions, bufopts)
+	keymap('n', 'gD', telescope.lsp_references, bufopts)
 
 	keymap('n', 'gS', ":SymbolsOutline<CR>", bufopts)
-	keymap('n', 'gy', function() telescope.lsp_type_definitions() end, bufopts)
+	keymap('n', 'gy', telescope.lsp_type_definitions, bufopts)
 	keymap('n', '<leader>R', vim.lsp.buf.rename, bufopts)
 	keymap('n', '<leader>h', vim.lsp.buf.hover, bufopts) -- docs popup
 
 	if client.name ~= "cssls" then -- to not override the navigation marker search for css files
-		keymap('n', 'gs', function() telescope.lsp_document_symbols() end, bufopts) -- overrides treesitter symbols browsing
+		keymap('n', 'gs', telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
 	end
 end
 

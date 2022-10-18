@@ -6,18 +6,18 @@ g.mapleader = ','
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
 
--- re-run last [c]ommand
-keymap("n", "<leader>c", ':<C-r>:<CR>')
+-- run [l]ast command [a]gain
+keymap("n", "<leader>la", ':<C-r>:<CR>')
 
 -- search keymaps
-keymap("n", "?", function() telescope.keymaps() end)
-keymap("n", "<leader>?", function() telescope.help_tags() end)
+keymap("n", "?", telescope.keymaps)
+keymap("n", "<leader>?", telescope.help_tags)
 
 -- Theme Picker
-keymap("n", "<leader>T", function() telescope.colorscheme() end)
+keymap("n", "<leader>T", telescope.colorscheme)
 
 -- Highlights
-keymap("n", "<leader>G", function() telescope.highlights() end)
+keymap("n", "<leader>G", telescope.highlights)
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
@@ -214,7 +214,7 @@ end
 keymap("n", "X", 'mz$"_x`z')
 
 -- Spelling (mnemonic: [z]pelling)
-keymap("n", "zl", function() telescope.spell_suggest() end)
+keymap("n", "zl", telescope.spell_suggest)
 keymap("n", "gz", "]s") -- next misspelling
 keymap("n", "gZ", "[s") -- prev misspelling
 keymap("n", "za", "1z=") -- Autocorrect word under cursor (= select 1st suggestion)
@@ -293,11 +293,11 @@ keymap({"n", "v"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-fil
 -- FILES
 
 -- File switchers
-keymap("n", "go", function() telescope.find_files() end) -- [o]pen file in parent-directory
+keymap("n", "go", telescope.find_files) -- [o]pen file in parent-directory
 keymap("n", "gO", function() telescope.find_files{cwd='%:p:h:h', prompt_prefix=' '} end) -- [o]pen file in grandparent-directory
-keymap("n", "gr", function() telescope.oldfiles() end) -- [r]ecent files
-keymap("n", "gb", function() telescope.buffers() end) -- open [b]uffer
-keymap("n", "gf", function() telescope.live_grep() end) -- search in [f]iles
+keymap("n", "gr", telescope.oldfiles) -- [r]ecent files
+keymap("n", "gb", telescope.buffers) -- open [b]uffer
+keymap("n", "gf", telescope.live_grep) -- search in [f]iles
 
 -- File Operations
 keymap("n", "<C-p>", ':let @+ = expand("%:p")<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
