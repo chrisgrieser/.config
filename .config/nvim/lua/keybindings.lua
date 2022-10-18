@@ -159,8 +159,14 @@ require('Comment').setup{
 	},
 }
 
-keymap("n", "dq", function () cmd[[normal mzdcom`z]]	end) -- wrapping in normal needed, as com is treesitter textobj
+-- effectively creating "q" as comment textobj, can't map directly to q since
+-- overlap in visual mode where q can be object and operator. However, this
+-- method here also has the advantage of making it possible to preserve cursor
+-- position
+keymap("n", "dq", function () cmd[[normal mzdcom`z]] end) -- wrapping in normal needed, as com is treesitter textobj
 keymap("n", "cq", function () cmd[[normal com]]	end) 
+keymap("n", "yq", function () cmd[[normal mzycom`z]] end) 
+keymap("n", "öq", function () cmd[[normal mzöcom`z]] end) 
 
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h") -- append space
@@ -182,7 +188,7 @@ keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
 
 keymap({"n", "v"}, "^", "=") -- auto-indent
-keymap("n", "^^", "mz=ip`z") -- since indenting paragraph more common than line
+keymap("n", "^^", "mz=ip`z") -- since indenting paragraph is far more common than indenting a line
 keymap("n", "^p", "mz`[v`]=`z") -- last paste
 keymap("n", "^A", "mzgg=G`z") -- entire file
 
