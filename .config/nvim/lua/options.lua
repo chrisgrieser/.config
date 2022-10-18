@@ -72,7 +72,7 @@ opt.mousemodel="extend" -- deacvitate context menu, right mouse instead expands 
 
 -- ruler
 opt.textwidth = 80 -- used by `gq` and wrap
-opt.colorcolumn = '+1' -- column next to textwidth option length
+-- opt.colorcolumn = '+1' -- column next to textwidth option length
 opt.wrap = false
 
 -- files
