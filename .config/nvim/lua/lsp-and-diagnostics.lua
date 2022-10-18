@@ -67,10 +67,6 @@ vim.diagnostic.config{
 
 keymap("n", "<leader>d", function () vim.diagnostic.open_float{focusable=false} end)
 
--- textobj diagnostic plugin
-require("textobj-diagnostic").setup{create_default_keymaps = false}
-keymap({"x", "o"}, "id", function() require("textobj-diagnostic").next_diag_inclusive() end, opts)
-
 --------------------------------------------------------------------------------
 
 require("mason").setup({
