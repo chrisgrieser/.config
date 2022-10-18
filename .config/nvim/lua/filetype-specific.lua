@@ -107,7 +107,7 @@ autocmd("BufNewFile", {
 --------------------------------------------------------------------------------
 
 -- [H]orizontal Ruler
-keymap("n", "gh", function()
+keymap("n", "zh", function()
 	if not(b.hrComment) then
 		print("No hr for this filetype defined.")
 	elseif bo.filetype == "css" then
