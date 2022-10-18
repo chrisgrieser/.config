@@ -59,8 +59,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+					<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 if pgrep "neovide" ; then
 	prevClipboard="$(pbpaste)" 
@@ -76,7 +75,11 @@ if pgrep "neovide" ; then
 		end tell'
 	echo "$prevClipboard" | pbcopy
 else
-	neovide "$1"
+	if [[ -z "$LINE" ]] ; then
+		neovide "$1"
+	else
+		neovide "+$LINE" "$1"
+	fi
 fi
 </string>
 					<key>CheckedForUserDefaultShell</key>
@@ -191,7 +194,7 @@ fi
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>591.000000:432.000000</string>
+				<string>591.000000:252.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>

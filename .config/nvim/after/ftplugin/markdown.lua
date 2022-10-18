@@ -37,7 +37,5 @@ keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", opts)
 keymap("v", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", opts)
 keymap("i", "<D-i>", "**<Left>", opts)
 
--- cmd+e: inline code
-keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", opts)
-keymap("v", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", opts)
-keymap("i", "<D-e>", "``<Left>", opts)
+-- cmd+e for inline code done in gui-settings, since also used for other cases
+-- outside of markdown (e.g. templater strings)
