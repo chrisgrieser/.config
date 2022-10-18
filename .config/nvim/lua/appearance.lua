@@ -41,7 +41,6 @@ require('gitsigns').setup{
 	max_file_length = 15000,
 	preview_config	= { border = borderStyle },
 }
-keymap('n', '<leader>H', ":Gitsigns preview_hunk<CR>")
 
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS
