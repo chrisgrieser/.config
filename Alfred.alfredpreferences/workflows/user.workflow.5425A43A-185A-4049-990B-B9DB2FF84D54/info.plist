@@ -384,6 +384,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>⏳ Building...</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>B3464F95-B489-4113-82A7-9CCB3300B0E1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -407,27 +428,6 @@ zsh build.sh "$*"</string>
 			<string>8627A802-741F-4477-A445-AA3EA82ED4C8</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>⏳ Building...</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>B3464F95-B489-4113-82A7-9CCB3300B0E1</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -650,8 +650,9 @@ zsh build.sh "$*"</string>
 sf_path="${vault_path/#\~/$HOME}""/.obsidian/themes/Shimmering Focus/theme.css"
 lineNo="$*"
 
-open "$sf_path"
+# neovide "+$lineNo" "$sf_path"
 
+open "$sf_path"
 sleep 0.3
 osascript -e 'tell application "System Events" to keystroke ":'$lineNo'"'
 osascript -e 'tell application "System Events" to keystroke return'</string>

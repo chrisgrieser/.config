@@ -11,7 +11,7 @@ source "$DOTFILE_FOLDER/zsh/git_github.zsh" # make github functions available in
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# so linters managed by mason are still available
+# so linters managed by mason are available to other apps
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 
 # karabiner_cli
