@@ -164,12 +164,16 @@ require('Comment').setup{
 -- method here also has the advantage of making it possible to preserve cursor
 -- position
 keymap("n", "dq", function () cmd[[normal mzdcom`z]] end) -- wrapping in normal needed, as com is treesitter textobj
-keymap("n", "cq", function () cmd[[normal com]]	end) 
-keymap("n", "yq", function () cmd[[normal mzycom`z]] end) 
-keymap("n", "öq", function () cmd[[normal mzöcom`z]] end) 
+keymap("n", "yq", function () cmd[[normal mzycom`z]] end)
+keymap("n", "öq", function () cmd[[normal mzöcom`z]] end)
+keymap("n", "cq", function ()
+	cmd[[normal mzdcom`z]]
+	cmd[[normal Q]]
+	cmd[[startinsert!]]
+end)
 
 -- Whitespace Control
-keymap("n", "!", "a <Esc>h") -- append space
+keymap("n", "!", "a <Esc>h")
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
 keymap("n", "<BS>", function() -- reduce multiple blank lines to exactly one
