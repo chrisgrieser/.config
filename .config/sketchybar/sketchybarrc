@@ -1,7 +1,9 @@
+# vim: filetype=bash
+#───────────────────────────────────────────────────────────────────────────────
+
 # restart: `brew services restart sketchybar`
 # reload (does only update items, not the look of the bar): `sketchybar --update`
-
-################################################################################
+#───────────────────────────────────────────────────────────────────────────────
 
 pgrep "Stats" || open -a "Stats" # ensure Stats.app is running
 
@@ -72,11 +74,10 @@ sketchybar --add item clock right                            \
                          script="$PLUGIN_DIR/weather.sh"     \
            --add item covid-stats right                      \
            --set covid-stats update_freq=43200               \
-                        script="$PLUGIN_DIR/covid-stats.sh" \
+                        script="$PLUGIN_DIR/covid-stats.sh"  \
            --add item git-sync right                         \
            --set git-sync update_freq=9001                   \
-                        script="$PLUGIN_DIR/git-sync.sh"
-								icon.font="Noto Emoji:Bold:15"      \
+                        script="$PLUGIN_DIR/git-sync.sh"     \
            --add event repo-files-update                     \
            --subscribe git-sync repo-files-update            \
            --subscribe git-sync system_woke                  \
