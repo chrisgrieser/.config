@@ -61,7 +61,8 @@ keymap("n", "<C-h>", "<C-o>") -- Back
 keymap("n", "<C-l>", "<C-i>") -- Forward
 
 -- Hunks
-keymap("n", "gh", "") 
+keymap("n", "gh", ":Gitsigns next_hunk<CR>")
+keymap("n", "gH", ":Gitsigns next_prev<CR>")
 
 -- Sneak: enable clever-f-style movement
 keymap("", "f", "<Plug>Sneak_f")
@@ -122,7 +123,7 @@ keymap("o", "P", '{') -- beginning of the [P]aragraph
 -- special plugin text objects
 require("textobj-diagnostic").setup{create_default_keymaps = false}
 keymap({"v", "o"}, "id", require("textobj-diagnostic").next_diag_inclusive, {silent = true})
-keymap({"v", "o"}, 'ih', ':<C-U>Gitsigns select_hunk<CR>', {silent = true})
+keymap({"v", "o"}, 'ih', ':Gitsigns select_hunk<CR>', {silent = true})
 
 -- treesitter textobjects:
 -- af -> a function
