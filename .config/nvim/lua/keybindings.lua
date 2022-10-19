@@ -44,8 +44,7 @@ keymap({"v", "o"}, "J", "7j")
 keymap("", "K", "7k")
 
 -- when reaching the last line, scroll down (since scrolloff does not work at EOF)
----
-function overscroll (action)
+function overscroll (action) ---@param action string
 	local curLine = fn.line(".")
 	local lastLine = fn.line("$")
 	if (lastLine - curLine - 1) < wo.scrolloff then
@@ -74,7 +73,7 @@ keymap("", "T", "<Plug>Sneak_T")
 -- Search
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "/", "/\v") -- more PCRE-like regex patterns (:h magic)
-keymap("n", "<Esc>", ":nohl<CR>:echo<CR>", {silent = true}) -- clear highlights & shortmessage
+keymap("n", "<Esc>", "lh:nohl<CR>:echo<CR>", {silent = true}) -- clear highlights & shortmessage, lh clears hover window
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 
 -- URLs
