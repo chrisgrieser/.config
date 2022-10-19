@@ -35,10 +35,12 @@ cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED')
 
 --------------------------------------------------------------------------------
 -- ruler
+-- replaces 'opt.colorcolumn = "+1"'
 require("virt-column").setup {
 	char = "┃",
 	virtcolumn = "+1",
 }
+
 
 --------------------------------------------------------------------------------
 
@@ -63,7 +65,7 @@ local signs = {
 }
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl }) ---@diagnostic disable-line: redundant-parameter, param-type-mismatch
+	fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl }) ---@diagnostic disable-line: redundant-parameter, param-type-mismatch
 end
 
 --------------------------------------------------------------------------------
@@ -83,13 +85,14 @@ local function currentFile() -- using this function instead of default filename,
 end
 
 local function mixedIndentation()
-	if bo.filetype == "css" or bo.filetype == "startuptime" or bo.filetype == "packer" or bo.filetype == "undotree" then return "" end
+	if bo.filetype == "css" or vim.tbl_contains(specialFiletypes, bo.filetype) then return "" end
+
 	local hasTabs = fn.search("^\t", "nw") ~= 0
 	local hasSpaces = fn.search("^ ", "nw") ~= 0
 	local mixed = fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
 
 	if (hasSpaces and hasTabs) or mixed then
-		return " mixed indents"
+		return "  mixed "
 	elseif hasSpaces and not(bo.expandtab) then
 		return " expandtab"
 	elseif hasTabs and bo.expandtab then
@@ -115,7 +118,7 @@ require('lualine').setup {
 		lualine_z = {'location', 'progress'},
 	},
 	options = {
-		theme  = 'auto',
+		theme = 'auto',
 		globalstatus = true,
 		component_separators = { left = '', right = ''},
 		section_separators = secSeparators,
