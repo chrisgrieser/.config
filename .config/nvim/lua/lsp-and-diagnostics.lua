@@ -145,7 +145,7 @@ lspConfig['sumneko_lua'].setup{
 	capabilities = capabilities,
 	settings = { -- https://github.com/sumneko/lua-language-server/wiki/Settings
 	Lua = {
-		runtime = { version = 'LuaJIT', },  -- used by neovim
+		runtime = { version = 'LuaJIT' }, -- used by neovim
 		completion = {
 			callSnippet = "Both",
 			keywordSnippet = "Replace",
@@ -161,7 +161,7 @@ lspConfig['sumneko_lua'].setup{
 			},
 		},
 		workspace = {
-			library =  {
+			library = {
 				home.."/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
 			}
 		},

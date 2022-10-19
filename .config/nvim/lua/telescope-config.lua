@@ -34,7 +34,7 @@ require("telescope").setup {
 				preview_width = {0.55, max = 50}
 			},
 			bottom_pane = {
-				height = 12,
+				height = 15,
 				preview_cutoff = 70,
 				prompt_position = "bottom",
 			},

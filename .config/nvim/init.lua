@@ -10,9 +10,8 @@ require("utils") -- must be 3rd
 
 --------------------------------------------------------------------------------
 
-require("options")
+require("options-and-autocmds")
 require("keybindings")
-require("filetype-specific")
 require("remaining-plugins")
 require("appearance")
 require("telescope-config")

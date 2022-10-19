@@ -14,32 +14,12 @@ opt.pumwidth = 10 -- min width popup menu
 -- Spelling
 opt.spell = false
 opt.spelllang = "en_us,de_de"
--- no spellcheck in URLs and acronyms http://www.panozzaj.com/blog/2016/03/21/ignore-urls-and-acroynms-while-spell-checking-vim/
-cmd[[syntax match UrlNoSpell 'http[s]\?:\/\/[[:alnum:]%\/_#.-?]*' contains=@NoSpell"]]
-cmd[[syntax match AcronymNoSpell '\<\(\u\|\d\)\{3,}s\?\>' contains=@NoSpell]]
 
 -- Gutter
 opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
 opt.numberwidth = 3 -- minimum width, save some space for shorter files
 opt.number = false
 opt.relativenumber = false
-
--- -- hide line numbers on window split
--- augroup("linenumberSplit", {})
--- autocmd({"WinLeave", "WinEnter", "WinClosed"},{
--- 	group = "linenumberSplit",
--- 	callback = function ()
--- 		if bo.filetype == "" or bo.filetype == "mason" then return end -- ignore special windows like telescope
--- 		local isVsplit = fn.winlayout()[1] == "row"
--- 		if isVsplit then
--- 			opt.number = false
--- 			opt.relativenumber = false
--- 		else
--- 			opt.number = true
--- 			opt.relativenumber = true
--- 		end
--- 	end
--- })
 
 -- whitespace & indentation
 opt.tabstop = 3
@@ -70,9 +50,13 @@ opt.history = 777 -- do not save too much history to reduce noise for command li
 -- Mouse
 opt.mousemodel="extend" -- deacvitate context menu, right mouse instead expands selection
 
--- ruler
+-- Window Managers/espanso: set title
+opt.title = true
+opt.titlelen = 0 -- do not shorten title
+opt.titlestring='%{expand(\"%:p\")} [%{mode()}]'
+
+-- width
 opt.textwidth = 80 -- used by `gq` and wrap
--- opt.colorcolumn = '+1' -- column next to textwidth option length
 opt.wrap = false
 
 -- files
@@ -91,7 +75,7 @@ autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
 })
 
 -- editor
-opt.cursorline = true -- by default underline, look changed in appearnce
+opt.cursorline = true
 opt.scrolloff = 12
 opt.sidescrolloff = 21
 
@@ -109,9 +93,7 @@ autocmd ("BufReadPost", {
 })
 
 -- clear cmdline on entering buffer
-autocmd ("BufReadPost", {
-	command = [[echo]]
-})
+autocmd ("BufReadPost", { command = "echo" })
 
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
@@ -143,11 +125,6 @@ autocmd("BufWinEnter", {
 	command = "silent! loadview"
 })
 
--- Window Managers/espanso: set title
-opt.title = true
-opt.titlelen = 0 -- do not shorten title
-opt.titlestring='%{expand(\"%:p\")} [%{mode()}]'
-
 -- Terminal Mode
 augroup("Terminal", {})
 autocmd("TermOpen", {
@@ -160,3 +137,29 @@ autocmd("TermClose", {
 	pattern = "*",
 	command = "bd"
 })
+
+--------------------------------------------------------------------------------
+
+-- Skeletons (Templates)
+augroup("Templates", {})
+autocmd("BufNewFile", {
+	group = "Templates",
+	pattern = "*.js",
+	command = "0r ~/.config/nvim/templates/skeleton.js",
+})
+autocmd("BufNewFile", {
+	group = "Templates",
+	pattern = "*.applescript",
+	command = "0r ~/.config/nvim/templates/skeleton.applescript",
+})
+autocmd("BufNewFile", {
+	group = "Templates",
+	pattern = "*.sh",
+	command = "0r ~/.config/nvim/templates/skeleton.sh",
+})
+autocmd("BufNewFile", {
+	group = "Templates",
+	pattern = "*.lua",
+	command = "0r ~/.config/nvim/templates/skeleton.lua",
+})
+
