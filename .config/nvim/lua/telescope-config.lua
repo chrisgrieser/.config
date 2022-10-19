@@ -30,7 +30,8 @@ require("telescope").setup {
 			horizontal = {
 				height = 0.95,
 				preview_cutoff = 70,
-				width = 0.92
+				width = 0.92,
+				preview_width = {0.55, max = 50}
 			},
 			bottom_pane = {
 				height = 12,

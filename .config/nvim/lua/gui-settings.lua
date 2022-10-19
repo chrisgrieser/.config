@@ -42,16 +42,16 @@ auto_dark_mode.setup({
 auto_dark_mode.init()
 
 --------------------------------------------------------------------------------
--- Keybindings
+-- CMD-Keybindings
 keymap({"n", "v"}, "<D-w>", ":close<CR>") -- cmd+w
 keymap("i", "<D-w>", "<Esc>:close<CR>")
 
 keymap({"n", "v"}, "<D-n>", ':e Untitled<CR>:w<CR>:Rename ') -- cmd+n
 
-keymap({"n", "v"}, "<D-z>", ":undo<CR>") -- cmd+z
-keymap({"n", "v"}, "<D-Z>", ":redo<CR>") -- cmd+shift+z
-keymap("i", "<D-z>", "<Esc>:undo<CR>a")
-keymap("i", "<D-Z>", "<Esc>:redo<CR>a")
+keymap({"n", "v"}, "<D-z>", "u") -- cmd+z
+keymap({"n", "v"}, "<D-Z>", "<C-R>") -- cmd+shift+z
+keymap("i", "<D-z>", "<C-o>u")
+keymap("i", "<D-Z>", "<C-o><C-r>")
 keymap({"n", "v"}, "<D-s>", ":write!<CR>") -- cmd+s
 keymap("i", "<D-s>", "<Esc>:write!<CR>a")
 keymap("n", "<D-a>", "ggVG") -- cmd+a
@@ -59,6 +59,9 @@ keymap("i", "<D-a>", "<Esc>ggVG")
 keymap("v", "<D-a>", "ggG")
 
 keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
+
+keymap({"n", "v", "i"}, "<D-1>", ":Lex<CR>:vertical resize 30<CR>") -- file tree (netrw)
+keymap({"n", "v", "i"}, "<D-0>", ":SymbolsOutline<CR>") -- Symbol Outline
 
 -- Multi-Cursor with cmd+j https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 cmd[[ let g:VM_maps = {}

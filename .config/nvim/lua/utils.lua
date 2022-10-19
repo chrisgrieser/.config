@@ -26,3 +26,15 @@ cmd[[:command! -nargs=1 I lua inspectFn(<f-args>)]]
 function isGui()
 	return g.neovide or g.goneovim
 end
+
+specialFiletypes = {
+	"help",
+	"startuptime",
+	"qf",
+	"lspinfo",
+	"AppleScriptRunOutput",
+	"Outline",
+	"netrw",
+	"packer",
+	"undotree",
+}

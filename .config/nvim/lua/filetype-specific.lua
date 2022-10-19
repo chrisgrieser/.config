@@ -40,7 +40,7 @@ autocmd("FileType", {
 
 -- neovim special windows
 autocmd("FileType", {
-	pattern = { "help", "startuptime", "qf", "lspinfo", "AppleScriptRunOutput", "Outline" },
+	pattern = specialFiletypes,
 	callback = function ()
 		keymap("n", "q", ":close<CR>", {buffer = true, silent = true, nowait = true})
 	end
