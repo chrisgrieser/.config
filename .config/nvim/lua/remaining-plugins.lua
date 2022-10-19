@@ -1,6 +1,10 @@
 require("utils")
 --------------------------------------------------------------------------------
 
+g.netrw_list_hide= '.*\\.DS_Store$,^./$,^../$' -- hide files created by macOS & current directory
+g.netrw_banner = 0 -- no ugly top banner
+g.netrw_liststyle = 3 -- tree style as default
+
 -- Sneak
 cmd[[let g:sneak#s_next = 1]] -- "s" repeats, like with clever-f
 cmd[[let g:sneak#use_ic_scs = 1]] -- smart case

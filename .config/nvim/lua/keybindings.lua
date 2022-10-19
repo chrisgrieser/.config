@@ -173,7 +173,7 @@ keymap("n", "dq", function () cmd[[normal mzdCOM`z]] end) -- wrapping in normal 
 keymap("n", "yq", function () cmd[[normal mzyCOM`z]] end)
 keymap("n", "öq", function () cmd[[normal mzöCOM`z]] end)
 keymap("n", "cq", function ()
-	cmd[[normal mzdCOM`z]]
+	cmd[[normal mzdCOMx`z]]
 	cmd[[normal Q]]
 	cmd[[startinsert!]]
 end)
@@ -309,10 +309,10 @@ keymap("v", "y", "ygv<Esc>") -- yanking in visual mode keeps position https://st
 -- WINDOW AND BUFFERS
 keymap("", "<C-w>v", ":vsplit #<CR>") -- open the alternate file in the split instead of the current file
 keymap("", "<C-w>h", ":split #<CR>")
-keymap("", "<C-Right>", "<C-w>>") -- resizing on one key for sanity
-keymap("", "<C-Left>", "<C-w><")
-keymap("", "<C-Up>", "<C-w>+")
-keymap("", "<C-Down>", "<C-w>-")
+keymap("", "<C-Right>", ":vertical resize +3<CR>") -- resizing on one key for sanity
+keymap("", "<C-Left>", ":vertical resize -3<CR>")
+keymap("", "<C-Up>", ":resize +3<CR>")
+keymap("", "<C-Down>", ":resize -3<CR>")
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 
 -- Buffers
