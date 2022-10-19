@@ -205,6 +205,17 @@ keymap("n", "ü", "mzlblgueh~`z")
 
 -- toggle case or switch direction of char (e.g. > to <)
 keymap("n", "Ü", function ()
+	-- toggle false/false
+	local wordUnderCursor = fn.expand("<cword>")
+	if wordUnderCursor == "true" then
+		cmd[[normal! "_ciwfalse]]
+		return
+	elseif wordUnderCursor == "false" then
+		cmd[[normal! "_ciwtrue]]
+		return
+	end
+
+	-- toggle case
 	local col = api.nvim_win_get_cursor(0)[2] + 1
 	local char = fn.getline("."):sub(col, col) ---@diagnostic disable-line: param-type-mismatch, undefined-field
 	local letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZäöüÄÖÜ"
@@ -213,6 +224,7 @@ keymap("n", "Ü", function ()
 		return
 	end
 
+	-- switch char
 	local out = ""
 	if char == "<" then out = ">"
 	elseif char == ">" then out = "<"
