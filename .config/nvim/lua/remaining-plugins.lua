@@ -4,6 +4,9 @@ require("utils")
 g.netrw_list_hide= '.*\\.DS_Store$,^./$,^../$' -- hide files created by macOS & current directory
 g.netrw_banner = 0 -- no ugly top banner
 g.netrw_liststyle = 3 -- tree style as default
+g.netrw_winsize = 30
+g.netrw_localcopydircmd = 'cp -r' -- makes copy work with directories
+cmd[[highlight! ]]
 
 -- Sneak
 cmd[[let g:sneak#s_next = 1]] -- "s" repeats, like with clever-f

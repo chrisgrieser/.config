@@ -311,8 +311,8 @@ keymap("", "<C-w>v", ":vsplit #<CR>") -- open the alternate file in the split in
 keymap("", "<C-w>h", ":split #<CR>")
 keymap("", "<C-Right>", ":vertical resize +3<CR>") -- resizing on one key for sanity
 keymap("", "<C-Left>", ":vertical resize -3<CR>")
-keymap("", "<C-Up>", ":resize +3<CR>")
-keymap("", "<C-Down>", ":resize -3<CR>")
+keymap("", "<C-Down>", ":resize +3<CR>")
+keymap("", "<C-Up>", ":resize -3<CR>")
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 
 -- Buffers
