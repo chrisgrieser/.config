@@ -46,7 +46,7 @@ auto_dark_mode.init()
 keymap({"n", "v"}, "<D-w>", ":close<CR>") -- cmd+w
 keymap("i", "<D-w>", "<Esc>:close<CR>")
 
-keymap({"n", "v"}, "<D-n>", ':e Untitled<CR>:w<CR>:Rename ') -- cmd+n
+keymap({"n", "v"}, "<D-n>", ':Lexplore<CR>%', {remap = true}) -- cmd+n
 
 keymap({"n", "v"}, "<D-z>", "u") -- cmd+z
 keymap({"n", "v"}, "<D-Z>", "<C-R>") -- cmd+shift+z

@@ -106,8 +106,6 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 	if client.name ~= "cssls" then -- to not override the navigation marker search for css files
 		keymap('n', 'gs', telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
 	end
-
-	require'virtualtypes'.on_attach()
 end
 
 --------------------------------------------------------------------------------
