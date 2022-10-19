@@ -7,14 +7,16 @@ require("telescope").setup {
 		path_display = { "tail" },
 		file_ignore_patterns = {
 			"packer_compiled.lua",
-			".DS_Store",
-			".git/",
-			".spl",
-			".log",
+			"%.DS_Store",
+			"%.git/",
+			"%.spl",
+			"%.log",
+			"%[No Name%]",
+			"/$", -- ignore folders
 			"node_modules",
-			".png",
-			".zip",
-			".pxd",
+			"%.png",
+			"%.zip",
+			"%.pxd",
 		},
 		mappings = {
 			i = {

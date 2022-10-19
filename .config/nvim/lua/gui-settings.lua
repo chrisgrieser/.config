@@ -60,7 +60,7 @@ keymap("v", "<D-a>", "ggG")
 
 keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 
-keymap({"n", "v", "i"}, "<D-1>", ":Lexplore %:p:h<CR>") -- file tree (netrw)
+keymap({"n", "v", "i"}, "<D-1>", ":Lexplore<CR>") -- file tree (netrw)
 keymap({"n", "v", "i"}, "<D-0>", ":SymbolsOutline<CR>") -- Symbol Outline
 
 -- Multi-Cursor with cmd+j https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
