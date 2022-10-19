@@ -168,17 +168,13 @@ require('Comment').setup{
 -- effectively creating "q" as comment textobj, can't map directly to q since
 -- overlap in visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
--- position
-
--- keymap("n", "dq", "mzdCOM`z", {remap = true})
--- keymap("n", "dq", function () cmd[[normal mzdCOM`z]] end)
--- keymap("n", "yq", function () cmd[[normal mzyCOM`z]] end)
--- keymap("n", "öq", function () cmd[[normal mzöCOM`z]] end)
-keymap("n", "cq", function ()
-	cmd[[normal mzdCOMx`z]]
-	cmd[[normal Q]]
-	cmd[[startinsert!]]
-end)
+-- position.
+-- requires remap for for treesitter and comments.nvim mappings
+keymap("n", "dq", "mzdCOM`z", {remap = true})
+keymap("n", "dq", "mzdCOM`z", {remap = true})
+keymap("n", "yq", "mzyCOM`z", {remap = true})
+keymap("n", "öq", "mzöCOM`z", {remap = true})
+keymap("n", "cq", "mzdCOMxQ", {remap = true}) -- using delete to preserve commentstring
 
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h")
