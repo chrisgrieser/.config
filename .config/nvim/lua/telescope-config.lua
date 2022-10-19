@@ -11,8 +11,8 @@ require("telescope").setup {
 			"%.git/",
 			"%.spl",
 			"%.log",
-			"%[No Name%]",
-			"/$", -- ignore folders
+			"%[No Name%]", -- new files / sometimes folders (netrw)
+			"/$", -- ignore folders (netrw)
 			"node_modules",
 			"%.png",
 			"%.zip",
@@ -25,6 +25,7 @@ require("telescope").setup {
 			},
 			n = {
 				q = "close",
+				["<Esc>"] = "close",
 			},
 		},
 		layout_strategy = 'horizontal',
@@ -36,7 +37,7 @@ require("telescope").setup {
 				preview_width = {0.55, max = 50}
 			},
 			bottom_pane = {
-				height = 15,
+				height = 12,
 				preview_cutoff = 70,
 				prompt_position = "bottom",
 			},
@@ -106,7 +107,7 @@ require("telescope").setup {
 			results_title = '',
 			layout_strategy = "bottom_pane",
 			sorting_strategy = "ascending",
-			layout_config = { bottom_pane = { height = 6 } },
+			layout_config = { bottom_pane = { height = 8 } },
 		}
 	}
 }
