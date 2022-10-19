@@ -138,7 +138,8 @@ require("neodev").setup {
 		plugins = false,
 	}
 }
-
+-- https://github.com/sumneko/lua-language-server/wiki/Annotations#annotations
+-- https://github.com/sumneko/lua-language-server/wiki/Settings
 lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -146,8 +147,11 @@ lspConfig['sumneko_lua'].setup{
 	Lua = {
 		runtime = { version = 'LuaJIT', },  -- used by neovim
 		completion = {
-			callSnippet = "both",
-			keywordSnippet = "both",
+			callSnippet = "Both",
+			keywordSnippet = "Replace",
+			displayContext = 3,
+			postfix = "@",
+			showWord = "Enable",
 		},
 		diagnostics = {
 			globals = {"vim", "use", "martax"},

@@ -95,17 +95,7 @@ cmp.setup({
 			return vim_item
 		end
 	},
-
 	-- disable completion in comments https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-completion-in-certain-contexts-such-as-comments
-	enabled = function()
-		local context = require 'cmp.config.context'
-		if vim.api.nvim_get_mode().mode == 'c' then -- keep command mode completion enabled when cursor is in a comment
-			return true
-		else
-			return not context.in_treesitter_capture("comment")
-			and not context.in_syntax_group("Comment")
-		end
-	end
 })
 
 --------------------------------------------------------------------------------
@@ -114,15 +104,7 @@ cmp.setup({
 -- disable leading "-" and comments
 cmp.setup.filetype ("lua", {
 	enabled = function()
-		local context = require 'cmp.config.context'
-		if api.nvim_get_mode().mode == 'c' then -- keep command mode completion enabled when cursor is in a comment
-			return true
-		elseif fn.getline("."):match("%s*%-+") then ---@diagnostic disable-line: undefined-field, param-type-mismatch
-			return false
-		else
-			return not context.in_treesitter_capture("comment")
-			and not context.in_syntax_group("Comment")
-		end
+		return fn.getline("."):match("%s*%-%-?") ---@diagnostic disable-line: undefined-field, param-type-mismatch
 	end,
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },

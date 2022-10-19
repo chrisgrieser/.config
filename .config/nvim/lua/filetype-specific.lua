@@ -10,35 +10,7 @@ keymap("n", "<leader>x", 'mz^lllrx`z') -- check markdown tasks
 keymap("n", "<leader>-", "mzI- <Esc>`z") -- Add bullet point
 keymap("n", "<leader>>", "mzI> <Esc>`z") -- Turn into blockquote
 
--- CSS / JSON / YAML
-keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key
-
--- CSS
-keymap("n", "<leader>c", 'mzlEF.yEEp`z') -- double [c]lass under cursor
-keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>:nohl<CR>') -- delete class under cursor
-
--- toggle !important
-keymap("n", "<leader>i", function ()
-	---@diagnostic disable: undefined-field, param-type-mismatch
-	local lineContent = fn.getline('.')
-	if lineContent:find("!important") then
-		lineContent = lineContent:gsub(" !important", "")
-	else
-		lineContent = lineContent:gsub(";", " !important;")
-	end
-	fn.setline(".", lineContent)
-	---@diagnostic enable: undefined-field, param-type-mismatch
-end)
-
--- Emmet
-autocmd("FileType", {
-	pattern = {"css"},
-	callback = function ()
-		keymap("i", ",,", "<Plug>(emmet-expand-abbr)", {silent = true})
-	end
-})
-
--- neovim special windows
+-- q to close special windows
 autocmd("FileType", {
 	pattern = specialFiletypes,
 	callback = function ()
