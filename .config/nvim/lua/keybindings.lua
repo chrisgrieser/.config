@@ -169,9 +169,11 @@ require('Comment').setup{
 -- overlap in visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
 -- position
-keymap("n", "dq", function () cmd[[normal mzdCOM`z]] end) -- wrapping in normal needed, as com is treesitter textobj
-keymap("n", "yq", function () cmd[[normal mzyCOM`z]] end)
-keymap("n", "öq", function () cmd[[normal mzöCOM`z]] end)
+
+-- keymap("n", "dq", "mzdCOM`z", {remap = true})
+-- keymap("n", "dq", function () cmd[[normal mzdCOM`z]] end)
+-- keymap("n", "yq", function () cmd[[normal mzyCOM`z]] end)
+-- keymap("n", "öq", function () cmd[[normal mzöCOM`z]] end)
 keymap("n", "cq", function ()
 	cmd[[normal mzdCOMx`z]]
 	cmd[[normal Q]]
@@ -250,12 +252,12 @@ keymap("n", "gZ", "[s") -- prev misspelling
 keymap("n", "za", "1z=") -- Autocorrect word under cursor (= select 1st suggestion)
 
 -- [O]verride Operator (substitute.nvim)
-require("substitute").setup()
 local substi = require('substitute')
-keymap("n", "ö", substi."operator()<cr>")
-keymap("n", "öö", substi."line()<cr>")
-keymap("n", "Ö", substi."eol()<cr>")
-keymap("x", "ö", substi."visual()<cr>")
+substi.setup()
+keymap("n", "ö", substi.operator)
+keymap("n", "öö", substi.line)
+keymap("n", "Ö", substi.eol)
+keymap("x", "ö", substi.visual)
 
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
@@ -362,7 +364,7 @@ keymap("n", "<leader>r", function()
 
 	local filename = fn.expand("%:t") ---@diagnostic disable-line: missing-parameter
 	if filename == "sketchybarrc" then
-		fn.system("brew services restart sketchybar")
+		-- fn.system("brew services restart sketchybar")
 
 	elseif bo.filetype == "lua" then
 		local parentFolder = fn.expand("%:p:h") ---@diagnostic disable-line: missing-parameter
