@@ -25,11 +25,11 @@ end
 customHighlights()
 
 -- mixed whitespace
-cmd[[highlight def link MixedWhiteSpace Folded]]
+cmd[[highlight! def link MixedWhiteSpace Folded]]
 cmd[[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 
 -- Annotations
-cmd[[highlight def link myAnnotations Todo]] -- use same styling as "TODO"
+cmd[[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
 cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED') ]]
 
 
@@ -41,6 +41,8 @@ require("virt-column").setup {
 	virtcolumn = "+1",
 }
 
+cmd[[highlight! def link VirtColumn IndentBlankLineChar]]
+cmd[[highlight! def link WinSeparator IndentBlankLineChar]]
 
 --------------------------------------------------------------------------------
 
