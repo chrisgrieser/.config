@@ -67,8 +67,6 @@ function PluginList ()
 	use "lewis6991/gitsigns.nvim"
 	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	use "lukas-reineke/virt-column.nvim" -- ruler
-	use 'jubnzv/virtual-types.nvim'
 
 	-- File Management & Switching
 	use "tpope/vim-eunuch" -- file operation utilities
@@ -81,22 +79,20 @@ function PluginList ()
 	-- Operators
 	use "kylechui/nvim-surround"
 	use "tpope/vim-abolish" -- various case conversions
-	use "svermeulen/vim-subversive" -- substitution operator
+	use "gbprod/substitute.nvim" -- substitution operator, neovim version for vim-subversive
 	use "numToStr/Comment.nvim"
 
 	-- Text Objects
 	use "andrewferrier/textobj-diagnostic.nvim" -- nvim diagnostics as text object
 	use "michaeljsmith/vim-indent-object"
 
-	-- Movements
+	-- Navigation
 	use "mg979/vim-visual-multi" -- multi-cursor
 	use "justinmk/vim-sneak"
 	use "simrat39/symbols-outline.nvim" -- outline view for symbols
 
-	-- Line Editing
+	-- Editing
 	use "matze/vim-move" -- move lines with auto-indention (alternative: vim.unimpaired)
 	use "AndrewRadev/splitjoin.vim"
-
-	-- Misc
 	use "mbbill/undotree" -- undo history nagivation
 end

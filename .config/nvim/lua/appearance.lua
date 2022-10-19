@@ -32,18 +32,6 @@ cmd[[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 cmd[[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
 cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED') ]]
 
-
---------------------------------------------------------------------------------
--- ruler
--- replaces 'opt.colorcolumn = "+1"'
-require("virt-column").setup {
-	char = "┃",
-	virtcolumn = "+1",
-}
-
-cmd[[highlight! def link VirtColumn IndentBlankLineChar]]
-cmd[[highlight! def link WinSeparator IndentBlankLineChar]]
-
 --------------------------------------------------------------------------------
 
 -- GUTTER
