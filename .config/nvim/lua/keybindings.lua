@@ -44,6 +44,7 @@ keymap({"v", "o"}, "J", "7j")
 keymap("", "K", "7k")
 
 -- when reaching the last line, scroll down (since scrolloff does not work at EOF)
+---
 function overscroll (action)
 	local curLine = fn.line(".")
 	local lastLine = fn.line("$")
@@ -169,11 +170,11 @@ require('Comment').setup{
 -- overlap in visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
 -- position
-keymap("n", "dq", function () cmd[[normal mzdcom`z]] end) -- wrapping in normal needed, as com is treesitter textobj
-keymap("n", "yq", function () cmd[[normal mzycom`z]] end)
-keymap("n", "öq", function () cmd[[normal mzöcom`z]] end)
+keymap("n", "dq", function () cmd[[normal mzdCOM`z]] end) -- wrapping in normal needed, as com is treesitter textobj
+keymap("n", "yq", function () cmd[[normal mzyCOM`z]] end)
+keymap("n", "öq", function () cmd[[normal mzöCOM`z]] end)
 keymap("n", "cq", function ()
-	cmd[[normal mzdcom`z]]
+	cmd[[normal mzdCOM`z]]
 	cmd[[normal Q]]
 	cmd[[startinsert!]]
 end)
@@ -348,3 +349,99 @@ keymap("n", "<leader>ow", ":set wrap! <CR>")
 -- TERMINAL MODE
 keymap("n", "zt", ":10split<CR>:terminal<CR>")
 keymap("n", "zz", ":w<CR>:!acp ") -- shell function, enabled via .zshenv
+
+
+--------------------------------------------------------------------------------
+
+-- BUILD SYSTEM
+keymap("n", "<leader>r", function()
+	cmd[[write]]
+
+	local filename = fn.expand("%:t") ---@diagnostic disable-line: missing-parameter
+	if filename == "sketchybarrc" then
+		fn.system("brew services restart sketchybar")
+
+	elseif bo.filetype == "lua" then
+		local parentFolder = fn.expand("%:p:h") ---@diagnostic disable-line: missing-parameter
+		if not(parentFolder) then return end
+		if parentFolder:find("nvim") then
+			cmd[[write | source % | echo "Neovim config reloaded."]]
+		else
+			os.execute('open -g "hammerspoon://hs-reload"')
+		end
+
+	elseif bo.filetype == "yaml" then
+		os.execute[[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
+
+	elseif bo.filetype == "typescript" then
+		cmd[[!npm run build]]
+
+	elseif bo.filetype == "applescript" then
+		cmd[[:AppleScriptRun]]
+	else
+
+		print("No build system set.")
+	end
+end)
+--------------------------------------------------------------------------------
+
+-- q to close special windows
+autocmd("FileType", {
+	pattern = specialFiletypes,
+	callback = function ()
+		keymap("n", "q", ":close<CR>", {buffer = true, silent = true, nowait = true})
+	end
+})
+
+--------------------------------------------------------------------------------
+
+-- [H]orizontal Ruler
+keymap("n", "zh", function()
+	if not(b.hrComment) then
+		print("No hr for this filetype defined.")
+	elseif bo.filetype == "css" then
+		fn.append('.', b.hrComment) ---@diagnostic disable-line: param-type-mismatch
+
+		local lineNum = api.nvim_win_get_cursor(0)[1] + 2
+		local colNum = #b.hrComment[2] + 2
+		api.nvim_win_set_cursor(0, {lineNum, colNum})
+		cmd[[startinsert]]
+	else
+		fn.append('.', {b.hrComment, ""}) ---@diagnostic disable-line: param-type-mismatch
+		cmd[[normal! j]]
+	end
+end)
+
+augroup("horizontalRuler", {})
+autocmd( "FileType", {
+	group = "horizontalRuler",
+	pattern = {"json", "javascript", "typescript"},
+	callback = function() b.hrComment = "//──────────────────────────────────────────────────────────────────────────────" end
+})
+autocmd( "FileType", {
+	group = "horizontalRuler",
+	pattern = {"bash", "zsh", "sh", "yaml"},
+	callback = function() b.hrComment = "#───────────────────────────────────────────────────────────────────────────────" end
+})
+autocmd( "FileType", {
+	group = "horizontalRuler",
+	pattern = {"lua", "applescript"},
+	callback = function() b.hrComment = "--------------------------------------------------------------------------------" end
+})
+autocmd( "FileType", {
+	group = "horizontalRuler",
+	pattern = {"markdown"},
+	callback = function() b.hrComment = "---" end
+})
+autocmd( "FileType", {
+	group = "horizontalRuler",
+	pattern = {"css"},
+	callback = function() b.hrComment = {
+		"/* ───────────────────────────────────────────────── */",
+		"/* << ",
+		"──────────────────────────────────────────────────── */",
+		"",
+		"",
+	} end,
+})
+

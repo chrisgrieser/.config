@@ -21,11 +21,12 @@ keymap("n", "zz", ":syntax sync fromstart<CR>", {buffer = true})
 keymap("i", ",,", "<Plug>(emmet-expand-abbr)", {silent = true, buffer = true})
 
 
-keymap("n", "<leader>v", '^Ellct;') -- change [v]alue key
-keymap("n", "<leader>c", 'mzlEF.yEEp`z') -- double [c]lass under cursor
-keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>:nohl<CR>') -- delete class under cursor
+keymap("n", "<leader>v", '^Ellct;', {buffer = true}) -- change [v]alue key
+keymap("n", "<leader>c", 'mzlEF.yEEp`z', {buffer = true}) -- double [c]lass under cursor
+keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>:nohl<CR>', {buffer = true}) -- delete class under cursor
 
 -- toggle !important
+---@diagnostic disable: undefined-field, param-type-mismatch
 keymap("n", "<leader>i", function ()
 	local lineContent = fn.getline('.')
 	if lineContent:find("!important") then
@@ -34,6 +35,6 @@ keymap("n", "<leader>i", function ()
 		lineContent = lineContent:gsub(";", " !important;")
 	end
 	fn.setline(".", lineContent)
-	---@diagnostic enable: undefined-field, param-type-mismatch
 end, {buffer = true})
+---@diagnostic enable: undefined-field, param-type-mismatch
 

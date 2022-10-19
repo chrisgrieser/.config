@@ -104,7 +104,8 @@ cmp.setup({
 -- disable leading "-" and comments
 cmp.setup.filetype ("lua", {
 	enabled = function()
-		return fn.getline("."):match("%s*%-%-?") ---@diagnostic disable-line: undefined-field, param-type-mismatch
+		fn.getline()
+		return not(fn.getline("."):match(" %-%-?$")) ---@diagnostic disable-line: undefined-field, param-type-mismatch
 	end,
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
