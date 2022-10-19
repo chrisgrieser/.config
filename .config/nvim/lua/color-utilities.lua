@@ -6,7 +6,7 @@ ccc.setup{
 	win_opts	= { border = borderStyle },
 	highlighter = {
 		auto_enable = true,
-		excludes = {"packer"},
+		excludes = specialFiletypes,
 		max_byte = 2 * 1024 * 1024, -- 2mb
 		lsp = true,
 	},
