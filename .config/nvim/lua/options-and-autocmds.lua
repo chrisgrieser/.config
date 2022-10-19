@@ -58,6 +58,7 @@ opt.titlestring='%{expand(\"%:p\")} [%{mode()}]'
 -- width
 opt.textwidth = 80 -- used by `gq` and wrap
 opt.wrap = false
+opt.colorcolumn = "+1"
 
 -- files
 opt.hidden = true -- inactive buffers are only hidden, not unloaded

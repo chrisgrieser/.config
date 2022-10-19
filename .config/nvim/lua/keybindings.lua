@@ -249,10 +249,14 @@ keymap("n", "gz", "]s") -- next misspelling
 keymap("n", "gZ", "[s") -- prev misspelling
 keymap("n", "za", "1z=") -- Autocorrect word under cursor (= select 1st suggestion)
 
--- [O]verride Operator (vim.subversive)
-keymap("n", "ö", "<Plug>(SubversiveSubstitute)")
-keymap("n", "öö", "<Plug>(SubversiveSubstituteLine)")
-keymap("n", "Ö", "<Plug>(SubversiveSubstituteToEndOfLine)")
+-- [O]verride Operator (substitute.nvim)
+require("substitute").setup()
+local substi = require('substitute')
+keymap("n", "ö", substi."operator()<cr>")
+keymap("n", "öö", substi."line()<cr>")
+keymap("n", "Ö", substi."eol()<cr>")
+keymap("x", "ö", substi."visual()<cr>")
+
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", ':noautocmd normal!mz"zyy"zp`zj<CR>', {silent = true}) -- current line, ":noautocmd" to disable highlighted yank for this
