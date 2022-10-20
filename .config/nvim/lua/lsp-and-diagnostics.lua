@@ -34,6 +34,10 @@ end)
 
 function diagnosticFormat(diagnostic, mode)
 	local out
+	if diagnostic.source == "shellcheck" and diagnostic.code == 1071 then
+		return ""
+	end
+
 	if diagnostic.source == "stylelint" then
 		out = diagnostic.message -- stylelint already includes the code in the message
 	else
