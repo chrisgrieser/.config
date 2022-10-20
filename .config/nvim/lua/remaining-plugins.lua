@@ -2,7 +2,7 @@ require("utils")
 --------------------------------------------------------------------------------
 
 -- netrw
-g.netrw_browsex_viewer = "qlmanage -p" -- macOS' QuickLook
+g.netrw_browse_split = 0
 g.netrw_list_hide = '.*\\.DS_Store$,^./$,^../$' -- hide files created by macOS & current directory
 g.netrw_banner = 0 -- no ugly top banner
 g.netrw_liststyle = 3 -- tree style as default
