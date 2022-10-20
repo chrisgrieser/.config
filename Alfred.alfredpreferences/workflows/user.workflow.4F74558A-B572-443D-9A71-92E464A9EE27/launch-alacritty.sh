@@ -2,7 +2,7 @@
 # shellcheck disable=SC2154,SC2009
 export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 
-# if Finder or Sublime are frontmost, use those paths as working directory
+# if Finder is frontmost, use its path as working directory
 # (same is done from inside Marta, so not needed to be done here)
 FRONT_APP=$(osascript -e 'tell application "System Events" to set frontApp to (name of first process where it is frontmost)')
 
