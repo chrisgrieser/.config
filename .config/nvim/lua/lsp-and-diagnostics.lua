@@ -102,9 +102,12 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 	keymap('n', 'gS', ":SymbolsOutline<CR>", bufopts)
 	keymap('n', 'gy', telescope.lsp_type_definitions, bufopts)
 	keymap('n', '<leader>R', vim.lsp.buf.rename, bufopts)
-	keymap('n', '<leader>h', vim.lsp.buf.hover, bufopts) -- docs popup
 
-	if client.name ~= "cssls" then -- to not override the navigation marker search for css files
+	if client.name ~= "bashls" then -- don't override man page popup
+		keymap('n', '<leader>h', vim.lsp.buf.hover, bufopts) -- docs popup
+	end
+
+	if client.name ~= "cssls" then -- don't override navigation marker search for css files
 		keymap('n', 'gs', telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
 	end
 end
