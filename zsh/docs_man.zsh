@@ -1,9 +1,9 @@
 # search cht.sh for information
 # aggregates stackoverflow, tl;dr and many other help pages
-function cc () {
+function ch () {
 	QUERY=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
 	CHEAT_INFO=$(curl -s "https://cht.sh/$QUERY") # https://cht.sh/:help
-	CHEAT_CODE_ONLY=$(curl -s "https://cht.sh/$QUERY?T")
+	CHEAT_CODE_ONLY=$(curl -s "https://cht.sh/$QUERY?Q")
 	echo "$CHEAT_INFO" | less
 	echo "$CHEAT_CODE_ONLY" | pbcopy
 }
@@ -11,25 +11,25 @@ function cc () {
 # Better Man
 # first arg: command, second arg: search term
 function man () {
- 	CONFIG=~"/.config/alacritty/man-page.yml"
+	CONFIG=~"/.config/alacritty/man-page.yml"
 
 	if ! which alacritty &> /dev/null; then
 		echo "Not using Alacritty." ; return 1
 	elif ! which "$1" &> /dev/null; then
 		echo "Command '$1' not installed." ; return 1
- 	fi
+	fi
 
- 	local isBuiltIn=false
- 	[[ "$(which "$1")" =~ "built-in" ]] && isBuiltIn=true
- 	if [[ "$1" == "test" ]] || [[ "$1" == "kill" ]] ; then # builtIn command which *do* have a man page
- 		isBuiltIn=false
- 	fi
+	local isBuiltIn=false
+	[[ "$(which "$1")" =~ "built-in" ]] && isBuiltIn=true
+	if [[ "$1" == "test" ]] || [[ "$1" == "kill" ]] ; then # builtIn command which *do* have a man page
+		isBuiltIn=false
+	fi
 
 	# run in subshell to surpress output
- 	if [[ $isBuiltIn == true ]] && [[ -z "$2" ]] ; then
- 		(alacritty --config-file="$CONFIG" --title="built-in help: $1" --command less /usr/share/zsh/*/help/"$1" &)
- 	elif [[ $isBuiltIn == true ]] && [[ -n "$2" ]] ; then
- 		(alacritty --config-file="$CONFIG" --title="built-in help: $1" --command less --pattern="$2" /usr/share/zsh/*/help/"$1" &)
+	if [[ $isBuiltIn == true ]] && [[ -z "$2" ]] ; then
+		(alacritty --config-file="$CONFIG" --title="built-in help: $1" --command less /usr/share/zsh/*/help/"$1" &)
+	elif [[ $isBuiltIn == true ]] && [[ -n "$2" ]] ; then
+		(alacritty --config-file="$CONFIG" --title="built-in help: $1" --command less --pattern="$2" /usr/share/zsh/*/help/"$1" &)
 	elif [[ $isBuiltIn == false ]] && [[ -z "$2" ]] ; then
 		(alacritty --config-file="$CONFIG" --title="man: $1" --command man "$1" &)
 	else
