@@ -12,7 +12,8 @@ keymap("", "n", "%", opts) -- new file
 keymap("", "N", "d", opts) -- new directory
 keymap("", "<Esc>", ":q<CR>", opts) -- quit
 keymap("", "r", "R", opts) -- rename
-keymap("", "P", "<C-w>z", opts) -- close preview window
+
+
 keymap("", "<Space>", "x", opts) -- macOS QuickLook
 
 -- INFO there are also netrw options which need in remaining plugins
