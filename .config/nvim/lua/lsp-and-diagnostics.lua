@@ -11,7 +11,6 @@ local lsp_servers = {
 	"marksman", -- markdown
 	"jsonls",
 	"cssls",
-	"bashls",
 	-- REQUIRED: new servers also need to be set up further below
 }
 
@@ -34,10 +33,6 @@ end)
 
 function diagnosticFormat(diagnostic, mode)
 	local out
-	if diagnostic.source == "shellcheck" and diagnostic.code == 1071 then
-		return ""
-	end
-
 	if diagnostic.source == "stylelint" then
 		out = diagnostic.message -- stylelint already includes the code in the message
 	else
@@ -80,7 +75,7 @@ require("mason-lspconfig").setup({
 
 --------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
--- LSP Signature
+
 require"lsp_signature".setup{
 	floating_window = false,
 	hint_prefix = "﬍ ",
@@ -144,6 +139,7 @@ require("neodev").setup {
 		plugins = false,
 	}
 }
+
 -- https://github.com/sumneko/lua-language-server/wiki/Annotations#annotations
 -- https://github.com/sumneko/lua-language-server/wiki/Settings
 lspConfig['sumneko_lua'].setup{
@@ -209,9 +205,18 @@ lspConfig['jsonls'].setup{
 	capabilities = capabilities,
 }
 
-lspConfig['bashls'].setup{
-	on_attach = on_attach,
-	capabilities = capabilities,
-	filetypes = {"zsh", "sh"} -- force to work with zsh as well
-}
+-- lspConfig['bashls'].setup{
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- 	filetypes = {"zsh", "sh"}, -- force to work with zsh as well
+-- 	handlers = { -- disable shellcheck diagnostics (mostly)
+-- 		["textDocument/publishDiagnostics"] = vim.lsp.with(
+-- 			vim.lsp.diagnostic.on_publish_diagnostics, {
+-- 				virtual_text = false,
+-- 				underline = false,
+-- 				signs = false,
+-- 			}
+-- 		),
+-- 	},
+-- }
 
