@@ -12,9 +12,7 @@ keymap("", "n", "%", opts) -- new file
 keymap("", "N", "d", opts) -- new directory
 keymap("", "<Esc>", ":q<CR>", opts) -- quit
 keymap("", "r", "R", opts) -- rename
-
-
-keymap("", "<Space>", "x", opts) -- macOS QuickLook
+keymap("", "i", "qf", opts) -- info
 
 -- INFO there are also netrw options which need in remaining plugins
 
