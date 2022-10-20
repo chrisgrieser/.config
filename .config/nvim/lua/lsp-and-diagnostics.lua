@@ -11,18 +11,9 @@ local lsp_servers = {
 	"marksman", -- markdown
 	"jsonls",
 	"cssls",
+	"bashls",
 	-- REQUIRED: new servers also need to be set up further below
 }
-
---------------------------------------------------------------------------------
--- LSP Signature
-require"lsp_signature".setup{
-	floating_window = false,
-	hint_prefix = "﬍ ",
-	hint_scheme = "Comment", -- highlight group that is applied to the hint
-}
-
-keymap({"n", "i", "v"}, '<C-s>', function () vim.lsp.buf.signature_help() end)
 
 --------------------------------------------------------------------------------
 -- DIAGNOTICS (in general, also applies to nvim-lint etc.)
@@ -68,7 +59,7 @@ vim.diagnostic.config{
 keymap("n", "<leader>d", function () vim.diagnostic.open_float{focusable=false} end)
 
 --------------------------------------------------------------------------------
-
+-- Mason Config
 require("mason").setup({
 	ui = {
 		border = borderStyle,
@@ -76,13 +67,23 @@ require("mason").setup({
 	}
 })
 require('mason-update-all').setup()
---------------------------------------------------------------------------------
 
 require("mason-lspconfig").setup({
 	-- mason-lspconfig uses the lspconfig servernames, not mason servernames
 	-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
 	ensure_installed = lsp_servers,
 })
+
+--------------------------------------------------------------------------------
+-- LSP KEYBINDINGS
+-- LSP Signature
+require"lsp_signature".setup{
+	floating_window = false,
+	hint_prefix = "﬍ ",
+	hint_scheme = "Comment", -- highlight group that is applied to the hint
+}
+
+keymap({"n", "i", "v"}, '<C-s>', function () vim.lsp.buf.signature_help() end)
 
 -- fallback for languages without an action LSP
 keymap('n', 'gs', telescope.treesitter, {silent = true})
@@ -141,11 +142,11 @@ require("neodev").setup {
 lspConfig['sumneko_lua'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
-	settings = { -- https://github.com/sumneko/lua-language-server/wiki/Settings
+	settings = {
 	Lua = {
 		runtime = { version = 'LuaJIT' }, -- used by neovim
 		completion = {
-			callSnippet = "Both",
+			callSnippet = "Replace",
 			keywordSnippet = "Replace",
 			displayContext = 3,
 			postfix = "@",
@@ -163,11 +164,11 @@ lspConfig['sumneko_lua'].setup{
 				home.."/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
 			}
 		},
-		telemetry = { enable = false },
 		hint = {
 			enable = true,
 			settype = true
 		},
+		telemetry = { enable = false },
 	}
 }
 }
@@ -199,5 +200,11 @@ lspConfig['marksman'].setup{
 lspConfig['jsonls'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
+}
+
+lspConfig['bashls'].setup{
+	on_attach = on_attach,
+	capabilities = capabilities,
+	filetypes = {"zsh", "sh"} -- force to work with zsh as well
 }
 
