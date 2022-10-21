@@ -160,11 +160,6 @@ keyBindings {
         src "~/.Trash"
         mode "newTab"
     }
-    "Cmd+Z" {
-        id "core.open.folder"
-        src "~/.Trash"
-        mode "newTab"
-    }
     "x" "core.pane.swap"
     "Return" "core.rename"
     "Cmd+Return" "core.open"
@@ -186,7 +181,6 @@ keyBindings {
     "Shift+Z" "core.extract"
     "Shift+Space" "core.select.move.down"
 
-    "Cmd+G" "gadget.action.git.acp"
     "Cmd+Shift+Opt+Ctrl+T" "gadget.action.open.alacritty"
     "Ctrl+H" "core.back"
     "Ctrl+O" "core.back"

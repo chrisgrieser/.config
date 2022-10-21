@@ -719,6 +719,19 @@ rules:
               - option
         to:
           - shell_command: /Applications/Marta.app/Contents/Resources/launcher --existing-tab "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+      # cmd+z: pseudo undo
+      - type: basic
+        from:
+          key_code: "y" # z and y exchanged due to German keyboard
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - shell_command: 'osascript "$HOME/dotfiles/Marta/scripts/put-file-back.applescript"'
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^org\.yanex\.marta$
   - description: "🅰️👨‍💻 Script Editor"
     manipulators:
       # Quick Closing skipping save prompt

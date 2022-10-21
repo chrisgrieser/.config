@@ -194,12 +194,14 @@ lspConfig['tsserver'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 }
-
 lspConfig['marksman'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 }
-
+lspConfig['yamlls'].setup{
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
 lspConfig['jsonls'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
