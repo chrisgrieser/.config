@@ -1357,6 +1357,30 @@
               "shell_command": "/Applications/Marta.app/Contents/Resources/launcher --existing-tab \"$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/\""
             }
           ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "y",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript \"$HOME/dotfiles/Marta/scripts/put-file-back.applescript\""
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^org\\.yanex\\.marta$"
+              ]
+            }
+          ]
         }
       ]
     },
