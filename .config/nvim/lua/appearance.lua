@@ -75,7 +75,7 @@ local function currentFile() -- using this function instead of default filename,
 end
 
 local function mixedIndentation()
-	if bo.filetype == "css" or vim.tbl_contains(specialFiletypes, bo.filetype) then return "" end
+	if bo.filetype == "css" or bo.filetype == "markdown" or vim.tbl_contains(specialFiletypes, bo.filetype) then return "" end
 
 	local hasTabs = fn.search("^\t", "nw") ~= 0
 	local hasSpaces = fn.search("^ ", "nw") ~= 0
