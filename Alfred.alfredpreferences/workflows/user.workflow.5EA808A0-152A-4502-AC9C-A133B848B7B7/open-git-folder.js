@@ -79,7 +79,8 @@ repoArray.forEach(localRepoFilePath => {
 		if (readme) {
 			repoName = readme
 				.split("\n")
-				.find(line => line.startsWith("# "));
+				.find(line => line.startsWith("# "))
+				.replace(/^#+ /, "");
 			if (!repoName) repoName = "Heading Missing";
 		}
 		else repoName = localRepoFilePath;
