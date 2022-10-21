@@ -89,7 +89,7 @@ function officeWake (eventType)
 	if eventType == hs.caffeinate.watcher.screensDidUnlock then
 		gitDotfileSync("--submodules")
 		gitVaultSync()
-		officeModeLayout() ---@diagnostic disable-line: undefined-global
+		officeModeLayout()
 	end
 end
 
@@ -108,8 +108,8 @@ function homeWake (eventType)
 		gitVaultSync()
 
 		-- should run after git sync, to avoid conflicts
-		if isProjector() then movieModeLayout() ---@diagnostic disable-line: undefined-global
-		else homeModeLayout() end ---@diagnostic disable-line: undefined-global
+		if isProjector() then movieModeLayout()
+		else homeModeLayout() end
 	end
 end
 
@@ -168,6 +168,7 @@ biweeklyTimer = hs.timer.doAt("02:00", "03d", function()
 			run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles" with argument "no sound"
 		end tell
 	]])
+	hs.execute('cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/"')
 	log ("🕝2️⃣ biweekly ("..deviceName()..")", "./logs/some.log")
 	hs.loadSpoon('EmmyLua') -- so it runs not as often
 end, true)
@@ -181,8 +182,12 @@ dailyMorningTimer = hs.timer.doAt("08:00", "01d", function ()
 end)
 
 function projectorScreensaverStop (eventType)
-	if isProjector() and (eventType == hs.caffeinate.watcher.screensaverDidStop or eventType == hs.caffeinate.watcher.screensaverDidStart) then
-		iMacDisplay:setBrightness(0)
+	if (eventType == hs.caffeinate.watcher.screensaverDidStop or eventType == hs.caffeinate.watcher.screensaverDidStart) then
+		runDelayed(3, function ()
+			if isProjector() then
+				iMacDisplay:setBrightness(0)
+			end
+		end)
 	end
 end
 projectorScreensaverWatcher = hs.caffeinate.watcher.new(projectorScreensaverStop)
