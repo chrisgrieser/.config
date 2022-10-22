@@ -144,7 +144,6 @@ autocmd("TermClose", {
 -- Skeletons (Templates)
 augroup("Templates", {})
 local filestypesWithSkeletons = {"lua", "sh", "applescript", "js"}
-
 for i = 1, #filestypesWithSkeletons do
 	local ft = filestypesWithSkeletons[i]
 	autocmd("BufNewFile", {

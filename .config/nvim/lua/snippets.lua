@@ -16,32 +16,33 @@ ls.setup {
 	updateevents = "TextChanged, TextChangedI", -- for dynamic snippets, it updates as you type
 }
 
-ls.filetype_extend("ts", {"js"}) -- typescript uses all javascript snippets
-ls.filetype_extend("zsh", {"sh"})
-
 --------------------------------------------------------------------------------
 -- SNIPPETS
 
-ls.add_snippets("all", {
-	s("##", { t { "#!/usr/bin/env python", "" }, i(0), }),
-}, { type = "autosnippets" })
-
 -- Shell (zsh)
 ls.add_snippets("sh", {
+	s("##", { t{'#!/usr/bin/env zsh', ""}, i(0) }),
 	s("##", { t{'#!/usr/bin/env zsh', ""}, i(0) }),
 }, { type = "autosnippets" })
 
 -- AppleScript
 ls.add_snippets("applescript", {
-	s("##", { t{'#!/usr/bin/env osascript'}, i(0) }),
+	s("##", { t{'#!/usr/bin/env osascript', ""}, i(0) }),
 }, { type = "autosnippets" })
 
 -- JavaScript
-ls.add_snippets("js", {
-	s("##", { t{'#!/usr/bin/env osascript -l JavaScript'}, i(0) }),
+ls.add_snippets("javascript", {
+	s("##", { t{'#!/usr/bin/env osascript -l JavaScript', ""}, i(0) }),
 	s("rrr", { t('.replace(//g,"")') }),
 }, { type = "autosnippets" })
 
-ls.add_snippets("js", {
+ls.add_snippets("javascript", {
 	s("ternary", { i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else") })
 })
+
+--------------------------------------------------------------------------------
+
+-- needs to come after snippet definitions
+ls.filetype_extend("typescript", {"javascript"}) -- typescript uses all javascript snippets
+ls.filetype_extend("zsh", {"sh"})
+

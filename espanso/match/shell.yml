@@ -25,9 +25,6 @@ matches:
       	echo "short string is part of long string"
       fi
     label: 🐚 String Includes
-  - triggers: ["!zsh", "#!"]
-    replace: "#!/usr/bin/env zsh\n"
-    label: 🐚 zsh Shebang
   - replace: '[[ "$LONG_STRING" =~ "$SHORT_STRING" ]]'
     label: 🐚 String contains other string
   - trigger: "!sed"
