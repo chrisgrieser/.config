@@ -142,20 +142,27 @@ autocmd("TermClose", {
 --------------------------------------------------------------------------------
 
 -- Skeletons (Templates)
+augroup("Templates", {})
+local filestypesWithSkeletons = {"lua", "sh", "applescript", "js"}
+
+for i = 1, #filestypesWithSkeletons do
+	local ft = filestypesWithSkeletons[i]
+	autocmd("BufNewFile", {
+		group = "Templates",
+		pattern = "*."..ft,
+		command = "0r ~/.config/nvim/templates/skeleton."..ft.." | normal! G",
+	})
 -- BufReadPost + empty file as additional condition to also auto-insert
 -- skeletons created by other apps
-augroup("Templates", {})
-autocmd({"BufReadPost", "BufNewFile"}, {
-	group = "Templates",
-	pattern = "*",
-	callback = function ()
-		local filestypesWithSkeletons = {"lua", "sh", "applescript", "js"}
-		local fileHasSkeleton = vim.tbl_contains(filestypesWithSkeletons, bo.filetype)
-		local fileIsEmpty = fn.getfsize(fn.expand("%")) < 2 -- 2 to account for linebreak
-		if fileHasSkeleton and fileIsEmpty then
-			cmd("0r ~/.config/nvim/templates/skeleton."..bo.filetype)
-			cmd[[normal! G]]
+	autocmd("BufReadPost", {
+		group = "Templates",
+		pattern = "*."..ft,
+		callback = function ()
+			local fileIsEmpty = fn.getfsize(fn.expand("%")) < 2 -- 2 to account for linebreak
+			if fileIsEmpty then
+				cmd("0r ~/.config/nvim/templates/skeleton."..ft.." | normal! G")
+			end
 		end
-	end,
-})
+	})
+end
 
