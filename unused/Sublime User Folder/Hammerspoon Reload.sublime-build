@@ -1,7 +1,0 @@
-{
-	"selector": "source.lua",
-	// has to open Sublime again, since using URI schemes makes Sublime loose focus
-	"shell_cmd": "open 'hammerspoon://hs-reload'",
-}
-
-

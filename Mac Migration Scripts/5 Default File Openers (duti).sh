@@ -10,9 +10,9 @@ duti -s com.apple.automator.Obsidian-Opener md all
 
 # video & mp3
 videoplayerID="com.colliderli.iina"
+duti -s "$videoplayerID" vid all
 duti -s "$videoplayerID" mp4 all
 duti -s "$videoplayerID" mp3 all
-duti -s "$videoplayerID" vid all
 duti -s "$videoplayerID" mov all
 duti -s "$videoplayerID" m3u all
 duti -s "$videoplayerID" m3u8 all

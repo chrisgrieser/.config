@@ -1,5 +1,0 @@
-// These settings override both User and Default settings for the Bibtex syntax
-{
-	"spell_check": false,
-	"word_wrap": false,
-}

@@ -65,10 +65,12 @@ keymap("n", "gh", ":Gitsigns next_hunk<CR>")
 keymap("n", "gH", ":Gitsigns next_prev<CR>")
 
 -- Sneak: enable clever-f-style movement
-keymap("", "f", "<Plug>Sneak_f")
-keymap("", "F", "<Plug>Sneak_F")
-keymap("", "t", "<Plug>Sneak_t")
-keymap("", "T", "<Plug>Sneak_T")
+-- keymap("", "f", "<Plug>Sneak_f")
+-- keymap("", "F", "<Plug>Sneak_F")
+-- keymap("", "t", "<Plug>Sneak_t")
+-- keymap("", "T", "<Plug>Sneak_T")
+
+require('leap').add_default_mappings()
 
 -- Search
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
