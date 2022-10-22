@@ -22,13 +22,32 @@ ls.setup {
 -- Shell (zsh)
 ls.add_snippets("sh", {
 	s("##", { t{'#!/usr/bin/env zsh', ""}, i(0) }),
-	s("##", { t{'#!/usr/bin/env zsh', ""}, i(0) }),
 }, { type = "autosnippets" })
+
+ls.add_snippets("sh", {
+	s("resolve home", { t('resolved_path="${file_path/#\\~/$HOME}"')}),
+})
+
+-- Lua
+ls.add_snippets("lua", {
+	s("resolve home", { t('os.getenv("HOME")')}),
+})
 
 -- AppleScript
 ls.add_snippets("applescript", {
 	s("##", { t{'#!/usr/bin/env osascript', ""}, i(0) }),
 }, { type = "autosnippets" })
+
+ls.add_snippets("applescript", {
+	s("resolve home", { t(
+		'# resolve ~', 
+		'set unresolved_path to "~/Documents"', 
+		"set AppleScript's text item delimiters to \"~/\"",
+		'set theTextItems to every text item of unresolved_path',
+		"set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))", 
+		'set resolved_path to theTextItems as string'),
+	})
+})
 
 -- JavaScript
 ls.add_snippets("javascript", {
@@ -37,7 +56,11 @@ ls.add_snippets("javascript", {
 }, { type = "autosnippets" })
 
 ls.add_snippets("javascript", {
-	s("ternary", { i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else") })
+	s("ternary", { i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else") }),
+	s("resolve home (JXA)", { 
+		t('const vaultPath = $.getenv("vault_path").replace(/^~/, app.pathTo("home folder"));', ''),
+		i(0)
+	}),
 })
 
 --------------------------------------------------------------------------------
