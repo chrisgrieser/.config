@@ -78,7 +78,7 @@ keymap("", "T", "<Plug>Sneak_T")
 -- Search
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "/", "/\v") -- more PCRE-like regex patterns (:h magic)
-keymap("n", "<Esc>", "lh:nohl<CR>:echo<CR>", {silent = true}) -- clear highlights & shortmessage, lh clears hover window
+keymap("n", "<Esc>", ":nohl<CR>:echo<CR>lh", {silent = true}) -- clear highlights & shortmessage, lh clears hover window
 keymap("", "+", "*") -- no more modifier key on German Keyboard
 
 -- URLs
