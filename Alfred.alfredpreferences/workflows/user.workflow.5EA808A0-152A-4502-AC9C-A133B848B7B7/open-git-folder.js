@@ -96,3 +96,4 @@ repoArray.forEach(localRepoFilePath => {
 });
 
 JSON.stringify({ items: jsonArray });
+
