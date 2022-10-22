@@ -1,7 +1,0 @@
-{
-    "scope": "source.shell",
-    "completions": [
-    	"osascript -e ''",
-    	"[[ -e \"$\" ]] && exit 0",
-    ]
-}

@@ -1,4 +1,0 @@
-{
-	"selector": "source.yaml",
-	"shell_cmd": "osascript -l JavaScript \"\\$HOME/.config/karabiner/build-karabiner-config.js\"",
-}

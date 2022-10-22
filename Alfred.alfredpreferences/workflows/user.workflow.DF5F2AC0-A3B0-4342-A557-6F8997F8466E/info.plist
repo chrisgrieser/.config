@@ -1076,7 +1076,7 @@ return "{query}"</string>
 	<key>variables</key>
 	<dict>
 		<key>custom_icon_folder</key>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Custom App Icons</string>
+		<string>~/dotfiles/Custom App Icons</string>
 		<key>icon_folder</key>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Icon Collection</string>
 		<key>pwa_folder</key>

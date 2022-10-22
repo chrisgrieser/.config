@@ -1,6 +1,0 @@
-// These settings override both User and Default settings for the Python syntax
-{
-	"disable_default_completions": true, // for lsp
-	"auto_complete_use_history": false,
-	"auto_complete_use_index": false,
-}

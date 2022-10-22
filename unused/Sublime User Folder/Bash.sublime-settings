@@ -1,5 +1,0 @@
-// These settings override both User and Default settings for the Bash syntax
-{
-	"draw_white_space": ["selection", "isolated_mixed"],
-	"show_panel_on_build": true,
-}

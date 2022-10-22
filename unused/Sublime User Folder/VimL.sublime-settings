@@ -1,4 +1,0 @@
-{
-	// as " is a comment, no need to auto-match them
-	"auto_match_enabled": false,
-}
