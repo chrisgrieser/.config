@@ -84,7 +84,6 @@ keymap("", "+", "*") -- no more modifier key on German Keyboard
 -- URLs
 keymap("n", "gü", "/http.*<CR>") -- goto next
 keymap("n", "gÜ", "?http.*<CR>") -- goto prev
-keymap("n", ",ü", "/http.*<CR>gx", {remap = true}) -- open next URL, remap needed as `gx` is netrw mapping
 
 -- Marks
 keymap("", "ä", "`") -- Goto Mark
@@ -310,9 +309,6 @@ keymap("i", "<C-a>", '<Esc>I') -- BoL
 keymap("c", "<C-a>", '<Home>')
 keymap("c", "<C-e>", '<End>')
 keymap("c", "<C-u>", '<C-e><C-u>') -- clear
-
--- quicker typing
-keymap("i", "!!", ' {}<Left><CR><Esc>O') -- {} with proper linebreak
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
