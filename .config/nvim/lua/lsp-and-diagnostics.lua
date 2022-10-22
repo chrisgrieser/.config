@@ -33,6 +33,9 @@ end)
 
 function diagnosticFormat(diagnostic, mode)
 	local out
+	if diagnostic.source:match(".$") then -- remove trailing dot for some sources
+		diagnostic.source = diagnostic.source:sub(1, -2)
+	end
 	if diagnostic.source == "stylelint" then
 		out = diagnostic.message -- stylelint already includes the code in the message
 	else
@@ -47,6 +50,7 @@ end
 vim.diagnostic.config{
 	virtual_text = {
 		format = function (diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
+		severity = {},
 	},
 	float = {
 		border = borderStyle,
@@ -206,19 +210,4 @@ lspConfig['jsonls'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 }
-
--- lspConfig['bashls'].setup{
--- 	on_attach = on_attach,
--- 	capabilities = capabilities,
--- 	filetypes = {"zsh", "sh"}, -- force to work with zsh as well
--- 	handlers = { -- disable shellcheck diagnostics (mostly)
--- 		["textDocument/publishDiagnostics"] = vim.lsp.with(
--- 			vim.lsp.diagnostic.on_publish_diagnostics, {
--- 				virtual_text = false,
--- 				underline = false,
--- 				signs = false,
--- 			}
--- 		),
--- 	},
--- }
 
