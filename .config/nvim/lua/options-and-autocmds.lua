@@ -1,3 +1,6 @@
+require("utils")
+--------------------------------------------------------------------------------
+
 -- Default vim settings: https://neovim.io/doc/user/vim_diff.html
 require("utils")
 -------------------------------------------------------------------------------
@@ -143,29 +146,15 @@ autocmd("TermClose", {
 
 -- Skeletons (Templates)
 augroup("Templates", {})
-autocmd("BufNewFile", {
+autocmd({"BufReadPost", "BufNewFile"}, {
 	group = "Templates",
-	pattern = "*.js",
-	command = "0r ~/.config/nvim/templates/skeleton.js",
-})
-autocmd("BufNewFile", {
-	group = "Templates",
-	pattern = "*.applescript",
-	command = "0r ~/.config/nvim/templates/skeleton.applescript",
-})
-autocmd("BufNewFile", {
-	group = "Templates",
-	pattern = "*.sh",
-	command = "0r ~/.config/nvim/templates/skeleton.sh",
-})
-autocmd("BufNewFile", {
-	group = "Templates",
-	pattern = "*.lua",
-	command = "0r ~/.config/nvim/templates/skeleton.lua",
-})
-autocmd("BufReadPost", {
-	group = "Templates",
-	pattern = "*.lua",
-	command = "0r ~/.config/nvim/templates/skeleton.lua",
+	pattern = "*",
+	callback = function ()
+		local filestypesWithSkeletons = {"lua", "sh", "applescript", "js"}
+		if not(vim.tbl_contains(filestypesWithSkeletons, bo.filetype)) then return end
+			
+		cmd("0r ~/.config/nvim/templates/skeleton."..bo.filetype)
+		cmd[[normal! G]]
+	end,
 })
 
