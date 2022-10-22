@@ -192,7 +192,6 @@ keymap("n", "<BS>", function() -- reduce multiple blank lines to exactly one
 		print("Line not empty.")
 	end
 end)
-keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 
 -- Indention
 keymap("n", "<Tab>", ">>")
@@ -295,6 +294,7 @@ g.splitjoin_split_mapping = '' -- disable default mappings
 g.splitjoin_join_mapping = ''
 keymap("n", "<leader>m", ":SplitjoinJoin<CR>")
 keymap("n", "<leader>s", ":SplitjoinSplit<CR>")
+keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 
 -- Undo
 keymap({"n", "v"}, "U", "<C-r>") -- redo
