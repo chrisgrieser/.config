@@ -65,12 +65,12 @@ keymap("n", "gh", ":Gitsigns next_hunk<CR>")
 keymap("n", "gH", ":Gitsigns next_prev<CR>")
 
 -- Sneak: enable clever-f-style movement
--- keymap("", "f", "<Plug>Sneak_f")
--- keymap("", "F", "<Plug>Sneak_F")
--- keymap("", "t", "<Plug>Sneak_t")
--- keymap("", "T", "<Plug>Sneak_T")
-
-require('leap').add_default_mappings()
+keymap("", "ö", "<Plug>Sneak_s")
+keymap("", "Ö", "<Plug>Sneak_S")
+keymap("", "f", "<Plug>Sneak_f")
+keymap("", "F", "<Plug>Sneak_F")
+keymap("", "t", "<Plug>Sneak_t")
+keymap("", "T", "<Plug>Sneak_T")
 
 -- Search
 keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
@@ -81,6 +81,7 @@ keymap("", "+", "*") -- no more modifier key on German Keyboard
 -- URLs
 keymap("n", "gü", "/http.*<CR>") -- goto next
 keymap("n", "gÜ", "?http.*<CR>") -- goto prev
+keymap("n", ",ü", "/http.*<CR>gx", {remap = true}) -- open next URL, remap needed as `gx` is netrw mapping
 
 -- Marks
 keymap("", "ä", "`") -- Goto Mark
@@ -175,7 +176,7 @@ require('Comment').setup{
 keymap("n", "dq", "mzdCOM`z", {remap = true})
 keymap("n", "dq", "mzdCOM`z", {remap = true})
 keymap("n", "yq", "mzyCOM`z", {remap = true})
-keymap("n", "öq", "mzöCOM`z", {remap = true})
+keymap("n", "sq", "mzsCOM`z", {remap = true})
 keymap("n", "cq", "mzdCOMxQ", {remap = true}) -- using delete to preserve commentstring
 
 -- Whitespace Control
@@ -261,14 +262,13 @@ keymap("n", "gz", "]s") -- next misspelling
 keymap("n", "gZ", "[s") -- prev misspelling
 keymap("n", "za", "1z=") -- Autocorrect word under cursor (= select 1st suggestion)
 
--- [O]verride Operator (substitute.nvim)
+-- [S]ubstitute Operator (substitute.nvim)
 local substi = require('substitute')
 substi.setup()
-keymap("n", "ö", substi.operator)
-keymap("n", "öö", substi.line)
-keymap("n", "Ö", substi.eol)
-keymap("x", "ö", substi.visual)
-
+keymap("n", "s", substi.operator)
+keymap("n", "ss", substi.line)
+keymap("n", "S", substi.eol)
+keymap("x", "s", substi.visual)
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", ':noautocmd normal!mz"zyy"zp`zj<CR>', {silent = true}) -- current line, ":noautocmd" to disable highlighted yank for this

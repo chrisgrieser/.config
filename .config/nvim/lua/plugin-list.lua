@@ -88,8 +88,7 @@ function PluginList ()
 
 	-- Navigation
 	use "mg979/vim-visual-multi" -- multi-cursor
-	-- use "justinmk/vim-sneak"
-	use "ggandor/leap.nvim"
+	use "justinmk/vim-sneak"
 	use "simrat39/symbols-outline.nvim" -- outline view for symbols
 
 	-- Editing

@@ -163,4 +163,9 @@ autocmd("BufNewFile", {
 	pattern = "*.lua",
 	command = "0r ~/.config/nvim/templates/skeleton.lua",
 })
+autocmd("BufReadPost", {
+	group = "Templates",
+	pattern = "*.lua",
+	command = "0r ~/.config/nvim/templates/skeleton.lua",
+})
 
