@@ -7,27 +7,35 @@ local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
 
---------------------------------------------------------------------------------
-
 keymap({"i", "s"}, "<C-s>", function()
 	if ls.expand_or_jumpable() then ls.expand_or_jump() end
 end, { silent = true })
 
 ls.setup {
 	enable_autosnippets = true,
-	-- updateevents = "TextChanged, TextChangedI", -- for dynamic snippets, it updates as you type!
-
-	-- This tells LuaSnip to remember to keep around the last snippet.
-	-- You can jump back into it even if you move outside of the selection
-	history = true,
-
+	updateevents = "TextChanged, TextChangedI", -- for dynamic snippets, it updates as you type
 }
+
+ls.filetype_extend("ts", {"js"}) -- typescript uses all javascript snippets
+ls.filetype_extend("zsh", {"sh"})
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
 
-ls.add_snippets("all", {
-	s("rrr", { t('.replace(//g,"$1")') }),
+-- Shell (zsh)
+ls.add_snippets("sh", {
+	s("##", { t('#!/usr/bin/env zsh') }),
+}, { type = "autosnippets" })
+
+-- AppleScript
+ls.add_snippets("applescript", {
+	s("##", { t('#!/usr/bin/env osascript') }),
+}, { type = "autosnippets" })
+
+-- JavaScript
+ls.add_snippets("js", {
+	s("##", { t('#!/usr/bin/env osascript -l JavaScript') }),
+	s("rrr", { t('.replace(//g,"")') }),
 }, { type = "autosnippets" })
 
 ls.add_snippets("js", {
