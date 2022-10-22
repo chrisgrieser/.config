@@ -151,7 +151,7 @@ autocmd({"BufReadPost", "BufNewFile"}, {
 	callback = function ()
 		local filestypesWithSkeletons = {"lua", "sh", "applescript", "js"}
 		local fileHasSkeleton = vim.tbl_contains(filestypesWithSkeletons, bo.filetype)
-		local fileIsEmpty = fn.getfsize(fn.expand("%")) < 2
+		local fileIsEmpty = fn.getfsize(fn.expand("%")) < 2 #!/usr/bin/env osascript -l JavaScript
 		if fileHasSkeleton and fileIsEmpty then
 			cmd("0r ~/.config/nvim/templates/skeleton."..bo.filetype)
 			cmd[[normal! G]]

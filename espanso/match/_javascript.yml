@@ -2,8 +2,6 @@
 # ------------------------------------------
 
 matches:
-  - trigger: ".rr"
-    replace: ".replace(/$|$/g, \"\");"
   - replace: "[...new Set(myArray)]"
     label: 🏝 Filter Duplicates / Keep Uniques in Array
   - trigger: "!capitalize"
