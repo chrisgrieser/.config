@@ -3,8 +3,8 @@ require("appearance")
 --------------------------------------------------------------------------------
 
 -- BASE CONFIG
--- local darkTheme = "tokyonight-moon"
-local darkTheme = "kanagawa"
+local darkTheme = "tokyonight-moon"
+-- local darkTheme = "kanagawa"
 local lightTheme = "dawnfox"
 
 g.gui_font_default_size = 25.2
@@ -28,7 +28,7 @@ local function dark()
 	opt.background = 'dark' ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.97
 
-	cmd[[hi rainbowcol1 guifg=#7e8a95]] -- kanagawa
+	cmd[[hi rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets...
 	customHighlights()
 end
 
