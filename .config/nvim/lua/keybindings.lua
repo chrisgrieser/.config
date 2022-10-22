@@ -174,7 +174,7 @@ require('Comment').setup{
 -- overlap in visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
--- requires remap for for treesitter and comments.nvim mappings
+-- requires remap for treesitter and comments.nvim mappings
 keymap("n", "dq", "mzdCOM`z", {remap = true})
 keymap("n", "dq", "mzdCOM`z", {remap = true})
 keymap("n", "yq", "mzyCOM`z", {remap = true})
