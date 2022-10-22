@@ -1,5 +1,8 @@
 require("utils")
 --------------------------------------------------------------------------------
+
+require("utils")
+--------------------------------------------------------------------------------
 -- META
 g.mapleader = ','
 
@@ -64,7 +67,7 @@ keymap("n", "<C-l>", "<C-i>") -- Forward
 keymap("n", "gh", ":Gitsigns next_hunk<CR>")
 keymap("n", "gH", ":Gitsigns next_prev<CR>")
 
--- Sneak: enable clever-f-style movement
+-- Sneak
 keymap("", "ö", "<Plug>Sneak_s")
 keymap("", "Ö", "<Plug>Sneak_S")
 keymap("", "f", "<Plug>Sneak_f")
