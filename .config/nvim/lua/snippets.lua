@@ -22,19 +22,23 @@ ls.filetype_extend("zsh", {"sh"})
 --------------------------------------------------------------------------------
 -- SNIPPETS
 
+ls.add_snippets("all", {
+	s("##", { t { "#!/usr/bin/env python", "" }, i(0), }),
+}, { type = "autosnippets" })
+
 -- Shell (zsh)
 ls.add_snippets("sh", {
-	s("##", { t('#!/usr/bin/env zsh') }),
+	s("##", { t{'#!/usr/bin/env zsh', ""}, i(0) }),
 }, { type = "autosnippets" })
 
 -- AppleScript
 ls.add_snippets("applescript", {
-	s("##", { t('#!/usr/bin/env osascript') }),
+	s("##", { t{'#!/usr/bin/env osascript'}, i(0) }),
 }, { type = "autosnippets" })
 
 -- JavaScript
 ls.add_snippets("js", {
-	s("##", { t('#!/usr/bin/env osascript -l JavaScript') }),
+	s("##", { t{'#!/usr/bin/env osascript -l JavaScript'}, i(0) }),
 	s("rrr", { t('.replace(//g,"")') }),
 }, { type = "autosnippets" })
 
