@@ -3,62 +3,61 @@ require("utils")
 --------------------------------------------------------------------------------
 
 local ls = require("luasnip")
-local pars = ls.parser.parse_snippet -- vs-code-style snippets
--- local s = ls.snippet -- luasnippet-style snippets
--- local t = ls.text_node
--- local i = ls.insert_node
+local add = ls.add_snippets
+local snip = ls.parser.parse_snippet -- vs-code-style snippets for future-proofness
 
 ls.setup {
 	enable_autosnippets = true,
-	updateevents = "TextChanged, TextChangedI", -- for dynamic snippets, it updates as you type
 }
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
 ls.cleanup() -- clears all snippets for writing snippets
 
--- Shell (zsh)
-ls.add_snippets("sh", {
-	pars("##", "#!/usr/bin/env zsh\n$0"),
+
+add("all", {
+	snip("!!", "{\n\t$0\n\\}"),
 }, { type = "autosnippets" })
 
-ls.add_snippets("sh", {
-	pars("resolve home",'resolved_path="${file_path/#\\~/$HOME}"'),
+-- Shell (zsh)
+add("sh", {
+	snip("##", "#!/usr/bin/env zsh\n$0"),
+}, { type = "autosnippets" })
+
+add("sh", {
+	snip("resolve home",'resolved_path="${file_path/#\\~/$HOME}"'),
 })
 
 -- Lua
-ls.add_snippets("lua", {
-	pars("for", "for i=1, #${1:Stuff} do\n\t$0\nend"),
-	pars("resolve home", 'os.getenv("HOME")'),
+add("lua", {
+	snip("for", "for i=1, #${1:Stuff} do\n\t$0\nend"),
+	snip("resolve home", 'os.getenv("HOME")'),
 })
 
 -- AppleScript
-ls.add_snippets("applescript", {
-	pars("##", "#!/usr/bin/env osascript\n$0"),
+add("applescript", {
+	snip("##", "#!/usr/bin/env osascript\n$0"),
 }, { type = "autosnippets" })
 
-ls.add_snippets("applescript", {
-	pars("resolve home",
+add("applescript", {
+	snip("resolve home",
 		'set unresolved_path to "~/Documents"'..
 		"set AppleScript's text item delimiters to \"~/\""..
 		'set theTextItems to every text item of unresolved_path'..
 		"set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))"..
-		'set resolved_path to theTextItems as string')
+		'set resolved_path to theTextItems as string'
 	),
-	s("resolve home", { t(
-		'# resolve ~',
-	})
 })
 
 -- JavaScript
-ls.add_snippets("javascript", {
-	pars("##", "#!/usr/bin/env osascript\n$0"),
-	pars({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:repl}")'),
+add("javascript", {
+	snip("##", "#!/usr/bin/env osascript\n$0"),
+	snip({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:repl}")'),
 }, { type = "autosnippets" })
 
-ls.add_snippets("javascript", {
-	pars("ternary", "${1:cond} ? ${2:true} : ${3:false}"),
-	pars("resolve home (JXA)",'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
+add("javascript", {
+	snip("ternary", "${1:cond} ? ${2:then} : ${3:else}"),
+	snip("resolve home (JXA)",'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 })
 
 --------------------------------------------------------------------------------

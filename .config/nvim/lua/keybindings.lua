@@ -311,7 +311,7 @@ keymap("c", "<C-e>", '<End>')
 keymap("c", "<C-u>", '<C-e><C-u>') -- clear
 
 -- quicker typing
-keymap("i", "!!", ' {}<Left><CR><Esc>O') -- {} with proper linebreak
+-- keymap("i", "!!", ' {}<Left><CR><Esc>O') -- {} with proper linebreak
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
