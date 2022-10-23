@@ -86,14 +86,14 @@ require"lsp_signature".setup{
 	hint_scheme = "Comment", -- highlight group that is applied to the hint
 }
 
-keymap({"n", "i", "v"}, '<C-s>', function () vim.lsp.buf.signature_help() end)
+keymap({"n", "i", "x"}, '<C-s>', function () vim.lsp.buf.signature_help() end)
 
 -- fallback for languages without an action LSP
 keymap('n', 'gs', telescope.treesitter, {silent = true})
 
 -- actions defined globally for null-ls
 keymap('n', '<leader>a', vim.lsp.buf.code_action, {silent=true})
-keymap('v', '<leader>a', ":'<,'>lua vim.lsp.buf.range_code_action()", {silent=true})
+keymap('x', '<leader>a', ":'<,'>lua vim.lsp.buf.range_code_action()", {silent=true})
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer

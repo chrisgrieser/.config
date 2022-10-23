@@ -1,5 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
 
-if (cond) {
+terna.replace(/ffis/gm, "ffs")
 
-}
+blu.replace(/.*/mg, "$1")
