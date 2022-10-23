@@ -420,22 +420,19 @@ keymap("n", "zh", function()
 		return
 	end
 
-	-- shorten by hr by indent
-	local indent = fn.indent(".")
-	local hr
-	if indent > 0 then
-		hr = b.hrComment:sub(1, -(indent+1)) 
-	end
-
 	if bo.filetype == "css" then
+		local hr = b.hrComment
 		fn.append('.', hr)
 		local lineNum = api.nvim_win_get_cursor(0)[1] + 2
 		local colNum = #hr[2] + 2
 		api.nvim_win_set_cursor(0, {lineNum, colNum})
 		cmd[[startinsert]]
 	else
+		-- shorten hr by indent
+		local indent = fn.indent(".")
+		local hr = b.hrComment:sub(1, -(indent+1))
 		fn.append('.', {hr, ""})
-		cmd[[normal! j]]
+		cmd[[normal! j==]]
 	end
 	---@diagnostic enable: param-type-mismatch
 end)
