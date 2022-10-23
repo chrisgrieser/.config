@@ -58,6 +58,7 @@ function PluginList ()
 
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip",
+		"rafamadriz/friendly-snippets", -- collection of common snippets
 	}}
 
 	-- Appearance

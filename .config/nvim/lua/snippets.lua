@@ -10,12 +10,12 @@ local snip = ls.parser.parse_snippet -- vs-code-style snippets for future-proofn
 
 ls.setup {
 	enable_autosnippets = true,
+	history = true, -- enable jumping back into a snippet after moving outside
 }
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
 ls.cleanup() -- clears all snippets for writing snippets
-
 
 add("all", {
 	snip("!!", "{\n\t$0\n\\}"),
@@ -27,6 +27,9 @@ add("sh", {
 }, { type = "autosnippets" })
 
 add("sh", {
+	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
+	snip("if", 'if [[ "$${1:var}" ]] ; then\n\t$0\nfi'),
+	snip("if else", 'if [[ "$${1:var}" ]] ; then\n\t$2\nelse\n\t$0\nfi'),
 	snip("resolve home",'resolved_path="${file_path/#\\~/$HOME}"'),
 })
 
@@ -43,11 +46,11 @@ add("applescript", {
 
 add("applescript", {
 	snip("resolve home",
-		'set unresolved_path to "~/Documents"'..
-		"set AppleScript's text item delimiters to \"~/\""..
-		'set theTextItems to every text item of unresolved_path'..
-		"set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))"..
-		'set resolved_path to theTextItems as string'
+		'set unresolved_path to "~/Documents"\n'..
+		"set AppleScript's text item delimiters to \"~/\"\n"..
+		'set theTextItems to every text item of unresolved_path\n'..
+		"set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))\n"..
+		'set resolved_path to theTextItems as string\n'
 	),
 })
 
@@ -68,3 +71,5 @@ add("javascript", {
 ls.filetype_extend("typescript", {"javascript"}) -- typescript uses all javascript snippets
 ls.filetype_extend("zsh", {"sh"})
 
+-- load friendly snippets
+require("luasnip.loaders.from_vscode").lazy_load()
