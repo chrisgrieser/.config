@@ -114,8 +114,6 @@ cmp.setup({
 	-- disable completion in comments https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-completion-in-certain-contexts-such-as-comments
 })
 
-	
-
 --------------------------------------------------------------------------------
 -- Filetype specific Completion
 

@@ -41,10 +41,10 @@ keymap("n", "ZZ", ":w<CR>:q<CR>") -- quicker quitting
 -- NAVIGATION
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
-keymap("", "H", "0^") -- 0^ ensures scrolling to the left on long lines
-keymap("", "L", "$")
-keymap({"v", "o"}, "J", "7j")
-keymap("", "K", "7k")
+keymap({"n", "x", "o"}, "H", "0^") -- 0^ ensures scrolling to the left on long lines
+keymap({"n", "x", "o"}, "L", "$")
+keymap({"x", "o"}, "J", "7j")
+keymap({"n", "x", "o"}, "K", "7k")
 
 -- when reaching the last line, scroll down (since scrolloff does not work at EOF)
 function overscroll (action) ---@param action string
@@ -57,7 +57,7 @@ function overscroll (action) ---@param action string
 end
 keymap("n", "j", function () overscroll("j") end)
 keymap("n", "J", function () overscroll("7j") end)
-keymap({"n", "v"}, "G", "Gzz")
+keymap({"n", "x"}, "G", "Gzz")
 
 -- Jump History
 keymap("n", "<C-h>", "<C-o>") -- Back
@@ -68,42 +68,42 @@ keymap("n", "gh", ":Gitsigns next_hunk<CR>")
 keymap("n", "gH", ":Gitsigns next_prev<CR>")
 
 -- Sneak
-keymap("", "ö", "<Plug>Sneak_s")
-keymap("", "Ö", "<Plug>Sneak_S")
-keymap("", "f", "<Plug>Sneak_f")
-keymap("", "F", "<Plug>Sneak_F")
-keymap("", "t", "<Plug>Sneak_t")
-keymap("", "T", "<Plug>Sneak_T")
+keymap({"n", "x", "o"}, "ö", "<Plug>Sneak_s")
+keymap({"n", "x", "o"}, "Ö", "<Plug>Sneak_S")
+keymap({"n", "x", "o"}, "f", "<Plug>Sneak_f")
+keymap({"n", "x", "o"}, "F", "<Plug>Sneak_F")
+keymap({"n", "x", "o"}, "t", "<Plug>Sneak_t")
+keymap({"n", "x", "o"}, "T", "<Plug>Sneak_T")
 
 -- Search
-keymap("", "-", "/") -- German Keyboard consistent with US Keyboard layout
+keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "/", "/\v") -- more PCRE-like regex patterns (:h magic)
 keymap("n", "<Esc>", ":nohl<CR>:echo<CR>lh", {silent = true}) -- clear highlights & shortmessage, lh clears hover window
-keymap("", "+", "*") -- no more modifier key on German Keyboard
+keymap({"n", "x", "o"}, "+", "*") -- no more modifier key on German Keyboard
 
 -- URLs
 keymap("n", "gü", "/http.*<CR>") -- goto next
 keymap("n", "gÜ", "?http.*<CR>") -- goto prev
 
 -- Marks
-keymap("", "ä", "`") -- Goto Mark
+keymap({"n", "x", "o"}, "ä", "`") -- Goto Mark
 
 --------------------------------------------------------------------------------
 -- EDITING
 
 -- CLIPBOARD
-keymap({"n", "v"}, "x", '"_x')
-keymap({"n", "v"}, "c", '"_c')
-keymap({"n", "v"}, "C", '"_C')
+keymap({"n", "o"}, "x", '"_x')
+keymap({"n", "o"}, "c", '"_c')
+keymap({"n", "o"}, "C", '"_C')
 keymap("n", "p", 'p`[') -- pasting does not move the cursor
-keymap("n", "P", '"0p') -- paste what was yanked
+keymap("n", "P", '"0p`[') -- paste what was yanked
 
 -- TEXT OBJECTS
 -- INFO: Various Text Objects are defined via treesitter textobj
 -- the text-objects below need "_
 keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<C-A-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
-keymap("v", "<Space>", '"_c')
+keymap("x", "<Space>", '"_c')
 
 -- change small word (i.e. a simpler version of vim-textobj-variable-segment,
 -- but not supporting CamelCase)
@@ -127,10 +127,10 @@ keymap("o", "P", '{') -- beginning of the [P]aragraph
 
 -- special plugin text objects
 require("textobj-diagnostic").setup{create_default_keymaps = false}
-keymap({"v", "o"}, "id", require("textobj-diagnostic").next_diag_inclusive, {silent = true})
-keymap({"v", "o"}, "ad", require("textobj-diagnostic").next_diag_inclusive, {silent = true})
-keymap({"v", "o"}, 'ih', ':Gitsigns select_hunk<CR>', {silent = true})
-keymap({"v", "o"}, 'ah', ':Gitsigns select_hunk<CR>', {silent = true})
+keymap({"x", "o"}, "id", require("textobj-diagnostic").next_diag_inclusive, {silent = true})
+keymap({"x", "o"}, "ad", require("textobj-diagnostic").next_diag_inclusive, {silent = true})
+keymap({"x", "o"}, 'ih', ':Gitsigns select_hunk<CR>', {silent = true})
+keymap({"x", "o"}, 'ah', ':Gitsigns select_hunk<CR>', {silent = true})
 
 -- treesitter textobjects:
 -- af -> a function
@@ -176,8 +176,8 @@ require('Comment').setup{
 -- position.
 -- requires remap for treesitter and comments.nvim mappings
 keymap("n", "dq", "mzdCOM`z", {remap = true})
-keymap("n", "dq", "mzdCOM`z", {remap = true})
 keymap("n", "yq", "mzyCOM`z", {remap = true})
+keymap("n", "gUq", "mzgUCOM`z", {remap = true})
 keymap("n", "sq", "mzsCOM`z", {remap = true})
 keymap("n", "cq", "mzdCOMxQ", {remap = true}) -- using delete to preserve commentstring
 
@@ -196,10 +196,10 @@ end)
 -- Indention
 keymap("n", "<Tab>", ">>")
 keymap("n", "<S-Tab>", "<<")
-keymap("v", "<Tab>", ">gv")
-keymap("v", "<S-Tab>", "<gv")
+keymap("x", "<Tab>", ">gv")
+keymap("x", "<S-Tab>", "<gv")
 
-keymap({"n", "v"}, "^", "=") -- auto-indent
+keymap({"n", "x"}, "^", "=") -- auto-indent
 keymap("n", "^^", "mz=ip`z") -- since indenting paragraph is far more common than indenting a line
 keymap("n", "^p", "mz`[v`]=`z") -- last paste
 keymap("n", "^A", "mzgg=G`z") -- entire file
@@ -273,23 +273,23 @@ keymap("x", "s", substi.visual)
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", ':noautocmd normal!mz"zyy"zp`zj<CR>', {silent = true}) -- current line, ":noautocmd" to disable highlighted yank for this
-keymap("v", "R", '"zy`]"zp', {silent = true}) -- selection (best used with Visual Line Mode)
+keymap("x", "R", '"zy`]"zp', {silent = true}) -- selection (best used with Visual Line Mode)
 
 -- Line & Character Movement (vim.move plugin)
 g.move_map_keys = 0 -- disable default keymaps of vim.move
 keymap("n", "<Down>", "<Plug>MoveLineDown")
 keymap("n", "<Up>", "<Plug>MoveLineUp")
-keymap("v", "<Down>", "<Plug>MoveBlockDown")
-keymap("v", "<Up>", "<Plug>MoveBlockUp")
+keymap("x", "<Down>", "<Plug>MoveBlockDown")
+keymap("x", "<Up>", "<Plug>MoveBlockUp")
 
 keymap("n", "<Right>", "<Plug>MoveCharRight")
 keymap("n", "<Left>", "<Plug>MoveCharLeft")
-keymap("v", "<Right>", "<Plug>MoveBlockRight")
-keymap("v", "<Left>", "<Plug>MoveBlockLeft")
+keymap("x", "<Right>", "<Plug>MoveBlockRight")
+keymap("x", "<Left>", "<Plug>MoveBlockLeft")
 
 -- Merging / Splitting Lines
-keymap({"n", "v"}, "M", "J") -- [M]erge line up
-keymap({"n", "v"}, "gm", "ddpkJ") -- [m]erge line down
+keymap({"n", "x"}, "M", "J") -- [M]erge line up
+keymap({"n", "x"}, "gm", "ddpkJ") -- [m]erge line down
 g.splitjoin_split_mapping = '' -- disable default mappings
 g.splitjoin_join_mapping = ''
 keymap("n", "<leader>m", ":SplitjoinJoin<CR>")
@@ -297,7 +297,7 @@ keymap("n", "<leader>s", ":SplitjoinSplit<CR>")
 keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 
 -- Undo
-keymap({"n", "v"}, "U", "<C-r>") -- redo
+keymap({"n", "x"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", "U") -- undo line
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
@@ -312,13 +312,13 @@ keymap("c", "<C-u>", '<C-e><C-u>') -- clear
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
-keymap("v", "p", 'P') -- do not override register when pasting
-keymap("v", "P", 'p') -- override register when pasting
+keymap("x", "p", 'P') -- do not override register when pasting
+keymap("x", "P", 'p') -- override register when pasting
 
 keymap("n", "V", "Vj") -- visual line mode starts with two lines selected
-keymap("v", "V", "j") -- repeatedly pressing "V" selects more lines
+keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines
 
-keymap("v", "y", "ygv<Esc>") -- yanking in visual mode keeps position https://stackoverflow.com/a/3806683#comment10788861_3806683
+keymap("x", "y", "ygv<Esc>") -- yanking in visual mode keeps position https://stackoverflow.com/a/3806683#comment10788861_3806683
 
 --------------------------------------------------------------------------------
 -- WINDOW AND BUFFERS
@@ -332,7 +332,7 @@ keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 
 -- Buffers
 keymap("", "<C-Tab>", "<C-^>") -- for footpedal
-keymap({"n", "v"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
+keymap({"n", "x"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
 
 --------------------------------------------------------------------------------
 -- FILES
@@ -351,7 +351,7 @@ keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
 keymap("n", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
 keymap("n", "<leader>X", ':Chmod +x<CR>') -- execution permission, requires eunuch.vim
 keymap("n", "<leader><BS>", ':w!<CR>:!mv "%:p" ~/.Trash/<CR><CR>:bd<CR>:echo "file deleted"<CR>') -- undoable deletion of the file
-keymap("v", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
+keymap("x", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
 
 -- Option Toggling
 keymap("n", "<leader>os", ":set spell!<CR>")

@@ -15,7 +15,7 @@ ls.setup {
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
--- ls.cleanup() -- clears all snippets for writing snippets
+ls.cleanup() -- clears all snippets for writing snippets
 
 add("all", {
 	snip("!!", "{\n\t$0\n\\}"),
@@ -57,12 +57,10 @@ add("applescript", {
 -- JavaScript
 add("javascript", {
 	snip("##", "#!/usr/bin/env osascript\n$0"),
-	snip({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:repl}")'),
+	snip({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:repl}");'),
 }, { type = "autosnippets" })
 
 add("javascript", {
-	snip("if", 'if (${1:cond}) {\n$0\n}'),
-	snip("if else", 'if (${1:cond}) {\n$2\n} else {\n$0}'),
 	snip("ternary", "${1:cond} ? ${2:then} : ${3:else}"),
 	snip("resolve home (JXA)",'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 })
