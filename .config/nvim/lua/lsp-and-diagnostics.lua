@@ -33,7 +33,7 @@ end)
 
 function diagnosticFormat(diagnostic, mode)
 	local out
-	if diagnostic.source:match(".$") then -- remove trailing dot for some sources
+	if diagnostic.source:match("%.$") then -- remove trailing dot for some sources
 		diagnostic.source = diagnostic.source:sub(1, -2)
 	end
 	if diagnostic.source == "stylelint" then
@@ -188,6 +188,7 @@ lspConfig['cssls'].setup{
 			lint = {
 				vendorPrefix = "ignore",
 				duplicateProperties = "error",
+				emptyRules = "ignore",
 			},
 			colorDecorators = { enable = true }, -- does not seem to work?
 		}
