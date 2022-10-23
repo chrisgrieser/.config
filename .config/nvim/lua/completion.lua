@@ -1,5 +1,6 @@
 require("utils")
 local cmp = require('cmp')
+local luasnip = require("luasnip")
 --------------------------------------------------------------------------------
 
 require("registers").setup({
@@ -61,13 +62,29 @@ cmp.setup({
 	},
 
 	mapping = cmp.mapping.preset.insert({
-		-- ['<Tab>'] = cmp.mapping.select_next_item(),
-		-- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-		-- by *not* using Esc, Esc closes closes and laves insert mode with one
-		-- keypress
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
 		['<S-Down>'] = cmp.mapping.scroll_docs(4),
+
+		-- expand or jump in luasnip snippet https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
 	}),
 
 	sources = cmp.config.sources({
@@ -96,6 +113,8 @@ cmp.setup({
 	},
 	-- disable completion in comments https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-completion-in-certain-contexts-such-as-comments
 })
+
+	
 
 --------------------------------------------------------------------------------
 -- Filetype specific Completion
