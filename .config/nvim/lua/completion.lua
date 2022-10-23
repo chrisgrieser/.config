@@ -61,19 +61,18 @@ cmp.setup({
 	},
 
 	mapping = cmp.mapping.preset.insert({
-		['<Tab>'] = cmp.mapping.select_next_item(),
-		['<S-Tab>'] = cmp.mapping.select_prev_item(),
+		-- ['<Tab>'] = cmp.mapping.select_next_item(),
+		-- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 		-- by *not* using Esc, Esc closes closes and laves insert mode with one
 		-- keypress
-		['<C-x>'] = cmp.mapping.close(), -- close() leaves the current text, abort() restores pre-completion situation
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
 		['<S-Down>'] = cmp.mapping.scroll_docs(4),
 	}),
 
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
+		{ name = 'nvim_lsp' },
 		{ name = 'emoji', keyword_length = 2 },
 		{ name = 'buffer', keyword_length = 2 },
 	}),
@@ -89,7 +88,7 @@ cmp.setup({
 				emoji = "[E]",
 				nerdfont = "[NF]",
 				cmdline = "[CMD]",
-				cmdline_history = "[CMD-H]",
+				cmdline_history = "[C-H]",
 				path = "[F]",
 			})[entry.source.name]
 			return vim_item
@@ -101,15 +100,15 @@ cmp.setup({
 --------------------------------------------------------------------------------
 -- Filetype specific Completion
 
--- disable leading "-" and comments
+-- disable leading "-", add nerfont
 cmp.setup.filetype ("lua", {
 	enabled = function()
 		local lineContent = fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
 		return not(lineContent:match(" %-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
 	end,
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
+		{ name = 'nvim_lsp' },
 		{ name = 'nerdfont', keyword_length = 2 }, -- also use nerdfont for nvim config
 		{ name = 'emoji', keyword_length = 2 },
 		{ name = 'buffer', keyword_length = 2 },
@@ -119,8 +118,8 @@ cmp.setup.filetype ("lua", {
 -- don't use buffer in css completions
 cmp.setup.filetype ("css", {
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
+		{ name = 'nvim_lsp' },
 		{ name = 'emoji', keyword_length = 2 },
 	})
 })
@@ -129,6 +128,7 @@ cmp.setup.filetype ("css", {
 cmp.setup.filetype ("toml", {
 	sources = cmp.config.sources({
 		{ name = 'luasnip' },
+		{ name = 'nvim_lsp' },
 		{ name = 'nerdfont', keyword_length = 2 },
 		{ name = 'emoji', keyword_length = 2 },
 		{ name = 'buffer', keyword_length = 2 },

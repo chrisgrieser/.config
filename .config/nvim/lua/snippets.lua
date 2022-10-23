@@ -6,6 +6,7 @@ local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
+local pars = ls.parser.parse_snippet
 
 keymap({"i", "s"}, "<C-s>", function()
 	if ls.expand_or_jumpable() then ls.expand_or_jump() end
@@ -31,6 +32,7 @@ ls.add_snippets("sh", {
 -- Lua
 ls.add_snippets("lua", {
 	s("resolve home", { t('os.getenv("HOME")')}),
+	pars()
 })
 
 -- AppleScript
