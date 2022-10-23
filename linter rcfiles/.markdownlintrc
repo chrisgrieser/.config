@@ -7,7 +7,7 @@
   "no-inline-html": false,
   "blanks-around-headings": { "lines_below": 0 },
   "blanks-around-lists": false,
-  "no-multiple-blanks": { "maximum": 1 },
+  "no-multiple-blanks": { "maximum": 2 },
   "ul-indent": false,
   "no-blanks-blockquote": false,
   "no-emphasis-as-heading": false,
