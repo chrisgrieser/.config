@@ -15,7 +15,7 @@ ls.setup {
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
-ls.cleanup() -- clears all snippets for writing snippets
+-- ls.cleanup() -- clears all snippets for writing snippets
 
 add("all", {
 	snip("!!", "{\n\t$0\n\\}"),
@@ -36,7 +36,7 @@ add("sh", {
 -- Lua
 add("lua", {
 	snip("for", "for i=1, #${1:Stuff} do\n\t$0\nend"),
-	snip("resolve home", 'os.getenv("HOME")', {description = "description"}),
+	snip("resolve home", 'os.getenv("HOME")'),
 })
 
 -- AppleScript
@@ -61,6 +61,8 @@ add("javascript", {
 }, { type = "autosnippets" })
 
 add("javascript", {
+	snip("if", 'if (${1:cond}) {\n$0\n}'),
+	snip("if else", 'if (${1:cond}) {\n$2\n} else {\n$0}'),
 	snip("ternary", "${1:cond} ? ${2:then} : ${3:else}"),
 	snip("resolve home (JXA)",'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 })
