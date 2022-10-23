@@ -14,7 +14,7 @@ function run (argv) {
 
 	function readData (key) {
 		const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
-		const dataPath = $.getenv("alfred_workflow_data") + key;
+		const dataPath = $.getenv("alfred_workflow_data") + "/" + $.getenv("alfred_workflow_bundleid") + key;
 		if (!fileExists(dataPath)) return "data does not exist.";
 		const data = $.NSFileManager.defaultManager.contentsAtPath(dataPath);
 		const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
@@ -22,7 +22,7 @@ function run (argv) {
 	}
 
 	function writeData (key, newValue) {
-		const dataPath = $.getenv("alfred_workflow_data") + key;
+		const dataPath = $.getenv("alfred_workflow_data") + "/" + $.getenv("alfred_workflow_bundleid") + key;
 		const str = $.NSString.alloc.initWithUTF8String(newValue);
 		str.writeToFileAtomicallyEncodingError(dataPath, true, $.NSUTF8StringEncoding, null);
 	}
