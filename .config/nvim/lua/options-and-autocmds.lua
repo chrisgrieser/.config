@@ -2,6 +2,9 @@
 require("utils")
 -------------------------------------------------------------------------------
 
+-- timeout for awaiting keystrokes
+opt.timeoutlen = 2000 -- me slow lol
+
 -- Search
 opt.showmatch = true
 opt.smartcase = true

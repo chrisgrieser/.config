@@ -3,14 +3,10 @@ require("utils")
 --------------------------------------------------------------------------------
 
 local ls = require("luasnip")
-local s = ls.snippet
+local s = ls.snippet -- luasnippet-style snippets
 local t = ls.text_node
 local i = ls.insert_node
-local pars = ls.parser.parse_snippet
-
-keymap({"i", "s"}, "<C-s>", function()
-	if ls.expand_or_jumpable() then ls.expand_or_jump() end
-end, { silent = true })
+local pars = ls.parser.parse_snippet -- vs-code-style snippets
 
 ls.setup {
 	enable_autosnippets = true,
@@ -22,8 +18,9 @@ ls.setup {
 
 -- Shell (zsh)
 ls.add_snippets("sh", {
-	s("##", { t{'#!/usr/bin/env zsh', ""}, i(0) }),
+	pars("##", "#!/usr/bin/env zsh\n$0"),
 }, { type = "autosnippets" })
+
 
 ls.add_snippets("sh", {
 	s("resolve home", { t('resolved_path="${file_path/#\\~/$HOME}"')}),
@@ -32,34 +29,35 @@ ls.add_snippets("sh", {
 -- Lua
 ls.add_snippets("lua", {
 	s("resolve home", { t('os.getenv("HOME")')}),
-	pars()
+	pars("for", "for i=1, #${1:Stuff} do\n\t$0\nend"),
 })
 
 -- AppleScript
 ls.add_snippets("applescript", {
-	s("##", { t{'#!/usr/bin/env osascript', ""}, i(0) }),
+	pars("##", "#!/usr/bin/env osascript\n$0"),
 }, { type = "autosnippets" })
 
 ls.add_snippets("applescript", {
 	s("resolve home", { t(
-		'# resolve ~', 
-		'set unresolved_path to "~/Documents"', 
+		'# resolve ~',
+		'set unresolved_path to "~/Documents"',
 		"set AppleScript's text item delimiters to \"~/\"",
 		'set theTextItems to every text item of unresolved_path',
-		"set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))", 
+		"set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))",
 		'set resolved_path to theTextItems as string'),
 	})
 })
 
 -- JavaScript
 ls.add_snippets("javascript", {
-	s("##", { t{'#!/usr/bin/env osascript -l JavaScript', ""}, i(0) }),
+	pars("##", "#!/usr/bin/env osascript\n$0"),
+	pars(".rr", "#!/usr/bin/env osascript\n$0"),
 	s("rrr", { t('.replace(//g,"")') }),
 }, { type = "autosnippets" })
 
 ls.add_snippets("javascript", {
 	s("ternary", { i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else") }),
-	s("resolve home (JXA)", { 
+	s("resolve home (JXA)", {
 		t('const vaultPath = $.getenv("vault_path").replace(/^~/, app.pathTo("home folder"));', ''),
 		i(0)
 	}),
