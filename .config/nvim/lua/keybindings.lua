@@ -310,9 +310,6 @@ keymap("c", "<C-a>", '<Home>')
 keymap("c", "<C-e>", '<End>')
 keymap("c", "<C-u>", '<C-e><C-u>') -- clear
 
--- quicker typing
--- keymap("i", "!!", ' {}<Left><CR><Esc>O') -- {} with proper linebreak
-
 --------------------------------------------------------------------------------
 -- VISUAL MODE
 keymap("v", "p", 'P') -- do not override register when pasting
