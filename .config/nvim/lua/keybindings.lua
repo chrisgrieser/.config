@@ -414,19 +414,30 @@ autocmd("FileType", {
 
 -- [H]orizontal Ruler
 keymap("n", "zh", function()
+	---@diagnostic disable: param-type-mismatch
 	if not(b.hrComment) then
 		print("No hr for this filetype defined.")
-	elseif bo.filetype == "css" then
-		fn.append('.', b.hrComment) ---@diagnostic disable-line: param-type-mismatch
+		return
+	end
 
+	-- shorten by hr by indent
+	local indent = fn.indent(".")
+	local hr
+	if indent > 0 then
+		hr = b.hrComment:sub(1, -(indent+1)) 
+	end
+
+	if bo.filetype == "css" then
+		fn.append('.', hr)
 		local lineNum = api.nvim_win_get_cursor(0)[1] + 2
-		local colNum = #b.hrComment[2] + 2
+		local colNum = #hr[2] + 2
 		api.nvim_win_set_cursor(0, {lineNum, colNum})
 		cmd[[startinsert]]
 	else
-		fn.append('.', {b.hrComment, ""}) ---@diagnostic disable-line: param-type-mismatch
+		fn.append('.', {hr, ""})
 		cmd[[normal! j]]
 	end
+	---@diagnostic enable: param-type-mismatch
 end)
 
 augroup("horizontalRuler", {})
