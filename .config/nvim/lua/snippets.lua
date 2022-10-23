@@ -1,5 +1,7 @@
 require("utils")
 -- https://github.com/L3MON4D3/LuaSnip/blob/master/Examples/snippets.lua
+-- https://code.visualstudio.com/docs/editor/userdefinedsnippets
+-- https://github.com/L3MON4D3/LuaSnip/blob/master/doc/luasnip.txt
 --------------------------------------------------------------------------------
 
 local ls = require("luasnip")
@@ -31,7 +33,7 @@ add("sh", {
 -- Lua
 add("lua", {
 	snip("for", "for i=1, #${1:Stuff} do\n\t$0\nend"),
-	snip("resolve home", 'os.getenv("HOME")'),
+	snip("resolve home", 'os.getenv("HOME")', {description = "description"}),
 })
 
 -- AppleScript

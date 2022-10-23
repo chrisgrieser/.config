@@ -50,7 +50,7 @@ end
 vim.diagnostic.config{
 	virtual_text = {
 		format = function (diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
-		severity = {vim.diagnostic.severity.WARN, vim.diagnostic.severity.ERROR}
+		severity = { min = vim.diagnostic.severity.WARN }
 	},
 	float = {
 		border = borderStyle,
