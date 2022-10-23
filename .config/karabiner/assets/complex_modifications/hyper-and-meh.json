@@ -23,6 +23,14 @@
                 "right_option"
               ]
             }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.KonfaGames\\.DespotsGame$"
+              ]
+            }
           ]
         }
       ]
