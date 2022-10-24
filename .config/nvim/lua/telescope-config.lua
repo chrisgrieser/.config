@@ -84,6 +84,7 @@ require("telescope").setup {
 		live_grep = {
 			cwd='%:p:h',
 			disable_coordinates=true,
+			prompt_title='Search in Folder',
 			prompt_prefix=' ',
 		},
 		spell_suggest = {
