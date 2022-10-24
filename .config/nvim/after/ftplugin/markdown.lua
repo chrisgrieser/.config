@@ -1,8 +1,10 @@
 require("utils")
+local opts = {buffer = true}
 --------------------------------------------------------------------------------
 
+
 -- hide URLs and other formatting, TODO: figure out how to hide only URLs
--- localOpt("conceallevel", 2)
+localOpt("conceallevel", 2)
 
 -- spelling
 localOpt("spell", true)
@@ -11,13 +13,10 @@ localOpt("spell", true)
 localOpt("wrap", true) -- soft wrap
 localOpt("linebreak", true) -- do not break words for soft wrap
 localOpt("colorcolumn", "") -- deactivate ruler
-keymap({"n", "v"}, "H", "g^", {buffer = true})
-keymap({"n", "v"}, "L", "g$", {buffer = true})
-keymap({"n", "v"}, "k", "gk", {buffer = true})
-keymap({"n", "v"}, "j", function() overscroll("gj") end, {buffer = true})
-
--- keybindings
-local opts = {buffer = true}
+keymap({"n", "v"}, "H", "g^", opts)
+keymap({"n", "v"}, "L", "g$", opts)
+keymap({"n", "v"}, "k", "gk", opts)
+keymap({"n", "v"}, "j", function() overscroll("gj") end, opts)
 
 -- cmd+shift+e: export as pdf (cmd+ctrl remapped via karabiner)
 keymap("n", "<D-C-e>", ":!pandoc %:p --output=%:t:r.pdf --pdf-engine=wkhtmltopdf<CR>:!open %:t:r.pdf<CR><CR>")
@@ -40,8 +39,8 @@ keymap("i", "<D-i>", "**<Left>", opts)
 -- cmd+e for inline code done in gui-settings, since also used for other cases
 -- outside of markdown (e.g. templater strings)
 
-keymap("n", "<CR>", 'A') -- So double return keeps markdown list syntax
-keymap("n", "<leader>x", 'mz^lllrx`z') -- check markdown tasks
-keymap("n", "<leader>-", "mzI- <Esc>`z") -- Add bullet point
-keymap("n", "<leader>>", "mzI> <Esc>`z") -- Turn into blockquote
+keymap("n", "<CR>", 'A', opts) -- So double return keeps markdown list syntax
+keymap("n", "<leader>x", 'mz^lllrx`z', opts) -- check markdown tasks
+keymap("n", "<leader>-", "mzI- <Esc>`z", opts) -- Add bullet point
+keymap("n", "<leader>>", "mzI> <Esc>`z", opts) -- Turn into blockquote
 
