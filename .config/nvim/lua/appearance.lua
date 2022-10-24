@@ -33,6 +33,13 @@ cmd[[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
 cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED') ]]
 
 --------------------------------------------------------------------------------
+-- Indention
+require("indent_blankline").setup {
+	show_current_context = true,
+}
+cmd[[highlight! def link IndentBlanklineContextChar Folded]]
+
+--------------------------------------------------------------------------------
 
 -- GUTTER
 opt.signcolumn = "yes:1"
