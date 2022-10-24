@@ -11,6 +11,7 @@ local snip = ls.parser.parse_snippet -- vs-code-style snippets for future-proofn
 ls.setup {
 	enable_autosnippets = true,
 	history = true, -- enable jumping back into a snippet after moving outside
+	update_events = 'TextChanged,TextChangedI', -- live updating of snippets
 }
 
 --------------------------------------------------------------------------------
@@ -40,12 +41,20 @@ add("lua", {
 	snip("augroup & autocmd",
 		'augroup("${1:groupname}", {\\})\n'..
 		'autocmd("${2:event}", {\n'..
-		'\tgroup = "${3:groupname}",\n'..
+		'\tgroup = "${1:groupname}",\n'..
 		'\tcallback = function()\n'..
 		'\t\t$0\n'..
 		'\tend\n'..
 		"})"
 	)
+})
+
+augroup("Stuff", {})
+autocmd("event", {
+	group = "Stuff",
+	callback = function()
+		
+	end
 })
 
 -- AppleScript

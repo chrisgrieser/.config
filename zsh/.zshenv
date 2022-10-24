@@ -13,6 +13,7 @@ source "$DOTFILE_FOLDER/zsh/git_github.zsh" # make github functions available in
 
 # so linters managed by mason are available to other apps
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
+alias eslint='eslint_d'
 
 # karabiner_cli
 export PATH="/Library/Application Support/org.pqrs/Karabiner-Elements/bin:$PATH"
