@@ -3,7 +3,7 @@ require("utils")
 -------------------------------------------------------------------------------
 
 -- timeout for awaiting keystrokes
-opt.timeoutlen = 2000 -- me slow lol
+opt.timeoutlen = 2000 -- because I'm slow lol
 
 -- Search
 opt.showmatch = true
@@ -16,7 +16,7 @@ opt.pumwidth = 10 -- min width popup menu
 
 -- Spelling
 opt.spell = false
-opt.spelllang = "en_us,de_de"
+opt.spelllang = "en_us"
 
 -- Gutter
 opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
@@ -59,9 +59,9 @@ opt.titlelen = 0 -- do not shorten title
 opt.titlestring='%{expand(\"%:p\")} [%{mode()}]'
 
 -- width
-opt.textwidth = 80 -- used by `gq` and wrap
+opt.textwidth = 80 -- used by `gq` wrap, etc.
 opt.wrap = false
-opt.colorcolumn = "+1"
+opt.colorcolumn = "+1" -- relative to textwidth
 
 -- files
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
@@ -92,7 +92,9 @@ autocmd("BufEnter", {
 })
 
 -- Remember Cursor Position
+augroup("rememberCursorPosition", {})
 autocmd ("BufReadPost", {
+	group = "rememberCursorPosition",
 	command = [[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' |  exe "normal! g`\"" | endif]]
 })
 

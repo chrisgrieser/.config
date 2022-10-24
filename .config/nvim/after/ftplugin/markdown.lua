@@ -1,5 +1,4 @@
 require("utils")
-require("keybindings")
 --------------------------------------------------------------------------------
 
 -- hide URLs and other formatting, TODO: figure out how to hide only URLs
