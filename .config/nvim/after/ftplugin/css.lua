@@ -10,9 +10,9 @@ keymap("n", "gs", function() telescope.current_buffer_fuzzy_find{
 
 -- search only for variables
 keymap("n", "gS", function() telescope.current_buffer_fuzzy_find{
-	default_text='-- ',
-	prompt_prefix='',
-	prompt_title = 'Navigation Markers',
+	default_text='--',
+	prompt_prefix=' ',
+	prompt_title = 'CSS Variables',
 } end, {buffer = true, silent = true})
 
 -- kebab-case variables, #hex color codes, & percentage values
@@ -28,7 +28,6 @@ cmd[[
 -- highlighting isn't good yet, so...
 keymap("n", "zz", ":syntax sync fromstart<CR>", {buffer = true})
 keymap("i", ",,", "<Plug>(emmet-expand-abbr)", {silent = true, buffer = true})
-
 
 keymap("n", "<leader>v", '^Ellct;', {buffer = true}) -- change [v]alue key
 keymap("n", "<leader>c", 'mzlEF.yEEp`z', {buffer = true}) -- double [c]lass under cursor
