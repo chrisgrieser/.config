@@ -26,7 +26,11 @@ require('nvim-treesitter.configs').setup {
 		enable = true,
 
 		-- NOTE: these are the names of the parsers and not the filetype
-		disable = {"css"}, -- looks weird with css
+		disable = {
+			"css", -- looks weird with css
+			"markdown", -- looks worse?
+			"markdown_inline",
+		},
 
 		-- Setting this to true will run `syntax` and tree-sitter at the same
 		-- time. Set this to `true` if you depend on 'syntax' being enabled (like
@@ -87,10 +91,10 @@ require('nvim-treesitter.configs').setup {
 	}
 }
 
--- require'treesitter-context'.setup{
--- 	enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
--- 	max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.
--- 	trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
--- 	min_window_height = 20, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
--- }
+require'treesitter-context'.setup{
+	enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+	max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.
+	trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+	min_window_height = 20, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+}
 
