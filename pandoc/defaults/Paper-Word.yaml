@@ -13,7 +13,7 @@ toc-depth: 3
 resource-path:  # must be array
   - .
   - ./attachments
-  - ${HOME}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/  # Vault path for images
+  - ${HOME}/Main Vault/  # Vault path for images
 
 # Markdown-Reader
 reader: markdown+lists_without_preceding_blankline
