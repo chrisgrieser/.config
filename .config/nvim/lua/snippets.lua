@@ -37,6 +37,15 @@ add("sh", {
 add("lua", {
 	snip("for", "for i=1, #${1:Stuff} do\n\t$0\nend"),
 	snip("resolve home", 'os.getenv("HOME")'),
+	snip("augroup & autocmd",
+		'augroup("${1:groupname}", {\\})\n'..
+		'autocmd("${2:event}", {\n'..
+		'\tgroup = "${3:groupname}",\n'..
+		'\tcallback = function()\n'..
+		'\t\t$0\n'..
+		'\tend\n'..
+		"})"
+	)
 })
 
 -- AppleScript
