@@ -2,7 +2,7 @@ require("utils")
 require("keybindings")
 --------------------------------------------------------------------------------
 
--- hide URLs and other formatting
+-- hide URLs and other formatting, TODO: figure out how to hide only URLs
 -- localOpt("conceallevel", 2)
 
 -- spelling
@@ -19,6 +19,9 @@ keymap({"n", "v"}, "j", function() overscroll("gj") end, {buffer = true})
 
 -- keybindings
 local opts = {buffer = true}
+
+-- cmd+shift+e: export as pdf (cmd+ctrl remapped via karabiner)
+keymap("n", "<D-C-e>", ":!pandoc %:p --output=%:t:r.pdf --pdf-engine=wkhtmltopdf<CR>:!open %:t:r.pdf<CR><CR>")
 
 -- cmd+k: markdown link
 keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", opts)
