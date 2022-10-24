@@ -2,9 +2,8 @@ require("utils")
 local opts = {buffer = true}
 --------------------------------------------------------------------------------
 
-
 -- hide URLs and other formatting, TODO: figure out how to hide only URLs
-localOpt("conceallevel", 2)
+-- localOpt("conceallevel", 2)
 
 -- spelling
 localOpt("spell", true)
