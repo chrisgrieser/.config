@@ -1,4 +1,4 @@
-# vim: filetype=bash
+# vim: filetype=zsh
 #───────────────────────────────────────────────────────────────────────────────
 
 # restart: `brew services restart sketchybar`

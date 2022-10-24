@@ -36,11 +36,9 @@ cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED')
 -- Indention
 require("indent_blankline").setup {
 	show_current_context = true,
-	context_char = '┃', -- current content thicker
-	use_treesitter= true,
+	-- use_treesitter= true,
 }
-
-cmd[[highlight! def link IndentBlanklineContextChar IndentBlanklineChar]]
+cmd[[highlight! def link IndentBlanklineContextChar Comment]]
 
 --------------------------------------------------------------------------------
 -- Zen Mode

@@ -373,7 +373,7 @@ keymap("n", "<leader>r", function()
 
 	local filename = fn.expand("%:t") ---@diagnostic disable-line: missing-parameter
 	if filename == "sketchybarrc" then
-		-- fn.system("brew services restart sketchybar")
+		fn.system("brew services restart sketchybar")
 
 	elseif bo.filetype == "lua" then
 		local parentFolder = fn.expand("%:p:h") ---@diagnostic disable-line: missing-parameter
