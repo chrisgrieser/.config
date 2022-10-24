@@ -36,9 +36,11 @@ cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED')
 -- Indention
 require("indent_blankline").setup {
 	show_current_context = true,
+	context_char = '┃', -- current content thicker
+	use_treesitter= true,
 }
-cmd[[highlight! def link IndentBlanklineContextChar Folded]]
 
+cmd[[highlight! def link IndentBlanklineContextChar IndentBlanklineChar]]
 
 --------------------------------------------------------------------------------
 -- Zen Mode
@@ -51,6 +53,20 @@ require("zen-mode").setup{
 	-- callback when the Zen window opens/closes
 	on_open = customHighlights,
 	on_close = customHighlights,
+}
+
+require("true-zen").setup {
+	modes = {
+		ataraxis = {
+			callback = {
+				open_pos = customHighlights,
+				close_pos = customHighlights,
+			}
+		}
+	},
+	integration = {
+		lualine = false,
+	}
 }
 
 --------------------------------------------------------------------------------

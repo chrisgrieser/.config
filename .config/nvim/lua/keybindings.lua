@@ -92,9 +92,9 @@ keymap({"n", "x", "o"}, "ä", "`") -- Goto Mark
 -- EDITING
 
 -- CLIPBOARD
-keymap({"n", "o"}, "x", '"_x')
-keymap({"n", "o"}, "c", '"_c')
-keymap({"n", "o"}, "C", '"_C')
+keymap("n", "x", '"_x')
+keymap("n", "c", '"_c')
+keymap("n", "C", '"_C')
 keymap("n", "p", 'p`[') -- pasting does not move the cursor
 keymap("n", "P", '"0p`[') -- paste what was yanked
 
