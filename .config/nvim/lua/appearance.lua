@@ -39,6 +39,20 @@ require("indent_blankline").setup {
 }
 cmd[[highlight! def link IndentBlanklineContextChar Folded]]
 
+
+--------------------------------------------------------------------------------
+-- Zen Mode
+require("zen-mode").setup{
+	window = {
+		backdrop = 1,
+		width = 90,
+		height = 1, -- 1 = 100%
+	},
+	-- callback when the Zen window opens/closes
+	on_open = customHighlights,
+	on_close = customHighlights,
+}
+
 --------------------------------------------------------------------------------
 
 -- GUTTER
