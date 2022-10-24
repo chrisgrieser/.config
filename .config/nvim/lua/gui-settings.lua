@@ -130,3 +130,4 @@ g.neovide_input_macos_alt_is_meta = true -- makes `opt` usable on macOS
 -- needed when alt is turned into meta key
 keymap({"n", "v"}, "<M-l>", "@")
 keymap("i", "<M-.>", "…")
+keymap("i", "<M-->", "–")
