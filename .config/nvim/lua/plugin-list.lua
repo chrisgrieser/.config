@@ -67,7 +67,6 @@ function PluginList ()
 	use "lewis6991/gitsigns.nvim"
 	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	-- use "folke/zen-mode.nvim" -- nvim version of Goyo; mostly for readable line length in markdown
 
 	-- File Management & Switching
 	use "tpope/vim-eunuch" -- file operation utilities
