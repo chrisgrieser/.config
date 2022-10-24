@@ -101,8 +101,6 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 	local bufopts = { silent=true, buffer=true }
 	keymap('n', 'gd', telescope.lsp_definitions, bufopts)
 	keymap('n', 'gD', telescope.lsp_references, bufopts)
-
-	keymap('n', 'gS', ":SymbolsOutline<CR>", bufopts)
 	keymap('n', 'gy', telescope.lsp_type_definitions, bufopts)
 	keymap('n', '<leader>R', vim.lsp.buf.rename, bufopts)
 
@@ -111,6 +109,7 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 	end
 
 	if client.name ~= "cssls" then -- don't override navigation marker search for css files
+		keymap('n', 'gS', ":SymbolsOutline<CR>", bufopts)
 		keymap('n', 'gs', telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
 	end
 end

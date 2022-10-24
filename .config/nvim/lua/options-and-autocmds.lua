@@ -103,7 +103,9 @@ autocmd ("BufReadPost", { command = "echo" })
 
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
-autocmd("TextYankPost", { command = "silent! lua vim.highlight.on_yank{timeout = 2500}" })
+autocmd("TextYankPost", {
+	callback = function () vim.highlight.on_yank{timeout = 2500} end
+})
 
 -- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070
 -- (see also the respective "change small word" keybinding <leader><space>)
@@ -136,12 +138,12 @@ augroup("Terminal", {})
 autocmd("TermOpen", {
 	group = "Terminal",
 	pattern = "*",
-	command = "startinsert"
+	command = "startinsert",
 })
 autocmd("TermClose", {
 	group = "Terminal",
 	pattern = "*",
-	command = "bd"
+	command = "bd",
 })
 
 --------------------------------------------------------------------------------
