@@ -423,7 +423,7 @@ keymap("n", "zh", function()
 		local lineNum = api.nvim_win_get_cursor(0)[1] + 2
 		local colNum = #hr[2] + 2
 		api.nvim_win_set_cursor(0, {lineNum, colNum})
-		cmd[[startinsert]]
+		cmd[[startinsert!]]
 	else
 		-- shorten hr by indent
 		local indent = fn.indent(".")
@@ -460,7 +460,7 @@ autocmd( "FileType", {
 	pattern = {"css"},
 	callback = function() b.hrComment = {
 		"/* ───────────────────────────────────────────────── */",
-		"/* <<  ",
+		"/* << ",
 		"──────────────────────────────────────────────────── */",
 		"",
 		"",
