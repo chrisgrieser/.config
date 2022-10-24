@@ -164,3 +164,6 @@ matches:
   - trigger: beign
     replace: being
     word: true
+  - trigger: udn
+    replace: und
+    word: true
