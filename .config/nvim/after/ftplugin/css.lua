@@ -4,14 +4,23 @@ require("utils")
 -- comment marks more useful than symbols for theme development
 keymap("n", "gs", function() telescope.current_buffer_fuzzy_find{
 	default_text='/* < ',
-	prompt_prefix='🪧',
+	prompt_prefix=' ',
+	prompt_title = 'Navigation Markers',
+} end, {buffer = true, silent = true})
+
+-- search only for variables
+keymap("n", "gS", function() telescope.current_buffer_fuzzy_find{
+	default_text='-- ',
+	prompt_prefix='',
 	prompt_title = 'Navigation Markers',
 } end, {buffer = true, silent = true})
 
 -- kebab-case variables, #hex color codes, & percentage values
-cmd[[setlocal iskeyword+=#]] -- for whatever reason, appending to "bo.iskeyword" does not work...
-cmd[[setlocal iskeyword+=%]]
-cmd[[setlocal iskeyword+=-]]
+cmd[[
+	setlocal iskeyword+=#
+	setlocal iskeyword+=%
+	setlocal iskeyword+=-
+]]
 
 -- INFO: fix syntax highlighting with ':syntax sync fromstart'
 -- various other solutions are described here: https://github.com/vim/vim/issues/2790
