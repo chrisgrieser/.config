@@ -1,8 +1,25 @@
 title: "⚒️ Vim Utilities"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
-  - description: "⚒️ Fix <S-Space> for neovim and terminal"
+  - description: "⚒️ Fix <S-Space> and <D-S-e> for neovim and terminal"
     manipulators:
+      - type: basic
+        from:
+          key_code: e
+          modifiers:
+            mandatory:
+              - command
+              - shift
+        to:
+          - key_code: e
+            modifiers:
+              - command
+              - control
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - "[Nn]eovide"
+              - alacritty$
       - type: basic
         from:
           key_code: spacebar

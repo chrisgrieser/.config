@@ -53,7 +53,7 @@
       ]
     },
     {
-      "description": "🅰️🖥 Alacritty: Keyboard Shortcut Fixes",
+      "description": "🅰️🖥 Alacritty: Undo",
       "manipulators": [
         {
           "type": "basic",
@@ -71,36 +71,6 @@
               "modifiers": [
                 "control"
               ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "file_paths": [
-                "alacritty$"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "spacebar",
-            "modifiers": {
-              "mandatory": [
-                "shift"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "d"
-            },
-            {
-              "key_code": "a"
-            },
-            {
-              "key_code": "w"
             }
           ],
           "conditions": [
