@@ -18,10 +18,6 @@ opt.pumwidth = 10 -- min width popup menu
 opt.spell = false
 opt.spelllang = "en_us,de_de"
 
-
-cmd[[syn region markdownLink matchgroup=markdownLinkDelimiter start="(" end=")" keepend contained conceal contains=markdownUrl]]
-
-
 -- Gutter
 opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
 opt.numberwidth = 3 -- minimum width, save some space for shorter files
