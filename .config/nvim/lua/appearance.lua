@@ -44,30 +44,34 @@ cmd[[highlight! def link IndentBlanklineContextChar IndentBlanklineChar]]
 
 --------------------------------------------------------------------------------
 -- Zen Mode
-require("zen-mode").setup{
-	window = {
-		backdrop = 1,
-		width = 90,
-		height = 1, -- 1 = 100%
-	},
-	-- callback when the Zen window opens/closes
-	on_open = customHighlights,
-	on_close = customHighlights,
-}
-
-require("true-zen").setup {
-	modes = {
-		ataraxis = {
-			callback = {
-				open_pos = customHighlights,
-				close_pos = customHighlights,
-			}
-		}
-	},
-	integration = {
-		lualine = false,
-	}
-}
+-- require("zen-mode").setup{
+-- 	window = {
+-- 		backdrop = 1,
+-- 		width = 80,
+-- 		height = 1, -- 1 = 100%
+-- 	},
+-- 	plugins = {
+-- 		gitsigns = { enabled = true },
+-- 		options = {
+-- 			showcmd = true,
+-- 			ruler = true,
+-- 		},
+-- 	},
+-- 	on_open = customHighlights,
+-- 	on_close = customHighlights,
+-- }
+--
+-- augroup("markdownZen", {})
+-- autocmd("BufEnter", {
+-- 	group = "markdownZen",
+-- 	pattern = "*.md",
+-- 	command = [[ZenMode]],
+-- })
+-- autocmd("BufLeave", {
+-- 	group = "markdownZen",
+-- 	pattern = "*.md",
+-- 	command = [[ZenMode]],
+-- })
 
 --------------------------------------------------------------------------------
 
