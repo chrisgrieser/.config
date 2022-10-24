@@ -19,4 +19,3 @@ keymap("v", "<D-b>", ":'<,'>!yq -o=json<CR>", {buffer = true})
 -- JSON-[m]inify selection, requires `yq`
 keymap("v", "<D-m>", ":'<,'>!yq -I=0<CR>", {buffer = true})
 
-
