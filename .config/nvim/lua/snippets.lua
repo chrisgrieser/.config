@@ -49,14 +49,6 @@ add("lua", {
 	)
 })
 
-augroup("Stuff", {})
-autocmd("event", {
-	group = "Stuff",
-	callback = function()
-		
-	end
-})
-
 -- AppleScript
 add("applescript", {
 	snip("##", "#!/usr/bin/env osascript\n$0"),
