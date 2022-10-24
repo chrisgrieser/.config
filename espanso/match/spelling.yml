@@ -55,7 +55,7 @@ matches:
     replace: nicht
   - trigger: ncoh
     replace: noch
-  - regex:   'n[#Ä]t '
+  - regex: 'n[#Ä]t '
     replace: "n't "
   - trigger: onyl
     replace: only
@@ -161,3 +161,6 @@ matches:
     word: true
   - trigger: tempalte
     replace: template
+  - trigger: beign
+    replace: being
+    word: true
