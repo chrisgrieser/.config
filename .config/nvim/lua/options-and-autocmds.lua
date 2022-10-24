@@ -17,6 +17,7 @@ opt.pumwidth = 10 -- min width popup menu
 -- Spelling
 opt.spell = false
 opt.spelllang = "en_us,de_de"
+cmd[[syntax match UrlNoSpell "http[s]\?:\/\/.*" contains=@NoSpell]]
 
 -- Gutter
 opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer

@@ -19,7 +19,7 @@ function customHighlights()
 
 	-- URLs
 	cmd[[highlight urls cterm=underline term=underline gui=underline]]
-	cmd[[call matchadd('urls', 'http[s]\?:\/\/[[:alnum:]%\/_#.\-?]*') ]]
+	fn.matchadd('urls', [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:]*]])
 end
 
 customHighlights()
