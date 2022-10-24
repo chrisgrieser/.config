@@ -5,7 +5,7 @@ require("keybindings")
 -- hide URLs and other formatting
 -- TODO: figure out how to *only* conceal markdown links
 -- https://www.reddit.com/r/vim/comments/h8pgor/til_conceal_in_vim/
-localOpt("conceallevel", 1)
+-- localOpt("conceallevel", 1)
 
 -- spelling
 localOpt("spell", true)
