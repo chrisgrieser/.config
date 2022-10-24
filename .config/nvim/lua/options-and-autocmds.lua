@@ -17,7 +17,10 @@ opt.pumwidth = 10 -- min width popup menu
 -- Spelling
 opt.spell = false
 opt.spelllang = "en_us,de_de"
-cmd[[syntax match UrlNoSpell "http[s]\?:\/\/.*" contains=@NoSpell]]
+
+
+cmd[[syn region markdownLink matchgroup=markdownLinkDelimiter start="(" end=")" keepend contained conceal contains=markdownUrl]]
+
 
 -- Gutter
 opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
