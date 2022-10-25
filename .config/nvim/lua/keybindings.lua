@@ -339,7 +339,7 @@ keymap({"n", "x"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-fil
 
 -- File switchers
 keymap("n", "go", telescope.find_files) -- [o]pen file in parent-directory
-keymap("n", "gO", function() telescope.find_files{cwd='%:p:h:h', prompt_prefix=' '} end) -- [o]pen file in grandparent-directory
+keymap("n", "gO", telescope.git_files) -- [o]pen file in git directory
 keymap("n", "gr", telescope.oldfiles) -- [r]ecent files
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
 keymap("n", "gf", telescope.live_grep) -- search in [f]iles
@@ -363,7 +363,6 @@ keymap("n", "<leader>ow", ":set wrap! <CR>")
 -- TERMINAL MODE
 keymap("n", "zt", ":10split<CR>:terminal<CR>")
 keymap("n", "zz", ":w<CR>:!acp ") -- shell function, enabled via .zshenv
-
 
 --------------------------------------------------------------------------------
 
