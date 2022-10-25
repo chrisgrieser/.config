@@ -4,19 +4,19 @@ function PluginList ()
 	use "wbthomason/packer.nvim" -- packer manages itself
 	use "dstein64/vim-startuptime" -- measure startup time with `:StartupTime`
 	use 'lewis6991/impatient.nvim' -- reduces startup time by ~50%
-	use {"williamboman/mason.nvim", requires = {
+	use { "williamboman/mason.nvim", requires = {
 		'RubixDev/mason-update-all',
 		"jayp0521/mason-null-ls.nvim",
 		"williamboman/mason-lspconfig.nvim",
 	}}
 
 	-- Themes
-	-- use "folke/tokyonight.nvim"
+	use "navarasu/onedark.nvim"
 	use "EdenEast/nightfox.nvim"
+	-- use "folke/tokyonight.nvim"
 	-- use "rebelot/kanagawa.nvim"
 	-- use "sainnhe/edge"
 	-- use "Mofiqul/dracula.nvim"
-	use "navarasu/onedark.nvim"
 	-- use "savq/melange"
 	-- use "Yazeed1s/minimal.nvim"
 	-- use "kaiuri/nvim-juliana"
