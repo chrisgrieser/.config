@@ -32,7 +32,7 @@ end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
 
 -- Utils
-keymap("n", "ZZ", ":w<CR>:q<CR>") -- quicker quitting
+-- keymap("n", "ZZ", ":w<CR>:q<CR>") -- quicker quitting
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
