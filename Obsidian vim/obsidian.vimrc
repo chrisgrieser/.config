@@ -57,12 +57,11 @@ vmap zl :contextMenu
 " nmap <C-k> :prevHeading
 
 " line movement
+" (don't work as expected in visual mode)
 exmap lineUp obcommand editor:swap-line-up
 exmap lineDown obcommand editor:swap-line-down
 nmap <Up> :lineUp
 nmap <Down> :lineDown
-vmap <Up> :lineUp
-vmap <Down> :lineDown
 nmap <Right> dlp
 nmap <Left> dlhhp
 
@@ -242,7 +241,9 @@ nmap q "_ci'
 """"""""""""""""""""""
 
 " so that VV... in normal mode selects more lines
+" and vv... selects more words
 vmap V j
+vmap v e
 
 """"""""""""""""""""""
 " < Tabs/Window
