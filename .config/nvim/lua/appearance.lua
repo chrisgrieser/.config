@@ -26,6 +26,7 @@ function customHighlights()
 	fn.matchadd('urls', [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=]*]])
 end
 
+
 customHighlights()
 
 -- mixed whitespace
@@ -44,8 +45,12 @@ require("indent_blankline").setup {
 }
 
 --------------------------------------------------------------------------------
--- use pending on: https://github.com/folke/zen-mode.nvim/issues/47
--- Zen Mode
+-- other plugins will use notify.nvim for notifications
+vim.notify = require("notify")
+
+--------------------------------------------------------------------------------
+-- pending on: https://github.com/folke/zen-mode.nvim/issues/47
+-- ZEN MODE
 -- require("zen-mode").setup{
 -- 	window = {
 -- 		backdrop = 1,

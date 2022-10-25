@@ -11,10 +11,10 @@ function PluginList ()
 	}}
 
 	-- Themes
-	use "folke/tokyonight.nvim"
+	-- use "folke/tokyonight.nvim"
 	use "EdenEast/nightfox.nvim"
-	use "rebelot/kanagawa.nvim"
-	use "sainnhe/edge"
+	-- use "rebelot/kanagawa.nvim"
+	-- use "sainnhe/edge"
 	-- use "Mofiqul/dracula.nvim"
 	use "navarasu/onedark.nvim"
 	-- use "savq/melange"
@@ -39,7 +39,7 @@ function PluginList ()
 	-- LSP & Linting
 	use "neovim/nvim-lspconfig"
 	use "ray-x/lsp_signature.nvim"
-	use {"jose-elias-alvarez/null-ls.nvim", requires =  "nvim-lua/plenary.nvim"}
+	use {"jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim"}
 
 	-- Completion & Suggestion
 	use "mattn/emmet-vim" -- Emmet for CSS
@@ -67,6 +67,7 @@ function PluginList ()
 	use "lewis6991/gitsigns.nvim"
 	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
+	use "rcarriga/nvim-notify"
 
 	-- File Management & Switching
 	use "tpope/vim-eunuch" -- file operation utilities
