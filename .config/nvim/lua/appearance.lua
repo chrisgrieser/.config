@@ -5,21 +5,19 @@ require("utils")
 -- have to wrapped in function and regularly called due to auto-dark-mode
 -- regularly resetting the theme
 function customHighlights()
-	-- Diagnostics/Spell: use straight underlines instead of curly underlines
 	local highlights = {
-
+		"DiagnosticUnderlineError",
+		"DiagnosticUnderlineWarn",
+		"DiagnosticUnderlineHint",
+		"DiagnosticUnderlineInfo",
+		"SpellLocal",
+		"SpellRare",
+		"SpellCap",
+		"SpellBad",
 	}
-	for k, v in pairs(highlights) do
-		cmd[[highlight DiagnosticUnderlineError gui=underline]]
+	for _, v in pairs(highlights) do
+		cmd("highlight "..v.." gui=underline")
 	end
-	 DiagnosticUnderlineError,
-	 DiagnosticUnderlineWarn,
-	 DiagnosticUnderlineHint,
-	 DiagnosticUnderlineInfo,
-	 SpellLocal,
-	 SpellRare,
-	 SpellCap,
-	 SpellBad,
 
 	cmd[[highlight! def link IndentBlanklineContextChar Comment]]
 
@@ -46,6 +44,7 @@ require("indent_blankline").setup {
 }
 
 --------------------------------------------------------------------------------
+-- use pending on: https://github.com/folke/zen-mode.nvim/issues/47
 -- Zen Mode
 -- require("zen-mode").setup{
 -- 	window = {

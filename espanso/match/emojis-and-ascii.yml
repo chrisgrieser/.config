@@ -28,20 +28,18 @@ matches:
     replace: ' 🙈'
   - trigger: '!eyes'
     replace: 👁️👄👁️
-  - trigger: '!tm'
-    replace: ™
 
-  - triggers: ['!shrug', "!ascii"]
+  - triggers: [':shrug', "!ascii"]
     replace: ¯\_(ツ)_/¯
-  - triggers: ['!gimme', "!ascii"]
+  - triggers: [':gimme', "!ascii"]
     replace: ༼つ ◕_◕ ༽つ
-  - triggers: ['!tableflip', "!ascii"]
+  - triggers: [':tableflip', "!ascii"]
     replace: (╯°□°)--︻╦╤─ - - -
-  - triggers: ['!tableflip', "!ascii"]
+  - triggers: [':tableflip', "!ascii"]
     replace: (╯°□°）╯︵ ┻━┻
-  - triggers: ['!tableflip', "!ascii"]
+  - triggers: [':tableflip', "!ascii"]
     replace: ┻━┻︵ \\(°□°)\/ ︵ ┻━┻
-  - triggers: ['!tableflip', "!ascii"]
+  - triggers: [':tableflip', "!ascii"]
     replace: (ノಠ_ಠ)ノ彡︵ ┻━┻︵ ┻━┻
-  - triggers: ['!tableflip', "!ascii"]
+  - triggers: [':tableflip', "!ascii"]
     replace: ┬─┬ノ(ಠ_ಠノ)
