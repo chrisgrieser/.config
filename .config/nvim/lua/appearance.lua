@@ -5,17 +5,23 @@ require("utils")
 -- have to wrapped in function and regularly called due to auto-dark-mode
 -- regularly resetting the theme
 function customHighlights()
-	-- Diagnostics/Spell: use straight underlines instead of curly underlines,
-	-- since the latter look weird with Neovide
-	cmd[[highlight DiagnosticUnderlineError gui=underline]]
-	cmd[[highlight DiagnosticUnderlineWarn gui=underline]]
-	cmd[[highlight DiagnosticUnderlineHint gui=underline]]
-	cmd[[highlight DiagnosticUnderlineInfo gui=underline]]
+	-- Diagnostics/Spell: use straight underlines instead of curly underlines
+	local highlights = {
 
-	cmd[[highlight SpellLocal gui=underline]]
-	cmd[[highlight SpellRare gui=underline]]
-	cmd[[highlight SpellCap gui=underline]]
-	cmd[[highlight SpellBad gui=underline]]
+	}
+	for k, v in pairs(highlights) do
+		cmd[[highlight DiagnosticUnderlineError gui=underline]]
+	end
+	 DiagnosticUnderlineError,
+	 DiagnosticUnderlineWarn,
+	 DiagnosticUnderlineHint,
+	 DiagnosticUnderlineInfo,
+	 SpellLocal,
+	 SpellRare,
+	 SpellCap,
+	 SpellBad,
+
+	cmd[[highlight! def link IndentBlanklineContextChar Comment]]
 
 	-- URLs
 	cmd[[highlight urls cterm=underline term=underline gui=underline]]
@@ -36,9 +42,8 @@ cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED')
 -- Indention
 require("indent_blankline").setup {
 	show_current_context = true,
-	-- use_treesitter= true,
+	use_treesitter= true,
 }
-cmd[[highlight! def link IndentBlanklineContextChar Comment]]
 
 --------------------------------------------------------------------------------
 -- Zen Mode
