@@ -1,8 +1,9 @@
 # https://espanso.org/docs/configuration/options/
-# -----------------------------------------------------
+# yamllint disable rule:truthy
+#───────────────────────────────────────────────────────────────────────────────
 
-toggle_key: OFF # yamllint disable-line rule:truthy
-search_trigger: OFF # yamllint disable-line rule:truthy
+toggle_key: OFF
+search_trigger: OFF
 search_shortcut: META+ALT+SPACE
 show_icon: false
 show_notifications: true
@@ -19,6 +20,3 @@ restore_clipboard_delay: 300
 # By default, espanso uses the "Auto" backend which should work well in most cases,
 # but you may want to try the "Clipboard" or "Inject" backend in case of issues.
 backend: auto
-inject_delay: 10
-key_delay: 10
-clipboard_threshold: 5
