@@ -75,6 +75,11 @@ require("telescope").setup {
 		keymaps = { prompt_prefix='? ' },
 		oldfiles = { prompt_prefix=' ' },
 		highlights = { prompt_prefix=' ' },
+		git_files = {
+			prompt_prefix=' ',
+			show_untracked = true,
+			path_display = { "tail" },
+		},
 		buffers = {
 			prompt_prefix='﬘ ',
 			ignore_current_buffer = true,
@@ -112,7 +117,6 @@ require("telescope").setup {
 		}
 	}
 }
-
 
 --------------------------------------------------------------------------------
 
