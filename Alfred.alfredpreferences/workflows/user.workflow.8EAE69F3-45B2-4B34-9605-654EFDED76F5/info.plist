@@ -9,31 +9,7 @@
 	<key>connections</key>
 	<dict>
 		<key>22140E59-E984-40C1-9850-CA91847C6FF5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>140A7E62-3C7B-4CB0-BC8D-31A64DA4849A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>43F710C6-44A2-45FF-9B24-38734C701EEB</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>85137F9B-F432-4120-BDD0-2204B4843B53</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>747F9CA9-D21B-4591-84AC-DEE0948C8A70</key>
 		<array>
 			<dict>
@@ -201,69 +177,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>codemirror</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>CM6 Vim</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>43F710C6-44A2-45FF-9B24-38734C701EEB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://github.com/replit/codemirror-vim/blob/master/src/vim.js</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>85137F9B-F432-4120-BDD0-2204B4843B53</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>140A7E62-3C7B-4CB0-BC8D-31A64DA4849A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -324,15 +237,6 @@
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>140A7E62-3C7B-4CB0-BC8D-31A64DA4849A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>405</real>
-			<key>ypos</key>
-			<real>455</real>
-		</dict>
 		<key>22140E59-E984-40C1-9850-CA91847C6FF5</key>
 		<dict>
 			<key>colorindex</key>
@@ -342,7 +246,7 @@
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>285</real>
 		</dict>
 		<key>3B3913A5-94C6-45E5-847A-BB2600F1B1C2</key>
 		<dict>
@@ -352,15 +256,6 @@
 			<real>245</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>43F710C6-44A2-45FF-9B24-38734C701EEB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>300</real>
 		</dict>
 		<key>616A791C-515F-4771-BD72-6BCF32748B88</key>
 		<dict>
@@ -376,18 +271,9 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>455</real>
-		</dict>
-		<key>85137F9B-F432-4120-BDD0-2204B4843B53</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>245</real>
-			<key>ypos</key>
-			<real>300</real>
+			<real>285</real>
 		</dict>
 		<key>945ED155-23DF-4F0F-B90C-DBDDB2C715A9</key>
 		<dict>
