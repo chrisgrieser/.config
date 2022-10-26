@@ -1,6 +1,6 @@
 require("utils")
-
 --------------------------------------------------------------------------------
+
 -- custom highlights
 -- have to wrapped in function and regularly called due to auto-dark-mode
 -- regularly resetting the theme
@@ -37,7 +37,6 @@ cmd[[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 cmd[[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
 cmd[[call matchadd('myAnnotations', '\<\(INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
 
---------------------------------------------------------------------------------
 -- Indention
 require("indent_blankline").setup {
 	show_current_context = true,
