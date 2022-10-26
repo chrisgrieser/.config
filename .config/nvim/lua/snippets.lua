@@ -31,7 +31,8 @@ add("sh", {
 	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
 	snip("if", 'if [[ "$${1:var}" ]] ; then\n\t$0\nfi'),
 	snip("if else", 'if [[ "$${1:var}" ]] ; then\n\t$2\nelse\n\t$0\nfi'),
-	snip("resolve home",'${1:path}="${${1:path}/#\\~/$HOME}"'),
+	snip("resolve home",'${1:path}="${${1:path}/#\\~/\\$HOME}"'),
+	snip("stderr",'2>&1'),
 })
 
 -- Lua
