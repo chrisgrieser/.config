@@ -88,6 +88,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4CF068F9-35CF-447E-BD74-226173D43B75</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F0CD3DA7-A748-4654-AA5A-1FEDBF899855</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4E05F542-9EEE-41E9-86B1-B4F1C201A764</key>
 		<array>
 			<dict>
@@ -142,6 +155,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>BEA583C1-293D-4CF7-AB3A-7BEE5A3B41CA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>8CFA9B58-9BCF-450F-9BE4-6B459FE7534E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C21186A4-BFA2-43DB-8893-567B30CBA24D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -337,6 +363,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F0CD3DA7-A748-4654-AA5A-1FEDBF899855</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8CFA9B58-9BCF-450F-9BE4-6B459FE7534E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -370,27 +409,6 @@
 			<string>92246A7B-E550-40D1-9840-C2CB0F213DE3</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>2272192E-81AD-4662-A0D4-58300A23360E</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -438,6 +456,27 @@
 			<string>A9C9D34F-A692-412A-9152-2BC3E99B51BE</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>2272192E-81AD-4662-A0D4-58300A23360E</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -710,6 +749,29 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-neovide-path.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0216398A-09AD-4D85-A101-3884E853D638</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -732,6 +794,7 @@ echo "$url"</string>
 				<array>
 					<string>com.apple.finder</string>
 					<string>org.yanex.marta</string>
+					<string>md.obsidian</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>
@@ -746,25 +809,17 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>openwith</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-neovide-path.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>sourcefile</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>0216398A-09AD-4D85-A101-3884E853D638</string>
+			<string>BEA583C1-293D-4CF7-AB3A-7BEE5A3B41CA</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -816,21 +871,6 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>BEA583C1-293D-4CF7-AB3A-7BEE5A3B41CA</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string> </string>
 				<key>passthroughargument</key>
@@ -847,29 +887,6 @@ echo "$url"</string>
 			<string>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-old-version.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>478C272A-AA90-4C7C-B103-6A3BC82916D4</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -919,6 +936,29 @@ echo "$url"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
+				<string>open-old-version.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>478C272A-AA90-4C7C-B103-6A3BC82916D4</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string>show-diff.sh</string>
 				<key>type</key>
 				<integer>8</integer>
@@ -929,6 +969,23 @@ echo "$url"</string>
 			<string>4D767180-5C0F-4AAE-9C93-BE41D821EB5D</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Version History</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -980,23 +1037,6 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Version History</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
@@ -1011,6 +1051,27 @@ echo "$url"</string>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>C21186A4-BFA2-43DB-8893-567B30CBA24D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>0696CF60-CCEE-4A13-B435-B3F0384C89C8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1036,23 +1097,81 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>9</integer>
+				<key>hotmod</key>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>V</string>
+				<key>leftcursor</key>
 				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>md.obsidian</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>0696CF60-CCEE-4A13-B435-B3F0384C89C8</string>
+			<string>4CF068F9-35CF-447E-BD74-226173D43B75</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-obsidian-path.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F0CD3DA7-A748-4654-AA5A-1FEDBF899855</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>8CFA9B58-9BCF-450F-9BE4-6B459FE7534E</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1101,25 +1220,23 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
+				<key>argumenttype</key>
 				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>github-topic-search.js</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>keyword</key>
+				<string>configs</string>
+				<key>subtext</key>
+				<string>Enter GitHub Topic</string>
+				<key>text</key>
+				<string>⬇️ Download Repos: '{query}'</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>4E05F542-9EEE-41E9-86B1-B4F1C201A764</string>
+			<string>7788A2EF-46C7-48E7-A073-C7938913B87D</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1145,23 +1262,25 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>configs</string>
-				<key>subtext</key>
-				<string>Enter GitHub Topic</string>
-				<key>text</key>
-				<string>⬇️ Download Repos: '{query}'</string>
-				<key>withspace</key>
-				<true/>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>github-topic-search.js</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>7788A2EF-46C7-48E7-A073-C7938913B87D</string>
+			<string>4E05F542-9EEE-41E9-86B1-B4F1C201A764</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -1206,7 +1325,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
-			<real>1135</real>
+			<real>1180</real>
 		</dict>
 		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
 		<dict>
@@ -1235,7 +1354,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>1020</real>
+			<real>1065</real>
 		</dict>
 		<key>180397E4-072D-4480-B4A2-58E77C28324C</key>
 		<dict>
@@ -1286,6 +1405,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>4CF068F9-35CF-447E-BD74-226173D43B75</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>Version History</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>905</real>
+		</dict>
 		<key>4D767180-5C0F-4AAE-9C93-BE41D821EB5D</key>
 		<dict>
 			<key>colorindex</key>
@@ -1302,7 +1432,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>1135</real>
+			<real>1180</real>
 		</dict>
 		<key>7788A2EF-46C7-48E7-A073-C7938913B87D</key>
 		<dict>
@@ -1313,7 +1443,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1135</real>
+			<real>1180</real>
 		</dict>
 		<key>78077732-42EB-4967-885E-DF4366FAB695</key>
 		<dict>
@@ -1334,6 +1464,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>850</real>
 			<key>ypos</key>
 			<real>545</real>
+		</dict>
+		<key>8CFA9B58-9BCF-450F-9BE4-6B459FE7534E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>remove \n</string>
+			<key>xpos</key>
+			<real>340</real>
+			<key>ypos</key>
+			<real>935</real>
 		</dict>
 		<key>8D2069C6-2EDB-40CD-854E-38574F301A4B</key>
 		<dict>
@@ -1473,6 +1614,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>875</real>
 		</dict>
+		<key>F0CD3DA7-A748-4654-AA5A-1FEDBF899855</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>get Obsidian Path</string>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>905</real>
+		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
@@ -1482,13 +1634,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<string>pseudometa</string>
 		<key>maxReposNumber</key>
 		<string>100</string>
+		<key>vault_path</key>
+		<string>~/Main Vault/</string>
 		<key>working_folder</key>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
-		<string>git_author</string>
 		<string>working_folder</string>
+		<string>vault_path</string>
+		<string>git_author</string>
 	</array>
 	<key>version</key>
 	<string></string>

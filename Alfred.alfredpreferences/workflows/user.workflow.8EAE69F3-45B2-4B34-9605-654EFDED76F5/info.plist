@@ -21,32 +21,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7A86B5B1-E60C-4A6C-A220-0893F3D48599</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C7CEE1BE-F622-4A58-BFDE-8B1DF12C1B14</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>86AFF9A1-7DD6-443E-BD1C-151917586042</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>DD7DC249-E9DE-4C30-AD48-25F1884C1D6D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>945ED155-23DF-4F0F-B90C-DBDDB2C715A9</key>
 		<array>
 			<dict>
@@ -60,50 +34,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A5F44C9A-4E8B-4985-B4F3-0D71BB64D89E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>DD7DC249-E9DE-4C30-AD48-25F1884C1D6D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>B018F2BE-3E56-4A4C-BA46-7853812AD54B</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>616A791C-515F-4771-BD72-6BCF32748B88</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C3163E68-E961-49C7-A170-E3D3AE97DE4C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EECD8B98-E934-4325-A613-8673D7A2FB7D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>EECD8B98-E934-4325-A613-8673D7A2FB7D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7A86B5B1-E60C-4A6C-A220-0893F3D48599</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -240,175 +175,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-obsidian-path.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>EECD8B98-E934-4325-A613-8673D7A2FB7D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>version-history</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>de.chris-grieser.github</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>C7CEE1BE-F622-4A58-BFDE-8B1DF12C1B14</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>9</integer>
-				<key>hotmod</key>
-				<integer>917504</integer>
-				<key>hotstring</key>
-				<string>V</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>md.obsidian</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>C3163E68-E961-49C7-A170-E3D3AE97DE4C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>7A86B5B1-E60C-4A6C-A220-0893F3D48599</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>43</integer>
-				<key>hotmod</key>
-				<integer>655360</integer>
-				<key>hotstring</key>
-				<string>,</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>md.obsidian</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>A5F44C9A-4E8B-4985-B4F3-0D71BB64D89E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/Meta/obsidian.vimrc</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>DD7DC249-E9DE-4C30-AD48-25F1884C1D6D</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>vimrc</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>obsidian.vimrc</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>86AFF9A1-7DD6-443E-BD1C-151917586042</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -467,7 +233,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>300</real>
 		</dict>
 		<key>616A791C-515F-4771-BD72-6BCF32748B88</key>
 		<dict>
@@ -476,34 +242,14 @@
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
-		<key>7A86B5B1-E60C-4A6C-A220-0893F3D48599</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>remove \n</string>
-			<key>xpos</key>
-			<real>410</real>
-			<key>ypos</key>
-			<real>320</real>
-		</dict>
 		<key>85137F9B-F432-4120-BDD0-2204B4843B53</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>695</real>
-		</dict>
-		<key>86AFF9A1-7DD6-443E-BD1C-151917586042</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>575</real>
+			<real>300</real>
 		</dict>
 		<key>945ED155-23DF-4F0F-B90C-DBDDB2C715A9</key>
 		<dict>
@@ -514,17 +260,6 @@
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>A5F44C9A-4E8B-4985-B4F3-0D71BB64D89E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>vimrc</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>440</real>
-		</dict>
 		<key>B018F2BE-3E56-4A4C-BA46-7853812AD54B</key>
 		<dict>
 			<key>note</key>
@@ -534,58 +269,9 @@
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
-		<key>C3163E68-E961-49C7-A170-E3D3AE97DE4C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>Version History</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>290</real>
-		</dict>
-		<key>C7CEE1BE-F622-4A58-BFDE-8B1DF12C1B14</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>505</real>
-			<key>ypos</key>
-			<real>290</real>
-		</dict>
-		<key>DD7DC249-E9DE-4C30-AD48-25F1884C1D6D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>220</real>
-			<key>ypos</key>
-			<real>490</real>
-		</dict>
-		<key>EECD8B98-E934-4325-A613-8673D7A2FB7D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>get Obsidian Path</string>
-			<key>xpos</key>
-			<real>245</real>
-			<key>ypos</key>
-			<real>290</real>
-		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
-	<key>variables</key>
-	<dict>
-		<key>vault_path</key>
-		<string>~/Main Vault</string>
-	</dict>
-	<key>variablesdontexport</key>
-	<array>
-		<string>vault_path</string>
-	</array>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>
