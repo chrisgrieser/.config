@@ -308,9 +308,16 @@ nmap zR :unfoldall
 """"""""""""""""""""""
 " < Sneak
 """"""""""""""""""""""
-
 " emulate vim-sneak
 exmap nextTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(true)}
 exmap prevTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(false)}
 nmap ö :nextTwoCharMatch
 nmap Ö :prevTwoCharMatch
+
+
+""""""""""""""""""""""
+" < Substitute
+""""""""""""""""""""""
+" emulate substitute.vim
+nmap ss Vp
+nmap S vg$p
