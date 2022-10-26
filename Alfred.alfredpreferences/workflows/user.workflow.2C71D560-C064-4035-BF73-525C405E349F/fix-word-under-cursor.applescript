@@ -9,7 +9,13 @@ on run argv
 	set langArg to item 1 of argv
 	#----------------------------------------------------------------------------
 
-	set prevClipboard to the clipboard
+	try
+		set prevClipboard to the clipboard
+		set success to true
+	on error
+		set success to false
+	end try
+
 	delay delayAmount
 	tell application "System Events"
 		key code 123 -- char left
@@ -29,7 +35,9 @@ on run argv
 	tell application "System Events" to keystroke "v" using {command down}
 	delay delayAmount
 
-	set the clipboard to prevClipboard
+	if success is true then
+		set the clipboard to prevClipboard
+	end if
 
 end run
 

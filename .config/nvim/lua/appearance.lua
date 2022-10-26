@@ -45,10 +45,6 @@ require("indent_blankline").setup {
 }
 
 --------------------------------------------------------------------------------
--- other plugins will use notify.nvim for notifications
-vim.notify = require("notify")
-
---------------------------------------------------------------------------------
 -- pending on: https://github.com/folke/zen-mode.nvim/issues/47
 -- ZEN MODE
 -- require("zen-mode").setup{

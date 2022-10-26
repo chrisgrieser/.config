@@ -8,6 +8,21 @@ local opts = {buffer = true}
 -- spelling
 localOpt("spell", true)
 
+-- syntax highlighting in code blocks
+g.markdown_fenced_languages = {
+	'python',
+	'css',
+	'yaml',
+	'json',
+	'javascript',
+	'js=javascript',
+	'typescript',
+	'ts=typescript',
+	'applescript',
+	'bash',
+	'zsh',
+}
+
 -- wrapping and related options
 localOpt("wrap", true) -- soft wrap
 localOpt("linebreak", true) -- do not break words for soft wrap

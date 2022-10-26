@@ -17,6 +17,7 @@ require("telescope").setup {
 			"%.png",
 			"%.zip",
 			"%.pxd",
+			"info.plist", -- Alfred Config Data
 		},
 		mappings = {
 			i = {
