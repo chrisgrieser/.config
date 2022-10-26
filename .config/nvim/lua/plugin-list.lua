@@ -12,7 +12,6 @@ function PluginList ()
 
 	-- Themes
 	use "navarasu/onedark.nvim"
-	use "sainnhe/edge"
 	use "EdenEast/nightfox.nvim"
 	-- use "folke/tokyonight.nvim"
 	-- use "rebelot/kanagawa.nvim"
