@@ -35,6 +35,8 @@ map - /
 " Have j and k navigate visual lines rather than logical ones
 nmap j gj
 nmap k gk
+nmap I g0i
+nmap A g$a
 
 " HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
 map H g0
