@@ -310,5 +310,5 @@ nmap zR :unfoldall
 " emulate vim-sneak
 exmap nextTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(true)}
 exmap prevTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(false)}
-nmap s :nextTwoCharMatch
-nmap S :prevTwoCharMatch
+nmap ö :nextTwoCharMatch
+nmap Ö :prevTwoCharMatch
