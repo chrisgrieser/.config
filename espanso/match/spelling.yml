@@ -167,3 +167,15 @@ matches:
   - trigger: udn
     replace: und
     word: true
+  - trigger: toher
+    replace: other
+    word: true
+  - trigger: ggggg
+    replace: ffff
+    word: true
+  - trigger: gg
+    replace: ff
+    word: true
+  - trigger: ggg
+    replace: ffff
+    word: true
