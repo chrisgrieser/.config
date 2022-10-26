@@ -396,11 +396,13 @@ keymap("n", "<leader>r", function()
 end)
 --------------------------------------------------------------------------------
 
--- q to close special windows
+-- q / Esc to close special windows
 autocmd("FileType", {
 	pattern = specialFiletypes,
 	callback = function ()
-		keymap("n", "q", ":close<CR>", {buffer = true, silent = true, nowait = true})
+		local opts = {buffer = true, silent = true, nowait = true}
+		keymap("n", "<Esc>", ":close<CR>", opts)
+		keymap("n", "q", ":close<CR>", opts)
 	end
 })
 

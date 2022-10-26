@@ -12,10 +12,10 @@ function PluginList ()
 
 	-- Themes
 	use "navarasu/onedark.nvim"
+	use "sainnhe/edge"
 	use "EdenEast/nightfox.nvim"
 	-- use "folke/tokyonight.nvim"
 	-- use "rebelot/kanagawa.nvim"
-	-- use "sainnhe/edge"
 	-- use "Mofiqul/dracula.nvim"
 	-- use "savq/melange"
 	-- use "Yazeed1s/minimal.nvim"
@@ -43,7 +43,6 @@ function PluginList ()
 
 	-- Completion & Suggestion
 	use "mattn/emmet-vim" -- Emmet for CSS
-	use "tversteeg/registers.nvim"
 	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
 	use {"hrsh7th/nvim-cmp", requires = {
 		"hrsh7th/cmp-buffer", -- completion sources
@@ -67,7 +66,6 @@ function PluginList ()
 	use "lewis6991/gitsigns.nvim"
 	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	use "rcarriga/nvim-notify"
 
 	-- File Management & Switching
 	use "tpope/vim-eunuch" -- file operation utilities

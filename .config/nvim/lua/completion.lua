@@ -3,18 +3,6 @@ local cmp = require('cmp')
 local luasnip = require("luasnip")
 --------------------------------------------------------------------------------
 
-require("registers").setup({
-	show = '*"0123456789abcdefghijklmnopqrstuvwxy',
-	show_empty = false,
-	show_register_types = false,
-	window = {
-		max_width = 60,
-		border = borderStyle,
-		transparency = 0,
-		highlight_cursorline = false,
-	},
-})
-
 -- autopairs
 require("nvim-autopairs").setup {}
 local cmp_autopairs = require('nvim-autopairs.completion.cmp') -- add brackets to cmp

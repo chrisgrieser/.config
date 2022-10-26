@@ -1,7 +1,8 @@
 #!/usr/bin/env osascript
+set uppercaseChars to "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+set lowercaseChars to "abcdefghijklmnopqrstuvwxyz"
+
 on lowercase(theText)
-	set uppercaseChars to "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	set lowercaseChars to "abcdefghijklmnopqrstuvwxyz"
 	set output to ""
 	repeat with aChar in theText
 		set theOffset to offset of aChar in uppercaseChars
@@ -15,8 +16,6 @@ on lowercase(theText)
 end lowercase
 
 on capitalize(theText)
-	set uppercaseChars to "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	set lowercaseChars to "abcdefghijklmnopqrstuvwxyz"
 	set output to ""
 	set isFirstChar to true
 	repeat with aChar in theText
@@ -49,9 +48,13 @@ on run argv
 	set delayAmount to (system attribute "delay_ms") as number
 	set delayAmount to delayAmount/1000
 
-	#----------------------------------------------------------------------------
+	try
+		set prevClipboard to the clipboard
+		set success to true
+	on error
+		set success to false
+	end try
 
-	set prevClipboard to the clipboard
 	delay delayAmount
 	tell application "System Events"
 		key code 123 -- char left
@@ -63,8 +66,7 @@ on run argv
 	set theWord to the clipboard
 	delay delayAmount
 
-	-- AppleScript string comparisons ignore case by default
-	considering case
+	considering case -- AppleScript string comparisons ignore case by default
 		if theWord is equal to lowercase(theWord) then
 			set theFixedWord to capitalize(theWord)
 		else
@@ -77,6 +79,8 @@ on run argv
 	tell application "System Events" to keystroke "v" using {command down}
 	delay delayAmount
 
-	set the clipboard to prevClipboard
+	if success is true then
+		set the clipboard to prevClipboard
+	end if
 
 end run
