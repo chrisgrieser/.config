@@ -343,10 +343,10 @@ keymap("n", "gb", telescope.buffers) -- open [b]uffer
 keymap("n", "gf", telescope.live_grep) -- search in [f]iles
 
 -- File Operations
-keymap("n", "<C-p>", ':let @+ = expand("%:p")<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
-keymap("n", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
-keymap("n", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
-keymap("n", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
+keymap("", "<C-p>", ':let @+ = expand("%:p")<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
+keymap("", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
+keymap("", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
+keymap("", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
 keymap("n", "<leader>X", ':Chmod +x<CR>') -- execution permission, requires eunuch.vim
 keymap("x", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
 
