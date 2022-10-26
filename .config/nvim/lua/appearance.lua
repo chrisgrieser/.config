@@ -35,7 +35,7 @@ cmd[[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 
 -- Annotations
 cmd[[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
-cmd[[call matchadd('myAnnotations', 'INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED') ]]
+cmd[[call matchadd('myAnnotations', '\<\(INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
 
 --------------------------------------------------------------------------------
 -- Indention
