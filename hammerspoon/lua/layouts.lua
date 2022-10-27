@@ -106,7 +106,7 @@ function homeModeLayout ()
 	runDelayed(1.0, function () hs.application("Drafts"):activate() end)
 
 	if screenIsUnlocked() then
-		runDelayed (1.5, function()twitterrificAction("scrollup") end)
+		runDelayed (10, function()twitterrificAction("scrollup") end)
 	end
 
 	-- wait until sync is finished, to avoid merge conflict
