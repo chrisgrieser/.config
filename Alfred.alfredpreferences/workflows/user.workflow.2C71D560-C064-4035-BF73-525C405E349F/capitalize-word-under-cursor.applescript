@@ -1,8 +1,8 @@
 #!/usr/bin/env osascript
-set uppercaseChars to "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-set lowercaseChars to "abcdefghijklmnopqrstuvwxyz"
 
 on lowercase(theText)
+	set uppercaseChars to "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	set lowercaseChars to "abcdefghijklmnopqrstuvwxyz"
 	set output to ""
 	repeat with aChar in theText
 		set theOffset to offset of aChar in uppercaseChars
@@ -16,6 +16,8 @@ on lowercase(theText)
 end lowercase
 
 on capitalize(theText)
+	set uppercaseChars to "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	set lowercaseChars to "abcdefghijklmnopqrstuvwxyz"
 	set output to ""
 	set isFirstChar to true
 	repeat with aChar in theText
