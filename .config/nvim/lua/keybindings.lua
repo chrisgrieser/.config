@@ -79,8 +79,8 @@ keymap("n", "<Esc>", ":nohl<CR>:echo<CR>lh", {silent = true}) -- clear highlight
 keymap({"n", "x", "o"}, "+", "*") -- no more modifier key on German Keyboard
 
 -- URLs
-keymap("n", "gü", "/http.*<CR>") -- goto next
-keymap("n", "gÜ", "?http.*<CR>") -- goto prev
+keymap("n", "gü", "/http.*<CR>:nohl<CR>") -- goto next
+keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
 
 -- Marks
 keymap({"n", "x", "o"}, "ä", "`") -- Goto Mark
@@ -93,13 +93,8 @@ keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("n", "P", '"0p') -- paste what was yanked, not what was deleted
-keymap("n", "gp", function ()
-	
-end) 
 
 -- TEXT OBJECTS
--- INFO: Various Text Objects are defined via treesitter textobj
--- the text-objects below need "_
 keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<C-A-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
 keymap("x", "<Space>", '"_c')
@@ -121,8 +116,8 @@ keymap("o", "ir", "i]") -- [r]ectangular brackets
 keymap("o", "ar", "a]")
 keymap("o", "ic", "i}") -- [c]urly brackets
 keymap("o", "ac", "a}")
-keymap("o", "p", '}') -- rest of the [p]aragraph
-keymap("o", "P", '{') -- beginning of the [P]aragraph
+keymap("o", "r", '}') -- [r]est of the paragraph
+keymap("o", "R", '{')
 
 -- special plugin text objects
 require("textobj-diagnostic").setup{create_default_keymaps = false}
@@ -143,7 +138,7 @@ require("nvim-surround").setup{
 		insert = "<C-g>s",
 		visual = "s",
 	},
-	aliases = { -- aliases should match the bindings above
+	aliases = { -- aliases should match the bindings further above
 		["b"] = ")",
 		["c"] = "}",
 		["r"] = "]",
