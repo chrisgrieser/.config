@@ -6,7 +6,7 @@ import-url: karabiner://karabiner/assets/complex_modifications/import?url=https:
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 # Sublime Keymaps for Mouse4 and Mouse5 defined in `Default (OSX).sublime-mousemap`
 rules:
-    # this basically emulations the "Right-Click Open Link in new Background tab" Chrome extension
+  # this basically emulations the "Right-Click Open Link in new Background tab" Chrome extension
   - description: "🐁 R (tap): Open link in new background tab (when in Browser or Obsidian)"
     manipulators:
       - type: basic
@@ -22,6 +22,7 @@ rules:
               - ^org\.chromium\.Chromium$
               - ^com\.brave\.Browser$
               - ^com\.apple\.Safari$
+              - ^md\.obsidian$
               - ^md\.obsidian$
       # Drafts: R-Click opens link in background
       - type: basic
@@ -410,4 +411,3 @@ rules:
               - control
         parameters:
           basic.simultaneous_threshold_milliseconds: 100
-
