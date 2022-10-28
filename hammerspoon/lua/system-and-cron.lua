@@ -3,6 +3,7 @@ require("lua.window-management")
 require("lua.dark-mode")
 require("lua.layouts")
 
+local caff = hs.caffeinate.watcher
 --------------------------------------------------------------------------------
 -- CONFIG
 dotfileLocation = home.."/dotfiles"
@@ -75,12 +76,12 @@ vaultWatcher:start()
 --------------------------------------------------------------------------------
 
 function screenSleep (eventType)
-	if eventType == hs.caffeinate.watcher.screensDidSleep then
+	if eventType == caff.screensDidSleep then
 		log ("💤 sleep ("..deviceName()..")", "./logs/some.log")
 		gitDotfileSync()
 	end
 end
-shutDownWatcher = hs.caffeinate.watcher.new(screenSleep)
+shutDownWatcher = caff.new(screenSleep)
 shutDownWatcher:start()
 
 --------------------------------------------------------------------------------
