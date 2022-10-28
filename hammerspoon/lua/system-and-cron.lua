@@ -87,7 +87,7 @@ shutDownWatcher:start()
 --------------------------------------------------------------------------------
 -- SYSTEM WAKE/START
 function officeWake (eventType)
-	if eventType == hs.caffeinate.watcher.screensDidUnlock then
+	if eventType == caff.screensDidUnlock then
 		gitDotfileSync("--submodules")
 		gitVaultSync()
 		officeModeLayout()
@@ -95,29 +95,30 @@ function officeWake (eventType)
 end
 
 function homeWake (eventType)
-	local screensWoke = eventType == hs.caffeinate.watcher.screensDidWake
-	local systemWokeUp = eventType == hs.caffeinate.watcher.systemDidWake
-
-	if systemWokeUp or screensWoke then
-		if betweenTime(7, 19) then
-			hs.shortcuts.run("Send Reminders due today to Drafts")
-			if not(isProjector()) then setDarkmode(false) end
-		else
+	runDelayed(2, function ()
+		if not(eventType == caff.screensDidWake or eventType == caff.systemDidWake) then return end
+		if isProjector() then
 			setDarkmode(true)
+			movieModeLayout()
+		else
+			if betweenTime(7, 19) then
+				hs.shortcuts.run("Send Reminders due today to Drafts")
+				setDarkmode(false)
+			else
+				setDarkmode(true)
+			end
+			gitDotfileSync("--submodules")
+			gitVaultSync()
+			homeModeLayout() -- should run after git sync, to avoid conflicts
 		end
-		gitDotfileSync("--submodules")
-		gitVaultSync()
 
-		-- should run after git sync, to avoid conflicts
-		if isProjector() then movieModeLayout()
-		else homeModeLayout() end
-	end
+	end)
 end
 
 if isIMacAtHome() or isAtMother() then
-	wakeWatcher = hs.caffeinate.watcher.new(homeWake)
+	wakeWatcher = caff.new(homeWake)
 elseif isAtOffice() then
-	wakeWatcher = hs.caffeinate.watcher.new(officeWake)
+	wakeWatcher = caff.new(officeWake)
 end
 wakeWatcher:start()
 
@@ -183,7 +184,7 @@ dailyMorningTimer = hs.timer.doAt("08:00", "01d", function ()
 end)
 
 function projectorScreensaverStop (eventType)
-	if (eventType == hs.caffeinate.watcher.screensaverDidStop or eventType == hs.caffeinate.watcher.screensaverDidStart) then
+	if (eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart) then
 		runDelayed(3, function ()
 			if isProjector() then
 				iMacDisplay:setBrightness(0)
@@ -191,7 +192,7 @@ function projectorScreensaverStop (eventType)
 		end)
 	end
 end
-projectorScreensaverWatcher = hs.caffeinate.watcher.new(projectorScreensaverStop)
+projectorScreensaverWatcher = caff.new(projectorScreensaverStop)
 
 if isIMacAtHome() then
 	dailyMorningTimer:start()
