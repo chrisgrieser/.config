@@ -10,7 +10,7 @@ local lightTheme = "dawnfox"
 
 g.gui_font_default_size = 25.2
 g.gui_font_face = "JetBrainsMonoNL Nerd Font"
-opt.guicursor = 
+opt.guicursor =
 	"n-sm:block,"..
 	"i-ci-c-ve:ver25,"..
 	"r-cr-o-v:hor10,"..
@@ -79,7 +79,7 @@ keymap({"n", "v"}, "<D-v>", "p")
 keymap({"i", "c"}, "<D-v>", "<C-r>*")
 keymap("n", "<D-c>", "yy") -- no selection = line
 keymap("v", "<D-c>", "y")
-keymap("i", "<D-v>", '<C-r>"')
+keymap("i", "<D-v>", '<C-r>+')
 keymap("n", "<D-x>", "dd") -- no selection = line
 keymap("v", "<D-x>", "d")
 
