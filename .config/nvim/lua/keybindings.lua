@@ -92,8 +92,10 @@ keymap({"n", "x", "o"}, "ä", "`") -- Goto Mark
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
-keymap("n", "p", 'p`[') -- pasting does not move the cursor
-keymap("n", "P", '"0p`[') -- paste what was yanked
+keymap("n", "P", '"0p') -- paste what was yanked, not what was deleted
+keymap("n", "gp", function ()
+	
+end) 
 
 -- TEXT OBJECTS
 -- INFO: Various Text Objects are defined via treesitter textobj
