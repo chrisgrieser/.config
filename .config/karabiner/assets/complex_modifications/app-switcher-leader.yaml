@@ -466,7 +466,7 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
-      # [N]ews Reader (NetNewsWire)
+      # [N]ews Reader (Reeder)
       - type: basic
         from:
           key_code: "n"
