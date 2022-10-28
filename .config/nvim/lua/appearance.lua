@@ -23,7 +23,7 @@ function customHighlights()
 
 	-- URLs
 	cmd[[highlight urls cterm=underline term=underline gui=underline]]
-	fn.matchadd('urls', [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=]*]])
+	fn.matchadd('urls', [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&]*]])
 end
 
 
@@ -82,7 +82,7 @@ require("indent_blankline").setup {
 opt.signcolumn = "yes:1"
 
 require('gitsigns').setup{
-	max_file_length = 15000,
+	max_file_length = 10000,
 	preview_config	= { border = borderStyle },
 }
 
