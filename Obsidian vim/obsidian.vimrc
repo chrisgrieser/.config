@@ -108,15 +108,13 @@ nmap <C-a> I
 nmap x "_dl
 nmap cl "_dli
 
-" Consistent with Insert Mode Selection
-vmap <BS> "_d
-
 " UNDO consistently on one key
 nmap U <C-r>
 vmap U <C-r>
 
 " CASE SWITCH, (h to enable vertical navigation afterwards)
 nmap Ü ~h
+
 " Case Switch via Smarter MD Hotkeys Plugin
 exmap caseSwitch obcommand obsidian-smarter-md-hotkeys:smarter-upper-lower
 nmap ü :caseSwitch
@@ -232,19 +230,14 @@ vmap <S-Space> "_d
 " [R]eplicate (duplicate)
 exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
 nmap R :duplicate
-vmap R :duplicate
-
-" Change Quote/Wikilink Content
-nmap Q "_ci]
-nmap q "_ci'
 
 """"""""""""""""""""""
 " < Visual Mode
 """"""""""""""""""""""
 
 " so that VV... in normal mode selects more lines
-" and vv... selects more words
 vmap V j
+" and vv... selects more words
 vmap v e
 
 """"""""""""""""""""""
@@ -321,3 +314,18 @@ nmap Ö :prevTwoCharMatch
 " emulate substitute.vim
 nmap ss Vp
 nmap S vg$p
+
+""""""""""""""""""""""
+" < Option Toggling
+""""""""""""""""""""""
+
+exmap number obcommand obsidian-smarter-md-hotkeys:toggle-line-numbers
+exmap readableLineLength obcommand obsidian-smarter-md-hotkeys:toggle-readable-line-length
+exmap spellcheck obcommand editor:toggle-spellcheck
+
+" [O]ption: line [n]umbers
+map ,on :number
+" [O]ption: [s]pellcheck
+map ,os :spellcheck
+" [O]ption: line [w]rap
+map ,ow :readableLineLength
