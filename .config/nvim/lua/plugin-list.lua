@@ -45,6 +45,7 @@ function PluginList ()
 	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
 	use {"hrsh7th/nvim-cmp", requires = {
 		"hrsh7th/cmp-buffer", -- completion sources
+		"amarakon/nvim-cmp-buffer-lines", 
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
 		"dmitmel/cmp-cmdline-history",

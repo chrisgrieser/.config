@@ -3,10 +3,15 @@ local cmp = require('cmp')
 local luasnip = require("luasnip")
 --------------------------------------------------------------------------------
 
--- autopairs
-require("nvim-autopairs").setup {}
-local cmp_autopairs = require('nvim-autopairs.completion.cmp') -- add brackets to cmp
-cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done())
+local defaultSources = {
+	{ name = 'luasnip' },
+	{ name = 'nvim_lsp' },
+	{ name = 'emoji', keyword_length = 2 },
+	{ name = 'buffer', keyword_length = 2 },
+}
+
+local nerdfontSource = { name = "nerdfont", keyword_length = 2 }
+local bufferLineSource = { name = "buffer-lines", keyword_length = 2 }
 
 --------------------------------------------------------------------------------
 
@@ -75,12 +80,7 @@ cmp.setup({
 		end, { "i", "s" }),
 	}),
 
-	sources = cmp.config.sources({
-		{ name = 'luasnip' },
-		{ name = 'nvim_lsp' },
-		{ name = 'emoji', keyword_length = 2 },
-		{ name = 'buffer', keyword_length = 2 },
-	}),
+	sources = cmp.config.sources(defaultSources),
 
 	formatting = {
 		format = function(entry, vim_item)
@@ -88,6 +88,7 @@ cmp.setup({
 			vim_item.kind = kind_icons[vim_item.kind]
 			vim_item.menu = ({
 				buffer = "[B]",
+				["buffer-lines"] = "[BL]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[S]",
 				emoji = "[E]",
@@ -105,39 +106,42 @@ cmp.setup({
 --------------------------------------------------------------------------------
 -- Filetype specific Completion
 
--- disable leading "-", add nerfont
 cmp.setup.filetype ("lua", {
 	enabled = function()
+		-- disable leading "-"
 		local lineContent = fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
 		return not(lineContent:match(" %-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
 	end,
-	sources = cmp.config.sources({
-		{ name = 'luasnip' },
-		{ name = 'nvim_lsp' },
-		{ name = 'nerdfont', keyword_length = 2 }, -- also use nerdfont for nvim config
-		{ name = 'emoji', keyword_length = 2 },
-		{ name = 'buffer', keyword_length = 2 },
-	}),
+	sources = cmp.config.sources(
+		table.insert(defaultSources, nerdfontSource)
+	),
+})
+
+-- use buffer lines in yaml and json
+cmp.setup.filetype ("json", {
+	sources = cmp.config.sources(
+		table.insert(defaultSources, bufferLineSource)
+	),
+})
+cmp.setup.filetype ("yaml", {
+	sources = cmp.config.sources(
+		table.insert(defaultSources, bufferLineSource)
+	),
 })
 
 -- don't use buffer in css completions
+local bufferSourceIndex = table.find(defaultSources,{name='buffer', keyword_length=2 })
 cmp.setup.filetype ("css", {
-	sources = cmp.config.sources({
-		{ name = 'luasnip' },
-		{ name = 'nvim_lsp' },
-		{ name = 'emoji', keyword_length = 2 },
-	})
+	sources = cmp.config.sources(
+		table.remove(defaultSources)
+	),
 })
 
 -- also use nerdfont for starship config
 cmp.setup.filetype ("toml", {
-	sources = cmp.config.sources({
-		{ name = 'luasnip' },
-		{ name = 'nvim_lsp' },
-		{ name = 'nerdfont', keyword_length = 2 },
-		{ name = 'emoji', keyword_length = 2 },
-		{ name = 'buffer', keyword_length = 2 },
-	}),
+	sources = cmp.config.sources(
+		table.insert(defaultSources, nerdfontSource)
+	),
 })
 
 --------------------------------------------------------------------------------
@@ -160,4 +164,9 @@ cmp.setup.cmdline(':', {
 	})
 })
 
+--------------------------------------------------------------------------------
 
+-- autopairs
+require("nvim-autopairs").setup {}
+local cmp_autopairs = require('nvim-autopairs.completion.cmp') -- add brackets to cmp
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done())
