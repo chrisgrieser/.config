@@ -7,9 +7,10 @@ local defaultSources = {
 	{ name = 'luasnip' },
 	{ name = 'nvim_lsp' },
 	{ name = 'emoji', keyword_length = 2 },
-	{ name = 'buffer', keyword_length = 2 },
+	{ name = 'buffer', keyword_length = 2 }, -- should be last
 }
 
+local defaultWithoutBuffer = table.remove(defaultSources) -- requires buffer being last element
 local nerdfontSource = { name = "nerdfont", keyword_length = 2 }
 local bufferLineSource = { name = "buffer-lines", keyword_length = 2 }
 
@@ -130,11 +131,8 @@ cmp.setup.filetype ("yaml", {
 })
 
 -- don't use buffer in css completions
-local bufferSourceIndex = table.find(defaultSources,{name='buffer', keyword_length=2 })
 cmp.setup.filetype ("css", {
-	sources = cmp.config.sources(
-		table.remove(defaultSources)
-	),
+	sources = cmp.config.sources(defaultWithoutBuffer),
 })
 
 -- also use nerdfont for starship config
