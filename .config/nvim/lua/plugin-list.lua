@@ -18,7 +18,7 @@ function PluginList ()
 	-- use "Mofiqul/dracula.nvim"
 	-- use "savq/melange"
 	-- use "Yazeed1s/minimal.nvim"
-	-- use "kaiuri/nvim-juliana"
+	-- use "kaiuri/nvim-juliana" -- sublime-mariana like
 
 	-- Syntax
 	use {
@@ -90,7 +90,8 @@ function PluginList ()
 	use "simrat39/symbols-outline.nvim" -- outline view for symbols
 
 	-- Editing
-	use "matze/vim-move" -- move lines with auto-indention (alternative: vim.unimpaired)
+	use "matze/vim-move" 
 	use "AndrewRadev/splitjoin.vim"
+	use "Darazaki/indent-o-matic" -- detect indention (alternative: NMAC427/guess-indent.nvim)
 	use "mbbill/undotree" -- undo history nagivation
 end

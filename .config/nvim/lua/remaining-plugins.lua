@@ -63,3 +63,9 @@ require("symbols-outline").setup{
 	lsp_blacklist = {},
 	symbol_blacklist = {"Enum", "EnumMember"},
 }
+
+require('indent-o-matic').setup {
+	max_lines = 2048,
+	standard_widths = { 2, 4, 8 }, -- Space indentations that should be detected
+	skip_multiline = true, -- Skip multi-line comments and strings (more accurate detection but less performant)
+}
