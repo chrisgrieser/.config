@@ -8,7 +8,7 @@
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
-      "description": "🐁 R (tap): Open link in new background tab (when in Browser or Obsidian)",
+      "description": "🐁 R (tap): Open link in new background tab (Browser or Obsidian)",
       "manipulators": [
         {
           "type": "basic",
@@ -31,6 +31,45 @@
                 "^com\\.brave\\.Browser$",
                 "^com\\.apple\\.Safari$",
                 "^md\\.obsidian$"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "🐁 R (tap): Open link in new background tab (RSS Readers)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button2"
+          },
+          "to_if_alone": [
+            {
+              "pointing_button": "button1",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "key_code": "vk_none",
+              "hold_down_milliseconds": 80
+            },
+            {
+              "key_code": "tab",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^org\\.chromium\\.Chromium",
+                "^com\\.brave\\.Browser",
+                "^com.reederapp.5.macOS$"
               ]
             }
           ]
