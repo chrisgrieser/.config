@@ -10,9 +10,12 @@ local snip = ls.parser.parse_snippet -- vs-code-style snippets for future-proofn
 
 ls.setup {
 	enable_autosnippets = true,
-	history = true, -- enable jumping back into a snippet after moving outside
+	history = true, -- allow jumping back into the snippet
+	region_check_events = "InsertEnter", -- prevent <Tab> jumping back to a snippet after it has been left early
 	update_events = 'TextChanged,TextChangedI', -- live updating of snippets
 }
+
+require(fsfsf)
 
 --------------------------------------------------------------------------------
 -- SNIPPETS

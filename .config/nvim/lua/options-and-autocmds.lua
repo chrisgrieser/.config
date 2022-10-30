@@ -104,7 +104,7 @@ autocmd ("BufReadPost", { command = "echo" })
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
 autocmd("TextYankPost", {
-	callback = function () vim.highlight.on_yank{timeout = 2500} end
+	callback = function () vim.highlight.on_yank{timeout = 2000} end
 })
 
 -- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070

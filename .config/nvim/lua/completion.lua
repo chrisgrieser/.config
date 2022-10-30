@@ -65,7 +65,7 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 
-	mapping = cmp.mapping.preset.insert({
+	mapping = cmp.mapping.preset.insert{
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
 		['<S-Down>'] = cmp.mapping.scroll_docs(4),
@@ -89,7 +89,7 @@ cmp.setup({
 				fallback()
 			end
 		end, { "i", "s" }),
-	}),
+	},
 
 	sources = cmp.config.sources(defaultSources),
 

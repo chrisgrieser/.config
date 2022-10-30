@@ -1435,6 +1435,60 @@
       ]
     },
     {
+      "description": "🅰️  Drafts",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "comma",
+            "modifiers": {
+              "mandatory": [
+                "shift",
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell application \"System Events\"\n  tell process \"Drafts\"\n    click menu item \"Manage Actions...\" of menu \"Actions\" of menu bar 1\n  end tell\nend tell'\n"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.agiletortoise\\.Drafts-OSX$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "delete_or_backspace",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell application \"System Events\"\n  tell process \"Drafts\"\n    click menu item \"Archive\" of menu of menu item \"Basic\" of menu \"Actions\" of menu bar 1\n  end tell\nend tell'\n"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.agiletortoise\\.Drafts-OSX$"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "description": "🅰️ 📫 Mimestream",
       "manipulators": [
         {
@@ -1486,7 +1540,7 @@
           },
           "to": [
             {
-              "shell_command": "osascript -e 'display notification \"\" with title \"Restarting Alfred...\"'\nkillall -KILL \"Alfred\"\ndelay 0.2\nopen -a Alfred\\ 5\n"
+              "shell_command": "osascript -e 'display notification \"\" with title \"Restarting Alfred…\"'\nkillall -KILL \"Alfred\"\ndelay 0.4\nopen -a Alfred\\ 5\n"
             }
           ]
         }
