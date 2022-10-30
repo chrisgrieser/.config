@@ -23,6 +23,7 @@ matches:
   - triggers: ["!color", "!white"]
     replace: "\\033[1;37m"
     label: fg white
+
   - triggers: ["!color", "!bg"]
     replace: "\\033[1;40m"
     label: bg black

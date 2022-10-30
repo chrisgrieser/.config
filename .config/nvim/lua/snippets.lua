@@ -48,18 +48,6 @@ add("sh", {
 	snip("plist", 'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
 	snip("running", 'pgrep -x "$${1:process}" > /dev/null && $0'),
 	snip("quicklook", 'qlmanage -p "${1:filepath}"'),
-})
-
-add("sh", {
-	snip("reset", "\\\\\\033[0m"),
-	snip("black", "\\\\\\033[1;30m"),
-	snip("red", "\\\\\\033[1;31m"),
-	snip("green", "\\\\\\033[1;32m"),
-	snip("yellow", "\\\\\\033[1;33m"),
-	snip("blue", "\\\\\\033[1;34m"),
-	snip("magenta", "\\\\\\033[1;35m"),
-	snip("cyan", "\\\\\\033[1;36m"),
-	snip("white", "\\\\\\033[1;37m"),
 
 	snip("reset", "\\\\\\033[0m"),
 	snip("black", "\\\\\\033[1;30m"),
@@ -70,6 +58,14 @@ add("sh", {
 	snip("magenta", "\\\\\\033[1;35m"),
 	snip("cyan", "\\\\\\033[1;36m"),
 	snip("white", "\\\\\\033[1;37m"),
+	snip("black bg", "\\\\\\033[1;40m"),
+	snip("red bg", "\\\\\\033[1;41m"),
+	snip("green bg", "\\\\\\033[1;42m"),
+	snip("yellow bg", "\\\\\\033[1;43m"),
+	snip("blue bg", "\\\\\\033[1;44m"),
+	snip("magenta bg", "\\\\\\033[1;45m"),
+	snip("cyan bg", "\\\\\\033[1;46m"),
+	snip("white bg", "\\\\\\033[1;47m"),
 })
 
 -- Lua
@@ -102,10 +98,16 @@ add("applescript", {
 	),
 })
 
+-- Markdown
+add("markdown", {
+	snip("github note", "> **Note**  \n> $0"),
+	snip("github warning", "> **Warning**  \n> $0"),
+})
+
 -- JavaScript
 add("javascript", {
 	snip("##", "#!/usr/bin/env osascript\n$0"),
-	snip({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:repl}");'),
+	snip({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:replacement}");'),
 }, { type = "autosnippets" })
 
 add("javascript", {
