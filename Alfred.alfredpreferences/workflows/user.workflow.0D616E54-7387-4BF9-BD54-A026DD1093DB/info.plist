@@ -8,19 +8,6 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
-		<key>0F3BB1D5-25E5-4DDC-BB38-4C261621555B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>79405FF0-A2F1-462E-8A8F-AC1F83CC4C1A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>10BEA201-3D46-4F89-ADB1-10704261A8C7</key>
 		<array>
 			<dict>
@@ -85,19 +72,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>E65BE4E1-C446-4840-A1D2-0033CA73F1EB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>4838A2F3-53D2-43E5-9852-C92E421CCD26</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C3FDBE13-E7E8-4D2A-B488-31005068420C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -247,19 +221,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>44ACF59E-80E4-46E2-99C3-E424AAF3B5D8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>7CE2D45A-74D6-40DD-A8C8-6164633FB545</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>AD1B0D13-F18C-41AB-BCD9-8C00E6A632A2</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1182,27 +1143,6 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Save as new Draft</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>0F3BB1D5-25E5-4DDC-BB38-4C261621555B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1510,27 +1450,6 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Append to last Draft</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>7CE2D45A-74D6-40DD-A8C8-6164633FB545</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -1567,7 +1486,7 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>tell application id (system attribute "focusedapp") to activate</string>
+				<string>set prevApp to (system attribute "focusedapp")if prevApp = "" then	tell application "Neovide" to activateelse	tell application id (system attribute "focusedapp") to activateend if</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1579,68 +1498,6 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>78A52CE9-2DAF-4C58-97EC-B4687CF31E4D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "System Events"
-	tell process "Drafts"
-		click menu item "Archive" of menu of menu item "Basic" of menu "Actions" of menu bar 1
-	end tell
-end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C3FDBE13-E7E8-4D2A-B488-31005068420C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>51</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>⌫</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.agiletortoise.Drafts-OSX</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>4838A2F3-53D2-43E5-9852-C92E421CCD26</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1740,15 +1597,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
-		<key>0F3BB1D5-25E5-4DDC-BB38-4C261621555B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>550</real>
-		</dict>
 		<key>10BEA201-3D46-4F89-ADB1-10704261A8C7</key>
 		<dict>
 			<key>colorindex</key>
@@ -1821,17 +1669,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>1060</real>
 			<key>ypos</key>
 			<real>690</real>
-		</dict>
-		<key>4838A2F3-53D2-43E5-9852-C92E421CCD26</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>archive</string>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>925</real>
 		</dict>
 		<key>49D892A0-CD14-4CD5-8A67-9ED72DB6F5D9</key>
 		<dict>
@@ -1907,9 +1744,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>open "manage actions"</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>1055</real>
+			<real>925</real>
 		</dict>
 		<key>77E992B5-E489-4B56-A178-7C1CB761F733</key>
 		<dict>
@@ -1955,15 +1792,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>690</real>
 		</dict>
-		<key>7CE2D45A-74D6-40DD-A8C8-6164633FB545</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>805</real>
-		</dict>
 		<key>7F193D53-A438-48E3-AA84-18737E10DC34</key>
 		<dict>
 			<key>colorindex</key>
@@ -1989,9 +1817,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>1055</real>
+			<real>925</real>
 		</dict>
 		<key>8479954D-12AF-484E-94BC-FA244E2ECF27</key>
 		<dict>
@@ -2103,15 +1931,6 @@ Recommended Hotkey: ⇧⌘2</string>
 			<real>1060</real>
 			<key>ypos</key>
 			<real>420</real>
-		</dict>
-		<key>C3FDBE13-E7E8-4D2A-B488-31005068420C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>925</real>
 		</dict>
 		<key>CB88FFA3-5FB6-4A18-B60D-E2889A0C6C13</key>
 		<dict>
