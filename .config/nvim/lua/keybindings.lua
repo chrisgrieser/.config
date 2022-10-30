@@ -175,7 +175,7 @@ keymap("n", "dq", "mzdCOM`z", {remap = true})
 keymap("n", "yq", "mzyCOM`z", {remap = true})
 keymap("n", "gUq", "mzgUCOM`z", {remap = true})
 keymap("n", "sq", "mzsCOM`z", {remap = true})
-keymap("n", "cq", "mzdCOMxQ", {remap = true}) -- using delete to preserve commentstring
+keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- using delete to preserve commentstring
 
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h")
