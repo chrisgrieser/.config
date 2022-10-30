@@ -219,11 +219,6 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
-  ["nvim-cmp-buffer-lines"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim-cmp-buffer-lines",
-    url = "https://github.com/amarakon/nvim-cmp-buffer-lines"
-  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",

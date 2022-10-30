@@ -17,7 +17,7 @@ require("telescope").setup {
 			"%.png",
 			"%.zip",
 			"%.pxd",
-			"Spoon/", -- Hammerspoon spoons
+			"Spoons/", -- Hammerspoon spoons
 			"info.plist", -- Alfred Config Data
 		},
 		mappings = {

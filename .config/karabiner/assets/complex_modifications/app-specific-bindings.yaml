@@ -780,7 +780,7 @@ rules:
     manipulators:
       - type: basic
         from:
-          key_code: s
+          key_code: "5"
           modifiers:
             mandatory:
               - command
@@ -788,5 +788,10 @@ rules:
               - option
               - control
         to:
+          - key_code: "1"
+          - shell_command: osascript -e 'beep'
           - shell_command: |
-            killl
+              osascript -e 'display notification "" with title "Restarting Alfred..."
+              killall -KILL "Alfred"
+              delay 0.2
+            # open -a Alfred\ 5

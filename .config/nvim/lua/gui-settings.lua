@@ -24,7 +24,7 @@ local function light()
 	opt.background = 'light' ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.93
 
-	cmd[[highlight IndentBlanklineChar guifg=#cdb398]] -- dawnfox
+	cmd[[highlight IndentBlanklineChar guifg=#deccba]] -- dawnfox
 	customHighlights()
 end
 

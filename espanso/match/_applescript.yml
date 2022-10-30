@@ -48,17 +48,6 @@ matches:
     label: 🍏 Get Current Browser Tab
   - replace: |
       tell application "Finder"
-      	if (count windows) is 0 then
-      		activate
-      		tell application "System Events" to keystroke "n" using {command down}
-      		delay 0.1
-      	end if
-      	set currentDir to target of Finder window 1 as alias
-      end tell
-      return POSIX path of currentDir
-    label: 🍏 Get Current Finder Window
-  - replace: |
-      tell application "Finder"
       	if ((count windows) is 0) then return "no window"
 
       	set sel to selection
@@ -74,11 +63,6 @@ matches:
   - trigger: '!key'
     replace: tell application "System Events" to keystroke "$|$" using {command down}
     label: 🍏 Keystroke
-  - trigger: '!click'
-    replace: tell application "System Events" to click at {123$|$, 456}
-    label: 🍏 Mouse Click
-  - replace: tell application "Twitterrific$|$" to if it is not running then activate
-    label: 🍏 Launch App
   - trigger: '!quit'
     replace: tell application "Twitterrific$|$" to if it is running then quit
     label: 🍏 Quit App
@@ -102,15 +86,6 @@ matches:
       	end repeat
       end tell
     label: 🍏 Wait till tab is loaded
-  - trigger: "!resolve"
-    replace: |
-      # resolve ~
-      set unresolved_path to "~/Documents"
-      set AppleScript's text item delimiters to "~/"
-      set theTextItems to every text item of unresolved_path
-      set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))
-      set resolved_path to theTextItems as string
-    label: 🍏 Resolve ~
   - replace: |
       tell application "System Events"
       	tell process "Highlights"
