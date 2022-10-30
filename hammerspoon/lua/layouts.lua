@@ -8,13 +8,6 @@ function dockSwitcher (targetMode)
 	hs.execute("zsh ./helpers/dock-switching/dock-switcher.sh --load "..targetMode)
 end
 
-function neovideFontSize (size)
-	hs.execute("VALUE="..tostring(size)..[[
-		VIM_GUI_CONFIG="$HOME/dotfiles/.config/nvim/lua/gui-settings.lua"
-		sed -i '' "s/g.gui_font_default_size = .*/g.gui_font_default_size = $VALUE/" "$VIM_GUI_CONFIG"
-	]])
-end
-
 function alacrittyFontSize (size)
 	hs.execute("VALUE="..tostring(size)..[[
 		ALACRITTY_CONFIG="$HOME/.config/alacritty/alacritty.yml"
@@ -49,7 +42,6 @@ function movieModeLayout()
 	killIfRunning("Mimestream")
 	killIfRunning("Alfred Preferences")
 	killIfRunning("Sublime Text")
-	killIfRunning("Neovide")
 	killIfRunning("Finder")
 	killIfRunning("Alacritty")
 	killIfRunning("alacritty")
@@ -115,7 +107,6 @@ function homeModeLayout ()
 			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
 		end,
 		function()
-			neovideFontSize(25.2)
 			alacrittyFontSize(26)
 		end
 	):start()
@@ -168,7 +159,6 @@ function officeModeLayout ()
 			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
 		end,
 		function()
-			neovideFontSize(23)
 			alacrittyFontSize(24)
 		end
 	):start()
@@ -211,7 +201,6 @@ function motherHomeModeLayout()
 	killIfRunning("Twitch")
 	privateClosers() ---@diagnostic disable-line: undefined-global
 
-	neovideFontSize(24)
 	alacrittyFontSize(25)
 	dockSwitcher("home")
 

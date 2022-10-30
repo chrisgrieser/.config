@@ -7,18 +7,15 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # workaround for: https://github.com/neovide/neovide/issues/1586
 if pgrep "neovide" ; then
-	prevClipboard="$(pbpaste)"
-	echo "$1" | pbcopy
+	[[ -n "$LINE" ]] && LINE="+$LINE"
 	osascript -e "tell application \"Neovide\" to activate
 		delay 0.07
 		tell application \"System Events\"
 			key code 53
-			keystroke \":e +$LINE \"
-			keystroke \"v\" using {command down}
+			keystroke \":e $LINE $1 \"
 			delay 0.05
 			keystroke return
 		end tell"
-	echo "$prevClipboard" | pbcopy
 
 # workaround for: https://github.com/neovide/neovide/issues/1604
 else

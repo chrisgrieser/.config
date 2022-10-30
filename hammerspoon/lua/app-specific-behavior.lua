@@ -29,7 +29,7 @@ local function hideAllExcept(appNotToHide)
 end
 
 -- not local, since needed by window movements
-function unHideAll() 
+function unHideAll()
 	local wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
 	for i = 1, #wins do
 		local app = wins[i]:application()
@@ -159,13 +159,6 @@ wf_neovim = wf.new("neovide")
 		end
 	end)
 	-- bugfix for: https://github.com/neovide/neovide/issues/1595
-	:subscribe(wf.windowDestroyed, function ()
-		if #wf_neovim:getWindows() == 0 then
-			runDelayed(3, function ()
-				hs.execute("pgrep neovide || pkill nvim")
-			end)
-		end
-	end)
 	:subscribe(wf.windowDestroyed, function ()
 		if #wf_neovim:getWindows() == 0 then
 			runDelayed(3, function ()
