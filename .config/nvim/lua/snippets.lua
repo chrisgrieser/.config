@@ -6,7 +6,7 @@ require("utils")
 
 local ls = require("luasnip")
 local add = ls.add_snippets
-local snip = ls.parser.parse_snippet -- vs-code-style snippets for future-proofness
+local snip = ls.parser.parse_snippet -- lsp-style-snippets for future-proofness
 
 ls.setup {
 	enable_autosnippets = true,
@@ -14,8 +14,6 @@ ls.setup {
 	region_check_events = "InsertEnter", -- prevent <Tab> jumping back to a snippet after it has been left early
 	update_events = 'TextChanged,TextChangedI', -- live updating of snippets
 }
-
-require(fsfsf)
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
@@ -44,15 +42,15 @@ add("sh", {
 	snip("if else", 'if [[ "$${1:var}" ]] ; then\n\t$2\nelse\n\t$0\nfi'),
 	snip("installed", 'which ${1:cli} &> /dev/null || echo "${1:cli} not installed." && exit 1'),
 
-	snip("stderr",'2>&1 '),
-	snip("null", "&> /dev/null "),
+	snip("stderr (pipe)",'2>&1 '),
+	snip("null (pipe)", "&> /dev/null "),
 
-	snip("sed", "| sed 's/${1:pattern}/${2:replacement}/g'"),
-	snip("plist", 'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
-	snip("running", 'pgrep -x "$${1:process}" > /dev/null && $0'),
-	snip("quicklook", 'qlmanage -p "${1:filepath}"'),
+	snip("sed (pipe)", "| sed 's/${1:pattern}/${2:replacement}/g'"),
+	snip("plist extract key", 'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
+	snip("running process", 'pgrep -x "$${1:process}" > /dev/null && $0'),
+	snip("quicklook", 'qlmanage -p "${1:filepath}"'), -- mac only
 
-	snip("reset", "\\\\\\033[0m"),
+	snip("reset", "\\\\\\033[0m"), -- yes, it seems that many backslashes are actually needed
 	snip("black", "\\\\\\033[1;30m"),
 	snip("red", "\\\\\\033[1;31m"),
 	snip("green", "\\\\\\033[1;32m"),
@@ -73,7 +71,7 @@ add("sh", {
 
 -- Lua
 add("lua", {
-	snip("for", "for i=1, #${1:Stuff} do\n\t$0\nend"),
+	snip("for", "for i=1, #${1:array} do\n\t$0\nend"),
 	snip("resolve home", 'os.getenv("HOME")'),
 	snip("augroup & autocmd",
 		'augroup("${1:groupname}", {\\})\n'..
@@ -124,5 +122,5 @@ add("javascript", {
 ls.filetype_extend("typescript", {"javascript"}) -- typescript uses all javascript snippets
 ls.filetype_extend("zsh", {"sh"})
 
--- load friendly snippets
+-- load friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()
