@@ -32,8 +32,12 @@ keymap("n", "<leader>v", '^Ewct;', {buffer = true}) -- change [v]alue key
 keymap("n", "<leader>c", 'mzlEF.yEEp`z', {buffer = true}) -- double [c]lass under cursor
 keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>:nohl<CR>', {buffer = true}) -- delete class under cursor
 
--- toggle !important
 ---@diagnostic disable: undefined-field, param-type-mismatch
+-- prefix "." to every word. Useful when copypasting from the dev tools
+keymap("n", "<leader>.","`[v`]", {buffer = true}) -- add dots to last paste
+
+-- tree-item-self is-clickable
+-- toggle !important
 keymap("n", "<leader>i", function ()
 	local lineContent = fn.getline('.')
 	if lineContent:find("!important") then
