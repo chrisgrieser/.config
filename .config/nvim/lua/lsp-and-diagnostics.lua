@@ -103,6 +103,7 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 	keymap('n', 'gD', telescope.lsp_references, bufopts)
 	keymap('n', 'gy', telescope.lsp_type_definitions, bufopts)
 	keymap('n', '<leader>R', vim.lsp.buf.rename, bufopts)
+	keymap('n', '<D-s>', function () vim.lsp.buf.format{async = true} end, bufopts)
 
 	if client.name ~= "bashls" then -- don't override man page popup
 		keymap('n', '<leader>h', vim.lsp.buf.hover, bufopts) -- docs popup
