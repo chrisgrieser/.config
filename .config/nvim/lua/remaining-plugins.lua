@@ -15,14 +15,6 @@ cmd[[let g:sneak#s_next = 1]] -- "s" repeats, like with clever-f
 cmd[[let g:sneak#use_ic_scs = 1]] -- smart case
 cmd[[let g:sneak#prompt = '👟 ']]
 
--- Emmet: use only in CSS insert mode
-g.user_emmet_install_global = 0
-g.user_emmet_mode='i'
-autocmd("FileType", {
-	pattern = "css",
-	command = "EmmetInstall"
-})
-
 -- indention lines
 g.indent_blankline_filetype_exclude = {"undotree"}
 g.indent_blankline_strict_tabs = true
@@ -43,26 +35,6 @@ nmap <buffer> K 7k
 nmap <buffer> U <plug>UndotreeRedo
 endfunc
 ]]
-
--- Symbol outline
-require("symbols-outline").setup{
-	width = 40,
-	autofold_depth = 2,
-	keymaps = {
-		close = {"<Esc>", "gS"}, -- q mapped via filetype-spefic binding for "nowait"
-		goto_location = "<CR>",
-		focus_location = "f",
-		toggle_preview = "p",
-		rename_symbol = "r",
-		code_actions = "a",
-		fold = "h",
-		unfold = "l",
-		fold_all = "H",
-		unfold_all = "L",
-	},
-	lsp_blacklist = {},
-	symbol_blacklist = {"Enum", "EnumMember"},
-}
 
 require('indent-o-matic').setup {
 	max_lines = 2048,

@@ -86,7 +86,7 @@ require"lsp_signature".setup{
 	hint_scheme = "Comment", -- highlight group that is applied to the hint
 }
 
-keymap({"n", "i", "x"}, '<C-s>', function () vim.lsp.buf.signature_help() end)
+keymap({"n", "i", "x"}, '<C-s>', vim.lsp.buf.signature_help)
 
 -- fallback for languages without an action LSP
 keymap('n', 'gs', telescope.treesitter, {silent = true})
@@ -109,7 +109,6 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 	end
 
 	if client.name ~= "cssls" then -- don't override navigation marker search for css files
-		keymap('n', 'gS', ":SymbolsOutline<CR>", bufopts)
 		keymap('n', 'gs', telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
 	end
 end

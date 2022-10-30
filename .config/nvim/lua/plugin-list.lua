@@ -2,14 +2,14 @@ function PluginList ()
 
 	-- Package Management
 	use "wbthomason/packer.nvim" -- packer manages itself
-	use "dstein64/vim-startuptime" -- measure startup time with `:StartupTime`
+	-- use "dstein64/vim-startuptime" -- measure startup time with `:StartupTime`
 	use 'lewis6991/impatient.nvim' -- reduces startup time by ~50%
 	use { "williamboman/mason.nvim", requires = 'RubixDev/mason-update-all' }
 
 	-- Themes
-	use "navarasu/onedark.nvim"
+	-- use "navarasu/onedark.nvim"
 	use "EdenEast/nightfox.nvim"
-	-- use "folke/tokyonight.nvim"
+	use "folke/tokyonight.nvim"
 	-- use "rebelot/kanagawa.nvim"
 	-- use "Mofiqul/dracula.nvim"
 	-- use "savq/melange"
@@ -44,12 +44,9 @@ function PluginList ()
 	-- 	"jayp0521/mason-nvim-dap.nvim",
 	-- 	"rcarriga/nvim-dap-ui",
 	-- 	"mxsdev/nvim-dap-vscode-js",
-	-- 	"nvim-dap-virtual-text",
-	-- 	"theHamsta/nvim-dap-virtual-text",
 	-- }}
 
 	-- Completion & Suggestion
-	use "mattn/emmet-vim" -- Emmet for CSS
 	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
 	use {"hrsh7th/nvim-cmp", requires = {
 		"hrsh7th/cmp-buffer", -- completion sources
@@ -74,11 +71,6 @@ function PluginList ()
 	use "lewis6991/gitsigns.nvim"
 	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	use {
-		'phaazon/notisys.nvim',
-		branch = 'v0.1',
-		config = function() require'notisys'.setup() end,
-	}
 
 	-- File Management & Switching
 	use "tpope/vim-eunuch" -- file operation utilities
@@ -101,7 +93,7 @@ function PluginList ()
 	-- Navigation
 	use "mg979/vim-visual-multi" -- multi-cursor
 	use "justinmk/vim-sneak"
-	use "simrat39/symbols-outline.nvim" -- outline view for symbols
+	use "phaazon/hop.nvim"
 
 	-- Editing
 	use "matze/vim-move"
