@@ -64,13 +64,15 @@ keymap("n", "<C-l>", "<C-i>") -- Forward
 keymap("n", "gh", ":Gitsigns next_hunk<CR>")
 keymap("n", "gH", ":Gitsigns next_prev<CR>")
 
--- Sneak
-keymap({"n", "x", "o"}, "ö", "<Plug>Sneak_s")
-keymap({"n", "x", "o"}, "Ö", "<Plug>Sneak_S")
-keymap({"n", "x", "o"}, "f", "<Plug>Sneak_f")
-keymap({"n", "x", "o"}, "F", "<Plug>Sneak_F")
-keymap({"n", "x", "o"}, "t", "<Plug>Sneak_t")
-keymap({"n", "x", "o"}, "T", "<Plug>Sneak_T")
+-- Hop
+keymap("n", "ö", ":HopWordAC<CR>")
+keymap("n", "Ö", ":HopWordBC<CR>")
+-- keymap({"n", "x", "o"}, "ö", "<Plug>Sneak_s")
+-- keymap({"n", "x", "o"}, "Ö", "<Plug>Sneak_S")
+-- keymap({"n", "x", "o"}, "f", "<Plug>Sneak_f")
+-- keymap({"n", "x", "o"}, "F", "<Plug>Sneak_F")
+-- keymap({"n", "x", "o"}, "t", "<Plug>Sneak_t")
+-- keymap({"n", "x", "o"}, "T", "<Plug>Sneak_T")
 
 -- Search
 keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout

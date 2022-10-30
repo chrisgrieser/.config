@@ -92,7 +92,7 @@ function PluginList ()
 
 	-- Navigation
 	use "mg979/vim-visual-multi" -- multi-cursor
-	use "justinmk/vim-sneak"
+	-- use "justinmk/vim-sneak"
 	use "phaazon/hop.nvim"
 
 	-- Editing

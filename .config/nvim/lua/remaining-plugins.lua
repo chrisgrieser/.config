@@ -11,9 +11,12 @@ g.netrw_localcopydircmd = 'cp -r' -- makes copy work with directories
 cmd[[highlight! def link netrwTreeBar IndentBlankLineChar]]
 
 -- Sneak
-cmd[[let g:sneak#s_next = 1]] -- "s" repeats, like with clever-f
-cmd[[let g:sneak#use_ic_scs = 1]] -- smart case
-cmd[[let g:sneak#prompt = '👟 ']]
+-- cmd[[let g:sneak#s_next = 1]] -- "s" repeats, like with clever-f
+-- cmd[[let g:sneak#use_ic_scs = 1]] -- smart case
+-- cmd[[let g:sneak#prompt = '👟 ']]
+
+-- Hop.nvim
+require('hop').setup { multi_windows = true }
 
 -- indention lines
 g.indent_blankline_filetype_exclude = {"undotree"}
