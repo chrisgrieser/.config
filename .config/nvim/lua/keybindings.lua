@@ -288,13 +288,17 @@ keymap({"n", "x"}, "M", "J") -- [M]erge line up
 keymap({"n", "x"}, "gm", "ddpkJ") -- [m]erge line down
 g.splitjoin_split_mapping = '' -- disable default mappings
 g.splitjoin_join_mapping = ''
+
 keymap("n", "<leader>m", ":SplitjoinJoin<CR>")
 keymap("n", "<leader>s", ":SplitjoinSplit<CR>")
 keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 
+keymap("n", "<C-q>", "gqq") -- needs remapping since shadowed
+keymap("x", "<C-q>", "gq")
+
 -- Undo
 keymap({"n", "x"}, "U", "<C-r>") -- redo
-keymap("n", "<C-u>", "U") -- undo line
+keymap("n", "<C-u>", "U") -- undo line, needs remapping since shadowed
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
 --------------------------------------------------------------------------------
@@ -340,6 +344,7 @@ keymap("n", "gO", telescope.git_files) -- [o]pen file in git directory
 keymap("n", "gr", telescope.oldfiles) -- [r]ecent files
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
 keymap("n", "gf", telescope.live_grep) -- search in [f]iles
+keymap("n", "gF", "gf") -- needs remapping since shadowed
 
 -- File Operations
 keymap("", "<C-p>", ':let @+ = expand("%:p")<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file

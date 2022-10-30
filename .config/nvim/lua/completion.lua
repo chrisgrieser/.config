@@ -27,7 +27,7 @@ defaultAndNerdfont = {
 defaultAndBufferlines = {
 	{ name = 'luasnip' },
 	{ name = 'nvim_lsp' },
-	{ name = "buffer-lines", keyword_length = 2 },
+	{ name = "buffer-lines", keyword_length = 3 },
 	{ name = 'emoji', keyword_length = 2 },
 	{ name = 'buffer', keyword_length = 2 },
 }
@@ -154,7 +154,6 @@ cmp.setup.filetype ("toml", {
 
 --------------------------------------------------------------------------------
 -- Command Line Completion
-
 cmp.setup.cmdline({ '/', '?' }, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
