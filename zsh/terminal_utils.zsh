@@ -54,7 +54,6 @@ function timezsh(){
 	for i in $(seq 1 10); do /usr/bin/time $SHELL -i -c exit; done
 }
 
-# Move to trash via Finder (allows retrievability)
 # no arg = all files in folder will be deleted
 function d () {
 	if [[ $# == 0 ]]; then
@@ -66,11 +65,7 @@ function d () {
 		ALL_FILES=( "$@" ) # save as array
 	fi
 	for ARG in "${ALL_FILES[@]}"; do
-		ABSOLUTE_PATH="$(cd "$(dirname "$ARG")" || return 1; pwd -P)/$(basename "$ARG")"
-		osascript -e "
-			set toDelete to \"$ABSOLUTE_PATH\" as POSIX file
-			tell application \"Finder\" to delete toDelete
-		" >/dev/null
+		mv "$ARG" ~/.Trash
 	done
 }
 
