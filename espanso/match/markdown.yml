@@ -8,8 +8,8 @@ matches:
     replace: "```{{lang}}\n{{clipboard}}\n```"
     label: Markdown Codeblock
     vars:
-    - name: clipboard
-      type: clipboard
+      - name: clipboard
+        type: clipboard
 
   - trigger: TTT
     replace: '- [ ] '
@@ -35,17 +35,3 @@ matches:
   - trigger: '!progress'
     replace: '<progress value="$|$" max="10"></progress>'
     label: HTML Progress Bar
-
-  - trigger: '!yaml'
-    replace: |
-      ---
-      aliases:
-      tags: seedling, $|$
-      similar:
-      ---
-    label: Base YAML Header
-
-  - trigger: "!github"
-    replace: "> **Note**  \n> "
-    label: GitHub Callout
-
