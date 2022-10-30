@@ -16,18 +16,10 @@ local defaultWithoutBuffer = {
 	{ name = 'emoji', keyword_length = 2 },
 }
 
-defaultAndNerdfont = {
+local defaultAndNerdfont = {
 	{ name = 'luasnip' },
 	{ name = 'nvim_lsp' },
 	{ name = "nerdfont", keyword_length = 2 },
-	{ name = 'emoji', keyword_length = 2 },
-	{ name = 'buffer', keyword_length = 2 },
-}
-
-defaultAndBufferlines = {
-	{ name = 'luasnip' },
-	{ name = 'nvim_lsp' },
-	{ name = "buffer-lines", keyword_length = 3 },
 	{ name = 'emoji', keyword_length = 2 },
 	{ name = 'buffer', keyword_length = 2 },
 }
@@ -103,11 +95,9 @@ cmp.setup({
 
 	formatting = {
 		format = function(entry, vim_item)
-			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
 			vim_item.kind = kind_icons[vim_item.kind]
 			vim_item.menu = ({
 				buffer = "[B]",
-				["buffer-lines"] = "[BL]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[S]",
 				emoji = "[E]",
@@ -119,7 +109,6 @@ cmp.setup({
 			return vim_item
 		end
 	},
-	-- disable completion in comments https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-completion-in-certain-contexts-such-as-comments
 })
 
 --------------------------------------------------------------------------------
@@ -132,14 +121,6 @@ cmp.setup.filetype ("lua", {
 		return not(lineContent:match(" %-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
 	end,
 	sources = cmp.config.sources(defaultAndNerdfont),
-})
-
--- use buffer lines in yaml and json
-cmp.setup.filetype ("json", {
-	sources = cmp.config.sources(defaultAndBufferlines),
-})
-cmp.setup.filetype ("yaml", {
-	sources = cmp.config.sources(defaultAndBufferlines),
 })
 
 -- don't use buffer in css completions

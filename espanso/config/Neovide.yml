@@ -1,9 +1,10 @@
 # https://espanso.org/docs/configuration/app-specific-configurations/#advanced-use-cases-for-filter_title
 # ------------------------------------------------------------------------------
-# only activates code snippets when a file of the right language is open
 
+filter_exex: neovide
 
-filter_title: \.py
+extra_exclude:
+  - "../match/private.yml"
+  - "../match/email.yml"
 
-extra_includes:
-  - "../match/_python.yml"
+backend: Clipboard

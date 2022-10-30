@@ -1467,6 +1467,36 @@
           ]
         }
       ]
+    },
+    {
+      "description": "🅰️  Alfred Restart",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "5",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "shift",
+                "option",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "1"
+            },
+            {
+              "shell_command": "osascript -e 'beep'"
+            },
+            {
+              "shell_command": "osascript -e 'display notification \"\" with title \"Restarting Alfred...\"\nkillall -KILL \"Alfred\"\ndelay 0.2\n"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
