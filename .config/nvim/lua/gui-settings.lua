@@ -25,6 +25,7 @@ local function light()
 	g.neovide_transparency = 0.93
 
 	cmd[[highlight IndentBlanklineChar guifg=#deccba]] -- dawnfox
+	cmd[[highlight VertSplit guifg=#b29b84]] -- dawnfox
 	customHighlights()
 end
 

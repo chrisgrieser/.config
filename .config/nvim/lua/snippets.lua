@@ -28,19 +28,48 @@ add("sh", {
 }, { type = "autosnippets" })
 
 add("sh", {
+	snip("PATH", 'export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH\n$0'),
+	snip("resolve home",'${1:path}="${${1:path}/#\\~/\\$HOME}"'),
+	snip("filename", '${1:file_name}=$(basename "$${1:filepath}")'),
+	snip("parent folder", '$(dirname "$${1:filepath}")'),
+	snip("extension", '${2:ext}=\\${${1:file_name}##*.}'),
+	snip("filename w/o ext", '${1:file_name}=\\${${1:file_name}%.*}'),
+	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
+
 	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
 	snip("if", 'if [[ "$${1:var}" ]] ; then\n\t$0\nfi'),
 	snip("if else", 'if [[ "$${1:var}" ]] ; then\n\t$2\nelse\n\t$0\nfi'),
-	snip("resolve home",'${1:path}="${${1:path}/#\\~/\\$HOME}"'),
-	snip("stderr",'2>&1'),
-	snip("null", "&> /dev/null"),
-	snip("sed", "| sed 's/$|$//g'"),
 	snip("installed", 'which ${1:cli} &> /dev/null || echo "${1:cli} not installed." && exit 1'),
-	snip("quicklook", 'qlmanage -p "${1:filepath}"'),
-	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
+
+	snip("stderr",'2>&1 '),
+	snip("null", "&> /dev/null "),
+
+	snip("sed", "| sed 's/${1:pattern}/${2:replacement}/g'"),
 	snip("plist", 'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
-	snip("running", 'pgrep -x "${1:process}" > /dev/null && $0'),
-	snip("PATH", 'pgrep -x "${1:process}" > /dev/null && $0'),
+	snip("running", 'pgrep -x "$${1:process}" > /dev/null && $0'),
+	snip("quicklook", 'qlmanage -p "${1:filepath}"'),
+})
+
+add("sh", {
+	snip("reset", "\\\\\\033[0m"),
+	snip("black", "\\\\\\033[1;30m"),
+	snip("red", "\\\\\\033[1;31m"),
+	snip("green", "\\\\\\033[1;32m"),
+	snip("yellow", "\\\\\\033[1;33m"),
+	snip("blue", "\\\\\\033[1;34m"),
+	snip("magenta", "\\\\\\033[1;35m"),
+	snip("cyan", "\\\\\\033[1;36m"),
+	snip("white", "\\\\\\033[1;37m"),
+
+	snip("reset", "\\\\\\033[0m"),
+	snip("black", "\\\\\\033[1;30m"),
+	snip("red", "\\\\\\033[1;31m"),
+	snip("green", "\\\\\\033[1;32m"),
+	snip("yellow", "\\\\\\033[1;33m"),
+	snip("blue", "\\\\\\033[1;34m"),
+	snip("magenta", "\\\\\\033[1;35m"),
+	snip("cyan", "\\\\\\033[1;36m"),
+	snip("white", "\\\\\\033[1;37m"),
 })
 
 -- Lua

@@ -2,20 +2,6 @@
 # ------------------------------------------
 
 matches:
-  - replace: |
-      file_name=$(basename "$input_path")
-      ext="${file_name##*.}"
-      file_without_extension="${file_name%.*}"
-      file_name=$(basename "$input_path" .txt) # when extension is know, e.g. .txt
-      parent_folder=$(dirname "$input_path")
-    label: 🐚 Extract file name, extension or folder from path
-
-  - triggers: ["!color", "!reset"]
-    replace: "\\033[0m"
-    label: reset
-  - triggers: ["!color", "!black"]
-    replace: "\\033[1;30m"
-    label: fg black
   - triggers: ["!color", "!red"]
     replace: "\\033[1;31m"
     label: fg red
