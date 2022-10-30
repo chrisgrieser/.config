@@ -9,40 +9,7 @@ matches:
       file_name=$(basename "$input_path" .txt) # when extension is know, e.g. .txt
       parent_folder=$(dirname "$input_path")
     label: 🐚 Extract file name, extension or folder from path
-  - replace: cd "$(dirname "$0")"
-    label: 🐚 Go to directory of script (location)
-  - replace: qlmanage -p "$filepath"
-    label: 🐚 Quick Look file
-  - replace: |
-      plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1
-    label: 🐚 Read plist value
-  - replace: |
-      if [[ "$LONG_STRING" =~ "$SHORTSTRING" ]] ; then
-      	echo "short string is part of long string"
-      fi
-    label: 🐚 String Includes
-  - replace: '[[ "$LONG_STRING" =~ "$SHORT_STRING" ]]'
-    label: 🐚 String contains other string
-  - trigger: "!sed"
-    replace: "| sed 's/$|$//g' "
-    label: 🐚 pipe to sed
-  - trigger: "!null"
-    replace: "&> /dev/null"
-    label: 🐚 dev/null
-  - trigger: "!cli"
-    label: "🐚 CLI Availability Guard Clause"
-    replace: |
-      if ! which $|$ &> /dev/null ; then
-        echo "XXX not installed."
-        exit 1
-      fi
-  - label: "🐚 Check whether process is running"
-    replace: |
-      if pgrep -x "app$|$" > /dev/null; then
-      	echo "Running"
-      else
-      	echo "Not running"
-      fi
+
   - triggers: ["!color", "!reset"]
     replace: "\\033[0m"
     label: reset
