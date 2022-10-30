@@ -3,8 +3,8 @@ require("appearance")
 --------------------------------------------------------------------------------
 
 -- BASE CONFIG
-local darkTheme = "onedark"
--- local darkTheme = "tokyonight-moon"
+-- local darkTheme = "onedark"
+local darkTheme = "tokyonight-moon"
 -- local darkTheme = "kanagawa"
 local lightTheme = "dawnfox"
 

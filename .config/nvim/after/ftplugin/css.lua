@@ -28,8 +28,7 @@ cmd[[
 -- highlighting isn't good yet, so...
 keymap("n", "zz", ":syntax sync fromstart<CR>", {buffer = true})
 
-keymap("i", ",,", "<Plug>(emmet-expand-abbr)", {silent = true, buffer = true})
-keymap("n", "<leader>v", '^Ellct;', {buffer = true}) -- change [v]alue key
+keymap("n", "<leader>v", '^Ewct;', {buffer = true}) -- change [v]alue key
 keymap("n", "<leader>c", 'mzlEF.yEEp`z', {buffer = true}) -- double [c]lass under cursor
 keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>:nohl<CR>', {buffer = true}) -- delete class under cursor
 
