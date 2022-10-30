@@ -7,12 +7,21 @@ local defaultSources = {
 	{ name = 'luasnip' },
 	{ name = 'nvim_lsp' },
 	{ name = 'emoji', keyword_length = 2 },
-	{ name = 'buffer', keyword_length = 2 }, -- should be last
+	{ name = 'buffer', keyword_length = 2 }, 
 }
 
-local defaultWithoutBuffer = table.remove(defaultSources) -- requires buffer being last element
+local defaultSources = {
+	{ name = 'luasnip' },
+	{ name = 'nvim_lsp' },
+	{ name = 'emoji', keyword_length = 2 },
+	{ name = 'buffer', keyword_length = 2 }, 
+}
+
+local defaultWithoutBuffer = table.remove(defaultSources) 
 local nerdfontSource = { name = "nerdfont", keyword_length = 2 }
 local bufferLineSource = { name = "buffer-lines", keyword_length = 2 }
+
+
 
 --------------------------------------------------------------------------------
 
@@ -107,6 +116,7 @@ cmp.setup({
 --------------------------------------------------------------------------------
 -- Filetype specific Completion
 
+local defaultWithNerd
 cmp.setup.filetype ("lua", {
 	enabled = function()
 		-- disable leading "-"
