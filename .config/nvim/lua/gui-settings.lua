@@ -1,14 +1,24 @@
 require("utils")
 require("appearance")
+
+
 --------------------------------------------------------------------------------
 
 -- BASE CONFIG
--- local darkTheme = "onedark"
-local darkTheme = "tokyonight-moon"
--- local darkTheme = "kanagawa"
 local lightTheme = "dawnfox"
+local darkTheme = "tokyonight-moon"
+-- local darkTheme = "onedark"
+-- local darkTheme = "kanagawa"
 
-g.gui_font_default_size = 25.2
+-- font size dependent on device
+if fn.hostname():find("iMac") then
+	g.gui_font_default_size = 25.2
+elseif fn.hostname():find("mini") then
+	g.gui_font_default_size = 23
+elseif fn.hostname():find("Mother") then
+	g.gui_font_default_size = 24
+end
+
 g.gui_font_face = "JetBrainsMonoNL Nerd Font"
 opt.guicursor =
 	"n-sm:block,"..
@@ -21,30 +31,28 @@ opt.guicursor =
 -- THEME
 local function light()
 	cmd("colorscheme "..lightTheme)
-	opt.background = 'light' ---@diagnostic disable-line: assign-type-mismatch
-	g.neovide_transparency = 0.93
-
-	cmd[[highlight IndentBlanklineChar guifg=#deccba]] -- dawnfox
-	cmd[[highlight VertSplit guifg=#b29b84]] -- dawnfox
+	g.neovide_transparency = 0.92
+	if g.colors_name == "dawnfox" then
+		cmd[[highlight IndentBlanklineChar guifg=#deccba]]
+		cmd[[highlight VertSplit guifg=#b29b84]]
+	end
 	customHighlights()
 end
 
 local function dark()
 	cmd("colorscheme "..darkTheme)
-	opt.background = 'dark' ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.97
-
 	cmd[[hi rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets...
 	customHighlights()
 end
 
 -- toggle theme with OS
 local auto_dark_mode = require('auto-dark-mode')
-auto_dark_mode.setup({
+auto_dark_mode.setup{
 	update_interval = 3000,
 	set_dark_mode = dark,
 	set_light_mode = light,
-})
+}
 auto_dark_mode.init()
 
 --------------------------------------------------------------------------------
@@ -52,7 +60,7 @@ auto_dark_mode.init()
 keymap({"n", "v"}, "<D-w>", ":close<CR>") -- cmd+w
 keymap("i", "<D-w>", "<Esc>:close<CR>")
 
-keymap({"n", "v"}, "<D-n>", ':Lexplore<CR>%', {remap = true}) -- cmd+n
+keymap({"n", "v"}, "<D-n>", ':Lexplore<CR>%', {remap = true}) -- cmd+n, needs remap since % is netrw mapping
 
 keymap({"n", "v"}, "<D-z>", "u") -- cmd+z
 keymap({"n", "v"}, "<D-Z>", "<C-R>") -- cmd+shift+z
