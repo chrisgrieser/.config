@@ -25,13 +25,11 @@ local forceZshForShellcheck = {
 null_ls.setup{
 	sources = {
 		null_ls.builtins.code_actions.gitsigns, -- gitsings.nvim plugin, e.g. hunk previews
-		null_ls.builtins.diagnostics.trail_space,
 
 		-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go
 		null_ls.builtins.diagnostics.shellcheck.with(forceZshForShellcheck),
 		null_ls.builtins.code_actions.shellcheck.with(forceZshForShellcheck),
 		null_ls.builtins.diagnostics.zsh, -- basic diagnostics via shell -x
-		null_ls.builtins.hover.printenv, -- value of env variable
 
 		null_ls.builtins.formatting.stylelint,
 		null_ls.builtins.diagnostics.stylelint.with{ -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
