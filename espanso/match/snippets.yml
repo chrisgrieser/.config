@@ -1,5 +1,5 @@
 # https://espanso.org/docs/
-# ------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
 matches:
   - trigger: '!web'
@@ -81,9 +81,17 @@ matches:
           cmd: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; neovide --version | cut -d' ' -f2"
 
   - trigger: "!oversion"
-    replace: "Obsidian {{version}}"
+    replace: |
+      ```
+      macOS {{OSversion}} (M1)
+      Obsidian {{obsiVersion}}
+      ```
     vars:
-      - name: version
+      - name: OSversion
+        type: shell
+        params:
+          cmd: "sw_vers -productVersion"
+      - name: obsiVersion
         type: shell
         params:
           cmd: 'ls ~"/Library/Application Support/obsidian/"*".asar" | xargs -I {} basename {} | cut -d"." -f1-3 | cut -d"-" -f2'
