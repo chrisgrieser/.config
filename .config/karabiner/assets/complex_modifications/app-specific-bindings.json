@@ -1486,13 +1486,7 @@
           },
           "to": [
             {
-              "key_code": "1"
-            },
-            {
-              "shell_command": "osascript -e 'beep'"
-            },
-            {
-              "shell_command": "osascript -e 'display notification \"\" with title \"Restarting Alfred...\"\nkillall -KILL \"Alfred\"\ndelay 0.2\n"
+              "shell_command": "osascript -e 'display notification \"\" with title \"Restarting Alfred...\"'\nkillall -KILL \"Alfred\"\ndelay 0.2\nopen -a Alfred\\ 5\n"
             }
           ]
         }

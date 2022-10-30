@@ -33,6 +33,14 @@ add("sh", {
 	snip("if else", 'if [[ "$${1:var}" ]] ; then\n\t$2\nelse\n\t$0\nfi'),
 	snip("resolve home",'${1:path}="${${1:path}/#\\~/\\$HOME}"'),
 	snip("stderr",'2>&1'),
+	snip("null", "&> /dev/null"),
+	snip("sed", "| sed 's/$|$//g'"),
+	snip("installed", 'which ${1:cli} &> /dev/null || echo "${1:cli} not installed." && exit 1'),
+	snip("quicklook", 'qlmanage -p "${1:filepath}"'),
+	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
+	snip("plist", 'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
+	snip("running", 'pgrep -x "${1:process}" > /dev/null && $0'),
+	snip("PATH", 'pgrep -x "${1:process}" > /dev/null && $0'),
 })
 
 -- Lua

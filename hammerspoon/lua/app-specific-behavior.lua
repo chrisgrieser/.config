@@ -166,6 +166,13 @@ wf_neovim = wf.new("neovide")
 			end)
 		end
 	end)
+	:subscribe(wf.windowDestroyed, function ()
+		if #wf_neovim:getWindows() == 0 then
+			runDelayed(3, function ()
+				hs.execute("pgrep neovide || pkill nvim")
+			end)
+		end
+	end)
 
 --------------------------------------------------------------------------------
 
