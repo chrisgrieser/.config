@@ -3,7 +3,7 @@
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
-      "description": "↹ Tab →  Meh",
+      "description": "↹ Tab → Meh",
       "manipulators": [
         {
           "type": "basic",
