@@ -30,14 +30,13 @@ keymap("n", "zz", ":syntax sync fromstart<CR>", {buffer = true})
 
 keymap("n", "<leader>v", '^Ewct;', {buffer = true}) -- change [v]alue key
 keymap("n", "<leader>c", 'mzlEF.yEEp`z', {buffer = true}) -- double [c]lass under cursor
-keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>:nohl<CR>', {buffer = true}) -- delete class under cursor
+keymap("n", "<leader>C", 'lF.d/[.\\s]<CR>:nohl<CR>', {buffer = true}) -- delete [c]lass under cursor
 
----@diagnostic disable: undefined-field, param-type-mismatch
--- prefix "." to every word. Useful when copypasting from the dev tools
-keymap("n", "<leader>.","`[v`]", {buffer = true}) -- add dots to last paste
+-- prefix "." and join the last paste. Useful when copypasting from the dev tools
+keymap("n", "<leader>.","mz`[v`]: s/^\\| /./g<CR>:nohl<CR>`zl", {buffer = true})
 
--- tree-item-self is-clickable
 -- toggle !important
+---@diagnostic disable: undefined-field, param-type-mismatch
 keymap("n", "<leader>i", function ()
 	local lineContent = fn.getline('.')
 	if lineContent:find("!important") then
