@@ -1,4 +1,4 @@
 require("utils")
 --------------------------------------------------------------------------------
 
-keymap('n', '<leader>h', ":Man", {buffer = true})
+keymap('n', '<leader>h', ":Man<CR>", {buffer = true})

@@ -28,7 +28,7 @@ add("sh", {
 }, { type = "autosnippets" })
 
 add("sh", {
-	snip("PATH", 'export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH\n$0'),
+	snip("PATH", 'export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\\$PATH\n$0'),
 	snip("resolve home",'${1:path}="${${1:path}/#\\~/\\$HOME}"'),
 	snip("filename", '${1:file_name}=$(basename "$${1:filepath}")'),
 	snip("parent folder", '$(dirname "$${1:filepath}")'),
