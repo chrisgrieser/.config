@@ -5,7 +5,7 @@ require("lua.system-and-cron")
 --------------------------------------------------------------------------------
 -- TRANSPARENT background for Obsidian & Alacritty & Neovim
 
-function hideAllExcept(appNotToHide)
+local function hideAllExcept(appNotToHide)
 	local mainScreen = hs.screen.mainScreen()
 	local wins = hs.window.orderedWindows() -- `orderedWindows()` ignores headless apps like Twitterrific
 	for i = 1, #wins do
@@ -28,7 +28,8 @@ function hideAllExcept(appNotToHide)
 	end
 end
 
-function unHideAll()
+-- not local, since needed by window movements
+function unHideAll() 
 	local wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
 	for i = 1, #wins do
 		local app = wins[i]:application()
@@ -37,7 +38,7 @@ function unHideAll()
 	end
 end
 
-function transBackgroundApp (appName, eventType, appObject)
+local function transBackgroundApp (appName, eventType, appObject)
 	if not(appName == "neovide" or appName == "Neovide" or appName == "Obsidian" or appName == "alacritty" or appName == "Alacritty") then return end
 
 	local win = appObject:mainWindow()
@@ -54,7 +55,7 @@ transBgAppWatcher:start()
 
 -- OBSIDIAN
 -- Sync on Vault close
-function obsidianSync (appName, eventType)
+local function obsidianSync (appName, eventType)
 	if appName == "Obsidian" and eventType == aw.launched then
 		gitVaultSync()
 	end

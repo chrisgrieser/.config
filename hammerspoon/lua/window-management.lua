@@ -48,7 +48,7 @@ end
 
 -- requires these two helper actions for Drafts installed:
 -- https://directory.getdrafts.com/a/2BS & https://directory.getdrafts.com/a/2BR
-function toggleDraftsSidebar (draftsWin)
+local function toggleDraftsSidebar (draftsWin)
 	local function toggle ()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
@@ -62,7 +62,7 @@ function toggleDraftsSidebar (draftsWin)
 	runDelayed(0.2, toggle) -- repetition for some rare cases with lag needed
 end
 
-function toggleHighlightsSidebar (highlightsWin)
+local function toggleHighlightsSidebar (highlightsWin)
 	runDelayed(0.3, function ()
 		local highlights_w = highlightsWin:frame().w
 		local screen_w = highlightsWin:screen():frame().w
@@ -102,8 +102,9 @@ end
 
 function moveResizeCurWin(mode)
 	local win = hs.window.focusedWindow()
-	local position
+	local appName = win:application():name()
 
+	local position
 	if (mode == "left") then
 		position = hs.layout.left50
 	elseif (mode == "right") then
@@ -120,11 +121,20 @@ function moveResizeCurWin(mode)
 		position = {x=0.2, y=0.1, w=0.6, h=0.8}
 	end
 
+	if not(mode == "pseudo-maximized" or mode == "maximized") then
+		unHideAll()
+		if appName == "neovide" or appName == "Neovide" then -- useful for theme development
+			runDelayed(0.2, function ()
+				hs.application("Obsidian"):mainWindow():raise()
+			end)
+		end
+	end
+
 	moveResize(win, position) -- workaround for https://github.com/Hammerspoon/hammerspoon/issues/2316
 
-	if win:application():name() == "Drafts" then toggleDraftsSidebar(win)
-	elseif win:application():name() == "Obsidian" then toggleObsidianSidebar(win)
-	elseif win:application():name() == "Highlights" then toggleHighlightsSidebar(win)
+	if appName == "Drafts" then toggleDraftsSidebar(win)
+	elseif appName == "Obsidian" then toggleObsidianSidebar(win)
+	elseif appName == "Highlights" then toggleHighlightsSidebar(win)
 	end
 
 	if mode == "pseudo-maximized" then
@@ -141,7 +151,7 @@ function moveResize(win, pos)
 	runDelayed(0.5, function () win:moveToUnit(pos) end):start()
 end
 
-function moveToOtherDisplay ()
+local function moveToOtherDisplay ()
 	local win = hs.window.focusedWindow()
 	local targetScreen = win:screen():next()
 	win:moveToScreen(targetScreen, true)
@@ -155,7 +165,7 @@ end
 
 --------------------------------------------------------------------------------
 -- HOTKEYS
-function controlSpace ()
+local function controlSpace ()
 	if frontapp() == "Finder" or frontapp() == "Script Editor" then
 		size = "centered"
 	elseif isIMacAtHome() or isAtMother() then

@@ -776,3 +776,17 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
+  - description: "🅰️  Alfred Restart"
+    manipulators:
+      - type: basic
+        from:
+          key_code: s
+          modifiers:
+            mandatory:
+              - command
+              - shift
+              - option
+              - control
+        to:
+          - shell_command: |
+            killl

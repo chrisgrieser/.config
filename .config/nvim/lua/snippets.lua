@@ -19,7 +19,7 @@ ls.setup {
 ls.cleanup() -- clears all snippets for writing snippets
 
 add("all", {
-	snip("!!", "{\n\t$0\n\\}"),
+	snip({trig = "!!", wordTrig = false}, "{\n\t$0\n\\}"),
 }, { type = "autosnippets" })
 
 -- Shell (zsh)
