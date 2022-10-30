@@ -4,7 +4,7 @@ function o (){
 	local selected
 	local input="$*"
 
-	if [[ -e "$input" ]] ; then   # skip `fzf` if file is fully named, e.g. through tab completion
+	if [[ -e "$input" ]] ; then # skip `fzf` if file is fully named, e.g. through tab completion
 		[[ -d "$input" ]] && z "$input"
 		[[ -f "$input" ]] && open "$input"
 		return 0
@@ -23,7 +23,7 @@ function o (){
 					--bind="tab:reload(fd --hidden --color=always --type=directory)+change-prompt(↪ )" \
 					--preview-window="border-left" \
 					--preview 'if [[ -d {} ]] ; then echo "\\033[1;33m"{}"\\033[0m" ; echo ; exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=1 {} ; fi' \
-	         )
+				)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
 	selected=$(echo "$selected" | tail -n+2)
