@@ -38,7 +38,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E3CB06C7-80F4-4569-9646-EC67EEEFB51C</string>
+				<string>9758FBBC-5756-44AA-B8D2-9A8693E71248</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -431,10 +431,10 @@
 				<integer>2</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.brave.Browser.app.fmajbmdokmecmpllfhcamihghgoablgg</string>
 					<string>com.vivaldi.Vivaldi</string>
-					<string>org.chromium.Chromium</string>
 					<string>com.brave.Browser</string>
+					<string>org.chromium.Chromium</string>
+					<string>com.brave.Browser.app.fmajbmdokmecmpllfhcamihghgoablgg</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -449,23 +449,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>j</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1572864</integer>
-				<key>overridewithargument</key>
+				<key>concurrently</key>
 				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "System Events"	keystroke "i" using {command down, option down}	delay 0.4	keystroke "c" using {command down, shift down}end tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>E3CB06C7-80F4-4569-9646-EC67EEEFB51C</string>
+			<string>9758FBBC-5756-44AA-B8D2-9A8693E71248</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1158,7 +1160,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>Open Console</string>
+			<string>Open Console + Element Picker</string>
 			<key>xpos</key>
 			<real>585</real>
 			<key>ypos</key>
@@ -1278,6 +1280,15 @@
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
+		<key>9758FBBC-5756-44AA-B8D2-9A8693E71248</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>755</real>
+			<key>ypos</key>
+			<real>135</real>
+		</dict>
 		<key>97E52210-B26B-49B3-AC6D-65A1235A88C9</key>
 		<dict>
 			<key>colorindex</key>
@@ -1385,13 +1396,6 @@
 			<real>585</real>
 			<key>ypos</key>
 			<real>985</real>
-		</dict>
-		<key>E3CB06C7-80F4-4569-9646-EC67EEEFB51C</key>
-		<dict>
-			<key>xpos</key>
-			<real>755</real>
-			<key>ypos</key>
-			<real>135</real>
 		</dict>
 		<key>E51DFA56-3523-4840-8EF6-40FC832EE3BB</key>
 		<dict>
