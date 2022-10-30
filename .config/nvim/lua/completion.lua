@@ -3,25 +3,34 @@ local cmp = require('cmp')
 local luasnip = require("luasnip")
 --------------------------------------------------------------------------------
 
-local defaultSources = {
+defaultSources = {
 	{ name = 'luasnip' },
 	{ name = 'nvim_lsp' },
 	{ name = 'emoji', keyword_length = 2 },
-	{ name = 'buffer', keyword_length = 2 }, 
+	{ name = 'buffer', keyword_length = 2 },
 }
 
-local defaultSources = {
+local defaultWithoutBuffer = {
 	{ name = 'luasnip' },
 	{ name = 'nvim_lsp' },
 	{ name = 'emoji', keyword_length = 2 },
-	{ name = 'buffer', keyword_length = 2 }, 
 }
 
-local defaultWithoutBuffer = table.remove(defaultSources) 
-local nerdfontSource = { name = "nerdfont", keyword_length = 2 }
-local bufferLineSource = { name = "buffer-lines", keyword_length = 2 }
+defaultAndNerdfont = {
+	{ name = 'luasnip' },
+	{ name = 'nvim_lsp' },
+	{ name = "nerdfont", keyword_length = 2 },
+	{ name = 'emoji', keyword_length = 2 },
+	{ name = 'buffer', keyword_length = 2 },
+}
 
-
+defaultAndBufferlines = {
+	{ name = 'luasnip' },
+	{ name = 'nvim_lsp' },
+	{ name = "buffer-lines", keyword_length = 2 },
+	{ name = 'emoji', keyword_length = 2 },
+	{ name = 'buffer', keyword_length = 2 },
+}
 
 --------------------------------------------------------------------------------
 
@@ -116,28 +125,21 @@ cmp.setup({
 --------------------------------------------------------------------------------
 -- Filetype specific Completion
 
-local defaultWithNerd
 cmp.setup.filetype ("lua", {
 	enabled = function()
 		-- disable leading "-"
 		local lineContent = fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
 		return not(lineContent:match(" %-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
 	end,
-	sources = cmp.config.sources(
-		table.insert(defaultSources, nerdfontSource)
-	),
+	sources = cmp.config.sources(defaultAndNerdfont),
 })
 
 -- use buffer lines in yaml and json
 cmp.setup.filetype ("json", {
-	sources = cmp.config.sources(
-		table.insert(defaultSources, bufferLineSource)
-	),
+	sources = cmp.config.sources(defaultAndBufferlines),
 })
 cmp.setup.filetype ("yaml", {
-	sources = cmp.config.sources(
-		table.insert(defaultSources, bufferLineSource)
-	),
+	sources = cmp.config.sources(defaultAndBufferlines),
 })
 
 -- don't use buffer in css completions
@@ -147,9 +149,7 @@ cmp.setup.filetype ("css", {
 
 -- also use nerdfont for starship config
 cmp.setup.filetype ("toml", {
-	sources = cmp.config.sources(
-		table.insert(defaultSources, nerdfontSource)
-	),
+	sources = cmp.config.sources(defaultAndNerdfont),
 })
 
 --------------------------------------------------------------------------------

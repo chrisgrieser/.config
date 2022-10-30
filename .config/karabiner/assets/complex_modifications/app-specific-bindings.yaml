@@ -716,6 +716,18 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^org\.yanex\.marta$
+      # hyper + ⌫ = Open Trash
+      - type: basic
+        from:
+          key_code: delete_or_backspace
+          modifiers:
+            mandatory:
+              - command
+              - shift
+              - option
+              - control
+        to:
+          - shell_command: open -a "Finder" ~/.Trash
   - description: "🅰️👨‍💻 Script Editor"
     manipulators:
       # Quick Closing skipping save prompt
