@@ -159,6 +159,8 @@ lspConfig['sumneko_lua'].setup {
 				quote_style = "double",
 				call_arg_parentheses = "remove_table_only",
 				keep_one_space_between_table_and_bracket = false,
+				keep_one_space_between_namedef_and_attribute = false,
+				continuous_assign_table_field_align_to_equal_sign = false,
 			},
 			completion = {
 				callSnippet = "Replace",

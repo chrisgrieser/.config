@@ -107,7 +107,7 @@ function vsplit (mode, secondWin)
 	moveResize(SPLIT_LEFT, f2)
 	SPLIT_RIGHT:raise()
 	SPLIT_LEFT:raise()
-	runDelayed(0.2, function ()
+	runDelayed(0.3, function ()
 		if SPLIT_RIGHT:application() then
 			if SPLIT_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(SPLIT_RIGHT)
 			elseif SPLIT_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(SPLIT_RIGHT)
