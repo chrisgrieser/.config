@@ -19,7 +19,7 @@ opt.spell = false
 opt.spelllang = "en_us"
 
 -- Gutter
-opt.fillchars = 'eob: ' -- hide the ugly "~" marking the end of the buffer
+opt.fillchars = "eob: " -- hide the ugly "~" marking the end of the buffer
 opt.numberwidth = 3 -- minimum width, save some space for shorter files
 opt.number = false
 opt.relativenumber = false
@@ -32,13 +32,14 @@ opt.shiftround = true
 opt.list = true
 opt.listchars = "multispace:··,tab:  "
 
--- remove trailing whitespaces on save
+-- trim trailing whitespaces & extra blanks at eof on save
 augroup("Mini-Lint", {})
 autocmd("BufWritePre", {
 	group = "Mini-Lint",
 	callback = function()
 		local save_view = fn.winsaveview() -- save cursor positon
 		cmd [[%s/\s\+$//e]]
+		cmd [[%s#\($\n\s*\)\+\%$##]] -- https://stackoverflow.com/a/7496112
 		fn.winrestview(save_view)
 	end
 })
@@ -56,7 +57,7 @@ opt.mousemodel = "extend" -- deacvitate context menu, right mouse instead expand
 -- Window Managers/espanso: set title
 opt.title = true
 opt.titlelen = 0 -- do not shorten title
-opt.titlestring = '%{expand(\"%:p\")} [%{mode()}]'
+opt.titlestring = "%{expand(\"%:p\")} [%{mode()}]"
 
 -- width
 opt.textwidth = 80 -- used by `gq` wrap, etc.
@@ -68,12 +69,12 @@ opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
 opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
 opt.autochdir = true -- always current directory
-autocmd({ "BufWinEnter" }, { -- since autochdir is not always reliable...?
+autocmd({"BufWinEnter"}, {-- since autochdir is not always reliable...?
 	command = "cd %:p:h"
 })
 
 -- auto-save
-autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
+autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
 	pattern = "?*",
 	command = "silent! update"
 })
@@ -88,7 +89,7 @@ opt.sidescrolloff = 21
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
 autocmd("BufEnter", {
 	---@diagnostic disable-next-line: assign-type-mismatch
-	callback = function() opt.formatoptions = opt.formatoptions - { "o", "r" } end
+	callback = function() opt.formatoptions = opt.formatoptions - {"o", "r"} end
 })
 
 -- Remember Cursor Position
@@ -99,17 +100,17 @@ autocmd("BufReadPost", {
 })
 
 -- clear cmdline on entering buffer
-autocmd("BufReadPost", { command = "echo" })
+autocmd("BufReadPost", {command = "echo"})
 
 -- clipboard & yanking
-opt.clipboard = 'unnamedplus'
+opt.clipboard = "unnamedplus"
 autocmd("TextYankPost", {
-	callback = function() vim.highlight.on_yank { timeout = 2000 } end
+	callback = function() vim.highlight.on_yank {timeout = 2000} end
 })
 
 -- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070
 -- (see also the respective "change small word" keybinding <leader><space>)
-opt.iskeyword = opt.iskeyword + { "-", "_" }
+opt.iskeyword = opt.iskeyword + {"-", "_"}
 
 -- status bar
 opt.showcmd = true -- keychords pressed
@@ -151,7 +152,7 @@ autocmd("TermClose", {
 
 -- Skeletons (Templates)
 augroup("Templates", {})
-local filestypesWithSkeletons = { "lua", "sh", "applescript", "js" }
+local filestypesWithSkeletons = {"lua", "sh", "applescript", "js"}
 for i = 1, #filestypesWithSkeletons do
 	local ft = filestypesWithSkeletons[i]
 	autocmd("BufNewFile", {
