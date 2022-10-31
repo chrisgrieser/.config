@@ -170,3 +170,6 @@ matches:
   - trigger: toher
     replace: other
     word: true
+  - trigger: dei
+    replace: die
+    word: true
