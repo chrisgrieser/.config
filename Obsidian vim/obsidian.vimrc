@@ -239,8 +239,6 @@ nmap R :duplicate
 
 " so that VV... in normal mode selects more lines
 vmap V j
-" and vv... selects more words
-vmap v e
 
 """"""""""""""""""""""
 " < Tabs/Window
