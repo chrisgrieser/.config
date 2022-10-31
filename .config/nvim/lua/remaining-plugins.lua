@@ -16,7 +16,11 @@ cmd[[highlight! def link netrwTreeBar IndentBlankLineChar]]
 -- cmd[[let g:sneak#prompt = '👟 ']]
 
 -- Hop.nvim
-require('hop').setup { multi_windows = true }
+require('hop').setup {
+	multi_windows = true,
+	hint_position = require'hop.hint'.HintPosition.MIDDLE,
+	uppercase_labels = true,
+}
 
 -- indention lines
 g.indent_blankline_filetype_exclude = {"undotree"}

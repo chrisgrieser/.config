@@ -66,8 +66,8 @@ keymap("n", "gh", ":Gitsigns next_hunk<CR>")
 keymap("n", "gH", ":Gitsigns next_prev<CR>")
 
 -- Hop
-keymap("n", "ö", ":HopWordAC<CR>:echo<CR>")
-keymap("n", "Ö", ":HopWordBC<CR>:echo<CR>")
+keymap("n", "ö", ":HopWordAC<CR>")
+keymap("n", "Ö", ":HopWordBC<CR>")
 -- keymap({"n", "x", "o"}, "ö", "<Plug>Sneak_s")
 -- keymap({"n", "x", "o"}, "Ö", "<Plug>Sneak_S")
 -- keymap({"n", "x", "o"}, "f", "<Plug>Sneak_f")
@@ -363,8 +363,8 @@ keymap("n", "<leader>ow", ":set wrap! <CR>")
 --------------------------------------------------------------------------------
 
 -- TERMINAL MODE
-keymap("n", "zt", ":10split<CR>:terminal<CR>")
-keymap("n", "zz", ":w<CR>:!acp ") -- shell function, enabled via .zshenv
+keymap("n", "<leader>t", ":10split<CR>:terminal<CR>")
+keymap("n", "<leader>g", ":w<CR>:!acp ") -- shell function, enabled via .zshenv
 
 --------------------------------------------------------------------------------
 
