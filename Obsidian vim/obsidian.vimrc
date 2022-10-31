@@ -103,11 +103,11 @@ nmap <C-a> I
 " << General Editing
 """"""""""""""""""""""
 
-" don't save small deletion in the register
-" can't use "_x, cause Obsidian doesn't support noremap
+" don't pollute the register
+" workarounds, since Obsidian vimrc does not support noremap properly
 nmap x "_dl
 nmap cl "_dli
-nmap c "_c
+nmap C "_d$a
 nmap cc "_cc
 
 " UNDO consistently on one key
