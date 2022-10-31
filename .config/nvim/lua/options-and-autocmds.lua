@@ -33,12 +33,12 @@ opt.list = true
 opt.listchars = "multispace:··,tab:  "
 
 -- remove trailing whitespaces on save
-augroup("Mini-Lint",{})
+augroup("Mini-Lint", {})
 autocmd("BufWritePre", {
 	group = "Mini-Lint",
-	callback = function ()
+	callback = function()
 		local save_view = fn.winsaveview() -- save cursor positon
-		cmd[[%s/\s\+$//e]]
+		cmd [[%s/\s\+$//e]]
 		fn.winrestview(save_view)
 	end
 })
@@ -51,12 +51,12 @@ opt.splitbelow = true -- split down instead of up
 opt.history = 777 -- do not save too much history to reduce noise for command line history search
 
 -- Mouse
-opt.mousemodel="extend" -- deacvitate context menu, right mouse instead expands selection
+opt.mousemodel = "extend" -- deacvitate context menu, right mouse instead expands selection
 
 -- Window Managers/espanso: set title
 opt.title = true
 opt.titlelen = 0 -- do not shorten title
-opt.titlestring='%{expand(\"%:p\")} [%{mode()}]'
+opt.titlestring = '%{expand(\"%:p\")} [%{mode()}]'
 
 -- width
 opt.textwidth = 80 -- used by `gq` wrap, etc.
@@ -68,12 +68,12 @@ opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
 opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
 opt.autochdir = true -- always current directory
-autocmd({"BufWinEnter"}, { -- since autochdir is not always reliable...?
+autocmd({ "BufWinEnter" }, { -- since autochdir is not always reliable...?
 	command = "cd %:p:h"
 })
 
 -- auto-save
-autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
+autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	pattern = "?*",
 	command = "silent! update"
 })
@@ -88,28 +88,28 @@ opt.sidescrolloff = 21
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
 autocmd("BufEnter", {
 	---@diagnostic disable-next-line: assign-type-mismatch
-	callback = function () opt.formatoptions = opt.formatoptions - {"o", "r"} end
+	callback = function() opt.formatoptions = opt.formatoptions - { "o", "r" } end
 })
 
 -- Remember Cursor Position
 augroup("rememberCursorPosition", {})
-autocmd ("BufReadPost", {
+autocmd("BufReadPost", {
 	group = "rememberCursorPosition",
 	command = [[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' |  exe "normal! g`\"" | endif]]
 })
 
 -- clear cmdline on entering buffer
-autocmd ("BufReadPost", { command = "echo" })
+autocmd("BufReadPost", { command = "echo" })
 
 -- clipboard & yanking
 opt.clipboard = 'unnamedplus'
 autocmd("TextYankPost", {
-	callback = function () vim.highlight.on_yank{timeout = 2000} end
+	callback = function() vim.highlight.on_yank { timeout = 2000 } end
 })
 
 -- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070
 -- (see also the respective "change small word" keybinding <leader><space>)
-opt.iskeyword = opt.iskeyword + {"-", "_"}
+opt.iskeyword = opt.iskeyword + { "-", "_" }
 
 -- status bar
 opt.showcmd = true -- keychords pressed
@@ -151,25 +151,24 @@ autocmd("TermClose", {
 
 -- Skeletons (Templates)
 augroup("Templates", {})
-local filestypesWithSkeletons = {"lua", "sh", "applescript", "js"}
+local filestypesWithSkeletons = { "lua", "sh", "applescript", "js" }
 for i = 1, #filestypesWithSkeletons do
 	local ft = filestypesWithSkeletons[i]
 	autocmd("BufNewFile", {
 		group = "Templates",
-		pattern = "*."..ft,
-		command = "0r ~/.config/nvim/templates/skeleton."..ft.." | normal! G",
+		pattern = "*." .. ft,
+		command = "0r ~/.config/nvim/templates/skeleton." .. ft .. " | normal! G",
 	})
--- BufReadPost + empty file as additional condition to also auto-insert
--- skeletons created by other apps
+	-- BufReadPost + empty file as additional condition to also auto-insert
+	-- skeletons created by other apps
 	autocmd("BufReadPost", {
 		group = "Templates",
-		pattern = "*."..ft,
-		callback = function ()
+		pattern = "*." .. ft,
+		callback = function()
 			local fileIsEmpty = fn.getfsize(fn.expand("%")) < 2 -- 2 to account for linebreak
 			if fileIsEmpty then
-				cmd("0r ~/.config/nvim/templates/skeleton."..ft.." | normal! G")
+				cmd("0r ~/.config/nvim/templates/skeleton." .. ft .. " | normal! G")
 			end
 		end
 	})
 end
-

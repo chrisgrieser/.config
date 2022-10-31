@@ -107,6 +107,8 @@ nmap <C-a> I
 " can't use "_x, cause Obsidian doesn't support noremap
 nmap x "_dl
 nmap cl "_dli
+nmap c "_c
+nmap cc "_cc
 
 " UNDO consistently on one key
 nmap U <C-r>
