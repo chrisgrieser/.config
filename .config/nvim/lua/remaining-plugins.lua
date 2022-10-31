@@ -17,14 +17,11 @@ cmd[[highlight! def link netrwTreeBar IndentBlankLineChar]]
 
 -- Hop.nvim
 require('hop').setup {
+	uppercase_labels = true,
 	multi_windows = true,
 	hint_position = require'hop.hint'.HintPosition.MIDDLE,
-	uppercase_labels = true,
+	hint_offset = -1,
 }
-
--- indention lines
-g.indent_blankline_filetype_exclude = {"undotree"}
-g.indent_blankline_strict_tabs = true
 
 -- undotree
 -- also requires persistent undos in the options
