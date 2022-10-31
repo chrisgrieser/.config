@@ -9,23 +9,6 @@ function toggleDarkMode()
 
 	hs.execute("zsh ./helpers/toggle-marta-darkmode.sh " .. targetMode)
 
-	-- Obsidian Electron Window Tweacher: Opacity Change
-	if appIsRunning("Obsidian") then
-		if (targetMode == "light") then
-			openLinkInBackground("obsidian://advanced-uri?commandid=obsidian-electron-window-tweaker%253Aewt-decrease-opacity")
-		else
-			openLinkInBackground("obsidian://advanced-uri?commandid=obsidian-electron-window-tweaker%253Aewt-increase-opacity")
-		end
-	else
-		local opacity
-		if (targetMode == "light") then opacity = 0.92
-		else opacity = 0.97 end
-		hs.execute("OPACITY="..tostring(opacity)..[[
-			WINDOWTWEAKER_CONFIG="$HOME/Main Vault/.obsidian/plugins/obsidian-electron-window-tweaker/data.json"
-			sed -i '' "s/"opacity":.*/"opacity": $OPACITY,/" "$WINDOWTWEAKER_CONFIG"
-		]])
-	end
-
 	hs.osascript.applescript([[
 		set openBlank to false
 		tell application "Brave Browser"

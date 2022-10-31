@@ -21,34 +21,34 @@ end
 
 g.gui_font_face = "JetBrainsMonoNL Nerd Font"
 opt.guicursor =
-	"n-sm:block,"..
-	"i-ci-c-ve:ver25,"..
-	"r-cr-o-v:hor10,"..
-	"a:blinkwait400-blinkoff500-blinkon700"
+"n-sm:block," ..
+	 "i-ci-c-ve:ver25," ..
+	 "r-cr-o-v:hor10," ..
+	 "a:blinkwait400-blinkoff500-blinkon700"
 
 --------------------------------------------------------------------------------
 
 -- THEME
 local function light()
-	cmd("colorscheme "..lightTheme)
-	g.neovide_transparency = 0.92
+	cmd("colorscheme " .. lightTheme)
+	g.neovide_transparency = 0.95
 	if g.colors_name == "dawnfox" then
-		cmd[[highlight IndentBlanklineChar guifg=#deccba]]
-		cmd[[highlight VertSplit guifg=#b29b84]]
+		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
+		cmd [[highlight VertSplit guifg=#b29b84]]
 	end
 	customHighlights()
 end
 
 local function dark()
-	cmd("colorscheme "..darkTheme)
+	cmd("colorscheme " .. darkTheme)
 	g.neovide_transparency = 0.97
-	cmd[[hi rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets...
+	cmd [[hi rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets...
 	customHighlights()
 end
 
 -- toggle theme with OS
-local auto_dark_mode = require('auto-dark-mode')
-auto_dark_mode.setup{
+local auto_dark_mode = require("auto-dark-mode")
+auto_dark_mode.setup {
 	update_interval = 3000,
 	set_dark_mode = dark,
 	set_light_mode = light,
@@ -60,7 +60,7 @@ auto_dark_mode.init()
 keymap({"n", "v"}, "<D-w>", ":close<CR>") -- cmd+w
 keymap("i", "<D-w>", "<Esc>:close<CR>")
 
-keymap({"n", "v"}, "<D-n>", ':Lexplore<CR>%', {remap = true}) -- cmd+n, needs remap since % is netrw mapping
+keymap({"n", "v"}, "<D-n>", ":Lexplore<CR>%", {remap = true}) -- cmd+n, needs remap since % is netrw mapping
 
 keymap({"n", "v"}, "<D-z>", "u") -- cmd+z
 keymap({"n", "v"}, "<D-Z>", "<C-R>") -- cmd+shift+z
@@ -78,7 +78,7 @@ keymap({"n", "v", "i"}, "<D-1>", ":Lexplore<CR>") -- file tree (netrw)
 keymap({"n", "v", "i"}, "<D-0>", ":SymbolsOutline<CR>") -- Symbol Outline
 
 -- Multi-Cursor with cmd+j https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
-cmd[[ let g:VM_maps = {}
+cmd [[ let g:VM_maps = {}
 let g:VM_maps['Find Under'] = '<D-j>' ]]
 
 keymap("i", "<D-j>", '<C-o>"_ciw')
@@ -88,7 +88,7 @@ keymap({"n", "v"}, "<D-v>", "p")
 keymap({"i", "c"}, "<D-v>", "<C-r>*")
 keymap("n", "<D-c>", "yy") -- no selection = line
 keymap("v", "<D-c>", "y")
-keymap("i", "<D-v>", '<C-r>+')
+keymap("i", "<D-v>", "<C-r>+")
 keymap("n", "<D-x>", "dd") -- no selection = line
 keymap("v", "<D-x>", "d")
 
@@ -101,7 +101,7 @@ keymap("i", "<D-e>", "``<Left>")
 -- https://neovide.dev/faq.html#how-can-i-dynamically-change-the-font-size-at-runtime
 g.gui_font_size = g.gui_font_default_size
 RefreshGuiFont = function()
-	opt.guifont = string.format("%s:h%s",g.gui_font_face, g.gui_font_size) ---@diagnostic disable-line: assign-type-mismatch
+	opt.guifont = string.format("%s:h%s", g.gui_font_face, g.gui_font_size) ---@diagnostic disable-line: assign-type-mismatch
 end
 ResizeGuiFont = function(delta)
 	g.gui_font_size = g.gui_font_size + delta
@@ -112,8 +112,8 @@ ResetGuiFont = function()
 	RefreshGuiFont()
 end
 ResetGuiFont() -- Call function on startup to set default value
-keymap({'n','v','i'}, '<D-+>', function() ResizeGuiFont(1) end, {silent = true})
-keymap({'n','v','i'}, '<D-->', function() ResizeGuiFont(-1) end, {silent = true})
+keymap({"n", "v", "i"}, "<D-+>", function() ResizeGuiFont(1) end, {silent = true})
+keymap({"n", "v", "i"}, "<D-->", function() ResizeGuiFont(-1) end, {silent = true})
 
 --------------------------------------------------------------------------------
 
@@ -129,11 +129,11 @@ g.neovide_cursor_unfocused_outline_width = 0.1
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
 
 g.neovide_cursor_vfx_mode = "railgun"
-g.neovide_cursor_vfx_particle_lifetime=1
-g.neovide_cursor_vfx_particle_density=20.0
-g.neovide_cursor_vfx_particle_speed=25.0
-g.neovide_cursor_vfx_particle_phase=1.3 -- only railgun
-g.neovide_cursor_vfx_particle_curl=1.3 -- only railgun
+g.neovide_cursor_vfx_particle_lifetime = 1
+g.neovide_cursor_vfx_particle_density = 20.0
+g.neovide_cursor_vfx_particle_speed = 25.0
+g.neovide_cursor_vfx_particle_phase = 1.3 -- only railgun
+g.neovide_cursor_vfx_particle_curl = 1.3 -- only railgun
 
 g.neovide_confirm_quit = false
 g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
