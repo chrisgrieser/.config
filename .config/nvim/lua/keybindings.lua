@@ -318,7 +318,6 @@ keymap("x", "P", 'p') -- override register when pasting
 
 keymap("n", "V", "Vj") -- visual line mode starts with two lines selected
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
-keymap("x", "v", "e") -- repeatedly pressing "v" selects more words (indented for regular Visual Mode)
 
 keymap("x", "y", "ygv<Esc>") -- yanking in visual mode keeps position https://stackoverflow.com/a/3806683#comment10788861_3806683
 
