@@ -8,108 +8,10 @@
 	<string>Academic</string>
 	<key>connections</key>
 	<dict>
-		<key>00426556-3B89-45BE-AAF5-3686D4C05191</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>ECF6CF6C-8EA8-4BC7-9EEE-209ABD2A05E9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>1D4244BC-122A-4164-A41C-7C200E37A558</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7B84C695-C751-47B2-9CFE-A76195793996</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>2758A6FF-8EAE-405B-836A-625E0F88A836</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>94FC6D63-0671-49B4-BA12-48798A34C95C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>3D1B339C-48BD-42CB-8D87-FC57A8AD0BF2</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>5D640EDA-EDBB-4D6D-94ED-7C3112EA10D2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>4BAD913A-CD83-4811-BE26-A2677CBEE978</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9715BFDE-8185-44F9-B599-1FC2DDE501EA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5D640EDA-EDBB-4D6D-94ED-7C3112EA10D2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B2BBB36A-309F-46A6-93E8-FE3C927FCFD8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>7404AB3E-1B74-4343-BC14-1D89BF00ED91</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6C721D0C-7462-4269-938D-F946894F9642</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>7B84C695-C751-47B2-9CFE-A76195793996</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7404AB3E-1B74-4343-BC14-1D89BF00ED91</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>99F9C1A4-47AA-40EF-9970-26A959D31A75</string>
@@ -125,20 +27,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4BAD913A-CD83-4811-BE26-A2677CBEE978</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>94FC6D63-0671-49B4-BA12-48798A34C95C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1D4244BC-122A-4164-A41C-7C200E37A558</string>
+				<string>9715BFDE-8185-44F9-B599-1FC2DDE501EA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -151,7 +40,17 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>00426556-3B89-45BE-AAF5-3686D4C05191</string>
+				<string>1D4244BC-122A-4164-A41C-7C200E37A558</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>7B84C695-C751-47B2-9CFE-A76195793996</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -174,44 +73,7 @@
 			</dict>
 		</array>
 		<key>9CF16FDF-64CB-488C-85FE-EF7029CE7CEC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4D12E63E-75B2-4940-A9A0-786A46088914</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>B2BBB36A-309F-46A6-93E8-FE3C927FCFD8</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>94FC6D63-0671-49B4-BA12-48798A34C95C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>ECF6CF6C-8EA8-4BC7-9EEE-209ABD2A05E9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2758A6FF-8EAE-405B-836A-625E0F88A836</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 	</dict>
 	<key>createdby</key>
 	<string>Rokas Rudgalvis</string>
@@ -220,24 +82,47 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>OpenAI helpers</string>
+	<string>OpenAI</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Thinking...</string>
+				<key>title</key>
+				<string>OpenAI</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>1D4244BC-122A-4164-A41C-7C200E37A558</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>0</integer>
+				<integer>49</integer>
 				<key>hotmod</key>
-				<integer>0</integer>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>Space</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -249,104 +134,6 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>8871FA8E-5658-4816-BACB-695ECD934CCE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ask</string>
-				<key>subtext</key>
-				<string>Enter the text</string>
-				<key>text</key>
-				<string>Ask OpenAI to finish your text</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>4BAD913A-CD83-4811-BE26-A2677CBEE978</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>150</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>6C721D0C-7462-4269-938D-F946894F9642</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>[\s\S]*</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>00426556-3B89-45BE-AAF5-3686D4C05191</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>function run(argv) {
-  var query = argv[0];
-
-  return query.replace('|*|', '');
-}</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>7</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>7404AB3E-1B74-4343-BC14-1D89BF00ED91</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -373,56 +160,14 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>set token limit</string>
-				<key>subtext</key>
-				<string>(100) Enter number of tokens...</string>
-				<key>text</key>
-				<string>Set token limit for Open AI</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>ECF6CF6C-8EA8-4BC7-9EEE-209ABD2A05E9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>Thinking...</string>
-				<key>title</key>
-				<string>OpenAI</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>1D4244BC-122A-4164-A41C-7C200E37A558</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
-				<false/>
+				<true/>
 				<key>clipboardtext</key>
-				<string>{query}</string>
+				<string>{var:PROMPT}{query}</string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
 				<key>transient</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
@@ -430,27 +175,6 @@
 			<string>9CF16FDF-64CB-488C-85FE-EF7029CE7CEC</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>My answer is copied to clipboard</string>
-				<key>title</key>
-				<string>OpenAI</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>4D12E63E-75B2-4940-A9A0-786A46088914</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -487,7 +211,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./node_modules/.bin/run-node ask.js "$1"</string>
+				<string>./node_modules/.bin/run-node ask.js</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -499,87 +223,6 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>7B84C695-C751-47B2-9CFE-A76195793996</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>^$|\s+</string>
-						<key>outputlabel</key>
-						<string>Is empty</string>
-						<key>uid</key>
-						<string>3D1B339C-48BD-42CB-8D87-FC57A8AD0BF2</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>2758A6FF-8EAE-405B-836A-625E0F88A836</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>94FC6D63-0671-49B4-BA12-48798A34C95C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>TOKEN_LIMIT</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>5D640EDA-EDBB-4D6D-94ED-7C3112EA10D2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>[\s\S]*</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>B2BBB36A-309F-46A6-93E8-FE3C927FCFD8</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -598,117 +241,47 @@ Changelog:
 v1.0.1: added command:  command + shift + space - opens prompt to for AI completion.</string>
 	<key>uidata</key>
 	<dict>
-		<key>00426556-3B89-45BE-AAF5-3686D4C05191</key>
-		<dict>
-			<key>xpos</key>
-			<real>425</real>
-			<key>ypos</key>
-			<real>380</real>
-		</dict>
 		<key>1D4244BC-122A-4164-A41C-7C200E37A558</key>
 		<dict>
 			<key>xpos</key>
-			<real>670</real>
+			<real>270</real>
 			<key>ypos</key>
-			<real>510</real>
-		</dict>
-		<key>2758A6FF-8EAE-405B-836A-625E0F88A836</key>
-		<dict>
-			<key>xpos</key>
-			<real>340</real>
-			<key>ypos</key>
-			<real>525</real>
-		</dict>
-		<key>4BAD913A-CD83-4811-BE26-A2677CBEE978</key>
-		<dict>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>350</real>
-		</dict>
-		<key>4D12E63E-75B2-4940-A9A0-786A46088914</key>
-		<dict>
-			<key>xpos</key>
-			<real>1355</real>
-			<key>ypos</key>
-			<real>510</real>
-		</dict>
-		<key>5D640EDA-EDBB-4D6D-94ED-7C3112EA10D2</key>
-		<dict>
-			<key>xpos</key>
-			<real>440</real>
-			<key>ypos</key>
-			<real>580</real>
-		</dict>
-		<key>6C721D0C-7462-4269-938D-F946894F9642</key>
-		<dict>
-			<key>xpos</key>
-			<real>1190</real>
-			<key>ypos</key>
-			<real>380</real>
-		</dict>
-		<key>7404AB3E-1B74-4343-BC14-1D89BF00ED91</key>
-		<dict>
-			<key>xpos</key>
-			<real>1025</real>
-			<key>ypos</key>
-			<real>380</real>
+			<real>105</real>
 		</dict>
 		<key>7B84C695-C751-47B2-9CFE-A76195793996</key>
 		<dict>
 			<key>xpos</key>
-			<real>815</real>
+			<real>270</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>220</real>
 		</dict>
 		<key>8871FA8E-5658-4816-BACB-695ECD934CCE</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>350</real>
-		</dict>
-		<key>94FC6D63-0671-49B4-BA12-48798A34C95C</key>
-		<dict>
-			<key>xpos</key>
-			<real>595</real>
-			<key>ypos</key>
-			<real>540</real>
+			<real>145</real>
 		</dict>
 		<key>9715BFDE-8185-44F9-B599-1FC2DDE501EA</key>
 		<dict>
 			<key>xpos</key>
-			<real>350</real>
+			<real>180</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>175</real>
 		</dict>
 		<key>99F9C1A4-47AA-40EF-9970-26A959D31A75</key>
 		<dict>
 			<key>xpos</key>
-			<real>1025</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>220</real>
 		</dict>
 		<key>9CF16FDF-64CB-488C-85FE-EF7029CE7CEC</key>
 		<dict>
 			<key>xpos</key>
-			<real>1190</real>
+			<real>570</real>
 			<key>ypos</key>
-			<real>510</real>
-		</dict>
-		<key>B2BBB36A-309F-46A6-93E8-FE3C927FCFD8</key>
-		<dict>
-			<key>xpos</key>
-			<real>525</real>
-			<key>ypos</key>
-			<real>580</real>
-		</dict>
-		<key>ECF6CF6C-8EA8-4BC7-9EEE-209ABD2A05E9</key>
-		<dict>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>505</real>
+			<real>220</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -716,9 +289,9 @@ v1.0.1: added command:  command + shift + space - opens prompt to for AI complet
 	<key>variables</key>
 	<dict>
 		<key>OPENAI_API_KEY</key>
-		<string>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</string>
+		<string>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</string>
 		<key>TOKEN_LIMIT</key>
-		<string>60</string>
+		<string>50</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
