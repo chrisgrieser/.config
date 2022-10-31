@@ -39,7 +39,7 @@ autocmd("BufWritePre", {
 	callback = function()
 		local save_view = fn.winsaveview() -- save cursor positon
 		cmd [[%s/\s\+$//e]]
-		cmd [[%s#\($\n\s*\)\+\%$##]] -- https://stackoverflow.com/a/7496112
+		cmd [[silent! %s#\($\n\s*\)\+\%$##]] -- https://stackoverflow.com/a/7496112
 		fn.winrestview(save_view)
 	end
 })
@@ -69,7 +69,7 @@ opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
 opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
 opt.autochdir = true -- always current directory
-autocmd({"BufWinEnter"}, {-- since autochdir is not always reliable...?
+autocmd({"BufWinEnter"}, {-- since autochdir is not always reliable…?
 	command = "cd %:p:h"
 })
 
