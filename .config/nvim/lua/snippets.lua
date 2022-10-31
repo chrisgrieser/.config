@@ -50,26 +50,26 @@ add("sh", {
 	snip("running process", 'pgrep -x "$${1:process}" > /dev/null && $0'),
 	snip("quicklook", 'qlmanage -p "${1:filepath}"'), -- mac only
 
-	snip("reset", "\\\\\\033[0m"), -- yes, it seems that many backslashes are actually needed
-	snip("black", "\\\\\\033[1;30m"),
-	snip("red", "\\\\\\033[1;31m"),
-	snip("green", "\\\\\\033[1;32m"),
-	snip("yellow", "\\\\\\033[1;33m"),
-	snip("blue", "\\\\\\033[1;34m"),
-	snip("magenta", "\\\\\\033[1;35m"),
-	snip("cyan", "\\\\\\033[1;36m"),
-	snip("white", "\\\\\\033[1;37m"),
-	snip("black bg", "\\\\\\033[1;40m"),
-	snip("red bg", "\\\\\\033[1;41m"),
-	snip("green bg", "\\\\\\033[1;42m"),
-	snip("yellow bg", "\\\\\\033[1;43m"),
-	snip("blue bg", "\\\\\\033[1;44m"),
-	snip("magenta bg", "\\\\\\033[1;45m"),
-	snip("cyan bg", "\\\\\\033[1;46m"),
-	snip("white bg", "\\\\\\033[1;47m"),
+	snip("reset", "\\033[0m"),
+	snip("black", "\\033[1;30m"),
+	snip("red", "\\033[1;31m"),
+	snip("green", "\\033[1;32m"),
+	snip("yellow", "\\033[1;33m"),
+	snip("blue", "\\033[1;34m"),
+	snip("magenta", "\\033[1;35m"),
+	snip("cyan", "\\033[1;36m"),
+	snip("white", "\\033[1;37m"),
+	snip("black bg", "\\033[1;40m"),
+	snip("red bg", "\\033[1;41m"),
+	snip("green bg", "\\033[1;42m"),
+	snip("yellow bg", "\\033[1;43m"),
+	snip("blue bg", "\\033[1;44m"),
+	snip("magenta bg", "\\033[1;45m"),
+	snip("cyan bg", "\\033[1;46m"),
+	snip("white bg", "\\033[1;47m"),
 })
 
--- Lua
+
 add("lua", {
 	snip("for", "for i=1, #${1:array} do\n\t$0\nend"),
 	snip("resolve home", 'os.getenv("HOME")'),
