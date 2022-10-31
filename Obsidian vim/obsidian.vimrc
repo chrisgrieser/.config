@@ -108,7 +108,7 @@ nmap <C-a> I
 nmap x "_dl
 nmap cl "_dli
 nmap C "_d$a
-nmap cc "_cc
+nmap cc ^"_d$a
 
 " UNDO consistently on one key
 nmap U <C-r>
