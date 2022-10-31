@@ -22,6 +22,7 @@ duti -s "$videoplayerID" m4a all
 
 # text
 editorID="com.apple.automator.Neovim"
+duti -s "$editorID" plist all
 duti -s "$editorID" vim all
 duti -s "$editorID" csv all
 duti -s "$editorID" log all
