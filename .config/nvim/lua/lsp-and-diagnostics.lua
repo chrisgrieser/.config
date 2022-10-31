@@ -106,7 +106,7 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 
 	-- format on manual saving
 	keymap('n', '<D-s>', function()
-		vim.lsp.buf.format{ async = true }
+		vim.lsp.buf.format{async = true}
 		cmd[[write!]]
 	end, bufopts)
 
@@ -124,13 +124,11 @@ end
 require('lspconfig.ui.windows').default_options.border = borderStyle
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-	vim.lsp.handlers.hover,
-	{ border = borderStyle }
+	vim.lsp.handlers.hover, { border = borderStyle }
 )
 
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-	vim.lsp.handlers.signature_help,
-	{ border = borderStyle }
+	vim.lsp.handlers.signature_help, { border = borderStyle }
 )
 --------------------------------------------------------------------------------
 -- LSP-SERVER-SPECIFIC SETUP
@@ -156,6 +154,10 @@ lspConfig['sumneko_lua'].setup {
 	settings = {
 		Lua = {
 			runtime = { version = 'LuaJIT' }, -- used by neovim
+			-- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
+			format = {
+				quote_style = "double",
+			},
 			completion = {
 				callSnippet = "Replace",
 				keywordSnippet = "Replace",
@@ -177,7 +179,8 @@ lspConfig['sumneko_lua'].setup {
 			},
 			hint = {
 				enable = true,
-				settype = true
+				setType = true,
+				arrayIndex = "Enable",
 			},
 			telemetry = { enable = false },
 		}

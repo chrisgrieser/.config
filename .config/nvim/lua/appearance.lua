@@ -41,7 +41,8 @@ cmd[[call matchadd('myAnnotations', '\<\(INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIR
 require("indent_blankline").setup {
 	show_current_context = true,
 	use_treesitter= true,
-	filetype_exclude = {'help'},
+	strict_tabs = true,
+	filetype_exclude = {"help", "undotree"},
 }
 
 --------------------------------------------------------------------------------

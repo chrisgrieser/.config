@@ -920,6 +920,38 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$</string>
+						<key>outputlabel</key>
+						<string>open UUID</string>
+						<key>uid</key>
+						<string>9CB86CF0-AB9E-4F11-B023-41E4E2A44AC9</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>new draft</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>7F193D53-A438-48E3-AA84-18737E10DC34</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -1063,38 +1095,6 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<string>4E5B84C8-6F38-4660-BF59-079EE3D12150</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$</string>
-						<key>outputlabel</key>
-						<string>open UUID</string>
-						<key>uid</key>
-						<string>9CB86CF0-AB9E-4F11-B023-41E4E2A44AC9</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>new draft</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>7F193D53-A438-48E3-AA84-18737E10DC34</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1797,9 +1797,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>315</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>375</real>
 		</dict>
 		<key>803872F9-9E6E-40EE-BCCE-C0A71698B224</key>
 		<dict>
