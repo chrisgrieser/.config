@@ -5,12 +5,6 @@
 Icon
 
 
-# Sublime
-*.sublime-workspace
-
-# NPM
-node_modules
-
 # safety net to prevent sensitive data being accidentally moved
 *.kdb
 *.kdbx
@@ -18,5 +12,5 @@ node_modules
 *.key
 pw.*
 
-# created with sync issues
+# created due to sync issues
 *.icloud

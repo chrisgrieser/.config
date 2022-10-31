@@ -1,7 +1,7 @@
-# Mac
-.DS_Store
-
 # don't add "node_modules" here since some Alfred workflows actually rely on it
+
+# contains API Key
+Alfred.alfredpreferences/workflows/user.workflow.17D78B6F-728C-444B-ADD8-CE737873CE0F/prefs.plist
 
 # Activity Data
 sync.log
@@ -17,10 +17,3 @@ dlFolderLastChange
 # in case of accidental saving of such files in the repo
 *.mp4
 *.part
-
-# safety net in case sensitive data is accidentally moved
-pw.*
-*.kdb
-*.kdbx
-*.pfx
-*.key
