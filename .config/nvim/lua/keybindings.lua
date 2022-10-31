@@ -1,13 +1,13 @@
 require("utils")
 --------------------------------------------------------------------------------
 -- META
-g.mapleader = ','
+g.mapleader = ","
 
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
 
 -- run [l]ast command [a]gain
-keymap("n", "<leader>la", ':<C-r>:<CR>')
+keymap("n", "<leader>la", ":<C-r>:<CR>")
 
 -- search keymaps
 keymap("n", "?", telescope.keymaps)
@@ -38,10 +38,10 @@ keymap("n", "<leader>P", ":PackerStatus<CR>")
 -- NAVIGATION
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
-keymap({ "n", "x", "o" }, "H", "0^") -- 0^ ensures scrolling to the left on long lines
-keymap({ "n", "x", "o" }, "L", "$")
-keymap({ "x", "o" }, "J", "7j")
-keymap({ "n", "x", "o" }, "K", "7k")
+keymap({"n", "x", "o"}, "H", "0^") -- 0^ ensures scrolling to the left on long lines
+keymap({"n", "x", "o"}, "L", "$")
+keymap({"x", "o"}, "J", "7j")
+keymap({"n", "x", "o"}, "K", "7k")
 
 -- when reaching the last line, scroll down (since scrolloff does not work at EOF)
 function overscroll(action) ---@param action string
@@ -55,7 +55,7 @@ end
 
 keymap("n", "j", function() overscroll("j") end)
 keymap("n", "J", function() overscroll("7j") end)
-keymap({ "n", "x" }, "G", "Gzz")
+keymap({"n", "x"}, "G", "Gzz")
 
 -- Jump History
 keymap("n", "<C-h>", "<C-o>") -- Back
@@ -76,17 +76,17 @@ keymap("n", "Ö", ":HopWordBC<CR>")
 -- keymap({"n", "x", "o"}, "T", "<Plug>Sneak_T")
 
 -- Search
-keymap({ "n", "x", "o" }, "-", "/") -- German Keyboard consistent with US Keyboard layout
+keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "/", "/\v") -- more PCRE-like regex patterns (:h magic)
-keymap("n", "<Esc>", ":nohl<CR>:echo<CR>lh", { silent = true }) -- clear highlights & shortmessage, lh clears hover window
-keymap({ "n", "x", "o" }, "+", "*") -- no more modifier key on German Keyboard
+keymap("n", "<Esc>", ":nohl<CR>:echo<CR>lh", {silent = true}) -- clear highlights & shortmessage, lh clears hover window
+keymap({"n", "x", "o"}, "+", "*") -- no more modifier key on German Keyboard
 
 -- URLs
 keymap("n", "gü", "/http.*<CR>:nohl<CR>") -- goto next
 keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
 
 -- Marks
-keymap({ "n", "x", "o" }, "ä", "`") -- Goto Mark
+keymap({"n", "x", "o"}, "ä", "`") -- Goto Mark
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -104,11 +104,11 @@ keymap("x", "<Space>", '"_c')
 
 -- change small word (i.e. a simpler version of vim-textobj-variable-segment,
 -- but not supporting CamelCase)
-keymap("n", '<leader><Space>', function()
-	opt.iskeyword = opt.iskeyword - { "_", "-" }
+keymap("n", "<leader><Space>", function()
+	opt.iskeyword = opt.iskeyword - {"_", "-"}
 	cmd [[normal! "_diw]]
 	cmd [[startinsert]] -- :Normal does not allow to end in insert mode
-	opt.iskeyword = opt.iskeyword - { "_", "-" }
+	opt.iskeyword = opt.iskeyword - {"_", "-"}
 end)
 
 keymap("o", "iq", 'i"') -- double [q]uote
@@ -119,15 +119,15 @@ keymap("o", "ir", "i]") -- [r]ectangular brackets
 keymap("o", "ar", "a]")
 keymap("o", "ic", "i}") -- [c]urly brackets
 keymap("o", "ac", "a}")
-keymap("o", "r", '}') -- [r]est of the paragraph
-keymap("o", "R", '{')
+keymap("o", "r", "}") -- [r]est of the paragraph
+keymap("o", "R", "{")
 
 -- special plugin text objects
-require("textobj-diagnostic").setup { create_default_keymaps = false }
-keymap({ "x", "o" }, "id", require("textobj-diagnostic").next_diag_inclusive, { silent = true })
-keymap({ "x", "o" }, "ad", require("textobj-diagnostic").next_diag_inclusive, { silent = true })
-keymap({ "x", "o" }, 'ih', ':Gitsigns select_hunk<CR>', { silent = true })
-keymap({ "x", "o" }, 'ah', ':Gitsigns select_hunk<CR>', { silent = true })
+require("textobj-diagnostic").setup {create_default_keymaps = false}
+keymap({"x", "o"}, "id", require("textobj-diagnostic").next_diag_inclusive, {silent = true})
+keymap({"x", "o"}, "ad", require("textobj-diagnostic").next_diag_inclusive, {silent = true})
+keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {silent = true})
+keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>", {silent = true})
 
 -- treesitter textobjects:
 -- af -> a function
@@ -141,7 +141,7 @@ require("nvim-surround").setup {
 		insert = "<C-g>s",
 		visual = "s",
 	},
-	aliases = { -- aliases should match the bindings further above
+	aliases = {-- aliases should match the bindings further above
 		["b"] = ")",
 		["c"] = "}",
 		["r"] = "]",
@@ -151,19 +151,19 @@ require("nvim-surround").setup {
 }
 
 -- COMMENTS (mnemonic: [q]uiet text)
-require('Comment').setup {
+require("Comment").setup {
 	toggler = {
-		line = 'qq',
-		block = '<Nop>',
+		line = "qq",
+		block = "<Nop>",
 	},
 	opleader = {
-		line = 'q',
-		block = '<Nop>',
+		line = "q",
+		block = "<Nop>",
 	},
 	extra = {
-		above = 'qO',
-		below = 'qo',
-		eol = 'Q',
+		above = "qO",
+		below = "qo",
+		eol = "Q",
 	},
 }
 
@@ -172,11 +172,11 @@ require('Comment').setup {
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
 -- requires remap for treesitter and comments.nvim mappings
-keymap("n", "dq", "mzdCOM`z", { remap = true })
-keymap("n", "yq", "mzyCOM`z", { remap = true })
-keymap("n", "gUq", "mzgUCOM`z", { remap = true })
-keymap("n", "sq", "mzsCOM`z", { remap = true })
-keymap("n", "cq", 'mz"_dCOMxQ', { remap = true }) -- using delete to preserve commentstring
+keymap("n", "dq", "mzdCOM`z", {remap = true})
+keymap("n", "yq", "mzyCOM`z", {remap = true})
+keymap("n", "gUq", "mzgUCOM`z", {remap = true})
+keymap("n", "sq", "mzsCOM`z", {remap = true})
+keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- using delete to preserve commentstring
 
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h")
@@ -196,7 +196,7 @@ keymap("n", "<S-Tab>", "<<")
 keymap("x", "<Tab>", ">gv")
 keymap("x", "<S-Tab>", "<gv")
 
-keymap({ "n", "x" }, "^", "=") -- auto-indent
+keymap({"n", "x"}, "^", "=") -- auto-indent
 keymap("n", "^^", "mz=ip`z") -- since indenting paragraph is far more common than indenting a line
 keymap("n", "^p", "mz`[v`]=`z") -- last paste
 keymap("n", "^A", "mzgg=G`z") -- entire file
@@ -247,7 +247,7 @@ keymap("n", "Ü", function()
 end)
 
 -- <leader>{char} → Append {char} to end of line
-local trailingKeys = { ".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`" }
+local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`"}
 for i = 1, #trailingKeys do
 	keymap("n", "<leader>" .. trailingKeys[i], "mzA" .. trailingKeys[i] .. "<Esc>`z")
 end
@@ -261,7 +261,7 @@ keymap("n", "gZ", "[s") -- prev misspelling
 keymap("n", "za", "1z=") -- Autocorrect word under cursor (= select 1st suggestion)
 
 -- [S]ubstitute Operator (substitute.nvim)
-local substi = require('substitute')
+local substi = require("substitute")
 substi.setup()
 keymap("n", "s", substi.operator)
 keymap("n", "ss", substi.line)
@@ -269,8 +269,8 @@ keymap("n", "S", substi.eol)
 keymap("x", "s", substi.visual)
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
-keymap("n", "R", ':noautocmd normal!mz"zyy"zp`zj<CR>', { silent = true }) -- current line, ":noautocmd" to disable highlighted yank for this
-keymap("x", "R", '"zy`]"zp', { silent = true }) -- selection (best used with Visual Line Mode)
+keymap("n", "R", ':noautocmd normal!mz"zyy"zp`zj<CR>', {silent = true}) -- current line, ":noautocmd" to disable highlighted yank for this
+keymap("x", "R", '"zy`]"zp', {silent = true}) -- selection (best used with Visual Line Mode)
 
 -- Line & Character Movement (vim.move plugin)
 g.move_map_keys = 0 -- disable default keymaps of vim.move
@@ -285,10 +285,10 @@ keymap("x", "<Right>", "<Plug>MoveBlockRight")
 keymap("x", "<Left>", "<Plug>MoveBlockLeft")
 
 -- Merging / Splitting Lines
-keymap({ "n", "x" }, "M", "J") -- [M]erge line up
-keymap({ "n", "x" }, "gm", "ddpkJ") -- [m]erge line down
-g.splitjoin_split_mapping = '' -- disable default mappings
-g.splitjoin_join_mapping = ''
+keymap({"n", "x"}, "M", "J") -- [M]erge line up
+keymap({"n", "x"}, "gm", "ddpkJ") -- [m]erge line down
+g.splitjoin_split_mapping = "" -- disable default mappings
+g.splitjoin_join_mapping = ""
 
 keymap("n", "<leader>m", ":SplitjoinJoin<CR>")
 keymap("n", "<leader>s", ":SplitjoinSplit<CR>")
@@ -298,23 +298,23 @@ keymap("n", "<C-q>", "gqq") -- needs remapping since shadowed
 keymap("x", "<C-q>", "gq")
 
 -- Undo
-keymap({ "n", "x" }, "U", "<C-r>") -- redo
+keymap({"n", "x"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", "U") -- undo line, needs remapping since shadowed
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
-keymap("i", "<C-e>", '<Esc>A') -- EoL
-keymap("i", "<C-k>", '<Esc>lDi') -- kill line
-keymap("i", "<C-a>", '<Esc>I') -- BoL
-keymap("c", "<C-a>", '<Home>')
-keymap("c", "<C-e>", '<End>')
-keymap("c", "<C-u>", '<C-e><C-u>') -- clear
+keymap("i", "<C-e>", "<Esc>A") -- EoL
+keymap("i", "<C-k>", "<Esc>lDi") -- kill line
+keymap("i", "<C-a>", "<Esc>I") -- BoL
+keymap("c", "<C-a>", "<Home>")
+keymap("c", "<C-e>", "<End>")
+keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
-keymap("x", "p", 'P') -- do not override register when pasting
-keymap("x", "P", 'p') -- override register when pasting
+keymap("x", "p", "P") -- do not override register when pasting
+keymap("x", "P", "p") -- override register when pasting
 
 keymap("n", "V", "Vj") -- visual line mode starts with two lines selected
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
@@ -333,7 +333,7 @@ keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 
 -- Buffers
 keymap("", "<C-Tab>", "<C-^>") -- for footpedal
-keymap({ "n", "x" }, "gt", ":nohl<CR><C-^>", { silent = true }) -- switch to alt-file (use vim's buffer model instead of tabs)
+keymap({"n", "x"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
 
 --------------------------------------------------------------------------------
 -- FILES
@@ -349,9 +349,9 @@ keymap("n", "gF", "gf") -- needs remapping since shadowed
 -- File Operations
 keymap("", "<C-p>", ':let @+ = expand("%:p")<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
 keymap("", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
-keymap("", "<C-r>", ':Rename ') -- rename of current file, requires eunuch.vim
+keymap("", "<C-r>", ":Rename ") -- rename of current file, requires eunuch.vim
 keymap("", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
-keymap("n", "<leader>X", ':Chmod +x<CR>') -- execution permission, requires eunuch.vim
+keymap("n", "<leader>X", ":Chmod +x<CR>") -- execution permission, requires eunuch.vim
 keymap("x", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
 
 -- Option Toggling
@@ -403,7 +403,7 @@ end)
 autocmd("FileType", {
 	pattern = specialFiletypes,
 	callback = function()
-		local opts = { buffer = true, silent = true, nowait = true }
+		local opts = {buffer = true, silent = true, nowait = true}
 		keymap("n", "<Esc>", ":close<CR>", opts)
 		keymap("n", "q", ":close<CR>", opts)
 	end
@@ -421,16 +421,16 @@ keymap("n", "zh", function()
 
 	if bo.filetype == "css" then
 		local hr = b.hrComment
-		fn.append('.', hr)
+		fn.append(".", hr)
 		local lineNum = api.nvim_win_get_cursor(0)[1] + 2
 		local colNum = #hr[2] + 2
-		api.nvim_win_set_cursor(0, { lineNum, colNum })
+		api.nvim_win_set_cursor(0, {lineNum, colNum})
 		cmd [[startinsert!]]
 	else
 		-- shorten hr by indent
 		local indent = fn.indent(".")
 		local hr = b.hrComment:sub(1, -(indent + 1))
-		fn.append('.', { hr, "" })
+		fn.append(".", {hr, ""})
 		cmd [[normal! j==]]
 	end
 	---@diagnostic enable: param-type-mismatch
@@ -439,27 +439,27 @@ end)
 augroup("horizontalRuler", {})
 autocmd("FileType", {
 	group = "horizontalRuler",
-	pattern = { "json", "javascript", "typescript" },
+	pattern = {"json", "javascript", "typescript"},
 	callback = function() b.hrComment = "//──────────────────────────────────────────────────────────────────────────────" end
 })
 autocmd("FileType", {
 	group = "horizontalRuler",
-	pattern = { "bash", "zsh", "sh", "yaml" },
+	pattern = {"bash", "zsh", "sh", "yaml"},
 	callback = function() b.hrComment = "#───────────────────────────────────────────────────────────────────────────────" end
 })
 autocmd("FileType", {
 	group = "horizontalRuler",
-	pattern = { "lua", "applescript" },
+	pattern = {"lua", "applescript"},
 	callback = function() b.hrComment = "--------------------------------------------------------------------------------" end
 })
 autocmd("FileType", {
 	group = "horizontalRuler",
-	pattern = { "markdown" },
+	pattern = {"markdown"},
 	callback = function() b.hrComment = "---" end
 })
 autocmd("FileType", {
 	group = "horizontalRuler",
-	pattern = { "css" },
+	pattern = {"css"},
 	callback = function() b.hrComment = {
 			"/* ───────────────────────────────────────────────── */",
 			"/* << ",
