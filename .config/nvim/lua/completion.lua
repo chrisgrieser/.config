@@ -16,6 +16,12 @@ local defaultWithoutBuffer = {
 	{ name = 'emoji', keyword_length = 2 },
 }
 
+local defaultWithoutEmoji = {
+	{ name = 'luasnip' },
+	{ name = 'nvim_lsp' },
+	{ name = 'buffer', keyword_length = 2 },
+}
+
 local defaultAndNerdfont = {
 	{ name = 'luasnip' },
 	{ name = 'nvim_lsp' },
@@ -126,6 +132,11 @@ cmp.setup.filetype ("lua", {
 -- don't use buffer in css completions
 cmp.setup.filetype ("css", {
 	sources = cmp.config.sources(defaultWithoutBuffer),
+})
+
+-- no emojis in vim, to avoid `:` emojis
+cmp.setup.filetype ("vim", {
+	sources = cmp.config.sources(defaultWithoutEmoji),
 })
 
 -- also use nerdfont for starship config
