@@ -36,7 +36,7 @@ map - /
 nmap j gj
 nmap k gk
 nmap I g0i
-nmap A g$a
+nmap A g$i
 
 " HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
 map H g0
@@ -298,15 +298,28 @@ nmap zM :foldall
 nmap zr :foldless
 nmap zR :unfoldall
 
-""""""""""""""""""""""
-" < Sneak
-""""""""""""""""""""""
-" emulate vim-sneak
-exmap nextTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(true)}
-exmap prevTwoCharMatch jsfile Meta/obsidian-vim-helpers.js {moveToChars(false)}
-nmap ö :nextTwoCharMatch
-nmap Ö :prevTwoCharMatch
+""""""""""""""""""""""""""""
+" < Sneak / Hop / Lightspeed
+""""""""""""""""""""""""""""
+" emulate various vim navigation plugins
 
+" Sneak
+" exmap sneakForward jsfile Meta/obsidian-vim-helpers.js {moveToChars(true)}
+" exmap sneakBack jsfile Meta/obsidian-vim-helpers.js {moveToChars(false)}
+" nmap ö :sneakForward
+" nmap Ö :sneakBack
+
+" Hop
+exmap hop obcommand mrj-jump-to-link:activate-jump-to-anywhere
+nmap ö :hop
+
+" Lightspeed
+" exmap lightspeed mrj-jump-to-link:activate-lightspeed-jump
+" nmap ö :lightspeed
+
+" Link Jump (similar to Vimium's f)
+exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
+nmap ,f :linkjump
 
 """"""""""""""""""""""
 " < Substitute
