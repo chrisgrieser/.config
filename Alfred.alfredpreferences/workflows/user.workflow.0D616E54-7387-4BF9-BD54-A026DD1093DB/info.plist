@@ -978,7 +978,7 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 				<key>argument</key>
 				<integer>1</integer>
 				<key>focusedappvariable</key>
-				<true/>
+				<false/>
 				<key>focusedappvariablename</key>
 				<string>focusedapp</string>
 				<key>hotkey</key>
@@ -1283,7 +1283,7 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 				<key>argument</key>
 				<integer>1</integer>
 				<key>focusedappvariable</key>
-				<true/>
+				<false/>
 				<key>focusedappvariablename</key>
 				<string>focusedapp</string>
 				<key>hotkey</key>
@@ -1486,7 +1486,7 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>set prevApp to (system attribute "focusedapp")if prevApp = "" then	tell application "Neovide" to activateelse	tell application id (system attribute "focusedapp") to activateend if</string>
+				<string>set prevApp to (system attribute "focusedapp")if prevApp = "" then	tell application "Neovide" to activateelse	tell application (system attribute "focusedapp") to activateend if</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2028,6 +2028,8 @@ Recommended Hotkey: ⇧⌘2</string>
 	<array/>
 	<key>variables</key>
 	<dict>
+		<key>focusedapp</key>
+		<string>Marta</string>
 		<key>ocr_languages</key>
 		<string>eng+deu</string>
 		<key>tagToExcludeFromSearch</key>

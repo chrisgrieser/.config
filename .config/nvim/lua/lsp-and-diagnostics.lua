@@ -106,8 +106,8 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 
 	-- format on manual saving
 	keymap('n', '<D-s>', function()
-		vim.lsp.buf.format{async = true}
-		cmd[[write!]]
+		vim.lsp.buf.format { async = true }
+		cmd [[write!]]
 	end, bufopts)
 
 	if client.name ~= "bashls" then -- don't override man page popup
@@ -154,9 +154,11 @@ lspConfig['sumneko_lua'].setup {
 	settings = {
 		Lua = {
 			runtime = { version = 'LuaJIT' }, -- used by neovim
-			-- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
 			format = {
+				-- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
 				quote_style = "double",
+				call_arg_parentheses = "remove_table_only",
+				keep_one_space_between_table_and_bracket = false,
 			},
 			completion = {
 				callSnippet = "Replace",
