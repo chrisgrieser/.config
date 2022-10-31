@@ -3,13 +3,14 @@ on run argv
 	set AppleScript's text item delimiters to ""
 	set input to argv as string
 	set selectionExists to (input is not "")
-	set braveIsFrontMost to (frontmost of application "Brave Browser")
+	tell application "System Events" to set frontApp to (name of first process where it is frontmost)
+	tell application id "com.runningwithcrayons.Alfred" to set configuration "focusedapp" to value frontApp in workflow (system attribute "alfred_workflow_bundleid") with exportable
 
-	if (selectionExists is false) and (braveIsFrontMost is false) then
+	if (selectionExists is false) and (frontApp is not "Brave Browser") then
 		return "🛑 No Input provided."
 	end if
 
-	if (braveIsFrontMost) then
+	if (frontApp is "Brave Browser") then
 		tell application "Brave Browser"
 			set currentTabUrl to URL of active tab of front window
 			set currentTabTitle to title of active tab of front window
