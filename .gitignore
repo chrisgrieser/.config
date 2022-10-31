@@ -1,6 +1,8 @@
 # Mac
 .DS_Store
 
+# don't add "node_modules" here since some Alfred workflows actually rely on it
+
 # Activity Data
 sync.log
 some.log
