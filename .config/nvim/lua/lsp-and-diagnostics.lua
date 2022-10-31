@@ -155,12 +155,16 @@ lspConfig['sumneko_lua'].setup {
 		Lua = {
 			runtime = { version = 'LuaJIT' }, -- used by neovim
 			format = {
-				-- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
-				quote_style = "double",
-				call_arg_parentheses = "remove_table_only",
-				keep_one_space_between_table_and_bracket = false,
-				keep_one_space_between_namedef_and_attribute = false,
-				continuous_assign_table_field_align_to_equal_sign = false,
+				enable = true,
+				defaultConfig = {
+					-- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
+					-- https://github.com/sumneko/lua-language-server/wiki/Formatter
+					quote_style = "double",
+					call_arg_parentheses = "remove_table_only",
+					keep_one_space_between_table_and_bracket = "false", -- yes, these must be strings
+					keep_one_space_between_namedef_and_attribute = "false",
+					continuous_assign_table_field_align_to_equal_sign = "false",
+				},
 			},
 			completion = {
 				callSnippet = "Replace",
@@ -181,7 +185,7 @@ lspConfig['sumneko_lua'].setup {
 					home .. "/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
 				}
 			},
-			hint = {
+			hint = { -- do not seem to be supported?
 				enable = true,
 				setType = true,
 				arrayIndex = "Enable",
@@ -198,7 +202,7 @@ lspConfig['cssls'].setup {
 		css = {
 			lint = {
 				vendorPrefix = "ignore",
-				duplicateProperties = "error",
+				duplicateProperties = "error", -- duplication with styleling
 				emptyRules = "ignore",
 			},
 			colorDecorators = { enable = true }, -- does not seem to work?
