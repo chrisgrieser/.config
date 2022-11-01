@@ -51,10 +51,7 @@ null_ls.setup{
 		},
 
 		builtins.code_actions.proselint,
-		builtins.diagnostics.proselint.with{
-			extra_args = {"--config", fn.expand("~/.config/proselint/config.json")},
-			-- /Users/chrisgrieser/dotfiles/.config/proselint/config.json
-		},
+		builtins.diagnostics.proselint, -- proselint bug causing config to be ignored it seems?
 		builtins.hover.dictionary, -- vim's builtin dictionary
 		builtins.diagnostics.markdownlint.with{
 			extra_args = {"--disable=trailing-spaces"}, -- vim already takes care of that
