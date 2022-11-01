@@ -166,7 +166,7 @@ require("Comment").setup {
 }
 
 -- effectively creating "q" as comment textobj, can't map directly to q since
--- overlap in visual mode where q can be object and operator. However, this
+-- overlap visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
 -- requires remap for treesitter and comments.nvim mappings
