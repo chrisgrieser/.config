@@ -865,14 +865,14 @@
             },
             {
               "key_code": "vk_none",
-              "hold_down_milliseconds": 50
+              "hold_down_milliseconds": 70
             },
             {
               "key_code": "up_arrow"
             },
             {
               "key_code": "vk_none",
-              "hold_down_milliseconds": 50
+              "hold_down_milliseconds": 70
             },
             {
               "key_code": "r"

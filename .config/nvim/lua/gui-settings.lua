@@ -104,6 +104,11 @@ keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>") -- no selection = word under cursor
 keymap("v", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>")
 keymap("i", "<D-e>", "``<Left>")
 
+-- cmd+t: Template string
+keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>") -- no selection = word under cursor
+keymap("v", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>")
+keymap("i", "<D-t>", "${}<Left>")
+
 -- font resizing font size
 -- https://neovide.dev/faq.html#how-can-i-dynamically-change-the-font-size-at-runtime
 g.gui_font_size = g.gui_font_default_size
