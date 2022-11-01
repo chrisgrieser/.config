@@ -28,7 +28,7 @@ rules:
       - type: basic
         from:
           pointing_button: button2
-        to_if_alone:
+        to:
           - pointing_button: button1
             modifiers:
               - command
@@ -90,38 +90,11 @@ rules:
               - ^org\.hammerspoon\.Hammerspoon$
   - description: "🐁 4 (bottom)"
     manipulators:
-      # held-down: Mission Control
-      - type: basic
-        from:
-          pointing_button: button4
-        to_if_alone:
-          - pointing_button: button4
-        conditions:
-          - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-              - ^com\.brave\.Browser.+ # PWAs
-              - ^com\.apple\.finder$
-              - ^md\.obsidian$
-              - ^com\.mimestream\.Mimestream$
-              - ^net\.highlightsapp\.universal$
-              - ^org\.yanex\.marta$
-              - ^cc\.ffitch\.shottr$
-        to_if_held_down:
-          - key_code: tab # persistent app-switcher in AltTab.app
-            modifiers:
-              - command
-              - option
-            repeat: false
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
-
       # Brave: Back
       - type: basic
         from:
           pointing_button: button4
-        to_if_alone:
+        to:
           - key_code: escape # to leave insert mode (Vimium)
           - key_code: left_arrow
             modifiers:
@@ -130,42 +103,24 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.brave\.Browser$
-        to_if_held_down:
-          - key_code: tab # persistent app-switcher in AltTab.app
-            modifiers:
-              - command
-              - option
-            repeat: false
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
 
       # YouTube: Home
       - type: basic
         from:
           pointing_button: button4
-        to_if_alone:
+        to:
           - key_code: escape # to leave full screen
           - shell_command: osascript -e 'tell application "Brave Browser" to set URL of active tab of front window to "https://www.youtube.com"'
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.brave\.Browser.+ # PWAs
-        to_if_held_down:
-          - key_code: tab # persistent app-switcher in AltTab.app
-            modifiers:
-              - command
-              - option
-            repeat: false
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
 
       # Marta & Obsidian: Back
       - type: basic
         from:
           pointing_button: button4
-        to_if_alone:
+        to:
           - key_code: h
             modifiers:
               - control
@@ -174,21 +129,12 @@ rules:
             bundle_identifiers:
               - ^org\.yanex\.marta$
               - ^md\.obsidian$
-        to_if_held_down:
-          - key_code: tab # persistent app-switcher in AltTab.app
-            modifiers:
-              - command
-              - option
-            repeat: false
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
 
       # Shottr: Pin
       - type: basic
         from:
           pointing_button: button4
-        to_if_alone:
+        to:
           - key_code: p
             modifiers:
               - command
@@ -196,41 +142,23 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^cc\.ffitch\.shottr$
-        to_if_held_down:
-          - key_code: tab # persistent app-switcher in AltTab.app
-            modifiers:
-              - command
-              - option
-            repeat: false
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
 
       # Mimestream: Delete
       - type: basic
         from:
           pointing_button: button4
-        to_if_alone:
+        to:
           - key_code: non_us_pound # "#"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
-        to_if_held_down:
-          - key_code: tab # persistent app-switcher in AltTab.app
-            modifiers:
-              - command
-              - option
-            repeat: false
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
 
       # Highlights: Free Comment
       - type: basic
         from:
           pointing_button: button4
-        to_if_alone:
+        to:
           - key_code: "n"
             modifiers:
               - command
@@ -243,21 +171,12 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^net\.highlightsapp\.universal$
-        to_if_held_down:
-          - key_code: tab # persistent app-switcher in AltTab.app
-            modifiers:
-              - command
-              - option
-            repeat: false
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
 
       # Finder: back
       - type: basic
         from:
           pointing_button: button4
-        to_if_alone:
+        to:
           - shell_command: |
               osascript -e '
                 tell application "System Events"
@@ -270,15 +189,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.apple\.finder$
-        to_if_held_down:
-          - key_code: tab # persistent app-switcher in AltTab.app
-            modifiers:
-              - command
-              - option
-            repeat: false
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
+
   - description: "🐁 5 (top)"
     manipulators:
       # held-down: universal-search

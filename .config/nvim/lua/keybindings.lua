@@ -108,7 +108,7 @@ keymap("n", "<leader><Space>", function()
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
 	cmd [[normal! "_diw]]
 	cmd [[startinsert]] -- :Normal does not allow to end in insert mode
-	opt.iskeyword = opt.iskeyword - {"_", "-"}
+	opt.iskeyword = opt.iskeyword + {"_", "-"}
 end)
 
 keymap({"o", "x"}, "iq", 'i"') -- double [q]uote
@@ -127,12 +127,14 @@ keymap({"o", "x"}, "R", "{")
 -- special plugin text objects
 keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {silent = true})
 keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>", {silent = true})
+
+-- map ai to aI, except for yaml and python, where aI does not make sense
 augroup("indentobject", {})
 autocmd("BufEnter", {
 	group = "indentobject",
 	callback = function()
 		if bo.filetype ~= "yaml" and bo.filetype ~= "python" then
-			keymap({"x", "o"}, "ai", "aI", {remap = true, buffer = true}) 
+			keymap({"x", "o"}, "ai", "aI", {remap = true, buffer = true})
 		end
 	end
 })
