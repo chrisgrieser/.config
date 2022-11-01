@@ -89,7 +89,15 @@ keymap("v", "<D-c>", "y")
 keymap("n", "<D-x>", "dd") -- no selection = line
 keymap("v", "<D-x>", "d")
 keymap({"n", "v"}, "<D-v>", "p")
-keymap({"i", "c"}, "<D-v>", "<C-r><C-r>*")
+keymap({"i", "c"}, "<D-v>",function ()
+	local isLinewise = fn.getregtype("*") == "V"
+	if isLinewise then
+		cmd[[normal! gp]]
+	else
+		cmd("normal! i"..fn.getreg("*"))
+		cmd[[startinsert!]]
+	end
+end)
 
 
 

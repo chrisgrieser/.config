@@ -41,7 +41,7 @@ keymap("n", "<leader>P", ":PackerStatus<CR>")
 keymap({"n", "x", "o"}, "H", "0^") -- 0^ ensures scrolling to the left on long lines
 keymap({"n", "x", "o"}, "L", "$")
 keymap({"x", "o"}, "J", "7j")
-keymap({"n", "x", "o"}, "K", "7k")
+keymap({"n", "x", "o"}, "K", "7k", {silent = true})
 
 -- when reaching the last line, scroll down (since scrolloff does not work at EOF)
 function overscroll(action) ---@param action string
@@ -53,8 +53,8 @@ function overscroll(action) ---@param action string
 	cmd("normal! " .. action)
 end
 
-keymap("n", "j", function() overscroll("j") end)
-keymap("n", "J", function() overscroll("7j") end)
+keymap("n", "j", function() overscroll("j") end, {silent = true})
+keymap("n", "J", function() overscroll("7j") end, {silent = true})
 keymap({"n", "x"}, "G", "Gzz")
 
 -- Jump History
