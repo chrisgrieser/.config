@@ -10,7 +10,7 @@ augroup = vim.api.nvim_create_augroup
 autocmd = vim.api.nvim_create_autocmd
 telescope = require("telescope.builtin") -- requires loading extensions first
 keymap = vim.keymap.set
-home = fn.expand("~") ---@diagnostic disable-line: missing-parameter
+home = vim.fn.expand("~")
 
 -- :setlocal does not have a direct access via the vim-module, it seems https://neovim.io/doc/user/lua.html#lua-vim-setlocal
 function localOpt(option, value)
@@ -27,13 +27,27 @@ function isGui()
 	return g.neovide or g.goneovim
 end
 
+commonFiletypes = {
+	"lua",
+	"markdown",
+	"javascript",
+	"typescript",
+	"applescript",
+	"json",
+	"yaml",
+	"toml",
+	"zsh",
+	"bash",
+	"bibtex",
+	"gitcommit",
+}
+
 specialFiletypes = {
 	"help",
 	"startuptime",
 	"qf",
 	"lspinfo",
 	"AppleScriptRunOutput",
-	"Outline",
 	"netrw",
 	"packer",
 	"undotree",
