@@ -1,10 +1,10 @@
-function PluginList ()
+function PluginList()
 
 	-- Package Management
 	use "wbthomason/packer.nvim" -- packer manages itself
 	-- use "dstein64/vim-startuptime" -- measure startup time with `:StartupTime`
-	use 'lewis6991/impatient.nvim' -- reduces startup time by ~50%
-	use { "williamboman/mason.nvim", requires = 'RubixDev/mason-update-all' }
+	use "lewis6991/impatient.nvim" -- reduces startup time by ~50%
+	use {"williamboman/mason.nvim", requires = "RubixDev/mason-update-all"}
 
 	-- Themes
 	-- use "navarasu/onedark.nvim"
@@ -20,7 +20,7 @@ function PluginList ()
 	use {
 		"nvim-treesitter/nvim-treesitter",
 		run = function() -- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
-			require("nvim-treesitter.install").update({ with_sync = true })
+			require("nvim-treesitter.install").update {with_sync = true}
 		end,
 		requires = {
 			"nvim-treesitter/nvim-treesitter-context",
@@ -32,10 +32,10 @@ function PluginList ()
 	use "hail2u/vim-css3-syntax" -- better css syntax highlighting (until treesitter css looks decent…)
 
 	-- LSP & Linting
-	use {"neovim/nvim-lspconfig", requires = "williamboman/mason-lspconfig.nvim" }
+	use {"neovim/nvim-lspconfig", requires = "williamboman/mason-lspconfig.nvim"}
 	use "ray-x/lsp_signature.nvim"
 	use {"jose-elias-alvarez/null-ls.nvim", requires = {
-		"nvim-lua/plenary.nvim" ,
+		"nvim-lua/plenary.nvim",
 		"jayp0521/mason-null-ls.nvim",
 	}}
 
@@ -73,7 +73,7 @@ function PluginList ()
 
 	-- File Management & Switching
 	use "tpope/vim-eunuch" -- file operation utilities
-	use { "nvim-telescope/telescope.nvim", requires = {
+	use {"nvim-telescope/telescope.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons",
 		"nvim-telescope/telescope-ui-select.nvim",
@@ -95,7 +95,12 @@ function PluginList ()
 
 	-- Editing
 	use "matze/vim-move"
+	use {"ThePrimeagen/refactoring.nvim", requires = {
+		"nvim-lua/plenary.nvim",
+		"nvim-treesitter/nvim-treesitter",
+	}}
 	use "AndrewRadev/splitjoin.vim"
 	use "Darazaki/indent-o-matic" -- detect indention (alternative: NMAC427/guess-indent.nvim)
 	use "mbbill/undotree" -- undo history nagivation
+
 end
