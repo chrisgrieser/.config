@@ -10,17 +10,19 @@ localOpt("spell", true)
 
 -- syntax highlighting in code blocks
 g.markdown_fenced_languages = {
-	'python',
-	'css',
-	'yaml',
-	'json',
-	'javascript',
-	'js=javascript',
-	'typescript',
-	'ts=typescript',
-	'applescript',
-	'bash',
-	'zsh',
+	"python",
+	"css",
+	"yaml",
+	"json",
+	"toml",
+	"lua",
+	"javascript",
+	"js=javascript",
+	"typescript",
+	"ts=typescript",
+	"applescript",
+	"bash",
+	"zsh",
 }
 
 -- wrapping and related options
@@ -31,6 +33,8 @@ keymap({"n", "v"}, "H", "g^", opts)
 keymap({"n", "v"}, "L", "g$", opts)
 keymap({"n", "v"}, "A", "g$a", opts)
 keymap({"n", "v"}, "I", "g^i", opts)
+keymap({"n", "v"}, "J", "7gj", opts)
+keymap({"n", "v"}, "K", "7gk", opts)
 keymap({"n", "v"}, "k", "gk", opts)
 keymap({"n", "v"}, "j", function() overscroll("gj") end, opts)
 
@@ -55,8 +59,7 @@ keymap("i", "<D-i>", "**<Left>", opts)
 -- cmd+e for inline code done in gui-settings, since also used for other cases
 -- outside of markdown (e.g. templater strings)
 
-keymap("n", "<CR>", 'A', opts) -- So double return keeps markdown list syntax
-keymap("n", "<leader>x", 'mz^lllrx`z', opts) -- check markdown tasks
+keymap("n", "<CR>", "A", opts) -- So double return keeps markdown list syntax
+keymap("n", "<leader>x", "mz^lllrx`z", opts) -- check markdown tasks
 keymap("n", "<leader>-", "mzI- <Esc>`z", opts) -- Add bullet point
 keymap("n", "<leader>>", "mzI> <Esc>`z", opts) -- Turn into blockquote
-
