@@ -1,0 +1,33 @@
+{
+  "blacklist": "",
+  "blockColor": "default",
+  "blockWholeSite": true,
+  "dialogTheme": "default",
+  "enablePathDepth": false,
+  "hideBlockLinks": false,
+  "hideControl": false,
+  "highlightColors": [
+    "#ddeeff"
+  ],
+  "linkColor": "default",
+  "skipBlockDialog": false,
+  "subscriptions": [
+    {
+      "name": "GitHub Translations",
+      "url": "https://raw.githubusercontent.com/arosh/ublacklist-github-translation/master/uBlacklist.txt",
+      "enabled": true
+    },
+    {
+      "name": "Stackoverflow Translations",
+      "url": "https://raw.githubusercontent.com/arosh/ublacklist-stackoverflow-translation/master/uBlacklist.txt",
+      "enabled": true
+    }
+  ],
+  "syncAppearance": false,
+  "syncBlocklist": true,
+  "syncGeneral": false,
+  "syncInterval": 15,
+  "syncSubscriptions": false,
+  "updateInterval": 1440,
+  "version": "8.1.1"
+}

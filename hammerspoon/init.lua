@@ -10,38 +10,13 @@ require("lua.splits")
 require("lua.scroll-and-cursor")
 require("lua.system-and-cron")
 require("lua.filesystem-watchers")
-if isIMacAtHome() then require("lua.usb-watchers") end
-
 require("lua.app-specific-behavior")
-if not (isAtOffice()) then
+
+if isIMacAtHome() or isAtMother() then
 	require("lua.twitterrific-controls")
 	require("lua.hot-corner-action")
+	require("lua.usb-watchers")
 end
-
-
---------------------------------------------------------------------------------
--- https://github.com/dbalatero/VimMode.spoon#configuration
-
-VimMode = hs.loadSpoon('VimMode')
-vim = VimMode:new()
-vim:setAlertFont('Input')
-	:bindHotKeys({ enter = {{'cmd'}, 'f19'} }) -- Karabiner: tap left-opt
-	:enableBetaFeature('block_cursor_overlay')
-
-vim:disableForApp('Sublime Text')
-	:disableForApp('alacritty')
-	:disableForApp('Alacritty')
-	:disableForApp('Obsidian')
-	:disableForApp('ShortCat')
-	:disableForApp('espanso')
-	:disableForApp('Marta')
-	:disableForApp('Finder')
-	:disableForApp('Alfred')
-	:disableForApp('Neovide')
-	:disableForApp('neovide')
-
---------------------------------------------------------------------------------
 
 holeCover()
 systemStart()
-
