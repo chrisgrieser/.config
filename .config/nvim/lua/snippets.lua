@@ -85,7 +85,7 @@ add("lua", {
 add("applescript", {
 	snip("browser URL", 'tell application "Brave Browser" to set currentTabUrl to URL of active tab of front window'),
 	snip("browser tab title", 'tell application "Brave Browser" to set currentTabName to title of active tab of front window'),
-	snip("notify", 'tell application "Brave Browser" to set currentTabName to title of active tab of front window'),
+	snip("notify", 'display notification "${2:subtitle}" with title "${1:title}"\n$0'),
 	snip("##", "#!/usr/bin/env osascript\n$0"),
 	snip("resolve home",
 		'set unresolved_path to "~/Documents"\n'..
@@ -108,7 +108,7 @@ add("javascript", {
 }, { type = "autosnippets" })
 
 add("javascript", {
-	snip("##", "#!/usr/bin/env osascript\n$0"),
+	snip("##", "#!/usr/bin/env osascript -l JavaScript\n$0"),
 	snip("ternary", "${1:cond} ? ${2:then} : ${3:else}"),
 	snip("resolve home (JXA)",'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 })
