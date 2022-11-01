@@ -204,45 +204,55 @@ keymap("n", "ü", "mzlblgueh~`z")
 
 -- toggle case or switch direction of char (e.g. > to <)
 keymap("n", "Ü", function()
-	-- toggle false/false
 	local wordUnderCursor = fn.expand("<cword>")
-	if wordUnderCursor == "true" then
-		cmd [[normal! "_ciwfalse]]
-		return
-	elseif wordUnderCursor == "false" then
-		cmd [[normal! "_ciwtrue]]
+	local col = api.nvim_win_get_cursor(0)[2] + 1
+	local char = fn.getline("."):sub(col, col) ---@diagnostic disable-line: param-type-mismatch, undefined-field
+
+	-- toggle words
+	cmd("setlocal iskeyword-=-")
+	local opposite = ""
+	if wordUnderCursor == "true" then opposite = "false"
+	elseif wordUnderCursor == "false" then opposite = "true"
+	elseif wordUnderCursor == "top" then opposite = "bottom"
+	elseif wordUnderCursor == "bottom" then opposite = "top"
+	elseif wordUnderCursor == "left" then opposite = "right"
+	elseif wordUnderCursor == "right" then opposite = "left"
+	end
+	if opposite then
+		cmd ("normal! _ciw"..opposite)
+		cmd("setlocal iskeyword+=-")
 		return
 	end
 
 	-- toggle case
-	local col = api.nvim_win_get_cursor(0)[2] + 1
-	local char = fn.getline("."):sub(col, col) ---@diagnostic disable-line: param-type-mismatch, undefined-field
 	local letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZäöüÄÖÜ"
 	if letters:find(char) then
 		cmd [[normal! ~h]]
 		return
 	end
 
-	-- switch char
-	local out = ""
-	if char == "<" then out = ">"
-	elseif char == ">" then out = "<"
-	elseif char == "(" then out = ")"
-	elseif char == ")" then out = "("
-	elseif char == "]" then out = "["
-	elseif char == "[" then out = "]"
-	elseif char == "{" then out = "}"
-	elseif char == "}" then out = "{"
-	elseif char == "/" then out = "\\"
-	elseif char == "\\" then out = "/"
-	elseif char == "'" then out = '"'
-	elseif char == '"' then out = "'"
-	elseif char == "," then out = ";"
-	elseif char == ";" then out = ","
+	-- switch punctuation
+	local switched = ""
+	if char == "<" then switched = ">"
+	elseif char == ">" then switched = "<"
+	elseif char == "(" then switched = ")"
+	elseif char == ")" then switched = "("
+	elseif char == "]" then switched = "["
+	elseif char == "[" then switched = "]"
+	elseif char == "{" then switched = "}"
+	elseif char == "}" then switched = "{"
+	elseif char == "/" then switched = "\\"
+	elseif char == "\\" then switched = "/"
+	elseif char == "'" then switched = '"'
+	elseif char == '"' then switched = "'"
+	elseif char == "," then switched = ";"
+	elseif char == ";" then switched = ","
 	end
-	if not (out) then return end
-	cmd("normal! r" .. out)
+	if switched then
+		cmd("normal! r" .. switched)
+	end
 end)
+
 
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`"}
