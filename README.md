@@ -1,14 +1,13 @@
 # pseudometa's dotfiles
 
 ## Table of Contents
-<!-- MarkdownTOC -->
-
+<!--toc:start-->
 - [Configurations of Interest](#configurations-of-interest)
 - [What is this repository?](#what-is-this-repository)
 - [Got an idea for an improvement?](#got-an-idea-for-an-improvement)
 - [About Me](#about-me)
+<!--toc:end-->
 
-<!-- /MarkdownTOC -->
 ## Configurations of Interest
 Most people tell me they find the following configurations useful:
 - [.zshrc setup](/zsh/)
