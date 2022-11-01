@@ -104,11 +104,13 @@ local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-lo
 	keymap('n', 'gy', telescope.lsp_type_definitions, bufopts)
 	keymap('n', '<leader>R', vim.lsp.buf.rename, bufopts)
 
-	-- format on manual saving
-	keymap('n', '<D-s>', function()
-		vim.lsp.buf.format { async = true }
-		cmd [[write!]]
-	end, bufopts)
+	-- format on manual saving, except for json
+	if client.name ~= "jsonls" then
+		keymap('n', '<D-s>', function()
+			vim.lsp.buf.format { async = true }
+			cmd [[write!]]
+		end, bufopts)
+	end
 
 	if client.name ~= "bashls" then -- don't override man page popup
 		keymap('n', '<leader>h', vim.lsp.buf.hover, bufopts) -- docs popup
