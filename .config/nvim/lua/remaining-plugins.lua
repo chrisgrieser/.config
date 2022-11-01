@@ -51,4 +51,13 @@ require("indent-o-matic").setup {
 
 require("refactoring").setup {}
 
+-- Remaps for the refactoring operations currently offered by the plugin
+keymap("x", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {silent = true})
+keymap("x", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], {silent = true})
+keymap("x", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {silent = true})
 
+-- Extract block doesn't need visual mode
+keymap("n", "<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], {silent = true})
+
+-- Inline variable can also pick up the identifier currently under the cursor without visual mode
+keymap("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {silent = true})
