@@ -30,7 +30,8 @@ opt.softtabstop = 3
 opt.shiftwidth = 3
 opt.shiftround = true
 opt.list = true
-opt.listchars = "multispace:··,tab:  "
+opt.listchars = "multispace:··,tab:  ,nbsp:ﮊ"
+opt.virtualedit = "block" -- select whitespace for proper rectangles in visual block mode
 
 -- trim trailing whitespaces & extra blanks at eof on save
 augroup("Mini-Lint", {})

@@ -19,8 +19,8 @@ cmd[[highlight! def link netrwTreeBar IndentBlankLineChar]]
 require('hop').setup {
 	uppercase_labels = true,
 	multi_windows = true,
-	hint_position = require'hop.hint'.HintPosition.MIDDLE,
-	hint_offset = -1,
+	hint_position = require'hop.hint'.HintPosition.END,
+	hint_offset = 0,
 }
 
 -- undotree
