@@ -119,13 +119,23 @@ keymap({"o", "x"}, "ir", "i]") -- [r]ectangular brackets
 keymap({"o", "x"}, "ar", "a]")
 keymap({"o", "x"}, "ic", "i}") -- [c]urly brackets
 keymap({"o", "x"}, "ac", "a}")
+keymap({"o", "x"}, "in", "gn") -- [n]ext search hit
+keymap({"o", "x"}, "an", "gn")
 keymap({"o", "x"}, "r", "}") -- [r]est of the paragraph
 keymap({"o", "x"}, "R", "{")
 
 -- special plugin text objects
 keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {silent = true})
 keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>", {silent = true})
-keymap({"x", "o"}, "ai", "aI", {remap = true}) -- indent text object
+augroup("indentobject", {})
+autocmd("BufEnter", {
+	group = "indentobject",
+	callback = function()
+		if bo.filetype ~= "yaml" and bo.filetype ~= "python" then
+			keymap({"x", "o"}, "ai", "aI", {remap = true, buffer = true}) 
+		end
+	end
+})
 
 -- treesitter textobjects:
 -- af -> a function
@@ -166,7 +176,7 @@ require("Comment").setup {
 }
 
 -- effectively creating "q" as comment textobj, can't map directly to q since
--- overlap visual mode where q can be object and operator. However, this
+-- overlap in visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
 -- requires remap for treesitter and comments.nvim mappings

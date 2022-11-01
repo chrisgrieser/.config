@@ -127,13 +127,13 @@ opt.foldenable = false -- do not fold on start
 opt.foldminlines = 2
 augroup("rememberFolds", {}) -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
 autocmd("BufWinLeave", {
-	pattern = "?*",
 	group = "rememberFolds",
+	pattern = "?*",
 	command = "silent! mkview"
 })
 autocmd("BufWinEnter", {
-	pattern = "?*",
 	group = "rememberFolds",
+	pattern = "?*",
 	command = "silent! loadview"
 })
 
