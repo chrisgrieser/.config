@@ -66,8 +66,10 @@ function acp (){
 	git pull
 	git push
 
+	# open issue automatically
 	if [[ "$COMMIT_MSG" =~ "#" ]]; then
-		open
+		issueNumber=$(echo $COMMIT_MSG | grep -Eo "#\d+" | cut -c2-)
+		open "$(getGithubURL)/issues/$issueNumber"
 	fi
 }
 
