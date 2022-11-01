@@ -26,7 +26,6 @@ local forceZshForShellcheck = {
 null_ls.setup{
 	sources = {
 		builtins.code_actions.gitsigns, -- gitsings.nvim plugin, e.g. hunk previews
-		builtins.code_actions.refactoring, -- refactoring.nvim plugin
 
 		-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go
 		builtins.diagnostics.shellcheck.with(forceZshForShellcheck),

@@ -39,7 +39,7 @@ function PluginList()
 		"jayp0521/mason-null-ls.nvim",
 	}}
 
-	-- DAP
+	-- DAP & debugging
 	-- use {"mfussenegger/nvim-dap", requires = {
 	-- 	"jayp0521/mason-nvim-dap.nvim",
 	-- 	"rcarriga/nvim-dap-ui",
@@ -95,10 +95,6 @@ function PluginList()
 
 	-- Editing
 	use "matze/vim-move"
-	use {"ThePrimeagen/refactoring.nvim", requires = {
-		"nvim-lua/plenary.nvim",
-		"nvim-treesitter/nvim-treesitter",
-	}}
 	use "AndrewRadev/splitjoin.vim"
 	use "Darazaki/indent-o-matic" -- detect indention (alternative: NMAC427/guess-indent.nvim)
 	use "mbbill/undotree" -- undo history nagivation
