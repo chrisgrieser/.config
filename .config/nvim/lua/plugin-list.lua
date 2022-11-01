@@ -80,14 +80,11 @@ function PluginList()
 		"nvim-telescope/telescope-ui-select.nvim",
 	}}
 
-	-- Operators
+	-- Operators & Text Objects
 	use "kylechui/nvim-surround"
 	use "tpope/vim-abolish" -- various case conversions
 	use "gbprod/substitute.nvim" -- substitution operator, neovim version for vim-subversive
 	use "numToStr/Comment.nvim"
-
-	-- Text Objects
-	use "andrewferrier/textobj-diagnostic.nvim" -- nvim diagnostics as text object
 	use "michaeljsmith/vim-indent-object"
 
 	-- Navigation

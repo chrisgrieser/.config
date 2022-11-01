@@ -25,6 +25,7 @@ alias bu='brew uninstall --zap'
 
 function print-section () {
 	echo
+	echo
 	echo "$*"
 	separator
 }
