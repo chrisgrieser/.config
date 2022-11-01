@@ -7,6 +7,7 @@ export VAULT_PATH=~'/Main Vault'
 
 export NEOVIDE_FRAME="buttonless" # https://neovide.dev/command-line-referencehtml#frame
 
+# shellcheck disable=1091
 source "$DOTFILE_FOLDER/zsh/git_github.zsh" # make github functions available in other apps like nvim
 
 #───────────────────────────────────────────────────────────────────────────────

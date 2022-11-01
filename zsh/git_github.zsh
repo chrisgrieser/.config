@@ -35,6 +35,8 @@ function gli (){
 	fi
 }
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # git add, commit, (pull) & push
 function acp (){
 	# safeguard against accidental pushing of large files
@@ -50,7 +52,8 @@ function acp (){
 	local MSG_LENGTH=${#COMMIT_MSG}
 	if [[ $MSG_LENGTH -gt 50 ]]; then
 		echo "Commit Message too long ($MSG_LENGTH chars)."
-		# shellcheck disable=SC1087,SC2154
+		[[ "$TERM" != "alacritty" ]] && return 1
+		# shellcheck disable=SC1087
 		FUNC_NAME="$funcstack[1]" # https://stackoverflow.com/a/62527825
 		print -z "$FUNC_NAME \"$COMMIT_MSG\"" # put back into buffer
 		return 1
@@ -62,6 +65,10 @@ function acp (){
 	git add -A && git commit -m "$COMMIT_MSG"
 	git pull
 	git push
+
+	if [[ "$COMMIT_MSG" =~ "#" ]]; then
+		open
+	fi
 }
 
 function amend () {
@@ -71,12 +78,15 @@ function amend () {
 	local MSG_LENGTH=${#COMMIT_MSG}
 	if [[ $MSG_LENGTH -gt 50 ]]; then
 		echo "Commit Message too long ($MSG_LENGTH chars)."
+		[[ "$TERM" != "alacritty" ]] && return 1
 		print -z "\"$COMMIT_MSG\""
 		return 1
 	fi
 	if [[ -z "$COMMIT_MSG" ]] ; then
 		# prefile last commit message
-		print -z "amend \"$LAST_COMMIT_MSG\""
+		# shellcheck disable=1087
+		FUNC_NAME="$funcstack[1]" # https://stackoverflow.com/a/62527825
+		print -z "FUNC_NAME \"$LAST_COMMIT_MSG\""
 		return 0
 	else
 		git commit --amend -m "$COMMIT_MSG" # directly set new commit message
@@ -85,6 +95,8 @@ function amend () {
 	# with collaboraters: https://stackoverflow.com/a/255080
 	git push --force
 }
+
+#───────────────────────────────────────────────────────────────────────────────
 
 function gittree(){ (
 	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
@@ -101,13 +113,19 @@ alias pull="git pull"
 alias ignored="git status --ignored"
 
 # go to git root https://stackoverflow.com/a/38843585
+# shellcheck disable=2031
 alias g='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
 alias gg="git checkout -" # go to last branch, analogues to `zz` switching to last directory
 
 
 # open GitHub repo
-alias gh="open \$(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//' );"
-alias ghi="open \$(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//' )/issues;"
+function getGithubURL() {
+	git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//'
+}
+alias gh="getGithubURL | xargs open"
+alias ghi='open "$(getGithubURL)/issues"'
+
+#───────────────────────────────────────────────────────────────────────────────
 
 function clone(){
 	betterClone "$*" "normal"
@@ -135,7 +153,6 @@ function betterClone() {
 	fi
 }
 
-
 function nuke {
 	SSH_REMOTE=$(git remote -v | head -n1 | cut -d" " -f1 | cut -d$'	' -f2)
 
@@ -155,6 +172,8 @@ function nuke {
 	cd "$LOCAL_REPO" || return 1
 }
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # runs a release scripts placed at the git root
 function rel(){
 	# shellcheck disable=SC2164
@@ -173,6 +192,8 @@ function rel(){
 		echo "No '.release.sh' found."
 	fi
 }
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # search for [g]it [d]eleted [f]ile -> https://stackoverflow.com/a/42582877
 function gdf() {
