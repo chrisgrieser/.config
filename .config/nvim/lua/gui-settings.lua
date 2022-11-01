@@ -89,7 +89,8 @@ keymap("v", "<D-c>", "y")
 keymap("n", "<D-x>", "dd") -- no selection = line
 keymap("v", "<D-x>", "d")
 keymap({"n", "v"}, "<D-v>", "p")
-keymap({"i", "c"}, "<D-v>",function ()
+keymap("c", "<D-v>", "<C-r>+")
+keymap({"i"}, "<D-v>",function ()
 	local isLinewise = fn.getregtype("*") == "V" or fn.getreg("*"):find("\n")
 	if isLinewise then
 		cmd[[normal! gp]]

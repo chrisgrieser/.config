@@ -112,7 +112,7 @@ autocmd("TextYankPost", {
 
 -- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070
 -- (see also the respective "change small word" keybinding <leader><space>)
-opt.iskeyword = opt.iskeyword + {"-", "_"}
+opt.iskeyword = opt.iskeyword + {"-"}
 
 -- status bar
 opt.showcmd = true -- keychords pressed
