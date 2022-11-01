@@ -111,23 +111,21 @@ keymap("n", "<leader><Space>", function()
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
 end)
 
-keymap("o", "iq", 'i"') -- double [q]uote
-keymap("o", "aq", 'a"')
-keymap("o", "iz", "i'") -- single quote (mnemonic: [z]itation)
-keymap("o", "az", "a'")
-keymap("o", "ir", "i]") -- [r]ectangular brackets
-keymap("o", "ar", "a]")
-keymap("o", "ic", "i}") -- [c]urly brackets
-keymap("o", "ac", "a}")
-keymap("o", "r", "}") -- [r]est of the paragraph
-keymap("o", "R", "{")
+keymap({"o", "x"}, "iq", 'i"') -- double [q]uote
+keymap({"o", "x"}, "aq", 'a"')
+keymap({"o", "x"}, "iz", "i'") -- single quote (mnemonic: [z]itation)
+keymap({"o", "x"}, "az", "a'")
+keymap({"o", "x"}, "ir", "i]") -- [r]ectangular brackets
+keymap({"o", "x"}, "ar", "a]")
+keymap({"o", "x"}, "ic", "i}") -- [c]urly brackets
+keymap({"o", "x"}, "ac", "a}")
+keymap({"o", "x"}, "r", "}") -- [r]est of the paragraph
+keymap({"o", "x"}, "R", "{")
 
 -- special plugin text objects
-require("textobj-diagnostic").setup {create_default_keymaps = false}
-keymap({"x", "o"}, "id", require("textobj-diagnostic").next_diag_inclusive, {silent = true})
-keymap({"x", "o"}, "ad", require("textobj-diagnostic").next_diag_inclusive, {silent = true})
 keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {silent = true})
 keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>", {silent = true})
+keymap({"x", "o"}, "ai", "aI", {remap = true}) -- indent text object
 
 -- treesitter textobjects:
 -- af -> a function

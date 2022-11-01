@@ -36,8 +36,8 @@ brew "starship"
 brew "subliminal"
 brew "tesseract-lang"
 brew "transmission-cli"
-brew "youtube-dl"
 brew "yq"
+brew "yt-dlp"
 brew "zoxide"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
@@ -76,6 +76,7 @@ cask "stats"
 cask "steam"
 cask "terminology"
 cask "transmission"
+cask "wkhtmltopdf"
 cask "zoom"
 mas "Color Picker", id: 1545870783
 mas "Drafts", id: 1435957248
@@ -84,3 +85,4 @@ mas "Peek", id: 1554235898
 mas "Pixelmator Pro", id: 1289583905
 mas "Reeder", id: 1529448980
 mas "Twitterrific", id: 1289378661
+mas "WISO Steuer 2022", id: 1573428744
