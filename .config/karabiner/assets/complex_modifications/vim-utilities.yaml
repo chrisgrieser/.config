@@ -49,6 +49,25 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
+      # cmd+q -> <Esc>ZZ (does  skip pre-quit triggers)
+      - type: basic
+        from:
+          key_code: q
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: escape # to ensure normal mode
+          - key_code: "Y" # z & y switched
+            modifiers:
+              - shift
+          - key_code: "Y"
+            modifiers:
+              - shift
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - "[Nn]eovide"
   - description: "⚒️ f+j (simultaneously): ↵"
     manipulators:
       - type: basic
@@ -454,4 +473,3 @@ rules:
           - key_code: v
             modifiers:
               - command
-

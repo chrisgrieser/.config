@@ -92,6 +92,42 @@
               ]
             }
           ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "q",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "escape"
+            },
+            {
+              "key_code": "Y",
+              "modifiers": [
+                "shift"
+              ]
+            },
+            {
+              "key_code": "Y",
+              "modifiers": [
+                "shift"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "file_paths": [
+                "[Nn]eovide"
+              ]
+            }
+          ]
         }
       ]
     },
