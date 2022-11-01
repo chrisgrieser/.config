@@ -103,9 +103,8 @@ add("markdown", {
 })
 
 -- CSS
-add("css", {
-	snip("mr	", 'margin-right: $0;'),
-}, { type = "autosnippets" })
+-- add("css", {
+-- }, { type = "autosnippets" })
 
 -- JavaScript
 add("javascript", {

@@ -209,7 +209,7 @@ keymap("n", "Ü", function()
 	local char = fn.getline("."):sub(col, col) ---@diagnostic disable-line: param-type-mismatch, undefined-field
 
 	-- toggle words
-	cmd("setlocal iskeyword-=-")
+	opt.iskeyword = opt.iskeyword - {"-"}
 	local opposite = ""
 	if wordUnderCursor == "true" then opposite = "false"
 	elseif wordUnderCursor == "false" then opposite = "true"
@@ -217,10 +217,12 @@ keymap("n", "Ü", function()
 	elseif wordUnderCursor == "bottom" then opposite = "top"
 	elseif wordUnderCursor == "left" then opposite = "right"
 	elseif wordUnderCursor == "right" then opposite = "left"
+	elseif wordUnderCursor == "width" then opposite = "height"
+	elseif wordUnderCursor == "height" then opposite = "width"
 	end
-	if opposite then
-		cmd ("normal! _ciw"..opposite)
-		cmd("setlocal iskeyword+=-")
+	if opposite ~= "" then
+		cmd ('normal! "_ciw'..opposite)
+		opt.iskeyword = opt.iskeyword + {"-"}
 		return
 	end
 
@@ -248,7 +250,7 @@ keymap("n", "Ü", function()
 	elseif char == "," then switched = ";"
 	elseif char == ";" then switched = ","
 	end
-	if switched then
+	if switched ~= "" then
 		cmd("normal! r" .. switched)
 	end
 end)
