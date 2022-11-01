@@ -22,9 +22,9 @@ end
 g.gui_font_face = "JetBrainsMonoNL Nerd Font"
 opt.guicursor =
 "n-sm:block," ..
-	 "i-ci-c-ve:ver25," ..
-	 "r-cr-o-v:hor10," ..
-	 "a:blinkwait400-blinkoff500-blinkon700"
+	"i-ci-c-ve:ver25," ..
+	"r-cr-o-v:hor10," ..
+	"a:blinkwait400-blinkoff500-blinkon700"
 
 --------------------------------------------------------------------------------
 
@@ -88,9 +88,13 @@ keymap({"n", "v"}, "<D-v>", "p")
 keymap({"i", "c"}, "<D-v>", "<C-r>*")
 keymap("n", "<D-c>", "yy") -- no selection = line
 keymap("v", "<D-c>", "y")
-keymap("i", "<D-v>", "<C-r>+")
 keymap("n", "<D-x>", "dd") -- no selection = line
 keymap("v", "<D-x>", "d")
+
+keymap({"i", "c"}, "<D-v>", "<C-r>*")
+
+
+
 
 -- cmd+e: inline code
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>") -- no selection = word under cursor

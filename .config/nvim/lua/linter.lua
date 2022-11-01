@@ -31,7 +31,9 @@ null_ls.setup{
 		null_ls.builtins.code_actions.shellcheck.with(forceZshForShellcheck),
 		null_ls.builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 
-		null_ls.builtins.formatting.stylelint,
+		null_ls.builtins.formatting.stylelint.with{
+			extra_args = { ""}
+		},
 		null_ls.builtins.diagnostics.stylelint.with{ -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 			extra_args = { "--quiet" }, -- only errors, no warnings
 		},
