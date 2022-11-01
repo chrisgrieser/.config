@@ -1,6 +1,6 @@
 ---
 aliases: 
-tags: pandoc, citation, css, coding
+tags: pandoc, citation, css, Coding
 similar:
 - [[Citation Styles]]
 - [[Bibliography Creation]]
