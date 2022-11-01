@@ -1,33 +1,33 @@
 require("utils")
-local cmp = require('cmp')
+local cmp = require("cmp")
 local luasnip = require("luasnip")
 --------------------------------------------------------------------------------
 
 defaultSources = {
-	{ name = 'luasnip' },
-	{ name = 'nvim_lsp' },
-	{ name = 'emoji', keyword_length = 2 },
-	{ name = 'buffer', keyword_length = 2 },
+	{name = "luasnip"},
+	{name = "nvim_lsp"},
+	{name = "emoji", keyword_length = 2},
+	{name = "buffer", keyword_length = 2},
 }
 
 local defaultWithoutBuffer = {
-	{ name = 'luasnip' },
-	{ name = 'nvim_lsp' },
-	{ name = 'emoji', keyword_length = 2 },
+	{name = "luasnip"},
+	{name = "nvim_lsp"},
+	{name = "emoji", keyword_length = 2},
 }
 
 local defaultWithoutEmoji = {
-	{ name = 'luasnip' },
-	{ name = 'nvim_lsp' },
-	{ name = 'buffer', keyword_length = 2 },
+	{name = "luasnip"},
+	{name = "nvim_lsp"},
+	{name = "buffer", keyword_length = 2},
 }
 
 local defaultAndNerdfont = {
-	{ name = 'luasnip' },
-	{ name = 'nvim_lsp' },
-	{ name = "nerdfont", keyword_length = 2 },
-	{ name = 'emoji', keyword_length = 2 },
-	{ name = 'buffer', keyword_length = 2 },
+	{name = "luasnip"},
+	{name = "nvim_lsp"},
+	{name = "nerdfont", keyword_length = 2},
+	{name = "emoji", keyword_length = 2},
+	{name = "buffer", keyword_length = 2},
 }
 
 --------------------------------------------------------------------------------
@@ -60,21 +60,20 @@ local kind_icons = {
 	TypeParameter = ""
 }
 
-cmp.setup({
-	snippet = { -- REQUIRED a snippet engine must be specified and installed
-		expand = function(args) require('luasnip').lsp_expand(args.body) end,
+cmp.setup {
+	snippet = {-- REQUIRED a snippet engine must be specified and installed
+		expand = function(args) require("luasnip").lsp_expand(args.body) end,
 	},
-	experimental = { ghost_text = true },
 
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
 
-	mapping = cmp.mapping.preset.insert{
-		['<CR>'] = cmp.mapping.confirm({ select = true }),
-		['<S-Up>'] = cmp.mapping.scroll_docs(-4),
-		['<S-Down>'] = cmp.mapping.scroll_docs(4),
+	mapping = cmp.mapping.preset.insert {
+		["<CR>"] = cmp.mapping.confirm {select = true},
+		["<S-Up>"] = cmp.mapping.scroll_docs(-4),
+		["<S-Down>"] = cmp.mapping.scroll_docs(4),
 
 		-- expand or jump in luasnip snippet https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
 		["<Tab>"] = cmp.mapping(function(fallback)
@@ -85,7 +84,7 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, { "i", "s" }),
+		end, {"i", "s"}),
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
@@ -94,7 +93,7 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, { "i", "s" }),
+		end, {"i", "s"}),
 	},
 
 	sources = cmp.config.sources(defaultSources),
@@ -116,58 +115,58 @@ cmp.setup({
 			return vim_item
 		end
 	},
-})
+}
 
 --------------------------------------------------------------------------------
 -- Filetype specific Completion
 
-cmp.setup.filetype ("lua", {
+cmp.setup.filetype("lua", {
 	enabled = function()
 		-- disable leading "-"
 		local lineContent = fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
-		return not(lineContent:match(" %-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
+		return not (lineContent:match(" %-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
 	end,
 	sources = cmp.config.sources(defaultAndNerdfont),
 })
 
 -- don't use buffer in css completions
-cmp.setup.filetype ("css", {
+cmp.setup.filetype("css", {
 	sources = cmp.config.sources(defaultWithoutBuffer),
 })
 
 -- no emojis in vim, to avoid ex command `:` triggering emojis
-cmp.setup.filetype ("vim", {
+cmp.setup.filetype("vim", {
 	sources = cmp.config.sources(defaultWithoutEmoji),
 })
 
 -- also use nerdfont for starship config
-cmp.setup.filetype ("toml", {
+cmp.setup.filetype("toml", {
 	sources = cmp.config.sources(defaultAndNerdfont),
 })
 
 --------------------------------------------------------------------------------
 -- Command Line Completion
-cmp.setup.cmdline({ '/', '?' }, {
+cmp.setup.cmdline({"/", "?"}, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
-		{ name = 'buffer', keyword_length = 4 }
+		{name = "buffer", keyword_length = 4}
 	}
 })
 
-cmp.setup.cmdline(':', {
+cmp.setup.cmdline(":", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = 'git' }, -- commits with ":", issues/PRs with "#"
-		{ name = 'path' },
-		{ name = 'cmdline' },
-	},{ -- second array only relevant when no source from the first matches
-		{ name = 'cmdline_history' },
+		{name = "git"}, -- commits with ":", issues/PRs with "#"
+		{name = "path"},
+		{name = "cmdline"},
+	}, {-- second array only relevant when no source from the first matches
+		{name = "cmdline_history"},
 	})
 })
 
 --------------------------------------------------------------------------------
 
-require("cmp_git").setup{
+require("cmp_git").setup {
 	filetypes = commonFiletypes,
 	github = {
 		issues = {
@@ -184,5 +183,5 @@ require("cmp_git").setup{
 
 -- autopairs
 require("nvim-autopairs").setup {}
-local cmp_autopairs = require('nvim-autopairs.completion.cmp') -- add brackets to cmp
-cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done())
+local cmp_autopairs = require("nvim-autopairs.completion.cmp") -- add brackets to cmp
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
