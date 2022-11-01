@@ -10,7 +10,6 @@ matches:
     replace: https://github.com/chrisgrieser
   - trigger: '!blog'
     replace: https://nanotipsforvim.prose.sh
-
   - trigger: "!name"
     replace: "Christopher Grieser"
 
@@ -21,6 +20,8 @@ matches:
     replace: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH"
     label: PATH
 
+  - trigger: "!dontask"
+    replace: "https://dontasktoask.com/"
   - trigger: '!bug'
     replace: >
       Could you open a bug report at the GitHub repo?
@@ -28,6 +29,7 @@ matches:
       information I need to investigate the issue.
       (also, I don't have the time to look into it right now,
       so an issue will make sure that I can keep track of it.)
+
   - trigger: "!iso"
     replace: "{{todayISO}}"
     vars:
