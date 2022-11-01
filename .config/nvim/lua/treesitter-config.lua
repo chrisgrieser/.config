@@ -10,9 +10,9 @@ require('nvim-treesitter.configs').setup {
 		"bash",
 		"bibtex",
 		"gitignore",
-		"lua",
 		"regex",
 		"python",
+		"lua",
 		"toml",
 		"yaml",
 		"json",
@@ -96,4 +96,3 @@ require'treesitter-context'.setup{
 	trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
 	min_window_height = 20, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
 }
-
