@@ -135,7 +135,7 @@ cmp.setup.filetype ("css", {
 	sources = cmp.config.sources(defaultWithoutBuffer),
 })
 
--- no emojis in vim, to avoid `:` emojis
+-- no emojis in vim, to avoid ex command `:` triggering emojis
 cmp.setup.filetype ("vim", {
 	sources = cmp.config.sources(defaultWithoutEmoji),
 })
@@ -157,22 +157,29 @@ cmp.setup.cmdline({ '/', '?' }, {
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = 'git' },
+		{ name = 'git' }, -- commits with ":", issues/PRs with "#"
 		{ name = 'path' },
 		{ name = 'cmdline' },
-	},{ -- additional arrays = second array only relevant when no source from the first matches
+	},{ -- second array only relevant when no source from the first matches
 		{ name = 'cmdline_history' },
 	})
 })
 
 --------------------------------------------------------------------------------
+
 require("cmp_git").setup{
-	filetypes = {
-		"gitcommit",
-		"lua",
+	filetypes = commonFiletypes,
+	github = {
+		issues = {
+			limit = 100,
+			state = "open", -- open, closed, all
+		},
+		pull_requests = {
+			limit = 10,
+			state = "open",
+		},
 	},
 }
-
 --------------------------------------------------------------------------------
 
 -- autopairs
