@@ -84,14 +84,12 @@ let g:VM_maps['Find Under'] = '<D-j>' ]]
 keymap("i", "<D-j>", '<C-o>"_ciw')
 
 -- cut, copy & paste
-keymap({"n", "v"}, "<D-v>", "p")
-keymap({"i", "c"}, "<D-v>", "<C-r>*")
 keymap("n", "<D-c>", "yy") -- no selection = line
 keymap("v", "<D-c>", "y")
 keymap("n", "<D-x>", "dd") -- no selection = line
 keymap("v", "<D-x>", "d")
-
-keymap({"i", "c"}, "<D-v>", "<C-r>*")
+keymap({"n", "v"}, "<D-v>", "p")
+keymap({"i", "c"}, "<D-v>", "<C-r><C-r>*")
 
 
 
