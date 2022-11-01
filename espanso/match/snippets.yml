@@ -22,6 +22,9 @@ matches:
 
   - trigger: "!dontask"
     replace: "https://dontasktoask.com/"
+  - trigger: "!nohello"
+    replace: "https://nohello.net/en/"
+
   - trigger: '!bug'
     replace: >
       Could you open a bug report at the GitHub repo?

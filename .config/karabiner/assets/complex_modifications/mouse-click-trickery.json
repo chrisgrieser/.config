@@ -45,7 +45,7 @@
           "from": {
             "pointing_button": "button2"
           },
-          "to_if_alone": [
+          "to": [
             {
               "pointing_button": "button1",
               "modifiers": [
@@ -174,47 +174,7 @@
           "from": {
             "pointing_button": "button4"
           },
-          "to_if_alone": [
-            {
-              "pointing_button": "button4"
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^com\\.brave\\.Browser$",
-                "^com\\.brave\\.Browser.+",
-                "^com\\.apple\\.finder$",
-                "^md\\.obsidian$",
-                "^com\\.mimestream\\.Mimestream$",
-                "^net\\.highlightsapp\\.universal$",
-                "^org\\.yanex\\.marta$",
-                "^cc\\.ffitch\\.shottr$"
-              ]
-            }
-          ],
-          "to_if_held_down": [
-            {
-              "key_code": "tab",
-              "modifiers": [
-                "command",
-                "option"
-              ],
-              "repeat": false
-            }
-          ],
-          "parameters": {
-            "basic.to_if_alone_timeout_milliseconds": 250,
-            "basic.to_if_held_down_threshold_milliseconds": 250
-          }
-        },
-        {
-          "type": "basic",
-          "from": {
-            "pointing_button": "button4"
-          },
-          "to_if_alone": [
+          "to": [
             {
               "key_code": "escape"
             },
@@ -232,28 +192,14 @@
                 "^com\\.brave\\.Browser$"
               ]
             }
-          ],
-          "to_if_held_down": [
-            {
-              "key_code": "tab",
-              "modifiers": [
-                "command",
-                "option"
-              ],
-              "repeat": false
-            }
-          ],
-          "parameters": {
-            "basic.to_if_alone_timeout_milliseconds": 250,
-            "basic.to_if_held_down_threshold_milliseconds": 250
-          }
+          ]
         },
         {
           "type": "basic",
           "from": {
             "pointing_button": "button4"
           },
-          "to_if_alone": [
+          "to": [
             {
               "key_code": "escape"
             },
@@ -268,28 +214,14 @@
                 "^com\\.brave\\.Browser.+"
               ]
             }
-          ],
-          "to_if_held_down": [
-            {
-              "key_code": "tab",
-              "modifiers": [
-                "command",
-                "option"
-              ],
-              "repeat": false
-            }
-          ],
-          "parameters": {
-            "basic.to_if_alone_timeout_milliseconds": 250,
-            "basic.to_if_held_down_threshold_milliseconds": 250
-          }
+          ]
         },
         {
           "type": "basic",
           "from": {
             "pointing_button": "button4"
           },
-          "to_if_alone": [
+          "to": [
             {
               "key_code": "h",
               "modifiers": [
@@ -305,28 +237,14 @@
                 "^md\\.obsidian$"
               ]
             }
-          ],
-          "to_if_held_down": [
-            {
-              "key_code": "tab",
-              "modifiers": [
-                "command",
-                "option"
-              ],
-              "repeat": false
-            }
-          ],
-          "parameters": {
-            "basic.to_if_alone_timeout_milliseconds": 250,
-            "basic.to_if_held_down_threshold_milliseconds": 250
-          }
+          ]
         },
         {
           "type": "basic",
           "from": {
             "pointing_button": "button4"
           },
-          "to_if_alone": [
+          "to": [
             {
               "key_code": "p",
               "modifiers": [
@@ -341,28 +259,14 @@
                 "^cc\\.ffitch\\.shottr$"
               ]
             }
-          ],
-          "to_if_held_down": [
-            {
-              "key_code": "tab",
-              "modifiers": [
-                "command",
-                "option"
-              ],
-              "repeat": false
-            }
-          ],
-          "parameters": {
-            "basic.to_if_alone_timeout_milliseconds": 250,
-            "basic.to_if_held_down_threshold_milliseconds": 250
-          }
+          ]
         },
         {
           "type": "basic",
           "from": {
             "pointing_button": "button4"
           },
-          "to_if_alone": [
+          "to": [
             {
               "key_code": "non_us_pound"
             }
@@ -374,28 +278,14 @@
                 "^com\\.mimestream\\.Mimestream$"
               ]
             }
-          ],
-          "to_if_held_down": [
-            {
-              "key_code": "tab",
-              "modifiers": [
-                "command",
-                "option"
-              ],
-              "repeat": false
-            }
-          ],
-          "parameters": {
-            "basic.to_if_alone_timeout_milliseconds": 250,
-            "basic.to_if_held_down_threshold_milliseconds": 250
-          }
+          ]
         },
         {
           "type": "basic",
           "from": {
             "pointing_button": "button4"
           },
-          "to_if_alone": [
+          "to": [
             {
               "key_code": "n",
               "modifiers": [
@@ -418,28 +308,14 @@
                 "^net\\.highlightsapp\\.universal$"
               ]
             }
-          ],
-          "to_if_held_down": [
-            {
-              "key_code": "tab",
-              "modifiers": [
-                "command",
-                "option"
-              ],
-              "repeat": false
-            }
-          ],
-          "parameters": {
-            "basic.to_if_alone_timeout_milliseconds": 250,
-            "basic.to_if_held_down_threshold_milliseconds": 250
-          }
+          ]
         },
         {
           "type": "basic",
           "from": {
             "pointing_button": "button4"
           },
-          "to_if_alone": [
+          "to": [
             {
               "shell_command": "osascript -e '\n  tell application \"System Events\"\n  tell process \"Finder\"\n    set frontmost to true\n    click menu item \"Back\" of menu \"Go\" of menu bar 1\n  end tell\nend tell'\n"
             }
@@ -451,21 +327,7 @@
                 "^com\\.apple\\.finder$"
               ]
             }
-          ],
-          "to_if_held_down": [
-            {
-              "key_code": "tab",
-              "modifiers": [
-                "command",
-                "option"
-              ],
-              "repeat": false
-            }
-          ],
-          "parameters": {
-            "basic.to_if_alone_timeout_milliseconds": 250,
-            "basic.to_if_held_down_threshold_milliseconds": 250
-          }
+          ]
         }
       ]
     },
