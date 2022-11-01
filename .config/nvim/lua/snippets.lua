@@ -102,6 +102,11 @@ add("markdown", {
 	snip("github warning", "> **Warning**  \n> $0"),
 })
 
+-- CSS
+add("css", {
+	snip("mr	", 'margin-right: $0;'),
+}, { type = "autosnippets" })
+
 -- JavaScript
 add("javascript", {
 	snip({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:replacement}");'),

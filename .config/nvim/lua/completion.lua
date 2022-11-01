@@ -64,7 +64,7 @@ cmp.setup({
 	snippet = { -- REQUIRED a snippet engine must be specified and installed
 		expand = function(args) require('luasnip').lsp_expand(args.body) end,
 	},
-	experimental = { ghost_text = false },
+	experimental = { ghost_text = true },
 
 	window = {
 		completion = cmp.config.window.bordered(),
@@ -104,6 +104,7 @@ cmp.setup({
 			vim_item.kind = kind_icons[vim_item.kind]
 			vim_item.menu = ({
 				buffer = "[B]",
+				git = "[GIT]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[S]",
 				emoji = "[E]",
@@ -156,12 +157,21 @@ cmp.setup.cmdline({ '/', '?' }, {
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
+		{ name = 'git' },
 		{ name = 'path' },
 		{ name = 'cmdline' },
 	},{ -- additional arrays = second array only relevant when no source from the first matches
 		{ name = 'cmdline_history' },
 	})
 })
+
+--------------------------------------------------------------------------------
+require("cmp_git").setup{
+	filetypes = {
+		"gitcommit",
+		"lua",
+	},
+}
 
 --------------------------------------------------------------------------------
 

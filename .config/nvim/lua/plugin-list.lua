@@ -55,6 +55,7 @@ function PluginList()
 		"dmitmel/cmp-cmdline-history",
 		"hrsh7th/cmp-emoji",
 		"chrisgrieser/cmp-nerdfont",
+		"petertriho/cmp-git",
 
 		"hrsh7th/cmp-nvim-lsp", -- lsp
 		"folke/neodev.nvim", -- lsp for nvim config
