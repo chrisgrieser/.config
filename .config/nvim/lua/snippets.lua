@@ -26,9 +26,6 @@ add("all", {
 -- Shell (zsh)
 add("sh", {
 	snip("##", "#!/usr/bin/env zsh\n$0"),
-}, { type = "autosnippets" })
-
-add("sh", {
 	snip("PATH", 'export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\\$PATH\n$0'),
 	snip("resolve home",'${1:path}="${${1:path}/#\\~/\\$HOME}"'),
 	snip("filename", '${1:file_name}=$(basename "$${1:filepath}")'),
@@ -86,10 +83,10 @@ add("lua", {
 
 -- AppleScript
 add("applescript", {
+	snip("browser URL", 'tell application "Brave Browser" to set currentTabUrl to URL of active tab of front window'),
+	snip("browser tab title", 'tell application "Brave Browser" to set currentTabName to title of active tab of front window'),
+	snip("notify", 'tell application "Brave Browser" to set currentTabName to title of active tab of front window'),
 	snip("##", "#!/usr/bin/env osascript\n$0"),
-}, { type = "autosnippets" })
-
-add("applescript", {
 	snip("resolve home",
 		'set unresolved_path to "~/Documents"\n'..
 		"set AppleScript's text item delimiters to \"~/\"\n"..
@@ -107,11 +104,11 @@ add("markdown", {
 
 -- JavaScript
 add("javascript", {
-	snip("##", "#!/usr/bin/env osascript\n$0"),
 	snip({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:replacement}");'),
 }, { type = "autosnippets" })
 
 add("javascript", {
+	snip("##", "#!/usr/bin/env osascript\n$0"),
 	snip("ternary", "${1:cond} ? ${2:then} : ${3:else}"),
 	snip("resolve home (JXA)",'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 })
