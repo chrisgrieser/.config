@@ -1,3 +1,4 @@
+// vim: ft=jsonc
 {
 	"extends": ["eslint:recommended"],
 	"root": true, // stop that annoying deprecation warning >.>
