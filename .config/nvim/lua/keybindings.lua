@@ -211,7 +211,6 @@ keymap("x", "<S-Tab>", "<gv")
 
 keymap({"n", "x"}, "^", "=") -- auto-indent
 keymap("n", "^^", "mz=ip`z") -- since indenting paragraph is far more common than indenting a line
-keymap("n", "^p", "mz`[v`]=`z") -- last paste
 keymap("n", "^A", "mzgg=G`z") -- entire file
 
 -- toggle word between Capital and lower case
@@ -294,8 +293,8 @@ keymap("n", "S", substi.eol)
 keymap("x", "s", substi.visual)
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
--- keymap("n", "R", require("duplicate").duplicate, {silent = true})
-keymap("x", "R", '"zy`]"zp', {silent = true}) -- selection (best used with Visual Line Mode)
+keymap("n", "R", require("duplicate").duplicateLine, {silent = true})
+keymap("x", "R", require("duplicate").duplicateVisual, {silent = true})
 
 -- Line & Character Movement (vim.move plugin)
 g.move_map_keys = 0 -- disable default keymaps of vim.move
