@@ -97,7 +97,8 @@ keymap({"i"}, "<D-v>", function()
 		cmd [[normal! gp]]
 	else
 		cmd("normal! i" .. fn.getreg("*"))
-		cmd [[startinsert!]]
+		cmd("normal!l")
+		cmd [[startinsert]]
 	end
 end)
 

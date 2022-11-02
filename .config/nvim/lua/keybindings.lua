@@ -236,7 +236,7 @@ keymap("n", "Ü", function()
 	elseif wordUnderCursor == "height" then opposite = "width"
 	end
 	if opposite ~= "" then
-		cmd ('normal! "_ciw'..opposite)
+		cmd('normal! "_ciw' .. opposite)
 		opt.iskeyword = opt.iskeyword + {"-"}
 		return
 	end
@@ -294,7 +294,7 @@ keymap("n", "S", substi.eol)
 keymap("x", "s", substi.visual)
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
-keymap("n", "R", ':noautocmd normal!mz"zyy"zp`zj<CR>', {silent = true}) -- current line, ":noautocmd" to disable highlighted yank for this
+-- keymap("n", "R", require("duplicate").duplicate, {silent = true})
 keymap("x", "R", '"zy`]"zp', {silent = true}) -- selection (best used with Visual Line Mode)
 
 -- Line & Character Movement (vim.move plugin)

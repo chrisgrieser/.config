@@ -31,35 +31,31 @@ keymap("n", "<leader>C", "lF.d/[.\\s]<CR>:nohl<CR>", opts) -- delete [c]lass und
 -- prefix "." and join the last paste. Useful when copypasting from the dev tools
 keymap("n", "<leader>.", "mz`[v`]: s/^\\| /./g<CR>:nohl<CR>`zl", opts)
 
----@diagnostic disable: undefined-field, param-type-mismatch
 
--- replicate line and switch top/bottom right/left
+-- smart line duplicate (mnemonic: Replicate)
+-- switches top/bottom & moves to value
+---@diagnostic disable: undefined-field, param-type-mismatch
 keymap("n", "R", function()
 	local line = fn.getline(".")
-	local newLine = line
-	if line:find("top") then newLine = line:gsub("top", "bottom")
-	elseif line:find("bottom") then newLine = line:gsub("bottom", "top")
-	elseif line:find("right") then newLine = line:gsub("right", "left")
-	elseif line:find("left") then newLine = line:gsub("left", "right")
-	elseif line:find("width") then newLine = line:gsub("width", "height")
-	elseif line:find("height") then newLine = line:gsub("height", "width")
+	if line:find("top") then line = line:gsub("top", "bottom")
+	elseif line:find("bottom") then line = line:gsub("bottom", "top")
+	elseif line:find("right") then line = line:gsub("right", "left")
+	elseif line:find("left") then line = line:gsub("left", "right")
+	elseif line:find("height") and not(line:find("line-height")) then
+		line = line:gsub("height", "width")
+	elseif line:find("width") and not(line:find("border-width")) and not(line:find("outline-width")) then
+		line = line:gsub("width", "height")
 	end
-	fn.append(".", newLine)
+	fn.append(".", line)
 
-	-- move cursor line down
-	local lineNum = api.nvim_win_get_cursor(0)[1]
-	local colNum
-	local lineHasChanged = newLine == line
-	print(line)
-	print(newLine)
-	if lineHasChanged then
-		-- if line was changed, move cursor to value
-		local _, valuePos = line:find(": ?")
-		colNum = valuePos + 1
-	else
-		colNum = api.nvim_win_get_cursor(0)[2]
-	end
-	api.nvim_win_set_cursor(0, {lineNum + 1, colNum})
+	-- cursor movement
+	local lineNum = api.nvim_win_get_cursor(0)[1] + 1 -- line down
+	local colNum = api.nvim_win_get_cursor(0)[2]
+	local _, valuePos = line:find(": ?")
+	if valuePos then -- if line was changed, move cursor to value of the property
+		colNum = valuePos 
+	end 
+	api.nvim_win_set_cursor(0, {lineNum, colNum})
 end, opts)
 
 -- toggle !important
