@@ -24,6 +24,9 @@ function customHighlights()
 	-- URLs
 	cmd[[highlight urls cterm=underline term=underline gui=underline]]
 	fn.matchadd('urls', [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&]*]])
+
+	-- rainbow brackets without agressive red…	
+	cmd [[highlight rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets…
 end
 
 
@@ -35,14 +38,14 @@ cmd[[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 
 -- Annotations
 cmd[[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
-cmd[[call matchadd('myAnnotations', '\<\(INFO\|TODO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
+cmd[[call matchadd('myAnnotations', '\<\(INFO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
 
 -- Indention
 require("indent_blankline").setup {
 	show_current_context = true,
 	use_treesitter= true,
-	strict_tabs = true,
-	filetype_exclude = {"help", "undotree"},
+	strict_tabs = false,
+	filetype_exclude = specialFiletypes,
 }
 
 --------------------------------------------------------------------------------
