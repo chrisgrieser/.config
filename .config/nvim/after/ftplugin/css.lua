@@ -32,10 +32,11 @@ keymap("n", "<leader>C", "lF.d/[.\\s]<CR>:nohl<CR>", opts) -- delete [c]lass und
 keymap("n", "<leader>.", "mz`[v`]: s/^\\| /./g<CR>:nohl<CR>`zl", opts)
 
 ---@diagnostic disable: undefined-field, param-type-mismatch
+
 -- replicate line and switch top/bottom right/left
 keymap("n", "R",function ()
-	cmd[[noautocmd normal!mz"zyy"zp`zj]]
 	local line = fn.getline(".")
+	fn.append(".", line)
 	if line:find("top") then line = line:gsub("top", "bottom")
 	elseif line:find("bottom") then line = line:gsub("bottom", "top")
 	elseif line:find("right") then line = line:gsub("right", "left")
