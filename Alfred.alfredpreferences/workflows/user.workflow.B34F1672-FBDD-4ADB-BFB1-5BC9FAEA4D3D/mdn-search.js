@@ -9,39 +9,56 @@ function run (argv) {
 		+ str.replace(/([A-Z])/g, " $1"); // match parts of CamelCase
 	const onlineJSON = (url) => JSON.parse (app.doShellScript(`curl -sL '${url}'`));
 
-	//------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
 
 	const input = argv.join("").split(" ");
 	const lang = input.shift();
 	const query = input.join(" ");
-	console.log(lang + " " + query);
+
 	const baseURL = "https://developer.mozilla.org";
 	const searchAPI = "https://developer.mozilla.org/api/v1/search?q=";
-	console.log(searchAPI + query);
+	const baseURL2 = "https://cssreference.io/";
+	const output = [];
 
 	const resultsArr = onlineJSON(searchAPI + query)
 		.documents
 		.filter(result => result.mdn_url.includes(lang));
-	let output = [];
 
 	if (resultsArr.length === 0) {
-		output = [{
-			"title": "No documents found.",
+		output.push({
+			"title": "No MDN documents found.",
 			"subtitle": "MDN search sometimes requires longer queries before results are shown.",
 			"valid": false,
 			"arg": "no"
-		}];
+		});
 	} else {
-		output = resultsArr.map(item => {
+		resultsArr.forEach(item => {
 			const url = baseURL + item.mdn_url;
-			return {
+			output.push ({
 				"title": item.title,
 				"match": alfredMatcher(item.title),
 				"subtitle": item.summary,
 				"arg": url,
-			};
+				"uid": url,
+			});
 		});
 	}
+
+	app.doShellScript(`curl -sL "${baseURL2}" | grep "<article"`)
+		.match(/data-property-name=".+?"/g)
+		.map(item => item.slice(20, -1)) // eslint-disable-line no-magic-numbers
+		.filter(item => item.includes(query))
+		.forEach(item => {
+			const url = `${baseURL2}/property/${item}`;
+			output.push ({
+				"title": item,
+				"match": alfredMatcher(item),
+				"subtitle": "visual reference",
+				"arg": url,
+				"uid": url,
+			});
+		});
+
 
 	return JSON.stringify({ items: output });
 }
