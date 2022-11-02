@@ -629,8 +629,12 @@
 				<false/>
 				<key>modsmode</key>
 				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.brave.Browser</string>
+				</array>
 				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<integer>1</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
@@ -686,9 +690,9 @@
 				<key>relatedApps</key>
 				<array>
 					<string>com.vivaldi.Vivaldi</string>
-					<string>com.brave.Browser.app.fmajbmdokmecmpllfhcamihghgoablgg</string>
-					<string>org.chromium.Chromium</string>
 					<string>com.brave.Browser</string>
+					<string>org.chromium.Chromium</string>
+					<string>com.brave.Browser.app.fmajbmdokmecmpllfhcamihghgoablgg</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
