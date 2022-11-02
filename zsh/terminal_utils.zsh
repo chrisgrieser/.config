@@ -177,3 +177,12 @@ function appid () {
 	echo "appid: $id"
 	echo "$id" | pbcopy
 }
+
+# Conversions
+function yaml2json () {
+	yq -o=json '.' "$1" > "$(basename "$1" .yml).json"
+}
+
+function json2yaml () {
+	yq -P '.' "$1" > "$(basename "$1" .json).yml"
+}

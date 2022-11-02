@@ -47,7 +47,7 @@ function run (argv) {
 	app.doShellScript(`curl -sL "${baseURL2}" | grep "<article"`)
 		.match(/data-property-name=".+?"/g)
 		.map(item => item.slice(20, -1)) // eslint-disable-line no-magic-numbers
-		.filter(item => item.includes(query))
+		.filter(item => item.includes(query)) // since filtered not filtered by Alfred
 		.forEach(item => {
 			const url = `${baseURL2}/property/${item}`;
 			output.push ({
