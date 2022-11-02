@@ -63,8 +63,9 @@ function isDarkMode()
 end
 
 function setDarkmode(toDark)
-	if not (isDarkMode()) and toDark then toggleDarkMode() end
-	if isDarkMode() and not (toDark) then toggleDarkMode() end
+	if (not (isDarkMode()) and toDark) or (isDarkMode() and not(toDark)) then
+		toggleDarkMode()
+	end
 	log("🌒 Dark Mode: " .. (tostring(isDarkMode())) .. " (" .. deviceName() .. ")", "./logs/some.log")
 end
 
