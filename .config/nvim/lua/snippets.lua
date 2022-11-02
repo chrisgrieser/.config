@@ -109,6 +109,7 @@ add("markdown", {
 -- JavaScript (General)
 add("javascript", {
 	snip({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:replacement}");'),
+	snip("llog", 'console.log(`\\${$0}`);'),
 }, { type = "autosnippets" })
 
 add("javascript", {
