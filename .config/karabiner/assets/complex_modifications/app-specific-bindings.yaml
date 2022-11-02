@@ -751,6 +751,7 @@ rules:
               - control
         to:
           - shell_command: open -a "Finder" ~/.Trash
+          - shell_command: osascript
   - description: "🅰️👨‍💻 Script Editor"
     manipulators:
       # Quick Closing skipping save prompt
