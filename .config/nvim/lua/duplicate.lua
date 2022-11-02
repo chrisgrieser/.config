@@ -20,16 +20,20 @@ end
 
 function dup.duplicateVisual()
 	local prevReg = vim.fn.getreg("z")
-	cmd[[silent! "zy`]"zp]]
+	cmd[[silent! normal!"zy`]"zp]]
 	vim.fn.setreg("z", prevReg)
 end
 
 function dup.smartDuplicateLine()
 	local line = getline(".")
-	if line:find("top") then line = line:gsub("top", "bottom")
-	elseif line:find("bottom") then line = line:gsub("bottom", "top")
-	elseif line:find("right") then line = line:gsub("right", "left")
-	elseif line:find("left") then line = line:gsub("left", "right")
+	if line:find("top") then
+		line = line:gsub("top", "bottom")
+	elseif line:find("bottom") then
+		line = line:gsub("bottom", "top")
+	elseif line:find("right") then
+		line = line:gsub("right", "left")
+	elseif line:find("left") then
+		line = line:gsub("left", "right")
 	elseif line:find("height") and not(line:find("line-height")) then
 		line = line:gsub("height", "width")
 	elseif line:find("width") and not(line:find("border-width")) and not(line:find("outline-width")) then
