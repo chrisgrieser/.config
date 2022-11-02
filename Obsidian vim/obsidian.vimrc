@@ -237,6 +237,8 @@ nmap R :duplicate
 " < Visual Mode
 """"""""""""""""""""""
 
+imap jk <Esc>
+
 " so that VV... in normal mode selects more lines
 vmap V j
 
