@@ -92,6 +92,7 @@ rules:
     - warn
     - double
     - avoidEscape: true
+    - allowTemplateLiterals: true
   no-useless-concat: warn
   no-multi-str: error
   no-magic-numbers:
