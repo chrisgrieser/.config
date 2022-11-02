@@ -168,13 +168,11 @@ cmp.setup.cmdline(":", {
 
 require("cmp_git").setup {
 	filetypes = commonFiletypes,
+	git = { commits = { limit = 0 } }, -- = disable completing commits
 	github = {
 		issues = {
 			limit = 100,
 			state = "open", -- open, closed, all
-		},
-		mentions = {
-			limit = 0, --
 		},
 		pull_requests = {
 			limit = 10,
