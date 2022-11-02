@@ -53,12 +53,6 @@ https://neovim.io/doc/user/options.html#'conceallevel',,cole
 https://neovim.io/doc/user/options.html#'confirm',,cf noconfirm nocf
 https://neovim.io/doc/user/options.html#'copyindent',,ci nocopyindent noci
 https://neovim.io/doc/user/options.html#'cpoptions',,cpo
-https://neovim.io/doc/user/options.html#'cscopepathcomp',,cspc
-https://neovim.io/doc/user/options.html#'cscopeprg',,csprg
-https://neovim.io/doc/user/options.html#'cscopequickfix',,csqf
-https://neovim.io/doc/user/options.html#'cscoperelative',,csre nocscoperelative nocsre
-https://neovim.io/doc/user/options.html#'cscopetag',,cst nocscopetag nocst
-https://neovim.io/doc/user/options.html#'cscopetagorder',,csto
 https://neovim.io/doc/user/options.html#'cursorbind',,crb nocursorbind nocrb
 https://neovim.io/doc/user/options.html#'cursorcolumn',,cuc nocursorcolumn nocuc
 https://neovim.io/doc/user/options.html#'cursorline',,cul nocursorline nocul
@@ -76,6 +70,7 @@ https://neovim.io/doc/user/options.html#'display',,dy
 https://neovim.io/doc/user/options.html#'eadirection',,ead
 https://neovim.io/doc/user/options.html#'emoji',,emo noemoji noemo
 https://neovim.io/doc/user/options.html#'encoding',,enc
+https://neovim.io/doc/user/options.html#'endoffile',,eof noendoffile noeof
 https://neovim.io/doc/user/options.html#'endofline',,eol noendofline noeol
 https://neovim.io/doc/user/options.html#'equalalways',,ea noequalalways noea
 https://neovim.io/doc/user/options.html#'equalprg',,ep
@@ -179,6 +174,7 @@ https://neovim.io/doc/user/options.html#'linebreak',,lbr nolinebreak nolbr
 https://neovim.io/doc/user/options.html#'lines',
 https://neovim.io/doc/user/options.html#'linespace',,lsp
 https://neovim.io/doc/user/options.html#'lisp',,nolisp
+https://neovim.io/doc/user/options.html#'lispoptions',,lop
 https://neovim.io/doc/user/options.html#'lispwords',,lw
 https://neovim.io/doc/user/options.html#'list',,nolist
 https://neovim.io/doc/user/options.html#'listchars',,lcs
@@ -512,28 +508,6 @@ https://neovim.io/doc/user/gui.html#tooltips,,menu-tips
 https://neovim.io/doc/user/gui.html#%3Atmenu,
 https://neovim.io/doc/user/gui.html#%3Atunmenu,
 https://neovim.io/doc/user/gui.html#%3Apopup,,:popu
-https://neovim.io/doc/user/if_cscop.html#if_cscop.txt,
-https://neovim.io/doc/user/if_cscop.html#cscope,,Cscope
-https://neovim.io/doc/user/if_cscop.html#cscope-intro,
-https://neovim.io/doc/user/if_cscop.html#cscope-commands,
-https://neovim.io/doc/user/if_cscop.html#%3Acscope,,:cs :scs :scscope E259 E262 E560 E561
-https://neovim.io/doc/user/if_cscop.html#E563,,E564 E566 E568 E622 E623 E625
-https://neovim.io/doc/user/if_cscop.html#E626,,E609
-https://neovim.io/doc/user/if_cscop.html#cscope-find,,cs-find E567
-https://neovim.io/doc/user/if_cscop.html#E261,
-https://neovim.io/doc/user/if_cscop.html#%3Alcscope,,:lcs
-https://neovim.io/doc/user/if_cscop.html#%3Acstag,,E257 E562
-https://neovim.io/doc/user/if_cscop.html#cscope-options,
-https://neovim.io/doc/user/if_cscop.html#cscopeprg,,csprg
-https://neovim.io/doc/user/if_cscop.html#cscopequickfix,,csqf E469
-https://neovim.io/doc/user/if_cscop.html#cscopetag,,cst
-https://neovim.io/doc/user/if_cscop.html#cscoperelative,,csre
-https://neovim.io/doc/user/if_cscop.html#cscopetagorder,,csto
-https://neovim.io/doc/user/if_cscop.html#cscopepathcomp,,cspc
-https://neovim.io/doc/user/if_cscop.html#cscope-usage,,cscope-howtouse
-https://neovim.io/doc/user/if_cscop.html#cscope-limitations,
-https://neovim.io/doc/user/if_cscop.html#cscope-suggestions,
-https://neovim.io/doc/user/if_cscop.html#twice,
 https://neovim.io/doc/user/change.html#change.txt,
 https://neovim.io/doc/user/change.html#deleting,,E470
 https://neovim.io/doc/user/change.html#x,,dl
@@ -887,6 +861,7 @@ https://neovim.io/doc/user/vim_diff.html#if_tcl,
 https://neovim.io/doc/user/vim_diff.html#%3Agui,
 https://neovim.io/doc/user/vim_diff.html#%3Agvim,
 https://neovim.io/doc/user/vim_diff.html#nvim-features-removed,
+https://neovim.io/doc/user/vim_diff.html#cscope_connection(),
 https://neovim.io/doc/user/vim_diff.html#js_encode(),
 https://neovim.io/doc/user/vim_diff.html#js_decode(),
 https://neovim.io/doc/user/vim_diff.html#v%3Anone,
@@ -896,6 +871,7 @@ https://neovim.io/doc/user/vim_diff.html#v%3Asizeofpointer,
 https://neovim.io/doc/user/vim_diff.html#hl-StatusLineTerm,,hl-StatusLineTermNC
 https://neovim.io/doc/user/vim_diff.html#t_xx,,termcap-options t_AB t_Sb t_vb t_SI
 https://neovim.io/doc/user/vim_diff.html#termcap,
+https://neovim.io/doc/user/vim_diff.html#cscope,
 https://neovim.io/doc/user/userfunc.html#userfunc.txt,
 https://neovim.io/doc/user/userfunc.html#define-function,
 https://neovim.io/doc/user/userfunc.html#local-function,
@@ -1496,6 +1472,7 @@ https://neovim.io/doc/user/editing.html#file-formats,
 https://neovim.io/doc/user/editing.html#DOS-format,
 https://neovim.io/doc/user/editing.html#Unix-format,
 https://neovim.io/doc/user/editing.html#Mac-format,
+https://neovim.io/doc/user/editing.html#eol-and-eof,
 https://neovim.io/doc/user/editing.html#argument-list,,arglist
 https://neovim.io/doc/user/editing.html#%3Aar,,:arg :args
 https://neovim.io/doc/user/editing.html#%3Aargs_f,
@@ -1769,6 +1746,9 @@ https://neovim.io/doc/user/syntax.html#g%3Ahtml_hover_unfold,
 https://neovim.io/doc/user/syntax.html#g%3Ahtml_id_expr,
 https://neovim.io/doc/user/syntax.html#TOhtml-wrap-text,,g:html_pre_wrap
 https://neovim.io/doc/user/syntax.html#g%3Ahtml_no_pre,
+https://neovim.io/doc/user/syntax.html#g%3Ahtml_no_doc,
+https://neovim.io/doc/user/syntax.html#g%3Ahtml_no_links,
+https://neovim.io/doc/user/syntax.html#g%3Ahtml_no_modeline,
 https://neovim.io/doc/user/syntax.html#g%3Ahtml_expand_tabs,
 https://neovim.io/doc/user/syntax.html#TOhtml-encoding-detect,,TOhtml-encoding
 https://neovim.io/doc/user/syntax.html#g%3Ahtml_use_encoding,
@@ -2740,7 +2720,7 @@ https://neovim.io/doc/user/indent.html#ft-vhdl-indent,
 https://neovim.io/doc/user/indent.html#ft-vim-indent,
 https://neovim.io/doc/user/indent.html#g%3Avim_indent_cont,
 https://neovim.io/doc/user/builtin.html#builtin.txt,
-https://neovim.io/doc/user/builtin.html#builtin-functions,
+https://neovim.io/doc/user/builtin.html#vimscript-functions,,builtin-functions
 https://neovim.io/doc/user/builtin.html#builtin-function-list,
 https://neovim.io/doc/user/builtin.html#builtin-function-details,
 https://neovim.io/doc/user/builtin.html#abs(),
@@ -2791,7 +2771,6 @@ https://neovim.io/doc/user/builtin.html#copy(),
 https://neovim.io/doc/user/builtin.html#cos(),
 https://neovim.io/doc/user/builtin.html#cosh(),
 https://neovim.io/doc/user/builtin.html#count(),
-https://neovim.io/doc/user/builtin.html#cscope_connection(),
 https://neovim.io/doc/user/builtin.html#ctxget(),
 https://neovim.io/doc/user/builtin.html#ctxpop(),
 https://neovim.io/doc/user/builtin.html#ctxpush(),
@@ -2892,6 +2871,7 @@ https://neovim.io/doc/user/builtin.html#gettabinfo(),
 https://neovim.io/doc/user/builtin.html#gettabvar(),
 https://neovim.io/doc/user/builtin.html#gettabwinvar(),
 https://neovim.io/doc/user/builtin.html#gettagstack(),
+https://neovim.io/doc/user/builtin.html#gettext(),
 https://neovim.io/doc/user/builtin.html#getwininfo(),
 https://neovim.io/doc/user/builtin.html#getwinpos(),
 https://neovim.io/doc/user/builtin.html#getwinposx(),
@@ -3011,6 +2991,7 @@ https://neovim.io/doc/user/builtin.html#pyxeval(),
 https://neovim.io/doc/user/builtin.html#E726,,E727
 https://neovim.io/doc/user/builtin.html#range(),
 https://neovim.io/doc/user/builtin.html#rand(),
+https://neovim.io/doc/user/builtin.html#readblob(),
 https://neovim.io/doc/user/builtin.html#readdir(),
 https://neovim.io/doc/user/builtin.html#readfile(),
 https://neovim.io/doc/user/builtin.html#reduce(),,E998
@@ -3262,6 +3243,9 @@ https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.setloclist(),
 https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.setqflist(),
 https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.show(),
 https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.toqflist(),
+https://neovim.io/doc/user/support.html#support.txt,
+https://neovim.io/doc/user/support.html#support,
+https://neovim.io/doc/user/support.html#supported-platforms,
 https://neovim.io/doc/user/pi_netrw.html#pi_netrw.txt,
 https://neovim.io/doc/user/pi_netrw.html#netrw-copyright,
 https://neovim.io/doc/user/pi_netrw.html#netrw,
@@ -3662,7 +3646,7 @@ https://neovim.io/doc/user/starting.html#standard-path,
 https://neovim.io/doc/user/starting.html#base-directories,,xdg
 https://neovim.io/doc/user/starting.html#E5430,
 https://neovim.io/doc/user/eval.html#eval.txt,
-https://neovim.io/doc/user/eval.html#expression,,expr E15 eval
+https://neovim.io/doc/user/eval.html#vimscript,,expression expr E15 eval
 https://neovim.io/doc/user/eval.html#variables,
 https://neovim.io/doc/user/eval.html#E712,,E896 E897 E899
 https://neovim.io/doc/user/eval.html#Number,,Integer
@@ -4262,7 +4246,7 @@ https://neovim.io/doc/user/windows.html#unlisted-buffer,
 https://neovim.io/doc/user/pi_health.html#pi_health.txt,
 https://neovim.io/doc/user/pi_health.html#health,
 https://neovim.io/doc/user/pi_health.html#health-commands,
-https://neovim.io/doc/user/pi_health.html#%3Acheckhealth,,:CheckHealth
+https://neovim.io/doc/user/pi_health.html#%3Ache,,:checkhealth :CheckHealth
 https://neovim.io/doc/user/pi_health.html#E5009,
 https://neovim.io/doc/user/pi_health.html#health-functions,,vim.health
 https://neovim.io/doc/user/pi_health.html#vim.health.report_start(),
@@ -5020,7 +5004,6 @@ https://neovim.io/doc/user/filetype.html#new-filetype,
 https://neovim.io/doc/user/filetype.html#ftdetect,
 https://neovim.io/doc/user/filetype.html#new-filetype-scripts,
 https://neovim.io/doc/user/filetype.html#remove-filetype,
-https://neovim.io/doc/user/filetype.html#g%3Ado_legacy_filetype,
 https://neovim.io/doc/user/filetype.html#g%3Adid_load_filetypes,
 https://neovim.io/doc/user/filetype.html#plugin-details,
 https://neovim.io/doc/user/filetype.html#filetype-plugins,
@@ -5105,7 +5088,7 @@ https://neovim.io/doc/user/deprecated.html#vim.lsp.diagnostic.show_position_diag
 https://neovim.io/doc/user/deprecated.html#vim.lsp.diagnostic.set_signs(),
 https://neovim.io/doc/user/deprecated.html#vim.lsp.diagnostic.set_underline(),
 https://neovim.io/doc/user/deprecated.html#vim.lsp.diagnostic.set_virtual_text(),
-https://neovim.io/doc/user/deprecated.html#vim.lsp.range_code_action,
+https://neovim.io/doc/user/deprecated.html#vim.lsp.buf.range_code_action(),
 https://neovim.io/doc/user/deprecated.html#vim.lsp.util.diagnostics_to_items(),
 https://neovim.io/doc/user/deprecated.html#vim.lsp.util.set_qflist(),
 https://neovim.io/doc/user/deprecated.html#vim.lsp.util.set_loclist(),
@@ -5197,7 +5180,7 @@ https://neovim.io/doc/user/tagsrch.html#%3Adli,,:dlist
 https://neovim.io/doc/user/tagsrch.html#%3Adj,,:djump
 https://neovim.io/doc/user/tagsrch.html#CTRL-W_CTRL-D,,CTRL-W_d
 https://neovim.io/doc/user/tagsrch.html#%3Adsp,,:dsplit
-https://neovim.io/doc/user/tagsrch.html#%3Ache,,:chec :check :checkpath
+https://neovim.io/doc/user/tagsrch.html#%3Acheckp,,:checkpath
 https://neovim.io/doc/user/tagsrch.html#%3Asearch-args,
 https://neovim.io/doc/user/tagsrch.html#tag-function,
 https://neovim.io/doc/user/tagsrch.html#E987,
@@ -5308,8 +5291,7 @@ https://neovim.io/doc/user/print.html#postscript-print-util,
 https://neovim.io/doc/user/print.html#printing-formfeed,
 https://neovim.io/doc/user/help.html#help.txt,
 https://neovim.io/doc/user/help.html#help-context,
-https://neovim.io/doc/user/help.html#doc-file-list,,Q_ct
-https://neovim.io/doc/user/help.html#reference_toc,
+https://neovim.io/doc/user/help.html#reference_toc,,doc-file-list Q_ct
 https://neovim.io/doc/user/help.html#standard-plugin-list,
 https://neovim.io/doc/user/help.html#local-additions,
 https://neovim.io/doc/user/help.html#bars,
@@ -5598,6 +5580,7 @@ https://neovim.io/doc/user/undo.html#undo-remarks,
 https://neovim.io/doc/user/undo.html#clear-undo,
 https://neovim.io/doc/user/undo.html#redo-register,
 https://neovim.io/doc/user/luvref.html#luvref.txt,
+https://neovim.io/doc/user/luvref.html#luvref,
 https://neovim.io/doc/user/luvref.html#luv,,luv-intro uv
 https://neovim.io/doc/user/luvref.html#luv-contents,
 https://neovim.io/doc/user/luvref.html#luv-error-handling,
