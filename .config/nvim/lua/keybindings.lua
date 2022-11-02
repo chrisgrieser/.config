@@ -188,6 +188,9 @@ keymap("n", "gUq", "mzgUCOM`z", {remap = true})
 keymap("n", "sq", "mzsCOM`z", {remap = true})
 keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- using delete to preserve commentstring
 
+-- Macro
+keymap("n", "<leader>q", "q") -- needs remapping due to q mapping to comments
+
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h")
 keymap("n", "=", "mzO<Esc>`z") -- add blank above

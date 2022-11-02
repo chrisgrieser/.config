@@ -23,6 +23,10 @@ add("all", {
 	snip({trig = "!!", wordTrig = false}, "{\n\t$0\n\\}"),
 }, { type = "autosnippets" })
 
+add("all", {
+	snip("modeline", "vim: filetype=bash"),
+})
+
 -- Shell (zsh)
 add("sh", {
 	snip("##", "#!/usr/bin/env zsh\n$0"),
