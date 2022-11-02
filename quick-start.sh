@@ -57,7 +57,7 @@ ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
 
 # linter rcfiles
 ln -sf "$DOTFILE_FOLDER/linter rcfiles/.stylelintrc.json" ~
-ln -sf "$DOTFILE_FOLDER/linter rcfiles/.eslintrc.json" ~
+ln -sf "$DOTFILE_FOLDER/linter rcfiles/.eslintrc.yml" ~
 ln -sf "$DOTFILE_FOLDER/linter rcfiles/.markdownlintrc" ~
 ln -sf "$DOTFILE_FOLDER/linter rcfiles/.pylintrc" ~
 ln -sf "$DOTFILE_FOLDER/linter rcfiles/.shellcheckrc" ~
