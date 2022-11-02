@@ -42,7 +42,6 @@ end
 local function dark()
 	cmd("colorscheme " .. darkTheme)
 	g.neovide_transparency = 0.97
-	cmd [[hi rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets...
 	customHighlights()
 end
 
@@ -131,7 +130,7 @@ keymap({"n", "v", "i"}, "<D-+>", function() ResizeGuiFont(1) end, {silent = true
 keymap({"n", "v", "i"}, "<D-->", function() ResizeGuiFont(-1) end, {silent = true})
 
 --------------------------------------------------------------------------------
-~
+
 -- NEOVIDE
 -- https://neovide.dev/configuration.html
 
