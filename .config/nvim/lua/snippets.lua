@@ -123,6 +123,11 @@ add("javascript", {
 	snip("resolve home (JXA)",'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 })
 
+-- YAML
+add("yaml", {
+	snip("delay", "- key_code: vk_none\n  hold_down_milliseconds: 50\n"),
+})
+
 --------------------------------------------------------------------------------
 
 -- needs to come after snippet definitions
