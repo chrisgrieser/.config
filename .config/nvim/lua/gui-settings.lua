@@ -77,11 +77,13 @@ keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI f
 keymap({"n", "v", "i"}, "<D-1>", ":Lexplore<CR>") -- file tree (netrw)
 keymap({"n", "v", "i"}, "<D-0>", ":SymbolsOutline<CR>") -- Symbol Outline
 
--- Multi-Cursor with cmd+j https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
-cmd [[ let g:VM_maps = {}
-let g:VM_maps['Find Under'] = '<D-j>' ]]
-
-keymap("i", "<D-j>", '<C-o>"_ciw')
+-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
+g.VM_maps = {
+	["Find Under"] = "<D-j>",
+	["Visual Add"] = "<D-j>",
+	["Select Cursor Up"] = "<C-Up>",
+	["Select Cursor Down"] = "<C-Down>",
+}
 
 -- cut, copy & paste
 keymap("n", "<D-c>", "yy") -- no selection = line
@@ -90,13 +92,13 @@ keymap("n", "<D-x>", "dd") -- no selection = line
 keymap("v", "<D-x>", "d")
 keymap({"n", "v"}, "<D-v>", "p")
 keymap("c", "<D-v>", "<C-r>+")
-keymap({"i"}, "<D-v>",function ()
+keymap({"i"}, "<D-v>", function()
 	local isLinewise = fn.getregtype("*") == "V" or fn.getreg("*"):find("\n")
 	if isLinewise then
-		cmd[[normal! gp]]
+		cmd [[normal! gp]]
 	else
-		cmd("normal! i"..fn.getreg("*"))
-		cmd[[startinsert!]]
+		cmd("normal! i" .. fn.getreg("*"))
+		cmd [[startinsert!]]
 	end
 end)
 
@@ -129,7 +131,7 @@ keymap({"n", "v", "i"}, "<D-+>", function() ResizeGuiFont(1) end, {silent = true
 keymap({"n", "v", "i"}, "<D-->", function() ResizeGuiFont(-1) end, {silent = true})
 
 --------------------------------------------------------------------------------
-
+~
 -- NEOVIDE
 -- https://neovide.dev/configuration.html
 
