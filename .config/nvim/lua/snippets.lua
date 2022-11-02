@@ -102,18 +102,20 @@ add("markdown", {
 	snip("github warning", "> **Warning**  \n> $0"),
 })
 
--- CSS
--- add("css", {
--- }, { type = "autosnippets" })
-
--- JavaScript
+-- JavaScript (General)
 add("javascript", {
 	snip({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:replacement}");'),
 }, { type = "autosnippets" })
 
 add("javascript", {
-	snip("##", "#!/usr/bin/env osascript -l JavaScript\n$0"),
 	snip("ternary", "${1:cond} ? ${2:then} : ${3:else}"),
+})
+
+-- JXA-specific
+add("javascript", {
+	snip("##", "#!/usr/bin/env osascript -l JavaScript\n$0"),
+	snip("app", "const app = Application.currentApplication();\napp.includeStandardAdditions = true;\n$0"),
+	snip("shell script", "app.doShellScript('${1:shellscript}');\n$0"),
 	snip("resolve home (JXA)",'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 })
 
