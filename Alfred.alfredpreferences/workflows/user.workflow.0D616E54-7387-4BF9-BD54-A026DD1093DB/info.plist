@@ -2029,7 +2029,7 @@ Recommended Hotkey: ⇧⌘2</string>
 	<key>variables</key>
 	<dict>
 		<key>focusedapp</key>
-		<string>Brave Browser</string>
+		<string>Discord</string>
 		<key>ocr_languages</key>
 		<string>eng+deu</string>
 		<key>tagToExcludeFromSearch</key>
