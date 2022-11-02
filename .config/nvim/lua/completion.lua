@@ -177,7 +177,11 @@ require("cmp_git").setup {
 			limit = 10,
 			state = "open",
 		},
-	},
+		trigger_actions = { -- deactivate completions for commits
+			{ debug_name = "git_commits", trigger_character = "" },
+			-- { debug_name = "git_mentions", trigger_character = "" },
+		},
+	}
 }
 --------------------------------------------------------------------------------
 

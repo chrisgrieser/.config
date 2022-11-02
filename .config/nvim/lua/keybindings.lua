@@ -269,7 +269,6 @@ keymap("n", "Ü", function()
 	end
 end)
 
-
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`"}
 for i = 1, #trailingKeys do
