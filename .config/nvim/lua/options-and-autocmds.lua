@@ -89,7 +89,7 @@ opt.sidescrolloff = 24
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
-autocmd("BufReadPost", {
+autocmd("BufEnter", {
 	callback = function()
 		if not(bo.filetype == "markdown") then -- not for markdown, for autolist hack (see markdown.lua)
 			bo.formatoptions = bo.formatoptions:gsub("r", ""):gsub("o", "")

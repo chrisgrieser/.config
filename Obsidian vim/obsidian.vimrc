@@ -327,7 +327,7 @@ nmap ,f :linkjump
 " < Substitute
 """"""""""""""""""""""
 " emulate substitute.vim
-nmap ss Vp
+nmap s Vp
 nmap S vg$p
 
 """"""""""""""""""""""
