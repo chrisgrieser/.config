@@ -6,11 +6,13 @@ on run argv
 	tell application "System Events" to set frontApp to (name of first process where it is frontmost)
 	tell application id "com.runningwithcrayons.Alfred" to set configuration "focusedapp" to value frontApp in workflow (system attribute "alfred_workflow_bundleid") with exportable
 
+	set hotkeyUsed to (system attribute "hotkeyUsed")
+
 	if (selectionExists is false) and (frontApp is not "Brave Browser") then
 		return "🛑 No Input provided."
 	end if
 
-	if (frontApp is "Brave Browser") then
+	if (frontApp is "Brave Browser" and hotkeyUsed is "true") then
 		tell application "Brave Browser"
 			set currentTabUrl to URL of active tab of front window
 			set currentTabTitle to title of active tab of front window
@@ -31,6 +33,10 @@ on run argv
 	end if
 
 	tell application "Drafts" to make new draft with properties {content: output}
+
+	-- reset
+	tell application id "com.runningwithcrayons.Alfred" to set configuration "hotkeyUsed" to value "false" in workflow (system attribute "alfred_workflow_bundleid")
+
 	return notif_msg
 
 end run

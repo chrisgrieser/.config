@@ -233,6 +233,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>B6A0C425-D9B7-4F43-A579-32BCF3E9003F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>77E992B5-E489-4B56-A178-7C1CB761F733</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -240,16 +250,6 @@
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>9CB86CF0-AB9E-4F11-B023-41E4E2A44AC9</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>79405FF0-A2F1-462E-8A8F-AC1F83CC4C1A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -343,11 +343,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B6A0C425-D9B7-4F43-A579-32BCF3E9003F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>79405FF0-A2F1-462E-8A8F-AC1F83CC4C1A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B970369A-B4DB-46EE-8725-1BF669D561C5</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>42389168-DDFE-4158-93B7-8AD8E3B7564E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B9E643D5-8F80-4981-AC73-070D537A1375</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>79405FF0-A2F1-462E-8A8F-AC1F83CC4C1A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -425,7 +451,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>79405FF0-A2F1-462E-8A8F-AC1F83CC4C1A</string>
+				<string>B9E643D5-8F80-4981-AC73-070D537A1375</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -952,6 +978,26 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>hotkeyUsed</key>
+					<string>false</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>B6A0C425-D9B7-4F43-A579-32BCF3E9003F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -969,41 +1015,6 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<string>77E992B5-E489-4B56-A178-7C1CB761F733</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>2</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>D</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.agiletortoise.Drafts-OSX</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>F6A1C8B1-4191-4F60-966D-38C835B0142A</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1078,6 +1089,41 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>2</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>D</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.agiletortoise.Drafts-OSX</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>F6A1C8B1-4191-4F60-966D-38C835B0142A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -1095,6 +1141,26 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<string>4E5B84C8-6F38-4660-BF59-079EE3D12150</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>hotkeyUsed</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>B9E643D5-8F80-4981-AC73-070D537A1375</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1903,6 +1969,15 @@ Recommended Hotkey: ⇧⌘2</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>B6A0C425-D9B7-4F43-A579-32BCF3E9003F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>400</real>
+		</dict>
 		<key>B970369A-B4DB-46EE-8725-1BF669D561C5</key>
 		<dict>
 			<key>colorindex</key>
@@ -1913,6 +1988,15 @@ Recommended Hotkey: ⇧⌘2</string>
 			<real>875</real>
 			<key>ypos</key>
 			<real>290</real>
+		</dict>
+		<key>B9E643D5-8F80-4981-AC73-070D537A1375</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>455</real>
 		</dict>
 		<key>BAD44650-CAFD-4C9E-84D9-6710E38A751C</key>
 		<dict>
@@ -1999,7 +2083,7 @@ Recommended Hotkey: ⇧⌘2</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>425</real>
 		</dict>
 		<key>F72FF25E-1D98-498B-97A5-4CBF55FCEA5C</key>
 		<dict>
@@ -2029,7 +2113,9 @@ Recommended Hotkey: ⇧⌘2</string>
 	<key>variables</key>
 	<dict>
 		<key>focusedapp</key>
-		<string>alacritty</string>
+		<string>Brave Browser</string>
+		<key>hotkeyUsed</key>
+		<string>false</string>
 		<key>ocr_languages</key>
 		<string>eng+deu</string>
 		<key>tagToExcludeFromSearch</key>
@@ -2039,6 +2125,7 @@ Recommended Hotkey: ⇧⌘2</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
+		<string>hotkeyUsed</string>
 		<string>tagToExcludeFromSearch</string>
 		<string>url_to_open_after</string>
 	</array>
