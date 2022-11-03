@@ -7,7 +7,7 @@ local opts = {buffer = true, silent = true}
 
 
 -- hack to make lists auto-continue via Return in Insert & o in normal mode
--- based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
+-- i.e. replaces bullet.vim based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
 cmd [[
 	setlocal comments="b:*,b:-,b:+"
 	setlocal formatoptions+=ro

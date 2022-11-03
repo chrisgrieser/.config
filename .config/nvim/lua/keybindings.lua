@@ -334,8 +334,9 @@ keymap("n", "<leader>r", function()
 
 	elseif bo.filetype == "markdown" then
 		local filepath = fn.expand("%:p")
-		local filenameNoExt = fn.expand("%:t:r")
-		os.execute[[pandoc "%:p --output=%:t:r.pdf --pdf-engine=wkhtmltopdf<CR>:!open %:t:r.pdf]]
+		local pdfFilename = fn.expand("%:t:r")..".pdf"
+		fn.system("pandoc '"..filepath.."' --output='"..pdfFilename.."' --pdf-engine=wkhtmltopdf")
+		fn.system("open '"..pdfFilename.."'")
 
 	elseif bo.filetype == "lua" then
 		local parentFolder = fn.expand("%:p:h")
@@ -350,7 +351,7 @@ keymap("n", "<leader>r", function()
 		os.execute [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
 
 	elseif bo.filetype == "typescript" then
-		cmd [[!npm run build]]
+		cmd [[!npm run build]] -- not via fn.system to get the output in the cmdline
 
 	elseif bo.filetype == "applescript" then
 		cmd [[:AppleScriptRun]]
