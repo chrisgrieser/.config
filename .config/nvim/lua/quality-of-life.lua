@@ -8,10 +8,6 @@ local setCursor = vim.api.nvim_win_set_cursor
 
 local ret = {}
 
-function ret.setup(options) ---@diagnostic disable-line: unused-local
-	-- placeholder for potential future options
-end
-
 function ret.duplicateLine()
 	local line = getline(".")
 	append(".", line)
@@ -84,12 +80,20 @@ function ret.hr()
 end
 
 function ret.switcher()
-	opt.iskeyword = opt.iskeyword - {"-"}
-	local wordUnderCursor = fn.expand("<cword>")
-	opt.iskeyword = opt.iskeyword + {"-"}
+	-- ignore 'iskeyword' option when retrieving word under cursor
+	local wordUnderCursor
+	local wordchar = bo.iskeyword
+	dashIsKeyword = wordchar:find(",%-$") or wordchar:find(",%-,") or wordchar:find("^%-,")
+	if dashIsKeyword then
+		bo.iskeyword = wordchar:gsub(",?%-,?", "")
+		wordUnderCursor = fn.expand("<cword>")
+		bo.iskeyword = wordchar
+	else
+		wordUnderCursor = fn.expand("<cword>")
+	end
 
-	local col = api.nvim_win_get_cursor(0)[2] + 1
-	local char = fn.getline("."):sub(col, col) ---@diagnostic disable-line: param-type-mismatch, undefined-field
+	local col = getCursor(0)[2] + 1
+	local char = getline("."):sub(col, col) ---@diagnostic disable-line: param-type-mismatch, undefined-field
 
 	-- toggle words
 	local opposite = ""
@@ -122,7 +126,7 @@ function ret.switcher()
 	end
 
 	-- toggle case
-	local letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZäöüÄÖÜ"
+	local isLetter = char:upp
 	if letters:find(char) then
 		cmd [[normal! ~h]]
 		return
