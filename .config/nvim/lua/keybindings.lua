@@ -450,11 +450,16 @@ keymap("n", "zh", function()
 		api.nvim_win_set_cursor(0, {lineNum, colNum})
 		cmd [[startinsert!]]
 	else
-		-- shorten hr by indent
-		local indent = fn.indent(".")
-		local hr = b.hrComment:sub(1, -(indent + 1))
+		local hr = b.hrComment
 		fn.append(".", {hr, ""})
 		cmd [[normal! j==]]
+
+		-- shorten hr by indent
+		local indent = fn.indent(".")
+		local tw = opt.textwidth._value
+		local linelength = tw - indent
+
+
 	end
 	---@diagnostic enable: param-type-mismatch
 end)
