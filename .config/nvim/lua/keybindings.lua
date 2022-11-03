@@ -34,7 +34,7 @@ keymap("n", "<leader>P", ":PackerStatus<CR>")
 -- NAVIGATION
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
-keymap({"n", "x", "o"}, "H", "0^") -- 0^ ensures scrolling to the left on long lines
+keymap({"n", "x", "o"}, "H", "0^") -- 0^ ensures fully scrolling to the left on long lines
 keymap({"n", "x", "o"}, "L", "$")
 keymap({"x", "o"}, "J", "7j")
 keymap({"n", "x", "o"}, "K", "7k", {silent = true})
@@ -54,12 +54,6 @@ keymap("n", "gH", ":Gitsigns next_prev<CR>")
 -- Hop
 keymap("n", "ö", ":HopWordAC<CR>")
 keymap("n", "Ö", ":HopWordBC<CR>")
--- keymap({"n", "x", "o"}, "ö", "<Plug>Sneak_s")
--- keymap({"n", "x", "o"}, "Ö", "<Plug>Sneak_S")
--- keymap({"n", "x", "o"}, "f", "<Plug>Sneak_f")
--- keymap({"n", "x", "o"}, "F", "<Plug>Sneak_F")
--- keymap({"n", "x", "o"}, "t", "<Plug>Sneak_t")
--- keymap({"n", "x", "o"}, "T", "<Plug>Sneak_T")
 
 -- Search
 keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout

@@ -1,5 +1,5 @@
 require("utils")
-local opts = {buffer = true}
+local opts = {buffer = true, silent = true}
 --------------------------------------------------------------------------------
 
 -- hide URLs and other formatting, TODO: figure out how to hide only URLs
