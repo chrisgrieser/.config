@@ -10,19 +10,22 @@ sudo mdutil -E -i on /
 sudo rm -R "$SPOTLIGHT_CONFIG"
 
 sleep 1
+function addExclusion(){
+	sudo plutil -insert Exclusions.0 -string "$1" "$SPOTLIGHT_CONFIG"
+}
 
-sudo plutil -insert Exclusions.0 -string '/Applications/Utilities/' "$SPOTLIGHT_CONFIG"
-sudo plutil -insert Exclusions.0 -string ~'/dotfiles/zsh/plugins/' "$SPOTLIGHT_CONFIG"
-sudo plutil -insert Exclusions.0 -string '/Applications/Cisco' "$SPOTLIGHT_CONFIG"
-sudo plutil -insert Exclusions.0 -string ~'/dotfiles/Alfred.alfredpreferences/workflows/' "$SPOTLIGHT_CONFIG"
-sudo plutil -insert Exclusions.0 -string ~'/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/' "$SPOTLIGHT_CONFIG"
-sudo plutil -insert Exclusions.0 -string ~'/Library/Mobile Documents/com~apple~CloudDocs/.Trash/' "$SPOTLIGHT_CONFIG"
-sudo plutil -insert Exclusions.0 -string ~'/Library/Mobile Documents/com~apple~CloudDocs/Academia/PhD Data/' "$SPOTLIGHT_CONFIG"
-sudo plutil -insert Exclusions.0 -string "/Volumes/Externe A" "$SPOTLIGHT_CONFIG"
-sudo plutil -insert Exclusions.0 -string "/Volumes/Externe B" "$SPOTLIGHT_CONFIG"
-sudo plutil -insert Exclusions.0 -string "/Volumes/Externe C" "$SPOTLIGHT_CONFIG"
-sudo plutil -insert Exclusions.0 -string ~"/dotfiles/Utility Scripts/less-bottom.app" "$SPOTLIGHT_CONFIG"
-sudo plutil -insert Exclusions.0 -string ~"/dotfiles/Utility Scripts/Obsidian-Opener.app" "$SPOTLIGHT_CONFIG"
+addExclusion '/Applications/Utilities/' 
+addExclusion '/Applications/Cisco' 
+addExclusion "/Volumes/Externe A" 
+addExclusion "/Volumes/Externe B" 
+addExclusion "/Volumes/Externe C" 
+addExclusion '$HOME/dotfiles/zsh/plugins/' 
+addExclusion '$HOME/dotfiles/Alfred.alfredpreferences/workflows/' 
+addExclusion '$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/' 
+addExclusion '$HOME/Library/Mobile Documents/com~apple~CloudDocs/.Trash/' 
+addExclusion '$HOME/Library/Mobile Documents/com~apple~CloudDocs/Academia/PhD Data/' 
+addExclusion "$HOME/dotfiles/Utility Scripts/Obsidian-Opener.app" 
+addExclusion "$HOME/dotfiles/Utility Scripts/Neovim.app" 
 
 #-------------------------------------------------------------------------------
 
