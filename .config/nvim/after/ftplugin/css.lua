@@ -35,7 +35,7 @@ keymap("n", "<leader>.", "mz`[v`]: s/^\\| /./g<CR>:nohl<CR>`zl", opts)
 -- smart line duplicate (mnemonic: Replicate)
 -- switches top/bottom & moves to value
 ---@diagnostic disable: undefined-field, param-type-mismatch
-keymap("n", "R", require("duplicate").smartDuplicateLine, opts)
+keymap("n", "R", require("quality-of-life").smartDuplicateLine, opts)
 
 -- toggle !important
 keymap("n", "<leader>i", function()
