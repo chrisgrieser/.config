@@ -84,13 +84,12 @@ autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
 -- editor
 opt.cursorline = true
 opt.scrolloff = 12
-opt.sidescrolloff = 21
+opt.sidescrolloff = 24
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
 autocmd("BufEnter", {
-	---@diagnostic disable-next-line: assign-type-mismatch
 	callback = function() opt.formatoptions = opt.formatoptions - {"o", "r"} end
 })
 
@@ -114,15 +113,19 @@ autocmd("TextYankPost", {
 -- (see also the respective "change small word" keybinding <leader><space>)
 opt.iskeyword = opt.iskeyword + {"-"}
 
--- status bar
+-- status bar & cmdline
 opt.showcmd = true -- keychords pressed
 opt.showmode = false -- don't show "-- Insert --"
 opt.laststatus = 3 -- show one status line for all splits
+opt.shortmess:append("S") -- do not show search count, since lualine does it already
+
+--------------------------------------------------------------------------------
 
 -- folding
-opt.foldmethod = "expr"
-opt.foldexpr = "indent"
--- opt.foldexpr = "nvim_treesitter#foldexpr()" -- use treesitter for folding https://github.com/nvim-treesitter/nvim-treesitter
+opt.foldmethod = "indent"
+-- to use treesitter for folding https://github.com/nvim-treesitter/nvim-treesitter
+-- opt.foldmethod = "expr"
+-- opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldenable = false -- do not fold on start
 opt.foldminlines = 2
 augroup("rememberFolds", {}) -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save

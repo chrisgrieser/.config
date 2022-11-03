@@ -16,34 +16,33 @@ function customHighlights()
 		"SpellBad",
 	}
 	for _, v in pairs(highlights) do
-		cmd("highlight "..v.." gui=underline")
+		cmd("highlight " .. v .. " gui=underline")
 	end
 
-	cmd[[highlight! def link IndentBlanklineContextChar Comment]]
+	cmd [[highlight! def link IndentBlanklineContextChar Comment]]
 
 	-- URLs
-	cmd[[highlight urls cterm=underline term=underline gui=underline]]
-	fn.matchadd('urls', [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&]*]])
+	cmd [[highlight urls cterm=underline term=underline gui=underline]]
+	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&]*]])
 
-	-- rainbow brackets without agressive red…	
+	-- rainbow brackets without agressive red…
 	cmd [[highlight rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets…
 end
-
 
 customHighlights()
 
 -- mixed whitespace
-cmd[[highlight! def link MixedWhiteSpace Folded]]
-cmd[[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
+cmd [[highlight! def link MixedWhiteSpace Folded]]
+cmd [[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 
 -- Annotations
-cmd[[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
-cmd[[call matchadd('myAnnotations', '\<\(INFO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
+cmd [[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
+cmd [[call matchadd('myAnnotations', '\<\(INFO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
 
 -- Indention
 require("indent_blankline").setup {
 	show_current_context = true,
-	use_treesitter= true,
+	use_treesitter = true,
 	strict_tabs = false,
 	filetype_exclude = specialFiletypes,
 }
@@ -85,9 +84,9 @@ require("indent_blankline").setup {
 -- GUTTER
 opt.signcolumn = "yes:1"
 
-require('gitsigns').setup{
+require("gitsigns").setup {
 	max_file_length = 10000,
-	preview_config	= { border = borderStyle },
+	preview_config = {border = borderStyle},
 }
 
 --------------------------------------------------------------------------------
@@ -98,12 +97,12 @@ require('gitsigns').setup{
 local signs = {
 	Error = "",
 	Warn = "▲",
-	Info = "" ,
+	Info = "",
 	Hint = "",
 }
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
-	fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl }) ---@diagnostic disable-line: redundant-parameter, param-type-mismatch
+	fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl}) ---@diagnostic disable-line: redundant-parameter, param-type-mismatch
 end
 
 --------------------------------------------------------------------------------
@@ -113,13 +112,13 @@ local function alternateFile()
 	local altFile = api.nvim_exec('echo expand("#:t")', true)
 	local curFile = api.nvim_exec('echo expand("%:t")', true)
 	if altFile == curFile or altFile == "" then return "" end
-	return "# "..altFile
+	return "# " .. altFile
 end
 
 local function currentFile() -- using this function instead of default filename, since this does not show "[No Name]" for Telescope
 	local curFile = api.nvim_exec('echo expand("%:t")', true)
-	if not(curFile) or curFile == "" then return "" end
-	return "%% "..curFile -- "%" is lua's escape character and therefore needs to be escaped itself
+	if not (curFile) or curFile == "" then return "" end
+	return "%% " .. curFile -- "%" is lua's escape character and therefore needs to be escaped itself
 end
 
 local function mixedIndentation()
@@ -130,36 +129,35 @@ local function mixedIndentation()
 	local mixed = fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
 
 	if (hasSpaces and hasTabs) or mixed then
-		return "  mixed "
-	elseif hasSpaces and not(bo.expandtab) then
-		return " expandtab"
+		return "  mixed"
+	elseif hasSpaces and not (bo.expandtab) then
+		return " et"
 	elseif hasTabs and bo.expandtab then
-		return " noexpandtab"
+		return " noet"
 	end
 	return ""
 end
 
 local secSeparators
 if isGui() then
-	secSeparators = { left = ' ', right = ' '} -- nerdfont: 'nf-ple'
+	secSeparators = {left = " ", right = " "} -- nerdfont: 'nf-ple'
 else
-	secSeparators = { left = '', right = ''}
+	secSeparators = {left = "", right = ""}
 end
 
-require('lualine').setup {
+require("lualine").setup {
 	sections = {
-		lualine_a = {'mode'},
-		lualine_b = {{ currentFile }},
-		lualine_c = {{ alternateFile }},
-		lualine_x = {'diff'},
-		lualine_y = {'diagnostics', {mixedIndentation}},
-		lualine_z = {'location', 'progress'},
+		lualine_a = {"mode"},
+		lualine_b = {{currentFile}},
+		lualine_c = {{alternateFile}},
+		lualine_x = {"searchcount", "diagnostics", {mixedIndentation}},
+		lualine_y = {"diff", {"branch"}},
+		lualine_z = {{"location", separator = ""}, "progress"},
 	},
 	options = {
-		theme = 'auto',
+		theme = "auto",
 		globalstatus = true,
-		component_separators = { left = '', right = ''},
+		component_separators = {left = "", right = ""},
 		section_separators = secSeparators,
 	},
 }
-

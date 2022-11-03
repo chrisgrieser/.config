@@ -78,9 +78,9 @@ keymap({"n", "v", "i"}, "<D-0>", ":SymbolsOutline<CR>") -- Symbol Outline
 
 -- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 g.VM_maps = {
-	["Find Under"] = "<D-j>",
+	["Find Under"] = "<D-j>", -- cmd+j
 	["Visual Add"] = "<D-j>",
-	["Select Cursor Up"] = "<C-Up>",
+	["Select Cursor Up"] = "<C-Up>", -- ctrl+up
 	["Select Cursor Down"] = "<C-Down>",
 }
 
