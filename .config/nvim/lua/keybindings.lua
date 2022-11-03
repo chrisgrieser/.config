@@ -234,6 +234,16 @@ keymap("n", "Ü", function()
 	elseif wordUnderCursor == "width" then opposite = "height"
 	elseif wordUnderCursor == "height" then opposite = "width"
 	end
+	if bo.filetype == "lua" then
+		if wordUnderCursor == "and" then opposite = "or"
+		elseif wordUnderCursor == "or" then opposite = "and"
+		end
+	end
+	if bo.filetype == "javascript" or bo.filetype == "typescript" then
+		if wordUnderCursor == "const" then opposite = "let"
+		elseif wordUnderCursor == "let" then opposite = "const"
+		end
+	end
 	if opposite ~= "" then
 		cmd('normal! "_ciw' .. opposite)
 		opt.iskeyword = opt.iskeyword + {"-"}
@@ -379,7 +389,8 @@ keymap("x", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>:Rename ") -- re
 
 -- Option Toggling
 keymap("n", "<leader>os", ":set spell!<CR>")
-keymap("n", "<leader>or", ":set number! relativenumber!<CR>")
+keymap("n", "<leader>or", ":set relativenumber!<CR>")
+keymap("n", "<leader>on", ":set number!<CR>")
 keymap("n", "<leader>ow", ":set wrap! <CR>")
 
 --------------------------------------------------------------------------------
@@ -413,8 +424,6 @@ keymap("n", "<leader>r", function()
 	elseif bo.filetype == "typescript" then
 		cmd [[!npm run build]]
 
-		------------------------------------------------------------------------------
-
 	elseif bo.filetype == "applescript" then
 		cmd [[:AppleScriptRun]]
 	else
@@ -422,6 +431,7 @@ keymap("n", "<leader>r", function()
 		print("No build system set.")
 	end
 end)
+
 --------------------------------------------------------------------------------
 
 -- q / Esc to close special windows
@@ -442,35 +452,29 @@ keymap("n", "zh", function()
 
 	-- construct hr considering textwidth, commentstring, and indent
 	local indent = fn.indent(".")
-	local tw = bo.textwidth
-	local comstr = bo.commentstring:gsub("%%s", ""):gsub(" ", "")
-	local linestr = "─"
-	if comstr:find("-") then linestr = "-" end
-	local linelength = tw - indent - #comstr
-	local hr = comstr .. string.rep(linestr, linelength)
+	local textwidth = bo.textwidth
+	local comstr = bo.commentstring
+	local comStrLength = #comstr:gsub("%%s", ""):gsub(" ", "")
+	local linechar = "─"
+	if comstr:find("-") then linechar = "-" end
+	local linelength = textwidth - indent - comStrLength
+	local fullLine = string.rep(linechar, linelength)
+	local hr = comstr:gsub(" ?%%s ?", fullLine)
 
 	fn.append(".", {hr, ""})
-	cmd[[normal! j==]] -- move down and indent
-
-	--------------------------------------------------------------------------------
+	cmd [[normal! j==]] -- move down and indent
 
 	-- fix for blank lines inside indentations
 	local line = fn.getline(".")
 	if bo.expandtab then
-		line = line:sub(1, tw)
+		line = line:sub(1, textwidth)
 	else
-		local expandedTab = string.rep(" ", bo.tabstop)
-		line = line:gsub("\t", expandedTab) -- expand tabs
-		print(#line)
-		line:sub(1, tw) -- cut overlength
-		line:gsub(expandedTab, "\t") -- turn spaces back to tabs
+		local spacesPerTab = string.rep(" ", bo.tabstop)
+		line = line
+			:gsub("\t", spacesPerTab)
+			:sub(1, textwidth)
+			:gsub(spacesPerTab, "\t")
 	end
 	fn.setline(".", line)
 
 end)
-
-test = "		------------------------------------------------------------------------------"
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
---------------------------------------------------------------------------------
