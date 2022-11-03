@@ -91,13 +91,14 @@ add("applescript", {
 	snip("browser tab title", 'tell application "Brave Browser" to set currentTabName to title of active tab of front window'),
 	snip("notify", 'display notification "${2:subtitle}" with title "${1:title}"\n$0'),
 	snip("##", "#!/usr/bin/env osascript\n$0"),
-	snip("resolve home",
-		'set unresolved_path to "~/Documents"\n'..
-		"set AppleScript's text item delimiters to \"~/\"\n"..
-		'set theTextItems to every text item of unresolved_path\n'..
-		"set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))\n"..
-		'set resolved_path to theTextItems as string\n'
-	),
+	snip("resolve home",[[
+		set unresolved_path to "~/Documents"
+		set AppleScript's text item delimiters to \"~/\"
+		set theTextItems to every text item of unresolved_path
+		set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))
+		set resolved_path to theTextItems as string
+		$0
+	]]),
 })
 
 -- Markdown
@@ -124,9 +125,24 @@ add("javascript", {
 	snip("resolve home (JXA)",'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 })
 
+-- Alfred JXA
+add("javascript", {
+	snip("Set Alfred Env Var)", [[
+		function setEnvVar(envVar, newValue) {
+			Application("com.runningwithcrayons.Alfred")
+				.setConfiguration(envVar, {
+					toValue: newValue,
+					inWorkflow: $.getenv("alfred_workflow_bundleid"),
+					exportable: false
+				});
+		}
+		$0
+	]])
+})
+
 -- YAML
 add("yaml", {
-	snip("delay", "- key_code: vk_none\n  hold_down_milliseconds: 50\n"),
+	snip("delay (Karabiner)", "- key_code: vk_none\n  hold_down_milliseconds: 50\n"),
 })
 
 --------------------------------------------------------------------------------

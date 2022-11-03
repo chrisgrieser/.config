@@ -88,7 +88,7 @@ function amend () {
 		# prefile last commit message
 		# shellcheck disable=1087
 		FUNC_NAME="$funcstack[1]" # https://stackoverflow.com/a/62527825
-		print -z "FUNC_NAME \"$LAST_COMMIT_MSG\""
+		print -z "$FUNC_NAME \"$LAST_COMMIT_MSG\""
 		return 0
 	else
 		git commit --amend -m "$COMMIT_MSG" # directly set new commit message
