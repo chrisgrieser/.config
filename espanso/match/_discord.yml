@@ -3,8 +3,7 @@ matches:
     replace: "ro*dmap [auto-censored]"
   - trigger: "legacy editor"
     replace: "legacy edit0r [auto-censored]"
-  - trigger: "eee"
-    replace: "s/$|$//"
+
   - trigger: "!update"
     replace: |
       **Shimmering Focus Update ⟡**
