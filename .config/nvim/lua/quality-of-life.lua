@@ -1,12 +1,15 @@
 ---@diagnostic disable: param-type-mismatch, undefined-field
 local getline = vim.fn.getline
 local setline = vim.fn.setline
+local lineNo = vim.fn.line
 local append = vim.fn.append
 local bo = vim.bo
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
 
 local ret = {}
+
+--------------------------------------------------------------------------------
 
 function ret.duplicateLine()
 	local line = getline(".")
@@ -125,10 +128,10 @@ function ret.switcher()
 		return
 	end
 
-	-- toggle case
-	local isLetter = char:upp
-	if letters:find(char) then
-		cmd [[normal! ~h]]
+	-- toggle case (regular ~)
+	local isLetter = char:upper() ~= char:lower()
+	if isLetter then
+		cmd [[normal! ~]]
 		return
 	end
 
@@ -153,5 +156,16 @@ function ret.switcher()
 		cmd("normal! r" .. switched)
 	end
 end
+
+function ret.overscroll(action) ---@param action string The motion to be executed when not at EOF
+	local curLine = lineNo(".")
+	local lastLine = lineNo("$")
+	if (lastLine - curLine - 1) < vim.wo.scrolloff then
+		cmd [[normal! zz]]
+	end
+	cmd("normal! " .. action)
+end
+
+--------------------------------------------------------------------------------
 
 return ret

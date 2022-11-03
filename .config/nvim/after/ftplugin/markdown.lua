@@ -36,7 +36,7 @@ keymap({"n", "v"}, "I", "g^i", opts)
 keymap({"n", "v"}, "J", "7gj", opts)
 keymap({"n", "v"}, "K", "7gk", opts)
 keymap({"n", "v"}, "k", "gk", opts)
-keymap({"n", "v"}, "j", function() overscroll("gj") end, opts)
+keymap({"n", "v"}, "j", function() require("quality-of-life").overscroll("gj") end, opts)
 
 -- cmd+shift+e: export as pdf (cmd+ctrl remapped via karabiner)
 keymap("n", "<D-C-e>", ":!pandoc %:p --output=%:t:r.pdf --pdf-engine=wkhtmltopdf<CR>:!open %:t:r.pdf<CR><CR>")
