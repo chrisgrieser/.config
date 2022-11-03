@@ -22,7 +22,7 @@ opt.guicursor =
 "n-sm:block," ..
 	"i-ci-c-ve:ver25," ..
 	"r-cr-o-v:hor10," ..
-	"a:blinkwait400-blinkoff500-blinkon700"
+	"a:blinkwait300-blinkoff500-blinkon700"
 
 --------------------------------------------------------------------------------
 

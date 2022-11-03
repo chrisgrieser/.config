@@ -145,15 +145,20 @@ else
 	secSeparators = {left = "", right = ""}
 end
 
+function nonStandardBranch()
+	-- local branch = fn.system("git branch --show-current")
+	branch = "bla"
+	branch = trim(branch)
+	return branch ~= "main" and branch ~= "master"
+end
+
 require("lualine").setup {
 	sections = {
 		lualine_a = {"mode"},
 		lualine_b = {{currentFile}},
 		lualine_c = {{alternateFile}},
 		lualine_x = {"searchcount", "diagnostics", {mixedIndentation}},
-		lualine_y = {"diff", {"branch", cond = function ()
-			return fn.system("git branch --show-current") == "bla"
-		end}},
+		lualine_y = {"diff", {"branch", cond = nonStandardBranch }},
 		lualine_z = {{"location", separator = ""}, "progress"},
 	},
 	options = {
