@@ -11,7 +11,6 @@ keymap("n", "<leader>la", ":<C-r>:<CR>")
 
 -- search keymaps
 keymap("n", "?", telescope.keymaps)
-keymap("n", "<leader>?", telescope.help_tags)
 
 -- Theme Picker
 keymap("n", "<leader>T", telescope.colorscheme)
@@ -31,9 +30,6 @@ keymap("n", "<leader>p", function()
 end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
 
--- Utils
--- keymap("n", "ZZ", ":w<CR>:q<CR>") -- quicker quitting
-
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
@@ -43,18 +39,8 @@ keymap({"n", "x", "o"}, "L", "$")
 keymap({"x", "o"}, "J", "7j")
 keymap({"n", "x", "o"}, "K", "7k", {silent = true})
 
--- when reaching the last line, scroll down (since scrolloff does not work at EOF)
-function overscroll(action) ---@param action string
-	local curLine = fn.line(".")
-	local lastLine = fn.line("$")
-	if (lastLine - curLine - 1) < wo.scrolloff then
-		cmd [[normal! zz]]
-	end
-	cmd("normal! " .. action)
-end
-
-keymap("n", "j", function() overscroll("j") end, {silent = true})
-keymap("n", "J", function() overscroll("7j") end, {silent = true})
+keymap("n", "j", function() require("quality-of-life").overscroll("j") end, {silent = true})
+keymap("n", "J", function() require("quality-of-life").overscroll("7j") end, {silent = true})
 keymap({"n", "x"}, "G", "Gzz")
 
 -- Jump History
@@ -203,6 +189,9 @@ keymap("n", "<BS>", function() -- reduce multiple blank lines to exactly one
 	end
 end)
 
+-- [H]ori[z]ontal Ruler
+keymap("n", "zh", require("quality-of-life").hr)
+
 -- Indention
 keymap("n", "<Tab>", ">>")
 keymap("n", "<S-Tab>", "<<")
@@ -218,9 +207,6 @@ keymap("n", "ü", "mzlblgueh~`z")
 
 -- toggle case or switch direction of char (e.g. > to <)
 keymap("n", "Ü", require("quality-of-life").switcher)
-
--- [H]ori[z]ontal Ruler
-keymap("n", "zh", require("quality-of-life").hr)
 
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`"}
@@ -245,8 +231,8 @@ keymap("n", "S", substi.eol)
 keymap("x", "s", substi.visual)
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
-keymap("n", "R", require("quality-of-life").duplicateLine, {silent = true})
-keymap("x", "R", require("quality-of-life").duplicateVisual, {silent = true})
+keymap("n", "R", require("quality-of-life").duplicateLine)
+keymap("x", "R", require("quality-of-life").duplicateVisual)
 
 -- Line & Character Movement (vim.move plugin)
 g.move_map_keys = 0 -- disable default keymaps of vim.move
