@@ -1,7 +1,5 @@
 require("utils")
 require("appearance")
-
-
 --------------------------------------------------------------------------------
 
 -- BASE CONFIG
@@ -28,14 +26,25 @@ opt.guicursor =
 
 --------------------------------------------------------------------------------
 
--- THEME
-local function light()
-	cmd("colorscheme " .. lightTheme)
-	g.neovide_transparency = 0.95
+local function themeModifications()
+	if g.colors_name == "tokyonight" then
+		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
+		for _, v in pairs(modes) do
+			cmd("highlight lualine_y_diff_modified_" .. v .. " guifg=#acaa62")
+			cmd("highlight lualine_y_diff_added_" .. v .. " guifg=#8cbf8e")
+		end
+	end
 	if g.colors_name == "dawnfox" then
 		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
 		cmd [[highlight VertSplit guifg=#b29b84]]
 	end
+end
+
+-- THEME
+local function light()
+	cmd("colorscheme " .. lightTheme)
+	g.neovide_transparency = 0.95
+	themeModifications()
 	customHighlights()
 end
 
@@ -43,9 +52,7 @@ end
 local function dark()
 	cmd("colorscheme " .. darkTheme)
 	g.neovide_transparency = 0.97
-	if g.colors_name == "tokyonight" then
-		-- cmd [[highlight VertSplit guifg=#b29b84]]
-	end
+	themeModifications()
 	customHighlights()
 end
 
