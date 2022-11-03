@@ -434,66 +434,25 @@ autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
--- [H]orizontal Ruler
+-- [H]ori[z]ontal Ruler
+---@diagnostic disable: param-type-mismatch, undefined-field
 keymap("n", "zh", function()
-	---@diagnostic disable: param-type-mismatch
-	if not (b.hrComment) then
-		print("No hr for this filetype defined.")
-		return
-	end
 
-	if bo.filetype == "css" then
-		local hr = b.hrComment
-		fn.append(".", hr)
-		local lineNum = api.nvim_win_get_cursor(0)[1] + 2
-		local colNum = #hr[2] + 2
-		api.nvim_win_set_cursor(0, {lineNum, colNum})
-		cmd [[startinsert!]]
-	else
-		local hr = b.hrComment
-		fn.append(".", {hr, ""})
-		cmd [[normal! j==]]
+	-- construct hr considering textwidth, commentstring, and indent
+	local indent = fn.indent(".")
+	local tw = bo.textwidth
+	local comstr = bo.commentstring:gsub("%%s", ""):gsub(" ", "")
+	local linestr = "─"
+	if comstr:find("-") then linestr = "-" end
+	local linelength = tw - indent - #comstr
+	local hr = comstr .. string.rep(linestr, linelength)
 
-		-- shorten hr by indent
-		local indent = fn.indent(".")
-		local tw = opt.textwidth._value
-		local linelength = tw - indent
+	fn.append(".", {hr, ""})
+	cmd[[normal! j==]] -- move down and indent
 
+	-- fix for blank lines inside indentations
+	local line = fn.getline(".")
+	fn.setline(".", line:sub("a"))
 
-	end
-	---@diagnostic enable: param-type-mismatch
 end)
 
-augroup("horizontalRuler", {})
-autocmd("FileType", {
-	group = "horizontalRuler",
-	pattern = {"json", "javascript", "typescript"},
-	callback = function() b.hrComment = "//──────────────────────────────────────────────────────────────────────────────" end
-})
-autocmd("FileType", {
-	group = "horizontalRuler",
-	pattern = {"bash", "zsh", "sh", "yaml"},
-	callback = function() b.hrComment = "#───────────────────────────────────────────────────────────────────────────────" end
-})
-autocmd("FileType", {
-	group = "horizontalRuler",
-	pattern = {"lua", "applescript"},
-	callback = function() b.hrComment = "--------------------------------------------------------------------------------" end
-})
-autocmd("FileType", {
-	group = "horizontalRuler",
-	pattern = {"markdown"},
-	callback = function() b.hrComment = "---" end
-})
-autocmd("FileType", {
-	group = "horizontalRuler",
-	pattern = {"css"},
-	callback = function() b.hrComment = {
-			"/* ───────────────────────────────────────────────── */",
-			"/* << ",
-			"──────────────────────────────────────────────────── */",
-			"",
-			"",
-		}
-	end,
-})

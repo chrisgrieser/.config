@@ -47,4 +47,20 @@ keymap("n", "<leader>i", function()
 	end
 	fn.setline(".", lineContent)
 end, {buffer = true})
+
+keymap("n", "zh", function ()
+	local hr = {
+		"/* ───────────────────────────────────────────────── */",
+		"/* << ",
+		"──────────────────────────────────────────────────── */",
+		"",
+		"",
+	}
+	fn.append(".", hr)
+	local lineNum = api.nvim_win_get_cursor(0)[1] + 2
+	local colNum = #hr[2] + 2
+	api.nvim_win_set_cursor(0, {lineNum, colNum})
+	cmd [[startinsert!]]
+end, opts)
+
 ---@diagnostic enable: undefined-field, param-type-mismatch
