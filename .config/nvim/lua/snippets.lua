@@ -101,6 +101,13 @@ add("applescript", {
 	]]),
 })
 
+-- Alfred AppleScript
+add("applescript", {
+	snip("Get Alfred Env Var", 'set ${1:envvar} to (system attribute "${1:envvar}")'),
+	snip("Get Alfred Env Var (Unicode Fix)", 'set ${1:envvar} to do shell script "echo " & quoted form of (system attribute "${1:envvar}") & " | iconv -f UTF-8-MAC -t MACROMAN"\n$0'),
+	snip("Set Alfred Env Var", 'tell application id "com.runningwithcrayons.Alfred" to set configuration "${1:envvar}" to value ${2:value} in workflow (system attribute "alfred_workflow_bundleid")\n$0'),
+})
+
 -- Markdown
 add("markdown", {
 	snip("github note", "> **Note**  \n> $0"),
