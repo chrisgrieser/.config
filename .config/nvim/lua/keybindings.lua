@@ -217,67 +217,10 @@ keymap("n", "^A", "mzgg=G`z") -- entire file
 keymap("n", "ü", "mzlblgueh~`z")
 
 -- toggle case or switch direction of char (e.g. > to <)
-keymap("n", "Ü", function()
-	local wordUnderCursor = fn.expand("<cword>")
-	local col = api.nvim_win_get_cursor(0)[2] + 1
-	local char = fn.getline("."):sub(col, col) ---@diagnostic disable-line: param-type-mismatch, undefined-field
+keymap("n", "Ü", require("quality-of-life").switcher)
 
-	-- toggle words
-	opt.iskeyword = opt.iskeyword - {"-"}
-	local opposite = ""
-	if wordUnderCursor == "true" then opposite = "false"
-	elseif wordUnderCursor == "false" then opposite = "true"
-	elseif wordUnderCursor == "top" then opposite = "bottom"
-	elseif wordUnderCursor == "bottom" then opposite = "top"
-	elseif wordUnderCursor == "left" then opposite = "right"
-	elseif wordUnderCursor == "right" then opposite = "left"
-	elseif wordUnderCursor == "width" then opposite = "height"
-	elseif wordUnderCursor == "height" then opposite = "width"
-	end
-	if bo.filetype == "lua" then
-		if wordUnderCursor == "and" then opposite = "or"
-		elseif wordUnderCursor == "or" then opposite = "and"
-		end
-	end
-	if bo.filetype == "javascript" or bo.filetype == "typescript" then
-		if wordUnderCursor == "const" then opposite = "let"
-		elseif wordUnderCursor == "let" then opposite = "const"
-		end
-	end
-	if opposite ~= "" then
-		cmd('normal! "_ciw' .. opposite)
-		opt.iskeyword = opt.iskeyword + {"-"}
-		return
-	end
-
-	-- toggle case
-	local letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZäöüÄÖÜ"
-	if letters:find(char) then
-		cmd [[normal! ~h]]
-		return
-	end
-
-	-- switch punctuation
-	local switched = ""
-	if char == "<" then switched = ">"
-	elseif char == ">" then switched = "<"
-	elseif char == "(" then switched = ")"
-	elseif char == ")" then switched = "("
-	elseif char == "]" then switched = "["
-	elseif char == "[" then switched = "]"
-	elseif char == "{" then switched = "}"
-	elseif char == "}" then switched = "{"
-	elseif char == "/" then switched = "\\"
-	elseif char == "\\" then switched = "/"
-	elseif char == "'" then switched = '"'
-	elseif char == '"' then switched = "'"
-	elseif char == "," then switched = ";"
-	elseif char == ";" then switched = ","
-	end
-	if switched ~= "" then
-		cmd("normal! r" .. switched)
-	end
-end)
+-- [H]ori[z]ontal Ruler
+keymap("n", "zh", require("quality-of-life").hr)
 
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`"}
@@ -302,8 +245,8 @@ keymap("n", "S", substi.eol)
 keymap("x", "s", substi.visual)
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
-keymap("n", "R", require("duplicate").duplicateLine, {silent = true})
-keymap("x", "R", require("duplicate").duplicateVisual, {silent = true})
+keymap("n", "R", require("quality-of-life").duplicateLine, {silent = true})
+keymap("x", "R", require("quality-of-life").duplicateVisual, {silent = true})
 
 -- Line & Character Movement (vim.move plugin)
 g.move_map_keys = 0 -- disable default keymaps of vim.move
@@ -405,16 +348,16 @@ keymap("n", "<leader>g", ":w<CR>:!acp ") -- shell function, enabled via .zshenv
 keymap("n", "<leader>r", function()
 	cmd [[write]]
 
-	local filename = fn.expand("%:t") ---@diagnostic disable-line: missing-parameter
+	local filename = fn.expand("%:t") 
 	if filename == "sketchybarrc" then
 		fn.system("brew services restart sketchybar")
 
 	elseif bo.filetype == "lua" then
-		local parentFolder = fn.expand("%:p:h") ---@diagnostic disable-line: missing-parameter
+		local parentFolder = fn.expand("%:p:h") 
 		if not (parentFolder) then return end
 		if parentFolder:find("nvim") then
-			cmd [[write | source % | echo "Neovim config reloaded."]]
-		else
+			cmd [[write! | source % | echo "Neovim config reloaded."]]
+		elseif parentFolder:find("hammerspoon") then
 			os.execute('open -g "hammerspoon://hs-reload"')
 		end
 
@@ -444,37 +387,3 @@ autocmd("FileType", {
 	end
 })
 
---------------------------------------------------------------------------------
-
--- [H]ori[z]ontal Ruler
----@diagnostic disable: param-type-mismatch, undefined-field
-keymap("n", "zh", function()
-
-	-- construct hr considering textwidth, commentstring, and indent
-	local indent = fn.indent(".")
-	local textwidth = bo.textwidth
-	local comstr = bo.commentstring
-	local comStrLength = #comstr:gsub("%%s", ""):gsub(" ", "")
-	local linechar = "─"
-	if comstr:find("-") then linechar = "-" end
-	local linelength = textwidth - indent - comStrLength
-	local fullLine = string.rep(linechar, linelength)
-	local hr = comstr:gsub(" ?%%s ?", fullLine)
-
-	fn.append(".", {hr, ""})
-	cmd [[normal! j==]] -- move down and indent
-
-	-- fix for blank lines inside indentations
-	local line = fn.getline(".")
-	if bo.expandtab then
-		line = line:sub(1, textwidth)
-	else
-		local spacesPerTab = string.rep(" ", bo.tabstop)
-		line = line
-			:gsub("\t", spacesPerTab)
-			:sub(1, textwidth)
-			:gsub(spacesPerTab, "\t")
-	end
-	fn.setline(".", line)
-
-end)
