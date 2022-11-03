@@ -327,13 +327,18 @@ keymap("n", "<leader>g", ":w<CR>:!acp ") -- shell function, enabled via .zshenv
 -- BUILD SYSTEM
 keymap("n", "<leader>r", function()
 	cmd [[write]]
+	local filename = fn.expand("%:t")
 
-	local filename = fn.expand("%:t") 
 	if filename == "sketchybarrc" then
 		fn.system("brew services restart sketchybar")
 
+	elseif bo.filetype == "markdown" then
+		local filepath = fn.expand("%:p")
+		local filenameNoExt = fn.expand("%:t:r")
+		os.execute[[pandoc "%:p --output=%:t:r.pdf --pdf-engine=wkhtmltopdf<CR>:!open %:t:r.pdf]]
+
 	elseif bo.filetype == "lua" then
-		local parentFolder = fn.expand("%:p:h") 
+		local parentFolder = fn.expand("%:p:h")
 		if not (parentFolder) then return end
 		if parentFolder:find("nvim") then
 			cmd [[write! | source % | echo "Neovim config reloaded."]]
@@ -366,4 +371,3 @@ autocmd("FileType", {
 		keymap("n", "q", ":close<CR>", opts)
 	end
 })
-

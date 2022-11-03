@@ -7,7 +7,7 @@ bo.tabstop = 2
 bo.softtabstop = 2
 bo.expandtab = true
 
-localOpt("listchars", "tab: >")
+setlocal("listchars", "tab: >")
 
 -- hides quotes in JSON, making it actually more readable
 wo.conceallevel = 2
@@ -18,4 +18,3 @@ keymap("v", "<D-b>", ":'<,'>!yq -o=json<CR>", {buffer = true})
 
 -- JSON-[m]inify selection, requires `yq`
 keymap("v", "<D-m>", ":'<,'>!yq -I=0<CR>", {buffer = true})
-

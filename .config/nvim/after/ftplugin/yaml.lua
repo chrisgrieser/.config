@@ -7,5 +7,4 @@ bo.tabstop = 2
 bo.softtabstop = 2
 bo.expandtab = true
 
-localOpt("listchars", "tab: >")
-
+setlocal("listchars", "tab: >")
