@@ -145,33 +145,15 @@ else
 	secSeparators = {left = "", right = ""}
 end
 
-require("tokyonight").setup({
-  -- use the night style
-  style = "night",
-  -- disable italic for functions
-  styles = {
-    functions = {}
-  },
-  sidebars = { "qf", "vista_kind", "terminal", "packer" },
-  -- Change the "hint" color to the "orange" color, and make the "error" color bright red
-  on_colors = function(colors)
-    colors.hint = colors.orange
-    colors.error = "#ff0000"
-  end
-})
-
 require("lualine").setup {
 	sections = {
 		lualine_a = {"mode"},
 		lualine_b = {{currentFile}},
 		lualine_c = {{alternateFile}},
 		lualine_x = {"searchcount", "diagnostics", {mixedIndentation}},
-		lualine_y = {
-			{"diff", diff_color = {
-				modified = "",
-			}},
-			{"branch"}
-		},
+		lualine_y = {"diff", {"branch", cond = function ()
+			return fn.system("git branch --show-current") == "bla"
+		end}},
 		lualine_z = {{"location", separator = ""}, "progress"},
 	},
 	options = {
