@@ -17,6 +17,10 @@ function localOpt(option, value)
 	vim.api.nvim_set_option_value(option, value, {scope = "local"})
 end
 
+function trim(str)
+	return (str:gsub("^%s*(.-)%s*$", "%1"))
+end
+
 -- `:I` inspects the passed lua object
 function inspectFn(obj)
 	vim.pretty_print(fn.luaeval(obj))
