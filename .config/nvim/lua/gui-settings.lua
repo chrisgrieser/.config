@@ -4,9 +4,9 @@ require("appearance")
 
 -- BASE CONFIG
 local lightTheme = "dawnfox"
-local darkTheme = "tokyonight-moon"
+local darkTheme = "kanagawa"
+-- local darkTheme = "tokyonight-moon"
 -- local darkTheme = "onedark"
--- local darkTheme = "kanagawa"
 
 -- font size dependent on device
 if fn.hostname():find("iMac") then
@@ -23,6 +23,7 @@ opt.guicursor =
 	"i-ci-c-ve:ver25," ..
 	"r-cr-o-v:hor10," ..
 	"a:blinkwait300-blinkoff500-blinkon700"
+
 
 --------------------------------------------------------------------------------
 

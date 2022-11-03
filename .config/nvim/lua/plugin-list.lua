@@ -10,7 +10,7 @@ function PluginList()
 	-- use "navarasu/onedark.nvim"
 	use "EdenEast/nightfox.nvim"
 	use "folke/tokyonight.nvim"
-	-- use "rebelot/kanagawa.nvim"
+	use "rebelot/kanagawa.nvim"
 	-- use "Mofiqul/dracula.nvim"
 	-- use "savq/melange"
 	-- use "Yazeed1s/minimal.nvim"
@@ -23,7 +23,6 @@ function PluginList()
 			require("nvim-treesitter.install").update {with_sync = true}
 		end,
 		requires = {
-			"nvim-treesitter/nvim-treesitter-context",
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"p00f/nvim-ts-rainbow",
 		}
