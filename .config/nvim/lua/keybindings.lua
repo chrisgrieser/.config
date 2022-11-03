@@ -413,6 +413,8 @@ keymap("n", "<leader>r", function()
 	elseif bo.filetype == "typescript" then
 		cmd [[!npm run build]]
 
+		------------------------------------------------------------------------------
+
 	elseif bo.filetype == "applescript" then
 		cmd [[:AppleScriptRun]]
 	else
@@ -450,9 +452,25 @@ keymap("n", "zh", function()
 	fn.append(".", {hr, ""})
 	cmd[[normal! j==]] -- move down and indent
 
+	--------------------------------------------------------------------------------
+
 	-- fix for blank lines inside indentations
 	local line = fn.getline(".")
-	fn.setline(".", line:sub("a"))
+	if bo.expandtab then
+		line = line:sub(1, tw)
+	else
+		local expandedTab = string.rep(" ", bo.tabstop)
+		line = line:gsub("\t", expandedTab) -- expand tabs
+		print(#line)
+		line:sub(1, tw) -- cut overlength
+		line:gsub(expandedTab, "\t") -- turn spaces back to tabs
+	end
+	fn.setline(".", line)
 
 end)
 
+test = "		------------------------------------------------------------------------------"
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
