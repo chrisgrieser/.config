@@ -142,14 +142,20 @@ local secSeparators
 if isGui() then
 	secSeparators = {left = " ", right = " "} -- nerdfont: 'nf-ple'
 else
-	secSeparators = {left = "", right = ""}
+	secSeparators = {left = "", right = ""} -- separators look off in Terminal
 end
 
-function nonStandardBranch()
-	-- local branch = fn.system("git branch --show-current")
-	branch = "bla"
-	branch = trim(branch)
-	return branch ~= "main" and branch ~= "master"
+augroup("branchChange", {})
+autocmd({"BufEnter", "FocusGained"}, {
+	group = "branchChange",
+	callback = function()
+		g.cur_branch = trim(fn.system("git branch --show-current"))
+	end
+})
+
+function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
+	local branch = g.cur_branch
+	return not (branch == "main" or branch == "master")
 end
 
 require("lualine").setup {
@@ -158,7 +164,7 @@ require("lualine").setup {
 		lualine_b = {{currentFile}},
 		lualine_c = {{alternateFile}},
 		lualine_x = {"searchcount", "diagnostics", {mixedIndentation}},
-		lualine_y = {"diff", {"branch", cond = nonStandardBranch }},
+		lualine_y = {"diff", {"branch", cond = isStandardBranch}},
 		lualine_z = {{"location", separator = ""}, "progress"},
 	},
 	options = {
