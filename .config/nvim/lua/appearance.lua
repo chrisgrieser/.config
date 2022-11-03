@@ -109,8 +109,8 @@ end
 
 -- STATUS LINE (LuaLine)
 local function alternateFile()
-	local altFile = api.nvim_exec('echo expand("#:t")', true)
-	local curFile = api.nvim_exec('echo expand("%:t")', true)
+	local altFile = fn.expand("#:t")
+	local curFile = fn.expand("%:t")
 	if altFile == curFile or altFile == "" then return "" end
 	return "# " .. altFile
 end

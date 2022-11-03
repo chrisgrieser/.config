@@ -89,8 +89,12 @@ opt.sidescrolloff = 24
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
-autocmd("BufEnter", {
-	callback = function() opt.formatoptions = opt.formatoptions - {"o", "r"} end
+autocmd("BufReadPost", {
+	callback = function()
+		if not(bo.filetype == "markdown") then -- not for markdown, for autolist hack (see markdown.lua)
+			bo.formatoptions = bo.formatoptions:gsub("r", ""):gsub("o", "")
+		end
+	end
 })
 
 -- Remember Cursor Position
@@ -101,7 +105,7 @@ autocmd("BufReadPost", {
 })
 
 -- clear cmdline on entering buffer
-autocmd("BufReadPost", {command = "echo"})
+autocmd("BufEnter", {command = "echo"})
 
 -- clipboard & yanking
 opt.clipboard = "unnamedplus"

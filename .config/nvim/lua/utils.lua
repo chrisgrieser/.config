@@ -13,7 +13,7 @@ keymap = vim.keymap.set
 home = vim.fn.expand("~")
 
 -- :setlocal does not have a direct access via the vim-module, it seems https://neovim.io/doc/user/lua.html#lua-vim-setlocal
-function localOpt(option, value)
+function setlocal(option, value)
 	vim.api.nvim_set_option_value(option, value, {scope = "local"})
 end
 

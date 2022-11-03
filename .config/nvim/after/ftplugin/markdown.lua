@@ -5,12 +5,22 @@ local opts = {buffer = true, silent = true}
 -- hide URLs and other formatting, TODO: figure out how to hide only URLs
 -- localOpt("conceallevel", 2)
 
+
+-- hack to make lists auto-continue via Return in Insert & o in normal mode
+-- based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
+cmd [[
+	setlocal comments="b:*,b:-,b:+"
+	setlocal formatoptions+=ro
+]]
+
+
 -- spelling
-localOpt("spell", true)
+setlocal("spell", true)
 
 -- syntax highlighting in code blocks
 g.markdown_fenced_languages = {
 	"python",
+	"py=python",
 	"css",
 	"yaml",
 	"json",
@@ -22,13 +32,14 @@ g.markdown_fenced_languages = {
 	"ts=typescript",
 	"applescript",
 	"bash",
+	"sh=bash",
 	"zsh",
 }
 
 -- wrapping and related options
-localOpt("wrap", true) -- soft wrap
-localOpt("linebreak", true) -- do not break words for soft wrap
-localOpt("colorcolumn", "") -- deactivate ruler
+setlocal("wrap", true) -- soft wrap
+setlocal("linebreak", true) -- do not break words for soft wrap
+setlocal("colorcolumn", "") -- deactivate ruler
 keymap({"n", "v"}, "H", "g^", opts)
 keymap({"n", "v"}, "L", "g$", opts)
 keymap({"n", "v"}, "A", "g$a", opts)
@@ -38,8 +49,7 @@ keymap({"n", "v"}, "K", "7gk", opts)
 keymap({"n", "v"}, "k", "gk", opts)
 keymap({"n", "v"}, "j", function() require("quality-of-life").overscroll("gj") end, opts)
 
--- cmd+shift+e: export as pdf (cmd+ctrl remapped via karabiner)
-keymap("n", "<D-C-e>", ":!pandoc %:p --output=%:t:r.pdf --pdf-engine=wkhtmltopdf<CR>:!open %:t:r.pdf<CR><CR>")
+--------------------------------------------------------------------------------
 
 -- cmd+k: markdown link
 keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", opts)
