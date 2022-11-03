@@ -39,9 +39,13 @@ local function light()
 	customHighlights()
 end
 
+--
 local function dark()
 	cmd("colorscheme " .. darkTheme)
 	g.neovide_transparency = 0.97
+	if g.colors_name == "tokyonight" then
+		-- cmd [[highlight VertSplit guifg=#b29b84]]
+	end
 	customHighlights()
 end
 
