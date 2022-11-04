@@ -351,7 +351,7 @@ keymap("n", "<leader>g", ":w<CR>:!acp ") -- shell function, enabled via .zshenv
 
 -- BUILD SYSTEM
 keymap("n", "<leader>r", function()
-	cmd [[write]]
+	cmd [[update]]
 	local filename = fn.expand("%:t")
 
 	if filename == "sketchybarrc" then
@@ -372,7 +372,7 @@ keymap("n", "<leader>r", function()
 			os.execute('open -g "hammerspoon://hs-reload"')
 		end
 
-	elseif bo.filetype == "yaml" then
+	elseif bo.filetype == "yaml" and fn.getcwd():find(".config/karabiner") then
 		os.execute [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
 
 	elseif bo.filetype == "typescript" then

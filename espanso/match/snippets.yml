@@ -26,7 +26,7 @@ matches:
     replace: "https://nohello.net/en/"
 
   - trigger: '!bug'
-    replace: >
+    replace: >-
       Could you open a bug report at the GitHub repo?
       Reason being that the bug report forms asks for various
       information I need to investigate the issue.
