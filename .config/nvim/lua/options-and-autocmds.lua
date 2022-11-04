@@ -118,7 +118,7 @@ autocmd("TextYankPost", {
 opt.iskeyword = opt.iskeyword + {"-"}
 
 -- status bar & cmdline
-opt.showcmd = true -- keychords pressed
+opt.showcmd = false -- keychords pressed
 opt.showmode = false -- don't show "-- Insert --"
 opt.laststatus = 3 -- show one status line for all splits
 opt.shortmess:append("S") -- do not show search count, since lualine does it already
