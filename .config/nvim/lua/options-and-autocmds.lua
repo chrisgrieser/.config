@@ -1,6 +1,6 @@
 require("utils")
 -- Default vim settings: https://neovim.io/doc/user/vim_diff.html
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 -- timeout for awaiting keystrokes
 opt.timeoutlen = 2000 -- because I'm slow lol
@@ -62,25 +62,6 @@ opt.textwidth = 80 -- used by `gq` wrap, etc.
 opt.wrap = false
 opt.colorcolumn = "+1" -- relative to textwidth
 
--- files
-opt.hidden = true -- inactive buffers are only hidden, not unloaded
-opt.undofile = true -- persistent undo history
-opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
-opt.autochdir = true -- always current directory
-augroup("autocd", {})
-autocmd({"BufWinEnter"}, {-- since autochdir is not always reliable…?
-	group = "autocd",
-	command = "cd %:p:h",
-})
-
--- auto-save
-augroup("autosave", {})
-autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
-	group = "autosave",
-	pattern = "?*",
-	command = "silent! update"
-})
-
 -- Editor
 opt.cursorline = true
 opt.scrolloff = 12
@@ -117,6 +98,26 @@ autocmd("TextYankPost", {
 -- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070
 -- (see also the respective "change small word" keybinding <leader><space>)
 opt.iskeyword = opt.iskeyword + {"-"}
+
+--------------------------------------------------------------------------------
+
+-- FILES
+opt.hidden = true -- inactive buffers are only hidden, not unloaded
+opt.undofile = true -- persistent undo history
+opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
+opt.autochdir = true -- always current directory
+augroup("autocd", {})
+autocmd({"BufWinEnter"}, {-- since autochdir is not always reliable…?
+	group = "autocd",
+	command = "cd %:p:h",
+})
+
+augroup("autosave", {})
+autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
+	group = "autosave",
+	pattern = "?*",
+	command = "silent! update"
+})
 
 --------------------------------------------------------------------------------
 
