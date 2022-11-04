@@ -752,13 +752,10 @@ rules:
         to:
           - shell_command: open -a "Finder" ~/.Trash
           - key_code: vk_none
-            hold_down_milliseconds: 50
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Finder"
-                  set frontmost to true
-                  click menu item "as List" of menu "View" of menu bar 1
-                end tell'
+            hold_down_milliseconds: 200
+          - key_code: "2" # list view
+            modifiers:
+              - command
   - description: "🅰️  Script Editor"
     manipulators:
       # Quick Closing skipping save prompt

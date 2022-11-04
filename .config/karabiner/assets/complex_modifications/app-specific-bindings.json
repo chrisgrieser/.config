@@ -1421,10 +1421,13 @@
             },
             {
               "key_code": "vk_none",
-              "hold_down_milliseconds": 50
+              "hold_down_milliseconds": 200
             },
             {
-              "shell_command": "osascript -e '\n  tell application \"System Events\" to tell process \"Finder\"\n    set frontmost to true\n    click menu item \"as List\" of menu \"View\" of menu bar 1\n  end tell'\n"
+              "key_code": "2",
+              "modifiers": [
+                "command"
+              ]
             }
           ]
         }
