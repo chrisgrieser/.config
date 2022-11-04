@@ -12,7 +12,7 @@ ls.setup {
 	enable_autosnippets = true,
 	history = true, -- allow jumping back into the snippet
 	region_check_events = "InsertEnter", -- prevent <Tab> jumping back to a snippet after it has been left early
-	update_events = 'TextChanged,TextChangedI', -- live updating of snippets
+	update_events = "TextChanged,TextChangedI", -- live updating of snippets
 }
 
 --------------------------------------------------------------------------------
@@ -21,21 +21,21 @@ ls.cleanup() -- clears all snippets for writing snippets
 
 add("all", {
 	snip({trig = "!!", wordTrig = false}, "{\n\t$0\n\\}"),
-}, { type = "autosnippets" })
+}, {type = "autosnippets"})
 
 add("all", {
 	snip("modeline", "vim: filetype=bash"),
 })
 
 -- Shell (zsh)
-add("sh", {
+add("zsh", {
 	snip("##", "#!/usr/bin/env zsh\n$0"),
-	snip("PATH", 'export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\\$PATH\n$0'),
-	snip("resolve home",'${1:path}="${${1:path}/#\\~/\\$HOME}"'),
+	snip("PATH", "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\\$PATH\n$0"),
+	snip("resolve home", '${1:path}="${${1:path}/#\\~/\\$HOME}"'),
 	snip("filename", '${1:file_name}=$(basename "$${1:filepath}")'),
 	snip("parent folder", '$(dirname "$${1:filepath}")'),
-	snip("extension", '${2:ext}=\\${${1:file_name}##*.}'),
-	snip("filename w/o ext", '${1:file_name}=\\${${1:file_name}%.*}'),
+	snip("extension", "${2:ext}=\\${${1:file_name}##*.}"),
+	snip("filename w/o ext", "${1:file_name}=\\${${1:file_name}%.*}"),
 	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
 
 	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
@@ -43,11 +43,12 @@ add("sh", {
 	snip("if else", 'if [[ "$${1:var}" ]] ; then\n\t$2\nelse\n\t$0\nfi'),
 	snip("installed", 'which ${1:cli} &> /dev/null || echo "${1:cli} not installed." && exit 1'),
 
-	snip("stderr (pipe)",'2>&1 '),
+	snip("stderr (pipe)", "2>&1 "),
 	snip("null (pipe)", "&> /dev/null "),
 
 	snip("sed (pipe)", "| sed 's/${1:pattern}/${2:replacement}/g'"),
-	snip("plist extract key", 'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
+	snip("plist extract key",
+		'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
 	snip("running process", 'pgrep -x "$${1:process}" > /dev/null && $0'),
 	snip("quicklook", 'qlmanage -p "${1:filepath}"'), -- mac only
 
@@ -72,28 +73,32 @@ add("sh", {
 
 
 add("lua", {
-	snip("for", "for i=1, #${1:array} do\n\t$0\nend"),
 	snip("resolve home", 'os.getenv("HOME")'),
-	snip("augroup & autocmd",
-		'augroup("${1:groupname}", {\\})\n'..
-		'autocmd("${2:event}", {\n'..
-		'\tgroup = "${1:groupname}",\n'..
-		'\tcallback = function()\n'..
-		'\t\t$0\n'..
-		'\tend\n'..
-		"})"
-	)
+	snip("for", [[
+		for i=1, #${1:array} do
+			$0
+		end
+	]]),
+	snip("augroup & autocmd", [[
+		augroup("${1:groupname}", {\})
+		autocmd("${2:event}", {
+			group = "${1:groupname}",
+			callback = function()
+				$0
+			end
+		})
+	]]),
 })
 
 -- AppleScript
 add("applescript", {
-	snip("browser URL", 'tell application "Brave Browser" to set currentTabUrl to URL of active tab of front window'),
-	snip("browser tab title", 'tell application "Brave Browser" to set currentTabName to title of active tab of front window'),
+	snip("browser URL", 'tell application "Brave Browser" to set currentTabUrl to URL of active tab of front window\n$0'),
+	snip("browser tab title", 'tell application "Brave Browser" to set currentTabName to title of active tab of front window\n$0'),
 	snip("notify", 'display notification "${2:subtitle}" with title "${1:title}"\n$0'),
 	snip("##", "#!/usr/bin/env osascript\n$0"),
-	snip("resolve home",[[
+	snip("resolve home", [[
 		set unresolved_path to "~/Documents"
-		set AppleScript's text item delimiters to \"~/\"
+		set AppleScript's text item delimiters to "~/"
 		set theTextItems to every text item of unresolved_path
 		set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))
 		set resolved_path to theTextItems as string
@@ -104,21 +109,22 @@ add("applescript", {
 -- Alfred AppleScript
 add("applescript", {
 	snip("Get Alfred Env Var", 'set ${1:envvar} to (system attribute "${1:envvar}")'),
-	snip("Get Alfred Env Var (Unicode Fix)", 'set ${1:envvar} to do shell script "echo " & quoted form of (system attribute "${1:envvar}") & " | iconv -f UTF-8-MAC -t MACROMAN"\n$0'),
-	snip("Set Alfred Env Var", 'tell application id "com.runningwithcrayons.Alfred" to set configuration "${1:envvar}" to value ${2:value} in workflow (system attribute "alfred_workflow_bundleid")\n$0'),
+	snip("Get Alfred Env Var (Unicode Fix)",
+		'set ${1:envvar} to do shell script "echo " & quoted form of (system attribute "${1:envvar}") & " | iconv -f UTF-8-MAC -t MACROMAN"\n$0'),
+	snip("Set Alfred Env Var",
+		'tell application id "com.runningwithcrayons.Alfred" to set configuration "${1:envvar}" to value ${2:value} in workflow (system attribute "alfred_workflow_bundleid")\n$0'),
 })
 
 -- Markdown
 add("markdown", {
-	snip("github note", "> **Note**  \n> $0"),
-	snip("github warning", "> **Warning**  \n> $0"),
+	snip("github note", "> __Note__  \n> $0"),
+	snip("github warning", "> __Warning__  \n> $0"),
 })
 
 -- JavaScript (General)
 add("javascript", {
 	snip({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:replacement}");'),
-	snip("llog", 'console.log(`\\${$0}`);'),
-}, { type = "autosnippets" })
+}, {type = "autosnippets"})
 
 add("javascript", {
 	snip("ternary", "${1:cond} ? ${2:then} : ${3:else}"),
@@ -129,7 +135,7 @@ add("javascript", {
 	snip("##", "#!/usr/bin/env osascript -l JavaScript\n$0"),
 	snip("app", "const app = Application.currentApplication();\napp.includeStandardAdditions = true;\n$0"),
 	snip("shell script", "app.doShellScript('${1:shellscript}');\n$0"),
-	snip("resolve home (JXA)",'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
+	snip("resolve home (JXA)", 'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 })
 
 -- Alfred JXA
@@ -156,7 +162,7 @@ add("yaml", {
 
 -- needs to come after snippet definitions
 ls.filetype_extend("typescript", {"javascript"}) -- typescript uses all javascript snippets
-ls.filetype_extend("zsh", {"sh"})
+ls.filetype_extend("bash", {"zsh"})
 
 -- load friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()
