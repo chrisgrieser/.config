@@ -53,12 +53,16 @@ function ret.smartDuplicateLine()
 end
 
 -- construct hr considering textwidth, commentstring, and indent
-function ret.hr()
+---@param linechar? string Character used for horizontal divider. Default: "─"
+function ret.hr(linechar)
 	local indent = vim.fn.indent(".")
 	local textwidth = bo.textwidth
 	local comstr = bo.commentstring
 	local comStrLength = #comstr:gsub("%%s", ""):gsub(" ", "")
-	local linechar = "─"
+
+	if not (linechar) then linechar = "─" end
+	if #linechar > 1 then linechar:sub(1, 1) end
+
 	if comstr:find("-") then linechar = "-" end
 	local linelength = textwidth - indent - comStrLength
 	local fullLine = string.rep(linechar, linelength)
@@ -88,7 +92,7 @@ function ret.switcher()
 	local wordchar = bo.iskeyword
 	dashIsKeyword = wordchar:find(",%-$") or wordchar:find(",%-,") or wordchar:find("^%-,")
 	if dashIsKeyword then
-		bo.iskeyword = wordchar:gsub(",?%-,?", "")
+		bo.iskeyword = wordchar:gsub("%-,?", ""):gsub(",?%-", "")
 		wordUnderCursor = fn.expand("<cword>")
 		bo.iskeyword = wordchar
 	else
@@ -164,6 +168,18 @@ function ret.overscroll(action) ---@param action string The motion to be execute
 		cmd [[normal! zz]]
 	end
 	cmd("normal! " .. action)
+end
+
+function ret.quicklog()
+	local wordUnderCursor = fn.expand("<cword>")
+	local logStatement
+	local ft = bo.filetype
+	if ft == "lua" then
+		logStatement = 'print("'..wordUnderCursor..': "..'..wordUnderCursor..')'
+	else
+		print("Quicklog does not yet support "..ft..".")
+	end
+	append(".", logStatement)
 end
 
 --------------------------------------------------------------------------------

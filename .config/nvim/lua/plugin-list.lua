@@ -38,7 +38,7 @@ function PluginList()
 		"jayp0521/mason-null-ls.nvim",
 	}}
 
-	-- DAP & debugging
+	-- DAP & Debugging
 	-- use {"mfussenegger/nvim-dap", requires = {
 	-- 	"jayp0521/mason-nvim-dap.nvim",
 	-- 	"rcarriga/nvim-dap-ui",
