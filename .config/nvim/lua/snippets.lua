@@ -45,12 +45,13 @@ add("zsh", {
 
 	snip("stderr (pipe)", "2>&1 "),
 	snip("null (pipe)", "&> /dev/null "),
-
 	snip("sed (pipe)", "| sed 's/${1:pattern}/${2:replacement}/g'"),
+
 	snip("plist extract key",
 		'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
 	snip("running process", 'pgrep -x "$${1:process}" > /dev/null && $0'),
 	snip("quicklook", 'qlmanage -p "${1:filepath}"'), -- mac only
+	snip("sound", 'afplay "/System/Library/Sounds/${1:Submarine}.aiff"'), -- mac only
 
 	snip("reset", "\\033[0m"),
 	snip("black", "\\033[1;30m"),
