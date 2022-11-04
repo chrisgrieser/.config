@@ -52,7 +52,7 @@ function ret.smartDuplicateLine()
 	if valuePos then -- if line was changed, move cursor to value of the property
 		colNum = valuePos
 	end
-	api.nvim_win_set_cursor(0, {lineNum, colNum})
+	setCursor(0, {lineNum, colNum})
 end
 
 -- construct hr considering textwidth, commentstring, and indent
@@ -118,18 +118,23 @@ function ret.switcher()
 		elseif word == "right" then opposite = "left"
 		elseif word == "width" then opposite = "height"
 		elseif word == "height" then opposite = "width"
+		elseif word == "absolute" then opposite = "relative"
+		elseif word == "relative" then opposite = "absolute"
 		end
-	end
-	if bo.filetype == "lua" then
+	elseif bo.filetype == "lua" then
 		if word == "and" then opposite = "or"
 		elseif word == "or" then opposite = "and"
 		end
-	end
-	if bo.filetype == "javascript" or bo.filetype == "typescript" then
+	elseif bo.filetype == "python" then
+		if word == "True" then opposite = "False"
+		elseif word == "False" then opposite = "True"
+		end
+	elseif bo.filetype == "javascript" or bo.filetype == "typescript" then
 		if word == "const" then opposite = "let"
 		elseif word == "let" then opposite = "const"
 		end
 	end
+
 	if opposite ~= "" then
 		cmd('normal! "_ciw' .. opposite)
 		return
@@ -174,6 +179,7 @@ function ret.overscroll(action) ---@param action string The motion to be execute
 end
 
 -- log statement for variable under cursor, similar to the 'turbo console log'
+-- popular VS Code plugin
 -- supported: lua, js/ts, zsh/bash, and applescript
 ---@param addLineNumber? boolean Whether to add the line number. Default: false
 function ret.quicklog(addLineNumber)
@@ -183,18 +189,17 @@ function ret.quicklog(addLineNumber)
 	local lnStr = ""
 
 	if addLineNumber then
-		lnStr = " L" .. tostring(lineNo(".")) .. " "
+		lnStr = "L" .. tostring(lineNo(".")) .. " "
 	end
 
-
 	if ft == "lua" then
-		logStatement = 'print("'.. lnStr .. varname .. ': ", ' .. varname .. ")"
+		logStatement = 'print("' .. lnStr .. varname .. ': ", ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = "console.log({ " .. varname .. " });"
+		logStatement = "console.log({ " .. lnStr .. varname .. " });"
 	elseif ft == "zsh" or ft == "bash" then
-		logStatement = 'echo "' .. varname .. ": $" .. varname .. '"'
+		logStatement = 'echo "' .. lnStr .. varname .. ": $" .. varname .. '"'
 	elseif ft == "applescript" then
-		logStatement = 'log "' .. varname .. ': " & ' .. varname
+		logStatement = 'log "' .. lnStr .. varname .. ': " & ' .. varname
 	else
 		print("Quicklog does not support " .. ft .. " yet.")
 	end
