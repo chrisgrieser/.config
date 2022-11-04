@@ -34,8 +34,7 @@ opt.list = true
 opt.listchars = "multispace:··,tab:  ,nbsp:ﮊ"
 opt.virtualedit = "block" -- select whitespace for proper rectangles in visual block mode
 
--- trim trailing whitespaces & extra blanks at eof on save
-augroup("Mini-Lint", {})
+augroup("Mini-Lint", {}) -- trim trailing whitespaces & extra blanks at eof on save
 autocmd("BufWritePre", {
 	group = "Mini-Lint",
 	callback = function()
@@ -49,9 +48,6 @@ autocmd("BufWritePre", {
 -- Split
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
-
--- Command line
-opt.history = 777 -- do not save too much history to reduce noise for command line history search
 
 -- Mouse
 opt.mousemodel = "extend" -- deacvitate context menu, right mouse instead expands selection
@@ -85,7 +81,7 @@ autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
 	command = "silent! update"
 })
 
--- editor
+-- Editor
 opt.cursorline = true
 opt.scrolloff = 12
 opt.sidescrolloff = 24
@@ -97,7 +93,7 @@ augroup("formatopts", {})
 autocmd("BufEnter", {
 	group = "formatopts",
 	callback = function()
-		if not(bo.filetype == "markdown") then -- not for markdown, for autolist hack (see markdown.lua)
+		if not (bo.filetype == "markdown") then -- not for markdown, for autolist hack (see markdown.lua)
 			bo.formatoptions = bo.formatoptions:gsub("r", ""):gsub("o", "")
 		end
 	end
@@ -122,11 +118,14 @@ autocmd("TextYankPost", {
 -- (see also the respective "change small word" keybinding <leader><space>)
 opt.iskeyword = opt.iskeyword + {"-"}
 
+--------------------------------------------------------------------------------
+
 -- status bar & cmdline
 opt.showcmd = false -- keychords pressed
 opt.showmode = false -- don't show "-- Insert --"
 opt.laststatus = 3 -- show one status line for all splits
 opt.shortmess:append("S") -- do not show search count, since lualine does it already
+opt.history = 400 -- do not save too much history to reduce noise for command line history search
 
 augroup("clearCmdline", {})
 autocmd("BufEnter", {
@@ -155,6 +154,8 @@ autocmd("BufWinEnter", {
 	command = "silent! loadview"
 })
 
+--------------------------------------------------------------------------------
+
 -- Terminal Mode
 augroup("Terminal", {})
 autocmd("TermOpen", {
@@ -171,31 +172,28 @@ autocmd("TermClose", {
 --------------------------------------------------------------------------------
 
 -- Skeletons (Templates)
+-- apply templates for any filetype named `.config/nvim/templates/skeletion.{ft}`
 augroup("Templates", {})
-filestypesWithSkeletons = fn.system("ls '"..home.."/.config/nvim/templates/skeleton.'* | xargs basename | cut -d. -f2")
-print("L175 filestypesWithSkeletons: ", filestypesWithSkeletons)
-
--- for ft in filestypesWithSkeletons:match("(.-)\n") do
-	-- print(ft)
--- end
-
--- for ft in filestypesWithSkeletons:match("([^\n]+)") do
--- 	autocmd("BufNewFile", {
--- 		group = "Templates",
--- 		pattern = "*." .. ft,
--- 		command = "0r ~/.config/nvim/templates/skeleton." .. ft .. " | normal! G",
--- 	})
--- 	-- BufReadPost + empty file as additional condition to also auto-insert
--- 	-- skeletons created by other apps
--- 	autocmd("BufReadPost", {
--- 		group = "Templates",
--- 		pattern = "*." .. ft,
--- 		callback = function()
--- 			local curFile = fn.expand("%")
--- 			local fileIsEmpty = fn.getfsize(curFile) < 2 -- 2 to account for linebreak
--- 			if fileIsEmpty then
--- 				cmd("0r ~/.config/nvim/templates/skeleton." .. ft .. " | normal! G")
--- 			end
--- 		end
--- 	})
--- end
+ftWithSkeletons = fn.system('ls "$HOME/.config/nvim/templates/skeleton."* | xargs basename | cut -d. -f2')
+	:gmatch("(.-)\n") -- https://stackoverflow.com/a/40151628
+for ft in ftWithSkeletons do
+	local readCmd = "0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! G"
+	autocmd("BufNewFile", {
+		group = "Templates",
+		pattern = "*." .. ft,
+		command = readCmd,
+	})
+	-- BufReadPost + empty file as additional condition to also auto-insert
+	-- skeletons when empty files were created by other apps
+	autocmd("BufReadPost", {
+		group = "Templates",
+		pattern = "*." .. ft,
+		callback = function()
+			local curFile = fn.expand("%")
+			local fileIsEmpty = fn.getfsize(curFile) < 2 -- 2 to account for linebreak
+			if fileIsEmpty then
+				cmd(readCmd)
+			end
+		end
+	})
+end
