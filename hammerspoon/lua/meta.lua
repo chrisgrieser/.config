@@ -41,6 +41,5 @@ end)
 hs.urlevent.bind("clear-console",hs.console.clearConsole)
 
 -- aliases
-i = hs.inspect -- to inspect tables in the console
-a = hs.application
-
+I = hs.inspect -- to inspect tables in the console
+A = hs.application

@@ -82,7 +82,7 @@ keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<C-A-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
 keymap("x", "<Space>", '"_c')
 
--- change small word (i.e. a simpler version of vim-textobj-variable-segment,
+-- change sub-word (i.e. a simpler version of vim-textobj-variable-segment,
 -- but not supporting CamelCase)
 keymap("n", "<leader><Space>", function()
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
@@ -90,6 +90,8 @@ keymap("n", "<leader><Space>", function()
 	cmd [[startinsert]] -- :Normal does not allow to end in insert mode
 	opt.iskeyword = opt.iskeyword + {"_", "-"}
 end)
+
+
 
 keymap({"o", "x"}, "iq", 'i"') -- double [q]uote
 keymap({"o", "x"}, "aq", 'a"')
