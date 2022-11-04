@@ -42,8 +42,6 @@ setlocal("linebreak", true) -- do not break words for soft wrap
 setlocal("colorcolumn", "") -- deactivate ruler
 keymap({"n", "v"}, "H", "g^", opts)
 keymap({"n", "v"}, "L", "g$", opts)
-keymap({"n", "v"}, "A", "g$a", opts)
-keymap({"n", "v"}, "I", "g^i", opts)
 keymap({"n", "v"}, "J", "7gj", opts)
 keymap({"n", "v"}, "K", "7gk", opts)
 keymap({"n", "v"}, "k", "gk", opts)
