@@ -6,6 +6,9 @@ local append = vim.fn.append
 local bo = vim.bo
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
+local function wordUnderCursor()
+	return vim.fn.expand("<cword>")
+end
 
 local ret = {}
 
@@ -88,15 +91,15 @@ end
 
 function ret.switcher()
 	-- ignore 'iskeyword' option when retrieving word under cursor
-	local wordUnderCursor
+	local word
 	local wordchar = bo.iskeyword
 	dashIsKeyword = wordchar:find(",%-$") or wordchar:find(",%-,") or wordchar:find("^%-,")
 	if dashIsKeyword then
 		bo.iskeyword = wordchar:gsub("%-,?", ""):gsub(",?%-", "")
-		wordUnderCursor = fn.expand("<cword>")
+		word = wordUnderCursor()
 		bo.iskeyword = wordchar
 	else
-		wordUnderCursor = fn.expand("<cword>")
+		word = wordUnderCursor()
 	end
 
 	local col = getCursor(0)[2] + 1
@@ -104,27 +107,27 @@ function ret.switcher()
 
 	-- toggle words
 	local opposite = ""
-	if wordUnderCursor == "true" then opposite = "false"
-	elseif wordUnderCursor == "false" then opposite = "true"
+	if word == "true" then opposite = "false"
+	elseif word == "false" then opposite = "true"
 	end
 
 	if bo.filetype == "css" then
-		if wordUnderCursor == "top" then opposite = "bottom"
-		elseif wordUnderCursor == "bottom" then opposite = "top"
-		elseif wordUnderCursor == "left" then opposite = "right"
-		elseif wordUnderCursor == "right" then opposite = "left"
-		elseif wordUnderCursor == "width" then opposite = "height"
-		elseif wordUnderCursor == "height" then opposite = "width"
+		if word == "top" then opposite = "bottom"
+		elseif word == "bottom" then opposite = "top"
+		elseif word == "left" then opposite = "right"
+		elseif word == "right" then opposite = "left"
+		elseif word == "width" then opposite = "height"
+		elseif word == "height" then opposite = "width"
 		end
 	end
 	if bo.filetype == "lua" then
-		if wordUnderCursor == "and" then opposite = "or"
-		elseif wordUnderCursor == "or" then opposite = "and"
+		if word == "and" then opposite = "or"
+		elseif word == "or" then opposite = "and"
 		end
 	end
 	if bo.filetype == "javascript" or bo.filetype == "typescript" then
-		if wordUnderCursor == "const" then opposite = "let"
-		elseif wordUnderCursor == "let" then opposite = "const"
+		if word == "const" then opposite = "let"
+		elseif word == "let" then opposite = "const"
 		end
 	end
 	if opposite ~= "" then
@@ -171,21 +174,29 @@ function ret.overscroll(action) ---@param action string The motion to be execute
 end
 
 -- log statement for variable under cursor, similar to the 'turbo console log'
--- supported: lua, js/ts, zsh/bash, and applescript (sic!)
-function ret.quicklog()
-	local wordUnderCursor = fn.expand("<cword>")
+-- supported: lua, js/ts, zsh/bash, and applescript
+---@param addLineNumber? boolean Whether to add the line number. Default: false
+function ret.quicklog(addLineNumber)
+	local varname = wordUnderCursor()
 	local logStatement
 	local ft = bo.filetype
+	local lnStr = ""
+
+	if addLineNumber then
+		lnStr = " L" .. tostring(lineNo(".")) .. " "
+	end
+
 
 	if ft == "lua" then
-		logStatement = 'print("'..wordUnderCursor..': "..'..wordUnderCursor..')'
+		logStatement = 'print("'.. lnStr .. varname .. ': ", ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = 'console.log({ '..wordUnderCursor..' });'
+		logStatement = "console.log({ " .. varname .. " });"
 	elseif ft == "zsh" or ft == "bash" then
+		logStatement = 'echo "' .. varname .. ": $" .. varname .. '"'
 	elseif ft == "applescript" then
-		logStatement = 'log "'..wordUnderCursor..'": & '..wordUnderCursor
+		logStatement = 'log "' .. varname .. ': " & ' .. varname
 	else
-		print("Quicklog does not yet support "..ft..".")
+		print("Quicklog does not support " .. ft .. " yet.")
 	end
 
 	append(".", logStatement)
