@@ -6,9 +6,7 @@ local append = vim.fn.append
 local bo = vim.bo
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
-local function wordUnderCursor()
-	return vim.fn.expand("<cword>")
-end
+local function wordUnderCursor() return vim.fn.expand("<cword>") end
 
 local ret = {}
 
@@ -28,6 +26,8 @@ function ret.duplicateVisual()
 	vim.fn.setreg("z", prevReg)
 end
 
+-- Duplicate line under cursor, and change occurences of certain words to their 
+-- opposite, e.g., "right" to "left". Indended for languages like CSS.
 function ret.smartDuplicateLine()
 	local line = getline(".")
 	if line:find("top") then
@@ -55,7 +55,7 @@ function ret.smartDuplicateLine()
 	setCursor(0, {lineNum, colNum})
 end
 
--- construct hr considering textwidth, commentstring, and indent
+-- insert horizontal divider considering textwidth, commentstring, and indent
 ---@param linechar? string Character used for horizontal divider. Default: "─"
 function ret.hr(linechar)
 	local indent = vim.fn.indent(".")
@@ -63,10 +63,16 @@ function ret.hr(linechar)
 	local comstr = bo.commentstring
 	local comStrLength = #comstr:gsub("%%s", ""):gsub(" ", "")
 
-	if not (linechar) then linechar = "─" end
-	if #linechar > 1 then linechar:sub(1, 1) end
+	if not (linechar) then
+		if comstr:find("-") then
+			linechar = "-"
+		else
+			linechar = "─"
+		end
+	elseif #linechar > 1 then
+		linechar:sub(1, 1)
+	end
 
-	if comstr:find("-") then linechar = "-" end
 	local linelength = textwidth - indent - comStrLength
 	local fullLine = string.rep(linechar, linelength)
 	local hr = comstr:gsub(" ?%%s ?", fullLine)
@@ -74,7 +80,7 @@ function ret.hr(linechar)
 	append(".", {hr, ""})
 	cmd [[normal! j==]] -- move down and indent
 
-	-- fix for blank lines inside indentations
+	-- fix for blank lines inside indented blocks
 	local line = getline(".")
 	if bo.expandtab then
 		line = line:sub(1, textwidth)
@@ -89,6 +95,13 @@ function ret.hr(linechar)
 
 end
 
+-- Drop-in replacement for vim's `~` command. If the word under cursor has a
+-- reasonable opposite in the current language (e.g., "top" and "bottom" in
+-- css), then the word will be toggled. 
+-- Otherwise will check character under cursor. If it is a "reversible"
+-- character, the character will be switched, e.g. "(" to ")". If it is a
+-- letter, falls back to the default `~` behavior of toggling between upper and
+-- lower case.
 function ret.switcher()
 	-- ignore 'iskeyword' option when retrieving word under cursor
 	local word
@@ -166,7 +179,9 @@ function ret.switcher()
 	end
 	if switched ~= "" then
 		cmd("normal! r" .. switched)
+		return
 	end
+	print("Nothing under the cursor that can be switched")
 end
 
 function ret.overscroll(action) ---@param action string The motion to be executed when not at EOF
@@ -180,14 +195,13 @@ end
 
 -- log statement for variable under cursor, similar to the 'turbo console log'
 -- popular VS Code plugin
--- supported: lua, js/ts, zsh/bash, and applescript
+-- supported: lua, js/ts, zsh/bash/fish, and applescript
 ---@param addLineNumber? boolean Whether to add the line number. Default: false
 function ret.quicklog(addLineNumber)
 	local varname = wordUnderCursor()
 	local logStatement
 	local ft = bo.filetype
 	local lnStr = ""
-
 	if addLineNumber then
 		lnStr = "L" .. tostring(lineNo(".")) .. " "
 	end
@@ -195,8 +209,8 @@ function ret.quicklog(addLineNumber)
 	if ft == "lua" then
 		logStatement = 'print("' .. lnStr .. varname .. ': ", ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = "console.log({ " .. lnStr .. varname .. " });"
-	elseif ft == "zsh" or ft == "bash" then
+		logStatement = 'console.log("' .. lnStr .. varname .. ': " + ' .. varname .. ")"
+	elseif ft == "zsh" or ft == "bash" or ft == "fish" then
 		logStatement = 'echo "' .. lnStr .. varname .. ": $" .. varname .. '"'
 	elseif ft == "applescript" then
 		logStatement = 'log "' .. lnStr .. varname .. ': " & ' .. varname
