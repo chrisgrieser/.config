@@ -1,5 +1,5 @@
--- Default vim settings: https://neovim.io/doc/user/vim_diff.html
 require("utils")
+-- Default vim settings: https://neovim.io/doc/user/vim_diff.html
 -------------------------------------------------------------------------------
 
 -- timeout for awaiting keystrokes
@@ -71,12 +71,16 @@ opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
 opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
 opt.autochdir = true -- always current directory
+augroup("autocd", {})
 autocmd({"BufWinEnter"}, {-- since autochdir is not always reliable…?
-	command = "cd %:p:h"
+	group = "autocd",
+	command = "cd %:p:h",
 })
 
 -- auto-save
+augroup("autosave", {})
 autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
+	group = "autosave",
 	pattern = "?*",
 	command = "silent! update"
 })
@@ -89,7 +93,9 @@ opt.sidescrolloff = 24
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
+augroup("formatopts", {})
 autocmd("BufEnter", {
+	group = "formatopts",
 	callback = function()
 		if not(bo.filetype == "markdown") then -- not for markdown, for autolist hack (see markdown.lua)
 			bo.formatoptions = bo.formatoptions:gsub("r", ""):gsub("o", "")
@@ -104,12 +110,11 @@ autocmd("BufReadPost", {
 	command = [[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' |  exe "normal! g`\"" | endif]]
 })
 
--- clear cmdline on entering buffer
-autocmd("BufEnter", {command = "echo"})
-
 -- clipboard & yanking
 opt.clipboard = "unnamedplus"
+augroup("highlightedYank", {})
 autocmd("TextYankPost", {
+	group = "highlightedYank",
 	callback = function() vim.highlight.on_yank {timeout = 2000} end
 })
 
@@ -122,6 +127,12 @@ opt.showcmd = false -- keychords pressed
 opt.showmode = false -- don't show "-- Insert --"
 opt.laststatus = 3 -- show one status line for all splits
 opt.shortmess:append("S") -- do not show search count, since lualine does it already
+
+augroup("clearCmdline", {})
+autocmd("BufEnter", {
+	group = "clearCmdline",
+	command = "echo",
+}) -- clear cmdline on entering buffer
 
 --------------------------------------------------------------------------------
 
@@ -161,24 +172,30 @@ autocmd("TermClose", {
 
 -- Skeletons (Templates)
 augroup("Templates", {})
-local filestypesWithSkeletons = {"lua", "sh", "applescript", "js"}
-for i = 1, #filestypesWithSkeletons do
-	local ft = filestypesWithSkeletons[i]
-	autocmd("BufNewFile", {
-		group = "Templates",
-		pattern = "*." .. ft,
-		command = "0r ~/.config/nvim/templates/skeleton." .. ft .. " | normal! G",
-	})
-	-- BufReadPost + empty file as additional condition to also auto-insert
-	-- skeletons created by other apps
-	autocmd("BufReadPost", {
-		group = "Templates",
-		pattern = "*." .. ft,
-		callback = function()
-			local fileIsEmpty = fn.getfsize(fn.expand("%")) < 2 -- 2 to account for linebreak
-			if fileIsEmpty then
-				cmd("0r ~/.config/nvim/templates/skeleton." .. ft .. " | normal! G")
-			end
-		end
-	})
-end
+filestypesWithSkeletons = fn.system("ls '"..home.."/.config/nvim/templates/skeleton.'* | xargs basename | cut -d. -f2")
+print("L175 filestypesWithSkeletons: ", filestypesWithSkeletons)
+
+-- for ft in filestypesWithSkeletons:match("(.-)\n") do
+	-- print(ft)
+-- end
+
+-- for ft in filestypesWithSkeletons:match("([^\n]+)") do
+-- 	autocmd("BufNewFile", {
+-- 		group = "Templates",
+-- 		pattern = "*." .. ft,
+-- 		command = "0r ~/.config/nvim/templates/skeleton." .. ft .. " | normal! G",
+-- 	})
+-- 	-- BufReadPost + empty file as additional condition to also auto-insert
+-- 	-- skeletons created by other apps
+-- 	autocmd("BufReadPost", {
+-- 		group = "Templates",
+-- 		pattern = "*." .. ft,
+-- 		callback = function()
+-- 			local curFile = fn.expand("%")
+-- 			local fileIsEmpty = fn.getfsize(curFile) < 2 -- 2 to account for linebreak
+-- 			if fileIsEmpty then
+-- 				cmd("0r ~/.config/nvim/templates/skeleton." .. ft .. " | normal! G")
+-- 			end
+-- 		end
+-- 	})
+-- end
