@@ -180,13 +180,13 @@ keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- using delete to preserve comm
 augroup("recording", {})
 autocmd({"RecordingLeave", "VimEnter"}, {
 	group = "recording",
-	callback = function() keymap("n", "0", "qz") end
+	callback = function() keymap("n", "0", "qy") end -- not saving in throwaway register z, so the respective keymaps can be used during a macro
 })
 autocmd("RecordingEnter", {
 	group = "recording",
 	callback = function() keymap("n", "0", "q") end
 })
-keymap("n", "9", "qz") -- quick replay (don't use counts that high anyway)
+keymap("n", "9", "qy") -- quick replay (don't use counts that high anyway)
 
 --------------------------------------------------------------------------------
 
@@ -255,7 +255,7 @@ keymap("n", "<C-u>", "U") -- undo line, needs remapping since shadowed
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
 -- Logging
-keymap("n", "<leader>ll", function () qol.quicklog(true) end)
+keymap("n", "<leader>ll", function() qol.quicklog(true) end)
 --------------------------------------------------------------------------------
 
 -- Line & Character Movement (vim.move)
@@ -359,9 +359,9 @@ keymap("n", "<leader>r", function()
 
 	elseif bo.filetype == "markdown" then
 		local filepath = fn.expand("%:p")
-		local pdfFilename = fn.expand("%:t:r")..".pdf"
-		fn.system("pandoc '"..filepath.."' --output='"..pdfFilename.."' --pdf-engine=wkhtmltopdf")
-		fn.system("open '"..pdfFilename.."'")
+		local pdfFilename = fn.expand("%:t:r") .. ".pdf"
+		fn.system("pandoc '" .. filepath .. "' --output='" .. pdfFilename .. "' --pdf-engine=wkhtmltopdf")
+		fn.system("open '" .. pdfFilename .. "'")
 
 	elseif bo.filetype == "lua" then
 		local parentFolder = fn.expand("%:p:h")
