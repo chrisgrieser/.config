@@ -173,3 +173,6 @@ matches:
   - trigger: dei
     replace: die
     word: true
+  - trigger: btu
+    replace: but
+    word: true
