@@ -155,7 +155,9 @@ autocmd({"BufEnter", "FocusGained"}, {
 
 function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
 	local branch = g.cur_branch
-	return not (branch == "main" or branch == "master")
+	local notMainBranch = branch ~= "main" and branch ~= "master"
+	local validFiletype = bo.filetype ~= "help"
+	return notMainBranch and validFiletype
 end
 
 require("lualine").setup {
