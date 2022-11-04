@@ -172,19 +172,21 @@ keymap("n", "gUq", "mzgUCOM`z", {remap = true})
 keymap("n", "sq", "mzsCOM`z", {remap = true})
 keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- using delete to preserve commentstring
 
--- Macro
+--------------------------------------------------------------------------------
+
+-- MACRO
 -- one-off recording (+ q needs remapping due to being mapped to comments)
 -- needs temporary remapping, since there is no "recording mode"
 augroup("recording", {})
 autocmd({"RecordingLeave", "VimEnter"}, {
 	group = "recording",
-	callback = function() keymap("n", "0", "qq") end
+	callback = function() keymap("n", "0", "qz") end
 })
 autocmd("RecordingEnter", {
 	group = "recording",
 	callback = function() keymap("n", "0", "q") end
 })
-keymap("n", "9", "Q") -- quick replay (don't use counts that high anyway)
+keymap("n", "9", "qz") -- quick replay (don't use counts that high anyway)
 
 --------------------------------------------------------------------------------
 
