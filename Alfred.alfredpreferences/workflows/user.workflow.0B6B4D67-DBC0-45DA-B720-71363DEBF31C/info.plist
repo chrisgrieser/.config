@@ -65,11 +65,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>49C1CB43-3C55-4085-BBF5-A406476E7309</string>
+				<string>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string>^: delete</string>
+				<string>⌃: Delete</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -79,6 +79,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>EC5DBDBD-F5AC-476A-8757-5C1577F33D11</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -118,19 +131,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>EA84A1D9-5B40-48C6-B910-0E4E2E12B31C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>49C1CB43-3C55-4085-BBF5-A406476E7309</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -756,22 +756,27 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>applescript</key>
-				<string>on alfred_script(q)
-	set toDelete to q as POSIX file
-	tell application "Finder" 
-		delete toDelete
-	end tell
-end alfred_script</string>
-				<key>cachescript</key>
+				<key>concurrently</key>
 				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>file=$1
+
+mv -fr "$file" "$HOME/.Trash/"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.applescript</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>49C1CB43-3C55-4085-BBF5-A406476E7309</string>
+			<string>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1051,6 +1056,17 @@ open .</string>
 			<key>ypos</key>
 			<real>615</real>
 		</dict>
+		<key>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>delete file</string>
+			<key>xpos</key>
+			<real>855</real>
+			<key>ypos</key>
+			<real>500</real>
+		</dict>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<dict>
 			<key>colorindex</key>
@@ -1081,17 +1097,6 @@ open .</string>
 			<real>220</real>
 			<key>ypos</key>
 			<real>615</real>
-		</dict>
-		<key>49C1CB43-3C55-4085-BBF5-A406476E7309</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>delete file</string>
-			<key>xpos</key>
-			<real>855</real>
-			<key>ypos</key>
-			<real>500</real>
 		</dict>
 		<key>4B4F74D9-0F04-44F9-B1F5-1F7DFCF57B2C</key>
 		<dict>
