@@ -11,8 +11,8 @@ local opts = {buffer = true, silent = true}
 cmd [[
 	setlocal comments="b:*,b:-,b:+"
 	setlocal formatoptions+=ro
+	setlocal formatoptions-=c
 ]]
-
 
 -- spelling
 setlocal("spell", true)
