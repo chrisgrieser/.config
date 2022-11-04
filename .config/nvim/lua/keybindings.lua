@@ -1,4 +1,5 @@
 require("utils")
+local qol = require("quality-of-life")
 --------------------------------------------------------------------------------
 -- META
 g.mapleader = ","
@@ -39,8 +40,8 @@ keymap({"n", "x", "o"}, "L", "$")
 keymap({"x", "o"}, "J", "7j")
 keymap({"n", "x", "o"}, "K", "7k", {silent = true})
 
-keymap("n", "j", function() require("quality-of-life").overscroll("j") end, {silent = true})
-keymap("n", "J", function() require("quality-of-life").overscroll("7j") end, {silent = true})
+keymap("n", "j", function() qol.overscroll("j") end, {silent = true})
+keymap("n", "J", function() qol.overscroll("7j") end, {silent = true})
 keymap({"n", "x"}, "G", "Gzz")
 
 -- Jump History
@@ -69,13 +70,14 @@ keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
 keymap({"n", "x", "o"}, "ä", "`") -- Goto Mark
 
 --------------------------------------------------------------------------------
--- EDITING
 
 -- CLIPBOARD
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("n", "P", '"0p') -- paste what was yanked, not what was deleted
+
+--------------------------------------------------------------------------------
 
 -- TEXT OBJECTS
 keymap("n", "<Space>", '"_ciw') -- change word
@@ -90,8 +92,6 @@ keymap("n", "<leader><Space>", function()
 	cmd [[startinsert]] -- :Normal does not allow to end in insert mode
 	opt.iskeyword = opt.iskeyword + {"_", "-"}
 end)
-
-
 
 keymap({"o", "x"}, "iq", 'i"') -- double [q]uote
 keymap({"o", "x"}, "aq", 'a"')
@@ -142,6 +142,8 @@ require("nvim-surround").setup {
 	},
 }
 
+--------------------------------------------------------------------------------
+
 -- COMMENTS (mnemonic: [q]uiet text)
 require("Comment").setup {
 	toggler = {
@@ -173,6 +175,8 @@ keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- using delete to preserve comm
 -- Macro
 keymap("n", "<leader>q", "q") -- needs remapping due to q mapping to comments
 
+--------------------------------------------------------------------------------
+
 -- Whitespace Control
 keymap("n", "!", "a <Esc>h")
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
@@ -186,7 +190,7 @@ keymap("n", "<BS>", function() -- reduce multiple blank lines to exactly one
 end)
 
 -- [H]ori[z]ontal Ruler
-keymap("n", "zh", require("quality-of-life").hr)
+keymap("n", "zh", qol.hr)
 
 -- Indention
 keymap("n", "<Tab>", ">>")
@@ -198,11 +202,13 @@ keymap({"n", "x"}, "^", "=") -- auto-indent
 keymap("n", "^^", "mz=ip`z") -- since indenting paragraph is far more common than indenting a line
 keymap("n", "^A", "mzgg=G`z") -- entire file
 
+--------------------------------------------------------------------------------
+
 -- toggle word between Capital and lower case
 keymap("n", "ü", "mzlblgueh~`z")
 
 -- toggle case or switch direction of char (e.g. > to <)
-keymap("n", "Ü", require("quality-of-life").switcher)
+keymap("n", "Ü", qol.switcher)
 
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`"}
@@ -227,10 +233,19 @@ keymap("n", "S", substi.eol)
 keymap("x", "s", substi.visual)
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
-keymap("n", "R", require("quality-of-life").duplicateLine)
-keymap("x", "R", require("quality-of-life").duplicateVisual)
+keymap("n", "R", qol.duplicateLine)
+keymap("x", "R", qol.duplicateVisual)
 
--- Line & Character Movement (vim.move plugin)
+-- Undo
+keymap({"n", "x"}, "U", "<C-r>") -- redo
+keymap("n", "<C-u>", "U") -- undo line, needs remapping since shadowed
+keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
+
+-- Logging
+keymap("n", "<leader>ll", qol.quicklog)
+--------------------------------------------------------------------------------
+
+-- Line & Character Movement (vim.move)
 g.move_map_keys = 0 -- disable default keymaps of vim.move
 keymap("n", "<Down>", "<Plug>MoveLineDown")
 keymap("n", "<Up>", "<Plug>MoveLineUp")
@@ -254,11 +269,6 @@ keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 
 keymap("n", "<C-q>", "gqq") -- needs remapping since shadowed
 keymap("x", "<C-q>", "gq")
-
--- Undo
-keymap({"n", "x"}, "U", "<C-r>") -- redo
-keymap("n", "<C-u>", "U") -- undo line, needs remapping since shadowed
-keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE

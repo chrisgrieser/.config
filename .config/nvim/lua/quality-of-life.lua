@@ -170,16 +170,26 @@ function ret.overscroll(action) ---@param action string The motion to be execute
 	cmd("normal! " .. action)
 end
 
+-- log statement for variable under cursor, similar to the 'turbo console log'
+-- supported: lua, js/ts, zsh/bash, and applescript (sic!)
 function ret.quicklog()
 	local wordUnderCursor = fn.expand("<cword>")
 	local logStatement
 	local ft = bo.filetype
+
 	if ft == "lua" then
 		logStatement = 'print("'..wordUnderCursor..': "..'..wordUnderCursor..')'
+	elseif ft == "javascript" or ft == "typescript" then
+		logStatement = 'console.log({ '..wordUnderCursor..' });'
+	elseif ft == "zsh" or ft == "bash" then
+	elseif ft == "applescript" then
+		logStatement = 'log "'..wordUnderCursor..'": & '..wordUnderCursor
 	else
 		print("Quicklog does not yet support "..ft..".")
 	end
+
 	append(".", logStatement)
+	cmd [[normal! j==]] -- move down and indent
 end
 
 --------------------------------------------------------------------------------
