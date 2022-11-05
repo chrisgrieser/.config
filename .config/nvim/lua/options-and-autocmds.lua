@@ -34,17 +34,6 @@ opt.list = true
 opt.listchars = "multispace:··,tab:  ,nbsp:ﮊ"
 opt.virtualedit = "block" -- select whitespace for proper rectangles in visual block mode
 
-augroup("Mini-Lint", {}) -- trim trailing whitespaces & extra blanks at eof on save
-autocmd("BufWritePre", {
-	group = "Mini-Lint",
-	callback = function()
-		local save_view = fn.winsaveview() -- save cursor positon
-		cmd [[%s/\s\+$//e]]
-		cmd [[silent! %s#\($\n\s*\)\+\%$##]] -- https://stackoverflow.com/a/7496112
-		fn.winrestview(save_view)
-	end
-})
-
 -- Split
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
@@ -57,15 +46,13 @@ opt.title = true
 opt.titlelen = 0 -- do not shorten title
 opt.titlestring = "%{expand(\"%:p\")} [%{mode()}]"
 
--- width
-opt.textwidth = 80 -- used by `gq` wrap, etc.
-opt.wrap = false
-opt.colorcolumn = "+1" -- relative to textwidth
-
 -- Editor
 opt.cursorline = true
 opt.scrolloff = 12
 opt.sidescrolloff = 24
+opt.textwidth = 80 -- used by `gq` wrap, etc.
+opt.wrap = false
+opt.colorcolumn = "+1" -- relative to textwidth
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
@@ -101,11 +88,12 @@ opt.iskeyword = opt.iskeyword + {"-"}
 
 --------------------------------------------------------------------------------
 
--- FILES
+-- FILES & SAVING
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
 opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
 opt.autochdir = true -- always current directory
+opt.updatetime = 1500 -- affects current symbol highlight from treesitter-refactor
 augroup("autocd", {})
 autocmd({"BufWinEnter"}, {-- since autochdir is not always reliable…?
 	group = "autocd",
@@ -117,6 +105,17 @@ autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
 	group = "autosave",
 	pattern = "?*",
 	command = "silent! update"
+})
+
+augroup("Mini-Lint", {}) -- trim trailing whitespaces & extra blanks at eof on save
+autocmd("BufWritePre", {
+	group = "Mini-Lint",
+	callback = function()
+		local save_view = fn.winsaveview() -- save cursor positon
+		cmd [[%s/\s\+$//e]]
+		cmd [[silent! %s#\($\n\s*\)\+\%$##]] -- https://stackoverflow.com/a/7496112
+		fn.winrestview(save_view)
+	end
 })
 
 --------------------------------------------------------------------------------

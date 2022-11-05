@@ -95,15 +95,15 @@ require("nvim-treesitter.configs").setup {
 			enable = true,
 			clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
 		},
-		highlight_current_scope = { enable = true },
+		highlight_current_scope = { enable = false },
 		navigation = {
 			enable = true,
 			keymaps = {
-				goto_definition = "gnd",
-				list_definitions = "gnD",
-				list_definitions_toc = "gO",
-				goto_next_usage = "<a-*>",
-				goto_previous_usage = "<a-#>",
+				goto_definition = "<Nop>",
+				list_definitions = "<Nop>",
+				list_definitions_toc = "<Nop>",
+				goto_next_usage = "gn",
+				goto_previous_usage = "gN",
 			},
 		},
 	},
