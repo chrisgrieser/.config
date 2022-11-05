@@ -174,9 +174,10 @@ autocmd("TermClose", {
 -- Skeletons (Templates)
 -- apply templates for any filetype named `.config/nvim/templates/skeletion.{ft}`
 augroup("Templates", {})
-ftWithSkeletons = fn.system('ls "$HOME/.config/nvim/templates/skeleton."* | xargs basename | cut -d. -f2')
-	:gmatch("(.-)\n") -- https://stackoverflow.com/a/40151628
-for ft in ftWithSkeletons do
+local filetypeList = fn.system('ls "$HOME/.config/nvim/templates/skeleton."* | xargs basename | cut -d. -f2')
+local ftWithSkeletons = split(filetypeList, "\n")
+for _, ft in ipairs(ftWithSkeletons) do
+	if ft == "" then break end
 	local readCmd = "0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! G"
 	autocmd("BufNewFile", {
 		group = "Templates",
