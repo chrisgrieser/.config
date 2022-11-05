@@ -10,12 +10,15 @@
 
 ## Configurations of Interest
 Most people tell me they find the following configurations useful:
-- [.zshrc setup](/zsh/)
+- [.zshrc setup](/zsh)
 - [Starship Prompt](/.config/starship/starship.toml)
 - [Pandoc configs & pointers on how to use pandoc](/pandoc/#Pandoc)
 - [complex modifications for Karabiner Elements](/.config/karabiner)
 - [.obsidian.vimrc](Obsidian%20vim/obsidian.vimrc) via the [vimrc Support Plugin](https://obsidian.md/plugins?id=obsidian-vimrc-support)
 - [neovim config](.config/nvim)
+
+> __Note__
+> I also have a blog for intermediary-advanced neovim tips: <https://nanotipsforvim.prose.sh/>
 
 ## What is this repository?
 Essentially, it's all of my dotfiles, that I put online for backup, version history, and easy sharing with others.
