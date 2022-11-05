@@ -25,6 +25,7 @@ function PluginList()
 		requires = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"p00f/nvim-ts-rainbow",
+			"nvim-treesitter/nvim-treesitter-refactor",
 		}
 	}
 	use "mityu/vim-applescript" -- applescript syntax highlighting
