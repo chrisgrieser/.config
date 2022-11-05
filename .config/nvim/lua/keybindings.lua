@@ -191,7 +191,7 @@ keymap("n", "9", "qy") -- quick replay (don't use counts that high anyway)
 --------------------------------------------------------------------------------
 
 -- Whitespace Control
-keymap("n", "!", "a <Esc>h")
+keymap("n", "!", "a <Esc>h") -- insert space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
 keymap("n", "<BS>", function() -- reduce multiple blank lines to exactly one
@@ -233,9 +233,9 @@ keymap("n", "X", 'mz$"_x`z')
 
 -- Spelling (mnemonic: [z]pelling)
 keymap("n", "zl", telescope.spell_suggest)
-keymap("n", "gz", "]s") -- next misspelling
-keymap("n", "gZ", "[s") -- prev misspelling
-keymap("n", "za", "1z=") -- Autocorrect word under cursor (= select 1st suggestion)
+keymap("n", "gl", "]s") -- next misspelling
+keymap("n", "gL", "[s") -- prev misspelling
+keymap("n", "zf", "1z=") -- auto[f]ix word under cursor (= select 1st suggestion)
 
 -- [S]ubstitute Operator (substitute.nvim)
 local substi = require("substitute")

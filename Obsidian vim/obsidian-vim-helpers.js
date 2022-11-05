@@ -1,5 +1,16 @@
 /* global app, Notice */
+// all hail the @koala
 //------------------------------------------------------------------------------
+
+// eslint-disable-next-line no-unused-vars
+function appendSpace() {
+	const editor = app.workspace.activeLeaf.view.editor;
+	const pos = editor.getCursor();
+	const convPos = editor.posToOffset(pos);
+	const cm6 = editor.cm;
+	const transaction = cm6.state.update({ changes: { from: convPos + 1, to: convPos + 1, insert: " " } });
+	cm6.dispatch(transaction);
+}
 
 // VIM SNEAK
 function extractRegexp(text, chars, currentCursor, forward) {

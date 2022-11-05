@@ -135,12 +135,17 @@ vmap M :mergeLines
 " split line at cursor
 nmap | a<CR><Esc>k$
 
+" WHITSPACE CONTROL
 " Add Blank Line above/below
 nmap = mzO<Esc>`z
 nmap _ mzo<Esc>`z
-" these require cursor being on the right end of the selection though...
+" in visual mode requires cursor being on the right end of the selection though…
 vmap = <Esc>O<Esc>gv
 vmap _ <Esc>o<Esc>gv
+
+" append space after cursor position
+exmap appendSpace jsfile Meta/obsidian-vim-helpers.js {appendSpace()}
+nmap ! :appendSpace
 
 " Append punctuation to end of line
 " `&§&` are helper commands for addings substitution to command chain,
