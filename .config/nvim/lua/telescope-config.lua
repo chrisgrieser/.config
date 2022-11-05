@@ -19,6 +19,7 @@ require("telescope").setup {
 			"%.pxd",
 			"Spoons/", -- Hammerspoon spoons
 			"info.plist", -- Alfred Config Data
+			"complex_modifications/.*json", -- Karabiner JSONs
 		},
 		mappings = {
 			i = {
