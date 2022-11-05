@@ -19,7 +19,7 @@ require("telescope").setup {
 			"%.pxd",
 			"Spoons/", -- Hammerspoon spoons
 			"info.plist", -- Alfred Config Data
-			"complex_modifications/.*json", -- Karabiner JSONs
+			-- "app%-specific%-bindings.json", -- Karabiner JSONs
 		},
 		mappings = {
 			i = {
@@ -125,4 +125,3 @@ require("telescope").setup {
 
 -- have to be loaded after telescope config
 require("telescope").load_extension("ui-select") -- use telescope for selections like code actions
-

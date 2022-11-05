@@ -1,4 +1,4 @@
-require('nvim-treesitter.configs').setup {
+require("nvim-treesitter.configs").setup {
 	ensure_installed = {
 		"javascript",
 		"typescript",
@@ -20,7 +20,7 @@ require('nvim-treesitter.configs').setup {
 		"jsonc",
 	},
 
-	auto_install = true,	-- install missing parers when entering a buffer
+	auto_install = true, -- install missing parers when entering a buffer
 
 	highlight = {
 		enable = true,
@@ -44,8 +44,8 @@ require('nvim-treesitter.configs').setup {
 		disable = {}, -- NOTE: these are the names of the parsers and not the filetype
 	},
 
-	textobjects = { -- textobj plugin
-		move = { -- move to next comment / function
+	textobjects = {-- textobj plugin
+		move = {-- move to next comment / function
 			enable = true,
 			set_jumps = true,
 			goto_next_start = {
@@ -82,10 +82,29 @@ require('nvim-treesitter.configs').setup {
 			include_surrounding_whitespace = false,
 		},
 	},
+
 	rainbow = { -- rainbow plugin
 		enable = true,
 		disable = {}, -- list of languages you want to disable the plugin for
 		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
 		max_file_lines = 2000,
-	}
+	},
+
+	refactor = { -- refactor plugin
+		highlight_definitions = {
+			enable = true,
+			clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
+		},
+		highlight_current_scope = { enable = true },
+		navigation = {
+			enable = true,
+			keymaps = {
+				goto_definition = "gnd",
+				list_definitions = "gnD",
+				list_definitions_toc = "gO",
+				goto_next_usage = "<a-*>",
+				goto_previous_usage = "<a-#>",
+			},
+		},
+	},
 }
