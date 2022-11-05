@@ -47,23 +47,6 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^net\.highlightsapp\.universal$
-  - description: "🅰️🖥 Alacritty: Undo"
-    manipulators:
-      # ⌘Z → ⌃Z (zle-widget: undo)
-      - type: basic
-        from:
-          key_code: "y"  # z and y switched
-          modifiers:
-            mandatory:
-              - command
-        to:
-          - key_code: "y"
-            modifiers:
-              - control
-        conditions:
-          - type: frontmost_application_if
-            file_paths:
-              - alacritty$
   - description: "🅰️🏞 YouTube: ⌘+P → Picture-in-Picture Mode"
     manipulators:
       - type: basic
@@ -841,6 +824,90 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
+  - description: "🅰️ Alacritty: Undo"
+    manipulators:
+      # ⌘Z → ⌃Z (zle-widget: undo)
+      - type: basic
+        from:
+          key_code: "y"  # z and y switched
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: "y"
+            modifiers:
+              - control
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - alacritty$
+  - description: "🅰️  Neovide / Alacritty: Fix <S-Space> and <D-S-e>"
+    manipulators:
+      - type: basic
+        from:
+          key_code: e
+          modifiers:
+            mandatory:
+              - command
+              - shift
+        to:
+          - key_code: e
+            modifiers:
+              - command
+              - control
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - "[Nn]eovide"
+              - alacritty$
+      - type: basic
+        from:
+          key_code: spacebar
+          modifiers:
+            mandatory:
+              - shift
+        to:
+          - key_code: spacebar
+            modifiers:
+              - option
+              - control
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - "[Nn]eovide"
+      - type: basic
+        from:
+          key_code: spacebar
+          modifiers:
+            mandatory:
+              - shift
+        to:
+          - key_code: d
+          - key_code: a
+          - key_code: w
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - alacritty$
+      # cmd+q -> <Esc>ZZ (does  skip pre-quit triggers)
+      - type: basic
+        from:
+          key_code: q
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: escape # to ensure normal mode
+          - key_code: "Y" # z & y switched
+            modifiers:
+              - shift
+          - key_code: "Y"
+            modifiers:
+              - shift
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - "[Nn]eovide"
   - description: "🅰️  Alfred Restart"
     manipulators:
       - type: basic

@@ -3,135 +3,6 @@
   "homepage": "https://github.com/chrisgrieser/dotfiles/karabiner",
   "rules": [
     {
-      "description": "⚒️ Fix <S-Space> and <D-S-e> for neovim and terminal",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "e",
-            "modifiers": {
-              "mandatory": [
-                "command",
-                "shift"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "e",
-              "modifiers": [
-                "command",
-                "control"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "file_paths": [
-                "[Nn]eovide",
-                "alacritty$"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "spacebar",
-            "modifiers": {
-              "mandatory": [
-                "shift"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "spacebar",
-              "modifiers": [
-                "option",
-                "control"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "file_paths": [
-                "[Nn]eovide"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "spacebar",
-            "modifiers": {
-              "mandatory": [
-                "shift"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "d"
-            },
-            {
-              "key_code": "a"
-            },
-            {
-              "key_code": "w"
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "file_paths": [
-                "alacritty$"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "q",
-            "modifiers": {
-              "mandatory": [
-                "command"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "escape"
-            },
-            {
-              "key_code": "Y",
-              "modifiers": [
-                "shift"
-              ]
-            },
-            {
-              "key_code": "Y",
-              "modifiers": [
-                "shift"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "file_paths": [
-                "[Nn]eovide"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
       "description": "⚒️ f+j (simultaneously): ↵",
       "manipulators": [
         {
@@ -158,7 +29,7 @@
       ]
     },
     {
-      "description": "⚒️ R-J (tap): go to end of line",
+      "description": "⚒️ R-⌘ (tap): go to end of line",
       "manipulators": [
         {
           "type": "basic",
@@ -176,6 +47,33 @@
           "to_if_alone": [
             {
               "key_code": "e",
+              "modifiers": [
+                "control"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "⚒️  L-⌥ (tap): go to beginning of line",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_option"
+          },
+          "to": [
+            {
+              "key_code": "left_option"
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 200
+          },
+          "to_if_alone": [
+            {
+              "key_code": "a",
               "modifiers": [
                 "control"
               ]
