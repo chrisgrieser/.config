@@ -100,16 +100,14 @@ end
 -- css), then the word will be toggled.
 -- Otherwise will check character under cursor. If it is a "reversible"
 -- character, the character will be switched, e.g. "(" to ")". If it is a
--- letter, falls back to the default `~` behavior of toggling between upper and
+-- letter, falls back to the default `~` behavior of Toggling between upper and
 -- lower case.
 function ret.switcher()
-	-- ignore 'iskeyword' option when retrieving word under cursor
 	local word
 	local wordchar = bo.iskeyword
-	print("L108 wordchar: ", wordchar)
 	dashIsKeyword = wordchar:find(",%-$") or wordchar:find(",%-,") or wordchar:find("^%-,")
 	if dashIsKeyword then
-		bo.iskeyword = wordchar:gsub("%-,?", ""):gsub(",?%-", "")
+		bo.iskeyword = wordchar:gsub("%-,", ""):gsub(",%-", "")
 		word = wordUnderCursor()
 		bo.iskeyword = wordchar
 	else
@@ -157,7 +155,7 @@ function ret.switcher()
 	-- toggle case (regular ~)
 	local isLetter = char:upper() ~= char:lower()
 	if isLetter then
-		cmd [[normal! ~]]
+		cmd [[normal! ~h]]
 		return
 	end
 
