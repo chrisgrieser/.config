@@ -73,7 +73,7 @@ auto_dark_mode.init()
 keymap({"n", "v"}, "<D-w>", ":close<CR>") -- cmd+w
 keymap("i", "<D-w>", "<Esc>:close<CR>")
 
-keymap({"n", "v"}, "<D-n>", ":Lexplore<CR>%", {remap = true}) -- cmd+n, needs remap since % is netrw mapping
+keymap({"n", "v", "i"}, "<D-n>", ":e ")
 
 keymap({"n", "v"}, "<D-z>", "u") -- cmd+z
 keymap({"n", "v"}, "<D-Z>", "<C-R>") -- cmd+shift+z
@@ -88,7 +88,7 @@ keymap("v", "<D-a>", "ggG")
 keymap("", "<D-BS>", ':w!<CR>:!mv "%:p" ~/.Trash/<CR><CR>:bd<CR>:echo "File deleted."<CR>') -- undoable deletion of the file
 keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 keymap({"n", "v", "i"}, "<D-1>", ":Lexplore<CR>") -- file tree (netrw)
-keymap({"n", "v", "i"}, "<D-0>", ":SymbolsOutline<CR>") -- Symbol Outline
+keymap({"n", "v", "i"}, "<D-0>", ":messages<CR>")
 
 -- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 g.VM_maps = {
