@@ -81,9 +81,6 @@ require("indent_blankline").setup {
 
 --------------------------------------------------------------------------------
 
--- GUTTER
-opt.signcolumn = "yes:1"
-
 require("gitsigns").setup {
 	max_file_length = 10000,
 	preview_config = {border = borderStyle},
@@ -112,13 +109,13 @@ local function alternateFile()
 	local altPath = fn.expand("#:p")
 	local curPath = fn.expand("%:p")
 	local altFile = fn.expand("#:t")
-	if altPath == curPath or not(altFile) then return "" end
+	if altPath == curPath or altFile == "" then return "" end
 	return "# " .. altFile
 end
 
 local function currentFile() -- using this function instead of default filename, since this does not show "[No Name]" for Telescope
 	local curFile = fn.expand("%:t")
-	if not (curFile) then return "" end
+	if curFile == "" then return "" end
 	return "%% " .. curFile -- "%" is lua's escape character and therefore needs to be escaped itself
 end
 

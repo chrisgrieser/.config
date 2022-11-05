@@ -53,6 +53,7 @@ opt.sidescrolloff = 24
 opt.textwidth = 80 -- used by `gq` wrap, etc.
 opt.wrap = false
 opt.colorcolumn = "+1" -- relative to textwidth
+opt.signcolumn = "yes:1" -- = gutter
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
@@ -82,9 +83,8 @@ autocmd("TextYankPost", {
 	callback = function() vim.highlight.on_yank {timeout = 2000} end
 })
 
--- don't treat "-" as word boundary for kebab-case variables – https://superuser.com/a/244070
--- (see also the respective "change small word" keybinding <leader><space>)
-opt.iskeyword = opt.iskeyword + {"-"}
+-- don't treat "-" as word boundary
+opt.iskeyword:append("-")
 
 --------------------------------------------------------------------------------
 
@@ -92,10 +92,10 @@ opt.iskeyword = opt.iskeyword + {"-"}
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
 opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
-opt.autochdir = true -- always current directory
 opt.updatetime = 1500 -- affects current symbol highlight from treesitter-refactor
+opt.autochdir = true -- always current directory
 augroup("autocd", {})
-autocmd({"BufWinEnter"}, {-- since autochdir is not always reliable…?
+autocmd({"BufWinEnter"}, { -- since autochdir is not always reliable…?
 	group = "autocd",
 	command = "cd %:p:h",
 })
