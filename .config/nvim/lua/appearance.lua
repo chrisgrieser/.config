@@ -106,18 +106,19 @@ for type, icon in pairs(signs) do
 end
 
 --------------------------------------------------------------------------------
-
 -- STATUS LINE (LuaLine)
+
 local function alternateFile()
+	local altPath = fn.expand("#:p")
+	local curPath = fn.expand("%:p")
 	local altFile = fn.expand("#:t")
-	local curFile = fn.expand("%:t")
-	if altFile == curFile or altFile == "" then return "" end
+	if altPath == curPath or not(altFile) then return "" end
 	return "# " .. altFile
 end
 
 local function currentFile() -- using this function instead of default filename, since this does not show "[No Name]" for Telescope
-	local curFile = api.nvim_exec('echo expand("%:t")', true)
-	if not (curFile) or curFile == "" then return "" end
+	local curFile = fn.expand("%:t")
+	if not (curFile) then return "" end
 	return "%% " .. curFile -- "%" is lua's escape character and therefore needs to be escaped itself
 end
 
