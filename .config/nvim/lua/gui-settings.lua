@@ -43,6 +43,7 @@ end
 
 -- THEME
 local function light()
+	api.nvim_set_option('background', 'light')
 	cmd("colorscheme " .. lightTheme)
 	g.neovide_transparency = 0.95
 	themeModifications()
@@ -51,6 +52,7 @@ end
 
 --
 local function dark()
+	api.nvim_set_option('background', 'dark')
 	cmd("colorscheme " .. darkTheme)
 	g.neovide_transparency = 0.97
 	themeModifications()
