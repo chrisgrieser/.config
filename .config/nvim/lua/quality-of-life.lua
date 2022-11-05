@@ -26,7 +26,7 @@ function ret.duplicateVisual()
 	vim.fn.setreg("z", prevReg)
 end
 
--- Duplicate line under cursor, and change occurences of certain words to their 
+-- Duplicate line under cursor, and change occurences of certain words to their
 -- opposite, e.g., "right" to "left". Indended for languages like CSS.
 function ret.smartDuplicateLine()
 	local line = getline(".")
@@ -97,7 +97,7 @@ end
 
 -- Drop-in replacement for vim's `~` command. If the word under cursor has a
 -- reasonable opposite in the current language (e.g., "top" and "bottom" in
--- css), then the word will be toggled. 
+-- css), then the word will be toggled.
 -- Otherwise will check character under cursor. If it is a "reversible"
 -- character, the character will be switched, e.g. "(" to ")". If it is a
 -- letter, falls back to the default `~` behavior of toggling between upper and
@@ -106,6 +106,7 @@ function ret.switcher()
 	-- ignore 'iskeyword' option when retrieving word under cursor
 	local word
 	local wordchar = bo.iskeyword
+	print("L108 wordchar: ", wordchar)
 	dashIsKeyword = wordchar:find(",%-$") or wordchar:find(",%-,") or wordchar:find("^%-,")
 	if dashIsKeyword then
 		bo.iskeyword = wordchar:gsub("%-,?", ""):gsub(",?%-", "")
