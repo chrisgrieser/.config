@@ -21,6 +21,28 @@ local ret = {}
 
 --------------------------------------------------------------------------------
 
+cmd [[:command! -nargs=1 Rename lua renameFile(<f-args>)]]
+---Rename Current File.
+---@param newName string if no new ext is provided, the current will be kept
+function renameFile(newName)
+	if newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") then
+		cmd('echo "Invalid filename"')
+		return
+	end
+
+	local oldName = fn.expand("%:t")
+	if not(newName:find("%.")) then
+		newName = newName .. "." .. fn.expand("%:e")
+	end
+	os.rename(oldName, newName)
+
+	cmd("edit " .. newName)
+	cmd("bdelete #")
+	cmd('echo "Renamed '.. oldName.." to "..newName..'"')
+end
+
+--------------------------------------------------------------------------------
+
 function ret.duplicateVisual()
 	local prevReg = vim.fn.getreg("z")
 	cmd [[silent! normal!"zy`]"zp]]
