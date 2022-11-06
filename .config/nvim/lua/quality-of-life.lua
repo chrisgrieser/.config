@@ -234,14 +234,6 @@ end
 -- MOVEMENT
 -- performed as command makes them less glitchy
 
-function ret.moveCharRight()
-	cmd [[:normal! xp]]
-end
-
-function ret.moveCharLeft()
-	cmd [[:normal! xhhp]]
-end
-
 function ret.moveLineDown()
 	cmd [[. move +1]]
 	cmd [[normal! ==]]
@@ -269,7 +261,15 @@ function ret.moveSelectionRight()
 end
 
 function ret.moveSelectionLeft()
-	cmd [[normal! xhhpgvhoho]]
+	cmd [[normal! xhPgvhoho]]
+end
+
+function ret.moveCharRight()
+	cmd [[:normal! xp]]
+end
+
+function ret.moveCharLeft()
+	cmd [[:normal! xhP]]
 end
 
 --------------------------------------------------------------------------------

@@ -259,23 +259,21 @@ keymap({"n", "x"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", "U") -- undo line, needs remapping since shadowed
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
-
 -- Logging
---------------------------------------------------------------------------------
 keymap("n", "<leader>ll", function() qol.quicklog(true) end)
+
+--------------------------------------------------------------------------------
 
 -- Line & Character Movement
 keymap("n", "<Down>", qol.moveLineDown)
 keymap("n", "<Up>", qol.moveLineUp)
-keymap("x", "<Down>",qol.moveSelectionDown)
+keymap("x", "<Down>", qol.moveSelectionDown)
 keymap("x", "<Up>", qol.moveSelectionUp)
 
 keymap("n", "<Right>", qol.moveCharRight)
 keymap("n", "<Left>", qol.moveCharLeft)
 keymap("x", "<Right>", qol.moveSelectionRight)
 keymap("x", "<Left>", qol.moveSelectionLeft)
--- mkeyap("x", "<Right>", "")
--- makeyp("x", "<Left>", "")
 
 -- Merging / Splitting Lines
 keymap({"n", "x"}, "M", "J") -- [M]erge line up
@@ -286,9 +284,7 @@ g.splitjoin_join_mapping = ""
 keymap("n", "<leader>m", ":SplitjoinJoin<CR>")
 keymap("n", "<leader>s", ":SplitjoinSplit<CR>")
 keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
-
-keymap("n", "<C-q>", "gqq") -- needs remapping since shadowed
-keymap("x", "<C-q>", "gq")
+keymap("n", "<leader>q", "gqq") -- needs remapping since shadowed
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
@@ -338,8 +334,8 @@ keymap("n", "gF", "gf") -- needs remapping since shadowed
 keymap("", "<C-p>", ':let @+ = expand("%:p")<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
 keymap("", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
 keymap("", "<C-r>", ":Rename ") -- rename of current file, requires eunuch.vim
-keymap("", "<C-d>", ':Duplicate <C-R>=expand("%:t")<CR>') -- duplicate current file
-keymap("n", "<leader>X", ":Chmod +x<CR>") -- execution permission, requires eunuch.vim
+keymap("", "<C-d>", ':saveas <C-R>=expand("%:t")<CR>') -- duplicate current file
+keymap("n", "<leader>x", ':!chmod +x %:p<CR><CR>:echo "Execution permission granted."<CR>')
 keymap("x", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
 
 -- Option Toggling
@@ -386,10 +382,11 @@ keymap("n", "<leader>r", function()
 		cmd [[!npm run build]] -- not via fn.system to get the output in the cmdline
 
 	elseif bo.filetype == "applescript" then
-		cmd [[:AppleScriptRun]]
-	else
+		cmd [[AppleScriptRun]]
 
+	else
 		print("No build system set.")
+
 	end
 end)
 

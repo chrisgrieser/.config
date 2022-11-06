@@ -24,6 +24,11 @@ function setlocal(option, value)
 	vim.api.nvim_set_option_value(option, value, {scope = "local"})
 end
 
+function setlocal(option, value)
+	-- :setlocal does not have a direct access via the vim-module, it seems https://neovim.io/doc/user/lua.html#lua-vim-setlocal
+	vim.api.nvim_set_option_value(option, value, {scope = "local"})
+end
+
 -- `:I` inspects the passed lua object
 cmd [[:command! -nargs=1 I lua inspectFn(<f-args>)]]
 function inspectFn(obj)
