@@ -32,11 +32,12 @@ g.undotree_ShortIndicators = 1 -- for the relative date
 g.undotree_HelpLine = 0 -- 0 hides the "Press ? for help"
 
 function g.Undotree_CustomMap()
-	keymap("n", "<C-j>", "<plug>UndotreePreviousState", {buffer = true})
-	keymap("n", "<C-k>", "<plug>UndotreeNextState", {buffer = true})
-	keymap("n", "J", "jjjjjjj", {buffer = true})
-	keymap("n", "K", "7k", {buffer = true})
-	keymap("n", "U", "<plug>UndotreeRedo", {buffer = true})
+	local opts = {buffer = true, silent = true}
+	keymap("n", "<C-j>", "<Plug>UndotreePreviousState", opts)
+	keymap("n", "<C-k>", "<Plug>UndotreeNextState", opts)
+	keymap("n", "J", "7j", opts)
+	keymap("n", "K", "7k", opts)
+	setlocal("list", false)
 end
 
 --------------------------------------------------------------------------------

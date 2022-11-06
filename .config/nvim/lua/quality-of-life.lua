@@ -223,8 +223,10 @@ end
 
 --------------------------------------------------------------------------------
 -- MOVEMENT
+-- performed as command makes them less glitchy
+
 function ret.moveCharRight()
-	cmd [[:normal! xp]] -- performed as command less glitchy
+	cmd [[:normal! xp]]
 end
 
 function ret.moveCharLeft()
@@ -232,7 +234,7 @@ function ret.moveCharLeft()
 end
 
 function ret.moveLineDown()
-	cmd [[. move +1]] -- performed as command less glitchy
+	cmd [[. move +1]]
 	cmd [[normal! ==]]
 end
 
@@ -247,11 +249,10 @@ function ret.moveSelectionDown()
 end
 
 function ret.moveSelectionUp()
+	vim.fn.feedkeys("<Esc>")
 	cmd [[move '<-2]]
 	cmd [[normal! gv=gv]]
 end
-
-
 
 --------------------------------------------------------------------------------
 
