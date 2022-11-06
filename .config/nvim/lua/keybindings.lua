@@ -114,12 +114,14 @@ keymap({"o", "x"}, "R", "{")
 keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {silent = true})
 keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>", {silent = true})
 
--- map ai to aI, except for yaml and python, where aI does not make sense
+-- map ai to aI
+-- except for yaml, python and md, where aI does not make sense
 augroup("indentobject", {})
 autocmd("BufEnter", {
 	group = "indentobject",
 	callback = function()
-		if bo.filetype ~= "yaml" and bo.filetype ~= "python" then
+		local ft = bo.filetype
+		if not(ft == "yaml" or ft == "python" or ft == "markdown") then
 			keymap({"x", "o"}, "ai", "aI", {remap = true, buffer = true})
 		end
 	end
@@ -230,7 +232,7 @@ keymap("n", "^A", "mzgg=G`z") -- entire file
 keymap("n", "ü", "mzlblgueh~`z")
 
 -- toggle case or switch direction of char (e.g. > to <)
-keymap("n", "Ü", qol.switcher)
+keymap("n", "Ü", qol.reverse)
 
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`"}
@@ -255,7 +257,9 @@ keymap("n", "S", substi.eol)
 keymap("x", "s", substi.visual)
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
+-- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine)
+keymap("n", "<A-r>", function() qol.duplicateLine {increment = true} end)
 keymap("x", "R", qol.duplicateVisual)
 
 -- Undo
