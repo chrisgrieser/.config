@@ -333,10 +333,10 @@ keymap("n", "gF", "gf") -- needs remapping since shadowed
 -- File Operations
 keymap("", "<C-p>", ':let @+ = expand("%:p")<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
 keymap("", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
-keymap("", "<C-r>", ":Rename ") -- rename of current file, requires eunuch.vim
+keymap("", "<C-r>", ":Rename ") -- rename of current file, requires quality-of-life.nvim
 keymap("", "<C-d>", ':saveas <C-R>=expand("%:t")<CR>') -- duplicate current file
 keymap("n", "<leader>x", ':!chmod +x %:p<CR><CR>:echo "Execution permission granted."<CR>')
-keymap("x", "X", ":'<,'> w new.lua | normal gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
+keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
 
 -- Option Toggling
 keymap("n", "<leader>os", ":set spell!<CR>")
