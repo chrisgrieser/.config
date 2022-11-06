@@ -234,22 +234,23 @@ function ret.moveCharLeft()
 end
 
 function ret.moveLineDown()
-	cmd [[. move +1]]
+	cmd [[. move .+1]]
 	cmd [[normal! ==]]
 end
 
 function ret.moveLineUp()
-	cmd [[. move -2]]
 	cmd [[normal! ==]]
+	cmd [[. move -2]]
 end
 
 function ret.moveSelectionDown()
+	cmd[[startinsert]]
+	cmd[[stopinsert]]
 	cmd [[move '>+1]]
 	cmd [[normal! gv=gv]]
 end
 
 function ret.moveSelectionUp()
-	vim.fn.feedkeys("<Esc>")
 	cmd [[move '<-2]]
 	cmd [[normal! gv=gv]]
 end
