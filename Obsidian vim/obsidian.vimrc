@@ -36,6 +36,10 @@ map - /
 nmap j gj
 nmap k gk
 
+" consistent with insert mode / emacs bindings
+nmap <C-e> A
+nmap <C-a> I
+
 " HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
 map H g0
 map L g$
@@ -44,6 +48,10 @@ map K 7k
 
 " Goto Mark
 nmap ä `
+
+" Section Navigation easier to press
+map } ]
+map { [
 
 " Emulate `z=` (and bind it zo `zl` because more convenient; mnemonic: [z]pelling [l]ist)
 exmap contextMenu obcommand editor:context-menu
@@ -88,10 +96,6 @@ vmap go :quickSwitcher
 
 " go to last change - https://vimhelp.org/motion.txt.html#g%3B
 nmap g; u<C-r>
-
-" consistent with insert mode / emacs bindings
-nmap <C-e> A
-nmap <C-a> I
 
 """"""""""""""""""""""
 " < Editing
