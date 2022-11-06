@@ -31,32 +31,26 @@ function qol_renameFile(newName)
 
 	local oldName = fn.expand("%:t")
 	local extProvided = newName:find("%.")
-	if not(extProvided) then
+	if not (extProvided) then
 		newName = newName .. "." .. fn.expand("%:e")
 	end
 	os.rename(oldName, newName)
 
 	cmd("edit " .. newName)
 	cmd("bdelete #")
-	cmd('echo "Renamed '.. oldName.." to "..newName..'"')
+	cmd('echo "Renamed ' .. oldName .. " to " .. newName .. '"')
 end
 
 cmd [[:command! -nargs=1 Rename lua qol_renameFile(<f-args>)]]
 
 --------------------------------------------------------------------------------
 
-function ret.duplicateVisual()
-	local prevReg = vim.fn.getreg("z")
-	cmd [[silent! normal!"zy`]"zp]]
-	vim.fn.setreg("z", prevReg)
-end
-
 -- Duplicate line under cursor, and change occurences of certain words to their
 -- opposite, e.g., "right" to "left". Indended for languages like CSS.
 ---@param opts table
 function ret.duplicateLine(opts)
-	if not(opts) then
-		opts = {smart=false, moveToValue=false}
+	if not (opts) then
+		opts = {smart = false, moveToValue = false, increment = true}
 	end
 
 	local line = getline(".")
@@ -75,6 +69,15 @@ function ret.duplicateLine(opts)
 			line = line:gsub("width", "height")
 		end
 	end
+
+	if opts.increment then
+		local digits = line:match("%d+")
+		if digits then
+			digits = tostring(tonumber(digits) + 1)  -- increment by one
+			line = line:gsub("%d+", digits, 1)
+		end
+	end
+
 	append(".", line)
 
 	-- cursor movement
@@ -82,11 +85,17 @@ function ret.duplicateLine(opts)
 	local colNum = getCursor(0)[2]
 	if opts.moveToValue then
 		local _, valuePos = line:find(": ?")
-		if valuePos then 
+		if valuePos then
 			colNum = valuePos
 		end
 	end
 	setCursor(0, {lineNum, colNum})
+end
+
+function ret.duplicateVisual()
+	local prevReg = vim.fn.getreg("z")
+	cmd [[silent! normal!"zy`]"zp]]
+	vim.fn.setreg("z", prevReg)
 end
 
 -- insert horizontal divider considering textwidth, commentstring, and indent

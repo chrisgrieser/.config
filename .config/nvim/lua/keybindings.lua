@@ -44,6 +44,10 @@ keymap("n", "j", function() qol.overscroll("j") end, {silent = true})
 keymap("n", "J", function() qol.overscroll("7j") end, {silent = true})
 keymap({"n", "x"}, "G", "Gzz")
 
+-- Sections
+keymap("", "[", "{", {nowait = true}) -- slightly easier to press
+keymap("", "]", "}", {nowait = true})
+
 -- Jump History
 keymap("n", "<C-h>", "<C-o>") -- Back
 keymap("n", "<C-l>", "<C-i>") -- Forward
@@ -167,7 +171,7 @@ require("Comment").setup {
 -- position.
 keymap("n", "dq", "mzdCOM`z", {remap = true}) -- requires remap for treesitter and comments.nvim mappings
 keymap("n", "yq", "mzyCOM`z", {remap = true})
-keymap("n", "gUq", "mzgUCOM`z", {remap = true})
+keymap("n", "gUq", "mzgUCOM`z", {remap = true}) -- uppercase comment
 keymap("n", "sq", "mzsCOM`z", {remap = true})
 keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
 
@@ -269,7 +273,6 @@ keymap("n", "<Down>", qol.moveLineDown)
 keymap("n", "<Up>", qol.moveLineUp)
 keymap("x", "<Down>", qol.moveSelectionDown)
 keymap("x", "<Up>", qol.moveSelectionUp)
-
 keymap("n", "<Right>", qol.moveCharRight)
 keymap("n", "<Left>", qol.moveCharLeft)
 keymap("x", "<Right>", qol.moveSelectionRight)
