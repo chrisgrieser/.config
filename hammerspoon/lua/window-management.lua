@@ -3,7 +3,7 @@ require("lua.twitterrific-controls")
 
 --------------------------------------------------------------------------------
 -- WINDOW MANAGEMENT UTILS
-iMacDisplay = hs.screen("Built%-in") -- % to escape hyphen (is a quantifier in lua patterns)
+iMacDisplay = hs.screen("Built%-in") 
 maximized = hs.layout.maximized
 
 -- device-specific parameters
@@ -20,13 +20,18 @@ elseif isAtOffice() then
 	pseudoMaximized = maximized
 end
 
--- window size checks
+---Whether Window is maximimized
+---@param win hs.window
+---@return boolean
 function isMaximized(win)
 	if not (win) then return false end
 	local max = win:screen():frame()
 	return win:frame().w == max.w
 end
 
+---Whether Window is pseudoMaximized
+---@param win hs.window
+---@return boolean
 function isPseudoMaximized(win)
 	if not (win) then return false end
 	local max = win:screen():frame()
@@ -36,6 +41,9 @@ function isPseudoMaximized(win)
 	return widthOkay and posOkay
 end
 
+---Whether Window is half-sized
+---@param win hs.window
+---@return boolean
 function isHalf(win)
 	if not (win) then return false end
 	local max = win:screen():frame()
@@ -48,6 +56,7 @@ end
 
 -- requires these two helper actions for Drafts installed:
 -- https://directory.getdrafts.com/a/2BS & https://directory.getdrafts.com/a/2BR
+---@param draftsWin hs.window
 function toggleDraftsSidebar(draftsWin)
 	local function toggle()
 		local drafts_w = draftsWin:frame().w
@@ -63,6 +72,7 @@ function toggleDraftsSidebar(draftsWin)
 	runDelayed(0.2, toggle) -- repetition for some rare cases with lag needed
 end
 
+---@param highlightsWin hs.window
 function toggleHighlightsSidebar(highlightsWin)
 	runDelayed(0.3, function()
 		local highlights_w = highlightsWin:frame().w
@@ -77,8 +87,8 @@ function toggleHighlightsSidebar(highlightsWin)
 	end)
 end
 
--- requires Obsidian Sidebar Toggler Plugin
--- https://github.com/chrisgrieser/obsidian-sidebar-toggler
+-- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
+---@param obsiWin hs.window
 function toggleObsidianSidebar(obsiWin)
 	local function toggle()
 		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
@@ -102,6 +112,8 @@ end
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
+---Moved Window
+---@param mode string
 function moveResizeCurWin(mode)
 	local win = hs.window.focusedWindow()
 	local appName = win:application():name()
@@ -145,7 +157,9 @@ function moveResizeCurWin(mode)
 
 end
 
--- replaces `win:moveToUnit(pos)`
+---replaces `win:moveToUnit(pos)`
+---@param win hs.window
+---@param pos hs.geometry
 function moveResize(win, pos)
 	win:moveToUnit(pos)
 	-- has to repeat due window creation delay for some apps
@@ -153,7 +167,7 @@ function moveResize(win, pos)
 	runDelayed(0.5, function() win:moveToUnit(pos) end):start()
 end
 
-local function moveToOtherDisplay()
+local function moveCurWinToOtherDisplay()
 	local win = hs.window.focusedWindow()
 	local targetScreen = win:screen():next()
 	win:moveToScreen(targetScreen, true)
@@ -188,7 +202,7 @@ hotkey(hyper, "up", function() moveResizeCurWin("up") end)
 hotkey(hyper, "down", function() moveResizeCurWin("down") end)
 hotkey(hyper, "right", function() moveResizeCurWin("right") end)
 hotkey(hyper, "left", function() moveResizeCurWin("left") end)
-hotkey({}, "f6", moveToOtherDisplay) -- for apple keyboard
-hotkey(hyper, "pagedown", moveToOtherDisplay)
-hotkey(hyper, "pageup", moveToOtherDisplay)
+hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
+hotkey(hyper, "pagedown", moveCurWinToOtherDisplay)
+hotkey(hyper, "pageup", moveCurWinToOtherDisplay)
 hotkey({"ctrl"}, "space", controlSpace) -- fn+space also bound to ctrl+space via Karabiner

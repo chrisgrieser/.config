@@ -194,7 +194,7 @@ autocmd("RecordingEnter", {
 keymap("n", "9", "qy") -- quick replay (don't use counts that high anyway)
 
 -- find & replace under cursor
-keymap("n", "<leader>f", ':% s/<C-r>=expand("<cword>")<CR>//<Left>')
+keymap("n", "<leader>f", ':% s/<C-r>=expand("<cword>")<CR>//g<Left><Left>')
 
 -- find & replace selection
 keymap("v", "<leader>f", [[<Esc>:'<,'> s/\(.*\)/\1/<Left><Left><Left>]])

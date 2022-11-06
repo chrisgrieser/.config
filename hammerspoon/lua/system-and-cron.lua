@@ -2,7 +2,6 @@ require("lua.utils")
 require("lua.window-management")
 require("lua.dark-mode")
 require("lua.layouts")
-
 local caff = hs.caffeinate.watcher
 --------------------------------------------------------------------------------
 -- CONFIG

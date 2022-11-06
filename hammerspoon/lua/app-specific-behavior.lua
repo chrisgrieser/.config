@@ -9,21 +9,21 @@ local function hideAllExcept(appNotToHide)
 	local mainScreen = hs.screen.mainScreen()
 	local wins = hs.window.orderedWindows() -- `orderedWindows()` ignores headless apps like Twitterrific
 	for i = 1, #wins do
-		local app = wins[i]:application()
-		if not (app) then break end
+		local appli = wins[i]:application()
+		if not (appli) then break end
 
 		local winScreen = wins[i]:screen()
 
 		local isPip = false
-		if app:name() == "Brave Browser" or app:name() == "YouTube" then -- if Browser has PiP window, do not hide it
-			local browserWins = app:allWindows()
+		if appli:name() == "Brave Browser" or appli:name() == "YouTube" then -- if Browser has PiP window, do not hide it
+			local browserWins = appli:allWindows()
 			for j = 1, #browserWins do
 				if browserWins[j]:title() == "Picture in Picture" then isPip = true end
 			end
 		end
 
-		if not (app:name() == appNotToHide) and not (isPip) and winScreen == mainScreen then -- main screen as condition for two-screen setups
-			app:hide()
+		if not (appli:name() == appNotToHide) and not (isPip) and winScreen == mainScreen then -- main screen as condition for two-screen setups
+			appli:hide()
 		end
 	end
 end
@@ -84,8 +84,11 @@ pixelmatorWatcher:start()
 -- split when second window is opened
 -- change sizing back, when back to one window
 wf_browser = wf.new("Brave Browser")
-	:setOverrideFilter {rejectTitles = {" %(Private%)$", "^Picture in Picture$", "^Task Manager$"},
-		allowRoles = "AXStandardWindow", hasTitlebar = true}
+	:setOverrideFilter {
+		rejectTitles = {" %(Private%)$", "^Picture in Picture$", "^Task Manager$"},
+		allowRoles = "AXStandardWindow", 
+		hasTitlebar = true
+	}
 	:subscribe(wf.windowCreated, function()
 		if #wf_browser:getWindows() == 1 then
 			if isAtOffice() or isProjector() then
@@ -119,7 +122,7 @@ wf_browser_all = wf.new("Brave Browser")
 	:setOverrideFilter {allowRoles = "AXStandardWindow"}
 	:subscribe(wf.windowDestroyed, function()
 		if #wf_browser_all:getWindows() == 0 then
-			hs.application("Brave Browser"):hide()
+			app("Brave Browser"):hide()
 		end
 	end)
 
@@ -147,7 +150,7 @@ wf_mimestream = wf.new("Mimestream")
 		end
 	end)
 	:subscribe(wf.windowFocused, function()
-		hs.application("Mimestream"):selectMenuItem {"Window", "Bring All to Front"}
+		app("Mimestream"):selectMenuItem {"Window", "Bring All to Front"}
 	end)
 
 --------------------------------------------------------------------------------
@@ -157,7 +160,7 @@ function twitterrificNextToPseudoMax(_, eventType)
 	if appIsRunning("Twitterrific") and (eventType == aw.activated or eventType == aw.launching) then
 		local currentWin = hs.window.focusedWindow()
 		if isPseudoMaximized(currentWin) then
-			hs.application("Twitterrific"):mainWindow():raise()
+			app("Twitterrific"):mainWindow():raise()
 		end
 	end
 end
@@ -259,7 +262,7 @@ finderAppWatcher:start()
 wf_finder = wf.new("Finder")
 wf_finder:subscribe(wf.windowDestroyed, function()
 	if #wf_finder:getWindows() == 0 then
-		hs.application("Finder"):kill()
+		app("Finder"):kill()
 	end
 end)
 
@@ -274,7 +277,7 @@ wf_marta = wf.new("Marta")
 	:subscribe(wf.windowCreated, function()
 		runDelayed(0.1,
 			function() -- close other tabs, needed because: https://github.com/marta-file-manager/marta-issues/issues/896
-				keystroke({"shift"}, "w", 1, hs.application("Marta"))
+				keystroke({"shift"}, "w", 1, app("Marta"))
 			end)
 		if isAtOffice() or isProjector() then
 			moveResizeCurWin("maximized")
@@ -284,7 +287,7 @@ wf_marta = wf.new("Marta")
 	end)
 	:subscribe(wf.windowDestroyed, function()
 		if #wf_marta:getWindows() == 0 then
-			hs.application("Marta"):kill()
+			app("Marta"):kill()
 		end
 	end)
 
@@ -298,7 +301,7 @@ wf_zoom = wf.new("zoom.us")
 		local numberOfZoomWindows = #wf_zoom:getWindows();
 		if numberOfZoomWindows == 2 then
 			runDelayed(1.3, function()
-				hs.application("zoom.us"):findWindow("^Zoom$"):close()
+				app("zoom.us"):findWindow("^Zoom$"):close()
 				hs.osascript.applescript([[
 					tell application "Brave Browser"
 						set window_list to every window
@@ -382,14 +385,14 @@ macPassWatcher:start()
 -- Resume Spotify on quit
 function spotifyTUI(toStatus)
 	local currentStatus = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s")
-	currentStatus = trim(currentStatus)
+	currentStatus = trim(currentStatus) ---@diagnostic disable-line: param-type-mismatch, cast-local-type
 	if (currentStatus == "▶️" and toStatus == "pause") or (currentStatus == "⏸" and toStatus == "play") then
 		local stdout = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle")
-		if (toStatus == "play") then notify(stdout) end
+		if (toStatus == "play") then notify(stdout) end ---@diagnostic disable-line: param-type-mismatch
 	end
 end
 
-function SpotifyToggler(appName, eventType)
+function spotifyToggler(appName, eventType)
 	if appName == "YouTube" or appName == "zoom.us" or appName == "FaceTime" then
 		if eventType == aw.launched then
 			spotifyTUI("pause")
@@ -399,7 +402,7 @@ function SpotifyToggler(appName, eventType)
 	end
 end
 
-spotifyAppWatcher = aw.new(SpotifyToggler)
+spotifyAppWatcher = aw.new(spotifyToggler)
 if not (isAtOffice()) then spotifyAppWatcher:start() end
 
 --------------------------------------------------------------------------------
@@ -425,7 +428,7 @@ function discordWatcher(appName, eventType)
 	if appName ~= "Discord" then return end
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
-	if eventType == hs.application.watcher.launched then
+	if eventType == aw.launched then
 		hs.urlevent.openURL("discord://discord.com/channels/686053708261228577/700466324840775831")
 	end
 
