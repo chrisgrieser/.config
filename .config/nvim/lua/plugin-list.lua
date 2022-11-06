@@ -62,7 +62,6 @@ function PluginList()
 
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip",
-		"rafamadriz/friendly-snippets", -- collection of common snippets
 	}}
 
 	-- Appearance
@@ -90,6 +89,7 @@ function PluginList()
 	-- Navigation
 	use "mg979/vim-visual-multi" -- multi-cursor
 	use "phaazon/hop.nvim"
+	use "unblevable/quick-scope" -- f-t-improvement
 
 	-- Editing
 	use "matze/vim-move"
