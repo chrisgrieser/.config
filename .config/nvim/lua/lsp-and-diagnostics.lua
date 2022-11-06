@@ -89,10 +89,10 @@ require "lsp_signature".setup {
 keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help)
 
 -- fallback for languages without an action LSP
-keymap("n", "gs", telescope.treesitter, {silent = true})
+keymap("n", "gs", telescope.treesitter)
 
 -- actions defined globally for null-ls
-keymap({"n", "x"}, "<leader>a", vim.lsp.buf.code_action, {silent = true})
+keymap({"n", "x"}, "<leader>a", vim.lsp.buf.code_action)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -183,11 +183,11 @@ lspConfig["sumneko_lua"].setup {
 			},
 			workspace = {
 				library = {
-					"/Users/chrisgrieser/dotfiles/hammerspoon/Spoons/EmmyLua.spoon/annotations",
+					home .. ".hammerspoon/Spoons/EmmyLua.spoon/annotations",
 				},
 			},
-			hint = { -- do not seem to be supported?
-				enable = true,
+			hint = {
+				enable = true, -- do not seem to be supported?
 				setType = true,
 				arrayIndex = "Enable",
 			},
@@ -203,7 +203,7 @@ lspConfig["cssls"].setup {
 		css = {
 			lint = {
 				vendorPrefix = "ignore",
-				duplicateProperties = "error", -- duplication with stylelint
+				duplicateProperties = "ignore", -- duplication with stylelint
 				emptyRules = "ignore",
 			},
 			colorDecorators = {enable = true}, -- does not seem to work?

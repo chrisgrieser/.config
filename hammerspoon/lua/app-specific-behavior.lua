@@ -14,15 +14,15 @@ local function hideAllExcept(appNotToHide)
 
 		local winScreen = wins[i]:screen()
 
-		local isPip = false
+		local isPictureInPicture = false
 		if appli:name() == "Brave Browser" or appli:name() == "YouTube" then -- if Browser has PiP window, do not hide it
 			local browserWins = appli:allWindows()
 			for j = 1, #browserWins do
-				if browserWins[j]:title() == "Picture in Picture" then isPip = true end
+				if browserWins[j]:title() == "Picture in Picture" then isPictureInPicture = true end
 			end
 		end
 
-		if not (appli:name() == appNotToHide) and not (isPip) and winScreen == mainScreen then -- main screen as condition for two-screen setups
+		if not (appli:name() == appNotToHide) and not (isPictureInPicture) and winScreen == mainScreen then -- main screen as condition for two-screen setups
 			appli:hide()
 		end
 	end
@@ -32,9 +32,9 @@ end
 function unHideAll()
 	local wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
 	for i = 1, #wins do
-		local app = wins[i]:application()
-		if not (app) then break end
-		if app:isHidden() then app:unhide() end
+		local appli = wins[i]:application()
+		if not (appli) then break end
+		if appli:isHidden() then appli:unhide() end
 	end
 end
 
@@ -57,24 +57,13 @@ transBgAppWatcher:start()
 
 --------------------------------------------------------------------------------
 
--- OBSIDIAN
--- Sync on Vault close
-local function obsidianSync(appName, eventType)
-	if appName == "Obsidian" and eventType == aw.launched then
-		gitVaultSync()
-	end
-end
-obsidianWatcher = aw.new(obsidianSync)
-obsidianWatcher:start()
-
---------------------------------------------------------------------------------
-
 -- PIXELMATOR
 local function pixelmatorMax(appName, eventType)
 	if appName:find("Pixelmator") and eventType == aw.launched then
 		runDelayed(0.3, function() moveResizeCurWin("maximized") end)
 	end
 end
+
 pixelmatorWatcher = aw.new(pixelmatorMax)
 pixelmatorWatcher:start()
 
@@ -86,7 +75,7 @@ pixelmatorWatcher:start()
 wf_browser = wf.new("Brave Browser")
 	:setOverrideFilter {
 		rejectTitles = {" %(Private%)$", "^Picture in Picture$", "^Task Manager$"},
-		allowRoles = "AXStandardWindow", 
+		allowRoles = "AXStandardWindow",
 		hasTitlebar = true
 	}
 	:subscribe(wf.windowCreated, function()
@@ -132,9 +121,11 @@ wf_browser_all = wf.new("Brave Browser")
 -- split when second window is opened
 -- change sizing back, when back to one window
 wf_mimestream = wf.new("Mimestream")
-	:setOverrideFilter {allowRoles = "AXStandardWindow",
+	:setOverrideFilter {
+		allowRoles = "AXStandardWindow",
 		rejectTitles = {"General", "Accounts", "Sidebar & List", "Viewing", "Composing", "Templates", "Signatures", "Labs",
-			"Updating Mimestream"}}
+			"Updating Mimestream"}
+	}
 	:subscribe(wf.windowCreated, function()
 		if #wf_mimestream:getWindows() == 2 then
 			local win1 = wf_mimestream:getWindows()[1]
@@ -156,7 +147,7 @@ wf_mimestream = wf.new("Mimestream")
 --------------------------------------------------------------------------------
 
 -- keep TWITTERRIFIC visible, when active window is pseudomaximized
-function twitterrificNextToPseudoMax(_, eventType)
+local function twitterrificNextToPseudoMax(_, eventType)
 	if appIsRunning("Twitterrific") and (eventType == aw.activated or eventType == aw.launching) then
 		local currentWin = hs.window.focusedWindow()
 		if isPseudoMaximized(currentWin) then
@@ -174,18 +165,18 @@ anyAppActivationWatcher:start()
 -- pseudomaximized window
 wf_neovim = wf.new("neovide")
 	:subscribe(wf.windowCreated, function()
-		if isAtOffice() or isProjector() then
-			moveResizeCurWin("maximized")
-		else
-			moveResizeCurWin("pseudo-maximized")
-		end
+		runDelayed(0.5, function()
+			if isAtOffice() or isProjector() then
+				moveResizeCurWin("maximized")
+			else
+				moveResizeCurWin("pseudo-maximized")
+			end
+		end)
 	end)
 	-- bugfix for: https://github.com/neovide/neovide/issues/1595
 	:subscribe(wf.windowDestroyed, function()
 		if #wf_neovim:getWindows() == 0 then
-			runDelayed(3, function()
-				hs.execute("pgrep neovide || pkill nvim")
-			end)
+			runDelayed(3, function() hs.execute("pgrep neovide || pkill nvim") end)
 		end
 	end)
 
@@ -226,7 +217,7 @@ end)
 -- - Bring all windows forward
 -- - hide sidebar
 -- - enlarge window if it's too small
-function finderWatcher(appName, eventType, appObject)
+local function finderWatcher(appName, eventType, appObject)
 	if not (appName == "Finder") then return end
 
 	if eventType == aw.activated then
@@ -325,7 +316,7 @@ wf_zoom = wf.new("zoom.us")
 -- HIGHLIGHTS:
 -- - Sync Dark & Light Mode
 -- - Start with Highlight as Selection
-function highlightsWatcher(appName, eventType)
+local function highlightsWatcher(appName, eventType)
 	if not (eventType == aw.launched and appName == "Highlights") then return end
 	hs.osascript.applescript([[
 		tell application "System Events"
@@ -352,7 +343,7 @@ highlightsAppWatcher:start()
 --------------------------------------------------------------------------------
 
 -- DRAFTS: Hide Toolbar
-function draftsLaunchWake(appName, eventType, appObject)
+local function draftsLaunchWake(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
 
 	if (eventType == aw.launched) then
@@ -370,7 +361,7 @@ draftsWatcher:start()
 --------------------------------------------------------------------------------
 
 -- MACPASS: properly show when activated
-function macPassActivate(appName, eventType, appObject)
+local function macPassActivate(appName, eventType, appObject)
 	if not (appName == "MacPass") or not (eventType == aw.launched) then return end
 	runDelayed(0.3, function() appObject:activate() end)
 end
@@ -383,7 +374,7 @@ macPassWatcher:start()
 -- SPOTIFY
 -- Pause Spotify on launch
 -- Resume Spotify on quit
-function spotifyTUI(toStatus)
+local function spotifyTUI(toStatus)
 	local currentStatus = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s")
 	currentStatus = trim(currentStatus) ---@diagnostic disable-line: param-type-mismatch, cast-local-type
 	if (currentStatus == "▶️" and toStatus == "pause") or (currentStatus == "⏸" and toStatus == "play") then
@@ -392,7 +383,7 @@ function spotifyTUI(toStatus)
 	end
 end
 
-function spotifyToggler(appName, eventType)
+local function spotifyToggler(appName, eventType)
 	if appName == "YouTube" or appName == "zoom.us" or appName == "FaceTime" then
 		if eventType == aw.launched then
 			spotifyTUI("pause")
@@ -424,7 +415,7 @@ wf_script_editor = wf.new("Script Editor")
 --------------------------------------------------------------------------------
 
 -- DISCORD
-function discordWatcher(appName, eventType)
+local function discordWatcher(appName, eventType)
 	if appName ~= "Discord" then return end
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
