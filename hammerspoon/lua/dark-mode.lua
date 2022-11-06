@@ -1,11 +1,10 @@
 require("lua.utils")
-
 --------------------------------------------------------------------------------
 
 function toggleDarkMode()
 	local targetMode = "dark"
 	if isDarkMode() then targetMode = "light" end
-	local prevApp = frontapp()
+	local prevApp = frontApp()
 
 	hs.execute("zsh ./helpers/toggle-marta-darkmode.sh " .. targetMode)
 
@@ -52,16 +51,18 @@ function toggleDarkMode()
 		end tell
 	]])
 
-	hs.application(prevApp):activate()
+	app(prevApp):activate()
 	holeCover() ---@diagnostic disable-line: undefined-global
 	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar") -- restart instead of reload to load colors
 end
 
+---@return boolean
 function isDarkMode()
 	local _, isDark = hs.osascript.applescript('tell application "System Events" to return dark mode of appearance preferences')
-	return isDark
+	return isDark ---@diagnostic disable-line: return-type-mismatch
 end
 
+---@param toDark boolean true = dark, false = light
 function setDarkmode(toDark)
 	if (not (isDarkMode()) and toDark) or (isDarkMode() and not(toDark)) then
 		toggleDarkMode()

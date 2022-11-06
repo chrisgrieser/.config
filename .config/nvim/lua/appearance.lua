@@ -29,13 +29,12 @@ function customHighlights()
 	-- rainbow brackets without agressive red…
 	cmd [[highlight rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets…
 
+	-- treesittter refactor focus
+	cmd [[highlight TSDefinition term=underline gui=underline]]
+	cmd [[highlight TSDefinitionUsage term=underline gui=underline]]
 end
 
 customHighlights()
-
--- treesittter refactor focus
-cmd [[highlight TSDefinition term=underline gui=underline]]
-cmd [[highlight TSDefinitionUsage term=underline gui=underline]]
 
 -- mixed whitespace
 cmd [[highlight! def link MixedWhiteSpace Folded]]
