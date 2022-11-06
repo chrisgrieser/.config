@@ -11,8 +11,8 @@ function PluginList()
 	use "EdenEast/nightfox.nvim"
 	use "folke/tokyonight.nvim"
 	use "rebelot/kanagawa.nvim"
+	use "savq/melange"
 	-- use "Mofiqul/dracula.nvim"
-	-- use "savq/melange"
 	-- use "Yazeed1s/minimal.nvim"
 	-- use "kaiuri/nvim-juliana" -- sublime-mariana like
 
