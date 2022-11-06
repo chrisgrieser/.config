@@ -165,12 +165,11 @@ require("Comment").setup {
 -- overlap in visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
--- requires remap for treesitter and comments.nvim mappings
-keymap("n", "dq", "mzdCOM`z", {remap = true})
+keymap("n", "dq", "mzdCOM`z", {remap = true}) -- requires remap for treesitter and comments.nvim mappings
 keymap("n", "yq", "mzyCOM`z", {remap = true})
 keymap("n", "gUq", "mzgUCOM`z", {remap = true})
 keymap("n", "sq", "mzsCOM`z", {remap = true})
-keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- using delete to preserve commentstring
+keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
 
 --------------------------------------------------------------------------------
 
@@ -273,8 +272,10 @@ keymap("x", "<Up>", qol.moveSelectionUp)
 
 keymap("n", "<Right>", qol.moveCharRight)
 keymap("n", "<Left>", qol.moveCharLeft)
--- keymap("x", "<Right>", "")
--- keymap("x", "<Left>", "")
+keymap("x", "<Right>", qol.moveSelectionRight)
+keymap("x", "<Left>", qol.moveSelectionLeft)
+-- mkeyap("x", "<Right>", "")
+-- makeyp("x", "<Left>", "")
 
 -- Merging / Splitting Lines
 keymap({"n", "x"}, "M", "J") -- [M]erge line up

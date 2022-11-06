@@ -6,7 +6,16 @@ local append = vim.fn.append
 local bo = vim.bo
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
-local function wordUnderCursor() return vim.fn.expand("<cword>") end
+
+local function wordUnderCursor()
+	return vim.fn.expand("<cword>")
+end
+
+local function leaveVisualMode()
+	-- https://github.com/neovim/neovim/issues/17735#issuecomment-1068525617
+	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
+	vim.api.nvim_feedkeys(escKey, "nx", false)
+end
 
 local ret = {}
 
@@ -234,25 +243,33 @@ function ret.moveCharLeft()
 end
 
 function ret.moveLineDown()
-	cmd [[. move .+1]]
+	cmd [[. move +1]]
 	cmd [[normal! ==]]
 end
 
 function ret.moveLineUp()
-	cmd [[normal! ==]]
 	cmd [[. move -2]]
+	cmd [[normal! ==]]
 end
 
 function ret.moveSelectionDown()
-	cmd[[startinsert]]
-	cmd[[stopinsert]]
-	cmd [[move '>+1]]
+	leaveVisualMode()
+	cmd [['<,'> move '>+1]]
 	cmd [[normal! gv=gv]]
 end
 
 function ret.moveSelectionUp()
-	cmd [[move '<-2]]
+	leaveVisualMode()
+	cmd [['<,'> move '<-2]]
 	cmd [[normal! gv=gv]]
+end
+
+function ret.moveSelectionRight()
+	cmd [[normal! xpgvlolo]]
+end
+
+function ret.moveSelectionLeft()
+	cmd [[normal! xhhpgvhoho]]
 end
 
 --------------------------------------------------------------------------------
