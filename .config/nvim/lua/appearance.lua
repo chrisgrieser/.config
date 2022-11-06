@@ -27,9 +27,14 @@ function customHighlights()
 
 	-- rainbow brackets without agressive red…
 	cmd [[highlight rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets…
+
 end
 
 customHighlights()
+
+-- treesittter refactor focus
+-- cmd [[highlight TSDefinition term=underline gui=underline]]
+cmd [[highlight TSDefinitionUsage term=underline gui=underline]]
 
 -- mixed whitespace
 cmd [[highlight! def link MixedWhiteSpace Folded]]
@@ -44,40 +49,9 @@ require("indent_blankline").setup {
 	show_current_context = true,
 	use_treesitter = true,
 	strict_tabs = false,
+	-- context_char = '┃',
 	filetype_exclude = specialFiletypes,
 }
-
---------------------------------------------------------------------------------
--- pending on: https://github.com/folke/zen-mode.nvim/issues/47
--- ZEN MODE plugin
--- require("zen-mode").setup{
--- 	window = {
--- 		backdrop = 1,
--- 		width = 80,
--- 		height = 1, -- 1 = 100%
--- 	},
--- 	plugins = {
--- 		gitsigns = { enabled = true },
--- 		options = {
--- 			showcmd = true,
--- 			ruler = true,
--- 		},
--- 	},
--- 	on_open = customHighlights,
--- 	on_close = customHighlights,
--- }
---
--- augroup("markdownZen", {})
--- autocmd("BufEnter", {
--- 	group = "markdownZen",
--- 	pattern = "*.md",
--- 	command = [[ZenMode]],
--- })
--- autocmd("BufLeave", {
--- 	group = "markdownZen",
--- 	pattern = "*.md",
--- 	command = [[ZenMode]],
--- })
 
 --------------------------------------------------------------------------------
 
