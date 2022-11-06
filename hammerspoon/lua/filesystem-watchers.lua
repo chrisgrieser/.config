@@ -12,7 +12,6 @@ function bookmarkSync()
 		cp "$BROWSER_FOLDER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
 		cp "$BROWSER_FOLDER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
 	]])
-	log("🔖 Bookmark Sync (" .. deviceName() .. ")", "./logs/some.log")
 end
 
 bookmarkWatcher = hs.pathwatcher.new(browserFolder .. "Default/Bookmarks", bookmarkSync)

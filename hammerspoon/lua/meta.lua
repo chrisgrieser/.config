@@ -1,4 +1,5 @@
 require("lua.utils")
+local cons = hs.console
 --------------------------------------------------------------------------------
 -- Hammerspoon settings
 hs.allowAppleScript(false)
@@ -11,35 +12,30 @@ hs.window.animationDuration = 0
 
 -- `hammerspoon://hs-reload` for reloading via Build System
 hs.urlevent.bind("hs-reload", function()
-	if hs.console.hswindow() then hs.console.hswindow():close() end -- close console
+	if cons.hswindow() then cons.hswindow():close() end -- close console
 	hs.execute("touch ./is-reloading")
 	hs.reload()
 end)
 
 --------------------------------------------------------------------------------
 -- CONSOLE
+cons.titleVisibility("hidden")
+cons.toolbar(nil)
 
-hs.console.titleVisibility("hidden")
-hs.console.toolbar(nil)
+cons.consoleFont {name = "JetBrainsMonoNL Nerd Font", size = 20}
 
-hs.console.consoleFont({name = "JetBrainsMonoNL Nerd Font", size = 19})
-
-hs.console.darkMode(false)
-hs.console.outputBackgroundColor{ white = 0.9 }
+cons.darkMode(false)
+cons.outputBackgroundColor {white = 0.9}
 
 -- copy last command to clipboard
 -- `hammerspoon://copy-last-command` for Karabiner Elements (⌘⇧C)
 hs.urlevent.bind("copy-last-command", function()
-	consoleHistory = hs.console.getHistory()
+	consoleHistory = cons.getHistory()
 	lastcommand = consoleHistory[#consoleHistory]
 	lastcommand = trim(lastcommand)
 	hs.pasteboard.setContents(lastcommand)
-	notify("Copied: '"..lastcommand.."'")
+	notify("Copied: '" .. lastcommand .. "'")
 end)
 
 -- `hammerspoon://clear-console` for Karabiner Elements (⌘K)
-hs.urlevent.bind("clear-console",hs.console.clearConsole)
-
--- aliases
-I = hs.inspect -- to inspect tables in the console
-A = hs.application
+hs.urlevent.bind("clear-console", cons.clearConsole)

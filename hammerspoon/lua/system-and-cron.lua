@@ -6,11 +6,11 @@ require("lua.layouts")
 local caff = hs.caffeinate.watcher
 --------------------------------------------------------------------------------
 -- CONFIG
-dotfileLocation = home.."/dotfiles"
-vaultLocation = home.."/Main Vault"
-gitDotfileScript = dotfileLocation.."/git-dotfile-sync.sh"
-gitVaultScript = vaultLocation.."/Meta/git-vault-sync.sh"
-dotfileIcon ="⏺"
+dotfileLocation = home .. "/dotfiles"
+vaultLocation = home .. "/Main Vault"
+gitDotfileScript = dotfileLocation .. "/git-dotfile-sync.sh"
+gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
+dotfileIcon = "⏺"
 vaultIcon = "🟪"
 repoSyncFrequencyMin = 20
 
@@ -20,37 +20,35 @@ repoSyncFrequencyMin = 20
 function gitDotfileSync(arg)
 	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then return end
 
-	gitDotfileSyncTask = hs.task.new(gitDotfileScript, function (exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
-		stdErr = stdErr:gsub("\n", " –– ")
-		if exitCode ~= 0 then
-			local stdout = hs.execute("git status --short")
-			if not(stdout) then return end
-			local submodulesStillDirty = stdout:match(" m ")
-			if submodulesStillDirty then
-				local modules = stdout:gsub(".*/", "")
-				notify(dotfileIcon.."⚠️️ dotfiles submodules still dirty\n\n"..modules)
-				log(dotfileIcon.." ⚠️️ dotfiles submodules still dirty ("..deviceName().."):\n"..modules)
-			else
-				notify(dotfileIcon.."⚠️️ dotfiles "..stdErr)
-				log (dotfileIcon.." ⚠️ dotfiles sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
+	gitDotfileSyncTask = hs.task.new(gitDotfileScript,
+		function(exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
+			stdErr = stdErr:gsub("\n", " –– ")
+			if exitCode ~= 0 then
+				local stdout = hs.execute("git status --short")
+				if not (stdout) then return end
+				local submodulesStillDirty = stdout:match(" m ")
+				if submodulesStillDirty then
+					local modules = stdout:gsub(".*/", "")
+					notify(dotfileIcon .. "⚠️️ dotfiles submodules still dirty\n\n" .. modules)
+				else
+					notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
+				end
 			end
-		end
-	end, {arg}):start()
+		end, {arg}):start()
 end
 
 function gitVaultSync()
 	if gitVaultSyncTask and gitVaultSyncTask:isRunning() then return end
 
-	gitVaultSyncTask = hs.task.new(gitVaultScript, function (exitCode, _, stdErr)
+	gitVaultSyncTask = hs.task.new(gitVaultScript, function(exitCode, _, stdErr)
 		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode ~= 0 then
-			notify(vaultIcon.."⚠️️ vault "..stdErr)
-			log (vaultIcon.." ⚠️ vault sync ("..deviceName().."): "..stdErr, "./logs/sync.log")
+			notify(vaultIcon .. "⚠️️ vault " .. stdErr)
 		end
 	end):start()
 end
 
-repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function ()
+repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function()
 	gitDotfileSync()
 	gitVaultSync()
 end)
@@ -68,6 +66,7 @@ end)
 function updateSketchybar()
 	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --trigger repo-files-update")
 end
+
 dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateSketchybar)
 dotfilesWatcher:start()
 vaultWatcher = hs.pathwatcher.new(vaultLocation, updateSketchybar)
@@ -75,18 +74,18 @@ vaultWatcher:start()
 
 --------------------------------------------------------------------------------
 
-function screenSleep (eventType)
+function screenSleep(eventType)
 	if eventType == caff.screensDidSleep then
-		log ("💤 sleep ("..deviceName()..")", "./logs/some.log")
 		gitDotfileSync()
 	end
 end
+
 shutDownWatcher = caff.new(screenSleep)
 shutDownWatcher:start()
 
 --------------------------------------------------------------------------------
 -- SYSTEM WAKE/START
-function officeWake (eventType)
+function officeWake(eventType)
 	if eventType == caff.screensDidUnlock then
 		gitDotfileSync("--submodules")
 		gitVaultSync()
@@ -94,9 +93,9 @@ function officeWake (eventType)
 	end
 end
 
-function homeWake (eventType)
-	runDelayed(2, function ()
-		if not(eventType == caff.screensDidWake or eventType == caff.systemDidWake) then return end
+function homeWake(eventType)
+	runDelayed(2, function()
+		if not (eventType == caff.screensDidWake or eventType == caff.systemDidWake) then return end
 		if isProjector() then
 			setDarkmode(true)
 			movieModeLayout()
@@ -139,7 +138,7 @@ end
 
 --------------------------------------------------------------------------------
 -- CRONJOBS AT HOME
-function sleepYouTube ()
+function sleepYouTube()
 	local minutesIdle = hs.host.idleTime() / 60
 	if minutesIdle < 30 then return end
 
@@ -157,8 +156,8 @@ function sleepYouTube ()
 			end if
 		end tell
 	]])
-	log ("😴 sleepTimer ("..deviceName()..")", "./logs/some.log")
 end
+
 sleepTimer1 = hs.timer.doAt("03:00", "01d", sleepYouTube, true)
 sleepTimer2 = hs.timer.doAt("04:00", "01d", sleepYouTube, true)
 sleepTimer3 = hs.timer.doAt("05:00", "01d", sleepYouTube, true)
@@ -171,27 +170,27 @@ biweeklyTimer = hs.timer.doAt("02:00", "03d", function()
 		end tell
 	]])
 	hs.execute('cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/"')
-	log ("🕝2️⃣ biweekly ("..deviceName()..")", "./logs/some.log")
-	hs.loadSpoon('EmmyLua') -- so it runs not as often
+	hs.loadSpoon("EmmyLua") -- so it runs not as often
 end, true)
 
-dailyEveningTimer = hs.timer.doAt("21:00", "01d", function ()
+dailyEveningTimer = hs.timer.doAt("21:00", "01d", function()
 	setDarkmode(true)
 end)
 
-dailyMorningTimer = hs.timer.doAt("08:00", "01d", function ()
+dailyMorningTimer = hs.timer.doAt("08:00", "01d", function()
 	setDarkmode(false)
 end)
 
-function projectorScreensaverStop (eventType)
+function projectorScreensaverStop(eventType)
 	if (eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart) then
-		runDelayed(3, function ()
+		runDelayed(3, function()
 			if isProjector() then
 				iMacDisplay:setBrightness(0)
 			end
 		end)
 	end
 end
+
 projectorScreensaverWatcher = caff.new(projectorScreensaverStop)
 
 if isIMacAtHome() then
@@ -211,4 +210,3 @@ if isAtMother() then
 	sleepTimer2:start()
 	sleepTimer3:start()
 end
-
