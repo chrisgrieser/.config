@@ -174,7 +174,7 @@ keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- using delete to preserve comm
 
 --------------------------------------------------------------------------------
 
--- MACRO
+-- MACRO & SUBSTITUTION
 -- one-off recording (+ q needs remapping due to being mapped to comments)
 -- needs temporary remapping, since there is no "recording mode"
 augroup("recording", {})
@@ -187,6 +187,12 @@ autocmd("RecordingEnter", {
 	callback = function() keymap("n", "0", "q") end
 })
 keymap("n", "9", "qy") -- quick replay (don't use counts that high anyway)
+
+-- find & replace under cursor
+keymap("n", "<leader>f", ':% s/<C-r>=expand("<cword>")<CR>//<Left>')
+
+-- find & replace selection
+keymap("v", "<leader>f", [[<Esc>:'<,'> s/\(.*\)/\1/<Left><Left><Left>]])
 
 --------------------------------------------------------------------------------
 
@@ -260,15 +266,24 @@ keymap("n", "<leader>ll", function() qol.quicklog(true) end)
 
 -- Line & Character Movement (vim.move)
 g.move_map_keys = 0 -- disable default keymaps of vim.move
-keymap("n", "<Down>", "<Plug>MoveLineDown")
-keymap("n", "<Up>", "<Plug>MoveLineUp")
-keymap("x", "<Down>", "<Plug>MoveBlockDown")
-keymap("x", "<Up>", "<Plug>MoveBlockUp")
+keymap("n", "<Down>", ":. move +1<CR>")
+keymap("n", "<Up>", "")
+keymap("x", "<Down>", "")
+keymap("x", "<Up>", "")
 
-keymap("n", "<Right>", "<Plug>MoveCharRight")
-keymap("n", "<Left>", "<Plug>MoveCharLeft")
-keymap("x", "<Right>", "<Plug>MoveBlockRight")
-keymap("x", "<Left>", "<Plug>MoveBlockLeft")
+keymap("n", "<Right>", "")
+keymap("n", "<Left>", "")
+keymap("x", "<Right>", "")
+keymap("x", "<Left>", "")
+
+-- keymap("n", "<Down>", "<Plug>MoveLineDown")
+-- keymap("n", "<Up>", "<Plug>MoveLineUp")
+-- keymap("x", "<Down>", "<Plug>MoveBlockDown")
+-- keymap("x", "<Up>", "<Plug>MoveBlockUp")
+-- keymap("n", "<Right>", "<Plug>MoveCharRight")
+-- keymap("n", "<Left>", "<Plug>MoveCharLeft")
+-- keymap("x", "<Right>", "<Plug>MoveBlockRight")
+-- keymap("x", "<Left>", "<Plug>MoveBlockLeft")
 
 -- Merging / Splitting Lines
 keymap({"n", "x"}, "M", "J") -- [M]erge line up
