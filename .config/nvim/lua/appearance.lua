@@ -19,6 +19,7 @@ function customHighlights()
 		cmd("highlight " .. v .. " gui=underline")
 	end
 
+	-- active indent
 	cmd [[highlight! def link IndentBlanklineContextChar Comment]]
 
 	-- URLs
@@ -33,7 +34,7 @@ end
 customHighlights()
 
 -- treesittter refactor focus
--- cmd [[highlight TSDefinition term=underline gui=underline]]
+cmd [[highlight TSDefinition term=underline gui=underline]]
 cmd [[highlight TSDefinitionUsage term=underline gui=underline]]
 
 -- mixed whitespace

@@ -34,7 +34,7 @@ keymap("n", "<leader>.", "mz`[v`]: s/^\\| /./g<CR>:nohl<CR>`zl", opts)
 -- smart line duplicate (mnemonic: Replicate)
 -- switches top/bottom & moves to value
 keymap("n", "R", function ()
-	require("quality-of-life").duplicateLine {smart = true}
+	require("quality-of-life").duplicateLine {smart = true, moveToValue = true}
 end, opts)
 
 ---@diagnostic disable: undefined-field, param-type-mismatch
