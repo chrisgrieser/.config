@@ -8,6 +8,24 @@ keystroke = hs.eventtap.keyStroke
 aw = hs.application.watcher
 wf = hs.window.filter
 runDelayed = hs.timer.doAfter
+app = hs.application
+I = hs.inspect -- to inspect tables in the console
+
+--------------------------------------------------------------------------------
+
+local mainDisplayName = hs.screen.primaryScreen():name()
+
+function isProjector()
+	local projectorHelmholtz = mainDisplayName == "ViewSonic PJ"
+	local tvLeuthinger = mainDisplayName == "TV_MONITOR"
+	return projectorHelmholtz or tvLeuthinger
+end
+
+function isAtOffice()
+	local screenOne = mainDisplayName == "HP E223"
+	local screenTwo = mainDisplayName == "Acer CB241HY"
+	return screenOne or screenTwo
+end
 
 function screenIsUnlocked()
 	local _, success = hs.execute('[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]] && exit 0 || exit 1')
@@ -23,29 +41,15 @@ end
 function isAtMother()
 	if deviceName():find("Mother") then
 		return true
-	else
-		return false
 	end
+	return false
 end
 
 function isIMacAtHome()
 	if deviceName():find("iMac") and deviceName():find("Home") then
 		return true
-	else
-		return false
 	end
-end
-
-function isProjector()
-	local projectorHelmholtz = hs.screen.primaryScreen():name() == "ViewSonic PJ"
-	local tvLeuthinger = hs.screen.primaryScreen():name() == "TV_MONITOR"
-	return projectorHelmholtz or tvLeuthinger
-end
-
-function isAtOffice()
-	local screenOne = hs.screen.primaryScreen():name() == "HP E223"
-	local screenTwo = hs.screen.primaryScreen():name() == "Acer CB241HY"
-	return (screenOne or screenTwo)
+	return false
 end
 
 function notify(text)
@@ -58,11 +62,18 @@ function notify(text)
 	print("notify: " .. text) -- for the console
 end
 
-function betweenTime(startTime, endTime)
+---whether the current time is between start & end
+---@param startHour integer
+---@param endHour integer
+---@return boolean
+function betweenTime(startHour, endHour)
 	local currentHour = hs.timer.localTime() / 60 / 60
-	return currentHour > startTime and currentHour < endTime
+	return currentHour > startHour and currentHour < endHour
 end
 
+---general log util
+---@param text string
+---@param logpath any
 function log(text, logpath)
 	text = trim(text)
 	hs.execute('mkdir -p "$(dirname "' .. logpath .. '")"')
@@ -70,7 +81,9 @@ function log(text, logpath)
 	print("log: " .. text) -- for the console
 end
 
-function frontapp()
+---name of frontapp
+---@return string
+function frontApp()
 	return hs.application.frontmostApplication():name()
 end
 
@@ -100,7 +113,7 @@ function killIfRunning(appName)
 	end)
 end
 
--- won't work with Chromium browsers due to widespread bug though
+-- won't work with Chromium browsers due to bug
 function openLinkInBackground(url)
 	hs.execute('open -g "' .. url .. '"')
 end

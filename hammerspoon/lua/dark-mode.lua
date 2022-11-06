@@ -66,13 +66,11 @@ function setDarkmode(toDark)
 	if (not (isDarkMode()) and toDark) or (isDarkMode() and not(toDark)) then
 		toggleDarkMode()
 	end
-	log("🌒 Dark Mode: " .. (tostring(isDarkMode())) .. " (" .. deviceName() .. ")", "./logs/some.log")
 end
 
 -- `hammerspoon://toggle-darkmode` for toggling via Shortcuts
 hs.urlevent.bind("toggle-darkmode", function()
 	toggleDarkMode()
-	log("🌒 Manual Toggle Darkmode (" .. deviceName() .. ")", "./logs/some.log")
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 

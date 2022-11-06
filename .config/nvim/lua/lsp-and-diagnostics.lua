@@ -172,7 +172,6 @@ lspConfig["sumneko_lua"].setup {
 				callSnippet = "Replace",
 				keywordSnippet = "Replace",
 				displayContext = 0,
-				postfix = "@",
 				showWord = "Enable",
 			},
 			diagnostics = {
@@ -184,8 +183,8 @@ lspConfig["sumneko_lua"].setup {
 			},
 			workspace = {
 				library = {
-					home .. "/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
-				}
+					"/Users/chrisgrieser/dotfiles/hammerspoon/Spoons/EmmyLua.spoon/annotations",
+				},
 			},
 			hint = { -- do not seem to be supported?
 				enable = true,

@@ -1,7 +1,7 @@
 require("lua.utils")
 require("lua.window-management")
 require("lua.private")
-
+local useLayout
 --------------------------------------------------------------------------------
 -- HELPERS
 function dockSwitcher (targetMode)
@@ -17,9 +17,10 @@ function alacrittyFontSize (size)
 	]])
 end
 
+
 function showAllSidebars()
 	-- because of the use of URL schemes, leaves Drafts as the focused app
-	if appIsRunning("Highlights") then hs.application("Highlights"):selectMenuItem({"View", "Show Sidebar"}) end
+	if appIsRunning("Highlights") then app("Highlights"):selectMenuItem{"View", "Show Sidebar"} end
 	openLinkInBackground("obsidian://sidebar?showLeft=true&showRight=false")
 	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
@@ -36,6 +37,8 @@ function movieModeLayout()
 	killIfRunning("Obsidian")
 	killIfRunning("Marta")
 	killIfRunning("Drafts")
+	killIfRunning("Neovide")
+	killIfRunning("neovide")
 	killIfRunning("Slack")
 	killIfRunning("Discord")
 	killIfRunning("BusyCal")
@@ -57,7 +60,7 @@ function homeModeLayout ()
 	if betweenTime(1, 8) then
 		iMacDisplay:setBrightness(0)
 	else
-		iMacDisplay:setBrightness(0.85)
+		iMacDisplay:setBrightness(0.8)
 	end
 	holeCover()
 	hs.execute("brew services restart sketchybar") -- restart instead of reload to load colors
@@ -84,6 +87,7 @@ function homeModeLayout ()
 		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Neovide", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"neovide", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Slack", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Discord", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil},
@@ -94,8 +98,8 @@ function homeModeLayout ()
 	}
 
 	showAllSidebars()
-	hs.layout.apply(homeLayout)
-	runDelayed(1.0, function () hs.application("Drafts"):activate() end)
+	useLayout(homeLayout)
+	runDelayed(1.0, function () app("Drafts"):activate() end)
 
 	if screenIsUnlocked() then
 		runDelayed (10, function()twitterrificAction("scrollup") end)
@@ -138,19 +142,21 @@ function officeModeLayout ()
 		{"Marta", nil, screen1, maximized, nil, nil},
 		{"Sublime Text", nil, screen1, maximized, nil, nil},
 		{"Obsidian", nil, screen1, maximized, nil, nil},
+		{"Neovide", nil, screen1, maximized, nil, nil},
+		{"neovide", nil, screen1, maximized, nil, nil},
 		{"Drafts", nil, screen1, maximized, nil, nil},
 		{"Mimestream", nil, screen1, maximized, nil, nil},
 		{"alacritty", nil, screen1, maximized, nil, nil},
 		{"Alacritty", nil, screen1, maximized, nil, nil},
 	}
 
-	hs.layout.apply(officeLayout)
+	useLayout(officeLayout)
 	showAllSidebars()
 	runDelayed(0.3, function ()
-		hs.layout.apply(officeLayout)
+		useLayout(officeLayout)
 	end)
 	runDelayed(0.5, function ()
-		hs.application("Drafts"):activate()
+		app("Drafts"):activate()
 	end)
 
 	-- wait until sync is finished, to avoid merge conflict
@@ -217,13 +223,13 @@ function motherHomeModeLayout()
 		{"alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
 	}
 
-	hs.layout.apply(motherHomeLayout)
+	useLayout(motherHomeLayout)
 	showAllSidebars()
 	runDelayed(0.3, function ()
-		hs.layout.apply(motherHomeLayout)
+		useLayout(motherHomeLayout)
 	end)
-	runDelayed(0.6, function () hs.layout.apply(motherHomeLayout) end)
-	runDelayed(1, function () hs.layout.apply(motherHomeLayout) end)
+	runDelayed(0.6, function () useLayout(motherHomeLayout) end)
+	runDelayed(1, function () useLayout(motherHomeLayout) end)
 end
 
 --------------------------------------------------------------------------------
@@ -246,8 +252,9 @@ hotkey(hyper, "home", setLayout) -- hyper + eject on Apple Keyboard
 
 --------------------------------------------------------------------------------
 
+
 -- Open at Mouse Screen
-wf_appsOnMouseScreen = wf.new({
+wf_appsOnMouseScreen = wf.new{
 	"Drafts",
 	"Brave Browser",
 	"Mimestream",
@@ -257,6 +264,8 @@ wf_appsOnMouseScreen = wf.new({
 	"alacritty",
 	"Slack",
 	"Discord",
+	"Neovide",
+	"neovide",
 	"Marta",
 	"Espanso",
 	"BusyCal",
@@ -264,7 +273,7 @@ wf_appsOnMouseScreen = wf.new({
 	"System Preferences",
 	"BetterTouchTool",
 	"Finder"
-})
+}
 
 wf_appsOnMouseScreen:subscribe(wf.windowCreated, function (newWindow)
 	local mouseScreen = hs.mouse.getCurrentScreen()
