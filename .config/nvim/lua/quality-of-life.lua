@@ -25,7 +25,7 @@ local ret = {}
 ---@param newName string if no new ext is provided, the current will be kept
 function qol_renameFile(newName)
 	if newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") then
-		cmd('echo "Invalid filename"')
+		cmd('echo "Invalid filename."')
 		return
 	end
 
@@ -38,7 +38,7 @@ function qol_renameFile(newName)
 
 	cmd("edit " .. newName)
 	cmd("bdelete #")
-	cmd('echo "Renamed ' .. oldName .. " to " .. newName .. '"')
+	cmd('echo "Renamed \'' .. oldName .. "\' to \'" .. newName .. '\'."')
 end
 
 cmd [[:command! -nargs=1 Rename lua qol_renameFile(<f-args>)]]
@@ -47,10 +47,10 @@ cmd [[:command! -nargs=1 Rename lua qol_renameFile(<f-args>)]]
 
 -- Duplicate line under cursor, and change occurences of certain words to their
 -- opposite, e.g., "right" to "left". Indended for languages like CSS.
----@param opts table
+---@param opts table available: smart, moveToValue, increment
 function ret.duplicateLine(opts)
 	if not (opts) then
-		opts = {smart = false, moveToValue = false, increment = true}
+		opts = {smart = false, moveToValue = false, increment = false}
 	end
 
 	local line = getline(".")
@@ -73,7 +73,7 @@ function ret.duplicateLine(opts)
 	if opts.increment then
 		local digits = line:match("%d+")
 		if digits then
-			digits = tostring(tonumber(digits) + 1)  -- increment by one
+			digits = tostring(tonumber(digits) + 1) 
 			line = line:gsub("%d+", digits, 1)
 		end
 	end
@@ -145,7 +145,7 @@ end
 -- character, the character will be switched, e.g. "(" to ")". If it is a
 -- letter, falls back to the default `~` behavior of Toggling between upper and
 -- lower case.
-function ret.switcher()
+function ret.reverse()
 	local word
 	local wordchar = bo.iskeyword
 	dashIsKeyword = wordchar:find(",%-$") or wordchar:find(",%-,") or wordchar:find("^%-,")
@@ -223,6 +223,7 @@ function ret.switcher()
 		cmd("normal! r" .. switched)
 		return
 	end
+
 	print("Nothing under the cursor that can be switched")
 end
 
