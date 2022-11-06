@@ -31,12 +31,13 @@ keymap("n", "<leader>C", "lF.d/[.\\s]<CR>:nohl<CR>", opts) -- delete [c]lass und
 -- prefix "." and join the last paste. Useful when copypasting from the dev tools
 keymap("n", "<leader>.", "mz`[v`]: s/^\\| /./g<CR>:nohl<CR>`zl", opts)
 
-
 -- smart line duplicate (mnemonic: Replicate)
 -- switches top/bottom & moves to value
----@diagnostic disable: undefined-field, param-type-mismatch
-keymap("n", "R", require("quality-of-life").smartDuplicateLine, opts)
+keymap("n", "R", function ()
+	require("quality-of-life").duplicateLine {smart = true}
+end, opts)
 
+---@diagnostic disable: undefined-field, param-type-mismatch
 -- toggle !important
 keymap("n", "<leader>i", function()
 	local lineContent = fn.getline(".")
@@ -48,7 +49,7 @@ keymap("n", "<leader>i", function()
 	fn.setline(".", lineContent)
 end, {buffer = true})
 
-keymap("n", "zh", function ()
+keymap("n", "zh", function()
 	local hr = {
 		"/* ───────────────────────────────────────────────── */",
 		"/* << ",

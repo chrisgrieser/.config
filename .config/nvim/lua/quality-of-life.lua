@@ -31,40 +31,37 @@ end
 -- opposite, e.g., "right" to "left". Indended for languages like CSS.
 ---@param opts table
 function ret.duplicateLine(opts)
+	if not(opts) then
+		opts = {smart=false, moveToValue=false}
+	end
+
 	local line = getline(".")
 	if opts.smart then
-		
-	end
-	if line:find("top") then
-		line = line:gsub("top", "bottom")
-	elseif line:find("bottom") then
-		line = line:gsub("bottom", "top")
-	elseif line:find("right") then
-		line = line:gsub("right", "left")
-	elseif line:find("left") then
-		line = line:gsub("left", "right")
-	elseif line:find("height") and not (line:find("line-height")) then
-		line = line:gsub("height", "width")
-	elseif line:find("width") and not (line:find("border-width")) and not (line:find("outline-width")) then
-		line = line:gsub("width", "height")
+		if line:find("top") then
+			line = line:gsub("top", "bottom")
+		elseif line:find("bottom") then
+			line = line:gsub("bottom", "top")
+		elseif line:find("right") then
+			line = line:gsub("right", "left")
+		elseif line:find("left") then
+			line = line:gsub("left", "right")
+		elseif line:find("height") and not (line:find("line-height")) then
+			line = line:gsub("height", "width")
+		elseif line:find("width") and not (line:find("border-width")) and not (line:find("outline-width")) then
+			line = line:gsub("width", "height")
+		end
 	end
 	append(".", line)
 
 	-- cursor movement
 	local lineNum = getCursor(0)[1] + 1 -- line down
 	local colNum = getCursor(0)[2]
-	local _, valuePos = line:find(": ?")
-	if valuePos then -- if line was changed, move cursor to value of the property
-		colNum = valuePos
+	if opts.moveToValue then
+		local _, valuePos = line:find(": ?")
+		if valuePos then 
+			colNum = valuePos
+		end
 	end
-	setCursor(0, {lineNum, colNum})
-end
-
-function ret.duplicateLine()
-	local line = getline(".")
-	append(".", line)
-	local lineNum = getCursor(0)[1] + 1 -- line down
-	local colNum = getCursor(0)[2]
 	setCursor(0, {lineNum, colNum})
 end
 
