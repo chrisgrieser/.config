@@ -20,7 +20,7 @@ duti -s "$videoplayerID" m3u8 all
 duti -s "$videoplayerID" mkv all
 duti -s "$videoplayerID" m4a all
 
-# text
+# code
 editorID="com.apple.automator.Neovim"
 duti -s "$editorID" com.apple.property-list all
 duti -s "$editorID" vim all
