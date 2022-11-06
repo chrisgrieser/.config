@@ -16,7 +16,7 @@ keymap = vim.keymap.set
 
 --------------------------------------------------------------------------------
 
----equivalent to `:setlocal`
+---equivalent to `:setlocal option=value`
 ---@param option string
 ---@param value any
 function setlocal(option, value)
@@ -24,9 +24,11 @@ function setlocal(option, value)
 	vim.api.nvim_set_option_value(option, value, {scope = "local"})
 end
 
-function setlocal(option, value)
-	-- :setlocal does not have a direct access via the vim-module, it seems https://neovim.io/doc/user/lua.html#lua-vim-setlocal
-	vim.api.nvim_set_option_value(option, value, {scope = "local"})
+---equivalent to `:setlocal option?`
+---@param option string
+---@return any
+function getlocalopt(option)
+	return vim.api.nvim_get_option_value(option, {scope = "local"})
 end
 
 -- `:I` inspects the passed lua object
