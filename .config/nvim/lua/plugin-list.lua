@@ -81,7 +81,6 @@ function PluginList()
 
 	-- Operators & Text Objects
 	use "kylechui/nvim-surround"
-	use "tpope/vim-abolish" -- various case conversions
 	use "gbprod/substitute.nvim" -- substitution operator, neovim version for vim-subversive
 	use "numToStr/Comment.nvim"
 	use "michaeljsmith/vim-indent-object"
@@ -89,10 +88,8 @@ function PluginList()
 	-- Navigation
 	use "mg979/vim-visual-multi" -- multi-cursor
 	use "phaazon/hop.nvim"
-	use "unblevable/quick-scope" -- f-t-improvement
 
 	-- Editing
-	use "matze/vim-move"
 	use "AndrewRadev/splitjoin.vim"
 	use "Darazaki/indent-o-matic" -- detect indention (alternative: NMAC427/guess-indent.nvim)
 	use "mbbill/undotree" -- undo history nagivation

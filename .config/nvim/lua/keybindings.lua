@@ -266,14 +266,13 @@ keymap("n", "<leader>ll", function() qol.quicklog(true) end)
 --------------------------------------------------------------------------------
 
 -- Line & Character Movement
-g.move_map_keys = 0 -- disable default keymaps of vim.move
 keymap("n", "<Down>", qol.moveLineDown)
 keymap("n", "<Up>", qol.moveLineUp)
-keymap("x", "<Down>",)
-keymap("x", "<Up>", ":move '<-2<CR>gv=gv")
+keymap("x", "<Down>",qol.moveSelectionDown)
+keymap("x", "<Up>", qol.moveSelectionUp)
 
 keymap("n", "<Right>", qol.moveCharRight)
-keymap("n", "<Right>", qol.moveCharLeft)
+keymap("n", "<Left>", qol.moveCharLeft)
 -- keymap("x", "<Right>", "")
 -- keymap("x", "<Left>", "")
 
