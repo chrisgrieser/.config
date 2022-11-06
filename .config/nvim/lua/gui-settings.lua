@@ -85,7 +85,7 @@ keymap("n", "<D-a>", "ggVG") -- cmd+a
 keymap("i", "<D-a>", "<Esc>ggVG")
 keymap("v", "<D-a>", "ggG")
 
-keymap("", "<D-BS>", ':w!<CR>:!mv "%:p" ~/.Trash/<CR><CR>:bd<CR>:echo "File deleted."<CR>') -- undoable deletion of the file
+keymap("", "<D-BS>", ':w!<CR>:!mv -f "%:p" ~/.Trash/<CR><CR>:bd<CR>:echo "File deleted."<CR>') -- undoable deletion of the file
 keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 keymap({"n", "v", "i"}, "<D-1>", ":Lexplore<CR>") -- file tree (netrw)
 keymap({"n", "v", "i"}, "<D-0>", ":messages<CR>")

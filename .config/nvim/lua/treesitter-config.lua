@@ -59,8 +59,11 @@ require("nvim-treesitter.configs").setup {
 		},
 		swap = {
 			enable = true,
-			swap_next = {
-				["<leader>S"] = "@parameter.inner",
+			swap_next = { -- mnemonic: [e]xchange
+				["<leader>e"] = "@parameter.inner",
+			},
+			swap_previous = {
+				["<leader>E"] = "@parameter.inner",
 			},
 		},
 		select = {
