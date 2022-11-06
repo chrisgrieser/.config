@@ -424,12 +424,12 @@ brew services restart sketchybar</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string></string>
+				<string>~/dotfiles/hammerspoon/helpers/dock-switching/dock-switcher.sh</string>
+				<key>filtermode</key>
+				<integer>2</integer>
 				<key>placeholder</key>
-				<string>~/dotfiles/hammerspoon/dock-switching/dock-switcher.sh</string>
+				<string>/path/dock-switcher.sh</string>
 				<key>required</key>
-				<false/>
-				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
@@ -437,7 +437,7 @@ brew services restart sketchybar</string>
 			<key>label</key>
 			<string>dock switcher script path</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>filepicker</string>
 			<key>variable</key>
 			<string>dock_switcher_path</string>
 		</dict>
