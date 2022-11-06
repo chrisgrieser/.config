@@ -262,8 +262,8 @@ keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
 
 -- Logging
-keymap("n", "<leader>ll", function() qol.quicklog(true) end)
 --------------------------------------------------------------------------------
+keymap("n", "<leader>ll", function() qol.quicklog(true) end)
 
 -- Line & Character Movement
 keymap("n", "<Down>", qol.moveLineDown)
