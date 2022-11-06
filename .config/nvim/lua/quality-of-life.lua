@@ -21,14 +21,6 @@ local ret = {}
 
 --------------------------------------------------------------------------------
 
-function ret.duplicateLine()
-	local line = getline(".")
-	append(".", line)
-	local lineNum = getCursor(0)[1] + 1 -- line down
-	local colNum = getCursor(0)[2]
-	setCursor(0, {lineNum, colNum})
-end
-
 function ret.duplicateVisual()
 	local prevReg = vim.fn.getreg("z")
 	cmd [[silent! normal!"zy`]"zp]]
@@ -37,8 +29,12 @@ end
 
 -- Duplicate line under cursor, and change occurences of certain words to their
 -- opposite, e.g., "right" to "left". Indended for languages like CSS.
-function ret.smartDuplicateLine()
+---@param opts table
+function ret.duplicateLine(opts)
 	local line = getline(".")
+	if opts.smart then
+		
+	end
 	if line:find("top") then
 		line = line:gsub("top", "bottom")
 	elseif line:find("bottom") then
@@ -61,6 +57,14 @@ function ret.smartDuplicateLine()
 	if valuePos then -- if line was changed, move cursor to value of the property
 		colNum = valuePos
 	end
+	setCursor(0, {lineNum, colNum})
+end
+
+function ret.duplicateLine()
+	local line = getline(".")
+	append(".", line)
+	local lineNum = getCursor(0)[1] + 1 -- line down
+	local colNum = getCursor(0)[2]
 	setCursor(0, {lineNum, colNum})
 end
 

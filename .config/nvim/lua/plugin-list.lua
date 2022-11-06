@@ -72,7 +72,6 @@ function PluginList()
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 
 	-- File Management & Switching
-	use "tpope/vim-eunuch" -- file operation utilities
 	use {"nvim-telescope/telescope.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons",
@@ -88,6 +87,7 @@ function PluginList()
 	-- Navigation
 	use "mg979/vim-visual-multi" -- multi-cursor
 	use "phaazon/hop.nvim"
+	use "unblevable/quick-scope" -- f-t-improvement
 
 	-- Editing
 	use "AndrewRadev/splitjoin.vim"
