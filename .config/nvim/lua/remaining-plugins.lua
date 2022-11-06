@@ -30,14 +30,14 @@ g.undotree_DiffAutoOpen = 0
 g.undotree_SetFocusWhenToggle = 1
 g.undotree_ShortIndicators = 1 -- for the relative date
 g.undotree_HelpLine = 0 -- 0 hides the "Press ? for help"
-cmd [[ function! g:Undotree_CustomMap()
-nmap <buffer> <C-j> <plug>UndotreePreviousState
-nmap <buffer> <C-k> <plug>UndotreeNextState
-nmap <buffer> J jjjjjjj
-nmap <buffer> K 7k
-nmap <buffer> U <plug>UndotreeRedo
-endfunc
-]]
+
+function g.Undotree_CustomMap()
+	keymap("n", "<C-j>", "<plug>UndotreePreviousState", {buffer = true})
+	keymap("n", "<C-k>", "<plug>UndotreeNextState", {buffer = true})
+	keymap("n", "J", "jjjjjjj", {buffer = true})
+	keymap("n", "K", "7k", {buffer = true})
+	keymap("n", "U", "<plug>UndotreeRedo", {buffer = true})
+end
 
 --------------------------------------------------------------------------------
 
@@ -48,6 +48,3 @@ require("indent-o-matic").setup {
 }
 
 --------------------------------------------------------------------------------
-
--- Quick Scope
-g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
