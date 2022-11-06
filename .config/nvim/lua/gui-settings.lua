@@ -3,8 +3,10 @@ require("appearance")
 --------------------------------------------------------------------------------
 
 -- BASE CONFIG
-local lightTheme = "dawnfox"
-local darkTheme = "kanagawa"
+local lightTheme = "melange"
+local darkTheme = "melange"
+-- local lightTheme = "dawnfox"
+-- local darkTheme = "kanagawa"
 -- local darkTheme = "tokyonight-moon"
 -- local darkTheme = "onedark"
 
@@ -23,7 +25,6 @@ opt.guicursor =
 	"i-ci-c-ve:ver25," ..
 	"r-cr-o-v:hor10," ..
 	"a:blinkwait300-blinkoff500-blinkon700"
-
 
 --------------------------------------------------------------------------------
 
