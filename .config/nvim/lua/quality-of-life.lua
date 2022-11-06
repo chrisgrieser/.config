@@ -222,5 +222,37 @@ function ret.quicklog(addLineNumber)
 end
 
 --------------------------------------------------------------------------------
+-- MOVEMENT
+function ret.moveCharRight()
+	cmd [[:normal! xp]] -- performed as command less glitchy
+end
+
+function ret.moveCharLeft()
+	cmd [[:normal! xhhp]]
+end
+
+function ret.moveLineDown()
+	cmd [[. move +1]] -- performed as command less glitchy
+	cmd [[normal! ==]]
+end
+
+function ret.moveLineUp()
+	cmd [[. move -2]]
+	cmd [[normal! ==]]
+end
+
+function ret.moveSelectionDown()
+	cmd [[move '>+1]]
+	cmd [[normal! gv=gv]]
+end
+
+function ret.moveSelectionUp()
+	cmd [[move '<-2]]
+	cmd [[normal! gv=gv]]
+end
+
+
+
+--------------------------------------------------------------------------------
 
 return ret

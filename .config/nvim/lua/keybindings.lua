@@ -267,24 +267,15 @@ keymap("n", "<leader>ll", function() qol.quicklog(true) end)
 
 -- Line & Character Movement
 g.move_map_keys = 0 -- disable default keymaps of vim.move
-keymap("n", "<Down>", ":. move +1<CR>==")
-keymap("n", "<Up>", ":. move -2<CR>==")
-keymap("x", "<Down>", ":move '>+1<CR>gv=gv")
+keymap("n", "<Down>", qol.moveLineDown)
+keymap("n", "<Up>", qol.moveLineUp)
+keymap("x", "<Down>",)
 keymap("x", "<Up>", ":move '<-2<CR>gv=gv")
 
-keymap("n", "<Right>", "xp")
-keymap("n", "<Left>", "xhhp")
-keymap("x", "<Right>", "")
-keymap("x", "<Left>", "")
-
--- keymap("n", "<Down>", "<Plug>MoveLineDown")
--- keymap("n", "<Up>", "<Plug>MoveLineUp")
--- keymap("x", "<Down>", "<Plug>MoveBlockDown")
--- keymap("x", "<Up>", "<Plug>MoveBlockUp")
--- keymap("n", "<Right>", "<Plug>MoveCharRight")
--- keymap("n", "<Left>", "<Plug>MoveCharLeft")
--- keymap("x", "<Right>", "<Plug>MoveBlockRight")
--- keymap("x", "<Left>", "<Plug>MoveBlockLeft")
+keymap("n", "<Right>", qol.moveCharRight)
+keymap("n", "<Right>", qol.moveCharLeft)
+-- keymap("x", "<Right>", "")
+-- keymap("x", "<Left>", "")
 
 -- Merging / Splitting Lines
 keymap({"n", "x"}, "M", "J") -- [M]erge line up
