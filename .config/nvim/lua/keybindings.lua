@@ -260,19 +260,20 @@ keymap({"n", "x"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", "U") -- undo line, needs remapping since shadowed
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
+
 -- Logging
 keymap("n", "<leader>ll", function() qol.quicklog(true) end)
 --------------------------------------------------------------------------------
 
--- Line & Character Movement (vim.move)
+-- Line & Character Movement
 g.move_map_keys = 0 -- disable default keymaps of vim.move
-keymap("n", "<Down>", ":. move +1<CR>")
-keymap("n", "<Up>", "")
-keymap("x", "<Down>", "")
-keymap("x", "<Up>", "")
+keymap("n", "<Down>", ":. move +1<CR>==")
+keymap("n", "<Up>", ":. move -2<CR>==")
+keymap("x", "<Down>", ":move '>+1<CR>gv=gv")
+keymap("x", "<Up>", ":move '<-2<CR>gv=gv")
 
-keymap("n", "<Right>", "")
-keymap("n", "<Left>", "")
+keymap("n", "<Right>", "xp")
+keymap("n", "<Left>", "xhhp")
 keymap("x", "<Right>", "")
 keymap("x", "<Left>", "")
 
