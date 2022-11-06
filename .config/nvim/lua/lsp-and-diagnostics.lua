@@ -165,13 +165,13 @@ lspConfig["sumneko_lua"].setup {
 					keep_one_space_between_table_and_bracket = "false", -- yes, all these must be strings
 					keep_one_space_between_namedef_and_attribute = "false",
 					continuous_assign_table_field_align_to_equal_sign = "false",
-					continuation_indent_size = tostring(opt.tabstop._value),
+					continuation_indent_size = tostring(opt.tabstop:get()),
 				},
 			},
 			completion = {
 				callSnippet = "Replace",
 				keywordSnippet = "Replace",
-				displayContext = 3,
+				displayContext = 0,
 				postfix = "@",
 				showWord = "Enable",
 			},
@@ -187,7 +187,7 @@ lspConfig["sumneko_lua"].setup {
 					home .. "/.hammerspoon/Spoons/EmmyLua.spoon/annotations",
 				}
 			},
-			hint = {-- do not seem to be supported?
+			hint = { -- do not seem to be supported?
 				enable = true,
 				setType = true,
 				arrayIndex = "Enable",
@@ -204,7 +204,7 @@ lspConfig["cssls"].setup {
 		css = {
 			lint = {
 				vendorPrefix = "ignore",
-				duplicateProperties = "error", -- duplication with styleling
+				duplicateProperties = "error", -- duplication with stylelint
 				emptyRules = "ignore",
 			},
 			colorDecorators = {enable = true}, -- does not seem to work?
