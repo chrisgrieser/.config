@@ -8,7 +8,7 @@ function toggleDarkMode()
 
 	hs.execute("zsh ./helpers/toggle-marta-darkmode.sh " .. targetMode)
 
-	hs.osascript.applescript([[
+	applescript([[
 		set openBlank to false
 		tell application "Brave Browser"
 			if ((count of window) is 0) then
@@ -58,7 +58,7 @@ end
 
 ---@return boolean
 function isDarkMode()
-	local _, isDark = hs.osascript.applescript('tell application "System Events" to return dark mode of appearance preferences')
+	local _, isDark = applescript('tell application "System Events" to return dark mode of appearance preferences')
 	return isDark ---@diagnostic disable-line: return-type-mismatch
 end
 
@@ -70,7 +70,7 @@ function setDarkmode(toDark)
 end
 
 -- `hammerspoon://toggle-darkmode` for toggling via Shortcuts
-hs.urlevent.bind("toggle-darkmode", function()
+uriScheme("toggle-darkmode", function()
 	toggleDarkMode()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)

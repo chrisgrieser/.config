@@ -123,8 +123,7 @@ wf_browser_all = wf.new("Brave Browser")
 wf_mimestream = wf.new("Mimestream")
 	:setOverrideFilter {
 		allowRoles = "AXStandardWindow",
-		rejectTitles = {"General", "Accounts", "Sidebar & List", "Viewing", "Composing", "Templates", "Signatures", "Labs",
-			"Updating Mimestream"}
+		rejectTitles = {"General", "Accounts", "Sidebar & List", "Viewing", "Composing", "Templates", "Signatures", "Labs", "Updating Mimestream"}
 	}
 	:subscribe(wf.windowCreated, function()
 		if #wf_mimestream:getWindows() == 2 then
@@ -195,11 +194,11 @@ wf_alacritty = wf.new("alacritty")
 	end)
 
 
--- ALACRITTY Man / cheat sheet leaader hotkey
+-- ALACRITTY Man / cheat sheet leaader hotkey (for Karabiner)
 -- work around necessary, cause alacritty creates multiple instances, i.e.
 -- multiple applications all with the name "alacritty", preventing conventional
 -- methods for focussing a window via AppleScript
-hs.urlevent.bind("focus-help", function()
+uriScheme("focus-help", function()
 	local win = hs.window.find("man:")
 	if not (win) then win = hs.window.find("builtin:") end
 	if not (win) then win = hs.window.find("cheatsheet:") end
@@ -207,7 +206,7 @@ hs.urlevent.bind("focus-help", function()
 	if win then
 		win:focus()
 	else
-		notify("none open")
+		notify("None open")
 	end
 end)
 
@@ -236,7 +235,7 @@ local function finderWatcher(appName, eventType, appObject)
 			finderWin:setSize {w = target_w, h = target_h}
 		end
 	elseif eventType == aw.launched then
-		-- quit finder if it was started as a helper, but has no window
+		-- quit Finder if it was started as a helper, but has no window
 		runDelayed(1, function()
 			if not (appObject) then return end
 			if not (appObject:mainWindow()) then
@@ -289,7 +288,7 @@ wf_marta = wf.new("Marta")
 -- don't leave tab behind when opening zoom
 wf_zoom = wf.new("zoom.us")
 	:subscribe(wf.windowCreated, function()
-		hs.osascript.applescript([[
+		applescript[[
 			tell application "Brave Browser"
 				set window_list to every window
 				repeat with the_window in window_list
@@ -300,7 +299,7 @@ wf_zoom = wf.new("zoom.us")
 					end repeat
 				end repeat
 			end tell
-		]])
+		]]
 		local numberOfZoomWindows = #wf_zoom:getWindows();
 		if numberOfZoomWindows == 2 then
 			runDelayed(1.3, function()
@@ -316,13 +315,12 @@ wf_zoom = wf.new("zoom.us")
 -- - Start with Highlight as Selection
 local function highlightsWatcher(appName, eventType)
 	if not (eventType == aw.launched and appName == "Highlights") then return end
-	hs.osascript.applescript([[
+	applescript[[
 		tell application "System Events"
 			tell appearance preferences to set isDark to dark mode
 			if (isDark is false) then set targetView to "Default"
 			if (isDark is true) then set targetView to "Night"
 			delay 0.4
-
 			tell process "Highlights"
 				set frontmost to true
 				click menu item targetView of menu of menu item "PDF Appearance" of menu "View" of menu bar 1
@@ -330,7 +328,7 @@ local function highlightsWatcher(appName, eventType)
 				click menu item "Yellow" of menu of menu item "Color" of menu "Tools" of menu bar 1
 			end tell
 		end tell
-	]])
+	]]
 	if isAtOffice() then moveResizeCurWin("maximized")
 	else moveResizeCurWin("pseudo-maximized") end
 end
@@ -418,7 +416,7 @@ local function discordWatcher(appName, eventType)
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	if eventType == aw.launched then
-		hs.urlevent.openURL("discord://discord.com/channels/686053708261228577/700466324840775831")
+		openLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 	end
 
 	-- when Discord is focused, enclose URL in clipboard with <>
@@ -451,6 +449,5 @@ discordAppWatcher:start()
 wf_shottr = wf.new("Shottr")
 	:subscribe(wf.windowCreated, function(newWindow)
 		if newWindow:title() == "Preferences" then return end
-
 		runDelayed(0.1, function() keystroke({}, "a") end)
 	end)

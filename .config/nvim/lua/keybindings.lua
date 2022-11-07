@@ -35,7 +35,8 @@ keymap("n", "<leader>P", ":PackerStatus<CR>")
 -- NAVIGATION
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
-keymap({"n", "x", "o"}, "H", "0^") -- 0^ ensures fully scrolling to the left on long lines
+keymap({"n", "x"}, "H", "0^") -- 0^ ensures fully scrolling to the left on long lines
+keymap("o", "H", "^")
 keymap({"n", "x", "o"}, "L", "$")
 keymap({"x", "o"}, "J", "7j")
 keymap({"n", "x", "o"}, "K", "7k", {silent = true})

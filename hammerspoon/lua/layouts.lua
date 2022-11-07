@@ -1,7 +1,7 @@
 require("lua.utils")
 require("lua.window-management")
 require("lua.private")
-local useLayout
+local useLayout = hs.layout.apply
 --------------------------------------------------------------------------------
 -- HELPERS
 function dockSwitcher (targetMode)
