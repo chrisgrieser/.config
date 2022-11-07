@@ -2,9 +2,6 @@ require("utils")
 local opts = {buffer = true, silent = true}
 --------------------------------------------------------------------------------
 
--- embedded file types yaml
-cmd[[silent! /@settings/,$ SyntaxInclude yaml]]
-
 -- comment marks more useful than symbols for theme development
 keymap("n", "gs", function() telescope.current_buffer_fuzzy_find {
 		default_text = "/* < ",
@@ -24,8 +21,10 @@ end, opts)
 -- INFO: fix syntax highlighting with ':syntax sync fromstart'
 -- various other solutions are described here: https://github.com/vim/vim/issues/2790
 -- however, using treesitter, this is less of an issue, but treesitter css
--- highlighting isn't good yet, so...
+-- highlighting isn't good yet, so…
 keymap("n", "zz", ":syntax sync fromstart<CR>", {buffer = true})
+
+
 
 keymap("n", "cv", "^Ewct;", opts) -- change [v]alue key
 keymap("n", "<leader>c", "mzlEF.yEEp`z", opts) -- double [c]lass under cursor
@@ -34,7 +33,7 @@ keymap("n", "<leader>C", "lF.d/[.\\s]<CR>:nohl<CR>", opts) -- delete [c]lass und
 -- prefix "." and join the last paste. Useful when copypasting from the dev tools
 keymap("n", "<leader>.", "mz`[v`]: s/^\\| /./g<CR>:nohl<CR>`zl", opts)
 
--- smart line duplicate (mnemonic: Replicate)
+-- smart line duplicate (mnemonic: [R]eplicate)
 -- switches top/bottom & moves to value
 keymap("n", "R", function ()
 	require("quality-of-life").duplicateLine {smart = true, moveToValue = true}
