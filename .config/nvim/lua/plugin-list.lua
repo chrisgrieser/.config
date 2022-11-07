@@ -71,6 +71,7 @@ function M.PluginList()
 	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 	use "hood/popui.nvim" -- alternative to "stevearc/dressing.nvim"
+	use "stevearc/dressing.nvim"
 	use "rcarriga/nvim-notify"
 
 
@@ -90,7 +91,6 @@ function M.PluginList()
 	use "mg979/vim-visual-multi" -- multi-cursor
 	use "phaazon/hop.nvim"
 	use "unblevable/quick-scope" -- f-t-improvement
-	use "cbochs/portal.nvim"
 
 	-- Editing
 	use "AndrewRadev/splitjoin.vim"

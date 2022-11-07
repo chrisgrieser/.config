@@ -54,12 +54,25 @@ require("indent_blankline").setup {
 }
 
 --------------------------------------------------------------------------------
--- PopUI & Notifications
-vim.ui.select = require("popui.ui-overrider")
-vim.ui.input = require("popui.input-overrider")
-g.popui_border_style = borderStyle
-
+-- Notification
 vim.notify = require("notify")
+
+-- Dressing
+require("dressing").setup {
+	input = {
+		border = borderStyle,
+		winblend = 5, -- % transparency
+	},
+	select = {
+		telescope = {
+			initial_mode = "normal",
+			prompt_prefix = "  ",
+			layout_strategy = "cursor",
+			results_title = "",
+			sorting_strategy = "ascending",
+		},
+	},
+}
 --------------------------------------------------------------------------------
 -- GUTTER
 require("gitsigns").setup {

@@ -6,6 +6,7 @@ local setline = vim.fn.setline
 local lineNo = vim.fn.line
 local append = vim.fn.append
 local bo = vim.bo
+local fn = vim.fn
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
 
@@ -22,26 +23,26 @@ end
 --------------------------------------------------------------------------------
 
 ---Rename Current File
----@param newName string if no new ext is provided, the current will be kept
-function M.qol_renameFile(newName)
-	if newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") then
-		cmd('echo "Invalid filename."')
-		return
-	end
-
+function M.qol_renameFile()
 	local oldName = fn.expand("%:t")
-	local extProvided = newName:find("%.")
-	if not (extProvided) then
-		newName = newName .. "." .. fn.expand("%:e")
-	end
-	os.rename(oldName, newName)
+	local oldExt = fn.expand("%:e")
 
-	cmd("edit " .. newName)
-	cmd("bdelete #")
-	cmd('echo "Renamed \'' .. oldName .. "\' to \'" .. newName .. '\'."')
+	vim.ui.input({prompt="New Filename:"}, function (newName)
+		if newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") then
+			cmd('echo "Invalid filename."')
+			return
+		end
+		local extProvided = newName:find("%.")
+		if not (extProvided) then
+			newName = newName .. "." .. oldExt
+		end
+		os.rename(oldName, newName)
+
+		cmd("edit " .. newName)
+		cmd("bdelete #")
+		cmd('echo "Renamed \'' .. oldName .. "\' to \'" .. newName .. '\'."')
+	end)
 end
-
-cmd [[:command! -nargs=1 Rename lua require("quality-of-life").qol_renameFile(<f-args>)]]
 
 --------------------------------------------------------------------------------
 
@@ -50,7 +51,7 @@ cmd [[:command! -nargs=1 Rename lua require("quality-of-life").qol_renameFile(<f
 ---@param opts? table available: smart, moveTo, increment
 function M.duplicateLine(opts)
 	if not (opts) then
-		opts = {smart = false, moveTo = false, increment = false}
+		opts = {smart = false, moveTo = "key", increment = false}
 	end
 
 	local line = getline(".")
@@ -83,11 +84,12 @@ function M.duplicateLine(opts)
 	-- cursor movement
 	local lineNum = getCursor(0)[1] + 1 -- line down
 	local colNum = getCursor(0)[2]
-	local keyPos, valuePos = line:find(". ?[:=] ?.")
+	local keyPos, valuePos = line:find(". ?[:=] ?")
 	if opts.moveTo == "value" and valuePos then
 		colNum = valuePos
 	elseif opts.moveTo == "key" and keyPos then
 		colNum = keyPos
+		cmd[[normal! b]]
 	end
 	setCursor(0, {lineNum, colNum})
 end

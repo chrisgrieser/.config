@@ -54,9 +54,3 @@ require("indent-o-matic").setup {
 g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
 g.qs_max_chars=200
 cmd[[highlight def link QuickScopePrimary CurSearch]]
-
---------------------------------------------------------------------------------
--- Portal
-require("portal").setup{
-
-}

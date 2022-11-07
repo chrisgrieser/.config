@@ -21,6 +21,7 @@ keymap("n", "<leader>G", telescope.highlights)
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
+	cmd [[nohl]]
 	cmd [[update! ~/.config/nvim/lua/plugin-list.lua]]
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	local packer = require("packer")
@@ -257,7 +258,7 @@ keymap("n", "S", substi.eol)
 keymap("x", "s", substi.visual)
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
-keymap("n", "R", function() qol.duplicateLine {moveTo = "key"} end)
+keymap("n", "R", qol.duplicateLine)
 keymap("n", "<A-r>", function() qol.duplicateLine {increment = true} end)
 keymap("x", "R", qol.duplicateVisual)
 
@@ -339,10 +340,12 @@ keymap("n", "gF", "gf") -- needs remapping since shadowed
 -- File Operations
 keymap("", "<C-p>", ':let @+ = expand("%:p")<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
 keymap("", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
-keymap("", "<C-r>", ":Rename ") -- rename of current file, requires quality-of-life.nvim
 keymap("", "<C-d>", ':saveas <C-R>=expand("%:t")<CR>') -- duplicate current file
 keymap("n", "<leader>x", ':!chmod +x %:p<CR><CR>:echo "Execution permission granted."<CR>')
 keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
+
+-- keymap("", "<C-r>", ":Rename ") -- rename of current file, requires quality-of-life.nvim
+keymap("", "<C-r>", require("quality-of-life").qol_renameFile)
 
 -- Option Toggling
 keymap("n", "<leader>os", ":set spell!<CR>")

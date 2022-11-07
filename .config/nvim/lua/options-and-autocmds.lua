@@ -113,7 +113,8 @@ autocmd("BufWritePre", {
 	callback = function()
 		local save_view = fn.winsaveview() -- save cursor positon
 		if bo.filetype == "markdown" then -- to preserve spaces from the two-space-rule
-			cmd [[%s/\(.\)\s\$//e]]
+			cmd [[%s/\(.\)\s\$/\1/e]] -- exactly one whitespace
+			cmd [[%s/\(.\)\s\s\s\$/\1/e]] -- exactly three whitespaces
 		else
 			cmd [[%s/\s\+$//e]]
 		end
