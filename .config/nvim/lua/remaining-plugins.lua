@@ -56,4 +56,25 @@ g.qs_max_chars=200
 cmd[[highlight def link QuickScopePrimary CurSearch]]
 
 --------------------------------------------------------------------------------
--- Context Filetype
+-- Portal
+require("portal").setup{
+
+}
+
+--------------------------------------------------------------------------------
+-- Dressing
+require('dressing').setup{
+	input = {
+		border =borderStyle,
+		winblend = 5, -- % transparency
+	},
+	select = {
+		telescope = {
+			initial_mode = "normal",
+			prompt_prefix = "  ",
+			layout_strategy = "cursor",
+			results_title = "",
+			sorting_strategy = "ascending",
+		},
+	},
+}

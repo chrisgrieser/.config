@@ -139,6 +139,11 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["dressing.nvim"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/dressing.nvim",
+    url = "https://github.com/stevearc/dressing.nvim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
@@ -163,11 +168,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/indent-o-matic",
     url = "https://github.com/Darazaki/indent-o-matic"
-  },
-  ["kanagawa.nvim"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/kanagawa.nvim",
-    url = "https://github.com/rebelot/kanagawa.nvim"
   },
   ["lsp_signature.nvim"] = {
     loaded = true,
@@ -209,11 +209,6 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/neodev.nvim",
     url = "https://github.com/folke/neodev.nvim"
   },
-  ["nightfox.nvim"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
-    url = "https://github.com/EdenEast/nightfox.nvim"
-  },
   ["null-ls.nvim"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
@@ -233,6 +228,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-notify"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim-notify",
+    url = "https://github.com/rcarriga/nvim-notify"
   },
   ["nvim-surround"] = {
     loaded = true,
@@ -274,6 +274,11 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["portal.nvim"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/portal.nvim",
+    url = "https://github.com/cbochs/portal.nvim"
+  },
   ["quick-scope"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/quick-scope",
@@ -289,30 +294,15 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/substitute.nvim",
     url = "https://github.com/gbprod/substitute.nvim"
   },
-  ["telescope-ui-select.nvim"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/telescope-ui-select.nvim",
-    url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
-  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
-  ["tokyonight.nvim"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
-    url = "https://github.com/folke/tokyonight.nvim"
-  },
   undotree = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/undotree",
     url = "https://github.com/mbbill/undotree"
-  },
-  ["vim-SyntaxRange"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-SyntaxRange",
-    url = "https://github.com/inkarkat/vim-SyntaxRange"
   },
   ["vim-applescript"] = {
     loaded = true,
@@ -328,11 +318,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-indent-object",
     url = "https://github.com/michaeljsmith/vim-indent-object"
-  },
-  ["vim-ingo-library"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-ingo-library",
-    url = "https://github.com/inkarkat/vim-ingo-library"
   },
   ["vim-visual-multi"] = {
     loaded = true,
