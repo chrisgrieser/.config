@@ -19,7 +19,6 @@ require("telescope").setup {
 			"%.pxd",
 			"Spoons/", -- Hammerspoon spoons
 			"info.plist", -- Alfred Config Data
-			-- "app%-specific%-bindings.json", -- Karabiner JSONs
 		},
 		mappings = {
 			i = {
@@ -29,6 +28,7 @@ require("telescope").setup {
 			n = {
 				q = "close",
 				["<Esc>"] = "close",
+				["?"] = "which_key",
 			},
 		},
 		layout_strategy = 'horizontal',
@@ -85,7 +85,6 @@ require("telescope").setup {
 		git_files = {
 			prompt_prefix=' ',
 			show_untracked = true,
-			path_display = { "tail" },
 		},
 		buffers = {
 			prompt_prefix='﬘ ',
@@ -103,7 +102,7 @@ require("telescope").setup {
 			initial_mode = "normal",
 			prompt_prefix = "暈",
 			theme = "cursor",
-			layout_config = { cursor = { width = 0.3 } },
+			layout_config = { cursor = { width = 0.2 } },
 		},
 		colorscheme = {
 			enable_preview = true,
