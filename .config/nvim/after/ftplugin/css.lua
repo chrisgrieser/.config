@@ -2,6 +2,9 @@ require("utils")
 local opts = {buffer = true, silent = true}
 --------------------------------------------------------------------------------
 
+-- embedded file types yaml
+cmd[[silent! /@settings/,$ SyntaxInclude yaml]]
+
 -- comment marks more useful than symbols for theme development
 keymap("n", "gs", function() telescope.current_buffer_fuzzy_find {
 		default_text = "/* < ",

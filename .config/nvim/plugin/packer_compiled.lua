@@ -309,6 +309,11 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/undotree",
     url = "https://github.com/mbbill/undotree"
   },
+  ["vim-SyntaxRange"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-SyntaxRange",
+    url = "https://github.com/inkarkat/vim-SyntaxRange"
+  },
   ["vim-applescript"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-applescript",
@@ -323,6 +328,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-indent-object",
     url = "https://github.com/michaeljsmith/vim-indent-object"
+  },
+  ["vim-ingo-library"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/vim-ingo-library",
+    url = "https://github.com/inkarkat/vim-ingo-library"
   },
   ["vim-visual-multi"] = {
     loaded = true,

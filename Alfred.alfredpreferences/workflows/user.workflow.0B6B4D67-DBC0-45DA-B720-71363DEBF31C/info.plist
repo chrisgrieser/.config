@@ -763,9 +763,7 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 				<key>script</key>
 				<string>file=$1
 
-mv -f "$file" "$HOME/.Trash/"
-
-afplay "/System/Library/Sounds/Submarine.aiff"</string>
+mv -f "$file" "$HOME/.Trash/"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>

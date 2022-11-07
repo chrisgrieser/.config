@@ -40,13 +40,16 @@ local function themeModifications()
 		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
 		cmd [[highlight VertSplit guifg=#b29b84]]
 	end
+	if g.colors_name == "melange" then
+		cmd [[highlight def link @punctuation @label]]
+	end
 end
 
 -- THEME
 local function light()
 	api.nvim_set_option("background", "light")
 	cmd("colorscheme " .. lightTheme)
-	g.neovide_transparency = 0.95
+	g.neovide_transparency = 0.94
 	themeModifications()
 	customHighlights()
 end
