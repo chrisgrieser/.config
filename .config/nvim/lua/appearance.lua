@@ -49,17 +49,17 @@ require("indent_blankline").setup {
 	show_current_context = true,
 	use_treesitter = true,
 	strict_tabs = false,
-	-- context_char = '┃',
 	filetype_exclude = specialFiletypes,
+	-- context_char = '┃',
 }
 
-
 --------------------------------------------------------------------------------
--- PopUI
-vim.ui.select = require"popui.ui-overrider"
-vim.ui.input = require"popui.input-overrider"
+-- PopUI & Notifications
+vim.ui.select = require("popui.ui-overrider")
+vim.ui.input = require("popui.input-overrider")
 g.popui_border_style = borderStyle
 
+vim.notify = require("notify")
 --------------------------------------------------------------------------------
 -- GUTTER
 require("gitsigns").setup {

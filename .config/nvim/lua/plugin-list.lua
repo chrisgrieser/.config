@@ -1,4 +1,5 @@
-function PluginList()
+local M = {}
+function M.PluginList()
 
 	-- Package Management
 	use "wbthomason/packer.nvim" -- packer manages itself
@@ -97,3 +98,4 @@ function PluginList()
 	use "mbbill/undotree" -- undo history nagivation
 
 end
+return M

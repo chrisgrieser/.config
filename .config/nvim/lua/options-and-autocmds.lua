@@ -112,7 +112,11 @@ autocmd("BufWritePre", {
 	group = "Mini-Lint",
 	callback = function()
 		local save_view = fn.winsaveview() -- save cursor positon
-		cmd [[%s/\s\+$//e]]
+		if bo.filetype == "markdown" then -- to preserve spaces from the two-space-rule
+			cmd [[%s/\(.\)\s\$//e]]
+		else
+			cmd [[%s/\s\+$//e]]
+		end
 		cmd [[silent! %s#\($\n\s*\)\+\%$##]] -- https://stackoverflow.com/a/7496112
 		fn.winrestview(save_view)
 	end

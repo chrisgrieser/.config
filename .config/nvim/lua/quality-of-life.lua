@@ -18,11 +18,12 @@ local function leaveVisualMode()
 	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
 	vim.api.nvim_feedkeys(escKey, "nx", false)
 end
+
 --------------------------------------------------------------------------------
 
----Rename Current File.
+---Rename Current File
 ---@param newName string if no new ext is provided, the current will be kept
-function qol_renameFile(newName) -- no M.qol… since not exported
+function M.qol_renameFile(newName)
 	if newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") then
 		cmd('echo "Invalid filename."')
 		return
@@ -40,16 +41,16 @@ function qol_renameFile(newName) -- no M.qol… since not exported
 	cmd('echo "Renamed \'' .. oldName .. "\' to \'" .. newName .. '\'."')
 end
 
-cmd [[:command! -nargs=1 Rename lua qol_renameFile(<f-args>)]]
+cmd [[:command! -nargs=1 Rename lua require("quality-of-life").qol_renameFile(<f-args>)]]
 
 --------------------------------------------------------------------------------
 
 -- Duplicate line under cursor, and change occurences of certain words to their
 -- opposite, e.g., "right" to "left". Indended for languages like CSS.
----@param opts table available: smart, moveTo, increment
+---@param opts? table available: smart, moveTo, increment
 function M.duplicateLine(opts)
 	if not (opts) then
-		opts = {smart = false, moveTo = "value", increment = false}
+		opts = {smart = false, moveTo = false, increment = false}
 	end
 
 	local line = getline(".")
@@ -82,11 +83,11 @@ function M.duplicateLine(opts)
 	-- cursor movement
 	local lineNum = getCursor(0)[1] + 1 -- line down
 	local colNum = getCursor(0)[2]
-	local _, valuePos = line:find("[:=] ?")
+	local keyPos, valuePos = line:find(". ?[:=] ?.")
 	if opts.moveTo == "value" and valuePos then
 		colNum = valuePos
-	elseif opts.moveTo == "key" then
-		colNum = valuePos -2
+	elseif opts.moveTo == "key" and keyPos then
+		colNum = keyPos
 	end
 	setCursor(0, {lineNum, colNum})
 end
@@ -103,7 +104,7 @@ function M.hr(linechar)
 	local indent = vim.fn.indent(".")
 	local textwidth = bo.textwidth
 	local comstr = bo.commentstring
-	local comStrLength = #comstr:gsub("%%s", ""):gsub(" ", "")
+	local comStrLength = #(comstr:gsub("%%s", ""):gsub(" ", ""))
 
 	if not (linechar) then
 		if comstr:find("-") then
@@ -226,7 +227,10 @@ function M.reverse()
 	print("Nothing under the cursor that can be switched")
 end
 
-function M.overscroll(action) ---@param action string The motion to be executed when not at EOF
+---enables overscrolling for that action when close to the last line, depending
+--on 'scrolloff' option
+---@param action string The motion to be executed when not at EOF
+function M.overscroll(action)
 	local curLine = lineNo(".")
 	local lastLine = lineNo("$")
 	if (lastLine - curLine - 1) < vim.wo.scrolloff then
