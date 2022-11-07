@@ -131,7 +131,7 @@ function installObsiAlpha(files)
 				killall "Obsidian" && sleep 1 && open -a "Obsidian" ]]
 			)
 			-- close the created tab
-			hs.osascript.applescript([[
+			applescript([[
 				tell application "Brave Browser"
 					set window_list to every window
 					repeat with the_window in window_list

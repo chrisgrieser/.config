@@ -6,13 +6,13 @@ local caff = hs.caffeinate.watcher
 local timer = hs.timer.doAt
 --------------------------------------------------------------------------------
 -- CONFIG
-dotfileLocation = home .. "/dotfiles"
-vaultLocation = home .. "/Main Vault"
-gitDotfileScript = dotfileLocation .. "/git-dotfile-sync.sh"
-gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
-dotfileIcon = "⏺ "
-vaultIcon = "🟪"
-repoSyncFrequencyMin = 20
+local dotfileLocation = home .. "/dotfiles"
+local vaultLocation = home .. "/Main Vault"
+local gitDotfileScript = dotfileLocation .. "/git-dotfile-sync.sh"
+local gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
+local dotfileIcon = "⏺ "
+local vaultIcon = "🟪"
+local repoSyncFrequencyMin = 20
 
 --------------------------------------------------------------------------------
 
@@ -55,7 +55,7 @@ end)
 repoSyncTimer:start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
-hs.urlevent.bind("sync-repos", function()
+uriScheme("sync-repos", function()
 	gitDotfileSync()
 	gitVaultSync()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
@@ -63,7 +63,7 @@ end)
 
 
 -- update icons for sketchybar
-function updateSketchybar()
+local function updateSketchybar()
 	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --trigger repo-files-update")
 end
 
@@ -74,7 +74,7 @@ vaultWatcher:start()
 
 --------------------------------------------------------------------------------
 
-function screenSleep(eventType)
+local function screenSleep(eventType)
 	if eventType == caff.screensDidSleep then
 		gitDotfileSync()
 	end
@@ -85,7 +85,7 @@ shutDownWatcher:start()
 
 --------------------------------------------------------------------------------
 -- SYSTEM WAKE/START
-function officeWake(eventType)
+local function officeWake(eventType)
 	if eventType == caff.screensDidUnlock then
 		gitDotfileSync("--submodules")
 		gitVaultSync()
@@ -93,7 +93,7 @@ function officeWake(eventType)
 	end
 end
 
-function homeWake(eventType)
+local function homeWake(eventType)
 	runDelayed(2, function()
 		if not (eventType == caff.screensDidWake or eventType == caff.systemDidWake) then return end
 		if isProjector() then
@@ -138,7 +138,34 @@ end
 
 --------------------------------------------------------------------------------
 -- CRONJOBS AT HOME
-function sleepYouTube()
+
+local biweeklyTimer = timer("02:00", "03d", function()
+	hs.execute('cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/"')
+	hs.loadSpoon("EmmyLua") -- so it runs not as often
+	applescript([[
+		tell application id "com.runningwithcrayons.Alfred"
+			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
+			run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles" with argument "no sound"
+		end tell
+	]])
+end, true)
+
+dailyEveningTimer = timer("21:00", "01d", function() setDarkmode(true) end)
+dailyMorningTimer = timer("08:00", "01d", function() setDarkmode(false) end)
+
+local function projectorScreensaverStop(eventType)
+	if (eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart) then
+		runDelayed(3, function()
+			if isProjector() then
+				iMacDisplay:setBrightness(0)
+			end
+		end)
+	end
+end
+
+projectorScreensaverWatcher = caff.new(projectorScreensaverStop)
+
+local function sleepYouTube()
 	local minutesIdle = hs.host.idleTime() / 60
 	if minutesIdle < 30 then return end
 
@@ -146,7 +173,7 @@ function sleepYouTube()
 	killIfRunning("Twitch")
 	killIfRunning("Netflix")
 	-- no need to quit IINA, since it autoquits on finishing playback
-	hs.osascript.applescript([[
+	applescript([[
 		tell application "Brave Browser"
 			if ((count of window) is not 0)
 				if ((count of tab of front window) is not 0)
@@ -161,52 +188,19 @@ end
 sleepTimer1 = timer("03:00", "01d", sleepYouTube, true)
 sleepTimer2 = timer("04:00", "01d", sleepYouTube, true)
 sleepTimer3 = timer("05:00", "01d", sleepYouTube, true)
+sleepTimer4 = timer("06:00", "01d", sleepYouTube, true)
 
-biweeklyTimer = timer("02:00", "03d", function()
-	hs.osascript.applescript([[
-		tell application id "com.runningwithcrayons.Alfred"
-			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
-			run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles" with argument "no sound"
-		end tell
-	]])
-	hs.execute('cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/"')
-	hs.loadSpoon("EmmyLua") -- so it runs not as often
-end, true)
+--------------------------------------------------------------------------------
 
-dailyEveningTimer = timer("21:00", "01d", function()
-	setDarkmode(true)
-end)
-
-dailyMorningTimer = timer("08:00", "01d", function()
-	setDarkmode(false)
-end)
-
-function projectorScreensaverStop(eventType)
-	if (eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart) then
-		runDelayed(3, function()
-			if isProjector() then
-				iMacDisplay:setBrightness(0)
-			end
-		end)
-	end
+if isIMacAtHome() or isAtMother() then
+	dailyMorningTimer:start()
+	dailyEveningTimer:start()
+	sleepTimer1:start()
+	sleepTimer2:start()
+	sleepTimer3:start()
 end
-
-projectorScreensaverWatcher = caff.new(projectorScreensaverStop)
 
 if isIMacAtHome() then
-	dailyMorningTimer:start()
-	dailyEveningTimer:start()
-	sleepTimer1:start()
-	sleepTimer2:start()
-	sleepTimer3:start()
 	biweeklyTimer:start()
 	projectorScreensaverWatcher:start()
-end
-
-if isAtMother() then
-	dailyMorningTimer:start()
-	dailyEveningTimer:start()
-	sleepTimer1:start()
-	sleepTimer2:start()
-	sleepTimer3:start()
 end

@@ -9,14 +9,15 @@ aw = hs.application.watcher
 wf = hs.window.filter
 runDelayed = hs.timer.doAfter
 app = hs.application
+applescript = hs.osascript.applescript
+uriScheme = hs.urlevent.bind
 I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
 
-local mainDisplayName = hs.screen.primaryScreen():name()
-
 ---@return boolean
 function isProjector()
+	local mainDisplayName = hs.screen.primaryScreen():name()
 	local projectorHelmholtz = mainDisplayName == "ViewSonic PJ"
 	local tvLeuthinger = mainDisplayName == "TV_MONITOR"
 	return projectorHelmholtz or tvLeuthinger
@@ -24,6 +25,7 @@ end
 
 ---@return boolean
 function isAtOffice()
+	local mainDisplayName = hs.screen.primaryScreen():name()
 	local screenOne = mainDisplayName == "HP E223"
 	local screenTwo = mainDisplayName == "Acer CB241HY"
 	return screenOne or screenTwo
