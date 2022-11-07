@@ -53,8 +53,15 @@ require("indent_blankline").setup {
 	filetype_exclude = specialFiletypes,
 }
 
---------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------
+-- PopUI
+vim.ui.select = require"popui.ui-overrider"
+vim.ui.input = require"popui.input-overrider"
+g.popui_border_style = borderStyle
+
+--------------------------------------------------------------------------------
+-- GUTTER
 require("gitsigns").setup {
 	max_file_length = 10000,
 	preview_config = {border = borderStyle},

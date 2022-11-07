@@ -1,4 +1,6 @@
 ---@diagnostic disable: param-type-mismatch, undefined-field
+local M = {}
+--------------------------------------------------------------------------------
 local getline = vim.fn.getline
 local setline = vim.fn.setline
 local lineNo = vim.fn.line
@@ -16,14 +18,11 @@ local function leaveVisualMode()
 	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
 	vim.api.nvim_feedkeys(escKey, "nx", false)
 end
-
-local ret = {}
-
 --------------------------------------------------------------------------------
 
 ---Rename Current File.
 ---@param newName string if no new ext is provided, the current will be kept
-function qol_renameFile(newName)
+function qol_renameFile(newName) -- no M.qol… since not exported
 	if newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") then
 		cmd('echo "Invalid filename."')
 		return
@@ -47,10 +46,10 @@ cmd [[:command! -nargs=1 Rename lua qol_renameFile(<f-args>)]]
 
 -- Duplicate line under cursor, and change occurences of certain words to their
 -- opposite, e.g., "right" to "left". Indended for languages like CSS.
----@param opts table available: smart, moveToValue, increment
-function ret.duplicateLine(opts)
+---@param opts table available: smart, moveTo, increment
+function M.duplicateLine(opts)
 	if not (opts) then
-		opts = {smart = false, moveToValue = false, increment = false}
+		opts = {smart = false, moveTo = "value", increment = false}
 	end
 
 	local line = getline(".")
@@ -73,7 +72,7 @@ function ret.duplicateLine(opts)
 	if opts.increment then
 		local digits = line:match("%d+")
 		if digits then
-			digits = tostring(tonumber(digits) + 1) 
+			digits = tostring(tonumber(digits) + 1)
 			line = line:gsub("%d+", digits, 1)
 		end
 	end
@@ -83,16 +82,16 @@ function ret.duplicateLine(opts)
 	-- cursor movement
 	local lineNum = getCursor(0)[1] + 1 -- line down
 	local colNum = getCursor(0)[2]
-	if opts.moveToValue then
-		local _, valuePos = line:find(": ?")
-		if valuePos then
-			colNum = valuePos
-		end
+	local _, valuePos = line:find("[:=] ?")
+	if opts.moveTo == "value" and valuePos then
+		colNum = valuePos
+	elseif opts.moveTo == "key" then
+		colNum = valuePos -2
 	end
 	setCursor(0, {lineNum, colNum})
 end
 
-function ret.duplicateVisual()
+function M.duplicateVisual()
 	local prevReg = vim.fn.getreg("z")
 	cmd [[silent! normal!"zy`]"zp]]
 	vim.fn.setreg("z", prevReg)
@@ -100,7 +99,7 @@ end
 
 -- insert horizontal divider considering textwidth, commentstring, and indent
 ---@param linechar? string Character used for horizontal divider. Default: "─"
-function ret.hr(linechar)
+function M.hr(linechar)
 	local indent = vim.fn.indent(".")
 	local textwidth = bo.textwidth
 	local comstr = bo.commentstring
@@ -145,7 +144,7 @@ end
 -- character, the character will be switched, e.g. "(" to ")". If it is a
 -- letter, falls back to the default `~` behavior of Toggling between upper and
 -- lower case.
-function ret.reverse()
+function M.reverse()
 	local word
 	local wordchar = bo.iskeyword
 	dashIsKeyword = wordchar:find(",%-$") or wordchar:find(",%-,") or wordchar:find("^%-,")
@@ -227,7 +226,7 @@ function ret.reverse()
 	print("Nothing under the cursor that can be switched")
 end
 
-function ret.overscroll(action) ---@param action string The motion to be executed when not at EOF
+function M.overscroll(action) ---@param action string The motion to be executed when not at EOF
 	local curLine = lineNo(".")
 	local lastLine = lineNo("$")
 	if (lastLine - curLine - 1) < vim.wo.scrolloff then
@@ -240,7 +239,7 @@ end
 -- popular VS Code plugin
 -- supported: lua, js/ts, zsh/bash/fish, and applescript
 ---@param addLineNumber? boolean Whether to add the line number. Default: false
-function ret.quicklog(addLineNumber)
+function M.quicklog(addLineNumber)
 	local varname = wordUnderCursor()
 	local logStatement
 	local ft = bo.filetype
@@ -269,44 +268,44 @@ end
 -- MOVEMENT
 -- performed as command makes them less glitchy
 
-function ret.moveLineDown()
+function M.moveLineDown()
 	cmd [[. move +1]]
 	cmd [[normal! ==]]
 end
 
-function ret.moveLineUp()
+function M.moveLineUp()
 	cmd [[. move -2]]
 	cmd [[normal! ==]]
 end
 
-function ret.moveSelectionDown()
+function M.moveSelectionDown()
 	leaveVisualMode()
 	cmd [['<,'> move '>+1]]
 	cmd [[normal! gv=gv]]
 end
 
-function ret.moveSelectionUp()
+function M.moveSelectionUp()
 	leaveVisualMode()
 	cmd [['<,'> move '<-2]]
 	cmd [[normal! gv=gv]]
 end
 
-function ret.moveSelectionRight()
+function M.moveSelectionRight()
 	cmd [[normal! xpgvlolo]]
 end
 
-function ret.moveSelectionLeft()
+function M.moveSelectionLeft()
 	cmd [[normal! xhPgvhoho]]
 end
 
-function ret.moveCharRight()
+function M.moveCharRight()
 	cmd [[:normal! xp]]
 end
 
-function ret.moveCharLeft()
+function M.moveCharLeft()
 	cmd [[:normal! xhP]]
 end
 
 --------------------------------------------------------------------------------
 
-return ret
+return M

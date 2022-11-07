@@ -69,8 +69,7 @@ function PluginList()
 	use "lewis6991/gitsigns.nvim"
 	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	use "stevearc/dressing.nvim"
-	-- use "hood/popui.nvim"
+	use "hood/popui.nvim" -- alternative to "stevearc/dressing.nvim"
 	use "rcarriga/nvim-notify"
 
 
