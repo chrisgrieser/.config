@@ -18,18 +18,18 @@ function pseudoHideCursor ()
 end
 
 function scrollDown ()
-	if frontapp():lower() == "alacritty" or frontapp() == "Terminal" then
+	if frontApp():lower() == "alacritty" or frontApp() == "Terminal" then
 		keystroke ({"shift"}, "pagedown")
-	elseif frontapp() == "Highlights" then
+	elseif frontApp() == "Highlights" then
 		highlightsAppScroll(-highlightsScrollAmount)
 	else
 		keystroke ({}, "pagedown")
 	end
 end
 function scrollUp ()
-	if frontapp():lower() == "alacritty" or frontapp() == "Terminal" then
+	if frontApp():lower() == "alacritty" or frontApp() == "Terminal" then
 		keystroke ({"shift"}, "pageup")
-	elseif frontapp() == "Highlights" then
+	elseif frontApp() == "Highlights" then
 		highlightsAppScroll(highlightsScrollAmount)
 	else
 		keystroke ({}, "pageup")
