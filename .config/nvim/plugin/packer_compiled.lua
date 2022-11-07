@@ -274,11 +274,6 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/popui.nvim",
     url = "https://github.com/hood/popui.nvim"
   },
-  ["portal.nvim"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/portal.nvim",
-    url = "https://github.com/cbochs/portal.nvim"
-  },
   ["quick-scope"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/quick-scope",
