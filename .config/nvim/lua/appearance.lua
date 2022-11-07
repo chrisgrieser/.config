@@ -62,9 +62,10 @@ require("dressing").setup {
 	input = {
 		border = borderStyle,
 		winblend = 4, -- % transparency
+		relative = "win",
 	},
 	select = {
-		backend = { "builtin", "telescope" }, -- Priority list of preferred vim.select implementations
+		backend = { "builtin", "telescope", "nui" }, -- Priority list of preferred vim.select implementations
 		trim_prompt = true, -- Trim trailing `:` from prompt
 		builtin = {
 			border = borderStyle,
