@@ -11,7 +11,7 @@ function PluginList()
 	use "EdenEast/nightfox.nvim"
 	use "folke/tokyonight.nvim"
 	use "rebelot/kanagawa.nvim"
-	use "savq/melange"
+	use "savq/melange" -- like Obsidian's Primary color scheme
 	-- use "Mofiqul/dracula.nvim"
 	-- use "Yazeed1s/minimal.nvim"
 	-- use "kaiuri/nvim-juliana" -- sublime-mariana like
@@ -30,6 +30,7 @@ function PluginList()
 	}
 	use "mityu/vim-applescript" -- applescript syntax highlighting
 	use "hail2u/vim-css3-syntax" -- better css syntax highlighting (until treesitter css looks decent…)
+	use {"inkarkat/vim-SyntaxRange", requires = "inkarkat/vim-ingo-library"}
 
 	-- LSP & Linting
 	use {"neovim/nvim-lspconfig", requires = "williamboman/mason-lspconfig.nvim"}
