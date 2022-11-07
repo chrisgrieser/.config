@@ -22,7 +22,7 @@ end
 ---Rename Current File
 -- - if no extension is provided, the current extensions will be kept
 -- - uses vim.ui.input, so plugins like dressing.nvim are automatically supported
-function M.qol_renameFile()
+function M.renameFile()
 	local oldName = fn.expand("%:t")
 	local oldExt = fn.expand("%:e")
 
@@ -84,11 +84,11 @@ function M.duplicateLine(opts)
 	-- cursor movement
 	local lineNum = getCursor(0)[1] + 1 -- line down
 	local colNum = getCursor(0)[2]
-	local keyPos, valuePos = line:find(".+ ?[:=] ?")
+	local keyPos, valuePos = line:find(".%w+ ?[:=] ?")
 	if opts.moveTo == "value" and valuePos then
 		colNum = valuePos
 	elseif opts.moveTo == "key" and keyPos then
-		colNum = keyPos - 1
+		colNum = keyPos
 	end
 	setCursor(0, {lineNum, colNum})
 end

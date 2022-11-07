@@ -39,7 +39,7 @@ keymap({"n", "x"}, "H", "0^") -- 0^ ensures fully scrolling to the left on long 
 keymap("o", "H", "^")
 keymap({"n", "x", "o"}, "L", "$")
 keymap({"x", "o"}, "J", "7j")
-keymap({"n", "x", "o"}, "K", "7k", {silent = true})
+keymap({"n", "x", "o"}, "K", "7k")
 
 keymap("n", "j", function() qol.overscroll("j") end, {silent = true})
 keymap("n", "J", function() qol.overscroll("7j") end, {silent = true})
@@ -72,7 +72,7 @@ keymap("n", "gü", "/http.*<CR>:nohl<CR>") -- goto next
 keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
 
 -- Marks
-keymap({"n", "x", "o"}, "ä", "`") -- Goto Mark
+keymap("", "ä", "`") -- Goto Mark
 
 --------------------------------------------------------------------------------
 
@@ -89,8 +89,8 @@ keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<C-A-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
 keymap("x", "<Space>", '"_c')
 
--- change sub-word (i.e. a simpler version of vim-textobj-variable-segment,
--- but not supporting CamelCase)
+-- change sub-word
+-- (i.e. a simpler version of vim-textobj-variable-segment, not supporting CamelCase)
 keymap("n", "<leader><Space>", function()
 	opt.iskeyword = opt.iskeyword - {"_", "-"}
 	cmd [[normal! "_diw]]
@@ -260,6 +260,7 @@ keymap("x", "s", substi.visual)
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine)
 keymap("n", "<A-r>", function() qol.duplicateLine {increment = true} end)
+keymap("n", "<A-r>", function() qol.duplicateLine {increment = true} end)
 keymap("x", "R", qol.duplicateSelection)
 
 -- Undo
@@ -335,6 +336,7 @@ keymap("n", "gO", telescope.git_files) -- [o]pen file in git directory
 keymap("n", "gr", telescope.oldfiles) -- [r]ecent files
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
 keymap("n", "gf", telescope.live_grep) -- search in [f]iles
+keymap("n", "gR", telescope.resume) -- search in [f]iles
 keymap("n", "gF", "gf") -- needs remapping since shadowed
 
 -- File Operations
@@ -342,10 +344,8 @@ keymap("", "<C-p>", ':let @+ = expand("%:p")<CR>:echo "Copied:"expand("%:p")<CR>
 keymap("", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
 keymap("", "<C-d>", ':saveas <C-R>=expand("%:t")<CR>') -- duplicate current file
 keymap("n", "<leader>x", ':!chmod +x %:p<CR><CR>:echo "Execution permission granted."<CR>')
-keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR>:Rename ") -- refactor selection into new file
-
--- keymap("", "<C-r>", ":Rename ") -- rename of current file, requires quality-of-life.nvim
-keymap("", "<C-r>", require("quality-of-life").qol_renameFile)
+keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR> ") -- refactor selection into new file
+keymap("", "<C-r>", qol.renameFile)
 
 -- Option Toggling
 keymap("n", "<leader>os", ":set spell!<CR>")
