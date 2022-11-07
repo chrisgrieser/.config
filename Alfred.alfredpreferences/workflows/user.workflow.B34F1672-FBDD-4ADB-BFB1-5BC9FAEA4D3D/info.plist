@@ -828,51 +828,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ch</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>cheat.sh: '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>852FEFE2-6998-4254-985C-75A2E3AEB5B2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>QUERY=$(echo "$*" | tr " " "+")
-curl -s "https://cht.sh/$QUERY?T"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>cheat.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>5320A9D6-5BED-4AC3-B729-7E0FCA44A54B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<true/>
 				<key>clipboardtext</key>
@@ -939,10 +894,125 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<integer>3</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ch</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>cheat.sh: '{query}'</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>852FEFE2-6998-4254-985C-75A2E3AEB5B2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>QUERY=$(echo "$*" | tr " " "+")
+curl -s "https://cht.sh/$QUERY?T"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>cheat.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5320A9D6-5BED-4AC3-B729-7E0FCA44A54B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ep</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>espanso-docs-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Espanso Docs Search...</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>FE9038EA-F174-44C3-96CF-EED8F400E783</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
 			<string>EA3DF9A8-C9B9-4A5B-BE23-02A376F9B128</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>147B74A7-0701-400F-9336-3E942E809AB8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1011,7 +1081,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>ep</string>
+				<string>ke</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1027,11 +1097,11 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>espanso-docs-search.js</string>
+				<string>karabiner-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Espanso Docs Search...</string>
+				<string>Karabiner Docs Search...</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1040,30 +1110,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>FE9038EA-F174-44C3-96CF-EED8F400E783</string>
+			<string>FE8C5299-418B-45DE-A554-50495EF4EE22</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>147B74A7-0701-400F-9336-3E942E809AB8</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1106,55 +1155,6 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<string>66A6B203-4D92-418E-9D90-D4815DA05E8F</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ke</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>karabiner-docs-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Karabiner Docs Search...</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>FE8C5299-418B-45DE-A554-50495EF4EE22</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1298,7 +1298,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>795</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>715</real>
 		</dict>
 		<key>5B4488F5-41D3-4E76-A00D-E7878BC0BC40</key>
 		<dict>
@@ -1316,7 +1316,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>795</real>
 			<key>ypos</key>
-			<real>805</real>
+			<real>930</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
@@ -1332,7 +1332,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>575</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>655</real>
 		</dict>
 		<key>9F684AD8-A54B-461A-A897-B3CC1713BCFA</key>
 		<dict>
@@ -1341,7 +1341,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>575</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>795</real>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
@@ -1368,7 +1368,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>575</real>
 			<key>ypos</key>
-			<real>805</real>
+			<real>930</real>
 		</dict>
 		<key>D8D7E65D-1523-47A4-9964-845E4D2C0927</key>
 		<dict>
@@ -1384,7 +1384,7 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>xpos</key>
 			<real>725</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>745</real>
 		</dict>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<dict>

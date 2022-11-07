@@ -80,6 +80,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>959E0C24-63F8-4632-8402-40832861A03B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2BA0A448-A9A0-4E6E-B964-1B6FF2DC2A86</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E8FE5041-BE45-45DC-B8BF-78785E3AD196</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>959E0C24-63F8-4632-8402-40832861A03B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F5FCFE38-5C42-4335-BD61-3B4658A9C8F8</key>
 		<array>
 			<dict>
@@ -285,6 +311,73 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo '{"window":{"Windowed":{"position":{"x":0,"y":0},"size":{"width":182,"height":90}}}}' &gt; "$HOME/.local/share/nvim/neovide-settings.json"
+
+echo "Size reset."</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>959E0C24-63F8-4632-8402-40832861A03B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>2BA0A448-A9A0-4E6E-B964-1B6FF2DC2A86</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>:vim</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🪟 Fix Neovide Window Size</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E8FE5041-BE45-45DC-B8BF-78785E3AD196</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -402,6 +495,13 @@
 			<key>ypos</key>
 			<real>100</real>
 		</dict>
+		<key>2BA0A448-A9A0-4E6E-B964-1B6FF2DC2A86</key>
+		<dict>
+			<key>xpos</key>
+			<real>750</real>
+			<key>ypos</key>
+			<real>360</real>
+		</dict>
 		<key>4C8471ED-D799-4D45-B9DD-EEA5E5B94EA0</key>
 		<dict>
 			<key>colorindex</key>
@@ -461,6 +561,13 @@
 			<key>ypos</key>
 			<real>505</real>
 		</dict>
+		<key>959E0C24-63F8-4632-8402-40832861A03B</key>
+		<dict>
+			<key>xpos</key>
+			<real>580</real>
+			<key>ypos</key>
+			<real>360</real>
+		</dict>
 		<key>D6E5E105-38E3-4BC1-90E3-52BEE556349D</key>
 		<dict>
 			<key>colorindex</key>
@@ -478,6 +585,13 @@
 			<real>265</real>
 			<key>ypos</key>
 			<real>515</real>
+		</dict>
+		<key>E8FE5041-BE45-45DC-B8BF-78785E3AD196</key>
+		<dict>
+			<key>xpos</key>
+			<real>415</real>
+			<key>ypos</key>
+			<real>360</real>
 		</dict>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<dict>
