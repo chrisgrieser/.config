@@ -12,6 +12,7 @@ function PluginList()
 	-- use "folke/tokyonight.nvim"
 	-- use "rebelot/kanagawa.nvim"
 	use "savq/melange" -- like Obsidian's Primary color scheme
+
 	-- use "Mofiqul/dracula.nvim"
 	-- use "Yazeed1s/minimal.nvim"
 	-- use "kaiuri/nvim-juliana" -- sublime-mariana like
@@ -69,13 +70,14 @@ function PluginList()
 	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 	use "stevearc/dressing.nvim"
+	-- use "hood/popui.nvim"
+	use "rcarriga/nvim-notify"
 
 
 	-- File Management & Switching
 	use {"nvim-telescope/telescope.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons",
-		-- "nvim-telescope/telescope-ui-select.nvim",
 	}}
 
 	-- Operators & Text Objects
@@ -88,6 +90,7 @@ function PluginList()
 	use "mg979/vim-visual-multi" -- multi-cursor
 	use "phaazon/hop.nvim"
 	use "unblevable/quick-scope" -- f-t-improvement
+	use "cbochs/portal.nvim"
 
 	-- Editing
 	use "AndrewRadev/splitjoin.vim"

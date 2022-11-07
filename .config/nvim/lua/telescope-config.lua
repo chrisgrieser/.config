@@ -40,10 +40,14 @@ require("telescope").setup {
 				preview_width = {0.55, max = 50}
 			},
 			bottom_pane = {
-				height = 12,
+				height = 10,
 				preview_cutoff = 70,
 				prompt_position = "bottom",
 			},
+			cursor = {
+				width = 0.3,
+				height = 0.3,
+			}
 		},
 	},
 
@@ -99,29 +103,14 @@ require("telescope").setup {
 			initial_mode = "normal",
 			prompt_prefix = "暈",
 			theme = "cursor",
-			layout_config = { cursor = { width = 0.3 } }
+			layout_config = { cursor = { width = 0.3 } },
 		},
 		colorscheme = {
 			enable_preview = true,
-			prompt_prefix = '',
+			prompt_prefix = ' ',
 			results_title = '',
 			layout_strategy = "bottom_pane",
 		},
 	},
 
-	extensions = {
-		["ui-select"] = { -- mostly code actions
-			initial_mode = "normal",
-			prompt_prefix = "  ",
-			results_title = '',
-			layout_strategy = "bottom_pane",
-			sorting_strategy = "ascending",
-			layout_config = { bottom_pane = { height = 8 } },
-		}
-	}
 }
-
---------------------------------------------------------------------------------
-
--- have to be loaded after telescope config
-require("telescope").load_extension("ui-select") -- use telescope for selections like code actions
