@@ -65,6 +65,7 @@ specialFiletypes = {
 	"help",
 	"startuptime",
 	"qf",
+	"DressingSelect",
 	"lspinfo",
 	"AppleScriptRunOutput",
 	"netrw",

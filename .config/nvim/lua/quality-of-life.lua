@@ -28,6 +28,7 @@ function M.qol_renameFile()
 	local oldExt = fn.expand("%:e")
 
 	vim.ui.input({prompt="New Filename:"}, function (newName)
+		if not(newName) then return end
 		if newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") then
 			cmd('echo "Invalid filename."')
 			return

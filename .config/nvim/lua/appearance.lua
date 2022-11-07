@@ -61,9 +61,16 @@ vim.notify = require("notify")
 require("dressing").setup {
 	input = {
 		border = borderStyle,
-		winblend = 5, -- % transparency
+		winblend = 4, -- % transparency
 	},
 	select = {
+		backend = { "builtin", "telescope" }, -- Priority list of preferred vim.select implementations
+		trim_prompt = true, -- Trim trailing `:` from prompt
+		builtin = {
+			border = borderStyle,
+			relative = "win",
+			winblend = 4,
+		},
 		telescope = {
 			initial_mode = "normal",
 			prompt_prefix = "  ",
