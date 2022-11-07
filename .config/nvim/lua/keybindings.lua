@@ -23,9 +23,8 @@ keymap("n", "<leader>G", telescope.highlights)
 keymap("n", "<leader>p", function()
 	cmd [[update! ~/.config/nvim/lua/plugin-list.lua]]
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
-	require("plugin-list")
 	local packer = require("packer")
-	packer.startup(PluginList)
+	packer.startup(require("plugin-list").PluginList)
 	packer.sync()
 	cmd [[MasonUpdateAll]]
 end)
@@ -122,7 +121,7 @@ autocmd("BufEnter", {
 	group = "indentobject",
 	callback = function()
 		local ft = bo.filetype
-		if not(ft == "yaml" or ft == "python" or ft == "markdown") then
+		if not (ft == "yaml" or ft == "python" or ft == "markdown") then
 			keymap({"x", "o"}, "ai", "aI", {remap = true, buffer = true})
 		end
 	end
@@ -258,8 +257,7 @@ keymap("n", "S", substi.eol)
 keymap("x", "s", substi.visual)
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
--- Duplicate Line / Selection (mnemonic: [r]eplicate)
-keymap("n", "R", qol.duplicateLine)
+keymap("n", "R", function() qol.duplicateLine {moveTo = "key"} end)
 keymap("n", "<A-r>", function() qol.duplicateLine {increment = true} end)
 keymap("x", "R", qol.duplicateVisual)
 

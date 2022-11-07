@@ -16,9 +16,8 @@ local status_ok, packer = pcall(require, "packer")
 if (not status_ok) then return end
 
 -- Load plugins and display packer as popup
-require("plugin-list")
-packer.startup({
-	PluginList,
+packer.startup{
+	require("plugin-list").PluginList,
 	config = {
 		display = {
 			open_fn = function()
@@ -26,8 +25,7 @@ packer.startup({
 			end
 		}
 	}
-})
+}
 
 packer.install() -- auto-install missing plugins
 packer.clean() -- remove unused plugins
-
