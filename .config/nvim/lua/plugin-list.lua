@@ -70,10 +70,8 @@ function M.PluginList()
 	use "lewis6991/gitsigns.nvim"
 	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	use "hood/popui.nvim" -- alternative to "stevearc/dressing.nvim"
-	use "stevearc/dressing.nvim"
+	use "stevearc/dressing.nvim" -- alternative to "hood/popui.nvim"
 	use "rcarriga/nvim-notify"
-
 
 	-- File Management & Switching
 	use {"nvim-telescope/telescope.nvim", requires = {
