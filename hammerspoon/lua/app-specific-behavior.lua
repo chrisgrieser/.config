@@ -123,7 +123,8 @@ wf_browser_all = wf.new("Brave Browser")
 wf_mimestream = wf.new("Mimestream")
 	:setOverrideFilter {
 		allowRoles = "AXStandardWindow",
-		rejectTitles = {"General", "Accounts", "Sidebar & List", "Viewing", "Composing", "Templates", "Signatures", "Labs", "Updating Mimestream"}
+		rejectTitles = {"General", "Accounts", "Sidebar & List", "Viewing", "Composing", "Templates", "Signatures", "Labs",
+			"Updating Mimestream"}
 	}
 	:subscribe(wf.windowCreated, function()
 		if #wf_mimestream:getWindows() == 2 then
@@ -288,7 +289,7 @@ wf_marta = wf.new("Marta")
 -- don't leave tab behind when opening zoom
 wf_zoom = wf.new("zoom.us")
 	:subscribe(wf.windowCreated, function()
-		applescript[[
+		applescript [[
 			tell application "Brave Browser"
 				set window_list to every window
 				repeat with the_window in window_list
@@ -315,7 +316,7 @@ wf_zoom = wf.new("zoom.us")
 -- - Start with Highlight as Selection
 local function highlightsWatcher(appName, eventType)
 	if not (eventType == aw.launched and appName == "Highlights") then return end
-	applescript[[
+	applescript [[
 		tell application "System Events"
 			tell appearance preferences to set isDark to dark mode
 			if (isDark is false) then set targetView to "Default"
@@ -343,7 +344,7 @@ local function draftsLaunchWake(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
 
 	if (eventType == aw.launched) then
-		runDelayed(0.5, function()
+		runDelayed(0.3, function()
 			appObject:selectMenuItem {"View", "Hide Toolbar"}
 		end)
 	elseif (eventType == aw.activated) then
