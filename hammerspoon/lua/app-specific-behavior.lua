@@ -289,24 +289,22 @@ wf_marta = wf.new("Marta")
 -- don't leave tab behind when opening zoom
 wf_zoom = wf.new("zoom.us")
 	:subscribe(wf.windowCreated, function()
+		hs.osascript.applescript([[
+			tell application "Brave Browser"
+				set window_list to every window
+				repeat with the_window in window_list
+					set tab_list to every tab in the_window
+					repeat with the_tab in tab_list
+						set the_url to the url of the_tab
+						if the_url contains ("zoom.us") then close the_tab
+					end repeat
+				end repeat
+			end tell
+		]])
 		local numberOfZoomWindows = #wf_zoom:getWindows();
 		if numberOfZoomWindows == 2 then
 			runDelayed(1.3, function()
 				app("zoom.us"):findWindow("^Zoom$"):close()
-				hs.osascript.applescript([[
-					tell application "Brave Browser"
-						set window_list to every window
-						repeat with the_window in window_list
-							set tab_list to every tab in the_window
-							repeat with the_tab in tab_list
-								set the_url to the url of the_tab
-								if the_url contains ("zoom.us") then
-									close the_tab
-								end if
-							end repeat
-						end repeat
-					end tell
-				]])
 			end)
 		end
 	end)
@@ -374,7 +372,7 @@ macPassWatcher:start()
 -- SPOTIFY
 -- Pause Spotify on launch
 -- Resume Spotify on quit
-local function spotifyTUI(toStatus)
+function spotifyTUI(toStatus)
 	local currentStatus = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s")
 	currentStatus = trim(currentStatus) ---@diagnostic disable-line: param-type-mismatch, cast-local-type
 	if (currentStatus == "▶️" and toStatus == "pause") or (currentStatus == "⏸" and toStatus == "play") then
