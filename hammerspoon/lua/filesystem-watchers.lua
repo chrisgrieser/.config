@@ -1,20 +1,19 @@
 require("lua.utils")
-
-fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-
+local fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+local pw = hs.pathwatcher.new
 --------------------------------------------------------------------------------
 
 -- BRAVE Bookmarks synced to Chrome Bookmarks (needed for Alfred)
-browserFolder = os.getenv("HOME") .. "/Library/Application Support/BraveSoftware/Brave-Browser/"
+browserFolder = home .. "/Library/Application Support/BraveSoftware/Brave-Browser/"
 function bookmarkSync()
-	hs.execute("BROWSER_FOLDER='" .. browserFolder .. "' ; " ..
-		[[mkdir -p "$HOME/Library/Application Support/Google/Chrome/Default"
+	hs.execute("BROWSER_FOLDER='" .. browserFolder .. "' ; " .. [[
+		mkdir -p "$HOME/Library/Application Support/Google/Chrome/Default"
 		cp "$BROWSER_FOLDER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
 		cp "$BROWSER_FOLDER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
 	]])
 end
 
-bookmarkWatcher = hs.pathwatcher.new(browserFolder .. "Default/Bookmarks", bookmarkSync)
+bookmarkWatcher = pw(browserFolder .. "Default/Bookmarks", bookmarkSync)
 bookmarkWatcher:start()
 
 --------------------------------------------------------------------------------
@@ -26,7 +25,7 @@ function downloadFolderBadge()
 	hs.execute("zsh ./helpers/download-folder-badge/download-folder-icon.sh " .. downloadFolder)
 end
 
-downloadFolderWatcher = hs.pathwatcher.new(downloadFolder, downloadFolderBadge)
+downloadFolderWatcher = pw(downloadFolder, downloadFolderBadge)
 downloadFolderWatcher:start()
 
 --------------------------------------------------------------------------------
@@ -34,11 +33,11 @@ downloadFolderWatcher:start()
 -- FONT rsync (for both directions)
 -- - symlinking the Folder somehow does not work properly, therefore rsync
 -- - source folder needs trailing "/" to copy contents (instead of the folder)
-fontsWatcher1 = hs.pathwatcher.new(home .. "/Library/Fonts", function()
+fontsWatcher1 = pw(home .. "/Library/Fonts", function()
 	hs.execute('rsync --archive --update --delete "$HOME/Library/Fonts/" "$HOME/dotfiles/Fonts"')
 	notify("Fonts synced.")
 end)
-fontsWatcher2 = hs.pathwatcher.new(home .. "/dotfiles/Fonts", function()
+fontsWatcher2 = pw(home .. "/dotfiles/Fonts", function()
 	hs.execute('rsync --archive --update --delete "$HOME/dotfiles/Fonts/" "$HOME/Library/Fonts"')
 	notify("Fonts synced.")
 end)
@@ -49,19 +48,19 @@ fontsWatcher2:start()
 
 -- Redirects TO File Hub
 scanFolder = home .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
-scanFolderWatcher = hs.pathwatcher.new(scanFolder, function()
+scanFolderWatcher = pw(scanFolder, function()
 	hs.execute("mv '" .. scanFolder .. "'/* '" .. fileHub .. "'")
 end)
 scanFolderWatcher:start()
 
 systemDownloadFolder = home .. "/Downloads/"
-systemDlFolderWatcher = hs.pathwatcher.new(systemDownloadFolder, function()
+systemDlFolderWatcher = pw(systemDownloadFolder, function()
 	hs.execute("mv '" .. systemDownloadFolder .. "'/* '" .. fileHub .. "'")
 end)
 systemDlFolderWatcher:start()
 
 draftsIcloud = home .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
-draftsIcloudWatcher = hs.pathwatcher.new(draftsIcloud, function()
+draftsIcloudWatcher = pw(draftsIcloud, function()
 	hs.execute("mv '" .. draftsIcloud .. "'/*.md '" .. fileHub .. "'")
 end)
 draftsIcloudWatcher:start()
@@ -114,7 +113,7 @@ function fromFileHub(files)
 	end
 end
 
-fileHubWatcher = hs.pathwatcher.new(fileHub, fromFileHub)
+fileHubWatcher = pw(fileHub, fromFileHub)
 fileHubWatcher:start()
 
 --------------------------------------------------------------------------------
@@ -150,5 +149,5 @@ function installObsiAlpha(files)
 	end
 end
 
-obsiAlphaWatcher = hs.pathwatcher.new(fileHub, installObsiAlpha)
+obsiAlphaWatcher = pw(fileHub, installObsiAlpha)
 obsiAlphaWatcher:start()

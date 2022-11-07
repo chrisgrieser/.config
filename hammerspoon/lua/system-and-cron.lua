@@ -3,13 +3,14 @@ require("lua.window-management")
 require("lua.dark-mode")
 require("lua.layouts")
 local caff = hs.caffeinate.watcher
+local timer = hs.timer.doAt
 --------------------------------------------------------------------------------
 -- CONFIG
 dotfileLocation = home .. "/dotfiles"
 vaultLocation = home .. "/Main Vault"
 gitDotfileScript = dotfileLocation .. "/git-dotfile-sync.sh"
 gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
-dotfileIcon = "⏺"
+dotfileIcon = "⏺ "
 vaultIcon = "🟪"
 repoSyncFrequencyMin = 20
 
@@ -157,11 +158,11 @@ function sleepYouTube()
 	]])
 end
 
-sleepTimer1 = hs.timer.doAt("03:00", "01d", sleepYouTube, true)
-sleepTimer2 = hs.timer.doAt("04:00", "01d", sleepYouTube, true)
-sleepTimer3 = hs.timer.doAt("05:00", "01d", sleepYouTube, true)
+sleepTimer1 = timer("03:00", "01d", sleepYouTube, true)
+sleepTimer2 = timer("04:00", "01d", sleepYouTube, true)
+sleepTimer3 = timer("05:00", "01d", sleepYouTube, true)
 
-biweeklyTimer = hs.timer.doAt("02:00", "03d", function()
+biweeklyTimer = timer("02:00", "03d", function()
 	hs.osascript.applescript([[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
@@ -172,11 +173,11 @@ biweeklyTimer = hs.timer.doAt("02:00", "03d", function()
 	hs.loadSpoon("EmmyLua") -- so it runs not as often
 end, true)
 
-dailyEveningTimer = hs.timer.doAt("21:00", "01d", function()
+dailyEveningTimer = timer("21:00", "01d", function()
 	setDarkmode(true)
 end)
 
-dailyMorningTimer = hs.timer.doAt("08:00", "01d", function()
+dailyMorningTimer = timer("08:00", "01d", function()
 	setDarkmode(false)
 end)
 
