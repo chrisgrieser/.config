@@ -1,18 +1,15 @@
 ---@diagnostic disable: param-type-mismatch, undefined-field
 local M = {}
 --------------------------------------------------------------------------------
+local bo = vim.bo
+local fn = vim.fn
 local getline = vim.fn.getline
 local setline = vim.fn.setline
 local lineNo = vim.fn.line
 local append = vim.fn.append
-local bo = vim.bo
-local fn = vim.fn
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
-
-local function wordUnderCursor()
-	return vim.fn.expand("<cword>")
-end
+local function wordUnderCursor() return vim.fn.expand("<cword>") end
 
 local function leaveVisualMode()
 	-- https://github.com/neovim/neovim/issues/17735#issuecomment-1068525617
@@ -23,14 +20,16 @@ end
 --------------------------------------------------------------------------------
 
 ---Rename Current File
+-- - if no extension is provided, the current extensions will be kept
+-- - uses vim.ui.input, so plugins like dressing.nvim are automatically supported
 function M.qol_renameFile()
 	local oldName = fn.expand("%:t")
 	local oldExt = fn.expand("%:e")
 
-	vim.ui.input({prompt="New Filename:"}, function (newName)
-		if not(newName) then return end
+	vim.ui.input({prompt = "New Filename: "}, function(newName)
+		if not (newName) then return end -- cancel
 		if newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") then
-			cmd('echo "Invalid filename."')
+			cmd('echoerr "Invalid filename."')
 			return
 		end
 		local extProvided = newName:find("%.")
@@ -48,8 +47,8 @@ end
 --------------------------------------------------------------------------------
 
 -- Duplicate line under cursor, and change occurences of certain words to their
--- opposite, e.g., "right" to "left". Indended for languages like CSS.
----@param opts? table available: smart, moveTo, increment
+-- opposite, e.g., "right" to "left". Intended for languages like CSS.
+---@param opts? table available: smart, moveTo = "key"|"value", increment
 function M.duplicateLine(opts)
 	if not (opts) then
 		opts = {smart = false, moveTo = "key", increment = false}
@@ -85,17 +84,16 @@ function M.duplicateLine(opts)
 	-- cursor movement
 	local lineNum = getCursor(0)[1] + 1 -- line down
 	local colNum = getCursor(0)[2]
-	local keyPos, valuePos = line:find(". ?[:=] ?")
+	local keyPos, valuePos = line:find(".+ ?[:=] ?")
 	if opts.moveTo == "value" and valuePos then
 		colNum = valuePos
 	elseif opts.moveTo == "key" and keyPos then
-		colNum = keyPos
-		cmd[[normal! b]]
+		colNum = keyPos - 1
 	end
 	setCursor(0, {lineNum, colNum})
 end
 
-function M.duplicateVisual()
+function M.duplicateSelection()
 	local prevReg = vim.fn.getreg("z")
 	cmd [[silent! normal!"zy`]"zp]]
 	vim.fn.setreg("z", prevReg)
@@ -141,13 +139,13 @@ function M.hr(linechar)
 
 end
 
--- Drop-in replacement for vim's `~` command. If the word under cursor has a
--- reasonable opposite in the current language (e.g., "top" and "bottom" in
--- css), then the word will be toggled.
--- Otherwise will check character under cursor. If it is a "reversible"
--- character, the character will be switched, e.g. "(" to ")". If it is a
--- letter, falls back to the default `~` behavior of Toggling between upper and
--- lower case.
+-- Drop-in replacement for vim's `~` command.
+-- - If the word under cursor has a reasonable opposite in the current language
+--   (e.g., "top" and "bottom" in css), then the word will be toggled.
+-- - Otherwise will check character under cursor. If it is a "reversible"
+--   character, the character will be switched, e.g. "(" to ")".
+-- - If the character is a letter, falls back to the default `~` behavior of
+--   toggling between upper and lower case.
 function M.reverse()
 	local word
 	local wordchar = bo.iskeyword

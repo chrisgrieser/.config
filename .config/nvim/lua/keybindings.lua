@@ -260,7 +260,7 @@ keymap("x", "s", substi.visual)
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine)
 keymap("n", "<A-r>", function() qol.duplicateLine {increment = true} end)
-keymap("x", "R", qol.duplicateVisual)
+keymap("x", "R", qol.duplicateSelection)
 
 -- Undo
 keymap({"n", "x"}, "U", "<C-r>") -- redo
