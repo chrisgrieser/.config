@@ -30,7 +30,6 @@ function PluginList()
 	}
 	use "mityu/vim-applescript" -- applescript syntax highlighting
 	use "hail2u/vim-css3-syntax" -- better css syntax highlighting (until treesitter css looks decent…)
-	-- use {"inkarkat/vim-SyntaxRange", requires = "inkarkat/vim-ingo-library"}
 
 	-- LSP & Linting
 	use {"neovim/nvim-lspconfig", requires = "williamboman/mason-lspconfig.nvim"}
@@ -57,10 +56,8 @@ function PluginList()
 		"hrsh7th/cmp-emoji",
 		"chrisgrieser/cmp-nerdfont",
 		"petertriho/cmp-git",
-
 		"hrsh7th/cmp-nvim-lsp", -- lsp
-		"folke/neodev.nvim", -- lsp for nvim config
-
+		"folke/neodev.nvim", -- lsp for nvim-lua config
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip",
 	}}
@@ -71,12 +68,14 @@ function PluginList()
 	use "lewis6991/gitsigns.nvim"
 	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
+	use "stevearc/dressing.nvim"
+
 
 	-- File Management & Switching
 	use {"nvim-telescope/telescope.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons",
-		"nvim-telescope/telescope-ui-select.nvim",
+		-- "nvim-telescope/telescope-ui-select.nvim",
 	}}
 
 	-- Operators & Text Objects
