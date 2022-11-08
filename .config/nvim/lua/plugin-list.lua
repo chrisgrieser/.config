@@ -13,7 +13,7 @@ function M.PluginList()
 	-- use "folke/tokyonight.nvim"
 	-- use "rebelot/kanagawa.nvim"
 	use "savq/melange" -- like Obsidian's Primary color scheme
-
+	use "Yazeed1s/oh-lucy.nvim"
 	-- use "Mofiqul/dracula.nvim"
 	-- use "Yazeed1s/minimal.nvim"
 	-- use "kaiuri/nvim-juliana" -- sublime-mariana like
