@@ -142,6 +142,10 @@ end
 ---Run Last Command Again
 function M.runLastCommandAgain()
 	local lastCommand = fn.getreg(":")
+	if not(lastCommand) then
+		vim.notify("No Command has been run yet.", error)
+		return
+	end
 	cmd(lastCommand)
 end
 
