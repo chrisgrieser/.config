@@ -5,7 +5,7 @@ local qol = require("quality-of-life")
 g.mapleader = ","
 
 -- copy [l]ast ex[c]ommand
-keymap("n", "<leader>lc", ':let @+=@:<CR>:echo "Copied:"@:<CR>')
+keymap("n", "<leader>lc", ':let @+=@:<CR>:lua vim.notify("COPIED\\n"..vim.fn.getreg(":"))<CR>')
 
 -- run [l]ast command [a]gain
 keymap("n", "<leader>la", ":<C-r>:<CR>")
@@ -32,7 +32,7 @@ end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
 
 -- write all before quitting
-keymap("n", "ZZ", ":wall<CR>:ZZ") 
+keymap("n", "ZZ", ":wall<CR>ZZ")
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -343,9 +343,9 @@ keymap("n", "gR", telescope.resume) -- search in [f]iles
 keymap("n", "gF", "gf") -- needs remapping since shadowed
 
 -- File Operations
-keymap("", "<C-p>", ':let @+ = expand("%:p")<CR>:echo "Copied:"expand("%:p")<CR>') -- copy path of current file
-keymap("", "<C-n>", ':let @+ = expand("%:t")<CR>:echo "Copied:"expand("%:t")<CR>') -- copy name of current file
-keymap("n", "<leader>x", ':!chmod +x %:p<CR><CR>:echo "Execution permission granted."<CR>')
+keymap("", "<C-p>", ':let @+ = expand("%:p")<CR>:lua vim.notify("COPIED\\n"..fn.expand("%:p"))<CR>') -- copy path of current file
+keymap("", "<C-n>", ':let @+ = expand("%:t")<CR>:lua vim.notify("COPIED\\n"..fn.expand("%:t"))<CR>') -- copy name of current file
+keymap("n", "<leader>x", ':!chmod +x %:p<CR><CR>:lua vim.notify("Execution permission granted.")<CR>')
 keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR> ") -- refactor selection into new file
 keymap("", "<C-r>", qol.renameFile)
 keymap("", "<C-d>", qol.duplicateFile)
@@ -382,7 +382,8 @@ keymap("n", "<leader>r", function()
 		local parentFolder = fn.expand("%:p:h")
 		if not (parentFolder) then return end
 		if parentFolder:find("nvim") then
-			cmd [[write! | source % | echo "Neovim config reloaded."]]
+			cmd [[write! | source %]]
+			vim.notify("Neovim config reloaded.")
 		elseif parentFolder:find("hammerspoon") then
 			os.execute('open -g "hammerspoon://hs-reload"')
 		end
