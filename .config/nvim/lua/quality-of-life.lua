@@ -3,7 +3,6 @@ local M = {}
 --------------------------------------------------------------------------------
 local bo = vim.bo
 local fn = vim.fn
-local notify = vim.notify
 local getline = vim.fn.getline
 local setline = vim.fn.setline
 local lineNo = vim.fn.line
@@ -37,7 +36,7 @@ local function fileop(operation)
 	vim.ui.input({prompt = promptStr}, function(newName)
 		if not (newName) then return end -- cancel
 		if newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") then
-			notify("Invalid Filename.", error)
+			vim.notify("Invalid Filename.", error)
 			return
 		end
 		local extProvided = newName:find("%.")
@@ -47,27 +46,43 @@ local function fileop(operation)
 		if operation == "duplicate" then
 			cmd("saveas " .. newName)
 			cmd("edit " .. newName)
-			notify("Duplicated '" .. oldName .. "' as '" .. newName .. "'.")
+			vim.notify("Duplicated '" .. oldName .. "' as '" .. newName .. "'.")
 		elseif operation == "rename" then
 			os.rename(oldName, newName)
 			cmd("edit " .. newName)
 			cmd("bdelete #")
-			notify("Renamed '" .. oldName .. "' to '" .. newName .. "'.")
+			vim.notify("Renamed '" .. oldName .. "' to '" .. newName .. "'.")
 		end
 	end)
 end
 
 ---Rename Current File
 -- - if no extension is provided, the current extensions will be kept
--- - uses vim.ui.input and vim.notify, so plugins like dressing.nvim or 
+-- - uses vim.ui.input and vim.notify, so plugins like dressing.nvim or
 --   notify.nvim are automatically supported
 function M.renameFile() fileop("rename") end
 
 ---Duplicate Current File
 -- - if no extension is provided, the current extensions will be kept
--- - uses vim.ui.input and vim.notify, so plugins like dressing.nvim or 
+-- - uses vim.ui.input and vim.notify, so plugins like dressing.nvim or
 --   notify.nvim are automatically supported
 function M.duplicateFile() fileop("duplicate") end
+
+---run `chmod +x` on the current file
+function M.chmodx()
+	local currentFile = fn.expand("%:p")
+	os.execute("chmod +x " .. "'" .. currentFile .. "'")
+	vim.notify("Execution permission granted.")
+end
+
+--------------------------------------------------------------------------------
+function M.copyLastCommand()
+	local lastCommand = fn.getreg(":")
+	if not(lastCommand)
+	fn.setreg('"', lastCommand)
+	vim.notify("COPIED\n")
+end
+--':let @+=@:<CR>:lua vim.notify("COPIED\\n"..vim.fn.getreg(":"))<CR>'
 
 --------------------------------------------------------------------------------
 
@@ -250,7 +265,7 @@ function M.reverse()
 		return
 	end
 
-	notify("Nothing under the cursor that can be switched", warn)
+	vim.notify("Nothing under the cursor that can be switched", warn)
 end
 
 ---enables overscrolling for that action when close to the last line, depending
@@ -287,7 +302,7 @@ function M.quicklog(addLineNumber)
 	elseif ft == "applescript" then
 		logStatement = 'log "' .. lnStr .. varname .. ': " & ' .. varname
 	else
-		notify("Quicklog does not support " .. ft .. " yet.", warn)
+		vim.notify("Quicklog does not support " .. ft .. " yet.", warn)
 	end
 
 	append(".", logStatement)

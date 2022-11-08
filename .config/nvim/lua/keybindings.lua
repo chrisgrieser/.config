@@ -5,7 +5,7 @@ local qol = require("quality-of-life")
 g.mapleader = ","
 
 -- copy [l]ast ex[c]ommand
-keymap("n", "<leader>lc", ':let @+=@:<CR>:lua vim.notify("COPIED\\n"..vim.fn.getreg(":"))<CR>')
+keymap("n", "<leader>lc", ':let @+=@:<CR>:lua vim.notify("COPIED\\n"..vim.fn.getreg(":"))<CR>', {silent = true})
 
 -- run [l]ast command [a]gain
 keymap("n", "<leader>la", ":<C-r>:<CR>")
@@ -344,8 +344,8 @@ keymap("n", "gF", "gf") -- needs remapping since shadowed
 -- File Operations
 keymap("", "<C-p>", ':let @+ = expand("%:p")<CR>:lua vim.notify("COPIED\\n"..fn.expand("%:p"))<CR>', {silent = true}) -- copy path of current file
 keymap("", "<C-n>", ':let @+ = expand("%:t")<CR>:lua vim.notify("COPIED\\n"..fn.expand("%:t"))<CR>', {silent = true}) -- copy name of current file
-keymap("n", "<leader>x", ':!chmod +x %:p<CR><CR>:lua vim.notify("Execution permission granted.")<CR>', {silent = true})
 keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR> ") -- refactor selection into new file
+keymap("n", "<leader>x",qol.chmodx)
 keymap("", "<C-r>", qol.renameFile)
 keymap("", "<C-d>", qol.duplicateFile)
 
@@ -382,7 +382,7 @@ keymap("n", "<leader>r", function()
 		if not (parentFolder) then return end
 		if parentFolder:find("nvim") then
 			cmd [[write! | source %]]
-			notify("Neovim config reloaded.")
+			vim.notify("Neovim config reloaded.")
 		elseif parentFolder:find("hammerspoon") then
 			os.execute('open -g "hammerspoon://hs-reload"')
 		end
@@ -397,7 +397,7 @@ keymap("n", "<leader>r", function()
 		cmd [[AppleScriptRun]]
 
 	else
-		notify("No build system set.", warn) ---@diagnostic disable-line: param-type-mismatch
+		vim.notify("No build system set.", warn) ---@diagnostic disable-line: param-type-mismatch
 
 	end
 end)
