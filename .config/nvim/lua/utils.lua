@@ -13,7 +13,6 @@ augroup = vim.api.nvim_create_augroup
 autocmd = vim.api.nvim_create_autocmd
 telescope = require("telescope.builtin") -- requires loading extensions first
 keymap = vim.keymap.set
-notify = vim.notify
 error = vim.log.levels.ERROR
 warn = vim.log.levels.WARN
 

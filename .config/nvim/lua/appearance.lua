@@ -71,8 +71,8 @@ end
 require("notify").setup {
 	icons = { WARN = "" },
 	render = "minimal", -- styles, "default"|"minimal"|"simply"
-	minimum_width = 30,
-	timeout = 5000,
+	minimum_width = 25,
+	timeout = 4000,
 }
 --------------------------------------------------------------------------------
 
