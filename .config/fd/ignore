@@ -1,6 +1,9 @@
 # encrypted data
 Academia/PhD Data/
 
+# Neovim
+packer_compiled.lua
+
 # Mac Stuff
 .DS_Store
 .Trash

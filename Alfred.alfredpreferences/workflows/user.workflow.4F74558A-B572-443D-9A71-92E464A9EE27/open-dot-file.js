@@ -17,6 +17,7 @@ const workArray = app.doShellScript (
 	-E "Alfred.alfredpreferences" \
 	-E ".config/alacritty/colors/*" \
 	-E "Marta/Themes/*" \
+	-E "packer_compiled.lua" \
 	-E "hammerspoon/Spoons/*" \
 	-E ".config/karabiner/automatic_backups/*" \
 	-E ".config/karabiner/assets/complex_modifications/*.json" \
