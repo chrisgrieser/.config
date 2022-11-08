@@ -213,7 +213,7 @@ keymap("n", "<BS>", function() -- reduce multiple blank lines to exactly one
 	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
 		cmd [[normal! "_dipO]]
 	else
-		print("Line not empty.")
+		notify("Line not empty.", warn) ---@diagnostic disable-line: param-type-mismatch
 	end
 end)
 
@@ -228,7 +228,6 @@ keymap("x", "<S-Tab>", "<gv")
 
 keymap({"n", "x"}, "^", "=") -- auto-indent
 keymap("n", "^^", "mz=ip`z") -- since indenting paragraph is far more common than indenting a line
-keymap("n", "^A", "mzgg=G`z") -- entire file
 
 --------------------------------------------------------------------------------
 
@@ -343,9 +342,9 @@ keymap("n", "gR", telescope.resume) -- search in [f]iles
 keymap("n", "gF", "gf") -- needs remapping since shadowed
 
 -- File Operations
-keymap("", "<C-p>", ':let @+ = expand("%:p")<CR>:lua vim.notify("COPIED\\n"..fn.expand("%:p"))<CR>') -- copy path of current file
-keymap("", "<C-n>", ':let @+ = expand("%:t")<CR>:lua vim.notify("COPIED\\n"..fn.expand("%:t"))<CR>') -- copy name of current file
-keymap("n", "<leader>x", ':!chmod +x %:p<CR><CR>:lua vim.notify("Execution permission granted.")<CR>')
+keymap("", "<C-p>", ':let @+ = expand("%:p")<CR>:lua vim.notify("COPIED\\n"..fn.expand("%:p"))<CR>', {silent = true}) -- copy path of current file
+keymap("", "<C-n>", ':let @+ = expand("%:t")<CR>:lua vim.notify("COPIED\\n"..fn.expand("%:t"))<CR>', {silent = true}) -- copy name of current file
+keymap("n", "<leader>x", ':!chmod +x %:p<CR><CR>:lua vim.notify("Execution permission granted.")<CR>', {silent = true})
 keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR> ") -- refactor selection into new file
 keymap("", "<C-r>", qol.renameFile)
 keymap("", "<C-d>", qol.duplicateFile)
@@ -383,7 +382,7 @@ keymap("n", "<leader>r", function()
 		if not (parentFolder) then return end
 		if parentFolder:find("nvim") then
 			cmd [[write! | source %]]
-			vim.notify("Neovim config reloaded.")
+			notify("Neovim config reloaded.")
 		elseif parentFolder:find("hammerspoon") then
 			os.execute('open -g "hammerspoon://hs-reload"')
 		end
@@ -398,7 +397,7 @@ keymap("n", "<leader>r", function()
 		cmd [[AppleScriptRun]]
 
 	else
-		print("No build system set.")
+		notify("No build system set.", warn) ---@diagnostic disable-line: param-type-mismatch
 
 	end
 end)

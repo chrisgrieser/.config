@@ -3,12 +3,16 @@ local M = {}
 --------------------------------------------------------------------------------
 local bo = vim.bo
 local fn = vim.fn
+local notify = vim.notify
 local getline = vim.fn.getline
 local setline = vim.fn.setline
 local lineNo = vim.fn.line
 local append = vim.fn.append
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
+local error = vim.log.levels.ERROR
+local warn = vim.log.levels.WARN
+
 local function wordUnderCursor() return vim.fn.expand("<cword>") end
 
 local function leaveVisualMode()
@@ -33,7 +37,7 @@ local function fileop(operation)
 	vim.ui.input({prompt = promptStr}, function(newName)
 		if not (newName) then return end -- cancel
 		if newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") then
-			cmd('echoerr "Invalid filename."')
+			notify("Invalid Filename.", error)
 			return
 		end
 		local extProvided = newName:find("%.")
@@ -43,29 +47,27 @@ local function fileop(operation)
 		if operation == "duplicate" then
 			cmd("saveas " .. newName)
 			cmd("edit " .. newName)
-			cmd('echo "Duplicated \'' .. oldName .. "\' as \'" .. newName .. '\'."')
+			notify("Duplicated '" .. oldName .. "' as '" .. newName .. "'.")
 		elseif operation == "rename" then
 			os.rename(oldName, newName)
 			cmd("edit " .. newName)
 			cmd("bdelete #")
-			cmd('echo "Renamed \'' .. oldName .. "\' to \'" .. newName .. '\'."')
+			notify("Renamed '" .. oldName .. "' to '" .. newName .. "'.")
 		end
 	end)
 end
 
 ---Rename Current File
 -- - if no extension is provided, the current extensions will be kept
--- - uses vim.ui.input, so plugins like dressing.nvim are automatically supported
-function M.renameFile()
-	fileop("rename")
-end
+-- - uses vim.ui.input and vim.notify, so plugins like dressing.nvim or 
+--   notify.nvim are automatically supported
+function M.renameFile() fileop("rename") end
 
 ---Duplicate Current File
 -- - if no extension is provided, the current extensions will be kept
--- - uses vim.ui.input, so plugins like dressing.nvim are automatically supported
-function M.duplicateFile()
-	fileop("duplicate")
-end
+-- - uses vim.ui.input and vim.notify, so plugins like dressing.nvim or 
+--   notify.nvim are automatically supported
+function M.duplicateFile() fileop("duplicate") end
 
 --------------------------------------------------------------------------------
 
@@ -248,7 +250,7 @@ function M.reverse()
 		return
 	end
 
-	print("Nothing under the cursor that can be switched")
+	notify("Nothing under the cursor that can be switched", warn)
 end
 
 ---enables overscrolling for that action when close to the last line, depending
@@ -285,7 +287,7 @@ function M.quicklog(addLineNumber)
 	elseif ft == "applescript" then
 		logStatement = 'log "' .. lnStr .. varname .. ': " & ' .. varname
 	else
-		print("Quicklog does not support " .. ft .. " yet.")
+		notify("Quicklog does not support " .. ft .. " yet.", warn)
 	end
 
 	append(".", logStatement)

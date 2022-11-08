@@ -57,6 +57,7 @@ require("indent_blankline").setup {
 -- Notifications
 opt.termguicolors = true
 vim.notify = require("notify") -- use notify.nvim for all vim notifications
+notify = require("notify")
 
 -- replace lua's print message with notify.nvim → https://www.reddit.com/r/neovim/comments/xv3v68/tip_nvimnotify_can_be_used_to_display_print/
 print = function(...)
