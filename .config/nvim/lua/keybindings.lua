@@ -31,6 +31,9 @@ keymap("n", "<leader>p", function()
 end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
 
+-- write all before quitting
+keymap("n", "ZZ", ":wall<CR>:ZZ") 
+
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
@@ -64,7 +67,7 @@ keymap("n", "Ö", ":HopWordBC<CR>")
 -- Search
 keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "/", "/\v") -- more PCRE-like regex patterns (:h magic)
-keymap("n", "<Esc>", ":nohl<CR>:echo<CR>lh", {silent = true}) -- clear highlights & shortmessage, lh clears hover window
+keymap("n", "<Esc>", ":lua require('notify').dismiss()<CR>:nohl<CR>:echo<CR>lh", {silent = true}) -- clear highlights & shortmessage, lh clears hover window
 keymap({"n", "x", "o"}, "+", "*") -- no more modifier key on German Keyboard
 
 -- URLs

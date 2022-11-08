@@ -55,7 +55,20 @@ require("indent_blankline").setup {
 
 --------------------------------------------------------------------------------
 -- Notification
+opt.termguicolors = true
 vim.notify = require("notify")
+
+-- replace lua's print message with notify.nvim → https://www.reddit.com/r/neovim/comments/xv3v68/tip_nvimnotify_can_be_used_to_display_print/
+print = function(...)
+	local print_safe_args = {}
+	local _ = {...}
+	for i = 1, #_ do
+		table.insert(print_safe_args, tostring(_[i]))
+	end
+	vim.notify(table.concat(print_safe_args, " "), "info") ---@diagnostic disable-line: param-type-mismatch
+end
+require("notify").setup {}
+--------------------------------------------------------------------------------
 
 -- Dressing
 require("dressing").setup {
@@ -65,7 +78,7 @@ require("dressing").setup {
 		relative = "win",
 	},
 	select = {
-		backend = { "builtin", "telescope", "nui" }, -- Priority list of preferred vim.select implementations
+		backend = {"builtin", "telescope", "nui"}, -- Priority list of preferred vim.select implementations
 		trim_prompt = true, -- Trim trailing `:` from prompt
 		builtin = {
 			border = borderStyle,
