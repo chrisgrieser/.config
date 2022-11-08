@@ -19,14 +19,18 @@ end
 
 --------------------------------------------------------------------------------
 
----Rename Current File
--- - if no extension is provided, the current extensions will be kept
--- - uses vim.ui.input, so plugins like dressing.nvim are automatically supported
-function M.renameFile()
+---Helper Function performing commong file operation tasks
+---@param operation string rename|duplicate
+local function fileop(operation)
 	local oldName = fn.expand("%:t")
 	local oldExt = fn.expand("%:e")
 
-	vim.ui.input({prompt = "New Filename: "}, function(newName)
+	local promptStr
+	if operation == "duplicate" then promptStr = "Duplicate File as: "
+	elseif operation == "rename" then promptStr = "Rename File to: "
+	end
+
+	vim.ui.input({prompt = promptStr}, function(newName)
 		if not (newName) then return end -- cancel
 		if newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") then
 			cmd('echoerr "Invalid filename."')
@@ -36,22 +40,41 @@ function M.renameFile()
 		if not (extProvided) then
 			newName = newName .. "." .. oldExt
 		end
-		os.rename(oldName, newName)
-
-		cmd("edit " .. newName)
-		cmd("bdelete #")
-		cmd('echo "Renamed \'' .. oldName .. "\' to \'" .. newName .. '\'."')
+		if operation == "duplicate" then
+			cmd("saveas " .. newName)
+			cmd("edit " .. newName)
+			cmd('echo "Duplicated \'' .. oldName .. "\' as \'" .. newName .. '\'."')
+		elseif operation == "rename" then
+			os.rename(oldName, newName)
+			cmd("edit " .. newName)
+			cmd("bdelete #")
+			cmd('echo "Renamed \'' .. oldName .. "\' to \'" .. newName .. '\'."')
+		end
 	end)
+end
+
+---Rename Current File
+-- - if no extension is provided, the current extensions will be kept
+-- - uses vim.ui.input, so plugins like dressing.nvim are automatically supported
+function M.renameFile()
+	fileop("rename")
+end
+
+---Duplicate Current File
+-- - if no extension is provided, the current extensions will be kept
+-- - uses vim.ui.input, so plugins like dressing.nvim are automatically supported
+function M.duplicateFile()
+	fileop("duplicate")
 end
 
 --------------------------------------------------------------------------------
 
 -- Duplicate line under cursor, and change occurences of certain words to their
 -- opposite, e.g., "right" to "left". Intended for languages like CSS.
----@param opts? table available: smart, moveTo = "key"|"value", increment
+---@param opts? table available: reverse, moveTo = "key"|"value", increment
 function M.duplicateLine(opts)
 	if not (opts) then
-		opts = {smart = false, moveTo = "key", increment = false}
+		opts = {reverse = false, moveTo = "key", increment = false}
 	end
 
 	local line = getline(".")
