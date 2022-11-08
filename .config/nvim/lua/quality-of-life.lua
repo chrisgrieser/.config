@@ -22,15 +22,16 @@ end
 
 --------------------------------------------------------------------------------
 
----Helper Function performing commong file operation tasks
----@param operation string rename|duplicate
-local function fileop(operation)
+---Helper Function performing common file operation tasks
+---@param operation string rename|duplicate|new
+local function fileOp(operation)
 	local oldName = fn.expand("%:t")
 	local oldExt = fn.expand("%:e")
 
 	local promptStr
 	if operation == "duplicate" then promptStr = "Duplicate File as: "
 	elseif operation == "rename" then promptStr = "Rename File to: "
+	elseif operation == "new" then promptStr = "New File: "
 	end
 
 	vim.ui.input({prompt = promptStr}, function(newName)
@@ -52,6 +53,9 @@ local function fileop(operation)
 			cmd("edit " .. newName)
 			cmd("bdelete #")
 			vim.notify("Renamed '" .. oldName .. "' to '" .. newName .. "'.")
+		elseif operation == "new" then
+			cmd("edit " .. newName)
+			cmd("write " .. newName)
 		end
 	end)
 end
@@ -60,13 +64,19 @@ end
 -- - if no extension is provided, the current extensions will be kept
 -- - uses vim.ui.input and vim.notify, so plugins like dressing.nvim or
 --   notify.nvim are automatically supported
-function M.renameFile() fileop("rename") end
+function M.renameFile() fileOp("rename") end
 
 ---Duplicate Current File
 -- - if no extension is provided, the current extensions will be kept
 -- - uses vim.ui.input and vim.notify, so plugins like dressing.nvim or
 --   notify.nvim are automatically supported
-function M.duplicateFile() fileop("duplicate") end
+function M.duplicateFile() fileOp("duplicate") end
+
+---Create New File
+-- - if no extension is provided, the extensions of the current file will be used
+-- - uses vim.ui.input and vim.notify, so plugins like dressing.nvim or
+--   notify.nvim are automatically supported
+function M.createNewFile() fileOp("new") end
 
 ---run `chmod +x` on the current file
 function M.chmodx()
@@ -75,20 +85,71 @@ function M.chmodx()
 	vim.notify("Execution permission granted.")
 end
 
---------------------------------------------------------------------------------
-function M.copyLastCommand()
-	local lastCommand = fn.getreg(":")
-	if not(lastCommand)
-	fn.setreg('"', lastCommand)
-	vim.notify("COPIED\n")
+---Helper for copying file information
+---@param operation string filename|filepath
+---@param reg? string register to copy to
+local function copyOp (operation, reg)
+	if not (reg) then reg = "+" end
+	local toCopy
+	if operation == "filename" then
+		toCopy = fn.expand("%:t")
+	elseif operation == "filepath" then
+		toCopy = fn.expand("%:p")
+	end
+	fn.setreg(reg, toCopy)
+	vim.notify("COPIED\n"..toCopy)
 end
---':let @+=@:<CR>:lua vim.notify("COPIED\\n"..vim.fn.getreg(":"))<CR>'
+
+---Copy full path of current file
+---@param reg? string The register to copy the last command to. Default: "+"
+function M.copyFilepath(reg)
+	copyOp("filepath", reg)
+end
+
+---Copy name of current file
+---@param reg? string The register to copy the last command to. Default: "+"
+function M.copyFilename(reg)
+	copyOp("filename", reg)
+end
+
+---Trash the Current File. Requires `mv`.
+---@param trashLocation string Trash directory. Default: "$HOME/.Trash/" 
+function M.trashFile(trashLocation)
+	if not (trashLocation) then trashLocation = "$HOME/.Trash/" end
+	local currentFile = fn.expand("%:p")
+	local filename = fn.expand("%:t")
+	cmd[[update!]]
+	os.execute('mv -f "'..currentFile..'" "'..trashLocation..'"')
+	cmd[[bdelete]]
+	vim.notify("'"..filename.."' deleted.")
+end
+
+--------------------------------------------------------------------------------
+
+---Copy Last Command
+---@param reg? string The register to copy the last command to. Default: "+"
+function M.copyLastCommand(reg)
+	if not (reg) then reg = "+" end
+	local lastCommand = fn.getreg(":")
+	if not(lastCommand) then
+		vim.notify("No Command has been run yet.", error)
+		return
+	end
+	fn.setreg(reg, lastCommand)
+	vim.notify("COPIED\n"..lastCommand)
+end
+
+---Run Last Command Again
+function M.runLastCommandAgain()
+	local lastCommand = fn.getreg(":")
+	cmd(lastCommand)
+end
 
 --------------------------------------------------------------------------------
 
 -- Duplicate line under cursor, and change occurences of certain words to their
 -- opposite, e.g., "right" to "left". Intended for languages like CSS.
----@param opts? table available: reverse, moveTo = "key"|"value", increment
+---@param opts? table available: reverse, moveTo = key|value|none, increment
 function M.duplicateLine(opts)
 	if not (opts) then
 		opts = {reverse = false, moveTo = "key", increment = false}
@@ -134,9 +195,9 @@ function M.duplicateLine(opts)
 end
 
 function M.duplicateSelection()
-	local prevReg = vim.fn.getreg("z")
+	local prevReg = fn.getreg("z")
 	cmd [[silent! normal!"zy`]"zp]]
-	vim.fn.setreg("z", prevReg)
+	fn.setreg("z", prevReg)
 end
 
 -- insert horizontal divider considering textwidth, commentstring, and indent
