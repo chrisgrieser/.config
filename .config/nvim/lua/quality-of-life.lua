@@ -37,7 +37,7 @@ local function fileOp(operation)
 	vim.ui.input({prompt = promptStr}, function(newName)
 		if not (newName) then return end -- cancel
 		if newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") then
-			vim.notify("Invalid Filename.", error)
+			vim.notify(" Invalid Filename.", error)
 			return
 		end
 		local extProvided = newName:find("%.")
@@ -47,12 +47,12 @@ local function fileOp(operation)
 		if operation == "duplicate" then
 			cmd("saveas " .. newName)
 			cmd("edit " .. newName)
-			vim.notify("Duplicated '" .. oldName .. "' as '" .. newName .. "'.")
+			vim.notify(" Duplicated '" .. oldName .. "' as '" .. newName .. "'.")
 		elseif operation == "rename" then
 			os.rename(oldName, newName)
 			cmd("edit " .. newName)
 			cmd("bdelete #")
-			vim.notify("Renamed '" .. oldName .. "' to '" .. newName .. "'.")
+			vim.notify(" Renamed '" .. oldName .. "' to '" .. newName .. "'.")
 		elseif operation == "new" then
 			cmd("edit " .. newName)
 			cmd("write " .. newName)
@@ -82,7 +82,7 @@ function M.createNewFile() fileOp("new") end
 function M.chmodx()
 	local currentFile = fn.expand("%:p")
 	os.execute("chmod +x " .. "'" .. currentFile .. "'")
-	vim.notify("Execution permission granted.")
+	vim.notify(" Execution permission granted.")
 end
 
 ---Helper for copying file information
@@ -97,7 +97,7 @@ local function copyOp (operation, reg)
 		toCopy = fn.expand("%:p")
 	end
 	fn.setreg(reg, toCopy)
-	vim.notify("COPIED\n"..toCopy)
+	vim.notify(" COPIED\n "..toCopy)
 end
 
 ---Copy full path of current file
@@ -121,7 +121,7 @@ function M.trashFile(trashLocation)
 	cmd[[update!]]
 	os.execute('mv -f "'..currentFile..'" "'..trashLocation..'"')
 	cmd[[bdelete]]
-	vim.notify("'"..filename.."' deleted.")
+	vim.notify(" '"..filename.."' deleted.")
 end
 
 --------------------------------------------------------------------------------
@@ -132,18 +132,18 @@ function M.copyLastCommand(reg)
 	if not (reg) then reg = "+" end
 	local lastCommand = fn.getreg(":")
 	if not(lastCommand) then
-		vim.notify("No Command has been run yet.", error)
+		vim.notify(" No Command has been run yet.", error)
 		return
 	end
 	fn.setreg(reg, lastCommand)
-	vim.notify("COPIED\n"..lastCommand)
+	vim.notify(" COPIED\n "..lastCommand)
 end
 
 ---Run Last Command Again
 function M.runLastCommandAgain()
 	local lastCommand = fn.getreg(":")
 	if not(lastCommand) then
-		vim.notify("No Command has been run yet.", error)
+		vim.notify(" No Command has been run yet.", error)
 		return
 	end
 	cmd(lastCommand)
@@ -330,7 +330,7 @@ function M.reverse()
 		return
 	end
 
-	vim.notify("Nothing under the cursor that can be switched", warn)
+	vim.notify(" Nothing under the cursor can be switched.", warn)
 end
 
 --------------------------------------------------------------------------------
@@ -347,22 +347,24 @@ function M.overscroll(action)
 	cmd("normal! " .. action)
 end
 
----Fix for Pasting in insert mode
+---Fix for Pasting in Insert Mode
 ---@param reg? string register to copy to. Default: "+"
 function M.insertModePasteFix(reg)
 	if not (reg) then reg = "+" end
 	local isLinewise = fn.getregtype(reg) == "V" or fn.getreg(reg):find("\n")
-	local isEndofLine
+	local lineLength = #getline(".")
+	local cursorPos = getCursor(0)[2]
+	local isEndofLine = lineLength == cursorPos
 
 	if isLinewise then
 		cmd [[normal! gp]]
 	else
 		cmd("normal! i" .. fn.getreg(reg))
 		if isEndofLine then
+			cmd [[startinsert!]]
+		else
 			cmd("normal!l")
 			cmd [[startinsert]]
-		else
-
 		end
 	end
 end
@@ -391,7 +393,7 @@ function M.quicklog(addLineNumber)
 	elseif ft == "applescript" then
 		logStatement = 'log "' .. lnStr .. varname .. ': " & ' .. varname
 	else
-		vim.notify("Quicklog does not support " .. ft .. " yet.", warn)
+		vim.notify(" Quicklog does not support " .. ft .. " yet.", warn)
 	end
 
 	append(".", logStatement)

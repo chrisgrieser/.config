@@ -82,19 +82,22 @@ require("mason-lspconfig").setup {
 require("lsp_signature").setup {
 	floating_window = false,
 	hint_prefix = "﬍ ",
-	-- hint_scheme = "Comment", -- highlight group
-	hint_scheme = "GhostText", 
+	hint_scheme = "GhostText", -- highlight group
 }
 
 require("lsp-inlayhints").setup {
 	inlay_hints = {
 		parameter_hints = {
 			show = true,
-			prefix = "  ",
+			prefix = " ",
+			remove_colon_start = false,
+			remove_colon_end = false,
 		},
 		type_hints = {
 			show = true,
-			prefix = "",
+			prefix = " ",
+			remove_colon_start = false,
+			remove_colon_end = false,
 		},
 		only_current_line = true,
 		highlight = "GhostText", -- highlight group

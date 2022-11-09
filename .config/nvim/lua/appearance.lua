@@ -68,6 +68,7 @@ require("notify").setup {
 	render = "minimal", -- styles, "default"|"minimal"|"simply"
 	minimum_width = 25,
 	timeout = 4000,
+	top_down = false,
 }
 
 -- replace lua's print message with notify.nvim → https://www.reddit.com/r/neovim/comments/xv3v68/tip_nvimnotify_can_be_used_to_display_print/
@@ -190,7 +191,7 @@ require("lualine").setup {
 		lualine_a = {"mode"},
 		lualine_b = {{currentFile}},
 		lualine_c = {{alternateFile}},
-		lualine_x = {"searchcount", "diagnostics", {mixedIndentation}},
+		lualine_x = {{"searchcount", format }, "diagnostics", {mixedIndentation}},
 		lualine_y = {"diff", {"branch", cond = isStandardBranch}},
 		lualine_z = {{"location", separator = ""}, "progress"},
 	},

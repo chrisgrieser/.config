@@ -213,7 +213,7 @@ keymap("n", "<BS>", function() -- reduce multiple blank lines to exactly one
 	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
 		cmd [[normal! "_dipO]]
 	else
-		vim.notify("Line not empty.", warn) ---@diagnostic disable-line: param-type-mismatch
+		vim.notify(" Line not empty.", warn) ---@diagnostic disable-line: param-type-mismatch
 	end
 end)
 
@@ -382,7 +382,7 @@ keymap("n", "<leader>r", function()
 		if not (parentFolder) then return end
 		if parentFolder:find("nvim") then
 			cmd [[write! | source %]]
-			vim.notify("Neovim config reloaded.")
+			vim.notify(" Neovim config reloaded.")
 		elseif parentFolder:find("hammerspoon") then
 			os.execute('open -g "hammerspoon://hs-reload"')
 		end
@@ -397,7 +397,7 @@ keymap("n", "<leader>r", function()
 		cmd [[AppleScriptRun]]
 
 	else
-		vim.notify("No build system set.", warn) ---@diagnostic disable-line: param-type-mismatch
+		vim.notify(" No build system set.", warn) ---@diagnostic disable-line: param-type-mismatch
 
 	end
 end)
