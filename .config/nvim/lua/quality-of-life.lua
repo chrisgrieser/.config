@@ -347,13 +347,11 @@ function M.overscroll(action)
 	cmd("normal! " .. action)
 end
 
----Fix for Pasting in Insert Mode
+---Fix for Pasting in Insert Mode (whacky indentation, etc.)
 ---@param reg? string register to copy to. Default: "+"
 function M.insertModePasteFix(reg)
 	if not (reg) then reg = "+" end
 	local isLinewise = fn.getregtype(reg) == "V" or fn.getreg(reg):find("\n")
-	-- col($) only considers line end *before* entering insert mode, col(.)
-	-- considers insert mode cursor
 	local endOfLine = fn.col("$") - 2 -- eol before entering insert mode
 	local cursorCol = fn.col(".") -- considers insert mode cursor
 	local isEndofLine = endOfLine <= cursorCol -- column can be beyond EoL in insert mode
@@ -369,6 +367,15 @@ function M.insertModePasteFix(reg)
 			cmd [[startinsert]]
 		end
 	end
+end
+
+---Force pasting as a characterwise register
+---@param reg? string register to copy to. Default: "+"
+function M.pasteCharacterwise(reg) -- paste as characterwise
+	if not (reg) then reg = "+" end
+	local regContent = fn.getreg(reg):gsub("\n$", "")
+	fn.setreg(reg, regContent, "c") 	---@diagnostic disable-line: param-type-mismatch
+	cmd('normal! "'..reg..'p')
 end
 
 --------------------------------------------------------------------------------
