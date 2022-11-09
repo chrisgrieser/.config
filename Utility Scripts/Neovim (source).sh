@@ -7,23 +7,24 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # workaround for: https://github.com/neovide/neovide/issues/1586
 if pgrep "neovide" ; then
+	prevClipb=$(pbpaste)
+
 	[[ -n "$LINE" ]] && LINE="+$LINE"
 	vimcmd="e $LINE $1"
-	prevClipb=$(pbpaste)
 	echo "$vimcmd" | pbcopy
 
 	# wrangling around clipboard instead of keystrokeing path, since iCloud paths
 	# with "~" result in diacretics like `õ`, making the path invalid
-	osascript -e "tell application \"Neovide\" to activate
+	osascript -e 'tell application "Neovide" to activate
 		delay 0.07
-		tell application \"System Events\"
+		tell application "System Events"
 			key code 53
-			keystroke \":\"
+			keystroke ":"
 			delay 0.05
-			keystroke \"v\" using command down
+			keystroke "v" using command down
 			delay 0.05
 			keystroke return
-		end tell"
+		end tell'
 
 	echo "$prevClipb" | pbcopy
 
