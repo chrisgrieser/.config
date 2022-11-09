@@ -13,7 +13,8 @@ function M.PluginList()
 	-- use "folke/tokyonight.nvim"
 	-- use "rebelot/kanagawa.nvim"
 	use "savq/melange" -- like Obsidian's Primary color scheme
-	use "Yazeed1s/oh-lucy.nvim"
+
+	-- use "Yazeed1s/oh-lucy.nvim"
 	-- use "Mofiqul/dracula.nvim"
 	-- use "Yazeed1s/minimal.nvim"
 	-- use "kaiuri/nvim-juliana" -- sublime-mariana like
@@ -34,8 +35,12 @@ function M.PluginList()
 	use "hail2u/vim-css3-syntax" -- better css syntax highlighting (until treesitter css looks decent…)
 
 	-- LSP & Linting
-	use {"neovim/nvim-lspconfig", requires = "williamboman/mason-lspconfig.nvim"}
-	use "ray-x/lsp_signature.nvim"
+	use { "neovim/nvim-lspconfig", requires = {
+		"williamboman/mason-lspconfig.nvim",
+		"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
+		"ray-x/lsp_signature.nvim",
+	}}
+
 	use {"jose-elias-alvarez/null-ls.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"jayp0521/mason-null-ls.nvim",

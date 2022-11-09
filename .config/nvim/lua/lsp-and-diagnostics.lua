@@ -78,13 +78,38 @@ require("mason-lspconfig").setup {
 }
 
 --------------------------------------------------------------------------------
--- LSP KEYBINDINGS
-
-require "lsp_signature".setup {
+-- LSP PLUGINS
+require("lsp_signature").setup {
 	floating_window = false,
 	hint_prefix = "﬍ ",
 	hint_scheme = "Comment", -- highlight group that is applied to the hint
 }
+
+require("lsp-inlayhints").setup{
+	inlay_hints = {
+		parameter_hints = {
+			show = false,
+			prefix = "<- ",
+			separator = ", ",
+			remove_colon_start = false,
+			remove_colon_end = false,
+		},
+		type_hints = {
+			show = false,
+			prefix = "",
+			separator = ", ",
+			remove_colon_start = false,
+			remove_colon_end = false,
+		},
+		only_current_line = false,
+		labels_separator = "  ", -- separator between types and parameter hints. Note that type hints are shown before parameter
+		max_len_align_padding = 1, -- padding from the left if max_len_align is true
+		highlight = "LspInlayHint", -- highlight group
+	},
+}
+
+--------------------------------------------------------------------------------
+-- LSP KEYBINDINGS
 
 keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help)
 
@@ -94,9 +119,12 @@ keymap("n", "gs", telescope.treesitter)
 -- actions defined globally for null-ls
 keymap({"n", "x"}, "<leader>a", vim.lsp.buf.code_action)
 
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr) ---@diagnostic disable-line: unused-local
+local function on_attach(client, bufnr) ---@diagnostic disable-line: unused-local
+	require("lsp-inlayhints").on_attach(client, bufnr)
+
 	local bufopts = {silent = true, buffer = true}
 	keymap("n", "gd", telescope.lsp_definitions, bufopts)
 	keymap("n", "gD", telescope.lsp_references, bufopts)
