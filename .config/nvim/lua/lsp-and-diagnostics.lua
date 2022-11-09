@@ -85,26 +85,18 @@ require("lsp_signature").setup {
 	hint_scheme = "Comment", -- highlight group that is applied to the hint
 }
 
-require("lsp-inlayhints").setup{
+require("lsp-inlayhints").setup {
 	inlay_hints = {
 		parameter_hints = {
-			show = false,
+			show = true,
 			prefix = "<- ",
-			separator = ", ",
-			remove_colon_start = false,
-			remove_colon_end = false,
 		},
 		type_hints = {
-			show = false,
+			show = true,
 			prefix = "",
-			separator = ", ",
-			remove_colon_start = false,
-			remove_colon_end = false,
 		},
-		only_current_line = false,
-		labels_separator = "  ", -- separator between types and parameter hints. Note that type hints are shown before parameter
-		max_len_align_padding = 1, -- padding from the left if max_len_align is true
-		highlight = "LspInlayHint", -- highlight group
+		only_current_line = true,
+		highlight = "FoldColumn", -- highlight group
 	},
 }
 
@@ -215,9 +207,11 @@ lspConfig["sumneko_lua"].setup {
 				},
 			},
 			hint = {
-				enable = true, -- do not seem to be supported?
+				enable = true,
 				setType = true,
-				arrayIndex = "Enable",
+				paramName = "All",
+				paramType = true,
+				arrayIndex = "Auto",
 			},
 			telemetry = {enable = false},
 		}
@@ -234,7 +228,7 @@ lspConfig["cssls"].setup {
 				duplicateProperties = "ignore", -- duplication with stylelint
 				emptyRules = "ignore",
 			},
-			colorDecorators = {enable = true}, -- does not seem to work?
+			colorDecorators = {enable = true},
 		}
 	}
 }
