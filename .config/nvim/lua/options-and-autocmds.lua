@@ -95,7 +95,7 @@ opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of fail
 opt.updatetime = 1500 -- affects current symbol highlight from treesitter-refactor
 opt.autochdir = true -- always current directory
 augroup("autocd", {})
-autocmd({"BufWinEnter"}, { -- since autochdir is not always reliable…?
+autocmd({"BufWinEnter"}, {-- since autochdir is not always reliable…?
 	group = "autocd",
 	command = "cd %:p:h",
 })
@@ -128,15 +128,16 @@ autocmd("BufWritePre", {
 -- status bar & cmdline
 opt.showcmd = false -- keychords pressed
 opt.showmode = false -- don't show "-- Insert --"
-opt.laststatus = 3 -- show one status line for all splits
 opt.shortmess:append("S") -- do not show search count, since lualine does it already
+opt.cmdheight = 0 -- effectively also redundant with all of the above
+opt.laststatus = 3 -- = global status line
 opt.history = 400 -- do not save too much history to reduce noise for command line history search
 
 augroup("clearCmdline", {})
 autocmd("BufEnter", {
 	group = "clearCmdline",
-	command = "echo",
-}) -- clear cmdline on entering buffer
+	command = "echo", -- clear cmdline on entering buffer
+})
 
 --------------------------------------------------------------------------------
 
