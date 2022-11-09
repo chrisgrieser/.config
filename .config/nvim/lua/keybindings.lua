@@ -83,13 +83,7 @@ keymap("", "ä", "`") -- Goto Mark
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
-keymap("n", "gp", function () -- paste as characterwise
-	local reg = '+'
-	local regContent = fn.getreg(reg)
-	---@diagnostic disable-next-line: param-type-mismatch
-	fn.setreg(reg, regContent, "c") -- set to characterwise
-	cmd('normal! "'..reg..'p')
-end)
+keymap("n", "gp", qol.pasteCharacterwise)
 
 keymap("n", "C", '"_C')
 

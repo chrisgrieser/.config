@@ -35,7 +35,7 @@ function M.PluginList()
 	use "hail2u/vim-css3-syntax" -- better css syntax highlighting (until treesitter css looks decent…)
 
 	-- LSP & Linting
-	use { "neovim/nvim-lspconfig", requires = {
+	use {"neovim/nvim-lspconfig", requires = {
 		"williamboman/mason-lspconfig.nvim",
 		"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		"ray-x/lsp_signature.nvim",
@@ -83,6 +83,7 @@ function M.PluginList()
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons",
 	}}
+	use {"sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim"}
 
 	-- Operators & Text Objects
 	use "kylechui/nvim-surround"
@@ -101,4 +102,5 @@ function M.PluginList()
 	use "mbbill/undotree" -- undo history nagivation
 
 end
+
 return M

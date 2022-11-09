@@ -51,20 +51,22 @@ require("indent-o-matic").setup {
 --------------------------------------------------------------------------------
 
 -- Quick Scope
-g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
-g.qs_max_chars=200
-cmd[[highlight def link QuickScopePrimary CurSearch]]
+g.qs_highlight_on_keys = {"f", "F", "t", "T"}
+g.qs_max_chars = 200
+cmd [[highlight def link QuickScopePrimary CurSearch]]
 
 --------------------------------------------------------------------------------
 
 -- Comments.nvim Undo
----Textobject for adjacent commented lines = qu for uncommenting
+-- Textobject for adjacent commented lines
+-- = qu for uncommenting
+-- big Q also as text object
 -- https://github.com/numToStr/Comment.nvim/issues/22#issuecomment-1272569139
 local function commented_lines_textobject()
 	local U = require("Comment.utils")
 	local cl = vim.api.nvim_win_get_cursor(0)[1] -- current line
-	local range = { srow = cl, scol = 0, erow = cl, ecol = 0 }
-	local ctx = { ctype = U.ctype.linewise, range = range }
+	local range = {srow = cl, scol = 0, erow = cl, ecol = 0}
+	local ctx = {ctype = U.ctype.linewise, range = range}
 	local cstr = require("Comment.ft").calculate(ctx) or vim.bo.commentstring
 	local ll, rr = U.unwrap_cstr(cstr)
 	local padding = true
@@ -85,4 +87,5 @@ local function commented_lines_textobject()
 	vim.fn.execute("normal! " .. rs .. "GV" .. re .. "G")
 end
 
-vim.keymap.set("o", "u", commented_lines_textobject, { silent = true})
+keymap("o", "u", commented_lines_textobject, {silent = true})
+keymap("o", "Q", commented_lines_textobject, {silent = true})
