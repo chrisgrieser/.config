@@ -40,7 +40,10 @@ local function themeModifications(mode)
 		cmd [[highlight VertSplit guifg=#b29b84]]
 	elseif g.colors_name == "melange" and mode == "light" then
 		cmd [[highlight def link @punctuation @label]]
-		cmd [[highlight! def link NotifyINFOTitle @field]]
+		local elements = {"Title", "Body", "Icon"}
+		for _, v in pairs(elements) do
+			cmd("highlight def link NotifyINFO" .. v .. " @define")
+		end
 	end
 end
 
