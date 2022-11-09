@@ -45,7 +45,7 @@ cmd [[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
 cmd [[call matchadd('myAnnotations', '\<\(INFO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
 
 -- Ghost Text, used for Completion Ghost Text and LSP Inlay Hints
-cmd[[highlight GhostText guifg=#6d6d6d]]
+cmd [[highlight GhostText guifg=#6d6d6d]]
 
 --------------------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ opt.termguicolors = true
 vim.notify = require("notify") -- use notify.nvim for all vim notifications
 
 require("notify").setup {
-	icons = { WARN = "" },
+	icons = {WARN = ""},
 	render = "minimal", -- styles, "default"|"minimal"|"simply"
 	minimum_width = 25,
 	timeout = 4000,
@@ -182,7 +182,7 @@ autocmd({"BufEnter", "FocusGained"}, {
 function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
 	local branch = g.cur_branch
 	local notMainBranch = branch ~= "main" and branch ~= "master"
-	local validFiletype = bo.filetype ~= "help"
+	local validFiletype = bo.filetype ~= "help" -- vim help files are located in a git repo
 	return notMainBranch and validFiletype
 end
 
@@ -191,9 +191,19 @@ require("lualine").setup {
 		lualine_a = {"mode"},
 		lualine_b = {{currentFile}},
 		lualine_c = {{alternateFile}},
-		lualine_x = {{"searchcount", format }, "diagnostics", {mixedIndentation}},
-		lualine_y = {"diff", {"branch", cond = isStandardBranch}},
-		lualine_z = {{"location", separator = ""}, "progress"},
+		lualine_x = {
+			{"searchcount", fmt = function(str) return str:sub(2, -2) end},
+			"diagnostics",
+			{mixedIndentation}
+		},
+		lualine_y = {
+			"diff",
+			{"branch", cond = isStandardBranch,}
+		},
+		lualine_z = {
+			{"location", separator = ""},
+			"progress",
+		},
 	},
 	options = {
 		theme = "auto",

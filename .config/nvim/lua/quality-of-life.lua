@@ -352,7 +352,7 @@ end
 function M.insertModePasteFix(reg)
 	if not (reg) then reg = "+" end
 	local isLinewise = fn.getregtype(reg) == "V" or fn.getreg(reg):find("\n")
-	local lineLength = #getline(".")
+	local lineLength = #(getline("."))
 	local cursorPos = getCursor(0)[2]
 	local isEndofLine = lineLength == cursorPos
 
