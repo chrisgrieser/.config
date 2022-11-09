@@ -32,6 +32,9 @@ function customHighlights()
 	-- treesittter refactor focus
 	cmd [[highlight TSDefinition term=underline gui=underline]]
 	cmd [[highlight TSDefinitionUsage term=underline gui=underline]]
+
+	-- Custom Highlight-Group, used for Completion Ghost Text and LSP Inlay Hints
+	cmd [[highlight GhostText guifg=#6d6d6d]]
 end
 
 customHighlights()
@@ -43,9 +46,6 @@ cmd [[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 -- Annotations
 cmd [[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
 cmd [[call matchadd('myAnnotations', '\<\(INFO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
-
--- Ghost Text, used for Completion Ghost Text and LSP Inlay Hints
-cmd [[highlight GhostText guifg=#6d6d6d]]
 
 --------------------------------------------------------------------------------
 
@@ -148,7 +148,10 @@ local function currentFile() -- using this function instead of default filename,
 end
 
 local function mixedIndentation()
-	if bo.filetype == "css" or bo.filetype == "markdown" or vim.tbl_contains(specialFiletypes, bo.filetype) then return "" end
+	local ft = bo.filetype
+	if vim.tbl_contains(specialFiletypes, ft) or ft == "css" or ft == "markdown" or ft == "" then
+		return ""
+	end
 
 	local hasTabs = fn.search("^\t", "nw") ~= 0
 	local hasSpaces = fn.search("^ ", "nw") ~= 0

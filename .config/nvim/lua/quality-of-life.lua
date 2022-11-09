@@ -352,9 +352,11 @@ end
 function M.insertModePasteFix(reg)
 	if not (reg) then reg = "+" end
 	local isLinewise = fn.getregtype(reg) == "V" or fn.getreg(reg):find("\n")
-	local lineLength = #(getline("."))
-	local cursorPos = getCursor(0)[2]
-	local isEndofLine = lineLength == cursorPos
+	-- col($) only considers line end *before* entering insert mode, col(.)
+	-- considers insert mode cursor
+	local endOfLine = fn.col("$") - 2 -- eol before entering insert mode
+	local cursorCol = fn.col(".") -- considers insert mode cursor
+	local isEndofLine = endOfLine <= cursorCol -- column can be beyond EoL in insert mode
 
 	if isLinewise then
 		cmd [[normal! gp]]
@@ -363,7 +365,7 @@ function M.insertModePasteFix(reg)
 		if isEndofLine then
 			cmd [[startinsert!]]
 		else
-			cmd("normal!l")
+			cmd [[normal!l]]
 			cmd [[startinsert]]
 		end
 	end

@@ -49,11 +49,9 @@ require("nvim-treesitter.configs").setup {
 			enable = true,
 			set_jumps = true,
 			goto_next_start = {
-				["gq"] = "@comment.outer",
 				["<C-j>"] = "@function.outer",
 			},
 			goto_previous_start = {
-				["gQ"] = "@comment.outer",
 				["<C-k>"] = "@function.outer",
 			},
 		},
@@ -96,7 +94,7 @@ require("nvim-treesitter.configs").setup {
 	refactor = { -- refactor plugin
 		highlight_definitions = {
 			enable = true,
-			clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
+			clear_on_cursor_move = false, -- Set to false if you have an `updatetime` of ~100.
 		},
 		highlight_current_scope = { enable = false },
 		navigation = {
@@ -105,8 +103,8 @@ require("nvim-treesitter.configs").setup {
 				goto_definition = "<Nop>",
 				list_definitions = "<Nop>",
 				list_definitions_toc = "<Nop>",
-				goto_next_usage = "gn",
-				goto_previous_usage = "gN",
+				goto_next_usage = "g+",
+				goto_previous_usage = "g#",
 			},
 		},
 	},
