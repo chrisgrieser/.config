@@ -113,7 +113,7 @@ function M.copyFilename(reg)
 end
 
 ---Trash the Current File. Requires `mv`.
----@param trashLocation string Trash directory. Default: "$HOME/.Trash/" 
+---@param trashLocation string Trash directory. Default: "$HOME/.Trash/"
 function M.trashFile(trashLocation)
 	if not (trashLocation) then trashLocation = "$HOME/.Trash/" end
 	local currentFile = fn.expand("%:p")
@@ -160,7 +160,7 @@ function M.duplicateLine(opts)
 	end
 
 	local line = getline(".")
-	if opts.smart then
+	if opts.reverse then
 		if line:find("top") then
 			line = line:gsub("top", "bottom")
 		elseif line:find("bottom") then
