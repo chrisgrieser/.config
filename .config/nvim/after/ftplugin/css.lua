@@ -24,8 +24,6 @@ end, opts)
 -- highlighting isn't good yet, so…
 keymap("n", "zz", ":syntax sync fromstart<CR>", {buffer = true})
 
-
-
 keymap("n", "cv", "^Ewct;", opts) -- change [v]alue key
 keymap("n", "<leader>c", "mzlEF.yEEp`z", opts) -- double [c]lass under cursor
 keymap("n", "<leader>C", "lF.d/[.\\s]<CR>:nohl<CR>", opts) -- delete [c]lass under cursor
