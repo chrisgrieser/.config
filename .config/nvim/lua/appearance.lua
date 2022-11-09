@@ -44,6 +44,11 @@ cmd [[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 cmd [[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
 cmd [[call matchadd('myAnnotations', '\<\(INFO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
 
+-- Ghost Text, used for Completion Ghost Text and LSP Inlay Hints
+cmd[[highlight GhostText guifg=#6d6d6d]]
+
+--------------------------------------------------------------------------------
+
 -- Indention
 require("indent_blankline").setup {
 	show_current_context = true,
