@@ -215,7 +215,7 @@ lspConfig["sumneko_lua"].setup {
 				setType = true,
 				paramName = "All",
 				paramType = true,
-				arrayIndex = "Auto",
+				arrayIndex = "Disable",
 			},
 			telemetry = {enable = false},
 		}

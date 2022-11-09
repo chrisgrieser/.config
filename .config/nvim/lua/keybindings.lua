@@ -83,11 +83,17 @@ keymap("", "ä", "`") -- Goto Mark
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
-keymap("n", "P", '"0p') -- paste what was yanked, not what was deleted
+keymap("n", "gp", function () -- paste as characterwise
+	local reg = '+'
+	local regContent = fn.getreg(reg)
+	---@diagnostic disable-next-line: param-type-mismatch
+	fn.setreg(reg, regContent, "c") -- set to characterwise
+	cmd('normal! "'..reg..'p')
+end)
 
---------------------------------------------------------------------------------
+keymap("n", "C", '"_C')
 
--- TEXT OBJECTS
+keymap("n", "C", '"_C')
 keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<C-A-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
 keymap("x", "<Space>", '"_c')
@@ -239,13 +245,13 @@ keymap("n", "Ü", qol.reverse)
 
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`"}
-for i = 1, #trailingKeys do
-	keymap("n", "<leader>" .. trailingKeys[i], "mzA" .. trailingKeys[i] .. "<Esc>`z")
+for _,v in pairs(trailingKeys) do
+	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z")
 end
--- Remove last character from line
+-- Remove last character from line, e.g., a trailing comma
 keymap("n", "X", 'mz$"_x`z')
 
--- Spelling (mnemonic: [z]pelling)
+-- Spelling (mnemonic: [z]pe[l]ling)
 keymap("n", "zl", telescope.spell_suggest)
 keymap("n", "gl", "]s") -- next misspelling
 keymap("n", "gL", "[s") -- prev misspelling
@@ -291,9 +297,8 @@ keymap({"n", "x"}, "gm", "ddpkJ") -- [m]erge line down
 g.splitjoin_split_mapping = "" -- disable default mappings
 g.splitjoin_join_mapping = ""
 
-keymap("n", "<leader>s", ":SplitjoinSplit<CR><CR>")
+keymap("n", "<leader>s", ":SplitjoinSplit<CR><CR>") -- 2nd <CR> needed for cmdheight=0
 keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
-keymap("n", "<leader>q", "gqq") -- needs remapping since shadowed
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
@@ -341,8 +346,8 @@ keymap("n", "gR", telescope.resume) -- search in [f]iles
 keymap("n", "gF", "gf") -- needs remapping since shadowed
 
 -- File Operations
-keymap("", "<C-p>", qol.copyFilepath) 
-keymap("", "<C-n>", qol.copyFilename) 
+keymap("", "<C-p>", qol.copyFilepath)
+keymap("", "<C-n>", qol.copyFilename)
 keymap("n", "<leader>x",qol.chmodx)
 keymap("", "<C-r>", qol.renameFile)
 keymap("", "<C-d>", qol.duplicateFile)

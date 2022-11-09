@@ -111,7 +111,7 @@ keymap("n", "<D-x>", "dd") -- no selection = line
 keymap("v", "<D-x>", "d")
 keymap({"n", "v"}, "<D-v>", "p")
 keymap("c", "<D-v>", "<C-r>+")
-keymap({"i"}, "<D-v>", require("quality-of-life").insertModePasteFix)
+keymap("i", "<D-v>", require("quality-of-life").insertModePasteFix)
 
 -- cmd+e: inline code
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>") -- no selection = word under cursor
