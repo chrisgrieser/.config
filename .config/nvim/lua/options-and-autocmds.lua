@@ -92,7 +92,7 @@ opt.iskeyword:append("-")
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
 opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
-opt.updatetime = 1500 -- affects current symbol highlight from treesitter-refactor
+opt.updatetime = 50 -- affects current symbol highlight from treesitter-refactor and currentline hints
 opt.autochdir = true -- always current directory
 augroup("autocd", {})
 autocmd({"BufWinEnter"}, {-- since autochdir is not always reliable…?
