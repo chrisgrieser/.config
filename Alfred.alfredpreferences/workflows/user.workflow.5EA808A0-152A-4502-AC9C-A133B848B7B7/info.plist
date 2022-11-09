@@ -1268,14 +1268,14 @@ echo "$url"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>get-neovide-path.sh</string>
+				<string>restore.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>0216398A-09AD-4D85-A101-3884E853D638</string>
+			<string>C4BF78D4-67F1-4226-B19F-091FF3687B4D</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1291,14 +1291,14 @@ echo "$url"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>restore.sh</string>
+				<string>get-neovide-path.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>C4BF78D4-67F1-4226-B19F-091FF3687B4D</string>
+			<string>0216398A-09AD-4D85-A101-3884E853D638</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1318,7 +1318,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>1055</real>
+			<real>1165</real>
 		</dict>
 		<key>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</key>
 		<dict>

@@ -12,7 +12,7 @@ local darkTheme = "melange"
 
 -- font size dependent on device
 if fn.hostname():find("iMac") then
-	g.gui_font_default_size = 25.2
+	g.gui_font_default_size = 21
 elseif fn.hostname():find("mini") then
 	g.gui_font_default_size = 23
 elseif fn.hostname():find("Mother") then
@@ -153,6 +153,8 @@ g.neovide_floating_blur_amount_x = 5.0
 g.neovide_floating_blur_amount_y = 5.0
 g.neovide_cursor_unfocused_outline_width = 0.1
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
+
+g.neovide_scale_factor = 1.25
 
 g.neovide_cursor_vfx_mode = "railgun"
 g.neovide_cursor_vfx_particle_lifetime = 1

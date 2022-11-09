@@ -33,7 +33,7 @@ const workArray = app.doShellScript (
 /* eslint-enable no-multi-str, quotes */
 
 workArray.forEach(file => {
-	const filePath = dotfileFolder + file.slice(1);
+	const filePath = dotfileFolder + file;
 	const parts = file.split("/");
 	const isFolder = file.endsWith("/");
 	if (isFolder) parts.pop();
