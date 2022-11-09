@@ -64,7 +64,9 @@ cmp.setup {
 	snippet = {-- REQUIRED a snippet engine must be specified and installed
 		expand = function(args) require("luasnip").lsp_expand(args.body) end,
 	},
-
+	experimental = {
+		-- ghost_text = { hl_group = "GhostText", },
+	},
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),

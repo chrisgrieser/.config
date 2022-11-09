@@ -333,6 +333,8 @@ function M.reverse()
 	vim.notify("Nothing under the cursor that can be switched", warn)
 end
 
+--------------------------------------------------------------------------------
+
 ---enables overscrolling for that action when close to the last line, depending
 --on 'scrolloff' option
 ---@param action string The motion to be executed when not at EOF
@@ -344,6 +346,28 @@ function M.overscroll(action)
 	end
 	cmd("normal! " .. action)
 end
+
+---Fix for Pasting in insert mode
+---@param reg? string register to copy to. Default: "+"
+function M.insertModePasteFix(reg)
+	if not (reg) then reg = "+" end
+	local isLinewise = fn.getregtype(reg) == "V" or fn.getreg(reg):find("\n")
+	local isEndofLine
+
+	if isLinewise then
+		cmd [[normal! gp]]
+	else
+		cmd("normal! i" .. fn.getreg(reg))
+		if isEndofLine then
+			cmd("normal!l")
+			cmd [[startinsert]]
+		else
+
+		end
+	end
+end
+
+--------------------------------------------------------------------------------
 
 -- log statement for variable under cursor, similar to the 'turbo console log'
 -- popular VS Code plugin
