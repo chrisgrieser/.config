@@ -89,15 +89,15 @@ require("lsp-inlayhints").setup {
 	inlay_hints = {
 		parameter_hints = {
 			show = true,
-			prefix = " ",
-			remove_colon_start = false,
-			remove_colon_end = false,
+			prefix = " ",
+			remove_colon_start = true,
+			remove_colon_end = true,
 		},
 		type_hints = {
 			show = true,
 			prefix = " ",
-			remove_colon_start = false,
-			remove_colon_end = false,
+			remove_colon_start = true,
+			remove_colon_end = true,
 		},
 		only_current_line = true,
 		highlight = "GhostText", -- highlight group
