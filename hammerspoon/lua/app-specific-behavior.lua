@@ -311,7 +311,7 @@ wf_zoom = wf.new("zoom.us")
 
 --------------------------------------------------------------------------------
 
--- HIGHLIGHTS:
+-- HIGHLIGHTS
 -- - Sync Dark & Light Mode
 -- - Start with Highlight as Selection
 local function highlightsWatcher(appName, eventType)
@@ -319,8 +319,8 @@ local function highlightsWatcher(appName, eventType)
 	applescript [[
 		tell application "System Events"
 			tell appearance preferences to set isDark to dark mode
-			if (isDark is false) then set targetView to "Default"
 			if (isDark is true) then set targetView to "Night"
+			else set targetView to "Default"
 			delay 0.4
 			tell process "Highlights"
 				set frontmost to true
@@ -342,10 +342,13 @@ highlightsAppWatcher:start()
 -- DRAFTS: Hide Toolbar
 local function draftsLaunchWake(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
+	local workspace = "Home"
+	if isAtOffice() then workspace = "Office" end
 
 	if (eventType == aw.launched) then
-		runDelayed(0.3, function()
+		runDelayed(0.15, function()
 			appObject:selectMenuItem {"View", "Hide Toolbar"}
+			appObject:selectMenuItem {"Workspaces", workspace}
 		end)
 	elseif (eventType == aw.activated) then
 		appObject:selectMenuItem {"View", "Hide Toolbar"}
