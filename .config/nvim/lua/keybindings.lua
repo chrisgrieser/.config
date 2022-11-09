@@ -213,7 +213,7 @@ keymap("n", "<BS>", function() -- reduce multiple blank lines to exactly one
 	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
 		cmd [[normal! "_dipO]]
 	else
-		notify("Line not empty.", warn) ---@diagnostic disable-line: param-type-mismatch
+		vim.notify("Line not empty.", warn) ---@diagnostic disable-line: param-type-mismatch
 	end
 end)
 

@@ -20,28 +20,27 @@ elseif fn.hostname():find("Mother") then
 end
 
 g.gui_font_face = "JetBrainsMonoNL Nerd Font"
-opt.guicursor =
-"n-sm:block," ..
+opt.guicursor = "n-sm:block," ..
 	"i-ci-c-ve:ver25," ..
 	"r-cr-o-v:hor10," ..
 	"a:blinkwait300-blinkoff500-blinkon700"
 
 --------------------------------------------------------------------------------
 
-local function themeModifications()
+---@param mode string light|dark
+local function themeModifications(mode)
 	if g.colors_name == "tokyonight" then
 		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
 		for _, v in pairs(modes) do
 			cmd("highlight lualine_y_diff_modified_" .. v .. " guifg=#acaa62")
 			cmd("highlight lualine_y_diff_added_" .. v .. " guifg=#8cbf8e")
 		end
-	end
-	if g.colors_name == "dawnfox" then
+	elseif g.colors_name == "dawnfox" then
 		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
 		cmd [[highlight VertSplit guifg=#b29b84]]
-	end
-	if g.colors_name == "melange" then
+	elseif g.colors_name == "melange" and mode == "light" then
 		cmd [[highlight def link @punctuation @label]]
+		cmd [[highlight! def link NotifyINFOTitle @field]]
 	end
 end
 
@@ -50,8 +49,8 @@ local function light()
 	api.nvim_set_option("background", "light")
 	cmd("colorscheme " .. lightTheme)
 	g.neovide_transparency = 0.94
-	themeModifications()
 	customHighlights()
+	themeModifications("light")
 end
 
 --
@@ -59,8 +58,8 @@ local function dark()
 	api.nvim_set_option("background", "dark")
 	cmd("colorscheme " .. darkTheme)
 	g.neovide_transparency = 0.97
-	themeModifications()
 	customHighlights()
+	themeModifications("dark")
 end
 
 -- toggle theme with OS
