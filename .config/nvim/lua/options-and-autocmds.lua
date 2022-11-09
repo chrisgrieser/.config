@@ -95,7 +95,7 @@ opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of fail
 opt.updatetime = 50 -- affects current symbol highlight from treesitter-refactor and currentline hints
 opt.autochdir = true -- always current directory
 augroup("autocd", {})
-autocmd({"BufWinEnter"}, {-- since autochdir is not always reliable…?
+autocmd("BufWinEnter", {-- since autochdir is not always reliable…?
 	group = "autocd",
 	command = "cd %:p:h",
 })
@@ -126,12 +126,12 @@ autocmd("BufWritePre", {
 --------------------------------------------------------------------------------
 
 -- status bar & cmdline
-opt.showcmd = false -- keychords pressed
+opt.showcmd = true -- keychords pressed
 opt.showmode = false -- don't show "-- Insert --"
 opt.shortmess:append("S") -- do not show search count, since lualine does it already
 opt.cmdheight = 0 -- effectively also redundant with all of the above
 opt.laststatus = 3 -- = global status line
-opt.history = 400 -- do not save too much history to reduce noise for command line history search
+opt.history = 250 -- do not save too much history to reduce noise for command line history search
 
 augroup("clearCmdline", {})
 autocmd("BufEnter", {
@@ -143,9 +143,6 @@ autocmd("BufEnter", {
 
 -- folding
 opt.foldmethod = "indent"
--- to use treesitter for folding https://github.com/nvim-treesitter/nvim-treesitter
--- opt.foldmethod = "expr"
--- opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldenable = false -- do not fold on start
 opt.foldminlines = 2
 augroup("rememberFolds", {}) -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save

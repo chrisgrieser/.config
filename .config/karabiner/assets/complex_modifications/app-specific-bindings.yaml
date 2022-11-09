@@ -841,25 +841,8 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
-  - description: "🅰️  Neovide / Alacritty: Fix <S-Space> and <D-S-e>"
+  - description: "🅰️  Neovide / Alacritty: Fix <S-Space>"
     manipulators:
-      - type: basic
-        from:
-          key_code: e
-          modifiers:
-            mandatory:
-              - command
-              - shift
-        to:
-          - key_code: e
-            modifiers:
-              - command
-              - control
-        conditions:
-          - type: frontmost_application_if
-            file_paths:
-              - "[Nn]eovide"
-              - alacritty$
       - type: basic
         from:
           key_code: spacebar
@@ -904,10 +887,10 @@ rules:
           - key_code: "Y"
             modifiers:
               - shift
-        conditions:
-          - type: frontmost_application_if
-            file_paths:
-              - "[Nn]eovide"
+        # conditions:
+        #   - type: frontmost_application_if
+        #     file_paths:
+        #       - "[Nn]eovide"
   - description: "🅰️  Alfred Restart"
     manipulators:
       - type: basic

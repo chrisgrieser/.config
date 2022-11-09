@@ -12,14 +12,14 @@ local darkTheme = "melange"
 
 -- font size dependent on device
 if fn.hostname():find("iMac") then
-	g.gui_font_default_size = 21
+	g.neovide_scale_factor = 1
 elseif fn.hostname():find("mini") then
-	g.gui_font_default_size = 23
+	g.neovide_scale_factor = 1
 elseif fn.hostname():find("Mother") then
-	g.gui_font_default_size = 24
+	g.neovide_scale_factor = 1
 end
 
-g.gui_font_face = "JetBrainsMonoNL Nerd Font"
+opt.guifont = "JetBrainsMonoNL Nerd Font:h26"
 opt.guicursor = "n-sm:block," ..
 	"i-ci-c-ve:ver25," ..
 	"r-cr-o-v:hor10," ..
@@ -123,23 +123,12 @@ keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>") -- no selection = word under cursor
 keymap("v", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>")
 keymap("i", "<D-t>", "${}<Left>")
 
--- font resizing font size
--- https://neovide.dev/faq.html#how-can-i-dynamically-change-the-font-size-at-runtime
-g.gui_font_size = g.gui_font_default_size
-RefreshGuiFont = function()
-	opt.guifont = string.format("%s:h%s", g.gui_font_face, g.gui_font_size) ---@diagnostic disable-line: assign-type-mismatch
-end
-ResizeGuiFont = function(delta)
-	g.gui_font_size = g.gui_font_size + delta
-	RefreshGuiFont()
-end
-ResetGuiFont = function()
-	g.gui_font_size = g.gui_font_default_size
-	RefreshGuiFont()
-end
-ResetGuiFont() -- Call function on startup to set default value
-keymap({"n", "v", "i"}, "<D-+>", function() ResizeGuiFont(1) end, {silent = true})
-keymap({"n", "v", "i"}, "<D-->", function() ResizeGuiFont(-1) end, {silent = true})
+keymap({"n", "v", "i"}, "<D-+>", function()
+	g.neovide_scale_factor = g.neovide_scale_factor * 1.25
+end)
+keymap({"n", "v", "i"}, "<D-->", function()
+	g.neovide_scale_factor = g.neovide_scale_factor / 1.25
+end)
 
 --------------------------------------------------------------------------------
 
@@ -153,8 +142,6 @@ g.neovide_floating_blur_amount_x = 5.0
 g.neovide_floating_blur_amount_y = 5.0
 g.neovide_cursor_unfocused_outline_width = 0.1
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
-
-g.neovide_scale_factor = 1.25
 
 g.neovide_cursor_vfx_mode = "railgun"
 g.neovide_cursor_vfx_particle_lifetime = 1
