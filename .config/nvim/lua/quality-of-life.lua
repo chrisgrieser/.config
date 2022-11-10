@@ -369,10 +369,23 @@ function M.insertModePasteFix(reg)
 	end
 end
 
----Force pasting as a characterwise register
+---Force pasting a linewise register characterwise and vice versa
 ---@param reg? string register to copy to. Default: "+"
-function M.pasteCharacterwise(reg) -- paste as characterwise
+function M.pasteDifferently(reg) -- paste as characterwise
 	if not (reg) then reg = "+" end
+	local isLinewise = fn.getregtype(reg) == "V"
+	local isCharwise = fn.getregtype(reg) == "v"
+	local targetRegType
+
+	if isLinewise then
+		targetRegType = "v"	
+	elseif isCharwise then
+		targetRegType = "V"	
+	else
+		notify
+		return
+	end
+
 	local regContent = fn.getreg(reg):gsub("\n$", "")
 	fn.setreg(reg, regContent, "c") 	---@diagnostic disable-line: param-type-mismatch
 	cmd('normal! "'..reg..'p')
