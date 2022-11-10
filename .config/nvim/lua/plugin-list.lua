@@ -8,11 +8,11 @@ function M.PluginList()
 	use {"williamboman/mason.nvim", requires = "RubixDev/mason-update-all"}
 
 	-- Themes
-	-- use "navarasu/onedark.nvim"
-	-- use "EdenEast/nightfox.nvim"
-	-- use "folke/tokyonight.nvim"
-	-- use "rebelot/kanagawa.nvim"
+	use "folke/tokyonight.nvim"
 	use "savq/melange" -- like Obsidian's Primary color scheme
+	-- use "EdenEast/nightfox.nvim"
+	-- use "navarasu/onedark.nvim"
+	-- use "rebelot/kanagawa.nvim"
 
 	-- use "Yazeed1s/oh-lucy.nvim"
 	-- use "Mofiqul/dracula.nvim"

@@ -4,22 +4,23 @@ require("appearance")
 
 -- BASE CONFIG
 local lightTheme = "melange"
-local darkTheme = "melange"
 -- local lightTheme = "dawnfox"
+
+local darkTheme = "tokyonight-moon"
+-- local darkTheme = "melange"
 -- local darkTheme = "kanagawa"
--- local darkTheme = "tokyonight-moon"
 -- local darkTheme = "onedark"
 
 -- font size dependent on device
 if fn.hostname():find("iMac") then
 	g.neovide_scale_factor = 1
 elseif fn.hostname():find("mini") then
-	g.neovide_scale_factor = 1
+	g.neovide_scale_factor = 0.95
 elseif fn.hostname():find("Mother") then
-	g.neovide_scale_factor = 1
+	g.neovide_scale_factor = 0.95
 end
 
-opt.guifont = "JetBrainsMonoNL Nerd Font:h26"
+opt.guifont = "JetBrainsMonoNL Nerd Font:h26.9"
 opt.guicursor = "n-sm:block," ..
 	"i-ci-c-ve:ver25," ..
 	"r-cr-o-v:hor10," ..
@@ -123,11 +124,12 @@ keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>") -- no selection = word under cursor
 keymap("v", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>")
 keymap("i", "<D-t>", "${}<Left>")
 
+local delta = 1.1
 keymap({"n", "v", "i"}, "<D-+>", function()
-	g.neovide_scale_factor = g.neovide_scale_factor * 1.25
+	g.neovide_scale_factor = g.neovide_scale_factor * delta
 end)
 keymap({"n", "v", "i"}, "<D-->", function()
-	g.neovide_scale_factor = g.neovide_scale_factor / 1.25
+	g.neovide_scale_factor = g.neovide_scale_factor / delta
 end)
 
 --------------------------------------------------------------------------------
