@@ -33,8 +33,8 @@ function customHighlights()
 	cmd [[highlight TSDefinition term=underline gui=underline]]
 	cmd [[highlight TSDefinitionUsage term=underline gui=underline]]
 
-	-- Custom Highlight-Group, used for Completion Ghost Text and LSP Inlay Hints
-	cmd [[highlight GhostText guifg=#6d6d6d]]
+	-- Custom Highlight-Group, used for various LSP Hints
+	cmd [[highlight GhostText guifg=#7c7c7c]]
 end
 
 customHighlights()
@@ -95,7 +95,7 @@ require("dressing").setup {
 		trim_prompt = true, -- Trim trailing `:` from prompt
 		builtin = {
 			border = borderStyle,
-			relative = "win",
+			relative = "cursor",
 			winblend = 4,
 		},
 		telescope = {
