@@ -89,3 +89,8 @@ end
 
 keymap("o", "u", commented_lines_textobject, {silent = true})
 keymap("o", "Q", commented_lines_textobject, {silent = true})
+
+
+--------------------------------------------------------------------------------
+-- Diffview
+

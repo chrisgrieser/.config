@@ -94,11 +94,6 @@ opt.undofile = true -- persistent undo history
 opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
 opt.updatetime = 50 -- affects current symbol highlight from treesitter-refactor and currentline hints
 opt.autochdir = true -- always current directory
-augroup("autocd", {})
-autocmd("BufWinEnter", {-- since autochdir is not always reliable…?
-	group = "autocd",
-	command = "cd %:p:h",
-})
 
 augroup("autosave", {})
 autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {

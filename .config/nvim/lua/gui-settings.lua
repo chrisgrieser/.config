@@ -101,8 +101,8 @@ keymap({"n", "v", "i"}, "<D-9>", ":Notification<CR>")
 g.VM_maps = {
 	["Find Under"] = "<D-j>", -- cmd+j
 	["Visual Add"] = "<D-j>",
-	["Select Cursor Up"] = "<C-Up>", -- ctrl+up
-	["Select Cursor Down"] = "<C-Down>",
+	["Select Cursor Up"] = "<M-Up>", -- opt+up
+	["Select Cursor Down"] = "<M-Down>",
 }
 
 -- cut, copy & paste

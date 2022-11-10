@@ -69,6 +69,7 @@ commonFiletypes = {
 specialFiletypes = {
 	"help",
 	"startuptime",
+	"DiffviewFileHistory",
 	"qf",
 	"DressingSelect",
 	"lspinfo",

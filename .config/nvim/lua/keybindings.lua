@@ -312,8 +312,8 @@ keymap("x", "y", "ygv<Esc>") -- yanking in visual mode keeps position https://st
 
 --------------------------------------------------------------------------------
 -- WINDOW AND BUFFERS
-keymap("", "<C-w>v", ":vsplit #<CR>") -- open the alternate file in the split instead of the current file
 keymap("", "<C-w>h", ":split #<CR>")
+keymap("", "<C-w>v", ":vsplit #<CR>") -- open the alternate file in the split instead of the current file
 keymap("", "<C-Right>", ":vertical resize +3<CR>") -- resizing on one key for sanity
 keymap("", "<C-Left>", ":vertical resize -3<CR>")
 keymap("", "<C-Down>", ":resize +3<CR>")
