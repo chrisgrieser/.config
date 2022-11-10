@@ -3,9 +3,9 @@ function M.PluginList()
 
 	-- Package Management
 	use "wbthomason/packer.nvim" -- packer manages itself
-	-- use "dstein64/vim-startuptime" -- measure startup time with `:StartupTime`
 	use "lewis6991/impatient.nvim" -- reduces startup time by ~50%
 	use {"williamboman/mason.nvim", requires = "RubixDev/mason-update-all"}
+	-- use "dstein64/vim-startuptime" -- measure startup time with `:StartupTime`
 
 	-- Themes
 	use "folke/tokyonight.nvim"
@@ -66,7 +66,7 @@ function M.PluginList()
 		"hrsh7th/cmp-nvim-lsp", -- lsp
 		"folke/neodev.nvim", -- lsp for nvim-lua config
 		"L3MON4D3/LuaSnip", -- snippet engine
-		"saadparwaiz1/cmp_luasnip",
+		"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 	}}
 
 	-- Appearance
@@ -83,6 +83,9 @@ function M.PluginList()
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons",
 	}}
+
+	-- File History
+	use "mbbill/undotree" -- undo history nagivation
 	use {"sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim"}
 
 	-- Operators & Text Objects
@@ -99,7 +102,9 @@ function M.PluginList()
 	-- Editing
 	use "AndrewRadev/splitjoin.vim"
 	use "Darazaki/indent-o-matic" -- detect indention (alternative: NMAC427/guess-indent.nvim)
-	use "mbbill/undotree" -- undo history nagivation
+
+	-- Other
+	use "itchyny/calendar.vim"
 
 end
 

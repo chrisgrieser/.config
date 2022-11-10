@@ -351,7 +351,7 @@ keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR> ") -- refac
 -- Git Operations
 -- keymap("", "<C-g>", telescope.git_bcommits)
 keymap("n", "<C-g>", ":DiffviewFileHistory %<CR>")
-keymap("x", "<C-g>", ":DiffviewFileHistory %<CR>")
+keymap("x", "<C-g>", ":DiffviewFileHistory<CR>")
 
 -- Option Toggling
 keymap("n", "<leader>os", ":set spell!<CR>")
