@@ -52,6 +52,13 @@ require("telescope").setup {
 	},
 
 	pickers = {
+		jumplist = {
+			prompt_prefix='⬅️',
+			show_line=false,
+			trim_text=true,
+			include_declaration=false,
+			initial_mode = "normal",
+		},
 		lsp_references = {
 			prompt_prefix='⬅️',
 			show_line=false,
