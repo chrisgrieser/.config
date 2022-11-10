@@ -1,17 +1,17 @@
--- INFO: file should *not* be named "packer.lua", since then `require("packer")`
--- is ambigious
+-- INFO: file should *not* be named "packer.lua", since `require("packer")`
+-- would then be ambigious
 
 --------------------------------------------------------------------------------
 
 -- auto-install packer if not installed https://github.com/wbthomason/packer.nvim#bootstrapping
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then ---@diagnostic disable-line: missing-parameter
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then 
 	print("Packer not installed. Installing...")
 	vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 	vim.cmd [[packadd packer.nvim]]
 end
 
--- Protected call to prevent error when packer is not installed
+-- Protected call to prevent error when Packer is not installed
 local status_ok, packer = pcall(require, "packer")
 if (not status_ok) then return end
 
@@ -25,10 +25,10 @@ packer.startup{
 			prompt_border = borderStyle,
 			show_all_info = false,
 		},
-		snapshot_path = "/Users/chrisgrieser/.config/nvim",
+		snapshot_path = vim.fn.stdpath("config").."/packer-snapshots/",
 		autoremove = true, -- remove unused plugins without prompting user
 	},
 }
 
 packer.install() -- auto-install missing plugins
-packer.clean() -- remove unused plugins
+-- packer.clean() -- remove unused plugins

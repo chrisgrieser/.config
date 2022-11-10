@@ -22,18 +22,18 @@ keymap("n", "<leader>G", telescope.highlights)
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
 	cmd [[nohl]]
-	cmd [[update! ~/.config/nvim/lua/plugin-list.lua]]
+	cmd [[write! ~/.config/nvim/lua/plugin-list.lua]]
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	local packer = require("packer")
 	packer.startup(require("plugin-list").PluginList)
+	packer.snapshot("snapshot_"..os.date("!%Y-%m-%d_%H-%M-%S"))
 	packer.sync()
-	packer.snapshot("packer-snapshot_"..isodate())
 	cmd [[MasonUpdateAll]]
 end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
 
 -- write all before quitting
-keymap("n", "ZZ", ":wall<CR>ZZ")
+keymap("n", "ZZ", ":wqall<CR>")
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -84,7 +84,7 @@ keymap("", "ä", "`") -- Goto Mark
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
-keymap("n", "gp", qol.pasteCharacterwise)
+keymap("n", "gp", qol.pasteDifferently)
 
 keymap("n", "C", '"_C')
 
