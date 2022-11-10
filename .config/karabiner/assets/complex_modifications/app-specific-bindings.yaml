@@ -841,7 +841,7 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
-  - description: "🅰️  Neovide / Alacritty: Fix <S-Space>"
+  - description: "🅰️  Neovide / Alacritty: Fix <S-Space>, and cmd+q → ZZ"
     manipulators:
       - type: basic
         from:
@@ -872,7 +872,7 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
-      # cmd+q -> <Esc>ZZ (does  skip pre-quit triggers)
+      # cmd+q -> <Esc>ZZ (does skip pre-quit triggers)
       - type: basic
         from:
           key_code: q
@@ -881,16 +881,16 @@ rules:
               - command
         to:
           - key_code: escape # to ensure normal mode
-          - key_code: "Y" # z & y switched
+          - key_code: "y" # z & y switched
             modifiers:
               - shift
-          - key_code: "Y"
+          - key_code: "y"
             modifiers:
               - shift
-        # conditions:
-        #   - type: frontmost_application_if
-        #     file_paths:
-        #       - "[Nn]eovide"
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - "[Nn]eovide"
   - description: "🅰️  Alfred Restart"
     manipulators:
       - type: basic

@@ -89,7 +89,7 @@ require("lsp-inlayhints").setup {
 	inlay_hints = {
 		parameter_hints = {
 			show = true,
-			prefix = " ",
+			prefix = "<- ",
 			remove_colon_start = true,
 			remove_colon_end = true,
 		},
