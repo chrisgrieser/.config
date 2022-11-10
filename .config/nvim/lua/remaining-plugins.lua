@@ -62,7 +62,7 @@ cmd [[highlight def link QuickScopePrimary CurSearch]]
 -- = qu for uncommenting
 -- big Q also as text object
 -- https://github.com/numToStr/Comment.nvim/issues/22#issuecomment-1272569139
-local function commented_lines_textobject()
+function commented_lines_textobject()
 	local U = require("Comment.utils")
 	local cl = vim.api.nvim_win_get_cursor(0)[1] -- current line
 	local range = {srow = cl, scol = 0, erow = cl, ecol = 0}
@@ -87,10 +87,43 @@ local function commented_lines_textobject()
 	vim.fn.execute("normal! " .. rs .. "GV" .. re .. "G")
 end
 
-keymap("o", "u", commented_lines_textobject, {silent = true})
-keymap("o", "Q", commented_lines_textobject, {silent = true})
-
-
 --------------------------------------------------------------------------------
 -- Diffview
-
+local actions = require("diffview.actions")
+require("diffview").setup {
+	view = {
+		-- Available layouts: 'diff1_plain' |'diff2_horizontal' |'diff2_vertical' |'diff3_horizontal' |'diff3_vertical' |'diff3_mixed' |'diff4_mixed' For more info, see ':h diffview-config-view.x.layout'.
+		default = {layout = "diff2_horizontal"},
+		merge_tool = {
+			layout = "diff3_horizontal",
+			disable_diagnostics = true, -- Temporarily disable diagnostics for conflict buffers while in the view.
+		},
+		file_history = {layout = "diff2_horizontal"},
+	},
+	file_panel = {
+		win_config = {
+			position = "left",
+			width = 35,
+		},
+	},
+	file_history_panel = {
+		win_config = {
+			position = "bottom",
+			height = 10,
+		},
+	},
+	keymaps = {
+		view = {
+			-- The `view` bindings are active in the diff buffers, only when the current
+			-- tabpage is a Diffview.
+			["<tab>"] = actions.select_next_entry, -- Open the diff for the next file
+			["<s-tab>"] = actions.select_prev_entry, -- Open the diff for the previous file
+		},
+		file_history_panel = {
+			["o"] = actions.options, -- Open the option panel
+		},
+		option_panel = {
+			["<CR>"] = actions.select_entry,
+		},
+	},
+}

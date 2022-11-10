@@ -131,7 +131,7 @@ autocmd("BufEnter", {
 -- treesitter textobjects:
 -- af -> a function
 -- aC -> a condition
--- c -> comment
+-- q -> comment
 -- aa -> an argument
 
 require("nvim-surround").setup {
@@ -178,7 +178,11 @@ keymap("n", "gUq", "mzgUCOM`z", {remap = true}) -- uppercase comment
 keymap("n", "sq", "mzsCOM`z", {remap = true})
 keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
 
+keymap("o", "u", commented_lines_textobject, {silent = true})
+keymap("o", "Q", commented_lines_textobject, {silent = true})
+
 --------------------------------------------------------------------------------
+
 
 -- MACRO & SUBSTITUTION
 -- one-off recording (+ q needs remapping due to being mapped to comments)
@@ -342,8 +346,12 @@ keymap("", "<C-n>", qol.copyFilename)
 keymap("n", "<leader>x",qol.chmodx)
 keymap("", "<C-r>", qol.renameFile)
 keymap("", "<C-d>", qol.duplicateFile)
-keymap("", "<C-g>", telescope.git_bcommits)
 keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR> ") -- refactor selection into new file
+
+-- Git Operations
+-- keymap("", "<C-g>", telescope.git_bcommits)
+keymap("n", "<C-g>", ":DiffviewFileHistory %<CR>")
+keymap("x", "<C-g>", ":DiffviewFileHistory %<CR>")
 
 -- Option Toggling
 keymap("n", "<leader>os", ":set spell!<CR>")
