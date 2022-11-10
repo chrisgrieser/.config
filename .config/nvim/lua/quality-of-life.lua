@@ -402,8 +402,8 @@ end
 
 --------------------------------------------------------------------------------
 
--- log statement for variable under cursor, similar to the 'turbo console log'
--- VS Code plugin. Supported: lua, js/ts, zsh/bash/fish, and applescript
+---log statement for variable under cursor, similar to the 'turbo console log'
+---VS Code plugin. Supported: lua, js/ts, zsh/bash/fish, and applescript
 ---@param opts? table
 function M.quicklog(opts)
 	if not (opts) then opts = {addLineNumber = false} end

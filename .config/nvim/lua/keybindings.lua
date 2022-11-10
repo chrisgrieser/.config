@@ -84,7 +84,7 @@ keymap("", "ä", "`") -- Goto Mark
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
-keymap("n", "gp", qol.pasteDifferently)
+keymap("n", "gp", qol.pasteDifferently) -- paste charwise reg as linewise & vice versa
 
 keymap("n", "C", '"_C')
 keymap("n", "<Space>", '"_ciw') -- change word
@@ -117,8 +117,7 @@ keymap({"o", "x"}, "R", "{")
 keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {silent = true})
 keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>", {silent = true})
 
--- map ai to aI
--- except for yaml, python and md, where aI does not make sense
+-- map ai to aI in languages where aI is not used anyway
 augroup("indentobject", {})
 autocmd("BufEnter", {
 	group = "indentobject",
@@ -270,7 +269,7 @@ keymap("n", "<C-u>", "U") -- undo line, needs remapping since shadowed
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
 -- Logging
-keymap("n", "<leader>ll", function() qol.quicklog(true) end)
+keymap("n", "<leader>ll", qol.quicklog)
 
 --------------------------------------------------------------------------------
 
