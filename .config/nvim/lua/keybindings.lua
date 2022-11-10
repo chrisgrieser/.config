@@ -22,7 +22,6 @@ keymap("n", "<leader>G", telescope.highlights)
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
 	cmd [[nohl]]
-	cmd [[write! ~/.config/nvim/lua/plugin-list.lua]]
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	local packer = require("packer")
 	packer.startup(require("plugin-list").PluginList)
@@ -56,6 +55,7 @@ keymap("", "]", "}", {nowait = true})
 -- Jump History
 keymap("n", "<C-h>", "<C-o>") -- Back
 keymap("n", "<C-l>", "<C-i>") -- Forward
+keymap("n", "<C-o>", telescope.jumplist) 
 
 -- Hunks
 keymap("n", "gh", ":Gitsigns next_hunk<CR>")
@@ -361,7 +361,7 @@ keymap("n", "<leader>g", ":w<CR>:!acp ") -- shell function, enabled via .zshenv
 
 -- BUILD SYSTEM
 keymap("n", "<leader>r", function()
-	cmd [[update]]
+	cmd [[update!]]
 	local filename = fn.expand("%:t")
 
 	if filename == "sketchybarrc" then
@@ -375,7 +375,6 @@ keymap("n", "<leader>r", function()
 
 	elseif bo.filetype == "lua" then
 		local parentFolder = fn.expand("%:p:h")
-		if not (parentFolder) then return end
 		if parentFolder:find("nvim") then
 			cmd [[write! | source %]]
 			vim.notify(" Neovim config reloaded.")

@@ -24,7 +24,7 @@ add("all", {
 }, {type = "autosnippets"})
 
 add("all", {
-	snip("modeline", "vim: filetype=bash"),
+	snip("modeline", "vim: filetype=bash\n$0"),
 })
 
 -- Shell (zsh)
