@@ -11,7 +11,6 @@ local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
 local error = vim.log.levels.ERROR
 local warn = vim.log.levels.WARN
-
 local function wordUnderCursor() return vim.fn.expand("<cword>") end
 
 local function leaveVisualMode()
@@ -101,25 +100,28 @@ local function copyOp (operation, reg)
 end
 
 ---Copy full path of current file
----@param reg? string The register to copy the last command to. Default: "+"
-function M.copyFilepath(reg)
-	copyOp("filepath", reg)
+---@param opts? table
+function M.copyFilepath(opts)
+	if not (opts) then opts = {reg = "+"} end
+	copyOp("filepath", opts.reg)
 end
 
 ---Copy name of current file
----@param reg? string The register to copy the last command to. Default: "+"
-function M.copyFilename(reg)
-	copyOp("filename", reg)
+---@param opts? table
+function M.copyFilename(opts)
+	if not (opts) then opts = {reg = "+"} end
+	copyOp("filename", opts.reg)
 end
 
 ---Trash the Current File. Requires `mv`.
----@param trashLocation string Trash directory. Default: "$HOME/.Trash/"
-function M.trashFile(trashLocation)
-	if not (trashLocation) then trashLocation = "$HOME/.Trash/" end
+---@param opts? table
+function M.trashFile(opts)
+	if not (opts) then opts = {trashLocation = "$HOME/.Trash/"} end
+
 	local currentFile = fn.expand("%:p")
 	local filename = fn.expand("%:t")
 	cmd[[update!]]
-	os.execute('mv -f "'..currentFile..'" "'..trashLocation..'"')
+	os.execute('mv -f "'..currentFile..'" "'..opts.trashLocation..'"')
 	cmd[[bdelete]]
 	vim.notify(" '"..filename.."' deleted.")
 end
@@ -348,9 +350,11 @@ function M.overscroll(action)
 end
 
 ---Fix for Pasting in Insert Mode (whacky indentation, etc.)
----@param reg? string register to copy to. Default: "+"
-function M.insertModePasteFix(reg)
-	if not (reg) then reg = "+" end
+---@param opts? table
+function M.insertModePasteFix(opts)
+	if not (opts) then opts = {reg = "+"} end
+	local reg = opts.reg
+
 	local isLinewise = fn.getregtype(reg) == "V" or fn.getreg(reg):find("\n")
 	local endOfLine = fn.col("$") - 2 -- eol before entering insert mode
 	local cursorCol = fn.col(".") -- considers insert mode cursor
@@ -370,39 +374,44 @@ function M.insertModePasteFix(reg)
 end
 
 ---Force pasting a linewise register characterwise and vice versa
----@param reg? string register to copy to. Default: "+"
-function M.pasteDifferently(reg) -- paste as characterwise
-	if not (reg) then reg = "+" end
+---@param opts? table
+function M.pasteDifferently(opts) -- paste as characterwise
+	if not (opts) then
+		opts = {reg = "+", undo = false}
+	end
+	local reg = opts.reg
+
 	local isLinewise = fn.getregtype(reg) == "V"
 	local isCharwise = fn.getregtype(reg) == "v"
+	local regContent = fn.getreg(reg):gsub("\n$", "")
 	local targetRegType
 
 	if isLinewise then
-		targetRegType = "v"	
+		targetRegType = "v"
 	elseif isCharwise then
-		targetRegType = "V"	
+		targetRegType = "V"
 	else
-		notify
+		vim.notify(" This paste command does not work with blockwise registers.", warn)
 		return
 	end
 
-	local regContent = fn.getreg(reg):gsub("\n$", "")
-	fn.setreg(reg, regContent, "c") 	---@diagnostic disable-line: param-type-mismatch
+	fn.setreg(reg, regContent, targetRegType)
+	if opts.undo then cmd("undo") end
 	cmd('normal! "'..reg..'p')
 end
 
 --------------------------------------------------------------------------------
 
 -- log statement for variable under cursor, similar to the 'turbo console log'
--- popular VS Code plugin
--- supported: lua, js/ts, zsh/bash/fish, and applescript
----@param addLineNumber? boolean Whether to add the line number. Default: false
-function M.quicklog(addLineNumber)
+-- VS Code plugin. Supported: lua, js/ts, zsh/bash/fish, and applescript
+---@param opts? table
+function M.quicklog(opts)
+	if not (opts) then opts = {addLineNumber = false} end
 	local varname = wordUnderCursor()
 	local logStatement
 	local ft = bo.filetype
 	local lnStr = ""
-	if addLineNumber then
+	if opts.addLineNumber then
 		lnStr = "L" .. tostring(lineNo(".")) .. " "
 	end
 
