@@ -79,7 +79,7 @@ auto_dark_mode.init()
 keymap({"n", "v"}, "<D-w>", ":close<CR>") -- cmd+w
 keymap("i", "<D-w>", "<Esc>:close<CR>")
 
-keymap({"n", "v", "i"}, "<D-n>", ":e ")
+keymap({"n", "v", "i"}, "<D-n>", qol.createNewFile)
 
 keymap({"n", "v"}, "<D-z>", "u") -- cmd+z
 keymap({"n", "v"}, "<D-Z>", "<C-R>") -- cmd+shift+z
@@ -91,7 +91,7 @@ keymap("n", "<D-a>", "ggVG") -- cmd+a
 keymap("i", "<D-a>", "<Esc>ggVG")
 keymap("v", "<D-a>", "ggG")
 
-keymap("", "<D-BS>", require("quality-of-life").trashFile)
+keymap("", "<D-BS>", qol.trashFile)
 keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 keymap({"n", "v", "i"}, "<D-1>", ":Lexplore<CR><CR>") -- file tree (netrw)
 keymap({"n", "v", "i"}, "<D-0>", ":messages<CR>")
@@ -112,7 +112,7 @@ keymap("n", "<D-x>", "dd") -- no selection = line
 keymap("v", "<D-x>", "d")
 keymap({"n", "v"}, "<D-v>", "p")
 keymap("c", "<D-v>", "<C-r>+")
-keymap("i", "<D-v>", require("quality-of-life").insertModePasteFix)
+keymap("i", "<D-v>", qol.insertModePasteFix)
 
 -- cmd+e: inline code
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>") -- no selection = word under cursor

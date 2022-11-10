@@ -9,12 +9,15 @@ cmd = vim.cmd
 bo = vim.bo -- buffer-scoped options
 b = vim.b -- buffer-scoped variables
 wo = vim.wo -- window-scoped variables
+
 augroup = vim.api.nvim_create_augroup
 autocmd = vim.api.nvim_create_autocmd
-telescope = require("telescope.builtin") -- requires loading extensions first
 keymap = vim.keymap.set
 error = vim.log.levels.ERROR
 warn = vim.log.levels.WARN
+
+telescope = require("telescope.builtin") -- requires loading extensions first
+qol = require("quality-of-life") 
 
 --------------------------------------------------------------------------------
 

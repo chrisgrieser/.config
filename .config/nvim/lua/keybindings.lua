@@ -1,5 +1,4 @@
 require("utils")
-local qol = require("quality-of-life")
 --------------------------------------------------------------------------------
 -- META
 g.mapleader = ","

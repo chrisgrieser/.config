@@ -448,11 +448,13 @@ end
 -- performed as command makes them less glitchy
 
 function M.moveLineDown()
+	if lineNo(".") == lineNo("$") then return end
 	cmd [[. move +1]]
 	cmd [[normal! ==]]
 end
 
 function M.moveLineUp()
+	if lineNo(".") == 1 then return end
 	cmd [[. move -2]]
 	cmd [[normal! ==]]
 end
