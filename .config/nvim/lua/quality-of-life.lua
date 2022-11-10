@@ -207,21 +207,25 @@ function M.duplicateSelection()
 end
 
 -- insert horizontal divider considering textwidth, commentstring, and indent
----@param linechar? string Character used for horizontal divider. Default: "─"
-function M.hr(linechar)
+---@param opts? table
+function M.hr(opts)
 	local indent = vim.fn.indent(".")
+	print("indent: ", indent)
 	local textwidth = bo.textwidth
+	print("textwidth: ", textwidth)
 	local comstr = bo.commentstring
+	print("comstr: ", comstr)
 	local comStrLength = #(comstr:gsub("%%s", ""):gsub(" ", ""))
+	print("comStrLength: ", comStrLength)
 
-	if not (linechar) then
+	if not (opts) then
 		if comstr:find("-") then
 			linechar = "-"
 		else
 			linechar = "─"
 		end
 	elseif #linechar > 1 then
-		linechar:sub(1, 1)
+		linechar = linechar:sub(1, 1)
 	end
 
 	local linelength = textwidth - indent - comStrLength

@@ -55,7 +55,7 @@ keymap("", "]", "}", {nowait = true})
 -- Jump History
 keymap("n", "<C-h>", "<C-o>") -- Back
 keymap("n", "<C-l>", "<C-i>") -- Forward
-keymap("n", "<C-o>", telescope.jumplist) 
+keymap("n", "<C-o>", telescope.jumplist)
 
 -- Hunks
 keymap("n", "gh", ":Gitsigns next_hunk<CR>")
@@ -343,6 +343,7 @@ keymap("", "<C-n>", qol.copyFilename)
 keymap("n", "<leader>x",qol.chmodx)
 keymap("", "<C-r>", qol.renameFile)
 keymap("", "<C-d>", qol.duplicateFile)
+keymap("", "<C-g>", telescope.git_bcommits)
 keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR> ") -- refactor selection into new file
 
 -- Option Toggling
