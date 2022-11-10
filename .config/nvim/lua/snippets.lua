@@ -164,6 +164,7 @@ add("yaml", {
 -- needs to come after snippet definitions
 ls.filetype_extend("typescript", {"javascript"}) -- typescript uses all javascript snippets
 ls.filetype_extend("bash", {"zsh"})
+ls.filetype_extend("sh", {"zsh"})
 
 -- load friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()

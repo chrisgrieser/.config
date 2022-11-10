@@ -64,9 +64,6 @@ cmp.setup {
 	snippet = {-- REQUIRED a snippet engine must be specified and installed
 		expand = function(args) require("luasnip").lsp_expand(args.body) end,
 	},
-	experimental = {
-		-- ghost_text = { hl_group = "GhostText", },
-	},
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
@@ -161,7 +158,6 @@ cmp.setup.cmdline(":", {
 		{name = "git"}, -- commits with ":", issues/PRs with "#"
 		{name = "path"},
 		{name = "cmdline"},
-	}, {-- second array only relevant when no source from the first matches
 		{name = "cmdline_history"},
 	})
 })
@@ -170,7 +166,7 @@ cmp.setup.cmdline(":", {
 
 require("cmp_git").setup {
 	filetypes = commonFiletypes,
-	git = { commits = { limit = 0 } }, -- = disable completing commits
+	git = { commits = { limit = 0 } }, -- 0 = disable completing commits
 	github = {
 		issues = {
 			limit = 100,
