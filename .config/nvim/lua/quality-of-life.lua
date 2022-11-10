@@ -209,27 +209,17 @@ end
 -- insert horizontal divider considering textwidth, commentstring, and indent
 ---@param opts? table
 function M.hr(opts)
-	local indent = vim.fn.indent(".")
-	print("indent: ", indent)
-	local textwidth = bo.textwidth
-	print("textwidth: ", textwidth)
-	local comstr = bo.commentstring
-	print("comstr: ", comstr)
-	local comStrLength = #(comstr:gsub("%%s", ""):gsub(" ", ""))
-	print("comStrLength: ", comStrLength)
-
 	if not (opts) then
-		if comstr:find("-") then
-			linechar = "-"
-		else
-			linechar = "─"
-		end
-	elseif #linechar > 1 then
-		linechar = linechar:sub(1, 1)
+		opts = {linechar = ""}
 	end
+	local indent = vim.fn.indent(".")
+	local textwidth = bo.textwidth
+	local comstr = bo.commentstring
+	local comStrLength = #(comstr:gsub("%%s", ""):gsub(" ", ""))
+	if comstr:find("-") then opts.linechar = "-" end
 
 	local linelength = textwidth - indent - comStrLength
-	local fullLine = string.rep(linechar, linelength)
+	local fullLine = string.rep(opts.linechar, linelength)
 	local hr = comstr:gsub(" ?%%s ?", fullLine)
 
 	append(".", {hr, ""})
@@ -433,6 +423,22 @@ function M.quicklog(opts)
 
 	append(".", logStatement)
 	cmd [[normal! j==]] -- move down and indent
+end
+
+function M.removeLog()
+	local ft = bo.filetype
+	if ft == "lua" then
+		logCommand = "print"
+	elseif ft == "javascript" or ft == "typescript" then
+		logCommand = "console.log"
+	elseif ft == "zsh" or ft == "bash" or ft == "fish" then
+		vim.notify(" Shell 'echo' cannot be removed since indistinguishable from other echos.")
+	elseif ft == "applescript" then
+		logCommand = "log"
+	else
+		vim.notify(" Quicklog does not support " .. ft .. " yet.")
+	end
+	cmd([[g/^\s\*]]..logCommand..[[/d]])
 end
 
 --------------------------------------------------------------------------------
