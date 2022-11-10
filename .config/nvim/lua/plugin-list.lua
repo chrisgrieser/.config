@@ -13,7 +13,6 @@ function M.PluginList()
 	-- use "EdenEast/nightfox.nvim"
 	-- use "navarasu/onedark.nvim"
 	-- use "rebelot/kanagawa.nvim"
-
 	-- use "Yazeed1s/oh-lucy.nvim"
 	-- use "Mofiqul/dracula.nvim"
 	-- use "Yazeed1s/minimal.nvim"
@@ -102,9 +101,6 @@ function M.PluginList()
 	-- Editing
 	use "AndrewRadev/splitjoin.vim"
 	use "Darazaki/indent-o-matic" -- detect indention (alternative: NMAC427/guess-indent.nvim)
-
-	-- Other
-	use "itchyny/calendar.vim"
 
 end
 

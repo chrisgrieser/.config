@@ -158,6 +158,7 @@ cmp.setup.cmdline(":", {
 		{name = "git"}, -- commits with ":", issues/PRs with "#"
 		{name = "path"},
 		{name = "cmdline"},
+	}, {-- second array only relevant when no source from the first matches
 		{name = "cmdline_history"},
 	})
 })
