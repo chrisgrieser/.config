@@ -24,7 +24,7 @@ keymap("n", "<leader>p", function()
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	local packer = require("packer")
 	packer.startup(require("plugin-list").PluginList)
-	packer.snapshot("snapshot_"..os.date("!%Y-%m-%d_%H-%M-%S"))
+	packer.snapshot("snapshot_" .. os.date("!%Y-%m-%d_%H-%M-%S"))
 	packer.sync()
 	cmd [[MasonUpdateAll]]
 end)
@@ -178,11 +178,39 @@ keymap("n", "gUq", "mzgUCOM`z", {remap = true}) -- uppercase comment
 keymap("n", "sq", "mzsCOM`z", {remap = true})
 keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
 
+-- TEXTOBJECT FOR ADJACENT COMMENTED LINES
+-- = qu for uncommenting
+-- big Q also as text object
+-- https://github.com/numToStr/Comment.nvim/issues/22#issuecomment-1272569139
+function commented_lines_textobject()
+	local U = require("Comment.utils")
+	local cl = vim.api.nvim_win_get_cursor(0)[1] -- current line
+	local range = {srow = cl, scol = 0, erow = cl, ecol = 0}
+	local ctx = {ctype = U.ctype.linewise, range = range}
+	local cstr = require("Comment.ft").calculate(ctx) or vim.bo.commentstring
+	local ll, rr = U.unwrap_cstr(cstr)
+	local padding = true
+	local is_commented = U.is_commented(ll, rr, padding)
+	local line = vim.api.nvim_buf_get_lines(0, cl - 1, cl, false)
+	if next(line) == nil or not is_commented(line[1]) then return end
+	local rs, re = cl, cl -- range start and end
+	repeat
+		rs = rs - 1
+		line = vim.api.nvim_buf_get_lines(0, rs - 1, rs, false)
+	until next(line) == nil or not is_commented(line[1])
+	rs = rs + 1
+	repeat
+		re = re + 1
+		line = vim.api.nvim_buf_get_lines(0, re - 1, re, false)
+	until next(line) == nil or not is_commented(line[1])
+	re = re - 1
+	vim.fn.execute("normal! " .. rs .. "GV" .. re .. "G")
+end
+
 keymap("o", "u", commented_lines_textobject, {silent = true})
 keymap("o", "Q", commented_lines_textobject, {silent = true})
 
 --------------------------------------------------------------------------------
-
 
 -- MACRO & SUBSTITUTION
 -- one-off recording (+ q needs remapping due to being mapped to comments)
@@ -240,7 +268,7 @@ keymap("n", "Ü", qol.reverse)
 
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`"}
-for _,v in pairs(trailingKeys) do
+for _, v in pairs(trailingKeys) do
 	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z")
 end
 -- Remove last character from line, e.g., a trailing comma
@@ -343,7 +371,7 @@ keymap("n", "gF", "gf") -- needs remapping since shadowed
 -- File Operations
 keymap("", "<C-p>", qol.copyFilepath)
 keymap("", "<C-n>", qol.copyFilename)
-keymap("n", "<leader>x",qol.chmodx)
+keymap("n", "<leader>x", qol.chmodx)
 keymap("", "<C-r>", qol.renameFile)
 keymap("", "<C-d>", qol.duplicateFile)
 keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR> ") -- refactor selection into new file

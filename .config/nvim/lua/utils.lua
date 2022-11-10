@@ -70,6 +70,7 @@ specialFiletypes = {
 	"help",
 	"startuptime",
 	"DiffviewFileHistory",
+	"calendar",
 	"qf",
 	"DressingSelect",
 	"lspinfo",
