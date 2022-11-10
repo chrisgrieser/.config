@@ -212,17 +212,23 @@ function M.hr(opts)
 	if not (opts) then
 		opts = {linechar = "─"}
 	end
-	linechar = opts.linechar:sub(1, 1)
+	local linechar = opts.linechar:sub(1, 1)
 	local wasOnBlank = getline(".") == ""
 	local indent = fn.indent(".")
 	local textwidth = bo.textwidth
 	local comstr = bo.commentstring
 	local comStrLength = #(comstr:gsub("%%s", ""):gsub(" ", ""))
+
+	if comstr == "" then
+		vim.notify(" No commentstring for this filetype available.", warn)
+		return
+	end
 	if comstr:find("-") then linechar = "-" end
 
 	local linelength = textwidth - indent - comStrLength
 	local fullLine = string.rep(linechar, linelength)
 	local hr = comstr:gsub(" ?%%s ?", fullLine)
+	if bo.filetype == "markdown" then hr = "---" end
 
 	append(".", {hr, ""})
 	cmd [[normal! j==]] -- move down and indent
