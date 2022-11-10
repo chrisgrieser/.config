@@ -10,11 +10,6 @@ function isodate ()
 	return os.date("!%Y-%m-%d")
 end
 
----string.sub, but for two-byte characters
-function utf8.sub(s, i, j)
-    return utf8.char(utf8.codepoint(s, i, j))
-end
-
 ---@param str string
 ---@param separator string uses Lua Pattern, so requires escaping
 ---@return table
