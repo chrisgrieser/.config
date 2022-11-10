@@ -11,7 +11,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then ---@diagnostic disable-line:
 	vim.cmd [[packadd packer.nvim]]
 end
 
--- Protected call to make sure that packer is installed
+-- Protected call to prevent error when packer is not installed
 local status_ok, packer = pcall(require, "packer")
 if (not status_ok) then return end
 
@@ -21,8 +21,13 @@ packer.startup{
 	config = {
 		display = {
 			open_fn = function() return require('packer.util').float{border = borderStyle} end,
-		}
-	}
+			compact = true,
+			prompt_border = borderStyle,
+			show_all_info = false,
+		},
+		snapshot_path = "/Users/chrisgrieser/.config/nvim",
+		autoremove = true, -- remove unused plugins without prompting user
+	},
 }
 
 packer.install() -- auto-install missing plugins

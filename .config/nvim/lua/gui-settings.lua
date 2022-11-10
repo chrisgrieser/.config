@@ -93,8 +93,9 @@ keymap("v", "<D-a>", "ggG")
 
 keymap("", "<D-BS>", require("quality-of-life").trashFile)
 keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
-keymap({"n", "v", "i"}, "<D-1>", ":Lexplore<CR>") -- file tree (netrw)
+keymap({"n", "v", "i"}, "<D-1>", ":Lexplore<CR><CR>") -- file tree (netrw)
 keymap({"n", "v", "i"}, "<D-0>", ":messages<CR>")
+keymap({"n", "v", "i"}, "<D-9>", ":Notification<CR>")
 
 -- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 g.VM_maps = {

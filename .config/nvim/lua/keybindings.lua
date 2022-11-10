@@ -27,6 +27,7 @@ keymap("n", "<leader>p", function()
 	local packer = require("packer")
 	packer.startup(require("plugin-list").PluginList)
 	packer.sync()
+	packer.snapshot("packer-snapshot_"..isodate())
 	cmd [[MasonUpdateAll]]
 end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
