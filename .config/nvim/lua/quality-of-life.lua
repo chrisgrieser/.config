@@ -4,7 +4,6 @@ local M = {}
 local bo = vim.bo
 local fn = vim.fn
 local getline = vim.fn.getline
-local setline = vim.fn.setline
 local lineNo = vim.fn.line
 local append = vim.fn.append
 local getCursor = vim.api.nvim_win_get_cursor
@@ -87,7 +86,7 @@ end
 ---Helper for copying file information
 ---@param operation string filename|filepath
 ---@param reg? string register to copy to
-local function copyOp (operation, reg)
+local function copyOp(operation, reg)
 	if not (reg) then reg = "+" end
 	local toCopy
 	if operation == "filename" then
@@ -96,7 +95,7 @@ local function copyOp (operation, reg)
 		toCopy = fn.expand("%:p")
 	end
 	fn.setreg(reg, toCopy)
-	vim.notify(" COPIED\n "..toCopy)
+	vim.notify(" COPIED\n " .. toCopy)
 end
 
 ---Copy full path of current file
@@ -120,10 +119,10 @@ function M.trashFile(opts)
 
 	local currentFile = fn.expand("%:p")
 	local filename = fn.expand("%:t")
-	cmd[[update!]]
-	os.execute('mv -f "'..currentFile..'" "'..opts.trashLocation..'"')
-	cmd[[bdelete]]
-	vim.notify(" '"..filename.."' deleted.")
+	cmd [[update!]]
+	os.execute('mv -f "' .. currentFile .. '" "' .. opts.trashLocation .. '"')
+	cmd [[bdelete]]
+	vim.notify(" '" .. filename .. "' deleted.")
 end
 
 --------------------------------------------------------------------------------
@@ -133,18 +132,18 @@ end
 function M.copyLastCommand(reg)
 	if not (reg) then reg = "+" end
 	local lastCommand = fn.getreg(":")
-	if not(lastCommand) then
+	if not (lastCommand) then
 		vim.notify(" No Command has been run yet.", error)
 		return
 	end
 	fn.setreg(reg, lastCommand)
-	vim.notify(" COPIED\n "..lastCommand)
+	vim.notify(" COPIED\n " .. lastCommand)
 end
 
 ---Run Last Command Again
 function M.runLastCommandAgain()
 	local lastCommand = fn.getreg(":")
-	if not(lastCommand) then
+	if not (lastCommand) then
 		vim.notify(" No Command has been run yet.", error)
 		return
 	end
@@ -212,7 +211,7 @@ function M.hr(opts)
 	if not (opts) then
 		opts = {linechar = ""}
 	end
-	local indent = vim.fn.indent(".")
+	local indent = fn.indent(".")
 	local textwidth = bo.textwidth
 	local comstr = bo.commentstring
 	local comStrLength = #(comstr:gsub("%%s", ""):gsub(" ", ""))
@@ -222,21 +221,13 @@ function M.hr(opts)
 	local fullLine = string.rep(opts.linechar, linelength)
 	local hr = comstr:gsub(" ?%%s ?", fullLine)
 
+	-- cannot use simply :sub, since it assumes one-byte-size chars
+	while #hr >= textwidth - indent do
+		hr = hr:gsub(opts.linechar, "", 1)
+	end
+
 	append(".", {hr, ""})
 	cmd [[normal! j==]] -- move down and indent
-
-	-- fix for blank lines inside indented blocks
-	local line = getline(".")
-	if bo.expandtab then
-		line = line:sub(1, textwidth)
-	else
-		local spacesPerTab = string.rep(" ", bo.tabstop)
-		line = line
-			:gsub("\t", spacesPerTab)
-			:sub(1, textwidth)
-			:gsub(spacesPerTab, "\t")
-	end
-	setline(".", line)
 
 end
 
@@ -391,7 +382,7 @@ function M.pasteDifferently(opts) -- paste as characterwise
 
 	fn.setreg(reg, regContent, targetRegType)
 	if opts.undo then cmd("undo") end
-	cmd('normal! "'..reg..'p')
+	cmd('normal! "' .. reg .. "p")
 end
 
 --------------------------------------------------------------------------------
@@ -438,7 +429,7 @@ function M.removeLog()
 	else
 		vim.notify(" Quicklog does not support " .. ft .. " yet.")
 	end
-	cmd([[g/^\s\*]]..logCommand..[[/d]])
+	cmd([[g/^\s\*]] .. logCommand .. [[/d]])
 end
 
 --------------------------------------------------------------------------------
