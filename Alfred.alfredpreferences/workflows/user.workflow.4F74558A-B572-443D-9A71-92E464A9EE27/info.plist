@@ -34,6 +34,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>43FED74A-4CD7-4ED2-9ED0-4952120C4B79</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6633D9C-EF3D-4A41-A6C5-874457C95DA6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<array>
 			<dict>
@@ -350,11 +363,11 @@
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>17</integer>
+				<integer>0</integer>
 				<key>hotmod</key>
-				<integer>1966080</integer>
+				<integer>0</integer>
 				<key>hotstring</key>
-				<string>T</string>
+				<string></string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -446,6 +459,54 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/System/Volumes/Data/Applications/Warp.app</string>
+				</array>
+				<key>toggle</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>A6633D9C-EF3D-4A41-A6C5-874457C95DA6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>17</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>T</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>43FED74A-4CD7-4ED2-9ED0-4952120C4B79</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -731,7 +792,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>530</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>695</real>
 		</dict>
 		<key>3ADE22C7-10D2-4528-9298-22A616F276B1</key>
 		<dict>
@@ -739,6 +800,15 @@ echo "$backup"</string>
 			<real>240</real>
 			<key>ypos</key>
 			<real>150</real>
+		</dict>
+		<key>43FED74A-4CD7-4ED2-9ED0-4952120C4B79</key>
+		<dict>
+			<key>note</key>
+			<string>Quake Mode</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>435</real>
 		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
@@ -756,7 +826,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>695</real>
 		</dict>
 		<key>5707C8CC-3CD7-4D92-A6CD-283E796905EC</key>
 		<dict>
@@ -765,7 +835,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>845</real>
 		</dict>
 		<key>616AF66D-17DC-445B-8F58-EBC80A1556CE</key>
 		<dict>
@@ -783,7 +853,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>930</real>
 		</dict>
 		<key>64C686C1-E836-4CB7-AAD4-52E72832714C</key>
 		<dict>
@@ -792,7 +862,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>570</real>
 		</dict>
 		<key>7715FAE1-9F26-411B-B95B-7D9D41BAA899</key>
 		<dict>
@@ -815,7 +885,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>695</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
@@ -831,7 +901,14 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>385</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>695</real>
+		</dict>
+		<key>A6633D9C-EF3D-4A41-A6C5-874457C95DA6</key>
+		<dict>
+			<key>xpos</key>
+			<real>240</real>
+			<key>ypos</key>
+			<real>435</real>
 		</dict>
 		<key>A883397A-C748-4E51-B5EB-96B4F58AADCD</key>
 		<dict>
@@ -842,7 +919,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>696</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>715</real>
 		</dict>
 		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
 		<dict>
@@ -860,7 +937,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>770</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>695</real>
 		</dict>
 		<key>B49ADC0D-7CDD-4567-A6DE-E7D97662B343</key>
 		<dict>
@@ -869,7 +946,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>930</real>
 		</dict>
 		<key>E0C75078-1F39-43D8-9A91-F93AA5784104</key>
 		<dict>
@@ -885,7 +962,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>570</real>
 		</dict>
 		<key>FE91F5F4-DB81-40FB-95B9-20859076AB23</key>
 		<dict>
@@ -894,7 +971,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>815</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
