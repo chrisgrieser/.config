@@ -87,8 +87,6 @@ keymap("n", "C", '"_C')
 keymap("n", "gp", qol.pasteDifferently)
 
 keymap("n", "C", '"_C')
-
-keymap("n", "C", '"_C')
 keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<C-A-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
 keymap("x", "<Space>", '"_c')
