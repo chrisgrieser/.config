@@ -3,8 +3,8 @@ local M = {}
 --------------------------------------------------------------------------------
 local bo = vim.bo
 local fn = vim.fn
-local setline = vim.fn.setline
 local getline = vim.fn.getline
+local setline = vim.fn.setline
 local lineNo = vim.fn.line
 local append = vim.fn.append
 local getCursor = vim.api.nvim_win_get_cursor
@@ -330,7 +330,7 @@ end
 
 ---enables overscrolling for that action when close to the last line, depending
 --on 'scrolloff' option
----@param action string The motion to be executed when not at EOF
+---@param action string The motion to be executed when not at the EOF
 function M.overscroll(action)
 	local curLine = lineNo(".")
 	local lastLine = lineNo("$")
@@ -368,7 +368,7 @@ end
 ---@param opts? table
 function M.pasteDifferently(opts) -- paste as characterwise
 	if not (opts) then
-		opts = {reg = "+", undo = false}
+		opts = {reg = "+"}
 	end
 	local reg = opts.reg
 
@@ -387,7 +387,6 @@ function M.pasteDifferently(opts) -- paste as characterwise
 	end
 
 	fn.setreg(reg, regContent, targetRegType)
-	if opts.undo then cmd("undo") end
 	cmd('normal! "' .. reg .. "p")
 end
 
