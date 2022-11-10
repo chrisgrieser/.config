@@ -5,6 +5,11 @@
 ---home directory
 home = os.getenv("HOME")
 
+---returns current date in ISO 8601 format
+function isodate ()
+	return os.date("!%Y-%m-%d")
+end
+
 ---@param str string
 ---@param separator string uses Lua Pattern, so requires escaping
 ---@return table
