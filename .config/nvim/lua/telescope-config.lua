@@ -53,11 +53,10 @@ require("telescope").setup {
 
 	pickers = {
 		jumplist = {
-			prompt_prefix='⬅️',
+			prompt_prefix='ﴰ',
 			show_line=false,
 			trim_text=true,
-			include_declaration=false,
-			initial_mode = "normal",
+			fname_width = 30,
 		},
 		lsp_references = {
 			prompt_prefix='⬅️',
@@ -92,6 +91,10 @@ require("telescope").setup {
 		git_files = {
 			prompt_prefix=' ',
 			show_untracked = true,
+		},
+		git_bcommits = {
+			prompt_prefix=' ',
+			-- git_command = {"git", "log", "--pretty=format:%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)"},
 		},
 		buffers = {
 			prompt_prefix='﬘ ',
