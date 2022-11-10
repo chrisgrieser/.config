@@ -17,6 +17,6 @@ restore_clipboard_delay: 300
 undo_backspace: false # backspace undos expansion
 
 backend: clipboard
-clipboard_threshold: 20
+clipboard_threshold: 5
 # key_delay: 1
 # inject_delay: 1

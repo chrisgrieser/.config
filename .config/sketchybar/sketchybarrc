@@ -1,8 +1,9 @@
 # vim: filetype=zsh
 #───────────────────────────────────────────────────────────────────────────────
-
 # restart: `brew services restart sketchybar`
 # reload (does only update items, not the look of the bar): `sketchybar --update`
+#───────────────────────────────────────────────────────────────────────────────
+# INFO: After Update, needs to be re-granted screen recording permissions
 #───────────────────────────────────────────────────────────────────────────────
 
 pgrep "Stats" || open -a "Stats" # ensure Stats.app is running
