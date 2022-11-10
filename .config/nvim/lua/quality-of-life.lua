@@ -24,6 +24,7 @@ end
 ---Helper Function performing common file operation tasks
 ---@param operation string rename|duplicate|new
 local function fileOp(operation)
+	local dir = fn.expand("%:p:h")
 	local oldName = fn.expand("%:t")
 	local oldExt = fn.expand("%:e")
 
@@ -43,18 +44,20 @@ local function fileOp(operation)
 		if not (extProvided) then
 			newName = newName .. "." .. oldExt
 		end
+		local filepath = dir .. "/".. newName
+
 		if operation == "duplicate" then
-			cmd("saveas " .. newName)
-			cmd("edit " .. newName)
+			cmd("saveas " .. filepath)
+			cmd("edit " .. filepath)
 			vim.notify(" Duplicated '" .. oldName .. "' as '" .. newName .. "'.")
 		elseif operation == "rename" then
 			os.rename(oldName, newName)
-			cmd("edit " .. newName)
+			cmd("edit " .. filepath)
 			cmd("bdelete #")
 			vim.notify(" Renamed '" .. oldName .. "' to '" .. newName .. "'.")
 		elseif operation == "new" then
-			cmd("edit " .. newName)
-			cmd("write " .. newName)
+			cmd("edit " .. filepath)
+			cmd("write " .. filepath)
 		end
 	end)
 end
