@@ -3,6 +3,7 @@ local M = {}
 --------------------------------------------------------------------------------
 local bo = vim.bo
 local fn = vim.fn
+local setline = vim.fn.setline
 local getline = vim.fn.getline
 local lineNo = vim.fn.line
 local append = vim.fn.append
@@ -209,26 +210,31 @@ end
 ---@param opts? table
 function M.hr(opts)
 	if not (opts) then
-		opts = {linechar = ""}
+		opts = {linechar = "─"}
 	end
+	linechar = opts.linechar:sub(1, 1)
+	local wasOnBlank = getline(".") == ""
 	local indent = fn.indent(".")
 	local textwidth = bo.textwidth
 	local comstr = bo.commentstring
 	local comStrLength = #(comstr:gsub("%%s", ""):gsub(" ", ""))
-	if comstr:find("-") then opts.linechar = "-" end
+	if comstr:find("-") then linechar = "-" end
 
 	local linelength = textwidth - indent - comStrLength
-	local fullLine = string.rep(opts.linechar, linelength)
+	local fullLine = string.rep(linechar, linelength)
 	local hr = comstr:gsub(" ?%%s ?", fullLine)
-
-	-- cannot use simply :sub, since it assumes one-byte-size chars
-	while #hr >= textwidth - indent do
-		hr = hr:gsub(opts.linechar, "", 1)
-	end
 
 	append(".", {hr, ""})
 	cmd [[normal! j==]] -- move down and indent
 
+	-- shorten if it was on blank line, since fn.indent() does not return indent
+	-- line would have if it has content
+	if wasOnBlank then
+		local hrIndent = fn.indent(".")
+		-- cannot use simply :sub, since it assumes one-byte-size chars
+		local hrLine = getline("."):gsub(linechar, "", hrIndent)
+		setline(".", hrLine)
+	end
 end
 
 -- Drop-in replacement for vim's `~` command.

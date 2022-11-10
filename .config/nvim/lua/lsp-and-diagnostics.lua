@@ -213,7 +213,7 @@ lspConfig["sumneko_lua"].setup {
 			hint = {
 				enable = true,
 				setType = true,
-				paramName = "All",
+				-- paramName = "All",
 				paramType = true,
 				arrayIndex = "Disable",
 			},
