@@ -29,7 +29,7 @@ opt.guicursor = "n-sm:block," ..
 --------------------------------------------------------------------------------
 
 ---@param mode string light|dark
-local function themeModifications(mode)
+function themeModifications(mode)
 	if g.colors_name == "tokyonight" then
 		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
 		for _, v in pairs(modes) do
@@ -41,10 +41,9 @@ local function themeModifications(mode)
 		cmd [[highlight VertSplit guifg=#b29b84]]
 	elseif g.colors_name == "melange" and mode == "light" then
 		cmd [[highlight def link @punctuation @label]]
-		local elements = {"Title", "Body", "Icon"}
-		for _, v in pairs(elements) do
-			cmd("highlight def link NotifyINFO" .. v .. " @define")
-		end
+		cmd [[highlight! def link NotifyINFOIcon @define]]
+		cmd [[highlight! def link NotifyINFOTitle @define]]
+		cmd [[highlight! def link NotifyINFOBody @define]]
 	end
 end
 

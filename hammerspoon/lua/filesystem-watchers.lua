@@ -11,6 +11,7 @@ function bookmarkSync()
 		cp "$BROWSER_FOLDER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
 		cp "$BROWSER_FOLDER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
 	]])
+	notify("Bookmarks synced.")
 end
 
 bookmarkWatcher = pw(browserFolder .. "Default/Bookmarks", bookmarkSync)
@@ -50,18 +51,21 @@ fontsWatcher2:start()
 scanFolder = home .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 scanFolderWatcher = pw(scanFolder, function()
 	hs.execute("mv '" .. scanFolder .. "'/* '" .. fileHub .. "'")
+	notify("Scan moved to File Hub.")
 end)
 scanFolderWatcher:start()
 
 systemDownloadFolder = home .. "/Downloads/"
 systemDlFolderWatcher = pw(systemDownloadFolder, function()
 	hs.execute("mv '" .. systemDownloadFolder .. "'/* '" .. fileHub .. "'")
+	notify("Download moved to File Hub.")
 end)
 systemDlFolderWatcher:start()
 
 draftsIcloud = home .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
 draftsIcloudWatcher = pw(draftsIcloud, function()
 	hs.execute("mv '" .. draftsIcloud .. "'/*.md '" .. fileHub .. "'")
+	notify("Drafts doc moved to File Hub.")
 end)
 draftsIcloudWatcher:start()
 
@@ -86,28 +90,34 @@ function fromFileHub(files)
 			-- vimium backup
 		elseif fileName == "vimium-options.json" then
 			hs.execute('mv -f "' .. file .. '" "$HOME/dotfiles/Browser Extension Settings/"')
+			notify("Vimium backup filed away.")
 
 			-- ublocklist backup
 		elseif fileName == "ublacklist-settings.json" then
 			hs.execute('mv -f "' .. file .. '" "$HOME/dotfiles/Browser Extension Settings/"')
+			notify("uBlacklist backup filed away.")
 
 			-- adguard backup
 		elseif fileName:match(".*_adg_ext_settings_.*%.json") then
 			hs.execute('mv -f "' .. file .. '" "$HOME/dotfiles/Browser Extension Settings/adguard-settings.json"')
+			notify("AdGuard backup filed away.")
 
 			-- tampermonkey backup
 		elseif fileName:match("tampermonkey%-backup-.+%.txt") then
 			hs.execute('mv -f "' .. file .. '" "$HOME/dotfiles/Browser Extension Settings/tampermonkey-settings.json"')
+			notify("TamperMonkey backup filed away.")
 
 			-- watch later .urls from the office
 		elseif fileName:sub(-4) == ".url" and isIMacAtHome() then
 			hs.execute('mv -f "' .. file .. '" "$HOME/Downloaded/" ')
+			notify("Watch Later URL moved to Video Downloads.")
 
 			-- visualised keyboard layouts
 		elseif fileName:match("base%-keyboard%-layout%.%w+") or fileName:match("app%-switcher%-layout%.%w+") or
 			fileName:match("vimrc%-remapping%.%w+") or fileName:match("marta%-key%-bindings%.%w+") or
 			fileName:match("hyper%-bindings%-layout%.%w+") or fileName:match("single%-keystroke%-bindings%.%w+") then
 			hs.execute('mv -f "' .. file .. '" "$HOME/dotfiles/visualized keyboard layout/"')
+			notify("Visualized Keyboard Layout filed away.")
 
 		end
 	end
@@ -131,7 +141,7 @@ function installObsiAlpha(files)
 				killall "Obsidian" && sleep 1 && open -a "Obsidian" ]]
 			)
 			-- close the created tab
-			applescript([[
+			applescript [[
 				tell application "Brave Browser"
 					set window_list to every window
 					repeat with the_window in window_list
@@ -144,7 +154,7 @@ function installObsiAlpha(files)
 						end repeat
 					end repeat
 				end tell
-			]])
+			]]
 		end)
 	end
 end

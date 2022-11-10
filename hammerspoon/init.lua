@@ -18,5 +18,9 @@ if isIMacAtHome() or isAtMother() then
 	require("lua.usb-watchers")
 end
 
+anycomplete = hs.loadSpoon("Anycomplete")
+anycomplete.engine = "duckduckgo"
+hotkey({"alt"}, "space", function() anycomplete:anycomplete() end)
+
 holeCover()
 systemStart()
