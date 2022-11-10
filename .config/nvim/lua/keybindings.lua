@@ -32,7 +32,7 @@ end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
 
 -- write all before quitting
-keymap("n", "ZZ", ":wqall<CR>")
+keymap("n", "ZZ", ":wqall!<CR>")
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
