@@ -6,6 +6,7 @@ local fn = vim.fn
 local getline = vim.fn.getline
 local setline = vim.fn.setline
 local lineNo = vim.fn.line
+local colNo = vim.fn.col
 local append = vim.fn.append
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
@@ -44,7 +45,7 @@ local function fileOp(operation)
 		if not (extProvided) then
 			newName = newName .. "." .. oldExt
 		end
-		local filepath = dir .. "/".. newName
+		local filepath = dir .. "/" .. newName
 
 		if operation == "duplicate" then
 			cmd("saveas " .. filepath)
@@ -335,6 +336,16 @@ function M.reverse()
 	vim.notify(" Nothing under the cursor can be switched.", warn)
 end
 
+---select between undoing the last 1h, 4h, or 24h
+function M.undotimes()
+	local duration
+	local selection = {"1h", "4h", "24h"}
+	vim.ui.select(selection, {prompt = "Undo the last…"}, function(choice)
+		cmd("earlier " .. duration)
+		vim.notify("Restored to" .. duration .. "earlier")
+	end)
+end
+
 --------------------------------------------------------------------------------
 
 ---enables overscrolling for that action when close to the last line, depending
@@ -356,8 +367,8 @@ function M.insertModePasteFix(opts)
 	local reg = opts.reg
 
 	local isLinewise = fn.getregtype(reg) == "V" or fn.getreg(reg):find("\n")
-	local endOfLine = fn.col("$") - 2 -- eol before entering insert mode
-	local cursorCol = fn.col(".") -- considers insert mode cursor
+	local endOfLine = colNo("$") - 2 -- eol before entering insert mode
+	local cursorCol = colNo(".") -- considers insert mode cursor
 	local isEndofLine = endOfLine <= cursorCol -- column can be beyond EoL in insert mode
 
 	if isLinewise then
@@ -406,6 +417,7 @@ end
 ---@param opts? table
 function M.quicklog(opts)
 	if not (opts) then opts = {addLineNumber = false} end
+
 	local varname = wordUnderCursor()
 	local logStatement
 	local ft = bo.filetype
@@ -462,6 +474,16 @@ function M.moveLineUp()
 	cmd [[normal! ==]]
 end
 
+function M.moveCharRight()
+	if colNo(".") >= colNo("$") - 2 then return end
+	cmd [[:normal! xp]]
+end
+
+function M.moveCharLeft()
+	if colNo(".") == 1 then return end
+	cmd [[:normal! xhP]]
+end
+
 function M.moveSelectionDown()
 	leaveVisualMode()
 	cmd [['<,'> move '>+1]]
@@ -480,14 +502,6 @@ end
 
 function M.moveSelectionLeft()
 	cmd [[normal! xhPgvhoho]]
-end
-
-function M.moveCharRight()
-	cmd [[:normal! xp]]
-end
-
-function M.moveCharLeft()
-	cmd [[:normal! xhP]]
 end
 
 --------------------------------------------------------------------------------
