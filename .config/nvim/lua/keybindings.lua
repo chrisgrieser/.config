@@ -336,6 +336,9 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
+keymap("x", "<C-e>", "A")
+keymap("x", "<C-a>", "I")
+
 keymap("x", "p", "P") -- do not override register when pasting
 keymap("x", "P", "p") -- override register when pasting
 

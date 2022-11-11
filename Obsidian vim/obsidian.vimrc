@@ -39,6 +39,8 @@ nmap k gk
 " consistent with insert mode / emacs bindings
 nmap <C-e> A
 nmap <C-a> I
+vmap <C-e> A
+vmap <C-a> I
 
 " HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
 map H g0
