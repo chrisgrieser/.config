@@ -2,7 +2,7 @@ require("utils")
 --------------------------------------------------------------------------------
 
 -- timeout for awaiting keystrokes
-opt.timeoutlen = 2000 -- because I'm slow lol
+opt.timeoutlen = 2000 -- yes, I'm slow lol
 
 -- Search
 opt.showmatch = true
@@ -48,10 +48,10 @@ opt.titlestring = "%{expand(\"%:p\")} [%{mode()}]"
 -- Editor
 opt.cursorline = true
 opt.scrolloff = 12
-opt.sidescrolloff = 24
-opt.textwidth = 80 -- used by `gq` wrap, etc.
+opt.sidescrolloff = 17
+opt.textwidth = 80 -- used by `gq` 
 opt.wrap = false
-opt.colorcolumn = "+1" -- relative to textwidth
+opt.colorcolumn = {"+1", "+16"} -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
@@ -90,7 +90,7 @@ opt.iskeyword:append("-")
 -- FILES & SAVING
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
-opt.confirm = true -- unsaved bufers trigger confirmation prompt instead of failing
+opt.confirm = true -- unsaved buffers trigger confirmation prompt instead of failing
 opt.updatetime = 50 -- affects current symbol highlight from treesitter-refactor and currentline hints
 opt.autochdir = true -- always current directory
 
@@ -118,7 +118,7 @@ autocmd("BufWritePre", {
 
 -- status bar & cmdline
 opt.showcmd = true -- keychords pressed
-opt.showmode = false -- don't show "-- Insert --"
+opt.showmode = false -- don't show "-- Insert --", since lualine does it already
 opt.shortmess:append("S") -- do not show search count, since lualine does it already
 opt.cmdheight = 0 -- effectively also redundant with all of the above
 opt.laststatus = 3 -- = global status line
@@ -167,11 +167,13 @@ local ftWithSkeletons = split(filetypeList, "\n")
 for _, ft in ipairs(ftWithSkeletons) do
 	if ft == "" then break end
 	local readCmd = "0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! G"
+
 	autocmd("BufNewFile", {
 		group = "Templates",
 		pattern = "*." .. ft,
 		command = readCmd,
 	})
+
 	-- BufReadPost + empty file as additional condition to also auto-insert
 	-- skeletons when empty files were created by other apps
 	autocmd("BufReadPost", {
