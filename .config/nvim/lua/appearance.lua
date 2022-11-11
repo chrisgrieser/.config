@@ -82,8 +82,7 @@ print = function(...)
 end
 
 --------------------------------------------------------------------------------
-
--- Dressing
+-- DRESSING
 require("dressing").setup {
 	input = {
 		border = borderStyle,
@@ -97,6 +96,10 @@ require("dressing").setup {
 			border = borderStyle,
 			relative = "cursor",
 			winblend = 4,
+			max_width = 80,
+			min_width = 15,
+			max_height = 12,
+			min_height = 4,
 		},
 		telescope = {
 			initial_mode = "normal",

@@ -58,7 +58,7 @@ keymap("n", "<C-o>", telescope.jumplist)
 
 -- Hunks
 keymap("n", "gh", ":Gitsigns next_hunk<CR>")
-keymap("n", "gH", ":Gitsigns next_prev<CR>")
+keymap("n", "gH", ":Gitsigns prev_hunk<CR>")
 
 -- Hop
 keymap("n", "ö", ":HopWordAC<CR>")
@@ -296,7 +296,7 @@ keymap("x", "R", qol.duplicateSelection)
 
 -- Undo
 keymap({"n", "x"}, "U", "<C-r>") -- redo
-keymap("n", "<C-u>", qol.undotimes)
+keymap("n", "<C-u>", qol.undoDuration)
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
 -- Logging
