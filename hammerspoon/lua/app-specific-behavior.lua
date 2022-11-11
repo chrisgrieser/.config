@@ -339,14 +339,15 @@ highlightsAppWatcher:start()
 
 --------------------------------------------------------------------------------
 
--- DRAFTS: Hide Toolbar
+-- DRAFTS: Hide Toolbar & set proper workspace
 local function draftsLaunchWake(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
+
 	local workspace = "Home"
 	if isAtOffice() then workspace = "Office" end
 
 	if (eventType == aw.launched) then
-		runDelayed(0.15, function()
+		runDelayed(0.25, function()
 			appObject:selectMenuItem {"View", "Hide Toolbar"}
 			appObject:selectMenuItem {"Workspaces", workspace}
 		end)
