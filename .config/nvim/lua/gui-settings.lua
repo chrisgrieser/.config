@@ -139,7 +139,7 @@ end)
 
 g.neovide_cursor_animation_length = 0.01
 g.neovide_cursor_trail_size = 0.9
-g.neovide_scroll_animation_length = 0.8
+g.neovide_scroll_animation_length = 2
 g.neovide_floating_blur_amount_x = 5.0
 g.neovide_floating_blur_amount_y = 5.0
 g.neovide_cursor_unfocused_outline_width = 0.1

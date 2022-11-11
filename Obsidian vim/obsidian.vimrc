@@ -138,14 +138,14 @@ exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 nmap M :mergeLines
 vmap M :mergeLines
 
-" split line at cursor
-nmap | a<CR><Esc>k$
+" split line at cursor (does not work in Obsdian, TODO emulate with js?)
+" nmap | a<CR><Esc>k$
 
 " WHITSPACE CONTROL
 " Add Blank Line above/below
 nmap = mzO<Esc>`z
 nmap _ mzo<Esc>`z
-" in visual mode requires cursor being on the right end of the selection though…
+" Caveat: in visual mode requires cursor being on the right end of the selection
 vmap = <Esc>O<Esc>gv
 vmap _ <Esc>o<Esc>gv
 
