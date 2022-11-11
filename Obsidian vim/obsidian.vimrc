@@ -310,7 +310,7 @@ nmap zR :unfoldall
 """"""""""""""""""""""""""""
 " < Sneak / Hop / Lightspeed
 """"""""""""""""""""""""""""
-" emulate various vim navigation plugins
+" emulate various vim motion plugins
 
 " Sneak
 " exmap sneakForward jsfile Meta/obsidian-vim-helpers.js {moveToChars(true)}
@@ -334,7 +334,10 @@ nmap ,f :linkjump
 " < Substitute
 """"""""""""""""""""""
 " emulate substitute.vim
-nmap s Vp
+unmap s
+nmap sas vasp
+nmap siw viwp
+nmap ss Vp
 nmap S vg$p
 
 """"""""""""""""""""""

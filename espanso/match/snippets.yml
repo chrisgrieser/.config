@@ -24,6 +24,8 @@ matches:
     replace: "https://dontasktoask.com/"
   - trigger: "!nohello"
     replace: "https://nohello.net/en/"
+  - trigger: "!xy"
+    replace: "https://xyproblem.info/"
 
   - trigger: '!bug'
     replace: >-
