@@ -4,6 +4,7 @@ require("utils")
 -- https://github.com/williamboman/mason-lspconfig.nvim#setup
 --------------------------------------------------------------------------------
 
+-- INFO: new servers also need to be set up further below
 local lsp_servers = {
 	"sumneko_lua",
 	"yamlls",
@@ -11,7 +12,6 @@ local lsp_servers = {
 	"marksman", -- markdown
 	"jsonls",
 	"cssls",
-	-- REQUIRED: new servers also need to be set up further below
 }
 
 --------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ require("lsp-inlayhints").setup {
 		},
 		type_hints = {
 			show = true,
-			prefix = " ",
+			prefix = " ", -- 
 			remove_colon_start = true,
 			remove_colon_end = true,
 		},
@@ -167,7 +167,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 require("neodev").setup {
 	library = {
 		enabled = true,
-		plugins = false,
+		plugins = true,
 	}
 }
 
@@ -186,7 +186,8 @@ lspConfig["sumneko_lua"].setup {
 					-- https://github.com/sumneko/lua-language-server/wiki/Formatter
 					quote_style = "double",
 					call_arg_parentheses = "remove_table_only",
-					keep_one_space_between_table_and_bracket = "false", -- yes, all these must be strings
+					-- yes, all these must be strings
+					keep_one_space_between_table_and_bracket = "false",
 					keep_one_space_between_namedef_and_attribute = "false",
 					continuous_assign_table_field_align_to_equal_sign = "false",
 					continuation_indent_size = tostring(opt.tabstop:get()),
@@ -206,14 +207,12 @@ lspConfig["sumneko_lua"].setup {
 				},
 			},
 			workspace = {
-				library = {
-					home .. ".hammerspoon/Spoons/EmmyLua.spoon/annotations",
-				},
+				library = {home .. ".hammerspoon/Spoons/EmmyLua.spoon/annotations"}
 			},
 			hint = {
 				enable = true,
 				setType = true,
-				-- paramName = "All",
+				paramName = "All",
 				paramType = true,
 				arrayIndex = "Disable",
 			},
