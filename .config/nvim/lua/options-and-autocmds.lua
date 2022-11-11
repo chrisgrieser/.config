@@ -1,5 +1,4 @@
 require("utils")
--- Default vim settings: https://neovim.io/doc/user/vim_diff.html
 --------------------------------------------------------------------------------
 
 -- timeout for awaiting keystrokes
@@ -106,9 +105,10 @@ augroup("Mini-Lint", {}) -- trim trailing whitespaces & extra blanks at eof on s
 autocmd("BufWritePre", {
 	group = "Mini-Lint",
 	callback = function()
-		if bo.filetype == "markdown" then return end -- to preserve spaces from the two-space-rule, and trailing spaces on sentences
 		local save_view = fn.winsaveview() -- save cursor positon
-		cmd [[%s/\s\+$//e]]
+		if bo.filetype ~= "markdown" then -- to preserve spaces from the two-space-rule, and trailing spaces on sentences
+			cmd [[%s/\s\+$//e]]
+		end
 		cmd [[silent! %s#\($\n\s*\)\+\%$##]] -- https://stackoverflow.com/a/7496112
 		fn.winrestview(save_view)
 	end
@@ -123,12 +123,6 @@ opt.shortmess:append("S") -- do not show search count, since lualine does it alr
 opt.cmdheight = 0 -- effectively also redundant with all of the above
 opt.laststatus = 3 -- = global status line
 opt.history = 250 -- do not save too much history to reduce noise for command line history search
-
-augroup("clearCmdline", {})
-autocmd("BufEnter", {
-	group = "clearCmdline",
-	command = "echo", -- clear cmdline on entering buffer
-})
 
 --------------------------------------------------------------------------------
 
@@ -186,9 +180,7 @@ for _, ft in ipairs(ftWithSkeletons) do
 		callback = function()
 			local curFile = fn.expand("%")
 			local fileIsEmpty = fn.getfsize(curFile) < 2 -- 2 to account for linebreak
-			if fileIsEmpty then
-				cmd(readCmd)
-			end
+			if fileIsEmpty then cmd(readCmd) end
 		end
 	})
 end
