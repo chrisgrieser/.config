@@ -337,12 +337,12 @@ function M.reverse()
 end
 
 ---select between undoing the last 1h, 4h, or 24h
-function M.undotimes()
-	local duration
+function M.undoDuration()
 	local selection = {"1h", "4h", "24h"}
 	vim.ui.select(selection, {prompt = "Undo the last…"}, function(choice)
-		cmd("earlier " .. duration)
-		vim.notify("Restored to" .. duration .. "earlier")
+		if not(choice) then return end
+		cmd("earlier " .. choice)
+		vim.notify("Restored to " .. choice .. " earlier")
 	end)
 end
 
