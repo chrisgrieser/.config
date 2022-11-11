@@ -65,8 +65,9 @@ local kind_icons = {
 }
 
 cmp.setup {
-	snippet = {-- REQUIRED a snippet engine must be specified and installed
-		expand = function(args) require("luasnip").lsp_expand(args.body) end,
+	snippet = {
+		-- REQUIRED a snippet engine must be specified and installed
+		expand = function(args) require("luasnip").lsp_expand(args.body) end, 
 	},
 	window = {
 		completion = cmp.config.window.bordered(),
@@ -188,7 +189,9 @@ require("cmp_git").setup {
 --------------------------------------------------------------------------------
 -- AUTOPAIRS
 require("nvim-autopairs").setup {}
-local cmp_autopairs = require("nvim-autopairs.completion.cmp") -- add brackets to cmp
+
+-- add brackets to cmp
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 --------------------------------------------------------------------------------
@@ -196,20 +199,17 @@ cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 require("cmp_tabnine.config").setup {
 	max_lines = 1000, -- buffer lines to consider
 	max_num_results = 10,
-	sort = true,
-	run_on_every_keystroke = true,
-	snippet_placeholder = "..",
-	ignored_file_types = {
-		-- uncomment to ignore in lua: default is not to ignore
-		-- lua = true
-	},
+	run_on_every_keystroke = true, -- https://github.com/tzachar/cmp-tabnine/issues/18#issuecomment-974766219
+	snippet_placeholder = "",
 	show_prediction_strength = true,
+	ignored_file_types = {
+		json = true,
+	},
 }
 
 -- automatically prefetch completions for the buffer
-augroup("prefetch", {})
+augroup("prefetchTabNine", {})
 autocmd("BufRead", {
-	group = "prefetch",
-	pattern = "*",
+	group = "prefetchTabNine",
 	callback = function() require("cmp_tabnine"):prefetch(fn.expand("%:p")) end
 })
