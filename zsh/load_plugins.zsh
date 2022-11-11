@@ -19,9 +19,14 @@ source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # has to be loaded *after* zsh syntax highlighting
 source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
-# StarShip
+# Starship
 eval "$(starship init zsh)"
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
+if [[ "$TERM" == "alacritty" ]] ; then
+	export STARSHIP_CONFIG=~/.config/starship/starship-alacritty.toml
+else
+	export STARSHIP_CONFIG=~/.config/starship/starship-warp.toml
+	cd "$WD" || return
+fi
 
 source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
 source "$DOTFILE_FOLDER/zsh/plugins/obsidian-vault-navigation.sh"

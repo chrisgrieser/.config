@@ -215,7 +215,7 @@ function M.hr(opts)
 	if not (opts) then
 		opts = {linechar = "─"}
 	end
-	local linechar = opts.linechar:sub(1, 1)
+	local linechar = opts.linechar
 	local wasOnBlank = getline(".") == ""
 	local indent = fn.indent(".")
 	local textwidth = bo.textwidth

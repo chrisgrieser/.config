@@ -46,6 +46,7 @@ rules:
               - "[Nn]eovide"
               - Finder\.app$
               - ^/Applications/Twitterrific\.app
+              - Warp\.app
   - description: '🔘 ⌘+D → Delete (Visual) Line'
     manipulators:
       - type: basic
@@ -69,6 +70,7 @@ rules:
               - ^/Applications/Drafts\.app
               - ^/Applications/Alfred \d\.app
               - "[Nn]eovide"
+              - Warp\.app
   - description: "🔘 § → | (+ US Layout)"
     manipulators:
       - type: basic

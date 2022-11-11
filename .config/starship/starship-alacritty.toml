@@ -1,11 +1,6 @@
 # https://starship.rs/config/ ----> https://github.com/toml-lang/toml
 # Ansi colors: https://i.stack.imgur.com/KTSQa.png
-# nerd font icons https://www.nerdfonts.com/cheat-sheet
-
-# --------------------------------------------------
-# Terminus does not properly support bold, therefore
-# separate config file for it
-# --------------------------------------------------
+# ------------------------------------------------------------------------------
 
 add_newline = false
 continuation_prompt = "❯"
@@ -34,7 +29,7 @@ truncation_symbol = "/"
 truncate_to_repo = true
 read_only = "ﮖ  "
 read_only_style = "red bg:black"
-style = "fg:bright-blue bg:black bold" # terminus different
+style = "fg:bright-blue bg:black bold"
 format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
@@ -49,7 +44,7 @@ when = "true"
 symbol = " "
 description = "Number of files (and folders) in the current working directory"
 format = '[$symbol$output]($style) '
-style = "fg:yellow bg:black bold" # terminus different
+style = "fg:yellow bg:black bold" 
 
 [status]
 format = " [$symbol$status]($style)"
@@ -73,7 +68,7 @@ format = "[$hash]($style) "
 [git_branch]
 only_attached = true
 symbol = ""
-style = "fg:purple bg:black bold" # terminus different
+style = "fg:purple bg:black bold" 
 format = "[$symbol$branch]($style) "
 
 # files
@@ -88,7 +83,7 @@ conflicted = '[⤱$count ](fg:red bg:black)'
 diverged = '[⇈$count ](fg:cyan bg:black)'
 ahead = '[⇡$count ](fg:cyan bg:black)'
 behind = '[⇣$count ](fg:yellow bg:black)'
-style = 'fg:purple bg:black bold' # terminus different
+style = 'fg:purple bg:black bold' 
 format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted]($style)'
 
 # lines
