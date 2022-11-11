@@ -6,6 +6,7 @@ local luasnip = require("luasnip")
 defaultSources = {
 	{name = "luasnip"},
 	{name = "nvim_lsp"},
+	{name = "cmp_tabnine", keyword_length = 3},
 	{name = "emoji", keyword_length = 2},
 	{name = "buffer", keyword_length = 2},
 }
@@ -13,18 +14,21 @@ defaultSources = {
 local defaultWithoutBuffer = {
 	{name = "luasnip"},
 	{name = "nvim_lsp"},
+	{name = "cmp_tabnine", keyword_length = 3},
 	{name = "emoji", keyword_length = 2},
 }
 
 local defaultWithoutEmoji = {
 	{name = "luasnip"},
 	{name = "nvim_lsp"},
+	{name = "cmp_tabnine", keyword_length = 3},
 	{name = "buffer", keyword_length = 2},
 }
 
 local defaultAndNerdfont = {
 	{name = "luasnip"},
 	{name = "nvim_lsp"},
+	{name = "cmp_tabnine", keyword_length = 3},
 	{name = "nerdfont", keyword_length = 2},
 	{name = "emoji", keyword_length = 2},
 	{name = "buffer", keyword_length = 2},
@@ -104,6 +108,7 @@ cmp.setup {
 				buffer = "[B]",
 				git = "[GIT]",
 				nvim_lsp = "[LSP]",
+				cmp_tabnine = "[T9]",
 				luasnip = "[S]",
 				emoji = "[E]",
 				nerdfont = "[NF]",
@@ -167,7 +172,7 @@ cmp.setup.cmdline(":", {
 
 require("cmp_git").setup {
 	filetypes = commonFiletypes,
-	git = { commits = { limit = 0 } }, -- 0 = disable completing commits
+	git = {commits = {limit = 0}}, -- 0 = disable completing commits
 	github = {
 		issues = {
 			limit = 100,
@@ -179,9 +184,32 @@ require("cmp_git").setup {
 		},
 	}
 }
---------------------------------------------------------------------------------
 
--- autopairs
+--------------------------------------------------------------------------------
+-- AUTOPAIRS
 require("nvim-autopairs").setup {}
 local cmp_autopairs = require("nvim-autopairs.completion.cmp") -- add brackets to cmp
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+--------------------------------------------------------------------------------
+-- TABNINE
+require("cmp_tabnine.config").setup {
+	max_lines = 1000, -- buffer lines to consider
+	max_num_results = 10,
+	sort = true,
+	run_on_every_keystroke = true,
+	snippet_placeholder = "..",
+	ignored_file_types = {
+		-- uncomment to ignore in lua: default is not to ignore
+		-- lua = true
+	},
+	show_prediction_strength = true,
+}
+
+-- automatically prefetch completions for the buffer
+augroup("prefetch", {})
+autocmd("BufRead", {
+	group = "prefetch",
+	pattern = "*",
+	callback = function() require("cmp_tabnine"):prefetch(fn.expand("%:p")) end
+})
