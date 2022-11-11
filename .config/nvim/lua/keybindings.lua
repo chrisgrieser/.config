@@ -296,7 +296,7 @@ keymap("x", "R", qol.duplicateSelection)
 
 -- Undo
 keymap({"n", "x"}, "U", "<C-r>") -- redo
-keymap("n", "<C-u>", "U") -- undo line, needs remapping since shadowed
+keymap("n", "<C-u>", qol.undotimes)
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
 -- Logging
