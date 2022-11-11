@@ -77,13 +77,14 @@ keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
 -- Marks
 keymap("", "ä", "`") -- Goto Mark
 
---------------------------------------------------------------------------------
 
 -- CLIPBOARD
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("n", "gp", qol.pasteDifferently) -- paste charwise reg as linewise & vice versa
+--------------------------------------------------------------------------------
+-- TEXTOBJECTS
 
 keymap("n", "C", '"_C')
 keymap("n", "<Space>", '"_ciw') -- change word
@@ -109,8 +110,23 @@ keymap({"o", "x"}, "ic", "i}") -- [c]urly brackets
 keymap({"o", "x"}, "ac", "a}")
 keymap({"o", "x"}, "in", "gn") -- [n]ext search hit
 keymap({"o", "x"}, "an", "gn")
-keymap({"o", "x"}, "r", "}") -- [r]est of the paragraph
-keymap({"o", "x"}, "R", "{")
+keymap("o", "r", "}") -- [r]est of the paragraph
+keymap("o", "R", "{")
+
+require("nvim-surround").setup {
+	move_cursor = false,
+	keymaps = {
+		insert = "<C-g>s",
+		visual = "s",
+	},
+	aliases = {-- aliases should match the bindings further above
+		["b"] = ")",
+		["c"] = "}",
+		["r"] = "]",
+		["q"] = '"',
+		["z"] = "'",
+	},
+}
 
 -- special plugin text objects
 keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {silent = true})
@@ -133,21 +149,6 @@ autocmd("BufEnter", {
 -- aC -> a condition
 -- q -> comment
 -- aa -> an argument
-
-require("nvim-surround").setup {
-	move_cursor = false,
-	keymaps = {
-		insert = "<C-g>s",
-		visual = "s",
-	},
-	aliases = {-- aliases should match the bindings further above
-		["b"] = ")",
-		["c"] = "}",
-		["r"] = "]",
-		["q"] = '"',
-		["z"] = "'",
-	},
-}
 
 --------------------------------------------------------------------------------
 
@@ -301,6 +302,7 @@ keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
 -- Logging
 keymap("n", "<leader>ll", qol.quicklog)
+keymap("n", "<leader>lr", qol.removeLog)
 
 --------------------------------------------------------------------------------
 
@@ -317,9 +319,9 @@ keymap("x", "<Left>", qol.moveSelectionLeft)
 -- Merging / Splitting Lines
 keymap({"n", "x"}, "M", "J") -- [M]erge line up
 keymap({"n", "x"}, "gm", "ddpkJ") -- [m]erge line down
+
 g.splitjoin_split_mapping = "" -- disable default mappings
 g.splitjoin_join_mapping = ""
-
 keymap("n", "<leader>s", ":SplitjoinSplit<CR><CR>") -- 2nd <CR> needed for cmdheight=0
 keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 
@@ -374,10 +376,9 @@ keymap("", "<C-n>", qol.copyFilename)
 keymap("n", "<leader>x", qol.chmodx)
 keymap("", "<C-r>", qol.renameFile)
 keymap("", "<C-d>", qol.duplicateFile)
-keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR> ") -- refactor selection into new file
+keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR>") -- refactor selection into new file
 
 -- Git Operations
--- keymap("", "<C-g>", telescope.git_bcommits)
 keymap("n", "<C-g>", ":DiffviewFileHistory %<CR>")
 keymap("x", "<C-g>", ":DiffviewFileHistory<CR>")
 
