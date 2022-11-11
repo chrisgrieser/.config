@@ -67,6 +67,10 @@ ln -sf "$DOTFILE_FOLDER/linter rcfiles/.flake8" ~
 [[ -e ~/.hammerspoon ]] && rm -rf ~/.hammerspoon
 ln -sf "$DOTFILE_FOLDER/hammerspoon" ~/.hammerspoon
 
+# Warp
+[[ -e ~/.warp ]] && rm -rf ~/.warp
+ln -sf "$DOTFILE_FOLDER/warp" ~/.warp
+
 # Marta
 # Marta as default folder opener set in Duti Script
 ln -sf /Applications/Marta.app/Contents/Resources/launcher /opt/homebrew/bin/marta

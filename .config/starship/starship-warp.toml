@@ -1,22 +1,14 @@
 # https://starship.rs/config/ ----> https://github.com/toml-lang/toml
 # Ansi colors: https://i.stack.imgur.com/KTSQa.png
-# nerd font icons https://www.nerdfonts.com/cheat-sheet
-
-# --------------------------------------------------
-# Terminus does not properly support bold, therefore
-# separate config file for it
-# --------------------------------------------------
+# ------------------------------------------------------------------------------
 
 add_newline = false
 continuation_prompt = "❯"
-format = "[$directory${custom.folder_number}$git_branch$git_status$git_metrics$git_commit$git_state$sudo](bg:black)[](black)$cmd_duration$status$character"
-right_format="$package${custom.alfred}$nodejs$python$jobs$memory_usage"
+format = "[$directory${custom.folder_number}$git_branch$git_status$git_metrics$git_commit$git_state$sudo](bg:black)$cmd_duration$status$character"
 
-# ⏼⏻⟐ﰉﰊ★ﮊגּﮏ﫜ﲮﲭﱬﳄﯖﴣﯟﯢﳝﯶﯾ卵擄勞ﮧ閭ﴯﰪﭾ璉ﲅ晴ﲊ羽⚡
 [character]
-success_symbol = " [](bold green)"
-error_symbol = " [](bold red)"
-# vimcmd_symbol = " [Normal](bold blue)" # doesn't work as long as cursor styling snippet is active
+success_symbol = ""
+error_symbol = ""
 
 [sudo]
 style = 'fg:green bg:black'
@@ -34,7 +26,7 @@ truncation_symbol = "/"
 truncate_to_repo = true
 read_only = "ﮖ  "
 read_only_style = "red bg:black"
-style = "fg:bright-blue bg:black bold" # terminus different
+style = "fg:bright-blue bg:black bold"
 format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
@@ -49,7 +41,7 @@ when = "true"
 symbol = " "
 description = "Number of files (and folders) in the current working directory"
 format = '[$symbol$output]($style) '
-style = "fg:yellow bg:black bold" # terminus different
+style = "fg:yellow bg:black bold"
 
 [status]
 format = " [$symbol$status]($style)"
@@ -73,7 +65,7 @@ format = "[$hash]($style) "
 [git_branch]
 only_attached = true
 symbol = ""
-style = "fg:purple bg:black bold" # terminus different
+style = "fg:purple bg:black bold"
 format = "[$symbol$branch]($style) "
 
 # files
@@ -88,7 +80,7 @@ conflicted = '[⤱$count ](fg:red bg:black)'
 diverged = '[⇈$count ](fg:cyan bg:black)'
 ahead = '[⇡$count ](fg:cyan bg:black)'
 behind = '[⇣$count ](fg:yellow bg:black)'
-style = 'fg:purple bg:black bold' # terminus different
+style = 'fg:purple bg:black bold'
 format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted]($style)'
 
 # lines
@@ -98,48 +90,3 @@ disabled = false
 added_style = "fg:green bg:black"
 deleted_style = "fg:red bg:black"
 format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\) )'
-
-# -------------
-# right side
-# -------------
-[jobs]
-symbol = ""
-format = "[ +$number $symbol ]($style)"
-style = "fg:white"
-symbol_threshold = 1
-number_threshold = 2
-
-[memory_usage]
-disabled = false
-symbol = " "
-threshold = 75
-format = " [$symbol$ram_pct]($style)"
-
-[package]
-format = "[$symbol$version]($style)"
-version_format = "$raw"
-symbol = " "
-style = "dimmed 208"
-
-[custom.alfred]
-files = ["info.plist"]
-command = "plutil -extract version xml1 -o - info.plist | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
-symbol = " "
-os = "macos"
-description = "Version number of Alfred Workflow"
-style = "dimmed 208"
-format = '[](purple) [$symbol$output]($style)'
-
-[nodejs]
-format = " [$symbol$version]($style)"
-version_format = "$major"
-style = "dimmed cyan"
-detect_extensions = ["ts"] # dont trigger for JXA
-
-[python]
-format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
-version_format = "$major.$minor"
-style = "dimmed yellow"
-python_binary = ["python3"]
-symbol = " "
-
