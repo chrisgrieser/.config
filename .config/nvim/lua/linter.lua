@@ -1,15 +1,15 @@
 require("utils")
 --------------------------------------------------------------------------------
 
+-- INFO: linters also need to be added as source below
 local lintersAndFormatters = {
 	"eslint_d",
 	"markdownlint",
 	"shellcheck",
 	"yamllint",
 	"proselint",
-	-- stylelint not available?
+	-- stylelint not available :(
 }
--- INFO: linters also need to be added as source below
 
 --------------------------------------------------------------------------------
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
