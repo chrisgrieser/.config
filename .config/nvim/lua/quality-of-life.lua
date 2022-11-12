@@ -435,7 +435,7 @@ function M.quicklog(opts)
 	if ft == "lua" then
 		logStatement = 'print("' .. lnStr .. varname .. ': ", ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = 'console.log("' .. lnStr .. varname .. ': " + ' .. varname .. ")"
+		logStatement = 'console.log("' .. lnStr .. varname .. ': " + ' .. varname .. ");"
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" then
 		logStatement = 'echo "' .. lnStr .. varname .. ": $" .. varname .. '"'
 	elseif ft == "applescript" then
