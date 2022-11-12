@@ -461,7 +461,8 @@ function M.removeLog()
 	else
 		vim.notify(" Quicklog does not support " .. ft .. " yet.")
 	end
-	cmd([[g/^\s\*]] .. logCommand .. [[/d]])
+	cmd([[g/^\s*]] .. logCommand .. [[/d]])
+	cmd("nohl")
 end
 
 --------------------------------------------------------------------------------
