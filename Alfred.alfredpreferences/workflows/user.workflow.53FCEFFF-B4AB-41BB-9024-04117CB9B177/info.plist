@@ -22,26 +22,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>64D310B5-3CCA-4CC5-B216-B8D58A59C070</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>F1000F74-5759-4CCD-9340-87037FA12234</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>177877D7-B9C6-4769-B88B-D310CE841A9C</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
@@ -66,7 +46,7 @@
 			<key>config</key>
 			<dict>
 				<key>autopaste</key>
-				<false/>
+				<true/>
 				<key>clipboardtext</key>
 				<string></string>
 				<key>ignoredynamicplaceholders</key>
@@ -80,27 +60,6 @@
 			<string>BD993DCC-6A60-4320-903E-EF147BC55589</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>Copied "{query}" to clipboard</string>
-				<key>title</key>
-				<string>dict.cc</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>64D310B5-3CCA-4CC5-B216-B8D58A59C070</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -163,31 +122,14 @@ fi</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string></string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>F1000F74-5759-4CCD-9340-87037FA12234</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -209,39 +151,27 @@ https://www.buymeacoffee.com/dennistra</string>
 		<key>177877D7-B9C6-4769-B88B-D310CE841A9C</key>
 		<dict>
 			<key>xpos</key>
-			<integer>510</integer>
+			<real>510</real>
 			<key>ypos</key>
-			<integer>540</integer>
+			<real>415</real>
 		</dict>
 		<key>230B7E17-DE58-409D-821F-A8F7228E7B6D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>240</integer>
+			<real>240</real>
 			<key>ypos</key>
-			<integer>360</integer>
-		</dict>
-		<key>64D310B5-3CCA-4CC5-B216-B8D58A59C070</key>
-		<dict>
-			<key>xpos</key>
-			<integer>510</integer>
-			<key>ypos</key>
-			<integer>300</integer>
+			<real>360</real>
 		</dict>
 		<key>BD993DCC-6A60-4320-903E-EF147BC55589</key>
 		<dict>
 			<key>xpos</key>
-			<integer>510</integer>
+			<real>515</real>
 			<key>ypos</key>
-			<integer>180</integer>
-		</dict>
-		<key>F1000F74-5759-4CCD-9340-87037FA12234</key>
-		<dict>
-			<key>xpos</key>
-			<integer>510</integer>
-			<key>ypos</key>
-			<integer>420</integer>
+			<real>310</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>variables</key>
 	<dict>
 		<key>from_language</key>

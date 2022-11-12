@@ -314,22 +314,16 @@ wf_zoom = wf.new("zoom.us")
 -- HIGHLIGHTS
 -- - Sync Dark & Light Mode
 -- - Start with Highlight as Selection
-local function highlightsWatcher(appName, eventType)
+local function highlightsWatcher(appName, eventType, appObject)
 	if not (eventType == aw.launched and appName == "Highlights") then return end
-	applescript [[
-		tell application "System Events"
-			tell appearance preferences to set isDark to dark mode
-			if (isDark is true) then set targetView to "Night"
-			else set targetView to "Default"
-			delay 0.4
-			tell process "Highlights"
-				set frontmost to true
-				click menu item targetView of menu of menu item "PDF Appearance" of menu "View" of menu bar 1
-				click menu item "Highlight" of menu "Tools" of menu bar 1
-				click menu item "Yellow" of menu of menu item "Color" of menu "Tools" of menu bar 1
-			end tell
-		end tell
-	]]
+
+	local targetView = "Default"
+	if isDarkMode() then targetView = "Night" end
+	appObject:selectMenuItem {"View", "PDF Appearance", targetView}
+
+	appObject:selectMenuItem {"Tools", "Highlight"}
+	appObject:selectMenuItem {"Tools", "Color", "Yellow"}
+
 	if isAtOffice() then moveResizeCurWin("maximized")
 	else moveResizeCurWin("pseudo-maximized") end
 end

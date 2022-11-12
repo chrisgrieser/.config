@@ -3,7 +3,7 @@ require("lua.twitterrific-controls")
 
 --------------------------------------------------------------------------------
 -- WINDOW MANAGEMENT UTILS
-iMacDisplay = hs.screen("Built%-in") 
+iMacDisplay = hs.screen("Built%-in")
 maximized = hs.layout.maximized
 
 -- device-specific parameters
@@ -79,7 +79,7 @@ function toggleHighlightsSidebar(highlightsWin)
 		local screen_w = highlightsWin:screen():frame().w
 		local highlightsApp = hs.application("Highlights")
 		highlightsApp:activate()
-		if (highlights_w / screen_w < 0.6) then
+		if (highlights_w / screen_w > 0.6) then
 			highlightsApp:selectMenuItem {"View", "Show Sidebar"}
 		else
 			highlightsApp:selectMenuItem {"View", "Hide Sidebar"}
@@ -93,6 +93,7 @@ function toggleObsidianSidebar(obsiWin)
 	local function toggle()
 		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
 		if (numberOfObsiWindows > 1) then return end -- prevent popout window resizing to affect sidebars
+
 		local obsi_width = obsiWin:frame().w
 		local screen_width = obsiWin:screen():frame().w
 
