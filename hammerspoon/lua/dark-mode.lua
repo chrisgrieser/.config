@@ -2,13 +2,24 @@ require("lua.utils")
 --------------------------------------------------------------------------------
 
 function toggleDarkMode()
-	local targetMode = "dark"
-	if isDarkMode() then targetMode = "light" end
 	local prevApp = frontApp()
+	local targetMode
+	local highlightsView
+	if isDarkMode() then
+		targetMode = "light"
+		highlightsView = "Default"
+	else
+		targetMode = "dark"
+		highlightsView = "Night"
+	end
 
+	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar") -- restart instead of reload to load colors
 	hs.execute("zsh ./helpers/toggle-marta-darkmode.sh " .. targetMode)
+	if appIsRunning("Highlights") then
+		app("Highlights"):selectMenuItem {"View", "PDF Appearance", highlightsView}
+	end
 
-	applescript([[
+	applescript[[
 		set openBlank to false
 		tell application "Brave Browser"
 			if ((count of window) is 0) then
@@ -31,29 +42,10 @@ function toggleDarkMode()
 			delay 0.2
 			tell application "Brave Browser" to close active tab of front window
 		end if
-
-		# Make Highlights.app get the same mode as the OS mode (if running)
-		tell application "System Events"
-			tell appearance preferences to set isDark to dark mode
-			if (isDark is false) then
-				set targetView to "Default"
-			else
-				set targetView to "Night"
-			end if
-
-			set highlightsRunning to ((name of processes) contains "Highlights")
-			if (highlightsRunning is true) then
-				tell process "Highlights"
-					set frontmost to true
-					click menu item targetView of menu of menu item "PDF Appearance" of menu "View" of menu bar 1
-				end tell
-			end if
-		end tell
-	]])
+	]]
 
 	app(prevApp):activate()
 	holeCover() ---@diagnostic disable-line: undefined-global
-	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar") -- restart instead of reload to load colors
 end
 
 ---@return boolean
