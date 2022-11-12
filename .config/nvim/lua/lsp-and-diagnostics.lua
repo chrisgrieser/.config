@@ -119,7 +119,7 @@ keymap({"n", "x"}, "<leader>a", vim.lsp.buf.code_action)
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local function on_attach(client, bufnr) ---@diagnostic disable-line: unused-local
-	require("lsp-inlayhints").on_attach(client, bufnr)
+	require("lsp-inlayhints").on_attach(client, bufnr) ---@diagnostic disable-line: missing-parameter
 
 	local bufopts = {silent = true, buffer = true}
 	keymap("n", "gd", telescope.lsp_definitions, bufopts)
