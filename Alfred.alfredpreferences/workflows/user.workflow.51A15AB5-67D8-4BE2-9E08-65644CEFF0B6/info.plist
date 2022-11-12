@@ -8,11 +8,50 @@
 	<string>Language</string>
 	<key>connections</key>
 	<dict>
+		<key>2D3076C7-7BED-42ED-A545-3889257EE3B6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>53A26825-EC6B-4509-A18E-8BF696F6D59F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>389036E3-27E1-4755-ACA6-9C39368823F7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F703AFB2-7C4A-41DE-A02A-988D5038E28A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3D040EF9-D603-4C7D-8EAA-7B9BB9F7E445</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>CDE76627-FD04-4765-8690-C25FAE750E6B</string>
+				<string>389036E3-27E1-4755-ACA6-9C39368823F7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5BE5BD63-8EAF-4363-8877-F3F1B51F28A9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2D3076C7-7BED-42ED-A545-3889257EE3B6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -34,36 +73,30 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F703AFB2-7C4A-41DE-A02A-988D5038E28A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CDE76627-FD04-4765-8690-C25FAE750E6B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Alfred Port of https://github.com/nathancahill/Anycomplete</string>
+	<string>Complete Word Under the Cursor via Duckduckgo</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
 	<string>Anycomplete</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>5BE5BD63-8EAF-4363-8877-F3F1B51F28A9</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -98,6 +131,44 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>5BE5BD63-8EAF-4363-8877-F3F1B51F28A9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{clipboard:2}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>53A26825-EC6B-4509-A18E-8BF696F6D59F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -110,8 +181,6 @@
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>cp</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -144,37 +213,160 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>select-word.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>389036E3-27E1-4755-ACA6-9C39368823F7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>seconds</key>
+				<string>0.2</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>2D3076C7-7BED-42ED-A545-3889257EE3B6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>F703AFB2-7C4A-41DE-A02A-988D5038E28A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>Alfred Port of the [Anycomplete Spoon for Hammerspoon](https://github.com/nathancahill/Anycomplete) with some minor improvements.
+
+Completes word under the cursor using Duckduckgo.
+
+---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>2D3076C7-7BED-42ED-A545-3889257EE3B6</key>
+		<dict>
+			<key>xpos</key>
+			<real>725</real>
+			<key>ypos</key>
+			<real>220</real>
+		</dict>
+		<key>389036E3-27E1-4755-ACA6-9C39368823F7</key>
+		<dict>
+			<key>note</key>
+			<string>get word under cursor</string>
+			<key>xpos</key>
+			<real>175</real>
+			<key>ypos</key>
+			<real>190</real>
+		</dict>
 		<key>3D040EF9-D603-4C7D-8EAA-7B9BB9F7E445</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>190</real>
+		</dict>
+		<key>53A26825-EC6B-4509-A18E-8BF696F6D59F</key>
+		<dict>
+			<key>note</key>
+			<string>restore previous clipboard</string>
+			<key>xpos</key>
+			<real>790</real>
+			<key>ypos</key>
+			<real>190</real>
 		</dict>
 		<key>5BE5BD63-8EAF-4363-8877-F3F1B51F28A9</key>
 		<dict>
 			<key>note</key>
 			<string>Paste</string>
 			<key>xpos</key>
-			<real>395</real>
+			<real>575</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>190</real>
 		</dict>
 		<key>CDE76627-FD04-4765-8690-C25FAE750E6B</key>
 		<dict>
+			<key>note</key>
+			<string>autocomplete query</string>
 			<key>xpos</key>
-			<real>215</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>190</real>
+		</dict>
+		<key>F703AFB2-7C4A-41DE-A02A-988D5038E28A</key>
+		<dict>
+			<key>note</key>
+			<string>remove \n</string>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>220</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>70</string>
+				<key>placeholder</key>
+				<string>70</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>in ms</string>
+			<key>label</key>
+			<string>Delay</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>delay_ms</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
