@@ -6,7 +6,8 @@
 home = os.getenv("HOME")
 
 ---returns current date in ISO 8601 format
-function isodate ()
+---@return string|osdate
+function isodate()
 	return os.date("!%Y-%m-%d")
 end
 
@@ -16,7 +17,8 @@ end
 function split(str, separator)
 	str = str .. separator
 	local output = {}
-	for i in str:gmatch("(.-)" .. separator) do -- https://www.lua.org/manual/5.4/manual.html#pdf-string.gmatch
+	-- https://www.lua.org/manual/5.4/manual.html#pdf-string.gmatch
+	for i in str:gmatch("(.-)" .. separator) do
 		table.insert(output, i)
 	end
 	return output

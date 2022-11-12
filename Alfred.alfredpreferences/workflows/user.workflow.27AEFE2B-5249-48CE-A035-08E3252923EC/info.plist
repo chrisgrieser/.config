@@ -8,37 +8,11 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
-		<key>0C46F8A4-6B13-4A56-90EC-0929472AF091</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D596C401-9181-448B-B8EF-6139469B23EF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>14C11AAF-4BA7-4F10-8AE5-C5BF378187DE</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>D14B4522-0A25-4F4D-9985-FF8B04E43832</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>15777E56-7AC1-41E6-99AA-BB38854CDB0A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9758FBBC-5756-44AA-B8D2-9A8693E71248</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -65,19 +39,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>6F3C1C68-F012-43DA-97ED-530C7CF22733</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>1F381AED-559E-4CD5-B1C5-E97FDDE86541</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0394E195-B211-460A-AA61-7FD79149A56B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -184,19 +145,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>CEBEAB0F-094B-4D18-8144-6C38BDC53F34</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>A71D06EE-92C3-46BA-8C90-7AEA9A3B54F6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F35FE6EA-4E8C-4BA4-9DE7-69C10C44E2F8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -611,205 +559,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>6</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>Y</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.brave.Browser</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>A71D06EE-92C3-46BA-8C90-7AEA9A3B54F6</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>yank-and-close_[Browser].applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>F35FE6EA-4E8C-4BA4-9DE7-69C10C44E2F8</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>79</integer>
-				<key>hotmod</key>
-				<integer>8650752</integer>
-				<key>hotstring</key>
-				<string>F18</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.vivaldi.Vivaldi</string>
-					<string>com.brave.Browser</string>
-					<string>org.chromium.Chromium</string>
-					<string>com.brave.Browser.app.fmajbmdokmecmpllfhcamihghgoablgg</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>15777E56-7AC1-41E6-99AA-BB38854CDB0A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "System Events"	keystroke "i" using {command down, option down}	delay 0.4	keystroke "c" using {command down, shift down}end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>9758FBBC-5756-44AA-B8D2-9A8693E71248</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>11</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>B</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.brave.Browser</string>
-					<string>org.chromium.Chromium</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>1F381AED-559E-4CD5-B1C5-E97FDDE86541</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>bookmark_[Browser].applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0394E195-B211-460A-AA61-7FD79149A56B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>extensions</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>⚙️ Browser Extensions</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>8D2676E8-2C88-4759-9445-2DBC22311D6D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -854,6 +603,48 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>extensions</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>⚙️ Browser Extensions</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>8D2676E8-2C88-4759-9445-2DBC22311D6D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>vimium</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Open Vimium Settings</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A1D6C97A-829B-4173-B967-F20510910BC5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string>brave://extensions/</string>
 				<key>passthroughargument</key>
@@ -865,6 +656,27 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>2D16E8C6-DE6C-4485-A253-14235E4A1A94</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>chrome-extension://dbepggeogbaibhgnhhndojpepiihcmeb/pages/options.html</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>CEBEAB0F-094B-4D18-8144-6C38BDC53F34</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -912,15 +724,15 @@
 				<key>argument</key>
 				<integer>0</integer>
 				<key>focusedappvariable</key>
-				<false/>
+				<true/>
 				<key>focusedappvariablename</key>
-				<string></string>
+				<string>focusedapp</string>
 				<key>hotkey</key>
-				<integer>9</integer>
+				<integer>43</integer>
 				<key>hotmod</key>
-				<integer>917504</integer>
+				<integer>655360</integer>
 				<key>hotstring</key>
-				<string>V</string>
+				<string>,</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -935,30 +747,7 @@
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>0C46F8A4-6B13-4A56-90EC-0929472AF091</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>github-history_[Browser].js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>D596C401-9181-448B-B8EF-6139469B23EF</string>
+			<string>DEDBE302-1875-4B06-9AB5-021D3F7F22A5</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1027,27 +816,6 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>vimium</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Open Vimium Settings</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A1D6C97A-829B-4173-B967-F20510910BC5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
 				<string>extensions</string>
@@ -1068,27 +836,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>chrome-extension://dbepggeogbaibhgnhhndojpepiihcmeb/pages/options.html</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>CEBEAB0F-094B-4D18-8144-6C38BDC53F34</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string>chrome://extensions/shortcuts</string>
 				<key>passthroughargument</key>
@@ -1102,41 +849,6 @@
 			<string>84BC39C1-682C-4479-8CBF-97E48DB8B35A</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>43</integer>
-				<key>hotmod</key>
-				<integer>655360</integer>
-				<key>hotstring</key>
-				<string>,</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.brave.Browser</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>DEDBE302-1875-4B06-9AB5-021D3F7F22A5</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1181,34 +893,14 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>0394E195-B211-460A-AA61-7FD79149A56B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>455</real>
-		</dict>
 		<key>0ABBA2D0-AB03-47DC-952B-157EAB6B558B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>865</real>
+			<real>720</real>
 			<key>ypos</key>
-			<real>825</real>
-		</dict>
-		<key>0C46F8A4-6B13-4A56-90EC-0929472AF091</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>4</integer>
-			<key>note</key>
-			<string>git history</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>730</real>
+			<real>650</real>
 		</dict>
 		<key>10C28BFB-0100-4B2F-BAEF-FEA3FC8C44E2</key>
 		<dict>
@@ -1226,17 +918,6 @@
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>15777E56-7AC1-41E6-99AA-BB38854CDB0A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>Open Console + Element Picker</string>
-			<key>xpos</key>
-			<real>420</real>
-			<key>ypos</key>
-			<real>430</real>
-		</dict>
 		<key>1B16BCB9-7B91-423E-8408-B89E2D57670C</key>
 		<dict>
 			<key>colorindex</key>
@@ -1244,7 +925,7 @@
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>1085</real>
+			<real>915</real>
 		</dict>
 		<key>1F170814-90DD-485E-A861-757A4FD92606</key>
 		<dict>
@@ -1257,17 +938,6 @@
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
-		<key>1F381AED-559E-4CD5-B1C5-E97FDDE86541</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>note</key>
-			<string>Bookmark</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>455</real>
-		</dict>
 		<key>2D16E8C6-DE6C-4485-A253-14235E4A1A94</key>
 		<dict>
 			<key>colorindex</key>
@@ -1275,7 +945,7 @@
 			<key>xpos</key>
 			<real>585</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>430</real>
 		</dict>
 		<key>40631024-7C9F-4784-A3E7-1116BD6C894A</key>
 		<dict>
@@ -1302,7 +972,7 @@
 			<key>xpos</key>
 			<real>415</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>280</real>
 		</dict>
 		<key>56A2CDC1-E909-4825-82BA-80AAC51CD73F</key>
 		<dict>
@@ -1311,7 +981,7 @@
 			<key>xpos</key>
 			<real>585</real>
 			<key>ypos</key>
-			<real>845</real>
+			<real>675</real>
 		</dict>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<dict>
@@ -1329,7 +999,7 @@
 			<key>xpos</key>
 			<real>590</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>280</real>
 		</dict>
 		<key>84BC39C1-682C-4479-8CBF-97E48DB8B35A</key>
 		<dict>
@@ -1338,7 +1008,7 @@
 			<key>xpos</key>
 			<real>590</real>
 			<key>ypos</key>
-			<real>955</real>
+			<real>785</real>
 		</dict>
 		<key>8D2676E8-2C88-4759-9445-2DBC22311D6D</key>
 		<dict>
@@ -1349,16 +1019,7 @@
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>570</real>
-		</dict>
-		<key>9758FBBC-5756-44AA-B8D2-9A8693E71248</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>590</real>
-			<key>ypos</key>
-			<real>430</real>
+			<real>400</real>
 		</dict>
 		<key>97E52210-B26B-49B3-AC6D-65A1235A88C9</key>
 		<dict>
@@ -1367,7 +1028,7 @@
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>295</real>
 		</dict>
 		<key>9AA14640-4989-4266-9F9B-E6DB0264EFA5</key>
 		<dict>
@@ -1378,7 +1039,7 @@
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>925</real>
+			<real>755</real>
 		</dict>
 		<key>A1D6C97A-829B-4173-B967-F20510910BC5</key>
 		<dict>
@@ -1387,14 +1048,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>870</real>
-		</dict>
-		<key>A71D06EE-92C3-46BA-8C90-7AEA9A3B54F6</key>
-		<dict>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>325</real>
+			<real>425</real>
 		</dict>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<dict>
@@ -1403,7 +1057,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>295</real>
 		</dict>
 		<key>B6430DD8-BB7B-43C8-ADCA-D14DD9FC0D7A</key>
 		<dict>
@@ -1412,7 +1066,7 @@
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>1055</real>
+			<real>885</real>
 		</dict>
 		<key>BE7EDFB7-052F-45E8-BC4B-5448613EE413</key>
 		<dict>
@@ -1439,7 +1093,7 @@
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>925</real>
+			<real>480</real>
 		</dict>
 		<key>D14B4522-0A25-4F4D-9985-FF8B04E43832</key>
 		<dict>
@@ -1455,15 +1109,6 @@
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>D596C401-9181-448B-B8EF-6139469B23EF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>4</integer>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>730</real>
-		</dict>
 		<key>DEDBE302-1875-4B06-9AB5-021D3F7F22A5</key>
 		<dict>
 			<key>colorindex</key>
@@ -1473,7 +1118,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>980</real>
+			<real>535</real>
 		</dict>
 		<key>E51DFA56-3523-4840-8EF6-40FC832EE3BB</key>
 		<dict>
@@ -1493,14 +1138,7 @@
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>815</real>
-		</dict>
-		<key>F35FE6EA-4E8C-4BA4-9DE7-69C10C44E2F8</key>
-		<dict>
-			<key>xpos</key>
-			<real>210</real>
-			<key>ypos</key>
-			<real>325</real>
+			<real>645</real>
 		</dict>
 		<key>F3966E19-739B-4CD9-9ADE-6AFE837C3817</key>
 		<dict>
@@ -1509,7 +1147,7 @@
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>530</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

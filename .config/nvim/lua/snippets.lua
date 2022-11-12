@@ -46,6 +46,7 @@ add("zsh", {
 	snip("stderr (pipe)", "2>&1 "),
 	snip("null (pipe)", "&> /dev/null "),
 	snip("sed (pipe)", "| sed 's/${1:pattern}/${2:replacement}/g'"),
+	snip("| sed", "| sed 's/${1:pattern}/${2:replacement}/g'"),
 
 	snip("plist extract key",
 		'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
@@ -114,6 +115,7 @@ add("applescript", {
 		'set ${1:envvar} to do shell script "echo " & quoted form of (system attribute "${1:envvar}") & " | iconv -f UTF-8-MAC -t MACROMAN"\n$0'),
 	snip("Set Alfred Env Var",
 		'tell application id "com.runningwithcrayons.Alfred" to set configuration "${1:envvar}" to value ${2:value} in workflow (system attribute "alfred_workflow_bundleid")\n$0'),
+	snip("argv", "replace: set input to argv as string")
 })
 
 -- Markdown
@@ -141,6 +143,12 @@ add("javascript", {
 
 -- Alfred JXA
 add("javascript", {
+	snip("argv", [[
+		function run(argv){
+			const ${1:query} = argv.join("");
+		} 
+	]]),
+	snip("Get Alfred Env Var", 'const ${1:envVar} = $.getenv("${1:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
 	snip("Set Alfred Env Var)", [[
 		function setEnvVar(envVar, newValue) {
 			Application("com.runningwithcrayons.Alfred")
@@ -155,8 +163,9 @@ add("javascript", {
 })
 
 -- YAML
+-- Karabiner config
 add("yaml", {
-	snip("delay (Karabiner)", "- key_code: vk_none\n  hold_down_milliseconds: 50\n"),
+	snip("delay (Karabiner)", "- key_code: vk_none\n  hold_down_milliseconds: ${1:50}\n$0"),
 })
 
 --------------------------------------------------------------------------------
@@ -165,6 +174,3 @@ add("yaml", {
 ls.filetype_extend("typescript", {"javascript"}) -- typescript uses all javascript snippets
 ls.filetype_extend("bash", {"zsh"})
 ls.filetype_extend("sh", {"zsh"})
-
--- load friendly-snippets
-require("luasnip.loaders.from_vscode").lazy_load()

@@ -102,6 +102,18 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>6DD83908-25CD-4BBE-8715-259DE58C2A17</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>8528AFE1-2E0D-42FB-A357-BADB551CBB64</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>0216398A-09AD-4D85-A101-3884E853D638</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -1268,6 +1280,29 @@ echo "$url"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
+				<string>.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6DD83908-25CD-4BBE-8715-259DE58C2A17</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string>restore.sh</string>
 				<key>type</key>
 				<integer>8</integer>
@@ -1318,7 +1353,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1120</real>
 		</dict>
 		<key>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</key>
 		<dict>
@@ -1440,6 +1475,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>230</real>
 			<key>ypos</key>
 			<real>540</real>
+		</dict>
+		<key>6DD83908-25CD-4BBE-8715-259DE58C2A17</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>githistory.xyz</string>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>985</real>
 		</dict>
 		<key>7788A2EF-46C7-48E7-A073-C7938913B87D</key>
 		<dict>
