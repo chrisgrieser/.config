@@ -133,15 +133,19 @@ end
 --------------------------------------------------------------------------------
 
 ---Copy Last Command
----@param reg? string The register to copy the last command to. Default: "+"
-function M.copyLastCommand(reg)
-	if not (reg) then reg = "+" end
+---@param opts? table
+function M.copyLastCommand(opts)
+	if not (opts) then
+		opts = {reg = "+", noColon = false}
+	end
+
 	local lastCommand = fn.getreg(":")
 	if not (lastCommand) then
 		vim.notify(" No Command has been run yet.", error)
 		return
 	end
-	fn.setreg(reg, lastCommand)
+	if not(opts.noColon) then lastCommand = ":"..lastCommand end
+	fn.setreg(opts.reg, lastCommand)
 	vim.notify(" COPIED\n " .. lastCommand)
 end
 

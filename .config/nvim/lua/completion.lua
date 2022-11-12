@@ -67,7 +67,7 @@ local kind_icons = {
 cmp.setup {
 	snippet = {
 		-- REQUIRED a snippet engine must be specified and installed
-		expand = function(args) require("luasnip").lsp_expand(args.body) end, 
+		expand = function(args) require("luasnip").lsp_expand(args.body) end,
 	},
 	window = {
 		completion = cmp.config.window.bordered(),
@@ -196,16 +196,32 @@ cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 --------------------------------------------------------------------------------
 -- TABNINE
-require("cmp_tabnine.config").setup {
-	max_lines = 1000, -- buffer lines to consider
-	max_num_results = 10,
-	run_on_every_keystroke = true, -- https://github.com/tzachar/cmp-tabnine/issues/18#issuecomment-974766219
-	snippet_placeholder = "",
-	show_prediction_strength = true,
+-- require("cmp_tabnine.config").setup {
+-- 	max_lines = 1000, -- buffer lines to consider
+-- 	max_num_results = 10,
+-- 	run_on_every_keystroke = true, -- https://github.com/tzachar/cmp-tabnine/issues/18#issuecomment-974766219
+-- 	snippet_placeholder = "",
+-- 	show_prediction_strength = true,
+-- 	ignored_file_types = {
+-- 		-- json = true,
+-- 	},
+-- }
+local tabnine = require('cmp_tabnine.config')
+tabnine.setup({
+	max_lines = 1000,
+	max_num_results = 20,
+	sort = true,
+	run_on_every_keystroke = true,
+	snippet_placeholder = 'aaaaaaaaaaa',
 	ignored_file_types = {
-		json = true,
+		-- default is not to ignore
+		-- uncomment to ignore in lua:
+		-- lua = true
 	},
-}
+	show_prediction_strength = false
+})
+
+require(...)
 
 -- automatically prefetch completions for the buffer
 augroup("prefetchTabNine", {})
