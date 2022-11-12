@@ -13,7 +13,6 @@ function toggleDarkMode()
 		highlightsView = "Night"
 	end
 
-	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar") -- restart instead of reload to load colors
 	hs.execute("zsh ./helpers/toggle-marta-darkmode.sh " .. targetMode)
 	if appIsRunning("Highlights") then
 		app("Highlights"):selectMenuItem {"View", "PDF Appearance", highlightsView}
@@ -43,6 +42,7 @@ function toggleDarkMode()
 			tell application "Brave Browser" to close active tab of front window
 		end if
 	]]
+	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar") -- restart instead of reload to load colors
 
 	app(prevApp):activate()
 	holeCover() ---@diagnostic disable-line: undefined-global
