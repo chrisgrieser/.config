@@ -30,8 +30,8 @@ function customHighlights()
 	cmd [[highlight rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets…
 
 	-- treesittter refactor focus
-	cmd [[highlight TSDefinition term=underline gui=underline]]
-	cmd [[highlight TSDefinitionUsage term=underline gui=underline]]
+	cmd [[highlight TSDefinition term=underline gui=underdotted]]
+	cmd [[highlight TSDefinitionUsage term=underline gui=underdotted]]
 
 	-- Custom Highlight-Group, used for various LSP Hints
 	cmd [[highlight GhostText guifg=#7c7c7c]]
