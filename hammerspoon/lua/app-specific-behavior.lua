@@ -427,7 +427,8 @@ local function discordWatcher(appName, eventType)
 	if eventType == aw.activated then
 		local hasURL = clipb:match("^https?:%S+$")
 		local hasObsidianURL = clipb:match("^obsidian:%S+$")
-		if hasURL or hasObsidianURL then
+		local isTweet = clipb:match("^https?://twitter%.com") -- for tweets, the previews are actually useful
+		if (hasURL or hasObsidianURL) and not(isTweet) then
 			hs.pasteboard.setContents("<" .. clipb .. ">")
 		end
 	elseif eventType == aw.deactivated then
