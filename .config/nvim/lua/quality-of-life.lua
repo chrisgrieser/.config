@@ -20,6 +20,13 @@ local function leaveVisualMode()
 	vim.api.nvim_feedkeys(escKey, "nx", false)
 end
 
+---trims whitespace from string
+---@param str string
+---@return string
+function trim(str)
+	return (str:gsub("^%s*(.-)%s*$", "%1"))
+end
+
 --------------------------------------------------------------------------------
 
 ---Helper Function performing common file operation tasks
@@ -407,6 +414,7 @@ function M.pasteDifferently(opts) -- paste as characterwise
 		targetRegType = "v"
 	elseif isCharwise then
 		targetRegType = "V"
+		regContent = trim(regContent)
 	else
 		vim.notify(" This paste command does not work with blockwise registers.", warn)
 		return

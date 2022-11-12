@@ -167,7 +167,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 require("neodev").setup {
 	library = {
 		enabled = true,
-		plugins = true,
+		plugins = false,
 	}
 }
 

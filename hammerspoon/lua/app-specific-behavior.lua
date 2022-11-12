@@ -1,7 +1,6 @@
 require("lua.utils")
 require("lua.window-management")
 require("lua.system-and-cron")
-
 --------------------------------------------------------------------------------
 -- TRANSPARENT background for Obsidian & Alacritty & Neovim
 
@@ -207,7 +206,7 @@ uriScheme("focus-help", function()
 	if win then
 		win:focus()
 	else
-		notify("None open")
+		notify("None open.")
 	end
 end)
 
@@ -221,11 +220,12 @@ local function finderWatcher(appName, eventType, appObject)
 	if not (appName == "Finder") then return end
 
 	if eventType == aw.activated then
-		appObject:selectMenuItem {"View", "Hide Sidebar"}
 
 		local finderWin = appObject:focusedWindow()
 		local isInfoWindow = finderWin:title():match(" Info$")
 		if isInfoWindow then return end
+
+		appObject:selectMenuItem {"View", "Hide Sidebar"}
 
 		local win_h = finderWin:frame().h
 		local max_h = finderWin:screen():frame().h
@@ -238,8 +238,7 @@ local function finderWatcher(appName, eventType, appObject)
 	elseif eventType == aw.launched then
 		-- quit Finder if it was started as a helper, but has no window
 		runDelayed(1, function()
-			if not (appObject) then return end
-			if not (appObject:mainWindow()) then
+			if appObject and not (appObject:mainWindow()) then
 				appObject:kill()
 			end
 		end)
@@ -323,6 +322,8 @@ local function highlightsWatcher(appName, eventType, appObject)
 
 	appObject:selectMenuItem {"Tools", "Highlight"}
 	appObject:selectMenuItem {"Tools", "Color", "Yellow"}
+
+	appObject:selectMenuItem {"View", "Hide Toolbar"}
 
 	if isAtOffice() then moveResizeCurWin("maximized")
 	else moveResizeCurWin("pseudo-maximized") end
