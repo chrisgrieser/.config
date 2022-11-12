@@ -9,8 +9,9 @@ extra_exclude:
 
 backend: clipboard
 
-inject_delay: 1
-key_delay: 1
+# inject_delay: 1
+# key_delay: 1
+
 # paste_shortcut: None
 # pre_paste_delay: 100
 # paste_shortcut_event_delay: 10

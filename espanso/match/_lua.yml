@@ -1,9 +1,0 @@
-# https://espanso.org/docs/
-# ------------------------------------------
-
-matches:
-  - trigger: "!resolve"
-    replace: 'os.getenv("HOME")'
-    label: resolve ~
-  - trigger: "!utils"
-    replace: 'require("utils")'
