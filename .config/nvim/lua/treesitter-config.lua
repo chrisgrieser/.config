@@ -47,6 +47,7 @@ require("nvim-treesitter.configs").setup {
 	textobjects = {-- textobj plugin
 		move = {-- move to next comment / function
 			enable = true,
+			disable = { "markdown" }, -- so they can be mapped to heading navigation
 			set_jumps = true,
 			goto_next_start = {
 				["<C-j>"] = "@function.outer",

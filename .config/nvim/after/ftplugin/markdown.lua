@@ -37,32 +37,36 @@ g.markdown_fenced_languages = {
 setlocal("wrap", true) -- soft wrap
 setlocal("linebreak", true) -- do not break words for soft wrap
 setlocal("colorcolumn", "") -- deactivate ruler
-keymap({"n", "v"}, "H", "g^", opts)
-keymap({"n", "v"}, "L", "g$", opts)
-keymap({"n", "v"}, "J", "7gj", opts)
-keymap({"n", "v"}, "K", "7gk", opts)
-keymap({"n", "v"}, "k", "gk", opts)
-keymap({"n", "v"}, "j", function() require("quality-of-life").overscroll("gj") end, opts)
+keymap({"n", "x"}, "H", "g^", opts)
+keymap({"n", "x"}, "L", "g$", opts)
+keymap({"n", "x"}, "J", "7gj", opts)
+keymap({"n", "x"}, "K", "7gk", opts)
+keymap({"n", "x"}, "j", "gjzz", opts)
+keymap({"n", "x"}, "k", "gkzz", opts)
+
+-- Heading instead of function navigation
+keymap({"n", "x"}, "<C-j>", "/^#\\+ <CR>:nohl<CR>", opts)
+keymap({"n", "x"}, "<C-k>", "?^#\\+ <CR>:nohl<CR>", opts)
 
 --------------------------------------------------------------------------------
 
 -- cmd+k: markdown link
 keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", opts)
-keymap("v", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", opts)
+keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", opts)
 keymap("i", "<D-k>", "[]()<Left><Left><Left>", opts)
 
 -- cmd+b: bold
 keymap("n", "<D-b>", "bi__<Esc>ea__<Esc>", opts)
-keymap("v", "<D-b>", "<Esc>`<i__<Esc>`>lla__<Esc>", opts)
+keymap("x", "<D-b>", "<Esc>`<i__<Esc>`>lla__<Esc>", opts)
 keymap("i", "<D-b>", "____<Left><Left>", opts)
 
 -- cmd+i: italics
 keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", opts)
-keymap("v", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", opts)
+keymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", opts)
 keymap("i", "<D-i>", "**<Left>", opts)
 
 -- cmd+e for inline code done in gui-settings, since also used for other cases
--- outside of markdown (e.g. templater strings)
+-- outside of markdown (e.g. template strings)
 
 keymap("n", "<CR>", "A", opts) -- So double return keeps markdown list syntax
 keymap("n", "<leader>x", "mz^lllrx`z", opts) -- check markdown tasks
