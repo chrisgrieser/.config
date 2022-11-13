@@ -33,19 +33,17 @@ end)
 
 function diagnosticFormat(diagnostic, mode)
 	local msg = trim(diagnostic.message)
-	local source = trim(diagnostic.source):gsub("%.$", "")
+	local source = diagnostic.source:gsub("%.$", "")
 	local code = tostring(diagnostic.code)
-	local out = msg .. " (" .. code .. ")"
+	local out
 
-	if diagnostic.source:match("%.$") then -- remove trailing dot for some sources
-		diagnostic.source = diagnostic.source:sub(1, -2)
-	end
-	-- stylelint already includes the code in the message, write-good has no codes
-	if diagnostic.source == "stylelint" or diagnostic.source == "write-good" then
-		out = diagnostic.message 
+	if source == "stylelint" or code == "nil" then -- stylelint already includes the code in the message, write-good has no codes
+		out = msg
+	else
+		out = msg .. " (" .. code .. ")"
 	end
 	if diagnostic.source and mode == "float" then
-		out = out .. " [" .. diagnostic.source .. "]"
+		out = out .. " [" .. source .. "]"
 	end
 	return out
 end

@@ -28,5 +28,6 @@ end
 ---@param str string
 ---@return string
 function trim(str)
+	if not(str) then return "" end
 	return (str:gsub("^%s*(.-)%s*$", "%1"))
 end

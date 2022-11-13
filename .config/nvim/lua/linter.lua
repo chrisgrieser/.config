@@ -10,7 +10,6 @@ local lintersAndFormatters = {
 	"markdownlint",
 	"write_good",
 	"alex",
-	"textlint",
 	-- stylelint not available :(
 }
 
@@ -23,8 +22,7 @@ local builtins = null_ls.builtins
 
 null_ls.setup {
 	sources = {
-		-- deactivated due to cluttering lightbulb https://github.com/kosayoda/nvim-lightbulb/issues/39
-		-- builtins.code_actions.gitsigns, -- gitsings.nvim plugin, e.g. reset hunks
+		builtins.code_actions.gitsigns, -- gitsings.nvim plugin, e.g. reset hunks
 
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		builtins.diagnostics.shellcheck.with {-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go
@@ -54,14 +52,15 @@ null_ls.setup {
 			extra_args = {"--config-file", fn.expand("~/.config/yamllint/config/.yamllint.yaml")},
 		},
 
-		builtins.diagnostics.write_good, 
-		builtins.diagnostics.textlint, 
-		builtins.diagnostics.alex, 
-		builtins.hover.dictionary, -- vim's builtin dictionary
-		builtins.formatting.markdownlint,
+		builtins.diagnostics.write_good.with{
+			extra_args = {"--no-passive"}, -- disable no-passive rule
+		},
+		builtins.diagnostics.alex,
 		builtins.diagnostics.markdownlint.with {
 			extra_args = {"--disable=trailing-spaces"}, -- vim already takes care of that
 		},
+		builtins.hover.dictionary, -- vim's builtin dictionary
+		builtins.formatting.markdownlint,
 		builtins.completion.spell.with {-- vim's built-in spell-suggestions
 			filetypes = {"markdown"},
 		},
