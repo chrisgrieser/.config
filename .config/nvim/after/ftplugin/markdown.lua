@@ -41,8 +41,8 @@ keymap({"n", "x"}, "H", "g^", opts)
 keymap({"n", "x"}, "L", "g$", opts)
 keymap({"n", "x"}, "J", "7gj", opts)
 keymap({"n", "x"}, "K", "7gk", opts)
-keymap({"n", "x"}, "j", "gjzz", opts)
-keymap({"n", "x"}, "k", "gkzz", opts)
+keymap({"n", "x"}, "k", "gk", opts)
+keymap({"n", "x"}, "j", function() require("quality-of-life").overscroll("gj") end, opts)
 
 -- Heading instead of function navigation
 keymap({"n", "x"}, "<C-j>", "/^#\\+ <CR>:nohl<CR>", opts)
