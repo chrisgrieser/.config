@@ -68,7 +68,7 @@ end
 -- toggle theme with OS
 local auto_dark_mode = require("auto-dark-mode")
 auto_dark_mode.setup {
-	update_interval = 3000,
+	update_interval = 3000, ---@diagnostic disable-line: assign-type-mismatch
 	set_dark_mode = dark,
 	set_light_mode = light,
 }
@@ -76,26 +76,26 @@ auto_dark_mode.init()
 
 --------------------------------------------------------------------------------
 -- CMD-Keybindings
-keymap({"n", "v"}, "<D-w>", ":close<CR>") -- cmd+w
+keymap({"n", "x"}, "<D-w>", ":close<CR>") -- cmd+w
 keymap("i", "<D-w>", "<Esc>:close<CR>")
 
-keymap({"n", "v", "i"}, "<D-n>", qol.createNewFile)
+keymap({"n", "x", "i"}, "<D-n>", qol.createNewFile)
 
-keymap({"n", "v"}, "<D-z>", "u") -- cmd+z
-keymap({"n", "v"}, "<D-Z>", "<C-R>") -- cmd+shift+z
+keymap({"n", "x"}, "<D-z>", "u") -- cmd+z
+keymap({"n", "x"}, "<D-Z>", "<C-R>") -- cmd+shift+z
 keymap("i", "<D-z>", "<C-o>u")
 keymap("i", "<D-Z>", "<C-o><C-r>")
-keymap({"n", "v"}, "<D-s>", ":write!<CR>") -- cmd+s
+keymap({"n", "x"}, "<D-s>", ":write!<CR>") -- cmd+s
 keymap("i", "<D-s>", "<Esc>:write!<CR>a")
 keymap("n", "<D-a>", "ggVG") -- cmd+a
 keymap("i", "<D-a>", "<Esc>ggVG")
-keymap("v", "<D-a>", "ggG")
+keymap("x", "<D-a>", "ggG")
 
 keymap("", "<D-BS>", qol.trashFile)
-keymap({"n", "v"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
-keymap({"n", "v", "i"}, "<D-1>", ":Lexplore<CR><CR>") -- file tree (netrw)
-keymap({"n", "v", "i"}, "<D-0>", ":messages<CR>")
-keymap({"n", "v", "i"}, "<D-9>", ":Notification<CR>")
+keymap({"n", "x"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
+keymap({"n", "x", "i"}, "<D-1>", ":Lexplore<CR><CR>") -- file tree (netrw)
+keymap({"n", "x", "i"}, "<D-0>", ":messages<CR>")
+keymap({"n", "x", "i"}, "<D-9>", ":Notification<CR>")
 
 -- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 g.VM_maps = {
@@ -107,28 +107,28 @@ g.VM_maps = {
 
 -- cut, copy & paste
 keymap("n", "<D-c>", "yy") -- no selection = line
-keymap("v", "<D-c>", "y")
+keymap("x", "<D-c>", "y")
 keymap("n", "<D-x>", "dd") -- no selection = line
-keymap("v", "<D-x>", "d")
-keymap({"n", "v"}, "<D-v>", "p")
+keymap("x", "<D-x>", "d")
+keymap({"n", "x"}, "<D-v>", "p")
 keymap("c", "<D-v>", "<C-r>+")
 keymap("i", "<D-v>", qol.insertModePasteFix)
 
 -- cmd+e: inline code
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>") -- no selection = word under cursor
-keymap("v", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>")
+keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>")
 keymap("i", "<D-e>", "``<Left>")
 
 -- cmd+t: Template string
 keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>") -- no selection = word under cursor
-keymap("v", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>")
+keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>")
 keymap("i", "<D-t>", "${}<Left>")
 
 local delta = 1.1
-keymap({"n", "v", "i"}, "<D-+>", function()
+keymap({"n", "x", "i"}, "<D-+>", function()
 	g.neovide_scale_factor = g.neovide_scale_factor * delta
 end)
-keymap({"n", "v", "i"}, "<D-->", function()
+keymap({"n", "x", "i"}, "<D-->", function()
 	g.neovide_scale_factor = g.neovide_scale_factor / delta
 end)
 
@@ -159,6 +159,6 @@ g.neovide_remember_window_size = true
 
 g.neovide_input_macos_alt_is_meta = true -- makes `opt` usable on macOS
 -- needed when alt is turned into meta key
-keymap({"n", "v"}, "<M-l>", "@")
+keymap({"n", "x"}, "<M-l>", "@")
 keymap("i", "<M-.>", "…")
 keymap("i", "<M-->", "–")
