@@ -41,7 +41,7 @@ function themeModifications(mode)
 		cmd [[highlight VertSplit guifg=#b29b84]]
 	elseif g.colors_name == "melange" and mode == "light" then
 		cmd [[highlight def link @punctuation @label]]
-		cmd [[highlight! def link Todo @label]]
+		cmd [[highlight! def link Todo IncSearch]]
 		cmd [[highlight! def link NotifyINFOIcon @define]]
 		cmd [[highlight! def link NotifyINFOTitle @define]]
 		cmd [[highlight! def link NotifyINFOBody @define]]

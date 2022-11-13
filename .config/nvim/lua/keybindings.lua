@@ -9,6 +9,9 @@ keymap("n", "<leader>lc", qol.copyLastCommand)
 -- run [l]ast command [a]gain
 keymap("n", "<leader>la", qol.runLastCommandAgain)
 
+-- [e]dit [l]ast command
+keymap("n", "<leader>le", ":<Up>")
+
 -- search keymaps
 keymap("n", "?", telescope.keymaps)
 
@@ -60,9 +63,9 @@ keymap("n", "<C-o>", telescope.jumplist)
 keymap("n", "gh", ":Gitsigns next_hunk<CR>")
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>")
 
--- Hop
-keymap("n", "ö", ":HopWordAC<CR>")
-keymap("n", "Ö", ":HopWordBC<CR>")
+-- Leap
+keymap({"n", "x", "o"}, "ö", "<Plug>(leap-forward-to)")
+keymap({"n", "x", "o"}, "Ö", "<Plug>(leap-backwards-to)")
 
 -- Search
 keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout

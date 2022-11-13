@@ -79,12 +79,12 @@ require("mason-lspconfig").setup {
 
 --------------------------------------------------------------------------------
 -- LSP PLUGINS
-require("nvim-lightbulb").setup {
-	-- not working yet, required workaround below: https://github.com/kosayoda/nvim-lightbulb/issues/39
-	ignore = {"marksman"},
-	autocmd = {enabled = true},
-	sign = { priority = 9001 },
-}
+-- .setup not working correctly https://github.com/kosayoda/nvim-lightbulb/issues/39
+augroup("LightBulb", {})
+autocmd({"CursorHold", "CursorHoldI"}, {
+	group = "LightBulb",
+	callback = require("nvim-lightbulb").update_lightbulb,
+})
 fn.sign_define("LightBulbSign", {text = "", texthl = "DiagnosticInfo"})
 
 require("lsp_signature").setup {

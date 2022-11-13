@@ -49,14 +49,24 @@ cmd [[call matchadd('myAnnotations', '\<\(TODO\|INFO\|NOTE\|WARNING\|WARN\|REQUI
 
 --------------------------------------------------------------------------------
 
--- Indention
+-- Indentation
 require("indent_blankline").setup {
 	show_current_context = true,
 	use_treesitter = true,
 	strict_tabs = false,
 	filetype_exclude = specialFiletypes,
-	-- context_char = '┃',
 }
+
+
+--------------------------------------------------------------------------------
+-- Scrollbar
+require("scrollbar").setup{
+	marks = {
+		GitChange = {text = "┃"},
+		GitAdd = {text = "┃"},
+	},
+}
+require("scrollbar.handlers.gitsigns").setup()
 
 --------------------------------------------------------------------------------
 -- Notifications
@@ -207,8 +217,8 @@ require("lualine").setup {
 			{"branch", cond = isStandardBranch,}
 		},
 		lualine_z = {
-			{"location", separator = ""},
-			"progress",
+			-- {"location", separator = ""},
+			"location",
 		},
 	},
 	options = {
