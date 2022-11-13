@@ -33,13 +33,15 @@ function M.PluginList()
 	use "mityu/vim-applescript" -- applescript syntax highlighting
 	use "hail2u/vim-css3-syntax" -- better css syntax highlighting (until treesitter css looks decent…)
 
-	-- LSP & Linting
+	-- LSP
 	use {"neovim/nvim-lspconfig", requires = {
 		"williamboman/mason-lspconfig.nvim",
 		"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		"ray-x/lsp_signature.nvim",
+		"kosayoda/nvim-lightbulb",
 	}}
 
+	-- Linting
 	use {"jose-elias-alvarez/null-ls.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"jayp0521/mason-null-ls.nvim",
@@ -72,11 +74,11 @@ function M.PluginList()
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use "nvim-lualine/lualine.nvim" -- status line
-	use "lewis6991/gitsigns.nvim"
+	use "lewis6991/gitsigns.nvim" -- gutter signs
 	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
+	use "stevearc/dressing.nvim" -- Selection Menus and Inputs
+	use "rcarriga/nvim-notify" -- notifications
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	use "stevearc/dressing.nvim" -- alternative to "hood/popui.nvim"
-	use "rcarriga/nvim-notify"
 
 	-- File Management & Switching
 	use {"nvim-telescope/telescope.nvim", requires = {
@@ -96,8 +98,7 @@ function M.PluginList()
 
 	-- Navigation
 	use "mg979/vim-visual-multi" -- multi-cursor
-	use "phaazon/hop.nvim"
-	use "unblevable/quick-scope" -- f-t-improvement
+	use "ggandor/leap.nvim"
 
 	-- Editing
 	use "AndrewRadev/splitjoin.vim"

@@ -97,7 +97,7 @@ require("dressing").setup {
 			relative = "cursor",
 			winblend = 4,
 			max_width = 80,
-			min_width = 15,
+			min_width = 18,
 			max_height = 12,
 			min_height = 4,
 		},
