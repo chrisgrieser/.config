@@ -164,7 +164,7 @@ autocmd("TermClose", {
 augroup("Templates", {})
 local filetypeList = fn.system('ls "$HOME/.config/nvim/templates/skeleton."* | xargs basename | cut -d. -f2')
 local ftWithSkeletons = split(filetypeList, "\n")
-for _, ft in ipairs(ftWithSkeletons) do
+for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
 	local readCmd = "0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! G"
 

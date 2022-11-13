@@ -8,7 +8,7 @@ function ch () {
 	echo "$CHEAT_CODE_ONLY" | pbcopy
 }
 
-# Better Man
+# GET A BETTER MAN
 # first arg: command, second arg: search term
 function man () {
 	CONFIG=~"/.config/alacritty/man-page.yml"
@@ -33,7 +33,7 @@ function man () {
 	elif [[ $isBuiltIn == false ]] && [[ -z "$2" ]] ; then
 		(alacritty --config-file="$CONFIG" --title="man: $1" --command man "$1" &)
 	else
-		(alacritty --config-file="$CONFIG" --title="man: $1" --command man "$1" -P "/usr/bin/less -is --pattern=$2" &)
+		(alacritty --config-file="$CONFIG" --title="man: $1" --command man -P "/usr/bin/less -is --pattern=$2" "$1" &)
 	fi
 }
 
@@ -52,4 +52,3 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 # Pager-specific settings
 # (INFO: less ignore-case is actually smart case)
 export LESS='-R --incsearch --ignore-case --window=-3 --quit-if-one-screen --no-init --tilde'
-

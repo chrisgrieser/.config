@@ -79,6 +79,23 @@ require("mason-lspconfig").setup {
 
 --------------------------------------------------------------------------------
 -- LSP PLUGINS
+local fffffd
+local lightbulb = require("nvim-lightbulb")
+lightbulb.setup {
+	-- not working yet, required workaround below: https://github.com/kosayoda/nvim-lightbulb/issues/39
+	-- ignore = {"null-ls"},
+	-- autocmd = {enabled = true},
+	sign = {
+		priority = 110, -- higher than lsp
+	}
+}
+augroup("LightBulb", {})
+autocmd({"CursorHold", "CursorHoldI"}, {
+	group = "LightBulb",
+	callback = function() lightbulb.update_lightbulb {ignore = {"null-ls"}} end,
+})
+fn.sign_define("LightBulbSign", {text = "", texthl = "DiagnosticInfo"})
+
 require("lsp_signature").setup {
 	floating_window = false,
 	hint_prefix = "﬍ ",
@@ -107,6 +124,7 @@ require("lsp-inlayhints").setup {
 --------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
 
+-- Signature
 keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help)
 
 -- fallback for languages without an action LSP
@@ -114,7 +132,6 @@ keymap("n", "gs", telescope.treesitter)
 
 -- actions defined globally for null-ls
 keymap({"n", "x"}, "<leader>a", vim.lsp.buf.code_action)
-
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
