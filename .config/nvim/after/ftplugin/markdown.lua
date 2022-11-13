@@ -44,6 +44,11 @@ keymap({"n", "x"}, "K", "7gk", opts)
 keymap({"n", "x"}, "k", "gk", opts)
 keymap({"n", "x"}, "j", function() require("quality-of-life").overscroll("gj") end, opts)
 
+-- automatically open float, since virtual text not readable with wrapping
+keymap("n", "ge", function() vim.diagnostic.goto_next {wrap = true, float = true} end, opts)
+keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = true} end, opts)
+--------------------------------------------------------------------------------
+
 -- Heading instead of function navigation
 keymap({"n", "x"}, "<C-j>", "/^#\\+ <CR>:nohl<CR>", opts)
 keymap({"n", "x"}, "<C-k>", "?^#\\+ <CR>:nohl<CR>", opts)
