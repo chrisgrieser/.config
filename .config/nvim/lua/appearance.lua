@@ -60,21 +60,31 @@ require("indent_blankline").setup {
 
 --------------------------------------------------------------------------------
 -- Scrollbar
-require("scrollbar").setup{
+require("scrollbar").setup {
 	marks = {
 		GitChange = {text = "┃"},
 		GitAdd = {text = "┃"},
 	},
 }
 require("scrollbar.handlers.gitsigns").setup()
--- https://github.com/petertriho/nvim-scrollbar#custom-handlers
--- require("scrollbar.handlers").register("lastjump", )
 
-g.myJumplist = ""
-function lastJumpPos (bufnr)
+require("scrollbar.handlers").register("my_marks", function(bufnr)
+	return {
+		{line = 1, text = "x", type = "Warn"},
+	}
+end)
+
+-- https://github.com/petertriho/nvim-scrollbar#custom-handlers
+require("scrollbar.handlers").register("lastjump", currentAndLastJump)
+function currentAndLastJump(bufnr)
 	local lastJump = fn.getjumplist()[2]
 	local lastJumpPos = fn.getjumplist()[1][lastJump]
-	if lastJumpPos.bufnr ~= bufnr then return end
+	local currentLnum = fn.line(".")
+	local out = { line = currentLnum, text = ""}
+	if lastJumpPos.bufnr == bufnr then
+		table.insert(out, { line = lastJumpPos.lnum, text = "▶️" })
+	end
+	return out
 end
 
 --------------------------------------------------------------------------------
