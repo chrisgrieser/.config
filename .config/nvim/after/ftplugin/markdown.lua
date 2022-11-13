@@ -40,7 +40,7 @@ setlocal("linebreak", true) -- do not break words for soft wrap
 setlocal("colorcolumn", "") -- deactivate ruler
 keymap({"n", "x"}, "H", "g^", opts)
 keymap({"n", "x"}, "L", "g$", opts)
-keymap({"n", "x"}, "J", "7gj", opts)
+keymap({"n", "x"}, "J", function() require("quality-of-life").overscroll("7gj") end, opts)
 keymap({"n", "x"}, "K", "7gk", opts)
 keymap({"n", "x"}, "k", "gk", opts)
 keymap({"n", "x"}, "j", function() require("quality-of-life").overscroll("gj") end, opts)

@@ -70,7 +70,6 @@ specialFiletypes = {
 	"help",
 	"startuptime",
 	"DiffviewFileHistory",
-	"calendar",
 	"qf",
 	"DressingSelect",
 	"lspinfo",
@@ -78,4 +77,9 @@ specialFiletypes = {
 	"netrw",
 	"packer",
 	"undotree",
+	"prompt",
+	"TelescopePrompt",
+	"noice",
+	"Mason",
+	"",
 }
