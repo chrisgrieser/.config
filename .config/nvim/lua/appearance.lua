@@ -67,7 +67,20 @@ require("scrollbar").setup{
 	},
 }
 require("scrollbar.handlers.gitsigns").setup()
+-- https://github.com/petertriho/nvim-scrollbar#custom-handlers
+require("scrollbar.handlers").register("lastjump", function (bufnr)
+	local bufPath = fn.expand("#"..bufnr..":p")
+	cmd[[ redir @z | jumps | redir END]]
+	local lastJump = fn.getreg("z"):match(".*\n")
+	print (lastJump)
+end)
 
+function lastJumpPos (bufnr)
+	-- local bufPath = fn.expand("#"..bufnr..":p")
+	cmd[[ redir @z | jumps | redir END]]
+	local lastJump = fn.getreg("z"):match(".*\n")
+	print (lastJump)
+end
 --------------------------------------------------------------------------------
 -- Notifications
 opt.termguicolors = true
