@@ -20,7 +20,8 @@ local builtins = null_ls.builtins
 
 null_ls.setup {
 	sources = {
-		builtins.code_actions.gitsigns, -- gitsings.nvim plugin, e.g. hunk previews
+		-- deactivated due to cluttering lightbulb https://github.com/kosayoda/nvim-lightbulb/issues/39
+		-- builtins.code_actions.gitsigns, -- gitsings.nvim plugin, e.g. reset hunks
 
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		builtins.diagnostics.shellcheck.with {-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go

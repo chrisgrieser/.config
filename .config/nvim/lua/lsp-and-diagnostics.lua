@@ -15,7 +15,7 @@ local lsp_servers = {
 }
 
 --------------------------------------------------------------------------------
--- DIAGNOTICS (in general, also applies to nvim-lint etc.)
+-- DIAGNOTICS (also applies to null-ls)
 local opts = {noremap = true, silent = true}
 keymap("n", "ge", function() vim.diagnostic.goto_next {wrap = true, float = false} end, opts)
 keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = false} end, opts)
@@ -66,7 +66,7 @@ keymap("n", "<leader>d", function() vim.diagnostic.open_float {focusable = false
 require("mason").setup {
 	ui = {
 		border = borderStyle,
-		icons = {package_installed = "✓", package_pending = "➜", package_uninstalled = "✗"}
+		icons = {package_installed = "✓", package_pending = "羽", package_uninstalled = "✗"}
 	}
 }
 require("mason-update-all").setup()
@@ -79,21 +79,12 @@ require("mason-lspconfig").setup {
 
 --------------------------------------------------------------------------------
 -- LSP PLUGINS
-local fffffd
-local lightbulb = require("nvim-lightbulb")
-lightbulb.setup {
+require("nvim-lightbulb").setup {
 	-- not working yet, required workaround below: https://github.com/kosayoda/nvim-lightbulb/issues/39
-	-- ignore = {"null-ls"},
-	-- autocmd = {enabled = true},
-	sign = {
-		priority = 110, -- higher than lsp
-	}
+	ignore = {"marksman"},
+	autocmd = {enabled = true},
+	sign = { priority = 9001 },
 }
-augroup("LightBulb", {})
-autocmd({"CursorHold", "CursorHoldI"}, {
-	group = "LightBulb",
-	callback = function() lightbulb.update_lightbulb {ignore = {"null-ls"}} end,
-})
 fn.sign_define("LightBulbSign", {text = "", texthl = "DiagnosticInfo"})
 
 require("lsp_signature").setup {
