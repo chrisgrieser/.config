@@ -50,8 +50,8 @@ keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = true
 --------------------------------------------------------------------------------
 
 -- Heading instead of function navigation
-keymap({"n", "x"}, "<C-j>", "/^#\\+ <CR>:nohl<CR>", opts)
-keymap({"n", "x"}, "<C-k>", "?^#\\+ <CR>:nohl<CR>", opts)
+keymap({"n", "x"}, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], opts)
+keymap({"n", "x"}, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], opts)
 
 --------------------------------------------------------------------------------
 
