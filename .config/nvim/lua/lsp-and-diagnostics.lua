@@ -79,14 +79,6 @@ require("mason-lspconfig").setup {
 
 --------------------------------------------------------------------------------
 -- LSP PLUGINS
--- .setup not working correctly https://github.com/kosayoda/nvim-lightbulb/issues/39
-augroup("LightBulb", {})
-autocmd({"CursorHold", "CursorHoldI"}, {
-	group = "LightBulb",
-	callback = require("nvim-lightbulb").update_lightbulb,
-})
-fn.sign_define("LightBulbSign", {text = "", texthl = "DiagnosticInfo"})
-
 require("lsp_signature").setup {
 	floating_window = false,
 	hint_prefix = "﬍ ",

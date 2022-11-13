@@ -2,12 +2,15 @@ require("utils")
 --------------------------------------------------------------------------------
 
 -- INFO: linters also need to be added as source below
+-- these require the null-ls name, not the mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
 local lintersAndFormatters = {
 	"eslint_d",
-	"markdownlint",
 	"shellcheck",
 	"yamllint",
-	"proselint",
+	"markdownlint",
+	"write_good",
+	"alex",
+	"textlint",
 	-- stylelint not available :(
 }
 
@@ -69,6 +72,5 @@ null_ls.setup {
 -- mason-null-ls should be loaded after null-ls and mason https://github.com/jayp0521/mason-null-ls.nvim#setup
 
 require("mason-null-ls").setup {
-	-- these require the null-ls name, not the mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
 	ensure_installed = lintersAndFormatters,
 }
