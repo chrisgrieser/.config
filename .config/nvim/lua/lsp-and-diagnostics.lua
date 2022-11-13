@@ -32,14 +32,17 @@ keymap("n", "<leader>D", function()
 end)
 
 function diagnosticFormat(diagnostic, mode)
-	local out
+	local msg = trim(diagnostic.message)
+	local source = trim(diagnostic.source):gsub("%.$", "")
+	local code = tostring(diagnostic.code)
+	local out = msg .. " (" .. code .. ")"
+
 	if diagnostic.source:match("%.$") then -- remove trailing dot for some sources
 		diagnostic.source = diagnostic.source:sub(1, -2)
 	end
-	if diagnostic.source == "stylelint" then
-		out = diagnostic.message -- stylelint already includes the code in the message
-	else
-		out = diagnostic.message .. " (" .. tostring(diagnostic.code) .. ")"
+	-- stylelint already includes the code in the message, write-good has no codes
+	if diagnostic.source == "stylelint" or diagnostic.source == "write-good" then
+		out = diagnostic.message 
 	end
 	if diagnostic.source and mode == "float" then
 		out = out .. " [" .. diagnostic.source .. "]"

@@ -54,8 +54,9 @@ null_ls.setup {
 			extra_args = {"--config-file", fn.expand("~/.config/yamllint/config/.yamllint.yaml")},
 		},
 
-		builtins.code_actions.proselint,
-		builtins.diagnostics.proselint, -- proselint bug causing config to be ignored it seems?
+		builtins.diagnostics.write_good, 
+		builtins.diagnostics.textlint, 
+		builtins.diagnostics.alex, 
 		builtins.hover.dictionary, -- vim's builtin dictionary
 		builtins.formatting.markdownlint,
 		builtins.diagnostics.markdownlint.with {
