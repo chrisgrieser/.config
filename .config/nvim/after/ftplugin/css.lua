@@ -18,11 +18,13 @@ keymap("n", "gS", function() telescope.current_buffer_fuzzy_find {
 	}
 end, opts)
 
--- INFO: fix syntax highlighting with ':syntax sync fromstart'
--- various other solutions are described here: https://github.com/vim/vim/issues/2790
--- however, using treesitter, this is less of an issue, but treesitter css
--- highlighting isn't good yet, so…
-keymap("n", "zz", ":syntax sync fromstart<CR>", {buffer = true})
+--------------------------------------------------------------------------------
+
+-- section jumping instead of function jumping
+keymap({"n", "x"}, "<C-j>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
+keymap({"n", "x"}, "<C-k>", [[?^\/\* <\+ <CR>:nohl<CR>]], opts)
+
+--------------------------------------------------------------------------------
 
 keymap("n", "cv", "^Ewct;", opts) -- change [v]alue key
 keymap("n", "<leader>c", "mzlEF.yEEp`z", opts) -- double [c]lass under cursor

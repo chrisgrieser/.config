@@ -217,6 +217,7 @@ end
 
 function M.duplicateSelection()
 	local prevReg = fn.getreg("z")
+	-- `noautocmd` to not trigger highlighted yank
 	cmd [[noautocmd silent! normal!"zy`]"zp]]
 	fn.setreg("z", prevReg)
 end
