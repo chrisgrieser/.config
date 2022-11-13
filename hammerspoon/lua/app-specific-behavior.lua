@@ -322,7 +322,6 @@ local function highlightsWatcher(appName, eventType, appObject)
 
 	appObject:selectMenuItem {"Tools", "Highlight"}
 	appObject:selectMenuItem {"Tools", "Color", "Yellow"}
-
 	appObject:selectMenuItem {"View", "Hide Toolbar"}
 
 	if isAtOffice() then moveResizeCurWin("maximized")
@@ -342,7 +341,7 @@ local function draftsLaunchWake(appName, eventType, appObject)
 	if isAtOffice() then workspace = "Office" end
 
 	if (eventType == aw.launched) then
-		runDelayed(0.25, function()
+		runDelayed(0.3, function()
 			appObject:selectMenuItem {"View", "Hide Toolbar"}
 			appObject:selectMenuItem {"Workspaces", workspace}
 		end)
@@ -419,8 +418,8 @@ local function discordWatcher(appName, eventType)
 		openLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 	end
 
-	-- when Discord is focused, enclose URL in clipboard with <>
-	-- when Discord is unfocused, removes <> from URL in clipboard
+	-- when focused, enclose URL in clipboard with <>
+	-- when unfocused, removes <> from URL in clipboard
 	local clipb = hs.pasteboard.getContents()
 	if not (clipb) then return end
 
