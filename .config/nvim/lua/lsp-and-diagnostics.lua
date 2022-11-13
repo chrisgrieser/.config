@@ -16,9 +16,8 @@ local lsp_servers = {
 
 --------------------------------------------------------------------------------
 -- DIAGNOTICS (also applies to null-ls)
-local opts = {noremap = true, silent = true}
-keymap("n", "ge", function() vim.diagnostic.goto_next {wrap = true, float = false} end, opts)
-keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = false} end, opts)
+keymap("n", "ge", function() vim.diagnostic.goto_next {wrap = true, float = false} end, {silent = true})
+keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = false} end, {silent = true})
 
 -- toggle diagnostics
 local diagnosticToggled = true;
@@ -51,7 +50,7 @@ end
 vim.diagnostic.config {
 	virtual_text = {
 		format = function(diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
-		severity = {min = vim.diagnostic.severity.WARN}
+		-- severity = {min = vim.diagnostic.severity.WARN},
 	},
 	float = {
 		border = borderStyle,
