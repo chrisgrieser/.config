@@ -23,6 +23,7 @@ g.markdown_fenced_languages = {
 	"json",
 	"toml",
 	"lua",
+	"xml",
 	"javascript",
 	"js=javascript",
 	"typescript",

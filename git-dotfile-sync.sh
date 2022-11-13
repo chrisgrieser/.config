@@ -1,6 +1,6 @@
 #!/bin/zsh
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 # with "--submodules" arg → also pull submodules
-
 #───────────────────────────────────────────────────────────────────────────────
 
 MAX_FILE_SIZE_MB=10

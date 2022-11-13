@@ -21,7 +21,7 @@ Most people tell me they find the following configurations useful:
 > I also have a blog for intermediary-advanced neovim tips: <https://nanotipsforvim.prose.sh/>
 
 ## What is this repository?
-Essentially, it's all of my dotfiles, that I put online for backup, version history, and easy sharing with others.
+Essentially, it's all of my dotfiles that I put online for backup, version history, and easy sharing with others.
 
 __What are "dotfiles"?__
 - Read this excellent [primer what dotfiles are](https://www.freecodecamp.org/news/dotfiles-what-is-a-dot-file-and-how-to-create-it-in-mac-and-linux/).

@@ -40,7 +40,7 @@ __Higher overwrites lower__
 2. Arguments from the defaults-file (`--defaults`) (default location: `~/.pandoc/defaults`)
 3. Another defaults file imported in the defaults file. (`defaults: entry`)
 4. Metadata set as CLI argument (`--metadata`)
-5. YAML of the Document (in the docs mostly referred to as "Metadata")
+5. YAML of the Document (in the docs referred to as "Metadata")
 6. `--metadata-file` (default location: `~/.pandoc/metadata`)
 
 > Options specified in a defaults file itself always have priority over those in another file included with a `defaults: entry`.  
@@ -51,18 +51,19 @@ __Higher overwrites lower__
 > – [Pandoc Docs](https://pandoc.org/MANUAL.html#option--metadata)
 
 ## How Templating works
-> yeah, the pandoc docs aren't really good in explaining templates. So for odt, pptx, and docs, pandoc calls templates "reference documents" (`--reference-doc`), where you style a docx (etc) document and when selected as reference for a docx output, the output gets styled the same way as that document.
+> yeah, the pandoc docs aren't really good in explaining templates. For odt, pptx, and docs, pandoc calls templates "reference documents" (`--reference-doc`), where you style a docx (etc) document and when selected as reference for a docx output, the output gets styled the same way as that document.
 >
-> for *all* other output formats you need actual templates (`--template`), which depend on the output format (html template + css for html output, etc.). Most notoriously, for a PDF output, the type of template you need depends on the pdfengine (`--pdf-engine`) you use are using, since pandoc does not directly convert to pdf, but converts to PDf via something like an "intermediate format". In most cases, it's either a html-based pdf-engine (e.g. `wkhtmltopdf`) in which case you need a html and css template (and need to know html and css for that), or a latex-based pdf-engine (e.g. `pdflatex`), in which case the template needs to be written in latex. And to make it even more complicated, in both cases, there are some variables for the templates (e.g. margins) which can be set in the yaml-metadata of the markdown document.
+> for *all* other output formats you need actual templates (`--template`), which depend on the output format (html template + css for html output, etc.). Most notoriously, for a PDF output, the type of template you need depends on the pdf-engine (`--pdf-engine`) you use are using, since pandoc does not directly convert to pdf, but converts to PDF via something like an "intermediate format". In most cases, it's either a html-based pdf-engine (e.g. `wkhtmltopdf`) in which case you need a html and css template (and need to know html and css for that), or a latex-based pdf-engine (e.g. `pdflatex`), in which case the template needs to be written in latex. And to make it even more complicated, in both cases, there are some variables for the templates (e.g., margins) __which__ can be set in the yaml-metadata of the markdown document.
 >
 > So if you want PDF output, you either have to learn html/css, latex, or simply export to docx (and convert the docx to a pdf), with the latter being probably the easiest approach.
 
 __Summary__
-- output format is `docx` or `pptx`, you need a reference-document in those formats, where you have pre-applied all your styling. Those mostly concern the templating of the look, the templating of content is limited.
+- output format is `docx` or `pptx`, you need a reference-document in those formats, where you have pre-applied all your styling. Those concern the templating of the look, the templating of content is limited.
 - output format is `html`, the look of the output is determined by an `html` template (content) and a `css` file (looks)
 - output format is `pdf`, you either need a `latex` template (which determines looks & content) or you need the `html-css`-combination from above. (Different PDF engines use different forms of templates.)
 
 ## Useful Snippets
+
 ```xml
 <!-- will generate a pagebreak when converting md to docx
 https://pandoc.org/MANUAL.html#generic-raw-attribute
@@ -72,18 +73,18 @@ or via LUA filter https://github.com/pandoc/lua-filters/tree/master/pagebreak --
 ~~~
 ```
 
-```shell
+```sh
 # Insert today's date
 --metadata=date:"$(date "+%e. %B %Y")"
 ```
 
-```shell
+```sh
 # Convert Bibliography files
 # https://tex.stackexchange.com/a/268305
 pandoc "My Library.bib" -t csljson -o "bibtexjson.json"
 ```
 
-```shell
+```sh
 # Batch Conversion
 cd "/folder/with/your/html/files/"
 for f in *.html ; do 
@@ -91,7 +92,7 @@ for f in *.html ; do
 done
 ```
 
-```shell
+```sh
 # read tracked changes from word, compliant with Critic Markup
 pandoc "my file.docx" --track-changes=all -t markdown | grep -C3 "{\."
 ```
