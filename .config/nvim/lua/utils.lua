@@ -29,7 +29,7 @@ function setlocal(option, value)
 	vim.api.nvim_set_option_value(option, value, {scope = "local"})
 end
 
----equivalent to `:setlocal option?`
+---equivalent to `:setlocal option&`
 ---@param option string
 ---@return any
 function getlocalopt(option)
@@ -66,6 +66,7 @@ commonFiletypes = {
 	"conf",
 }
 
+-- filetypes to be ignored by most plugins
 specialFiletypes = {
 	"help",
 	"startuptime",
@@ -80,6 +81,6 @@ specialFiletypes = {
 	"prompt",
 	"TelescopePrompt",
 	"noice",
-	"Mason",
+	"mason",
 	"",
 }

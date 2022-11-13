@@ -12,7 +12,6 @@ local lsp_servers = {
 	"jsonls",
 	"cssls",
 	"marksman", -- markdown
-	"ltex", -- markdown
 }
 
 --------------------------------------------------------------------------------
@@ -20,6 +19,7 @@ local lsp_servers = {
 keymap("n", "ge", function() vim.diagnostic.goto_next {wrap = true, float = false} end, {silent = true})
 keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = false} end, {silent = true})
 keymap("n", "<leader>d", function() vim.diagnostic.open_float {focusable = false} end)
+
 -- toggle diagnostics
 local diagnosticToggled = true;
 keymap("n", "<leader>D", function()
