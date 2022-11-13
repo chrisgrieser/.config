@@ -27,7 +27,7 @@ require("nvim-treesitter.configs").setup {
 
 		-- NOTE: these are the names of the parsers and not the filetype
 		disable = {
-			-- "css", -- looks weird with css
+			"css", -- looks weird with css
 			"markdown", -- looks worse and enables spellcheck in URLs and Code Blocks 🙈
 		},
 
@@ -36,7 +36,7 @@ require("nvim-treesitter.configs").setup {
 		-- for indentation). Using this option may slow down your editor, and you
 		-- may see some duplicate highlights. Instead of true it can also be a
 		-- list of languages
-		additional_vim_regex_highlighting = false,
+		additional_vim_regex_highlighting = {"css"},
 	},
 
 	indentation = {
