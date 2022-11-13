@@ -53,13 +53,13 @@ font:
   size: 26
 #-------------------------------------------------------------------------------
   normal:
-    family: Input Nerd Font
+    family: JetBrainsMonoNL Nerd Font
     style: Regular
   bold:
-    family: Input Nerd Font
+    family: JetBrainsMonoNL Nerd Font
     style: Bold
   italic:
-    family: Input Nerd Font
+    family: JetBrainsMonoNL Nerd Font
     style: Italic
   draw_bold_text_with_bright_colors: true
   builtin_box_drawing: true

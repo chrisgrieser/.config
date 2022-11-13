@@ -27,7 +27,7 @@ require("nvim-treesitter.configs").setup {
 
 		-- NOTE: these are the names of the parsers and not the filetype
 		disable = {
-			"css", -- looks weird with css
+			-- "css", -- looks weird with css
 			"markdown", -- looks worse and enables spellcheck in URLs and Code Blocks 🙈
 		},
 
