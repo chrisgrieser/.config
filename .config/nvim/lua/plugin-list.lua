@@ -78,7 +78,7 @@ function M.PluginList()
 	use "stevearc/dressing.nvim" -- Selection Menus and Inputs
 	use "rcarriga/nvim-notify" -- notifications
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	use "petertriho/nvim-scrollbar" -- also doubles as minimap-light
+	use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter
 
 	-- File Management & Switching
 	use {"nvim-telescope/telescope.nvim", requires = {

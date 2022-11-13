@@ -9,9 +9,11 @@ local lsp_servers = {
 	"sumneko_lua",
 	"yamlls",
 	"tsserver", -- ts/js
-	"marksman", -- markdown
 	"jsonls",
 	"cssls",
+	"marksman", -- markdown
+	"grammarly",
+	"prosemd_lsp",
 }
 
 --------------------------------------------------------------------------------
@@ -249,6 +251,10 @@ lspConfig["yamlls"].setup {
 	capabilities = capabilities,
 }
 lspConfig["jsonls"].setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+lspConfig["grammarly"].setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
 }
