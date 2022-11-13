@@ -316,8 +316,8 @@ function M.reverse()
 	end
 
 	-- toggle case (regular ~)
-	local isLetter = char:upper() ~= char:lower()
-	if isLetter then
+	local letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÄÖÜäöü"
+	if letters:find(char) then
 		cmd [[normal! ~h]]
 		return
 	end

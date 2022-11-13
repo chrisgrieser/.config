@@ -321,12 +321,12 @@ nmap zR :unfoldall
 " nmap Ö :sneakBack
 
 " Hop
-exmap hop obcommand mrj-jump-to-link:activate-jump-to-anywhere
-nmap ö :hop
+" exmap hop obcommand mrj-jump-to-link:activate-jump-to-anywhere
+" nmap ö :hop
 
 " Lightspeed
-" exmap lightspeed mrj-jump-to-link:activate-lightspeed-jump
-" nmap ö :lightspeed
+exmap lightspeed mrj-jump-to-link:activate-lightspeed-jump
+nmap ö :lightspeed
 
 " Link Jump (similar to Vimium's f)
 exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
