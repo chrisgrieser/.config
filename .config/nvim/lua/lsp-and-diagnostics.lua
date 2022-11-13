@@ -1,10 +1,10 @@
 require("utils")
--- INFO: required order of setup() calls is
--- mason, mason-config, nvim-dev, lspconfig
+-- INFO: required order of setup() calls is mason, mason-config, nvim-dev, lspconfig
 -- https://github.com/williamboman/mason-lspconfig.nvim#setup
 --------------------------------------------------------------------------------
 
--- INFO: new servers also need to be set up further below
+-- INFO: Server names are LSP names, not Mason names
+-- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 local lsp_servers = {
 	"sumneko_lua",
 	"yamlls",
@@ -12,15 +12,14 @@ local lsp_servers = {
 	"jsonls",
 	"cssls",
 	"marksman", -- markdown
-	"grammarly",
-	"prosemd_lsp",
+	"ltex", -- markdown
 }
 
 --------------------------------------------------------------------------------
 -- DIAGNOTICS (also applies to null-ls)
 keymap("n", "ge", function() vim.diagnostic.goto_next {wrap = true, float = false} end, {silent = true})
 keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = false} end, {silent = true})
-
+keymap("n", "<leader>d", function() vim.diagnostic.open_float {focusable = false} end)
 -- toggle diagnostics
 local diagnosticToggled = true;
 keymap("n", "<leader>D", function()
@@ -61,7 +60,6 @@ vim.diagnostic.config {
 	}
 }
 
-keymap("n", "<leader>d", function() vim.diagnostic.open_float {focusable = false} end)
 
 --------------------------------------------------------------------------------
 -- Mason Config
@@ -106,21 +104,23 @@ require("lsp-inlayhints").setup {
 	},
 }
 
+-- INFO: this block must come before lua LSP setup
+require("neodev").setup {
+	library = { plugins = false }
+}
+
 --------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
-
--- Signature
-keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help)
 
 -- fallback for languages without an action LSP
 keymap("n", "gs", telescope.treesitter)
 
--- actions defined globally for null-ls
+-- actions defined globally so null-ls can use them without LSP being present
 keymap({"n", "x"}, "<leader>a", vim.lsp.buf.code_action)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local function on_attach(client, bufnr) ---@diagnostic disable-line: unused-local
+local function on_attach(client, bufnr) 
 	require("lsp-inlayhints").on_attach(client, bufnr) ---@diagnostic disable-line: missing-parameter
 
 	local bufopts = {silent = true, buffer = true}
@@ -128,18 +128,15 @@ local function on_attach(client, bufnr) ---@diagnostic disable-line: unused-loca
 	keymap("n", "gD", telescope.lsp_references, bufopts)
 	keymap("n", "gy", telescope.lsp_type_definitions, bufopts)
 	keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts)
+	keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help)
 
 	-- format on manual saving, except for json
-	if client.name ~= "jsonls" then
-		keymap("n", "<D-s>", function()
-			vim.lsp.buf.format {async = true}
-			cmd [[write!]]
-		end, bufopts)
-	end
-
-	if client.name ~= "bashls" then -- don't override man page popup
-		keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
-	end
+	-- if client.name ~= "jsonls" then
+	-- 	keymap("n", "<D-s>", function()
+	-- 		vim.lsp.buf.format {async = true}
+	-- 		cmd [[write!]]
+	-- 	end, bufopts)
+	-- end
 
 	if client.name ~= "cssls" then -- don't override navigation marker search for css files
 		keymap("n", "gs", telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
@@ -159,102 +156,84 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 )
 --------------------------------------------------------------------------------
 -- LSP-SERVER-SPECIFIC SETUP
-local lspConfig = require("lspconfig")
-
--- Enable snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
--- INFO: this block must come before lua LSP setup
-require("neodev").setup {
-	library = {
-		enabled = true,
-		plugins = false,
-	}
-}
 
 -- https://github.com/sumneko/lua-language-server/wiki/Annotations#annotations
 -- https://github.com/sumneko/lua-language-server/wiki/Settings
-lspConfig["sumneko_lua"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			runtime = {version = "LuaJIT"}, -- used by neovim
-			format = {
-				enable = true,
-				defaultConfig = {
-					-- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
-					-- https://github.com/sumneko/lua-language-server/wiki/Formatter
-					quote_style = "double",
-					call_arg_parentheses = "remove_table_only",
-					-- yes, all these must be strings
-					keep_one_space_between_table_and_bracket = "false",
-					keep_one_space_between_namedef_and_attribute = "false",
-					continuous_assign_table_field_align_to_equal_sign = "false",
-					continuation_indent_size = tostring(opt.tabstop:get()),
-				},
+local luaSettings = {
+	Lua = {
+		runtime = {version = "LuaJIT"}, -- used by neovim
+		format = {
+			enable = true,
+			defaultConfig = {
+				-- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
+				-- https://github.com/sumneko/lua-language-server/wiki/Formatter
+				quote_style = "double",
+				call_arg_parentheses = "remove_table_only",
+				-- yes, all these must be strings
+				keep_one_space_between_table_and_bracket = "false",
+				keep_one_space_between_namedef_and_attribute = "false",
+				continuous_assign_table_field_align_to_equal_sign = "false",
+				continuation_indent_size = tostring(opt.tabstop:get()),
 			},
-			completion = {
-				callSnippet = "Replace",
-				keywordSnippet = "Replace",
-				displayContext = 0,
-				showWord = "Enable",
+		},
+		completion = {
+			callSnippet = "Replace",
+			keywordSnippet = "Replace",
+			displayContext = 0,
+			showWord = "Enable",
+		},
+		diagnostics = {
+			globals = {"vim", "use", "martax"},
+			disable = {
+				"trailing-space",
+				"lowercase-global",
 			},
-			diagnostics = {
-				globals = {"vim", "use", "martax"},
-				disable = {
-					"trailing-space",
-					"lowercase-global",
-				},
-			},
-			workspace = {
-				library = {home .. ".hammerspoon/Spoons/EmmyLua.spoon/annotations"}
-			},
-			hint = {
-				enable = true,
-				setType = true,
-				paramName = "All",
-				paramType = true,
-				arrayIndex = "Disable",
-			},
-			telemetry = {enable = false},
-		}
+		},
+		workspace = {
+			library = {home .. ".hammerspoon/Spoons/EmmyLua.spoon/annotations"}
+		},
+		hint = {
+			enable = true,
+			setType = true,
+			paramName = "All",
+			paramType = true,
+			arrayIndex = "Disable",
+		},
+		telemetry = {enable = false},
 	}
 }
 
-lspConfig["cssls"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		css = {
-			lint = {
-				vendorPrefix = "ignore",
-				duplicateProperties = "ignore", -- duplication with stylelint
-				emptyRules = "ignore",
-			},
-			colorDecorators = {enable = true},
-		}
+local cssSettings = {
+	css = {
+		lint = {
+			vendorPrefix = "ignore",
+			-- since it would be duplication with stylelint
+			duplicateProperties = "ignore",
+			emptyRules = "ignore",
+		},
+		colorDecorators = {enable = true}, -- not supported yet
 	}
 }
 
-lspConfig["tsserver"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
-lspConfig["marksman"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
-lspConfig["yamlls"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
-lspConfig["jsonls"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
-lspConfig["grammarly"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
+-- Enable snippet capability for completion (nvim_cmp)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+-- configure all lsp servers
+for _, lsp in pairs(lsp_servers) do
+	local config = {on_attach = on_attach, capabilities = capabilities}
+	if lsp == "sumneko_lua" then
+		config = {
+			on_attach = on_attach,
+			capabilities = capabilities,
+			settings = luaSettings,
+		}
+	elseif lsp == "cssls" then
+		config = {
+			on_attach = on_attach,
+			capabilities = capabilities,
+			settings = cssSettings,
+		}
+	end
+	require("lspconfig")[lsp].setup(config)
+end

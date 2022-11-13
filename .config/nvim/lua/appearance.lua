@@ -61,10 +61,12 @@ require("indent_blankline").setup {
 --------------------------------------------------------------------------------
 -- Scrollbar
 require("scrollbar").setup {
+	handle = {highlight = "Folded"},
 	marks = {
 		GitChange = {text = "┃"},
 		GitAdd = {text = "┃"},
 	},
+	excluded_filetypes = specialFiletypes,
 }
 require("scrollbar.handlers.gitsigns").setup()
 
@@ -74,9 +76,9 @@ require("scrollbar.handlers").register("lastjump", function(bufnr)
 	local lastJump = fn.getjumplist()[2]
 	local lastJumpPos = fn.getjumplist()[1][lastJump]
 	local currentLnum = fn.line(".")
-	local out = {{ line = currentLnum, text = "", type = "Hint", level = 0}}
+	local out = {{line = currentLnum, text = "", type = "Hint", level = 0}}
 	if lastJumpPos.bufnr == bufnr then
-		table.insert(out, { line = lastJumpPos.lnum, text = "▶️" })
+		table.insert(out, {line = lastJumpPos.lnum, text = "▶️"})
 	end
 	return out
 end)
@@ -89,7 +91,7 @@ vim.notify = require("notify") -- use notify.nvim for all vim notifications
 
 require("notify").setup {
 	icons = {WARN = ""},
-	render = "minimal", -- styles, "default"|"minimal"|"simply"
+	render = "minimal", -- styles, "default"|"minimal"|"simple"
 	minimum_width = 25,
 	timeout = 4000,
 	top_down = false,
@@ -176,7 +178,7 @@ end
 
 local function mixedIndentation()
 	local ft = bo.filetype
-	if vim.tbl_contains(specialFiletypes, ft) or ft == "css" or ft == "markdown" or ft == "" then
+	if vim.tbl_contains(specialFiletypes, ft) or ft == "css" or ft == "markdown" then
 		return ""
 	end
 
