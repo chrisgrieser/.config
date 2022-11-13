@@ -49,7 +49,7 @@ opt.titlestring = "%{expand(\"%:p\")} [%{mode()}]"
 opt.cursorline = true
 opt.scrolloff = 12
 opt.sidescrolloff = 17
-opt.textwidth = 80 -- used by `gq` 
+opt.textwidth = 80 -- used by `gq`
 opt.wrap = false
 opt.colorcolumn = {"+1", "+16"} -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
@@ -91,7 +91,7 @@ opt.iskeyword:append("-")
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
 opt.confirm = true -- unsaved buffers trigger confirmation prompt instead of failing
-opt.updatetime = 50 -- affects current symbol highlight from treesitter-refactor and currentline hints
+opt.updatetime = 150 -- affects current symbol highlight from treesitter-refactor and currentline hints
 opt.autochdir = true -- always current directory
 
 augroup("autosave", {})

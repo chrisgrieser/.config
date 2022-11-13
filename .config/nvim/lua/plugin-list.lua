@@ -38,7 +38,6 @@ function M.PluginList()
 		"williamboman/mason-lspconfig.nvim",
 		"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		"ray-x/lsp_signature.nvim",
-		"kosayoda/nvim-lightbulb",
 	}}
 
 	-- Linting
@@ -79,7 +78,7 @@ function M.PluginList()
 	use "stevearc/dressing.nvim" -- Selection Menus and Inputs
 	use "rcarriga/nvim-notify" -- notifications
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	use "petertriho/nvim-scrollbar" 
+	use "petertriho/nvim-scrollbar" -- also doubles as minimap-light
 
 	-- File Management & Switching
 	use {"nvim-telescope/telescope.nvim", requires = {
