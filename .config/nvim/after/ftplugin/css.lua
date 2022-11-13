@@ -20,9 +20,17 @@ end, opts)
 
 --------------------------------------------------------------------------------
 
--- section jumping instead of function jumping
+-- INFO: fix syntax highlighting with ':syntax sync fromstart'
+-- various other solutions are described here: https://github.com/vim/vim/issues/2790
+-- however, using treesitter, this is less of an issue, but treesitter css
+-- highlighting isn't good yet, so…
+keymap("n", "zz", ":syntax sync fromstart<CR>", {buffer = true})
+
+--------------------------------------------------------------------------------
+
+-- Section instead of function movement
 keymap({"n", "x"}, "<C-j>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
-keymap({"n", "x"}, "<C-k>", [[?^\/\* <\+ <CR>:nohl<CR>]], opts)
+keymap({"n", "x"}, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 
 --------------------------------------------------------------------------------
 
