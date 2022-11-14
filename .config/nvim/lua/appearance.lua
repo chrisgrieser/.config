@@ -173,10 +173,10 @@ for type, icon in pairs(signs) do
 end
 
 --------------------------------------------------------------------------------
--- STATUS LINE (LuaLine)
+-- STATUS LINE (LUALINE)
 
--- https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/?utm_source=share&utm_medium=web2x&context=3
 local function lsp_progress()
+	-- https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/?utm_source=share&utm_medium=web2x&context=3
 	local messages = vim.lsp.util.get_progress_messages()
 	if #messages == 0 then return "" end
 
@@ -185,6 +185,14 @@ local function lsp_progress()
 	local ms = vim.loop.hrtime() / 1000000
 	local frame = math.floor(ms / 120) % #spinners
 	return status .. " " .. spinners[frame + 1]
+end
+
+local function recordingStatus()
+	if g.isRecording then
+		return "[ REC]"
+	else
+		return ""
+	end
 end
 
 local function alternateFile()
@@ -249,14 +257,15 @@ require("lualine").setup {
 		lualine_b = {{currentFile}},
 		lualine_c = {{alternateFile}},
 		lualine_x = {
+			{recordingStatus},
 			{"searchcount", fmt = function(str) return str:sub(2, -2) end},
 			{lsp_progress},
 			"diagnostics",
-			{mixedIndentation}
+			{mixedIndentation},
 		},
 		lualine_y = {
 			"diff",
-			{"branch", cond = isStandardBranch,}
+			{"branch", cond = isStandardBranch,},
 		},
 		lualine_z = {
 			-- {"location", separator = ""},

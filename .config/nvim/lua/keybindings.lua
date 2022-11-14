@@ -261,16 +261,23 @@ keymap("o", "Q", commented_lines_textobject, {silent = true})
 -- MACRO & SUBSTITUTION
 -- one-off recording (+ q needs remapping due to being mapped to comments)
 -- needs temporary remapping, since there is no "recording mode"
+g.isRecording = false
 augroup("recording", {})
 autocmd({"RecordingLeave", "VimEnter"}, {
 	group = "recording",
-	callback = function() keymap("n", "0", "qy") end -- not saving in throwaway register z, so the respective keymaps can be used during a macro
+	callback = function()
+		keymap("n", "0", "qy") -- not saving in throwaway register z, so the respective keymaps can be used during a macro
+		g.isRecording = false -- for status line
+	end
 })
 autocmd("RecordingEnter", {
 	group = "recording",
-	callback = function() keymap("n", "0", "q") end
+	callback = function()
+		keymap("n", "0", "q")
+		g.isRecording = true
+	end
 })
-keymap("n", "9", "qy") -- quick replay (don't use counts that high anyway)
+keymap("n", "9", "@y") -- quick replay (don't use counts that high anyway)
 
 -- find & replace under cursor
 keymap("n", "<leader>f", ':% s/<C-r>=expand("<cword>")<CR>//g<Left><Left>')
