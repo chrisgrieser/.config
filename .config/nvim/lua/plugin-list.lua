@@ -47,6 +47,7 @@ function M.PluginList()
 	}}
 
 	-- DAP & Debugging
+	use "metakirby5/codi.vim"
 	-- use {"mfussenegger/nvim-dap", requires = {
 	-- 	"jayp0521/mason-nvim-dap.nvim",
 	-- 	"rcarriga/nvim-dap-ui",
