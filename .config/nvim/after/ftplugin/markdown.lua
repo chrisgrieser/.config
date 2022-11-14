@@ -28,7 +28,6 @@ g.markdown_fenced_languages = {
 	"js=javascript",
 	"typescript",
 	"ts=typescript",
-	"applescript",
 	"bash",
 	"sh=bash",
 	"zsh",

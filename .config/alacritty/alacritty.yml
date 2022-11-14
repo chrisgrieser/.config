@@ -89,7 +89,7 @@ window:
     x: 0  # move completely to the left
     y: 0
   dimensions:
-    columns: 94
+    columns: 100
     lines: 50
   padding:
     x: 5
