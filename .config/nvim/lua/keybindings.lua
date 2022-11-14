@@ -398,7 +398,16 @@ keymap("x", "P", "p") -- override register when pasting
 keymap("n", "V", "Vj") -- visual line mode starts with two lines selected
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
 
-keymap("x", "y", "ygv<Esc>") -- yanking in visual mode keeps position https://stackoverflow.com/a/3806683#comment10788861_3806683
+-- yanking without moving the cursor
+-- visual https://stackoverflow.com/a/3806683#comment10788861_3806683
+-- normal https://vi.stackexchange.com/a/34896
+keymap("x", "y", "ygv<Esc>")
+keymap("n", "y", "mzy") -- however, prevents `yy` with a count
+augroup("yankKeepCursor", {})
+autocmd("TextYankPost", {
+	group = "yankKeepCursor",
+	command = [[silent! normal! `z]]
+})
 
 --------------------------------------------------------------------------------
 -- WINDOW AND BUFFERS
