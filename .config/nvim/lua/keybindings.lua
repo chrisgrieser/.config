@@ -441,7 +441,7 @@ keymap("n", "<leader>ow", ":set wrap! <CR>")
 
 -- TERMINAL MODE
 keymap("n", "<leader>t", ":10split<CR>:terminal<CR>")
-keymap("n", "<leader>g", ":w<CR>:!acp ") -- shell function, enabled via .zshenv
+keymap("n", "<leader>g", [[:w<CR>:!acp ""<Left>]]) -- shell function, enabled via .zshenv
 
 --------------------------------------------------------------------------------
 
