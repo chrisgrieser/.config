@@ -130,6 +130,7 @@ add("markdown", {
 -- JavaScript (General)
 add("javascript", {
 	snip({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:replacement}");'),
+	snip("llog", 'console.${2:log}("$1");\n$0'),
 }, {type = "autosnippets"})
 
 add("javascript", {
@@ -150,7 +151,7 @@ add("javascript", {
 	snip("argv", [[
 		function run(argv){
 			const ${1:query} = argv.join("");
-		} 
+		}
 	]]),
 	snip("Get Alfred Env Var", 'const ${1:envVar} = $.getenv("${1:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
 	snip("Set Alfred Env Var)", [[
