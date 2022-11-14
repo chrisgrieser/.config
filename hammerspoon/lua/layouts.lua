@@ -19,7 +19,6 @@ end
 
 
 function showAllSidebars()
-	-- because of the use of URL schemes, leaves Drafts as the focused app
 	if appIsRunning("Highlights") then app("Highlights"):selectMenuItem{"View", "Show Sidebar"} end
 	openLinkInBackground("obsidian://sidebar?showLeft=true&showRight=false")
 	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
@@ -31,8 +30,7 @@ function movieModeLayout()
 	holeCover()
 	iMacDisplay:setBrightness(0)
 
-	openIfNotRunning("YouTube")
-	runDelayed(0.5, function () openIfNotRunning("YouTube") end) -- safety redundancy
+	repeatFunc({0, 0.5}, function () openIfNotRunning("YouTube") end)
 
 	killIfRunning("Obsidian")
 	killIfRunning("Marta")
@@ -44,8 +42,8 @@ function movieModeLayout()
 	killIfRunning("BusyCal")
 	killIfRunning("Mimestream")
 	killIfRunning("Alfred Preferences")
-	killIfRunning("Sublime Text")
 	killIfRunning("Finder")
+	killIfRunning("Warp")
 	killIfRunning("Alacritty")
 	killIfRunning("alacritty")
 
@@ -53,7 +51,7 @@ function movieModeLayout()
 	setDarkmode(true)
 
 	local twitterrificWin = hs.application("Twitterrific"):mainWindow()
-	moveResize(twitterrificWin, toTheSide) ---@diagnostic disable-line: undefined-global
+	moveResize(twitterrificWin, toTheSide)
 end
 
 function homeModeLayout ()
@@ -77,12 +75,12 @@ function homeModeLayout ()
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
 	killIfRunning("Twitch")
-	privateClosers() ---@diagnostic disable-line: undefined-global
+	privateClosers()
 
 	dockSwitcher("home")
 
 	local homeLayout = {
-		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil}, ---@diagnostic disable-line: undefined-global
+		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
 		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil},
@@ -90,6 +88,7 @@ function homeModeLayout ()
 		{"neovide", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Slack", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Discord", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Warp", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil},
@@ -102,7 +101,7 @@ function homeModeLayout ()
 	runDelayed(1.0, function () app("Drafts"):activate() end)
 
 	if screenIsUnlocked() then
-		runDelayed (10, function()twitterrificAction("scrollup") end)
+		runDelayed (20, function()twitterrificAction("scrollup") end)
 	end
 
 	-- wait until sync is finished, to avoid merge conflict
@@ -148,6 +147,7 @@ function officeModeLayout ()
 		{"Mimestream", nil, screen1, maximized, nil, nil},
 		{"alacritty", nil, screen1, maximized, nil, nil},
 		{"Alacritty", nil, screen1, maximized, nil, nil},
+		{"Warp", nil, screen1, maximized, nil, nil},
 	}
 
 	useLayout(officeLayout)
@@ -192,7 +192,7 @@ function motherMovieModeLayout()
 end
 
 function motherHomeModeLayout()
-	iMacDisplay:setBrightness(0.85)
+	iMacDisplay:setBrightness(0.8)
 	openIfNotRunning("Discord")
 	openIfNotRunning("Slack")
 	openIfNotRunning("Obsidian")
@@ -205,7 +205,7 @@ function motherHomeModeLayout()
 	killIfRunning("Netflix")
 	killIfRunning("IINA")
 	killIfRunning("Twitch")
-	privateClosers() ---@diagnostic disable-line: undefined-global
+	privateClosers()
 
 	alacrittyFontSize(25)
 	dockSwitcher("home")
@@ -214,6 +214,7 @@ function motherHomeModeLayout()
 		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
 		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Warp", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Slack", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Discord", nil, iMacDisplay, pseudoMaximized, nil, nil},
@@ -225,11 +226,8 @@ function motherHomeModeLayout()
 
 	useLayout(motherHomeLayout)
 	showAllSidebars()
-	runDelayed(0.3, function ()
-		useLayout(motherHomeLayout)
-	end)
-	runDelayed(0.6, function () useLayout(motherHomeLayout) end)
-	runDelayed(1, function () useLayout(motherHomeLayout) end)
+
+	repeatFunc({0.05, 0.2}, function() useLayout(motherHomeLayout) end)
 end
 
 --------------------------------------------------------------------------------
@@ -252,7 +250,6 @@ hotkey(hyper, "home", setLayout) -- hyper + eject on Apple Keyboard
 
 --------------------------------------------------------------------------------
 
-
 -- Open at Mouse Screen
 wf_appsOnMouseScreen = wf.new{
 	"Drafts",
@@ -262,6 +259,7 @@ wf_appsOnMouseScreen = wf.new{
 	"Sublime Text",
 	"Alacritty",
 	"alacritty",
+	"Warp",
 	"Slack",
 	"Discord",
 	"Neovide",
@@ -280,8 +278,8 @@ wf_appsOnMouseScreen:subscribe(wf.windowCreated, function (newWindow)
 	if not(mouseScreen) then return end
 	local screenOfWindow = newWindow:screen()
 	if isProjector() and not(mouseScreen:name() == screenOfWindow:name()) then
-		newWindow:moveToScreen(mouseScreen)
-		runDelayed (0.3, function () newWindow:moveToScreen(mouseScreen) end)
-		runDelayed (0.6, function () newWindow:moveToScreen(mouseScreen) end)
+		repeatFunc({0, 0.1, 0.2, 0.4}, function()
+			newWindow:moveToScreen(mouseScreen)
+		end)
 	end
 end)
