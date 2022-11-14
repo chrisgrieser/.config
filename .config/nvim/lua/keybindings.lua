@@ -139,6 +139,8 @@ require("nvim-surround").setup {
 				local patt
 				if ft == "lua" then
 					patt = "^(.-function.-%b())().*(end)()$"
+				elseif ft == "js" or ft == "ts" or ft == "bash" or ft == "zsh" then
+					patt = "^(.-function.-%b() ?{)().*(})()$"
 				else
 					vim.notify("No function-surround defined for " .. ft)
 					patt = "()()()()"
@@ -167,12 +169,6 @@ require("nvim-surround").setup {
 		},
 	}
 }
-
-
-
-print("test")
-
-
 
 -- fix for ss not working, has to come after nvim-surround's setup
 keymap("n", "yss", "ys_", {remap = true})
