@@ -83,8 +83,9 @@ function iinaLaunch(appName, eventType, appObject)
 	if not (eventType == aw.launched and appName == "IINA") then
 		if isProjector() then
 			-- going full screen needs a small delay
-			runDelayed(0.4, function() appObject:selectMenuItem({"Video", "Enter Full Screen"}) end)
-			runDelayed(0.8, function() appObject:selectMenuItem({"Video", "Enter Full Screen"}) end)
+			repeatFunc({0.05, 0.2}, function()
+				appObject:selectMenuItem({"Video", "Enter Full Screen"})
+			end)
 		end
 	end
 end

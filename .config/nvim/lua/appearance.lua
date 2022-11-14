@@ -48,7 +48,6 @@ cmd [[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
 cmd [[call matchadd('myAnnotations', '\<\(TODO\|INFO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
 
 --------------------------------------------------------------------------------
-
 -- Indentation
 require("indent_blankline").setup {
 	show_current_context = true,
@@ -57,14 +56,15 @@ require("indent_blankline").setup {
 	filetype_exclude = specialFiletypes,
 }
 
-
 --------------------------------------------------------------------------------
--- Scrollbar
+-- SCROLLBAR
 require("scrollbar").setup {
 	handle = {highlight = "Folded"},
 	marks = {
 		GitChange = {text = "┃"},
 		GitAdd = {text = "┃"},
+		Hint = {priority = 1},
+		Misc = {priority = 1},
 	},
 	excluded_filetypes = specialFiletypes,
 }
@@ -76,9 +76,9 @@ require("scrollbar.handlers").register("lastjump", function(bufnr)
 	local lastJump = fn.getjumplist()[2]
 	local lastJumpPos = fn.getjumplist()[1][lastJump]
 	local currentLnum = fn.line(".")
-	local out = {{line = currentLnum, text = "", type = "Hint", level = 0}}
+	local out = {{line = currentLnum, text = "", type = "Hint"}}
 	if lastJumpPos.bufnr == bufnr then
-		table.insert(out, {line = lastJumpPos.lnum, text = "▶️"})
+		table.insert(out, {line = lastJumpPos.lnum, text = "▶️", type = "Misc"})
 	end
 	return out
 end)

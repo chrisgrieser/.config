@@ -58,7 +58,7 @@ end
 -- https://directory.getdrafts.com/a/2BS & https://directory.getdrafts.com/a/2BR
 ---@param draftsWin hs.window
 function toggleDraftsSidebar(draftsWin)
-	local function toggle()
+	repeatFunc({0.05, 0.2}, function()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
 		if (drafts_w / screen_w > 0.6) then
@@ -66,10 +66,7 @@ function toggleDraftsSidebar(draftsWin)
 		else
 			openLinkInBackground("drafts://x-callback-url/runAction?text=&action=hide-sidebar")
 		end
-	end
-
-	runDelayed(0.05, toggle)
-	runDelayed(0.2, toggle) -- repetition for some rare cases with lag needed
+	end)
 end
 
 ---@param highlightsWin hs.window
@@ -90,7 +87,7 @@ end
 -- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
 ---@param obsiWin hs.window
 function toggleObsidianSidebar(obsiWin)
-	local function toggle()
+	repeatFunc({0.05, 0.2}, function()
 		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
 		if (numberOfObsiWindows > 1) then return end -- prevent popout window resizing to affect sidebars
 
@@ -104,10 +101,7 @@ function toggleObsidianSidebar(obsiWin)
 		else
 			openLinkInBackground("obsidian://sidebar?showLeft=false&showRight=false")
 		end
-	end
-
-	runDelayed(0.05, toggle)
-	runDelayed(0.2, toggle)
+	end)
 end
 
 --------------------------------------------------------------------------------
@@ -162,10 +156,8 @@ end
 ---@param win hs.window
 ---@param pos hs.geometry
 function moveResize(win, pos)
-	win:moveToUnit(pos)
 	-- has to repeat due window creation delay for some apps
-	runDelayed(0.25, function() win:moveToUnit(pos) end):start()
-	runDelayed(0.5, function() win:moveToUnit(pos) end):start()
+	repeatFunc({0, 0.1, 0.3, 0.5}, function() win:moveToUnit(pos) end)
 end
 
 local function moveCurWinToOtherDisplay()

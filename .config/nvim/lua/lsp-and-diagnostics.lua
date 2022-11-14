@@ -106,7 +106,7 @@ require("lsp-inlayhints").setup {
 
 -- INFO: this block must come before lua LSP setup
 require("neodev").setup {
-	library = { plugins = false }
+	library = {plugins = false}
 }
 
 --------------------------------------------------------------------------------
@@ -120,7 +120,7 @@ keymap({"n", "x"}, "<leader>a", vim.lsp.buf.code_action)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local function on_attach(client, bufnr) 
+local function on_attach(client, bufnr)
 	require("lsp-inlayhints").on_attach(client, bufnr) ---@diagnostic disable-line: missing-parameter
 
 	local bufopts = {silent = true, buffer = true}
@@ -132,10 +132,10 @@ local function on_attach(client, bufnr)
 
 	-- format on manual saving, except for json
 	-- if client.name ~= "jsonls" then
-	-- 	keymap("n", "<D-s>", function()
-	-- 		vim.lsp.buf.format {async = true}
-	-- 		cmd [[write!]]
-	-- 	end, bufopts)
+	keymap("n", "<D-s>", function()
+		vim.lsp.buf.format {async = true}
+		cmd [[write!]]
+	end, bufopts)
 	-- end
 
 	if client.name ~= "cssls" then -- don't override navigation marker search for css files

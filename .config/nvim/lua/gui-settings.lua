@@ -52,7 +52,7 @@ end
 local function light()
 	api.nvim_set_option("background", "light")
 	cmd("colorscheme " .. lightTheme)
-	g.neovide_transparency = 0.94
+	g.neovide_transparency = 0.96
 	customHighlights()
 	themeModifications("light")
 end

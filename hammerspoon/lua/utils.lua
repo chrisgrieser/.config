@@ -15,11 +15,13 @@ I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
 
----comment
----@param delays any
----@param func any
+---Repeat a Function multiple times
+---@param delays table of numbers
+---@param func function to repeat
 function repeatFunc(delays, func)
-	
+	for _, delay in pairs(delays) do
+		hs.timer.doAfter(delay, func)
+	end	
 end
 
 ---@return boolean
