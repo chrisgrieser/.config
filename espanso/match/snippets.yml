@@ -16,6 +16,10 @@ matches:
   - trigger: '!wd'
     replace: '~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/'
 
+  - trigger: ttt
+    replace: "\t"
+    label: Insert a Tab character
+
   - trigger: "!path"
     replace: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH"
     label: PATH
