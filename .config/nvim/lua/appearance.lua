@@ -175,6 +175,18 @@ end
 --------------------------------------------------------------------------------
 -- STATUS LINE (LuaLine)
 
+-- https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/?utm_source=share&utm_medium=web2x&context=3
+local function lsp_progress()
+	local messages = vim.lsp.util.get_progress_messages()
+	if #messages == 0 then return "" end
+
+	local status = (messages[1].percentage or 0) .. "%% " .. (messages[1].title or "")
+	local spinners = {"⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"}
+	local ms = vim.loop.hrtime() / 1000000
+	local frame = math.floor(ms / 120) % #spinners
+	return status .. " " .. spinners[frame + 1]
+end
+
 local function alternateFile()
 	local altPath = fn.expand("#:p")
 	local curPath = fn.expand("%:p")
@@ -238,6 +250,7 @@ require("lualine").setup {
 		lualine_c = {{alternateFile}},
 		lualine_x = {
 			{"searchcount", fmt = function(str) return str:sub(2, -2) end},
+			{lsp_progress},
 			"diagnostics",
 			{mixedIndentation}
 		},
