@@ -144,6 +144,11 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["codi.vim"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/codi.vim",
+    url = "https://github.com/metakirby5/codi.vim"
+  },
   ["diffview.nvim"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/diffview.nvim",

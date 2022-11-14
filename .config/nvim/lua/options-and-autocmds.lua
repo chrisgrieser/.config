@@ -71,7 +71,17 @@ autocmd("BufEnter", {
 augroup("rememberCursorPosition", {})
 autocmd("BufReadPost", {
 	group = "rememberCursorPosition",
-	command = [[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' |  exe "normal! g`\"" | endif]]
+	callback = function()
+		if bo.filetype == "commit" then
+			return
+		elseif bo.filetype == "log" then
+			cmd [[G]] -- for log files jump to the bottom
+		elseif fn.line [['"]] >= fn.line [[$]] then -- in case file has been shortened outside of vim
+			cmd [[G]]
+		elseif fn.line [['"]] >= 1 then
+			cmd [[keepjumps normal! '"]]
+		end
+	end,
 })
 
 -- clipboard & yanking

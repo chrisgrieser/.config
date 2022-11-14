@@ -113,9 +113,6 @@ require("neodev").setup()
 -- fallback for languages without an action LSP
 keymap("n", "gs", telescope.treesitter)
 
--- actions defined globally so null-ls can use them without LSP being present
-keymap({"n", "x"}, "<leader>a", vim.lsp.buf.code_action)
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local function on_attach(client, bufnr)
@@ -128,6 +125,10 @@ local function on_attach(client, bufnr)
 	keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts)
 	keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help)
 
+	-- actions defined globally so null-ls can use them without LSP being present
+	-- apply = true → if there is only one code action, autoselect it
+	keymap("n", "<leader>a", function () vim.lsp.buf.code_action{apply = true} end)
+
 	-- format on manual saving, except for json
 	-- if client.name ~= "jsonls" then
 	keymap("n", "<D-s>", function()
@@ -138,6 +139,7 @@ local function on_attach(client, bufnr)
 
 	if client.name ~= "cssls" then -- don't override navigation marker search for css files
 		keymap("n", "gs", telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
+		keymap("n", "gS", telescope.lsp_workspace_symbols, bufopts)
 	end
 end
 
