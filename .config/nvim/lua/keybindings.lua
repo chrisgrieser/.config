@@ -117,18 +117,46 @@ keymap("o", "r", "}") -- [r]est of the paragraph
 keymap("o", "R", "{")
 
 require("nvim-surround").setup {
-	move_cursor = false,
-	keymaps = {
-		visual = "s",
-	},
-	aliases = {-- aliases should match the bindings further above
+	aliases = {-- aliases should match the bindings above
 		["b"] = ")",
 		["c"] = "}",
 		["r"] = "]",
 		["q"] = '"',
 		["z"] = "'",
 	},
+	move_cursor = false,
+	keymaps = {
+		visual = "s",
+	},
+	surrounds = {
+		["f"] = {
+			delete = "^([^=%s]+%()().-(%))()$",
+			add = function()
+				local cur = require("nvim-treesitter.ts_utils").get_node_at_cursor(0, true)
+				local language = nil
+				if cur then
+					for child_node in cur:iter_children() do
+						if child_node:type() == "info_string" then
+							language = vim.treesitter.query.get_node_text(child_node:child(0), 0)
+						end
+					end
+				end
+
+				if language == "lua" then
+					return {
+						{"function("},
+						{")", "\treturn nil", "end",},
+					}
+				end
+				return {{""}, {""}}
+			end,
+		},
+	}
 }
+
+function testfunc()
+	print("test")
+end
 
 -- special plugin text objects
 keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {silent = true})
