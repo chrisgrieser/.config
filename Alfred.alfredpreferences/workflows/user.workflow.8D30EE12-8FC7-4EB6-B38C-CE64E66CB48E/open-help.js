@@ -1,5 +1,4 @@
 #!/usr/bin/env osascript -l JavaScript
-
 function run(argv) {
 	ObjC.import("stdlib");
 	const app = Application.currentApplication();
@@ -23,9 +22,22 @@ function run(argv) {
 	}
 	if (repoFiles.message) return "Default Branch neither 'master' nor 'main'.";
 
-	const docFiles = repoFiles.tree.filter(file => file.path.startsWith("doc/"));
-	const docFile = docFiles[0].path;
-	const docURL = `https://github.com/${repo}/blob/${branch}/${docFile}`;
+	const docFiles = repoFiles.tree.filter(file => {
+		const isDoc = file.path.startsWith("doc/");
+		const isChangelog = file.path.includes("change");
+		const otherCruff = file.path.includes("secret"); // e.g. telescope
+		return isDoc && !isChangelog && !otherCruff;
+	});
+
+	let docFile;
+	let docURL;
+
+	if (docFiles.length === 0) {
+		docURL = "https://github.com/" + repo + "#readme";
+	} else {
+		docFile = docFiles[0].path;
+		docURL = `https://github.com/${repo}/blob/${branch}/${docFile}`;
+	}
 
 	app.openLocation(docURL);
 }

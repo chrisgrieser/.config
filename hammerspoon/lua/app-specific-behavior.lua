@@ -451,3 +451,16 @@ wf_shottr = wf.new("Shottr")
 		if newWindow:title() == "Preferences" then return end
 		runDelayed(0.1, function() keystroke({}, "a") end)
 	end)
+
+--------------------------------------------------------------------------------
+
+-- WARP
+-- since window size saving & session saving is not separated
+local function warpLaunch(appName, eventType)
+	if appName == "Warp" and eventType == aw.launched then 
+		keystroke({"cmd"})
+	end
+end
+
+warpWatcher = aw.new(warpLaunch)
+warpWatcher:start()
