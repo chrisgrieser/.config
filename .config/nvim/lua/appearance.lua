@@ -64,7 +64,10 @@ require("scrollbar").setup {
 		GitChange = {text = "┃"},
 		GitAdd = {text = "┃"},
 		Hint = {priority = 1},
-		Info = { priority = 1},
+		Misc = {
+			priority = 1,
+			highlight = "Normal",
+		},
 	},
 	excluded_filetypes = specialFiletypes,
 }
@@ -78,15 +81,15 @@ require("scrollbar.handlers").register("lastjump", function(bufnr)
 	local currentLnum = fn.line(".")
 	local out = {{
 		line = currentLnum,
-		text = "",
-		type = "Hint",
+		text = "ﱢ",
+		type = "Misc",
 		level = 6,
 	}}
 	if lastJumpPos.bufnr == bufnr then
 		table.insert(out, {
 			line = lastJumpPos.lnum,
 			text = "▶️",
-			type = "Info",
+			type = "Hint",
 			level = 6,
 		})
 	end
