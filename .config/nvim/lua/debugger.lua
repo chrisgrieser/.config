@@ -6,6 +6,7 @@ local dap = require("dap")
 -- https://github.com/jbyuki/one-small-step-for-vimkind
 --------------------------------------------------------------------------------
 
+-- DAP SETUP
 require("mason-nvim-dap").setup {
 	-- INFO: uses dap-names, not mason-names https://github.com/jayp0521/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
 	ensure_installed = {
@@ -18,9 +19,8 @@ require("mason-nvim-dap").setup {
 	automatic_setup = true,
 }
 
-
 --------------------------------------------------------------------------------
-
+-- CONFIGURATION OF SPECIFIC DEBUGGERS
 -- Lua (one-step-for-vimkind plugin)
 dap.configurations.lua = {{
 	type = "nlua",
@@ -33,12 +33,14 @@ dap.adapters.nlua = function(callback, config)
 end
 
 --------------------------------------------------------------------------------
+-- DAP-RELATED PLUGINS
+-- require("nvim-dap-virtual-text").setup()
 
-require("nvim-dap-virtual-text").setup()
-
+-- require("dapui").setup()
+-- keymap("n", "<leader>bu", require("dapui").toggle)
 
 --------------------------------------------------------------------------------
-
+-- KEYBINDINGS
 keymap("n", "<leader>bb", dap.continue)
 keymap("n", "<leader>bp", dap.toggle_breakpoint)
 keymap("n", "<leader>bs", dap.step_over)
