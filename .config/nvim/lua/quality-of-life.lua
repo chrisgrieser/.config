@@ -151,7 +151,7 @@ function M.copyLastCommand(opts)
 		vim.notify(" No Command has been run yet.", error)
 		return
 	end
-	if not(opts.noColon) then lastCommand = ":"..lastCommand end
+	if not (opts.noColon) then lastCommand = ":" .. lastCommand end
 	fn.setreg(opts.reg, lastCommand)
 	vim.notify(" COPIED\n " .. lastCommand)
 end
@@ -217,8 +217,7 @@ end
 
 function M.duplicateSelection()
 	local prevReg = fn.getreg("z")
-	-- `noautocmd` to not trigger highlighted yank
-	cmd [[noautocmd silent! normal!"zy`]"zp]]
+	cmd [[noautocmd silent! normal!"zy`]"zp]] -- `noautocmd` to not trigger highlighted yank
 	fn.setreg("z", prevReg)
 end
 
@@ -351,7 +350,7 @@ end
 ---select between undoing the last 1h, 4h, or 24h
 ---@param opts table
 function M.undoDuration(opts)
-	if not (opts) then opts = {selection = {"1h", "4h", "24h"}} end
+	if not (opts) then opts = {selection = {"15m", "1h", "4h", "24h"}} end
 
 	vim.ui.select(opts.selection, {prompt = "Undo the last…"}, function(choice)
 		if not (choice) then return end
@@ -388,7 +387,8 @@ function M.insertModePasteFix(opts)
 	if isLinewise then
 		cmd [[normal! gp]]
 	else
-		cmd("normal! i" .. fn.getreg(reg))
+		local toPaste = trim(fn.getreg(reg))
+		cmd("normal! i" .. toPaste)
 		if isEndofLine then
 			cmd [[startinsert!]]
 		else
