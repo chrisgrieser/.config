@@ -1,7 +1,10 @@
+---@diagnostic disable: missing-parameter
 require("utils")
--- https://github.com/L3MON4D3/LuaSnip/blob/master/Examples/snippets.lua
 -- https://code.visualstudio.com/docs/editor/userdefinedsnippets
+-- https://github.com/L3MON4D3/LuaSnip/blob/master/Examples/snippets.lua
 -- https://github.com/L3MON4D3/LuaSnip/blob/master/doc/luasnip.txt
+
+-- INFO: Snippets can be converted between formats with https://github.com/smjonas/snippet-converter.nvim
 --------------------------------------------------------------------------------
 
 local ls = require("luasnip")
