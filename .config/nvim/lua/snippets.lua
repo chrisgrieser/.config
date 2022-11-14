@@ -142,6 +142,7 @@ add("javascript", {
 	snip("app", "const app = Application.currentApplication();\napp.includeStandardAdditions = true;\n$0"),
 	snip("shell script", "app.doShellScript('${1:shellscript}');\n$0"),
 	snip("resolve home (JXA)", 'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
+	snip("exists (file)", '	const fileExists = (filePath) => Application("Finder").exists(Path(filePath));\n$0')
 })
 
 -- Alfred JXA
