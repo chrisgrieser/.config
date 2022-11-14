@@ -344,9 +344,10 @@ keymap({"n", "x"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", qol.undoDuration)
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 
--- Logging
+-- Logging & Debugging
 keymap("n", "<leader>ll", qol.quicklog)
 keymap("n", "<leader>lr", qol.removeLog)
+keymap("n", "<leader>c", ":Codi!!<CR>") -- toggle Codi
 
 --------------------------------------------------------------------------------
 

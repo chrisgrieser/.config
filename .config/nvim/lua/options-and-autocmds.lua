@@ -72,15 +72,17 @@ augroup("rememberCursorPosition", {})
 autocmd("BufReadPost", {
 	group = "rememberCursorPosition",
 	callback = function()
+		local jumpcmd
 		if bo.filetype == "commit" then
 			return
 		elseif bo.filetype == "log" then
-			cmd [[G]] -- for log files jump to the bottom
+			jumpcmd = "G" -- for log files jump to the bottom
 		elseif fn.line [['"]] >= fn.line [[$]] then -- in case file has been shortened outside of vim
-			cmd [[G]]
+			jumpcmd = "G"
 		elseif fn.line [['"]] >= 1 then
-			cmd [[keepjumps normal! '"]]
+			jumpcmd = [['"]]
 		end
+		cmd("keepjumps normal! " .. jumpcmd)
 	end,
 })
 
@@ -176,7 +178,7 @@ local filetypeList = fn.system('ls "$HOME/.config/nvim/templates/skeleton."* | x
 local ftWithSkeletons = split(filetypeList, "\n")
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
-	local readCmd = "0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! G"
+	local readCmd = "0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! Go<Esc>"
 
 	autocmd("BufNewFile", {
 		group = "Templates",
