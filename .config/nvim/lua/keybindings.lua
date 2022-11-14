@@ -131,22 +131,28 @@ require("nvim-surround").setup {
 	},
 	surrounds = {
 		["f"] = {
-			-- find = function()
-			-- 	return require("nvim-surround.config").get_selection {motion = "af"}
-			-- end,
+			find = function()
+				return require("nvim-surround.config").get_selection {motion = "af"}
+			end,
 			delete = function()
 				local ft = bo.filetype
+				local patt
 				if ft == "lua" then
-					return {"f", "^(l?o?c?a?l? ?function.-%(.-%))().-(end)()$"}
+					patt = "^(.-function.-%b())().*(end)()$"
+				else
+					vim.notify("No function-surround defined for " .. ft)
+					patt = "()()()()"
 				end
-				vim.notify("No function-surround defined for " .. ft)
-				return {"f", "()()()()"}
+				return require("nvim-surround.config").get_selections {
+					char = "f",
+					pattern = patt,
+				}
 			end,
 			add = function()
 				local ft = bo.filetype
 				if ft == "lua" then
 					return {
-						{"function ()", "\t"},
+						{"local function ()", "\t"},
 						{"", "end"},
 					}
 				elseif ft == "js" or ft == "ts" or ft == "bash" or ft == "zsh" then
@@ -162,9 +168,11 @@ require("nvim-surround").setup {
 	}
 }
 
-function bla()
-	print("test")
-end
+
+
+print("test")
+
+
 
 -- fix for ss not working, has to come after nvim-surround's setup
 keymap("n", "yss", "ys_", {remap = true})
