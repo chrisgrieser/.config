@@ -9,14 +9,23 @@ function run(argv) {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	const repo = argv.join("").replace(/https:\/\/github\.com\/(.+?\/.*)/, "$1");
+	const repo = argv.join("");
+	const apiUrl = "https://api.github.com/repos/" + repo + "/git/trees/";
+	const main = apiUrl + "main?recursive=1";
+	const master = apiUrl + "master?recursive=1";
 
-	const apiUrl = "https://api.github.com/repos/" + repo + "git/trees/";
-
-	let repoFiles = onlineJSON(apiUrl + "master");
-	if (repoFiles.message) repoFiles = onlineJSON(apiUrl + "main");
+	// try out branches "main" and "master"
+	let repoFiles = onlineJSON(master);
+	let branch = "master";
+	if (repoFiles.message) {
+		repoFiles = onlineJSON(main);
+		branch = "main";
+	}
 	if (repoFiles.message) return "Default Branch neither 'master' nor 'main'.";
 
-	const docFiles = repoFiles.tree.filter()
+	const docFiles = repoFiles.tree.filter(file => file.path.startsWith("doc/"));
+	const docFile = docFiles[0].path;
+	const docURL = `https://github.com/${repo}/blob/${branch}/${docFile}`;
 
+	app.openLocation(docURL);
 }

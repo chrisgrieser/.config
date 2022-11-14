@@ -124,6 +124,7 @@ local function on_attach(client, bufnr)
 	keymap("n", "gy", telescope.lsp_type_definitions, bufopts)
 	keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts)
 	keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help)
+	keymap('n', '<leader>h', vim.lsp.buf.hover, bufopts) -- docs popup
 
 	-- actions defined globally so null-ls can use them without LSP being present
 	-- apply = true → if there is only one code action, autoselect it
