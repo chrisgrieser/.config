@@ -80,12 +80,12 @@ keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
 -- Marks
 keymap("", "ä", "`") -- Goto Mark
 
-
 -- CLIPBOARD
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("n", "gp", qol.pasteDifferently) -- paste charwise reg as linewise & vice versa
+
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
 
@@ -132,31 +132,25 @@ require("nvim-surround").setup {
 		["f"] = {
 			delete = "^([^=%s]+%()().-(%))()$",
 			add = function()
-				local cur = require("nvim-treesitter.ts_utils").get_node_at_cursor(0, true)
-				local language = nil
-				if cur then
-					for child_node in cur:iter_children() do
-						if child_node:type() == "info_string" then
-							language = vim.treesitter.query.get_node_text(child_node:child(0), 0)
-						end
-					end
-				end
-
-				if language == "lua" then
+				local ft = bo.filetype
+				if ft == "lua" then
 					return {
-						{"function("},
-						{")", "\treturn nil", "end",},
+						{"function ()", "\t"},
+						{"", "end"},
+					}
+				elseif ft == "js" or ft == "ts" or ft == "bash" or ft == "zsh" then
+					return {
+						{"function () {", "\t"},
+						{"","}"},
 					}
 				end
+				vim.notify("No function-surround defined for "..ft)
 				return {{""}, {""}}
 			end,
 		},
 	}
 }
 
-function testfunc()
-	print("test")
-end
 
 -- special plugin text objects
 keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {silent = true})
