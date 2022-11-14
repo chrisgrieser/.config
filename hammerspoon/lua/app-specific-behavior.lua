@@ -427,7 +427,7 @@ local function discordWatcher(appName, eventType)
 		local hasURL = clipb:match("^https?:%S+$")
 		local hasObsidianURL = clipb:match("^obsidian:%S+$")
 		local isTweet = clipb:match("^https?://twitter%.com") -- for tweets, the previews are actually useful
-		if (hasURL or hasObsidianURL) and not(isTweet) then
+		if (hasURL or hasObsidianURL) and not (isTweet) then
 			hs.pasteboard.setContents("<" .. clipb .. ">")
 		end
 	elseif eventType == aw.deactivated then
@@ -445,7 +445,8 @@ discordAppWatcher:start()
 
 --------------------------------------------------------------------------------
 
--- SHOTTR: Auto-select Arrow
+-- SHOTTR
+-- Auto-select Arrow
 wf_shottr = wf.new("Shottr")
 	:subscribe(wf.windowCreated, function(newWindow)
 		if newWindow:title() == "Preferences" then return end
@@ -457,8 +458,8 @@ wf_shottr = wf.new("Shottr")
 -- WARP
 -- since window size saving & session saving is not separated
 local function warpLaunch(appName, eventType)
-	if appName == "Warp" and eventType == aw.launched then 
-		keystroke({"cmd"})
+	if appName == "Warp" and eventType == aw.launched then
+		keystroke({"cmd"}, "k") -- clear
 	end
 end
 
