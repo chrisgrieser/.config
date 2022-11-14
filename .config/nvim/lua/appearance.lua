@@ -35,6 +35,7 @@ function customHighlights()
 
 	-- Custom Highlight-Group, used for various LSP Hints
 	cmd [[highlight GhostText guifg=#7c7c7c]]
+
 end
 
 customHighlights()
@@ -59,11 +60,10 @@ require("indent_blankline").setup {
 --------------------------------------------------------------------------------
 -- SCROLLBAR
 require("scrollbar").setup {
-	handle = {highlight = "Folded"},
+	handle = {highlight = "Folded"}, -- bit darker
 	marks = {
 		GitChange = {text = "┃"},
 		GitAdd = {text = "┃"},
-		Hint = {priority = 1},
 		Misc = {
 			priority = 1,
 			highlight = "Normal",
@@ -89,7 +89,7 @@ require("scrollbar.handlers").register("lastjump", function(bufnr)
 		table.insert(out, {
 			line = lastJumpPos.lnum,
 			text = "▶️",
-			type = "Hint",
+			type = "Misc",
 			level = 6,
 		})
 	end

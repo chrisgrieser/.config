@@ -127,6 +127,8 @@ require("nvim-surround").setup {
 	move_cursor = false,
 	keymaps = {
 		visual = "s",
+		normal_cur = "yss",
+		visual_line = "S",
 	},
 	surrounds = {
 		["f"] = {
