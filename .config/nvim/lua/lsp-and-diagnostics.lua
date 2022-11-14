@@ -105,9 +105,7 @@ require("lsp-inlayhints").setup {
 }
 
 -- INFO: this block must come before lua LSP setup
-require("neodev").setup {
-	library = {plugins = false}
-}
+require("neodev").setup() 
 
 --------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
