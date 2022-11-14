@@ -13,7 +13,6 @@ function M.PluginList()
 	-- use "EdenEast/nightfox.nvim"
 	-- use "navarasu/onedark.nvim"
 	-- use "rebelot/kanagawa.nvim"
-	-- use "Yazeed1s/oh-lucy.nvim"
 	-- use "Mofiqul/dracula.nvim"
 	-- use "Yazeed1s/minimal.nvim"
 	-- use "kaiuri/nvim-juliana" -- sublime-mariana like
@@ -30,8 +29,8 @@ function M.PluginList()
 			"p00f/nvim-ts-rainbow",
 		}
 	}
-	use "mityu/vim-applescript" -- applescript syntax highlighting
-	use "hail2u/vim-css3-syntax" -- better css syntax highlighting (until treesitter css looks decent…)
+	use {"mityu/vim-applescript", ft = "applescript"} -- applescript syntax highlighting
+	use {"hail2u/vim-css3-syntax", ft = "css"} -- better css syntax highlighting (until treesitter css looks decent…)
 
 	-- LSP
 	use {"neovim/nvim-lspconfig", requires = {
@@ -48,14 +47,13 @@ function M.PluginList()
 
 	-- DAP & Debugging
 	use "metakirby5/codi.vim"
-	-- use {"mfussenegger/nvim-dap", requires = {
-	-- 	"jayp0521/mason-nvim-dap.nvim",
-	-- 	"rcarriga/nvim-dap-ui",
-	-- 	"mxsdev/nvim-dap-vscode-js",
-	-- }}
+	use {"mfussenegger/nvim-dap", requires = {
+		"jayp0521/mason-nvim-dap.nvim",
+		"rcarriga/nvim-dap-ui",
+		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
+	}}
 
 	-- Completion & Suggestion
-	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
 	use {"hrsh7th/nvim-cmp", requires = {
 		"hrsh7th/cmp-buffer", -- completion sources
 		"hrsh7th/cmp-path",
@@ -63,13 +61,14 @@ function M.PluginList()
 		"dmitmel/cmp-cmdline-history",
 		"hrsh7th/cmp-emoji",
 		"chrisgrieser/cmp-nerdfont",
-		"petertriho/cmp-git",
+		"petertriho/cmp-git", -- git issues, mentions & commits
 		"hrsh7th/cmp-nvim-lsp", -- lsp
 		"folke/neodev.nvim", -- lsp for nvim-lua config
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 	}}
 	use {"tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp"}
+	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
 
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
@@ -88,7 +87,7 @@ function M.PluginList()
 	}}
 
 	-- File History
-	use "mbbill/undotree" -- undo history nagivation
+	use "mbbill/undotree" 
 	use {"sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim"}
 
 	-- Operators & Text Objects

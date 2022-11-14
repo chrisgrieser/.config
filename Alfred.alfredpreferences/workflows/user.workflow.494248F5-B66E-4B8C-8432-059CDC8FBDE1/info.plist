@@ -172,7 +172,7 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 				<key>keyword</key>
 				<string>rl</string>
 				<key>subtext</key>
-				<string>Browser Tab</string>
+				<string>Add Current Browser Tab</string>
 				<key>text</key>
 				<string>⬇️ Read Later</string>
 				<key>withspace</key>
