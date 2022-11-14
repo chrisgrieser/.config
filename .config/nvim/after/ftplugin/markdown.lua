@@ -16,18 +16,12 @@ setlocal("spell", true)
 
 -- syntax highlighting in code blocks
 g.markdown_fenced_languages = {
-	"python",
-	"py=python",
 	"css",
 	"yaml",
 	"json",
-	"toml",
 	"lua",
-	"xml",
 	"javascript",
 	"js=javascript",
-	"typescript",
-	"ts=typescript",
 	"bash",
 	"sh=bash",
 	"zsh",

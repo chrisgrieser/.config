@@ -78,22 +78,14 @@ require("scrollbar.handlers.gitsigns").setup()
 require("scrollbar.handlers").register("lastjump", function(bufnr)
 	local lastJump = fn.getjumplist()[2]
 	local lastJumpPos = fn.getjumplist()[1][lastJump]
-	local currentLnum = fn.line(".")
-	local out = {{
-		line = currentLnum,
-		text = "ﱢ",
-		type = "Misc",
-		level = 6,
-	}}
 	if lastJumpPos.bufnr == bufnr then
-		table.insert(out, {
+		return {{
 			line = lastJumpPos.lnum,
 			text = "▶️",
 			type = "Misc",
 			level = 6,
-		})
+		}}
 	end
-	return out
 end)
 
 
