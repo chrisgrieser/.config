@@ -15,6 +15,13 @@ I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
 
+---comment
+---@param delays any
+---@param func any
+function repeatFunc(delays, func)
+	
+end
+
 ---@return boolean
 function isProjector()
 	local mainDisplayName = hs.screen.primaryScreen():name()
