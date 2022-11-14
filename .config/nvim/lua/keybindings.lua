@@ -127,12 +127,22 @@ require("nvim-surround").setup {
 	move_cursor = false,
 	keymaps = {
 		visual = "s",
-		normal_cur = "yss",
 		visual_line = "S",
 	},
 	surrounds = {
 		["f"] = {
-			delete = "^([^=%s]+%()().-(%))()$",
+			-- delete = "^([^=%s]+%()().-(%))()$",
+			delete = function ()
+				local ft = bo.filetype
+				if ft == "lua" then
+					return {
+						{"function"},
+						{"end"},
+					}
+				end
+				vim.notify("No function-surround defined for "..ft)
+				return {{""}, {""}}
+			end,
 			add = function()
 				local ft = bo.filetype
 				if ft == "lua" then
@@ -153,6 +163,12 @@ require("nvim-surround").setup {
 	}
 }
 
+function bla () print("test") end
+
+-- fix for ss not working, has to come after nvim-surround's setup
+keymap("n", "yss", "ys_", {remap = true})
+keymap("n", "dss", "ds_", {remap = true})
+keymap("n", "css", "cs_", {remap = true})
 
 -- special plugin text objects
 keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {silent = true})
@@ -201,8 +217,6 @@ require("Comment").setup {
 -- position.
 keymap("n", "dq", "mzdCOM`z", {remap = true}) -- requires remap for treesitter and comments.nvim mappings
 keymap("n", "yq", "mzyCOM`z", {remap = true})
-keymap("n", "gUq", "mzgUCOM`z", {remap = true}) -- uppercase comment
-keymap("n", "sq", "mzsCOM`z", {remap = true})
 keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
 
 -- TEXTOBJECT FOR ADJACENT COMMENTED LINES
@@ -313,7 +327,6 @@ substi.setup()
 keymap("n", "s", substi.operator)
 keymap("n", "ss", substi.line)
 keymap("n", "S", substi.eol)
-keymap("x", "s", substi.visual)
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine)
