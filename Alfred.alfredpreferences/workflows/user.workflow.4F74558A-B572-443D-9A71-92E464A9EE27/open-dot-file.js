@@ -51,6 +51,9 @@ workArray.forEach(file => {
 		case "json":
 			iconObject = { "path": "icons/json.png" };
 			break;
+		case "lua":
+			iconObject = { "path": "icons/lua.png" };
+			break;
 		case "yaml":
 		case "yml":
 			iconObject = { "path": "icons/yaml.png" };

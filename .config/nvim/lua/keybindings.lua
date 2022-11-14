@@ -119,7 +119,6 @@ keymap("o", "R", "{")
 require("nvim-surround").setup {
 	move_cursor = false,
 	keymaps = {
-		insert = "<C-g>s",
 		visual = "s",
 	},
 	aliases = {-- aliases should match the bindings further above
