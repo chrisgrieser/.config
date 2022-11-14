@@ -19,7 +19,7 @@ require("treesitter-config")
 require("lsp-and-diagnostics")
 require("completion") -- should come after lsp
 require("linter") -- should come after lsp
--- require("debugger")
+require("debugger") -- should come after lsp
 require("snippets")
 
 if isGui() then
