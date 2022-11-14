@@ -3,7 +3,6 @@ local dap = require("dap")
 --------------------------------------------------------------------------------
 -- INFO: setup descriptions
 -- https://github.com/mxsdev/nvim-dap-vscode-js#setup
--- https://github.com/jbyuki/one-small-step-for-vimkind
 --------------------------------------------------------------------------------
 
 -- DAP SETUP
@@ -22,6 +21,7 @@ require("mason-nvim-dap").setup {
 --------------------------------------------------------------------------------
 -- CONFIGURATION OF SPECIFIC DEBUGGERS
 -- Lua (one-step-for-vimkind plugin)
+-- https://github.com/jbyuki/one-small-step-for-vimkind
 dap.configurations.lua = {{
 	type = "nlua",
 	request = "attach",
