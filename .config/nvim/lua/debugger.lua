@@ -1,14 +1,25 @@
 require("utils")
 local dap = require("dap")
 --------------------------------------------------------------------------------
+-- INFO: setup descriptions
+-- https://github.com/mxsdev/nvim-dap-vscode-js#setup
+-- https://github.com/jbyuki/one-small-step-for-vimkind
+--------------------------------------------------------------------------------
 
 require("mason-nvim-dap").setup {
+	-- INFO: uses dap-names, not mason-names https://github.com/jayp0521/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
 	ensure_installed = {
-		-- one-step-for-vimkind not included with mason
+		-- "bash",
+		-- "node2",
+		-- "js",
+		-- "chrome",
 	},
+	-- one-step-for-vimkind not included with mason
 	automatic_setup = true,
 }
 
+
+--------------------------------------------------------------------------------
 
 -- Lua (one-step-for-vimkind plugin)
 dap.configurations.lua = {{
@@ -24,7 +35,6 @@ end
 --------------------------------------------------------------------------------
 
 require("nvim-dap-virtual-text").setup()
--- https://github.com/mxsdev/nvim-dap-vscode-js#setup
 
 
 --------------------------------------------------------------------------------
