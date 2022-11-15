@@ -46,7 +46,7 @@ cmd [[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 
 -- Annotations
 cmd [[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
-cmd [[call matchadd('myAnnotations', '\<\(TODO\|INFO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
+cmd [[call matchadd('myAnnotations', '\<\(HACK\|TODO\|INFO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
 
 --------------------------------------------------------------------------------
 -- Indentation
@@ -75,11 +75,9 @@ require("scrollbar").setup {
 require("scrollbar.handlers.gitsigns").setup()
 -- Custom Scrollbar Handlers https://github.com/petertriho/nvim-scrollbar#custom-handlers
 
--- custom scrollbar showing current location and last jump (if in same buffer)
-require("scrollbar.handlers").register("lastjumploc", function(bufnr)
-end)
-
+-- HACK using one custom function instead of two due to https://github.com/petertriho/nvim-scrollbar/issues/66
 require("scrollbar.handlers").register("marksmarks", function(bufnr)
+	-- marks in scrollbar
 	local excluded_marks = "z"
 	local marks = fn.getmarklist(bufnr) ---@diagnostic disable-line: param-type-mismatch
 	local out = {}
@@ -97,7 +95,7 @@ require("scrollbar.handlers").register("marksmarks", function(bufnr)
 		end
 	end
 
-	-- using one custom function instead of two due to https://github.com/petertriho/nvim-scrollbar/issues/66
+	-- last jumplocation
 	local lastJump = fn.getjumplist()[2]
 	local lastJumpPos = fn.getjumplist()[1][lastJump]
 	if lastJumpPos.bufnr == bufnr then
@@ -111,6 +109,15 @@ require("scrollbar.handlers").register("marksmarks", function(bufnr)
 
 	return out
 end)
+
+-- HACK workaround due to neovim's `:delmarks` not persistently deleting marks
+-- https://www.reddit.com/r/neovim/comments/qliuid/the_overly_persistent_marks_problem/
+-- https://github.com/neovim/neovim/issues/4295
+augroup("delmarksFix", {})
+autocmd("BufReadPost", {
+	group = "delmarksFix",
+	command = "delmarks a-z",
+})
 
 --------------------------------------------------------------------------------
 -- Notifications
