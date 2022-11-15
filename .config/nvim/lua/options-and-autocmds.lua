@@ -75,11 +75,11 @@ autocmd("BufReadPost", {
 		local jumpcmd
 		if bo.filetype == "commit" then
 			return
-		elseif bo.filetype == "log" then
-			jumpcmd = "G" -- for log files jump to the bottom
+		elseif bo.filetype == "log" then -- for log files jump to the bottom
+			jumpcmd = "G"
 		elseif fn.line [['"]] >= fn.line [[$]] then -- in case file has been shortened outside of vim
 			jumpcmd = "G"
-		elseif fn.line [['"]] >= 1 then
+		elseif fn.line [['"]] >= 1 then -- check file has been entered already
 			jumpcmd = [['"]]
 		end
 		cmd("keepjumps normal! " .. jumpcmd)
@@ -103,7 +103,7 @@ opt.iskeyword:append("-")
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
 opt.confirm = true -- unsaved buffers trigger confirmation prompt instead of failing
-opt.updatetime = 50 -- affects current symbol highlight from treesitter-refactor and currentline hints
+opt.updatetime = 500 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 opt.autochdir = true -- always current directory
 
 augroup("autosave", {})

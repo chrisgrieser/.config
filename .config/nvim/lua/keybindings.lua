@@ -78,8 +78,9 @@ keymap("n", "gü", "/http.*<CR>:nohl<CR>") -- goto next
 keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
 
 -- Marks
-keymap("", "ä", "`") -- Goto Mark
-keymap("", "<C-m>", ":delmarks a-z<CR>") -- clear local marks
+keymap("", "m", "`") -- Goto Mark (changing this also requires adapting `dq` and `cq` mappings)
+keymap("", "ä", "m") -- Set Mark
+keymap("", "<C-m>", ":delmarks a-z<CR><C-e><C-y>") -- clear local marks, scrolling to update marks in scrollbar
 
 -- CLIPBOARD
 keymap("n", "x", '"_x')
@@ -239,9 +240,11 @@ require("Comment").setup {
 -- overlap in visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
-keymap("n", "dq", "mzdCOM`z", {remap = true}) -- requires remap for treesitter and comments.nvim mappings
+-- INFO: Also need to use the remapped "ä", cannot use noremap since "COM" from
+-- treesitter textobj is needed 🥴
+keymap("n", "dq", "äzdCOM`z", {remap = true}) -- requires remap for treesitter and comments.nvim mappings
 keymap("n", "yq", "yCOM", {remap = true}) -- thanks to yank positon saving, doesnt need to be done here
-keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
+keymap("n", "cq", 'äz"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
 
 -- TEXTOBJECT FOR ADJACENT COMMENTED LINES
 -- = qu for uncommenting
@@ -427,8 +430,7 @@ keymap("", "<C-Up>", ":resize -3<CR>")
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 
 -- Buffers
-keymap("", "<C-Tab>", "<C-^>") -- for footpedal
-keymap({"n", "x"}, "gt", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
+keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
 
 --------------------------------------------------------------------------------
 -- FILES
