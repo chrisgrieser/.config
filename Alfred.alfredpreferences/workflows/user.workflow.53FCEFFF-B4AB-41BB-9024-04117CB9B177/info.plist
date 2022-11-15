@@ -151,23 +151,23 @@ https://www.buymeacoffee.com/dennistra</string>
 		<key>177877D7-B9C6-4769-B88B-D310CE841A9C</key>
 		<dict>
 			<key>xpos</key>
-			<real>510</real>
+			<real>320</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>270</real>
 		</dict>
 		<key>230B7E17-DE58-409D-821F-A8F7228E7B6D</key>
 		<dict>
 			<key>xpos</key>
-			<real>240</real>
+			<real>50</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>215</real>
 		</dict>
 		<key>BD993DCC-6A60-4320-903E-EF147BC55589</key>
 		<dict>
 			<key>xpos</key>
-			<real>515</real>
+			<real>320</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>165</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

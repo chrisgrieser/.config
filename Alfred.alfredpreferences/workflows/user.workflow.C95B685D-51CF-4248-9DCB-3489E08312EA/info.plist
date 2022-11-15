@@ -55,7 +55,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Subtitle &amp; Catch Torrents</string>
+	<string>Subtitle</string>
 	<key>objects</key>
 	<array>
 		<dict>
