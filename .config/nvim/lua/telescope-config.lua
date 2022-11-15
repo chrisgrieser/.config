@@ -73,10 +73,12 @@ require("telescope").setup {
 		},
 		lsp_document_symbols = {
 			prompt_prefix='* ',
+			ignore_symbols = {"string", "boolean", "number"},
 		},
 		lsp_workspace_symbols = {
 			prompt_prefix='** ',
-			show_line = false,
+			ignore_symbols = {"string", "boolean", "number"},
+			fname_width = 17,
 		},
 		treesitter = {
 			prompt_prefix=' ',
@@ -97,7 +99,6 @@ require("telescope").setup {
 		},
 		git_bcommits = {
 			prompt_prefix=' ',
-			-- git_command = {"git", "log", "--pretty=format:%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)"},
 		},
 		buffers = {
 			prompt_prefix='﬘ ',
