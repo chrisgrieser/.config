@@ -92,10 +92,14 @@ keymap("n", "gp", qol.pasteDifferently) -- paste charwise reg as linewise & vice
 keymap("x", "y", "ygv<Esc>")
 keymap("n", "y", "mzy") -- however, prevents `yy` with a count
 augroup("yankKeepCursor", {})
--- autocmd("TextYankPost", {
--- 	group = "yankKeepCursor",
--- 	command = [[silent! normal! `z]]
--- })
+autocmd("TextYankPost", {
+	group = "yankKeepCursor",
+	callback = function ()
+		if vim.v.event.operator == "y" then
+			cmd[[silent! normal! `z]]
+		end
+	end
+})
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
