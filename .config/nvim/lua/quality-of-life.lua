@@ -245,7 +245,10 @@ function M.hr(opts)
 	local hr = comstr:gsub(" ?%%s ?", fullLine)
 	if bo.filetype == "markdown" then hr = "---" end
 
-	append(".", {hr, ""})
+	local linesToAppend = {"", hr, ""}
+	if wasOnBlank then linesToAppend = {hr, ""} end
+
+	append(".", linesToAppend)
 	cmd [[normal! j==]] -- move down and indent
 
 	-- shorten if it was on blank line, since fn.indent() does not return indent
@@ -278,7 +281,7 @@ function M.reverse()
 	end
 
 	local col = getCursor(0)[2] + 1
-	local char = getline("."):sub(col, col) ---@diagnostic disable-line: param-type-mismatch, undefined-field
+	local char = getline("."):sub(col, col) 
 
 	-- toggle words
 	local opposite = ""

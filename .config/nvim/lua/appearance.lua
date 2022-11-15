@@ -64,6 +64,7 @@ require("scrollbar").setup {
 	marks = {
 		GitChange = {text = "┃"},
 		GitAdd = {text = "┃"},
+		Cursor = {highlight = "Comment"}, -- less dark
 		Misc = {
 			priority = 1,
 			highlight = "Normal",
