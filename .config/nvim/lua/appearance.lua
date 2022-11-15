@@ -75,27 +75,6 @@ require("scrollbar").setup {
 require("scrollbar.handlers.gitsigns").setup()
 -- Custom Scrollbar Handlers https://github.com/petertriho/nvim-scrollbar#custom-handlers
 
-require("scrollbar.handlers").register("marksmarks", function(bufnr)
-	local excluded_marks = "z"
-	local marks = fn.getmarklist(bufnr) ---@diagnostic disable-line: param-type-mismatch
-	local out = {}
-	table.insert(out, {line = 0, text = ""}) -- ensure at least one dummy element in return list to prevent errors when there is no valid mark
-
-	for _, markObj in pairs(marks) do
-		local mark = markObj.mark:sub(2, 2)
-		local isLetter = mark:lower() ~= mark:upper()
-		if isLetter and not (excluded_marks:find(mark)) then
-			table.insert(out, {
-				line = markObj.pos[2],
-				text = mark,
-				type = "Info",
-				level = 6,
-			})
-		end
-	end
-	return out
-end)
-
 -- custom scrollbar showing current location and last jump (if in same buffer)
 require("scrollbar.handlers").register("lastjumploc", function(bufnr)
 	local lastJump = fn.getjumplist()[2]
@@ -109,6 +88,26 @@ require("scrollbar.handlers").register("lastjumploc", function(bufnr)
 		}}
 	end
 	return {{line = 0, text = ""}}
+end)
+
+require("scrollbar.handlers").register("marksmarks", function(bufnr)
+	local excluded_marks = "z"
+	local marks = fn.getmarklist(bufnr) ---@diagnostic disable-line: param-type-mismatch
+	local out = {}
+	table.insert(out, {line = 0, text = ""}) -- ensure at least one dummy element in return list to prevent errors when there is no valid mark
+	for _, markObj in pairs(marks) do
+		local mark = markObj.mark:sub(2, 2)
+		local isLetter = mark:lower() ~= mark:upper()
+		if isLetter and not (excluded_marks:find(mark)) then
+			table.insert(out, {
+				line = markObj.pos[2],
+				text = mark,
+				type = "Info",
+				level = 6,
+			})
+		end
+	end
+	return out
 end)
 
 --------------------------------------------------------------------------------

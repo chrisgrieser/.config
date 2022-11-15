@@ -12,11 +12,21 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</string>
+				<string>D9E07FDE-1870-42B0-B6D4-AA209906679E</string>
 				<key>modifiers</key>
 				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Open :help at GitHub</string>
+				<string>⇧: Search issues</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Open :help at GitHub</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -103,45 +113,15 @@
 				<false/>
 			</dict>
 		</array>
-		<key>799F31B4-F294-42FD-B4F4-2D190B6C7A33</key>
+		<key>79F25308-2C64-400B-AC1D-C1FD5FC840DF</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</string>
-				<key>modifiers</key>
-				<integer>131072</integer>
-				<key>modifiersubtext</key>
-				<string>⇧: Open :help at GitHub</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
+				<string>F9A20C61-953A-4498-8DBA-0DDCF26A94A3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Copy Packer Line</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy GitHub URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -151,6 +131,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>2BA0A448-A9A0-4E6E-B964-1B6FF2DC2A86</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D9E07FDE-1870-42B0-B6D4-AA209906679E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>79F25308-2C64-400B-AC1D-C1FD5FC840DF</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -199,6 +192,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/.local/share/nvim</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>09E95958-33BA-4403-A120-ED77024AAB7E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -216,21 +224,6 @@
 			<string>5A271BE0-443A-43F2-A9FA-C01047FE0F58</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/.local/share/nvim</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>09E95958-33BA-4403-A120-ED77024AAB7E</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -299,21 +292,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/.local/state/nvim/swap</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>6DA05A81-0D56-4CD6-A247-5D15F1F24D8F</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -331,6 +309,21 @@
 			<string>62F7FD14-3DF1-4FBC-9C3B-B99132F28919</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/.local/state/nvim/swap</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>6DA05A81-0D56-4CD6-A247-5D15F1F24D8F</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -371,27 +364,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>4C8471ED-D799-4D45-B9DD-EEA5E5B94EA0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>2BA0A448-A9A0-4E6E-B964-1B6FF2DC2A86</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -444,25 +416,111 @@ echo "Size reset."</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>lastpathcomponent</key>
 				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>2BA0A448-A9A0-4E6E-B964-1B6FF2DC2A86</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>F9A20C61-953A-4498-8DBA-0DDCF26A94A3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading...</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-help.js</string>
+				<string>issue-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search for Issues on GitHub</string>
 				<key>type</key>
 				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</string>
+			<string>79F25308-2C64-400B-AC1D-C1FD5FC840DF</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string> </string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>repo</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>D9E07FDE-1870-42B0-B6D4-AA209906679E</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -488,51 +546,25 @@ echo "Size reset."</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>vp</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>search-nvim-plugins.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search Neovim Plugin</string>
+				<string>open-help.js</string>
 				<key>type</key>
 				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>799F31B4-F294-42FD-B4F4-2D190B6C7A33</string>
+			<string>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -571,7 +603,7 @@ echo "Size reset."</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>nvim</string>
+				<string>nv</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -654,9 +686,9 @@ echo "Size reset."</string>
 			<key>note</key>
 			<string>plugin search</string>
 			<key>xpos</key>
-			<real>50</real>
+			<real>55</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>785</real>
 		</dict>
 		<key>09E95958-33BA-4403-A120-ED77024AAB7E</key>
 		<dict>
@@ -669,10 +701,12 @@ echo "Size reset."</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
+			<key>note</key>
+			<string>open help page</string>
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>650</real>
 		</dict>
 		<key>2BA0A448-A9A0-4E6E-B964-1B6FF2DC2A86</key>
 		<dict>
@@ -711,7 +745,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>785</real>
 		</dict>
 		<key>6DA05A81-0D56-4CD6-A247-5D15F1F24D8F</key>
 		<dict>
@@ -729,16 +763,16 @@ echo "Size reset."</string>
 			<key>ypos</key>
 			<real>95</real>
 		</dict>
-		<key>799F31B4-F294-42FD-B4F4-2D190B6C7A33</key>
+		<key>79F25308-2C64-400B-AC1D-C1FD5FC840DF</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>9</integer>
 			<key>note</key>
-			<string>plugin search</string>
+			<string>issue search GitHub</string>
 			<key>xpos</key>
-			<real>50</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>510</real>
 		</dict>
 		<key>959E0C24-63F8-4632-8402-40832861A03B</key>
 		<dict>
@@ -751,19 +785,32 @@ echo "Size reset."</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>copy url</string>
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>835</real>
+			<real>1040</real>
+		</dict>
+		<key>D9E07FDE-1870-42B0-B6D4-AA209906679E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>295</real>
+			<key>ypos</key>
+			<real>540</real>
 		</dict>
 		<key>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>copy packer line</string>
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>900</real>
 		</dict>
 		<key>E8FE5041-BE45-45DC-B8BF-78785E3AD196</key>
 		<dict>
@@ -782,11 +829,11 @@ echo "Size reset."</string>
 		<key>F5BC25CE-C34C-4EF9-B428-71EDB9170948</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>1</integer>
 			<key>xpos</key>
 			<real>505</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>650</real>
 		</dict>
 		<key>F5FCFE38-5C42-4335-BD61-3B4658A9C8F8</key>
 		<dict>
@@ -796,6 +843,15 @@ echo "Size reset."</string>
 			<real>50</real>
 			<key>ypos</key>
 			<real>255</real>
+		</dict>
+		<key>F9A20C61-953A-4498-8DBA-0DDCF26A94A3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>505</real>
+			<key>ypos</key>
+			<real>510</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
