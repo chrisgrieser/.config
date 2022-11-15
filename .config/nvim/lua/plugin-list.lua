@@ -46,7 +46,6 @@ function M.PluginList(use)
 	}}
 
 	-- DAP & Debugging
-	use "metakirby5/codi.vim"
 	use {"mfussenegger/nvim-dap", requires = {
 		"jayp0521/mason-nvim-dap.nvim",
 		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
