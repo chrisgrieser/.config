@@ -511,7 +511,7 @@ echo "Size reset."</string>
 				<false/>
 				<key>variables</key>
 				<dict>
-					<key>repo</key>
+					<key>repoID</key>
 					<string>{query}</string>
 				</dict>
 			</dict>
@@ -688,7 +688,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>55</real>
 			<key>ypos</key>
-			<real>785</real>
+			<real>755</real>
 		</dict>
 		<key>09E95958-33BA-4403-A120-ED77024AAB7E</key>
 		<dict>
@@ -706,7 +706,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>620</real>
 		</dict>
 		<key>2BA0A448-A9A0-4E6E-B964-1B6FF2DC2A86</key>
 		<dict>
@@ -722,7 +722,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>255</real>
+			<real>225</real>
 		</dict>
 		<key>5A271BE0-443A-43F2-A9FA-C01047FE0F58</key>
 		<dict>
@@ -745,7 +745,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>785</real>
+			<real>755</real>
 		</dict>
 		<key>6DA05A81-0D56-4CD6-A247-5D15F1F24D8F</key>
 		<dict>
@@ -761,7 +761,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>55</real>
 			<key>ypos</key>
-			<real>95</real>
+			<real>65</real>
 		</dict>
 		<key>79F25308-2C64-400B-AC1D-C1FD5FC840DF</key>
 		<dict>
@@ -772,7 +772,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>480</real>
 		</dict>
 		<key>959E0C24-63F8-4632-8402-40832861A03B</key>
 		<dict>
@@ -790,7 +790,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>1040</real>
+			<real>1010</real>
 		</dict>
 		<key>D9E07FDE-1870-42B0-B6D4-AA209906679E</key>
 		<dict>
@@ -799,7 +799,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>295</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>510</real>
 		</dict>
 		<key>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</key>
 		<dict>
@@ -810,7 +810,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>870</real>
 		</dict>
 		<key>E8FE5041-BE45-45DC-B8BF-78785E3AD196</key>
 		<dict>
@@ -824,7 +824,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>95</real>
+			<real>65</real>
 		</dict>
 		<key>F5BC25CE-C34C-4EF9-B428-71EDB9170948</key>
 		<dict>
@@ -833,7 +833,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>505</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>620</real>
 		</dict>
 		<key>F5FCFE38-5C42-4335-BD61-3B4658A9C8F8</key>
 		<dict>
@@ -842,7 +842,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>50</real>
 			<key>ypos</key>
-			<real>255</real>
+			<real>225</real>
 		</dict>
 		<key>F9A20C61-953A-4498-8DBA-0DDCF26A94A3</key>
 		<dict>
@@ -851,7 +851,7 @@ echo "Size reset."</string>
 			<key>xpos</key>
 			<real>505</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>480</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

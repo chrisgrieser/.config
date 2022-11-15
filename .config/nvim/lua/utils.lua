@@ -1,7 +1,7 @@
 require("lua-utils") -- does not work with symlink, therefore hardlink
 --------------------------------------------------------------------------------
 
-opt = vim.opt -- global options
+opt = vim.opt -- global options obj
 g = vim.g -- global variables
 api = vim.api
 fn = vim.fn
@@ -17,7 +17,7 @@ error = vim.log.levels.ERROR
 warn = vim.log.levels.WARN
 
 telescope = require("telescope.builtin") -- requires loading extensions first
-qol = require("quality-of-life") 
+qol = require("quality-of-life")
 
 --------------------------------------------------------------------------------
 

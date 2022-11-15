@@ -113,12 +113,12 @@ add("applescript", {
 
 -- Alfred AppleScript
 add("applescript", {
-	snip("Get Alfred Env Var", 'set ${1:envvar} to (system attribute "${1:envvar}")'),
-	snip("Get Alfred Env Var (Unicode Fix)",
+	snip("Get Alfred Env", 'set ${1:envvar} to (system attribute "${1:envvar}")'),
+	snip("Get Alfred Env (Unicode Fix)",
 		'set ${1:envvar} to do shell script "echo " & quoted form of (system attribute "${1:envvar}") & " | iconv -f UTF-8-MAC -t MACROMAN"\n$0'),
-	snip("Set Alfred Env Var",
+	snip("Set Alfred Env",
 		'tell application id "com.runningwithcrayons.Alfred" to set configuration "${1:envvar}" to value ${2:value} in workflow (system attribute "alfred_workflow_bundleid")\n$0'),
-	snip("argv", "replace: set input to argv as string")
+	snip("argv", "set input to argv as string\n$0")
 })
 
 -- Markdown
@@ -153,8 +153,9 @@ add("javascript", {
 			const ${1:query} = argv.join("");
 		}
 	]]),
-	snip("Get Alfred Env Var", 'const ${1:envVar} = $.getenv("${1:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
-	snip("Set Alfred Env Var)", [[
+	snip("Get Alfred Env (short)", 'const ${1:envVar} = $.getenv("${1:envVar}")\n$0'),
+	snip("Get Alfred Env (long)", 'const ${1:envVar} = $.getenv("${1:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
+	snip("Set Alfred Env)", [[
 		function setEnvVar(envVar, newValue) {
 			Application("com.runningwithcrayons.Alfred")
 				.setConfiguration(envVar, {
