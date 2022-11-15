@@ -73,22 +73,7 @@ require("scrollbar").setup {
 	excluded_filetypes = specialFiletypes,
 }
 require("scrollbar.handlers.gitsigns").setup()
-
--- custom scrollbar showing current location and last jump (if in same buffer)
--- https://github.com/petertriho/nvim-scrollbar#custom-handlers
-require("scrollbar.handlers").register("lastjump", function(bufnr)
-	local lastJump = fn.getjumplist()[2]
-	local lastJumpPos = fn.getjumplist()[1][lastJump]
-	if lastJumpPos.bufnr ~= bufnr then
-		return {{line = 0, text = ""}} -- dummy return to prevent error
-	end
-	return {{
-		line = lastJumpPos.lnum,
-		text = "▶️",
-		type = "Misc",
-		level = 6,
-	}}
-end)
+-- Custom Scrollbar Handlers https://github.com/petertriho/nvim-scrollbar#custom-handlers
 
 require("scrollbar.handlers").register("marksmarks", function(bufnr)
 	local excluded_marks = "z"
@@ -109,6 +94,21 @@ require("scrollbar.handlers").register("marksmarks", function(bufnr)
 		end
 	end
 	return out
+end)
+
+-- custom scrollbar showing current location and last jump (if in same buffer)
+require("scrollbar.handlers").register("lastjumploc", function(bufnr)
+	local lastJump = fn.getjumplist()[2]
+	local lastJumpPos = fn.getjumplist()[1][lastJump]
+	if lastJumpPos.bufnr == bufnr then
+		return {{
+			line = lastJumpPos.lnum,
+			text = "▶️",
+			type = "Misc",
+			level = 6,
+		}}
+	end
+	return {{line = 0, text = ""}}
 end)
 
 --------------------------------------------------------------------------------
