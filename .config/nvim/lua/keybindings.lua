@@ -86,6 +86,17 @@ keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("n", "gp", qol.pasteDifferently) -- paste charwise reg as linewise & vice versa
 
+-- yanking without moving the cursor
+-- visual https://stackoverflow.com/a/3806683#comment10788861_3806683
+-- normal https://vi.stackexchange.com/a/34896
+keymap("x", "y", "ygv<Esc>")
+keymap("n", "y", "mzy") -- however, prevents `yy` with a count
+augroup("yankKeepCursor", {})
+-- autocmd("TextYankPost", {
+-- 	group = "yankKeepCursor",
+-- 	command = [[silent! normal! `z]]
+-- })
+
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
 
@@ -354,7 +365,6 @@ keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 -- Logging & Debugging
 keymap("n", "<leader>ll", qol.quicklog)
 keymap("n", "<leader>lr", qol.removeLog)
-keymap("n", "<leader>c", ":Codi!!<CR>") -- toggle Codi
 
 --------------------------------------------------------------------------------
 
@@ -397,17 +407,6 @@ keymap("x", "P", "p") -- override register when pasting
 
 keymap("n", "V", "Vj") -- visual line mode starts with two lines selected
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
-
--- yanking without moving the cursor
--- visual https://stackoverflow.com/a/3806683#comment10788861_3806683
--- normal https://vi.stackexchange.com/a/34896
-keymap("x", "y", "ygv<Esc>")
-keymap("n", "y", "mzy") -- however, prevents `yy` with a count
-augroup("yankKeepCursor", {})
-autocmd("TextYankPost", {
-	group = "yankKeepCursor",
-	command = [[silent! normal! `z]]
-})
 
 --------------------------------------------------------------------------------
 -- WINDOW AND BUFFERS
