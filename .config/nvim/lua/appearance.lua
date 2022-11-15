@@ -77,17 +77,6 @@ require("scrollbar.handlers.gitsigns").setup()
 
 -- custom scrollbar showing current location and last jump (if in same buffer)
 require("scrollbar.handlers").register("lastjumploc", function(bufnr)
-	local lastJump = fn.getjumplist()[2]
-	local lastJumpPos = fn.getjumplist()[1][lastJump]
-	if lastJumpPos.bufnr == bufnr then
-		return {{
-			line = lastJumpPos.lnum,
-			text = "▶️",
-			type = "Misc",
-			level = 6,
-		}}
-	end
-	return {{line = 0, text = ""}}
 end)
 
 require("scrollbar.handlers").register("marksmarks", function(bufnr)
@@ -107,6 +96,19 @@ require("scrollbar.handlers").register("marksmarks", function(bufnr)
 			})
 		end
 	end
+
+	-- using one custom function instead of two due to https://github.com/petertriho/nvim-scrollbar/issues/66
+	local lastJump = fn.getjumplist()[2]
+	local lastJumpPos = fn.getjumplist()[1][lastJump]
+	if lastJumpPos.bufnr == bufnr then
+		table.insert(out, {
+			line = lastJumpPos.lnum,
+			text = "▶️",
+			type = "Misc",
+			level = 6,
+		})
+	end
+
 	return out
 end)
 
