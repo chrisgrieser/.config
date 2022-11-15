@@ -67,7 +67,7 @@ keymap("i", "<D-i>", "**<Left>", opts)
 -- cmd+e for inline code done in gui-settings, since also used for other cases
 -- outside of markdown (e.g. template strings)
 
-keymap("n", "<CR>", "A", opts) -- So double return keeps markdown list syntax
+-- Misc
 keymap("n", "<leader>x", "mz^lllrx`z", opts) -- check markdown tasks
 keymap("n", "<leader>-", "mzI- <Esc>`z", opts) -- Add bullet point
 keymap("n", "<leader>>", "mzI> <Esc>`z", opts) -- Turn into blockquote

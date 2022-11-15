@@ -185,12 +185,9 @@ nmap gcc :.s/^|$/%%/g
 " << Markdown-specific
 """"""""""""""""""""""
 
-" allows Double Enter to add new line and indent with bullet points
-nmap <CR> A
-
 " delete alias part of next Wikilink
 " (or Link Homepage when using Auto Title Plugin)
-nmap <leader>l t|"_dt]
+nmap ,l t|"_dt]
 
 " append to [y]aml (line 3 = tags)
 nmap ,y 3ggA
