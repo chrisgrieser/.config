@@ -73,6 +73,9 @@ require("telescope").setup {
 		},
 		lsp_document_symbols = {
 			prompt_prefix='* ',
+		},
+		lsp_workspace_symbols = {
+			prompt_prefix='** ',
 			show_line = false,
 		},
 		treesitter = {

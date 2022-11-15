@@ -236,7 +236,7 @@ require("Comment").setup {
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
 keymap("n", "dq", "mzdCOM`z", {remap = true}) -- requires remap for treesitter and comments.nvim mappings
-keymap("n", "yq", "mzyCOM`z", {remap = true})
+keymap("n", "yq", "yCOM", {remap = true}) -- thanks to yank positon saving, doesnt need to be done here
 keymap("n", "cq", 'mz"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
 
 -- TEXTOBJECT FOR ADJACENT COMMENTED LINES
