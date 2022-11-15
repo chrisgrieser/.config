@@ -79,8 +79,8 @@ add("zsh", {
 
 add("lua", {
 	snip("resolve home", 'os.getenv("HOME")'),
-	snip("for", [[
-		for i=1, #${1:array} do
+	snip("for (list)", [[
+		for _, value pairs(${1:list_table}) do
 			$0
 		end
 	]]),

@@ -78,17 +78,35 @@ require("scrollbar.handlers.gitsigns").setup()
 require("scrollbar.handlers").register("lastjump", function(bufnr)
 	local lastJump = fn.getjumplist()[2]
 	local lastJumpPos = fn.getjumplist()[1][lastJump]
-	if lastJumpPos.bufnr == bufnr then
-		return {{
-			line = lastJumpPos.lnum,
-			text = "▶️",
-			type = "Misc",
-			level = 6,
-		}}
+	if lastJumpPos.bufnr ~= bufnr then
+		return {{line = 0, text = ""}} -- dummy return to prevent error
 	end
-	return {{line = 0, text = ""}}
+	return {{
+		line = lastJumpPos.lnum,
+		text = "▶️",
+		type = "Misc",
+		level = 6,
+	}}
 end)
 
+require("scrollbar.handlers").register("marksmarks", function(bufnr)
+	local marks = fn.getmarklist(bufnr) ---@diagnostic disable-line: param-type-mismatch
+	if #marks == 0 then return {{line = 0, text = ""}} end -- dummy return to prevent error
+
+	local out = {}
+	for _, mark in pairs(marks) do
+		local markname = mark.mark:sub(2, 2)
+		local isLetter = markname:lower() ~= markname:upper()
+		if not(isLetter) then break end
+		table.insert(out, {
+			line = mark.pos[2],
+			text = markname,
+			type = "Info",
+			level = 6,
+		})
+	end
+	return out
+end)
 
 --------------------------------------------------------------------------------
 -- Notifications
