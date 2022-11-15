@@ -79,6 +79,7 @@ keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
 
 -- Marks
 keymap("", "ä", "`") -- Goto Mark
+keymap("", "<C-m>", ":delmarks a-z<CR>") -- clear local marks
 
 -- CLIPBOARD
 keymap("n", "x", '"_x')
@@ -88,10 +89,15 @@ keymap("n", "gp", qol.pasteDifferently) -- paste charwise reg as linewise & vice
 
 -- yanking without moving the cursor
 -- visual https://stackoverflow.com/a/3806683#comment10788861_3806683
--- normal https://vi.stackexchange.com/a/34896
+-- normal https://www.reddit.com/r/vim/comments/ekgy47/comment/fddnfl3/
 keymap("x", "y", "ygv<Esc>")
-keymap("n", "y", "mzy") -- however, prevents `yy` with a count
 augroup("yankKeepCursor", {})
+autocmd({"CursorMoved", "VimEnter"}, {
+	group = "yankKeepCursor",
+	callback = function ()
+		g.cursorPreYankPos = 
+	end
+})
 autocmd("TextYankPost", {
 	group = "yankKeepCursor",
 	callback = function ()
