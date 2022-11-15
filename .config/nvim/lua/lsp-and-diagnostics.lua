@@ -105,7 +105,7 @@ require("lsp-inlayhints").setup {
 }
 
 -- INFO: this block must come before lua LSP setup
-require("neodev").setup() 
+require("neodev").setup()
 
 --------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
@@ -180,18 +180,19 @@ local luaSettings = {
 		completion = {
 			callSnippet = "Replace",
 			keywordSnippet = "Replace",
-			displayContext = 0,
-			showWord = "Enable",
+			displayContext = 1,
+			showWord = "Fallback",
 		},
 		diagnostics = {
-			globals = {"vim", "use", "martax"},
+			globals = {"martax"},
 			disable = {
 				"trailing-space",
 				"lowercase-global",
 			},
 		},
 		workspace = {
-			library = {home .. ".hammerspoon/Spoons/EmmyLua.spoon/annotations"}
+			library = {home .. ".hammerspoon/Spoons/EmmyLua.spoon/annotations"},
+			checkThirdParty = false, -- https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		},
 		hint = {
 			enable = true,

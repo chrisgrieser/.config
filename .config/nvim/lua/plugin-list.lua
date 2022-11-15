@@ -1,5 +1,5 @@
 local M = {}
-function M.PluginList()
+function M.PluginList(use)
 
 	-- Package Management
 	use "wbthomason/packer.nvim" -- packer manages itself

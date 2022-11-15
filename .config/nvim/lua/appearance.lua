@@ -86,6 +86,7 @@ require("scrollbar.handlers").register("lastjump", function(bufnr)
 			level = 6,
 		}}
 	end
+	return {{line = 0, text = ""}}
 end)
 
 
@@ -171,20 +172,19 @@ local function lsp_progress()
 	-- https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/?utm_source=share&utm_medium=web2x&context=3
 	local messages = vim.lsp.util.get_progress_messages()
 	if #messages == 0 then return "" end
+	local progess = messages[1].percentage or 0
+	local task = messages[1].title or ""
+	task = task:gsub("^(%w+).*", "%1") -- only first word
 
-	local status = (messages[1].percentage or 0) .. "%% " .. (messages[1].title or "")
 	local spinners = {"⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"}
 	local ms = vim.loop.hrtime() / 1000000
 	local frame = math.floor(ms / 120) % #spinners
-	return status .. " " .. spinners[frame + 1]
+	return progess .. "%% " .. task .. " " .. spinners[frame + 1]
 end
 
 local function recordingStatus()
-	if g.isRecording then
-		return "[ REC]"
-	else
-		return ""
-	end
+	if g.isRecording then return "[ REC]"
+	else return "" end
 end
 
 local function alternateFile()
@@ -250,7 +250,10 @@ require("lualine").setup {
 		lualine_c = {{alternateFile}},
 		lualine_x = {
 			{recordingStatus},
-			{"searchcount", fmt = function(str) return str:sub(2, -2) end},
+			{"searchcount", fmt = function(str)
+				if str == "" then return "" end
+				return " " .. str:sub(2, -2)
+			end},
 			{lsp_progress},
 			"diagnostics",
 			{mixedIndentation},
@@ -259,10 +262,7 @@ require("lualine").setup {
 			"diff",
 			{"branch", cond = isStandardBranch,},
 		},
-		lualine_z = {
-			-- {"location", separator = ""},
-			"location",
-		},
+		lualine_z = {"location"},
 	},
 	options = {
 		theme = "auto",
