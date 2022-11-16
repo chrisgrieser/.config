@@ -1,12 +1,44 @@
 require("utils")
+local styler = require("styler")
+local auto_dark_mode = require("auto-dark-mode")
+local currentTheme = g.colors_name
 --------------------------------------------------------------------------------
 
-local lightTheme = "melange"
-local darkTheme = "tokyonight-moon"
+local darkThemes = {
+	default = "tokyonight-moon",
+	yaml = "melange",
+	lua = "onedark",
+}
+
+local lightThemes = {
+	default = "dawnfox",
+	yaml = "melange",
+	lua = "dawnfox",
+}
+
+local stylerLightThemes = {}
+for ft, theme in pairs(lightThemes) do
+	if not (ft == "default") then
+		stylerLightThemes[ft] = {
+			colorscheme = theme,
+			background = "light",
+		}
+	end
+end
+
+local stylerDarkThemes = {}
+for ft, theme in pairs(darkThemes) do
+	if not (ft == "default") then
+		stylerDarkThemes[ft] = {
+			colorscheme = theme,
+			background = "dark",
+		}
+	end
+end
 
 --------------------------------------------------------------------------------
 
--- CUSTOM HIGHLIGHTS
+-- CUSTOM HIGHLIGHTS & Theme Modifications
 -- have to wrapped in function and regularly called due to auto-dark-mode
 -- regularly resetting the theme
 local function customHighlights()
@@ -45,22 +77,18 @@ local function customHighlights()
 	cmd [[highlight! def link luaParenError NormalFloat]]
 end
 
-customHighlights() -- run once to apply them
-
---------------------------------------------------------------------------------
-
 ---@param mode string light|dark
-function themeModifications(mode)
-	if g.colors_name == "tokyonight" then
+local function themeModifications(mode)
+	if currentTheme == "tokyonight" then
 		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
 		for _, v in pairs(modes) do
 			cmd("highlight lualine_y_diff_modified_" .. v .. " guifg=#acaa62")
 			cmd("highlight lualine_y_diff_added_" .. v .. " guifg=#8cbf8e")
 		end
-	elseif g.colors_name == "dawnfox" then
+	elseif currentTheme == "dawnfox" then
 		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
 		cmd [[highlight VertSplit guifg=#b29b84]]
-	elseif g.colors_name == "melange" and mode == "light" then
+	elseif currentTheme == "melange" and mode == "light" then
 		cmd [[highlight def link @punctuation @label]]
 		cmd [[highlight! def link Todo IncSearch]]
 		cmd [[highlight! def link NotifyINFOIcon @define]]
@@ -69,29 +97,37 @@ function themeModifications(mode)
 	end
 end
 
-local function light()
-	api.nvim_set_option("background", "light")
-	cmd("colorscheme " .. lightTheme)
-	g.neovide_transparency = 0.96
-	customHighlights()
-	themeModifications("light")
-end
-
---
-local function dark()
-	api.nvim_set_option("background", "dark")
-	cmd("colorscheme " .. darkTheme)
-	g.neovide_transparency = 0.97
-	customHighlights()
-	themeModifications("dark")
-end
+--------------------------------------------------------------------------------
+-- AUTO DARK MODE
 
 -- toggle theme with OS
-local auto_dark_mode = require("auto-dark-mode")
 auto_dark_mode.setup {
 	update_interval = 3000, ---@diagnostic disable-line: assign-type-mismatch
-	set_dark_mode = dark,
-	set_light_mode = light,
+	set_dark_mode = function()
+		api.nvim_set_option("background", "dark")
+		cmd("colorscheme " .. darkThemes.default)
+		g.neovide_transparency = 0.97
+		themeModifications("dark")
+	end,
+	set_light_mode = function()
+		api.nvim_set_option("background", "light")
+		cmd("colorscheme " .. lightThemes.default)
+		g.neovide_transparency = 0.96
+		themeModifications("light")
+	end,
 }
 auto_dark_mode.init()
+
+--------------------------------------------------------------------------------
+
+customHighlights() -- run once to apply them
+
+augroup("themeChange", {})
+autocmd("ColorScheme", {
+	group = "themeChange",
+	callback = function ()
+		customHighlights()
+		local mode = api.nvim_get_option(name)
+	end,
+})
 
