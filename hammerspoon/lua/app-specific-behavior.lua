@@ -237,7 +237,7 @@ local function finderWatcher(appName, eventType, appObject)
 		end
 	elseif eventType == aw.launched then
 		-- quit Finder if it was started as a helper, but has no window
-		runDelayed(1, function()
+		repeatFunc({1, 5, 10}, function()
 			if appObject and not (appObject:mainWindow()) then
 				appObject:kill()
 			end
