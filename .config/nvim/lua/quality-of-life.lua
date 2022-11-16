@@ -249,15 +249,17 @@ function M.hr(opts)
 	if wasOnBlank then linesToAppend = {hr, ""} end
 
 	append(".", linesToAppend)
-	cmd [[normal! j==]] -- move down and indent
 
 	-- shorten if it was on blank line, since fn.indent() does not return indent
 	-- line would have if it has content
 	if wasOnBlank then
+		cmd [[normal! j==]] -- move down and indent
 		local hrIndent = fn.indent(".")
 		-- cannot use simply :sub, since it assumes one-byte-size chars
 		local hrLine = getline("."):gsub(linechar, "", hrIndent)
 		setline(".", hrLine)
+	else
+		cmd [[normal! jj==]] 
 	end
 end
 

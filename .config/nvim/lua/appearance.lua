@@ -36,6 +36,8 @@ function customHighlights()
 	-- Custom Highlight-Group, used for various LSP Hints
 	cmd [[highlight GhostText guifg=#7c7c7c]]
 
+	-- bugfix for https://github.com/neovim/neovim/issues/20456
+	cmd [[highlight! def link luaParenError NormalFloat]]
 end
 
 customHighlights()
