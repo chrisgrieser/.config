@@ -178,7 +178,7 @@ local filetypeList = fn.system('ls "$HOME/.config/nvim/templates/skeleton."* | x
 local ftWithSkeletons = split(filetypeList, "\n")
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
-	local readCmd = "0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! Go<Esc>"
+	local readCmd = "0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! Go"
 
 	autocmd("BufNewFile", {
 		group = "Templates",
