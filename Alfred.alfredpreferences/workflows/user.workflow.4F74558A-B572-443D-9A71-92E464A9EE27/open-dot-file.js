@@ -1,11 +1,17 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
+function alfredMatcher(str) {
+	const clean = str.replace(/[-()_.:#;,/\\[\]]/g, " ");
+	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeperated, str].join(" ");
+}
+
 const getEnv = (path) => $.getenv(path).replace(/^~/, app.pathTo("home folder"));
+
+//──────────────────────────────────────────────────────────────────────────────
 
 const jsonArray = [];
 const dotfileFolder = getEnv ("dotfile_folder");

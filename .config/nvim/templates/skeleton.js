@@ -7,7 +7,7 @@ app.includeStandardAdditions = true;
 const onlineJSON = (url) => JSON.parse(app.doShellScript(`curl -s "${url}"`));
 
 function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#/\\;,]/g, " ");
+	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
 	return [clean, camelCaseSeperated, str].join(" ");
 }
