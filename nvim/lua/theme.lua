@@ -2,7 +2,7 @@ require("utils")
 --------------------------------------------------------------------------------
 
 local lightTheme = "melange"
-local darkTheme = "minimal"
+local darkTheme = "tokyonight-moon"
 
 --------------------------------------------------------------------------------
 
@@ -47,8 +47,6 @@ end
 
 customHighlights() -- to apply on default
 
---------------------------------------------------------------------------------
-
 function themeModifications()
 	local mode = api.nvim_get_option("background")
 	if g.colors_name == "tokyonight" then
@@ -77,11 +75,15 @@ auto_dark_mode.setup {
 		api.nvim_set_option("background", "dark")
 		cmd("colorscheme " .. darkTheme)
 		g.neovide_transparency = 0.97
+		themeModifications() -- for some reason, the ColorScheme is not triggered here, requiring the call here
+		customHighlights()
 	end,
 	set_light_mode = function()
 		api.nvim_set_option("background", "light")
 		cmd("colorscheme " .. lightTheme)
 		g.neovide_transparency = 0.96
+		themeModifications()
+		customHighlights()
 	end,
 }
 auto_dark_mode.init()

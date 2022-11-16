@@ -77,7 +77,6 @@ function M.PluginList(use)
 	use "rcarriga/nvim-notify" -- notifications
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 	use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter
-	use "folke/styler.nvim"
 
 	-- File Management & Switching
 	use {"nvim-telescope/telescope.nvim", requires = {
