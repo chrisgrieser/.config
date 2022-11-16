@@ -2113,7 +2113,7 @@ Recommended Hotkey: ⇧⌘2</string>
 	<key>variables</key>
 	<dict>
 		<key>focusedapp</key>
-		<string>Obsidian</string>
+		<string>Brave Browser</string>
 		<key>hotkeyUsed</key>
 		<string>false</string>
 		<key>ocr_languages</key>
@@ -2125,9 +2125,9 @@ Recommended Hotkey: ⇧⌘2</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
-		<string>hotkeyUsed</string>
-		<string>tagToExcludeFromSearch</string>
 		<string>url_to_open_after</string>
+		<string>tagToExcludeFromSearch</string>
+		<string>hotkeyUsed</string>
 	</array>
 	<key>version</key>
 	<string>0.8</string>
