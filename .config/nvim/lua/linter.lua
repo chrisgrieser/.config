@@ -69,7 +69,7 @@ null_ls.setup {
 }
 
 --------------------------------------------------------------------------------
--- mason-null-ls should be loaded after null-ls and mason 
+-- mason-null-ls should be loaded after null-ls and mason
 -- https://github.com/jayp0521/mason-null-ls.nvim#setup
 
 require("mason-null-ls").setup {

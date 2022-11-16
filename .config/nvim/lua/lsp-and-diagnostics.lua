@@ -130,13 +130,13 @@ local function on_attach(client, bufnr)
 	-- apply = true → if there is only one code action, autoselect it
 	keymap("n", "<leader>a", function () vim.lsp.buf.code_action{apply = true} end)
 
-	-- format on manual saving, except for json
-	-- if client.name ~= "jsonls" then
-	keymap("n", "<D-s>", function()
-		vim.lsp.buf.format {async = true}
-		cmd [[write!]]
-	end, bufopts)
-	-- end
+	-- format on manual save, not for tsserver since using eslint there instead
+	if client.name ~= "tsserver" then
+		keymap("n", "<D-s>", function()
+			vim.lsp.buf.format {async = true}
+			cmd [[write!]]
+		end, bufopts)
+	end
 
 	if client.name ~= "cssls" then -- don't override navigation marker search for css files
 		keymap("n", "gs", telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
@@ -233,6 +233,9 @@ local tsserverSettings = {
 			showInlayHints = true,
 			documentFormat = true,
 			javascript = {
+				format = {
+					insertSpaceAfterCommaDelimiter = false,
+				},
 				inlayHints = {
 					includeInlayEnumMemberValueHints = true,
 					includeInlayFunctionLikeReturnTypeHints = true,
