@@ -2,8 +2,8 @@ require("lua.utils")
 require("lua.window-management")
 require("lua.system-and-cron")
 --------------------------------------------------------------------------------
--- TRANSPARENT background for Obsidian & Alacritty & Neovim
 
+-- TRANSPARENT background for Obsidian & Alacritty & Neovim
 local function hideAllExcept(appNotToHide)
 	local mainScreen = hs.screen.mainScreen()
 	local wins = hs.window.orderedWindows() -- `orderedWindows()` ignores headless apps like Twitterrific
@@ -105,7 +105,7 @@ wf_browser = wf.new("Brave Browser")
 		if hasSound then spotifyTUI("pause") end
 	end)
 
--- Automatically hide Browser when no window
+-- Automatically hide Browser has when no window
 wf_browser_all = wf.new("Brave Browser")
 	:setOverrideFilter {allowRoles = "AXStandardWindow"}
 	:subscribe(wf.windowDestroyed, function()
@@ -183,7 +183,7 @@ wf_neovim = wf.new("neovide")
 
 -- ALACRITTY
 -- pseudomaximized window
-wf_alacritty = wf.new("alacritty")
+wf_alacritty = wf.new({"alacritty", "Alacritty"})
 	:setOverrideFilter {rejectTitles = {"^cheatsheet: "}}
 	:subscribe(wf.windowCreated, function()
 		if isAtOffice() or isProjector() then
