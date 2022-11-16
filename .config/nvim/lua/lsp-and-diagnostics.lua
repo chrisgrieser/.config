@@ -205,15 +205,54 @@ local luaSettings = {
 	}
 }
 
+-- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
 local cssSettings = {
 	css = {
 		lint = {
 			vendorPrefix = "ignore",
-			-- since it would be duplication with stylelint
+			propertyIgnoredDueToDisplay = "error",
+			universalSelector = "warning",
+			float = "warning",
+			boxModel = "error",
+			-- since these would be duplication with stylelint
 			duplicateProperties = "ignore",
 			emptyRules = "ignore",
 		},
 		colorDecorators = {enable = true}, -- not supported yet
+	}
+}
+
+-- https://github.com/sublimelsp/LSP-typescript/blob/master/LSP-typescript.sublime-settings 
+local tsserverSettings = { 
+	tsserver = { 
+		settings = { 
+			diagnostics = {
+				ignoredCodes = {},
+			},
+			show_inlay_hints = true,
+			javascript = { 
+				inlayHints = { 
+					includeInlayEnumMemberValueHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayParameterNameHints = "none",
+					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayVariableTypeHints = true,
+				},
+			},
+			typescript = { 
+				inlayHints = { 
+					includeInlayEnumMemberValueHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayParameterNameHints = "none",
+					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayVariableTypeHints = true,
+				},
+			},
+		}
 	}
 }
 
@@ -225,17 +264,11 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 for _, lsp in pairs(lsp_servers) do
 	local config = {on_attach = on_attach, capabilities = capabilities}
 	if lsp == "sumneko_lua" then
-		config = {
-			on_attach = on_attach,
-			capabilities = capabilities,
-			settings = luaSettings,
-		}
+		config.settings = luaSettings
+	elseif lsp == "tsserver" then
+		config.settings = tsserverSettings
 	elseif lsp == "cssls" then
-		config = {
-			on_attach = on_attach,
-			capabilities = capabilities,
-			settings = cssSettings,
-		}
+		config.settings = cssSettings
 	end
 	require("lspconfig")[lsp].setup(config)
 end
