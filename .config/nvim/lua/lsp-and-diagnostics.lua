@@ -222,16 +222,18 @@ local cssSettings = {
 	}
 }
 
--- https://github.com/sublimelsp/LSP-typescript/blob/master/LSP-typescript.sublime-settings 
-local tsserverSettings = { 
-	tsserver = { 
-		settings = { 
+-- https://github.com/sublimelsp/LSP-typescript/blob/master/LSP-typescript.sublime-settings
+local tsserverSettings = {
+	tsserver = {
+		settings = {
 			diagnostics = {
 				ignoredCodes = {},
 			},
 			show_inlay_hints = true,
-			javascript = { 
-				inlayHints = { 
+			showInlayHints = true,
+			documentFormat = true,
+			javascript = {
+				inlayHints = {
 					includeInlayEnumMemberValueHints = true,
 					includeInlayFunctionLikeReturnTypeHints = true,
 					includeInlayFunctionParameterTypeHints = true,
@@ -241,8 +243,8 @@ local tsserverSettings = {
 					includeInlayVariableTypeHints = true,
 				},
 			},
-			typescript = { 
-				inlayHints = { 
+			typescript = {
+				inlayHints = {
 					includeInlayEnumMemberValueHints = true,
 					includeInlayFunctionLikeReturnTypeHints = true,
 					includeInlayFunctionParameterTypeHints = true,
