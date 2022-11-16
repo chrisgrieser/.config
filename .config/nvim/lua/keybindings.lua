@@ -24,6 +24,7 @@ keymap("n", "<leader>G", telescope.highlights)
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
 	cmd [[nohl]]
+	cmd [[update!]]
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	local packer = require("packer")
 	packer.startup(require("plugin-list").PluginList)
@@ -95,11 +96,11 @@ keymap("x", "y", "ygv<Esc>")
 augroup("yankKeepCursor", {})
 autocmd({"CursorMoved", "VimEnter"}, {
 	group = "yankKeepCursor",
-	callback = function () g.cursorPreYankPos = fn.getpos(".") end,
+	callback = function() g.cursorPreYankPos = fn.getpos(".") end,
 })
 autocmd("TextYankPost", {
 	group = "yankKeepCursor",
-	callback = function ()
+	callback = function()
 		if vim.v.event.operator == "y" then
 			fn.setpos(".", g.cursorPreYankPos)
 		end

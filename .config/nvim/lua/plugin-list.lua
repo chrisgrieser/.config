@@ -10,12 +10,9 @@ function M.PluginList(use)
 	-- Themes
 	use "folke/tokyonight.nvim"
 	use "savq/melange" -- like Obsidian's Primary color scheme
-	use "EdenEast/nightfox.nvim"
-	use "navarasu/onedark.nvim"
-	use "rebelot/kanagawa.nvim"
-	use "Mofiqul/dracula.nvim"
-	use "Yazeed1s/minimal.nvim"
-	use "kaiuri/nvim-juliana" -- sublime-mariana like
+	-- use "EdenEast/nightfox.nvim"
+	-- use "rebelot/kanagawa.nvim"
+	-- use "Mofiqul/dracula.nvim"
 
 	-- Syntax
 	use {
