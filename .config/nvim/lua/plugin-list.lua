@@ -26,6 +26,7 @@ function M.PluginList(use)
 		requires = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/nvim-treesitter-refactor",
+			"nvim-treesitter/nvim-treesitter-context",
 			"p00f/nvim-ts-rainbow",
 		}
 	}
@@ -79,6 +80,7 @@ function M.PluginList(use)
 	use "rcarriga/nvim-notify" -- notifications
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 	use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter
+	use "folke/styler.nvim"
 
 	-- File Management & Switching
 	use {"nvim-telescope/telescope.nvim", requires = {
@@ -87,7 +89,7 @@ function M.PluginList(use)
 	}}
 
 	-- File History
-	use "mbbill/undotree" 
+	use "mbbill/undotree"
 	use {"sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim"}
 
 	-- Operators & Text Objects

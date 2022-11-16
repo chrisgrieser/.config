@@ -23,6 +23,7 @@ require("debugger") -- should come after lsp
 require("snippets")
 
 if isGui() then
+	require("theme")
 	require("gui-settings")
 	require("color-utilities")
 else
