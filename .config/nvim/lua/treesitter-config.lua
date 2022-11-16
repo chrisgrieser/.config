@@ -19,7 +19,6 @@ require("nvim-treesitter.configs").setup {
 		"json5",
 		"jsonc",
 	},
-
 	auto_install = true, -- install missing parers when entering a buffer
 
 	highlight = {
@@ -47,7 +46,7 @@ require("nvim-treesitter.configs").setup {
 	textobjects = {-- textobj plugin
 		move = {-- move to next comment / function
 			enable = true,
-			disable = { "markdown" }, -- so they can be mapped to heading navigation
+			disable = {"markdown"}, -- so they can be mapped to heading navigation
 			set_jumps = true,
 			goto_next_start = {
 				["<C-j>"] = "@function.outer",
@@ -58,7 +57,7 @@ require("nvim-treesitter.configs").setup {
 		},
 		swap = {
 			enable = true,
-			swap_next = { -- mnemonic: [e]xchange
+			swap_next = {-- mnemonic: [e]xchange
 				["<leader>e"] = "@parameter.inner",
 			},
 			swap_previous = {
@@ -85,19 +84,19 @@ require("nvim-treesitter.configs").setup {
 		},
 	},
 
-	rainbow = { -- rainbow plugin
+	rainbow = {-- rainbow plugin
 		enable = true,
 		disable = {}, -- list of languages you want to disable the plugin for
 		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
 		max_file_lines = 2000,
 	},
 
-	refactor = { -- refactor plugin
+	refactor = {-- refactor plugin
 		highlight_definitions = {
 			enable = true,
 			clear_on_cursor_move = false, -- Set to false if you have an `updatetime` of ~100.
 		},
-		highlight_current_scope = { enable = false },
+		highlight_current_scope = {enable = false},
 		navigation = {
 			enable = true,
 			keymaps = {
@@ -109,4 +108,12 @@ require("nvim-treesitter.configs").setup {
 			},
 		},
 	},
+}
+
+-- https://github.com/nvim-treesitter/nvim-treesitter-context#configuration
+require ("treesitter-context").setup {
+	enable = true,
+	max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.
+	trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+	min_window_height = 20,
 }

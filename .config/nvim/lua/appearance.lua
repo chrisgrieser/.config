@@ -1,47 +1,6 @@
 require("utils")
 --------------------------------------------------------------------------------
 
--- custom highlights
--- have to wrapped in function and regularly called due to auto-dark-mode
--- regularly resetting the theme
-function customHighlights()
-	local highlights = {
-		"DiagnosticUnderlineError",
-		"DiagnosticUnderlineWarn",
-		"DiagnosticUnderlineHint",
-		"DiagnosticUnderlineInfo",
-		"SpellLocal",
-		"SpellRare",
-		"SpellCap",
-		"SpellBad",
-	}
-	for _, v in pairs(highlights) do
-		cmd("highlight " .. v .. " gui=underline")
-	end
-
-	-- active indent
-	cmd [[highlight! def link IndentBlanklineContextChar Comment]]
-
-	-- URLs
-	cmd [[highlight urls cterm=underline term=underline gui=underline]]
-	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&]*]])
-
-	-- rainbow brackets without agressive red…
-	cmd [[highlight rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets…
-
-	-- treesittter refactor focus
-	cmd [[highlight TSDefinition term=underline gui=underdotted]]
-	cmd [[highlight TSDefinitionUsage term=underline gui=underdotted]]
-
-	-- Custom Highlight-Group, used for various LSP Hints
-	cmd [[highlight GhostText guifg=#7c7c7c]]
-
-	-- bugfix for https://github.com/neovim/neovim/issues/20456
-	cmd [[highlight! def link luaParenError NormalFloat]]
-end
-
-customHighlights()
-
 -- mixed whitespace
 cmd [[highlight! def link MixedWhiteSpace Folded]]
 cmd [[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]

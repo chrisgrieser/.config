@@ -2,15 +2,6 @@ require("utils")
 require("appearance")
 --------------------------------------------------------------------------------
 
--- BASE CONFIG
-local lightTheme = "melange"
--- local lightTheme = "dawnfox"
-
-local darkTheme = "tokyonight-moon"
--- local darkTheme = "melange"
--- local darkTheme = "kanagawa"
--- local darkTheme = "onedark"
-
 -- font size dependent on device
 if fn.hostname():find("iMac") then
 	g.neovide_scale_factor = 1
@@ -25,55 +16,6 @@ opt.guicursor = "n-sm:block," ..
 	"i-ci-c-ve:ver25," ..
 	"r-cr-o-v:hor10," ..
 	"a:blinkwait300-blinkoff500-blinkon700"
-
---------------------------------------------------------------------------------
-
----@param mode string light|dark
-function themeModifications(mode)
-	if g.colors_name == "tokyonight" then
-		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
-		for _, v in pairs(modes) do
-			cmd("highlight lualine_y_diff_modified_" .. v .. " guifg=#acaa62")
-			cmd("highlight lualine_y_diff_added_" .. v .. " guifg=#8cbf8e")
-		end
-	elseif g.colors_name == "dawnfox" then
-		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
-		cmd [[highlight VertSplit guifg=#b29b84]]
-	elseif g.colors_name == "melange" and mode == "light" then
-		cmd [[highlight def link @punctuation @label]]
-		cmd [[highlight! def link Todo IncSearch]]
-		cmd [[highlight! def link NotifyINFOIcon @define]]
-		cmd [[highlight! def link NotifyINFOTitle @define]]
-		cmd [[highlight! def link NotifyINFOBody @define]]
-	end
-end
-
--- THEME
-local function light()
-	api.nvim_set_option("background", "light")
-	cmd("colorscheme " .. lightTheme)
-	g.neovide_transparency = 0.96
-	customHighlights()
-	themeModifications("light")
-end
-
---
-local function dark()
-	api.nvim_set_option("background", "dark")
-	cmd("colorscheme " .. darkTheme)
-	g.neovide_transparency = 0.97
-	customHighlights()
-	themeModifications("dark")
-end
-
--- toggle theme with OS
-local auto_dark_mode = require("auto-dark-mode")
-auto_dark_mode.setup {
-	update_interval = 3000, ---@diagnostic disable-line: assign-type-mismatch
-	set_dark_mode = dark,
-	set_light_mode = light,
-}
-auto_dark_mode.init()
 
 --------------------------------------------------------------------------------
 -- CMD-Keybindings
