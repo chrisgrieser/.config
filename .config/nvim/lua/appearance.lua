@@ -34,8 +34,9 @@ require("scrollbar").setup {
 	excluded_filetypes = specialFiletypes,
 }
 require("scrollbar.handlers.gitsigns").setup()
--- Custom Scrollbar Handlers https://github.com/petertriho/nvim-scrollbar#custom-handlers
 
+
+-- Custom Scrollbar Handlers https://github.com/petertriho/nvim-scrollbar#custom-handlers
 -- HACK using one custom function instead of two due to https://github.com/petertriho/nvim-scrollbar/issues/66
 require("scrollbar.handlers").register("marksmarks", function(bufnr)
 	-- marks in scrollbar
@@ -59,7 +60,7 @@ require("scrollbar.handlers").register("marksmarks", function(bufnr)
 	-- last jumplocation
 	local lastJump = fn.getjumplist()[2]
 	local lastJumpPos = fn.getjumplist()[1][lastJump]
-	if lastJumpPos.bufnr == bufnr then
+	if lastJumpPos.bufnr == bufnr and lastJumpPos.lnum > 1 then
 		table.insert(out, {
 			line = lastJumpPos.lnum,
 			text = "▶️",
