@@ -7,16 +7,15 @@ app.includeStandardAdditions = true;
 const onlineJSON = (url) => JSON.parse(app.doShellScript(`curl -s "${url}"`));
 
 function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#]/g, " ");
+	const clean = str.replace(/[-()_.:#/\\;,]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
 	return [clean, camelCaseSeperated, str].join(" ");
 }
 
-function readFile(path, encoding) {
-	if (!encoding) encoding = $.NSUTF8StringEncoding;
+function readFile(path) {
 	const fm = $.NSFileManager.defaultManager;
 	const data = fm.contentsAtPath(path);
-	const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
 

@@ -2,15 +2,16 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 matches:
-  # ",,lang,," will create a code block of the respective language and prefill
+  # `,,lang,,` will create a code block of the respective language and prefill
   # it with the clipboard content, e.g. `,,js,,`
   - regex: ",,(?P<lang>\\w*),,"
-    replace: "```{{lang}}\n{{clipboard}}\n```"
+    replace: "```{{lang}}\n{{clipb}}\n```"
     label: Markdown Codeblock
     vars:
-      - name: clipboard
-        type: clipboard
-
+      - name: clipb
+        type: shell
+        params:
+          cmd: "pbpaste | awk 'NF {p=1} p'" # remove trailing blank lines
   - trigger: TTT
     replace: '- [ ] '
     label: Markdown Task
