@@ -68,7 +68,6 @@ function M.PluginList(use)
 	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
 	use "folke/neodev.nvim" -- lsp for nvim-lua config
 
-
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use "nvim-lualine/lualine.nvim" -- status line
