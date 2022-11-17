@@ -34,7 +34,7 @@ bkp ~'/Main Vault/' "./Homefolder/Main Vault"
 bkp ~'/Library/Mobile Documents/com~apple~CloudDocs/' ./iCloud-Folder
 
 # Brew Dumps
-BREWDUMP_PATH="$BACKUP_DEST/install lists"
+BREWDUMP_PATH="$BACKUP_DEST/installed-apps-and-packages"
 mkdir -p "$BREWDUMP_PATH"
 brew bundle dump --force --file "$BREWDUMP_PATH/Brewfile_$DEVICE_NAME"
 npm list -g --parseable | sed "1d" | sed -E "s/.*\///" > "$BREWDUMP_PATH/NPMfile_$DEVICE_NAME"

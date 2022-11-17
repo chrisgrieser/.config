@@ -44,8 +44,6 @@ function directoryInspect (){
 	fi
 	if [[ $(ls | wc -l) -lt 20 ]] ; then
 		exa
-	elif [[ $(ls -d */ | wc -l) -lt 20 ]] ; then
-		command exa --all --icons --sort=modified -d */ # only directories
 	fi
 }
 

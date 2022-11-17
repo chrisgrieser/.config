@@ -96,7 +96,7 @@ gadgets [
         id "gadget.action.pseudo.cut"
         name "Pseudo-Cut"
         type "executable"
-        executable "${user.home}/dotfiles/Marta/scripts/cut.sh"
+        executable "${user.home}/.config/marta/scripts/cut.sh"
         args ["${active.selection.paths}"]
     }
     {
@@ -104,7 +104,7 @@ gadgets [
         name "Marta Keybinding Cheatsheet"
         type "executable"
         executable "/usr/bin/qlmanage"
-        args ["-p" "${user.home}/dotfiles/visualized keyboard layout/marta-key-bindings.png"]
+        args ["-p" "${user.home}/.config/visualized keyboard layout/marta-key-bindings.png"]
     }
     {
         id "gadget.action.print"

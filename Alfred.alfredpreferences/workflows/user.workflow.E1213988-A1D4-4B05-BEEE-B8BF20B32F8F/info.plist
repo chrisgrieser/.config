@@ -21,19 +21,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E2E50A21-55EC-48F7-80FB-047931E107C6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4FD1CE6A-A995-4691-94F1-99CEE25277B3</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -100,62 +87,6 @@ end tell</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>29</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>0</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>us.zoom.xos</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>E2E50A21-55EC-48F7-80FB-047931E107C6</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>h</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1179648</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>4FD1CE6A-A995-4691-94F1-99CEE25277B3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -170,13 +101,6 @@ end tell</string>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
-		<key>4FD1CE6A-A995-4691-94F1-99CEE25277B3</key>
-		<dict>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>155</real>
-		</dict>
 		<key>69321844-5FD6-49B4-904B-EA6C9F22AA56</key>
 		<dict>
 			<key>colorindex</key>
@@ -187,15 +111,6 @@ end tell</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>20</real>
-		</dict>
-		<key>E2E50A21-55EC-48F7-80FB-047931E107C6</key>
-		<dict>
-			<key>note</key>
-			<string>Shwo Chat Sidebar</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>155</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

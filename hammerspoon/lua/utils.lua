@@ -15,6 +15,11 @@ I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
 
+dotfilesFolder = home.."/.config"
+fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+
+--------------------------------------------------------------------------------
+
 ---Repeat a Function multiple times
 ---@param delays table of numbers (in ms)
 ---@param func function to repeat

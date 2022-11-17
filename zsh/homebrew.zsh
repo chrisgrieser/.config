@@ -12,7 +12,7 @@ export HOMEBREW_AUTOREMOVE=1
 export HOMEBREW_CASK_OPTS="--no-quarantine"
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 
-BREWDUMP_PATH="$DOTFILE_FOLDER/Installed Apps and Packages/"
+BREWDUMP_PATH="$DOTFILE_FOLDER/installed-apps-and-packages/"
 
 # aliases already get tab-completion
 alias bh='brew home'

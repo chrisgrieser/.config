@@ -211,53 +211,14 @@ local cssSettings = {
 		lint = {
 			vendorPrefix = "ignore",
 			propertyIgnoredDueToDisplay = "error",
-			universalSelector = "warning",
-			float = "warning",
-			boxModel = "error",
+			universalSelector = "ignore",
+			float = "ignore",
+			boxModel = "ignore",
 			-- since these would be duplication with stylelint
 			duplicateProperties = "ignore",
-			emptyRules = "ignore",
+			emptyRules = "warning",
 		},
 		colorDecorators = {enable = true}, -- not supported yet
-	}
-}
-
--- https://github.com/sublimelsp/LSP-typescript/blob/master/LSP-typescript.sublime-settings
-local tsserverSettings = {
-	tsserver = {
-		settings = {
-			diagnostics = {
-				ignoredCodes = {},
-			},
-			show_inlay_hints = true,
-			showInlayHints = true,
-			documentFormat = true,
-			javascript = {
-				format = {
-					insertSpaceAfterCommaDelimiter = false,
-				},
-				inlayHints = {
-					includeInlayEnumMemberValueHints = true,
-					includeInlayFunctionLikeReturnTypeHints = true,
-					includeInlayFunctionParameterTypeHints = true,
-					includeInlayParameterNameHints = "none",
-					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-					includeInlayPropertyDeclarationTypeHints = true,
-					includeInlayVariableTypeHints = true,
-				},
-			},
-			typescript = {
-				inlayHints = {
-					includeInlayEnumMemberValueHints = true,
-					includeInlayFunctionLikeReturnTypeHints = true,
-					includeInlayFunctionParameterTypeHints = true,
-					includeInlayParameterNameHints = "none",
-					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-					includeInlayPropertyDeclarationTypeHints = true,
-					includeInlayVariableTypeHints = true,
-				},
-			},
-		}
 	}
 }
 
@@ -267,11 +228,12 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- configure all lsp servers
 for _, lsp in pairs(lsp_servers) do
-	local config = {on_attach = on_attach, capabilities = capabilities}
+	local config = {
+		on_attach = on_attach,
+		capabilities = capabilities,
+	}
 	if lsp == "sumneko_lua" then
 		config.settings = luaSettings
-	elseif lsp == "tsserver" then
-		config.settings = tsserverSettings
 	elseif lsp == "cssls" then
 		config.settings = cssSettings
 	end
