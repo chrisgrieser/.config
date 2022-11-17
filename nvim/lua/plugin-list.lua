@@ -86,7 +86,7 @@ function M.PluginList(use)
 
 	-- File History
 	use {"mbbill/undotree", cmd = "UndotreeToggle"}
-	use {"sindrets/diffview.nvim", cmd = "requires = "nvim-lua/plenary.nvim"}
+	use {"sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim"}
 
 	-- Operators & Text Objects
 	use "kylechui/nvim-surround"
