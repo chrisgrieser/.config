@@ -29,27 +29,3 @@ function g.Undotree_CustomMap()
 	keymap("n", "K", "7k", opts)
 	setlocal("list", false)
 end
-
---------------------------------------------------------------------------------
--- Diffview
-local actions = require("diffview.actions")
-require("diffview").setup {
-	view = {
-		file_history = {layout = "diff2_horizontal"},
-	},
-	file_history_panel = {
-		win_config = { height = 8, },
-	},
-	keymaps = {
-		view = {
-			["<tab>"] = actions.select_next_entry, 
-			["<s-tab>"] = actions.select_prev_entry, 
-		},
-		file_history_panel = {
-			["o"] = actions.options, -- Open the option panel
-		},
-		option_panel = {
-			["<CR>"] = actions.select_entry,
-		},
-	},
-}

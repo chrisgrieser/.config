@@ -86,13 +86,25 @@ function M.PluginList(use)
 
 	-- File History
 	use {"mbbill/undotree", cmd = "UndotreeToggle"}
-	use {"sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim"}
+	use {"sindrets/diffview.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		cmd = "DiffviewFileHistory",
+		config = function()
+			require("diffview").setup {
+				file_history_panel = {win_config = {height = 8}},
+				keymaps = {
+					file_history_panel = {["o"] = require("diffview.actions").options},
+					option_panel = {["<CR>"] = require("diffview.actions").select_entry},
+				},
+			}
+		end
+	}
 
 	-- Operators & Text Objects
 	use "kylechui/nvim-surround"
 	use "gbprod/substitute.nvim" -- substitution operator, neovim version for vim-subversive
 	use "numToStr/Comment.nvim"
-	use "michaeljsmith/vim-indent-object"
+	use {"michaeljsmith/vim-indent-object", keys = {{"o", "ai"}, {"o", "ii"}}}
 
 	-- Navigation
 	use "mg979/vim-visual-multi" -- multi-cursor
