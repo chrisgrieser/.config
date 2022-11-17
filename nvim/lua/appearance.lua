@@ -53,7 +53,6 @@ require("scrollbar.handlers").register("lastjumploc", function(bufnr)
 	return {{line = 0, text = ""}} -- dummy element to prevent error
 end)
 
-
 -- marks in scrollbar
 require("scrollbar.handlers").register("marksmarks", function(bufnr)
 	local excluded_marks = "z"
@@ -237,6 +236,13 @@ function isStandardBranch() -- not checking for branch here, since running the c
 	return notMainBranch and validFiletype
 end
 
+function jsonPath()
+	if bo.filetype == "json" then
+		return require("jsonpath").get()
+	end
+	return ""
+end
+
 require("lualine").setup {
 	sections = {
 		lualine_a = {"mode"},
@@ -254,7 +260,8 @@ require("lualine").setup {
 		},
 		lualine_y = {
 			"diff",
-			{"branch", cond = isStandardBranch,},
+			{"branch", cond = isStandardBranch},
+			{jsonPath},
 		},
 		lualine_z = {"location"},
 	},

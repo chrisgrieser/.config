@@ -176,6 +176,6 @@ matches:
   - trigger: btu
     replace: but
     word: true
-  - trigger: e.g.
-    replace: e.g.,
+  - trigger: "e.g. "
+    replace: "e.g., "
     word: true
