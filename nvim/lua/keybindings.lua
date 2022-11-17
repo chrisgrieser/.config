@@ -31,6 +31,9 @@ keymap("n", "<leader>p", function()
 	packer.snapshot("snapshot_" .. os.date("!%Y-%m-%d_%H-%M-%S"))
 	packer.sync()
 	cmd [[MasonUpdateAll]]
+	-- remove oldest snapshot when more than 20
+	local snapshotPath = fn.stdpath("config").."/packer-snapshots"
+	os.execute([[cd ']]..snapshotPath..[[' ; ls -t | tail -n +20 | tr '\n' '\0' | xargs -0 rm]])
 end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
 
