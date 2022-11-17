@@ -27,8 +27,11 @@ packer.startup{
 		},
 		snapshot_path = vim.fn.stdpath("config").."/packer-snapshots/",
 		autoremove = true, -- remove unused plugins without prompting user
+		profile = {
+			enable = true,
+			threshold = 1, -- ms that a plugins load time must be over to be included
+		},
 	},
 }
 
 packer.install() -- auto-install missing plugins
--- packer.clean() -- remove unused plugins

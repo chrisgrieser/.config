@@ -11,6 +11,7 @@ local lsp_servers = {
 	"tsserver", -- ts/js
 	"jsonls",
 	"cssls",
+	"pyright",
 	"marksman", -- markdown
 }
 
@@ -105,7 +106,9 @@ require("lsp-inlayhints").setup {
 }
 
 -- INFO: this block must come before lua LSP setup
-require("neodev").setup()
+require("neodev").setup{ 
+	library = { plugins = false } 
+}
 
 --------------------------------------------------------------------------------
 -- LSP KEYBINDINGS

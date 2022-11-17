@@ -49,28 +49,31 @@ customHighlights() -- to apply on default
 
 function themeModifications()
 	local mode = api.nvim_get_option("background")
-	if g.colors_name == "tokyonight" then
+	local theme = g.colors_name
+	if theme == "tokyonight" then
 		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
 		for _, v in pairs(modes) do
 			cmd("highlight lualine_y_diff_modified_" .. v .. " guifg=#acaa62")
 			cmd("highlight lualine_y_diff_added_" .. v .. " guifg=#8cbf8e")
 		end
-	elseif g.colors_name == "dawnfox" then
+	elseif theme == "dawnfox" then
 		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
 		cmd [[highlight VertSplit guifg=#b29b84]]
-	elseif g.colors_name == "melange" and mode == "light" then
-		cmd [[highlight def link @punctuation @label]]
+	elseif theme == "melange" then
 		cmd [[highlight! def link Todo IncSearch]]
-		cmd [[highlight! def link NotifyINFOIcon @define]]
-		cmd [[highlight! def link NotifyINFOTitle @define]]
-		cmd [[highlight! def link NotifyINFOBody @define]]
+		if mode == "light" then
+			cmd [[highlight def link @punctuation @label]]
+			cmd [[highlight! def link NotifyINFOIcon @define]]
+			cmd [[highlight! def link NotifyINFOTitle @define]]
+			cmd [[highlight! def link NotifyINFOBody @define]]
+		end
 	end
 end
 
 -- toggle theme with OS
 local auto_dark_mode = require("auto-dark-mode")
 auto_dark_mode.setup {
-	update_interval = 3000, ---@diagnostic disable-line: assign-type-mismatch
+	update_interval = 2500, ---@diagnostic disable-line: assign-type-mismatch
 	set_dark_mode = function()
 		api.nvim_set_option("background", "dark")
 		cmd("colorscheme " .. darkTheme)
