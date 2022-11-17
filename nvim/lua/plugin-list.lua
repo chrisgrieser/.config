@@ -29,9 +29,9 @@ function M.PluginList(use)
 	}
 
 	-- Filetype-specific
-	use {"phelipetls/jsonpath.nvim", ft = "json"}
-	use {"mityu/vim-applescript", ft = "applescript"} -- applescript syntax highlighting
-	use {"hail2u/vim-css3-syntax", ft = "css"} -- better css syntax highlighting (until treesitter css looks decent…)
+	use {"phelipetls/jsonpath.nvim", ft = "json", requires = "nvim-treesitter/nvim-treesitter-textobjects"}
+	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
+	use {"hail2u/vim-css3-syntax", ft = "css"} -- better syntax highlighting (until treesitter css looks decent…)
 
 	-- LSP
 	use {"neovim/nvim-lspconfig", requires = {
@@ -106,7 +106,6 @@ function M.PluginList(use)
 	-- Operators & Text Objects
 	use "kylechui/nvim-surround"
 	use "gbprod/substitute.nvim" -- substitution operator
-
 	use "numToStr/Comment.nvim"
 	use {"michaeljsmith/vim-indent-object", keys = {{"o", "ai"}, {"o", "ii"}}}
 
