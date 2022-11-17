@@ -381,6 +381,9 @@ keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
 keymap("n", "<leader>ll", qol.quicklog)
 keymap("n", "<leader>lr", qol.removeLog)
 
+-- Sort
+keymap({"n", "x"}, "<leader>S", ":sort<CR>")
+
 --------------------------------------------------------------------------------
 
 -- Line & Character Movement
