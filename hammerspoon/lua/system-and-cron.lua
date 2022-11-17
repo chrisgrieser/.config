@@ -137,16 +137,16 @@ end
 
 --------------------------------------------------------------------------------
 -- CRONJOBS AT HOME
-
-local biweeklyTimer = timer("02:00", "03d", function()
+-- timers not local for longevity with garbage collection
+biweeklyTimer = timer("02:00", "03d", function()
 	hs.execute('cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/"')
 	hs.loadSpoon("EmmyLua") -- so it runs not as often
-	applescript([[
+	applescript[[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
 			run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles" with argument "no sound"
 		end tell
-	]])
+	]]
 end, true)
 
 dailyEveningTimer = timer("21:00", "01d", function() setDarkmode(true) end)
@@ -184,6 +184,7 @@ local function sleepYouTube()
 	]]
 end
 
+sleepTimer0 = timer("02:00", "01d", sleepYouTube, true)
 sleepTimer1 = timer("03:00", "01d", sleepYouTube, true)
 sleepTimer2 = timer("04:00", "01d", sleepYouTube, true)
 sleepTimer3 = timer("05:00", "01d", sleepYouTube, true)
@@ -194,9 +195,11 @@ sleepTimer4 = timer("06:00", "01d", sleepYouTube, true)
 if isIMacAtHome() or isAtMother() then
 	dailyMorningTimer:start()
 	dailyEveningTimer:start()
+	sleepTimer0:start()
 	sleepTimer1:start()
 	sleepTimer2:start()
 	sleepTimer3:start()
+	sleepTimer4:start()
 end
 
 if isIMacAtHome() then
