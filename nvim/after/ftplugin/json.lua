@@ -12,6 +12,12 @@ setlocal("listchars", "tab: >")
 -- hides quotes in JSON, making it actually more readable
 wo.conceallevel = 2
 
+keymap("n", "<D-p>", function ()
+	local jsonpath = require("jsonpath").get()
+	fn.setreg("+", jsonpath)
+	vim.notify(jsonpath)
+end, {buffer = true})
+
 -- JSON-[b]eautify line/selection, requires `yq`
 keymap("n", "<D-b>", ":.!yq -o=json<CR>", {buffer = true})
 keymap("v", "<D-b>", ":'<,'>!yq -o=json<CR>", {buffer = true})

@@ -27,6 +27,9 @@ function M.PluginList(use)
 			"p00f/nvim-ts-rainbow",
 		}
 	}
+
+	-- Filetype-specific
+	use {"phelipetls/jsonpath.nvim", ft = "json"}
 	use {"mityu/vim-applescript", ft = "applescript"} -- applescript syntax highlighting
 	use {"hail2u/vim-css3-syntax", ft = "css"} -- better css syntax highlighting (until treesitter css looks decent…)
 
