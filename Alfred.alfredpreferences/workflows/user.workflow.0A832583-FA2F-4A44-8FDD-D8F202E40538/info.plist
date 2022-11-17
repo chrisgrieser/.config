@@ -104,7 +104,7 @@
 				<key>text</key>
 				<string></string>
 				<key>title</key>
-				<string>✅ Loaded '{query}'</string>
+				<string>✅ {query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -199,7 +199,7 @@ zsh "$dock_switcher_path" --load "$1"</string>
 				<key>text</key>
 				<string></string>
 				<key>title</key>
-				<string>✅ Saved as '{query}'</string>
+				<string>✅ {query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>

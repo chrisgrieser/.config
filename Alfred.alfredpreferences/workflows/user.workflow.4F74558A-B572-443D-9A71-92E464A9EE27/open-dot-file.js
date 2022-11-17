@@ -42,7 +42,7 @@ workArray.forEach(file => {
 	if (isFolder) parts.pop();
 	const fileName = parts.pop();
 
-	let parentPart = filePath.replace(/\/Users\/.*?(\/.*\/).*$/, "$1");
+	let parentPart = filePath.replace(/\/Users\/.*?\.config(\/.*\/).*$/, "$1");
 	if (parentPart === ".") parentPart = "";
 
 	let ext = fileName.split(".").pop();
