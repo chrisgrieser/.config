@@ -5,7 +5,7 @@ function M.PluginList(use)
 	use "wbthomason/packer.nvim" -- packer manages itself
 	use "lewis6991/impatient.nvim" -- reduces startup time by ~50%
 	use {"williamboman/mason.nvim", requires = "RubixDev/mason-update-all"}
-	-- use "dstein64/vim-startuptime" -- measure startup time with `:StartupTime`
+	-- use {"dstein64/vim-startuptime", cmd = "StartupTime"} -- measure startup time with `:StartupTime`
 
 	-- Themes
 	use "folke/tokyonight.nvim"
