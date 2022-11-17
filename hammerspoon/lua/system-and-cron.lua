@@ -6,9 +6,8 @@ local caff = hs.caffeinate.watcher
 local timer = hs.timer.doAt
 --------------------------------------------------------------------------------
 -- CONFIG
-local dotfileLocation = home .. "/dotfiles"
 local vaultLocation = home .. "/Main Vault"
-local gitDotfileScript = dotfileLocation .. "/git-dotfile-sync.sh"
+local gitDotfileScript = dotfilesFolder .. "/git-dotfile-sync.sh"
 local gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
 local dotfileIcon = "⏺ "
 local vaultIcon = "🟪"
@@ -67,7 +66,7 @@ local function updateSketchybar()
 	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --trigger repo-files-update")
 end
 
-dotfilesWatcher = hs.pathwatcher.new(dotfileLocation, updateSketchybar)
+dotfilesWatcher = hs.pathwatcher.new(dotfilesFolder, updateSketchybar)
 dotfilesWatcher:start()
 vaultWatcher = hs.pathwatcher.new(vaultLocation, updateSketchybar)
 vaultWatcher:start()
@@ -173,7 +172,7 @@ local function sleepYouTube()
 	killIfRunning("Twitch")
 	killIfRunning("Netflix")
 	-- no need to quit IINA, since it autoquits on finishing playback
-	applescript([[
+	applescript[[
 		tell application "Brave Browser"
 			if ((count of window) is not 0)
 				if ((count of tab of front window) is not 0)
@@ -182,7 +181,7 @@ local function sleepYouTube()
 				end if
 			end if
 		end tell
-	]])
+	]]
 end
 
 sleepTimer1 = timer("03:00", "01d", sleepYouTube, true)

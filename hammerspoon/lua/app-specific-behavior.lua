@@ -162,9 +162,9 @@ anyAppActivationWatcher:start()
 
 -- NEOVIM
 -- pseudomaximized window
-wf_neovim = wf.new("neovide")
+wf_neovim = wf.new({"neovide", "Neovide"})
 	:subscribe(wf.windowCreated, function()
-		runDelayed(0.5, function()
+		repeatFunc({0.3, 0.6}, function()
 			if isAtOffice() or isProjector() then
 				moveResizeCurWin("maximized")
 			else
@@ -192,7 +192,6 @@ wf_alacritty = wf.new({"alacritty", "Alacritty"})
 			moveResizeCurWin("pseudo-maximized")
 		end
 	end)
-
 
 -- ALACRITTY Man / cheat sheet leaader hotkey (for Karabiner)
 -- work around necessary, cause alacritty creates multiple instances, i.e.

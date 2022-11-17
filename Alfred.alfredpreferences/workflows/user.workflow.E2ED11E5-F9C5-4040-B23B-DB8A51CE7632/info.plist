@@ -268,6 +268,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>EB86FE71-A06D-4948-B550-9B411159F134</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>01D81532-884A-41E2-AE82-FEF84FB3619B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>EBC239AD-244F-469E-B63C-89ACB30AF5E0</key>
 		<array>
 			<dict>
@@ -677,6 +690,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>B2C13A68-FC87-4C88-A98E-CB1989CE5DBE</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -694,21 +722,6 @@
 			<string>EBC239AD-244F-469E-B63C-89ACB30AF5E0</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>B2C13A68-FC87-4C88-A98E-CB1989CE5DBE</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1133,6 +1146,42 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
+				<string>spotlight</string>
+				<key>subtext</key>
+				<string>System Preferences.app</string>
+				<key>text</key>
+				<string>🔍 Spotlight</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>EB86FE71-A06D-4948-B550-9B411159F134</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>/System/Library/PreferencePanes/Spotlight.prefPane</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>01D81532-884A-41E2-AE82-FEF84FB3619B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
 				<string>menubar</string>
 				<key>subtext</key>
 				<string>System Preferences.app</string>
@@ -1197,6 +1246,15 @@
 			<real>235</real>
 			<key>ypos</key>
 			<real>620</real>
+		</dict>
+		<key>01D81532-884A-41E2-AE82-FEF84FB3619B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>970</real>
+			<key>ypos</key>
+			<real>900</real>
 		</dict>
 		<key>02B3F5B3-C592-4D21-888D-0801F4A00D65</key>
 		<dict>
@@ -1547,6 +1605,15 @@
 			<real>605</real>
 			<key>ypos</key>
 			<real>1055</real>
+		</dict>
+		<key>EB86FE71-A06D-4948-B550-9B411159F134</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>765</real>
+			<key>ypos</key>
+			<real>900</real>
 		</dict>
 		<key>EBC239AD-244F-469E-B63C-89ACB30AF5E0</key>
 		<dict>

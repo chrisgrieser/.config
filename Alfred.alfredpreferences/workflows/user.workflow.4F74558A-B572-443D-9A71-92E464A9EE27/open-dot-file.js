@@ -21,18 +21,15 @@ const workArray = app.doShellScript (
 	cd "' + dotfileFolder + '" ; \
 	fd --hidden --no-ignore \
 	-E "Alfred.alfredpreferences" \
-	-E ".config/alacritty/colors/*" \
+	-E "alacritty/colors/*" \
 	-E "Marta/Themes/*" \
 	-E "packer_compiled.lua" \
 	-E "hammerspoon/Spoons/*" \
-	-E ".config/karabiner/automatic_backups/*" \
-	-E ".config/karabiner/assets/complex_modifications/*.json" \
-	-E "FileHistory*.json" \
+	-E "karabiner/automatic_backups/*" \
 	-E "visualized keyboard layout/*.json" \
-	-E "Mac Migration Scripts/to do*" \
+	-E "mac-migration" \
 	-E "unused/*" \
-	-E "Fonts/*" \
-	-E ".config/coc/*" \
+	-E "fonts/*" \
 	-E ".DS_Store" \
 	-E ".git/"'
 ).split("\r");
@@ -45,8 +42,8 @@ workArray.forEach(file => {
 	if (isFolder) parts.pop();
 	const fileName = parts.pop();
 
-	let twoParents = filePath.replace(/.*\/(.*\/.*)\/.*$/, "$1");
-	if (twoParents === ".") twoParents = "";
+	let parentPart = filePath.replace(/\/Users\/.*?(\/.*\/).*$/, "$1");
+	if (parentPart === ".") parentPart = "";
 
 	let ext = fileName.split(".").pop();
 	if (ext.includes("rc")) ext = "rc"; // rc files
@@ -81,7 +78,7 @@ workArray.forEach(file => {
 
 	jsonArray.push({
 		"title": fileName,
-		"subtitle": "▸ " + twoParents,
+		"subtitle": "▸ " + parentPart,
 		"match": alfredMatcher (fileName),
 		"icon": iconObject,
 		"type": "file:skipcheck",

@@ -68,7 +68,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Print &amp; Documents</string>
+	<string>Pandoc &amp; Print</string>
 	<key>objects</key>
 	<array>
 		<dict>

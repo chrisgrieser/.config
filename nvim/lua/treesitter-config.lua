@@ -26,18 +26,13 @@ require("nvim-treesitter.configs").setup {
 
 		-- NOTE: these are the names of the parsers and not the filetype
 		disable = {
-			"css", -- looks weird with css
+			"css", -- looks weird with css: https://github.com/tree-sitter/tree-sitter-css/issues/34
 			"markdown", -- looks worse and enables spellcheck in URLs and Code Blocks 🙈
 		},
 
-		-- Setting this to true will run `syntax` and tree-sitter at the same
-		-- time. Set this to `true` if you depend on 'syntax' being enabled (like
-		-- for indentation). Using this option may slow down your editor, and you
-		-- may see some duplicate highlights. Instead of true it can also be a
-		-- list of languages
-		additional_vim_regex_highlighting = {"css"},
 	},
 
+	-- use treesitter for autoindent with `=`
 	indentation = {
 		enable = true,
 		disable = {}, -- NOTE: these are the names of the parsers and not the filetype
@@ -94,7 +89,7 @@ require("nvim-treesitter.configs").setup {
 	refactor = {-- refactor plugin
 		highlight_definitions = {
 			enable = true,
-			clear_on_cursor_move = false, -- Set to false if you have an `updatetime` of ~100.
+			clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
 		},
 		highlight_current_scope = {enable = false},
 		navigation = {
@@ -110,10 +105,21 @@ require("nvim-treesitter.configs").setup {
 	},
 }
 
--- https://github.com/nvim-treesitter/nvim-treesitter-context#configuration
-require ("treesitter-context").setup {
-	enable = true,
-	max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.
-	trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-	min_window_height = 20,
-}
+--------------------------------------------------------------------------------
+-- force treesitter to highlight zsh as if it was bash
+augroup("zshAsBash", {})
+autocmd("BufWinEnter", {
+	group = "zshAsBash",
+	pattern = "*.sh",
+	command = "set filetype=sh",
+})
+
+--------------------------------------------------------------------------------
+
+-- using the setup function leads to bugs, so disabling this for now
+-- require ("treesitter-context").setup {
+-- 	enable = true,
+-- 	max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.
+-- 	trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+-- 	min_window_height = 20,
+-- }

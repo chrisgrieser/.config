@@ -1,5 +1,4 @@
 require("lua.utils")
-local fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 local pw = hs.pathwatcher.new
 --------------------------------------------------------------------------------
 
@@ -34,12 +33,13 @@ downloadFolderWatcher:start()
 -- FONT rsync (for both directions)
 -- - symlinking the Folder somehow does not work properly, therefore rsync
 -- - source folder needs trailing "/" to copy contents (instead of the folder)
+fontLocation = dotfilesFolder .. "/fonts"
 fontsWatcher1 = pw(home .. "/Library/Fonts", function()
-	hs.execute('rsync --archive --update --delete "$HOME/Library/Fonts/" "$HOME/dotfiles/Fonts"')
+	hs.execute([[rsync --archive --update --delete "$HOME/Library/Fonts/" "]] .. fontLocation .. [["]])
 	notify("Fonts synced.")
 end)
-fontsWatcher2 = pw(home .. "/dotfiles/Fonts", function()
-	hs.execute('rsync --archive --update --delete "$HOME/dotfiles/Fonts/" "$HOME/Library/Fonts"')
+fontsWatcher2 = pw(fontLocation, function()
+	hs.execute([[rsync --archive --update --delete "]] .. fontLocation .. [[" "$HOME/Library/Fonts"]])
 	notify("Fonts synced.")
 end)
 fontsWatcher1:start()
@@ -75,6 +75,7 @@ draftsIcloudWatcher:start()
 --------------------------------------------------------------------------------
 
 -- Redirects FROM File Hub
+local browserSettings = dotfilesFolder .. "/browser-extension-configs"
 function fromFileHub(files)
 	for _, file in pairs(files) do
 		local function isInSubdirectory(f, folder) -- (instead of directly in the folder)
@@ -92,22 +93,22 @@ function fromFileHub(files)
 
 			-- vimium backup
 		elseif fileName == "vimium-options.json" then
-			hs.execute('mv -f "' .. file .. '" "$HOME/dotfiles/Browser Extension Settings/"')
+			hs.execute([[mv -f "]] .. file .. [[" "]] .. browserSettings .. [["]])
 			notify("Vimium backup filed away.")
 
 			-- ublocklist backup
 		elseif fileName == "ublacklist-settings.json" then
-			hs.execute('mv -f "' .. file .. '" "$HOME/dotfiles/Browser Extension Settings/"')
+			hs.execute([[mv -f "]] .. file .. [[" "]] .. browserSettings .. [["]])
 			notify("uBlacklist backup filed away.")
 
 			-- adguard backup
 		elseif fileName:match(".*_adg_ext_settings_.*%.json") then
-			hs.execute('mv -f "' .. file .. '" "$HOME/dotfiles/Browser Extension Settings/adguard-settings.json"')
+			hs.execute([[mv -f "]] .. file .. [[" "]] .. browserSettings .. [[/adguard-settings.json"]])
 			notify("AdGuard backup filed away.")
 
 			-- tampermonkey backup
 		elseif fileName:match("tampermonkey%-backup-.+%.txt") then
-			hs.execute('mv -f "' .. file .. '" "$HOME/dotfiles/Browser Extension Settings/tampermonkey-settings.json"')
+			hs.execute([[mv -f "]] .. file .. [[" "]] .. browserSettings .. [[/tampermonkey-settings.json"]])
 			notify("TamperMonkey backup filed away.")
 
 			-- watch later .urls from the office
@@ -119,7 +120,7 @@ function fromFileHub(files)
 		elseif fileName:match("base%-keyboard%-layout%.%w+") or fileName:match("app%-switcher%-layout%.%w+") or
 			fileName:match("vimrc%-remapping%.%w+") or fileName:match("marta%-key%-bindings%.%w+") or
 			fileName:match("hyper%-bindings%-layout%.%w+") or fileName:match("single%-keystroke%-bindings%.%w+") then
-			hs.execute('mv -f "' .. file .. '" "$HOME/dotfiles/visualized keyboard layout/"')
+			hs.execute([[mv -f "]] .. file .. [[" "]] .. dotfilesFolder .. [[/visualized-keyboard-layout/"]])
 			notify("Visualized Keyboard Layout filed away.")
 
 		end

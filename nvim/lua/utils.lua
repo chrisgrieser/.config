@@ -1,6 +1,5 @@
 require("lua-utils") -- does not work with symlink, therefore hardlink
 --------------------------------------------------------------------------------
-
 opt = vim.opt -- global options obj
 g = vim.g -- global variables
 api = vim.api
@@ -18,6 +17,9 @@ warn = vim.log.levels.WARN
 
 telescope = require("telescope.builtin") -- requires loading extensions first
 qol = require("quality-of-life")
+--------------------------------------------------------------------------------
+
+dotfilesFolder = home.."/.config"
 
 --------------------------------------------------------------------------------
 
@@ -72,6 +74,7 @@ specialFiletypes = {
 	"startuptime",
 	"DiffviewFileHistory",
 	"qf",
+	"man",
 	"DressingSelect",
 	"lspinfo",
 	"AppleScriptRunOutput",

@@ -37,9 +37,25 @@ require("scrollbar.handlers.gitsigns").setup()
 
 
 -- Custom Scrollbar Handlers https://github.com/petertriho/nvim-scrollbar#custom-handlers
--- HACK using one custom function instead of two due to https://github.com/petertriho/nvim-scrollbar/issues/66
+
+-- last jumplocation
+require("scrollbar.handlers").register("lastjumploc", function(bufnr)
+	local lastJump = fn.getjumplist()[2]
+	local lastJumpPos = fn.getjumplist()[1][lastJump]
+	if lastJumpPos.bufnr == bufnr and lastJumpPos.lnum > 1 then
+		return {{
+			line = lastJumpPos.lnum,
+			text = "▶️",
+			type = "Misc",
+			level = 6,
+		}}
+	end
+	return {{line = 0, text = ""}} -- dummy element to prevent error
+end)
+
+
+-- marks in scrollbar
 require("scrollbar.handlers").register("marksmarks", function(bufnr)
-	-- marks in scrollbar
 	local excluded_marks = "z"
 	local marks = fn.getmarklist(bufnr) ---@diagnostic disable-line: param-type-mismatch
 	local out = {}
@@ -56,19 +72,6 @@ require("scrollbar.handlers").register("marksmarks", function(bufnr)
 			})
 		end
 	end
-
-	-- last jumplocation
-	local lastJump = fn.getjumplist()[2]
-	local lastJumpPos = fn.getjumplist()[1][lastJump]
-	if lastJumpPos.bufnr == bufnr and lastJumpPos.lnum > 1 then
-		table.insert(out, {
-			line = lastJumpPos.lnum,
-			text = "▶️",
-			type = "Misc",
-			level = 6,
-		})
-	end
-
 	return out
 end)
 

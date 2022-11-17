@@ -36,7 +36,7 @@ null_ls.setup {
 
 		builtins.formatting.stylelint.with {
 			-- using config without ordering, since ordering on save is confusing
-			extra_args = {"--config", fn.expand("~/dotfiles/linter rcfiles/.stylelintrc-formatting.json")},
+			extra_args = {"--config", dotfilesFolder.."/.stylelintrc-formatting.json"},
 		},
 		builtins.diagnostics.stylelint.with {-- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 			extra_args = {"--quiet"}, -- only errors, no warnings

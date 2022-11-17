@@ -109,19 +109,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>6434A449-59F1-4AD1-B616-B22CC2FC4A6D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B49ADC0D-7CDD-4567-A6DE-E7D97662B343</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>64C686C1-E836-4CB7-AAD4-52E72832714C</key>
 		<array/>
 		<key>7715FAE1-9F26-411B-B95B-7D9D41BAA899</key>
@@ -737,40 +724,6 @@ echo "$backup"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.shell-script</string>
-				</array>
-				<key>name</key>
-				<string>Run Shell Script</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>6434A449-59F1-4AD1-B616-B22CC2FC4A6D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>zsh "{query}"</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
-			<key>uid</key>
-			<string>B49ADC0D-7CDD-4567-A6DE-E7D97662B343</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -845,15 +798,6 @@ echo "$backup"</string>
 			<real>335</real>
 			<key>ypos</key>
 			<real>305</real>
-		</dict>
-		<key>6434A449-59F1-4AD1-B616-B22CC2FC4A6D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>930</real>
 		</dict>
 		<key>64C686C1-E836-4CB7-AAD4-52E72832714C</key>
 		<dict>
@@ -939,15 +883,6 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>695</real>
 		</dict>
-		<key>B49ADC0D-7CDD-4567-A6DE-E7D97662B343</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>210</real>
-			<key>ypos</key>
-			<real>930</real>
-		</dict>
 		<key>E0C75078-1F39-43D8-9A91-F93AA5784104</key>
 		<dict>
 			<key>xpos</key>
@@ -981,9 +916,7 @@ echo "$backup"</string>
 		<key>dotfile_bkp_destination</key>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/dotfile bkp/</string>
 		<key>dotfile_folder</key>
-		<string>~/dotfiles/</string>
-		<key>history_path</key>
-		<string>~/.zsh_history</string>
+		<string>~/.config/</string>
 		<key>max_number_of_bkps</key>
 		<string>20</string>
 		<key>working_directory</key>
@@ -991,10 +924,9 @@ echo "$backup"</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
+		<string>dotfile_folder</string>
 		<string>working_directory</string>
 		<string>dotfile_bkp_destination</string>
-		<string>history_path</string>
-		<string>dotfile_folder</string>
 	</array>
 	<key>version</key>
 	<string></string>
