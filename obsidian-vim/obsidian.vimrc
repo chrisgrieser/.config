@@ -108,9 +108,6 @@ nmap g; u<C-r>
 " don't pollute the register
 " workarounds, since Obsidian vimrc does not support noremap properly
 nmap x "_dl
-nmap cl "_dli
-nmap C "_d$a
-nmap cc ^"_d$a
 
 " UNDO consistently on one key
 nmap U <C-r>

@@ -10,12 +10,12 @@
 
 ## Configurations of Interest
 Most people tell me they find the following configurations useful:
+- [neovim config](/nvim)
 - [.zshrc setup](/zsh)
-- [Starship Prompt](/.config/starship/starship-alacritty.toml)
+- [Starship Prompt](/starship/starship-alacritty.toml)
 - [Pandoc configs & pointers on how to use pandoc](/pandoc/#Pandoc)
-- [complex modifications for Karabiner Elements](/.config/karabiner)
-- [.obsidian.vimrc](Obsidian%20vim/obsidian.vimrc) via the [vimrc Support Plugin](https://obsidian.md/plugins?id=obsidian-vimrc-support)
-- [neovim config](.config/nvim)
+- [complex modifications for Karabiner Elements](/karabiner)
+- [.obsidian.vimrc](obsidian-vim/obsidian.vimrc) via the [vimrc Support Plugin](https://obsidian.md/plugins?id=obsidian-vimrc-support)
 
 > __Note__
 > I also have a blog for intermediary-advanced neovim tips: <https://nanotipsforvim.prose.sh/>
