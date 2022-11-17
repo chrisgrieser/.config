@@ -17,6 +17,8 @@ setlocal("spell", true)
 -- syntax highlighting in code blocks
 g.markdown_fenced_languages = {
 	"css",
+	"python",
+	"py=python",
 	"yaml",
 	"json",
 	"lua",
@@ -24,7 +26,6 @@ g.markdown_fenced_languages = {
 	"js=javascript",
 	"bash",
 	"sh=bash",
-	"zsh",
 }
 
 -- wrapping and related options
@@ -38,7 +39,7 @@ keymap({"n", "x"}, "K", "7gk", opts)
 keymap({"n", "x"}, "k", "gk", opts)
 keymap({"n", "x"}, "j", function() require("quality-of-life").overscroll("gj") end, opts)
 
--- automatically open float, since virtual text not readable with wrapping
+-- automatically open float, since virtual text is hard to read with wrapping
 keymap("n", "ge", function() vim.diagnostic.goto_next {wrap = true, float = true} end, opts)
 keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = true} end, opts)
 --------------------------------------------------------------------------------
