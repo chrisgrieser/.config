@@ -1,25 +1,29 @@
 #!/usr/bin/env osascript -l JavaScript
 // requires 'fd' cli
 
-// -----------------------
+//──────────────────────────────────────────────────────────────────────────────
 ObjC.import("stdlib");
 ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const home = app.pathTo("home folder");
 const finderApp = Application("Finder");
-// ---------------------------------------------
+//──────────────────────────────────────────────────────────────────────────────
 
 const pathsToSearch = [
-	$.getenv("working_folder").replace("~", home),
+	$.getenv("working_folder").replace(/^~/, home),
+	$.getenv("dotfile_folder").replace(/^~/, home),
 	home + "/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development",
 	home + "/Library/Mobile Documents/com~apple~CloudDocs/shimmering-focus",
-	home + "/dotfiles" // folder also includes Alfred Preferences folder, which is therefore omitted here
 ];
 
-// ---------------------------------------------
+//──────────────────────────────────────────────────────────────────────────────
 
-const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
+function alfredMatcher(str) {
+	const clean = str.replace(/[-()_.:#]/g, " ");
+	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeperated, str].join(" ");
+}
 
 function readPlist (key, path) {
 	return app.doShellScript(
@@ -29,11 +33,10 @@ function readPlist (key, path) {
 		.replaceAll ("&amp;", "&");
 }
 
-function readFile (path, encoding) {
-	if (!encoding) encoding = $.NSUTF8StringEncoding;
+function readFile (path) {
 	const fm = $.NSFileManager.defaultManager;
 	const data = fm.contentsAtPath(path);
-	const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
 
@@ -47,7 +50,6 @@ const repoArray = app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/b
 	.split("\r")
 	.map(i => i.slice(0, -5))
 	.filter(i => !i.endsWith(".spoon/")); // no hammerspoon spoons
-
 
 repoArray.forEach(localRepoFilePath => {
 	let repoName;

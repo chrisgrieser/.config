@@ -1801,8 +1801,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<array/>
 	<key>variables</key>
 	<dict>
-		<key>git_author</key>
-		<string>pseudometa</string>
+		<key>dotfile_folder</key>
+		<string>~/.config</string>
 		<key>maxReposNumber</key>
 		<string>100</string>
 		<key>vault_path</key>
@@ -1813,8 +1813,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>variablesdontexport</key>
 	<array>
 		<string>working_folder</string>
+		<string>dotfile_folder</string>
 		<string>vault_path</string>
-		<string>git_author</string>
 	</array>
 	<key>version</key>
 	<string></string>
