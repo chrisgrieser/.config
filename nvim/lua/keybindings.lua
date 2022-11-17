@@ -32,8 +32,8 @@ keymap("n", "<leader>p", function()
 	packer.sync()
 	cmd [[MasonUpdateAll]]
 	-- remove oldest snapshot when more than 20
-	local snapshotPath = fn.stdpath("config").."/packer-snapshots"
-	os.execute([[cd ']]..snapshotPath..[[' ; ls -t | tail -n +20 | tr '\n' '\0' | xargs -0 rm]])
+	local snapshotPath = fn.stdpath("config") .. "/packer-snapshots"
+	os.execute([[cd ']] .. snapshotPath .. [[' ; ls -t | tail -n +20 | tr '\n' '\0' | xargs -0 rm]])
 end)
 keymap("n", "<leader>P", ":PackerStatus<CR>")
 
@@ -68,8 +68,8 @@ keymap("n", "gh", ":Gitsigns next_hunk<CR>")
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>")
 
 -- Leap
-keymap({"n", "x", "o"}, "ö", "<Plug>(leap-forward-to)")
-keymap({"n", "x", "o"}, "Ö", "<Plug>(leap-backwards-to)")
+keymap("n", "ö", "<Plug>(leap-forward-to)")
+keymap("n", "Ö", "<Plug>(leap-backwards-to)")
 
 -- Search
 keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout

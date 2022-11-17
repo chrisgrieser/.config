@@ -102,12 +102,13 @@ function M.PluginList(use)
 
 	-- Operators & Text Objects
 	use "kylechui/nvim-surround"
-	use "gbprod/substitute.nvim" -- substitution operator, neovim version for vim-subversive
+	use "gbprod/substitute.nvim" -- substitution operator
+
 	use "numToStr/Comment.nvim"
 	use {"michaeljsmith/vim-indent-object", keys = {{"o", "ai"}, {"o", "ii"}}}
 
 	-- Navigation
-	use "mg979/vim-visual-multi" -- multi-cursor
+	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}}} -- multi-cursor
 	use "ggandor/leap.nvim"
 
 	-- Editing
