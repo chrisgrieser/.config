@@ -61,12 +61,13 @@ function M.PluginList(use)
 		"chrisgrieser/cmp-nerdfont",
 		"petertriho/cmp-git", -- git issues, mentions & commits
 		"hrsh7th/cmp-nvim-lsp", -- lsp
-		"folke/neodev.nvim", -- lsp for nvim-lua config
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 	}}
 	use {"tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp"}
 	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
+	use "folke/neodev.nvim" -- lsp for nvim-lua config
+
 
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
@@ -88,7 +89,7 @@ function M.PluginList(use)
 	use {"mbbill/undotree", cmd = "UndotreeToggle"}
 	use {"sindrets/diffview.nvim",
 		requires = "nvim-lua/plenary.nvim",
-		cmd = "DiffviewFileHistory",
+		cmd = {"DiffviewFileHistory", "DiffviewOpen"},
 		config = function()
 			require("diffview").setup {
 				file_history_panel = {win_config = {height = 8}},
