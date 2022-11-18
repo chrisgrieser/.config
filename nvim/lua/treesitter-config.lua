@@ -110,7 +110,7 @@ require("nvim-treesitter.configs").setup {
 augroup("zshAsBash", {})
 autocmd("BufWinEnter", {
 	group = "zshAsBash",
-	pattern = "*.sh",
+	pattern = {"*.sh", "*.zsh"},
 	command = "silent! set filetype=sh",
 })
 

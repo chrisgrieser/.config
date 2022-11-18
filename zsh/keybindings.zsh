@@ -12,6 +12,7 @@ bindEverywhere "^Z" undo
 bindEverywhere "^U" kill-whole-line
 bindEverywhere "^P" copy-location
 bindEverywhere "^B" copy-buffer
+bindEverywhere "^L" open-location
 bindEverywhere "^V" yank # (the emacs-yank which can be used to re-paste a line killed)
 bindEverywhere '“' quote-all-args # “=alt+2
 bindEverywhere '…' insert-last-word # …=alt+.
@@ -43,6 +44,10 @@ copy-location () {
 	zle -M "'$PWD' copied."
 }
 zle -N copy-location
+
+open-location () {
+	open .
+}
 
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/copybuffer/copybuffer.plugin.zsh
 copy-buffer () {
