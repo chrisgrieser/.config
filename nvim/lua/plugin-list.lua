@@ -95,7 +95,7 @@ function M.PluginList(use)
 	}
 
 	-- Operators & Text Objects
-	use "kylechui/nvim-surround" 
+	use "kylechui/nvim-surround"
 	use {"gbprod/substitute.nvim",
 		module = "substitute",
 		config = function() require("substitute").setup() end,
@@ -110,7 +110,17 @@ function M.PluginList(use)
 	-- Editing
 	use "AndrewRadev/splitjoin.vim"
 	use "Darazaki/indent-o-matic"
-	use {"cshuaimin/ssr.nvim", module = "ssr"} -- structural search & replace
+	use {"cshuaimin/ssr.nvim", -- structural search & replace
+		module = "ssr",
+		config = function() require("ssr").setup {
+			keymaps = {
+				close = "Q",
+				next_match = "n",
+				prev_match = "N",
+				replace_all = "<leader><cr>",
+		}}
+		end
+	}
 
 	-- Filetype-specific
 	use {"phelipetls/jsonpath.nvim", ft = "json", requires = "nvim-treesitter/nvim-treesitter-textobjects"}

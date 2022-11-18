@@ -140,6 +140,60 @@ keymap({"o", "x"}, "an", "gn")
 keymap("o", "r", "}") -- [r]est of the paragraph
 keymap("o", "R", "{")
 
+require("nvim-surround").setup {
+	aliases = {-- aliases should match the bindings above
+		["b"] = ")",
+		["c"] = "}",
+		["r"] = "]",
+		["q"] = '"',
+		["z"] = "'",
+	},
+	move_cursor = false,
+	keymaps = {
+		visual = "s",
+		visual_line = "S",
+	},
+	surrounds = {
+		["f"] = {
+			find = function()
+				return require("nvim-surround.config").get_selection {motion = "af"}
+			end,
+			delete = function()
+				local ft = bo.filetype
+				local patt
+				if ft == "lua" then
+					patt = "^(.-function.-%b() ?)().-( ?end)()$"
+				elseif ft == "js" or ft == "ts" or ft == "bash" or ft == "zsh" then
+					patt = "^(.-function.-%b() ?{)().*(})()$"
+				else
+					vim.notify("No function-surround defined for " .. ft)
+					patt = "()()()()"
+				end
+				return require("nvim-surround.config").get_selections {
+					char = "f",
+					pattern = patt,
+				}
+			end,
+			add = function()
+				local ft = bo.filetype
+				if ft == "lua" then
+					return {
+						{"function ()", "\t"},
+						{"", "end"},
+					}
+				elseif ft == "js" or ft == "ts" or ft == "bash" or ft == "zsh" then
+					return {
+						{"function () {", "\t"},
+						{"", "}"},
+					}
+				end
+				vim.notify("No function-surround defined for " .. ft)
+				return {{""}, {""}}
+			end,
+		},
+	}
+}
+
 -- fix for ss not working, has to come after nvim-surround's setup
 keymap("n", "yss", "ys_", {remap = true})
 keymap("n", "dss", "ds_", {remap = true})
@@ -200,7 +254,7 @@ keymap("n", "cq", 'äz"_dCOMxQ', {remap = true}) -- delete & append comment to p
 -- = qu for uncommenting
 -- big Q also as text object
 -- https://github.com/numToStr/Comment.nvim/issues/22#issuecomment-1272569139
-function commented_lines_textobject()
+local function commented_lines_textobject()
 	local U = require("Comment.utils")
 	local cl = vim.api.nvim_win_get_cursor(0)[1] -- current line
 	local range = {srow = cl, scol = 0, erow = cl, ecol = 0}
@@ -252,10 +306,13 @@ autocmd("RecordingEnter", {
 keymap("n", "9", "@y") -- quick replay (don't use counts that high anyway)
 
 -- find & replace under cursor
-keymap("n", "<leader>f", ':% s/<C-r>=expand("<cword>")<CR>//g<Left><Left>')
+-- keymap("n", "<leader>f", ':% s/<C-r>=expand("<cword>")<CR>//g<Left><Left>')
 
 -- find & replace selection
-keymap("v", "<leader>f", [[<Esc>:'<,'> s/\(.*\)/\1/<Left><Left><Left>]])
+-- keymap("x", "<leader>F", [[<Esc>:'<,'> s/\(.*\)/\1/<Left><Left><Left>]])
+
+-- structured search & replace
+keymap({"n", "x"}, "<leader>f", function() require("ssr").open() end)
 
 --------------------------------------------------------------------------------
 
