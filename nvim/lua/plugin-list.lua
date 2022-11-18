@@ -112,14 +112,14 @@ function M.PluginList(use)
 	use "Darazaki/indent-o-matic"
 	use {"cshuaimin/ssr.nvim", -- structural search & replace
 		module = "ssr",
-		config = function() require("ssr").setup {
-			keymaps = {
-				close = "Ä",
-				next_match = "n",
-				prev_match = "N",
-				replace_all = ",<CR>",
-		}}
-		end
+		config = function() 
+			require("ssr").setup {
+				keymaps = {
+					close = "Q",
+					replace_all = "<CR>",
+				}
+			}
+		end,
 	}
 
 	-- Filetype-specific
