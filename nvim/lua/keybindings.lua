@@ -361,7 +361,6 @@ keymap("n", "zf", "1z=") -- auto[f]ix word under cursor (= select 1st suggestion
 
 -- [S]ubstitute Operator (substitute.nvim)
 local substi = require("substitute")
-substi.setup()
 keymap("n", "s", substi.operator)
 keymap("n", "ss", substi.line)
 keymap("n", "S", substi.eol)

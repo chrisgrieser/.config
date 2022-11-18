@@ -82,10 +82,10 @@ function M.PluginList(use)
 	use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter
 
 	-- File Management & Switching
-	use {"nvim-telescope/telescope.nvim", requires = {
-		"nvim-lua/plenary.nvim",
-		"kyazdani42/nvim-web-devicons",
-	}}
+	use {"nvim-telescope/telescope.nvim", 
+		requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
+		module = "telescope",
+	}
 
 	-- File History
 	use {"mbbill/undotree", cmd = "UndotreeToggle"}
@@ -105,7 +105,7 @@ function M.PluginList(use)
 
 	-- Operators & Text Objects
 	use "kylechui/nvim-surround"
-	use "gbprod/substitute.nvim" -- substitution operator
+	use {"gbprod/substitute.nvim"}
 	use "numToStr/Comment.nvim"
 	use {"michaeljsmith/vim-indent-object", keys = {{"o", "ai"}, {"o", "ii"}}}
 
