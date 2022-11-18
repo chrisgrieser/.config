@@ -106,8 +106,8 @@ require("lsp-inlayhints").setup {
 }
 
 -- INFO: this block must come before lua LSP setup
-require("neodev").setup{ 
-	library = { plugins = false } 
+require("neodev").setup{
+	library = { plugins = false }
 }
 
 --------------------------------------------------------------------------------
@@ -223,15 +223,33 @@ local cssSettings = {
 		colorDecorators = {enable = true}, -- not supported yet
 	}
 }
-
+-- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local tsSettings = {
 	typescript = {
 		format = {
-			indentSize = 16,
 		},
-	}
+	},
+	javascript = {
+		format = {
+		},
+	},
 }
 
+-- https://github.com/redhat-developer/yaml-language-server#language-server-settings
+local yamlSettings = {
+	yaml = {
+		format = {
+			singleQuote = false,
+			bracketSpacing = true,
+			proseWrap = "preserve", -- preserve|always|never
+			printWidth = 120, -- relevant for proseWrap
+		},
+		hover = true,
+		completion = true,
+		validate = true,
+		schemaStore = true, -- Automatically pull available YAML schemas from JSON Schema Store
+	},
+}
 --------------------------------------------------------------------------------
 
 -- Enable snippet capability for completion (nvim_cmp)
@@ -247,20 +265,11 @@ for _, lsp in pairs(lsp_servers) do
 	if lsp == "sumneko_lua" then
 		config.settings = luaSettings
 	elseif lsp == "tsserver" then
-		-- config.settings = tsSettings
-		break
+		config.settings = tsSettings
 	elseif lsp == "cssls" then
 		config.settings = cssSettings
+	elseif lsp == "yamlls" then
+		config.settings = yamlSettings
 	end
 	require("lspconfig")[lsp].setup(config)
 end
-
-require("lspconfig").tsserver.setup({
-	settings = {
-		typescript = {
-			format = {
-				indentSize = 16,
-			},
-		},
-	},
-})
