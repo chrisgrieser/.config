@@ -28,19 +28,12 @@ function M.PluginList(use)
 		}
 	}
 
-	-- Filetype-specific
-	use {"phelipetls/jsonpath.nvim", ft = "json", requires = "nvim-treesitter/nvim-treesitter-textobjects"}
-	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
-	use {"hail2u/vim-css3-syntax", ft = "css"} -- better syntax highlighting (until treesitter css looks decent…)
-
-	-- LSP
+	-- LSP & Linting
 	use {"neovim/nvim-lspconfig", requires = {
 		"williamboman/mason-lspconfig.nvim",
 		"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		"ray-x/lsp_signature.nvim",
 	}}
-
-	-- Linting
 	use {"jose-elias-alvarez/null-ls.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"jayp0521/mason-null-ls.nvim",
@@ -81,13 +74,11 @@ function M.PluginList(use)
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 	use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter
 
-	-- File Management & Switching
-	use {"nvim-telescope/telescope.nvim", 
-		requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
-		module = "telescope",
-	}
-
-	-- File History
+	-- File History & Switching
+	use {"nvim-telescope/telescope.nvim", requires = {
+		"nvim-lua/plenary.nvim",
+		"kyazdani42/nvim-web-devicons"
+	}}
 	use {"mbbill/undotree", cmd = "UndotreeToggle"}
 	use {"sindrets/diffview.nvim",
 		requires = "nvim-lua/plenary.nvim",
@@ -105,7 +96,10 @@ function M.PluginList(use)
 
 	-- Operators & Text Objects
 	use "kylechui/nvim-surround"
-	use {"gbprod/substitute.nvim"}
+	use {"gbprod/substitute.nvim",
+		module = "substitute",
+		config = function() require("substitute").setup() end,
+	}
 	use "numToStr/Comment.nvim"
 	use {"michaeljsmith/vim-indent-object", keys = {{"o", "ai"}, {"o", "ii"}}}
 
@@ -114,8 +108,13 @@ function M.PluginList(use)
 	use "ggandor/leap.nvim"
 
 	-- Editing
-	use "AndrewRadev/splitjoin.vim"
+	use {"AndrewRadev/splitjoin.vim", cmd = {"SplitjoinSplit", "SplitjoinJoin"}}
 	use "Darazaki/indent-o-matic" -- detect indention (alternative: NMAC427/guess-indent.nvim)
+	use {"cshuaimin/ssr.nvim", module = "ssr", }
+	-- Filetype-specific
+	use {"phelipetls/jsonpath.nvim", ft = "json", requires = "nvim-treesitter/nvim-treesitter-textobjects"}
+	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
+	use {"hail2u/vim-css3-syntax", ft = "css"} -- better syntax highlighting (until treesitter css looks decent…)
 
 end
 

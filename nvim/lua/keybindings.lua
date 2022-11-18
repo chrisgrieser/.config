@@ -162,7 +162,7 @@ require("nvim-surround").setup {
 				local ft = bo.filetype
 				local patt
 				if ft == "lua" then
-					patt = "^(.-function.-%b())().*(end)()$"
+					patt = "^(.-function.-%b() ?)().-( ?end)()$"
 				elseif ft == "js" or ft == "ts" or ft == "bash" or ft == "zsh" then
 					patt = "^(.-function.-%b() ?{)().*(})()$"
 				else
@@ -360,10 +360,9 @@ keymap("n", "gL", "[s") -- prev misspelling
 keymap("n", "zf", "1z=") -- auto[f]ix word under cursor (= select 1st suggestion)
 
 -- [S]ubstitute Operator (substitute.nvim)
-local substi = require("substitute")
-keymap("n", "s", substi.operator)
-keymap("n", "ss", substi.line)
-keymap("n", "S", substi.eol)
+keymap("n", "s", require("substitute").operator)
+keymap("n", "ss", require("substitute").line)
+keymap("n", "S", require("substitute").eol)
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine)
