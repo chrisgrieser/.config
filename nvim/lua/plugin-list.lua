@@ -114,10 +114,10 @@ function M.PluginList(use)
 		module = "ssr",
 		config = function() require("ssr").setup {
 			keymaps = {
-				close = "Q",
+				close = "Ä",
 				next_match = "n",
 				prev_match = "N",
-				replace_all = "<leader><cr>",
+				replace_all = ",<CR>",
 		}}
 		end
 	}
