@@ -111,15 +111,14 @@ augroup("zshAsBash", {})
 autocmd("BufWinEnter", {
 	group = "zshAsBash",
 	pattern = "*.sh",
-	command = "set filetype=sh",
+	command = "silent! set filetype=sh",
 })
 
 --------------------------------------------------------------------------------
 
--- using the setup function leads to bugs, so disabling this for now
--- require ("treesitter-context").setup {
--- 	enable = true,
--- 	max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.
+-- setup function potentially has bugs, so disabling parts of it
+require ("treesitter-context").setup {
+	max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.
 -- 	trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
 -- 	min_window_height = 20,
--- }
+}

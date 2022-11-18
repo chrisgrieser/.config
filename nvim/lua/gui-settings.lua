@@ -24,18 +24,17 @@ keymap("i", "<D-w>", "<Esc>:close<CR>")
 
 keymap({"n", "x", "i"}, "<D-n>", qol.createNewFile)
 
-keymap({"n", "x"}, "<D-z>", "u") -- cmd+z
+keymap({"n"}, "<D-z>", "u") -- cmd+z
 keymap({"n", "x"}, "<D-Z>", "<C-R>") -- cmd+shift+z
 keymap("i", "<D-z>", "<C-o>u")
 keymap("i", "<D-Z>", "<C-o><C-r>")
-keymap({"n", "x"}, "<D-s>", ":write!<CR>") -- cmd+s
-keymap("i", "<D-s>", "<Esc>:write!<CR>a")
+keymap({"n", "x", "i"}, "<D-s>", function () cmd[[write!]] end) -- cmd+s
 keymap("n", "<D-a>", "ggVG") -- cmd+a
 keymap("i", "<D-a>", "<Esc>ggVG")
 keymap("x", "<D-a>", "ggG")
 
-keymap("", "<D-BS>", qol.trashFile)
-keymap({"n", "x"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
+keymap({"n", "x", "i"}, "<D-BS>", qol.trashFile)
+keymap({"n", "x", "i"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 keymap({"n", "x", "i"}, "<D-1>", ":Lexplore<CR><CR>") -- file tree (netrw)
 keymap({"n", "x", "i"}, "<D-0>", ":messages<CR>")
 keymap({"n", "x", "i"}, "<D-9>", ":Notification<CR>")
@@ -55,7 +54,8 @@ keymap("n", "<D-x>", "dd") -- no selection = line
 keymap("x", "<D-x>", "d")
 keymap({"n", "x"}, "<D-v>", "p")
 keymap("c", "<D-v>", "<C-r>+")
-keymap("i", "<D-v>", qol.insertModePasteFix)
+-- keymap("i", "<D-v>", qol.insertModePasteFix)
+keymap("i", "<D-v>", [[<C-r><C-o>"]])
 
 -- cmd+e: inline code
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>") -- no selection = word under cursor
