@@ -44,7 +44,7 @@ null_ls.setup {
 
 		builtins.code_actions.eslint_d, -- no formatting used, since ts lsp does it
 		builtins.diagnostics.eslint_d.with {
-			extra_args = {"--quiet"}, -- only errors, no warnings
+			-- extra_args = {"--quiet"}, -- only errors, no warnings
 		},
 
 		builtins.diagnostics.yamllint.with {

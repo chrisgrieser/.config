@@ -4,11 +4,19 @@
 
 add_newline = false
 continuation_prompt = "❯"
-format = "[$directory${custom.folder_number}$git_branch$git_status$git_metrics$git_commit$git_state$sudo](bg:black)$cmd_duration$status$character"
+format = "[$directory${custom.folder_number}$git_branch$git_status$git_metrics$git_commit$git_state$sudo]${custom.delimiter}(fg:black)$cmd_duration$character$status"
+
+[custom.delimiter]
+command = "echo b"
+when = "true"
+symbol = " "
+description = "Simple Delimiter"
+format = '[$symbol$output]($style) '
+style = "fg:black"
 
 [character]
 success_symbol = ""
-error_symbol = ""
+error_symbol = " [](bold red)"
 
 [sudo]
 style = 'fg:green bg:black'
@@ -89,4 +97,4 @@ disabled = false
 # only_nonzero_diffs = false
 added_style = "fg:green bg:black"
 deleted_style = "fg:red bg:black"
-format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\) )'
+format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\))'
