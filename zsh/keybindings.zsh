@@ -45,9 +45,12 @@ copy-location () {
 }
 zle -N copy-location
 
+alias l="open-location" # alias since `bindkey` not supported in Warp
+
 open-location () {
 	open .
 }
+zle -N open-location
 
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/copybuffer/copybuffer.plugin.zsh
 copy-buffer () {
