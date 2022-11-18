@@ -8,11 +8,11 @@ require("utils")
 local lsp_servers = {
 	"sumneko_lua",
 	"yamlls",
-	"tsserver", -- ts/js
 	"jsonls",
 	"cssls",
 	"pyright",
 	"marksman", -- markdown
+	"tsserver", -- ts/js
 }
 
 --------------------------------------------------------------------------------
@@ -133,12 +133,12 @@ local function on_attach(client, bufnr)
 	keymap("n", "<leader>a", vim.lsp.buf.code_action)
 
 	-- format on manual save, not for tsserver since using eslint there instead
-	if client.name ~= "tsserver" then
+	-- if client.name ~= "tsserver" then
 		keymap("n", "<D-s>", function()
 			vim.lsp.buf.format {async = true}
 			cmd [[write!]]
 		end, bufopts)
-	end
+	-- end
 
 	if client.name ~= "cssls" then -- don't override navigation marker search for css files
 		keymap("n", "gs", telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
@@ -224,6 +224,16 @@ local cssSettings = {
 	}
 }
 
+local tsSettings = {
+	typescript = {
+		format = {
+			indentSize = 16,
+		},
+	}
+}
+
+--------------------------------------------------------------------------------
+
 -- Enable snippet capability for completion (nvim_cmp)
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -236,8 +246,21 @@ for _, lsp in pairs(lsp_servers) do
 	}
 	if lsp == "sumneko_lua" then
 		config.settings = luaSettings
+	elseif lsp == "tsserver" then
+		-- config.settings = tsSettings
+		break
 	elseif lsp == "cssls" then
 		config.settings = cssSettings
 	end
 	require("lspconfig")[lsp].setup(config)
 end
+
+require("lspconfig").tsserver.setup({
+	settings = {
+		typescript = {
+			format = {
+				indentSize = 16,
+			},
+		},
+	},
+})

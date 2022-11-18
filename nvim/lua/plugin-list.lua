@@ -110,7 +110,7 @@ function M.PluginList(use)
 	use {"michaeljsmith/vim-indent-object", keys = {{"o", "ai"}, {"o", "ii"}}}
 
 	-- Navigation
-	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}}} -- multi-cursor
+	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}
 	use "ggandor/leap.nvim"
 
 	-- Editing

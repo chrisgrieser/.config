@@ -42,7 +42,7 @@ null_ls.setup {
 			extra_args = {"--quiet"}, -- only errors, no warnings
 		},
 
-		builtins.formatting.eslint_d,
+		-- builtins.formatting.eslint_d,
 		builtins.code_actions.eslint_d,
 		builtins.diagnostics.eslint_d.with {
 			extra_args = {"--quiet"}, -- only errors, no warnings
