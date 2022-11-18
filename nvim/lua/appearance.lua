@@ -113,6 +113,7 @@ require("dressing").setup {
 		border = borderStyle,
 		winblend = 4, -- % transparency
 		relative = "win",
+		insert_only = false,
 	},
 	select = {
 		backend = {"builtin", "telescope", "nui"}, -- Priority list of preferred vim.select implementations
@@ -275,7 +276,7 @@ require("lualine").setup {
 			cond = navic.is_available,
 			section_separators = winSecSeparators,
 		}},
-		lualine_c = {},
+		lualine_c = {{function () return " " end}}, -- dummy to ensure no glitches when winbar disappears
 		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {}
