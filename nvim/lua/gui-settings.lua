@@ -55,7 +55,7 @@ keymap("x", "<D-x>", "d")
 keymap({"n", "x"}, "<D-v>", "p")
 keymap("c", "<D-v>", "<C-r>+")
 -- keymap("i", "<D-v>", qol.insertModePasteFix)
-keymap("i", "<D-v>", [[<C-r><C-o>"]])
+keymap("i", "<D-v>", [[<C-r><C-o>+]])
 
 -- cmd+e: inline code
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>") -- no selection = word under cursor
