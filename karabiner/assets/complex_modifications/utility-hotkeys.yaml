@@ -1,14 +1,14 @@
 title: 🔘 Utility Shortcuts
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
-  - description: '🔘 ⇧+⌫ → ⌦ '
+  - description: '🔘 ⌃+⌫ → ⌦ '
     manipulators:
       - type: basic
         from:
           key_code: delete_or_backspace
           modifiers:
             mandatory:
-              - shift
+              - control
         to:
           - key_code: delete_forward
   - description: 'fn+space → ctrl+space (for Apple Keyboards)'
