@@ -15,7 +15,6 @@ keymap = vim.keymap.set
 error = vim.log.levels.ERROR
 warn = vim.log.levels.WARN
 
-telescope = require("telescope.builtin") -- requires loading extensions first
 qol = require("quality-of-life")
 --------------------------------------------------------------------------------
 
