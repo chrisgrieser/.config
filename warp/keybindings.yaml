@@ -1,4 +1,5 @@
 ---
-"terminal:select_next_block": ctrl-j
-"editor_view:add_next_occurrence": cmd-j
 "terminal:select_previous_block": ctrl-k
+"editor_view:add_next_occurrence": cmd-j
+"workspace:show_keybinding_settings": shift-cmd-;
+"terminal:select_next_block": ctrl-j
