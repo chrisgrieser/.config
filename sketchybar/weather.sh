@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 weather=$(curl "https://wttr.in/Berlin?format=1" | tr -d "C ")
-if [[ "$weather" =~ Unknown|Sorry ]] ; then
+if [[ "$weather" =~ Unknown ]] || [[ "$weather" =~ Sorry ]] ; then
 	icon=""
 	temp="–"
 else
