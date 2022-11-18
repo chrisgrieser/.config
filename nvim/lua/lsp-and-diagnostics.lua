@@ -71,10 +71,7 @@ require("mason").setup {
 	}
 }
 require("mason-update-all").setup()
-
 require("mason-lspconfig").setup {
-	-- mason-lspconfig uses the lspconfig servernames, not mason servernames
-	-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
 	ensure_installed = lsp_servers,
 }
 

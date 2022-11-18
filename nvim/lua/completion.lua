@@ -196,17 +196,12 @@ cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 --------------------------------------------------------------------------------
 -- TABNINE
--- WARN: Config is ignored https://github.com/tzachar/cmp-tabnine/issues/75
-
-require("cmp_tabnine.config"):setup {
+require("cmp_tabnine.config"):setup { -- yes, requires a ":", not "."
 	max_lines = 1000,
 	max_num_results = 20,
 	run_on_every_keystroke = true,
 	snippet_placeholder = "…",
 	show_prediction_strength = true,
-	ignored_file_types = {
-		-- json = true,
-	},
 }
 
 -- automatically prefetch completions for the buffer

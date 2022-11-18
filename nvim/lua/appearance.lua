@@ -217,7 +217,7 @@ end
 local secSeparators
 if isGui() then
 	secSeparators = {left = " ", right = " "} -- nerdfont: 'nf-ple'
-	winSecSeparators = {left = " ", right = ""}
+	winSecSeparators = {left = " ", right = ""}
 else
 	secSeparators = {left = "", right = ""} -- separators look off in Terminal
 	winSecSeparators = {left = "", right = ""}
@@ -237,6 +237,15 @@ function isStandardBranch() -- not checking for branch here, since running the c
 	local validFiletype = bo.filetype ~= "help" -- vim help files are located in a git repo
 	return notMainBranch and validFiletype
 end
+
+local navic = require("nvim-navic")
+navic.setup {
+	icons = {
+		Object = "ﴯ ",
+	},
+	separator = "  ",
+}
+
 
 require("lualine").setup {
 	sections = {
@@ -262,8 +271,8 @@ require("lualine").setup {
 	winbar = {
 		lualine_a = {},
 		lualine_b = {{
-			require("nvim-navic").get_location,
-			cond = require("nvim-navic").is_available,
+			navic.get_location,
+			cond = navic.is_available,
 			section_separators = winSecSeparators,
 		}},
 		lualine_c = {},

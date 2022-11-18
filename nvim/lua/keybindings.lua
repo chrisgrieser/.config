@@ -493,7 +493,7 @@ keymap("n", "<leader>r", function()
 		local parentFolder = fn.expand("%:p:h")
 		if parentFolder:find("nvim") then
 			cmd [[write! | source %]]
-			vim.notify(" Neovim config reloaded.")
+			vim.notify(" " .. fn.expand("%") .. " reloaded")
 		elseif parentFolder:find("hammerspoon") then
 			os.execute('open -g "hammerspoon://hs-reload"')
 		end
