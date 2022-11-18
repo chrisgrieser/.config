@@ -4,15 +4,7 @@
 
 add_newline = false
 continuation_prompt = "❯"
-format = "[$directory${custom.folder_number}$git_branch$git_status$git_metrics$git_commit$git_state$sudo]${custom.delimiter}(fg:black)$cmd_duration$character$status"
-
-[custom.delimiter]
-command = "echo b"
-when = "true"
-symbol = " "
-description = "Simple Delimiter"
-format = '[$symbol$output]($style) '
-style = "fg:black"
+format = "[$directory${custom.folder_number}$git_branch$git_status$git_metrics$git_commit$git_state$sudo$package${custom.alfred}$nodejs$python$jobs$memory_usage](bg:black)[](fg:000)$cmd_duration$character$status" # warp does not support right-side formatting
 
 [character]
 success_symbol = ""
@@ -98,3 +90,47 @@ disabled = false
 added_style = "fg:green bg:black"
 deleted_style = "fg:red bg:black"
 format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\))'
+
+#───────────────────────────────────────────────────────────────────────────────
+
+[jobs]
+symbol = ""
+format = "[ +$number $symbol ]($style)"
+style = "fg:white"
+symbol_threshold = 1
+number_threshold = 2
+
+[memory_usage]
+disabled = false
+symbol = " "
+threshold = 75
+format = " [$symbol$ram_pct]($style)"
+
+[package]
+format = "[$symbol$version]($style)"
+version_format = "$raw"
+symbol = " "
+style = "dimmed 208"
+
+[custom.alfred]
+files = ["info.plist"]
+command = "plutil -extract version xml1 -o - info.plist | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
+symbol = " "
+os = "macos"
+description = "Version number of Alfred Workflow"
+style = "dimmed 208"
+format = '[](purple) [$symbol$output]($style)'
+
+[nodejs]
+format = " [$symbol$version]($style)"
+version_format = "$major"
+style = "dimmed cyan"
+detect_extensions = ["ts"] # dont trigger for JXA
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+version_format = "$major.$minor"
+style = "dimmed yellow"
+python_binary = ["python3"]
+symbol = " "
+

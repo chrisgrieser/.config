@@ -265,6 +265,7 @@ local tsjsSettings = {
 local yamlSettings = {
 	yaml = {
 		format = {
+			enable = true,
 			singleQuote = false,
 			bracketSpacing = true,
 			proseWrap = "preserve", -- preserve|always|never

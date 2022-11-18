@@ -94,9 +94,10 @@ added_style = "fg:green bg:black"
 deleted_style = "fg:red bg:black"
 format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\) )'
 
-# -------------
+#───────────────────────────────────────────────────────────────────────────────
 # right side
-# -------------
+#───────────────────────────────────────────────────────────────────────────────
+
 [jobs]
 symbol = ""
 format = "[ +$number $symbol ]($style)"
