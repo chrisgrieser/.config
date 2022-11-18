@@ -95,22 +95,23 @@ function M.PluginList(use)
 	}
 
 	-- Operators & Text Objects
-	use "kylechui/nvim-surround"
+	use "kylechui/nvim-surround" 
 	use {"gbprod/substitute.nvim",
 		module = "substitute",
 		config = function() require("substitute").setup() end,
 	}
 	use "numToStr/Comment.nvim"
-	use {"michaeljsmith/vim-indent-object", keys = {{"o", "ai"}, {"o", "ii"}}}
+	use {"michaeljsmith/vim-indent-object", keys = {{"o", "ai"}, {"o", "ii"}, {"x", "ai"}, {"x", "ii"}}}
 
 	-- Navigation
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}
 	use "ggandor/leap.nvim"
 
 	-- Editing
-	use {"AndrewRadev/splitjoin.vim", cmd = {"SplitjoinSplit", "SplitjoinJoin"}}
-	use "Darazaki/indent-o-matic" -- detect indention (alternative: NMAC427/guess-indent.nvim)
-	use {"cshuaimin/ssr.nvim", module = "ssr", }
+	use "AndrewRadev/splitjoin.vim"
+	use "Darazaki/indent-o-matic"
+	use {"cshuaimin/ssr.nvim", module = "ssr"} -- structural search & replace
+
 	-- Filetype-specific
 	use {"phelipetls/jsonpath.nvim", ft = "json", requires = "nvim-treesitter/nvim-treesitter-textobjects"}
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
