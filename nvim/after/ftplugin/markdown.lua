@@ -71,4 +71,5 @@ keymap("i", "<D-i>", "**<Left>", opts)
 -- Misc
 keymap("n", "<leader>x", "mz^lllrx`z", opts) -- check markdown tasks
 keymap("n", "<leader>-", "mzI- <Esc>`z", opts) -- Add bullet point
+keymap("n", "<D-4>", "mzI- <Esc>`z", opts) -- Add bullet point
 keymap("n", "<leader>>", "mzI> <Esc>`z", opts) -- Turn into blockquote
