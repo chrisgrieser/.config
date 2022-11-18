@@ -3,7 +3,7 @@ local opts = {buffer = true, silent = true}
 --------------------------------------------------------------------------------
 
 -- hide URLs and other formatting, TODO: figure out how to hide only URLs
--- localOpt("conceallevel", 2)
+wo.conceallevel = 2
 
 -- hack to make lists auto-continue via Return in Insert & o in normal mode
 -- i.e. replaces bullet.vim based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
