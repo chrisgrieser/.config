@@ -106,8 +106,8 @@ require("lsp-inlayhints").setup {
 }
 
 -- INFO: this block must come before lua LSP setup
-require("neodev").setup{
-	library = { plugins = false }
+require("neodev").setup {
+	library = {plugins = false}
 }
 
 --------------------------------------------------------------------------------
@@ -132,13 +132,11 @@ local function on_attach(client, bufnr)
 	-- actions defined globally so null-ls can use them without LSP being present
 	keymap("n", "<leader>a", vim.lsp.buf.code_action)
 
-	-- format on manual save, not for tsserver since using eslint there instead
-	-- if client.name ~= "tsserver" then
-		keymap("n", "<D-s>", function()
-			vim.lsp.buf.format {async = true}
-			cmd [[write!]]
-		end, bufopts)
-	-- end
+	-- format on manual save
+	keymap("n", "<D-s>", function()
+		vim.lsp.buf.format {async = true}
+		cmd [[write!]]
+	end, bufopts)
 
 	if client.name ~= "cssls" then -- don't override navigation marker search for css files
 		keymap("n", "gs", telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
@@ -224,15 +222,43 @@ local cssSettings = {
 	}
 }
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
-local tsSettings = {
-	typescript = {
-		format = {
-		},
+local jsAndTsSettings = {
+	format = {
+		insertSpaceAfterCommaDelimiter = true,
+		insertSpaceAfterConstructor = false,
+		insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
+		insertSpaceAfterKeywordsInControlFlowStatements = true,
+		insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
+		insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
+		insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+		insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+		insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+		insertSpaceAfterSemicolonInForStatements = true,
+		insertSpaceBeforeAndAfterBinaryOperators = true,
+		insertSpaceBeforeFunctionParenthesis = false,
+		insertSpaceBeforeTypeAnnotation = true,
+		placeOpenBraceOnNewLineForFunctions = false,
+		semicolons = "insert", -- ignore | insert | remove
+		trimTrailingWhitespace = true,
 	},
-	javascript = {
-		format = {
-		},
+	inlayHints = {
+		includeInlayEnumMemberValueHints = true,
+		includeInlayFunctionLikeReturnTypeHints = true,
+		includeInlayFunctionParameterTypeHints = true,
+		includeInlayParameterNameHints = "all", -- none | literals | all
+		includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+		includeInlayPropertyDeclarationTypeHints = true,
+		includeInlayVariableTypeHints = true,
+		includeInlayVariableTypeHintsWhenTypeMatchesName = true,
 	},
+}
+
+local tsjsSettings = {
+	diagnostics = {
+		ignoredCode = {},
+	},
+	typescript = jsAndTsSettings,
+	javascript = jsAndTsSettings,
 }
 
 -- https://github.com/redhat-developer/yaml-language-server#language-server-settings
@@ -265,7 +291,7 @@ for _, lsp in pairs(lsp_servers) do
 	if lsp == "sumneko_lua" then
 		config.settings = luaSettings
 	elseif lsp == "tsserver" then
-		config.settings = tsSettings
+		config.settings = tsjsSettings
 	elseif lsp == "cssls" then
 		config.settings = cssSettings
 	elseif lsp == "yamlls" then
