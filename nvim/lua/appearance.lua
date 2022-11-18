@@ -217,8 +217,10 @@ end
 local secSeparators
 if isGui() then
 	secSeparators = {left = " ", right = " "} -- nerdfont: 'nf-ple'
+	winSecSeparators = {left = " ", right = ""}
 else
 	secSeparators = {left = "", right = ""} -- separators look off in Terminal
+	winSecSeparators = {left = "", right = ""}
 end
 
 augroup("branchChange", {})
@@ -234,13 +236,6 @@ function isStandardBranch() -- not checking for branch here, since running the c
 	local notMainBranch = branch ~= "main" and branch ~= "master"
 	local validFiletype = bo.filetype ~= "help" -- vim help files are located in a git repo
 	return notMainBranch and validFiletype
-end
-
-function jsonPath()
-	if bo.filetype == "json" then
-		return require("jsonpath").get()
-	end
-	return ""
 end
 
 require("lualine").setup {
@@ -261,9 +256,20 @@ require("lualine").setup {
 		lualine_y = {
 			"diff",
 			{"branch", cond = isStandardBranch},
-			{jsonPath},
 		},
 		lualine_z = {"location"},
+	},
+	winbar = {
+		lualine_a = {},
+		lualine_b = {{
+			require("nvim-navic").get_location,
+			cond = require("nvim-navic").is_available,
+			section_separators = winSecSeparators,
+		}},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {}
 	},
 	options = {
 		theme = "auto",

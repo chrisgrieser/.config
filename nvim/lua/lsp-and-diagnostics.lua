@@ -120,6 +120,9 @@ keymap("n", "gs", telescope.treesitter)
 -- after the language server attaches to the current buffer
 local function on_attach(client, bufnr)
 	require("lsp-inlayhints").on_attach(client, bufnr) ---@diagnostic disable-line: missing-parameter
+	if client.server_capabilities.documentSymbolProvider then
+		require("nvim-navic").attach(client, bufnr)
+	end
 
 	local bufopts = {silent = true, buffer = true}
 	keymap("n", "gd", telescope.lsp_definitions, bufopts)
@@ -251,7 +254,7 @@ local jsAndTsSettings = {
 }
 
 local tsjsSettings = {
-	completions = { completeFunctionCalls = true },
+	completions = {completeFunctionCalls = true},
 	diagnostics = {
 		-- https://github.com/microsoft/TypeScript/blob/master/src/compiler/diagnosticMessages.json
 		ignoredCode = {},

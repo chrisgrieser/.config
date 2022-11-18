@@ -23,7 +23,6 @@ function M.PluginList(use)
 		requires = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/nvim-treesitter-refactor",
-			"nvim-treesitter/nvim-treesitter-context",
 			"p00f/nvim-ts-rainbow",
 		}
 	}
@@ -33,6 +32,7 @@ function M.PluginList(use)
 		"williamboman/mason-lspconfig.nvim",
 		"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		"ray-x/lsp_signature.nvim",
+		"SmiteshP/nvim-navic",
 	}}
 	use {"jose-elias-alvarez/null-ls.nvim", requires = {
 		"nvim-lua/plenary.nvim",
@@ -112,7 +112,7 @@ function M.PluginList(use)
 	use "Darazaki/indent-o-matic"
 	use {"cshuaimin/ssr.nvim", -- structural search & replace
 		module = "ssr",
-		config = function() 
+		config = function()
 			require("ssr").setup {
 				keymaps = {
 					close = "Q",
