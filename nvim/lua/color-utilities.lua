@@ -3,14 +3,12 @@ require("utils")
 opt.termguicolors = true -- required for color previewing, but also messes up look in the terminal
 
 local ccc = require("ccc")
--- local excludedFiletypes = table.insert(specialFiletypes, "markdown")
 
 ccc.setup{
 	win_opts	= { border = borderStyle },
 	highlighter = {
 		auto_enable = true,
-		filetypes = {"lua", "css", "bash", "sh", "zsh"},
-		-- excludes = excludedFiletypes,
+		filetypes = {"lua", "css", "bash", "sh", "zsh", "yaml"},
 		max_byte = 2 * 1024 * 1024, -- 2mb
 		lsp = true,
 	},
@@ -30,6 +28,6 @@ ccc.setup{
 	},
 }
 
-keymap("n", "<leader>#", ":CccPick<CR>")
+keymap("n", "#", ":CccPick<CR>")
 keymap("n", "g#", ":CccConvert<CR>")
 keymap("i", "<C-#>", "<Plug>(ccc-insert)")

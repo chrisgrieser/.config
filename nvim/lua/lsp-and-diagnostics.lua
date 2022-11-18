@@ -227,7 +227,6 @@ local jsAndTsSettings = {
 		insertSpaceAfterCommaDelimiter = true,
 		insertSpaceAfterConstructor = false,
 		insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
-		insertSpaceAfterKeywordsInControlFlowStatements = true,
 		insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
 		insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
 		insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
@@ -236,9 +235,7 @@ local jsAndTsSettings = {
 		insertSpaceAfterSemicolonInForStatements = true,
 		insertSpaceBeforeAndAfterBinaryOperators = true,
 		insertSpaceBeforeFunctionParenthesis = false,
-		insertSpaceBeforeTypeAnnotation = true,
 		placeOpenBraceOnNewLineForFunctions = false,
-		semicolons = "insert", -- ignore | insert | remove
 		trimTrailingWhitespace = true,
 	},
 	inlayHints = {
@@ -254,7 +251,9 @@ local jsAndTsSettings = {
 }
 
 local tsjsSettings = {
+	completions = { completeFunctionCalls = true },
 	diagnostics = {
+		-- https://github.com/microsoft/TypeScript/blob/master/src/compiler/diagnosticMessages.json
 		ignoredCode = {},
 	},
 	typescript = jsAndTsSettings,
@@ -265,7 +264,7 @@ local tsjsSettings = {
 local yamlSettings = {
 	yaml = {
 		format = {
-			enable = true,
+			enable = true, -- does not seem to be supported yet
 			singleQuote = false,
 			bracketSpacing = true,
 			proseWrap = "preserve", -- preserve|always|never
