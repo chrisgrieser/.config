@@ -178,7 +178,7 @@ require("nvim-surround").setup {
 				local ft = bo.filetype
 				if ft == "lua" then
 					return {
-						{"local function ()", "\t"},
+						{"function ()", "\t"},
 						{"", "end"},
 					}
 				elseif ft == "js" or ft == "ts" or ft == "bash" or ft == "zsh" then
