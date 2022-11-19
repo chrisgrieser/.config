@@ -8,8 +8,34 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
+		<key>3C5C9A77-FB6B-4CCE-98EC-3DE84FF67B9E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A94E2D4B-C051-4919-8446-B88D616A0C87</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<array/>
+		<key>5F520387-B2D2-490D-83E3-639D537DAC50</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F8785CE7-513D-4EE4-866A-04AB1336A36E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<array>
 			<dict>
@@ -41,6 +67,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A94E2D4B-C051-4919-8446-B88D616A0C87</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5F520387-B2D2-490D-83E3-639D537DAC50</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -83,81 +122,9 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Hammerspoon Utilities</string>
+	<string>Automation Utilities</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>tell application "System Events" to set frontAppProcess to first application process whose frontmost is true# Tell the *process* to count its windows and return its front window's name.tell frontAppProcess	if (count of windows) &gt; 0 then		set window_name to name of front window	end ifend tell
-
-set the clipboard to window_name
-
-# direct return for displaying in Alfred
-window_name</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-window-title.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>win</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Display Window Properties</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>restart-hammerspoon.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>4F748E27-E0FA-42A5-9B83-B58EF498DC15</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -193,6 +160,55 @@ window_name</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
+				<string>win</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Display Window Properties</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>tell application "System Events" to set frontAppProcess to first application process whose frontmost is true# Tell the *process* to count its windows and return its front window's name.tell frontAppProcess	if (count of windows) &gt; 0 then		set window_name to name of front window	end ifend tell
+
+set the clipboard to window_name
+
+# direct return for displaying in Alfred
+window_name</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-window-title.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
 				<string>hs</string>
 				<key>subtext</key>
 				<string></string>
@@ -205,6 +221,50 @@ window_name</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>E8066503-E298-4023-9E9F-3FBA20E03748</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>restart-hammerspoon.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4F748E27-E0FA-42A5-9B83-B58EF498DC15</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>hammerspoon://sync-repos</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -226,27 +286,6 @@ window_name</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>hammerspoon://sync-repos</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -304,6 +343,153 @@ window_name</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>App ID: '{query}'</string>
+				<key>title</key>
+				<string>✅ Copied to clipboard</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F8785CE7-513D-4EE4-866A-04AB1336A36E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>appid=$(osascript -e 'id of app "$*"')
+echo -n "$appid" | pbcopy
+echo -n "$appid"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5F520387-B2D2-490D-83E3-639D537DAC50</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>anchorfields</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>daterange</key>
+				<integer>0</integer>
+				<key>fields</key>
+				<array>
+					<dict>
+						<key>field</key>
+						<string>kMDItemDisplayName</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>field</key>
+						<string>kMDItemAlternateNames</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>field</key>
+						<string>kMDItemFinderComment</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+				</array>
+				<key>includesystem</key>
+				<false/>
+				<key>keyword</key>
+				<string>appid</string>
+				<key>limit</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>scopes</key>
+				<array/>
+				<key>sortmode</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Get the App ID of '{query}'</string>
+				<key>types</key>
+				<array>
+					<string>com.apple.application-bundle</string>
+				</array>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.filefilter</string>
+			<key>uid</key>
+			<string>3C5C9A77-FB6B-4CCE-98EC-3DE84FF67B9E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\/.*\/(.*)\.app</string>
+				<key>regexcaseinsensitive</key>
+				<true/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string>$1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>A94E2D4B-C051-4919-8446-B88D616A0C87</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -327,6 +513,15 @@ window_name</string>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
+		<key>3C5C9A77-FB6B-4CCE-98EC-3DE84FF67B9E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>320</real>
+		</dict>
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<dict>
 			<key>colorindex</key>
@@ -335,6 +530,15 @@ window_name</string>
 			<real>645</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>5F520387-B2D2-490D-83E3-639D537DAC50</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>320</real>
 		</dict>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>
@@ -376,6 +580,17 @@ window_name</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>A94E2D4B-C051-4919-8446-B88D616A0C87</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>only app name</string>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>350</real>
+		</dict>
 		<key>E8066503-E298-4023-9E9F-3FBA20E03748</key>
 		<dict>
 			<key>colorindex</key>
@@ -395,6 +610,15 @@ window_name</string>
 			<real>490</real>
 			<key>ypos</key>
 			<real>155</real>
+		</dict>
+		<key>F8785CE7-513D-4EE4-866A-04AB1336A36E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>455</real>
+			<key>ypos</key>
+			<real>320</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
