@@ -8,7 +8,6 @@ ccc.setup{
 	win_opts	= { border = borderStyle },
 	highlighter = {
 		auto_enable = true,
-		filetypes = {"lua", "css", "bash", "sh", "zsh", "yaml"},
 		max_byte = 2 * 1024 * 1024, -- 2mb
 		lsp = true,
 	},
