@@ -86,7 +86,6 @@ function M.PluginList(use)
 		cmd = {"DiffviewFileHistory", "DiffviewOpen"},
 		config = function()
 			require("diffview").setup {
-				file_history_panel = {win_config = {height = 8}},
 				keymaps = {
 					file_history_panel = {["o"] = require("diffview.actions").options},
 					option_panel = {["<CR>"] = require("diffview.actions").select_entry},
@@ -99,7 +98,7 @@ function M.PluginList(use)
 	use "kylechui/nvim-surround"
 	use "gbprod/substitute.nvim"
 	use "numToStr/Comment.nvim"
-	use {"michaeljsmith/vim-indent-object", keys = {{"o", "ai"}, {"o", "ii"}, {"x", "ai"}, {"x", "ii"}, {"n", "ai"}, {"n", "ii"}}}
+	use "michaeljsmith/vim-indent-object"
 
 	-- Navigation
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}
