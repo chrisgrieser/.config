@@ -102,7 +102,6 @@ opt.iskeyword:append("-")
 -- FILES & SAVING
 opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
-opt.confirm = true -- unsaved buffers trigger confirmation prompt instead of failing
 opt.updatetime = 200 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 opt.autochdir = true -- always current directory
 
@@ -171,14 +170,13 @@ autocmd("TermClose", {
 --------------------------------------------------------------------------------
 
 -- Skeletons (Templates)
--- Skeletons (Templates)
 -- apply templates for any filetype named `.config/nvim/templates/skeletion.{ft}`
 augroup("Templates", {})
 local filetypeList = fn.system('ls "$HOME/.config/nvim/templates/skeleton."* | xargs basename | cut -d. -f2')
 local ftWithSkeletons = split(filetypeList, "\n")
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
-	local readCmd = "0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! G | bdelete"
+	local readCmd = "0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! Go"
 
 	autocmd("BufNewFile", {
 		group = "Templates",

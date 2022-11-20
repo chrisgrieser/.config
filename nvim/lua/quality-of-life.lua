@@ -38,6 +38,7 @@ local function fileOp(operation)
 	local prevReg
 	if operation == "newFromSel" then
 		prevReg = fn.getreg("z")
+		leaveVisualMode()
 		cmd[['<,'>delete z]]
 	end
 
@@ -48,8 +49,19 @@ local function fileOp(operation)
 	end
 
 	vim.ui.input({prompt = promptStr}, function(newName)
-		local invalidName = newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") or newName = ""
+		local invalidName
+		if newName then invalidName = newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") or newName == "" end
 
+		if not (newName) or invalidName then -- cancel
+			if operation == "newFromSel" then
+				cmd[[undo]] -- undo deletion
+				fn.setreg("z", prevReg) -- restore register content
+			end
+			if invalidName then
+				vim.notify(" Invalid Filename.", error)
+			end
+			return
+		end
 		if not (newName) or invalidName then -- cancel
 			if operation == "newFromSel" then
 				cmd[[undo]] -- undo deletion
