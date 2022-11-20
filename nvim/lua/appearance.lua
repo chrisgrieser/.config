@@ -276,13 +276,17 @@ require("lualine").setup {
 			section_separators = winSecSeparators,
 		}},
 	},
-	inactive_winbar = {
-		lualine_c = {{dummy}}, -- so ignored filetypes do not cause movement
-	},
+	-- inactive_winbar = {
+	-- 	lualine_c = {{dummy}}, -- so ignored filetypes do not cause movement
+	-- },
 	options = {
 		theme = "auto",
+		ignore_focus = specialFiletypes,
 		globalstatus = true,
 		component_separators = {left = "", right = ""},
 		section_separators = secSeparators,
+		disable_filetypes = {
+			winbar = specialFiletypes,
+		},
 	},
 }
