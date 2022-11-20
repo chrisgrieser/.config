@@ -10,7 +10,6 @@ local dap = require("dap")
 require("mason-nvim-dap").setup {
 	ensure_installed = {
 		"node2",
-		"python",
 		"bash",
 	},
 	-- one-small-step-for-vimkind not included with mason, but installed as nvim plugin
@@ -93,44 +92,34 @@ require("dapui").setup()
 
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
-keymap("n", "<leader>b", dap.continue)
+keymap("n", "8", function ()
+	local dapRunning = dap.status() ~= ""
+	local isNvimConfig = fn.expand("%:p:h"):find("nvim") and bo.filetype == "lua"
+	if not(dapRunning) then 
+		bo.number = true 
+		if isNvimConfig then require("osv").run_this() end
+	end
+	dap.continue()
+end, {nowait = true})
+
 keymap("n", "*", dap.toggle_breakpoint)
 
-keymap("n", "<leader>B", function()
-	local ft = bo.filetype
+keymap("n", "<leader>b", function()
+
 	local selection = {
+		"Toggle DAP UI",
+		"Terminate",
 		"Set Log Point",
 		"Clear Breakpoints",
-		"Terminate",
 		"Step over",
 		"Step into",
 		"Step out",
-		"Toggle DAP UI",
 	}
-	if fn.expand("%:p:h"):find("nvim") and ft == "lua" then
-		table.insert(selection, "Launch nvim-debugger")
-	elseif ft == "python" then
-		table.insert(selection, "Launch debugpy")
-	elseif ft == "javascript" or ft == "typescript" then
-		table.insert(selection, "Launch node2-debugger")
-	elseif ft == "bash" or ft == "sh" then
-		table.insert(selection, "Launch bash-debugger")
-	end
-
 	vim.ui.select(selection, {prompt = "DAP Command"}, function(choice)
 		if not (choice) then return end
 		if choice:find("^Launch") then opt.number = true end
 
-		if choice == "Launch nvim-debugger" then
-			require("osv").run_this()
-		elseif choice == "Launch node2-debugger" then
-			vim.notify(" Not implemented yet. ")
-		elseif choice == "Launch debugpy" then
-			vim.notify(" Not implemented yet. ")
-		elseif choice == "Launch bash-debugger" then
-			vim.notify(" Not implemented yet. ")
-
-		elseif choice == "Set Log Point" then
+		if choice == "Set Log Point" then
 			vim.ui.input({ prompt = "Log point message: "}, function (msg)
 				if not(msg) then return end
 				dap.toggle_breakpoint(nil, nil, msg)
@@ -147,7 +136,7 @@ keymap("n", "<leader>B", function()
 			dap.clear_breakpoints()
 		elseif choice == "Terminate" then
 			dap.terminate()
-			opt.number = false
+			bo.number = false
 		end
 
 	end)
