@@ -126,5 +126,12 @@ require("telescope").setup {
 			layout_strategy = "bottom_pane",
 		},
 	},
-
+	extensions = {
+		dap = {
+			prompt_prefix = '',
+			layout_strategy = "cursor",
+		},
+	},
 }
+
+require("telescope").load_extension("dap")

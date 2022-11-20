@@ -33,10 +33,11 @@ end
 
 --------------------------------------------------------------------------------
 -- DAP-RELATED PLUGINS
--- require("nvim-dap-virtual-text").setup()
+require("nvim-dap-virtual-text").setup()
 
--- require("dapui").setup()
--- keymap("n", "<leader>bu", require("dapui").toggle)
+require("dapui").setup()
+keymap("n", "<leader>bu", require("dapui").toggle)
+
 
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
@@ -46,4 +47,6 @@ keymap("n", "<leader>bs", dap.step_over)
 keymap("n", "<leader>bi", dap.step_into)
 keymap("n", "<leader>bo", dap.repl.open)
 
-keymap("n", "<leader>bl", require("osv").run_this) -- start nvim-lua-debugger
+keymap("n", "<leader>B", require("telescope").extensions.dap.commands)
+
+keymap("n", "<leader>br", require("osv").run_this) -- start nvim-lua-debugger

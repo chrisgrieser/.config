@@ -45,9 +45,9 @@ function M.PluginList(use)
 	use {"mfussenegger/nvim-dap", requires = {
 		"jayp0521/mason-nvim-dap.nvim",
 		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
-		-- "rcarriga/nvim-dap-ui",
-		-- "theHamsta/nvim-dap-virtual-text",
-		-- "nvim-telescope/telescope-dap.nvim",
+		"rcarriga/nvim-dap-ui",
+		"theHamsta/nvim-dap-virtual-text",
+		"nvim-telescope/telescope-dap.nvim",
 		-- "mxsdev/nvim-dap-vscode-js",
 	}}
 
