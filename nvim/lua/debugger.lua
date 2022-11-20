@@ -10,9 +10,8 @@ require("mason-nvim-dap").setup {
 	-- INFO: uses dap-names, not mason-names https://github.com/jayp0521/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
 	ensure_installed = {
 		"node2",
-		-- one-step-for-vimkind not included with mason, but installed as nvim
-		-- plugin
 	},
+	-- one-step-for-vimkind not included with mason, but installed as nvim plugin
 	automatic_setup = true,
 }
 
@@ -20,7 +19,6 @@ require("mason-nvim-dap").setup {
 -- CONFIGURATION OF SPECIFIC DEBUGGERS
 
 -- Lua (one-step-for-vimkind plugin)
--- https://github.com/jbyuki/one-small-step-for-vimkind
 dap.configurations.lua = {{
 	type = "nlua",
 	request = "attach",
@@ -34,22 +32,35 @@ end
 --------------------------------------------------------------------------------
 -- DAP-RELATED PLUGINS
 require("nvim-dap-virtual-text").setup()
+require("dapui").setup()
 
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
 keymap("n", "<leader>b", dap.continue)
-keymap("n", "<leader>B", function ()
+keymap("n", "<leader>B", function()
+	local ft = bo.filetype
 	local selection = {
 		"Toggle Breakpoint",
-		"Launch nvim-debugger",
 		"Step over",
 		"Step into",
 		"Toggle DAP UI",
 	}
-	vim.ui.select(selection, {prompt = "DAP Command"}, function (choice)
+	if fn.expand("%:p"):find("nvim") and ft == "lua" then
+		table.insert(selection, "Launch nvim-debugger")
+	elseif ft == "python" then
+		table.insert(selection, "Launch debugpy")
+	elseif ft == "javascript" or ft == "typescript" then
+		table.insert(selection, "Launch node2-debugger")
+	end
+
+	vim.ui.select(selection, {prompt = "DAP Command"}, function(choice)
 		if not (choice) then return end
 		if choice == "Launch nvim-debugger" then
 			require("osv").run_this()
+		elseif choice == "Launch node2-debugger" then
+			vim.notify(" Not implemented yet. ")
+		elseif choice == "Launch debugpy" then
+			vim.notify(" Not implemented yet. ")
 		elseif choice == "Toggle Breakpoint" then
 			dap.toggle_breakpoint()
 		elseif choice == "Toggle DAP UI" then

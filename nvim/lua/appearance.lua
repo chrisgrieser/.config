@@ -231,6 +231,9 @@ navic.setup {
 	separator = "  ",
 }
 
+-- dummy to ensure no glitches when winbar disappears
+local function dummy() return " " end
+
 require("lualine").setup {
 	sections = {
 		lualine_a = {"mode"},
@@ -253,16 +256,15 @@ require("lualine").setup {
 		lualine_z = {"location"},
 	},
 	winbar = {
-		lualine_a = {},
 		lualine_b = {{
 			navic.get_location,
 			cond = navic.is_available,
 			section_separators = winSecSeparators,
 		}},
-		lualine_c = {{function () return " " end}}, -- dummy to ensure no glitches when winbar disappears
-		lualine_x = {},
-		lualine_y = {},
-		lualine_z = {}
+		lualine_c = {{dummy}},
+	},
+	inactive_winbar = {
+		lualine_c = {{dummy}}, -- so ignored filetypes do not cause movement
 	},
 	options = {
 		theme = "auto",
