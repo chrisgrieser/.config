@@ -85,8 +85,13 @@ specialFiletypes = {
 	"prompt",
 	"TelescopePrompt",
 	"noice",
-	"dap-repl",
 	"mason",
 	"ssr",
-	"",
+
+	"dap-repl",
+	"dui_console",
+	"dui_scopes",
+	"dui_breakpoints",
+	"dui_stacks",
+	"dui_watches",
 }
