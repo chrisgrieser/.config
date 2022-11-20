@@ -18,15 +18,14 @@ ls.setup {
 	update_events = "TextChanged,TextChangedI", -- live updating of snippets
 }
 
-keymap("n", "<D-J>", function ()
-	if ls.jumpable(1) then
+-- to be able to jump without <Tab> (e.g. when there is a non-needed suggestion)
+keymap("i", "<D-j>", function ()
+	if ls.expand_or_jumpable() then
 		ls.jump(1)
 	else
-		vim.notify("No Jump available")
+		vim.notify("No Jump available.")
 	end
 end)
-
-
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
@@ -99,7 +98,7 @@ add("lua", {
 			$0
 		end
 	]]),
-	snip("augroup & autocmd", [[
+	snip("autocmd & augroup", [[
 		augroup("${1:groupname}", {\})
 		autocmd("${2:event}", {
 			group = "${1:groupname}",
