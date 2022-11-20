@@ -231,6 +231,11 @@ navic.setup {
 	separator = "  ",
 }
 
+function debuggerStatus ()
+	local dap = require("dap")
+	return dap.status()
+end
+
 -- dummy to ensure no glitches when winbar disappears
 local function dummy() return " " end
 
@@ -262,6 +267,7 @@ require("lualine").setup {
 			section_separators = winSecSeparators,
 		}},
 		lualine_c = {{dummy}},
+		lualine_z = {{debuggerStatus, section_separators = winSecSeparators}},
 	},
 	inactive_winbar = {
 		lualine_c = {{dummy}}, -- so ignored filetypes do not cause movement

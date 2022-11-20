@@ -129,16 +129,16 @@ require("neodev").setup {
 keymap("n", "gs", telescope.treesitter)
 
 -- copy breadcrumbs (nvim navic)
-keymap("n", "<C-b>", function ()
+keymap("n", "<C-b>", function()
 	if require("nvim-navic").is_available() then
 		local rawdata = require("nvim-navic").get_data()
 		local breadcrumbs = ""
 		for _, v in pairs(rawdata) do
-			breadcrumbs = breadcrumbs..v.name.."."
+			breadcrumbs = breadcrumbs .. v.name .. "."
 		end
 		breadcrumbs = breadcrumbs:sub(1, -2)
 		fn.setreg("+", breadcrumbs)
-		vim.notify(" COPIED\n "..breadcrumbs)
+		vim.notify(" COPIED\n " .. breadcrumbs .. " ")
 	else
 		vim.notify("No Breadcrumbs available.")
 	end
