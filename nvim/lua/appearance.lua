@@ -25,6 +25,11 @@ require("scrollbar").setup {
 	marks = {
 		GitChange = {text = "┃"},
 		GitAdd = {text = "┃"},
+		GitDelete = {text = "┃"},
+		Error = {text = {"-"}},
+		Warn = {text = {"-"}},
+		Info = {text = {"-"}},
+		Hint = {text = {"-"}},
 		Cursor = {highlight = "Comment"}, -- less dark
 		Misc = {
 			priority = 1,
@@ -90,7 +95,7 @@ vim.notify = require("notify") -- use notify.nvim for all vim notifications
 
 require("notify").setup {
 	icons = {WARN = ""},
-	render = "minimal", -- styles, "default"|"minimal"|"simple"
+	render = "minimal", -- styles, default|minimal|simple
 	minimum_width = 25,
 	timeout = 4000,
 	top_down = false,
@@ -116,7 +121,7 @@ require("dressing").setup {
 		insert_only = false,
 	},
 	select = {
-		backend = {"builtin", "telescope", "nui"}, -- Priority list of preferred vim.select implementations
+		backend = {"builtin", "nui"}, -- Priority list of preferred vim.select implementations
 		trim_prompt = true, -- Trim trailing `:` from prompt
 		builtin = {
 			border = borderStyle,
@@ -126,13 +131,6 @@ require("dressing").setup {
 			min_width = 18,
 			max_height = 12,
 			min_height = 4,
-		},
-		telescope = {
-			initial_mode = "normal",
-			prompt_prefix = "  ",
-			layout_strategy = "cursor",
-			results_title = "",
-			sorting_strategy = "ascending",
 		},
 	},
 }
@@ -146,36 +144,34 @@ require("gitsigns").setup {
 --------------------------------------------------------------------------------
 -- STATUS LINE (LUALINE)
 
-local function lsp_progress()
-	-- https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/?utm_source=share&utm_medium=web2x&context=3
-	local messages = vim.lsp.util.get_progress_messages()
-	if #messages == 0 then return "" end
-	local progess = messages[1].percentage or 0
-	local task = messages[1].title or ""
-	task = task:gsub("^(%w+).*", "%1") -- only first word
-
-	local spinners = {"⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"}
-	local ms = vim.loop.hrtime() / 1000000
-	local frame = math.floor(ms / 120) % #spinners
-	return progess .. "%% " .. task .. " " .. spinners[frame + 1]
-end
-
 local function recordingStatus()
 	if g.isRecording then return "[ REC]"
 	else return "" end
 end
 
 local function alternateFile()
-	local altPath = fn.expand("#:p")
-	local curPath = fn.expand("%:p")
 	local altFile = fn.expand("#:t")
-	if altPath == curPath or altFile == "" then return "" end
+	local curFile = fn.expand("%:t")
+	if altFile == "" then
+		return ""
+	elseif curFile == altFile then
+		local altParent = fn.expand("#:p:h:t")
+		if #altParent > 15 then altParent = altParent:sub(1, 15) end
+		return altParent .. "/" .. altFile
+	end
 	return "# " .. altFile
 end
 
 local function currentFile() -- using this function instead of default filename, since this does not show "[No Name]" for Telescope
+	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
-	if curFile == "" then return "" end
+	if curFile == "" then
+		return ""
+	elseif curFile == altFile then
+		local curParent = fn.expand("%:p:h:t")
+		if #curParent > 15 then curParent = curParent:sub(1, 15) end
+		return curParent .. "/" .. curFile
+	end
 	return "%% " .. curFile -- "%" is lua's escape character and therefore needs to be escaped itself
 end
 
@@ -202,7 +198,7 @@ end
 local secSeparators
 if isGui() then
 	secSeparators = {left = " ", right = " "} -- nerdfont: 'nf-ple'
-	winSecSeparators = {left = " ", right = " "}
+	winSecSeparators = {left = "", right = ""}
 else
 	secSeparators = {left = "", right = ""} -- separators look off in Terminal
 	winSecSeparators = {left = "", right = ""}
@@ -237,7 +233,7 @@ navic.setup {
 function debuggerStatus()
 	local dapStatus = require("dap").status()
 	if dapStatus ~= "" then
-		return "  "..dapStatus
+		return "  " .. dapStatus
 	else
 		return ""
 	end
@@ -252,12 +248,10 @@ require("lualine").setup {
 		lualine_b = {{currentFile}},
 		lualine_c = {{alternateFile}},
 		lualine_x = {
-			{recordingStatus},
 			{"searchcount", fmt = function(str)
 				if str == "" then return "" end
 				return " " .. str:sub(2, -2)
 			end},
-			{lsp_progress},
 			"diagnostics",
 			{mixedIndentation},
 		},
@@ -274,22 +268,16 @@ require("lualine").setup {
 			section_separators = winSecSeparators,
 		}},
 		lualine_c = {{dummy}},
-		lualine_z = {{
-			debuggerStatus,
-			section_separators = winSecSeparators,
-		}},
+		lualine_z = {
+			{recordingStatus},
+			{debuggerStatus, section_separators = winSecSeparators,}
+		},
 	},
-	-- inactive_winbar = {
-	-- 	lualine_c = {{dummy}}, -- so ignored filetypes do not cause movement
-	-- },
 	options = {
 		theme = "auto",
 		ignore_focus = specialFiletypes,
 		globalstatus = true,
 		component_separators = {left = "", right = ""},
 		section_separators = secSeparators,
-		disable_filetypes = {
-			winbar = specialFiletypes,
-		},
 	},
 }
