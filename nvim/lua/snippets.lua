@@ -13,10 +13,20 @@ local snip = ls.parser.parse_snippet -- lsp-style-snippets for future-proofness
 
 ls.setup {
 	enable_autosnippets = true,
-	history = true, -- allow jumping back into the snippet
+	history = false, -- allow jumping back into the snippet
 	region_check_events = "InsertEnter", -- prevent <Tab> jumping back to a snippet after it has been left early
 	update_events = "TextChanged,TextChangedI", -- live updating of snippets
 }
+
+keymap("n", "<D-J>", function ()
+	if ls.jumpable(1) then
+		ls.jump(1)
+	else
+		vim.notify("No Jump available")
+	end
+end)
+
+
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
@@ -76,9 +86,14 @@ add("zsh", {
 	snip("white bg", "\\033[1;47m"),
 })
 
+-- Lua
+add("lua", {
+	snip("llog", 'print("$1")\n$0'),
+}, {type = "autosnippets"})
 
 add("lua", {
 	snip("resolve home", 'os.getenv("HOME")'),
+	snip("keymap", 'keymap("n", "$1", ${2:""})\n$0'),
 	snip("for (list)", [[
 		for _, value pairs(${1:list_table}) do
 			$0
