@@ -94,10 +94,12 @@ require("dapui").setup()
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
 keymap("n", "<leader>b", dap.continue)
+keymap("n", "*", dap.toggle_breakpoint)
+
 keymap("n", "<leader>B", function()
 	local ft = bo.filetype
 	local selection = {
-		"Toggle Breakpoint",
+		"Set Log Point",
 		"Clear Breakpoints",
 		"Terminate",
 		"Step over",
@@ -117,6 +119,8 @@ keymap("n", "<leader>B", function()
 
 	vim.ui.select(selection, {prompt = "DAP Command"}, function(choice)
 		if not (choice) then return end
+		if choice:find("^Launch") then opt.number = true end
+
 		if choice == "Launch nvim-debugger" then
 			require("osv").run_this()
 		elseif choice == "Launch node2-debugger" then
@@ -126,8 +130,8 @@ keymap("n", "<leader>B", function()
 		elseif choice == "Launch bash-debugger" then
 			vim.notify(" Not implemented yet. ")
 
-		elseif choice == "Toggle Breakpoint" then
-			dap.toggle_breakpoint()
+		elseif choice == "Set Logpoint" then
+			dap.toggle_breakpoint{}
 		elseif choice == "Toggle DAP UI" then
 			require("dapui").toggle()
 		elseif choice == "Step over" then
@@ -140,6 +144,7 @@ keymap("n", "<leader>B", function()
 			dap.clear_breakpoints()
 		elseif choice == "Terminate" then
 			dap.terminate()
+			opt.number = false
 		end
 
 	end)

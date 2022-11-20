@@ -202,7 +202,7 @@ end
 local secSeparators
 if isGui() then
 	secSeparators = {left = " ", right = " "} -- nerdfont: 'nf-ple'
-	winSecSeparators = {left = " ", right = ""}
+	winSecSeparators = {left = " ", right = " "}
 else
 	secSeparators = {left = "", right = ""} -- separators look off in Terminal
 	winSecSeparators = {left = "", right = ""}
@@ -231,9 +231,13 @@ navic.setup {
 	separator = "  ",
 }
 
-function debuggerStatus ()
-	local dap = require("dap")
-	return dap.status()
+function debuggerStatus()
+	local dapStatus = require("dap").status()
+	if dapStatus ~= "" then
+		return "  "..dapStatus
+	else
+		return ""
+	end
 end
 
 -- dummy to ensure no glitches when winbar disappears
@@ -267,7 +271,10 @@ require("lualine").setup {
 			section_separators = winSecSeparators,
 		}},
 		lualine_c = {{dummy}},
-		lualine_z = {{debuggerStatus, section_separators = winSecSeparators}},
+		lualine_z = {{
+			debuggerStatus,
+			section_separators = winSecSeparators,
+		}},
 	},
 	inactive_winbar = {
 		lualine_c = {{dummy}}, -- so ignored filetypes do not cause movement
