@@ -138,19 +138,25 @@ end
 --------------------------------------------------------------------------------
 -- CRONJOBS AT HOME
 -- timers not local for longevity with garbage collection
-biweeklyTimer = timer("02:00", "03d", function()
-	hs.execute('cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/"')
-	hs.loadSpoon("EmmyLua") -- so it runs not as often
-	applescript[[
+function bkp()
+	applescript [[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
 			run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles" with argument "no sound"
 		end tell
 	]]
-end, true)
+	hs.execute('cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/"')
+	hs.loadSpoon("EmmyLua") -- so it runs not as often
+end
 
-dailyEveningTimer = timer("21:00", "01d", function() setDarkmode(true) end)
-dailyMorningTimer = timer("08:00", "01d", function() setDarkmode(false) end)
+biweeklyTimer = timer("02:00", "01d", bkp, true)
+
+dailyEveningTimer = timer("19:00", "01d", function() setDarkmode(true) end)
+dailyMorningTimer = timer("08:00", "01d", function()
+	if not(isProjector()) then
+		setDarkmode(false)
+	end
+end)
 
 local function projectorScreensaverStop(eventType)
 	if (eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart) then
@@ -172,7 +178,7 @@ local function sleepYouTube()
 	killIfRunning("Twitch")
 	killIfRunning("Netflix")
 	-- no need to quit IINA, since it autoquits on finishing playback
-	applescript[[
+	applescript [[
 		tell application "Brave Browser"
 			if ((count of window) is not 0)
 				if ((count of tab of front window) is not 0)
