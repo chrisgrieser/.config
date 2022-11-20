@@ -30,41 +30,40 @@ end
 --------------------------------------------------------------------------------
 
 ---Helper Function performing common file operation tasks
----@param operation string rename|duplicate|new|newFromSel
-local function fileOp(operation)
+---@param op string rename|duplicate|new|newFromSel
+local function fileOp(op)
 	local dir = fn.expand("%:p:h")
 	local oldName = fn.expand("%:t")
 	local oldExt = fn.expand("%:e")
 	local prevReg
-	if operation == "newFromSel" then
+	if op == "newFromSel" then
 		prevReg = fn.getreg("z")
 		leaveVisualMode()
 		cmd [['<,'>delete z]]
 	end
 
 	local promptStr
-	if operation == "duplicate" then promptStr = "Duplicate File as: "
-	elseif operation == "rename" then promptStr = "Rename File to: "
-	elseif operation == "new" or operation == "newFromSel" then promptStr = "Name for New File: "
+	if op == "duplicate" then promptStr = "Duplicate File as: "
+	elseif op == "rename" then promptStr = "Rename File to: "
+	elseif op == "new" or op == "newFromSel" then promptStr = "Name for New File: "
 	end
 
 	vim.ui.input({prompt = promptStr}, function(newName)
 		local invalidName
 		if newName then invalidName = newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") or
-			newName == "" end
+				newName == ""
+		end
 
 		if not (newName) or invalidName then -- cancel
-			if operation == "newFromSel" then
+			if op == "newFromSel" then
 				cmd [[undo]] -- undo deletion
 				fn.setreg("z", prevReg) -- restore register content
 			end
-			if invalidName then
-				vim.notify(" Invalid Filename.", error)
-			end
+			if invalidName then vim.notify(" Invalid Filename.", error) end
 			return
 		end
 		if not (newName) or invalidName then -- cancel
-			if operation == "newFromSel" then
+			if op == "newFromSel" then
 				cmd [[undo]] -- undo deletion
 				fn.setreg("z", prevReg) -- restore register content
 			end
@@ -81,19 +80,19 @@ local function fileOp(operation)
 		end
 		local filepath = dir .. "/" .. newName
 
-		if operation == "duplicate" then
+		if op == "duplicate" then
 			cmd("saveas " .. filepath)
 			cmd("edit " .. filepath)
 			vim.notify(" Duplicated '" .. oldName .. "' as '" .. newName .. "'.")
-		elseif operation == "rename" then
+		elseif op == "rename" then
 			os.rename(oldName, newName)
 			cmd("edit " .. filepath)
 			cmd("bdelete #")
 			vim.notify(" Renamed '" .. oldName .. "' to '" .. newName .. "'.")
-		elseif operation == "new" then
+		elseif op == "new" then
 			cmd("edit " .. filepath)
 			cmd("write " .. filepath)
-		elseif operation == "newFromSel" then
+		elseif op == "newFromSel" then
 			cmd("edit " .. filepath)
 			cmd("put z")
 			cmd("write " .. filepath)
@@ -129,38 +128,33 @@ function M.moveSelectionToNewFile() fileOp("newFromSel") end
 ---run `chmod +x` on the current file
 function M.chmodx()
 	local currentFile = fn.expand("%:p")
-	os.execute("chmod +x " .. "'" .. currentFile .. "'")
-	vim.notify(" Execution permission granted.")
+	os.execute("chmod +x '" .. currentFile .. "'")
+	vim.notify(" Execution permission granted. ")
 end
 
 ---Helper for copying file information
 ---@param operation string filename|filepath
----@param reg? string register to copy to
-local function copyOp(operation, reg)
-	if not (reg) then reg = "+" end
+local function copyOp(operation)
+	local useSystemClipb = opt.clipboard:get()[1]:find("unnamed")
+	local reg = '"'
+	if useSystemClipb then reg = "+" end
+
 	local toCopy
 	if operation == "filename" then
 		toCopy = fn.expand("%:t")
 	elseif operation == "filepath" then
 		toCopy = fn.expand("%:p")
 	end
+
 	fn.setreg(reg, toCopy)
 	vim.notify(" COPIED\n " .. toCopy)
 end
 
 ---Copy full path of current file
----@param opts? table
-function M.copyFilepath(opts)
-	if not (opts) then opts = {reg = "+"} end
-	copyOp("filepath", opts.reg)
-end
+function M.copyFilepath() copyOp("filepath") end
 
 ---Copy name of current file
----@param opts? table
-function M.copyFilename(opts)
-	if not (opts) then opts = {reg = "+"} end
-	copyOp("filename", opts.reg)
-end
+function M.copyFilename() copyOp("filename") end
 
 ---Trash the Current File. Requires `mv`.
 ---@param opts? table
@@ -178,19 +172,17 @@ end
 --------------------------------------------------------------------------------
 
 ---Copy Last Command
----@param opts? table
-function M.copyLastCommand(opts)
-	if not (opts) then
-		opts = {reg = "+", noColon = false}
-	end
+function M.copyLastCommand()
+	local useSystemClipb = opt.clipboard:get()[1]:find("unnamed")
+	local reg = '"'
+	if useSystemClipb then reg = "+" end
 
 	local lastCommand = fn.getreg(":")
 	if not (lastCommand) then
-		vim.notify(" No Command has been run yet.", error)
+		vim.notify(" No Command has been run yet. ", error)
 		return
 	end
-	if not (opts.noColon) then lastCommand = ":" .. lastCommand end
-	fn.setreg(opts.reg, lastCommand)
+	fn.setreg(reg, lastCommand)
 	vim.notify(" COPIED\n " .. lastCommand)
 end
 
@@ -416,31 +408,6 @@ function M.overscroll(action)
 		end
 	end
 	cmd("normal! " .. action)
-end
-
----Fix for Pasting in Insert Mode (whacky indentation, etc.)
----@param opts? table
-function M.insertModePasteFix(opts)
-	if not (opts) then opts = {reg = "+"} end
-	local reg = opts.reg
-
-	local isLinewise = fn.getregtype(reg) == "V" or fn.getreg(reg):find("\n")
-	local endOfLine = colNo("$") - 2 -- eol before entering insert mode
-	local cursorCol = colNo(".") -- considers insert mode cursor
-	local isEndofLine = endOfLine <= cursorCol -- column can be beyond EoL in insert mode
-
-	if isLinewise then
-		cmd [[normal! gp]]
-	else
-		local toPaste = trim(fn.getreg(reg))
-		cmd("normal! i" .. toPaste)
-		if isEndofLine then
-			cmd [[startinsert!]]
-		else
-			cmd [[normal!l]]
-			cmd [[startinsert]]
-		end
-	end
 end
 
 ---Force pasting a linewise register characterwise and vice versa
