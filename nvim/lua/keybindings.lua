@@ -366,13 +366,11 @@ keymap("n", "zf", "1z=") -- auto[f]ix word under cursor (= select 1st suggestion
 keymap("n", "s", require("substitute").operator)
 keymap("n", "ss", require("substitute").line)
 keymap("n", "S", require("substitute").eol)
+keymap("n", "sx", require("substitute.exchange").operator)
+keymap("n", "sxx", require("substitute.exchange").line)
+keymap("x", "X", require("substitute.exchange").eol)
 
--- Duplicate Line / Selection (mnemonic: [r]eplicate)
-keymap("n", "R", qol.duplicateLine)
-keymap("n", "<A-r>", function() qol.duplicateLine {increment = true} end)
-keymap("n", "<A-r>", function() qol.duplicateLine {increment = true} end)
-keymap("x", "R", qol.duplicateSelection)
-
+-- [S]ubstitute Operator (substitute.nvim)
 -- Undo
 keymap({"n", "x"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", qol.undoDuration)

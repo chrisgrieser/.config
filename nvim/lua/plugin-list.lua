@@ -27,13 +27,15 @@ function M.PluginList(use)
 		}
 	}
 
-	-- LSP & Linting
+	-- LSP
 	use {"neovim/nvim-lspconfig", requires = {
 		"williamboman/mason-lspconfig.nvim",
 		"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
-		"ray-x/lsp_signature.nvim",
-		"SmiteshP/nvim-navic",
+		"ray-x/lsp_signature.nvim", -- signature hint
+		"SmiteshP/nvim-navic", -- breadcrumbs
+		"folke/neodev.nvim", -- lsp for nvim-lua config
 	}}
+	-- Linting
 	use {"jose-elias-alvarez/null-ls.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"jayp0521/mason-null-ls.nvim",
@@ -62,7 +64,6 @@ function M.PluginList(use)
 	}}
 	use {"tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp"}
 	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
-	use "folke/neodev.nvim" -- lsp for nvim-lua config
 
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
@@ -97,7 +98,7 @@ function M.PluginList(use)
 	-- Operators & Text Objects
 	use "kylechui/nvim-surround"
 	use {"gbprod/substitute.nvim",
-		module = "substitute",
+		module = {"substitute", "substitute.exchange"},
 		config = function() require("substitute").setup() end,
 	}
 	use "numToStr/Comment.nvim"
@@ -115,7 +116,7 @@ function M.PluginList(use)
 		config = function()
 			require("ssr").setup {
 				keymaps = {
-					close = "Q",
+					close = "q",
 					replace_all = "<CR>",
 				}
 			}
