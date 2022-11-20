@@ -35,6 +35,11 @@ local function fileOp(operation)
 	local dir = fn.expand("%:p:h")
 	local oldName = fn.expand("%:t")
 	local oldExt = fn.expand("%:e")
+	local prevReg
+	if operation == "newFromSel" then
+		prevReg = fn.getreg("z")
+		cmd[['<,'>delete z]]
+	end
 
 	local promptStr
 	if operation == "duplicate" then promptStr = "Duplicate File as: "
@@ -43,13 +48,21 @@ local function fileOp(operation)
 	end
 
 	vim.ui.input({prompt = promptStr}, function(newName)
-		if not (newName) then return end -- cancel
-		if newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") then
-			vim.notify(" Invalid Filename.", error)
+		local invalidName = newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") or newName = ""
+
+		if not (newName) or invalidName then -- cancel
+			if operation == "newFromSel" then
+				cmd[[undo]] -- undo deletion
+				fn.setreg("z", prevReg) -- restore register content
+			end
+			if invalidName then
+				vim.notify(" Invalid Filename.", error)
+			end
 			return
 		end
+
 		local extProvided = newName:find(".%.") -- non-leading dot to exclude dotfile-dots
-		local isDotfile = newName:match("^%.") 
+		local isDotfile = newName:match("^%.")
 		if not (extProvided) and not (isDotfile) then
 			newName = newName .. "." .. oldExt
 		end
@@ -69,8 +82,9 @@ local function fileOp(operation)
 			cmd("write " .. filepath)
 		elseif operation == "newFromSel" then
 			cmd("edit " .. filepath)
-			cmd()
+			cmd("put z")
 			cmd("write " .. filepath)
+			fn.setreg("z", prevReg) -- restore register content
 		end
 	end)
 end
@@ -93,22 +107,17 @@ function M.duplicateFile() fileOp("duplicate") end
 --   notify.nvim are automatically supported
 function M.createNewFile() fileOp("new") end
 
+---Move Selection to New File
+-- - if no extension is provided, the extensions of the current file will be used
+-- - uses vim.ui.input and vim.notify, so plugins like dressing.nvim or
+--   notify.nvim are automatically supported
+function M.moveSelectionToNewFile() fileOp("newFromSel") end
+
 ---run `chmod +x` on the current file
 function M.chmodx()
 	local currentFile = fn.expand("%:p")
 	os.execute("chmod +x " .. "'" .. currentFile .. "'")
 	vim.notify(" Execution permission granted.")
-end
-
-function M.moveSelectionToNewFile()
-	local prevReg = fn.getreg("z")
-
-	cmd[['<,'>delete z]]
-	local newContent = fn.getreg("z")
-	local currentFile = fn.expand("%:p")
-
-	fn.setreg("z", prevReg)
-	-- keymap("x", "<leader>X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR>") -- refactor selection into new file
 end
 
 ---Helper for copying file information
@@ -275,7 +284,7 @@ function M.hr(opts)
 		local hrLine = getline("."):gsub(linechar, "", hrIndent)
 		setline(".", hrLine)
 	else
-		cmd [[normal! jj==]] 
+		cmd [[normal! jj==]]
 	end
 end
 
@@ -299,7 +308,7 @@ function M.reverse()
 	end
 
 	local col = getCursor(0)[2] + 1
-	local char = getline("."):sub(col, col) 
+	local char = getline("."):sub(col, col)
 
 	-- toggle words
 	local opposite = ""

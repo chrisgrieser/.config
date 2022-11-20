@@ -457,7 +457,8 @@ keymap("", "<C-n>", qol.copyFilename)
 keymap("", "<leader>x", qol.chmodx)
 keymap("", "<C-r>", qol.renameFile)
 keymap("", "<C-d>", qol.duplicateFile)
-keymap("x", "<leader>X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR>") -- refactor selection into new file
+keymap("x", "<leader>X", qol.moveSelectionToNewFile)
+-- keymap("x", "<leader>X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR>") -- refactor selection into new file
 
 -- Git Operations
 keymap("n", "<C-g>", function ()
