@@ -41,14 +41,22 @@ function M.PluginList(use)
 		"jayp0521/mason-null-ls.nvim",
 	}}
 
-	-- DAP & Debugging
+	-- DAP
 	use {"mfussenegger/nvim-dap", requires = {
 		"jayp0521/mason-nvim-dap.nvim",
-		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
-		"rcarriga/nvim-dap-ui",
 		"theHamsta/nvim-dap-virtual-text",
 		-- "mxsdev/nvim-dap-vscode-js",
 	}}
+
+	use {"rcarriga/nvim-dap-ui",
+		requires = "mfussenegger/nvim-dap",
+		config = function () require("dapui").setup() end,
+		keys = {{"n", ",B"}},
+	}
+	use {"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
+		requires = "mfussenegger/nvim-dap",
+		ft = "lua",
+	}
 
 	-- Completion & Suggestion
 	use {"hrsh7th/nvim-cmp", requires = {
