@@ -34,7 +34,6 @@ end
 --------------------------------------------------------------------------------
 -- DAP-RELATED PLUGINS
 require("nvim-dap-virtual-text").setup()
-require("dapui").setup()
 
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
@@ -66,16 +65,28 @@ end)
 
 --------------------------------------------------------------------------------
 -- SIGN-COLUMN ICONS
--- ▪︎▴• ▲  
--- https://www.reddit.com/r/neovim/comments/qpymbb/lsp_sign_in_sign_columngutter/
-local signs = {
-	Error = "",
-	Warn = "▲",
-	Info = "",
-	Hint = "",
-}
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl}) ---@diagnostic disable-line: redundant-parameter, param-type-mismatch
-end
-
+fn.sign_define("DapBreakpoint", {
+	text = "",
+	texthl = "DiagnosticHint",
+	numhl = "DiagnosticHint",
+})
+fn.sign_define("DapBreakpointCondition", {
+	text = "",
+	texthl = "DiagnosticInfo",
+	numhl = "DiagnosticInfo",
+})
+fn.sign_define("DapLogPoint", {
+	text = "",
+	texthl = "DiagnosticInfo",
+	numhl = "DiagnosticInfo",
+})
+fn.sign_define("DapStopped", {
+	text = "",
+	texthl = "DiagnosticHint",
+	numhl = "DiagnosticHint",
+})
+fn.sign_define("DapBreakpointRejected", {
+	text = "",
+	texthl = "DiagnosticError",
+	numhl = "DiagnosticError",
+})
