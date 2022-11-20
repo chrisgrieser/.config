@@ -247,22 +247,6 @@ navic.setup {
 	separator = "  ",
 }
 
-keymap("n", "<C-b>", function ()
-	if navic.is_available() then
-		local rawdata = navic.get_data()
-		local breadcrumbs = ""
-		for _, v in pairs(rawdata) do
-			breadcrumbs = breadcrumbs + 	
-			
-		end
-		fn.setreg("+", breadcrumbs)
-		vim.notify(" COPIED\n"..breadcrumbs)
-	else
-		vim.notify("No Breadcrumbs available.")
-	end
-end)
-
-
 require("lualine").setup {
 	sections = {
 		lualine_a = {"mode"},

@@ -18,6 +18,7 @@ require("mason-nvim-dap").setup {
 
 --------------------------------------------------------------------------------
 -- CONFIGURATION OF SPECIFIC DEBUGGERS
+
 -- Lua (one-step-for-vimkind plugin)
 -- https://github.com/jbyuki/one-small-step-for-vimkind
 dap.configurations.lua = {{
@@ -44,3 +45,5 @@ keymap("n", "<leader>bp", dap.toggle_breakpoint)
 keymap("n", "<leader>bs", dap.step_over)
 keymap("n", "<leader>bi", dap.step_into)
 keymap("n", "<leader>bo", dap.repl.open)
+
+keymap("n", "<leader>bl", require("osv").run_this) -- start nvim-lua-debugger
