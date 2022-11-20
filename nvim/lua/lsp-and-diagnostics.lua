@@ -32,7 +32,7 @@ keymap("n", "<leader>D", function()
 	diagnosticToggled = not (diagnosticToggled)
 end)
 
-function diagnosticFormat(diagnostic, mode)
+local function diagnosticFormat(diagnostic, mode)
 	local msg = trim(diagnostic.message)
 	local source = diagnostic.source:gsub("%.$", "")
 	local code = tostring(diagnostic.code)
@@ -113,6 +113,23 @@ require("neodev").setup {
 -- fallback for languages without an action LSP
 keymap("n", "gs", telescope.treesitter)
 
+-- copy breadcrumbs (nvim navic)
+keymap("n", "<C-b>", function ()
+	if require("nvim-navic").is_available() then
+		local rawdata = require("nvim-navic").get_data()
+		local breadcrumbs = ""
+		for _, v in pairs(rawdata) do
+			breadcrumbs = breadcrumbs..v.name.."."
+		end
+		breadcrumbs = breadcrumbs:sub(1, -2)
+		fn.setreg("+", breadcrumbs)
+		vim.notify(" COPIED\n "..breadcrumbs)
+	else
+		vim.notify("No Breadcrumbs available.")
+	end
+end)
+
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local function on_attach(client, bufnr)
@@ -126,11 +143,11 @@ local function on_attach(client, bufnr)
 	keymap("n", "gD", telescope.lsp_references, bufopts)
 	keymap("n", "gy", telescope.lsp_type_definitions, bufopts)
 	keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts)
-	keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help)
+	keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)
 	keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
 	-- actions defined globally so null-ls can use them without LSP being present
-	keymap("n", "<leader>a", vim.lsp.buf.code_action)
+	keymap("n", "<leader>a", vim.lsp.buf.code_action, bufopts)
 
 	-- format on manual save
 	keymap("n", "<D-s>", function()
