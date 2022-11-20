@@ -85,6 +85,7 @@ specialFiletypes = {
 	"prompt",
 	"TelescopePrompt",
 	"noice",
+	"dap-repl",
 	"mason",
 	"ssr",
 	"",
