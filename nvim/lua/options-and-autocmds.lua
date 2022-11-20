@@ -171,13 +171,14 @@ autocmd("TermClose", {
 --------------------------------------------------------------------------------
 
 -- Skeletons (Templates)
+-- Skeletons (Templates)
 -- apply templates for any filetype named `.config/nvim/templates/skeletion.{ft}`
 augroup("Templates", {})
 local filetypeList = fn.system('ls "$HOME/.config/nvim/templates/skeleton."* | xargs basename | cut -d. -f2')
 local ftWithSkeletons = split(filetypeList, "\n")
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
-	local readCmd = "0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! Go"
+	local readCmd = "0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! G | bdelete"
 
 	autocmd("BufNewFile", {
 		group = "Templates",
