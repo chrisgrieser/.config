@@ -97,10 +97,7 @@ function M.PluginList(use)
 
 	-- Operators & Text Objects
 	use "kylechui/nvim-surround"
-	use {"gbprod/substitute.nvim",
-		module = {"substitute", "substitute.exchange"},
-		config = function() require("substitute").setup() end,
-	}
+	use "gbprod/substitute.nvim"
 	use "numToStr/Comment.nvim"
 	use {"michaeljsmith/vim-indent-object", keys = {{"o", "ai"}, {"o", "ii"}, {"x", "ai"}, {"x", "ii"}}}
 
@@ -116,7 +113,7 @@ function M.PluginList(use)
 		config = function()
 			require("ssr").setup {
 				keymaps = {
-					close = "q",
+					close = "Q",
 					replace_all = "<CR>",
 				}
 			}
