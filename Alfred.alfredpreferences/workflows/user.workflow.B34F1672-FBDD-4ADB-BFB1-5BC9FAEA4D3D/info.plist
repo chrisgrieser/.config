@@ -459,23 +459,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>title</key>
-				<string>✅ Index created</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>neovim-docs-index-creation.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>4DEABEE2-4999-4872-A75E-DCBD98C663E1</string>
+			<string>D8D7E65D-1523-47A4-9964-845E4D2C0927</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -516,25 +518,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>neovim-docs-index-creation.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>title</key>
+				<string>✅ Index created</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>D8D7E65D-1523-47A4-9964-845E4D2C0927</string>
+			<string>4DEABEE2-4999-4872-A75E-DCBD98C663E1</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -993,9 +993,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
 			<key>xpos</key>
-			<real>315</real>
+			<real>385</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>355</real>
 		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>
