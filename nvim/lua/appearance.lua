@@ -144,22 +144,6 @@ require("gitsigns").setup {
 }
 
 --------------------------------------------------------------------------------
--- DIAGNOSTICS
-
--- ▪︎▴• ▲  
--- https://www.reddit.com/r/neovim/comments/qpymbb/lsp_sign_in_sign_columngutter/
-local signs = {
-	Error = "",
-	Warn = "▲",
-	Info = "",
-	Hint = "",
-}
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl}) ---@diagnostic disable-line: redundant-parameter, param-type-mismatch
-end
-
---------------------------------------------------------------------------------
 -- STATUS LINE (LUALINE)
 
 local function lsp_progress()

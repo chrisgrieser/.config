@@ -16,6 +16,21 @@ local lsp_servers = {
 }
 
 --------------------------------------------------------------------------------
+-- SIGN-COLUMN ICONS
+-- ▪︎▴• ▲  
+-- https://www.reddit.com/r/neovim/comments/qpymbb/lsp_sign_in_sign_columngutter/
+local signs = {
+	Error = "",
+	Warn = "▲",
+	Info = "",
+	Hint = "",
+}
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl}) ---@diagnostic disable-line: redundant-parameter, param-type-mismatch
+end
+
+--------------------------------------------------------------------------------
 -- DIAGNOTICS (also applies to null-ls)
 keymap("n", "ge", function() vim.diagnostic.goto_next {wrap = true, float = false} end, {silent = true})
 keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = false} end, {silent = true})
