@@ -130,8 +130,11 @@ keymap("n", "<leader>B", function()
 		elseif choice == "Launch bash-debugger" then
 			vim.notify(" Not implemented yet. ")
 
-		elseif choice == "Set Logpoint" then
-			dap.toggle_breakpoint{}
+		elseif choice == "Set Log Point" then
+			vim.ui.input({ prompt = "Log point message: "}, function (msg)
+				if not(msg) then return end
+				dap.toggle_breakpoint(nil, nil, msg)
+			end)
 		elseif choice == "Toggle DAP UI" then
 			require("dapui").toggle()
 		elseif choice == "Step over" then
@@ -159,18 +162,18 @@ fn.sign_define("DapBreakpoint", {
 })
 fn.sign_define("DapBreakpointCondition", {
 	text = "",
-	texthl = "DiagnosticInfo",
-	numhl = "DiagnosticInfo",
-})
-fn.sign_define("DapLogPoint", {
-	text = "",
-	texthl = "DiagnosticInfo",
-	numhl = "DiagnosticInfo",
-})
-fn.sign_define("DapStopped", {
-	text = "",
 	texthl = "DiagnosticHint",
 	numhl = "DiagnosticHint",
+})
+fn.sign_define("DapLogPoint", {
+	text = "",
+	texthl = "DiagnosticHint",
+	numhl = "DiagnosticHint",
+})
+fn.sign_define("DapStopped", {
+	text = "",
+	texthl = "DiagnosticInfo",
+	numhl = "DiagnosticInfo",
 })
 fn.sign_define("DapBreakpointRejected", {
 	text = "",
