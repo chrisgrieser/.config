@@ -92,11 +92,14 @@ require("dapui").setup()
 
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
+
+-- wrap `continue` in this, since the nvim-lua-debugger has to be started
+-- separately
 keymap("n", "8", function ()
 	local dapRunning = dap.status() ~= ""
 	local isNvimConfig = fn.expand("%:p:h"):find("nvim") and bo.filetype == "lua"
-	if not(dapRunning) then 
-		bo.number = true 
+	if not(dapRunning) then
+		bo.number = true
 		if isNvimConfig then require("osv").run_this() end
 	end
 	dap.continue()
@@ -104,6 +107,7 @@ end, {nowait = true})
 
 keymap("n", "*", dap.toggle_breakpoint)
 
+-- selection of dap-commands
 keymap("n", "<leader>b", function()
 	local selection = {
 		"Toggle DAP UI",
@@ -114,7 +118,7 @@ keymap("n", "<leader>b", function()
 		"Step into",
 		"Step out",
 	}
-	vim.ui.select(selection, {prompt = "DAP Command"}, function(choice)
+	vim.ui.select(selection, {prompt = " DAP Command"}, function(choice)
 		if not (choice) then return end
 		if choice:find("^Launch") then opt.number = true end
 
