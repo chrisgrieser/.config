@@ -99,7 +99,7 @@ function M.PluginList(use)
 	use "kylechui/nvim-surround"
 	use "gbprod/substitute.nvim"
 	use "numToStr/Comment.nvim"
-	use {"michaeljsmith/vim-indent-object", keys = {{"o", "ai"}, {"o", "ii"}, {"x", "ai"}, {"x", "ii"}}}
+	use {"michaeljsmith/vim-indent-object", keys = {{"o", "ai"}, {"o", "ii"}, {"x", "ai"}, {"x", "ii"}, {"n", "ai"}, {"n", "ii"}}}
 
 	-- Navigation
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}

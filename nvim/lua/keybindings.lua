@@ -360,7 +360,7 @@ keymap("n", "X", 'mz$"_x`z')
 keymap("n", "zl", telescope.spell_suggest)
 keymap("n", "gl", "]s") -- next misspelling
 keymap("n", "gL", "[s") -- prev misspelling
-keymap("n", "zf", "1z=") -- auto[f]ix word under cursor (= select 1st suggestion)
+keymap("n", "zf", "mz1z=`z") -- auto[f]ix word under cursor (= select 1st suggestion)
 
 -- [S]ubstitute Operator (substitute.nvim)
 local substi = require("substitute")
@@ -462,7 +462,20 @@ keymap("", "<C-d>", qol.duplicateFile)
 keymap("x", "<leader>X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR>") -- refactor selection into new file
 
 -- Git Operations
-keymap("n", "<C-g>", ":DiffviewFileHistory %<CR>")
+keymap("n", "<C-g>", function ()
+	if bo.filetype == "DiffviewFileHistory" then
+		cmd("DiffviewClose")
+	end
+	vim.ui.input({prompt = "Search File History (empty = full file history):"}, function (query)
+		if not (query) then -- = cancellation
+			return
+		elseif query == "" then
+			cmd("DiffviewFileHistory %")
+		else
+			cmd("DiffviewFileHistory % -G"..query)
+		end
+	end)
+end)
 keymap("x", "<C-g>", ":DiffviewFileHistory<CR>")
 
 -- Option Toggling
