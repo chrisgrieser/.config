@@ -191,7 +191,7 @@ local luaSettings = {
 			},
 		},
 		workspace = {
-			library = {home .. ".hammerspoon/Spoons/EmmyLua.spoon/annotations"},
+			library = {home .. "/.hammerspoon/Spoons/EmmyLua.spoon/annotations"},
 			checkThirdParty = false, -- https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		},
 		hint = {
