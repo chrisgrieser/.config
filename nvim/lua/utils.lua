@@ -16,6 +16,7 @@ error = vim.log.levels.ERROR
 warn = vim.log.levels.WARN
 
 qol = require("quality-of-life")
+telescope = require("telescope.builtin")
 --------------------------------------------------------------------------------
 
 dotfilesFolder = home.."/.config"
@@ -63,6 +64,7 @@ commonFiletypes = {
 	"toml",
 	"zsh",
 	"bash",
+	"sh",
 	"bibtex",
 	"gitcommit",
 	"conf",
@@ -83,7 +85,6 @@ specialFiletypes = {
 	"packer",
 	"undotree",
 	"prompt",
-	"TelescopePrompt",
 	"noice",
 	"mason",
 	"ssr",

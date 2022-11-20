@@ -3,12 +3,11 @@ vim.opt.runtimepath:append [[, "~/.config/nvim/lua"]] ---@diagnostic disable-lin
 
 --------------------------------------------------------------------------------
 
-borderStyle = "rounded" -- must be 0th
+borderStyle = "rounded" -- must be 0th.
 require("packer-setup") -- must be 1st
 require("impatient") -- must be 2nd (plugin, improve startuptime)
 require("utils") -- must be 3rd
 
-telescope = require("telescope.builtin") -- requires loading extensions first
 --------------------------------------------------------------------------------
 
 require("options-and-autocmds")

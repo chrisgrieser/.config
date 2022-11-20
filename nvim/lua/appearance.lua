@@ -229,6 +229,9 @@ navic.setup {
 		Object = "ﴯ ",
 	},
 	separator = "  ",
+	depth_limit = 10,
+	depth_limit_indicator = "…",
+	highlight = false,
 }
 
 function debuggerStatus()
