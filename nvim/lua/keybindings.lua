@@ -363,14 +363,21 @@ keymap("n", "gL", "[s") -- prev misspelling
 keymap("n", "zf", "1z=") -- auto[f]ix word under cursor (= select 1st suggestion)
 
 -- [S]ubstitute Operator (substitute.nvim)
-keymap("n", "s", require("substitute").operator)
-keymap("n", "ss", require("substitute").line)
-keymap("n", "S", require("substitute").eol)
-keymap("n", "sx", require("substitute.exchange").operator)
-keymap("n", "sxx", require("substitute.exchange").line)
-keymap("x", "X", require("substitute.exchange").eol)
+local substi = require("substitute")
+local exchange = require("substitute.exchange")
+substi.setup()
+keymap("n", "s", substi.operator)
+keymap("n", "ss", substi.line)
+keymap("n", "S", substi.eol)
+keymap("n", "sx", exchange.operator)
+keymap("n", "sxx", exchange.line)
+keymap("x", "X", exchange.visual)
 
--- [S]ubstitute Operator (substitute.nvim)
+-- Duplicate Line / Selection (mnemonic: [r]eplicate)
+keymap("n", "R", qol.duplicateLine)
+keymap("n", "<A-r>", function() qol.duplicateLine {increment = true} end)
+keymap("x", "R", qol.duplicateSelection)
+
 -- Undo
 keymap({"n", "x"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", qol.undoDuration)
@@ -445,15 +452,14 @@ keymap("n", "gr", telescope.oldfiles) -- [r]ecent files
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
 keymap("n", "gf", telescope.live_grep) -- search in [f]iles
 keymap("n", "gR", telescope.resume) -- search in [f]iles
-keymap("n", "gF", "gf") -- needs remapping since shadowed
 
 -- File Operations
 keymap("", "<C-p>", qol.copyFilepath)
 keymap("", "<C-n>", qol.copyFilename)
-keymap("n", "<leader>x", qol.chmodx)
+keymap("", "<leader>x", qol.chmodx)
 keymap("", "<C-r>", qol.renameFile)
 keymap("", "<C-d>", qol.duplicateFile)
-keymap("x", "X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR>") -- refactor selection into new file
+keymap("x", "<leader>X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR>") -- refactor selection into new file
 
 -- Git Operations
 keymap("n", "<C-g>", ":DiffviewFileHistory %<CR>")
@@ -491,6 +497,9 @@ keymap("n", "<leader>r", function()
 		local parentFolder = fn.expand("%:p:h")
 		if parentFolder:find("nvim") then
 			cmd [[write! | source %]]
+			if filename:find("plugin-list") then
+				require("packer").compile()
+			end
 			vim.notify(" " .. fn.expand("%") .. " reloaded")
 		elseif parentFolder:find("hammerspoon") then
 			os.execute('open -g "hammerspoon://hs-reload"')
