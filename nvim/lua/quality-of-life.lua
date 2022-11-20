@@ -39,7 +39,7 @@ local function fileOp(operation)
 	if operation == "newFromSel" then
 		prevReg = fn.getreg("z")
 		leaveVisualMode()
-		cmd[['<,'>delete z]]
+		cmd [['<,'>delete z]]
 	end
 
 	local promptStr
@@ -50,11 +50,12 @@ local function fileOp(operation)
 
 	vim.ui.input({prompt = promptStr}, function(newName)
 		local invalidName
-		if newName then invalidName = newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") or newName == "" end
+		if newName then invalidName = newName:find("^%s*$") or newName:find("/") or newName:find(":") or newName:find("\\") or
+			newName == "" end
 
 		if not (newName) or invalidName then -- cancel
 			if operation == "newFromSel" then
-				cmd[[undo]] -- undo deletion
+				cmd [[undo]] -- undo deletion
 				fn.setreg("z", prevReg) -- restore register content
 			end
 			if invalidName then
@@ -64,7 +65,7 @@ local function fileOp(operation)
 		end
 		if not (newName) or invalidName then -- cancel
 			if operation == "newFromSel" then
-				cmd[[undo]] -- undo deletion
+				cmd [[undo]] -- undo deletion
 				fn.setreg("z", prevReg) -- restore register content
 			end
 			if invalidName then
@@ -407,10 +408,12 @@ end
 --on 'scrolloff' option
 ---@param action string The motion to be executed when not at the EOF
 function M.overscroll(action)
-	local curLine = lineNo(".")
-	local lastLine = lineNo("$")
-	if (lastLine - curLine - 1) < vim.wo.scrolloff then
-		cmd [[normal! zz]]
+	if bo.filetype ~= "DressingSelect" then
+		local curLine = lineNo(".")
+		local lastLine = lineNo("$")
+		if (lastLine - curLine - 1) < vim.wo.scrolloff then
+			cmd [[normal! zz]]
+		end
 	end
 	cmd("normal! " .. action)
 end

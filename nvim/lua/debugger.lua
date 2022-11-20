@@ -34,19 +34,48 @@ end
 --------------------------------------------------------------------------------
 -- DAP-RELATED PLUGINS
 require("nvim-dap-virtual-text").setup()
-
 require("dapui").setup()
-keymap("n", "<leader>bu", require("dapui").toggle)
-
 
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
-keymap("n", "<leader>bb", dap.continue)
-keymap("n", "<leader>bp", dap.toggle_breakpoint)
-keymap("n", "<leader>bs", dap.step_over)
-keymap("n", "<leader>bi", dap.step_into)
-keymap("n", "<leader>bo", dap.repl.open)
+keymap("n", "<leader>b", dap.continue)
+keymap("n", "<leader>B", function ()
+	local selection = {
+		"Toggle Breakpoint",
+		"Launch nvim-debugger",
+		"Step over",
+		"Step into",
+		"Toggle DAP UI",
+	}
+	vim.ui.select(selection, {prompt = "DAP Command"}, function (choice)
+		if not (choice) then return end
+		if choice == "Launch nvim-debugger" then
+			require("osv").run_this()
+		elseif choice == "Toggle Breakpoint" then
+			dap.toggle_breakpoint()
+		elseif choice == "Toggle DAP UI" then
+			require("dapui").toggle()
+		elseif choice == "Step over" then
+			dap.step_over()
+		elseif choice == "Step into" then
+			dap.step_into()
+		end
 
-keymap("n", "<leader>B", require("telescope").extensions.dap.commands)
+	end)
+end)
 
-keymap("n", "<leader>br", require("osv").run_this) -- start nvim-lua-debugger
+--------------------------------------------------------------------------------
+-- SIGN-COLUMN ICONS
+-- ▪︎▴• ▲  
+-- https://www.reddit.com/r/neovim/comments/qpymbb/lsp_sign_in_sign_columngutter/
+local signs = {
+	Error = "",
+	Warn = "▲",
+	Info = "",
+	Hint = "",
+}
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl}) ---@diagnostic disable-line: redundant-parameter, param-type-mismatch
+end
+

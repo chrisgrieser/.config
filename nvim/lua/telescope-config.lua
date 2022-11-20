@@ -119,6 +119,10 @@ require("telescope").setup {
 			theme = "cursor",
 			layout_config = { cursor = { width = 0.2 } },
 		},
+		builtin = {
+			prompt_prefix = "B",
+			include_extensions = true,
+		},
 		colorscheme = {
 			enable_preview = true,
 			prompt_prefix = ' ',
@@ -126,12 +130,5 @@ require("telescope").setup {
 			layout_strategy = "bottom_pane",
 		},
 	},
-	extensions = {
-		dap = {
-			prompt_prefix = '',
-			layout_strategy = "cursor",
-		},
-	},
 }
 
-require("telescope").load_extension("dap")
