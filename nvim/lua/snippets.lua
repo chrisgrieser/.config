@@ -94,7 +94,7 @@ add("lua", {
 	snip("resolve home", 'os.getenv("HOME")'),
 	snip("keymap", 'keymap("n", "$1", ${2:""})\n$0'),
 	snip("for (list)", [[
-		for _, value pairs(${1:list_table}) do
+		for _, ${1:v} in pairs(${2:list_table}) do
 			$0
 		end
 	]]),

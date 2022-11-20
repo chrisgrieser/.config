@@ -9,12 +9,10 @@ local dap = require("dap")
 require("mason-nvim-dap").setup {
 	-- INFO: uses dap-names, not mason-names https://github.com/jayp0521/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
 	ensure_installed = {
-		-- "bash",
-		-- "node2",
-		-- "js",
-		-- "chrome",
+		"node2",
+		-- one-step-for-vimkind not included with mason, but installed as nvim
+		-- plugin
 	},
-	-- one-step-for-vimkind not included with mason
 	automatic_setup = true,
 }
 
