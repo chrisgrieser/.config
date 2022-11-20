@@ -14,7 +14,6 @@ require("mason-nvim-dap").setup {
 		"bash",
 	},
 	-- one-small-step-for-vimkind not included with mason, but installed as nvim plugin
-	automatic_setup = true,
 }
 
 --------------------------------------------------------------------------------
@@ -99,9 +98,11 @@ keymap("n", "<leader>B", function()
 	local ft = bo.filetype
 	local selection = {
 		"Toggle Breakpoint",
-		"Toggle Breakpoint",
+		"Clear Breakpoints",
+		"Terminate",
 		"Step over",
 		"Step into",
+		"Step out",
 		"Toggle DAP UI",
 	}
 	if fn.expand("%:p:h"):find("nvim") and ft == "lua" then
@@ -133,6 +134,12 @@ keymap("n", "<leader>B", function()
 			dap.step_over()
 		elseif choice == "Step into" then
 			dap.step_into()
+		elseif choice == "Step out" then
+			dap.step_into()
+		elseif choice == "Clear Breakpoints" then
+			dap.clear_breakpoints()
+		elseif choice == "Terminate" then
+			dap.terminate()
 		end
 
 	end)
