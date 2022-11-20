@@ -92,11 +92,28 @@ add("lua", {
 
 add("lua", {
 	snip("resolve home", 'os.getenv("HOME")'),
+})
+
+-- nvim-lua
+add("lua", {
 	snip("keymap", 'keymap("n", "$1", ${2:""})\n$0'),
 	snip("for (list)", [[
 		for _, ${1:v} in pairs(${2:list_table}) do
 			$0
 		end
+	]]),
+	snip("input (vim.ui)", [[
+		vim.ui.input({ prompt = "${1:prompt_msg}"}, function (input)
+			if not(input) then return end
+			$2
+		end)
+	]]),
+	snip("selection (vim.ui)", [[
+		local ${1:list} = {}
+		vim.ui.selection({ prompt = "${2:prompt_msg}"}, function (choice)
+			if not(choice) then return end
+			$3
+		end)
 	]]),
 	snip("autocmd & augroup", [[
 		augroup("${1:groupname}", {\})

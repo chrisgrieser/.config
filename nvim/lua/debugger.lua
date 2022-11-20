@@ -105,7 +105,6 @@ end, {nowait = true})
 keymap("n", "*", dap.toggle_breakpoint)
 
 keymap("n", "<leader>b", function()
-
 	local selection = {
 		"Toggle DAP UI",
 		"Terminate",
