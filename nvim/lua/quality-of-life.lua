@@ -30,7 +30,7 @@ end
 --------------------------------------------------------------------------------
 
 ---Helper Function performing common file operation tasks
----@param operation string rename|duplicate|new
+---@param operation string rename|duplicate|new|newFromSel
 local function fileOp(operation)
 	local dir = fn.expand("%:p:h")
 	local oldName = fn.expand("%:t")
@@ -39,7 +39,7 @@ local function fileOp(operation)
 	local promptStr
 	if operation == "duplicate" then promptStr = "Duplicate File as: "
 	elseif operation == "rename" then promptStr = "Rename File to: "
-	elseif operation == "new" then promptStr = "New File: "
+	elseif operation == "new" or operation == "newFromSel" then promptStr = "Name for New File: "
 	end
 
 	vim.ui.input({prompt = promptStr}, function(newName)
@@ -66,6 +66,10 @@ local function fileOp(operation)
 			vim.notify(" Renamed '" .. oldName .. "' to '" .. newName .. "'.")
 		elseif operation == "new" then
 			cmd("edit " .. filepath)
+			cmd("write " .. filepath)
+		elseif operation == "newFromSel" then
+			cmd("edit " .. filepath)
+			cmd()
 			cmd("write " .. filepath)
 		end
 	end)
@@ -94,6 +98,17 @@ function M.chmodx()
 	local currentFile = fn.expand("%:p")
 	os.execute("chmod +x " .. "'" .. currentFile .. "'")
 	vim.notify(" Execution permission granted.")
+end
+
+function M.moveSelectionToNewFile()
+	local prevReg = fn.getreg("z")
+
+	cmd[['<,'>delete z]]
+	local newContent = fn.getreg("z")
+	local currentFile = fn.expand("%:p")
+
+	fn.setreg("z", prevReg)
+	-- keymap("x", "<leader>X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR>") -- refactor selection into new file
 end
 
 ---Helper for copying file information

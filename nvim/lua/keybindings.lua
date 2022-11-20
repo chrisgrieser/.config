@@ -425,8 +425,6 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 -- VISUAL MODE
 keymap("x", "p", "P") -- do not override register when pasting
 keymap("x", "P", "p") -- override register when pasting
-
-keymap("n", "V", "Vj") -- visual line mode starts with two lines selected
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
 
 --------------------------------------------------------------------------------
@@ -465,6 +463,7 @@ keymap("x", "<leader>X", ":write Untitled.lua | normal! gvd<CR>:buffer #<CR>") -
 keymap("n", "<C-g>", function ()
 	if bo.filetype == "DiffviewFileHistory" then
 		cmd("DiffviewClose")
+		return
 	end
 	vim.ui.input({prompt = "Search File History (empty = full file history):"}, function (query)
 		if not (query) then -- = cancellation
@@ -510,10 +509,12 @@ keymap("n", "<leader>r", function()
 		local parentFolder = fn.expand("%:p:h")
 		if parentFolder:find("nvim") then
 			cmd [[write! | source %]]
-			if filename:find("plugin-list") then
+			if filename:find("plugin%-list") then
 				require("packer").compile()
+				vim.notify(" Plugins reloaded and re-compiled. ")
+			else
+				vim.notify(" " .. fn.expand("%") .. " reloaded. ")
 			end
-			vim.notify(" " .. fn.expand("%") .. " reloaded")
 		elseif parentFolder:find("hammerspoon") then
 			os.execute('open -g "hammerspoon://hs-reload"')
 		end
