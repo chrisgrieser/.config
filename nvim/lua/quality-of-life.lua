@@ -48,8 +48,9 @@ local function fileOp(operation)
 			vim.notify(" Invalid Filename.", error)
 			return
 		end
-		local extProvided = newName:find("%.")
-		if not (extProvided) then
+		local extProvided = newName:find(".%.") -- non-leading dot to exclude dotfile-dots
+		local isDotfile = newName:match("^%.") 
+		if not (extProvided) and not (isDotfile) then
 			newName = newName .. "." .. oldExt
 		end
 		local filepath = dir .. "/" .. newName
