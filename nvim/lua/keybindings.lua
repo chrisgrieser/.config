@@ -377,7 +377,7 @@ keymap("x", "R", qol.duplicateSelection)
 keymap({"n", "x"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", qol.undoDuration)
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
-keymap("i", "<C-g>u<Space>", "<Space>") -- Undo Point for every space
+keymap("i", "<C-g>u<Space>", "<Space>") -- extra undo point for every space
 
 -- Logging & Debugging
 keymap("n", "<leader>ll", qol.quicklog)
