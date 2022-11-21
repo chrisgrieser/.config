@@ -75,7 +75,6 @@ keymap("n", "Ö", "<Plug>(leap-backwards-to)")
 
 -- Search
 keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout
-keymap("n", "/", "/\v") -- more PCRE-like regex patterns (:h magic)
 keymap("n", "<Esc>", ":lua require('notify').dismiss()<CR>:nohl<CR>:echo<CR>lh", {silent = true}) -- clear highlights & shortmessage, lh clears hover window
 keymap({"n", "x", "o"}, "+", "*") -- no more modifier key on German Keyboard
 
@@ -137,8 +136,6 @@ keymap({"o", "x"}, "ir", "i]") -- [r]ectangular brackets
 keymap({"o", "x"}, "ar", "a]")
 keymap({"o", "x"}, "ic", "i}") -- [c]urly brackets
 keymap({"o", "x"}, "ac", "a}")
-keymap({"o", "x"}, "in", "gn") -- [n]ext search hit
-keymap({"o", "x"}, "an", "gn")
 keymap("o", "r", "}") -- [r]est of the paragraph
 keymap("o", "R", "{")
 
@@ -286,7 +283,7 @@ keymap("o", "Q", commented_lines_textobject, {silent = true})
 
 --------------------------------------------------------------------------------
 
--- MACRO & SUBSTITUTION
+-- MACRO
 -- one-off recording (+ q needs remapping due to being mapped to comments)
 -- needs temporary remapping, since there is no "recording mode"
 g.isRecording = false
@@ -296,6 +293,7 @@ autocmd({"RecordingLeave", "VimEnter"}, {
 	callback = function()
 		keymap("n", "0", "qy") -- not saving in throwaway register z, so the respective keymaps can be used during a macro
 		g.isRecording = false -- for status line
+		require("lualine").refresh()
 	end
 })
 autocmd("RecordingEnter", {
@@ -303,18 +301,13 @@ autocmd("RecordingEnter", {
 	callback = function()
 		keymap("n", "0", "q")
 		g.isRecording = true
+		require("lualine").refresh()
 	end
 })
 keymap("n", "9", "@y") -- quick replay (don't use counts that high anyway)
 
--- find & replace under cursor
--- keymap("n", "<leader>f", ':% s/<C-r>=expand("<cword>")<CR>//g<Left><Left>')
-
--- find & replace selection
--- keymap("x", "<leader>F", [[<Esc>:'<,'> s/\(.*\)/\1/<Left><Left><Left>]])
-
 -- structured search & replace
-keymap({"n", "x"}, "<leader>f", function() require("ssr").open() end)
+keymap({"n", "x"}, "<leader>f", function() require("ssr").open() end) -- wrapped in function for lazy-loading
 
 --------------------------------------------------------------------------------
 
@@ -462,18 +455,18 @@ keymap("", "<C-d>", qol.duplicateFile)
 keymap("x", "<leader>X", qol.moveSelectionToNewFile)
 
 -- Git Operations
-keymap("n", "<C-g>", function ()
+keymap("n", "<C-g>", function()
 	if bo.filetype == "DiffviewFileHistory" then
 		cmd("DiffviewClose")
 		return
 	end
-	vim.ui.input({prompt = "Search File History (empty = full file history):"}, function (query)
+	vim.ui.input({prompt = "Search File History (empty = full file history):"}, function(query)
 		if not (query) then -- = cancellation
 			return
 		elseif query == "" then
 			cmd("DiffviewFileHistory %")
 		else
-			cmd("DiffviewFileHistory % -G"..query)
+			cmd("DiffviewFileHistory % -G" .. query)
 		end
 	end)
 end)
@@ -531,7 +524,7 @@ keymap("n", "<leader>r", function()
 		cmd [[AppleScriptRun]]
 
 	else
-		vim.notify(" No build system set.", error) 
+		vim.notify(" No build system set.", error)
 
 	end
 end)
