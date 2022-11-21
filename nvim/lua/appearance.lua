@@ -90,16 +90,19 @@ autocmd("BufReadPost", {
 
 --------------------------------------------------------------------------------
 -- Notifications
-opt.termguicolors = true
-vim.notify = require("notify") -- use notify.nvim for all vim notifications
-
-require("notify").setup {
-	icons = {WARN = ""},
-	render = "minimal", -- styles, default|minimal|simple
-	minimum_width = 25,
-	timeout = 4000,
-	top_down = false,
-}
+if isGui() then
+	opt.termguicolors = true
+	vim.notify = require("notify") -- use notify.nvim for all vim notifications
+	require("notify").setup {
+		render = "minimal",
+		stages = "slide",
+		minimum_width = 25,
+		max_width = 45,
+		max_height = 12,
+		timeout = 4000,
+		top_down = false,
+	}
+end
 
 -- replace lua's print message with notify.nvim → https://www.reddit.com/r/neovim/comments/xv3v68/tip_nvimnotify_can_be_used_to_display_print/
 print = function(...)
@@ -146,6 +149,9 @@ require("gitsigns").setup {
 require("fidget").setup {
 	-- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
 	text = {spinner = "dots"},
+	fmt = {
+		leftpad = false,
+	},
 	sources = {
 		["null-ls"] = {ignore = true}
 	}

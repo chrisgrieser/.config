@@ -329,15 +329,15 @@ function M.quicklog(opts)
 end
 
 ---Remove all log statements in the current buffer
----VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
+---Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.removeLog()
 	local ft = bo.filetype
 	if ft == "lua" or ft == "python" then
 		logCommand = "print"
 	elseif ft == "javascript" or ft == "typescript" then
-		logCommand = "console.log"
+		logCommand = "console."
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" then
-		vim.notify(" Shell 'echo' cannot be removed since indistinguishable from other echos.")
+		vim.notify(" Shell 'echo' cannot be removed since indistinguishable from other echos. ", warn)
 	elseif ft == "applescript" then
 		logCommand = "log"
 	else
