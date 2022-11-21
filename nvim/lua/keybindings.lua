@@ -128,6 +128,28 @@ keymap("n", "<leader><Space>", function()
 	opt.iskeyword = opt.iskeyword + {"_", "-"}
 end)
 
+-- special plugin text objects
+keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {silent = true})
+keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>", {silent = true})
+
+-- map ai to aI in languages where aI is not used anyway
+augroup("indentobject", {})
+autocmd("BufEnter", {
+	group = "indentobject",
+	callback = function()
+		local ft = bo.filetype
+		if not (ft == "yaml" or ft == "python" or ft == "markdown") then
+			keymap({"x", "o"}, "ai", "aI", {remap = true, buffer = true})
+		end
+	end
+})
+
+-- treesitter textobjects:
+-- af -> a function
+-- aC -> a condition
+-- q -> comment
+-- aa -> an argument
+
 keymap({"o", "x"}, "iq", 'i"') -- double [q]uote
 keymap({"o", "x"}, "aq", 'a"')
 keymap({"o", "x"}, "iz", "i'") -- single quote (mnemonic: [z]itation)
@@ -197,28 +219,6 @@ require("nvim-surround").setup {
 keymap("n", "yss", "ys_", {remap = true})
 keymap("n", "dss", "ds_", {remap = true})
 keymap("n", "css", "cs_", {remap = true})
-
--- special plugin text objects
-keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {silent = true})
-keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>", {silent = true})
-
--- map ai to aI in languages where aI is not used anyway
-augroup("indentobject", {})
-autocmd("BufEnter", {
-	group = "indentobject",
-	callback = function()
-		local ft = bo.filetype
-		if not (ft == "yaml" or ft == "python" or ft == "markdown") then
-			keymap({"x", "o"}, "ai", "aI", {remap = true, buffer = true})
-		end
-	end
-})
-
--- treesitter textobjects:
--- af -> a function
--- aC -> a condition
--- q -> comment
--- aa -> an argument
 
 --------------------------------------------------------------------------------
 
@@ -421,6 +421,7 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 keymap("x", "p", "P") -- do not override register when pasting
 keymap("x", "P", "p") -- override register when pasting
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
+keymap("x", "v", "<C-v>") -- `vv` from normal mode goes to visual block mode
 
 --------------------------------------------------------------------------------
 -- WINDOW AND BUFFERS
@@ -433,7 +434,8 @@ keymap("", "<C-Up>", ":resize -3<CR>")
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 
 -- Buffers
-keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file (use vim's buffer model instead of tabs)
+keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file
+keymap("n", "<S-CR>", ":bnext<CR>", {silent = true}) -- cycle between buffers
 
 --------------------------------------------------------------------------------
 -- FILES
@@ -451,7 +453,7 @@ keymap("", "<C-p>", qol.copyFilepath)
 keymap("", "<C-n>", qol.copyFilename)
 keymap("", "<leader>x", qol.chmodx)
 keymap("", "<C-r>", qol.renameFile)
-keymap("", "<C-d>", qol.duplicateFile)
+keymap({"n", "x", "i"}, "<D-n>", qol.createNewFile)
 keymap("x", "<leader>X", qol.moveSelectionToNewFile)
 
 -- Git Operations
@@ -460,7 +462,7 @@ keymap("n", "<C-g>", function()
 		cmd("DiffviewClose")
 		return
 	end
-	vim.ui.input({prompt = "Search File History (empty = full file history):"}, function(query)
+	vim.ui.input({prompt = "Search File History (empty = full history):"}, function(query)
 		if not (query) then -- = cancellation
 			return
 		elseif query == "" then
@@ -471,6 +473,8 @@ keymap("n", "<C-g>", function()
 	end)
 end)
 keymap("x", "<C-g>", ":DiffviewFileHistory<CR>")
+
+--------------------------------------------------------------------------------
 
 -- Option Toggling
 keymap("n", "<leader>os", ":set spell!<CR>")
