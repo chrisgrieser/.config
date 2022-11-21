@@ -449,13 +449,14 @@ keymap("n", "gb", telescope.buffers) -- open [b]uffer
 keymap("n", "gf", telescope.live_grep) -- search in [f]iles
 keymap("n", "gR", telescope.resume) -- search in [f]iles
 
--- File Operations
-keymap("", "<C-p>", qol.copyFilepath)
-keymap("", "<C-n>", qol.copyFilename)
-keymap("", "<leader>x", qol.chmodx)
-keymap("", "<C-r>", qol.renameFile)
-keymap({"n", "x", "i"}, "<D-n>", qol.createNewFile)
-keymap("x", "<leader>X", qol.moveSelectionToNewFile)
+-- File Operations (ghengis-nvim)
+local ghengis = require("ghengis")
+keymap("", "<C-p>", ghengis.copyFilepath)
+keymap("", "<C-n>", ghengis.copyFilename)
+keymap("", "<leader>x", ghengis.chmodx)
+keymap("", "<C-r>", ghengis.renameFile)
+keymap({"n", "x", "i"}, "<D-n>", ghengis.createNewFile)
+keymap("x", "<leader>X", ghengis.moveSelectionToNewFile)
 
 -- Git Operations
 keymap("n", "<C-g>", function()
@@ -541,6 +542,9 @@ autocmd("FileType", {
 	pattern = specialFiletypes,
 	callback = function()
 		local opts = {buffer = true, silent = true, nowait = true}
+		-- these bindings do not work with Telescope
+		if bo.filetype == "TelescopePrompt" then return end 
+
 		keymap("n", "<Esc>", ":close<CR>", opts)
 		keymap("n", "q", ":close<CR>", opts)
 	end

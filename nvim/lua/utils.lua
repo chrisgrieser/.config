@@ -83,6 +83,7 @@ specialFiletypes = {
 	"packer",
 	"undotree",
 	"prompt",
+	"TelescopePrompt",
 	"noice",
 	"mason",
 	"ssr",
