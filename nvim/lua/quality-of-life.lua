@@ -27,7 +27,6 @@ function trim(str)
 	return (str:gsub("^%s*(.-)%s*$", "%1"))
 end
 
-
 --------------------------------------------------------------------------------
 
 ---Copy Last Command
@@ -300,7 +299,7 @@ end
 --------------------------------------------------------------------------------
 
 ---log statement for variable under cursor, similar to the 'turbo console log'
----VS Code plugin. Supported: lua, js/ts, zsh/bash/fish, and applescript
+---VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 ---@param opts? table
 function M.quicklog(opts)
 	if not (opts) then opts = {addLineNumber = false} end
@@ -313,7 +312,7 @@ function M.quicklog(opts)
 		lnStr = "L" .. tostring(lineNo(".")) .. " "
 	end
 
-	if ft == "lua" then
+	if ft == "lua" or ft == "python" then
 		logStatement = 'print("' .. lnStr .. varname .. ': ", ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then
 		logStatement = 'console.log("' .. lnStr .. varname .. ': " + ' .. varname .. ");"
@@ -329,9 +328,11 @@ function M.quicklog(opts)
 	cmd [[normal! j==]] -- move down and indent
 end
 
+---Remove all log statements in the current buffer
+---VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.removeLog()
 	local ft = bo.filetype
-	if ft == "lua" then
+	if ft == "lua" or ft == "python" then
 		logCommand = "print"
 	elseif ft == "javascript" or ft == "typescript" then
 		logCommand = "console.log"
@@ -342,7 +343,10 @@ function M.removeLog()
 	else
 		vim.notify(" Quicklog does not support " .. ft .. " yet.")
 	end
+	local logsStatementsNum = fn.search([[^\s*]] .. logCommand, "nw")
 	cmd([[g/^\s*]] .. logCommand .. [[/d]])
+
+	vim.notify (" Cleared "..tostring(logsStatementsNum).." log statements. ")
 	cmd("nohl")
 end
 
