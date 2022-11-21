@@ -144,10 +144,13 @@ require("gitsigns").setup {
 --------------------------------------------------------------------------------
 -- STATUS LINE (LUALINE)
 
-require("fidget").setup {}
+require("fidget").setup {
+	-- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
+	text = { spinner = "meter" }
+}
 
 local function recordingStatus()
-	if g.isRecording then return "[ REC]"
+	if g.isRecording then return " REC"
 	else return "" end
 end
 
