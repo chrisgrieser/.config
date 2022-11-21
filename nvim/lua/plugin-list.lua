@@ -33,6 +33,7 @@ function M.PluginList(use)
 		"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		"ray-x/lsp_signature.nvim", -- signature hint
 		"SmiteshP/nvim-navic", -- breadcrumbs
+		"j-hui/fidget.nvim", -- lsp status
 		"folke/neodev.nvim", -- lsp for nvim-lua config
 	}}
 	-- Linting

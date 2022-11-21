@@ -158,6 +158,11 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/dressing.nvim",
     url = "https://github.com/stevearc/dressing.nvim"
   },
+  ["fidget.nvim"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/fidget.nvim",
+    url = "https://github.com/j-hui/fidget.nvim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
@@ -433,8 +438,8 @@ time([[Defining lazy-load commands]], false)
 -- Keymap lazy-loads
 time([[Defining lazy-load keymaps]], true)
 vim.cmd [[nnoremap <silent> <M-Down> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>M-Down>", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> <M-Up> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>M-Up>", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[vnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
 time([[Defining lazy-load keymaps]], false)
 

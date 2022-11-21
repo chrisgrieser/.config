@@ -144,32 +144,36 @@ require("gitsigns").setup {
 --------------------------------------------------------------------------------
 -- STATUS LINE (LUALINE)
 
+require("fidget").setup {}
+
 local function recordingStatus()
 	if g.isRecording then return "[ REC]"
 	else return "" end
 end
 
 local function alternateFile()
+	local maxLen = 15
 	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
 	if altFile == "" then
 		return ""
 	elseif curFile == altFile then
 		local altParent = fn.expand("#:p:h:t")
-		if #altParent > 15 then altParent = altParent:sub(1, 15) end
+		if #altParent > maxLen then altParent = altParent:sub(1, maxLen) .. "…" end
 		return altParent .. "/" .. altFile
 	end
 	return "# " .. altFile
 end
 
 local function currentFile() -- using this function instead of default filename, since this does not show "[No Name]" for Telescope
+	local maxLen = 15
 	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
 	if curFile == "" then
 		return ""
 	elseif curFile == altFile then
 		local curParent = fn.expand("%:p:h:t")
-		if #curParent > 15 then curParent = curParent:sub(1, 15) end
+		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
 		return curParent .. "/" .. curFile
 	end
 	return "%% " .. curFile -- "%" is lua's escape character and therefore needs to be escaped itself
