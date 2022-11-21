@@ -1126,8 +1126,24 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
-  - description: "🅰️  Neovide / Alacritty: Fix <S-Space>, and cmd+q → ZZ"
+  - description: "🅰️  Neovide / Alacritty: Fix <S-Space> and <S-CR>, and cmd+q → ZZ"
     manipulators:
+      - type: basic
+        from:
+          key_code: return_or_enter
+          modifiers:
+            mandatory:
+              - shift
+        to:
+          - key_code: return_or_enter
+            modifiers:
+              - option
+              - control
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - "[Nn]eovide"
+              - "[Aa]lacritty"
       - type: basic
         from:
           key_code: spacebar
@@ -1143,20 +1159,6 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - "[Nn]eovide"
-      - type: basic
-        from:
-          key_code: spacebar
-          modifiers:
-            mandatory:
-              - shift
-        to:
-          - key_code: d
-          - key_code: a
-          - key_code: w
-        conditions:
-          - type: frontmost_application_if
-            file_paths:
-              - alacritty$
       # cmd+q -> <Esc>ZZ (does skip pre-quit triggers)
       - type: basic
         from:

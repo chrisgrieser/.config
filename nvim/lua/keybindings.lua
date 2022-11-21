@@ -116,7 +116,7 @@ autocmd("TextYankPost", {
 
 keymap("n", "C", '"_C')
 keymap("n", "<Space>", '"_ciw') -- change word
-keymap("n", "<C-A-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
+keymap("n", "<C-M-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
 keymap("x", "<Space>", '"_c')
 
 -- change sub-word
@@ -377,6 +377,7 @@ keymap("x", "R", qol.duplicateSelection)
 keymap({"n", "x"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", qol.undoDuration)
 keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
+keymap("i", "<C-g>u<Space>", "<Space>") -- Undo Point for every space
 
 -- Logging & Debugging
 keymap("n", "<leader>ll", qol.quicklog)
@@ -435,7 +436,7 @@ keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 
 -- Buffers
 keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file
-keymap("n", "<S-CR>", ":bnext<CR>", {silent = true}) -- cycle between buffers
+keymap("n", "<C-M-CR>", ":nohl | bnext<CR>", {silent = true}) -- cycle between buffers, <S-CR> supported via karabiner-remapping
 
 --------------------------------------------------------------------------------
 -- FILES
