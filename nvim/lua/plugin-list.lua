@@ -1,4 +1,5 @@
 local M = {}
+local myrepos = "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Repos/"
 function M.PluginList(use)
 
 	-- Package Management
@@ -58,7 +59,7 @@ function M.PluginList(use)
 		"hrsh7th/cmp-cmdline",
 		"dmitmel/cmp-cmdline-history",
 		"hrsh7th/cmp-emoji",
-		"chrisgrieser/cmp-nerdfont",
+		myrepos.."cmp-nerdfont",
 		"petertriho/cmp-git", -- git issues, mentions & commits
 		"hrsh7th/cmp-nvim-lsp", -- lsp
 		"L3MON4D3/LuaSnip", -- snippet engine
@@ -78,7 +79,7 @@ function M.PluginList(use)
 	use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter
 
 	-- File History & File Switching & File Operation
-	use {"~//Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Repos/nvim-ghengis", requires = "stevearc/dressing.nvim"}
+	use {myrepos.."nvim-ghengis", requires = "stevearc/dressing.nvim"}
 	use {"nvim-telescope/telescope.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons"
