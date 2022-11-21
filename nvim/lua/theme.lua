@@ -43,6 +43,10 @@ local function customHighlights()
 
 	-- bugfix for https://github.com/neovim/neovim/issues/20456
 	cmd [[highlight! def link luaParenError NormalFloat]]
+
+	-- Figet
+	cmd [[highlight! link FidgetTitle lualine_a_normal]]
+	cmd [[highlight! link FidgetTask lualine_a_normal]]
 end
 
 customHighlights() -- to apply on default
