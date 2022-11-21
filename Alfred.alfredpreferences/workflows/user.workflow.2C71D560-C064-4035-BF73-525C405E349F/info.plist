@@ -414,6 +414,28 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>variable</key>
 			<string>second_lang</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/.config/espanso/match/spelling.yml
+~/.config/espanso/match/spelling.yml</string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>path to spelling espanso file</string>
+			<key>label</key>
+			<string>Spell File</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>spell_config</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string>0.2</string>
