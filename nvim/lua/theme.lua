@@ -38,9 +38,6 @@ local function customHighlights()
 	cmd [[highlight TSDefinition term=underline gui=underdotted]]
 	cmd [[highlight TSDefinitionUsage term=underline gui=underdotted]]
 
-	-- Custom Highlight-Group, used for various LSP Hints
-	cmd [[highlight GhostText guifg=#7c7c7c]]
-
 	-- bugfix for https://github.com/neovim/neovim/issues/20456
 	cmd [[highlight! def link luaParenError NormalFloat]]
 
