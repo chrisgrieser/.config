@@ -77,7 +77,8 @@ function M.PluginList(use)
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 	use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter
 
-	-- File History & Switching
+	-- File History & File Switching & File Operation
+	use {"~/.local/share/nvim/nvim-ghengis", requires = "stevearc/dressing.nvim"}
 	use {"nvim-telescope/telescope.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons"

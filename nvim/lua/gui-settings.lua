@@ -28,7 +28,6 @@ keymap("n", "<D-a>", "ggVG") -- cmd+a
 keymap("i", "<D-a>", "<Esc>ggVG")
 keymap("x", "<D-a>", "ggG")
 
-keymap({"n", "x", "i"}, "<D-BS>", qol.trashFile)
 keymap({"n", "x"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
 keymap({"n", "x"}, "<D-1>", ":Lexplore<CR><CR>") -- file tree (netrw)
 keymap({"n", "x"}, "<D-0>", ":messages<CR>")

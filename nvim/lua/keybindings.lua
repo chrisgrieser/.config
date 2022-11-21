@@ -450,13 +450,15 @@ keymap("n", "gf", telescope.live_grep) -- search in [f]iles
 keymap("n", "gR", telescope.resume) -- search in [f]iles
 
 -- File Operations (ghengis-nvim)
-local ghengis = require("ghengis")
-keymap("", "<C-p>", ghengis.copyFilepath)
-keymap("", "<C-n>", ghengis.copyFilename)
-keymap("", "<leader>x", ghengis.chmodx)
-keymap("", "<C-r>", ghengis.renameFile)
-keymap({"n", "x", "i"}, "<D-n>", ghengis.createNewFile)
-keymap("x", "<leader>X", ghengis.moveSelectionToNewFile)
+-- local ghengis = require("nvim-ghengis")
+-- keymap("", "<C-p>", ghengis.copyFilepath)
+-- keymap("", "<C-n>", ghengis.copyFilename)
+-- keymap("", "<leader>x", ghengis.chmodx)
+-- keymap("", "<C-r>", ghengis.renameFile)
+-- keymap("", "<C-d>", ghengis.duplicateFile)
+-- keymap("", "<D-BS>", ghengis.trashFile)
+-- keymap({"n", "x", "i"}, "<D-n>", ghengis.createNewFile)
+-- keymap("x", "<leader>X", ghengis.moveSelectionToNewFile)
 
 -- Git Operations
 keymap("n", "<C-g>", function()
@@ -543,7 +545,7 @@ autocmd("FileType", {
 	callback = function()
 		local opts = {buffer = true, silent = true, nowait = true}
 		-- these bindings do not work with Telescope
-		if bo.filetype == "TelescopePrompt" then return end 
+		if bo.filetype == "TelescopePrompt" then return end
 
 		keymap("n", "<Esc>", ":close<CR>", opts)
 		keymap("n", "q", ":close<CR>", opts)
