@@ -3,12 +3,12 @@ local opts = {buffer = true, silent = true}
 --------------------------------------------------------------------------------
 
 -- hide URLs and other formatting, TODO: figure out how to hide only URLs
-wo.conceallevel = 2
+-- wo.conceallevel = 2
 
 -- hack to make lists auto-continue via Return in Insert & o in normal mode
 -- i.e. replaces bullet.vim based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
 setlocal("comments", "b:*,b:-,b:+")
-local fo = getlocalopt("formatoptions"):gsub("c", "") .. "ro" ---@diagnostic disable-line: undefined-field
+local fo = getlocalopt("formatoptions"):gsub("[ct]", "") .. "ro" ---@diagnostic disable-line: undefined-field
 setlocal("formatoptions", fo)
 
 -- spelling
