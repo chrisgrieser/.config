@@ -32,8 +32,9 @@ end
 
 ---Copy Last Command
 function M.copyLastCommand()
-	local useSystemClipb = opt.clipboard:get()[1]:find("unnamed")
 	local reg = '"'
+	local clipboardOpt = vim.opt.clipboard:get();
+	local useSystemClipb = #clipboardOpt > 0 and clipboardOpt[1]:find("unnamed")
 	if useSystemClipb then reg = "+" end
 
 	local lastCommand = fn.getreg(":")
