@@ -30,7 +30,7 @@ keymap("n", "<leader>p", function()
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	local packer = require("packer")
 	packer.startup(require("plugin-list").PluginList)
-	packer.snapshot("snapshot_" .. os.date("!%Y-%m-%d_%H-%M-%S"))
+	packer.snapshot("packer-snapshot_" .. os.date("!%Y-%m-%d_%H-%M-%S"))
 	packer.sync()
 	cmd [[MasonUpdateAll]]
 	-- remove oldest snapshot when more than 20

@@ -1,4 +1,5 @@
 -- https://github.com/nvim-telescope/telescope.nvim#telescope-setup-structure
+--------------------------------------------------------------------------------
 
 require("telescope").setup {
 	defaults = {
@@ -7,17 +8,18 @@ require("telescope").setup {
 		path_display = { "tail" },
 		file_ignore_patterns = {
 			"packer_compiled.lua",
+			"packer-snapshot_",
 			"%.DS_Store",
 			"%.git/",
 			"%.spl",
 			"%.log",
 			"%[No Name%]", -- new files / sometimes folders (netrw)
 			"/$", -- ignore folders (netrw)
-			"node_modules",
+			"node_modules/",
 			"%.png",
 			"%.zip",
 			"%.pxd",
-			"Spoons/", -- Hammerspoon spoons
+			"%.spoon",
 			"%.plist", -- Alfred Config Data
 			"%.string",
 		},
