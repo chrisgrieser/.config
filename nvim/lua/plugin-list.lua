@@ -125,7 +125,10 @@ function M.PluginList(use)
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
 	use {"hail2u/vim-css3-syntax", ft = "css"} -- better syntax highlighting (until treesitter css looks decent…)
-
+	use {"iamcco/markdown-preview.nvim",
+		run = "cd app && npm install",
+		ft = {"markdown"},
+	}
 end
 
 return M
