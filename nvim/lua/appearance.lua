@@ -124,7 +124,7 @@ require("dressing").setup {
 		backend = {"builtin", "nui"}, -- Priority list of preferred vim.select implementations
 		trim_prompt = true, -- Trim trailing `:` from prompt
 		builtin = {
-			border = borderStyle,---@diagnostic disable-line: undefined-global
+			border = borderStyle, ---@diagnostic disable-line: undefined-global
 			relative = "cursor",
 			winblend = 4,
 			max_width = 80,
@@ -138,14 +138,17 @@ require("dressing").setup {
 -- GUTTER
 require("gitsigns").setup {
 	max_file_length = 10000,
-	preview_config = {border = borderStyle},---@diagnostic disable-line: undefined-global
+	preview_config = {border = borderStyle}, ---@diagnostic disable-line: undefined-global
 }
 
 --------------------------------------------------------------------------------
 -- FIDGET
 require("fidget").setup {
 	-- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
-	text = {spinner = "dots"}
+	text = {spinner = "dots"},
+	sources = {
+		["null-ls"] = {ignore = true}
+	}
 }
 
 --------------------------------------------------------------------------------

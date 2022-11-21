@@ -25,11 +25,11 @@ matches:
     label: PATH
 
   - trigger: "!dontask"
-    replace: "<https://dontasktoask.com/"
+    replace: "<https://dontasktoask.com/>"
   - trigger: "!nohello"
-    replace: "https://nohello.net/en/"
+    replace: "<https://nohello.net/en/>"
   - trigger: "!xy"
-    replace: "https://xyproblem.info/"
+    replace: "<https://xyproblem.info/>"
 
   - trigger: '!bug'
     replace: >-

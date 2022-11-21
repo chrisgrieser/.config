@@ -163,15 +163,14 @@ function nuke {
 	LOCAL_REPO=$(pwd)
 	cd ..
 
-	rm -rf "$LOCAL_REPO"
+	rm -rvf "$LOCAL_REPO"
 	echo "---"
 	echo "Local repo removed."
 	echo
 	echo "Downloading repo again from remote…"
 	echo "---"
 
-	git clone "$SSH_REMOTE"
-	cd "$LOCAL_REPO" || return 1
+	git clone "$SSH_REMOTE" "$LOCAL_REPO" && cd "$LOCAL_REPO"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
