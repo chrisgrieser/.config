@@ -146,7 +146,7 @@ require("gitsigns").setup {
 
 require("fidget").setup {
 	-- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
-	text = { spinner = "meter" }
+	text = {spinner = "meter"}
 }
 
 local function recordingStatus()
@@ -271,13 +271,17 @@ require("lualine").setup {
 	winbar = {
 		lualine_b = {{
 			navic.get_location,
-			cond = navic.is_available,
+			-- breadcrumbs not useful in css, but winbar needed for recordings
+			cond = function() return navic.is_available() and bo.filetype ~= "css" end,
 			section_separators = winSecSeparators,
 		}},
-		lualine_c = {{dummy}},
+		lualine_c = {{
+			dummy,
+			cond = function() return bo.filetype ~= "css" end,
+		}},
 		lualine_z = {
-			{recordingStatus},
-			{debuggerStatus, section_separators = winSecSeparators,}
+			{debuggerStatus, section_separators = winSecSeparators},
+			{recordingStatus, section_separators = winSecSeparators},
 		},
 	},
 	options = {
