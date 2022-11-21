@@ -224,6 +224,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>80C655AE-CDC9-4254-AE20-335E3083D62C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>36047F87-94C5-4EB8-827A-E32140BA800D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>8CFA9B58-9BCF-450F-9BE4-6B459FE7534E</key>
 		<array>
 			<dict>
@@ -757,6 +770,40 @@ open $(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | c
 			<string>EA54F14F-CC68-4A7B-A74C-A4BD9B9E7C76</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>test</string>
+				<key>subtext</key>
+				<string>test</string>
+				<key>text</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>80C655AE-CDC9-4254-AE20-335E3083D62C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string>~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development/.obsidian/plugins/new-tab-default-page</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>36047F87-94C5-4EB8-827A-E32140BA800D</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1522,6 +1569,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>36047F87-94C5-4EB8-827A-E32140BA800D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>585</real>
+			<key>ypos</key>
+			<real>300</real>
+		</dict>
 		<key>478C272A-AA90-4C7C-B103-6A3BC82916D4</key>
 		<dict>
 			<key>colorindex</key>
@@ -1626,6 +1682,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>850</real>
 			<key>ypos</key>
 			<real>545</real>
+		</dict>
+		<key>80C655AE-CDC9-4254-AE20-335E3083D62C</key>
+		<dict>
+			<key>xpos</key>
+			<real>415</real>
+			<key>ypos</key>
+			<real>290</real>
 		</dict>
 		<key>8CFA9B58-9BCF-450F-9BE4-6B459FE7534E</key>
 		<dict>
