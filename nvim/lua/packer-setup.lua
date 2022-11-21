@@ -1,6 +1,6 @@
 -- INFO: file should *not* be named "packer.lua", since `require("packer")`
 -- would then be ambigious
-
+local borderStyle = "rounded"
 --------------------------------------------------------------------------------
 
 -- auto-install packer if not installed https://github.com/wbthomason/packer.nvim#bootstrapping

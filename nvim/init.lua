@@ -3,7 +3,6 @@ vim.opt.runtimepath:append [[, "~/.config/nvim/lua"]]
 
 --------------------------------------------------------------------------------
 
-borderStyle = "rounded" -- must be 0th https://neovim.io/doc/user/api.html#nvim_open_win()
 require("packer-setup") -- must be 1st
 require("impatient") -- must be 2nd (plugin, improve startuptime)
 require("utils") -- must be 3rd

@@ -312,8 +312,10 @@ function M.quicklog(opts)
 		lnStr = "L" .. tostring(lineNo(".")) .. " "
 	end
 
-	if ft == "lua" or ft == "python" then
+	if ft == "lua" then
 		logStatement = 'print("' .. lnStr .. varname .. ': ", ' .. varname .. ")"
+	elseif ft == "python" then
+		logStatement = 'print("' .. lnStr .. varname .. ': " + ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then
 		logStatement = 'console.log("' .. lnStr .. varname .. ': " + ' .. varname .. ");"
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" then

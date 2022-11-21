@@ -48,7 +48,7 @@ opt.scrolloff = 12
 opt.sidescrolloff = 20
 opt.textwidth = 80 -- used by `gq`
 opt.wrap = false
-opt.colorcolumn = {"+1", "+17"} -- relative to textwidth
+opt.colorcolumn = {"+1", "+18"} -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's

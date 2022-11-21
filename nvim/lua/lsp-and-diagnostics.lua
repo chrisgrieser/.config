@@ -17,15 +17,7 @@ local lsp_servers = {
 
 --------------------------------------------------------------------------------
 -- SIGN-COLUMN ICONS
--- ▪︎▴• ▲  
--- https://www.reddit.com/r/neovim/comments/qpymbb/lsp_sign_in_sign_columngutter/
-local signs = {
-	Error = "",
-	Warn = "▲",
-	Info = "",
-	Hint = "",
-}
-for type, icon in pairs(signs) do
+for type, icon in pairs(signIcons) do
 	local hl = "DiagnosticSign" .. type
 	fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl}) ---@diagnostic disable-line: redundant-parameter, param-type-mismatch
 end
