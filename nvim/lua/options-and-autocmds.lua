@@ -84,7 +84,7 @@ autocmd("BufReadPost", {
 })
 
 -- clipboard & yanking
-opt.clipboard = "unnamedplus"
+-- opt.clipboard = "unnamedplus"
 augroup("highlightedYank", {})
 autocmd("TextYankPost", {
 	group = "highlightedYank",
