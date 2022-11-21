@@ -1,5 +1,6 @@
 local M = {}
 local myrepos = "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Repos/"
+
 function M.PluginList(use)
 
 	-- Package Management
@@ -126,8 +127,8 @@ function M.PluginList(use)
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
 	use {"hail2u/vim-css3-syntax", ft = "css"} -- better syntax highlighting (until treesitter css looks decent…)
-	use {"iamcco/markdown-preview.nvim", run = "cd app && npm install", ft = {"markdown"}}
-	use {"Aadv1k/gdoc.vim", run = "./install.py"}
+	use {"iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && npm install" }
+	use {"Aadv1k/gdoc.vim", ft = "markdown", run = "./install.py"}
 
 end
 
