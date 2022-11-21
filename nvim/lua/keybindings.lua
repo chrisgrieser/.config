@@ -450,15 +450,15 @@ keymap("n", "gf", telescope.live_grep) -- search in [f]iles
 keymap("n", "gR", telescope.resume) -- search in [f]iles
 
 -- File Operations (ghengis-nvim)
--- local ghengis = require("nvim-ghengis")
--- keymap("", "<C-p>", ghengis.copyFilepath)
--- keymap("", "<C-n>", ghengis.copyFilename)
--- keymap("", "<leader>x", ghengis.chmodx)
--- keymap("", "<C-r>", ghengis.renameFile)
--- keymap("", "<C-d>", ghengis.duplicateFile)
--- keymap("", "<D-BS>", ghengis.trashFile)
--- keymap({"n", "x", "i"}, "<D-n>", ghengis.createNewFile)
--- keymap("x", "<leader>X", ghengis.moveSelectionToNewFile)
+local ghengis = require("ghengis")
+keymap("", "<C-p>", ghengis.copyFilepath)
+keymap("", "<C-n>", ghengis.copyFilename)
+keymap("", "<leader>x", ghengis.chmodx)
+keymap("", "<C-r>", ghengis.renameFile)
+keymap("", "<C-d>", ghengis.duplicateFile)
+keymap("", "<D-BS>", ghengis.trashFile)
+keymap({"n", "x", "i"}, "<D-n>", ghengis.createNewFile)
+keymap("x", "<leader>X", ghengis.moveSelectionToNewFile)
 
 -- Git Operations
 keymap("n", "<C-g>", function()
