@@ -14,7 +14,7 @@ const pathsToSearch = [
 	$.getenv("working_folder").replace(/^~/, home),
 	$.getenv("dotfile_folder").replace(/^~/, home),
 	home + "/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development",
-	home + "/Library/Mobile Documents/com~apple~CloudDocs/shimmering-focus",
+	home + "/Library/Mobile Documents/com~apple~CloudDocs/repos",
 ];
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -40,7 +40,7 @@ function readFile (path) {
 	return ObjC.unwrap(str);
 }
 
-// ---------------------------------------------
+//──────────────────────────────────────────────────────────────────────────────
 
 const jsonArray = [];
 let pathString = "";
@@ -56,6 +56,7 @@ repoArray.forEach(localRepoFilePath => {
 	let iconpath;
 	const isAlfredWorkflow = finderApp.exists(Path(localRepoFilePath + "/info.plist"));
 	const isObsiPlugin = finderApp.exists(Path(localRepoFilePath + "/manifest.json"));
+	const isNeovimPlugin = finderApp.exists(Path(localRepoFilePath + "/lua"));
 
 	// Dirty Repo
 	let dirtyIcon = "";
@@ -73,6 +74,10 @@ repoArray.forEach(localRepoFilePath => {
 		const manifest = readFile(localRepoFilePath + "/manifest.json");
 		repoName = JSON.parse(manifest).name;
 		iconpath = "obsidian.png";
+
+	} else if (isNeovimPlugin) {
+		repoName = localRepoFilePath.replace(/.*\/(.*)\//, "$1");
+		iconpath = "neovim.png";
 	}
 
 	// Other Repos
