@@ -19,6 +19,7 @@
 		keystroke "v" using {command down}
 		delay 0.05
 		key code 36 -- return
+		delay 0.01
 		if q starts with "cd " then keystroke "l" using {control down} -- clear screen
 	end tell
 
