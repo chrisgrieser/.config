@@ -1,5 +1,6 @@
-# Configs https://docs.brew.sh/Manpage#environment
-#-------------------------------------------------------------------------------
+# https://docs.brew.sh/Manpage#environment
+
+#───────────────────────────────────────────────────────────────────────────────
 
 export HOMEBREW_NO_AUTO_UPDATE=0
 export HOMEBREW_AUTO_UPDATE_SECS=259200 # 3 days before updating on `brew install`
@@ -21,7 +22,7 @@ alias bi='brew install'
 alias br='brew reinstall'
 alias bu='brew uninstall --zap'
 
-# -----------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
 function print-section () {
 	echo
@@ -73,6 +74,7 @@ function update (){
 	pip3 install --upgrade "pdfannots"
 	pip3 install --upgrade "pdfminer.six"
 	pip3 install --upgrade "alacritty-colorscheme"
+	pip3 install --upgrade "pynvim"
 
 	print-section "DUMP INSTALLS"
 	dump

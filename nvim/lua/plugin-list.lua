@@ -59,7 +59,7 @@ function M.PluginList(use)
 		"hrsh7th/cmp-cmdline",
 		"dmitmel/cmp-cmdline-history",
 		"hrsh7th/cmp-emoji",
-		myrepos.."cmp-nerdfont",
+		myrepos .. "cmp-nerdfont",
 		"petertriho/cmp-git", -- git issues, mentions & commits
 		"hrsh7th/cmp-nvim-lsp", -- lsp
 		"L3MON4D3/LuaSnip", -- snippet engine
@@ -79,7 +79,7 @@ function M.PluginList(use)
 	use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter
 
 	-- File History & File Switching & File Operation
-	use {myrepos.."nvim-ghengis", requires = "stevearc/dressing.nvim"}
+	use {myrepos .. "nvim-ghengis", requires = "stevearc/dressing.nvim"}
 	use {"nvim-telescope/telescope.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons"
@@ -126,10 +126,9 @@ function M.PluginList(use)
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
 	use {"hail2u/vim-css3-syntax", ft = "css"} -- better syntax highlighting (until treesitter css looks decent…)
-	use {"iamcco/markdown-preview.nvim",
-		run = "cd app && npm install",
-		ft = {"markdown"},
-	}
+	use {"iamcco/markdown-preview.nvim", run = "cd app && npm install", ft = {"markdown"}}
+	use {"Aadv1k/gdoc.vim", run = "./install.py"}
+
 end
 
 return M

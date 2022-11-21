@@ -87,7 +87,7 @@ require("mason-lspconfig").setup {
 require("lsp_signature").setup {
 	floating_window = false,
 	hint_prefix = "﬍ ",
-	hint_scheme = "GhostText", -- highlight group
+	hint_scheme = "NonText", -- highlight group
 }
 
 require("lsp-inlayhints").setup {
@@ -105,7 +105,7 @@ require("lsp-inlayhints").setup {
 			remove_colon_end = true,
 		},
 		only_current_line = true,
-		highlight = "GhostText", -- highlight group
+		highlight = "NonText", -- highlight group
 	},
 }
 
