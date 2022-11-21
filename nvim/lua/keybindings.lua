@@ -514,7 +514,7 @@ keymap("n", "<leader>r", function()
 			cmd [[write! | source %]]
 			if filename:find("plugin%-list") then
 				require("packer").compile()
-				vim.notify(" Plugins reloaded and re-compiled. ")
+				vim.notify(" 'plugins-list.lua' reloaded and re-compiled. ")
 			else
 				vim.notify(" " .. fn.expand("%") .. " reloaded. ")
 			end

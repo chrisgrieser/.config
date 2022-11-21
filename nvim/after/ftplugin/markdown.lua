@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 require("utils")
 local opts = {buffer = true, silent = true}
 --------------------------------------------------------------------------------
@@ -52,6 +53,10 @@ keymap({"n", "x"}, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], opts)
 keymap({"n", "x"}, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], opts)
 
 --------------------------------------------------------------------------------
+
+-- cmd+r: Markdown Preview
+keymap("n", "<D-r>", "<Plug>MarkdownPreviewToggle", opts)
+
 
 -- cmd+k: markdown link
 keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", opts)
