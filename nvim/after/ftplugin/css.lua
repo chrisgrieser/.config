@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 require("utils")
 local opts = {buffer = true, silent = true}
 --------------------------------------------------------------------------------
@@ -37,9 +38,6 @@ keymap({"n", "x"}, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 keymap("n", "cv", "^Ewct;", opts) -- change [v]alue key
 keymap("n", "<leader>c", "mzlEF.yEEp`z", opts) -- double [c]lass under cursor
 keymap("n", "<leader>C", "lF.d/[.\\s]<CR>:nohl<CR>", opts) -- delete [c]lass under cursor
-
--- prefix "." and join the last paste. Useful when copypasting from the dev tools
-keymap("n", "<leader>.", "mz`[v`]: s/^\\| /./g<CR>:nohl<CR>`zl", opts)
 
 -- smart line duplicate (mnemonic: [R]eplicate)
 -- switches top/bottom & moves to value
