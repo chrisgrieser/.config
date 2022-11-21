@@ -78,7 +78,7 @@ function M.PluginList(use)
 	use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter
 
 	-- File History & File Switching & File Operation
-	use {"~/.local/share/nvim/nvim-ghengis", requires = "stevearc/dressing.nvim"}
+	use {"~//Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Repos/nvim-ghengis", requires = "stevearc/dressing.nvim"}
 	use {"nvim-telescope/telescope.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons"

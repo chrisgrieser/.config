@@ -23,6 +23,15 @@ rules:
       - type: basic
         from:
           key_code: caps_lock
+        to:
+          - key_code: escape  # Capslock to Esc
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^dev\.warp\.Warp-Stable$
+      - type: basic
+        from:
+          key_code: caps_lock
         to_if_alone:
           - key_code: escape  # Capslock to Esc
         to:
@@ -35,6 +44,9 @@ rules:
           - type: variable_unless
             name: LEADER_ACTIVE
             value: true
+          - type: frontmost_application_unless
+            bundle_identifiers:
+              - ^dev\.warp\.Warp-Stable$
       # Capslock/Shift to Hyper/Shift
       - type: basic
         from:
