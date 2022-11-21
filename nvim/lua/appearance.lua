@@ -25,11 +25,10 @@ require("scrollbar").setup {
 	marks = {
 		GitChange = {text = "┃"},
 		GitAdd = {text = "┃"},
-		GitDelete = {text = "┃"},
-		Error = {text = {"-"}},
-		Warn = {text = {"-"}},
-		Info = {text = {"-"}},
-		Hint = {text = {"-"}},
+		Error = {text = {signIcons.Error}},
+		Warn = {text = {signIcons.Warn}},
+		Info = {text = {signIcons.Info}},
+		Hint = {text = {signIcons.Hint}},
 		Cursor = {highlight = "Comment"}, -- less dark
 		Misc = {
 			priority = 1,
@@ -111,14 +110,14 @@ print = function(...)
 	for i = 1, #_ do
 		table.insert(print_safe_args, tostring(_[i]))
 	end
-	vim.notify(table.concat(print_safe_args, " "), "info") ---@diagnostic disable-line: param-type-mismatch
+	vim.notify(table.concat(print_safe_args, " "), vim.log.levels.INFO) 
 end
 
 --------------------------------------------------------------------------------
 -- DRESSING
 require("dressing").setup {
 	input = {
-		border = borderStyle, ---@diagnostic disable-line: undefined-global
+		border = borderStyle, 
 		winblend = 4, -- % transparency
 		relative = "win",
 		insert_only = false,
@@ -127,7 +126,7 @@ require("dressing").setup {
 		backend = {"builtin", "nui"}, -- Priority list of preferred vim.select implementations
 		trim_prompt = true, -- Trim trailing `:` from prompt
 		builtin = {
-			border = borderStyle, ---@diagnostic disable-line: undefined-global
+			border = borderStyle, 
 			relative = "cursor",
 			winblend = 4,
 			max_width = 80,
@@ -141,7 +140,7 @@ require("dressing").setup {
 -- GUTTER
 require("gitsigns").setup {
 	max_file_length = 10000,
-	preview_config = {border = borderStyle}, ---@diagnostic disable-line: undefined-global
+	preview_config = {border = borderStyle}, 
 }
 
 --------------------------------------------------------------------------------
@@ -149,9 +148,6 @@ require("gitsigns").setup {
 require("fidget").setup {
 	-- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
 	text = {spinner = "dots"},
-	fmt = {
-		leftpad = false,
-	},
 	sources = {
 		["null-ls"] = {ignore = true}
 	}

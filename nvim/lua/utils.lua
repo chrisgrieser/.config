@@ -15,11 +15,6 @@ keymap = vim.keymap.set
 
 qol = require("quality-of-life")
 telescope = require("telescope.builtin")
---------------------------------------------------------------------------------
-
-dotfilesFolder = home.."/.config"
-
---------------------------------------------------------------------------------
 
 ---equivalent to `:setlocal option=value`
 ---@param option string
@@ -49,6 +44,16 @@ function isGui()
 end
 
 --------------------------------------------------------------------------------
+
+-- CONFIGS SHARED SCROSS MULTIPLE FILES
+borderStyle = "rounded" -- https://neovim.io/doc/user/api.html#nvim_open_win()
+dotfilesFolder = home.."/.config"
+signIcons = {
+	Error = "",
+	Warn = "▲",
+	Info = "",
+	Hint = "",
+}
 
 commonFiletypes = {
 	"lua",
