@@ -29,3 +29,7 @@ function g.Undotree_CustomMap()
 	keymap("n", "K", "7k", opts)
 	setlocal("list", false)
 end
+
+--------------------------------------------------------------------------------
+
+g.path_to_creds = "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/gdocs-vim-credentials.json"
