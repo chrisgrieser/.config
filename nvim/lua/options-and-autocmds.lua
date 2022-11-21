@@ -37,9 +37,6 @@ opt.virtualedit = "block" -- select whitespace for proper rectangles in visual b
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
 
--- Mouse
-opt.mousemodel = "extend" -- deacvitate context menu, right mouse instead expands selection
-
 -- Window Managers/espanso: set title
 opt.title = true
 opt.titlelen = 0 -- do not shorten title
@@ -48,7 +45,7 @@ opt.titlestring = "%{expand(\"%:p\")} [%{mode()}]"
 -- Editor
 opt.cursorline = true
 opt.scrolloff = 12
-opt.sidescrolloff = 17
+opt.sidescrolloff = 20
 opt.textwidth = 80 -- used by `gq`
 opt.wrap = false
 opt.colorcolumn = {"+1", "+16"} -- relative to textwidth
@@ -104,6 +101,7 @@ opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
 opt.updatetime = 200 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 opt.autochdir = true -- always current directory
+opt.confirm = true -- always current directory
 
 augroup("autosave", {})
 autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {

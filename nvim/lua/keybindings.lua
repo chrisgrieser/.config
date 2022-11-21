@@ -1,4 +1,6 @@
 require("utils")
+local warn = vim.log.levels.WARN
+local error = vim.log.levels.ERROR
 --------------------------------------------------------------------------------
 -- META
 g.mapleader = ","
@@ -166,7 +168,7 @@ require("nvim-surround").setup {
 				elseif ft == "js" or ft == "ts" or ft == "bash" or ft == "zsh" then
 					patt = "^(.-function.-%b() ?{)().*(})()$"
 				else
-					vim.notify("No function-surround defined for " .. ft)
+					vim.notify("No function-surround defined for " .. ft, warn)
 					patt = "()()()()"
 				end
 				return require("nvim-surround.config").get_selections {
@@ -187,7 +189,7 @@ require("nvim-surround").setup {
 						{"", "}"},
 					}
 				end
-				vim.notify("No function-surround defined for " .. ft)
+				vim.notify("No function-surround defined for " .. ft, warn)
 				return {{""}, {""}}
 			end,
 		},
@@ -529,7 +531,7 @@ keymap("n", "<leader>r", function()
 		cmd [[AppleScriptRun]]
 
 	else
-		vim.notify(" No build system set.", warn) ---@diagnostic disable-line: param-type-mismatch
+		vim.notify(" No build system set.", error) 
 
 	end
 end)

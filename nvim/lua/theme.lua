@@ -44,15 +44,12 @@ local function customHighlights()
 	-- bugfix for https://github.com/neovim/neovim/issues/20456
 	cmd [[highlight! def link luaParenError NormalFloat]]
 
-	-- Figet
-	cmd [[highlight! link FidgetTitle lualine_a_normal]]
-	cmd [[highlight! link FidgetTask lualine_a_normal]]
 end
 
 customHighlights() -- to apply on default
 
 function themeModifications()
-	local mode = api.nvim_get_option("background")
+	local mode = opt.background:get()
 	local theme = g.colors_name
 	if theme == "tokyonight" then
 		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
@@ -79,14 +76,14 @@ local auto_dark_mode = require("auto-dark-mode")
 auto_dark_mode.setup {
 	update_interval = 2500, ---@diagnostic disable-line: assign-type-mismatch
 	set_dark_mode = function()
-		api.nvim_set_option("background", "dark")
+		vim.o.background = "dark"
 		cmd("colorscheme " .. darkTheme)
 		g.neovide_transparency = 0.97
 		themeModifications() -- for some reason, the ColorScheme is not triggered here, requiring the call here
 		customHighlights()
 	end,
 	set_light_mode = function()
-		api.nvim_set_option("background", "light")
+		vim.o.background = "light"
 		cmd("colorscheme " .. lightTheme)
 		g.neovide_transparency = 0.96
 		themeModifications()
