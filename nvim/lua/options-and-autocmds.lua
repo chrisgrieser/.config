@@ -48,7 +48,7 @@ opt.scrolloff = 12
 opt.sidescrolloff = 20
 opt.textwidth = 80 -- used by `gq`
 opt.wrap = false
-opt.colorcolumn = {"+1", "+16"} -- relative to textwidth
+opt.colorcolumn = {"+1", "+17"} -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
@@ -101,7 +101,7 @@ opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
 opt.updatetime = 200 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 opt.autochdir = true -- always current directory
-opt.confirm = true -- always current directory
+opt.confirm = true
 
 augroup("autosave", {})
 autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
@@ -126,11 +126,11 @@ autocmd("BufWritePre", {
 --------------------------------------------------------------------------------
 
 -- status bar & cmdline
-opt.showcmd = true -- keychords pressed
-opt.showmode = false -- don't show "-- Insert --", since lualine does it already
-opt.shortmess:append("S") -- do not show search count, since lualine does it already
+-- opt.showcmd = true -- keychords pressed
+-- opt.showmode = false -- don't show "-- Insert --", since lualine does it already
+-- opt.shortmess:append("S") -- do not show search count, since lualine does it already
+-- opt.laststatus = 3 -- = global status line
 opt.cmdheight = 0 -- effectively also redundant with all of the above
-opt.laststatus = 3 -- = global status line
 opt.history = 250 -- do not save too much history to reduce noise for command line history search
 
 --------------------------------------------------------------------------------
