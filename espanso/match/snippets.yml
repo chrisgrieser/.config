@@ -25,7 +25,7 @@ matches:
     label: PATH
 
   - trigger: "!dontask"
-    replace: "https://dontasktoask.com/"
+    replace: "<https://dontasktoask.com/"
   - trigger: "!nohello"
     replace: "https://nohello.net/en/"
   - trigger: "!xy"

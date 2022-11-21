@@ -20,7 +20,7 @@
 		delay 0.05
 		key code 36 -- return
 		delay 0.01
-		if q starts with "cd " then keystroke "l" using {control down} -- clear screen
+		if q starts with "cd " then keystroke "k" using {command down} -- clear screen
 	end tell
 
 	delay 0.05

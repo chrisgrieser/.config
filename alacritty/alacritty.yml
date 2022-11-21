@@ -176,13 +176,20 @@ key_bindings:
       args:
         - -c
         - open .
+  # Clear workaround since the default config does not work
+  # https://github.com/alacritty/alacritty/blob/master/alacritty.yml#L852
   - key: K
+    mode: ~Vi|~Search
     mods: Command
-    command:
-      program: sh
-      args:
-        - -c
-        - open .
+    chars: "clear\n"
+  - key: K
+    mode: ~Vi|~Search
+    mods: Command
+    action: ClearHistory
+  - key: K
+    mode: ~Vi|~Search
+    mods: Command
+    action: ClearLogNotice
 
   # fix various special characters for the German keyboard
   - key: 28
