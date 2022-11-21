@@ -115,7 +115,7 @@ end
 -- DRESSING
 require("dressing").setup {
 	input = {
-		border = borderStyle,
+		border = borderStyle, ---@diagnostic disable-line: undefined-global
 		winblend = 4, -- % transparency
 		relative = "win",
 		insert_only = false,
@@ -124,7 +124,7 @@ require("dressing").setup {
 		backend = {"builtin", "nui"}, -- Priority list of preferred vim.select implementations
 		trim_prompt = true, -- Trim trailing `:` from prompt
 		builtin = {
-			border = borderStyle,
+			border = borderStyle,---@diagnostic disable-line: undefined-global
 			relative = "cursor",
 			winblend = 4,
 			max_width = 80,
@@ -138,16 +138,18 @@ require("dressing").setup {
 -- GUTTER
 require("gitsigns").setup {
 	max_file_length = 10000,
-	preview_config = {border = borderStyle},
+	preview_config = {border = borderStyle},---@diagnostic disable-line: undefined-global
+}
+
+--------------------------------------------------------------------------------
+-- FIDGET
+require("fidget").setup {
+	-- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
+	text = {spinner = "dots"}
 }
 
 --------------------------------------------------------------------------------
 -- STATUS LINE (LUALINE)
-
-require("fidget").setup {
-	-- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
-	text = {spinner = "meter"}
-}
 
 local function recordingStatus()
 	if g.isRecording then return " REC"
