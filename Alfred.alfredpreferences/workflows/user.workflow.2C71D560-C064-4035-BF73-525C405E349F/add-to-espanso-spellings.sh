@@ -1,13 +1,13 @@
 #!/usr/bin/env zsh
 
-spell_config="$HOME/dotfiles/espanso/match/spelling.yml"
-wc -l "$spell_config"
+spell_config="${spell_config/#\~/$HOME}"
 
 wrong=$(echo "$*" | cut -d" " -f1)
 correct=$(echo "$*" | cut -d" " -f2)
 
 { echo "  - trigger: $wrong" ;
   echo "    replace: $correct" ;
+  echo "    propagate_casing: true" ;
   echo "    word: true";        } >> "$spell_config"
 
 LINE_NO=$(wc -l "$spell_config" | tr -s " " | cut -d" " -f2)

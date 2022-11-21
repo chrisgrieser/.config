@@ -173,9 +173,15 @@ matches:
   - trigger: dei
     replace: die
     word: true
+    propagate_case: true
   - trigger: btu
     replace: but
     word: true
+    propagate_case: true
   - trigger: "e.g. "
     replace: "e.g., "
     word: true
+  - trigger: thansk
+    replace: thanks
+    word: true
+    propagate_case: true

@@ -110,14 +110,14 @@ print = function(...)
 	for i = 1, #_ do
 		table.insert(print_safe_args, tostring(_[i]))
 	end
-	vim.notify(table.concat(print_safe_args, " "), vim.log.levels.INFO) 
+	vim.notify(table.concat(print_safe_args, " "), vim.log.levels.INFO)
 end
 
 --------------------------------------------------------------------------------
 -- DRESSING
 require("dressing").setup {
 	input = {
-		border = borderStyle, 
+		border = borderStyle,
 		winblend = 4, -- % transparency
 		relative = "win",
 		insert_only = false,
@@ -126,7 +126,7 @@ require("dressing").setup {
 		backend = {"builtin", "nui"}, -- Priority list of preferred vim.select implementations
 		trim_prompt = true, -- Trim trailing `:` from prompt
 		builtin = {
-			border = borderStyle, 
+			border = borderStyle,
 			relative = "cursor",
 			winblend = 4,
 			max_width = 80,
@@ -140,7 +140,7 @@ require("dressing").setup {
 -- GUTTER
 require("gitsigns").setup {
 	max_file_length = 10000,
-	preview_config = {border = borderStyle}, 
+	preview_config = {border = borderStyle},
 }
 
 --------------------------------------------------------------------------------
@@ -233,17 +233,6 @@ function isStandardBranch() -- not checking for branch here, since running the c
 	return notMainBranch and validFiletype
 end
 
-local navic = require("nvim-navic")
-navic.setup {
-	icons = {
-		Object = "ﴯ ",
-	},
-	separator = "  ",
-	depth_limit = 10,
-	depth_limit_indicator = "…",
-	highlight = false,
-}
-
 function debuggerStatus()
 	local dapStatus = require("dap").status()
 	if dapStatus ~= "" then
@@ -255,6 +244,25 @@ end
 
 -- dummy to ensure no glitches when winbar disappears
 local function dummy() return " " end
+
+-- NAVIC
+local navic = require("nvim-navic")
+navic.setup {
+	icons = {
+		Object = "ﴯ ",
+	},
+	separator = "  ",
+	depth_limit = 10,
+	depth_limit_indicator = "…",
+	highlight = false,
+}
+
+local function showBreadcrumbs()
+	local noBreadcrumbsFt = {"css", "bash", "sh", "zsh"}
+	return not(vim.tbl_contains(noBreadcrumbsFt, bo.filetype))
+end
+
+--------------------------------------------------------------------------------
 
 require("lualine").setup {
 	sections = {
@@ -279,12 +287,12 @@ require("lualine").setup {
 		lualine_b = {{
 			navic.get_location,
 			-- breadcrumbs not useful in css, but winbar needed for recordings
-			cond = function() return navic.is_available() and bo.filetype ~= "css" end,
+			cond = function() return navic.is_available() and showBreadcrumbs() end,
 			section_separators = winSecSeparators,
 		}},
 		lualine_c = {{
 			dummy,
-			cond = function() return bo.filetype ~= "css" end,
+			cond = showBreadcrumbs,
 		}},
 		lualine_z = {
 			{debuggerStatus, section_separators = winSecSeparators},
