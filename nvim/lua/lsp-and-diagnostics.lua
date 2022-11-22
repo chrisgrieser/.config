@@ -136,7 +136,7 @@ local function on_attach(client, bufnr)
 	keymap("n", "gd", telescope.lsp_definitions, bufopts)
 	keymap("n", "gD", telescope.lsp_references, bufopts)
 	keymap("n", "gy", telescope.lsp_type_definitions, bufopts)
-	keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts)
+	keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts) -- overrides treesitter-refactor's rename
 	keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)
 	keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
@@ -164,7 +164,7 @@ keymap("n", "<C-b>", function()
 		fn.setreg("+", breadcrumbs)
 		vim.notify(" COPIED\n " .. breadcrumbs .. " ")
 	else
-		vim.notify("No Breadcrumbs available.")
+		vim.notify(" No Breadcrumbs available. ", vim.log.levels.WARN)
 	end
 end)
 
@@ -172,14 +172,9 @@ end)
 --------------------------------------------------------------------------------
 -- Add borders to various lsp windows
 require("lspconfig.ui.windows").default_options.border = borderStyle
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = borderStyle})
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = borderStyle})
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-	vim.lsp.handlers.hover, {border = borderStyle}
-)
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-	vim.lsp.handlers.signature_help, {border = borderStyle}
-)
 --------------------------------------------------------------------------------
 -- LSP-SERVER-SPECIFIC SETUP
 

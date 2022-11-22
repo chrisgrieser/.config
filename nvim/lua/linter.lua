@@ -8,7 +8,6 @@ local lintersAndFormatters = {
 	"shellcheck",
 	"yamllint",
 	"markdownlint",
-	"proselint",
 	"write_good",
 	-- stylelint not available :(
 }
@@ -42,7 +41,6 @@ null_ls.setup {
 			extra_args = {"--quiet"}, -- only errors, no warnings
 		},
 
-		builtins.code_actions.eslint_d, -- no formatting used, since ts lsp does it
 		builtins.diagnostics.eslint_d.with {
 			-- extra_args = {"--quiet"}, -- only errors, no warnings
 		},
@@ -54,7 +52,6 @@ null_ls.setup {
 		builtins.diagnostics.write_good.with{
 			extra_args = {"--no-passive", "--no-adverb"}, -- disable those rules
 		},
-		builtins.diagnostics.proselint,
 		builtins.diagnostics.markdownlint.with {
 			extra_args = {"--disable=trailing-spaces"}, -- vim already takes care of that
 		},
