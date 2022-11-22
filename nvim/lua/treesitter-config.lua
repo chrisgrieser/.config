@@ -87,22 +87,20 @@ require("nvim-treesitter.configs").setup {
 	},
 
 	refactor = {-- refactor plugin
-		highlight_definitions = {
-			enable = true,
-			clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
-		},
-		highlight_current_scope = {enable = false},
-		navigation = {
-			enable = true,
-			keymaps = {
-				goto_definition = "<Nop>",
-				list_definitions = "<Nop>",
-				list_definitions_toc = "<Nop>",
-				goto_next_usage = "g+",
-				goto_previous_usage = "g#",
-			},
+	highlight_definitions = {
+		enable = true,
+		clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
+	},
+	highlight_current_scope = {enable = false},
+	smart_rename = {
+		enable = true,
+		keymaps = {
+			-- overwritten by on lsp-attach with LSP's rename, but useful for
+			-- filetypes without proper lsp, e.g., bash
+			smart_rename = "<leader>R", 
 		},
 	},
+},
 }
 
 --------------------------------------------------------------------------------
@@ -113,4 +111,3 @@ autocmd("BufWinEnter", {
 	pattern = {"*.sh", "*.zsh"},
 	command = "silent! set filetype=sh",
 })
-

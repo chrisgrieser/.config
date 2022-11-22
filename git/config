@@ -13,7 +13,6 @@
 	editor = nvim
 	excludesfile = /Users/chrisgrieser/.config/git/gitignore_global
 	autocrlf = input
-   pager = delta
 [pager]
 	branch = false
 [pull]
@@ -22,11 +21,23 @@
 	showUntrackedFiles = all
 [advice]
 	detachedHead = false
+
+# Diff-related
+[core]
+	pager = delta
 [interactive]
-    diffFilter = delta --color-only
-[delta]
-   navigate = true
+	diffFilter = delta --color-only
 [merge]
-    conflictstyle = diff3
+	conflictstyle = diff3
 [diff]
-    colorMoved = default
+	colorMoved = default
+
+# Delta
+[delta]
+	side-by-side = true
+	navigate = true
+
+	# deactivate line numbers in side-by-side-view, but keep vertical separator
+	line-numbers-left-format = ""
+	line-numbers-right-format = "│ "
+
