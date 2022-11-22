@@ -47,6 +47,9 @@ require("telescope").setup {
 				preview_cutoff = 70,
 				prompt_position = "bottom",
 			},
+			cursor = {
+				preview_cutoff = 9001,
+			},
 		},
 	},
 
