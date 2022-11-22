@@ -5,7 +5,7 @@ require("telescope").setup {
 	defaults = {
 		selection_caret = "ﰉ ",
 		prompt_prefix = "❱ ",
-		path_display = { "tail" },
+		path_display = {"tail"},
 		file_ignore_patterns = {
 			"packer_compiled.lua",
 			"packer-snapshot_",
@@ -34,7 +34,7 @@ require("telescope").setup {
 				["?"] = "which_key",
 			},
 		},
-		layout_strategy = 'horizontal',
+		layout_strategy = "horizontal",
 		layout_config = {
 			horizontal = {
 				height = 0.95,
@@ -47,79 +47,79 @@ require("telescope").setup {
 				preview_cutoff = 70,
 				prompt_position = "bottom",
 			},
-			cursor = {
-				width = 0.3,
-				height = 0.3,
-			}
 		},
 	},
 
 	pickers = {
 		jumplist = {
-			prompt_prefix='ﴰ',
-			show_line=false,
-			trim_text=true,
+			prompt_prefix = "ﴰ",
+			show_line = false,
+			trim_text = true,
 			fname_width = 30,
 		},
 		lsp_references = {
-			prompt_prefix='⬅️',
-			show_line=false,
-			trim_text=true,
-			include_declaration=false,
+			prompt_prefix = "⬅️",
+			show_line = false,
+			trim_text = true,
+			include_declaration = false,
 			initial_mode = "normal",
 		},
 		lsp_definitions = {
-			prompt_prefix='➡️',
-			show_line=false,
-			trim_text=true,
+			prompt_prefix = "➡️",
+			show_line = false,
+			trim_text = true,
 			initial_mode = "normal",
 		},
 		lsp_document_symbols = {
-			prompt_prefix='* ',
+			prompt_prefix = "* ",
 			ignore_symbols = {"string", "boolean", "number"},
 		},
 		lsp_workspace_symbols = {
-			prompt_prefix='** ',
+			prompt_prefix = "** ",
 			ignore_symbols = {"string", "boolean", "number"},
 			fname_width = 17,
 		},
 		treesitter = {
-			prompt_prefix=' ',
+			prompt_prefix = " ",
 			show_line = false,
 		},
 		find_files = {
-			cwd='%:p:h',
-			prompt_prefix=' ',
+			cwd = "%:p:h",
+			prompt_prefix = " ",
 			hidden = true,
 			follow = true,
 		},
-		keymaps = { prompt_prefix='? ' },
-		oldfiles = { prompt_prefix=' ' },
-		highlights = { prompt_prefix=' ' },
+		keymaps = {prompt_prefix = "? "},
+		oldfiles = {prompt_prefix = " "},
+		highlights = {prompt_prefix = " "},
 		git_files = {
-			prompt_prefix=' ',
+			prompt_prefix = " ",
 			show_untracked = true,
 		},
 		git_bcommits = {
-			prompt_prefix=' ',
+			prompt_prefix = " ",
 		},
 		buffers = {
-			prompt_prefix='﬘ ',
+			prompt_prefix = "﬘ ",
 			ignore_current_buffer = true,
 			initial_mode = "normal",
 			sort_mru = true,
+			prompt_title = false,
+			results_title = false,
+			theme = "cursor",
+			layout_config = {cursor = {width = 0.4}},
 		},
 		live_grep = {
-			cwd='%:p:h',
-			disable_coordinates=true,
-			prompt_title='Search in Folder',
-			prompt_prefix=' ',
+			cwd = "%:p:h",
+			disable_coordinates = true,
+			prompt_title = "Search in Folder",
+			prompt_prefix = " ",
 		},
 		spell_suggest = {
 			initial_mode = "normal",
 			prompt_prefix = "暈",
 			theme = "cursor",
-			layout_config = { cursor = { width = 0.2 } },
+			layout_config = {cursor = {width = 0.2}},
 		},
 		builtin = {
 			prompt_prefix = "B",
@@ -127,10 +127,9 @@ require("telescope").setup {
 		},
 		colorscheme = {
 			enable_preview = true,
-			prompt_prefix = ' ',
-			results_title = '',
+			prompt_prefix = " ",
+			results_title = "",
 			layout_strategy = "bottom_pane",
 		},
 	},
 }
-
