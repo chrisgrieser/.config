@@ -8,6 +8,19 @@
 	<string>Tweaks</string>
 	<key>connections</key>
 	<dict>
+		<key>00C49F8A-E3D2-4751-A79C-A814251AFF30</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3427988B-35D1-4145-BB72-8CFF0445F63C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0374B2C9-BC32-4520-B8FC-826A3F26C196</key>
 		<array>
 			<dict>
@@ -308,35 +321,6 @@ last reboot | head -n 10 | cut -c 37-</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string>Menlo</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>FDF63B46-8376-4578-B3D1-6AF2ECC6ABFE</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -364,6 +348,35 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<string>08FF165B-3950-4760-9A48-5996704B1C65</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string>Menlo</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>FDF63B46-8376-4578-B3D1-6AF2ECC6ABFE</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -558,11 +571,62 @@ fi</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>8</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1835008</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>3427988B-35D1-4145-BB72-8CFF0445F63C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>invert</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Invert Display</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>00C49F8A-E3D2-4751-A79C-A814251AFF30</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>00C49F8A-E3D2-4751-A79C-A814251AFF30</key>
+		<dict>
+			<key>note</key>
+			<string>invert display</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>725</real>
+		</dict>
 		<key>0374B2C9-BC32-4520-B8FC-826A3F26C196</key>
 		<dict>
 			<key>colorindex</key>
@@ -587,6 +651,15 @@ fi</string>
 			<real>365</real>
 			<key>ypos</key>
 			<real>535</real>
+		</dict>
+		<key>3427988B-35D1-4145-BB72-8CFF0445F63C</key>
+		<dict>
+			<key>note</key>
+			<string>default hotkey in macOS settings</string>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>725</real>
 		</dict>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<dict>
