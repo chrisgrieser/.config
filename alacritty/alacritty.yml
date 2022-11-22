@@ -61,7 +61,7 @@ colors:
     cursor: '0xffffff'
 
 font:
-  size: 27
+  size: 26
 
   normal:
     family: JetBrainsMonoNL Nerd Font
