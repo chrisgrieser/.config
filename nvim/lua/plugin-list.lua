@@ -11,6 +11,7 @@ function M.PluginList(use)
 
 	-- Themes
 	use "folke/tokyonight.nvim"
+	use "NLKNguyen/papercolor-theme"
 	use "savq/melange" -- like Obsidian's Primary color scheme
 	-- use "EdenEast/nightfox.nvim"
 	-- use "rebelot/kanagawa.nvim"

@@ -317,7 +317,7 @@ nmap zR :unfoldall
 " nmap ö :hop
 
 " Lightspeed
-exmap lightspeed mrj-jump-to-link:activate-lightspeed-jump
+exmap lightspeed obcommand mrj-jump-to-link:activate-lightspeed-jump
 nmap ö :lightspeed
 
 " Link Jump (similar to Vimium's f)
