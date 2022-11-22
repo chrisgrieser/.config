@@ -1553,6 +1553,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>show diff</string>
 			<key>xpos</key>
 			<real>930</real>
 			<key>ypos</key>

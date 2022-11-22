@@ -13,12 +13,20 @@
 	editor = nvim
 	excludesfile = /Users/chrisgrieser/.config/git/gitignore_global
 	autocrlf = input
+   pager = delta
 [pager]
 	branch = false
 [pull]
-	rebase = true
+	rebase = false
 [status]
 	showUntrackedFiles = all
 [advice]
 	detachedHead = false
-
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+   navigate = true
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default
