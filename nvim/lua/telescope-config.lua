@@ -8,7 +8,7 @@ require("telescope").setup {
 		path_display = {"tail"},
 		file_ignore_patterns = {
 			"packer_compiled.lua",
-			"packer-snapshot_",
+			"packer%-snapshot_",
 			"%.DS_Store",
 			"%.git/",
 			"%.spl",
@@ -16,6 +16,7 @@ require("telescope").setup {
 			"%[No Name%]", -- new files / sometimes folders (netrw)
 			"/$", -- ignore folders (netrw)
 			"node_modules/",
+			"venv/",
 			"%.png",
 			"%.zip",
 			"%.pxd",
@@ -26,12 +27,11 @@ require("telescope").setup {
 		mappings = {
 			i = {
 				["<Esc>"] = "close", -- close w/ one esc
-				["?"] = "which_key",
+				["<D-w>"] = "delete_buffer",
 			},
 			n = {
-				q = "close",
 				["<Esc>"] = "close",
-				["?"] = "which_key",
+				["<D-w>"] = "delete_buffer",
 			},
 		},
 		layout_strategy = "horizontal",
@@ -89,7 +89,7 @@ require("telescope").setup {
 			hidden = true,
 			follow = true,
 		},
-		keymaps = {prompt_prefix = "? "},
+		keymaps = {prompt_prefix = " "},
 		oldfiles = {prompt_prefix = " "},
 		highlights = {prompt_prefix = " "},
 		git_files = {

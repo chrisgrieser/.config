@@ -224,6 +224,7 @@ keymap("n", "css", "cs_", {remap = true})
 
 -- COMMENTS (mnemonic: [q]uiet text)
 require("Comment").setup {
+	ignore = "^$",
 	toggler = {
 		line = "qq",
 		block = "<Nop>",
@@ -233,8 +234,8 @@ require("Comment").setup {
 		block = "<Nop>",
 	},
 	extra = {
-		above = "qO",
-		below = "qo",
+		above = "<Nop>",
+		below = "<Nop>",
 		eol = "Q",
 	},
 }
