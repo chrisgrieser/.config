@@ -22,6 +22,7 @@ require("indent_blankline").setup {
 -- SCROLLBAR
 require("scrollbar").setup {
 	handle = {highlight = "Folded"}, -- bit darker
+	handlers = {cursor = false},
 	marks = {
 		GitChange = {text = "┃"},
 		GitAdd = {text = "┃"},
@@ -79,7 +80,7 @@ require("scrollbar.handlers").register("marksmarks", function(bufnr)
 			markIsInThisFile = pathOfMark == curBufPath
 		end
 
-		if isLetter and not(excluded_marks:find(markName)) and markIsInThisFile then
+		if isLetter and not (excluded_marks:find(markName)) and markIsInThisFile then
 			table.insert(out, {
 				line = markObj.pos[2],
 				text = markName,
@@ -273,7 +274,7 @@ navic.setup {
 
 local function showBreadcrumbs()
 	local noBreadcrumbsFt = {"css", "bash", "sh", "zsh"}
-	return not(vim.tbl_contains(noBreadcrumbsFt, bo.filetype))
+	return not (vim.tbl_contains(noBreadcrumbsFt, bo.filetype))
 end
 
 --------------------------------------------------------------------------------
