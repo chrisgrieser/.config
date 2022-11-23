@@ -83,8 +83,8 @@ keymap("n", "gü", "/http.*<CR>:nohl<CR>") -- goto next
 keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
 
 -- Marks
-keymap("", "m", "`") -- Goto Mark (changing this also requires adapting `dq` and `cq` mappings)
-keymap("", "ä", "m") -- Set Mark
+keymap("", "m", "`M") -- Goto Mark M (changing this also requires adapting `dq` and `cq` mappings)
+keymap("", "ä", "mM") -- Set Mark M
 keymap("", "<C-m>", ":delmarks a-z<CR><C-e><C-y>") -- clear local marks, scrolling to update marks in scrollbar
 
 -- CLIPBOARD
@@ -244,11 +244,10 @@ require("Comment").setup {
 -- overlap in visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
--- INFO: Also need to use the remapped "ä", cannot use noremap since "COM" from
--- treesitter textobj is needed 🥴
-keymap("n", "dq", "äzdCOM`z", {remap = true}) -- requires remap for treesitter and comments.nvim mappings
+-- requires remap for treesitter and comments.nvim mappings
+keymap("n", "dq", ":normal!mz<CR>dCOM`z", {remap = true}) -- since remap is required, using mz via :normal, since m has been remapped
 keymap("n", "yq", "yCOM", {remap = true}) -- thanks to yank positon saving, doesnt need to be done here
-keymap("n", "cq", 'äz"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
+keymap("n", "cq", '"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
 
 -- TEXTOBJECT FOR ADJACENT COMMENTED LINES
 -- = qu for uncommenting

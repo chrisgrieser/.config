@@ -11,6 +11,10 @@ function isodate()
 	return os.date("!%Y-%m-%d")
 end
 
+for _,v in ipairs(t2) do
+   table.insert(t1, v)
+end
+
 ---@param str string
 ---@param separator string uses Lua Pattern, so requires escaping
 ---@return table

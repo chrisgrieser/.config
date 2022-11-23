@@ -60,7 +60,13 @@ end)
 -- marks in scrollbar
 require("scrollbar.handlers").register("marksmarks", function(bufnr)
 	local excluded_marks = "z"
-	local marks = fn.getmarklist(bufnr) ---@diagnostic disable-line: param-type-mismatch
+
+	local marks = fn.getmarklist(bufnr)
+	local marksGlobal = fn.getmarklist()
+	for _,v in ipairs(marksGlobal) do
+		table.insert(marks, v)
+	end
+
 	local out = {}
 	table.insert(out, {line = 0, text = ""}) -- ensure at least one dummy element in return list to prevent errors when there is no valid mark
 	for _, markObj in pairs(marks) do
