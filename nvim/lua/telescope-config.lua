@@ -49,6 +49,7 @@ require("telescope").setup {
 			},
 			cursor = {
 				preview_cutoff = 9001,
+				width = 0.4,
 			},
 		},
 	},
@@ -78,7 +79,7 @@ require("telescope").setup {
 			ignore_symbols = {"string", "boolean", "number"},
 		},
 		lsp_workspace_symbols = {
-			prompt_prefix = "** ",
+			prompt_prefix = "W* ",
 			ignore_symbols = {"string", "boolean", "number"},
 			fname_width = 17,
 		},
@@ -99,9 +100,6 @@ require("telescope").setup {
 			prompt_prefix = " ",
 			show_untracked = true,
 		},
-		git_bcommits = {
-			prompt_prefix = " ",
-		},
 		buffers = {
 			prompt_prefix = "﬘ ",
 			ignore_current_buffer = true,
@@ -110,7 +108,6 @@ require("telescope").setup {
 			prompt_title = false,
 			results_title = false,
 			theme = "cursor",
-			layout_config = {cursor = {width = 0.4}},
 		},
 		live_grep = {
 			cwd = "%:p:h",
@@ -122,7 +119,7 @@ require("telescope").setup {
 			initial_mode = "normal",
 			prompt_prefix = "暈",
 			theme = "cursor",
-			layout_config = {cursor = {width = 0.2}},
+			layout_config = {cursor = {width = 0.25}},
 		},
 		builtin = {
 			prompt_prefix = "B",
