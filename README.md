@@ -1,6 +1,6 @@
 # pseudometa's dotfiles
 
-## Configurations of Interest
+## Configurations of interest
 Most people tell me they find the following configurations useful:
 - [neovim config](/nvim)
 - [.zshrc setup](/zsh)
@@ -19,14 +19,13 @@ Most people tell me they find the following configurations useful:
 ## How this repository works
 - These files are symlinked into iCloud for synchronization.
 - `Hammerspoon` [is configured](hammerspoon/system-and-cron.lua) to run the script [git-dotfile-sync.sh](git-dotfile-sync.sh) every 15 minutes, or on wake and sleep. The Alfred keyword `shutdown` triggers the script before shutting down.
-- The git repos that are nested inside this dotfile repository (i.e. Alfred git repositories, because the nesting can't be avoided in this case) are gitignored and pulled individually.
+- The git repos that are nested inside this dotfile repository (that is Alfred git repositories, because the nesting cannot be avoided in this case) are gitignored and pulled individually.
 - [git-dotfile-backup.sh](git-dotfile-backup.sh) checks whether there have been any changes in dot files. If there are, it creates somewhat useful commit messages and runs the `git add commit pull push` sequence.
 - [.gitignore](.gitignore) contains a list of files not to backups for several reasons, for example redundancy, privacy, or because they are too big for a git repo.
 
 <!-- vale Google.FirstPerson = NO --> <!-- vale Microsoft.FirstPerson = NO -->
 ## About me
 In my day job, I am a sociologist studying the social mechanisms underlying the digital economy. For my PhD project, I investigate the governance of the app economy and how software ecosystems manage the tension between innovation and compatibility. If you are interested in this subject, feel free to get in touch.
-<!-- vale Microsoft.Rule = YES --> <!-- vale Google.Rule = YES -->
 
 __Profiles__
 - [Discord](https://discordapp.com/users/462774483044794368/)
