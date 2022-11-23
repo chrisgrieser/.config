@@ -499,6 +499,7 @@ keymap("n", "<leader>g", [[:w<CR>:!acp ""<Left>]]) -- shell function, enabled vi
 keymap("n", "<leader>r", function()
 	cmd [[update!]]
 	local filename = fn.expand("%:t")
+	local parentFolder = fn.expand("%:p:h")
 
 	if filename == "sketchybarrc" then
 		fn.system("brew services restart sketchybar")
@@ -510,7 +511,6 @@ keymap("n", "<leader>r", function()
 		fn.system("open '" .. pdfFilename .. "'")
 
 	elseif bo.filetype == "lua" then
-		local parentFolder = fn.expand("%:p:h")
 		if parentFolder:find("nvim") then
 			cmd [[write! | source %]]
 			if filename:find("plugin%-list") then
@@ -523,8 +523,12 @@ keymap("n", "<leader>r", function()
 			os.execute('open -g "hammerspoon://hs-reload"')
 		end
 
-	elseif bo.filetype == "yaml" and fn.getcwd():find(".config/karabiner") then
+	elseif bo.filetype == "yaml" and parentFolder:find(".config/karabiner") then
 		os.execute [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
+
+	elseif filename:find("vale%.ini") then
+		vim.notify(" Loading… ")
+		fn.system [[cd "$HOME" && vale sync && open "$HOME/.config/vale/styles"]]
 
 	elseif bo.filetype == "typescript" then
 		cmd [[!npm run build]] -- not via fn.system to get the output in the cmdline
@@ -533,7 +537,7 @@ keymap("n", "<leader>r", function()
 		cmd [[AppleScriptRun]]
 
 	else
-		vim.notify(" No build system set.", error)
+		vim.notify(" No build system set.", warn)
 
 	end
 end)
