@@ -337,13 +337,11 @@ local function draftsLaunchWake(appName, eventType, appObject)
 	local workspace = "Home"
 	if isAtOffice() then workspace = "Office" end
 
-	if (eventType == aw.launched) then
-		repeatFunc({0, 0.25, 0.5, 0.7}, function()
+	if (eventType == aw.launched or eventType == aw.activated) then
+		repeatFunc({0, 0.1, 0.3, 0.5}, function()
 			appObject:selectMenuItem {"View", "Hide Toolbar"}
 			appObject:selectMenuItem {"Workspaces", workspace}
 		end)
-	elseif (eventType == aw.activated) then
-		appObject:selectMenuItem {"View", "Hide Toolbar"}
 	end
 end
 
