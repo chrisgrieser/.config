@@ -264,10 +264,8 @@ end)
 wf_marta = wf.new("Marta")
 	:setOverrideFilter {allowRoles = "AXStandardWindow", rejectTitles = "^Preferences$"}
 	:subscribe(wf.windowCreated, function()
-		runDelayed(0.1,
-			function() -- close other tabs, needed because: https://github.com/marta-file-manager/marta-issues/issues/896
-				keystroke({"shift"}, "w", 1, app("Marta"))
-			end)
+		-- close other tabs, needed because: https://github.com/marta-file-manager/marta-issues/issues/896
+		repeatFunc({0.1, 0.2}, function() keystroke({"shift"}, "w", 1, app("Marta")) end)
 		if isAtOffice() or isProjector() then
 			moveResizeCurWin("maximized")
 		else
@@ -340,7 +338,7 @@ local function draftsLaunchWake(appName, eventType, appObject)
 	if isAtOffice() then workspace = "Office" end
 
 	if (eventType == aw.launched) then
-		repeatFunc({0.25, 0.5, 0.7, 6}, function()
+		repeatFunc({0, 0.25, 0.5, 0.7}, function()
 			appObject:selectMenuItem {"View", "Hide Toolbar"}
 			appObject:selectMenuItem {"Workspaces", workspace}
 		end)
