@@ -7,7 +7,6 @@ local lintersAndFormatters = {
 	"shellcheck",
 	"yamllint",
 	"markdownlint",
-	"write_good",
 	"vale",
 	-- stylelint not available :(
 }
@@ -55,9 +54,6 @@ null_ls.setup {
 
 		-- Markdown & Prose
 		builtins.diagnostics.vale,
-		-- builtins.diagnostics.write_good.with{
-		-- 	extra_args = {"--no-passive", "--no-adverb"}, -- disable those rules
-		-- },
 		builtins.diagnostics.markdownlint.with {
 			extra_args = {"--disable=trailing-spaces"}, -- vim already takes care of that
 		},

@@ -273,7 +273,7 @@ navic.setup {
 }
 
 local function showBreadcrumbs()
-	local noBreadcrumbsFt = {"css", "bash", "sh", "zsh"}
+	local noBreadcrumbsFt = {"css", "bash", "sh", "zsh", "ini", "toml"}
 	return not (vim.tbl_contains(noBreadcrumbsFt, bo.filetype))
 end
 
