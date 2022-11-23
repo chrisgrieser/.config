@@ -36,6 +36,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>656E6A0F-FAB7-428D-AB7D-811A3D19C2A1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>496D4848-5FF5-4521-AD62-DA66D955EF60</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<array>
 			<dict>
@@ -490,6 +503,50 @@ echo -n "$appid"</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>rss</string>
+				<key>subtext</key>
+				<string>to Inoreader</string>
+				<key>text</key>
+				<string>Add RSS Feed</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>656E6A0F-FAB7-428D-AB7D-811A3D19C2A1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>add-feed-to-inoreader.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>496D4848-5FF5-4521-AD62-DA66D955EF60</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -522,6 +579,13 @@ echo -n "$appid"</string>
 			<key>ypos</key>
 			<real>320</real>
 		</dict>
+		<key>496D4848-5FF5-4521-AD62-DA66D955EF60</key>
+		<dict>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>515</real>
+		</dict>
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<dict>
 			<key>colorindex</key>
@@ -539,6 +603,17 @@ echo -n "$appid"</string>
 			<real>305</real>
 			<key>ypos</key>
 			<real>320</real>
+		</dict>
+		<key>656E6A0F-FAB7-428D-AB7D-811A3D19C2A1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>add rss feed</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>510</real>
 		</dict>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>

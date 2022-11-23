@@ -91,19 +91,6 @@
 			<key>utf8</key>
 			<true/>
 		</dict>
-		<key>803FD56E-C61A-4A39-9FE7-3E5AE227386F</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ph</string>
-			<key>text</key>
-			<string>Pornhub: '{query}'</string>
-			<key>url</key>
-			<string>https://www.pornhub.com/video/search?search={query}</string>
-			<key>utf8</key>
-			<true/>
-		</dict>
 		<key>84F64B41-9C2A-49F0-AAB4-E6FFB0BCB143</key>
 		<dict>
 			<key>enabled</key>
@@ -205,17 +192,6 @@
 			<string>https://www.google.de/search?q={query}+(site:wired.com+OR+site:techcrunch.com+OR+site:bloomberg.com+OR+site:nytimes.com+OR+site:theverge.com+OR+site:protocol.com)&amp;tbm=nws</string>
 			<key>utf8</key>
 			<true/>
-		</dict>
-		<key>E2BE83BA-73C9-46DE-997F-7C6AFFC41CAA</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>rss</string>
-			<key>text</key>
-			<string>Inoreader RSS</string>
-			<key>url</key>
-			<string>https://www.inoreader.com/search/feeds/{query}</string>
 		</dict>
 		<key>E6EBE234-58DF-42AE-B019-B2941D2B424F</key>
 		<dict>
