@@ -7,8 +7,9 @@ parserOptions:
   ecmaVersion: 2021
   sourceType: module
 
-# Lint files in dotfolder, https://stackoverflow.com/questions/57947585/eslint-warning-file-ignored-by-default-use-a-negated-ignore-pattern
-ignorePatterns: ["!.config"]
+# Lint files in dotfolder https://github.com/eslint/eslint/issues/10341#issuecomment-468548031
+ignorePatterns: ["!.*", "node_modules"]
+
 #───────────────────────────────────────────────────────────────────────────────
 
 rules:
@@ -141,13 +142,13 @@ rules:
   eqeqeq: error
   no-eq-null: error
   no-negated-condition: error
-  no-unneeded-ternary: error
+  no-unneeded-ternary: warn
   no-nested-ternary: error
   yoda: warn
   no-else-return:
     - error
-    - allowElseIf: false
-  no-lonely-if: error
+    - allowElseIf: true
+  no-lonely-if: warn
   no-mixed-operators:
     - error
     - groups:
