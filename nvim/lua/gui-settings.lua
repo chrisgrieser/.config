@@ -56,9 +56,9 @@ keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>") -- no selection = word under cursor
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>")
 keymap("i", "<D-e>", "``<Left>")
 
--- cmd+t: Template string
-keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>") -- no selection = word under cursor
-keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>")
+-- cmd+t: Template ${string}
+keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>b") -- no selection = word under cursor
+keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b")
 keymap("i", "<D-t>", "${}<Left>")
 
 local delta = 1.1

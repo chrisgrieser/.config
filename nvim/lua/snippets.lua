@@ -156,6 +156,7 @@ add("applescript", {
 add("markdown", {
 	snip("github note", "> __Note__  \n> $0"),
 	snip("github warning", "> __Warning__  \n> $0"),
+	snip("vale ignore", "<!-- vale ${1:Style${}.${2:Rule} = NO --> <!-- vale ${1:Style}.${2:Rule} = YES -->"),
 })
 
 -- JavaScript (General)
