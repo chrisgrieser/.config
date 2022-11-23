@@ -11,8 +11,13 @@ function isodate()
 	return os.date("!%Y-%m-%d")
 end
 
-for _,v in ipairs(t2) do
-   table.insert(t1, v)
+---appends t2 to t1 in-place
+---@param t1 table
+---@param t2 table
+function concatTables(t1, t2)
+	for _,v in ipairs(t2) do
+		table.insert(t1, v)
+	end
 end
 
 ---@param str string

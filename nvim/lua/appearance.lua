@@ -63,19 +63,26 @@ require("scrollbar.handlers").register("marksmarks", function(bufnr)
 
 	local marks = fn.getmarklist(bufnr)
 	local marksGlobal = fn.getmarklist()
-	for _,v in ipairs(marksGlobal) do
-		table.insert(marks, v)
-	end
+	concatTables(marks, marksGlobal)
 
 	local out = {}
 	table.insert(out, {line = 0, text = ""}) -- ensure at least one dummy element in return list to prevent errors when there is no valid mark
 	for _, markObj in pairs(marks) do
-		local mark = markObj.mark:sub(2, 2)
-		local isLetter = mark:lower() ~= mark:upper()
-		if isLetter and not (excluded_marks:find(mark)) then
+		local markName = markObj.mark:sub(2, 2)
+
+		local isLetter = markName:lower() ~= markName:upper()
+		local isGlobalMark = markObj.file
+		local markIsInThisFile = true
+		if isGlobalMark then
+			local pathOfMark = markObj.file:gsub("~", home)
+			local curBufPath = fn.expand("%:p")
+			markIsInThisFile = pathOfMark == curBufPath
+		end
+
+		if isLetter and not(excluded_marks:find(markName)) and markIsInThisFile then
 			table.insert(out, {
 				line = markObj.pos[2],
-				text = mark,
+				text = markName,
 				type = "Info",
 				level = 6,
 			})
@@ -84,13 +91,14 @@ require("scrollbar.handlers").register("marksmarks", function(bufnr)
 	return out
 end)
 
+
 -- HACK workaround due to neovim's `:delmarks` not persistently deleting marks
 -- https://www.reddit.com/r/neovim/comments/qliuid/the_overly_persistent_marks_problem/
 -- https://github.com/neovim/neovim/issues/4295
 augroup("delmarksFix", {})
 autocmd("BufReadPost", {
 	group = "delmarksFix",
-	command = "delmarks a-z",
+	command = "delmarks a-zA-LN-Z",
 })
 
 --------------------------------------------------------------------------------
