@@ -1,16 +1,17 @@
 require("utils")
 --------------------------------------------------------------------------------
 
--- INFO: linters also need to be added as source below
--- these require the null-ls name, not the mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
+-- INFO: these require null-ls name, not mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
 local lintersAndFormatters = {
 	"eslint_d",
 	"shellcheck",
 	"yamllint",
 	"markdownlint",
 	"write_good",
+	"vale",
 	-- stylelint not available :(
 }
+-- INFO: linters also need to be added as source below
 
 --------------------------------------------------------------------------------
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
@@ -23,6 +24,7 @@ null_ls.setup {
 	sources = {
 		builtins.code_actions.gitsigns, -- gitsings.nvim plugin, e.g. reset hunks
 
+		-- shell
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		builtins.diagnostics.shellcheck.with {-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go
 			extra_filetypes = {"zsh"},
@@ -33,6 +35,7 @@ null_ls.setup {
 			extra_args = {"--shell=bash"},
 		},
 
+		-- css
 		builtins.formatting.stylelint.with {
 			-- using config without ordering, since ordering on save is confusing
 			extra_args = {"--config", dotfilesFolder.."/linter-configs/.stylelintrc-formatting.json"},
@@ -41,6 +44,7 @@ null_ls.setup {
 			extra_args = {"--quiet"}, -- only errors, no warnings
 		},
 
+		-- JS/TS
 		builtins.diagnostics.eslint_d.with {
 			-- extra_args = {"--quiet"}, -- only errors, no warnings
 		},
@@ -49,9 +53,11 @@ null_ls.setup {
 			extra_args = {"--config-file", fn.expand("~/.config/yamllint/config/.yamllint.yaml")},
 		},
 
-		builtins.diagnostics.write_good.with{
-			extra_args = {"--no-passive", "--no-adverb"}, -- disable those rules
-		},
+		-- Markdown & Prose
+		builtins.diagnostics.vale,
+		-- builtins.diagnostics.write_good.with{
+		-- 	extra_args = {"--no-passive", "--no-adverb"}, -- disable those rules
+		-- },
 		builtins.diagnostics.markdownlint.with {
 			extra_args = {"--disable=trailing-spaces"}, -- vim already takes care of that
 		},
