@@ -49,11 +49,11 @@ keymap("n", "ZZ", ":wqall!<CR>")
 keymap({"n", "x"}, "H", "0^") -- 0^ ensures fully scrolling to the left on long lines
 keymap("o", "H", "^")
 keymap({"n", "x", "o"}, "L", "$")
-keymap({"x", "o"}, "J", "7j")
-keymap({"n", "x", "o"}, "K", "7k")
+keymap({"x", "o"}, "J", "6j")
+keymap({"n", "x", "o"}, "K", "6k")
 
 keymap("n", "j", function() qol.overscroll("j") end, {silent = true})
-keymap("n", "J", function() qol.overscroll("7j") end, {silent = true})
+keymap("n", "J", function() qol.overscroll("6j") end, {silent = true})
 keymap({"n", "x"}, "G", "Gzz")
 
 -- Sections
