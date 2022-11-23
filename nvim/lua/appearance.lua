@@ -257,9 +257,6 @@ function debuggerStatus()
 	end
 end
 
--- dummy to ensure no glitches when winbar disappears
-local function dummy() return " " end
-
 -- NAVIC
 local navic = require("nvim-navic")
 navic.setup {
@@ -273,8 +270,8 @@ navic.setup {
 }
 
 local function showBreadcrumbs()
-	local noBreadcrumbsFt = {"css", "bash", "sh", "zsh", "dosini", "toml"}
-	return not (vim.tbl_contains(noBreadcrumbsFt, bo.filetype))
+	-- breadcrumbs not useful in css, but winbar still needed for recordings
+	return navic.is_available() and not(bo.filetype == "css")
 end
 
 --------------------------------------------------------------------------------
@@ -301,12 +298,11 @@ require("lualine").setup {
 	winbar = {
 		lualine_b = {{
 			navic.get_location,
-			-- breadcrumbs not useful in css, but winbar needed for recordings
-			cond = function() return navic.is_available() and showBreadcrumbs() end,
+			cond = showBreadcrumbs,
 			section_separators = winSecSeparators,
 		}},
 		lualine_c = {{
-			dummy,
+			function () return " " end, -- dummy to avoid bar appearing and disappearing
 			cond = showBreadcrumbs,
 		}},
 		lualine_z = {
@@ -318,7 +314,7 @@ require("lualine").setup {
 		theme = "auto",
 		ignore_focus = specialFiletypes,
 		globalstatus = true,
-		component_separators = {left = "", right = ""},
+		component_separators = {left = " ", right = " "},
 		section_separators = secSeparators,
 	},
 }

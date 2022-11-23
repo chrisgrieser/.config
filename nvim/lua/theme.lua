@@ -45,7 +45,7 @@ end
 
 customHighlights() -- to apply on default
 
-function themeModifications()
+local function themeModifications()
 	local mode = opt.background:get()
 	local theme = g.colors_name
 	if theme == "tokyonight" then
@@ -54,6 +54,7 @@ function themeModifications()
 			cmd("highlight lualine_y_diff_modified_" .. v .. " guifg=#acaa62")
 			cmd("highlight lualine_y_diff_added_" .. v .. " guifg=#8cbf8e")
 		end
+		cmd("highlight GitSignsModified guifg=#acaa62")
 	elseif theme == "dawnfox" then
 		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
 		cmd [[highlight VertSplit guifg=#b29b84]]
@@ -71,7 +72,7 @@ end
 -- toggle theme with OS
 local auto_dark_mode = require("auto-dark-mode")
 auto_dark_mode.setup {
-	update_interval = 2500, ---@diagnostic disable-line: assign-type-mismatch
+	update_interval = 2500,
 	set_dark_mode = function()
 		vim.o.background = "dark"
 		cmd("colorscheme " .. darkTheme)
