@@ -8,11 +8,37 @@
 	<string>Mini-Apps</string>
 	<key>connections</key>
 	<dict>
+		<key>07067962-C5C6-4B45-84D2-E12B587B394A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6213F69C-01C4-4A2C-AA88-EF3E1F005182</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>15C5CEF9-52E9-4682-8DE4-0E5332D17D18</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>812123A0-13FF-4E57-A76C-6EB0EDF2A55D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1B6BE7EF-EE49-4827-A81C-43DBAC01C611</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>07067962-C5C6-4B45-84D2-E12B587B394A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -34,11 +60,37 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A3AB158D-877A-451A-85CA-39C230762B3C</key>
+		<key>397D1E63-05F6-40AE-B853-F29D34668491</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C6041485-5CE5-467D-A8AA-FBE386D8D2E3</string>
+				<string>1B6BE7EF-EE49-4827-A81C-43DBAC01C611</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>42B4605C-47C6-40D0-9BCF-9DFA71CE9594</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>397D1E63-05F6-40AE-B853-F29D34668491</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6213F69C-01C4-4A2C-AA88-EF3E1F005182</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2E868D0E-EDBC-46E9-B513-BC2F070A869A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -60,8 +112,19 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C6041485-5CE5-467D-A8AA-FBE386D8D2E3</key>
-		<array/>
+		<key>EB84A4C2-76C4-4F85-B569-2BB8574BBA12</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>42B4605C-47C6-40D0-9BCF-9DFA71CE9594</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -70,7 +133,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Quick Spelling Fixer + Spelling Adder</string>
+	<string>Quick Spelling Fixer &amp; Word-Completer</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -261,37 +324,166 @@ end run</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>add-to-espanso-spellings.sh</string>
+				<string>select-word.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>C6041485-5CE5-467D-A8AA-FBE386D8D2E3</string>
+			<string>42B4605C-47C6-40D0-9BCF-9DFA71CE9594</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>07067962-C5C6-4B45-84D2-E12B587B394A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>spell</string>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>49</integer>
+				<key>hotmod</key>
+				<integer>524288</integer>
+				<key>hotstring</key>
+				<string>Space</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>EB84A4C2-76C4-4F85-B569-2BB8574BBA12</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>anycomplete.js</string>
 				<key>subtext</key>
-				<string>$1: Misspelling $2: Correct Spelling</string>
-				<key>text</key>
-				<string>Spelling: {query}</string>
+				<string></string>
+				<key>title</key>
+				<string>Complete...</string>
+				<key>type</key>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>A3AB158D-877A-451A-85CA-39C230762B3C</string>
+			<string>1B6BE7EF-EE49-4827-A81C-43DBAC01C611</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{clipboard:2}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>2E868D0E-EDBC-46E9-B513-BC2F070A869A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>seconds</key>
+				<string>0.2</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>6213F69C-01C4-4A2C-AA88-EF3E1F005182</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>397D1E63-05F6-40AE-B853-F29D34668491</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -300,25 +492,91 @@ end run</string>
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>07067962-C5C6-4B45-84D2-E12B587B394A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>Paste</string>
+			<key>xpos</key>
+			<real>580</real>
+			<key>ypos</key>
+			<real>475</real>
+		</dict>
 		<key>15C5CEF9-52E9-4682-8DE4-0E5332D17D18</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>second language (defined in settings)</string>
+			<string>autocorrect for 2nd language (defined in settings)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
+		<key>1B6BE7EF-EE49-4827-A81C-43DBAC01C611</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>autocomplete query</string>
+			<key>xpos</key>
+			<real>425</real>
+			<key>ypos</key>
+			<real>475</real>
+		</dict>
+		<key>2E868D0E-EDBC-46E9-B513-BC2F070A869A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>restore previous clipboard</string>
+			<key>xpos</key>
+			<real>795</real>
+			<key>ypos</key>
+			<real>475</real>
+		</dict>
 		<key>312B23B5-ED5C-4D40-9A96-B52BC742B891</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>Capitalize Word unders Cursor</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>310</real>
+		</dict>
+		<key>397D1E63-05F6-40AE-B853-F29D34668491</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>remove \n</string>
+			<key>xpos</key>
+			<real>340</real>
+			<key>ypos</key>
+			<real>505</real>
+		</dict>
+		<key>42B4605C-47C6-40D0-9BCF-9DFA71CE9594</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>get word under cursor</string>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>475</real>
+		</dict>
+		<key>6213F69C-01C4-4A2C-AA88-EF3E1F005182</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>730</real>
+			<key>ypos</key>
+			<real>505</real>
 		</dict>
 		<key>812123A0-13FF-4E57-A76C-6EB0EDF2A55D</key>
 		<dict>
@@ -334,40 +592,29 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>235</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>385</real>
-		</dict>
-		<key>A3AB158D-877A-451A-85CA-39C230762B3C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>note</key>
-			<string>Add Spelling correction to espanso</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>510</real>
+			<real>310</real>
 		</dict>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>English</string>
+			<string>Autocorrect for English</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
-		<key>C6041485-5CE5-467D-A8AA-FBE386D8D2E3</key>
+		<key>EB84A4C2-76C4-4F85-B569-2BB8574BBA12</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>235</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>475</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -438,7 +685,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.2</string>
+	<string>0.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

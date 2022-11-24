@@ -912,7 +912,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>0B1E6AA4-1922-4203-943D-62AA02786451</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>(re)create index</string>
 			<key>xpos</key>
@@ -939,7 +939,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>2ACE5555-5735-4C32-AB12-52AF7B05D8B1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>985</real>
 			<key>ypos</key>
@@ -957,7 +957,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>4DEABEE2-4999-4872-A75E-DCBD98C663E1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>845</real>
 			<key>ypos</key>
@@ -966,7 +966,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>516A8D31-7193-47FD-AD28-ADAE49601D02</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>705</real>
 			<key>ypos</key>
@@ -993,9 +993,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
 			<key>xpos</key>
-			<real>385</real>
+			<real>380</real>
 			<key>ypos</key>
-			<real>355</real>
+			<real>310</real>
 		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>
@@ -1009,7 +1009,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>D8D7E65D-1523-47A4-9964-845E4D2C0927</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>700</real>
 			<key>ypos</key>
@@ -1027,7 +1027,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>FA98F18D-55A1-40A3-A635-ACE7396D22C2</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>neovim docs. Requires running `:vim` first</string>
 			<key>xpos</key>
