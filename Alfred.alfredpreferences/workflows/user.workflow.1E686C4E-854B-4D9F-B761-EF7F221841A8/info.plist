@@ -8,6 +8,19 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
+		<key>0CB1384E-FC0D-46E5-8142-2590BB7CE8BD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3C5C9A77-FB6B-4CCE-98EC-3DE84FF67B9E</key>
 		<array>
 			<dict>
@@ -540,6 +553,61 @@ echo -n "$appid"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>zz</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔓 Zoom Login</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0CB1384E-FC0D-46E5-8142-2590BB7CE8BD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "zoom.us" to activate
+delay 1
+tell application "System Events" 
+	keystroke tab
+	keystroke space
+	delay 0.2
+	keystroke tab
+	keystroke tab
+	keystroke tab
+	keystroke tab
+	keystroke space
+end tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>login-automation_[Browser].applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -609,6 +677,15 @@ echo -n "$appid"</string>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0CB1384E-FC0D-46E5-8142-2590BB7CE8BD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>460</real>
+			<key>ypos</key>
+			<real>460</real>
+		</dict>
 		<key>16D2C4F3-A099-4D2C-A0C8-03E587C8968A</key>
 		<dict>
 			<key>colorindex</key>
@@ -744,6 +821,17 @@ echo -n "$appid"</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>605</real>
+		</dict>
+		<key>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>login script</string>
+			<key>xpos</key>
+			<real>625</real>
+			<key>ypos</key>
+			<real>460</real>
 		</dict>
 		<key>E8066503-E298-4023-9E9F-3FBA20E03748</key>
 		<dict>
