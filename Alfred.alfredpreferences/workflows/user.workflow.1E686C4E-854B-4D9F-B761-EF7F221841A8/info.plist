@@ -75,6 +75,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A2960A81-02AB-485E-AF91-AEF7B502D533</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C120F733-C46F-44AC-ADAA-504E11D52028</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</key>
 		<array>
 			<dict>
@@ -547,6 +560,50 @@ echo -n "$appid"</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>add-to-espanso-spellings.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C120F733-C46F-44AC-ADAA-504E11D52028</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>spell</string>
+				<key>subtext</key>
+				<string>$1: Misspelling $2: Correct Spelling</string>
+				<key>text</key>
+				<string>Spelling: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A2960A81-02AB-485E-AF91-AEF7B502D533</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -586,7 +643,7 @@ echo -n "$appid"</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>460</real>
 		</dict>
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<dict>
@@ -615,7 +672,7 @@ echo -n "$appid"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>460</real>
 		</dict>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>
@@ -646,6 +703,17 @@ echo -n "$appid"</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>A2960A81-02AB-485E-AF91-AEF7B502D533</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>Add Spelling correction to espanso</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>605</real>
+		</dict>
 		<key>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</key>
 		<dict>
 			<key>colorindex</key>
@@ -667,6 +735,15 @@ echo -n "$appid"</string>
 			<real>200</real>
 			<key>ypos</key>
 			<real>350</real>
+		</dict>
+		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>605</real>
 		</dict>
 		<key>E8066503-E298-4023-9E9F-3FBA20E03748</key>
 		<dict>
@@ -699,15 +776,29 @@ echo -n "$appid"</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
-	<key>variables</key>
-	<dict>
-		<key>working_directory</key>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/</string>
-	</dict>
-	<key>variablesdontexport</key>
 	<array>
-		<string>working_directory</string>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/.config/espanso/match/spelling.yml
+~/.config/espanso/match/spelling.yml</string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string>spelling.yml</string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>path to spelling espanso file</string>
+			<key>label</key>
+			<string>Spell File</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>spell_config</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string></string>
