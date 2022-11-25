@@ -4,7 +4,6 @@ require("utils")
 -- INFO: these require null-ls name, not mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
 local lintersAndFormatters = {
 	"yamllint",
-	"textlint",
 	"shellcheck", -- needed for bash-lsp
 	"markdownlint",
 	"vale",
@@ -48,6 +47,7 @@ null_ls.setup {
 
 		-- Markdown & Prose
 		builtins.diagnostics.vale,
+		builtins.diagnostics.textlint,
 		builtins.diagnostics.markdownlint.with {
 			extra_args = {"--disable=trailing-spaces"}, -- vim already takes care of that
 		},
