@@ -183,9 +183,11 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 --------------------------------------------------------------------------------
 -- LSP-SERVER-SPECIFIC SETUP
 
+local lspSettings = {}
+
 -- https://github.com/sumneko/lua-language-server/wiki/Annotations#annotations
 -- https://github.com/sumneko/lua-language-server/wiki/Settings
-local luaSettings = {
+lspSettings.sumneko_lua = {
 	Lua = {
 		runtime = {version = "LuaJIT"}, -- used by neovim
 		format = {
@@ -231,7 +233,7 @@ local luaSettings = {
 }
 
 -- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
-local cssSettings = {
+lspSettings.cssls = {
 	css = {
 		lint = {
 			vendorPrefix = "ignore",
@@ -275,7 +277,7 @@ local jsAndTsSettings = {
 	},
 }
 
-local tsjsSettings = {
+lspSettings.tsserver = {
 	completions = {completeFunctionCalls = true},
 	diagnostics = {
 		-- https://github.com/microsoft/TypeScript/blob/master/src/compiler/diagnosticMessages.json
@@ -286,7 +288,7 @@ local tsjsSettings = {
 }
 
 -- https://github.com/redhat-developer/yaml-language-server#language-server-settings
-local yamlSettings = {
+lspSettings.yamlls = {
 	yaml = {
 		format = {
 			enable = true, -- does not seem to be supported yet
@@ -298,16 +300,24 @@ local yamlSettings = {
 		hover = true,
 		completion = true,
 		validate = true,
-		schemaStore = true, -- Automatically pull available YAML schemas from JSON Schema Store
+		schemaStore = {enable = true}, -- Automatically pull available YAML schemas from JSON Schema Store
 	},
 }
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
-eslintSettings = {
+lspSettings.eslint = {
+	quiet = false, -- = include warnings
 	codeAction = {
 		disableRuleComment = {
 			location = "sameLine",
 		},
+	},
+}
+
+lspSettings.jsonls = {
+	json = {
+		schemas = require("schemastore").json.schemas(),
+		validate = {enable = true},
 	},
 }
 --------------------------------------------------------------------------------
@@ -322,17 +332,10 @@ for _, lsp in pairs(lsp_servers) do
 		on_attach = on_attach,
 		capabilities = capabilities,
 	}
-	if lsp == "sumneko_lua" then
-		config.settings = luaSettings
-	elseif lsp == "tsserver" then
-		config.settings = tsjsSettings
-	elseif lsp == "cssls" then
-		config.settings = cssSettings
-	elseif lsp == "yamlls" then
-		config.settings = yamlSettings
-	elseif lsp == "eslint" then
-		config.settings = eslintSettings
-	elseif lsp == "bashls" then
+	if lspSettings[lsp] then
+		config.settings = lspSettings[lsp]
+	end
+	if lsp == "bashls" then
 		config.filetypes = {"sh", "zsh", "bash"} -- force lsp to work with zsh
 	end
 	require("lspconfig")[lsp].setup(config)
