@@ -33,13 +33,13 @@ null_ls.setup {
 		},
 
 		-- css
-		-- builtins.formatting.stylelint.with {
-		-- 	-- using config without ordering, since ordering on save is confusing
-		-- 	extra_args = {"--config", dotfilesFolder.."/linter-configs/.stylelintrc-formatting.json"},
-		-- },
-		-- builtins.diagnostics.stylelint.with {-- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
-		-- 	extra_args = {"--quiet"}, -- only errors, no warnings
-		-- },
+		builtins.formatting.stylelint.with {
+			-- using config without ordering, since ordering on save is confusing
+			extra_args = {"--config", dotfilesFolder.."/linter-configs/.stylelintrc-formatting.json"},
+		},
+		builtins.diagnostics.stylelint.with {-- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
+			extra_args = {"--quiet"}, -- only errors, no warnings
+		},
 
 		-- JS/TS
 		builtins.diagnostics.eslint_d.with {

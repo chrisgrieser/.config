@@ -11,7 +11,6 @@ function M.PluginList(use)
 
 	-- Themes
 	use "folke/tokyonight.nvim"
-	use "NLKNguyen/papercolor-theme"
 	use "savq/melange" -- like Obsidian's Primary color scheme
 	-- use "EdenEast/nightfox.nvim"
 	-- use "rebelot/kanagawa.nvim"
@@ -37,6 +36,7 @@ function M.PluginList(use)
 		"ray-x/lsp_signature.nvim", -- signature hint
 		"SmiteshP/nvim-navic", -- breadcrumbs
 		"j-hui/fidget.nvim", -- lsp status
+		"folke/neodev.nvim", -- lsp for nvim-lua config
 		"folke/neodev.nvim", -- lsp for nvim-lua config
 	}}
 	-- Linting
