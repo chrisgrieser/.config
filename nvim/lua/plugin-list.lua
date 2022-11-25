@@ -37,7 +37,7 @@ function M.PluginList(use)
 		"SmiteshP/nvim-navic", -- breadcrumbs
 		"j-hui/fidget.nvim", -- lsp status
 		"folke/neodev.nvim", -- lsp for nvim-lua config
-		"folke/neodev.nvim", -- lsp for nvim-lua config
+		"b0o/SchemaStore.nvim", 
 	}}
 	-- Linting
 	use {"jose-elias-alvarez/null-ls.nvim", requires = {

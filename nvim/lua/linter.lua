@@ -3,12 +3,11 @@ require("utils")
 
 -- INFO: these require null-ls name, not mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
 local lintersAndFormatters = {
-	"eslint_d",
 	"yamllint",
-	"shellcheck",
+	"shellcheck", -- needed for bash-lsp
 	"markdownlint",
 	"vale",
-	-- stylelint not available :(
+	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 }
 -- INFO: linters also need to be added as source below
 
@@ -39,11 +38,6 @@ null_ls.setup {
 		},
 		builtins.diagnostics.stylelint.with {-- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 			extra_args = {"--quiet"}, -- only errors, no warnings
-		},
-
-		-- JS/TS
-		builtins.diagnostics.eslint_d.with {
-			-- extra_args = {"--quiet"}, -- only errors, no warnings
 		},
 
 		builtins.diagnostics.yamllint.with {
