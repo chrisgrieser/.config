@@ -14,7 +14,6 @@ function M.PluginList(use)
 	use "savq/melange" -- like Obsidian's Primary color scheme
 	-- use "EdenEast/nightfox.nvim"
 	-- use "rebelot/kanagawa.nvim"
-	use "Mofiqul/dracula.nvim"
 
 	-- Syntax
 	use {
@@ -109,7 +108,7 @@ function M.PluginList(use)
 	-- Navigation
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}
 	use "ggandor/leap.nvim"
-	use "andymass/vim-matchup"
+	use {"andymass/vim-matchup", requires = "nvim-treesitter/nvim-treesitter"}
 
 	-- Editing
 	use {"abecodes/tabout.nvim",

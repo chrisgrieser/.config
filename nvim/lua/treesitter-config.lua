@@ -70,7 +70,7 @@ require("nvim-treesitter.configs").setup {
 				["ia"] = "@parameter.inner",
 				["aC"] = "@conditional.outer", -- [C]onditional (ac = a curly)
 				["iC"] = "@conditional.inner",
-				["COM"] = "@comment.outer", -- latter remapped to q, not done directly to avoid conflict with visual mode comments
+				["COM"] = "@comment.outer", -- latter remapped to q, done indirectly to avoid conflict with visual mode comments
 			},
 			-- If you set this to `true` (default is `false`) then any textobject is
 			-- extended to include preceding xor succeeding whitespace. Succeeding
@@ -97,14 +97,14 @@ require("nvim-treesitter.configs").setup {
 			enable = true,
 			keymaps = {
 				-- overwritten by on lsp-attach with LSP's rename, but useful for
-				-- filetypes without proper lsp, e.g., bash
+				-- filetypes without proper lsp support
 				smart_rename = "<leader>R",
 			},
 		},
-		matchup = {
-			enable = true,
-			disable = {},
-		},
+	},
+	matchup = {-- vim-matchup plugin
+		enable = true,
+		disable = {},
 	},
 }
 

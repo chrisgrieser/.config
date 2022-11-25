@@ -1,5 +1,6 @@
 require("utils")
 local dap = require("dap")
+local dapUI = require("dapui")
 --------------------------------------------------------------------------------
 -- INFO: setup descriptions
 -- https://github.com/mxsdev/nvim-dap-vscode-js#setup
@@ -88,17 +89,25 @@ dap.configurations.sh = {{
 --------------------------------------------------------------------------------
 -- DAP-RELATED PLUGINS
 require("nvim-dap-virtual-text").setup()
-require("dapui").setup()
+dapUI.setup()
+
+-- auto-close dapUI on termination of debugging
+dap.listeners.before.event_terminated["dapui_config"] = function()
+	dapUI.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+	dapUI.close()
+end
 
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
 
 -- wrap `continue` in this, since the nvim-lua-debugger has to be started
 -- separately
-keymap("n", "8", function ()
+keymap("n", "8", function()
 	local dapRunning = dap.status() ~= ""
 	local isNvimConfig = fn.expand("%:p:h"):find("nvim") and bo.filetype == "lua"
-	if not(dapRunning) then
+	if not (dapRunning) then
 		bo.number = true
 		if isNvimConfig then require("osv").run_this() end
 	end
@@ -114,29 +123,35 @@ keymap("n", "<leader>b", function()
 		"Terminate",
 		"Set Log Point",
 		"Clear Breakpoints",
+		"Conditional Breakpoint",
 		"Step over",
 		"Step into",
 		"Step out",
+		"Run to Cursor",
 	}
 	vim.ui.select(selection, {prompt = " DAP Command"}, function(choice)
 		if not (choice) then return end
 		if choice:find("^Launch") then opt.number = true end
 
 		if choice == "Set Log Point" then
-			vim.ui.input({ prompt = "Log point message: "}, function (msg)
-				if not(msg) then return end
+			vim.ui.input({prompt = "Log point message: "}, function(msg)
+				if not (msg) then return end
 				dap.toggle_breakpoint(nil, nil, msg)
 			end)
 		elseif choice == "Toggle DAP UI" then
-			require("dapui").toggle()
+			dapUI.toggle()
 		elseif choice == "Step over" then
 			dap.step_over()
 		elseif choice == "Step into" then
 			dap.step_into()
 		elseif choice == "Step out" then
 			dap.step_into()
+		elseif choice == "Run to Cursor" then
+			dap.run_to_cursor()
 		elseif choice == "Clear Breakpoints" then
 			dap.clear_breakpoints()
+		elseif choice == "Conditional Breakpoint" then
+			dap.set_breakpoint(fn.input("Breakpoint condition: ")) ---@diagnostic disable-line: param-type-mismatch
 		elseif choice == "Terminate" then
 			dap.terminate()
 			bo.number = false
