@@ -7,6 +7,8 @@
 # ask for credentials upfront
 sudo -v
 
+bla=`echo rt`
+
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 xcode-select --install
