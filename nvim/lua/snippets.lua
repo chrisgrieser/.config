@@ -37,6 +37,14 @@ add("all", {
 
 add("all", {
 	snip("modeline", "vim: filetype=bash\n$0"),
+
+	snip("cmd", "⌘"),
+	snip("opt", "⌥"),
+	snip("alt", "⌥"),
+	snip("ctrl", "⌃"),
+	snip("shift", "⇧"),
+	snip("capslock", "⇪"),
+	snip("return", "↵ "),
 })
 
 -- Shell (zsh)

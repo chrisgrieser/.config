@@ -58,7 +58,7 @@ end
 ---@param t1 table
 ---@param t2 table
 function concatTables(t1, t2)
-	for _,v in ipairs(t2) do
+	for _, v in ipairs(t2) do
 		table.insert(t1, v)
 	end
 end
@@ -80,7 +80,7 @@ end
 ---@param str string
 ---@return string
 function trim(str)
-	if not(str) then return "" end
+	if not (str) then return "" end
 	return (str:gsub("^%s*(.-)%s*$", "%1"))
 end
 
@@ -88,7 +88,8 @@ end
 
 -- CONFIGS SHARED SCROSS MULTIPLE FILES
 borderStyle = "rounded" -- https://neovim.io/doc/user/api.html#nvim_open_win()
-dotfilesFolder = home.."/.config"
+dotfilesFolder = home .. "/.config"
+myrepos = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/"
 signIcons = {
 	Error = "",
 	Warn = "▲",
@@ -141,4 +142,3 @@ specialFiletypes = {
 	"dui_stacks",
 	"dui_watches",
 }
-

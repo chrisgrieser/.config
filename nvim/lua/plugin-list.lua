@@ -1,5 +1,4 @@
 local M = {}
-local myrepos = "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Repos/"
 
 function M.PluginList(use)
 
@@ -15,7 +14,7 @@ function M.PluginList(use)
 	-- use "EdenEast/nightfox.nvim"
 	-- use "rebelot/kanagawa.nvim"
 
-	-- Syntax
+	-- Treesitter
 	use {
 		"nvim-treesitter/nvim-treesitter",
 		run = function() -- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
@@ -25,8 +24,24 @@ function M.PluginList(use)
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"p00f/nvim-ts-rainbow", -- colored brackets
-			"Wansmer/treesj", -- split-join
 		}
+	}
+	use {"Wansmer/treesj", -- split-join
+		requires = "nvim-treesitter/nvim-treesitter",
+		cmd = "TSJToggle",
+		config = function()
+			require("treesj").setup {
+				use_default_keymaps = false,
+				max_join_length = 150,
+			}
+		end
+	}
+	use {"andymass/vim-matchup", -- improved %
+		requires = "nvim-treesitter/nvim-treesitter",
+	}
+	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
+		after = "nvim-cmp",
+		requires = "nvim-treesitter/nvim-treesitter",
 	}
 
 	-- LSP
@@ -39,6 +54,7 @@ function M.PluginList(use)
 		"folke/neodev.nvim", -- lsp for nvim-lua config
 		"b0o/SchemaStore.nvim", -- schemas for json-lsp
 	}}
+
 	-- Linting
 	use {"jose-elias-alvarez/null-ls.nvim", requires = {
 		"nvim-lua/plenary.nvim",
@@ -108,13 +124,8 @@ function M.PluginList(use)
 	-- Navigation
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}
 	use "ggandor/leap.nvim"
-	use {"andymass/vim-matchup", requires = "nvim-treesitter/nvim-treesitter"}
 
 	-- Editing
-	use {"abecodes/tabout.nvim",
-		after = "nvim-cmp",
-		requires = "nvim-treesitter/nvim-treesitter",
-	}
 	use "Darazaki/indent-o-matic"
 	use {"cshuaimin/ssr.nvim", -- structural search & replace
 		module = "ssr",
