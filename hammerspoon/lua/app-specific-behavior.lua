@@ -123,14 +123,16 @@ wf_mimestream = wf.new("Mimestream")
 	:setOverrideFilter {
 		allowRoles = "AXStandardWindow",
 		rejectTitles = {"General", "Accounts", "Sidebar & List", "Viewing", "Composing", "Templates", "Signatures", "Labs",
-			"Updating Mimestream"}
+			"Updating Mimestream", "Software Update"}
 	}
-	:subscribe(wf.windowCreated, function()
+	:subscribe(wf.windowCreated, function(newWindow)
 		if #wf_mimestream:getWindows() == 2 then
 			local win1 = wf_mimestream:getWindows()[1]
 			local win2 = wf_mimestream:getWindows()[2]
 			moveResize(win1, hs.layout.left50)
 			moveResize(win2, hs.layout.right50)
+		elseif #wf_mimestream:getWindows() == 1 then
+			moveResize(newWindow, pseudoMaximized)
 		end
 	end)
 	:subscribe(wf.windowDestroyed, function()

@@ -1,4 +1,4 @@
----@diagnostic disable: param-type-mismatch, undefined-field
+---@diagnostic disable: assign-type-mismatch, param-type-mismatch
 local M = {}
 --------------------------------------------------------------------------------
 local bo = vim.bo
@@ -65,7 +65,7 @@ function M.duplicateLine(opts)
 		opts = {reverse = false, moveTo = "key", increment = false}
 	end
 
-	local line = getline(".")
+	local line = getline(".") ---@type string
 	if opts.reverse then
 		if line:find("top") then
 			line = line:gsub("top", "bottom")
@@ -145,7 +145,8 @@ function M.hr(opts)
 		cmd [[normal! j==]] -- move down and indent
 		local hrIndent = fn.indent(".")
 		-- cannot use simply :sub, since it assumes one-byte-size chars
-		local hrLine = getline("."):gsub(linechar, "", hrIndent)
+		local hrLine = getline(".") ---@type string
+		hrLine = hrLine:gsub(linechar, "", hrIndent)
 		setline(".", hrLine)
 	else
 		cmd [[normal! jj==]]
@@ -172,7 +173,8 @@ function M.reverse()
 	end
 
 	local col = getCursor(0)[2] + 1
-	local char = getline("."):sub(col, col)
+	local char = getline(".") ---@type string
+	char = char:sub(col, col)
 
 	-- toggle words
 	local opposite = ""
