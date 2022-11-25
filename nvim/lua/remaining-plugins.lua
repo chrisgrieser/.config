@@ -42,4 +42,3 @@ require("tabout").setup {
 	act_as_shift_tab = false,
 }
 
-g.matchup_matchparen_offscreen = {method = "popup"}
