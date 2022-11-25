@@ -57,6 +57,7 @@ local function themeModifications()
 			cmd("highlight lualine_y_diff_modified_" .. v .. " guifg=#dfdb5d")
 		end
 		cmd("highlight GitSignsChange guifg=#dfdb5d")
+		cmd("highlight! def link MatchParen CursorColumn")
 	elseif theme == "tokyonight" then
 		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
 		for _, v in pairs(modes) do

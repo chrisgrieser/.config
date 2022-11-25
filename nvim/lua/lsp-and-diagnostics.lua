@@ -184,6 +184,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 -- LSP-SERVER-SPECIFIC SETUP
 
 local lspSettings = {}
+local lspFilestypes = {}
 
 -- https://github.com/sumneko/lua-language-server/wiki/Annotations#annotations
 -- https://github.com/sumneko/lua-language-server/wiki/Settings
@@ -321,6 +322,9 @@ lspSettings.jsonls = {
 	},
 }
 
+lspFilestypes.bashls = {"sh", "zsh", "bash"} -- force lsp to work with zsh
+lspFilestypes.emmet_ls = {"css", "scss"} --only css
+
 --------------------------------------------------------------------------------
 
 -- Enable snippet capability for completion (nvim_cmp)
@@ -336,10 +340,8 @@ for _, lsp in pairs(lsp_servers) do
 	if lspSettings[lsp] then
 		config.settings = lspSettings[lsp]
 	end
-	if lsp == "bashls" then
-		config.filetypes = {"sh", "zsh", "bash"} -- force lsp to work with zsh
-	elseif lsp == "bashls" then
-		config.filetypes = {"sh", "zsh", "bash"} -- force lsp to work with zsh
+	if lspFilestypes[lsp] then
+		config.filetypes = lspFilestypes[lsp]
 	end
 	require("lspconfig")[lsp].setup(config)
 end
