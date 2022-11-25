@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["SchemaStore.nvim"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/SchemaStore.nvim",
+    url = "https://github.com/b0o/SchemaStore.nvim"
+  },
   ["auto-dark-mode.nvim"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/auto-dark-mode.nvim",
@@ -347,11 +352,6 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
-  ["papercolor-theme"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/papercolor-theme",
-    url = "https://github.com/NLKNguyen/papercolor-theme"
-  },
   ["plenary.nvim"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/plenary.nvim",
@@ -462,9 +462,9 @@ time([[Defining lazy-load commands]], false)
 -- Keymap lazy-loads
 time([[Defining lazy-load keymaps]], true)
 vim.cmd [[nnoremap <silent> <M-Down> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>M-Down>", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[vnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> <M-Up> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>M-Up>", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[vnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
 time([[Defining lazy-load keymaps]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
