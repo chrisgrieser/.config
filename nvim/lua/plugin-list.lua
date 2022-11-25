@@ -24,7 +24,8 @@ function M.PluginList(use)
 		requires = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/nvim-treesitter-refactor",
-			"p00f/nvim-ts-rainbow",
+			"p00f/nvim-ts-rainbow", -- colored brackets
+			"Wansmer/treesj", -- split-join
 		}
 	}
 
@@ -50,7 +51,6 @@ function M.PluginList(use)
 		"theHamsta/nvim-dap-virtual-text",
 		"rcarriga/nvim-dap-ui",
 		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
-		-- "mxsdev/nvim-dap-vscode-js",
 	}}
 
 	-- Completion & Suggestion
@@ -115,7 +115,6 @@ function M.PluginList(use)
 		after = "nvim-cmp",
 		requires = "nvim-treesitter/nvim-treesitter",
 	}
-	use "AndrewRadev/splitjoin.vim"
 	use "Darazaki/indent-o-matic"
 	use {"cshuaimin/ssr.nvim", -- structural search & replace
 		module = "ssr",
@@ -132,8 +131,8 @@ function M.PluginList(use)
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
 	use {"hail2u/vim-css3-syntax", ft = "css"} -- better syntax highlighting (until treesitter css looks decent…)
-	use {"iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && npm install" }
-	use {"Aadv1k/gdoc.vim", ft = "markdown", run = "./install.py"}
+	use {"iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && npm install"}
+	-- use {"Aadv1k/gdoc.vim", ft = "markdown", run = "./install.py"}
 
 end
 
