@@ -4,8 +4,8 @@ require("utils")
 -- INFO: these require null-ls name, not mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
 local lintersAndFormatters = {
 	"eslint_d",
-	"shellcheck",
 	"yamllint",
+	"shellcheck",
 	"markdownlint",
 	"vale",
 	-- stylelint not available :(
@@ -25,14 +25,12 @@ null_ls.setup {
 
 		-- shell
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
-		-- builtins.diagnostics.shellcheck.with {-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go
-		-- 	extra_filetypes = {"zsh"},
-		-- 	extra_args = {"--shell=bash"},
-		-- },
-		-- builtins.code_actions.shellcheck.with {
-		-- 	extra_filetypes = {"zsh"},
-		-- 	extra_args = {"--shell=bash"},
-		-- },
+		-- no diagnostics for shellcheck needed, since handled by bash-lsp
+		-- but code actions are needed: https://github.com/bash-lsp/bash-language-server/issues/490
+		builtins.code_actions.shellcheck.with {
+			extra_filetypes = {"zsh"},
+			extra_args = {"--shell=bash"},
+		},
 
 		-- css
 		-- builtins.formatting.stylelint.with {
