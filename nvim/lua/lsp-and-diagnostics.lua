@@ -10,7 +10,7 @@ local lsp_servers = {
 	"yamlls",
 	"jsonls",
 	"bashls", -- also used for zsh; shellcheck CLI required
-	"eslint",
+	"eslint", -- requires eslint https://github.com/williamboman/mason.nvim/issues/697
 	"emmet_ls",
 	"cssls",
 	"pyright",
@@ -302,6 +302,14 @@ local yamlSettings = {
 	},
 }
 
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
+eslintSettings = {
+	codeAction = {
+		disableRuleComment = {
+			location = "sameLine",
+		},
+	},
+}
 --------------------------------------------------------------------------------
 
 -- Enable snippet capability for completion (nvim_cmp)
@@ -322,6 +330,8 @@ for _, lsp in pairs(lsp_servers) do
 		config.settings = cssSettings
 	elseif lsp == "yamlls" then
 		config.settings = yamlSettings
+	elseif lsp == "eslint" then
+		config.settings = eslintSettings
 	elseif lsp == "bashls" then
 		config.filetypes = {"sh", "zsh", "bash"} -- force lsp to work with zsh
 	end

@@ -7,8 +7,6 @@
 # ask for credentials upfront
 sudo -v
 
-bla=`echo rt`
-
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 xcode-select --install
@@ -56,6 +54,9 @@ ln -sf "$DOTFILE_FOLDER/linter-configs/.pylintrc" ~
 ln -sf "$DOTFILE_FOLDER/linter-configs/.shellcheckrc" ~
 ln -sf "$DOTFILE_FOLDER/linter-configs/.flake8" ~
 ln -sf "$DOTFILE_FOLDER/vale/.vale.ini" ~
+
+# use eslint_d for eslint
+ln -sf "$HOME/.local/share/nvim/mason/bin/eslint_d" "/opt/homebrew/bin/eslint"
 
 # pandoc
 ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
