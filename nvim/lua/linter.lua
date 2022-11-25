@@ -25,23 +25,23 @@ null_ls.setup {
 
 		-- shell
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
-		builtins.diagnostics.shellcheck.with {-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go
-			extra_filetypes = {"zsh"},
-			extra_args = {"--shell=bash"},
-		},
-		builtins.code_actions.shellcheck.with {
-			extra_filetypes = {"zsh"},
-			extra_args = {"--shell=bash"},
-		},
+		-- builtins.diagnostics.shellcheck.with {-- `bashls` and `diagnosticls` both do not work for zsh shellcheck; `efm` depends on go
+		-- 	extra_filetypes = {"zsh"},
+		-- 	extra_args = {"--shell=bash"},
+		-- },
+		-- builtins.code_actions.shellcheck.with {
+		-- 	extra_filetypes = {"zsh"},
+		-- 	extra_args = {"--shell=bash"},
+		-- },
 
 		-- css
-		builtins.formatting.stylelint.with {
-			-- using config without ordering, since ordering on save is confusing
-			extra_args = {"--config", dotfilesFolder.."/linter-configs/.stylelintrc-formatting.json"},
-		},
-		builtins.diagnostics.stylelint.with {-- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
-			extra_args = {"--quiet"}, -- only errors, no warnings
-		},
+		-- builtins.formatting.stylelint.with {
+		-- 	-- using config without ordering, since ordering on save is confusing
+		-- 	extra_args = {"--config", dotfilesFolder.."/linter-configs/.stylelintrc-formatting.json"},
+		-- },
+		-- builtins.diagnostics.stylelint.with {-- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
+		-- 	extra_args = {"--quiet"}, -- only errors, no warnings
+		-- },
 
 		-- JS/TS
 		builtins.diagnostics.eslint_d.with {

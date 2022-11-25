@@ -9,6 +9,10 @@ local lsp_servers = {
 	"sumneko_lua",
 	"yamlls",
 	"jsonls",
+	"bashls", -- also used for zsh
+	"eslint",
+	"stylelint_lsp",
+	"emmet_ls",
 	"cssls",
 	"pyright",
 	"marksman", -- markdown
@@ -202,7 +206,7 @@ local luaSettings = {
 		completion = {
 			callSnippet = "Replace",
 			keywordSnippet = "Replace",
-			displayContext = 1,
+			displayContext = 2,
 			showWord = "Fallback",
 		},
 		diagnostics = {
@@ -298,6 +302,7 @@ local yamlSettings = {
 		schemaStore = true, -- Automatically pull available YAML schemas from JSON Schema Store
 	},
 }
+
 --------------------------------------------------------------------------------
 
 -- Enable snippet capability for completion (nvim_cmp)
@@ -318,6 +323,9 @@ for _, lsp in pairs(lsp_servers) do
 		config.settings = cssSettings
 	elseif lsp == "yamlls" then
 		config.settings = yamlSettings
+	elseif lsp == "bashls" then
+		config.filetypes = {"sh", "zsh", "bash"}
+		config.cmd = {"bash-language-server", "start"}
 	end
 	require("lspconfig")[lsp].setup(config)
 end
