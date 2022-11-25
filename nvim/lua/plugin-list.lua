@@ -14,7 +14,7 @@ function M.PluginList(use)
 	use "savq/melange" -- like Obsidian's Primary color scheme
 	-- use "EdenEast/nightfox.nvim"
 	-- use "rebelot/kanagawa.nvim"
-	-- use "Mofiqul/dracula.nvim"
+	use "Mofiqul/dracula.nvim"
 
 	-- Syntax
 	use {
