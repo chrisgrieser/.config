@@ -320,6 +320,7 @@ lspSettings.jsonls = {
 		validate = {enable = true},
 	},
 }
+
 --------------------------------------------------------------------------------
 
 -- Enable snippet capability for completion (nvim_cmp)

@@ -32,5 +32,14 @@ end
 
 --------------------------------------------------------------------------------
 
+-- Google Docs
 g.path_to_creds = "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/gdocs-vim-credentials.json"
 g.token_directory = "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/gdocs-vim-token.pickle"
+
+--------------------------------------------------------------------------------
+-- Tabout
+require("tabout").setup {
+	act_as_shift_tab = false,
+}
+
+g.matchup_matchparen_offscreen = {method = "popup"}
