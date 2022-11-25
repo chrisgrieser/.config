@@ -4,6 +4,7 @@ require("utils")
 -- INFO: these require null-ls name, not mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
 local lintersAndFormatters = {
 	"yamllint",
+	"textlint",
 	"shellcheck", -- needed for bash-lsp
 	"markdownlint",
 	"vale",
