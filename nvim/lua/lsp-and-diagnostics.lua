@@ -151,7 +151,7 @@ local function on_attach(client, bufnr)
 		cmd [[write!]]
 	end, bufopts)
 
-	if client.name ~= "cssls" then -- don't override navigation marker search for css files
+	if bo.filetype ~= "css" then -- don't override navigation marker search for css files
 		keymap("n", "gs", telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
 		keymap("n", "gS", telescope.lsp_workspace_symbols, bufopts)
 	end
