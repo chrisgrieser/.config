@@ -2,7 +2,8 @@ require("utils")
 --------------------------------------------------------------------------------
 
 local lightTheme = "melange"
-local darkTheme = "tokyonight-moon"
+-- local darkTheme = "tokyonight-moon"
+local darkTheme = "dracula"
 
 --------------------------------------------------------------------------------
 
@@ -48,13 +49,21 @@ customHighlights() -- to apply on default
 local function themeModifications()
 	local mode = opt.background:get()
 	local theme = g.colors_name
-	if theme == "tokyonight" then
+	if theme == "dracula" then
+		cmd [[highlight! IndentBlanklineChar guifg=#445064]]
+		cmd [[highlight! NonText guifg=#8f8f8f]]
+		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
+		for _, v in pairs(modes) do
+			cmd("highlight lualine_y_diff_modified_" .. v .. " guifg=#dfdb5d")
+		end
+		cmd("highlight GitSignsChange guifg=#dfdb5d")
+	elseif theme == "tokyonight" then
 		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
 		for _, v in pairs(modes) do
 			cmd("highlight lualine_y_diff_modified_" .. v .. " guifg=#acaa62")
 			cmd("highlight lualine_y_diff_added_" .. v .. " guifg=#8cbf8e")
 		end
-		cmd("highlight GitSignsModified guifg=#acaa62")
+		cmd("highlight GitSignsChange guifg=#acaa62")
 	elseif theme == "dawnfox" then
 		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
 		cmd [[highlight VertSplit guifg=#b29b84]]

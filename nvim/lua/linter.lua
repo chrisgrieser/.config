@@ -47,7 +47,6 @@ null_ls.setup {
 
 		-- Markdown & Prose
 		builtins.diagnostics.vale,
-		builtins.diagnostics.textlint,
 		builtins.diagnostics.markdownlint.with {
 			extra_args = {"--disable=trailing-spaces"}, -- vim already takes care of that
 		},
