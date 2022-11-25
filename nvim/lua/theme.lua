@@ -2,8 +2,10 @@ require("utils")
 --------------------------------------------------------------------------------
 
 local lightTheme = "melange"
+local darkTheme = "melange"
 -- local darkTheme = "tokyonight-moon"
-local darkTheme = "dracula"
+-- local darkTheme = "kanagawa"
+-- local darkTheme = "dracula"
 
 --------------------------------------------------------------------------------
 
@@ -51,6 +53,7 @@ local function themeModifications()
 	local theme = g.colors_name
 	if theme == "dracula" then
 		cmd [[highlight! IndentBlanklineChar guifg=#445064]]
+		cmd [[highlight! def link ScrollbarHandle IndentBlanklineChar]]
 		cmd [[highlight! NonText guifg=#8f8f8f]]
 		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
 		for _, v in pairs(modes) do

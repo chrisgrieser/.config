@@ -46,8 +46,8 @@ map L g$
 map J 7j
 map K 7k
 
-" Goto Mark
-nmap ä `
+" [m]atch
+map m %
 
 " Section Navigation easier to press
 map } ]

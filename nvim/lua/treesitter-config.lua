@@ -14,6 +14,7 @@ require("nvim-treesitter.configs").setup {
 		"python",
 		"lua",
 		"toml",
+		"vim", -- viml
 		"yaml",
 		"json",
 		"json5",
@@ -87,20 +88,24 @@ require("nvim-treesitter.configs").setup {
 	},
 
 	refactor = {-- refactor plugin
-	highlight_definitions = {
-		enable = true,
-		clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
-	},
-	highlight_current_scope = {enable = false},
-	smart_rename = {
-		enable = true,
-		keymaps = {
-			-- overwritten by on lsp-attach with LSP's rename, but useful for
-			-- filetypes without proper lsp, e.g., bash
-			smart_rename = "<leader>R", 
+		highlight_definitions = {
+			enable = true,
+			clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
+		},
+		highlight_current_scope = {enable = false},
+		smart_rename = {
+			enable = true,
+			keymaps = {
+				-- overwritten by on lsp-attach with LSP's rename, but useful for
+				-- filetypes without proper lsp, e.g., bash
+				smart_rename = "<leader>R",
+			},
+		},
+		matchup = {
+			enable = true,
+			disable = {},
 		},
 	},
-},
 }
 
 --------------------------------------------------------------------------------
