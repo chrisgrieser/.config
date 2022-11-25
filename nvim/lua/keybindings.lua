@@ -1,5 +1,6 @@
 require("utils")
 local warn = vim.log.levels.WARN
+local packer = require("packer")
 --------------------------------------------------------------------------------
 
 -- META
@@ -22,6 +23,21 @@ keymap("n", "<leader>T", telescope.colorscheme)
 
 -- Highlights
 keymap("n", "<leader>G", telescope.highlights)
+
+-- Update [P]lugins
+keymap("n", "<leader>p", function()
+	cmd [[nohl]]
+	cmd [[update!]]
+	package.loaded["plugin-list"] = nil -- empty the cache for lua
+	packer.startup(require("plugin-list").PluginList)
+	packer.snapshot("packer-snapshot_" .. os.date("!%Y-%m-%d_%H-%M-%S"))
+	packer.sync()
+	cmd [[MasonUpdateAll]]
+	-- remove oldest snapshot when more than 20
+	local snapshotPath = fn.stdpath("config") .. "/packer-snapshots"
+	os.execute([[cd ']] .. snapshotPath .. [[' ; ls -t | tail -n +20 | tr '\n' '\0' | xargs -0 rm]])
+end)
+keymap("n", "<leader>P", packer.status)
 
 -- write all before quitting
 keymap("n", "ZZ", ":wqall!<CR>")
@@ -389,12 +405,26 @@ keymap("x", "<Left>", qol.moveSelectionLeft)
 -- Merging / Splitting Lines
 keymap({"n", "x"}, "M", "J") -- [M]erge line up
 keymap({"n", "x"}, "gm", "ddpkJ") -- [m]erge line down
-
-g.splitjoin_split_mapping = "" -- disable default mappings
-g.splitjoin_join_mapping = ""
-keymap("n", "<leader>s", ":SplitjoinSplit<CR><CR>") -- 2nd <CR> needed for cmdheight=0
-keymap("n", "<leader>m", ":SplitjoinJoin<CR><CR>") -- 2nd <CR> needed for cmdheight=0
 keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
+
+local treesj = require("treesj")
+treesj.setup {
+	use_default_keymaps = false,
+	check_syntax_error = true, -- Node with syntax error will not be formatted
+
+	max_join_length = 120, -- If line after join will be longer than max value, node will not be formatted
+
+	-- hold|start|end:
+	-- hold - cursor follows the node/place on which it was called
+	-- start - cursor jumps to the first symbol of the node being formatted
+	-- end - cursor jumps to the last symbol of the node being formatted
+	cursor_behavior = "hold",
+
+	-- Notify about possible problems or not
+	notify = true,
+	langs = langs,
+}
+keymap("n", "<leader>s", ":TStoggle<CR>")
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
