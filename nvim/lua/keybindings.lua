@@ -111,7 +111,7 @@ autocmd("TextYankPost", {
 })
 
 -- vim.[m]atchup
-keymap({"n", "x"}, "m", "%", {remap = true})
+keymap("", "m", "%", {remap = true}) -- remap to use matchup's % instead of builtin %
 keymap({"o", "x"}, "im", "i%", {remap = true})
 keymap({"o", "x"}, "am", "a%", {remap = true})
 g.matchup_matchparen_offscreen = {method = "popup"}
@@ -189,7 +189,7 @@ require("nvim-surround").setup {
 				local patt
 				if ft == "lua" then
 					patt = "^(.-function.-%b() ?)().-( ?end)()$"
-				elseif ft == "js" or ft == "ts" or ft == "bash" or ft == "zsh" then
+				elseif ft == "js" or ft == "ts" or ft == "bash" or ft == "zsh" or ft == "sh" then
 					patt = "^(.-function.-%b() ?{)().*(})()$"
 				else
 					vim.notify("No function-surround defined for " .. ft, warn)
