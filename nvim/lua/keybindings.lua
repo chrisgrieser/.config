@@ -26,7 +26,6 @@ keymap("n", "<leader>G", telescope.highlights)
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
-	cmd [[nohl]]
 	cmd [[update!]]
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	packer.startup(require("plugin-list").PluginList)
@@ -63,7 +62,6 @@ keymap("", "]", "}", {nowait = true})
 -- Jump History
 keymap("n", "<C-h>", "<C-o>") -- Back
 keymap("n", "<C-l>", "<C-i>") -- Forward
-keymap("n", "<C-o>", telescope.jumplist)
 
 -- Hunks
 keymap("n", "gh", ":Gitsigns next_hunk<CR>")
@@ -75,7 +73,12 @@ keymap("n", "Ö", "<Plug>(leap-backwards-to)")
 
 -- Search
 keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout
-keymap("n", "<Esc>", ":lua require('notify').dismiss()<CR>:nohl<CR>:echo<CR>lh", {silent = true}) -- clear highlights & shortmessage, lh clears hover window
+keymap("n", "<Esc>", function() -- clear all
+	require("notify").dismiss() -- notifications
+	cmd [[nohl]] -- highlights
+	cmd [[echo]] -- shortmessage
+	cmd [[normal!lh]] -- lsp hover window
+end, {silent = true})
 keymap({"n", "x", "o"}, "+", "*") -- no more modifier key on German Keyboard
 
 -- URLs
@@ -154,7 +157,7 @@ autocmd("BufEnter", {
 -- q -> comment
 -- aa -> an argument
 
-keymap({"o", "x"}, "iq", 'i"') -- double [q]uote
+keymap({ "o", "x" }, "iq", 'i"') -- double [q]uote
 keymap({"o", "x"}, "aq", 'a"')
 keymap({"o", "x"}, "iz", "i'") -- single quote (mnemonic: [z]itation)
 keymap({"o", "x"}, "az", "a'")
@@ -206,7 +209,7 @@ require("nvim-surround").setup {
 						{"function ()", "\t"},
 						{"", "end"},
 					}
-				elseif ft == "js" or ft == "ts" or ft == "bash" or ft == "zsh" then
+				elseif ft == "js" or ft == "ts" or ft == "bash" or ft == "zsh" or ft == "sh" then
 					return {
 						{"function () {", "\t"},
 						{"", "}"},
@@ -291,13 +294,16 @@ keymap("o", "Q", commented_lines_textobject, {silent = true})
 -- one-off recording (+ q needs remapping due to being mapped to comments)
 -- needs temporary remapping, since there is no "recording mode"
 g.isRecording = false
+keymap("n", "0", "qy") -- not saving in throwaway register z, so the respective keymaps can be used during a macro
 augroup("recording", {})
-autocmd({"RecordingLeave", "VimEnter"}, {
+autocmd("RecordingLeave", {
 	group = "recording",
 	callback = function()
 		keymap("n", "0", "qy") -- not saving in throwaway register z, so the respective keymaps can be used during a macro
 		g.isRecording = false -- for status line
 		require("lualine").refresh()
+		local recording = fn.
+		vim.notify(" RECORDED\n "..fn.getreg("y"))
 	end
 })
 autocmd("RecordingEnter", {
