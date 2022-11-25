@@ -94,15 +94,6 @@ dapUI.setup()
 dap.listeners.after.event_initialized["dapui_config"] = function()
 	wo.number = true
 end
-dap.listeners.before.event_terminated["dapui_config"] = function()
-	dapUI.close()
-	wo.number = false
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-	dapUI.close()
-	wo.number = false
-end
-
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
 
@@ -158,6 +149,7 @@ keymap("n", "<leader>b", function()
 			dap.set_breakpoint(fn.input("Breakpoint condition: ")) ---@diagnostic disable-line: param-type-mismatch
 		elseif choice == "Terminate" then
 			wo.number = false
+			dapUI.close()
 			dap.terminate()
 		end
 
