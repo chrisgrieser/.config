@@ -82,10 +82,9 @@ keymap({"n", "x", "o"}, "+", "*") -- no more modifier key on German Keyboard
 keymap("n", "gü", "/http.*<CR>:nohl<CR>") -- goto next
 keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
 
--- Marks
-keymap("", "m", "`M") -- Goto Mark M (changing this also requires adapting `dq` and `cq` mappings)
-keymap("", "ä", "mM") -- Set Mark M
-keymap("", "<C-m>", ":delmarks a-z<CR><C-e><C-y>") -- clear local marks, scrolling to update marks in scrollbar
+-- MARKS
+keymap("", "ä", "`M") -- Goto Mark M
+keymap("", "Ä", "mM") -- Set Mark M
 
 -- CLIPBOARD
 keymap("n", "x", '"_x')
@@ -110,6 +109,12 @@ autocmd("TextYankPost", {
 		end
 	end
 })
+
+-- vim.[m]atchup
+keymap({"n", "x"}, "m", "%", {remap = true})
+keymap({"o", "x"}, "im", "i%", {remap = true})
+keymap({"o", "x"}, "am", "a%", {remap = true})
+g.matchup_matchparen_offscreen = {method = "popup"}
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
