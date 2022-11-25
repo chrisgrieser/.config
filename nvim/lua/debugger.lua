@@ -91,12 +91,16 @@ dap.configurations.sh = {{
 require("nvim-dap-virtual-text").setup()
 dapUI.setup()
 
--- auto-close dapUI on termination of debugging
+dap.listeners.after.event_initialized["dapui_config"] = function()
+	wo.number = true
+end
 dap.listeners.before.event_terminated["dapui_config"] = function()
 	dapUI.close()
+	wo.number = false
 end
 dap.listeners.before.event_exited["dapui_config"] = function()
 	dapUI.close()
+	wo.number = false
 end
 
 --------------------------------------------------------------------------------
@@ -107,11 +111,11 @@ end
 keymap("n", "8", function()
 	local dapRunning = dap.status() ~= ""
 	local isNvimConfig = fn.expand("%:p:h"):find("nvim") and bo.filetype == "lua"
-	if not (dapRunning) then
-		bo.number = true
-		if isNvimConfig then require("osv").run_this() end
+	if not (dapRunning) and isNvimConfig then
+		require("osv").run_this()
+	else
+		dap.continue()
 	end
-	dap.continue()
 end, {nowait = true})
 
 keymap("n", "*", dap.toggle_breakpoint)
@@ -153,8 +157,8 @@ keymap("n", "<leader>b", function()
 		elseif choice == "Conditional Breakpoint" then
 			dap.set_breakpoint(fn.input("Breakpoint condition: ")) ---@diagnostic disable-line: param-type-mismatch
 		elseif choice == "Terminate" then
+			wo.number = false
 			dap.terminate()
-			bo.number = false
 		end
 
 	end)

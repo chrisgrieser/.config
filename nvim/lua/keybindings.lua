@@ -1,7 +1,7 @@
 require("utils")
 local warn = vim.log.levels.WARN
-local error = vim.log.levels.ERROR
 --------------------------------------------------------------------------------
+
 -- META
 g.mapleader = ","
 
@@ -22,22 +22,6 @@ keymap("n", "<leader>T", telescope.colorscheme)
 
 -- Highlights
 keymap("n", "<leader>G", telescope.highlights)
-
--- Update [P]lugins
-keymap("n", "<leader>p", function()
-	cmd [[nohl]]
-	cmd [[update!]]
-	package.loaded["plugin-list"] = nil -- empty the cache for lua
-	local packer = require("packer")
-	packer.startup(require("plugin-list").PluginList)
-	packer.snapshot("packer-snapshot_" .. os.date("!%Y-%m-%d_%H-%M-%S"))
-	packer.sync()
-	cmd [[MasonUpdateAll]]
-	-- remove oldest snapshot when more than 20
-	local snapshotPath = fn.stdpath("config") .. "/packer-snapshots"
-	os.execute([[cd ']] .. snapshotPath .. [[' ; ls -t | tail -n +20 | tr '\n' '\0' | xargs -0 rm]])
-end)
-keymap("n", "<leader>P", ":PackerStatus<CR>")
 
 -- write all before quitting
 keymap("n", "ZZ", ":wqall!<CR>")
@@ -114,7 +98,6 @@ autocmd("TextYankPost", {
 keymap("", "m", "%", {remap = true}) -- remap to use matchup's % instead of builtin %
 keymap({"o", "x"}, "im", "i%", {remap = true})
 keymap({"o", "x"}, "am", "a%", {remap = true})
-g.matchup_matchparen_offscreen = {method = "popup"}
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
@@ -229,7 +212,7 @@ keymap("n", "css", "cs_", {remap = true})
 
 -- COMMENTS (mnemonic: [q]uiet text)
 require("Comment").setup {
-	ignore = "^$",
+	ignore = "^$", -- ignore empty lines
 	toggler = {
 		line = "qq",
 		block = "<Nop>",

@@ -31,3 +31,17 @@ packer.startup{
 }
 
 packer.install() -- auto-install missing plugins
+
+-- Update [P]lugins
+vim.keymap.set("n", "<leader>p", function()
+	cmd [[update!]]
+	package.loaded["plugin-list"] = nil -- empty the cache for lua
+	packer.startup(require("plugin-list").PluginList)
+	packer.snapshot("packer-snapshot_" .. os.date("!%Y-%m-%d_%H-%M-%S"))
+	packer.sync()
+	cmd [[MasonUpdateAll]]
+	-- remove oldest snapshot when more than 20
+	local snapshotPath = fn.stdpath("config") .. "/packer-snapshots"
+	os.execute([[cd ']] .. snapshotPath .. [[' ; ls -t | tail -n +20 | tr '\n' '\0' | xargs -0 rm]])
+end)
+vim.keymap.set("n", "<leader>P", packer.status)
