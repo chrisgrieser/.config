@@ -14,9 +14,9 @@ const getEnv = (path) => $.getenv(path).replace(/^~/, app.pathTo("home folder"))
 //──────────────────────────────────────────────────────────────────────────────
 
 const jsonArray = [];
-const dotfileFolder = getEnv ("dotfile_folder");
+const dotfileFolder = getEnv("dotfile_folder");
 /* eslint-disable no-multi-str, quotes */
-const workArray = app.doShellScript (
+const workArray = app.doShellScript(
 	'PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;\
 	cd "' + dotfileFolder + '" ; \
 	fd --hidden --no-ignore \
@@ -79,12 +79,24 @@ workArray.forEach(file => {
 	jsonArray.push({
 		"title": fileName,
 		"subtitle": "▸ " + parentPart,
-		"match": alfredMatcher (fileName),
+		"match": alfredMatcher(fileName),
 		"icon": iconObject,
 		"type": "file:skipcheck",
 		"uid": filePath,
 		"arg": filePath,
 	});
+});
+
+// add dotfile folder itself
+const self = dotfileFolder.replace(/.*\/(.+)\//, "$1");
+jsonArray.push({
+	"title": self,
+	"subtitle": "▸ root",
+	"match": alfredMatcher(self),
+	"icon": { "type": "fileicon", "path": dotfileFolder },
+	"type": "file:skipcheck",
+	"uid": self,
+	"arg": self,
 });
 
 JSON.stringify({ items: jsonArray });
