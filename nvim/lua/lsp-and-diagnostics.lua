@@ -338,6 +338,8 @@ for _, lsp in pairs(lsp_servers) do
 	end
 	if lsp == "bashls" then
 		config.filetypes = {"sh", "zsh", "bash"} -- force lsp to work with zsh
+	elseif lsp == "bashls" then
+		config.filetypes = {"sh", "zsh", "bash"} -- force lsp to work with zsh
 	end
 	require("lspconfig")[lsp].setup(config)
 end
