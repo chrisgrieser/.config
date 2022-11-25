@@ -21,8 +21,8 @@ packer.startup{
 	config = {
 		display = {
 			open_fn = function() return require('packer.util').float{border = borderStyle} end,
-			compact = true,
 			prompt_border = borderStyle,
+			compact = true,
 			show_all_info = false,
 		},
 		snapshot_path = vim.fn.stdpath("config").."/packer-snapshots/",

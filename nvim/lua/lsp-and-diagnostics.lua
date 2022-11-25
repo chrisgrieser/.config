@@ -11,7 +11,6 @@ local lsp_servers = {
 	"jsonls",
 	"bashls", -- also used for zsh; shellcheck CLI required
 	"eslint",
-	"stylelint_lsp",
 	"emmet_ls",
 	"cssls",
 	"pyright",
@@ -323,8 +322,6 @@ for _, lsp in pairs(lsp_servers) do
 		config.settings = cssSettings
 	elseif lsp == "yamlls" then
 		config.settings = yamlSettings
-	elseif lsp == "stylelint_lsp" then
-		config.root_dir = root_pattern(".git")
 	elseif lsp == "bashls" then
 		config.filetypes = {"sh", "zsh", "bash"} -- force lsp to work with zsh
 	end
