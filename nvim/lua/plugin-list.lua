@@ -37,7 +37,7 @@ function M.PluginList(use)
 		"SmiteshP/nvim-navic", -- breadcrumbs
 		"j-hui/fidget.nvim", -- lsp status
 		"folke/neodev.nvim", -- lsp for nvim-lua config
-		"b0o/SchemaStore.nvim", 
+		"b0o/SchemaStore.nvim", -- schemas for json-lsp
 	}}
 	-- Linting
 	use {"jose-elias-alvarez/null-ls.nvim", requires = {
@@ -109,8 +109,13 @@ function M.PluginList(use)
 	-- Navigation
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}
 	use "ggandor/leap.nvim"
+	use "andymass/vim-matchup"
 
 	-- Editing
+	use {"abecodes/tabout.nvim",
+		after = "nvim-cmp",
+		requires = "nvim-treesitter/nvim-treesitter",
+	}
 	use "AndrewRadev/splitjoin.vim"
 	use "Darazaki/indent-o-matic"
 	use {"cshuaimin/ssr.nvim", -- structural search & replace
