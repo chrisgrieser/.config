@@ -111,8 +111,7 @@ if isGui() then
 		render = "minimal",
 		stages = "slide",
 		minimum_width = 25,
-		max_width = 45,
-		max_height = 12,
+		max_height = 15,
 		timeout = 4000,
 		top_down = false,
 	}
@@ -144,7 +143,7 @@ require("dressing").setup {
 			border = borderStyle,
 			relative = "cursor",
 			winblend = 4,
-			max_width = 80,
+			max_width = 60,
 			min_width = 18,
 			max_height = 12,
 			min_height = 4,
@@ -172,7 +171,7 @@ require("fidget").setup {
 -- STATUS LINE (LUALINE)
 
 local function recordingStatus()
-	if g.isRecording then return " REC"
+	if g.isRecording then return " RECORDING"
 	else return "" end
 end
 
