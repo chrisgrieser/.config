@@ -218,6 +218,7 @@ function motherHomeModeLayout()
 		{"Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
 	}
 
 	useLayout(motherHomeLayout)
@@ -274,7 +275,7 @@ wf_appsOnMouseScreen:subscribe(wf.windowCreated, function (newWindow)
 	if not(mouseScreen) then return end
 	local screenOfWindow = newWindow:screen()
 	if isProjector() and not(mouseScreen:name() == screenOfWindow:name()) then
-		repeatFunc({0, 0.1, 0.2, 0.4}, function()
+		repeatFunc({0, 0.1, 0.2, 0.4, 0.6}, function()
 			newWindow:moveToScreen(mouseScreen)
 		end)
 	end

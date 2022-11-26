@@ -136,19 +136,8 @@ opt.history = 250 -- do not save too much history to reduce noise for command li
 --------------------------------------------------------------------------------
 
 -- folding
-opt.foldmethod = "indent"
+opt.foldmethod = "syntax"
 opt.foldenable = false -- do not fold on start
-augroup("rememberFolds", {}) -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
-autocmd("BufWinLeave", {
-	group = "rememberFolds",
-	pattern = "?*",
-	command = "silent! mkview"
-})
-autocmd("BufWinEnter", {
-	group = "rememberFolds",
-	pattern = "?*",
-	command = "silent! loadview"
-})
 
 --------------------------------------------------------------------------------
 
