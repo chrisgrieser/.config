@@ -1,14 +1,16 @@
 title: 🔺 App Switcher
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
-definitions:
+anchors:
   - conditions: &leader-active
       - type: variable_if
         name: LEADER_ACTIVE
         value: true
-  - &deactivate-leader set_variable:
+  - &deactivate-leader
+    set_variable:
       name: LEADER_ACTIVE
       value: false
-  - &remove-notice set_notification_message:
+  - &remove-notice
+    set_notification_message:
       id: leader-notice
       text: ""
 
@@ -54,18 +56,14 @@ rules:
             identifiers:
               - vendor_id: 76
                 is_keyboard: true
+          # Prevent footpedal from accidentally triggering twice.
           - type: device_if
-            description: Prevent footpedal from accidentally triggering twice.
             identifiers:
               - is_pointing_device: false
         to_if_alone:
           - key_code: f19
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       - type: basic
         description: Apple Keyboard
         from:
@@ -106,12 +104,8 @@ rules:
                 is_keyboard: true
         to_if_alone:
           - key_code: f19
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
 
   #─────────────────────────────────────────────────────────────────────────────
 
@@ -124,24 +118,16 @@ rules:
           key_code: escape
         conditions: *leader-active
         to:
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       - type: basic
         description: 'Hyper (Esc): Leader Cancel'
         from:
           key_code: caps_lock
         conditions: *leader-active
         to_if_alone:
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [.] Emoji Inserter
       - type: basic
         from:
@@ -151,39 +137,25 @@ rules:
             modifiers:
               - control
               - command
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
         conditions: *leader-active
       # [C]alendar: BusyCal
       - type: basic
-        from:
-          key_code: c
+        from: {key_code: c}
         conditions: *leader-active
         to:
           - shell_command: open -a 'BusyCal'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [,]: System Preferences
       - type: basic
-        from:
-          key_code: comma
+        from: {key_code: comma}
         conditions: *leader-active
         to:
           - shell_command: open -a 'System Preferences'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [O]bsidian
       - type: basic
         from:
@@ -191,12 +163,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Obsidian'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [D]iscord
       - type: basic
         from:
@@ -204,12 +172,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Discord'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [Z]oom
       - type: basic
         from:
@@ -218,12 +182,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'zoom.us'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [E]ditor: Neovim
       - type: basic
         from:
@@ -231,12 +191,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: osascript -e 'tell application "Neovide" to activate'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # D[r]afts
       - type: basic
         from:
@@ -244,12 +200,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Drafts'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [S]lack
       - type: basic
         from:
@@ -257,12 +209,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Slack'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # Script Editor [Q]
       - type: basic
         from:
@@ -270,12 +218,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Script Editor'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [M]imestream
       - type: basic
         from:
@@ -283,12 +227,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Mimestream'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # Brave [B]rowser
       - type: basic
         from:
@@ -296,12 +236,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Brave Browser'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # Brave [B]rowser: re-open tab (Shift)
       - type: basic
         from:
@@ -318,12 +254,8 @@ rules:
             modifiers:
               - command
               - shift
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [l]ocate: Marta
       - type: basic
         from:
@@ -331,12 +263,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a "Marta"
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [H]ammerspoon
       - type: basic
         from:
@@ -344,12 +272,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Hammerspoon'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [K]arabiner-EventViewer
       - type: basic
         from:
@@ -357,12 +281,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Karabiner-EventViewer'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [X] MacPass
       - type: basic
         from:
@@ -371,12 +291,8 @@ rules:
         to:
           # for some reason opening once sometimes puts MacPass in the bg
           - shell_command: 'open -a "MacPass" ; sleep 0.3 ; open -a "MacPass"'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [Y]ouTube
       - type: basic
         from:
@@ -384,12 +300,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'YouTube' || open 'https://www.youtube.com/'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [A]lfred Preferences
       - type: basic
         from:
@@ -397,12 +309,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Alfred Preferences'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [I]noreader
       - type: basic
         from:
@@ -410,12 +318,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Inoreader' || open 'https://www.inoreader.com/'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [N]ews Reader (Reeder)
       - type: basic
         from:
@@ -423,12 +327,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Reeder' || open 'https://www.inoreader.com/'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [P]DF Reader: Highlights
       - type: basic
         from:
@@ -436,12 +336,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Highlights'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [G]oogle Docs
       - type: basic
         from:
@@ -449,12 +345,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Docs' || open 'https://docs.google.com/'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [V]ideo: IINA
       - type: basic
         from:
@@ -462,12 +354,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'IINA'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [#] Color Picker
       - type: basic
         from:
@@ -475,12 +363,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Color Picker'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [W]hatsApp
       - type: basic
         from:
@@ -488,12 +372,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open 'https://web.whatsapp.com/'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [F]acebook Messenger
       - type: basic
         from:
@@ -501,12 +381,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open 'https://www.messenger.com/'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [T]elegram
       - type: basic
         from:
@@ -514,12 +390,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open 'https://web.telegram.org/z/'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [4] (mnenic: $ sign) MoneyMoney
       - type: basic
         from:
@@ -527,12 +399,8 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'MoneyMoney'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [?] (w/o shift, German keyboard) man page or cheatsheet
       - type: basic
         from:
@@ -546,12 +414,8 @@ rules:
               - language: ^de$
         to:
           - shell_command: open 'hammerspoon://focus-help'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
       # [esc] (f18) Activity Monitor
       - type: basic
         from:
@@ -559,9 +423,5 @@ rules:
         conditions: *leader-active
         to:
           - shell_command: open -a 'Activity Monitor'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
+          - *deactivate-leader
+          - *remove-notice
