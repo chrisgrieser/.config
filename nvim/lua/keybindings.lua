@@ -178,7 +178,6 @@ autocmd("RecordingLeave", {
 	group = "recording",
 	callback = function()
 		keymap("n", "0", "qy") -- not saving in throwaway register z, so the respective keymaps can be used during a macro
-		keymap("n", "9", "@y") -- quick replay (I don't use counts that high anyway)
 		vim.notify(" RECORDED\n " .. vim.v.event.regcontents)
 	end
 })
@@ -186,6 +185,7 @@ autocmd("RecordingEnter", {
 	group = "recording",
 	callback = function() keymap("n", "0", "q") end,
 })
+keymap("n", "9", "@y") -- quick replay (I don't use counts that high anyway)
 keymap("n", "0", "qy") -- needs to be set initially
 
 --------------------------------------------------------------------------------
@@ -326,19 +326,17 @@ keymap("n", "gO", telescope.git_files) -- [o]pen file in git directory
 keymap("n", "gr", telescope.oldfiles) -- [r]ecent files
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
 keymap("n", "gf", telescope.live_grep) -- search in [f]iles
-keymap("n", "gR", telescope.resume) -- search in [f]iles
 
--- File Operations (ghengis-nvim)
-
-local ghengis = require("ghengis")
-keymap("", "<C-p>", ghengis.copyFilepath)
-keymap("", "<C-n>", ghengis.copyFilename)
-keymap("", "<leader>x", ghengis.chmodx)
-keymap("", "<C-r>", ghengis.renameFile)
-keymap("", "<C-d>", ghengis.duplicateFile)
-keymap("", "<D-BS>", ghengis.trashFile)
-keymap({"n", "x", "i"}, "<D-n>", ghengis.createNewFile)
-keymap("x", "<leader>X", ghengis.moveSelectionToNewFile)
+-- File Operations (genghis-nvim)
+local genghis = require("genghis")
+keymap("", "<C-p>", genghis.copyFilepath)
+keymap("", "<C-n>", genghis.copyFilename)
+keymap("", "<leader>x", genghis.chmodx)
+keymap("", "<C-r>", genghis.renameFile)
+keymap("", "<C-d>", genghis.duplicateFile)
+keymap("", "<D-BS>", genghis.trashFile)
+keymap("", "<D-n>", genghis.createNewFile)
+keymap("x", "X", genghis.moveSelectionToNewFile)
 
 -- Git Operations
 keymap("n", "<C-g>", function()
@@ -356,7 +354,6 @@ keymap("n", "<C-g>", function()
 		end
 	end)
 end)
-keymap("x", "<C-g>", ":DiffviewFileHistory<CR>")
 
 --------------------------------------------------------------------------------
 
