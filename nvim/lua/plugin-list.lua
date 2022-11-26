@@ -44,6 +44,17 @@ function M.PluginList(use)
 		after = "nvim-cmp",
 		requires = "nvim-treesitter/nvim-treesitter",
 	}
+	use {"cshuaimin/ssr.nvim", -- structural search & replace
+		module = "ssr",
+		config = function()
+			require("ssr").setup {
+				keymaps = {
+					close = "Q",
+					replace_all = "<CR>",
+				}
+			}
+		end,
+	}
 
 	-- LSP
 	use {"neovim/nvim-lspconfig", requires = {
@@ -128,17 +139,6 @@ function M.PluginList(use)
 
 	-- Editing
 	use "Darazaki/indent-o-matic"
-	use {"cshuaimin/ssr.nvim", -- structural search & replace
-		module = "ssr",
-		config = function()
-			require("ssr").setup {
-				keymaps = {
-					close = "Q",
-					replace_all = "<CR>",
-				}
-			}
-		end,
-	}
 
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
