@@ -18,9 +18,6 @@ local lsp_servers = {
 	"tsserver", -- ts/js
 }
 
-require("lspconfig").grammarly.setup {
-	init_options = {clientId = "client_BaDkMgx4X19X9UxxYRCXZo",},
-}
 --------------------------------------------------------------------------------
 -- SIGN-COLUMN ICONS
 for type, icon in pairs(signIcons) do
@@ -326,7 +323,7 @@ lspSettings.jsonls = {
 }
 
 lspFilestypes.bashls = {"sh", "zsh", "bash"} -- force lsp to work with zsh
-lspFilestypes.emmet_ls = {"css", "scss"} --only css
+lspFilestypes.emmet_ls = {"css", "scss", "html"}
 
 --------------------------------------------------------------------------------
 
