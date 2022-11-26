@@ -56,7 +56,12 @@ ln -sf "$DOTFILE_FOLDER/linter-configs/.flake8" ~
 ln -sf "$DOTFILE_FOLDER/vale/.vale.ini" ~
 
 # pandoc
+[[ -e ~/.pandoc ]] && rm -rf ~/.pandoc
 ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
+
+# searchlink
+[[ -e ~/.searchlink ]] && rm -f ~/.searchlink
+ln -sf "$DOTFILE_FOLDER/searchlink/.searchlink" ~
 
 # Hammerspoon
 [[ -e ~/.hammerspoon ]] && rm -rf ~/.hammerspoon
