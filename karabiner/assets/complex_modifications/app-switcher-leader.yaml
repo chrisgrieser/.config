@@ -1,5 +1,12 @@
 title: 🔺 App Switcher
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
+definitions:
+  - conditions: &leader-active
+      - type: variable_if
+        name: LEADER_ACTIVE
+        value: true
+
+#───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: '🔺 L-Ctrl (Non-Apple) / fn (Apple)'
     manipulators:
@@ -34,9 +41,7 @@ rules:
         to:
           - key_code: left_control
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
           - type: device_unless
             identifiers:
               - vendor_id: 76
@@ -84,9 +89,7 @@ rules:
         to:
           - key_code: fn
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
           - type: device_if
             identifiers:
               - vendor_id: 76
@@ -99,6 +102,8 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
+
+  #─────────────────────────────────────────────────────────────────────────────
   - description: 🔺 App Switcher Actions
     manipulators:
       # Cancel (Esc/Hyper)
@@ -107,9 +112,7 @@ rules:
         from:
           key_code: escape
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - set_variable:
               name: LEADER_ACTIVE
@@ -122,9 +125,7 @@ rules:
         from:
           key_code: caps_lock
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to_if_alone:
           - set_variable:
               name: LEADER_ACTIVE
@@ -148,9 +149,7 @@ rules:
               id: leader-notice
               text: ""
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
       # [C]alendar: BusyCal
       - type: basic
         from:
@@ -172,9 +171,7 @@ rules:
         from:
           key_code: comma
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'System Preferences'
           - set_variable:
@@ -188,9 +185,7 @@ rules:
         from:
           key_code: o
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Obsidian'
           - set_variable:
@@ -204,9 +199,7 @@ rules:
         from:
           key_code: d
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Discord'
           - set_variable:
@@ -221,9 +214,7 @@ rules:
           # switched y and z due to German Keyboard
           key_code: "y"
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'zoom.us'
           - set_variable:
@@ -237,9 +228,7 @@ rules:
         from:
           key_code: e
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: osascript -e 'tell application "Neovide" to activate'
           - set_variable:
@@ -269,9 +258,7 @@ rules:
         from:
           key_code: s
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Slack'
           - set_variable:
@@ -285,9 +272,7 @@ rules:
         from:
           key_code: q
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Script Editor'
           - set_variable:
@@ -301,9 +286,7 @@ rules:
         from:
           key_code: m
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Mimestream'
           - set_variable:
@@ -317,9 +300,7 @@ rules:
         from:
           key_code: b
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Brave Browser'
           - set_variable:
@@ -336,9 +317,7 @@ rules:
             mandatory:
               - shift
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: osascript -e 'tell application "Brave Browser" to activate'
           - key_code: vk_none
@@ -358,9 +337,7 @@ rules:
         from:
           key_code: l
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a "Marta"
           - set_variable:
@@ -374,9 +351,7 @@ rules:
         from:
           key_code: h
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Hammerspoon'
           - set_variable:
@@ -390,9 +365,7 @@ rules:
         from:
           key_code: k
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Karabiner-EventViewer'
           - set_variable:
@@ -406,9 +379,7 @@ rules:
         from:
           key_code: x
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           # for some reason opening once sometimes puts MacPass in the bg
           - shell_command: 'open -a "MacPass" ; sleep 0.3 ; open -a "MacPass"'
@@ -423,9 +394,7 @@ rules:
         from:
           key_code: z  # switched y and z due to German Keyboard
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'YouTube' || open 'https://www.youtube.com/'
           - set_variable:
@@ -439,9 +408,7 @@ rules:
         from:
           key_code: a
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Alfred Preferences'
           - set_variable:
@@ -455,9 +422,7 @@ rules:
         from:
           key_code: i
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Inoreader' || open 'https://www.inoreader.com/'
           - set_variable:
@@ -471,9 +436,7 @@ rules:
         from:
           key_code: "n"
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Reeder' || open 'https://www.inoreader.com/'
           - set_variable:
@@ -487,9 +450,7 @@ rules:
         from:
           key_code: p
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Highlights'
           - set_variable:
@@ -503,9 +464,7 @@ rules:
         from:
           key_code: g
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Docs' || open 'https://docs.google.com/'
           - set_variable:
@@ -519,9 +478,7 @@ rules:
         from:
           key_code: v
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'IINA'
           - set_variable:
@@ -535,9 +492,7 @@ rules:
         from:
           key_code: non_us_pound  # "#" on Germany keyboard
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Color Picker'
           - set_variable:
@@ -551,9 +506,7 @@ rules:
         from:
           key_code: w
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open 'https://web.whatsapp.com/'
           - set_variable:
@@ -567,9 +520,7 @@ rules:
         from:
           key_code: f
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open 'https://www.messenger.com/'
           - set_variable:
@@ -583,9 +534,7 @@ rules:
         from:
           key_code: t
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open 'https://web.telegram.org/z/'
           - set_variable:
@@ -599,9 +548,7 @@ rules:
         from:
           key_code: "4"
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'MoneyMoney'
           - set_variable:
@@ -615,9 +562,7 @@ rules:
         from:
           key_code: hyphen
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
           - type: input_source_if
             input_sources:
               - language: ^de$
@@ -634,346 +579,9 @@ rules:
         from:
           key_code: "f18"
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
         to:
           - shell_command: open -a 'Activity Monitor'
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-  - description: "🅰️🗂 Browser/Obsidian/Sublime: Tab Switching"
-    manipulators:
-      - type: basic
-        from:
-          key_code: "1"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-        to:
-          - key_code: "1"
-            modifiers:
-              - command
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "2"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-        to:
-          - key_code: "2"
-            modifiers:
-              - command
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "3"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-        to:
-          - key_code: "3"
-            modifiers:
-              - command
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "4"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-        to:
-          - key_code: "4"
-            modifiers:
-              - command
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "5"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-        to:
-          - key_code: "5"
-            modifiers:
-              - command
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "6"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-        to:
-          - key_code: "6"
-            modifiers:
-              - command
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "7"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-        to:
-          - key_code: "7"
-            modifiers:
-              - command
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "8"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-        to:
-          - key_code: "8"
-            modifiers:
-              - command
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "9"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-        to:
-          - key_code: "9"
-            modifiers:
-              - command
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "1"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-        to:
-          - key_code: "1"
-            modifiers:
-              - control
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "2"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-        to:
-          - key_code: "2"
-            modifiers:
-              - control
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "3"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-        to:
-          - key_code: "3"
-            modifiers:
-              - control
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "4"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-        to:
-          - key_code: "4"
-            modifiers:
-              - control
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "5"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-        to:
-          - key_code: "5"
-            modifiers:
-              - control
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "6"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-        to:
-          - key_code: "6"
-            modifiers:
-              - control
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "7"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-        to:
-          - key_code: "7"
-            modifiers:
-              - control
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "8"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-        to:
-          - key_code: "8"
-            modifiers:
-              - control
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: false
-          - set_notification_message:
-              id: leader-notice
-              text: ""
-      - type: basic
-        from:
-          key_code: "9"
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-        to:
-          - key_code: "9"
-            modifiers:
-              - control
           - set_variable:
               name: LEADER_ACTIVE
               value: false
