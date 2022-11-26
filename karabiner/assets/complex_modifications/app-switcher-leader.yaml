@@ -158,8 +158,7 @@ rules:
           - *remove-notice
       # [O]bsidian
       - type: basic
-        from:
-          key_code: o
+        from: {key_code: o}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Obsidian'
@@ -167,8 +166,7 @@ rules:
           - *remove-notice
       # [D]iscord
       - type: basic
-        from:
-          key_code: d
+        from: {key_code: d}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Discord'
@@ -176,9 +174,8 @@ rules:
           - *remove-notice
       # [Z]oom
       - type: basic
-        from:
-          # switched y and z due to German Keyboard
-          key_code: "y"
+        # switched y and z due to German Keyboard
+        from: {key_code: "y"}
         conditions: *leader-active
         to:
           - shell_command: open -a 'zoom.us'
@@ -186,8 +183,7 @@ rules:
           - *remove-notice
       # [E]ditor: Neovim
       - type: basic
-        from:
-          key_code: e
+        from: {key_code: e}
         conditions: *leader-active
         to:
           - shell_command: osascript -e 'tell application "Neovide" to activate'
@@ -195,8 +191,7 @@ rules:
           - *remove-notice
       # D[r]afts
       - type: basic
-        from:
-          key_code: r
+        from: {key_code: r}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Drafts'
@@ -204,8 +199,7 @@ rules:
           - *remove-notice
       # [S]lack
       - type: basic
-        from:
-          key_code: s
+        from: {key_code: s}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Slack'
@@ -213,8 +207,7 @@ rules:
           - *remove-notice
       # Script Editor [Q]
       - type: basic
-        from:
-          key_code: q
+        from: {key_code: q}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Script Editor'
@@ -222,8 +215,7 @@ rules:
           - *remove-notice
       # [M]imestream
       - type: basic
-        from:
-          key_code: m
+        from: {key_code: m}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Mimestream'
@@ -231,8 +223,7 @@ rules:
           - *remove-notice
       # Brave [B]rowser
       - type: basic
-        from:
-          key_code: b
+        from: {key_code: b}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Brave Browser'
@@ -258,8 +249,7 @@ rules:
           - *remove-notice
       # [l]ocate: Marta
       - type: basic
-        from:
-          key_code: l
+        from: {key_code: l}
         conditions: *leader-active
         to:
           - shell_command: open -a "Marta"
@@ -267,8 +257,7 @@ rules:
           - *remove-notice
       # [H]ammerspoon
       - type: basic
-        from:
-          key_code: h
+        from: {key_code: h}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Hammerspoon'
@@ -276,8 +265,7 @@ rules:
           - *remove-notice
       # [K]arabiner-EventViewer
       - type: basic
-        from:
-          key_code: k
+        from: {key_code: k}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Karabiner-EventViewer'
@@ -285,8 +273,7 @@ rules:
           - *remove-notice
       # [X] MacPass
       - type: basic
-        from:
-          key_code: x
+        from: {key_code: x}
         conditions: *leader-active
         to:
           # for some reason opening once sometimes puts MacPass in the bg
@@ -295,8 +282,7 @@ rules:
           - *remove-notice
       # [Y]ouTube
       - type: basic
-        from:
-          key_code: z  # switched y and z due to German Keyboard
+        from: {key_code: z} # switched y and z due to German Keyboard
         conditions: *leader-active
         to:
           - shell_command: open -a 'YouTube' || open 'https://www.youtube.com/'
@@ -304,8 +290,7 @@ rules:
           - *remove-notice
       # [A]lfred Preferences
       - type: basic
-        from:
-          key_code: a
+        from: {key_code: a}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Alfred Preferences'
@@ -313,8 +298,7 @@ rules:
           - *remove-notice
       # [I]noreader
       - type: basic
-        from:
-          key_code: i
+        from: {key_code: i}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Inoreader' || open 'https://www.inoreader.com/'
@@ -322,8 +306,7 @@ rules:
           - *remove-notice
       # [N]ews Reader (Reeder)
       - type: basic
-        from:
-          key_code: "n"
+        from: {key_code: "n"}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Reeder' || open 'https://www.inoreader.com/'
@@ -331,8 +314,7 @@ rules:
           - *remove-notice
       # [P]DF Reader: Highlights
       - type: basic
-        from:
-          key_code: p
+        from: {key_code: p}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Highlights'
@@ -340,8 +322,7 @@ rules:
           - *remove-notice
       # [G]oogle Docs
       - type: basic
-        from:
-          key_code: g
+        from: {key_code: g}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Docs' || open 'https://docs.google.com/'
@@ -349,8 +330,7 @@ rules:
           - *remove-notice
       # [V]ideo: IINA
       - type: basic
-        from:
-          key_code: v
+        from: {key_code: v}
         conditions: *leader-active
         to:
           - shell_command: open -a 'IINA'
@@ -358,8 +338,7 @@ rules:
           - *remove-notice
       # [#] Color Picker
       - type: basic
-        from:
-          key_code: non_us_pound  # "#" on Germany keyboard
+        from: {key_code: non_us_pound} # "#" on Germany keyboard
         conditions: *leader-active
         to:
           - shell_command: open -a 'Color Picker'
@@ -367,8 +346,7 @@ rules:
           - *remove-notice
       # [W]hatsApp
       - type: basic
-        from:
-          key_code: w
+        from: {key_code: w}
         conditions: *leader-active
         to:
           - shell_command: open 'https://web.whatsapp.com/'
@@ -376,8 +354,7 @@ rules:
           - *remove-notice
       # [F]acebook Messenger
       - type: basic
-        from:
-          key_code: f
+        from: {key_code: f}
         conditions: *leader-active
         to:
           - shell_command: open 'https://www.messenger.com/'
@@ -385,8 +362,7 @@ rules:
           - *remove-notice
       # [T]elegram
       - type: basic
-        from:
-          key_code: t
+        from: {key_code: t}
         conditions: *leader-active
         to:
           - shell_command: open 'https://web.telegram.org/z/'
@@ -394,8 +370,7 @@ rules:
           - *remove-notice
       # [4] (mnenic: $ sign) MoneyMoney
       - type: basic
-        from:
-          key_code: "4"
+        from: {key_code: "4"}
         conditions: *leader-active
         to:
           - shell_command: open -a 'MoneyMoney'
@@ -403,23 +378,20 @@ rules:
           - *remove-notice
       # [?] (w/o shift, German keyboard) man page or cheatsheet
       - type: basic
-        from:
-          key_code: hyphen
+        from: {key_code: hyphen}
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
             value: true
           - type: input_source_if
-            input_sources:
-              - language: ^de$
+            input_sources: [language: ^de$]
         to:
           - shell_command: open 'hammerspoon://focus-help'
           - *deactivate-leader
           - *remove-notice
       # [esc] (f18) Activity Monitor
       - type: basic
-        from:
-          key_code: "f18"
+        from: {key_code: "f18"}
         conditions: *leader-active
         to:
           - shell_command: open -a 'Activity Monitor'
