@@ -130,14 +130,17 @@ keymap("n", "<leader>a", vim.lsp.buf.code_action)
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local function on_attach(client, bufnr)
-	b.hasLSPserver = true
-
+	local bufopts = {silent = true, buffer = true}
 	require("lsp-inlayhints").on_attach(client, bufnr) ---@diagnostic disable-line: missing-parameter
+
 	if client.server_capabilities.documentSymbolProvider then
 		require("nvim-navic").attach(client, bufnr)
 	end
 
-	local bufopts = {silent = true, buffer = true}
+	if client.server_capabilities.documentSymbolProvider then
+		require("nvim-navic").attach(client, bufnr)
+	end
+
 	keymap("n", "gd", telescope.lsp_definitions, bufopts)
 	keymap("n", "gD", telescope.lsp_references, bufopts)
 	keymap("n", "gy", telescope.lsp_type_definitions, bufopts)
