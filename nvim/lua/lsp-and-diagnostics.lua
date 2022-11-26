@@ -137,14 +137,13 @@ local function on_attach(client, bufnr)
 		require("nvim-navic").attach(client, bufnr)
 	end
 
-	if client.server_capabilities.documentSymbolProvider then
-		require("nvim-navic").attach(client, bufnr)
+	if client.server_capabilities.renameProvider then
+		keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts) -- overrides treesitter-refactor's rename
 	end
 
 	keymap("n", "gd", telescope.lsp_definitions, bufopts)
 	keymap("n", "gD", telescope.lsp_references, bufopts)
 	keymap("n", "gy", telescope.lsp_type_definitions, bufopts)
-	keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts) -- overrides treesitter-refactor's rename
 	keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)
 	keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 

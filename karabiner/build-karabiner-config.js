@@ -26,6 +26,7 @@ if (yqNotInstalled) {
 	throw "";
 } else {
 	// convert yaml to json (requires `yq`)
+	// using `explode` to expand anchors & aliases: https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators#explode-alias-and-anchor
 	app.doShellScript(`
 		export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 		cd "$HOME/.config/karabiner/assets/complex_modifications/" || exit 1
@@ -43,7 +44,7 @@ if (yqNotInstalled) {
 			const filePath = customRulesJSONlocation + fileName;
 			const ruleSet = JSON.parse(readFile(filePath)).rules;
 			ruleSet.forEach(rule => customRules.push(rule));
-			app.doShellScript(`rm "${filePath}"`) // delete leftover JSON
+			app.doShellScript(`rm "${filePath}"`); // delete leftover JSON
 		});
 	const complexRules = JSON.parse(readFile(karabinerJSON));
 
