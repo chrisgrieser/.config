@@ -29,6 +29,7 @@ require("nvim-treesitter.configs").setup {
 		disable = {
 			"css", -- looks weird with css: https://github.com/tree-sitter/tree-sitter-css/issues/34
 			"markdown", -- looks worse and enables spellcheck in URLs and Code Blocks 🙈
+			"markdown_inline", 
 		},
 
 	},

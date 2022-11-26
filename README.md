@@ -18,9 +18,9 @@ Most people tell me they find the following configurations useful:
 
 ## How this repository works
 - These files are symlinked into iCloud for synchronization.
-- `Hammerspoon` [is configured](hammerspoon/system-and-cron.lua) to run the script [git-dotfile-sync.sh](git-dotfile-sync.sh) every 15 minutes, or on wake and sleep. The Alfred keyword `shutdown` triggers the script before shutting down.
+- Hammerspoon [is configured](hammerspoon/system-and-cron.lua) to run the script [git-dotfile-sync.sh](git-dotfile-sync.sh) every 15 minutes, or on wake and sleep. The Alfred keyword `shutdown` triggers the script before shutting down.
 - The git repos that are nested inside this dotfile repository (that is Alfred git repositories, because the nesting cannot be avoided in this case) are gitignored and pulled individually.
-- [git-dotfile-backup.sh](git-dotfile-backup.sh) checks whether there have been any changes in dot files. If there are, it creates somewhat useful commit messages and runs the `git add commit pull push` sequence.
+- [git-dotfile-backup.sh](git-dotfile-backup.sh) checks whether there have been any changes in dotfiles. If there are, it creates somewhat useful commit messages and runs the `git add commit pull push` sequence.
 - [.gitignore](.gitignore) contains a list of files not to backups for several reasons, for example redundancy, privacy, or because they are too big for a git repo.
 
 <!-- vale Google.FirstPerson = NO --> <!-- vale Microsoft.FirstPerson = NO -->
@@ -34,3 +34,4 @@ __Profiles__
 - [Twitter](https://twitter.com/pseudo_meta)
 - [ResearchGate](https://www.researchgate.net/profile/Christopher-Grieser)
 - [LinkedIn](https://www.linkedin.com/in/christopher-grieser-ba693b17a/)
+
