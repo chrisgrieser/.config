@@ -110,15 +110,15 @@ autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
 	command = "silent! update"
 })
 
-augroup("Mini-Lint", {}) -- trim trailing whitespaces & extra blanks at eof on save
+augroup("Mini-Lint", {})
 autocmd("BufWritePre", {
 	group = "Mini-Lint",
 	callback = function()
 		local save_view = fn.winsaveview() -- save cursor positon
 		if bo.filetype ~= "markdown" then -- to preserve spaces from the two-space-rule, and trailing spaces on sentences
-			cmd [[%s/\s\+$//e]]
+			cmd [[%s/\s\+$//e]] -- trim trailing whitespaces
 		end
-		cmd [[silent! %s#\($\n\s*\)\+\%$##]] -- https://stackoverflow.com/a/7496112
+		cmd [[silent! %s#\($\n\s*\)\+\%$##]] -- trim extra blanks at eof https://stackoverflow.com/a/7496112
 		fn.winrestview(save_view)
 	end
 })
@@ -136,8 +136,19 @@ opt.history = 250 -- do not save too much history to reduce noise for command li
 --------------------------------------------------------------------------------
 
 -- folding
-opt.foldmethod = "syntax"
+opt.foldmethod = "indent"
 opt.foldenable = false -- do not fold on start
+augroup("rememberFolds", {}) -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
+autocmd("BufWinLeave", {
+	group = "rememberFolds",
+	pattern = "?*",
+	command = "silent! mkview!"
+})
+autocmd("BufWinEnter", {
+	group = "rememberFolds",
+	pattern = "?*",
+	command = "silent! loadview"
+})
 
 --------------------------------------------------------------------------------
 
