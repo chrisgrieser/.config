@@ -184,6 +184,7 @@ require("nvim-surround").setup {
 	surrounds = {
 		["f"] = {
 			find = function()
+				-- needs to be consistent with treesitter
 				return require("nvim-surround.config").get_selection {motion = "af"}
 			end,
 			delete = function()
@@ -219,6 +220,16 @@ require("nvim-surround").setup {
 				return {{""}, {""}}
 			end,
 		},
+		["C"] = {
+			find = function()
+				-- needs to be consistent with treesitter
+				return require("nvim-surround.config").get_selection {motion = "aC"}
+			end,
+			delete = function()
+				-- needs to be consistent with treesitter
+				return require("nvim-surround.config").get_selection {motion = "aC"}
+			end,
+		}
 	}
 }
 
@@ -293,17 +304,12 @@ keymap("o", "Q", commented_lines_textobject, {silent = true})
 -- MACRO
 -- one-off recording (+ q needs remapping due to being mapped to comments)
 -- needs temporary remapping, since there is no "recording mode"
-g.isRecording = false
-keymap("n", "0", "qy") -- not saving in throwaway register z, so the respective keymaps can be used during a macro
 augroup("recording", {})
 autocmd("RecordingLeave", {
 	group = "recording",
 	callback = function()
 		keymap("n", "0", "qy") -- not saving in throwaway register z, so the respective keymaps can be used during a macro
-		g.isRecording = false -- for status line
-		local recording = vim.v.event.regcontents
-		vim.notify(" RECORDED\n "..recording)
-		require("lualine").refresh()
+		vim.notify(" RECORDED\n "..vim.v.event.regcontents)
 	end
 })
 autocmd("RecordingEnter", {
@@ -311,9 +317,9 @@ autocmd("RecordingEnter", {
 	callback = function()
 		keymap("n", "0", "q")
 		g.isRecording = true
-		require("lualine").refresh()
 	end
 })
+keymap("n", "0", "qy") -- needs to be set initially
 keymap("n", "9", "@y") -- quick replay (don't use counts that high anyway)
 
 -- structured search & replace

@@ -171,7 +171,7 @@ require("fidget").setup {
 -- STATUS LINE (LUALINE)
 
 local function recordingStatus()
-	if g.isRecording then return " RECORDING"
+	if fn.reg_recording() ~= "" then return " RECORDING"
 	else return "" end
 end
 
@@ -272,16 +272,6 @@ local function showBreadcrumbs()
 	-- breadcrumbs not useful in css, but winbar still needed for recordings
 	return navic.is_available() and not (bo.filetype == "css")
 end
-
-local visual_str = {
-	["v"] = true, -- Visual by character
-	["vs"] = true, -- Visual by character using |v_CTRL-O| in Select mode
-	["V"] = true, -- Visual by line
-	["Vs"] = true, -- Visual by line using |v_CTRL-O| in Select mode
-	["CTRL-V"] = true, -- Visual blockwise
-	["^V"] = true, -- Visual blockwise <--- this never hits, why?
-	["CTRL-Vs"] = true, -- Visual blockwise using |v_CTRL-O| in Select mode
-}
 
 local function selectionCount()
 	if not (fn.mode():find("[vV]")) then return "" end
