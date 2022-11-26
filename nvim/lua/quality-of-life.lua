@@ -268,15 +268,13 @@ function M.overscroll(action)
 			cmd [[normal! zz]]
 		end
 	end
-	cmd("normal! " .. action)
+	cmd("normal! " .. tostring(vim.v.count1) .. action)
 end
 
 ---Force pasting a linewise register characterwise and vice versa
 ---@param opts? table
 function M.pasteDifferently(opts) -- paste as characterwise
-	if not (opts) then
-		opts = {reg = "+"}
-	end
+	if not (opts) then opts = {reg = "+"} end
 	local reg = opts.reg
 
 	local isLinewise = fn.getregtype(reg) == "V"
@@ -350,7 +348,7 @@ function M.removeLog()
 	local logsStatementsNum = fn.search([[^\s*]] .. logCommand, "nw")
 	cmd([[g/^\s*]] .. logCommand .. [[/d]])
 
-	vim.notify (" Cleared "..tostring(logsStatementsNum).." log statements. ")
+	vim.notify(" Cleared " .. tostring(logsStatementsNum) .. " log statements. ")
 	cmd("nohl")
 end
 

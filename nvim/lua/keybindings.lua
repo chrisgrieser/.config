@@ -301,9 +301,9 @@ autocmd("RecordingLeave", {
 	callback = function()
 		keymap("n", "0", "qy") -- not saving in throwaway register z, so the respective keymaps can be used during a macro
 		g.isRecording = false -- for status line
+		local recording = vim.v.event.regcontents
+		vim.notify(" RECORDED\n "..recording)
 		require("lualine").refresh()
-		local recording = fn.
-		vim.notify(" RECORDED\n "..fn.getreg("y"))
 	end
 })
 autocmd("RecordingEnter", {
