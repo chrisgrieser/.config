@@ -100,6 +100,7 @@ add("lua", {
 
 add("lua", {
 	snip("resolve home", 'os.getenv("HOME")'),
+	snip("ternary", '${1:cond} and ${2:expr} or ${3:expr}\n$0'),
 })
 
 -- nvim-lua

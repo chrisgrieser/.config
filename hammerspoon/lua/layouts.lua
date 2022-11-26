@@ -101,7 +101,7 @@ function homeModeLayout ()
 	runDelayed(1.0, function () app("Drafts"):activate() end)
 
 	if screenIsUnlocked() then
-		runDelayed (10, function()twitterrificAction("scrollup") end)
+		runDelayed (5, function()twitterrificAction("scrollup") end)
 	end
 
 	-- wait until sync is finished, to avoid merge conflict
@@ -152,12 +152,8 @@ function officeModeLayout ()
 
 	useLayout(officeLayout)
 	showAllSidebars()
-	runDelayed(0.3, function ()
-		useLayout(officeLayout)
-	end)
-	runDelayed(0.5, function ()
-		app("Drafts"):activate()
-	end)
+	runDelayed(0.3, function () useLayout(officeLayout) end)
+	runDelayed(0.5, function () app("Drafts"):activate() end)
 
 	-- wait until sync is finished, to avoid merge conflict
 	hs.timer.waitUntil (
