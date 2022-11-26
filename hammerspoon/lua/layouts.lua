@@ -258,6 +258,7 @@ wf_appsOnMouseScreen = wf.new{
 	"alacritty",
 	"Warp",
 	"Slack",
+	"IINA",
 	"Discord",
 	"Neovide",
 	"neovide",
@@ -267,6 +268,8 @@ wf_appsOnMouseScreen = wf.new{
 	"Alfred Preferences",
 	"System Preferences",
 	"BetterTouchTool",
+	"YouTube",
+	"Netflix",
 	"Finder"
 }
 
