@@ -62,18 +62,18 @@ colors:
 
 font:
   size: 26
-
+  main: &font JetBrainsMonoNL Nerd Font
   normal:
-    family: JetBrainsMonoNL Nerd Font
+    family: *font
     style: Regular
   bold:
-    family: JetBrainsMonoNL Nerd Font
+    family: *font
     style: Bold
   italic:
-    family: JetBrainsMonoNL Nerd Font
+    family: *font
     style: Italic
   bold_italic:
-    family: JetBrainsMonoNL Nerd Font
+    family: *font
     style: Bold Italic
   draw_bold_text_with_bright_colors: true
   builtin_box_drawing: true
