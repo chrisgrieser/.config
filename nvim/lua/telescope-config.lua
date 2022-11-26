@@ -42,14 +42,8 @@ require("telescope").setup {
 				width = 0.92,
 				preview_width = {0.55, max = 50}
 			},
-			bottom_pane = {
-				height = 10,
-				preview_cutoff = 70,
-				prompt_position = "bottom",
-			},
 			cursor = {
 				preview_cutoff = 9001,
-				width = 0.4,
 			},
 		},
 	},
@@ -108,6 +102,7 @@ require("telescope").setup {
 			prompt_title = false,
 			results_title = false,
 			theme = "cursor",
+			layout_config = {cursor = {width = 0.4}},
 		},
 		live_grep = {
 			cwd = "%:p:h",
