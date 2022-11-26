@@ -69,7 +69,7 @@ keymap("n", "gH", ":Gitsigns prev_hunk<CR>")
 
 -- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)")
-keymap("n", "Ö", "<Plug>(leap-backwards-to)")
+keymap("n", "Ö", "<Plug>(leap-backward-to)")
 
 -- Search
 keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout
@@ -129,10 +129,10 @@ keymap("x", "<Space>", '"_c')
 -- change sub-word
 -- (i.e. a simpler version of vim-textobj-variable-segment, not supporting CamelCase)
 keymap("n", "<leader><Space>", function()
-	opt.iskeyword = opt.iskeyword - {"_", "-"}
+	opt.iskeyword:remove {"_", "-"}
 	cmd [[normal! "_diw]]
 	cmd [[startinsert]] -- :Normal does not allow to end in insert mode
-	opt.iskeyword = opt.iskeyword + {"_", "-"}
+	opt.iskeyword:append {"_", "-"}
 end)
 
 -- special plugin text objects
@@ -168,10 +168,6 @@ keymap({"o", "x"}, "ac", "a}")
 keymap("o", "r", "}") -- [r]est of the paragraph
 keymap("o", "R", "{")
 
--- CONFIGURATIONS FOR NVIM-SURROUND AND COMMENTS.NVIM
-require("surround-config")
-require("comment-config")
-
 --------------------------------------------------------------------------------
 
 -- MACRO
@@ -182,21 +178,15 @@ autocmd("RecordingLeave", {
 	group = "recording",
 	callback = function()
 		keymap("n", "0", "qy") -- not saving in throwaway register z, so the respective keymaps can be used during a macro
+		keymap("n", "9", "@y") -- quick replay (I don't use counts that high anyway)
 		vim.notify(" RECORDED\n " .. vim.v.event.regcontents)
 	end
 })
 autocmd("RecordingEnter", {
 	group = "recording",
-	callback = function()
-		keymap("n", "0", "q")
-		g.isRecording = true
-	end
+	callback = function() keymap("n", "0", "q") end,
 })
 keymap("n", "0", "qy") -- needs to be set initially
-keymap("n", "9", "@y") -- quick replay (don't use counts that high anyway)
-
--- structured search & replace
-keymap({"n", "x"}, "<leader>f", function() require("ssr").open() end) -- wrapped in function for lazy-loading
 
 --------------------------------------------------------------------------------
 
@@ -225,6 +215,7 @@ keymap({"n", "x"}, "^", "=") -- auto-indent
 keymap("n", "^^", "mz=ip`z") -- since indenting paragraph is far more common than indenting a line
 
 --------------------------------------------------------------------------------
+-- EDITING
 
 -- toggle word between Capital and lower case
 keymap("n", "ü", "mzlblgueh~`z")
@@ -256,6 +247,9 @@ keymap("n", "S", substi.eol)
 keymap("n", "sx", exchange.operator)
 keymap("n", "sxx", exchange.line)
 keymap("x", "X", exchange.visual)
+
+-- structured search & replace
+keymap({"n", "x"}, "<leader>f", function() require("ssr").open() end) -- wrapped in function for lazy-loading
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine)
