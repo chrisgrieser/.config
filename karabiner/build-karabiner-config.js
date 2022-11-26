@@ -31,7 +31,7 @@ if (yqNotInstalled) {
 		cd "$HOME/.config/karabiner/assets/complex_modifications/" || exit 1
 		for f in *.yaml ; do
 			f=$(basename "$f" .yaml)
-			yq -o=json '.' "$f.yaml" > "$f.json"
+			yq -o=json 'explode(.)' "$f.yaml" > "$f.json"
 		done
 	`);
 

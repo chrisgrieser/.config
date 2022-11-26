@@ -5,6 +5,12 @@ definitions:
       - type: variable_if
         name: LEADER_ACTIVE
         value: true
+  - &deactivate-leader set_variable:
+      name: LEADER_ACTIVE
+      value: false
+  - &remove-notice set_notification_message:
+      id: leader-notice
+      text: ""
 
 #───────────────────────────────────────────────────────────────────────────────
 rules:
@@ -41,7 +47,9 @@ rules:
         to:
           - key_code: left_control
         conditions:
-          - *leader-active
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: true
           - type: device_unless
             identifiers:
               - vendor_id: 76
@@ -89,7 +97,9 @@ rules:
         to:
           - key_code: fn
         conditions:
-          - *leader-active
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: true
           - type: device_if
             identifiers:
               - vendor_id: 76
@@ -104,6 +114,7 @@ rules:
               text: ""
 
   #─────────────────────────────────────────────────────────────────────────────
+
   - description: 🔺 App Switcher Actions
     manipulators:
       # Cancel (Esc/Hyper)
@@ -111,8 +122,7 @@ rules:
         description: Leader Cancel
         from:
           key_code: escape
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - set_variable:
               name: LEADER_ACTIVE
@@ -124,8 +134,7 @@ rules:
         description: 'Hyper (Esc): Leader Cancel'
         from:
           key_code: caps_lock
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to_if_alone:
           - set_variable:
               name: LEADER_ACTIVE
@@ -148,16 +157,12 @@ rules:
           - set_notification_message:
               id: leader-notice
               text: ""
-        conditions:
-          - *leader-active
+        conditions: *leader-active
       # [C]alendar: BusyCal
       - type: basic
         from:
           key_code: c
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+        conditions: *leader-active
         to:
           - shell_command: open -a 'BusyCal'
           - set_variable:
@@ -170,8 +175,7 @@ rules:
       - type: basic
         from:
           key_code: comma
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'System Preferences'
           - set_variable:
@@ -184,8 +188,7 @@ rules:
       - type: basic
         from:
           key_code: o
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Obsidian'
           - set_variable:
@@ -198,8 +201,7 @@ rules:
       - type: basic
         from:
           key_code: d
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Discord'
           - set_variable:
@@ -213,8 +215,7 @@ rules:
         from:
           # switched y and z due to German Keyboard
           key_code: "y"
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'zoom.us'
           - set_variable:
@@ -227,8 +228,7 @@ rules:
       - type: basic
         from:
           key_code: e
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: osascript -e 'tell application "Neovide" to activate'
           - set_variable:
@@ -241,10 +241,7 @@ rules:
       - type: basic
         from:
           key_code: r
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Drafts'
           - set_variable:
@@ -257,8 +254,7 @@ rules:
       - type: basic
         from:
           key_code: s
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Slack'
           - set_variable:
@@ -271,8 +267,7 @@ rules:
       - type: basic
         from:
           key_code: q
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Script Editor'
           - set_variable:
@@ -285,8 +280,7 @@ rules:
       - type: basic
         from:
           key_code: m
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Mimestream'
           - set_variable:
@@ -299,8 +293,7 @@ rules:
       - type: basic
         from:
           key_code: b
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Brave Browser'
           - set_variable:
@@ -316,8 +309,7 @@ rules:
           modifiers:
             mandatory:
               - shift
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: osascript -e 'tell application "Brave Browser" to activate'
           - key_code: vk_none
@@ -336,8 +328,7 @@ rules:
       - type: basic
         from:
           key_code: l
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a "Marta"
           - set_variable:
@@ -350,8 +341,7 @@ rules:
       - type: basic
         from:
           key_code: h
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Hammerspoon'
           - set_variable:
@@ -364,8 +354,7 @@ rules:
       - type: basic
         from:
           key_code: k
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Karabiner-EventViewer'
           - set_variable:
@@ -378,8 +367,7 @@ rules:
       - type: basic
         from:
           key_code: x
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           # for some reason opening once sometimes puts MacPass in the bg
           - shell_command: 'open -a "MacPass" ; sleep 0.3 ; open -a "MacPass"'
@@ -393,8 +381,7 @@ rules:
       - type: basic
         from:
           key_code: z  # switched y and z due to German Keyboard
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'YouTube' || open 'https://www.youtube.com/'
           - set_variable:
@@ -407,8 +394,7 @@ rules:
       - type: basic
         from:
           key_code: a
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Alfred Preferences'
           - set_variable:
@@ -421,8 +407,7 @@ rules:
       - type: basic
         from:
           key_code: i
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Inoreader' || open 'https://www.inoreader.com/'
           - set_variable:
@@ -435,8 +420,7 @@ rules:
       - type: basic
         from:
           key_code: "n"
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Reeder' || open 'https://www.inoreader.com/'
           - set_variable:
@@ -449,8 +433,7 @@ rules:
       - type: basic
         from:
           key_code: p
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Highlights'
           - set_variable:
@@ -463,8 +446,7 @@ rules:
       - type: basic
         from:
           key_code: g
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Docs' || open 'https://docs.google.com/'
           - set_variable:
@@ -477,8 +459,7 @@ rules:
       - type: basic
         from:
           key_code: v
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'IINA'
           - set_variable:
@@ -491,8 +472,7 @@ rules:
       - type: basic
         from:
           key_code: non_us_pound  # "#" on Germany keyboard
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Color Picker'
           - set_variable:
@@ -505,8 +485,7 @@ rules:
       - type: basic
         from:
           key_code: w
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open 'https://web.whatsapp.com/'
           - set_variable:
@@ -519,8 +498,7 @@ rules:
       - type: basic
         from:
           key_code: f
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open 'https://www.messenger.com/'
           - set_variable:
@@ -533,8 +511,7 @@ rules:
       - type: basic
         from:
           key_code: t
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open 'https://web.telegram.org/z/'
           - set_variable:
@@ -547,8 +524,7 @@ rules:
       - type: basic
         from:
           key_code: "4"
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'MoneyMoney'
           - set_variable:
@@ -562,7 +538,9 @@ rules:
         from:
           key_code: hyphen
         conditions:
-          - *leader-active
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: true
           - type: input_source_if
             input_sources:
               - language: ^de$
@@ -578,8 +556,7 @@ rules:
       - type: basic
         from:
           key_code: "f18"
-        conditions:
-          - *leader-active
+        conditions: *leader-active
         to:
           - shell_command: open -a 'Activity Monitor'
           - set_variable:
