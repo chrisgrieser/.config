@@ -48,7 +48,7 @@ local function diagnosticFormat(diagnostic, mode)
 	local code = tostring(diagnostic.code)
 	local out = msg .. " (" .. code .. ")"
 
-	if source == "stylelint" or code == "nil" then 
+	if source == "stylelint" or code == "nil" then
 	-- stylelint already includes the code in the message, some linters without code
 		out = msg
 	end
@@ -102,7 +102,7 @@ require("lsp-inlayhints").setup {
 		},
 		type_hints = {
 			show = true,
-			prefix = " ♦️ ",
+			prefix = "  ",
 			remove_colon_start = true,
 			remove_colon_end = true,
 		},
