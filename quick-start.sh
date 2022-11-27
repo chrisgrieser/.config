@@ -12,8 +12,7 @@ sudo -v
 xcode-select --install
 
 # Install Essential Apps
-brew install --no-quarantine macpass alfred hammerspoon neovim alacritty karabiner-elements brave-browser
-brew install --no-quarantine neovide --cask
+brew install --no-quarantine macpass alfred hammerspoon neovim alacritty karabiner-elements brave-browser neovide --cask
 
 # Hammerspoon
 defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
@@ -25,11 +24,10 @@ defaults write "org.hammerspoon.Hammerspoon" "SUEnableAutomaticChecks" 1
 # DOTFILES / VAULT
 
 cd ~
-git clone git@github.com:chrisgrieser/main-vault-backup.git
-git clone --recurse-submodules git@github.com:chrisgrieser/dotfiles.git
-cd ~/dotfiles
+git clone git@github.com:chrisgrieser/main-vault-backup.git "$HOME/Main Vault"
+git clone --recurse-submodules git@github.com:chrisgrieser/dotfiles.git "$HOME/.config"
+cd ~/.config
 git submodule foreach git checkout main
-mv "main-vault-backup" "Main Vault"
 
 # load Dock from dotfiles
 zsh "$HOME/dotfiles/hammerspoon/dock-switching/dock-switcher.sh" --load home
