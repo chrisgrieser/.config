@@ -34,6 +34,6 @@ end
 
 -- Tabout
 require("tabout").setup {
-	act_as_shift_tab = false,
+	act_as_shift_tab = true,
 }
 
