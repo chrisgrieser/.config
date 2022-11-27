@@ -4,14 +4,14 @@ require("appearance")
 
 -- font size dependent on device
 if fn.hostname():find("iMac") then
-	g.neovide_scale_factor = 1
+	g.neovide_scale_factor = 0.9
 elseif fn.hostname():find("mini") then
-	g.neovide_scale_factor = 0.95
+	g.neovide_scale_factor = 0.85
 elseif fn.hostname():find("Mother") then
-	g.neovide_scale_factor = 0.95
+	g.neovide_scale_factor = 0.85
 end
 
-opt.guifont = "JetBrainsMonoNL Nerd Font:h26.9"
+opt.guifont = "JetBrainsMonoNL Nerd Font:h26.5"
 opt.guicursor = "n-sm:block," ..
 	"i-ci-c-ve:ver25," ..
 	"r-cr-o-v:hor10," ..
