@@ -25,13 +25,14 @@ const workArray = app.doShellScript(
 	-E "Marta/Themes/*" \
 	-E "packer_compiled.lua" \
 	-E "hammerspoon/Spoons/*" \
-	-E "vale/styles/*.yml" \
+	-E "vale/styles/*/*.yml" \
 	-E "*.app/*" \
 	-E "karabiner/automatic_backups/*" \
 	-E "visualized keyboard layout/*.json" \
 	-E "mac-migration" \
 	-E "unused/*" \
 	-E "fonts/*" \
+	-E "Fonts/*" \
 	-E ".DS_Store" \
 	-E ".git/"'
 ).split("\r");
