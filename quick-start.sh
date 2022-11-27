@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+!/usr/bin/env zsh
 # shellcheck disable=SC2034,SC2164,SC1071
 
 #-------------------------------------------------------------------------------
@@ -24,8 +24,8 @@ defaults write "org.hammerspoon.Hammerspoon" "SUEnableAutomaticChecks" 1
 # DOTFILES / VAULT
 
 cd ~
-git clone git@github.com:chrisgrieser/main-vault-backup.git "$HOME/Main Vault"
-git clone --recurse-submodules git@github.com:chrisgrieser/dotfiles.git "$HOME/.config"
+git clone git@github.com:chrisgrieser/main-vault-backup.git
+git clone --recurse-submodules git@github.com:chrisgrieser/.config.git
 cd ~/.config
 git submodule foreach git checkout main
 
