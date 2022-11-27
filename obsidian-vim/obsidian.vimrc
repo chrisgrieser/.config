@@ -133,9 +133,6 @@ exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 nmap M :mergeLines
 vmap M :mergeLines
 
-" split line at cursor (does not work in Obsdian, TODO emulate with js?)
-" nmap | a<CR><Esc>k$
-
 " WHITSPACE CONTROL
 " Add Blank Line above/below
 nmap = mzO<Esc>`z
@@ -264,6 +261,9 @@ exmap nextTab obcommand workspace:next-tab
 exmap prevTab obcommand workspace:previous-tab
 nmap gt :nextTab
 nmap gT :prevTab
+nmap <BS> :nextTab
+nmap <CR> :nextTab
+nmap <S-BS> :prevTab
 
 " " orginal vim: <C-w>_ for vertical maximizing, <C-w>= for equal size
 " exmap toggle-maximize-pane obcommand pane-relief:maximize

@@ -331,33 +331,32 @@ keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 
 -- BUFFERS
 keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file
-keymap("n", "gb", telescope.buffers) -- open [b]uffer
 keymap("n", "<BS>", "<Plug>(CybuNext)") -- cycle between buffers
+keymap("n", "<S-BS>", "<Plug>(CybuPrev)")
+keymap("n", "d<BS>", function()
+	cmd [[bdelete]]
+	vim.notify(" Buffer deleted. ")
+end)
+keymap("n", "gb", telescope.buffers) -- open [b]uffer
 
 require("cybu").setup {
-	display_time = 1000, -- time the cybu window is displayed
+	display_time = 750,
 	position = {
 		anchor = "bottomcenter", -- topleft, topcenter, topright, centerleft, center, centerright, bottomleft, bottomcenter, bottomright
-		vertical_offset = 1,
+		max_win_height = 12,
+		vertical_offset = 4,
 	},
 	style = {
 		border = borderStyle,
+		padding = 2,
+		path = "tail", -- relative|absolute|tail
 		hide_buffer_id = true,
-		highlights = {
-			current_buffer = "CursorLine",
-			adjacent_buffers = "CybuAdjacent", -- buffers not in focus
-			background = "CybuBackground", -- window background
-			border = "CybuBorder", -- border of the window
-		},
+		highlights = {current_buffer = "CursorLine"},
 	},
 	behavior = {
 		mode = {
 			default = {
 				switch = "immediate", -- immediate, on_close
-				view = "paging", -- paging, rolling
-			},
-			last_used = {
-				switch = "on_close", -- immediate, on_close
 				view = "paging", -- paging, rolling
 			},
 		},
