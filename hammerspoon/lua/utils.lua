@@ -124,8 +124,8 @@ function notify(text)
 end
 
 ---Whether the current time is between start & end
----@param startHour float 13.5 = 13:30
----@param endHour float
+---@param startHour integer 13.5 = 13:30
+---@param endHour integer
 ---@return boolean
 function betweenTime(startHour, endHour)
 	local currentHour = hs.timer.localTime() / 60 / 60

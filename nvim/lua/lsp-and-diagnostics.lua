@@ -153,15 +153,6 @@ local function on_attach(client, bufnr)
 		cmd [[write!]]
 	end, bufopts)
 
-	if bo.filetype == "lua" then
-		if fn.expand("%:p"):find("hammerspoon") then
-			vim.lsp.buf.add_workspace_folder(home .. "/.hammerspoon/Spoons/EmmyLua.spoon/annotations")
-			print("hs")
-		elseif fn.expand("%:p"):find("nvim") then
-			vim.lsp.buf.add_workspace_folder(fn.stdpath("config"))
-		end
-	end
-
 	if bo.filetype ~= "css" then -- don't override navigation marker search for css files
 		keymap("n", "gs", telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
 		keymap("n", "gS", telescope.lsp_workspace_symbols, bufopts)
@@ -201,7 +192,6 @@ local lspFilestypes = {}
 -- https://github.com/sumneko/lua-language-server/wiki/Settings
 lspSettings.sumneko_lua = {
 	Lua = {
-		runtime = {version = "LuaJIT"}, -- used by neovim
 		format = {
 			enable = true,
 			defaultConfig = {
@@ -222,12 +212,13 @@ lspSettings.sumneko_lua = {
 			displayContext = 2,
 		},
 		diagnostics = {
-			globals = {"martax"},
 			disable = {
 				"trailing-space",
 				"lowercase-global",
 			},
 		},
+		-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
+		-- libraries defined per-project via luarc.json location: https://github.com/sumneko/lua-language-server/wiki/Libraries#manually-applying
 		workspace = {checkThirdParty = false}, -- https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		hint = {
 			enable = true,

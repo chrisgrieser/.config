@@ -61,7 +61,7 @@ function homeModeLayout ()
 		iMacDisplay:setBrightness(0.8)
 	end
 	holeCover()
-	hs.execute("brew services restart sketchybar") -- restart instead of reload to load colors
+	hs.execute("brew services restart sketchybar") -- restart instead of reload to update theme
 
 	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")

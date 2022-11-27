@@ -87,7 +87,6 @@ end
 --------------------------------------------------------------------------------
 
 -- CONFIGS SHARED SCROSS MULTIPLE FILES
-borderStyle = "rounded" -- https://neovim.io/doc/user/api.html#nvim_open_win()
 dotfilesFolder = home .. "/.config"
 signIcons = {
 	Error = "",

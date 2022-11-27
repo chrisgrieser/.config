@@ -2126,8 +2126,8 @@ Recommended Hotkey: ⇧⌘2</string>
 	<key>variablesdontexport</key>
 	<array>
 		<string>hotkeyUsed</string>
-		<string>tagToExcludeFromSearch</string>
 		<string>url_to_open_after</string>
+		<string>tagToExcludeFromSearch</string>
 	</array>
 	<key>version</key>
 	<string>0.8</string>
