@@ -2,7 +2,7 @@
 vim.opt.runtimepath:append [[, "~/.config/nvim/lua"]] 
 
 --------------------------------------------------------------------------------
-
+borderStyle = "rounded" -- https://neovim.io/doc/user/api.html#nvim_open_win()
 require("packer-setup") -- must be 1st
 require("impatient") -- must be 2nd (plugin, improve startuptime)
 require("utils") -- must be 3rd
@@ -16,14 +16,14 @@ require("surround-config")
 require("comment-config")
 require("telescope-config")
 require("treesitter-config")
-require("lsp-and-diagnostics")
-require("completion") -- should come after lsp
-require("linter") -- should come after lsp
-require("debugger") -- should come after lsp
+require("lsp-and-diagnostics") -- should come before completion, linter, and debugger
+require("completion") 
+require("linter") 
+require("debugger") 
 require("snippets")
 require("remaining-plugins")
 
-if isGui() then ---@diagnostic disable-line: undefined-global
+if isGui() then 
 	require("theme")
 	require("gui-settings")
 	require("color-utilities")
