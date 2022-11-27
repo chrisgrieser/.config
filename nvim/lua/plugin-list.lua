@@ -30,25 +30,13 @@ function M.PluginList(use)
 	use {"Wansmer/treesj", -- split-join
 		requires = "nvim-treesitter/nvim-treesitter",
 		cmd = "TSJToggle",
-		config = function()
-			require("treesj").setup {
-				use_default_keymaps = false,
-				max_join_length = 150,
-			}
-		end
+		config = function() require("treesj").setup {use_default_keymaps = false} end,
 	}
-	use {"andymass/vim-matchup", -- improved %
-		requires = "nvim-treesitter/nvim-treesitter",
-	}
+	use {"andymass/vim-matchup", requires = "nvim-treesitter/nvim-treesitter"} -- % improved
 	use {"cshuaimin/ssr.nvim", -- structural search & replace
 		module = "ssr",
 		config = function()
-			require("ssr").setup {
-				keymaps = {
-					close = "Q",
-					replace_all = "<CR>",
-				}
-			}
+			require("ssr").setup {keymaps = {close = "Q", replace_all = "<CR>"}}
 		end,
 	}
 
@@ -120,14 +108,7 @@ function M.PluginList(use)
 	use {"sindrets/diffview.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		cmd = {"DiffviewFileHistory", "DiffviewOpen"},
-		config = function()
-			require("diffview").setup {
-				keymaps = {
-					file_history_panel = {["o"] = require("diffview.actions").options},
-					option_panel = {["<CR>"] = require("diffview.actions").select_entry},
-				},
-			}
-		end
+		config = function() require("diffview").setup() end,
 	}
 
 	-- Operators & Text Objects, Navigation & Editing
