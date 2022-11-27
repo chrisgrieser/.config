@@ -39,7 +39,7 @@ keymap({"n", "x"}, "J", function() require("quality-of-life").overscroll("6gj") 
 keymap({"n", "x"}, "K", "6gk", opts)
 keymap({"n", "x"}, "k", "gk", opts)
 keymap({"n", "x"}, "j", function() require("quality-of-life").overscroll("gj") end, opts)
-cmd[[ScrollbarHide]] -- HACK: deactivate, since not working well with markdown: https://github.com/petertriho/nvim-scrollbar/issues/40
+cmd [[ScrollbarHide]] -- HACK: deactivate, since not working well with markdown: https://github.com/petertriho/nvim-scrollbar/issues/40
 
 
 -- pseudo-readable line length
@@ -53,6 +53,26 @@ keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = true
 -- Heading instead of function navigation
 keymap({"n", "x"}, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], opts)
 keymap({"n", "x"}, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], opts)
+
+--------------------------------------------------------------------------------
+
+-- Obsidian.nvim
+-- keymap("n", "gf", function()
+-- 	if require("obsidian").util.cursor_on_markdown_link() then
+-- 		cmd [[ObsidianFollowLink]]
+-- 	else
+-- 		telescope.live_grep()
+-- 	end
+-- end, opts)
+
+-- -- Obsidian.nvim
+-- keymap("n", "go", function()
+-- 	if fn.expand("%:p:h"):find("Main Vault") then
+-- 		cmd [[ObsidianOpen]]
+-- 	else
+-- 		telescope.find_files()
+-- 	end
+-- end, opts)
 
 --------------------------------------------------------------------------------
 
