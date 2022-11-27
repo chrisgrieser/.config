@@ -6,7 +6,7 @@ const alfredMatcher = (str) => str.replace (/[-()_.:]/g, " ");
 
 //------------------------------------------------------------------------------
 
-const jsonArray = app.doShellScript("zsh ./nvim-recent-files.sh")
+const jsonArray = app.doShellScript("zsh ./scripts/nvim-recent-files.sh")
 	.split("\r")
 	.filter(line => line.startsWith("/")) // remove some buggy output
 	.map(filepath => {

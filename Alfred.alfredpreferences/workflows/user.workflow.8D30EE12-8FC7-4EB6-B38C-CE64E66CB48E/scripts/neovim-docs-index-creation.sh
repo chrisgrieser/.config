@@ -1,7 +1,8 @@
 #!/bin/zsh
 baseHelpURL="https://neovim.io/doc/user/"
 baseRawURL="https://raw.githubusercontent.com/neovim/neovim/master/runtime/doc/"
-
+# shellcheck disable=2154
+cacheLocation="$alfred_workflow_data"
 #-------------------------------------------------------------------------------
 
 echo "Downloading doc files..."
