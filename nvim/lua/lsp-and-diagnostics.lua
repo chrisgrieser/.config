@@ -9,20 +9,20 @@ local lsp_servers = {
 	"sumneko_lua",
 	"yamlls",
 	"jsonls",
-	"bashls", -- also used for zsh; shellcheck CLI required
-	"eslint", -- requires eslint https://github.com/williamboman/mason.nvim/issues/697
-	"emmet_ls",
+	"bashls", -- also used for zsh; requires shellcheck-cli
 	"cssls",
-	"pyright",
+	"emmet_ls", -- css & html completion
+	"pyright", -- python
 	"marksman", -- markdown
 	"tsserver", -- ts/js
+	"eslint", -- ts/js, requires eslint-cli https://github.com/williamboman/mason.nvim/issues/697
 }
 
 --------------------------------------------------------------------------------
 -- SIGN-COLUMN ICONS
 for type, icon in pairs(signIcons) do
 	local hl = "DiagnosticSign" .. type
-	fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl}) 
+	fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
 end
 
 --------------------------------------------------------------------------------
@@ -46,12 +46,11 @@ local function diagnosticFormat(diagnostic, mode)
 	local msg = trim(diagnostic.message)
 	local source = diagnostic.source:gsub("%.$", "")
 	local code = tostring(diagnostic.code)
-	local out
+	local out = msg .. " (" .. code .. ")"
 
-	if source == "stylelint" or code == "nil" then -- stylelint already includes the code in the message
+	if source == "stylelint" or code == "nil" then 
+	-- stylelint already includes the code in the message, some linters without code
 		out = msg
-	else
-		out = msg .. " (" .. code .. ")"
 	end
 	if diagnostic.source and mode == "float" then
 		out = out .. " [" .. source .. "]"
@@ -97,13 +96,13 @@ require("lsp-inlayhints").setup {
 	inlay_hints = {
 		parameter_hints = {
 			show = true,
-			prefix = " ◀️ ",
+			prefix = " ",
 			remove_colon_start = true,
 			remove_colon_end = true,
 		},
 		type_hints = {
 			show = true,
-			prefix = " ", -- 
+			prefix = " ♦️ ",
 			remove_colon_start = true,
 			remove_colon_end = true,
 		},
@@ -131,7 +130,7 @@ keymap("n", "<leader>a", vim.lsp.buf.code_action)
 -- after the language server attaches to the current buffer
 local function on_attach(client, bufnr)
 	local bufopts = {silent = true, buffer = true}
-	require("lsp-inlayhints").on_attach(client, bufnr) 
+	require("lsp-inlayhints").on_attach(client, bufnr)
 
 	if client.server_capabilities.documentSymbolProvider then
 		require("nvim-navic").attach(client, bufnr)

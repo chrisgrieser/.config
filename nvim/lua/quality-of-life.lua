@@ -306,7 +306,7 @@ function M.pasteDifferently(opts) -- paste as characterwise
 		return
 	end
 
-	fn.setreg(reg, regContent, {targetRegType})
+	fn.setreg(reg, regContent, targetRegType)
 	cmd('normal! "' .. reg .. "p")
 end
 
