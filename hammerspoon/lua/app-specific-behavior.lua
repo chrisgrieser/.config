@@ -164,7 +164,7 @@ anyAppActivationWatcher:start()
 
 -- NEOVIM
 -- pseudomaximized window
-wf_neovim = wf.new({"neovide", "Neovide"})
+wf_neovim = wf.new {"neovide", "Neovide"}
 	:subscribe(wf.windowCreated, function()
 		repeatFunc({0.3, 0.6}, function()
 			if isAtOffice() or isProjector() then
@@ -185,7 +185,7 @@ wf_neovim = wf.new({"neovide", "Neovide"})
 
 -- ALACRITTY
 -- pseudomaximized window
-wf_alacritty = wf.new({"alacritty", "Alacritty"})
+wf_alacritty = wf.new {"alacritty", "Alacritty"}
 	:setOverrideFilter {rejectTitles = {"^cheatsheet: "}}
 	:subscribe(wf.windowCreated, function()
 		if isAtOffice() or isProjector() then
@@ -336,13 +336,15 @@ highlightsAppWatcher:start()
 local function draftsLaunchWake(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
 
-	local workspace = "Home"
-	if isAtOffice() then workspace = "Office" end
-
 	if (eventType == aw.launched or eventType == aw.activated) then
+		local workspace = isAtOffice() and "Office" or "Home"
 		repeatFunc({0, 0.1, 0.3, 0.5}, function()
+			local name = appObject:focusedWindow():title()
+			local isTaskList = name:find("Supermarkt$") or name:find("Drogerie$") or name:find("Ernährung$")
+			if not (isTaskList) then
+				appObject:selectMenuItem {"Workspaces", workspace}
+			end
 			appObject:selectMenuItem {"View", "Hide Toolbar"}
-			appObject:selectMenuItem {"Workspaces", workspace}
 		end)
 	end
 end
