@@ -12,9 +12,9 @@ defaultSources = {
 }
 
 defaultAndPath = {
+	{name = "path", keyword_pattern = "[["},
 	{name = "luasnip"},
 	{name = "nvim_lsp"},
-	{name = "path"},
 	{name = "cmp_tabnine", keyword_length = 3},
 	{name = "emoji", keyword_length = 2},
 	{name = "buffer", keyword_length = 2},
