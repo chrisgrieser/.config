@@ -91,11 +91,6 @@ keymap("", "m", "%", {remap = true}) -- remap to use matchup's % instead of buil
 keymap({"o", "x"}, "im", "i%", {remap = true})
 keymap({"o", "x"}, "am", "a%", {remap = true})
 
--- Tabout
--- require("tabout").setup {
--- 	act_as_shift_tab = true,
---}
-
 -- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)")
 keymap("n", "Ö", "<Plug>(leap-backward-to)")

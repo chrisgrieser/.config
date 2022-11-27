@@ -40,10 +40,6 @@ function M.PluginList(use)
 	use {"andymass/vim-matchup", -- improved %
 		requires = "nvim-treesitter/nvim-treesitter",
 	}
-	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
-		after = "nvim-cmp",
-		requires = "nvim-treesitter/nvim-treesitter",
-	}
 	use {"cshuaimin/ssr.nvim", -- structural search & replace
 		module = "ssr",
 		config = function()
@@ -60,7 +56,7 @@ function M.PluginList(use)
 	use {"neovim/nvim-lspconfig", requires = {
 		"williamboman/mason-lspconfig.nvim",
 		"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
-		-- "ray-x/lsp_signature.nvim", -- signature hint
+		"ray-x/lsp_signature.nvim", -- signature hint
 		"SmiteshP/nvim-navic", -- breadcrumbs
 		"j-hui/fidget.nvim", -- lsp status
 		"folke/neodev.nvim", -- lsp for nvim-lua config
@@ -142,6 +138,12 @@ function M.PluginList(use)
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}
 	use "ggandor/leap.nvim"
 	use "Darazaki/indent-o-matic"
+	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
+		after = "nvim-cmp",
+		requires = "nvim-treesitter/nvim-treesitter",
+		config = function() require("tabout").setup() end,
+		event = "InsertEnter",
+	}
 
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
@@ -152,8 +154,9 @@ function M.PluginList(use)
 		requires = "hrsh7th/nvim-cmp",
 		config = function()
 			require("obsidian").setup {
-				dir = "/Users/chrisgrieser/main-vault",
+				dir = "~/main-vault",
 				completion = {nvim_cmp = true},
+				use_advanced_uri = true, -- obsidian advanced URI plugin
 			}
 		end,
 	}

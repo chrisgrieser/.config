@@ -909,6 +909,8 @@ open "$sf_path" --env=LINE=$lineNo</string>
 				<string></string>
 				<key>filtermode</key>
 				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
 				<key>required</key>
 				<true/>
 			</dict>
@@ -925,9 +927,11 @@ open "$sf_path" --env=LINE=$lineNo</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>~/Main Vault</string>
+				<string>~/main-vault</string>
 				<key>filtermode</key>
 				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
 				<key>required</key>
 				<true/>
 			</dict>
