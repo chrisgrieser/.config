@@ -25,6 +25,8 @@ const workArray = app.doShellScript(
 	-E "Marta/Themes/*" \
 	-E "packer_compiled.lua" \
 	-E "hammerspoon/Spoons/*" \
+	-E "vale/styles" \
+	-E "*.app/*" \
 	-E "karabiner/automatic_backups/*" \
 	-E "visualized keyboard layout/*.json" \
 	-E "mac-migration" \
@@ -45,11 +47,10 @@ workArray.forEach(file => {
 	let parentPart = filePath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
 	if (parentPart === ".") parentPart = "";
 
+	let iconObject;
 	let ext = fileName.split(".").pop();
 	if (ext.includes("rc")) ext = "rc"; // rc files
 	else if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
-
-	let iconObject;
 	switch (ext) {
 		case "json":
 			iconObject = { "path": "icons/json.png" };

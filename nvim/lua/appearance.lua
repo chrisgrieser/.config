@@ -162,6 +162,9 @@ require("gitsigns").setup {
 require("fidget").setup {
 	-- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
 	text = {spinner = "dots"},
+	fmt = {
+		stack_upwards = false, -- false = title on top
+	},
 	sources = {
 		["null-ls"] = {ignore = true}
 	}
