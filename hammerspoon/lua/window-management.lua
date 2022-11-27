@@ -8,7 +8,7 @@ maximized = hs.layout.maximized
 
 -- device-specific parameters
 if isIMacAtHome() then
-	pseudoMaximized = {x = 0, y = 0, w = 0.8175, h = 1}
+	pseudoMaximized = {x = 0, y = 0, w = 0.816, h = 1}
 	baseLayout = pseudoMaximized
 	toTheSide = {x = 0.815, y = 0.025, w = 0.185, h = 0.975}
 elseif isAtMother() then
