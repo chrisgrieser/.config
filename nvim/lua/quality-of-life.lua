@@ -242,15 +242,30 @@ function M.reverse()
 	vim.notify(" Nothing under the cursor can be switched.", warn)
 end
 
+--------------------------------------------------------------------------------
+-- UNDO
+-- Save
+augroup("undoTimeMarker", {})
+autocmd("BufReadPost", {
+	group = "undoTimeMarker",
+	callback = function() b.timeOpened = os.time() end,
+})
+
 ---select between undoing the last 1h, 4h, or 24h
 ---@param opts table
 function M.undoDuration(opts)
-	if not (opts) then opts = {selection = {"15m", "1h", "4h", "24h"}} end
+	if not (opts) then opts = {selection = {"buffer opening", "15m", "1h", "4h", "24h"}} end
 
 	vim.ui.select(opts.selection, {prompt = "Undo the last…"}, function(choice)
 		if not (choice) then return end
+		if choice == "buffer opening" then
+			local now = os.time()
+			local secsPassed = now - b.timeOpened
+			cmd("earlier " .. secsPassed .. "s")
+			return
+		end
 		cmd("earlier " .. choice)
-		vim.notify("Restored to " .. choice .. " earlier")
+		vim.notify(" Restored to " .. choice .. " earlier. ")
 	end)
 end
 

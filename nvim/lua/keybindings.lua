@@ -344,24 +344,24 @@ end)
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
 
 require("cybu").setup {
-	display_time = 750,
+	display_time = 1500,
 	position = {
-		anchor = "bottomcenter", 
+		anchor = "bottomcenter",
 		max_win_height = 12,
 		vertical_offset = 2,
 	},
 	style = {
 		border = borderStyle,
 		padding = 2,
-		path = "tail", 
+		path = "tail",
 		hide_buffer_id = true,
 		highlights = {current_buffer = "CursorLine"},
 	},
 	behavior = {
 		mode = {
 			default = {
-				switch = "immediate", 
-				view = "paging", 
+				switch = "immediate",
+				view = "paging",
 			},
 		},
 	},
