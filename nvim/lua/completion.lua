@@ -11,6 +11,15 @@ defaultSources = {
 	{name = "buffer", keyword_length = 2},
 }
 
+defaultAndPath = {
+	{name = "luasnip"},
+	{name = "nvim_lsp"},
+	{name = "path"},
+	{name = "cmp_tabnine", keyword_length = 3},
+	{name = "emoji", keyword_length = 2},
+	{name = "buffer", keyword_length = 2},
+}
+
 local defaultWithoutBuffer = {
 	{name = "luasnip"},
 	{name = "nvim_lsp"},
@@ -126,8 +135,8 @@ cmp.setup {
 -- Filetype specific Completion
 
 cmp.setup.filetype("lua", {
+	-- disable leading "-"
 	enabled = function()
-		-- disable leading "-"
 		local lineContent = fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
 		return not (lineContent:match(" %-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
 	end,
@@ -147,6 +156,11 @@ cmp.setup.filetype("vim", {
 -- also use nerdfont for starship config
 cmp.setup.filetype("toml", {
 	sources = cmp.config.sources(defaultAndNerdfont),
+})
+
+-- also use paths for markdown images
+cmp.setup.filetype("markdown", {
+	sources = cmp.config.sources(defaultAndPath),
 })
 
 --------------------------------------------------------------------------------
