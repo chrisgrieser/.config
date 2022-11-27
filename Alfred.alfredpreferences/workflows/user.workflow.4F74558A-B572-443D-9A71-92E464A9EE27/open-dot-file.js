@@ -25,7 +25,7 @@ const workArray = app.doShellScript(
 	-E "Marta/Themes/*" \
 	-E "packer_compiled.lua" \
 	-E "hammerspoon/Spoons/*" \
-	-E "vale/styles" \
+	-E "vale/styles/*.yml" \
 	-E "*.app/*" \
 	-E "karabiner/automatic_backups/*" \
 	-E "visualized keyboard layout/*.json" \

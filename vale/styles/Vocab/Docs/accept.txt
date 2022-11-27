@@ -2,3 +2,5 @@ git
 vim
 pseudometa
 only
+color
+between
