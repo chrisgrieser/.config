@@ -63,14 +63,6 @@ keymap("", "]", "}", {nowait = true})
 keymap("n", "<C-h>", "<C-o>") -- Back
 keymap("n", "<C-l>", "<C-i>") -- Forward
 
--- Hunks
-keymap("n", "gh", ":Gitsigns next_hunk<CR>")
-keymap("n", "gH", ":Gitsigns prev_hunk<CR>")
-
--- Leap
-keymap("n", "ö", "<Plug>(leap-forward-to)")
-keymap("n", "Ö", "<Plug>(leap-backward-to)")
-
 -- Search
 keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "<Esc>", function() -- clear all
@@ -81,7 +73,7 @@ keymap("n", "<Esc>", function() -- clear all
 end, {silent = true})
 
 keymap({"n", "x", "o"}, "+", "*") -- no more modifier key on German Keyboard
-keymap({"n", "x", "o"}, "*", "#") 
+keymap({"n", "x", "o"}, "*", "#")
 
 -- URLs
 keymap("n", "gü", "/http.*<CR>:nohl<CR>") -- goto next
@@ -90,6 +82,29 @@ keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
 -- MARKS
 keymap("", "ä", "`M") -- Goto Mark M
 keymap("", "Ä", "mM") -- Set Mark M
+
+
+--------------------------------------------------------------------------------
+-- NAVIGATION PLUGINS
+-- vim.[m]atchup
+keymap("", "m", "%", {remap = true}) -- remap to use matchup's % instead of builtin %
+keymap({"o", "x"}, "im", "i%", {remap = true})
+keymap({"o", "x"}, "am", "a%", {remap = true})
+
+-- Tabout
+require("tabout").setup {
+	act_as_shift_tab = true,
+}
+
+-- Leap
+keymap("n", "ö", "<Plug>(leap-forward-to)")
+keymap("n", "Ö", "<Plug>(leap-backward-to)")
+
+-- Hunks
+keymap("n", "gh", ":Gitsigns next_hunk<CR>")
+keymap("n", "gH", ":Gitsigns prev_hunk<CR>")
+
+--------------------------------------------------------------------------------
 
 -- CLIPBOARD
 keymap("n", "x", '"_x')
@@ -114,11 +129,6 @@ autocmd("TextYankPost", {
 		end
 	end
 })
-
--- vim.[m]atchup
-keymap("", "m", "%", {remap = true}) -- remap to use matchup's % instead of builtin %
-keymap({"o", "x"}, "im", "i%", {remap = true})
-keymap({"o", "x"}, "am", "a%", {remap = true})
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
@@ -196,11 +206,11 @@ keymap("n", "0", "qy") -- needs to be set initially
 keymap("n", "!", "a <Esc>h") -- insert space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
-keymap("n", "<BS>", function() -- reduce multiple blank lines to exactly one
+keymap("n", "d<Space>", function() -- reduce multiple blank lines to exactly one
 	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
 		cmd [[normal! "_dipO]]
 	else
-		vim.notify(" Line not empty.", warn) ---@diagnostic disable-line: param-type-mismatch
+		vim.notify(" Line not empty.", warn)
 	end
 end)
 
@@ -250,7 +260,7 @@ keymap("n", "sx", exchange.operator)
 keymap("n", "sxx", exchange.line)
 keymap("x", "X", exchange.visual)
 
--- search & replace 
+-- search & replace
 keymap("n", "<leader>f", ":%s///g<Left><Left><Left>")
 keymap("x", "<leader>f", ":s///g<Left><Left><Left>")
 keymap({"n", "x"}, "<leader>F", function() require("ssr").open() end) -- wrapped in function for lazy-loading
@@ -317,15 +327,48 @@ keymap("", "<C-Down>", ":resize +3<CR>")
 keymap("", "<C-Up>", ":resize -3<CR>")
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 
--- Buffers
+--------------------------------------------------------------------------------
+
+-- BUFFERS
 keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file
-keymap("n", "<C-M-CR>", ":nohl | bnext<CR>", {silent = true}) -- cycle between buffers, <S-CR> supported via karabiner-remapping
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
+keymap("n", "<BS>", "<Plug>(CybuNext)") -- cycle between buffers
+
+require("cybu").setup {
+	display_time = 1000, -- time the cybu window is displayed
+	position = {
+		anchor = "bottomcenter", -- topleft, topcenter, topright, centerleft, center, centerright, bottomleft, bottomcenter, bottomright
+		vertical_offset = 1,
+	},
+	style = {
+		border = borderStyle,
+		hide_buffer_id = true,
+		highlights = {
+			current_buffer = "CursorLine",
+			adjacent_buffers = "CybuAdjacent", -- buffers not in focus
+			background = "CybuBackground", -- window background
+			border = "CybuBorder", -- border of the window
+		},
+	},
+	behavior = {
+		mode = {
+			default = {
+				switch = "immediate", -- immediate, on_close
+				view = "paging", -- paging, rolling
+			},
+			last_used = {
+				switch = "on_close", -- immediate, on_close
+				view = "paging", -- paging, rolling
+			},
+		},
+	},
+	exclude = specialFiletypes,
+}
 
 --------------------------------------------------------------------------------
 -- FILES
 
--- File switchers
+-- File Switchers
 keymap("n", "go", telescope.find_files) -- [o]pen file in parent-directory
 keymap("n", "gO", telescope.git_files) -- [o]pen file in git directory
 keymap("n", "gr", telescope.oldfiles) -- [r]ecent files
@@ -342,7 +385,7 @@ keymap("", "<D-BS>", genghis.trashFile)
 keymap("", "<D-n>", genghis.createNewFile)
 keymap("x", "X", genghis.moveSelectionToNewFile)
 
--- Git Operations
+-- Diffview
 keymap("n", "<C-g>", function()
 	if bo.filetype == "DiffviewFileHistory" then
 		cmd("DiffviewClose")

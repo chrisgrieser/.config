@@ -66,6 +66,7 @@ local function themeModifications()
 			cmd("highlight lualine_y_diff_added_" .. v .. " guifg=#8cbf8e")
 		end
 		cmd("highlight GitSignsChange guifg=#acaa62")
+		cmd("highlight GitSignsAdd guifg=#8cbf8e")
 	elseif theme == "dawnfox" then
 		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
 		cmd [[highlight VertSplit guifg=#b29b84]]
