@@ -148,10 +148,19 @@ local function on_attach(client, bufnr)
 	keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
 	-- format on manual save
-	keymap("n", "<D-s>", function()
+	keymap({"n", "x", "i"}, "<D-s>", function()
 		vim.lsp.buf.format {async = true}
 		cmd [[write!]]
 	end, bufopts)
+
+	if bo.filetype == "lua" then
+		if fn.expand("%:p"):find("hammerspoon") then
+			vim.lsp.buf.add_workspace_folder(home .. "/.hammerspoon/Spoons/EmmyLua.spoon/annotations")
+			print("hs")
+		elseif fn.expand("%:p"):find("nvim") then
+			vim.lsp.buf.add_workspace_folder(fn.stdpath("config"))
+		end
+	end
 
 	if bo.filetype ~= "css" then -- don't override navigation marker search for css files
 		keymap("n", "gs", telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
