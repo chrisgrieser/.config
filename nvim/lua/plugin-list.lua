@@ -151,7 +151,17 @@ function M.PluginList(use)
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
 	use {"hail2u/vim-css3-syntax", ft = "css"} -- better syntax highlighting (until treesitter css looks decent…)
 	use {"iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && npm install"}
-	use {"iamcco/markdown-preview.nvim", ft = "markdown", config = ""}
+	-- use {"epwalsh/obsidian.nvim",
+	-- 	-- ft = "markdown",
+	-- 	requires = "hrsh7th/nvim-cmp",
+	-- 	config = function()
+	-- 		require("obsidian").setup {
+	-- 			-- dir = "~/Main Vault",
+	-- 			completion = {nvim_cmp = true},
+	-- 			use_advanced_uri = true,
+	-- 		}
+	-- 	end,
+	-- }
 
 end
 
