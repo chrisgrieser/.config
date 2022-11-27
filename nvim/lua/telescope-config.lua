@@ -43,7 +43,12 @@ require("telescope").setup {
 				preview_width = {0.55, max = 50}
 			},
 			cursor = {
-				preview_cutoff = 9001,
+				preview_cutoff = 9001, -- never use preview here
+			},
+			bottom_pane = {
+				height = 20,
+				preview_cutoff = 70,
+				prompt_position = "bottom",
 			},
 		},
 	},
@@ -67,6 +72,7 @@ require("telescope").setup {
 			show_line = false,
 			trim_text = true,
 			initial_mode = "normal",
+			layout_config = {horizontal = {height = 8}}
 		},
 		lsp_document_symbols = {
 			prompt_prefix = "* ",
@@ -116,14 +122,10 @@ require("telescope").setup {
 			theme = "cursor",
 			layout_config = {cursor = {width = 0.25}},
 		},
-		builtin = {
-			prompt_prefix = "B",
-			include_extensions = true,
-		},
 		colorscheme = {
 			enable_preview = true,
 			prompt_prefix = " ",
-			results_title = "",
+			results_title = false,
 			layout_strategy = "bottom_pane",
 		},
 	},

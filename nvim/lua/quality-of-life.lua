@@ -10,7 +10,6 @@ local colNo = vim.fn.col
 local append = vim.fn.append
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
-local error = vim.log.levels.ERROR
 local warn = vim.log.levels.WARN
 local function wordUnderCursor() return vim.fn.expand("<cword>") end
 
@@ -38,7 +37,7 @@ function M.copyLastCommand()
 
 	local lastCommand = fn.getreg(":")
 	if not (lastCommand) then
-		vim.notify(" No Command has been run yet. ", error)
+		vim.notify(" No Command has been run yet. ", warn)
 		return
 	end
 	fn.setreg(reg, lastCommand)
@@ -49,7 +48,7 @@ end
 function M.runLastCommandAgain()
 	local lastCommand = fn.getreg(":")
 	if not (lastCommand) then
-		vim.notify(" No Command has been run yet.", error)
+		vim.notify(" No Command has been run yet. ", warn)
 		return
 	end
 	cmd(lastCommand)
@@ -106,7 +105,7 @@ end
 
 function M.duplicateSelection()
 	local prevReg = fn.getreg("z")
-	cmd [[noautocmd silent! normal!"zy`]"zp]] -- `noautocmd` to not trigger highlighted yank
+	cmd [[noautocmd silent! normal!"zy`]"zp]] -- `noautocmd` to not trigger highlighted-yank
 	fn.setreg("z", prevReg)
 end
 
@@ -120,18 +119,18 @@ function M.hr(opts)
 	local wasOnBlank = getline(".") == ""
 	local indent = fn.indent(".")
 	local textwidth = bo.textwidth
-	local comstr = bo.commentstring
-	local comStrLength = #(comstr:gsub("%%s", ""):gsub(" ", ""))
+	local comStr = bo.commentstring
+	local comStrLength = #(comStr:gsub("%%s", ""):gsub(" ", ""))
 
-	if comstr == "" then
+	if comStr == "" then
 		vim.notify(" No commentstring for this filetype available.", warn)
 		return
 	end
-	if comstr:find("-") then linechar = "-" end
+	if comStr:find("-") then linechar = "-" end
 
 	local linelength = textwidth - indent - comStrLength
 	local fullLine = string.rep(linechar, linelength)
-	local hr = comstr:gsub(" ?%%s ?", fullLine)
+	local hr = comStr:gsub(" ?%%s ?", fullLine)
 	if bo.filetype == "markdown" then hr = "---" end
 
 	local linesToAppend = {"", hr, ""}
@@ -145,7 +144,7 @@ function M.hr(opts)
 		cmd [[normal! j==]] -- move down and indent
 		local hrIndent = fn.indent(".")
 		-- cannot use simply :sub, since it assumes one-byte-size chars
-		local hrLine = getline(".") 
+		local hrLine = getline(".") ---@type string
 		hrLine = hrLine:gsub(linechar, "", hrIndent)
 		setline(".", hrLine)
 	else
