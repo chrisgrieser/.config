@@ -190,7 +190,7 @@ autocmd("RecordingLeave", {
 	group = "recording",
 	callback = function()
 		keymap("n", "0", "qy") -- not saving in throwaway register z, so the respective keymaps can be used during a macro
-		vim.notify(" RECORDED\n " .. vim.v.event.regcontents)
+		vim.notify(" Recorded\n " .. vim.v.event.regcontents)
 	end
 })
 autocmd("RecordingEnter", {
@@ -199,6 +199,14 @@ autocmd("RecordingEnter", {
 })
 keymap("n", "9", "@y") -- quick replay (I don't use counts that high anyway)
 keymap("n", "0", "qy") -- needs to be set initially
+keymap("n", "c0", function() -- edit macro
+	local macro = fn.getreg("y")
+	vim.ui.input({prompt = "Edit Macro: ", default = macro}, function(editedMacro)
+		if not (editedMacro) then return end -- cancellation
+		fn.setreg("y", editedMacro)
+		vim.notify(" Edited Macro\n " .. editedMacro)
+	end)
+end)
 
 --------------------------------------------------------------------------------
 

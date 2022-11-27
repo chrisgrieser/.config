@@ -14,7 +14,7 @@ local snip = ls.parser.parse_snippet -- lsp-style-snippets for future-proofness
 ls.setup {
 	enable_autosnippets = true,
 	history = false, -- allow jumping back into the snippet
-	region_check_events = "InsertEnter", -- prevent <Tab> jumping back to a snippet after it has been left early
+	-- region_check_events = "InsertEnter", -- prevent <Tab> jumping back to a snippet after it has been left early
 	update_events = "TextChanged,TextChangedI", -- live updating of snippets
 }
 
