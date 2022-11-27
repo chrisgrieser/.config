@@ -34,6 +34,7 @@ require("scrollbar").setup {
 		Misc = {
 			priority = 1,
 			highlight = "Normal",
+			text = "", -- no "=" at the top of the file
 		},
 	},
 	excluded_filetypes = specialFiletypes,

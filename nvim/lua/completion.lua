@@ -137,7 +137,7 @@ cmp.setup {
 cmp.setup.filetype("lua", {
 	-- disable leading "-"
 	enabled = function()
-		local lineContent = fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
+		local lineContent = fn.getline(".") 
 		return not (lineContent:match(" %-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
 	end,
 	sources = cmp.config.sources(defaultAndNerdfont),

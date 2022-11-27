@@ -48,7 +48,7 @@ local function diagnosticFormat(diagnostic, mode)
 	local code = tostring(diagnostic.code)
 	local out
 
-	if source == "stylelint" or code == "nil" then -- stylelint already includes the code in the message, write-good has no codes
+	if source == "stylelint" or code == "nil" then -- stylelint already includes the code in the message
 		out = msg
 	else
 		out = msg .. " (" .. code .. ")"
