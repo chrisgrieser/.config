@@ -37,14 +37,16 @@ add("all", {
 add("all", {
 	snip("modeline", "vim: filetype=bash\n$0"),
 
-	-- macoS modifier symbols
+	-- macOS symbols
 	snip("cmd", "⌘"),
 	snip("opt", "⌥"),
 	snip("alt", "⌥"),
 	snip("ctrl", "⌃"),
 	snip("shift", "⇧"),
 	snip("capslock", "⇪"),
-	snip("backspace", "⇪"),
+	snip("backspace", "⌫"),
+	snip("escape", "⎋"),
+	snip("tab", "↹ "),
 })
 
 -- Shell (zsh)
