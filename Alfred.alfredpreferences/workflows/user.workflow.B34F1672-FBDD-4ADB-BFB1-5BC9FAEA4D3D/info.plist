@@ -31,29 +31,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>0B1E6AA4-1922-4203-943D-62AA02786451</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>516A8D31-7193-47FD-AD28-ADAE49601D02</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>D8D7E65D-1523-47A4-9964-845E4D2C0927</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>1CA4905C-0482-4517-93A3-656ACFA985CD</key>
 		<array>
 			<dict>
@@ -96,19 +73,6 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy to Clipboard</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>4DEABEE2-4999-4872-A75E-DCBD98C663E1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2ACE5555-5735-4C32-AB12-52AF7B05D8B1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -168,19 +132,6 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy to Clipboard</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>D8D7E65D-1523-47A4-9964-845E4D2C0927</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4DEABEE2-4999-4872-A75E-DCBD98C663E1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -389,27 +340,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>This may take up to a minute.</string>
-				<key>title</key>
-				<string>⏳Re-Creating Index</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>516A8D31-7193-47FD-AD28-ADAE49601D02</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -455,86 +385,6 @@
 			<string>1CA4905C-0482-4517-93A3-656ACFA985CD</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>neovim-docs-index-creation.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>D8D7E65D-1523-47A4-9964-845E4D2C0927</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Blow</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>2ACE5555-5735-4C32-AB12-52AF7B05D8B1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>:vim</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Update Neovim :help Index</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>0B1E6AA4-1922-4203-943D-62AA02786451</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ Index created</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>4DEABEE2-4999-4872-A75E-DCBD98C663E1</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -909,17 +759,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>475</real>
 		</dict>
-		<key>0B1E6AA4-1922-4203-943D-62AA02786451</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>(re)create index</string>
-			<key>xpos</key>
-			<real>540</real>
-			<key>ypos</key>
-			<real>275</real>
-		</dict>
 		<key>147B74A7-0701-400F-9336-3E942E809AB8</key>
 		<dict>
 			<key>xpos</key>
@@ -936,15 +775,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>245</real>
 		</dict>
-		<key>2ACE5555-5735-4C32-AB12-52AF7B05D8B1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>985</real>
-			<key>ypos</key>
-			<real>275</real>
-		</dict>
 		<key>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</key>
 		<dict>
 			<key>colorindex</key>
@@ -953,24 +783,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>130</real>
-		</dict>
-		<key>4DEABEE2-4999-4872-A75E-DCBD98C663E1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>845</real>
-			<key>ypos</key>
-			<real>275</real>
-		</dict>
-		<key>516A8D31-7193-47FD-AD28-ADAE49601D02</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>705</real>
-			<key>ypos</key>
-			<real>160</real>
 		</dict>
 		<key>5B4488F5-41D3-4E76-A00D-E7878BC0BC40</key>
 		<dict>
@@ -1005,15 +817,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>365</real>
-		</dict>
-		<key>D8D7E65D-1523-47A4-9964-845E4D2C0927</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>700</real>
-			<key>ypos</key>
-			<real>275</real>
 		</dict>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<dict>
