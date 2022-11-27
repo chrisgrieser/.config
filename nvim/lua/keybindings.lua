@@ -300,6 +300,7 @@ keymap("x", "<Left>", qol.moveSelectionLeft)
 
 -- Merging / Splitting Lines
 keymap({"n", "x"}, "M", "J") -- [M]erge line up
+keymap({"n", "x"}, "gM", "gJ") -- [M]erge line up, don't add spaces
 keymap({"n", "x"}, "gm", "ddpkJ") -- [m]erge line down
 keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 keymap("n", "<leader>s", ":TSJToggle<CR>")
@@ -321,9 +322,9 @@ keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented fo
 keymap("x", "v", "<C-v>") -- `vv` from normal mode goes to visual block mode
 
 --------------------------------------------------------------------------------
--- WINDOW
-keymap("", "<C-w>h", ":split #<CR>")
+-- WINDOWS & SPLITS
 keymap("", "<C-w>v", ":vsplit #<CR>") -- open the alternate file in the split instead of the current file
+keymap("", "<C-w>h", ":split #<CR>")
 keymap("", "<C-Right>", ":vertical resize +3<CR>") -- resizing on one key for sanity
 keymap("", "<C-Left>", ":vertical resize -3<CR>")
 keymap("", "<C-Down>", ":resize +3<CR>")
@@ -345,22 +346,22 @@ keymap("n", "gb", telescope.buffers) -- open [b]uffer
 require("cybu").setup {
 	display_time = 750,
 	position = {
-		anchor = "bottomcenter", -- topleft, topcenter, topright, centerleft, center, centerright, bottomleft, bottomcenter, bottomright
+		anchor = "bottomcenter", 
 		max_win_height = 12,
 		vertical_offset = 3,
 	},
 	style = {
 		border = borderStyle,
 		padding = 2,
-		path = "tail", -- relative|absolute|tail
+		path = "tail", 
 		hide_buffer_id = true,
 		highlights = {current_buffer = "CursorLine"},
 	},
 	behavior = {
 		mode = {
 			default = {
-				switch = "immediate", -- immediate, on_close
-				view = "paging", -- paging, rolling
+				switch = "immediate", 
+				view = "paging", 
 			},
 		},
 	},
