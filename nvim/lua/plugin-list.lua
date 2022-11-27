@@ -152,9 +152,8 @@ function M.PluginList(use)
 		requires = "hrsh7th/nvim-cmp",
 		config = function()
 			require("obsidian").setup {
-				dir = "~/Main\\ Vault",
+				dir = "/Users/chrisgrieser/main-vault",
 				completion = {nvim_cmp = true},
-				use_advanced_uri = true,
 			}
 		end,
 	}

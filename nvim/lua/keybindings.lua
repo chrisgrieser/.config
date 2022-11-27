@@ -92,9 +92,9 @@ keymap({"o", "x"}, "im", "i%", {remap = true})
 keymap({"o", "x"}, "am", "a%", {remap = true})
 
 -- Tabout
-require("tabout").setup {
-	act_as_shift_tab = true,
-}
+-- require("tabout").setup {
+-- 	act_as_shift_tab = true,
+--}
 
 -- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)")
