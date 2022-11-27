@@ -132,6 +132,7 @@ specialFiletypes = {
 	"noice",
 	"mason",
 	"ssr",
+	"cybu",
 
 	"dap-repl",
 	"dui_console",
