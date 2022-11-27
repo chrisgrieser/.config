@@ -176,3 +176,9 @@ Neovimcraft
 filetype
 neovimcraft
 autoupdates
+zsh
+shellcheck
+LSP
+Treesitter
+treesitter
+linter
