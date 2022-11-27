@@ -133,6 +133,7 @@ specialFiletypes = {
 	"mason",
 	"ssr",
 	"cybu",
+	"",
 
 	"dap-repl",
 	"dui_console",
