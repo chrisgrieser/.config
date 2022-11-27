@@ -98,10 +98,10 @@ function homeModeLayout ()
 
 	showAllSidebars()
 	useLayout(homeLayout)
-	runDelayed(1.0, function () app("Drafts"):activate() end)
+	repeatFunc({0.5, 1}, function () app("Drafts"):activate() end)
 
 	if screenIsUnlocked() then
-		runDelayed (5, function()twitterrificAction("scrollup") end)
+		runDelayed (3, function()twitterrificAction("scrollup") end)
 	end
 
 	-- wait until sync is finished, to avoid merge conflict

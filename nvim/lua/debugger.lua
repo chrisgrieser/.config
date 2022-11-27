@@ -2,9 +2,6 @@ require("utils")
 local dap = require("dap")
 local dapUI = require("dapui")
 --------------------------------------------------------------------------------
--- INFO: setup descriptions
--- https://github.com/mxsdev/nvim-dap-vscode-js#setup
---------------------------------------------------------------------------------
 
 -- DAP SETUP
 -- INFO: uses dap-names, not mason-names https://github.com/jayp0521/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
@@ -12,6 +9,7 @@ require("mason-nvim-dap").setup {
 	ensure_installed = {
 		"node2",
 		"bash",
+		-- "python",
 	},
 	-- one-small-step-for-vimkind not included with mason, but installed as nvim plugin
 }
@@ -91,12 +89,10 @@ dap.configurations.sh = {{
 require("nvim-dap-virtual-text").setup()
 dapUI.setup()
 
-dap.listeners.after.event_initialized["dapui_config"] = function()
-	wo.number = true
-end
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
 
+keymap("n", "7", dap.toggle_breakpoint)
 -- wrap `continue` in this, since the nvim-lua-debugger has to be started
 -- separately
 keymap("n", "8", function()
@@ -107,9 +103,9 @@ keymap("n", "8", function()
 	else
 		dap.continue()
 	end
-end, {nowait = true})
+	wo.number = true
+end)
 
-keymap("n", "*", dap.toggle_breakpoint)
 
 -- selection of dap-commands
 keymap("n", "<leader>b", function()
@@ -128,12 +124,7 @@ keymap("n", "<leader>b", function()
 		if not (choice) then return end
 		if choice:find("^Launch") then opt.number = true end
 
-		if choice == "Set Log Point" then
-			vim.ui.input({prompt = "Log point message: "}, function(msg)
-				if not (msg) then return end
-				dap.toggle_breakpoint(nil, nil, msg)
-			end)
-		elseif choice == "Toggle DAP UI" then
+		if choice == "Toggle DAP UI" then
 			dapUI.toggle()
 		elseif choice == "Step over" then
 			dap.step_over()
@@ -147,6 +138,11 @@ keymap("n", "<leader>b", function()
 			dap.clear_breakpoints()
 		elseif choice == "Conditional Breakpoint" then
 			dap.set_breakpoint(fn.input("Breakpoint condition: ")) ---@diagnostic disable-line: param-type-mismatch
+		elseif choice == "Log Point" then
+			vim.ui.input({prompt = "Log point message: "}, function(msg)
+				if not (msg) then return end
+				dap.toggle_breakpoint(nil, nil, msg)
+			end)
 		elseif choice == "Terminate" then
 			wo.number = false
 			dapUI.close()

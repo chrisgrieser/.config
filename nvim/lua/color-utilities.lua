@@ -28,5 +28,5 @@ ccc.setup{
 }
 
 keymap("n", "#", ":CccPick<CR>")
-keymap("n", "g#", ":CccConvert<CR>")
+keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
 keymap("i", "<C-#>", "<Plug>(ccc-insert)")
