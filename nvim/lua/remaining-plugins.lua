@@ -30,10 +30,4 @@ function g.Undotree_CustomMap()
 	setlocal("list", false)
 end
 
---------------------------------------------------------------------------------
-
--- Tabout
-require("tabout").setup {
-	act_as_shift_tab = true,
-}
 

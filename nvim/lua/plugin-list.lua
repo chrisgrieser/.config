@@ -113,7 +113,11 @@ function M.PluginList(use)
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons"
 	}}
-	use "ghillb/cybu.nvim" -- Cycle Buffers
+
+	use {"ghillb/cybu.nvim", requires = {-- Cycle Buffers
+		"nvim-tree/nvim-web-devicons",
+		"nvim-lua/plenary.nvim",
+	}}
 
 	-- File History
 	use {"mbbill/undotree", cmd = "UndotreeToggle"}
