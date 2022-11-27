@@ -78,7 +78,7 @@ function homeModeLayout ()
 	privateClosers()
 
 	dockSwitcher("home")
-
+	
 	local homeLayout = {
 		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
 		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
