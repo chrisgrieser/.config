@@ -10,3 +10,7 @@
 	path = Alfred.alfredpreferences/workflows/pdf-annotation-extractor-alfred
 	url = git@github.com:chrisgrieser/pdf-annotation-extractor-alfred.git
 	update = rebase
+[submodule "Alfred.alfredpreferences/workflows/alfred-neovim-utilities"]
+	path = Alfred.alfredpreferences/workflows/alfred-neovim-utilities
+	url = git@github.com:chrisgrieser/alfred-neovim-utilities.git
+	update = rebase
