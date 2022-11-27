@@ -60,7 +60,7 @@ function M.PluginList(use)
 	use {"neovim/nvim-lspconfig", requires = {
 		"williamboman/mason-lspconfig.nvim",
 		"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
-		"ray-x/lsp_signature.nvim", -- signature hint
+		-- "ray-x/lsp_signature.nvim", -- signature hint
 		"SmiteshP/nvim-navic", -- breadcrumbs
 		"j-hui/fidget.nvim", -- lsp status
 		"folke/neodev.nvim", -- lsp for nvim-lua config
@@ -134,34 +134,30 @@ function M.PluginList(use)
 		end
 	}
 
-	-- Operators & Text Objects
+	-- Operators & Text Objects, Navigation & Editing
 	use "kylechui/nvim-surround"
 	use "gbprod/substitute.nvim"
 	use "numToStr/Comment.nvim"
 	use "michaeljsmith/vim-indent-object"
-
-	-- Navigation
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}
 	use "ggandor/leap.nvim"
-
-	-- Editing
 	use "Darazaki/indent-o-matic"
 
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
 	use {"hail2u/vim-css3-syntax", ft = "css"} -- better syntax highlighting (until treesitter css looks decent…)
 	use {"iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && npm install"}
-	-- use {"epwalsh/obsidian.nvim",
-	-- 	-- ft = "markdown",
-	-- 	requires = "hrsh7th/nvim-cmp",
-	-- 	config = function()
-	-- 		require("obsidian").setup {
-	-- 			-- dir = "~/Main Vault",
-	-- 			completion = {nvim_cmp = true},
-	-- 			use_advanced_uri = true,
-	-- 		}
-	-- 	end,
-	-- }
+	use {"epwalsh/obsidian.nvim",
+		-- ft = "markdown",
+		requires = "hrsh7th/nvim-cmp",
+		config = function()
+			require("obsidian").setup {
+				dir = "~/Main\\ Vault",
+				completion = {nvim_cmp = true},
+				use_advanced_uri = true,
+			}
+		end,
+	}
 
 end
 
