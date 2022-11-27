@@ -336,7 +336,7 @@ keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file
 keymap("n", "<BS>", "<Plug>(CybuNext)") -- cycle between buffers
 keymap("n", "<S-BS>", "<Plug>(CybuPrev)")
-keymap("n", "d<BS>", function()
+keymap("n", "<Del>", function() -- <C-BS> = <Del> (via Karabiner)
 	cmd [[bdelete]]
 	vim.notify(" Buffer deleted. ")
 end)
@@ -347,7 +347,7 @@ require("cybu").setup {
 	position = {
 		anchor = "bottomcenter", -- topleft, topcenter, topright, centerleft, center, centerright, bottomleft, bottomcenter, bottomright
 		max_win_height = 12,
-		vertical_offset = 4,
+		vertical_offset = 3,
 	},
 	style = {
 		border = borderStyle,
@@ -410,7 +410,7 @@ end)
 keymap("n", "<leader>os", ":set spell!<CR>")
 keymap("n", "<leader>or", ":set relativenumber!<CR>")
 keymap("n", "<leader>on", ":set number!<CR>")
-keymap("n", "<leader>ow", ":set wrap! <CR>")
+keymap("n", "<leader>ow", ":set wrap!<CR>")
 
 --------------------------------------------------------------------------------
 
