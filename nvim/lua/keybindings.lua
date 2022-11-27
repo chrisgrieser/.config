@@ -79,7 +79,9 @@ keymap("n", "<Esc>", function() -- clear all
 	cmd [[echo]] -- shortmessage
 	cmd [[normal!lh]] -- lsp hover window
 end, {silent = true})
+
 keymap({"n", "x", "o"}, "+", "*") -- no more modifier key on German Keyboard
+keymap({"n", "x", "o"}, "*", "#") 
 
 -- URLs
 keymap("n", "gü", "/http.*<CR>:nohl<CR>") -- goto next
@@ -248,8 +250,10 @@ keymap("n", "sx", exchange.operator)
 keymap("n", "sxx", exchange.line)
 keymap("x", "X", exchange.visual)
 
--- structured search & replace
-keymap({"n", "x"}, "<leader>f", function() require("ssr").open() end) -- wrapped in function for lazy-loading
+-- search & replace 
+keymap("n", "<leader>f", ":%s///g<Left><Left><Left>")
+keymap("x", "<leader>f", ":s///g<Left><Left><Left>")
+keymap({"n", "x"}, "<leader>F", function() require("ssr").open() end) -- wrapped in function for lazy-loading
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine)
