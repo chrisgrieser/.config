@@ -1,4 +1,3 @@
----@diagnostic disable: missing-parameter
 require("utils")
 -- https://code.visualstudio.com/docs/editor/userdefinedsnippets
 -- https://github.com/L3MON4D3/LuaSnip/blob/master/Examples/snippets.lua
@@ -38,13 +37,14 @@ add("all", {
 add("all", {
 	snip("modeline", "vim: filetype=bash\n$0"),
 
+	-- macoS modifier symbols
 	snip("cmd", "⌘"),
 	snip("opt", "⌥"),
 	snip("alt", "⌥"),
 	snip("ctrl", "⌃"),
 	snip("shift", "⇧"),
 	snip("capslock", "⇪"),
-	snip("return", "↵ "),
+	snip("backspace", "⇪"),
 })
 
 -- Shell (zsh)

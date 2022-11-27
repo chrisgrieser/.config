@@ -137,11 +137,14 @@ keymap("n", "<leader>b", function()
 		elseif choice == "Clear Breakpoints" then
 			dap.clear_breakpoints()
 		elseif choice == "Conditional Breakpoint" then
-			dap.set_breakpoint(fn.input("Breakpoint condition: ")) ---@diagnostic disable-line: param-type-mismatch
+			vim.ui.input({prompt = "Breakpoint condition: "}, function (cond)
+				if not(cond) then return end
+				dap.set_breakpoint(cond)
+			end)
 		elseif choice == "Log Point" then
 			vim.ui.input({prompt = "Log point message: "}, function(msg)
 				if not (msg) then return end
-				dap.toggle_breakpoint(nil, nil, msg)
+				dap.set_breakpoint(nil, nil, msg)
 			end)
 		elseif choice == "Terminate" then
 			wo.number = false

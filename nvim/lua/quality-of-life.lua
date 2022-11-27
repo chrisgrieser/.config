@@ -1,4 +1,4 @@
----@diagnostic disable: assign-type-mismatch, param-type-mismatch
+---@diagnostic disable: param-type-mismatch, assign-type-mismatch
 local M = {}
 --------------------------------------------------------------------------------
 local bo = vim.bo
@@ -145,7 +145,7 @@ function M.hr(opts)
 		cmd [[normal! j==]] -- move down and indent
 		local hrIndent = fn.indent(".")
 		-- cannot use simply :sub, since it assumes one-byte-size chars
-		local hrLine = getline(".") ---@type string
+		local hrLine = getline(".") 
 		hrLine = hrLine:gsub(linechar, "", hrIndent)
 		setline(".", hrLine)
 	else
@@ -292,7 +292,7 @@ function M.pasteDifferently(opts) -- paste as characterwise
 		return
 	end
 
-	fn.setreg(reg, regContent, targetRegType)
+	fn.setreg(reg, regContent, {targetRegType})
 	cmd('normal! "' .. reg .. "p")
 end
 
