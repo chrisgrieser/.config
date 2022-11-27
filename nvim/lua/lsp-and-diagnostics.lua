@@ -22,7 +22,7 @@ local lsp_servers = {
 -- SIGN-COLUMN ICONS
 for type, icon in pairs(signIcons) do
 	local hl = "DiagnosticSign" .. type
-	fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl}) ---@diagnostic disable-line: redundant-parameter, param-type-mismatch
+	fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl}) 
 end
 
 --------------------------------------------------------------------------------
@@ -131,7 +131,7 @@ keymap("n", "<leader>a", vim.lsp.buf.code_action)
 -- after the language server attaches to the current buffer
 local function on_attach(client, bufnr)
 	local bufopts = {silent = true, buffer = true}
-	require("lsp-inlayhints").on_attach(client, bufnr) ---@diagnostic disable-line: missing-parameter
+	require("lsp-inlayhints").on_attach(client, bufnr) 
 
 	if client.server_capabilities.documentSymbolProvider then
 		require("nvim-navic").attach(client, bufnr)

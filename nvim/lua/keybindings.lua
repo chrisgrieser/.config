@@ -348,7 +348,7 @@ require("cybu").setup {
 	position = {
 		anchor = "bottomcenter", 
 		max_win_height = 12,
-		vertical_offset = 3,
+		vertical_offset = 2,
 	},
 	style = {
 		border = borderStyle,
