@@ -46,7 +46,7 @@ require("telescope").setup {
 				preview_cutoff = 9001, -- never use preview here
 			},
 			bottom_pane = {
-				height = 20,
+				height = 8,
 				preview_cutoff = 70,
 				prompt_position = "bottom",
 			},
@@ -72,7 +72,12 @@ require("telescope").setup {
 			show_line = false,
 			trim_text = true,
 			initial_mode = "normal",
-			layout_config = {horizontal = {height = 8}}
+			theme = "cursor",
+			layout_config = {cursor = {
+				width = 0.7,
+				preview_cutoff = 30,
+				preview_width = {0.55, max = 45}
+			}},
 		},
 		lsp_document_symbols = {
 			prompt_prefix = "* ",
