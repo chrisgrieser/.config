@@ -87,11 +87,11 @@ require("mason-lspconfig").setup {
 
 --------------------------------------------------------------------------------
 -- LSP PLUGINS
-require("lsp_signature").setup {
-	floating_window = false,
-	hint_prefix = "﬍ ",
-	hint_scheme = "NonText", -- highlight group
-}
+-- require("lsp_signature").setup {
+-- 	floating_window = false,
+-- 	hint_prefix = "﬍ ",
+-- 	hint_scheme = "NonText", -- highlight group
+-- }
 
 require("lsp-inlayhints").setup {
 	inlay_hints = {
