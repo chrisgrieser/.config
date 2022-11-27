@@ -149,6 +149,11 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["cybu.nvim"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/cybu.nvim",
+    url = "https://github.com/ghillb/cybu.nvim"
+  },
   ["diffview.nvim"] = {
     commands = { "DiffviewFileHistory", "DiffviewOpen" },
     config = { "\27LJ\2\n€\1\0\0\b\0\15\0\0236\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\r\0005\3\a\0005\4\5\0006\5\0\0'\a\3\0B\5\2\0029\5\4\5=\5\6\4=\4\b\0035\4\n\0006\5\0\0'\a\3\0B\5\2\0029\5\t\5=\5\v\4=\4\f\3=\3\14\2B\0\2\1K\0\1\0\fkeymaps\1\0\0\17option_panel\t<CR>\1\0\0\17select_entry\23file_history_panel\1\0\0\6o\1\0\0\foptions\21diffview.actions\nsetup\rdiffview\frequire\0" },
@@ -280,10 +285,10 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text",
     url = "https://github.com/theHamsta/nvim-dap-virtual-text"
   },
-  ["nvim-ghengis"] = {
+  ["nvim-genghis"] = {
     loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim-ghengis",
-    url = "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Repos/nvim-ghengis"
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim-genghis",
+    url = "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Repos/nvim-genghis"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -382,7 +387,7 @@ _G.packer_plugins = {
   },
   treesj = {
     commands = { "TSJToggle" },
-    config = { "\27LJ\2\nc\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\20max_join_length\3ñ\1\24use_default_keymaps\1\nsetup\vtreesj\frequire\0" },
+    config = { "\27LJ\2\nc\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\24use_default_keymaps\1\20max_join_length\3ñ\1\nsetup\vtreesj\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -476,9 +481,9 @@ time([[Defining lazy-load commands]], false)
 
 -- Keymap lazy-loads
 time([[Defining lazy-load keymaps]], true)
-vim.cmd [[nnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> <M-Down> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>M-Down>", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> <M-Up> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>M-Up>", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[vnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
 time([[Defining lazy-load keymaps]], false)
 
@@ -487,8 +492,8 @@ vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
 vim.cmd [[au FileType css ++once lua require("packer.load")({'vim-css3-syntax'}, { ft = "css" }, _G.packer_plugins)]]
-vim.cmd [[au FileType applescript ++once lua require("packer.load")({'vim-applescript'}, { ft = "applescript" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType applescript ++once lua require("packer.load")({'vim-applescript'}, { ft = "applescript" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]

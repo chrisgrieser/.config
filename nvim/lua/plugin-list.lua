@@ -107,12 +107,15 @@ function M.PluginList(use)
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 	use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter
 
-	-- File History & File Switching & File Operation
+	-- File Switching & File Operation
 	use {myrepos .. "nvim-genghis", requires = "stevearc/dressing.nvim"}
 	use {"nvim-telescope/telescope.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons"
 	}}
+	use "ghillb/cybu.nvim" -- Cycle Buffers
+
+	-- File History
 	use {"mbbill/undotree", cmd = "UndotreeToggle"}
 	use {"sindrets/diffview.nvim",
 		requires = "nvim-lua/plenary.nvim",

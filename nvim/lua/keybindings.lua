@@ -308,7 +308,7 @@ keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented fo
 keymap("x", "v", "<C-v>") -- `vv` from normal mode goes to visual block mode
 
 --------------------------------------------------------------------------------
--- WINDOW AND BUFFERS
+-- WINDOW
 keymap("", "<C-w>h", ":split #<CR>")
 keymap("", "<C-w>v", ":vsplit #<CR>") -- open the alternate file in the split instead of the current file
 keymap("", "<C-Right>", ":vertical resize +3<CR>") -- resizing on one key for sanity
@@ -320,6 +320,7 @@ keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 -- Buffers
 keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file
 keymap("n", "<C-M-CR>", ":nohl | bnext<CR>", {silent = true}) -- cycle between buffers, <S-CR> supported via karabiner-remapping
+keymap("n", "gb", telescope.buffers) -- open [b]uffer
 
 --------------------------------------------------------------------------------
 -- FILES
@@ -328,7 +329,6 @@ keymap("n", "<C-M-CR>", ":nohl | bnext<CR>", {silent = true}) -- cycle between b
 keymap("n", "go", telescope.find_files) -- [o]pen file in parent-directory
 keymap("n", "gO", telescope.git_files) -- [o]pen file in git directory
 keymap("n", "gr", telescope.oldfiles) -- [r]ecent files
-keymap("n", "gb", telescope.buffers) -- open [b]uffer
 keymap("n", "gf", telescope.live_grep) -- search in [f]iles
 
 -- File Operations (genghis-nvim)
