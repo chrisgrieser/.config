@@ -211,7 +211,6 @@ lspSettings.sumneko_lua = {
 			callSnippet = "Replace",
 			keywordSnippet = "Replace",
 			displayContext = 2,
-			showWord = "Fallback",
 		},
 		diagnostics = {
 			globals = {"martax"},
@@ -220,10 +219,7 @@ lspSettings.sumneko_lua = {
 				"lowercase-global",
 			},
 		},
-		workspace = {
-			library = {home .. "/.hammerspoon/Spoons/EmmyLua.spoon/annotations"},
-			checkThirdParty = false, -- https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
-		},
+		workspace = {checkThirdParty = false}, -- https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		hint = {
 			enable = true,
 			setType = true,
