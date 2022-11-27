@@ -2,10 +2,8 @@ require("utils")
 --------------------------------------------------------------------------------
 
 local lightTheme = "melange"
-local darkTheme = "melange"
--- local darkTheme = "tokyonight-moon"
+local darkTheme = "tokyonight-moon"
 -- local darkTheme = "kanagawa"
--- local darkTheme = "dracula"
 
 --------------------------------------------------------------------------------
 
