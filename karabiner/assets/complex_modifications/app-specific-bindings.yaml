@@ -278,9 +278,13 @@ rules:
           - key_code: l
             modifiers:
               - command
+          - key_code: vk_none
+            hold_down_milliseconds: 15
           - key_code: c
             modifiers:
               - command
+          - key_code: vk_none
+            hold_down_milliseconds: 15
           - key_code: w
             modifiers:
               - command
