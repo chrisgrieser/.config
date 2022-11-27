@@ -54,25 +54,14 @@ keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = true
 keymap({"n", "x"}, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], opts)
 keymap({"n", "x"}, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], opts)
 
---------------------------------------------------------------------------------
-
--- Obsidian.nvim
--- keymap("n", "gf", function()
--- 	if require("obsidian").util.cursor_on_markdown_link() then
--- 		cmd [[ObsidianFollowLink]]
--- 	else
--- 		telescope.live_grep()
--- 	end
--- end, opts)
-
--- -- Obsidian.nvim
--- keymap("n", "go", function()
--- 	if fn.expand("%:p:h"):find("Main Vault") then
--- 		cmd [[ObsidianOpen]]
--- 	else
--- 		telescope.find_files()
--- 	end
--- end, opts)
+-- Obsidian Vault
+keymap("n", "go", function()
+	if fn.expand("%:p:h"):find("main-vault") then
+		telescope.find_files {cwd = home .. "/main-vault", prompt_prefix = " "}
+	else
+		telescope.find_files()
+	end
+end, opts)
 
 --------------------------------------------------------------------------------
 
