@@ -19,10 +19,13 @@ opt.guicursor = "n-sm:block," ..
 
 --------------------------------------------------------------------------------
 -- CMD-Keybindings
-keymap({"n", "x", "i"}, "<D-w>", function() cmd [[close]] end) -- cmd+w
+keymap({"n", "x", "i"}, "<D-w>", function() -- cmd+w
+	cmd [[silent! close]]
+	cmd [[silent! tabclose]]
+end)
 keymap({"n", "x", "i"}, "<D-S-w>", function() cmd [[only]] end) -- cmd+shift+w
-keymap({"n", "x", "i"}, "<D-z>", function () cmd[[undo]] end) -- cmd+z
-keymap({"n", "x", "i"}, "<D-S-z>", function () cmd[[redo]] end) -- cmd+shift+z
+keymap({"n", "x", "i"}, "<D-z>", function() cmd [[undo]] end) -- cmd+z
+keymap({"n", "x", "i"}, "<D-S-z>", function() cmd [[redo]] end) -- cmd+shift+z
 keymap({"n", "x", "i"}, "<D-s>", function() cmd [[write!]] end) -- cmd+s
 keymap("n", "<D-a>", "ggVG") -- cmd+a
 keymap("i", "<D-a>", "<Esc>ggVG")

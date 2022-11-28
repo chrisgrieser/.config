@@ -7,6 +7,7 @@ local lintersAndFormatters = {
 	"shellcheck", -- needed for bash-lsp
 	"markdownlint",
 	"vale",
+	"shfmt",
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
@@ -27,6 +28,7 @@ null_ls.setup {
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		-- no diagnostics for shellcheck needed, since handled by bash-lsp
 		-- but code actions are needed: https://github.com/bash-lsp/bash-language-server/issues/490
+		builtins.formatting.shfmt,
 		builtins.code_actions.shellcheck.with {
 			extra_filetypes = {"zsh"},
 			extra_args = {"--shell=bash"},

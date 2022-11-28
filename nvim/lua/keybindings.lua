@@ -394,17 +394,10 @@ keymap("x", "X", genghis.moveSelectionToNewFile)
 
 -- Diffview
 keymap("n", "<C-g>", function()
-	if bo.filetype == "DiffviewFileHistory" then
-		cmd("DiffviewClose")
-		return
-	end
 	vim.ui.input({prompt = "Search File History (empty = full history):"}, function(query)
-		if not (query) then -- = cancellation
-			return
-		elseif query == "" then
-			cmd("DiffviewFileHistory %")
-		else
-			cmd("DiffviewFileHistory % -G" .. query)
+		if not (query) then return
+		elseif query == "" then cmd("DiffviewFileHistory %")
+		else cmd("DiffviewFileHistory % -G" .. query)
 		end
 	end)
 end)
