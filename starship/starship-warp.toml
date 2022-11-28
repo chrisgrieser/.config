@@ -48,9 +48,9 @@ format = " [$symbol$status]($style)"
 disabled = false
 symbol = ""
 
-# -------------
+
+#───────────────────────────────────────────────────────────────────────────────
 # git
-# -------------
 
 [git_state] # mostly conflicts
 style = 'fg:blue bg:black'
@@ -89,7 +89,7 @@ disabled = false
 # only_nonzero_diffs = false
 added_style = "fg:green bg:black"
 deleted_style = "fg:red bg:black"
-format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\)) '
+format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\) )'
 
 #───────────────────────────────────────────────────────────────────────────────
 
