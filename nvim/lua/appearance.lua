@@ -175,8 +175,8 @@ require("fidget").setup {
 -- STATUS LINE (LUALINE)
 
 local function recordingStatus()
-	if fn.reg_recording() ~= "" then return " RECORDING"
-	else return "" end
+	if fn.reg_recording() == "" then return "" end
+	return " RECORDING"
 end
 
 local function alternateFile()
@@ -305,7 +305,7 @@ require("lualine").setup {
 			{"branch", cond = isStandardBranch},
 		},
 		lualine_z = {
-			"location",
+			{"location", symbols = {added = "", modified = " :", removed = "-"}},
 			{selectionCount},
 		},
 	},
