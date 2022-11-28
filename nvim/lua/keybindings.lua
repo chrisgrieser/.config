@@ -264,8 +264,8 @@ keymap("n", "sxx", exchange.line)
 keymap("x", "X", exchange.visual)
 
 -- search & replace
-keymap("n", "<leader>f", ":%s///g<Left><Left><Left>")
-keymap("x", "<leader>f", ":s///g<Left><Left><Left>")
+keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]])
+keymap("x", "<leader>f", ":s///g<Left><Left>")
 keymap({"n", "x"}, "<leader>F", function() require("ssr").open() end) -- wrapped in function for lazy-loading
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
@@ -379,6 +379,7 @@ keymap("n", "go", telescope.find_files) -- [o]pen file in parent-directory
 keymap("n", "gO", telescope.git_files) -- [o]pen file in git directory
 keymap("n", "gr", telescope.oldfiles) -- [r]ecent files
 keymap("n", "gf", telescope.live_grep) -- search in [f]iles
+keymap("n", "gR", telescope.resume) -- resume last search
 
 -- File Operations (genghis-nvim)
 local genghis = require("genghis")

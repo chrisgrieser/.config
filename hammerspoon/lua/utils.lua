@@ -1,11 +1,11 @@
 -- CONFIG
+home = os.getenv("HOME")
+
 dotfilesFolder = home.."/.config"
 fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 vaultLocation = home .. "/main-vault"
 
 --------------------------------------------------------------------------------
----home directory
-home = os.getenv("HOME")
 
 ---returns current date in ISO 8601 format
 ---@return string|osdate

@@ -1,7 +1,7 @@
 # `bat --list-themes`
 --theme="Sublime Snazzy"
 
---italic-text=never
+# --italic-text=never
 --wrap=never
 --tabs=2
 --terminal-width="-1"
@@ -12,4 +12,3 @@
 
 # show percentage indicator
 --pager="less -RF --long-prompt +Gg"
-

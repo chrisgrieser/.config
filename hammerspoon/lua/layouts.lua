@@ -44,6 +44,7 @@ function movieModeLayout()
 	killIfRunning("Alfred Preferences")
 	killIfRunning("Finder")
 	killIfRunning("Warp")
+	killIfRunning("Highlights")
 	killIfRunning("Alacritty")
 	killIfRunning("alacritty")
 
@@ -54,6 +55,7 @@ function movieModeLayout()
 	moveResize(twitterrificWin, toTheSide)
 end
 
+currentlyRunning = false
 function homeModeLayout ()
 	if betweenTime(1, 8) then
 		iMacDisplay:setBrightness(0)
@@ -83,7 +85,7 @@ function homeModeLayout ()
 		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
 		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{"Highlights", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Neovide", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"neovide", nil, iMacDisplay, pseudoMaximized, nil, nil},
 		{"Slack", nil, iMacDisplay, pseudoMaximized, nil, nil},
@@ -100,8 +102,12 @@ function homeModeLayout ()
 	useLayout(homeLayout)
 	repeatFunc({0.5, 1}, function () app("Drafts"):activate() end)
 
-	if screenIsUnlocked() then
-		runDelayed (3, function()twitterrificAction("scrollup") end)
+	if screenIsUnlocked() and not(currentlyRunning) then
+		currentlyRunning = true
+		runDelayed (2, function()
+         twitterrificAction("scrollup")
+			currentlyRunning = false
+      end)
 	end
 
 	-- wait until sync is finished, to avoid merge conflict
@@ -124,16 +130,16 @@ function officeModeLayout ()
 	openIfNotRunning("Slack")
 	openIfNotRunning("Brave Browser")
 	openIfNotRunning("Obsidian")
-	openIfNotRunning("Tweeten")
+	openIfNotRunning("TweetDeck")
 	openIfNotRunning("Drafts")
 
-	dockSwitcher("office") -- separate layout to include "Tweeten"
+	dockSwitcher("office") -- separate layout to include "TweetDeck"
 
 	local top = {x=0, y=0.015, w=1, h=0.485}
 	local bottom = {x=0, y=0.5, w=1, h=0.5}
 	local officeLayout = {
 		-- screen 2
-		{"Tweeten", nil, screen2, top, nil, nil},
+		{"TweetDeck", nil, screen2, top, nil, nil},
 		{"Discord", nil, screen2, bottom, nil, nil},
 		{"Slack", nil, screen2, bottom, nil, nil},
 		-- screen 1
