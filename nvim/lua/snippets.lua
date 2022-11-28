@@ -264,6 +264,12 @@ add("javascript", {
 -- Karabiner config
 add("yaml", {
 	snip("delay (Karabiner)", "- key_code: vk_none\n  hold_down_milliseconds: ${1:50}\n$0"),
+	snip("condition (Karabiner)", [[
+		conditions:
+			- type: frontmost_application_if
+			bundle_identifiers:
+				- ^$0\$
+	]]),
 })
 
 --------------------------------------------------------------------------------
