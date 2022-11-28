@@ -6,19 +6,6 @@
 	<string>de.chris-grieser.cheatsheet-search</string>
 	<key>connections</key>
 	<dict>
-		<key>5AD61792-3003-4131-80D3-35545C307A7C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B00B02C4-7B24-4B4B-8F4A-ECF9BEF7D87F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>868D511F-E9BE-4DA9-8B21-4F33C0CB26CE</key>
 		<array>
 			<dict>
@@ -37,6 +24,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>D3503654-2247-4B2E-B4AB-CB505D2A4D11</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A1847CB5-99EE-4DA2-9641-A2058FBFD384</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B00B02C4-7B24-4B4B-8F4A-ECF9BEF7D87F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -108,82 +108,51 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>anchorfields</key>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
 				<integer>0</integer>
-				<key>daterange</key>
-				<integer>0</integer>
-				<key>fields</key>
-				<array>
-					<dict>
-						<key>field</key>
-						<string>kMDItemDisplayName</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>field</key>
-						<string>kMDItemAlternateNames</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>field</key>
-						<string>kMDItemFinderComment</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-				</array>
-				<key>includesystem</key>
-				<false/>
 				<key>keyword</key>
 				<string>ch</string>
-				<key>limit</key>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
 				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>runningsubtext</key>
 				<string></string>
-				<key>scopes</key>
-				<array>
-					<string>~/.config/Cheatsheets</string>
-				</array>
-				<key>sortmode</key>
-				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>cheatsheet-pdfs.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Cheatsheet: '{query}'</string>
-				<key>types</key>
-				<array/>
+				<string>Search Cheatsheet PDFs</string>
+				<key>type</key>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.filefilter</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>5AD61792-3003-4131-80D3-35545C307A7C</string>
+			<string>A1847CB5-99EE-4DA2-9641-A2058FBFD384</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -334,17 +303,6 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>5AD61792-3003-4131-80D3-35545C307A7C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>custom cheatsheets</string>
-			<key>xpos</key>
-			<real>95</real>
-			<key>ypos</key>
-			<real>60</real>
-		</dict>
 		<key>868D511F-E9BE-4DA9-8B21-4F33C0CB26CE</key>
 		<dict>
 			<key>note</key>
@@ -372,6 +330,17 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>ypos</key>
 			<real>470</real>
 		</dict>
+		<key>A1847CB5-99EE-4DA2-9641-A2058FBFD384</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>cheatsheet PDFs</string>
+			<key>xpos</key>
+			<real>90</real>
+			<key>ypos</key>
+			<real>55</real>
+		</dict>
 		<key>B00B02C4-7B24-4B4B-8F4A-ECF9BEF7D87F</key>
 		<dict>
 			<key>colorindex</key>
@@ -379,9 +348,9 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 			<key>note</key>
 			<string>Quicklook</string>
 			<key>xpos</key>
-			<real>300</real>
+			<real>305</real>
 			<key>ypos</key>
-			<real>60</real>
+			<real>55</real>
 		</dict>
 		<key>B3ADB39C-09E7-49B2-97F6-9CCD79DFBD6C</key>
 		<dict>
@@ -410,7 +379,31 @@ curl -s "https://cht.sh/$QUERY?T"</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Cheatsheet-Files Folder</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>cheatfile_folder</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
