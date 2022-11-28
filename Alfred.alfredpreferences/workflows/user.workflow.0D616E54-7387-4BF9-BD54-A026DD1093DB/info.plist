@@ -1679,7 +1679,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>create Draft</string>
+			<string>get browser URL</string>
 			<key>xpos</key>
 			<real>295</real>
 			<key>ypos</key>
