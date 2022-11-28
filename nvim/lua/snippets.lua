@@ -165,9 +165,9 @@ add("applescript", {
 
 -- Markdown
 add("markdown", {
-	snip("github note", "> __Note__  \n> $0"),
-	snip("github warning", "> __Warning__  \n> $0"),
-	snip("vale ignore", "<!-- vale ${1:Style${}.${2:Rule} = NO --> <!-- vale ${1:Style}.${2:Rule} = YES -->"),
+	snip("info (GitHub Callout)", "> __Note__  \n> $0"),
+	snip("warning (GitHub Callout)", "> __Warning__  \n> $0"),
+	snip("vale ignore (Comment)", "<!-- vale ${1:Style${}.${2:Rule} = NO --> <!-- vale ${1:Style}.${2:Rule} = YES -->"),
 })
 
 -- JavaScript (General)
@@ -187,18 +187,23 @@ add("javascript", {
 	snip("shell script", "app.doShellScript('${1:shellscript}');\n$0"),
 	snip("resolve home (JXA)", 'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 	snip("exists (file)", '	const fileExists = (filePath) => Application("Finder").exists(Path(filePath));\n$0'),
-	snip("browser URL", [[
-		function currentBrowserURL() {
+	snip("browser URL & title", [[
+		function currentBrowserTab() {
 			const frontmostAppName = Application("System Events").applicationProcesses.where({ frontmost: true }).name()[0];
 			const frontmostApp = Application(frontmostAppName);
 			const chromiumVariants = ["Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge"];
 			const webkitVariants = ["Safari", "Webkit"];
+			let title, url;
 			if (chromiumVariants.some(appName => frontmostAppName.startsWith(appName))) {
-				return frontmostApp.windows[0].activeTab.url();
+				url = frontmostApp.windows[0].activeTab.url();
+				title = frontmostApp.windows[0].activeTab.name();
 			} else if (webkitVariants.some(appName => frontmostAppName.startsWith(appName))) {
-				return frontmostApp.documents[0].url();
+				url = frontmostApp.documents[0].url();
+				title = frontmostApp.documents[0].name();
+			} else {
+				return "You need a supported browser as your frontmost app";
 			}
-			throw new Error("You need a supported browser as your frontmost app");
+			return {"url": url, "title": title};
 		}
 	]]),
 })
