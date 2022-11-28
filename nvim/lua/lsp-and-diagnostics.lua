@@ -102,7 +102,7 @@ require("lsp-inlayhints").setup {
 		},
 		type_hints = {
 			show = true,
-			prefix = "  ",
+			prefix = "   ",
 			remove_colon_start = true,
 			remove_colon_end = true,
 		},
@@ -173,7 +173,7 @@ keymap("n", "<C-b>", function()
 		fn.setreg("+", breadcrumbs)
 		vim.notify(" COPIED\n " .. breadcrumbs .. " ")
 	else
-		vim.notify(" No Breadcrumbs available. ", vim.log.levels.WARN)
+		vim.notify(" No Breadcrumbs available. ", logWarn)
 	end
 end)
 
