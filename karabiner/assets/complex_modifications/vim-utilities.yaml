@@ -208,9 +208,9 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - ^/Applications/Obsidian\.app
-              - ^/Applications/Sublime Text\.app
               - "[Nn]eovide"
               - alacritty$
+              - Warp\.app
               - ^/System/Applications/Utilities/Terminal.app
               - ^/Applications/Discord\.app
               - ^/Applications/Brave Browser\.app
@@ -229,9 +229,9 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
+              - Warp\.app
               - ^/System/Applications/Utilities/Terminal.app
               - ^/Applications/Obsidian\.app
-              - ^/Applications/Sublime Text\.app
               - "[Nn]eovide"
               - ^/Applications/Discord\.app
               - ^/Applications/Brave Browser\.app
