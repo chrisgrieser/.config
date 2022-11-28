@@ -73,7 +73,7 @@ local function themeModifications()
 	elseif theme == "melange" then
 		cmd [[highlight! def link Todo IncSearch]]
 		if mode == "light" then
-			cmd [[highlight def link @punctuation @label]]
+			cmd [[highlight! def link NonText Conceal]]
 			cmd [[highlight! def link NotifyINFOIcon @define]]
 			cmd [[highlight! def link NotifyINFOTitle @define]]
 			cmd [[highlight! def link NotifyINFOBody @define]]
