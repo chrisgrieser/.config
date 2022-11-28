@@ -28,7 +28,10 @@ function M.PluginList(use)
 		}
 	}
 	use {"Wansmer/treesj", -- split-join
-		requires = "nvim-treesitter/nvim-treesitter",
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+			"AndrewRadev/splitjoin.vim", -- only used as fallback. TODO: remove when treesj has wider language support
+		},
 		cmd = "TSJToggle",
 		config = function() require("treesj").setup {use_default_keymaps = false} end,
 	}
@@ -109,10 +112,10 @@ function M.PluginList(use)
 		requires = "nvim-lua/plenary.nvim",
 		cmd = {"DiffviewFileHistory", "DiffviewOpen"},
 		config = function()
-         require("diffview").setup{
+			require("diffview").setup {
 				file_history_panel = {win_config = {height = 4}},
 			}
-      end,
+		end,
 	}
 
 	-- Operators & Text Objects, Navigation & Editing

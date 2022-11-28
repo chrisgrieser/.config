@@ -212,7 +212,7 @@ keymap("n", "d<Space>", function() -- reduce multiple blank lines to exactly one
 	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
 		cmd [[normal! "_dipO]]
 	else
-		vim.notify(" Line not empty.", logWarn) 
+		vim.notify(" Line not empty.", logWarn)
 	end
 end)
 
@@ -302,16 +302,23 @@ keymap({"n", "x"}, "M", "J") -- [M]erge line up
 keymap({"n", "x"}, "gM", "gJ") -- [M]erge line up, don't add spaces
 keymap({"n", "x"}, "gm", "ddpkJ") -- [m]erge line down
 keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
-keymap("n", "<leader>s", ":TSJToggle<CR>")
 
---------------------------------------------------------------------------------
--- INSERT MODE & COMMAND MODE
-keymap("i", "<C-e>", "<Esc>A") -- EoL
-keymap("i", "<C-k>", "<Esc>lDi") -- kill line
-keymap("i", "<C-a>", "<Esc>I") -- BoL
-keymap("c", "<C-a>", "<Home>")
-keymap("c", "<C-e>", "<End>")
-keymap("c", "<C-u>", "<C-e><C-u>") -- clear
+-- TreeSJ plugin + Splitjoin-Fallback
+keymap("n", "<leader>s", function()
+	cmd [[TSJToggle]]
+	vim.lsp.buf.format {async = true} -- HACK: run formatter as workaround for https://github.com/Wansmer/treesj/issues/25
+end)
+augroup("splitjoinFallback", {}) -- HACK: https://github.com/Wansmer/treesj/discussions/19
+autocmd("FileType", {
+	pattern = "*",
+	group = "splitjoinFallback",
+	callback = function()
+		local langs = require("treesj.langs")["presets"]
+		if not (langs[bo.filetype]) then
+			keymap("n", "<leader>s", ":SplitjoinSplit<CR>", {buffer = true})
+		end
+	end
+})
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
