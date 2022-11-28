@@ -184,7 +184,7 @@ add("javascript", {
 add("javascript", {
 	snip("##", "#!/usr/bin/env osascript -l JavaScript\n$0"),
 	snip("app", "const app = Application.currentApplication();\napp.includeStandardAdditions = true;\n$0"),
-	snip("shell script", "app.doShellScript('${1:shellscript}');\n$0"),
+	snip("shell script", "app.doShellScript(`${1:shellscript}`);\n$0"),
 	snip("resolve home (JXA)", 'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 	snip("exists (file)", '	const fileExists = (filePath) => Application("Finder").exists(Path(filePath));\n$0'),
 	snip("browser URL & title", [[
@@ -215,8 +215,8 @@ add("javascript", {
 			const ${1:query} = argv.join("");
 		}
 	]]),
-	snip("Get Alfred Env (short)", 'const ${1:envVar} = $.getenv("${1:envVar}")\n$0'),
-	snip("Get Alfred Env (long)", 'const ${1:envVar} = $.getenv("${1:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
+	snip("Get Alfred Env (short)", 'const ${1:envVar} = $.getenv("${2:envVar}");\n$0'),
+	snip("Get Alfred Env (long)", 'const ${1:envVar} = $.getenv("${2:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
 	snip("Set Alfred Env)", [[
 		function setEnvVar(envVar, newValue) {
 			Application("com.runningwithcrayons.Alfred")
