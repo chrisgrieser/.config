@@ -69,6 +69,7 @@ keymap("n", "<Esc>", function() -- clear all
 	cmd [[nohl]] -- highlights
 	cmd [[echo]] -- shortmessage
 	cmd [[normal!lh]] -- lsp hover window
+	require("lualine").refresh()
 end, {silent = true})
 
 keymap({"n", "x", "o"}, "+", "*") -- no more modifier key on German Keyboard
@@ -80,8 +81,8 @@ keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
 
 -- MARKS
 keymap("", "ä", "`M") -- Goto Mark M
-keymap("", "Ä", function ()-- Set Mark M
-	cmd[[normal!mM]]
+keymap("", "Ä", function() -- Set Mark M
+	cmd [[normal!mM]]
 	vim.notify(" Mark M set. ")
 end)
 
@@ -187,12 +188,15 @@ autocmd("RecordingLeave", {
 	group = "recording",
 	callback = function()
 		keymap("n", "0", "qy") -- not saving in throwaway register z, so the respective keymaps can be used during a macro
-		vim.notify(" Recorded\n " .. vim.v.event.regcontents)
+		vim.notify(" Recorded\n " .. vim.v.event.regcontents, logTrace)
 	end
 })
 autocmd("RecordingEnter", {
 	group = "recording",
-	callback = function() keymap("n", "0", "q") end,
+	callback = function()
+		keymap("n", "0", "q")
+		vim.notify(" Recording…", logTrace)
+	end,
 })
 keymap("n", "9", "@y") -- quick replay (I don't use counts that high anyway)
 keymap("n", "0", "qy") -- needs to be set initially
@@ -201,7 +205,7 @@ keymap("n", "c0", function() -- edit macro
 	vim.ui.input({prompt = "Edit Macro: ", default = macro}, function(editedMacro)
 		if not (editedMacro) then return end -- cancellation
 		fn.setreg("y", editedMacro)
-		vim.notify(" Edited Macro\n " .. editedMacro)
+		vim.notify(" Edited Macro\n " .. editedMacro, logTrace)
 	end)
 end)
 

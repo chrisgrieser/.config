@@ -13,6 +13,7 @@ autocmd = vim.api.nvim_create_autocmd
 keymap = vim.keymap.set
 logWarn = vim.log.levels.WARN
 logError = vim.log.levels.ERROR
+logTrace = vim.log.levels.TRACE
 
 qol = require("quality-of-life")
 telescope = require("telescope.builtin")

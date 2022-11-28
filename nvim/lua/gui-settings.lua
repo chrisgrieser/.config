@@ -22,6 +22,7 @@ opt.guicursor = "n-sm:block," ..
 keymap({"n", "x", "i"}, "<D-w>", function() -- cmd+w
 	cmd [[silent! close]]
 	cmd [[silent! tabclose]]
+	cmd [[nohl]]
 end)
 keymap({"n", "x", "i"}, "<D-S-w>", function() cmd [[only]] end) -- cmd+shift+w
 keymap({"n", "x", "i"}, "<D-z>", function() cmd [[undo]] end) -- cmd+z
