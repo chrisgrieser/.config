@@ -1,3 +1,9 @@
+-- CONFIG
+dotfilesFolder = home.."/.config"
+fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+vaultLocation = home .. "/main-vault"
+
+--------------------------------------------------------------------------------
 ---home directory
 home = os.getenv("HOME")
 
@@ -49,11 +55,6 @@ app = hs.application
 applescript = hs.osascript.applescript
 uriScheme = hs.urlevent.bind
 I = hs.inspect -- to inspect tables in the console
-
---------------------------------------------------------------------------------
-
-dotfilesFolder = home.."/.config"
-fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 
 --------------------------------------------------------------------------------
 

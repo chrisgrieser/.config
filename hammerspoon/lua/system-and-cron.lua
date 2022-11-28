@@ -4,12 +4,13 @@ require("lua.dark-mode")
 require("lua.layouts")
 local caff = hs.caffeinate.watcher
 local timer = hs.timer.doAt
+
 --------------------------------------------------------------------------------
+
 -- CONFIG
-local vaultLocation = home .. "/Main Vault"
 local gitDotfileScript = dotfilesFolder .. "/git-dotfile-sync.sh"
 local gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
-local dotfileIcon = "⏺ "
+local dotfileIcon = "✴️ "
 local vaultIcon = "🟪"
 local repoSyncFrequencyMin = 20
 
