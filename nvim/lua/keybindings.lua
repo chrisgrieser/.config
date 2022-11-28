@@ -1,5 +1,4 @@
 require("utils")
-local warn = vim.log.levels.WARN
 local packer = require("packer")
 --------------------------------------------------------------------------------
 
@@ -213,7 +212,7 @@ keymap("n", "d<Space>", function() -- reduce multiple blank lines to exactly one
 	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
 		cmd [[normal! "_dipO]]
 	else
-		vim.notify(" Line not empty.", warn)
+		vim.notify(" Line not empty.", warn) ---@diagnostic disable-line: param-type-mismatch
 	end
 end)
 
@@ -460,7 +459,7 @@ keymap("n", "<leader>r", function()
 		cmd [[AppleScriptRun]]
 
 	else
-		vim.notify(" No build system set.", warn)
+		vim.notify(" No build system set.", warn)---@diagnostic disable-line: param-type-mismatch
 
 	end
 end)

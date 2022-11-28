@@ -3,7 +3,7 @@ require("utils")
 
 -- mixed whitespace
 cmd [[highlight! def link MixedWhiteSpace Folded]]
-cmd [[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
+cmd [[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)')]]
 
 -- Annotations
 cmd [[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
@@ -213,8 +213,8 @@ local function mixedIndentation()
 		return ""
 	end
 
-	local hasTabs = fn.search("^\t", "nw") ~= 0
-	local hasSpaces = fn.search("^ ", "nw") ~= 0
+	local hasTabs = fn.search("^\t", "nw") > 0
+	local hasSpaces = fn.search("^ ", "nw") > 0
 	local mixed = fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
 
 	if (hasSpaces and hasTabs) or mixed then

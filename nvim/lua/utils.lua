@@ -11,6 +11,8 @@ wo = vim.wo -- window-scoped variables
 augroup = vim.api.nvim_create_augroup
 autocmd = vim.api.nvim_create_autocmd
 keymap = vim.keymap.set
+warn = vim.log.levels.WARN
+error = vim.log.levels.ERROR
 
 qol = require("quality-of-life")
 telescope = require("telescope.builtin")

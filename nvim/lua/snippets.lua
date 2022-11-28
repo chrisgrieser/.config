@@ -1,4 +1,9 @@
 require("utils")
+local ls = require("luasnip")
+local add = ls.add_snippets
+local snip = ls.parser.parse_snippet -- lsp-style-snippets for future-proofness
+--------------------------------------------------------------------------------
+
 -- https://code.visualstudio.com/docs/editor/userdefinedsnippets
 -- https://github.com/L3MON4D3/LuaSnip/blob/master/Examples/snippets.lua
 -- https://github.com/L3MON4D3/LuaSnip/blob/master/doc/luasnip.txt
@@ -6,9 +11,6 @@ require("utils")
 -- INFO: Snippets can be converted between formats with https://github.com/smjonas/snippet-converter.nvim
 --------------------------------------------------------------------------------
 
-local ls = require("luasnip")
-local add = ls.add_snippets
-local snip = ls.parser.parse_snippet -- lsp-style-snippets for future-proofness
 
 ls.setup {
 	enable_autosnippets = true,
@@ -22,7 +24,7 @@ keymap("i", "<D-j>", function()
 	if ls.expand_or_jumpable() then
 		ls.jump(1)
 	else
-		vim.notify("No Jump available.")
+		vim.notify("No Jump available.", warn)
 	end
 end)
 
@@ -35,7 +37,7 @@ add("all", {
 }, {type = "autosnippets"})
 
 add("all", {
-	snip("modeline", "vim: filetype=bash\n$0"),
+	snip("modeline (bash)", "vim: filetype=bash\n$0"),
 
 	-- macOS symbols
 	snip("cmd", "⌘"),
@@ -103,16 +105,17 @@ add("lua", {
 add("lua", {
 	snip("resolve home", 'os.getenv("HOME")'),
 	snip("ternary", "${1:cond} and ${2:expr} or ${3:expr}\n$0"),
+	snip("for (list)", [[
+	for _, ${1:v} in pairs(${2:list_table}) do
+		$0
+	end
+	]]),
 })
 
 -- nvim-lua
 add("lua", {
 	snip("keymap", 'keymap("n", "$1", ${2:""})\n$0'),
-	snip("for (list)", [[
-		for _, ${1:v} in pairs(${2:list_table}) do
-			$0
-		end
-	]]),
+	snip("keymap (multi-mode)", 'keymap({"n", "${1:x}"}, "$2", ${3:""})\n$0'),
 	snip("input (vim.ui)", [[
 		vim.ui.input({ prompt = "${1:prompt_msg}"}, function (input)
 			if not(input) then return end
@@ -156,11 +159,10 @@ add("applescript", {
 
 -- Alfred AppleScript
 add("applescript", {
+	snip("Remove Alfred Env", 'tell application id "com.runningwithcrayons.Alfred" to remove configuration "ObRunning" in workflow (system attribute "alfred_workflow_bundleid")'),
 	snip("Get Alfred Env", 'set ${1:envvar} to (system attribute "${1:envvar}")'),
-	snip("Get Alfred Env (Unicode Fix)",
-		'set ${1:envvar} to do shell script "echo " & quoted form of (system attribute "${1:envvar}") & " | iconv -f UTF-8-MAC -t MACROMAN"\n$0'),
-	snip("Set Alfred Env",
-		'tell application id "com.runningwithcrayons.Alfred" to set configuration "${1:envvar}" to value ${2:value} in workflow (system attribute "alfred_workflow_bundleid")\n$0'),
+	snip("Get Alfred Env (Unicode Fix)", 'set ${1:envvar} to do shell script "echo " & quoted form of (system attribute "${1:envvar}") & " | iconv -f UTF-8-MAC -t MACROMAN"\n$0'),
+	snip("Set Alfred Env", 'tell application id "com.runningwithcrayons.Alfred" to set configuration "${1:envvar}" to value ${2:value} in workflow (system attribute "alfred_workflow_bundleid")\n$0'),
 	snip("argv", "set input to argv as string\n$0")
 })
 
@@ -213,20 +215,44 @@ add("javascript", {
 add("javascript", {
 	snip("argv", [[
 		function run(argv){
-			const ${1:query} = argv.join("");
+			const ${1:query} = argv[0];
 		}
+	]]),
+	snip("Modifiers (Script Filter)", [[
+		"mods": {
+			"cmd": { "arg": "foo" },
+			"alt": {
+				"arg": "bar",
+				"subtitle": "⌥: Copy Link"
+			},
+		},
+	]]),
+	snip("Script Filter", [[
+		const jsonArray = JSON.parse(readFile(VAR))
+			.split("\r")
+			.map(item => {
+				return {
+					"title": item,
+					"match": alfredMatcher (item),
+					"subtitle": item,
+					"type": "file:skipcheck",
+					"icon": { "type": "fileicon", "path": item },
+					"arg": item,
+					"uid": item,
+				};
+			});
+		JSON.stringify({ items: jsonArray });
 	]]),
 	snip("Get Alfred Env", 'const ${1:envVar} = $.getenv("${2:envVar}");\n$0'),
 	snip("Get Alfred Env (+ resolve home)",
 		'const ${1:envVar} = $.getenv("${2:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
 	snip("Set Alfred Env (function)", [[
 		function setEnvVar(envVar, newValue) {
-			Application("com.runningwithcrayons.Alfred")
-				.setConfiguration(envVar, {
-					toValue: newValue,
-					inWorkflow: $.getenv("alfred_workflow_bundleid"),
-					exportable: false
-				});
+			Application("com.runningwithcrayons.Alfred").setConfiguration(envVar, {
+				toValue: newValue,
+				inWorkflow: $.getenv("alfred_workflow_bundleid"),
+				exportable: false
+			});
 		}
 		$0
 	]]),
