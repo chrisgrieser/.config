@@ -16,6 +16,7 @@ require("mason-nvim-dap").setup {
 
 --------------------------------------------------------------------------------
 -- CONFIGURATION OF SPECIFIC DEBUGGERS
+-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
 
 -- Lua (one-step-for-vimkind plugin)
 dap.configurations.lua = {{
@@ -97,8 +98,7 @@ keymap("n", "7", dap.toggle_breakpoint)
 -- separately
 keymap("n", "8", function()
 	local dapRunning = dap.status() ~= ""
-	local isNvimConfig = fn.expand("%:p:h"):find("nvim") and bo.filetype == "lua"
-	if not (dapRunning) and isNvimConfig then
+	if not (dapRunning) and bo.filetype == "lua" then
 		require("osv").run_this()
 	else
 		dap.continue()
