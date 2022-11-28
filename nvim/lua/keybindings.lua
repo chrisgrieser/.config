@@ -80,7 +80,10 @@ keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
 
 -- MARKS
 keymap("", "ä", "`M") -- Goto Mark M
-keymap("", "Ä", "mM") -- Set Mark M
+keymap("", "Ä", function ()-- Set Mark M
+	cmd[[normal!mM]]
+	vim.notify(" Mark M set. ")
+end)
 
 
 --------------------------------------------------------------------------------
