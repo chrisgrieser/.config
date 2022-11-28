@@ -1,5 +1,4 @@
 require("utils")
-local warn = vim.log.levels.WARN
 --------------------------------------------------------------------------------
 
 require("nvim-surround").setup {
@@ -29,7 +28,7 @@ require("nvim-surround").setup {
 				elseif ft == "javascript" or ft == "typescript" or ft == "bash" or ft == "zsh" or ft == "sh" then
 					patt = "^(.-function.-%b() ?{)().*(})()$"
 				else
-					vim.notify("No function-surround defined for " .. ft, warn)
+					vim.notify("No function-surround defined for " .. ft, logWarn)
 					patt = "()()()()"
 				end
 				return require("nvim-surround.config").get_selections {
@@ -50,7 +49,7 @@ require("nvim-surround").setup {
 						{"", "}"},
 					}
 				end
-				vim.notify("No function-surround defined for " .. ft, warn)
+				vim.notify("No function-surround defined for " .. ft, logWarn)
 				return {{""}, {""}}
 			end,
 		},
@@ -67,7 +66,7 @@ require("nvim-surround").setup {
 				elseif ft == "javascript" or ft == "typescript" then
 					patt = "^(if %b() ?{?)().-( ?}?)()$"
 				else
-					vim.notify("No conditional-surround defined for " .. ft, warn)
+					vim.notify("No conditional-surround defined for " .. ft, logWarn)
 					patt = "()()()()"
 				end
 				return require("nvim-surround.config").get_selections {
@@ -88,7 +87,7 @@ require("nvim-surround").setup {
 						{"", "}"},
 					}
 				end
-				vim.notify("No if-surround defined for " .. ft, warn)
+				vim.notify("No if-surround defined for " .. ft, logWarn)
 				return {{""}, {""}}
 			end,
 		}

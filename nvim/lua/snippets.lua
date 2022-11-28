@@ -11,7 +11,6 @@ local snip = ls.parser.parse_snippet -- lsp-style-snippets for future-proofness
 -- INFO: Snippets can be converted between formats with https://github.com/smjonas/snippet-converter.nvim
 --------------------------------------------------------------------------------
 
-
 ls.setup {
 	enable_autosnippets = true,
 	history = false, -- false = allow jumping back into the snippet
@@ -24,7 +23,7 @@ keymap("i", "<D-j>", function()
 	if ls.expand_or_jumpable() then
 		ls.jump(1)
 	else
-		vim.notify("No Jump available.", warn)
+		vim.notify("No Jump available.", logWarn)
 	end
 end)
 
@@ -159,10 +158,13 @@ add("applescript", {
 
 -- Alfred AppleScript
 add("applescript", {
-	snip("Remove Alfred Env", 'tell application id "com.runningwithcrayons.Alfred" to remove configuration "ObRunning" in workflow (system attribute "alfred_workflow_bundleid")'),
+	snip("Remove Alfred Env",
+		'tell application id "com.runningwithcrayons.Alfred" to remove configuration "ObRunning" in workflow (system attribute "alfred_workflow_bundleid")'),
 	snip("Get Alfred Env", 'set ${1:envvar} to (system attribute "${1:envvar}")'),
-	snip("Get Alfred Env (Unicode Fix)", 'set ${1:envvar} to do shell script "echo " & quoted form of (system attribute "${1:envvar}") & " | iconv -f UTF-8-MAC -t MACROMAN"\n$0'),
-	snip("Set Alfred Env", 'tell application id "com.runningwithcrayons.Alfred" to set configuration "${1:envvar}" to value ${2:value} in workflow (system attribute "alfred_workflow_bundleid")\n$0'),
+	snip("Get Alfred Env (Unicode Fix)",
+		'set ${1:envvar} to do shell script "echo " & quoted form of (system attribute "${1:envvar}") & " | iconv -f UTF-8-MAC -t MACROMAN"\n$0'),
+	snip("Set Alfred Env",
+		'tell application id "com.runningwithcrayons.Alfred" to set configuration "${1:envvar}" to value ${2:value} in workflow (system attribute "alfred_workflow_bundleid")\n$0'),
 	snip("argv", "set input to argv as string\n$0")
 })
 

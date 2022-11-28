@@ -10,7 +10,7 @@ local colNo = vim.fn.col
 local append = vim.fn.append
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
-local warn = vim.log.levels.WARN
+local logWarn = vim.log.levels.WARN
 local function wordUnderCursor() return vim.fn.expand("<cword>") end
 
 local function leaveVisualMode()
@@ -37,7 +37,7 @@ function M.copyLastCommand()
 
 	local lastCommand = fn.getreg(":")
 	if not (lastCommand) then
-		vim.notify(" No Command has been run yet. ", warn)
+		vim.notify(" No Command has been run yet. ", logWarn)
 		return
 	end
 	fn.setreg(reg, lastCommand)
@@ -48,7 +48,7 @@ end
 function M.runLastCommandAgain()
 	local lastCommand = fn.getreg(":")
 	if not (lastCommand) then
-		vim.notify(" No Command has been run yet. ", warn)
+		vim.notify(" No Command has been run yet. ", logWarn)
 		return
 	end
 	cmd(lastCommand)
@@ -123,7 +123,7 @@ function M.hr(opts)
 	local comStrLength = #(comStr:gsub("%%s", ""):gsub(" ", ""))
 
 	if comStr == "" then
-		vim.notify(" No commentstring for this filetype available.", warn)
+		vim.notify(" No commentstring for this filetype available.", logWarn)
 		return
 	end
 	if comStr:find("-") then linechar = "-" end
@@ -239,7 +239,7 @@ function M.reverse()
 		return
 	end
 
-	vim.notify(" Nothing under the cursor can be switched.", warn)
+	vim.notify(" Nothing under the cursor can be switched.", logWarn)
 end
 
 --------------------------------------------------------------------------------
@@ -302,7 +302,7 @@ function M.pasteDifferently(opts) -- paste as characterwise
 		targetRegType = "V"
 		regContent = trim(regContent)
 	else
-		vim.notify(" This paste command does not work with blockwise registers.", warn)
+		vim.notify(" This paste command does not work with blockwise registers.", logWarn)
 		return
 	end
 
@@ -337,7 +337,7 @@ function M.quicklog(opts)
 	elseif ft == "applescript" then
 		logStatement = 'log "' .. lnStr .. varname .. ': " & ' .. varname
 	else
-		vim.notify(" Quicklog does not support " .. ft .. " yet.", warn)
+		vim.notify(" Quicklog does not support " .. ft .. " yet.", logWarn)
 	end
 
 	append(".", logStatement)
@@ -353,7 +353,7 @@ function M.removeLog()
 	elseif ft == "javascript" or ft == "typescript" then
 		logCommand = "console."
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" then
-		vim.notify(" Shell 'echo' cannot be removed since indistinguishable from other echos. ", warn)
+		vim.notify(" Shell 'echo' cannot be removed since indistinguishable from other echos. ", logWarn)
 	elseif ft == "applescript" then
 		logCommand = "log"
 	else
