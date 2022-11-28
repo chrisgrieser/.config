@@ -1,7 +1,7 @@
-title: 🅰️ App-Specific-Bindings
+title: "\U0001F170️ App-Specific-Bindings"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
-  - description: "🅰️  Zoom"
+  - description: "\U0001F170️  Zoom"
     manipulators:
       # Toggle Sidebar
       - type: basic
@@ -19,7 +19,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^us\.zoom\.xos$
-  - description: "🅰️  Microsoft & Google Office"
+  - description: "\U0001F170️  Microsoft & Google Office"
     manipulators:
       # export
       - type: basic
@@ -92,7 +92,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com.brave.Browser.app.mpnpojknpmmopombnjdcgaaiekajbnjb
-  - description: "🅰️  Highlights"
+  - description: "\U0001F170️  Highlights"
     manipulators:
       # cmd+l = show in Explorer
       - type: basic
@@ -105,12 +105,11 @@ rules:
           - software_function:
               set_mouse_cursor_position:
                 x: 45%
-                y: 1%  # assuming hidden menubar, otherwise 3-4%
+                y: 1% # assuming hidden menubar, otherwise 3-4%
                 screen: 0
           - pointing_button: button2
-          - key_code: vk_none
           - key_code: down_arrow
-          - key_code: down_arrow  # assuming hidden menubar, otherwise only 1x arrow down
+          - key_code: down_arrow # assuming hidden menubar, otherwise only 1x arrow down
           - key_code: return_or_enter
         conditions:
           - type: frontmost_application_if
@@ -266,7 +265,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^net\.highlightsapp\.universal$
-  - description: "🅰️  Brave: ⌘+Y → Copy URL and close tab"
+  - description: "\U0001F170️  Brave: ⌘+Y → Copy URL and close tab"
     manipulators:
       - type: basic
         from:
@@ -336,7 +335,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.brave\.Browser # no $ to also work in PWAs
-  - description: "🅰️🏞 YouTube: ⌘+P → Picture-in-Picture Mode"
+  - description: "\U0001F170️\U0001F3DE YouTube: ⌘+P → Picture-in-Picture Mode"
     manipulators:
       - type: basic
         from:
@@ -366,7 +365,7 @@ rules:
             file_paths:
               - YouTube
               - Brave Browser
-  - description: "🅰️📖 Reeder: b opens in background"
+  - description: "\U0001F170️\U0001F4D6 Reeder: b opens in background"
     manipulators:
       - type: basic
         from:
@@ -382,7 +381,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.reederapp\.\d\.macOS$
-  - description: "🅰️📖 Inoreader: b opens in background, switch jk & np"
+  - description: "\U0001F170️\U0001F4D6 Inoreader: b opens in background, switch jk & np"
     manipulators:
       - type: basic
         from:
@@ -434,7 +433,7 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - Inoreader.app
-  - description: "🅰️🔑 MacPass: ⌘+c/u → ⌘⌥+c/⌘⇧+c, then ⌘+h"
+  - description: "\U0001F170️\U0001F511 MacPass: ⌘+c/u → ⌘⌥+c/⌘⇧+c, then ⌘+h"
     manipulators:
       - type: basic
         from:
@@ -472,7 +471,7 @@ rules:
           - key_code: h
             modifiers:
               - command
-  - description: "🅰️♠️ Bartender & Alt-Tab: ⌘Q → Close instead of Quit"
+  - description: "\U0001F170️♠️ Bartender & Alt-Tab: ⌘Q → Close instead of Quit"
     manipulators:
       # does not work 100% cause Bartender seems to overlay a window sometimes
       # to cover parts of the menubar
@@ -491,7 +490,7 @@ rules:
             bundle_identifiers:
               - ^com.surteesstudios.Bartender$
               - ^com.lwouis.alt-tab-macos$
-  - description: "🅰️🔨 Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
+  - description: "\U0001F170️\U0001F528 Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
       - type: basic
         from:
@@ -532,7 +531,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^org\.hammerspoon\.Hammerspoon$
-  - description: "🅰️💬 Slack"
+  - description: "\U0001F170️\U0001F4AC Slack"
     # https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
     # INFO: cmd+e for inline code is at the Discord-Section
     manipulators:
@@ -628,7 +627,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.tinyspeck\.slackmacgap$
-  - description: "🅰️💬 Discord"
+  - description: "\U0001F170️\U0001F4AC Discord"
     manipulators:
       # ctrl-h & ctrl-l to go back / forward a channel
       # to circumvent Discord's weird keybindings, which seem to capture things
@@ -830,7 +829,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.hnc\.Discord$
-  - description: "🅰️📂 Finder"
+  - description: "\U0001F170️\U0001F4C2 Finder"
     manipulators:
       # Sidebar
       - type: basic
@@ -984,7 +983,7 @@ rules:
           - set_notification_message:
               id: cut-notice
               text: ""
-  - description: "🅰️📂 Marta"
+  - description: "\U0001F170️\U0001F4C2 Marta"
     manipulators:
       # Hyper-F: Open $WD
       - type: basic
@@ -1028,7 +1027,7 @@ rules:
           - key_code: "2" # list view
             modifiers:
               - command
-  - description: "🅰️  Script Editor"
+  - description: "\U0001F170️  Script Editor"
     manipulators:
       # Quick Closing skipping save prompt
       # for movement with tab required: `defaults write NSGlobalDomain AppleKeyboardUIMode -int 3`
@@ -1057,7 +1056,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.apple\.ScriptEditor
-  - description: "🅰️  Drafts"
+  - description: "\U0001F170️  Drafts"
     manipulators:
       - type: basic
         from:
@@ -1094,7 +1093,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.agiletortoise\.Drafts-OSX$
-  - description: "🅰️ 📫 Mimestream"
+  - description: "\U0001F170️ \U0001F4EB Mimestream"
     manipulators:
       # snoozing consistent with snoozing in Drafts
       - type: basic
@@ -1113,12 +1112,12 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
-  - description: "🅰️  Alacritty: Undo"
+  - description: "\U0001F170️  Alacritty: Undo"
     manipulators:
       # ⌘Z → ⌃Z (zle-widget: undo)
       - type: basic
         from:
-          key_code: "y"  # z and y switched
+          key_code: "y" # z and y switched
           modifiers:
             mandatory:
               - command
@@ -1130,7 +1129,7 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
-  - description: "🅰️  Neovide: Fix <S-Space> and cmd+q → ZZ"
+  - description: "\U0001F170️  Neovide: Fix <S-Space> and cmd+q → ZZ"
     manipulators:
       - type: basic
         from:
@@ -1166,7 +1165,7 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - "[Nn]eovide"
-  - description: "🅰️  Alfred Restart"
+  - description: "\U0001F170️  Alfred Restart"
     manipulators:
       - type: basic
         from:

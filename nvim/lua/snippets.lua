@@ -3,11 +3,9 @@ local ls = require("luasnip")
 local add = ls.add_snippets
 local snip = ls.parser.parse_snippet -- lsp-style-snippets for future-proofness
 --------------------------------------------------------------------------------
-
 -- https://code.visualstudio.com/docs/editor/userdefinedsnippets
 -- https://github.com/L3MON4D3/LuaSnip/blob/master/Examples/snippets.lua
 -- https://github.com/L3MON4D3/LuaSnip/blob/master/doc/luasnip.txt
-
 -- INFO: Snippets can be converted between formats with https://github.com/smjonas/snippet-converter.nvim
 --------------------------------------------------------------------------------
 
@@ -218,6 +216,7 @@ add("javascript", {
 	snip("argv", [[
 		function run(argv){
 			const ${1:query} = argv[0];
+
 		}
 	]]),
 	snip("Modifiers (Script Filter)", [[
@@ -263,12 +262,28 @@ add("javascript", {
 -- YAML
 -- Karabiner config
 add("yaml", {
-	snip("delay (Karabiner)", "- key_code: vk_none\n  hold_down_milliseconds: ${1:50}\n$0"),
-	snip("condition (Karabiner)", [[
-		conditions:
-			- type: frontmost_application_if
-			bundle_identifiers:
-				- ^$0\$
+	snip("conditions: (Karabiner)", [[
+	  conditions:
+	    - type: frontmost_application_if
+	      bundle_identifiers:
+	        - ^${1:appid}\$
+	]]),
+	snip("from: (Karabiner)", [[
+	  from:
+	    key_code: ${1:key}
+	    modifiers:
+	    mandatory:
+	      - ${2:command}
+	]]),
+	snip("to: (Karabiner)", [[
+	  to:
+	    - key_code: ${1:key}
+	      modifiers:
+	        - ${2:command}
+	]]),
+	snip("delay (Karabiner)", [[
+	  - key_code: vk_none
+	    hold_down_milliseconds: ${1:amount}
 	]]),
 })
 
