@@ -149,6 +149,9 @@ local function on_attach(client, bufnr)
 	-- format on manual save
 	keymap({"n", "x", "i"}, "<D-s>", function()
 		vim.lsp.buf.format {async = true}
+		if bo.filetype == "javascript" or bo.filetype == "typescript" then
+			cmd [[EslintFixAll]] -- eslint-lsp
+		end
 		cmd [[write!]]
 	end, bufopts)
 
