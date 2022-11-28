@@ -221,8 +221,8 @@ local function finderWatcher(appName, eventType, appObject)
 	if not (appName == "Finder") then return end
 
 	if eventType == aw.activated then
-
 		local finderWin = appObject:focusedWindow()
+
 		local isInfoWindow = finderWin:title():match(" Info$")
 		if isInfoWindow then return end
 
@@ -237,7 +237,7 @@ local function finderWatcher(appName, eventType, appObject)
 			finderWin:setSize {w = target_w, h = target_h}
 		end
 	elseif eventType == aw.launched then
-		-- quit Finder if it was started as a helper, but has no window
+		-- quit Finder if it was started as a helper (e.g., JXA), but has no window
 		repeatFunc({1, 5, 10}, function()
 			if appObject and not (appObject:mainWindow()) then
 				appObject:kill()
@@ -342,7 +342,7 @@ local function draftsLaunchWake(appName, eventType, appObject)
 
 	if (eventType == aw.launched or eventType == aw.activated) then
 		local workspace = isAtOffice() and "Office" or "Home"
-		repeatFunc({0, 0.1, 0.3, 0.5}, function()
+		runDelayed(0.3, function()
 			local name = appObject:focusedWindow():title()
 			local isTaskList = name:find("Supermarkt$") or name:find("Drogerie$") or name:find("Ernährung$")
 			if not (isTaskList) then
