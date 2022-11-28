@@ -12,8 +12,8 @@ local snip = ls.parser.parse_snippet -- lsp-style-snippets for future-proofness
 
 ls.setup {
 	enable_autosnippets = true,
-	history = false, -- allow jumping back into the snippet
-	-- region_check_events = "InsertEnter", -- prevent <Tab> jumping back to a snippet after it has been left early
+	history = false, -- false = allow jumping back into the snippet
+	region_check_events = "InsertEnter", -- prevent <Tab> jumping back to a snippet after it has been left early
 	update_events = "TextChanged,TextChangedI", -- live updating of snippets
 }
 
@@ -52,11 +52,12 @@ add("all", {
 -- Shell (zsh)
 add("zsh", {
 	snip("##", "#!/usr/bin/env zsh\n$0"),
+	snip("expansion", "\\${${1:var}/${2:search}/${3:replace}}"),
 	snip("PATH", "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\\$PATH\n$0"),
 	snip("resolve home", '${1:path}="${${1:path}/#\\~/\\$HOME}"'),
 	snip("filename", '${1:file_name}=$(basename "$${1:filepath}")'),
 	snip("parent folder", '$(dirname "$${1:filepath}")'),
-	snip("extension", "${2:ext}=\\${${1:file_name}##*.}"),
+	snip("ext", "${2:ext}=\\${${1:file_name}##*.}"),
 	snip("filename w/o ext", "${1:file_name}=\\${${1:file_name}%.*}"),
 	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
 
@@ -67,8 +68,7 @@ add("zsh", {
 
 	snip("stderr (pipe)", "2>&1 "),
 	snip("null (pipe)", "&> /dev/null "),
-	snip("sed (pipe)", "| sed 's/${1:pattern}/${2:replacement}/g'"),
-	snip("| sed", "| sed 's/${1:pattern}/${2:replacement}/g'"),
+	snip("sed (pipe)", "sed 's/${1:pattern}/${2:replacement}/g'"),
 
 	snip("plist extract key",
 		'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
@@ -76,7 +76,7 @@ add("zsh", {
 	snip("quicklook", 'qlmanage -p "${1:filepath}"'), -- mac only
 	snip("sound", 'afplay "/System/Library/Sounds/${1:Submarine}.aiff"'), -- mac only
 
-	snip("reset", "\\033[0m"),
+	snip("reset color", "\\033[0m"),
 	snip("black", "\\033[1;30m"),
 	snip("red", "\\033[1;31m"),
 	snip("green", "\\033[1;32m"),
@@ -167,7 +167,7 @@ add("applescript", {
 add("markdown", {
 	snip("info (GitHub Callout)", "> __Note__  \n> $0"),
 	snip("warning (GitHub Callout)", "> __Warning__  \n> $0"),
-	snip("vale ignore (Comment)", "<!-- vale ${1:Style${}.${2:Rule} = NO --> <!-- vale ${1:Style}.${2:Rule} = YES -->"),
+	snip("vale ignore (Comment)", "<!-- vale ${1:Style${}.${2:Rule} = NO -->\n<!-- vale ${1:Style}.${2:Rule} = YES -->"),
 })
 
 -- JavaScript (General)
@@ -215,9 +215,9 @@ add("javascript", {
 			const ${1:query} = argv.join("");
 		}
 	]]),
-	snip("Get Alfred Env (short)", 'const ${1:envVar} = $.getenv("${2:envVar}");\n$0'),
-	snip("Get Alfred Env (long)", 'const ${1:envVar} = $.getenv("${2:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
-	snip("Set Alfred Env)", [[
+	snip("Get Alfred Env", 'const ${1:envVar} = $.getenv("${2:envVar}");\n$0'),
+	snip("Get Alfred Env (+ resolve home)", 'const ${1:envVar} = $.getenv("${2:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
+	snip("Set Alfred Env (function)", [[
 		function setEnvVar(envVar, newValue) {
 			Application("com.runningwithcrayons.Alfred")
 				.setConfiguration(envVar, {
