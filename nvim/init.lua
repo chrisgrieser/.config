@@ -24,7 +24,7 @@ require("snippets")
 require("remaining-plugins")
 
 if isGui() then
-	require("theme")
+	require("theme-settings")
 	require("gui-settings")
 	require("color-utilities")
 else
