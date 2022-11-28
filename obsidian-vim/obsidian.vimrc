@@ -43,15 +43,8 @@ vmap <C-e> <Esc>A
 " HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
 map H g0
 map L g$
-map J 7j
-map K 7k
-
-" [m]atch
-map m %
-
-" Section Navigation easier to press
-map } ]
-map { [
+map J 6j
+map K 6k
 
 " Emulate `z=` (and bind it zo `zl` because more convenient; mnemonic: [z]pelling [l]ist)
 exmap contextMenu obcommand editor:context-menu

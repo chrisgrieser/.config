@@ -355,7 +355,10 @@ require("cybu").setup {
 		padding = 2,
 		path = "tail",
 		hide_buffer_id = true,
-		highlights = {current_buffer = "CursorLine"},
+		highlights = {
+			current_buffer = "CursorLine",
+			adjacent_buffers = "Normal",
+		},
 	},
 	behavior = {
 		mode = {
