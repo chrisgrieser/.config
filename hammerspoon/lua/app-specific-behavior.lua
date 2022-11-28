@@ -267,7 +267,7 @@ wf_marta = wf.new("Marta")
 	:setOverrideFilter {allowRoles = "AXStandardWindow", rejectTitles = "^Preferences$"}
 	:subscribe(wf.windowCreated, function()
 		-- close other tabs, needed because: https://github.com/marta-file-manager/marta-issues/issues/896
-		repeatFunc({0.1, 0.2}, function() keystroke({"shift"}, "w", 1, app("Marta")) end)
+		repeatFunc({0.1, 0.4, 0.6}, function() keystroke({"shift"}, "w", 1, app("Marta")) end)
 		if isAtOffice() or isProjector() then
 			moveResizeCurWin("maximized")
 		else
@@ -301,7 +301,7 @@ wf_zoom = wf.new("zoom.us")
 		]]
 		local numberOfZoomWindows = #wf_zoom:getWindows();
 		if numberOfZoomWindows == 2 then
-			runDelayed(1.3, function()
+			repeatFunc({1, 2}, function()
 				app("zoom.us"):findWindow("^Zoom$"):close()
 			end)
 		end
@@ -319,12 +319,16 @@ local function highlightsWatcher(appName, eventType, appObject)
 	if isDarkMode() then targetView = "Night" end
 	appObject:selectMenuItem {"View", "PDF Appearance", targetView}
 
+	-- pre-select yellow highlight tool & hide toolbar
 	appObject:selectMenuItem {"Tools", "Highlight"}
 	appObject:selectMenuItem {"Tools", "Color", "Yellow"}
 	appObject:selectMenuItem {"View", "Hide Toolbar"}
 
-	if isAtOffice() then moveResizeCurWin("maximized")
-	else moveResizeCurWin("pseudo-maximized") end
+	if isAtOffice() then
+		moveResizeCurWin("maximized")
+	else
+		moveResizeCurWin("pseudo-maximized")
+	end
 end
 
 highlightsAppWatcher = aw.new(highlightsWatcher)
@@ -368,7 +372,7 @@ macPassWatcher:start()
 -- SPOTIFY
 -- Pause Spotify on launch
 -- Resume Spotify on quit
-function spotifyTUI(toStatus)
+function spotifyTUI(toStatus) -- has to be non-local function
 	local currentStatus = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s")
 	currentStatus = trim(currentStatus) ---@diagnostic disable-line: param-type-mismatch, cast-local-type
 	if (currentStatus == "▶️" and toStatus == "pause") or (currentStatus == "⏸" and toStatus == "play") then
@@ -451,6 +455,10 @@ wf_shottr = wf.new("Shottr")
 		if newWindow:title() == "Preferences" then return end
 		runDelayed(0.1, function() keystroke({}, "a") end)
 	end)
+
+if 1 == 1 then
+   print("beep")
+end
 
 --------------------------------------------------------------------------------
 

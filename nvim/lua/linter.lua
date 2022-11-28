@@ -8,6 +8,7 @@ local lintersAndFormatters = {
 	"markdownlint",
 	"vale",
 	"shfmt",
+	"yamlfmt",
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
@@ -43,6 +44,7 @@ null_ls.setup {
 			extra_args = {"--quiet"}, -- only errors, no warnings
 		},
 
+		builtins.formatting.yamlfmt,
 		builtins.diagnostics.yamllint.with {
 			extra_args = {"--config-file", fn.expand("~/.config/yamllint/config/.yamllint.yaml")},
 		},

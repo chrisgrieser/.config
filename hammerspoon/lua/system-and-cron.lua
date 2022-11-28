@@ -10,7 +10,7 @@ local timer = hs.timer.doAt
 -- CONFIG
 local gitDotfileScript = dotfilesFolder .. "/git-dotfile-sync.sh"
 local gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
-local dotfileIcon = "✴️ "
+local dotfileIcon = "🔵"
 local vaultIcon = "🟪"
 local repoSyncFrequencyMin = 20
 
@@ -33,6 +33,8 @@ function gitDotfileSync(arg)
 				else
 					notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
 				end
+			else
+				print("Dotfile Sync successful.")
 			end
 		end, {arg}):start()
 end
@@ -44,6 +46,8 @@ function gitVaultSync()
 		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode ~= 0 then
 			notify(vaultIcon .. "⚠️️ vault " .. stdErr)
+		else
+			print("Dotfile Sync successful.")
 		end
 	end):start()
 end
@@ -154,7 +158,7 @@ biweeklyTimer = timer("02:00", "01d", bkp, true)
 
 dailyEveningTimer = timer("19:00", "01d", function() setDarkmode(true) end)
 dailyMorningTimer = timer("08:00", "01d", function()
-	if not(isProjector()) then
+	if not (isProjector()) then
 		setDarkmode(false)
 	end
 end)
