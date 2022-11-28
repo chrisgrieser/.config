@@ -3,7 +3,7 @@ require("utils")
 
 -- mixed whitespace
 cmd [[highlight! def link MixedWhiteSpace Folded]]
-cmd [[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)')]]
+cmd [[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 
 -- Annotations
 cmd [[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
