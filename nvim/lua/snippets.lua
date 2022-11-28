@@ -18,7 +18,7 @@ ls.setup {
 }
 
 -- to be able to jump without <Tab> (e.g. when there is a non-needed suggestion)
-keymap("i", "<D-j>", function ()
+keymap("i", "<D-j>", function()
 	if ls.expand_or_jumpable() then
 		ls.jump(1)
 	else
@@ -62,8 +62,8 @@ add("zsh", {
 	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
 
 	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
-	snip("if", 'if [[ "$${1:var}" ]] ; then\n\t$0\nfi'),
-	snip("if else", 'if [[ "$${1:var}" ]] ; then\n\t$2\nelse\n\t$0\nfi'),
+	snip("if", 'if [[ "$${1:var}" ]]; then\n\t$0\nfi'),
+	snip("if else", 'if [[ "$${1:var}" ]]; then\n\t$2\nelse\n\t$0\nfi'),
 	snip("installed", 'which ${1:cli} &> /dev/null || echo "${1:cli} not installed." && exit 1'),
 
 	snip("stderr (pipe)", "2>&1 "),
@@ -102,7 +102,7 @@ add("lua", {
 
 add("lua", {
 	snip("resolve home", 'os.getenv("HOME")'),
-	snip("ternary", '${1:cond} and ${2:expr} or ${3:expr}\n$0'),
+	snip("ternary", "${1:cond} and ${2:expr} or ${3:expr}\n$0"),
 })
 
 -- nvim-lua
@@ -140,7 +140,8 @@ add("lua", {
 -- AppleScript
 add("applescript", {
 	snip("browser URL", 'tell application "Brave Browser" to set currentTabUrl to URL of active tab of front window\n$0'),
-	snip("browser tab title", 'tell application "Brave Browser" to set currentTabName to title of active tab of front window\n$0'),
+	snip("browser tab title",
+		'tell application "Brave Browser" to set currentTabName to title of active tab of front window\n$0'),
 	snip("notify", 'display notification "${2:subtitle}" with title "${1:title}"\n$0'),
 	snip("##", "#!/usr/bin/env osascript\n$0"),
 	snip("resolve home", [[
@@ -216,7 +217,8 @@ add("javascript", {
 		}
 	]]),
 	snip("Get Alfred Env", 'const ${1:envVar} = $.getenv("${2:envVar}");\n$0'),
-	snip("Get Alfred Env (+ resolve home)", 'const ${1:envVar} = $.getenv("${2:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
+	snip("Get Alfred Env (+ resolve home)",
+		'const ${1:envVar} = $.getenv("${2:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
 	snip("Set Alfred Env (function)", [[
 		function setEnvVar(envVar, newValue) {
 			Application("com.runningwithcrayons.Alfred")

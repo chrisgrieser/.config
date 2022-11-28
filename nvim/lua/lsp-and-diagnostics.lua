@@ -48,8 +48,8 @@ local function diagnosticFormat(diagnostic, mode)
 	local code = tostring(diagnostic.code)
 	local out = msg .. " (" .. code .. ")"
 
-	if source == "stylelint" or code == "nil" then
-	-- stylelint already includes the code in the message, some linters without code
+	if source == "stylelint" or source == "shellcheck" or code == "nil" then
+	-- stylelint and shellcheck already includes the code in the message, some linters without code
 		out = msg
 	end
 	if diagnostic.source and mode == "float" then

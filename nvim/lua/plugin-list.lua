@@ -108,7 +108,11 @@ function M.PluginList(use)
 	use {"sindrets/diffview.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		cmd = {"DiffviewFileHistory", "DiffviewOpen"},
-		config = function() require("diffview").setup() end,
+		config = function()
+         require("diffview").setup{
+				file_history_panel = {win_config = {height = 4}},
+			}
+      end,
 	}
 
 	-- Operators & Text Objects, Navigation & Editing

@@ -4,12 +4,12 @@ require("lua.private")
 local useLayout = hs.layout.apply
 --------------------------------------------------------------------------------
 -- HELPERS
-function dockSwitcher (targetMode)
-	hs.execute("zsh ./helpers/dock-switching/dock-switcher.sh --load "..targetMode)
+local function dockSwitcher(targetMode)
+	hs.execute("zsh ./helpers/dock-switching/dock-switcher.sh --load " .. targetMode)
 end
 
-function alacrittyFontSize (size)
-	hs.execute("VALUE="..tostring(size)..[[
+local function alacrittyFontSize(size)
+	hs.execute("VALUE=" .. tostring(size) .. [[
 		ALACRITTY_CONFIG="$HOME/.config/alacritty/alacritty.yml"
 		MAN_PAGE_CONFIG="$HOME/.config/alacritty/man-page.yml"
 		sed -i '' "s/size: .*/size: $VALUE/" "$ALACRITTY_CONFIG"
@@ -17,20 +17,19 @@ function alacrittyFontSize (size)
 	]])
 end
 
-
-function showAllSidebars()
-	if appIsRunning("Highlights") then app("Highlights"):selectMenuItem{"View", "Show Sidebar"} end
+local function showAllSidebars()
+	if appIsRunning("Highlights") then app("Highlights"):selectMenuItem {"View", "Show Sidebar"} end
 	openLinkInBackground("obsidian://sidebar?showLeft=true&showRight=false")
 	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
 
 --------------------------------------------------------------------------------
 -- LAYOUTS
-function movieModeLayout()
+local function movieModeLayout()
 	holeCover()
 	iMacDisplay:setBrightness(0)
 
-	repeatFunc({0, 0.5}, function () openIfNotRunning("YouTube") end)
+	repeatFunc({0, 0.5}, function() openIfNotRunning("YouTube") end)
 
 	killIfRunning("Obsidian")
 	killIfRunning("Marta")
@@ -55,15 +54,12 @@ function movieModeLayout()
 	moveResize(twitterrificWin, toTheSide)
 end
 
-currentlyRunning = false
-function homeModeLayout ()
-	if betweenTime(1, 8) then
-		iMacDisplay:setBrightness(0)
-	else
-		iMacDisplay:setBrightness(0.8)
-	end
+local layoutChangeActive = false
+local function homeModeLayout()
+	local brightness = betweenTime(1, 8) and 0 or 0.8
+	iMacDisplay:setBrightness(brightness)
+
 	holeCover()
-	hs.execute("brew services restart sketchybar") -- restart instead of reload to update theme
 
 	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
@@ -80,7 +76,7 @@ function homeModeLayout ()
 	privateClosers()
 
 	dockSwitcher("home")
-	
+
 	local homeLayout = {
 		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
 		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
@@ -100,20 +96,20 @@ function homeModeLayout ()
 
 	showAllSidebars()
 	useLayout(homeLayout)
-	repeatFunc({0.5, 1}, function () app("Drafts"):activate() end)
+	repeatFunc({0.5, 1}, function() app("Drafts"):activate() end)
 
-	if screenIsUnlocked() and not(currentlyRunning) then
-		currentlyRunning = true
-		runDelayed (2, function()
-         twitterrificAction("scrollup")
-			currentlyRunning = false
-      end)
+	if screenIsUnlocked() and not (layoutChangeActive) then
+		layoutChangeActive = true
+		runDelayed(2, function()
+			twitterrificAction("scrollup")
+			layoutChangeActive = false
+		end)
 	end
 
 	-- wait until sync is finished, to avoid merge conflict
-	hs.timer.waitUntil (
-		function ()
-			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
+	hs.timer.waitUntil(
+		function()
+			return not (gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
 		end,
 		function()
 			alacrittyFontSize(26)
@@ -121,7 +117,7 @@ function homeModeLayout ()
 	):start()
 end
 
-function officeModeLayout ()
+local function officeModeLayout()
 	local screen1 = hs.screen.allScreens()[1]
 	local screen2 = hs.screen.allScreens()[2]
 
@@ -135,8 +131,8 @@ function officeModeLayout ()
 
 	dockSwitcher("office") -- separate layout to include "TweetDeck"
 
-	local top = {x=0, y=0.015, w=1, h=0.485}
-	local bottom = {x=0, y=0.5, w=1, h=0.5}
+	local top = {x = 0, y = 0.015, w = 1, h = 0.485}
+	local bottom = {x = 0, y = 0.5, w = 1, h = 0.5}
 	local officeLayout = {
 		-- screen 2
 		{"TweetDeck", nil, screen2, top, nil, nil},
@@ -158,13 +154,13 @@ function officeModeLayout ()
 
 	useLayout(officeLayout)
 	showAllSidebars()
-	runDelayed(0.3, function () useLayout(officeLayout) end)
-	runDelayed(0.5, function () app("Drafts"):activate() end)
+	runDelayed(0.3, function() useLayout(officeLayout) end)
+	runDelayed(0.5, function() app("Drafts"):activate() end)
 
 	-- wait until sync is finished, to avoid merge conflict
-	hs.timer.waitUntil (
-		function ()
-			return not(gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
+	hs.timer.waitUntil(
+		function()
+			return not (gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
 		end,
 		function()
 			alacrittyFontSize(24)
@@ -172,13 +168,11 @@ function officeModeLayout ()
 	):start()
 end
 
-function motherMovieModeLayout()
-	if not(isProjector()) then return end
+local function motherMovieModeLayout()
+	if not (isProjector()) then return end
 	iMacDisplay:setBrightness(0)
 
-	openIfNotRunning("YouTube")
-	runDelayed(1, function () openIfNotRunning("YouTube") end) -- safety redundancy
-
+	repeatFunc({0, 1}, function() openIfNotRunning("YouTube") end)
 	killIfRunning("Obsidian")
 	killIfRunning("Marta")
 	killIfRunning("Drafts")
@@ -186,14 +180,17 @@ function motherMovieModeLayout()
 	killIfRunning("Discord")
 	killIfRunning("Mimestream")
 	killIfRunning("Alfred Preferences")
-	killIfRunning("Sublime Text")
+	killIfRunning("Warp")
+	killIfRunning("neovide")
+	killIfRunning("Neovide")
 	killIfRunning("alacritty")
+	killIfRunning("Alacritty")
 	killIfRunning("Twitterrific")
 
 	dockSwitcher("mother-movie")
 end
 
-function motherHomeModeLayout()
+local function motherHomeModeLayout()
 	iMacDisplay:setBrightness(0.8)
 	openIfNotRunning("Discord")
 	openIfNotRunning("Slack")
@@ -235,7 +232,7 @@ end
 
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
-function setLayout()
+local function setLayout()
 	if isAtOffice() then officeModeLayout()
 	elseif isIMacAtHome() then
 		if isProjector() then movieModeLayout()
@@ -254,7 +251,7 @@ hotkey(hyper, "home", setLayout) -- hyper + eject on Apple Keyboard
 --------------------------------------------------------------------------------
 
 -- Open at Mouse Screen
-wf_appsOnMouseScreen = wf.new{
+wf_appsOnMouseScreen = wf.new {
 	"Drafts",
 	"Brave Browser",
 	"Mimestream",
@@ -279,11 +276,11 @@ wf_appsOnMouseScreen = wf.new{
 	"Finder"
 }
 
-wf_appsOnMouseScreen:subscribe(wf.windowCreated, function (newWindow)
+wf_appsOnMouseScreen:subscribe(wf.windowCreated, function(newWindow)
 	local mouseScreen = hs.mouse.getCurrentScreen()
-	if not(mouseScreen) then return end
+	if not (mouseScreen) then return end
 	local screenOfWindow = newWindow:screen()
-	if isProjector() and not(mouseScreen:name() == screenOfWindow:name()) then
+	if isProjector() and not (mouseScreen:name() == screenOfWindow:name()) then
 		repeatFunc({0, 0.1, 0.2, 0.4, 0.6}, function()
 			newWindow:moveToScreen(mouseScreen)
 		end)

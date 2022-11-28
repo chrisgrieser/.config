@@ -1,4 +1,4 @@
-!/usr/bin/env zsh
+#!/usr/bin/env zsh
 # shellcheck disable=SC2034,SC2164,SC1071
 
 #-------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ ln -sf "$DOTFILE_FOLDER/warp" ~/.warp
 # INFO: Marta as default folder opener set in Duti Script
 ln -sf /Applications/Marta.app/Contents/Resources/launcher /opt/homebrew/bin/marta
 MARTA_DIR=~"/Library/Application Support/org.yanex.marta"
-if [[ -e "$MARTA_DIR" ]] ; then
+if [[ -e "$MARTA_DIR" ]]; then
 	rm -rf "$MARTA_DIR"
 else
 	mkdir -p "$MARTA_DIR"
@@ -82,7 +82,7 @@ ln -sf "$DOTFILE_FOLDER/Marta" "$MARTA_DIR"
 
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"
-if [[ -e "$ESPANSO_DIR" ]] ; then
+if [[ -e "$ESPANSO_DIR" ]]; then
 	rm -rf "$ESPANSO_DIR"
 else
 	mkdir -p "$ESPANSO_DIR"
