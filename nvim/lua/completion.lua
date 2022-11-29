@@ -3,48 +3,6 @@ local cmp = require("cmp")
 local luasnip = require("luasnip")
 --------------------------------------------------------------------------------
 
-defaultSources = {
-	{name = "luasnip"},
-	{name = "nvim_lsp"},
-	{name = "cmp_tabnine", keyword_length = 3},
-	{name = "emoji", keyword_length = 2},
-	{name = "buffer", keyword_length = 2},
-}
-
-defaultAndPath = {
-	{name = "path"},
-	{name = "luasnip"},
-	{name = "nvim_lsp"},
-	{name = "cmp_tabnine", keyword_length = 3},
-	{name = "emoji", keyword_length = 2},
-	{name = "buffer", keyword_length = 2},
-}
-
-local defaultWithoutBuffer = {
-	{name = "luasnip"},
-	{name = "nvim_lsp"},
-	{name = "cmp_tabnine", keyword_length = 3},
-	{name = "emoji", keyword_length = 2},
-}
-
-local defaultWithoutEmoji = {
-	{name = "luasnip"},
-	{name = "nvim_lsp"},
-	{name = "cmp_tabnine", keyword_length = 3},
-	{name = "buffer", keyword_length = 2},
-}
-
-local defaultAndNerdfont = {
-	{name = "luasnip"},
-	{name = "nvim_lsp"},
-	{name = "cmp_tabnine", keyword_length = 3},
-	{name = "nerdfont", keyword_length = 2},
-	{name = "emoji", keyword_length = 2},
-	{name = "buffer", keyword_length = 2},
-}
-
---------------------------------------------------------------------------------
-
 local kind_icons = {
 	Text = "",
 	Method = "",
@@ -109,7 +67,13 @@ cmp.setup {
 		end, {"i", "s"}),
 	},
 
-	sources = cmp.config.sources(defaultSources),
+	sources = cmp.config.sources {
+		{name = "luasnip"},
+		{name = "nvim_lsp"},
+		{name = "cmp_tabnine", keyword_length = 3},
+		{name = "emoji", keyword_length = 2},
+		{name = "buffer", keyword_length = 2},
+	},
 
 	formatting = {
 		format = function(entry, vim_item)
@@ -134,6 +98,15 @@ cmp.setup {
 --------------------------------------------------------------------------------
 -- Filetype specific Completion
 
+local defaultAndNerdfont = {
+	{name = "luasnip"},
+	{name = "nvim_lsp"},
+	{name = "cmp_tabnine", keyword_length = 3},
+	{name = "nerdfont", keyword_length = 2},
+	{name = "emoji", keyword_length = 2},
+	{name = "buffer", keyword_length = 2},
+}
+
 cmp.setup.filetype("lua", {
 	-- disable leading "-"
 	enabled = function()
@@ -143,24 +116,30 @@ cmp.setup.filetype("lua", {
 	sources = cmp.config.sources(defaultAndNerdfont),
 })
 
--- don't use buffer in css completions
-cmp.setup.filetype("css", {
-	sources = cmp.config.sources(defaultWithoutBuffer),
-})
-
--- no emojis in vim, to avoid ex command `:` triggering emojis
-cmp.setup.filetype("vim", {
-	sources = cmp.config.sources(defaultWithoutEmoji),
-})
-
 -- also use nerdfont for starship config
 cmp.setup.filetype("toml", {
 	sources = cmp.config.sources(defaultAndNerdfont),
 })
 
--- also use paths for markdown images
+-- don't use buffer in css completions
+cmp.setup.filetype("css", {
+	sources = cmp.config.sources {
+		{name = "luasnip"},
+		{name = "nvim_lsp"},
+		{name = "cmp_tabnine", keyword_length = 3},
+		{name = "emoji", keyword_length = 2},
+	},
+})
+
+-- also use paths for markdown images, don't use tabnine
 cmp.setup.filetype("markdown", {
-	sources = cmp.config.sources(defaultAndPath),
+	sources = cmp.config.sources {
+		{name = "path"},
+		{name = "luasnip"},
+		{name = "nvim_lsp"},
+		{name = "emoji", keyword_length = 2},
+		{name = "buffer", keyword_length = 3},
+	},
 })
 
 --------------------------------------------------------------------------------
@@ -210,7 +189,7 @@ cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 --------------------------------------------------------------------------------
 -- TABNINE
-require("cmp_tabnine.config"):setup { -- yes, requires a ":", not "."
+require("cmp_tabnine.config"):setup {-- yes, requires a ":", not "."
 	max_lines = 1000,
 	max_num_results = 20,
 	run_on_every_keystroke = true,
