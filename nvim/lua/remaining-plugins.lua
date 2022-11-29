@@ -24,6 +24,5 @@ autocmd("FileType", {
 	pattern = "Mundo",
 	callback = function()
 		keymap("n", "-", "/", {remap = true, buffer = true})
-		keymap("n", "q", ":close<CR>", {nowait = true, buffer = true})
 	end
 })

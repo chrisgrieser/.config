@@ -225,9 +225,6 @@ keymap("n", "d<Space>", function() -- reduce multiple blank lines to exactly one
 	end
 end)
 
--- Horizontal Ruler
-keymap("n", "qw", qol.hr)
-
 -- Indention
 keymap("n", "<Tab>", ">>")
 keymap("n", "<S-Tab>", "<<")
@@ -484,8 +481,8 @@ autocmd("FileType", {
 	pattern = specialFiletypes,
 	callback = function()
 		local opts = {buffer = true, silent = true, nowait = true}
-		local ft = bo.filetype
-		if ft == "TelescopePrompt" or ft:find("Mundo") then return end
+		if bo.filetype == "TelescopePrompt" then return end
+
 		keymap("n", "<Esc>", ":close<CR>", opts)
 		keymap("n", "q", ":close<CR>", opts)
 	end
