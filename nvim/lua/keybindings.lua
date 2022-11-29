@@ -72,8 +72,8 @@ keymap("n", "<Esc>", function() -- clear all
 	require("lualine").refresh()
 end, {silent = true})
 
-keymap({"n", "x", "o"}, "+", "*") -- no more modifier key on German Keyboard
-keymap({"n", "x", "o"}, "*", "#")
+keymap({"n", "x", "o"}, "+", "*") -- no more modifier key (German Layout)
+keymap({"n", "x", "o"}, "*", "#") -- backwards on the same key (German Layout)
 
 -- URLs
 keymap("n", "gü", "/http.*<CR>:nohl<CR>") -- goto next
@@ -86,6 +86,8 @@ keymap("", "Ä", function() -- Set Mark M
 	vim.notify(" Mark M set. ")
 end)
 
+-- FOLDING
+keymap("n", "^", "za") -- quicker toggling of folds
 
 --------------------------------------------------------------------------------
 -- NAVIGATION PLUGINS
@@ -344,9 +346,10 @@ keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 --------------------------------------------------------------------------------
 
 -- BUFFERS
+-- :nohl added here, since it does not work with autocmds
 keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file
-keymap("n", "<BS>", "<Plug>(CybuNext)") -- cycle between buffers
-keymap("n", "<S-BS>", "<Plug>(CybuPrev)")
+keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)") -- cycle between buffers
+keymap("n", "<S-BS>", ":nohl<CR><Plug>(CybuPrev)")
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
 
 require("cybu").setup {
@@ -475,15 +478,15 @@ end)
 --------------------------------------------------------------------------------
 
 -- q / Esc to close special windows
+augroup("quickQuit", {})
 autocmd("FileType", {
+	group = "quickQuit",
 	pattern = specialFiletypes,
 	callback = function()
 		local opts = {buffer = true, silent = true, nowait = true}
-		if bo.filetype == "TelescopePrompt" then return end -- these bindings do not work with Telescope
-		if not(bo.filetype:find("Mundo")) then
-			keymap("n", "<Esc>", ":close<CR>", opts)
-		end
+		local ft = bo.filetype
+		if ft == "TelescopePrompt" or ft:find("Mundo") then return end
+		keymap("n", "<Esc>", ":close<CR>", opts)
 		keymap("n", "q", ":close<CR>", opts)
-		vim.keymap.del("n", "qq")
 	end
 })
