@@ -23,7 +23,7 @@ end
 ---@param str string
 ---@return string
 function trim(str)
-   return (str:gsub("^%s*(.-)%s*$", "%1"))
+	return (str:gsub("^%s*(.-)%s*$", "%1"))
 end
 
 --------------------------------------------------------------------------------
