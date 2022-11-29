@@ -91,7 +91,7 @@ autocmd("TextYankPost", {
 	callback = function() vim.highlight.on_yank {timeout = 2000} end
 })
 
--- don't treat "-" as word boundary
+-- don't treat "-" as word boundary, useful for things like kebab-case-variables
 opt.iskeyword:append("-")
 
 --------------------------------------------------------------------------------
@@ -126,20 +126,15 @@ autocmd("BufWritePre", {
 --------------------------------------------------------------------------------
 
 -- status bar & cmdline
+opt.history = 250 -- do not save too much history to reduce noise for command line history search
+opt.cmdheight = 0 -- effectively also redundant with all of the above
 -- opt.showcmd = true -- keychords pressed
 -- opt.showmode = false -- don't show "-- Insert --", since lualine does it already
 -- opt.shortmess:append("S") -- do not show search count, since lualine does it already
 -- opt.laststatus = 3 -- = global status line
-opt.cmdheight = 0 -- effectively also redundant with all of the above
-opt.history = 250 -- do not save too much history to reduce noise for command line history search
 
 --------------------------------------------------------------------------------
-
 -- FOLDING
-opt.foldlevel = 99
-opt.foldlevelstart = 99
-opt.foldenable = true
--- opt.fillchars:append(",fold: ,foldopen:,foldsep: ,foldclose:") -- if using foldcolumn
 
 -- UFO
 local ufo = require("ufo")
@@ -153,8 +148,14 @@ ufo.setup {
 }
 
 keymap("n", "zp", ufo.peekFoldedLinesUnderCursor)
--- keymap("n", "zR", ufo.openAllFolds) -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
--- keymap("n", "zM", ufo.closeAllFolds)
+keymap("n", "zR", ufo.openAllFolds) -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+keymap("n", "zM", ufo.closeAllFolds)
+keymap("n", "^", "za") -- quicker toggling of folds
+
+-- options needed for UFO
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldenable = true
 
 augroup("rememberFolds", {}) -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
 autocmd("BufWinLeave", {
