@@ -112,9 +112,7 @@ end
 -- insert horizontal divider considering textwidth, commentstring, and indent
 ---@param opts? table
 function M.hr(opts)
-	if not (opts) then
-		opts = {linechar = "─"}
-	end
+	if not (opts) then opts = {linechar = "─"} end
 	local linechar = opts.linechar
 	local wasOnBlank = getline(".") == ""
 	local indent = fn.indent(".")
