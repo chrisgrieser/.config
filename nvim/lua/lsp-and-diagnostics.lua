@@ -308,10 +308,10 @@ lspSettings.yamlls = {
 lspSettings.eslint = {
 	quiet = false, -- = include warnings
 	codeAction = {
-		disableRuleComment = {
-			location = "sameLine",
-		},
+		disableRuleComment = { location = "sameLine" }, -- ignore-comments on same line
 	},
+	-- needed to use mason's eslint with the eslint-lsp https://github.com/williamboman/mason.nvim/issues/697#issuecomment-1330855352
+	nodePath = os.getenv("HOME").."/.local/share/nvim/mason/packages/eslint/node_modules",
 }
 
 lspSettings.jsonls = {

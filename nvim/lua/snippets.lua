@@ -100,7 +100,7 @@ add("lua", {
 }, {type = "autosnippets"})
 
 add("lua", {
-	snip("resolve home", 'os.getenv("HOME")'),
+	snip("home", 'os.getenv("HOME")'),
 	snip("ternary", "${1:cond} and ${2:expr} or ${3:expr}\n$0"),
 	snip("for (list)", [[
 	for _, ${1:v} in pairs(${2:list_table}) do
@@ -158,6 +158,7 @@ add("applescript", {
 	]]),
 	snip("keystroke", [[tell application "System Events" to keystroke "${1:key}" using {${2:command} down}]]),
 	snip("key code", [[tell application "System Events" to key code "${1:num}"]]),
+	snip("home", "(POSIX path of (path to home folder as string))"),
 	snip("resolve home", [[
 		set unresolved_path to "~/Documents"
 		set AppleScript's text item delimiters to "~/"
@@ -202,6 +203,7 @@ add("javascript", {
 	snip("##", "#!/usr/bin/env osascript -l JavaScript\n$0"),
 	snip("app", "const app = Application.currentApplication();\napp.includeStandardAdditions = true;\n$0"),
 	snip("shell script", "app.doShellScript(`${1:shellscript}`);\n$0"),
+	snip("home (JXA)", 'app.pathTo("home folder")'),
 	snip("resolve home (JXA)", 'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 	snip("exists (file)", '	const fileExists = (filePath) => Application("Finder").exists(Path(filePath));\n$0'),
 	snip("browser URL & title", [[

@@ -16,16 +16,11 @@ if ! command yq &>/dev/null; then
 	echo "yq not installed."
 	echo "install: brew install yq"
 fi
-if ! command gather &>/dev/null; then
-	echo "gather-cli not installed."
-	echo "Install from here: https://github.com/ttscoff/gather-cli"
-	echo "(brew-tap requires 12gb Xcode install, so download the package instead…)"
-fi
 if ! command readable &>/dev/null; then
 	echo "readability-cli not installed."
 	echo "install: npm install -g readability-cli"
 fi
-if ! command readable &>/dev/null || ! command postlight-parser &>/dev/null || ! command turndown-cli &>/dev/null || ! command yq &>/dev/null || ! command gather &>/dev/null; then
+if ! command readable &>/dev/null || ! command postlight-parser &>/dev/null || ! command turndown-cli &>/dev/null || ! command yq &>/dev/null; then
 	exit 1
 fi
 
@@ -153,11 +148,7 @@ echo "$INPUT" | while read -r line; do
 	# (use content from the parser which seems to get more content)
 	# for using OSX sed to insert lines: https://stackoverflow.com/a/25632073
 	# shellcheck disable=SC2086
-	if [[ $count_gather -gt $count_readable ]] && [[ $count_gather -gt $count_postlight ]]; then
-		content="$output_gather"
-		frontmatter=$(echo "$frontmatter" | sed '6i\
-		              parser: Gather')
-	elif [[ $count_readable -gt $count_postlight ]]; then
+	if [[ $count_readable -gt $count_postlight ]]; then
 		content="$output_readable"
 		frontmatter=$(echo "$frontmatter" | sed '6i\
 		              parser: Readability')
