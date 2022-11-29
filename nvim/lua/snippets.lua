@@ -96,7 +96,7 @@ add("zsh", {
 
 -- Lua
 add("lua", {
-	snip("llog", 'print("beep")\n$0'),
+	snip("llog", 'print("beep")'),
 }, {type = "autosnippets"})
 
 add("lua", {
@@ -176,7 +176,7 @@ add("markdown", {
 -- JavaScript (General)
 add("javascript", {
 	snip({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:replacement}");'),
-	snip("llog", 'console.log("${1:beep}");\n$0'),
+	snip("llog", 'console.log("${1:beep}");'),
 }, {type = "autosnippets"})
 
 add("javascript", {

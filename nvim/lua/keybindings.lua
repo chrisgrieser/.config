@@ -350,10 +350,6 @@ keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file
 keymap("n", "<BS>", "<Plug>(CybuNext)") -- cycle between buffers
 keymap("n", "<S-BS>", "<Plug>(CybuPrev)")
-keymap("n", "<Del>", function() -- <C-BS> = <Del> (via Karabiner)
-	cmd [[bdelete]]
-	vim.notify(" Buffer deleted. ")
-end)
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
 
 require("cybu").setup {
