@@ -1076,6 +1076,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.agiletortoise\.Drafts-OSX$
+      # Archive
       - type: basic
         from:
           key_code: delete_or_backspace
@@ -1086,7 +1087,43 @@ rules:
           - shell_command: |
               osascript -e 'tell application "System Events"
                 tell process "Drafts"
-                  click menu item "Archive" of menu of menu item "Basic" of menu "Actions" of menu bar 1
+                  click menu item "Move to Archive" of menu "File" of menu bar 1
+                end tell
+              end tell'
+              afplay "/System/Library/Sounds/.aiff"
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.agiletortoise\.Drafts-OSX$
+      # Next/Prev Draft
+      - type: basic
+        from:
+          key_code: j
+          modifiers:
+            mandatory:
+              - control
+        to:
+          - shell_command: |
+              osascript -e 'tell application "System Events"
+                tell process "Drafts"
+                  click menu item "Next Draft" of menu "File" of menu bar 1
+                end tell
+              end tell'
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.agiletortoise\.Drafts-OSX$
+      - type: basic
+        from:
+          key_code: k
+          modifiers:
+            mandatory:
+              - control
+        to:
+          - shell_command: |
+              osascript -e 'tell application "System Events"
+                tell process "Drafts"
+                  click menu item "Previous Draft" of menu "File" of menu bar 1
                 end tell
               end tell'
         conditions:

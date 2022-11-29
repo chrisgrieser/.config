@@ -27,11 +27,11 @@ const workArray = app.doShellScript(
 	-E "hammerspoon/Spoons/*" \
 	-E "vale/styles/*/*.yml" \
 	-E "*.app/*" \
-	-E "karabiner/automatic_backups/*" \
+	-E "karabiner/automatic_backups" \
 	-E "visualized keyboard layout/*.json" \
 	-E "mac-migration" \
-	-E "unused/*" \
-	-E "fonts/*" \
+	-E "*.icns" \
+	-E "*.png" \
 	-E "Fonts/*" \
 	-E ".DS_Store" \
 	-E ".git/"'

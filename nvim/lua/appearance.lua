@@ -227,15 +227,6 @@ local function mixedIndentation()
 	return ""
 end
 
-local secSeparators
-if isGui() then
-	secSeparators = {left = " ", right = " "} -- nerdfont: 'nf-ple'
-	winSecSeparators = {left = "", right = ""}
-else
-	secSeparators = {left = "", right = ""} -- separators look off in Terminal
-	winSecSeparators = {left = "", right = ""}
-end
-
 augroup("branchChange", {})
 autocmd({"BufEnter", "FocusGained"}, {
 	group = "branchChange",
@@ -286,6 +277,15 @@ local function selectionCount()
 end
 
 --------------------------------------------------------------------------------
+
+local secSeparators
+if isGui() then
+	secSeparators = {left = " ", right = " "} -- nerdfont: 'nf-ple'
+	winSecSeparators = {left = "", right = ""}
+else
+	secSeparators = {left = "", right = ""} -- separators look off in Terminal
+	winSecSeparators = {left = "", right = ""}
+end
 
 require("lualine").setup {
 	sections = {
