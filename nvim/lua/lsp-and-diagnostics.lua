@@ -148,13 +148,11 @@ local function on_attach(client, bufnr)
 
 	-- format on manual save
 	keymap({"n", "x", "i"}, "<D-s>", function()
-		cmd [[silent! mkview]]
-		vim.lsp.buf.format() -- {async = true}
+		vim.lsp.buf.format {async = true}
 		if bo.filetype == "javascript" or bo.filetype == "typescript" then
 			cmd [[silent! EslintFixAll]] -- eslint-lsp
 		end
 		cmd [[write!]]
-		cmd [[silent! loadview]]
 	end, bufopts)
 
 	if bo.filetype ~= "css" then -- don't override navigation marker search for css files

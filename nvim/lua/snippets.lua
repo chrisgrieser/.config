@@ -208,7 +208,7 @@ add("javascript", {
 	snip("resolve home (JXA)", 'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 	snip("exists (file)", '	const fileExists = (filePath) => Application("Finder").exists(Path(filePath));\n$0'),
 	snip("browser URL & title", [[
-		function currentBrowserTab() {
+		function browserTab() {
 			const frontmostAppName = Application("System Events").applicationProcesses.where({ frontmost: true }).name()[0];
 			const frontmostApp = Application(frontmostAppName);
 			const chromiumVariants = ["Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge"];
