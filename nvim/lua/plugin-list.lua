@@ -107,8 +107,7 @@ function M.PluginList(use)
 	}}
 
 	-- File History
-	use {"mbbill/undotree", cmd = "UndotreeToggle"}
-	use "simnalamburt/vim-mundo"
+	use {"simnalamburt/vim-mundo", cmd = "MundoToggle"} -- undotree, also supports searching undo history
 	use {"sindrets/diffview.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		cmd = {"DiffviewFileHistory", "DiffviewOpen"},

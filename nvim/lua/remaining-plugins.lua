@@ -11,30 +11,18 @@ g.netrw_localcopydircmd = "cp -r" -- so copy work with directories
 cmd [[highlight! def link netrwTreeBar IndentBlankLineChar]]
 
 --------------------------------------------------------------------------------
+-- Mundo
+g.mundo_width = 30
+g.mundo_preview_height = 30
+g.mundo_preview_bottom = 0
+g.mundo_auto_preview = 1
+g.mundo_right = 1 -- right side, not left
 
--- undotree
--- also requires persistent undos in the options
-g.undotree_WindowLayout = 4 -- split to the right
-g.undotree_SplitWidth = 25
-g.undotree_DiffpanelHeight = 10
-
-g.undotree_DiffCommand = "diff --unified"
-g.undotree_DiffAutoOpen = 0
-
-g.undotree_SetFocusWhenToggle = 1
-g.undotree_ShortIndicators = 1 -- short relative dates
-g.undotree_HelpLine = 1 -- 0 = hides the "Press ? for help"
-
-function g.Undotree_CustomMap()
-	local opts = {buffer = true, silent = true, nowait = true}
-	keymap("n", "<C-j>", "<Plug>UndotreePreviousState", opts)
-	keymap("n", "<C-k>", "<Plug>UndotreeNextState", opts)
-	keymap("n", "d", "<Plug>UndotreeDiffToggle", opts)
-	keymap("n", "J", "7j", opts)
-	keymap("n", "K", "7k", opts)
-	setlocal("list", false)
-end
-
---------------------------------------------------------------------------------
-
-keymap("n", "<leader>u", ":MundoToggle<CR>")
+augroup("MundoConfig", {})
+autocmd("FileType", {
+	group = "MundoConfig",
+	pattern = "Mundo",
+	callback = function()
+		keymap("n", "-", "/", {remap = true})
+	end
+})

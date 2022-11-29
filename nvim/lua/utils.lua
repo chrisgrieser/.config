@@ -130,6 +130,8 @@ specialFiletypes = {
 	"netrw",
 	"packer",
 	"undotree",
+	"Mundo",
+	"MundoDiff",
 	"prompt",
 	"TelescopePrompt",
 	"noice",
