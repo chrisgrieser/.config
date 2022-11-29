@@ -34,3 +34,7 @@ function g.Undotree_CustomMap()
 	keymap("n", "K", "7k", opts)
 	setlocal("list", false)
 end
+
+--------------------------------------------------------------------------------
+
+keymap("n", "<leader>u", ":MundoToggle<CR>")

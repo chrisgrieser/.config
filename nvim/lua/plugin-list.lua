@@ -108,6 +108,7 @@ function M.PluginList(use)
 
 	-- File History
 	use {"mbbill/undotree", cmd = "UndotreeToggle"}
+	use "simnalamburt/vim-mundo"
 	use {"sindrets/diffview.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		cmd = {"DiffviewFileHistory", "DiffviewOpen"},
