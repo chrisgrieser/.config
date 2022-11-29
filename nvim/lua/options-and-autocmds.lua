@@ -134,9 +134,8 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldmethod = "expr"
 
 opt.foldenable = false -- do not fold at start
-opt.foldlevel = 2
 opt.foldminlines = 2
-opt.foldnestmax = 2
+opt.foldnestmax = 3
 
 -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
 augroup("rememberFolds", {})
@@ -147,47 +146,11 @@ autocmd("BufWinLeave", {
 	command = "silent! mkview"
 })
 
-autocmd("BufWinEnter", {
+autocmd("BufWinEnter", { -- test
 	group = "rememberFolds",
 	pattern = "?*",
 	command = "silent! loadview"
 })
-
--- pretty fold
-
--- local foldIcon = " 祉"
-require("pretty-fold").setup {
-	sections = {
-		left = { "content", },
-		right = {
-			" ", "number_of_folded_lines", ": ", "percentage", " ",
-			function(config) return config.fill_char:rep(3) end
-		}
-	},
-	remove_fold_markers = true,
-	keep_indentation = true, -- Keep the indentation of the content of the fold string.
-
-	-- Possible values:
-	-- "delete" : Delete all comment signs from the fold string.
-	-- "spaces" : Replace all comment signs with equal number of spaces.
-	-- false    : Do nothing with comment signs.
-	process_comment_signs = "spaces",
-
-	-- Comment signs additional to the value of `&commentstring` option.
-	comment_signs = {},
-
-	-- List of patterns that will be removed from content foldtext section.
-	stop_words = {
-		"@brief%s*", -- (for C++) Remove '@brief' and all spaces after.
-	},
-
-	add_close_pattern = true, -- true, 'last_line' or false
-	matchup_patterns = {
-		{"{", "}"},
-		{"%(", ")"}, -- % to escape lua pattern char
-		{"%[", "]"}, -- % to escape lua pattern char
-	},
-}
 
 --------------------------------------------------------------------------------
 
