@@ -179,7 +179,7 @@ add("applescript", {
 		'tell application id "com.runningwithcrayons.Alfred" to set configuration "${1:envvar}" to value ${2:value} in workflow (system attribute "alfred_workflow_bundleid")\n$0'),
 	snip("argv", "set input to argv as string\n$0"),
 	snip("Remove Alfred Env",
-	'tell application id "com.runningwithcrayons.Alfred" to remove configuration "ObRunning" in workflow (system attribute "alfred_workflow_bundleid")'),
+	'tell application id "com.runningwithcrayons.Alfred" to remove configuration "${1:var}" in workflow (system attribute "alfred_workflow_bundleid")'),
 })
 
 -- Markdown
