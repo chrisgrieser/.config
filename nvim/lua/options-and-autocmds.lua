@@ -136,8 +136,27 @@ opt.history = 250 -- do not save too much history to reduce noise for command li
 --------------------------------------------------------------------------------
 
 -- folding
-opt.foldmethod = "indent"
-opt.foldenable = false -- do not fold on start
+-- opt.foldmethod = "indent"
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldenable = true
+
+-- UFO
+local ufo = require("ufo")
+
+ufo.setup {
+	provider_selector = function(bufnr, filetype, buftype) ---@diagnostic disable-line: unused-local
+		return {"treesitter", "indent"} -- Use Treesitter as fold provider
+	end,
+	preview = {
+		win_config = {
+			border = {default = "double"},
+		},
+	},
+}
+
+keymap("n", "zp", ufo.peekFoldedLinesUnderCursor)
+
 augroup("rememberFolds", {}) -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
 autocmd("BufWinLeave", {
 	group = "rememberFolds",
