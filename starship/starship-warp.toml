@@ -52,8 +52,8 @@ symbol = ""
 #───────────────────────────────────────────────────────────────────────────────
 # git
 
-[git_state] # mostly conflicts
-style = 'fg:blue bg:black'
+[git_state] # mostly conflicts or rebasing
+style = 'fg:yellow bg:black'
 
 # checkout
 [git_commit]
@@ -70,16 +70,16 @@ format = "[$symbol$branch]($style) "
 
 # files
 [git_status]
-ignore_submodules=false
 untracked = '[+$count ](fg:green bg:black)'
 deleted = '[-$count ](fg:red bg:black)'
-modified = '[*$count ](fg:cyan bg:black)'
-renamed = '[✎$count ](fg:blue bg:black)'
-staged = '[◎$count ](fg:cyan bg:black)'
+modified = '[~$count ](fg:yellow bg:black)'
+renamed = '[凜$count ](fg:blue bg:black)'
+staged = '[$count ](fg:cyan bg:black)'
 conflicted = '[⤱$count ](fg:red bg:black)'
 diverged = '[⇈$count ](fg:cyan bg:black)'
 ahead = '[⇡$count ](fg:cyan bg:black)'
 behind = '[⇣$count ](fg:yellow bg:black)'
+ignore_submodules=false
 style = 'fg:purple bg:black bold'
 format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted]($style)'
 
@@ -133,4 +133,3 @@ version_format = "$major.$minor"
 style = "fg:dimmed yellow bg:black"
 python_binary = ["python3"]
 symbol = " "
-
