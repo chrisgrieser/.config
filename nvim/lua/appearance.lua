@@ -175,7 +175,7 @@ require("fidget").setup {
 require("pretty-fold").setup {
 	sections = {
 		left = {"content"},
-		right = {"  ﬔ ", "number_of_folded_lines"}, -- 祉
+		right = {"  ﬔ  ", "number_of_folded_lines"},
 	},
 	fill_char = "",
 	process_comment_signs = false,

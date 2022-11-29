@@ -482,7 +482,6 @@ autocmd("FileType", {
 	callback = function()
 		local opts = {buffer = true, silent = true, nowait = true}
 		if bo.filetype == "TelescopePrompt" then return end
-
 		keymap("n", "<Esc>", ":close<CR>", opts)
 		keymap("n", "q", ":close<CR>", opts)
 	end

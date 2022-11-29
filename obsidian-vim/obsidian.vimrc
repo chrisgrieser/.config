@@ -40,7 +40,7 @@ nmap k gk
 nmap <C-e> A
 vmap <C-e> <Esc>A
 
-" HJKL behaves like hjkl, but bigger distance (best used with scroll offset plugin)
+" HJKL behaves like hjkl, but bigger distance 
 map H g0
 map L g$
 map J 6j
@@ -128,10 +128,8 @@ vmap M :mergeLines
 
 " WHITSPACE CONTROL
 " Add Blank Line above/below
-nnoremap m %
-nnoremap = mzO<Esc>`z
-nnoremap _ mzo<Esc>`z
-
+nmap = mzO<Esc>`z
+nmap _ mzo<Esc>`z
 
 " Caveat: in visual mode requires cursor being on the right end of the selection
 vmap = <Esc>O<Esc>gv
@@ -340,4 +338,5 @@ map ,os :spellcheck
 " [O]ption: line [w]rap
 map ,ow :readableLineLength
 
+"───────────────────────────────────────────────────────────────────────────────
 
