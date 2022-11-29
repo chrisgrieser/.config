@@ -214,10 +214,7 @@ lspSettings.sumneko_lua = {
 			displayContext = 2,
 		},
 		diagnostics = {
-			disable = {
-				"trailing-space",
-				"lowercase-global",
-			},
+			disable = { "trailing-space", "lowercase-global" },
 		},
 		-- libraries defined per-project via luarc.json location: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
 		workspace = {checkThirdParty = false}, -- HACK: https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
@@ -248,6 +245,7 @@ lspSettings.cssls = {
 		colorDecorators = {enable = true}, -- not supported yet
 	}
 }
+
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local jsAndTsSettings = {
 	format = {

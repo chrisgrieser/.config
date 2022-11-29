@@ -128,8 +128,11 @@ vmap M :mergeLines
 
 " WHITSPACE CONTROL
 " Add Blank Line above/below
-nmap = mzO<Esc>`z
-nmap _ mzo<Esc>`z
+nnoremap m %
+nnoremap = mzO<Esc>`z
+nnoremap _ mzo<Esc>`z
+
+
 " Caveat: in visual mode requires cursor being on the right end of the selection
 vmap = <Esc>O<Esc>gv
 vmap _ <Esc>o<Esc>gv
@@ -336,3 +339,5 @@ map ,on :number
 map ,os :spellcheck
 " [O]ption: line [w]rap
 map ,ow :readableLineLength
+
+
