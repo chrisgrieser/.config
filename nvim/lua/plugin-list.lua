@@ -107,7 +107,10 @@ function M.PluginList(use)
 	}}
 
 	-- File History
-	use {"simnalamburt/vim-mundo", cmd = "MundoToggle"} -- undotree, also supports searching undo history
+	use {"simnalamburt/vim-mundo", -- undotree, also supports searching undo history
+		cmd = "MundoToggle",
+		run = "pip3 install --upgrade pynvim",
+	}
 	use {"sindrets/diffview.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		cmd = {"DiffviewFileHistory", "DiffviewOpen"},
@@ -132,7 +135,6 @@ function M.PluginList(use)
 		config = function() require("tabout").setup() end,
 		event = "InsertEnter",
 	}
-	use {"kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async"} -- folding
 
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting

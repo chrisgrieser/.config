@@ -11,6 +11,7 @@ wo = vim.wo -- window-scoped variables
 augroup = vim.api.nvim_create_augroup
 autocmd = vim.api.nvim_create_autocmd
 keymap = vim.keymap.set
+unmap = vim.keymap.del
 logWarn = vim.log.levels.WARN
 logError = vim.log.levels.ERROR
 logTrace = vim.log.levels.TRACE

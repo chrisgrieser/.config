@@ -13,7 +13,7 @@ cmd [[highlight! def link netrwTreeBar IndentBlankLineChar]]
 --------------------------------------------------------------------------------
 -- Mundo
 g.mundo_width = 30
-g.mundo_preview_height = 30
+g.mundo_preview_height = 15
 g.mundo_preview_bottom = 0
 g.mundo_auto_preview = 1
 g.mundo_right = 1 -- right side, not left
@@ -23,6 +23,7 @@ autocmd("FileType", {
 	group = "MundoConfig",
 	pattern = "Mundo",
 	callback = function()
-		keymap("n", "-", "/", {remap = true})
+		keymap("n", "-", "/", {remap = true, buffer = true})
+		keymap("n", "q", ":close<CR>", {nowait = true, buffer = true})
 	end
 })
