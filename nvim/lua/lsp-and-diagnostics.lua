@@ -49,7 +49,7 @@ local function diagnosticFormat(diagnostic, mode)
 	local out = msg .. " (" .. code .. ")"
 
 	if source == "stylelint" or source == "shellcheck" or code == "nil" then
-	-- stylelint and shellcheck already includes the code in the message, some linters without code
+		-- stylelint and shellcheck already includes the code in the message, some linters without code
 		out = msg
 	end
 	if diagnostic.source and mode == "float" then
@@ -148,11 +148,13 @@ local function on_attach(client, bufnr)
 
 	-- format on manual save
 	keymap({"n", "x", "i"}, "<D-s>", function()
-		vim.lsp.buf.format {async = true}
+		cmd [[silent! mkview]]
+		vim.lsp.buf.format() -- {async = true}
 		if bo.filetype == "javascript" or bo.filetype == "typescript" then
 			cmd [[silent! EslintFixAll]] -- eslint-lsp
 		end
 		cmd [[write!]]
+		cmd [[silent! loadview]]
 	end, bufopts)
 
 	if bo.filetype ~= "css" then -- don't override navigation marker search for css files
@@ -214,7 +216,7 @@ lspSettings.sumneko_lua = {
 			displayContext = 2,
 		},
 		diagnostics = {
-			disable = { "trailing-space", "lowercase-global" },
+			disable = {"trailing-space", "lowercase-global"},
 		},
 		-- libraries defined per-project via luarc.json location: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
 		workspace = {checkThirdParty = false}, -- HACK: https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
@@ -306,10 +308,10 @@ lspSettings.yamlls = {
 lspSettings.eslint = {
 	quiet = false, -- = include warnings
 	codeAction = {
-		disableRuleComment = { location = "sameLine" }, -- ignore-comments on same line
+		disableRuleComment = {location = "sameLine"}, -- ignore-comments on same line
 	},
 	-- needed to use mason's eslint with the eslint-lsp https://github.com/williamboman/mason.nvim/issues/697#issuecomment-1330855352
-	nodePath = os.getenv("HOME").."/.local/share/nvim/mason/packages/eslint/node_modules",
+	nodePath = os.getenv("HOME") .. "/.local/share/nvim/mason/packages/eslint/node_modules",
 }
 
 lspSettings.jsonls = {
