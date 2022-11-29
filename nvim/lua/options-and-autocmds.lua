@@ -127,11 +127,10 @@ opt.cmdheight = 0
 
 --------------------------------------------------------------------------------
 -- FOLDING
-
-
 -- use treesitter folding
-opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldmethod = "expr"
+-- opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- opt.foldmethod = "expr"
+opt.foldmethod = "indent"
 
 opt.foldenable = false -- do not fold at start
 opt.foldminlines = 2
@@ -139,14 +138,12 @@ opt.foldnestmax = 3
 
 -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
 augroup("rememberFolds", {})
-
 autocmd("BufWinLeave", {
 	group = "rememberFolds",
 	pattern = "?*",
 	command = "silent! mkview"
 })
-
-autocmd("BufWinEnter", { -- test
+autocmd("BufWinEnter", {
 	group = "rememberFolds",
 	pattern = "?*",
 	command = "silent! loadview"
