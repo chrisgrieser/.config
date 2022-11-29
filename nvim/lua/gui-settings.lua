@@ -24,8 +24,7 @@ keymap({"n", "x", "i"}, "<D-w>", function() -- cmd+w
 		cmd [[tabclose]]
 	elseif fn.winnr("$") > 1 then
 		cmd [[close]]
-		print("beep")
-	elseif fn.bufnr("$") > 1 then ---@diagnostic disable-line: param-type-mismatch
+	else
 		cmd [[bdelete]]
 	end
 	cmd [[nohl]]
@@ -105,6 +104,5 @@ g.neovide_remember_window_size = true
 
 g.neovide_input_macos_alt_is_meta = true -- makes `opt` usable on macOS
 -- needed when alt is turned into meta key
-keymap({"n", "x"}, "<M-l>", "@")
 keymap("i", "<M-.>", "…")
 keymap("i", "<M-->", "–")
