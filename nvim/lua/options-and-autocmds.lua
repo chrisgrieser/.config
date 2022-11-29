@@ -2,7 +2,7 @@ require("utils")
 --------------------------------------------------------------------------------
 
 -- timeout for awaiting keystrokes
-opt.timeoutlen = 500
+opt.timeoutlen = 750
 
 -- Search
 opt.showmatch = true
@@ -18,10 +18,7 @@ opt.spell = false
 opt.spelllang = "en_us"
 
 -- Gutter
-opt.fillchars = "eob: "
-opt.numberwidth = 3 -- minimum width, save some space for shorter files
-opt.number = false
-opt.relativenumber = false
+opt.fillchars = "eob: ,fold: " -- no ~ for the eof, no dots for folds
 
 -- whitespace & indentation
 opt.tabstop = 3
@@ -97,7 +94,6 @@ opt.iskeyword:append("-")
 --------------------------------------------------------------------------------
 
 -- FILES & SAVING
-opt.hidden = true -- inactive buffers are only hidden, not unloaded
 opt.undofile = true -- persistent undo history
 opt.updatetime = 200 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 opt.autochdir = true -- always current directory
@@ -126,26 +122,29 @@ autocmd("BufWritePre", {
 --------------------------------------------------------------------------------
 
 -- status bar & cmdline
-opt.history = 250 -- do not save too much history to reduce noise for command line history search
+opt.history = 250 -- reduce noise for command history search
 opt.cmdheight = 0
 
 --------------------------------------------------------------------------------
 -- FOLDING
 
--- local foldIcon = " 祉"
--- opt.fillchars:append(",fold: ") -- remove the dots in folded lines
-opt.foldenable = false -- do not fold at start
 
 -- use treesitter folding
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldmethod = "expr"
 
+opt.foldenable = false -- do not fold at start
+opt.foldlevel = 2
+opt.foldminlines = 2
+opt.foldnestmax = 2
+
 -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
 augroup("rememberFolds", {})
+
 autocmd("BufWinLeave", {
 	group = "rememberFolds",
 	pattern = "?*",
-	command = "silent! mkview!"
+	command = "silent! mkview"
 })
 
 autocmd("BufWinEnter", {
@@ -155,39 +154,40 @@ autocmd("BufWinEnter", {
 })
 
 -- pretty fold
--- require("pretty-fold").setup {
--- 	sections = {
--- 		left = { "content", },
--- 		right = {
--- 			" ", "number_of_folded_lines", ": ", "percentage", " ",
--- 			function(config) return config.fill_char:rep(3) end
--- 		}
--- 	},
--- 	fill_char = "",
--- 	remove_fold_markers = true,
--- 	keep_indentation = true, -- Keep the indentation of the content of the fold string.
 
--- 	-- Possible values:
--- 	-- "delete" : Delete all comment signs from the fold string.
--- 	-- "spaces" : Replace all comment signs with equal number of spaces.
--- 	-- false    : Do nothing with comment signs.
--- 	process_comment_signs = "spaces",
+-- local foldIcon = " 祉"
+require("pretty-fold").setup {
+	sections = {
+		left = { "content", },
+		right = {
+			" ", "number_of_folded_lines", ": ", "percentage", " ",
+			function(config) return config.fill_char:rep(3) end
+		}
+	},
+	remove_fold_markers = true,
+	keep_indentation = true, -- Keep the indentation of the content of the fold string.
 
--- 	-- Comment signs additional to the value of `&commentstring` option.
--- 	comment_signs = {},
+	-- Possible values:
+	-- "delete" : Delete all comment signs from the fold string.
+	-- "spaces" : Replace all comment signs with equal number of spaces.
+	-- false    : Do nothing with comment signs.
+	process_comment_signs = "spaces",
 
--- 	-- List of patterns that will be removed from content foldtext section.
--- 	stop_words = {
--- 		"@brief%s*", -- (for C++) Remove '@brief' and all spaces after.
--- 	},
+	-- Comment signs additional to the value of `&commentstring` option.
+	comment_signs = {},
 
--- 	add_close_pattern = true, -- true, 'last_line' or false
--- 	matchup_patterns = {
--- 		{"{", "}"},
--- 		{"%(", ")"}, -- % to escape lua pattern char
--- 		{"%[", "]"}, -- % to escape lua pattern char
--- 	},
--- }
+	-- List of patterns that will be removed from content foldtext section.
+	stop_words = {
+		"@brief%s*", -- (for C++) Remove '@brief' and all spaces after.
+	},
+
+	add_close_pattern = true, -- true, 'last_line' or false
+	matchup_patterns = {
+		{"{", "}"},
+		{"%(", ")"}, -- % to escape lua pattern char
+		{"%[", "]"}, -- % to escape lua pattern char
+	},
+}
 
 --------------------------------------------------------------------------------
 
