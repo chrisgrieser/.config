@@ -176,7 +176,7 @@ require("fidget").setup {
 
 local function recordingStatus()
 	if fn.reg_recording() == "" then return "" end
-	return " RECORDING"
+	return " RECORDING" -- 
 end
 
 local function alternateFile()
@@ -301,11 +301,11 @@ require("lualine").setup {
 			{mixedIndentation},
 		},
 		lualine_y = {
-			"diff",
+			{"diff", symbols = {added = " ", modified = " ", removed = " "}},
 			{"branch", cond = isStandardBranch},
 		},
 		lualine_z = {
-			{"location", symbols = {added = "", modified = " :", removed = "-"}},
+			"location",
 			{selectionCount},
 		},
 	},
@@ -323,6 +323,18 @@ require("lualine").setup {
 			{debuggerStatus, section_separators = winSecSeparators},
 			{recordingStatus, section_separators = winSecSeparators},
 		},
+	},
+	tabline = {
+		lualine_a = {{
+			"tabs",
+			mode = 1,
+			cond = function () return fn.tabpagenr("$") > 1 end,
+		}},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {},
 	},
 	options = {
 		theme = "auto",
