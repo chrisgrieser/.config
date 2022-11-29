@@ -232,9 +232,6 @@ keymap("n", "<S-Tab>", "<<")
 keymap("x", "<Tab>", ">gv")
 keymap("x", "<S-Tab>", "<gv")
 
-keymap({"n", "x"}, "^", "=") -- auto-indent
-keymap("n", "^^", "mz=ip`z") -- since indenting paragraph is far more common than indenting a line
-
 --------------------------------------------------------------------------------
 -- EDITING
 
@@ -432,19 +429,20 @@ keymap("n", "<leader>r", function()
 	cmd [[update!]]
 	local filename = fn.expand("%:t")
 	local parentFolder = fn.expand("%:p:h")
+	local ft = bo.filetype
 
 	if filename == "sketchybarrc" then
 		fn.system("brew services restart sketchybar")
 
-	elseif bo.filetype == "markdown" then
+	elseif ft == "markdown" then
 		local filepath = fn.expand("%:p")
 		local pdfFilename = fn.expand("%:t:r") .. ".pdf"
 		fn.system("pandoc '" .. filepath .. "' --output='" .. pdfFilename .. "' --pdf-engine=wkhtmltopdf")
 		fn.system("open '" .. pdfFilename .. "'")
 
-	elseif bo.filetype == "lua" then
+	elseif ft == "lua" then
 		if parentFolder:find("nvim") then
-			cmd [[write! | source %]]
+			cmd [[write! | mkview! | source % | loadview]] -- mkview and loadview needed to not loose folding when sourcing
 			if filename:find("plugin%-list") then
 				require("packer").compile()
 				vim.notify(" 'plugins-list.lua' reloaded and re-compiled. ")
@@ -455,17 +453,17 @@ keymap("n", "<leader>r", function()
 			os.execute('open -g "hammerspoon://hs-reload"')
 		end
 
-	elseif bo.filetype == "yaml" and parentFolder:find(".config/karabiner") then
+	elseif ft == "yaml" and parentFolder:find(".config/karabiner") then
 		os.execute [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
 
 	elseif filename:find("vale%.ini") then
 		vim.notify(" Loading… ")
 		fn.system [[cd "$HOME" && vale sync && open "$HOME/.config/vale/styles"]]
 
-	elseif bo.filetype == "typescript" then
+	elseif ft == "typescript" then
 		cmd [[!npm run build]] -- not via fn.system to get the output in the cmdline
 
-	elseif bo.filetype == "applescript" then
+	elseif ft == "applescript" then
 		cmd [[AppleScriptRun]]
 
 	else
