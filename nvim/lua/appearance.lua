@@ -301,7 +301,7 @@ require("lualine").setup {
 			{mixedIndentation},
 		},
 		lualine_y = {
-			{"diff", symbols = {added = " ", modified = " ", removed = " "}},
+			"diff",
 			{"branch", cond = isStandardBranch},
 		},
 		lualine_z = {
@@ -324,21 +324,11 @@ require("lualine").setup {
 			{recordingStatus, section_separators = winSecSeparators},
 		},
 	},
-	-- tabline = {
-	-- 	lualine_a = {{
-	-- 		"tabs",
-	-- 		mode = 1,
-	-- 		section_separators = "",
-	-- 		cond = function () return fn.tabpagenr("$") > 1 end,
-	-- 	}},
-	-- },
 	options = {
 		theme = "auto",
 		ignore_focus = specialFiletypes,
 		globalstatus = true,
-		always_divide_middle = false,
 		component_separators = {left = "", right = ""},
 		section_separators = secSeparators,
-		extensions = {"nvim-dap-ui"},
 	},
 }
