@@ -138,6 +138,7 @@ opt.cmdheight = 0 -- effectively also redundant with all of the above
 
 -- UFO
 local ufo = require("ufo")
+local foldIcon = " 祉"
 ufo.setup {
 	provider_selector = function(bufnr, filetype, buftype) ---@diagnostic disable-line: unused-local
 		return {"treesitter", "indent"} -- Use Treesitter as fold provider
@@ -145,7 +146,7 @@ ufo.setup {
 	fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 		-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
 		local newVirtText = {}
-		local suffix = ("  %d "):format(endLnum - lnum)
+		local suffix = foldIcon..tostring(endLnum - lnum)
 		local sufWidth = vim.fn.strdisplaywidth(suffix)
 		local targetWidth = width - sufWidth
 		local curWidth = 0
@@ -173,6 +174,7 @@ ufo.setup {
 		win_config = {
 			border = borderStyle,
 			winblend = 4,
+			max_height = 25,
 		},
 	},
 }
