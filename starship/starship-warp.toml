@@ -96,7 +96,7 @@ format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\) )'
 [jobs]
 symbol = ""
 format = "[ +$number $symbol ]($style)"
-style = "fg:white"
+style = "fg:white bg:black"
 symbol_threshold = 1
 number_threshold = 2
 
@@ -110,7 +110,7 @@ format = " [$symbol$ram_pct]($style)"
 format = "[$symbol$version]($style)"
 version_format = "$raw"
 symbol = " "
-style = "dimmed 208"
+style = "fg:dimmed 208 bg:black"
 
 [custom.alfred]
 files = ["info.plist"]
@@ -118,19 +118,19 @@ command = "plutil -extract version xml1 -o - info.plist | sed -n 4p | cut -d'>' 
 symbol = " "
 os = "macos"
 description = "Version number of Alfred Workflow"
-style = "dimmed 208"
+style = "fg:dimmed 208 bg:black"
 format = '[](purple) [$symbol$output]($style)'
 
 [nodejs]
-format = " [$symbol$version]($style)"
+format = " [$symbol$version]($style) "
 version_format = "$major"
-style = "dimmed cyan"
+style = "fg:dimmed cyan bg:black"
 detect_extensions = ["ts"] # dont trigger for JXA
 
 [python]
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 version_format = "$major.$minor"
-style = "dimmed yellow"
+style = "fg:dimmed yellow bg:black"
 python_binary = ["python3"]
 symbol = " "
 
