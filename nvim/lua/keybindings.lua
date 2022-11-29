@@ -223,8 +223,8 @@ keymap("n", "d<Space>", function() -- reduce multiple blank lines to exactly one
 	end
 end)
 
--- [H]ori[z]ontal Ruler
-keymap("n", "zh", qol.hr)
+-- Horizontal Ruler
+keymap("n", "qw", qol.hr)
 
 -- Indention
 keymap("n", "<Tab>", ">>")
