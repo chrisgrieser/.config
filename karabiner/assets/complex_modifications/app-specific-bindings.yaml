@@ -1090,7 +1090,7 @@ rules:
                   click menu item "Move to Archive" of menu "File" of menu bar 1
                 end tell
               end tell'
-              afplay "/System/Library/Sounds/.aiff"
+              afplay "/System/Library/Sounds/Tink.aiff"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:

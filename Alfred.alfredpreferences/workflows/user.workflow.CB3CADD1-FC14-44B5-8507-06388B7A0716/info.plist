@@ -996,11 +996,11 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>application support</string>
+				<string>sound files</string>
 				<key>subtext</key>
-				<string>~/Library/Application Support</string>
+				<string>/System/Library/Sounds/</string>
 				<key>text</key>
-				<string>Application Support</string>
+				<string>Sound Files</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -1017,7 +1017,7 @@
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
-				<string>~/Library/Application Support</string>
+				<string>/System/Library/Sounds</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openfile</string>
@@ -2493,7 +2493,7 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>805</real>
+			<real>800</real>
 			<key>ypos</key>
 			<real>120</real>
 		</dict>
@@ -2664,7 +2664,7 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>600</real>
+			<real>595</real>
 			<key>ypos</key>
 			<real>120</real>
 		</dict>
@@ -2743,7 +2743,7 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 		<key>8DF0DD15-2F02-4FAA-A0EF-B435B4E86A6C</key>
 		<dict>
 			<key>xpos</key>
-			<real>450</real>
+			<real>440</real>
 			<key>ypos</key>
 			<real>35</real>
 		</dict>

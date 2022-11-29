@@ -144,6 +144,20 @@ add("applescript", {
 		'tell application "Brave Browser" to set currentTabName to title of active tab of front window\n$0'),
 	snip("notify", 'display notification "${2:subtitle}" with title "${1:title}"\n$0'),
 	snip("##", "#!/usr/bin/env osascript\n$0"),
+	snip("menu item", [[
+		tell application "System Events" to tell process "${1:process}"
+			set frontmost to true
+			click menu item "${2:item}" of menu "${3:menu}" of menu bar 1
+		end tell
+	]]),
+	snip("submenu", [[
+		tell application "System Events" to tell process "${1:process}"
+			set frontmost to true
+			click menu item "${2:item}" of menu of menu item "${3:submenu}" of menu "${4:menu}" of menu bar 1
+		end tell
+	]]),
+	snip("keystroke", [[tell application "System Events" to keystroke "${1:key}" using {${2:command} down}]]),
+	snip("key code", [[tell application "System Events" to key code "${1:num}"]]),
 	snip("resolve home", [[
 		set unresolved_path to "~/Documents"
 		set AppleScript's text item delimiters to "~/"
@@ -156,14 +170,14 @@ add("applescript", {
 
 -- Alfred AppleScript
 add("applescript", {
-	snip("Remove Alfred Env",
-		'tell application id "com.runningwithcrayons.Alfred" to remove configuration "ObRunning" in workflow (system attribute "alfred_workflow_bundleid")'),
 	snip("Get Alfred Env", 'set ${1:envvar} to (system attribute "${1:envvar}")'),
 	snip("Get Alfred Env (Unicode Fix)",
 		'set ${1:envvar} to do shell script "echo " & quoted form of (system attribute "${1:envvar}") & " | iconv -f UTF-8-MAC -t MACROMAN"\n$0'),
 	snip("Set Alfred Env",
 		'tell application id "com.runningwithcrayons.Alfred" to set configuration "${1:envvar}" to value ${2:value} in workflow (system attribute "alfred_workflow_bundleid")\n$0'),
-	snip("argv", "set input to argv as string\n$0")
+	snip("argv", "set input to argv as string\n$0"),
+	snip("Remove Alfred Env",
+	'tell application id "com.runningwithcrayons.Alfred" to remove configuration "ObRunning" in workflow (system attribute "alfred_workflow_bundleid")'),
 })
 
 -- Markdown
