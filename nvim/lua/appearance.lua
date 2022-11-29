@@ -244,14 +244,14 @@ autocmd({"BufEnter", "FocusGained"}, {
 	end
 })
 
-function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
+local function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
 	local branch = g.cur_branch
 	local notMainBranch = branch ~= "main" and branch ~= "master"
 	local validFiletype = bo.filetype ~= "help" -- vim help files are located in a git repo
 	return notMainBranch and validFiletype
 end
 
-function debuggerStatus()
+local function debuggerStatus()
 	local dapStatus = require("dap").status()
 	if dapStatus ~= "" then
 		return "  " .. dapStatus
@@ -330,5 +330,10 @@ require("lualine").setup {
 		globalstatus = true,
 		component_separators = {left = "", right = ""},
 		section_separators = secSeparators,
+		extensions = {"nvim-dap-ui"},
+		disabled_filetypes = {
+			statusline = specialFiletypes,
+			winbar = specialFiletypes,
+		},
 	},
 }

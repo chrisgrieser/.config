@@ -163,10 +163,10 @@ anyAppActivationWatcher:start()
 --------------------------------------------------------------------------------
 
 -- NEOVIM
--- pseudomaximized window
+-- pseudomaximized window & killing leftover neovide process
 wf_neovim = wf.new {"neovide", "Neovide"}
 	:subscribe(wf.windowCreated, function()
-		repeatFunc({0.3, 0.6}, function()
+		repeatFunc({0.2, 0.4, 0.6, 0.8}, function()
 			if isAtOffice() or isProjector() then
 				moveResizeCurWin("maximized")
 			else
@@ -457,7 +457,7 @@ wf_shottr = wf.new("Shottr")
 	end)
 
 if 1 == 1 then
-   print("beep")
+	print("beep")
 end
 
 --------------------------------------------------------------------------------
