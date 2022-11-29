@@ -132,7 +132,7 @@ function M.PluginList(use)
 		config = function() require("tabout").setup() end,
 		event = "InsertEnter",
 	}
-	use {"kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async"}
+	use {"kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async"} -- folding
 
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
