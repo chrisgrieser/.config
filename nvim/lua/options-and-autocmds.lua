@@ -142,20 +142,51 @@ ufo.setup {
 	provider_selector = function(bufnr, filetype, buftype) ---@diagnostic disable-line: unused-local
 		return {"treesitter", "indent"} -- Use Treesitter as fold provider
 	end,
+	fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
+		-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
+		local newVirtText = {}
+		local suffix = ("  %d "):format(endLnum - lnum)
+		local sufWidth = vim.fn.strdisplaywidth(suffix)
+		local targetWidth = width - sufWidth
+		local curWidth = 0
+		for _, chunk in ipairs(virtText) do
+			local chunkText = chunk[1]
+			local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+			if targetWidth > curWidth + chunkWidth then
+				table.insert(newVirtText, chunk)
+			else
+				chunkText = truncate(chunkText, targetWidth - curWidth)
+				local hlGroup = chunk[2]
+				table.insert(newVirtText, {chunkText, hlGroup})
+				chunkWidth = vim.fn.strdisplaywidth(chunkText)
+				if curWidth + chunkWidth < targetWidth then
+					suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+				end
+				break
+			end
+			curWidth = curWidth + chunkWidth
+		end
+		table.insert(newVirtText, {suffix, "MoreMsg"})
+		return newVirtText
+	end,
 	preview = {
-		win_config = {border = borderStyle},
+		win_config = {
+			border = borderStyle,
+			winblend = 4,
+		},
 	},
 }
 
-keymap("n", "zp", ufo.peekFoldedLinesUnderCursor)
-keymap("n", "zR", ufo.openAllFolds) -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-keymap("n", "zM", ufo.closeAllFolds)
+keymap("n", "zp", function() ufo.peekFoldedLinesUnderCursor(false, false) end)
+-- keymap("n", "zR", ufo.openAllFolds) -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+-- keymap("n", "zM", ufo.closeAllFolds)
 keymap("n", "^", "za") -- quicker toggling of folds
 
 -- options needed for UFO
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldenable = true
+opt.fillchars:append(",fold: ") -- remove the dots in folded lines
 
 augroup("rememberFolds", {}) -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
 autocmd("BufWinLeave", {
