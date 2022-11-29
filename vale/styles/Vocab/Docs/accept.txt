@@ -1,6 +1,9 @@
 git
 vim
+Vim
 pseudometa
 only
 color
+Color
 between
+Mode
