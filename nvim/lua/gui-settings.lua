@@ -20,8 +20,14 @@ opt.guicursor = "n-sm:block," ..
 --------------------------------------------------------------------------------
 -- CMD-Keybindings
 keymap({"n", "x", "i"}, "<D-w>", function() -- cmd+w
-	cmd [[silent! close]]
-	cmd [[silent! tabclose]]
+	if fn.tabpagenr("$") > 1 then
+		cmd [[tabclose]]
+	elseif fn.winnr("$") > 1 then
+		cmd [[close]]
+		print("beep")
+	elseif fn.bufnr("$") > 1 then ---@diagnostic disable-line: param-type-mismatch
+		cmd [[bdelete]]
+	end
 	cmd [[nohl]]
 end)
 keymap({"n", "x", "i"}, "<D-S-w>", function() cmd [[only]] end) -- cmd+shift+w
