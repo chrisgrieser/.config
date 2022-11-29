@@ -90,7 +90,7 @@ end)
 --------------------------------------------------------------------------------
 -- NAVIGATION PLUGINS
 -- vim.[m]atchup
-keymap("", "m", "%", {remap = true}) -- remap to use matchup's % instead of builtin %
+keymap({"n", "x", "o"}, "m", "%", {remap = true}) -- remap to use matchup's % instead of builtin %
 keymap({"o", "x"}, "im", "i%", {remap = true})
 keymap({"o", "x"}, "am", "a%", {remap = true})
 
@@ -279,7 +279,7 @@ keymap("x", "R", qol.duplicateSelection)
 -- Undo
 keymap({"n", "x"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", qol.undoDuration)
-keymap("n", "<leader>u", ":UndotreeToggle<CR>") -- undo tree
+keymap("n", "<leader>u", ":MundoToggle<CR>") -- undo tree
 keymap("i", "<C-g>u<Space>", "<Space>") -- extra undo point for every space
 
 -- Logging & Debugging
@@ -479,10 +479,11 @@ autocmd("FileType", {
 	pattern = specialFiletypes,
 	callback = function()
 		local opts = {buffer = true, silent = true, nowait = true}
-		-- these bindings do not work with Telescope
-		if bo.filetype == "TelescopePrompt" then return end
-
-		keymap("n", "<Esc>", ":close<CR>", opts)
+		if bo.filetype == "TelescopePrompt" then return end -- these bindings do not work with Telescope
+		if not(bo.filetype:find("Mundo")) then
+			keymap("n", "<Esc>", ":close<CR>", opts)
+		end
 		keymap("n", "q", ":close<CR>", opts)
+		vim.keymap.del("n", "qq")
 	end
 })
