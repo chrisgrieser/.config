@@ -25,6 +25,7 @@ keymap({"n", "x", "i"}, "<D-w>", function() -- cmd+w
 	elseif fn.winnr("$") > 1 then
 		cmd [[close]]
 	else
+		cmd [[update!]]
 		cmd [[bdelete]]
 	end
 	cmd [[nohl]]
