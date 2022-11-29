@@ -4,7 +4,6 @@ local M = {}
 local bo = vim.bo
 local fn = vim.fn
 local getline = vim.fn.getline
-local setline = vim.fn.setline
 local lineNo = vim.fn.line
 local colNo = vim.fn.col
 local append = vim.fn.append
@@ -107,47 +106,6 @@ function M.duplicateSelection()
 	local prevReg = fn.getreg("z")
 	cmd [[noautocmd silent! normal!"zy`]"zp]] -- `noautocmd` to not trigger highlighted-yank
 	fn.setreg("z", prevReg)
-end
-
--- insert horizontal divider considering textwidth, commentstring, and indent
----@param opts? table
-function M.hr(opts)
-	if not (opts) then opts = {linechar = "─"} end
-	local linechar = opts.linechar
-	local wasOnBlank = getline(".") == ""
-	local indent = fn.indent(".")
-	local textwidth = bo.textwidth
-	local comStr = bo.commentstring
-	local comStrLength = #(comStr:gsub("%%s", ""):gsub(" ", ""))
-
-	if comStr == "" then
-		vim.notify(" No commentstring for this filetype available.", logWarn)
-		return
-	end
-	if comStr:find("-") then linechar = "-" end
-
-	local linelength = textwidth - indent - comStrLength
-	local fullLine = string.rep(linechar, linelength)
-	local hr = comStr:gsub(" ?%%s ?", fullLine)
-	if bo.filetype == "markdown" then hr = "---" end
-
-	local linesToAppend = {"", hr, ""}
-	if wasOnBlank then linesToAppend = {hr, ""} end
-
-	append(".", linesToAppend)
-
-	-- shorten if it was on blank line, since fn.indent() does not return indent
-	-- line would have if it has content
-	if wasOnBlank then
-		cmd [[normal! j==]] -- move down and indent
-		local hrIndent = fn.indent(".")
-		-- cannot use simply :sub, since it assumes one-byte-size chars
-		local hrLine = getline(".") ---@type string
-		hrLine = hrLine:gsub(linechar, "", hrIndent)
-		setline(".", hrLine)
-	else
-		cmd [[normal! jj==]]
-	end
 end
 
 -- Drop-in replacement for vim's `~` command.

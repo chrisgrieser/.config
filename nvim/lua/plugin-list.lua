@@ -38,9 +38,7 @@ function M.PluginList(use)
 	use {"andymass/vim-matchup", requires = "nvim-treesitter/nvim-treesitter"} -- % improved
 	use {"cshuaimin/ssr.nvim", -- structural search & replace
 		module = "ssr",
-		config = function()
-			require("ssr").setup {keymaps = {close = "Q", replace_all = "<CR>"}}
-		end,
+		config = function() require("ssr").setup() end,
 	}
 
 	-- LSP
@@ -129,6 +127,7 @@ function M.PluginList(use)
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}
 	use "ggandor/leap.nvim"
 	use "Darazaki/indent-o-matic"
+	use "anuvyklack/pretty-fold.nvim"
 	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
 		after = "nvim-cmp",
 		requires = "nvim-treesitter/nvim-treesitter",

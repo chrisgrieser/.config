@@ -2,7 +2,7 @@ require("utils")
 --------------------------------------------------------------------------------
 
 -- timeout for awaiting keystrokes
-opt.timeoutlen = 2000 -- yes, I'm slow lol
+opt.timeoutlen = 500
 
 -- Search
 opt.showmatch = true
@@ -133,19 +133,61 @@ opt.cmdheight = 0
 -- FOLDING
 
 -- local foldIcon = " 祉"
-opt.fillchars:append(",fold: ") -- remove the dots in folded lines
+-- opt.fillchars:append(",fold: ") -- remove the dots in folded lines
+opt.foldenable = false -- do not fold at start
 
-augroup("rememberFolds", {}) -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
+-- use treesitter folding
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldmethod = "expr"
+
+-- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
+augroup("rememberFolds", {})
 autocmd("BufWinLeave", {
 	group = "rememberFolds",
 	pattern = "?*",
 	command = "silent! mkview!"
 })
+
 autocmd("BufWinEnter", {
 	group = "rememberFolds",
 	pattern = "?*",
 	command = "silent! loadview"
 })
+
+-- pretty fold
+-- require("pretty-fold").setup {
+-- 	sections = {
+-- 		left = { "content", },
+-- 		right = {
+-- 			" ", "number_of_folded_lines", ": ", "percentage", " ",
+-- 			function(config) return config.fill_char:rep(3) end
+-- 		}
+-- 	},
+-- 	fill_char = "",
+-- 	remove_fold_markers = true,
+-- 	keep_indentation = true, -- Keep the indentation of the content of the fold string.
+
+-- 	-- Possible values:
+-- 	-- "delete" : Delete all comment signs from the fold string.
+-- 	-- "spaces" : Replace all comment signs with equal number of spaces.
+-- 	-- false    : Do nothing with comment signs.
+-- 	process_comment_signs = "spaces",
+
+-- 	-- Comment signs additional to the value of `&commentstring` option.
+-- 	comment_signs = {},
+
+-- 	-- List of patterns that will be removed from content foldtext section.
+-- 	stop_words = {
+-- 		"@brief%s*", -- (for C++) Remove '@brief' and all spaces after.
+-- 	},
+
+-- 	add_close_pattern = true, -- true, 'last_line' or false
+-- 	matchup_patterns = {
+-- 		{"{", "}"},
+-- 		{"%(", ")"}, -- % to escape lua pattern char
+-- 		{"%[", "]"}, -- % to escape lua pattern char
+-- 	},
+-- }
 
 --------------------------------------------------------------------------------
 

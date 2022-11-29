@@ -19,6 +19,9 @@ require("Comment").setup {
 	},
 }
 
+--------------------------------------------------------------------------------
+-- STICKY TEXT OBJECTS ACTIONS
+
 -- effectively creating "q" as comment textobj, can't map directly to q since
 -- overlap in visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
@@ -27,6 +30,53 @@ require("Comment").setup {
 keymap("n", "dq", [[:normal!mz<CR>dCOM`z]], {remap = true}) -- since remap is required, using mz via :normal, since m has been remapped
 keymap("n", "yq", "yCOM", {remap = true}) -- thanks to yank positon saving, doesnt need to be done here
 keymap("n", "cq", '"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
+
+--------------------------------------------------------------------------------
+-- HORIZONTAL DIVIDER
+
+---@diagnostic disable: param-type-mismatch
+function divider()
+	local linechar = "─"
+	local wasOnBlank = fn.getline(".") == ""
+	local indent = fn.indent(".")
+	local textwidth = bo.textwidth
+	local comStr = bo.commentstring
+	local comStrLength = #(comStr:gsub("%%s", ""):gsub(" ", ""))
+
+	if comStr == "" then
+		vim.notify(" No commentstring for this filetype available.", logWarn)
+		return
+	end
+	if comStr:find("-") then linechar = "-" end
+
+	local linelength = textwidth - indent - comStrLength
+	local fullLine = string.rep(linechar, linelength)
+	local hr = comStr:gsub(" ?%%s ?", fullLine)
+	if bo.filetype == "markdown" then hr = "---" end
+
+	local linesToAppend = {"", hr, ""}
+	if wasOnBlank then linesToAppend = {hr, ""} end
+
+	fn.append(".", linesToAppend)
+
+	-- shorten if it was on blank line, since fn.indent() does not return indent
+	-- line would have if it has content
+	if wasOnBlank then
+		cmd [[normal! j==]] -- move down and indent
+		local hrIndent = fn.indent(".")
+		-- cannot use simply :sub, since it assumes one-byte-size chars
+		local hrLine = fn.getline(".") ---@diagnostic disable-next-line: assign-type-mismatch, undefined-field
+		hrLine = hrLine:gsub(linechar, "", hrIndent)
+		fn.setline(".", hrLine)
+	else
+		cmd [[normal! jj==]]
+	end
+end
+---@diagnostic enable: param-type-mismatch
+
+keymap("n", "qw", divider)
+
+--------------------------------------------------------------------------------
 
 -- TEXTOBJECT FOR ADJACENT COMMENTED LINES
 -- = qu for uncommenting
