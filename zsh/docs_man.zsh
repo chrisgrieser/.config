@@ -17,6 +17,8 @@ function man () {
 		echo "Not using Alacritty." ; return 1
 	elif ! which "$1" &> /dev/null; then
 		echo "Command '$1' not installed." ; return 1
+	elif [[ $(command man "$1") == "No manual entry for delta" ]]; then
+		return 1
 	fi
 
 	local isBuiltIn=false

@@ -14,17 +14,19 @@ cmd [[highlight! def link netrwTreeBar IndentBlankLineChar]]
 
 -- undotree
 -- also requires persistent undos in the options
-g.undotree_WindowLayout = 3 -- split to the right
-g.undotree_SplitWidth = 30
-g.undotree_DiffAutoOpen = 0
+g.undotree_WindowLayout = 4 -- split to the right
+g.undotree_SplitWidth = 25
+g.undotree_DiffpanelHeight = 10
 g.undotree_SetFocusWhenToggle = 1
-g.undotree_ShortIndicators = 1 -- for the relative date
-g.undotree_HelpLine = 0 -- 0 hides the "Press ? for help"
+g.undotree_ShortIndicators = 1 -- short relative dates
+g.undotree_HelpLine = 1 -- 0 = hides the "Press ? for help"
+g.undotree_DiffAutoOpen = 0
 
 function g.Undotree_CustomMap()
-	local opts = {buffer = true, silent = true}
+	local opts = {buffer = true, silent = true, nowait = true}
 	keymap("n", "<C-j>", "<Plug>UndotreePreviousState", opts)
 	keymap("n", "<C-k>", "<Plug>UndotreeNextState", opts)
+	keymap("n", "d", "<Plug>UndotreeDiffToggle", opts)
 	keymap("n", "J", "7j", opts)
 	keymap("n", "K", "7k", opts)
 	setlocal("list", false)
