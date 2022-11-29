@@ -18,7 +18,7 @@ opt.spell = false
 opt.spelllang = "en_us"
 
 -- Gutter
-opt.fillchars = "eob: " -- hide the ugly "~" marking the end of the buffer
+opt.fillchars = "eob: "
 opt.numberwidth = 3 -- minimum width, save some space for shorter files
 opt.number = false
 opt.relativenumber = false
@@ -135,27 +135,26 @@ opt.history = 250 -- do not save too much history to reduce noise for command li
 
 --------------------------------------------------------------------------------
 
--- folding
--- opt.foldmethod = "indent"
+-- FOLDING
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldenable = true
+-- opt.fillchars:append(",fold: ,foldopen:,foldsep: ,foldclose:") -- if using foldcolumn
 
 -- UFO
 local ufo = require("ufo")
-
 ufo.setup {
 	provider_selector = function(bufnr, filetype, buftype) ---@diagnostic disable-line: unused-local
 		return {"treesitter", "indent"} -- Use Treesitter as fold provider
 	end,
 	preview = {
-		win_config = {
-			border = {default = "double"},
-		},
+		win_config = {border = borderStyle},
 	},
 }
 
 keymap("n", "zp", ufo.peekFoldedLinesUnderCursor)
+-- keymap("n", "zR", ufo.openAllFolds) -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+-- keymap("n", "zM", ufo.closeAllFolds)
 
 augroup("rememberFolds", {}) -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
 autocmd("BufWinLeave", {
