@@ -163,7 +163,7 @@ require("gitsigns").setup {
 require("fidget").setup {
 	-- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
 	text = {spinner = "dots"},
-	fmt = { stack_upwards = false },-- false = title on top
+	fmt = {stack_upwards = false}, -- false = title on top
 	sources = {
 		["null-ls"] = {ignore = true}
 	}
@@ -174,11 +174,12 @@ require("fidget").setup {
 -- PRETTY FOLD
 require("pretty-fold").setup {
 	sections = {
-		left = {string.rep("*", vim.v.foldlevel).." ", "content"},
-		right = {"  祉", "number_of_folded_lines"}
+		left = {"content"},
+		right = {"  ﬔ ", "number_of_folded_lines"}, -- 祉
 	},
 	fill_char = "",
 	process_comment_signs = false,
+	keep_indentation = true,
 }
 
 --------------------------------------------------------------------------------
