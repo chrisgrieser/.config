@@ -90,7 +90,8 @@ function M.PluginList(use)
 	use "stevearc/dressing.nvim" -- Selection Menus and Inputs
 	use "rcarriga/nvim-notify" -- notifications
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter
+	use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter, too
+	use "anuvyklack/pretty-fold.nvim"
 
 	-- File Switching & File Operation
 	use {myrepos .. "nvim-genghis", requires = "stevearc/dressing.nvim"}
@@ -127,7 +128,6 @@ function M.PluginList(use)
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}
 	use "ggandor/leap.nvim"
 	use "Darazaki/indent-o-matic"
-	use "anuvyklack/pretty-fold.nvim"
 	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
 		after = "nvim-cmp",
 		requires = "nvim-treesitter/nvim-treesitter",

@@ -163,12 +163,22 @@ require("gitsigns").setup {
 require("fidget").setup {
 	-- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
 	text = {spinner = "dots"},
-	fmt = {
-		stack_upwards = false, -- false = title on top
-	},
+	fmt = { stack_upwards = false },-- false = title on top
 	sources = {
 		["null-ls"] = {ignore = true}
 	}
+}
+
+--------------------------------------------------------------------------------
+
+-- PRETTY FOLD
+require("pretty-fold").setup {
+	sections = {
+		left = {string.rep("*", vim.v.foldlevel).." ", "content"},
+		right = {"  祉", "number_of_folded_lines"}
+	},
+	fill_char = "",
+	process_comment_signs = false,
 }
 
 --------------------------------------------------------------------------------
@@ -176,7 +186,7 @@ require("fidget").setup {
 
 local function recordingStatus()
 	if fn.reg_recording() == "" then return "" end
-	return " RECORDING" -- 
+	return " RECORDING"
 end
 
 local function alternateFile()
@@ -281,7 +291,7 @@ end
 local secSeparators
 if isGui() then
 	secSeparators = {left = " ", right = " "} -- nerdfont: 'nf-ple'
-	winSecSeparators = {left = "", right = ""}
+	winSecSeparators = {left = "", right = ""}
 else
 	secSeparators = {left = "", right = ""} -- separators look off in Terminal
 	winSecSeparators = {left = "", right = ""}
