@@ -1183,7 +1183,7 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - "[Nn]eovide"
-      # cmd+q -> <Esc>ZZ (does skip pre-quit triggers)
+      # cmd+q -> <Esc>ZZ (does not skip pre-quit triggers)
       - type: basic
         from:
           key_code: q
@@ -1191,7 +1191,6 @@ rules:
             mandatory:
               - command
         to:
-          - key_code: escape # to ensure normal mode
           - key_code: "y" # z & y switched
             modifiers:
               - shift
