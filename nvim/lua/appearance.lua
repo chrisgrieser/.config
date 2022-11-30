@@ -7,7 +7,7 @@ cmd [[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 
 -- Annotations
 cmd [[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
-cmd [[call matchadd('myAnnotations', '\<\(HACK\|TODO\|INFO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
+cmd [[call matchadd('myAnnotations', '\<\(BUG\|WTF\|HACK\|TODO\|INFO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
 
 --------------------------------------------------------------------------------
 -- Indentation
@@ -20,89 +20,12 @@ require("indent_blankline").setup {
 
 --------------------------------------------------------------------------------
 -- SCROLLBAR
-require("scrollbar").setup {
-	handle = {highlight = "Folded"}, -- bit darker
-	handlers = {cursor = false},
-	marks = {
-		GitChange = {text = "┃"},
-		GitAdd = {text = "┃"},
-		Error = {text = {signIcons.Error}},
-		Warn = {text = {signIcons.Warn}},
-		Info = {text = {signIcons.Info}},
-		Hint = {text = {signIcons.Hint}},
-		Cursor = {highlight = "Comment"}, -- less dark
-		Misc = {
-			priority = 1,
-			highlight = "Normal",
-			text = "", -- no "=" at the top of the file
-		},
-	},
+require("scrollview").setup {
+	current_only = true,
+	winblend = 20,
+	column = 1,
 	excluded_filetypes = specialFiletypes,
 }
-require("scrollbar.handlers.gitsigns").setup()
-
-
--- Custom Scrollbar Handlers https://github.com/petertriho/nvim-scrollbar#custom-handlers
-
--- last jumplocation
-require("scrollbar.handlers").register("lastjumploc", function(bufnr)
-	local lastJump = fn.getjumplist()[2]
-	local lastJumpPos = fn.getjumplist()[1][lastJump]
-	if lastJumpPos.bufnr == bufnr and lastJumpPos.lnum > 1 then
-		return {{
-			line = lastJumpPos.lnum,
-			text = "▶️",
-			type = "Misc",
-			level = 6,
-		}}
-	end
-	return {{line = 0, text = ""}} -- dummy element to prevent error
-end)
-
--- marks in scrollbar
-require("scrollbar.handlers").register("marksmarks", function(bufnr)
-	local excluded_marks = "z"
-
-	local marks = fn.getmarklist(bufnr)
-	local marksGlobal = fn.getmarklist()
-	concatTables(marks, marksGlobal)
-
-	local out = {}
-	table.insert(out, {line = 0, text = ""}) -- ensure at least one dummy element in return list to prevent errors when there is no valid mark
-	for _, markObj in pairs(marks) do
-		local markName = markObj.mark:sub(2, 2)
-
-		local isLetter = markName:lower() ~= markName:upper()
-		local isGlobalMark = markObj.file
-		local markIsInThisFile = true
-		if isGlobalMark then
-			local pathOfMark = markObj.file:gsub("~", home)
-			local curBufPath = fn.expand("%:p")
-			markIsInThisFile = pathOfMark == curBufPath
-		end
-
-		if isLetter and not (excluded_marks:find(markName)) and markIsInThisFile then
-			table.insert(out, {
-				line = markObj.pos[2],
-				text = markName,
-				type = "Info",
-				level = 6,
-			})
-		end
-	end
-	return out
-end)
-
-
--- HACK workaround due to neovim's `:delmarks` not persistently deleting marks
--- https://www.reddit.com/r/neovim/comments/qliuid/the_overly_persistent_marks_problem/
--- https://github.com/neovim/neovim/issues/4295
-augroup("delmarksFix", {})
-autocmd("BufReadPost", {
-	group = "delmarksFix",
-	command = "delmarks a-zA-LN-Z",
-})
-
 --------------------------------------------------------------------------------
 -- Notifications
 if isGui() then

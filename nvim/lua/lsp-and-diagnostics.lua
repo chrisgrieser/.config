@@ -146,14 +146,11 @@ local function on_attach(client, bufnr)
 	keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)
 	keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
-	if client.name == "sumneko_lua" then
-		-- HACK for formatting removing folds…
+	if client.name == "sumneko_lua" then -- HACK since formatting with lua lsp seems to remove folds?!
 		keymap({"n", "x", "i"}, "<D-s>", function()
-			print("beep")
 			cmd [[mkview]]
-			vim.lsp.buf.format()
-			augroup("rememberFolds", {clear = true})
-			cmd [[noautocmd write! | edit %]] -- reload, no autocmd to not trigger mkview (of the now non-existing folds) of bufleave
+			vim.lsp.buf.format() -- not async to avoid race condition
+			cmd [[noautocmd write! | edit %]] -- reload, no autocmd to not trigger rememberFolds augroup, with mkview (of the now non-existing folds) on bufleave
 			cmd [[loadview]]
 		end, bufopts)
 	else
