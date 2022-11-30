@@ -104,7 +104,7 @@ opt.directory:prepend(vimDataDir .. "swap//")
 opt.undodir:prepend(vimDataDir .. "undo//")
 opt.backupdir:prepend(vimDataDir .. "backup//")
 ---@diagnostic disable-next-line: param-type-mismatch
-opt.viewdir = vimDataDir:gsub("^~", home) .. "view" -- as opposed to the others, only accepts one dir and no ~
+opt.viewdir = vimDataDir:gsub("^~", home) .. "view" -- as opposed to the others, only accepts one dir
 
 --------------------------------------------------------------------------------
 

@@ -75,6 +75,7 @@ function M.PluginList(use)
 		"hrsh7th/cmp-emoji",
 		myrepos .. "cmp-nerdfont",
 		"tamago324/cmp-zsh",
+		"ray-x/cmp-treesitter",
 		"petertriho/cmp-git", -- git issues, mentions & commits
 		"hrsh7th/cmp-nvim-lsp", -- lsp
 		"L3MON4D3/LuaSnip", -- snippet engine
