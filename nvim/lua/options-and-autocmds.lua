@@ -127,13 +127,15 @@ opt.cmdheight = 0
 
 --------------------------------------------------------------------------------
 -- FOLDING
+
 -- use treesitter folding
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldmethod = "expr"
 
+-- fold settings
 opt.foldenable = false -- do not fold at start
 opt.foldminlines = 2
-opt.foldnestmax = 3
+opt.foldnestmax = 2
 opt.foldlevel = 99
 
 -- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
