@@ -5,6 +5,8 @@ export DOTFILE_FOLDER=~/.config
 export WD=~"/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
 export VAULT_PATH=~'/Main Vault'
 
+
+
 # karabiner_cli
 export PATH="/Library/Application Support/org.pqrs/Karabiner-Elements/bin:$PATH"
 
@@ -18,6 +20,6 @@ export NEOVIDE_FRAME="buttonless"
 # so linters managed by mason are available to other apps
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 
-# make github functions available in nvim
+
 # shellcheck disable=1091
 source "$DOTFILE_FOLDER/zsh/git_github.zsh"

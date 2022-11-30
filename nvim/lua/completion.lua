@@ -30,7 +30,7 @@ local kind_icons = {
 	TypeParameter = ""
 }
 
-local function has_words_before ()
+local function has_words_before()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
@@ -77,9 +77,9 @@ cmp.setup {
 
 	sources = cmp.config.sources {
 		{name = "luasnip"},
-		{name = "treesitter"},
 		{name = "nvim_lsp"},
 		{name = "cmp_tabnine", keyword_length = 3},
+		{name = "treesitter"},
 		{name = "emoji", keyword_length = 2},
 		{name = "buffer", keyword_length = 2},
 	},
@@ -111,9 +111,9 @@ cmp.setup {
 
 local defaultAndNerdfont = {
 	{name = "luasnip"},
-	{name = "treesitter"},
 	{name = "nvim_lsp"},
 	{name = "cmp_tabnine", keyword_length = 3},
+	{name = "treesitter"},
 	{name = "nerdfont", keyword_length = 2},
 	{name = "emoji", keyword_length = 2},
 	{name = "buffer", keyword_length = 2},
@@ -137,8 +137,8 @@ cmp.setup.filetype("toml", {
 cmp.setup.filetype("css", {
 	sources = cmp.config.sources {
 		{name = "luasnip"},
-		{name = "treesitter"},
 		{name = "nvim_lsp"},
+		{name = "treesitter"},
 		{name = "cmp_tabnine", keyword_length = 3},
 		{name = "emoji", keyword_length = 2},
 	},
@@ -149,9 +149,22 @@ cmp.setup.filetype("markdown", {
 	sources = cmp.config.sources {
 		{name = "path"},
 		{name = "luasnip"},
-		{name = "treesitter"},
 		{name = "nvim_lsp"},
 		{name = "emoji", keyword_length = 2},
+		{name = "buffer", keyword_length = 3},
+	},
+})
+
+-- also use zsh for shell completion
+cmp.setup.filetype("sh", {
+	sources = cmp.config.sources {
+		{name = "zsh"},
+		{name = "luasnip"},
+		{name = "nvim_lsp"},
+		{name = "cmp_tabnine", keyword_length = 3},
+		{name = "treesitter"},
+		{name = "emoji", keyword_length = 2},
+		{name = "nerdfont", keyword_length = 2},
 		{name = "buffer", keyword_length = 3},
 	},
 })
@@ -174,6 +187,7 @@ cmp.setup.cmdline(":", {
 		{name = "cmdline"},
 	}, {-- second array only relevant when no source from the first matches
 		{name = "cmdline_history"},
+		{name = "zsh"},
 	})
 })
 

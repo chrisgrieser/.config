@@ -96,13 +96,11 @@ opt.iskeyword:append("-")
 --------------------------------------------------------------------------------
 
 -- UNDO & SWAP
-opt.undofile = true -- persistent undo history
-opt.backup = true -- backups when writing to disk
+opt.undofile = true -- enable persistent undo history
 
--- save swap, undo, view, and backup files in cloud for syncing with other devices
+-- save swap, undo, and view files in cloud for syncing with other devices
 opt.directory:prepend(vimDataDir .. "swap//")
 opt.undodir:prepend(vimDataDir .. "undo//")
-opt.backupdir:prepend(vimDataDir .. "backup//")
 ---@diagnostic disable-next-line: param-type-mismatch
 opt.viewdir = vimDataDir:gsub("^~", home) .. "view" -- as opposed to the others, only accepts one dir and no ~
 
