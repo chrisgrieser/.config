@@ -153,7 +153,7 @@ keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>", {silent = true})
 
 -- map ai to aI in languages where aI is not used anyway
 augroup("indentobject", {})
-autocmd("BufEnter", {
+autocmd("FileType", {
 	group = "indentobject",
 	callback = function()
 		local ft = bo.filetype

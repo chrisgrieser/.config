@@ -39,7 +39,6 @@ keymap({"n", "x"}, "J", function() require("quality-of-life").overscroll("6gj") 
 keymap({"n", "x"}, "K", "6gk", opts)
 keymap({"n", "x"}, "k", "gk", opts)
 keymap({"n", "x"}, "j", function() require("quality-of-life").overscroll("gj") end, opts)
-cmd [[ScrollbarHide]] -- HACK: deactivate, since not working well with markdown: https://github.com/petertriho/nvim-scrollbar/issues/40
 
 
 -- pseudo-readable line length

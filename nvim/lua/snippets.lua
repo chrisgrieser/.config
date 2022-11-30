@@ -96,7 +96,7 @@ add("zsh", {
 
 -- Lua
 add("lua", {
-	snip("llog", 'print("beep")'),
+	snip("llog", 'print("${1:beep}")'),
 }, {type = "autosnippets"})
 
 add("lua", {
