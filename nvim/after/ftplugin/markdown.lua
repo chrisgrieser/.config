@@ -29,13 +29,6 @@ g.markdown_fenced_languages = {
 	"sh=bash",
 }
 
--- syntax highlighting for yaml header
-cmd [[
-	unlet b:current_syntax
-	syntax include @Yaml syntax/yaml.vim
-	syntax region yamlFrontmatter start=/\%^---$/ end=/^---$/ keepend contains=@Yaml
-]]
-
 --------------------------------------------------------------------------------
 
 -- wrapping and related options
