@@ -26,6 +26,7 @@ keymap("n", "<leader>G", telescope.highlights)
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
 	cmd [[update!]]
+	packer.compile()
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	packer.startup(require("plugin-list").PluginList)
 	packer.snapshot("packer-snapshot_" .. os.date("!%Y-%m-%d_%H-%M-%S"))
@@ -442,9 +443,9 @@ keymap("n", "<leader>r", function()
 
 	elseif ft == "lua" then
 		if parentFolder:find("nvim") then
-			cmd [[write! | mkview! | source % | loadview]] -- mkview and loadview needed to not loose folding when sourcing
+			cmd [[write! | mkview! | source % | loadview]] -- HACK: mkview and loadview needed to not loose folding when sourcing
 			if filename:find("plugin%-list") then
-				require("packer").compile()
+				packer.compile()
 				vim.notify(" 'plugins-list.lua' reloaded and re-compiled. ")
 			else
 				vim.notify(" " .. fn.expand("%") .. " reloaded. ")

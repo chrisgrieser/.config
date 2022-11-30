@@ -90,7 +90,8 @@ function M.PluginList(use)
 	use "stevearc/dressing.nvim" -- Selection Menus and Inputs
 	use "rcarriga/nvim-notify" -- notifications
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
-	use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter, too
+	-- use "petertriho/nvim-scrollbar" -- kinda works as secondary gutter, too
+	use "dstein64/nvim-scrollview"
 	use "anuvyklack/pretty-fold.nvim"
 
 	-- File Switching & File Operation
