@@ -146,21 +146,29 @@ local function on_attach(client, bufnr)
 	keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)
 	keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
+	-- format on manual save
 	-- mkview
 	-- Format
 	-- turn off remenberfold auto cmd
 	-- Reload via edit %
 	-- loadview
 	-- Turn on autocmd
-	-- format on manual save
-	keymap({"n", "x", "i"}, "<D-s>", function()
-		local ft = bo.filetype
-		if ft == "lua" then cmd[[mkview]] end -- HACK
-
-		vim.lsp.buf.format {async = true}
-		if ft == "javascript" or ft == "typescript" then cmd [[silent! EslintFixAll]] end
-		cmd [[write!]]
-	end, bufopts)
+	if client == "sumneko_lua" then
+		keymap({"n", "x", "i"}, "<D-s>", function()
+			cmd[[mkview]] -- HACK for formatting removing folds...
+			vim.lsp.buf.format {async = true}
+			cmd [[edit %]] -- == reload
+			cmd [[write!]]
+		end, bufopts)
+	else
+		keymap({"n", "x", "i"}, "<D-s>", function()
+			vim.lsp.buf.format {async = true}
+			if bo.filetype == "javascript" or bo.filetype == "typescript" then
+				cmd [[silent! EslintFixAll]] -- eslint-lsp
+			end
+			cmd [[write!]]
+		end, bufopts)
+	end
 
 	if bo.filetype ~= "css" then -- don't override navigation marker search for css files
 		keymap("n", "gs", telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
