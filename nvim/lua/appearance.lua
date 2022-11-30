@@ -27,7 +27,7 @@ require("scrollview").setup {
 	excluded_filetypes = specialFiletypes,
 }
 --------------------------------------------------------------------------------
--- Notifications
+-- NOTIFICATIONS
 if isGui() then
 	opt.termguicolors = true
 	vim.notify = require("notify") -- use notify.nvim for all vim notifications
