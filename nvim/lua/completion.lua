@@ -189,7 +189,6 @@ cmp.setup.cmdline(":", {
 		{name = "cmdline"},
 	}, {-- second array only relevant when no source from the first matches
 		{name = "cmdline_history"},
-		{name = "zsh"},
 	})
 })
 
