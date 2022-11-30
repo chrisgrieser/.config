@@ -4,7 +4,7 @@ local opts = {buffer = true, silent = true}
 --------------------------------------------------------------------------------
 
 -- hide URLs and other formatting, TODO: figure out how to hide only URLs
--- wo.conceallevel = 2
+setlocal("conceallevel", 2)
 
 -- hack to make lists auto-continue via Return in Insert & o in normal mode
 -- i.e. replaces bullet.vim based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
@@ -29,6 +29,8 @@ g.markdown_fenced_languages = {
 	"sh=bash",
 }
 
+--------------------------------------------------------------------------------
+
 -- wrapping and related options
 setlocal("wrap", true) -- soft wrap
 setlocal("linebreak", true) -- do not break words for soft wrap
@@ -39,7 +41,6 @@ keymap({"n", "x"}, "J", function() require("quality-of-life").overscroll("6gj") 
 keymap({"n", "x"}, "K", "6gk", opts)
 keymap({"n", "x"}, "k", "gk", opts)
 keymap({"n", "x"}, "j", function() require("quality-of-life").overscroll("gj") end, opts)
-
 
 -- pseudo-readable line length
 keymap("n", "<D-8>", ":25vsplit n<CR><C-w><C-w>", opts)
