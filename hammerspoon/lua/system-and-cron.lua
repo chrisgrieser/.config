@@ -100,12 +100,12 @@ end
 local function homeWake(eventType)
 	runDelayed(2, function()
 		if not (eventType == caff.screensDidWake or eventType == caff.systemDidWake) then return end
+
 		if isProjector() then
 			setDarkmode(true)
 			movieModeLayout()
 		else
 			if betweenTime(7, 19) then
-				hs.shortcuts.run("Send Reminders due today to Drafts")
 				setDarkmode(false)
 			else
 				setDarkmode(true)
@@ -131,19 +131,19 @@ function systemStart()
 	if isReloading then
 		hs.execute("rm ./is-reloading")
 		notify("Config reloaded.")
-		return
+	else
+		app("Finder"):kill()
+		notify("Hammerspoon started.")
+		gitDotfileSync("--submodules")
+		gitVaultSync()
+		notify("Sync finished.")
 	end
-
-	notify("Hammerspoon started.")
-	gitDotfileSync("--submodules")
-	gitVaultSync()
-	notify("Sync finished.")
 end
 
 --------------------------------------------------------------------------------
 -- CRONJOBS AT HOME
 -- timers not local for longevity with garbage collection
-function bkp()
+local function bkp()
 	applescript [[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
@@ -211,9 +211,8 @@ if isIMacAtHome() or isAtMother() then
 	sleepTimer2:start()
 	sleepTimer3:start()
 	sleepTimer4:start()
-end
-
-if isIMacAtHome() then
-	biweeklyTimer:start()
-	projectorScreensaverWatcher:start()
+	if isIMacAtHome() then
+		biweeklyTimer:start()
+		projectorScreensaverWatcher:start()
+	end
 end

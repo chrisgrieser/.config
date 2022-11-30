@@ -6,8 +6,9 @@ cmd [[highlight! def link MixedWhiteSpace Folded]]
 cmd [[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 
 -- Annotations
-cmd [[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
+cmd [[highlight! def link myAnnotations Todo]] -- use same styling as "TODO" TODO:
 cmd [[call matchadd('myAnnotations', '\<\(HACK\|TODO\|INFO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
+cmd [[call matchadd('myAnnotations', '\<\(HACK\|TODO\|INFO\|NOTE\|WARNING\|WARN\|REQUIRED\):') ]]
 
 --------------------------------------------------------------------------------
 -- Indentation

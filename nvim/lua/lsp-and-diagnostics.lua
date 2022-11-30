@@ -146,12 +146,19 @@ local function on_attach(client, bufnr)
 	keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)
 	keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
+	-- mkview
+	-- Format
+	-- turn off remenberfold auto cmd
+	-- Reload via edit %
+	-- loadview
+	-- Turn on autocmd
 	-- format on manual save
 	keymap({"n", "x", "i"}, "<D-s>", function()
+		local ft = bo.filetype
+		if ft == "lua" then cmd[[mkview]] end -- HACK
+
 		vim.lsp.buf.format {async = true}
-		if bo.filetype == "javascript" or bo.filetype == "typescript" then
-			cmd [[silent! EslintFixAll]] -- eslint-lsp
-		end
+		if ft == "javascript" or ft == "typescript" then cmd [[silent! EslintFixAll]] end
 		cmd [[write!]]
 	end, bufopts)
 

@@ -108,8 +108,7 @@ rules:
   comma-style: warn
   comma-dangle:
     - error
-    - arrays: never
-      objects: only-multiline
+    - objects: always-multiline
   quotes:
     - warn
     - double
