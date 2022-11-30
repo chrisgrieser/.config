@@ -30,6 +30,21 @@ local kind_icons = {
 	TypeParameter = ""
 }
 
+local source_icons = {
+	buffer = "﬘",
+	git = "",
+	treesitter = "",
+	zsh = "",
+	nvim_lsp = "璉",
+	cmp_tabnine = "",
+	luasnip = "ﲖ",
+	emoji = "",
+	nerdfont = "",
+	cmdline = "",
+	cmdline_history = "",
+	path = "",
+}
+
 local function has_words_before()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -87,20 +102,7 @@ cmp.setup {
 	formatting = {
 		format = function(entry, vim_item)
 			vim_item.kind = kind_icons[vim_item.kind]
-			vim_item.menu = ({
-				buffer = "[B]",
-				git = "[GIT]",
-				treesitter = "[TS]",
-				zsh = "[ZSH]",
-				nvim_lsp = "[LSP]",
-				cmp_tabnine = "[T9]",
-				luasnip = "[S]",
-				emoji = "[E]",
-				nerdfont = "[NF]",
-				cmdline = "[CMD]",
-				cmdline_history = "[C-H]",
-				path = "[F]",
-			})[entry.source.name]
+			vim_item.menu = source_icons[entry.source.name]
 			return vim_item
 		end
 	},
