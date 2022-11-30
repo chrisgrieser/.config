@@ -6,14 +6,14 @@ local opts = {buffer = true, silent = true}
 -- hide URLs and other formatting, TODO: figure out how to hide only URLs
 setlocal("conceallevel", 2)
 
+-- spelling
+setlocal("spell", true)
+
 -- hack to make lists auto-continue via Return in Insert & o in normal mode
 -- i.e. replaces bullet.vim based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
 setlocal("comments", "b:*,b:-,b:+")
 local fo = getlocalopt("formatoptions"):gsub("[ct]", "") .. "ro" ---@diagnostic disable-line: undefined-field
 setlocal("formatoptions", fo)
-
--- spelling
-setlocal("spell", true)
 
 -- syntax highlighting in code blocks
 g.markdown_fenced_languages = {
@@ -28,6 +28,12 @@ g.markdown_fenced_languages = {
 	"bash",
 	"sh=bash",
 }
+
+-- syntax highlighting for yaml header
+-- cmd [[
+-- 	syntax include @Yaml syntax/yaml.lua
+-- 	syntax region yamlFrontmatter start=/\%^---$/ end=/^---$/ keepend contains=@Yaml
+-- ]]
 
 --------------------------------------------------------------------------------
 
@@ -88,6 +94,6 @@ keymap("i", "<D-i>", "**<Left>", opts)
 
 -- Misc
 keymap("n", "<leader>x", "mz^lllrx`z", opts) -- check markdown tasks
-keymap("n", "<leader>-", "mzI- <Esc>`z", opts) -- Add bullet point
 keymap("n", "<D-4>", "mzI- <Esc>`z", opts) -- Add bullet point
 keymap("n", "<leader>>", "mzI> <Esc>`z", opts) -- Turn into blockquote
+keymap("n", "<leader><", "mzI> <Esc>`z", opts) 

@@ -20,13 +20,15 @@ opt.guicursor = "n-sm:block," ..
 --------------------------------------------------------------------------------
 -- CMD-Keybindings
 keymap({"n", "x", "i"}, "<D-w>", function() -- cmd+w
-	if fn.tabpagenr("$") > 1 then
+	local moreThanOneTab = fn.tabpagenr("$") > 1
+	local scrollvEnabled = require("scrollview") -- counts as one window
+	local moreThanOneWin = (fn.winnr("$") > 2 and scrollvEnabled) or (fn.winnr("$") > 1 and not(scrollvEnabled))
+	if moreThanOneTab then
 		cmd [[tabclose]]
-	elseif fn.winnr("$") > 1 then
+	elseif moreThanOneWin then
 		cmd [[close]]
 	else
-		cmd [[update!]]
-		cmd [[bdelete]]
+		cmd [[update! | bdelete]]
 	end
 	cmd [[nohl]]
 end)
