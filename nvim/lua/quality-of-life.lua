@@ -264,6 +264,7 @@ function M.pasteDifferently(opts) -- paste as characterwise
 
 	fn.setreg(reg, regContent, targetRegType)
 	cmd('normal! "' .. reg .. "p")
+	if targetRegType == "V" then cmd [[normal!==]] end -- indent the new paste
 end
 
 --------------------------------------------------------------------------------

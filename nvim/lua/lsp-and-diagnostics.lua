@@ -146,19 +146,15 @@ local function on_attach(client, bufnr)
 	keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)
 	keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
-	-- format on manual save
-	-- mkview
-	-- Format
-	-- turn off remenberfold auto cmd
-	-- Reload via edit %
-	-- loadview
-	-- Turn on autocmd
-	if client == "sumneko_lua" then
+	if client.name == "sumneko_lua" then
+		-- HACK for formatting removing folds…
 		keymap({"n", "x", "i"}, "<D-s>", function()
-			cmd[[mkview]] -- HACK for formatting removing folds...
-			vim.lsp.buf.format {async = true}
-			cmd [[edit %]] -- == reload
-			cmd [[write!]]
+			print("beep")
+			cmd [[mkview]]
+			vim.lsp.buf.format()
+			augroup("rememberFolds", {clear = true})
+			cmd [[noautocmd write! | edit %]] -- reload, no autocmd to not trigger mkview (of the now non-existing folds) of bufleave
+			cmd [[loadview]]
 		end, bufopts)
 	else
 		keymap({"n", "x", "i"}, "<D-s>", function()
