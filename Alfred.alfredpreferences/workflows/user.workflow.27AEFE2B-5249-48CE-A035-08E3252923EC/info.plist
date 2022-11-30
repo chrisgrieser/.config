@@ -289,7 +289,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/" &amp;&amp; echo yes</string>
+				<string>cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Browser-Bookmarks.bkp" &amp;&amp; echo yes</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -914,7 +914,7 @@
 		<key>14C11AAF-4BA7-4F10-8AE5-C5BF378187DE</key>
 		<dict>
 			<key>xpos</key>
-			<real>585</real>
+			<real>590</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
