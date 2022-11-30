@@ -47,8 +47,8 @@ function isGui()
 end
 
 --------------------------------------------------------------------------------
-
 -- GENERAL LUA UTILS
+
 ---home directory
 home = os.getenv("HOME")
 
@@ -92,6 +92,7 @@ end
 
 -- CONFIGS SHARED SCROSS MULTIPLE FILES
 dotfilesFolder = home .. "/.config"
+vimDataDir = "~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/vim-data/"
 signIcons = {
 	Error = "",
 	Warn = "▲",

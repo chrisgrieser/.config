@@ -1,17 +1,19 @@
 require("utils")
 --------------------------------------------------------------------------------
 
--- timeout for awaiting keystrokes
-opt.timeoutlen = 750
+-- timeouts
+opt.timeoutlen = 750 -- for awaiting keystrokes (no nowait)
+opt.updatetime = 200 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 
 -- Search
 opt.showmatch = true
 opt.smartcase = true
 opt.ignorecase = true
 
--- Popup
+-- Popups / Floating Windows
 opt.pumheight = 15 -- max number of items in popup menu
 opt.pumwidth = 10 -- min width popup menu
+opt.winblend = 5 -- % transparency
 
 -- Spelling
 opt.spell = false
@@ -93,11 +95,21 @@ opt.iskeyword:append("-")
 
 --------------------------------------------------------------------------------
 
--- FILES & SAVING
+-- UNDO & SWAP
 opt.undofile = true -- persistent undo history
-opt.updatetime = 200 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
+opt.backup = true -- backups when writing to disk
+
+-- save swap, undo, view, and backup files in cloud for syncing with other devices
+opt.directory:prepend(vimDataDir.."swap//")
+opt.undodir:prepend(vimDataDir.."undo//")
+opt.viewdir:prepend(vimDataDir.."view//")
+opt.backupdir:prepend(vimDataDir.."view//")
+
+--------------------------------------------------------------------------------
+
+-- FILES & SAVING
 opt.autochdir = true -- always current directory
-opt.confirm = true
+opt.confirm = true -- ask instead of aborting
 
 augroup("autosave", {})
 autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
