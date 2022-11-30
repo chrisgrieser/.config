@@ -25,7 +25,7 @@ end
 
 --------------------------------------------------------------------------------
 -- LAYOUTS
-local function movieModeLayout()
+function movieModeLayout()
 	holeCover()
 	iMacDisplay:setBrightness(0)
 
@@ -55,7 +55,7 @@ local function movieModeLayout()
 end
 
 local layoutChangeActive = false
-local function homeModeLayout()
+function homeModeLayout()
 	local brightness = betweenTime(1, 8) and 0 or 0.8
 	iMacDisplay:setBrightness(brightness)
 
@@ -117,7 +117,7 @@ local function homeModeLayout()
 	):start()
 end
 
-local function officeModeLayout()
+function officeModeLayout()
 	local screen1 = hs.screen.allScreens()[1]
 	local screen2 = hs.screen.allScreens()[2]
 
