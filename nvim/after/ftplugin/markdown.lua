@@ -30,10 +30,11 @@ g.markdown_fenced_languages = {
 }
 
 -- syntax highlighting for yaml header
--- cmd [[
--- 	syntax include @Yaml syntax/yaml.lua
--- 	syntax region yamlFrontmatter start=/\%^---$/ end=/^---$/ keepend contains=@Yaml
--- ]]
+cmd [[
+	unlet b:current_syntax
+	syntax include @Yaml syntax/yaml.vim
+	syntax region yamlFrontmatter start=/\%^---$/ end=/^---$/ keepend contains=@Yaml
+]]
 
 --------------------------------------------------------------------------------
 
@@ -96,4 +97,4 @@ keymap("i", "<D-i>", "**<Left>", opts)
 keymap("n", "<leader>x", "mz^lllrx`z", opts) -- check markdown tasks
 keymap("n", "<D-4>", "mzI- <Esc>`z", opts) -- Add bullet point
 keymap("n", "<leader>>", "mzI> <Esc>`z", opts) -- Turn into blockquote
-keymap("n", "<leader><", "mzI> <Esc>`z", opts) 
+keymap("n", "<leader><", "mzI> <Esc>`z", opts)

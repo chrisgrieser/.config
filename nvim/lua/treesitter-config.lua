@@ -2,13 +2,12 @@ require("nvim-treesitter.configs").setup {
 	ensure_installed = {
 		"javascript",
 		"typescript",
-		"markdown",
-		"markdown_inline", -- markdown inline code
 		"html",
 		"help", -- vim help files
-		"css",
-		"scss",
 		"bash",
+		"css",
+		"markdown",
+		"markdown_inline",
 		"bibtex",
 		"gitignore",
 		"regex",
@@ -18,10 +17,8 @@ require("nvim-treesitter.configs").setup {
 		"vim", -- viml
 		"yaml",
 		"json",
-		"json5",
-		"jsonc",
 	},
-	auto_install = true, -- install missing parers when entering a buffer
+	auto_install = false, -- install missing parers when entering a buffer
 
 	highlight = {
 		enable = true,
@@ -31,6 +28,7 @@ require("nvim-treesitter.configs").setup {
 			"css", -- looks weird with css: https://github.com/tree-sitter/tree-sitter-css/issues/34
 			"scss",
 			"markdown", -- looks worse and enables spellcheck in URLs and Code Blocks 🙈
+			"markdown-inline", -- breaks e.g., yaml frontmatter highlighting
 		},
 
 	},
@@ -55,11 +53,11 @@ require("nvim-treesitter.configs").setup {
 		},
 		swap = {
 			enable = true,
-			swap_next = {-- mnemonic: [e]xchange
-				["<leader>e"] = "@parameter.inner",
+			swap_next = {
+				["]"] = "@parameter.inner",
 			},
 			swap_previous = {
-				["<leader>E"] = "@parameter.inner",
+				["["] = "@parameter.inner",
 			},
 		},
 		select = {
@@ -70,9 +68,9 @@ require("nvim-treesitter.configs").setup {
 				["if"] = "@function.inner",
 				["aa"] = "@parameter.outer", -- [a]rgument
 				["ia"] = "@parameter.inner",
-				["aC"] = "@conditional.outer", -- [C]onditional (ac = a curly)
-				["iC"] = "@conditional.inner",
-				["COM"] = "@comment.outer", -- latter remapped to q, done indirectly to avoid conflict with visual mode comments
+				["ao"] = "@conditional.outer", -- c[o]nditional (`ac` already = a curly)
+				["io"] = "@conditional.inner",
+				["COM"] = "@comment.outer", -- later remapped to q, done indirectly to avoid conflict with visual mode comments
 			},
 			-- If you set this to `true` (default is `false`) then any textobject is
 			-- extended to include preceding xor succeeding whitespace. Succeeding

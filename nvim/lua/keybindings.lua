@@ -94,8 +94,6 @@ keymap("n", "^", "za") -- quicker toggling of folds
 -- NAVIGATION PLUGINS
 -- vim.[m]atchup
 keymap({"n", "x", "o"}, "m", "%", {remap = true}) -- remap to use matchup's % instead of builtin %
-keymap({"o", "x"}, "im", "i%", {remap = true})
-keymap({"o", "x"}, "am", "a%", {remap = true})
 
 -- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)")
