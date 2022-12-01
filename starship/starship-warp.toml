@@ -40,7 +40,7 @@ when = "true"
 symbol = " "
 description = "Number of files (and folders) in the current working directory"
 format = '[$symbol$output]($style) '
-style = "fg:dimmed 208 bg:black bold"
+style = "fg:yellow bg:black bold"
 
 [status]
 format = " [$symbol$status]($style)"
@@ -71,7 +71,7 @@ format = "[$symbol$branch]($style) "
 [git_status]
 untracked = '[+$count ](fg:green bg:black)'
 deleted = '[-$count ](fg:red bg:black)'
-modified = '[~$count ](fg:yellow bg:black)'
+modified = '[~$count ](fg:dimmed 208 bg:black)'
 renamed = '[凜$count ](fg:blue bg:black)'
 staged = '[$count ](fg:cyan bg:black)'
 conflicted = '[⤱$count ](fg:red bg:black)'

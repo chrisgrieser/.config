@@ -102,7 +102,7 @@ opt.undofile = true -- enable persistent undo history
 opt.directory:prepend(vimDataDir .. "swap//")
 opt.undodir:prepend(vimDataDir .. "undo//")
 opt.viewdir = vimDataDir .. "view"
-opt.shadafile = vimDataDir .. "shada"
+opt.shadafile = vimDataDir .. "main.shada"
 
 --------------------------------------------------------------------------------
 
