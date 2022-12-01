@@ -67,6 +67,7 @@ local function themeModifications()
 		end
 		cmd("highlight GitSignsChange guifg=#acaa62")
 		cmd("highlight GitSignsAdd guifg=#7fcc82")
+		cmd[[highlight link ScrollView Folded]]
 	elseif theme == "dawnfox" then
 		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
 		cmd [[highlight VertSplit guifg=#b29b84]]

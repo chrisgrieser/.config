@@ -4,11 +4,11 @@ require("appearance")
 
 -- font size dependent on device
 local device = fn.hostname()
-if device():find("iMac") then
+if device:find("iMac") then
 	g.neovide_scale_factor = 1
-elseif device():find("eduroam") or device:find("mini") then
-	g.neovide_scale_factor = 0.97
-elseif device():find("Mother") then
+elseif device:find("eduroam") or device:find("mini") then
+	g.neovide_scale_factor = 0.92
+elseif device:find("Mother") then
 	g.neovide_scale_factor = 0.9
 end
 
