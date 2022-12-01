@@ -136,11 +136,12 @@ function installObsiAlpha(files)
 		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
 		runDelayed(0.5, function()
 			hs.execute(
-				'cd "' .. fileHub .. [[" || exit 1
+				[[cd "]] .. fileHub .. [[" || exit 1
 				test -f obsidian-*.*.*.asar.gz || exit 1
 				gunzip obsidian-*.*.*.asar.gz
 				mv obsidian-*.*.*.asar "$HOME/Library/Application Support/obsidian/"
-				killall "Obsidian" && sleep 1 && open -a "Obsidian" ]]
+				killall "Obsidian" && sleep 1 
+				open -a "Obsidian" ]]
 			)
 			-- close the created tab
 			applescript [[

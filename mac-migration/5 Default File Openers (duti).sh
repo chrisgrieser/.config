@@ -23,14 +23,13 @@ duti -s "$videoplayerID" m4a all
 # code
 editorID="com.apple.automator.Neovim"
 duti -s "$editorID" ini all
-duti -s "$editorID" com.apple.property-list all
+duti -s "$editorID" com.apple.property-list all # plist
 duti -s "$editorID" vim all
 duti -s "$editorID" csv all
 duti -s "$editorID" log all
 duti -s "$editorID" toml all
 duti -s "$editorID" sh all
 duti -s "$editorID" bib all
-duti -s "$editorID" html all
 duti -s "$editorID" zsh all
 duti -s "$editorID" bash all
 duti -s "$editorID" py all

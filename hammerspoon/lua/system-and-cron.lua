@@ -132,7 +132,7 @@ function systemStart()
 		hs.execute("rm ./is-reloading")
 		notify("Config reloaded.")
 	else
-		app("Finder"):kill()
+		if app("Finder") then app("Finder"):kill() end
 		notify("Hammerspoon started.")
 		gitDotfileSync("--submodules")
 		gitVaultSync()

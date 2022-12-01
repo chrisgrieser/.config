@@ -1,5 +1,4 @@
 # https://github.com/Rigellute/spotify-tui#configuration
-# Sample config file
 
 behavior:
   seek_milliseconds: 5000
@@ -14,4 +13,3 @@ behavior:
   repeat_context_icon: 🔁
   playing_icon: "▶️"
   paused_icon: ⏸
-

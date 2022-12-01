@@ -102,7 +102,7 @@ opt.undofile = true -- enable persistent undo history
 opt.directory:prepend(vimDataDir .. "swap//")
 opt.undodir:prepend(vimDataDir .. "undo//")
 ---@diagnostic disable-next-line: param-type-mismatch
-opt.viewdir = vimDataDir:gsub("^~", home) .. "view" -- as opposed to the others, only accepts one dir and no ~
+opt.viewdir = vimDataDir .. "view" -- as opposed to the others
 
 --------------------------------------------------------------------------------
 

@@ -45,9 +45,6 @@ case $APP_TO_UPDATE in
 	"Alacritty"|"alacritty")
 		cp "$CUSTOM_ICON_FOLDER/alacritty alt.icns" 'Alacritty.app/Contents/Resources/alacritty.icns'
 		touch "Alacritty.app" ;;
-	"Sublime Text")
-		cp "$CUSTOM_ICON_FOLDER/Sublime Text Black.icns" 'Sublime Text.app/Contents/Resources/Sublime Text.icns'
-		touch "Sublime Text.app" ;;
 	"AppCleaner")
 		cp "$CUSTOM_ICON_FOLDER/AppCleaner.icns" 'AppCleaner.app/Contents/Resources/AppCleaner.icns'
 		touch "AppCleaner.app" ;;
@@ -57,18 +54,12 @@ case $APP_TO_UPDATE in
 	"MacPass")
 		cp "$CUSTOM_ICON_FOLDER/MacPass.icns" 'MacPass.app/Contents/Resources/MacPassAppIcon.icns'
 		touch "MacPass.app" ;;
-	"Tweeten")
-		cp "$CUSTOM_ICON_FOLDER/Twitter.icns" 'Tweeten.app/Contents/Resources/Tweeten.icns'
-		touch "Tweeten.app" ;;
 	"Discord")
 		cp "$CUSTOM_ICON_FOLDER/Discord Black.icns" 'Discord.app/Contents/Resources/electron.icns'
 		touch "Discord.app" ;;
 	"Neovide")
 		cp "$CUSTOM_ICON_FOLDER/Neovim-dark.icns" 'Neovide.app/Contents/Resources/Neovide.icns'
 		touch "Neovide.app" ;;
-	"goneovim")
-		cp "$CUSTOM_ICON_FOLDER/Neovide alt.icns" 'goneovim.app/Contents/Resources/goneovim.icns'
-		touch "goneovim.app" ;;
 
 	"Microsoft Word")
 		osascript -e "tell application \"Finder\"
@@ -84,13 +75,6 @@ case $APP_TO_UPDATE in
 		end tell
 		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Excel.icns\""
 		INFO_WINDOW=1 ;;
-	"VimR")
-		osascript -e "tell application \"Finder\"
-			open information window of (\"/Applications/VimR.app\" as POSIX file as alias)
-			activate
-		end tell
-		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Vim.icns\""
-		INFO_WINDOW=1 ;;
 	"Mimestream")
 		osascript -e "tell application \"Finder\"
 			open information window of (\"/Applications/Mimestream.app\" as POSIX file as alias)
@@ -101,13 +85,15 @@ case $APP_TO_UPDATE in
 		# cp "$CUSTOM_ICON_FOLDER/Mail_fancy.icns" 'Mimestream.app/Contents/Resources/AppIcon.icns'
 		# touch "Mimestream.app" ;;
 
+	"TweetDeck")
+		iconsur -k "Twitter" set "$PWA_FOLDER/TweetDeck.app" &> /dev/null ;;
+		# cp "$CUSTOM_ICON_FOLDER/Twitter.icns" 'TweetDeck.app/Contents/Resources/app.icns'
+		# touch "$PWA_FOLDER/TweetDeck.app" ;;
 	"Docs")
 		cp "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Docs.app/Contents/Resources/app.icns"
 		touch "$PWA_FOLDER/Docs.app" ;;
 	"Inoreader")
 		iconsur -k "Unread" set "$PWA_FOLDER/Inoreader.app" &> /dev/null ;;
-	"Excalidraw")
-		iconsur -l set "$PWA_FOLDER/Excalidraw.app" &> /dev/null ;;
 	"YouTube"|"Youtube")
 		cp "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
 		touch "$PWA_FOLDER/YouTube.app" ;;
