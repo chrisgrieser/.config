@@ -11,7 +11,6 @@ wo = vim.wo -- window-scoped variables
 augroup = vim.api.nvim_create_augroup
 autocmd = vim.api.nvim_create_autocmd
 keymap = vim.keymap.set
-unmap = vim.keymap.del
 logWarn = vim.log.levels.WARN
 logError = vim.log.levels.ERROR
 logTrace = vim.log.levels.TRACE
@@ -84,7 +83,9 @@ end
 -- CONFIGS SHARED SCROSS MULTIPLE FILES
 local home = os.getenv("HOME")
 dotfilesFolder = home .. "/.config"
+vaultFolder = home .. "/main-vault"
 vimDataDir = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/vim-data/"
+
 signIcons = {
 	Error = "",
 	Warn = "▲",

@@ -98,11 +98,11 @@ opt.iskeyword:append("-")
 -- UNDO & SWAP
 opt.undofile = true -- enable persistent undo history
 
--- save swap, undo, and view files in cloud for syncing with other devices
+-- save swap, undo, view, and shada files in cloud for syncing with other devices
 opt.directory:prepend(vimDataDir .. "swap//")
 opt.undodir:prepend(vimDataDir .. "undo//")
----@diagnostic disable-next-line: param-type-mismatch
-opt.viewdir = vimDataDir .. "view" -- as opposed to the others
+opt.viewdir = vimDataDir .. "view"
+opt.shadafile = vimDataDir .. "shada"
 
 --------------------------------------------------------------------------------
 
