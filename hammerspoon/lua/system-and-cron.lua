@@ -125,7 +125,7 @@ elseif isAtOffice() then
 end
 wakeWatcher:start()
 
-function systemStart()
+local function systemStart()
 	-- prevent commit spam when updating hammerspoon config regularly
 	local _, isReloading = hs.execute('[[ -e "./is-reloading" ]]')
 	if isReloading then
