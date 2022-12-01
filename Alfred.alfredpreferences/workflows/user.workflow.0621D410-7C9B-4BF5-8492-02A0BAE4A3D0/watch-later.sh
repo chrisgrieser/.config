@@ -24,4 +24,3 @@ rm -f temp.jpg
 
 # return for notification
 echo -n "$TITLE"
-

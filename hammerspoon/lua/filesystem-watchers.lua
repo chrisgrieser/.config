@@ -94,7 +94,7 @@ function fromFileHub(files)
 			hs.execute([[mv -f "]] .. file .. [[" "]] .. browserSettings .. [["]])
 			notify("Vimium backup filed away.")
 
-			-- ublocklist backup
+			-- ublacklist backup
 		elseif fileName == "ublacklist-settings.json" then
 			hs.execute([[mv -f "]] .. file .. [[" "]] .. browserSettings .. [["]])
 			notify("uBlacklist backup filed away.")
