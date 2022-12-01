@@ -1,14 +1,18 @@
 export EDITOR=nvim
 export PAGER=less
 
-export DOTFILE_FOLDER=~/.config
-export WD=~"/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
-export VAULT_PATH=~'/Main Vault'
+#───────────────────────────────────────────────────────────────────────────────
+# DIRECTORIES
+export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
+export DOTFILE_FOLDER="$HOME/.config"
+export VAULT_PATH="$HOME/main-vault"
 
+#───────────────────────────────────────────────────────────────────────────────
 # karabiner_cli
 export PATH="/Library/Application Support/org.pqrs/Karabiner-Elements/bin:$PATH"
 
 #───────────────────────────────────────────────────────────────────────────────
+# NEOVIM-RELATED
 # Neovide https://neovide.dev/command-line-referencehtml#frame
 export NEOVIDE_FRAME="buttonless"
 

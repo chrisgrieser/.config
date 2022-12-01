@@ -84,7 +84,7 @@ end
 local home = os.getenv("HOME")
 dotfilesFolder = home .. "/.config"
 vaultFolder = home .. "/main-vault"
-vimDataDir = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/vim-data/"
+vimDataDir = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/vim-data/"
 
 signIcons = {
 	Error = "",
