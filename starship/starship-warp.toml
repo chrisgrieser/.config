@@ -32,7 +32,6 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 [directory.substitutions]
 "/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
 "/File Hub" = "/柳"
-"dotfiles" = " "
 "Configs/Alfred.alfredpreferences/workflows" = "AlfredPrefs"
 
 [custom.folder_number]
@@ -41,7 +40,7 @@ when = "true"
 symbol = " "
 description = "Number of files (and folders) in the current working directory"
 format = '[$symbol$output]($style) '
-style = "fg:yellow bg:black bold"
+style = "fg:dimmed 208 bg:black bold"
 
 [status]
 format = " [$symbol$status]($style)"
