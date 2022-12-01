@@ -26,6 +26,8 @@ const workArray = app.doShellScript(
 	-E "packer_compiled.lua" \
 	-E "hammerspoon/Spoons/*" \
 	-E "vale/styles/*/*.yml" \
+	-E "vale/styles/*/*.adoc" \
+	-E "vale/styles/*/*.md" \
 	-E "*.app/*" \
 	-E "karabiner/automatic_backups" \
 	-E "visualized keyboard layout/*.json" \
