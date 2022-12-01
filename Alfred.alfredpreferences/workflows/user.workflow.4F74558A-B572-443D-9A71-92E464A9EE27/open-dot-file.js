@@ -29,8 +29,8 @@ const workArray = app.doShellScript(
 	-E "*.app/*" \
 	-E "karabiner/automatic_backups" \
 	-E "visualized keyboard layout/*.json" \
-	-E "mac-migration" \
 	-E "*.icns" \
+	-E "mac-migration/to do*" \
 	-E "*.png" \
 	-E "Fonts/*" \
 	-E ".DS_Store" \

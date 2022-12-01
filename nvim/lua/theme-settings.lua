@@ -36,8 +36,8 @@ local function customHighlights()
 	cmd [[highlight rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets…
 
 	-- treesittter refactor focus
-	cmd [[highlight TSDefinition term=underline gui=underdotted]]
-	cmd [[highlight TSDefinitionUsage term=underline gui=underdotted]]
+	cmd [[highlight TSDefinition term=underline gui=underline]]
+	cmd [[highlight TSDefinitionUsage term=underline gui=underline]]
 
 	-- bugfix for https://github.com/neovim/neovim/issues/20456
 	cmd [[highlight! def link luaParenError NormalFloat]]

@@ -40,7 +40,7 @@ local source_icons = {
 	luasnip = "ﲖ",
 	emoji = "",
 	nerdfont = "",
-	cmdline = "",
+	cmdline = "",
 	cmdline_history = "",
 	path = "",
 }

@@ -310,6 +310,10 @@ keymap("n", "<leader>s", function()
 	cmd [[TSJToggle]]
 	vim.lsp.buf.format {async = true} -- HACK: run formatter as workaround for https://github.com/Wansmer/treesj/issues/25
 end)
+
+require("treesj").setup {
+	use_default_keymaps = false,
+}
 augroup("splitjoinFallback", {}) -- HACK: https://github.com/Wansmer/treesj/discussions/19
 autocmd("FileType", {
 	pattern = "*",

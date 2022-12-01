@@ -207,7 +207,7 @@
 	<key>description</key>
 	<string>Searches your watchlists in the Portfolio Performance App for securities. Select one to copy its Name, Symbol, ISIN or WKN to the clipboard.</string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>Portfolio Performance</string>
 	<key>objects</key>

@@ -3,11 +3,12 @@ require("appearance")
 --------------------------------------------------------------------------------
 
 -- font size dependent on device
-if fn.hostname():find("iMac") then
+local device = fn.hostname()
+if device():find("iMac") then
 	g.neovide_scale_factor = 1
-elseif fn.hostname():find("mini") then
-	g.neovide_scale_factor = 0.9
-elseif fn.hostname():find("Mother") then
+elseif device():find("eduroam") or device:find("mini") then
+	g.neovide_scale_factor = 0.97
+elseif device():find("Mother") then
 	g.neovide_scale_factor = 0.9
 end
 
@@ -15,13 +16,13 @@ opt.guifont = "JetBrainsMonoNL Nerd Font:h26"
 opt.guicursor = "n-sm:block," ..
 	"i-ci-c-ve:ver25," ..
 	"r-cr-o-v:hor10," ..
-	"a:blinkwait300-blinkoff500-blinkon700"
+	"a:blinkwait200-blinkoff500-blinkon700"
 
 --------------------------------------------------------------------------------
 -- CMD-Keybindings
 keymap({"n", "x", "i"}, "<D-w>", function() -- cmd+w
 	local moreThanOneTab = fn.tabpagenr("$") > 1
-	local scrollvEnabled = require("scrollview") -- counts as one window
+	local scrollvEnabled = require("scrollview") -- HACK: since scrollview counts as a window
 	local moreThanOneWin = (fn.winnr("$") > 2 and scrollvEnabled) or (fn.winnr("$") > 1 and not(scrollvEnabled))
 	if moreThanOneTab then
 		cmd [[tabclose]]

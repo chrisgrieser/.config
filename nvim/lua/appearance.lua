@@ -20,12 +20,12 @@ require("indent_blankline").setup {
 
 --------------------------------------------------------------------------------
 -- SCROLLBAR
--- require("scrollview").setup {
--- 	current_only = true,
--- 	winblend = 20,
--- 	column = 1,
--- 	excluded_filetypes = specialFiletypes,
--- }
+require("scrollview").setup {
+	current_only = true,
+	winblend = 20,
+	column = 1,
+	excluded_filetypes = specialFiletypes,
+}
 --------------------------------------------------------------------------------
 -- NOTIFICATIONS
 if isGui() then

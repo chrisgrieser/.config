@@ -1,7 +1,7 @@
 {
-  "blacklist": "*://bleepcoder.com/*\n*://githubja.com/*\n*://www.gitmemory.com/*\n*://giters.com/*\n*://www.giters.com/*\n*://githubmemory.com/*\n*://githubmate.com/*\n*://www.wenyanet.com/*\n*://issueexplorer.com/*\n*://opensourcelibs.com/*\n*://awesomeopensource.com/*\n*://www.findbestopensource.com/*\n*://githubhelp.com/*\n*://golangrepo.com/*\n*://gitmemory.cn/*\n*://pythonissues.com/*\n*://reposhub.com/*\n*://openprojectrepo.com/*\n*://gitanswer.com/*\n*://githubplus.com/*\n*://pythonrepo.com/*\n*://bestofcpp.com/*\n*://github.innominds.com/*\n*://www.higithub.com/*\n*://githublab.com/*\n*://githubhot.com/*\n*://code-examples.net/*\n*://kotaeta.com/*\n*://answer-id.com/*\n*://de-vraag.com/*\n*://code.i-harness.com/*\n*://living-sun.com/*\n*://qastack.jp/*\n*://qastack.ru/*\n*://qastack.it/*\n*://qastack.mx/*\n*://qastack.com.br/*\n*://qastack.info.tr/*\n*://qastack.in.th/*\n*://qastack.com.de/*\n*://qastack.fr/*\n*://qastack.cn/*\n*://qastack.com.ua/*\n*://qastack.co.in/*\n*://qastack.kr/*\n*://qastack.vn/*\n*://qastack.net.bd/*\n*://qa-stack.pl/*\n*://qastack.id/*\n*://www.coder.work/*\n*://www.it-swarm-ja.tech/*\n*://www.it-swarm.jp.net/*\n*://www.it-swarm-ja.com/*\n*://www.webdevqa.jp.net/*\n*://www.web-dev-qa-db-ja.com/*\n*://www.it-swarm-fr.com/*\n*://www.web-dev-qa-db-fr.com/*\n*://*.codeflow.site/*\n*://codeguides.site/*\n*://overcoder.net/*\n*://coderoad.ru/*\n*://www.javaer101.com/*\n*://*.voidcc.com/*\n*://*.siwib.org/*\n*://*.fluffyfables.com/*\n*://www.fixes.pub/*\n*://knews.vip/*\n*://isolution.pro/*\n*://*.uwenku.com/*\n*://*.athabasca-foto.com/*\n*://*.zsharp.org/*\n*://*.projectbackpack.org/*\n*://*.waymanamechurch.org/*\n*://*.sunflowercreations.org/*\n*://*.cfadnc.org/*\n*://*.fitforlearning.org/*\n*://*.panaindustrial.com/*\n*://*.sierrasummit2005.org/*\n*://*.theshuggahpies.com/*\n*://*.pcbconline.org/*\n*://www.nuomiphp.com/*\n*://ubuntu.buildwebhost.com/*\n*://ubuntuaa.com/*\n*://www.debugcn.com/*\n*://*.sch22.org/*\n*://*.gupgallery.com/*\n*://*.amuddycup.com/*\n*://*.ecnf2016.org/*\n*://*.softwareuser.asklobster.com/*\n*://*.domainelespailles.net/*\n*://*.ec-europe.org/*\n*://*.pakostnici.com/*\n*://*.try2explore.com/*\n*://itectec.com/*\n*://stackovergo.com/*\n*://*.faithcov.org/*\n*://*.noblenaz.org/*\n*://*.culinarydegree.info/*\n*://qapicks.com/*\n*://*.narkive.jp/*\n*://*.ourladylakes.org/*\n*://intellipaat.com/*\n*://newbedev.com/*\n*://www.codenong.com/*\n*://routinepanic.com/*\n*://*.tousu.in/*\n*://tutorialmore.com/*\n*://www.titanwolf.org/*\n*://coderedirect.com/*\n*://fullstackuser.com/*\n*://*.ostack.cn/*\n*://*.wujigu.com/*\n*://webdevdesigner.com/*\n*://www.ghcc.net/*\n*://*.developreference.com/*\n*://www.semicolonworld.com/*\n*://tipsfordev.com/*\n*://*.qi-u.com/*\n*://www.xsprogram.com/*\n*://stackoom.com/*\n*://cndgn.com/*\n*://www.generacodice.com/*\n*://stackfinder.jp.net/*\n*://www.uebu-kaihatsu.jp.net/*\n*://*.sqlite.in/*\n*://stackguides.com/*\n*://younggeeks.in/*\n*://www.answerlib.com/*\n*://edupro.id/*\n*://www.stackfinder.ru/*\n*://www.desenv-web-rp.com/*\n*://www.web-dev-qa-db-pt.com/*\n*://www.jscodetips.com/*\n*://www.5axxw.com/*\n*://question-it.com/*\n*://*.codefaq.info/*\n*://codefaq.ru/*\n*://*.mediatagtw.com/*\n*://progi.pro/*\n*://*.elfishgene.com/*\n*://sysadminde.com/*\n*://*.answacode.com/*\n*://ask-dev.ru/*\n*://*.arip-photo.org/*\n*://jablogs.com/*\n*://jpdebug.com/*\n*://askcodez.com/*\n*://iquestion.pro/*\n*://*.ntcdoon.org/*\n*://programmierfrage.com/*\n*://microeducate.tech/*\n*://www.debugko.com/*\n*://devdreamz.com/*\n*://catwolf.org/*\n*://*.1r1g.com/*\n*://string.quest/*\n*://reddit.fun/*\n*://qa.icopy.site/*\n*://errorsfixing.com/*\n*://syntaxfix.com/*\n*://codegrepr.com/*\n*://quabr.com/*\n*://serveanswer.com/*\n*://*.safehavenpetrescue.org/*\n*://cainiaojiaocheng.com/*\n*://www.linuxfixes.com/*\n*://www.it-roy-ru.com/*\n*://www.web-dev-qa.com/*\n*://flutterhq.com/*\n*://dailydevsblog.com/*\n*://711web.com/*\n*://www.binarydevelop.com/*\n*://so.muouseo.com/*\n*://coder-solution-es.com/*\n*://peaku.co/*\n*://www.learnfk.com/*\n*://solveforum.com/*\n*://www.edureka.co/*\n*://itecnote.com/*\n*://tagsqa.com/*\n*://www.faqcode4u.com/*\n*://digitrain.ru/*\n*://prograide.com/*\n*://*.dovov.com/*\n*://oomake.com/*\n*://ajaxhispano.com/*\n*://www.codebaoku.com/*\n*://daplus.net/*\n*://questu.ru/*\n*://www.itranslater.com/*\n*://doraprojects.net/*\n*://*.iteramos.com/*\n*://www.faqcodes.com/*\n*://www.mejorcodigo.com/*\n*://www.anycodings.com/*\n*://www.javafixing.com/*\n*://xstack.us/*\n*://shenghuobao.net/*\n*://*.overstack.in/*\n*://*.zaizhele.cn/*\n*://*.zaizhele.net/*\n*://*.xstack.ru/*\n*://*.mlink.in/*\n*://*.jonic.cn/*\n*://*.jike.in/*\n*://*.16892.net/*\n*://*.vigges.net/*\n*://*.55276.net/*\n*://*.ogeek.cn/*\n*://*.shenzhenjia.net/*\n*://*.shenzhenjia.cn/*\n*://*.9ishenzhen.com/*\n*://*.vigge.net/*\n*://*.vigge.cn/*\n*://*.web-dev-qa-db-fra.com/*\n*://*.ape-ask.com/*\n*://yaoply.com/*\n*://techhelpnotes.com/*",
+  "blacklist": "",
   "blockColor": "default",
-  "blockWholeSite": false,
+  "blockWholeSite": true,
   "dialogTheme": "default",
   "enablePathDepth": false,
   "hideBlockLinks": false,
@@ -11,12 +11,23 @@
   ],
   "linkColor": "default",
   "skipBlockDialog": false,
-  "subscriptions": [],
+  "subscriptions": [
+    {
+      "name": "GitHub Translations",
+      "url": "https://raw.githubusercontent.com/arosh/ublacklist-github-translation/master/uBlacklist.txt",
+      "enabled": true
+    },
+    {
+      "name": "Stackoverflow Translations",
+      "url": "https://raw.githubusercontent.com/arosh/ublacklist-stackoverflow-translation/master/uBlacklist.txt",
+      "enabled": true
+    }
+  ],
   "syncAppearance": false,
   "syncBlocklist": true,
   "syncGeneral": false,
   "syncInterval": 15,
   "syncSubscriptions": false,
-  "updateInterval": 120,
-  "version": "8.2.0"
+  "updateInterval": 1440,
+  "version": "8.1.1"
 }
