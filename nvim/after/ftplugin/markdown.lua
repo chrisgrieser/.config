@@ -57,7 +57,7 @@ keymap({"n", "x"}, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], opts)
 -- Obsidian Vault
 keymap("n", "go", function()
 	if fn.expand("%:p:h"):find("main-vault") then
-		telescope.find_files {cwd = home .. "/main-vault", prompt_prefix = " "}
+		telescope.find_files {cwd = os.getenv("HOME") .. "/main-vault", prompt_prefix = " "}
 	else
 		telescope.find_files()
 	end

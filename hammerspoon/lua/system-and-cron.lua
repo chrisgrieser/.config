@@ -19,6 +19,7 @@ local repoSyncFrequencyMin = 20
 -- calling with "--submodules" also updates submodules
 function gitDotfileSync(arg)
 	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then return end
+	if not(screenIsUnlocked()) then return end -- prevent background sync when in office
 
 	gitDotfileSyncTask = hs.task.new(gitDotfileScript,
 		function(exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
@@ -41,6 +42,7 @@ end
 
 function gitVaultSync()
 	if gitVaultSyncTask and gitVaultSyncTask:isRunning() then return end
+	if not(screenIsUnlocked()) then return end -- prevent background sync when in office
 
 	gitVaultSyncTask = hs.task.new(gitVaultScript, function(exitCode, _, stdErr)
 		stdErr = stdErr:gsub("\n", " –– ")
@@ -125,7 +127,7 @@ elseif isAtOffice() then
 end
 wakeWatcher:start()
 
-local function systemStart()
+function systemStart()
 	-- prevent commit spam when updating hammerspoon config regularly
 	local _, isReloading = hs.execute('[[ -e "./is-reloading" ]]')
 	if isReloading then
