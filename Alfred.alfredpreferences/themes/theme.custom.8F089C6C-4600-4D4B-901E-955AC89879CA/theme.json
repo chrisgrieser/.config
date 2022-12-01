@@ -31,14 +31,14 @@
       "paddingHorizontal" : 8,
       "spacing" : 7,
       "text" : {
-        "size" : 51,
+        "size" : 47,
         "colorSelected" : "#000000FF",
         "font" : "Recursive",
         "color" : "#FDFDFDFF"
       },
       "background" : "#0000007F",
       "roundness" : 9,
-      "paddingVertical" : 0
+      "paddingVertical" : 5
     },
     "window" : {
       "color" : "#454545FF",
