@@ -49,15 +49,6 @@ end
 --------------------------------------------------------------------------------
 -- GENERAL LUA UTILS
 
----home directory
-home = os.getenv("HOME")
-
----returns current date in ISO 8601 format
----@return string|osdate
-function isodate()
-	return os.date("!%Y-%m-%d")
-end
-
 ---appends t2 to t1 in-place
 ---@param t1 table
 ---@param t2 table
@@ -91,8 +82,9 @@ end
 --------------------------------------------------------------------------------
 
 -- CONFIGS SHARED SCROSS MULTIPLE FILES
+local home = os.getenv("HOME")
 dotfilesFolder = home .. "/.config"
-vimDataDir = home.."/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/vim-data/"
+vimDataDir = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/vim-data/"
 signIcons = {
 	Error = "",
 	Warn = "▲",
