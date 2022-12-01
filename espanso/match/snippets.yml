@@ -10,27 +10,26 @@ matches:
     replace: https://github.com/chrisgrieser
   - trigger: '!blog'
     replace: https://nanotipsforvim.prose.sh
+  - trigger: '!paypal'
+    replace: https://www.paypal.me/ChrisGrieser
   - trigger: "!name"
     replace: "Christopher Grieser"
-
+  #─────────────────────────────────────────────────────────────────────────────
   - trigger: '!wd'
     replace: '~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/'
-
   - trigger: ttt
     replace: "\t"
     label: Insert a Tab character
-
   - trigger: "!path"
     replace: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH"
     label: PATH
-
+    #───────────────────────────────────────────────────────────────────────────
   - trigger: "!dontask"
     replace: "<https://dontasktoask.com/>"
   - trigger: "!nohello"
     replace: "<https://nohello.net/en/>"
   - trigger: "!xy"
     replace: "<https://xyproblem.info/>"
-
   - trigger: '!bug'
     replace: >-
       Could you open a bug report at the GitHub repo?
@@ -38,7 +37,7 @@ matches:
       information I need to investigate the issue.
       (also, I don't have the time to look into it right now,
       so an issue will make sure that I can keep track of it.)
-
+    #───────────────────────────────────────────────────────────────────────────
   - trigger: "!iso"
     replace: "{{todayISO}}"
     vars:
@@ -61,7 +60,7 @@ matches:
         type: date
         params:
           format: "%d.%m.%Y"
-
+  #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!version"
     replace: "macOS {{version}} (M1)"
     vars:
@@ -69,7 +68,6 @@ matches:
         type: shell
         params:
           cmd: "sw_vers -productVersion"
-
   - trigger: "!nversion"
     replace: |
       ```
@@ -90,7 +88,6 @@ matches:
         type: shell
         params:
           cmd: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; neovide --version | cut -d' ' -f2"
-
   - trigger: "!oversion"
     replace: |
       ```
