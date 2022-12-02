@@ -1,4 +1,4 @@
-title: "Finder Vim Controls & Other Commands"
+title: "Finder Vim Controls"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 anchors:
   - conditions:
@@ -10,17 +10,25 @@ anchors:
         type: variable_if
         name: FINDER_RENAME_MODE
         value: true
-      - &is-normal-mode
+      - &not-rename-mode
         type: variable_unless
         name: FINDER_RENAME_MODE
         value: true
+      - &is-search-mode
+        type: variable_if
+        name: FINDER_SEARCH_MODE
+        value: true
+      - &not-search-mode
+        type: variable_unless
+        name: FINDER_SEARCH_MODE
+        value: true
       - &cut-active
         type: variable_if
-        name: CUT_ACTIVE
+        name: FINDER_CUT_ACTIVE
         value: true
       - &cut-inactive
         type: variable_unless
-        name: CUT_ACTIVE
+        name: FINDER_CUT_ACTIVE
         value: true
   - to:
       - &enter-rename-mode
@@ -31,18 +39,32 @@ anchors:
         set_variable:
           name: FINDER_RENAME_MODE
           value: false
-      - &end-cut
-        set_variable:
-          name: CUT_ACTIVE
-          value: false
       - &rename-notice
         set_notification_message:
           id: insert-notice
-          text: "✏️ RENAME"
+          text: "✏️  RENAME"
       - &remove-rename-notice
         set_notification_message:
           id: insert-notice
           text: ""
+      #─────────────────────────────────────────────────────────────────────────
+      - &enter-search-mode
+        set_variable:
+          name: FINDER_SEARCH_MODE
+          value: true
+      - &leave-search-mode
+        set_variable:
+          name: FINDER_SEARCH_MODE
+          value: false
+      - &search-notice
+        set_notification_message:
+          id: search-notice
+          text: "🔍 SEARCH"
+      - &remove-search-notice
+        set_notification_message:
+          id: search-notice
+          text: ""
+      #─────────────────────────────────────────────────────────────────────────
       - &remove-cut-notice
         set_notification_message:
           id: cut-notice
@@ -51,6 +73,15 @@ anchors:
         set_notification_message:
           id: cut-notice
           text: "✂️ CUT"
+      - &start-cut
+        set_variable:
+          name: FINDER_CUT_ACTIVE
+          value: true
+      - &end-cut
+        set_variable:
+          name: FINDER_CUT_ACTIVE
+          value: false
+#───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: "Finder Vim Controls"
@@ -60,30 +91,30 @@ rules:
         from: {key_code: j}
         to:
           - key_code: down_arrow
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       - type: basic
         from: {key_code: k}
         to:
           - key_code: up_arrow
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       - type: basic
         from: {key_code: h}
         to:
           - key_code: up_arrow
             modifiers: [command]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       - type: basic
         from: {key_code: l}
         to:
           - key_code: down_arrow
             modifiers: [command]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       - type: basic
         from: {key_code: g}
         to:
           - key_code: up_arrow
             modifiers: [option]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       - type: basic
         from:
           key_code: g
@@ -91,16 +122,17 @@ rules:
         to:
           - key_code: down_arrow
             modifiers: [option]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       #─────────────────────────────────────────────────────────────────────────
-      # rename mode - enter
+      # RENAME MODE
+      # enter
       - type: basic
         from: {key_code: return_or_enter}
         to:
           - key_code: return_or_enter
           - *rename-notice
           - *enter-rename-mode
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       - type: basic # fix for Alfred
         from:
           key_code: spacebar
@@ -110,9 +142,8 @@ rules:
             modifiers: [command]
           - *rename-notice
           - *enter-rename-mode
-        conditions: [*is-finder, *is-normal-mode]
-
-      # rename mode - leave
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+      # leave
       - type: basic
         from: {key_code: return_or_enter}
         to:
@@ -126,7 +157,14 @@ rules:
           - key_code: escape
           - *remove-rename-notice
           - *leave-rename-mode
-        conditions: [*is-rename-mode]
+        conditions: [*is-finder, *is-rename-mode]
+      - type: basic
+        from: {key_code: escape}
+        to:
+          - key_code: escape
+          - *remove-rename-notice
+          - *leave-rename-mode
+        conditions: [*is-finder, *is-rename-mode]
       - type: basic
         from:
           key_code: w
@@ -136,7 +174,7 @@ rules:
             modifiers: [command]
           - *remove-rename-notice
           - *leave-rename-mode
-        conditions: [*is-finder]
+        conditions: [*is-finder, *is-rename-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Basic File Operations
       # d = delete
@@ -145,49 +183,49 @@ rules:
         to:
           - key_code: delete_or_backspace
             modifiers: [command]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # y = yank
       - type: basic
         from: {key_code: z} # y = z in German Keyboard
         to:
           - key_code: c
             modifiers: [command]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # r = replicate (duplicate)
       - type: basic
         from: {key_code: r}
         to:
           - key_code: d
             modifiers: [command]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # p = paste
       - type: basic
         from: {key_code: p}
         to:
           - key_code: v
             modifiers: [command]
-        conditions: [*is-finder, *is-normal-mode, *cut-inactive]
+        conditions: [*is-finder, *not-rename-mode, *cut-inactive, *not-search-mode]
       # i = info window
       - type: basic
         from: {key_code: i}
         to:
           - key_code: i
             modifiers: [command]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # v = view window
       - type: basic
         from: {key_code: v}
         to:
           - key_code: j
             modifiers: [command]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # u = undo
       - type: basic
         from: {key_code: u}
         to:
           - key_code: "y" # y = z in German keyboard
             modifiers: [command]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # U = redo
       - type: basic
         from:
@@ -196,7 +234,7 @@ rules:
         to:
           - key_code: "y" # y = z in German keyboard
             modifiers: [command, shift]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # N = New Folder
       - type: basic
         from:
@@ -205,7 +243,7 @@ rules:
         to:
           - key_code: n
             modifiers: [command, shift]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # n = New File
       - type: basic
         from: {key_code: n}
@@ -220,11 +258,11 @@ rules:
               touch "$folder/new"
               open -R "$folder/new"
           - key_code: vk_none
-            hold_down_milliseconds: 750 # delay needed as Finder needs a to pick up new file
+            hold_down_milliseconds: 750 # delay needed as Finder needs to pick up new file
           - key_code: return_or_enter
           - *enter-rename-mode
           - *rename-notice
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Navigation
       # o = pseudo-quick-switcher
@@ -233,13 +271,13 @@ rules:
         to:
           - key_code: g
             modifiers: [command, shift]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # f = open fold
       - type: basic
         from: {key_code: f}
         to:
           - key_code: right_arrow
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # f = close fold
       - type: basic
         from:
@@ -247,7 +285,7 @@ rules:
           modifiers: {mandatory: [shift]}
         to:
           - key_code: left_arrow
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # <C-h> = History Back
       - type: basic
         from:
@@ -256,7 +294,7 @@ rules:
         to:
           - key_code: semicolon # German ö
             modifiers: [command]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # <C-l> = History Forward
       - type: basic
         from:
@@ -265,7 +303,7 @@ rules:
         to:
           - key_code: quote # German ä
             modifiers: [command]
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Finder Extras"
     manipulators:
@@ -290,7 +328,7 @@ rules:
             modifiers:
               - command
               - option
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # copy name
       - type: basic
         from:
@@ -303,75 +341,66 @@ rules:
           - key_code: c
             modifiers: [command]
           - key_code: return_or_enter
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Cut Files"
     manipulators:
       # c = cut
       - type: basic
-        from:
-          key_code: c
+        from: {key_code: c}
         to:
           - key_code: c
             modifiers: [command]
-          - *cut-active
+          - *start-cut
           - *cut-notice
-        conditions: [*is-finder, *is-normal-mode]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # p = paste cutted thing
       - type: basic
-        from:
-          key_code: p
-        conditions: [*is-finder, *is-normal-mode, *cut-active]
+        from: {key_code: p}
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode, *cut-active]
         to:
           - key_code: v
-            modifiers:
-              - command
-              - option
+            modifiers: [command, option]
           - *end-cut
           - *remove-cut-notice
-      # Esc = Abort Cut
-      - type: basic
-        from: {key_code: caps_lock}
-        to:
-          - *remove-cut-notice
-          - *end-cut
-        conditions: [*cut-active]
       # y = yank, which aborts cut
       - type: basic
         from: {key_code: z} # y and z switched on German keyboard
         to:
-          - *remove-cut-notice
           - *end-cut
-        conditions: [*cut-active]
+          - *remove-cut-notice
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode, *cut-active]
+      # Esc = Abort Cut
+      - type: basic
+        from: {key_code: caps_lock}
+        to:
+          - *end-cut
+          - *remove-cut-notice
+        conditions: [*is-finder, *cut-active]
+      - type: basic
+        from: {key_code: escape}
+        to:
+          - *end-cut
+          - *remove-cut-notice
+        conditions: [*is-finder, *cut-active]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Open Locations"
+  - description: "Open Locations (Globally Active)"
     manipulators:
       # Hyper + ⌫ = Open Trash
       - type: basic
         from:
           key_code: delete_or_backspace
-          modifiers:
-            mandatory:
-              - command
-              - shift
-              - option
-              - control
+          modifiers: {mandatory: [control, command, shift, option]}
         to:
           - shell_command: open -a "Finder" ~/.Trash
           - key_code: vk_none
             hold_down_milliseconds: 200
           - key_code: "2" # list view
-            modifiers:
-              - command
+            modifiers: [command]
       # Hyper + F: Open $WD
       - type: basic
         from:
           key_code: f
-          modifiers:
-            mandatory:
-              - control
-              - command
-              - shift
-              - option
+          modifiers: {mandatory: [control, command, shift, option]}
         to:
           - shell_command: open "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"

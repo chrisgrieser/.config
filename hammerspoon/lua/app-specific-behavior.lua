@@ -61,8 +61,8 @@ local function pixelmatorMax(appName, eventType)
 	end
 end
 
-pixelmatorWatcher = aw.new(pixelmatorMax)
-pixelmatorWatcher:start()
+finderWatcher = aw.new(pixelmatorMax)
+finderWatcher:start()
 
 --------------------------------------------------------------------------------
 
@@ -236,6 +236,14 @@ wf_finder = wf.new("Finder")
 		end
 	end)
 
+local function finderPassThrough(appName, eventType, appObject)
+	if appName == "Finder" and eventType == aw.activated then
+		if appObject:allWindows()
+	end
+end
+
+finderWatcher = aw.new(finderPassThrough)
+finderWatcher:start()
 --------------------------------------------------------------------------------
 
 -- ZOOM
