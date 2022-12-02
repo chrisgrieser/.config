@@ -79,6 +79,8 @@ keymap({"n", "x", "o"}, "*", "#") -- backwards on the same key (German Layout)
 -- URLs
 keymap("n", "gü", "/http.*<CR>:nohl<CR>") -- goto next
 keymap("n", "gÜ", "?http.*<CR>:nohl<CR>") -- goto prev
+keymap("n", "gx", "/http.*<CR><Plug>NetrwBrowseX:nohl<CR>") -- open next
+keymap("n", "gX", "?http.*<CR><Plug>NetrwBrowseX:nohl<CR>") -- open prev
 
 -- MARKS
 keymap("", "ä", "`M") -- Goto Mark M
