@@ -61,8 +61,8 @@ local function pixelmatorMax(appName, eventType)
 	end
 end
 
-braveWatcher = aw.new(pixelmatorMax)
-braveWatcher:start()
+pixelmatorWatcher = aw.new(pixelmatorMax)
+pixelmatorWatcher:start()
 
 --------------------------------------------------------------------------------
 
@@ -249,18 +249,20 @@ wf_finder = wf.new("Finder")
 		end
 	end)
 
--- if activated but no window, pass through (no accidental alt-tabbing into it)
-local function finderPassThrough(appName, eventType, finderAppObj)
-	if appName == "Finder" and eventType == aw.activated then
-		runDelayed(0.2, function()
-			local finderWins = #finderAppObj:allWindows() - 1 -- -1 since `:allWindows` includes Desktop as one window
-			if finderWins == 0 then finderAppObj:hide() end
+-- quit Finder if it was started as a helper (e.g., JXA), but has no window
+local function finderWatcher(appName, eventType, finderAppObj)
+	if appName == "Finder" and eventType == aw.launched then
+		repeatFunc({1, 5, 10}, function()
+			if finderAppObj and not (finderAppObj:mainWindow()) then
+				finderAppObj:kill()
+			end
 		end)
 	end
 end
 
-braveWatcher = aw.new(finderPassThrough)
-braveWatcher:start()
+finderAppWatcher = aw.new(finderWatcher)
+finderAppWatcher:start()
+
 --------------------------------------------------------------------------------
 
 -- ZOOM

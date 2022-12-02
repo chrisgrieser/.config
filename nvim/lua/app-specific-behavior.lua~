@@ -232,7 +232,7 @@ end)
 wf_finder = wf.new("Finder")
 	:subscribe(wf.windowDestroyed, function()
 		if #wf_finder:getWindows() == 0 then
-			app("Finder"):kill()
+			app("Finder"):hide()
 		end
 	end)
 	:subscribe(wf.windowFocused, function(currentWin)
@@ -262,6 +262,13 @@ end
 
 finderAppWatcher = aw.new(finderWatcher)
 finderAppWatcher:start()
+
+-- quit when last window closed
+wf_finder = wf.new("Finder")
+wf_finder:subscribe(wf.windowDestroyed, function()
+	if #wf_finder:getWindows() == 0 then
+	end
+end)
 
 --------------------------------------------------------------------------------
 
