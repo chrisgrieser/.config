@@ -43,12 +43,16 @@ anchors:
         set_notification_message:
           id: insert-notice
           text: "✏️  RENAME"
+      - &insert-notice
+        set_notification_message:
+          id: insert-notice
+          text: "✏️  INSERT"
       - &remove-rename-notice
         set_notification_message:
           id: insert-notice
           text: ""
-      #─────────────────────────────────────────────────────────────────────────
       - &enter-search-mode
+        #─────────────────────────────────────────────────────────────────────────
         set_variable:
           name: FINDER_SEARCH_MODE
           value: true
@@ -59,13 +63,13 @@ anchors:
       - &search-notice
         set_notification_message:
           id: search-notice
-          text: "🔍 SEARCH"
+          text: "\U0001F50D SEARCH"
       - &remove-search-notice
         set_notification_message:
           id: search-notice
           text: ""
-      #─────────────────────────────────────────────────────────────────────────
       - &remove-cut-notice
+        #─────────────────────────────────────────────────────────────────────────
         set_notification_message:
           id: cut-notice
           text: ""
@@ -83,8 +87,9 @@ anchors:
           value: false
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
+#───────────────────────────────────────────────────────────────────────────────
 rules:
-  - description: "Finder Vim Controls"
+  - description: "\U0001F4C2 Finder Vim Controls"
     manipulators:
       # hjkl, ggG
       - type: basic
@@ -133,14 +138,14 @@ rules:
           - *rename-notice
           - *enter-rename-mode
         conditions: [*is-finder, *not-rename-mode, *not-search-mode]
-      - type: basic # fix for Alfred
+      - type: basic # so you can insert text in Alfred/Spotlight while Finder is frontmost
         from:
           key_code: spacebar
           modifiers: {mandatory: [command]}
         to:
           - key_code: spacebar
             modifiers: [command]
-          - *rename-notice
+          - *insert-notice
           - *enter-rename-mode
         conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # leave
@@ -176,13 +181,19 @@ rules:
           - *leave-rename-mode
         conditions: [*is-finder, *is-rename-mode]
       #─────────────────────────────────────────────────────────────────────────
-      # Selections
+      # Selections & View
       # a = select all
       - type: basic
         from: {key_code: a}
         to:
           - key_code: a
             modifiers: [command]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+      - type: basic
+        from: {key_code: period}
+        to:
+          - key_code: period
+            modifiers: [command, shift]
         conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       # <S-Space> = add down to selection
       - type: basic
@@ -283,24 +294,15 @@ rules:
         conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Navigation
-      # o = pseudo-quick-switcher
+      # o = open fold
       - type: basic
         from: {key_code: o}
         to:
-          - key_code: g
-            modifiers: [command, shift]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
-      # f = open fold
-      - type: basic
-        from: {key_code: f}
-        to:
           - key_code: right_arrow
         conditions: [*is-finder, *not-rename-mode, *not-search-mode]
-      # f = close fold
+      # c = close fold
       - type: basic
-        from:
-          key_code: f
-          modifiers: {mandatory: [shift]}
+        from: {key_code: c}
         to:
           - key_code: left_arrow
         conditions: [*is-finder, *not-rename-mode, *not-search-mode]
@@ -322,8 +324,81 @@ rules:
           - key_code: quote # German ä
             modifiers: [command]
         conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+      #─────────────────────────────────────────────────────────────────────────
+      # Search Mode
+      #Enter/Exit
+      - type: basic
+        from: {key_code: f}
+        to:
+          - key_code: right_arrow
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Finder Extras"
+  - description: "\U0001F4C2 Move Files"
+    manipulators:
+      # m = move
+      - type: basic
+        from: {key_code: m}
+        to:
+          - key_code: c
+            modifiers: [command]
+          - *start-cut
+          - *cut-notice
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+      # p / cmd+v = paste cutted thing
+      - type: basic
+        from: {key_code: p}
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode, *cut-active]
+        to:
+          - key_code: v
+            modifiers: [command, option]
+          - *end-cut
+          - *remove-cut-notice
+      - type: basic
+        from:
+          key_code: v
+          modifiers: {mandatory: [command]}
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode, *cut-active]
+        to:
+          - key_code: v
+            modifiers: [command, option]
+          - *end-cut
+          - *remove-cut-notice
+      # y / cmd+c = yank, which also aborts cut
+      - type: basic
+        from: {key_code: z} # y and z switched on German keyboard
+        to:
+          - key_code: c
+            modifiers: [command]
+          - *end-cut
+          - *remove-cut-notice
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode, *cut-active]
+      - type: basic
+        from:
+          key_code: c
+          modifiers: {mandatory: [command]}
+        to:
+          - key_code: c
+            modifiers: [command]
+          - *end-cut
+          - *remove-cut-notice
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode, *cut-active]
+      # Esc = Abort Cut
+      - type: basic
+        from: {key_code: caps_lock}
+        to:
+          - *end-cut
+          - *remove-cut-notice
+        conditions: [*is-finder, *cut-active]
+      - type: basic
+        from: {key_code: escape}
+        to:
+          - *end-cut
+          - *remove-cut-notice
+        conditions: [*is-finder, *cut-active]
+  #─────────────────────────────────────────────────────────────────────────────
+  #─────────────────────────────────────────────────────────────────────────────
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "\U0001F4C2 Finder Extras"
     manipulators:
       # Sidebar
       - type: basic
@@ -361,48 +436,7 @@ rules:
           - key_code: return_or_enter
         conditions: [*is-finder, *not-rename-mode, *not-search-mode]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Cut Files"
-    manipulators:
-      # c = cut
-      - type: basic
-        from: {key_code: c}
-        to:
-          - key_code: c
-            modifiers: [command]
-          - *start-cut
-          - *cut-notice
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
-      # p = paste cutted thing
-      - type: basic
-        from: {key_code: p}
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode, *cut-active]
-        to:
-          - key_code: v
-            modifiers: [command, option]
-          - *end-cut
-          - *remove-cut-notice
-      # y = yank, which aborts cut
-      - type: basic
-        from: {key_code: z} # y and z switched on German keyboard
-        to:
-          - *end-cut
-          - *remove-cut-notice
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode, *cut-active]
-      # Esc = Abort Cut
-      - type: basic
-        from: {key_code: caps_lock}
-        to:
-          - *end-cut
-          - *remove-cut-notice
-        conditions: [*is-finder, *cut-active]
-      - type: basic
-        from: {key_code: escape}
-        to:
-          - *end-cut
-          - *remove-cut-notice
-        conditions: [*is-finder, *cut-active]
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "Open Locations (Globally Active)"
+  - description: "\U0001F4C2 Open Locations (Globally Active)"
     manipulators:
       # Hyper + ⌫ = Open Trash
       - type: basic
