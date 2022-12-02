@@ -6,13 +6,13 @@ anchors:
         type: frontmost_application_if
         bundle_identifiers:
           - ^com\.apple\.finder$
-      - &is-rename-mode
+      - &is-insert-mode
         type: variable_if
-        name: FINDER_RENAME_MODE
+        name: FINDER_INSERT_MODE
         value: true
-      - &not-rename-mode
+      - &not-insert-mode
         type: variable_unless
-        name: FINDER_RENAME_MODE
+        name: FINDER_INSERT_MODE
         value: true
       - &is-search-mode
         type: variable_if
@@ -32,23 +32,19 @@ anchors:
         value: true
   #─────────────────────────────────────────────────────────────────────────────
   - to:
-      - &enter-rename-mode
-        set_variable: # Rename Mode
-          name: FINDER_RENAME_MODE
+      - &enter-insert-mode
+        set_variable: # Insert Mode
+          name: FINDER_INSERT_MODE
           value: true
-      - &leave-rename-mode
+      - &leave-insert-mode
         set_variable:
-          name: FINDER_RENAME_MODE
+          name: FINDER_INSERT_MODE
           value: false
-      - &rename-notice
-        set_notification_message:
-          id: insert-notice
-          text: "✏️  RENAME"
       - &insert-notice
         set_notification_message:
           id: insert-notice
           text: "✏️  INSERT"
-      - &remove-rename-notice
+      - &remove-insert-notice
         set_notification_message:
           id: insert-notice
           text: ""
@@ -95,30 +91,30 @@ rules:
         from: {key_code: j}
         to:
           - key_code: down_arrow
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       - type: basic
         from: {key_code: k}
         to:
           - key_code: up_arrow
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       - type: basic
         from: {key_code: h}
         to:
           - key_code: up_arrow
             modifiers: [command]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       - type: basic
         from: {key_code: l}
         to:
           - key_code: down_arrow
             modifiers: [command]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       - type: basic
         from: {key_code: g}
         to:
           - key_code: up_arrow
             modifiers: [option]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       - type: basic
         from:
           key_code: g
@@ -126,83 +122,85 @@ rules:
         to:
           - key_code: down_arrow
             modifiers: [option]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       #─────────────────────────────────────────────────────────────────────────
-      # RENAME MODE
+      # INSERT MODE
       # enter
-      - type: basic
+      - type: basic # Rename
         from: {key_code: return_or_enter}
         to:
           - key_code: return_or_enter
-          - *rename-notice
-          - *enter-rename-mode
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+          - *insert-notice
+          - *enter-insert-mode
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+      - type: basic # Switch Directory
+        from: {key_code: s}
+        to:
+          - {key_code: g, modifiers: [command, shift]}
+          - *insert-notice
+          - *enter-insert-mode
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       - type: basic # so you can insert text in Alfred/Spotlight while Finder is frontmost
         from:
           key_code: spacebar
           modifiers: {mandatory: [command]}
         to:
-          - key_code: spacebar
-            modifiers: [command]
+          - {key_code: spacebar, modifiers: [command]}
           - *insert-notice
-          - *enter-rename-mode
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+          - *enter-insert-mode
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # leave
       - type: basic
         from: {key_code: return_or_enter}
         to:
           - key_code: return_or_enter
-          - *remove-rename-notice
-          - *leave-rename-mode
-        conditions: [*is-finder, *is-rename-mode]
+          - *remove-insert-notice
+          - *leave-insert-mode
+        conditions: [*is-finder, *is-insert-mode]
       - type: basic
         from: {key_code: caps_lock}
         to:
           - key_code: escape
-          - *remove-rename-notice
-          - *leave-rename-mode
-        conditions: [*is-finder, *is-rename-mode]
+          - *remove-insert-notice
+          - *leave-insert-mode
+        conditions: [*is-finder, *is-insert-mode]
       - type: basic
         from: {key_code: escape}
         to:
           - key_code: escape
-          - *remove-rename-notice
-          - *leave-rename-mode
-        conditions: [*is-finder, *is-rename-mode]
+          - *remove-insert-notice
+          - *leave-insert-mode
+        conditions: [*is-finder, *is-insert-mode]
       - type: basic
         from:
           key_code: w
           modifiers: {mandatory: [command]}
         to:
-          - key_code: w
-            modifiers: [command]
-          - *remove-rename-notice
-          - *leave-rename-mode
-        conditions: [*is-finder, *is-rename-mode]
+          - {key_code: w, modifiers: [command]}
+          - *remove-insert-notice
+          - *leave-insert-mode
+        conditions: [*is-finder, *is-insert-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Selections & View
       # a = select all
       - type: basic
         from: {key_code: a}
         to:
-          - key_code: a
-            modifiers: [command]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+          - {key_code: a, modifiers: [command]}
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       - type: basic
         from: {key_code: period}
         to:
-          - key_code: period
-            modifiers: [command, shift]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+          - {key_code: period, modifiers: [command, shift]}
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # <S-Space> = add down to selection
       - type: basic
         from:
           key_code: spacebar
           modifiers: {mandatory: [shift]}
         to:
-          - key_code: down_arrow
-            modifiers: [shift]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+          - {key_code: down_arrow, modifiers: [shift]}
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Basic File Operations
       # d = delete
@@ -211,49 +209,49 @@ rules:
         to:
           - key_code: delete_or_backspace
             modifiers: [command]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # y = yank
       - type: basic
         from: {key_code: z} # y = z in German Keyboard
         to:
           - key_code: c
             modifiers: [command]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # r = replicate (duplicate)
       - type: basic
         from: {key_code: r}
         to:
           - key_code: d
             modifiers: [command]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # p = paste
       - type: basic
         from: {key_code: p}
         to:
           - key_code: v
             modifiers: [command]
-        conditions: [*is-finder, *not-rename-mode, *cut-inactive, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *cut-inactive, *not-search-mode]
       # i = info window
       - type: basic
         from: {key_code: i}
         to:
           - key_code: i
             modifiers: [command]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # v = view window
       - type: basic
         from: {key_code: v}
         to:
           - key_code: j
             modifiers: [command]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # u = undo
       - type: basic
         from: {key_code: u}
         to:
           - key_code: "y" # y = z in German keyboard
             modifiers: [command]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # U = redo
       - type: basic
         from:
@@ -262,7 +260,7 @@ rules:
         to:
           - key_code: "y" # y = z in German keyboard
             modifiers: [command, shift]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # N = New Folder
       - type: basic
         from:
@@ -271,7 +269,7 @@ rules:
         to:
           - key_code: n
             modifiers: [command, shift]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # n = New File
       - type: basic
         from: {key_code: n}
@@ -288,9 +286,9 @@ rules:
           - key_code: vk_none
             hold_down_milliseconds: 750 # delay needed as Finder needs to pick up new file
           - key_code: return_or_enter
-          - *enter-rename-mode
-          - *rename-notice
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+          - *enter-insert-mode
+          - *insert-notice
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Navigation
       # o = open fold
@@ -298,13 +296,13 @@ rules:
         from: {key_code: o}
         to:
           - key_code: right_arrow
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # c = close fold
       - type: basic
         from: {key_code: c}
         to:
           - key_code: left_arrow
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # <C-h> = History Back
       - type: basic
         from:
@@ -313,7 +311,7 @@ rules:
         to:
           - key_code: semicolon # German ö
             modifiers: [command]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # <C-l> = History Forward
       - type: basic
         from:
@@ -322,7 +320,7 @@ rules:
         to:
           - key_code: quote # German ä
             modifiers: [command]
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Search Mode
       # Enter/Exit
@@ -331,7 +329,7 @@ rules:
         to:
           - *enter-search-mode
           - *search-notice
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       - type: basic
         from: {key_code: capslock}
         to:
@@ -348,9 +346,110 @@ rules:
       - type: basic
         from: {key_code: a}
         to: [{key_code: a}, *leave-search-mode, *remove-search-notice]
-          - key_code: a
-          - *leave-search-mode
-          - *remove-search-notice
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: b}
+        to: [{key_code: b}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: c}
+        to: [{key_code: c}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: d}
+        to: [{key_code: d}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: e}
+        to: [{key_code: e}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: f}
+        to: [{key_code: f}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: g}
+        to: [{key_code: g}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: h}
+        to: [{key_code: h}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: i}
+        to: [{key_code: i}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: j}
+        to: [{key_code: j}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: k}
+        to: [{key_code: k}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: l}
+        to: [{key_code: l}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: m}
+        to: [{key_code: m}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: n}
+        to: [{key_code: n}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: o}
+        to: [{key_code: o}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: p}
+        to: [{key_code: p}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: q}
+        to: [{key_code: q}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: r}
+        to: [{key_code: r}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: s}
+        to: [{key_code: s}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: t}
+        to: [{key_code: t}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: u}
+        to: [{key_code: u}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: v}
+        to: [{key_code: v}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: w}
+        to: [{key_code: w}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: x}
+        to: [{key_code: x}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: y}
+        to: [{key_code: y}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: z}
+        to: [{key_code: z}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: period}
+        to: [{key_code: period}, *leave-search-mode, *remove-search-notice]
         conditions: [*is-finder, *is-search-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "\U0001F4C2 Move Files"
@@ -363,11 +462,11 @@ rules:
             modifiers: [command]
           - *start-cut
           - *cut-notice
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # p / cmd+v = paste cutted thing
       - type: basic
         from: {key_code: p}
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode, *cut-active]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *cut-active]
         to:
           - key_code: v
             modifiers: [command, option]
@@ -377,7 +476,7 @@ rules:
         from:
           key_code: v
           modifiers: {mandatory: [command]}
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode, *cut-active]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *cut-active]
         to:
           - key_code: v
             modifiers: [command, option]
@@ -391,7 +490,7 @@ rules:
             modifiers: [command]
           - *end-cut
           - *remove-cut-notice
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode, *cut-active]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *cut-active]
       - type: basic
         from:
           key_code: c
@@ -401,7 +500,7 @@ rules:
             modifiers: [command]
           - *end-cut
           - *remove-cut-notice
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode, *cut-active]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *cut-active]
       # Esc = Abort Cut
       - type: basic
         from: {key_code: caps_lock}
@@ -441,7 +540,7 @@ rules:
             modifiers:
               - command
               - option
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # copy name
       - type: basic
         from:
@@ -454,7 +553,7 @@ rules:
           - key_code: c
             modifiers: [command]
           - key_code: return_or_enter
-        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "\U0001F4C2 Open Locations (Globally Active)"
     manipulators:

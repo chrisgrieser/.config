@@ -45,7 +45,7 @@ rules:
             name: LEADER_ACTIVE
             value: true
           - type: variable_unless
-            name: FINDER_RENAME_MODE
+            name: FINDER_INSERT_MODE
             value: true
           - type: variable_unless
             name: FINDER_SEARCH_MODE
