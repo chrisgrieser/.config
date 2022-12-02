@@ -44,6 +44,9 @@ rules:
           - type: variable_unless
             name: LEADER_ACTIVE
             value: true
+          - type: variable_unless
+            name: FINDER_INSERT_MODE
+            value: true
           - type: frontmost_application_unless
             bundle_identifiers:
               - ^dev\.warp\.Warp-Stable$
