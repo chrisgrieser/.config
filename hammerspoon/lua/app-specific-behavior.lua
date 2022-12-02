@@ -115,7 +115,7 @@ wf_browser_all = wf.new("Brave Browser")
 -- if activated but no window, pass through (no accidental alt-tabbing into it)
 local function browserPassThrough(appName, eventType, browserAppObj)
 	if appName == "Brave Browser" and eventType == aw.activated then
-		runDelayed(0.05, function()
+		runDelayed(0.1, function()
 			local browserWins = #browserAppObj:allWindows()
 			if browserWins == 0 then browserAppObj:hide() end
 		end)
@@ -252,7 +252,7 @@ wf_finder = wf.new("Finder")
 -- if activated but no window, pass through (no accidental alt-tabbing into it)
 local function finderPassThrough(appName, eventType, finderAppObj)
 	if appName == "Finder" and eventType == aw.activated then
-		runDelayed(0.1, function()
+		runDelayed(0.2, function()
 			local finderWins = #finderAppObj:allWindows() - 1 -- -1 since `:allWindows` includes Desktop as one window
 			if finderWins == 0 then finderAppObj:hide() end
 		end)
