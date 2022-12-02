@@ -51,7 +51,7 @@ rules:
             name: FINDER_SEARCH_MODE
             value: true
           - type: variable_unless
-            name: FINDER_CUT_ACTIVE
+            name: FINDER_MOVE_ACTIVE
             value: true
           - type: frontmost_application_unless
             bundle_identifiers:
