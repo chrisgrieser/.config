@@ -325,18 +325,18 @@ end
 
 --------------------------------------------------------------------------------
 -- MOVEMENT
--- performed as command makes them less glitchy
+-- performed via `:normal` makes them less glitchy
 
 function M.moveLineDown()
 	if lineNo(".") == lineNo("$") then return end
 	cmd [[. move +1]]
-	cmd [[normal! ==]]
+	if bo.filetype ~= "yaml" then cmd [[normal! ==]] end
 end
 
 function M.moveLineUp()
 	if lineNo(".") == 1 then return end
 	cmd [[. move -2]]
-	cmd [[normal! ==]]
+	if bo.filetype ~= "yaml" then cmd [[normal! ==]] end
 end
 
 function M.moveCharRight()

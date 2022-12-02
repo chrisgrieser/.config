@@ -47,6 +47,12 @@ rules:
           - type: variable_unless
             name: FINDER_RENAME_MODE
             value: true
+          - type: variable_unless
+            name: FINDER_SEARCH_MODE
+            value: true
+          - type: variable_unless
+            name: FINDER_CUT_ACTIVE
+            value: true
           - type: frontmost_application_unless
             bundle_identifiers:
               - ^dev\.warp\.Warp-Stable$
