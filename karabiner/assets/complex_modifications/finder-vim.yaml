@@ -1,7 +1,7 @@
 title: "Finder Vim Controls & Other Commands"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 anchors:
-  - condition:
+  - conditions:
       - &is-finder
         type: frontmost_application_if
         bundle_identifiers:
@@ -38,7 +38,7 @@ anchors:
       - &rename-notice
         set_notification_message:
           id: insert-notice
-          text: "✏️ INSERT"
+          text: "✏️ RENAME"
       - &remove-rename-notice
         set_notification_message:
           id: insert-notice
@@ -47,6 +47,10 @@ anchors:
         set_notification_message:
           id: cut-notice
           text: ""
+      - &cut-notice
+        set_notification_message:
+          id: cut-notice
+          text: "✂️ CUT"
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: "Finder Vim Controls"
@@ -162,6 +166,20 @@ rules:
         to:
           - key_code: v
             modifiers: [command]
+        conditions: [*is-finder, *is-normal-mode, *cut-inactive]
+      # i = info window
+      - type: basic
+        from: {key_code: i}
+        to:
+          - key_code: i
+            modifiers: [command]
+        conditions: [*is-finder, *is-normal-mode]
+      # v = view window
+      - type: basic
+        from: {key_code: v}
+        to:
+          - key_code: j
+            modifiers: [command]
         conditions: [*is-finder, *is-normal-mode]
       # u = undo
       - type: basic
@@ -249,7 +267,7 @@ rules:
             modifiers: [command]
         conditions: [*is-finder, *is-normal-mode]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Finder Basic Control"
+  - description: "Finder Extras"
     manipulators:
       # Sidebar
       - type: basic
@@ -287,34 +305,23 @@ rules:
           - key_code: return_or_enter
         conditions: [*is-finder, *is-normal-mode]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Cut & Paste"
+  - description: "Cut Files"
     manipulators:
+      # c = cut
       - type: basic
         from:
-          key_code: x
-          modifiers:
-            mandatory:
-              - command
+          key_code: c
         to:
           - key_code: c
-            modifiers:
-              - command
-          - set_variable:
-              name: CUT_ACTIVE
-              value: true
-          - set_notification_message:
-              id: cut-notice
-              text: "✂️ Cut"
-        conditions: [*is-finder]
+            modifiers: [command]
+          - *cut-active
+          - *cut-notice
+        conditions: [*is-finder, *is-normal-mode]
+      # p = paste cutted thing
       - type: basic
         from:
-          key_code: v
-          modifiers:
-            mandatory:
-              - command
-        conditions:
-          - *cut-active
-          - *is-finder
+          key_code: p
+        conditions: [*is-finder, *is-normal-mode, *cut-active]
         to:
           - key_code: v
             modifiers:
@@ -322,41 +329,20 @@ rules:
               - option
           - *end-cut
           - *remove-cut-notice
-      # Abort with Hyper/Esc
+      # Esc = Abort Cut
       - type: basic
-        from:
-          key_code: caps_lock
-        conditions:
-          - *cut-active
-          - *is-finder
+        from: {key_code: caps_lock}
         to:
-          - *end-cut
           - *remove-cut-notice
+          - *end-cut
+        conditions: [*cut-active]
+      # y = yank, which aborts cut
       - type: basic
-        from:
-          key_code: escape
-        conditions:
-          - *cut-active
-          - *is-finder
+        from: {key_code: z} # y and z switched on German keyboard
         to:
-          - *end-cut
           - *remove-cut-notice
-      # Abort when deciding to copy instead
-      - type: basic
-        from:
-          key_code: c
-          modifiers:
-            mandatory:
-              - command
-        conditions:
-          - *cut-active
-          - *is-finder
-        to:
-          - key_code: c
-            modifiers:
-              - command
           - *end-cut
-          - *remove-cut-notice
+        conditions: [*cut-active]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Open Locations"
     manipulators:
