@@ -212,7 +212,25 @@ rules:
           - *leave-insert-mode
         conditions: [*is-finder, *is-insert-mode]
       #─────────────────────────────────────────────────────────────────────────
-      # Selections & View
+      # Selections & Window
+      # w = close window/tab (:close)
+      - type: basic
+        from: {key_code: w}
+        to:
+          - {key_code: w, modifiers: [command]}
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+      # Cycle windows
+      - type: basic
+        from: {key_code: tab}
+        to:
+          - {key_code: grave_accent_and_tilde, modifiers: [command]}
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+      # toggle hidden files visibility
+      - type: basic
+        from: {key_code: period}
+        to:
+          - {key_code: period, modifiers: [command, shift]}
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # a = select all
       - type: basic
         from: {key_code: a}
@@ -501,6 +519,46 @@ rules:
       - type: basic
         from: {key_code: period}
         to: [{key_code: period}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: "0"}
+        to: [{key_code: "0"}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: "1"}
+        to: [{key_code: "1"}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: "2"}
+        to: [{key_code: "2"}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: "3"}
+        to: [{key_code: "3"}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: "4"}
+        to: [{key_code: "4"}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: "5"}
+        to: [{key_code: "5"}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: "6"}
+        to: [{key_code: "6"}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: "7"}
+        to: [{key_code: "7"}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: "8"}
+        to: [{key_code: "8"}, *leave-search-mode, *remove-search-notice]
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: "9"}
+        to: [{key_code: "9"}, *leave-search-mode, *remove-search-notice]
         conditions: [*is-finder, *is-search-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "\U0001F4C2 Move Files"
