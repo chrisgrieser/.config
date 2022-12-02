@@ -4,8 +4,13 @@ anchors:
   - conditions:
       - &is-finder
         type: frontmost_application_if
-        bundle_identifiers:
-          - ^com\.apple\.finder$
+        bundle_identifiers: [^com\.apple\.finder$]
+      - &is-German-keyboard
+        type: input_source_if
+        language: [de]
+      - &not-German-keyboard
+        type: input_source_unless
+        language: [de]
       - &is-insert-mode
         type: variable_if
         name: FINDER_INSERT_MODE
@@ -216,7 +221,13 @@ rules:
         to:
           - key_code: c
             modifiers: [command]
-        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *is-German-keyboard]
+      - type: basic
+        from: {key_code: "y"}
+        to:
+          - key_code: c
+            modifiers: [command]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *not-German-keyboard]
       # r = replicate (duplicate)
       - type: basic
         from: {key_code: r}
@@ -249,10 +260,24 @@ rules:
       - type: basic
         from: {key_code: u}
         to:
+          - key_code: z
+            modifiers: [command]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *not-German-keyboard]
+      - type: basic
+        from: {key_code: u}
+        to:
           - key_code: "y" # y = z in German keyboard
             modifiers: [command]
-        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *is-German-keyboard]
       # U = redo
+      - type: basic
+        from:
+          key_code: u
+          modifiers: {mandatory: [shift]}
+        to:
+          - key_code: z
+            modifiers: [command, shift]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *not-German-keyboard]
       - type: basic
         from:
           key_code: u
@@ -260,7 +285,7 @@ rules:
         to:
           - key_code: "y" # y = z in German keyboard
             modifiers: [command, shift]
-        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *is-German-keyboard]
       # N = New Folder
       - type: basic
         from:
@@ -311,7 +336,7 @@ rules:
         to:
           - key_code: semicolon # German ö
             modifiers: [command]
-        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *is-German-keyboard]
       # <C-l> = History Forward
       - type: basic
         from:
@@ -320,7 +345,7 @@ rules:
         to:
           - key_code: quote # German ä
             modifiers: [command]
-        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *is-German-keyboard]
       #─────────────────────────────────────────────────────────────────────────
       # Search Mode
       # Enter/Exit
@@ -484,13 +509,21 @@ rules:
           - *remove-cut-notice
       # y / cmd+c = yank, which also aborts cut
       - type: basic
+        from: {key_code: "y"}
+        to:
+          - key_code: c
+            modifiers: [command]
+          - *end-cut
+          - *remove-cut-notice
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *cut-active, *not-German-keyboard]
+      - type: basic
         from: {key_code: z} # y and z switched on German keyboard
         to:
           - key_code: c
             modifiers: [command]
           - *end-cut
           - *remove-cut-notice
-        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *cut-active]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *cut-active, *is-German-keyboard]
       - type: basic
         from:
           key_code: c
