@@ -10,6 +10,7 @@ require("nvim-treesitter.configs").setup {
 		"markdown_inline",
 		"bibtex",
 		"gitignore",
+		"diff",
 		"regex",
 		"python",
 		"lua",
