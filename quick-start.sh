@@ -65,32 +65,34 @@ ln -sf "$DOTFILE_FOLDER/searchlink/.searchlink" ~
 [[ -e ~/.hammerspoon ]] && rm -rf ~/.hammerspoon
 ln -sf "$DOTFILE_FOLDER/hammerspoon" ~/.hammerspoon
 
-# Warp
-[[ -e ~/.warp ]] && rm -rf ~/.warp
-ln -sf "$DOTFILE_FOLDER/warp" ~/.warp
-
-# Marta
-# INFO: Marta as default folder opener set in Duti Script
-ln -sf /Applications/Marta.app/Contents/Resources/launcher /opt/homebrew/bin/marta
-MARTA_DIR=~"/Library/Application Support/org.yanex.marta"
-[[ -e "$MARTA_DIR" ]] && rm -rf "$MARTA_DIR"
-ln -sf "$DOTFILE_FOLDER/Marta" "$MARTA_DIR"
-
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"
 [[ -e "$ESPANSO_DIR" ]] && rm -rf "$ESPANSO_DIR"
 ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
+
+# Warp
+# [[ -e ~/.warp ]] && rm -rf ~/.warp
+# ln -sf "$DOTFILE_FOLDER/warp" ~/.warp
+
+# Marta
+# INFO: Marta as default folder opener set in Duti Script
+# ln -sf /Applications/Marta.app/Contents/Resources/launcher /opt/homebrew/bin/marta
+# MARTA_DIR=~"/Library/Application Support/org.yanex.marta"
+# [[ -e "$MARTA_DIR" ]] && rm -rf "$MARTA_DIR"
+# ln -sf "$DOTFILE_FOLDER/Marta" "$MARTA_DIR"
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # INFO: already set up, no need to run again.
 # Only left here for reference, or when dotfile folder location is changed
 
 # Brave PWAs
 
-BROWSER="Brave Browser"
-[[ -e ~"/Applications/$BROWSER Apps.localized" ]] && rm -rf ~"/Applications/$BROWSER Apps.localized"
-ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
+# BROWSER="Brave Browser"
+# [[ -e ~"/Applications/$BROWSER Apps.localized" ]] && rm -rf ~"/Applications/$BROWSER Apps.localized"
+# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
 
 # to keep private stuff out of the dotfile repo
 # ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/hammerspoon-private.lua" "$DOTFILE_FOLDER/hammerspoon/lua/private.lua"

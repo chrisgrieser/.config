@@ -51,7 +51,7 @@ anchors:
 rules:
   - description: "Finder Vim Controls"
     manipulators:
-      # hjkl
+      # hjkl, ggG
       - type: basic
         from: {key_code: j}
         to:
@@ -73,6 +73,20 @@ rules:
         to:
           - key_code: down_arrow
             modifiers: [command]
+        conditions: [*is-finder, *is-normal-mode]
+      - type: basic
+        from: {key_code: g}
+        to:
+          - key_code: up_arrow
+            modifiers: [option]
+        conditions: [*is-finder, *is-normal-mode]
+      - type: basic
+        from:
+          key_code: g
+          modifiers: {mandatory: [shift]}
+        to:
+          - key_code: down_arrow
+            modifiers: [option]
         conditions: [*is-finder, *is-normal-mode]
       # insert mode (rename mode) via <CR>
       - type: basic
@@ -142,7 +156,7 @@ rules:
               - shift
         conditions: [*is-finder]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Cut & Paste Workaround"
+  - description: "Cut & Paste"
     manipulators:
       - type: basic
         from:
