@@ -59,19 +59,14 @@ duti -s com.brave.Browser webloc all     # link files
 duti -s com.brave.Browser url all     # link files
 
 # Marta
-duti -s org.yanex.marta file             # file links
-duti -s marco com.sublimetext.4 all      # marta config files
-defaults write -g NSFileViewer -string org.yanex.marta
-defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="org.yanex.marta";}'
-
-brew uninstall duti
-# -> then restart mac
+# defaults write -g NSFileViewer -string org.yanex.marta
+# defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="org.yanex.marta";}'
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # to restore Finder as default
-# defaults delete -g NSFileViewer
-# defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="com.apple.finder";}'
+defaults delete -g NSFileViewer
+defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="com.apple.finder";}'
 # Reference
 # https://binarynights.com/manual#fileviewer
 # https://github.com/marta-file-manager/marta-issues/issues/861

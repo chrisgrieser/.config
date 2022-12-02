@@ -22,6 +22,7 @@ anchors:
         type: variable_unless
         name: CUT_ACTIVE
         value: true
+  - to:
   - &enter-insert-mode
     set_variable:
       name: FINDER_INSERT_MODE
@@ -89,12 +90,21 @@ rules:
           - *enter-normal-mode
         conditions: [*is-finder, *is-insert-mode]
       - type: basic
-        from: {key_code: capslock}
+        from: {key_code: caps_lock}
         to:
           - key_code: escape
           - *remove-insert-notice
           - *enter-normal-mode
-        conditions: [*is-finder, *is-insert-mode]
+        conditions: [*is-insert-mode]
+      - type: basic
+        from:
+          key_code: w
+          modifiers: {mandatory: [command]}
+        to:
+          - key_code: escape
+          - *remove-insert-notice
+          - *enter-normal-mode
+        conditions: [*is-finder]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Finder Basic Control"
     manipulators:
@@ -102,9 +112,7 @@ rules:
       - type: basic
         from:
           key_code: "1"
-          modifiers:
-            mandatory:
-              - command
+          modifiers: {mandatory: [command]}
         to:
           - key_code: s
             modifiers:
@@ -115,9 +123,7 @@ rules:
       - type: basic
         from:
           key_code: p
-          modifiers:
-            mandatory:
-              - control
+          modifiers: {mandatory: [control]}
         to:
           - key_code: c
             modifiers:
@@ -128,9 +134,7 @@ rules:
       - type: basic
         from:
           key_code: o
-          modifiers:
-            mandatory:
-              - command
+          modifiers: {mandatory: [command]}
         to:
           - key_code: g
             modifiers:
