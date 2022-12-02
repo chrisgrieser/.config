@@ -102,7 +102,7 @@ rules:
           key_code: spacebar
           modifiers: {mandatory: [command]}
         to:
-          - key_code: delete_or_backspace
+          - key_code: spacebar
             modifiers: [command]
           - *rename-notice
           - *enter-rename-mode
@@ -134,7 +134,7 @@ rules:
           - *leave-rename-mode
         conditions: [*is-finder]
       #─────────────────────────────────────────────────────────────────────────
-      # Basic Operation
+      # Basic File Operations
       # d = delete
       - type: basic
         from: {key_code: d}
@@ -147,6 +147,13 @@ rules:
         from: {key_code: z} # y = z in German Keyboard
         to:
           - key_code: c
+            modifiers: [command]
+        conditions: [*is-finder, *is-normal-mode]
+      # r = replicate (duplicate)
+      - type: basic
+        from: {key_code: r}
+        to:
+          - key_code: d
             modifiers: [command]
         conditions: [*is-finder, *is-normal-mode]
       # p = paste
@@ -183,8 +190,7 @@ rules:
         conditions: [*is-finder, *is-normal-mode]
       # n = New File
       - type: basic
-        from:
-          key_code: n
+        from: {key_code: n}
         to:
           - shell_command: |
               folder=$(osascript -e '
@@ -196,18 +202,51 @@ rules:
               touch "$folder/new"
               open -R "$folder/new"
           - key_code: vk_none
-            hold_down_milliseconds: 500 # delay needed as Finder needs a to pick up new file
+            hold_down_milliseconds: 750 # delay needed as Finder needs a to pick up new file
           - key_code: return_or_enter
           - *enter-rename-mode
           - *rename-notice
         conditions: [*is-finder, *is-normal-mode]
+      #─────────────────────────────────────────────────────────────────────────
+      # Navigation
       # o = pseudo-quick-switcher
       - type: basic
-        from:
-          key_code: o
+        from: {key_code: o}
         to:
           - key_code: g
             modifiers: [command, shift]
+        conditions: [*is-finder, *is-normal-mode]
+      # f = open fold
+      - type: basic
+        from: {key_code: f}
+        to:
+          - key_code: right_arrow
+        conditions: [*is-finder, *is-normal-mode]
+      # f = close fold
+      - type: basic
+        from:
+          key_code: f
+          modifiers: {mandatory: [shift]}
+        to:
+          - key_code: left_arrow
+        conditions: [*is-finder, *is-normal-mode]
+      # <C-h> = History Back
+      - type: basic
+        from:
+          key_code: h
+          modifiers: {mandatory: [control]}
+        to:
+          - key_code: semicolon # German ö
+            modifiers: [command]
+        conditions: [*is-finder, *is-normal-mode]
+      # <C-l> = History Forward
+      - type: basic
+        from:
+          key_code: h
+          modifiers: {mandatory: [control]}
+        to:
+          - key_code: quote # German ä
+            modifiers: [command]
         conditions: [*is-finder, *is-normal-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Finder Basic Control"
