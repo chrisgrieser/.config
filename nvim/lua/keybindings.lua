@@ -329,6 +329,15 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+-- INSERT MODE & COMMAND MODE
+keymap("i", "<C-e>", "<Esc>A") -- EoL
+keymap("i", "<C-k>", "<Esc>lDi") -- kill line
+keymap("i", "<C-a>", "<Esc>I") -- BoL
+keymap("c", "<C-a>", "<Home>")
+keymap("c", "<C-e>", "<End>")
+keymap("c", "<C-u>", "<C-e><C-u>") -- clear
+
+--------------------------------------------------------------------------------
 -- VISUAL MODE
 keymap("x", "p", "P") -- do not override register when pasting
 keymap("x", "P", "p") -- override register when pasting

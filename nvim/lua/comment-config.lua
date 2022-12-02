@@ -41,6 +41,7 @@ function divider()
 	local indent = fn.indent(".")
 	local textwidth = bo.textwidth
 	local comStr = bo.commentstring
+	local ft = bo.filetype
 	local comStrLength = #(comStr:gsub("%%s", ""):gsub(" ", ""))
 
 	if comStr == "" then
@@ -52,10 +53,11 @@ function divider()
 	local linelength = textwidth - indent - comStrLength
 	local fullLine = string.rep(linechar, linelength)
 	local hr = comStr:gsub(" ?%%s ?", fullLine)
-	if bo.filetype == "markdown" then hr = "---" end
+	if ft == "markdown" then hr = "---" end
 
 	local linesToAppend = {"", hr, ""}
-	if wasOnBlank then linesToAppend = {hr, ""} end
+	if ft == "yaml" then linesToAppend = {hr}
+	elseif wasOnBlank then linesToAppend = {hr, ""} end
 
 	fn.append(".", linesToAppend)
 

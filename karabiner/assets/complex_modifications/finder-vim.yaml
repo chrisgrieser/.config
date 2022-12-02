@@ -1,8 +1,16 @@
 title: "Finder Vim Controls & Other Commands"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 anchors:
-  - conditions: &is-finder-insert-mode
+  - conditions: &is-finder
+      - type: frontmost_application_if
+        bundle_identifiers:
+          - ^com\.apple\.finder$
+  - conditions: &is-insert-mode
       - type: variable_if
+        name: FINDER_INSERT_MODE
+        value: true
+  - conditions: &is-normal-mode
+      - type: variable_unless
         name: FINDER_INSERT_MODE
         value: true
   - conditions: &cut-active
@@ -10,20 +18,20 @@ anchors:
         name: CUT_ACTIVE
         value: true
   - conditions: &cut-inactive
-      - type: variable_if
+      - type: variable_unless
         name: CUT_ACTIVE
-        value: false
-  - conditions: &is-Finder
-      - type: frontmost_application_if
-        bundle_identifiers:
-          - ^com\.apple\.finder$
-  - to: &insert-mode
+        value: true
+  - to: &enter-insert-mode
     set_variable:
       name: FINDER_INSERT_MODE
       value: true
-  - to: &normal-mode
+  - to: &enter-normal-mode
     set_variable:
       name: FINDER_INSERT_MODE
+      value: false
+  - to: &end-cut
+    set_variable:
+      name: CUT_ACTIVE
       value: false
   - to: &insert-notice
     set_notification_message:
@@ -33,14 +41,52 @@ anchors:
     set_notification_message:
       id: insert-notice
       text: ""
+  - to: &remove-cut-notice
+    set_notification_message:
+      id: cut-notice
+      text: ""
 #───────────────────────────────────────────────────────────────────────────────
 rules:
+  - description: "Finder Vim Controls"
+    manipulators:
+      - type: basic
+        from:
+          key_code: j
+        to:
+          - key_code: down_arrow
+        conditions:
+          - *is-finder
+          - *is-normal-mode
+      - type: basic
+        from: {key_code: k}
+        to:
+          - key_code: up_arrow
+        conditions:
+          - *is-finder
+          - *is-normal-mode
+      - type: basic
+        from: {key_code: h}
+        to:
+          - key_code: up_arrow
+            modifiers: [command]
+        conditions:
+          - *is-finder
+          - *is-normal-mode
+      - type: basic
+        from: {key_code: l}
+        to:
+          - key_code: down_arrow
+            modifiers: [command]
+        conditions:
+          - *is-finder
+          - *is-normal-mode
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "Finder Basic Control"
     manipulators:
       # Sidebar
       - type: basic
         from:
-          key_code: "a"
+          key_code: "1"
           modifiers:
             mandatory:
               - command
@@ -49,7 +95,7 @@ rules:
             modifiers:
               - command
               - option
-        conditions: *is-Finder
+        conditions: *is-finder
       # copy path
       - type: basic
         from:
@@ -62,7 +108,7 @@ rules:
             modifiers:
               - command
               - option
-        conditions: *is-Finder
+        conditions: *is-finder
       # pseudo-quick-switcher
       - type: basic
         from:
@@ -75,7 +121,7 @@ rules:
             modifiers:
               - command
               - shift
-        conditions: &is-Finder
+        conditions: *is-finder
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Cut & Paste Workaround"
     manipulators:
@@ -95,7 +141,7 @@ rules:
           - set_notification_message:
               id: cut-notice
               text: "✂️ Cut"
-        conditions: *is-Finder
+        conditions: *is-finder
       - type: basic
         from:
           key_code: v
@@ -104,45 +150,33 @@ rules:
               - command
         conditions:
           - *cut-active
-          - *is-Finder
+          - *is-finder
         to:
           - key_code: v
             modifiers:
               - command
               - option
-          - set_variable:
-              name: CUT_ACTIVE
-              value: false
-          - set_notification_message:
-              id: cut-notice
-              text: ""
+          - *end-cut
+          - *remove-cut-notice
       # Abort with Hyper/Esc
       - type: basic
         from:
           key_code: caps_lock
         conditions:
           - *cut-active
-          - *is-Finder
+          - *is-finder
         to:
-          - set_variable:
-              name: CUT_ACTIVE
-              value: false
-          - set_notification_message:
-              id: cut-notice
-              text: ""
+          - *end-cut
+          - *remove-cut-notice
       - type: basic
         from:
           key_code: escape
         conditions:
           - *cut-active
-          - *is-Finder
+          - *is-finder
         to:
-          - set_variable:
-              name: CUT_ACTIVE
-              value: false
-          - set_notification_message:
-              id: cut-notice
-              text: ""
+          - *end-cut
+          - *remove-cut-notice
       # Abort when deciding to copy instead
       - type: basic
         from:
@@ -152,17 +186,13 @@ rules:
               - command
         conditions:
           - *cut-active
-          - *is-Finder
+          - *is-finder
         to:
           - key_code: c
             modifiers:
               - command
-          - set_variable:
-              name: CUT_ACTIVE
-              value: false
-          - set_notification_message:
-              id: cut-notice
-              text: ""
+          - *end-cut
+          - *remove-cut-notice
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Open Locations"
     manipulators:
