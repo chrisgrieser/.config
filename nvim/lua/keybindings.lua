@@ -368,11 +368,11 @@ require("cybu").setup {
 	position = {
 		anchor = "bottomcenter",
 		max_win_height = 12,
-		vertical_offset = 2,
+		vertical_offset = 3,
 	},
 	style = {
 		border = borderStyle,
-		padding = 2,
+		padding = 7,
 		path = "tail",
 		hide_buffer_id = true,
 		highlights = {

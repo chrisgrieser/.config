@@ -1,0 +1,267 @@
+[
+  {
+    "name": "Marta Key Bindings",
+    "author": "pseudometa"
+  },
+  [
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 7
+    },
+    "⎋",
+    {
+      "f": 4
+    },
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8",
+    "F9",
+    "F10",
+    "F11",
+    "F12",
+    {
+      "f": 7
+    },
+    "⌱",
+    {
+      "f": 4
+    },
+    "del",
+    {
+      "f": 7
+    },
+    "◎"
+  ],
+  [
+    {
+      "c": "#CCCCCC",
+      "a": 5,
+      "f": 4
+    },
+    "^",
+    {
+      "c": "#c7a6ff",
+      "f": 2
+    },
+    "1\nsort: modified",
+    "2\nsort: added",
+    "3\nsort: name",
+    "4\nsort: ext",
+    "5\nsort: size",
+    "6\nview: table",
+    "/\nquick select",
+    {
+      "c": "#CCCCCC"
+    },
+    "8",
+    "9",
+    {
+      "c": "#c7a6ff"
+    },
+    "=\nflatten",
+    "?\nopen docs",
+    {
+      "c": "#CCCCCC"
+    },
+    "`",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 6,
+      "w": 2
+    },
+    "⌫",
+    {
+      "f": 4
+    },
+    "PdUp"
+  ],
+  [
+    {
+      "c": "#c7a6ff",
+      "a": 5,
+      "f": 2,
+      "w": 1.5
+    },
+    "↹\nswitch pane",
+    "q\nshow queue",
+    "w W\nclose tab",
+    "e E\nedit file / folder",
+    "r\nrecents",
+    {
+      "f": 1
+    },
+    "tT\nnext / prev tab",
+    {
+      "f": 2
+    },
+    "z Z\n(un)zip",
+    "u\nhier-archy",
+    "i\ninfo",
+    {
+      "f": 1
+    },
+    "o\nopen dir / with",
+    {
+      "f": 2
+    },
+    "p\npaste",
+    {
+      "c": "#CCCCCC"
+    },
+    "Ü",
+    "+",
+    {
+      "x": 0.25,
+      "c": "#c7a6ff",
+      "w": 1.25,
+      "h": 2,
+      "w2": 1.5,
+      "h2": 1,
+      "x2": -0.25
+    },
+    "↵: rename\n\n\n\n\n\n⇧↵: open",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 4
+    },
+    "PgDn"
+  ],
+  [
+    {
+      "c": "#c7a6ff",
+      "a": 5,
+      "f": 2,
+      "w": 1.75
+    },
+    "⇪\ndeselect",
+    {
+      "f": 1
+    },
+    "a A\nselect all / files",
+    "s S\ncreate / follow symlink",
+    "d D\ndelete / show Trash",
+    {
+      "c": "#cccccc",
+      "f": 2,
+      "n": true
+    },
+    "f",
+    {
+      "c": "#c7a6ff",
+      "f": 1
+    },
+    "g G\nscroll top / bottom",
+    "h H\nup / clone left",
+    {
+      "f": 2,
+      "n": true
+    },
+    "j J\ndown",
+    "k K\nup",
+    {
+      "f": 1
+    },
+    "l L\nopen / clone right",
+    {
+      "f": 2
+    },
+    "ö\nleft",
+    "ä\nright",
+    "#\nview: 3 columns",
+    {
+      "x": 1.25,
+      "c": "#999999",
+      "a": 7,
+      "f": 4
+    },
+    "home"
+  ],
+  [
+    {
+      "f": 7,
+      "w": 1.25
+    },
+    "⇧",
+    {
+      "c": "#CCCCCC",
+      "a": 5,
+      "f": 2
+    },
+    ">",
+    {
+      "c": "#c7a6ff"
+    },
+    "y Y\ncopy / ducplic.",
+    "x\nswap panes",
+    "c\npseudo-cut",
+    "v\nmove to pane",
+    "b\ncopy to pane",
+    "n\nnew file / folder",
+    {
+      "f": 1
+    },
+    "m M\nselect / add favorite",
+    {
+      "f": 2
+    },
+    ",\nconfig",
+    ".\nhidden files",
+    "-\nlookup here",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 7,
+      "w": 1.75
+    },
+    "⇧",
+    {
+      "n": true
+    },
+    "↑",
+    {
+      "f": 4
+    },
+    "end"
+  ],
+  [
+    {
+      "f": 7,
+      "w": 1.25
+    },
+    "⌃",
+    {
+      "w": 1.25
+    },
+    "⌥",
+    {
+      "w": 1.25
+    },
+    "⌘",
+    {
+      "c": "#c7a6ff",
+      "a": 5,
+      "f": 2,
+      "w": 6.25
+    },
+    "\nquick look / add to selecttion\n\n\n\n\n──────",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 7
+    },
+    "⌘",
+    "fn",
+    "⌃",
+    "←",
+    "↓",
+    "→"
+  ]
+]
