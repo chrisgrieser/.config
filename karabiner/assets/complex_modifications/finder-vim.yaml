@@ -8,10 +8,12 @@ anchors:
         bundle_identifiers: [^com\.apple\.finder$]
       - &is-German-keyboard
         type: input_source_if
-        language: [de]
+        input_sources:
+          - language: ^de$
       - &not-German-keyboard
         type: input_source_unless
-        language: [de]
+        input_sources:
+          - language: ^de$
       - &is-insert-mode
         type: variable_if
         name: FINDER_INSERT_MODE
@@ -71,13 +73,13 @@ anchors:
           id: search-notice
           text: ""
       - &remove-move-notice
-        set_notification_message: # Move Mode
+        set_notification_message: # Move Active
           id: move-notice
           text: ""
       - &move-notice
         set_notification_message:
           id: move-notice
-          text: "✂️ move"
+          text: "✂️ move active"
       - &start-move
         set_variable:
           name: FINDER_MOVE_ACTIVE
@@ -213,17 +215,29 @@ rules:
         conditions: [*is-finder, *is-insert-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Selections & Window
-      # w = close window/tab (:close)
+      # w = close window/tab (:[tab]close)
       - type: basic
         from: {key_code: w}
         to:
           - {key_code: w, modifiers: [command]}
         conditions: [*is-finder, *not-insert-mode, *not-search-mode]
-      # Cycle windows
+      # Cycle windows/tabs
       - type: basic
         from: {key_code: tab}
         to:
           - {key_code: grave_accent_and_tilde, modifiers: [command]}
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+      - type: basic
+        from: {key_code: t}
+        to:
+          - {key_code: tab, modifiers: [control]}
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+      - type: basic
+        from:
+          key_code: t
+          modifiers: {mandatory: [shift]}
+        to:
+          - {key_code: tab, modifiers: [control, shift]}
         conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # toggle hidden files visibility
       - type: basic
@@ -339,6 +353,15 @@ rules:
           - key_code: n
             modifiers: [command, shift]
         conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+      # M = Move selection to new folder
+      - type: basic
+        from:
+          key_code: m
+          modifiers: {mandatory: [shift]}
+        to:
+          - key_code: n
+            modifiers: [command, control]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       # n = New File
       - type: basic
         from: {key_code: n}
@@ -346,9 +369,7 @@ rules:
           - shell_command: |
               folder=$(osascript -e '
                 tell application "Finder"
-                  if exists Finder window 1 then
-                    return POSIX path of (target of Finder window 1 as alias)
-                  end if
+                  if exists Finder window 1 then return POSIX path of (target of Finder window 1 as alias)
                 end tell')
               touch "$folder/new"
               open -R "$folder/new"
@@ -358,6 +379,16 @@ rules:
           - *enter-insert-mode
           - *insert-notice
         conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+      # z = zip files
+      - type: basic
+        from: {key_code: "y"} # y and z switched on German keyboard
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Finder"
+                  click menu item "Compress" of menu "File" of menu bar 1
+                end tell'
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *is-German-keyboard]
       #─────────────────────────────────────────────────────────────────────────
       # Navigation
       # o = open fold
