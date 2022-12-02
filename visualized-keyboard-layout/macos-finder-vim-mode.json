@@ -1,0 +1,283 @@
+[
+  {
+    "name": "macOS Finder Vim Mode",
+    "author": "pseudometa",
+    "notes": "# vim/ranger-like bindings in Finder\n\n*to be used with Finder's \"List View\"*\n\n1. Switcher, Rename, and Spotlight/Alfred active Insert Mode for Normal Typing\n2. \"f\" activates a one-letter-search mode, similar to vim: The next typed letter will select a file starting with that letter\n3. Escape/Hyper leave Normal Mode. If you have a Hyper=Caps Binding, make sure Finder Vim Mode has a higher priority to avoid conflicts.\n4. \"m\" marks a file as \"to be moved\". The next paste (via \"p\" or \"cmd-v\") will cause the marked file to be moved to the respective location."
+  },
+  [
+    {
+      "c": "#c7a6ff",
+      "a": 5,
+      "f": 2
+    },
+    "⎋\nnormal mode",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 4
+    },
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8",
+    "F9",
+    "F10",
+    "F11",
+    "F12",
+    {
+      "f": 7
+    },
+    "⌱",
+    {
+      "f": 4
+    },
+    "del",
+    {
+      "f": 7
+    },
+    "◎"
+  ],
+  [
+    {
+      "c": "#CCCCCC",
+      "a": 5,
+      "f": 4
+    },
+    "^",
+    {
+      "f": 2
+    },
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "0",
+    "ß",
+    {
+      "f": 4
+    },
+    "`",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 6,
+      "w": 2
+    },
+    "⌫",
+    {
+      "f": 4
+    },
+    "PdUp"
+  ],
+  [
+    {
+      "c": "#CCCCCC",
+      "a": 5,
+      "f": 2,
+      "w": 1.5
+    },
+    "↹",
+    "q",
+    "w",
+    "e",
+    {
+      "c": "#c7a6ff",
+      "f": 1
+    },
+    "r\nduplicate file",
+    {
+      "c": "#CCCCCC"
+    },
+    "t",
+    {
+      "f": 2
+    },
+    "z",
+    {
+      "c": "#c7a6ff"
+    },
+    "u (U)\nundo (redo)",
+    "i\ninfo",
+    "o\nopen fold",
+    "p\npaste file",
+    {
+      "c": "#CCCCCC"
+    },
+    "ü",
+    "+",
+    {
+      "x": 0.25,
+      "c": "#c7a6ff",
+      "w": 1.25,
+      "h": 2,
+      "w2": 1.5,
+      "h2": 1,
+      "x2": -0.25
+    },
+    "↵: rename (insert mode)\nin insert mode: confirm",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 4
+    },
+    "PgDn"
+  ],
+  [
+    {
+      "c": "#c7a6ff",
+      "a": 5,
+      "f": 2,
+      "w": 1.75
+    },
+    "⇪\n(if hyper key)\n\n\n\n\nnormal mode",
+    "a\nselect all files",
+    {
+      "f": 1
+    },
+    "s\nSwicher (Insert Mode)",
+    {
+      "f": 2
+    },
+    "d\ntrash file",
+    {
+      "n": true
+    },
+    "f\nsearch mode",
+    {
+      "f": 1
+    },
+    "gg (G)\nto top (to bottom)",
+    {
+      "f": 2
+    },
+    "h\nparent dir",
+    {
+      "n": true
+    },
+    "j\ndown",
+    "k\nup",
+    {
+      "f": 1
+    },
+    "l\nopen file / folder",
+    {
+      "c": "#CCCCCC",
+      "f": 2
+    },
+    "ö",
+    "ä",
+    "#",
+    {
+      "x": 1.25,
+      "c": "#999999",
+      "a": 7,
+      "f": 4
+    },
+    "home"
+  ],
+  [
+    {
+      "f": 7,
+      "w": 1.25
+    },
+    "⇧",
+    {
+      "c": "#CCCCCC",
+      "a": 5,
+      "f": 2
+    },
+    ">",
+    {
+      "c": "#c7a6ff"
+    },
+    "y\nyank file",
+    {
+      "c": "#CCCCCC"
+    },
+    "x",
+    {
+      "c": "#c7a6ff"
+    },
+    "c\nclose fold",
+    "v\nview settings",
+    {
+      "c": "#CCCCCC"
+    },
+    "b",
+    {
+      "c": "#c7a6ff"
+    },
+    "n N\nnew file (folder)",
+    "m\nmove file",
+    {
+      "c": "#CCCCCC"
+    },
+    ",",
+    {
+      "c": "#c7a6ff",
+      "f": 1
+    },
+    ".\ntoggle hidden files",
+    {
+      "f": 3
+    },
+    "-",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 7,
+      "w": 1.75
+    },
+    "⇧",
+    {
+      "n": true
+    },
+    "↑",
+    {
+      "f": 4
+    },
+    "end"
+  ],
+  [
+    {
+      "f": 7,
+      "w": 1.25
+    },
+    "⌃",
+    {
+      "w": 1.25
+    },
+    "⌥",
+    {
+      "w": 1.25
+    },
+    "⌘",
+    {
+      "c": "#c7a6ff",
+      "a": 5,
+      "f": 2,
+      "w": 6.25
+    },
+    "quick look\nwith ⇧: add to selection\n\n\n\n\n──────",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 7
+    },
+    "⌘",
+    "fn",
+    "⌃",
+    "←",
+    "↓",
+    "→"
+  ]
+]

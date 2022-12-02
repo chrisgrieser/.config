@@ -1,5 +1,6 @@
 title: "Finder Vim Controls"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
+author: [pseudometa]
 anchors:
   - conditions:
       - &is-finder
@@ -27,13 +28,13 @@ anchors:
         type: variable_unless
         name: FINDER_SEARCH_MODE
         value: true
-      - &cut-active
+      - &move-active
         type: variable_if
-        name: FINDER_CUT_ACTIVE
+        name: FINDER_MOVE_ACTIVE
         value: true
-      - &cut-inactive
+      - &move-inactive
         type: variable_unless
-        name: FINDER_CUT_ACTIVE
+        name: FINDER_MOVE_ACTIVE
         value: true
   #─────────────────────────────────────────────────────────────────────────────
   - to:
@@ -69,21 +70,21 @@ anchors:
         set_notification_message:
           id: search-notice
           text: ""
-      - &remove-cut-notice
-        set_notification_message: # Cut Mode
-          id: cut-notice
+      - &remove-move-notice
+        set_notification_message: # Move Mode
+          id: move-notice
           text: ""
-      - &cut-notice
+      - &move-notice
         set_notification_message:
-          id: cut-notice
-          text: "✂️ CUT"
-      - &start-cut
+          id: move-notice
+          text: "✂️ move"
+      - &start-move
         set_variable:
-          name: FINDER_CUT_ACTIVE
+          name: FINDER_MOVE_ACTIVE
           value: true
-      - &end-cut
+      - &end-move
         set_variable:
-          name: FINDER_CUT_ACTIVE
+          name: FINDER_MOVE_ACTIVE
           value: false
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -91,7 +92,7 @@ anchors:
 rules:
   - description: "\U0001F4C2 Finder Vim Controls"
     manipulators:
-      # hjkl, ggG
+      # hjkl
       - type: basic
         from: {key_code: j}
         to:
@@ -114,6 +115,7 @@ rules:
           - key_code: down_arrow
             modifiers: [command]
         conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+      # gg, G, J, K
       - type: basic
         from: {key_code: g}
         to:
@@ -127,6 +129,30 @@ rules:
         to:
           - key_code: down_arrow
             modifiers: [option]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+      - type: basic
+        from:
+          key_code: j
+          modifiers: {mandatory: [shift]}
+        to:
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+      - type: basic
+        from:
+          key_code: k
+          modifiers: {mandatory: [shift]}
+        to:
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
         conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       #─────────────────────────────────────────────────────────────────────────
       # INSERT MODE
@@ -241,7 +267,7 @@ rules:
         to:
           - key_code: v
             modifiers: [command]
-        conditions: [*is-finder, *not-insert-mode, *cut-inactive, *not-search-mode]
+        conditions: [*is-finder, *not-insert-mode, *move-inactive, *not-search-mode]
       # i = info window
       - type: basic
         from: {key_code: i}
@@ -485,45 +511,45 @@ rules:
         to:
           - key_code: c
             modifiers: [command]
-          - *start-cut
-          - *cut-notice
+          - *start-move
+          - *move-notice
         conditions: [*is-finder, *not-insert-mode, *not-search-mode]
-      # p / cmd+v = paste cutted thing
+      # p / cmd+v = paste content marked for move thing
       - type: basic
         from: {key_code: p}
-        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *cut-active]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *move-active]
         to:
           - key_code: v
             modifiers: [command, option]
-          - *end-cut
-          - *remove-cut-notice
+          - *end-move
+          - *remove-move-notice
       - type: basic
         from:
           key_code: v
           modifiers: {mandatory: [command]}
-        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *cut-active]
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *move-active]
         to:
           - key_code: v
             modifiers: [command, option]
-          - *end-cut
-          - *remove-cut-notice
-      # y / cmd+c = yank, which also aborts cut
+          - *end-move
+          - *remove-move-notice
+      # y / cmd+c = yank, which also aborts move
       - type: basic
         from: {key_code: "y"}
         to:
           - key_code: c
             modifiers: [command]
-          - *end-cut
-          - *remove-cut-notice
-        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *cut-active, *not-German-keyboard]
+          - *end-move
+          - *remove-move-notice
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *move-active, *not-German-keyboard]
       - type: basic
         from: {key_code: z} # y and z switched on German keyboard
         to:
           - key_code: c
             modifiers: [command]
-          - *end-cut
-          - *remove-cut-notice
-        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *cut-active, *is-German-keyboard]
+          - *end-move
+          - *remove-move-notice
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *move-active, *is-German-keyboard]
       - type: basic
         from:
           key_code: c
@@ -531,22 +557,22 @@ rules:
         to:
           - key_code: c
             modifiers: [command]
-          - *end-cut
-          - *remove-cut-notice
-        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *cut-active]
-      # Esc = Abort Cut
+          - *end-move
+          - *remove-move-notice
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *move-active]
+      # Esc = Abort move
       - type: basic
         from: {key_code: caps_lock}
         to:
-          - *end-cut
-          - *remove-cut-notice
-        conditions: [*is-finder, *cut-active]
+          - *end-move
+          - *remove-move-notice
+        conditions: [*is-finder, *move-active]
       - type: basic
         from: {key_code: escape}
         to:
-          - *end-cut
-          - *remove-cut-notice
-        conditions: [*is-finder, *cut-active]
+          - *end-move
+          - *remove-move-notice
+        conditions: [*is-finder, *move-active]
   #─────────────────────────────────────────────────────────────────────────────
   #─────────────────────────────────────────────────────────────────────────────
   #─────────────────────────────────────────────────────────────────────────────
