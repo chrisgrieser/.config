@@ -1,12 +1,46 @@
 title: "Finder Vim Controls & Other Commands"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
+anchors:
+  - conditions: &is-finder-insert-mode
+      - type: variable_if
+        name: FINDER_INSERT_MODE
+        value: true
+  - conditions: &cut-active
+      - type: variable_if
+        name: CUT_ACTIVE
+        value: true
+  - conditions: &cut-inactive
+      - type: variable_if
+        name: CUT_ACTIVE
+        value: false
+  - conditions: &is-Finder
+      - type: frontmost_application_if
+        bundle_identifiers:
+          - ^com\.apple\.finder$
+  - to: &insert-mode
+    set_variable:
+      name: FINDER_INSERT_MODE
+      value: true
+  - to: &normal-mode
+    set_variable:
+      name: FINDER_INSERT_MODE
+      value: false
+  - to: &insert-notice
+    set_notification_message:
+      id: insert-notice
+      text: "✏️ INSERT"
+  - to: &remove-insert-notice
+    set_notification_message:
+      id: insert-notice
+      text: ""
+#───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: "Finder Basic Control"
     manipulators:
       # Sidebar
       - type: basic
         from:
-          key_code: "1"
+          key_code: "a"
           modifiers:
             mandatory:
               - command
@@ -15,10 +49,7 @@ rules:
             modifiers:
               - command
               - option
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.apple\.finder$
+        conditions: *is-Finder
       # copy path
       - type: basic
         from:
@@ -31,10 +62,7 @@ rules:
             modifiers:
               - command
               - option
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.apple\.finder$
+        conditions: *is-Finder
       # pseudo-quick-switcher
       - type: basic
         from:
@@ -47,11 +75,10 @@ rules:
             modifiers:
               - command
               - shift
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.apple\.finder$
-      # Cut & Paste Workaround
+        conditions: &is-Finder
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "Cut & Paste Workaround"
+    manipulators:
       - type: basic
         from:
           key_code: x
@@ -68,10 +95,7 @@ rules:
           - set_notification_message:
               id: cut-notice
               text: "✂️ Cut"
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.apple\.finder$
+        conditions: *is-Finder
       - type: basic
         from:
           key_code: v
@@ -79,12 +103,8 @@ rules:
             mandatory:
               - command
         conditions:
-          - type: variable_if
-            name: CUT_ACTIVE
-            value: true
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.apple\.finder$
+          - *cut-active
+          - *is-Finder
         to:
           - key_code: v
             modifiers:
@@ -101,12 +121,8 @@ rules:
         from:
           key_code: caps_lock
         conditions:
-          - type: variable_if
-            name: CUT_ACTIVE
-            value: true
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.apple\.finder$
+          - *cut-active
+          - *is-Finder
         to:
           - set_variable:
               name: CUT_ACTIVE
@@ -118,12 +134,8 @@ rules:
         from:
           key_code: escape
         conditions:
-          - type: variable_if
-            name: CUT_ACTIVE
-            value: true
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.apple\.finder$
+          - *cut-active
+          - *is-Finder
         to:
           - set_variable:
               name: CUT_ACTIVE
@@ -139,12 +151,8 @@ rules:
             mandatory:
               - command
         conditions:
-          - type: variable_if
-            name: CUT_ACTIVE
-            value: true
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.apple\.finder$
+          - *cut-active
+          - *is-Finder
         to:
           - key_code: c
             modifiers:
@@ -155,7 +163,10 @@ rules:
           - set_notification_message:
               id: cut-notice
               text: ""
-      # hyper + ⌫ = Open Trash
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "Open Locations"
+    manipulators:
+      # Hyper + ⌫ = Open Trash
       - type: basic
         from:
           key_code: delete_or_backspace
@@ -172,3 +183,15 @@ rules:
           - key_code: "2" # list view
             modifiers:
               - command
+      # Hyper + F: Open $WD
+      - type: basic
+        from:
+          key_code: f
+          modifiers:
+            mandatory:
+              - control
+              - command
+              - shift
+              - option
+        to:
+          - shell_command: open "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"

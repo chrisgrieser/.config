@@ -829,20 +829,6 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.hnc\.Discord$
-  - description: "\U0001F170️\U0001F4C2 Marta"
-    manipulators:
-      # Hyper-F: Open $WD
-      - type: basic
-        from:
-          key_code: f
-          modifiers:
-            mandatory:
-              - control
-              - command
-              - shift
-              - option
-        to:
-          - shell_command: /Applications/Marta.app/Contents/Resources/launcher --existing-tab "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
   - description: "\U0001F170️  Script Editor"
     manipulators:
       # Quick Closing skipping save prompt
