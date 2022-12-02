@@ -322,7 +322,7 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 				<key>keyword</key>
 				<string>shadow</string>
 				<key>subtext</key>
-				<string>only affects Screenshot.app itself</string>
+				<string>Screenshot.app</string>
 				<key>text</key>
 				<string>Toggle Shadow for Window Screenshots</string>
 				<key>withspace</key>

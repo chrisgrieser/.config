@@ -117,7 +117,8 @@ function fromFileHub(files)
 			-- visualised keyboard layouts
 		elseif fileName:match("base%-keyboard%-layout%.%w+") or fileName:match("app%-switcher%-layout%.%w+") or
 			fileName:match("vimrc%-remapping%.%w+") or fileName:match("marta%-key%-bindings%.%w+") or
-			fileName:match("hyper%-bindings%-layout%.%w+") or fileName:match("single%-keystroke%-bindings%.%w+") then
+			fileName:match("hyper%-bindings%-layout%.%w+") or fileName:match("single%-keystroke%-bindings%.%w+") or
+			fileName:match("macos%-finder%-vim%-mode%.%w+") then
 			hs.execute([[mv -f "]] .. file .. [[" "]] .. dotfilesFolder .. [[/visualized-keyboard-layout/"]])
 			notify("Visualized Keyboard Layout filed away.")
 

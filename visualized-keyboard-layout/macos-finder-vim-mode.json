@@ -80,27 +80,32 @@
   ],
   [
     {
-      "c": "#CCCCCC",
+      "c": "#c7a6ff",
       "a": 5,
       "f": 2,
       "w": 1.5
     },
-    "↹",
+    "↹\nCycle through windows",
+    {
+      "c": "#CCCCCC"
+    },
     "q",
-    "w",
+    {
+      "c": "#c7a6ff"
+    },
+    "w\n:close",
+    {
+      "c": "#CCCCCC"
+    },
     "e",
     {
-      "c": "#c7a6ff",
-      "f": 1
+      "c": "#c7a6ff"
     },
     "r\nduplicate file",
     {
       "c": "#CCCCCC"
     },
     "t",
-    {
-      "f": 2
-    },
     "z",
     {
       "c": "#c7a6ff"
@@ -155,19 +160,17 @@
     {
       "f": 1
     },
-    "gg (G)\nto top (to bottom)",
+    "gg (G)\n(bottom)\n\n\n\n\nto top",
     {
       "f": 2
     },
     "h\nparent dir",
     {
+      "f": 1,
       "n": true
     },
-    "j\ndown",
-    "k\nup",
-    {
-      "f": 1
-    },
+    "j (J)\n(6 down)\n\n\n\n\ndown",
+    "k (K)\n(6 up)\n\n\n\n\nup",
     "l\nopen file / folder",
     {
       "c": "#CCCCCC",
@@ -217,9 +220,13 @@
       "c": "#c7a6ff"
     },
     "n N\nnew file (folder)",
-    "m\nmove file",
     {
-      "c": "#CCCCCC"
+      "f": 1
+    },
+    "m (M)\n(new dir from sel)\n\n\n\n\nmove file",
+    {
+      "c": "#CCCCCC",
+      "f": 2
     },
     ",",
     {
