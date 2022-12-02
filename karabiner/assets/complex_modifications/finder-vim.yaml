@@ -6,13 +6,13 @@ anchors:
         type: frontmost_application_if
         bundle_identifiers:
           - ^com\.apple\.finder$
-      - &is-insert-mode
+      - &is-rename-mode
         type: variable_if
-        name: FINDER_INSERT_MODE
+        name: FINDER_RENAME_MODE
         value: true
       - &is-normal-mode
         type: variable_unless
-        name: FINDER_INSERT_MODE
+        name: FINDER_RENAME_MODE
         value: true
       - &cut-active
         type: variable_if
@@ -23,30 +23,30 @@ anchors:
         name: CUT_ACTIVE
         value: true
   - to:
-  - &enter-insert-mode
-    set_variable:
-      name: FINDER_INSERT_MODE
-      value: true
-  - &enter-normal-mode
-    set_variable:
-      name: FINDER_INSERT_MODE
-      value: false
-  - &end-cut
-    set_variable:
-      name: CUT_ACTIVE
-      value: false
-  - &insert-notice
-    set_notification_message:
-      id: insert-notice
-      text: "✏️ INSERT"
-  - &remove-insert-notice
-    set_notification_message:
-      id: insert-notice
-      text: ""
-  - &remove-cut-notice
-    set_notification_message:
-      id: cut-notice
-      text: ""
+      - &enter-rename-mode
+        set_variable:
+          name: FINDER_RENAME_MODE
+          value: true
+      - &leave-rename-mode
+        set_variable:
+          name: FINDER_RENAME_MODE
+          value: false
+      - &end-cut
+        set_variable:
+          name: CUT_ACTIVE
+          value: false
+      - &rename-notice
+        set_notification_message:
+          id: insert-notice
+          text: "✏️ INSERT"
+      - &remove-rename-notice
+        set_notification_message:
+          id: insert-notice
+          text: ""
+      - &remove-cut-notice
+        set_notification_message:
+          id: cut-notice
+          text: ""
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: "Finder Vim Controls"
@@ -88,37 +88,127 @@ rules:
           - key_code: down_arrow
             modifiers: [option]
         conditions: [*is-finder, *is-normal-mode]
-      # insert mode (rename mode) via <CR>
+      #─────────────────────────────────────────────────────────────────────────
+      # rename mode - enter
       - type: basic
         from: {key_code: return_or_enter}
         to:
           - key_code: return_or_enter
-          - *insert-notice
-          - *enter-insert-mode
+          - *rename-notice
+          - *enter-rename-mode
         conditions: [*is-finder, *is-normal-mode]
+      - type: basic # fix for Alfred
+        from:
+          key_code: spacebar
+          modifiers: {mandatory: [command]}
+        to:
+          - key_code: delete_or_backspace
+            modifiers: [command]
+          - *rename-notice
+          - *enter-rename-mode
+        conditions: [*is-finder, *is-normal-mode]
+
+      # rename mode - leave
       - type: basic
         from: {key_code: return_or_enter}
         to:
           - key_code: return_or_enter
-          - *remove-insert-notice
-          - *enter-normal-mode
-        conditions: [*is-finder, *is-insert-mode]
+          - *remove-rename-notice
+          - *leave-rename-mode
+        conditions: [*is-finder, *is-rename-mode]
       - type: basic
         from: {key_code: caps_lock}
         to:
           - key_code: escape
-          - *remove-insert-notice
-          - *enter-normal-mode
-        conditions: [*is-insert-mode]
+          - *remove-rename-notice
+          - *leave-rename-mode
+        conditions: [*is-rename-mode]
       - type: basic
         from:
           key_code: w
           modifiers: {mandatory: [command]}
         to:
-          - key_code: escape
-          - *remove-insert-notice
-          - *enter-normal-mode
+          - key_code: w
+            modifiers: [command]
+          - *remove-rename-notice
+          - *leave-rename-mode
         conditions: [*is-finder]
+      #─────────────────────────────────────────────────────────────────────────
+      # Basic Operation
+      # d = delete
+      - type: basic
+        from: {key_code: d}
+        to:
+          - key_code: delete_or_backspace
+            modifiers: [command]
+        conditions: [*is-finder, *is-normal-mode]
+      # y = yank
+      - type: basic
+        from: {key_code: z} # y = z in German Keyboard
+        to:
+          - key_code: c
+            modifiers: [command]
+        conditions: [*is-finder, *is-normal-mode]
+      # p = paste
+      - type: basic
+        from: {key_code: p}
+        to:
+          - key_code: v
+            modifiers: [command]
+        conditions: [*is-finder, *is-normal-mode]
+      # u = undo
+      - type: basic
+        from: {key_code: u}
+        to:
+          - key_code: "y" # y = z in German keyboard
+            modifiers: [command]
+        conditions: [*is-finder, *is-normal-mode]
+      # U = redo
+      - type: basic
+        from:
+          key_code: u
+          modifiers: {mandatory: [shift]}
+        to:
+          - key_code: "y" # y = z in German keyboard
+            modifiers: [command, shift]
+        conditions: [*is-finder, *is-normal-mode]
+      # N = New Folder
+      - type: basic
+        from:
+          key_code: n
+          modifiers: {mandatory: [shift]}
+        to:
+          - key_code: n
+            modifiers: [command, shift]
+        conditions: [*is-finder, *is-normal-mode]
+      # n = New File
+      - type: basic
+        from:
+          key_code: n
+        to:
+          - shell_command: |
+              folder=$(osascript -e '
+                tell application "Finder"
+                  if exists Finder window 1 then
+                    return POSIX path of (target of Finder window 1 as alias)
+                  end if
+                end tell')
+              touch "$folder/new"
+              open -R "$folder/new"
+          - key_code: vk_none
+            hold_down_milliseconds: 500 # delay needed as Finder needs a to pick up new file
+          - key_code: return_or_enter
+          - *enter-rename-mode
+          - *rename-notice
+        conditions: [*is-finder, *is-normal-mode]
+      # o = pseudo-quick-switcher
+      - type: basic
+        from:
+          key_code: o
+        to:
+          - key_code: g
+            modifiers: [command, shift]
+        conditions: [*is-finder, *is-normal-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Finder Basic Control"
     manipulators:
@@ -143,18 +233,20 @@ rules:
             modifiers:
               - command
               - option
-        conditions: [*is-finder]
-      # pseudo-quick-switcher
+        conditions: [*is-finder, *is-normal-mode]
+      # copy name
       - type: basic
         from:
-          key_code: o
-          modifiers: {mandatory: [command]}
+          key_code: n
+          modifiers: {mandatory: [control]}
         to:
-          - key_code: g
-            modifiers:
-              - command
-              - shift
-        conditions: [*is-finder]
+          - key_code: return_or_enter
+          - key_code: a
+            modifiers: [command]
+          - key_code: c
+            modifiers: [command]
+          - key_code: return_or_enter
+        conditions: [*is-finder, *is-normal-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Cut & Paste"
     manipulators:

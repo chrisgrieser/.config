@@ -24,6 +24,7 @@ const workArray = app.doShellScript(
 	-E "alacritty/colors/*" \
 	-E "Marta/Themes/*" \
 	-E "packer_compiled.lua" \
+	-E "nvim/packer-snapshots/*" \
 	-E "hammerspoon/Spoons/*" \
 	-E "vale/styles/*/*.yml" \
 	-E "vale/styles/*/*.adoc" \
