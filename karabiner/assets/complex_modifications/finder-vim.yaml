@@ -1,10 +1,10 @@
 title: "Finder Vim Controls & Other Commands"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 anchors:
-  - conditions: &is-finder
-      - type: frontmost_application_if
-        bundle_identifiers:
-          - ^com\.apple\.finder$
+  - &is-finder
+    type: frontmost_application_if
+    bundle_identifiers:
+      - ^com\.apple\.finder$
   - conditions: &is-insert-mode
       - type: variable_if
         name: FINDER_INSERT_MODE
@@ -21,27 +21,27 @@ anchors:
       - type: variable_unless
         name: CUT_ACTIVE
         value: true
-  - to: &enter-insert-mode
+  - &enter-insert-mode
     set_variable:
       name: FINDER_INSERT_MODE
       value: true
-  - to: &enter-normal-mode
+  - &enter-normal-mode
     set_variable:
       name: FINDER_INSERT_MODE
       value: false
-  - to: &end-cut
+  - &end-cut
     set_variable:
       name: CUT_ACTIVE
       value: false
-  - to: &insert-notice
+  - &insert-notice
     set_notification_message:
       id: insert-notice
       text: "✏️ INSERT"
-  - to: &remove-insert-notice
+  - &remove-insert-notice
     set_notification_message:
       id: insert-notice
       text: ""
-  - to: &remove-cut-notice
+  - &remove-cut-notice
     set_notification_message:
       id: cut-notice
       text: ""
@@ -55,31 +55,9 @@ rules:
         to:
           - key_code: down_arrow
         conditions:
-          - *is-finder
-          - *is-normal-mode
-      - type: basic
-        from: {key_code: k}
-        to:
-          - key_code: up_arrow
-        conditions:
-          - *is-finder
-          - *is-normal-mode
-      - type: basic
-        from: {key_code: h}
-        to:
-          - key_code: up_arrow
-            modifiers: [command]
-        conditions:
-          - *is-finder
-          - *is-normal-mode
-      - type: basic
-        from: {key_code: l}
-        to:
-          - key_code: down_arrow
-            modifiers: [command]
-        conditions:
-          - *is-finder
-          - *is-normal-mode
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.apple\.finder$
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Finder Basic Control"
     manipulators:
