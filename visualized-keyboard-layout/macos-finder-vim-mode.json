@@ -2,7 +2,7 @@
   {
     "name": "macOS Finder Vim Mode",
     "author": "pseudometa",
-    "notes": "# vim/ranger-like bindings in Finder\n\n*to be used with Finder's \"List View\"*\n\n1. Switcher, Rename, and Spotlight/Alfred active Insert Mode for Normal Typing\n2. \"f\" activates a one-letter-search mode, similar to vim: The next typed letter will select a file starting with that letter\n3. Escape/Hyper leave Normal Mode. If you have a Hyper=Caps Binding, make sure Finder Vim Mode has a higher priority to avoid conflicts.\n4. \"m\" marks a file as \"to be moved\". The next paste (via \"p\" or \"cmd-v\") will cause the marked file to be moved to the respective location."
+    "notes": "# vim/ranger-like bindings in Finder\n\n*to be used with Finder's \"List View\"*\n\n1. Switcher, Rename, and Spotlight/Alfred (⌘+space) active Insert Mode for Normal Typing\n2. \"f\" activates a one-letter-search mode, similar to vim: The next typed letter will select a file starting with that letter\n3. Escape/Hyper leave Normal Mode. If you have a Hyper=Caps Binding, make sure Finder Vim Mode has a higher priority to avoid conflicts.\n4. \"m\" marks a file as \"to be moved\". The next paste (via \"p\" or \"cmd-v\") will cause the marked file to be moved to the respective location."
   },
   [
     {
@@ -49,9 +49,14 @@
     },
     "^",
     {
+      "c": "#c7a6ff",
+      "f": 1
+    },
+    "⌘1\ntoggle left sidebar",
+    {
+      "c": "#CCCCCC",
       "f": 2
     },
-    "1",
     "2",
     "3",
     "4",
@@ -60,7 +65,15 @@
     "7",
     "8",
     "9",
-    "0",
+    {
+      "c": "#c7a6ff",
+      "f": 1
+    },
+    "⌘0\ntoggle left preview",
+    {
+      "c": "#CCCCCC",
+      "f": 2
+    },
     "ß",
     {
       "f": 4
@@ -80,40 +93,28 @@
   ],
   [
     {
-      "c": "#c7a6ff",
+      "c": "#CCCCCC",
       "a": 5,
       "f": 2,
       "w": 1.5
     },
-    "↹\nCycle through windows",
+    "↹",
     {
-      "c": "#CCCCCC"
+      "c": "#cccccc"
     },
     "q",
     {
       "c": "#c7a6ff"
     },
     "w\n:close",
-    {
-      "c": "#CCCCCC"
-    },
-    "e",
-    {
-      "c": "#c7a6ff"
-    },
+    "e\neject (if volume)",
     "r\nduplicate file",
-    {
-      "c": "#CCCCCC"
-    },
-    "t",
-    "z",
-    {
-      "c": "#c7a6ff"
-    },
+    "t\n:tabnext",
+    "z\nzip file(s)",
     "u (U)\nundo (redo)",
     "i\ninfo",
     "o\nopen fold",
-    "p\npaste file",
+    "p\npaste file(s)\n\n\n⌃p path",
     {
       "c": "#CCCCCC"
     },
@@ -162,19 +163,23 @@
     },
     "gg (G)\n(bottom)\n\n\n\n\nto top",
     {
+      "sm": "cherry",
       "f": 2
     },
-    "h\nparent dir",
+    "h\nparent dir\n\n\n⌃h back",
     {
+      "sm": "",
       "f": 1,
       "n": true
     },
     "j (J)\n(6 down)\n\n\n\n\ndown",
     "k (K)\n(6 up)\n\n\n\n\nup",
-    "l\nopen file / folder",
     {
-      "c": "#CCCCCC",
       "f": 2
+    },
+    "l\nopen file / dir\n\n\n⌃l forw",
+    {
+      "c": "#CCCCCC"
     },
     "ö",
     "ä",
@@ -202,7 +207,7 @@
     {
       "c": "#c7a6ff"
     },
-    "y\nyank file",
+    "y\nyank file(s)",
     {
       "c": "#CCCCCC"
     },
@@ -212,14 +217,8 @@
     },
     "c\nclose fold",
     "v\nview settings",
-    {
-      "c": "#CCCCCC"
-    },
-    "b",
-    {
-      "c": "#c7a6ff"
-    },
-    "n N\nnew file (folder)",
+    "b\n:bnext (window)",
+    "n N\nnew file (folder)\n\n\n⌃n name",
     {
       "f": 1
     },
