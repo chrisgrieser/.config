@@ -50,12 +50,11 @@
     "^",
     {
       "c": "#c7a6ff",
-      "f": 1
-    },
-    "⌘1\ntoggle left sidebar",
-    {
-      "c": "#CCCCCC",
       "f": 2
+    },
+    "(⌘)1\ntoggle sidebar",
+    {
+      "c": "#CCCCCC"
     },
     "2",
     "3",
@@ -64,18 +63,14 @@
     "6",
     "7",
     "8",
-    "9",
     {
-      "c": "#c7a6ff",
-      "f": 1
+      "c": "#c7a6ff"
     },
-    "⌘0\ntoggle left preview",
+    "(⌘)9\ntoggle pathbar",
+    "(⌘)0\ntoggle preview",
+    "?\n:help",
     {
       "c": "#CCCCCC",
-      "f": 2
-    },
-    "ß",
-    {
       "f": 4
     },
     "`",
