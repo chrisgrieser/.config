@@ -20,6 +20,9 @@ defaults write "org.hammerspoon.Hammerspoon" "HSUploadCrashData" 0
 defaults write "org.hammerspoon.Hammerspoon" "MJKeepConsoleOnTopKey" 1
 defaults write "org.hammerspoon.Hammerspoon" "SUEnableAutomaticChecks" 1
 
+# Make Finder quittable
+defaults write com.apple.finder QuitMenuItem -bool true
+
 #-------------------------------------------------------------------------------
 # DOTFILES / VAULT
 

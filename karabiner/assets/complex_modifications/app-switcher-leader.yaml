@@ -239,12 +239,12 @@ rules:
               - shift
           - *deactivate-leader
           - *remove-notice
-      # [l]ocate: Marta
+      # [l]ocate: Finder
       - type: basic
         from: {key_code: l}
         conditions: *leader-active
         to:
-          - shell_command: open -a "Marta"
+          - shell_command: open -a "Finder"
           - *deactivate-leader
           - *remove-notice
       # [H]ammerspoon
