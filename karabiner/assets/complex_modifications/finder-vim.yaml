@@ -301,12 +301,14 @@ rules:
         to_if_alone:
           - key_code: c
             modifiers: [command]
+          - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
         conditions: [*is-finder, *not-insert-mode, *not-search-mode, *is-German-keyboard]
       - type: basic
         from: {key_code: "y"}
         to:
           - key_code: c
             modifiers: [command]
+          - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
         conditions: [*is-finder, *not-insert-mode, *not-search-mode, *not-German-keyboard]
       # r = replicate (duplicate)
       - type: basic
@@ -674,6 +676,7 @@ rules:
             modifiers: [command]
           - *end-move
           - *remove-move-notice
+          - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
         conditions: [*is-finder, *not-insert-mode, *not-search-mode, *move-active, *not-German-keyboard]
       - type: basic
         from: {key_code: z} # y and z switched on German keyboard
@@ -764,6 +767,7 @@ rules:
           - key_code: c
             modifiers: [command]
           - key_code: return_or_enter
+          - shell_command: osascript -e 'display notification "File name" with title "✅ Copied"'
         conditions: [*is-finder, *not-insert-mode, *not-search-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "\U0001F4C2 Open Locations (Globally Active)"
