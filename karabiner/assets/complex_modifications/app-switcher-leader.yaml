@@ -113,14 +113,6 @@ rules:
     manipulators:
       # Cancel (Esc/Hyper)
       - type: basic
-        description: Leader Cancel
-        from:
-          key_code: escape
-        conditions: *leader-active
-        to:
-          - *deactivate-leader
-          - *remove-notice
-      - type: basic
         description: 'Hyper (Esc): Leader Cancel'
         from:
           key_code: caps_lock
