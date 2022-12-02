@@ -61,8 +61,8 @@ local function pixelmatorMax(appName, eventType)
 	end
 end
 
-pixelmatorWatcher = aw.new(pixelmatorMax)
-pixelmatorWatcher:start()
+braveWatcher = aw.new(pixelmatorMax)
+braveWatcher:start()
 
 --------------------------------------------------------------------------------
 
@@ -111,6 +111,17 @@ wf_browser_all = wf.new("Brave Browser")
 			app("Brave Browser"):hide()
 		end
 	end)
+
+-- if activated but no window, pass through (no accidental alt-tabbing into it)
+local function browserPassThrough(appName, eventType, browserAppObj)
+	if appName == "Brave Browser" and eventType == aw.activated then
+		local browserWins = #browserAppObj:getWindows()
+		if browserWins == 0 then browserAppObj:hide() end
+	end
+end
+
+browserWatcher = aw.new(browserPassThrough)
+browserWatcher:start()
 
 --------------------------------------------------------------------------------
 
@@ -215,39 +226,37 @@ end)
 -- - Bring all windows forward
 -- - hide sidebar
 -- - enlarge window if it's too small
-local function finderWatcher(appName, eventType, appObject)
-	if not (appName == "Finder") then return end
-
-	if eventType == aw.activated then
-		local finderWin = appObject:focusedWindow()
-
-		local isInfoWindow = finderWin:title():match(" Info$")
+-- - hide when last window closed
+wf_finder = wf.new("Finder")
+	:subscribe(wf.windowDestroyed, function()
+		if #wf_finder:getWindows() == 0 then
+			app("Finder"):hide()
+		end
+	end)
+	:subscribe(wf.windowFocused, function(currentWin)
+		local isInfoWindow = currentWin:title():match(" Info$")
 		if isInfoWindow then return end
 
-		appObject:selectMenuItem {"View", "Hide Sidebar"}
+		app("Finder"):selectMenuItem {"View", "Hide Sidebar"}
 
-		local win_h = finderWin:frame().h
-		local max_h = finderWin:screen():frame().h
-		local max_w = finderWin:screen():frame().w
-		local target_w = 0.6 * max_w
-		local target_h = 0.8 * max_h
+		local win_h = currentWin:frame().h
+		local max_h = currentWin:screen():frame().h
+		local max_w = currentWin:screen():frame().w
 		if (win_h / max_h) < 0.7 then
-			finderWin:setSize {w = target_w, h = target_h}
+			currentWin:setSize {w = 0.6 * max_w, h = 0.8 * max_h}
 		end
+	end)
+
+-- if activated but no window, pass through (no accidental alt-tabbing into it)
+local function finderPassThrough(appName, eventType, finderAppObj)
+	if appName == "Finder" and eventType == aw.activated then
+		local finderWins = #finderAppObj:allWindows() - 1 -- -1 since `:allWindows` includes Desktop as one window
+		if finderWins == 0 then finderAppObj:hide() end
 	end
 end
 
-finderAppWatcher = aw.new(finderWatcher)
-finderAppWatcher:start()
-
--- quit when last window closed
-wf_finder = wf.new("Finder")
-wf_finder:subscribe(wf.windowDestroyed, function()
-	if #wf_finder:getWindows() == 0 then
-		app("Finder"):kill()
-	end
-end)
-
+braveWatcher = aw.new(finderPassThrough)
+braveWatcher:start()
 --------------------------------------------------------------------------------
 
 -- ZOOM

@@ -176,8 +176,8 @@ cmp.setup.filetype("sh", {
 cmp.setup.cmdline({"/", "?"}, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
-		{name = "treesitter"},
-		{name = "buffer", keyword_length = 2},
+		{name = "treesitter", keyword_length = 3},
+		{name = "buffer", keyword_length = 3},
 	}
 })
 

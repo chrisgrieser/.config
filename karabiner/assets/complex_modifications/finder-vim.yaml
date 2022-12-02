@@ -176,6 +176,24 @@ rules:
           - *leave-rename-mode
         conditions: [*is-finder, *is-rename-mode]
       #─────────────────────────────────────────────────────────────────────────
+      # Selections
+      # a = select all
+      - type: basic
+        from: {key_code: a}
+        to:
+          - key_code: a
+            modifiers: [command]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+      # <S-Space> = add down to selection
+      - type: basic
+        from:
+          key_code: spacebar
+          modifiers: {mandatory: [shift]}
+        to:
+          - key_code: down_arrow
+            modifiers: [shift]
+        conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+      #─────────────────────────────────────────────────────────────────────────
       # Basic File Operations
       # d = delete
       - type: basic
