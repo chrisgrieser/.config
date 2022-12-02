@@ -30,9 +30,10 @@ anchors:
         type: variable_unless
         name: FINDER_CUT_ACTIVE
         value: true
+  #─────────────────────────────────────────────────────────────────────────────
   - to:
       - &enter-rename-mode
-        set_variable:
+        set_variable: # Rename Mode
           name: FINDER_RENAME_MODE
           value: true
       - &leave-rename-mode
@@ -52,8 +53,7 @@ anchors:
           id: insert-notice
           text: ""
       - &enter-search-mode
-        #─────────────────────────────────────────────────────────────────────────
-        set_variable:
+        set_variable: # Search Mode
           name: FINDER_SEARCH_MODE
           value: true
       - &leave-search-mode
@@ -69,8 +69,7 @@ anchors:
           id: search-notice
           text: ""
       - &remove-cut-notice
-        #─────────────────────────────────────────────────────────────────────────
-        set_notification_message:
+        set_notification_message: # Cut Mode
           id: cut-notice
           text: ""
       - &cut-notice
@@ -326,12 +325,33 @@ rules:
         conditions: [*is-finder, *not-rename-mode, *not-search-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Search Mode
-      #Enter/Exit
+      # Enter/Exit
       - type: basic
         from: {key_code: f}
         to:
-          - key_code: right_arrow
+          - *enter-search-mode
+          - *search-notice
         conditions: [*is-finder, *not-rename-mode, *not-search-mode]
+      - type: basic
+        from: {key_code: capslock}
+        to:
+          - *leave-search-mode
+          - *remove-search-notice
+        conditions: [*is-finder, *is-search-mode]
+      - type: basic
+        from: {key_code: escape}
+        to:
+          - *leave-search-mode
+          - *remove-search-notice
+        conditions: [*is-finder, *is-search-mode]
+      # One-Letter-Searches
+      - type: basic
+        from: {key_code: a}
+        to: [{key_code: a}, *leave-search-mode, *remove-search-notice]
+          - key_code: a
+          - *leave-search-mode
+          - *remove-search-notice
+        conditions: [*is-finder, *is-search-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "\U0001F4C2 Move Files"
     manipulators:

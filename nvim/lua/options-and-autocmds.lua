@@ -90,9 +90,9 @@ autocmd("TextYankPost", {
 	callback = function() vim.highlight.on_yank {timeout = 2000} end
 })
 
--- don't treat "-" as word boundary, useful for things like kebab-case-variables
-opt.iskeyword:append("-")
-
+-- Character groups
+opt.iskeyword:append("-") -- don't treat "-" as word boundary, useful e.g. for kebab-case-variables
+opt.nrformats = "alpha" -- <C-a> and <C-x> also work on letters
 --------------------------------------------------------------------------------
 
 -- UNDO & SWAP
