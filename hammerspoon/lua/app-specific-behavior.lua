@@ -61,8 +61,8 @@ local function pixelmatorMax(appName, eventType)
 	end
 end
 
-finderWatcher = aw.new(pixelmatorMax)
-finderWatcher:start()
+braveWatcher = aw.new(pixelmatorMax)
+braveWatcher:start()
 
 --------------------------------------------------------------------------------
 
@@ -111,6 +111,19 @@ wf_browser_all = wf.new("Brave Browser")
 			app("Brave Browser"):hide()
 		end
 	end)
+
+-- if activated but no window, pass through (no accidental alt-tabbing into it)
+local function browserPassThrough(appName, eventType, browserAppObj)
+	if appName == "Brave Browser" and eventType == aw.activated then
+		runDelayed(0.05, function()
+			local browserWins = #browserAppObj:allWindows()
+			if browserWins == 0 then browserAppObj:hide() end
+		end)
+	end
+end
+
+browserWatcher = aw.new(browserPassThrough)
+browserWatcher:start()
 
 --------------------------------------------------------------------------------
 
@@ -236,14 +249,18 @@ wf_finder = wf.new("Finder")
 		end
 	end)
 
-local function finderPassThrough(appName, eventType, appObject)
+-- if activated but no window, pass through (no accidental alt-tabbing into it)
+local function finderPassThrough(appName, eventType, finderAppObj)
 	if appName == "Finder" and eventType == aw.activated then
-		if appObject:allWindows()
+		runDelayed(0.1, function()
+			local finderWins = #finderAppObj:allWindows() - 1 -- -1 since `:allWindows` includes Desktop as one window
+			if finderWins == 0 then finderAppObj:hide() end
+		end)
 	end
 end
 
-finderWatcher = aw.new(finderPassThrough)
-finderWatcher:start()
+braveWatcher = aw.new(finderPassThrough)
+braveWatcher:start()
 --------------------------------------------------------------------------------
 
 -- ZOOM
@@ -417,7 +434,9 @@ discordAppWatcher:start()
 wf_shottr = wf.new("Shottr")
 	:subscribe(wf.windowCreated, function(newWindow)
 		if newWindow:title() == "Preferences" then return end
-		runDelayed(0.1, function() keystroke({}, "a") end)
+		runDelayed(0.1, function()
+			keystroke({}, "a")
+		end)
 	end)
 
 if 1 == 1 then

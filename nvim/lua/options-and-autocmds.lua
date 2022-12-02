@@ -2,7 +2,7 @@ require("utils")
 --------------------------------------------------------------------------------
 
 -- timeouts
-opt.timeoutlen = 750 -- for awaiting keystrokes (no nowait)
+opt.timeoutlen = 1000 -- for awaiting keystrokes (no nowait)
 opt.updatetime = 200 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 
 -- Search
