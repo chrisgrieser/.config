@@ -90,19 +90,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>BC41C6FD-A0A1-48EC-A156-72DC0D9520FF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EAD2AC7E-2F9F-4704-B8C6-6A5FB1934632</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>DCD9C133-BB06-4C67-9775-B4814A38FF71</key>
 		<array>
 			<dict>
@@ -185,6 +172,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library/Caches/com.runningwithcrayons.Alfred</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>ABF30A35-70D2-41E3-B40B-4A5E783EB7FC</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alfred workflow cache</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>📂 Alfred Workflow Cache</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>4A3828AC-7DF5-44AE-84CE-3F1B054C7349</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -248,57 +271,15 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>restart alfred</string>
-				<key>subtext</key>
-				<string>via Shortcut</string>
-				<key>text</key>
-				<string>Restart Alfred</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>BC41C6FD-A0A1-48EC-A156-72DC0D9520FF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>shortcuts://run-shortcut?name=Restart%20Alfred</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>EAD2AC7E-2F9F-4704-B8C6-6A5FB1934632</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
-				<string>~/Library/Caches/com.runningwithcrayons.Alfred</string>
+				<string>~/Library/Application Support/Alfred/Workflow Data</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>ABF30A35-70D2-41E3-B40B-4A5E783EB7FC</string>
+			<string>33BD77E2-2929-432E-9718-B2FDBAF4EFE5</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -308,18 +289,18 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>alfred workflow cache</string>
+				<string>alfred workflow data</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>📂 Alfred Workflow Cache</string>
+				<string>📂 Alfred Workflow Data</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>4A3828AC-7DF5-44AE-84CE-3F1B054C7349</string>
+			<string>411F0C67-7E50-4B01-AF68-F2742465259B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -382,78 +363,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library/Application Support/Alfred/Workflow Data</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>33BD77E2-2929-432E-9718-B2FDBAF4EFE5</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>alfred workflow data</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>📂 Alfred Workflow Data</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>411F0C67-7E50-4B01-AF68-F2742465259B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>/Applications/Alfred 5.app/Contents/Preferences</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>D5D0024E-316C-4A4C-BEA4-7366C58BF580</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>alfred preference app</string>
-				<key>subtext</key>
-				<string>Reveal in Finder</string>
-				<key>text</key>
-				<string>⚙️ Alfred Preference.app</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>5B7DFCDF-718D-4957-985A-AA31D51AEFFC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -495,6 +404,42 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>/Applications/Alfred 5.app/Contents/Preferences</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>D5D0024E-316C-4A4C-BEA4-7366C58BF580</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alfred preference app</string>
+				<key>subtext</key>
+				<string>Reveal in Finder</string>
+				<key>text</key>
+				<string>⚙️ Alfred Preference.app</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>5B7DFCDF-718D-4957-985A-AA31D51AEFFC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -505,18 +450,18 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>675</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>190</real>
 		</dict>
 		<key>411F0C67-7E50-4B01-AF68-F2742465259B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>525</real>
+			<real>575</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>190</real>
 		</dict>
 		<key>424FC24A-8D2D-4BE5-A394-E934EF993E6F</key>
 		<dict>
@@ -532,18 +477,18 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>525</real>
+			<real>575</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>65</real>
 		</dict>
 		<key>4A6AD1C0-ABCF-4C85-8E12-C4170B8982C5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>675</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>320</real>
 		</dict>
 		<key>59B65F8F-3EDB-4000-8F90-1C01AF6BC6A5</key>
 		<dict>
@@ -561,14 +506,14 @@
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>425</real>
 		</dict>
 		<key>859A813B-BC0E-4FD1-B2A5-E698076BF6E5</key>
 		<dict>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>305</real>
 		</dict>
 		<key>88BE14E8-8C6C-40C6-9497-48E193416293</key>
 		<dict>
@@ -584,18 +529,9 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>675</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>310</real>
-		</dict>
-		<key>BC41C6FD-A0A1-48EC-A156-72DC0D9520FF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>310</real>
+			<real>65</real>
 		</dict>
 		<key>BF89C364-F5A2-446D-A3F4-F0EAF2212146</key>
 		<dict>
@@ -613,32 +549,23 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>425</real>
 		</dict>
 		<key>DCD9C133-BB06-4C67-9775-B4814A38FF71</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>525</real>
+			<real>575</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>320</real>
 		</dict>
 		<key>E1B642B1-7077-4090-9C23-656A55E19199</key>
 		<dict>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>430</real>
-		</dict>
-		<key>EAD2AC7E-2F9F-4704-B8C6-6A5FB1934632</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>310</real>
+			<real>305</real>
 		</dict>
 		<key>F55D1533-F14F-4A8E-88D1-B4C3F3DACB70</key>
 		<dict>
