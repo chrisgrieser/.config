@@ -97,12 +97,12 @@ rules:
       # hjkl
       - type: basic
         from: {key_code: j}
-        to_if_alone:
+        to: # not to_if_alone since it blocks repeat
           - key_code: down_arrow
         conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       - type: basic
         from: {key_code: k}
-        to_if_alone:
+        to: # not to_if_alone since it blocks repeat
           - key_code: up_arrow
         conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       - type: basic
@@ -488,7 +488,7 @@ rules:
           - *leave-search-mode
           - *remove-search-notice
         conditions: [*is-finder, *is-search-mode]
-      # One-Letter-Searches
+      # One-Char-Searches
       - type: basic
         from: {key_code: a}
         to: [{key_code: a}, *leave-search-mode, *remove-search-notice]
@@ -637,9 +637,8 @@ rules:
         from: {key_code: "9"}
         to: [{key_code: "9"}, *leave-search-mode, *remove-search-notice]
         conditions: [*is-finder, *is-search-mode]
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "\U0001F4C2 Move Files"
-    manipulators:
+      #─────────────────────────────────────────────────────────────────────────
+      # MOVE 
       # m = move
       - type: basic
         from: {key_code: m}
@@ -709,11 +708,8 @@ rules:
           - *end-move
           - *remove-move-notice
         conditions: [*is-finder, *move-active]
-  #─────────────────────────────────────────────────────────────────────────────
-  #─────────────────────────────────────────────────────────────────────────────
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "\U0001F4C2 Toggles for Sidebar/Preview/Path (0, 1, 9)"
-    manipulators:
+      #─────────────────────────────────────────────────────────────────────────
+      #─────────────────────────────────────────────────────────────────────────
       # Sidebar/Preview/Pathbar Toggle
       - type: basic
         from:

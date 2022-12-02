@@ -127,7 +127,7 @@ function moveResizeCurWin(mode)
 	elseif (mode == "maximized") then
 		position = maximized
 	elseif (mode == "centered") then
-		position = {x = 0.2, y = 0.1, w = 0.6, h = 0.8}
+		position = {x = 0.2, y = 0, w = 0.6, h = 1}
 	end
 
 	if not (mode == "pseudo-maximized" or mode == "maximized") then

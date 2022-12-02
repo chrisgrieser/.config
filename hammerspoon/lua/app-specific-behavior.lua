@@ -55,13 +55,11 @@ transBgAppWatcher:start()
 --------------------------------------------------------------------------------
 
 -- PIXELMATOR
-local function pixelmatorMax(appName, eventType)
+pixelmatorWatcher = aw.new(function(appName, eventType)
 	if appName:find("Pixelmator") and eventType == aw.launched then
 		runDelayed(0.3, function() moveResizeCurWin("maximized") end)
 	end
-end
-
-pixelmatorWatcher = aw.new(pixelmatorMax)
+end)
 pixelmatorWatcher:start()
 
 --------------------------------------------------------------------------------
@@ -224,17 +222,16 @@ end)
 
 --------------------------------------------------------------------------------
 
--- FINDER: when activated
--- - Bring all windows forward
--- - hide sidebar
--- - enlarge window if it's too small
--- - hide when last window closed
+-- FINDER
+-- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 wf_finder = wf.new("Finder")
 	:subscribe(wf.windowDestroyed, function()
-		if #wf_finder:getWindows() == 0 then
-			app("Finder"):hide()
-		end
+		-- quit when last window closed
+		if #wf_finder:getWindows() == 0 then app("Finder"):kill() end
 	end)
+	-- - Bring all windows forward
+	-- - hide sidebar
+	-- - enlarge window if it's too small
 	:subscribe(wf.windowFocused, function(currentWin)
 		local isInfoWindow = currentWin:title():match(" Info$")
 		if isInfoWindow then return end
@@ -244,15 +241,15 @@ wf_finder = wf.new("Finder")
 		local win_h = currentWin:frame().h
 		local max_h = currentWin:screen():frame().h
 		local max_w = currentWin:screen():frame().w
-		if (win_h / max_h) < 0.7 then
-			currentWin:setSize {w = 0.6 * max_w, h = 0.8 * max_h}
+		if (win_h / max_h) < 0.9 then
+			currentWin:setSize {w = 0.6 * max_w, h = 1 * max_h}
 		end
 	end)
 
 -- quit Finder if it was started as a helper (e.g., JXA), but has no window
 local function finderWatcher(appName, eventType, finderAppObj)
 	if appName == "Finder" and eventType == aw.launched then
-		repeatFunc({1, 5, 10}, function()
+		repeatFunc({1, 4, 7}, function()
 			if finderAppObj and not (finderAppObj:mainWindow()) then
 				finderAppObj:kill()
 			end
@@ -441,19 +438,13 @@ wf_shottr = wf.new("Shottr")
 		end)
 	end)
 
-if 1 == 1 then
-	print("beep")
-end
-
 --------------------------------------------------------------------------------
 
 -- WARP
 -- since window size saving & session saving is not separated
-local function warpLaunch(appName, eventType)
+warpWatcher = aw.new(function(appName, eventType)
 	if appName == "Warp" and eventType == aw.launched then
 		keystroke({"cmd"}, "k") -- clear
 	end
-end
-
-warpWatcher = aw.new(warpLaunch)
+end)
 warpWatcher:start()
