@@ -215,26 +215,38 @@ end)
 -- - Bring all windows forward
 -- - hide sidebar
 -- - enlarge window if it's too small
--- - hide when last window closed
-wf_finder = wf.new("Finder")
-	:subscribe(wf.windowDestroyed, function()
-		if #wf_finder:getWindows() == 0 then
-			app("Finder"):hide()
-		end
-	end)
-	:subscribe(wf.windowFocused, function(currentWin)
-		local isInfoWindow = currentWin:title():match(" Info$")
+local function finderWatcher(appName, eventType, appObject)
+	if not (appName == "Finder") then return end
+
+	if eventType == aw.activated then
+		local finderWin = appObject:focusedWindow()
+
+		local isInfoWindow = finderWin:title():match(" Info$")
 		if isInfoWindow then return end
 
-		app("Finder"):selectMenuItem {"View", "Hide Sidebar"}
+		appObject:selectMenuItem {"View", "Hide Sidebar"}
 
-		local win_h = currentWin:frame().h
-		local max_h = currentWin:screen():frame().h
-		local max_w = currentWin:screen():frame().w
+		local win_h = finderWin:frame().h
+		local max_h = finderWin:screen():frame().h
+		local max_w = finderWin:screen():frame().w
+		local target_w = 0.6 * max_w
+		local target_h = 0.8 * max_h
 		if (win_h / max_h) < 0.7 then
-			currentWin:setSize {w = 0.6 * max_w, h = 0.8 * max_h}
+			finderWin:setSize {w = target_w, h = target_h}
 		end
-	end)
+	end
+end
+
+finderAppWatcher = aw.new(finderWatcher)
+finderAppWatcher:start()
+
+-- quit when last window closed
+wf_finder = wf.new("Finder")
+wf_finder:subscribe(wf.windowDestroyed, function()
+	if #wf_finder:getWindows() == 0 then
+		app("Finder"):kill()
+	end
+end)
 
 --------------------------------------------------------------------------------
 

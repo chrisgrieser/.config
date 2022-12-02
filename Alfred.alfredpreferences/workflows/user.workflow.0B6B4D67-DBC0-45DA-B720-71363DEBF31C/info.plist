@@ -8,19 +8,6 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
-		<key>034A18C3-9F44-4A99-9FB4-5109EEE25D52</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D5103819-BE47-447C-8880-FB1D3986CAE8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<array>
 			<dict>
@@ -317,7 +304,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>File Management – Marta</string>
+	<string>Finder Tweaks</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -621,112 +608,6 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string>/System/Applications/Preview.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>C0B013A4-4D3F-43EE-AFFB-3EEE98E5BFAE</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>1</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.adobe.pdf</string>
-				</array>
-				<key>name</key>
-				<string>Open with Preview</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>D5DAF813-DAB5-4CB4-A094-1E6785223E34</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>2</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>D</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-					<string>org.yanex.marta</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>034A18C3-9F44-4A99-9FB4-5109EEE25D52</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>jumpto</key>
-				<string>alfred.action.copy</string>
-				<key>path</key>
-				<string></string>
-				<key>type</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.actioninalfred</string>
-			<key>uid</key>
-			<string>D5103819-BE47-447C-8880-FB1D3986CAE8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>rename</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>com.vitorgalvao.alfred.renameaction</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>D04D747E-97EE-434F-A844-51FF56BF67F2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -755,11 +636,11 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>45</integer>
+				<integer>0</integer>
 				<key>hotmod</key>
-				<integer>262144</integer>
+				<integer>0</integer>
 				<key>hotstring</key>
-				<string>N</string>
+				<string></string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -803,44 +684,19 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>file=$1
-
-mv -f "$file" "$HOME/.Trash/"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>externaltriggerid</key>
-				<string>file-hub-cycle</string>
+				<string>rename</string>
 				<key>passinputasargument</key>
 				<true/>
 				<key>passvariables</key>
 				<true/>
 				<key>workflowbundleid</key>
-				<string>self</string>
+				<string>com.vitorgalvao.alfred.renameaction</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
-			<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
+			<string>D04D747E-97EE-434F-A844-51FF56BF67F2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -964,6 +820,50 @@ IconIndex=0</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>file=$1
+
+mv -f "$file" "$HOME/.Trash/"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>file-hub-cycle</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
@@ -1053,20 +953,45 @@ open .</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Applications/Preview.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>C0B013A4-4D3F-43EE-AFFB-3EEE98E5BFAE</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
+				<key>name</key>
+				<string>Open with Preview</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>D5DAF813-DAB5-4CB4-A094-1E6785223E34</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>034A18C3-9F44-4A99-9FB4-5109EEE25D52</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>345</real>
-		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
 			<key>colorindex</key>
@@ -1083,7 +1008,7 @@ open .</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>380</real>
 		</dict>
 		<key>11D8554B-846B-40DD-9CA0-C73F5736472F</key>
 		<dict>
@@ -1101,7 +1026,7 @@ open .</string>
 			<key>xpos</key>
 			<real>605</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>485</real>
 		</dict>
 		<key>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</key>
 		<dict>
@@ -1143,7 +1068,7 @@ open .</string>
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>485</real>
 		</dict>
 		<key>4B4F74D9-0F04-44F9-B1F5-1F7DFCF57B2C</key>
 		<dict>
@@ -1152,7 +1077,7 @@ open .</string>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>515</real>
 		</dict>
 		<key>56CD69F0-DA3F-4EF1-809F-78543F4459A1</key>
 		<dict>
@@ -1190,7 +1115,7 @@ open .</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>350</real>
 		</dict>
 		<key>7B43FD68-D463-4626-BE13-7D1C65B12ECF</key>
 		<dict>
@@ -1217,7 +1142,7 @@ open .</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>485</real>
 		</dict>
 		<key>95E5B67E-7350-4876-B7DF-90F25BC4A121</key>
 		<dict>
@@ -1226,7 +1151,7 @@ open .</string>
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>615</real>
 		</dict>
 		<key>993B0563-52D6-4547-B1D7-97E70FF55DB2</key>
 		<dict>
@@ -1244,7 +1169,7 @@ open .</string>
 			<key>xpos</key>
 			<real>425</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>350</real>
 		</dict>
 		<key>B1A3DB54-4F96-4E6E-9CF1-E7721DA58232</key>
 		<dict>
@@ -1253,7 +1178,7 @@ open .</string>
 			<key>xpos</key>
 			<real>450</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>485</real>
 		</dict>
 		<key>BF0AEAE4-89C0-4DFF-8F6D-4C1FE0DE091B</key>
 		<dict>
@@ -1269,9 +1194,9 @@ open .</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>590</real>
+			<real>220</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>735</real>
 		</dict>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<dict>
@@ -1289,7 +1214,7 @@ open .</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>615</real>
 		</dict>
 		<key>D04D747E-97EE-434F-A844-51FF56BF67F2</key>
 		<dict>
@@ -1300,23 +1225,14 @@ open .</string>
 			<key>ypos</key>
 			<real>370</real>
 		</dict>
-		<key>D5103819-BE47-447C-8880-FB1D3986CAE8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>210</real>
-			<key>ypos</key>
-			<real>345</real>
-		</dict>
 		<key>D5DAF813-DAB5-4CB4-A094-1E6785223E34</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>415</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>735</real>
 		</dict>
 		<key>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</key>
 		<dict>
@@ -1343,7 +1259,7 @@ open .</string>
 			<key>xpos</key>
 			<real>370</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>515</real>
 		</dict>
 		<key>EC5DBDBD-F5AC-476A-8757-5C1577F33D11</key>
 		<dict>
@@ -1352,7 +1268,7 @@ open .</string>
 			<key>xpos</key>
 			<real>275</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>350</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -45,7 +45,7 @@ rules:
             name: LEADER_ACTIVE
             value: true
           - type: variable_unless
-            name: FINDER_INSERT_MODE
+            name: FINDER_RENAME_MODE
             value: true
           - type: frontmost_application_unless
             bundle_identifiers:
