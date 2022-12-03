@@ -282,6 +282,7 @@ rules:
           - key_code: escape
           - *remove-insert-notice
           - *leave-insert-mode
+          - *leave-search-mode
         conditions: [*is-finder, *is-insert-mode]
       - type: basic
         from: {key_code: escape}
@@ -289,6 +290,7 @@ rules:
           - key_code: escape
           - *remove-insert-notice
           - *leave-insert-mode
+          - *leave-search-mode
         conditions: [*is-finder, *is-insert-mode]
       - type: basic
         from: {key_code: f18} # abort Alfred
@@ -305,6 +307,7 @@ rules:
           - {key_code: w, modifiers: [command]}
           - *remove-insert-notice
           - *leave-insert-mode
+          - *leave-search-mode
         conditions: [*is-finder, *is-insert-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Window & Tabs
