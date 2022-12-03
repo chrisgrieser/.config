@@ -32,7 +32,7 @@ g.markdown_fenced_languages = {
 -- custom text object markdown link
 b.miniai_config = {
 	custom_textobjects = {
-		l = {"%[().*()]%(.*%)"}, -- markdown link
+		l = {"%[().*()]%(.*%)"}, 
 	},
 }
 --------------------------------------------------------------------------------
