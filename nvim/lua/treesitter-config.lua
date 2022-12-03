@@ -119,3 +119,12 @@ autocmd("BufWinEnter", {
 	pattern = {"*.sh", "*.zsh", ".zsh*"},
 	command = "silent! set filetype=sh",
 })
+
+require("hlargs").setup {
+	paint_catch_blocks = {
+		declarations = true,
+		usages = true
+	},
+	extras = {named_parameters = true},
+}
+cmd[[highlight! Hlargs gui=underline cterm=underline]]

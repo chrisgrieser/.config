@@ -25,6 +25,7 @@ function M.PluginList(use)
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"p00f/nvim-ts-rainbow", -- colored brackets
+			"m-demare/hlargs.nvim", -- highlight function args
 		}
 	}
 	use {"Wansmer/treesj", -- split-join
@@ -45,7 +46,6 @@ function M.PluginList(use)
 		"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		"ray-x/lsp_signature.nvim", -- signature hint
 		"SmiteshP/nvim-navic", -- breadcrumbs
-		"j-hui/fidget.nvim", -- lsp status
 		"folke/neodev.nvim", -- lsp for nvim-lua config
 		"b0o/SchemaStore.nvim", -- schemas for json-lsp
 	}}
