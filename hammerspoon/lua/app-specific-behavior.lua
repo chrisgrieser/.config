@@ -28,7 +28,7 @@ local function hideAllExcept(appNotToHide)
 end
 
 -- not local, since needed by window movements
-function unHideAll()
+local function unHideAll()
 	local wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
 	for i = 1, #wins do
 		local appli = wins[i]:application()
@@ -232,18 +232,13 @@ wf_finder = wf.new("Finder")
 	-- - Bring all windows forward
 	-- - hide sidebar
 	-- - enlarge window if it's too small
-	:subscribe(wf.windowFocused, function(currentWin)
-		local isInfoWindow = currentWin:title():match(" Info$")
+	:subscribe(wf.windowCreated, function(newWin)
+		local isInfoWindow = newWin:title():match(" Info$")
 		if isInfoWindow then return end
 
 		app("Finder"):selectMenuItem {"View", "Hide Sidebar"}
-
-		local win_h = currentWin:frame().h
-		local max_h = currentWin:screen():frame().h
-		local max_w = currentWin:screen():frame().w
-		if (win_h / max_h) < 0.9 then
-			currentWin:setSize {w = 0.6 * max_w, h = 1 * max_h}
-		end
+		app("Finder"):selectMenuItem {"Window", "Bring All to Front"}
+		moveResizeCurWin("centered")
 	end)
 
 -- quit Finder if it was started as a helper (e.g., JXA), but has no window
