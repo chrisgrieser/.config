@@ -135,13 +135,23 @@ cmp.setup.filetype("toml", {
 	sources = cmp.config.sources(defaultAndNerdfont),
 })
 
--- don't use buffer in css completions
+-- don't use buffer and treesitter in css completions since laggy
 cmp.setup.filetype("css", {
 	sources = cmp.config.sources {
 		{name = "luasnip"},
 		{name = "nvim_lsp"},
-		{name = "treesitter"},
 		{name = "cmp_tabnine", keyword_length = 3},
+		{name = "emoji", keyword_length = 2},
+	},
+})
+
+-- treesitter has better completions here so using it
+cmp.setup.filetype("yaml", {
+	sources = cmp.config.sources {
+		{name = "luasnip"},
+		{name = "treesitter"},
+		{name = "nvim_lsp"},
+		{name = "cmp_tabnine", keyword_length = 2},
 		{name = "emoji", keyword_length = 2},
 	},
 })
