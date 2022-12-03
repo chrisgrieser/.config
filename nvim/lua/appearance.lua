@@ -82,7 +82,6 @@ require("gitsigns").setup {
 	preview_config = {border = borderStyle},
 }
 
-
 --------------------------------------------------------------------------------
 
 -- PRETTY FOLD
@@ -104,27 +103,27 @@ require("windows").setup {
 		winwidth = 10,
 	},
 	ignore = {
-		filetype = {"Mundo", "MundoDiff", "netrw"}
+		filetype = {"Mundo", "MundoDiff", "netrw"},
+		buftype = {""},
 	}
 }
 
 --------------------------------------------------------------------------------
 -- STATUS LINE (LUALINE)
 
--- simple alternative to fidget.nvim https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
+-- simple alternative to fidget.nvim, via https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
 local function lsp_progress()
 	local messages = vim.lsp.util.get_progress_messages()
 	if #messages == 0 then return "" end
 	local progess = messages[1].percentage or 0
+	local client = messages[1].name and messages[1].name .. ": " or ""
 	local task = messages[1].title or ""
 	task = task:gsub("^(%w+).*", "%1") -- only first word
-
 	local spinners = {"⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"}
 	local ms = vim.loop.hrtime() / 1000000
 	local frame = math.floor(ms / 120) % #spinners
-	return progess .. "%% " .. task .. " " .. spinners[frame + 1]
+	return client .. progess .. "%% " .. task .. " " .. spinners[frame + 1]
 end
-
 
 local function recordingStatus()
 	if fn.reg_recording() == "" then return "" end

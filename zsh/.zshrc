@@ -10,7 +10,7 @@ CONFIG+=('history_config')
 CONFIG+=('general_and_plugin_configs')
 CONFIG+=('completions')
 CONFIG+=('keybindings')
-[[ $TERM != "xterm-256color" ]] && CONFIG+=('vi-mode')
+[[ $TERM != "xterm-256color" ]] && CONFIG+=('vi-mode') # don't use vi mode for toggleterm in neovim
 CONFIG+=('docs_man')
 CONFIG+=('git_github')
 CONFIG+=('homebrew')

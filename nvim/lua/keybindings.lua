@@ -39,7 +39,7 @@ end)
 keymap("n", "<leader>P", packer.status)
 
 -- write all before quitting
-keymap("n", "ZZ", ":wqall!<CR>")
+keymap("n", "ZZ", ":wall! | qa!<CR>")
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -463,13 +463,9 @@ keymap("n", "<leader>ow", ":set wrap!<CR>")
 
 -- TERMINAL MODE
 keymap("t", "<Esc>", [[<C-\><C-n>]]) -- normal mode in Terminal window
--- keymap("n", "6", ":ToggleTerm<CR>")
-keymap("n", "<leader>g", [[:TermExec cmd="git status"<CR>]]) -- shell function, enabled via .zshenv
-
-require("toggleterm").setup {
-	size = 15,
-	open_mapping = "6",
-}
+keymap("n", "<leader>g", [[:w<CR>:!acp ""<Left>]]) -- shell function `acp`, enabled via .zshenv
+keymap("n", "6", ":ToggleTerm size=8<CR>")
+keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>")
 
 --------------------------------------------------------------------------------
 
@@ -494,7 +490,7 @@ keymap("n", "<leader>r", function()
 			cmd [[write! | mkview | source % | loadview]] -- HACK: mkview and loadview needed to not loose folding when sourcing
 			if filename:find("plugin%-list") then
 				packer.compile()
-				packer.sync()
+				vim.notify(" Packer recompiled and " .. fn.expand("%") .. " reloaded. ")
 			else
 				vim.notify(" " .. fn.expand("%") .. " reloaded. ")
 			end
