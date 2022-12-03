@@ -112,7 +112,7 @@ add("lua", {
 -- nvim-lua
 add("lua", {
 	snip("keymap", 'keymap("n", "$1", ${2:""})\n$0'),
-	snip("highlight (link)", 'cmd[[highlight! def link ${1:from} ${2:to}]]'),
+	snip("highlight (link)", 'cmd[[highlight! def link ${1:fromGroup} ${2:toGroup}]]'),
 	snip("keymap (multi-mode)", 'keymap({"n", "${1:x}"}, "$2", ${3:""})\n$0'),
 	snip("input (vim.ui)", [[
 		vim.ui.input({ prompt = "${1:prompt_msg}"}, function (input)
@@ -203,12 +203,21 @@ add("javascript", {
 -- JXA-specific
 add("javascript", {
 	snip("##", "#!/usr/bin/env osascript -l JavaScript\n$0"),
+	snip("online JSON", 'const onlineJSON = (url) => JSON.parse(app.doShellScript(`curl -s "${url}"`));'),
+	snip("read file", [[
+		function readFile(path) {
+			const fm = $.NSFileManager.defaultManager;
+			const data = fm.contentsAtPath(path);
+			const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+			return ObjC.unwrap(str);
+		}
+	]]),
 	snip("app", "const app = Application.currentApplication();\napp.includeStandardAdditions = true;\n$0"),
 	snip("shell script", "app.doShellScript(`${1:shellscript}`);\n$0"),
 	snip("home (JXA)", 'app.pathTo("home folder")'),
 	snip("resolve home (JXA)", 'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 	snip("exists (file)", '	const fileExists = (filePath) => Application("Finder").exists(Path(filePath));\n$0'),
-	snip("browser URL & title", [[
+	snip("browser URL & title (function)", [[
 		function browserTab() {
 			const frontmostAppName = Application("System Events").applicationProcesses.where({ frontmost: true }).name()[0];
 			const frontmostApp = Application(frontmostAppName);
@@ -242,14 +251,15 @@ add("javascript", {
 			"cmd": { "arg": "foo" },
 			"alt": {
 				"arg": "bar",
-				"subtitle": "⌥: Copy Link"
+				"subtitle": "⌥: Copy Link",
 			},
 		},
 	]]),
 	snip("Script Filter", [[
-		const jsonArray = JSON.parse(readFile(VAR))
+		const jsonArray = JSON.parse(readFile(${1:VAR}))
 			.split("\r")
 			.map(item => {
+				$2
 				return {
 					"title": item,
 					"match": alfredMatcher (item),
@@ -280,25 +290,6 @@ add("javascript", {
 -- YAML
 -- Karabiner config
 add("yaml", {
-	snip("conditions: (Karabiner)", [[
-	  conditions:
-	    - type: frontmost_application_if
-	      bundle_identifiers:
-	        - ^${1:appid}\$
-	]]),
-	snip("from: (Karabiner)", [[
-	  from:
-	    key_code: ${1:key}
-	    modifiers:
-	    mandatory:
-	      - ${2:command}
-	]]),
-	snip("to: (Karabiner)", [[
-	  to:
-	    - key_code: ${1:key}
-	      modifiers:
-	        - ${2:command}
-	]]),
 	snip("delay (Karabiner)", [[
 	  - key_code: vk_none
 	    hold_down_milliseconds: ${1:amount}

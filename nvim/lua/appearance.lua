@@ -27,17 +27,6 @@ require("scrollview").setup {
 	excluded_filetypes = specialFiletypes,
 }
 
--- require("codewindow").setup {
--- 	auto_enable = true,
--- 	max_lines = 2000,
--- 	minimap_width = 7,
--- 	width_multiplier = 7,
--- 	show_cursor = true,
--- 	window_border = {"│", "" ,"", "", "", "", "│", "│" },
--- }
--- cmd[[highlight! def link CodewindowBorder NonText]]
-require('mini.map').setup()
-
 --------------------------------------------------------------------------------
 -- NOTIFICATIONS
 if isGui() then
