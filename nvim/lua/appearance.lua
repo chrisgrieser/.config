@@ -19,9 +19,9 @@ require("indent_blankline").setup {
 }
 
 --------------------------------------------------------------------------------
--- SCROLLBAR & MINIMAP
+-- SCROLLBAR
 require("scrollview").setup {
-	current_only = true,
+	current_only = false,
 	winblend = 0,
 	column = 1,
 	excluded_filetypes = specialFiletypes,
@@ -104,6 +104,18 @@ require("pretty-fold").setup {
 	fill_char = "",
 	process_comment_signs = false,
 	keep_indentation = true,
+}
+
+--------------------------------------------------------------------------------
+-- AUTO-RESIZE WINDOWS
+require("windows").setup {
+	autowidth = {
+		enable = true,
+		winwidth = 10,
+	},
+	ignore = {
+		filetype = {"Mundo", "MundoDiff", "netrw"}
+	}
 }
 
 --------------------------------------------------------------------------------

@@ -317,7 +317,7 @@ local function draftsLaunchWake(appName, eventType, appObject)
 
 	if (eventType == aw.launched or eventType == aw.activated) then
 		local workspace = isAtOffice() and "Office" or "Home"
-		runDelayed(0.3, function()
+		repeatFunc({0.15, 0.3}, function()
 			local name = appObject:focusedWindow():title()
 			local isTaskList = name:find("Supermarkt$") or name:find("Drogerie$") or name:find("Ernährung$")
 			if not (isTaskList) then
