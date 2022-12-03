@@ -181,14 +181,14 @@ keymap({"o", "x"}, "ac", "a}")
 keymap("o", "r", "}") -- [r]est of the paragraph
 keymap("o", "R", "{")
 
-require("mini.ai").setup {
+-- disable text-objects from mini.ai in favor of my own
+local miniaiConfig = {
 	custom_textobjects = {
-		b = false, -- disable text-objects from mini.ai in favor of my own
+		b = false,
 		q = false,
 		t = false,
 		f = false,
 		a = false,
-		l = {"()%[.-]%(.-)()"}, -- markdown link
 	},
 	mappings = {
 		around_next = "",
@@ -199,7 +199,19 @@ require("mini.ai").setup {
 		goto_right = "",
 	},
 }
--- [bla](blubbb)
+
+-- custom text object "e": from cursor to end of line minus 1 char
+miniaiConfig.custom_textobjects.e = function ()
+	local row = api.nvim_win_get_cursor(0)[1]
+	local col = api.nvim_win_get_cursor(0)[2]
+	local eol = fn.col("$") - 1
+	local from = {line = row, col = col}
+	local to = {line = row, col = eol - 1}
+	return {from = from, to = to}
+end
+require("mini.ai").setup(miniaiConfig)
+
+
 --------------------------------------------------------------------------------
 
 -- MACRO
