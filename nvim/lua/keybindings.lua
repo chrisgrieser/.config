@@ -395,7 +395,7 @@ keymap("n", "<S-BS>", ":nohl<CR><Plug>(CybuPrev)")
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
 
 require("cybu").setup {
-	display_time = 1500,
+	display_time = 1000,
 	position = {
 		anchor = "bottomcenter",
 		max_win_height = 12,
