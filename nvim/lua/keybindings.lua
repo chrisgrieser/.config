@@ -77,7 +77,7 @@ keymap({"n", "x", "o"}, "+", "*") -- no more modifier key (German Layout)
 keymap({"n", "x", "o"}, "*", "#") -- backwards on the same key (German Layout)
 
 -- Open Next URL
-keymap("n", "gx", "/http<CR>:nohl<CR><Plug>NetrwBrowseX") 
+keymap("n", "gx", "/http<CR>:nohl<CR><Plug>NetrwBrowseX")
 
 -- MARKS
 keymap("", "ä", "`M") -- Goto Mark M
@@ -89,10 +89,11 @@ end)
 -- FOLDING
 keymap("n", "^", "za") -- quicker toggling of folds
 
+-- [M]atch
+keymap({"n", "x", "o"}, "m", "%")
+
 --------------------------------------------------------------------------------
 -- NAVIGATION PLUGINS
--- vim.[m]atchup
-keymap({"n", "x", "o"}, "m", "%", {remap = true}) -- remap to use matchup's % instead of builtin %
 
 -- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)")
@@ -198,7 +199,7 @@ local miniaiConfig = {
 }
 
 -- custom text object "e": from cursor to end of line minus 1 char
-miniaiConfig.custom_textobjects.e = function ()
+miniaiConfig.custom_textobjects.e = function()
 	local row = fn.line(".")
 	local col = fn.col(".")
 	local eol = fn.col("$") - 1
@@ -461,8 +462,16 @@ keymap("n", "<leader>ow", ":set wrap!<CR>")
 --------------------------------------------------------------------------------
 
 -- TERMINAL MODE
-keymap("n", "<leader>t", ":10split<CR>:terminal<CR>")
-keymap("n", "<leader>g", [[:w<CR>:!acp ""<Left>]]) -- shell function, enabled via .zshenv
+keymap("n", "6", ":ToggleTerm<CR>")
+keymap("n", "<leader>g", ":TermExec cmd=git status<CR>") -- shell function, enabled via .zshenv
+
+require("toggleterm").setup {
+
+}
+keymap("t", "<Esc>", [[<C-\><C-n>]])
+
+augroup("Terminal", {})
+autocmd("TermOpen", )
 
 --------------------------------------------------------------------------------
 
