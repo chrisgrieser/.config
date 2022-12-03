@@ -82,16 +82,6 @@ require("gitsigns").setup {
 	preview_config = {border = borderStyle},
 }
 
---------------------------------------------------------------------------------
--- FIDGET
-require("fidget").setup {
-	-- https://github.com/j-hui/fidget.nvim/blob/main/lua/fidget/spinners.lua
-	text = {spinner = "dots"},
-	fmt = {stack_upwards = false}, -- false = title on top
-	sources = {
-		["null-ls"] = {ignore = true}
-	}
-}
 
 --------------------------------------------------------------------------------
 
@@ -120,6 +110,21 @@ require("windows").setup {
 
 --------------------------------------------------------------------------------
 -- STATUS LINE (LUALINE)
+
+-- simple alternative to fidget.nvim https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
+local function lsp_progress()
+	local messages = vim.lsp.util.get_progress_messages()
+	if #messages == 0 then return "" end
+	local progess = messages[1].percentage or 0
+	local task = messages[1].title or ""
+	task = task:gsub("^(%w+).*", "%1") -- only first word
+
+	local spinners = {"⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"}
+	local ms = vim.loop.hrtime() / 1000000
+	local frame = math.floor(ms / 120) % #spinners
+	return progess .. "%% " .. task .. " " .. spinners[frame + 1]
+end
+
 
 local function recordingStatus()
 	if fn.reg_recording() == "" then return "" end
@@ -243,6 +248,7 @@ require("lualine").setup {
 				return " " .. str:sub(2, -2)
 			end},
 			"diagnostics",
+			{lsp_progress},
 			{mixedIndentation},
 		},
 		lualine_y = {
