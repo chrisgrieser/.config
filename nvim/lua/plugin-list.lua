@@ -92,6 +92,7 @@ function M.PluginList(use)
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 	use "dstein64/nvim-scrollview" -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
 	use "anuvyklack/pretty-fold.nvim" -- fold look customization
+	use {"anuvyklack/windows.nvim", requires = "anuvyklack/middleclass"} -- auto-resize splits
 
 	-- File Switching & File Operation
 	use {myrepos .. "nvim-genghis", requires = "stevearc/dressing.nvim"}
