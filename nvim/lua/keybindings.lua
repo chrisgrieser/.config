@@ -462,16 +462,14 @@ keymap("n", "<leader>ow", ":set wrap!<CR>")
 --------------------------------------------------------------------------------
 
 -- TERMINAL MODE
-keymap("n", "6", ":ToggleTerm<CR>")
-keymap("n", "<leader>g", ":TermExec cmd=git status<CR>") -- shell function, enabled via .zshenv
+keymap("t", "<Esc>", [[<C-\><C-n>]]) -- normal mode in Terminal window
+-- keymap("n", "6", ":ToggleTerm<CR>")
+keymap("n", "<leader>g", [[:TermExec cmd="git status"<CR>]]) -- shell function, enabled via .zshenv
 
 require("toggleterm").setup {
-
+	size = 15,
+	open_mapping = "6",
 }
-keymap("t", "<Esc>", [[<C-\><C-n>]])
-
-augroup("Terminal", {})
-autocmd("TermOpen", )
 
 --------------------------------------------------------------------------------
 
