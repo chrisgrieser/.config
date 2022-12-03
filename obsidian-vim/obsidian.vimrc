@@ -1,5 +1,5 @@
 """"""""""""""""""""""
-" < Leader
+" Leader
 """"""""""""""""""""""
 " let mapleader=,
 " can't set leaders in Obsidian vim, so the key just has to be used consistently.
@@ -19,7 +19,7 @@ nmap Y y$
 nmap P "0p
 
 """"""""""""""""""""""
-" < Search
+" Search
 """"""""""""""""""""""
 " no modifier key for jumping to next word
 nmap + *
@@ -29,7 +29,7 @@ nmap + *
 map - /
 
 """"""""""""""""""""""
-" < Nagivation
+" Nagivation
 """"""""""""""""""""""
 
 " Have j and k navigate visual lines rather than logical ones
@@ -91,11 +91,7 @@ vmap go :quickSwitcher
 nmap g; u<C-r>
 
 """"""""""""""""""""""
-" < Editing
-""""""""""""""""""""""
-
-""""""""""""""""""""""
-" << General Editing
+" Editing
 """"""""""""""""""""""
 
 " don't pollute the register
@@ -116,7 +112,7 @@ nmap ü :caseSwitch
 vmap ü :caseSwitch
 
 """"""""""""""""""""""
-" << Line-Based Editing
+" Line-Based Editing
 """"""""""""""""""""""
 
 " [M]erge Lines
@@ -168,7 +164,7 @@ nmap X mz$"_x`z
 nmap gcc :.s/^|$/%%/g
 
 """"""""""""""""""""""
-" << Markdown-specific
+" Markdown-specific
 """"""""""""""""""""""
 
 " delete alias part of next Wikilink
@@ -205,12 +201,12 @@ nmap &§&#b :.s/^-/##/
 nmap ,+ mz&§&#a&§&#bO<Esc>`z
 
 """"""""""""""""""""""
-" << Indentation
+" Indentation
 """"""""""""""""""""""
 " <Tab> as indentation is already implemented in Obsidian
 
 """"""""""""""""""""""
-" < Text Objects
+" Text Objects
 """"""""""""""""""""""
 
 " Change Word/Selection
@@ -226,14 +222,14 @@ exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
 nmap R :duplicate
 
 """"""""""""""""""""""
-" < Visual Mode
+" Visual Mode
 """"""""""""""""""""""
 
 " so that VV... in normal mode selects more lines
 vmap V j
 
 """"""""""""""""""""""
-" < Tabs/Window
+" Tabs/Window
 """"""""""""""""""""""
 
 " https://vimhelp.org/index.txt.html#CTRL-W
@@ -277,7 +273,7 @@ nmap <S-BS> :prevTab
 " map gW :prevPane
 
 """"""""""""""""""""""
-" < Folding
+" Folding
 """"""""""""""""""""""
 " Emulate Original Folding command https://vimhelp.org/fold.txt.html#fold-commands
 exmap unfoldall obcommand editor:unfold-all
@@ -294,7 +290,7 @@ nmap zr :foldless
 nmap zR :unfoldall
 
 """"""""""""""""""""""""""""
-" < Sneak / Hop / Lightspeed
+" Sneak / Hop / Lightspeed
 """"""""""""""""""""""""""""
 " emulate various vim motion plugins
 
@@ -317,14 +313,14 @@ exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
 nmap ,f :linkjump
 
 """"""""""""""""""""""
-" < Substitute
+" Substitute
 """"""""""""""""""""""
 " emulate substitute.vim
 nmap s Vp
 nmap S vg$p
 
 """"""""""""""""""""""
-" < Option Toggling
+" Option Toggling
 """"""""""""""""""""""
 
 exmap number obcommand obsidian-smarter-md-hotkeys:toggle-line-numbers

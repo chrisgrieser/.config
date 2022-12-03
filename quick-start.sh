@@ -92,7 +92,6 @@ ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 # Only left here for reference, or when dotfile folder location is changed
 
 # Brave PWAs
-
 # BROWSER="Brave Browser"
 # [[ -e ~"/Applications/$BROWSER Apps.localized" ]] && rm -rf ~"/Applications/$BROWSER Apps.localized"
 # ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"

@@ -267,8 +267,8 @@ keymap("n", "sxx", exchange.line)
 keymap("x", "X", exchange.visual)
 
 -- search & replace
-keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]])
-keymap("x", "<leader>f", ":s///g<Left><Left><Left>")
+keymap("n", "<leader>f", [[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]])
+keymap("x", "<leader>f", ":sm///g<Left><Left><Left>")
 keymap({"n", "x"}, "<leader>F", function() require("ssr").open() end) -- wrapped in function for lazy-loading
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)

@@ -68,20 +68,24 @@
     },
     "(⌘)9\ntoggle pathbar",
     "(⌘)0\ntoggle preview",
-    "?\n:help",
+    {
+      "f": 1
+    },
+    "?\n:help (this image)",
     {
       "c": "#CCCCCC",
       "f": 4
     },
     "`",
     {
-      "c": "#999999",
-      "a": 7,
-      "f": 6,
+      "c": "#c7a6ff",
+      "f": 2,
       "w": 2
     },
-    "⌫",
+    "⌫\ngoto trash",
     {
+      "c": "#999999",
+      "a": 7,
       "f": 4
     },
     "PdUp"
@@ -95,11 +99,12 @@
     },
     "↹",
     {
-      "c": "#cccccc"
+      "c": "#c7a6ff",
+      "f": 1
     },
-    "q",
+    "q\ngoto Downloads",
     {
-      "c": "#c7a6ff"
+      "f": 2
     },
     "w\n:close",
     "e\neject (if volume)",
@@ -163,7 +168,6 @@
     },
     "h\nparent dir\n\n\n⌃h back",
     {
-      "sm": "",
       "f": 1,
       "n": true
     },
