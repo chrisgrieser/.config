@@ -140,6 +140,7 @@ add("lua", {
 
 -- AppleScript
 add("applescript", {
+	snip("get selection (Finder)", 'tell application "Finder" to return POSIX path of (selection as alias)'),
 	snip("browser URL", 'tell application "Brave Browser" to set currentTabUrl to URL of active tab of front window\n$0'),
 	snip("browser tab title",
 		'tell application "Brave Browser" to set currentTabName to title of active tab of front window\n$0'),
