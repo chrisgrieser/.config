@@ -165,19 +165,6 @@ autocmd("BufWinEnter", {
 
 --------------------------------------------------------------------------------
 
--- Terminal Mode
-augroup("Terminal", {})
-autocmd("TermOpen", {
-	group = "Terminal",
-	command = "startinsert",
-})
-autocmd("TermClose", {
-	group = "Terminal",
-	command = "bdelete",
-})
-
---------------------------------------------------------------------------------
-
 -- Skeletons (Templates)
 -- apply templates for any filetype named `.config/nvim/templates/skeletion.{ft}`
 augroup("Templates", {})

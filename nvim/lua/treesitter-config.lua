@@ -105,10 +105,6 @@ require("nvim-treesitter.configs").setup {
 			},
 		},
 	},
-	matchup = {-- vim-matchup plugin
-		enable = true,
-		disable = {},
-	},
 }
 
 --------------------------------------------------------------------------------

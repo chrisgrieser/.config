@@ -1,7 +1,8 @@
+---@diagnostic disable: undefined-global
 local M = {}
 myrepos = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/"
 --------------------------------------------------------------------------------
-function M.PluginList(use)
+function M.PluginList()
 
 	-- Package Management
 	use "wbthomason/packer.nvim" -- packer manages itself
@@ -34,7 +35,6 @@ function M.PluginList(use)
 			"AndrewRadev/splitjoin.vim", -- only used as fallback. TODO: remove when treesj has wider language support
 		},
 	}
-	use {"andymass/vim-matchup", requires = "nvim-treesitter/nvim-treesitter"} -- % improved
 	use {"cshuaimin/ssr.nvim", -- structural search & replace
 		module = "ssr",
 		config = function() require("ssr").setup() end,
@@ -100,7 +100,7 @@ function M.PluginList(use)
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons"
 	}}
-
+	use "akinsho/toggleterm.nvim"
 	use {"ghillb/cybu.nvim", requires = {-- Cycle Buffers
 		"nvim-tree/nvim-web-devicons",
 		"nvim-lua/plenary.nvim",
