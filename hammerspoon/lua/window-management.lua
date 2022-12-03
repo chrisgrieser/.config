@@ -107,11 +107,11 @@ end
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
----Moved Window
----@param mode string
+---Move and Resize Window
+---@param mode string left|right|up|down|centered|[pseudo-]maximized
 function moveResizeCurWin(mode)
 	local win = hs.window.focusedWindow()
-	local appName = win:application():name()
+	local appOfWin = win:application():name()
 
 	local position
 	if (mode == "left") then
@@ -130,23 +130,23 @@ function moveResizeCurWin(mode)
 		position = {x = 0.2, y = 0, w = 0.6, h = 1}
 	end
 
+	moveResize(win, position) -- workaround for https://github.com/Hammerspoon/hammerspoon/issues/2316
+
+	if appOfWin == "Drafts" then toggleDraftsSidebar(win)
+	elseif appOfWin == "Obsidian" then toggleObsidianSidebar(win)
+	elseif appOfWin == "Highlights" then toggleHighlightsSidebar(win)
+	end
+
 	if not (mode == "pseudo-maximized" or mode == "maximized") then
-		unHideAll()
-		if appName == "neovide" or appName == "Neovide" then -- useful for theme development
-			runDelayed(0.2, function()
+		if appOfWin:find("[Nn]eovide") then -- for Obsidian theme development
+			runDelayed(0.15, function()
+				app("Obsidian"):unhide()
 				app("Obsidian"):mainWindow():raise()
 			end)
 		end
 	end
 
-	moveResize(win, position) -- workaround for https://github.com/Hammerspoon/hammerspoon/issues/2316
-
-	if appName == "Drafts" then toggleDraftsSidebar(win)
-	elseif appName == "Obsidian" then toggleObsidianSidebar(win)
-	elseif appName == "Highlights" then toggleHighlightsSidebar(win)
-	end
-
-	if mode == "pseudo-maximized" then
+	if mode == "pseudo-maximized" or mode == "centered" then
 		app("Twitterrific"):mainWindow():raise()
 	end
 

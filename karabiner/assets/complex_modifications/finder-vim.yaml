@@ -169,13 +169,35 @@ rules:
         from:
           key_code: q
         to:
-          - shell_command: open "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/" || open "$HOME/Downloads"
+          - shell_command: |
+              target="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+              if [[! -e "$target"]]
+              osascript -e '
+                set home to (POSIX path of (path to home folder as string))
+                set the_folder to (home & "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/") as POSIX file
+                tell application "Finder"
+                  if front Finder window exists then
+                    set target of front Finder window to the_folder
+                  else
+                    open the_folder
+                  end if
+                end tell'
         conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       - type: basic
         from:
           key_code: delete_or_backspace
         to:
-          - shell_command: open "$HOME/.Trash"
+          - shell_command: |
+              osascript -e '
+                set home to (POSIX path of (path to home folder as string))
+                set the_folder to (home & ".Trash") as POSIX file
+                tell application "Finder"
+                  if front Finder window exists then
+                    set target of front Finder window to the_folder
+                  else
+                    open the_folder
+                  end if
+                end tell'
         conditions: [*is-finder, *not-insert-mode, *not-search-mode]
       #─────────────────────────────────────────────────────────────────────────
       # INSERT MODE
@@ -489,7 +511,7 @@ rules:
       # <C-l> = History Forward
       - type: basic
         from:
-          key_code: h
+          key_code: l
           modifiers: {mandatory: [control]}
         to:
           - key_code: quote # German ä
