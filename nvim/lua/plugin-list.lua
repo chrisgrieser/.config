@@ -93,7 +93,7 @@ function M.PluginList(use)
 	use "dstein64/nvim-scrollview" -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
 	use "anuvyklack/pretty-fold.nvim" -- fold look customization
 	use "gorbit99/codewindow.nvim" -- minimap
-	use {"wfxr/minimap.vim", run = "brew install code-minimap"} 
+	use "echasnovski/mini.map"
 
 	-- File Switching & File Operation
 	use {myrepos .. "nvim-genghis", requires = "stevearc/dressing.nvim"}

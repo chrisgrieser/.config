@@ -27,14 +27,16 @@ require("scrollview").setup {
 	excluded_filetypes = specialFiletypes,
 }
 
-require("codewindow").setup {
-	auto_enable = true,
-	max_lines = 2000,
-	minimap_width = 6,
-	width_multiplier = 5,
-	show_cursor = false,
-	window_border = {"│", "" ,"", "", "", "", "│", "│" },
-}
+-- require("codewindow").setup {
+-- 	auto_enable = true,
+-- 	max_lines = 2000,
+-- 	minimap_width = 7,
+-- 	width_multiplier = 7,
+-- 	show_cursor = true,
+-- 	window_border = {"│", "" ,"", "", "", "", "│", "│" },
+-- }
+-- cmd[[highlight! def link CodewindowBorder NonText]]
+require('mini.map').setup()
 
 --------------------------------------------------------------------------------
 -- NOTIFICATIONS
@@ -105,15 +107,15 @@ require("fidget").setup {
 --------------------------------------------------------------------------------
 
 -- PRETTY FOLD
--- require("pretty-fold").setup {
--- 	sections = {
--- 		left = {"content"},
--- 		right = {"  ﬔ  ", "number_of_folded_lines"},
--- 	},
--- 	fill_char = "",
--- 	process_comment_signs = false,
--- 	keep_indentation = true,
--- }
+require("pretty-fold").setup {
+	sections = {
+		left = {"content"},
+		right = {"  ﬔ  ", "number_of_folded_lines"},
+	},
+	fill_char = "",
+	process_comment_signs = false,
+	keep_indentation = true,
+}
 
 --------------------------------------------------------------------------------
 -- STATUS LINE (LUALINE)
@@ -198,9 +200,7 @@ end
 -- NAVIC
 local navic = require("nvim-navic")
 navic.setup {
-	icons = {
-		Object = "ﴯ ",
-	},
+	icons = {Object = "ﴯ "},
 	separator = "  ",
 	depth_limit = 10,
 	depth_limit_indicator = "…",
