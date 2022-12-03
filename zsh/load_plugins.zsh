@@ -21,11 +21,11 @@ source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substrin
 
 # Starship
 eval "$(starship init zsh)"
-if [[ "$TERM" == "alacritty" ]] ; then
-	export STARSHIP_CONFIG=~/.config/starship/starship-alacritty.toml
-else
+if [[ "$TERM" == "Warp" ]] ; then
 	export STARSHIP_CONFIG=~/.config/starship/starship-warp.toml
 	cd "$WD" || return
+else
+	export STARSHIP_CONFIG=~/.config/starship/starship-alacritty.toml
 fi
 
 source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"

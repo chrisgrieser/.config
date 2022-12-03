@@ -129,7 +129,6 @@ specialFiletypes = {
 	"MundoDiff",
 	"prompt",
 	"TelescopePrompt",
-	"toggleterm",
 	"noice",
 	"mason",
 	"ssr",
