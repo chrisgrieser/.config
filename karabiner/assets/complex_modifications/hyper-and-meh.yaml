@@ -44,18 +44,18 @@ rules:
           - type: variable_unless
             name: LEADER_ACTIVE
             value: true
-          - type: variable_unless
-            name: FINDER_INSERT_MODE
-            value: true
-          - type: variable_unless
-            name: FINDER_SEARCH_MODE
-            value: true
-          - type: variable_unless
-            name: FINDER_MOVE_ACTIVE
-            value: true
-          - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^dev\.warp\.Warp-Stable$
+            # - type: variable_unless
+            #   name: FINDER_INSERT_MODE
+            #   value: true
+            # - type: variable_unless
+            #   name: FINDER_FIND_MODE
+            #   value: true
+            # - type: variable_unless
+            #   name: FINDER_MOVE_ACTIVE
+            #   value: true
+            # - type: frontmost_application_unless
+            #   bundle_identifiers:
+            #     - ^dev\.warp\.Warp-Stable$
       # Capslock/Shift to Hyper/Shift
       - type: basic
         from:
@@ -109,7 +109,18 @@ rules:
           key_code: delete_or_backspace
           modifiers: {mandatory: [control, command, shift, option]}
         to:
-          - shell_command: open -a "Finder" ~/.Trash
+          - shell_command: |
+              osascript -e '
+                set home to (POSIX path of (path to home folder as string))
+                set the_folder to (home & ".Trash") as POSIX file
+                tell application "Finder"
+                  activate
+                  if front Finder window exists then
+                    set target of front Finder window to the_folder
+                  else
+                    open the_folder
+                  end if
+                end tell'
           - key_code: vk_none
             hold_down_milliseconds: 200
           - key_code: "2" # list view
@@ -120,4 +131,16 @@ rules:
           key_code: f
           modifiers: {mandatory: [control, command, shift, option]}
         to:
-          - shell_command: open "$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+          - shell_command: |
+              target="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+              [[ -e "$target" ]] || target="$HOME/Downloads"
+              osascript -e "
+                set the_folder to (\"$target\") as POSIX file
+                tell application \"Finder\"
+                  activate
+                  if front Finder window exists then
+                    set target of front Finder window to the_folder
+                  else
+                    open the_folder
+                  end if
+                end tell"
