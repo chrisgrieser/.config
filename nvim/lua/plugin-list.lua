@@ -100,7 +100,10 @@ function M.PluginList()
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons"
 	}}
-	use "akinsho/toggleterm.nvim"
+	use {"akinsho/toggleterm.nvim",
+		cmd = {"ToggleTerm", "ToggleTermSendVisualSelection"},
+		config = function() require("toggleterm").setup() end
+	}
 	use {"ghillb/cybu.nvim", requires = {-- Cycle Buffers
 		"nvim-tree/nvim-web-devicons",
 		"nvim-lua/plenary.nvim",

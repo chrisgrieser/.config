@@ -387,6 +387,18 @@ rules:
           - key_code: v
             modifiers: [command]
         conditions: [*is-finder, *not-insert-mode, *move-inactive, *not-find-mode]
+      # x = cross-move to other Finder Window (if there are exactly 2 Finder windows)
+      - type: basic
+        from: {key_code: x}
+        to_if_alone:
+          - shell_command: |
+              msg=$(osascript -e 'tell application "Finder"
+                if number of windows is not 2 then return "⚠️ More than two windows."
+                set otherWin to (target of Finder window 2 as alias)
+                set sel to (selection as alias)
+                move sel to otherWin
+              end tell'
+        conditions: [*is-finder, *not-insert-mode, *not-find-mode]
       # i = info window
       - type: basic
         from: {key_code: i}
