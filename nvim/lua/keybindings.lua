@@ -181,6 +181,25 @@ keymap({"o", "x"}, "ac", "a}")
 keymap("o", "r", "}") -- [r]est of the paragraph
 keymap("o", "R", "{")
 
+require("mini.ai").setup {
+	custom_textobjects = {
+		b = false, -- disable text-objects from mini.ai in favor of my own
+		q = false,
+		t = false,
+		f = false,
+		a = false,
+		l = {"()%[.-]%(.-)()"}, -- markdown link
+	},
+	mappings = {
+		around_next = "",
+		inside_next = "",
+		around_last = "",
+		inside_last = "",
+		goto_left = "",
+		goto_right = "",
+	},
+}
+-- [bla](blubbb)
 --------------------------------------------------------------------------------
 
 -- MACRO

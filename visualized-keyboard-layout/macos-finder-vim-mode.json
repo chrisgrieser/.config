@@ -123,13 +123,14 @@
     {
       "x": 0.25,
       "c": "#c7a6ff",
+      "f": 1,
       "w": 1.25,
       "h": 2,
       "w2": 1.5,
       "h2": 1,
       "x2": -0.25
     },
-    "↵: rename (insert mode)\nin insert mode: confirm",
+    "↵: rename (insert mode)\nin insert mode: confirm & leave insert mode",
     {
       "c": "#999999",
       "a": 7,
@@ -149,7 +150,7 @@
     {
       "f": 1
     },
-    "s\nSwicher (Insert Mode)",
+    "s (S)\nSwitcher (Symlink)",
     {
       "f": 2
     },

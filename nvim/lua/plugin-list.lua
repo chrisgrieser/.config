@@ -121,6 +121,7 @@ function M.PluginList(use)
 	}
 
 	-- Operators & Text Objects, Navigation & Editing
+	use "echasnovski/mini.ai"
 	use "kylechui/nvim-surround"
 	use "gbprod/substitute.nvim"
 	use "numToStr/Comment.nvim"

@@ -424,6 +424,20 @@ rules:
           - *enter-insert-mode
           - *insert-notice
         conditions: [*is-finder, *not-insert-mode, *not-search-mode]
+      # S = Symlink
+      - type: basic
+        from:
+          key_code: s
+          modifiers: {mandatory: [shift]}
+        to:
+          - shell_command: |
+              sel=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
+              fileNoExt=${sel%.*}
+              ext=${sel##*.}
+              symlinkName="${fileNoExt}-symlink.$ext"
+              ln -sf "$sel" "$symlinkName"
+              open -R "$symlinkName"
+        conditions: [*is-finder, *not-insert-mode, *not-search-mode, *is-German-keyboard]
       # z = zip files
       - type: basic
         from: {key_code: "y"} # y and z switched on German keyboard
@@ -652,7 +666,7 @@ rules:
         to: [{key_code: "9"}, *leave-search-mode, *remove-search-notice]
         conditions: [*is-finder, *is-search-mode]
       #─────────────────────────────────────────────────────────────────────────
-      # MOVE 
+      # MOVE
       # m = move
       - type: basic
         from: {key_code: m}
