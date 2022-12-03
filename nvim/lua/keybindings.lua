@@ -202,8 +202,8 @@ local miniaiConfig = {
 
 -- custom text object "e": from cursor to end of line minus 1 char
 miniaiConfig.custom_textobjects.e = function ()
-	local row = api.nvim_win_get_cursor(0)[1]
-	local col = api.nvim_win_get_cursor(0)[2]
+	local row = fn.line(".")
+	local col = fn.col(".")
 	local eol = fn.col("$") - 1
 	local from = {line = row, col = col}
 	local to = {line = row, col = eol - 1}
