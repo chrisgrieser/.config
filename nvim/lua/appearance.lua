@@ -19,13 +19,23 @@ require("indent_blankline").setup {
 }
 
 --------------------------------------------------------------------------------
--- SCROLLBAR
+-- SCROLLBAR & MINIMAP
 require("scrollview").setup {
 	current_only = true,
 	winblend = 0,
 	column = 1,
 	excluded_filetypes = specialFiletypes,
 }
+
+require("codewindow").setup {
+	auto_enable = true,
+	max_lines = 2000,
+	minimap_width = 6,
+	width_multiplier = 5,
+	show_cursor = false,
+	window_border = {"│", "" ,"", "", "", "", "│", "│" },
+}
+
 --------------------------------------------------------------------------------
 -- NOTIFICATIONS
 if isGui() then
@@ -95,15 +105,15 @@ require("fidget").setup {
 --------------------------------------------------------------------------------
 
 -- PRETTY FOLD
-require("pretty-fold").setup {
-	sections = {
-		left = {"content"},
-		right = {"  ﬔ  ", "number_of_folded_lines"},
-	},
-	fill_char = "",
-	process_comment_signs = false,
-	keep_indentation = true,
-}
+-- require("pretty-fold").setup {
+-- 	sections = {
+-- 		left = {"content"},
+-- 		right = {"  ﬔ  ", "number_of_folded_lines"},
+-- 	},
+-- 	fill_char = "",
+-- 	process_comment_signs = false,
+-- 	keep_indentation = true,
+-- }
 
 --------------------------------------------------------------------------------
 -- STATUS LINE (LUALINE)

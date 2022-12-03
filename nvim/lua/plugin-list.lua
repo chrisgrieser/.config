@@ -91,7 +91,9 @@ function M.PluginList(use)
 	use "rcarriga/nvim-notify" -- notifications
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 	use "dstein64/nvim-scrollview" -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
-	use "anuvyklack/pretty-fold.nvim"
+	use "anuvyklack/pretty-fold.nvim" -- fold look customization
+	use "gorbit99/codewindow.nvim" -- minimap
+	use {"wfxr/minimap.vim", run = "brew install code-minimap"} 
 
 	-- File Switching & File Operation
 	use {myrepos .. "nvim-genghis", requires = "stevearc/dressing.nvim"}
@@ -121,7 +123,7 @@ function M.PluginList(use)
 	}
 
 	-- Operators & Text Objects, Navigation & Editing
-	use "echasnovski/mini.ai"
+	use "echasnovski/mini.ai" -- custom text objects
 	use "kylechui/nvim-surround"
 	use "gbprod/substitute.nvim"
 	use "numToStr/Comment.nvim"
