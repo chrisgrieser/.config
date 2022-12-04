@@ -224,6 +224,11 @@ end)
 
 -- FINDER
 wf_finder = wf.new("Finder")
+	:setOverrideFilter {
+		rejectTitles = {"Move", "Delete", "Copy"},
+		allowRoles = "AXStandardWindow",
+		hasTitlebar = true
+	}
 	:subscribe(wf.windowDestroyed, function()
 		if #wf_finder:getWindows() == 0 then
 			-- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
@@ -327,7 +332,7 @@ highlightsAppWatcher:start()
 local function draftsLaunchWake(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
 
-	if (eventType == aw.launched or eventType == aw.activated) then
+	if eventType == aw.launched or eventType == aw.activated then
 		local workspace = isAtOffice() and "Office" or "Home"
 		repeatFunc({0.15, 0.3}, function()
 			local name = appObject:focusedWindow():title()
@@ -364,7 +369,7 @@ function spotifyTUI(toStatus) -- has to be non-local function
 	currentStatus = trim(currentStatus) ---@diagnostic disable-line: param-type-mismatch, cast-local-type
 	if (currentStatus == "▶️" and toStatus == "pause") or (currentStatus == "⏸" and toStatus == "play") then
 		local stdout = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle")
-		if (toStatus == "play") then notify(stdout) end ---@diagnostic disable-line: param-type-mismatch
+		if toStatus == "play" then notify(stdout) end ---@diagnostic disable-line: param-type-mismatch
 	end
 end
 
