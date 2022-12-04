@@ -10,6 +10,7 @@ local lintersAndFormatters = {
 	"selene",
 	"shfmt",
 	"yamlfmt",
+	"beautifysh",
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
@@ -29,6 +30,7 @@ null_ls.setup {
 		-- shell
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		builtins.formatting.shfmt,
+		builtins.formatting.shellharden,
 		-- no diagnostics for shellcheck needed, since handled by bash-lsp
 		-- but code actions are needed: https://github.com/bash-lsp/bash-language-server/issues/490
 		builtins.code_actions.shellcheck.with {
