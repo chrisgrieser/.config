@@ -1824,6 +1824,18 @@
                 "command",
                 "shift"
               ]
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": true
+              }
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": "✏️  INSERT"
+              }
             }
           ],
           "conditions": [
@@ -4195,6 +4207,108 @@
         {
           "type": "basic",
           "from": {
+            "key_code": "3"
+          },
+          "to": [
+            {
+              "key_code": "1",
+              "modifiers": [
+                "control",
+                "option",
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_FIND_MODE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "4"
+          },
+          "to": [
+            {
+              "key_code": "5",
+              "modifiers": [
+                "control",
+                "option",
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_FIND_MODE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "5"
+          },
+          "to": [
+            {
+              "key_code": "6",
+              "modifiers": [
+                "control",
+                "option",
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_FIND_MODE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
             "key_code": "1",
             "modifiers": {
               "optional": [
@@ -4206,8 +4320,8 @@
             {
               "key_code": "s",
               "modifiers": [
-                "command",
-                "option"
+                "option",
+                "command"
               ]
             }
           ],
@@ -4244,8 +4358,8 @@
             {
               "key_code": "p",
               "modifiers": [
-                "command",
-                "shift"
+                "shift",
+                "command"
               ]
             }
           ],
@@ -4282,8 +4396,8 @@
             {
               "key_code": "p",
               "modifiers": [
-                "command",
-                "option"
+                "option",
+                "command"
               ]
             }
           ],
@@ -4320,8 +4434,8 @@
             {
               "key_code": "c",
               "modifiers": [
-                "command",
-                "option"
+                "option",
+                "command"
               ]
             },
             {

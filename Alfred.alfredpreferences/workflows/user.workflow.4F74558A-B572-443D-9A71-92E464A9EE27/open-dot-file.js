@@ -31,7 +31,7 @@ const workArray = app.doShellScript(
 	-E "vale/styles/*/*.md" \
 	-E "*.app/*" \
 	-E "karabiner/automatic_backups" \
-	-E "visualized keyboard layout/*.json" \
+	-E "visualized-keyboard-layout/*.json" \
 	-E "*.icns" \
 	-E "mac-migration/to do*" \
 	-E "*.png" \
