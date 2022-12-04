@@ -225,7 +225,7 @@ end)
 -- FINDER
 wf_finder = wf.new("Finder")
 	:setOverrideFilter {
-		rejectTitles = {"Move", "Delete", "Copy"},
+		rejectTitles = {"Move", "Delete", "Copy", "Finder Settings", " Infto$"},
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true
 	}
@@ -237,12 +237,7 @@ wf_finder = wf.new("Finder")
 			moveResizeCurWin("centered")
 		end
 	end)
-	-- - Bring all windows forward
-	-- - hide sidebar
-	-- - enlarge window / split view windows
 	:subscribe(wf.windowCreated, function(newWin)
-		local isInfoWindow = newWin:title():match(" Info$")
-		if isInfoWindow then return end
 		if newWin:title() == "RomComs" then
 			moveResizeCurWin("maximized")
 		elseif #wf_finder:getWindows() == 1 then
