@@ -113,8 +113,10 @@ require("windows").setup {
 local function lsp_progress()
 	local messages = vim.lsp.util.get_progress_messages()
 	if #messages == 0 then return "" end
-	local progess = messages[1].percentage or 0
 	local client = messages[1].name and messages[1].name .. ": " or ""
+	if client:find("null%-ls") then return "" end
+
+	local progess = messages[1].percentage or 0
 	local task = messages[1].title or ""
 	task = task:gsub("^(%w+).*", "%1") -- only first word
 	local spinners = {"⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"}
