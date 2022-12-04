@@ -468,6 +468,8 @@ rules:
         to:
           - key_code: n
             modifiers: [command, shift]
+          - *enter-insert-mode # enters insert mode since folder renaming is also triggered
+          - *insert-notice
         conditions: [*is-finder, *not-insert-mode, *not-find-mode]
       # M = Move selection to new folder
       - type: basic
