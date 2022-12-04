@@ -18,4 +18,5 @@ curl -sL "https://raw.githubusercontent.com/chrisgrieser/.config/main/visualized
 ```
 
 To be used in `List View` only. Press `?` in Finder to show the following cheatsheet:
+
 ![finder-vim-cheatsheet](/visualized-keyboard-layout/macos-finder-vim-mode.png).
