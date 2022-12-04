@@ -42,6 +42,8 @@ local function customHighlights()
 	-- bugfix for https://github.com/neovim/neovim/issues/20456
 	cmd [[highlight! def link luaParenError NormalFloat]]
 
+	-- hlargs
+	-- cmd[[highlight Hlargs gui=underdashed cterm=underdashed]]
 end
 
 customHighlights() -- to apply on default

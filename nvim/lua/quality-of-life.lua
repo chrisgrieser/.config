@@ -2,7 +2,9 @@
 local M = {}
 --------------------------------------------------------------------------------
 local bo = vim.bo
+local b = vim.b
 local fn = vim.fn
+local cmd = vim.cmd
 local getline = vim.fn.getline
 local lineNo = vim.fn.line
 local colNo = vim.fn.col
@@ -10,7 +12,9 @@ local append = vim.fn.append
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
 local logWarn = vim.log.levels.WARN
-local function wordUnderCursor() return vim.fn.expand("<cword>") end
+local function wordUnderCursor()
+	return vim.fn.expand("<cword>")
+end
 
 local function leaveVisualMode()
 	-- https://github.com/neovim/neovim/issues/17735#issuecomment-1068525617
@@ -118,7 +122,7 @@ end
 function M.reverse()
 	local word
 	local wordchar = bo.iskeyword
-	dashIsKeyword = wordchar:find(",%-$") or wordchar:find(",%-,") or wordchar:find("^%-,")
+	local dashIsKeyword = wordchar:find(",%-$") or wordchar:find(",%-,") or wordchar:find("^%-,")
 	if dashIsKeyword then
 		bo.iskeyword = wordchar:gsub("%-,", ""):gsub(",%-", "")
 		word = wordUnderCursor()
@@ -305,6 +309,7 @@ end
 ---Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.removeLog()
 	local ft = bo.filetype
+	local logCommand
 	if ft == "lua" or ft == "python" then
 		logCommand = "print"
 	elseif ft == "javascript" or ft == "typescript" then

@@ -108,6 +108,10 @@ require("nvim-treesitter.configs").setup {
 }
 
 --------------------------------------------------------------------------------
+
+require("hlargs").setup()
+
+--------------------------------------------------------------------------------
 -- force treesitter to highlight zsh as if it was bash
 augroup("zshAsBash", {})
 autocmd("BufWinEnter", {
@@ -115,12 +119,3 @@ autocmd("BufWinEnter", {
 	pattern = {"*.sh", "*.zsh", ".zsh*"},
 	command = "silent! set filetype=sh",
 })
-
-require("hlargs").setup {
-	paint_catch_blocks = {
-		declarations = true,
-		usages = true
-	},
-	extras = {named_parameters = true},
-}
-cmd[[highlight! Hlargs gui=underline cterm=underline]]
