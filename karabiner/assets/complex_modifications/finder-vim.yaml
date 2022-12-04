@@ -179,7 +179,7 @@ rules:
           key_code: hyphen # "?" on German keyboard
           modifiers: {mandatory: [shift]}
         to:
-          - shell_command: qlmanage -p "$HOME/.config/visualized-keyboard-layout/macos-finder-vim-mode.png" || open "$HOME/.config/karabiner/assets/macos-finder-vim-mode.png"
+          - shell_command: qlmanage -p "$HOME/.config/visualized-keyboard-layout/macos-finder-vim-mode.png" || qlmanage -p "$HOME/.config/karabiner/assets/macos-finder-vim-mode.png"
         conditions: [*is-finder, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       - type: basic
         from:
