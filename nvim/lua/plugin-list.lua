@@ -39,10 +39,6 @@ function M.PluginList()
 		module = "ssr",
 		config = function() require("ssr").setup() end,
 	}
-	use {"ThePrimeagen/refactoring.nvim", requires = {
-		"nvim-lua/plenary.nvim",
-		"nvim-treesitter/nvim-treesitter",
-	}}
 	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
 		after = "nvim-cmp",
 		requires = "nvim-treesitter/nvim-treesitter",
