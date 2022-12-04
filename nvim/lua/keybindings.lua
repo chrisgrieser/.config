@@ -51,7 +51,9 @@ keymap({"n", "x", "o"}, "L", "$")
 keymap({"x", "o"}, "J", "6j")
 keymap({"n", "x", "o"}, "K", "6k")
 
+-- selene: allow(multiple_statements)
 keymap("n", "j", function() qol.overscroll("j") end, {silent = true})
+-- selene: allow(multiple_statements)
 keymap("n", "J", function() qol.overscroll("6j") end, {silent = true})
 keymap({"n", "x"}, "G", "Gzz")
 
@@ -291,10 +293,12 @@ keymap("x", "X", exchange.visual)
 -- search & replace
 keymap("n", "<leader>f", [[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]])
 keymap("x", "<leader>f", ":sm///g<Left><Left><Left>")
+-- selene: allow(multiple_statements)
 keymap({"n", "x"}, "<leader>F", function() require("ssr").open() end) -- wrapped in function for lazy-loading
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine)
+-- selene: allow(multiple_statements)
 keymap("n", "<A-r>", function() qol.duplicateLine {increment = true} end)
 keymap("x", "R", qol.duplicateSelection)
 
