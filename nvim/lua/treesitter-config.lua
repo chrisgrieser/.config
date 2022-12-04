@@ -54,7 +54,7 @@ require("nvim-treesitter.configs").setup {
 				["gQ"] = "@comment.outer",
 			},
 		},
-		swap = {
+		swap = { -- mnemonic: [z]wap
 			enable = true,
 			swap_next = {
 				["zu"] = "@parameter.inner",

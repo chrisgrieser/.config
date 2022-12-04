@@ -7,6 +7,7 @@ local lintersAndFormatters = {
 	"shellcheck", -- needed for bash-lsp
 	"markdownlint",
 	"vale",
+	"selene",
 	"shfmt",
 	"yamlfmt",
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
@@ -27,15 +28,15 @@ null_ls.setup {
 
 		-- shell
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
+		builtins.formatting.shfmt,
 		-- no diagnostics for shellcheck needed, since handled by bash-lsp
 		-- but code actions are needed: https://github.com/bash-lsp/bash-language-server/issues/490
-		builtins.formatting.shfmt,
 		builtins.code_actions.shellcheck.with {
 			extra_filetypes = {"zsh"},
 			extra_args = {"--shell=bash"},
 		},
 
-		-- css
+		-- CSS
 		builtins.formatting.stylelint.with {
 			-- using config without ordering, since ordering on save is confusing
 			filetypes = {"css"}, -- only css
@@ -46,6 +47,12 @@ null_ls.setup {
 			extra_args = {"--quiet"}, -- only errors, no warnings
 		},
 
+		-- Lua
+		builtins.diagnostics.selene.with{
+			extra_args = {"--config", fn.expand("~/.config/linter-configs/selene.toml")}
+		},
+
+		-- YAML
 		builtins.formatting.yamlfmt,
 		builtins.diagnostics.yamllint.with {
 			extra_args = {"--config-file", fn.expand("~/.config/yamllint/config/.yamllint.yaml")},

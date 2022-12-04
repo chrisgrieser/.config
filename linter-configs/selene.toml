@@ -1,0 +1,5 @@
+
+# allowing to avoid duplication with lua-lsp
+[lints]
+undefined_variable = "allow"
+empty_if = "allow"
