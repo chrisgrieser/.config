@@ -39,6 +39,16 @@ function M.PluginList()
 		module = "ssr",
 		config = function() require("ssr").setup() end,
 	}
+	use {"ThePrimeagen/refactoring.nvim", requires = {
+		"nvim-lua/plenary.nvim",
+		"nvim-treesitter/nvim-treesitter",
+	}}
+	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
+		after = "nvim-cmp",
+		requires = "nvim-treesitter/nvim-treesitter",
+		config = function() require("tabout").setup() end,
+		event = "InsertEnter",
+	}
 
 	-- LSP
 	use {"neovim/nvim-lspconfig", requires = {
@@ -133,12 +143,6 @@ function M.PluginList()
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}
 	use "ggandor/leap.nvim"
 	use "Darazaki/indent-o-matic"
-	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
-		after = "nvim-cmp",
-		requires = "nvim-treesitter/nvim-treesitter",
-		config = function() require("tabout").setup() end,
-		event = "InsertEnter",
-	}
 
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting

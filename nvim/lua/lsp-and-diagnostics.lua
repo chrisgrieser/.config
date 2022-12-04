@@ -126,7 +126,6 @@ keymap("n", "gs", telescope.treesitter)
 -- actions defined globally so null-ls can use them without LSP, e.g., for bash
 -- or gitsigns
 keymap("n", "<leader>a", vim.lsp.buf.code_action)
-keymap("x", "<leader>a", ":lua vim.lsp.buf.range_code_action()")
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer

@@ -29,4 +29,5 @@ autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
-
+require("refactoring").setup()
+keymap("x", "<leader><CR>", ":lua require('refactoring').select_refactor()<CR>")
