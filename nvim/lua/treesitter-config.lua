@@ -29,7 +29,7 @@ require("nvim-treesitter.configs").setup {
 			"css", -- looks weird with css: https://github.com/tree-sitter/tree-sitter-css/issues/34
 			"scss",
 			"markdown", -- looks worse and enables spellcheck in URLs and Code Blocks 🙈
-			"markdown-inline", -- breaks e.g., yaml frontmatter highlighting
+			-- "markdown-inline", -- breaks e.g., yaml frontmatter highlighting
 		},
 
 	},
