@@ -279,7 +279,8 @@ rules:
           - key_code: return_or_enter
           - *remove-insert-notice
           - *leave-insert-mode
-        conditions: [*is-finder, *is-insert-mode, *not-search-mode, *alfred-inactive]
+          - *end-alfred
+        conditions: [*is-finder, *is-insert-mode, *not-search-mode]
       # Confirm Search Mode
       - type: basic
         from: {key_code: return_or_enter}
@@ -290,18 +291,76 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
           - *leave-search-mode
-        conditions: [*is-finder, *is-insert-mode, *is-search-mode, *alfred-inactive]
-      # Confirm Alfred Mode
+        conditions: [*is-finder, *is-insert-mode, *is-search-mode]
+      # Confirm Alfred Mode with various modifiers
       - type: basic
-        from: {key_code: return_or_enter, modifiers: {optional: [shift, command, control, option, fn]}}
-        to:
-          - key_code: return_or_enter
-          - key_code: tab
-          - key_code: tab
-          - *remove-insert-notice
-          - *leave-insert-mode
-          - *leave-search-mode
-        conditions: [*is-finder, *is-insert-mode, *is-search-mode, *alfred-inactive]
+        from: {key_code: return_or_enter, modifiers: {mandatory: [control]}}
+        to: [{key_code: return_or_enter, modifiers: [control]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: return_or_enter, modifiers: {mandatory: [command]}}
+        to: [{key_code: return_or_enter, modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: return_or_enter, modifiers: {mandatory: [shift]}}
+        to: [{key_code: return_or_enter, modifiers: [shift]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: return_or_enter, modifiers: {mandatory: [option]}}
+        to: [{key_code: return_or_enter, modifiers: [option]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: return_or_enter, modifiers: {mandatory: [fn]}}
+        to: [{key_code: return_or_enter, modifiers: [fn]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic # Hyper+return
+        from: {key_code: return_or_enter, modifiers: {mandatory: [command, control, option, shift]}}
+        to: [{key_code: return_or_enter, modifiers: [command, control, option, shift]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic # Meh+return
+        from: {key_code: return_or_enter, modifiers: {mandatory: [shift, control, option]}}
+        to: [{key_code: return_or_enter, modifiers: [shift, control, option]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: "2", modifiers: {mandatory: [command]}}
+        to: [{key_code: "2", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: "3", modifiers: {mandatory: [command]}}
+        to: [{key_code: "3", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: "4", modifiers: {mandatory: [command]}}
+        to: [{key_code: "4", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: "5", modifiers: {mandatory: [command]}}
+        to: [{key_code: "5", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: "6", modifiers: {mandatory: [command]}}
+        to: [{key_code: "6", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: "7", modifiers: {mandatory: [command]}}
+        to: [{key_code: "7", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: "8", modifiers: {mandatory: [command]}}
+        to: [{key_code: "8", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: "9", modifiers: {mandatory: [command]}}
+        to: [{key_code: "9", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: c, modifiers: {mandatory: [command]}}
+        to: [{key_code: c, modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
+      - type: basic
+        from: {key_code: l, modifiers: {mandatory: [command]}}
+        to: [{key_code: l, modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        conditions: [*is-finder, *is-insert-mode, *alfred-active]
       # Abort
       - type: basic
         from: {key_code: caps_lock}

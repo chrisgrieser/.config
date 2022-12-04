@@ -61,6 +61,16 @@
         },
         {
           "type": "variable_if",
+          "name": "FINDER_ALFRED_ACTIVE",
+          "value": true
+        },
+        {
+          "type": "variable_unless",
+          "name": "FINDER_ALFRED_ACTIVE",
+          "value": true
+        },
+        {
+          "type": "variable_if",
           "name": "FINDER_MOVE_ACTIVE",
           "value": true
         },
@@ -143,6 +153,18 @@
           "set_notification_message": {
             "id": "move-notice",
             "text": "✂️ move active"
+          }
+        },
+        {
+          "set_variable": {
+            "name": "FINDER_ALFRED_ACTIVE",
+            "value": true
+          }
+        },
+        {
+          "set_variable": {
+            "name": "FINDER_ALFRED_ACTIVE",
+            "value": false
           }
         },
         {
@@ -746,14 +768,14 @@
               ]
             },
             {
-              "set_notification_message": {
-                "id": "insert-notice",
-                "text": "✏️  INSERT"
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": true
               }
             },
             {
               "set_variable": {
-                "name": "FINDER_INSERT_MODE",
+                "name": "FINDER_ALFRED_ACTIVE",
                 "value": true
               }
             }
@@ -797,14 +819,14 @@
               ]
             },
             {
-              "set_notification_message": {
-                "id": "insert-notice",
-                "text": "✏️  INSERT"
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": true
               }
             },
             {
               "set_variable": {
-                "name": "FINDER_INSERT_MODE",
+                "name": "FINDER_ALFRED_ACTIVE",
                 "value": true
               }
             }
@@ -830,14 +852,14 @@
               ]
             },
             {
-              "set_notification_message": {
-                "id": "insert-notice",
-                "text": "✏️  INSERT"
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": true
               }
             },
             {
               "set_variable": {
-                "name": "FINDER_INSERT_MODE",
+                "name": "FINDER_ALFRED_ACTIVE",
                 "value": true
               }
             }
@@ -881,6 +903,12 @@
                 "name": "FINDER_INSERT_MODE",
                 "value": false
               }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
             }
           ],
           "conditions": [
@@ -958,6 +986,951 @@
         {
           "type": "basic",
           "from": {
+            "key_code": "return_or_enter",
+            "modifiers": {
+              "mandatory": [
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "return_or_enter",
+              "modifiers": [
+                "control"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "return_or_enter",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "return_or_enter",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "return_or_enter",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "return_or_enter",
+              "modifiers": [
+                "shift"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "return_or_enter",
+            "modifiers": {
+              "mandatory": [
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "return_or_enter",
+              "modifiers": [
+                "option"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "return_or_enter",
+            "modifiers": {
+              "mandatory": [
+                "fn"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "return_or_enter",
+              "modifiers": [
+                "fn"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "return_or_enter",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "control",
+                "option",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "return_or_enter",
+              "modifiers": [
+                "command",
+                "control",
+                "option",
+                "shift"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "return_or_enter",
+            "modifiers": {
+              "mandatory": [
+                "shift",
+                "control",
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "return_or_enter",
+              "modifiers": [
+                "shift",
+                "control",
+                "option"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "2",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "2",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "3",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "3",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "4",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "4",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "5",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "5",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "6",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "6",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "7",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "7",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "8",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "8",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "9",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "9",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "c",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "l",
+              "modifiers": [
+                "command"
+              ]
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": ""
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
             "key_code": "caps_lock"
           },
           "to_if_alone": [
@@ -979,6 +1952,12 @@
             {
               "set_variable": {
                 "name": "FINDER_SEARCH_MODE",
+                "value": false
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
                 "value": false
               }
             }
@@ -1023,6 +2002,12 @@
                 "name": "FINDER_SEARCH_MODE",
                 "value": false
               }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_ALFRED_ACTIVE",
+                "value": false
+              }
             }
           ],
           "conditions": [
@@ -1049,14 +2034,14 @@
               "key_code": "f18"
             },
             {
-              "set_notification_message": {
-                "id": "insert-notice",
-                "text": ""
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": false
               }
             },
             {
               "set_variable": {
-                "name": "FINDER_INSERT_MODE",
+                "name": "FINDER_ALFRED_ACTIVE",
                 "value": false
               }
             }
@@ -1071,6 +2056,11 @@
             {
               "type": "variable_if",
               "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_if",
+              "name": "FINDER_ALFRED_ACTIVE",
               "value": true
             }
           ]
