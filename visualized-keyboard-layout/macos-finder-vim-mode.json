@@ -57,9 +57,15 @@
       "c": "#CCCCCC"
     },
     "2",
-    "3",
-    "4",
-    "5",
+    {
+      "c": "#c7a6ff"
+    },
+    "3\nsort by name",
+    "4\nsort by modified",
+    "5\nsort by size",
+    {
+      "c": "#CCCCCC"
+    },
     "6",
     "7",
     "8",
@@ -207,11 +213,11 @@
     },
     "y\nyank file(s)",
     {
-      "c": "#CCCCCC"
+      "f": 1
     },
-    "x",
+    "x\ncross-move (if 2 wins)",
     {
-      "c": "#c7a6ff"
+      "f": 2
     },
     "c\nclose fold",
     "v\nview settings",

@@ -223,32 +223,40 @@ end)
 --------------------------------------------------------------------------------
 
 -- FINDER
--- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 wf_finder = wf.new("Finder")
 	:subscribe(wf.windowDestroyed, function()
-		-- quit when last window closed
-		if #wf_finder:getWindows() == 0 then app("Finder"):kill() end
+		if #wf_finder:getWindows() == 0 then
+			-- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
+			app("Finder"):kill()
+		elseif #wf_finder:getWindows() == 1 then
+			moveResizeCurWin("centered")
+		end
 	end)
 	-- - Bring all windows forward
 	-- - hide sidebar
-	-- - enlarge window if it's too small
+	-- - enlarge window / split view windows
 	:subscribe(wf.windowCreated, function(newWin)
 		local isInfoWindow = newWin:title():match(" Info$")
 		if isInfoWindow then return end
+		if newWin:title() == "RomComs" then
+			moveResizeCurWin("maximized")
+		elseif #wf_finder:getWindows() == 1 then
+			moveResizeCurWin("centered")
+		elseif #wf_finder:getWindows() == 2 then
+			local win1 = wf_finder:getWindows()[1]
+			local win2 = wf_finder:getWindows()[2]
+			moveResize(win1, hs.layout.left50)
+			moveResize(win2, hs.layout.right50)
+		end
 
 		app("Finder"):selectMenuItem {"View", "Hide Sidebar"}
 		app("Finder"):selectMenuItem {"Window", "Bring All to Front"}
-		if newWin:title() == "RomComs" then
-			moveResizeCurWin("maximized")
-		else
-			moveResizeCurWin("centered")
-		end
 	end)
 
 -- quit Finder if it was started as a helper (e.g., JXA), but has no window
 local function finderWatcher(appName, eventType, finderAppObj)
 	if appName == "Finder" and eventType == aw.launched then
-		repeatFunc({1, 4, 7}, function()
+		repeatFunc({1, 4, 7, 10}, function()
 			if finderAppObj and not (finderAppObj:mainWindow()) then
 				finderAppObj:kill()
 			end

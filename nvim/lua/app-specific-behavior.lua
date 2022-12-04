@@ -28,7 +28,7 @@ local function hideAllExcept(appNotToHide)
 end
 
 -- not local, since needed by window movements
-function unHideAll()
+local function unHideAll()
 	local wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
 	for i = 1, #wins do
 		local appli = wins[i]:application()
@@ -55,13 +55,11 @@ transBgAppWatcher:start()
 --------------------------------------------------------------------------------
 
 -- PIXELMATOR
-local function pixelmatorMax(appName, eventType)
+pixelmatorWatcher = aw.new(function(appName, eventType)
 	if appName:find("Pixelmator") and eventType == aw.launched then
 		runDelayed(0.3, function() moveResizeCurWin("maximized") end)
 	end
-end
-
-pixelmatorWatcher = aw.new(pixelmatorMax)
+end)
 pixelmatorWatcher:start()
 
 --------------------------------------------------------------------------------
@@ -224,29 +222,32 @@ end)
 
 --------------------------------------------------------------------------------
 
--- FINDER: when activated
--- - Bring all windows forward
--- - hide sidebar
--- - enlarge window if it's too small
--- - hide when last window closed
+-- FINDER
+-- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 wf_finder = wf.new("Finder")
 	:subscribe(wf.windowDestroyed, function()
-		if #wf_finder:getWindows() == 0 then
-			app("Finder"):kill()
-		end
+		-- quit when last window closed
+		if #wf_finder:getWindows() == 0 then app("Finder"):kill() end
 	end)
-	:subscribe(wf.windowFocused, function(currentWin)
-		local isInfoWindow = currentWin:title():match(" Info$")
+	-- - Bring all windows forward
+	-- - hide sidebar
+	-- - enlarge window / split view windows
+	:subscribe(wf.windowCreated, function(newWin)
+		local isInfoWindow = newWin:title():match(" Info$")
 		if isInfoWindow then return end
+		if newWin:title() == "RomComs" then
+			moveResizeCurWin("maximized")
+		elseif #wf_finder:getWindows() == 1 then
+			moveResizeCurWin("centered")
+		elseif #wf_finder:getWindows() == 2 then
+			local win1 = wf_finder:getWindows()[1]
+			local win2 = wf_finder:getWindows()[2]
+			moveResize(win1, hs.layout.left50)
+			moveResize(win2, hs.layout.right50)
+		end
 
 		app("Finder"):selectMenuItem {"View", "Hide Sidebar"}
-
-		local win_h = currentWin:frame().h
-		local max_h = currentWin:screen():frame().h
-		local max_w = currentWin:screen():frame().w
-		if (win_h / max_h) < 0.7 then
-			currentWin:setSize {w = 0.6 * max_w, h = 0.8 * max_h}
-		end
+		app("Finder"):selectMenuItem {"Window", "Bring All to Front"}
 	end)
 
 -- quit Finder if it was started as a helper (e.g., JXA), but has no window
@@ -325,7 +326,7 @@ local function draftsLaunchWake(appName, eventType, appObject)
 
 	if (eventType == aw.launched or eventType == aw.activated) then
 		local workspace = isAtOffice() and "Office" or "Home"
-		runDelayed(0.3, function()
+		repeatFunc({0.15, 0.3}, function()
 			local name = appObject:focusedWindow():title()
 			local isTaskList = name:find("Supermarkt$") or name:find("Drogerie$") or name:find("Ernährung$")
 			if not (isTaskList) then
@@ -441,19 +442,13 @@ wf_shottr = wf.new("Shottr")
 		end)
 	end)
 
-if 1 == 1 then
-	print("beep")
-end
-
 --------------------------------------------------------------------------------
 
 -- WARP
 -- since window size saving & session saving is not separated
-local function warpLaunch(appName, eventType)
+warpWatcher = aw.new(function(appName, eventType)
 	if appName == "Warp" and eventType == aw.launched then
 		keystroke({"cmd"}, "k") -- clear
 	end
-end
-
-warpWatcher = aw.new(warpLaunch)
+end)
 warpWatcher:start()
