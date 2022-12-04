@@ -76,6 +76,15 @@ require("dressing").setup {
 		},
 	},
 }
+
+-- HACK: do not apply sidescrolloff to dressing, https://github.com/stevearc/dressing.nvim/issues/75
+augroup("dressing", {})
+autocmd("FileType", {
+	pattern = "DressingInput",
+	group = "dressing",
+	command = "setlocal sidescrolloff=1",
+})
+
 --------------------------------------------------------------------------------
 -- GUTTER
 require("gitsigns").setup {
@@ -103,7 +112,7 @@ require("windows").setup {
 		enable = true,
 		winwidth = 15,
 	},
-	ignore = { filetype = {"Mundo", "MundoDiff", "netrw"} }
+	ignore = {filetype = {"Mundo", "MundoDiff", "netrw"}}
 }
 
 --------------------------------------------------------------------------------
