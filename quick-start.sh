@@ -48,7 +48,7 @@ ln -sf "$DOTFILE_FOLDER/zsh/.zprofile" ~
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
 
 # linter configs
-ln -sf "$DOTFILE_FOLDER/linter-configs/.stylelintrc.json" ~
+ln -sf "$DOTFILE_FOLDER/linter-configs/.stylelintrc.yml" ~
 ln -sf "$DOTFILE_FOLDER/linter-configs/.eslintrc.yml" ~
 ln -sf "$DOTFILE_FOLDER/linter-configs/.markdownlintrc" ~
 ln -sf "$DOTFILE_FOLDER/linter-configs/.pylintrc" ~

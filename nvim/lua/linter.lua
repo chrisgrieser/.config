@@ -10,7 +10,6 @@ local lintersAndFormatters = {
 	"selene",
 	"shfmt",
 	"yamlfmt",
-	"beautifysh",
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
@@ -25,12 +24,15 @@ local builtins = null_ls.builtins
 
 null_ls.setup {
 	sources = {
-		builtins.code_actions.gitsigns, -- gitsings.nvim plugin, e.g. reset hunks
+		builtins.code_actions.gitsigns, -- gitsigns.nvim plugin, e.g. reset hunks
+		builtins.code_actions.refactoring, -- refactoring.nvim
 
-		-- shell
+		-- SHELL
+		builtins.hover.printenv.with{-- show value of environment variable
+			extra_filetypes = {"zsh", "bash"},
+		}, 
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		builtins.formatting.shfmt,
-		builtins.formatting.shellharden,
 		-- no diagnostics for shellcheck needed, since handled by bash-lsp
 		-- but code actions are needed: https://github.com/bash-lsp/bash-language-server/issues/490
 		builtins.code_actions.shellcheck.with {
@@ -41,11 +43,10 @@ null_ls.setup {
 		-- CSS
 		builtins.formatting.stylelint.with {
 			-- using config without ordering, since ordering on save is confusing
-			filetypes = {"css"}, -- only css
-			extra_args = {"--config", dotfilesFolder.."/linter-configs/.stylelintrc-formatting.json"},
+			extra_args = {"--config", dotfilesFolder.."/linter-configs/.stylelintrc-formatting.yml"},
 		},
 		builtins.diagnostics.stylelint.with {-- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
-			filetypes = {"css"}, -- only css
+			filetypes = {"css"}, 
 			extra_args = {"--quiet"}, -- only errors, no warnings
 		},
 
