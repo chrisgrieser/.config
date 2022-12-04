@@ -238,7 +238,11 @@ wf_finder = wf.new("Finder")
 
 		app("Finder"):selectMenuItem {"View", "Hide Sidebar"}
 		app("Finder"):selectMenuItem {"Window", "Bring All to Front"}
-		moveResizeCurWin("centered")
+		if newWin:title() == "RomComs" then
+			moveResizeCurWin("maximized")
+		else
+			moveResizeCurWin("centered")
+		end
 	end)
 
 -- quit Finder if it was started as a helper (e.g., JXA), but has no window

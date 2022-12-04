@@ -45,10 +45,10 @@ local source_icons = {
 	path = "",
 }
 
-local function has_words_before()
-	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
+-- local function has_words_before()
+-- 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+-- 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+-- end
 
 --------------------------------------------------------------------------------
 
@@ -61,7 +61,6 @@ cmp.setup {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
-
 	mapping = cmp.mapping.preset.insert {
 		["<CR>"] = cmp.mapping.confirm {select = true},
 		["<S-Up>"] = cmp.mapping.scroll_docs(-4),
@@ -89,7 +88,6 @@ cmp.setup {
 			end
 		end, {"i", "s", "n"}),
 	},
-
 	sources = cmp.config.sources {
 		{name = "luasnip"},
 		{name = "nvim_lsp"},
@@ -98,7 +96,6 @@ cmp.setup {
 		{name = "emoji", keyword_length = 2},
 		{name = "buffer", keyword_length = 2},
 	},
-
 	formatting = {
 		format = function(entry, vim_item)
 			vim_item.kind = kind_icons[vim_item.kind]
@@ -187,7 +184,8 @@ cmp.setup.cmdline({"/", "?"}, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
 		{name = "treesitter", keyword_length = 2},
-		{name = "buffer", keyword_length = 4},
+	}, {-- second array only relevant when no source from the first matches
+		{name = "buffer", keyword_length = 2},
 	}
 })
 
@@ -221,7 +219,7 @@ require("cmp_git").setup {
 
 --------------------------------------------------------------------------------
 -- AUTOPAIRS
-require("nvim-autopairs").setup {}
+require("nvim-autopairs").setup()
 
 -- add brackets to cmp
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")

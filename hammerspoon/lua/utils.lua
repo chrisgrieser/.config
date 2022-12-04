@@ -1,9 +1,9 @@
 -- CONFIG
 home = os.getenv("HOME")
 
-dotfilesFolder = home.."/.config"
+dotfilesFolder = home.."/.config/"
 fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-vaultLocation = home .. "/main-vault"
+vaultLocation = home .. "/main-vault/"
 
 --------------------------------------------------------------------------------
 
