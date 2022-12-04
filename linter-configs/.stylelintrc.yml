@@ -2,7 +2,7 @@ extends: [stylelint-config-recommended]
 plugins:
   - stylelint-order
   - stylelint-declaration-block-no-ignored-properties
-reportNeedlessDisables: [true, {severity: warning}]
+reportNeedlessDisables: [false, {severity: warning}]
 reportInvalidScopeDisables: [true, {severity: error}]
 ignoreFiles:
   - '**/Main Vault/.obsidian/plugins/**'
@@ -16,11 +16,8 @@ rules:
 
   # plugin rules
   plugin/declaration-block-no-ignored-properties: true
-  order/properties-order: # https://github.com/hudochenkov/stylelint-order/blob/master/rules/properties-order/README.md#emptylineminimumpropertythreshold
-    - emptyLineBeforeUnspecified: threshold
-      unspecified: bottom
-      emptyLineMinimumPropertyThreshold: 6
-      severity: warning
+  # https://github.com/hudochenkov/stylelint-order/blob/master/rules/properties-order/README.md#emptylineminimumpropertythreshold
+  order/properties-order:
     - - groupName: Content & Display
         emptyLineBefore: threshold
         noEmptyLineBetween: true
@@ -157,7 +154,11 @@ rules:
           - transition-duration
           - transition-delay
           - cursor
-
+    - emptyLineBeforeUnspecified: threshold
+      unspecified: bottom
+      emptyLineMinimumPropertyThreshold: 6
+      severity: warning
+  #─────────────────────────────────────────────────────────────────────────────
   # Main Rules
   declaration-no-important: true
   indentation: [tab, {severity: warning}]
