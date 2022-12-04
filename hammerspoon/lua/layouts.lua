@@ -23,6 +23,15 @@ local function showAllSidebars()
 	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
 
+local function isWeekend()
+	local weekday = os.date():sub(1,3)
+	if weekday == "Sun" or weekday == "Sat" then
+		return true
+	else
+		return false
+	end
+end
+
 --------------------------------------------------------------------------------
 -- LAYOUTS
 function movieModeLayout()
@@ -63,7 +72,7 @@ function homeModeLayout()
 
 	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
-	openIfNotRunning("Slack")
+	if not(isWeekend()) then openIfNotRunning("Slack") end
 	openIfNotRunning("Brave Browser")
 	openIfNotRunning("Twitterrific")
 	openIfNotRunning("Drafts")
