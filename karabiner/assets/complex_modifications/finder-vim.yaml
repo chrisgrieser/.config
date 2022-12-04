@@ -483,7 +483,7 @@ rules:
               osascript -e'
                 tell application "Finder"
                   if (number of windows is not 2) then
-                    display notification "" with title "Failure" subtitle "⚠️ More than two windows"
+                    display notification "" with title "Failure" subtitle "⚠️ Not exactly two windows"
                     beep
                   else if ((count of (selection as list)) is 0) then
                     display notification "" with title "Failure" subtitle "⚠️ No selection"
@@ -493,7 +493,6 @@ rules:
                     repeat with f in (selection as list)
                       move f to otherWin
                     end repeat
-                    set index of window 2 to 1 -- set otherWin frontmost
                   end if
                 end tell'
         conditions: [*is-finder, *not-insert-mode, *not-find-mode]

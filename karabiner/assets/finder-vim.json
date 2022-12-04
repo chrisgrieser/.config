@@ -2507,7 +2507,7 @@
           },
           "to_if_alone": [
             {
-              "shell_command": "osascript -e'\n  tell application \"Finder\"\n    if (number of windows is not 2) then\n      display notification \"\" with title \"Failure\" subtitle \"⚠️ More than two windows\"\n      beep\n    else if ((count of (selection as list)) is 0) then\n      display notification \"\" with title \"Failure\" subtitle \"⚠️ No selection\"\n      beep\n    else\n      set otherWin to (target of window 2 as alias)\n      repeat with f in (selection as list)\n        move f to otherWin\n      end repeat\n      set index of window 2 to 1 -- set otherWin frontmost\n    end if\n  end tell'\n"
+              "shell_command": "osascript -e'\n  tell application \"Finder\"\n    if (number of windows is not 2) then\n      display notification \"\" with title \"Failure\" subtitle \"⚠️ Not exactly two windows\"\n      beep\n    else if ((count of (selection as list)) is 0) then\n      display notification \"\" with title \"Failure\" subtitle \"⚠️ No selection\"\n      beep\n    else\n      set otherWin to (target of window 2 as alias)\n      repeat with f in (selection as list)\n        move f to otherWin\n      end repeat\n    end if\n  end tell'\n"
             }
           ],
           "conditions": [

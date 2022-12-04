@@ -7,7 +7,6 @@ undefined_variable = "allow"
 unused_variable = "allow"
 empty_if = "allow"
 unscoped_variables = "allow" # requires turning of tons of globals, which does not seem possible
+multiple_statements = "allow"
 
 [config]
-# Modifications
-multiple_statements = {one_line_if = "allow"}
