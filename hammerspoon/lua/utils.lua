@@ -7,12 +7,6 @@ vaultLocation = home .. "/main-vault/"
 
 --------------------------------------------------------------------------------
 
----returns current date in ISO 8601 format
----@return string|osdate
-function isodate()
-	return os.date("!%Y-%m-%d")
-end
-
 ---appends t2 to t1 in-place
 ---@param t1 table
 ---@param t2 table
