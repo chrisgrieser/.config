@@ -24,9 +24,9 @@
 				<key>destinationuid</key>
 				<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
 				<key>modifiers</key>
-				<integer>8388608</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>fn: Move file to front Marta Folder</string>
+				<string>fn: Move file to front Finder Folder</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -34,9 +34,9 @@
 				<key>destinationuid</key>
 				<string>64FEC427-2CB3-4EB1-8543-392E2319CBFC</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>8388608</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Move file</string>
+				<string>fn: Move file</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
