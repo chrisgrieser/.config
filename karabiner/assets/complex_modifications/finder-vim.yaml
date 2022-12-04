@@ -810,45 +810,53 @@ rules:
         conditions: [*is-finder, *move-active]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
+      # SORT
+      - type: basic # by name
+        from: {key_code: "3"}
+        to:
+          - {key_code: "1", modifiers: [control, option, command]}
+        conditions: [*is-finder, *not-insert-mode, *not-find-mode]
+      - type: basic # by modification date
+        from: {key_code: "4"}
+        to:
+          - {key_code: "5", modifiers: [control, option, command]}
+        conditions: [*is-finder, *not-insert-mode, *not-find-mode]
+      - type: basic # by size
+        from: {key_code: "5"}
+        to:
+          - {key_code: "6", modifiers: [control, option, command]}
+        conditions: [*is-finder, *not-insert-mode, *not-find-mode]
+      #─────────────────────────────────────────────────────────────────────────
       # Sidebar/Preview/Pathbar Toggle
       - type: basic
         from:
           key_code: "1"
           modifiers: {optional: [command]}
         to:
-          - key_code: s
-            modifiers:
-              - command
-              - option
+          - {key_code: "s", modifiers: [option, command]}
         conditions: [*is-finder, *not-insert-mode, *not-find-mode]
       - type: basic
         from:
           key_code: "0"
           modifiers: {optional: [command]}
         to:
-          - key_code: p
-            modifiers:
-              - command
-              - shift
+          - {key_code: "p", modifiers: [shift, command]}
         conditions: [*is-finder, *not-insert-mode, *not-find-mode]
       - type: basic
         from:
           key_code: "9"
           modifiers: {optional: [command]}
         to:
-          - key_code: p
-            modifiers:
-              - command
-              - option
+          - {key_code: "p", modifiers: [option, command]}
         conditions: [*is-finder, *not-insert-mode, *not-find-mode]
+      #─────────────────────────────────────────────────────────────────────────
       # copy path
       - type: basic
         from:
           key_code: p
           modifiers: {mandatory: [control]}
         to:
-          - key_code: c
-            modifiers: [command, option]
+          - {key_code: "c", modifiers: [option, command]}
           - shell_command: osascript -e 'display notification "File path" with title "✅ Copied"'
         conditions: [*is-finder, *not-insert-mode, *not-find-mode]
       # copy name
@@ -858,10 +866,8 @@ rules:
           modifiers: {mandatory: [control]}
         to:
           - key_code: return_or_enter
-          - key_code: a
-            modifiers: [command]
-          - key_code: c
-            modifiers: [command]
+          - {key_code: "a", modifiers: [command]}
+          - {key_code: "c", modifiers: [command]}
           - key_code: return_or_enter
           - shell_command: osascript -e 'display notification "File name" with title "✅ Copied"'
         conditions: [*is-finder, *not-insert-mode, *not-find-mode]

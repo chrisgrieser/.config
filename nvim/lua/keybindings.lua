@@ -55,10 +55,6 @@ keymap("n", "j", function() qol.overscroll("j") end, {silent = true})
 keymap("n", "J", function() qol.overscroll("6j") end, {silent = true})
 keymap({"n", "x"}, "G", "Gzz")
 
--- Sections
-keymap("", "[", "{", {nowait = true}) -- slightly easier to press
-keymap("", "]", "}", {nowait = true})
-
 -- Jump History
 keymap("n", "<C-h>", "<C-o>") -- Back
 keymap("n", "<C-l>", "<C-i>") -- Forward
@@ -75,9 +71,6 @@ end, {silent = true})
 
 keymap({"n", "x", "o"}, "+", "*") -- no more modifier key (German Layout)
 keymap({"n", "x", "o"}, "*", "#") -- backwards on the same key (German Layout)
-
--- Open Next URL
-keymap("n", "gx", "/http<CR>:nohl<CR><Plug>NetrwBrowseX")
 
 -- MARKS
 keymap("", "ä", "`M") -- Goto Mark M
