@@ -1,4 +1,4 @@
---# selene: allow()
+--# selene: allow(multiple_statements)
 require("utils")
 
 require("appearance")

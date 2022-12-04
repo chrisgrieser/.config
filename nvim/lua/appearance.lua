@@ -35,7 +35,7 @@ if isGui() then
 	require("notify").setup {
 		render = "minimal",
 		stages = "slide",
-		minimum_width = 25,
+		minimum_width = 20,
 		max_height = 15,
 		timeout = 4000,
 		top_down = false,
@@ -43,6 +43,7 @@ if isGui() then
 end
 
 -- replace lua's print message with notify.nvim → https://www.reddit.com/r/neovim/comments/xv3v68/tip_nvimnotify_can_be_used_to_display_print/
+-- selene: allow(incorrect_standard_library_use)
 print = function(...)
 	local print_safe_args = {}
 	local _ = {...}
@@ -96,16 +97,13 @@ require("pretty-fold").setup {
 }
 
 --------------------------------------------------------------------------------
--- AUTO-RESIZE WINDOWS
+-- AUTO-RESIZE WINDOWS/SPLITS
 require("windows").setup {
 	autowidth = {
 		enable = true,
-		winwidth = 10,
+		winwidth = 15,
 	},
-	ignore = {
-		filetype = {"Mundo", "MundoDiff", "netrw"},
-		buftype = {""},
-	}
+	ignore = { filetype = {"Mundo", "MundoDiff", "netrw"} }
 }
 
 --------------------------------------------------------------------------------
@@ -178,6 +176,7 @@ local function mixedIndentation()
 	return ""
 end
 
+-- show branch info only when not on main/master
 augroup("branchChange", {})
 autocmd({"BufEnter", "FocusGained"}, {
 	group = "branchChange",
@@ -207,9 +206,8 @@ local navic = require("nvim-navic")
 navic.setup {
 	icons = {Object = "ﴯ "},
 	separator = "  ",
-	depth_limit = 10,
+	depth_limit = 8,
 	depth_limit_indicator = "…",
-	highlight = false,
 }
 
 local function showBreadcrumbs()
