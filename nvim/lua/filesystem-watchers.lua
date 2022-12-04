@@ -73,8 +73,11 @@ draftsIcloudWatcher:start()
 --------------------------------------------------------------------------------
 
 -- Redirects FROM File Hub
-local browserSettings = dotfilesFolder .. "/browser-extension-configs/"
-function fromFileHub(paths)
+local browserSettings = dotfilesFolder .. "/browser-extension-configs"
+function fromFileHub(paths, event)
+	if event.itemIsDir then return end
+	print(hs.inspect(event))
+	print(hs.inspect(paths))
 	for _, file in pairs(paths) do
 		local function isInSubdirectory(f, folder) -- (instead of directly in the folder)
 			local _, fileSlashes = f:gsub("/", "")
@@ -87,26 +90,31 @@ function fromFileHub(paths)
 
 		-- delete alfredworkflows and ics
 		if fileName:sub(-15) == ".alfredworkflow" or fileName:sub(-4) == ".ics" then
-			runDelayed(3, function() os.rename(file, home.."/.Trash/"..fileName) end)
+			runDelayed(3, function() hs.execute('mv -f "' .. file .. '" "$HOME/.Trash"') end)
 
-			-- vimium/ublacklist
-		elseif fileName == "vimium-options.json" or fileName == "ublacklist-settings.json" then
-			os.rename(file, browserSettings .. fileName)
-			notify(fileName .. " filed away.")
+			-- vimium backup
+		elseif fileName == "vimium-options.json" then
+			hs.execute([[mv -f "]] .. file .. [[" "]] .. browserSettings .. [["]])
+			notify("Vimium backup filed away.")
+
+			-- ublacklist backup
+		elseif fileName == "ublacklist-settings.json" then
+			hs.execute([[mv -f "]] .. file .. [[" "]] .. browserSettings .. [["]])
+			notify("uBlacklist backup filed away.")
 
 			-- adguard backup
 		elseif fileName:match(".*_adg_ext_settings_.*%.json") then
-			os.rename(file, browserSettings .. "adguard-settings.json")
+			hs.execute([[mv -f "]] .. file .. [[" "]] .. browserSettings .. [[/adguard-settings.json"]])
 			notify("AdGuard backup filed away.")
 
 			-- tampermonkey backup
 		elseif fileName:match("tampermonkey%-backup-.+%.txt") then
-			os.rename(file, browserSettings .. "tampermonkey-settings.json")
+			hs.execute([[mv -f "]] .. file .. [[" "]] .. browserSettings .. [[/tampermonkey-settings.json"]])
 			notify("TamperMonkey backup filed away.")
 
 			-- watch later .urls from the office
 		elseif fileName:sub(-4) == ".url" and isIMacAtHome() then
-			os.rename(file, home .. "/Downloaded/"..fileName)
+			hs.execute('mv -f "' .. file .. '" "$HOME/Downloaded/" ')
 			notify("Watch Later URL moved to Video Downloads.")
 
 			-- visualised keyboard layouts
@@ -114,7 +122,7 @@ function fromFileHub(paths)
 			fileName:match("vimrc%-remapping%.%w+") or fileName:match("marta%-key%-bindings%.%w+") or
 			fileName:match("hyper%-bindings%-layout%.%w+") or fileName:match("single%-keystroke%-bindings%.%w+") or
 			fileName:match("macos%-finder%-vim%-mode%.%w+") then
-			os.rename(file, dotfilesFolder.."/visualized-keyboard-layout/"..fileName)
+			hs.execute([[mv -f "]] .. file .. [[" "]] .. dotfilesFolder .. [[/visualized-keyboard-layout/"]])
 			notify("Visualized Keyboard Layout filed away.")
 
 		end
@@ -136,7 +144,7 @@ function installObsiAlpha(files)
 				test -f obsidian-*.*.*.asar.gz || exit 1
 				gunzip obsidian-*.*.*.asar.gz
 				mv obsidian-*.*.*.asar "$HOME/Library/Application Support/obsidian/"
-				killall "Obsidian" && sleep 1 
+				killall "Obsidian" && sleep 1
 				open -a "Obsidian" ]]
 			)
 			-- close the created tab
