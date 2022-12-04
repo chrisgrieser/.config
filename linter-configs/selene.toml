@@ -1,5 +1,12 @@
+# https://kampfkarren.github.io/selene/lints/constant_table_comparison.html
+#───────────────────────────────────────────────────────────────────────────────
 
-# allowing to avoid duplication with lua-lsp
+# disabled to avoid duplication with lua-lsp
 [lints]
 undefined_variable = "allow"
 empty_if = "allow"
+unscoped_variables = "allow" # requires turning of tons of globals, which does not seem possible
+
+[config]
+# Modifications
+multiple_statements = {one_line_if = "allow"}
