@@ -12,7 +12,8 @@ sudo -v
 xcode-select --install
 
 # Install Essential Apps
-brew install --no-quarantine pass alfred hammerspoon neovim alacritty karabiner-elements brave-browser
+brew install pinentry-mac pass gnupg
+brew install --no-quarantine alfred hammerspoon neovim alacritty karabiner-elements brave-browser
 brew install --no-quarantine --cask neovide
 
 # Hammerspoon
@@ -59,6 +60,7 @@ ln -sf "$DOTFILE_FOLDER/vale/.vale.ini" ~
 
 # GPG
 ln -sf "$DOTFILE_FOLDER/gpg/gpg.conf" ~/.gpg
+ln -sf "$DOTFILE_FOLDER/gpg/gpg-agent.conf" ~/.gnupg
 
 # pandoc
 [[ -e ~/.pandoc ]] && rm -rf ~/.pandoc
