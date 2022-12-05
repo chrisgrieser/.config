@@ -1,3 +1,6 @@
+# https://www.passwordstore.org/
+#───────────────────────────────────────────────────────────────────────────────
+
 # shorthands
 alias pc='pass --clip'
 alias p='pass'

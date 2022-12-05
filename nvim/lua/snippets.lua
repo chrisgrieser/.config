@@ -217,7 +217,7 @@ add("javascript", {
 	snip("shell script", "app.doShellScript(`${1:shellscript}`);\n$0"),
 	snip("home (JXA)", 'app.pathTo("home folder")'),
 	snip("resolve home (JXA)", 'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
-	snip("exists (file)", '	const fileExists = (filePath) => Application("Finder").exists(Path(filePath));\n$0'),
+	snip("exists (file)", 'const fileExists = (filePath) => Application("Finder").exists(Path(filePath));\n$0'),
 	snip("browser URL & title (function)", [[
 		function browserTab() {
 			const frontmostAppName = Application("System Events").applicationProcesses.where({ frontmost: true }).name()[0];
@@ -257,7 +257,7 @@ add("javascript", {
 		},
 	]]),
 	snip("Script Filter", [[
-		const jsonArray = JSON.parse(readFile(${1:VAR}))
+		const  jsonArray = app.doShellScript(`$1`)
 			.split("\r")
 			.map(item => {
 				$2
@@ -271,6 +271,7 @@ add("javascript", {
 					"uid": item,
 				};
 			});
+
 		JSON.stringify({ items: jsonArray });
 	]]),
 	snip("Get Alfred Env", 'const ${1:envVar} = $.getenv("${2:envVar}");\n$0'),
