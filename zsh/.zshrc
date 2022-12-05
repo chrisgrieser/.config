@@ -1,5 +1,3 @@
-# shellcheck disable=SC1091,SC1090
-
 printf '\33c\e[3J' # remove last login message https://stackoverflow.com/a/69915614
 
 CONFIG=()
@@ -19,7 +17,6 @@ CONFIG+=('../pandoc/pandoc')
 CONFIG+=('intro-messages')
 
 for config_file in "${CONFIG[@]}"; do
+	# shellcheck disable=1090
 	source "$DOTFILE_FOLDER/zsh/$config_file.zsh"
 done
-
-
