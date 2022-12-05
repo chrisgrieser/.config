@@ -381,8 +381,8 @@ rules:
           - *leave-search-mode
           - *end-alfred
         to:
-          - key_code: shift
-            modifiers: [command - control - option] # keep hyper binding
+          - key_code: right_shift
+            modifiers: [command, control, option] # keep hyper binding
         conditions: [*finder-app, *is-insert-mode]
       - type: basic
         from: {key_code: escape}

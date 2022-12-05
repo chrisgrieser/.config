@@ -278,12 +278,12 @@ rules:
             modifiers:
               - command
           - key_code: vk_none
-            hold_down_milliseconds: 15
+            hold_down_milliseconds: 30
           - key_code: c
             modifiers:
               - command
           - key_code: vk_none
-            hold_down_milliseconds: 15
+            hold_down_milliseconds: 70
           - key_code: w
             modifiers:
               - command
