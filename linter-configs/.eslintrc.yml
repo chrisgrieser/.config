@@ -19,9 +19,6 @@ rules:
     - error
     - builtinGlobals: true
       hoist: all
-  no-unused-vars:
-    - warn
-    - varsIgnorePattern: run
   camelcase:
     - warn
     - properties: always
@@ -107,7 +104,7 @@ rules:
   comma-spacing: warn
   comma-style: warn
   comma-dangle:
-    - error
+    - warn
     - objects: always-multiline
   quotes:
     - warn
