@@ -8,16 +8,22 @@ local timer = hs.timer.doAt
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local gitDotfileScript = dotfilesFolder .. "/git-dotfile-sync.sh"
-local gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
+local repoSyncFreqMin = 20
+
 local dotfileIcon = "🔵"
 local vaultIcon = "🟪"
-local repoSyncFrequencyMin = 20
+local passIcon = "🔑"
 
+local dotfilesFolder = home.."/.config/"
+local vaultLocation = home .. "/main-vault/"
+local passwordStore = home .. "/.password-store/"
+
+local gitDotfileScript = dotfilesFolder .. "/git-dotfile-sync.sh"
+local gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
 --------------------------------------------------------------------------------
 
 -- calling with "--submodules" also updates submodules
-function gitDotfileSync(arg)
+local function gitDotfileSync(arg)
 	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then return end
 	if not(screenIsUnlocked()) then return end -- prevent background sync when in office
 
@@ -40,7 +46,7 @@ function gitDotfileSync(arg)
 		end, {arg}):start()
 end
 
-function gitVaultSync()
+local function gitVaultSync()
 	if gitVaultSyncTask and gitVaultSyncTask:isRunning() then return end
 	if not(screenIsUnlocked()) then return end -- prevent background sync when in office
 
@@ -54,16 +60,39 @@ function gitVaultSync()
 	end):start()
 end
 
-repoSyncTimer = hs.timer.doEvery(repoSyncFrequencyMin * 60, function()
-	gitDotfileSync()
+local function gitPassSync()
+	if gitpassSync and gitpassSync:isRunning() then return end
+
+	gitpassSync = hs.task.new(gitVaultScript, function(exitCode, _, stdErr)
+		stdErr = stdErr:gsub("\n", " –– ")
+		if exitCode ~= 0 then
+			notify(passIcon .. "⚠️️ password-store " .. stdErr)
+		else
+			print("Dotfile Sync successful.")
+		end
+	end):start()
+end
+
+---sync all three git repos
+---@param args? string like "--submodules"
+local function syncAllGitRepos(args)
+	if args then
+		gitDotfileSync("--submodules")
+	else
+		gitDotfileSync()
+	end
 	gitVaultSync()
-end)
+	gitPassSync()
+end
+
+--------------------------------------------------------------------------------
+
+repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, syncAllGitRepos)
 repoSyncTimer:start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
 uriScheme("sync-repos", function()
-	gitDotfileSync()
-	gitVaultSync()
+	syncAllGitRepos()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
@@ -73,28 +102,27 @@ local function updateSketchybar()
 	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --trigger repo-files-update")
 end
 
-dotfilesWatcher = hs.pathwatcher.new(dotfilesFolder, updateSketchybar)
+dotfilesWatcher = pw(dotfilesFolder, updateSketchybar)
 dotfilesWatcher:start()
-vaultWatcher = hs.pathwatcher.new(vaultLocation, updateSketchybar)
+vaultWatcher = pw(vaultLocation, updateSketchybar)
 vaultWatcher:start()
+passFileWatcher = pw(passwordStore, updateSketchybar)
+passFileWatcher:start()
 
 --------------------------------------------------------------------------------
 
-local function screenSleep(eventType)
+shutDownWatcher = caff.new(function(eventType)
 	if eventType == caff.screensDidSleep then
-		gitDotfileSync()
+		syncAllGitRepos()
 	end
-end
-
-shutDownWatcher = caff.new(screenSleep)
+end)
 shutDownWatcher:start()
 
 --------------------------------------------------------------------------------
 -- SYSTEM WAKE/START
 local function officeWake(eventType)
 	if eventType == caff.screensDidUnlock then
-		gitDotfileSync("--submodules")
-		gitVaultSync()
+		syncAllGitRepos("--submodules")
 		officeModeLayout()
 	end
 end
@@ -112,8 +140,7 @@ local function homeWake(eventType)
 			else
 				setDarkmode(true)
 			end
-			gitDotfileSync("--submodules")
-			gitVaultSync()
+			syncAllGitRepos("--submodules")
 			homeModeLayout() -- should run after git sync, to avoid conflicts
 		end
 
@@ -136,16 +163,15 @@ function systemStart()
 	else
 		if app("Finder") then app("Finder"):kill() end
 		notify("Hammerspoon started.")
-		gitDotfileSync("--submodules")
-		gitVaultSync()
+		syncAllGitRepos("--submodules")
 		notify("Sync finished.")
 	end
 end
 
 --------------------------------------------------------------------------------
 -- CRONJOBS AT HOME
--- timers not local for longevity with garbage collection
-local function bkp()
+
+biweeklyTimer = timer("02:00", "02d", function()
 	applescript [[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
@@ -154,33 +180,25 @@ local function bkp()
 	]]
 	hs.execute('cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Browser-Bookmarks.bkp"')
 	hs.loadSpoon("EmmyLua") -- so it runs not as often
-end
+end, true)
 
-biweeklyTimer = timer("02:00", "01d", bkp, true)
-
+-- timers not local for longevity with garbage collection
 dailyEveningTimer = timer("19:00", "01d", function() setDarkmode(true) end)
 dailyMorningTimer = timer("08:00", "01d", function()
-	if not (isProjector()) then
-		setDarkmode(false)
-	end
+	if not (isProjector()) then setDarkmode(false) end
 end)
 
-local function projectorScreensaverStop(eventType)
-	if (eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart) then
+projectorScreensaverWatcher = caff.new(function(eventType)
+	if eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart then
 		runWithDelays(3, function()
-			if isProjector() then
-				iMacDisplay:setBrightness(0)
-			end
+			if isProjector() then iMacDisplay:setBrightness(0) end
 		end)
 	end
-end
-
-projectorScreensaverWatcher = caff.new(projectorScreensaverStop)
+end)
 
 local function sleepYouTube()
 	local minutesIdle = hs.host.idleTime() / 60
 	if minutesIdle < 30 then return end
-
 	killIfRunning("YouTube")
 	killIfRunning("Twitch")
 	killIfRunning("Netflix")

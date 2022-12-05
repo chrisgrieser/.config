@@ -1,5 +1,5 @@
 require("lua.utils")
-local pw = hs.pathwatcher.new
+local fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 --------------------------------------------------------------------------------
 
 -- BRAVE Bookmarks synced to Chrome Bookmarks (needed for Alfred)

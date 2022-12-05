@@ -1,11 +1,18 @@
--- CONFIG
-home = os.getenv("HOME")
-
-dotfilesFolder = home.."/.config/"
-fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-vaultLocation = home .. "/main-vault/"
+hyper = {"cmd", "alt", "ctrl", "shift"}
+hotkey = hs.hotkey.bind
+alert = hs.alert.show
+keystroke = hs.eventtap.keyStroke
+aw = hs.application.watcher
+wf = hs.window.filter
+app = hs.application
+applescript = hs.osascript.applescript
+uriScheme = hs.urlevent.bind
+pw = hs.pathwatcher.new
+I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
+
+home = os.getenv("HOME")
 
 ---appends t2 to t1 in-place
 ---@param t1 table
@@ -36,18 +43,6 @@ function trim(str)
 	if not(str) then return "" end
 	return (str:gsub("^%s*(.-)%s*$", "%1"))
 end
-
---------------------------------------------------------------------------------
-hyper = {"cmd", "alt", "ctrl", "shift"}
-hotkey = hs.hotkey.bind
-alert = hs.alert.show
-keystroke = hs.eventtap.keyStroke
-aw = hs.application.watcher
-wf = hs.window.filter
-app = hs.application
-applescript = hs.osascript.applescript
-uriScheme = hs.urlevent.bind
-I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
 

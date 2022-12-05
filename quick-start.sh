@@ -28,7 +28,7 @@ defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from savi
 
 cd ~
 git clone git@github.com:chrisgrieser/main-vault-backup.git
-git clone 
+git clone git@github.com:chrisgrieser/.password-store.git
 git clone --recurse-submodules git@github.com:chrisgrieser/.config.git
 cd ~/.config
 git submodule foreach git checkout main
