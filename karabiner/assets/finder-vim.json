@@ -104,6 +104,12 @@
         {
           "set_notification_message": {
             "id": "insert-notice",
+            "text": "⏸️ Finder-Vim-Mode paused. \n(↵ , ⇪, or ⎋ to re-activate.)"
+          }
+        },
+        {
+          "set_notification_message": {
+            "id": "insert-notice",
             "text": ""
           }
         },
@@ -152,7 +158,7 @@
         {
           "set_notification_message": {
             "id": "move-notice",
-            "text": "✂️ move active"
+            "text": "✂️  Move active"
           }
         },
         {
@@ -603,6 +609,90 @@
         {
           "type": "basic",
           "from": {
+            "key_code": "delete_or_backspace"
+          },
+          "to": [
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": "⏸️ Finder-Vim-Mode paused. \n(↵ , ⇪, or ⎋ to re-activate.)"
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": true
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_FIND_MODE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "return_or_enter",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e '\n  tell application \"System Events\" to tell process \"Finder\"\n    click menu item \"Rename…\" of menu \"File\" of menu bar 1\n  end tell'\n"
+            },
+            {
+              "set_notification_message": {
+                "id": "insert-notice",
+                "text": "✏️  INSERT"
+              }
+            },
+            {
+              "set_variable": {
+                "name": "FINDER_INSERT_MODE",
+                "value": true
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_FIND_MODE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
             "key_code": "s"
           },
           "to": [
@@ -835,21 +925,11 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "f18",
-            "modifiers": {
-              "mandatory": [
-                "command",
-                "shift"
-              ]
-            }
+            "key_code": "f18"
           },
           "to": [
             {
-              "key_code": "f18",
-              "modifiers": [
-                "command",
-                "shift"
-              ]
+              "key_code": "f18"
             },
             {
               "set_variable": {
@@ -1962,6 +2042,16 @@
               }
             }
           ],
+          "to": [
+            {
+              "key_code": "right_shift",
+              "modifiers": [
+                "command",
+                "control",
+                "option"
+              ]
+            }
+          ],
           "conditions": [
             {
               "type": "frontmost_application_if",
@@ -2111,6 +2201,11 @@
             {
               "type": "variable_if",
               "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_ALFRED_ACTIVE",
               "value": true
             }
           ]
@@ -2904,26 +2999,7 @@
           },
           "to_if_alone": [
             {
-              "shell_command": "folder=$(osascript -e 'tell application \"Finder\"\n  if exists Finder window 1 then return POSIX path of (target of Finder window 1 as alias)\nend tell')\ntouch \"$folder/new\"\nopen -R \"$folder/new\"\n"
-            },
-            {
-              "key_code": "vk_none",
-              "hold_down_milliseconds": 750
-            },
-            {
-              "key_code": "return_or_enter"
-            },
-            {
-              "set_variable": {
-                "name": "FINDER_INSERT_MODE",
-                "value": true
-              }
-            },
-            {
-              "set_notification_message": {
-                "id": "insert-notice",
-                "text": "✏️  INSERT"
-              }
+              "shell_command": "folder=$(osascript -e 'tell application \"Finder\"\n  if exists Finder window 1 then return POSIX path of (target of Finder window 1 as alias)\nend tell')\nnewFile=\"$folder/new-file\"\nwhile [[ -e \"$newFile\" ]] ; do\n  newFile=\"$newFile-1\"\ndone\ntouch \"$newFile\"\nopen -R \"$newFile\"\n"
             }
           ],
           "conditions": [
@@ -4829,7 +4905,7 @@
             {
               "set_notification_message": {
                 "id": "move-notice",
-                "text": "✂️ move active"
+                "text": "✂️  Move active"
               }
             }
           ],
@@ -5270,6 +5346,40 @@
           "to": [
             {
               "key_code": "6",
+              "modifiers": [
+                "control",
+                "option",
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_INSERT_MODE",
+              "value": true
+            },
+            {
+              "type": "variable_unless",
+              "name": "FINDER_FIND_MODE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "6"
+          },
+          "to": [
+            {
+              "key_code": "2",
               "modifiers": [
                 "control",
                 "option",
