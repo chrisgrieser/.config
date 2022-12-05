@@ -16,11 +16,6 @@ alias r='exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmy
 alias q='exit'
 alias notify="osascript -e 'display notification \"\" with title \"Terminal Process finished.\" subtitle \"\" sound name \"\"'"
 
-# pass-cli
-alias p='pass --clip'
-alias pe='pass edit'
-alias pf='pass find'
-
 # verbosity nets
 alias rm='rm -v'
 alias mv='mv -v'
