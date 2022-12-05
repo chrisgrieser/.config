@@ -12,8 +12,12 @@ export VAULT_PATH="$HOME/main-vault"
 export PATH="/Library/Application Support/org.pqrs/Karabiner-Elements/bin:$PATH"
 
 #───────────────────────────────────────────────────────────────────────────────
-# pass-cli
-export PASSWORD_STORE_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Authentification/.password-store"
+
+# Config
+export PASSWORD_STORE_CLIP_TIME=60
+export PASSWORD_STORE_GENERATED_LENGTH=32
+export PASSWORD_STORE_ENABLE_EXTENSIONS=false
+export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
 
 #───────────────────────────────────────────────────────────────────────────────
 # NEOVIM-RELATED

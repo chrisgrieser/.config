@@ -5,17 +5,16 @@ CONFIG+=('load_plugins')
 CONFIG+=('terminal_utils')
 CONFIG+=('aliases')
 CONFIG+=('history_config')
-CONFIG+=('pass')
 CONFIG+=('general_and_plugin_configs')
 CONFIG+=('completions')
 CONFIG+=('keybindings')
-[[ $TERM != "xterm-256color" ]] && CONFIG+=('vi-mode') # don't use vi mode for toggleterm in neovim
 CONFIG+=('docs_man')
 CONFIG+=('git_github')
 CONFIG+=('homebrew')
 CONFIG+=('alacritty_theme_utilities')
 CONFIG+=('../pandoc/pandoc')
 CONFIG+=('intro-messages')
+[[ $TERM != "xterm-256color" ]] && CONFIG+=('vi-mode') # don't use vi mode for toggleterm in neovim
 
 for config_file in "${CONFIG[@]}"; do
 	# shellcheck disable=1090
