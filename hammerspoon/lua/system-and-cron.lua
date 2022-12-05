@@ -20,6 +20,8 @@ local passwordStore = home .. "/.password-store/"
 
 local gitDotfileScript = dotfilesFolder .. "/git-dotfile-sync.sh"
 local gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
+local gitPassScript = passwordStore .. "/pass-sync.sh"
+
 --------------------------------------------------------------------------------
 
 -- calling with "--submodules" also updates submodules
@@ -63,12 +65,12 @@ end
 local function gitPassSync()
 	if gitpassSync and gitpassSync:isRunning() then return end
 
-	gitpassSync = hs.task.new(gitVaultScript, function(exitCode, _, stdErr)
+	gitpassSync = hs.task.new(gitPassScript, function(exitCode, _, stdErr)
 		stdErr = stdErr:gsub("\n", " –– ")
 		if exitCode ~= 0 then
 			notify(passIcon .. "⚠️️ password-store " .. stdErr)
 		else
-			print("Dotfile Sync successful.")
+			print("Password-Store Sync successful.")
 		end
 	end):start()
 end

@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B46D4F01-F87D-4123-9D22-FB7EDABD729F</string>
+				<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -107,11 +107,11 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>pw</string>
+				<string>xx</string>
 				<key>subtext</key>
-				<string>with length: '{query}' (default: 32)</string>
+				<string></string>
 				<key>text</key>
-				<string>Random password</string>
+				<string>Generate new Password</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -130,75 +130,20 @@
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>function run() {
-
-	const pwlength = parseInt("{query}");
-    var result           = '';
-    const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for ( var i = 0; i &lt; pwlength; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
-   }
-   return result;
-
-}</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>pw-generate.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ Password copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>B46D4F01-F87D-4123-9D22-FB7EDABD729F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
 				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
-pass --clip "$*"</string>
+pass generate --clip --no-symbols "$*" | tail -n1</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>copy-password.sh</string>
+				<string>pw-generate.sh</string>
 				<key>type</key>
 				<integer>5</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</string>
+			<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -222,6 +167,31 @@ pass --clip "$*"</string>
 			<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+pass --clip "$*" | tail -n1</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>copy-password.sh</string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -276,17 +246,25 @@ osascript -l JavaScript pass-cli-search.js "$PASSWORD_STORE_DIR"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>127</integer>
 				<key>script</key>
-				<string>pass {query}</string>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>EF422DD3-F6E3-4548-958A-6272B0762C37</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -342,31 +320,31 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>40</real>
 		</dict>
 		<key>24B77922-B082-4744-B4A1-6EAD37FFD88C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>search</string>
+			<string>search passwords</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>305</real>
 		</dict>
 		<key>3C073A54-0FF5-46B7-A886-7EF36A81668C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>paste random password</string>
+			<string>new password</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>40</real>
 		</dict>
 		<key>7C6B7643-4B16-4307-ADA8-14D6837FEE59</key>
 		<dict>
@@ -375,9 +353,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>edit</string>
 			<key>xpos</key>
-			<real>245</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>570</real>
 		</dict>
 		<key>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</key>
 		<dict>
@@ -386,36 +364,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>copy</string>
 			<key>xpos</key>
-			<real>245</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>215</real>
+			<real>175</real>
 		</dict>
 		<key>A5733344-CBEB-486B-87D4-DE52472EB5A5</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>395</real>
+			<real>445</real>
 			<key>ypos</key>
-			<real>215</real>
-		</dict>
-		<key>B46D4F01-F87D-4123-9D22-FB7EDABD729F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>335</real>
-			<key>ypos</key>
-			<real>15</real>
+			<real>115</real>
 		</dict>
 		<key>DD83841D-8A6C-41C6-96C4-440F0D766047</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>440</real>
 		</dict>
 		<key>EF422DD3-F6E3-4548-958A-6272B0762C37</key>
 		<dict>
@@ -424,9 +393,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>show</string>
 			<key>xpos</key>
-			<real>245</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>315</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
