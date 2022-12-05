@@ -8,6 +8,19 @@
 	<string>Mini-Apps</string>
 	<key>connections</key>
 	<dict>
+		<key>08E69B18-BE97-43EE-BF15-20A002F4E292</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7C6B7643-4B16-4307-ADA8-14D6837FEE59</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0F6DB773-7447-4D7C-900E-59F3E9C69B19</key>
 		<array>
 			<dict>
@@ -35,6 +48,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>A7E6132A-ED6F-4DE6-A91B-966B8288D21B</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Remove Entry</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>EF422DD3-F6E3-4548-958A-6272B0762C37</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
@@ -55,7 +78,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>7C6B7643-4B16-4307-ADA8-14D6837FEE59</string>
+				<string>8D26DC88-EF69-4797-BE9B-5DA1F6D9CF51</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
@@ -77,7 +100,45 @@
 				<false/>
 			</dict>
 		</array>
+		<key>8D26DC88-EF69-4797-BE9B-5DA1F6D9CF51</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7C6B7643-4B16-4307-ADA8-14D6837FEE59</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>08E69B18-BE97-43EE-BF15-20A002F4E292</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>9CBA9A32-467C-43DC-8DDA-D743189F828B</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A7E6132A-ED6F-4DE6-A91B-966B8288D21B</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -117,6 +178,32 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+pass generate --clip --no-symbols "$*" | tail -n1
+[[ "$auto_push" == "1" ]] &amp;&amp; pass git push &amp;&gt; /dev/null</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>pw-generate.sh</string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -134,31 +221,6 @@
 			<string>3C073A54-0FF5-46B7-A886-7EF36A81668C</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-pass generate --clip --no-symbols "$*" | tail -n1</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>pw-generate.sh</string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -209,31 +271,28 @@ pass --clip "$*" | tail -n1</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
+				<key>concurrently</key>
 				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+pass rm "$*" | tail -n1
+[[ "$auto_push" == "1" ]] &amp;&amp; pass git push &amp;&gt; /dev/null</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>copy-password.sh</string>
+				<key>type</key>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</string>
+			<string>A7E6132A-ED6F-4DE6-A91B-966B8288D21B</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -315,6 +374,35 @@ echo "$data" # for Large Type</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -338,15 +426,66 @@ echo "$data" # for Large Type</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>{query}
+pass git push</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>08E69B18-BE97-43EE-BF15-20A002F4E292</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>pass edit {query}</string>
+				<string>pass edit {query}
+</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.terminalcommand</string>
 			<key>uid</key>
 			<string>7C6B7643-4B16-4307-ADA8-14D6837FEE59</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:auto_push}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>yes</string>
+						<key>uid</key>
+						<string>9CBA9A32-467C-43DC-8DDA-D743189F828B</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>no</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>8D26DC88-EF69-4797-BE9B-5DA1F6D9CF51</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -361,12 +500,21 @@ echo "$data" # for Large Type</string>
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>08E69B18-BE97-43EE-BF15-20A002F4E292</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>720</real>
+		</dict>
 		<key>0F6DB773-7447-4D7C-900E-59F3E9C69B19</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>240</real>
+			<real>230</real>
 			<key>ypos</key>
 			<real>40</real>
 		</dict>
@@ -388,7 +536,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>new password</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>40</real>
 		</dict>
@@ -397,9 +545,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>390</real>
+			<real>380</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>450</real>
 		</dict>
 		<key>7C6B7643-4B16-4307-ADA8-14D6837FEE59</key>
 		<dict>
@@ -408,9 +556,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>edit</string>
 			<key>xpos</key>
-			<real>240</real>
+			<real>345</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>720</real>
+		</dict>
+		<key>8D26DC88-EF69-4797-BE9B-5DA1F6D9CF51</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>auto_push</string>
+			<key>xpos</key>
+			<real>196</real>
+			<key>ypos</key>
+			<real>725</real>
 		</dict>
 		<key>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</key>
 		<dict>
@@ -419,7 +578,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>copy</string>
 			<key>xpos</key>
-			<real>240</real>
+			<real>230</real>
 			<key>ypos</key>
 			<real>175</real>
 		</dict>
@@ -432,14 +591,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>115</real>
 		</dict>
+		<key>A7E6132A-ED6F-4DE6-A91B-966B8288D21B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>remove</string>
+			<key>xpos</key>
+			<real>230</real>
+			<key>ypos</key>
+			<real>315</real>
+		</dict>
 		<key>DD83841D-8A6C-41C6-96C4-440F0D766047</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>show in Finder</string>
 			<key>xpos</key>
-			<real>240</real>
+			<real>230</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>575</real>
 		</dict>
 		<key>EF422DD3-F6E3-4548-958A-6272B0762C37</key>
 		<dict>
@@ -448,9 +620,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>show</string>
 			<key>xpos</key>
-			<real>240</real>
+			<real>230</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>450</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
