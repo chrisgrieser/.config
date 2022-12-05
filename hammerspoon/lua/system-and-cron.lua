@@ -76,25 +76,28 @@ local function gitPassSync()
 end
 
 ---sync all three git repos
----@param args? string like "--submodules"
-local function syncAllGitRepos(args)
-	if args then
+---@param mode? string full|partial
+local function syncAllGitRepos(mode)
+	if mode == "full" then
 		gitDotfileSync("--submodules")
-	else
+		gitPassSync()
+		gitVaultSync()
+	elseif mode == "partial" then
 		gitDotfileSync()
+		gitVaultSync()
 	end
-	gitVaultSync()
-	gitPassSync()
 end
 
 --------------------------------------------------------------------------------
 
-repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, syncAllGitRepos)
+repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, function ()
+	syncAllGitRepos("partial")
+end)
 repoSyncTimer:start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
 uriScheme("sync-repos", function()
-	syncAllGitRepos()
+	syncAllGitRepos("full")
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
@@ -115,7 +118,7 @@ passFileWatcher:start()
 
 shutDownWatcher = caff.new(function(eventType)
 	if eventType == caff.screensDidSleep then
-		syncAllGitRepos()
+		syncAllGitRepos("full")
 	end
 end)
 shutDownWatcher:start()
@@ -124,7 +127,7 @@ shutDownWatcher:start()
 -- SYSTEM WAKE/START
 local function officeWake(eventType)
 	if eventType == caff.screensDidUnlock then
-		syncAllGitRepos("--submodules")
+		syncAllGitRepos("full")
 		officeModeLayout()
 	end
 end
@@ -142,7 +145,7 @@ local function homeWake(eventType)
 			else
 				setDarkmode(true)
 			end
-			syncAllGitRepos("--submodules")
+			syncAllGitRepos("full")
 			homeModeLayout() -- should run after git sync, to avoid conflicts
 		end
 
