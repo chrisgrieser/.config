@@ -44,7 +44,6 @@ rules:
             file_paths:
               - ^/Applications/Obsidian\.app
               - "[Nn]eovide"
-              - Finder\.app
               - ^/Applications/Twitterrific\.app
               - Warp\.app
   - description: '🔘 ⌘+D → Delete (Visual) Line'
