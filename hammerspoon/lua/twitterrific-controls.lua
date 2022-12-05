@@ -83,7 +83,7 @@ function iinaLaunch(appName, eventType, appObject)
 	if not (eventType == aw.launched and appName == "IINA") then
 		if isProjector() then
 			-- going full screen needs a small delay
-			repeatFunc({0.05, 0.2}, function()
+			runWithDelays({0.05, 0.2}, function()
 				appObject:selectMenuItem({"Video", "Enter Full Screen"})
 			end)
 		end
@@ -107,7 +107,7 @@ hotkey({"shift"}, "end", shiftEndAction)
 -- only active in office & when not using twitterrificScrollUp()
 function twitterificAppActivated(appName, eventType)
 	if not(appName == "Twitterrific" and eventType == aw.launched) then return end
-	runDelayed(1, function() twitterrificAction("scrollup") end)
+	runWithDelays(1, function() twitterrificAction("scrollup") end)
 end
 twitterificAppWatcher = aw.new(twitterificAppActivated)
 twitterificAppWatcher:start()

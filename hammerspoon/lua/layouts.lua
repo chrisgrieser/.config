@@ -38,7 +38,7 @@ function movieModeLayout()
 	holeCover()
 	iMacDisplay:setBrightness(0)
 
-	repeatFunc({0, 0.5}, function() openIfNotRunning("YouTube") end)
+	runWithDelays({0, 0.5}, function() openIfNotRunning("YouTube") end)
 
 	killIfRunning("Obsidian")
 	killIfRunning("Marta")
@@ -105,11 +105,11 @@ function homeModeLayout()
 
 	showAllSidebars()
 	useLayout(homeLayout)
-	repeatFunc({0.5, 1}, function() app("Drafts"):activate() end)
+	runWithDelays({0.5, 1}, function() app("Drafts"):activate() end)
 
 	if screenIsUnlocked() and not (layoutChangeActive) then
 		layoutChangeActive = true
-		runDelayed(2, function()
+		runWithDelays(2, function()
 			twitterrificAction("scrollup")
 			layoutChangeActive = false
 		end)
@@ -163,8 +163,8 @@ function officeModeLayout()
 
 	useLayout(officeLayout)
 	showAllSidebars()
-	runDelayed(0.3, function() useLayout(officeLayout) end)
-	runDelayed(0.5, function() app("Drafts"):activate() end)
+	runWithDelays(0.3, function() useLayout(officeLayout) end)
+	runWithDelays(0.5, function() app("Drafts"):activate() end)
 
 	-- wait until sync is finished, to avoid merge conflict
 	hs.timer.waitUntil(
@@ -181,7 +181,7 @@ local function motherMovieModeLayout()
 	if not (isProjector()) then return end
 	iMacDisplay:setBrightness(0)
 
-	repeatFunc({0, 1}, function() openIfNotRunning("YouTube") end)
+	runWithDelays({0, 1}, function() openIfNotRunning("YouTube") end)
 	killIfRunning("Obsidian")
 	killIfRunning("Marta")
 	killIfRunning("Drafts")
@@ -236,7 +236,7 @@ local function motherHomeModeLayout()
 	useLayout(motherHomeLayout)
 	showAllSidebars()
 
-	repeatFunc({0.05, 0.2}, function() useLayout(motherHomeLayout) end)
+	runWithDelays({0.05, 0.2}, function() useLayout(motherHomeLayout) end)
 end
 
 --------------------------------------------------------------------------------
@@ -290,7 +290,7 @@ wf_appsOnMouseScreen:subscribe(wf.windowCreated, function(newWindow)
 	if not (mouseScreen) then return end
 	local screenOfWindow = newWindow:screen()
 	if isProjector() and not (mouseScreen:name() == screenOfWindow:name()) then
-		repeatFunc({0, 0.1, 0.2, 0.4, 0.6}, function()
+		runWithDelays({0, 0.1, 0.2, 0.4, 0.6}, function()
 			newWindow:moveToScreen(mouseScreen)
 		end)
 	end

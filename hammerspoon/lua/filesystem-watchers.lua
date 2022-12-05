@@ -87,7 +87,7 @@ function fromFileHub(paths)
 
 		-- delete alfredworkflows and ics
 		if fileName:sub(-15) == ".alfredworkflow" or fileName:sub(-4) == ".ics" then
-			runDelayed(3, function() os.rename(file, home.."/.Trash/"..fileName) end)
+			runWithDelays(3, function() os.rename(file, home.."/.Trash/"..fileName) end)
 
 			-- vimium/ublacklist
 		elseif fileName == "vimium-options.json" or fileName == "ublacklist-settings.json" then
@@ -130,13 +130,13 @@ function installObsiAlpha(files)
 	for _, file in pairs(files) do
 		-- needs delay and crdownload check, since the renaming is sometimes not picked up by hammerspoon
 		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
-		runDelayed(0.5, function()
+		runWithDelays(0.5, function()
 			hs.execute(
 				[[cd "]] .. fileHub .. [[" || exit 1
 				test -f obsidian-*.*.*.asar.gz || exit 1
 				gunzip obsidian-*.*.*.asar.gz
 				mv obsidian-*.*.*.asar "$HOME/Library/Application Support/obsidian/"
-				killall "Obsidian" && sleep 1 
+				killall "Obsidian" && sleep 1
 				open -a "Obsidian" ]]
 			)
 			-- close the created tab

@@ -42,9 +42,9 @@ function pairedActivation(mode)
 			-- not using :focus(), since that would cause infinite recursion
 			-- raising needs small delay, so that focused window is already at front
 			if focusedWin:id() == SPLIT_RIGHT:id() then
-				runDelayed (0.02, function ()	SPLIT_LEFT:raise() end)
+				runWithDelays (0.02, function ()	SPLIT_LEFT:raise() end)
 			elseif focusedWin:id() == SPLIT_LEFT:id() then
-				runDelayed (0.02, function ()	SPLIT_RIGHT:raise() end)
+				runWithDelays (0.02, function ()	SPLIT_RIGHT:raise() end)
 			end
 		end)
 		wf_pairedActivation:subscribe(wf.windowDestroyed, function(closedWin)
@@ -107,7 +107,7 @@ function vsplit (mode, secondWin)
 	moveResize(SPLIT_LEFT, f2)
 	SPLIT_RIGHT:raise()
 	SPLIT_LEFT:raise()
-	runDelayed(0.3, function ()
+	runWithDelays(0.3, function ()
 		if SPLIT_RIGHT:application() then
 			if SPLIT_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(SPLIT_RIGHT)
 			elseif SPLIT_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(SPLIT_RIGHT)
@@ -134,5 +134,3 @@ end
 hotkey(hyper, "X", function() vsplit("swap") end)
 hotkey(hyper, "C", function() vsplit("unsplit") end)
 hotkey(hyper, "V", startSplit)
-
-

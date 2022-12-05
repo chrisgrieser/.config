@@ -100,7 +100,7 @@ local function officeWake(eventType)
 end
 
 local function homeWake(eventType)
-	runDelayed(2, function()
+	runWithDelays(2, function()
 		if not (eventType == caff.screensDidWake or eventType == caff.systemDidWake) then return end
 
 		if isProjector() then
@@ -167,7 +167,7 @@ end)
 
 local function projectorScreensaverStop(eventType)
 	if (eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart) then
-		runDelayed(3, function()
+		runWithDelays(3, function()
 			if isProjector() then
 				iMacDisplay:setBrightness(0)
 			end

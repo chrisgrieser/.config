@@ -57,7 +57,7 @@ transBgAppWatcher:start()
 -- PIXELMATOR
 pixelmatorWatcher = aw.new(function(appName, eventType)
 	if appName:find("Pixelmator") and eventType == aw.launched then
-		runDelayed(0.3, function() moveResizeCurWin("maximized") end)
+		runWithDelays(0.3, function() moveResizeCurWin("maximized") end)
 	end
 end)
 pixelmatorWatcher:start()
@@ -113,7 +113,7 @@ wf_browser_all = wf.new("Brave Browser")
 -- if activated but no window, pass through (no accidental alt-tabbing into it)
 local function browserPassThrough(appName, eventType, browserAppObj)
 	if appName == "Brave Browser" and eventType == aw.activated then
-		runDelayed(0.1, function()
+		runWithDelays(0.1, function()
 			local browserWins = #browserAppObj:allWindows()
 			if browserWins == 0 then browserAppObj:hide() end
 		end)
@@ -175,7 +175,7 @@ anyAppActivationWatcher:start()
 -- pseudomaximized window & killing leftover neovide process
 wf_neovim = wf.new {"neovide", "Neovide"}
 	:subscribe(wf.windowCreated, function()
-		repeatFunc({0.2, 0.4, 0.6, 0.8}, function()
+		runWithDelays({0.2, 0.4, 0.6, 0.8}, function()
 			if isAtOffice() or isProjector() then
 				moveResizeCurWin("maximized")
 			else
@@ -186,7 +186,7 @@ wf_neovim = wf.new {"neovide", "Neovide"}
 	-- bugfix for: https://github.com/neovide/neovide/issues/1595
 	:subscribe(wf.windowDestroyed, function()
 		if #wf_neovim:getWindows() == 0 then
-			runDelayed(3, function() hs.execute("pgrep neovide || pkill nvim") end)
+			runWithDelays(3, function() hs.execute("pgrep neovide || pkill nvim") end)
 		end
 	end)
 
@@ -256,7 +256,7 @@ wf_finder = wf.new("Finder")
 -- quit Finder if it was started as a helper (e.g., JXA), but has no window
 local function finderWatcher(appName, eventType, finderAppObj)
 	if appName == "Finder" and eventType == aw.launched then
-		repeatFunc({1, 4, 7, 10}, function()
+		runWithDelays({1, 4, 7, 10}, function()
 			if finderAppObj and not (finderAppObj:mainWindow()) then
 				finderAppObj:kill()
 			end
@@ -288,7 +288,7 @@ wf_zoom = wf.new("zoom.us")
 		]]
 		local numberOfZoomWindows = #wf_zoom:getWindows();
 		if numberOfZoomWindows == 2 then
-			repeatFunc({1, 2}, function()
+			runWithDelays({1, 2}, function()
 				app("zoom.us"):findWindow("^Zoom$"):close()
 			end)
 		end
@@ -324,12 +324,13 @@ highlightsAppWatcher:start()
 --------------------------------------------------------------------------------
 
 -- DRAFTS: Hide Toolbar & set proper workspace
-local function draftsLaunchWake(appName, eventType, appObject)
+
+draftsWatcher = aw.new(function (appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
 
 	if eventType == aw.launched or eventType == aw.activated then
 		local workspace = isAtOffice() and "Office" or "Home"
-		repeatFunc({0.15, 0.3}, function()
+		runWithDelays(0.2, function()
 			local name = appObject:focusedWindow():title()
 			local isTaskList = name:find("Supermarkt$") or name:find("Drogerie$") or name:find("Ernährung$")
 			if not (isTaskList) then
@@ -338,9 +339,7 @@ local function draftsLaunchWake(appName, eventType, appObject)
 			appObject:selectMenuItem {"View", "Hide Toolbar"}
 		end)
 	end
-end
-
-draftsWatcher = aw.new(draftsLaunchWake)
+end)
 draftsWatcher:start()
 
 --------------------------------------------------------------------------------
@@ -376,11 +375,11 @@ wf_script_editor = wf.new("Script Editor")
 	:subscribe(wf.windowCreated, function(newWindow)
 		if newWindow:title() == "Open" then
 			keystroke({"cmd"}, "n")
-			runDelayed(0.2, function()
+			runWithDelays(0.2, function()
 				keystroke({"cmd"}, "v")
 				moveResizeCurWin("centered")
 			end)
-			runDelayed(0.4, function()
+			runWithDelays(0.4, function()
 				keystroke({"cmd"}, "k")
 			end)
 		end
@@ -429,7 +428,7 @@ discordAppWatcher:start()
 wf_shottr = wf.new("Shottr")
 	:subscribe(wf.windowCreated, function(newWindow)
 		if newWindow:title() == "Preferences" then return end
-		runDelayed(0.1, function()
+		runWithDelays(0.1, function()
 			keystroke({}, "a")
 		end)
 	end)
