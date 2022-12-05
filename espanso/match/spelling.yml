@@ -18,7 +18,7 @@ matches:
     propagate_case: true
   - trigger: fiels
     replace: files
-  - trigger: "\bfo "  # extra space necessary to avoid accental triggering when searching for go in Alfred
+  - regex: "\bfo "  # extra space necessary to avoid accental triggering when using "fo" as search term
     replace: "of "
   - trigger: forshcung
     replace: forschung
