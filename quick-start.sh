@@ -6,24 +6,22 @@
 
 # ask for credentials upfront
 sudo -v
+setopt INTERACTIVE_COMMENTS
 
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 xcode-select --install
 
-# Install Essential Apps
+# get passwords
 brew install pinentry-mac pass gnupg
+
+# Install Essential Apps
 brew install --no-quarantine alfred hammerspoon neovim alacritty karabiner-elements brave-browser
 brew install --no-quarantine --cask neovide
 
-# Hammerspoon
-defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
-defaults write "org.hammerspoon.Hammerspoon" "HSUploadCrashData" 0
-defaults write "org.hammerspoon.Hammerspoon" "MJKeepConsoleOnTopKey" 1
-defaults write "org.hammerspoon.Hammerspoon" "SUEnableAutomaticChecks" 1
-
-# Make Finder quittable
-defaults write com.apple.finder QuitMenuItem -bool true
+# Key settings
+defaults write com.apple.finder QuitMenuItem -bool true # Finder quitable
+defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from saving in the keychains
 
 #-------------------------------------------------------------------------------
 # DOTFILES / VAULT

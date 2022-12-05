@@ -6,7 +6,7 @@ export LC_CTYPE="en_US.UTF-8"
 
 # OPTIONS --- (`man zshoptions` to see all options)
 setopt AUTO_CD # pure directory = cd into it
-setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful für copypasting)
+setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
 
 #-------------------------------------------------------------
 

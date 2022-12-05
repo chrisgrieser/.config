@@ -45,15 +45,17 @@ espanso service register
 # sketchy
 brew services start felixkratz/formulae/sketchybar
 
-# make Finder quittable
-defaults write com.apple.finder QuitMenuItem -bool true
-killall Finder
-
 # change setting of archive utility
 open "/System/Library/CoreServices/Applications/Archive Utility.app"
 
 # Twitterific: run headless http://support.iconfactory.com/kb/twitterrific/advanced-settings-using-the-command-line-macos
 defaults write com.iconfactory.Twitterrific5 advancedShowDockIcon -bool NO
+
+# Hammerspoon
+defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
+defaults write "org.hammerspoon.Hammerspoon" "HSUploadCrashData" 0
+defaults write "org.hammerspoon.Hammerspoon" "MJKeepConsoleOnTopKey" 1
+defaults write "org.hammerspoon.Hammerspoon" "SUEnableAutomaticChecks" 1
 
 # Portfolio Performance
 font_size=19
