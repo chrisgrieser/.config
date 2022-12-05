@@ -39,7 +39,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Show Entry</string>
+				<string>⌘: Show Data</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -82,6 +82,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EF422DD3-F6E3-4548-958A-6272B0762C37</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -196,6 +209,35 @@ pass --clip "$*" | tail -n1</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -249,9 +291,13 @@ osascript -l JavaScript pass-cli-search.js "$PASSWORD_STORE_DIR"</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>127</integer>
+				<integer>102</integer>
 				<key>script</key>
-				<string></string>
+				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+data=$(pass show "$*" | tail +2)
+echo "$data" | pbcopy
+echo "$data" # for Large Type</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -333,7 +379,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>315</real>
 		</dict>
 		<key>3C073A54-0FF5-46B7-A886-7EF36A81668C</key>
 		<dict>
@@ -345,6 +391,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>40</real>
+		</dict>
+		<key>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>390</real>
+			<key>ypos</key>
+			<real>315</real>
 		</dict>
 		<key>7C6B7643-4B16-4307-ADA8-14D6837FEE59</key>
 		<dict>
