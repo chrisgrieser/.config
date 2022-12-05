@@ -15,6 +15,7 @@ alias .....="z ../../../.."
 alias r='exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias q='exit'
 alias notify="osascript -e 'display notification \"\" with title \"Terminal Process finished.\" subtitle \"\" sound name \"\"'"
+alias p='pass'
 
 # verbosity nets
 alias rm='rm -v'
