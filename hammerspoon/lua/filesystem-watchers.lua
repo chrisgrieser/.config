@@ -1,5 +1,8 @@
 require("lua.utils")
+--------------------------------------------------------------------------------
+-- CONFIG
 local fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+local dotfilesFolder = home.."/.config/"
 --------------------------------------------------------------------------------
 
 -- BRAVE Bookmarks synced to Chrome Bookmarks (needed for Alfred)
