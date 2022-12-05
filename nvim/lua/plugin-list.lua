@@ -115,7 +115,7 @@ function M.PluginList()
 		"nvim-lua/plenary.nvim",
 	}}
 
-	-- File History
+	-- File History & Git
 	use {"simnalamburt/vim-mundo", -- undotree, also supports searching undo history
 		cmd = "MundoToggle",
 		run = "pip3 install --upgrade pynvim",
@@ -129,6 +129,7 @@ function M.PluginList()
 			}
 		end,
 	}
+	use {"ruifm/gitlinker.nvim", requires = "nvim-lua/plenary.nvim"}
 
 	-- Operators & Text Objects, Navigation & Editing
 	use "echasnovski/mini.ai" -- custom text objects

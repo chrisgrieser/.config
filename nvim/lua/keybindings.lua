@@ -21,7 +21,7 @@ keymap("n", "?", telescope.keymaps)
 keymap("n", "<leader>T", telescope.colorscheme)
 
 -- Highlights
-keymap("n", "<leader>G", telescope.highlights)
+keymap("n", "<leader>H", telescope.highlights)
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
@@ -318,11 +318,12 @@ keymap({"n", "x"}, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]]) -- secon
 -- sane-gx
 keymap("n", "gx", function ()
 	local url = fn.expand("<cWORD>")
-	-- fn.system([[open "]]..url..[["]])
-	fn.system([[open]], ..url..[["]])
+	if url:find("http") then
+		os.execute([[open "]]..url..[["]])
+	else
+		vim.notify(" Not an URL. ", logWarn)
+	end
 end)
-
--- https://roobert.github.io/2022/12/03/Extending-Neovim/
 
 --------------------------------------------------------------------------------
 
