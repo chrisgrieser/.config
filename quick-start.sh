@@ -74,9 +74,6 @@ ESPANSO_DIR=~"/Library/Application Support/espanso"
 [[ -e "$ESPANSO_DIR" ]] && rm -rf "$ESPANSO_DIR"
 ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 
-# pass-cli
-ln -sf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Authentification/.password-store" ~/.password-store
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # Warp

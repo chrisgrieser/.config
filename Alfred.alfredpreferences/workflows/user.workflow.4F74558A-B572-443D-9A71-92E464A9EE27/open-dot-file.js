@@ -8,8 +8,8 @@ function alfredMatcher(str) {
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
 	return [clean, camelCaseSeperated, str].join(" ");
 }
-
-const getEnv = (path) => $.getenv(path).replace(/^~/, app.pathTo("home folder"));
+const home = app.pathTo("home folder");
+const getEnv = (path) => $.getenv(path).replace(/^~/, home);
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -92,7 +92,9 @@ workArray.forEach(file => {
 	});
 });
 
-// add dotfile folder itself
+//──────────────────────────────────────────────────────────────────────────────
+
+// add dotfile folder itself + password-store (pass-cli)
 const self = dotfileFolder.replace(/.*\/(.+)\//, "$1");
 jsonArray.push({
 	"title": self,
@@ -101,7 +103,18 @@ jsonArray.push({
 	"icon": { "type": "fileicon", "path": dotfileFolder },
 	"type": "file:skipcheck",
 	"uid": self,
-	"arg": self,
+	"arg": dotfileFolder,
+});
+
+const pw = home + "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Authentification/.password-store";
+jsonArray.push({
+	"title": ".password-store",
+	"subtitle": "▸ Dotfolder/Authentification/",
+	"match": alfredMatcher(pw),
+	"icon": { "type": "fileicon", "path": dotfileFolder },
+	"type": "file:skipcheck",
+	"uid": pw,
+	"arg": pw,
 });
 
 JSON.stringify({ items: jsonArray });
