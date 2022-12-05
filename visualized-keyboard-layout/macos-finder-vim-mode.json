@@ -84,12 +84,13 @@
     },
     "`",
     {
-      "c": "#999999",
-      "f": 6,
+      "c": "#c7a6ff",
+      "f": 1,
       "w": 2
     },
-    "⌫",
+    "⌫\ntemporarily disable Finder Vim Mode until next ⎋, ↵, or ⇪",
     {
+      "c": "#999999",
       "a": 7,
       "f": 4
     },
@@ -149,7 +150,7 @@
       "f": 2,
       "w": 1.75
     },
-    "⇪\n(if hyper key)\n\n\n\n\nnormal mode",
+    "⇪\nnormal mode",
     "a\nselect all files",
     {
       "f": 1
