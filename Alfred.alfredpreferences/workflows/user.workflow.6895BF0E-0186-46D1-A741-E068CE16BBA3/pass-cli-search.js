@@ -15,26 +15,31 @@ const passwordStore = $.getenv("password_store").replace(/^~/, app.pathTo("home 
 const jsonArray = [];
 
 if (fileExists(passwordStore)) {
-	app.doShellScript(`cd "${passwordStore}" ; find . -name "*.gpg"`)
+	const fdInstalled = app.doShellScript('command -v fd || echo "no"') !== "no";
+	const searchCommand = fdInstalled ? 'fd ".*\\.gpg"' : 'find . -name "*.gpg"';
+
+	console.log("searchCommand: " + searchCommand);
+
+	app.doShellScript(`cd "${passwordStore}" ; ${searchCommand}`)
 		.split("\r")
-		.forEach(item => {
-			item = item.slice(1);
+		.forEach(gpgFile => {
+			const id = gpgFile.slice(2, -4);
+			const parts = id.split("/");
+			const name = parts.pop();
+			const group = parts.join("/");
 
 			jsonArray.push({
-				"title": item,
-				"match": alfredMatcher(item),
-				"subtitle": item,
-				"type": "file:skipcheck",
-				"icon": { "type": "fileicon", "path": item },
-				"arg": item,
-				"uid": item,
+				"title": name,
+				"subtitle": group,
+				"match": alfredMatcher(id),
+				"arg": id,
+				"uid": id,
 			});
 		});
 } else {
 	jsonArray.push({
 		"title": "⚠️ Password Store does not exist",
 		"subtitle": passwordStore.replace(/\/Users\/\w+/, "~"),
-		"type": "file:skipcheck",
 		"valid": false,
 	});
 }

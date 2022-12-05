@@ -64,7 +64,7 @@ function run (argv) {
 					"mods": {
 						"alt": {
 							"arg": commitHash,
-							"subtitle": `${commitHash}    (⌥: Copy)`
+							"subtitle": `${commitHash}    (⌥: Copy)`,
 						},
 					},
 					"icon": FILE_ICON,
@@ -107,7 +107,7 @@ function run (argv) {
 				"mods": {
 					"alt": {
 						"arg": commitHash,
-						"subtitle": `${commitHash}    (⌥: Copy)`
+						"subtitle": `${commitHash}    (⌥: Copy)`,
 					},
 				},
 				"icon": FILE_ICON,

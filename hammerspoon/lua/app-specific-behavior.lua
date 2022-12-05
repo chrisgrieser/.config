@@ -256,7 +256,7 @@ wf_finder = wf.new("Finder")
 -- quit Finder if it was started as a helper (e.g., JXA), but has no window
 local function finderWatcher(appName, eventType, finderAppObj)
 	if appName == "Finder" and eventType == aw.launched then
-		runWithDelays({1, 4, 7, 10}, function()
+		runWithDelays({1, 2}, function()
 			if finderAppObj and not (finderAppObj:mainWindow()) then
 				finderAppObj:kill()
 			end

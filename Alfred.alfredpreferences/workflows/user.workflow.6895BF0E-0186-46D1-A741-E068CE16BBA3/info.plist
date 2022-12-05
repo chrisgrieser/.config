@@ -69,6 +69,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>pw</string>
+				<key>subtext</key>
+				<string>with length: '{query}' (default: 32)</string>
+				<key>text</key>
+				<string>Random password</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>3C073A54-0FF5-46B7-A886-7EF36A81668C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -103,27 +124,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>pw</string>
-				<key>subtext</key>
-				<string>with length: '{query}' (default: 32)</string>
-				<key>text</key>
-				<string>Random password</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>3C073A54-0FF5-46B7-A886-7EF36A81668C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -153,7 +153,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>pass-cli.js</string>
+				<string>pass-cli-search.js</string>
 				<key>subtext</key>
 				<string>Loading...</string>
 				<key>title</key>
@@ -172,7 +172,11 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>Alternative: https://github.com/MatthewWest/pass-alfred
+
+---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>0F6DB773-7447-4D7C-900E-59F3E9C69B19</key>
@@ -186,10 +190,12 @@
 		</dict>
 		<key>24B77922-B082-4744-B4A1-6EAD37FFD88C</key>
 		<dict>
+			<key>note</key>
+			<string>search</string>
 			<key>xpos</key>
-			<real>105</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>360</real>
 		</dict>
 		<key>3C073A54-0FF5-46B7-A886-7EF36A81668C</key>
 		<dict>
