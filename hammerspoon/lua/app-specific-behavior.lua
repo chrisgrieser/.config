@@ -56,7 +56,7 @@ transBgAppWatcher:start()
 
 -- PIXELMATOR
 pixelmatorWatcher = aw.new(function(appName, eventType)
-	if appName:find("Pixelmator") and eventType == aw.launched then
+	if appName == "Pixelmator" and eventType == aw.launched then
 		runWithDelays(0.3, function() moveResizeCurWin("maximized") end)
 	end
 end)
@@ -325,7 +325,7 @@ highlightsAppWatcher:start()
 
 -- DRAFTS: Hide Toolbar & set proper workspace
 
-draftsWatcher = aw.new(function (appName, eventType, appObject)
+draftsWatcher = aw.new(function(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
 
 	if eventType == aw.launched or eventType == aw.activated then

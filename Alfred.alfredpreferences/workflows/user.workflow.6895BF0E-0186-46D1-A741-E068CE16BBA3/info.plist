@@ -249,48 +249,20 @@ pass generate --clip --no-symbols "$*" | tail -n1
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-pass --clip "$*" | tail -n1</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>copy-password.sh</string>
+				<string>copy-pw.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-pass rm "$*" | tail -n1
-[[ "$auto_push" == "1" ]] &amp;&amp; pass git push &amp;&gt; /dev/null</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>copy-password.sh</string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A7E6132A-ED6F-4DE6-A91B-966B8288D21B</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -322,7 +294,7 @@ pass rm "$*" | tail -n1
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string># workaround to "$PASSWORD_STORE_DIR" from zshenv to the JavaScript
+				<string># since this is a shell-script "$PASSWORD_STORE_DIR" from zshenv can be passed to JavaScript
 osascript -l JavaScript pass-cli-search.js "$PASSWORD_STORE_DIR"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -350,19 +322,38 @@ osascript -l JavaScript pass-cli-search.js "$PASSWORD_STORE_DIR"</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-data=$(pass show "$*" | tail +2)
-echo "$data" | pbcopy
-echo "$data" # for Large Type</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>remove-pw.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A7E6132A-ED6F-4DE6-A91B-966B8288D21B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>show-data.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -406,15 +397,15 @@ echo "$data" # for Large Type</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>open -R "${password_store/#\~/$HOME}/$*.gpg"</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>open-entry-in-finder.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -638,7 +629,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<string>Run `pass git push` after any changes.</string>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Affects editing, generating &amp; removing</string>
 			<key>label</key>
 			<string>Auto-Push</string>
 			<key>type</key>

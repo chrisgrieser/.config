@@ -132,13 +132,14 @@ function M.PluginList()
 
 	-- Operators & Text Objects, Navigation & Editing
 	use "echasnovski/mini.ai" -- custom text objects
-	use "kylechui/nvim-surround"
-	use "gbprod/substitute.nvim"
-	use "numToStr/Comment.nvim"
-	use "michaeljsmith/vim-indent-object"
+	use "kylechui/nvim-surround" -- surround operator
+	use "gbprod/substitute.nvim" -- substitution & exchange operator
+	use "numToStr/Comment.nvim" -- comment operator
+	use "michaeljsmith/vim-indent-object" -- indention-based text-object
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}
-	use "ggandor/leap.nvim"
-	use "Darazaki/indent-o-matic"
+	use "ggandor/leap.nvim" -- easymotion-like
+	use "Darazaki/indent-o-matic" -- auto-determine indents
+	use "nacro90/numb.nvim" -- line previews when ":n"
 
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting

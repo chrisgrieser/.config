@@ -58,7 +58,6 @@ end
 require("dressing").setup {
 	input = {
 		border = borderStyle,
-		winblend = 4, -- % transparency
 		relative = "win",
 		insert_only = false,
 		win_options = { sidescrolloff = 0 },
@@ -69,7 +68,6 @@ require("dressing").setup {
 		builtin = {
 			border = borderStyle,
 			relative = "cursor",
-			winblend = 4,
 			max_width = 60,
 			min_width = 18,
 			max_height = 12,

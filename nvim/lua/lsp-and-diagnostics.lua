@@ -45,7 +45,7 @@ end)
 
 local function diagnosticFormat(diagnostic, mode)
 	local msg = trim(diagnostic.message)
-	local source = diagnostic.source:gsub("%.$", "")
+	local source = diagnostic.source and diagnostic.source:gsub("%.$", "") or ""
 	local code = tostring(diagnostic.code)
 	local out = msg .. " (" .. code .. ")"
 
