@@ -59,8 +59,7 @@ ln -sf "$DOTFILE_FOLDER/linter-configs/.flake8" ~
 ln -sf "$DOTFILE_FOLDER/vale/.vale.ini" ~
 
 # GPG
-ln -sf "$DOTFILE_FOLDER/gpg/gpg.conf" ~/.gpg
-ln -sf "$DOTFILE_FOLDER/gpg/gpg-agent.conf" ~/.gnupg
+ln -sf "$DOTFILE_FOLDER/gnupg/gpg-agent.conf" ~/.gnupg
 
 # pandoc
 [[ -e ~/.pandoc ]] && rm -rf ~/.pandoc
