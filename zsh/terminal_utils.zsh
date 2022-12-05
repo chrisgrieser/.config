@@ -111,14 +111,6 @@ function settings () {
 	fi )
 }
 
-# copies path of file
-function p () {
-	# shellcheck disable=SC2164
-	ABSOLUTE_PATH="$(cd "$(dirname "$1")"; pwd -P)/$(basename "$1")"
-	echo "$ABSOLUTE_PATH" | pbcopy
-	echo "Copied: ""$ABSOLUTE_PATH"
-}
-
 # copies last n commands
 function lc (){
 	number="$*"

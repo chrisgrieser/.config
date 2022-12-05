@@ -3,26 +3,27 @@
 
 # configurations
 alias .star='open $STARSHIP_CONFIG'
-alias .nv='nvim -c "Telescope find_files cwd=~/.config/nvim" '
 alias r='exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias bar='sketchybar --update && echo sketchybar updated'
 alias barr='brew services restart sketchybar'
 
 # z & cd
 alias zz='z -' # back to last dir
+alias z='cd'
 alias .="open ."
 alias ..="z .."
 alias ...="z ../.."
 alias ....="z ../../.."
 alias .....="z ../../../.."
 
-# vim
-alias vim='nvim'
-alias nv='nvim'
-
 # utils
 alias q='exit'
 alias notify="osascript -e 'display notification \"\" with title \"Terminal Process finished.\" subtitle \"\" sound name \"\"'"
+
+# pass-cli
+alias p='pass --clip'
+alias pe='pass edit'
+alias pf='pass find'
 
 # colorize by default
 alias grep='grep --color'
@@ -39,6 +40,7 @@ alias which='which -a'
 alias mkdir='mkdir -p'
 alias pip="pip3"
 alias curl="curl -sL"
+alias tetris="tetris --ascii-only"
 
 # exa
 # in function for directoryInspect function
@@ -70,21 +72,16 @@ ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' L$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
 
-# Suffix Aliases
+# SUFFIX ALIASES
 # = default command to act upon the filetype, when is is entered
 # ' and " are there to also open quoted things
 # without preceding command (analogous to `setopt AUTO_CD` but for files)
 alias -s {css,ts,js,yml,json,plist,xml,md}='bat'
 alias -s {css,ts,js,yml,json,plist,xml,md}\"='bat'
-alias -s {css,ts,js,yml,json,plist,xml,md}\'='bat'
 alias -s {pdf,png,jpg,jpeg,tiff}="qlmanage -p &> /dev/null"
 alias -s {pdf,png,jpg,jpeg,tiff}\"="qlmanage -p &> /dev/null"
-alias -s {pdf,png,jpg,jpeg,tiff}\'="qlmanage -p &> /dev/null"
 
 # open log files in less and scrolled to the bottom
 alias -s log="less +G"
-alias -s log\'="less +G"
 alias -s log\"="less +G"
 
-# Misc
-alias tetris="tetris --ascii-only"
