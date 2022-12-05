@@ -8,8 +8,12 @@ export DOTFILE_FOLDER="$HOME/.config"
 export VAULT_PATH="$HOME/main-vault"
 
 #───────────────────────────────────────────────────────────────────────────────
-# karabiner_cli
+# karabiner-cli
 export PATH="/Library/Application Support/org.pqrs/Karabiner-Elements/bin:$PATH"
+
+#───────────────────────────────────────────────────────────────────────────────
+# pass-cli
+export PASSWORD_STORE_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Authentification/.password-store"
 
 #───────────────────────────────────────────────────────────────────────────────
 # NEOVIM-RELATED

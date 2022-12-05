@@ -84,7 +84,7 @@ workArray.forEach(file => {
 	jsonArray.push({
 		"title": fileName,
 		"subtitle": "▸ " + parentPart,
-		"match": alfredMatcher(fileName),
+		"match": alfredMatcher(`${fileName} ${parentPart}`),
 		"icon": iconObject,
 		"type": "file:skipcheck",
 		"uid": filePath,

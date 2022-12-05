@@ -1,3 +1,5 @@
+# yamllint disable rule:truthy
+#───────────────────────────────────────────────────────────────────────────────
 extends:
   - eslint:recommended
 
@@ -19,6 +21,7 @@ rules:
     - error
     - builtinGlobals: true
       hoist: all
+  no-unused-vars: off # disabled, since typescript already checks for that
   camelcase:
     - warn
     - properties: always
