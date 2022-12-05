@@ -263,7 +263,7 @@ rules:
         to_after_key_up:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
-  - description: 'Insert Mode Vim: ⇪ Hyper + hjkliomn<space>ö → ←↓↑→↵⌫⇐⇒ (w/ shift option)'
+  - description: 'Insert Mode Vim: ⇪ Hyper + hjkliomn<space>ö → ←↓↑→↵⌫⇐⇒'
     manipulators:
       - type: basic
         from:
@@ -333,18 +333,6 @@ rules:
               - control
         to:
           - key_code: delete_or_backspace
-      - type: basic
-        from:
-          key_code: "n"
-          modifiers:
-            mandatory:
-              - option
-              - left_shift  # hyper + shift
-              - right_shift
-              - command
-              - control
-        to:
-          - key_code: delete_forward
 
       # word to the left
       - type: basic
