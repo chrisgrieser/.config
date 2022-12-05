@@ -61,6 +61,9 @@ require("dressing").setup {
 		winblend = 4, -- % transparency
 		relative = "win",
 		insert_only = false,
+		win_options = {
+			sidescrolloff = 1,
+		},
 	},
 	select = {
 		backend = {"builtin", "nui"}, -- Priority list of preferred vim.select implementations
@@ -76,14 +79,6 @@ require("dressing").setup {
 		},
 	},
 }
-
--- HACK: do not apply sidescrolloff to dressing, https://github.com/stevearc/dressing.nvim/issues/75
-augroup("dressing", {})
-autocmd("FileType", {
-	pattern = "DressingInput",
-	group = "dressing",
-	command = "setlocal sidescrolloff=1",
-})
 
 --------------------------------------------------------------------------------
 -- GUTTER
