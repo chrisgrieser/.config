@@ -44,7 +44,6 @@ alert = hs.alert.show
 keystroke = hs.eventtap.keyStroke
 aw = hs.application.watcher
 wf = hs.window.filter
-runDelayed = hs.timer.doAfter
 app = hs.application
 applescript = hs.osascript.applescript
 uriScheme = hs.urlevent.bind
@@ -53,9 +52,10 @@ I = hs.inspect -- to inspect tables in the console
 --------------------------------------------------------------------------------
 
 ---Repeat a Function multiple times
----@param delaySecs table<number>
----@param func function what to repeat
-function repeatFunc(delaySecs, func)
+---@param delaySecs number|table<number>
+---@param func function function to repeat
+function runWithDelays(delaySecs, func)
+	if type(delaySecs) == "number" then delaySecs = {delaySecs} end
 	for _, delay in pairs(delaySecs) do
 		hs.timer.doAfter(delay, func)
 	end

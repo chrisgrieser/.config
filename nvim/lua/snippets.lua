@@ -63,7 +63,7 @@ add("zsh", {
 	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
 	snip("if", 'if [[ "$${1:var}" ]]; then\n\t$0\nfi'),
 	snip("if else", 'if [[ "$${1:var}" ]]; then\n\t$2\nelse\n\t$0\nfi'),
-	snip("installed", 'which ${1:cli} &> /dev/null || echo "${1:cli} not installed." && exit 1'),
+	snip("check installed", 'command -v ${1:cli} &> /dev/null || echo "${1:cli} not installed." && exit 1\n$0'),
 
 	snip("stderr (pipe)", "2>&1 "),
 	snip("null (pipe)", "&> /dev/null "),

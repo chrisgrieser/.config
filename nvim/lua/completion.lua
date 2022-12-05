@@ -72,8 +72,8 @@ cmp.setup {
 				cmp.select_next_item()
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
-			-- elseif has_words_before() then -- disabled when using tabout plugin
-			-- 	cmp.complete()
+				-- elseif has_words_before() then -- disabled when using tabout plugin
+				-- 	cmp.complete()
 			else
 				fallback()
 			end
@@ -167,14 +167,25 @@ cmp.setup.filetype("markdown", {
 -- also use zsh for shell completion
 cmp.setup.filetype("sh", {
 	sources = cmp.config.sources {
-		{name = "zsh"},
 		{name = "luasnip"},
+		{name = "zsh"},
 		{name = "nvim_lsp"},
 		{name = "cmp_tabnine", keyword_length = 3},
 		{name = "treesitter"},
 		{name = "emoji", keyword_length = 2},
 		{name = "nerdfont", keyword_length = 2},
 		{name = "buffer", keyword_length = 3},
+	},
+})
+
+-- gitcommit
+cmp.setup.filetype("gitcommit", {
+	sources = cmp.config.sources {
+		{name = "git"}, -- commits with ":", issues/PRs with "#"
+		{name = "path"},
+		{name = "luasnip"},
+		{name = "cmp_tabnine", keyword_length = 3},
+		{name = "emoji", keyword_length = 2},
 	},
 })
 

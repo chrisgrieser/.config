@@ -58,7 +58,7 @@ end
 -- https://directory.getdrafts.com/a/2BS & https://directory.getdrafts.com/a/2BR
 ---@param draftsWin hs.window
 function toggleDraftsSidebar(draftsWin)
-	repeatFunc({0.05, 0.2}, function()
+	runWithDelays({0.05, 0.2}, function()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
 		if (drafts_w / screen_w > 0.6) then
@@ -71,7 +71,7 @@ end
 
 ---@param highlightsWin hs.window
 function toggleHighlightsSidebar(highlightsWin)
-	runDelayed(0.3, function()
+	runWithDelays(0.3, function()
 		local highlights_w = highlightsWin:frame().w
 		local screen_w = highlightsWin:screen():frame().w
 		local highlightsApp = hs.application("Highlights")
@@ -87,7 +87,7 @@ end
 -- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
 ---@param obsiWin hs.window
 function toggleObsidianSidebar(obsiWin)
-	repeatFunc({0.05, 0.2}, function()
+	runWithDelays({0.05, 0.2}, function()
 		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
 		if (numberOfObsiWindows > 1) then return end -- prevent popout window resizing to affect sidebars
 
@@ -139,7 +139,7 @@ function moveResizeCurWin(mode)
 
 	if not (mode == "pseudo-maximized" or mode == "maximized") then
 		if appOfWin:find("[Nn]eovide") then -- for Obsidian theme development
-			runDelayed(0.15, function()
+			runWithDelays(0.15, function()
 				app("Obsidian"):unhide()
 				app("Obsidian"):mainWindow():raise()
 			end)
@@ -157,7 +157,7 @@ end
 ---@param pos hs.geometry
 function moveResize(win, pos)
 	-- has to repeat due window creation delay for some apps
-	repeatFunc({0, 0.1, 0.3, 0.5}, function() win:moveToUnit(pos) end)
+	runWithDelays({0, 0.1, 0.3, 0.5}, function() win:moveToUnit(pos) end)
 end
 
 local function moveCurWinToOtherDisplay()
@@ -166,7 +166,7 @@ local function moveCurWinToOtherDisplay()
 	win:moveToScreen(targetScreen, true)
 
 	-- workaround for ensuring proper resizing
-	runDelayed(0.25, function()
+	runWithDelays(0.25, function()
 		win_ = hs.window.focusedWindow()
 		win_:setFrameInScreenBounds(win_:frame())
 	end)
