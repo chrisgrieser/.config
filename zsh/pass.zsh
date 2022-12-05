@@ -9,7 +9,7 @@ alias pf='pass find'
 alias pi='pass insert --echo'
 
 # Config
-export PASSWORD_STORE_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Authentification/.password-store"
+# PASSWORD_STORE_DIR set in zshenv
 export PASSWORD_STORE_CLIP_TIME=60
 export PASSWORD_STORE_GENERATED_LENGTH=32
 export PASSWORD_STORE_ENABLE_EXTENSIONS=false

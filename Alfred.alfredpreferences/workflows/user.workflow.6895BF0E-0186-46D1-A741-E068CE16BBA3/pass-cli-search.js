@@ -11,8 +11,12 @@ function alfredMatcher(str) {
 const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
 
 //──────────────────────────────────────────────────────────────────────────────
-const passwordStore = $.getenv("password_store").replace(/^~/, app.pathTo("home folder"));
+// const passwordStore = $.getenv("password_store").replace(/^~/, app.pathTo("home folder"));
 const jsonArray = [];
+
+ObjC.import("Foundation");
+const environment = $.NSProcessInfo.processInfo.environment.js;
+const passwordStore = "PWD" in environment ? environment.PWD.js : undefined; /* eslint-disable-line no-undefined */
 
 if (fileExists(passwordStore)) {
 	app.doShellScript(`cd "${passwordStore}" ; find . -name "*.gpg"`)
@@ -34,7 +38,7 @@ if (fileExists(passwordStore)) {
 } else {
 	jsonArray.push({
 		"title": "⚠️ Password Store does not exist",
-		"subtitle": passwordStore.replace(/\/Users\/\w+/, "~"),
+		"subtitle": passwordStore,
 		"valid": false,
 	});
 }

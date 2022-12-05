@@ -413,29 +413,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>~/.password-store</string>
-				<key>filtermode</key>
-				<integer>1</integer>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Path to Password Store</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>password_store</string>
-		</dict>
-	</array>
+	<array/>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>
