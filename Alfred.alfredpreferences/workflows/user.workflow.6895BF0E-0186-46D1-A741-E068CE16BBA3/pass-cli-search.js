@@ -1,6 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
 function run(argv) {
-	const passwordStore = argv[0];
 
 	ObjC.import("stdlib");
 	const app = Application.currentApplication();
@@ -12,8 +11,12 @@ function run(argv) {
 		return [clean, camelCaseSeperated, str].join(" ");
 	}
 	const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
+	const home = app.pathTo("home folder");
 
 	//──────────────────────────────────────────────────────────────────────────────
+	let passwordStore = argv[0];
+	if (passwordStore === "") passwordStore = home + "/.password-store";
+
 	const jsonArray = [];
 
 	if (fileExists(passwordStore)) {

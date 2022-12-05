@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>15A925C2-09AD-4263-90C4-311B32B32B1D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A47AF20F-35BB-4EE7-A702-92DC5C37F8B3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>24B77922-B082-4744-B4A1-6EAD37FFD88C</key>
 		<array>
 			<dict>
@@ -64,6 +77,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>31D384C9-50D7-480F-AC43-7B048E9F77BA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>15A925C2-09AD-4263-90C4-311B32B32B1D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3C073A54-0FF5-46B7-A886-7EF36A81668C</key>
 		<array>
 			<dict>
@@ -98,7 +124,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Passwords</string>
+	<string>Pass</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -251,7 +277,8 @@ pass --clip "$*"</string>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript pass-cli-search.js "$PASSWORD_STORE_DIR"</string>
+				<string># workaround to "$PASSWORD_STORE_DIR" from zshenv to the JavaScript
+osascript -l JavaScript pass-cli-search.js "$PASSWORD_STORE_DIR"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -313,6 +340,83 @@ pass --clip "$*"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>⌫</string>
+				<key>keycode</key>
+				<integer>51</integer>
+				<key>keymod</key>
+				<integer>0</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>15A925C2-09AD-4263-90C4-311B32B32B1D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>46</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>M</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>31D384C9-50D7-480F-AC43-7B048E9F77BA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>m</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1179648</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>A47AF20F-35BB-4EE7-A702-92DC5C37F8B3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
@@ -327,7 +431,9 @@ pass --clip "$*"</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Alternative: https://github.com/MatthewWest/pass-alfred
+	<string>Alternative: https://github.com/CGenie/alfred-pass
+
+**INFO** if you are using a custom password-store directory, you need to save `export PASSWORD_STORE_DIR="your path"` to your `.zshenv`.
 
 ---
 
@@ -341,16 +447,34 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>15</real>
+		</dict>
+		<key>15A925C2-09AD-4263-90C4-311B32B32B1D</key>
+		<dict>
+			<key>note</key>
+			<string>deactivate insert mode</string>
+			<key>xpos</key>
+			<real>755</real>
+			<key>ypos</key>
+			<real>545</real>
 		</dict>
 		<key>24B77922-B082-4744-B4A1-6EAD37FFD88C</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>search</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>265</real>
+		</dict>
+		<key>31D384C9-50D7-480F-AC43-7B048E9F77BA</key>
+		<dict>
+			<key>xpos</key>
+			<real>575</real>
+			<key>ypos</key>
+			<real>545</real>
 		</dict>
 		<key>3C073A54-0FF5-46B7-A886-7EF36A81668C</key>
 		<dict>
@@ -361,32 +485,47 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>15</real>
 		</dict>
 		<key>7C6B7643-4B16-4307-ADA8-14D6837FEE59</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>edit</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>610</real>
 		</dict>
 		<key>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>copy</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>215</real>
+		</dict>
+		<key>A47AF20F-35BB-4EE7-A702-92DC5C37F8B3</key>
+		<dict>
+			<key>note</key>
+			<string>pass on the key for alfred</string>
+			<key>xpos</key>
+			<real>915</real>
+			<key>ypos</key>
+			<real>545</real>
 		</dict>
 		<key>A5733344-CBEB-486B-87D4-DE52472EB5A5</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>215</real>
 		</dict>
 		<key>B46D4F01-F87D-4123-9D22-FB7EDABD729F</key>
 		<dict>
@@ -395,23 +534,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>335</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>15</real>
 		</dict>
 		<key>DD83841D-8A6C-41C6-96C4-440F0D766047</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>480</real>
 		</dict>
 		<key>EF422DD3-F6E3-4548-958A-6272B0762C37</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>show</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>345</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
