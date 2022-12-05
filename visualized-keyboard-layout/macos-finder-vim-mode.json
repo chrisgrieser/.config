@@ -63,10 +63,10 @@
     "3\nsort by name",
     "4\nsort by modified",
     "5\nsort by size",
+    "6\nsort by kind",
     {
       "c": "#CCCCCC"
     },
-    "6",
     "7",
     "8",
     {
@@ -134,7 +134,7 @@
       "h2": 1,
       "x2": -0.25
     },
-    "↵: rename (insert mode)\nin insert mode: confirm & leave insert mode",
+    "↵: rename\ninsert mode: confirm & normal mode\n\n\n\n\n⇧↵: batch rename",
     {
       "c": "#999999",
       "a": 7,
@@ -237,7 +237,7 @@
       "f": 1
     },
     ".\ntoggle hidden files",
-    "-\nSearch (insert mode)",
+    "- /\nSearch (insert mode)",
     {
       "c": "#999999",
       "a": 7,

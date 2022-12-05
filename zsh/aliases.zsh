@@ -1,11 +1,6 @@
 # shellcheck disable=SC2139
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
 
-# configurations
-alias .star='open $STARSHIP_CONFIG'
-alias r='exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
-alias bar='sketchybar --update && echo sketchybar updated'
-alias barr='brew services restart sketchybar'
 
 # z & cd
 alias zz='z -' # back to last dir
@@ -17,6 +12,7 @@ alias ....="z ../../.."
 alias .....="z ../../../.."
 
 # utils
+alias r='exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias q='exit'
 alias notify="osascript -e 'display notification \"\" with title \"Terminal Process finished.\" subtitle \"\" sound name \"\"'"
 
@@ -25,17 +21,15 @@ alias p='pass --clip'
 alias pe='pass edit'
 alias pf='pass find'
 
-# colorize by default
-alias grep='grep --color'
-alias ls='ls -G'
-
-# Safety nets
+# verbosity nets
 alias rm='rm -v'
 alias mv='mv -v'
 alias ln='ln -v'
 alias cp='cp -v'
 
 # defaults
+alias grep='grep --ignore-case --color'
+alias ls='ls -G' # colorize by default
 alias which='which -a'
 alias mkdir='mkdir -p'
 alias pip="pip3"
@@ -44,19 +38,18 @@ alias tetris="tetris --ascii-only"
 
 # exa
 # in function for directoryInspect function
-function exa(){
+function exa() {
 	command exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
 }
 
 alias exagit='git status --short; command echo; exa --long --grid --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git'
-alias l='command exa --all --long --git --icons --group-directories-first --sort=modified'
-alias tree='command exa --tree -L5 --icons --git-ignore'
-alias t='command exa --tree -L5 --icons --git-ignore'
+alias ls='command exa --all --long --git --icons --group-directories-first --sort=modified'
+alias tree='command exa --tree -L4 --icons --git-ignore'
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 
 # Global Alias
 alias -g H="--help"
-alias -g G="| grep --color"
+alias -g G="| grep --ignore-case --color"
 alias -g B="| bat"
 alias -g C="| pbcopy ; echo 'Copied.'"
 alias -g J="| yq --prettyPrint --output-format=json --colors | less" # beautify in JSON
@@ -84,4 +77,3 @@ alias -s {pdf,png,jpg,jpeg,tiff}\"="qlmanage -p &> /dev/null"
 # open log files in less and scrolled to the bottom
 alias -s log="less +G"
 alias -s log\"="less +G"
-
