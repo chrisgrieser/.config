@@ -57,6 +57,9 @@ ln -sf "$DOTFILE_FOLDER/linter-configs/.shellcheckrc" ~
 ln -sf "$DOTFILE_FOLDER/linter-configs/.flake8" ~
 ln -sf "$DOTFILE_FOLDER/vale/.vale.ini" ~
 
+# GPG
+ln -sf "$DOTFILE_FOLDER/gpg/gpg.conf" ~/.gpg
+
 # pandoc
 [[ -e ~/.pandoc ]] && rm -rf ~/.pandoc
 ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
@@ -75,7 +78,6 @@ ESPANSO_DIR=~"/Library/Application Support/espanso"
 ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 
 #───────────────────────────────────────────────────────────────────────────────
-
 # Warp
 # [[ -e ~/.warp ]] && rm -rf ~/.warp
 # ln -sf "$DOTFILE_FOLDER/warp" ~/.warp

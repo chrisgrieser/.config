@@ -22,6 +22,7 @@ duti -s "$videoplayerID" m4a all
 
 # code
 editorID="com.apple.automator.Neovim"
+duti -s "$editorID" conf all
 duti -s "$editorID" ini all
 duti -s "$editorID" com.apple.property-list all # plist
 duti -s "$editorID" vim all
