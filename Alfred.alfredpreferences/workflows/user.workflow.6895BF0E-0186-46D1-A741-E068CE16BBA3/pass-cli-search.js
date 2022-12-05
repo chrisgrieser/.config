@@ -15,12 +15,7 @@ const passwordStore = $.getenv("password_store").replace(/^~/, app.pathTo("home 
 const jsonArray = [];
 
 if (fileExists(passwordStore)) {
-	const fdInstalled = app.doShellScript('command -v fd || echo "no"') !== "no";
-	const searchCommand = fdInstalled ? 'fd ".*\\.gpg"' : 'find . -name "*.gpg"';
-
-	console.log("searchCommand: " + searchCommand);
-
-	app.doShellScript(`cd "${passwordStore}" ; ${searchCommand}`)
+	app.doShellScript(`cd "${passwordStore}" ; find . -name "*.gpg"`)
 		.split("\r")
 		.forEach(gpgFile => {
 			const id = gpgFile.slice(2, -4);

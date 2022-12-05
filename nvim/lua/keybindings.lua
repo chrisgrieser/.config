@@ -312,8 +312,8 @@ keymap("i", "<C-g>u<Space>", "<Space>") -- extra undo point for every space
 keymap("n", "<leader>ll", qol.quicklog)
 keymap("n", "<leader>lr", qol.removeLog)
 
--- Sort
-keymap({"n", "x"}, "<leader>S", ":sort<CR>")
+-- Sort & highlight duplicate lines
+keymap({"n", "x"}, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]]) -- second <CR> due to cmdheight=0
 
 --------------------------------------------------------------------------------
 
