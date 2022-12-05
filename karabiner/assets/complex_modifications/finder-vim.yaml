@@ -275,11 +275,9 @@ rules:
           - *start-alfred
       # Alfred Custom Clipboard Search
       - type: basic
-        from:
-          key_code: f18
-          modifiers: {mandatory: [command, shift]}
+        from: {key_code: f18}
         to:
-          - {key_code: f18, modifiers: [command, shift]}
+          - key_code: f18
           - *enter-insert-mode
           - *start-alfred
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
@@ -393,7 +391,7 @@ rules:
           - *end-alfred
         conditions: [*finder-app, *is-insert-mode]
       - type: basic
-        from: {key_code: f18} # abort Alfred
+        from: {key_code: f18} # abort Alfred Clipboard
         to:
           - key_code: f18
           - *leave-insert-mode
@@ -408,7 +406,7 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
           - *leave-search-mode
-        conditions: [*finder-app, *is-insert-mode]
+        conditions: [*finder-app, *is-insert-mode, *alfred-inactive]
       #─────────────────────────────────────────────────────────────────────────
       # Window & Tabs
       # w = close window/tab (:[tab]close)

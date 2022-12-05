@@ -12,7 +12,8 @@ sudo -v
 xcode-select --install
 
 # Install Essential Apps
-brew install --no-quarantine macpass alfred hammerspoon neovim alacritty karabiner-elements brave-browser neovide --cask
+brew install --no-quarantine pass alfred hammerspoon neovim alacritty karabiner-elements brave-browser
+brew install --no-quarantine --cask neovide
 
 # Hammerspoon
 defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
@@ -106,8 +107,7 @@ ln -sf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Authentific
 # ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify_token_cache.json" "$DOTFILE_FOLDER/.config/spotify-tui/.spotify_token_cache.json"
 
 # Obsidian vimrc
-# ln -sf "$DOTFILE_FOLDER/obsidian-vim/obsidian.vimrc" "$HOME/Main Vault/Meta"
-# ln -sf "$DOTFILE_FOLDER/obsidian-vim/obsidian-vim-helpers.js" "$HOME/Main Vault/Meta"
+# ln -sf "$DOTFILE_FOLDER/obsidian-vim/obsidian.vimrc" "$HOME/main-vault/Meta"
+# ln -sf "$DOTFILE_FOLDER/obsidian-vim/obsidian-vim-helpers.js" "$HOME/main-vault/Meta"
 # ln -sf "$DOTFILE_FOLDER/obsidian-vim/obsidian.vimrc" "$HOME/Development/Meta"
 # ln -sf "$DOTFILE_FOLDER/obsidian-vim/obsidian-vim-helpers.js" "$HOME/Development/Meta"
-# ln -sf "$DOTFILE_FOLDER/pandoc/README.md" "$HOME/Main Vault/Knowledge Base/Pandoc.md"

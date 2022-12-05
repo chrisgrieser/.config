@@ -225,7 +225,7 @@ end)
 -- FINDER
 wf_finder = wf.new("Finder")
 	:setOverrideFilter {
-		rejectTitles = {"Move", "Delete", "Copy", "Finder Settings", " Infto$"},
+		rejectTitles = {"Move", "Delete", "Copy", "Finder Settings", " Info$"},
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true
 	}
@@ -345,23 +345,12 @@ draftsWatcher:start()
 
 --------------------------------------------------------------------------------
 
--- MACPASS: properly show when activated
-local function macPassActivate(appName, eventType, appObject)
-	if not (appName == "MacPass") or not (eventType == aw.launched) then return end
-	runDelayed(0.3, function() appObject:activate() end)
-end
-
-macPassWatcher = aw.new(macPassActivate)
-macPassWatcher:start()
-
---------------------------------------------------------------------------------
-
 -- SPOTIFY
 -- Pause Spotify on launch
 -- Resume Spotify on quit
 function spotifyTUI(toStatus) -- has to be non-local function
 	local currentStatus = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s")
-	currentStatus = trim(currentStatus) ---@diagnostic disable-line: param-type-mismatch, cast-local-type
+	currentStatus = trim(currentStatus) ---@diagnostic disable-line: param-type-mismatch
 	if (currentStatus == "▶️" and toStatus == "pause") or (currentStatus == "⏸" and toStatus == "play") then
 		local stdout = hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle")
 		if toStatus == "play" then notify(stdout) end ---@diagnostic disable-line: param-type-mismatch
