@@ -1,7 +1,7 @@
 title: ⇪ Hyper and ↹ Meh Key
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
-  - description: ↹ Tab → Meh
+  - description: "*️⃣ Tab ↹  → Meh"
     manipulators:
       - type: basic
         from:
@@ -17,25 +17,17 @@ rules:
           - type: frontmost_application_unless
             bundle_identifiers:
               - ^com\.KonfaGames\.DespotsGame$
-  - description: ⇪ Capslock → Hyper/Esc
+  #─────────────────────────────────────────────────────────────────
+  - description: "*️⃣ ⇪ Capslock  → Hyper/Esc"
     manipulators:
-      # Capslock to Hyper
-      - type: basic
-        from:
-          key_code: caps_lock
-        to:
-          - key_code: escape  # Capslock to Esc
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^dev\.warp\.Warp-Stable$
+      # caps regularly
       - type: basic
         from:
           key_code: caps_lock
         to_if_alone:
-          - key_code: escape  # Capslock to Esc
+          - key_code: escape
         to:
-          - key_code: right_shift
+          - key_code: shift
             modifiers:
               - command
               - control
@@ -44,49 +36,29 @@ rules:
           - type: variable_unless
             name: LEADER_ACTIVE
             value: true
-            # - type: variable_unless
-            #   name: FINDER_INSERT_MODE
-            #   value: true
-            # - type: variable_unless
-            #   name: FINDER_FIND_MODE
-            #   value: true
-            # - type: variable_unless
-            #   name: FINDER_MOVE_ACTIVE
-            #   value: true
-            # - type: frontmost_application_unless
-            #   bundle_identifiers:
-            #     - ^dev\.warp\.Warp-Stable$
-      # Capslock/Shift to Hyper/Shift
-      - type: basic
-        from:
-          key_code: caps_lock
-          modifiers:
-            mandatory:
-              - left_shift
-        to:
-          - key_code: left_shift
-            modifiers:
-              - command
-              - right_shift
-              - control
-              - option
-        conditions:
           - type: variable_unless
-            name: LEADER_ACTIVE
+            name: FINDER_INSERT_MODE
             value: true
+          - type: variable_unless
+            name: FINDER_FIND_MODE
+            value: true
+          - type: variable_unless
+            name: FINDER_MOVE_ACTIVE
+            value: true
+      #───────────────────────────────────────────────────────────────────────
       # Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+,
       - from:
           key_code: comma
           modifiers:
             mandatory:
-              - command
+              - capslock
               - shift
               - option
               - control
         to:
           - key_code: vk_none
         type: basic
-  - description: Keep Esc to Force Quit
+  - description: "*️⃣ Keep Esc to Force Quit"
     manipulators:
       - type: basic
         from:
@@ -101,7 +73,7 @@ rules:
             - command
             - option
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "\U0001F4C2 Open Locations (Globally Active)"
+  - description: "*️⃣  \U0001F4C2 Open Locations (Globally Active)"
     manipulators:
       # Hyper + ⌫ = Open Trash
       - type: basic
