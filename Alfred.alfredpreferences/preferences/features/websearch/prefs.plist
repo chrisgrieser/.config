@@ -9,13 +9,11 @@
 			<key>enabled</key>
 			<true/>
 			<key>keyword</key>
-			<string>p</string>
+			<string>pb</string>
 			<key>text</key>
 			<string>Search Piratebay for '{query}'</string>
 			<key>url</key>
 			<string>https://thepiratebay.org/search.php?q={query}</string>
-			<key>utf8</key>
-			<true/>
 		</dict>
 		<key>18866585-C31B-4991-AE5A-6FBFF4A1D4CB</key>
 		<dict>

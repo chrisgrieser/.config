@@ -42,27 +42,27 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Password Generation</string>
+	<string>Passwords</string>
 	<key>objects</key>
 	<array>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>pw</string>
-				<key>subtext</key>
-				<string>with length: '{query}' (default: 32)</string>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
 				<key>text</key>
-				<string>Random password</string>
-				<key>withspace</key>
-				<true/>
+				<string></string>
+				<key>title</key>
+				<string>✅ Password copied</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>3C073A54-0FF5-46B7-A886-7EF36A81668C</string>
+			<string>B46D4F01-F87D-4123-9D22-FB7EDABD729F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -103,23 +103,72 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>pw</string>
+				<key>subtext</key>
+				<string>with length: '{query}' (default: 32)</string>
 				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ Password copied</string>
+				<string>Random password</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>B46D4F01-F87D-4123-9D22-FB7EDABD729F</string>
+			<string>3C073A54-0FF5-46B7-A886-7EF36A81668C</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>pp</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>pass-cli.js</string>
+				<key>subtext</key>
+				<string>Loading...</string>
+				<key>title</key>
+				<string>Pass</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>24B77922-B082-4744-B4A1-6EAD37FFD88C</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -134,6 +183,13 @@
 			<real>180</real>
 			<key>ypos</key>
 			<real>175</real>
+		</dict>
+		<key>24B77922-B082-4744-B4A1-6EAD37FFD88C</key>
+		<dict>
+			<key>xpos</key>
+			<real>105</real>
+			<key>ypos</key>
+			<real>415</real>
 		</dict>
 		<key>3C073A54-0FF5-46B7-A886-7EF36A81668C</key>
 		<dict>
@@ -157,7 +213,31 @@
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/.password-store</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Path to Password Store</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>password_store</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
