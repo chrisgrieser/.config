@@ -315,6 +315,15 @@ keymap("n", "<leader>lr", qol.removeLog)
 -- Sort & highlight duplicate lines
 keymap({"n", "x"}, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]]) -- second <CR> due to cmdheight=0
 
+-- sane-gx
+keymap("n", "gx", function ()
+	local url = fn.expand("<cWORD>")
+	-- fn.system([[open "]]..url..[["]])
+	fn.system([[open]], ..url..[["]])
+end)
+
+-- https://roobert.github.io/2022/12/03/Extending-Neovim/
+
 --------------------------------------------------------------------------------
 
 -- Line & Character Movement
