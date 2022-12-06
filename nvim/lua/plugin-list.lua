@@ -37,7 +37,11 @@ function M.PluginList()
 	}
 	use {"cshuaimin/ssr.nvim", -- structural search & replace
 		module = "ssr",
-		config = function() require("ssr").setup() end,
+		config = function()
+			require("ssr").setup {
+				keymaps = {replace_confirm = "<cr>"},
+			}
+		end,
 	}
 	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
 		after = "nvim-cmp",
@@ -55,6 +59,10 @@ function M.PluginList()
 		"folke/neodev.nvim", -- lsp for nvim-lua config
 		"b0o/SchemaStore.nvim", -- schemas for json-lsp
 	}}
+	use {"andrewferrier/textobj-diagnostic.nvim",
+		module = "textobj-diagnostic",
+		config = function() require("textobj-diagnostic").setup {create_default_keymaps = false} end,
+	}
 
 	-- Linting & Formatting
 	use {"jose-elias-alvarez/null-ls.nvim", requires = {
@@ -101,7 +109,10 @@ function M.PluginList()
 	use {"anuvyklack/windows.nvim", requires = "anuvyklack/middleclass"} -- auto-resize splits
 
 	-- File Switching & File Operation
-	use {myrepos .. "nvim-genghis", requires = "stevearc/dressing.nvim"}
+	use {myrepos .. "nvim-genghis",
+		module = "genghis",
+		requires = "stevearc/dressing.nvim",
+	}
 	use {"nvim-telescope/telescope.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons"

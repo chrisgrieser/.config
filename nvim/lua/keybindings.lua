@@ -174,6 +174,10 @@ keymap({"o", "x"}, "ac", "a}")
 keymap("o", "r", "}") -- [r]est of the paragraph
 keymap("o", "R", "{")
 
+-- textobj-diagnostic
+keymap({"x", "o"}, "id", function() require("textobj-diagnostic").nearest_diag() end)
+keymap({"x", "o"}, "ad", function() require("textobj-diagnostic").nearest_diag() end)
+
 -- disable text-objects from mini.ai in favor of my own
 local miniaiConfig = {
 	custom_textobjects = {
@@ -396,7 +400,7 @@ if isGui() then
 		local moreThanOneTab = fn.tabpagenr("$") > 1
 		local scrollvEnabled = require("scrollview") -- HACK: since scrollview counts as a window
 		local moreThanOneWin = (fn.winnr("$") > 2 and scrollvEnabled) or (fn.winnr("$") > 1 and not (scrollvEnabled))
-		local moreThanOneBuf = #fn.getbufinfo({buflisted = 1}) > 1
+		local moreThanOneBuf = #fn.getbufinfo {buflisted = 1} > 1
 
 		cmd [[nohl | update!]]
 		if moreThanOneTab then
@@ -496,15 +500,25 @@ keymap("n", "gf", telescope.live_grep) -- search in [f]iles
 keymap("n", "gR", telescope.resume) -- resume last search
 
 -- File Operations (genghis-nvim)
-local genghis = require("genghis")
-keymap("", "<C-p>", genghis.copyFilepath)
-keymap("", "<C-n>", genghis.copyFilename)
-keymap("", "<leader>x", genghis.chmodx)
-keymap("", "<C-r>", genghis.renameFile)
-keymap("", "<C-d>", genghis.duplicateFile)
-keymap("", "<D-BS>", genghis.trashFile)
-keymap("", "<D-n>", genghis.createNewFile)
-keymap("x", "X", genghis.moveSelectionToNewFile)
+-- local genghis = require("genghis")
+-- keymap("", "<C-p>", genghis.copyFilepath)
+-- keymap("", "<C-n>", genghis.copyFilename)
+-- keymap("", "<leader>x", genghis.chmodx)
+-- keymap("", "<C-r>", genghis.renameFile)
+-- keymap("", "<C-d>", genghis.duplicateFile)
+-- keymap("", "<D-BS>", genghis.trashFile)
+-- keymap("", "<D-n>", genghis.createNewFile)
+-- keymap("x", "X", genghis.moveSelectionToNewFile)
+
+augroup("ssr-fix", {})
+autocmd("FileType", {
+	group = "ssr-fix",
+	pattern = "ssr",
+	callback = function()
+		keymap("n", "<CR>", function () require("ssr").replace_all() end)
+	end
+})
+
 
 -- Diffview
 keymap("n", "<C-g>", function()
