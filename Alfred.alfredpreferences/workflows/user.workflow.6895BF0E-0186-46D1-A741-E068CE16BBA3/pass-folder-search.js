@@ -25,11 +25,11 @@ function run(argv) {
 			.forEach(folder => {
 				const isRoot = folder === ".";
 				const id = isRoot ? "" : folder.slice(2);
-				const displayName = isRoot ? "/ (root)" : folder.slice(2);
+				const displayName = isRoot ? "[root]" : folder.slice(2);
 
 				jsonArray.push({
 					"title": displayName,
-					"match": alfredMatcher(id),
+					"match": alfredMatcher(displayName),
 					"arg": id,
 					"uid": id,
 				});

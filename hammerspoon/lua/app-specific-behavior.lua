@@ -110,19 +110,6 @@ wf_browser_all = wf.new("Brave Browser")
 		end
 	end)
 
--- if activated but no window, pass through (no accidental alt-tabbing into it)
-local function browserPassThrough(appName, eventType, browserAppObj)
-	if appName == "Brave Browser" and eventType == aw.activated then
-		runWithDelays(0.1, function()
-			local browserWins = #browserAppObj:allWindows()
-			if browserWins == 0 then browserAppObj:hide() end
-		end)
-	end
-end
-
-browserWatcher = aw.new(browserPassThrough)
-browserWatcher:start()
-
 --------------------------------------------------------------------------------
 
 -- MIMESTREAM
