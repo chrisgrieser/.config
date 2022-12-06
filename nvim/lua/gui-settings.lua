@@ -1,7 +1,5 @@
 --# selene: allow(multiple_statements)
 require("utils")
-
-require("appearance")
 --------------------------------------------------------------------------------
 
 -- font size dependent on device
@@ -21,59 +19,6 @@ opt.guicursor = "n-sm:block," ..
 	"a:blinkwait200-blinkoff500-blinkon700"
 
 --------------------------------------------------------------------------------
--- CMD-Keybindings
-keymap({"n", "x", "i"}, "<D-w>", function() -- cmd+w
-	local moreThanOneTab = fn.tabpagenr("$") > 1
-	local scrollvEnabled = require("scrollview") -- HACK: since scrollview counts as a window
-	local moreThanOneWin = (fn.winnr("$") > 2 and scrollvEnabled) or (fn.winnr("$") > 1 and not(scrollvEnabled))
-	if moreThanOneTab then
-		cmd [[tabclose]]
-	elseif moreThanOneWin then
-		cmd [[close]]
-	else
-		cmd [[update! | bdelete]]
-	end
-	cmd [[nohl]]
-end)
-keymap({"n", "x", "i"}, "<D-S-w>", function() cmd [[only]] end) -- cmd+shift+w
-keymap({"n", "x", "i"}, "<D-z>", function() cmd [[undo]] end) -- cmd+z
-keymap({"n", "x", "i"}, "<D-S-z>", function() cmd [[redo]] end) -- cmd+shift+z
-keymap({"n", "x", "i"}, "<D-s>", function() cmd [[write!]] end) -- cmd+s
-keymap("n", "<D-a>", "ggVG") -- cmd+a
-keymap("i", "<D-a>", "<Esc>ggVG")
-keymap("x", "<D-a>", "ggG")
-
-keymap({"n", "x"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
-keymap({"n", "x"}, "<D-1>", ":Lexplore<CR><CR>") -- file tree (netrw)
-keymap({"n", "x"}, "<D-0>", ":messages<CR>")
-keymap({"n", "x"}, "<D-9>", ":Notification<CR>")
-
--- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
-g.VM_maps = {
-	["Find Under"] = "<D-j>", -- cmd+j
-	["Visual Add"] = "<D-j>",
-	["Select Cursor Up"] = "<M-Up>", -- opt+up
-	["Select Cursor Down"] = "<M-Down>",
-}
-
--- cut, copy & paste
-keymap("n", "<D-c>", "yy") -- no selection = line
-keymap("x", "<D-c>", "y")
-keymap("n", "<D-x>", "dd") -- no selection = line
-keymap("x", "<D-x>", "d")
-keymap({"n", "x"}, "<D-v>", "p")
-keymap("c", "<D-v>", "<C-r>+")
-keymap("i", "<D-v>", "<C-r><C-o>+")
-
--- cmd+e: inline code
-keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>") -- no selection = word under cursor
-keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>")
-keymap("i", "<D-e>", "``<Left>")
-
--- cmd+t: Template ${string}
-keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>b") -- no selection = word under cursor
-keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b")
-keymap("i", "<D-t>", "${}<Left>")
 
 local delta = 1.1
 keymap({"n", "x", "i"}, "<D-+>", function()

@@ -32,7 +32,7 @@ g.markdown_fenced_languages = {
 -- custom text object markdown link
 b.miniai_config = {
 	custom_textobjects = {
-		l = {"%[().*()]%(.*%)"}, 
+		l = {"%[().*()]%(.*%)"},
 	},
 }
 --------------------------------------------------------------------------------
@@ -70,30 +70,32 @@ keymap("n", "go", function()
 end, opts)
 
 --------------------------------------------------------------------------------
-
--- cmd+r: Markdown Preview
-keymap("n", "<D-r>", "<Plug>MarkdownPreviewToggle", opts)
-
--- cmd+k: markdown link
-keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", opts)
-keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", opts)
-keymap("i", "<D-k>", "[]()<Left><Left><Left>", opts)
-
--- cmd+b: bold
-keymap("n", "<D-b>", "bi__<Esc>ea__<Esc>", opts)
-keymap("x", "<D-b>", "<Esc>`<i__<Esc>`>lla__<Esc>", opts)
-keymap("i", "<D-b>", "____<Left><Left>", opts)
-
--- cmd+i: italics
-keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", opts)
-keymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", opts)
-keymap("i", "<D-i>", "**<Left>", opts)
-
--- cmd+e for inline code done in gui-settings, since also used for other cases
--- outside of markdown (e.g. template strings)
-
--- Misc
+-- Tasks
 keymap("n", "<leader>x", "mz^lllrx`z", opts) -- check markdown tasks
-keymap("n", "<D-4>", "mzI- <Esc>`z", opts) -- Add bullet point
-keymap("n", "<leader>>", "mzI> <Esc>`z", opts) -- Turn into blockquote
-keymap("n", "<leader><", "mzI> <Esc>`z", opts)
+
+if isGui() then
+	-- cmd+r: Markdown Preview
+	keymap("n", "<D-r>", "<Plug>MarkdownPreviewToggle", opts)
+
+	-- cmd+k: markdown link
+	keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", opts)
+	keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", opts)
+	keymap("i", "<D-k>", "[]()<Left><Left><Left>", opts)
+
+	-- cmd+b: bold
+	keymap("n", "<D-b>", "bi__<Esc>ea__<Esc>", opts)
+	keymap("x", "<D-b>", "<Esc>`<i__<Esc>`>lla__<Esc>", opts)
+	keymap("i", "<D-b>", "____<Left><Left>", opts)
+
+	-- cmd+i: italics
+	keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", opts)
+	keymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", opts)
+	keymap("i", "<D-i>", "**<Left>", opts)
+
+	-- cmd+4: bullet points
+	keymap("n", "<D-4>", "mzI- <Esc>`z", opts)
+	keymap("x", "<D-4>", ":s/^/- /<CR>", opts)
+
+	-- INFO: cmd+e for inline code done in gui-settings, since also used for other cases
+	-- outside of markdown (e.g. template strings)
+end
