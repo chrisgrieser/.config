@@ -82,7 +82,6 @@ local function syncAllGitRepos(mode)
 		gitDotfileSync("--submodules")
 		gitPassSync()
 		gitVaultSync()
-		hs.reload() -- reload so synced changes in the hammerspoon config are active
 	elseif mode == "partial" then
 		gitDotfileSync()
 		gitPassSync()
