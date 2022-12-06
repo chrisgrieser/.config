@@ -217,7 +217,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>xx</string>
+				<string>pw</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -385,7 +385,7 @@ osascript -l JavaScript pass-folder-search.js "$PASSWORD_STORE_DIR"</string>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string># since this is a shell-script "$PASSWORD_STORE_DIR" from zshenv can be passed to JavaScript
+				<string># since this is a shell-script, "$PASSWORD_STORE_DIR" from zshenv can be passed to JavaScript
 osascript -l JavaScript pass-cli-search.js "$PASSWORD_STORE_DIR"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -398,7 +398,7 @@ osascript -l JavaScript pass-cli-search.js "$PASSWORD_STORE_DIR"</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
