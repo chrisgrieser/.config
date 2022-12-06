@@ -13,25 +13,29 @@ echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $VOLUME_NAME -- " >> "$LOG_LOCATION"
 
 function bkp () {
 	echo "-------------------------------------------"
-	echo "⏺ starting: $1"
+	echo " ⏺ starting: $1"
 	rsync --archive --progress --delete -h --exclude=".Trash/*" --exclude="*/.Trash/*" "$1" "$2"
 	echo "-------------------------------------------"
 }
 
-# =========================
+#───────────────────────────────────────────────────────────────────────────────
+
 # Content to Backup
 
 # ⚠️ each command has to sync to individual folders, since otherwise
 # the --delete option will override the previous contents
 mkdir -p ./Library
 bkp ~'/Library/Preferences/' ./Library/Preferences
-bkp ~'/Library/Fonts/' ./Library/Fonts
 mkdir -p ./Homefolder
 bkp ~'/Downloaded/' ./Homefolder/Downloaded
 bkp ~'/RomComs/' ./Homefolder/RomComs
-bkp ~'/dotfiles/' ./Homefolder/dotfiles
-bkp ~'/Main Vault/' "./Homefolder/Main Vault"
-bkp ~'/Library/Mobile Documents/com~apple~CloudDocs/' ./iCloud-Folder
+bkp "$DOTFILE_FOLDER" ./Homefolder/.config
+bkp "$VAULT_PATH" ./Homefolder/main-vault
+bkp "$ICLOUD" ./iCloud-Folder
+
+passPath="$PASSWORD_STORE_DIR"
+[[ -z "$passPath" ]] && passPath="$HOME/.password-store"
+bkp "$passPath" ./password-store
 
 # Brew Dumps
 BREWDUMP_PATH="$BACKUP_DEST/installed-apps-and-packages"
@@ -41,7 +45,7 @@ npm list -g --parseable | sed "1d" | sed -E "s/.*\///" > "$BREWDUMP_PATH/NPMfile
 pip3 list --not-required | tail -n+3 | grep -vE "Pillow|pip|pybind|setuptools|six|wheel" | cut -d" " -f1 > "$BREWDUMP_PATH/Pip3file_$DEVICE_NAME"
 echo "Brewfile, NPM-File, and Pip3-File dumped at \"$BREWDUMP_PATH\""
 
-# =========================
+#───────────────────────────────────────────────────────────────────────────────
 
 # Log (on Mac)
 echo "completed: $(date '+%H:%M')" >> "$LOG_LOCATION"
