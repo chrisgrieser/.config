@@ -627,7 +627,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>new password</string>
 			<key>xpos</key>
-			<real>40</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>40</real>
 		</dict>
@@ -638,7 +638,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>search passwords</string>
 			<key>xpos</key>
-			<real>50</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>335</real>
 		</dict>
@@ -646,6 +646,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
+			<key>note</key>
+			<string>save folder</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
