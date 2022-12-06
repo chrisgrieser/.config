@@ -74,6 +74,7 @@ autocmd("BufReadPost", {
 		elseif bo.filetype == "log" or bo.filetype == "" then -- for log files jump to the bottom
 			jumpcmd = "G"
 		elseif fn.line [['"]] >= fn.line [[$]] then -- in case file has been shortened outside of vim
+			-- selene: allow(if_same_then_else)
 			jumpcmd = "G"
 		elseif fn.line [['"]] >= 1 then -- check file has been entered already
 			jumpcmd = [['"]]
@@ -141,8 +142,11 @@ opt.cmdheight = 0
 -- FOLDING
 
 -- use treesitter folding
-opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldmethod = "expr"
+-- opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- opt.foldmethod = "expr"
+
+
+opt.foldmethod = "indent"
 
 -- fold settings
 opt.foldenable = false -- do not fold at start

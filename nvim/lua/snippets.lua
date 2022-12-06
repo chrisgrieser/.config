@@ -48,6 +48,15 @@ add("all", {
 	snip("tab", "↹ "),
 })
 
+-- CSS
+add("css", {
+	snip("ignore (stylelint)", "/* stylelint-disable-line ${1:rule_name} */"),
+	snip("ignore (stylelint range)", [[
+		/* stylelint-disable ${1:rule_name} */
+		/* stylelint-enable ${1:rule_name} */
+	]]),
+})
+
 -- Shell (zsh)
 add("zsh", {
 	snip("##", "#!/usr/bin/env zsh\n$0"),
@@ -101,6 +110,8 @@ add("lua", {
 }, {type = "autosnippets"})
 
 add("lua", {
+	snip("ignore (selene)", '-- selene: allow(${1:rule_name})'),
+	snip("ignore (selene global)", '--# selene: allow(${1:rule_name})'),
 	snip("home", 'os.getenv("HOME")'),
 	snip("ternary", "${1:cond} and ${2:expr} or ${3:expr}\n$0"),
 	snip("for (list)", [[
@@ -310,3 +321,4 @@ add("yaml", {
 ls.filetype_extend("typescript", {"javascript"}) -- typescript uses all javascript snippets
 ls.filetype_extend("bash", {"zsh"})
 ls.filetype_extend("sh", {"zsh"})
+ls.filetype_extend("scss", {"css"})
