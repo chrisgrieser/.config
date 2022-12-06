@@ -253,14 +253,14 @@ function M.pasteDifferently(opts) -- paste as characterwise
 
 	local isLinewise = fn.getregtype(reg) == "V"
 	local isCharwise = fn.getregtype(reg) == "v"
-	local regContent = fn.getreg(reg):gsub("\n$", "")
+	local regContent = fn.getreg(reg)
+	regContent = trim(regContent)
 	local targetRegType
 
 	if isLinewise then
 		targetRegType = "v"
 	elseif isCharwise then
 		targetRegType = "V"
-		regContent = trim(regContent)
 	else
 		vim.notify(" This paste command does not work with blockwise registers.", logWarn)
 		return

@@ -74,7 +74,7 @@ add("zsh", {
 	snip("if else", 'if [[ "$${1:var}" ]]; then\n\t$2\nelse\n\t$0\nfi'),
 	snip("check installed", 'if ! command -v ${1:cli} &>/dev/null; then echo "${1:cli} not installed." && exit 1; fi\n$0'),
 
--- if ! command -v yamllint &> /dev/null; then echo "yamllint not installed." ; exit 1 ; fi
+	-- if ! command -v yamllint &> /dev/null; then echo "yamllint not installed." ; exit 1 ; fi
 	snip("stderr (pipe)", "2>&1 "),
 	snip("null (pipe)", "&>/dev/null "),
 	snip("sed (pipe)", "sed 's/${1:pattern}/${2:replacement}/g'"),
@@ -110,8 +110,8 @@ add("lua", {
 }, {type = "autosnippets"})
 
 add("lua", {
-	snip("ignore (selene)", '-- selene: allow(${1:rule_name})'),
-	snip("ignore (selene global)", '--# selene: allow(${1:rule_name})'),
+	snip("ignore (selene)", "-- selene: allow(${1:rule_name})"),
+	snip("ignore (selene global)", "--# selene: allow(${1:rule_name})"),
 	snip("home", 'os.getenv("HOME")'),
 	snip("ternary", "${1:cond} and ${2:expr} or ${3:expr}\n$0"),
 	snip("for (list)", [[
@@ -124,7 +124,7 @@ add("lua", {
 -- nvim-lua
 add("lua", {
 	snip("keymap", 'keymap("n", "$1", ${2:""})\n$0'),
-	snip("highlight (link)", 'cmd[[highlight! def link ${1:fromGroup} ${2:toGroup}]]'),
+	snip("highlight (link)", "cmd[[highlight! def link ${1:fromGroup} ${2:toGroup}]]"),
 	snip("keymap (multi-mode)", 'keymap({"n", "${1:x}"}, "$2", ${3:""})\n$0'),
 	snip("input (vim.ui)", [[
 		vim.ui.input({ prompt = "${1:prompt_msg}"}, function (input)
@@ -192,7 +192,7 @@ add("applescript", {
 		'tell application id "com.runningwithcrayons.Alfred" to set configuration "${1:envvar}" to value ${2:value} in workflow (system attribute "alfred_workflow_bundleid")\n$0'),
 	snip("argv", "set input to argv as string\n$0"),
 	snip("Remove Alfred Env",
-	'tell application id "com.runningwithcrayons.Alfred" to remove configuration "${1:var}" in workflow (system attribute "alfred_workflow_bundleid")'),
+		'tell application id "com.runningwithcrayons.Alfred" to remove configuration "${1:var}" in workflow (system attribute "alfred_workflow_bundleid")'),
 })
 
 -- Markdown
@@ -214,6 +214,24 @@ add("javascript", {
 
 -- JXA-specific
 add("javascript", {
+	snip("running check", 'Application("${1:appName}").running()'),
+	snip("check frontmost", 'Application("${1:appName}").frontmost();'),
+	snip("running apps array", 'Application("System Events").applicationProcesses.where({ backgroundOnly: false }).displayedName();'),
+
+	snip("window path (Finder)", [[
+		function finderFrontWindow(){
+			const posixPath = (finderWindow) => $.NSURL.alloc.initWithString(finderWindow.target.url()).fileSystemRepresentation;
+			return posixPath(Application("Finder").finderWindows[0]);
+		}
+	]]),
+	snip("selection (Finder)", [[
+		function finderSelection () {
+			const selection = decodeURI(Application("Finder").selection()[0]?.url());
+			if (selection === "undefined") return ""; // no selection
+			return selection.slice(7);
+		}
+	]]),
+
 	snip("##", "#!/usr/bin/env osascript -l JavaScript\n$0"),
 	snip("online JSON", 'const onlineJSON = (url) => JSON.parse(app.doShellScript(`curl -s "${url}"`));'),
 	snip("read file", [[
@@ -224,8 +242,16 @@ add("javascript", {
 			return ObjC.unwrap(str);
 		}
 	]]),
+	snip("write file", [[
+		function writeToFile(text, file) {
+			const str = $.NSString.alloc.initWithUTF8String(text);
+			str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
+		}
+	]]),
 	snip("app", "const app = Application.currentApplication();\napp.includeStandardAdditions = true;\n$0"),
 	snip("shell script", "app.doShellScript(`${1:shellscript}`);\n$0"),
+	snip("open", 'app.openLocation("${1:url}");\n$0'),
+	snip("clipboard", 'app.setTheClipboard("${1:str}");\n$0'),
 	snip("home (JXA)", 'app.pathTo("home folder")'),
 	snip("resolve home (JXA)", 'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 	snip("exists (file)", 'const fileExists = (filePath) => Application("Finder").exists(Path(filePath));\n$0'),
@@ -288,6 +314,24 @@ add("javascript", {
 	snip("Get Alfred Env", 'const ${1:envVar} = $.getenv("${2:envVar}");\n$0'),
 	snip("Get Alfred Env (+ resolve home)",
 		'const ${1:envVar} = $.getenv("${2:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
+	-- workaround cause of unreliable saving of variables by Alfred
+	snip("read Alfred data", [[
+		function readData (key) {
+			const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
+			const dataPath = $.getenv("alfred_workflow_data") + "/" + $.getenv("alfred_workflow_bundleid") + key;
+			if (!fileExists(dataPath)) return "data does not exist.";
+			const data = $.NSFileManager.defaultManager.contentsAtPath(dataPath);
+			const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+			return ObjC.unwrap(str);
+		}
+	]]),
+	snip("write Alfred data", [[
+		function writeData (key, newValue) {
+			const dataPath = $.getenv("alfred_workflow_data") + "/" + $.getenv("alfred_workflow_bundleid") + key;
+			const str = $.NSString.alloc.initWithUTF8String(newValue);
+			str.writeToFileAtomicallyEncodingError(dataPath, true, $.NSUTF8StringEncoding, null);
+		}
+	]]),
 	snip("Set Alfred Env (function)", [[
 		function setEnvVar(envVar, newValue) {
 			Application("com.runningwithcrayons.Alfred").setConfiguration(envVar, {

@@ -64,10 +64,16 @@ keymap("n", "<C-l>", "<C-i>") -- Forward
 -- Search
 keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "<Esc>", function() -- clear all
-	require("notify").dismiss() -- notifications
-	cmd [[nohl]] -- highlights
-	cmd [[echo]] -- shortmessage
-	cmd [[normal!lh]] -- lsp hover window
+	-- if more than 10 notifications are in the queue, clear them all (mostly for bugs)
+	local notify = require("notify")
+	if notify.pending() > 10 then
+		notify.dismiss({pending = true})
+	else
+		notify.dismiss() -- clear notifications
+	end
+	cmd [[nohl]] -- clear highlights
+	cmd [[echo]] -- clear shortmessage
+	cmd [[normal!lh]] -- clear lsp hover window
 	require("lualine").refresh()
 end, {silent = true})
 
@@ -455,18 +461,9 @@ end
 --------------------------------------------------------------------------------
 
 -- BUFFERS
--- HACK to fix https://github.com/cshuaimin/ssr.nvim/issues/11
--- augroup("ssr-fix", {})
--- autocmd("BufReadPost", {
--- 	group = "ssr-fix",
--- 	callback = function()
--- 		if bo.filetype ~= "ssr" then
--- 			keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file
--- 		end
--- 	end
--- })
 
 -- INFO: nohl added here, since it does not work with autocmds
+keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file
 keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)") -- cycle between buffers
 keymap("n", "<S-BS>", ":nohl<CR><Plug>(CybuPrev)")
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
@@ -509,16 +506,15 @@ keymap("n", "gr", telescope.oldfiles) -- [r]ecent files
 keymap("n", "gf", telescope.live_grep) -- search in [f]iles
 keymap("n", "gR", telescope.resume) -- resume last search
 
--- File Operations (genghis-nvim)
--- local genghis = require("genghis")
--- keymap("", "<C-p>", genghis.copyFilepath)
--- keymap("", "<C-n>", genghis.copyFilename)
--- keymap("", "<leader>x", genghis.chmodx)
--- keymap("", "<C-r>", genghis.renameFile)
--- keymap("", "<C-d>", genghis.duplicateFile)
--- keymap("", "<D-BS>", genghis.trashFile)
--- keymap("", "<D-n>", genghis.createNewFile)
--- keymap("x", "X", genghis.moveSelectionToNewFile)
+-- File Operations (no shorthand for lazy-loading)
+keymap("", "<C-p>", function () require("genghis").copyFilepath() end)
+keymap("", "<C-n>", function () require("genghis").copyFilename() end)
+keymap("", "<leader>x", function () require("genghis").chmodx() end)
+keymap("", "<C-r>", function () require("genghis").renameFile() end)
+keymap("", "<C-d>", function () require("genghis").duplicateFile() end)
+keymap("", "<D-BS>", function () require("genghis").trashFile() end)
+keymap("", "<D-n>", function () require("genghis").createNewFile() end)
+keymap("x", "X", function () require("genghis").moveSelectionToNewFile() end)
 
 -- Diffview
 keymap("n", "<C-g>", function()
