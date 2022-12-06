@@ -396,17 +396,19 @@ if isGui() then
 		local moreThanOneTab = fn.tabpagenr("$") > 1
 		local scrollvEnabled = require("scrollview") -- HACK: since scrollview counts as a window
 		local moreThanOneWin = (fn.winnr("$") > 2 and scrollvEnabled) or (fn.winnr("$") > 1 and not (scrollvEnabled))
+		local moreThanOneBuf = #fn.getbufinfo({buflisted = 1}) > 1
 		if moreThanOneTab then
 			cmd [[tabclose]]
 		elseif moreThanOneWin then
-			cmd [[close]]
+			cmd [[update! | close]]
+		elseif moreThanOneBuf then
+			cmd [[update! | keepalt bdelete]]
 		else
-			cmd [[update! | bdelete]]
+			vim.notify(" Only one buffer open.", logWarn)
 		end
 		cmd [[nohl]]
 	end)
 
-	keymap({"n", "x", "i"}, "<D-S-w>", function() cmd [[only]] end) -- cmd+shift+w
 	keymap({"n", "x", "i"}, "<D-z>", function() cmd [[undo]] end) -- cmd+z
 	keymap({"n", "x", "i"}, "<D-S-z>", function() cmd [[redo]] end) -- cmd+shift+z
 	keymap({"n", "x", "i"}, "<D-s>", function() cmd [[write!]] end) -- cmd+s
@@ -420,8 +422,8 @@ if isGui() then
 	keymap({"n", "x"}, "<D-9>", ":Notification<CR>")
 
 	-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
-	g.VM_maps = {
-		["Find Under"] = "<D-j>", -- cmd+j
+	g.VM_maps = {-- cmd+j
+		["Find Under"] = "<D-j>",
 		["Visual Add"] = "<D-j>",
 	}
 

@@ -241,17 +241,15 @@ wf_finder = wf.new("Finder")
 	end)
 
 -- quit Finder if it was started as a helper (e.g., JXA), but has no window
-local function finderWatcher(appName, eventType, finderAppObj)
+finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 	if appName == "Finder" and eventType == aw.launched then
-		runWithDelays({1, 2, 5}, function()
+		runWithDelays({1, 3, 5}, function()
 			if finderAppObj and not (finderAppObj:mainWindow()) then
 				finderAppObj:kill()
 			end
 		end)
 	end
-end
-
-finderAppWatcher = aw.new(finderWatcher)
+end)
 finderAppWatcher:start()
 
 --------------------------------------------------------------------------------
@@ -286,7 +284,7 @@ wf_zoom = wf.new("zoom.us")
 -- HIGHLIGHTS
 -- - Sync Dark & Light Mode
 -- - Start with Highlight as Selection
-local function highlightsWatcher(appName, eventType, appObject)
+highlightsAppWatcher = aw.new(function(appName, eventType, appObject)
 	if not (eventType == aw.launched and appName == "Highlights") then return end
 
 	local targetView = "Default"
@@ -303,9 +301,7 @@ local function highlightsWatcher(appName, eventType, appObject)
 	else
 		moveResizeCurWin("pseudo-maximized")
 	end
-end
-
-highlightsAppWatcher = aw.new(highlightsWatcher)
+end)
 highlightsAppWatcher:start()
 
 --------------------------------------------------------------------------------
