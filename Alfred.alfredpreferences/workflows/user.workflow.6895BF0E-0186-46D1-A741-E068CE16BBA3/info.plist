@@ -487,7 +487,7 @@ pass git push</string>
 ## Requirements
 - `pass`
 - `pinentry-mac`
-- Alfred 5 with PowerPack
+- Alfred 5 with Powerpack
 
 Install them via `brew install pass pinentry-mac`. 
 
@@ -495,7 +495,7 @@ Install them via `brew install pass pinentry-mac`.
 1. Setup `pinentry-mac` as your `pinentry-program`:
 
 `[[ -d "$HOME/.gnupg" ]] || mkdir ~/.gnupg`
-`echo "pinentry-program /opt/homebrew/bin/pinentry-mac" &gt; ~/.gnupg/gpg-agent.conf`
+`echo "pinentry-program $HOMEBREW_PREFIX/bin/pinentry-mac" &gt; ~/.gnupg/gpg-agent.conf`
 `gpgconf --kill gpg-agent`
 
 ## Configuration

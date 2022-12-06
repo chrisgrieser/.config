@@ -2043,47 +2043,6 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "f18"
-          },
-          "to": [
-            {
-              "key_code": "f18"
-            },
-            {
-              "set_variable": {
-                "name": "FINDER_INSERT_MODE",
-                "value": false
-              }
-            },
-            {
-              "set_variable": {
-                "name": "FINDER_ALFRED_ACTIVE",
-                "value": false
-              }
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^com\\.apple\\.finder$"
-              ]
-            },
-            {
-              "type": "variable_if",
-              "name": "FINDER_INSERT_MODE",
-              "value": true
-            },
-            {
-              "type": "variable_if",
-              "name": "FINDER_ALFRED_ACTIVE",
-              "value": true
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "from": {
             "key_code": "w",
             "modifiers": {
               "mandatory": [

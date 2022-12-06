@@ -388,13 +388,6 @@ rules:
           - *end-alfred
         conditions: [*finder-app, *is-insert-mode]
       - type: basic
-        from: {key_code: f18} # abort Alfred Clipboard
-        to:
-          - key_code: f18
-          - *leave-insert-mode
-          - *end-alfred
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
-      - type: basic
         from:
           key_code: w # close window
           modifiers: {mandatory: [command]}
