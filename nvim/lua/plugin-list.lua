@@ -37,12 +37,8 @@ function M.PluginList()
 	}
 	use {"cshuaimin/ssr.nvim", -- structural search & replace
 		module = "ssr",
-		config = function()
-			require("ssr").setup {
-				keymaps = {replace_confirm = "<cr>"},
-			}
-		end,
 	}
+
 	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
 		after = "nvim-cmp",
 		requires = "nvim-treesitter/nvim-treesitter",
