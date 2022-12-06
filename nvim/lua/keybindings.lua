@@ -11,9 +11,6 @@ keymap("n", "<leader>lc", qol.copyLastCommand)
 -- run [l]ast command [a]gain
 keymap("n", "<leader>la", qol.runLastCommandAgain)
 
--- [e]dit [l]ast command
-keymap("n", "<leader>le", ":<Up>")
-
 -- search keymaps
 keymap("n", "?", telescope.keymaps)
 
@@ -22,6 +19,9 @@ keymap("n", "<leader>T", telescope.colorscheme)
 
 -- Highlights
 keymap("n", "<leader>H", telescope.highlights)
+
+-- Mason
+keymap("n", "<leader>m", ":Mason<CR>")
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
@@ -516,20 +516,14 @@ keymap("n", "<C-g>", function()
 end)
 
 -- GitLinker
-local gitlinker = require("gitlinker")
-gitlinker.setup {
-	mappings = nil,
-	opts = {print_url = false},
-}
-
 keymap("n", "<leader>G", function()
-	gitlinker.get_buf_range_url("n", {action_callback = require("gitlinker.actions").copy_to_clipboard})
-	gitlinker.get_buf_range_url("n", {action_callback = require("gitlinker.actions").open_in_browser})
+	require("gitlinker").get_buf_range_url("n", {action_callback = require("gitlinker.actions").copy_to_clipboard})
+	require("gitlinker").get_buf_range_url("n", {action_callback = require("gitlinker.actions").open_in_browser})
 end)
 
 keymap("x", "<leader>G", function()
-	gitlinker.get_buf_range_url("v", {action_callback = require("gitlinker.actions").copy_to_clipboard})
-	gitlinker.get_buf_range_url("v", {action_callback = require("gitlinker.actions").open_in_browser})
+	require("gitlinker").get_buf_range_url("v", {action_callback = require("gitlinker.actions").copy_to_clipboard})
+	require("gitlinker").get_buf_range_url("v", {action_callback = require("gitlinker.actions").open_in_browser})
 end)
 
 --------------------------------------------------------------------------------

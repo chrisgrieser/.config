@@ -56,7 +56,7 @@ function M.PluginList()
 		"b0o/SchemaStore.nvim", -- schemas for json-lsp
 	}}
 
-	-- Linting
+	-- Linting & Formatting
 	use {"jose-elias-alvarez/null-ls.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"jayp0521/mason-null-ls.nvim",
@@ -106,19 +106,19 @@ function M.PluginList()
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons"
 	}}
-	use {"akinsho/toggleterm.nvim",
-		cmd = {"ToggleTerm", "ToggleTermSendVisualSelection"},
-		config = function() require("toggleterm").setup() end
-	}
 	use {"ghillb/cybu.nvim", requires = {-- Cycle Buffers
 		"nvim-tree/nvim-web-devicons",
 		"nvim-lua/plenary.nvim",
 	}}
-
-	-- File History & Git
 	use {"simnalamburt/vim-mundo", -- undotree, also supports searching undo history
 		cmd = "MundoToggle",
 		run = "pip3 install --upgrade pynvim",
+	}
+
+	-- Terminal & Git
+	use {"akinsho/toggleterm.nvim",
+		cmd = {"ToggleTerm", "ToggleTermSendVisualSelection"},
+		config = function() require("toggleterm").setup() end
 	}
 	use {"sindrets/diffview.nvim",
 		requires = "nvim-lua/plenary.nvim",
@@ -129,7 +129,17 @@ function M.PluginList()
 			}
 		end,
 	}
-	use {"ruifm/gitlinker.nvim", requires = "nvim-lua/plenary.nvim"}
+	use {
+		"ruifm/gitlinker.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		module = "gitlinker",
+		config = function()
+			require("gitlinker").setup {
+				mappings = nil,
+				opts = {print_url = false},
+			}
+		end
+	}
 
 	-- Operators & Text Objects, Navigation & Editing
 	use "echasnovski/mini.ai" -- custom text objects
