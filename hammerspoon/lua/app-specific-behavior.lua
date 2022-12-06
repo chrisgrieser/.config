@@ -225,7 +225,7 @@ end)
 -- FINDER
 wf_finder = wf.new("Finder")
 	:setOverrideFilter {
-		rejectTitles = {"Move", "Delete", "Copy", "Finder Settings", " Info$"},
+		rejectTitles = {"Move", "Delete", "Copy", "Finder Settings", " Info$", "Quick Look"},
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true
 	}

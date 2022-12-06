@@ -6,10 +6,7 @@ export PAGER=less
 export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
 export DOTFILE_FOLDER="$HOME/.config"
 export VAULT_PATH="$HOME/main-vault"
-
-#───────────────────────────────────────────────────────────────────────────────
-# karabiner-cli
-export PATH="/Library/Application Support/org.pqrs/Karabiner-Elements/bin:$PATH"
+export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -33,3 +30,8 @@ export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 # make github functions available in nvim
 # shellcheck disable=1091
 source "$DOTFILE_FOLDER/zsh/git_github.zsh"
+
+#───────────────────────────────────────────────────────────────────────────────
+# karabiner-cli
+export PATH="/Library/Application Support/org.pqrs/Karabiner-Elements/bin:$PATH"
+

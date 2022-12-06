@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 # shellcheck disable=SC2034,SC2164,SC1071
 
+# REQUIREMENTS
+# - SSH setup
+
 #-------------------------------------------------------------------------------
 # ESSENTIAL
 
@@ -27,14 +30,16 @@ defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from savi
 # DOTFILES / VAULT
 
 cd ~
-git clone git@github.com:chrisgrieser/main-vault-backup.git
-git clone git@github.com:chrisgrieser/.password-store.git
 git clone --recurse-submodules git@github.com:chrisgrieser/.config.git
 cd ~/.config
 git submodule foreach git checkout main
 
 # load Dock from dotfiles
 zsh "$HOME/dotfiles/hammerspoon/dock-switching/dock-switcher.sh" --load home
+
+# REQUIRED: SSH setup
+git clone git@github.com:chrisgrieser/main-vault-backup.git
+git clone git@github.com:chrisgrieser/.password-store.git
 
 #-------------------------------------------------------------------------------
 # CREATE SYMLINKS
@@ -57,7 +62,7 @@ ln -sf "$DOTFILE_FOLDER/linter-configs/.shellcheckrc" ~
 ln -sf "$DOTFILE_FOLDER/linter-configs/.flake8" ~
 ln -sf "$DOTFILE_FOLDER/vale/.vale.ini" ~
 
-# GPG
+# GPG config
 mkdir ~/.gnupg
 ln -sf "$DOTFILE_FOLDER/gnupg/gpg-agent.conf" ~/.gnupg
 
