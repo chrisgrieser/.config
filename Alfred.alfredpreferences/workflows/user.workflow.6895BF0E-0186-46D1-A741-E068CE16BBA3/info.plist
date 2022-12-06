@@ -38,7 +38,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
+				<string>4B749645-5CE0-489A-8EDD-18F24386AE98</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -100,6 +100,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4B749645-5CE0-489A-8EDD-18F24386AE98</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D07CE8CB-D920-4F98-A583-6E0D2D8336BF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>8D26DC88-EF69-4797-BE9B-5DA1F6D9CF51</key>
 		<array>
 			<dict>
@@ -143,6 +156,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D07CE8CB-D920-4F98-A583-6E0D2D8336BF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -212,7 +238,7 @@ osascript -l JavaScript pass-folder-search.js "$PASSWORD_STORE_DIR"</string>
 				<key>subtext</key>
 				<string>Loading...</string>
 				<key>title</key>
-				<string>Generate New Password in Folder...</string>
+				<string>Select Folder for new Password...</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
@@ -247,6 +273,45 @@ osascript -l JavaScript pass-folder-search.js "$PASSWORD_STORE_DIR"</string>
 			<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>'{query}'</string>
+				<key>text</key>
+				<string>Name of new Entry</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D07CE8CB-D920-4F98-A583-6E0D2D8336BF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>folder</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>4B749645-5CE0-489A-8EDD-18F24386AE98</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -540,9 +605,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>270</real>
+			<real>280</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>740</real>
 		</dict>
 		<key>0F6DB773-7447-4D7C-900E-59F3E9C69B19</key>
 		<dict>
@@ -551,7 +616,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>generate</string>
 			<key>xpos</key>
-			<real>230</real>
+			<real>410</real>
 			<key>ypos</key>
 			<real>40</real>
 		</dict>
@@ -560,9 +625,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>search passwords</string>
+			<string>new password</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>40</real>
 			<key>ypos</key>
 			<real>40</real>
 		</dict>
@@ -573,18 +638,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>search passwords</string>
 			<key>xpos</key>
-			<real>40</real>
+			<real>50</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>335</real>
+		</dict>
+		<key>4B749645-5CE0-489A-8EDD-18F24386AE98</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>70</real>
 		</dict>
 		<key>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>385</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>470</real>
 		</dict>
 		<key>7C6B7643-4B16-4307-ADA8-14D6837FEE59</key>
 		<dict>
@@ -593,9 +667,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>edit</string>
 			<key>xpos</key>
-			<real>350</real>
+			<real>360</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>740</real>
 		</dict>
 		<key>8D26DC88-EF69-4797-BE9B-5DA1F6D9CF51</key>
 		<dict>
@@ -604,9 +678,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>auto_push</string>
 			<key>xpos</key>
-			<real>201</real>
+			<real>211</real>
 			<key>ypos</key>
-			<real>865</real>
+			<real>745</real>
 		</dict>
 		<key>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</key>
 		<dict>
@@ -615,16 +689,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>copy</string>
 			<key>xpos</key>
-			<real>235</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>195</real>
 		</dict>
 		<key>A5733344-CBEB-486B-87D4-DE52472EB5A5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>445</real>
+			<real>625</real>
 			<key>ypos</key>
 			<real>115</real>
 		</dict>
@@ -635,9 +709,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>remove</string>
 			<key>xpos</key>
-			<real>235</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>335</real>
+		</dict>
+		<key>D07CE8CB-D920-4F98-A583-6E0D2D8336BF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>40</real>
 		</dict>
 		<key>DD83841D-8A6C-41C6-96C4-440F0D766047</key>
 		<dict>
@@ -646,9 +729,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>show in Finder</string>
 			<key>xpos</key>
-			<real>235</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>595</real>
 		</dict>
 		<key>EF422DD3-F6E3-4548-958A-6272B0762C37</key>
 		<dict>
@@ -657,9 +740,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>show</string>
 			<key>xpos</key>
-			<real>235</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>470</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -84,6 +84,7 @@ local function syncAllGitRepos(mode)
 		gitVaultSync()
 	elseif mode == "partial" then
 		gitDotfileSync()
+		gitPassSync()
 		gitVaultSync()
 	end
 end
