@@ -250,6 +250,13 @@ rules:
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic
+        from: {key_code: g, modifiers: {mandatory: [command, shift]}}
+        to:
+          - {key_code: g, modifiers: [command, shift]}
+          - *insert-notice
+          - *enter-insert-mode
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
         # Search
       - type: basic
         from: {key_code: slash}
@@ -260,9 +267,7 @@ rules:
           - *enter-search-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
-        from:
-          key_code: f
-          modifiers: {mandatory: [command]}
+        from: {key_code: f, modifiers: {mandatory: [command]}}
         to:
           - {key_code: f, modifiers: [command]}
           - *insert-notice
@@ -271,9 +276,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # Alfred: so you can insert text in Alfred/Spotlight while Finder is frontmost
       - type: basic
-        from:
-          key_code: spacebar
-          modifiers: {mandatory: [command]}
+        from: {key_code: spacebar, modifiers: {mandatory: [command]}}
         to:
           - {key_code: spacebar, modifiers: [command]}
           - *enter-insert-mode
@@ -300,6 +303,7 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
           - *leave-search-mode
+          - *end-alfred
         conditions: [*finder-app, *is-insert-mode, *is-search-mode]
       # Confirm Alfred Mode with various modifiers
       - type: basic
