@@ -160,7 +160,7 @@ local function currentFile() -- using this function instead of default filename,
 	local curFile = fn.expand("%:t")
 	local altPath = fn.expand("#:t")
 	local curPath = fn.expand("%:t")
-	if curFile == altFile and not(altPath == curPath) then
+	if curFile == altFile and not (altPath == curPath) then
 		local curParent = fn.expand("%:p:h:t")
 		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
 		return curParent .. "/" .. curFile
@@ -223,7 +223,6 @@ navic.setup {
 }
 
 local function showBreadcrumbs()
-	-- breadcrumbs not useful in css, but winbar still needed for recordings
 	return navic.is_available() and not (bo.filetype == "css")
 end
 
