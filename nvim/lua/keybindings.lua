@@ -399,14 +399,12 @@ if isGui() then
 		local moreThanOneBuf = #fn.getbufinfo({buflisted = 1}) > 1
 
 		cmd [[nohl | update!]]
-		cmd [[update]]
-
 		if moreThanOneTab then
 			cmd [[tabclose]]
 		elseif moreThanOneWin then
-			cmd [[update! | close]]
+			cmd [[close]]
 		elseif moreThanOneBuf then
-			cmd [[update! | keepalt bdelete]]
+			cmd [[keepalt bdelete]]
 		else
 			vim.notify(" Only one buffer open.", logWarn)
 		end

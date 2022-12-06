@@ -60,7 +60,7 @@ require("dressing").setup {
 		border = borderStyle,
 		relative = "win",
 		insert_only = false,
-		win_options = { sidescrolloff = 0 },
+		win_options = {sidescrolloff = 0},
 	},
 	select = {
 		backend = {"builtin", "nui"}, -- Priority list of preferred vim.select implementations
@@ -130,11 +130,21 @@ local function recordingStatus()
 	return " RECORDING"
 end
 
+local function readOnly()
+	if bo.modifiable then
+		return ""
+	else
+		return ""
+	end
+end
+
 local function alternateFile()
 	local maxLen = 15
 	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
-	if altFile == "" then
+	local altPath = fn.expand("#:t")
+	local curPath = fn.expand("%:t")
+	if altPath == curPath or altFile == "" then
 		return ""
 	elseif curFile == altFile then
 		local altParent = fn.expand("#:p:h:t")
@@ -148,9 +158,9 @@ local function currentFile() -- using this function instead of default filename,
 	local maxLen = 15
 	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
-	if curFile == "" then
-		return ""
-	elseif curFile == altFile then
+	local altPath = fn.expand("#:t")
+	local curPath = fn.expand("%:t")
+	if curFile == altFile and not(altPath == curPath) then
 		local curParent = fn.expand("%:p:h:t")
 		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
 		return curParent .. "/" .. curFile
@@ -239,7 +249,10 @@ end
 require("lualine").setup {
 	sections = {
 		lualine_a = {"mode"},
-		lualine_b = {{currentFile}},
+		lualine_b = {
+			{readOnly},
+			{currentFile},
+		},
 		lualine_c = {{alternateFile}},
 		lualine_x = {
 			{"searchcount", fmt = function(str)
