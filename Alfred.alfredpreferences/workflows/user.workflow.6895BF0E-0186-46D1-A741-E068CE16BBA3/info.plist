@@ -61,11 +61,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>EE233DEA-A743-49D4-B7EC-A77927CCD9C1</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Copy user</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>A7E6132A-ED6F-4DE6-A91B-966B8288D21B</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>8388608</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Remove Entry</string>
+				<string>fn: Remove Entry</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -73,9 +83,9 @@
 				<key>destinationuid</key>
 				<string>EF422DD3-F6E3-4548-958A-6272B0762C37</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Show Data</string>
+				<string>⇧: Show Entry (w/o password)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -169,6 +179,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EE233DEA-A743-49D4-B7EC-A77927CCD9C1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -354,6 +377,29 @@ osascript -l JavaScript pass-folder-search.js "$PASSWORD_STORE_DIR"</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>copy-user.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>EE233DEA-A743-49D4-B7EC-A77927CCD9C1</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -605,9 +651,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>280</real>
+			<real>275</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>830</real>
 		</dict>
 		<key>0F6DB773-7447-4D7C-900E-59F3E9C69B19</key>
 		<dict>
@@ -660,7 +706,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>570</real>
 		</dict>
 		<key>7C6B7643-4B16-4307-ADA8-14D6837FEE59</key>
 		<dict>
@@ -669,9 +715,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>edit</string>
 			<key>xpos</key>
-			<real>360</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>830</real>
 		</dict>
 		<key>8D26DC88-EF69-4797-BE9B-5DA1F6D9CF51</key>
 		<dict>
@@ -680,20 +726,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>auto_push</string>
 			<key>xpos</key>
-			<real>211</real>
+			<real>206</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>835</real>
 		</dict>
 		<key>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>copy</string>
+			<string>copy pw</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>170</real>
 		</dict>
 		<key>A5733344-CBEB-486B-87D4-DE52472EB5A5</key>
 		<dict>
@@ -713,7 +759,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>440</real>
 		</dict>
 		<key>D07CE8CB-D920-4F98-A583-6E0D2D8336BF</key>
 		<dict>
@@ -733,7 +779,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>700</real>
+		</dict>
+		<key>EE233DEA-A743-49D4-B7EC-A77927CCD9C1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>copy user</string>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>305</real>
 		</dict>
 		<key>EF422DD3-F6E3-4548-958A-6272B0762C37</key>
 		<dict>
@@ -744,7 +801,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>570</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
