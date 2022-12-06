@@ -188,6 +188,23 @@ cmp.setup.filetype("gitcommit", {
 		{name = "emoji", keyword_length = 2},
 	},
 })
+-- bibtex
+cmp.setup.filetype("bibtex", {
+	sources = cmp.config.sources {
+		{name = "luasnip"},
+		{name = "treesitter"},
+		{name = "buffer", keyword_length = 2},
+	},
+})
+
+-- plaintext
+cmp.setup.filetype("plaintext", {
+	sources = cmp.config.sources {
+		{name = "luasnip"},
+		{name = "buffer", keyword_length = 2},
+		{name = "emoji", keyword_length = 2},
+	},
+})
 
 --------------------------------------------------------------------------------
 -- Command Line Completion
