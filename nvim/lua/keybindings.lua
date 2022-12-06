@@ -455,8 +455,18 @@ end
 --------------------------------------------------------------------------------
 
 -- BUFFERS
--- :nohl added here, since it does not work with autocmds
-keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file
+-- HACK to fix https://github.com/cshuaimin/ssr.nvim/issues/11
+-- augroup("ssr-fix", {})
+-- autocmd("BufReadPost", {
+-- 	group = "ssr-fix",
+-- 	callback = function()
+-- 		if bo.filetype ~= "ssr" then
+-- 			keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file
+-- 		end
+-- 	end
+-- })
+
+-- INFO: nohl added here, since it does not work with autocmds
 keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)") -- cycle between buffers
 keymap("n", "<S-BS>", ":nohl<CR><Plug>(CybuPrev)")
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
@@ -509,16 +519,6 @@ keymap("n", "gR", telescope.resume) -- resume last search
 -- keymap("", "<D-BS>", genghis.trashFile)
 -- keymap("", "<D-n>", genghis.createNewFile)
 -- keymap("x", "X", genghis.moveSelectionToNewFile)
-
-augroup("ssr-fix", {})
-autocmd("FileType", {
-	group = "ssr-fix",
-	pattern = "ssr",
-	callback = function()
-		keymap("n", "<CR>", function () require("ssr").replace_all() end)
-	end
-})
-
 
 -- Diffview
 keymap("n", "<C-g>", function()
@@ -616,7 +616,7 @@ autocmd("FileType", {
 	pattern = specialFiletypes,
 	callback = function()
 		local opts = {buffer = true, silent = true, nowait = true}
-		if bo.filetype == "TelescopePrompt" then return end
+		if bo.filetype == "TelescopePrompt" or bo.filetype == "ssr" then return end
 		keymap("n", "<Esc>", ":close<CR>", opts)
 		keymap("n", "q", ":close<CR>", opts)
 	end
