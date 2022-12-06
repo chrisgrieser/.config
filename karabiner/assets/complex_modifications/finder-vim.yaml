@@ -392,12 +392,19 @@ rules:
           - *leave-search-mode
           - *end-alfred
         conditions: [*finder-app, *is-insert-mode]
+        # Closing window or quitting Finder should also disable Insert mode
       - type: basic
-        from:
-          key_code: w # close window
-          modifiers: {mandatory: [command]}
+        from: {key_code: w, modifiers: {mandatory: [command]}}
         to:
           - {key_code: w, modifiers: [command]}
+          - *remove-insert-notice
+          - *leave-insert-mode
+          - *leave-search-mode
+        conditions: [*finder-app, *is-insert-mode, *alfred-inactive]
+      - type: basic
+        from: {key_code: q, modifiers: {mandatory: [command]}}
+        to:
+          - {key_code: q, modifiers: [command]}
           - *remove-insert-notice
           - *leave-insert-mode
           - *leave-search-mode
