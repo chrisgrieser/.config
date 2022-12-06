@@ -293,9 +293,15 @@ add("javascript", {
 -- Karabiner config
 add("yaml", {
 	snip("delay (Karabiner)", [[
-	  - key_code: vk_none
-	    hold_down_milliseconds: ${1:amount}
-	]]),
+	- {key_code: vk_none, hold_down_milliseconds: ${1:50}}
+	$0]]),
+	snip("to (Karabiner)", [[
+	to:
+		- {key_code: ${1:key}, modifiers: [${2:command}]}
+	$0]]),
+	snip("from (Karabiner)", [[
+	from: {key_code: ${1:key}, modifiers: {mandatory: [${2:command}]}}
+	$0]]),
 })
 
 --------------------------------------------------------------------------------

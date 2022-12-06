@@ -189,7 +189,7 @@ cmp.setup.filetype("gitcommit", {
 	},
 })
 -- bibtex
-cmp.setup.filetype("bibtex", {
+cmp.setup.filetype("bib", {
 	sources = cmp.config.sources {
 		{name = "luasnip"},
 		{name = "treesitter"},
@@ -198,7 +198,7 @@ cmp.setup.filetype("bibtex", {
 })
 
 -- plaintext
-cmp.setup.filetype("plaintext", {
+cmp.setup.filetype("text", {
 	sources = cmp.config.sources {
 		{name = "luasnip"},
 		{name = "buffer", keyword_length = 2},
