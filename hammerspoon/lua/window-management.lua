@@ -114,19 +114,19 @@ function moveResizeCurWin(mode)
 	local appOfWin = win:application():name()
 
 	local position
-	if (mode == "left") then
+	if mode == "left" then
 		position = hs.layout.left50
-	elseif (mode == "right") then
+	elseif mode == "right" then
 		position = hs.layout.right50
-	elseif (mode == "up") then
+	elseif mode == "up" then
 		position = {x = 0, y = 0, w = 1, h = 0.5}
-	elseif (mode == "down") then
+	elseif mode == "down" then
 		position = {x = 0, y = 0.5, w = 1, h = 0.5}
-	elseif (mode == "pseudo-maximized") then
+	elseif mode == "pseudo-maximized" then
 		position = pseudoMaximized
-	elseif (mode == "maximized") then
+	elseif mode == "maximized" then
 		position = maximized
-	elseif (mode == "centered") then
+	elseif mode == "centered" then
 		position = {x = 0.2, y = 0, w = 0.6, h = 1}
 	end
 
