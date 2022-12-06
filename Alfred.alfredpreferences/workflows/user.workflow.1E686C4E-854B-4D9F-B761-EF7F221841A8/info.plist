@@ -317,7 +317,7 @@ window_name</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>🔁 Sync Dotfiles, Vault, &amp; Password-Store</string>
+				<string>🔁 Sync Dotfiles, Vault &amp; Password-Store</string>
 				<key>withspace</key>
 				<false/>
 			</dict>

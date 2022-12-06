@@ -4,7 +4,6 @@
 
 # z & cd
 alias zz='z -' # back to last dir
-alias z='cd'
 alias .="open ."
 alias ..="z .."
 alias ...="z ../.."

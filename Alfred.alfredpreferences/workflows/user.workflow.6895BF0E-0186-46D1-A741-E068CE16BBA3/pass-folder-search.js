@@ -20,17 +20,15 @@ function run(argv) {
 	const jsonArray = [];
 
 	if (fileExists(passwordStore)) {
-		app.doShellScript(`cd "${passwordStore}" ; find . -name "*.gpg"`)
+		app.doShellScript(`cd "${passwordStore}" ; find . -type d ! -path "./.git*"`)
 			.split("\r")
-			.forEach(gpgFile => {
-				const id = gpgFile.slice(2, -4);
-				const parts = id.split("/");
-				const name = parts.pop();
-				const group = parts.join("/");
+			.forEach(folder => {
+				const isRoot = folder === ".";
+				const id = isRoot ? "" : folder.slice(2);
+				const displayName = isRoot ? "/ (root)" : folder.slice(2);
 
 				jsonArray.push({
-					"title": name,
-					"subtitle": group,
+					"title": displayName,
 					"match": alfredMatcher(id),
 					"arg": id,
 					"uid": id,
