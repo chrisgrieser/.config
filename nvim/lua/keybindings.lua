@@ -397,6 +397,10 @@ if isGui() then
 		local scrollvEnabled = require("scrollview") -- HACK: since scrollview counts as a window
 		local moreThanOneWin = (fn.winnr("$") > 2 and scrollvEnabled) or (fn.winnr("$") > 1 and not (scrollvEnabled))
 		local moreThanOneBuf = #fn.getbufinfo({buflisted = 1}) > 1
+
+		cmd [[nohl | update!]]
+		cmd [[update]]
+
 		if moreThanOneTab then
 			cmd [[tabclose]]
 		elseif moreThanOneWin then
@@ -406,7 +410,6 @@ if isGui() then
 		else
 			vim.notify(" Only one buffer open.", logWarn)
 		end
-		cmd [[nohl]]
 	end)
 
 	keymap({"n", "x", "i"}, "<D-z>", function() cmd [[undo]] end) -- cmd+z
