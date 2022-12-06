@@ -67,7 +67,7 @@ keymap("n", "<Esc>", function() -- clear all
 	-- if more than 10 notifications are in the queue, clear them all (mostly for bugs)
 	local notify = require("notify")
 	if notify.pending() > 10 then
-		notify.dismiss({pending = true})
+		notify.dismiss {pending = true}
 	else
 		notify.dismiss() -- clear notifications
 	end
@@ -414,7 +414,7 @@ if isGui() then
 		elseif moreThanOneWin then
 			cmd [[close]]
 		elseif moreThanOneBuf then
-			cmd [[keepalt bdelete]]
+			cmd [[bwipeout]] -- as opposed to bdelete, this ensures the deleted buffer does not stay alternate file
 		else
 			vim.notify(" Only one buffer open.", logWarn)
 		end
@@ -507,14 +507,14 @@ keymap("n", "gf", telescope.live_grep) -- search in [f]iles
 keymap("n", "gR", telescope.resume) -- resume last search
 
 -- File Operations (no shorthand for lazy-loading)
-keymap("", "<C-p>", function () require("genghis").copyFilepath() end)
-keymap("", "<C-n>", function () require("genghis").copyFilename() end)
-keymap("", "<leader>x", function () require("genghis").chmodx() end)
-keymap("", "<C-r>", function () require("genghis").renameFile() end)
-keymap("", "<C-d>", function () require("genghis").duplicateFile() end)
-keymap("", "<D-BS>", function () require("genghis").trashFile() end)
-keymap("", "<D-n>", function () require("genghis").createNewFile() end)
-keymap("x", "X", function () require("genghis").moveSelectionToNewFile() end)
+keymap("", "<C-p>", function() require("genghis").copyFilepath() end)
+keymap("", "<C-n>", function() require("genghis").copyFilename() end)
+keymap("", "<leader>x", function() require("genghis").chmodx() end)
+keymap("", "<C-r>", function() require("genghis").renameFile() end)
+keymap("", "<C-d>", function() require("genghis").duplicateFile() end)
+keymap("", "<D-BS>", function() require("genghis").trashFile() end)
+keymap("", "<D-n>", function() require("genghis").createNewFile() end)
+keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end)
 
 -- Diffview
 keymap("n", "<C-g>", function()

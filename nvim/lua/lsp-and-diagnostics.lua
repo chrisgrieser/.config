@@ -156,10 +156,12 @@ local function on_attach(client, bufnr)
 		end, bufopts)
 	else
 		keymap({"n", "x", "i"}, "<D-s>", function()
-			vim.lsp.buf.format {async = true}
 			if bo.filetype == "javascript" or bo.filetype == "typescript" then
+				vim.lsp.buf.format {async = false}
 				cmd [[update!]]
 				cmd [[EslintFixAll]] -- eslint-lsp
+			else
+				vim.lsp.buf.format {async = true}
 			end
 			cmd [[write!]]
 		end, bufopts)

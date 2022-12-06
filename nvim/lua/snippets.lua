@@ -326,8 +326,12 @@ add("javascript", {
 		}
 	]]),
 	snip("write Alfred data", [[
-		function writeData (key, newValue) {
-			const dataPath = $.getenv("alfred_workflow_data") + "/" + $.getenv("alfred_workflow_bundleid") + key;
+		function writeData(key, newValue) {
+			const dataFolder = $.getenv("alfred_workflow_data");
+			const fileManager = $.NSFileManager.defaultManager;
+			const folderExists = fileManager.fileExistsAtPath(dataFolder);
+			if (!folderExists) fileManager.createDirectoryAtPathWithIntermediateDirectoriesAttributesError(dataFolder, false, $(), $()); 
+			const dataPath = `${dataFolder}/${key}`;
 			const str = $.NSString.alloc.initWithUTF8String(newValue);
 			str.writeToFileAtomicallyEncodingError(dataPath, true, $.NSUTF8StringEncoding, null);
 		}
