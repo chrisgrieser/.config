@@ -225,7 +225,7 @@ autocmd("RecordingEnter", {
 		vim.notify(" Recording…", logTrace)
 	end,
 })
-keymap("n", "9", "@y") -- quick replay (I don't use counts that high anyway)
+keymap("n", "9", "@y") -- quick replay (yes, I don't use counts that high)
 keymap("n", "0", "qy") -- needs to be set initially
 keymap("n", "c0", function() -- edit macro
 	local macro = fn.getreg("y")
@@ -293,12 +293,10 @@ keymap("x", "X", exchange.visual)
 -- search & replace
 keymap("n", "<leader>f", [[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]])
 keymap("x", "<leader>f", ":sm///g<Left><Left><Left>")
--- selene: allow(multiple_statements)
 keymap({"n", "x"}, "<leader>F", function() require("ssr").open() end) -- wrapped in function for lazy-loading
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine)
--- selene: allow(multiple_statements)
 keymap("n", "<A-r>", function() qol.duplicateLine {increment = true} end)
 keymap("x", "R", qol.duplicateSelection)
 
