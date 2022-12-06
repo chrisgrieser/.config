@@ -1,18 +1,38 @@
 title: 🔺 App Switcher
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 anchors:
-  - conditions: &leader-active
-      - type: variable_if
+  - conditions: 
+      - &leader-active
+        type: variable_if
         name: LEADER_ACTIVE
         value: true
-  - &deactivate-leader
-    set_variable:
-      name: LEADER_ACTIVE
-      value: false
-  - &remove-notice
-    set_notification_message:
-      id: leader-notice
-      text: ""
+      - &not-apple-keyboard
+        type: device_unless
+        identifiers:
+          - vendor_id: 76
+            is_keyboard: true
+      - &is-apple-keyboard
+        type: device_if
+        identifiers:
+          - vendor_id: 76
+            is_keyboard: true
+  - to:
+      - &deactivate-leader
+        set_variable:
+          name: LEADER_ACTIVE
+          value: false
+      - &activate-leader
+        set_variable:
+          name: LEADER_ACTIVE
+          value: true
+      - &remove-notice
+        set_notification_message:
+          id: leader-notice
+          text: ""
+      - &set-notice
+        set_notification_message:
+          id: leader-notice
+          text: "🔺 Leader"
 
 #───────────────────────────────────────────────────────────────────────────────
 rules:
@@ -20,42 +40,26 @@ rules:
     manipulators:
       - type: basic
         description: Non-Apple Keyboard
-        from:
-          key_code: left_control
+        from: {key_code: left_control}
         to:
           - key_code: left_control
         parameters:
           basic.to_if_alone_timeout_milliseconds: 600
         conditions:
-          - type: variable_unless
-            name: LEADER_ACTIVE
-            value: true
-          - type: device_unless
-            identifiers:
-              - vendor_id: 76
-                is_keyboard: true
+          - *leader-active
+          - *not-apple-keyboard
         to_if_alone:
           - key_code: left_control
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: true
-          - set_notification_message:
-              id: leader-notice
-              text: 🔺 Leader
+          - *activate-leader
+          - *set-notice
       - description: '2x Leader: F19'
         type: basic
-        from:
-          key_code: left_control
+        from: {key_code: left_control}
         to:
           - key_code: left_control
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-          - type: device_unless
-            identifiers:
-              - vendor_id: 76
-                is_keyboard: true
+          - *leader-active
+          - *not-apple-keyboard
           # Prevent footpedal from accidentally triggering twice.
           - type: device_if
             identifiers:
@@ -66,42 +70,26 @@ rules:
           - *remove-notice
       - type: basic
         description: Apple Keyboard
-        from:
-          key_code: fn
+        from: {key_code: fn}
         to:
           - key_code: fn
         conditions:
-          - type: variable_unless
-            name: LEADER_ACTIVE
-            value: true
-          - type: device_if
-            identifiers:
-              - vendor_id: 76
-                is_keyboard: true
+          - *leader-active
+          - *is-apple-keyboard
         parameters:
           basic.to_if_alone_timeout_milliseconds: 600
         to_if_alone:
           - key_code: fn
-          - set_variable:
-              name: LEADER_ACTIVE
-              value: true
-          - set_notification_message:
-              id: leader-notice
-              text: 🔺 Leader
+          - *activate-leader
+          - *set-notice
       - description: '2x Leader: F19'
         type: basic
-        from:
-          key_code: fn
+        from: {key_code: fn}
         to:
           - key_code: fn
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-          - type: device_if
-            identifiers:
-              - vendor_id: 76
-                is_keyboard: true
+          - *leader-active
+          - *not-apple-keyboard
         to_if_alone:
           - key_code: f19
           - *deactivate-leader
@@ -114,16 +102,14 @@ rules:
       # Cancel (Esc/Hyper)
       - type: basic
         description: 'Hyper (Esc): Leader Cancel'
-        from:
-          key_code: caps_lock
-        conditions: *leader-active
+        from: {key_code: caps_lock}
+        conditions: [*leader-active]
         to_if_alone:
           - *deactivate-leader
           - *remove-notice
       # [.] Emoji Inserter
       - type: basic
-        from:
-          key_code: period
+        from: {key_code: period}
         to:
           - key_code: spacebar
             modifiers:
@@ -131,11 +117,11 @@ rules:
               - command
           - *deactivate-leader
           - *remove-notice
-        conditions: *leader-active
+        conditions: [*leader-active]
       # [C]alendar: BusyCal
       - type: basic
         from: {key_code: c}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'BusyCal'
           - *deactivate-leader
@@ -143,7 +129,7 @@ rules:
       # [,]: System Preferences
       - type: basic
         from: {key_code: comma}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'System Preferences'
           - *deactivate-leader
@@ -151,7 +137,7 @@ rules:
       # [O]bsidian
       - type: basic
         from: {key_code: o}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Obsidian'
           - *deactivate-leader
@@ -159,7 +145,7 @@ rules:
       # [D]iscord
       - type: basic
         from: {key_code: d}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Discord'
           - *deactivate-leader
@@ -168,7 +154,7 @@ rules:
       - type: basic
         # switched y and z due to German Keyboard
         from: {key_code: "y"}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'zoom.us'
           - *deactivate-leader
@@ -176,7 +162,7 @@ rules:
       # [E]ditor: Neovim
       - type: basic
         from: {key_code: e}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: osascript -e 'tell application "Neovide" to activate'
           - *deactivate-leader
@@ -184,7 +170,7 @@ rules:
       # D[r]afts
       - type: basic
         from: {key_code: r}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Drafts'
           - *deactivate-leader
@@ -192,7 +178,7 @@ rules:
       # [S]lack
       - type: basic
         from: {key_code: s}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Slack'
           - *deactivate-leader
@@ -200,7 +186,7 @@ rules:
       # Script Editor [Q]
       - type: basic
         from: {key_code: q}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Script Editor'
           - *deactivate-leader
@@ -208,15 +194,15 @@ rules:
       # [M]imestream
       - type: basic
         from: {key_code: m}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Mimestream'
           - *deactivate-leader
           - *remove-notice
-      # Brave [B]rowser
+      # Brave [b]rowser
       - type: basic
         from: {key_code: b}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Brave Browser'
           - *deactivate-leader
@@ -228,21 +214,18 @@ rules:
           modifiers:
             mandatory:
               - shift
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: osascript -e 'tell application "Brave Browser" to activate'
-          - key_code: vk_none
-            hold_down_milliseconds: 250
+          - {key_code: vk_none, hold_down_milliseconds: 250}
           - key_code: t
-            modifiers:
-              - command
-              - shift
+            modifiers: [command, shift]
           - *deactivate-leader
           - *remove-notice
-      # [l]ocate: Finder
+      # [L]ocate: Finder
       - type: basic
         from: {key_code: l}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a "Finder"
           - *deactivate-leader
@@ -250,7 +233,7 @@ rules:
       # [H]ammerspoon
       - type: basic
         from: {key_code: h}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Hammerspoon'
           - *deactivate-leader
@@ -258,7 +241,7 @@ rules:
       # [K]arabiner-EventViewer
       - type: basic
         from: {key_code: k}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Karabiner-EventViewer'
           - *deactivate-leader
