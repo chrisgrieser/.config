@@ -1,6 +1,6 @@
 ---@diagnostic disable: undefined-global
 local M = {}
-myrepos = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/"
+local myrepos = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/"
 --------------------------------------------------------------------------------
 function M.PluginList()
 
@@ -150,7 +150,10 @@ function M.PluginList()
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"x", "<D-j>"}}}
 	use "ggandor/leap.nvim" -- easymotion-like
 	use "Darazaki/indent-o-matic" -- auto-determine indents
-	use "nacro90/numb.nvim" -- line previews when ":n"
+	use {"nacro90/numb.nvim", -- line previews when ":n"
+		config = function() require("numb").setup() end,
+		keys = {{"n", ":"}},
+	}
 
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting

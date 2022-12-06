@@ -58,6 +58,7 @@ ln -sf "$DOTFILE_FOLDER/linter-configs/.flake8" ~
 ln -sf "$DOTFILE_FOLDER/vale/.vale.ini" ~
 
 # GPG
+mkdir ~/.gnupg
 ln -sf "$DOTFILE_FOLDER/gnupg/gpg-agent.conf" ~/.gnupg
 
 # pandoc
