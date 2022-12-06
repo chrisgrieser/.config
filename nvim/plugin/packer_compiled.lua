@@ -469,7 +469,7 @@ _G.packer_plugins = {
     url = "https://github.com/simnalamburt/vim-mundo"
   },
   ["vim-visual-multi"] = {
-    keys = { { "n", "<D-j>" }, { "v", "<D-j>" }, { "n", "<M-Up>" }, { "n", "<M-Down>" } },
+    keys = { { "n", "<D-j>" }, { "x", "<D-j>" } },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -526,6 +526,13 @@ pcall(vim.api.nvim_create_user_command, 'MundoToggle', function(cmdargs)
           require('packer.load')({'vim-mundo'}, { cmd = 'MundoToggle' }, _G.packer_plugins)
           vim.api.nvim_input('<space><bs><tab>')
       end})
+pcall(vim.api.nvim_create_user_command, 'ToggleTermSendVisualSelection', function(cmdargs)
+          require('packer.load')({'toggleterm.nvim'}, { cmd = 'ToggleTermSendVisualSelection', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'toggleterm.nvim'}, { cmd = 'ToggleTermSendVisualSelection' }, _G.packer_plugins)
+          vim.api.nvim_input('<space><bs><tab>')
+      end})
 pcall(vim.api.nvim_create_user_command, 'ToggleTerm', function(cmdargs)
           require('packer.load')({'toggleterm.nvim'}, { cmd = 'ToggleTerm', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
@@ -547,21 +554,12 @@ pcall(vim.api.nvim_create_user_command, 'DiffviewOpen', function(cmdargs)
           require('packer.load')({'diffview.nvim'}, { cmd = 'DiffviewOpen' }, _G.packer_plugins)
           vim.api.nvim_input('<space><bs><tab>')
       end})
-pcall(vim.api.nvim_create_user_command, 'ToggleTermSendVisualSelection', function(cmdargs)
-          require('packer.load')({'toggleterm.nvim'}, { cmd = 'ToggleTermSendVisualSelection', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
-        end,
-        {nargs = '*', range = true, bang = true, complete = function()
-          require('packer.load')({'toggleterm.nvim'}, { cmd = 'ToggleTermSendVisualSelection' }, _G.packer_plugins)
-          vim.api.nvim_input('<space><bs><tab>')
-      end})
 time([[Defining lazy-load commands]], false)
 
 -- Keymap lazy-loads
 time([[Defining lazy-load keymaps]], true)
-vim.cmd [[nnoremap <silent> <M-Up> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>M-Up>", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <M-Down> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>M-Down>", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[xnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[vnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
 time([[Defining lazy-load keymaps]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
@@ -569,8 +567,8 @@ vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
 vim.cmd [[au FileType applescript ++once lua require("packer.load")({'vim-applescript'}, { ft = "applescript" }, _G.packer_plugins)]]
-vim.cmd [[au FileType css ++once lua require("packer.load")({'vim-css3-syntax'}, { ft = "css" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType css ++once lua require("packer.load")({'vim-css3-syntax'}, { ft = "css" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)

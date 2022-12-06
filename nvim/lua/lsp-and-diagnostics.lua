@@ -149,7 +149,7 @@ local function on_attach(client, bufnr)
 
 	if client.name == "sumneko_lua" then -- HACK since formatting with lua lsp seems to remove folds?!
 		keymap({"n", "x", "i"}, "<D-s>", function()
-			cmd [[mkview]]
+			cmd [[mkview!]]
 			vim.lsp.buf.format{async = false} -- not async to avoid race condition
 			cmd [[noautocmd write! | edit %]] -- reload, no autocmd to not trigger rememberFolds augroup, with mkview (of the now non-existing folds) on bufleave
 			cmd [[loadview]]

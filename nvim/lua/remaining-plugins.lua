@@ -32,7 +32,4 @@ autocmd("FileType", {
 require("numb").setup()
 
 --------------------------------------------------------------------------------
--- GitLinker
-require("gitlinker").setup{
-	mappings = "<leader>G",
-}
+

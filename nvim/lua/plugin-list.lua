@@ -137,7 +137,7 @@ function M.PluginList()
 	use "gbprod/substitute.nvim" -- substitution & exchange operator
 	use "numToStr/Comment.nvim" -- comment operator
 	use "michaeljsmith/vim-indent-object" -- indention-based text-object
-	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"v", "<D-j>"}, {"n", "<M-Up>"}, {"n", "<M-Down>"}}}
+	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"x", "<D-j>"}}}
 	use "ggandor/leap.nvim" -- easymotion-like
 	use "Darazaki/indent-o-matic" -- auto-determine indents
 	use "nacro90/numb.nvim" -- line previews when ":n"

@@ -316,10 +316,10 @@ keymap("n", "<leader>lr", qol.removeLog)
 keymap({"n", "x"}, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]]) -- second <CR> due to cmdheight=0
 
 -- sane-gx
-keymap("n", "gx", function ()
+keymap("n", "gx", function()
 	local url = fn.expand("<cWORD>")
 	if url:find("http") then
-		os.execute([[open "]]..url..[["]])
+		os.execute([[open "]] .. url .. [["]])
 	else
 		vim.notify(" Not an URL. ", logWarn)
 	end
@@ -391,6 +391,63 @@ keymap("", "<C-Up>", ":resize -3<CR>")
 keymap("n", "gw", "<C-w><C-w>") -- switch to next split
 
 --------------------------------------------------------------------------------
+-- CMD-Keybindings
+if isGui() then
+
+	keymap({"n", "x", "i"}, "<D-w>", function() -- cmd+w
+		local moreThanOneTab = fn.tabpagenr("$") > 1
+		local scrollvEnabled = require("scrollview") -- HACK: since scrollview counts as a window
+		local moreThanOneWin = (fn.winnr("$") > 2 and scrollvEnabled) or (fn.winnr("$") > 1 and not (scrollvEnabled))
+		if moreThanOneTab then
+			cmd [[tabclose]]
+		elseif moreThanOneWin then
+			cmd [[close]]
+		else
+			cmd [[update! | bdelete]]
+		end
+		cmd [[nohl]]
+	end)
+
+	keymap({"n", "x", "i"}, "<D-S-w>", function() cmd [[only]] end) -- cmd+shift+w
+	keymap({"n", "x", "i"}, "<D-z>", function() cmd [[undo]] end) -- cmd+z
+	keymap({"n", "x", "i"}, "<D-S-z>", function() cmd [[redo]] end) -- cmd+shift+z
+	keymap({"n", "x", "i"}, "<D-s>", function() cmd [[write!]] end) -- cmd+s
+	keymap("n", "<D-a>", "ggVG") -- cmd+a
+	keymap("i", "<D-a>", "<Esc>ggVG")
+	keymap("x", "<D-a>", "ggG")
+
+	keymap({"n", "x"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
+	keymap({"n", "x"}, "<D-1>", ":Lexplore<CR><CR>") -- file tree (netrw)
+	keymap({"n", "x"}, "<D-0>", ":messages<CR>")
+	keymap({"n", "x"}, "<D-9>", ":Notification<CR>")
+
+	-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
+	g.VM_maps = {
+		["Find Under"] = "<D-j>", -- cmd+j
+		["Visual Add"] = "<D-j>",
+	}
+
+	-- cut, copy & paste
+	keymap("n", "<D-c>", "yy") -- no selection = line
+	keymap("x", "<D-c>", "y")
+	keymap("n", "<D-x>", "dd") -- no selection = line
+	keymap("x", "<D-x>", "d")
+	keymap({"n", "x"}, "<D-v>", "p")
+	keymap("c", "<D-v>", "<C-r>+")
+	keymap("i", "<D-v>", "<C-r><C-o>+")
+
+	-- cmd+e: inline code
+	keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>") -- no selection = word under cursor
+	keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>")
+	keymap("i", "<D-e>", "``<Left>")
+
+	-- cmd+t: Template ${string}
+	keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>b") -- no selection = word under cursor
+	keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b")
+	keymap("i", "<D-t>", "${}<Left>")
+end
+
+--------------------------------------------------------------------------------
 
 -- BUFFERS
 -- :nohl added here, since it does not work with autocmds
@@ -428,7 +485,7 @@ require("cybu").setup {
 }
 
 --------------------------------------------------------------------------------
--- FILES
+-- FILES & GIT
 
 -- File Switchers
 keymap("n", "go", telescope.find_files) -- [o]pen file in parent-directory
@@ -456,6 +513,23 @@ keymap("n", "<C-g>", function()
 		else cmd("DiffviewFileHistory % -G" .. query)
 		end
 	end)
+end)
+
+-- GitLinker
+local gitlinker = require("gitlinker")
+gitlinker.setup {
+	mappings = nil,
+	opts = {print_url = false},
+}
+
+keymap("n", "<leader>G", function()
+	gitlinker.get_buf_range_url("n", {action_callback = require("gitlinker.actions").copy_to_clipboard})
+	gitlinker.get_buf_range_url("n", {action_callback = require("gitlinker.actions").open_in_browser})
+end)
+
+keymap("x", "<leader>G", function()
+	gitlinker.get_buf_range_url("v", {action_callback = require("gitlinker.actions").copy_to_clipboard})
+	gitlinker.get_buf_range_url("v", {action_callback = require("gitlinker.actions").open_in_browser})
 end)
 
 --------------------------------------------------------------------------------
