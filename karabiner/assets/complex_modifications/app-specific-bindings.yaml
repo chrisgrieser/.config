@@ -201,6 +201,7 @@ rules:
             modifiers:
               - command
               - control
+          - shell_command: osascript -e 'display notification "Tool" with title "Image 🖼️"'
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -221,6 +222,7 @@ rules:
             modifiers:
               - command
               - control
+          - shell_command: osascript -e 'display notification "Tool" with title "Underline 🖍️"'
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -241,6 +243,7 @@ rules:
             modifiers:
               - command
               - control
+          - shell_command: osascript -e 'display notification "Tool" with title "Comment 🗣️"'
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -261,6 +264,7 @@ rules:
             modifiers:
               - command
               - control
+          - shell_command: osascript -e 'display notification "Tool" with title "Yellow Highlight 🟨"'
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:

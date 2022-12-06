@@ -1,9 +1,13 @@
 title: 🔺 App Switcher
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 anchors:
-  - conditions: 
+  - conditions:
       - &leader-active
         type: variable_if
+        name: LEADER_ACTIVE
+        value: true
+      - &leader-inactive
+        type: variable_unless
         name: LEADER_ACTIVE
         value: true
       - &not-apple-keyboard
@@ -46,7 +50,7 @@ rules:
         parameters:
           basic.to_if_alone_timeout_milliseconds: 600
         conditions:
-          - *leader-active
+          - *leader-inactive
           - *not-apple-keyboard
         to_if_alone:
           - key_code: left_control
@@ -74,7 +78,7 @@ rules:
         to:
           - key_code: fn
         conditions:
-          - *leader-active
+          - *leader-inactive
           - *is-apple-keyboard
         parameters:
           basic.to_if_alone_timeout_milliseconds: 600
@@ -249,7 +253,7 @@ rules:
       # [Y]ouTube
       - type: basic
         from: {key_code: z} # switched y and z due to German Keyboard
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'YouTube' || open 'https://www.youtube.com/'
           - *deactivate-leader
@@ -257,7 +261,7 @@ rules:
       # [A]lfred Preferences
       - type: basic
         from: {key_code: a}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Alfred Preferences'
           - *deactivate-leader
@@ -265,7 +269,7 @@ rules:
       # [I]noreader
       - type: basic
         from: {key_code: i}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Inoreader' || open 'https://www.inoreader.com/'
           - *deactivate-leader
@@ -273,7 +277,7 @@ rules:
       # [N]ews Reader (Reeder)
       - type: basic
         from: {key_code: "n"}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Reeder' || open 'https://www.inoreader.com/'
           - *deactivate-leader
@@ -281,7 +285,7 @@ rules:
       # [P]DF Reader: Highlights
       - type: basic
         from: {key_code: p}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Highlights'
           - *deactivate-leader
@@ -289,7 +293,7 @@ rules:
       # [G]oogle Docs
       - type: basic
         from: {key_code: g}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Docs' || open 'https://docs.google.com/'
           - *deactivate-leader
@@ -297,7 +301,7 @@ rules:
       # [V]ideo: IINA
       - type: basic
         from: {key_code: v}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'IINA'
           - *deactivate-leader
@@ -305,7 +309,7 @@ rules:
       # [#] Color Picker
       - type: basic
         from: {key_code: non_us_pound} # "#" on Germany keyboard
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Color Picker'
           - *deactivate-leader
@@ -313,7 +317,7 @@ rules:
       # [W]hatsApp
       - type: basic
         from: {key_code: w}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open 'https://web.whatsapp.com/'
           - *deactivate-leader
@@ -321,7 +325,7 @@ rules:
       # [F]acebook Messenger
       - type: basic
         from: {key_code: f}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open 'https://www.messenger.com/'
           - *deactivate-leader
@@ -329,7 +333,7 @@ rules:
       # [T]elegram
       - type: basic
         from: {key_code: t}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open 'https://web.telegram.org/z/'
           - *deactivate-leader
@@ -337,7 +341,7 @@ rules:
       # [4] (mnemonic: $ sign) MoneyMoney
       - type: basic
         from: {key_code: "4"}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'MoneyMoney'
           - *deactivate-leader
@@ -358,7 +362,7 @@ rules:
       # [esc] (f18) Activity Monitor
       - type: basic
         from: {key_code: "f18"}
-        conditions: *leader-active
+        conditions: [*leader-active]
         to:
           - shell_command: open -a 'Activity Monitor'
           - *deactivate-leader
