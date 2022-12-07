@@ -29,20 +29,18 @@ autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 -- https://neovim.io/doc/user/luvref.html#luv-fs-event-handle
-
+-- https://github.com/rktjmp/fwatch.nvim/blob/main/lua/fwatch.lua#L16
+-- https://neovim.io/doc/user/lua.html#lua-loop
 
 local w = vim.loop.new_fs_event()
-local function on_change(err, fname, status)
-	-- Do work...
-	vim.api.nvim_command("checktime")
-	-- Debounce: stop/start.
-	w:stop()
-	watch_file(fname)
+local function on_change(err)
+	if err then
+		print(err)
+		return
+	end
+	vim.notify("file has changed")
+	w:stop() ---@diagnostic disable-line: need-check-nil
 end
 
-local function watch_file(fname)
-	local fullpath = vim.api.nvim_call_function("fnamemodify", {fname, ":p"})
-	w:start(fullpath, {}, vim.schedule_wrap(function(...)
-		on_change(...)
-	end))
-end
+local fullpath = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/bla.txt"
+w:start(fullpath, {}, on_change) ---@diagnostic disable-line: need-check-nil
