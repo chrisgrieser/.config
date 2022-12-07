@@ -12,7 +12,7 @@ auto_restart: true
 # Because injecting long texts char-by-char is a slow operation, espanso automatically
 # uses the clipboard if the text is longer than 'clipboard_threshold' characters.
 preserve_clipboard: true
-restore_clipboard_delay: 300
+restore_clipboard_delay: 200
 
 undo_backspace: false # backspace undos expansion
 
