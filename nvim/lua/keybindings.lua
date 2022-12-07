@@ -475,9 +475,7 @@ end
 --------------------------------------------------------------------------------
 
 -- BUFFERS
-
--- INFO: nohl added here, since it does not work with autocmds
-keymap("n", "<CR>", function() -- switch to alternate-file
+local function betterAltBuf() -- switch to alternate-file
 	local noAltFile = fn.expand("#") == ""
 	if noAltFile then
 		vim.notify(" No alternate file.", logWarn)
@@ -485,7 +483,19 @@ keymap("n", "<CR>", function() -- switch to alternate-file
 		cmd [[nohl]]
 		cmd [[buffer #]]
 	end
-end)
+end
+
+-- HACK: fix for https://github.com/cshuaimin/ssr.nvim/issues/11
+augroup("ssr-fix", {})
+autocmd("BufReadPost", {
+	group = "ssr-fix",
+	callback = function()
+		if bo.filetype == "ssr" then return end
+		keymap("n", "<CR>", betterAltBuf)
+	end
+})
+
+-- INFO: nohl added here, since it does not work with autocmds
 keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)") -- cycle between buffers
 keymap("n", "<S-BS>", ":nohl<CR><Plug>(CybuPrev)")
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
