@@ -37,6 +37,7 @@ function M.PluginList()
 	}
 	use {"cshuaimin/ssr.nvim", -- structural search & replace
 		module = "ssr",
+		commit = "4304933", -- TODO: update to newest version with nvim 0.9 https://github.com/cshuaimin/ssr.nvim/issues/11#issuecomment-1340671193
 	}
 
 	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node

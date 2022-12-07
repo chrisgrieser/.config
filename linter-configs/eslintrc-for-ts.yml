@@ -1,15 +1,26 @@
 # yamllint disable rule:truthy
 #───────────────────────────────────────────────────────────────────────────────
-extends: [eslint:recommended]
+extends: 
+  - eslint:recommended
+  - plugin:@typescript-eslint/eslint-recommended
+  - plugin:@typescript-eslint/recommended
+plugins: ["@typescript-eslint"]
 root: true # stop annoying deprecation warning
-ignorePatterns: ["!.*", "node_modules"] # Lint files in dotfolder https://github.com/eslint/eslint/issues/10341#issuecomment-468548031
+parser: "@typescript-eslint/parser"
 parserOptions:
   ecmaVersion: 2021
   sourceType: module
 
 #───────────────────────────────────────────────────────────────────────────────
-
 rules:
+
+  # TypeScript specific
+  "@typescript-eslint/no-unused-vars": off
+  "@typescript-eslint/ban-ts-comment": off
+  "@typescript-eslint/no-extra-semi": warn
+  "@typescript-eslint/no-empty-function": warn
+  no-unused-vars: warn
+
   # code structure
   complexity: [warn, 15]
   max-depth: [warn, 4]
@@ -19,7 +30,6 @@ rules:
     - error
     - builtinGlobals: true
       hoist: all
-  no-unused-vars: off # typescript already checks for this
   camelcase:
     - warn
     - properties: always
@@ -154,21 +164,3 @@ rules:
         - [==, '!=', ===, '!==', '>', '>=', <, <=]
         - ['&&', '||']
         - [in, instanceof]
-
-#───────────────────────────────────────────────────────────────────────────────
-
-globals:
-
-  # JXA
-  console: readonly
-  ObjC: readonly
-  delay: readonly
-  Application: readonly
-  $: readonly
-  Set: readonly
-  Path: readonly
-
-  # Obsidian
-  tp: readonly # templater
-  dv: readonly # dataview
-  request: readonly

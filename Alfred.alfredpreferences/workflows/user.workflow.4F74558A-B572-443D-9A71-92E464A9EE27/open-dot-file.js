@@ -33,6 +33,7 @@ const workArray = app.doShellScript(
 	-E "karabiner/automatic_backups" \
 	-E "visualized-keyboard-layout/*.json" \
 	-E "*.icns" \
+	-E "*.plist" \
 	-E "TODO*" \
 	-E "INFO*" \
 	-E "*.png" \
