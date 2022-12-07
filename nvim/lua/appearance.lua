@@ -35,6 +35,7 @@ if isGui() then
 	require("notify").setup {
 		render = "minimal",
 		stages = "slide",
+		level = 0, -- minimum level to display (0 = display all)
 		minimum_width = 20,
 		max_height = 15,
 		timeout = 4000,

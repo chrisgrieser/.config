@@ -14,9 +14,6 @@ rules:
           - set_variable:
               name: FINDER_ALFRED_ACTIVE
               value: true
-          - set_notification_message:
-              id: insert-notice
-              text: "🎩 ALFRED"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.apple\.finder$]
@@ -37,10 +34,6 @@ rules:
           - set_variable:
               name: FINDER_ALFRED_ACTIVE
               value: true
-          - set_notification_message:
-              id: insert-notice
-              text: "🎩 ALFRED"
-          - shell_command: osascript -e "beep"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.apple\.finder$]
@@ -55,17 +48,13 @@ rules:
         from: {key_code: f18}
         to:
           - key_code: f18
-          - shell_command: osascript -e "beep beep"
           - set_variable:
               name: FINDER_INSERT_MODE
               value: false
           - set_variable:
               name: FINDER_ALFRED_ACTIVE
               value: false
-          - set_notification_message:
-              id: insert-notice
-              text: ""
-        conditions:
-          - type: variable_if
-            name: FINDER_ALFRED_MODE
-            value: true
+              # HACK no idea why, but setting a conditions here breaks this rule.
+              # Maybe due to recursion. But by placing this rule last, it only
+              # gets triggered if the other one does not get triggered before,
+              # which also works

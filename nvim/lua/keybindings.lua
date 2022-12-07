@@ -171,7 +171,7 @@ autocmd("FileType", {
 
 keymap({"o", "x"}, "iq", 'i"') -- double [q]uote
 keymap({"o", "x"}, "aq", 'a"')
-keymap({"o", "x"}, "iz", "i'") -- [z]ingle quote 
+keymap({"o", "x"}, "iz", "i'") -- [z]ingle quote
 keymap({"o", "x"}, "az", "a'")
 keymap({"o", "x"}, "at", "a`") -- [t]emplate-string-quote
 keymap({"o", "x"}, "it", "i`")
@@ -227,7 +227,12 @@ autocmd("RecordingLeave", {
 	group = "recording",
 	callback = function()
 		keymap("n", "0", "qy") -- not saving in throwaway register z, so the respective keymaps can be used during a macro
-		vim.notify(" Recorded\n " .. vim.v.event.regcontents, logTrace)
+		local sequence = vim.v.event.regcontents
+		if sequence ~= "" then
+			vim.notify(" Recorded\n " .. sequence, logTrace)
+		else
+			vim.notify(" Recording cancelled. ", logTrace)
+		end
 	end
 })
 autocmd("RecordingEnter", {
@@ -328,7 +333,7 @@ keymap({"n", "x"}, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]]) -- secon
 -- sane-gx
 keymap("n", "gx", function()
 	local url = fn.expand("<cWORD>")
-	if url:find("http") then
+	if url:find("^http") then
 		os.execute([[open "]] .. url .. [["]])
 	else
 		vim.notify(" Not an URL. ", logWarn)
@@ -356,7 +361,15 @@ keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 -- TreeSJ plugin + Splitjoin-Fallback
 keymap("n", "<leader>s", function()
 	cmd [[TSJToggle]]
-	vim.lsp.buf.format {async = true} -- HACK: run formatter as workaround for https://github.com/Wansmer/treesj/issues/25
+	if bo.filetype == "lua" then
+		-- HACK to not mess up lua folds
+		cmd [[mkview!]]
+		vim.lsp.buf.format {async = false} -- not async to avoid race condition
+		cmd [[noautocmd write! | edit %]] -- reload, no autocmd to not trigger rememberFolds augroup, with mkview (of the now non-existing folds) on bufleave
+		cmd [[loadview]]
+	else
+		vim.lsp.buf.format {async = true} -- HACK: run formatter as workaround for https://github.com/Wansmer/treesj/issues/25
+	end
 end)
 
 require("treesj").setup {
@@ -465,7 +478,15 @@ end
 -- BUFFERS
 
 -- INFO: nohl added here, since it does not work with autocmds
-keymap("n", "<CR>", ":nohl<CR><C-^>", {silent = true}) -- switch to alt-file
+keymap("n", "<CR>", function() -- switch to alternate-file
+	local noAltFile = fn.expand("#") == ""
+	if noAltFile then
+		vim.notify(" No alternate file.", logWarn)
+	else
+		cmd [[nohl]]
+		cmd [[buffer #]]
+	end
+end)
 keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)") -- cycle between buffers
 keymap("n", "<S-BS>", ":nohl<CR><Plug>(CybuPrev)")
 keymap("n", "gb", telescope.buffers) -- open [b]uffer
