@@ -17,7 +17,7 @@ rules:
           - set_notification_message:
               id: insert-notice
               text: "🎩 ALFRED"
-      - conditions:
+        conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.apple\.finder$]
           - type: variable_unless
@@ -37,20 +37,25 @@ rules:
           - set_variable:
               name: FINDER_ALFRED_ACTIVE
               value: true
-      - conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^com\.apple\.finder$]
-          - type: variable_unless
-            name: FINDER_INSERT_MODE
-            value: true
           - set_notification_message:
               id: insert-notice
               text: "🎩 ALFRED"
+          - shell_command: osascript -e "beep"
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.apple\.finder$]
+          - type: variable_unless
+            name: FINDER_ALFRED_MODE
+            value: true
+          - type: variable_unless
+            name: FINDER_INSERT_MODE
+            value: true
       # abort Alfred Clipboard
       - type: basic
         from: {key_code: f18}
         to:
           - key_code: f18
+          - shell_command: osascript -e "beep beep"
           - set_variable:
               name: FINDER_INSERT_MODE
               value: false
@@ -60,12 +65,7 @@ rules:
           - set_notification_message:
               id: insert-notice
               text: ""
-      - conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^com\.apple\.finder$]
-          - type: variable_if
-            name: FINDER_INSERT_MODE
-            value: true
+        conditions:
           - type: variable_if
             name: FINDER_ALFRED_MODE
             value: true
