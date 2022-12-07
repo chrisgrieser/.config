@@ -127,9 +127,6 @@ keymap("n", "gs", telescope.treesitter)
 -- or gitsigns
 keymap("n", "<leader>a", vim.lsp.buf.code_action)
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-
 augroup("LSP", {})
 autocmd("LspAttach", {
 	group = "LSP",
@@ -350,10 +347,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- configure all lsp servers
 for _, lsp in pairs(lsp_servers) do
-	local config = {
-		-- on_attach = on_attach,
-		capabilities = capabilities,
-	}
+	local config = { capabilities = capabilities }
 	if lspSettings[lsp] then
 		config.settings = lspSettings[lsp]
 	end
