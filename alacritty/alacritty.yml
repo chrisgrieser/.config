@@ -168,14 +168,6 @@ key_bindings:
         - -c
         - open ~/.config/alacritty/alacritty.yml
 
-  # open location in GUI file explorer
-  - key: L
-    mods: Command
-    command:
-      program: sh
-      args:
-        - -c
-        - open .
   # Clear workaround since the default config does not work
   # https://github.com/alacritty/alacritty/blob/master/alacritty.yml#L852
   - key: K

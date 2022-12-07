@@ -68,10 +68,6 @@ anchors:
         set_notification_message:
           id: insert-notice
           text: "✏️  INSERT"
-      - &alfred-notice
-        set_notification_message:
-          id: insert-notice
-          text: "🎩 ALFRED"
       - &vim-mode-paused-notice
         set_notification_message:
           id: insert-notice
@@ -281,7 +277,6 @@ rules:
           - {key_code: spacebar, modifiers: [command]}
           - *enter-insert-mode
           - *start-alfred
-          - *alfred-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # LEAVE INSERT MODE
       # Confirm Insert Mode

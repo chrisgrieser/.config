@@ -1,4 +1,4 @@
-title: "\U0001F170️ App-Specific-Bindings"
+title: "\U0001F170️ App-kpecific-Bindings"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
   - description: "\U0001F170️  Zoom"
@@ -955,7 +955,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
-  - description: "\U0001F170️  Alacritty: Undo"
+  - description: "\U0001F170️  Alacritty: Undo & open location"
     manipulators:
       # ⌘Z → ⌃Z (zle-widget: undo)
       - type: basic
@@ -966,6 +966,20 @@ rules:
               - command
         to:
           - key_code: "y"
+            modifiers:
+              - control
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - alacritty$
+      - type: basic
+        from:
+          key_code: l
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: "l"
             modifiers:
               - control
         conditions:
