@@ -210,6 +210,7 @@ add("javascript", {
 
 add("javascript", {
 	snip("ternary", "${1:cond} ? ${2:then} : ${3:else}"),
+	snip("ISO date", "new Date().toISOString().slice(0, 10);"),
 })
 
 -- JXA-specific
@@ -251,7 +252,7 @@ add("javascript", {
 	snip("app", "const app = Application.currentApplication();\napp.includeStandardAdditions = true;\n$0"),
 	snip("shell script", "app.doShellScript(`${1:shellscript}`);\n$0"),
 	snip("open", 'app.openLocation("${1:url}");\n$0'),
-	snip("clipboard", 'app.setTheClipboard("${1:str}");\n$0'),
+	snip("clipboard", 'app.setTheClipboardTo("${1:str}");\n$0'),
 	snip("home (JXA)", 'app.pathTo("home folder")'),
 	snip("resolve home (JXA)", 'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
 	snip("exists (file)", 'const fileExists = (filePath) => Application("Finder").exists(Path(filePath));\n$0'),
@@ -312,13 +313,21 @@ add("javascript", {
 		JSON.stringify({ items: jsonArray });
 	]]),
 	snip("Get Alfred Env", 'const ${1:envVar} = $.getenv("${2:envVar}");\n$0'),
+	snip("Get Alfred Env (safe)", [[
+	function env(envVar) {
+		let out;
+		try { out = $.getenv(envVar) }
+		catch (e) { out = "" }
+		return out;
+	}
+	]]),
 	snip("Get Alfred Env (+ resolve home)",
 		'const ${1:envVar} = $.getenv("${2:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
 	-- workaround cause of unreliable saving of variables by Alfred
 	snip("read Alfred data", [[
 		function readData (key) {
 			const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
-			const dataPath = $.getenv("alfred_workflow_data") + "/" + $.getenv("alfred_workflow_bundleid") + key;
+			const dataPath = $.getenv("alfred_workflow_data") + "/" + key;
 			if (!fileExists(dataPath)) return "data does not exist.";
 			const data = $.NSFileManager.defaultManager.contentsAtPath(dataPath);
 			const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
@@ -330,8 +339,8 @@ add("javascript", {
 			const dataFolder = $.getenv("alfred_workflow_data");
 			const fileManager = $.NSFileManager.defaultManager;
 			const folderExists = fileManager.fileExistsAtPath(dataFolder);
-			if (!folderExists) fileManager.createDirectoryAtPathWithIntermediateDirectoriesAttributesError(dataFolder, false, $(), $()); 
-			const dataPath = `${dataFolder}/${key}`;
+			if (!folderExists) fileManager.createDirectoryAtPathWithIntermediateDirectoriesAttributesError(dataFolder, false, $(), $());
+			const dataPath = `\${dataFolder}/\${key}`;
 			const str = $.NSString.alloc.initWithUTF8String(newValue);
 			str.writeToFileAtomicallyEncodingError(dataPath, true, $.NSUTF8StringEncoding, null);
 		}
