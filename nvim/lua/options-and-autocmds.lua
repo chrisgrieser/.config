@@ -145,7 +145,6 @@ opt.cmdheight = 0
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- opt.foldmethod = "expr"
 
-
 opt.foldmethod = "indent"
 
 -- fold settings
@@ -176,7 +175,7 @@ local filetypeList = fn.system('ls "$HOME/.config/nvim/templates/skeleton."* | x
 local ftWithSkeletons = split(filetypeList, "\n")
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
-	local readCmd = "0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! Go"
+	local readCmd = "keepalt 0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! Go"
 
 	autocmd("BufNewFile", {
 		group = "Templates",

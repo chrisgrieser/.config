@@ -171,8 +171,10 @@ autocmd("FileType", {
 
 keymap({"o", "x"}, "iq", 'i"') -- double [q]uote
 keymap({"o", "x"}, "aq", 'a"')
-keymap({"o", "x"}, "iz", "i'") -- single quote (mnemonic: [z]itation)
+keymap({"o", "x"}, "iz", "i'") -- [z]ingle quote 
 keymap({"o", "x"}, "az", "a'")
+keymap({"o", "x"}, "at", "a`") -- [t]emplate-string-quote
+keymap({"o", "x"}, "it", "i`")
 keymap({"o", "x"}, "ir", "i]") -- [r]ectangular brackets
 keymap({"o", "x"}, "ar", "a]")
 keymap({"o", "x"}, "ic", "i}") -- [c]urly brackets

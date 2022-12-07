@@ -8,6 +8,7 @@ require("nvim-surround").setup {
 		["r"] = "]",
 		["q"] = '"',
 		["z"] = "'",
+		["t"] = "`",
 	},
 	move_cursor = false,
 	keymaps = {

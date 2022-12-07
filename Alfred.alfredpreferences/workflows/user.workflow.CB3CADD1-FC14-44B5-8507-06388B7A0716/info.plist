@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>com.alfredapp.vitor.systemsettings</string>
+	<string>com.alfredapp.vitor.systemsettings-fork</string>
 	<key>category</key>
 	<string>Tweaks</string>
 	<key>connections</key>
@@ -351,6 +351,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>285881D2-1A39-4E8F-9664-D4137DE40140</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5271B0D3-9DE1-4163-9A3E-CF2C294EF1AE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8DF0DD15-2F02-4FAA-A0EF-B435B4E86A6C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -751,6 +764,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D457C3F5-5A28-43DA-9C9C-07414F972781</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5271B0D3-9DE1-4163-9A3E-CF2C294EF1AE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D6E98923-3178-4A19-BCD5-35F5C3E5814D</key>
 		<array>
 			<dict>
@@ -899,6 +925,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8DF0DD15-2F02-4FAA-A0EF-B435B4E86A6C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F81A69FD-8225-4A7D-8196-3143F85F9300</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5271B0D3-9DE1-4163-9A3E-CF2C294EF1AE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -2392,6 +2431,65 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>control centre</string>
+				<key>subtext</key>
+				<string>System Settings → Control Centre</string>
+				<key>text</key>
+				<string>Control Centre</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F81A69FD-8225-4A7D-8196-3143F85F9300</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>x-apple.systempreferences:com.apple.ControlCenter-Settings.extension</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>5271B0D3-9DE1-4163-9A3E-CF2C294EF1AE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>menu bar</string>
+				<key>subtext</key>
+				<string>System Settings → Control Centre</string>
+				<key>text</key>
+				<string>Menu Bar</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D457C3F5-5A28-43DA-9C9C-07414F972781</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -2454,7 +2552,7 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>60</real>
+			<real>65</real>
 			<key>ypos</key>
 			<real>3160</real>
 		</dict>
@@ -2642,6 +2740,13 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<real>595</real>
 			<key>ypos</key>
 			<real>485</real>
+		</dict>
+		<key>5271B0D3-9DE1-4163-9A3E-CF2C294EF1AE</key>
+		<dict>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>4015</real>
 		</dict>
 		<key>5C30707B-B5FD-4FB9-BFE1-70B378C691F6</key>
 		<dict>
@@ -2877,6 +2982,13 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>ypos</key>
 			<real>1355</real>
 		</dict>
+		<key>D457C3F5-5A28-43DA-9C9C-07414F972781</key>
+		<dict>
+			<key>xpos</key>
+			<real>65</real>
+			<key>ypos</key>
+			<real>4105</real>
+		</dict>
 		<key>D6E98923-3178-4A19-BCD5-35F5C3E5814D</key>
 		<dict>
 			<key>xpos</key>
@@ -2982,6 +3094,13 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<real>240</real>
 			<key>ypos</key>
 			<real>2355</real>
+		</dict>
+		<key>F81A69FD-8225-4A7D-8196-3143F85F9300</key>
+		<dict>
+			<key>xpos</key>
+			<real>65</real>
+			<key>ypos</key>
+			<real>3985</real>
 		</dict>
 		<key>F90E8A37-DC7E-4213-974D-30FDDC830142</key>
 		<dict>
