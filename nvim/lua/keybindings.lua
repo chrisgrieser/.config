@@ -399,9 +399,8 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 --------------------------------------------------------------------------------
 -- VISUAL MODE
 keymap("x", "p", "P") -- do not override register when pasting
-keymap("x", "P", "p") -- override register when pasting
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
-keymap("x", "v", "<C-v>") -- `vv` from normal mode goes to visual block mode
+keymap("x", "v", "<C-v>") -- `vv` from normal mode = visual block mode
 
 --------------------------------------------------------------------------------
 -- WINDOWS & SPLITS
@@ -431,7 +430,7 @@ if isGui() then
 		elseif moreThanOneBuf then
 			cmd [[bwipeout]] -- as opposed to bdelete, this ensures the deleted buffer does not stay alternate file
 		else
-			vim.notify(" Only one buffer open.", logWarn)
+			vim.notify(" Only one buffer open. ", logWarn)
 		end
 	end)
 
