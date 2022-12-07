@@ -3,31 +3,6 @@ require("lua.window-management")
 require("lua.system-and-cron")
 --------------------------------------------------------------------------------
 
--- TRANSPARENT background for Obsidian & Alacritty & Neovim
-local function hideAllExcept(appNotToHide)
-	local mainScreen = hs.screen.mainScreen()
-	local wins = hs.window.orderedWindows() -- `orderedWindows()` ignores headless apps like Twitterrific
-	for i = 1, #wins do
-		local appli = wins[i]:application()
-		if not (appli) then break end
-
-		local winScreen = wins[i]:screen()
-
-		local isPictureInPicture = false
-		if appli:name() == "Brave Browser" or appli:name() == "YouTube" then -- if Browser has PiP window, do not hide it
-			local browserWins = appli:allWindows()
-			for j = 1, #browserWins do
-				if browserWins[j]:title() == "Picture in Picture" then isPictureInPicture = true end
-			end
-		end
-
-		if not (appli:name() == appNotToHide) and not (isPictureInPicture) and winScreen == mainScreen then -- main screen as condition for two-screen setups
-			appli:hide()
-		end
-	end
-end
-
--- not local, since needed by window movements
 local function unHideAll()
 	local wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
 	for i = 1, #wins do
@@ -37,20 +12,17 @@ local function unHideAll()
 	end
 end
 
-local function transBackgroundApp(appName, eventType, appObject)
+transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 	if not (appName == "neovide" or appName == "Neovide" or appName == "Obsidian" or appName == "alacritty" or
 		appName == "Alacritty") then return end
-
 	local win = appObject:mainWindow()
+
 	if (eventType == aw.activated or eventType == aw.launching) and (isPseudoMaximized(win) or isMaximized(win)) then
-		hideAllExcept(appName)
+		appObject:selectMenuItem("Hide Others")
 	elseif eventType == aw.terminated then
 		unHideAll()
 	end
-end
-
-transBgAppWatcher = aw.new(transBackgroundApp)
-transBgAppWatcher:start()
+end):start()
 
 --------------------------------------------------------------------------------
 
@@ -59,8 +31,7 @@ pixelmatorWatcher = aw.new(function(appName, eventType)
 	if appName == "Pixelmator" and eventType == aw.launched then
 		runWithDelays(0.3, function() moveResizeCurWin("maximized") end)
 	end
-end)
-pixelmatorWatcher:start()
+end):start()
 
 --------------------------------------------------------------------------------
 
@@ -74,17 +45,16 @@ wf_browser = wf.new("Brave Browser")
 		hasTitlebar = true
 	}
 	:subscribe(wf.windowCreated, function()
-		if #wf_browser:getWindows() == 1 then
+		local browserWins = wf_browser:getWindows()
+		if #browserWins == 1 then
 			if isAtOffice() or isProjector() then
 				moveResizeCurWin("maximized")
 			else
 				moveResizeCurWin("pseudo-maximized")
 			end
-		elseif #wf_browser:getWindows() == 2 then
-			local win1 = wf_browser:getWindows()[1]
-			local win2 = wf_browser:getWindows()[2]
-			moveResize(win1, hs.layout.left50)
-			moveResize(win2, hs.layout.right50)
+		elseif #browserWins == 2 then
+			moveResize(browserWins[1], hs.layout.left50)
+			moveResize(browserWins[2], hs.layout.right50)
 		end
 	end)
 	:subscribe(wf.windowDestroyed, function()
@@ -144,17 +114,14 @@ wf_mimestream = wf.new("Mimestream")
 --------------------------------------------------------------------------------
 
 -- keep TWITTERRIFIC visible, when active window is pseudomaximized
-local function twitterrificNextToPseudoMax(_, eventType)
+twitterificVisible = aw.new(function(_, eventType)
 	if appIsRunning("Twitterrific") and (eventType == aw.activated or eventType == aw.launching) then
 		local currentWin = hs.window.focusedWindow()
 		if isPseudoMaximized(currentWin) then
 			app("Twitterrific"):mainWindow():raise()
 		end
 	end
-end
-
-anyAppActivationWatcher = aw.new(twitterrificNextToPseudoMax)
-anyAppActivationWatcher:start()
+end):start()
 
 --------------------------------------------------------------------------------
 
@@ -218,22 +185,20 @@ wf_finder = wf.new("Finder")
 	}
 	:subscribe(wf.windowDestroyed, function()
 		if #wf_finder:getWindows() == 0 then
-			-- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
-			app("Finder"):kill()
+			app("Finder"):kill() -- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 		elseif #wf_finder:getWindows() == 1 then
 			moveResizeCurWin("centered")
 		end
 	end)
 	:subscribe(wf.windowCreated, function(newWin)
+		local finderWins = wf_finder:getWindows()
 		if newWin:title() == "RomComs" then
 			moveResizeCurWin("maximized")
-		elseif #wf_finder:getWindows() == 1 then
+		elseif #finderWins == 1 then
 			moveResizeCurWin("centered")
-		elseif #wf_finder:getWindows() == 2 then
-			local win1 = wf_finder:getWindows()[1]
-			local win2 = wf_finder:getWindows()[2]
-			moveResize(win1, hs.layout.left50)
-			moveResize(win2, hs.layout.right50)
+		elseif #finderWins == 2 then
+			moveResize(finderWins[1], hs.layout.left50)
+			moveResize(finderWins[2], hs.layout.right50)
 		end
 
 		app("Finder"):selectMenuItem {"View", "Hide Sidebar"}
@@ -249,8 +214,7 @@ finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 			end
 		end)
 	end
-end)
-finderAppWatcher:start()
+end):start()
 
 --------------------------------------------------------------------------------
 
@@ -301,8 +265,7 @@ highlightsAppWatcher = aw.new(function(appName, eventType, appObject)
 	else
 		moveResizeCurWin("pseudo-maximized")
 	end
-end)
-highlightsAppWatcher:start()
+end):start()
 
 --------------------------------------------------------------------------------
 
@@ -322,8 +285,7 @@ draftsWatcher = aw.new(function(appName, eventType, appObject)
 			appObject:selectMenuItem {"View", "Hide Toolbar"}
 		end)
 	end
-end)
-draftsWatcher:start()
+end):start()
 
 --------------------------------------------------------------------------------
 
@@ -339,7 +301,7 @@ function spotifyTUI(toStatus) -- has to be non-local function
 	end
 end
 
-local function spotifyToggler(appName, eventType)
+spotifyAppWatcher = aw.new(function(appName, eventType)
 	if appName == "YouTube" or appName == "zoom.us" or appName == "FaceTime" then
 		if eventType == aw.launched then
 			spotifyTUI("pause")
@@ -347,9 +309,7 @@ local function spotifyToggler(appName, eventType)
 			spotifyTUI("play")
 		end
 	end
-end
-
-spotifyAppWatcher = aw.new(spotifyToggler)
+end)
 if not (isAtOffice()) then spotifyAppWatcher:start() end
 
 --------------------------------------------------------------------------------
@@ -371,7 +331,7 @@ wf_script_editor = wf.new("Script Editor")
 --------------------------------------------------------------------------------
 
 -- DISCORD
-local function discordWatcher(appName, eventType)
+discordAppWatcher = aw.new(function(appName, eventType)
 	if appName ~= "Discord" then return end
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
@@ -399,10 +359,7 @@ local function discordWatcher(appName, eventType)
 			hs.pasteboard.setContents(clipb)
 		end
 	end
-end
-
-discordAppWatcher = aw.new(discordWatcher)
-discordAppWatcher:start()
+end):start()
 
 --------------------------------------------------------------------------------
 
@@ -424,5 +381,4 @@ warpWatcher = aw.new(function(appName, eventType)
 	if appName == "Warp" and eventType == aw.launched then
 		keystroke({"cmd"}, "k") -- clear
 	end
-end)
-warpWatcher:start()
+end):start()

@@ -61,7 +61,7 @@ function toggleDraftsSidebar(draftsWin)
 	runWithDelays({0.05, 0.2}, function()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
-		if (drafts_w / screen_w > 0.6) then
+		if drafts_w / screen_w > 0.6 then
 			openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 		else
 			openLinkInBackground("drafts://x-callback-url/runAction?text=&action=hide-sidebar")
@@ -76,7 +76,7 @@ function toggleHighlightsSidebar(highlightsWin)
 		local screen_w = highlightsWin:screen():frame().w
 		local highlightsApp = hs.application("Highlights")
 		highlightsApp:activate()
-		if (highlights_w / screen_w > 0.6) then
+		if highlights_w / screen_w > 0.6 then
 			highlightsApp:selectMenuItem {"View", "Show Sidebar"}
 		else
 			highlightsApp:selectMenuItem {"View", "Hide Sidebar"}
@@ -89,7 +89,7 @@ end
 function toggleObsidianSidebar(obsiWin)
 	runWithDelays({0.05, 0.2}, function()
 		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
-		if (numberOfObsiWindows > 1) then return end -- prevent popout window resizing to affect sidebars
+		if numberOfObsiWindows > 1 then return end -- prevent popout window resizing to affect sidebars
 
 		local obsi_width = obsiWin:frame().w
 		local screen_width = obsiWin:screen():frame().w
