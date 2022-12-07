@@ -13,25 +13,18 @@ bindEverywhere "^U" kill-whole-line
 bindEverywhere "^P" copy-location
 bindEverywhere "^B" copy-buffer
 bindEverywhere "^L" open-location
-bindEverywhere "^V" yank # (the emacs-yank which can be used to re-paste a line killed)
-bindEverywhere '“' quote-all-args # “=alt+2
 bindEverywhere '…' insert-last-word # …=alt+.
 
-# [f]orward to editor
+# edit in Vim
 autoload edit-command-line
 zle -N edit-command-line
-bindEverywhere '^F' edit-command-line
+bindEverywhere '^V' edit-command-line
 
 # zsh-autosuggest
 bindkey -M viins '^[[32;5~' autosuggest-execute # ctrl+esc (with esc remapped to f18)
 
 # shift+tab: Cycle through base directories
 bindEverywhere "^[[Z" dir-cycler
-
-# [alt+arrow] - move word forward or backward (like on Mac)
-bindkey "^[[1;3C" forward-word
-bindkey "^[[1;3D" backward-word
-
 
 #-------------------------------------------------------------------------------
 # INFO: use ctrl-v and then a key combination to get the shell binding
@@ -58,15 +51,6 @@ copy-buffer () {
 	zle -M "Buffer copied."
 }
 zle -N copy-buffer
-
-quote-all-args() {
-	if [[ "$BUFFER" =~ " " ]] ; then
-		BUFFER="$(echo "$BUFFER" | sed 's/ / "/' | sed 's/$/"/' )"
-	else
-		BUFFER="\"$BUFFER\""
-	fi
-}
-zle -N quote-all-args
 
 function dir-cycler () {
 	if [[ "$PWD" == "$WD" ]]; then

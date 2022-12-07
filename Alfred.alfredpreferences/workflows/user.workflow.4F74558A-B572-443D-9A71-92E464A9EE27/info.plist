@@ -38,7 +38,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A6633D9C-EF3D-4A41-A6C5-874457C95DA6</string>
+				<string>6BED75D2-2489-4A1C-9DDF-07EA26D14164</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -350,21 +350,17 @@
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>17</integer>
+				<integer>0</integer>
 				<key>hotmod</key>
-				<integer>1966080</integer>
+				<integer>0</integer>
 				<key>hotstring</key>
-				<string>T</string>
+				<string></string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
 				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>org.yanex.marta</string>
-				</array>
 				<key>relatedAppsMode</key>
-				<integer>2</integer>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
@@ -452,23 +448,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>paths</key>
-				<array>
-					<string>/System/Volumes/Data/Applications/Warp.app</string>
-				</array>
-				<key>toggle</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.launchfiles</string>
-			<key>uid</key>
-			<string>A6633D9C-EF3D-4A41-A6C5-874457C95DA6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -478,21 +457,17 @@
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>0</integer>
+				<integer>17</integer>
 				<key>hotmod</key>
-				<integer>0</integer>
+				<integer>1966080</integer>
 				<key>hotstring</key>
-				<string></string>
+				<string>T</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
 				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>org.yanex.marta</string>
-				</array>
 				<key>relatedAppsMode</key>
-				<integer>2</integer>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
@@ -500,6 +475,23 @@
 			<string>43FED74A-4CD7-4ED2-9ED0-4952120C4B79</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/System/Volumes/Data/Applications/Alacritty.app</string>
+				</array>
+				<key>toggle</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>6BED75D2-2489-4A1C-9DDF-07EA26D14164</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -735,6 +727,8 @@ echo "$backup"</string>
 	<dict>
 		<key>01443011-3B15-41D0-8772-EFD75B0FE5B8</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>Quake Mode</string>
 			<key>xpos</key>
@@ -760,6 +754,8 @@ echo "$backup"</string>
 		</dict>
 		<key>43FED74A-4CD7-4ED2-9ED0-4952120C4B79</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>Quake Mode</string>
 			<key>xpos</key>
@@ -796,6 +792,8 @@ echo "$backup"</string>
 		</dict>
 		<key>616AF66D-17DC-445B-8F58-EBC80A1556CE</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
@@ -812,8 +810,19 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>570</real>
 		</dict>
+		<key>6BED75D2-2489-4A1C-9DDF-07EA26D14164</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>240</real>
+			<key>ypos</key>
+			<real>435</real>
+		</dict>
 		<key>7715FAE1-9F26-411B-B95B-7D9D41BAA899</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
@@ -821,6 +830,8 @@ echo "$backup"</string>
 		</dict>
 		<key>8E587366-49C7-4513-BFAB-3841D8E89D79</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>
@@ -851,13 +862,6 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>695</real>
 		</dict>
-		<key>A6633D9C-EF3D-4A41-A6C5-874457C95DA6</key>
-		<dict>
-			<key>xpos</key>
-			<real>240</real>
-			<key>ypos</key>
-			<real>435</real>
-		</dict>
 		<key>A883397A-C748-4E51-B5EB-96B4F58AADCD</key>
 		<dict>
 			<key>colorindex</key>
@@ -871,6 +875,8 @@ echo "$backup"</string>
 		</dict>
 		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>open Alacritty with config</string>
 			<key>xpos</key>
@@ -889,6 +895,8 @@ echo "$backup"</string>
 		</dict>
 		<key>E0C75078-1F39-43D8-9A91-F93AA5784104</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
