@@ -52,6 +52,8 @@ local source_icons = {
 
 --------------------------------------------------------------------------------
 
+opt.completeopt = {"menu", "menuone", "noselect"}
+
 cmp.setup {
 	snippet = {
 		-- REQUIRED a snippet engine must be specified and installed

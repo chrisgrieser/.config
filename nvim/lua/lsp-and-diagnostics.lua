@@ -129,52 +129,60 @@ keymap("n", "<leader>a", vim.lsp.buf.code_action)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local function on_attach(client, bufnr)
-	local bufopts = {silent = true, buffer = true}
-	require("lsp-inlayhints").on_attach(client, bufnr)
 
-	if client.server_capabilities.documentSymbolProvider then
-		require("nvim-navic").attach(client, bufnr)
+augroup("LSP", {})
+autocmd("LspAttach", {
+	group = "LSP",
+	callback = function(args)
+		local bufnr = args.buf
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		local bufopts = {silent = true, buffer = true}
+
+		require("lsp-inlayhints").on_attach(client, bufnr)
+
+		if client.server_capabilities.documentSymbolProvider then
+			require("nvim-navic").attach(client, bufnr)
+		end
+
+		if client.server_capabilities.renameProvider then
+			keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts) -- overrides treesitter-refactor's rename
+		end
+
+		keymap("n", "gd", telescope.lsp_definitions, bufopts)
+		keymap("n", "gD", telescope.lsp_references, bufopts)
+		keymap("n", "gy", telescope.lsp_type_definitions, bufopts)
+		keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)
+		keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
+
+		if client.name == "sumneko_lua" then -- HACK since formatting with lua lsp seems to remove folds?!
+			keymap({"n", "x", "i"}, "<D-s>", function()
+				cmd [[mkview!]]
+				vim.lsp.buf.format {async = false} -- not async to avoid race condition
+				cmd [[noautocmd write! | edit %]] -- reload, no autocmd to not trigger rememberFolds augroup, with mkview (of the now non-existing folds) on bufleave
+				cmd [[loadview]]
+			end, bufopts)
+		else
+			keymap({"n", "x", "i"}, "<D-s>", function()
+				if bo.filetype == "javascript" or bo.filetype == "typescript" then
+					vim.lsp.buf.format {async = false}
+					cmd [[update!]]
+					cmd [[EslintFixAll]] -- eslint-lsp
+				else
+					vim.lsp.buf.format {async = true}
+				end
+				cmd [[write!]]
+			end, bufopts)
+		end
+
+		if bo.filetype ~= "css" then -- don't override navigation marker search for css files
+			keymap("n", "gs", telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
+			keymap("n", "gS", telescope.lsp_workspace_symbols, bufopts)
+		end
 	end
-
-	if client.server_capabilities.renameProvider then
-		keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts) -- overrides treesitter-refactor's rename
-	end
-
-	keymap("n", "gd", telescope.lsp_definitions, bufopts)
-	keymap("n", "gD", telescope.lsp_references, bufopts)
-	keymap("n", "gy", telescope.lsp_type_definitions, bufopts)
-	keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)
-	keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
-
-	if client.name == "sumneko_lua" then -- HACK since formatting with lua lsp seems to remove folds?!
-		keymap({"n", "x", "i"}, "<D-s>", function()
-			cmd [[mkview!]]
-			vim.lsp.buf.format{async = false} -- not async to avoid race condition
-			cmd [[noautocmd write! | edit %]] -- reload, no autocmd to not trigger rememberFolds augroup, with mkview (of the now non-existing folds) on bufleave
-			cmd [[loadview]]
-		end, bufopts)
-	else
-		keymap({"n", "x", "i"}, "<D-s>", function()
-			if bo.filetype == "javascript" or bo.filetype == "typescript" then
-				vim.lsp.buf.format {async = false}
-				cmd [[update!]]
-				cmd [[EslintFixAll]] -- eslint-lsp
-			else
-				vim.lsp.buf.format {async = true}
-			end
-			cmd [[write!]]
-		end, bufopts)
-	end
-
-	if bo.filetype ~= "css" then -- don't override navigation marker search for css files
-		keymap("n", "gs", telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
-		keymap("n", "gS", telescope.lsp_workspace_symbols, bufopts)
-	end
-end
+})
 
 -- copy breadcrumbs (nvim navic)
-keymap("n", "<C-b>", function()
+keymap("n", "<D-b>", function()
 	if require("nvim-navic").is_available() then
 		local rawdata = require("nvim-navic").get_data()
 		local breadcrumbs = ""
@@ -217,7 +225,7 @@ lspSettings.sumneko_lua = {
 				keep_one_space_between_table_and_bracket = "false",
 				keep_one_space_between_namedef_and_attribute = "false",
 				continuous_assign_table_field_align_to_equal_sign = "false",
-				continuation_indent_size = tostring(opt.tabstop:get()),
+				-- continuation_indent_size = tostring(opt.tabstop:get()),
 			},
 		},
 		completion = {
@@ -343,7 +351,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- configure all lsp servers
 for _, lsp in pairs(lsp_servers) do
 	local config = {
-		on_attach = on_attach,
+		-- on_attach = on_attach,
 		capabilities = capabilities,
 	}
 	if lspSettings[lsp] then

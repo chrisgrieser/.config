@@ -298,8 +298,5 @@ require("lualine").setup {
 			statusline = specialFiletypes,
 			winbar = specialFiletypes,
 		},
-		refresh = {
-			statusline = 500,
-		}
 	},
 }
