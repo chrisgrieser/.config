@@ -259,9 +259,9 @@ end)
 keymap("n", "!", "a <Esc>h") -- insert space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
-keymap("n", "d<Space>", function() -- reduce multiple blank lines to exactly one
+keymap("n", "d<Space>", function() -- delete blank lines
 	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
-		cmd [[normal! "_dipO]]
+		cmd [[normal! "_dip]]
 	else
 		vim.notify(" Line not empty.", logWarn)
 	end
