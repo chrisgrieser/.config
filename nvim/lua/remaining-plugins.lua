@@ -31,16 +31,17 @@ autocmd("FileType", {
 -- https://neovim.io/doc/user/luvref.html#luv-fs-event-handle
 -- https://github.com/rktjmp/fwatch.nvim/blob/main/lua/fwatch.lua#L16
 -- https://neovim.io/doc/user/lua.html#lua-loop
-
 local w = vim.loop.new_fs_event()
 local function on_change(err)
 	if err then
 		print(err)
 		return
 	end
-	vim.notify("file has changed")
-	w:stop() ---@diagnostic disable-line: need-check-nil
+	print("file has changed")
+	if w then w:stop() end
 end
 
-local fullpath = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/bla.txt"
-w:start(fullpath, {}, on_change) ---@diagnostic disable-line: need-check-nil
+local watchedFile = "/tmp/nvim"
+if w then
+	w:start(watchedFile, {}, on_change)
+end
