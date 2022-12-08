@@ -21,7 +21,7 @@ keymap("n", "<leader>T", telescope.colorscheme)
 keymap("n", "<leader>H", telescope.highlights)
 
 -- Mason
-keymap("n", "<leader>m", ":Mason<CR>")
+keymap("n", "<leader>M", ":Mason<CR>")
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
@@ -93,6 +93,8 @@ keymap("n", "^", "za") -- quicker toggling of folds
 -- [M]atch
 keymap({"n", "x", "o"}, "m", "%")
 
+-- Middle of the Line
+keymap({"n", "x"}, "gm", "gM") 
 --------------------------------------------------------------------------------
 -- NAVIGATION PLUGINS
 
@@ -283,12 +285,10 @@ keymap("n", "ü", "mzlblgueh~`z")
 keymap("n", "Ü", qol.reverse)
 
 -- <leader>{char} → Append {char} to end of line
-local trailingKeys = {".", ",", ";", ":", '"', "'", "(", ")", "[", "]", "{", "}", "|", "/", "\\", "`"}
+local trailingKeys = {".", ",", ";", ":", '"', "'"}
 for _, v in pairs(trailingKeys) do
 	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z")
 end
--- Remove last character from line, e.g., a trailing comma
-keymap("n", "X", 'mz$"_x`z')
 
 -- Spelling (mnemonic: [z]pe[l]ling)
 keymap("n", "zl", telescope.spell_suggest)
@@ -354,8 +354,7 @@ keymap("x", "<Left>", qol.moveSelectionLeft)
 
 -- Merging / Splitting Lines
 keymap({"n", "x"}, "M", "J") -- [M]erge line up
-keymap({"n", "x"}, "gM", "gJ") -- [M]erge line up, don't add spaces
-keymap({"n", "x"}, "gm", "ddpkJ") -- [m]erge line down
+keymap({"n", "x"}, "<leader>m", "ddpkJ") -- [m]erge line down
 keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 
 -- TreeSJ plugin + Splitjoin-Fallback

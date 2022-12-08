@@ -36,8 +36,8 @@ keymap({"n", "x"}, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 --------------------------------------------------------------------------------
 
 keymap("n", "cv", "^Ewct;", opts) -- change [v]alue key
-keymap("n", "<leader>c", "mzlEF.yEEp`z", opts) -- double [c]lass under cursor
-keymap("n", "<leader>C", "lF.d/[.\\s]<CR>:nohl<CR>", opts) -- delete [c]lass under cursor
+keymap("n", "yc", "mzlEF.yEEp`z", opts) -- yank (double) [c]lass under cursor
+keymap("n", "dc", "lF.d/[.\\s]<CR>:nohl<CR>", opts) -- delete [c]lass under cursor
 
 -- smart line duplicate (mnemonic: [R]eplicate)
 -- switches top/bottom & moves to value
