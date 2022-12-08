@@ -91,7 +91,7 @@ auto_dark_mode.setup {
 	set_dark_mode = function()
 		vim.o.background = "dark"
 		cmd("colorscheme " .. darkTheme)
-		g.neovide_transparency = 0.95
+		g.neovide_transparency = 0.94
 		themeModifications() -- for some reason, the ColorScheme is not triggered here, requiring the call here
 		customHighlights()
 	end,

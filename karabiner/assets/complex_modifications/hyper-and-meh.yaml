@@ -72,17 +72,17 @@ rules:
           modifiers: {mandatory: [control, command, shift, option]}
         to:
           - shell_command: |
-              osascript -e '
-                set home to (POSIX path of (path to home folder as string))
-                set the_folder to (home & ".Trash") as POSIX file
-                tell application "Finder"
+              target="$HOME/.Trash"
+              osascript -e "
+                set the_folder to (\"$target\") as POSIX file
+                tell application \"Finder\"
                   activate
                   if front Finder window exists then
                     set target of front Finder window to the_folder
                   else
                     open the_folder
                   end if
-                end tell'
+                end tell"
           - key_code: vk_none
             hold_down_milliseconds: 200
           - key_code: "2" # list view
@@ -95,7 +95,6 @@ rules:
         to:
           - shell_command: |
               target="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-              [[ -e "$target" ]] || target="$HOME/Downloads"
               osascript -e "
                 set the_folder to (\"$target\") as POSIX file
                 tell application \"Finder\"
