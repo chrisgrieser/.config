@@ -33,11 +33,10 @@ function toggleDarkMode()
 			end if
 			if (openBlank)
 				open location "https://www.blank.org/"
-				delay 0.5
+				delay 0.4
 			end if
 		end tell
 
-		# toggle OS theme
 		tell application "System Events" to tell appearance preferences to set dark mode to not dark mode
 
 		if (openBlank)
@@ -57,7 +56,7 @@ end
 ---@return boolean
 function isDarkMode()
 	-- reading this via shell rather than applescript is less laggy
-	local isDark = hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n"
+	local isDark = hs.execute[[defaults read -g AppleInterfaceStyle]] == "Dark\n"
 	return isDark
 end
 
