@@ -2,7 +2,8 @@ require("utils")
 --------------------------------------------------------------------------------
 
 local lightTheme = "melange"
-local darkTheme = "tokyonight-moon"
+local darkTheme = "nightfox"
+-- local darkTheme = "tokyonight-moon"
 
 --------------------------------------------------------------------------------
 -- CUSTOM HIGHLIGHTS & Theme Customization

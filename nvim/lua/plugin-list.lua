@@ -13,7 +13,7 @@ function M.PluginList()
 	-- Themes
 	use "folke/tokyonight.nvim"
 	use "savq/melange" -- like Obsidian's Primary color scheme
-	-- use "EdenEast/nightfox.nvim"
+	use "EdenEast/nightfox.nvim"
 	-- use "rebelot/kanagawa.nvim"
 
 	-- Treesitter
