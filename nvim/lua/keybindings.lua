@@ -64,13 +64,9 @@ keymap("n", "<C-l>", "<C-i>") -- Forward
 -- Search
 keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout
 keymap("n", "<Esc>", function() -- clear all
-	-- if more than 10 notifications are in the queue, clear them all (mostly for bugs)
-	local notify = require("notify")
-	if notify.pending() > 10 then
-		notify.dismiss {pending = true}
-	else
-		notify.dismiss() -- clear notifications
-	end
+	-- if more than 10 notifications are in the queue, clear them all
+	local clearPending = require("notify").pending() > 10 and true or false
+	require("notify").dismiss{pending = clearPending} -- clear notifications
 	cmd [[nohl]] -- clear highlights
 	cmd [[echo]] -- clear shortmessage
 	cmd [[normal!lh]] -- clear lsp hover window
@@ -94,7 +90,7 @@ keymap("n", "^", "za") -- quicker toggling of folds
 keymap({"n", "x", "o"}, "m", "%")
 
 -- Middle of the Line
-keymap({"n", "x"}, "gm", "gM") 
+keymap({"n", "x"}, "gm", "gM")
 --------------------------------------------------------------------------------
 -- NAVIGATION PLUGINS
 
