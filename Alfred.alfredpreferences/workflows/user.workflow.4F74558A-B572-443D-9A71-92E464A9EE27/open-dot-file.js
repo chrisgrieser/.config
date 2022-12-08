@@ -53,41 +53,41 @@ workArray.forEach(file => {
 	let parentPart = filePath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
 	if (parentPart === ".") parentPart = "";
 
-	let iconObject;
+	let iconObj;
 	let ext = fileName.split(".").pop();
 	if (ext.includes("rc")) ext = "rc"; // rc files
 	else if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
 	switch (ext) {
 		case "json":
-			iconObject = { "path": "icons/json.png" };
+			iconObj = { "path": "icons/json.png" };
 			break;
 		case "lua":
-			iconObject = { "path": "icons/lua.png" };
+			iconObj = { "path": "icons/lua.png" };
 			break;
 		case "yaml":
 		case "yml":
-			iconObject = { "path": "icons/yaml.png" };
+			iconObj = { "path": "icons/yaml.png" };
 			break;
 		case "js":
-			iconObject = { "path": "icons/js.png" };
+			iconObj = { "path": "icons/js.png" };
 			break;
 		case "zsh":
 		case "sh":
-			iconObject = { "path": "icons/shell.png" };
+			iconObj = { "path": "icons/shell.png" };
 			break;
 		case "rc":
-			iconObject = { "path": "icons/rc.png" };
+			iconObj = { "path": "icons/rc.png" };
 			break;
 		case "": // = folder
 		default:
-			iconObject = { "type": "fileicon", "path": filePath }; // by default, use file icon
+			iconObj = { "type": "fileicon", "path": filePath }; // by default, use file icon
 	}
 
 	jsonArray.push({
 		"title": fileName,
 		"subtitle": "▸ " + parentPart,
 		"match": alfredMatcher(`${fileName} ${parentPart}`),
-		"icon": iconObject,
+		"icon": iconObj,
 		"type": "file:skipcheck",
 		"uid": filePath,
 		"arg": filePath,
@@ -108,15 +108,15 @@ jsonArray.push({
 	"arg": dotfileFolder,
 });
 
-const pw = home + "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Authentification/.password-store";
+const pwPath = home + "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Authentification/.password-store";
 jsonArray.push({
 	"title": ".password-store",
 	"subtitle": "▸ Dotfolder/Authentification/",
-	"match": alfredMatcher(pw),
+	"match": alfredMatcher(pwPath),
 	"icon": { "type": "fileicon", "path": dotfileFolder },
 	"type": "file:skipcheck",
-	"uid": pw,
-	"arg": pw,
+	"uid": pwPath,
+	"arg": pwPath,
 });
 
 JSON.stringify({ items: jsonArray });
