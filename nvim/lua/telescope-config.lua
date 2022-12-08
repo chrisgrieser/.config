@@ -7,20 +7,21 @@ require("telescope").setup {
 		prompt_prefix = "❱ ",
 		path_display = {"tail"},
 		file_ignore_patterns = {
-			"packer_compiled.lua",
-			"packer%-snapshot_",
-			"%.DS_Store",
+			"packer_compiled.lua", -- packer
+			"packer%-snapshot_", -- packer
+			"%.DS_Store", -- Mac system file
 			"%.git/",
-			"%.spl",
+			"%.spl", -- vim spell files
 			"%.log",
 			"%[No Name%]", -- new files / sometimes folders (netrw)
 			"/$", -- ignore folders (netrw)
-			"node_modules/",
-			"venv/",
+			"node_modules/", -- js
+			"venv/", -- python
+			"lib/", -- python
 			"%.png",
 			"%.zip",
 			"%.pxd",
-			"%.spoon",
+			"%.spoon", -- Hammerspoon
 			"%.plist", -- Alfred Config Data
 			"%.string",
 		},
