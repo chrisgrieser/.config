@@ -193,32 +193,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C5110F20-5D1C-438B-862D-177C45274CDD</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>95E5B67E-7350-4876-B7DF-90F25BC4A121</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>D5DAF813-DAB5-4CB4-A094-1E6785223E34</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C0B013A4-4D3F-43EE-AFFB-3EEE98E5BFAE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</key>
 		<array>
 			<dict>
@@ -729,58 +703,6 @@ IconIndex=0</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>file_path="$*"
-file_name="${file_path##*/}"
-file_without_ext="${file_name%.*}"
-parent_folder="${file_path%/*}"
-
-cd "$parent_folder"
-mkdir "$file_without_ext"
-mv "$file_name" ./"$file_without_ext"/"$file_without_ext".zip
-cd ./"$file_without_ext"
-
-unzip "$file_without_ext".zip
-mv "$file_without_ext".zip ~/.trash
-open .</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>95E5B67E-7350-4876-B7DF-90F25BC4A121</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Unzip as if .zip file</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>C5110F20-5D1C-438B-862D-177C45274CDD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
 				<string>file=$1
 
 mv -f "$file" "$HOME/.Trash/"</string>
@@ -814,40 +736,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
 			<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Applications/Preview.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>C0B013A4-4D3F-43EE-AFFB-3EEE98E5BFAE</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>1</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.adobe.pdf</string>
-				</array>
-				<key>name</key>
-				<string>Open with Preview</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>D5DAF813-DAB5-4CB4-A094-1E6785223E34</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -939,7 +827,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>220</real>
 			<key>ypos</key>
 			<real>230</real>
 		</dict>
@@ -983,19 +871,12 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
+			<key>note</key>
+			<string>URL action</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
 			<real>350</real>
-		</dict>
-		<key>95E5B67E-7350-4876-B7DF-90F25BC4A121</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>220</real>
-			<key>ypos</key>
-			<real>480</real>
 		</dict>
 		<key>993B0563-52D6-4547-B1D7-97E70FF55DB2</key>
 		<dict>
@@ -1024,15 +905,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>100</real>
 		</dict>
-		<key>C0B013A4-4D3F-43EE-AFFB-3EEE98E5BFAE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>220</real>
-			<key>ypos</key>
-			<real>600</real>
-		</dict>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<dict>
 			<key>colorindex</key>
@@ -1042,15 +914,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
-		<key>C5110F20-5D1C-438B-862D-177C45274CDD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>480</real>
-		</dict>
 		<key>D04D747E-97EE-434F-A844-51FF56BF67F2</key>
 		<dict>
 			<key>colorindex</key>
@@ -1059,15 +922,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>855</real>
 			<key>ypos</key>
 			<real>370</real>
-		</dict>
-		<key>D5DAF813-DAB5-4CB4-A094-1E6785223E34</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>600</real>
 		</dict>
 		<key>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</key>
 		<dict>

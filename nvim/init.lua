@@ -6,26 +6,27 @@ require("utils") -- must be 3rd
 --------------------------------------------------------------------------------
 
 require("options-and-autocmds")
-require("appearance")
+
+if isGui() then
+	require("theme-settings") -- should come first to start with the proper theme
+	require("gui-settings")
+else
+	require("terminal-only")
+end
 require("keybindings")
 require("file-watcher")
-
-require("surround-config")
-require("comment-config")
-require("telescope-config")
-require("treesitter-config")
-require("remaining-plugins")
+require("appearance")
 
 require("lsp-and-diagnostics") -- should come before completion, linter, and debugger
 require("completion")
 require("linter")
 require("debugger")
-require("snippets")
 
-if isGui() then
-	require("theme-settings")
-	require("gui-settings")
-	require("color-utilities")
-else
-	require("terminal-only")
-end
+require("surround-config")
+require("comment-config")
+require("telescope-config")
+require("treesitter-config")
+if isGui() then require("color-picker") end
+require("remaining-plugins")
+
+require("snippets")

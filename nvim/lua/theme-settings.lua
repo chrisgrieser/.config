@@ -3,13 +3,10 @@ require("utils")
 
 local lightTheme = "melange"
 local darkTheme = "tokyonight-moon"
--- local darkTheme = "kanagawa"
 
 --------------------------------------------------------------------------------
+-- CUSTOM HIGHLIGHTS & Theme Customization
 
--- CUSTOM HIGHLIGHTS
--- have to wrapped in function and regularly called due to auto-dark-mode
--- regularly resetting the theme
 local function customHighlights()
 	local highlights = {
 		"DiagnosticUnderlineError",
@@ -46,8 +43,6 @@ local function customHighlights()
 	-- cmd[[highlight Hlargs gui=underdashed cterm=underdashed]]
 end
 
-customHighlights() -- to apply on default
-
 local function themeModifications()
 	local mode = opt.background:get()
 	local theme = g.colors_name
@@ -69,7 +64,7 @@ local function themeModifications()
 		end
 		cmd("highlight GitSignsChange guifg=#acaa62")
 		cmd("highlight GitSignsAdd guifg=#7fcc82")
-		cmd[[highlight link ScrollView Folded]]
+		cmd [[highlight link ScrollView Folded]]
 	elseif theme == "dawnfox" then
 		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
 		cmd [[highlight VertSplit guifg=#b29b84]]
@@ -84,27 +79,6 @@ local function themeModifications()
 	end
 end
 
--- toggle theme with OS
-local auto_dark_mode = require("auto-dark-mode")
-auto_dark_mode.setup {
-	update_interval = 2500,
-	set_dark_mode = function()
-		vim.o.background = "dark"
-		cmd("colorscheme " .. darkTheme)
-		g.neovide_transparency = 0.94
-		themeModifications() -- for some reason, the ColorScheme is not triggered here, requiring the call here
-		customHighlights()
-	end,
-	set_light_mode = function()
-		vim.o.background = "light"
-		cmd("colorscheme " .. lightTheme)
-		g.neovide_transparency = 0.96
-		themeModifications()
-		customHighlights()
-	end,
-}
-auto_dark_mode.init()
-
 augroup("themeChange", {})
 autocmd("ColorScheme", {
 	group = "themeChange",
@@ -113,3 +87,26 @@ autocmd("ColorScheme", {
 		customHighlights()
 	end
 })
+
+--------------------------------------------------------------------------------
+-- DARK MODE / LIGHT MODE
+-- functions not local, so they can be accessed via file watcher
+function setDarkTheme()
+	vim.o.background = "dark"
+	cmd("colorscheme " .. darkTheme)
+	g.neovide_transparency = 0.94
+end
+
+function setLightTheme()
+	vim.o.background = "light"
+	cmd("colorscheme " .. lightTheme)
+	g.neovide_transparency = 0.95
+end
+
+-- automatically set dark or light mode on neovim startup (requires mac though)
+local macOStheme = fn.system([[defaults read -g AppleInterfaceStyle]]):gsub("\n$", "")
+if macOStheme == "Dark" then
+	setDarkTheme()
+else
+	setLightTheme()
+end

@@ -17,7 +17,7 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 		appName == "Alacritty") then return end
 	local win = appObject:mainWindow()
 
-	if (eventType == aw.activated or eventType == aw.launched) and (isPseudoMaximized(win) or isMaximized(win)) then
+	if (eventType == aw.activated or eventType == aw.launching) and (isPseudoMaximized(win) or isMaximized(win)) then
 		appObject:selectMenuItem("Hide Others")
 	elseif eventType == aw.terminated then
 		unHideAll()
@@ -56,9 +56,7 @@ spotifyAppWatcher = aw.new(function(appName, eventType)
 		end
 	end
 end)
-if not (isAtOffice()) then
-	spotifyAppWatcher:start()
-end
+if not (isAtOffice()) then spotifyAppWatcher:start() end
 
 --------------------------------------------------------------------------------
 

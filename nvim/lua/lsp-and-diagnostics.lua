@@ -222,7 +222,7 @@ lspSettings.sumneko_lua = {
 				keep_one_space_between_table_and_bracket = "false",
 				keep_one_space_between_namedef_and_attribute = "false",
 				continuous_assign_table_field_align_to_equal_sign = "false",
-				-- continuation_indent_size = tostring(opt.tabstop:get()),
+				continuation_indent_size = tostring(opt.tabstop:get()),
 			},
 		},
 		completion = {

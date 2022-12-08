@@ -97,12 +97,12 @@ function M.PluginList()
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use "nvim-lualine/lualine.nvim" -- status line
 	use "lewis6991/gitsigns.nvim" -- gutter signs
-	use "f-person/auto-dark-mode.nvim" -- auto-toggle themes with OS dark/light mode
 	use "stevearc/dressing.nvim" -- Selection Menus and Inputs
 	use "rcarriga/nvim-notify" -- notifications
 	use "uga-rosa/ccc.nvim" -- color previews & color utilites
 	use "dstein64/nvim-scrollview" -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
 	use "anuvyklack/pretty-fold.nvim" -- fold look customization
+	use "rareitems/hl_match_area.nvim"
 	use {"anuvyklack/windows.nvim", requires = "anuvyklack/middleclass"} -- auto-resize splits
 
 	-- File Switching & File Operation
