@@ -8,6 +8,7 @@ require("utils") -- must be 3rd
 require("options-and-autocmds")
 require("appearance")
 require("keybindings")
+require("file-watcher")
 
 require("surround-config")
 require("comment-config")

@@ -28,20 +28,3 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
--- https://neovim.io/doc/user/luvref.html#luv-fs-event-handle
--- https://github.com/rktjmp/fwatch.nvim/blob/main/lua/fwatch.lua#L16
--- https://neovim.io/doc/user/lua.html#lua-loop
-local w = vim.loop.new_fs_event()
-local function on_change(err)
-	if err then
-		print(err)
-		return
-	end
-	print("file has changed")
-	if w then w:stop() end
-end
-
-local watchedFile = "/tmp/nvim"
-if w then
-	w:start(watchedFile, {}, on_change)
-end
