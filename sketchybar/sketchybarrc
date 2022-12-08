@@ -12,15 +12,15 @@ if ! pgrep "Stats"; then
 	sleep 1
 fi
 
-PLUGIN_DIR="$HOME/.config/sketchybar/"
+PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
 ##### Bar Appearance #####
 # https://felixkratz.github.io/SketchyBar/config/bar
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-osascript -e 'tell application "System Events" to return dark mode of appearance preferences' | grep -q "false"
+defaults read -g AppleInterfaceStyle | grep -iq "Dark"
 IS_DARK_MODE=$?
-if [[ $IS_DARK_MODE -eq 1 ]]; then
+if [[ $IS_DARK_MODE -eq 0 ]]; then
 	BG_COLOR="0xff333333"
 	FONT_COLOR="0xffffffff"
 else
@@ -28,17 +28,26 @@ else
 	FONT_COLOR="0xff000000"
 fi
 
-scutil --get ComputerName | grep -q "iMac"
+scutil --get ComputerName | grep -iq "iMac"
 IS_AT_OFFICE=$?
-
 if [[ $IS_AT_OFFICE -eq 1 ]]; then
 	HEIGHT=25
 	ITEM_Y_OFFSET=2
+	# check for unreliable wifi at the office
+	# explanation on using "set" here: https://www.shellcheck.net/wiki/SC2089
+	set -- --add alias "Control Centre,WiFi" right --set "Control Centre,WiFi"
 else
 	HEIGHT=35 # 10px using extra height to cover the holes at the corner where the wallpaper shines through
 	ITEM_Y_OFFSET=5
 fi
 
+# necessary, since the exact name of the menubar item changes a bit depending on installation 🙈
+network_bar_item=$(sketchybar --query default_menu_items | grep -Ei "Stats.*network" | cut -d\" -f2)
+cpu_bar_item=$(sketchybar --query default_menu_items | grep -Ei "Stats.*cpu" | cut -d\" -f2)
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# one big call to speed reloading up
 sketchybar --bar \
 	height="$HEIGHT" \
 	position=top \
@@ -56,18 +65,7 @@ sketchybar --bar \
 	label.padding_right=6 \
 	icon.padding_left=1 \
 	icon.padding_right=2 \
-	y_offset="$ITEM_Y_OFFSET"
-
-##### Items #####
-# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
-# get names of original menubar items to add as alias:
-# `sketchybar --query default_menu_items`
-
-# necessary, since the exact name of the menubar item changes a bit depending on installation 🙈
-network_bar_item=$(sketchybar --query default_menu_items | grep -Ei "Stats.*network" | cut -d\" -f2)
-cpu_bar_item=$(sketchybar --query default_menu_items | grep -Ei "Stats.*cpu" | cut -d\" -f2)
-
-sketchybar \
+	y_offset="$ITEM_Y_OFFSET" \
 	--add item clock right \
 	--set clock update_freq=1 \
 	script="$PLUGIN_DIR/clock.sh" \
@@ -90,11 +88,8 @@ sketchybar \
 	script="$PLUGIN_DIR/git-sync.sh" \
 	--add event repo-files-update \
 	--subscribe git-sync repo-files-update \
-	--subscribe git-sync system_woke
-
-# check for unreliable wifi at the office
-# alternative: https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-3065175
-[[ $IS_AT_OFFICE -eq 1 ]] && sketchybar --add alias "Control Centre,WiFi"
+	--subscribe git-sync system_woke \
+	"$@"
 
 # NOTES:
 # - `repo-files-update` gets triggered via Hammerspoon path watcher

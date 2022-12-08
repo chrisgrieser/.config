@@ -112,96 +112,6 @@ function M.duplicateSelection()
 	fn.setreg("z", prevReg)
 end
 
--- Drop-in replacement for vim's `~` command.
--- - If the word under cursor has a reasonable opposite in the current language
---   (e.g., "top" and "bottom" in css), then the word will be toggled.
--- - Otherwise will check character under cursor. If it is a "reversible"
---   character, the character will be switched, e.g. "(" to ")".
--- - If the character is a letter, falls back to the default `~` behavior of
---   toggling between upper and lower case.
-function M.reverse()
-	local word
-	local wordchar = bo.iskeyword
-	local dashIsKeyword = wordchar:find(",%-$") or wordchar:find(",%-,") or wordchar:find("^%-,")
-	if dashIsKeyword then
-		bo.iskeyword = wordchar:gsub("%-,", ""):gsub(",%-", "")
-		word = wordUnderCursor()
-		bo.iskeyword = wordchar
-	else
-		word = wordUnderCursor()
-	end
-
-	local col = getCursor(0)[2] + 1
-	local char = getline(".") ---@type string
-	char = char:sub(col, col)
-
-	-- toggle words
-	local opposite = ""
-	if word == "true" then opposite = "false"
-	elseif word == "false" then opposite = "true"
-	end
-
-	if bo.filetype == "css" then
-		if word == "top" then opposite = "bottom"
-		elseif word == "bottom" then opposite = "top"
-		elseif word == "left" then opposite = "right"
-		elseif word == "right" then opposite = "left"
-		elseif word == "width" then opposite = "height"
-		elseif word == "height" then opposite = "width"
-		elseif word == "absolute" then opposite = "relative"
-		elseif word == "relative" then opposite = "absolute"
-		end
-	elseif bo.filetype == "lua" then
-		if word == "and" then opposite = "or"
-		elseif word == "or" then opposite = "and"
-		end
-	elseif bo.filetype == "python" then
-		if word == "True" then opposite = "False"
-		elseif word == "False" then opposite = "True"
-		end
-	elseif bo.filetype == "javascript" or bo.filetype == "typescript" then
-		if word == "const" then opposite = "let"
-		elseif word == "let" then opposite = "const"
-		end
-	end
-
-	if opposite ~= "" then
-		cmd('normal! "_ciw' .. opposite)
-		return
-	end
-
-	-- toggle case (regular ~)
-	local isLetter = char:lower() ~= char:upper()
-	if isLetter then
-		cmd [[normal! ~h]]
-		return
-	end
-
-	-- switch punctuation
-	local switched = ""
-	if char == "<" then switched = ">"
-	elseif char == ">" then switched = "<"
-	elseif char == "(" then switched = ")"
-	elseif char == ")" then switched = "("
-	elseif char == "]" then switched = "["
-	elseif char == "[" then switched = "]"
-	elseif char == "{" then switched = "}"
-	elseif char == "}" then switched = "{"
-	elseif char == "/" then switched = "\\"
-	elseif char == "\\" then switched = "/"
-	elseif char == "'" then switched = '"'
-	elseif char == '"' then switched = "'"
-	elseif char == "," then switched = ";"
-	elseif char == ";" then switched = ","
-	end
-	if switched ~= "" then
-		cmd("normal! r" .. switched)
-		return
-	end
-
-	vim.notify(" Nothing under the cursor can be switched.", logWarn)
-end
-
 --------------------------------------------------------------------------------
 -- UNDO
 -- Save
@@ -345,7 +255,7 @@ function M.moveLineUp()
 end
 
 function M.moveCharRight()
-	if colNo(".") >= colNo("$") - 2 then return end
+	if colNo(".") >= colNo("$") - 1 then return end
 	cmd [[:normal! xp]]
 end
 

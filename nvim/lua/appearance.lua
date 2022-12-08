@@ -7,7 +7,7 @@ cmd [[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
 
 -- Annotations
 cmd [[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
-cmd [[call matchadd('myAnnotations', '\<\(BUG\|WTF\|HACK\|TODO\|INFO\|NOTE\|WARNING\|WARN\|REQUIRED\)\>') ]]
+cmd [[call matchadd('myAnnotations', '\<\(BUG\|WTF\|HACK\|TODO\|INFO\|NOTE\|WARNING\)\>') ]]
 
 --------------------------------------------------------------------------------
 -- Indentation
@@ -16,6 +16,11 @@ require("indent_blankline").setup {
 	use_treesitter = true,
 	strict_tabs = false,
 	filetype_exclude = specialFiletypes,
+}
+
+-- Match Scope
+require("hl_match_area").setup {
+	highlight_in_insert_mode = false,
 }
 
 --------------------------------------------------------------------------------
@@ -35,10 +40,9 @@ if isGui() then
 	require("notify").setup {
 		render = "minimal",
 		stages = "slide",
-		level = 0, -- minimum level to display (0 = display all)
-		minimum_width = 20,
+		level = 0, -- minimum severity level to display (0 = display all)
 		max_height = 15,
-		timeout = 4000,
+		timeout = 5000,
 		top_down = false,
 	}
 end

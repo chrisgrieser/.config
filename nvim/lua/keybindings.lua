@@ -276,9 +276,7 @@ keymap("x", "<S-Tab>", "<gv")
 
 -- toggle word between Capital and lower case
 keymap("n", "ü", "mzlblgueh~`z")
-
--- toggle case or switch direction of char (e.g. > to <)
-keymap("n", "Ü", qol.reverse)
+keymap("n", "Ü", "gUiw")
 
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'"}

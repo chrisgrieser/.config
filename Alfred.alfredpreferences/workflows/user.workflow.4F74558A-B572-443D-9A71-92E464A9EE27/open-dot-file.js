@@ -113,7 +113,7 @@ jsonArray.push({
 	"title": ".password-store",
 	"subtitle": "▸ Dotfolder/Authentification/",
 	"match": alfredMatcher(pwPath),
-	"icon": { "type": "fileicon", "path": dotfileFolder },
+	"icon": { "type": "fileicon", "path": pwPath },
 	"type": "file:skipcheck",
 	"uid": pwPath,
 	"arg": pwPath,

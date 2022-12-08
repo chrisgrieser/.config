@@ -8,34 +8,8 @@
 	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
-		<key>16AD6685-B0BC-4837-AB55-A91B3A5F3BBF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>53396461-6F23-4C54-8552-A49A69ED0854</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>1A2A5FF6-BADA-4BD7-AE6D-765E6891E0A6</key>
 		<array/>
-		<key>436E6838-C21C-4927-B4B9-D7CCB67587DE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1A2A5FF6-BADA-4BD7-AE6D-765E6891E0A6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>47528376-3FAB-4282-8213-DC8E45C19F7B</key>
 		<array>
 			<dict>
@@ -75,37 +49,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>69E45CE7-99B7-48A7-971A-A5DC960D59F1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4D67ED53-EADE-458A-B761-7F5070BEABA6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>7613AED8-E386-43CC-827A-45FEB206FD74</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>1A2A5FF6-BADA-4BD7-AE6D-765E6891E0A6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>76796A9D-1159-4E3C-8670-7D341A35351D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C9AE1538-F1F2-4507-B205-4C90E7503DC3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -145,19 +93,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>DA6F5742-B25C-4044-A613-90AFAA7C559F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C9AE1538-F1F2-4507-B205-4C90E7503DC3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>16AD6685-B0BC-4837-AB55-A91B3A5F3BBF</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -395,52 +330,24 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "System Events"
-	tell process "Mimestream"
-		set frontmost to true
-		click menu item "Copy Gmail URL" of menu "Message" of menu bar 1
-	end tell
-end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>send-mail_[Browser].applescript</string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C9AE1538-F1F2-4507-B205-4C90E7503DC3</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
 				<integer>0</integer>
 				<key>focusedappvariable</key>
-				<true/>
+				<false/>
 				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
+				<string></string>
 				<key>hotkey</key>
-				<integer>8</integer>
+				<integer>25</integer>
 				<key>hotmod</key>
-				<integer>917504</integer>
+				<integer>1048576</integer>
 				<key>hotstring</key>
-				<string>C</string>
+				<string>9</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
-				<integer>2</integer>
+				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
 					<string>com.mimestream.Mimestream</string>
@@ -451,28 +358,28 @@ end tell</string>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>76796A9D-1159-4E3C-8670-7D341A35351D</string>
+			<string>A253620F-FFA6-4E80-8C60-CE220D4D50DD</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>t</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1572864</integer>
+				<key>overridewithargument</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Gmail URL copied</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
 			<key>uid</key>
-			<string>53396461-6F23-4C54-8552-A49A69ED0854</string>
+			<string>98959A8A-01E4-411D-93B6-00D953F6B889</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -534,82 +441,6 @@ Chris</string>
 			<string>5F4417F9-1E15-4514-8C37-FEBEE68D292A</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{clipboard}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key></key>
-					<string></string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>16AD6685-B0BC-4837-AB55-A91B3A5F3BBF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>25</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>9</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.mimestream.Mimestream</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>A253620F-FFA6-4E80-8C60-CE220D4D50DD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>t</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1572864</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>98959A8A-01E4-411D-93B6-00D953F6B889</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -712,27 +543,6 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>ma snoozed</string>
-				<key>subtext</key>
-				<string>at Gmail Web</string>
-				<key>text</key>
-				<string>💤 Snoozed Mails</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>69E45CE7-99B7-48A7-971A-A5DC960D59F1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -775,27 +585,6 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>filters</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Filters in Gmail</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>7613AED8-E386-43CC-827A-45FEB206FD74</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -820,7 +609,7 @@ end tell</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>ma filters</string>
+				<string>filters</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -831,7 +620,7 @@ end tell</string>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>436E6838-C21C-4927-B4B9-D7CCB67587DE</string>
+			<string>7613AED8-E386-43CC-827A-45FEB206FD74</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -840,48 +629,30 @@ end tell</string>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>16AD6685-B0BC-4837-AB55-A91B3A5F3BBF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>860</real>
-			<key>ypos</key>
-			<real>180</real>
-		</dict>
 		<key>1A2A5FF6-BADA-4BD7-AE6D-765E6891E0A6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>955</real>
-		</dict>
-		<key>436E6838-C21C-4927-B4B9-D7CCB67587DE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>955</real>
+			<real>720</real>
 		</dict>
 		<key>47528376-3FAB-4282-8213-DC8E45C19F7B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>600</real>
 		</dict>
 		<key>4D67ED53-EADE-458A-B761-7F5070BEABA6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>600</real>
 		</dict>
@@ -895,15 +666,6 @@ end tell</string>
 			<real>300</real>
 			<key>ypos</key>
 			<real>450</real>
-		</dict>
-		<key>53396461-6F23-4C54-8552-A49A69ED0854</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>930</real>
-			<key>ypos</key>
-			<real>150</real>
 		</dict>
 		<key>5BD7290A-4D3C-4A41-A4D4-668385E514AB</key>
 		<dict>
@@ -927,34 +689,14 @@ end tell</string>
 			<key>ypos</key>
 			<real>165</real>
 		</dict>
-		<key>69E45CE7-99B7-48A7-971A-A5DC960D59F1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>600</real>
-		</dict>
 		<key>7613AED8-E386-43CC-827A-45FEB206FD74</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>830</real>
-		</dict>
-		<key>76796A9D-1159-4E3C-8670-7D341A35351D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>copy Gmail link</string>
-			<key>xpos</key>
-			<real>550</real>
-			<key>ypos</key>
-			<real>150</real>
+			<real>720</real>
 		</dict>
 		<key>8A5B08EE-864A-4668-98C6-D4F8E9A56580</key>
 		<dict>
@@ -990,7 +732,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>720</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>160</real>
 		</dict>
 		<key>9BF84B32-0217-4A0F-9F75-E541FFDA268D</key>
 		<dict>
@@ -1008,9 +750,9 @@ end tell</string>
 			<key>note</key>
 			<string>toggle toolbar</string>
 			<key>xpos</key>
-			<real>545</real>
+			<real>550</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>160</real>
 		</dict>
 		<key>C0DA5B2B-624A-4F09-956B-68158231988A</key>
 		<dict>
@@ -1022,15 +764,6 @@ end tell</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>450</real>
-		</dict>
-		<key>C9AE1538-F1F2-4507-B205-4C90E7503DC3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>720</real>
-			<key>ypos</key>
-			<real>150</real>
 		</dict>
 		<key>CE7614ED-D40C-491F-9512-567F3BDB68C0</key>
 		<dict>
