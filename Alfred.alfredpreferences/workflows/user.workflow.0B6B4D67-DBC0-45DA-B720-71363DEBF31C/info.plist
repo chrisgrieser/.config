@@ -22,16 +22,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Move file to front Finder Folder</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>64FEC427-2CB3-4EB1-8543-392E2319CBFC</string>
 				<key>modifiers</key>
 				<integer>8388608</integer>
@@ -511,6 +501,21 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>rename</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>8D046756-BF24-4658-BD57-CAB48FF61B9D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>jumpto</key>
 				<string>alfred.action.move</string>
 				<key>path</key>
@@ -522,21 +527,6 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 			<string>alfred.workflow.action.actioninalfred</string>
 			<key>uid</key>
 			<string>64FEC427-2CB3-4EB1-8543-392E2319CBFC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>rename</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>8D046756-BF24-4658-BD57-CAB48FF61B9D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -639,25 +629,6 @@ IconIndex=0</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>rename</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>com.vitorgalvao.alfred.renameaction</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>D04D747E-97EE-434F-A844-51FF56BF67F2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
@@ -692,6 +663,25 @@ IconIndex=0</string>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>EA84A1D9-5B40-48C6-B910-0E4E2E12B31C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>rename</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>com.vitorgalvao.alfred.renameaction</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>D04D747E-97EE-434F-A844-51FF56BF67F2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -758,9 +748,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1005</real>
+			<real>1000</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>540</real>
 		</dict>
 		<key>1B6838B5-A98F-4E36-B645-F289BA31A5F8</key>
 		<dict>
@@ -778,9 +768,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>delete file</string>
 			<key>xpos</key>
-			<real>855</real>
+			<real>850</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>540</real>
 		</dict>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<dict>
@@ -845,9 +835,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>855</real>
+			<real>850</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>290</real>
 		</dict>
 		<key>7B43FD68-D463-4626-BE13-7D1C65B12ECF</key>
 		<dict>
@@ -909,6 +899,8 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
+			<key>note</key>
+			<string>move to front window</string>
 			<key>xpos</key>
 			<real>855</real>
 			<key>ypos</key>
@@ -919,9 +911,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>855</real>
+			<real>850</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>410</real>
 		</dict>
 		<key>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</key>
 		<dict>
