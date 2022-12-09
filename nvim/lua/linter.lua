@@ -27,8 +27,8 @@ null_ls.setup {
 	sources = {
 		-- Global
 		builtins.code_actions.gitsigns, -- gitsigns.nvim plugin, e.g. reset hunks
-		builtins.diagnostics.codespell, -- common misspellings and
-		builtins.formatting.codespell, 
+		builtins.diagnostics.codespell, -- common misspellings. Far less false positives than with cspell
+		builtins.formatting.codespell, -- autofix those misspellings
 
 		-- SHELL
 		builtins.hover.printenv, -- show value of environment variable on hover command
@@ -65,7 +65,8 @@ null_ls.setup {
 		-- Markdown & Prose
 		builtins.diagnostics.vale,
 		builtins.diagnostics.markdownlint.with {
-			extra_args = {"--disable=trailing-spaces"}, -- vim already takes care of that
+			-- fixed via formatting command already
+			extra_args = {"--disable", "trailing-spaces", "no-multiple-blanks"},
 		},
 		builtins.hover.dictionary, -- vim's builtin dictionary
 		builtins.formatting.markdownlint,

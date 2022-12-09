@@ -3,16 +3,16 @@ local opts = {buffer = true, silent = true}
 --------------------------------------------------------------------------------
 
 -- hide URLs and other formatting, TODO: figure out how to hide only URLs
-setlocal("conceallevel", 2)
+-- setlocal("conceallevel", 2)
 
--- spelling
+-- spellcheck
 setlocal("spell", true)
 
 -- hack to make lists auto-continue via Return in Insert & o in normal mode
 -- i.e. replaces bullet.vim based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
 setlocal("comments", "b:*,b:-,b:+")
-local fo = getlocalopt("formatoptions"):gsub("[ct]", "") .. "ro" ---@diagnostic disable-line: undefined-field
-setlocal("formatoptions", fo)
+local foOpts = getlocalopt("formatoptions"):gsub("[ct]", "") .. "ro" 
+setlocal("formatoptions", foOpts)
 
 -- syntax highlighting in code blocks
 g.markdown_fenced_languages = {
@@ -29,7 +29,7 @@ g.markdown_fenced_languages = {
 }
 
 --------------------------------------------------------------------------------
--- custom text object markdown link
+--custom text object markdown link `il/al`
 b.miniai_config = {
 	custom_textobjects = {
 		l = {"%[().*()]%(.*%)"},
@@ -60,19 +60,8 @@ keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = true
 keymap({"n", "x"}, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], opts)
 keymap({"n", "x"}, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], opts)
 
--- Obsidian Vault
-keymap("n", "go", function()
-	if fn.expand("%:p:h"):find("main-vault") then
-		telescope.find_files {cwd = vaultFolder, prompt_prefix = " "}
-	else
-		telescope.find_files()
-	end
-end, opts)
-
 --------------------------------------------------------------------------------
--- Tasks
-keymap("n", "<leader>x", "mz^lllrx`z", opts) -- check markdown tasks
-
+--KEYBINDINGS WITH THE GUI
 if isGui() then
 	-- cmd+r: Markdown Preview
 	keymap("n", "<D-r>", "<Plug>MarkdownPreviewToggle", opts)
@@ -95,7 +84,4 @@ if isGui() then
 	-- cmd+4: bullet points
 	keymap("n", "<D-4>", "mzI- <Esc>`z", opts)
 	keymap("x", "<D-4>", ":s/^/- /<CR>", opts)
-
-	-- INFO: cmd+e for inline code done in gui-settings, since also used for other cases
-	-- outside of markdown (e.g. template strings)
 end
