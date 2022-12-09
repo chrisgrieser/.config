@@ -21,7 +21,9 @@ require("indent_blankline").setup {
 -- Match Scope
 require("hl_match_area").setup {
 	highlight_in_insert_mode = false,
+	delay = opt.updatetime:get(),
 }
+cmd [[highlight! def link MatchArea Visual]]
 
 --------------------------------------------------------------------------------
 -- SCROLLBAR
@@ -42,6 +44,7 @@ if isGui() then
 		stages = "slide",
 		level = 0, -- minimum severity level to display (0 = display all)
 		max_height = 15,
+		minimum_width = 10,
 		timeout = 5000,
 		top_down = false,
 	}
@@ -121,13 +124,13 @@ local function lsp_progress()
 	local client = messages[1].name and messages[1].name .. ": " or ""
 	if client:find("null%-ls") then return "" end
 
-	local progess = messages[1].percentage or 0
+	local progress = messages[1].percentage or 0
 	local task = messages[1].title or ""
 	task = task:gsub("^(%w+).*", "%1") -- only first word
 	local spinners = {"⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"}
 	local ms = vim.loop.hrtime() / 1000000
 	local frame = math.floor(ms / 120) % #spinners
-	return client .. progess .. "%% " .. task .. " " .. spinners[frame + 1]
+	return client .. progress .. "%% " .. task .. " " .. spinners[frame + 1]
 end
 
 local function recordingStatus()

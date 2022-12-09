@@ -30,7 +30,7 @@ local function customHighlights()
 	cmd [[highlight urls cterm=underline term=underline gui=underline]]
 	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&]*]])
 
-	-- rainbow brackets without agressive red…
+	-- rainbow brackets without aggressive red…
 	cmd [[highlight rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets…
 
 	-- treesittter refactor focus
@@ -38,11 +38,10 @@ local function customHighlights()
 	cmd [[highlight TSDefinitionUsage term=underline gui=underdotted]]
 
 	-- bugfix for https://github.com/neovim/neovim/issues/20456
-	cmd [[highlight! def link luaParenError NormalFloat]]
+	-- cmd [[highlight! def link luaParenError NormalFloat]]
 
-	-- hlargs
-	-- cmd[[highlight Hlargs gui=underdashed cterm=underdashed]]
 end
+g.ts_highlight_lua = true
 
 local function themeModifications()
 	local mode = opt.background:get()
