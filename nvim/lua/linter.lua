@@ -4,12 +4,13 @@ require("utils")
 -- INFO: these require null-ls name, not mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
 local lintersAndFormatters = {
 	"yamllint",
-	"shellcheck", -- needed for bash-lsp
-	"markdownlint",
-	"vale",
-	"selene",
-	"shfmt",
 	"yamlfmt",
+	"shellcheck", -- needed for bash-lsp
+	"shfmt", -- shell
+	"markdownlint",
+	"vale", -- natural language
+	"selene", -- lua linter
+	"codespell", -- common misspellings, autoformatted
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
@@ -24,7 +25,10 @@ local builtins = null_ls.builtins
 
 null_ls.setup {
 	sources = {
+		-- Global
 		builtins.code_actions.gitsigns, -- gitsigns.nvim plugin, e.g. reset hunks
+		builtins.diagnostics.codespell, -- common misspellings and
+		builtins.formatting.codespell, 
 
 		-- SHELL
 		builtins.hover.printenv, -- show value of environment variable on hover command
@@ -40,7 +44,7 @@ null_ls.setup {
 		-- CSS
 		builtins.formatting.stylelint.with {
 			-- using config without ordering, since ordering on save is confusing
-			extra_args = {"--config", dotfilesFolder.."/linter-configs/.stylelintrc-formatting.yml"},
+			extra_args = {"--config", dotfilesFolder .. "/linter-configs/.stylelintrc-formatting.yml"},
 		},
 		builtins.diagnostics.stylelint.with {-- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 			filetypes = {"css"},
@@ -48,7 +52,7 @@ null_ls.setup {
 		},
 
 		-- Lua
-		builtins.diagnostics.selene.with{
+		builtins.diagnostics.selene.with {
 			extra_args = {"--config", fn.expand("~/.config/linter-configs/selene.toml")}
 		},
 
