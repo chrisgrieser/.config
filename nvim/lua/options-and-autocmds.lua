@@ -2,8 +2,8 @@ require("utils")
 --------------------------------------------------------------------------------
 
 -- timeouts
-opt.timeoutlen = 1000 -- for awaiting keystrokes (no nowait)
-opt.updatetime = 200 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
+opt.timeoutlen = 1200 -- for awaiting keystrokes (no nowait)
+opt.updatetime = 250 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 
 -- Search
 opt.showmatch = true
@@ -171,11 +171,12 @@ autocmd("BufWinEnter", {
 -- Skeletons (Templates)
 -- apply templates for any filetype named `.config/nvim/templates/skeletion.{ft}`
 augroup("Templates", {})
-local filetypeList = fn.system('ls "$HOME/.config/nvim/templates/skeleton."* | xargs basename | cut -d. -f2')
+local skeletionPath = fn.stdpath("config").."/templates"
+local filetypeList = fn.system([[ls "]]..skeletionPath..[[/skeleton."* | xargs basename | cut -d. -f2]])
 local ftWithSkeletons = split(filetypeList, "\n")
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
-	local readCmd = "keepalt 0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! Go"
+	local readCmd = "keepalt 0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! G"
 
 	autocmd("BufNewFile", {
 		group = "Templates",
