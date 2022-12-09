@@ -47,19 +47,9 @@ function M.copyLastCommand()
 	vim.notify(" COPIED\n " .. lastCommand)
 end
 
----Run Last Command Again
-function M.runLastCommandAgain()
-	local lastCommand = fn.getreg(":")
-	if not (lastCommand) then
-		vim.notify(" No Command has been run yet. ", logWarn)
-		return
-	end
-	cmd(lastCommand)
-end
-
 --------------------------------------------------------------------------------
 
--- Duplicate line under cursor, and change occurences of certain words to their
+-- Duplicate line under cursor, and change occurrences of certain words to their
 -- opposite, e.g., "right" to "left". Intended for languages like CSS.
 ---@param opts? table available: reverse, moveTo = key|value|none, increment
 function M.duplicateLine(opts)
@@ -256,7 +246,7 @@ end
 
 function M.moveCharRight()
 	if colNo(".") >= colNo("$") - 1 then return end
-	cmd [[:normal! xp]]
+	cmd [[:normal! "zx"zp]]
 end
 
 function M.moveCharLeft()
