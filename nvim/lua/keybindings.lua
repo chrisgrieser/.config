@@ -52,9 +52,9 @@ keymap({"x", "o"}, "J", "6j")
 keymap({"n", "x", "o"}, "K", "6k")
 
 -- selene: allow(multiple_statements)
-keymap("n", "j", function() qol.overscroll("j") end, {silent = true})
+keymap("n", "j", function() qol.overscroll("j") end)
 -- selene: allow(multiple_statements)
-keymap("n", "J", function() qol.overscroll("6j") end, {silent = true})
+keymap("n", "J", function() qol.overscroll("6j") end)
 keymap({"n", "x"}, "G", "Gzz")
 
 -- Jump History
@@ -62,16 +62,16 @@ keymap("n", "<C-h>", "<C-o>") -- Back
 keymap("n", "<C-l>", "<C-i>") -- Forward
 
 -- Search
-keymap({"n", "x", "o"}, "-", [[/\v]]) -- German Keyboard consistent with US Keyboard layout
-keymap("n", "<Esc>", function() -- clear all
+keymap({"n", "x", "o"}, "-", [[/\v]]) -- German Keyboard, \v for very-magic search
+keymap("n", "<Esc>", function()
 	-- if more than 10 notifications are in the queue, clear them all
 	local clearPending = require("notify").pending() > 10 and true or false
-	require("notify").dismiss {pending = clearPending} -- clear notifications
+	require("notify").dismiss {pending = clearPending}
 	cmd [[nohl]] -- clear highlights
 	cmd [[echo]] -- clear shortmessage
 	cmd [[normal!lh]] -- clear lsp hover window
 	require("lualine").refresh()
-end, {silent = true})
+end)
 
 keymap({"n", "x", "o"}, "+", "*") -- no more modifier key (German Layout)
 keymap({"n", "x", "o"}, "*", "#") -- backwards on the same key (German Layout)
@@ -91,12 +91,6 @@ keymap({"n", "x", "o"}, "m", "%")
 
 -- Middle of the Line
 keymap({"n", "x"}, "gm", "gM")
---------------------------------------------------------------------------------
--- NAVIGATION PLUGINS
-
--- Leap
-keymap("n", "ö", "<Plug>(leap-forward-to)")
-keymap("n", "Ö", "<Plug>(leap-backward-to)")
 
 -- Hunks
 keymap("n", "gh", ":Gitsigns next_hunk<CR>")
@@ -131,6 +125,35 @@ autocmd("TextYankPost", {
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
 
+-- LIST
+-- af -> a [f]unction
+-- ao -> a c[o]ndition
+-- q -> comment (mnemonic: [q]uiet text)
+-- Q -> consecutive comment
+-- aa -> an [a]rgument
+-- ah -> a [h]unk
+-- ai -> a [i]ndentation
+-- ad -> a [d]iagnostic
+-- ae -> almost to the [e]nding of line
+
+keymap({"o", "x"}, "iq", 'i"') -- [q]uote
+keymap({"o", "x"}, "aq", 'a"')
+keymap({"o", "x"}, "iz", "i'") -- [z]ingle quote
+keymap({"o", "x"}, "az", "a'")
+keymap({"o", "x"}, "at", "a`") -- [t]emplate-string
+keymap({"o", "x"}, "it", "i`")
+keymap({"o", "x"}, "ir", "i]") -- [r]ectangular brackets
+keymap({"o", "x"}, "ar", "a]")
+keymap({"o", "x"}, "ic", "i}") -- [c]urly brackets
+keymap({"o", "x"}, "ac", "a}")
+keymap("o", "an", "gn") -- [n]ext search result
+keymap("o", "in", "gn")
+keymap("o", "r", "}") -- [r]est of the paragraph
+
+
+--------------------------------------------------------------------------------
+-- Text Object definitions
+
 keymap("n", "C", '"_C')
 keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<C-M-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
@@ -161,26 +184,7 @@ autocmd("FileType", {
 	end
 })
 
--- treesitter textobjects:
--- af -> a function
--- aC -> a condition
--- q -> comment
--- aa -> an argument
-
-keymap({"o", "x"}, "iq", 'i"') -- double [q]uote
-keymap({"o", "x"}, "aq", 'a"')
-keymap({"o", "x"}, "iz", "i'") -- [z]ingle quote
-keymap({"o", "x"}, "az", "a'")
-keymap({"o", "x"}, "at", "a`") -- [t]emplate-string-quote
-keymap({"o", "x"}, "it", "i`")
-keymap({"o", "x"}, "ir", "i]") -- [r]ectangular brackets
-keymap({"o", "x"}, "ar", "a]")
-keymap({"o", "x"}, "ic", "i}") -- [c]urly brackets
-keymap({"o", "x"}, "ac", "a}")
-keymap("o", "r", "}") -- [r]est of the paragraph
-keymap("o", "R", "{")
-
--- textobj-diagnostic
+-- textobj-[d]iagnostic
 keymap({"x", "o"}, "id", function() require("textobj-diagnostic").nearest_diag() end)
 keymap({"x", "o"}, "ad", function() require("textobj-diagnostic").nearest_diag() end)
 
@@ -203,7 +207,7 @@ local miniaiConfig = {
 	},
 }
 
--- custom text object "e": from cursor to end of line minus 1 char
+-- custom text object "e": from cursor to [e]end of line minus 1 char
 miniaiConfig.custom_textobjects.e = function()
 	local row = fn.line(".")
 	local col = fn.col(".")
@@ -402,7 +406,7 @@ keymap("", "<C-Right>", ":vertical resize +3<CR>") -- resizing on one key for sa
 keymap("", "<C-Left>", ":vertical resize -3<CR>")
 keymap("", "<C-Down>", ":resize +3<CR>")
 keymap("", "<C-Up>", ":resize -3<CR>")
-keymap("n", "gw", "<C-w><C-w>") -- switch to next split
+keymap("n", "ö", "<C-w><C-w>") -- switch to next split
 
 --------------------------------------------------------------------------------
 -- CMD-Keybindings
@@ -541,7 +545,7 @@ keymap("", "<D-n>", function() require("genghis").createNewFile() end)
 keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end)
 
 -- Diffview
-keymap("n", "<C-g>", function()
+keymap("n", "<D-g>", function()
 	vim.ui.input({prompt = "Search File History (empty = full history):"}, function(query)
 		if not (query) then return
 		elseif query == "" then cmd("DiffviewFileHistory %")
@@ -573,6 +577,7 @@ keymap("n", "<leader>ow", ":set wrap!<CR>")
 
 -- TERMINAL MODE
 keymap("t", "<Esc>", [[<C-\><C-n>]]) -- normal mode in Terminal window
+keymap("t", "ö", [[<C-\><C-n><C-w><C-w>]]) -- switch windows directyl from Terminal window
 keymap("n", "<leader>g", [[:w<CR>:!acp ""<Left>]]) -- shell function `acp`, enabled via .zshenv
 keymap("n", "6", ":ToggleTerm size=8<CR>")
 keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>")
@@ -610,10 +615,6 @@ keymap("n", "<leader>r", function()
 
 	elseif ft == "yaml" and parentFolder:find(".config/karabiner") then
 		os.execute [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
-
-	elseif filename:find("vale%.ini") then
-		vim.notify(" Loading… ")
-		fn.system [[cd "$HOME" && vale sync && open "$HOME/.config/vale/styles"]]
 
 	elseif ft == "typescript" then
 		cmd [[!npm run build]] -- not via fn.system to get the output in the cmdline

@@ -18,13 +18,6 @@ require("indent_blankline").setup {
 	filetype_exclude = specialFiletypes,
 }
 
--- Match Scope
-require("hl_match_area").setup {
-	highlight_in_insert_mode = false,
-	delay = opt.updatetime:get(),
-}
-cmd [[highlight! def link MatchArea Visual]]
-
 --------------------------------------------------------------------------------
 -- SCROLLBAR
 require("scrollview").setup {
