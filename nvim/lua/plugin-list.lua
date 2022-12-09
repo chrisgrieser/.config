@@ -26,6 +26,7 @@ function M.PluginList()
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"p00f/nvim-ts-rainbow", -- colored brackets
 			"m-demare/hlargs.nvim", -- highlight function args
+			"RRethy/nvim-treesitter-textsubjects", -- smart text object
 		}
 	}
 	use {"Wansmer/treesj", -- split-join

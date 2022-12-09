@@ -270,7 +270,6 @@ end)
 --------------------------------------------------------------------------------
 
 -- Whitespace Control
-keymap("n", "!", "a <Esc>h") -- insert space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
 keymap("n", "d<Space>", function() -- delete blank lines except one

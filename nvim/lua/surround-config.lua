@@ -13,7 +13,6 @@ require("nvim-surround").setup {
 	move_cursor = false,
 	keymaps = {
 		visual = "s",
-		visual_line = "S",
 	},
 	surrounds = {
 		["f"] = {
@@ -54,7 +53,7 @@ require("nvim-surround").setup {
 				return {{""}, {""}}
 			end,
 		},
-		["C"] = {
+		["o"] = {
 			find = function()
 				-- needs to be consistent with treesitter
 				return require("nvim-surround.config").get_selection {motion = "aC"}
@@ -95,8 +94,6 @@ require("nvim-surround").setup {
 	}
 }
 
--- fix for ss not working, has to come after nvim-surround's setup
+-- surround current line or till end of line
 keymap("n", "yss", "ys_", {remap = true})
-keymap("n", "dss", "ds_", {remap = true})
-keymap("n", "css", "cs_", {remap = true})
-
+keymap("n", "yS", "ys$", {remap = true})
