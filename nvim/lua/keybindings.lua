@@ -146,10 +146,22 @@ keymap({"o", "x"}, "ir", "i]") -- [r]ectangular brackets
 keymap({"o", "x"}, "ar", "a]")
 keymap({"o", "x"}, "ic", "i}") -- [c]urly brackets
 keymap({"o", "x"}, "ac", "a}")
+keymap({"o", "x"}, "am", "aW") -- [m]assive word
+keymap({"o", "x"}, "im", "iW")
 keymap("o", "an", "gn") -- [n]ext search result
 keymap("o", "in", "gn")
 keymap("o", "r", "}") -- [r]est of the paragraph
 
+-- BUILT-IN ONES KEPT
+-- ab: bracket
+-- as: sentence
+-- ap: paragraph
+-- aw: word
+
+-- FILE-TYPE-SPECIFIC TEXT OBJECTS
+-- al: a [l]ink (markdown)
+-- c: class
+-- v: value
 
 --------------------------------------------------------------------------------
 -- Text Object definitions

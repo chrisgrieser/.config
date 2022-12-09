@@ -169,7 +169,7 @@ nmap gcc :.s/^|$/%%/g
 
 " delete alias part of next Wikilink
 " (or Link Homepage when using Auto Title Plugin)
-nmap ,l t|"_dt]
+nmap ,a t|"_dt]
 
 " append to [y]aml (line 3 = tags)
 nmap ,y 3ggA
@@ -184,21 +184,11 @@ exmap gotoFootnoteDefinition obcommand obsidian-footnotes:insert-footnote
 nmap gd :gotoFootnoteDefinition
 
 " Prepend Bullet or Blockquote
-exmap toggleBullet obcommand editor:toggle-bullet-list
 exmap toggleBlockquote obcommand editor:toggle-blockquote
-nmap ,- :toggleBullet
-vmap ,- :toggleBullet
 nmap ,< :toggleBlockquote
 vmap ,< :toggleBlockquote
 nmap ,> :toggleBlockquote
 vmap ,> :toggleBlockquote
-
-" turn bolded bullet points to h2 (##)
-" has to be done this complicated way cause vim substitutes called here can't
-" properly process spaces
-nmap &§&#a :.s/\*\*//g
-nmap &§&#b :.s/^-/##/
-nmap ,+ mz&§&#a&§&#bO<Esc>`z
 
 """"""""""""""""""""""
 " Indentation
@@ -225,8 +215,11 @@ nmap R :duplicate
 " Visual Mode
 """"""""""""""""""""""
 
-" so that VV... in normal mode selects more lines
+" so VV... in normal mode selects more lines
 vmap V j
+
+" so vv goes to visual block mode
+vmap v <C-v>
 
 """"""""""""""""""""""
 " Tabs/Window
@@ -241,36 +234,9 @@ nmap <C-w>s :splitHorizontal
 exmap only obcommand workspace:close-others
 nmap <C-w>o :only
 exmap close obcommand workspace:close
-nmap ZZ :close
-nmap ZQ :close
 
-" Emulate Original gt and gT https://vimhelp.org/tabpage.txt.html#gt
 exmap nextTab obcommand workspace:next-tab
-exmap prevTab obcommand workspace:previous-tab
-nmap gt :nextTab
-nmap gT :prevTab
-nmap <BS> :nextTab
 nmap <CR> :nextTab
-nmap <S-BS> :prevTab
-
-" " original vim: <C-w>_ for vertical maximizing, <C-w>= for equal size
-" exmap toggle-maximize-pane obcommand pane-relief:maximize
-" nmap <C-w>+ :toggle-maximize-pane
-" vmap <C-w>+ :toggle-maximize-pane
-" nmap <C-w>= :toggle-maximize-pane
-" vmap <C-w>= :toggle-maximize-pane
-
-" swap pane position (Original Vim Bindings)
-" requires Pane Relief Plugin
-" exmap swapPane obcommand pane-relief:swap-next
-" map <C-w>x :swapPane
-
-" " [g]oto next/prev [w]indow (= pane)
-" " requires Pane Relief Plugin
-" exmap nextPane obcommand pane-relief:go-next
-" exmap prevPane obcommand pane-relief:go-prev
-" map gw :nextPane
-" map gW :prevPane
 
 """"""""""""""""""""""
 " Folding
@@ -305,12 +271,12 @@ nmap zR :unfoldall
 " nmap ö :hop
 
 " Lightspeed
-exmap lightspeed obcommand mrj-jump-to-link:activate-lightspeed-jump
-nmap ö :lightspeed
+" exmap lightspeed obcommand mrj-jump-to-link:activate-lightspeed-jump
+" nmap ö :lightspeed
 
 " Link Jump (similar to Vimium's f)
-exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
-nmap ,f :linkjump
+" exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
+" nmap ,f :linkjump
 
 """"""""""""""""""""""
 " Substitute
