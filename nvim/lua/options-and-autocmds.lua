@@ -59,7 +59,7 @@ autocmd("FileType", {
 	group = "formatopts",
 	callback = function()
 		if not (bo.filetype == "markdown") then -- not for markdown, for autolist hack (see markdown.lua)
-			bo.formatoptions = bo.formatoptions:gsub("o", "") .. "a"
+			bo.formatoptions = bo.formatoptions:gsub("o", "")
 		end
 	end
 })
