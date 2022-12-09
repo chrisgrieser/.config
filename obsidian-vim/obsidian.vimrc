@@ -15,9 +15,6 @@ set clipboard=unnamed
 " Y consistent with D and C to the end of line
 nmap Y y$
 
-" always paste what was yanked, not what was deleted
-nmap P "0p
-
 """"""""""""""""""""""
 " Search
 """"""""""""""""""""""
@@ -75,12 +72,10 @@ vmap gs :gotoHeading
 " [g]oto [f]ile (= Follow Link under cursor)
 exmap followLinkUnderCursor obcommand editor:follow-link
 exmap followLinkInNewTab obcommand editor:open-link-in-new-leaf
-nmap gf :followLinkUnderCursor
 nmap gx :followLinkUnderCursor
-vmap gf :followLinkUnderCursor
 vmap gx :followLinkUnderCursor
-nmap gF :followLinkInNewTab
-vmap gF :followLinkInNewTab
+nmap gX :followLinkInNewTab
+vmap gX :followLinkInNewTab
 
 " [g]oto [o]pen file (= Quick Switcher)
 exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_recent-search
@@ -101,9 +96,6 @@ nmap x "_dl
 " UNDO consistently on one key
 nmap U <C-r>
 vmap U <C-r>
-
-" CASE SWITCH, (h to enable vertical navigation afterwards)
-nmap Ü ~h
 
 " Case Switch via Smarter MD Hotkeys Plugin
 exmap caseSwitch obcommand obsidian-smarter-md-hotkeys:smarter-upper-lower
@@ -131,37 +123,11 @@ nmap _ mzo<Esc>`z
 vmap = <Esc>O<Esc>gv
 vmap _ <Esc>o<Esc>gv
 
-" append space after cursor position
-exmap appendSpace jsfile Meta/obsidian-vim-helpers.js {appendSpace()}
-nmap ! :appendSpace
-
 " Append punctuation to end of line
 " `&§&` are helper commands for addings substitution to command chain,
 " `A;<Esc>` does not work as insert mode keystrokes aren't supported
 nmap &§&. :.s/$/./
-nmap &§&, :.s/$/,/
-nmap &§&; :.s/$/;/
-nmap &§&" :.s/$/"/
-nmap &§&' :.s/$/'/
-nmap &§&: :.s/$/:/
-nmap &§&) :.s/$/)/
-nmap &§&] :.s/$/]/
-nmap &§&} :.s/$/}/
 nmap ,. mz&§&.`z
-nmap ,, mz&§&,`z
-nmap ,; mz&§&;`z
-nmap ," mz&§&"`z
-nmap ,' mz&§&'`z
-nmap ,: mz&§&:`z
-nmap ,) mz&§&)`z
-nmap ,] mz&§&]`z
-nmap ,} mz&§&}`z
-
-" Remove last character from line
-nmap X mz$"_x`z
-
-" commentary.vim emulation
-nmap gcc :.s/^|$/%%/g
 
 """"""""""""""""""""""
 " Markdown-specific
@@ -281,14 +247,13 @@ nmap zR :unfoldall
 """"""""""""""""""""""
 " Substitute
 """"""""""""""""""""""
-" emulate substitute.vim
+" poor man#s substitute.vim
 nmap s Vp
 nmap S vg$p
 
 """"""""""""""""""""""
 " Option Toggling
 """"""""""""""""""""""
-
 exmap number obcommand obsidian-smarter-md-hotkeys:toggle-line-numbers
 exmap readableLineLength obcommand obsidian-smarter-md-hotkeys:toggle-readable-line-length
 exmap spellcheck obcommand editor:toggle-spellcheck

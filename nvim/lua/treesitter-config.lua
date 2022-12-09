@@ -7,7 +7,7 @@ require("nvim-treesitter.configs").setup {
 		"bash",
 		"css",
 		"markdown",
-		"markdown_inline",
+		"markdown_inline", -- fenced code blocks
 		"bibtex",
 		"gitignore",
 		"diff",
@@ -37,9 +37,17 @@ require("nvim-treesitter.configs").setup {
 	-- use treesitter for autoindent with `=`
 	indentation = {
 		enable = true,
-		disable = {}, -- NOTE: these are the names of the parsers and not the filetype
+		disable = {},
 	},
-
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "gnn",
+			node_incremental = "grn",
+			scope_incremental = "grc",
+			node_decremental = "grm",
+		},
+	},
 	textobjects = {-- textobj plugin
 		move = {-- move to next comment / function
 			enable = true,
@@ -47,20 +55,9 @@ require("nvim-treesitter.configs").setup {
 			set_jumps = true,
 			goto_next_start = {
 				["<C-j>"] = "@function.outer",
-				["gq"] = "@comment.outer",
 			},
 			goto_previous_start = {
 				["<C-k>"] = "@function.outer",
-				["gQ"] = "@comment.outer",
-			},
-		},
-		swap = { -- mnemonic: [z]wap
-			enable = true,
-			swap_next = {
-				["zu"] = "@parameter.inner",
-			},
-			swap_previous = {
-				["zt"] = "@parameter.inner",
 			},
 		},
 		select = {
@@ -73,7 +70,7 @@ require("nvim-treesitter.configs").setup {
 				["ia"] = "@parameter.inner",
 				["ao"] = "@conditional.outer", -- c[o]nditional (`ac` already = a curly)
 				["io"] = "@conditional.inner",
-				["COM"] = "@comment.outer", -- later remapped to q, done indirectly to avoid conflict with visual mode comments
+				["COM"] = "@comment.outer", -- HACK later remapped to q, done indirectly to avoid conflict with visual mode comments
 			},
 			-- If you set this to `true` (default is `false`) then any textobject is
 			-- extended to include preceding xor succeeding whitespace. Succeeding
@@ -108,7 +105,7 @@ require("nvim-treesitter.configs").setup {
 }
 
 --------------------------------------------------------------------------------
-
+-- highlight parameters
 require("hlargs").setup()
 
 --------------------------------------------------------------------------------
