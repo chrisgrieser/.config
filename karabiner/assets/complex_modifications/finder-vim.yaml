@@ -422,7 +422,7 @@ rules:
         to:
           - {key_code: w, modifiers: [command]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # b = Cycle windows (:bnext)
+      # b = cycle windows (:bnext)
       - type: basic
         from: {key_code: b}
         to_if_alone:
@@ -481,22 +481,20 @@ rules:
       # q = right-click
       - type: basic
         from: {key_code: q}
-        shell_command: |
-          osascript -e '
-            tell application "Finder"
-              set selected_items to the selection
-              if selected_items is {} then tell me to error "Nothing selected!"
-              set on_desktop to (insertion location as alias) is (path to desktop folder)
-            end tell
-
-            tell application "System Events" to tell process "Finder"
-              if on_desktop then
-                tell group 1 of scroll area 1 to tell (image 1 whose value of attribute "AXFilename" is the name of (item 1 of selected_items)) to perform action "AXShowMenu"
-              else
-                tell value of attribute "AXFocusedUIElement" to perform action "AXShowMenu"
-              end if
-            end tell
-          '
+        to:
+          # yes, Finder needs to activate even though it is already frontmost,
+          # since running a shellcommand seems to temporarily take focus, so
+          # that there is no AXfocusedUIElement during execution
+          - shell_command: |
+              osascript -e '
+                tell application "Finder"
+                  if the selection is {} then return
+                  activate
+                end tell
+                delay 0.1
+                tell application "System Events" to tell process "Finder"
+                  tell value of attribute "AXFocusedUIElement" to perform action "AXShowMenu"
+                end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # r = replicate (duplicate)
       - type: basic
@@ -512,7 +510,7 @@ rules:
           - key_code: v
             modifiers: [command]
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode]
-      # x = cross-move file(s) to other Finder Window (if there are exactly 2 Finder windows)
+      # x = cross-move items to other Finder window (if exactly 2 Finder windows)
       - type: basic
         from: {key_code: x}
         to_if_alone:

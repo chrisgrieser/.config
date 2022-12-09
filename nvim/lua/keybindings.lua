@@ -9,7 +9,7 @@ g.mapleader = ","
 keymap("n", "<leader>lc", qol.copyLastCommand)
 
 -- run [l]ast command [a]gain
-keymap("n", "<leader>la", qol.runLastCommandAgain)
+keymap("n", "<leader>la", "@:")
 
 -- search keymaps
 keymap("n", "?", telescope.keymaps)
@@ -66,7 +66,7 @@ keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard
 keymap("n", "<Esc>", function() -- clear all
 	-- if more than 10 notifications are in the queue, clear them all
 	local clearPending = require("notify").pending() > 10 and true or false
-	require("notify").dismiss{pending = clearPending} -- clear notifications
+	require("notify").dismiss {pending = clearPending} -- clear notifications
 	cmd [[nohl]] -- clear highlights
 	cmd [[echo]] -- clear shortmessage
 	cmd [[normal!lh]] -- clear lsp hover window
@@ -265,7 +265,7 @@ keymap("n", "d<Space>", function() -- delete blank lines
 	end
 end)
 
--- Indention
+-- Indentation
 keymap("n", "<Tab>", ">>")
 keymap("n", "<S-Tab>", "<<")
 keymap("x", "<Tab>", ">gv")
@@ -491,7 +491,7 @@ autocmd("BufReadPost", {
 -- INFO: nohl added here, since it does not work with autocmds
 keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)") -- cycle between buffers
 keymap("n", "<S-BS>", ":nohl<CR><Plug>(CybuPrev)")
-keymap("n", "gb", telescope.buffers) -- open [b]uffer
+keymap("n", "gb", telescope.buffers) -- open Buffer
 
 require("cybu").setup {
 	display_time = 1000,

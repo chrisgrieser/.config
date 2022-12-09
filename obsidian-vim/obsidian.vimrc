@@ -29,7 +29,7 @@ nmap + *
 map - /
 
 """"""""""""""""""""""
-" Nagivation
+" Navigation
 """"""""""""""""""""""
 
 " Have j and k navigate visual lines rather than logical ones
@@ -46,7 +46,7 @@ map L g$
 map J 6j
 map K 6k
 
-" Emulate `z=` (and bind it zo `zl` because more convenient; mnemonic: [z]pelling [l]ist)
+" Emulate `z=` (and bind it zo `zl` because more convenient; mnemonic: [z]pelling list)
 exmap contextMenu obcommand editor:context-menu
 nmap zl :contextMenu
 vmap zl :contextMenu
@@ -122,7 +122,7 @@ exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 nmap M :mergeLines
 vmap M :mergeLines
 
-" WHITSPACE CONTROL
+" WHITESPACE CONTROL
 " Add Blank Line above/below
 nmap = mzO<Esc>`z
 nmap _ mzo<Esc>`z
@@ -234,8 +234,8 @@ vmap V j
 
 " https://vimhelp.org/index.txt.html#CTRL-W
 exmap splitVertical obcommand workspace:split-vertical
-nmap <C-w>v :splitVertical
 exmap splitHorizontal obcommand workspace:split-horizontal
+nmap <C-w>v :splitVertical
 nmap <C-w>s :splitHorizontal
 
 exmap only obcommand workspace:close-others
@@ -253,7 +253,7 @@ nmap <BS> :nextTab
 nmap <CR> :nextTab
 nmap <S-BS> :prevTab
 
-" " orginal vim: <C-w>_ for vertical maximizing, <C-w>= for equal size
+" " original vim: <C-w>_ for vertical maximizing, <C-w>= for equal size
 " exmap toggle-maximize-pane obcommand pane-relief:maximize
 " nmap <C-w>+ :toggle-maximize-pane
 " vmap <C-w>+ :toggle-maximize-pane
@@ -335,4 +335,3 @@ map ,os :spellcheck
 map ,ow :readableLineLength
 
 "───────────────────────────────────────────────────────────────────────────────
-

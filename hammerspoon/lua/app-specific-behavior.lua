@@ -17,8 +17,12 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 		appName == "Alacritty") then return end
 	local win = appObject:mainWindow()
 
-	if (eventType == aw.activated or eventType == aw.launched) and (isPseudoMaximized(win) or isMaximized(win)) then
+	if (eventType == aw.activated) and (isPseudoMaximized(win) or isMaximized(win)) then
 		appObject:selectMenuItem("Hide Others")
+	elseif (eventType == aw.launched) and (isPseudoMaximized(win) or isMaximized(win)) then
+		runWithDelays({0.1, 0.2, 0.3}, function ()
+			appObject:selectMenuItem("Hide Others")
+		end)
 	elseif eventType == aw.terminated then
 		unHideAll()
 	end
