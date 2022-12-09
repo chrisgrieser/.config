@@ -130,7 +130,7 @@ anchors:
 rules:
   - description: "\U0001F4C2 Finder Vim Controls"
     manipulators:
-      # hjkl
+      # hjklL
       - type: basic
         from: {key_code: j}
         to: # not to_if_alone since it blocks repeat
@@ -152,6 +152,12 @@ rules:
         to_if_alone:
           - key_code: down_arrow
             modifiers: [command]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # L = open file & close window
+      - type: basic
+        from: {key_code: l, modifiers: {mandatory: [shift]}}
+        to:
+          - {key_code: o, modifiers: [command, option]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # gg, G, J, K
       - type: basic
@@ -416,12 +422,13 @@ rules:
         to:
           - {key_code: w, modifiers: [command]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-        # Cycle windows/tabs (:bnext, :tabnext)
+      # b = Cycle windows (:bnext)
       - type: basic
         from: {key_code: b}
         to_if_alone:
           - {key_code: grave_accent_and_tilde, modifiers: [command]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        # t = cycle tabs (:tabnext)
       - type: basic
         from: {key_code: t}
         to_if_alone:
@@ -435,16 +442,15 @@ rules:
         to_if_alone:
           - {key_code: a, modifiers: [command]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # A = DEselect all
       - type: basic
-        from: {key_code: period}
+        from: {key_code: a, modifiers: {mandatory: [shift]}}
         to_if_alone:
-          - {key_code: period, modifiers: [command, shift]}
+          - {key_code: a, modifiers: [command, option]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <S-Space> = add down to selection
       - type: basic
-        from:
-          key_code: spacebar
-          modifiers: {mandatory: [shift]}
+        from: {key_code: spacebar, modifiers: {mandatory: [shift]}}
         to:
           - {key_code: down_arrow, modifiers: [shift]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
@@ -472,6 +478,26 @@ rules:
             modifiers: [command]
           - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
+      # q = right-click
+      - type: basic
+        from: {key_code: q}
+        shell_command: |
+          osascript -e '
+            tell application "Finder"
+              set selected_items to the selection
+              if selected_items is {} then tell me to error "Nothing selected!"
+              set on_desktop to (insertion location as alias) is (path to desktop folder)
+            end tell
+
+            tell application "System Events" to tell process "Finder"
+              if on_desktop then
+                tell group 1 of scroll area 1 to tell (image 1 whose value of attribute "AXFilename" is the name of (item 1 of selected_items)) to perform action "AXShowMenu"
+              else
+                tell value of attribute "AXFocusedUIElement" to perform action "AXShowMenu"
+              end if
+            end tell
+          '
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # r = replicate (duplicate)
       - type: basic
         from: {key_code: r}

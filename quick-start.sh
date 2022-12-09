@@ -62,6 +62,10 @@ ln -sf "$DOTFILE_FOLDER/linter-configs/.shellcheckrc" ~
 ln -sf "$DOTFILE_FOLDER/linter-configs/.flake8" ~
 ln -sf "$DOTFILE_FOLDER/vale/.vale.ini" ~
 
+# Fig
+mkdir -p ~/.fig/config
+ln -sf "$DOTFILE_FOLDER/fig/settings.json" ~/.fig
+
 # GPG config
 mkdir ~/.gnupg
 ln -sf "$DOTFILE_FOLDER/gnupg/gpg-agent.conf" ~/.gnupg
