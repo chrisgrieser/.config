@@ -8,7 +8,6 @@ function M.PluginList()
 	use "wbthomason/packer.nvim" -- packer manages itself
 	use "lewis6991/impatient.nvim" -- reduces startup time by ~50%
 	use {"williamboman/mason.nvim", requires = "RubixDev/mason-update-all"}
-	-- use {"dstein64/vim-startuptime", cmd = "StartupTime"} -- measure startup time with `:StartupTime`
 
 	-- Themes
 	use "folke/tokyonight.nvim"
@@ -99,10 +98,9 @@ function M.PluginList()
 	use "lewis6991/gitsigns.nvim" -- gutter signs
 	use "stevearc/dressing.nvim" -- Selection Menus and Inputs
 	use "rcarriga/nvim-notify" -- notifications
-	use "uga-rosa/ccc.nvim" -- color previews & color utilites
+	use "uga-rosa/ccc.nvim" -- color previews & color utilities
 	use "dstein64/nvim-scrollview" -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
 	use "anuvyklack/pretty-fold.nvim" -- fold look customization
-	use "rareitems/hl_match_area.nvim"
 	use {"anuvyklack/windows.nvim", requires = "anuvyklack/middleclass"} -- auto-resize splits
 
 	-- File Switching & File Operation
@@ -156,7 +154,6 @@ function M.PluginList()
 	use "numToStr/Comment.nvim" -- comment operator
 	use "michaeljsmith/vim-indent-object" -- indention-based text-object
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"x", "<D-j>"}}}
-	use "ggandor/leap.nvim" -- easymotion-like
 	use "Darazaki/indent-o-matic" -- auto-determine indents
 	use {"nacro90/numb.nvim", -- line previews when ":n"
 		config = function() require("numb").setup() end,
