@@ -62,7 +62,7 @@ keymap("n", "<C-h>", "<C-o>") -- Back
 keymap("n", "<C-l>", "<C-i>") -- Forward
 
 -- Search
-keymap({"n", "x", "o"}, "-", "/") -- German Keyboard consistent with US Keyboard layout
+keymap({"n", "x", "o"}, "-", [[/\v]]) -- German Keyboard consistent with US Keyboard layout
 keymap("n", "<Esc>", function() -- clear all
 	-- if more than 10 notifications are in the queue, clear them all
 	local clearPending = require("notify").pending() > 10 and true or false
@@ -136,7 +136,7 @@ keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<C-M-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
 keymap("x", "<Space>", '"_c')
 
--- change sub-word
+-- change-subword
 -- (i.e. a simpler version of vim-textobj-variable-segment, not supporting CamelCase)
 keymap("n", "<leader><Space>", function()
 	opt.iskeyword:remove {"_", "-"}
@@ -257,9 +257,9 @@ end)
 keymap("n", "!", "a <Esc>h") -- insert space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
-keymap("n", "d<Space>", function() -- delete blank lines
+keymap("n", "d<Space>", function() -- delete blank lines except one
 	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
-		cmd [[normal! "_dip]]
+		cmd [[normal! "_dipO]]
 	else
 		vim.notify(" Line not empty.", logWarn)
 	end
@@ -299,7 +299,6 @@ keymap("n", "ss", substi.line)
 keymap("n", "S", substi.eol)
 keymap("n", "sx", exchange.operator)
 keymap("n", "sxx", exchange.line)
-keymap("x", "X", exchange.visual)
 
 -- search & replace
 keymap("n", "<leader>f", [[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]])

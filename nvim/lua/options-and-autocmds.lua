@@ -45,10 +45,11 @@ opt.titlestring = "%{expand(\"%:p\")} [%{mode()}]"
 opt.cursorline = true
 opt.scrolloff = 12
 opt.sidescrolloff = 20
-opt.textwidth = 80 -- used by `gq`
+opt.textwidth = 80
 opt.wrap = false
 opt.colorcolumn = {"+1", "+20"} -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
+opt.backspace = {} -- restrict insert mode backspace behavior
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
@@ -58,7 +59,7 @@ autocmd("FileType", {
 	group = "formatopts",
 	callback = function()
 		if not (bo.filetype == "markdown") then -- not for markdown, for autolist hack (see markdown.lua)
-			bo.formatoptions = bo.formatoptions:gsub("[ro]", "")
+			bo.formatoptions = bo.formatoptions:gsub("o", "") .. "a"
 		end
 	end
 })
@@ -123,7 +124,7 @@ augroup("Mini-Lint", {})
 autocmd("BufWritePre", {
 	group = "Mini-Lint",
 	callback = function()
-		local save_view = fn.winsaveview() -- save cursor positon
+		local save_view = fn.winsaveview() -- save cursor position
 		if bo.filetype ~= "markdown" then -- to preserve spaces from the two-space-rule, and trailing spaces on sentences
 			cmd [[%s/\s\+$//e]] -- trim trailing whitespaces
 		end

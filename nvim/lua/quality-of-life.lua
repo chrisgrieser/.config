@@ -251,7 +251,7 @@ end
 
 function M.moveCharLeft()
 	if colNo(".") == 1 then return end
-	cmd [[:normal! xhP]]
+	cmd [[:normal! "zdh"zph]]
 end
 
 function M.moveSelectionDown()
@@ -267,11 +267,11 @@ function M.moveSelectionUp()
 end
 
 function M.moveSelectionRight()
-	cmd [[normal! xpgvlolo]]
+	cmd [[normal! "zx"zpgvlolo]]
 end
 
 function M.moveSelectionLeft()
-	cmd [[normal! xhPgvhoho]]
+	cmd [[normal! "zdh"zPgvhoho]]
 end
 
 --------------------------------------------------------------------------------
