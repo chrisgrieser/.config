@@ -100,6 +100,7 @@ keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("n", "gp", qol.pasteDifferently) -- paste charwise reg as linewise & vice versa
+keymap("n", "P", '"0p') -- paste what was yanked, not deleted
 
 -- yanking without moving the cursor
 -- visual https://stackoverflow.com/a/3806683#comment10788861_3806683
@@ -226,20 +227,18 @@ miniaiConfig.custom_textobjects.e = function()
 end
 require("mini.ai").setup(miniaiConfig)
 
-
 --------------------------------------------------------------------------------
 
 -- MACRO
--- one-off recording (+ q needs remapping due to being mapped to comments)
--- needs temporary remapping, since there is no "recording mode"
+-- one-off recording
 augroup("recording", {})
 autocmd("RecordingLeave", {
 	group = "recording",
 	callback = function()
-		keymap("n", "0", "qy") -- not saving in throwaway register z, so the respective keymaps can be used during a macro
-		local sequence = vim.v.event.regcontents
-		if sequence ~= "" then
-			vim.notify(" Recorded\n " .. sequence, logTrace)
+		keymap("n", "0", "q" .. g.macroSlot)
+		local macro = vim.v.event.regcontents
+		if macro ~= "" then
+			vim.notify(" Recorded\n " .. macro, logTrace)
 		else
 			vim.notify(" Recording cancelled. ", logTrace)
 		end
@@ -248,22 +247,34 @@ autocmd("RecordingLeave", {
 autocmd("RecordingEnter", {
 	group = "recording",
 	callback = function()
-		local oldMacro = fn.getreg("y")
-		fn.setreg("x", oldMacro)
 		keymap("n", "0", "q")
 		vim.notify(" Recording…", logTrace)
 	end,
 })
-keymap("n", "9", "@y") -- quick replay (yes, I don't use counts that high)
-keymap("n", "0", "qy") -- needs to be set initially
-keymap("n", "<C-9>", "@y")  -- play previous macro
 
-keymap("n", "c0", function() -- edit macro
-	local macro = fn.getreg("y")
-	vim.ui.input({prompt = "Edit Macro: ", default = macro}, function(editedMacro)
+function switchMacroSlot()
+	g.macroSlot = g.macroSlot == "y" and "x" or "y"
+	if g.macroSlot == "x" then
+		g.macroSlot = "y" -- not saving in throwaway register z, so the respective keymaps can be used during a macro
+	else
+		g.macroSlot = "x"
+	end
+	vim.notify(" Now: Slot "..g.macroSlot, logTrace)
+	keymap("n", "9", "@" .. g.macroSlot) -- quick replay (yes, I don't use counts that high)
+	keymap("n", "0", "q" .. g.macroSlot) -- needs to be set initially
+end
+
+g.macroSlot = "y"
+switchMacroSlot() -- initialize
+keymap("n", "<C-0>", switchMacroSlot)
+
+-- edit macro
+keymap("n", "c0", function()
+	local macro = fn.getreg(g.macroSlot)
+	vim.ui.input({prompt = "Edit Macro " .. g.macroSlot .. ": ", default = macro}, function(editedMacro)
 		if not (editedMacro) then return end -- cancellation
-		fn.setreg("y", editedMacro)
-		vim.notify(" Edited Macro\n " .. editedMacro, logTrace)
+		fn.setreg(g.macroSlot, editedMacro)
+		vim.notify(" Edited Macro " .. g.macroSlot .. "\n " .. editedMacro, logTrace)
 	end)
 end)
 
@@ -481,17 +492,17 @@ autocmd("BufReadPost", {
 })
 
 -- cycle between buffers
-keymap("n", "<BS>", function ()
+keymap("n", "<BS>", function()
 	local moreThanOneBuf = fn.getbufinfo {buflisted = 1} > 1
 	if moreThanOneBuf then
-		cmd.nohlsearch()-- INFO: nohl added here, since it does not work with autocmds
-		cmd[[<Plug>(CybuNext)]]
+		cmd.nohlsearch() -- INFO: nohl added here, since it does not work with autocmds
+		cmd [[<Plug>(CybuNext)]]
 	else
 		vim.notify(" Only one buffer open. ")
 	end
 end)
 -- Buffer selector
-keymap("n", "gb", function ()
+keymap("n", "gb", function()
 	local moreThanOneBuf = fn.getbufinfo {buflisted = 1} > 1
 	if moreThanOneBuf then
 		cmd.nohlsearch()

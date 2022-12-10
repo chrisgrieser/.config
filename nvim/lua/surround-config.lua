@@ -56,7 +56,7 @@ require("nvim-surround").setup {
 		["o"] = {
 			find = function()
 				-- needs to be consistent with treesitter
-				return require("nvim-surround.config").get_selection {motion = "aC"}
+				return require("nvim-surround.config").get_selection {motion = "ao"}
 			end,
 			delete = function()
 				local ft = bo.filetype
