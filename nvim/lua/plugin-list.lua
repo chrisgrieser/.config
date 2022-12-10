@@ -10,9 +10,9 @@ function M.PluginList()
 	use {"williamboman/mason.nvim", requires = "RubixDev/mason-update-all"}
 
 	-- Themes
-	use "folke/tokyonight.nvim"
+	-- use "folke/tokyonight.nvim"
 	use "savq/melange" -- like Obsidian's Primary color scheme
-	use "EdenEast/nightfox.nvim"
+	-- use "EdenEast/nightfox.nvim"
 	use "nyoom-engineering/oxocarbon.nvim"
 	-- use "rebelot/kanagawa.nvim"
 
@@ -44,6 +44,10 @@ function M.PluginList()
 			}
 		end
 	}
+	use {"bennypowers/nvim-regexplainer", requires = {
+		"nvim-treesitter/nvim-treesitter",
+		"MunifTanjim/nui.nvim",
+	}}
 
 	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
 		after = "nvim-cmp",

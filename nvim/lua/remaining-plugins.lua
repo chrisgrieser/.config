@@ -28,3 +28,24 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+require("regexplainer").setup {
+	mode = "narrative",
+	auto = true, -- automatically show the explainer when the cursor enters a regexp
+
+	-- filetypes (i.e. extensions) in which to run the autocommand
+	filetypes = {
+		"html",
+		"js",
+		"cjs",
+		"mjs",
+		"ts",
+		"jsx",
+		"tsx",
+		"cjsx",
+		"mjsx",
+	},
+
+	mappings = {
+		toggle = "<leader>X",
+	},
+}
