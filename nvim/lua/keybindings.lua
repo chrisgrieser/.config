@@ -623,12 +623,14 @@ keymap("n", "<leader>r", function()
 		end
 
 	elseif ft == "yaml" and parentFolder:find("/karabiner") then
-		os.execute [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
+		local result = fn.system [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
+		vim.notify(" "..trim(result).." ")
 		if filename == "finder-vim.yaml" then
 			local curFile = fn.expand("%:p")
-			cmd.saveas (os.getenv("HOME").."/Library/Mobile Documents/com~apple~CloudDocs/Repos/finder-vim-mode/finder-vim.yaml", bang = true)
+			cmd.saveas {os.getenv("HOME").."/Library/Mobile Documents/com~apple~CloudDocs/Repos/finder-vim-mode/finder-vim.yaml", bang = true}
 			cmd.bwipeout()
 			cmd.edit(curFile)
+			vim.notify(" "..filename.." also duplicated. ")
 		end
 
 	elseif ft == "typescript" then
