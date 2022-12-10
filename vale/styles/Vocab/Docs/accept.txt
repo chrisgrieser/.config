@@ -8,5 +8,9 @@ color
 Color
 between
 Mode
+mode
+normal
+Normal
 US
 German
+"context menu"
