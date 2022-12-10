@@ -32,12 +32,9 @@ local function customHighlights()
 	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&]*]])
 
 	-- rainbow brackets without aggressive red…
-	cmd [[highlight rainbowcol1 guifg=#7e8a95]] 
+	cmd [[highlight rainbowcol1 guifg=#7e8a95]]
 
 	-- more visible matching
-	cmd [[highlight! MatchParen gui=underline cterm=underline]]
-
-	-- Columns
 	cmd [[highlight! MatchParen gui=underline cterm=underline]]
 
 	-- treesittter refactor focus
