@@ -1,7 +1,7 @@
 title: "Finder Vim Controls"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 maintainers: [pseudometa (chrisgrieser)]
-version: [1.0]
+version: [0.9.3]
 anchors:
   - conditions:
       - &finder-app
@@ -54,6 +54,14 @@ anchors:
       - &move-inactive
         type: variable_unless
         name: FINDER_MOVE_ACTIVE
+        value: true
+      - &context-menu-open
+        type: variable_if
+        name: FINDER_CONTEXT_MENU_ACTIVE
+        value: true
+      - &no-context-menu
+        type: variable_unless
+        name: FINDER_CONTEXT_MENU_ACTIVE
         value: true
   #─────────────────────────────────────────────────────────────────────────────
   - to:
@@ -168,17 +176,13 @@ rules:
             modifiers: [option]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
-        from:
-          key_code: g
-          modifiers: {mandatory: [shift]}
+        from: {key_code: g, modifiers: {mandatory: [shift]}}
         to_if_alone:
           - key_code: down_arrow
             modifiers: [option]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
-        from:
-          key_code: j
-          modifiers: {mandatory: [shift]}
+        from: {key_code: j, modifiers: {mandatory: [shift]}}
         to:
           - key_code: down_arrow
           - key_code: down_arrow
@@ -188,9 +192,7 @@ rules:
           - key_code: down_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
-        from:
-          key_code: k
-          modifiers: {mandatory: [shift]}
+        from: {key_code: k, modifiers: {mandatory: [shift]}}
         to:
           - key_code: up_arrow
           - key_code: up_arrow
@@ -206,14 +208,14 @@ rules:
           key_code: hyphen # "?" on German keyboard
           modifiers: {mandatory: [shift]}
         to:
-          - shell_command: qlmanage -p "$HOME/.config/visualized-keyboard-layout/macos-finder-vim-mode.png" || qlmanage -p "$HOME/.config/karabiner/assets/macos-finder-vim-mode.png"
+          - shell_command: qlmanage -p "$HOME/.config/visualized-keyboard-layout/macos-finder-vim-mode.png" || qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-cheatsheet.png"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       - type: basic
         from:
           key_code: slash # "?" on American keyboard
           modifiers: {mandatory: [shift]}
         to:
-          - shell_command: qlmanage -p "$HOME/.config/visualized-keyboard-layout/macos-finder-vim-mode.png" || open "$HOME/.config/karabiner/assets/macos-finder-vim-mode.png"
+          - shell_command: qlmanage -p "$HOME/.config/visualized-keyboard-layout/macos-finder-vim-mode.png" || open "$HOME/.config/karabiner/assets/finder-vim-cheatsheet.png"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
       #─────────────────────────────────────────────────────────────────────────
       # INSERT MODE
@@ -615,7 +617,7 @@ rules:
       - type: basic
         from: {key_code: s}
         to:
-          - shell-command: | 
+          - shell-command: |
               sel=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
               readlink "$sel" | xargs open -R
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
