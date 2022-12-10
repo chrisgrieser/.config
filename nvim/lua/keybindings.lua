@@ -407,6 +407,7 @@ keymap("", "<C-Up>", ":resize -3<CR>")
 keymap("n", "ö", "<C-w><C-w>") -- switch to next split
 
 --------------------------------------------------------------------------------
+
 -- CMD-Keybindings
 if isGui() then
 
