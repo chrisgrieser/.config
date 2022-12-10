@@ -133,7 +133,7 @@ autocmd("TextYankPost", {
 -- ai -> a [i]ndentation (indent-textobj)
 -- ad -> a [d]iagnostic (diagnostic-textobj)
 -- ae -> almost to the [e]nding of line (mini.ai)
--- av -> a Value (mini.ai)
+-- av -> a Value / right-hand-side of key-value pair or variable assignment (mini.ai)
 
 keymap({"o", "x"}, "iq", 'i"') -- [q]uote
 keymap({"o", "x"}, "aq", 'a"')
@@ -227,25 +227,7 @@ miniaiConfig.custom_textobjects.e = function()
 end
 
 -- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt#L215
-miniaiConfig.custom_textobjects.v = "[=:] ?()().*()[;,]()"
--- miniaiConfig.custom_textobjects.v = function()
--- 	local lineNr = fn.line(".")
--- 	local eol = fn.col("$") - 1
--- 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
--- 	local lineContent = fn.getline(".") ---@type string
--- 	local _, eqSign = lineContent:find("= ?")
--- 	local _, colonSign = lineContent:find(": ?")
--- 	local from = {line = lineNr}
--- 	local to = {line = lineNr, col = eol}
--- 	if eqSign then
--- 		from.col = eqSign + 1
--- 	elseif colonSign then
--- 		from.col = colonSign + 1
--- 	else
--- 		return {}
--- 	end
--- 	return {from = from, to = to}
--- end
+miniaiConfig.custom_textobjects.v = {"[=:] ?()().*()[;,]?()"}
 require("mini.ai").setup(miniaiConfig)
 
 --------------------------------------------------------------------------------
