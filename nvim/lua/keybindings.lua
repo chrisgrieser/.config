@@ -239,14 +239,14 @@ autocmd("RecordingLeave", {
 	group = "recording",
 	callback = function()
 		keymap("n", "0", "q" .. g.macroSlot)
-		vim.notify(" Recorded "..g.macroSlot..":\n " .. vim.v.event.regcontents, logTrace)
+		vim.notify(" Recorded " .. g.macroSlot .. ":\n " .. vim.v.event.regcontents, logTrace)
 	end
 })
 autocmd("RecordingEnter", {
 	group = "recording",
 	callback = function()
 		keymap("n", "0", "q")
-		vim.notify(" Recording to"..g.macroSlot.."… ", logTrace)
+		vim.notify(" Recording to" .. g.macroSlot .. "… ", logTrace)
 	end,
 })
 
@@ -255,7 +255,7 @@ function switchMacroSlot()
 		g.macroSlot = "y"
 	else
 		g.macroSlot = g.macroSlot == "y" and "x" or "y" -- not saving in throwaway register z, so the respective keymaps can be used during a macro
-		vim.notify(" Now using " .. g.macroSlot.. " ", logTrace)
+		vim.notify(" Now using " .. g.macroSlot .. " ", logTrace)
 	end
 	keymap("n", "9", "@" .. g.macroSlot) -- quick replay (yes, I don't use counts that high)
 	keymap("n", "0", "q" .. g.macroSlot) -- needs to be set initially
@@ -582,7 +582,7 @@ keymap("n", "<leader>ow", ":set wrap!<CR>")
 
 -- TERMINAL MODE
 keymap("t", "<Esc>", [[<C-\><C-n>]]) -- normal mode in Terminal window
-keymap("t", "ö", [[<C-\><C-n><C-w><C-w>]]) -- switch windows directyl from Terminal window
+keymap("t", "ö", [[<C-\><C-n><C-w><C-w>]]) -- switch windows directly from Terminal window
 keymap("n", "<leader>g", [[:w<CR>:!acp ""<Left>]]) -- shell function `acp`, enabled via .zshenv
 keymap("n", "6", ":ToggleTerm size=8<CR>")
 keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>")
@@ -623,7 +623,7 @@ keymap("n", "<leader>r", function()
 
 	elseif ft == "yaml" and parentFolder:find("/karabiner") then
 		local result = fn.system [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
-		vim.notify(" " .. trim(result) .. " ")
+		vim.notify(" " .. result:gsub("\n$", "") .. " ")
 
 	elseif ft == "typescript" then
 		cmd [[!npm run build]] -- not via fn.system to get the output in the cmdline

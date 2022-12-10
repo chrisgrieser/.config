@@ -121,11 +121,12 @@ end
 
 ---Close tabs, window, buffer in that order if there is more than one of the type
 function M.betterClose()
+	if require("notify") then require("notify").dismiss() end -- to not include notices in window count
+	local winThreshhold = require("scrollview") and 2 or 1-- HACK: since scrollview counts as a window
+	local moreThanOneWin = fn.winnr("$") > winThreshhold
+
 	local moreThanOneTab = fn.tabpagenr("$") > 1
 	local buffers = fn.getbufinfo {buflisted = 1}
-	local scrollviewInstalled = require("scrollview") -- HACK: since scrollview counts as a window
-	local winThreshhold = scrollviewInstalled and 2 or 1
-	local moreThanOneWin = fn.winnr("$") > winThreshhold
 
 	cmd.nohlsearch()
 	cmd.update()

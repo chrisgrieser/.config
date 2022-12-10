@@ -8,3 +8,5 @@ color
 Color
 between
 Mode
+US
+German
