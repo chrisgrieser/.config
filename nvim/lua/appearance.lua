@@ -64,7 +64,7 @@ require("dressing").setup {
 		win_options = {sidescrolloff = 0},
 	},
 	select = {
-		backend = {"builtin", "nui"}, -- Priority list of preferred vim.select implementations
+		backend = {"nui", "builtin"}, -- Priority list of preferred vim.select implementations
 		trim_prompt = true, -- Trim trailing `:` from prompt
 		builtin = {
 			border = borderStyle,

@@ -238,10 +238,10 @@ macroPlug.setup {
 	keymaps = {
 		toggleRecording = "0",
 		playRecording = "9",
+		switchMacro = "<C-0>",
+		editMacro = "c0",
 	},
 }
-keymap("n", "<C-0>", macroPlug.switchMacroSlot)
-keymap("n", "c0", macroPlug.editMacro)
 
 --------------------------------------------------------------------------------
 

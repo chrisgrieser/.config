@@ -17,7 +17,7 @@ local kind_icons = {
 	Value = "",
 	Enum = "",
 	Keyword = "",
-	Snippet = "",
+	Snippet = "",
 	Color = "",
 	File = "",
 	Reference = "",
@@ -42,12 +42,10 @@ local source_icons = {
 	nerdfont = "",
 	cmdline = "",
 	cmdline_history = "",
-	path = "",
+	path = "",
 }
 
 --------------------------------------------------------------------------------
-
-opt.completeopt = {"menu", "menuone", "noselect"}
 
 cmp.setup {
 	snippet = {
@@ -55,7 +53,11 @@ cmp.setup {
 		expand = function(args) require("luasnip").lsp_expand(args.body) end,
 	},
 	window = {
-		completion = cmp.config.window.bordered(),
+		completion = {
+			col_offset = -3,
+			side_padding = 0,
+			border = borderStyle,
+		},
 		documentation = cmp.config.window.bordered(),
 	},
 	mapping = cmp.mapping.preset.insert {
@@ -92,6 +94,7 @@ cmp.setup {
 		{name = "buffer", keyword_length = 2},
 	},
 	formatting = {
+		fields = { "kind", "abbr", "menu" }, -- order of the fields
 		format = function(entry, vim_item)
 			vim_item.kind = " "..kind_icons[vim_item.kind].." "
 			vim_item.menu = source_icons[entry.source.name]
@@ -99,8 +102,8 @@ cmp.setup {
 		end
 	},
 }
-
 --------------------------------------------------------------------------------
+
 -- Filetype specific Completion
 
 local defaultAndNerdfont = {

@@ -20,7 +20,7 @@ end):start()
 -- Download Folder Badge
 -- requires "fileicon" being installed
 local downloadFolder = home .. "/Downloaded"
-downloadFolderWatcher = pw(downloadFolder, function ()
+downloadFolderWatcher = pw(downloadFolder, function()
 	hs.execute("zsh ./helpers/download-folder-badge/download-folder-icon.sh " .. downloadFolder)
 end):start()
 
@@ -129,13 +129,14 @@ obsiAlphaWatcher = pw(fileHub, function(files)
 		runWithDelays(0.5, function()
 			hs.execute(
 				[[cd "]] .. fileHub .. [[" || exit 1
-				killall "Obsidian"
 				test -f obsidian-*.*.*.asar.gz || exit 1
-				mv obsidian-*.*.*.asar "$HOME/Library/Application Support/obsidian/"
+				killall "Obsidian" && obsiWasRunning=1
+				mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"
 				cd "$HOME/Library/Application Support/obsidian/"
 				rm obsidian-*.*.*.asar
 				gunzip obsidian-*.*.*.asar.gz
-				open -a "Obsidian" ]]
+				test -n $obsiWasRunning -eq 1 && sleep 1
+				open -a "Obsidian"]]
 			)
 			-- close the created tab
 			applescript [[

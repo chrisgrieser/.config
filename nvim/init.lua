@@ -15,7 +15,7 @@ else
 end
 require("keybindings")
 require("macro")
-require("file-watcher")
+require("automating-nvim")
 require("appearance")
 
 require("lsp-and-diagnostics") -- should come before completion, linter, and debugger

@@ -18,7 +18,7 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 		if eventType == aw.activated or eventType == aw.launched then
 		-- some apps like neovide do not set a "launched" signal, so the delayed
 		-- hiding is used for it activation as well
-		runWithDelays({0, 0.3, 1}, function()
+		runWithDelays({0, 0.3}, function()
 			local win = appObject:mainWindow()
 			if isPseudoMaximized(win) or isMaximized(win) then
 				appObject:selectMenuItem("Hide Others")
