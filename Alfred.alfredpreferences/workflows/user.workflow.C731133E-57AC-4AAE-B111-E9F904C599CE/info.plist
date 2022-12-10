@@ -76,7 +76,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4B2606CD-2C98-4BEB-8E44-4A047BE9B3FA</string>
+				<string>90992FC3-67B0-4E57-A6B5-65BFAA91EDCC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -167,6 +167,19 @@
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>754F2E4D-3974-4DCD-9218-D82A0014576A</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>90992FC3-67B0-4E57-A6B5-65BFAA91EDCC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4B2606CD-2C98-4BEB-8E44-4A047BE9B3FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -438,6 +451,27 @@ brew home "$*"</string>
 			<string>70235FFB-5E85-4C61-A7CE-B1CCC3E1DD0B</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>--\w+</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>90992FC3-67B0-4E57-A6B5-65BFAA91EDCC</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -833,7 +867,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>note</key>
 			<string>search for packages</string>
 			<key>xpos</key>
-			<real>670</real>
+			<real>665</real>
 			<key>ypos</key>
 			<real>395</real>
 		</dict>
@@ -923,6 +957,17 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<real>255</real>
 			<key>ypos</key>
 			<real>355</real>
+		</dict>
+		<key>90992FC3-67B0-4E57-A6B5-65BFAA91EDCC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>remove options</string>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>210</real>
 		</dict>
 		<key>A95AE0C7-7A80-4DA9-96C5-4561B4F4E6F2</key>
 		<dict>

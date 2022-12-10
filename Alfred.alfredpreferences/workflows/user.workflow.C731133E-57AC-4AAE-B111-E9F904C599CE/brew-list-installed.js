@@ -44,8 +44,8 @@ app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; mas li
 			"mods": {
 				"cmd": {
 					"arg": false,
-					"subtitle": "⛔️ Invalid for MAS app."
-				}
+					"subtitle": "⛔️ Invalid for MAS app.",
+				},
 			},
 		});
 	});
