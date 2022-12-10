@@ -37,7 +37,6 @@ b.miniai_config.custom_textobjects = {
 
 -- wrapping and related options
 setlocal("wrap", true) -- soft wrap
-setlocal("linebreak", true) -- do not break words for soft wrap
 setlocal("colorcolumn", "") -- deactivate ruler
 keymap({"n", "x"}, "H", "g^", opts)
 keymap({"n", "x"}, "L", "g$", opts)
