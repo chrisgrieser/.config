@@ -30,9 +30,8 @@ g.markdown_fenced_languages = {
 
 --------------------------------------------------------------------------------
 --custom text object markdown link `il/al`
-b.miniai_config.custom_textobjects = {
-	l = {"%[().*()]%(.*%)"},
-}
+b.miniai_config.custom_textobjects.l = {"%[().*()]%(.*%)"}
+
 --------------------------------------------------------------------------------
 
 -- wrapping and related options
