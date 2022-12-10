@@ -119,6 +119,10 @@ vmap M :mergeLines
 nmap = mzO<Esc>`z
 nmap _ mzo<Esc>`z
 
+" append space after cursor position
+exmap appendSpace jsfile Meta/obsidian-vim-helpers.js {appendSpace()}
+nmap ! :appendSpace
+
 " Caveat: in visual mode requires cursor being on the right end of the selection
 vmap = <Esc>O<Esc>gv
 vmap _ <Esc>o<Esc>gv
@@ -265,4 +269,3 @@ map ,os :spellcheck
 " [O]ption: line [w]rap
 map ,ow :readableLineLength
 
-"───────────────────────────────────────────────────────────────────────────────

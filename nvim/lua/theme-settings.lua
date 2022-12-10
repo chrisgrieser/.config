@@ -2,6 +2,7 @@ require("utils")
 --------------------------------------------------------------------------------
 
 local lightTheme = "melange"
+-- local lightTheme = "dawnfox"
 local darkTheme = "nightfox"
 -- local darkTheme = "tokyonight-moon"
 
@@ -31,32 +32,27 @@ local function customHighlights()
 	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&]*]])
 
 	-- rainbow brackets without aggressive red…
-	cmd [[highlight rainbowcol1 guifg=#7e8a95]] -- no aggressively red brackets…
+	cmd [[highlight rainbowcol1 guifg=#7e8a95]] 
+
+	-- more visible matching
+	cmd [[highlight! MatchParen gui=underline cterm=underline]]
+
+	-- Columns
+	cmd [[highlight! MatchParen gui=underline cterm=underline]]
 
 	-- treesittter refactor focus
 	cmd [[highlight TSDefinition term=underline gui=underdotted]]
 	cmd [[highlight TSDefinitionUsage term=underline gui=underdotted]]
 
 	-- bugfix for https://github.com/neovim/neovim/issues/20456
-	-- cmd [[highlight! def link luaParenError NormalFloat]]
+	cmd [[highlight! def link luaParenError NormalFloat]]
 
 end
-g.ts_highlight_lua = true
 
 local function themeModifications()
 	local mode = opt.background:get()
 	local theme = g.colors_name
-	if theme == "dracula" then
-		cmd [[highlight! IndentBlanklineChar guifg=#445064]]
-		cmd [[highlight! def link ScrollbarHandle IndentBlanklineChar]]
-		cmd [[highlight! NonText guifg=#8f8f8f]]
-		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
-		for _, v in pairs(modes) do
-			cmd("highlight lualine_y_diff_modified_" .. v .. " guifg=#dfdb5d")
-		end
-		cmd("highlight GitSignsChange guifg=#dfdb5d")
-		cmd("highlight! def link MatchParen CursorColumn")
-	elseif theme == "tokyonight" then
+	if theme == "tokyonight" then
 		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
 		for _, v in pairs(modes) do
 			cmd("highlight lualine_y_diff_modified_" .. v .. " guifg=#acaa62")
@@ -92,19 +88,19 @@ autocmd("ColorScheme", {
 -- DARK MODE / LIGHT MODE
 -- functions not local, so they can be accessed via file watcher
 function setDarkTheme()
-	vim.o.background = "dark"
+	opt.background = "dark" ---@diagnostic disable-line: assign-type-mismatch
 	cmd("colorscheme " .. darkTheme)
 	g.neovide_transparency = 0.94
 end
 
 function setLightTheme()
-	vim.o.background = "light"
+	opt.background = "light" ---@diagnostic disable-line: assign-type-mismatch
 	cmd("colorscheme " .. lightTheme)
 	g.neovide_transparency = 0.95
 end
 
 -- automatically set dark or light mode on neovim startup (requires mac though)
-local macOStheme = fn.system([[defaults read -g AppleInterfaceStyle]]):gsub("\n$", "")
+local macOStheme = fn.system [[defaults read -g AppleInterfaceStyle]]:gsub("\n$", "")
 if macOStheme == "Dark" then
 	setDarkTheme()
 else
