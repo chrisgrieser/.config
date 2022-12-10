@@ -235,13 +235,12 @@ require("mini.ai").setup(miniaiConfig)
 local macroPlug = require("macro")
 macroPlug.setup {
 	slots = {"a", "b"},
-	keymaps = {
-		toggleRecording = "0",
-		playRecording = "9",
-		switchMacro = "<C-0>",
-		editMacro = "c0",
-	},
 }
+
+keymap("n", "9", macroPlug.playRecording)
+keymap("n", "0", macroPlug.toggleRecording)
+keymap("n", "<C-0>", macroPlug.switchMacroSlot)
+keymap("n", "c0", macroPlug.editMacro)
 
 --------------------------------------------------------------------------------
 
