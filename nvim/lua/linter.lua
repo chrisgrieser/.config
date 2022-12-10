@@ -27,8 +27,12 @@ null_ls.setup {
 	sources = {
 		-- Global
 		builtins.code_actions.gitsigns, -- gitsigns.nvim plugin, e.g. reset hunks
-		builtins.diagnostics.codespell, -- common misspellings. Far less false positives than with cspell
-		builtins.formatting.codespell, -- autofix those misspellings
+		builtins.diagnostics.codespell.with {-- common misspellings. Far less false positives than with cspell
+			disabled_filetypes = {"css"}, -- base64-encoded fonts cause a lot of errors
+		},
+		builtins.formatting.codespell.with {-- autofix those misspellings
+			disabled_filetypes = {"css"}, -- base64-encoded fonts cause a lot of errors
+		},
 
 		-- SHELL
 		builtins.hover.printenv, -- show value of environment variable on hover command

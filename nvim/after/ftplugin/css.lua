@@ -34,18 +34,23 @@ keymap({"n", "x"}, "<C-j>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 keymap({"n", "x"}, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 
 --------------------------------------------------------------------------------
--- custom text object css selector
+
+keymap("n", "cv", "^Ewct;", opts) -- change value key
+
+-- custom text object css [s]elector (overwriting sentence textobj)
+-- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt
 b.miniai_config = {
 	custom_textobjects = {
-		l = {"%[().*()]%(.*%)"}, 
+		-- is = with ".", as = without
+		s = {"%.()[%w-]+()"},
 	},
 }
 
+-- double css class
+keymap("n", "yc", "yaslBP", {buffer = true, silent = true, remap = true})
+
 --------------------------------------------------------------------------------
 
-keymap("n", "cv", "^Ewct;", opts) -- change value key
-keymap("n", "yc", "mzlEF.yEEp`z", opts) -- yank (double) [c]lass under cursor
-keymap("n", "dc", "lF.d/[.\\s]<CR>:nohl<CR>", opts) -- delete [c]lass under cursor
 
 -- smart line duplicate (mnemonic: [R]eplicate)
 -- switches top/bottom & moves to value
