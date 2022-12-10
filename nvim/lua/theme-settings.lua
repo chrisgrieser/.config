@@ -88,14 +88,14 @@ autocmd("ColorScheme", {
 -- DARK MODE / LIGHT MODE
 -- functions not local, so they can be accessed via file watcher
 function setDarkTheme()
-	opt.background = "dark" ---@diagnostic disable-line: assign-type-mismatch
 	cmd.colorscheme(darkTheme)
+	opt.background = "dark" ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.94
 end
 
 function setLightTheme()
-	opt.background = "light" ---@diagnostic disable-line: assign-type-mismatch
 	cmd.colorscheme(lightTheme)
+	opt.background = "light" ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.95
 end
 

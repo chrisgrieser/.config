@@ -159,13 +159,15 @@ autocmd("BufReadPost", {
 ---select between undoing the last 1h, 4h, or 24h
 ---@param opts table
 function M.undoDuration(opts)
-	if not (opts) then opts = {selection = {b.timeOpened, "15m", "1h", "4h", "24h"}} end
+	local now = os.time()
+	local secsPassed = now - b.timeOpened
+	local minsPassedStr = tostring(secsPassed / 60)
+	local resetLabel = "last save ("..minsPassedStr..")"
+	if not (opts) then opts = {selection = {resetLabel, "15m", "1h", "4h", "24h"}} end
 
 	vim.ui.select(opts.selection, {prompt = "Undo the last…"}, function(choice)
 		if not (choice) then return end
 		if choice == "buffer opening" then
-			local now = os.time()
-			local secsPassed = now - b.timeOpened
 			cmd("earlier " .. secsPassed .. "s")
 			return
 		end

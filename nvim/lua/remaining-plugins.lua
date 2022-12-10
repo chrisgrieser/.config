@@ -30,9 +30,9 @@ autocmd("FileType", {
 --------------------------------------------------------------------------------
 require("regexplainer").setup {
 	mode = "narrative",
+	display = "popup", -- split|popup
 	auto = true, -- automatically show the explainer when the cursor enters a regexp
-
-	-- filetypes (i.e. extensions) in which to run the autocommand
+	mappings = {toggle = nil},
 	filetypes = {
 		"html",
 		"js",
@@ -43,9 +43,5 @@ require("regexplainer").setup {
 		"tsx",
 		"cjsx",
 		"mjsx",
-	},
-
-	mappings = {
-		toggle = "<leader>X",
 	},
 }
