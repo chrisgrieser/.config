@@ -1,13 +1,13 @@
 require("lua.utils")
 
-highlightsScrollAmount = 20
+local highlightsScrollAmount = 20
 
 --------------------------------------------------------------------------------
 -- global pageup/down keys
 -- have to be done here, since when send from Karabiner, gets caught by the
 -- pagedown/up listener from Hammerspoon in `twitterific-iina.lua`
 
-function pseudoHideCursor ()
+local function pseudoHideCursor ()
 	local screen = hs.mouse.getCurrentScreen()
 	if not(screen) then return end
 	local pos = {
@@ -17,7 +17,7 @@ function pseudoHideCursor ()
 	hs.mouse.setRelativePosition(pos, screen)
 end
 
-function scrollDown ()
+local function scrollDown ()
 	if frontApp():lower() == "alacritty" or frontApp() == "Terminal" then
 		keystroke ({"shift"}, "pagedown")
 	elseif frontApp() == "Highlights" then
@@ -26,7 +26,7 @@ function scrollDown ()
 		keystroke ({}, "pagedown")
 	end
 end
-function scrollUp ()
+local function scrollUp ()
 	if frontApp():lower() == "alacritty" or frontApp() == "Terminal" then
 		keystroke ({"shift"}, "pageup")
 	elseif frontApp() == "Highlights" then
@@ -80,7 +80,7 @@ kHidesCursor:disable()
 alfredDisablesJKCursorHider:disable()
 
 function jkWatcher(appName, eventType)
-	if (eventType == aw.activated) then
+	if eventType == aw.activated then
 		if appName == "Brave Browser" or appName == "Reeder" or appName == "Inoreader" then
 			jHidesCursor:enable()
 			kHidesCursor:enable()
