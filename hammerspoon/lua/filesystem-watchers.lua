@@ -122,8 +122,6 @@ fileHubWatcher = pw(fileHub, fromFileHub):start()
 
 --------------------------------------------------------------------------------
 -- auto-install Obsidian Alpha builds as soon as the file is downloaded
-
-
 obsiAlphaWatcher = pw(fileHub, function(files)
 	for _, file in pairs(files) do
 		-- needs delay and crdownload check, since the renaming is sometimes not picked up by hammerspoon
@@ -131,10 +129,12 @@ obsiAlphaWatcher = pw(fileHub, function(files)
 		runWithDelays(0.5, function()
 			hs.execute(
 				[[cd "]] .. fileHub .. [[" || exit 1
+				killall "Obsidian"
 				test -f obsidian-*.*.*.asar.gz || exit 1
-				gunzip obsidian-*.*.*.asar.gz
 				mv obsidian-*.*.*.asar "$HOME/Library/Application Support/obsidian/"
-				killall "Obsidian" && sleep 1
+				cd "$HOME/Library/Application Support/obsidian/"
+				rm obsidian-*.*.*.asar
+				gunzip obsidian-*.*.*.asar.gz
 				open -a "Obsidian" ]]
 			)
 			-- close the created tab

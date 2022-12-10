@@ -15,13 +15,14 @@ end
 transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 	if not (appName == "neovide" or appName == "Neovide" or appName == "Obsidian" or appName == "alacritty" or
 		appName == "Alacritty") then return end
-	local win = appObject:mainWindow()
-
-	if (eventType == aw.activated) and (isPseudoMaximized(win) or isMaximized(win)) then
-		appObject:selectMenuItem("Hide Others")
-	elseif (eventType == aw.launched) and (isPseudoMaximized(win) or isMaximized(win)) then
-		runWithDelays({0.1, 0.2, 0.3}, function ()
-			appObject:selectMenuItem("Hide Others")
+		if eventType == aw.activated or eventType == aw.launched then
+		-- some apps like neovide do not set a "launched" signal, so the delayed
+		-- hiding is used for it activation as well
+		runWithDelays({0, 0.3, 1}, function()
+			local win = appObject:mainWindow()
+			if isPseudoMaximized(win) or isMaximized(win) then
+				appObject:selectMenuItem("Hide Others")
+			end
 		end)
 	elseif eventType == aw.terminated then
 		unHideAll()
