@@ -39,15 +39,6 @@ require("nvim-treesitter.configs").setup {
 		enable = true,
 		disable = {},
 	},
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			init_selection = "gnn",
-			node_incremental = "grn",
-			scope_incremental = "grc",
-			node_decremental = "grm",
-		},
-	},
 	textobjects = {-- textobj plugin
 		move = {-- move to next comment / function
 			enable = true,
@@ -80,6 +71,15 @@ require("nvim-treesitter.configs").setup {
 		},
 	},
 
+	textsubjects = { -- textsubject plugin
+		enable = true,
+		-- prev_selection = ",", -- (Optional) keymap to select the previous selection
+		keymaps = {
+			["."] = "textsubjects-smart",
+			-- [";"] = "textsubjects-container-outer",
+			-- ["i;"] = "textsubjects-container-inner",
+		},
+	},
 	rainbow = {-- rainbow plugin
 		enable = true,
 		disable = {}, -- list of languages you want to disable the plugin for
