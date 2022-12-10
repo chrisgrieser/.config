@@ -93,7 +93,7 @@ cmp.setup {
 	},
 	formatting = {
 		format = function(entry, vim_item)
-			vim_item.kind = kind_icons[vim_item.kind]
+			vim_item.kind = " "..kind_icons[vim_item.kind].." "
 			vim_item.menu = source_icons[entry.source.name]
 			return vim_item
 		end

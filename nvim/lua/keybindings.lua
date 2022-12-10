@@ -231,48 +231,17 @@ miniaiConfig.custom_textobjects.v = {"[=:] ?()().*()[;,]?()\n"}
 require("mini.ai").setup(miniaiConfig)
 
 --------------------------------------------------------------------------------
-
--- MACRO
--- using two slots between which can be switched
-augroup("recording", {})
-autocmd("RecordingLeave", {
-	group = "recording",
-	callback = function()
-		keymap("n", "0", "q" .. g.macroSlot)
-		vim.notify(" Recorded " .. g.macroSlot .. ":\n " .. vim.v.event.regcontents, logTrace)
-	end
-})
-autocmd("RecordingEnter", {
-	group = "recording",
-	callback = function()
-		keymap("n", "0", "q")
-		vim.notify(" Recording to" .. g.macroSlot .. "… ", logTrace)
-	end,
-})
-
-function switchMacroSlot()
-	if not (g.macroSlot) then -- first run
-		g.macroSlot = "y"
-	else
-		g.macroSlot = g.macroSlot == "y" and "x" or "y" -- not saving in throwaway register z, so the respective keymaps can be used during a macro
-		vim.notify(" Now using " .. g.macroSlot .. " ", logTrace)
-	end
-	keymap("n", "9", "@" .. g.macroSlot) -- quick replay (yes, I don't use counts that high)
-	keymap("n", "0", "q" .. g.macroSlot) -- needs to be set initially
-end
-
-switchMacroSlot() -- initialize
-keymap("n", "<C-0>", switchMacroSlot)
-
--- edit macro
-keymap("n", "c0", function()
-	local macro = fn.getreg(g.macroSlot)
-	vim.ui.input({prompt = "Edit Macro " .. g.macroSlot .. ": ", default = macro}, function(editedMacro)
-		if not (editedMacro) then return end -- cancellation
-		fn.setreg(g.macroSlot, editedMacro)
-		vim.notify(" Edited Macro " .. g.macroSlot .. "\n " .. editedMacro, logTrace)
-	end)
-end)
+-- MACROS
+local macroPlug = require("macro")
+macroPlug.setup {
+	slots = {"a", "b"},
+	keymaps = {
+		toggleRecording = "0",
+		playRecording = "9",
+	},
+}
+keymap("n", "<C-0>", macroPlug.switchMacroSlot)
+keymap("n", "c0", macroPlug.editMacro)
 
 --------------------------------------------------------------------------------
 

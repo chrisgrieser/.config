@@ -126,11 +126,6 @@ local function lsp_progress()
 	return client .. progress .. "%% " .. task .. " " .. spinners[frame + 1]
 end
 
-local function recordingStatus()
-	if fn.reg_recording() == "" then return "" end
-	return " RECORDING"
-end
-
 local function readOnly()
 	if bo.modifiable then
 		return ""
@@ -284,7 +279,7 @@ require("lualine").setup {
 		}},
 		lualine_z = {
 			{debuggerStatus, section_separators = winSecSeparators},
-			{recordingStatus, section_separators = winSecSeparators},
+			{require("macro").recordingStatus, section_separators = winSecSeparators},
 		},
 	},
 	options = {
