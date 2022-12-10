@@ -38,7 +38,7 @@ if isGui() then
 		level = 0, -- minimum severity level to display (0 = display all)
 		max_height = 15,
 		minimum_width = 10,
-		timeout = 5000,
+		timeout = 4000,
 		top_down = false,
 	}
 end

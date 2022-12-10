@@ -600,7 +600,6 @@
 				<key>relatedApps</key>
 				<array>
 					<string>com.apple.finder</string>
-					<string>org.yanex.marta</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -746,7 +745,6 @@ open $(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | c
 				<key>relatedApps</key>
 				<array>
 					<string>com.apple.finder</string>
-					<string>org.yanex.marta</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>

@@ -3,7 +3,8 @@ require("utils")
 
 local lightTheme = "melange"
 -- local lightTheme = "dawnfox"
-local darkTheme = "nightfox"
+local darkTheme = "oxocarbon"
+-- local darkTheme = "nightfox"
 -- local darkTheme = "tokyonight-moon"
 
 --------------------------------------------------------------------------------

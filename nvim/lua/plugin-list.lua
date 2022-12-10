@@ -13,6 +13,7 @@ function M.PluginList()
 	use "folke/tokyonight.nvim"
 	use "savq/melange" -- like Obsidian's Primary color scheme
 	use "EdenEast/nightfox.nvim"
+	use "nyoom-engineering/oxocarbon.nvim"
 	-- use "rebelot/kanagawa.nvim"
 
 	-- Treesitter
@@ -48,7 +49,7 @@ function M.PluginList()
 		after = "nvim-cmp",
 		requires = "nvim-treesitter/nvim-treesitter",
 		config = function()
-			require("tabout").setup{
+			require("tabout").setup {
 				act_as_shift_tab = true,
 				ignore_beginning = true,
 			}
