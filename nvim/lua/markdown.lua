@@ -11,7 +11,7 @@ setlocal("spell", true)
 -- hack to make lists auto-continue via Return in Insert & o in normal mode
 -- i.e. replaces bullet.vim based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
 setlocal("comments", "b:*,b:-,b:+")
-local foOpts = getlocalopt("formatoptions"):gsub("[ct]", "") .. "ro" 
+local foOpts = getlocalopt("formatoptions"):gsub("[ct]", "") .. "ro"
 setlocal("formatoptions", foOpts)
 
 -- syntax highlighting in code blocks
@@ -30,10 +30,8 @@ g.markdown_fenced_languages = {
 
 --------------------------------------------------------------------------------
 --custom text object markdown link `il/al`
-b.miniai_config = {
-	custom_textobjects = {
-		l = {"%[().*()]%(.*%)"},
-	},
+b.miniai_config.custom_textobjects = {
+	l = {"%[().*()]%(.*%)"},
 }
 --------------------------------------------------------------------------------
 

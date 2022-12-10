@@ -43,7 +43,7 @@ const workArray = app.doShellScript(
 ).split("\r");
 /* eslint-enable no-multi-str, quotes */
 
-workArray.forEach(file => {
+workArray.forEach(file => { /* eslint-disable-line complexity */
 	const filePath = dotfileFolder + file;
 	const parts = file.split("/");
 	const isFolder = file.endsWith("/");
@@ -77,6 +77,9 @@ workArray.forEach(file => {
 		case "zsh":
 		case "sh":
 			iconObj = { "path": "icons/shell.png" };
+			break;
+		case "png":
+			iconObj = { "path": filePath }; // if png, use image itself
 			break;
 		case "rc":
 			iconObj = { "path": "icons/rc.png" };

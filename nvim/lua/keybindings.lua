@@ -225,23 +225,27 @@ miniaiConfig.custom_textobjects.e = function()
 	local to = {line = row, col = eol - 1}
 	return {from = from, to = to}
 end
-miniaiConfig.custom_textobjects.v = function()
-	local lineNr = fn.line(".")
-	local eol = fn.col("$") - 1
-	local lineContent = fn.getline(".") ---@type string
-	local _, eqSign = lineContent:find("= ?")
-	local _, colonSign = lineContent:find(": ?")
-	local from = {line = lineNr}
-	local to = {line = lineNr, col = eol}
-	if eqSign then
-		from.col = eqSign
-	elseif colonSign then
-		from.col = colonSign
-	else
-		return {}
-	end
-	return {from = from, to = to}
-end
+
+-- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt#L215
+miniaiConfig.custom_textobjects.v = "[=:] ?()().*()[;,]()"
+-- miniaiConfig.custom_textobjects.v = function()
+-- 	local lineNr = fn.line(".")
+-- 	local eol = fn.col("$") - 1
+-- 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
+-- 	local lineContent = fn.getline(".") ---@type string
+-- 	local _, eqSign = lineContent:find("= ?")
+-- 	local _, colonSign = lineContent:find(": ?")
+-- 	local from = {line = lineNr}
+-- 	local to = {line = lineNr, col = eol}
+-- 	if eqSign then
+-- 		from.col = eqSign + 1
+-- 	elseif colonSign then
+-- 		from.col = colonSign + 1
+-- 	else
+-- 		return {}
+-- 	end
+-- 	return {from = from, to = to}
+-- end
 require("mini.ai").setup(miniaiConfig)
 
 --------------------------------------------------------------------------------
@@ -580,7 +584,7 @@ keymap("n", "<D-g>", function()
 	end)
 end)
 
--- GitLinker
+-- GitLinker: Copy & Open in Browser
 keymap("n", "<leader>G", function()
 	require("gitlinker").get_buf_range_url("n", {action_callback = require("gitlinker.actions").copy_to_clipboard})
 	require("gitlinker").get_buf_range_url("n", {action_callback = require("gitlinker.actions").open_in_browser})
@@ -645,14 +649,6 @@ keymap("n", "<leader>r", function()
 	elseif ft == "yaml" and parentFolder:find("/karabiner") then
 		local result = fn.system [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
 		vim.notify(" " .. trim(result) .. " ")
-		if filename == "finder-vim.yaml" then
-			local curFile = fn.expand("%:p")
-			cmd.saveas {os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/finder-vim-mode/finder-vim.yaml",
-				bang = true}
-			cmd.bwipeout()
-			cmd.edit(curFile)
-			vim.notify(" " .. filename .. " also duplicated. ")
-		end
 
 	elseif ft == "typescript" then
 		cmd [[!npm run build]] -- not via fn.system to get the output in the cmdline
@@ -678,5 +674,6 @@ autocmd("FileType", {
 		if bo.filetype == "TelescopePrompt" or bo.filetype == "ssr" then return end
 		keymap("n", "<Esc>", cmd.close, opts)
 		keymap("n", "q", cmd.close, opts)
+		keymap("n", "Q", cmd.close, opts)
 	end
 })
