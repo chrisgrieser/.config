@@ -51,9 +51,7 @@ keymap({"n", "x", "o"}, "L", "$")
 keymap({"x", "o"}, "J", "6j")
 keymap({"n", "x", "o"}, "K", "6k")
 
--- selene: allow(multiple_statements)
 keymap("n", "j", function() qol.overscroll("j") end)
--- selene: allow(multiple_statements)
 keymap("n", "J", function() qol.overscroll("6j") end)
 keymap({"n", "x"}, "G", "Gzz")
 
@@ -64,9 +62,7 @@ keymap("n", "<C-l>", "<C-i>") -- Forward
 -- Search
 keymap({"n", "x", "o"}, "-", [[/\v]]) -- German Keyboard, \v for very-magic search
 keymap("n", "<Esc>", function()
-	-- if more than 10 notifications are in the queue, clear them all
-	local clearPending = require("notify").pending() > 10 and true or false
-	require("notify").dismiss {pending = clearPending}
+	require("notify").dismiss {pending = true}
 	cmd [[nohl]] -- clear highlights
 	cmd [[echo]] -- clear shortmessage
 	cmd [[normal!lh]] -- clear lsp hover window
@@ -129,7 +125,7 @@ autocmd("TextYankPost", {
 -- af -> a [f]unction
 -- ao -> a c[o]ndition
 -- q -> comment (mnemonic: [q]uiet text)
--- Q -> consecutive comment
+-- Q -> consecutive (big) comment
 -- aa -> an [a]rgument
 -- ah -> a [h]unk
 -- ai -> a [i]ndentation
@@ -171,18 +167,17 @@ keymap("n", "<Space>", '"_ciw') -- change word
 keymap("n", "<C-M-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
 keymap("x", "<Space>", '"_c')
 
--- change-subword
--- (i.e. a simpler version of vim-textobj-variable-segment, not supporting CamelCase)
+-- change-subword ( = word excluding _ and - as word-parts)
 keymap("n", "<leader><Space>", function()
 	opt.iskeyword:remove {"_", "-"}
 	cmd [[normal! "_diw]]
-	cmd [[startinsert]] -- :Normal does not allow to end in insert mode
+	cmd [[startinsert]] -- :normal does not allow to end in insert mode
 	opt.iskeyword:append {"_", "-"}
 end)
 
 -- special plugin text objects
-keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {silent = true})
-keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>", {silent = true})
+keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>")
+keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>")
 
 -- map ai to aI in languages where aI is not used anyway
 augroup("indentobject", {})
@@ -270,6 +265,7 @@ end)
 --------------------------------------------------------------------------------
 
 -- Whitespace Control
+keymap("n", "!", "a <Esc>h") -- insert space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
 keymap("n", "d<Space>", function() -- delete blank lines except one
@@ -485,7 +481,7 @@ end
 local function betterAltBuf() -- switch to alternate-file
 	local noAltFile = fn.expand("#") == ""
 	if noAltFile then
-		vim.notify(" No alternate file.", logWarn)
+		vim.notify(" No alternate file. ", logWarn)
 	else
 		cmd [[nohl]]
 		cmd [[buffer #]]
@@ -624,7 +620,7 @@ keymap("n", "<leader>r", function()
 			os.execute('open -g "hammerspoon://hs-reload"')
 		end
 
-	elseif ft == "yaml" and parentFolder:find(".config/karabiner") then
+	elseif ft == "yaml" and parentFolder:find("/karabiner") then
 		os.execute [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
 
 	elseif ft == "typescript" then
@@ -634,7 +630,7 @@ keymap("n", "<leader>r", function()
 		cmd [[AppleScriptRun]]
 
 	else
-		vim.notify(" No build system set.", logWarn)
+		vim.notify(" No build system set. ", logWarn)
 
 	end
 end)
