@@ -17,14 +17,14 @@ function writeToFile(text, file) {
 	str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
 }
 //------------------------------------------------------------------------------
-karabinerJSON = karabinerJSON.replace(/^~/, app.pathTo("home folder"));
-customRulesJSONlocation = customRulesJSONlocation.replace(/^~/, app.pathTo("home folder"));
 
-const yqNotInstalled = app.doShellScript("command yq || echo false") === "false";
-if (yqNotInstalled) {
-	app.displayNotification("", { withTitle: "❌ yq is not installed.", subtitle: "Karabiner Config" });
-	throw "";
-} else {
+function main() {
+	karabinerJSON = karabinerJSON.replace(/^~/, app.pathTo("home folder"));
+	customRulesJSONlocation = customRulesJSONlocation.replace(/^~/, app.pathTo("home folder"));
+
+	const yqNotInstalled = app.doShellScript("command yq || echo false") === "false";
+	if (yqNotInstalled) return "Karabiner Config Build: ❌ yq is not installed.";
+
 	// convert yaml to json (requires `yq`)
 	// using `explode` to expand anchors & aliases: https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators#explode-alias-and-anchor
 	app.doShellScript(`
@@ -57,5 +57,7 @@ if (yqNotInstalled) {
 	const lintStatus = app.doShellScript(`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJSON}"`).trim();
 	const msg = lintStatus === "ok" ? "✅ Build Success" : "🛑 Config Invalid";
 
-	app.displayNotification("", { withTitle: msg, subtitle: "Karabiner Config" });
+	return `Karabiner Config Build: ${msg}`;
 }
+
+main();

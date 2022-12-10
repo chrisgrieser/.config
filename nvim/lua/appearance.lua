@@ -143,8 +143,8 @@ local function alternateFile()
 	local maxLen = 15
 	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
-	local altPath = fn.expand("#:t")
-	local curPath = fn.expand("%:t")
+	local altPath = fn.expand("#:p")
+	local curPath = fn.expand("%:p")
 	if altPath == curPath or altFile == "" then
 		return ""
 	elseif curFile == altFile then
@@ -159,8 +159,8 @@ local function currentFile() -- using this function instead of default filename,
 	local maxLen = 15
 	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
-	local altPath = fn.expand("#:t")
-	local curPath = fn.expand("%:t")
+	local altPath = fn.expand("#:p")
+	local curPath = fn.expand("%:p")
 	if curFile == altFile and not (altPath == curPath) then
 		local curParent = fn.expand("%:p:h:t")
 		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
@@ -289,7 +289,7 @@ require("lualine").setup {
 	},
 	options = {
 		theme = "auto",
-		ignore_focus = specialFiletypes,
+		-- ignore_focus = specialFiletypes,
 		globalstatus = true,
 		component_separators = {left = "", right = ""},
 		section_separators = secSeparators,

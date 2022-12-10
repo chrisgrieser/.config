@@ -13,7 +13,7 @@ opt.ignorecase = true
 -- Popups / Floating Windows
 opt.pumheight = 15 -- max number of items in popup menu
 opt.pumwidth = 10 -- min width popup menu
-opt.winblend = 5 -- % transparency
+opt.winblend = 2 -- % transparency
 
 -- Spelling
 opt.spell = false

@@ -35,14 +35,14 @@ local function customHighlights()
 	cmd [[highlight rainbowcol1 guifg=#7e8a95]]
 
 	-- more visible matching
-	cmd [[highlight! MatchParen gui=underline cterm=underline]]
+	cmd [[highlight! MatchParen gui=standout cterm=standout]]
 
 	-- treesittter refactor focus
 	cmd [[highlight TSDefinition term=underline gui=underdotted]]
 	cmd [[highlight TSDefinitionUsage term=underline gui=underdotted]]
 
 	-- bugfix for https://github.com/neovim/neovim/issues/20456
-	cmd [[highlight! def link luaParenError NormalFloat]]
+	cmd.highlight{"def link luaParenError.highlight NormalFloat", bang = true}
 
 end
 
@@ -57,17 +57,17 @@ local function themeModifications()
 		end
 		cmd("highlight GitSignsChange guifg=#acaa62")
 		cmd("highlight GitSignsAdd guifg=#7fcc82")
-		cmd [[highlight link ScrollView Folded]]
+		cmd.highlight{"def link ScrollView Folded", bang = true}
 	elseif theme == "dawnfox" then
 		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
 		cmd [[highlight VertSplit guifg=#b29b84]]
 	elseif theme == "melange" then
-		cmd [[highlight! def link Todo IncSearch]]
+		cmd.highlight{"def link Todo IncSearch", bang = true}
 		if mode == "light" then
-			cmd [[highlight! def link NonText Conceal]]
-			cmd [[highlight! def link NotifyINFOIcon @define]]
-			cmd [[highlight! def link NotifyINFOTitle @define]]
-			cmd [[highlight! def link NotifyINFOBody @define]]
+			cmd.highlight{"def link NonText Conceal", bang = true}
+			cmd.highlight{"def link NotifyINFOIcon @define", bang = true}
+			cmd.highlight{"def link NotifyINFOTitle @define", bang = true}
+			cmd.highlight{"def link NotifyINFOBody @define", bang = true}
 		end
 	end
 end
@@ -86,13 +86,13 @@ autocmd("ColorScheme", {
 -- functions not local, so they can be accessed via file watcher
 function setDarkTheme()
 	opt.background = "dark" ---@diagnostic disable-line: assign-type-mismatch
-	cmd("colorscheme " .. darkTheme)
+	cmd.colorscheme(darkTheme)
 	g.neovide_transparency = 0.94
 end
 
 function setLightTheme()
 	opt.background = "light" ---@diagnostic disable-line: assign-type-mismatch
-	cmd("colorscheme " .. lightTheme)
+	cmd.colorscheme(lightTheme)
 	g.neovide_transparency = 0.95
 end
 

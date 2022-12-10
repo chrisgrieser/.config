@@ -124,7 +124,7 @@ add("lua", {
 -- nvim-lua
 add("lua", {
 	snip("keymap", 'keymap("n", "$1", ${2:""})\n$0'),
-	snip("highlight (link)", "cmd[[highlight! def link ${1:fromGroup} ${2:toGroup}]]"),
+	snip("highlight (link)", [[cmd.highlight {"def link ${1:fromGroup} ${2:toGroup}", bang = true}]]),
 	snip("keymap (multi-mode)", 'keymap({"n", "${1:x}"}, "$2", ${3:""})\n$0'),
 	snip("input (vim.ui)", [[
 		vim.ui.input({ prompt = "${1:prompt_msg}"}, function (input)
