@@ -11,7 +11,7 @@ else
 fi
 
 if pgrep "neovide"; then
-	echo "cmd[[edit $fileAndLn]]" >"/tmp/nvim-automation" # this part requires the setup in /lua/file-watcher.lua
+	echo "cmd.edit[[$fileAndLn]]" >"/tmp/nvim-automation" # this part requires the setup in /lua/file-watcher.lua
 	osascript -e 'tell application "Neovide" to activate'
 else
 	neovide "$fileAndLn"
