@@ -2,7 +2,7 @@ require("lua.utils")
 --------------------------------------------------------------------------------
 -- CONFIG
 local fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-local dotfilesFolder = home.."/.config/"
+local dotfilesFolder = home .. "/.config/"
 --------------------------------------------------------------------------------
 
 -- BRAVE Bookmarks synced to Chrome Bookmarks (needed for Alfred)
@@ -90,7 +90,7 @@ function fromFileHub(paths)
 
 		-- delete alfredworkflows and ics
 		if fileName:sub(-15) == ".alfredworkflow" or fileName:sub(-4) == ".ics" then
-			runWithDelays(3, function() os.rename(file, home.."/.Trash/"..fileName) end)
+			runWithDelays(3, function() os.rename(file, home .. "/.Trash/" .. fileName) end)
 
 			-- vimium/ublacklist
 		elseif fileName == "vimium-options.json" or fileName == "ublacklist-settings.json" then
@@ -109,16 +109,20 @@ function fromFileHub(paths)
 
 			-- watch later .urls from the office
 		elseif fileName:sub(-4) == ".url" and isIMacAtHome() then
-			os.rename(file, home .. "/Downloaded/"..fileName)
+			os.rename(file, home .. "/Downloaded/" .. fileName)
 			notify("Watch Later URL moved to Video Downloads.")
 
 			-- visualised keyboard layouts
 		elseif fileName:match("base%-keyboard%-layout%.%w+") or fileName:match("app%-switcher%-layout%.%w+") or
 			fileName:match("vimrc%-remapping%.%w+") or fileName:match("marta%-key%-bindings%.%w+") or
-			fileName:match("hyper%-bindings%-layout%.%w+") or fileName:match("single%-keystroke%-bindings%.%w+") or
-			fileName:match("macos%-finder%-vim%-mode%.%w+") then
-			os.rename(file, dotfilesFolder.."/visualized-keyboard-layout/"..fileName)
+			fileName:match("hyper%-bindings%-layout%.%w+") or fileName:match("single%-keystroke%-bindings%.%w+")
+		then
+			os.rename(file, dotfilesFolder .. "/visualized-keyboard-layout/" .. fileName)
 			notify("Visualized Keyboard Layout filed away.")
+
+		elseif fileName:match("finder%-vim%-cheatsheet%.%w+") then
+			os.rename(file, home .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/finder-vim-mode/" .. fileName)
+			notify("Finder Vim Layout filed away.")
 
 		end
 	end

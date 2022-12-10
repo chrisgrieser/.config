@@ -62,7 +62,8 @@ keymap("n", "<C-l>", "<C-i>") -- Forward
 -- Search
 keymap({"n", "x", "o"}, "-", [[/\v]]) -- German Keyboard, \v for very-magic search
 keymap("n", "<Esc>", function()
-	require("notify").dismiss {pending = true}
+	local clearPending = require("notify").pending() > 10 and true or false
+	require("notify").dismiss {pending = clearPending}
 	cmd [[nohl]] -- clear highlights
 	cmd [[echo]] -- clear shortmessage
 	cmd [[normal!lh]] -- clear lsp hover window
