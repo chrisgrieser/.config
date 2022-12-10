@@ -336,14 +336,7 @@ keymap("n", "<leader>lr", qol.removeLog)
 keymap({"n", "x"}, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]]) -- second <CR> due to cmdheight=0
 
 -- sane-gx
-keymap("n", "gx", function()
-	local url = fn.expand("<cWORD>")
-	if url:find("^http") then
-		os.execute([[open "]] .. url .. [["]])
-	else
-		vim.notify(" Not an URL. ", logWarn)
-	end
-end)
+keymap("n", "gx", qol.bettergx)
 
 --------------------------------------------------------------------------------
 
@@ -366,19 +359,16 @@ keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 keymap("n", "<leader>s", function()
 	cmd [[TSJToggle]]
 	if bo.filetype == "lua" then
-		-- HACK to not mess up lua folds
-		cmd [[mkview!]]
+		cmd.mkview() -- HACK to not mess up lua folds
 		vim.lsp.buf.format {async = false} -- not async to avoid race condition
 		cmd [[noautocmd write! | edit %]] -- reload, no autocmd to not trigger rememberFolds augroup, with mkview (of the now non-existing folds) on bufleave
-		cmd [[loadview]]
+		cmd.loadview()
 	else
 		vim.lsp.buf.format {async = true} -- HACK: run formatter as workaround for https://github.com/Wansmer/treesj/issues/25
 	end
 end)
 
-require("treesj").setup {
-	use_default_keymaps = false,
-}
+require("treesj").setup {use_default_keymaps = false}
 augroup("splitjoinFallback", {}) -- HACK: https://github.com/Wansmer/treesj/discussions/19
 autocmd("FileType", {
 	pattern = "*",
@@ -420,24 +410,7 @@ keymap("n", "ö", "<C-w><C-w>") -- switch to next split
 -- CMD-Keybindings
 if isGui() then
 
-	keymap({"n", "x", "i"}, "<D-w>", function() -- cmd+w
-		local moreThanOneTab = fn.tabpagenr("$") > 1
-		local scrollvEnabled = require("scrollview") -- HACK: since scrollview counts as a window
-		local moreThanOneWin = (fn.winnr("$") > 2 and scrollvEnabled) or (fn.winnr("$") > 1 and not (scrollvEnabled))
-		local moreThanOneBuf = #fn.getbufinfo {buflisted = 1} > 1
-
-		cmd.nohlsearch()
-		cmd.update()
-		if moreThanOneTab then
-			cmd.tabclose()
-		elseif moreThanOneWin then
-			cmd.close()
-		elseif moreThanOneBuf then
-			cmd.bwipeout() -- as opposed to bdelete, this ensures the deleted buffer does not stay alternate file
-		else
-			vim.notify(" Only one buffer open. ", logWarn)
-		end
-	end)
+	keymap({"n", "x", "i"}, "<D-w>", qol.betterClose) -- cmd+w
 
 	keymap({"n", "x", "i"}, "<D-z>", cmd.undo) -- cmd+z
 	keymap({"n", "x", "i"}, "<D-S-z>", cmd.redo) -- cmd+shift+z
@@ -613,7 +586,10 @@ keymap("n", "<leader>r", function()
 
 	elseif ft == "lua" then
 		if parentFolder:find("nvim") then
-			cmd [[write! | mkview | source % | loadview]] -- HACK: mkview and loadview needed to not loose folding when sourcing
+			cmd.write()
+			cmd.mkview() -- HACK: mkview and loadview needed to not loose folding when sourcing
+			cmd.source("%")
+			cmd.loadview()
 			if filename:find("plugin%-list") then
 				packer.compile()
 				vim.notify(" Packer recompiled and " .. fn.expand("%") .. " reloaded. ")

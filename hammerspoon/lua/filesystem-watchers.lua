@@ -6,78 +6,67 @@ local dotfilesFolder = home .. "/.config/"
 --------------------------------------------------------------------------------
 
 -- BRAVE Bookmarks synced to Chrome Bookmarks (needed for Alfred)
-browserFolder = home .. "/Library/Application Support/BraveSoftware/Brave-Browser/"
-function bookmarkSync()
+local browserFolder = home .. "/Library/Application Support/BraveSoftware/Brave-Browser/"
+bookmarkWatcher = pw(browserFolder .. "Default/Bookmarks", function()
 	hs.execute("BROWSER_FOLDER='" .. browserFolder .. "' ; " .. [[
 		mkdir -p "$HOME/Library/Application Support/Google/Chrome/Default"
 		cp "$BROWSER_FOLDER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
 		cp "$BROWSER_FOLDER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
 	]])
-end
-
-bookmarkWatcher = pw(browserFolder .. "Default/Bookmarks", bookmarkSync)
-bookmarkWatcher:start()
+end):start()
 
 --------------------------------------------------------------------------------
 
 -- Download Folder Badge
-downloadFolder = home .. "/Downloaded"
-function downloadFolderBadge()
-	-- requires "fileicon" being installed
+-- requires "fileicon" being installed
+local downloadFolder = home .. "/Downloaded"
+downloadFolderWatcher = pw(downloadFolder, function ()
 	hs.execute("zsh ./helpers/download-folder-badge/download-folder-icon.sh " .. downloadFolder)
-end
-
-downloadFolderWatcher = pw(downloadFolder, downloadFolderBadge)
-downloadFolderWatcher:start()
+end):start()
 
 --------------------------------------------------------------------------------
 
 -- FONT rsync (for both directions)
 -- (symlinking the Folder somehow does not work properly, therefore rsync)
-fontLocation = dotfilesFolder .. "/fonts/" -- source folder needs trailing "/" to copy contents (instead of the folder)
+local fontLocation = dotfilesFolder .. "/fonts/" -- source folder needs trailing "/" to copy contents (instead of the folder)
 fontsWatcher1 = pw(home .. "/Library/Fonts", function()
 	hs.execute([[rsync --archive --update --delete "$HOME/Library/Fonts/" "]] .. fontLocation .. [["]])
 	notify("Fonts synced.")
-end)
+end):start()
 fontsWatcher2 = pw(fontLocation, function()
 	hs.execute([[rsync --archive --update --delete "]] .. fontLocation .. [[" "$HOME/Library/Fonts"]])
 	notify("Fonts synced.")
-end)
-fontsWatcher1:start()
-fontsWatcher2:start()
+end):start()
 
 --------------------------------------------------------------------------------
 
 -- Redirects TO File Hub
-scanFolder = home .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
+local scanFolder = home .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 scanFolderWatcher = pw(scanFolder, function()
 	hs.execute("mv '" .. scanFolder .. "'/* '" .. fileHub .. "'")
 	notify("Scan moved to File Hub.")
-end)
-scanFolderWatcher:start()
+end):start()
 
-systemDownloadFolder = home .. "/Downloads/"
+local systemDownloadFolder = home .. "/Downloads/"
 systemDlFolderWatcher = pw(systemDownloadFolder, function()
 	hs.execute("mv '" .. systemDownloadFolder .. "'/* '" .. fileHub .. "'")
 	notify("Download moved to File Hub.")
-end)
-systemDlFolderWatcher:start()
+end):start()
 
-draftsIcloud = home .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
+local draftsIcloud = home .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
 draftsIcloudWatcher = pw(draftsIcloud, function(files)
 	for _, file in pairs(files) do
 		if file:sub(-3) ~= ".md" then return end
 		hs.execute("mv '" .. draftsIcloud .. "'/*.md '" .. fileHub .. "'")
 		notify("Drafts doc moved to File Hub.")
 	end
-end)
-draftsIcloudWatcher:start()
+end):start()
 
 --------------------------------------------------------------------------------
 
 -- Redirects FROM File Hub
 local browserSettings = dotfilesFolder .. "/browser-extension-configs/"
-function fromFileHub(paths)
+local function fromFileHub(paths)
 	for _, file in pairs(paths) do
 		local function isInSubdirectory(f, folder) -- (instead of directly in the folder)
 			local _, fileSlashes = f:gsub("/", "")
@@ -129,12 +118,13 @@ function fromFileHub(paths)
 	end
 end
 
-fileHubWatcher = pw(fileHub, fromFileHub)
-fileHubWatcher:start()
+fileHubWatcher = pw(fileHub, fromFileHub):start()
 
 --------------------------------------------------------------------------------
 -- auto-install Obsidian Alpha builds as soon as the file is downloaded
-function installObsiAlpha(files)
+
+
+obsiAlphaWatcher = pw(fileHub, function(files)
 	for _, file in pairs(files) do
 		-- needs delay and crdownload check, since the renaming is sometimes not picked up by hammerspoon
 		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
@@ -164,7 +154,4 @@ function installObsiAlpha(files)
 			]]
 		end)
 	end
-end
-
-obsiAlphaWatcher = pw(fileHub, installObsiAlpha)
-obsiAlphaWatcher:start()
+end):start()

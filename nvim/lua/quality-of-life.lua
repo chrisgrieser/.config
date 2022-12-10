@@ -103,6 +103,41 @@ function M.duplicateSelection()
 end
 
 --------------------------------------------------------------------------------
+
+-- macOS only
+-- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt
+function M.bettergx()
+	local urlVimRegex = [[https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*]] -- https://gist.github.com/tobym/584909
+	local urlLuaRegex = [[https?:?[^%s]+]] -- lua url regex being simple is okay, since vimregex runs before
+	local urlLineNr = fn.search(urlVimRegex, "nwcz")
+	if urlLineNr == 0 then
+		vim.notify(" No URL found in this file. ", logWarn)
+		return
+	end
+	local urlLine = fn.getline(urlLineNr) ---@type string
+	local url = urlLine:match(urlLuaRegex)
+	os.execute([[open "]] .. url .. [["]])
+end
+
+function M.betterClose() 
+		local moreThanOneTab = fn.tabpagenr("$") > 1
+		local scrollvEnabled = require("scrollview") -- HACK: since scrollview counts as a window
+		local moreThanOneWin = (fn.winnr("$") > 2 and scrollvEnabled) or (fn.winnr("$") > 1 and not (scrollvEnabled))
+		local moreThanOneBuf = #fn.getbufinfo {buflisted = 1} > 1
+
+		cmd.nohlsearch()
+		cmd.update()
+		if moreThanOneTab then
+			cmd.tabclose()
+		elseif moreThanOneWin then
+			cmd.close()
+		elseif moreThanOneBuf then
+			cmd.bwipeout() -- as opposed to bdelete, this ensures the deleted buffer does not stay alternate file
+		else
+			vim.notify(" Only one buffer open. ", logWarn)
+		end
+	end
+--------------------------------------------------------------------------------
 -- UNDO
 -- Save
 augroup("undoTimeMarker", {})
