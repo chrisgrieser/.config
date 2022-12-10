@@ -1,39 +1,43 @@
 require("utils")
 local trace = vim.log.levels.TRACE
-local keymap = vim.keymap.set
 local fn = vim.fn
-local macroRegs, keys
+local macroRegs
 local activeSlot
 local M = {}
 --------------------------------------------------------------------------------
 
-local function stopRecording()
-	cmd.normal ("q")
-	local justRecorded = vim.v.event.regcontents
-	keymap("n", keys.toggleRecording, startRecording)
-	vim.notify(" Recorded [" .. activeSlot .. "]: \n " .. justRecorded .. " ", trace)
+-- start/stop recording macro into the current slot
+function M.toggleRecording()
+	local isRecording = fn.reg_recording() ~= ""
+	if isRecording then
+		cmd.normal{"q", bang = true}
+		print(vim.v.event)
+		fn.setreg(activeSlot, fn.getreg(activeSlot):sub(1, -2)) -- remove last character
+		local justRecorded = fn.getreg(activeSlot)
+		vim.notify(" Recorded [" .. activeSlot .. "]: \n " .. justRecorded .. " ", trace)
+	else
+		cmd.normal {"q" .. activeSlot, bang = true}
+		vim.notify(" Recording to [" .. activeSlot .. "]… ", trace)
+	end
 end
 
-function startRecording()
-	cmd.normal {"q" .. activeSlot, bang = true}
-	keymap("n", keys.toggleRecording, stopRecording)
-	vim.notify(" Recording to [" .. activeSlot .. "]… ", trace)
+---play the macro recorded in current slot
+function M.playRecording()
+	cmd.normal{"@"..activeSlot, bang = true}
 end
 
----changes the active macroSlot & adapts keymaps for it
-local function switchMacroSlot()
+---changes the active slot
+function M.switchMacroSlot()
 	if not (activeSlot) then -- first run
 		activeSlot = macroRegs[1]
 	else
 		activeSlot = activeSlot == macroRegs[1] and macroRegs[2] or macroRegs[1]
 		vim.notify(" Now using macro slot [" .. activeSlot .. "] ", trace)
 	end
-	keymap("n", keys.playRecording, "@" .. activeSlot)
-	keymap("n", keys.toggleRecording, startRecording)
 end
 
----edit the current macroSlot
-local function editMacro()
+---edit the current slot
+function M.editMacro()
 	local macro = fn.getreg(activeSlot)
 	local inputConfig = {
 		prompt = "Edit Macro [" .. activeSlot .. "]: ",
@@ -52,16 +56,12 @@ end
 ---@param config table
 function M.setup(config)
 	macroRegs = config.slots
-	keys = config.keymaps
-	switchMacroSlot() -- initialize first slot & keymaps
-	keymap("n", "<C-0>", switchMacroSlot)
-	keymap("n", "c0", editMacro)
-
+	M.switchMacroSlot() -- initialize first slot & keymaps
 end
 
 --------------------------------------------------------------------------------
 
----returns Recording-Status for status line plugins (e.g., used with cmdheight=0)
+---returns recording status for status line plugins (e.g., used with cmdheight=0)
 ---@return string
 function M.recordingStatus()
 	if fn.reg_recording() == "" then return "" end

@@ -61,7 +61,7 @@ local function themeModifications()
 		cmd.highlight {"def link ScrollView Folded", bang = true}
 	elseif theme == "oxocarbon" then
 		cmd.highlight {"def link FloatTitle TelescopePromptTitle", bang = true}
-		cmd.highlight {"def link @function TelescopePromptTitle", bang = true}
+		cmd.highlight {"def link @function @function.builtin", bang = true} -- no bold
 	elseif theme == "dawnfox" then
 		cmd.highlight [[IndentBlanklineChar guifg=#deccba]]
 		cmd.highlight [[VertSplit guifg=#b29b84]]
