@@ -21,25 +21,25 @@ local function customHighlights()
 		"SpellBad",
 	}
 	for _, v in pairs(highlights) do
-		cmd("highlight " .. v .. " gui=underline")
+		cmd.highlight(v .. " gui=underline")
 	end
 
 	-- active indent
-	cmd [[highlight! def link IndentBlanklineContextChar Comment]]
+	cmd.highlight{"def link IndentBlanklineContextChar Comment", bang = true}
 
 	-- URLs
-	cmd [[highlight urls cterm=underline term=underline gui=underline]]
+	cmd.highlight [[urls cterm=underline gui=underline]]
 	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&]*]])
 
 	-- rainbow brackets without aggressive red…
-	cmd [[highlight rainbowcol1 guifg=#7e8a95]]
+	cmd.highlight [[rainbowcol1 guifg=#7e8a95]]
 
 	-- more visible matching
-	cmd [[highlight! MatchParen gui=standout cterm=standout]]
+	cmd.highlight [[MatchParen gui=underdotted cterm=underdotted]]
 
 	-- treesittter refactor focus
-	cmd [[highlight TSDefinition term=underline gui=underdotted]]
-	cmd [[highlight TSDefinitionUsage term=underline gui=underdotted]]
+	cmd.highlight [[TSDefinition term=underline gui=underdotted]]
+	cmd.highlight [[TSDefinitionUsage term=underline gui=underdotted]]
 
 	-- bugfix for https://github.com/neovim/neovim/issues/20456
 	cmd.highlight{"def link luaParenError.highlight NormalFloat", bang = true}
@@ -52,15 +52,15 @@ local function themeModifications()
 	if theme == "tokyonight" then
 		local modes = {"normal", "visual", "insert", "terminal", "replace", "command", "inactive"}
 		for _, v in pairs(modes) do
-			cmd("highlight lualine_y_diff_modified_" .. v .. " guifg=#acaa62")
-			cmd("highlight lualine_y_diff_added_" .. v .. " guifg=#8cbf8e")
+			cmd.highlight("lualine_y_diff_modified_" .. v .. " guifg=#acaa62")
+			cmd.highlight("lualine_y_diff_added_" .. v .. " guifg=#8cbf8e")
 		end
-		cmd("highlight GitSignsChange guifg=#acaa62")
-		cmd("highlight GitSignsAdd guifg=#7fcc82")
+		cmd.highlight("GitSignsChange guifg=#acaa62")
+		cmd.highlight("GitSignsAdd guifg=#7fcc82")
 		cmd.highlight{"def link ScrollView Folded", bang = true}
 	elseif theme == "dawnfox" then
-		cmd [[highlight IndentBlanklineChar guifg=#deccba]]
-		cmd [[highlight VertSplit guifg=#b29b84]]
+		cmd.highlight [[IndentBlanklineChar guifg=#deccba]]
+		cmd.highlight [[VertSplit guifg=#b29b84]]
 	elseif theme == "melange" then
 		cmd.highlight{"def link Todo IncSearch", bang = true}
 		if mode == "light" then

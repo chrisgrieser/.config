@@ -2,12 +2,12 @@ require("utils")
 --------------------------------------------------------------------------------
 
 -- mixed whitespace
-cmd [[highlight! def link MixedWhiteSpace Folded]]
-cmd [[call matchadd('MixedWhiteSpace', '^\(\t\+ \| \+\t\)[ \t]*')]]
+cmd.highlight {"def link MixedWhiteSpace Folded", bang = true}
+fn.matchadd("MixedWhiteSpace", [[^\(\t\+ \| \+\t\)[ \t]*]])
 
 -- Annotations
-cmd [[highlight! def link myAnnotations Todo]] -- use same styling as "TODO"
-cmd [[call matchadd('myAnnotations', '\<\(BUG\|WTF\|HACK\|TODO\|INFO\|NOTE\|WARNING\)\>') ]]
+cmd.highlight{"def link myAnnotations Todo", bang = true} -- use same styling as "TODO"
+fn.matchadd("myAnnotations", [[\<\(BUG\|WTF\|HACK\|TODO\|INFO\|NOTE\|WARNING\)\>]])
 
 --------------------------------------------------------------------------------
 -- Indentation
