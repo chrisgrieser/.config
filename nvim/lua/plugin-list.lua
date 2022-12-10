@@ -26,7 +26,7 @@ function M.PluginList()
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"p00f/nvim-ts-rainbow", -- colored brackets
 			"m-demare/hlargs.nvim", -- highlight function args
-			"RRethy/nvim-treesitter-textsubjects", -- smart text object
+			"drybalka/tree-climber.nvim", -- treesitter sibling based navigation
 		}
 	}
 	use {"Wansmer/treesj", -- split-join
@@ -38,6 +38,11 @@ function M.PluginList()
 	use {"cshuaimin/ssr.nvim", -- structural search & replace
 		module = "ssr",
 		commit = "4304933", -- TODO: update to newest version with nvim 0.9 https://github.com/cshuaimin/ssr.nvim/issues/11#issuecomment-1340671193
+		config = function()
+			require("ssr").setup {
+				keymaps = {close = "Q"},
+			}
+		end
 	}
 
 	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
