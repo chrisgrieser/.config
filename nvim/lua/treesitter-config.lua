@@ -29,7 +29,6 @@ require("nvim-treesitter.configs").setup {
 			"css", -- looks weird with css: https://github.com/tree-sitter/tree-sitter-css/issues/34
 			"scss",
 			"markdown", -- looks worse and enables spellcheck in URLs and Code Blocks 🙈
-			-- "markdown-inline", -- breaks e.g., yaml frontmatter highlighting
 		},
 
 	},
@@ -71,15 +70,6 @@ require("nvim-treesitter.configs").setup {
 		},
 	},
 
-	textsubjects = { -- textsubject plugin
-		enable = true,
-		-- prev_selection = ",", -- (Optional) keymap to select the previous selection
-		keymaps = {
-			["."] = "textsubjects-smart",
-			-- [";"] = "textsubjects-container-outer",
-			-- ["i;"] = "textsubjects-container-inner",
-		},
-	},
 	rainbow = {-- rainbow plugin
 		enable = true,
 		disable = {}, -- list of languages you want to disable the plugin for
@@ -107,6 +97,13 @@ require("nvim-treesitter.configs").setup {
 --------------------------------------------------------------------------------
 -- highlight parameters
 require("hlargs").setup()
+
+
+--------------------------------------------------------------------------------
+keymap({"n", "x", "o"}, "", function() require("tree-climber").goto_parent() end)
+keymap({"n", "x", "o"}, "L", function() require("tree-climber").goto_child() end)
+keymap({"n", "x", "o"}, "J", function() require("tree-climber").goto_next() end)
+keymap({"n", "x", "o"}, "K", function() require("tree-climber").goto_prev() end)
 
 --------------------------------------------------------------------------------
 -- force treesitter to highlight zsh as if it was bash
