@@ -1,6 +1,15 @@
 require("utils")
 --------------------------------------------------------------------------------
 
+-- DIRECTORIES
+opt.directory:prepend(vimDataDir .. "swap//")
+opt.undodir:prepend(vimDataDir .. "undo//")
+opt.viewdir = vimDataDir .. "view"
+opt.shadafile = vimDataDir .. "main.shada"
+
+opt.undofile = true -- enable persistent undo history
+--------------------------------------------------------------------------------
+
 -- timeouts
 opt.timeoutlen = 1200 -- for awaiting keystrokes when there is no `nowait`
 opt.updatetime = 250 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
@@ -36,12 +45,14 @@ opt.listchars = {
 	lead = "·",
 	leadmultispace = "·",
 	trail = "·",
-	precedes = "",
+	precedes = "<",
+	extends = ">",
 }
 opt.fillchars = {
 	eob = " ", -- no ~ for the eof, no dots for folds
 	fold = " ", -- no dots for folds
 }
+opt.showbreak = "↪ " -- precedes wrapped lines
 
 -- Split
 opt.splitright = true -- vsplit right instead of left
@@ -58,6 +69,8 @@ opt.scrolloff = 12
 opt.sidescrolloff = 20
 opt.textwidth = 80
 opt.wrap = false
+opt.breakindent = false
+opt.linebreak = true -- do not break up full words
 opt.colorcolumn = {"+1", "+20"} -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
 opt.backspace = {"start", "eol"} -- restrict insert mode backspace behavior
@@ -106,17 +119,6 @@ autocmd("TextYankPost", {
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, useful e.g. for kebab-case-variables
 opt.nrformats = "alpha" -- <C-a> and <C-x> also work on letters
-
---------------------------------------------------------------------------------
-
--- UNDO & SWAP
-opt.undofile = true -- enable persistent undo history
-
--- save swap, undo, view, and shada files in cloud for syncing with other devices
-opt.directory:prepend(vimDataDir .. "swap//")
-opt.undodir:prepend(vimDataDir .. "undo//")
-opt.viewdir = vimDataDir .. "view"
-opt.shadafile = vimDataDir .. "main.shada"
 
 --------------------------------------------------------------------------------
 
