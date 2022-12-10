@@ -248,12 +248,16 @@ autocmd("RecordingLeave", {
 autocmd("RecordingEnter", {
 	group = "recording",
 	callback = function()
+		local oldMacro = fn.getreg("y")
+		fn.setreg("x", oldMacro)
 		keymap("n", "0", "q")
 		vim.notify(" Recording…", logTrace)
 	end,
 })
 keymap("n", "9", "@y") -- quick replay (yes, I don't use counts that high)
 keymap("n", "0", "qy") -- needs to be set initially
+keymap("n", "<C-9>", "@y")  -- play previous macro
+
 keymap("n", "c0", function() -- edit macro
 	local macro = fn.getreg("y")
 	vim.ui.input({prompt = "Edit Macro: ", default = macro}, function(editedMacro)
@@ -476,10 +480,26 @@ autocmd("BufReadPost", {
 	end
 })
 
--- INFO: nohl added here, since it does not work with autocmds
-keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)") -- cycle between buffers
-keymap("n", "<S-BS>", ":nohl<CR><Plug>(CybuPrev)")
-keymap("n", "gb", telescope.buffers) -- open Buffer
+-- cycle between buffers
+keymap("n", "<BS>", function ()
+	local moreThanOneBuf = fn.getbufinfo {buflisted = 1} > 1
+	if moreThanOneBuf then
+		cmd.nohlsearch()-- INFO: nohl added here, since it does not work with autocmds
+		cmd[[<Plug>(CybuNext)]]
+	else
+		vim.notify(" Only one buffer open. ")
+	end
+end)
+-- Buffer selector
+keymap("n", "gb", function ()
+	local moreThanOneBuf = fn.getbufinfo {buflisted = 1} > 1
+	if moreThanOneBuf then
+		cmd.nohlsearch()
+		telescope.buffers()
+	else
+		vim.notify(" Only one buffer open. ")
+	end
+end)
 
 require("cybu").setup {
 	display_time = 1000,

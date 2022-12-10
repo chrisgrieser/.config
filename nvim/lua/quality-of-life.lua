@@ -119,10 +119,10 @@ function M.bettergx()
 	os.execute([[open "]] .. url .. [["]])
 end
 
+---Close tabs, window, buffer in that order if there is more than one of the type
 function M.betterClose()
 	local moreThanOneTab = fn.tabpagenr("$") > 1
 	local buffers = fn.getbufinfo {buflisted = 1}
-	local moreThanOneBuf = #buffers > 1
 	local scrollviewInstalled = require("scrollview") -- HACK: since scrollview counts as a window
 	local winThreshhold = scrollviewInstalled and 2 or 1
 	local moreThanOneWin = fn.winnr("$") > winThreshhold
@@ -133,10 +133,12 @@ function M.betterClose()
 		cmd.tabclose()
 	elseif moreThanOneWin then
 		cmd.close()
-	elseif moreThanOneBuf then
+	elseif #buffers == 2 then
+		cmd.bwipeout() -- only method to clear altfile
+	elseif #buffers > 1 then
 		cmd.bdelete()
-		local currentFile = fn.expand("%:p")
 		local newAltBuffer = buffers[1].name
+		local currentFile = fn.expand("%:p")
 		if newAltBuffer == currentFile then newAltBuffer = buffers[2] end
 		fn.setreg("#", newAltBuffer)
 	else
@@ -156,7 +158,7 @@ autocmd("BufReadPost", {
 ---select between undoing the last 1h, 4h, or 24h
 ---@param opts table
 function M.undoDuration(opts)
-	if not (opts) then opts = {selection = {"buffer opening", "15m", "1h", "4h", "24h"}} end
+	if not (opts) then opts = {selection = {b.timeOpened, "15m", "1h", "4h", "24h"}} end
 
 	vim.ui.select(opts.selection, {prompt = "Undo the last…"}, function(choice)
 		if not (choice) then return end
