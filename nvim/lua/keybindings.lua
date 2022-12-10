@@ -124,15 +124,16 @@ autocmd("TextYankPost", {
 -- TEXTOBJECTS
 
 -- LIST
--- af -> a [f]unction
--- ao -> a c[o]ndition
--- q -> comment (mnemonic: [q]uiet text)
--- Q -> consecutive (big) comment
--- aa -> an [a]rgument
--- ah -> a [h]unk
--- ai -> a [i]ndentation
--- ad -> a [d]iagnostic
--- ae -> almost to the [e]nding of line
+-- af -> a [f]unction (treesitter)
+-- ao -> a c[o]ndition (treesitter)
+-- q -> comment (mnemonic: [q]uiet text) (treesitter)
+-- Q -> consecutive (big) comment (comments.nvim)
+-- aa -> an [a]rgument (treesitter)
+-- ah -> a [h]unk (gitsigns)
+-- ai -> a [i]ndentation (indent-textobj)
+-- ad -> a [d]iagnostic (diagnostic-textobj)
+-- ae -> almost to the [e]nding of line (mini.ai)
+-- av -> a Value (mini.ai)
 
 keymap({"o", "x"}, "iq", 'i"') -- [q]uote
 keymap({"o", "x"}, "aq", 'a"')
@@ -158,8 +159,7 @@ keymap("o", "r", "}") -- [r]est of the paragraph
 
 -- FILE-TYPE-SPECIFIC TEXT OBJECTS
 -- al: a [l]ink (markdown)
--- c: class
--- v: value
+-- as: selector
 
 --------------------------------------------------------------------------------
 -- Text Object definitions
@@ -225,46 +225,56 @@ miniaiConfig.custom_textobjects.e = function()
 	local to = {line = row, col = eol - 1}
 	return {from = from, to = to}
 end
+miniaiConfig.custom_textobjects.v = function()
+	local lineNr = fn.line(".")
+	local eol = fn.col("$") - 1
+	local lineContent = fn.getline(".") ---@type string
+	local _, eqSign = lineContent:find("= ?")
+	local _, colonSign = lineContent:find(": ?")
+	local from = {line = lineNr}
+	local to = {line = lineNr, col = eol}
+	if eqSign then
+		from.col = eqSign
+	elseif colonSign then
+		from.col = colonSign
+	else
+		return {}
+	end
+	return {from = from, to = to}
+end
 require("mini.ai").setup(miniaiConfig)
 
 --------------------------------------------------------------------------------
 
 -- MACRO
--- one-off recording
+-- using two slots between which can be switched
 augroup("recording", {})
 autocmd("RecordingLeave", {
 	group = "recording",
 	callback = function()
 		keymap("n", "0", "q" .. g.macroSlot)
-		local macro = vim.v.event.regcontents
-		if macro ~= "" then
-			vim.notify(" Recorded\n " .. macro, logTrace)
-		else
-			vim.notify(" Recording cancelled. ", logTrace)
-		end
+		vim.notify(" Recorded "..g.macroSlot..":\n " .. vim.v.event.regcontents, logTrace)
 	end
 })
 autocmd("RecordingEnter", {
 	group = "recording",
 	callback = function()
 		keymap("n", "0", "q")
-		vim.notify(" Recording…", logTrace)
+		vim.notify(" Recording to"..g.macroSlot.."… ", logTrace)
 	end,
 })
 
 function switchMacroSlot()
-	g.macroSlot = g.macroSlot == "y" and "x" or "y"
-	if g.macroSlot == "x" then
-		g.macroSlot = "y" -- not saving in throwaway register z, so the respective keymaps can be used during a macro
+	if not (g.macroSlot) then -- first run
+		g.macroSlot = "y"
 	else
-		g.macroSlot = "x"
+		g.macroSlot = g.macroSlot == "y" and "x" or "y" -- not saving in throwaway register z, so the respective keymaps can be used during a macro
+		vim.notify(" Now using " .. g.macroSlot.. " ", logTrace)
 	end
-	vim.notify(" Now: Slot "..g.macroSlot, logTrace)
 	keymap("n", "9", "@" .. g.macroSlot) -- quick replay (yes, I don't use counts that high)
 	keymap("n", "0", "q" .. g.macroSlot) -- needs to be set initially
 end
 
-g.macroSlot = "y"
 switchMacroSlot() -- initialize
 keymap("n", "<C-0>", switchMacroSlot)
 
