@@ -235,7 +235,7 @@ function M.quicklog(opts)
 	end
 
 	if ft == "lua" then
-		logStatement = 'print("' .. lnStr .. varname .. ': ", ' .. varname .. ")"
+		logStatement = 'print("' .. lnStr .. varname .. ':", ' .. varname .. ")"
 	elseif ft == "python" then
 		logStatement = 'print("' .. lnStr .. varname .. ': " + ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then

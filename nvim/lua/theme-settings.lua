@@ -1,9 +1,9 @@
 require("utils")
 --------------------------------------------------------------------------------
 
-local lightTheme = "melange"
+lightTheme = "melange"
 -- local lightTheme = "dawnfox"
-local darkTheme = "oxocarbon"
+darkTheme = "oxocarbon"
 -- local darkTheme = "nightfox"
 -- local darkTheme = "tokyonight-moon"
 
@@ -26,7 +26,7 @@ local function customHighlights()
 	end
 
 	-- active indent
-	cmd.highlight{"def link IndentBlanklineContextChar Comment", bang = true}
+	cmd.highlight {"def link IndentBlanklineContextChar Comment", bang = true}
 
 	-- URLs
 	cmd.highlight [[urls cterm=underline gui=underline]]
@@ -43,7 +43,7 @@ local function customHighlights()
 	cmd.highlight [[TSDefinitionUsage term=underline gui=underdotted]]
 
 	-- bugfix for https://github.com/neovim/neovim/issues/20456
-	cmd.highlight{"def link luaParenError.highlight NormalFloat", bang = true}
+	cmd.highlight {"def link luaParenError.highlight NormalFloat", bang = true}
 
 end
 
@@ -58,19 +58,20 @@ local function themeModifications()
 		end
 		cmd.highlight("GitSignsChange guifg=#acaa62")
 		cmd.highlight("GitSignsAdd guifg=#7fcc82")
-		cmd.highlight{"def link ScrollView Folded", bang = true}
+		cmd.highlight {"def link ScrollView Folded", bang = true}
 	elseif theme == "oxocarbon" then
 		cmd.highlight {"def link FloatTitle TelescopePromptTitle", bang = true}
+		cmd.highlight {"def link @function TelescopePromptTitle", bang = true}
 	elseif theme == "dawnfox" then
 		cmd.highlight [[IndentBlanklineChar guifg=#deccba]]
 		cmd.highlight [[VertSplit guifg=#b29b84]]
 	elseif theme == "melange" then
-		cmd.highlight{"def link Todo IncSearch", bang = true}
+		cmd.highlight {"def link Todo IncSearch", bang = true}
 		if mode == "light" then
-			cmd.highlight{"def link NonText Conceal", bang = true}
-			cmd.highlight{"def link NotifyINFOIcon @define", bang = true}
-			cmd.highlight{"def link NotifyINFOTitle @define", bang = true}
-			cmd.highlight{"def link NotifyINFOBody @define", bang = true}
+			cmd.highlight {"def link NonText Conceal", bang = true}
+			cmd.highlight {"def link NotifyINFOIcon @define", bang = true}
+			cmd.highlight {"def link NotifyINFOTitle @define", bang = true}
+			cmd.highlight {"def link NotifyINFOBody @define", bang = true}
 		end
 	end
 end
@@ -88,14 +89,14 @@ autocmd("ColorScheme", {
 -- DARK MODE / LIGHT MODE
 -- functions not local, so they can be accessed via file watcher
 function setDarkTheme()
-	cmd.colorscheme(darkTheme)
 	opt.background = "dark" ---@diagnostic disable-line: assign-type-mismatch
+	cmd.colorscheme(darkTheme)
 	g.neovide_transparency = 0.94
 end
 
 function setLightTheme()
-	cmd.colorscheme(lightTheme)
 	opt.background = "light" ---@diagnostic disable-line: assign-type-mismatch
+	cmd.colorscheme(lightTheme)
 	g.neovide_transparency = 0.95
 end
 
