@@ -113,23 +113,8 @@ function settings () {
 
 # copies last n commands
 function lc (){
-	number="$*"
-	if [[ "$number" == "" ]] ; then
-		history | tail -n1 | cut -c8- | xargs echo -n | pbcopy
-	else
-		history | tail -n"$number" | cut -c8- | pbcopy
-	fi
+	history | tail -n1 | cut -c8-
 	echo "Copied."
-}
-
-# Save last n commands to Drafts
-function lcd (){
-	number="$*"
-	if [[ "$number" == "" ]] ; then
-		number=1
-	fi
-	lastCommand=$(history | tail -n "$number" | cut -c 8-)
-	osascript -e "tell application \"Drafts\" to make new draft with properties {content: \"$lastCommand\", tags: {\"Terminal Command\"}}" &> /dev/null
 }
 
 # copies result of last command

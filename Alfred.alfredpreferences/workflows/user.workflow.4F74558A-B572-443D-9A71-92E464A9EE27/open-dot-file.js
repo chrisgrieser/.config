@@ -68,6 +68,9 @@ workArray.forEach(file => {
 		case "yml":
 			iconObj = { "path": "icons/yaml.png" };
 			break;
+		case "md":
+			iconObj = { "path": "icons/markdown-file.png" };
+			break;
 		case "js":
 			iconObj = { "path": "icons/js.png" };
 			break;
@@ -108,10 +111,9 @@ jsonArray.push({
 	"arg": dotfileFolder,
 });
 
-const pwPath = home + "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Authentification/.password-store";
+const pwPath = home + "/.password-store";
 jsonArray.push({
 	"title": ".password-store",
-	"subtitle": "▸ Dotfolder/Authentification/",
 	"match": alfredMatcher(pwPath),
 	"icon": { "type": "fileicon", "path": pwPath },
 	"type": "file:skipcheck",
