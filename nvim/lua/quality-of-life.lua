@@ -119,24 +119,31 @@ function M.bettergx()
 	os.execute([[open "]] .. url .. [["]])
 end
 
-function M.betterClose() 
-		local moreThanOneTab = fn.tabpagenr("$") > 1
-		local scrollvEnabled = require("scrollview") -- HACK: since scrollview counts as a window
-		local moreThanOneWin = (fn.winnr("$") > 2 and scrollvEnabled) or (fn.winnr("$") > 1 and not (scrollvEnabled))
-		local moreThanOneBuf = #fn.getbufinfo {buflisted = 1} > 1
+function M.betterClose()
+	local moreThanOneTab = fn.tabpagenr("$") > 1
+	local buffers = fn.getbufinfo {buflisted = 1}
+	local moreThanOneBuf = #buffers > 1
+	local scrollviewInstalled = require("scrollview") -- HACK: since scrollview counts as a window
+	local winThreshhold = scrollviewInstalled and 2 or 1
+	local moreThanOneWin = fn.winnr("$") > winThreshhold
 
-		cmd.nohlsearch()
-		cmd.update()
-		if moreThanOneTab then
-			cmd.tabclose()
-		elseif moreThanOneWin then
-			cmd.close()
-		elseif moreThanOneBuf then
-			cmd.bwipeout() -- as opposed to bdelete, this ensures the deleted buffer does not stay alternate file
-		else
-			vim.notify(" Only one buffer open. ", logWarn)
-		end
+	cmd.nohlsearch()
+	cmd.update()
+	if moreThanOneTab then
+		cmd.tabclose()
+	elseif moreThanOneWin then
+		cmd.close()
+	elseif moreThanOneBuf then
+		cmd.bdelete()
+		local currentFile = fn.expand("%:p")
+		local newAltBuffer = buffers[1].name
+		if newAltBuffer == currentFile then newAltBuffer = buffers[2] end
+		fn.setreg("#", newAltBuffer)
+	else
+		vim.notify(" Only one buffer open. ", logWarn)
 	end
+end
+
 --------------------------------------------------------------------------------
 -- UNDO
 -- Save

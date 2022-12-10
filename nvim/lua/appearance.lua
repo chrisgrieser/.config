@@ -289,7 +289,7 @@ require("lualine").setup {
 	},
 	options = {
 		theme = "auto",
-		-- ignore_focus = specialFiletypes,
+		ignore_focus = specialFiletypes,
 		globalstatus = true,
 		component_separators = {left = "", right = ""},
 		section_separators = secSeparators,
