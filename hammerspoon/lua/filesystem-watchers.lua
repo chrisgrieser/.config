@@ -120,6 +120,7 @@ function fromFileHub(paths)
 			os.rename(file, dotfilesFolder .. "/visualized-keyboard-layout/" .. fileName)
 			notify("Visualized Keyboard Layout filed away.")
 
+			-- Finder vim mode
 		elseif fileName:match("finder%-vim%-cheatsheet%.%w+") then
 			os.rename(file, home .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/finder-vim-mode/" .. fileName)
 			notify("Finder Vim Layout filed away.")

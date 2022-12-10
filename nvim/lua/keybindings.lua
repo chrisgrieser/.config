@@ -426,13 +426,14 @@ if isGui() then
 		local moreThanOneWin = (fn.winnr("$") > 2 and scrollvEnabled) or (fn.winnr("$") > 1 and not (scrollvEnabled))
 		local moreThanOneBuf = #fn.getbufinfo {buflisted = 1} > 1
 
-		cmd [[nohl | update!]]
+		cmd.nohlsearch()
+		cmd.update()
 		if moreThanOneTab then
-			cmd [[tabclose]]
+			cmd.tabclose()
 		elseif moreThanOneWin then
-			cmd [[close]]
+			cmd.close()
 		elseif moreThanOneBuf then
-			cmd [[bwipeout]] -- as opposed to bdelete, this ensures the deleted buffer does not stay alternate file
+			cmd.bwipeout() -- as opposed to bdelete, this ensures the deleted buffer does not stay alternate file
 		else
 			vim.notify(" Only one buffer open. ", logWarn)
 		end
@@ -484,7 +485,7 @@ local function betterAltBuf() -- switch to alternate-file
 	if noAltFile then
 		vim.notify(" No alternate file. ", logWarn)
 	else
-		cmd [[nohl]]
+		cmd.nohlsearch()
 		cmd [[buffer #]]
 	end
 end
@@ -594,7 +595,7 @@ keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>")
 
 -- BUILD SYSTEM
 keymap("n", "<leader>r", function()
-	cmd [[update!]]
+	cmd.update()
 	local filename = fn.expand("%:t")
 	local parentFolder = fn.expand("%:p:h")
 	local ft = bo.filetype
@@ -623,12 +624,18 @@ keymap("n", "<leader>r", function()
 
 	elseif ft == "yaml" and parentFolder:find("/karabiner") then
 		os.execute [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
+		if filename == "finder-vim.yaml" then
+			local curFile = fn.expand("%:p")
+			cmd.saveas (os.getenv("HOME").."/Library/Mobile Documents/com~apple~CloudDocs/Repos/finder-vim-mode/finder-vim.yaml", bang = true)
+			cmd.bwipeout()
+			cmd.edit(curFile)
+		end
 
 	elseif ft == "typescript" then
 		cmd [[!npm run build]] -- not via fn.system to get the output in the cmdline
 
 	elseif ft == "applescript" then
-		cmd [[AppleScriptRun]]
+		cmd.AppleScriptRun()
 
 	else
 		vim.notify(" No build system set. ", logWarn)
@@ -646,7 +653,7 @@ autocmd("FileType", {
 	callback = function()
 		local opts = {buffer = true, silent = true, nowait = true}
 		if bo.filetype == "TelescopePrompt" or bo.filetype == "ssr" then return end
-		keymap("n", "<Esc>", ":close<CR>", opts)
-		keymap("n", "q", ":close<CR>", opts)
+		keymap("n", "<Esc>", cmd.close, opts)
+		keymap("n", "q", cmd.close, opts)
 	end
 })

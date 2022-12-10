@@ -94,7 +94,7 @@ autocmd("TextYankPost", {
 
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, useful e.g. for kebab-case-variables
--- opt.nrformats = "alpha" -- <C-a> and <C-x> also work on letters
+opt.nrformats = "alpha" -- <C-a> and <C-x> also work on letters
 
 --------------------------------------------------------------------------------
 
@@ -114,10 +114,14 @@ opt.autochdir = true -- always current directory
 opt.confirm = true -- ask instead of aborting
 
 augroup("autosave", {})
-autocmd({"BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
+autocmd({"BufWinLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
 	group = "autosave",
 	pattern = "?*",
-	command = "silent! update"
+	callback = function()
+		-- safety net to not save file in wrong folder when autochdir is not being reliable
+		local curFile = fn.expand("%:p")
+		cmd.update(curFile)
+	end
 })
 
 augroup("Mini-Lint", {})
