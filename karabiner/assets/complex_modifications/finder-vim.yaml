@@ -246,13 +246,6 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
         # Switch Directory
       - type: basic
-        from: {key_code: s}
-        to:
-          - {key_code: g, modifiers: [command, shift]}
-          - *insert-notice
-          - *enter-insert-mode
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      - type: basic
         from: {key_code: g, modifiers: {mandatory: [command, shift]}}
         to:
           - {key_code: g, modifiers: [command, shift]}
@@ -617,7 +610,15 @@ rules:
               touch "$newFile"
               open -R "$newFile"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # S = Symlink
+      # s = follow symlink
+      - type: basic
+        from: {key_code: s}
+        to:
+          - shell-command: | 
+              sel=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
+              readlink "$sel" | xargs open -R
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # S = Create Symlink
       - type: basic
         from:
           key_code: s
