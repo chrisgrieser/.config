@@ -35,8 +35,6 @@ keymap({"n", "x"}, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 
 --------------------------------------------------------------------------------
 
-keymap("n", "cv", "^Ewct;", opts) -- change value key
-
 -- custom text object css [s]elector (overwriting sentence textobj)
 -- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt
 b.miniai_config = {
