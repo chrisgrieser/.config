@@ -3,7 +3,7 @@ local trace = vim.log.levels.TRACE
 local keymap = vim.keymap.set
 local fn = vim.fn
 local macroRegs, macroKeys
-
+local activeSlot
 local M = {}
 --------------------------------------------------------------------------------
 
@@ -14,15 +14,16 @@ local function setupAutocmds(toggleKey)
 	autocmd("RecordingLeave", {
 		group = "recording",
 		callback = function()
-			keymap("n", toggleKey, "q" .. g.activeMacroSlot)
-			vim.notify(" Recorded " .. g.activeMacroSlot .. ": \n " .. vim.v.event.regcontents.." ", trace)
+			local justRecorded = vim.v.event.regcontents
+			keymap("n", toggleKey, "q" .. activeSlot)
+			vim.notify(" Recorded " .. activeSlot .. ": \n " .. justRecorded .. " ", trace)
 		end
 	})
 	autocmd("RecordingEnter", {
 		group = "recording",
 		callback = function()
 			keymap("n", toggleKey, "q")
-			vim.notify(" Recording to " .. g.activeMacroSlot .. "… ", trace)
+			vim.notify(" Recording to " .. activeSlot .. "… ", trace)
 		end,
 	})
 end
@@ -40,23 +41,27 @@ end
 
 ---changes the active macroSlot & adapts keymaps for it
 function M.switchMacroSlot()
-	if not(g.activeMacroSlot) then -- first run
-		g.activeMacroSlot = macroRegs[1]
+	if not (activeSlot) then -- first run
+		activeSlot = macroRegs[1]
 	else
-		g.activeMacroSlot = g.activeMacroSlot == macroRegs[1] and macroRegs[2] or macroRegs[1]
-		vim.notify(" Now using " .. g.activeMacroSlot .. " ", trace)
+		activeSlot = activeSlot == macroRegs[1] and macroRegs[2] or macroRegs[1]
+		vim.notify(" Now using [" .. activeSlot .. "] ", trace)
 	end
-	keymap("n", macroKeys.playRecording, "@" .. g.activeMacroSlot)
-	keymap("n", macroKeys.toggleRecording, "q" .. g.activeMacroSlot)
+	keymap("n", macroKeys.playRecording, "@" .. activeSlot)
+	keymap("n", macroKeys.toggleRecording, "q" .. activeSlot)
 end
 
 ---edit the current macroSlot
 function M.editMacro()
-	local macro = fn.getreg(g.activeMacroSlot)
-	vim.ui.input({prompt = "Edit Macro " .. g.activeMacroSlot .. ": ", default = macro}, function(editedMacro)
+	local macro = fn.getreg(activeSlot)
+	local inputConfig = {
+		prompt = "Edit Macro " .. activeSlot .. ": ",
+		default = macro,
+	}
+	vim.ui.input(inputConfig, function(editedMacro)
 		if not (editedMacro) then return end -- cancellation
-		fn.setreg(g.activeMacroSlot, editedMacro)
-		vim.notify(" Edited Macro " .. g.activeMacroSlot .. "\n " .. editedMacro, trace)
+		fn.setreg(activeSlot, editedMacro)
+		vim.notify(" Edited Macro [" .. activeSlot .. "]\n " .. editedMacro, trace)
 	end)
 end
 
@@ -66,7 +71,12 @@ end
 ---@return string
 function M.recordingStatus()
 	if fn.reg_recording() == "" then return "" end
-	return " RECORDING ["..g.activeMacroSlot.."]"
+	return " RECORDING [" .. activeSlot .. "]"
+end
+
+function M.displayActiveSlot()
+	if fn.reg_recording() == "" then return "" end
+	return " RECORDING [" .. activeSlot .. "]"
 end
 
 --------------------------------------------------------------------------------
