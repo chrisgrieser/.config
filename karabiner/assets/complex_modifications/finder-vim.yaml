@@ -1,6 +1,7 @@
 title: "Finder Vim Controls"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
-author: [pseudometa]
+maintainers: [pseudometa (chrisgrieser)]
+version: [1.0]
 anchors:
   - conditions:
       - &finder-app

@@ -49,7 +49,7 @@ opt.textwidth = 80
 opt.wrap = false
 opt.colorcolumn = {"+1", "+20"} -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
-opt.backspace = {"start"} -- restrict insert mode backspace behavior
+opt.backspace = {"start", "eol"} -- restrict insert mode backspace behavior
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set

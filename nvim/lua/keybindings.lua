@@ -488,18 +488,11 @@ autocmd("BufReadPost", {
 })
 
 -- cycle between buffers
-keymap("n", "<BS>", function()
-	local moreThanOneBuf = fn.getbufinfo {buflisted = 1} > 1
-	if moreThanOneBuf then
-		cmd.nohlsearch() -- INFO: nohl added here, since it does not work with autocmds
-		cmd [[<Plug>(CybuNext)]]
-	else
-		vim.notify(" Only one buffer open. ")
-	end
-end)
+keymap("n", "<BS>", [[:nohl<CR><Plug>(CybuNext)]])
+
 -- Buffer selector
 keymap("n", "gb", function()
-	local moreThanOneBuf = fn.getbufinfo {buflisted = 1} > 1
+	local moreThanOneBuf = #(fn.getbufinfo {buflisted = 1}) > 1
 	if moreThanOneBuf then
 		cmd.nohlsearch()
 		telescope.buffers()
