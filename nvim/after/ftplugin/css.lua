@@ -34,8 +34,16 @@ keymap({"n", "x"}, "<C-j>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 keymap({"n", "x"}, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 
 --------------------------------------------------------------------------------
+-- custom text object css selector
+b.miniai_config = {
+	custom_textobjects = {
+		l = {"%[().*()]%(.*%)"}, 
+	},
+}
 
-keymap("n", "cv", "^Ewct;", opts) -- change [v]alue key
+--------------------------------------------------------------------------------
+
+keymap("n", "cv", "^Ewct;", opts) -- change value key
 keymap("n", "yc", "mzlEF.yEEp`z", opts) -- yank (double) [c]lass under cursor
 keymap("n", "dc", "lF.d/[.\\s]<CR>:nohl<CR>", opts) -- delete [c]lass under cursor
 

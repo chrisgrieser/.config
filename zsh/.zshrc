@@ -1,6 +1,8 @@
 # Fig pre block. Keep at the top of this file.
 [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-printf '\33c\e[3J' # remove last login message https://stackoverflow.com/a/69915614
+
+# remove last login message https://stackoverflow.com/a/69915614
+printf '\33c\e[3J'
 
 CONFIG=()
 CONFIG+=('load_plugins')
@@ -9,7 +11,7 @@ CONFIG+=('aliases')
 CONFIG+=('history_config')
 CONFIG+=('general_and_plugin_configs')
 CONFIG+=('completions')
-CONFIG+=('keybindings')
+CONFIG+=('terminal-keybindings')
 CONFIG+=('docs_man')
 CONFIG+=('git_github')
 CONFIG+=('homebrew')

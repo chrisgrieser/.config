@@ -111,9 +111,9 @@ function settings () {
 	fi )
 }
 
-# copies last n commands
+# copies last commands
 function lc (){
-	history | tail -n1 | cut -c8-
+	history | tail -n1 | cut -c8- | sed 's/"/\\\"/g' | sed "s/'/\\\'/g" | xargs | pbcopy
 	echo "Copied."
 }
 

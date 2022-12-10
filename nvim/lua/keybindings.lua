@@ -439,16 +439,18 @@ if isGui() then
 		end
 	end)
 
-	keymap({"n", "x", "i"}, "<D-z>", function() cmd [[undo]] end) -- cmd+z
-	keymap({"n", "x", "i"}, "<D-S-z>", function() cmd [[redo]] end) -- cmd+shift+z
-	keymap({"n", "x", "i"}, "<D-s>", function() cmd [[write!]] end) -- cmd+s
+	keymap({"n", "x", "i"}, "<D-z>", cmd.undo) -- cmd+z
+	keymap({"n", "x", "i"}, "<D-S-z>", cmd.redo) -- cmd+shift+z
+	keymap({"n", "x", "i"}, "<D-s>", cmd.write) -- cmd+s
 	keymap("n", "<D-a>", "ggVG") -- cmd+a
 	keymap("i", "<D-a>", "<Esc>ggVG")
 	keymap("x", "<D-a>", "ggG")
 
-	keymap({"n", "x"}, "<D-l>", ":!open %:h <CR><CR>") -- show file in default GUI file explorer
-	keymap({"n", "x"}, "<D-1>", ":Lexplore<CR><CR>") -- file tree (netrw)
-	keymap({"n", "x"}, "<D-0>", ":messages<CR>")
+	keymap({"n", "x"}, "<D-l>", function() -- show file in default GUI file explorer
+		fn.system("open -R '" .. fn.expand("%:p") .. "'")
+	end)
+	keymap({"n", "x"}, "<D-1>", cmd.Lex) -- file tree (netrw)
+	keymap({"n", "x"}, "<D-0>", ":messages<CR>") -- as cmd.function these wouldn't require confirmation
 	keymap({"n", "x"}, "<D-9>", ":Notification<CR>")
 
 	-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
@@ -486,7 +488,7 @@ local function betterAltBuf() -- switch to alternate-file
 		vim.notify(" No alternate file. ", logWarn)
 	else
 		cmd.nohlsearch()
-		cmd [[buffer #]]
+		cmd.buffer("#")
 	end
 end
 
@@ -624,13 +626,14 @@ keymap("n", "<leader>r", function()
 
 	elseif ft == "yaml" and parentFolder:find("/karabiner") then
 		local result = fn.system [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
-		vim.notify(" "..trim(result).." ")
+		vim.notify(" " .. trim(result) .. " ")
 		if filename == "finder-vim.yaml" then
 			local curFile = fn.expand("%:p")
-			cmd.saveas {os.getenv("HOME").."/Library/Mobile Documents/com~apple~CloudDocs/Repos/finder-vim-mode/finder-vim.yaml", bang = true}
+			cmd.saveas {os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/finder-vim-mode/finder-vim.yaml",
+				bang = true}
 			cmd.bwipeout()
 			cmd.edit(curFile)
-			vim.notify(" "..filename.." also duplicated. ")
+			vim.notify(" " .. filename .. " also duplicated. ")
 		end
 
 	elseif ft == "typescript" then
