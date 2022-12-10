@@ -1,7 +1,7 @@
 title: "Finder Vim Controls"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 maintainers: [pseudometa (chrisgrieser)]
-version: [1.0.1]
+version: [1.0.2]
 anchors:
   - conditions:
       - &finder-app
@@ -176,11 +176,14 @@ rules:
         to:
           - {key_code: o, modifiers: [command, option]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # H = open file & close window
+      # H = Go to last recent folder
       - type: basic
         from: {key_code: h, modifiers: {mandatory: [shift]}}
         to:
-          - {key_code: o, modifiers: [command, option]}
+          - shell_command: |
+              osascript -e 'tell application "System Events" to tell process "Finder"
+                click first menu item of menu of menu item "Recent Folders" of menu "Go" of menu bar 1
+              end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # gg, G, J, K
       - type: basic

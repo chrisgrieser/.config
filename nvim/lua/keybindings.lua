@@ -227,7 +227,7 @@ miniaiConfig.custom_textobjects.e = function()
 end
 
 -- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt#L215
-miniaiConfig.custom_textobjects.v = {"[=:] ?()().*()[;,]?()"}
+miniaiConfig.custom_textobjects.v = {"[=:] ?()().*()[;,]?()\n"}
 require("mini.ai").setup(miniaiConfig)
 
 --------------------------------------------------------------------------------
