@@ -59,6 +59,8 @@ local function themeModifications()
 		cmd.highlight("GitSignsChange guifg=#acaa62")
 		cmd.highlight("GitSignsAdd guifg=#7fcc82")
 		cmd.highlight{"def link ScrollView Folded", bang = true}
+	elseif theme == "oxocarbon" then
+		cmd.highlight {"def link FloatTitle TelescopePromptTitle", bang = true}
 	elseif theme == "dawnfox" then
 		cmd.highlight [[IndentBlanklineChar guifg=#deccba]]
 		cmd.highlight [[VertSplit guifg=#b29b84]]
