@@ -26,7 +26,6 @@ function M.PluginList()
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"p00f/nvim-ts-rainbow", -- colored brackets
 			"m-demare/hlargs.nvim", -- highlight function args
-			"drybalka/tree-climber.nvim", -- treesitter sibling based navigation
 		}
 	}
 	use {"Wansmer/treesj", -- split-join
@@ -48,8 +47,12 @@ function M.PluginList()
 	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
 		after = "nvim-cmp",
 		requires = "nvim-treesitter/nvim-treesitter",
-		config = function() require("tabout").setup() end,
-		event = "InsertEnter",
+		config = function()
+			require("tabout").setup{
+				act_as_shift_tab = true,
+				ignore_beginning = true,
+			}
+		end,
 	}
 
 	-- LSP

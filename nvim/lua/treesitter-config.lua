@@ -100,12 +100,6 @@ require("hlargs").setup()
 
 
 --------------------------------------------------------------------------------
-keymap({"n", "x", "o"}, "", function() require("tree-climber").goto_parent() end)
-keymap({"n", "x", "o"}, "L", function() require("tree-climber").goto_child() end)
-keymap({"n", "x", "o"}, "J", function() require("tree-climber").goto_next() end)
-keymap({"n", "x", "o"}, "K", function() require("tree-climber").goto_prev() end)
-
---------------------------------------------------------------------------------
 -- force treesitter to highlight zsh as if it was bash
 augroup("zshAsBash", {})
 autocmd("BufWinEnter", {
