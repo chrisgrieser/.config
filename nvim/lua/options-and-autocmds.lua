@@ -2,7 +2,7 @@ require("utils")
 --------------------------------------------------------------------------------
 
 -- timeouts
-opt.timeoutlen = 1200 -- for awaiting keystrokes (no nowait)
+opt.timeoutlen = 1200 -- for awaiting keystrokes when there is no `nowait`
 opt.updatetime = 250 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 
 -- Search
@@ -19,9 +19,6 @@ opt.winblend = 2 -- % transparency
 opt.spell = false
 opt.spelllang = "en_us"
 
--- Gutter
-opt.fillchars = "eob: ,fold: " -- no ~ for the eof, no dots for folds
-
 -- whitespace & indentation
 opt.tabstop = 3
 opt.softtabstop = 3
@@ -29,8 +26,22 @@ opt.shiftwidth = 3
 opt.shiftround = true
 opt.smartindent = true
 opt.list = true
-opt.listchars = "multispace:··,tab:  ,nbsp:ﮊ"
 opt.virtualedit = "block" -- select whitespace for proper rectangles in visual block mode
+
+-- invisible chars
+opt.listchars = {
+	tab = "  ",
+	multispace = "·",
+	nbsp = "ﮊ",
+	lead = "·",
+	leadmultispace = "·",
+	trail = "·",
+	precedes = "",
+}
+opt.fillchars = {
+	eob = " ", -- no ~ for the eof, no dots for folds
+	fold = " ", -- no dots for folds
+}
 
 -- Split
 opt.splitright = true -- vsplit right instead of left
@@ -175,8 +186,8 @@ autocmd("BufWinEnter", {
 -- Skeletons (Templates)
 -- apply templates for any filetype named `.config/nvim/templates/skeletion.{ft}`
 augroup("Templates", {})
-local skeletionPath = fn.stdpath("config").."/templates"
-local filetypeList = fn.system([[ls "]]..skeletionPath..[[/skeleton."* | xargs basename | cut -d. -f2]])
+local skeletionPath = fn.stdpath("config") .. "/templates"
+local filetypeList = fn.system([[ls "]] .. skeletionPath .. [[/skeleton."* | xargs basename | cut -d. -f2]])
 local ftWithSkeletons = split(filetypeList, "\n")
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end

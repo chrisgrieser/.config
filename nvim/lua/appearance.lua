@@ -1,10 +1,6 @@
 require("utils")
 --------------------------------------------------------------------------------
 
--- mixed whitespace
-cmd.highlight {"def link MixedWhiteSpace Folded", bang = true}
-fn.matchadd("MixedWhiteSpace", [[^\(\t\+ \| \+\t\)[ \t]*]])
-
 -- Annotations
 cmd.highlight {"def link myAnnotations Todo", bang = true} -- use same styling as "TODO"
 fn.matchadd("myAnnotations", [[\<\(BUG\|WTF\|HACK\|TODO\|INFO\|NOTE\|WARNING\)\>]])

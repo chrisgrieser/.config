@@ -1,7 +1,10 @@
 require("utils")
+local null_ls = require("null-ls")
+local builtins = null_ls.builtins
 --------------------------------------------------------------------------------
 
--- INFO: these require null-ls name, not mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
+-- INFO these require null-ls name, not mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
+-- INFO linters also need to be added as source below
 local lintersAndFormatters = {
 	"yamllint",
 	"yamlfmt",
@@ -14,24 +17,23 @@ local lintersAndFormatters = {
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
--- INFO: linters also need to be added as source below
+
+local codeSpellIgnoreFile = os.getenv("HOME") .. "/.config/codespell/codespell-ignore.txt"
 
 --------------------------------------------------------------------------------
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
-
-local null_ls = require("null-ls")
-local builtins = null_ls.builtins
-
 null_ls.setup {
 	sources = {
 		-- Global
 		builtins.code_actions.gitsigns, -- gitsigns.nvim plugin, e.g. reset hunks
 		builtins.diagnostics.codespell.with {-- common misspellings. Far less false positives than with cspell
 			disabled_filetypes = {"css"}, -- base64-encoded fonts cause a lot of errors
+			args = {"--ignore-words", codeSpellIgnoreFile, "-"}
 		},
 		builtins.formatting.codespell.with {-- autofix those misspellings
-			disabled_filetypes = {"css"}, -- base64-encoded fonts cause a lot of errors
+			disabled_filetypes = {"css"},
+			extra_args = {"--ignore-words", codeSpellIgnoreFile}
 		},
 
 		-- SHELL

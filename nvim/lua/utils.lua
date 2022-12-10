@@ -34,10 +34,18 @@ function getlocalopt(option)
 end
 
 -- `:I` inspects the passed lua object
-cmd [[:command! -nargs=1 I lua inspectFn(<f-args>)]]
-function inspectFn(obj)
-	vim.pretty_print(fn.luaeval(obj))
-end
+api.nvim_create_user_command("I", function (ctx)
+	vim.pretty_print(fn.luaeval(ctx.args))
+end, {nargs = "+", complete = "command"})
+
+-- `:II` inspects the passed object and puts it into a new buffer
+api.nvim_create_user_command("II", function (ctx)
+
+	local output = fn.luaeval(ctx.args)
+	local lines = vim.split(output, "\n", {plain = true}) ---@diagnostic disable-line: param-type-mismatch
+	cmd.new()
+	api.nvim_buf_set_lines(0, 0, -1, false, lines)
+end, {nargs = "+", complete = "command"})
 
 ---whether nvim runs in a GUI
 ---@return boolean
