@@ -1,9 +1,10 @@
 require("utils")
 local trace = vim.log.levels.TRACE
+local keymap = vim.keymap.set
+local fn = vim.fn
+local macroRegs, macroKeys
 
 local M = {}
-local macroRegs, macroKeys
-g.activeMacroSlot = ""
 --------------------------------------------------------------------------------
 
 ---setup Autocommands
@@ -32,17 +33,18 @@ end
 ---@param config table
 function M.setup(config)
 	macroRegs = config.slots
-	setupAutocmds(config.keymap.toggleRecording)
+	macroKeys = config.keymaps
+	setupAutocmds(config.keymaps.toggleRecording)
 	M.switchMacroSlot() -- initialize first slot & keymaps
 end
 
 ---changes the active macroSlot & adapts keymaps for it
 function M.switchMacroSlot()
-	if g.macroSlot == "" then -- first run
-		g.macroSlot = macroRegs[1]
+	if not(g.activeMacroSlot) then -- first run
+		g.activeMacroSlot = macroRegs[1]
 	else
-		g.macroSlot = g.macroSlot == macroRegs[1] and macroRegs[2] or macroRegs[1]
-		vim.notify(" Now using " .. g.macroSlot .. " ", trace)
+		g.activeMacroSlot = g.activeMacroSlot == macroRegs[1] and macroRegs[2] or macroRegs[1]
+		vim.notify(" Now using " .. g.activeMacroSlot .. " ", trace)
 	end
 	keymap("n", macroKeys.playRecording, "@" .. g.activeMacroSlot)
 	keymap("n", macroKeys.toggleRecording, "q" .. g.activeMacroSlot)
