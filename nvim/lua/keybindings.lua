@@ -555,9 +555,7 @@ keymap("n", "<leader>g", function()
 		end
 
 		vim.notify(" ﴻ add-commit-push… ")
-		-- INFO shell function `acp` is made available by exporting it in my .zshenv
-		-- local result = fn.system([[acp "]] .. commitMsg .. [["]])
-		fn.jobstart("acp '"..commitMsg.."'", {
+		fn.jobstart("git add .", {
 			stdout_buffered = true,
 			stderr_buffered = true,
 			detach = true,
@@ -565,15 +563,32 @@ keymap("n", "<leader>g", function()
 				if not(data) or (data[1] == "" and #data == 1) then return end
 				local stdout = " "..table.concat(data, " \n "):gsub("%s*$", "").." "
 				vim.notify(stdout)
-				b.prevCommitMsg = nil
 			end,
 			on_stderr = function(_, data, _)
 				if not(data) or (data[1] == "" and #data == 1) then return end
 				local stderr = " "..table.concat(data, " \n "):gsub("%s*$", "").." "
 				vim.notify(stderr, logWarn)
-				b.prevCommitMsg = commitMsg
 			end,
 		})
+		-- INFO shell function `acp` is made available by exporting it in my .zshenv
+		-- local result = fn.system([[acp "]] .. commitMsg .. [["]])
+		-- fn.jobstart("acp '"..commitMsg.."'", {
+		-- 	stdout_buffered = true,
+		-- 	stderr_buffered = true,
+		-- 	detach = true,
+		-- 	on_stdout = function(_, data, _)
+		-- 		if not(data) or (data[1] == "" and #data == 1) then return end
+		-- 		local stdout = " "..table.concat(data, " \n "):gsub("%s*$", "").." "
+		-- 		vim.notify(stdout)
+		-- 		b.prevCommitMsg = nil
+		-- 	end,
+		-- 	on_stderr = function(_, data, _)
+		-- 		if not(data) or (data[1] == "" and #data == 1) then return end
+		-- 		local stderr = " "..table.concat(data, " \n "):gsub("%s*$", "").." "
+		-- 		vim.notify(stderr, logWarn)
+		-- 		b.prevCommitMsg = commitMsg
+		-- 	end,
+		-- })
 	end)
 
 end)
