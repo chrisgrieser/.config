@@ -574,13 +574,7 @@ keymap("n", "<leader>g", function()
 		}
 
 		vim.notify(" ﴻ add-commit-push… ")
-		local add = fn.jobstart("git add .", shellOpts)
-		fn.jobwait({add})
-		local commit = fn.jobstart("git commit -m '" .. commitMsg .. "'", shellOpts)
-		fn.jobwait({commit})
-		local pull = fn.jobstart("git pull", shellOpts)
-		fn.jobwait({pull})
-		fn.jobstart("git push", shellOpts)
+		fn.jobstart("git add -A && git commit -m '"..commitMsg.."' ; git pull ; git push", shellOpts)
 	end)
 
 end)
