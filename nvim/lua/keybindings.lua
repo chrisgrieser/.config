@@ -129,12 +129,16 @@ autocmd("TextYankPost", {
 -- q -> comment (mnemonic: [q]uiet text) (treesitter)
 -- Q -> consecutive (big) comment (comments.nvim)
 -- aa -> an [a]rgument (treesitter)
--- al -> an cal[l] (treesitter)
+-- al -> a cal[l] (treesitter)
 -- ah -> a [h]unk (gitsigns)
--- ai -> a [i]ndentation (indent-textobj)
+-- ai -> an [i]ndentation (indent-textobj)
 -- ad -> a [d]iagnostic (diagnostic-textobj)
 -- ae -> almost to the [e]nding of line (mini.ai)
--- av -> a Value / right-hand-side of key-value pair or variable assignment (mini.ai)
+-- av -> a [v]alue / right-hand-side of key-value pair or variable assignment (mini.ai)
+
+-- FILE-TYPE-SPECIFIC TEXT OBJECTS
+-- al: a [l]ink (markdown)
+-- as: a [s]elector (css)
 
 keymap({"o", "x"}, "iq", 'i"') -- [q]uote
 keymap({"o", "x"}, "aq", 'a"')
@@ -157,10 +161,6 @@ keymap("o", "r", "}") -- [r]est of the paragraph
 -- as: sentence
 -- ap: paragraph
 -- aw: word
-
--- FILE-TYPE-SPECIFIC TEXT OBJECTS
--- al: a [l]ink (markdown)
--- as: selector
 
 --------------------------------------------------------------------------------
 -- Text Object definitions
