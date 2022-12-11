@@ -563,13 +563,13 @@ keymap("n", "<leader>g", function()
 			detach = true,
 			on_stdout = function(_, data, _)
 				if not(data) or (data[1] == "" and #data == 1) then return end
-				local stdout = " "..table.concat(data, " \n ").." "
+				local stdout = " "..table.concat(data, " \n "):gsub("%s*$", "").." "
 				vim.notify(stdout)
 				b.prevCommitMsg = nil
 			end,
 			on_stderr = function(_, data, _)
 				if not(data) or (data[1] == "" and #data == 1) then return end
-				local stderr = " "..table.concat(data, " \n ").." "
+				local stderr = " "..table.concat(data, " \n "):gsub("%s*$", "").." "
 				vim.notify(stderr, logWarn)
 				b.prevCommitMsg = commitMsg
 			end,
