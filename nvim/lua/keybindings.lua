@@ -267,7 +267,8 @@ keymap("x", "<S-Tab>", "<gv")
 
 -- Casing
 keymap("n", "ü", "mzlblgueh~`z", {desc = "toggle capital/lowercase of word"}) 
-keymap("n", "Ü", "gUiw", {desc = "uppercase word"}) 
+keymap("n", "Ü", "gUiw", {desc = "uppercase word"})
+keymap("n", "~", "~h", {desc = "switch char case (w/o) moving"})
 
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'"}

@@ -44,9 +44,8 @@ opt.listchars = {
 	nbsp = "ﮊ",
 	lead = "·",
 	leadmultispace = "·",
-	trail = "·",
-	precedes = "<",
-	extends = ">",
+	precedes = "…",
+	extends = "…",
 }
 opt.fillchars = {
 	eob = " ", -- no ~ for the eof, no dots for folds
