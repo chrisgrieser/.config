@@ -7,7 +7,6 @@ cmd = vim.cmd
 bo = vim.bo -- buffer-scoped options
 b = vim.b -- buffer-scoped variables
 wo = vim.wo -- window-scoped variables
-v = vim.v -- internal variables
 
 augroup = vim.api.nvim_create_augroup
 autocmd = vim.api.nvim_create_autocmd
@@ -34,6 +33,29 @@ function getlocalopt(option)
 	return vim.api.nvim_get_option_value(option, {scope = "local"})
 end
 
+---whether nvim runs in a GUI
+---@return boolean
+function isGui()
+	return g.neovide or g.goneovim
+end
+
+-- shell options for fn.jobstart()
+shellOpts = {
+	detach = true,
+	on_stdout = function(_, data, _)
+		if not (data) or (data[1] == "" and #data == 1) then return end
+		local stdOut = " " .. table.concat(data, " \n "):gsub("%s*$", "") .. " "
+		vim.notify(stdOut, vim.log.levels.INFO)
+	end,
+	on_stderr = function(_, data, _)
+		if not (data) or (data[1] == "" and #data == 1) then return end
+		local stdErr = " " .. table.concat(data, " \n "):gsub("%s*$", "") .. " "
+		vim.notify(stdErr, vim.log.levels.WARN)
+	end,
+}
+
+--------------------------------------------------------------------------------
+
 -- `:I` inspects the passed lua object
 api.nvim_create_user_command("I", function (ctx)
 	vim.pretty_print(fn.luaeval(ctx.args))
@@ -47,12 +69,6 @@ api.nvim_create_user_command("II", function (ctx)
 	api.nvim_buf_set_lines(0, 0, -1, false, lines)
 	cmd.write("/tmp/nvim-cmd-output")
 end, {nargs = "+", complete = "command"})
-
----whether nvim runs in a GUI
----@return boolean
-function isGui()
-	return g.neovide or g.goneovim
-end
 
 --------------------------------------------------------------------------------
 -- GENERAL LUA UTILS

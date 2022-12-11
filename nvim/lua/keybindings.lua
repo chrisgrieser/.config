@@ -114,7 +114,7 @@ autocmd({"CursorMoved", "VimEnter"}, {
 autocmd("TextYankPost", {
 	group = "yankKeepCursor",
 	callback = function()
-		if v.event.operator == "y" then
+		if vim.v.event.operator == "y" then
 			fn.setpos(".", g.cursorPreYankPos)
 		end
 	end
@@ -556,22 +556,6 @@ keymap("n", "<leader>g", function()
 		elseif commitMsg == "" then
 			commitMsg = "patch"
 		end
-
-		local shellOpts = {
-			stdout_buffered = false,
-			stderr_buffered = false,
-			detach = true,
-			on_stdout = function(_, data, _)
-				if not (data) or (data[1] == "" and #data == 1) then return end
-				local stdOut = " " .. table.concat(data, " \n "):gsub("%s*$", "") .. " "
-				vim.notify(stdOut, vim.log.levels.INFO)
-			end,
-			on_stderr = function(_, data, _)
-				if not (data) or (data[1] == "" and #data == 1) then return end
-				local stdErr = " " .. table.concat(data, " \n "):gsub("%s*$", "") .. " "
-				vim.notify(stdErr, vim.log.levels.WARN)
-			end,
-		}
 
 		vim.notify(" ﴻ add-commit-push… ")
 		fn.jobstart("git add -A && git commit -m '"..commitMsg.."' ; git pull ; git push", shellOpts)
