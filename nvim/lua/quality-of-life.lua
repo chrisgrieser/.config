@@ -138,8 +138,8 @@ end
 ---Close tabs, window, buffer in that order if there is more than one of the type
 function M.betterClose()
 	local hasNotify = pcall(require, "notify")
-	local hasScrollview = pcall(require, "scrollview")
 	if hasNotify then require("notify").dismiss() end -- to not include notices in window count
+	local hasScrollview = pcall(require, "scrollview")
 	local winThreshhold = hasScrollview and 2 or 1 -- HACK: since scrollview counts as a window
 	local moreThanOneWin = fn.winnr("$") > winThreshhold
 
@@ -154,13 +154,21 @@ function M.betterClose()
 		if bo.filetype == "" then cmd.bwipeout() end -- scratch buffers
 		cmd.close()
 	elseif #buffers == 2 then
-		cmd.bwipeout() -- only method to clear altfile
+		cmd.bwipeout() -- only method to clear altfile in this case
 	elseif #buffers > 1 then
+		local bufToDel = fn.expand("%:p")
 		cmd.bdelete()
-		local newAltBuffer = buffers[1].name
-		local currentFile = fn.expand("%:p")
-		if newAltBuffer == currentFile then newAltBuffer = buffers[2] end
-		fn.setreg("#", newAltBuffer)
+
+		-- ensure new alt file points towards open, non-active buffer
+		local curFile = fn.expand("%:p")
+		local i = 1
+		local newAltBuf
+		repeat
+			i = i + 1
+			newAltBuf = buffers[i].name
+		until newAltBuf ~= curFile and newAltBuf ~= bufToDel
+
+		fn.setreg("#", newAltBuf)
 	else
 		vim.notify(" Only one buffer open. ", logWarn)
 	end
@@ -203,7 +211,7 @@ function M.overscroll(action)
 	if bo.filetype ~= "DressingSelect" then
 		local curLine = lineNo(".")
 		local lastLine = lineNo("$")
-		if (lastLine - curLine - 1) < vim.wo.scrolloff then
+		if (lastLine - curLine) <= vim.wo.scrolloff then
 			cmd [[normal! zz]]
 		end
 	end
