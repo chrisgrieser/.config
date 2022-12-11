@@ -1,7 +1,7 @@
 title: "Finder Vim Controls"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 maintainers: [pseudometa (chrisgrieser)]
-version: [1.0.2]
+version: [1.1.1]
 anchors:
   - conditions:
       - &finder-app
@@ -225,14 +225,14 @@ rules:
           key_code: hyphen # "?" on German keyboard
           modifiers: {mandatory: [shift]}
         to:
-          - shell_command: qlmanage -p "$HOME/.config/visualized-keyboard-layout/macos-finder-vim-mode.png" || qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-cheatsheet.png"
+          - shell_command: qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode-cheatsheet.png"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       - type: basic
         from:
           key_code: slash # "?" on American keyboard
           modifiers: {mandatory: [shift]}
         to:
-          - shell_command: qlmanage -p "$HOME/.config/visualized-keyboard-layout/macos-finder-vim-mode.png" || open "$HOME/.config/karabiner/assets/finder-vim-cheatsheet.png"
+          - shell_command: qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode-cheatsheet.png"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
       #─────────────────────────────────────────────────────────────────────────
       # INSERT MODE
@@ -438,19 +438,41 @@ rules:
         from: {key_code: w}
         to:
           - {key_code: w, modifiers: [command]}
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
+      # w = close other windows (:only)
+      - type: basic
+        from: {key_code: w, modifiers: {mandatory: [shift]}}
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "Finder"
+                  repeat while window 2 exists
+                    close window 2
+                  end repeat
+                end tell'
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       # b = cycle windows (:bnext)
       - type: basic
         from: {key_code: b}
         to_if_alone:
           - {key_code: grave_accent_and_tilde, modifiers: [command]}
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
+      # B = Arrange all windows
+      - type: basic
+        from: {key_code: b, modifiers: {mandatory: [shift]}}
+        to_if_alone:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Finder"
+                  click menu item "Arrange in Front" of menu "Window" of menu bar 1
+                end tell'
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
         # t = cycle tabs (:tabnext)
       - type: basic
         from: {key_code: t}
         to_if_alone:
           - {key_code: tab, modifiers: [control]}
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       #─────────────────────────────────────────────────────────────────────────
       # Selections
       # a = select all

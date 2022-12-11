@@ -13,5 +13,4 @@ normal
 Normal
 US
 German
-"context menu"
 keypress

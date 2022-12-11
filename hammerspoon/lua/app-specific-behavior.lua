@@ -53,7 +53,7 @@ local function spotifyTUI(toStatus) -- has to be non-local function
 end
 
 spotifyAppWatcher = aw.new(function(appName, eventType)
-	if appName == "YouTube" or appName == "zoom.us" or appName == "FaceTime" or appName == "Twitch" then
+	if appName == "YouTube" or appName == "zoom.us" or appName == "FaceTime" or appName == "Twitch" or appName == "Netflix" then
 		if eventType == aw.launched then
 			spotifyTUI("pause")
 		elseif eventType == aw.terminated and not (isProjector()) then
