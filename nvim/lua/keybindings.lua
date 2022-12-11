@@ -292,6 +292,9 @@ keymap("n", "S", substi.eol)
 keymap("n", "sx", exchange.operator)
 keymap("n", "sxx", exchange.line)
 
+-- ISwap
+keymap("n", "X", cmd.ISwapWith, {desc = "swap nodes"})
+
 -- search & replace
 keymap("n", "<leader>f", [[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]])
 keymap("x", "<leader>f", ":sm///g<Left><Left><Left>")

@@ -28,7 +28,7 @@ require("Comment").setup {
 -- position.
 -- requires remap for treesitter and comments.nvim mappings
 keymap("n", "dq", [[:normal!mz<CR>dCOM`z]], {remap = true}) -- since remap is required, using mz via :normal, since m has been remapped
-keymap("n", "yq", "yCOM", {remap = true}) -- thanks to yank positon saving, doesnt need to be done here
+keymap("n", "yq", "yCOM", {remap = true}) -- thanks to yank position saving, doesn't need to be done here
 keymap("n", "cq", '"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
 
 --------------------------------------------------------------------------------
@@ -74,6 +74,7 @@ function divider()
 		cmd [[normal! jj==]]
 	end
 end
+
 ---@diagnostic enable: param-type-mismatch
 
 keymap("n", "qw", divider)
