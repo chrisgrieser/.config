@@ -50,6 +50,7 @@ require("nvim-treesitter.configs").setup {
 		},
 		select = {
 			enable = true,
+			disable = {"markdown"}, -- so they can be remapped to link text object
 			lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
 			keymaps = {
 				["af"] = "@function.outer",
