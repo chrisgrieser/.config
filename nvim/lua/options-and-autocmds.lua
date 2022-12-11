@@ -87,26 +87,6 @@ autocmd("FileType", {
 	end
 })
 
--- Remember Cursor Position
-augroup("rememberCursorPosition", {})
-autocmd("BufReadPost", {
-	group = "rememberCursorPosition",
-	callback = function()
-		local jumpcmd
-		if bo.filetype == "commit" then
-			return
-		elseif bo.filetype == "log" or bo.filetype == "" then -- for log files jump to the bottom
-			jumpcmd = "G"
-		elseif fn.line [['"]] >= fn.line [[$]] then -- in case file has been shortened outside of vim
-			-- selene: allow(if_same_then_else)
-			jumpcmd = "G"
-		elseif fn.line [['"]] >= 1 then -- check file has been entered already
-			jumpcmd = [['"]]
-		end
-		cmd("keepjumps normal! " .. jumpcmd)
-	end,
-})
-
 -- clipboard & yanking
 opt.clipboard = "unnamedplus"
 augroup("highlightedYank", {})
@@ -169,15 +149,15 @@ opt.foldminlines = 2
 opt.foldnestmax = 2
 opt.foldlevel = 99
 
--- keep folds on save https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
-augroup("rememberFolds", {})
+-- keep folds and cursor
+augroup("rememberCursorAndFolds", {})
 autocmd("BufWinLeave", {
-	group = "rememberFolds",
+	group = "rememberCursorAndFolds",
 	pattern = "?*",
 	command = "silent! mkview"
 })
 autocmd("BufWinEnter", {
-	group = "rememberFolds",
+	group = "rememberCursorAndFolds",
 	pattern = "?*",
 	command = "silent! loadview"
 })

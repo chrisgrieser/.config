@@ -275,7 +275,7 @@ require("lualine").setup {
 		}},
 		lualine_z = {
 			{debuggerStatus, section_separators = winSecSeparators},
-			{require("macro").recordingStatus, section_separators = winSecSeparators},
+			{require("recorder").recordingStatus, section_separators = winSecSeparators},
 		},
 	},
 	options = {

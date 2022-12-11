@@ -14,7 +14,6 @@ else
 	require("terminal-only")
 end
 require("keybindings")
-require("macro")
 require("automating-nvim")
 require("appearance")
 
