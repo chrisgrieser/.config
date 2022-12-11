@@ -556,8 +556,10 @@ keymap("n", "<leader>g", function()
 
 		vim.notify(" ﴻ add-commit-push… ")
 		-- INFO shell function `acp` is made available by exporting it in my .zshenv
-		local result = fn.system([[acp "]] .. commitMsg .. [["]])
-		local success = v.shell_error ~= 0
+		-- local result = fn.system([[acp "]] .. commitMsg .. [["]])
+		fn.jobstart{{"acp", commitMsg}, {on_stdout = function ()
+			
+		end}}
 		if success then
 			vim.notify(result)
 		else
