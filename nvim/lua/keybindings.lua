@@ -231,16 +231,16 @@ miniaiConfig.custom_textobjects.v = {"[=:] ?()().*()[;,]?()\n"}
 require("mini.ai").setup(miniaiConfig)
 
 --------------------------------------------------------------------------------
+
 -- MACROS
-local macroPlug = require("recorder")
-macroPlug.setup {
+local recorder = require("recorder")
+recorder.setup {
 	slots = {"a", "b"},
 	toggleKey = "0",
 }
-
-keymap("n", "9", macroPlug.playRecording)
-keymap("n", "<C-0>", macroPlug.switchMacroSlot)
-keymap("n", "c0", macroPlug.editMacro)
+keymap("n", "9", recorder.playRecording)
+keymap("n", "<C-0>", recorder.switchMacroSlot)
+keymap("n", "c0", recorder.editMacro)
 
 --------------------------------------------------------------------------------
 
