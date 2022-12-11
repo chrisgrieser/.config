@@ -16,7 +16,13 @@ alias q='exit'
 alias notify="osascript -e 'display notification \"\" with title \"Terminal Process finished.\" subtitle \"\" sound name \"\"'"
 alias p='pass'
 
-# verbosity nets
+
+alias \?='betterApropos'
+function betterApropos () {
+	apropos -s1 "$*" | sed -E 's/(\d)//g'
+}
+
+# added verbosity
 alias rm='rm -v'
 alias mv='mv -v'
 alias ln='ln -v'
@@ -42,17 +48,17 @@ alias l='command exa --all --long --git --icons --group-directories-first --sort
 alias tree='command exa --tree -L4 --icons --git-ignore'
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 
-# Global Alias
-alias -g H="--help"
-alias -g G="| grep --ignore-case --color"
-alias -g B="| bat"
-alias -g C="| pbcopy ; echo 'Copied.'"
-alias -g J="| yq --prettyPrint --output-format=json --colors | less" # beautify in JSON
-alias -g L="| less"
-alias -g N="| wc -l | tr -d ' '"
+# Global Alias (to be used at the end, mostly)
+alias -s H="--help"
+alias -s G="| grep --ignore-case --color"
+alias -s B="| bat"
+alias -s C="| pbcopy ; echo 'Copied.'"
+alias -s J="| yq --prettyPrint --output-format=json --colors | less" # beautify in JSON
+alias -s L="| less"
+alias -s N="| wc -l | tr -d ' '"
 
 # highlights for them
-ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
@@ -65,10 +71,7 @@ ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
 # ' and " are there to also open quoted things
 # without preceding command (analogous to `setopt AUTO_CD` but for files)
 alias -s {css,ts,js,yml,json,plist,xml,md}='bat'
-alias -s {css,ts,js,yml,json,plist,xml,md}\"='bat'
 alias -s {pdf,png,jpg,jpeg,tiff}="qlmanage -p &> /dev/null"
-alias -s {pdf,png,jpg,jpeg,tiff}\"="qlmanage -p &> /dev/null"
 
 # open log files in less and scrolled to the bottom
 alias -s log="less +G"
-alias -s log\"="less +G"
