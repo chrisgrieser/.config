@@ -557,7 +557,6 @@ keymap("n", "<leader>g", function()
 			commitMsg = "patch"
 		end
 
-		vim.notify(" ﴻ add-commit-push… ")
 		fn.jobstart("git add -A && git commit -m '"..commitMsg.."' ; git pull ; git push", shellOpts)
 	end)
 
