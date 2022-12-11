@@ -553,18 +553,22 @@ keymap("n", "<leader>g", function()
 			b.prevCommitMsg = commitMsg:sub(1, 50)
 			return
 		end
-		vim.notify(" ﴻ add-commit-push… ")
 
+		vim.notify(" ﴻ add-commit-push… ")
 		-- INFO shell function `acp` is made available by exporting it in my .zshenv
 		-- local result = fn.system([[acp "]] .. commitMsg .. [["]])
-		fn.jobstart({"echo", "hello"}, {
+		fn.jobstart("acp '"..commitMsg.."'", {
 			on_stdout = function(_, data, _)
+				if not(data) then return end
+				local stdout = table.concat(data, "\n")
+				vim.notify(stdout)
 				b.prevCommitMsg = nil
-				vim.notify("success " .. data[1])
 			end,
 			on_stderr = function(_, data, _)
+				if not(data) then return end
+				local stderr = table.concat(data, "\n")
+				vim.notify(stderr, logError)
 				b.prevCommitMsg = commitMsg
-				vim.notify("failure " .. data[1], logError)
 			end,
 			stdout_buffered = true,
 			stderr_buffered = true,
