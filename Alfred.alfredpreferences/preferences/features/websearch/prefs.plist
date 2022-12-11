@@ -191,6 +191,17 @@
 			<key>utf8</key>
 			<true/>
 		</dict>
+		<key>DACC6220-45C3-4D2F-80C0-35180C1B68C8</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ai</string>
+			<key>text</key>
+			<string>Chat GPT: '{query}'</string>
+			<key>url</key>
+			<string>https://chat.openai.com/chat?q={query}</string>
+		</dict>
 		<key>E6EBE234-58DF-42AE-B019-B2941D2B424F</key>
 		<dict>
 			<key>enabled</key>

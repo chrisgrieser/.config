@@ -672,56 +672,11 @@ end tell</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>applescript</key>
-				<string>on alfred_script(q)
-  -- your script here
-end alfred_script</string>
-				<key>cachescript</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.applescript</string>
-			<key>uid</key>
-			<string>07DE7206-95D6-4EDA-AD69-FFAF7C00B7FD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ai</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Chat GPT</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A8D13876-78BC-4AA3-BCC0-50D00A445A8D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>07DE7206-95D6-4EDA-AD69-FFAF7C00B7FD</key>
-		<dict>
-			<key>xpos</key>
-			<real>855</real>
-			<key>ypos</key>
-			<real>655</real>
-		</dict>
 		<key>0CB1384E-FC0D-46E5-8142-2590BB7CE8BD</key>
 		<dict>
 			<key>colorindex</key>
@@ -846,13 +801,6 @@ end alfred_script</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>A8D13876-78BC-4AA3-BCC0-50D00A445A8D</key>
-		<dict>
-			<key>xpos</key>
-			<real>525</real>
-			<key>ypos</key>
-			<real>655</real>
 		</dict>
 		<key>A94E2D4B-C051-4919-8446-B88D616A0C87</key>
 		<dict>
