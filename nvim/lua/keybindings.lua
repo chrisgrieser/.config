@@ -557,11 +557,12 @@ keymap("n", "<leader>g", function()
 		vim.notify(" ﴻ add-commit-push… ")
 		-- INFO shell function `acp` is made available by exporting it in my .zshenv
 		-- local result = fn.system([[acp "]] .. commitMsg .. [["]])
-		local id = fn.jobstart("acp '"..commitMsg.."'", {
+		local id = fn.jobstart("false", {
 			stdout_buffered = true,
+			detach = true,
 			on_stdout = function(_, data, _)
 				if not(data) then return end
-				local stdout = " "..table.concat(data, "\n ")
+				local stdout = " "..table.concat(data, " \n ").." "
 				vim.notify(stdout)
 				b.prevCommitMsg = nil
 			end,
