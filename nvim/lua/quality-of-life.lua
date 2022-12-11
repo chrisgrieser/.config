@@ -109,22 +109,30 @@ end
 function M.bettergx()
 	local urlVimRegex = [[https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*]] -- https://gist.github.com/tobym/584909
 	local urlLuaRegex = [[https?:?[^%s]+]] -- lua url regex being simple is okay, since vimregex runs before
-	local urlLineNr = fn.search(urlVimRegex, "nwcz")
+	local prevCur = getCursor(0)
+
+	cmd.normal {"0", bang = true} -- to prioritize URLs in the same line
+	local urlLineNr = fn.search(urlVimRegex, "wcz")
 	if urlLineNr == 0 then
 		vim.notify(" No URL found in this file. ", logWarn)
+	else
+		local urlLine = fn.getline(urlLineNr) ---@type string
+		local url = urlLine:match(urlLuaRegex)
+		if fn.has("macunix") then
+		vim.notify(" Only macOS supported for now.", logWarn)
 		return
 	end
-	local urlLine = fn.getline(urlLineNr) ---@type string
-	local url = urlLine:match(urlLuaRegex)
-	os.execute([[open "]] .. url .. [["]])
+		os.execute([[open "]] .. url .. [["]])
+	end
+	setCursor(0, prevCur)
 end
 
 ---Close tabs, window, buffer in that order if there is more than one of the type
 function M.betterClose()
 	local hasNotify = pcall(require, "notify")
 	local hasScrollview = pcall(require, "scrollview")
-	if require("notify") then require("notify").dismiss() end -- to not include notices in window count
-	local winThreshhold = require("scrollview") and 2 or 1-- HACK: since scrollview counts as a window
+	if hasNotify then require("notify").dismiss() end -- to not include notices in window count
+	local winThreshhold = hasScrollview and 2 or 1 -- HACK: since scrollview counts as a window
 	local moreThanOneWin = fn.winnr("$") > winThreshhold
 
 	local moreThanOneTab = fn.tabpagenr("$") > 1
@@ -165,7 +173,7 @@ function M.undoDuration(opts)
 	local now = os.time()
 	local secsPassed = now - b.timeOpened
 	local minsPassedStr = tostring(secsPassed / 60)
-	local resetLabel = "last save ("..minsPassedStr.."m ago)"
+	local resetLabel = "last save (" .. minsPassedStr .. "m ago)"
 	if not (opts) then opts = {selection = {resetLabel, "15m", "1h", "4h", "24h"}} end
 	vim.ui.select(opts.selection, {prompt = "Undo the last…"}, function(choice)
 		if not (choice) then return end

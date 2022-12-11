@@ -113,7 +113,6 @@ add("lua", {
 	snip("ignore (selene)", "-- selene: allow(${1:rule_name})"),
 	snip("ignore (selene global)", "--# selene: allow(${1:rule_name})"),
 	snip("home", 'os.getenv("HOME")'),
-	snip("ternary", "${1:cond} and ${2:expr} or ${3:expr}\n$0"),
 	snip("for (list)", [[
 	for _, ${1:v} in pairs(${2:list_table}) do
 		$0
@@ -123,9 +122,11 @@ add("lua", {
 
 -- nvim-lua
 add("lua", {
-	snip("keymap", 'keymap("n", "$1", ${2:""})\n$0'),
+	snip("keymap", 'keymap("n", "$1", ${2:""}, {desc = ${3:""}})\n$0'),
+	snip("keymap (multi-mode)", 'keymap({"n", "${1:x}"}, "$2", ${3:""}, {desc = ${4:""}})\n$0'),
 	snip("highlight (link)", [[cmd.highlight {"def link ${1:fromGroup} ${2:toGroup}", bang = true}]]),
-	snip("keymap (multi-mode)", 'keymap({"n", "${1:x}"}, "$2", ${3:""})\n$0'),
+	snip("highlight", [[cmd.highlight ("${1:group} guifg=${2:color}")]]),
+	snip("normal", [[cmd.normal {${1:""}, bang = true}]]),
 	snip("input (vim.ui)", [[
 		vim.ui.input({ prompt = "${1:prompt_msg}"}, function (input)
 			if not(input) then return end
