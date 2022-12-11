@@ -10,7 +10,7 @@ export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# Config
+# Pass Config
 export PASSWORD_STORE_CLIP_TIME=60
 export PASSWORD_STORE_GENERATED_LENGTH=32
 export PASSWORD_STORE_ENABLE_EXTENSIONS=false
@@ -26,10 +26,6 @@ export NEOVIDE_FRAME="buttonless"
 
 # so linters managed by mason are available to other apps
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
-
-# make github functions available in nvim
-# shellcheck disable=1091
-source "$DOTFILE_FOLDER/zsh/git_github.zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 # karabiner-cli
