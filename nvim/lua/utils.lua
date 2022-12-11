@@ -41,6 +41,8 @@ end
 
 -- shell options for fn.jobstart()
 shellOpts = {
+	stdout_buffered = true,
+	stderr_buffered = true,
 	detach = true,
 	on_stdout = function(_, data, _)
 		if not (data) or (data[1] == "" and #data == 1) then return end
@@ -57,12 +59,12 @@ shellOpts = {
 --------------------------------------------------------------------------------
 
 -- `:I` inspects the passed lua object
-api.nvim_create_user_command("I", function (ctx)
+api.nvim_create_user_command("I", function(ctx)
 	vim.pretty_print(fn.luaeval(ctx.args))
 end, {nargs = "+", complete = "command"})
 
 -- `:II` inspects the passed object and puts it into a new buffer, https://www.reddit.com/r/neovim/comments/zhweuc/comment/izo9br1/?utm_source=share&utm_medium=web2x&context=3
-api.nvim_create_user_command("II", function (ctx)
+api.nvim_create_user_command("II", function(ctx)
 	local output = fn.luaeval(ctx.args)
 	local lines = vim.split(output, "\n", {plain = true}) ---@diagnostic disable-line: param-type-mismatch
 	cmd.new()

@@ -33,6 +33,7 @@ if isGui() then
 		stages = "slide",
 		level = 0, -- minimum severity level to display (0 = display all)
 		max_height = 15,
+		max_width = 40,
 		minimum_width = 10,
 		timeout = 4000,
 		top_down = false,
