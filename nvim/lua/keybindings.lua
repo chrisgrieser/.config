@@ -625,6 +625,7 @@ keymap("n", "<leader>r", function()
 
 	elseif ft == "applescript" then
 		cmd.AppleScriptRun()
+		cmd.normal {"<C-w><C-p>", bang = true} -- switch to previous window
 
 	else
 		vim.notify(" No build system set. ", logWarn)

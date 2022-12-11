@@ -71,18 +71,7 @@ rules:
           key_code: delete_or_backspace
           modifiers: {mandatory: [control, command, shift, option]}
         to:
-          - shell_command: |
-              target="$HOME/.Trash"
-              osascript -e "
-                set the_folder to (\"$target\") as POSIX file
-                tell application \"Finder\"
-                  activate
-                  if front Finder window exists then
-                    set target of front Finder window to the_folder
-                  else
-                    open the_folder
-                  end if
-                end tell"
+          - shell_command: open "$HOME/.Trash"
           - key_code: vk_none
             hold_down_milliseconds: 200
           - key_code: "2" # list view
@@ -93,6 +82,7 @@ rules:
           key_code: f
           modifiers: {mandatory: [control, command, shift, option]}
         to:
+          # with this method, it's not opened in a new window
           - shell_command: |
               target="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
               osascript -e "
