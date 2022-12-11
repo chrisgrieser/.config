@@ -288,7 +288,7 @@ require("lualine").setup {
 		extensions = {"nvim-dap-ui"},
 		disabled_filetypes = {
 			statusline = specialFiletypes,
-			winbar = specialFiletypes,
+			-- winbar = specialFiletypes,
 		},
 	},
 }

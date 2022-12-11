@@ -387,7 +387,8 @@ keymap("", "<C-Right>", ":vertical resize +3<CR>") -- resizing on one key for sa
 keymap("", "<C-Left>", ":vertical resize -3<CR>")
 keymap("", "<C-Down>", ":resize +3<CR>")
 keymap("", "<C-Up>", ":resize -3<CR>")
-keymap("n", "ö", "<C-w><C-w>") -- switch to next split
+keymap("n", "ö", "<C-w>w") -- switch to next split
+keymap("n", "Ö", "<C-w>o") -- close other window(s)
 
 --------------------------------------------------------------------------------
 

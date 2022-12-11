@@ -140,12 +140,12 @@ function M.betterClose()
 	local hasNotify = pcall(require, "notify")
 	if hasNotify then require("notify").dismiss() end -- to not include notices in window count
 
-	local threshold
 	-- HACK: since scrollview counts as a window, but only appears if buffer is
-	-- longer than window
+	-- longer than window https://github.com/dstein64/nvim-scrollview/issues/83
+	local threshold
 	local hasScrollview = pcall(require, "scrollview")
 	if hasScrollview then
-		local bufHeight = fn.lines("$")
+		local bufHeight = fn.line("$")
 		local winHeight = api.nvim_win_get_height(0)
 		threshold = bufHeight <= winHeight and 1 or 2
 	else
