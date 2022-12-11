@@ -23,14 +23,12 @@ require("nvim-treesitter.configs").setup {
 
 	highlight = {
 		enable = true,
-
 		-- NOTE: these are the names of the parsers and not the filetype
 		disable = {
 			"css", -- looks weird with css: https://github.com/tree-sitter/tree-sitter-css/issues/34
 			"scss",
 			"markdown", -- looks worse and enables spellcheck in URLs and Code Blocks 🙈
 		},
-
 	},
 
 	-- use treesitter for autoindent with `=`
@@ -70,6 +68,8 @@ require("nvim-treesitter.configs").setup {
 		},
 	},
 
+	-----------------------------------------------------------------------------
+
 	rainbow = {-- rainbow plugin
 		enable = true,
 		disable = {}, -- list of languages you want to disable the plugin for
@@ -93,11 +93,6 @@ require("nvim-treesitter.configs").setup {
 		},
 	},
 }
-
---------------------------------------------------------------------------------
--- highlight parameters
-require("hlargs").setup()
-
 
 --------------------------------------------------------------------------------
 -- force treesitter to highlight zsh as if it was bash

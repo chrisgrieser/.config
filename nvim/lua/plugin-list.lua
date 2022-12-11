@@ -10,10 +10,10 @@ function M.PluginList()
 	use {"williamboman/mason.nvim", requires = "RubixDev/mason-update-all"}
 
 	-- Themes
-	-- use "folke/tokyonight.nvim"
 	use "savq/melange" -- like Obsidian's Primary color scheme
-	-- use "EdenEast/nightfox.nvim"
 	use "nyoom-engineering/oxocarbon.nvim"
+	-- use "folke/tokyonight.nvim"
+	-- use "EdenEast/nightfox.nvim"
 	-- use "rebelot/kanagawa.nvim"
 
 	-- Treesitter
@@ -23,13 +23,18 @@ function M.PluginList()
 			require("nvim-treesitter.install").update {with_sync = true}
 		end,
 		requires = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/nvim-treesitter-refactor",
+			"nvim-treesitter/nvim-treesitter-textobjects",
 			"p00f/nvim-ts-rainbow", -- colored brackets
-			"m-demare/hlargs.nvim", -- highlight function args
-			"JoosepAlviste/nvim-ts-context-commentstring", -- comments for embedded filetypes
-			"mizlan/iswap.nvim", -- swapping of notes
 		}
+	}
+
+	use {"mizlan/iswap.nvim",-- swapping of notes
+		config = function () require("iswap").setup{autoswap = true} end,
+		cmd = "ISwapWith"
+	}
+	use {"m-demare/hlargs.nvim", -- highlight function args
+		config = function() require("hlargs").setup() end,
 	}
 	use {"Wansmer/treesj", -- split-join
 		requires = {
@@ -46,10 +51,6 @@ function M.PluginList()
 			}
 		end
 	}
-	use {"bennypowers/nvim-regexplainer", requires = {
-		"nvim-treesitter/nvim-treesitter",
-		"MunifTanjim/nui.nvim",
-	}}
 
 	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
 		after = "nvim-cmp",
@@ -181,6 +182,16 @@ function M.PluginList()
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
 	use {"hail2u/vim-css3-syntax", ft = "css"} -- better syntax highlighting (until treesitter css looks decent…)
 	use {"iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && npm install"}
+	use {"bennypowers/nvim-regexplainer",
+		ft = {"javascript", "typescript"},
+		requires = {"nvim-treesitter/nvim-treesitter", "MunifTanjim/nui.nvim"},
+		config = function()
+			require("regexplainer").setup {
+				auto = true, -- automatically show the explainer when the cursor enters a regexp
+				mappings = {toggle = nil},
+			}
+		end
+	}
 
 end
 

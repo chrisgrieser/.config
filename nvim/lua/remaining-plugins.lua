@@ -28,20 +28,3 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-require("regexplainer").setup {
-	mode = "narrative",
-	display = "popup", -- split|popup
-	auto = true, -- automatically show the explainer when the cursor enters a regexp
-	mappings = {toggle = nil},
-	filetypes = {
-		"html",
-		"js",
-		"cjs",
-		"mjs",
-		"ts",
-		"jsx",
-		"tsx",
-		"cjsx",
-		"mjsx",
-	},
-}
