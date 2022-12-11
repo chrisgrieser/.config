@@ -547,11 +547,14 @@ keymap("n", "<leader>g", function()
 	local prefill = b.prevCommitMsg or ""
 
 	vim.ui.input({prompt = "Commit Message:", default = prefill}, function(commitMsg)
-		if not (commitMsg) then return end
-		if #commitMsg > 50 then
+		if not (commitMsg) then
+			return
+		elseif #commitMsg > 50 then
 			vim.notify(" Commit Message too long. \n (Run again for shortened message.) ", logWarn)
 			b.prevCommitMsg = commitMsg:sub(1, 50)
 			return
+		elseif commitMsg == "" then
+			commitMsg = "patch"
 		end
 
 		local shellOpts = {
@@ -571,9 +574,12 @@ keymap("n", "<leader>g", function()
 		}
 
 		vim.notify(" ﴻ add-commit-push… ")
-		fn.jobstart("git add .", shellOpts)
-		fn.jobstart("git commit -m '" .. commitMsg .. "'", shellOpts)
-		fn.jobstart("git pull", shellOpts)
+		local add = fn.jobstart("git add .", shellOpts)
+		fn.jobwait({add})
+		local commit = fn.jobstart("git commit -m '" .. commitMsg .. "'", shellOpts)
+		fn.jobwait({commit})
+		local pull = fn.jobstart("git pull", shellOpts)
+		fn.jobwait({pull})
 		fn.jobstart("git push", shellOpts)
 	end)
 
