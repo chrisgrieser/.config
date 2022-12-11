@@ -558,8 +558,8 @@ keymap("n", "<leader>g", function()
 		end
 
 		local shellOpts = {
-			stdout_buffered = true,
-			stderr_buffered = true,
+			stdout_buffered = false,
+			stderr_buffered = false,
 			detach = true,
 			on_stdout = function(_, data, _)
 				if not (data) or (data[1] == "" and #data == 1) then return end
