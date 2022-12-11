@@ -266,7 +266,7 @@ keymap("x", "<S-Tab>", "<gv")
 -- EDITING
 
 -- Casing
-keymap("n", "ü", "mzlblgueh~`z", {desc = "toggle capital/lowercase of word"}) 
+keymap("n", "ü", "mzlblgueh~`z", {desc = "toggle capital/lowercase of word"})
 keymap("n", "Ü", "gUiw", {desc = "uppercase word"})
 keymap("n", "~", "~h", {desc = "switch char case (w/o) moving"})
 
@@ -518,6 +518,9 @@ keymap("", "<D-BS>", function() require("genghis").trashFile() end)
 keymap("", "<D-n>", function() require("genghis").createNewFile() end)
 keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end)
 
+--------------------------------------------------------------------------------
+-- GIT
+
 -- Diffview
 keymap("n", "<D-g>", function()
 	vim.ui.input({prompt = "Search File History (empty = full history):"}, function(query)
@@ -539,6 +542,32 @@ keymap("x", "<leader>G", function()
 	require("gitlinker").get_buf_range_url("v", {action_callback = require("gitlinker.actions").open_in_browser})
 end)
 
+-- add-commit-pull-push
+keymap("n", "<leader>g", function()
+	local prefill = b.prevCommitMsg or ""
+
+	vim.ui.input({prompt = "Commit Message:", default = prefill}, function(commitMsg)
+		if not (commitMsg) then return end
+		if #commitMsg > 50 then
+			vim.notify(" Commit Message too long. \n (Run again for shortened message.) ", logWarn)
+			b.prevCommitMsg = commitMsg:sub(1, 50)
+			return
+		end
+
+		vim.notify(" ﴻ add-commit-push… ")
+		-- INFO shell function `acp` is made available by exporting it in my .zshenv
+		local result = fn.system([[acp "]] .. commitMsg .. [["]])
+		local success = v.shell_error ~= 0
+		if success then
+			vim.notify(result)
+		else
+			vim.notify(result, logError)
+			b.prevCommitMsg = commitMsg
+		end
+	end)
+
+end)
+
 --------------------------------------------------------------------------------
 
 -- Option Toggling
@@ -552,7 +581,6 @@ keymap("n", "<leader>ow", ":set wrap!<CR>")
 -- TERMINAL MODE
 keymap("t", "<Esc>", [[<C-\><C-n>]]) -- normal mode in Terminal window
 keymap("t", "ö", [[<C-\><C-n><C-w><C-w>]]) -- switch windows directly from Terminal window
-keymap("n", "<leader>g", [[:w<CR>:!acp ""<Left>]]) -- shell function `acp`, enabled via .zshenv
 keymap("n", "6", ":ToggleTerm size=8<CR>")
 keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>")
 
