@@ -554,41 +554,27 @@ keymap("n", "<leader>g", function()
 			return
 		end
 
-		vim.notify(" ﴻ add-commit-push… ")
-		fn.jobstart("git add .", {
+		local shellOpts = {
 			stdout_buffered = true,
 			stderr_buffered = true,
 			detach = true,
 			on_stdout = function(_, data, _)
-				if not(data) or (data[1] == "" and #data == 1) then return end
-				local stdout = " "..table.concat(data, " \n "):gsub("%s*$", "").." "
-				vim.notify(stdout)
+				if not (data) or (data[1] == "" and #data == 1) then return end
+				local stdOut = " " .. table.concat(data, " \n "):gsub("%s*$", "") .. " "
+				vim.notify(stdOut, vim.log.levels.INFO)
 			end,
 			on_stderr = function(_, data, _)
-				if not(data) or (data[1] == "" and #data == 1) then return end
-				local stderr = " "..table.concat(data, " \n "):gsub("%s*$", "").." "
-				vim.notify(stderr, logWarn)
+				if not (data) or (data[1] == "" and #data == 1) then return end
+				local stdErr = " " .. table.concat(data, " \n "):gsub("%s*$", "") .. " "
+				vim.notify(stdErr, vim.log.levels.WARN)
 			end,
-		})
-		-- INFO shell function `acp` is made available by exporting it in my .zshenv
-		-- local result = fn.system([[acp "]] .. commitMsg .. [["]])
-		-- fn.jobstart("acp '"..commitMsg.."'", {
-		-- 	stdout_buffered = true,
-		-- 	stderr_buffered = true,
-		-- 	detach = true,
-		-- 	on_stdout = function(_, data, _)
-		-- 		if not(data) or (data[1] == "" and #data == 1) then return end
-		-- 		local stdout = " "..table.concat(data, " \n "):gsub("%s*$", "").." "
-		-- 		vim.notify(stdout)
-		-- 		b.prevCommitMsg = nil
-		-- 	end,
-		-- 	on_stderr = function(_, data, _)
-		-- 		if not(data) or (data[1] == "" and #data == 1) then return end
-		-- 		local stderr = " "..table.concat(data, " \n "):gsub("%s*$", "").." "
-		-- 		vim.notify(stderr, logWarn)
-		-- 		b.prevCommitMsg = commitMsg
-		-- 	end,
-		-- })
+		}
+
+		vim.notify(" ﴻ add-commit-push… ")
+		fn.jobstart("git add .", shellOpts)
+		fn.jobstart("git commit -m '" .. commitMsg .. "'", shellOpts)
+		fn.jobstart("git pull", shellOpts)
+		fn.jobstart("git push", shellOpts)
 	end)
 
 end)
