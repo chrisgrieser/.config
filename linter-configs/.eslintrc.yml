@@ -11,7 +11,7 @@ parserOptions:
 
 rules:
   # code structure
-  complexity: [warn, 15]
+  complexity: [warn, 13]
   max-depth: [warn, 4]
 
   # variables
@@ -106,7 +106,7 @@ rules:
   comma-style: warn
   comma-dangle:
     - warn
-    - objects: always-multiline
+    - always-multiline
   quotes:
     - warn
     - double

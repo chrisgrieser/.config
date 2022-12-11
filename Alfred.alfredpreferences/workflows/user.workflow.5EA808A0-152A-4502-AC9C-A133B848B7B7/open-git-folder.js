@@ -25,15 +25,15 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeperated, str].join(" ");
 }
 
-function readPlist (key, path) {
+function readPlist(key, path) {
 	return app.doShellScript(
 		"plutil -extract " + key
 		+ " xml1 -o - '" + path
 		+ "' | sed -n 4p | cut -d\">\" -f2 | cut -d\"<\" -f1")
-		.replaceAll ("&amp;", "&");
+		.replaceAll("&amp;", "&");
 }
 
-function readFile (path) {
+function readFile(path) {
 	const fm = $.NSFileManager.defaultManager;
 	const data = fm.contentsAtPath(path);
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
@@ -53,49 +53,48 @@ const repoArray = app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/b
 
 repoArray.forEach(localRepoFilePath => {
 	let repoName;
-	let iconpath;
 	const isAlfredWorkflow = finderApp.exists(Path(localRepoFilePath + "/info.plist"));
 	const isObsiPlugin = finderApp.exists(Path(localRepoFilePath + "/manifest.json"));
 	const isNeovimPlugin = finderApp.exists(Path(localRepoFilePath + "/lua"));
 
 	// Dirty Repo
 	let dirtyIcon = "";
-	const filesChangedStr = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`);
-	const dirtyRepo = filesChangedStr !== "";
+	const dirtyRepo = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
 	if (dirtyRepo) dirtyIcon = " ✴️";
-
-	// Alfred Workflow Repos
+	
+	let iconpath = "repotype-icons/";
 	if (isAlfredWorkflow) {
 		repoName = readPlist("name", localRepoFilePath + "/info.plist");
 		iconpath = localRepoFilePath + "/icon.png";
 
-	// Obsidian Plugin Repos
 	} else if (isObsiPlugin) {
 		const manifest = readFile(localRepoFilePath + "/manifest.json");
 		repoName = JSON.parse(manifest).name;
-		iconpath = "obsidian.png";
+		iconpath += "obsidian.png";
 
 	} else if (isNeovimPlugin) {
 		repoName = localRepoFilePath.replace(/.*\/(.*)\//, "$1");
-		iconpath = "neovim.png";
-	}
+		iconpath += "neovim.png";
 
-	// Other Repos
-	else {
+	} else {
 		const readme = readFile(localRepoFilePath + "/README.md");
+		const isKarabinerMod = readme.includes("Karabiner");
+		if (isKarabinerMod) iconpath += "karabiner.png";
+
 		if (readme) {
 			repoName = readme
 				.split("\n")
 				.find(line => line.startsWith("# "))
 				.replace(/^#+ /, "");
 			if (!repoName) repoName = "Heading Missing";
+		} else {
+			repoName = localRepoFilePath;
 		}
-		else repoName = localRepoFilePath;
 	}
 
 	jsonArray.push({
 		"title": repoName + dirtyIcon,
-		"match": alfredMatcher (repoName),
+		"match": alfredMatcher(repoName),
 		"icon": { "path": iconpath },
 		"arg": localRepoFilePath,
 		"uid": localRepoFilePath,
@@ -103,4 +102,3 @@ repoArray.forEach(localRepoFilePath => {
 });
 
 JSON.stringify({ items: jsonArray });
-

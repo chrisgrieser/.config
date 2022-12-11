@@ -27,6 +27,8 @@ function M.PluginList()
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"p00f/nvim-ts-rainbow", -- colored brackets
 			"m-demare/hlargs.nvim", -- highlight function args
+			"JoosepAlviste/nvim-ts-context-commentstring", -- comments for embedded filetypes
+			"mizlan/iswap.nvim", -- swapping of notes
 		}
 	}
 	use {"Wansmer/treesj", -- split-join
@@ -173,7 +175,7 @@ function M.PluginList()
 		config = function() require("numb").setup() end,
 		keys = {{"n", ":"}},
 	}
-	use (myrepos .. "nvim-recorder") -- better macros
+	use(myrepos .. "nvim-recorder") -- better macros
 
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
