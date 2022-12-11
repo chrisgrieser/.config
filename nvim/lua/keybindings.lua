@@ -561,7 +561,7 @@ keymap("n", "<leader>g", function()
 			stdout_buffered = true,
 			on_stdout = function(_, data, _)
 				if not(data) then return end
-				local stdout = table.concat(data, "\n")
+				local stdout = " "..table.concat(data, "\n ")
 				vim.notify(stdout)
 				b.prevCommitMsg = nil
 			end,
