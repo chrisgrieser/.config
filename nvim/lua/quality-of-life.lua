@@ -121,6 +121,8 @@ end
 
 ---Close tabs, window, buffer in that order if there is more than one of the type
 function M.betterClose()
+	local hasNotify = pcall(require, "notify")
+	local hasScrollview = pcall(require, "scrollview")
 	if require("notify") then require("notify").dismiss() end -- to not include notices in window count
 	local winThreshhold = require("scrollview") and 2 or 1-- HACK: since scrollview counts as a window
 	local moreThanOneWin = fn.winnr("$") > winThreshhold
@@ -133,6 +135,7 @@ function M.betterClose()
 	if moreThanOneTab then
 		cmd.tabclose()
 	elseif moreThanOneWin then
+		if bo.filetype == "" then cmd.bwipeout() end -- scratch buffers
 		cmd.close()
 	elseif #buffers == 2 then
 		cmd.bwipeout() -- only method to clear altfile
@@ -162,16 +165,15 @@ function M.undoDuration(opts)
 	local now = os.time()
 	local secsPassed = now - b.timeOpened
 	local minsPassedStr = tostring(secsPassed / 60)
-	local resetLabel = "last save ("..minsPassedStr..")"
+	local resetLabel = "last save ("..minsPassedStr.."m ago)"
 	if not (opts) then opts = {selection = {resetLabel, "15m", "1h", "4h", "24h"}} end
-
 	vim.ui.select(opts.selection, {prompt = "Undo the last…"}, function(choice)
 		if not (choice) then return end
-		if choice == "buffer opening" then
+		if choice:find("last save") then
 			cmd("earlier " .. secsPassed .. "s")
-			return
+		else
+			cmd("earlier " .. choice)
 		end
-		cmd("earlier " .. choice)
 		vim.notify(" Restored to " .. choice .. " earlier. ")
 	end)
 end
