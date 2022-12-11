@@ -8,6 +8,12 @@ function ch () {
 	echo "$CHEAT_CODE_ONLY" | pbcopy
 }
 
+# Better Aprospos (apropos searches descriptions of installed CLIs)
+alias \?='betterApropos'
+function betterApropos () {
+	apropos -s1 "$*" | sed -e 's/([[:digit:]])//' | sort -u
+}
+
 # GET A BETTER MAN
 # first arg: command, second arg: search term
 function man () {

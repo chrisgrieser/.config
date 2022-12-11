@@ -16,12 +16,6 @@ alias q='exit'
 alias notify="osascript -e 'display notification \"\" with title \"Terminal Process finished.\" subtitle \"\" sound name \"\"'"
 alias p='pass'
 
-
-alias \?='betterApropos'
-function betterApropos () {
-	apropos -s1 "$*" | sed -E 's/(\d)//g'
-}
-
 # added verbosity
 alias rm='rm -v'
 alias mv='mv -v'
