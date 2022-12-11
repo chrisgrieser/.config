@@ -548,11 +548,11 @@ keymap("n", "<leader>g", function()
 
 	vim.ui.input({prompt = "Commit Message:", default = prefill}, function(commitMsg)
 		if not (commitMsg) then return end
-		if #commitMsg > 50 then
-			vim.notify(" Commit Message too long. \n (Run again for shortened message.) ", logWarn)
-			b.prevCommitMsg = commitMsg:sub(1, 50)
-			return
-		end
+		-- if #commitMsg > 50 then
+		-- 	vim.notify(" Commit Message too long. \n (Run again for shortened message.) ", logWarn)
+		-- 	b.prevCommitMsg = commitMsg:sub(1, 50)
+		-- 	return
+		-- end
 
 		vim.notify(" ﴻ add-commit-push… ")
 		-- INFO shell function `acp` is made available by exporting it in my .zshenv
