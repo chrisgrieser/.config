@@ -114,7 +114,7 @@ autocmd({"CursorMoved", "VimEnter"}, {
 autocmd("TextYankPost", {
 	group = "yankKeepCursor",
 	callback = function()
-		if vim.v.event.operator == "y" then
+		if v.event.operator == "y" then
 			fn.setpos(".", g.cursorPreYankPos)
 		end
 	end
@@ -553,19 +553,22 @@ keymap("n", "<leader>g", function()
 			b.prevCommitMsg = commitMsg:sub(1, 50)
 			return
 		end
-
 		vim.notify(" ﴻ add-commit-push… ")
+
 		-- INFO shell function `acp` is made available by exporting it in my .zshenv
 		-- local result = fn.system([[acp "]] .. commitMsg .. [["]])
-		fn.jobstart{{"acp", commitMsg}, {on_stdout = function ()
-			
-		end}}
-		if success then
-			vim.notify(result)
-		else
-			vim.notify(result, logError)
-			b.prevCommitMsg = commitMsg
-		end
+		fn.jobstart({"echo", "hello"}, {
+			on_stdout = function(_, data, _)
+				b.prevCommitMsg = nil
+				vim.notify("success " .. data[1])
+			end,
+			on_stderr = function(_, data, _)
+				b.prevCommitMsg = commitMsg
+				vim.notify("failure " .. data[1], logError)
+			end,
+			stdout_buffered = true,
+			stderr_buffered = true,
+		})
 	end)
 
 end)
