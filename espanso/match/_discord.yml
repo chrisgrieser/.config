@@ -1,6 +1,10 @@
 matches:
   - trigger: "roadmap"
     replace: "ro*dmap [auto-censored]"
+
+  # sed for fixing messages
+  - trigger: "sss"
+    replace: "s/$|$//"
   - trigger: "legacy editor"
     replace: "legacy edit0r [auto-censored]"
 
