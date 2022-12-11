@@ -129,6 +129,7 @@ autocmd("TextYankPost", {
 -- q -> comment (mnemonic: [q]uiet text) (treesitter)
 -- Q -> consecutive (big) comment (comments.nvim)
 -- aa -> an [a]rgument (treesitter)
+-- al -> an cal[l] (treesitter)
 -- ah -> a [h]unk (gitsigns)
 -- ai -> a [i]ndentation (indent-textobj)
 -- ad -> a [d]iagnostic (diagnostic-textobj)

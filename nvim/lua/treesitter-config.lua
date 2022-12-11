@@ -58,6 +58,8 @@ require("nvim-treesitter.configs").setup {
 				["ia"] = "@parameter.inner",
 				["ao"] = "@conditional.outer", -- c[o]nditional (`ac` already = a curly)
 				["io"] = "@conditional.inner",
+				["il"] = "@call.inner", -- cal[l]
+				["al"] = "@call.outer",
 				["COM"] = "@comment.outer", -- HACK later remapped to q, done indirectly to avoid conflict with visual mode comments
 			},
 			-- If you set this to `true` (default is `false`) then any textobject is
