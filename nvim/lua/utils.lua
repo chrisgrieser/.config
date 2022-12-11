@@ -38,13 +38,13 @@ api.nvim_create_user_command("I", function (ctx)
 	vim.pretty_print(fn.luaeval(ctx.args))
 end, {nargs = "+", complete = "command"})
 
--- `:II` inspects the passed object and puts it into a new buffer
+-- `:II` inspects the passed object and puts it into a new buffer, https://www.reddit.com/r/neovim/comments/zhweuc/comment/izo9br1/?utm_source=share&utm_medium=web2x&context=3
 api.nvim_create_user_command("II", function (ctx)
-
 	local output = fn.luaeval(ctx.args)
 	local lines = vim.split(output, "\n", {plain = true}) ---@diagnostic disable-line: param-type-mismatch
 	cmd.new()
 	api.nvim_buf_set_lines(0, 0, -1, false, lines)
+	cmd.write("/tmp/nvim-cmd-output")
 end, {nargs = "+", complete = "command"})
 
 ---whether nvim runs in a GUI
