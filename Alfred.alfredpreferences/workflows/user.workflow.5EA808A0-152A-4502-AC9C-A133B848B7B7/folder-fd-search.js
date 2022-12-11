@@ -19,7 +19,7 @@ const repoArray = app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/b
 	cd \"" + folderToSearch + "\" ; \
 	fd --absolute-path --hidden --exclude \"/.git/*\"")
 	.split("\r")
-	.map(fPath => {
+	.map(fPath => { /* eslint-disable-line complexity */
 		const parts = fPath.split("/");
 		const isFolder = fPath.endsWith("/");
 		if (isFolder) parts.pop();
@@ -27,7 +27,7 @@ const repoArray = app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/b
 		const relativeParentFolder = fPath.slice(folderToSearch.length, -(name.length + 1));
 
 		let iconObj;
-		let ext = name.split(".").pop();
+		let ext = isFolder ? "folder" : name.split(".").pop();
 		if (ext.includes("rc")) ext = "rc"; // rc files
 		else if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
 		switch (ext) {

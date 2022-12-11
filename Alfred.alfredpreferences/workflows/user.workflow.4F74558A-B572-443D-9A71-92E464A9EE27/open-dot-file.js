@@ -54,9 +54,10 @@ workArray.forEach(file => { /* eslint-disable-line complexity */
 	if (parentPart === ".") parentPart = "";
 
 	let iconObj;
-	let ext = fileName.split(".").pop();
-	if (ext.includes("rc")) ext = "rc"; // rc files
+	let ext = isFolder ? "folder" : fileName.split(".").pop();
+	if (ext.includes("rc")) ext = "rc"; 
 	else if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
+
 	switch (ext) {
 		case "json":
 			iconObj = { "path": "icons/json.png" };
@@ -84,7 +85,6 @@ workArray.forEach(file => { /* eslint-disable-line complexity */
 		case "rc":
 			iconObj = { "path": "icons/rc.png" };
 			break;
-		case "": // = folder
 		default:
 			iconObj = { "type": "fileicon", "path": filePath }; // by default, use file icon
 	}
