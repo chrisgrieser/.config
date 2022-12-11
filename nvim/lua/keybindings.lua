@@ -559,7 +559,6 @@ keymap("n", "<leader>g", function()
 		-- local result = fn.system([[acp "]] .. commitMsg .. [["]])
 		local id = fn.jobstart("acp '"..commitMsg.."'", {
 			stdout_buffered = true,
-			stderr_buffered = true,
 			on_stdout = function(_, data, _)
 				if not(data) then return end
 				local stdout = table.concat(data, "\n")
@@ -568,7 +567,7 @@ keymap("n", "<leader>g", function()
 			end,
 		})
 		if not(id) then
-			vim.notify("error", logError)
+			vim.notify(" Could not upload. ", logError)
 		end
 	end)
 
