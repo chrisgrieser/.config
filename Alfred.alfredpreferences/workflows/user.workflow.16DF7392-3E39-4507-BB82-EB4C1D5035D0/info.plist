@@ -21,19 +21,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>67CDEE43-E332-44C8-A989-E51A7D6EB1E3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>010166A2-5769-42B4-8975-19AB9F0B46A1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>73FB998B-A01C-4934-961B-430CAA7F9D84</key>
 		<array>
 			<dict>
@@ -269,54 +256,6 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>paths</key>
-				<array>
-					<string>/System/Volumes/Data/Applications/Kap.app</string>
-				</array>
-				<key>toggle</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.launchfiles</string>
-			<key>uid</key>
-			<string>010166A2-5769-42B4-8975-19AB9F0B46A1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>23</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>5</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>67CDEE43-E332-44C8-A989-E51A7D6EB1E3</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -391,15 +330,6 @@ https://github.com/tesseract-ocr/tesseract/blob/b67ea2c1a70c56053e142a5fb7cc18fb
 IMAGE_BASE_NAME needs to be `Pasted image ` for the paste image renamer Obsidian plugin</string>
 	<key>uidata</key>
 	<dict>
-		<key>010166A2-5769-42B4-8975-19AB9F0B46A1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>255</real>
-		</dict>
 		<key>2245D209-C890-481A-AC66-F6D5B015FA02</key>
 		<dict>
 			<key>colorindex</key>
@@ -407,7 +337,7 @@ IMAGE_BASE_NAME needs to be `Pasted image ` for the paste image renamer Obsidian
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>270</real>
 		</dict>
 		<key>3A2C4213-C10F-4517-856A-17B41D519A7C</key>
 		<dict>
@@ -416,7 +346,7 @@ IMAGE_BASE_NAME needs to be `Pasted image ` for the paste image renamer Obsidian
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>270</real>
 		</dict>
 		<key>6683D7DE-D787-45CD-9433-8941FCB0F178</key>
 		<dict>
@@ -426,17 +356,6 @@ IMAGE_BASE_NAME needs to be `Pasted image ` for the paste image renamer Obsidian
 			<real>365</real>
 			<key>ypos</key>
 			<real>60</real>
-		</dict>
-		<key>67CDEE43-E332-44C8-A989-E51A7D6EB1E3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>Screenshot Recording</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>255</real>
 		</dict>
 		<key>73FB998B-A01C-4934-961B-430CAA7F9D84</key>
 		<dict>
@@ -478,7 +397,7 @@ Press SPACE to toggle to window capture</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>270</real>
 		</dict>
 		<key>D33641C6-9931-4B9A-8E22-E49496723AFD</key>
 		<dict>
