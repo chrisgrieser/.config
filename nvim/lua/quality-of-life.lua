@@ -118,11 +118,19 @@ function M.bettergx()
 	else
 		local urlLine = fn.getline(urlLineNr) ---@type string
 		local url = urlLine:match(urlLuaRegex)
+		local opener
 		if fn.has("macunix") then
-		vim.notify(" Only macOS supported for now.", logWarn)
-		return
-	end
-		os.execute([[open "]] .. url .. [["]])
+			opener = "open"
+		elseif fn.has("unix") then
+			opener = "xdg-open"
+		elseif fn.has("win64") or fn.has("win32") then
+			opener = "start"
+		end
+		if opener then
+			os.execute(opener .. ' "' .. url .. '"')
+		else
+			vim.notify(" Sorry, you have some arcane operating system that is not supported yet. ", logWarn)
+		end
 	end
 	setCursor(0, prevCur)
 end

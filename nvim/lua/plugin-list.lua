@@ -173,6 +173,7 @@ function M.PluginList()
 		config = function() require("numb").setup() end,
 		keys = {{"n", ":"}},
 	}
+	use (myrepos .. "nvim-recorder") -- better macros
 
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting

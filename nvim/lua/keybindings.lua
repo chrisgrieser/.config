@@ -232,7 +232,7 @@ require("mini.ai").setup(miniaiConfig)
 
 --------------------------------------------------------------------------------
 -- MACROS
-local macroPlug = require("macro")
+local macroPlug = require("recorder")
 macroPlug.setup {
 	slots = {"a", "b"},
 	toggleKey = "0",
