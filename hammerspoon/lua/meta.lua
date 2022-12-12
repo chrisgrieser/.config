@@ -16,6 +16,7 @@ uriScheme("hs-reload", function()
 	if cons.hswindow() then cons.hswindow():close() end -- close console
 	hs.execute("touch ./is-reloading")
 	hs.reload()
+	-- INFO will also run the systemStart function due to reload
 end)
 
 --------------------------------------------------------------------------------

@@ -254,7 +254,7 @@ recorder.setup {
 keymap("n", "!", "a <Esc>h") -- insert space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
-keymap("n", "d<Tab>", function() -- delete blank lines except one
+keymap("n", "d<Space>", function() -- delete blank lines except one
 	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
 		cmd [[normal! "_dipO]]
 	else
@@ -568,13 +568,13 @@ keymap("n", "<leader>g", function()
 		end
 
 		vim.notify("ﴻ add-commit-push…")
-		fn.jobstart("git add -A && git commit -m '"..commitMsg.."' ; git pull ; git push", shellOpts)
+		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
 
 		local issueNr = commitMsg:match("#(%d+)")
 		if issueNr then
-			local repo = fn.system[[git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//']]
+			local repo = fn.system [[git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//']]
 			local url = repo:gsub("\n", "") .. "/issues/" .. issueNr
-			os.execute("open '"..url.."'")
+			os.execute("open '" .. url .. "'")
 		end
 	end)
 
@@ -627,7 +627,7 @@ keymap("n", "<leader>r", function()
 				vim.notify(fn.expand("%") .. " reloaded.")
 			end
 		elseif parentFolder:find("hammerspoon") then
-			os.execute('open -g "hammerspoon://hs-reload"')
+			os.execute [[open -g "hammerspoon://hs-reload"]]
 		end
 
 	elseif ft == "yaml" and parentFolder:find("/karabiner") then

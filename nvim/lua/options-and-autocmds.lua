@@ -120,12 +120,12 @@ augroup("Mini-Lint", {})
 autocmd("BufWritePre", {
 	group = "Mini-Lint",
 	callback = function()
-		local save_view = fn.winsaveview() -- save cursor position
+		local prevCursor = api.nvim_win_get_cursor(0)
 		if bo.filetype ~= "markdown" then -- to preserve spaces from the two-space-rule, and trailing spaces on sentences
 			cmd [[%s/\s\+$//e]] -- trim trailing whitespaces
 		end
 		cmd [[silent! %s#\($\n\s*\)\+\%$##]] -- trim extra blanks at eof https://stackoverflow.com/a/7496112
-		fn.winrestview(save_view)
+		api.nvim_win_set_cursor(0, prevCursor)
 	end
 })
 
@@ -138,7 +138,7 @@ opt.cmdheight = 0
 --------------------------------------------------------------------------------
 -- FOLDING
 local ufo = require("ufo")
-local foldIcon = " 祉"
+local foldIcon = " 祉祉祉"
 ufo.setup {
 	provider_selector = function(bufnr, filetype, buftype) ---@diagnostic disable-line: unused-local
 		return {"treesitter", "indent"} -- Use Treesitter as fold provider
@@ -154,7 +154,7 @@ ufo.setup {
 	fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 		-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
 		local newVirtText = {}
-		local suffix = foldIcon..tostring(endLnum - lnum)
+		local suffix = foldIcon .. tostring(endLnum - lnum)
 		local sufWidth = vim.fn.strdisplaywidth(suffix)
 		local targetWidth = width - sufWidth
 		local curWidth = 0
