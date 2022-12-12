@@ -1037,5 +1037,5 @@ rules:
           - shell_command: |
               osascript -e 'display notification "" with title "Restarting Alfred…"'
               killall -KILL "Alfred"
-              delay 0.4
+              sleep 0.5
               open -a Alfred\ 5

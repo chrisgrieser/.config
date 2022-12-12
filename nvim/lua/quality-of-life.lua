@@ -137,6 +137,9 @@ end
 
 ---Close tabs, window, buffer in that order if there is more than one of the type
 function M.betterClose()
+	local hasNotify = pcall(require, "notify")
+	if hasNotify then require("notify").dismiss() end -- to not include notices in window count
+
 	-- HACK: since scrollview counts as a window, but only appears if buffer is
 	-- longer than window https://github.com/dstein64/nvim-scrollview/issues/83
 	local wincount = 0
@@ -166,7 +169,7 @@ function M.betterClose()
 
 		-- ensure new alt file points towards open, non-active buffer
 		local curFile = fn.expand("%:p")
-		local i = 1
+		local i = 0
 		local newAltBuf
 		repeat
 			i = i + 1
@@ -191,7 +194,7 @@ autocmd("BufReadPost", {
 ---select between undoing the last 1h, 4h, or 24h
 ---@param opts table
 function M.undoDuration(opts)
-	local now = os.time()
+	local now = os.time() -- saved in epoch secs
 	local secsPassed = now - b.timeOpened
 	local minsPassedStr = tostring(secsPassed / 60)
 	local resetLabel = "last save (" .. minsPassedStr .. "m ago)"

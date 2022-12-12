@@ -27,7 +27,7 @@ for type, icon in pairs(signIcons) do
 end
 
 --------------------------------------------------------------------------------
--- DIAGNOTICS (also applies to null-ls)
+-- DIAGNOSTICS (also applies to null-ls)
 keymap("n", "ge", function() vim.diagnostic.goto_next {wrap = true, float = false} end, {silent = true})
 keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = false} end, {silent = true})
 keymap("n", "<leader>d", function() vim.diagnostic.open_float {focusable = false} end)
@@ -153,21 +153,26 @@ autocmd("LspAttach", {
 
 		if client.name == "sumneko_lua" then -- HACK since formatting with lua lsp seems to remove folds?!
 			keymap({"n", "x", "i"}, "<D-s>", function()
-				cmd [[mkview!]]
+				cmd.mkview()
 				vim.lsp.buf.format {async = false} -- not async to avoid race condition
 				cmd [[noautocmd write! | edit %]] -- reload, no autocmd to not trigger rememberFolds augroup, with mkview (of the now non-existing folds) on bufleave
-				cmd [[loadview]]
+				cmd.loadview()
 			end, bufopts)
 		else
 			keymap({"n", "x", "i"}, "<D-s>", function()
 				if bo.filetype == "javascript" or bo.filetype == "typescript" then
 					vim.lsp.buf.format {async = false}
-					cmd [[update!]]
+					cmd.update {bang = true}
 					cmd [[EslintFixAll]] -- eslint-lsp
+				elseif bo.filetype == "applescript" then
+					local prevCursor = api.nvim_win_get_cursor(0)
+					cmd[[%normal!gg=G]] -- poor man's formatting…
+					vim.lsp.buf.format {async = false} -- null-ls-codespell
+					api.nvim_win_set_cursor(0, prevCursor)
 				else
 					vim.lsp.buf.format {async = true}
 				end
-				cmd [[write!]]
+				cmd.write {bang = true}
 			end, bufopts)
 		end
 
@@ -347,7 +352,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- configure all lsp servers
 for _, lsp in pairs(lsp_servers) do
-	local config = { capabilities = capabilities }
+	local config = {capabilities = capabilities}
 	if lspSettings[lsp] then
 		config.settings = lspSettings[lsp]
 	end

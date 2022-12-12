@@ -15,7 +15,7 @@ end
 transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 	if not (appName == "neovide" or appName == "Neovide" or appName == "Obsidian" or appName == "alacritty" or
 		appName == "Alacritty") then return end
-		if eventType == aw.activated or eventType == aw.launched then
+	if eventType == aw.activated or eventType == aw.launched then
 		-- some apps like neovide do not set a "launched" signal, so the delayed
 		-- hiding is used for it activation as well
 		runWithDelays({0, 0.3}, function()
@@ -211,7 +211,7 @@ end)
 -- FINDER
 wf_finder = wf.new("Finder")
 	:setOverrideFilter {
-		rejectTitles = {"^Move$", "^Delete$", "^Copy$", "^Finder Settings$", " Info$"},
+		rejectTitles = {"^Move$", "^Bin$", "^Copy$", "^Finder Settings$", " Info$"},
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true
 	}
@@ -240,7 +240,9 @@ wf_finder = wf.new("Finder")
 -- quit Finder if it was started as a helper (e.g., JXA), but has no window
 finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 	if appName == "Finder" and eventType == aw.launched then
-		runWithDelays({1, 3, 5, 10}, function()
+		-- INFO delay shouldn't be too low, otherwise other scripts cannot
+		-- properly utilize Finder
+		runWithDelays({3, 5, 10}, function()
 			if finderAppObj and not (finderAppObj:mainWindow()) then
 				finderAppObj:kill()
 			end

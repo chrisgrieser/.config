@@ -157,7 +157,7 @@ function systemStart()
 	if isReloading then
 		hs.execute("rm ./is-reloading")
 		-- use neovim automation to display the notification in neovim
-		hs.execute [[echo 'vim.notify(" ✅ Hammerspoon reloaded.  ")' > /tmp/nvim-automation]]
+		hs.execute [[echo 'vim.notify("✅ Hammerspoon reloaded. ")' > /tmp/nvim-automation]]
 	else
 		if app("Finder") then app("Finder"):kill() end
 		notify("Hammerspoon started.")
