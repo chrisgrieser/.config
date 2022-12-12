@@ -26,6 +26,32 @@ require("scrollview").setup {
 --------------------------------------------------------------------------------
 -- NOTIFICATIONS
 if isGui() then
+local function split_length(text, length)
+  local lines = {}
+  local next_line
+  while true do
+    if #text == 0 then
+      return lines
+    end
+    next_line, text = text:sub(1, length), text:sub(length)
+    lines[#lines + 1] = next_line
+  end
+end
+
+vim.notify = function(msg, level, opts)
+  if type(msg) == "string" then
+    msg = vim.split(msg, "\n")
+  end
+  local truncated = {}
+  for i, line in ipairs(msg) do
+    local new_lines = split_length(line, max_width)
+    for _, l in ipairs(t) do
+      truncated[#truncated + 1] = l
+    end
+  end
+  return require("notify")(truncated, level, opts)
+end
+
 	opt.termguicolors = true
 	vim.notify = require("notify") -- use notify.nvim for all vim notifications
 	require("notify").setup {
@@ -100,7 +126,7 @@ require("pretty-fold").setup {
 require("windows").setup {
 	autowidth = {
 		enable = true,
-		winwidth = 15,
+		winwidth = 0.6, -- active window gets 60% of total width
 	},
 	ignore = {filetype = {"Mundo", "MundoDiff", "netrw"}}
 }
@@ -114,7 +140,6 @@ local function lsp_progress()
 	if #messages == 0 then return "" end
 	local client = messages[1].name and messages[1].name .. ": " or ""
 	if client:find("null%-ls") then return "" end
-
 	local progress = messages[1].percentage or 0
 	local task = messages[1].title or ""
 	task = task:gsub("^(%w+).*", "%1") -- only first word

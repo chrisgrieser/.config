@@ -137,22 +137,17 @@ end
 
 ---Close tabs, window, buffer in that order if there is more than one of the type
 function M.betterClose()
-	local hasNotify = pcall(require, "notify")
-	if hasNotify then require("notify").dismiss() end -- to not include notices in window count
-
 	-- HACK: since scrollview counts as a window, but only appears if buffer is
 	-- longer than window https://github.com/dstein64/nvim-scrollview/issues/83
-	local threshold
-	local hasScrollview = pcall(require, "scrollview")
-	if hasScrollview then
-		local bufHeight = fn.line("$")
-		local winHeight = api.nvim_win_get_height(0)
-		threshold = bufHeight <= winHeight and 1 or 2
-	else
-		threshold = 1
+	local wincount = 0
+	for i = 1, fn.winnr("$"), 1 do
+		local config = api.nvim_win_get_config(fn.win_getid(i))
+		if not (config.external) and config.focusable then
+			wincount = wincount + 1
+		end
 	end
-	local moreThanOneWin = fn.winnr("$") > threshold
 
+	local moreThanOneWin = wincount > 1
 	local moreThanOneTab = fn.tabpagenr("$") > 1
 	local buffers = fn.getbufinfo {buflisted = 1}
 

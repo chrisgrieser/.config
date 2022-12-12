@@ -65,7 +65,7 @@ null_ls.setup {
 		-- YAML
 		builtins.formatting.yamlfmt,
 		builtins.diagnostics.yamllint.with {
-			extra_args = {"--config-file", dotfilesFolder .. "~/.config/yamllint/config/.yamllint.yaml"},
+			extra_args = {"--config-file", dotfilesFolder .. "/yamllint/config/.yamllint.yaml"},
 		},
 
 		-- Markdown & Prose
