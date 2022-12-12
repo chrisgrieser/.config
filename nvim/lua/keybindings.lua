@@ -564,6 +564,7 @@ keymap("n", "<leader>g", function()
 
 		vim.notify(" ﴻ add-commit-push… ")
 		local job = fn.jobstart("git add -A && git commit -m '"..commitMsg.."' ; git pull ; git push", shellOpts)
+		print("job:", job)
 		local issueNr = commitMsg:match("#(%d+)")
 		if issueNr then
 			local repo = fn.system[[git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//']]
