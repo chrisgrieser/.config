@@ -97,7 +97,7 @@ autocmd("TextYankPost", {
 
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, useful e.g. for kebab-case-variables
-opt.nrformats = "alpha" -- <C-a> and <C-x> also work on letters
+-- opt.nrformats = "alpha" -- <C-a> and <C-x> also work on letters
 
 --------------------------------------------------------------------------------
 

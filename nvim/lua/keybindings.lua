@@ -632,7 +632,8 @@ keymap("n", "<leader>r", function()
 
 	elseif ft == "yaml" and parentFolder:find("/karabiner") then
 		local result = fn.system [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
-		vim.notify(result:gsub("\n$", ""))
+		result = result:gsub("\n$", "")
+		vim.notify(result)
 
 	elseif ft == "typescript" then
 		cmd [[!npm run build]] -- not via fn.system to get the output in the cmdline
