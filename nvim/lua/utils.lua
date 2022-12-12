@@ -64,12 +64,14 @@ api.nvim_create_user_command("I", function(ctx)
 end, {nargs = "+"})
 
 -- `:SwapDelete` delete the swapfile
-api.nvim_create_user_command("SwapDelete", function(ctx)
+api.nvim_create_user_command("SwapDelete", function(_)
 	local success, err = os.remove(fn.swapname(0))
-	if not(success) then
-		vim.notify(err)
+	if success then
+		vim.notify(" Swap File deleted. ")
+	else
+		vim.notify(tostring(err), logError)
 	end
-end)
+end, {})
 
 -- `:II` inspects the passed object and puts it into a new buffer, https://www.reddit.com/r/neovim/comments/zhweuc/comment/izo9br1/?utm_source=share&utm_medium=web2x&context=3
 api.nvim_create_user_command("II", function(ctx)
