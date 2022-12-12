@@ -138,10 +138,9 @@ opt.cmdheight = 0
 --------------------------------------------------------------------------------
 -- FOLDING
 
--- use treesitter folding
-opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldmethod = "expr"
--- opt.foldmethod = "indent"
+opt.foldexpr = "nvim_treesitter#foldexpr()" -- if treesitter folding is used via expr below
+-- opt.foldmethod = "expr"
+opt.foldmethod = "indent"
 
 -- fold settings
 opt.foldenable = false -- do not fold at start

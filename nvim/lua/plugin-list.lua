@@ -29,8 +29,8 @@ function M.PluginList()
 		}
 	}
 
-	use {"mizlan/iswap.nvim",-- swapping of notes
-		config = function () require("iswap").setup{autoswap = true} end,
+	use {"mizlan/iswap.nvim", -- swapping of notes
+		config = function() require("iswap").setup {autoswap = true} end,
 		cmd = "ISwapWith"
 	}
 	use {"m-demare/hlargs.nvim", -- highlight function args
@@ -176,6 +176,9 @@ function M.PluginList()
 		keys = {{"n", ":"}},
 	}
 	use(myrepos .. "nvim-recorder") -- better macros
+
+	-- Misc
+	use "andweeb/presence.nvim"
 
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
