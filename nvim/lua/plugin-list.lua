@@ -101,7 +101,6 @@ function M.PluginList()
 		myrepos .. "cmp-nerdfont",
 		"tamago324/cmp-zsh",
 		"ray-x/cmp-treesitter",
-		"petertriho/cmp-git", -- git issues, mentions & commits
 		"hrsh7th/cmp-nvim-lsp", -- lsp
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
