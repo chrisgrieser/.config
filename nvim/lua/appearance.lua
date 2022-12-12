@@ -6,7 +6,8 @@ cmd.highlight {"def link myAnnotations Todo", bang = true} -- use same styling a
 fn.matchadd("myAnnotations", [[\<\(BUG\|WTF\|HACK\|TODO\|INFO\|NOTE\|WARNING\)\>]])
 
 --------------------------------------------------------------------------------
--- Indentation
+
+-- INDENTATION
 require("indent_blankline").setup {
 	show_current_context = true,
 	use_treesitter = true,
@@ -116,24 +117,11 @@ require("gitsigns").setup {
 }
 
 --------------------------------------------------------------------------------
-
--- PRETTY FOLD
-require("pretty-fold").setup {
-	sections = {
-		left = {"content"},
-		right = {"  ﬔ  ", "number_of_folded_lines"},
-	},
-	fill_char = "",
-	process_comment_signs = false,
-	keep_indentation = true,
-}
-
---------------------------------------------------------------------------------
 -- AUTO-RESIZE WINDOWS/SPLITS
 require("windows").setup {
 	autowidth = {
 		enable = true,
-		winwidth = 0.6, -- active window gets 60% of total width
+		winwidth = 0.7, -- active window gets 70% of total width
 	},
 	ignore = {filetype = {"Mundo", "MundoDiff", "netrw"}}
 }

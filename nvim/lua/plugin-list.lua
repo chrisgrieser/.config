@@ -116,7 +116,6 @@ function M.PluginList()
 	use "rcarriga/nvim-notify" -- notifications
 	use "uga-rosa/ccc.nvim" -- color previews & color utilities
 	use "dstein64/nvim-scrollview" -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
-	use "anuvyklack/pretty-fold.nvim" -- fold look customization
 	use {"anuvyklack/windows.nvim", requires = "anuvyklack/middleclass"} -- auto-resize splits
 
 	-- File Switching & File Operation
@@ -179,6 +178,7 @@ function M.PluginList()
 
 	-- Misc
 	use "andweeb/presence.nvim"
+	use {"kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async"} -- better folding
 
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
