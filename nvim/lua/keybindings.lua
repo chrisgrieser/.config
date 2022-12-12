@@ -238,11 +238,14 @@ require("mini.ai").setup(miniaiConfig)
 local recorder = require("recorder")
 recorder.setup {
 	slots = {"a", "b"},
-	toggleKey = "0",
+	clear = true,
+	mapping = {
+		startStopRecording = "0",
+		playMacro = "9",
+		editMacro = "c0",
+		switchSlot = "<C-0>",
+	}
 }
-keymap("n", "9", recorder.playRecording)
-keymap("n", "<C-0>", recorder.switchMacroSlot)
-keymap("n", "c0", recorder.editMacro)
 
 --------------------------------------------------------------------------------
 

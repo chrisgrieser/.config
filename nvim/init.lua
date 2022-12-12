@@ -1,4 +1,4 @@
-borderStyle = "rounded" -- https://neovim.io/doc/user/api.html#nvim_open_win()
+borderStyle = "single" -- https://neovim.io/doc/user/api.html#nvim_open_win()
 require("packer-setup") -- must be 1st
 require("impatient") -- must be 2nd
 require("utils") -- must be 3rd
@@ -14,6 +14,7 @@ else
 	require("terminal-only")
 end
 require("keybindings")
+require("user-commands")
 require("automating-nvim")
 require("appearance")
 
