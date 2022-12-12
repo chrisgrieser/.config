@@ -40,11 +40,11 @@ function M.copyLastCommand()
 
 	local lastCommand = fn.getreg(":")
 	if not (lastCommand) then
-		vim.notify(" No Command has been run yet. ", logWarn)
+		vim.notify("No Command has been run yet.", logWarn)
 		return
 	end
 	fn.setreg(reg, lastCommand)
-	vim.notify(" COPIED\n " .. lastCommand)
+	vim.notify("COPIED\n" .. lastCommand)
 end
 
 --------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ function M.bettergx()
 	cmd.normal {"0", bang = true} -- to prioritize URLs in the same line
 	local urlLineNr = fn.search(urlVimRegex, "wcz")
 	if urlLineNr == 0 then
-		vim.notify(" No URL found in this file. ", logWarn)
+		vim.notify("No URL found in this file.", logWarn)
 	else
 		local urlLine = fn.getline(urlLineNr) ---@type string
 		local url = urlLine:match(urlLuaRegex)
@@ -129,7 +129,7 @@ function M.bettergx()
 		if opener then
 			os.execute(opener .. ' "' .. url .. '"')
 		else
-			vim.notify(" Sorry, you have some arcane operating system that is not supported yet. ", logWarn)
+			vim.notify("Sorry, you have some arcane operating system that is not supported yet.", logWarn)
 		end
 	end
 	setCursor(0, prevCur)
@@ -175,7 +175,7 @@ function M.betterClose()
 
 		fn.setreg("#", newAltBuf)
 	else
-		vim.notify(" Only one buffer open. ", logWarn)
+		vim.notify("Only one buffer open.", logWarn)
 	end
 end
 
@@ -203,7 +203,7 @@ function M.undoDuration(opts)
 		else
 			cmd("earlier " .. choice)
 		end
-		vim.notify(" Restored to " .. choice .. " earlier. ")
+		vim.notify("Restored to " .. choice .. " earlier.")
 	end)
 end
 
@@ -240,7 +240,7 @@ function M.pasteDifferently(opts) -- paste as characterwise
 	elseif isCharwise then
 		targetRegType = "V"
 	else
-		vim.notify(" This paste command does not work with blockwise registers.", logWarn)
+		vim.notify("This paste command does not work with blockwise registers.", logWarn)
 		return
 	end
 
@@ -276,7 +276,7 @@ function M.quicklog(opts)
 	elseif ft == "applescript" then
 		logStatement = 'log "' .. lnStr .. varname .. ': " & ' .. varname
 	else
-		vim.notify(" Quicklog does not support " .. ft .. " yet.", logWarn)
+		vim.notify("Quicklog does not support " .. ft .. " yet.", logWarn)
 	end
 
 	append(".", logStatement)
@@ -293,16 +293,16 @@ function M.removeLog()
 	elseif ft == "javascript" or ft == "typescript" then
 		logCommand = "console."
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" then
-		vim.notify(" Shell 'echo' cannot be removed since indistinguishable from other echos. ", logWarn)
+		vim.notify("Shell 'echo' cannot be removed since indistinguishable from other echos.", logWarn)
 	elseif ft == "applescript" then
 		logCommand = "log"
 	else
-		vim.notify(" Quicklog does not support " .. ft .. " yet.")
+		vim.notify("Quicklog does not support " .. ft .. " yet.")
 	end
 	local logsStatementsNum = fn.search([[^\s*]] .. logCommand, "nw")
 	cmd([[g/^\s*]] .. logCommand .. [[/d]])
 
-	vim.notify(" Cleared " .. tostring(logsStatementsNum) .. " log statements. ")
+	vim.notify("Cleared " .. tostring(logsStatementsNum) .. " log statements.")
 	cmd("nohl")
 end
 

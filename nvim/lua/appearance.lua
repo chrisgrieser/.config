@@ -26,40 +26,43 @@ require("scrollview").setup {
 --------------------------------------------------------------------------------
 -- NOTIFICATIONS
 if isGui() then
-local function split_length(text, length)
-  local lines = {}
-  local next_line
-  while true do
-    if #text == 0 then
-      return lines
-    end
-    next_line, text = text:sub(1, length), text:sub(length)
-    lines[#lines + 1] = next_line
-  end
-end
 
-vim.notify = function(msg, level, opts)
-  if type(msg) == "string" then
-    msg = vim.split(msg, "\n")
-  end
-  local truncated = {}
-  for i, line in ipairs(msg) do
-    local new_lines = split_length(line, max_width)
-    for _, l in ipairs(t) do
-      truncated[#truncated + 1] = l
-    end
-  end
-  return require("notify")(truncated, level, opts)
-end
+	-- HACK requires custom wrapping setup https://github.com/rcarriga/nvim-notify/issues/129
+	local function split_length(text, length)
+		local lines = {}
+		local next_line
+		while true do
+			if #text == 0 then
+				return lines
+			end
+			next_line, text = text:sub(1, length), text:sub(length)
+			lines[#lines + 1] = next_line
+		end
+	end
+
+	---@diagnostic disable-next-line: duplicate-set-field
+	vim.notify = function(msg, level, opts)
+		local max_width = 50
+		if type(msg) == "string" then
+			msg = vim.split(msg, "\n", {trimepty = true})
+		end
+		local truncated = {}
+		for _, line in pairs(msg) do
+			local new_lines = split_length(line, max_width)
+			for _, nl in ipairs(new_lines) do
+				table.insert(truncated, " "..nl.." ")
+			end
+		end
+		return require("notify")(truncated, level, opts)
+	end
 
 	opt.termguicolors = true
-	vim.notify = require("notify") -- use notify.nvim for all vim notifications
+	-- vim.notify = require("notify") -- use notify.nvim for all vim notifications
 	require("notify").setup {
 		render = "minimal",
 		stages = "slide",
 		level = 0, -- minimum severity level to display (0 = display all)
 		max_height = 15,
-		-- TODO requires custom wrapping function though https://github.com/rcarriga/nvim-notify/issues/129
 		-- max_width = 50,
 		minimum_width = 10,
 		timeout = 4000,

@@ -1003,25 +1003,25 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - "[Nn]eovide"
-      # # cmd+q -> <Esc>ZZ (does not skip pre-quit triggers)
-      # - type: basic
-      #   from:
-      #     key_code: q
-      #     modifiers:
-      #       mandatory:
-      #         - command
-      #   to:
-      #     - key_code: escape
-      #     - key_code: "y" # z & y switched
-      #       modifiers:
-      #         - shift
-      #     - key_code: "y"
-      #       modifiers:
-      #         - shift
-      #   conditions:
-      #     - type: frontmost_application_if
-      #       file_paths:
-      #         - "[Nn]eovide"
+      # cmd+q -> <Esc>ZZ (does not skip pre-quit triggers)
+      - type: basic
+        from:
+          key_code: q
+          modifiers:
+            mandatory:
+              - command
+        to:
+          - key_code: escape
+          - key_code: "y" # z & y switched
+            modifiers:
+              - shift
+          - key_code: "y"
+            modifiers:
+              - shift
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - "[Nn]eovide"
   - description: "\U0001F170️  Alfred Restart"
     manipulators:
       - type: basic

@@ -77,7 +77,7 @@ keymap({"n", "x", "o"}, "*", "#") -- backwards on the same key (German Layout)
 keymap("", "ä", "`M") -- Goto Mark M
 keymap("", "Ä", function() -- Set Mark M
 	cmd [[normal!mM]]
-	vim.notify(" Mark M set. ")
+	vim.notify("Mark M set.")
 end)
 
 -- FOLDING
@@ -257,7 +257,7 @@ keymap("n", "d<Space>", function() -- delete blank lines except one
 	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
 		cmd [[normal! "_dipO]]
 	else
-		vim.notify(" Line not empty.", logWarn)
+		vim.notify("Line not empty.", logWarn)
 	end
 end)
 
@@ -448,7 +448,7 @@ end
 local function betterAltBuf() -- switch to alternate-file
 	local noAltFile = fn.expand("#") == ""
 	if noAltFile then
-		vim.notify(" No alternate file. ", logWarn)
+		vim.notify("No alternate file.", logWarn)
 	else
 		cmd.nohlsearch()
 		cmd.buffer("#")
@@ -475,7 +475,7 @@ keymap("n", "gb", function()
 		cmd.nohlsearch()
 		telescope.buffers()
 	else
-		vim.notify(" Only one buffer open. ")
+		vim.notify("Only one buffer open.")
 	end
 end)
 
@@ -559,14 +559,14 @@ keymap("n", "<leader>g", function()
 		if not (commitMsg) then
 			return
 		elseif #commitMsg > 50 then
-			vim.notify(" Commit Message too long. \n (Run again for shortened message.) ", logWarn)
+			vim.notify("Commit Message too long.\n(Run again for shortened message.)", logWarn)
 			b.prevCommitMsg = commitMsg:sub(1, 50)
 			return
 		elseif commitMsg == "" then
 			commitMsg = "patch"
 		end
 
-		vim.notify(" ﴻ add-commit-push… ")
+		vim.notify("ﴻ add-commit-push…")
 		fn.jobstart("git add -A && git commit -m '"..commitMsg.."' ; git pull ; git push", shellOpts)
 
 		local issueNr = commitMsg:match("#(%d+)")
@@ -621,9 +621,9 @@ keymap("n", "<leader>r", function()
 			cmd.loadview()
 			if filename:find("plugin%-list") then
 				packer.compile()
-				vim.notify(" Packer recompiled and " .. fn.expand("%") .. " reloaded. ")
+				vim.notify("Packer recompiled and " .. fn.expand("%") .. " reloaded.")
 			else
-				vim.notify(" " .. fn.expand("%") .. " reloaded. ")
+				vim.notify(fn.expand("%") .. " reloaded.")
 			end
 		elseif parentFolder:find("hammerspoon") then
 			os.execute('open -g "hammerspoon://hs-reload"')
@@ -631,7 +631,7 @@ keymap("n", "<leader>r", function()
 
 	elseif ft == "yaml" and parentFolder:find("/karabiner") then
 		local result = fn.system [[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]]
-		vim.notify(" " .. result:gsub("\n$", "") .. " ")
+		vim.notify(result:gsub("\n$", ""))
 
 	elseif ft == "typescript" then
 		cmd [[!npm run build]] -- not via fn.system to get the output in the cmdline
@@ -641,7 +641,7 @@ keymap("n", "<leader>r", function()
 		cmd.normal {"<C-w><C-p>", bang = true} -- switch to previous window
 
 	else
-		vim.notify(" No build system set. ", logWarn)
+		vim.notify("No build system set.", logWarn)
 
 	end
 end)
