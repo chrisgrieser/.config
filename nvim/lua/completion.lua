@@ -32,7 +32,6 @@ local kind_icons = {
 
 local source_icons = {
 	buffer = "﬘",
-	git = "",
 	treesitter = "",
 	zsh = "",
 	nvim_lsp = "璉",
@@ -177,17 +176,6 @@ cmp.setup.filetype("sh", {
 	},
 })
 
--- gitcommit
-cmp.setup.filetype("gitcommit", {
-	sources = cmp.config.sources {
-		{name = "git"}, -- commits with ":", issues/PRs with "#"
-		{name = "path"},
-		{name = "luasnip"},
-		{name = "cmp_tabnine", keyword_length = 3},
-		{name = "emoji", keyword_length = 2},
-	},
-})
-
 -- bibtex
 cmp.setup.filetype("bib", {
 	sources = cmp.config.sources {
@@ -206,27 +194,6 @@ cmp.setup.filetype("text", {
 	},
 })
 
--- Dressing
-cmp.setup.filetype("DressingInput", {
-	mapping = cmp.mapping.preset.insert {
-		["<CR>"] = cmp.mapping.confirm {select = true},
-		["<Down>"] = cmp.select_next_item(),
-		["<Up>"] = cmp.select_prev_item(),
-		["<Tab>"] = cmp.mapping(function(_)
-			if cmp.visible() then
-				cmp.select_next_item()
-			else
-				cmp.complete()
-			end
-		end, {"i", "s"}),
-	},
-	sources = cmp.config.sources {
-		{name = "git"}, -- commits with ":", issues/PRs with "#"
-		{name = "path"},
-		{name = "emoji", keyword_length = 2},
-	},
-})
-
 --------------------------------------------------------------------------------
 -- Command Line Completion
 cmp.setup.cmdline({"/", "?"}, {
@@ -241,7 +208,6 @@ cmp.setup.cmdline({"/", "?"}, {
 cmp.setup.cmdline(":", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{name = "git"}, -- commits with ":", issues/PRs with "#"
 		{name = "path"},
 		{name = "cmdline"},
 	}, {-- second array only relevant when no source from the first matches
@@ -249,22 +215,6 @@ cmp.setup.cmdline(":", {
 	})
 })
 
---------------------------------------------------------------------------------
-
-require("cmp_git").setup {
-	filetypes = commonFiletypes,
-	git = {commits = {limit = 0}}, -- 0 = disable completing commits
-	github = {
-		issues = {
-			limit = 100,
-			state = "open", -- open, closed, all
-		},
-		pull_requests = {
-			limit = 10,
-			state = "open",
-		},
-	}
-}
 
 --------------------------------------------------------------------------------
 -- AUTOPAIRS

@@ -504,7 +504,7 @@ require("cybu").setup {
 }
 
 --------------------------------------------------------------------------------
--- FILES & GIT
+-- FILES
 
 -- File Switchers
 keymap("n", "go", telescope.find_files) -- [o]pen file in parent-directory
@@ -564,6 +564,13 @@ keymap("n", "<leader>g", function()
 
 		vim.notify(" ﴻ add-commit-push… ")
 		fn.jobstart("git add -A && git commit -m '"..commitMsg.."' ; git pull ; git push", shellOpts)
+
+		local issueNr = commitMsg:match("#(%d+)")
+		if issueNr then
+			local repo = fn.system[[git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//']]
+			local url = repo:gsub("\n", "") .. "/issues/" .. issueNr
+			os.execute("open '"..url.."'")
+		end
 	end)
 
 end)
