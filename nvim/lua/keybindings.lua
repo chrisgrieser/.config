@@ -202,6 +202,7 @@ keymap({"x", "o"}, "ad", function() require("textobj-diagnostic").nearest_diag()
 
 -- disable text-objects from mini.ai in favor of my own
 local miniaiConfig = {
+	n_lines = 10, -- number of lines within which to search textobj
 	custom_textobjects = {
 		b = false,
 		q = false,
@@ -217,7 +218,6 @@ local miniaiConfig = {
 		goto_left = "",
 		goto_right = "",
 	},
-	n_lines = 10, -- number of lines within which to search textobj
 }
 
 -- custom text object "e": from cursor to [e]end of line minus 1 char
