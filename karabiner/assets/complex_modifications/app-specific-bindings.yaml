@@ -40,7 +40,7 @@ rules:
               - ^com\.microsoft\.Word$
               - ^com\.microsoft\.Excel$
               - ^com\.microsoft\.Powerpoint$
-      # Commment in MS Word
+      # Comment in MS Word
       - type: basic
         from:
           key_code: k
@@ -201,7 +201,7 @@ rules:
             modifiers:
               - command
               - control
-          - shell_command: osascript -e 'display notification "Tool" with title "Image 🖼️"'
+          - shell_command: "osascript -e 'display notification \"Tool\" with title \"Image \U0001F5BC️\"'"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -222,7 +222,7 @@ rules:
             modifiers:
               - command
               - control
-          - shell_command: osascript -e 'display notification "Tool" with title "Underline 🖍️"'
+          - shell_command: "osascript -e 'display notification \"Tool\" with title \"Underline \U0001F58D️\"'"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -243,7 +243,7 @@ rules:
             modifiers:
               - command
               - control
-          - shell_command: osascript -e 'display notification "Tool" with title "Comment 🗣️"'
+          - shell_command: "osascript -e 'display notification \"Tool\" with title \"Comment \U0001F5E3️\"'"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -264,7 +264,7 @@ rules:
             modifiers:
               - command
               - control
-          - shell_command: osascript -e 'display notification "Tool" with title "Yellow Highlight 🟨"'
+          - shell_command: "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -1003,24 +1003,25 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - "[Nn]eovide"
-      # cmd+q -> <Esc>ZZ (does not skip pre-quit triggers)
-      - type: basic
-        from:
-          key_code: q
-          modifiers:
-            mandatory:
-              - command
-        to:
-          - key_code: "y" # z & y switched
-            modifiers:
-              - shift
-          - key_code: "y"
-            modifiers:
-              - shift
-        conditions:
-          - type: frontmost_application_if
-            file_paths:
-              - "[Nn]eovide"
+      # # cmd+q -> <Esc>ZZ (does not skip pre-quit triggers)
+      # - type: basic
+      #   from:
+      #     key_code: q
+      #     modifiers:
+      #       mandatory:
+      #         - command
+      #   to:
+      #     - key_code: escape
+      #     - key_code: "y" # z & y switched
+      #       modifiers:
+      #         - shift
+      #     - key_code: "y"
+      #       modifiers:
+      #         - shift
+      #   conditions:
+      #     - type: frontmost_application_if
+      #       file_paths:
+      #         - "[Nn]eovide"
   - description: "\U0001F170️  Alfred Restart"
     manipulators:
       - type: basic
