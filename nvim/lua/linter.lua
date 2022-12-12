@@ -18,7 +18,7 @@ local lintersAndFormatters = {
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
 
-local codeSpellIgnoreFile = os.getenv("HOME") .. "/.config/codespell/codespell-ignore.txt"
+local codeSpellIgnoreFile = dotfilesFolder .. "/codespell/codespell-ignore.txt"
 
 --------------------------------------------------------------------------------
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
@@ -77,7 +77,7 @@ null_ls.setup {
 		builtins.hover.dictionary, -- vim's builtin dictionary
 		builtins.formatting.markdownlint,
 		builtins.completion.spell.with {-- vim's built-in spell-suggestions
-			filetypes = {"markdown", "text", "DressingInput"},
+			filetypes = {"markdown", "text"},
 		},
 
 	},

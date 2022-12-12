@@ -5,8 +5,6 @@ require("utils") -- must be 3rd
 
 --------------------------------------------------------------------------------
 
--- ffffffffffffffffff ffffffffffffffff fffffffffff ffffffffffffffff fffffffffffff ffffffffffffffffff fffffffffffff
-
 require("options-and-autocmds")
 
 if isGui() then
@@ -22,7 +20,7 @@ require("appearance")
 
 require("lsp-and-diagnostics") -- should come before completion, linter, and debugger
 require("completion")
--- require("linter")
+require("linter")
 require("debugger")
 
 require("surround-config")
