@@ -59,13 +59,13 @@ null_ls.setup {
 
 		-- Lua
 		builtins.diagnostics.selene.with {
-			extra_args = {"--config", fn.expand("~/.config/linter-configs/selene.toml")}
+			extra_args = {"--config", dotfilesFolder .. "/linter-configs/selene.toml"}
 		},
 
 		-- YAML
 		builtins.formatting.yamlfmt,
 		builtins.diagnostics.yamllint.with {
-			extra_args = {"--config-file", fn.expand("~/.config/yamllint/config/.yamllint.yaml")},
+			extra_args = {"--config-file", dotfilesFolder .. "~/.config/yamllint/config/.yamllint.yaml"},
 		},
 
 		-- Markdown & Prose
@@ -77,7 +77,7 @@ null_ls.setup {
 		builtins.hover.dictionary, -- vim's builtin dictionary
 		builtins.formatting.markdownlint,
 		builtins.completion.spell.with {-- vim's built-in spell-suggestions
-			filetypes = {"markdown"},
+			filetypes = {"markdown", "text", "DressingInput"},
 		},
 
 	},
