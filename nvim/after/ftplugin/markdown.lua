@@ -2,8 +2,12 @@ require("utils")
 local opts = {buffer = true, silent = true}
 --------------------------------------------------------------------------------
 
--- hide URLs and other formatting, TODO: figure out how to hide only URLs
+-- hide URLs and other formatting, TODO figure out how to hide only URLs
 -- setlocal("conceallevel", 2)
+
+-- decrease line length without zen mode plugins (which unfortunately remove
+-- statuslines and stuff)
+setlocal("signcolumn", "yes:9")
 
 -- spellcheck
 setlocal("spell", true)

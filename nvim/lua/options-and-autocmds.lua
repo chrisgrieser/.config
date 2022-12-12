@@ -71,7 +71,7 @@ opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words
 opt.colorcolumn = {"+1", "+20"} -- relative to textwidth
-opt.signcolumn = "yes:1" -- = gutter
+opt.signcolumn = "yes:2" -- = gutter
 opt.backspace = {"start", "eol"} -- restrict insert mode backspace behavior
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
