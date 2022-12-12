@@ -46,12 +46,12 @@ shellOpts = {
 	detach = true,
 	on_stdout = function(_, data, _)
 		if not (data) or (data[1] == "" and #data == 1) then return end
-		local stdOut = " " .. table.concat(data, " \n "):gsub("%s*$", "") .. " "
+		local stdOut = table.concat(data, " \n "):gsub("%s*$", "")
 		vim.notify(stdOut, vim.log.levels.INFO)
 	end,
 	on_stderr = function(_, data, _)
 		if not (data) or (data[1] == "" and #data == 1) then return end
-		local stdErr = " " .. table.concat(data, " \n "):gsub("%s*$", "") .. " "
+		local stdErr = table.concat(data, " \n "):gsub("%s*$", "")
 		vim.notify(stdErr, vim.log.levels.WARN)
 	end,
 }

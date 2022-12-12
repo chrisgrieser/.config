@@ -235,7 +235,7 @@ for _, ft in pairs(ftWithSkeletons) do
 		pattern = "*." .. ft,
 		callback = function()
 			local curFile = fn.expand("%")
-			local fileIsEmpty = fn.getfsize(curFile) < 2 -- 2 to account for linebreak
+			local fileIsEmpty = fn.getfsize(curFile) < 4 -- 2 to account for linebreak
 			if fileIsEmpty then cmd(readCmd) end
 		end
 	})
