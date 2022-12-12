@@ -153,7 +153,7 @@ autocmd("LspAttach", {
 
 		if client.name == "sumneko_lua" then -- HACK since formatting with lua lsp seems to remove folds?!
 			keymap({"n", "x", "i"}, "<D-s>", function()
-				cmd.mkview()
+				cmd.mkview {bang = true} -- bang required here
 				vim.lsp.buf.format {async = false} -- not async to avoid race condition
 				cmd [[noautocmd write! | edit %]] -- reload, no autocmd to not trigger rememberFolds augroup, with mkview (of the now non-existing folds) on bufleave
 				cmd.loadview()
@@ -166,7 +166,7 @@ autocmd("LspAttach", {
 					cmd [[EslintFixAll]] -- eslint-lsp
 				elseif bo.filetype == "applescript" then
 					local prevCursor = api.nvim_win_get_cursor(0)
-					cmd[[%normal!gg=G]] -- poor man's formatting…
+					cmd [[%normal!gg=G]] -- poor man's formatting…
 					vim.lsp.buf.format {async = false} -- null-ls-codespell
 					api.nvim_win_set_cursor(0, prevCursor)
 				else

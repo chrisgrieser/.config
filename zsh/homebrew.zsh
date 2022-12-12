@@ -48,13 +48,12 @@ function update (){
 	isodate=$(date '+%Y-%m-%d_%H-%M-%S')
 	nvim --headless -c 'autocmd User PackerComplete quitall' -c "PackerSnapshot snapshot_$isodate" # https://github.com/wbthomason/packer.nvim#bootstrapping
 	nvim --headless -c 'autocmd User PackerComplete quitall' -c "PackerSync"
-	nvim --headless -c 'autocmd User MasonUpdateAllComplete quitall' -c 'MasonUpdateAll' # https://github.com/RubixDev/mason-update-all#updating-from-cli
-	# TreeSitter parsers already auto-updated on start
+	# TreeSitter and Mason already auto-update on start
 
 	print-section "OBSIDIAN"
 	echo "Opening URIs..."
-	open "obsidian://advanced-uri?vault=Main%20Vault&commandid=obsidian42-brat%253ABRAT-checkForUpdatesAndUpdate"
-	open "obsidian://advanced-uri?vault=Main%20Vault&updateplugins=true"
+	open "obsidian://advanced-uri?vault=main-vault&updateplugins=true"
+	# brat plugins already auto-update on start
 
 	print-section "HOMEBREW"
 	print-section "update"
