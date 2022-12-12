@@ -1,5 +1,5 @@
 require("utils")
---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------[[ - ]]
 
 -- DIRECTORIES
 opt.directory:prepend(vimDataDir .. "swap//")
@@ -110,7 +110,7 @@ autocmd({"BufWinLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
 	group = "autosave",
 	pattern = "?*",
 	callback = function()
-		-- safety net to not save file in wrong folder when autochdir is not being reliable
+		-- safety net to not save file in wrong folder when autochdir is not reliable
 		local curFile = fn.expand("%:p")
 		cmd.update(curFile)
 	end
@@ -235,7 +235,7 @@ for _, ft in pairs(ftWithSkeletons) do
 		pattern = "*." .. ft,
 		callback = function()
 			local curFile = fn.expand("%")
-			local fileIsEmpty = fn.getfsize(curFile) < 4 -- 2 to account for linebreak
+			local fileIsEmpty = fn.getfsize(curFile) < 4 -- to account for linebreak weirdness
 			if fileIsEmpty then cmd(readCmd) end
 		end
 	})

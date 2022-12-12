@@ -1,6 +1,6 @@
 {
   "ai.terminal-hash-sub": false,
-  "app.disableAutolaunch": true,
+  "app.disableAutolaunch": false,
   "app.hideMenubarIcon": true,
   "app.launchOnStartup": true,
   "app.preferredTerminal": "Alacritty",
