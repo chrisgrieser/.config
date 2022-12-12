@@ -154,7 +154,7 @@ ufo.setup {
 	fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 		-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
 		local newVirtText = {}
-		local suffix = foldIcon .. tostring(endLnum - lnum)
+		local suffix = foldIcon .." ".. tostring(endLnum - lnum)
 		local sufWidth = vim.fn.strdisplaywidth(suffix)
 		local targetWidth = width - sufWidth
 		local curWidth = 0

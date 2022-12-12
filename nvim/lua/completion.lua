@@ -240,3 +240,11 @@ autocmd("BufRead", {
 	group = "prefetchTabNine",
 	callback = function() require("cmp_tabnine"):prefetch(fn.expand("%:p")) end
 })
+
+--------------------------------------------------------------------------------
+
+-- ai.vim
+g.ai_no_mappings = true -- no default mappings
+require("private-settings") -- API key symlinked and kept out of the dotfile repo
+
+

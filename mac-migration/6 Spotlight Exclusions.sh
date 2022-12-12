@@ -10,22 +10,21 @@ sudo mdutil -E -i on /
 sudo rm -R "$SPOTLIGHT_CONFIG"
 
 sleep 1
-function addExclusion(){
+function addExclusion() {
 	sudo plutil -insert Exclusions.0 -string "$1" "$SPOTLIGHT_CONFIG"
 }
 
-addExclusion '/Applications/Utilities/' 
-addExclusion '/Applications/Cisco' 
-addExclusion "/Volumes/Externe A" 
-addExclusion "/Volumes/Externe B" 
-addExclusion "/Volumes/Externe C" 
-addExclusion '$HOME/dotfiles/zsh/plugins/' 
-addExclusion '$HOME/dotfiles/Alfred.alfredpreferences/workflows/' 
-addExclusion '$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/' 
-addExclusion '$HOME/Library/Mobile Documents/com~apple~CloudDocs/.Trash/' 
-addExclusion '$HOME/Library/Mobile Documents/com~apple~CloudDocs/Academia/PhD Data/' 
-addExclusion "$HOME/dotfiles/Utility Scripts/Obsidian-Opener.app" 
-addExclusion "$HOME/dotfiles/Utility Scripts/Neovim.app" 
+addExclusion '/Applications/Utilities/'
+addExclusion '/Applications/Cisco'
+addExclusion "/Volumes/Externe A"
+addExclusion "/Volumes/Externe B"
+addExclusion "/Volumes/Externe C"
+addExclusion "$DOTFILE_FOLDER/Alfred.alfredpreferences/workflows/"
+addExclusion "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/"
+addExclusion "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/vim-data/undo"
+addExclusion "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/vim-data/view"
+addExclusion "$HOME/Library/Mobile Documents/com~apple~CloudDocs/.Trash/"
+addExclusion "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Academia/PhD Data/"
 
 #-------------------------------------------------------------------------------
 
@@ -35,4 +34,3 @@ sudo plutil -extract Exclusions xml1 -o - "$SPOTLIGHT_CONFIG"
 
 # remove an exclusion
 # sudo plutil -remove Exclusions.{index} "$SPOTLIGHT_CONFIG"
-

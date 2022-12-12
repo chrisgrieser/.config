@@ -109,7 +109,9 @@ function M.PluginList()
 
 	-- AI Stuff
 	use {"tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp"}
-	use "aduros/ai.vim"
+	use {"aduros/ai.vim", 
+
+	}
 
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
