@@ -1,5 +1,5 @@
 require("utils")
----------------------------------------------------------------------------------[[ - ]]
+--------------------------------------------------------------------------------
 
 -- DIRECTORIES
 opt.directory:prepend(vimDataDir .. "swap//")
@@ -144,13 +144,6 @@ ufo.setup {
 		return {"treesitter", "indent"} -- Use Treesitter as fold provider
 	end,
 	open_fold_hl_timeout = 0,
-	preview = {
-		win_config = {
-			border = borderStyle,
-			winblend = 4,
-			max_height = 25,
-		},
-	},
 	fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 		-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
 		local newVirtText = {}
@@ -213,7 +206,7 @@ autocmd("BufWinEnter", {
 --------------------------------------------------------------------------------
 
 -- Skeletons (Templates)
--- apply templates for any filetype named `.config/nvim/templates/skeletion.{ft}`
+-- apply templates for any filetype named `./templates/skeleton.{ft}`
 augroup("Templates", {})
 local skeletionPath = fn.stdpath("config") .. "/templates"
 local filetypeList = fn.system([[ls "]] .. skeletionPath .. [[/skeleton."* | xargs basename | cut -d. -f2]])
