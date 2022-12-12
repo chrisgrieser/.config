@@ -215,6 +215,7 @@ local miniaiConfig = {
 		goto_left = "",
 		goto_right = "",
 	},
+	n_lines = 10, -- number of lines within which to search textobj
 }
 
 -- custom text object "e": from cursor to [e]end of line minus 1 char
@@ -228,7 +229,7 @@ miniaiConfig.custom_textobjects.e = function()
 end
 
 -- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt#L215
-miniaiConfig.custom_textobjects.v = {"[=:] ?()().*()[;,]?()\n"}
+miniaiConfig.custom_textobjects.v = {"[=:] ?()().-()[;,]?()\n"}
 require("mini.ai").setup(miniaiConfig)
 
 --------------------------------------------------------------------------------
@@ -563,8 +564,8 @@ keymap("n", "<leader>g", function()
 		end
 
 		vim.notify(" ﴻ add-commit-push… ")
-		local job = fn.jobstart("git add -A && git commit -m '"..commitMsg.."' ; git pull ; git push", shellOpts)
-		print("job:", job)
+		fn.jobstart("git add -A && git commit -m '"..commitMsg.."' ; git pull ; git push", shellOpts)
+
 		local issueNr = commitMsg:match("#(%d+)")
 		if issueNr then
 			local repo = fn.system[[git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//']]
