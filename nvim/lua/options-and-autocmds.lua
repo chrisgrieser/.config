@@ -138,7 +138,7 @@ opt.cmdheight = 0
 --------------------------------------------------------------------------------
 -- FOLDING
 local ufo = require("ufo")
-local foldIcon = " 祉祉祉"
+local foldIcon = "  "
 ufo.setup {
 	provider_selector = function(bufnr, filetype, buftype) ---@diagnostic disable-line: unused-local
 		return {"treesitter", "indent"} -- Use Treesitter as fold provider
@@ -188,8 +188,6 @@ opt.foldenable = true
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 
---------------------------------------------------------------------------------
-
 -- if not using ufo for folding
 -- opt.foldexpr = "nvim_treesitter#foldexpr()" -- if treesitter folding is used via expr below
 -- opt.foldmethod = "expr"
@@ -197,7 +195,9 @@ opt.foldlevelstart = 99
 -- opt.foldnestmax = 2
 -- opt.foldminlines = 2
 
--- keep folds and cursor
+--------------------------------------------------------------------------------
+
+-- Remember folds and cursor
 augroup("rememberCursorAndFolds", {})
 autocmd("BufWinLeave", {
 	group = "rememberCursorAndFolds",

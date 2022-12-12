@@ -105,8 +105,11 @@ function M.PluginList()
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 	}}
-	use {"tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp"}
 	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
+
+	-- AI Stuff
+	use {"tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp"}
+	use "aduros/ai.vim"
 
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides

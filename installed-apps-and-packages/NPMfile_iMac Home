@@ -1,6 +1,6 @@
 parser
-bibtex-tidy
 clean-css-cli
+eslint
 npm
 postcss
 readability-cli
