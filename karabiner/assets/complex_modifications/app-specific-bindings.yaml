@@ -341,6 +341,15 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.brave\.Browser # no $ to also work in PWAs
+      # toggle octotree
+      - type: basic
+        from: {key_code: "1", modifiers: {mandatory: [command]}}
+        to:
+          - {key_code: s, modifiers: [command, shift]}
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.brave\.Browser$
   - description: "\U0001F170️\U0001F3DE YouTube: ⌘+P → Picture-in-Picture Mode"
     manipulators:
       - type: basic
