@@ -135,6 +135,8 @@ autocmd("TextYankPost", {
 -- ad -> a [d]iagnostic (diagnostic-textobj)
 -- ae -> almost to the [e]nding of line (mini.ai)
 -- av -> a [v]alue / right-hand-side of key-value pair or variable assignment (mini.ai)
+-- aL -> a [L]oop (treesitter)
+-- <Space> -> statement (treesitter)
 
 -- FILE-TYPE-SPECIFIC TEXT OBJECTS
 -- al: a [l]ink (markdown)
@@ -253,7 +255,7 @@ recorder.setup {
 keymap("n", "!", "a <Esc>h") -- insert space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
-keymap("n", "d<Space>", function() -- delete blank lines except one
+keymap("n", "d<Tab>", function() -- delete blank lines except one
 	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
 		cmd [[normal! "_dipO]]
 	else

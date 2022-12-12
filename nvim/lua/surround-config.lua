@@ -1,6 +1,11 @@
 require("utils")
 --------------------------------------------------------------------------------
 
+-- need to be consistent with treesitter
+local functionObjChar = "f"
+local conditionObjChar = "o"
+local callObjChar = "l"
+
 require("nvim-surround").setup {
 	aliases = {-- aliases should match the bindings for text objects
 		["b"] = ")",
@@ -15,10 +20,9 @@ require("nvim-surround").setup {
 		visual = "s",
 	},
 	surrounds = {
-		["f"] = {
+		[functionObjChar] = {
 			find = function()
-				-- needs to be consistent with treesitter
-				return require("nvim-surround.config").get_selection {motion = "af"}
+				return require("nvim-surround.config").get_selection {motion = "a" .. functionObjChar}
 			end,
 			delete = function()
 				local ft = bo.filetype
@@ -32,7 +36,7 @@ require("nvim-surround").setup {
 					patt = "()()()()"
 				end
 				return require("nvim-surround.config").get_selections {
-					char = "f",
+					char = functionObjChar,
 					pattern = patt,
 				}
 			end,
@@ -53,10 +57,15 @@ require("nvim-surround").setup {
 				return {{""}, {""}}
 			end,
 		},
-		["o"] = {
+		[callObjChar] = {
 			find = function()
-				-- needs to be consistent with treesitter
-				return require("nvim-surround.config").get_selection {motion = "ao"}
+				return require("nvim-surround.config").get_selection {motion = "a" .. callObjChar}
+			end,
+			delete = "^([^=%s]+%()().-(%))()$",
+		},
+		[conditionObjChar] = {
+			find = function()
+				return require("nvim-surround.config").get_selection {motion = "a" .. callObjChar}
 			end,
 			delete = function()
 				local ft = bo.filetype
@@ -70,7 +79,7 @@ require("nvim-surround").setup {
 					patt = "()()()()"
 				end
 				return require("nvim-surround.config").get_selections {
-					char = "C",
+					char = conditionObjChar,
 					pattern = patt,
 				}
 			end,
