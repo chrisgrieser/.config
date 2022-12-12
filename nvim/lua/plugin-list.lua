@@ -105,13 +105,11 @@ function M.PluginList()
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 	}}
-	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
+	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp" }
 
 	-- AI Stuff
 	use {"tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp"}
-	use {"aduros/ai.vim", 
-
-	}
+	use {"aduros/ai.vim", cmd = "AI"}
 
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
@@ -122,6 +120,7 @@ function M.PluginList()
 	use "uga-rosa/ccc.nvim" -- color previews & color utilities
 	use "dstein64/nvim-scrollview" -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
 	use {"anuvyklack/windows.nvim", requires = "anuvyklack/middleclass"} -- auto-resize splits
+	use "shortcuts/no-neck-pain.nvim"
 
 	-- File Switching & File Operation
 	use {myrepos .. "nvim-genghis",
