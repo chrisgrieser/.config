@@ -19,7 +19,7 @@ require("indent_blankline").setup {
 -- SCROLLBAR
 require("scrollview").setup {
 	current_only = false,
-	winblend = 10,
+	winblend = 20,
 	column = 1,
 	excluded_filetypes = specialFiletypes,
 }
