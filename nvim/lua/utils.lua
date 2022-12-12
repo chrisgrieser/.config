@@ -61,7 +61,15 @@ shellOpts = {
 -- `:I` inspects the passed lua object
 api.nvim_create_user_command("I", function(ctx)
 	vim.pretty_print(fn.luaeval(ctx.args))
-end, {nargs = "+", complete = "command"})
+end, {nargs = "+"})
+
+-- `:SwapDelete` delete the swapfile
+api.nvim_create_user_command("SwapDelete", function(ctx)
+	local success, err = os.remove(fn.swapname(0))
+	if not(success) then
+		vim.notify(err)
+	end
+end)
 
 -- `:II` inspects the passed object and puts it into a new buffer, https://www.reddit.com/r/neovim/comments/zhweuc/comment/izo9br1/?utm_source=share&utm_medium=web2x&context=3
 api.nvim_create_user_command("II", function(ctx)
@@ -70,7 +78,9 @@ api.nvim_create_user_command("II", function(ctx)
 	cmd.new()
 	api.nvim_buf_set_lines(0, 0, -1, false, lines)
 	cmd.write("/tmp/nvim-cmd-output")
-end, {nargs = "+", complete = "command"})
+end, {nargs = "+"})
+
+
 
 --------------------------------------------------------------------------------
 -- GENERAL LUA UTILS
@@ -120,24 +130,6 @@ signIcons = {
 	Hint = "",
 }
 
-commonFiletypes = {
-	"lua",
-	"markdown",
-	"javascript",
-	"typescript",
-	"applescript",
-	"json",
-	"python",
-	"yaml",
-	"toml",
-	"zsh",
-	"bash",
-	"sh",
-	"bibtex",
-	"gitcommit",
-	"conf",
-}
-
 -- filetypes to be ignored by most plugins
 specialFiletypes = {
 	"help",
@@ -162,7 +154,6 @@ specialFiletypes = {
 	"ssr",
 	"cybu",
 	"",
-
 	"dap-repl",
 	"dui_console",
 	"dui_scopes",
