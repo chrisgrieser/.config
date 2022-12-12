@@ -33,6 +33,7 @@ if isGui() then
 		stages = "slide",
 		level = 0, -- minimum severity level to display (0 = display all)
 		max_height = 15,
+		-- TODO requires custom wrapping function though https://github.com/rcarriga/nvim-notify/issues/129
 		-- max_width = 50,
 		minimum_width = 10,
 		timeout = 4000,
@@ -274,9 +275,12 @@ require("lualine").setup {
 			function() return " " end, -- dummy to avoid bar appearing and disappearing
 			cond = showBreadcrumbs,
 		}},
-		lualine_z = {
+		lualine_y = {
 			{debuggerStatus, section_separators = winSecSeparators},
+		},
+		lualine_z = {
 			{require("recorder").recordingStatus, section_separators = winSecSeparators},
+			{require("recorder").displaySlots, section_separators = winSecSeparators},
 		},
 	},
 	options = {
