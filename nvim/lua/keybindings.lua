@@ -136,7 +136,6 @@ autocmd("TextYankPost", {
 -- ae -> almost to the [e]nding of line (mini.ai)
 -- av -> a [v]alue / right-hand-side of key-value pair or variable assignment (mini.ai)
 -- aL -> a [L]oop (treesitter)
--- <Space> -> statement (treesitter)
 
 -- FILE-TYPE-SPECIFIC TEXT OBJECTS
 -- al: a [l]ink (markdown)
