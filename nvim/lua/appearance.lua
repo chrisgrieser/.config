@@ -220,11 +220,8 @@ end
 
 local function debuggerStatus()
 	local dapStatus = require("dap").status()
-	if dapStatus ~= "" then
-		return "  " .. dapStatus
-	else
-		return ""
-	end
+	if dapStatus == "" then return "" end
+	return "  " .. dapStatus
 end
 
 -- NAVIC

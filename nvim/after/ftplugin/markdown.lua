@@ -5,16 +5,12 @@ local opts = {buffer = true, silent = true}
 -- hide URLs and other formatting, TODO figure out how to hide only URLs
 -- setlocal("conceallevel", 2)
 
--- decrease line length without zen mode plugins (which unfortunately remove
--- statuslines and stuff)
-setlocal("signcolumn", "yes:9")
-
 -- spellcheck
 setlocal("spell", true)
 
 -- hack to make lists auto-continue via Return in Insert & o in normal mode
 -- i.e. replaces bullet.vim based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
-setlocal("comments", "b:*,b:-,b:+")
+setlocal("comments", "b:-")
 local foOpts = getlocalopt("formatoptions"):gsub("[ct]", "") .. "ro"
 setlocal("formatoptions", foOpts)
 
@@ -51,19 +47,22 @@ keymap({"n", "x"}, "K", "6gk", opts)
 keymap({"n", "x"}, "k", "gk", opts)
 keymap({"n", "x"}, "j", function() require("quality-of-life").overscroll("gj") end, opts)
 
--- pseudo-readable line length
-keymap("n", "<D-8>", ":25vsplit n<CR><C-w><C-w>", opts)
+-- decrease line length without zen mode plugins (which unfortunately remove
+-- statuslines and stuff)
+setlocal("signcolumn", "yes:9")
 
---------------------------------------------------------------------------------
 -- automatically open float, since virtual text is hard to read with wrapping
 keymap("n", "ge", function() vim.diagnostic.goto_next {wrap = true, float = true} end, opts)
 keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = true} end, opts)
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
 
 -- Heading instead of function navigation
 keymap({"n", "x"}, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], opts)
 keymap({"n", "x"}, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], opts)
 
---------------------------------------------------------------------------------
 --KEYBINDINGS WITH THE GUI
 if isGui() then
 	-- cmd+r: Markdown Preview
