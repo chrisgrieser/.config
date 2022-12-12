@@ -18,7 +18,7 @@ require("indent_blankline").setup {
 -- SCROLLBAR
 require("scrollview").setup {
 	current_only = false,
-	winblend = 0,
+	winblend = 10,
 	column = 1,
 	excluded_filetypes = specialFiletypes,
 }
@@ -28,6 +28,8 @@ require("scrollview").setup {
 if isGui() then
 
 	-- HACK requires custom wrapping setup https://github.com/rcarriga/nvim-notify/issues/129
+	-- replaces vim.notify = require("notify")
+
 	local function split_length(text, length)
 		local lines = {}
 		local next_line
@@ -40,8 +42,7 @@ if isGui() then
 		end
 	end
 
-	---@diagnostic disable-next-line: duplicate-set-field
-	vim.notify = function(msg, level, opts)
+	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
 		local max_width = 50
 		if type(msg) == "string" then
 			msg = vim.split(msg, "\n", {trimepty = true})
@@ -50,23 +51,27 @@ if isGui() then
 		for _, line in pairs(msg) do
 			local new_lines = split_length(line, max_width)
 			for _, nl in ipairs(new_lines) do
-				table.insert(truncated, " "..nl.." ")
+				table.insert(truncated, " " .. nl .. " ")
 			end
 		end
 		return require("notify")(truncated, level, opts)
 	end
 
 	opt.termguicolors = true
-	-- vim.notify = require("notify") -- use notify.nvim for all vim notifications
 	require("notify").setup {
 		render = "minimal",
 		stages = "slide",
 		level = 0, -- minimum severity level to display (0 = display all)
 		max_height = 15,
-		-- max_width = 50,
+		max_width = notifyWidth,
 		minimum_width = 10,
 		timeout = 4000,
 		top_down = false,
+		on_open = function(win)
+			if api.nvim_win_is_valid(win) then
+				api.nvim_win_set_config(win, {border = borderStyle})
+			end
+		end,
 	}
 end
 
