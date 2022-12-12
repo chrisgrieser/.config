@@ -648,6 +648,10 @@ keymap("n", "<leader>r", function()
 end)
 
 --------------------------------------------------------------------------------
+-- INFO as long as an lsp is attached to a buffer (null-ls or regular), `gq`
+-- apparently stops working.
+
+--------------------------------------------------------------------------------
 
 -- q / Esc to close special windows
 augroup("quickQuit", {})
