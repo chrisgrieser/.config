@@ -269,8 +269,9 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^net\.highlightsapp\.universal$
-  - description: "\U0001F170️  Brave: ⌘+Y → Copy URL and close tab"
+  - description: "\U0001F170️  Brave"
     manipulators:
+      # ⌘+Y → Copy URL and close tab
       - type: basic
         from:
           key_code: z # z and y switched on German keyboard
@@ -318,6 +319,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.brave\.Browser$
+      # open dev tools
       - type: basic
         from:
           key_code: f18 # mapped to esc via karabiner

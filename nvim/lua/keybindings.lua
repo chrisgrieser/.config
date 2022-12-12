@@ -519,11 +519,11 @@ keymap("n", "gf", telescope.live_grep) -- search in [f]iles
 keymap("n", "gR", telescope.resume) -- resume last search
 
 -- File Operations (no shorthand for lazy-loading)
-keymap("", "<C-p>", function() require("genghis").copyFilepath() end)
-keymap("", "<C-n>", function() require("genghis").copyFilename() end)
-keymap("", "<leader>x", function() require("genghis").chmodx() end)
-keymap("", "<C-r>", function() require("genghis").renameFile() end)
-keymap("", "<C-d>", function() require("genghis").duplicateFile() end)
+keymap("n", "<C-p>", function() require("genghis").copyFilepath() end)
+keymap("n", "<C-n>", function() require("genghis").copyFilename() end)
+keymap("n", "<leader>x", function() require("genghis").chmodx() end)
+keymap("n", "<C-r>", function() require("genghis").renameFile() end)
+keymap("n", "<C-d>", function() require("genghis").duplicateFile() end)
 keymap("", "<D-BS>", function() require("genghis").trashFile() end)
 keymap("", "<D-n>", function() require("genghis").createNewFile() end)
 keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end)
