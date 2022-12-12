@@ -19,6 +19,8 @@ keymap("n", "gS", function() telescope.current_buffer_fuzzy_find {
 	}
 end, opts)
 
+keymap("n", "-", telescope.current_buffer_fuzzy_find, {desc = "search in current buffer (css)", buffer = true})
+
 --------------------------------------------------------------------------------
 
 -- INFO: fix syntax highlighting with ':syntax sync fromstart'
