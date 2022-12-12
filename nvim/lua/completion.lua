@@ -85,6 +85,15 @@ cmp.setup {
 			end
 		end, {"i", "s", "n"}),
 	},
+	formatting = {
+		fields = {"kind", "abbr", "menu"}, -- order of the fields
+		format = function(entry, vim_item)
+			vim_item.kind = " " .. kind_icons[vim_item.kind] .. " "
+			vim_item.menu = source_icons[entry.source.name]
+			return vim_item
+		end
+	},
+	-- DEFAULT SOURCES
 	sources = cmp.config.sources {
 		{name = "luasnip"},
 		{name = "nvim_lsp"},
@@ -92,14 +101,6 @@ cmp.setup {
 		{name = "treesitter"},
 		{name = "emoji", keyword_length = 2},
 		{name = "buffer", keyword_length = 2},
-	},
-	formatting = {
-		fields = { "kind", "abbr", "menu" }, -- order of the fields
-		format = function(entry, vim_item)
-			vim_item.kind = " "..kind_icons[vim_item.kind].." "
-			vim_item.menu = source_icons[entry.source.name]
-			return vim_item
-		end
 	},
 }
 --------------------------------------------------------------------------------
@@ -186,6 +187,7 @@ cmp.setup.filetype("gitcommit", {
 		{name = "emoji", keyword_length = 2},
 	},
 })
+
 -- bibtex
 cmp.setup.filetype("bib", {
 	sources = cmp.config.sources {
@@ -195,11 +197,32 @@ cmp.setup.filetype("bib", {
 	},
 })
 
--- plaintext
+-- plaintext (e.g., pass editing)
 cmp.setup.filetype("text", {
 	sources = cmp.config.sources {
 		{name = "luasnip"},
 		{name = "buffer", keyword_length = 2},
+		{name = "emoji", keyword_length = 2},
+	},
+})
+
+-- Dressing
+cmp.setup.filetype("DressingInput", {
+	mapping = cmp.mapping.preset.insert {
+		["<CR>"] = cmp.mapping.confirm {select = true},
+		["<Down>"] = cmp.select_next_item(),
+		["<Up>"] = cmp.select_prev_item(),
+		["<Tab>"] = cmp.mapping(function(_)
+			if cmp.visible() then
+				cmp.select_next_item()
+			else
+				cmp.complete()
+			end
+		end, {"i", "s"}),
+	},
+	sources = cmp.config.sources {
+		{name = "git"}, -- commits with ":", issues/PRs with "#"
+		{name = "path"},
 		{name = "emoji", keyword_length = 2},
 	},
 })

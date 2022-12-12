@@ -80,13 +80,11 @@ end
 local function syncAllGitRepos(mode)
 	if mode == "full" then
 		gitDotfileSync("--submodules")
-		gitPassSync()
-		gitVaultSync()
 	elseif mode == "partial" then
 		gitDotfileSync()
-		gitPassSync()
-		gitVaultSync()
 	end
+	gitPassSync()
+	gitVaultSync()
 end
 
 --------------------------------------------------------------------------------
@@ -133,31 +131,25 @@ local function officeWake(eventType)
 end
 
 local function homeWake(eventType)
-	runWithDelays(2, function()
-		if not (eventType == caff.screensDidWake or eventType == caff.systemDidWake) then return end
-
+	if not (eventType == caff.screensDidWake or eventType == caff.systemDidWake) then return end
+	runWithDelays(1, function()
 		if isProjector() then
 			setDarkmode(true)
 			movieModeLayout()
 		else
-			if betweenTime(7, 19) then
-				setDarkmode(false)
-			else
-				setDarkmode(true)
-			end
 			syncAllGitRepos("full")
+			local toDark = betweenTime(7, 19) and false or true
 			homeModeLayout() -- should run after git sync, to avoid conflicts
+			setDarkmode(toDark)
 		end
-
 	end)
 end
 
 if isIMacAtHome() or isAtMother() then
-	wakeWatcher = caff.new(homeWake)
+	wakeWatcher = caff.new(homeWake):start()
 elseif isAtOffice() then
-	wakeWatcher = caff.new(officeWake)
+	wakeWatcher = caff.new(officeWake):start()
 end
-wakeWatcher:start()
 
 function systemStart()
 	-- prevent commit spam when updating hammerspoon config regularly
