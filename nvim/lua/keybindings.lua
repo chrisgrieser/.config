@@ -96,11 +96,20 @@ keymap("n", "gH", ":Gitsigns prev_hunk<CR>")
 --------------------------------------------------------------------------------
 
 -- CLIPBOARD
+opt.clipboard = "unnamedplus"
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
+
+require("yanky").setup {
+	ring = { history_length = 25},
+	highlight = { timer = 1500 },
+}
+
+keymap({"n", "x"}, "p", "<Plug>(YankyPutAfter)")
+keymap("n", "P", "<Plug>(YankyCycleForward)")
 keymap("n", "gp", qol.pasteDifferently) -- paste charwise reg as linewise & vice versa
-keymap("n", "P", '"0p') -- paste what was yanked, not deleted
+keymap("n", "gP", "<Plug>(YankyCycleBackward)")
 
 -- yanking without moving the cursor
 -- visual https://stackoverflow.com/a/3806683#comment10788861_3806683
@@ -172,7 +181,7 @@ keymap("n", "<C-M-Space>", '"_daw') -- wordaround, since <S-Space> not fully sup
 keymap("x", "<Space>", '"_c')
 
 -- change-subword ( = word excluding _ and - as word-parts)
-keymap("n", "<leader><Space>", function()
+keymap("n", "c<Space>", function()
 	opt.iskeyword:remove {"_", "-"}
 	cmd [[normal! "_diw]]
 	cmd [[startinsert]] -- :normal does not allow to end in insert mode
@@ -201,7 +210,7 @@ keymap({"x", "o"}, "ad", function() require("textobj-diagnostic").nearest_diag()
 
 -- disable text-objects from mini.ai in favor of my own
 local miniaiConfig = {
-	n_lines = 10, -- number of lines within which to search textobj
+	n_lines = 15, -- number of lines within which to search textobj
 	custom_textobjects = {
 		b = false,
 		q = false,
@@ -381,7 +390,6 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
-keymap("x", "p", "P") -- do not override register when pasting
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
 keymap("x", "v", "<C-v>") -- `vv` from normal mode = visual block mode
 
