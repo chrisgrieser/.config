@@ -104,17 +104,6 @@ cmp.setup {
 	},
 }
 --------------------------------------------------------------------------------
--- Dressing
-cmp.setup.filetype("DressingInput", {
-	sources = cmp.config.sources { {name = "omni"} },
-})
-
-keymap("n", ":", function ()
-	vim.ui.input({ completion = "command"}, function (input)
-		if not(input) then return end
-		cmd(input)
-	end)
-end, {desc = ": cmdline replacement"})
 
 -- Filetype specific Completion
 local defaultAndNerdfont = {
@@ -215,6 +204,17 @@ cmp.setup.cmdline({"/", "?"}, {
 		{name = "buffer", keyword_length = 2},
 	}
 })
+
+-- : via dressing
+cmp.setup.filetype("DressingInput", {
+	sources = cmp.config.sources { {name = "omni"} },
+})
+keymap("n", ":", function ()
+	vim.ui.input({ completion = "command", prompt = "Ex Command:"}, function (input)
+		if not(input) then return end
+		cmd(input)
+	end)
+end, {desc = ": cmdline replacement"})
 
 --------------------------------------------------------------------------------
 -- AUTOPAIRS
