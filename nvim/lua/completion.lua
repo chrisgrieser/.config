@@ -88,7 +88,7 @@ cmp.setup {
 	formatting = {
 		fields = {"kind", "abbr", "menu"}, -- order of the fields
 		format = function(entry, vim_item)
-			vim_item.kind = kind_icons[vim_item.kind]
+			vim_item.kind = " " .. kind_icons[vim_item.kind]
 			vim_item.menu = source_icons[entry.source.name]
 			return vim_item
 		end
@@ -104,15 +104,17 @@ cmp.setup {
 	},
 }
 --------------------------------------------------------------------------------
-
+-- Dressing
 cmp.setup.filetype("DressingInput", {
-	mapping = cmp.mapping.preset.insert{
-
-	},
-	sources = cmp.config.sources{
-		{name = "omni"},
-	},
+	sources = cmp.config.sources { {name = "omni"} },
 })
+
+keymap("n", ":", function ()
+	vim.ui.input({ completion = "command"}, function (input)
+		if not(input) then return end
+		cmd(input)
+	end)
+end, {desc = ": cmdline replacement"})
 
 -- Filetype specific Completion
 local defaultAndNerdfont = {
@@ -212,16 +214,6 @@ cmp.setup.cmdline({"/", "?"}, {
 	}, {-- second array only relevant when no source from the first matches
 		{name = "buffer", keyword_length = 2},
 	}
-})
-
-cmp.setup.cmdline(":", {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{name = "path"},
-		{name = "cmdline"},
-	}, {-- second array only relevant when no source from the first matches
-		{name = "cmdline_history", keyword_length = 3},
-	})
 })
 
 --------------------------------------------------------------------------------
