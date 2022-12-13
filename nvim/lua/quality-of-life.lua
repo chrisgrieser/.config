@@ -227,10 +227,11 @@ function M.overscroll(action)
 end
 
 ---Force pasting a linewise register characterwise and vice versa
----@param opts? table
-function M.pasteDifferently(opts) -- paste as characterwise
-	if not (opts) then opts = {reg = "+"} end
-	local reg = opts.reg
+function M.pasteDifferently()
+	local reg = '"'
+	local clipboardOpt = vim.opt.clipboard:get();
+	local useSystemClipb = #clipboardOpt > 0 and clipboardOpt[1]:find("unnamed")
+	if useSystemClipb then reg = "+" end
 
 	local isLinewise = fn.getregtype(reg) == "V"
 	local isCharwise = fn.getregtype(reg) == "v"
@@ -247,9 +248,12 @@ function M.pasteDifferently(opts) -- paste as characterwise
 		return
 	end
 
+	cmd.undo() -- undo previous paste
 	fn.setreg(reg, regContent, targetRegType)
-	cmd('normal! "' .. reg .. "p")
-	if targetRegType == "V" then cmd [[normal!==]] end -- indent the new paste
+	cmd.normal {reg .. "p", bang = true}
+	if targetRegType == "V" then
+		cmd.normal {"==", bang = true}-- indent the new paste
+	end 
 end
 
 --------------------------------------------------------------------------------

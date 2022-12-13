@@ -87,14 +87,6 @@ autocmd("FileType", {
 	end
 })
 
--- clipboard & yanking
-opt.clipboard = "unnamedplus"
-augroup("highlightedYank", {})
-autocmd("TextYankPost", {
-	group = "highlightedYank",
-	callback = function() vim.highlight.on_yank {timeout = 2000} end
-})
-
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, useful e.g. for kebab-case-variables
 -- opt.nrformats = "alpha" -- <C-a> and <C-x> also work on letters

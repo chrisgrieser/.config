@@ -121,7 +121,6 @@ function M.PluginList(use)
 	use "uga-rosa/ccc.nvim" -- color previews & color utilities
 	use "dstein64/nvim-scrollview" -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
 	use {"anuvyklack/windows.nvim", requires = "anuvyklack/middleclass"} -- auto-resize splits
-	use "shortcuts/no-neck-pain.nvim"
 
 	-- File Switching & File Operation
 	use {myrepos .. "nvim-genghis",
@@ -167,7 +166,7 @@ function M.PluginList(use)
 		end
 	}
 
-	-- Operators & Text Objects, Navigation & Editing
+	-- EDITING: Operators, Text Objects, Navigation, Clipboard
 	use "echasnovski/mini.ai" -- custom text objects
 	use "kylechui/nvim-surround" -- surround operator
 	use "gbprod/substitute.nvim" -- substitution & exchange operator
@@ -175,6 +174,9 @@ function M.PluginList(use)
 	use "michaeljsmith/vim-indent-object" -- indention-based text-object
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"x", "<D-j>"}}}
 	use "Darazaki/indent-o-matic" -- auto-determine indents
+
+	use {"gbprod/yanky.nvim"} -- register manager
+
 	use {"nacro90/numb.nvim", -- line previews when ":n"
 		config = function() require("numb").setup() end,
 		keys = {{"n", ":"}},
