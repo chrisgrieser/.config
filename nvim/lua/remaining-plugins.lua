@@ -8,7 +8,7 @@ g.netrw_banner = 0 -- no ugly top banner
 g.netrw_liststyle = 3 -- tree style as default
 g.netrw_winsize = 30 -- width
 g.netrw_localcopydircmd = "cp -r" -- so copy work with directories
-cmd [[highlight! def link netrwTreeBar IndentBlankLineChar]]
+cmd.highlight {"def link netrwTreeBar IndentBlankLineChar", bang = true}
 
 --------------------------------------------------------------------------------
 -- Mundo
@@ -21,13 +21,15 @@ g.mundo_right = 1 -- right side, not left
 augroup("MundoConfig", {})
 autocmd("FileType", {
 	group = "MundoConfig",
-	pattern = "Mundo",
+	pattern = {"Mundo", "MundoDiff"},
 	callback = function()
 		keymap("n", "-", "/", {remap = true, buffer = true})
+		keymap("n", "q", ":MundoToggle<CR>", {remap = true, buffer = true, nowait = true})
 	end
 })
 
 --------------------------------------------------------------------------------
+-- Discord Rich Presence
 require("presence"):setup {
 	blacklist = {}, -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
 	show_time = false,
