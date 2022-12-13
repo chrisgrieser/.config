@@ -42,18 +42,9 @@ local source_icons = {
 	cmdline = "",
 	cmdline_history = "",
 	path = "",
-	omni = "ﱤ",
+	omni = "",
 }
 
-local defaultSources = {
-	{name = "luasnip"},
-	{name = "nvim_lsp"},
-	{name = "cmp_tabnine", keyword_length = 3},
-	{name = "treesitter"},
-	{name = "emoji", keyword_length = 2},
-	{name = "buffer", keyword_length = 2},
-	{name = "omni"},
-}
 --------------------------------------------------------------------------------
 
 cmp.setup {
@@ -81,7 +72,7 @@ cmp.setup {
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
 			else
-				fallback() -- normal mapping, like tabout plugin
+				fallback() -- normal mapping, e.g. tabout plugin
 			end
 		end, {"i", "s", "n"}),
 		["<S-Tab>"] = cmp.mapping(function(fallback)
@@ -97,23 +88,42 @@ cmp.setup {
 	formatting = {
 		fields = {"kind", "abbr", "menu"}, -- order of the fields
 		format = function(entry, vim_item)
-			vim_item.kind = " " .. kind_icons[vim_item.kind] .. " "
+			vim_item.kind = kind_icons[vim_item.kind]
 			vim_item.menu = source_icons[entry.source.name]
 			return vim_item
 		end
 	},
 	-- DEFAULT SOURCES
-	sources = cmp.config.sources(defaultSources),
+	sources = cmp.config.sources {
+		{name = "luasnip"},
+		{name = "nvim_lsp"},
+		{name = "cmp_tabnine", keyword_length = 3},
+		{name = "treesitter"},
+		{name = "emoji", keyword_length = 2},
+		{name = "buffer", keyword_length = 2},
+	},
 }
 --------------------------------------------------------------------------------
 
--- Filetype specific Completion
-local defaultAndNerdfont = vim.tbl_extend(,
-	"force",
-	defaultSources,
-	{{name = "nerdfont", keyword_length = 2 }}
-)
+cmp.setup.filetype("DressingInput", {
+	mapping = cmp.mapping.preset.insert{
 
+	},
+	sources = cmp.config.sources{
+		{name = "omni"},
+	},
+})
+
+-- Filetype specific Completion
+local defaultAndNerdfont = {
+	{name = "luasnip"},
+	{name = "nvim_lsp"},
+	{name = "cmp_tabnine", keyword_length = 3},
+	{name = "treesitter"},
+	{name = "nerdfont", keyword_length = 2},
+	{name = "emoji", keyword_length = 2},
+	{name = "buffer", keyword_length = 2},
+}
 
 cmp.setup.filetype("lua", {
 	-- disable leading "-"
