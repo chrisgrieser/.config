@@ -1,6 +1,14 @@
 -- https://github.com/nvim-telescope/telescope.nvim#telescope-setup-structure
 --------------------------------------------------------------------------------
 
+local maps = {
+	["<Esc>"] = "close",
+	["<D-w>"] = "delete_buffer",
+	["?"] = "which_key",
+	["<S-Down>"] = "preview_scrolling_down",
+	["<S-Up>"] = "preview_scrolling_up",
+}
+
 require("telescope").setup {
 	defaults = {
 		selection_caret = "ﰉ ",
@@ -25,19 +33,9 @@ require("telescope").setup {
 			"%.plist", -- Alfred Config Data
 			"%.string",
 		},
-		mappings = {
-			i = {
-				["<Esc>"] = "close", -- close w/ one esc
-				["<D-w>"] = "delete_buffer",
-				["?"] = "which_key",
-				["<S-Down>"] = "preview_scrolling_down",
-				["<S-Up>"] = "preview_scrolling_up",
-			},
-			n = {
-				["<Esc>"] = "close",
-				["<D-w>"] = "delete_buffer",
-				["?"] = "which_key",
-			},
+		maps = {
+			i = maps,
+			n = maps,
 		},
 		layout_strategy = "horizontal",
 		layout_config = {
