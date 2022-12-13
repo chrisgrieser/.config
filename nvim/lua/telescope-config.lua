@@ -29,10 +29,14 @@ require("telescope").setup {
 			i = {
 				["<Esc>"] = "close", -- close w/ one esc
 				["<D-w>"] = "delete_buffer",
+				["?"] = "which_key",
+				["<S-Down>"] = "preview_scrolling_down",
+				["<S-Up>"] = "preview_scrolling_up",
 			},
 			n = {
 				["<Esc>"] = "close",
 				["<D-w>"] = "delete_buffer",
+				["?"] = "which_key",
 			},
 		},
 		layout_strategy = "horizontal",

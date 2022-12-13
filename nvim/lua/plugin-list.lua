@@ -99,6 +99,7 @@ function M.PluginList(use)
 		"hrsh7th/cmp-cmdline",
 		"dmitmel/cmp-cmdline-history",
 		"hrsh7th/cmp-emoji",
+		"hrsh7th/cmp-omni",
 		myrepos .. "cmp-nerdfont",
 		"tamago324/cmp-zsh",
 		"ray-x/cmp-treesitter",
