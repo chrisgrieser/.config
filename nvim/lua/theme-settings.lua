@@ -42,8 +42,9 @@ local function customHighlights()
 	cmd.highlight [[TSDefinition term=underline gui=underdotted]]
 	cmd.highlight [[TSDefinitionUsage term=underline gui=underdotted]]
 
-	-- bugfix for https://github.com/neovim/neovim/issues/20456
+	-- HACK bugfix for https://github.com/neovim/neovim/issues/20456
 	cmd.highlight {"def link luaParenError.highlight NormalFloat", bang = true}
+	cmd.highlight {"def link luaParenError NormalFloat", bang = true}
 
 end
 

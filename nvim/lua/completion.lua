@@ -42,8 +42,18 @@ local source_icons = {
 	cmdline = "",
 	cmdline_history = "",
 	path = "",
+	omni = "ﱤ",
 }
 
+local defaultSources = {
+	{name = "luasnip"},
+	{name = "nvim_lsp"},
+	{name = "cmp_tabnine", keyword_length = 3},
+	{name = "treesitter"},
+	{name = "emoji", keyword_length = 2},
+	{name = "buffer", keyword_length = 2},
+	{name = "omni"},
+}
 --------------------------------------------------------------------------------
 
 cmp.setup {
@@ -93,28 +103,17 @@ cmp.setup {
 		end
 	},
 	-- DEFAULT SOURCES
-	sources = cmp.config.sources {
-		{name = "luasnip"},
-		{name = "nvim_lsp"},
-		{name = "cmp_tabnine", keyword_length = 3},
-		{name = "treesitter"},
-		{name = "emoji", keyword_length = 2},
-		{name = "buffer", keyword_length = 2},
-	},
+	sources = cmp.config.sources(defaultSources),
 }
 --------------------------------------------------------------------------------
 
 -- Filetype specific Completion
+local defaultAndNerdfont = vim.tbl_extend(,
+	"force",
+	defaultSources,
+	{{name = "nerdfont", keyword_length = 2 }}
+)
 
-local defaultAndNerdfont = {
-	{name = "luasnip"},
-	{name = "nvim_lsp"},
-	{name = "cmp_tabnine", keyword_length = 3},
-	{name = "treesitter"},
-	{name = "nerdfont", keyword_length = 2},
-	{name = "emoji", keyword_length = 2},
-	{name = "buffer", keyword_length = 2},
-}
 
 cmp.setup.filetype("lua", {
 	-- disable leading "-"
