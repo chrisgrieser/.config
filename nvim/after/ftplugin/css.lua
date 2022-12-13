@@ -1,6 +1,6 @@
 ---@diagnostic disable: undefined-global
 require("utils")
-local opts = {buffer = true, silent = true}
+local opts = {buffer = true}
 --------------------------------------------------------------------------------
 
 -- comment marks more useful than symbols for theme development
@@ -19,6 +19,7 @@ keymap("n", "gS", function() telescope.current_buffer_fuzzy_find {
 	}
 end, opts)
 
+-- since in big css files, the "/" search (mapped to - for me) is laggy
 keymap("n", "-", telescope.current_buffer_fuzzy_find, {desc = "search in current buffer (css)", buffer = true})
 
 --------------------------------------------------------------------------------
@@ -27,7 +28,7 @@ keymap("n", "-", telescope.current_buffer_fuzzy_find, {desc = "search in current
 -- various other solutions are described here: https://github.com/vim/vim/issues/2790
 -- however, using treesitter, this is less of an issue, but treesitter css
 -- highlighting isn't good yet, so…
-keymap("n", "zz", ":syntax sync fromstart<CR>", {buffer = true})
+keymap("n", "zz", ":syntax sync fromstart<CR>", opts)
 
 --------------------------------------------------------------------------------
 
@@ -41,16 +42,14 @@ keymap({"n", "x"}, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 -- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt
 b.miniai_config = {
 	custom_textobjects = {
-		-- is = with ".", as = without
-		s = {"%.()[%w-]+()"},
+		s = {"%.()[%w-]+()"}, -- is = with ".", as = without
 	},
 }
 
--- double css class
-keymap("n", "yc", "yaslBP", {buffer = true, silent = true, remap = true})
+-- double a selector
+keymap("n", "yas", "yaslBP", {buffer = true, silent = true, remap = true})
 
 --------------------------------------------------------------------------------
-
 
 -- smart line duplicate (mnemonic: [R]eplicate)
 -- switches top/bottom & moves to value
@@ -68,7 +67,7 @@ keymap("n", "<leader>i", function()
 	fn.setline(".", lineContent)
 end, {buffer = true})
 
-keymap("n", "zh", function()
+keymap("n", "qw", function()
 	local hr = {
 		"/* ───────────────────────────────────────────────── */",
 		"/* << ",

@@ -1,8 +1,9 @@
----@diagnostic disable: undefined-global
 local M = {}
+
+-- alternative setup method https://www.reddit.com/r/neovim/comments/zk187u/how_does_everyone_segment_plugin_development_from/
 local myrepos = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/"
 --------------------------------------------------------------------------------
-function M.PluginList()
+function M.PluginList(use)
 
 	-- Package Management
 	use "wbthomason/packer.nvim" -- packer manages itself
@@ -105,7 +106,7 @@ function M.PluginList()
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 	}}
-	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp" }
+	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
 
 	-- AI Stuff
 	use {"tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp"}

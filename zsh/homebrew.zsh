@@ -1,9 +1,7 @@
 # https://docs.brew.sh/Manpage#environment
 
-#───────────────────────────────────────────────────────────────────────────────
-
 export HOMEBREW_NO_AUTO_UPDATE=0
-export HOMEBREW_AUTO_UPDATE_SECS=259200 # 3 days before updating on `brew install`
+export HOMEBREW_AUTO_UPDATE_SECS=259200 # = 3 days before updating on `brew install`
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_GITHUB_API=1
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=60
@@ -77,6 +75,10 @@ function update (){
 
 	print-section "DUMP INSTALLS"
 	dump
+	
+	print-section "\033[1;33mREMINDERS"
+	echo "If sketchybar or espanso updated, they need to be re-given permissions."
+
 }
 
 function report (){
