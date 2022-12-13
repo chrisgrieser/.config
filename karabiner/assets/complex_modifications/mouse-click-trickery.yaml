@@ -56,6 +56,22 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.agiletortoise\.Drafts-OSX$
+      # Mimestream: Open and delete
+      - type: basic
+        from:
+          pointing_button: button2
+        to:
+          - pointing_button: button1
+          - {key_code: vk_none, hold_down_milliseconds: 200}
+          - {key_code: tab, modifiers: [command]}
+          - {key_code: vk_none, hold_down_milliseconds: 100}
+          - key_code: non_us_pound
+          - {key_code: h, modifiers: [command]}
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.mimestream\.Mimestream$
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "\U0001F401 3: Quit app"
     manipulators:
       - type: basic
@@ -82,6 +98,7 @@ rules:
             bundle_identifiers:
               - ^com\.hegenberg\.BetterTouchTool$
               - ^org\.hammerspoon\.Hammerspoon$
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "\U0001F401 4 (bottom)"
     manipulators:
       # Brave: Back
@@ -156,7 +173,7 @@ rules:
             modifiers:
               - command
               - control
-          - shell_command: osascript -e 'display notification "Tool" with title "Comment 🗣️"'
+          - shell_command: "osascript -e 'display notification \"Tool\" with title \"Comment \U0001F5E3️\"'"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -269,7 +286,7 @@ rules:
             modifiers:
               - command
               - control
-          - shell_command: osascript -e 'display notification "Tool" with title "Yellow Highlight 🟨"'
+          - shell_command: "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:

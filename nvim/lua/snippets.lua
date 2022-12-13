@@ -365,8 +365,7 @@ add("yaml", {
 	- {key_code: vk_none, hold_down_milliseconds: ${1:50}}
 	]]),
 	snip("to (Karabiner)", [[
-	to:
-		- {key_code: ${1:key}, modifiers: [${2:command}]}
+	- {key_code: ${1:key}, modifiers: [${2:command}]}
 	]]),
 	snip("from (Karabiner)", [[
 	from: {key_code: ${1:key}, modifiers: {mandatory: [${2:command}]}}
