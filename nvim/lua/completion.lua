@@ -245,4 +245,5 @@ autocmd("BufRead", {
 -- ai.vim
 g.ai_no_mappings = true -- no default mappings
 require("private-settings") -- API key symlinked and kept out of the dotfile repo
-keymap({"n", "x", "i"}, "<M-a>", cmd.AI, {desc = "Run OpenAI Completion"})
+keymap({"n", "i"}, "ga", cmd.AI, {desc = "Run OpenAI Completion"})
+keymap("x", "ga", ":AI ", {desc = "Run OpenAI Completion with instruction on selection"})
