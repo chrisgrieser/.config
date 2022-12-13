@@ -40,11 +40,11 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Kill-RIng Like Workflow</string>
+	<string>Paste like the killring in Emacs</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>SequentialPaste</string>
+	<string>Killring</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -132,23 +132,23 @@ Restart the history after 1 minute.</string>
 			<key>note</key>
 			<string>cycle through clipboard history</string>
 			<key>xpos</key>
-			<real>40</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>200</real>
+			<real>60</real>
 		</dict>
 		<key>A8970522-87DD-45EC-95A3-D77922C7646D</key>
 		<dict>
 			<key>xpos</key>
-			<real>340</real>
+			<real>330</real>
 			<key>ypos</key>
-			<real>200</real>
+			<real>60</real>
 		</dict>
 		<key>B2F452F6-9ABC-42AE-B6A3-B89193BE28FF</key>
 		<dict>
 			<key>xpos</key>
-			<real>185</real>
+			<real>175</real>
 			<key>ypos</key>
-			<real>200</real>
+			<real>60</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

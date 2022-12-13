@@ -278,12 +278,13 @@ function M.quicklog(opts)
 		logStatement = 'print("' .. lnStr .. varname .. ': " + ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then
 		logStatement = 'console.log("' .. lnStr .. varname .. ': " + ' .. varname .. ");"
-	elseif ft == "zsh" or ft == "bash" or ft == "fish" then
+	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
 		logStatement = 'echo "' .. lnStr .. varname .. ": $" .. varname .. '"'
 	elseif ft == "applescript" then
 		logStatement = 'log "' .. lnStr .. varname .. ': " & ' .. varname
 	else
 		vim.notify("Quicklog does not support " .. ft .. " yet.", logWarn)
+		return
 	end
 
 	append(".", logStatement)
