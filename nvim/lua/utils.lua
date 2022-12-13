@@ -39,7 +39,7 @@ function isGui()
 	return g.neovide or g.goneovim
 end
 
--- shell options for fn.jobstart()
+-- common shell options for fn.jobstart()
 shellOpts = {
 	stdout_buffered = true,
 	stderr_buffered = true,
@@ -47,12 +47,12 @@ shellOpts = {
 	on_stdout = function(_, data, _)
 		if not (data) or (data[1] == "" and #data == 1) then return end
 		local stdOut = table.concat(data, " \n "):gsub("%s*$", "")
-		vim.notify(stdOut, vim.log.levels.INFO)
+		vim.notify(stdOut)
 	end,
 	on_stderr = function(_, data, _)
 		if not (data) or (data[1] == "" and #data == 1) then return end
 		local stdErr = table.concat(data, " \n "):gsub("%s*$", "")
-		vim.notify(stdErr, vim.log.levels.WARN)
+		vim.notify(stdErr)
 	end,
 }
 
@@ -102,36 +102,4 @@ signIcons = {
 	Warn = "▲",
 	Info = "",
 	Hint = "",
-}
-
--- filetypes to be ignored by most plugins
-specialFiletypes = {
-	"help",
-	"startuptime",
-	"DiffviewFileHistory",
-	"qf",
-	"man",
-	"DressingSelect",
-	"DressingInput",
-	"lspinfo",
-	"AppleScriptRunOutput",
-	"netrw",
-	"packer",
-	"undotree",
-	"Mundo",
-	"MundoDiff",
-	"prompt",
-	"TelescopePrompt",
-	"toggleterm",
-	"noice",
-	"mason",
-	"ssr",
-	"cybu",
-	"",
-	"dap-repl",
-	"dui_console",
-	"dui_scopes",
-	"dui_breakpoints",
-	"dui_stacks",
-	"dui_watches",
 }

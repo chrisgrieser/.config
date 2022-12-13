@@ -641,8 +641,8 @@ time([[Defining lazy-load commands]], false)
 
 -- Keymap lazy-loads
 time([[Defining lazy-load keymaps]], true)
-vim.cmd [[xnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> : <cmd>lua require("packer.load")({'numb.nvim'}, { keys = ":", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[xnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> <D-j> <cmd>lua require("packer.load")({'vim-visual-multi'}, { keys = "<lt>D-j>", prefix = "" }, _G.packer_plugins)<cr>]]
 time([[Defining lazy-load keymaps]], false)
 

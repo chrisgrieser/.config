@@ -43,13 +43,13 @@ alias tree='command exa --tree -L4 --icons --git-ignore'
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 
 # Global Alias (to be used at the end, mostly)
-alias -s H="--help"
-alias -s G="| grep --ignore-case --color"
-alias -s B="| bat"
-alias -s C="| pbcopy ; echo 'Copied.'"
-alias -s J="| yq --prettyPrint --output-format=json --colors | less" # beautify in JSON
-alias -s L="| less"
-alias -s N="| wc -l | tr -d ' '"
+alias -g H="--help"
+alias -g G="| grep --ignore-case --color"
+alias -g B="| bat"
+alias -g C="| pbcopy ; echo 'Copied.'"
+alias -g J="| yq --prettyPrint --output-format=json --colors | less" # beautify in JSON
+alias -g L="| less"
+alias -g N="| wc -l | tr -d ' '"
 
 # highlights for them
 ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')

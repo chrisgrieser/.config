@@ -97,7 +97,7 @@ function M.PluginList(use)
 		"hrsh7th/cmp-buffer", -- completion sources
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
-		-- "dmitmel/cmp-cmdline-history",
+		"dmitmel/cmp-cmdline-history",
 		"hrsh7th/cmp-emoji",
 		myrepos .. "cmp-nerdfont",
 		"tamago324/cmp-zsh",
@@ -124,7 +124,7 @@ function M.PluginList(use)
 	-- File Switching & File Operation
 	use {"stevearc/dressing.nvim", requires = {
 		"hrsh7th/nvim-cmp",
-		"hrsh7th/cmp-omni",
+		"hrsh7th/cmp-omni", -- for autocompletion in input prompts
 	}}
 
 	use {myrepos .. "nvim-genghis",

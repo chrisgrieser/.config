@@ -33,7 +33,7 @@ require("telescope").setup {
 			"%.plist", -- Alfred Config Data
 			"%.string",
 		},
-		maps = {
+		mappings = {
 			i = maps,
 			n = maps,
 		},
@@ -57,12 +57,6 @@ require("telescope").setup {
 	},
 
 	pickers = {
-		jumplist = {
-			prompt_prefix = "ﴰ",
-			show_line = false,
-			trim_text = true,
-			fname_width = 30,
-		},
 		lsp_references = {
 			prompt_prefix = "⬅️",
 			show_line = false,

@@ -12,7 +12,7 @@ require("indent_blankline").setup {
 	show_current_context = true,
 	use_treesitter = true,
 	strict_tabs = false,
-	filetype_exclude = specialFiletypes,
+	filetype_exclude = {},
 }
 
 --------------------------------------------------------------------------------
@@ -21,7 +21,7 @@ require("scrollview").setup {
 	current_only = false,
 	winblend = 20,
 	column = 1,
-	excluded_filetypes = specialFiletypes,
+	excluded_filetypes = {},
 }
 
 --------------------------------------------------------------------------------
@@ -94,6 +94,11 @@ require("dressing").setup {
 		relative = "win",
 		insert_only = false,
 		win_options = {sidescrolloff = 0},
+		mappings = {
+			n = {
+				["q"] = "Close",
+			},
+		},
 	},
 	select = {
 		backend = {"builtin"}, -- Priority list of preferred vim.select implementations
@@ -105,6 +110,9 @@ require("dressing").setup {
 			min_width = 18,
 			max_height = 12,
 			min_height = 4,
+			mappings = {
+				["q"] = "Close",
+			},
 		},
 	},
 }
@@ -184,9 +192,11 @@ end
 
 local function mixedIndentation()
 	local ft = bo.filetype
-	if vim.tbl_contains(specialFiletypes, ft) or ft == "css" or ft == "markdown" then
-		return ""
-	end
+	local ignoredFts = {
+		"css",
+		"markdown",
+	}
+	if vim.tbl_contains(ignoredFts, ft) then return "" end
 
 	local hasTabs = fn.search("^\t", "nw") > 0
 	local hasSpaces = fn.search("^ ", "nw") > 0
@@ -195,9 +205,9 @@ local function mixedIndentation()
 	if (hasSpaces and hasTabs) or mixed then
 		return "  mixed"
 	elseif hasSpaces and not (bo.expandtab) then
-		return " et"
+		return "  et"
 	elseif hasTabs and bo.expandtab then
-		return " noet"
+		return "  noet"
 	end
 	return ""
 end
@@ -302,14 +312,16 @@ require("lualine").setup {
 	},
 	options = {
 		theme = "auto",
-		ignore_focus = specialFiletypes,
+		ignore_focus = {
+			"TelescopePrompt",
+		},
 		globalstatus = true,
 		component_separators = {left = "", right = ""},
 		section_separators = secSeparators,
 		extensions = {"nvim-dap-ui"},
 		disabled_filetypes = {
-			statusline = specialFiletypes,
-			-- winbar = specialFiletypes,
+			statusline = {},
+			winbar = {},
 		},
 	},
 }

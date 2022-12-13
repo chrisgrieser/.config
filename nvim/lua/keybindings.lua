@@ -102,8 +102,8 @@ keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
 
 require("yanky").setup {
-	ring = { history_length = 25},
-	highlight = { timer = 1500 },
+	ring = {history_length = 25},
+	highlight = {timer = 1500},
 }
 
 keymap({"n", "x"}, "p", "<Plug>(YankyPutAfter)")
@@ -541,7 +541,7 @@ keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end)
 
 -- Diffview
 keymap("n", "<D-g>", function()
-	vim.ui.input({prompt = "Search File History (empty = full history):"}, function(query)
+	vim.ui.input({prompt = "Git Pickaxe (empty = full history):"}, function(query)
 		if not (query) then return
 		elseif query == "" then cmd("DiffviewFileHistory %")
 		else cmd("DiffviewFileHistory % -G" .. query)
@@ -564,7 +564,8 @@ end)
 keymap("n", "<leader>g", function()
 	local prefill = b.prevCommitMsg or ""
 
-	vim.ui.input({prompt = "Commit Message:", default = prefill}, function(commitMsg)
+	-- uses dressing + cmp + omnifunc for autocompletion of filenames
+	vim.ui.input({prompt = "Commit Message:", default = prefill, completion = "file"}, function(commitMsg)
 		if not (commitMsg) then
 			return
 		elseif #commitMsg > 50 then
@@ -666,12 +667,16 @@ end)
 augroup("quickQuit", {})
 autocmd("FileType", {
 	group = "quickQuit",
-	pattern = specialFiletypes,
+	pattern = {
+		"help",
+		"startuptime",
+		"netrw",
+		"AppleScriptRunOutput",
+		"man",
+	},
 	callback = function()
 		local opts = {buffer = true, silent = true, nowait = true}
-		if bo.filetype == "TelescopePrompt" or bo.filetype == "ssr" then return end
 		keymap("n", "<Esc>", cmd.close, opts)
 		keymap("n", "q", cmd.close, opts)
-		keymap("n", "Q", cmd.close, opts)
 	end
 })

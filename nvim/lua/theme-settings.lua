@@ -2,8 +2,8 @@ require("utils")
 --------------------------------------------------------------------------------
 
 lightTheme = "melange"
--- local lightTheme = "dawnfox"
 darkTheme = "oxocarbon"
+-- local lightTheme = "dawnfox"
 -- local darkTheme = "nightfox"
 -- local darkTheme = "tokyonight-moon"
 
@@ -101,7 +101,7 @@ function setLightTheme()
 	g.neovide_transparency = 0.95
 end
 
--- automatically set dark or light mode on neovim startup (requires mac though)
+-- set dark or light mode on neovim startup (requires macos)
 local macOStheme = fn.system [[defaults read -g AppleInterfaceStyle]]:gsub("\n$", "")
 if macOStheme == "Dark" then
 	setDarkTheme()

@@ -205,16 +205,22 @@ cmp.setup.cmdline({"/", "?"}, {
 	}
 })
 
--- : via dressing
+cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{name = "path"},
+		{name = "cmdline"},
+	}, {-- second array only relevant when no source from the first matches
+		{name = "cmdline_history", keyword_length = 3},
+	})
+})
+
+--------------------------------------------------------------------------------
+
+-- Enable Completion in DressingInput
 cmp.setup.filetype("DressingInput", {
 	sources = cmp.config.sources { {name = "omni"} },
 })
-keymap("n", ":", function ()
-	vim.ui.input({ completion = "command", prompt = "Ex Command:"}, function (input)
-		if not(input) then return end
-		cmd(input)
-	end)
-end, {desc = ": cmdline replacement"})
 
 --------------------------------------------------------------------------------
 -- AUTOPAIRS
@@ -246,5 +252,5 @@ autocmd("BufRead", {
 -- ai.vim
 g.ai_no_mappings = true -- no default mappings
 require("private-settings") -- API key symlinked and kept out of the dotfile repo
-keymap({"n", "i"}, "ga", cmd.AI, {desc = "Run OpenAI Completion"})
+keymap("n", "ga", cmd.AI, {desc = "Run OpenAI Completion"})
 keymap("x", "ga", ":AI ", {desc = "Run OpenAI Completion with instruction on selection"})

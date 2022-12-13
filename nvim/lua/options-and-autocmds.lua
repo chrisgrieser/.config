@@ -139,7 +139,7 @@ ufo.setup {
 	fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 		-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
 		local newVirtText = {}
-		local suffix = foldIcon .." ".. tostring(endLnum - lnum)
+		local suffix = foldIcon .. " " .. tostring(endLnum - lnum)
 		local sufWidth = vim.fn.strdisplaywidth(suffix)
 		local targetWidth = width - sufWidth
 		local curWidth = 0
@@ -192,7 +192,15 @@ autocmd("BufWinLeave", {
 autocmd("BufWinEnter", {
 	group = "rememberCursorAndFolds",
 	pattern = "?*",
-	command = "silent! loadview | normal! zH" -- zH to also scroll to the left
+	callback = function()
+		local ignoredFts = {
+			"DressingSelect",
+			"cybu",
+		}
+		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
+		cmd [[silent! loadview]]
+		cmd.normal {"zH", bang = true} -- zH to also scroll to the left
+	end
 })
 
 --------------------------------------------------------------------------------

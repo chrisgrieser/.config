@@ -184,7 +184,8 @@ end
 
 --------------------------------------------------------------------------------
 -- UNDO
--- Save
+
+-- Save Open time
 augroup("undoTimeMarker", {})
 autocmd("BufReadPost", {
 	group = "undoTimeMarker",
@@ -195,14 +196,14 @@ autocmd("BufReadPost", {
 ---@param opts table
 function M.undoDuration(opts)
 	local now = os.time() -- saved in epoch secs
-	local secsPassed = now - b.timeOpened
-	local minsPassedStr = tostring(secsPassed / 60)
-	local resetLabel = "last save (" .. minsPassedStr .. "m ago)"
+	local minsPassed = math.floor(now - b.timeOpened / 60)
+
+	local resetLabel = "last open (~" .. tostring(minsPassed) .. "m ago)"
 	if not (opts) then opts = {selection = {resetLabel, "15m", "1h", "4h", "24h"}} end
 	vim.ui.select(opts.selection, {prompt = "Undo the last…"}, function(choice)
 		if not (choice) then return end
 		if choice:find("last save") then
-			cmd("earlier " .. secsPassed .. "s")
+			cmd("earlier " .. minsPassed .. "m")
 		else
 			cmd("earlier " .. choice)
 		end
@@ -220,7 +221,7 @@ function M.overscroll(action)
 		local curLine = lineNo(".")
 		local lastLine = lineNo("$")
 		if (lastLine - curLine) <= vim.wo.scrolloff then
-			cmd [[normal! zz]]
+			cmd.normal {"zz", bang = true}
 		end
 	end
 	cmd("normal! " .. tostring(vim.v.count1) .. action)
@@ -248,7 +249,6 @@ function M.pasteDifferently()
 		return
 	end
 
-	cmd.undo() -- undo previous paste
 	fn.setreg(reg, regContent, targetRegType)
 	cmd.normal {reg .. "p", bang = true}
 	if targetRegType == "V" then
@@ -300,7 +300,7 @@ function M.removeLog()
 		logCommand = "print"
 	elseif ft == "javascript" or ft == "typescript" then
 		logCommand = "console."
-	elseif ft == "zsh" or ft == "bash" or ft == "fish" then
+	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
 		vim.notify("Shell 'echo' cannot be removed since indistinguishable from other echos.", logWarn)
 	elseif ft == "applescript" then
 		logCommand = "log"
@@ -311,7 +311,7 @@ function M.removeLog()
 	cmd([[g/^\s*]] .. logCommand .. [[/d]])
 
 	vim.notify("Cleared " .. tostring(logsStatementsNum) .. " log statements.")
-	cmd("nohl")
+	cmd.nohlsearch()
 end
 
 --------------------------------------------------------------------------------
