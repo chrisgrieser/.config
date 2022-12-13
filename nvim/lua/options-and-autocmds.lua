@@ -192,7 +192,7 @@ autocmd("BufWinLeave", {
 autocmd("BufWinEnter", {
 	group = "rememberCursorAndFolds",
 	pattern = "?*",
-	command = "silent! loadview"
+	command = "silent! loadview | normal! zH" -- zH to also scroll to the left
 })
 
 --------------------------------------------------------------------------------

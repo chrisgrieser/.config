@@ -97,9 +97,8 @@ function M.PluginList(use)
 		"hrsh7th/cmp-buffer", -- completion sources
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
-		"dmitmel/cmp-cmdline-history",
+		-- "dmitmel/cmp-cmdline-history",
 		"hrsh7th/cmp-emoji",
-		"hrsh7th/cmp-omni",
 		myrepos .. "cmp-nerdfont",
 		"tamago324/cmp-zsh",
 		"ray-x/cmp-treesitter",
@@ -117,13 +116,17 @@ function M.PluginList(use)
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use "nvim-lualine/lualine.nvim" -- status line
 	use "lewis6991/gitsigns.nvim" -- gutter signs
-	use "stevearc/dressing.nvim" -- Selection Menus and Inputs
 	use "rcarriga/nvim-notify" -- notifications
 	use "uga-rosa/ccc.nvim" -- color previews & color utilities
 	use "dstein64/nvim-scrollview" -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
 	use {"anuvyklack/windows.nvim", requires = "anuvyklack/middleclass"} -- auto-resize splits
 
 	-- File Switching & File Operation
+	use {"stevearc/dressing.nvim", requires = {
+		"hrsh7th/nvim-cmp",
+		"hrsh7th/cmp-omni",
+	}}
+
 	use {myrepos .. "nvim-genghis",
 		module = "genghis",
 		requires = "stevearc/dressing.nvim",
