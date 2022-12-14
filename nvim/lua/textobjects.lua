@@ -109,13 +109,29 @@ miniaiConfig.custom_textobjects.e = function()
 end
 
 -- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt#L215
-miniaiConfig.custom_textobjects.v = {"[=:] ?()().-()[;,]?()\n"}
+augroup("value-textobj", {})
+autocmd("FileType", {
+	group = "value-textobj",
+	callback = function()
+		-- this way, comments for various filetypes are excluded from the value-textobj
+		local comStr = bo.commentstring
+			:gsub("%%s.*", "")-- remove replaceholder and back side of comment
+			:gsub("(.)", "%1?") -- make all letters of the comment optional
+		local pattern = "[=:] ?()().-()[;,]?() ?" .. comStr .. "[][-_(){}/ %w]*\n"
+		b.miniai_config = {
+			custom_textobjects = {
+				v = {pattern}
+			}
+		}
+	end
+})
+
 require("mini.ai").setup(miniaiConfig)
 
 --------------------------------------------------------------------------------
 -- SURROUND
 -- need to be consistent with treesitter
-local functionObjChar = "f"
+local functionObjChar = "f" -- test
 local conditionObjChar = "o"
 local callObjChar = "l"
 

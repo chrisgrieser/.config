@@ -279,6 +279,8 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 -- VISUAL MODE
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
 keymap("x", "v", "<C-v>") -- `vv` from normal mode = visual block mode
+keymap("x", "u", "<Esc>u") -- actually undo/redo in visual mode
+keymap("x", "U", "<Esc><C-r>")
 
 --------------------------------------------------------------------------------
 -- WINDOWS & SPLITS
@@ -373,34 +375,6 @@ keymap("n", "gb", function()
 		vim.notify("Only one buffer open.")
 	end
 end)
-
-require("cybu").setup {
-	display_time = 1000,
-	position = {
-		anchor = "bottomcenter",
-		max_win_height = 12,
-		vertical_offset = 3,
-	},
-	style = {
-		border = borderStyle,
-		padding = 7,
-		path = "tail",
-		hide_buffer_id = true,
-		highlights = {
-			current_buffer = "CursorLine",
-			adjacent_buffers = "Normal",
-		},
-	},
-	behavior = {
-		mode = {
-			default = {
-				switch = "immediate",
-				view = "paging",
-			},
-		},
-	},
-	exclude = {},
-}
 
 --------------------------------------------------------------------------------
 -- FILES
