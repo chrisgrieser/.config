@@ -45,7 +45,7 @@ const recentItemsMap = recentItems
 	.slice(start, end)
 	.filter(item => !item.name.includes("“"));
 
-const recentAll = [...recentItemsMap, ...recentFolders]
+const recentAll = [...recentFolders, ...recentItemsMap]
 	.map(item => {
 		let revealID = item.id;
 		let iconPath = "folder.png";

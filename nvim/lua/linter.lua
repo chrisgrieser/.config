@@ -18,22 +18,27 @@ local lintersAndFormatters = {
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
 
-local codeSpellIgnoreFile = dotfilesFolder .. "/codespell/codespell-ignore.txt"
-
 --------------------------------------------------------------------------------
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
+
 null_ls.setup {
 	sources = {
 		-- Global
 		builtins.code_actions.gitsigns, -- gitsigns.nvim plugin, e.g. reset hunks
 		builtins.diagnostics.codespell.with {-- common misspellings. Far less false positives than with cspell
 			disabled_filetypes = {"css"}, -- base64-encoded fonts cause a lot of errors
-			args = {"--ignore-words", codeSpellIgnoreFile, "-"}
+			args = {
+				"--ignore-words", dotfilesFolder .. "/codespell/codespell-ignore.txt",
+				-- can't use `--skip`, since it null-ls reads from stdin and not a file
+				"-",
+			}
 		},
 		builtins.formatting.codespell.with {-- autofix those misspellings
 			disabled_filetypes = {"css"},
-			extra_args = {"--ignore-words", codeSpellIgnoreFile}
+			extra_args = {
+				"--ignore-words", dotfilesFolder .. "/codespell/codespell-ignore.txt",
+			}
 		},
 
 		-- SHELL
