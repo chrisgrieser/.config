@@ -123,7 +123,7 @@ end):start()
 
 --------------------------------------------------------------------------------
 -- SYSTEM WAKE/START
-local function officeWake(eventType)
+local function deviceWake(eventType)
 	if eventType == caff.screensDidUnlock then
 		syncAllGitRepos("full")
 		officeModeLayout()
@@ -145,6 +145,9 @@ local function homeWake(eventType)
 	end)
 end
 
+wakeWatcher = caff.new(function ()
+	
+end):start()
 if isIMacAtHome() or isAtMother() then
 	wakeWatcher = caff.new(homeWake):start()
 elseif isAtOffice() then
