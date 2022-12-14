@@ -415,7 +415,7 @@ keymap("n", "<leader>G", function()
 	require("gitlinker").get_buf_range_url("n", {action_callback = require("gitlinker.actions").open_in_browser})
 end)
 
-keymap("x", "<leader>G", function()
+keymap("v", "<leader>G", function() -- this seems to not work with xmap, requires vmap
 	require("gitlinker").get_buf_range_url("v", {action_callback = require("gitlinker.actions").copy_to_clipboard})
 	require("gitlinker").get_buf_range_url("v", {action_callback = require("gitlinker.actions").open_in_browser})
 end)
@@ -438,13 +438,6 @@ keymap("n", "<leader>g", function()
 
 		vim.notify("ﴻ add-commit-push…")
 		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
-
-		local issueNr = commitMsg:match("#(%d+)")
-		if issueNr then
-			local repo = fn.system [[git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//']]
-			local url = repo:gsub("\n", "") .. "/issues/" .. issueNr
-			os.execute("open '" .. url .. "'")
-		end
 	end)
 
 end)

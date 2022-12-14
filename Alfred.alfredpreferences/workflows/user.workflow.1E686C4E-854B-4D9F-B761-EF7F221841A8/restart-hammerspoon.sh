@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-if pgrep -x "Hammerspoon" > /dev/null; then
-	killall "Hammerspoon"
-	sleep 1
-fi
-
+killall "Hammerspoon"
+while pgrep -q "Hammerspoon"; do sleep 0.1 ; done
 open -a "Hammerspoon"

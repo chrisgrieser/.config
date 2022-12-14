@@ -66,7 +66,7 @@ end):start()
 
 -- Redirects FROM File Hub
 local browserSettings = dotfilesFolder .. "/browser-extension-configs/"
-local function fromFileHub(paths)
+fileHubWatcher = pw(fileHub, function(paths)
 	for _, file in pairs(paths) do
 		local function isInSubdirectory(f, folder) -- (instead of directly in the folder)
 			local _, fileSlashes = f:gsub("/", "")
@@ -116,9 +116,7 @@ local function fromFileHub(paths)
 
 		end
 	end
-end
-
-fileHubWatcher = pw(fileHub, fromFileHub):start()
+end):start()
 
 --------------------------------------------------------------------------------
 -- auto-install Obsidian Alpha builds as soon as the file is downloaded
@@ -130,12 +128,12 @@ obsiAlphaWatcher = pw(fileHub, function(files)
 			hs.execute(
 				[[cd "]] .. fileHub .. [[" || exit 1
 				test -f obsidian-*.*.*.asar.gz || exit 1
-				killall "Obsidian" && obsiWasRunning=1
+				killall Obsidian
 				mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"
 				cd "$HOME/Library/Application Support/obsidian/"
 				rm obsidian-*.*.*.asar
 				gunzip obsidian-*.*.*.asar.gz
-				test -n $obsiWasRunning -eq 1 && sleep 1
+				while pgrep -q "Obsidian" ; do sleep 0.1; done
 				open -a "Obsidian"]]
 			)
 			-- close the created tab
