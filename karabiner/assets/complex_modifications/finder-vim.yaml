@@ -1,7 +1,7 @@
 title: "Finder Vim Controls"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 maintainers: [pseudometa (chrisgrieser)]
-version: [1.0.3]
+version: [1.0.4]
 anchors:
   - conditions:
       - &finder-app
@@ -512,7 +512,14 @@ rules:
                   tell value of attribute "AXFocusedUIElement" to perform action "AXShowMenu"
                 end tell'
           - *start-context-menu
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
+      # close context menu with another q
+      - type: basic
+        from: {key_code: q}
+        to_if_alone:
+          - key_code: escape
+          - *end-context-menu
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *context-menu-open]
       # changed navigation in context menu
       - type: basic
         from: {key_code: l}

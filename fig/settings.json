@@ -1,7 +1,7 @@
 {
   "ai.terminal-hash-sub": false,
   "app.disableAutolaunch": false,
-  "app.hideMenubarIcon": true,
+  "app.hideMenubarIcon": false,
   "app.launchOnStartup": true,
   "app.preferredTerminal": "Alacritty",
   "autocomplete.firstTokenCompletion": false,
