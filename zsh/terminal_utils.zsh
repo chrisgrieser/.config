@@ -60,10 +60,10 @@ function d () {
 		ALL_FILES=($(find . -not -name ".*"))
 		unset IFS
 	else
-		ALL_FILES=( "$@" ) # save as array
+		ALL_FILES=( "$@" ) # save files as array
 	fi
-	for ARG in "${ALL_FILES[@]}"; do
-		mv "$ARG" ~/.Trash
+	for item in "${ALL_FILES[@]}"; do
+		mv -fv "$item" "$HOME/.Trash"
 	done
 }
 

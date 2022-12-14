@@ -175,7 +175,7 @@ opt.foldenable = true
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 
--- if not using ufo for folding
+-- if not using UFO for folding
 -- opt.foldexpr = "nvim_treesitter#foldexpr()" -- if treesitter folding is used via expr below
 -- opt.foldmethod = "expr"
 -- opt.foldmethod = "indent"
