@@ -37,16 +37,20 @@ nmap k gk
 nmap <C-e> A
 vmap <C-e> <Esc>A
 
-" HJKL behaves like hjkl, but bigger distance 
+" HJKL behaves like hjkl, but bigger distance
 map H g0
 map L g$
 map J 6j
 map K 6k
 
+" Spelling
 " Emulate `z=` (and bind it zo `zl` because more convenient; mnemonic: [z]pelling list)
 exmap contextMenu obcommand editor:context-menu
 nmap zl :contextMenu
-vmap zl :contextMenu
+
+" Synonyms
+exmap synonymSuggestion obcommand obsidian-wordy:wordy-syn
+nmap zs :synonymSuggestion
 
 " done via Obsdian Hotkeys, so they also work in Preview Mode
 " nmap <C-h> :back
@@ -268,4 +272,3 @@ map ,on :number
 map ,os :spellcheck
 " [O]ption: line [w]rap
 map ,ow :readableLineLength
-
