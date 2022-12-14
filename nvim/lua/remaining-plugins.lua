@@ -34,3 +34,34 @@ require("presence"):setup {
 	blacklist = {}, -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
 	show_time = false,
 }
+
+--------------------------------------------------------------------------------
+
+-- Cycle Buffer
+require("cybu").setup {
+	display_time = 1000,
+	position = {
+		anchor = "bottomcenter",
+		max_win_height = 12,
+		vertical_offset = 3,
+	},
+	style = {
+		border = borderStyle,
+		padding = 7,
+		path = "tail",
+		hide_buffer_id = true,
+		highlights = {
+			current_buffer = "CursorLine",
+			adjacent_buffers = "Normal",
+		},
+	},
+	behavior = {
+		mode = {
+			default = {
+				switch = "immediate",
+				view = "paging",
+			},
+		},
+	},
+	exclude = {},
+}
