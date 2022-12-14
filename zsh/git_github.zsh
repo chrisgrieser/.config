@@ -5,30 +5,30 @@
 alias gl="git log --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; true"
 
 # git log (interactive)
-function gli (){
+function gli() {
 	local hash key_pressed selected
-
-	selected=$(git log --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' | \
-		fzf -0 \
-		--query="$1" \
-		--ansi \
-		--nth=2.. \
-		--with-nth=2.. \
-		--no-sort \
-		--no-info \
-		--header-first --header="↵ : checkout  ^H: copy [h]ash  ^R: reset" \
-		--expect=ctrl-h \
-		--preview-window="wrap" \
-		--preview="git show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"\
+	selected=$(
+		git log --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' |
+			fzf -0 \
+				--query="$1" \
+				--ansi \
+				--nth=2.. \
+				--with-nth=2.. \
+				--no-sort \
+				--no-info \
+				--header-first --header="↵ : checkout  ^H: copy [h]ash  ^R: reset" \
+				--expect=ctrl-h \
+				--preview-window="wrap" \
+				--preview="git show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
 	hash=$(echo "$selected" | cut -d' ' -f1 | tail -n+2)
 
-	if [[ "$key_pressed" == "ctrl-h" ]] ; then
+	if [[ "$key_pressed" == "ctrl-h" ]]; then
 		echo "$hash" | pbcopy
 		echo "$hash copied."
-	elif [[ "$key_pressed" == "ctrl-r" ]] ; then
+	elif [[ "$key_pressed" == "ctrl-r" ]]; then
 		git reset "$hash"
 	else
 		git checkout "$hash"
@@ -38,7 +38,7 @@ function gli (){
 #───────────────────────────────────────────────────────────────────────────────
 
 # git add, commit, (pull) & push
-function acp (){
+function acp() {
 	# safeguard against accidental pushing of large files
 	NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -not -path "**/coc/extensions/**" -size +10M | wc -l | xargs)
 	if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
@@ -54,11 +54,11 @@ function acp (){
 		echo "Commit Message too long ($MSG_LENGTH chars)."
 		[[ "$TERM" != "alacritty" ]] && return 1
 		# shellcheck disable=SC1087,SC2154
-		FUNC_NAME="$funcstack[1]" # https://stackoverflow.com/a/62527825
+		FUNC_NAME="$funcstack[1]"             # https://stackoverflow.com/a/62527825
 		print -z "$FUNC_NAME \"$COMMIT_MSG\"" # put back into buffer
 		return 1
 	fi
-	if [[ "$COMMIT_MSG" == "" ]] ; then
+	if [[ "$COMMIT_MSG" == "" ]]; then
 		COMMIT_MSG="patch"
 	fi
 
@@ -73,7 +73,7 @@ function acp (){
 	fi
 }
 
-function amend () {
+function amend() {
 	local COMMIT_MSG="$*"
 	local LAST_COMMIT_MSG
 	LAST_COMMIT_MSG=$(git log -1 --pretty=%B | head -n1)
@@ -84,7 +84,7 @@ function amend () {
 		print -z "\"$COMMIT_MSG\""
 		return 1
 	fi
-	if [[ -z "$COMMIT_MSG" ]] ; then
+	if [[ -z "$COMMIT_MSG" ]]; then
 		# prefile last commit message
 		# shellcheck disable=1087
 		FUNC_NAME="$funcstack[1]" # https://stackoverflow.com/a/62527825
@@ -100,25 +100,24 @@ function amend () {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function gittree(){ (
+function gittree() { (
 	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
 	command exa --long --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git --tree --color=always | grep -v "\--"
-) }
+); }
 
 alias gc="git checkout"
 alias gs='git status'
+alias gd='git diff'
 alias gt='gittree'
 alias add="git add"
 alias commit="git commit -m"
 alias push="git push"
 alias pull="git pull"
-alias ignored="git status --ignored"
 
 # go to git root https://stackoverflow.com/a/38843585
 # shellcheck disable=2031
 alias g='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
 alias gg="git checkout -" # go to last branch, analogues to `zz` switching to last directory
-
 
 # open GitHub repo
 function getGithubURL() {
@@ -129,28 +128,28 @@ alias ghi='open "$(getGithubURL)/issues"'
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function clone(){
+function clone() {
 	betterClone "$*" "normal"
 }
 
-function sclone(){ # shallow clone
+function sclone() { # shallow clone
 	betterClone "$*" "shallow"
 }
 
 function betterClone() {
-	if	[[ "$1" =~ "http" ]] ; then # safety net to not accidentally use https
-		giturl="git@github.com:$(echo "$1" | sed 's/https:\/\/github.com\///' | sed 's/.git.git/.git/' )"
+	if [[ "$1" =~ "http" ]]; then # safety net to not accidentally use https
+		giturl="git@github.com:$(echo "$1" | sed 's/https:\/\/github.com\///' | sed 's/.git.git/.git/')"
 	else
 		giturl="$1"
 	fi
-	if [[ "$2" == "shallow" ]] ; then
+	if [[ "$2" == "shallow" ]]; then
 		git clone --depth=1 "$giturl"
 	else
 		git clone "$giturl"
 	fi
 	# shellcheck disable=SC2012
 	cd "$(ls -1 -t | head -n1)" || return
-	if grep -q "obsidian" package.json &> /dev/null; then
+	if grep -q "obsidian" package.json &>/dev/null; then
 		npm i # if it's an Obsidian plugin
 	fi
 }
@@ -176,17 +175,17 @@ function nuke {
 #───────────────────────────────────────────────────────────────────────────────
 
 # runs a release scripts placed at the git root
-function rel(){
+function rel() {
 	# shellcheck disable=SC2164
-	if [[ -f .release.sh ]] ; then
+	if [[ -f .release.sh ]]; then
 		zsh .release.sh "$*"
-	elif [[ -f ../.release.sh ]] ; then
+	elif [[ -f ../.release.sh ]]; then
 		cd ..
 		zsh .release.sh "$*"
-	elif [[ -f ../../.release.sh ]] ; then
+	elif [[ -f ../../.release.sh ]]; then
 		cd ../..
 		zsh .release.sh "$*"
-	elif [[ -f ../../../.release.sh ]] ; then
+	elif [[ -f ../../../.release.sh ]]; then
 		cd ../../..
 		zsh .release.sh "$*"
 	else
@@ -202,13 +201,13 @@ function gdf() {
 	# alternative method: `git rev-list -n 1 HEAD -- "**/*$1*"` to get the commit
 	# of a deleted file
 	deleted_path=$(git log --diff-filter=D --summary | grep delete | grep -i "$*" | cut -d" " -f5-)
-	if [[ $(echo "$deleted_path" | wc -l) -gt 1 ]] ; then
+	if [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
 		echo "🔍 multiple files found: "
 		echo "$deleted_path"
 		echo
 		echo "ℹ️ narrow down query so only one file is selected."
 		return 0
-	elif [[ -z "$deleted_path" ]] ; then
+	elif [[ -z "$deleted_path" ]]; then
 		echo "🔍 no deleted file found"
 		return 1
 	fi
@@ -221,9 +220,9 @@ function gdf() {
 	echo "c: checkout file, o: open file"
 	read -r -k 1 DECISION
 	# shellcheck disable=SC2193
-	if [[ "$DECISION:l" == "c" ]] ; then
+	if [[ "$DECISION:l" == "c" ]]; then
 		git checkout "$last_commit" -- "$deleted_path"
-	elif [[ "$DECISION:l" == "o" ]] ; then
+	elif [[ "$DECISION:l" == "o" ]]; then
 		git show "$last_commit:$deleted_path" | less
 	fi
 }
