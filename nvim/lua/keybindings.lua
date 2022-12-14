@@ -173,7 +173,7 @@ keymap("o", "r", "}") -- [r]est of the paragraph
 -- aw: word
 
 --------------------------------------------------------------------------------
--- Text Object definitions
+-- Text Object Config
 
 keymap("n", "C", '"_C')
 keymap("n", "<Space>", '"_ciw') -- change word

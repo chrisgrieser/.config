@@ -123,36 +123,24 @@ end):start()
 
 --------------------------------------------------------------------------------
 -- SYSTEM WAKE/START
-local function deviceWake(eventType)
-	if eventType == caff.screensDidUnlock then
+wakeWatcher = caff.new(function(eventType)
+	if isAtOffice() and eventType == caff.screensDidUnlock then
 		syncAllGitRepos("full")
 		officeModeLayout()
+	elseif not (isAtOffice()) and (eventType == caff.screensDidWake or eventType == caff.systemDidWake) then
+		runWithDelays(1, function()
+			if isProjector() then
+				setDarkmode(true)
+				movieModeLayout()
+			else
+				syncAllGitRepos("full")
+				local toDark = betweenTime(7, 19)
+				homeModeLayout() -- should run after git sync, to avoid conflicts
+				setDarkmode(toDark)
+			end
+		end)
 	end
-end
-
-local function homeWake(eventType)
-	if not (eventType == caff.screensDidWake or eventType == caff.systemDidWake) then return end
-	runWithDelays(1, function()
-		if isProjector() then
-			setDarkmode(true)
-			movieModeLayout()
-		else
-			syncAllGitRepos("full")
-			local toDark = betweenTime(7, 19) and false or true
-			homeModeLayout() -- should run after git sync, to avoid conflicts
-			setDarkmode(toDark)
-		end
-	end)
-end
-
-wakeWatcher = caff.new(function ()
-	
 end):start()
-if isIMacAtHome() or isAtMother() then
-	wakeWatcher = caff.new(homeWake):start()
-elseif isAtOffice() then
-	wakeWatcher = caff.new(officeWake):start()
-end
 
 function systemStart()
 	-- prevent commit spam when updating hammerspoon config regularly

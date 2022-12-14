@@ -46,6 +46,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5C836582-0C65-4EA0-A73C-96CAFA8EF06E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C6A760AA-7CD2-49A2-BCF8-896E4A94BE79</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>8DF09D83-DE5C-452E-8828-081440C474C1</key>
 		<array>
 			<dict>
@@ -137,6 +150,48 @@
 	<string>Regex Helpers</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>rg</string>
+				<key>subtext</key>
+				<string>Regex Match Generator</string>
+				<key>text</key>
+				<string>Grex</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>5C836582-0C65-4EA0-A73C-96CAFA8EF06E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://pemistahl.github.io/grex-js/</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>C6A760AA-7CD2-49A2-BCF8-896E4A94BE79</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -340,27 +395,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://sed.js.org/</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>1C6AF733-2996-43F9-9B7E-10619617C92D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -379,6 +413,27 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://sed.js.org/</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>1C6AF733-2996-43F9-9B7E-10619617C92D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -391,14 +446,14 @@
 			<key>xpos</key>
 			<real>290</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>285</real>
 		</dict>
 		<key>1C6AF733-2996-43F9-9B7E-10619617C92D</key>
 		<dict>
 			<key>xpos</key>
 			<real>290</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>420</real>
 		</dict>
 		<key>356A558A-9F47-4BC6-A163-1B181A26172F</key>
 		<dict>
@@ -416,7 +471,16 @@
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>170</real>
+		</dict>
+		<key>5C836582-0C65-4EA0-A73C-96CAFA8EF06E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>8DF09D83-DE5C-452E-8828-081440C474C1</key>
 		<dict>
@@ -434,14 +498,23 @@
 			<key>xpos</key>
 			<real>460</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>155</real>
+		</dict>
+		<key>C6A760AA-7CD2-49A2-BCF8-896E4A94BE79</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>290</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>CF556896-A43C-464A-8E0B-35233C55CCE8</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>420</real>
 		</dict>
 		<key>D357791A-7C1A-45F4-9FE6-210C217ADDD5</key>
 		<dict>
@@ -450,7 +523,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>150</real>
 		</dict>
 		<key>E12B7653-FF5A-4098-94BF-9D5AADB84EA9</key>
 		<dict>
@@ -461,7 +534,7 @@
 			<key>xpos</key>
 			<real>630</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>155</real>
 		</dict>
 		<key>E23B3A58-D13E-4884-BF4B-388B51EC21C6</key>
 		<dict>
@@ -470,7 +543,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>285</real>
 		</dict>
 		<key>FCB360D0-4069-4209-AA65-9223BAF14BF1</key>
 		<dict>
@@ -479,7 +552,7 @@
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>210</real>
+			<real>220</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -61,7 +61,7 @@ require("nvim-surround").setup {
 			find = function()
 				return require("nvim-surround.config").get_selection {motion = "a" .. callObjChar}
 			end,
-			delete = "^([^=%s]+%()().-(%))()$",
+			delete = "^([^=%s]-% ?()().-(%))()$",
 		},
 		[conditionObjChar] = {
 			find = function()
