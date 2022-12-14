@@ -14,6 +14,7 @@ else
 	require("terminal-only")
 end
 require("keybindings")
+require("textobjects")
 require("user-commands")
 require("automating-nvim")
 require("appearance")
@@ -23,7 +24,6 @@ require("completion")
 require("linter")
 require("debugger")
 
-require("surround-config")
 require("comment-config")
 require("telescope-config")
 require("treesitter-config")

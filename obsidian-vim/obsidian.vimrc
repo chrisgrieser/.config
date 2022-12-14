@@ -77,9 +77,11 @@ vmap gs :gotoHeading
 exmap followLinkUnderCursor obcommand editor:follow-link
 exmap followLinkInNewTab obcommand editor:open-link-in-new-leaf
 nmap gx :followLinkUnderCursor
+nmap gf :followLinkUnderCursor
+nmap gF :followLinkInNewTab
 vmap gx :followLinkUnderCursor
-nmap gX :followLinkInNewTab
-vmap gX :followLinkInNewTab
+vmap gf :followLinkUnderCursor
+vmap gF :followLinkInNewTab
 
 " [g]oto [o]pen file (= Quick Switcher)
 exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_recent-search

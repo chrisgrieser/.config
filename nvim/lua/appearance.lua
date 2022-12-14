@@ -131,7 +131,13 @@ require("windows").setup {
 		enable = true,
 		winwidth = 0.7, -- active window gets 70% of total width
 	},
-	ignore = {filetype = {"Mundo", "MundoDiff", "netrw"}}
+	ignore = {
+		filetype = {
+			"Mundo",
+			"MundoDiff",
+			"netrw",
+		}
+	}
 }
 
 --------------------------------------------------------------------------------
@@ -314,14 +320,21 @@ require("lualine").setup {
 		theme = "auto",
 		ignore_focus = {
 			"TelescopePrompt",
+			"DressingInput",
+			"Mason",
+			"packer",
+			"ccc-ui",
 		},
 		globalstatus = true,
 		component_separators = {left = "", right = ""},
 		section_separators = secSeparators,
 		extensions = {"nvim-dap-ui"},
 		disabled_filetypes = {
-			statusline = {},
-			winbar = {},
+			statusline = {
+				"ccc-ui",
+			},
+			winbar = {
+			},
 		},
 	},
 }

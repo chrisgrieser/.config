@@ -130,119 +130,6 @@ autocmd("TextYankPost", {
 })
 
 --------------------------------------------------------------------------------
--- TEXTOBJECTS
-
--- LIST
--- af -> a [f]unction (treesitter)
--- ao -> a c[o]ndition (treesitter)
--- q -> comment (mnemonic: [q]uiet text) (treesitter)
--- Q -> consecutive (big) comment (comments.nvim)
--- aa -> an [a]rgument (treesitter)
--- al -> a cal[l] (treesitter)
--- ah -> a [h]unk (gitsigns)
--- ai -> an [i]ndentation (indent-textobj)
--- ad -> a [d]iagnostic (diagnostic-textobj)
--- ae -> almost to the [e]nding of line (mini.ai)
--- av -> a [v]alue / right-hand-side of key-value pair or variable assignment (mini.ai)
--- aL -> a [L]oop (treesitter)
-
--- FILE-TYPE-SPECIFIC TEXT OBJECTS
--- al: a [l]ink (markdown)
--- as: a [s]elector (css)
-
-keymap({"o", "x"}, "iq", 'i"') -- [q]uote
-keymap({"o", "x"}, "aq", 'a"')
-keymap({"o", "x"}, "iz", "i'") -- [z]ingle quote
-keymap({"o", "x"}, "az", "a'")
-keymap({"o", "x"}, "at", "a`") -- [t]emplate-string
-keymap({"o", "x"}, "it", "i`")
-keymap({"o", "x"}, "ir", "i]") -- [r]ectangular brackets
-keymap({"o", "x"}, "ar", "a]")
-keymap({"o", "x"}, "ic", "i}") -- [c]urly brackets
-keymap({"o", "x"}, "ac", "a}")
-keymap({"o", "x"}, "am", "aW") -- [m]assive word
-keymap({"o", "x"}, "im", "iW")
-keymap("o", "an", "gn") -- [n]ext search result
-keymap("o", "in", "gn")
-keymap("o", "r", "}") -- [r]est of the paragraph
-
--- BUILT-IN ONES KEPT
--- ab: bracket
--- as: sentence
--- ap: paragraph
--- aw: word
-
---------------------------------------------------------------------------------
--- Text Object Config
-
-keymap("n", "C", '"_C')
-keymap("n", "<Space>", '"_ciw') -- change word
-keymap("n", "<C-M-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
-keymap("x", "<Space>", '"_c')
-
--- change-subword ( = word excluding _ and - as word-parts)
-keymap("n", "c<Space>", function()
-	opt.iskeyword:remove {"_", "-"}
-	cmd [[normal! "_diw]]
-	cmd [[startinsert]] -- :normal does not allow to end in insert mode
-	opt.iskeyword:append {"_", "-"}
-end)
-
--- special plugin text objects
-keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>")
-keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>")
-
--- map ai to aI in languages where aI is not used anyway
-augroup("indentobject", {})
-autocmd("FileType", {
-	group = "indentobject",
-	callback = function()
-		local ft = bo.filetype
-		if not (ft == "yaml" or ft == "python" or ft == "markdown") then
-			keymap({"x", "o"}, "ai", "aI", {remap = true, buffer = true})
-		end
-	end
-})
-
--- textobj-[d]iagnostic
-keymap({"x", "o"}, "id", function() require("textobj-diagnostic").nearest_diag() end)
-keymap({"x", "o"}, "ad", function() require("textobj-diagnostic").nearest_diag() end)
-
--- disable text-objects from mini.ai in favor of my own
-local miniaiConfig = {
-	n_lines = 15, -- number of lines within which to search textobj
-	custom_textobjects = {
-		b = false,
-		q = false,
-		t = false,
-		f = false,
-		a = false,
-	},
-	mappings = {
-		around_next = "",
-		inside_next = "",
-		around_last = "",
-		inside_last = "",
-		goto_left = "",
-		goto_right = "",
-	},
-}
-
--- custom text object "e": from cursor to [e]end of line minus 1 char
-miniaiConfig.custom_textobjects.e = function()
-	local row = fn.line(".")
-	local col = fn.col(".")
-	local eol = fn.col("$") - 1
-	local from = {line = row, col = col}
-	local to = {line = row, col = eol - 1}
-	return {from = from, to = to}
-end
-
--- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt#L215
-miniaiConfig.custom_textobjects.v = {"[=:] ?()().-()[;,]?()\n"}
-require("mini.ai").setup(miniaiConfig)
-
---------------------------------------------------------------------------------
 
 -- MACROS
 local recorder = require("recorder")
@@ -455,8 +342,7 @@ end
 
 -- BUFFERS
 local function betterAltBuf() -- switch to alternate-file
-	local noAltFile = fn.expand("#") == ""
-	if noAltFile then
+	if fn.expand("#") == "" then
 		vim.notify("No alternate file.", logWarn)
 	else
 		cmd.nohlsearch()
@@ -513,7 +399,7 @@ require("cybu").setup {
 			},
 		},
 	},
-	exclude = specialFiletypes,
+	exclude = {},
 }
 
 --------------------------------------------------------------------------------
@@ -523,7 +409,7 @@ require("cybu").setup {
 keymap("n", "go", telescope.find_files) -- [o]pen file in parent-directory
 keymap("n", "gO", telescope.git_files) -- [o]pen file in git directory
 keymap("n", "gr", telescope.oldfiles) -- [r]ecent files
-keymap("n", "gf", telescope.live_grep) -- search in [f]iles
+keymap("n", "gF", telescope.live_grep) -- search in [f]iles
 keymap("n", "gR", telescope.resume) -- resume last search
 
 -- File Operations (no shorthand for lazy-loading)

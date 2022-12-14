@@ -173,6 +173,10 @@ matches:
     replace: die
     word: true
     propagate_case: true
+  - trigger: aj
+    replace: ja
+    word: true
+    propagate_case: true
   - trigger: btu
     replace: but
     word: true

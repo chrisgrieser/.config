@@ -3,6 +3,10 @@ local ccc = require("ccc")
 --------------------------------------------------------------------------------
 opt.termguicolors = true -- required for color previewing, but also messes up look in the terminal
 
+keymap("n", "#", ":CccPick<CR>")
+keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
+keymap("i", "<C-#>", "<Plug>(ccc-insert)")
+
 ccc.setup {
 	win_opts = {border = borderStyle},
 	highlighter = {
@@ -33,7 +37,3 @@ ccc.setup {
 		H = ccc.mapping.decrease5,
 	},
 }
-
-keymap("n", "#", ":CccPick<CR>")
-keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
-keymap("i", "<C-#>", "<Plug>(ccc-insert)")

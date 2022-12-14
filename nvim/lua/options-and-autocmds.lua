@@ -35,6 +35,8 @@ opt.shiftwidth = 3
 opt.shiftround = true
 opt.smartindent = true
 opt.list = true
+
+-- modifying behavior of some keymaps
 opt.virtualedit = "block" -- select whitespace for proper rectangles in visual block mode
 
 -- invisible chars
