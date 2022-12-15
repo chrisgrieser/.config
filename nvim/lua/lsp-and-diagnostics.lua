@@ -163,7 +163,7 @@ autocmd("LspAttach", {
 					cmd.update {bang = true}
 					cmd.EslintFixAll() -- eslint-lsp
 				elseif bo.filetype == "applescript" then
-					cmd.mkview {bang = true} 
+					cmd.mkview {bang = true}
 					cmd [[%normal!gg=G]] -- poor man's formatting…
 					vim.lsp.buf.format {async = false} -- null-ls-codespell
 					cmd.loadview()

@@ -161,28 +161,18 @@ cmp.setup.filetype("css", {
 
 -- markdown
 local markdownSources = copyTable(defaultSources)
+table.remove(markdownSources, 3) -- no tabnine, since mostly suggesting useless words
 table.insert(markdownSources, 1, path) -- for markdown images
 cmp.setup.filetype("markdown", {
-	sources = cmp.config.sources {
-		{name = "path"},
-		{name = "luasnip"},
-		{name = "nvim_lsp"},
-		{name = "emoji", keyword_length = 2},
-		{name = "buffer", keyword_length = 3},
-	},
+	sources = cmp.config.sources(markdownSources),
 })
-
+local yamlSources = copyTable(defaultSources)
+table.remove(yamlSources) -- remove buffer
 cmp.setup.filetype("yaml", {
-	sources = cmp.config.sources {
-		snippets,
-		treesitter,
-		lsp,
-		tabnine,
-		emojis,
-	},
+	sources = cmp.config.sources(yamlSources),
 })
 
--- also use zsh for shell completion
+-- ZSH
 local shellSources = copyTable(defaultSources)
 table.insert(shellSources, 2, zsh)
 table.insert(shellSources, 5, nerdfont)
