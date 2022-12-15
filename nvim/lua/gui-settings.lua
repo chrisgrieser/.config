@@ -34,8 +34,8 @@ g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
 g.neovide_hide_mouse_when_typing = true
 g.neovide_remember_window_size = true
 g.neovide_input_macos_alt_is_meta = true -- makes `opt` usable on macOS
-keymap("i", "<M-.>", "…") -- needed when alt is turned into meta key
-keymap("i", "<M-->", "–")
+-- keymap("i", "<M-.>", "…") -- needed when alt is turned into meta key
+-- keymap("i", "<M-->", "–")
 
 -- Window Appearance
 g.neovide_floating_blur_amount_x = 5.0

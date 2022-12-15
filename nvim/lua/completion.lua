@@ -230,30 +230,3 @@ require("nvim-autopairs").setup()
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
---------------------------------------------------------------------------------
--- TABNINE
-require("cmp_tabnine.config"):setup {-- yes, requires a ":", not "."
-	max_lines = 1000,
-	max_num_results = 20,
-	run_on_every_keystroke = true,
-	snippet_placeholder = "…",
-	show_prediction_strength = true,
-}
-
--- automatically prefetch completions for the buffer
-augroup("prefetchTabNine", {})
-autocmd("BufRead", {
-	group = "prefetchTabNine",
-	callback = function() require("cmp_tabnine"):prefetch(fn.expand("%:p")) end
-})
-
---------------------------------------------------------------------------------
-
--- ai.vim
-g.ai_context_before = 10 -- lines to consider without prompt or selection
-g.ai_context_after = 10
-require("private-settings") -- API key symlinked and kept out of the dotfile repo
-
-g.ai_no_mappings = true -- no default mappings
-keymap("n", "ga", cmd.AI, {desc = "Run OpenAI Completion"})
-keymap("x", "ga", ":AI ", {desc = "Run OpenAI Completion with instruction on selection"})
