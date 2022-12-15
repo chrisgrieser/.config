@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.folded-paper.menu-bar-search</string>
-	<key>category</key>
-	<string>Mini-Apps</string>
 	<key>connections</key>
 	<dict>
 		<key>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</key>
@@ -287,6 +285,8 @@ You can change the workflow environment variables to fine tune menu listings
 			<integer>280</integer>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>variables</key>
 	<dict>
 		<key>-max-children</key>

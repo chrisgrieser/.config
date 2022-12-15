@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.youtube-dl</string>
-	<key>category</key>
-	<string>Mini-Apps</string>
 	<key>connections</key>
 	<dict>
 		<key>2856DA0F-7623-47F9-9E7C-DA4CC8F0B448</key>

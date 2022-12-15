@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.alfred-tweaks</string>
-	<key>category</key>
-	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
 		<key>411F0C67-7E50-4B01-AF68-F2742465259B</key>

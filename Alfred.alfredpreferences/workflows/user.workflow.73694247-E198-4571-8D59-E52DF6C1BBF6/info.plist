@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.ngreenstein.alfred-process-killer</string>
-	<key>category</key>
-	<string>Tweaks</string>
 	<key>connections</key>
 	<dict>
 		<key>2A751056-87B7-4408-90D6-B868021760CE</key>
@@ -255,6 +253,8 @@ The ruby script that powers Kill Process is `script.rb`. For testing, add a valu
 			<integer>315</integer>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>webaddress</key>
 	<string>https://github.com/nathangreenstein/alfred-process-killer</string>
 </dict>

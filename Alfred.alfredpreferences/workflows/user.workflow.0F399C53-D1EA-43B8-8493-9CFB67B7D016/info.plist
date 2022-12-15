@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string></string>
-	<key>category</key>
-	<string>Academic</string>
 	<key>connections</key>
 	<dict>
 		<key>28D55294-70F1-4A9A-9954-8EA1BF0C425E</key>

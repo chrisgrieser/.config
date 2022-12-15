@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.screenshot-utility</string>
-	<key>category</key>
-	<string>Mini-Apps</string>
 	<key>connections</key>
 	<dict>
 		<key>2245D209-C890-481A-AC66-F6D5B015FA02</key>
@@ -256,27 +254,6 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>shadow</string>
-				<key>subtext</key>
-				<string>Screenshot.app</string>
-				<key>text</key>
-				<string>Toggle Shadow for Window Screenshots</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>BB68E4B1-FF2A-4F66-B37B-14D2A943B776</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -315,6 +292,27 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>3A2C4213-C10F-4517-856A-17B41D519A7C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>shadow</string>
+				<key>subtext</key>
+				<string>Screenshot.app</string>
+				<key>text</key>
+				<string>Toggle Shadow for Window Screenshots</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>BB68E4B1-FF2A-4F66-B37B-14D2A943B776</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>

@@ -16,16 +16,14 @@ function betterApropos() {
 
 # GET A BETTER MAN
 # first arg: command, second arg: search term
-function man() {
-	CONFIG=~"/.config/alacritty/man-page.yml"
+function mann() {
+	local alacrittyConfig="$HOME/.config/alacritty/man-page.yml"
 
 	if ! command alacritty &>/dev/null; then
 		echo "Not using Alacritty."
 		return 1
 	elif ! command "$1" &>/dev/null; then
 		echo "Command '$1' not installed."
-		return 1
-	elif [[ $(command man "$1") == "No manual entry for delta" ]]; then
 		return 1
 	fi
 
@@ -38,13 +36,13 @@ function man() {
 
 	# run in subshell to suppress output
 	if [[ $isBuiltIn == true ]] && [[ -z "$2" ]]; then
-		(alacritty --config-file="$CONFIG" --title="built-in help: $1" --command less /usr/share/zsh/*/help/"$1" &)
+		(alacritty --config-file="$alacrittyConfig" --title="built-in help: $1" --command less /usr/share/zsh/*/help/"$1" &)
 	elif [[ $isBuiltIn == true ]] && [[ -n "$2" ]]; then
-		(alacritty --config-file="$CONFIG" --title="built-in help: $1" --command less --pattern="$2" /usr/share/zsh/*/help/"$1" &)
+		(alacritty --config-file="$alacrittyConfig" --title="built-in help: $1" --command less --pattern="$2" /usr/share/zsh/*/help/"$1" &)
 	elif [[ $isBuiltIn == false ]] && [[ -z "$2" ]]; then
-		(alacritty --config-file="$CONFIG" --title="man: $1" --command man "$1" &)
+		(alacritty --config-file="$alacrittyConfig" --title="man: $1" --command man "$1" &)
 	else
-		(alacritty --config-file="$CONFIG" --title="man: $1" --command man -P "/usr/bin/less -is --pattern=$2" "$1" &)
+		(alacritty --config-file="$alacrittyConfig" --title="man: $1" --command man -P "/usr/bin/less -is --pattern=$2" "$1" &)
 	fi
 }
 

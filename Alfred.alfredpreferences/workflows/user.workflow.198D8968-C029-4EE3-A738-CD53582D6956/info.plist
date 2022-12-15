@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.regex-helpers</string>
-	<key>category</key>
-	<string>Searches</string>
 	<key>connections</key>
 	<dict>
 		<key>356A558A-9F47-4BC6-A163-1B181A26172F</key>

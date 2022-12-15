@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.rudgavis.openAI.helpers</string>
-	<key>category</key>
-	<string>Academic</string>
 	<key>connections</key>
 	<dict>
 		<key>1D4244BC-122A-4164-A41C-7C200E37A558</key>

@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.apple.alfred.workflow.chromium-hist</string>
-	<key>category</key>
-	<string>Searches</string>
 	<key>connections</key>
 	<dict>
 		<key>6F7CBD9B-C876-48E2-B00E-92F71C1609A5</key>

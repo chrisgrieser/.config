@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.ocrmypdf</string>
-	<key>category</key>
-	<string>Mini-Apps</string>
 	<key>connections</key>
 	<dict>
 		<key>03206C07-E97F-40C0-922F-CB718A2F8A70</key>
@@ -222,12 +220,14 @@
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>https://ocrmypdf.readthedocs.io/en/latest/cookbook.html</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -247,6 +247,8 @@
 				<false/>
 				<key>items</key>
 				<string>[{"title":"OCR (German)","arg":"deu","subtitle":""},{"title":"OCR (English)","arg":"eng","subtitle":""},{"title":"OCR (Bilingual: German &amp; English)","arg":"eng+deu","subtitle":""},{"title":"Open OCRmyPDF Docs","arg":"manual","subtitle":""}]</string>
+				<key>matchmode</key>
+				<integer>0</integer>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>subtext</key>
@@ -402,6 +404,8 @@ end run</string>
 				</array>
 				<key>elselabel</key>
 				<string>run OCR</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -630,6 +634,8 @@ info on ocrmypdf: https://ocrmypdf.readthedocs.io/en/latest/cookbook.html</strin
 			<integer>170</integer>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>
