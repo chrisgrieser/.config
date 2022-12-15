@@ -5,8 +5,6 @@
 # INSTALLS
 sudo -v
 
-sudo gem install anystyle-cli
-
 pip3 install pdfannots
 pip3 install alacritty-colorscheme
 
@@ -69,4 +67,3 @@ newSkinPath="$steamDataPath""/skins/Bigger UI"
 mkdir -p "$newSkinPath"/resource/styles/
 cp "$steamDataPath"/resource/styles/steam.styles "$newSkinPath"/resource/styles/
 echo ":root { zoom: \"1.5\"; }" > "$newSkinPath"/resource/webkit.css
-

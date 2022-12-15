@@ -224,7 +224,7 @@ function M.overscroll(action)
 			cmd.normal {"zz", bang = true}
 		end
 	end
-	cmd("normal! " .. tostring(vim.v.count1) .. action)
+	cmd.normal {tostring(vim.v.count1) .. action, bang = true}
 end
 
 ---Force pasting a linewise register characterwise and vice versa
