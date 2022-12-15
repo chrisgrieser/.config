@@ -119,25 +119,32 @@ autocmd("FileType", {
 
 -- VALUE TEXT OBJECT
 local function valueTextObj()
-	local comStr = bo.commentstring:gsub(" ?%%s.*", "")-- remove replaceholder and back side of comment
-	local valuePattern = "[=:] ?()().-()[;,]?() ?" .. comStr .. "[][-_(){}/ %w]*\n"
-		
+	-- get line-content *without* trailing comment
+	local comStrPattern = bo.commentstring-- fff
+		:gsub(" ?%%s ?", ".*")-- %s placeholder becomes lua pattern placeholder
+		:gsub("(.)", "%%%1")-- escape all characters of commentstring so it works as pattern
+		:gsub("%%%.%%%*", ".*") -- do not escape the placeholder though
+	local lineContent = fn.getline("."):gsub(comStrPattern, "") ---@diagnostic disable-line: param-type-mismatch, undefined-field
+
+	local _, valueStart = lineContent:find("[=:] ?().-()[;,]?() ?[][-_(){}/ %w]*\n")
+
 end
 
-for _, prefix in pairs{"a", "i"} do
-	keymap({"x", "o"}, prefix.."v", valueTextObj, {desc = "value/assignment textobj"})
+for _, prefix in pairs {"a", "i"} do
+	keymap({"x", "o"}, prefix .. "v", valueTextObj, {desc = "value/assignment textobj"})
 end
 
 --------------------------------------------------------------------------------
 -- SPECIAL PLUGIN TEXT OBJECTS
 
--- Git Hunks
-keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {desc = "hunk textobj"})
-keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>", {desc = "hunk textobj"})
+for _, prefix in pairs {"a", "i"} do
+	-- Git Hunks
+	keymap({"x", "o"}, prefix .. "h", ":Gitsigns select_hunk<CR>", {desc = "hunk textobj"})
 
--- textobj-[d]iagnostic
-keymap({"x", "o"}, "id", function() require("textobj-diagnostic").nearest_diag() end)
-keymap({"x", "o"}, "ad", function() require("textobj-diagnostic").nearest_diag() end)
+	-- textobj-[d]iagnostic
+	keymap({"x", "o"}, prefix .. "d", function() require("textobj-diagnostic").nearest_diag() end,
+		{desc = "diagnostic textobj"})
+end
 
 -- disable text-objects from mini.ai in favor of my own
 local miniaiConfig = {
