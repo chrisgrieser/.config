@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.vitorgalvao.alfred.renameaction</string>
-	<key>category</key>
-	<string>Tweaks</string>
 	<key>connections</key>
 	<dict>
 		<key>05AD73E1-2A1E-45A5-8EC8-A9D60FFB2569</key>

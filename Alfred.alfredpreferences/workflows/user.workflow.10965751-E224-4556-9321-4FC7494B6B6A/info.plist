@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.pdf-renaming-helper</string>
-	<key>category</key>
-	<string>Academic</string>
 	<key>connections</key>
 	<dict>
 		<key>030D0D74-FC17-4504-B31D-3417940A7080</key>

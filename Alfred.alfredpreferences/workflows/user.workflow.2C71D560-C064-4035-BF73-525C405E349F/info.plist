@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.quick-spelling-fixer</string>
-	<key>category</key>
-	<string>Mini-Apps</string>
 	<key>connections</key>
 	<dict>
 		<key>07067962-C5C6-4B45-84D2-E12B587B394A</key>

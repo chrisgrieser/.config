@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.backup-utility</string>
-	<key>category</key>
-	<string>Mini-Apps</string>
 	<key>connections</key>
 	<dict>
 		<key>075B91F1-976D-42B4-96E3-293F0517DB7A</key>

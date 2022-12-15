@@ -3,17 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>categories</key>
-	<array>
-		<string>App-Enhance</string>
-		<string>Tweaks</string>
-		<string>Searches</string>
-		<string>Mini-Apps</string>
-		<string>Examples</string>
-		<string>Academic</string>
-		<string>Development</string>
-		<string>Stocks</string>
-		<string>Language</string>
-	</array>
+	<array/>
 	<key>defaultBundleId</key>
 	<string>de.chris-grieser.</string>
 	<key>defaultCreatedBy</key>

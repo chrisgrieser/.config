@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.github</string>
-	<key>category</key>
-	<string>Development</string>
 	<key>connections</key>
 	<dict>
 		<key>0216398A-09AD-4D85-A101-3884E853D638</key>

@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.volume-tweaks</string>
-	<key>category</key>
-	<string>Tweaks</string>
 	<key>connections</key>
 	<dict>
 		<key>6AFDF8FB-7B99-46E6-ABBB-772B0525181A</key>

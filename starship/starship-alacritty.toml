@@ -35,7 +35,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 [directory.substitutions]
 "/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
 "/File Hub" = "/柳"
-"Configs/Alfred.alfredpreferences/workflows" = "AlfredPrefs"
+"/Alfred.alfredpreferences/workflows/user.workflow." = "/  "
 
 [custom.folder_number]
 command = "find . -maxdepth 1 -not -name '.git' -not -name '.' -not -name '.DS_Store' | wc -l"

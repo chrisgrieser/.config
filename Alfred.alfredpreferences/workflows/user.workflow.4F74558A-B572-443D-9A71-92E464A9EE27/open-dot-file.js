@@ -32,6 +32,7 @@ const workArray = app.doShellScript(
 	-E "**/*.app/*" \
 	-E "karabiner/automatic_backups" \
 	-E "visualized-keyboard-layout/*.json" \
+	-E "zsh/plugins/*" \
 	-E "*.icns" \
 	-E "*.plist" \
 	-E "TODO*" \

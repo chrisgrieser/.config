@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.subtitle-download</string>
-	<key>category</key>
-	<string>Mini-Apps</string>
 	<key>connections</key>
 	<dict>
 		<key>18B122BD-9D18-4A98-B846-259913FE7BA9</key>

@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.google-utils</string>
-	<key>category</key>
-	<string>Searches</string>
 	<key>connections</key>
 	<dict>
 		<key>28F85017-1FCE-491E-9A6D-4A426338174F</key>

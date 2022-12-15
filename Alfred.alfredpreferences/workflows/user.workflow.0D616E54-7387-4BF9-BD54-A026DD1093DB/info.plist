@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.drafts-utilities</string>
-	<key>category</key>
-	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
 		<key>10BEA201-3D46-4F89-ADB1-10704261A8C7</key>

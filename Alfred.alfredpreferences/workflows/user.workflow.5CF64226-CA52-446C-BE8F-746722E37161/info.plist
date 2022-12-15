@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.drafts-addons</string>
-	<key>category</key>
-	<string>App-Enhance</string>
 	<key>connections</key>
 	<dict>
 		<key>0C4A60F1-B26F-48F1-A319-28F15EAD057C</key>
@@ -128,21 +126,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ein</string>
-				<key>subtext</key>
+				<key>browser</key>
 				<string></string>
-				<key>text</key>
-				<string>Drogerie: "{query}"</string>
-				<key>withspace</key>
-				<true/>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>drafts://runaction?text=urlscheme&amp;action=Workspace-Tasklists</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>BC0BC947-8F45-4C9C-A64C-688408AD1402</string>
+			<string>FF55F6D9-2CAA-457F-8BCE-56FDD2E26034</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -170,21 +168,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ein</string>
+				<key>subtext</key>
 				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>drafts://runaction?text=urlscheme&amp;action=Workspace-Tasklists</string>
+				<key>text</key>
+				<string>Drogerie: "{query}"</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>FF55F6D9-2CAA-457F-8BCE-56FDD2E26034</string>
+			<string>BC0BC947-8F45-4C9C-A64C-688408AD1402</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>

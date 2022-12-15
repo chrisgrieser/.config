@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>edgarjs.github-repos.workflow</string>
-	<key>category</key>
-	<string>Searches</string>
 	<key>connections</key>
 	<dict>
 		<key>72D9F53C-2F43-447A-8012-CA07801C1407</key>

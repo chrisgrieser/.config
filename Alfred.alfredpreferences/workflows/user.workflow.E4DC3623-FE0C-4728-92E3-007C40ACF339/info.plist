@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.weekly-date-generator-alfred</string>
-	<key>category</key>
-	<string>Academic</string>
 	<key>connections</key>
 	<dict>
 		<key>06E9C792-899B-42E7-B774-894F18BF0348</key>

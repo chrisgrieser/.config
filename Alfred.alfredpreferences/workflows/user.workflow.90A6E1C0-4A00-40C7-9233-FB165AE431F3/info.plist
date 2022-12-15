@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>giovanni-alfred-powerthesaurus</string>
-	<key>category</key>
-	<string>Language</string>
 	<key>connections</key>
 	<dict>
 		<key>2C9C2E06-FF0F-4D0A-AC8C-B06306B2EDDB</key>
