@@ -123,7 +123,7 @@ add("lua", {
 -- nvim-lua
 add("lua", {
 	snip("keymap", 'keymap("n", "$1", ${2:""}, {desc = ${3:""}})\n$0'),
-	snip("keymap (multi-mode)", 'keymap({"n", "${1:x}"}, "$2", ${3:""}, {desc = ${4:""}})\n$0'),
+	snip("keymap (multi-mode)", 'keymap({"n", "x"}, "$1", ${2:""}, {desc = ${3:""}})\n$0'),
 	snip("highlight (link)", [[cmd.highlight {"def link ${1:fromGroup} ${2:toGroup}", bang = true}]]),
 	snip("highlight", [[cmd.highlight ("${1:group} guifg=${2:color}")]]),
 	snip("normal", [[cmd.normal {"$1", bang = true}]]),
