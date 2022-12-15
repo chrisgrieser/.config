@@ -7,10 +7,10 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # ensure Stats.app is running
-if ! pgrep "Stats"; then
+while ! pgrep "Stats"; do
 	open -a "Stats"
 	sleep 1
-fi
+done
 
 PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
