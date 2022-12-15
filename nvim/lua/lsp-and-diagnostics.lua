@@ -34,7 +34,7 @@ keymap("n", "<leader>d", function() vim.diagnostic.open_float {focusable = false
 
 -- toggle diagnostics
 local diagnosticToggled = true;
-keymap("n", "<leader>D", function()
+keymap("n", "<leader>od", function() -- consistent with other option toggling also using <leader>o{letter}
 	if diagnosticToggled then
 		vim.diagnostic.disable(0)
 	else

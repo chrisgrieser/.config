@@ -31,11 +31,24 @@ keymap("n", "dq", [[:normal!mz<CR>dCOM`z]], {remap = true}) -- since remap is re
 keymap("n", "yq", "yCOM", {remap = true}) -- thanks to yank position saving, doesn't need to be done here
 keymap("n", "cq", '"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
 
+
+--------------------------------------------------------------------------------
+-- Search only comments
+augroup("commentSearch", {})
+autocmd("FileType", {
+	group = "commentSearch",
+	callback = function()
+		local comStr = 
+		keymap("n", "gq", "/\v", {desc = "Search only Comments for a string"})
+	end
+})
+
+
 --------------------------------------------------------------------------------
 -- HORIZONTAL DIVIDER
 
 ---@diagnostic disable: param-type-mismatch
-function divider()
+local function divider()
 	local linechar = "─"
 	local wasOnBlank = fn.getline(".") == ""
 	local indent = fn.indent(".")
