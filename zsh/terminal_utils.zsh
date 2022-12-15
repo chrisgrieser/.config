@@ -46,6 +46,7 @@ function directoryInspect (){
 		exa
 	fi
 }
+alias vidir="$DOTFILE_FOLDER/zsh/plugins/vidir"
 
 # measure zsh loading time, https://blog.jonlu.ca/posts/speeding-up-zsh
 function timezsh(){
@@ -64,8 +65,8 @@ function d () {
 	fi
 	for item in "${ALL_FILES[@]}"; do
 		local itemInTrash="$HOME/.Trash/$(basename "$item")"
-		[[ -e "$itemInTrash" ]] && rm -r 
-		mv -v "$item" "$itemInTrash"
+		[[ -e "$itemInTrash" ]] && rm -r
+		mv "$item" "$itemInTrash"
 	done
 }
 

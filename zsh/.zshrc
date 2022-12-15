@@ -1,6 +1,3 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-
 # remove last login message https://stackoverflow.com/a/69915614
 printf '\33c\e[3J'
 
@@ -24,6 +21,3 @@ for config_file in "${CONFIG[@]}"; do
 	# shellcheck disable=1090
 	source "$DOTFILE_FOLDER/zsh/$config_file.zsh"
 done
-
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
