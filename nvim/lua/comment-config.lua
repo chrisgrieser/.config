@@ -36,10 +36,11 @@ keymap("n", "cq", '"_dCOMxQ', {remap = true}) -- delete & append comment to pres
 -- Search only comments
 augroup("commentSearch", {})
 autocmd("FileType", {
+	pattern = "?*", -- only active when there is a filetype
 	group = "commentSearch",
 	callback = function()
-		local comStr = 
-		keymap("n", "gq", "/\v", {desc = "Search only Comments for a string"})
+		local comStr = bo.commentstring:gsub("%%s.*", "")-- remove replaceholder and back side of comment
+		keymap("n", "gq", "/\v"..comStr, {desc = "Search only Comments for a string"})
 	end
 })
 

@@ -111,7 +111,11 @@ function M.PluginList(use)
 	-- AI Stuff
 	use {"tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp"}
 	use {"aduros/ai.vim", cmd = "AI"}
-
+	use {"jackMort/ChatGPT.nvim", requires = {
+		"MunifTanjim/nui.nvim",
+		"nvim-lua/plenary.nvim",
+		"nvim-telescope/telescope.nvim"
+	}}
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use "nvim-lualine/lualine.nvim" -- status line

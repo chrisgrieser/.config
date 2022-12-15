@@ -25,6 +25,7 @@ require("linter")
 require("debugger")
 
 require("comment-config")
+require("AI-support")
 require("telescope-config")
 require("treesitter-config")
 if isGui() then require("color-picker") end
