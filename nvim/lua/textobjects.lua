@@ -58,7 +58,7 @@ end)
 --------------------------------------------------------------------------------
 -- CUSTOM TEXTOBJECTS
 
--- ae: almost [e]nding of line (line ending -1)
+-- ae/ie: LINE [E]NDING - 1
 for _, prefix in pairs {"a", "i"} do
 	keymap("o", prefix .. "e", function() cmd.normal {"v$hh", bang = true} end, {desc = "almost ending of line textobj"})
 	keymap("x", prefix .. "e", function() cmd.normal {"$hh", bang = true} end, {desc = "almost ending of line textobj"})
@@ -69,28 +69,31 @@ end
 ---indentation textobj, based on https://thevaluable.dev/vim-create-text-objects/
 ---@param startBorder boolean
 ---@param endBorder boolean
-local function selectIndent(startBorder, endBorder)
+local function indentationTextObj(startBorder, endBorder)
 	local function isBlankLine(lineNr)
 		---@diagnostic disable-next-line: assign-type-mismatch
 		local lineContent = fn.getline(lineNr) ---@type string
 		return string.find(lineContent, "^%s*$") == 1
 	end
+
 	if isBlankLine(fn.line(".")) then return end -- abort on blank line
 
 	local indentofStart = fn.indent(fn.line("."))
+	if indentofStart == 0 then return end -- do not select whole file
+
 	local prevLnum = fn.line(".") - 1 -- line before cursor
 	while prevLnum > 0 and (isBlankLine(prevLnum) or fn.indent(prevLnum) >= indentofStart) do
 		prevLnum = prevLnum - 1
 	end
 	local nextLnum = fn.line(".") + 1 -- line after cursor
 	local lastLine = fn.line("$")
-	while nextLnum <= lastLine and (isBlankLine(prevLnum) or fn.indent(nextLnum) >= indentofStart) do
+	while nextLnum <= lastLine and (isBlankLine(nextLnum) or fn.indent(nextLnum) >= indentofStart) do
 		nextLnum = nextLnum + 1
 	end
 
 	-- differentiate ai and ii
-	if not(startBorder) then prevLnum = prevLnum + 1 end
-	if not(endBorder) then nextLnum = nextLnum - 1 end
+	if not (startBorder) then prevLnum = prevLnum + 1 end
+	if not (endBorder) then nextLnum = nextLnum - 1 end
 
 	-- set selection
 	setCursor(0, {prevLnum, 0})
@@ -98,60 +101,39 @@ local function selectIndent(startBorder, endBorder)
 	setCursor(0, {nextLnum, 0})
 end
 
-keymap({"x", "o"}, "ii", function () selectIndent(false, false) end, {desc = "inner indentation textobj"})
-keymap({"x", "o"}, "ai", function () selectIndent(true, true) end, {desc = "outer indentation textobj"})
+keymap({"x", "o"}, "ii", function() indentationTextObj(false, false) end, {desc = "inner indentation textobj"})
+keymap({"x", "o"}, "ai", function() indentationTextObj(true, true) end, {desc = "outer indentation textobj"})
 
+augroup("IndentedFileTypes", {})
+autocmd("FileType", {
+	group = "IndentedFileTypes",
+	callback = function()
+		local indentedFts = {"python", "yaml", "markdown"}
+		if vim.tbl_contains(indentedFts, bo.filetype) then
+			keymap({"x", "o"}, "ai", function()
+				indentationTextObj(true, false)
+			end, {buffer = true, desc = "indentation textobj with start border"})
+		end
+	end
+})
 
--- local function check_noindent(start_indent, line)
--- 	-- This ensures that if I check indent for a block at top level, it doesn't
--- 	-- capture the whole file.
--- 	return start_indent == 0 and not is_blank_line(line)
--- end
+-- VALUE TEXT OBJECT
+local function valueTextObj()
+	local comStr = bo.commentstring:gsub(" ?%%s.*", "")-- remove replaceholder and back side of comment
+	local valuePattern = "[=:] ?()().-()[;,]?() ?" .. comStr .. "[][-_(){}/ %w]*\n"
+		
+end
 
--- local function indent_textobj_select(include_blank_lines)
--- 	local start_indent = vim.fn.indent(vim.fn.line("."))
-
--- 	if is_blank_line(vim.fn.line(".")) then
--- 		return
--- 	end
-
--- 	if vim.v.count > 0 then
--- 		start_indent = start_indent - vim.o.shiftwidth * (vim.v.count - 1)
--- 		if start_indent < 0 then
--- 			start_indent = 0
--- 		end
--- 	end
-
--- 	local prev_line = vim.fn.line(".") - 1
--- 	while prev_line > 0
--- 		and (
--- 		check_indented(start_indent, include_blank_lines, prev_line)
--- 			or check_noindent(start_indent, prev_line)
--- 		) do
--- 		vim.cmd("-")
--- 		prev_line = vim.fn.line(".") - 1
--- 	end
-
--- 	vim.cmd("normal! 0V")
-
--- 	local next_line = vim.fn.line(".") + 1
--- 	local last_line = vim.fn.line("$")
--- 	while next_line <= last_line
--- 		and (
--- 		check_indented(start_indent, include_blank_lines, next_line)
--- 			or check_noindent(start_indent, next_line)
--- 		) do
--- 		vim.cmd("+")
--- 		next_line = vim.fn.line(".") + 1
--- 	end
--- end
+for _, prefix in pairs{"a", "i"} do
+	keymap({"x", "o"}, prefix.."v", valueTextObj, {desc = "value/assignment textobj"})
+end
 
 --------------------------------------------------------------------------------
 -- SPECIAL PLUGIN TEXT OBJECTS
 
 -- Git Hunks
-keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>")
-keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>")
+keymap({"x", "o"}, "ih", ":Gitsigns select_hunk<CR>", {desc = "hunk textobj"})
+keymap({"x", "o"}, "ah", ":Gitsigns select_hunk<CR>", {desc = "hunk textobj"})
 
 -- textobj-[d]iagnostic
 keymap({"x", "o"}, "id", function() require("textobj-diagnostic").nearest_diag() end)
@@ -177,33 +159,23 @@ local miniaiConfig = {
 	},
 }
 
--- custom text object "e": from cursor to [e]end of line minus 1 char
--- miniaiConfig.custom_textobjects.e = function()
--- 	local row = fn.line(".")
--- 	local col = fn.col(".")
--- 	local eol = fn.col("$") - 1
--- 	local from = {line = row, col = col}
--- 	local to = {line = row, col = eol - 1}
--- 	return {from = from, to = to}
--- end
-
 -- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt#L215
-augroup("value-textobj", {})
-autocmd("FileType", {
-	group = "value-textobj",
-	callback = function()
-		-- this way, comments for various filetypes are excluded from the value-textobj
-		local comStr = bo.commentstring
-			:gsub("%%s.*", "")-- remove replaceholder and back side of comment
-			:gsub("(.)", "%1?") -- make all letters of the comment optional
-		local pattern = "[=:] ?()().-()[;,]?() ?" .. comStr .. "[][-_(){}/ %w]*\n"
-		b.miniai_config = {
-			custom_textobjects = {
-				v = {pattern}
-			}
-		}
-	end
-})
+-- augroup("value-textobj", {})
+-- autocmd("FileType", {
+-- 	group = "value-textobj",
+-- 	callback = function()
+-- 		-- this way, comments for various filetypes are excluded from the value-textobj
+-- 		local comStr = bo.commentstring
+-- 			:gsub("%%s.*", "")-- remove replaceholder and back side of comment
+-- 			:gsub("(.)", "%1?") -- make all letters of the comment optional
+-- 		local pattern = "[=:] ?()().-()[;,]?() ?" .. comStr .. "[][-_(){}/ %w]*\n"
+-- 		b.miniai_config = {
+-- 			custom_textobjects = {
+-- 				v = {pattern}
+-- 			}
+-- 		}
+-- 	end
+-- })
 
 require("mini.ai").setup(miniaiConfig)
 
