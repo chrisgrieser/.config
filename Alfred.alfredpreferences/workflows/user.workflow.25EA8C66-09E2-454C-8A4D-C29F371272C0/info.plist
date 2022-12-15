@@ -101,7 +101,9 @@
 
 eval "$(cat ~/.pandoc/pandoc.zsh)"
 
-md2docx "$*" 2&gt;&amp;1</string>
+output=$(md2docx "$*" 2&gt;&amp;1)
+echo $output | pbcopy
+echo $output</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -219,7 +221,7 @@ md2docx "$*" 2&gt;&amp;1</string>
 			<key>colorindex</key>
 			<integer>4</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>205</real>
 			<key>ypos</key>
 			<real>100</real>
 		</dict>

@@ -209,33 +209,32 @@ end)
 --------------------------------------------------------------------------------
 
 -- FINDER
+local function finderWinAutoLayout()
+	local finderWins = wf_finder:getWindows()
+	if #finderWins == 0 then
+		app("Finder"):kill() -- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
+	elseif #finderWins == 1 then
+		moveResize(finderWins[1], centered)
+	elseif #finderWins == 2 then
+		moveResize(finderWins[1], hs.layout.left50)
+		moveResize(finderWins[2], hs.layout.right50)
+	elseif #finderWins == 3 then
+		moveResize(finderWins[1], {h = 1, w = 0.33, x = 0, y = 0})
+		moveResize(finderWins[2], {h = 1, w = 0.34, x = 0.33, y = 0})
+		moveResize(finderWins[3], {h = 1, w = 0.33, x = 0.67, y = 0})
+	end
+	app("Finder"):selectMenuItem {"Window", "Bring All to Front"}
+	app("Finder"):selectMenuItem {"View", "Hide Sidebar"}
+end
+
 wf_finder = wf.new("Finder")
 	:setOverrideFilter {
 		rejectTitles = {"^Move$", "^Bin$", "^Copy$", "^Finder Settings$", " Info$"},
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true
 	}
-	:subscribe(wf.windowDestroyed, function()
-		if #wf_finder:getWindows() == 0 then
-			app("Finder"):kill() -- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
-		elseif #wf_finder:getWindows() == 1 then
-			moveResizeCurWin("centered")
-		end
-	end)
-	:subscribe(wf.windowCreated, function(newWin)
-		local finderWins = wf_finder:getWindows()
-		if newWin:title() == "RomComs" then
-			moveResizeCurWin("maximized")
-		elseif #finderWins == 1 then
-			moveResizeCurWin("centered")
-		elseif #finderWins == 2 then
-			moveResize(finderWins[1], hs.layout.left50)
-			moveResize(finderWins[2], hs.layout.right50)
-		end
-
-		app("Finder"):selectMenuItem {"View", "Hide Sidebar"}
-		app("Finder"):selectMenuItem {"Window", "Bring All to Front"}
-	end)
+	:subscribe(wf.windowDestroyed, finderWinAutoLayout)
+	:subscribe(wf.windowCreated, finderWinAutoLayout)
 
 -- quit Finder if it was started as a helper (e.g., JXA), but has no window
 finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
