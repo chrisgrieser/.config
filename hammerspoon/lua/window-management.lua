@@ -5,6 +5,7 @@ require("lua.twitterrific-controls")
 -- WINDOW MANAGEMENT UTILS
 iMacDisplay = hs.screen("Built%-in")
 maximized = hs.layout.maximized
+centered = {x = 0.2, y = 0, w = 0.6, h = 1}
 
 -- device-specific parameters
 if isIMacAtHome() then
@@ -118,16 +119,12 @@ function moveResizeCurWin(mode)
 		position = hs.layout.left50
 	elseif mode == "right" then
 		position = hs.layout.right50
-	elseif mode == "up" then
-		position = {x = 0, y = 0, w = 1, h = 0.5}
-	elseif mode == "down" then
-		position = {x = 0, y = 0.5, w = 1, h = 0.5}
 	elseif mode == "pseudo-maximized" then
 		position = pseudoMaximized
 	elseif mode == "maximized" then
 		position = maximized
 	elseif mode == "centered" then
-		position = {x = 0.2, y = 0, w = 0.6, h = 1}
+		position = centered
 	end
 
 	moveResize(win, position) -- workaround for https://github.com/Hammerspoon/hammerspoon/issues/2316
@@ -191,8 +188,6 @@ local function controlSpace()
 	moveResizeCurWin(size)
 end
 
-hotkey(hyper, "up", function() moveResizeCurWin("up") end)
-hotkey(hyper, "down", function() moveResizeCurWin("down") end)
 hotkey(hyper, "right", function() moveResizeCurWin("right") end)
 hotkey(hyper, "left", function() moveResizeCurWin("left") end)
 hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
