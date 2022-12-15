@@ -120,14 +120,31 @@ autocmd("FileType", {
 -- VALUE TEXT OBJECT
 local function valueTextObj()
 	-- get line-content *without* trailing comment
-	local comStrPattern = bo.commentstring-- fff
-		:gsub(" ?%%s ?", ".*")-- %s placeholder becomes lua pattern placeholder
-		:gsub("(.)", "%%%1")-- escape all characters of commentstring so it works as pattern
-		:gsub("%%%.%%%*", ".*") -- do not escape the placeholder though
-	local lineContent = fn.getline("."):gsub(comStrPattern, "") ---@diagnostic disable-line: param-type-mismatch, undefined-field
+	local comStrPattern = bo.commentstring
+		:gsub(" ?%%s.*", "")-- remove placeholder and backside of commentstring
+		:gsub("(.)", "%%%1") -- escape commentstring so it's a valid lua pattern
+	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
+	local lineContent = fn.getline(".") ---@type string
 
-	local _, valueStart = lineContent:find("[=:] ?().-()[;,]?() ?[][-_(){}/ %w]*\n")
+	local _, valueStart = lineContent:find("[=:] ?.")
+	print("valueStart:", valueStart)
+	if not(valueStart) then return end -- abort when no value found
 
+	local valueEnd, _ = lineContent:find("." .. comStrPattern)
+	print("valueEnd:", valueEnd)
+	if not (valueEnd) then -- value end either comment or end of line
+		valueEnd = #lineContent - 1 -- ffff
+		print("valueEnd:", valueEnd)
+	end
+
+	-- set selection
+	setCursor(0, {fn.line("."), valueStart})
+	if api.nvim_get_mode().mode:find("v") then
+		cmd.normal {"o", bang = true}
+	else
+		cmd.normal {"v", bang = true}
+	end
+	setCursor(0, {fn.line("."), valueEnd})
 end
 
 for _, prefix in pairs {"a", "i"} do
