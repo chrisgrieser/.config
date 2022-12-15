@@ -16,17 +16,12 @@ function betterApropos() {
 
 # GET A BETTER MAN
 # first arg: command, second arg: search term
-function mann() {
+function man() {
 	local alacrittyConfig="$HOME/.config/alacritty/man-page.yml"
 
-	if ! command alacritty &>/dev/null; then
-		echo "Not using Alacritty."
-		return 1
-	elif ! command "$1" &>/dev/null; then
-		echo "Command '$1' not installed."
-		return 1
-	fi
-
+	if ! command -v alacritty &>/dev/null; then echo "alacritty not installed." && exit 1; fi
+	if ! command -v "$1" &>/dev/null; then echo "$1 not installed." && exit 1; fi
+	
 	local isBuiltIn=false
 	# shellcheck disable=2230
 	[[ "$(which "$1")" =~ "built-in" ]] && isBuiltIn=true
