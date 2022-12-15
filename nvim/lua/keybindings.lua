@@ -21,17 +21,17 @@ keymap("n", "<leader>T", telescope.colorscheme)
 keymap("n", "<leader>H", telescope.highlights)
 
 -- Mason
-keymap("n", "<leader>M", ":Mason<CR>")
+keymap("n", "<leader>M", cmd.Mason)
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
-	cmd [[update!]]
+	cmd.update{bang = true}
 	packer.compile()
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	packer.startup(require("plugin-list").PluginList)
 	packer.snapshot("packer-snapshot_" .. os.date("!%Y-%m-%d_%H-%M-%S"))
 	packer.sync()
-	cmd [[MasonUpdateAll]]
+	cmd.MasonUpdateAll()
 	-- remove oldest snapshot when more than 20
 	local snapshotPath = fn.stdpath("config") .. "/packer-snapshots"
 	os.execute([[cd ']] .. snapshotPath .. [[' ; ls -t | tail -n +20 | tr '\n' '\0' | xargs -0 rm]])
@@ -64,10 +64,8 @@ keymap({"n", "x", "o"}, "-", [[/\v]]) -- German Keyboard, \v for very-magic sear
 keymap("n", "<Esc>", function()
 	local clearPending = require("notify").pending() > 10 and true or false
 	require("notify").dismiss {pending = clearPending}
-	cmd [[nohl]] -- clear highlights
-	cmd [[echo]] -- clear shortmessage
-	cmd [[normal!lh]] -- clear lsp hover window
-	require("lualine").refresh()
+	cmd.nohlsearch() -- clear highlights
+	cmd.echo() -- clear shortmessage
 end)
 
 keymap({"n", "x", "o"}, "+", "*") -- no more modifier key (German Layout)
@@ -76,7 +74,7 @@ keymap({"n", "x", "o"}, "*", "#") -- backwards on the same key (German Layout)
 -- MARKS
 keymap("", "ä", "`M") -- Goto Mark M
 keymap("", "Ä", function() -- Set Mark M
-	cmd [[normal!mM]]
+	cmd.normal {"mM", bang = true}
 	vim.notify("Mark M set.")
 end)
 
@@ -310,9 +308,9 @@ if isGui() then
 	keymap({"n", "x"}, "<D-l>", function() -- show file in default GUI file explorer
 		fn.system("open -R '" .. fn.expand("%:p") .. "'")
 	end)
-	keymap({"n", "x"}, "<D-1>", cmd.Lex) -- file tree (netrw)
-	keymap({"n", "x"}, "<D-0>", ":messages<CR>") -- as cmd.function these wouldn't require confirmation
-	keymap({"n", "x"}, "<D-9>", ":Notification<CR>")
+	keymap({"n", "x", "i"}, "<D-1>", cmd.Lex) -- file tree (netrw)
+	keymap("n", "<D-0>", ":messages<CR>") -- as cmd.function these wouldn't require confirmation
+	keymap("n", "<D-9>", ":Notification<CR>")
 
 	-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 	g.VM_maps = {-- cmd+j
