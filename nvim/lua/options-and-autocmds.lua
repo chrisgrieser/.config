@@ -114,12 +114,12 @@ augroup("Mini-Lint", {})
 autocmd("BufWritePre", {
 	group = "Mini-Lint",
 	callback = function()
-		local prevCursor = api.nvim_win_get_cursor(0)
+		cmd.mkview()
 		if bo.filetype ~= "markdown" then -- to preserve spaces from the two-space-rule, and trailing spaces on sentences
 			cmd [[%s/\s\+$//e]] -- trim trailing whitespaces
 		end
 		cmd [[silent! %s#\($\n\s*\)\+\%$##]] -- trim extra blanks at eof https://stackoverflow.com/a/7496112
-		api.nvim_win_set_cursor(0, prevCursor)
+		cmd.loadview()
 	end
 })
 

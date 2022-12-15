@@ -152,12 +152,12 @@ selection:
 
 key_bindings:
   # toggle alacritty's vi mode
-  - key: V
-    mods: Alt
-    action: ToggleViMode
-  - key: Escape
-    mode: Vi
-    action: ToggleViMode
+  # - key: V
+  #   mods: Alt
+  #   action: ToggleViMode
+  # - key: Escape
+  #   mode: Vi
+  #   action: ToggleViMode
 
   # settings
   - key: 43

@@ -10,6 +10,8 @@ wo = vim.wo -- window-scoped variables
 
 augroup = vim.api.nvim_create_augroup
 autocmd = vim.api.nvim_create_autocmd
+getCursor = vim.api.nvim_win_get_cursor
+setCursor = vim.api.nvim_win_set_cursor
 keymap = vim.keymap.set
 logWarn = vim.log.levels.WARN
 logError = vim.log.levels.ERROR

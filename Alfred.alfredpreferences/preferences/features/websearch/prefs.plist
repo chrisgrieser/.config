@@ -4,6 +4,17 @@
 <dict>
 	<key>customSites</key>
 	<dict>
+		<key>1055AB66-AEEC-48E2-ABEC-22EC774306C0</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ag</string>
+			<key>text</key>
+			<string>Alfred Gallery</string>
+			<key>url</key>
+			<string>https://alfred.app/search/?q={query}</string>
+		</dict>
 		<key>12683550-A2EA-40B6-B861-FB40A6E7603B</key>
 		<dict>
 			<key>enabled</key>
