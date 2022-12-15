@@ -65,45 +65,42 @@ for _, prefix in pairs {"a", "i"} do
 end
 
 -- INDENTATION OBJECT
--- Based on https://thevaluable.dev/vim-create-text-objects/
 
----checks whether string is for blank lins
----@param lineNr number
----@return boolean
-local function isBlankLine(lineNr)
-	---@diagnostic disable-next-line: assign-type-mismatch
-	local lineContent = fn.getline(lineNr) ---@type string
-	return string.find(lineContent, "^%s*$") == 1
-end
+---indentation textobj, based on https://thevaluable.dev/vim-create-text-objects/
+---@param startBorder boolean
+---@param endBorder boolean
+local function selectIndent(startBorder, endBorder)
+	local function isBlankLine(lineNr)
+		---@diagnostic disable-next-line: assign-type-mismatch
+		local lineContent = fn.getline(lineNr) ---@type string
+		return string.find(lineContent, "^%s*$") == 1
+	end
+	if isBlankLine(fn.line(".")) then return end -- abort on blank line
 
-local function selectIndent()
 	local indentofStart = fn.indent(fn.line("."))
-	local prevLnum = fn.line(".") - 1
-	while prevLnum > 0 and fn.indent(prevLnum) >= indentofStart do
+	local prevLnum = fn.line(".") - 1 -- line before cursor
+	while prevLnum > 0 and (isBlankLine(prevLnum) or fn.indent(prevLnum) >= indentofStart) do
 		prevLnum = prevLnum - 1
 	end
-	local nextLnum = fn.line(".") + 1
+	local nextLnum = fn.line(".") + 1 -- line after cursor
 	local lastLine = fn.line("$")
-	while nextLnum <= lastLine and fn.indent(nextLnum) >= indentofStart do
+	while nextLnum <= lastLine and (isBlankLine(prevLnum) or fn.indent(nextLnum) >= indentofStart) do
 		nextLnum = nextLnum + 1
 	end
-	local select = tostring(prevLnum).."GV"..tostring(nextLnum).."G"
-	print("select:", select)
-	cmd.normal {select, bang = true}
+
+	-- differentiate ai and ii
+	if not(startBorder) then prevLnum = prevLnum + 1 end
+	if not(endBorder) then nextLnum = nextLnum - 1 end
+
+	-- set selection
+	setCursor(0, {prevLnum, 0})
+	cmd.normal {"Vo", bang = true}
+	setCursor(0, {nextLnum, 0})
 end
 
-for _, prefix in pairs {"a", "i"} do
-	keymap({"x", "o"}, prefix .. "i", selectIndent)
-end
+keymap({"x", "o"}, "ii", function () selectIndent(false, false) end, {desc = "inner indentation textobj"})
+keymap({"x", "o"}, "ai", function () selectIndent(true, true) end, {desc = "outer indentation textobj"})
 
-
--- local function check_indented(start_indent, include_blank_lines, line)
--- 	return start_indent > 0
--- 		and (
--- 		(is_blank_line(line) and include_blank_lines)
--- 			or vim.fn.indent(line) >= start_indent
--- 		)
--- end
 
 -- local function check_noindent(start_indent, line)
 -- 	-- This ensures that if I check indent for a block at top level, it doesn't
@@ -148,33 +145,6 @@ end
 -- 		next_line = vim.fn.line(".") + 1
 -- 	end
 -- end
-
--- for _, mode in ipairs {"x", "o"} do
--- 	vim.keymap.set(
--- 		mode,
--- 		"ii",
--- 		":<c-u>lua _G.indent_textobj_select(false)<cr>",
--- 		{silent = true}
--- 	)
--- 	vim.keymap.set(
--- 		mode,
--- 		"ai",
--- 		":<c-u>lua _G.indent_textobj_select(true)<cr>",
--- 		{silent = true}
--- 	)
--- end
-
--- map ai to aI in languages where aI is not used anyway
--- augroup("indentobject", {})
--- autocmd("FileType", {
--- 	group = "indentobject",
--- 	callback = function()
--- 		local ft = bo.filetype
--- 		if not (ft == "yaml" or ft == "python" or ft == "markdown") then
--- 			keymap({"x", "o"}, "ai", "aI", {remap = true, buffer = true})
--- 		end
--- 	end
--- })
 
 --------------------------------------------------------------------------------
 -- SPECIAL PLUGIN TEXT OBJECTS
