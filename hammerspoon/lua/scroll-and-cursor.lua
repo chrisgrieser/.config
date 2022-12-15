@@ -17,6 +17,21 @@ local function pseudoHideCursor ()
 	hs.mouse.setRelativePosition(pos, screen)
 end
 
+--------------------------------------------------------------------------------
+
+-- HIGHLIGHTS Scroll
+local function highlightsAppScroll (amount)
+	local highlightsWin = hs.application("Highlights"):mainWindow():frame()
+	local centerPos = {
+		x = highlightsWin.x + highlightsWin.w * 0.5,
+		y = highlightsWin.y + highlightsWin.h * 0.5,
+	}
+	hs.mouse.setRelativePosition(centerPos)
+	hs.eventtap.scrollWheel({0, amount}, {})
+	pseudoHideCursor()
+end
+
+
 local function scrollDown ()
 	if frontApp():lower() == "alacritty" or frontApp() == "Terminal" then
 		keystroke ({"shift"}, "pagedown")
@@ -41,56 +56,26 @@ hotkey({"alt"}, "K", scrollUp, nil, scrollUp)
 
 --------------------------------------------------------------------------------
 
--- HIGHLIGHTS Scroll
-function highlightsAppScroll (amount)
-	local highlightsWin = hs.application("Highlights"):mainWindow():frame()
-	local centerPos = {
-		x = highlightsWin.x + highlightsWin.w * 0.5,
-		y = highlightsWin.y + highlightsWin.h * 0.5,
-	}
-	hs.mouse.setRelativePosition(centerPos)
-
-	hs.eventtap.scrollWheel({0, amount}, {})
+-- CURSOR HIDING in Brave
+-- when Brave activates and j or k is pressed for the first time, hide cursor
+local function hideCurAndPassThrough(key)
+	jHidesCursor:disable() -- so it only works the first time
+	kHidesCursor:disable()
+	keystroke({}, key, 1, hs.application("Brave Browser"))
 	pseudoHideCursor()
 end
 
---------------------------------------------------------------------------------
+jHidesCursor = hotkey({},"j", function() hideCurAndPassThrough("J") end):disable()
+kHidesCursor = hotkey({},"k", function() hideCurAndPassThrough("K") end):disable()
 
--- CURSOR HIDING in Brave
--- when Brave activates and j or k is pressed for the first time, hide cursor
-function hidingCursorInBrowser(key)
-	jHidesCursor:disable() -- so it only works the first time
-	kHidesCursor:disable()
-	alfredDisablesJKCursorHider:disable()
-
-	if key == "Alfred" then -- wordaround necessary, since Alfred isn't considered a window
-		applescript('tell application id "com.runningwithcrayons.Alfred" to search ""')
-	else
-		keystroke({}, key, 1, hs.application("Brave Browser"))
-		pseudoHideCursor()
-	end
-end
-jHidesCursor = hotkey({},"j", function() hidingCursorInBrowser("J") end)
-kHidesCursor = hotkey({},"k", function() hidingCursorInBrowser("K") end)
--- registering this shortcut requires disabling cmd+space in the macOS keyboard
--- settings (requires temporarily enabling the hotkey to do so)
-alfredDisablesJKCursorHider = hotkey({"cmd"}, "space", function() hidingCursorInBrowser("Alfred") end)
-jHidesCursor:disable()
-kHidesCursor:disable()
-alfredDisablesJKCursorHider:disable()
-
-function jkWatcher(appName, eventType)
+jk_watcher = aw.new(function(appName, eventType)
 	if eventType == aw.activated then
-		if appName == "Brave Browser" or appName == "Reeder" or appName == "Inoreader" then
+		if appName == "Brave Browser" then
 			jHidesCursor:enable()
 			kHidesCursor:enable()
-			alfredDisablesJKCursorHider:enable()
 		else
 			jHidesCursor:disable()
 			kHidesCursor:disable()
-			alfredDisablesJKCursorHider:disable()
 		end
 	end
-end
-jk_watcher = aw.new(jkWatcher)
-jk_watcher:start()
+end):start()
