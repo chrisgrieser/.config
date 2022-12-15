@@ -5,20 +5,22 @@ require("lua.twitterrific-controls")
 -- WINDOW MANAGEMENT UTILS
 iMacDisplay = hs.screen("Built%-in")
 maximized = hs.layout.maximized
-centered = {x = 0.2, y = 0, w = 0.6, h = 1}
 
 -- device-specific parameters
 if isIMacAtHome() then
 	pseudoMaximized = {x = 0, y = 0, w = 0.816, h = 1}
 	baseLayout = pseudoMaximized
 	toTheSide = {x = 0.815, y = 0.025, w = 0.185, h = 0.975}
+	centered = {x = 0.2, y = 0, w = 0.616, h = 1}
 elseif isAtMother() then
 	pseudoMaximized = {x = 0, y = 0, w = 0.7875, h = 1}
 	baseLayout = pseudoMaximized
 	toTheSide = {x = 0.7875, y = 0.03, w = 0.2125, h = 0.97}
+	centered = {x = 0.2, y = 0, w = 0.616, h = 1}
 elseif isAtOffice() then
 	baseLayout = maximized
 	pseudoMaximized = maximized
+	centered = {x = 0.2, y = 0, w = 0.616, h = 1}
 end
 
 ---Whether Window is maximimized
