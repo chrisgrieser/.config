@@ -114,7 +114,7 @@ augroup("Mini-Lint", {})
 autocmd("BufWritePre", {
 	group = "Mini-Lint",
 	callback = function()
-		cmd.mkview()
+		cmd.mkview {bang = true}
 		if bo.filetype ~= "markdown" then -- to preserve spaces from the two-space-rule, and trailing spaces on sentences
 			cmd [[%s/\s\+$//e]] -- trim trailing whitespaces
 		end

@@ -2,6 +2,34 @@ require("utils")
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
+---Create a copy of a lua table
+---@param originalTable table
+---@return table
+local function copyTable(originalTable)
+	local newTable = {}
+	for _, value in pairs(originalTable) do
+		table.insert(newTable, value)
+	end
+	return newTable
+end
+
+--------------------------------------------------------------------------------
+
+
+local defaultSources = {
+	{name = "luasnip"},
+	{name = "nvim_lsp"},
+	{name = "cmp_tabnine", keyword_length = 3},
+	{name = "treesitter"},
+	{name = "emoji", keyword_length = 2},
+	{name = "buffer", keyword_length = 2},
+}
+
+local defaultAndNerdfont = copyTable(defaultSources)
+table.insert(defaultAndNerdfont, {name = "nerdfont", keyword_length = 2})
+
+--------------------------------------------------------------------------------
+
 local kind_icons = {
 	Text = "",
 	Method = "",
@@ -94,27 +122,11 @@ cmp.setup {
 		end
 	},
 	-- DEFAULT SOURCES
-	sources = cmp.config.sources {
-		{name = "luasnip"},
-		{name = "nvim_lsp"},
-		{name = "cmp_tabnine", keyword_length = 3},
-		{name = "treesitter"},
-		{name = "emoji", keyword_length = 2},
-		{name = "buffer", keyword_length = 2},
-	},
+	sources = cmp.config.sources(defaultSources),
 }
 --------------------------------------------------------------------------------
 
 -- Filetype specific Completion
-local defaultAndNerdfont = {
-	{name = "luasnip"},
-	{name = "nvim_lsp"},
-	{name = "cmp_tabnine", keyword_length = 3},
-	{name = "treesitter"},
-	{name = "nerdfont", keyword_length = 2},
-	{name = "emoji", keyword_length = 2},
-	{name = "buffer", keyword_length = 2},
-}
 
 cmp.setup.filetype("lua", {
 	-- disable leading "-"
@@ -219,7 +231,7 @@ cmp.setup.cmdline(":", {
 
 -- Enable Completion in DressingInput
 cmp.setup.filetype("DressingInput", {
-	sources = cmp.config.sources { {name = "omni"} },
+	sources = cmp.config.sources {{name = "omni"}},
 })
 
 --------------------------------------------------------------------------------
@@ -229,4 +241,3 @@ require("nvim-autopairs").setup()
 -- add brackets to cmp
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-

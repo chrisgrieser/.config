@@ -50,8 +50,7 @@ local function diagnosticFormat(diagnostic, mode)
 	local out = msg .. " (" .. code .. ")"
 
 	if source == "stylelint" or source == "shellcheck" or code == "nil" then
-		-- stylelint and shellcheck already includes the code in the message, some linters without code
-		out = msg
+		out = msg -- stylelint and shellcheck already includes the code in the message, some linters without code
 	end
 	if diagnostic.source and mode == "float" then
 		out = out .. " [" .. source .. "]"
@@ -148,14 +147,13 @@ autocmd("LspAttach", {
 		keymap("n", "gd", telescope.lsp_definitions, bufopts)
 		keymap("n", "gD", telescope.lsp_references, bufopts)
 		keymap("n", "gy", telescope.lsp_type_definitions, bufopts)
-		keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)
+		keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)          
 		keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
 		if client.name == "sumneko_lua" then -- HACK since formatting with lua lsp seems to remove folds?!
 			keymap({"n", "x", "i"}, "<D-s>", function()
 				cmd.mkview {bang = true} -- bang required here
 				vim.lsp.buf.format {async = false} -- not async to avoid race condition
-				cmd [[noautocmd write! | edit %]] -- reload, no autocmd to not trigger rememberFolds augroup, with mkview (of the now non-existing folds) on bufleave
 				cmd.loadview()
 			end, bufopts)
 		else
