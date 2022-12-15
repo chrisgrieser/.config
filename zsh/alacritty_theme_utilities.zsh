@@ -3,7 +3,7 @@
 # switch alacritty color scheme. requires `fzf` and `alacritty-colorscheme`
 # (pip package). save alacritty themes in ~/.config/alacritty/colors, download
 # from https://github.com/eendroroy/alacritty-theme
-function t(){
+function th(){
 	local selected colordemo original
 	local alacritty_color_schemes=~/.config/alacritty/colors
 	original=$(alacritty-colorscheme status | cut -d. -f1)

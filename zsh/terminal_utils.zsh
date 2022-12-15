@@ -63,7 +63,9 @@ function d () {
 		ALL_FILES=( "$@" ) # save files as array
 	fi
 	for item in "${ALL_FILES[@]}"; do
-		mv -fv "$item" "$HOME/.Trash"
+		local itemInTrash="$HOME/.Trash/$(basename "$item")"
+		[[ -e "$itemInTrash" ]] && rm -r 
+		mv -v "$item" "$itemInTrash"
 	done
 }
 
