@@ -27,7 +27,7 @@ null_ls.setup {
 		-- Global
 		builtins.code_actions.gitsigns, -- gitsigns.nvim plugin, e.g. reset hunks
 		builtins.diagnostics.codespell.with {-- common misspellings. Far less false positives than with cspell
-			disabled_filetypes = {"css"}, -- base64-encoded fonts cause a lot of errors
+			disabled_filetypes = {"css", "bibtex"}, -- base64-encoded fonts cause a lot of errors
 			args = {
 				"--ignore-words", dotfilesFolder .. "/codespell/codespell-ignore.txt",
 				-- can't use `--skip`, since it null-ls reads from stdin and not a file
@@ -35,7 +35,7 @@ null_ls.setup {
 			}
 		},
 		builtins.formatting.codespell.with {-- autofix those misspellings
-			disabled_filetypes = {"css"},
+			disabled_filetypes = {"css", "bibtex"},
 			extra_args = {
 				"--ignore-words", dotfilesFolder .. "/codespell/codespell-ignore.txt",
 			}
