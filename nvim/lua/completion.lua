@@ -15,18 +15,24 @@ end
 
 --------------------------------------------------------------------------------
 
+local emojis = {name = "emoji", keyword_length = 2}
+local nerdfont = {name = "nerdfont", keyword_length = 2}
+local buffer = {name = "buffer", keyword_length = 2}
+local path = {name = "path"}
+local zsh = {name = "zsh"}
+local tabnine = {name = "cmp_tabnine", keyword_length = 3}
+local snippets = {name = "luasnip"}
+local lsp = {name = "nvim_lsp"}
+local treesitter = {name = "treesitter"}
 
 local defaultSources = {
-	{name = "luasnip"},
-	{name = "nvim_lsp"},
-	{name = "cmp_tabnine", keyword_length = 3},
-	{name = "treesitter"},
-	{name = "emoji", keyword_length = 2},
-	{name = "buffer", keyword_length = 2},
+	snippets,
+	lsp,
+	tabnine,
+	treesitter,
+	emojis,
+	buffer,
 }
-
-local defaultAndNerdfont = copyTable(defaultSources)
-table.insert(defaultAndNerdfont, {name = "nerdfont", keyword_length = 2})
 
 --------------------------------------------------------------------------------
 
@@ -126,8 +132,11 @@ cmp.setup {
 }
 --------------------------------------------------------------------------------
 
--- Filetype specific Completion
+-- lua and toml
+local defaultAndNerdfont = copyTable(defaultSources)
+table.insert(defaultAndNerdfont, 5, nerdfont)
 
+-- Filetype specific Completion
 cmp.setup.filetype("lua", {
 	-- disable leading "-"
 	enabled = function()
@@ -142,28 +151,17 @@ cmp.setup.filetype("toml", {
 	sources = cmp.config.sources(defaultAndNerdfont),
 })
 
--- don't use buffer and treesitter in css completions since laggy
+-- css
+local cssSources = copyTable(defaultSources)
+table.remove(cssSources) -- no buffer
+table.remove(cssSources) -- no emojis
 cmp.setup.filetype("css", {
-	sources = cmp.config.sources {
-		{name = "luasnip"},
-		{name = "nvim_lsp"},
-		{name = "cmp_tabnine", keyword_length = 3},
-		{name = "emoji", keyword_length = 2},
-	},
+	sources = cmp.config.sources(cssSources),
 })
 
--- treesitter has better completions here so using it
-cmp.setup.filetype("yaml", {
-	sources = cmp.config.sources {
-		{name = "luasnip"},
-		{name = "treesitter"},
-		{name = "nvim_lsp"},
-		{name = "cmp_tabnine", keyword_length = 2},
-		{name = "emoji", keyword_length = 2},
-	},
-})
-
--- also use paths for markdown images, don't use tabnine
+-- markdown
+local markdownSources = copyTable(defaultSources)
+table.insert(markdownSources, 1, path) -- for markdown images
 cmp.setup.filetype("markdown", {
 	sources = cmp.config.sources {
 		{name = "path"},
@@ -174,35 +172,39 @@ cmp.setup.filetype("markdown", {
 	},
 })
 
--- also use zsh for shell completion
-cmp.setup.filetype("sh", {
+cmp.setup.filetype("yaml", {
 	sources = cmp.config.sources {
-		{name = "luasnip"},
-		{name = "zsh"},
-		{name = "nvim_lsp"},
-		{name = "cmp_tabnine", keyword_length = 3},
-		{name = "treesitter"},
-		{name = "emoji", keyword_length = 2},
-		{name = "nerdfont", keyword_length = 2},
-		{name = "buffer", keyword_length = 3},
+		snippets,
+		treesitter,
+		lsp,
+		tabnine,
+		emojis,
 	},
+})
+
+-- also use zsh for shell completion
+local shellSources = copyTable(defaultSources)
+table.insert(shellSources, 2, zsh)
+table.insert(shellSources, 5, nerdfont)
+cmp.setup.filetype("sh", {
+	sources = cmp.config.sources(shellSources),
 })
 
 -- bibtex
 cmp.setup.filetype("bib", {
 	sources = cmp.config.sources {
-		{name = "luasnip"},
-		{name = "treesitter"},
-		{name = "buffer", keyword_length = 2},
+		snippets,
+		treesitter,
+		buffer,
 	},
 })
 
 -- plaintext (e.g., pass editing)
 cmp.setup.filetype("text", {
 	sources = cmp.config.sources {
-		{name = "luasnip"},
-		{name = "buffer", keyword_length = 2},
-		{name = "emoji", keyword_length = 2},
+		snippets,
+		buffer,
+		emojis,
 	},
 })
 

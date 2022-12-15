@@ -147,7 +147,7 @@ autocmd("LspAttach", {
 		keymap("n", "gd", telescope.lsp_definitions, bufopts)
 		keymap("n", "gD", telescope.lsp_references, bufopts)
 		keymap("n", "gy", telescope.lsp_type_definitions, bufopts)
-		keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)          
+		keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)
 		keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
 		if client.name == "sumneko_lua" then -- HACK since formatting with lua lsp seems to remove folds?!
@@ -161,12 +161,12 @@ autocmd("LspAttach", {
 				if bo.filetype == "javascript" or bo.filetype == "typescript" then
 					vim.lsp.buf.format {async = false}
 					cmd.update {bang = true}
-					cmd [[EslintFixAll]] -- eslint-lsp
+					cmd.EslintFixAll() -- eslint-lsp
 				elseif bo.filetype == "applescript" then
-					local prevCursor = api.nvim_win_get_cursor(0)
+					cmd.mkview {bang = true} 
 					cmd [[%normal!gg=G]] -- poor man's formatting…
 					vim.lsp.buf.format {async = false} -- null-ls-codespell
-					api.nvim_win_set_cursor(0, prevCursor)
+					cmd.loadview()
 				else
 					vim.lsp.buf.format {async = true}
 				end
