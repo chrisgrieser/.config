@@ -31,7 +31,7 @@ alias pip="pip3"
 alias curl="curl -sL"
 alias tetris="tetris --ascii-only"
 
-# exa
+# EXA
 # in function for directoryInspect function
 function exa() {
 	command exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
@@ -39,10 +39,10 @@ function exa() {
 
 alias exagit='git status --short; command echo; exa --long --grid --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git'
 alias l='command exa --all --long --git --icons --group-directories-first --sort=modified'
-alias tree='command exa --tree -L4 --icons --git-ignore'
+alias t='command exa --tree -L4 --icons --git-ignore'
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 
-# Global Alias (to be used at the end, mostly)
+# GLOBAL ALIAS (to be used at the end, mostly)
 alias -g H="--help"
 alias -g G="| grep --ignore-case --color"
 alias -g B="| bat"
