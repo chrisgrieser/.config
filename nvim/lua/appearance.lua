@@ -201,7 +201,9 @@ local function mixedIndentation()
 	local ignoredFts = {
 		"css",
 		"markdown",
+		"",
 	}
+
 	if vim.tbl_contains(ignoredFts, ft) then return "" end
 
 	local hasTabs = fn.search("^\t", "nw") > 0
