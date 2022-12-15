@@ -108,7 +108,7 @@ function M.PluginList(use)
 	}}
 	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
 
-	-- AI Stuff
+	-- AI-Support
 	use {"tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp"}
 	use {"aduros/ai.vim", cmd = "AI"}
 	use {"jackMort/ChatGPT.nvim", requires = {
@@ -116,6 +116,7 @@ function M.PluginList(use)
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope.nvim"
 	}}
+
 	-- Appearance
 	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
 	use "nvim-lualine/lualine.nvim" -- status line
@@ -162,8 +163,7 @@ function M.PluginList(use)
 			}
 		end,
 	}
-	use {
-		"ruifm/gitlinker.nvim",
+	use {"ruifm/gitlinker.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		module = "gitlinker",
 		config = function()
@@ -174,22 +174,20 @@ function M.PluginList(use)
 		end
 	}
 
-	-- EDITING: Operators, Text Objects, Navigation, Clipboard
+	-- EDITING-SUPPORT
 	use "echasnovski/mini.ai" -- custom text objects
 	use "kylechui/nvim-surround" -- surround operator
 	use "gbprod/substitute.nvim" -- substitution & exchange operator
 	use "numToStr/Comment.nvim" -- comment operator
-	use "michaeljsmith/vim-indent-object" -- indention-based text-object
+	-- use "michaeljsmith/vim-indent-object" -- indention-based text-object
 	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"x", "<D-j>"}}}
 	use "Darazaki/indent-o-matic" -- auto-determine indents
-
 	use {"gbprod/yanky.nvim"} -- register manager
-
+	use(myrepos .. "nvim-recorder") -- better macros
 	use {"nacro90/numb.nvim", -- line previews when ":n"
 		config = function() require("numb").setup() end,
 		keys = {{"n", ":"}},
 	}
-	use(myrepos .. "nvim-recorder") -- better macros
 
 	-- Misc
 	use "andweeb/presence.nvim"
