@@ -133,9 +133,8 @@ local function valueTextObj(inner)
 	if not (valueEnd) or comStrPattern == "" then
 		valueEnd = #lineContent - 1
 	end
-	valueEnd = valueEnd - 1
 
-	-- inner value = without trailing comma/semi
+	-- inner value = without trailing comma/semicolon
 	local trailingCommaSemi = lineContent:sub(-1):find("[,;]")
 	if inner and trailingCommaSemi then
 		valueEnd = valueEnd - 1
