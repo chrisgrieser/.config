@@ -13,7 +13,6 @@ require("lua.filesystem-watchers")
 require("lua.app-specific-behavior")
 
 if isIMacAtHome() or isAtMother() then
-	require("lua.twitterrific-controls")
 	require("lua.hot-corner-action")
 	require("lua.usb-watchers")
 end

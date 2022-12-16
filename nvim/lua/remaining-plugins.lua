@@ -11,24 +11,6 @@ g.netrw_localcopydircmd = "cp -r" -- so copy work with directories
 cmd.highlight {"def link netrwTreeBar IndentBlankLineChar", bang = true}
 
 --------------------------------------------------------------------------------
--- Mundo
-g.mundo_width = 30
-g.mundo_preview_height = 15
-g.mundo_preview_bottom = 0
-g.mundo_auto_preview = 1
-g.mundo_right = 1 -- right side, not left
-
-augroup("MundoConfig", {})
-autocmd("FileType", {
-	group = "MundoConfig",
-	pattern = {"Mundo", "MundoDiff"},
-	callback = function()
-		keymap("n", "-", "/", {remap = true, buffer = true})
-		keymap("n", "q", ":MundoToggle<CR>", {remap = true, buffer = true, nowait = true})
-	end
-})
-
---------------------------------------------------------------------------------
 -- Discord Rich Presence
 require("presence"):setup {
 	blacklist = {}, -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches

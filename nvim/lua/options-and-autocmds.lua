@@ -102,9 +102,9 @@ opt.confirm = true -- ask instead of aborting
 augroup("autosave", {})
 autocmd({"BufWinLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
 	group = "autosave",
-	pattern = "?*",
 	callback = function()
 		-- safety net to not save file in wrong folder when autochdir is not reliable
+		if bo.filetype == "TelescopePrompt" then return end
 		local curFile = fn.expand("%:p")
 		cmd.update(curFile)
 	end

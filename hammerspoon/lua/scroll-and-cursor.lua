@@ -1,11 +1,5 @@
 require("lua.utils")
-
-local highlightsScrollAmount = 20
-
 --------------------------------------------------------------------------------
--- global pageup/down keys
--- have to be done here, since when send from Karabiner, gets caught by the
--- pagedown/up listener from Hammerspoon in `twitterific-iina.lua`
 
 local function pseudoHideCursor ()
 	local screen = hs.mouse.getCurrentScreen()
@@ -20,6 +14,7 @@ end
 --------------------------------------------------------------------------------
 
 -- HIGHLIGHTS Scroll
+local highlightsScrollAmount = 20
 local function highlightsAppScroll (amount)
 	local highlightsWin = hs.application("Highlights"):mainWindow():frame()
 	local centerPos = {

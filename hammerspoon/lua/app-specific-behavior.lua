@@ -32,9 +32,9 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- PIXELMATOR
-pixelmatorWatcher = aw.new(function(appName, eventType)
+pixelmatorWatcher = aw.new(function(appName, eventType, appObj)
 	if appName == "Pixelmator" and eventType == aw.launched then
-		runWithDelays(0.3, function() moveResizeCurWin("maximized") end)
+		runWithDelays(0.3, function() moveResize(appObj, maximized) end)
 	end
 end):start()
 
@@ -76,17 +76,17 @@ wf_browser = wf.new("Brave Browser")
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true
 	}
-	:subscribe(wf.windowCreated, function()
+	:subscribe(wf.windowCreated, function(newWin)
 		local browserWins = wf_browser:getWindows()
 		if #browserWins == 1 then
 			if isAtOffice() or isProjector() then
-				moveResizeCurWin("maximized")
+				moveResize(newWin, maximized)
 			else
-				moveResizeCurWin("pseudo-maximized")
+				moveResize(newWin, pseudoMaximized)
 			end
 		elseif #browserWins == 2 then
-			moveResize(browserWins[1], hs.layout.left50)
-			moveResize(browserWins[2], hs.layout.right50)
+			moveResize(browserWins[1], leftHalf)
+			moveResize(browserWins[2], rightHalf)
 		end
 	end)
 	:subscribe(wf.windowDestroyed, function()
@@ -127,8 +127,8 @@ wf_mimestream = wf.new("Mimestream")
 		if #wf_mimestream:getWindows() == 2 then
 			local win1 = wf_mimestream:getWindows()[1]
 			local win2 = wf_mimestream:getWindows()[2]
-			moveResize(win1, hs.layout.left50)
-			moveResize(win2, hs.layout.right50)
+			moveResize(win1, leftHalf)
+			moveResize(win2, rightHalf)
 		elseif #wf_mimestream:getWindows() == 1 then
 			moveResize(newWindow, pseudoMaximized)
 		end
@@ -235,8 +235,8 @@ local function finderWinAutoLayout()
 	elseif #finderWins == 1 then
 		moveResize(finderWins[1], centered)
 	elseif #finderWins == 2 then
-		moveResize(finderWins[1], hs.layout.left50)
-		moveResize(finderWins[2], hs.layout.right50)
+		moveResize(finderWins[1], leftHalf)
+		moveResize(finderWins[2], rightHalf)
 	elseif #finderWins == 3 then
 		moveResize(finderWins[1], {h = 1, w = 0.33, x = 0, y = 0})
 		moveResize(finderWins[2], {h = 1, w = 0.34, x = 0.33, y = 0})
@@ -312,10 +312,11 @@ highlightsAppWatcher = aw.new(function(appName, eventType, appObject)
 	appObject:selectMenuItem {"Tools", "Color", "Yellow"}
 	appObject:selectMenuItem {"View", "Hide Toolbar"}
 
+	local hlWin = appObject:mainWindow()
 	if isAtOffice() then
-		moveResizeCurWin("maximized")
+		moveResize(hlWin, maximized)
 	else
-		moveResizeCurWin("pseudo-maximized")
+		moveResize(hlWin, pseudoMaximized)
 	end
 end):start()
 
@@ -342,12 +343,12 @@ end):start()
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR
 wf_script_editor = wf.new("Script Editor")
-	:subscribe(wf.windowCreated, function(newWindow)
-		if newWindow:title() == "Open" then
+	:subscribe(wf.windowCreated, function(newWin)
+		if newWin:title() == "Open" then
 			keystroke({"cmd"}, "n")
 			runWithDelays(0.2, function()
 				keystroke({"cmd"}, "v")
-				moveResizeCurWin("centered")
+				moveResize(newWin, centered)
 			end)
 			runWithDelays(0.4, function()
 				keystroke({"cmd"}, "k")
