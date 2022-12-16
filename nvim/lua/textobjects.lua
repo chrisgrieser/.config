@@ -136,10 +136,8 @@ local function valueTextObj()
 		:gsub("(.)", "%%%1") -- escape commentstring so it's a valid lua pattern
 	local valueEnd, _ = lineContent:find("." .. comStrPattern)
 
-	print("valueEnd:", valueEnd)
 	if not (valueEnd) then
 		valueEnd = #lineContent - 1
-		print("valueEnd:", valueEnd)
 	end
 
 	-- set selection
