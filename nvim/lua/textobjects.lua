@@ -129,8 +129,10 @@ local function valueTextObj(inner)
 	local comStrPattern = bo.commentstring
 		:gsub(" ?%%s.*", "")-- remove placeholder and backside of commentstring
 		:gsub("(.)", "%%%1") -- escape commentstring so it's a valid lua pattern
-	local valueEnd, _ = lineContent:find(". ?" .. comStrPattern)
-	if not (valueEnd) then valueEnd = #lineContent end
+	local valueEnd, _ = lineContent:find(".. ?" .. comStrPattern)
+	if not (valueEnd) or comStrPattern == "" then
+		valueEnd = #lineContent - 1
+	end
 	valueEnd = valueEnd - 1
 
 	-- inner value = without trailing comma/semi

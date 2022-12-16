@@ -981,7 +981,7 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 		<key>2C3B5193-F64C-473E-BBE5-15F668929269</key>
 		<dict>
 			<key>note</key>
-			<string>viDir of frontmost window</string>
+			<string>vidir the frontmost window</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
@@ -1153,7 +1153,7 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 		<key>D608B123-0780-4E08-A9AD-4BBF4396F654</key>
 		<dict>
 			<key>xpos</key>
-			<real>180</real>
+			<real>295</real>
 			<key>ypos</key>
 			<real>745</real>
 		</dict>
