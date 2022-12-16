@@ -40,6 +40,26 @@ keymap({"n", "x"}, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 -- TODO selector text object
 -- s = {"%.()[%w-]+()"}, -- is = with ".", as = without
 
+---CSS Selector Textobj
+---@param inner boolean inner selector?
+local function selectorTextobj(inner)
+	if not(fn.mode():find("[Vv]")) then
+		cmd.normal {"v", bang = true}
+	end
+	cmd.normal {"iwoh", bang = true}
+	local row, col = unpack(getCursor(0))
+	
+	---@diagnostic disable-next-line: assign-type-mismatch, param-type-mismatch, undefined-field
+	local char = fn.getline("."):sub(col, col)
+
+end
+
+-- .bliaaaaaaaa {}
+
+
+keymap({"o", "x"}, "as", function () selectorTextobj(true) end, {desc = "CSS selector textobj", buffer = true})
+keymap({"o", "x"}, "is", function () selectorTextobj(false) end, {desc = "CSS selector textobj", buffer = true})
+
 -- double a selector
 -- keymap("n", "yas", "yaslBP", {buffer = true, silent = true, remap = true})
 

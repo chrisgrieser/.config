@@ -405,7 +405,7 @@ keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end)
 
 -- Diffview
 keymap("n", "<D-g>", function()
-	vim.ui.input({prompt = "Git Pickaxe (empty = full history):"}, function(query)
+	vim.ui.input({prompt = "Git Pickaxe (empty = full history)"}, function(query)
 		if not (query) then return
 		elseif query == "" then cmd("DiffviewFileHistory %")
 		else cmd("DiffviewFileHistory % -G" .. query)
