@@ -11,7 +11,6 @@ local colNo = vim.fn.col
 local append = vim.fn.append
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
-local logWarn = vim.log.levels.WARN
 local function wordUnderCursor()
 	return vim.fn.expand("<cword>")
 end

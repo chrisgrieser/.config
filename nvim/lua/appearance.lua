@@ -83,7 +83,8 @@ print = function(...)
 	for i = 1, #_ do
 		table.insert(print_safe_args, tostring(_[i]))
 	end
-	vim.notify(table.concat(print_safe_args, " "), vim.log.levels.INFO)
+	-- persistent notification
+	vim.notify(table.concat(print_safe_args, " "), logTrace, {timeout = false})
 end
 
 --------------------------------------------------------------------------------

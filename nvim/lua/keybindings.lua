@@ -343,7 +343,7 @@ end
 -- BUFFERS
 local function betterAltBuf() -- switch to alternate-file
 	if fn.expand("#") == "" then
-		vim.notify("No alternate file.", logWarn)
+		vim.notify("No alternate file.", "warn")
 	else
 		cmd.nohlsearch()
 		cmd.buffer("#")
@@ -427,7 +427,7 @@ keymap("n", "<leader>g", function()
 		if not (commitMsg) then
 			return
 		elseif #commitMsg > 50 then
-			vim.notify("Commit Message too long.\n(Run again for shortened message.)", logWarn)
+			vim.notify("Commit Message too long.\n(Run again for shortened message.)", "warn")
 			b.prevCommitMsg = commitMsg:sub(1, 50)
 			return
 		elseif commitMsg == "" then
@@ -503,7 +503,7 @@ keymap("n", "<leader>r", function()
 		cmd.normal {"<C-w><C-p>", bang = true} -- switch to previous window
 
 	else
-		vim.notify("No build system set.", logWarn)
+		vim.notify("No build system set.", "warn")
 
 	end
 end)
