@@ -10,8 +10,8 @@ require("utils")
 -- ah -> a [h]unk (gitsigns)
 -- ai -> an [i]ndentation (indent-textobj)
 -- ad -> a [d]iagnostic (diagnostic-textobj)
--- ae -> almost to the [e]nding of line (mini.ai)
--- av -> a [v]alue / right-hand-side of key-value pair or variable assignment (mini.ai)
+-- ae -> almost to the [e]nding of line (custom)
+-- av -> a [v]alue / right-hand-side of key-value pair or variable assignment (custom)
 -- aL -> a [L]oop (treesitter)
 
 -- FILE-TYPE-SPECIFIC TEXT OBJECTS
@@ -37,9 +37,6 @@ keymap({"o", "x"}, "ic", "i}") -- [c]urly brackets
 keymap({"o", "x"}, "ac", "a}")
 keymap({"o", "x"}, "am", "aW") -- [m]assive word
 keymap({"o", "x"}, "im", "iW")
-keymap("o", "an", "gn") -- [n]ext search result
-keymap("o", "in", "gn")
-keymap("o", "r", "}") -- [r]est of the paragraph
 
 --------------------------------------------------------------------------------
 -- QUICK TEXTOBJ OPERATIONS
@@ -63,6 +60,10 @@ for _, prefix in pairs {"a", "i"} do
 	keymap("o", prefix .. "e", function() cmd.normal {"v$hh", bang = true} end, {desc = "almost ending of line textobj"})
 	keymap("x", prefix .. "e", function() cmd.normal {"$hh", bang = true} end, {desc = "almost ending of line textobj"})
 end
+
+
+-- r: rest of paragraph
+keymap("o", "r", "}") -- [r]est of the paragraph
 
 -- INDENTATION OBJECT
 
@@ -118,26 +119,26 @@ autocmd("FileType", {
 })
 
 -- VALUE TEXT OBJECT
-local function valueTextObj()
+---@param inner boolean
+local function valueTextObj(inner)
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
 
-	-- convert to spaces for proper counting of column
-	local tabwidth = string.rep(" ", bo.tabstop)
-	lineContent = lineContent:gsub("\t", tabwidth)
-
-	local _, valueStart = lineContent:find("[=:] ?.")
-	print("valueStart:", valueStart)
-	if not(valueStart) then return end -- abort when no value found
+	local _, valueStart = lineContent:find("[=:] ?")
+	if not(valueStart) then
+		vim.notify("No value found in current line.", logWarn)
+		return
+	end
 
 	-- value end either comment or end of line
 	local comStrPattern = bo.commentstring
 		:gsub(" ?%%s.*", "")-- remove placeholder and backside of commentstring
 		:gsub("(.)", "%%%1") -- escape commentstring so it's a valid lua pattern
-	local valueEnd, _ = lineContent:find("." .. comStrPattern)
-
-	if not (valueEnd) then
-		valueEnd = #lineContent - 1
+	local valueEnd, _ = lineContent:find(". ?" .. comStrPattern)
+	if not (valueEnd) then valueEnd = #lineContent end
+	valueEnd = valueEnd - 1
+	if inner and lineContent[valueEnd]:find("[,;]") then
+		
 	end
 
 	-- set selection
@@ -150,9 +151,8 @@ local function valueTextObj()
 	setCursor(0, {fn.line("."), valueEnd})
 end
 
-for _, prefix in pairs {"a", "i"} do
-	keymap({"x", "o"}, prefix .. "v", valueTextObj, {desc = "value/assignment textobj"})
-end
+keymap({"x", "o"}, "iv", function () valueTextObj(false) end, {desc = "value textobj"})
+keymap({"x", "o"}, "av", function () valueTextObj(true) end, {desc = "value textobj"})
 
 --------------------------------------------------------------------------------
 -- SPECIAL PLUGIN TEXT OBJECTS
@@ -165,46 +165,6 @@ for _, prefix in pairs {"a", "i"} do
 	keymap({"x", "o"}, prefix .. "d", function() require("textobj-diagnostic").nearest_diag() end,
 		{desc = "diagnostic textobj"})
 end
-
--- disable text-objects from mini.ai in favor of my own
-local miniaiConfig = {
-	n_lines = 15, -- number of lines within which to search textobj
-	custom_textobjects = {
-		b = false,
-		q = false,
-		t = false,
-		f = false,
-		a = false,
-	},
-	mappings = {
-		around_next = "",
-		inside_next = "",
-		around_last = "",
-		inside_last = "",
-		goto_left = "",
-		goto_right = "",
-	},
-}
-
--- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt#L215
--- augroup("value-textobj", {})
--- autocmd("FileType", {
--- 	group = "value-textobj",
--- 	callback = function()
--- 		-- this way, comments for various filetypes are excluded from the value-textobj
--- 		local comStr = bo.commentstring
--- 			:gsub("%%s.*", "")-- remove replaceholder and back side of comment
--- 			:gsub("(.)", "%1?") -- make all letters of the comment optional
--- 		local pattern = "[=:] ?()().-()[;,]?() ?" .. comStr .. "[][-_(){}/ %w]*\n"
--- 		b.miniai_config = {
--- 			custom_textobjects = {
--- 				v = {pattern}
--- 			}
--- 		}
--- 	end
--- })
-
-require("mini.ai").setup(miniaiConfig)
 
 --------------------------------------------------------------------------------
 -- SURROUND

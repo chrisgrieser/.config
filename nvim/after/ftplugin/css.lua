@@ -37,17 +37,11 @@ keymap({"n", "x"}, "<C-j>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 keymap({"n", "x"}, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 
 --------------------------------------------------------------------------------
-
--- custom text object css [s]elector (overwriting sentence textobj)
--- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt
-b.miniai_config = {
-	custom_textobjects = {
-		s = {"%.()[%w-]+()"}, -- is = with ".", as = without
-	},
-}
+-- TODO selector text object
+-- s = {"%.()[%w-]+()"}, -- is = with ".", as = without
 
 -- double a selector
-keymap("n", "yas", "yaslBP", {buffer = true, silent = true, remap = true})
+-- keymap("n", "yas", "yaslBP", {buffer = true, silent = true, remap = true})
 
 --------------------------------------------------------------------------------
 
