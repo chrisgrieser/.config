@@ -42,7 +42,7 @@ require("telescope").setup {
 			horizontal = {
 				height = 0.95,
 				preview_cutoff = 70,
-				width = 0.92,
+				width = 0.95,
 				preview_width = {0.60, min = 35}
 			},
 			cursor = {

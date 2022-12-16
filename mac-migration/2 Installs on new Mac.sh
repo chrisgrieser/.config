@@ -42,13 +42,13 @@ pip list --not-required
 # Espanso
 espanso service register
 
-# sketchy
+# sketchybar
 brew services start felixkratz/formulae/sketchybar
 
 # change setting of archive utility
 open "/System/Library/CoreServices/Applications/Archive Utility.app"
 
-# Twitterific: run headless http://support.iconfactory.com/kb/twitterrific/advanced-settings-using-the-command-line-macos
+# Twitterific headless http://support.iconfactory.com/kb/twitterrific/advanced-settings-using-the-command-line-macos
 defaults write com.iconfactory.Twitterrific5 advancedShowDockIcon -bool NO
 
 # Hammerspoon
@@ -57,15 +57,9 @@ defaults write "org.hammerspoon.Hammerspoon" "HSUploadCrashData" 0
 defaults write "org.hammerspoon.Hammerspoon" "MJKeepConsoleOnTopKey" 1
 defaults write "org.hammerspoon.Hammerspoon" "SUEnableAutomaticChecks" 1
 
-# Portfolio Performance
-font_size=19
-c_css_location=~'/Library/Application Support/name.abuchen.portfolio.product/workspace/.metadata/.plugins/name.abuchen.portfolio.ui/'
-mkdir -p "$c_css_location"
-printf "%s" "{\nfont-size: ""$font_size"";\n}" >>"$c_css_location"/custom.css
-
 # Steam UI https://tp69.blog/2020/02/11/how-to-zoom-the-steam-client/
-steamDataPath=~"/Library/Application Support/Steam/Steam.AppBundle/Steam/Contents/MacOS"
-newSkinPath="$steamDataPath""/skins/Bigger UI"
-mkdir -p "$newSkinPath"/resource/styles/
-cp "$steamDataPath"/resource/styles/steam.styles "$newSkinPath"/resource/styles/
-echo ":root { zoom: \"1.5\"; }" >"$newSkinPath"/resource/webkit.css
+steamDataPath="$HOME/Library/Application Support/Steam/Steam.AppBundle/Steam/Contents/MacOS"
+newSkinPath="$steamDataPath/skins/Bigger UI"
+mkdir -p "$newSkinPath/resource/styles/"
+cp "$steamDataPath/resource/styles/steam.styles" "$newSkinPath/resource/styles/"
+echo ':root { zoom: "1.5"; }' >"$newSkinPath/resource/webkit.css"

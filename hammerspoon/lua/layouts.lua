@@ -24,7 +24,7 @@ local function showAllSidebars()
 end
 
 local function isWeekend()
-	local weekday = os.date():sub(1,3)
+	local weekday = os.date():sub(1, 3)
 	if weekday == "Sun" or weekday == "Sat" then
 		return true
 	else
@@ -72,7 +72,7 @@ function homeModeLayout()
 
 	openIfNotRunning("Discord")
 	openIfNotRunning("Mimestream")
-	if not(isWeekend()) then openIfNotRunning("Slack") end
+	if not (isWeekend()) then openIfNotRunning("Slack") end
 	openIfNotRunning("Brave Browser")
 	openIfNotRunning("Twitterrific")
 	openIfNotRunning("Drafts")
@@ -285,14 +285,19 @@ wf_appsOnMouseScreen = wf.new {
 	"Finder"
 }
 
-wf_appsOnMouseScreen:subscribe(wf.windowCreated, function(newWindow)
+wf_appsOnMouseScreen:subscribe(wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()
 	if not (mouseScreen) then return end
-	local screenOfWindow = newWindow:screen()
+	local screenOfWindow = newWin:screen()
+	local appn = newWin:application():name()
 	if isProjector() and not (mouseScreen:name() == screenOfWindow:name()) then
 		runWithDelays({0, 0.1, 0.2, 0.4, 0.6}, function()
-			newWindow:moveToScreen(mouseScreen)
-			moveResize(newWindow, maximized)
+			newWin:moveToScreen(mouseScreen)
+			if appn == "Finder" or "Script Editor" then
+				moveResize(newWin, centered)
+			else
+				moveResize(newWin, maximized)
+			end
 		end)
 	end
 end)
