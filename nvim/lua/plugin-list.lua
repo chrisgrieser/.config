@@ -110,7 +110,6 @@ function M.PluginList(use)
 
 	-- AI-Support
 	use {"tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp"}
-	use {"aduros/ai.vim", cmd = "AI"}
 	use {"jackMort/ChatGPT.nvim", requires = {
 		"MunifTanjim/nui.nvim",
 		"nvim-lua/plenary.nvim",

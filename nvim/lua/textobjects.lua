@@ -142,7 +142,7 @@ local function valueTextObj(inner)
 
 	-- set selection
 	setCursor(0, {fn.line("."), valueStart})
-	if api.nvim_get_mode().mode:find("v") then
+	if fn.mode:find("v") then
 		cmd.normal {"o", bang = true}
 	else
 		cmd.normal {"v", bang = true}

@@ -189,19 +189,16 @@ augroup("rememberCursorAndFolds", {})
 autocmd("BufWinLeave", {
 	group = "rememberCursorAndFolds",
 	pattern = "?*",
-	command = "silent! mkview"
+	command = "silent! mkview!"
 })
 autocmd("BufWinEnter", {
 	group = "rememberCursorAndFolds",
 	pattern = "?*",
 	callback = function()
-		local ignoredFts = {
-			"DressingSelect",
-			"cybu",
-		}
+		local ignoredFts = {"DressingSelect", "cybu"}
 		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
 		cmd [[silent! loadview]]
-		cmd.normal {"zH", bang = true} -- zH to also scroll to the left
+		cmd.normal {"^", bang = true} -- scroll to the left
 	end
 })
 
