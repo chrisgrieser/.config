@@ -55,9 +55,8 @@ end)
 --------------------------------------------------------------------------------
 -- CUSTOM TEXTOBJECTS
 
--- z: end of line minus 1
-keymap("o", "z", function() cmd.normal {"v$hh", bang = true} end, {desc = "almost ending of line textobj"})
-keymap("x", "z", function() cmd.normal {"$hh", bang = true} end, {desc = "almost ending of line textobj"})
+-- p: [p]retty close to the end of the line
+keymap("o", "p", function() cmd.normal {"v$hh", bang = true} end, {desc = "almost ending of line textobj"})
 
 -- r: [r]est of paragraph (linewise)
 keymap("o", "r", function() cmd.normal {"V}", bang = true} end, {desc = "rest of paragraph (linewise)"})

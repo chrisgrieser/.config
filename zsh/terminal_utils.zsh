@@ -46,7 +46,6 @@ function directoryInspect (){
 		exa
 	fi
 }
-alias vidir="$DOTFILE_FOLDER/zsh/plugins/vidir"
 
 # measure zsh loading time, https://blog.jonlu.ca/posts/speeding-up-zsh
 function timezsh(){

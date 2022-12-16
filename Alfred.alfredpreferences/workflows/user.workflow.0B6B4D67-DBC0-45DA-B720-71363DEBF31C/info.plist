@@ -72,6 +72,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>2C3B5193-F64C-473E-BBE5-15F668929269</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D608B123-0780-4E08-A9AD-4BBF4396F654</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2CDD7161-EC93-4A2D-B9B2-ED76E07B0B3C</key>
 		<array>
 			<dict>
@@ -227,6 +240,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D608B123-0780-4E08-A9AD-4BBF4396F654</key>
+		<array/>
 		<key>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</key>
 		<array>
 			<dict>
@@ -853,6 +868,62 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>2</integer>
+				<key>hotmod</key>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>D</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>2C3B5193-F64C-473E-BBE5-15F668929269</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>finderWin=$(osascript -e 'tell application "Finder" to return POSIX path of (target of window 1 as alias)')
+
+alacritty --working-directory="$finderWin" --command vidir</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D608B123-0780-4E08-A9AD-4BBF4396F654</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -906,6 +977,15 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>850</real>
 			<key>ypos</key>
 			<real>540</real>
+		</dict>
+		<key>2C3B5193-F64C-473E-BBE5-15F668929269</key>
+		<dict>
+			<key>note</key>
+			<string>viDir of frontmost window</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>745</real>
 		</dict>
 		<key>2CDD7161-EC93-4A2D-B9B2-ED76E07B0B3C</key>
 		<dict>
@@ -1069,6 +1149,13 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>850</real>
 			<key>ypos</key>
 			<real>410</real>
+		</dict>
+		<key>D608B123-0780-4E08-A9AD-4BBF4396F654</key>
+		<dict>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>745</real>
 		</dict>
 		<key>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</key>
 		<dict>
