@@ -44,7 +44,7 @@ keymap({"o", "x"}, "im", "iW")
 -- QUICK TEXTOBJ OPERATIONS
 keymap("n", "C", '"_C')
 keymap("n", "<Space>", '"_ciw') -- change word
-keymap("n", "<C-M-Space>", '"_daw') -- HACK since <S-Space> not fully supported, requires karabiner remapping it
+keymap("n", "<C-M-Space>", '"_daW') -- HACK since <S-Space> not fully supported, requires karabiner remapping it
 keymap("x", "<Space>", '"_c')
 
 --------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ keymap("x", "<Space>", '"_c')
 -- <Space>: Subword (-_ as delimiters)
 keymap("o", "<Space>", function ()
 	local iskeywBefore = opt.iskeyword:get()
-	opt.iskeyword:remove {"_", "-"}
+	opt.iskeyword:remove {"_", "-", "."}
 	cmd.normal {"viw", bang = true}
 	opt.iskeyword = iskeywBefore
 end, {desc = "subword textobj"})
@@ -144,13 +144,14 @@ local function valueTextObj(inner)
 	end
 
 	-- set selection
-	setCursor(0, {fn.line("."), valueStart})
+	local currentRow = fn.line(".")
+	setCursor(0, {currentRow, valueStart})
 	if fn.mode():find("v") then
 		cmd.normal {"o", bang = true}
 	else
 		cmd.normal {"v", bang = true}
 	end
-	setCursor(0, {fn.line("."), valueEnd})
+	setCursor(0, {currentRow, valueEnd})
 end
 
 keymap({"x", "o"}, "iv", function() valueTextObj(true) end, {desc = "inner value textobj"})

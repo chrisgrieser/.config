@@ -154,7 +154,7 @@ recorder.setup {
 keymap("n", "!", "a <Esc>h") -- insert space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
-keymap("n", "d<Space>", function() -- delete blank lines except one
+keymap("n", "d<Tab>", function() -- delete blank lines except one
 	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
 		cmd [[normal! "_dipO]]
 	else
@@ -174,16 +174,16 @@ keymap("x", "<S-Tab>", "<gv")
 -- Casing
 keymap("n", "ü", "mzlblgueh~`z", {desc = "toggle capital/lowercase of word"})
 keymap("n", "Ü", "gUiw", {desc = "uppercase word"})
-keymap("n", "~", "~h", {desc = "switch char case (w/o) moving"})
+keymap("n", "~", "~h", {desc = "switch char case w/o moving"})
 
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'"}
 for _, v in pairs(trailingKeys) do
-	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z")
+	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", {desc = "append "..v.." to EoL"})
 end
 
 -- Spelling (mnemonic: [z]pe[l]ling)
-keymap("n", "zl", telescope.spell_suggest)
+keymap("n", "zl", telescope.spell_suggest, {desc = "spellsuggest"})
 keymap("n", "gl", "]s") -- next misspelling
 keymap("n", "gL", "[s") -- prev misspelling
 keymap("n", "zf", "mz1z=`z") -- auto[f]ix word under cursor (= select 1st suggestion)
