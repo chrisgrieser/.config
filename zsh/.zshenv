@@ -28,6 +28,6 @@ export NEOVIDE_FRAME="buttonless"
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 
 #───────────────────────────────────────────────────────────────────────────────
-# karabiner-cli
-export PATH="/Library/Application Support/org.pqrs/Karabiner-Elements/bin:$PATH"
 
+# vidir
+export PATH="$DOTFILE_FOLDER/zsh/plugins":$PATH

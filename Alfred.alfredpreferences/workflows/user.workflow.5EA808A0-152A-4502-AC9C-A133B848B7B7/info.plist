@@ -76,18 +76,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>C21186A4-BFA2-43DB-8893-567B30CBA24D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>1690B174-8A61-4A72-9D6C-C1D7692CF56F</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>F0CD3DA7-A748-4654-AA5A-1FEDBF899855</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -1204,20 +1192,6 @@ echo "$url"</string>
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>org.yanex.marta</string>
-						<key>outputlabel</key>
-						<string>Marta</string>
-						<key>uid</key>
-						<string>1690B174-8A61-4A72-9D6C-C1D7692CF56F</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:focusedapp}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
 						<string>com.apple.finder</string>
 						<key>outputlabel</key>
 						<string>Finder</string>
@@ -1568,7 +1542,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>1015</real>
+			<real>1030</real>
 		</dict>
 		<key>4C4CA3DF-BB26-4393-84E2-27190A118611</key>
 		<dict>
