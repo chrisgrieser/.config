@@ -55,8 +55,8 @@ end)
 --------------------------------------------------------------------------------
 -- CUSTOM TEXTOBJECTS
 
--- p: [p]retty close to the end of the line
-keymap("o", "p", function() cmd.normal {"v$hh", bang = true} end, {desc = "almost ending of line textobj"})
+-- n: [n]ear end of the line
+keymap("o", "n", function() cmd.normal {"v$hh", bang = true} end, {desc = "almost ending of line textobj"})
 
 -- r: [r]est of paragraph (linewise)
 keymap("o", "r", function() cmd.normal {"V}", bang = true} end, {desc = "rest of paragraph (linewise)"})
@@ -125,7 +125,7 @@ local function valueTextObj(inner)
 		return
 	end
 
-	-- value end either comment or end of line
+	-- valueEnd either comment or end of line
 	local comStrPattern = bo.commentstring
 		:gsub(" ?%%s.*", "")-- remove placeholder and backside of commentstring
 		:gsub("(.)", "%%%1") -- escape commentstring so it's a valid lua pattern
