@@ -43,7 +43,7 @@ require("telescope").setup {
 				height = 0.95,
 				preview_cutoff = 70,
 				width = 0.92,
-				preview_width = {0.55, max = 50}
+				preview_width = {0.60, min = 35}
 			},
 			cursor = {
 				preview_cutoff = 9001, -- never use preview here
@@ -129,6 +129,12 @@ require("telescope").setup {
 			prompt_prefix = " ",
 			results_title = false,
 			layout_strategy = "bottom_pane",
+		},
+	},
+	extensions = {
+		undo = {
+			prompt_prefix = "",
+			initial_mode = "normal",
 		},
 	},
 }

@@ -142,13 +142,10 @@ function M.PluginList(use)
 		"nvim-tree/nvim-web-devicons",
 		"nvim-lua/plenary.nvim",
 	}}
-	use {"simnalamburt/vim-mundo", -- undotree, also supports searching undo history
-		cmd = "MundoToggle",
-		run = "pip3 install --upgrade pynvim",
-	}
 	use { "debugloop/telescope-undo.nvim",
 		requires = {"nvim-telescope/telescope.nvim"},
 		config = function() require("telescope").load_extension("undo") end,
+		module = "telescope-undo",
 	}
 
 	-- Terminal & Git

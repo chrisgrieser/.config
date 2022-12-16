@@ -6,10 +6,10 @@ local packer = require("packer")
 g.mapleader = ","
 
 -- copy [l]ast ex[c]ommand
-keymap("n", "<leader>lc", function ()
+keymap("n", "<leader>lc", function()
 	local lastCommand = fn.getreg(":")
 	fn.setreg("+", lastCommand)
-	vim.notify("COPIED\n"..lastCommand)
+	vim.notify("COPIED\n" .. lastCommand)
 end)
 
 -- run [l]ast command [a]gain
@@ -29,7 +29,7 @@ keymap("n", "<leader>M", cmd.Mason)
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
-	cmd.update{bang = true}
+	cmd.update {bang = true}
 	packer.compile()
 	package.loaded["plugin-list"] = nil -- empty the cache for lua
 	packer.startup(require("plugin-list").PluginList)
@@ -156,7 +156,7 @@ keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
 keymap("n", "d<Tab>", function() -- delete blank lines except one
 	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
-		cmd [[normal! "_dipO]]
+		cmd.normal {[["_dipO]], bang = true}
 	else
 		vim.notify("Line not empty.", logWarn)
 	end
@@ -179,7 +179,7 @@ keymap("n", "~", "~h", {desc = "switch char case w/o moving"})
 -- <leader>{char} → Append {char} to end of line
 local trailingKeys = {".", ",", ";", ":", '"', "'"}
 for _, v in pairs(trailingKeys) do
-	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", {desc = "append "..v.." to EoL"})
+	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", {desc = "append " .. v .. " to EoL"})
 end
 
 -- Spelling (mnemonic: [z]pe[l]ling)
@@ -214,7 +214,8 @@ keymap("x", "R", qol.duplicateSelection)
 -- Undo
 keymap({"n", "x"}, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", qol.undoDuration)
-keymap("n", "<leader>u", ":MundoToggle<CR>") -- undo tree
+-- keymap("n", "<leader>u", ":MundoToggle<CR>") -- undo tree
+keymap("n", "<leader>u", function () require("telescope-undo")() end)
 keymap("i", "<C-g>u<Space>", "<Space>") -- extra undo point for every space
 
 -- Logging & Debugging

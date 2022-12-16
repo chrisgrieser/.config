@@ -1,10 +1,11 @@
 require("lua.utils")
-require("lua.twitterrific-controls")
 
 --------------------------------------------------------------------------------
 -- WINDOW MANAGEMENT UTILS
 iMacDisplay = hs.screen("Built%-in")
 maximized = hs.layout.maximized
+rightHalf = hs.layout.right50
+leftHalf = hs.layout.left50
 
 -- device-specific parameters
 if isIMacAtHome() then
@@ -42,16 +43,6 @@ function isPseudoMaximized(win)
 	local posOkay = win:frame().x == 0 and win:frame().y == 0
 	local widthOkay = (dif > -15 and dif < 15) -- leeway for some apps
 	return widthOkay and posOkay
-end
-
----Whether Window is half-sized
----@param win hs.window
----@return boolean
-function isHalf(win)
-	if not (win) then return false end
-	local max = win:screen():frame()
-	local dif = win:frame().w - 0.5 * max.w
-	return (dif > -15 and dif < 15) -- leeway for some apps
 end
 
 --------------------------------------------------------------------------------
@@ -110,12 +101,6 @@ end
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
----Move and Resize Window
----@param pos hs.geometry
-local function moveResizeCurWin(pos)
-	moveResize(hs.window.focusedWindow(), pos) 
-end
-
 ---replaces `win:moveToUnit(pos)`
 ---@param win hs.window
 ---@param pos hs.geometry
@@ -127,7 +112,7 @@ function moveResize(win, pos)
 	end
 
 	-- for Obsidian theme development
-	if not (pos == pseudoMaximized) and not(pos == maximized) then
+	if not (pos == pseudoMaximized) and not (pos == maximized) then
 		if appOfWin:find("[Nn]eovide") then
 			runWithDelays(0.15, function()
 				app("Obsidian"):unhide()
@@ -139,6 +124,7 @@ function moveResize(win, pos)
 	if pos == pseudoMaximized or pos == centered then
 		app("Twitterrific"):mainWindow():raise()
 	end
+
 	-- has to repeat due window creation delay for some apps
 	runWithDelays({0, 0.1, 0.3, 0.5}, function() win:moveToUnit(pos) end)
 end
@@ -176,17 +162,18 @@ function twitterrificAction(type)
 		keystroke({}, "down") -- enable j/k movement
 
 		hs.mouse.absolutePosition(prevMousePos)
-		hs.application(previousApp):activate()
+		app(previousApp):activate()
 	end
 end
+
 --------------------------------------------------------------------------------
--- HOTKEYS
+-- HOTKEY ACTIONS
 local function controlSpaceAction()
 	local currentWin = hs.window.focusedWindow()
 	local pos
 	if frontApp() == "Finder" or frontApp() == "Script Editor" then
 		pos = centered
-	elseif (isIMacAtHome() or isAtMother()) and not(isPseudoMaximized(currentWin)) then
+	elseif (isIMacAtHome() or isAtMother()) and not (isPseudoMaximized(currentWin)) then
 		pos = pseudoMaximized
 	else
 		pos = maximized
@@ -195,14 +182,17 @@ local function controlSpaceAction()
 end
 
 local function pagedownAction()
-	if numb
-	if appIsRunning("Twitterrific") then
+	if #hs.screen.allScreens() > 1 then
+		moveCurWinToOtherDisplay()
+	elseif appIsRunning("Twitterrific") then
 		keystroke({}, "down", 1, app("Twitterrific"))
 	end
 end
 
 local function pageupAction()
-	if appIsRunning("Twitterrific") then
+	if #hs.screen.allScreens() > 1 then
+		moveCurWinToOtherDisplay()
+	elseif appIsRunning("Twitterrific") then
 		keystroke({}, "up", 1, app("Twitterrific"))
 	end
 end
@@ -223,13 +213,17 @@ local function endAction()
 end
 
 --------------------------------------------------------------------------------
-hotkey(hyper, "right", function() moveResizeCurWin(hs.layout.right50) end)
-hotkey(hyper, "left", function() moveResizeCurWin(hs.layout.left50) end)
-hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
+-- HOTKEYS
+-- Window resizing
+hotkey(hyper, "right", function() moveResize(hs.window:focusedWindow(), rightHalf) end)
+hotkey(hyper, "left", function() moveResize(hs.window:focusedWindow(), leftHalf) end)
 hotkey({"ctrl"}, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
 
+-- move to other display or scroll Twitterrific
+hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
 hotkey({}, "pagedown", pagedownAction, nil, pagedownAction)
 hotkey({}, "pageup", pageupAction, nil, pageupAction)
-hotkey({}, "home", homeAction) 
-hotkey({}, "end", endAction)
 
+-- Twitterrific or Zoom
+hotkey({}, "home", homeAction)
+hotkey({}, "end", endAction)
