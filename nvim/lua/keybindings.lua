@@ -6,7 +6,11 @@ local packer = require("packer")
 g.mapleader = ","
 
 -- copy [l]ast ex[c]ommand
-keymap("n", "<leader>lc", qol.copyLastCommand)
+keymap("n", "<leader>lc", function ()
+	local lastCommand = fn.getreg(":")
+	fn.setreg("+", lastCommand)
+	vim.notify("COPIED\n"..lastCommand)
+end)
 
 -- run [l]ast command [a]gain
 keymap("n", "<leader>la", "@:")
@@ -35,6 +39,7 @@ keymap("n", "<leader>p", function()
 	-- remove oldest snapshot when more than 20
 	local snapshotPath = fn.stdpath("config") .. "/packer-snapshots"
 	os.execute([[cd ']] .. snapshotPath .. [[' ; ls -t | tail -n +20 | tr '\n' '\0' | xargs -0 rm]])
+	require("notify").dismiss()
 end)
 keymap("n", "<leader>P", packer.status)
 
@@ -134,6 +139,7 @@ local recorder = require("recorder")
 recorder.setup {
 	slots = {"a", "b"},
 	clear = true,
+	logLevel = logTrace,
 	mapping = {
 		startStopRecording = "0",
 		playMacro = "9",

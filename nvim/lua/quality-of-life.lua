@@ -30,24 +30,6 @@ end
 
 --------------------------------------------------------------------------------
 
----Copy Last Command
-function M.copyLastCommand()
-	local reg = '"'
-	local clipboardOpt = vim.opt.clipboard:get();
-	local useSystemClipb = #clipboardOpt > 0 and clipboardOpt[1]:find("unnamed")
-	if useSystemClipb then reg = "+" end
-
-	local lastCommand = fn.getreg(":")
-	if not (lastCommand) then
-		vim.notify("No Command has been run yet.", logWarn)
-		return
-	end
-	fn.setreg(reg, lastCommand)
-	vim.notify("COPIED\n" .. lastCommand)
-end
-
---------------------------------------------------------------------------------
-
 -- Duplicate line under cursor, and change occurrences of certain words to their
 -- opposite, e.g., "right" to "left". Intended for languages like CSS.
 ---@param opts? table available: reverse, moveTo = key|value|none, increment

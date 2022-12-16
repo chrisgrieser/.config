@@ -41,7 +41,7 @@ autocmd("FileType", {
 	group = "commentSearch",
 	callback = function()
 		local comStr = bo.commentstring:gsub(" ?%%s.*", "") -- remove replaceholder and back side of comment
-		keymap("n", "gq", [[/\v.*]] .. comStr, {buffer = true, desc = "search only comments"})
+		keymap("n", "gq", [[/\v]] .. comStr.. [[.*]], {buffer = true, desc = "search only comments"})
 	end
 })
 
