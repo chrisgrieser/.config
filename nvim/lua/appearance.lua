@@ -96,9 +96,7 @@ require("dressing").setup {
 		insert_only = false,
 		win_options = {sidescrolloff = 0},
 		mappings = {
-			n = {
-				["q"] = "Close",
-			},
+			n = {["q"] = "Close"},
 		},
 	},
 	select = {
@@ -111,9 +109,7 @@ require("dressing").setup {
 			min_width = 18,
 			max_height = 12,
 			min_height = 4,
-			mappings = {
-				["q"] = "Close",
-			},
+			mappings = {["q"] = "Close"},
 		},
 	},
 }
@@ -160,11 +156,8 @@ local function lsp_progress()
 end
 
 local function readOnly()
-	if bo.modifiable then
-		return ""
-	else
-		return ""
-	end
+	local status = bo.modifiable and "" or ""
+	return status
 end
 
 local function alternateFile()
@@ -194,7 +187,7 @@ local function currentFile() -- using this function instead of default filename,
 		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
 		return curParent .. "/" .. curFile
 	end
-	return "%% " .. curFile -- "%" is lua's escape character and therefore needs to be escaped itself
+	return "%% " .. curFile -- "%" is escape character and theremore must be escaped
 end
 
 local function mixedIndentation()
@@ -266,7 +259,7 @@ end
 
 --------------------------------------------------------------------------------
 
-local secSeparators
+local secSeparators, winSecSeparators
 if isGui() then
 	secSeparators = {left = " ", right = " "} -- nerdfont: 'nf-ple'
 	winSecSeparators = {left = "", right = ""}
@@ -327,6 +320,7 @@ require("lualine").setup {
 			"Mason",
 			"packer",
 			"ccc-ui",
+			"",
 		},
 		globalstatus = true,
 		component_separators = {left = "", right = ""},
@@ -334,7 +328,6 @@ require("lualine").setup {
 		extensions = {"nvim-dap-ui"},
 		disabled_filetypes = {
 			statusline = {
-				"ccc-ui",
 			},
 			winbar = {
 			},
