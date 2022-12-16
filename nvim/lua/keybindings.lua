@@ -75,7 +75,7 @@ keymap({"n", "x", "o"}, "*", "#") -- backwards on the same key (German Layout)
 keymap("", "ä", "`M") -- Goto Mark M
 keymap("", "Ä", function() -- Set Mark M
 	cmd.normal {"mM", bang = true}
-	vim.notify("Mark M set.")
+	vim.notify("Mark M set")
 end)
 
 -- FOLDING

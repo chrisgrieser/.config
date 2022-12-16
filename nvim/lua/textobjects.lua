@@ -61,12 +61,12 @@ for _, prefix in pairs {"a", "i"} do
 	keymap("x", prefix .. "e", function() cmd.normal {"$hh", bang = true} end, {desc = "almost ending of line textobj"})
 end
 
+-- r: [r]est of paragraph (linewise)
+keymap("o", "r", function() cmd.normal {"v0}", bang = true} end, {desc = "rest of paragraph (linewise)"})
+keymap("x", "r", function() cmd.normal {"0}", bang = true} end, {desc = "rest of paragraph (linewise)"})
 
--- r: rest of paragraph
-keymap("o", "r", "}") -- [r]est of the paragraph
 
 -- INDENTATION OBJECT
-
 ---indentation textobj, based on https://thevaluable.dev/vim-create-text-objects/
 ---@param startBorder boolean
 ---@param endBorder boolean
@@ -125,7 +125,7 @@ local function valueTextObj(inner)
 	local lineContent = fn.getline(".") ---@type string
 
 	local _, valueStart = lineContent:find("[=:] ?")
-	if not(valueStart) then
+	if not (valueStart) then
 		vim.notify("No value found in current line.", logWarn)
 		return
 	end
@@ -137,8 +137,11 @@ local function valueTextObj(inner)
 	local valueEnd, _ = lineContent:find(". ?" .. comStrPattern)
 	if not (valueEnd) then valueEnd = #lineContent end
 	valueEnd = valueEnd - 1
-	if inner and lineContent[valueEnd]:find("[,;]") then
-		
+
+	-- inner value = without trailing comma/semi
+	local trailingCommaSemi = lineContent:sub(-1):find("[,;]")
+	if inner and trailingCommaSemi then
+		valueEnd = valueEnd - 1
 	end
 
 	-- set selection
@@ -151,8 +154,8 @@ local function valueTextObj(inner)
 	setCursor(0, {fn.line("."), valueEnd})
 end
 
-keymap({"x", "o"}, "iv", function () valueTextObj(false) end, {desc = "value textobj"})
-keymap({"x", "o"}, "av", function () valueTextObj(true) end, {desc = "value textobj"})
+keymap({"x", "o"}, "iv", function() valueTextObj(true) end, {desc = "inner value textobj"})
+keymap({"x", "o"}, "av", function() valueTextObj(false) end, {desc = "outer value textobj"})
 
 --------------------------------------------------------------------------------
 -- SPECIAL PLUGIN TEXT OBJECTS
