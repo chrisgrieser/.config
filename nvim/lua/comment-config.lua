@@ -40,7 +40,7 @@ autocmd("FileType", {
 	group = "commentSearch",
 	callback = function()
 		local comStr = bo.commentstring:gsub("%%s.*", "")-- remove replaceholder and back side of comment
-		keymap("n", "gq", "/\v"..comStr, {desc = "Search only Comments for a string"})
+		keymap("n", "gq", "/\v"..comStr, {buffer = true, desc = "Search only Comments for a string"})
 	end
 })
 
@@ -78,14 +78,15 @@ local function divider()
 	-- shorten if it was on blank line, since fn.indent() does not return indent
 	-- line would have if it has content
 	if wasOnBlank then
-		cmd [[normal! j==]] -- move down and indent
+		cmd.normal {"j==", bang = true} -- move down and indent
+		cmd [[normal! j==]]
 		local hrIndent = fn.indent(".")
 		-- cannot use simply :sub, since it assumes one-byte-size chars
 		local hrLine = fn.getline(".") ---@diagnostic disable-next-line: assign-type-mismatch, undefined-field
 		hrLine = hrLine:gsub(linechar, "", hrIndent)
 		fn.setline(".", hrLine)
 	else
-		cmd [[normal! jj==]]
+		cmd.normal {"jj==", bang = true} 
 	end
 end
 

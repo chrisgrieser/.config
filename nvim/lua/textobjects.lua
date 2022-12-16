@@ -119,21 +119,26 @@ autocmd("FileType", {
 
 -- VALUE TEXT OBJECT
 local function valueTextObj()
-	-- get line-content *without* trailing comment
-	local comStrPattern = bo.commentstring
-		:gsub(" ?%%s.*", "")-- remove placeholder and backside of commentstring
-		:gsub("(.)", "%%%1") -- escape commentstring so it's a valid lua pattern
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
+
+	-- convert to spaces for proper counting of column
+	local tabwidth = string.rep(" ", bo.tabstop)
+	lineContent = lineContent:gsub("\t", tabwidth)
 
 	local _, valueStart = lineContent:find("[=:] ?.")
 	print("valueStart:", valueStart)
 	if not(valueStart) then return end -- abort when no value found
 
+	-- value end either comment or end of line
+	local comStrPattern = bo.commentstring
+		:gsub(" ?%%s.*", "")-- remove placeholder and backside of commentstring
+		:gsub("(.)", "%%%1") -- escape commentstring so it's a valid lua pattern
 	local valueEnd, _ = lineContent:find("." .. comStrPattern)
+
 	print("valueEnd:", valueEnd)
-	if not (valueEnd) then -- value end either comment or end of line
-		valueEnd = #lineContent - 1 -- ffff
+	if not (valueEnd) then
+		valueEnd = #lineContent - 1
 		print("valueEnd:", valueEnd)
 	end
 
