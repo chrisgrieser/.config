@@ -84,7 +84,7 @@ print = function(...)
 		table.insert(print_safe_args, tostring(_[i]))
 	end
 	-- persistent notification
-	vim.notify(table.concat(print_safe_args, " "), logTrace, {timeout = false})
+	vim.notify(table.concat(print_safe_args, " "), logTrace, {timeout = 10000})
 end
 
 --------------------------------------------------------------------------------
