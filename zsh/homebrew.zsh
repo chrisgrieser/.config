@@ -71,7 +71,6 @@ function update (){
 	pip3 install --upgrade "pdfannots"
 	pip3 install --upgrade "pdfminer.six"
 	pip3 install --upgrade "alacritty-colorscheme"
-	pip3 install --upgrade "pynvim"
 
 	print-section "DUMP INSTALLS"
 	dump
