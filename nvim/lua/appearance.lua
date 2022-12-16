@@ -94,7 +94,10 @@ require("dressing").setup {
 		border = borderStyle,
 		relative = "win",
 		insert_only = false,
-		win_options = {sidescrolloff = 0},
+		win_options = {
+			sidescrolloff = 0,
+			winblend = 0,
+		},
 		mappings = {
 			n = {["q"] = "Close"},
 		},
