@@ -130,7 +130,6 @@ function M.PluginList(use)
 		"hrsh7th/nvim-cmp",
 		"hrsh7th/cmp-omni", -- for autocompletion in input prompts
 	}}
-
 	use {myrepos .. "nvim-genghis",
 		module = "genghis",
 		requires = "stevearc/dressing.nvim",
@@ -146,6 +145,10 @@ function M.PluginList(use)
 	use {"simnalamburt/vim-mundo", -- undotree, also supports searching undo history
 		cmd = "MundoToggle",
 		run = "pip3 install --upgrade pynvim",
+	}
+	use { "debugloop/telescope-undo.nvim",
+		requires = {"nvim-telescope/telescope.nvim"},
+		config = function() require("telescope").load_extension("undo") end,
 	}
 
 	-- Terminal & Git

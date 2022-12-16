@@ -145,7 +145,20 @@ wf_mimestream = wf.new("Mimestream")
 
 --------------------------------------------------------------------------------
 
--- keep TWITTERRIFIC visible, when active window is pseudomaximized
+-- IINA: Full Screen when on projector
+iinaAppLauncher = aw.new(function(appName, eventType, appObject)
+	if eventType == aw.launched and appName == "IINA" and isProjector() then
+		-- going full screen needs a small delay
+		runWithDelays({0.05, 0.2}, function()
+			appObject:selectMenuItem {"Video", "Enter Full Screen"}
+		end)
+	end
+end):start()
+
+--------------------------------------------------------------------------------
+-- TWITTERRIFIC 
+
+-- keep visible, when active window is pseudomaximized
 twitterificVisible = aw.new(function(_, eventType)
 	if appIsRunning("Twitterrific") and (eventType == aw.activated or eventType == aw.launching) then
 		local currentWin = hs.window.focusedWindow()
@@ -155,17 +168,23 @@ twitterificVisible = aw.new(function(_, eventType)
 	end
 end):start()
 
+-- scroll up on launch
+twitterificAppWatcher = aw.new(function(appName, eventType)
+	if appName == "Twitterrific" and eventType == aw.launched then
+		runWithDelays(1, function() twitterrificAction("scrollup") end)
+	end
+end):start()
 --------------------------------------------------------------------------------
 
 -- NEOVIM
 -- pseudomaximized window & killing leftover neovide process
 wf_neovim = wf.new {"neovide", "Neovide"}
-	:subscribe(wf.windowCreated, function()
+	:subscribe(wf.windowCreated, function(newWin)
 		runWithDelays({0.2, 0.4, 0.6, 0.8}, function()
 			if isAtOffice() or isProjector() then
-				moveResizeCurWin("maximized")
+				moveResize(newWin, maximized)
 			else
-				moveResizeCurWin("pseudo-maximized")
+				moveResize(newWin, pseudoMaximized)
 			end
 		end)
 	end)
@@ -182,11 +201,11 @@ wf_neovim = wf.new {"neovide", "Neovide"}
 -- pseudomaximized window
 wf_alacritty = wf.new {"alacritty", "Alacritty"}
 	:setOverrideFilter {rejectTitles = {"^cheatsheet: "}}
-	:subscribe(wf.windowCreated, function()
+	:subscribe(wf.windowCreated, function(newWin)
 		if isAtOffice() or isProjector() then
-			moveResizeCurWin("maximized")
+			moveResize(newWin, maximized)
 		else
-			moveResizeCurWin("pseudo-maximized")
+			moveResize(newWin, pseudoMaximized)
 		end
 	end)
 
@@ -241,7 +260,7 @@ finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 	if appName == "Finder" and eventType == aw.launched then
 		-- INFO delay shouldn't be too low, otherwise other scripts cannot
 		-- properly utilize Finder
-		runWithDelays({3, 5, 10}, function()
+		runWithDelays({3, 4, 5}, function()
 			if finderAppObj and not (finderAppObj:mainWindow()) then
 				finderAppObj:kill()
 			end
@@ -307,9 +326,9 @@ end):start()
 draftsWatcher = aw.new(function(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
 
-	if eventType == aw.launched or eventType == aw.activated then
+	if eventType == aw.launching or eventType == aw.activated then
 		local workspace = isAtOffice() and "Office" or "Home"
-		runWithDelays(0.2, function()
+		runWithDelays({0.2, 0.4}, function()
 			local name = appObject:focusedWindow():title()
 			local isTaskList = name:find("Supermarkt$") or name:find("Drogerie$") or name:find("Ernährung$")
 			if not (isTaskList) then
