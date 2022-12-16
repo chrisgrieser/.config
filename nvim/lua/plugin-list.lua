@@ -175,7 +175,6 @@ function M.PluginList(use)
 	}
 
 	-- EDITING-SUPPORT
-	use "echasnovski/mini.ai" -- custom text objects
 	use "kylechui/nvim-surround" -- surround operator
 	use "gbprod/substitute.nvim" -- substitution & exchange operator
 	use "numToStr/Comment.nvim" -- comment operator
