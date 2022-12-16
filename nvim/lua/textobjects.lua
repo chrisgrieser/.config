@@ -1,22 +1,24 @@
 require("utils")
 --------------------------------------------------------------------------------
--- OVERVIEW
+-- New Text objects
 -- af -> a [f]unction (treesitter)
 -- ao -> a c[o]ndition (treesitter)
 -- q -> comment (mnemonic: [q]uiet text) (treesitter)
--- Q -> consecutive (big) comment (comments.nvim)
+-- Q -> consecutive comment (comments.nvim / custom)
 -- aa -> an [a]rgument (treesitter)
 -- al -> a cal[l] (treesitter)
 -- ah -> a [h]unk (gitsigns)
--- ai -> an [i]ndentation (indent-textobj)
+-- ai -> an [i]ndentation (custom)
 -- ad -> a [d]iagnostic (diagnostic-textobj)
--- ae -> almost to the [e]nding of line (custom)
--- av -> a [v]alue / right-hand-side of key-value pair or variable assignment (custom)
+-- n -> near the [e]nding of line (custom)
+-- r -> rest of paragraph, linewise (custom)
+-- av -> a [v]alue / variable assignment (custom)
 -- aL -> a [L]oop (treesitter)
+-- <Space> -> Subword (custom)
 
 -- FILE-TYPE-SPECIFIC TEXT OBJECTS
--- al: a [l]ink (markdown)
--- as: a [s]elector (css)
+-- al: a [l]ink (markdown, custom)
+-- as: a [s]elector (css, custom)
 
 -- BUILTIN ONES KEPT
 -- ab: bracket
@@ -42,18 +44,19 @@ keymap({"o", "x"}, "im", "iW")
 -- QUICK TEXTOBJ OPERATIONS
 keymap("n", "C", '"_C')
 keymap("n", "<Space>", '"_ciw') -- change word
-keymap("n", "<C-M-Space>", '"_daw') -- wordaround, since <S-Space> not fully supported, requires karabiner remapping it
+keymap("n", "<C-M-Space>", '"_daw') -- HACK since <S-Space> not fully supported, requires karabiner remapping it
 keymap("x", "<Space>", '"_c')
-
-keymap("n", "c<Space>", function() -- change-subword ( = word excluding _ and - as word-parts)
-	opt.iskeyword:remove {"_", "-"}
-	cmd.normal {[["_diw]], bang = true}
-	cmd.startinsert() -- :normal does not allow to end in insert mode
-	opt.iskeyword:append {"_", "-"}
-end)
 
 --------------------------------------------------------------------------------
 -- CUSTOM TEXTOBJECTS
+
+-- <Space>: Subword (-_ as delimiters)
+keymap("o", "<Space>", function ()
+	local iskeywBefore = opt.iskeyword:get()
+	opt.iskeyword:remove {"_", "-"}
+	cmd.normal {"viw", bang = true}
+	opt.iskeyword = iskeywBefore
+end, {desc = "subword textobj"})
 
 -- n: [n]ear end of the line
 keymap("o", "n", function() cmd.normal {"v$hh", bang = true} end, {desc = "almost ending of line textobj"})
@@ -135,14 +138,14 @@ local function valueTextObj(inner)
 	end
 
 	-- inner value = without trailing comma/semicolon
-	local trailingCommaSemi = lineContent:sub(-1):find("[,;]")
-	if inner and trailingCommaSemi then
+	local lastChar = lineContent:sub(valueEnd + 1, valueEnd + 1)
+	if inner and lastChar:find("[,;]") then
 		valueEnd = valueEnd - 1
 	end
 
 	-- set selection
 	setCursor(0, {fn.line("."), valueStart})
-	if fn.mode:find("v") then
+	if fn.mode():find("v") then
 		cmd.normal {"o", bang = true}
 	else
 		cmd.normal {"v", bang = true}
@@ -168,7 +171,7 @@ end
 --------------------------------------------------------------------------------
 -- SURROUND
 -- need to be consistent with treesitter
-local functionObjChar = "f" -- test
+local functionObjChar = "f"
 local conditionObjChar = "o"
 local callObjChar = "l"
 
