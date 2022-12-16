@@ -55,16 +55,12 @@ end)
 --------------------------------------------------------------------------------
 -- CUSTOM TEXTOBJECTS
 
--- ae/ie: LINE [E]NDING - 1
-for _, prefix in pairs {"a", "i"} do
-	keymap("o", prefix .. "e", function() cmd.normal {"v$hh", bang = true} end, {desc = "almost ending of line textobj"})
-	keymap("x", prefix .. "e", function() cmd.normal {"$hh", bang = true} end, {desc = "almost ending of line textobj"})
-end
+-- z: end of line minus 1
+keymap("o", "z", function() cmd.normal {"v$hh", bang = true} end, {desc = "almost ending of line textobj"})
+keymap("x", "z", function() cmd.normal {"$hh", bang = true} end, {desc = "almost ending of line textobj"})
 
 -- r: [r]est of paragraph (linewise)
-keymap("o", "r", function() cmd.normal {"v0}", bang = true} end, {desc = "rest of paragraph (linewise)"})
-keymap("x", "r", function() cmd.normal {"0}", bang = true} end, {desc = "rest of paragraph (linewise)"})
-
+keymap("o", "r", function() cmd.normal {"V}", bang = true} end, {desc = "rest of paragraph (linewise)"})
 
 -- INDENTATION OBJECT
 ---indentation textobj, based on https://thevaluable.dev/vim-create-text-objects/
@@ -191,8 +187,6 @@ require("nvim-surround").setup {
 	},
 	move_cursor = false,
 	keymaps = {
-		insert = "<Nop>",
-		insert_line = "<Nop>",
 		normal_cur = "<Nop>",
 		normal_line = "<Nop>",
 		normal_cur_line = "<Nop>",
