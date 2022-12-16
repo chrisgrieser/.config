@@ -292,6 +292,7 @@ wf_appsOnMouseScreen:subscribe(wf.windowCreated, function(newWindow)
 	if isProjector() and not (mouseScreen:name() == screenOfWindow:name()) then
 		runWithDelays({0, 0.1, 0.2, 0.4, 0.6}, function()
 			newWindow:moveToScreen(mouseScreen)
+			moveResize(newWindow, maximized)
 		end)
 	end
 end)

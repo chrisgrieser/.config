@@ -111,33 +111,24 @@ end
 -- WINDOW MOVEMENT
 
 ---Move and Resize Window
----@param mode string left|right|up|down|centered|[pseudo-]maximized
-function moveResizeCurWin(mode)
-	local win = hs.window.focusedWindow()
+---@param pos hs.geometry
+local function moveResizeCurWin(pos)
+	moveResize(hs.window.focusedWindow(), pos) 
+end
+
+---replaces `win:moveToUnit(pos)`
+---@param win hs.window
+---@param pos hs.geometry
+function moveResize(win, pos)
 	local appOfWin = win:application():name()
-
-	local position
-	if mode == "left" then
-		position = hs.layout.left50
-	elseif mode == "right" then
-		position = hs.layout.right50
-	elseif mode == "pseudo-maximized" then
-		position = pseudoMaximized
-	elseif mode == "maximized" then
-		position = maximized
-	elseif mode == "centered" then
-		position = centered
-	end
-
-	moveResize(win, position) -- workaround for https://github.com/Hammerspoon/hammerspoon/issues/2316
-
 	if appOfWin == "Drafts" then toggleDraftsSidebar(win)
 	elseif appOfWin == "Obsidian" then toggleObsidianSidebar(win)
 	elseif appOfWin == "Highlights" then toggleHighlightsSidebar(win)
 	end
 
-	if not (mode == "pseudo-maximized" or mode == "maximized") then
-		if appOfWin:find("[Nn]eovide") then -- for Obsidian theme development
+	-- for Obsidian theme development
+	if not (pos == pseudoMaximized) and not(pos == maximized) then
+		if appOfWin:find("[Nn]eovide") then
 			runWithDelays(0.15, function()
 				app("Obsidian"):unhide()
 				app("Obsidian"):mainWindow():raise()
@@ -145,16 +136,9 @@ function moveResizeCurWin(mode)
 		end
 	end
 
-	if mode == "pseudo-maximized" or mode == "centered" then
+	if pos == pseudoMaximized or pos == centered then
 		app("Twitterrific"):mainWindow():raise()
 	end
-
-end
-
----replaces `win:moveToUnit(pos)`
----@param win hs.window
----@param pos hs.geometry
-function moveResize(win, pos)
 	-- has to repeat due window creation delay for some apps
 	runWithDelays({0, 0.1, 0.3, 0.5}, function() win:moveToUnit(pos) end)
 end
@@ -172,27 +156,80 @@ local function moveCurWinToOtherDisplay()
 end
 
 --------------------------------------------------------------------------------
--- HOTKEYS
-local function controlSpace()
-	if frontApp() == "Finder" or frontApp() == "Script Editor" then
-		size = "centered"
-	elseif isIMacAtHome() or isAtMother() then
-		local currentWin = hs.window.focusedWindow()
-		if isPseudoMaximized(currentWin) then
-			size = "maximized"
-		else
-			size = "pseudo-maximized"
-		end
-	else
-		size = "maximized"
-	end
 
-	moveResizeCurWin(size)
+function twitterrificAction(type)
+	local previousApp = frontApp()
+	openIfNotRunning("Twitterrific")
+	local twitterrific = app("Twitterrific")
+	twitterrific:activate() -- needs activation, cause sending to app in background doesn't work w/ cmd
+
+	if type == "link" then
+		keystroke({}, "right")
+	elseif type == "scrollup" then
+		local prevMousePos = hs.mouse.absolutePosition()
+
+		local f = twitterrific:mainWindow():frame()
+		keystroke({"cmd"}, "1") -- properly up (to avoid clicking on tweet content)
+		hs.eventtap.leftClick {x = f.x + f.w * 0.04, y = f.y + 150}
+		keystroke({"cmd"}, "k") -- mark all as red
+		keystroke({"cmd"}, "j") -- scroll up
+		keystroke({}, "down") -- enable j/k movement
+
+		hs.mouse.absolutePosition(prevMousePos)
+		hs.application(previousApp):activate()
+	end
+end
+--------------------------------------------------------------------------------
+-- HOTKEYS
+local function controlSpaceAction()
+	local currentWin = hs.window.focusedWindow()
+	local pos
+	if frontApp() == "Finder" or frontApp() == "Script Editor" then
+		pos = centered
+	elseif (isIMacAtHome() or isAtMother()) and not(isPseudoMaximized(currentWin)) then
+		pos = pseudoMaximized
+	else
+		pos = maximized
+	end
+	moveResize(currentWin, pos)
 end
 
-hotkey(hyper, "right", function() moveResizeCurWin("right") end)
-hotkey(hyper, "left", function() moveResizeCurWin("left") end)
+local function pagedownAction()
+	if numb
+	if appIsRunning("Twitterrific") then
+		keystroke({}, "down", 1, app("Twitterrific"))
+	end
+end
+
+local function pageupAction()
+	if appIsRunning("Twitterrific") then
+		keystroke({}, "up", 1, app("Twitterrific"))
+	end
+end
+
+local function homeAction()
+	if appIsRunning("zoom.us") then
+		alert("🔈/🔇") -- toggle mute
+		keystroke({"shift", "command"}, "A", 1, app("zoom.us"))
+	elseif appIsRunning("Twitterrific") then
+		twitterrificAction("scrollup")
+	end
+end
+
+local function endAction()
+	if appIsRunning("Twitterrific") then
+		twitterrificAction("link")
+	end
+end
+
+--------------------------------------------------------------------------------
+hotkey(hyper, "right", function() moveResizeCurWin(hs.layout.right50) end)
+hotkey(hyper, "left", function() moveResizeCurWin(hs.layout.left50) end)
 hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
-hotkey(hyper, "pagedown", moveCurWinToOtherDisplay)
-hotkey(hyper, "pageup", moveCurWinToOtherDisplay)
-hotkey({"ctrl"}, "space", controlSpace) -- fn+space also bound to ctrl+space via Karabiner
+hotkey({"ctrl"}, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
+
+hotkey({}, "pagedown", pagedownAction, nil, pagedownAction)
+hotkey({}, "pageup", pageupAction, nil, pageupAction)
+hotkey({}, "home", homeAction) 
+hotkey({}, "end", endAction)
+
