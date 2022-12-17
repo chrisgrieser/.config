@@ -9,26 +9,26 @@ leftHalf = hs.layout.left50
 
 -- device-specific parameters
 if isIMacAtHome() then
-	pseudoMaximized = {x = 0, y = 0, w = 0.816, h = 1}
+	pseudoMaximized = { x = 0, y = 0, w = 0.816, h = 1 }
 	baseLayout = pseudoMaximized
-	toTheSide = {x = 0.815, y = 0.025, w = 0.185, h = 0.975}
-	centered = {x = 0.2, y = 0, w = 0.616, h = 1}
+	toTheSide = { x = 0.815, y = 0.025, w = 0.185, h = 0.975 }
+	centered = { x = 0.2, y = 0, w = 0.616, h = 1 }
 elseif isAtMother() then
-	pseudoMaximized = {x = 0, y = 0, w = 0.7875, h = 1}
+	pseudoMaximized = { x = 0, y = 0, w = 0.7875, h = 1 }
 	baseLayout = pseudoMaximized
-	toTheSide = {x = 0.7875, y = 0.03, w = 0.2125, h = 0.97}
-	centered = {x = 0.2, y = 0, w = 0.616, h = 1}
+	toTheSide = { x = 0.7875, y = 0.03, w = 0.2125, h = 0.97 }
+	centered = { x = 0.2, y = 0, w = 0.616, h = 1 }
 elseif isAtOffice() then
 	baseLayout = maximized
 	pseudoMaximized = maximized
-	centered = {x = 0.2, y = 0, w = 0.616, h = 1}
+	centered = { x = 0.2, y = 0, w = 0.616, h = 1 }
 end
 
 ---Whether Window is maximimized
 ---@param win hs.window
 ---@return boolean
 function isMaximized(win)
-	if not (win) then return false end
+	if not win then return false end
 	local max = win:screen():frame()
 	return win:frame().w == max.w
 end
@@ -37,11 +37,15 @@ end
 ---@param win hs.window
 ---@return boolean
 function isPseudoMaximized(win)
-	if not (win) then return false end
+	if not win then return false end
 	local max = win:screen():frame()
+	print("max:", max)
 	local dif = win:frame().w - pseudoMaximized.w * max.w
+	print("dif:", dif)
 	local posOkay = win:frame().x == 0 and win:frame().y == 0
+	print("posOkay:", posOkay)
 	local widthOkay = (dif > -15 and dif < 15) -- leeway for some apps
+	print("widthOkay:", widthOkay)
 	return widthOkay and posOkay
 end
 
@@ -52,7 +56,7 @@ end
 -- https://directory.getdrafts.com/a/2BS & https://directory.getdrafts.com/a/2BR
 ---@param draftsWin hs.window
 function toggleDraftsSidebar(draftsWin)
-	runWithDelays({0.05, 0.2}, function()
+	runWithDelays({ 0.05, 0.2 }, function()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
 		if drafts_w / screen_w > 0.6 then
@@ -71,9 +75,9 @@ function toggleHighlightsSidebar(highlightsWin)
 		local highlightsApp = hs.application("Highlights")
 		highlightsApp:activate()
 		if highlights_w / screen_w > 0.6 then
-			highlightsApp:selectMenuItem {"View", "Show Sidebar"}
+			highlightsApp:selectMenuItem { "View", "Show Sidebar" }
 		else
-			highlightsApp:selectMenuItem {"View", "Hide Sidebar"}
+			highlightsApp:selectMenuItem { "View", "Hide Sidebar" }
 		end
 	end)
 end
@@ -81,7 +85,7 @@ end
 -- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
 ---@param obsiWin hs.window
 function toggleObsidianSidebar(obsiWin)
-	runWithDelays({0.05, 0.2}, function()
+	runWithDelays({ 0.05, 0.2 }, function()
 		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
 		if numberOfObsiWindows > 1 then return end -- prevent popout window resizing to affect sidebars
 
@@ -106,14 +110,17 @@ end
 ---@param pos hs.geometry
 function moveResize(win, pos)
 	local appOfWin = win:application():name()
-	if appOfWin == "Drafts" then toggleDraftsSidebar(win)
-	elseif appOfWin == "Obsidian" then toggleObsidianSidebar(win)
-	elseif appOfWin == "Highlights" then toggleHighlightsSidebar(win)
+	if appOfWin == "Drafts" then
+		toggleDraftsSidebar(win)
+	elseif appOfWin == "Obsidian" then
+		toggleObsidianSidebar(win)
+	elseif appOfWin == "Highlights" then
+		toggleHighlightsSidebar(win)
 	end
 
 	-- for Obsidian theme development
 	if not (pos == pseudoMaximized) and not (pos == maximized) then
-		if appOfWin:find("[Nn]eovide") then
+		if appOfWin:find("[Nn]eovide") and appIsRunning("Obsidian") then
 			runWithDelays(0.15, function()
 				app("Obsidian"):unhide()
 				app("Obsidian"):mainWindow():raise()
@@ -121,12 +128,10 @@ function moveResize(win, pos)
 		end
 	end
 
-	if pos == pseudoMaximized or pos == centered then
-		app("Twitterrific"):mainWindow():raise()
-	end
+	if pos == pseudoMaximized or pos == centered then app("Twitterrific"):mainWindow():raise() end
 
 	-- has to repeat due window creation delay for some apps
-	runWithDelays({0, 0.1, 0.3, 0.5}, function() win:moveToUnit(pos) end)
+	runWithDelays({ 0, 0.1, 0.3, 0.5 }, function() win:moveToUnit(pos) end)
 end
 
 local function moveCurWinToOtherDisplay()
@@ -155,10 +160,10 @@ function twitterrificAction(type)
 		local prevMousePos = hs.mouse.absolutePosition()
 
 		local f = twitterrific:mainWindow():frame()
-		keystroke({"cmd"}, "1") -- properly up (to avoid clicking on tweet content)
-		hs.eventtap.leftClick {x = f.x + f.w * 0.04, y = f.y + 150}
-		keystroke({"cmd"}, "k") -- mark all as red
-		keystroke({"cmd"}, "j") -- scroll up
+		keystroke({ "cmd" }, "1") -- properly up (to avoid clicking on tweet content)
+		hs.eventtap.leftClick { x = f.x + f.w * 0.04, y = f.y + 150 }
+		keystroke({ "cmd" }, "k") -- mark all as red
+		keystroke({ "cmd" }, "j") -- scroll up
 		keystroke({}, "down") -- enable j/k movement
 
 		hs.mouse.absolutePosition(prevMousePos)
@@ -173,7 +178,7 @@ local function controlSpaceAction()
 	local pos
 	if frontApp() == "Finder" or frontApp() == "Script Editor" then
 		pos = centered
-	elseif (isIMacAtHome() or isAtMother()) and not (isPseudoMaximized(currentWin)) then
+	elseif isIMacAtHome() or isAtMother() and not isPseudoMaximized(currentWin) then
 		pos = pseudoMaximized
 	else
 		pos = maximized
@@ -200,16 +205,14 @@ end
 local function homeAction()
 	if appIsRunning("zoom.us") then
 		alert("🔈/🔇") -- toggle mute
-		keystroke({"shift", "command"}, "A", 1, app("zoom.us"))
+		keystroke({ "shift", "command" }, "A", 1, app("zoom.us"))
 	elseif appIsRunning("Twitterrific") then
 		twitterrificAction("scrollup")
 	end
 end
 
 local function endAction()
-	if appIsRunning("Twitterrific") then
-		twitterrificAction("link")
-	end
+	if appIsRunning("Twitterrific") then twitterrificAction("link") end
 end
 
 --------------------------------------------------------------------------------
@@ -217,7 +220,7 @@ end
 -- Window resizing
 hotkey(hyper, "right", function() moveResize(hs.window.focusedWindow(), rightHalf) end)
 hotkey(hyper, "left", function() moveResize(hs.window.focusedWindow(), leftHalf) end)
-hotkey({"ctrl"}, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
+hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
 
 -- move to other display or scroll Twitterrific
 hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard

@@ -11,9 +11,7 @@ local colNo = vim.fn.col
 local append = vim.fn.append
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
-local function wordUnderCursor()
-	return vim.fn.expand("<cword>")
-end
+local function wordUnderCursor() return vim.fn.expand("<cword>") end
 
 local function leaveVisualMode()
 	-- https://github.com/neovim/neovim/issues/17735#issuecomment-1068525617
@@ -24,9 +22,7 @@ end
 ---trims whitespace from string
 ---@param str string
 ---@return string
-function trim(str)
-	return (str:gsub("^%s*(.-)%s*$", "%1"))
-end
+function trim(str) return (str:gsub("^%s*(.-)%s*$", "%1")) end
 
 --------------------------------------------------------------------------------
 
@@ -34,9 +30,7 @@ end
 -- opposite, e.g., "right" to "left". Intended for languages like CSS.
 ---@param opts? table available: reverse, moveTo = key|value|none, increment
 function M.duplicateLine(opts)
-	if not (opts) then
-		opts = {reverse = false, moveTo = "key", increment = false}
-	end
+	if not opts then opts = { reverse = false, moveTo = "key", increment = false } end
 
 	local line = getline(".") ---@type string
 	if opts.reverse then
@@ -74,12 +68,12 @@ function M.duplicateLine(opts)
 	elseif opts.moveTo == "key" and keyPos then
 		colNum = keyPos
 	end
-	setCursor(0, {lineNum, colNum})
+	setCursor(0, { lineNum, colNum })
 end
 
 function M.duplicateSelection()
 	local prevReg = fn.getreg("z")
-	cmd [[noautocmd silent! normal!"zy`]"zp]] -- `noautocmd` to not trigger highlighted-yank
+	cmd([[noautocmd silent! normal!"zy`]"zp]]) -- `noautocmd` to not trigger highlighted-yank
 	fn.setreg("z", prevReg)
 end
 
@@ -88,11 +82,12 @@ end
 -- macOS only
 -- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt
 function M.bettergx()
-	local urlVimRegex = [[https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*]] -- https://gist.github.com/tobym/584909
+	local urlVimRegex =
+		[[https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*]] -- https://gist.github.com/tobym/584909
 	local urlLuaRegex = [[https?:?[^%s]+]] -- lua url regex being simple is okay, since vimregex runs before
 	local prevCur = getCursor(0)
 
-	cmd.normal {"0", bang = true} -- to prioritize URLs in the same line
+	cmd.normal { "0", bang = true } -- to prioritize URLs in the same line
 	local urlLineNr = fn.search(urlVimRegex, "wcz")
 	if urlLineNr == 0 then
 		vim.notify("No URL found in this file.", logWarn)
@@ -126,14 +121,12 @@ function M.betterClose()
 	local wincount = 0
 	for i = 1, fn.winnr("$"), 1 do
 		local config = api.nvim_win_get_config(fn.win_getid(i))
-		if not (config.external) and config.focusable then
-			wincount = wincount + 1
-		end
+		if not config.external and config.focusable then wincount = wincount + 1 end
 	end
 
 	local moreThanOneWin = wincount > 1
 	local moreThanOneTab = fn.tabpagenr("$") > 1
-	local buffers = fn.getbufinfo {buflisted = 1}
+	local buffers = fn.getbufinfo { buflisted = 1 }
 
 	cmd.nohlsearch()
 	cmd.update()
@@ -180,9 +173,9 @@ function M.undoDuration(opts)
 	local minsPassed = math.floor(now - b.timeOpened / 60)
 
 	local resetLabel = "last open (~" .. tostring(minsPassed) .. "m ago)"
-	if not (opts) then opts = {selection = {resetLabel, "15m", "1h", "4h", "24h"}} end
-	vim.ui.select(opts.selection, {prompt = "Undo the last…"}, function(choice)
-		if not (choice) then return end
+	if not opts then opts = { selection = { resetLabel, "15m", "1h", "4h", "24h" } } end
+	vim.ui.select(opts.selection, { prompt = "Undo the last…" }, function(choice)
+		if not choice then return end
 		if choice:find("last save") then
 			cmd("earlier " .. minsPassed .. "m")
 		else
@@ -201,9 +194,7 @@ function M.overscroll(action)
 	if bo.filetype ~= "DressingSelect" then
 		local curLine = lineNo(".")
 		local lastLine = lineNo("$")
-		if (lastLine - curLine) <= vim.wo.scrolloff then
-			cmd.normal {"zz", bang = true}
-		end
+		if (lastLine - curLine) <= vim.wo.scrolloff then cmd.normal { "zz", bang = true } end
 	end
 
 	local usedCount = vim.v.count1
@@ -212,36 +203,26 @@ function M.overscroll(action)
 		action = action:gsub("%d+", "")
 		usedCount = tonumber(actionCount) * usedCount
 	end
-	cmd.normal {tostring(usedCount) .. action, bang = true}
+	cmd.normal { tostring(usedCount) .. action, bang = true }
 end
 
 ---Force pasting a linewise register characterwise and vice versa
 function M.pasteDifferently()
-	local reg = '"'
-	local clipboardOpt = vim.opt.clipboard:get();
+	local clipboardOpt = vim.opt.clipboard:get()
 	local useSystemClipb = #clipboardOpt > 0 and clipboardOpt[1]:find("unnamed")
-	if useSystemClipb then reg = "+" end
+	local reg = useSystemClipb and "+" or '"'
 
 	local isLinewise = fn.getregtype(reg) == "V"
-	local isCharwise = fn.getregtype(reg) == "v"
+	local targetRegType = isLinewise and "v" or "V"
+
 	local regContent = fn.getreg(reg)
 	regContent = trim(regContent)
-	local targetRegType
-
-	if isLinewise then
-		targetRegType = "v"
-	elseif isCharwise then
-		targetRegType = "V"
-	else
-		vim.notify("This paste command does not work with blockwise registers.", logWarn)
-		return
-	end
 
 	fn.setreg(reg, regContent, targetRegType)
-	cmd.normal {reg .. "p", bang = true}
+	cmd.normal { reg .. "p", bang = true }
 	if targetRegType == "V" then
-		cmd.normal {"==", bang = true}-- indent the new paste
-	end 
+		cmd.normal { "==", bang = true } -- indent the new paste
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -250,15 +231,13 @@ end
 ---VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 ---@param opts? table
 function M.quicklog(opts)
-	if not (opts) then opts = {addLineNumber = false} end
+	if not opts then opts = { addLineNumber = false } end
 
 	local varname = wordUnderCursor()
 	local logStatement
 	local ft = bo.filetype
 	local lnStr = ""
-	if opts.addLineNumber then
-		lnStr = "L" .. tostring(lineNo(".")) .. " "
-	end
+	if opts.addLineNumber then lnStr = "L" .. tostring(lineNo(".")) .. " " end
 
 	if ft == "lua" then
 		logStatement = 'print("' .. lnStr .. varname .. ':", ' .. varname .. ")"
@@ -276,7 +255,7 @@ function M.quicklog(opts)
 	end
 
 	append(".", logStatement)
-	cmd [[normal! j==]] -- move down and indent
+	cmd.normal { "j==", bang = true }
 end
 
 ---Remove all log statements in the current buffer
@@ -308,45 +287,41 @@ end
 
 function M.moveLineDown()
 	if lineNo(".") == lineNo("$") then return end
-	cmd [[. move +1]]
-	if bo.filetype ~= "yaml" then cmd [[normal! ==]] end
+	cmd([[. move +1]])
+	if bo.filetype ~= "yaml" then cmd([[normal! ==]]) end
 end
 
 function M.moveLineUp()
 	if lineNo(".") == 1 then return end
-	cmd [[. move -2]]
-	if bo.filetype ~= "yaml" then cmd [[normal! ==]] end
+	cmd([[. move -2]])
+	if bo.filetype ~= "yaml" then cmd([[normal! ==]]) end
 end
 
 function M.moveCharRight()
 	if colNo(".") >= colNo("$") - 1 then return end
-	cmd [[:normal! "zx"zp]]
+	cmd([[:normal! "zx"zp]])
 end
 
 function M.moveCharLeft()
 	if colNo(".") == 1 then return end
-	cmd [[:normal! "zdh"zph]]
+	cmd([[:normal! "zdh"zph]])
 end
 
 function M.moveSelectionDown()
 	leaveVisualMode()
-	cmd [['<,'> move '>+1]]
-	cmd [[normal! gv=gv]]
+	cmd([['<,'> move '>+1]])
+	cmd([[normal! gv=gv]])
 end
 
 function M.moveSelectionUp()
 	leaveVisualMode()
-	cmd [['<,'> move '<-2]]
-	cmd [[normal! gv=gv]]
+	cmd([['<,'> move '<-2]])
+	cmd([[normal! gv=gv]])
 end
 
-function M.moveSelectionRight()
-	cmd [[normal! "zx"zpgvlolo]]
-end
+function M.moveSelectionRight() cmd([[normal! "zx"zpgvlolo]]) end
 
-function M.moveSelectionLeft()
-	cmd [[normal! "zdh"zPgvhoho]]
-end
+function M.moveSelectionLeft() cmd([[normal! "zdh"zPgvhoho]]) end
 
 --------------------------------------------------------------------------------
 
