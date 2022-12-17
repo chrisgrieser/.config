@@ -51,7 +51,7 @@ null_ls.setup {
 
 		-- JS/TS
 		builtins.formatting.prettier.with {
-			filetypes = { "javascript", "typescript", "yaml", "json" }, -- do format markdown, css, and so on
+			filetypes = { "javascript", "typescript" }, -- do format markdown, css, and so on
 			extra_args = { "--config", dotfilesFolder .. "/linter-configs/.prettierrc.yaml" },
 		},
 
@@ -72,7 +72,7 @@ null_ls.setup {
 		},
 
 		-- YAML
-		-- builtins.formatting.yamlfmt,
+		builtins.formatting.yamlfmt,
 		builtins.diagnostics.yamllint.with {
 			extra_args = { "--config-file", dotfilesFolder .. "/yamllint/config/.yamllint.yaml" },
 		},
