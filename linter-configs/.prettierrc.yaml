@@ -1,5 +1,6 @@
 # https://prettier.io/docs/en/options.html
-printWidth: 100
+printWidth: 120
 useTabs: true
 tabWidth: 3
 bracketSpacing: false
+arrowParens: avoid

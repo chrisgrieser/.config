@@ -54,7 +54,11 @@ function main() {
 	writeToFile(JSON.stringify(complexRules), karabinerJSON);
 
 	// validate
-	const lintStatus = app.doShellScript(`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJSON}"`).trim();
+	const lintStatus = app
+		.doShellScript(
+			`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJSON}"`,
+		)
+		.trim();
 	const msg = lintStatus === "ok" ? "✅ Build Success" : "🛑 Config Invalid";
 
 	return `Karabiner Config:\n${msg}`;
