@@ -1,7 +1,3 @@
--- INFO: file should *not* be named "packer.lua", since `require("packer")`
--- would be ambiguous
---------------------------------------------------------------------------------
-
 -- auto-install packer if not installed https://github.com/wbthomason/packer.nvim#bootstrapping
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -16,7 +12,7 @@ if not status_ok then return end
 
 -- Load plugins and display packer as popup
 packer.startup {
-	require("plugin-list").PluginList,
+	require("config/plugin-list").PluginList,
 	config = {
 		display = {
 			open_fn = function() return require("packer.util").float {border = borderStyle} end,

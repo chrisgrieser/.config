@@ -1,4 +1,4 @@
-require("utils")
+require("config/utils")
 local ls = require("luasnip")
 local add = ls.add_snippets
 local snip = ls.parser.parse_snippet -- lsp-style-snippets for future-proofness

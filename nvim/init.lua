@@ -1,34 +1,33 @@
 borderStyle = "single" -- https://neovim.io/doc/user/api.html#nvim_open_win()
-require("packer-setup") -- must be 1st
-require("impatient") -- must be 2nd
-require("utils") -- must be 3rd
+require("config/packer-setup") -- must be 1st
+require("impatient") -- plugin, must be 2nd
+require("config/utils") -- must be 3rd
 
 --------------------------------------------------------------------------------
 
-require("options-and-autocmds")
-
+require("config/options-and-autocmds")
 if isGui() then
-	require("theme-settings") -- should come first to start with the proper theme
-	require("gui-settings")
+	require("config/theme-settings") -- should come early to start with the proper theme
+	require("config/gui-settings")
 else
-	require("terminal-only")
+	require("config/terminal-only")
 end
-require("keybindings")
-require("textobjects")
-require("user-commands")
-require("automating-nvim")
-require("appearance")
+require("config/keybindings")
+require("config/textobjects")
+require("config/user-commands")
+require("config/automating-nvim")
+require("config/appearance")
 
-require("lsp-and-diagnostics") -- should come before completion, linter, and debugger
-require("completion")
-require("linter")
-require("debugger")
+require("config/lsp-and-diagnostics") -- should come before completion, linter, and debugger
+require("config/completion")
+require("config/linter")
+require("config/debugger")
 
-require("comment-config")
-require("AI-support")
-require("telescope-config")
-require("treesitter-config")
-if isGui() then require("color-picker") end
-require("remaining-plugins")
+require("config/comment-config")
+require("config/AI-support")
+require("config/telescope-config")
+require("config/treesitter-config")
+if isGui() then require("config/color-picker") end
+require("config/remaining-plugins")
 
-require("snippets")
+require("config/snippets")

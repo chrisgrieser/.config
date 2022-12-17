@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup {
+require("config/utils")
 	ensure_installed = {
 		"javascript",
 		"typescript",

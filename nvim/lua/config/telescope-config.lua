@@ -1,4 +1,4 @@
--- https://github.com/nvim-telescope/telescope.nvim#telescope-setup-structure
+require("config/utils")
 --------------------------------------------------------------------------------
 
 local maps = {

@@ -1,4 +1,4 @@
-require("utils")
+require("config/utils")
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 

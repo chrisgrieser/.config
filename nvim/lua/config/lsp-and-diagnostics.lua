@@ -1,4 +1,4 @@
---# selene: allow(multiple_statements)
+require("config/utils")
 require("utils")
 -- INFO: required order of setup() calls is mason, mason-config, nvim-dev, lspconfig
 -- https://github.com/williamboman/mason-lspconfig.nvim#setup
