@@ -13,9 +13,7 @@ ccc.setup {
 		auto_enable = true,
 		max_byte = 2 * 1024 * 1024, -- 2mb
 		lsp = true,
-		excludes = {
-			"packer",
-		}
+		excludes = { "packer" }
 	},
 	alpha_show = "hide", -- needed when highlighter.lsp is set to true
 	recognize = {output = true}, -- automatically recognize color format under cursor

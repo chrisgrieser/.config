@@ -245,7 +245,6 @@ local function finderWinAutoLayout()
 	app("Finder"):selectMenuItem {"Window", "Bring All to Front"}
 	app("Finder"):selectMenuItem {"View", "Hide Sidebar"}
 end
-
 wf_finder = wf.new("Finder")
 	:setOverrideFilter {
 		rejectTitles = {"^Move$", "^Bin$", "^Copy$", "^Finder Settings$", " Info$"},
