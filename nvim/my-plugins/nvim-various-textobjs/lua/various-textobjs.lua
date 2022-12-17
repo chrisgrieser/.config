@@ -16,18 +16,24 @@ function M.linkTextobj(inner)
 	local i = 0
 
 	normal { "F[", bang = true } -- go to beginning of link so it can be found when standing on it
+	
+	-- determine next row with link
 	local mdLinkPattern = "(%b[])%b()"
+	print("beep")	
 	while not hasLink do
 		i = i + 1
 		---@diagnostic disable-next-line: assign-type-mismatch
 		lineContent = fn.getline(curRow + i) ---@type string
 		hasLink = lineContent:find(mdLinkPattern)
 		if i > lookForwardLines then
-			setCursor(0, { curRow, curCol }) -- re
+			setCursor(0, { curRow, curCol }) -- restore pevious mouse location
 			return
 		end
 	end
+	print("beep")
 	curRow = curRow + i
+
+	-- determine location of link in row
 	if inner then
 		linkStart, _, barelink = lineContent:find(mdLinkPattern, curCol)
 		linkEnd = linkStart + #barelink - 3
