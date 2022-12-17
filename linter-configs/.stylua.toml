@@ -1,5 +1,6 @@
+# https://github.com/JohnnyMorganz/StyLua#options
 indent_type = "Tabs"
 indent_width = 3
 quote_style = "AutoPreferDouble"
 call_parentheses = "NoSingleTable"
-collapse_simple_statement = "ConditionalOnly"
+collapse_simple_statement = "Always"
