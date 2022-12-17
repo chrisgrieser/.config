@@ -55,10 +55,10 @@ keymap("x", "<Space>", '"_c')
 keymap("o", "<Space>", varTextobjs.subword, { desc = "subword textobj" })
 
 -- n: [n]ear end of the line
-keymap("o", "n", varTextobjs.nearEoL, { desc = "almost ending of line textobj" })
+keymap({"o", "x"}, "n", varTextobjs.nearEoL, { desc = "almost ending of line textobj" })
 
 -- r: [r]est of paragraph (linewise)
-keymap("o", "r", varTextobjs.restOfParagraph, { desc = "rest of paragraph (linewise)" })
+keymap({"o", "x"}, "r", varTextobjs.restOfParagraph, { desc = "rest of paragraph (linewise)" })
 
 -- av/iv: value textobj
 keymap({ "x", "o" }, "iv", function() varTextobjs.valueTextObj(true) end, { desc = "inner value textobj" })
