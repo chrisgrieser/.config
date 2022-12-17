@@ -111,6 +111,11 @@ add("lua", {
 }, {type = "autosnippets"})
 
 add("lua", {
+	snip("lf", [[
+	local function $1()
+		$2	
+	end
+	]]),
 	snip("ignore (selene)", "-- selene: allow(${1:rule_name})"),
 	snip("ignore (selene global)", "--# selene: allow(${1:rule_name})"),
 	snip("home", 'os.getenv("HOME")'),
@@ -127,7 +132,7 @@ add("lua", {
 	snip("keymap (multi-mode)", 'keymap({"n", "x"}, "$1", ${2:""}, {desc = ${3:""}})\n$0'),
 	snip("highlight (link)", [[cmd.highlight {"def link ${1:fromGroup} ${2:toGroup}", bang = true}]]),
 	snip("highlight", [[cmd.highlight ("${1:group} guifg=${2:color}")]]),
-	snip("normal", [[cmd.normal {"$1", bang = true}]]),
+	snip("normal", [[cmd.normal { "$1", bang = true }]]),
 	snip("input (vim.ui)", [[
 		vim.ui.input({ prompt = "${1:prompt_msg}"}, function (input)
 			if not(input) then return end

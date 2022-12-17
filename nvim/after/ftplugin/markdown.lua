@@ -1,5 +1,5 @@
 require("config/utils")
-local opts = {buffer = true, silent = true}
+local opts = { buffer = true, silent = true }
 --------------------------------------------------------------------------------
 
 -- hide URLs and other formatting, TODO figure out how to hide only URLs
@@ -32,35 +32,56 @@ g.markdown_fenced_languages = {
 --custom text object markdown link `il/al`
 -- l = {"%[().*()]%(.*%)"},
 
+---md links textobj
+---@param inner? boolean
+local function linkTextobj(inner)
+	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
+	local lineContent = fn.getline(".") ---@type string
 
+	local mdLinkPattern = "%b[]%b()"
+	local linkStart, linkEnd = lineContent:find(mdLinkPattern)
+	if not linkStart then return end
+
+	local curRow = fn.line(".")
+	setCursor(0, { curRow, linkStart })
+	if fn.mode():find("v") then
+		cmd.normal { "o", bang = true }
+	else
+		cmd.normal { "v", bang = true }
+	end
+	setCursor(0, { curRow, linkEnd })
+end
+
+keymap({ "o", "x" }, "al", function() linkTextobj(true) end, { desc = "mdlink textobj", buffer = true })
+keymap({ "o", "x" }, "il", function() linkTextobj(false) end, { desc = "mdlink textobj", buffer = true })
 
 --------------------------------------------------------------------------------
 
 -- wrapping and related options
 setlocal("wrap", true) -- soft wrap
 setlocal("colorcolumn", "") -- deactivate ruler
-keymap({"n", "x"}, "H", "g^", opts)
-keymap({"n", "x"}, "L", "g$", opts)
-keymap({"n", "x"}, "J", function() require("quality-of-life").overscroll("6gj") end, opts)
-keymap({"n", "x"}, "K", "6gk", opts)
-keymap({"n", "x"}, "k", "gk", opts)
-keymap({"n", "x"}, "j", function() require("quality-of-life").overscroll("gj") end, opts)
+keymap({ "n", "x" }, "H", "g^", opts)
+keymap({ "n", "x" }, "L", "g$", opts)
+keymap({ "n", "x" }, "J", function() require("quality-of-life").overscroll("6gj") end, opts)
+keymap({ "n", "x" }, "K", "6gk", opts)
+keymap({ "n", "x" }, "k", "gk", opts)
+keymap({ "n", "x" }, "j", function() require("quality-of-life").overscroll("gj") end, opts)
 
 -- decrease line length without zen mode plugins (which unfortunately remove
 -- statuslines and stuff)
 setlocal("signcolumn", "yes:9")
 
 -- automatically open float, since virtual text is hard to read with wrapping
-keymap("n", "ge", function() vim.diagnostic.goto_next {wrap = true, float = true} end, opts)
-keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = true} end, opts)
+keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, opts)
+keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, opts)
 
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 
 -- Heading instead of function navigation
-keymap({"n", "x"}, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], opts)
-keymap({"n", "x"}, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], opts)
+keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], opts)
+keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], opts)
 
 --KEYBINDINGS WITH THE GUI
 if isGui() then
