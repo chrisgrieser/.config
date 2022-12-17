@@ -26,6 +26,7 @@ keymap("i", "<D-j>", function()
 end)
 
 --------------------------------------------------------------------------------
+-- stylua: ignore start
 -- SNIPPETS
 ls.cleanup() -- clears all snippets for writing snippets
 
@@ -46,6 +47,7 @@ add("all", {
 	snip("backspace", "⌫"),
 	snip("escape", "⎋"),
 	snip("tab", "↹ "),
+	snip("enter", "↵"),
 })
 
 -- CSS
@@ -79,8 +81,7 @@ add("zsh", {
 	snip("null (pipe)", "&>/dev/null "),
 	snip("sed (pipe)", "sed 's/${1:pattern}/${2:replacement}/g'"),
 
-	snip("plist extract key",
-		'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
+	snip("plist extract key", 'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
 	snip("running process", 'pgrep -x "$${1:process}" > /dev/null && $0'),
 	snip("quicklook", 'qlmanage -p "${1:filepath}"'), -- mac only
 	snip("sound", 'afplay "/System/Library/Sounds/${1:Submarine}.aiff"'), -- mac only
@@ -373,9 +374,9 @@ add("yaml", {
 })
 
 --------------------------------------------------------------------------------
-
+-- stylua: ignore end
 -- needs to come after snippet definitions
-ls.filetype_extend("typescript", {"javascript"}) -- typescript uses all javascript snippets
-ls.filetype_extend("bash", {"zsh"})
-ls.filetype_extend("sh", {"zsh"})
-ls.filetype_extend("scss", {"css"})
+ls.filetype_extend("typescript", { "javascript" }) -- typescript uses all javascript snippets
+ls.filetype_extend("bash", { "zsh" })
+ls.filetype_extend("sh", { "zsh" })
+ls.filetype_extend("scss", { "css" })

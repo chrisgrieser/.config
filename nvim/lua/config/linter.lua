@@ -8,13 +8,13 @@ local builtins = null_ls.builtins
 local lintersAndFormatters = {
 	"yamllint",
 	"yamlfmt",
-	"prettier",
 	"shellcheck", -- needed for bash-lsp
 	"shfmt", -- shell
 	"markdownlint",
 	"vale", -- natural language
 	"selene", -- lua
 	"stylua", -- lua
+	"prettier",
 	"codespell", -- common misspellings, autoformatted
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
@@ -30,19 +30,12 @@ null_ls.setup {
 		builtins.code_actions.gitsigns, -- gitsigns.nvim plugin, e.g. reset hunks
 		builtins.diagnostics.codespell.with { -- common misspellings. Far less false positives than with cspell
 			disabled_filetypes = { "css", "bib" }, -- base64-encoded fonts cause a lot of errors
-			args = {
-				"--ignore-words",
-				dotfilesFolder .. "/codespell/codespell-ignore.txt",
-				-- can't use `--skip`, since it null-ls reads from stdin and not a file
-				"-",
-			},
+			-- can't use `--skip`, since it null-ls reads from stdin and not a file
+			args = { "--ignore-words", dotfilesFolder .. "/codespell/codespell-ignore.txt", "-" },
 		},
 		builtins.formatting.codespell.with { -- autofix those misspellings
 			disabled_filetypes = { "css", "bib" },
-			extra_args = {
-				"--ignore-words",
-				dotfilesFolder .. "/codespell/codespell-ignore.txt",
-			},
+			extra_args = { "--ignore-words", dotfilesFolder .. "/codespell/codespell-ignore.txt" },
 		},
 
 		-- SHELL
@@ -58,7 +51,8 @@ null_ls.setup {
 
 		-- JS/TS
 		builtins.formatting.prettier.with {
-			filetypes = { "javascript", "typescript", "yaml" }, -- do format markdown, css, and so on
+			filetypes = { "javascript", "typescript", "yaml", "json" }, -- do format markdown, css, and so on
+			extra_args = { "--config", dotfilesFolder .. "/linter-configs/.prettierrc.yaml" },
 		},
 
 		-- CSS
@@ -84,7 +78,7 @@ null_ls.setup {
 		},
 
 		-- MARKDOWN & PROSE
-		builtins.diagnostics.vale,
+		builtins.diagnostics.vale.with,
 		builtins.diagnostics.markdownlint.with {
 			-- fixed via formatting command already
 			extra_args = { "--disable", "trailing-spaces", "no-multiple-blanks" },
