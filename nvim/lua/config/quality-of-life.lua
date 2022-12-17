@@ -205,7 +205,14 @@ function M.overscroll(action)
 			cmd.normal {"zz", bang = true}
 		end
 	end
-	cmd.normal {tostring(vim.v.count1) .. action, bang = true}
+
+	local usedCount = vim.v.count1
+	local actionCount = action:match("%d+") -- if action includes a count
+	if actionCount then
+		action = action:gsub("%d+", "")
+		usedCount = tonumber(actionCount) * usedCount
+	end
+	cmd.normal {tostring(usedCount) .. action, bang = true}
 end
 
 ---Force pasting a linewise register characterwise and vice versa

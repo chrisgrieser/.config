@@ -67,7 +67,7 @@ opt.titlestring = '%{expand("%:p")} [%{mode()}]'
 -- Editor
 opt.cursorline = true
 opt.scrolloff = 12
-opt.sidescrolloff = 20
+opt.sidescrolloff = 18
 opt.textwidth = 80
 opt.wrap = false
 opt.breakindent = false
@@ -233,3 +233,15 @@ for _, ft in pairs(ftWithSkeletons) do
 		end,
 	})
 end
+
+--------------------------------------------------------------------------------
+
+-- netrw
+g.netrw_browse_split = 0
+g.netrw_list_hide = ".*\\.DS_Store$,^./$,^../$" -- hide files created by macOS & current directory
+g.netrw_banner = 0 -- no ugly top banner
+g.netrw_liststyle = 3 -- tree style as default
+g.netrw_winsize = 30 -- width
+g.netrw_localcopydircmd = "cp -r" -- so copy work with directories
+cmd.highlight { "def link netrwTreeBar IndentBlankLineChar", bang = true }
+

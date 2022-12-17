@@ -189,9 +189,6 @@ function M.PluginList(use)
 		config = function() require("numb").setup() end,
 		keys = {{"n", ":"}},
 	}
-
-	-- Misc
-	use "andweeb/presence.nvim"
 	use {"kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async"} -- better folding
 
 	-- Filetype-specific

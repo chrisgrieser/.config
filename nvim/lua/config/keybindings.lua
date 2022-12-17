@@ -56,8 +56,8 @@ keymap({"n", "x", "o"}, "L", "$")
 keymap({"x", "o"}, "J", "6j")
 keymap({"n", "x", "o"}, "K", "6k")
 
-keymap("n", "j", function() qol.overscroll("j") end)
-keymap("n", "J", function() qol.overscroll("6j") end)
+keymap("n", "j", function() qol.overscroll("j") end, {desc = "j (with overscroll)"})
+keymap("n", "J", function() qol.overscroll("6j") end, {desc = "6j (with overscroll)"})
 keymap({"n", "x"}, "G", "Gzz")
 
 -- Jump History
@@ -71,20 +71,20 @@ keymap("n", "<Esc>", function()
 	require("notify").dismiss {pending = clearPending}
 	cmd.nohlsearch() -- clear highlights
 	cmd.echo() -- clear shortmessage
-end)
+end, {desc = "clear highlights and notifications"})
 
 keymap({"n", "x", "o"}, "+", "*") -- no more modifier key (German Layout)
 keymap({"n", "x", "o"}, "*", "#") -- backwards on the same key (German Layout)
 
 -- MARKS
-keymap("", "ä", "`M") -- Goto Mark M
+keymap("", "ä", "`M", {desc = "goto mark M"}) -- Goto Mark M
 keymap("", "Ä", function() -- Set Mark M
 	cmd.normal {"mM", bang = true}
 	vim.notify("Mark M set")
-end)
+end, {desc = "set mark M"})
 
 -- FOLDING
-keymap("n", "^", "za") -- quicker toggling of folds
+keymap("n", "^", "za", {desc = "toggle fold"}) -- quicker toggling of folds
 
 -- [M]atch
 keymap({"n", "x", "o"}, "m", "%")
@@ -93,8 +93,8 @@ keymap({"n", "x", "o"}, "m", "%")
 keymap({"n", "x"}, "gm", "gM")
 
 -- Hunks
-keymap("n", "gh", ":Gitsigns next_hunk<CR>")
-keymap("n", "gH", ":Gitsigns prev_hunk<CR>")
+keymap("n", "gh", ":Gitsigns next_hunk<CR>", {desc = "goto next hunk"})
+keymap("n", "gH", ":Gitsigns prev_hunk<CR>", {desc = "goto previous hunk"})
 
 --------------------------------------------------------------------------------
 

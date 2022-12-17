@@ -13,6 +13,12 @@ local function isVisualMode()
 	return (modeWithV ~= nil and modeWithV ~= false)
 end
 
+---@return boolean
+local function isVisualLineMode()
+	local modeWithV = fn.mode():find("V")
+	return (modeWithV ~= nil and modeWithV ~= false)
+end
+
 local M = {}
 
 --------------------------------------------------------------------------------
@@ -20,7 +26,7 @@ local M = {}
 local lookForwardLines = 5
 --------------------------------------------------------------------------------
 
--- <Space>: Subword (-_ as delimiters)
+---Subword (word with "-_" as delimiters)
 function M.subword()
 	local iskeywBefore = opt.iskeyword:get()
 	opt.iskeyword:remove { "_", "-", "." }
@@ -29,16 +35,15 @@ function M.subword()
 	opt.iskeyword = iskeywBefore
 end
 
--- n: [n]ear end of the line
+---near end of the line
 function M.nearEoL()
 	if not isVisualMode() then normal { "v", bang = true } end
 	normal { "$hh", bang = true }
 end
 
--- r: [r]est of paragraph (linewise)
+---rest of paragraph (linewise)
 function M.restOfParagraph()
-	local isVisualLineMode = fn.mode():find("V")
-	if not isVisualLineMode then normal { "V", bang = true } end
+	if not isVisualLineMode() then normal { "V", bang = true } end
 	normal { "}", bang = true }
 end
 
@@ -76,7 +81,8 @@ function M.indentTextObj(startBorder, endBorder)
 
 	-- set selection
 	setCursor(0, { prevLnum, 0 })
-	cmd.normal { "Vo", bang = true }
+	if not (isVisualLineMode()) then cmd.normal { "V", bang = true } end
+	cmd.normal { "o", bang = true }
 	setCursor(0, { nextLnum, 0 })
 end
 
@@ -126,7 +132,7 @@ function M.mdlinkTextobj(inner)
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
 	local curRow, curCol = unpack(getCursor(0))
-	local linkStart, linkEnd, barelink, hasLink
+	local start, ending, barelink, hasLink
 	local i = -1
 
 	normal { "F[", bang = true } -- go to beginning of link so it can be found when standing on it
@@ -147,21 +153,21 @@ function M.mdlinkTextobj(inner)
 
 	-- determine location of link in row
 	if inner then
-		linkStart, _, barelink = lineContent:find(mdLinkPattern, curCol)
-		linkEnd = linkStart + #barelink - 3
+		start, _, barelink = lineContent:find(mdLinkPattern, curCol)
+		ending = start + #barelink - 3
 	else
-		linkStart, linkEnd = lineContent:find(mdLinkPattern, curCol)
-		linkStart = linkStart - 1
-		linkEnd = linkEnd - 1
+		start, ending = lineContent:find(mdLinkPattern, curCol)
+		start = start - 1
+		ending = ending - 1
 	end
 
-	setCursor(0, { curRow, linkStart })
+	setCursor(0, { curRow, start })
 	if isVisualMode() then
 		normal { "o", bang = true }
 	else
 		normal { "v", bang = true }
 	end
-	setCursor(0, { curRow, linkEnd })
+	setCursor(0, { curRow, ending })
 end
 
 ---CSS Selector Textobj
@@ -170,18 +176,17 @@ function M.cssSelectorTextobj(inner)
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
 	local curRow, curCol = unpack(getCursor(0))
-	local linkStart, linkEnd
 	local i = -1
 
 	normal { "F.", bang = true } -- go to beginning of selector
 
-	-- determine next row with link
-	local mdLinkPattern = "%.[%w-_]+"
-	while not hasLink do
+	-- determine next row with selector
+	local selectorPattern = "%.[%w-_]+"
+	while not hasSelector do
 		i = i + 1
 		---@diagnostic disable-next-line: assign-type-mismatch
 		lineContent = fn.getline(curRow + i) ---@type string
-		hasLink = lineContent:find(mdLinkPattern)
+		hasSelector = lineContent:find(selectorPattern)
 		if i > lookForwardLines then
 			setCursor(0, { curRow, curCol }) -- restore pevious mouse location
 			return
@@ -189,23 +194,18 @@ function M.cssSelectorTextobj(inner)
 	end
 	curRow = curRow + i
 
-	-- determine location of link in row
-	if inner then
-		linkStart, _, barelink = lineContent:find(mdLinkPattern, curCol)
-		linkEnd = linkStart + #barelink - 3
-	else
-		linkStart, linkEnd = lineContent:find(mdLinkPattern, curCol)
-		linkStart = linkStart - 1
-		linkEnd = linkEnd - 1
-	end
+	-- determine location of selector in row
+	local start, ending = lineContent:find(selectorPattern, curCol)
+	ending = ending - 1
+	if not inner then start = start - 1 end
 
-	setCursor(0, { curRow, linkStart })
+	setCursor(0, { curRow, start })
 	if isVisualMode() then
 		normal { "o", bang = true }
 	else
 		normal { "v", bang = true }
 	end
-	setCursor(0, { curRow, linkEnd })
+	setCursor(0, { curRow, ending })
 end
 
 --------------------------------------------------------------------------------

@@ -30,6 +30,5 @@ require("config/AI-support")
 require("config/telescope")
 require("config/treesitter")
 if isGui() then require("config/color-picker") end
-require("config/remaining-plugins")
 
 require("config/snippets")
