@@ -57,13 +57,14 @@ local function gitVaultSync()
 		if exitCode ~= 0 then
 			notify(vaultIcon .. "⚠️️ vault " .. stdErr)
 		else
-			print("Dotfile Sync successful.")
+			print("Vault Sync successful.")
 		end
 	end):start()
 end
 
 local function gitPassSync()
 	if gitpassSync and gitpassSync:isRunning() then return end
+	if not (screenIsUnlocked()) then return end -- prevent background sync when in office
 
 	gitpassSync = hs.task.new(gitPassScript, function(exitCode, _, stdErr)
 		stdErr = stdErr:gsub("\n", " –– ")
@@ -91,8 +92,7 @@ end
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, function()
 	syncAllGitRepos("partial")
-end)
-repoSyncTimer:start()
+end):start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
 uriScheme("sync-repos", function()
@@ -106,12 +106,9 @@ local function updateSketchybar()
 	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --trigger repo-files-update")
 end
 
-dotfilesWatcher = pw(dotfilesFolder, updateSketchybar)
-dotfilesWatcher:start()
-vaultWatcher = pw(vaultLocation, updateSketchybar)
-vaultWatcher:start()
-passFileWatcher = pw(passwordStore, updateSketchybar)
-passFileWatcher:start()
+dotfilesWatcher = pw(dotfilesFolder, updateSketchybar):start()
+vaultWatcher = pw(vaultLocation, updateSketchybar):start()
+passFileWatcher = pw(passwordStore, updateSketchybar):start()
 
 --------------------------------------------------------------------------------
 

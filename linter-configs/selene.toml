@@ -12,4 +12,4 @@ multiple_statements = "allow"
 high_cyclomatic_complexity = "warn" # enable this one
 
 [config]
-high_cyclomatic_complexity = {maximum_complexity = 13}
+high_cyclomatic_complexity = {maximum_complexity = 20}

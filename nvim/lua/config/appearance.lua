@@ -278,7 +278,7 @@ navic.setup {
 local function showBreadcrumbs() return navic.is_available() and not (bo.filetype == "css") end
 
 local function selectionCount()
-	if not (fn.mode():find("[vV]")) then return "" end
+	if not fn.mode():find("[vV]") then return "" end
 	local starts = fn.line("v")
 	local ends = fn.line(".")
 	local lines = starts <= ends and ends - starts + 1 or starts - ends + 1

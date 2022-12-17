@@ -70,6 +70,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>42266127-D884-4B85-92EF-70E28050CCCD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8FB4FEF7-6EDD-4B19-ABDB-C587A62A3BF9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<array>
 			<dict>
@@ -153,6 +166,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A4A97FBA-5CBA-4449-9044-CFD69762CA19</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EDEB1C89-49E1-443D-98F5-94AFC17DD1EC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>42266127-D884-4B85-92EF-70E28050CCCD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -668,6 +694,68 @@ done</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>chmod +x "$*"
+echo -n "$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>42266127-D884-4B85-92EF-70E28050CCCD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<true/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Execution permission granted</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>8FB4FEF7-6EDD-4B19-ABDB-C587A62A3BF9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>chmod +x</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>EDEB1C89-49E1-443D-98F5-94AFC17DD1EC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -716,6 +804,13 @@ done</string>
 			<key>ypos</key>
 			<real>665</real>
 		</dict>
+		<key>42266127-D884-4B85-92EF-70E28050CCCD</key>
+		<dict>
+			<key>xpos</key>
+			<real>175</real>
+			<key>ypos</key>
+			<real>945</real>
+		</dict>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<dict>
 			<key>xpos</key>
@@ -752,6 +847,13 @@ done</string>
 			<real>330</real>
 			<key>ypos</key>
 			<real>130</real>
+		</dict>
+		<key>8FB4FEF7-6EDD-4B19-ABDB-C587A62A3BF9</key>
+		<dict>
+			<key>xpos</key>
+			<real>325</real>
+			<key>ypos</key>
+			<real>945</real>
 		</dict>
 		<key>A25DDA0D-DA11-46FF-9CCB-41D3D338B420</key>
 		<dict>
@@ -822,6 +924,13 @@ done</string>
 			<real>185</real>
 			<key>ypos</key>
 			<real>375</real>
+		</dict>
+		<key>EDEB1C89-49E1-443D-98F5-94AFC17DD1EC</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>945</real>
 		</dict>
 		<key>F237B22E-6247-4FA6-899C-A9CA938AFED5</key>
 		<dict>

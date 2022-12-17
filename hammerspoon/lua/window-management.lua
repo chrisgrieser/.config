@@ -24,29 +24,18 @@ elseif isAtOffice() then
 	centered = { x = 0.2, y = 0, w = 0.616, h = 1 }
 end
 
----Whether Window is maximimized
 ---@param win hs.window
+---@param size hs.geometry
 ---@return boolean
-function isMaximized(win)
+function checkSize(win, size)
 	if not win then return false end
-	local max = win:screen():frame()
-	return win:frame().w == max.w
-end
-
----Whether Window is pseudoMaximized
----@param win hs.window
----@return boolean
-function isPseudoMaximized(win)
-	if not win then return false end
-	local max = win:screen():frame()
-	print("max:", max)
-	local dif = win:frame().w - pseudoMaximized.w * max.w
-	print("dif:", dif)
-	local posOkay = win:frame().x == 0 and win:frame().y == 0
-	print("posOkay:", posOkay)
-	local widthOkay = (dif > -15 and dif < 15) -- leeway for some apps
-	print("widthOkay:", widthOkay)
-	return widthOkay and posOkay
+	local maxf = win:screen():frame()
+	local winf = win:frame()
+	local diff = winf.w - size.w * maxf.w
+	local posxOkay = winf.x == size.x + maxf.x -- calculated this way for two screens
+	local posyOkay = winf.y == size.y + maxf.y
+	local widthOkay = (diff > -10 and diff < 10) -- leeway for some apps
+	return widthOkay and posxOkay and posyOkay
 end
 
 --------------------------------------------------------------------------------
@@ -178,7 +167,7 @@ local function controlSpaceAction()
 	local pos
 	if frontApp() == "Finder" or frontApp() == "Script Editor" then
 		pos = centered
-	elseif isIMacAtHome() or isAtMother() and not isPseudoMaximized(currentWin) then
+	elseif (isIMacAtHome() or isAtMother()) and not checkSize(currentWin, pseudoMaximized) then
 		pos = pseudoMaximized
 	else
 		pos = maximized
