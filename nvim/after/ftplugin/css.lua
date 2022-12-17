@@ -38,37 +38,9 @@ keymap({"n", "x"}, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 
 --------------------------------------------------------------------------------
 
----CSS Selector Textobj
----@param inner boolean inner selector?
-local function selectorTextobj(inner)
-	--ensure "-" is keyword for kebabcase
-	local dashNotKeyword = not (bo.iskeyword:find(",-"))
-	if dashNotKeyword then
-		bo.iskeyword = bo.iskeyword .. ",-"
-	end
 
-	if not (fn.mode():find("[Vv]")) then
-		cmd.normal {"v", bang = true}
-	end
-	cmd.normal {"iwo", bang = true}
-	local _, col = unpack(getCursor(0))
-
-	-- include the "." with outer selector
-	---@diagnostic disable-next-line: param-type-mismatch, undefined-field
-	local charBefore = fn.getline("."):sub(col, col)
-	if charBefore == "." and not (inner) then
-		cmd.normal {"h", bang = true}
-	end
-
-	-- restore previous iskeyword option
-	if dashNotKeyword then
-		bo.iskeyword = bo.iskeyword:sub(0, -2)
-	end
-
-end
-
-keymap({"o", "x"}, "as", function() selectorTextobj(false) end, {desc = "outer CSS selector textobj", buffer = true})
-keymap({"o", "x"}, "is", function() selectorTextobj(true) end, {desc = "inner CSS selector textobj", buffer = true})
+keymap({"o", "x"}, "as", function() require("various-textobjs").cssSelectorTextobj(false) end, {desc = "outer CSS selector textobj", buffer = true})
+keymap({"o", "x"}, "is", function() require("various-textobjs").cssSelectorTextobj(true) end, {desc = "inner CSS selector textobj", buffer = true})
 
 -- double a selector
 keymap("n", "yas", "yasEp", {buffer = true, silent = true, remap = true})

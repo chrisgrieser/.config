@@ -1,4 +1,5 @@
 require("config/utils")
+local varTextobjs = require("various-textobjs")
 --------------------------------------------------------------------------------
 -- New Text objects
 -- af -> a [f]unction (treesitter)
@@ -48,60 +49,24 @@ keymap("n", "<C-M-Space>", '"_daW') -- HACK since <S-Space> not fully supported,
 keymap("x", "<Space>", '"_c')
 
 --------------------------------------------------------------------------------
--- CUSTOM TEXTOBJECTS
+-- VARIOUS TEXTOBJS
 
--- <Space>: Subword (-_ as delimiters)
-keymap("o", "<Space>", function()
-	local iskeywBefore = opt.iskeyword:get()
-	opt.iskeyword:remove { "_", "-", "." }
-	cmd.normal { "viw", bang = true }
-	opt.iskeyword = iskeywBefore
-end, { desc = "subword textobj" })
+-- subword
+keymap("o", "<Space>", varTextobjs.subword, { desc = "subword textobj" })
 
 -- n: [n]ear end of the line
-keymap("o", "n", function() cmd.normal { "v$hh", bang = true } end, { desc = "almost ending of line textobj" })
+keymap("o", "n", varTextobjs.nearEoL, { desc = "almost ending of line textobj" })
 
 -- r: [r]est of paragraph (linewise)
-keymap("o", "r", function() cmd.normal { "V}", bang = true } end, { desc = "rest of paragraph (linewise)" })
+keymap("o", "r", varTextobjs.restOfParagraph, { desc = "rest of paragraph (linewise)" })
 
--- INDENTATION OBJECT
----indentation textobj, based on https://thevaluable.dev/vim-create-text-objects/
----@param startBorder boolean
----@param endBorder boolean
-local function indentationTextObj(startBorder, endBorder)
-	local function isBlankLine(lineNr)
-		---@diagnostic disable-next-line: assign-type-mismatch
-		local lineContent = fn.getline(lineNr) ---@type string
-		return string.find(lineContent, "^%s*$") == 1
-	end
+-- av/iv: value textobj
+keymap({ "x", "o" }, "iv", function() varTextobjs.valueTextObj(true) end, { desc = "inner value textobj" })
+keymap({ "x", "o" }, "av", function() varTextobjs.valueTextObj(false) end, { desc = "outer value textobj" })
 
-	if isBlankLine(fn.line(".")) then return end -- abort on blank line
-
-	local indentofStart = fn.indent(fn.line("."))
-	if indentofStart == 0 then return end -- do not select whole file
-
-	local prevLnum = fn.line(".") - 1 -- line before cursor
-	while prevLnum > 0 and (isBlankLine(prevLnum) or fn.indent(prevLnum) >= indentofStart) do
-		prevLnum = prevLnum - 1
-	end
-	local nextLnum = fn.line(".") + 1 -- line after cursor
-	local lastLine = fn.line("$")
-	while nextLnum <= lastLine and (isBlankLine(nextLnum) or fn.indent(nextLnum) >= indentofStart) do
-		nextLnum = nextLnum + 1
-	end
-
-	-- differentiate ai and ii
-	if not startBorder then prevLnum = prevLnum + 1 end
-	if not endBorder then nextLnum = nextLnum - 1 end
-
-	-- set selection
-	setCursor(0, { prevLnum, 0 })
-	cmd.normal { "Vo", bang = true }
-	setCursor(0, { nextLnum, 0 })
-end
-
-keymap({ "x", "o" }, "ii", function() indentationTextObj(false, false) end, { desc = "inner indentation textobj" })
-keymap({ "x", "o" }, "ai", function() indentationTextObj(true, true) end, { desc = "outer indentation textobj" })
+-- ii/ai: indentation textobj
+keymap({ "x", "o" }, "ii", function() varTextobjs.indentTextObj(false, false) end, { desc = "inner indentation textobj" })
+keymap({ "x", "o" }, "ai", function() varTextobjs.indentTextObj(true, true) end, { desc = "outer indentation textobj" })
 
 augroup("IndentedFileTypes", {})
 autocmd("FileType", {
@@ -118,44 +83,6 @@ autocmd("FileType", {
 		end
 	end,
 })
-
--- VALUE TEXT OBJECT
----@param inner boolean
-local function valueTextObj(inner)
-	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
-	local lineContent = fn.getline(".") ---@type string
-
-	local _, valueStart = lineContent:find("[=:] ?")
-	if not valueStart then
-		vim.notify("No value found in current line.", logWarn)
-		return
-	end
-
-	-- valueEnd either comment or end of line
-	local comStrPattern = bo
-		.commentstring
-		:gsub(" ?%%s.*", "") -- remove placeholder and backside of commentstring
-		:gsub("(.)", "%%%1") -- escape commentstring so it's a valid lua pattern
-	local valueEnd, _ = lineContent:find(".. ?" .. comStrPattern)
-	if not valueEnd or comStrPattern == "" then valueEnd = #lineContent - 1 end
-
-	-- inner value = without trailing comma/semicolon
-	local lastChar = lineContent:sub(valueEnd + 1, valueEnd + 1)
-	if inner and lastChar:find("[,;]") then valueEnd = valueEnd - 1 end
-
-	-- set selection
-	local currentRow = fn.line(".")
-	setCursor(0, { currentRow, valueStart })
-	if fn.mode():find("v") then
-		cmd.normal { "o", bang = true }
-	else
-		cmd.normal { "v", bang = true }
-	end
-	setCursor(0, { currentRow, valueEnd })
-end
-
-keymap({ "x", "o" }, "iv", function() valueTextObj(true) end, { desc = "inner value textobj" })
-keymap({ "x", "o" }, "av", function() valueTextObj(false) end, { desc = "outer value textobj" })
 
 --------------------------------------------------------------------------------
 -- SPECIAL PLUGIN TEXT OBJECTS

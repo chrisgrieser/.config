@@ -30,8 +30,8 @@ g.markdown_fenced_languages = {
 
 --------------------------------------------------------------------------------
 
-keymap({ "o", "x" }, "al", function() require("various-textobjs").linkTextobj(false) end,{ desc =  "outer mdlink textobj", buffer = true })
-keymap({ "o", "x" }, "il", function() require("various-textobjs").linkTextobj(true) end, { desc = "inner mdlink textobj", buffer = true })
+keymap({ "o", "x" }, "al", function() require("various-textobjs").mdlinkTextobj(false) end,{ desc =  "outer mdlink textobj", buffer = true })
+keymap({ "o", "x" }, "il", function() require("various-textobjs").mdlinkTextobj(true) end, { desc = "inner mdlink textobj", buffer = true })
 
 --------------------------------------------------------------------------------
 

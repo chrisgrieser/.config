@@ -484,9 +484,7 @@ keymap("n", "<leader>r", function()
 	elseif ft == "lua" then
 		if parentFolder:find("nvim") then
 			cmd.write()
-			cmd.mkview() -- HACK: mkview and loadview needed to not loose folding when sourcing
 			cmd.source("%")
-			cmd.loadview()
 			if filename:find("plugin%-list") then
 				packer.compile()
 				vim.notify("Packer recompiled and " .. fn.expand("%") .. " reloaded.")
