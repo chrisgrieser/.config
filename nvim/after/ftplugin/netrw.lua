@@ -1,7 +1,7 @@
-require("utils")
+require("config/utils")
 -- https://vonheikemen.github.io/devlog/tools/using-netrw-vim-builtin-file-explorer/
 --------------------------------------------------------------------------------
-local opts = {buffer = true, remap = true} -- remap requiered, since netrw uses remaps already
+local opts = {buffer = true, remap = true} -- remap required, since netrw uses remaps already
 
 keymap("", "h", "-", opts) -- up
 keymap("", "l", "<CR>", opts) -- open/toggle fold
@@ -15,4 +15,3 @@ keymap("", "r", "R", opts) -- rename
 keymap("", "i", "qf", opts) -- info
 
 -- INFO there are also netrw options which need in remaining plugins
-

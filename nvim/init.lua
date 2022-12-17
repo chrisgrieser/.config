@@ -1,5 +1,7 @@
+-- INFO configs in subfolder to avoid namespace collisions
+
 borderStyle = "single" -- https://neovim.io/doc/user/api.html#nvim_open_win()
-require("config/packer-setup") -- must be 1st
+require("config/packer") -- must be 1st
 require("impatient") -- plugin, must be 2nd
 require("config/utils") -- must be 3rd
 
@@ -23,10 +25,10 @@ require("config/completion")
 require("config/linter")
 require("config/debugger")
 
-require("config/comment-config")
+require("config/comments")
 require("config/AI-support")
-require("config/telescope-config")
-require("config/treesitter-config")
+require("config/telescope")
+require("config/treesitter")
 if isGui() then require("config/color-picker") end
 require("config/remaining-plugins")
 

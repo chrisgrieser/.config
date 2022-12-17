@@ -12,7 +12,8 @@ local lintersAndFormatters = {
 	"shfmt", -- shell
 	"markdownlint",
 	"vale", -- natural language
-	"selene", -- lua linter
+	"selene", -- lua
+	"stylua", -- lua
 	"codespell", -- common misspellings, autoformatted
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
@@ -62,7 +63,8 @@ null_ls.setup {
 			extra_args = {"--quiet"}, -- only errors, no warnings
 		},
 
-		-- Lua
+		-- LUA
+		builtins.formatting.stylua,
 		builtins.diagnostics.selene.with {
 			extra_args = {"--config", dotfilesFolder .. "/linter-configs/selene.toml"}
 		},
@@ -73,7 +75,7 @@ null_ls.setup {
 			extra_args = {"--config-file", dotfilesFolder .. "/yamllint/config/.yamllint.yaml"},
 		},
 
-		-- Markdown & Prose
+		-- MARKDOWN & PROSE
 		builtins.diagnostics.vale,
 		builtins.diagnostics.markdownlint.with {
 			-- fixed via formatting command already

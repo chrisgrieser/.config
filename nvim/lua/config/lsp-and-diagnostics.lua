@@ -1,5 +1,4 @@
 require("config/utils")
-require("utils")
 -- INFO: required order of setup() calls is mason, mason-config, nvim-dev, lspconfig
 -- https://github.com/williamboman/mason-lspconfig.nvim#setup
 --------------------------------------------------------------------------------
@@ -215,7 +214,7 @@ local lspFilestypes = {}
 lspSettings.sumneko_lua = {
 	Lua = {
 		format = {
-			enable = true,
+			enable = false,
 			defaultConfig = {
 				-- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
 				-- https://github.com/sumneko/lua-language-server/wiki/Formatter

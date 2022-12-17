@@ -21,7 +21,7 @@ autocmd("BufRead", {
 --------------------------------------------------------------------------------
 
 -- ChatGPT
-require("private-settings") -- API key symlinked and kept out of the dotfile repo
+require("config/private-settings") -- API key symlinked and kept out of the dotfile repo
 keymap("n", "ga", ":ChatGPT<CR>", {desc = "ChatGPT Prompt"})
 require("chatgpt").setup {
 	welcome_message = "",
