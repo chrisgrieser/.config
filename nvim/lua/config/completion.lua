@@ -1,6 +1,5 @@
 require("config/utils")
 local cmp = require("cmp")
-local luasnip = require("luasnip")
 
 ---Create a copy of a lua table
 ---@param originalTable table
@@ -14,6 +13,7 @@ local function copyTable(originalTable)
 end
 
 --------------------------------------------------------------------------------
+-- source definitions
 
 local emojis = {name = "emoji", keyword_length = 2}
 local nerdfont = {name = "nerdfont", keyword_length = 2}
@@ -103,8 +103,6 @@ cmp.setup {
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
 			else
 				fallback() -- normal mapping, e.g. tabout plugin
 			end
@@ -112,8 +110,6 @@ cmp.setup {
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
 			else
 				fallback()
 			end

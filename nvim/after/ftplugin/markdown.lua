@@ -30,49 +30,8 @@ g.markdown_fenced_languages = {
 
 --------------------------------------------------------------------------------
 
----md links textobj
----@param inner boolean
-local function linkTextobj(inner)
-	local lookForwardLines = 5
-	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
-	local lineContent = fn.getline(".") ---@type string
-	local curRow, curCol = unpack(getCursor(0))
-	local linkStart, linkEnd, barelink, hasLink
-	local i = 0
-
-	cmd.normal { "F[", bang = true } -- go to beginning of link so it can be found when standing on it
-	local mdLinkPattern = "(%b[])%b()"
-	while not hasLink do
-		i = i + 1
-		---@diagnostic disable-next-line: assign-type-mismatch
-		lineContent = fn.getline(curRow + i) ---@type string
-		hasLink = lineContent:find(mdLinkPattern)
-		if i > lookForwardLines then 
-			setCursor(0, {curRow, curCol}) -- re
-			return
-		end
-	end
-	curRow = curRow + i
-	if inner then
-		linkStart, _, barelink = lineContent:find(mdLinkPattern, curCol)
-		linkEnd = linkStart + #barelink - 3
-	else
-		linkStart, linkEnd = lineContent:find(mdLinkPattern, curCol)
-		linkStart = linkStart - 1
-		linkEnd = linkEnd - 1
-	end
-
-	setCursor(0, { curRow, linkStart })
-	if fn.mode():find("v") then
-		cmd.normal { "o", bang = true }
-	else
-		cmd.normal { "v", bang = true }
-	end
-	setCursor(0, { curRow, linkEnd })
-end
-
-keymap({ "o", "x" }, "al", function() linkTextobj(false) end, { desc = "mdlink textobj", buffer = true })
-keymap({ "o", "x" }, "il", function() linkTextobj(true) end, { desc = "mdlink textobj", buffer = true })
+keymap({ "o", "x" }, "al", function() require("various-textobjs").linkTextobj(false) end, { desc = "mdlink textobj", buffer = true })
+keymap({ "o", "x" }, "il", function() require("various-textobjs").linkTextobj(true) end, { desc = "mdlink textobj", buffer = true })
 
 --------------------------------------------------------------------------------
 

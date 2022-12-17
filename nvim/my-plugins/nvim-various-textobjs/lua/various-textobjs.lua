@@ -1,163 +1,50 @@
-local fn = vim.fn
-local v = vim.v
-local echoerr = vim.cmd.echoerr
-local getMacro = vim.fn.getreg
-local setMacro = vim.fn.setreg
 local normal = vim.cmd.normal
-local keymap = vim.keymap.set
-
----@return boolean
-local function isRecording()
-	return fn.reg_recording() ~= ""
-end
-
-local macroRegs, slot, toggleKey, logLevel
+local getCursor = vim.api.nvim_win_get_cursor
+local setCursor = vim.api.nvim_win_set_cursor
+local fn = vim.fn
 local M = {}
+local lookForwardLines = 5
 --------------------------------------------------------------------------------
--- COMMANDS
 
--- start/stop recording macro into the current slot
-local function toggleRecording()
-	local reg = macroRegs[slot]
-	if isRecording() then
-		local prevRec = getMacro(macroRegs[slot])
-		normal {"q", bang = true}
+---md links textobj
+---@param inner boolean inner or outer link
+function M.linkTextobj(inner)
+	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
+	local lineContent = fn.getline(".") ---@type string
+	local curRow, curCol = unpack(getCursor(0))
+	local linkStart, linkEnd, barelink, hasLink
+	local i = 0
 
-		-- NOTE the macro key records itself, so it has to be removed from the
-		-- register. As this function has to know the variable length of the
-		-- LHS key that triggered it, it has to be passed in via .setup()-function
-		setMacro(reg, getMacro(reg):sub(1, -1 * (#toggleKey + 1)))
-
-		local justRecorded = getMacro(reg)
-		if justRecorded == "" then
-			setMacro(reg, prevRec)
-			vim.notify("Recording aborted. (Previous recording is kept.)", logLevel)
-		else
-			vim.notify("Recorded [" .. reg .. "]:\n" .. justRecorded, logLevel)
-		end
-	else
-		normal {"q" .. reg, bang = true}
-		vim.notify("Recording to [" .. reg .. "]…", logLevel)
-	end
-end
-
----play the macro recorded in current slot
-local function playRecording()
-	local reg = macroRegs[slot]
-	if getMacro(reg) == "" then
-		vim.notify("Macro Slot ["..reg.."] is empty.", logLevel)
-		return
-	end
-	normal {v.count1.."@" .. reg, bang = true}
-end
-
----changes the active slot
-local function switchMacroSlot()
-	slot = slot + 1
-	if slot > #macroRegs then slot = 1 end
-	local currentMacro = getMacro(macroRegs[slot])
-	local msg = " Now using macro slot [" .. macroRegs[slot] .. "]"
-	if currentMacro ~= "" then
-		msg = msg .. ".\nCurrently recorded macro:\n" .. currentMacro
-	else
-		msg = msg .. "(empty)."
-	end
-	vim.notify(msg, logLevel)
-end
-
----edit the current slot
-local function editMacro()
-	local reg = macroRegs[slot]
-	local macroContent = getMacro(reg)
-	local inputConfig = {
-		prompt = "Edit Macro [" .. reg .. "]: ",
-		default = macroContent,
-	}
-	vim.ui.input(inputConfig, function(editedMacro)
-		if not (editedMacro) then return end -- cancellation
-		setMacro(reg, editedMacro)
-		vim.notify("Edited Macro [" .. reg .. "]\n" .. editedMacro, logLevel)
-	end)
-end
-
---------------------------------------------------------------------------------
--- CONFIG
-
----@class configObj
----@field slots table<string>: named register slots
----@field clear boolean: whether to clear slots/registers on setup
----@field timeout number: Default timeout for notification
----@field mapping maps: individual mappings
----@field logLevel integer: log level (vim.log.levels)
-
----@class maps
----@field startStopRecording string
----@field playMacro string
----@field editMacro string
----@field switchSlot string
-
----Setup Macro Plugin
----@param config configObj
-function M.setup(config)
-	slot = 1 -- initial starting slot
-	macroRegs = config.slots or {"a", "b"}
-	logLevel = config.logLevel or vim.log.levels.INFO
-
-	-- validation of slots
-	for _, reg in pairs(macroRegs) do
-		if not(reg:find("^%l$")) then
-			echoerr("'" .. reg .. "' is an invalid slot. Choose only named registers (a-z).")
+	normal { "F[", bang = true } -- go to beginning of link so it can be found when standing on it
+	local mdLinkPattern = "(%b[])%b()"
+	while not hasLink do
+		i = i + 1
+		---@diagnostic disable-next-line: assign-type-mismatch
+		lineContent = fn.getline(curRow + i) ---@type string
+		hasLink = lineContent:find(mdLinkPattern)
+		if i > lookForwardLines then
+			setCursor(0, { curRow, curCol }) -- re
 			return
 		end
 	end
-
-	-- set keymaps
-	toggleKey = config.mapping.startStopRecording or "q"
-	local playKey = config.mapping.playMacro or "Q"
-	local editKey = config.mapping.editMacro or "cq"
-	local switchKey = config.mapping.switchSlot or "<C-q>"
-	keymap("n", toggleKey, toggleRecording, {desc = "Start/stop recording to current macro slot."})
-	keymap("n", playKey, playRecording, {desc = "Play the current macro slot."})
-	keymap("n", editKey, editMacro, {desc = "Edit the macro in the current slot."})
-	keymap("n", switchKey, switchMacroSlot, {desc = "Edit the macro in the current slot."})
-
-	-- clearing
-	if config.clear then
-		for _, reg in pairs(macroRegs) do
-			setMacro(reg, "")
-		end
+	curRow = curRow + i
+	if inner then
+		linkStart, _, barelink = lineContent:find(mdLinkPattern, curCol)
+		linkEnd = linkStart + #barelink - 3
+	else
+		linkStart, linkEnd = lineContent:find(mdLinkPattern, curCol)
+		linkStart = linkStart - 1
+		linkEnd = linkEnd - 1
 	end
+
+	setCursor(0, { curRow, linkStart })
+	if fn.mode():find("v") then
+		normal { "o", bang = true }
+	else
+		normal { "v", bang = true }
+	end
+	setCursor(0, { curRow, linkEnd })
 end
 
 --------------------------------------------------------------------------------
--- STATUS LINE COMPONENTS
-
----returns recording status for status line plugins (e.g., used with cmdheight=0)
----@return string
-function M.recordingStatus()
-	if not (isRecording()) then return "" end
-	return "  REC [" .. macroRegs[slot] .. "]"
-end
-
----returns non-empty for status line plugins.
----@return string
-function M.displaySlots()
-	if isRecording() then return "" end
-	local out = {}
-	for _, reg in pairs(macroRegs) do
-		local notEmpty = getMacro(reg) ~= ""
-		local isActive = macroRegs[slot] == reg
-		if notEmpty and isActive then
-			table.insert(out, "[" .. reg .. "]")
-		elseif notEmpty and not (isActive) then
-			table.insert(out, reg)
-		end
-	end
-	local output = table.concat(out, " ")
-	if output ~= "" then output = " " .. output end
-	return output
-end
-
---------------------------------------------------------------------------------
-
 return M
