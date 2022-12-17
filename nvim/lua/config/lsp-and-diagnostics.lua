@@ -322,9 +322,9 @@ lspSettings.eslint = {
 -- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings
 lspSettings.jsonls = {
 	json = {
-		format = { enable = false }, -- let prettier format
-		schemas = require("schemastore").json.schemas(),
 		validate = { enable = true },
+		format = { enable = true },
+		schemas = require("schemastore").json.schemas(),
 	},
 }
 
