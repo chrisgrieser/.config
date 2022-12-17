@@ -1,4 +1,5 @@
-trailingComma: "es5"
+# https://prettier.io/docs/en/options.html
+printWidth: 100
+useTabs: true
 tabWidth: 3
-semi: false
-singleQuote: true
+bracketSpacing: false
