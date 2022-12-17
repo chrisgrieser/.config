@@ -244,8 +244,6 @@ local function finderWinAutoLayout()
 		moveResize(finderWins[2], {h = 1, w = 0.34, x = 0.33, y = 0})
 		moveResize(finderWins[3], {h = 1, w = 0.33, x = 0.67, y = 0})
 	end
-	app("Finder"):selectMenuItem {"Window", "Bring All to Front"}
-	app("Finder"):selectMenuItem {"View", "Hide Sidebar"}
 end
 wf_finder = wf.new("Finder")
 	:setOverrideFilter {
@@ -258,7 +256,9 @@ wf_finder = wf.new("Finder")
 
 -- quit Finder if it was started as a helper (e.g., JXA), but has no window
 finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
-	if appName == "Finder" and eventType == aw.launched then
+	if appName ~= "Finder" then return end
+
+	if eventType == aw.launched then
 		-- INFO delay shouldn't be too low, otherwise other scripts cannot
 		-- properly utilize Finder
 		runWithDelays({3, 4, 5}, function()
@@ -266,7 +266,16 @@ finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 				finderAppObj:kill()
 			end
 		end)
+	elseif eventType == aw.activated then
+		app("Finder"):selectMenuItem {"Window", "Bring All to Front"}
+		app("Finder"):selectMenuItem {"View", "Hide Sidebar"}
+		if isProjector() then
+			app("Finder"):selectMenuItem {"View", "Show Toolbar"}
+		else
+			app("Finder"):selectMenuItem {"View", "Hide Toolbar"}
+		end
 	end
+
 end):start()
 
 --------------------------------------------------------------------------------
