@@ -2,29 +2,44 @@ local normal = vim.cmd.normal
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
 local cmd = vim.cmd
-local fn = vim.fn
-local M = {}
-local lookForwardLines = 5
 local bo = vim.bo
+local fn = vim.fn
+local opt = vim.opt
 local logWarn = vim.log.levels.WARN
+
+---@return boolean
+local function isVisualMode()
+	local modeWithV = fn.mode():find("v")
+	return (modeWithV ~= nil and modeWithV ~= false)
+end
+
+local M = {}
+
+--------------------------------------------------------------------------------
+
+local lookForwardLines = 5
 --------------------------------------------------------------------------------
 
 -- <Space>: Subword (-_ as delimiters)
 function M.subword()
-	local iskeywBefore = vim.opt.iskeyword:get()
-	vim.opt.iskeyword:remove { "_", "-", "." }
-	cmd.normal { "viw", bang = true }
-	vim.opt.iskeyword = iskeywBefore
+	local iskeywBefore = opt.iskeyword:get()
+	opt.iskeyword:remove { "_", "-", "." }
+	if not isVisualMode() then normal { "v", bang = true } end
+	normal { "iw", bang = true }
+	opt.iskeyword = iskeywBefore
 end
 
 -- n: [n]ear end of the line
-function M.nearEoL() 
-	normal { "v$hh", bang = true }
+function M.nearEoL()
+	if not isVisualMode() then normal { "v", bang = true } end
+	normal { "$hh", bang = true }
 end
 
 -- r: [r]est of paragraph (linewise)
-function M.restOfParagraph() 
-	cmd.normal { "V}", bang = true }
+function M.restOfParagraph()
+	local isVisualLineMode = fn.mode():find("V")
+	if not isVisualLineMode then normal { "V", bang = true } end
+	normal { "}", bang = true }
 end
 
 --------------------------------------------------------------------------------
@@ -94,7 +109,7 @@ function M.valueTextObj(inner)
 	-- set selection
 	local currentRow = fn.line(".")
 	setCursor(0, { currentRow, valueStart })
-	if fn.mode():find("v") then
+	if isVisualMode() then
 		cmd.normal { "o", bang = true }
 	else
 		cmd.normal { "v", bang = true }
@@ -118,7 +133,6 @@ function M.mdlinkTextobj(inner)
 
 	-- determine next row with link
 	local mdLinkPattern = "(%b[])%b()"
-	print("beep")
 	while not hasLink do
 		i = i + 1
 		---@diagnostic disable-next-line: assign-type-mismatch
@@ -142,7 +156,7 @@ function M.mdlinkTextobj(inner)
 	end
 
 	setCursor(0, { curRow, linkStart })
-	if fn.mode():find("v") then
+	if isVisualMode() then
 		normal { "o", bang = true }
 	else
 		normal { "v", bang = true }
@@ -151,32 +165,47 @@ function M.mdlinkTextobj(inner)
 end
 
 ---CSS Selector Textobj
----@param inner boolean inner selector?
+---@param inner boolean inner selector
 function M.cssSelectorTextobj(inner)
-	--ensure "-" is keyword for kebabcase
-	local dashNotKeyword = not (bo.iskeyword:find(",-"))
-	if dashNotKeyword then
-		bo.iskeyword = bo.iskeyword .. ",-"
+	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
+	local lineContent = fn.getline(".") ---@type string
+	local curRow, curCol = unpack(getCursor(0))
+	local linkStart, linkEnd
+	local i = -1
+
+	normal { "F.", bang = true } -- go to beginning of selector
+
+	-- determine next row with link
+	local mdLinkPattern = "%.[%w-_]+"
+	while not hasLink do
+		i = i + 1
+		---@diagnostic disable-next-line: assign-type-mismatch
+		lineContent = fn.getline(curRow + i) ---@type string
+		hasLink = lineContent:find(mdLinkPattern)
+		if i > lookForwardLines then
+			setCursor(0, { curRow, curCol }) -- restore pevious mouse location
+			return
+		end
+	end
+	curRow = curRow + i
+
+	-- determine location of link in row
+	if inner then
+		linkStart, _, barelink = lineContent:find(mdLinkPattern, curCol)
+		linkEnd = linkStart + #barelink - 3
+	else
+		linkStart, linkEnd = lineContent:find(mdLinkPattern, curCol)
+		linkStart = linkStart - 1
+		linkEnd = linkEnd - 1
 	end
 
-	if not (fn.mode():find("[Vv]")) then
-		cmd.normal {"v", bang = true}
+	setCursor(0, { curRow, linkStart })
+	if isVisualMode() then
+		normal { "o", bang = true }
+	else
+		normal { "v", bang = true }
 	end
-	cmd.normal {"iwo", bang = true}
-	local _, col = unpack(getCursor(0))
-
-	-- include the "." with outer selector
-	---@diagnostic disable-next-line: param-type-mismatch, undefined-field
-	local charBefore = fn.getline("."):sub(col, col)
-	if charBefore == "." and not (inner) then
-		cmd.normal {"h", bang = true}
-	end
-
-	-- restore previous iskeyword option
-	if dashNotKeyword then
-		bo.iskeyword = bo.iskeyword:sub(0, -2)
-	end
-
+	setCursor(0, { curRow, linkEnd })
 end
 
 --------------------------------------------------------------------------------

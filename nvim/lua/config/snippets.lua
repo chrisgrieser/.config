@@ -113,9 +113,10 @@ add("lua", {
 add("lua", {
 	snip("lf", [[
 	local function $1()
-		$2	
+		$2
 	end
 	]]),
+	snip("ignore (stylua)", "-- stylua: ignore start"),
 	snip("ignore (selene)", "-- selene: allow(${1:rule_name})"),
 	snip("ignore (selene global)", "--# selene: allow(${1:rule_name})"),
 	snip("home", 'os.getenv("HOME")'),
@@ -378,8 +379,9 @@ add("yaml", {
 	]]),
 })
 
---------------------------------------------------------------------------------
 -- stylua: ignore end
+--------------------------------------------------------------------------------
+
 -- needs to come after snippet definitions
 ls.filetype_extend("typescript", { "javascript" }) -- typescript uses all javascript snippets
 ls.filetype_extend("bash", { "zsh" })

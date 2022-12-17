@@ -1,9 +1,10 @@
 local M = {}
 
 -- alternative setup method https://www.reddit.com/r/neovim/comments/zk187u/how_does_everyone_segment_plugin_development_from/
-local myrepos = vim.fn.stdpath("config").."/my-plugins/"
+local myrepos = vim.fn.stdpath("config") .. "/my-plugins/"
 
 --------------------------------------------------------------------------------
+-- stylua: ignore start
 function M.PluginList(use)
 
 	-- Package Management

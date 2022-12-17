@@ -1,26 +1,38 @@
 ---@diagnostic disable: undefined-global
 require("config/utils")
-local opts = {buffer = true}
+local opts = { buffer = true }
 --------------------------------------------------------------------------------
 
 -- comment marks more useful than symbols for theme development
-keymap("n", "gs", function() telescope.current_buffer_fuzzy_find {
-		default_text = "/* < ",
-		prompt_prefix = " ",
-		prompt_title = "Navigation Markers",
-	}
-end, opts)
+keymap(
+	"n",
+	"gs",
+	function()
+		telescope.current_buffer_fuzzy_find {
+			default_text = "/* < ",
+			prompt_prefix = " ",
+			prompt_title = "Navigation Markers",
+		}
+	end,
+	opts
+)
 
 -- search only for variables
-keymap("n", "gS", function() telescope.current_buffer_fuzzy_find {
-		default_text = "--",
-		prompt_prefix = " ",
-		prompt_title = "CSS Variables",
-	}
-end, opts)
+keymap(
+	"n",
+	"gS",
+	function()
+		telescope.current_buffer_fuzzy_find {
+			default_text = "--",
+			prompt_prefix = " ",
+			prompt_title = "CSS Variables",
+		}
+	end,
+	opts
+)
 
 -- since in big css files, the "/" search (mapped to - for me) is laggy
-keymap("n", "-", telescope.current_buffer_fuzzy_find, {desc = "search in current buffer (css)", buffer = true})
+keymap("n", "-", telescope.current_buffer_fuzzy_find, { desc = "search in current buffer (css)", buffer = true })
 
 --------------------------------------------------------------------------------
 
@@ -33,23 +45,32 @@ keymap("n", "zz", ":syntax sync fromstart<CR>", opts)
 --------------------------------------------------------------------------------
 
 -- Section instead of function movement
-keymap({"n", "x"}, "<C-j>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
-keymap({"n", "x"}, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
+keymap({ "n", "x" }, "<C-j>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
+keymap({ "n", "x" }, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 
 --------------------------------------------------------------------------------
 
-
-keymap({"o", "x"}, "as", function() require("various-textobjs").cssSelectorTextobj(false) end, {desc = "outer CSS selector textobj", buffer = true})
-keymap({"o", "x"}, "is", function() require("various-textobjs").cssSelectorTextobj(true) end, {desc = "inner CSS selector textobj", buffer = true})
+keymap(
+	{ "o", "x" },
+	"as",
+	function() require("various-textobjs").cssSelectorTextobj(false) end,
+	{ desc = "outer CSS selector textobj", buffer = true }
+)
+keymap(
+	{ "o", "x" },
+	"is",
+	function() require("various-textobjs").cssSelectorTextobj(true) end,
+	{ desc = "inner CSS selector textobj", buffer = true }
+)
 
 -- double a selector
-keymap("n", "yas", "yasEp", {buffer = true, silent = true, remap = true})
+keymap("n", "yas", "yasEp", { buffer = true, silent = true, remap = true })
 
 --------------------------------------------------------------------------------
 
 -- smart line duplicate (mnemonic: [R]eplicate)
 -- switches top/bottom & moves to value
-keymap("n", "R", function() qol.duplicateLine {reverse = true, moveTo = "value"} end, opts)
+keymap("n", "R", function() qol.duplicateLine { reverse = true, moveTo = "value" } end, opts)
 
 ---@diagnostic disable: undefined-field, param-type-mismatch
 -- toggle !important
@@ -61,7 +82,7 @@ keymap("n", "<leader>i", function()
 		lineContent = lineContent:gsub(";", " !important;")
 	end
 	fn.setline(".", lineContent)
-end, {buffer = true})
+end, { buffer = true })
 
 keymap("n", "qw", function()
 	local hr = {
@@ -74,8 +95,8 @@ keymap("n", "qw", function()
 	fn.append(".", hr)
 	local lineNum = api.nvim_win_get_cursor(0)[1] + 2
 	local colNum = #hr[2] + 2
-	api.nvim_win_set_cursor(0, {lineNum, colNum})
-	cmd [[startinsert!]]
+	api.nvim_win_set_cursor(0, { lineNum, colNum })
+	cmd([[startinsert!]])
 end, opts)
 
 ---@diagnostic enable: undefined-field, param-type-mismatch
