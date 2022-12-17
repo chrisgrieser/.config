@@ -78,7 +78,7 @@ null_ls.setup {
 		},
 
 		-- MARKDOWN & PROSE
-		builtins.diagnostics.vale.with,
+		builtins.diagnostics.vale,
 		builtins.diagnostics.markdownlint.with {
 			-- fixed via formatting command already
 			extra_args = { "--disable", "trailing-spaces", "no-multiple-blanks" },

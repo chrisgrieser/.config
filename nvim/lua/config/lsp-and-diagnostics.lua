@@ -144,6 +144,10 @@ autocmd("LspAttach", {
 
 		if client.server_capabilities.documentSymbolProvider then require("nvim-navic").attach(client, bufnr) end
 
+		if client.name == "tsserver" then -- eslint & prettier already take care of formatting
+			client.server_capabilities.documentFormattingProvider = false
+		end
+
 		if client.server_capabilities.renameProvider then
 			keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts) -- overrides treesitter-refactor's rename
 		end
@@ -247,23 +251,25 @@ lspSettings.cssls = {
 		colorDecorators = { enable = true }, -- not supported yet
 	},
 }
+
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local jsAndTsSettings = {
-	format = {
-		insertSpaceAfterCommaDelimiter = true,
-		insertSpaceAfterConstructor = false,
-		insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
-		insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
-		insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
-		insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
-		insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
-		insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
-		insertSpaceAfterSemicolonInForStatements = true,
-		insertSpaceBeforeAndAfterBinaryOperators = true,
-		insertSpaceBeforeFunctionParenthesis = false,
-		placeOpenBraceOnNewLineForFunctions = false,
-		trimTrailingWhitespace = true,
-	},
+	-- no formatting since using prettier
+	-- format = {
+	-- 	insertSpaceAfterCommaDelimiter = true,
+	-- 	insertSpaceAfterConstructor = false,
+	-- 	insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
+	-- 	insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
+	-- 	insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
+	-- 	insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+	-- 	insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+	-- 	insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+	-- 	insertSpaceAfterSemicolonInForStatements = true,
+	-- 	insertSpaceBeforeAndAfterBinaryOperators = true,
+	-- 	insertSpaceBeforeFunctionParenthesis = false,
+	-- 	placeOpenBraceOnNewLineForFunctions = false,
+	-- 	trimTrailingWhitespace = true,
+	-- },
 	inlayHints = {
 		includeInlayEnumMemberValueHints = true,
 		includeInlayFunctionLikeReturnTypeHints = true,
@@ -290,7 +296,7 @@ lspSettings.tsserver = {
 lspSettings.yamlls = {
 	yaml = {
 		format = {
-			enable = true, -- does not seem to be supported yet
+			enable = false, -- does not seem to be supported yet
 			singleQuote = false,
 			bracketSpacing = true,
 			proseWrap = "preserve", -- preserve|always|never
@@ -313,8 +319,10 @@ lspSettings.eslint = {
 	nodePath = os.getenv("HOME") .. "/.local/share/nvim/mason/packages/eslint/node_modules",
 }
 
+-- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings
 lspSettings.jsonls = {
 	json = {
+		format = { enable = false }, -- let prettier format
 		schemas = require("schemastore").json.schemas(),
 		validate = { enable = true },
 	},
