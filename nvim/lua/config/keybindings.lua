@@ -219,7 +219,7 @@ keymap("n", "<leader>u", function () require("telescope-undo")() end)
 keymap("i", "<C-g>u<Space>", "<Space>") -- extra undo point for every space
 
 -- Logging & Debugging
-keymap("n", "<leader>ll", qol.quicklog)
+keymap({"n", "x"}, "<leader>ll", qol.quicklog)
 keymap("n", "<leader>lr", qol.removeLog)
 
 -- Sort & highlight duplicate lines

@@ -233,7 +233,16 @@ end
 function M.quicklog(opts)
 	if not opts then opts = { addLineNumber = false } end
 
-	local varname = wordUnderCursor()
+	local varname
+	if fn.mode() == "n" then
+		varname = wordUnderCursor()
+	else
+		local prevReg = fn.getreg("z")
+		cmd.normal { '"zy', bang = true }
+		varname = fn.getreg("z")
+		fn.setreg("z", prevReg)
+	end
+
 	local logStatement
 	local ft = bo.filetype
 	local lnStr = ""
@@ -263,6 +272,7 @@ end
 function M.removeLog()
 	local ft = bo.filetype
 	local logCommand
+	local linesBefore = fn.line("$")
 	if ft == "lua" or ft == "python" then
 		logCommand = "print"
 	elseif ft == "javascript" or ft == "typescript" then
@@ -272,13 +282,16 @@ function M.removeLog()
 	elseif ft == "applescript" then
 		logCommand = "log"
 	else
-		vim.notify("Quicklog does not support " .. ft .. " yet.")
+		vim.notify("Quicklog does not support " .. ft .. " yet.", logWarn)
 	end
-	local logsStatementsNum = fn.search([[^\s*]] .. logCommand, "nw")
-	cmd([[g/^\s*]] .. logCommand .. [[/d]])
 
-	vim.notify("Cleared " .. tostring(logsStatementsNum) .. " log statements.")
+	cmd([[g/^\s*]] .. logCommand .. [[/d]])
 	cmd.nohlsearch()
+
+	local linesRemoved = linesBefore - fn.line("$")
+	local msg = "Cleared " .. tostring(linesRemoved) .. " log statements."
+	if linesRemoved == 1 then msg = msg:gsub("s%.$", ".") end
+	vim.notify(msg)
 end
 
 --------------------------------------------------------------------------------

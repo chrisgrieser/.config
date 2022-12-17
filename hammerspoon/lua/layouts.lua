@@ -18,7 +18,7 @@ local function alacrittyFontSize(size)
 end
 
 local function showAllSidebars()
-	if appIsRunning("Highlights") then app("Highlights"):selectMenuItem {"View", "Show Sidebar"} end
+	if appIsRunning("Highlights") then app("Highlights"):selectMenuItem { "View", "Show Sidebar" } end
 	openLinkInBackground("obsidian://sidebar?showLeft=true&showRight=false")
 	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
@@ -38,7 +38,7 @@ function movieModeLayout()
 	holeCover()
 	iMacDisplay:setBrightness(0)
 
-	runWithDelays({0, 0.5, 1}, function() openIfNotRunning("YouTube") end)
+	runWithDelays({ 0, 0.5, 1 }, function() openIfNotRunning("YouTube") end)
 
 	killIfRunning("Obsidian")
 	killIfRunning("Marta")
@@ -87,27 +87,27 @@ function homeModeLayout()
 	dockSwitcher("home")
 
 	local homeLayout = {
-		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
-		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Highlights", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Neovide", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"neovide", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Slack", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Discord", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Warp", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{ "Twitterrific", nil, iMacDisplay, toTheSide, nil, nil },
+		{ "Marta", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Highlights", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Neovide", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "neovide", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Slack", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Discord", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Warp", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil },
 	}
 
 	showAllSidebars()
 	useLayout(homeLayout)
-	runWithDelays({0.5, 1}, function() app("Drafts"):activate() end)
+	runWithDelays({ 0.5, 1 }, function() app("Drafts"):activate() end)
 
-	if screenIsUnlocked() and not (layoutChangeActive) then
+	if screenIsUnlocked() and not layoutChangeActive then
 		layoutChangeActive = true
 		runWithDelays(2, function()
 			twitterrificAction("scrollup")
@@ -116,14 +116,12 @@ function homeModeLayout()
 	end
 
 	-- wait until sync is finished, to avoid merge conflict
-	hs.timer.waitUntil(
-		function()
-			return not (gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
-		end,
-		function()
-			alacrittyFontSize(26)
-		end
-	):start()
+	hs.timer
+		.waitUntil(
+			function() return not (gitDotfileSyncTask and gitDotfileSyncTask:isRunning()) end,
+			function() alacrittyFontSize(26) end
+		)
+		:start()
 end
 
 function officeModeLayout()
@@ -140,25 +138,25 @@ function officeModeLayout()
 
 	dockSwitcher("office") -- separate layout to include "TweetDeck"
 
-	local top = {x = 0, y = 0.015, w = 1, h = 0.485}
-	local bottom = {x = 0, y = 0.5, w = 1, h = 0.5}
+	local top = { x = 0, y = 0.015, w = 1, h = 0.485 }
+	local bottom = { x = 0, y = 0.5, w = 1, h = 0.5 }
 	local officeLayout = {
 		-- screen 2
-		{"TweetDeck", nil, screen2, top, nil, nil},
-		{"Discord", nil, screen2, bottom, nil, nil},
-		{"Slack", nil, screen2, bottom, nil, nil},
+		{ "TweetDeck", nil, screen2, top, nil, nil },
+		{ "Discord", nil, screen2, bottom, nil, nil },
+		{ "Slack", nil, screen2, bottom, nil, nil },
 		-- screen 1
-		{"Brave Browser", nil, screen1, maximized, nil, nil},
-		{"Marta", nil, screen1, maximized, nil, nil},
-		{"Sublime Text", nil, screen1, maximized, nil, nil},
-		{"Obsidian", nil, screen1, maximized, nil, nil},
-		{"Neovide", nil, screen1, maximized, nil, nil},
-		{"neovide", nil, screen1, maximized, nil, nil},
-		{"Drafts", nil, screen1, maximized, nil, nil},
-		{"Mimestream", nil, screen1, maximized, nil, nil},
-		{"alacritty", nil, screen1, maximized, nil, nil},
-		{"Alacritty", nil, screen1, maximized, nil, nil},
-		{"Warp", nil, screen1, maximized, nil, nil},
+		{ "Brave Browser", nil, screen1, maximized, nil, nil },
+		{ "Marta", nil, screen1, maximized, nil, nil },
+		{ "Sublime Text", nil, screen1, maximized, nil, nil },
+		{ "Obsidian", nil, screen1, maximized, nil, nil },
+		{ "Neovide", nil, screen1, maximized, nil, nil },
+		{ "neovide", nil, screen1, maximized, nil, nil },
+		{ "Drafts", nil, screen1, maximized, nil, nil },
+		{ "Mimestream", nil, screen1, maximized, nil, nil },
+		{ "alacritty", nil, screen1, maximized, nil, nil },
+		{ "Alacritty", nil, screen1, maximized, nil, nil },
+		{ "Warp", nil, screen1, maximized, nil, nil },
 	}
 
 	useLayout(officeLayout)
@@ -167,21 +165,19 @@ function officeModeLayout()
 	runWithDelays(0.5, function() app("Drafts"):activate() end)
 
 	-- wait until sync is finished, to avoid merge conflict
-	hs.timer.waitUntil(
-		function()
-			return not (gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
-		end,
-		function()
-			alacrittyFontSize(24)
-		end
-	):start()
+	hs.timer
+		.waitUntil(
+			function() return not (gitDotfileSyncTask and gitDotfileSyncTask:isRunning()) end,
+			function() alacrittyFontSize(24) end
+		)
+		:start()
 end
 
 local function motherMovieModeLayout()
 	if not (isProjector()) then return end
 	iMacDisplay:setBrightness(0)
 
-	runWithDelays({0, 1}, function() openIfNotRunning("YouTube") end)
+	runWithDelays({ 0, 1 }, function() openIfNotRunning("YouTube") end)
 	killIfRunning("Obsidian")
 	killIfRunning("Marta")
 	killIfRunning("Drafts")
@@ -219,36 +215,43 @@ local function motherHomeModeLayout()
 	dockSwitcher("home")
 
 	local motherHomeLayout = {
-		{"Twitterrific", nil, iMacDisplay, toTheSide, nil, nil},
-		{"Marta", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Warp", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Slack", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Discord", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
-		{"Alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil},
+		{ "Twitterrific", nil, iMacDisplay, toTheSide, nil, nil },
+		{ "Marta", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Warp", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Slack", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Discord", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil },
+		{ "Alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil },
 	}
 
 	useLayout(motherHomeLayout)
 	showAllSidebars()
 
-	runWithDelays({0.05, 0.2}, function() useLayout(motherHomeLayout) end)
+	runWithDelays({ 0.05, 0.2 }, function() useLayout(motherHomeLayout) end)
 end
 
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
 local function setLayout()
-	if isAtOffice() then officeModeLayout()
+	if isAtOffice() then
+		officeModeLayout()
 	elseif isIMacAtHome() then
-		if isProjector() then movieModeLayout()
-		else homeModeLayout() end
+		if isProjector() then
+			movieModeLayout()
+		else
+			homeModeLayout()
+		end
 	elseif isAtMother() then
-		if isProjector() then motherMovieModeLayout()
-		else motherHomeModeLayout() end
+		if isProjector() then
+			motherMovieModeLayout()
+		else
+			motherHomeModeLayout()
+		end
 	end
 end
 
@@ -282,20 +285,20 @@ wf_appsOnMouseScreen = wf.new {
 	"BetterTouchTool",
 	"YouTube",
 	"Netflix",
-	"Finder"
+	"Finder",
 }
 
 wf_appsOnMouseScreen:subscribe(wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()
-	if not (mouseScreen) then return end
+	if not mouseScreen then return end
 	local screenOfWindow = newWin:screen()
 	local appn = newWin:application():name()
 	if isProjector() and not (mouseScreen:name() == screenOfWindow:name()) then
-		runWithDelays({0, 0.1, 0.2, 0.4, 0.6}, function()
-			newWin:moveToScreen(mouseScreen)
-			if appn == "Finder" or "Script Editor" then
+		runWithDelays({ 0.1, 0.3 }, function()
+			if not (mouseScreen:name() == screenOfWindow:name()) then newWin:moveToScreen(mouseScreen) end
+			if appn == "Finder" or "Script Editor" and not checkSize(newWin, maximized) then
 				moveResize(newWin, centered)
-			else
+			elseif not checkSize(newWin, maximized) then
 				moveResize(newWin, maximized)
 			end
 		end)

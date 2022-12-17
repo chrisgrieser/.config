@@ -20,7 +20,7 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 		-- hiding is used for it activation as well
 		runWithDelays({0, 0.3}, function()
 			local win = appObject:mainWindow()
-			if isPseudoMaximized(win) or isMaximized(win) then
+			if checkSize(win, pseudoMaximized) or checkSize(win, maximized) then
 				appObject:selectMenuItem("Hide Others")
 			end
 		end)
@@ -162,7 +162,7 @@ end):start()
 twitterificVisible = aw.new(function(_, eventType)
 	if appIsRunning("Twitterrific") and (eventType == aw.activated or eventType == aw.launching) then
 		local currentWin = hs.window.focusedWindow()
-		if isPseudoMaximized(currentWin) then
+		if checkSize(currentWin, pseudoMaximized) then
 			app("Twitterrific"):mainWindow():raise()
 		end
 	end
