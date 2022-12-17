@@ -232,6 +232,8 @@ local function finderWinAutoLayout()
 	local finderWins = wf_finder:getWindows()
 	if #finderWins == 0 then
 		app("Finder"):kill() -- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
+	elseif finderWins[1]:title() == "RomComs" then
+		moveResize(finderWins[1], maximized)
 	elseif #finderWins == 1 then
 		moveResize(finderWins[1], centered)
 	elseif #finderWins == 2 then
