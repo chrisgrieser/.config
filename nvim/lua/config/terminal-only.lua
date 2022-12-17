@@ -1,4 +1,4 @@
--- terminal-only styling, since most of these are already handled when using by
+require("config/utils")
 -- a color scheme
 --------------------------------------------------------------------------------
 

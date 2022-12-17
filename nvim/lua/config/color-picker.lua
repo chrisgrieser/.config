@@ -1,4 +1,4 @@
-require("utils")
+require("config/utils")
 local ccc = require("ccc")
 --------------------------------------------------------------------------------
 opt.termguicolors = true -- required for color previewing, but also messes up look in the terminal

@@ -1,4 +1,4 @@
-require("utils")
+require("config/utils")
 local dap = require("dap")
 local dapUI = require("dapui")
 --------------------------------------------------------------------------------

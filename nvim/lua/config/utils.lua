@@ -17,7 +17,7 @@ logWarn = vim.log.levels.WARN
 logError = vim.log.levels.ERROR
 logTrace = vim.log.levels.TRACE
 
-qol = require("quality-of-life")
+qol = require("config/quality-of-life")
 telescope = require("telescope.builtin")
 
 ---equivalent to `:setlocal option=value`

@@ -215,8 +215,8 @@ end
 --------------------------------------------------------------------------------
 -- HOTKEYS
 -- Window resizing
-hotkey(hyper, "right", function() moveResize(hs.window:focusedWindow(), rightHalf) end)
-hotkey(hyper, "left", function() moveResize(hs.window:focusedWindow(), leftHalf) end)
+hotkey(hyper, "right", function() moveResize(hs.window.focusedWindow(), rightHalf) end)
+hotkey(hyper, "left", function() moveResize(hs.window.focusedWindow(), leftHalf) end)
 hotkey({"ctrl"}, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
 
 -- move to other display or scroll Twitterrific

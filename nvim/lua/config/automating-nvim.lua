@@ -1,4 +1,4 @@
-require("utils")
+require("config/utils")
 -- Runs arbitrary lua commands when written to the watchedFile
 
 -- INFO

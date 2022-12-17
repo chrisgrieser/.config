@@ -1,4 +1,4 @@
-require("utils")
+require("config/utils")
 local newCommand = vim.api.nvim_create_user_command
 --------------------------------------------------------------------------------
 

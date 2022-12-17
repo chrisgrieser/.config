@@ -1,4 +1,4 @@
-require("utils")
+require("config/utils")
 local packer = require("packer")
 --------------------------------------------------------------------------------
 
