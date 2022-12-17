@@ -27,18 +27,18 @@ require("config/utils")
 -- aw: word
 
 -- REMAPPING OF BUILTIN TEXT OBJECTS
-keymap({"o", "x"}, "iq", 'i"') -- [q]uote
-keymap({"o", "x"}, "aq", 'a"')
-keymap({"o", "x"}, "iz", "i'") -- [z]ingle quote
-keymap({"o", "x"}, "az", "a'")
-keymap({"o", "x"}, "at", "a`") -- [t]emplate-string
-keymap({"o", "x"}, "it", "i`")
-keymap({"o", "x"}, "ir", "i]") -- [r]ectangular brackets
-keymap({"o", "x"}, "ar", "a]")
-keymap({"o", "x"}, "ic", "i}") -- [c]urly brackets
-keymap({"o", "x"}, "ac", "a}")
-keymap({"o", "x"}, "am", "aW") -- [m]assive word
-keymap({"o", "x"}, "im", "iW")
+keymap({ "o", "x" }, "iq", 'i"') -- [q]uote
+keymap({ "o", "x" }, "aq", 'a"')
+keymap({ "o", "x" }, "iz", "i'") -- [z]ingle quote
+keymap({ "o", "x" }, "az", "a'")
+keymap({ "o", "x" }, "at", "a`") -- [t]emplate-string
+keymap({ "o", "x" }, "it", "i`")
+keymap({ "o", "x" }, "ir", "i]") -- [r]ectangular brackets
+keymap({ "o", "x" }, "ar", "a]")
+keymap({ "o", "x" }, "ic", "i}") -- [c]urly brackets
+keymap({ "o", "x" }, "ac", "a}")
+keymap({ "o", "x" }, "am", "aW") -- [m]assive word
+keymap({ "o", "x" }, "im", "iW")
 
 --------------------------------------------------------------------------------
 -- QUICK TEXTOBJ OPERATIONS
@@ -51,18 +51,18 @@ keymap("x", "<Space>", '"_c')
 -- CUSTOM TEXTOBJECTS
 
 -- <Space>: Subword (-_ as delimiters)
-keymap("o", "<Space>", function ()
+keymap("o", "<Space>", function()
 	local iskeywBefore = opt.iskeyword:get()
-	opt.iskeyword:remove {"_", "-", "."}
-	cmd.normal {"viw", bang = true}
+	opt.iskeyword:remove { "_", "-", "." }
+	cmd.normal { "viw", bang = true }
 	opt.iskeyword = iskeywBefore
-end, {desc = "subword textobj"})
+end, { desc = "subword textobj" })
 
 -- n: [n]ear end of the line
-keymap("o", "n", function() cmd.normal {"v$hh", bang = true} end, {desc = "almost ending of line textobj"})
+keymap("o", "n", function() cmd.normal { "v$hh", bang = true } end, { desc = "almost ending of line textobj" })
 
 -- r: [r]est of paragraph (linewise)
-keymap("o", "r", function() cmd.normal {"V}", bang = true} end, {desc = "rest of paragraph (linewise)"})
+keymap("o", "r", function() cmd.normal { "V}", bang = true } end, { desc = "rest of paragraph (linewise)" })
 
 -- INDENTATION OBJECT
 ---indentation textobj, based on https://thevaluable.dev/vim-create-text-objects/
@@ -91,29 +91,32 @@ local function indentationTextObj(startBorder, endBorder)
 	end
 
 	-- differentiate ai and ii
-	if not (startBorder) then prevLnum = prevLnum + 1 end
-	if not (endBorder) then nextLnum = nextLnum - 1 end
+	if not startBorder then prevLnum = prevLnum + 1 end
+	if not endBorder then nextLnum = nextLnum - 1 end
 
 	-- set selection
-	setCursor(0, {prevLnum, 0})
-	cmd.normal {"Vo", bang = true}
-	setCursor(0, {nextLnum, 0})
+	setCursor(0, { prevLnum, 0 })
+	cmd.normal { "Vo", bang = true }
+	setCursor(0, { nextLnum, 0 })
 end
 
-keymap({"x", "o"}, "ii", function() indentationTextObj(false, false) end, {desc = "inner indentation textobj"})
-keymap({"x", "o"}, "ai", function() indentationTextObj(true, true) end, {desc = "outer indentation textobj"})
+keymap({ "x", "o" }, "ii", function() indentationTextObj(false, false) end, { desc = "inner indentation textobj" })
+keymap({ "x", "o" }, "ai", function() indentationTextObj(true, true) end, { desc = "outer indentation textobj" })
 
 augroup("IndentedFileTypes", {})
 autocmd("FileType", {
 	group = "IndentedFileTypes",
 	callback = function()
-		local indentedFts = {"python", "yaml", "markdown"}
+		local indentedFts = { "python", "yaml", "markdown" }
 		if vim.tbl_contains(indentedFts, bo.filetype) then
-			keymap({"x", "o"}, "ai", function()
-				indentationTextObj(true, false)
-			end, {buffer = true, desc = "indentation textobj with start border"})
+			keymap(
+				{ "x", "o" },
+				"ai",
+				function() indentationTextObj(true, false) end,
+				{ buffer = true, desc = "indentation textobj with start border" }
+			)
 		end
-	end
+	end,
 })
 
 -- VALUE TEXT OBJECT
@@ -123,50 +126,51 @@ local function valueTextObj(inner)
 	local lineContent = fn.getline(".") ---@type string
 
 	local _, valueStart = lineContent:find("[=:] ?")
-	if not (valueStart) then
+	if not valueStart then
 		vim.notify("No value found in current line.", logWarn)
 		return
 	end
 
 	-- valueEnd either comment or end of line
-	local comStrPattern = bo.commentstring
-		:gsub(" ?%%s.*", "")-- remove placeholder and backside of commentstring
+	local comStrPattern = bo
+		.commentstring
+		:gsub(" ?%%s.*", "") -- remove placeholder and backside of commentstring
 		:gsub("(.)", "%%%1") -- escape commentstring so it's a valid lua pattern
 	local valueEnd, _ = lineContent:find(".. ?" .. comStrPattern)
-	if not (valueEnd) or comStrPattern == "" then
-		valueEnd = #lineContent - 1
-	end
+	if not valueEnd or comStrPattern == "" then valueEnd = #lineContent - 1 end
 
 	-- inner value = without trailing comma/semicolon
 	local lastChar = lineContent:sub(valueEnd + 1, valueEnd + 1)
-	if inner and lastChar:find("[,;]") then
-		valueEnd = valueEnd - 1
-	end
+	if inner and lastChar:find("[,;]") then valueEnd = valueEnd - 1 end
 
 	-- set selection
 	local currentRow = fn.line(".")
-	setCursor(0, {currentRow, valueStart})
+	setCursor(0, { currentRow, valueStart })
 	if fn.mode():find("v") then
-		cmd.normal {"o", bang = true}
+		cmd.normal { "o", bang = true }
 	else
-		cmd.normal {"v", bang = true}
+		cmd.normal { "v", bang = true }
 	end
-	setCursor(0, {currentRow, valueEnd})
+	setCursor(0, { currentRow, valueEnd })
 end
 
-keymap({"x", "o"}, "iv", function() valueTextObj(true) end, {desc = "inner value textobj"})
-keymap({"x", "o"}, "av", function() valueTextObj(false) end, {desc = "outer value textobj"})
+keymap({ "x", "o" }, "iv", function() valueTextObj(true) end, { desc = "inner value textobj" })
+keymap({ "x", "o" }, "av", function() valueTextObj(false) end, { desc = "outer value textobj" })
 
 --------------------------------------------------------------------------------
 -- SPECIAL PLUGIN TEXT OBJECTS
 
-for _, prefix in pairs {"a", "i"} do
+for _, prefix in pairs { "a", "i" } do
 	-- Git Hunks
-	keymap({"x", "o"}, prefix .. "h", ":Gitsigns select_hunk<CR>", {desc = "hunk textobj"})
+	keymap({ "x", "o" }, prefix .. "h", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
 
 	-- textobj-[d]iagnostic
-	keymap({"x", "o"}, prefix .. "d", function() require("textobj-diagnostic").nearest_diag() end,
-		{desc = "diagnostic textobj"})
+	keymap(
+		{ "x", "o" },
+		prefix .. "d",
+		function() require("textobj-diagnostic").nearest_diag() end,
+		{ desc = "diagnostic textobj" }
+	)
 end
 
 --------------------------------------------------------------------------------
@@ -177,11 +181,11 @@ local conditionObjChar = "o"
 local callObjChar = "l"
 
 -- HACK define these manually, since for some reason why do not work
-keymap("n", "yss", "ys_", {remap = true})
-keymap("n", "yS", "ys$", {remap = true})
+keymap("n", "yss", "ys_", { remap = true })
+keymap("n", "yS", "ys$", { remap = true })
 
 require("nvim-surround").setup {
-	aliases = {-- aliases should match the bindings for text objects
+	aliases = { -- aliases should match the bindings for text objects
 		["b"] = ")",
 		["c"] = "}",
 		["r"] = "]",
@@ -198,9 +202,7 @@ require("nvim-surround").setup {
 	},
 	surrounds = {
 		[functionObjChar] = {
-			find = function()
-				return require("nvim-surround.config").get_selection {motion = "a" .. functionObjChar}
-			end,
+			find = function() return require("nvim-surround.config").get_selection { motion = "a" .. functionObjChar } end,
 			delete = function()
 				local ft = bo.filetype
 				local patt
@@ -221,29 +223,25 @@ require("nvim-surround").setup {
 				local ft = bo.filetype
 				if ft == "lua" then
 					return {
-						{"function ()", "\t"},
-						{"", "end"},
+						{ "function ()", "\t" },
+						{ "", "end" },
 					}
 				elseif ft == "typescript" or ft == "javascript" or ft == "bash" or ft == "zsh" or ft == "sh" then
 					return {
-						{"function () {", "\t"},
-						{"", "}"},
+						{ "function () {", "\t" },
+						{ "", "}" },
 					}
 				end
 				vim.notify("No function-surround defined for " .. ft, logWarn)
-				return {{""}, {""}}
+				return { { "" }, { "" } }
 			end,
 		},
 		[callObjChar] = {
-			find = function()
-				return require("nvim-surround.config").get_selection {motion = "a" .. callObjChar}
-			end,
+			find = function() return require("nvim-surround.config").get_selection { motion = "a" .. callObjChar } end,
 			delete = "^([^=%s]-% ?()().-(%))()$",
 		},
 		[conditionObjChar] = {
-			find = function()
-				return require("nvim-surround.config").get_selection {motion = "a" .. callObjChar}
-			end,
+			find = function() return require("nvim-surround.config").get_selection { motion = "a" .. callObjChar } end,
 			delete = function()
 				local ft = bo.filetype
 				local patt
@@ -264,18 +262,18 @@ require("nvim-surround").setup {
 				local ft = bo.filetype
 				if ft == "lua" then
 					return {
-						{"if true then", "\t"},
-						{"", "end"},
+						{ "if true then", "\t" },
+						{ "", "end" },
 					}
 				elseif ft == "typescript" or ft == "javascript" then
 					return {
-						{"if (true) {", "\t"},
-						{"", "}"},
+						{ "if (true) {", "\t" },
+						{ "", "}" },
 					}
 				end
 				vim.notify("No if-surround defined for " .. ft, logWarn)
-				return {{""}, {""}}
+				return { { "" }, { "" } }
 			end,
-		}
-	}
+		},
+	},
 }
