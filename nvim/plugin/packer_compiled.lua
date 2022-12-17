@@ -122,7 +122,7 @@ _G.packer_plugins = {
   ["cmp-nerdfont"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/cmp-nerdfont",
-    url = "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Repos/cmp-nerdfont"
+    url = "/Users/chrisgrieser/.config/nvim/my-plugins/cmp-nerdfont"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
@@ -332,7 +332,7 @@ _G.packer_plugins = {
     needs_bufread = false,
     only_cond = false,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/opt/nvim-genghis",
-    url = "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Repos/nvim-genghis"
+    url = "/Users/chrisgrieser/.config/nvim/my-plugins/nvim-genghis"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -352,7 +352,7 @@ _G.packer_plugins = {
   ["nvim-recorder"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim-recorder",
-    url = "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Repos/nvim-recorder"
+    url = "/Users/chrisgrieser/.config/nvim/my-plugins/nvim-recorder"
   },
   ["nvim-regexplainer"] = {
     config = { "\27LJ\2\n[\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\rmappings\1\0\0\1\0\1\tauto\2\nsetup\17regexplainer\frequire\0" },
@@ -397,6 +397,11 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim-ufo",
     url = "https://github.com/kevinhwang91/nvim-ufo"
   },
+  ["nvim-various-textobjs"] = {
+    loaded = true,
+    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim-various-textobjs",
+    url = "/Users/chrisgrieser/.config/nvim/my-plugins/nvim-various-textobjs"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -422,11 +427,6 @@ _G.packer_plugins = {
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["presence.nvim"] = {
-    loaded = true,
-    path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/presence.nvim",
-    url = "https://github.com/andweeb/presence.nvim"
-  },
   ["promise-async"] = {
     loaded = true,
     path = "/Users/chrisgrieser/.local/share/nvim/site/pack/packer/start/promise-async",
@@ -451,7 +451,7 @@ _G.packer_plugins = {
     url = "https://github.com/gbprod/substitute.nvim"
   },
   ["tabout.nvim"] = {
-    config = { "\27LJ\2\n_\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\21ignore_beginning\2\21act_as_shift_tab\2\nsetup\vtabout\frequire\0" },
+    config = { "\27LJ\2\n_\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\21act_as_shift_tab\2\21ignore_beginning\2\nsetup\vtabout\frequire\0" },
     load_after = {},
     loaded = true,
     needs_bufread = false,
@@ -570,19 +570,12 @@ vim.cmd [[ packadd nvim-cmp ]]
 vim.cmd [[ packadd tabout.nvim ]]
 
 -- Config for: tabout.nvim
-try_loadstring("\27LJ\2\n_\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\21ignore_beginning\2\21act_as_shift_tab\2\nsetup\vtabout\frequire\0", "config", "tabout.nvim")
+try_loadstring("\27LJ\2\n_\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\21act_as_shift_tab\2\21ignore_beginning\2\nsetup\vtabout\frequire\0", "config", "tabout.nvim")
 
 time([[Sequenced loading]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
-pcall(vim.api.nvim_create_user_command, 'ISwapWith', function(cmdargs)
-          require('packer.load')({'iswap.nvim'}, { cmd = 'ISwapWith', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
-        end,
-        {nargs = '*', range = true, bang = true, complete = function()
-          require('packer.load')({'iswap.nvim'}, { cmd = 'ISwapWith' }, _G.packer_plugins)
-          return vim.fn.getcompletion('ISwapWith ', 'cmdline')
-      end})
 pcall(vim.api.nvim_create_user_command, 'ToggleTerm', function(cmdargs)
           require('packer.load')({'toggleterm.nvim'}, { cmd = 'ToggleTerm', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
@@ -610,6 +603,13 @@ pcall(vim.api.nvim_create_user_command, 'DiffviewOpen', function(cmdargs)
         {nargs = '*', range = true, bang = true, complete = function()
           require('packer.load')({'diffview.nvim'}, { cmd = 'DiffviewOpen' }, _G.packer_plugins)
           return vim.fn.getcompletion('DiffviewOpen ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'ISwapWith', function(cmdargs)
+          require('packer.load')({'iswap.nvim'}, { cmd = 'ISwapWith', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'iswap.nvim'}, { cmd = 'ISwapWith' }, _G.packer_plugins)
+          return vim.fn.getcompletion('ISwapWith ', 'cmdline')
       end})
 time([[Defining lazy-load commands]], false)
 
