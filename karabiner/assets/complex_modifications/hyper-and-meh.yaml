@@ -47,19 +47,6 @@ rules:
             - command
             - option
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Open Last File in Neovide"
-    manipulators:
-      - type: basic
-        from:
-          key_code: e
-          modifiers: {mandatory: [control, command, shift, option]}
-        to:
-          - shell_command: |
-              export NEOVIDE_FRAME="buttonless"
-              neovide
-              while ! pgrep -q "neovide"; do sleep 0.1 ; done
-              sleep 0.2
-              echo "vim.cmd.normal { [['0]], bang = true }" > /tmp/nvim-automation
   - description: "*️⃣  \U0001F4C2 Open Locations (Globally Active)"
     manipulators:
       # Hyper + ⌫ = Open Trash
