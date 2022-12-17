@@ -22,24 +22,30 @@ local lsp_servers = {
 -- SIGN-COLUMN ICONS
 for type, icon in pairs(signIcons) do
 	local hl = "DiagnosticSign" .. type
-	fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
+	fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS (also applies to null-ls)
-keymap("n", "ge", function() vim.diagnostic.goto_next {wrap = true, float = false} end, {silent = true})
-keymap("n", "gE", function() vim.diagnostic.goto_prev {wrap = true, float = false} end, {silent = true})
-keymap("n", "<leader>d", function() vim.diagnostic.open_float {focusable = false} end)
+keymap("n", "ge", function()
+	vim.diagnostic.goto_next { wrap = true, float = false }
+end, { silent = true })
+keymap("n", "gE", function()
+	vim.diagnostic.goto_prev { wrap = true, float = false }
+end, { silent = true })
+keymap("n", "<leader>d", function()
+	vim.diagnostic.open_float { focusable = false }
+end)
 
 -- toggle diagnostics
-local diagnosticToggled = true;
+local diagnosticToggled = true
 keymap("n", "<leader>od", function() -- consistent with other option toggling also using <leader>o{letter}
 	if diagnosticToggled then
 		vim.diagnostic.disable(0)
 	else
 		vim.diagnostic.enable(0)
 	end
-	diagnosticToggled = not (diagnosticToggled)
+	diagnosticToggled = not diagnosticToggled
 end)
 
 local function diagnosticFormat(diagnostic, mode)
@@ -51,32 +57,33 @@ local function diagnosticFormat(diagnostic, mode)
 	if source == "stylelint" or source == "shellcheck" or code == "nil" then
 		out = msg -- stylelint and shellcheck already includes the code in the message, some linters without code
 	end
-	if diagnostic.source and mode == "float" then
-		out = out .. " [" .. source .. "]"
-	end
+	if diagnostic.source and mode == "float" then out = out .. " [" .. source .. "]" end
 	return out
 end
 
 vim.diagnostic.config {
 	virtual_text = {
-		format = function(diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
-		severity = {min = vim.diagnostic.severity.WARN},
+		format = function(diagnostic)
+			return diagnosticFormat(diagnostic, "virtual_text")
+		end,
+		severity = { min = vim.diagnostic.severity.WARN },
 	},
 	float = {
 		border = borderStyle,
 		max_width = 50,
-		format = function(diagnostic) return diagnosticFormat(diagnostic, "float") end,
-	}
+		format = function(diagnostic)
+			return diagnosticFormat(diagnostic, "float")
+		end,
+	},
 }
-
 
 --------------------------------------------------------------------------------
 -- Mason Config
 require("mason").setup {
 	ui = {
 		border = borderStyle,
-		icons = {package_installed = "✓", package_pending = "羽", package_uninstalled = "✗"}
-	}
+		icons = { package_installed = "✓", package_pending = "羽", package_uninstalled = "✗" },
+	},
 }
 require("mason-update-all").setup()
 require("mason-lspconfig").setup {
@@ -112,7 +119,7 @@ require("lsp-inlayhints").setup {
 
 -- INFO: this block must come before lua LSP setup
 require("neodev").setup {
-	library = {plugins = false}
+	library = { plugins = false },
 }
 
 --------------------------------------------------------------------------------
@@ -131,13 +138,11 @@ autocmd("LspAttach", {
 	callback = function(args)
 		local bufnr = args.buf
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		local bufopts = {silent = true, buffer = true}
+		local bufopts = { silent = true, buffer = true }
 
 		require("lsp-inlayhints").on_attach(client, bufnr)
 
-		if client.server_capabilities.documentSymbolProvider then
-			require("nvim-navic").attach(client, bufnr)
-		end
+		if client.server_capabilities.documentSymbolProvider then require("nvim-navic").attach(client, bufnr) end
 
 		if client.server_capabilities.renameProvider then
 			keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts) -- overrides treesitter-refactor's rename
@@ -146,38 +151,30 @@ autocmd("LspAttach", {
 		keymap("n", "gd", telescope.lsp_definitions, bufopts)
 		keymap("n", "gD", telescope.lsp_references, bufopts)
 		keymap("n", "gy", telescope.lsp_type_definitions, bufopts)
-		keymap({"n", "i", "x"}, "<C-s>", vim.lsp.buf.signature_help, bufopts)
+		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, bufopts)
 		keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
-		if client.name == "sumneko_lua" then -- HACK since formatting with lua lsp seems to remove folds?!
-			keymap({"n", "x", "i"}, "<D-s>", function()
-				cmd.mkview {bang = true} -- bang required here
-				vim.lsp.buf.format {async = false} -- not async to avoid race condition
+		keymap({ "n", "x", "i" }, "<D-s>", function()
+			if bo.filetype == "javascript" or bo.filetype == "typescript" then
+				vim.lsp.buf.format { async = false }
+				cmd.update { bang = true }
+				cmd.EslintFixAll() -- eslint-lsp
+			elseif bo.filetype == "applescript" then
+				cmd.mkview { bang = true }
+				cmd("%normal!gg=G") -- poor man's formatting…
+				vim.lsp.buf.format { async = false } -- null-ls-codespell
 				cmd.loadview()
-			end, bufopts)
-		else
-			keymap({"n", "x", "i"}, "<D-s>", function()
-				if bo.filetype == "javascript" or bo.filetype == "typescript" then
-					vim.lsp.buf.format {async = false}
-					cmd.update {bang = true}
-					cmd.EslintFixAll() -- eslint-lsp
-				elseif bo.filetype == "applescript" then
-					cmd.mkview {bang = true}
-					cmd [[%normal!gg=G]] -- poor man's formatting…
-					vim.lsp.buf.format {async = false} -- null-ls-codespell
-					cmd.loadview()
-				else
-					vim.lsp.buf.format {async = true}
-				end
-				cmd.write {bang = true}
-			end, bufopts)
-		end
+			else
+				vim.lsp.buf.format { async = true }
+			end
+			cmd.write { bang = true }
+		end, bufopts)
 
 		if bo.filetype ~= "css" then -- don't override navigation marker search for css files
 			keymap("n", "gs", telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
 			keymap("n", "gS", telescope.lsp_workspace_symbols, bufopts)
 		end
-	end
+	end,
 })
 
 -- copy breadcrumbs (nvim navic)
@@ -190,18 +187,17 @@ keymap("n", "<D-b>", function()
 		end
 		breadcrumbs = breadcrumbs:sub(1, -2)
 		fn.setreg("+", breadcrumbs)
-		vim.notify(" COPIED\n " .. breadcrumbs .. " ")
+		vim.notify("COPIED\n" .. breadcrumbs)
 	else
-		vim.notify(" No Breadcrumbs available. ", logWarn)
+		vim.notify("No Breadcrumbs available.", logWarn)
 	end
 end)
-
 
 --------------------------------------------------------------------------------
 -- Add borders to various lsp windows
 require("lspconfig.ui.windows").default_options.border = borderStyle
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = borderStyle})
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = borderStyle})
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderStyle })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
 
 --------------------------------------------------------------------------------
 -- LSP-SERVER-SPECIFIC SETUP
@@ -213,30 +209,17 @@ local lspFilestypes = {}
 -- https://github.com/sumneko/lua-language-server/wiki/Settings
 lspSettings.sumneko_lua = {
 	Lua = {
-		format = {
-			enable = false,
-			defaultConfig = {
-				-- https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/docs/format_config_EN.md
-				-- https://github.com/sumneko/lua-language-server/wiki/Formatter
-				quote_style = "double",
-				call_arg_parentheses = "remove_table_only",
-				-- yes, all these must be strings
-				keep_one_space_between_table_and_bracket = "false",
-				keep_one_space_between_namedef_and_attribute = "false",
-				continuous_assign_table_field_align_to_equal_sign = "false",
-				continuation_indent_size = tostring(opt.tabstop:get()),
-			},
-		},
+		format = { enable = false }, -- using stylua instead
 		completion = {
 			callSnippet = "Replace",
 			keywordSnippet = "Replace",
 			displayContext = 2,
 		},
 		diagnostics = {
-			disable = {"trailing-space", "lowercase-global"},
+			disable = { "trailing-space", "lowercase-global" },
 		},
 		-- libraries defined per-project via luarc.json location: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-		workspace = {checkThirdParty = false}, -- HACK: https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
+		workspace = { checkThirdParty = false }, -- HACK: https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		hint = {
 			enable = true,
 			setType = true,
@@ -244,8 +227,8 @@ lspSettings.sumneko_lua = {
 			paramType = true,
 			arrayIndex = "Disable",
 		},
-		telemetry = {enable = false},
-	}
+		telemetry = { enable = false },
+	},
 }
 
 -- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
@@ -261,10 +244,9 @@ lspSettings.cssls = {
 			duplicateProperties = "ignore",
 			emptyRules = "warning",
 		},
-		colorDecorators = {enable = true}, -- not supported yet
-	}
+		colorDecorators = { enable = true }, -- not supported yet
+	},
 }
-
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local jsAndTsSettings = {
 	format = {
@@ -295,7 +277,7 @@ local jsAndTsSettings = {
 }
 
 lspSettings.tsserver = {
-	completions = {completeFunctionCalls = true},
+	completions = { completeFunctionCalls = true },
 	diagnostics = {
 		-- https://github.com/microsoft/TypeScript/blob/master/src/compiler/diagnosticMessages.json
 		ignoredCode = {},
@@ -317,7 +299,7 @@ lspSettings.yamlls = {
 		hover = true,
 		completion = true,
 		validate = true,
-		schemaStore = {enable = true}, -- Automatically pull available YAML schemas from JSON Schema Store
+		schemaStore = { enable = true }, -- Automatically pull available YAML schemas from JSON Schema Store
 	},
 }
 
@@ -325,7 +307,7 @@ lspSettings.yamlls = {
 lspSettings.eslint = {
 	quiet = false, -- = include warnings
 	codeAction = {
-		disableRuleComment = {location = "sameLine"}, -- ignore-comments on same line
+		disableRuleComment = { location = "sameLine" }, -- ignore-comments on same line
 	},
 	-- needed to use mason's eslint with the eslint-lsp https://github.com/williamboman/mason.nvim/issues/697#issuecomment-1330855352
 	nodePath = os.getenv("HOME") .. "/.local/share/nvim/mason/packages/eslint/node_modules",
@@ -334,12 +316,12 @@ lspSettings.eslint = {
 lspSettings.jsonls = {
 	json = {
 		schemas = require("schemastore").json.schemas(),
-		validate = {enable = true},
+		validate = { enable = true },
 	},
 }
 
-lspFilestypes.bashls = {"sh", "zsh", "bash"} -- force lsp to work with zsh
-lspFilestypes.emmet_ls = {"css", "scss", "html"}
+lspFilestypes.bashls = { "sh", "zsh", "bash" } -- force lsp to work with zsh
+lspFilestypes.emmet_ls = { "css", "scss", "html" }
 
 --------------------------------------------------------------------------------
 
@@ -349,12 +331,8 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- configure all lsp servers
 for _, lsp in pairs(lsp_servers) do
-	local config = {capabilities = capabilities}
-	if lspSettings[lsp] then
-		config.settings = lspSettings[lsp]
-	end
-	if lspFilestypes[lsp] then
-		config.filetypes = lspFilestypes[lsp]
-	end
+	local config = { capabilities = capabilities }
+	if lspSettings[lsp] then config.settings = lspSettings[lsp] end
+	if lspFilestypes[lsp] then config.filetypes = lspFilestypes[lsp] end
 	require("lspconfig")[lsp].setup(config)
 end
