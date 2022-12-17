@@ -540,8 +540,7 @@ rules:
           - key_code: return_or_enter
           - *end-context-menu
         conditions: [*finder-app, *context-menu-open]
-      # INFO: context menu cancellation configured with the insert mode
-      # cancellations
+      # INFO: context menu cancellation configured with the insert mode cancellations
       #─────────────────────────────────────────────────────────────────────────
       # Basic File Operations
       # d = delete
@@ -558,14 +557,14 @@ rules:
           - key_code: c
             modifiers: [command]
           - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
+        conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
       - type: basic
         from: {key_code: "y"}
         to:
           - key_code: c
             modifiers: [command]
           - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
+        conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
       # r = replicate (duplicate)
       - type: basic
         from: {key_code: r}
