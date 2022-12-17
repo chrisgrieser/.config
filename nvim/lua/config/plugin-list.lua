@@ -1,7 +1,8 @@
 local M = {}
 
 -- alternative setup method https://www.reddit.com/r/neovim/comments/zk187u/how_does_everyone_segment_plugin_development_from/
-local myrepos = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/"
+local myrepos = vim.fn.stdpath("config").."/my-plugins/"
+
 --------------------------------------------------------------------------------
 function M.PluginList(use)
 
