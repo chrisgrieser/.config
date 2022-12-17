@@ -2,7 +2,7 @@ require("config/utils")
 --------------------------------------------------------------------------------
 
 -- Annotations
-cmd.highlight {"def link myAnnotations Todo", bang = true} -- use same styling as "TODO"
+cmd.highlight { "def link myAnnotations Todo", bang = true } -- use same styling as "TODO"
 fn.matchadd("myAnnotations", [[\<\(BUG\|WTF\|HACK\|TODO\|INFO\|NOTE\|WARNING\)\>]])
 
 --------------------------------------------------------------------------------
@@ -70,9 +70,7 @@ if isGui() then
 		timeout = 4000,
 		top_down = false,
 		on_open = function(win)
-			if api.nvim_win_is_valid(win) then
-				api.nvim_win_set_config(win, {border = borderStyle})
-			end
+			if api.nvim_win_is_valid(win) then api.nvim_win_set_config(win, { border = borderStyle }) end
 		end,
 	}
 
@@ -82,18 +80,14 @@ if isGui() then
 		local lines = {}
 		local next_line
 		while true do
-			if #text == 0 then
-				return lines
-			end
+			if #text == 0 then return lines end
 			next_line, text = text:sub(1, length), text:sub(length)
 			lines[#lines + 1] = next_line
 		end
 	end
 
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
-		if type(msg) == "string" then
-			msg = vim.split(msg, "\n", {trimepty = true})
-		end
+		if type(msg) == "string" then msg = vim.split(msg, "\n", { trimepty = true }) end
 		local truncated = {}
 		for _, line in pairs(msg) do
 			local new_lines = split_length(line, notifyWidth)
@@ -109,12 +103,12 @@ end
 -- selene: allow(incorrect_standard_library_use)
 print = function(...)
 	local print_safe_args = {}
-	local _ = {...}
+	local _ = { ... }
 	for i = 1, #_ do
 		table.insert(print_safe_args, tostring(_[i]))
 	end
 	-- persistent notification
-	vim.notify(table.concat(print_safe_args, " "), logTrace, {timeout = 10000})
+	vim.notify(table.concat(print_safe_args, " "), logTrace, { timeout = 10000 })
 end
 
 --------------------------------------------------------------------------------
@@ -123,17 +117,19 @@ require("dressing").setup {
 	input = {
 		border = borderStyle,
 		relative = "win",
-		insert_only = false,
+		max_width = 0.8,
+		min_width = { 40, 0.4 },
 		win_options = {
 			sidescrolloff = 0,
 			winblend = 0,
 		},
+		insert_only = false, -- enable normal mode
 		mappings = {
-			n = {["q"] = "Close"},
+			n = { ["q"] = "Close" },
 		},
 	},
 	select = {
-		backend = {"builtin"}, -- Priority list of preferred vim.select implementations
+		backend = { "builtin" }, -- Priority list of preferred vim.select implementations
 		trim_prompt = true, -- Trim trailing `:` from prompt
 		builtin = {
 			border = borderStyle,
@@ -142,7 +138,10 @@ require("dressing").setup {
 			min_width = 18,
 			max_height = 12,
 			min_height = 4,
-			mappings = {["q"] = "Close"},
+			mappings = {
+				["q"] = "Close",
+				["Esc"] = "Close",
+			},
 		},
 	},
 }
@@ -151,7 +150,7 @@ require("dressing").setup {
 -- GUTTER
 require("gitsigns").setup {
 	max_file_length = 10000,
-	preview_config = {border = borderStyle},
+	preview_config = { border = borderStyle },
 }
 
 --------------------------------------------------------------------------------
@@ -166,8 +165,8 @@ require("windows").setup {
 			"Mundo",
 			"MundoDiff",
 			"netrw",
-		}
-	}
+		},
+	},
 }
 
 --------------------------------------------------------------------------------
@@ -182,7 +181,7 @@ local function lsp_progress()
 	local progress = messages[1].percentage or 0
 	local task = messages[1].title or ""
 	task = task:gsub("^(%w+).*", "%1") -- only first word
-	local spinners = {"⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"}
+	local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
 	local ms = vim.loop.hrtime() / 1000000
 	local frame = math.floor(ms / 120) % #spinners
 	return client .. progress .. "%% " .. task .. " " .. spinners[frame + 1]
@@ -239,7 +238,7 @@ local function mixedIndentation()
 
 	if (hasSpaces and hasTabs) or mixed then
 		return "  mixed"
-	elseif hasSpaces and not (bo.expandtab) then
+	elseif hasSpaces and not bo.expandtab then
 		return "  et"
 	elseif hasTabs and bo.expandtab then
 		return "  noet"
@@ -249,11 +248,9 @@ end
 
 -- show branch info only when not on main/master
 augroup("branchChange", {})
-autocmd({"BufEnter", "FocusGained"}, {
+autocmd({ "BufEnter", "FocusGained" }, {
 	group = "branchChange",
-	callback = function()
-		g.cur_branch = trim(fn.system("git branch --show-current"))
-	end
+	callback = function() g.cur_branch = trim(fn.system("git branch --show-current")) end,
 })
 
 local function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
@@ -272,15 +269,13 @@ end
 -- NAVIC
 local navic = require("nvim-navic")
 navic.setup {
-	icons = {Object = "ﴯ "},
+	icons = { Object = "ﴯ " },
 	separator = "  ",
 	depth_limit = 8,
 	depth_limit_indicator = "…",
 }
 
-local function showBreadcrumbs()
-	return navic.is_available() and not (bo.filetype == "css")
-end
+local function showBreadcrumbs() return navic.is_available() and not (bo.filetype == "css") end
 
 local function selectionCount()
 	if not (fn.mode():find("[vV]")) then return "" end
@@ -294,55 +289,60 @@ end
 
 local secSeparators, winSecSeparators
 if isGui() then
-	secSeparators = {left = " ", right = " "} -- nerdfont: 'nf-ple'
-	winSecSeparators = {left = "", right = ""}
+	secSeparators = { left = " ", right = " " } -- nerdfont: 'nf-ple'
+	winSecSeparators = { left = "", right = "" }
 else
-	secSeparators = {left = "", right = ""} -- separators look off in Terminal
-	winSecSeparators = {left = "", right = ""}
+	secSeparators = { left = "", right = "" } -- separators look off in Terminal
+	winSecSeparators = { left = "", right = "" }
 end
 
 require("lualine").setup {
 	sections = {
-		lualine_a = {"mode"},
+		lualine_a = { "mode" },
 		lualine_b = {
-			{readOnly},
-			{currentFile},
+			{ readOnly },
+			{ currentFile },
 		},
-		lualine_c = {{alternateFile}},
+		lualine_c = { { alternateFile } },
 		lualine_x = {
-			{"searchcount", fmt = function(str)
-				if str == "" then return "" end
-				return " " .. str:sub(2, -2)
-			end},
+			{
+				"searchcount",
+				fmt = function(str)
+					if str == "" then return "" end
+					return " " .. str:sub(2, -2)
+				end,
+			},
 			"diagnostics",
-			{lsp_progress},
-			{mixedIndentation},
+			{ lsp_progress },
+			{ mixedIndentation },
 		},
 		lualine_y = {
 			"diff",
-			{"branch", cond = isStandardBranch},
+			{ "branch", cond = isStandardBranch },
 		},
 		lualine_z = {
 			"location",
-			{selectionCount},
+			{ selectionCount },
 		},
 	},
 	winbar = {
-		lualine_b = {{
+		lualine_b = { {
 			navic.get_location,
 			cond = showBreadcrumbs,
 			section_separators = winSecSeparators,
-		}},
-		lualine_c = {{
-			function() return " " end, -- dummy to avoid bar appearing and disappearing
-			cond = showBreadcrumbs,
-		}},
+		} },
+		lualine_c = {
+			{
+				function() return " " end, -- dummy to avoid bar appearing and disappearing
+				cond = showBreadcrumbs,
+			},
+		},
 		lualine_y = {
-			{debuggerStatus, section_separators = winSecSeparators},
+			{ debuggerStatus, section_separators = winSecSeparators },
 		},
 		lualine_z = {
-			{require("recorder").recordingStatus, section_separators = winSecSeparators},
-			{require("recorder").displaySlots, section_separators = winSecSeparators},
+			{ require("recorder").recordingStatus, section_separators = winSecSeparators },
+			{ require("recorder").displaySlots, section_separators = winSecSeparators },
 		},
 	},
 	options = {
@@ -356,14 +356,12 @@ require("lualine").setup {
 			"",
 		},
 		globalstatus = true,
-		component_separators = {left = "", right = ""},
+		component_separators = { left = "", right = "" },
 		section_separators = secSeparators,
-		extensions = {"nvim-dap-ui"},
+		extensions = { "nvim-dap-ui" },
 		disabled_filetypes = {
-			statusline = {
-			},
-			winbar = {
-			},
+			statusline = {},
+			winbar = {},
 		},
 	},
 }
