@@ -14,3 +14,14 @@
 	path = Alfred.alfredpreferences/workflows/alfred-neovim-utilities
 	url = git@github.com:chrisgrieser/alfred-neovim-utilities.git
 	update = rebase
+[submodule "nvim/my-plugins/nvim-genghis"]
+	path = nvim/my-plugins/nvim-genghis
+	url = git@github.com:chrisgrieser/nvim-genghis.git
+	update = rebase
+[submodule "nvim/my-plugins/nvim-recorder"]
+	path = nvim/my-plugins/nvim-recorder
+	url = git@github.com:chrisgrieser/nvim-recorder.git
+	update = rebase
+[submodule "nvim/my-plugins/cmp-nerdfont"]
+	path = nvim/my-plugins/cmp-nerdfont
+	url = git@github.com:chrisgrieser/cmp-nerdfont.git

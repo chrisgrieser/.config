@@ -183,6 +183,7 @@ function M.PluginList(use)
 	use "Darazaki/indent-o-matic" -- auto-determine indents
 	use {"gbprod/yanky.nvim"} -- register manager
 	use(myrepos .. "nvim-recorder") -- better macros
+	use(myrepos .. "nvim-various-textobjs") -- custom textobjects
 	use {"nacro90/numb.nvim", -- line previews when ":n"
 		config = function() require("numb").setup() end,
 		keys = {{"n", ":"}},
