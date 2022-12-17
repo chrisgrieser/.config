@@ -871,27 +871,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>rr</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string></string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>AAB37D8F-B7F9-4644-82D0-58EDDF48149F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -957,9 +936,9 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 			<key>note</key>
 			<string>open from menu</string>
 			<key>xpos</key>
-			<real>295</real>
+			<real>290</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>570</real>
 		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
@@ -984,7 +963,7 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>610</real>
 			<key>ypos</key>
 			<real>390</real>
 		</dict>
@@ -1004,18 +983,18 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 			<key>note</key>
 			<string>vidir the frontmost window</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>715</real>
 		</dict>
 		<key>2CDD7161-EC93-4A2D-B9B2-ED76E07B0B3C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>545</real>
 		</dict>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<dict>
@@ -1044,7 +1023,7 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 			<key>note</key>
 			<string>get title of URL</string>
 			<key>xpos</key>
-			<real>220</real>
+			<real>225</real>
 			<key>ypos</key>
 			<real>390</real>
 		</dict>
@@ -1053,7 +1032,7 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>165</real>
+			<real>170</real>
 			<key>ypos</key>
 			<real>420</real>
 		</dict>
@@ -1109,7 +1088,7 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 			<key>note</key>
 			<string>URL action</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>390</real>
 		</dict>
@@ -1129,23 +1108,16 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 			<key>note</key>
 			<string>open recent Finder item</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>580</real>
-		</dict>
-		<key>AAB37D8F-B7F9-4644-82D0-58EDDF48149F</key>
-		<dict>
-			<key>xpos</key>
-			<real>540</real>
-			<key>ypos</key>
-			<real>680</real>
+			<real>570</real>
 		</dict>
 		<key>B1A3DB54-4F96-4E6E-9CF1-E7721DA58232</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>450</real>
+			<real>455</real>
 			<key>ypos</key>
 			<real>390</real>
 		</dict>
@@ -1181,9 +1153,9 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 		<key>D608B123-0780-4E08-A9AD-4BBF4396F654</key>
 		<dict>
 			<key>xpos</key>
-			<real>295</real>
+			<real>290</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>715</real>
 		</dict>
 		<key>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</key>
 		<dict>
@@ -1208,7 +1180,7 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>370</real>
+			<real>375</real>
 			<key>ypos</key>
 			<real>420</real>
 		</dict>
