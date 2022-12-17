@@ -27,19 +27,21 @@ null_ls.setup {
 	sources = {
 		-- Global
 		builtins.code_actions.gitsigns, -- gitsigns.nvim plugin, e.g. reset hunks
-		builtins.diagnostics.codespell.with {-- common misspellings. Far less false positives than with cspell
-			disabled_filetypes = {"css", "bib"}, -- base64-encoded fonts cause a lot of errors
+		builtins.diagnostics.codespell.with { -- common misspellings. Far less false positives than with cspell
+			disabled_filetypes = { "css", "bib" }, -- base64-encoded fonts cause a lot of errors
 			args = {
-				"--ignore-words", dotfilesFolder .. "/codespell/codespell-ignore.txt",
+				"--ignore-words",
+				dotfilesFolder .. "/codespell/codespell-ignore.txt",
 				-- can't use `--skip`, since it null-ls reads from stdin and not a file
 				"-",
-			}
+			},
 		},
-		builtins.formatting.codespell.with {-- autofix those misspellings
-			disabled_filetypes = {"css", "bib"},
+		builtins.formatting.codespell.with { -- autofix those misspellings
+			disabled_filetypes = { "css", "bib" },
 			extra_args = {
-				"--ignore-words", dotfilesFolder .. "/codespell/codespell-ignore.txt",
-			}
+				"--ignore-words",
+				dotfilesFolder .. "/codespell/codespell-ignore.txt",
+			},
 		},
 
 		-- SHELL
@@ -49,44 +51,43 @@ null_ls.setup {
 		-- no diagnostics for shellcheck needed, since handled by bash-lsp
 		-- but code actions are needed: https://github.com/bash-lsp/bash-language-server/issues/490
 		builtins.code_actions.shellcheck.with {
-			extra_filetypes = {"zsh"},
-			extra_args = {"--shell=bash"},
+			extra_filetypes = { "zsh" },
+			extra_args = { "--shell=bash" },
 		},
 
 		-- CSS
 		builtins.formatting.stylelint.with {
 			-- using config without ordering, since ordering on save is confusing
-			extra_args = {"--config", dotfilesFolder .. "/linter-configs/.stylelintrc-formatting.yml"},
+			extra_args = { "--config", dotfilesFolder .. "/linter-configs/.stylelintrc-formatting.yml" },
 		},
-		builtins.diagnostics.stylelint.with {-- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
-			filetypes = {"css"},
-			extra_args = {"--quiet"}, -- only errors, no warnings
+		builtins.diagnostics.stylelint.with { -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
+			filetypes = { "css" },
+			extra_args = { "--quiet" }, -- only errors, no warnings
 		},
 
 		-- LUA
 		builtins.formatting.stylua,
 		builtins.diagnostics.selene.with {
-			extra_args = {"--config", dotfilesFolder .. "/linter-configs/selene.toml"}
+			extra_args = { "--config", dotfilesFolder .. "/linter-configs/selene.toml" },
 		},
 
 		-- YAML
 		builtins.formatting.yamlfmt,
 		builtins.diagnostics.yamllint.with {
-			extra_args = {"--config-file", dotfilesFolder .. "/yamllint/config/.yamllint.yaml"},
+			extra_args = { "--config-file", dotfilesFolder .. "/yamllint/config/.yamllint.yaml" },
 		},
 
 		-- MARKDOWN & PROSE
 		builtins.diagnostics.vale,
 		builtins.diagnostics.markdownlint.with {
 			-- fixed via formatting command already
-			extra_args = {"--disable", "trailing-spaces", "no-multiple-blanks"},
+			extra_args = { "--disable", "trailing-spaces", "no-multiple-blanks" },
 		},
 		builtins.hover.dictionary, -- vim's builtin dictionary
 		builtins.formatting.markdownlint,
-		builtins.completion.spell.with {-- vim's built-in spell-suggestions
-			filetypes = {"markdown", "text"},
+		builtins.completion.spell.with { -- vim's built-in spell-suggestions
+			filetypes = { "markdown", "text" },
 		},
-
 	},
 }
 
