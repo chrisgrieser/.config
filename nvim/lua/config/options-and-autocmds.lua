@@ -62,7 +62,7 @@ opt.splitbelow = true -- split down instead of up
 -- Window Managers/espanso: set title
 opt.title = true
 opt.titlelen = 0 -- do not shorten title
-opt.titlestring = "%{expand(\"%:p\")} [%{mode()}]"
+opt.titlestring = '%{expand("%:p")} [%{mode()}]'
 
 -- Editor
 opt.cursorline = true
@@ -72,9 +72,9 @@ opt.textwidth = 80
 opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words
-opt.colorcolumn = {"+1", "+20"} -- relative to textwidth
+opt.colorcolumn = { "+1", "+20" } -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
-opt.backspace = {"start", "eol"} -- restrict insert mode backspace behavior
+opt.backspace = { "start", "eol" } -- restrict insert mode backspace behavior
 
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
@@ -86,7 +86,7 @@ autocmd("FileType", {
 		if not (bo.filetype == "markdown") then -- not for markdown, for autolist hack (see markdown.lua)
 			bo.formatoptions = bo.formatoptions:gsub("o", "")
 		end
-	end
+	end,
 })
 
 -- Character groups
@@ -100,28 +100,28 @@ opt.autochdir = true -- always current directory
 opt.confirm = true -- ask instead of aborting
 
 augroup("autosave", {})
-autocmd({"BufWinLeave", "QuitPre", "FocusLost", "InsertLeave"}, {
+autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	group = "autosave",
 	pattern = "?*",
 	callback = function()
 		-- safety net to not save file in wrong folder when autochdir is not reliable
-		if bo.filetype == "TelescopePrompt" then return end
+		if not bo.modifiable then return end
 		local curFile = fn.expand("%:p")
 		cmd.update(curFile)
-	end
+	end,
 })
 
 augroup("Mini-Lint", {})
 autocmd("BufWritePre", {
 	group = "Mini-Lint",
 	callback = function()
-		cmd.mkview {bang = true}
+		cmd.mkview { bang = true }
 		if bo.filetype ~= "markdown" then -- to preserve spaces from the two-space-rule, and trailing spaces on sentences
-			cmd [[%s/\s\+$//e]] -- trim trailing whitespaces
+			cmd([[%s/\s\+$//e]]) -- trim trailing whitespaces
 		end
-		cmd [[silent! %s#\($\n\s*\)\+\%$##]] -- trim extra blanks at eof https://stackoverflow.com/a/7496112
+		cmd([[silent! %s#\($\n\s*\)\+\%$##]]) -- trim extra blanks at eof https://stackoverflow.com/a/7496112
 		cmd.loadview()
-	end
+	end,
 })
 
 --------------------------------------------------------------------------------
@@ -136,7 +136,7 @@ local ufo = require("ufo")
 local foldIcon = "  "
 ufo.setup {
 	provider_selector = function(bufnr, filetype, buftype) ---@diagnostic disable-line: unused-local
-		return {"treesitter", "indent"} -- Use Treesitter as fold provider
+		return { "treesitter", "indent" } -- Use Treesitter as fold provider
 	end,
 	open_fold_hl_timeout = 0,
 	fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
@@ -154,7 +154,7 @@ ufo.setup {
 			else
 				chunkText = truncate(chunkText, targetWidth - curWidth)
 				local hlGroup = chunk[2]
-				table.insert(newVirtText, {chunkText, hlGroup})
+				table.insert(newVirtText, { chunkText, hlGroup })
 				chunkWidth = vim.fn.strdisplaywidth(chunkText)
 				if curWidth + chunkWidth < targetWidth then
 					suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
@@ -163,7 +163,7 @@ ufo.setup {
 			end
 			curWidth = curWidth + chunkWidth
 		end
-		table.insert(newVirtText, {suffix, "MoreMsg"})
+		table.insert(newVirtText, { suffix, "MoreMsg" })
 		return newVirtText
 	end,
 }
@@ -190,17 +190,17 @@ augroup("rememberCursorAndFolds", {})
 autocmd("BufWinLeave", {
 	group = "rememberCursorAndFolds",
 	pattern = "?*",
-	command = "silent! mkview!"
+	command = "silent! mkview!",
 })
 autocmd("BufWinEnter", {
 	group = "rememberCursorAndFolds",
 	pattern = "?*",
 	callback = function()
-		local ignoredFts = {"DressingSelect", "cybu"}
+		local ignoredFts = { "DressingSelect", "cybu" }
 		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
-		cmd [[silent! loadview]]
-		cmd.normal {"^", bang = true} -- scroll to the left
-	end
+		cmd([[silent! loadview]])
+		cmd.normal { "^", bang = true } -- scroll to the left
+	end,
 })
 
 --------------------------------------------------------------------------------
@@ -230,6 +230,6 @@ for _, ft in pairs(ftWithSkeletons) do
 			local curFile = fn.expand("%")
 			local fileIsEmpty = fn.getfsize(curFile) < 4 -- to account for linebreak weirdness
 			if fileIsEmpty then cmd(readCmd) end
-		end
+		end,
 	})
 end

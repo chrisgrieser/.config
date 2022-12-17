@@ -209,7 +209,7 @@ local lspFilestypes = {}
 -- https://github.com/sumneko/lua-language-server/wiki/Settings
 lspSettings.sumneko_lua = {
 	Lua = {
-		format = { enable = false }, -- using stylua instead
+		format = { enable = false }, -- using stylua instead. Also, sumneko-lsp-formatting has this weird bug where all folds are opened
 		completion = {
 			callSnippet = "Replace",
 			keywordSnippet = "Replace",
@@ -219,7 +219,7 @@ lspSettings.sumneko_lua = {
 			disable = { "trailing-space", "lowercase-global" },
 		},
 		-- libraries defined per-project via luarc.json location: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-		workspace = { checkThirdParty = false }, -- HACK: https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
+		workspace = { checkThirdParty = false }, -- HACK https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		hint = {
 			enable = true,
 			setType = true,
@@ -307,7 +307,7 @@ lspSettings.yamlls = {
 lspSettings.eslint = {
 	quiet = false, -- = include warnings
 	codeAction = {
-		disableRuleComment = { location = "sameLine" }, -- ignore-comments on same line
+		disableRuleComment = { location = "sameLine" }, -- add ignore-comments on the same line
 	},
 	-- needed to use mason's eslint with the eslint-lsp https://github.com/williamboman/mason.nvim/issues/697#issuecomment-1330855352
 	nodePath = os.getenv("HOME") .. "/.local/share/nvim/mason/packages/eslint/node_modules",

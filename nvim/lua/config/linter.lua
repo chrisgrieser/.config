@@ -8,6 +8,7 @@ local builtins = null_ls.builtins
 local lintersAndFormatters = {
 	"yamllint",
 	"yamlfmt",
+	"prettier",
 	"shellcheck", -- needed for bash-lsp
 	"shfmt", -- shell
 	"markdownlint",
@@ -55,6 +56,11 @@ null_ls.setup {
 			extra_args = { "--shell=bash" },
 		},
 
+		-- JS/TS
+		builtins.formatting.prettier.with {
+			filetypes = { "javascript", "typescript", "yaml" }, -- do format markdown, css, and so on
+		},
+
 		-- CSS
 		builtins.formatting.stylelint.with {
 			-- using config without ordering, since ordering on save is confusing
@@ -72,7 +78,7 @@ null_ls.setup {
 		},
 
 		-- YAML
-		builtins.formatting.yamlfmt,
+		-- builtins.formatting.yamlfmt,
 		builtins.diagnostics.yamllint.with {
 			extra_args = { "--config-file", dotfilesFolder .. "/yamllint/config/.yamllint.yaml" },
 		},
