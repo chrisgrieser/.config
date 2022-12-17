@@ -33,16 +33,25 @@ g.markdown_fenced_languages = {
 -- l = {"%[().*()]%(.*%)"},
 
 ---md links textobj
----@param inner? boolean
+---@param inner boolean
 local function linkTextobj(inner)
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
+	local curRow, curCol = unpack(getCursor(0))
+	local linkStart, linkEnd, barelink
 
-	local mdLinkPattern = "%b[]%b()"
-	local linkStart, linkEnd = lineContent:find(mdLinkPattern)
-	if not linkStart then return end
+	cmd.normal { "F[", bang = true } -- go to beginning of link so it can be found when standing on it
+	local mdLinkPattern = "(%b[])%b()"
+	local hasLink = lineContent:find(mdLinkPattern)
+	if inner then
+		linkStart, _, barelink = lineContent:find(mdLinkPattern, curCol)
+		linkEnd = linkStart + #barelink - 3
+	else
+		linkStart, linkEnd = lineContent:find(mdLinkPattern, curCol)
+		linkStart = linkStart - 1
+		linkEnd = linkEnd - 1
+	end
 
-	local curRow = fn.line(".")
 	setCursor(0, { curRow, linkStart })
 	if fn.mode():find("v") then
 		cmd.normal { "o", bang = true }
@@ -52,8 +61,8 @@ local function linkTextobj(inner)
 	setCursor(0, { curRow, linkEnd })
 end
 
-keymap({ "o", "x" }, "al", function() linkTextobj(true) end, { desc = "mdlink textobj", buffer = true })
-keymap({ "o", "x" }, "il", function() linkTextobj(false) end, { desc = "mdlink textobj", buffer = true })
+keymap({ "o", "x" }, "al", function() linkTextobj(false) end, { desc = "mdlink textobj", buffer = true })
+keymap({ "o", "x" }, "il", function() linkTextobj(true) end, { desc = "mdlink textobj", buffer = true })
 
 --------------------------------------------------------------------------------
 
@@ -62,10 +71,10 @@ setlocal("wrap", true) -- soft wrap
 setlocal("colorcolumn", "") -- deactivate ruler
 keymap({ "n", "x" }, "H", "g^", opts)
 keymap({ "n", "x" }, "L", "g$", opts)
-keymap({ "n", "x" }, "J", function() require("quality-of-life").overscroll("6gj") end, opts)
+keymap({ "n", "x" }, "J", function() qol.overscroll("6gj") end, opts)
 keymap({ "n", "x" }, "K", "6gk", opts)
 keymap({ "n", "x" }, "k", "gk", opts)
-keymap({ "n", "x" }, "j", function() require("quality-of-life").overscroll("gj") end, opts)
+keymap({ "n", "x" }, "j", function() qol.overscroll("gj") end, opts)
 
 -- decrease line length without zen mode plugins (which unfortunately remove
 -- statuslines and stuff)
