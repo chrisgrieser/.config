@@ -19,6 +19,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>892B9EF8-E33C-4D32-BBEB-591DFBEFFFEC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C8DFF277-2C74-48D3-B685-F304268DF007</key>
 		<array/>
 		<key>CD061C82-1321-458D-B46E-3603B3DB27E0</key>
@@ -48,52 +61,33 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
 				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>49</integer>
+				<key>hotmod</key>
+				<integer>524288</integer>
+				<key>hotstring</key>
+				<string>Space</string>
+				<key>leftcursor</key>
 				<false/>
-				<key>argumenttrimmode</key>
+				<key>modsmode</key>
 				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>4</integer>
-				<key>keyword</key>
-				<string>m</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
+				<key>relatedAppsMode</key>
 				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string>./menu -async -cache 5 -query "{query}"
-</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Menu Bar Search</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</string>
+			<string>892B9EF8-E33C-4D32-BBEB-591DFBEFFFEC</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -130,11 +124,61 @@
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>keyword</key>
+				<string>m</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string>./menu -async -cache 5 -max-children "$maxItemsPerMenu" -max-depth "$maxSubMenusToSearch" -show-disabled "$showDisabledItems" -show-apple-menu "$showAppleMenuItems" -query "{query}"
+</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Menu Bar Search</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>:menubar</string>
+				<string>ms</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -209,20 +253,6 @@ E.g
 - `m cw` will match the menu item **Close Window**
 
 
-## Settings
-
-You can change the workflow environment variables to fine tune menu listings
-
-* -show-disabled    true/false    controls if diabled menu items should be shown (default is false)
-
-*  -show-apple-menu    true/false    if true, menus items under the apple menu will be shown (default is false)
-
-*  -max-children    number    how many sub-menu items to load for each menu item (default is 40)
-
-*  -max-depth    number    how many nested levels if sub menus should be listed (default is 10)
-
-
-
 ## Change log
 
 - 1.0 - Initial Release
@@ -251,62 +281,145 @@ You can change the workflow environment variables to fine tune menu listings
 
 - 1.6 - added per app customization settings, `-show-apple-menu` flag
 - 1.7 - universal build for M1 and Intel
-- 1.8 - fixed universal build</string>
+- 1.8 - fixed universal build
+- 1.9 - changed to user configuration, and signed executable (exported using Alfred 5)</string>
 	<key>uidata</key>
 	<dict>
 		<key>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>290</integer>
+			<real>290</real>
 			<key>ypos</key>
-			<integer>140</integer>
+			<real>140</real>
+		</dict>
+		<key>892B9EF8-E33C-4D32-BBEB-591DFBEFFFEC</key>
+		<dict>
+			<key>note</key>
+			<string>Thanks for downloading! 
+
+I highly recommend you set a hotkey for this so that it's even easier to trigger it. I personally set it to double-tapping the Cmd key.</string>
+			<key>xpos</key>
+			<real>70</real>
+			<key>ypos</key>
+			<real>140</real>
 		</dict>
 		<key>C8DFF277-2C74-48D3-B685-F304268DF007</key>
 		<dict>
 			<key>xpos</key>
-			<integer>560</integer>
+			<real>560</real>
 			<key>ypos</key>
-			<integer>140</integer>
+			<real>140</real>
 		</dict>
 		<key>CD061C82-1321-458D-B46E-3603B3DB27E0</key>
 		<dict>
-			<key>note</key>
-			<string>config</string>
 			<key>xpos</key>
-			<integer>290</integer>
+			<real>290</real>
 			<key>ypos</key>
-			<integer>280</integer>
+			<real>280</real>
 		</dict>
 		<key>CE6777D4-DFB9-460C-897D-EB6C45E6A769</key>
 		<dict>
 			<key>xpos</key>
-			<integer>560</integer>
+			<real>560</real>
 			<key>ypos</key>
-			<integer>280</integer>
+			<real>280</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
-	<key>variables</key>
-	<dict>
-		<key>-max-children</key>
-		<string>30</string>
-		<key>-max-depth</key>
-		<string>3</string>
-		<key>-show-apple-menu</key>
-		<string>false</string>
-		<key>-show-disabled</key>
-		<string>false</string>
-	</dict>
-	<key>variablesdontexport</key>
 	<array>
-		<string>-show-apple-menu</string>
-		<string>-max-children</string>
-		<string>-show-disabled</string>
-		<string>-max-depth</string>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>40</string>
+				<key>placeholder</key>
+				<string>Enter a postive integer, defaults to 40</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>This configuration controls how many menu items should be loaded at every level of the menu hierarchy. 
+
+Limiting this will speed up getting results, but you can tweak this in case you need to fetch more results.
+
+Some applications, e.g. internet browsers, may offer a "History" menu of all web pages accessed, which may contain a lot of sub-menu items. Loading all of them will make the workflow slow, and we limit to the first few, as specified using this configuration.</string>
+			<key>label</key>
+			<string>Maximum items per menu</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>maxItemsPerMenu</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>10</string>
+				<key>placeholder</key>
+				<string>Enter a postive integer, defaults to 10</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>How deep should we search for menu items.
+
+The depth of a menu item is determined by how many menu entries you need to select to reach that menu item. E.g. If you have a menu structure like "File → Export → Export to PDF", the "Export to PDF" is at a depth of 2, since that option has two menu items in its path:  "File" and "Export".
+
+Limiting the depth allows for the menus to be loaded quicker.</string>
+			<key>label</key>
+			<string>Maximum sub menu depth</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>maxSubMenusToSearch</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Show in search results</string>
+			</dict>
+			<key>description</key>
+			<string>If enabled, disabled menu items will be displayed. Selecting them may not perform any valid action in the focused app.</string>
+			<key>label</key>
+			<string>Disabled menu items</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>showDisabledItems</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Show in search results</string>
+			</dict>
+			<key>description</key>
+			<string>Determines if menu items from the Apple menu be included in the search results. By default, we only include the app-specific menu items.</string>
+			<key>label</key>
+			<string>Apple  menu items</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>showAppleMenuItems</string>
+		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>1.8</string>
+	<string>1.9</string>
 	<key>webaddress</key>
 	<string>https://github.com/BenziAhamed/Menu-Bar-Search</string>
 </dict>
