@@ -55,17 +55,22 @@ keymap("x", "<Space>", '"_c')
 keymap("o", "<Space>", varTextobjs.subword, { desc = "subword textobj" })
 
 -- n: [n]ear end of the line
-keymap({"o", "x"}, "n", varTextobjs.nearEoL, { desc = "almost ending of line textobj" })
+keymap({ "o", "x" }, "n", varTextobjs.nearEoL, { desc = "almost ending of line textobj" })
 
 -- r: [r]est of paragraph (linewise)
-keymap({"o", "x"}, "r", varTextobjs.restOfParagraph, { desc = "rest of paragraph (linewise)" })
+keymap({ "o", "x" }, "r", varTextobjs.restOfParagraph, { desc = "rest of paragraph (linewise)" })
 
 -- av/iv: value textobj
 keymap({ "x", "o" }, "iv", function() varTextobjs.valueTextObj(true) end, { desc = "inner value textobj" })
 keymap({ "x", "o" }, "av", function() varTextobjs.valueTextObj(false) end, { desc = "outer value textobj" })
 
 -- ii/ai: indentation textobj
-keymap({ "x", "o" }, "ii", function() varTextobjs.indentTextObj(false, false) end, { desc = "inner indentation textobj" })
+keymap(
+	{ "x", "o" },
+	"ii",
+	function() varTextobjs.indentTextObj(false, false) end,
+	{ desc = "inner indentation textobj" }
+)
 keymap({ "x", "o" }, "ai", function() varTextobjs.indentTextObj(true, true) end, { desc = "outer indentation textobj" })
 
 augroup("IndentedFileTypes", {})
@@ -77,7 +82,7 @@ autocmd("FileType", {
 			keymap(
 				{ "x", "o" },
 				"ai",
-				function() indentationTextObj(true, false) end,
+				function() varTextobjs.indentTextObj(true, false) end,
 				{ buffer = true, desc = "indentation textobj with start border" }
 			)
 		end
@@ -107,7 +112,7 @@ local functionObjChar = "f"
 local conditionObjChar = "o"
 local callObjChar = "l"
 
--- HACK define these manually, since for some reason why do not work
+-- HACK define these manually, since for some reason they do not work by default
 keymap("n", "yss", "ys_", { remap = true })
 keymap("n", "yS", "ys$", { remap = true })
 
@@ -168,7 +173,7 @@ require("nvim-surround").setup {
 			delete = "^([^=%s]-% ?()().-(%))()$",
 		},
 		[conditionObjChar] = {
-			find = function() return require("nvim-surround.config").get_selection { motion = "a" .. callObjChar } end,
+			find = function() return require("nvim-surround.config").get_selection { motion = "a" .. conditionObjChar } end,
 			delete = function()
 				local ft = bo.filetype
 				local patt

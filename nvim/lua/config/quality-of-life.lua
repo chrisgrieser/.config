@@ -11,7 +11,6 @@ local colNo = vim.fn.col
 local append = vim.fn.append
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
-local function wordUnderCursor() return vim.fn.expand("<cword>") end
 
 local function leaveVisualMode()
 	-- https://github.com/neovim/neovim/issues/17735#issuecomment-1068525617
@@ -229,13 +228,11 @@ end
 
 ---log statement for variable under cursor, similar to the 'turbo console log'
 ---VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
----@param opts? table
-function M.quicklog(opts)
-	if not opts then opts = { addLineNumber = false } end
-
+---@param addLineNum? boolean default: false
+function M.quicklog(addLineNum)
 	local varname
 	if fn.mode() == "n" then
-		varname = wordUnderCursor()
+		varname = fn.expand("<cword>")
 	else
 		local prevReg = fn.getreg("z")
 		cmd.normal { '"zy', bang = true }
@@ -246,7 +243,7 @@ function M.quicklog(opts)
 	local logStatement
 	local ft = bo.filetype
 	local lnStr = ""
-	if opts.addLineNumber then lnStr = "L" .. tostring(lineNo(".")) .. " " end
+	if addLineNum then lnStr = "L" .. tostring(lineNo(".")) .. " " end
 
 	if ft == "lua" then
 		logStatement = 'print("' .. lnStr .. varname .. ':", ' .. varname .. ")"
