@@ -308,6 +308,7 @@ if isGui() then
 	}
 
 	-- cut, copy & paste
+	keymap({"n", "x"}, "<D-v>", "<Esc>p", {desc = "paste"}) -- needed for pasting from Alfred clipboard history
 	keymap("c", "<D-v>", "<C-r>+")
 	keymap("i", "<D-v>", "<C-r><C-o>+")
 
@@ -334,16 +335,6 @@ local function betterAltBuf() -- switch to alternate-file
 	end
 end
 
--- HACK: fix for https://github.com/cshuaimin/ssr.nvim/issues/11
-augroup("ssr-fix", {})
-autocmd("BufReadPost", {
-	group = "ssr-fix",
-	callback = function()
-		if bo.filetype == "ssr" then return end
-		keymap("n", "<CR>", betterAltBuf)
-	end,
-})
-
 -- cycle between buffers
 keymap("n", "<BS>", [[:nohl<CR><Plug>(CybuNext)]])
 
@@ -357,6 +348,16 @@ keymap("n", "gb", function()
 		vim.notify("Only one buffer open.")
 	end
 end)
+
+-- HACK: fix for https://github.com/cshuaimin/ssr.nvim/issues/11
+augroup("ssr-fix", {})
+autocmd("BufReadPost", {
+	group = "ssr-fix",
+	callback = function()
+		if bo.filetype == "ssr" then return end
+		keymap("n", "<CR>", betterAltBuf)
+	end,
+})
 
 --------------------------------------------------------------------------------
 -- FILES

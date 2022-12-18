@@ -120,6 +120,7 @@ function moveResize(win, pos)
 	if pos == pseudoMaximized or pos == centered then app("Twitterrific"):mainWindow():raise() end
 
 	-- has to repeat due window creation delay for some apps
+	if checkSize(win, pos) then return end -- size does not need to be changed
 	runWithDelays({ 0, 0.1, 0.3, 0.5 }, function() win:moveToUnit(pos) end)
 end
 
