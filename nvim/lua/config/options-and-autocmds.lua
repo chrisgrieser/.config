@@ -204,6 +204,18 @@ autocmd("BufWinEnter", {
 })
 
 --------------------------------------------------------------------------------
+-- automatically set nohl
+-- https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?utm_source=share&utm_medium=web2x&context=3
+vim.on_key(function(char)
+	if fn.mode() == "n" then
+		local new_hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "+", "-" }, vim.fn.keytrans(char))
+		if vim.opt.hlsearch:get() ~= new_hlsearch then
+         vim.opt.hlsearch = new_hlsearch
+      end
+	end
+end, api.nvim_create_namespace("auto_hlsearch"))
+
+--------------------------------------------------------------------------------
 
 -- Skeletons (Templates)
 -- apply templates for any filetype named `./templates/skeleton.{ft}`
@@ -244,4 +256,3 @@ g.netrw_liststyle = 3 -- tree style as default
 g.netrw_winsize = 30 -- width
 g.netrw_localcopydircmd = "cp -r" -- so copy work with directories
 cmd.highlight { "def link netrwTreeBar IndentBlankLineChar", bang = true }
-

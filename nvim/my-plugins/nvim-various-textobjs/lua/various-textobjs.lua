@@ -199,10 +199,10 @@ function M.jsRegexTextobj(inner)
 
 	-- determine location in row
 	local start, ending = lineContent:find(pattern, curCol)
+	ending = ending - 1
 	if inner then
-		ending = ending - 2
-	else
 		ending = ending - 1
+	else
 		start = start - 1
 	end
 
