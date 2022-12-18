@@ -31,8 +31,8 @@ keymap(
 	opts
 )
 
--- since in big css files, the "/" search (mapped to - for me) is laggy
-keymap("n", "-", telescope.current_buffer_fuzzy_find, { desc = "search in current buffer (css)", buffer = true })
+-- since in big css files search is laggy with it
+setlocal("incsearch", false)
 
 --------------------------------------------------------------------------------
 

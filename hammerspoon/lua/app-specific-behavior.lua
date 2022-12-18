@@ -39,6 +39,7 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 end):start()
 
 ---automatically apply per-app auto-tiling of the windows of the app
+---@param windowFilter hs.window.filter
 local function autoTile(windowFilter)
 	local wins = windowFilter:getWindows()
 	local frontApp = app.frontmostApplication()
@@ -57,6 +58,11 @@ local function autoTile(windowFilter)
 		moveResize(wins[1], { h = 1, w = 0.33, x = 0, y = 0 })
 		moveResize(wins[2], { h = 1, w = 0.34, x = 0.33, y = 0 })
 		moveResize(wins[3], { h = 1, w = 0.33, x = 0.67, y = 0 })
+	elseif #wins == 4 then
+		moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
+		moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
+		moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
+		moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
 	end
 end
 
@@ -233,8 +239,8 @@ wf_finder = wf.new("Finder")
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(wf.windowDestroyed, autoTile)
-	:subscribe(wf.windowCreated, autoTile)
+	:subscribe(wf.windowCreated, function () autoTile(wf_finder) end)
+	:subscribe(wf.windowDestroyed, function () autoTile(wf_finder) end)
 	:subscribe(wf.windowFocused, function()
 		bringAllToFront()
 		app("Finder"):selectMenuItem { "View", "Hide Sidebar" }

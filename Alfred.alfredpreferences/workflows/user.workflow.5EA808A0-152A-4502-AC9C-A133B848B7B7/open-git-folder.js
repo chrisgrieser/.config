@@ -13,8 +13,10 @@ const finderApp = Application("Finder");
 const pathsToSearch = [
 	$.getenv("working_folder").replace(/^~/, home),
 	$.getenv("dotfile_folder").replace(/^~/, home),
-	home + "/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development",
-	home + "/Library/Mobile Documents/com~apple~CloudDocs/repos",
+	$.getenv("dotfile_folder").replace(/^~/, home) + "/nvim/my-plugins",
+	$.getenv("dotfile_folder").replace(/^~/, home) + "/Alfred.alfredpreferences/workflows",
+	home + "/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development/.obsidian/plugins",
+	home + "/Library/Mobile Documents/com~apple~CloudDocs/Repos",
 ];
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -26,10 +28,10 @@ function alfredMatcher(str) {
 }
 
 function readPlist(key, path) {
-	return app.doShellScript(
-		"plutil -extract " + key
-		+ " xml1 -o - '" + path
-		+ "' | sed -n 4p | cut -d\">\" -f2 | cut -d\"<\" -f1")
+	return app
+		.doShellScript(
+			"plutil -extract " + key + " xml1 -o - '" + path + '\' | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1',
+		)
 		.replaceAll("&amp;", "&");
 }
 
@@ -45,8 +47,13 @@ function readFile(path) {
 const jsonArray = [];
 let pathString = "";
 
-pathsToSearch.forEach(path => { pathString += "\"" + path + "\" " });
-const repoArray = app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; fd '\\.git$' --no-ignore --hidden " + pathString)
+pathsToSearch.forEach(path => {
+	pathString += '"' + path + '" ';
+});
+const repoArray = app
+	.doShellScript(
+		"export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; fd '\\.git$' --no-ignore --hidden --max-depth=2 " + pathString,
+	)
 	.split("\r")
 	.map(i => i.slice(0, -5))
 	.filter(i => !i.endsWith(".spoon/")); // no hammerspoon spoons
@@ -61,21 +68,18 @@ repoArray.forEach(localRepoFilePath => {
 	let dirtyIcon = "";
 	const dirtyRepo = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
 	if (dirtyRepo) dirtyIcon = " ✴️";
-	
+
 	let iconpath = "repotype-icons/";
 	if (isAlfredWorkflow) {
 		repoName = readPlist("name", localRepoFilePath + "/info.plist");
 		iconpath = localRepoFilePath + "/icon.png";
-
 	} else if (isObsiPlugin) {
 		const manifest = readFile(localRepoFilePath + "/manifest.json");
 		repoName = JSON.parse(manifest).name;
 		iconpath += "obsidian.png";
-
 	} else if (isNeovimPlugin) {
-		repoName = localRepoFilePath.replace(/.*\/(.*)\//, "$1");
+		repoName = localRepoFilePath.replace(/.*\/(.*)/, "$1");
 		iconpath += "neovim.png";
-
 	} else {
 		const readme = readFile(localRepoFilePath + "/README.md");
 		const isKarabinerMod = readme.includes("Karabiner");
@@ -93,11 +97,11 @@ repoArray.forEach(localRepoFilePath => {
 	}
 
 	jsonArray.push({
-		"title": repoName + dirtyIcon,
-		"match": alfredMatcher(repoName),
-		"icon": { "path": iconpath },
-		"arg": localRepoFilePath,
-		"uid": localRepoFilePath,
+		title: repoName + dirtyIcon,
+		match: alfredMatcher(repoName),
+		icon: { path: iconpath },
+		arg: localRepoFilePath,
+		uid: localRepoFilePath,
 	});
 });
 
