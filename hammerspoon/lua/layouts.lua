@@ -268,12 +268,12 @@ wf_appsOnMouseScreen = wf.new {
 	"Brave Browser",
 	"Mimestream",
 	"Obsidian",
-	"Sublime Text",
 	"Alacritty",
 	"alacritty",
 	"Warp",
 	"Slack",
 	"IINA",
+	"Hammerspoon",
 	"Discord",
 	"Neovide",
 	"neovide",
@@ -291,14 +291,16 @@ wf_appsOnMouseScreen = wf.new {
 wf_appsOnMouseScreen:subscribe(wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()
 	if not mouseScreen then return end
+
 	local screenOfWindow = newWin:screen()
 	local appn = newWin:application():name()
 	if isProjector() and not (mouseScreen:name() == screenOfWindow:name()) then
 		runWithDelays({ 0.1, 0.3 }, function()
 			if not (mouseScreen:name() == screenOfWindow:name()) then newWin:moveToScreen(mouseScreen) end
-			if appn == "Finder" or "Script Editor" and not checkSize(newWin, maximized) then
+
+			if appn == "Finder" or appn == "Script Editor" or appn == "Hammerspoon" then
 				moveResize(newWin, centered)
-			elseif not checkSize(newWin, maximized) then
+			else
 				moveResize(newWin, maximized)
 			end
 		end)

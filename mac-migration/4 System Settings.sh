@@ -8,42 +8,6 @@
 # ask for permissions upfront
 sudo -v
 
-#-------------------------------------------------------------------------------
-# Global Prefs
-#-------------------------------------------------------------------------------
-# these three need restart
-# mouse speed: 3 = max speed from System Preferences
-# https://mac-os-key-repeat.vercel.app/
-defaults write -g com.apple.mouse.scaling  4.0
-defaults write -g InitialKeyRepeat -int 13 # normal minimum: 15 (225ms)
-defaults write -g KeyRepeat -int 2 # normal minimum: 2 (30ms)
-
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
-# when to show scrollbars
-defaults write NSGlobalDomain AppleShowScrollBars -string "Automatic"
-# sidebar icon size (1-3)
-defaults write -g AppleShowAllExtensions -bool true
-# save menu settings
-defaults write -g NSNavPanelExpandedStateForSaveMode -bool true
-defaults write -g NSNavPanelExpandedStateForSaveMode2 -bool true
-defaults write -g NSDocumentSaveNewDocumentsToCloud -bool false
-defaults write NSGlobalDomain com.apple.springing.enabled -bool true
-defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-defaults write NSGlobalDomain NSWindowResizeTime 0.1
-# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
-# Disable press-and-hold for keys in favor of key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-# expand print menu by default
-defaults write -g PMPrintingExpandedStateForPrint -bool true
-defaults write -g PMPrintingExpandedStateForPrint2 -bool true
-
-# set highlight color, also relevant for sketchyvim's block cursor
-defaults write NSGlobalDomain AppleHighlightColor -string "0.968627 0.831373 1.000000 Purple"
 
 #-------------------------------------------------------------------------------
 # System Prefs
@@ -64,33 +28,12 @@ networksetup -setairportnetwork en1 "$WIFI_NAME" "$WIFI_PW"
 networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
 networksetup -setdnsservers Ethernet 8.8.8.8 8.8.4.4
 
-# Screensaver Settings
-defaults -currentHost write com.apple.screensaver showClock -int 0
-
-# Dock
-# -------------------------------
-defaults write com.apple.dock tilesize -int 70
-defaults write com.apple.dock autohide -bool true
-defaults write com.apple.dock no-bouncing -bool false
-# Speed up the animation when hiding/showing the Dock
-defaults write com.apple.dock autohide-time-modifier -float 0.5
-defaults write com.apple.dock autohide-delay -float 0
-defaults write com.apple.dock magnification -bool true
-defaults write com.apple.dock show-recents -bool false
-defaults write com.apple.dock mouse-over-hilite-stack -bool false
-defaults write com.apple.dock minimize-to-application -bool false
-defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
-defaults write com.apple.dock show-process-indicators -bool true
-# defaults write com.apple.dock static-only -bool true # show only active items in dock
-
-# Speed up Mission Control animations
-defaults write com.apple.dock expose-animation-duration -float 0.1
-killall Dock
-
-
 # -------------------------------
 # Finder
 # -------------------------------
+
+# set base directory
+WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 
 # Set the default location for new Finder windows
 defaults write com.apple.finder NewWindowTarget 'PfHm'
@@ -99,6 +42,12 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Libr
 # other settings
 defaults write com.apple.finder FXEnableExtensionChangeWarning -int 0
 defaults write com.apple.finder WarnOnEmptyTrash -int 0
+
+# make finder quittable
+defaults write com.apple.finder QuitMenuItem -bool true
+
+# disable desktop icons & make desktop unfocussable
+defaults write com.apple.finder CreateDesktop false
 
 # Automatically open a new Finder window when a volume is mounted
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
@@ -131,6 +80,7 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool false
 defaults write com.apple.finder ShowStatusBar -bool false
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
 #List view as default
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 # Show the ~/Library folder
@@ -147,18 +97,45 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 	Privileges -bool false
 killall Finder
 
-# -------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
+
+# these three need restart
+# mouse speed: 3 = max speed from System Preferences
+# https://mac-os-key-repeat.vercel.app/
+defaults write -g com.apple.mouse.scaling 4.0
+defaults write -g InitialKeyRepeat -int 13 # normal minimum: 15 (225ms)
+defaults write -g KeyRepeat -int 2         # normal minimum: 2 (30ms)
+
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+# when to show scrollbars
+defaults write NSGlobalDomain AppleShowScrollBars -string "Automatic"
+# sidebar icon size (1-3)
+defaults write -g AppleShowAllExtensions -bool true
+# save menu settings
+defaults write -g NSNavPanelExpandedStateForSaveMode -bool true
+defaults write -g NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write -g NSDocumentSaveNewDocumentsToCloud -bool false
+defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain NSWindowResizeTime 0.1
+# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+# Disable press-and-hold for keys in favor of key repeat
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+# expand print menu by default
+defaults write -g PMPrintingExpandedStateForPrint -bool true
+defaults write -g PMPrintingExpandedStateForPrint2 -bool true
+
+# set highlight color
+defaults write NSGlobalDomain AppleHighlightColor -string "0.968627 0.831373 1.000000 Purple"
 # Avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-
-# Desktop
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
-defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
-osascript -e 'tell application "System Events" to tell every desktop to set picture to POSIX file "/System/Library/Desktop Pictures/Solid Colors/Space Gray Pro.png"'
 
 # Show language menu in the top right corner of the boot screen
 sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
@@ -166,12 +143,15 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bo
 # Printer setting
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-#turn on firewall
+# turn on firewall
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 
-#screenshots
+# Screensaver Settings
+defaults -currentHost write com.apple.screensaver showClock -int 0
+
+# screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
-defaults write com.apple.screencapture location -string "${HOME}/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
+defaults write com.apple.screencapture location -string "$WD"
 defaults write com.apple.screencapture type -string "png"
 killall SystemUIServer
 
@@ -191,6 +171,15 @@ defaults write com.apple.CrashReporter DialogType -string "none"
 
 # Set Help Viewer windows to non-floating mode
 defaults write com.apple.helpviewer DevMode -bool true
+
+# Energy Saver Settings
+sudo pmset displaysleep 30 # minutes till display sleep
+sudo pmset sleep 1         # will sleep when displays are off
+sudo pmset autorestart 0   # restart on power failure
+sudo pmset womp 1          # Wake for network access
+
+# do not save GPG key in the keychains
+defaults write org.gpgtools.common DisableKeychain -bool yes
 
 # Hot corners
 #-------------------------------------------
@@ -220,7 +209,6 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # disable automatic backups
 sudo tmutil disable
 
-
 # Safari
 #--------------------------------------
 # Enable the Develop menu and the Web Inspector in Safari
@@ -229,7 +217,7 @@ defaults write com.apple.Safari IncludeDevelopMenu -bool true
 # Show the full URL in the address bar (note: this still hides the scheme)
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
 
-# Set Safari’s home page to `about:blank` for faster loading
+# Set Safari's home page to `about:blank` for faster loading
 defaults write com.apple.Safari HomePage -string "about:blank"
 
 # Disable auto-playing video
@@ -239,7 +227,7 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
 
 # Download path
-defaults write com.apple.Safari DownloadsPath -string ~"/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
+defaults write com.apple.Safari DownloadsPath -string "$WD"
 
 # Activity Monitor
 #------------------
@@ -257,9 +245,3 @@ defaults write com.apple.TextEdit RichText -int 0
 # Open and save files as UTF-8 in TextEdit
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
-
-# Energy Saver Settings
-sudo pmset displaysleep 30 # minutes till display sleep
-sudo pmset sleep 1 # will sleep when displays are off
-sudo pmset autorestart 0 # restart on power failure
-sudo pmset womp 1 # Wake for network access
