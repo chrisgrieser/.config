@@ -7,7 +7,7 @@ require("lua.utils")
 -- - Highlights PDF appearance
 -- - Sketchybar
 function toggleDarkMode()
-	local prevApp = frontApp()
+	local prevApp = frontAppName()
 
 	-- neovim & highlights
 	if isDarkMode() then

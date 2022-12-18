@@ -45,7 +45,7 @@ keymap({ "o", "x" }, "im", "iW")
 -- QUICK TEXTOBJ OPERATIONS
 keymap("n", "C", '"_C')
 keymap("n", "<Space>", '"_ciw') -- change word
-keymap("n", "<C-M-Space>", '"_daW') -- HACK since <S-Space> not fully supported, requires karabiner remapping it
+keymap("n", "<C-M-Space>", '"_daw') -- HACK since <S-Space> not fully supported, requires karabiner remapping it
 keymap("x", "<Space>", '"_c')
 
 --------------------------------------------------------------------------------

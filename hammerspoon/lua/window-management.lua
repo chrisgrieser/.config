@@ -138,7 +138,7 @@ end
 --------------------------------------------------------------------------------
 
 function twitterrificAction(type)
-	local previousApp = frontApp()
+	local previousApp = frontAppName()
 	openIfNotRunning("Twitterrific")
 	local twitterrific = app("Twitterrific")
 	twitterrific:activate() -- needs activation, cause sending to app in background doesn't work w/ cmd
@@ -165,7 +165,7 @@ end
 local function controlSpaceAction()
 	local currentWin = hs.window.focusedWindow()
 	local pos
-	if frontApp() == "Finder" or frontApp() == "Script Editor" then
+	if frontAppName() == "Finder" or frontAppName() == "Script Editor" then
 		pos = centered
 	elseif (isIMacAtHome() or isAtMother()) and not checkSize(currentWin, pseudoMaximized) then
 		pos = pseudoMaximized

@@ -41,15 +41,11 @@ end):start()
 ---automatically apply per-app auto-tiling of the windows of the app
 local function autoTile(windowFilter)
 	local wins = windowFilter:getWindows()
-	if #wins == 0 then
-		
-		if frontApp() == "Finder" then
-			app("Finder"):kill()
-		else 
-			app.frontmostApplication():hide()
-		end
+	local frontApp = app.frontmostApplication()
+	if #wins == 0 and frontApp:name() == "Finder" then
+		frontApp:kill() -- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 	elseif #wins == 1 then
-		if frontApp() == "Finder" then
+		if frontApp:name() == "Finder" then
 			moveResize(wins[1], centered)
 		else
 			moveResize(wins[1], baseLayout)
@@ -63,6 +59,8 @@ local function autoTile(windowFilter)
 		moveResize(wins[3], { h = 1, w = 0.33, x = 0.67, y = 0 })
 	end
 end
+
+local function bringAllToFront() app.frontmostApplication():selectMenuItem { "Window", "Bring All to Front" } end
 
 --------------------------------------------------------------------------------
 
@@ -117,27 +115,12 @@ wf_browser = wf.new("Brave Browser")
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(wf.windowCreated, function(newWin)
-		local browserWins = wf_browser:getWindows()
-		if #browserWins == 1 then
-			if isAtOffice() or isProjector() then
-				moveResize(newWin, maximized)
-			else
-				moveResize(newWin, pseudoMaximized)
-			end
-		elseif #browserWins == 2 then
-			moveResize(browserWins[1], leftHalf)
-			moveResize(browserWins[2], rightHalf)
-		end
-	end)
-	:subscribe(wf.windowDestroyed, function()
-		if #wf_browser:getWindows() == 1 then
-			local win = wf_browser:getWindows()[1]
-			moveResize(win, baseLayout)
-		end
-	end)
+	:subscribe(wf.windowCreated, function() autoTile(wf_browser) end)
+	:subscribe(wf.windowDestroyed, function() autoTile(wf_browser) end)
+	:subscribe(wf.windowFocused, bringAllToFront)
 
 -- Automatically hide Browser has when no window
+-- requires wider window-filter to not hide PiP windows etc
 wf_browser_all = wf.new("Brave Browser")
 	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
 	:subscribe(wf.windowDestroyed, function()
@@ -149,15 +132,7 @@ wf_browser_all = wf.new("Brave Browser")
 -- MIMESTREAM
 -- split when second window is opened
 -- change sizing back, when back to one window
-local function mailAutoLayout()
-	local wins = wf_mimestream:getWindows()
-	if #wins == 2 then
-		moveResize(wins[1], leftHalf)
-		moveResize(wins[2], rightHalf)
-	elseif #wins == 1 then
-		moveResize(wins[1], baseLayout)
-	end
-end
+
 wf_mimestream = wf.new("Mimestream")
 	:setOverrideFilter({
 		allowRoles = "AXStandardWindow",
@@ -174,9 +149,9 @@ wf_mimestream = wf.new("Mimestream")
 			"Software Update",
 		},
 	})
-	:subscribe(wf.windowCreated, mailAutoLayout)
-	:subscribe(wf.windowDestroyed, mailAutoLayout)
-	:subscribe(wf.windowFocused, function() app("Mimestream"):selectMenuItem { "Window", "Bring All to Front" } end)
+	:subscribe(wf.windowCreated, function() autoTile(wf_mimestream) end)
+	:subscribe(wf.windowDestroyed, function() autoTile(wf_mimestream) end)
+	:subscribe(wf.windowFocused, bringAllToFront)
 
 --------------------------------------------------------------------------------
 
@@ -230,13 +205,7 @@ wf_neovim = wf
 -- pseudomaximized window
 wf_alacritty = wf.new({ "alacritty", "Alacritty" })
 	:setOverrideFilter({ rejectTitles = { "^cheatsheet: " } })
-	:subscribe(wf.windowCreated, function(newWin)
-		if isAtOffice() or isProjector() then
-			moveResize(newWin, maximized)
-		else
-			moveResize(newWin, pseudoMaximized)
-		end
-	end)
+	:subscribe(wf.windowCreated, function(newWin) moveResize(newWin, baseLayout) end)
 
 -- ALACRITTY Man / cheat sheet leaader hotkey (for Karabiner)
 -- work around necessary, cause alacritty creates multiple instances, i.e.
@@ -257,34 +226,17 @@ end)
 --------------------------------------------------------------------------------
 
 -- FINDER
-local function finderAutoLayout()
-	local finderWins = wf_finder:getWindows()
-	if #finderWins == 0 then
-		app("Finder"):kill() -- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
-	elseif finderWins[1]:title() == "RomComs" then
-		moveResize(finderWins[1], maximized)
-	elseif #finderWins == 1 then
-		moveResize(finderWins[1], centered)
-	elseif #finderWins == 2 then
-		moveResize(finderWins[1], leftHalf)
-		moveResize(finderWins[2], rightHalf)
-	elseif #finderWins == 3 then
-		moveResize(finderWins[1], { h = 1, w = 0.33, x = 0, y = 0 })
-		moveResize(finderWins[2], { h = 1, w = 0.34, x = 0.33, y = 0 })
-		moveResize(finderWins[3], { h = 1, w = 0.33, x = 0.67, y = 0 })
-	end
-end
-
 wf_finder = wf.new("Finder")
 	:setOverrideFilter({
-		rejectTitles = { "^Move$", "^Bin$", "^Copy$", "^Finder Settings$", " Info$" },
+		-- "^$" excludes the Desktop, which has no window title
+		rejectTitles = { "^Move$", "^Bin$", "^Copy$", "^Finder Settings$", " Info$", "^$" },
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(wf.windowDestroyed, finderAutoLayout)
-	:subscribe(wf.windowCreated, finderAutoLayout)
+	:subscribe(wf.windowDestroyed, autoTile)
+	:subscribe(wf.windowCreated, autoTile)
 	:subscribe(wf.windowFocused, function()
-		app("Finder"):selectMenuItem { "Window", "Bring All to Front" }
+		bringAllToFront()
 		app("Finder"):selectMenuItem { "View", "Hide Sidebar" }
 		local verb = isProjector() and "Show" or "Hide"
 		app("Finder"):selectMenuItem { "View", verb .. " Toolbar" }
@@ -342,12 +294,7 @@ highlightsAppWatcher = aw.new(function(appName, eventType, appObject)
 	appObject:selectMenuItem { "Tools", "Color", "Yellow" }
 	appObject:selectMenuItem { "View", "Hide Toolbar" }
 
-	local hlWin = appObject:mainWindow()
-	if isAtOffice() then
-		moveResize(hlWin, maximized)
-	else
-		moveResize(hlWin, pseudoMaximized)
-	end
+	moveResize(appObject:mainWindow(), baseLayout)
 end):start()
 
 --------------------------------------------------------------------------------
