@@ -29,51 +29,60 @@ local function gitDotfileSync(arg)
 	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then return end
 	if not (screenIsUnlocked()) then return end -- prevent background sync when in office
 
-	gitDotfileSyncTask = hs.task.new(gitDotfileScript,
-		function(exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
-			stdErr = stdErr:gsub("\n", " –– ")
-			if exitCode ~= 0 then
-				local stdout = hs.execute("git status --short")
-				if not (stdout) then return end
-				local submodulesStillDirty = stdout:match(" m ")
-				if submodulesStillDirty then
-					local modules = stdout:gsub(".*/", "")
-					notify(dotfileIcon .. "⚠️️ dotfiles submodules still dirty\n\n" .. modules)
+	gitDotfileSyncTask = hs.task
+		.new(
+			gitDotfileScript,
+			function(exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
+				stdErr = stdErr:gsub("\n", " –– ")
+				if exitCode ~= 0 then
+					local stdout = hs.execute("git status --short")
+					if not stdout then return end
+					local submodulesStillDirty = stdout:match(" m ")
+					if submodulesStillDirty then
+						local modules = stdout:gsub(".*/", "")
+						notify(dotfileIcon .. "⚠️️ dotfiles submodules still dirty\n\n" .. modules)
+					else
+						notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
+					end
 				else
-					notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
+					print("Dotfile Sync successful.")
 				end
-			else
-				print("Dotfile Sync successful.")
-			end
-		end, {arg}):start()
+			end,
+			{ arg }
+		)
+		:start()
 end
 
 local function gitVaultSync()
 	if gitVaultSyncTask and gitVaultSyncTask:isRunning() then return end
 	if not (screenIsUnlocked()) then return end -- prevent background sync when in office
 
-	gitVaultSyncTask = hs.task.new(gitVaultScript, function(exitCode, _, stdErr)
-		stdErr = stdErr:gsub("\n", " –– ")
-		if exitCode ~= 0 then
-			notify(vaultIcon .. "⚠️️ vault " .. stdErr)
-		else
-			print("Vault Sync successful.")
-		end
-	end):start()
+	gitVaultSyncTask = hs.task
+		.new(gitVaultScript, function(exitCode, _, stdErr)
+			stdErr = stdErr:gsub("\n", " –– ")
+			if exitCode ~= 0 then
+				notify(vaultIcon .. "⚠️️ vault " .. stdErr)
+			else
+				print("Vault Sync successful.")
+			end
+		end)
+		:start()
 end
 
 local function gitPassSync()
 	if gitpassSync and gitpassSync:isRunning() then return end
 	if not (screenIsUnlocked()) then return end -- prevent background sync when in office
 
-	gitpassSync = hs.task.new(gitPassScript, function(exitCode, _, stdErr)
-		stdErr = stdErr:gsub("\n", " –– ")
-		if exitCode ~= 0 then
-			notify(passIcon .. "⚠️️ password-store " .. stdErr)
-		else
-			print("Password-Store Sync successful.")
-		end
-	end):start()
+	gitpassSync = hs.task
+		.new(gitPassScript, function(exitCode, _, stdErr)
+			stdErr = stdErr:gsub("\n", " –– ")
+			if exitCode ~= 0 then
+				notify(passIcon .. "⚠️️ password-store " .. stdErr)
+			else
+				print("Password-Store Sync successful.")
+			end
+		end)
+		:start()
 end
 
 ---sync all three git repos
@@ -90,9 +99,7 @@ end
 
 --------------------------------------------------------------------------------
 
-repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, function()
-	syncAllGitRepos("partial")
-end):start()
+repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, function() syncAllGitRepos("partial") end):start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
 uriScheme("sync-repos", function()
@@ -100,10 +107,11 @@ uriScheme("sync-repos", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
-
 -- update icons for sketchybar
 local function updateSketchybar()
-	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --trigger repo-files-update")
+	hs.execute(
+		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --trigger repo-files-update"
+	)
 end
 
 dotfilesWatcher = pw(dotfilesFolder, updateSketchybar):start()
@@ -112,32 +120,34 @@ passFileWatcher = pw(passwordStore, updateSketchybar):start()
 
 --------------------------------------------------------------------------------
 
-shutDownWatcher = caff.new(function(eventType)
-	if eventType == caff.screensDidSleep then
-		syncAllGitRepos("full")
-	end
-end):start()
+shutDownWatcher = caff
+	.new(function(eventType)
+		if eventType == caff.screensDidSleep then syncAllGitRepos("full") end
+	end)
+	:start()
 
 --------------------------------------------------------------------------------
 -- SYSTEM WAKE/START
-wakeWatcher = caff.new(function(eventType)
-	if isAtOffice() and eventType == caff.screensDidUnlock then
-		syncAllGitRepos("full")
-		officeModeLayout()
-	elseif not (isAtOffice()) and (eventType == caff.screensDidWake or eventType == caff.systemDidWake) then
-		runWithDelays(1, function()
-			if isProjector() then
-				setDarkmode(true)
-				movieModeLayout()
-			else
-				syncAllGitRepos("full")
-				local toDark = betweenTime(7, 19)
-				homeModeLayout() -- should run after git sync, to avoid conflicts
-				setDarkmode(toDark)
-			end
-		end)
-	end
-end):start()
+wakeWatcher = caff
+	.new(function(eventType)
+		if isAtOffice() and eventType == caff.screensDidUnlock then
+			syncAllGitRepos("full")
+			officeModeLayout()
+		elseif not (isAtOffice()) and (eventType == caff.screensDidWake or eventType == caff.systemDidWake) then
+			runWithDelays(1, function()
+				if isProjector() then
+					setDarkmode(true)
+					movieModeLayout()
+				else
+					syncAllGitRepos("full")
+					local toDark = betweenTime(7, 19)
+					homeModeLayout() -- should run after git sync, to avoid conflicts
+					setDarkmode(toDark)
+				end
+			end)
+		end
+	end)
+	:start()
 
 function systemStart()
 	-- prevent commit spam when updating hammerspoon config regularly
@@ -145,7 +155,7 @@ function systemStart()
 	if isReloading then
 		hs.execute("rm ./is-reloading")
 		-- use neovim automation to display the notification in neovim
-		hs.execute [[echo 'vim.notify("✅ Hammerspoon reloaded. ")' > /tmp/nvim-automation]]
+		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded. ")' > /tmp/nvim-automation]])
 	else
 		if app("Finder") then app("Finder"):kill() end
 		notify("Hammerspoon started.")
@@ -158,13 +168,15 @@ end
 -- CRONJOBS AT HOME
 
 biweeklyTimer = timer("02:00", "02d", function()
-	applescript [[
+	applescript([[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
 			run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles" with argument "no sound"
 		end tell
-	]]
-	hs.execute('cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Browser-Bookmarks.bkp"')
+	]])
+	hs.execute(
+		'cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Browser-Bookmarks.bkp"'
+	)
 	hs.loadSpoon("EmmyLua") -- so it runs not as often
 end, true)
 
@@ -188,7 +200,8 @@ local function sleepYouTube()
 	killIfRunning("YouTube")
 	killIfRunning("Twitch")
 	-- no need to quit IINA, since it autoquits on finishing playback
-	applescript [[
+	-- no need to quit Netflix, since it autostops
+	applescript([[
 		tell application "Brave Browser"
 			if ((count of window) is not 0)
 				if ((count of tab of front window) is not 0)
@@ -197,7 +210,7 @@ local function sleepYouTube()
 				end if
 			end if
 		end tell
-	]]
+	]])
 end
 
 sleepTimer0 = timer("02:00", "01d", sleepYouTube, true)
