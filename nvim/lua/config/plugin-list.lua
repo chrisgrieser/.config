@@ -55,17 +55,6 @@ function M.PluginList(use)
 		end
 	}
 
-	use {"abecodes/tabout.nvim", -- i_<Tab> to move out of node
-		after = "nvim-cmp",
-		requires = "nvim-treesitter/nvim-treesitter",
-		config = function()
-			require("tabout").setup {
-				act_as_shift_tab = true,
-				ignore_beginning = true,
-			}
-		end,
-	}
-
 	-- LSP
 	use {"neovim/nvim-lspconfig", requires = {
 		"williamboman/mason-lspconfig.nvim",
@@ -115,7 +104,6 @@ function M.PluginList(use)
 	use {"jackMort/ChatGPT.nvim", requires = {
 		"MunifTanjim/nui.nvim",
 		"nvim-lua/plenary.nvim",
-		"nvim-telescope/telescope.nvim"
 	}}
 
 	-- Appearance
@@ -198,12 +186,8 @@ function M.PluginList(use)
 	use {"bennypowers/nvim-regexplainer",
 		ft = {"javascript", "typescript"},
 		requires = {"nvim-treesitter/nvim-treesitter", "MunifTanjim/nui.nvim"},
-		config = function()
-			require("regexplainer").setup {
-				auto = true, -- automatically show the explainer when the cursor enters a regexp
-				mappings = {toggle = nil},
-			}
-		end
+		-- INFO: config set in javascript/typescript ftplugin, since not working
+		-- from here
 	}
 
 end

@@ -27,15 +27,9 @@ end
 
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS (also applies to null-ls)
-keymap("n", "ge", function()
-	vim.diagnostic.goto_next { wrap = true, float = false }
-end, { silent = true })
-keymap("n", "gE", function()
-	vim.diagnostic.goto_prev { wrap = true, float = false }
-end, { silent = true })
-keymap("n", "<leader>d", function()
-	vim.diagnostic.open_float { focusable = false }
-end)
+keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = false } end, { silent = true })
+keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = false } end, { silent = true })
+keymap("n", "<leader>d", function() vim.diagnostic.open_float { focusable = false } end)
 
 -- toggle diagnostics
 local diagnosticToggled = true
@@ -63,17 +57,13 @@ end
 
 vim.diagnostic.config {
 	virtual_text = {
-		format = function(diagnostic)
-			return diagnosticFormat(diagnostic, "virtual_text")
-		end,
+		format = function(diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
 		severity = { min = vim.diagnostic.severity.WARN },
 	},
 	float = {
 		border = borderStyle,
 		max_width = 50,
-		format = function(diagnostic)
-			return diagnosticFormat(diagnostic, "float")
-		end,
+		format = function(diagnostic) return diagnosticFormat(diagnostic, "float") end,
 	},
 }
 
@@ -159,19 +149,21 @@ autocmd("LspAttach", {
 		keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
 		keymap({ "n", "x", "i" }, "<D-s>", function()
-			if bo.filetype == "javascript" or bo.filetype == "typescript" then
-				vim.lsp.buf.format { async = false }
+			local ft = bo.filetype
+			local lspformat = vim.lsp.buf.format
+			if ft == "javascript" or ft == "typescript" then
+				lspformat { async = false } -- prettier
 				cmd.update { bang = true }
 				cmd.EslintFixAll() -- eslint-lsp
-			elseif bo.filetype == "applescript" then
+			elseif ft == "applescript" then
 				cmd.mkview { bang = true }
-				cmd("%normal!gg=G") -- poor man's formatting…
-				vim.lsp.buf.format { async = false } -- null-ls-codespell
+				cmd.normal { "gg=G", bang = true } -- poor man's formatting
+				lspformat { async = false } -- still used for null-ls-codespell
 				cmd.loadview()
 			else
-				vim.lsp.buf.format { async = true }
+				lspformat { async = true }
 			end
-			cmd.write { bang = true }
+			cmd.write()
 		end, bufopts)
 
 		if bo.filetype ~= "css" then -- don't override navigation marker search for css files

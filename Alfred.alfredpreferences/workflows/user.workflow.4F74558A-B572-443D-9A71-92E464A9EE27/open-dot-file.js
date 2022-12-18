@@ -40,7 +40,8 @@ const workArray = app.doShellScript(
 	-E "*.png" \
 	-E "Fonts/*" \
 	-E ".DS_Store" \
-	-E ".git/"',
+	-E ".git/" \
+	-E ".git"',
 ).split("\r");
 /* eslint-enable no-multi-str, quotes */
 

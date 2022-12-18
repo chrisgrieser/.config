@@ -37,6 +37,8 @@ null_ls.setup {
 			disabled_filetypes = { "css", "bib" },
 			extra_args = { "--ignore-words", dotfilesFolder .. "/codespell/codespell-ignore.txt" },
 		},
+		builtins.formatting.trim_newlines, -- trim trailing whitespace & newlines
+		builtins.formatting.trim_whitespace,
 
 		-- SHELL
 		builtins.hover.printenv, -- show value of environment variable on hover command

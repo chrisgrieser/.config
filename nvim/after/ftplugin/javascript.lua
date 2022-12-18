@@ -14,3 +14,11 @@ keymap(
 	function() require("various-textobjs").jsRegexTextobj(true) end,
 	{ desc = "inner regex textobj" }
 )
+
+require("regexplainer").setup {
+	auto = true, -- automatically show the explainer when the cursor enters a regexp
+	mappings = { toggle = nil },
+	popup = {
+		border = { style = borderStyle },
+	},
+}

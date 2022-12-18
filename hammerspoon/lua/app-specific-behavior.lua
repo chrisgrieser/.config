@@ -244,8 +244,7 @@ wf_finder = wf.new("Finder")
 	:subscribe(wf.windowFocused, function()
 		bringAllToFront()
 		app("Finder"):selectMenuItem { "View", "Hide Sidebar" }
-		local verb = isProjector() and "Show" or "Hide"
-		app("Finder"):selectMenuItem { "View", verb .. " Toolbar" }
+		app("Finder"):selectMenuItem { "View", "Show Toolbar" } -- hiding toolbar leads any dir-change to always open a new window
 	end)
 
 -- quit Finder if it was started as a helper (e.g., JXA), but has no window
@@ -306,7 +305,6 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- DRAFTS: Hide Toolbar & set proper workspace
-
 draftsWatcher = aw.new(function(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
 
