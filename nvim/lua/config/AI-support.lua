@@ -23,6 +23,7 @@ autocmd("BufRead", {
 -- ChatGPT
 require("config/private-settings") -- API key symlinked and kept out of the dotfile repo
 keymap("n", "ga", ":ChatGPT<CR>", { desc = "ChatGPT Prompt" })
+keymap("x", "ga", ":ChatGPTEditWithInstructions<CR>", { desc = "ChatGPT Edit with Instruction" })
 require("chatgpt").setup {
 	welcome_message = "",
 	question_sign = "",
@@ -40,14 +41,5 @@ require("chatgpt").setup {
 	chat_input = {
 		prompt = " > ",
 		border = { style = borderStyle },
-	},
-	openai_params = {
-		model = "text-davinci-003",
-		frequency_penalty = 0,
-		presence_penalty = 0,
-		max_tokens = 300,
-		temperature = 0,
-		top_p = 1,
-		n = 1,
 	},
 }
