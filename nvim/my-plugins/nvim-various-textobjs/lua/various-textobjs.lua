@@ -6,6 +6,9 @@ local bo = vim.bo
 local fn = vim.fn
 local opt = vim.opt
 
+local M = {}
+--------------------------------------------------------------------------------
+
 ---@return boolean
 local function isVisualMode()
 	local modeWithV = fn.mode():find("v")
@@ -18,10 +21,22 @@ local function isVisualLineMode()
 	return (modeWithV ~= nil and modeWithV ~= false)
 end
 
-local M = {}
+---sets the selection for the textobj (characterwise)
+---@param line integer
+---@param startCol integer
+---@param endCol integer
+local function setSelection(line, startCol, endCol)
+	setCursor(0, { line, startCol })
+	if isVisualMode() then
+		normal { "o", bang = true }
+	else
+		normal { "v", bang = true }
+	end
+	setCursor(0, { line, endCol })
+end
 
 --------------------------------------------------------------------------------
-
+-- TODO setup function with some configs
 local lookForwardLines = 5
 
 --------------------------------------------------------------------------------
@@ -35,18 +50,22 @@ function M.subword()
 	opt.iskeyword = iskeywBefore
 end
 
----near end of the line
+---near end of the line, ignoring trailing whitespace (relevant for markdown)
 function M.nearEoL()
-	if not isVisualMode() then normal { "v", bang = true } end 
-	normal { "$h", bang = true }
+	if not isVisualMode() then normal { "v", bang = true } end
+	normal { "$", bang = true }
+
 	-- loop ensure trailing whitespace is not counted
+	---@diagnostic disable-next-line: assign-type-mismatch, param-type-mismatch
+	local lineContent = fn.getline(".") ---@type string
+	local col = fn.col("$")
 	repeat
 		normal { "h", bang = true }
-		local _, col = unpack(getCursor(0))
-		---@diagnostic disable-next-line: assign-type-mismatch, param-type-mismatch
-		local lineContent = fn.getline(".") ---@type string
+		col = col - 1
 		local lastChar = lineContent:sub(col, col)
-	until lastChar ~= " "
+	until not lastChar:find("%s") or col == 1
+
+	normal { "h", bang = true }
 end
 
 ---rest of paragraph (linewise)
@@ -96,7 +115,13 @@ end
 
 --------------------------------------------------------------------------------
 
--- VALUE TEXT OBJECT
+---DIAGNOSTIC TEXT OBJECT, similar to https://github.com/andrewferrier/textobj-diagnostic.nvim
+function M.diagnosticTextobj()
+	local allDiagnostics = vim.diagnostic.get(0)
+end
+--------------------------------------------------------------------------------
+
+---VALUE TEXT OBJECT
 ---@param inner boolean
 function M.valueTextObj(inner)
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
@@ -128,14 +153,7 @@ function M.valueTextObj(inner)
 	local lastChar = lineContent:sub(ending + 1, ending + 1)
 	if inner and lastChar:find("[,;]") then valueEnd = valueEnd - 1 end
 
-	-- set selection
-	setCursor(0, { curRow, start })
-	if isVisualMode() then
-		cmd.normal { "o", bang = true }
-	else
-		cmd.normal { "v", bang = true }
-	end
-	setCursor(0, { curRow, ending })
+	setSelection(curRow, start, ending)
 end
 
 --------------------------------------------------------------------------------
@@ -174,13 +192,7 @@ function M.mdlinkTextobj(inner)
 		ending = ending - 1
 	end
 
-	setCursor(0, { curRow, start })
-	if isVisualMode() then
-		normal { "o", bang = true }
-	else
-		normal { "v", bang = true }
-	end
-	setCursor(0, { curRow, ending })
+	setSelection(curRow, start, ending)
 end
 
 ---JS Regex
@@ -214,13 +226,7 @@ function M.jsRegexTextobj(inner)
 		start = start - 1
 	end
 
-	setCursor(0, { curRow, start })
-	if isVisualMode() then
-		normal { "o", bang = true }
-	else
-		normal { "v", bang = true }
-	end
-	setCursor(0, { curRow, ending })
+	setSelection(curRow, start, ending)
 end
 
 ---CSS Selector Textobj
@@ -250,13 +256,7 @@ function M.cssSelectorTextobj(inner)
 	ending = ending - 1
 	if not inner then start = start - 1 end
 
-	setCursor(0, { curRow, start })
-	if isVisualMode() then
-		normal { "o", bang = true }
-	else
-		normal { "v", bang = true }
-	end
-	setCursor(0, { curRow, ending })
+	setSelection(curRow, start, ending)
 end
 
 --------------------------------------------------------------------------------

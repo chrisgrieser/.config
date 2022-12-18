@@ -213,7 +213,7 @@ keymap("x", "R", qol.duplicateSelection)
 keymap({ "n", "x" }, "U", "<C-r>") -- redo
 keymap("n", "<C-u>", qol.undoDuration)
 keymap("n", "<leader>u", function() require("telescope-undo")() end)
-keymap("i", "<C-g>u<Space>", "<Space>") -- extra undo point for every space
+keymap("i", "<Space>", "<Space><C-g>u") -- extra undo point for every space
 
 -- Logging & Debugging
 keymap({ "n", "x" }, "<leader>ll", qol.quicklog)
