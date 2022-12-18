@@ -44,7 +44,7 @@ end
 ---rest of paragraph (linewise)
 function M.restOfParagraph()
 	if not isVisualLineMode() then normal { "V", bang = true } end
-	normal { "}", bang = true }
+	normal { "}k", bang = true }
 end
 
 --------------------------------------------------------------------------------
@@ -93,12 +93,23 @@ end
 function M.valueTextObj(inner)
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
+	local curRow = fn.line(".")
+	local i = -1
+	local valuePattern = "[=:] ?"
 
-	local _, valueStart = lineContent:find("[=:] ?")
-	if not valueStart then
-		vim.notify("No value found in current line.", logWarn)
-		return
+
+	while not hasValue do
+		i = i + 1
+		---@diagnostic disable-next-line: assign-type-mismatch
+		lineContent = fn.getline(curRow + i) ---@type string
+		hasValue = lineContent:find(valuePattern)
+		if i > lookForwardLines then
+			setCursor(0, { curRow, curCol }) -- restore pevious mouse location
+			return
+		end
 	end
+	curRow = curRow + i
+	local _, valueStart = lineContent:find(valuePattern)
 
 	-- valueEnd either comment or end of line
 	local comStrPattern = bo
@@ -113,14 +124,13 @@ function M.valueTextObj(inner)
 	if inner and lastChar:find("[,;]") then valueEnd = valueEnd - 1 end
 
 	-- set selection
-	local currentRow = fn.line(".")
-	setCursor(0, { currentRow, valueStart })
+	setCursor(0, { curRow, valueStart })
 	if isVisualMode() then
 		cmd.normal { "o", bang = true }
 	else
 		cmd.normal { "v", bang = true }
 	end
-	setCursor(0, { currentRow, valueEnd })
+	setCursor(0, { curRow, valueEnd })
 end
 
 --------------------------------------------------------------------------------
