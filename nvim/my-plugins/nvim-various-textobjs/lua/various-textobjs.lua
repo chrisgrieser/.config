@@ -5,7 +5,6 @@ local cmd = vim.cmd
 local bo = vim.bo
 local fn = vim.fn
 local opt = vim.opt
-local logWarn = vim.log.levels.WARN
 
 ---@return boolean
 local function isVisualMode()
@@ -24,6 +23,7 @@ local M = {}
 --------------------------------------------------------------------------------
 
 local lookForwardLines = 5
+
 --------------------------------------------------------------------------------
 
 ---Subword (word with "-_" as delimiters)
@@ -94,43 +94,40 @@ function M.valueTextObj(inner)
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
 	local curRow = fn.line(".")
-	local i = -1
+	local i = 0
 	local valuePattern = "[=:] ?"
 
-
+	local hasValue = lineContent:find(valuePattern)
 	while not hasValue do
 		i = i + 1
 		---@diagnostic disable-next-line: assign-type-mismatch
 		lineContent = fn.getline(curRow + i) ---@type string
 		hasValue = lineContent:find(valuePattern)
-		if i > lookForwardLines then
-			setCursor(0, { curRow, curCol }) -- restore pevious mouse location
-			return
-		end
+		if i > lookForwardLines then return end
 	end
 	curRow = curRow + i
-	local _, valueStart = lineContent:find(valuePattern)
+	local _, start = lineContent:find(valuePattern)
 
 	-- valueEnd either comment or end of line
 	local comStrPattern = bo
 		.commentstring
 		:gsub(" ?%%s.*", "") -- remove placeholder and backside of commentstring
 		:gsub("(.)", "%%%1") -- escape commentstring so it's a valid lua pattern
-	local valueEnd, _ = lineContent:find(".. ?" .. comStrPattern)
+	local ending, _ = lineContent:find(".. ?" .. comStrPattern)
 	if not valueEnd or comStrPattern == "" then valueEnd = #lineContent - 1 end
 
 	-- inner value = without trailing comma/semicolon
-	local lastChar = lineContent:sub(valueEnd + 1, valueEnd + 1)
+	local lastChar = lineContent:sub(ending + 1, ending + 1)
 	if inner and lastChar:find("[,;]") then valueEnd = valueEnd - 1 end
 
 	-- set selection
-	setCursor(0, { curRow, valueStart })
+	setCursor(0, { curRow, start })
 	if isVisualMode() then
 		cmd.normal { "o", bang = true }
 	else
 		cmd.normal { "v", bang = true }
 	end
-	setCursor(0, { curRow, valueEnd })
+	setCursor(0, { curRow, ending })
 end
 
 --------------------------------------------------------------------------------
@@ -141,23 +138,21 @@ end
 function M.mdlinkTextobj(inner)
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
-	local curRow, curCol = unpack(getCursor(0))
-	local start, ending, barelink, hasLink
-	local i = -1
-
 	normal { "F[", bang = true } -- go to beginning of link so it can be found when standing on it
+	local curRow, curCol = unpack(getCursor(0))
+	local start, ending, barelink
+	local i = 0
 
 	-- determine next row with link
 	local mdLinkPattern = "(%b[])%b()"
+	local hasLink = lineContent:find(mdLinkPattern, curCol)
 	while not hasLink do
 		i = i + 1
 		---@diagnostic disable-next-line: assign-type-mismatch
 		lineContent = fn.getline(curRow + i) ---@type string
-		hasLink = lineContent:find(mdLinkPattern)
-		if i > lookForwardLines then
-			setCursor(0, { curRow, curCol }) -- restore pevious mouse location
-			return
-		end
+		hasLink = lineContent:find(mdLinkPattern, curCol)
+		curCol = 1 -- after the current row, pattern can occur everywhere in the line
+		if i > lookForwardLines then return end
 	end
 	curRow = curRow + i
 
@@ -180,27 +175,66 @@ function M.mdlinkTextobj(inner)
 	setCursor(0, { curRow, ending })
 end
 
+---JS Regex
+---@param inner boolean inner regex
+function M.jsRegexTextobj(inner)
+	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
+	local lineContent = fn.getline(".") ---@type string
+	normal { "F/", bang = true } -- go to beginning of regex
+	local curRow, curCol = unpack(getCursor(0))
+	local i = 0
+
+	-- determine next row with selector
+	local pattern = "%b//"
+	local hasPattern = lineContent:find(pattern)
+	while not hasPattern do
+		i = i + 1
+		---@diagnostic disable-next-line: assign-type-mismatch
+		lineContent = fn.getline(curRow + i) ---@type string
+		hasPattern = lineContent:find(pattern)
+		curCol = 1 -- after the current row, pattern can occur everywhere in the line
+		if i > lookForwardLines then return end
+	end
+	curRow = curRow + i
+
+	-- determine location in row
+	local start, ending = lineContent:find(pattern, curCol)
+	if inner then
+		ending = ending - 2
+		start = start + 1
+	else
+		ending = ending - 1
+		start = start - 1
+	end
+
+	setCursor(0, { curRow, start })
+	if isVisualMode() then
+		normal { "o", bang = true }
+	else
+		normal { "v", bang = true }
+	end
+	setCursor(0, { curRow, ending })
+end
+
 ---CSS Selector Textobj
 ---@param inner boolean inner selector
 function M.cssSelectorTextobj(inner)
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
-	local curRow, curCol = unpack(getCursor(0))
-	local i = -1
-
 	normal { "F.", bang = true } -- go to beginning of selector
+	local curRow, curCol = unpack(getCursor(0))
+	local i = 0
 
 	-- determine next row with selector
 	local selectorPattern = "%.[%w-_]+"
+	local hasSelector = lineContent:find(selectorPattern)
 	while not hasSelector do
 		i = i + 1
 		---@diagnostic disable-next-line: assign-type-mismatch
 		lineContent = fn.getline(curRow + i) ---@type string
 		hasSelector = lineContent:find(selectorPattern)
-		if i > lookForwardLines then
-			setCursor(0, { curRow, curCol }) -- restore pevious mouse location
-			return
-		end
+		curCol = 1 -- after the current row, pattern can occur everywhere in the line
+		if i > lookForwardLines then return end
 	end
 	curRow = curRow + i
 
