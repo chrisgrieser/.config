@@ -187,7 +187,6 @@ local function sleepYouTube()
 	if minutesIdle < 30 then return end
 	killIfRunning("YouTube")
 	killIfRunning("Twitch")
-	killIfRunning("Netflix")
 	-- no need to quit IINA, since it autoquits on finishing playback
 	applescript [[
 		tell application "Brave Browser"
