@@ -37,8 +37,16 @@ end
 
 ---near end of the line
 function M.nearEoL()
-	if not isVisualMode() then normal { "v", bang = true } end
-	normal { "$hh", bang = true }
+	if not isVisualMode() then normal { "v", bang = true } end 
+	normal { "$h", bang = true }
+	-- loop ensure trailing whitespace is not counted
+	repeat
+		normal { "h", bang = true }
+		local _, col = unpack(getCursor(0))
+		---@diagnostic disable-next-line: assign-type-mismatch, param-type-mismatch
+		local lineContent = fn.getline(".") ---@type string
+		local lastChar = lineContent:sub(col, col)
+	until lastChar ~= " "
 end
 
 ---rest of paragraph (linewise)
