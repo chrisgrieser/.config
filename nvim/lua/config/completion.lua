@@ -149,7 +149,7 @@ cmp.setup.filetype("toml", {
 
 -- css
 cmp.setup.filetype("css", {
-	sources = cmp.config.sources { lsp, snippets },
+	sources = cmp.config.sources { snippets, lsp, treesitter },
 })
 
 -- markdown
