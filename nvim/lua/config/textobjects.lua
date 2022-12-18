@@ -20,6 +20,7 @@ local varTextobjs = require("various-textobjs")
 -- FILE-TYPE-SPECIFIC TEXT OBJECTS
 -- al: a [l]ink (markdown, custom)
 -- as: a [s]elector (css, custom)
+-- aR: a [R]egex (js/ts, custom)
 
 -- BUILTIN ONES KEPT
 -- ab: bracket

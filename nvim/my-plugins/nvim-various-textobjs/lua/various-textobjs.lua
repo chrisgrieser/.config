@@ -185,7 +185,7 @@ function M.jsRegexTextobj(inner)
 	local i = 0
 
 	-- determine next row with selector
-	local pattern = "%b//"
+	local pattern = [[/.-[^\]/]] -- to not match escaped slash in regex
 	local hasPattern = lineContent:find(pattern)
 	while not hasPattern do
 		i = i + 1
@@ -201,7 +201,6 @@ function M.jsRegexTextobj(inner)
 	local start, ending = lineContent:find(pattern, curCol)
 	if inner then
 		ending = ending - 2
-		start = start + 1
 	else
 		ending = ending - 1
 		start = start - 1
