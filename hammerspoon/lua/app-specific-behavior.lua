@@ -38,6 +38,32 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 	end
 end):start()
 
+---automatically apply per-app auto-tiling of the windows of the app
+local function autoTile(windowFilter)
+	local wins = windowFilter:getWindows()
+	if #wins == 0 then
+		
+		if frontApp() == "Finder" then
+			app("Finder"):kill()
+		else 
+			app.frontmostApplication():hide()
+		end
+	elseif #wins == 1 then
+		if frontApp() == "Finder" then
+			moveResize(wins[1], centered)
+		else
+			moveResize(wins[1], baseLayout)
+		end
+	elseif #wins == 2 then
+		moveResize(wins[1], leftHalf)
+		moveResize(wins[2], rightHalf)
+	elseif #wins == 3 then
+		moveResize(wins[1], { h = 1, w = 0.33, x = 0, y = 0 })
+		moveResize(wins[2], { h = 1, w = 0.34, x = 0.33, y = 0 })
+		moveResize(wins[3], { h = 1, w = 0.33, x = 0.67, y = 0 })
+	end
+end
+
 --------------------------------------------------------------------------------
 
 -- PIXELMATOR
@@ -78,8 +104,7 @@ spotifyAppWatcher = aw.new(function(appName, eventType)
 			spotifyTUI("play")
 		end
 	end
-end)
-if not (isAtOffice()) then spotifyAppWatcher:start() end
+end):start()
 
 --------------------------------------------------------------------------------
 
@@ -110,13 +135,6 @@ wf_browser = wf.new("Brave Browser")
 			local win = wf_browser:getWindows()[1]
 			moveResize(win, baseLayout)
 		end
-	end)
-	:subscribe(wf.windowTitleChanged, function(win)
-		local hasSound = win:title():find("Audio playing")
-		-- not working properly when the tab stays the same, but at least works
-		-- with tab change. Since background tabs do have "audio playing" as
-		-- title, there is no good trigger for starting again.
-		if hasSound then spotifyTUI("pause") end
 	end)
 
 -- Automatically hide Browser has when no window
