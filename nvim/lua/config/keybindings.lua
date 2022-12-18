@@ -239,17 +239,7 @@ keymap({"n", "x"}, "<leader>m", "ddpkJ") -- [m]erge line down
 keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
 
 -- TreeSJ plugin + Splitjoin-Fallback
-keymap("n", "<leader>s", function()
-	cmd [[TSJToggle]]
-	if bo.filetype == "lua" then
-		cmd.mkview() -- HACK to not mess up lua folds
-		vim.lsp.buf.format {async = false} -- not async to avoid race condition
-		cmd [[noautocmd write! | edit %]] -- reload, no autocmd to not trigger rememberFolds augroup, with mkview (of the now non-existing folds) on bufleave
-		cmd.loadview()
-	else
-		vim.lsp.buf.format {async = true} -- HACK: run formatter as workaround for https://github.com/Wansmer/treesj/issues/25
-	end
-end)
+keymap("n", "<leader>s", cmd.TSJToggle)
 
 require("treesj").setup {use_default_keymaps = false}
 augroup("splitjoinFallback", {}) -- HACK: https://github.com/Wansmer/treesj/discussions/19
