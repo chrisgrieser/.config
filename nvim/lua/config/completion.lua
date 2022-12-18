@@ -76,7 +76,7 @@ local source_icons = {
 	cmdline = "",
 	cmdline_history = "",
 	path = "",
-	omni = "",
+	omni = "", -- since only used for folders right now
 }
 
 --------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ cmp.setup {
 			if cmp.visible() then
 				cmp.select_next_item()
 			else
-				fallback() -- normal mapping, e.g. tabout plugin
+				fallback()
 			end
 		end, { "i", "s" }),
 		["<S-Tab>"] = cmp.mapping(function(fallback)
@@ -149,7 +149,11 @@ cmp.setup.filetype("toml", {
 
 -- css
 cmp.setup.filetype("css", {
-	sources = cmp.config.sources { snippets, lsp, treesitter },
+	sources = cmp.config.sources {
+		snippets,
+		lsp,
+		treesitter,
+	},
 })
 
 -- markdown

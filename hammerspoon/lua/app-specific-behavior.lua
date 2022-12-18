@@ -191,11 +191,8 @@ wf_neovim = wf
 	.new({ "neovide", "Neovide" })
 	:subscribe(wf.windowCreated, function(newWin)
 		runWithDelays({ 0.2, 0.4, 0.6, 0.8 }, function()
-			if isAtOffice() or isProjector() then
-				moveResize(newWin, maximized)
-			else
-				moveResize(newWin, pseudoMaximized)
-			end
+			if isProjector() then return end -- has it's own layouting already
+			moveResize(newWin, baseLayout)
 		end)
 	end)
 	-- bugfix for: https://github.com/neovide/neovide/issues/1595
@@ -211,7 +208,10 @@ wf_neovim = wf
 -- pseudomaximized window
 wf_alacritty = wf.new({ "alacritty", "Alacritty" })
 	:setOverrideFilter({ rejectTitles = { "^cheatsheet: " } })
-	:subscribe(wf.windowCreated, function(newWin) moveResize(newWin, baseLayout) end)
+	:subscribe(wf.windowCreated, function(newWin)
+		if isProjector() then return end -- has it's own layouting already
+		moveResize(newWin, baseLayout)
+	end)
 
 -- ALACRITTY Man / cheat sheet leaader hotkey (for Karabiner)
 -- work around necessary, cause alacritty creates multiple instances, i.e.
@@ -239,8 +239,8 @@ wf_finder = wf.new("Finder")
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(wf.windowCreated, function () autoTile(wf_finder) end)
-	:subscribe(wf.windowDestroyed, function () autoTile(wf_finder) end)
+	:subscribe(wf.windowCreated, function() autoTile(wf_finder) end)
+	:subscribe(wf.windowDestroyed, function() autoTile(wf_finder) end)
 	:subscribe(wf.windowFocused, function()
 		bringAllToFront()
 		app("Finder"):selectMenuItem { "View", "Hide Sidebar" }
@@ -366,7 +366,7 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- SHOTTR
--- Auto-select Arrow
+-- Auto-select Arrow-Tool
 wf_shottr = wf.new("Shottr"):subscribe(wf.windowCreated, function(newWindow)
 	if newWindow:title() == "Preferences" then return end
 	runWithDelays(0.1, function() keystroke({}, "a") end)

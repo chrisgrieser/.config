@@ -19,6 +19,7 @@ require("telescope").setup {
 			"packer%-snapshot_", -- packer
 			"%.DS_Store", -- Mac system file
 			"%.git/",
+			"%.git", -- submodules
 			"%.spl", -- vim spell files
 			"%.log",
 			"%[No Name%]", -- new files / sometimes folders (netrw)
@@ -28,7 +29,7 @@ require("telescope").setup {
 			"lib/", -- python
 			"%.png",
 			"%.zip",
-			"%.pxd",
+			"%.pxd", -- Pixelmator images
 			"%.spoon", -- Hammerspoon
 			"%.plist", -- Alfred Config Data
 			"%.string",
