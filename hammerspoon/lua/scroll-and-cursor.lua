@@ -28,18 +28,18 @@ end
 
 
 local function scrollDown ()
-	if frontApp():lower() == "alacritty" or frontApp() == "Terminal" then
+	if frontAppName():lower() == "alacritty" or frontAppName() == "Terminal" then
 		keystroke ({"shift"}, "pagedown")
-	elseif frontApp() == "Highlights" then
+	elseif frontAppName() == "Highlights" then
 		highlightsAppScroll(-highlightsScrollAmount)
 	else
 		keystroke ({}, "pagedown")
 	end
 end
 local function scrollUp ()
-	if frontApp():lower() == "alacritty" or frontApp() == "Terminal" then
+	if frontAppName():lower() == "alacritty" or frontAppName() == "Terminal" then
 		keystroke ({"shift"}, "pageup")
-	elseif frontApp() == "Highlights" then
+	elseif frontAppName() == "Highlights" then
 		highlightsAppScroll(highlightsScrollAmount)
 	else
 		keystroke ({}, "pageup")

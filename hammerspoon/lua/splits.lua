@@ -7,7 +7,7 @@ local function runningApps()
 	local appsArr = {}
 	for i = 1, #wins do
 		local appName = wins[i]:application():name()
-		local isExcludedApp = appName == frontApp() or appName == "Hammerspoon" or appName == "Twitterrific" or
+		local isExcludedApp = appName == frontAppName() or appName == "Hammerspoon" or appName == "Twitterrific" or
 			appName == "Notification Centre"
 		if not (isExcludedApp) then
 			table.insert(appsArr, {text = appName})
@@ -29,7 +29,7 @@ local function startSplit()
 		:choices(apps)
 		:rows(#apps - 2)-- for whatever reason, the rows parameter is off by 3?!
 		:width(30)
-		:placeholderText("Split " .. frontApp() .. " with...")
+		:placeholderText("Split " .. frontAppName() .. " with...")
 		:show()
 end
 

@@ -102,7 +102,7 @@ end
 
 ---name of frontapp
 ---@return string
-function frontApp()
+function frontAppName()
 	return hs.application.frontmostApplication():name() ---@diagnostic disable-line: return-type-mismatch
 end
 

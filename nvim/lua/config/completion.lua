@@ -15,15 +15,15 @@ end
 --------------------------------------------------------------------------------
 -- source definitions
 
-local emojis = {name = "emoji", keyword_length = 2}
-local nerdfont = {name = "nerdfont", keyword_length = 2}
-local buffer = {name = "buffer", keyword_length = 2}
-local path = {name = "path"}
-local zsh = {name = "zsh"}
-local tabnine = {name = "cmp_tabnine", keyword_length = 3}
-local snippets = {name = "luasnip"}
-local lsp = {name = "nvim_lsp"}
-local treesitter = {name = "treesitter"}
+local emojis = { name = "emoji", keyword_length = 2 }
+local nerdfont = { name = "nerdfont", keyword_length = 2 }
+local buffer = { name = "buffer", keyword_length = 2 }
+local path = { name = "path" }
+local zsh = { name = "zsh" }
+local tabnine = { name = "cmp_tabnine", keyword_length = 3 }
+local snippets = { name = "luasnip" }
+local lsp = { name = "nvim_lsp" }
+local treesitter = { name = "treesitter" }
 
 local defaultSources = {
 	snippets,
@@ -61,7 +61,7 @@ local kind_icons = {
 	Struct = "",
 	Event = "",
 	Operator = "",
-	TypeParameter = ""
+	TypeParameter = "",
 }
 
 local source_icons = {
@@ -95,7 +95,7 @@ cmp.setup {
 		documentation = cmp.config.window.bordered(),
 	},
 	mapping = cmp.mapping.preset.insert {
-		["<CR>"] = cmp.mapping.confirm {select = true},
+		["<CR>"] = cmp.mapping.confirm { select = true },
 		["<S-Up>"] = cmp.mapping.scroll_docs(-4),
 		["<S-Down>"] = cmp.mapping.scroll_docs(4),
 
@@ -106,22 +106,22 @@ cmp.setup {
 			else
 				fallback() -- normal mapping, e.g. tabout plugin
 			end
-		end, {"i", "s", "n"}),
+		end, { "i", "s" }),
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
 			else
 				fallback()
 			end
-		end, {"i", "s", "n"}),
+		end, { "i", "s" }),
 	},
 	formatting = {
-		fields = {"kind", "abbr", "menu"}, -- order of the fields
+		fields = { "kind", "abbr", "menu" }, -- order of the fields
 		format = function(entry, vim_item)
 			vim_item.kind = " " .. kind_icons[vim_item.kind] .. " "
 			vim_item.menu = source_icons[entry.source.name]
 			return vim_item
-		end
+		end,
 	},
 	-- DEFAULT SOURCES
 	sources = cmp.config.sources(defaultSources),
@@ -148,11 +148,8 @@ cmp.setup.filetype("toml", {
 })
 
 -- css
-local cssSources = copyTable(defaultSources)
-table.remove(cssSources) -- no buffer
-table.remove(cssSources) -- no emojis
 cmp.setup.filetype("css", {
-	sources = cmp.config.sources(cssSources),
+	sources = cmp.config.sources { lsp, snippets },
 })
 
 -- markdown
@@ -196,30 +193,31 @@ cmp.setup.filetype("text", {
 
 --------------------------------------------------------------------------------
 -- Command Line Completion
-cmp.setup.cmdline({"/", "?"}, {
+cmp.setup.cmdline({ "/", "?" }, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
-		{name = "treesitter", keyword_length = 2},
-	}, {-- second array only relevant when no source from the first matches
-		{name = "buffer", keyword_length = 2},
-	}
+		{ name = "treesitter", keyword_length = 2 },
+	},
+	{ -- second array only relevant when no source from the first matches
+		{ name = "buffer", keyword_length = 2 },
+	},
 })
 
 cmp.setup.cmdline(":", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{name = "path"},
-		{name = "cmdline"},
-	}, {-- second array only relevant when no source from the first matches
-		{name = "cmdline_history", keyword_length = 3},
-	})
+		{ name = "path" },
+		{ name = "cmdline" },
+	}, { -- second array only relevant when no source from the first matches
+		{ name = "cmdline_history", keyword_length = 3 },
+	}),
 })
 
 --------------------------------------------------------------------------------
 
 -- Enable Completion in DressingInput
 cmp.setup.filetype("DressingInput", {
-	sources = cmp.config.sources {{name = "omni"}},
+	sources = cmp.config.sources { { name = "omni" } },
 })
 
 --------------------------------------------------------------------------------

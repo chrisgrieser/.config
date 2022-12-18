@@ -154,13 +154,6 @@ recorder.setup {
 keymap("n", "!", "a <Esc>h") -- insert space
 keymap("n", "=", "mzO<Esc>`z") -- add blank above
 keymap("n", "_", "mzo<Esc>`z") -- add blank below
-keymap("n", "d<Tab>", function() -- delete blank lines except one
-	if fn.getline(".") == "" then ---@diagnostic disable-line: param-type-mismatch
-		cmd.normal {[["_dipO]], bang = true}
-	else
-		vim.notify("Line not empty.", logWarn)
-	end
-end)
 
 -- Indentation
 keymap("n", "<Tab>", ">>")
