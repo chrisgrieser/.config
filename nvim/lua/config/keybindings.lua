@@ -39,7 +39,6 @@ keymap("n", "<leader>p", function()
 	-- remove oldest snapshot when more than 20
 	local snapshotPath = fn.stdpath("config") .. "/packer-snapshots"
 	os.execute([[cd ']] .. snapshotPath .. [[' ; ls -t | tail -n +20 | tr '\n' '\0' | xargs -0 rm]])
-	require("notify").dismiss()
 end)
 keymap("n", "<leader>P", packer.status)
 
@@ -509,3 +508,5 @@ autocmd("FileType", {
 		keymap("n", "q", cmd.close, opts)
 	end,
 })
+
+--------------------------------------------------------------------------------

@@ -3,8 +3,7 @@ local cons = hs.console
 --------------------------------------------------------------------------------
 
 -- HAMMERSPOON SETTINGS
-hs.allowAppleScript(false)
-hs.consoleOnTop(true)
+hs.consoleOnTop(false)
 hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
 hs.window.animationDuration = 0
@@ -26,8 +25,24 @@ cons.toolbar(nil)
 
 cons.consoleFont {name = "JetBrainsMonoNL Nerd Font", size = 20}
 
-cons.darkMode(false)
-cons.outputBackgroundColor {white = 0.9}
+---@param toDark boolean
+function setConsoleColors(toDark)
+	if toDark then
+		cons.darkMode(true)
+		cons.outputBackgroundColor {white = 0.1}
+		cons.consolePrintColor {white = 0.9}
+		cons.consoleCommandColor {white = 0.5}
+	else
+		cons.darkMode(false)
+		cons.outputBackgroundColor {white = 0.9}
+		cons.consolePrintColor {white = 0.1}
+		cons.consoleCommandColor {white = 0.5}
+	end
+end
+
+-- initialize
+local isDark = hs.execute[[defaults read -g AppleInterfaceStyle]] == "Dark\n"
+setConsoleColors(isDark)
 
 -- copy last command to clipboard
 -- `hammerspoon://copy-last-command` for Karabiner Elements (⌘⇧C)

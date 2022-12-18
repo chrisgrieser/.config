@@ -6,21 +6,25 @@ require("lua.utils")
 -- - Neovim
 -- - Highlights PDF appearance
 -- - Sketchybar
+-- - Hammerspoon Console
 function toggleDarkMode()
 	local prevApp = frontAppName()
 
-	-- neovim & highlights
+	-- neovim & highlights & hammerspoon
 	if isDarkMode() then
 		if appIsRunning("Highlights") then
 			app("Highlights"):selectMenuItem {"View", "PDF Appearance", "Default"}
 		end
 		hs.execute [[echo "setLightTheme()" > /tmp/nvim-automation]] -- requires setup in ~/.config/nvim/lua/file-watcher.lua
+		setConsoleColors(false)
 	else
 		if appIsRunning("Highlights") then
 			app("Highlights"):selectMenuItem {"View", "PDF Appearance", "Night"}
 		end
 		hs.execute [[echo "setDarkTheme()" > /tmp/nvim-automation]]
+		setConsoleColors(true)
 	end
+
 
 	-- Brave & System
 	applescript [[
