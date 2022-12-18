@@ -27,7 +27,7 @@ local function highlightsAppScroll(amount)
 end
 
 local function scrollDown()
-	if frontAppName():lower() == "alacritty" or frontAppName() == "Terminal" then
+	if frontAppName():lower() == "alacritty" then
 		keystroke({ "shift" }, "pagedown")
 	elseif frontAppName() == "Highlights" then
 		highlightsAppScroll(-highlightsScrollAmount)
@@ -36,7 +36,7 @@ local function scrollDown()
 	end
 end
 local function scrollUp()
-	if frontAppName():lower() == "alacritty" or frontAppName() == "Terminal" then
+	if frontAppName():lower() == "alacritty" then
 		keystroke({ "shift" }, "pageup")
 	elseif frontAppName() == "Highlights" then
 		highlightsAppScroll(highlightsScrollAmount)
@@ -55,33 +55,21 @@ hotkey({ "alt" }, "K", scrollUp, nil, scrollUp)
 local function hideCurAndPassThrough(key)
 	jHidesCursor:disable() -- so it only works the first time
 	kHidesCursor:disable()
-
-	-- if key == "Alfred" then -- wordaround necessary, since Alfred isn't considered a window
-	-- 	applescript('tell application id "com.runningwithcrayons.Alfred" to search')
-	-- 	return
-	-- end
-
-	keystroke({}, key, 1)
+	keystroke({}, key, 1) -- sending globally instead of to Brave, so it still works with Alfred
 	pseudoHideCursor()
 end
 
-jHidesCursor = hotkey({}, "j", function() hideCurAndPassThrough("J") end):disable()
-kHidesCursor = hotkey({}, "k", function() hideCurAndPassThrough("K") end):disable()
-
--- INFO registering this shortcut requires disabling cmd+space in the macOS keyboard
--- settings (requires temporarily enabling the hotkey to do so)
--- alfredDisablesJKCursorHider = hotkey({ "cmd" }, "space", function() hideCurAndPassThrough("Alfred") end):disable()
+jHidesCursor = hotkey({}, "j", function() hideCurAndPassThrough("j") end):disable()
+kHidesCursor = hotkey({}, "k", function() hideCurAndPassThrough("k") end):disable()
 
 jk_watcher = aw.new(function(appName, eventType)
 	if eventType == aw.activated then
 		if appName == "Brave Browser" then
 			jHidesCursor:enable()
 			kHidesCursor:enable()
-			-- alfredDisablesJKCursorHider:enable()
 		else
 			jHidesCursor:disable()
 			kHidesCursor:disable()
-			-- alfredDisablesJKCursorHider:disable()
 		end
 	end
 end):start()
