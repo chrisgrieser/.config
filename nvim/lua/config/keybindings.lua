@@ -209,6 +209,8 @@ keymap("n", "X", cmd.ISwapWith, { desc = "swap nodes" })
 keymap("n", "<leader>f", [[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "search & replace" })
 keymap("x", "<leader>f", ":sm///g<Left><Left><Left>", { desc = "search & replace" })
 keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "structural search & replace" }) -- wrapped in function for lazy-loading
+keymap({"n", "x"}, "<leader>n", ":normal ", {desc = ":normal"})
+
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine, { desc = "duplicate line" })
@@ -380,15 +382,15 @@ keymap("n", "gF", telescope.live_grep) -- search in [f]iles
 keymap("n", "gR", telescope.resume) -- [R]esume last search
 
 -- File Operations (no shorthand for lazy-loading)
-keymap("n", "<C-p>", function() require("genghis").copyFilepath() end)
-keymap("n", "<C-n>", function() require("genghis").copyFilename() end)
-keymap("n", "<leader>x", function() require("genghis").chmodx() end)
-keymap("n", "<C-r>", function() require("genghis").renameFile() end)
-keymap("n", "<C-m>", function() require("genghis").moveAndRenameFile() end)
-keymap("n", "<C-d>", function() require("genghis").duplicateFile() end)
-keymap("", "<D-BS>", function() require("genghis").trashFile() end)
-keymap("", "<D-n>", function() require("genghis").createNewFile() end)
-keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end)
+keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, {desc = "copy filepath"})
+keymap("n", "<C-n>", function() require("genghis").copyFilename() end, {desc = "copy filename"})
+keymap("n", "<leader>x", function() require("genghis").chmodx() end, {desc = "chmod +x"})
+keymap("n", "<C-r>", function() require("genghis").renameFile() end, {desc = "rename file"})
+keymap("n", "<C-m>", function() require("genghis").moveAndRenameFile() end, {desc = "move & rename file"})
+keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, {desc = "duplicate file"})
+keymap("", "<D-BS>", function() require("genghis").trashFile() end, {desc = "move file to trash"})
+keymap("", "<D-n>", function() require("genghis").createNewFile() end, {desc = "create new file"})
+keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, {desc = "move selection to new file"})
 
 --------------------------------------------------------------------------------
 -- GIT
