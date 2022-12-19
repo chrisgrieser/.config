@@ -268,6 +268,29 @@ function M.quicklog(addLineNum)
 	cmd.normal { "j==", bang = true }
 end
 
+---adds simple "beep" log statement to check whether conditionals have been
+--entered Supported: lua, python, js/ts, zsh/bash/fish, and applescript
+function M.beeplog()
+	local logStatement
+	local ft = bo.filetype
+
+	if ft == "lua" or ft == "python" then
+		logStatement = 'print("beep")'
+	elseif ft == "javascript" or ft == "typescript" then
+		logStatement = 'console.log("beep")'
+	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
+		logStatement = 'echo "beep"'
+	elseif ft == "applescript" then
+		logStatement = 'log "beep"'
+	else
+		vim.notify("Beeplog does not support " .. ft .. " yet.", logWarn)
+		return
+	end
+
+	append(".", logStatement)
+	cmd.normal { "j==", bang = true }
+end
+
 ---Remove all log statements in the current buffer
 ---Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.removeLog()

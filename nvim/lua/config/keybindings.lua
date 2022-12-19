@@ -226,6 +226,7 @@ keymap("i", "<Space>", "<Space><C-g>u", { desc = "add blank below" })
 
 -- Logging & Debugging
 keymap({ "n", "x" }, "<leader>ll", qol.quicklog, { desc = "add log statement" })
+keymap({ "n", "x" }, "<leader>lb", qol.beeplog, { desc = "add beep log" })
 keymap("n", "<leader>lr", qol.removeLog, { desc = "remove all log statements" })
 
 -- Sort & highlight duplicate lines
@@ -468,36 +469,37 @@ keymap("n", "<leader>r", function()
 	-- 	fn.system("open '" .. pdfFilename .. "'")
 
 	-- nvim config
-	elseif ft == "lua" and parentFolder:find("nvim/lua") then
-		cmd.write()
-		cmd.source("%")
-		vim.notify(fn.expand("%") .. " reloaded.")
-
-	-- nvim plugin development
-	elseif ft == "lua" and parentFolder:find("nvim/my%-plugins") then
-		local toReload = {
-			fn.expand("%:r"),
-			"config/textobjects",
-			"config/keybindings",
-		}
-		for _, pack in pairs(toReload) do
-			package.loaded[pack] = nil -- uncache for lua
-			require(pack)
+	elseif ft == "lua" and parentFolder:find("nvim") then
+		cmd.wall()
+		-- INFO packages need to be unloaded due to lua's caching
+		local pack = fn.expand("%:r")	-- also reloads the current plugin
+		package.loaded[pack] = nil
+		for name, _ in pairs(package.loaded) do
+			if name:match("^config") then package.loaded[name] = nil end
 		end
-		vim.notify(fn.expand("%:r") .. " reloaded.")
+		dofile(vim.env.MYVIMRC)
+		vim.notify("All reloaded.", logTrace)
 
 	-- Hammerspoon
 	elseif ft == "lua" and parentFolder:find("hammerspoon") then
 		os.execute([[open -g "hammerspoon://hs-reload"]])
+
+	-- Karabiner
 	elseif ft == "yaml" and parentFolder:find("/karabiner") then
 		local result = fn.system([[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]])
 		result = result:gsub("\n$", "")
 		vim.notify(result)
+
+	-- Typescript
 	elseif ft == "typescript" then
 		cmd([[!npm run build]]) -- not via fn.system to get the output in the cmdline
+
+	-- AppleScript
 	elseif ft == "applescript" then
 		cmd.AppleScriptRun()
 		normal("<C-w><C-p>") -- switch to previous window
+
+	-- None
 	else
 		vim.notify("No build system set.", logWarn)
 	end
