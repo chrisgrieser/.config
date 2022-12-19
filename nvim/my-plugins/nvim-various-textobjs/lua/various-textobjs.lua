@@ -46,9 +46,9 @@ end
 ---@param pattern string lua pattern
 ---@param seekInStartRowBeforeCursor? boolean Default: false
 ---@return integer|nil line pattern was found, or nil if not found
----@return integer startCol
+---@return integer beginCol
 ---@return integer endCol
----@return string lineContent where the pattern was found
+---@return string capture capture group from pattern (if provided)
 local function seekForward(pattern, seekInStartRowBeforeCursor)
 	local i = -1
 	local lineContent, hasPattern
@@ -58,6 +58,7 @@ local function seekForward(pattern, seekInStartRowBeforeCursor)
 
 	repeat
 		i = i + 1
+		if i > 0 then startCol = 1 end -- after the current row, pattern can occur everywhere in the line
 		if i > lookForwardLines or startRow + i > lastLine then
 			vim.notify("Textobject not found within " .. tostring(lookForwardLines) .. " lines.", vim.log.levels.WARN)
 			return nil, 0, 0, ""
@@ -65,11 +66,14 @@ local function seekForward(pattern, seekInStartRowBeforeCursor)
 		---@diagnostic disable-next-line: assign-type-mismatch
 		lineContent = fn.getline(startRow + i) ---@type string
 		hasPattern = lineContent:find(pattern, startCol)
-		startCol = 1 -- after the current row, pattern can occur everywhere in the line
 	until hasPattern
-	local findrow = startRow + i
 
-	return findrow, startCol, endCol, lineContent
+	local findrow = startRow + i
+	local beginCol, endCol, capture = lineContent:find(pattern, startCol)
+	beginCol = beginCol - 1
+	endCol = endCol - 1
+
+	return findrow, beginCol, endCol, capture
 end
 
 --------------------------------------------------------------------------------
@@ -158,18 +162,18 @@ end
 ---VALUE TEXT OBJECT
 ---@param inner boolean
 function M.value(inner)
-	local pattern = "[=:] ?"
+	local pattern = "%f[=:] ?[^=:]"
 
-	local row, _, lineContent = seekForward(pattern, true)
+	local row, _, start = seekForward(pattern, true)
 	if not row then return end
-
-	local _, start = lineContent:find(pattern)
 
 	-- valueEnd either comment or end of line
 	local comStrPattern = bo
 		.commentstring
 		:gsub(" ?%%s.*", "") -- remove placeholder and backside of commentstring
 		:gsub("(.)", "%%%1") -- escape commentstring so it's a valid lua pattern
+	---@diagnostic disable-next-line: assign-type-mismatch
+	local lineContent = fn.getline(row) ---@type string
 	local ending, _ = lineContent:find(" ?" .. comStrPattern)
 	if not ending or comStrPattern == "" then
 		ending = #lineContent - 1
@@ -193,15 +197,11 @@ function M.number(inner)
 		pattern = "%d+"
 	else
 		normal("lB")
-		pattern = "%-?%d*%.?%d+"
+		pattern = "%-?%d*%.?%d+" -- number, including minus-sign and decimal point
 	end
 
-	local row, startCol, lineContent = seekForward(pattern)
+	local row, start, ending = seekForward(pattern)
 	if not row then return end
-
-	local start, ending = lineContent:find(pattern, startCol)
-	start = start - 1
-	ending = ending - 1
 
 	setSelection(row, row, start, ending)
 end
@@ -212,20 +212,13 @@ end
 ---md links textobj
 ---@param inner boolean inner or outer link
 function M.mdlink(inner)
-	local pattern = "(%b[])%b()"
 	normal("F[") -- go to beginning of link so it can be found when standing on it
+	local pattern = "(%b[])%b()"
 
-	local row, startCol, lineContent = seekForward(pattern)
+	local row, start, ending, barelink = seekForward(pattern)
 	if not row then return end
 
-	local start, ending, barelink = lineContent:find(pattern, startCol)
-	if inner then
-		ending = start + #barelink - 3
-	else
-		start, ending = lineContent:find(pattern)
-		start = start - 1
-		ending = ending - 1
-	end
+	if inner then ending = start + #barelink - 3 end
 
 	setSelection(row, row, start, ending)
 end
@@ -236,16 +229,10 @@ function M.jsRegex(inner)
 	normal("F/") -- go to beginning of regex
 	local pattern = [[/.-[^\]/]] -- to not match escaped slash in regex
 
-	local row, startCol, lineContent = seekForward(pattern)
+	local row, start, ending = seekForward(pattern)
 	if not row then return end
 
-	local start, ending = lineContent:find(pattern, startCol)
-	if inner then
-		ending = ending - 2
-	else
-		ending = ending - 1
-		start = start - 1
-	end
+	if inner then ending = ending - 1 end
 
 	setSelection(row, row, start, ending)
 end
@@ -256,13 +243,10 @@ function M.cssSelector(inner)
 	normal("F.") -- go to beginning of selector
 	local pattern = "%.[%w-_]+"
 
-	local row, startCol, lineContent = seekForward(pattern)
+	local row, start, ending = seekForward(pattern)
 	if not row then return end
 
-	-- determine location of selector in row
-	local start, ending = lineContent:find(pattern, startCol)
-	ending = ending - 1
-	if not inner then start = start - 1 end
+	if inner then start = start + 1 end
 
 	setSelection(row, row, start, ending)
 end
