@@ -46,8 +46,9 @@ end
 ---@param pattern string lua pattern
 ---@param seekInStartRowBeforeCursor? boolean Default: false
 ---@return integer|nil line pattern was found, or nil if not found
----@return integer startCol from where to look, if not first row this is 1
----@return string linecontent where the pattern was found
+---@return integer startCol
+---@return integer endCol
+---@return string lineContent where the pattern was found
 local function seekForward(pattern, seekInStartRowBeforeCursor)
 	local i = -1
 	local lineContent, hasPattern
@@ -58,8 +59,8 @@ local function seekForward(pattern, seekInStartRowBeforeCursor)
 	repeat
 		i = i + 1
 		if i > lookForwardLines or startRow + i > lastLine then
-			vim.notify("Textobject not found within " .. tostring(lookForwardLines) .. ".", vim.log.levels.WARN)
-			return nil, 1, ""
+			vim.notify("Textobject not found within " .. tostring(lookForwardLines) .. " lines.", vim.log.levels.WARN)
+			return nil, 0, 0, ""
 		end
 		---@diagnostic disable-next-line: assign-type-mismatch
 		lineContent = fn.getline(startRow + i) ---@type string
@@ -68,7 +69,7 @@ local function seekForward(pattern, seekInStartRowBeforeCursor)
 	until hasPattern
 	local findrow = startRow + i
 
-	return findrow, startCol, lineContent
+	return findrow, startCol, endCol, lineContent
 end
 
 --------------------------------------------------------------------------------
@@ -183,17 +184,24 @@ function M.value(inner)
 	setSelection(row, row, start, ending)
 end
 
-
 ---number textobj
 ---@param inner boolean inner number (no decimal or minus-sign)
 function M.number(inner)
-	local pattern = inner and "%d+" or "-?[%d.]+"
-	normal("E") -- go to beginning of word
+	local pattern
+	if inner then
+		normal("lb") -- go to beginning of word
+		pattern = "%d+"
+	else
+		normal("lB")
+		pattern = "%-?%d*%.?%d+"
+	end
 
 	local row, startCol, lineContent = seekForward(pattern)
 	if not row then return end
 
 	local start, ending = lineContent:find(pattern, startCol)
+	start = start - 1
+	ending = ending - 1
 
 	setSelection(row, row, start, ending)
 end
