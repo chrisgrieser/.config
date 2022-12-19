@@ -367,7 +367,7 @@ keymap("n", "go", telescope.find_files) -- [o]pen file in parent-directory
 keymap("n", "gO", telescope.git_files) -- [o]pen file in git directory
 keymap("n", "gr", telescope.oldfiles) -- [r]ecent files
 keymap("n", "gF", telescope.live_grep) -- search in [f]iles
-keymap("n", "gR", telescope.resume) -- resume last search
+keymap("n", "gR", telescope.resume) -- [R]esume last search
 
 -- File Operations (no shorthand for lazy-loading)
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end)
@@ -416,7 +416,7 @@ keymap("n", "<leader>g", function()
 		if not commitMsg then
 			return
 		elseif #commitMsg > 50 then
-			vim.notify("Commit Message too long.\n(Run again for shortened message.)", "warn")
+			vim.notify("Commit Message too long.\n(Run again for shortened message.)", logWarn)
 			b.prevCommitMsg = commitMsg:sub(1, 50)
 			return
 		elseif commitMsg == "" then
