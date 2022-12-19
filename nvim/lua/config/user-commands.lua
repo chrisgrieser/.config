@@ -2,6 +2,18 @@ require("config/utils")
 local newCommand = vim.api.nvim_create_user_command
 --------------------------------------------------------------------------------
 
+-- `:SwapDelete` delete the swapfile
+newCommand("SwapDeleteAll", function(_)
+	local swapdir = vimDataDir .. "swap/"
+	local out = fn.system([[rm -vf "]]..swapdir..[["* ]])
+	vim.notify("Deleted:\n"..out)
+end, {})
+
+-- `:PackerRoot` opens path where packer packages are installed
+newCommand("PackerRoot", function(_)
+	fn.system('open "' .. fn.stdpath("data") .. '/site/pack/packer"')
+end, {})
+
 -- `:I` inspects the passed lua object
 newCommand("I", function(ctx)
 	local output = vim.inspect(fn.luaeval(ctx.args))
@@ -16,21 +28,6 @@ newCommand("I", function(ctx)
 		end,
 	})
 end, { nargs = "+" })
-
--- `:SwapDelete` delete the swapfile
-newCommand("SwapDelete", function(_)
-	local success, err = os.remove(fn.swapname(0))
-	if success then
-		vim.notify("Swap File deleted.")
-	else
-		vim.notify(tostring(err), logError)
-	end
-end, {})
-
--- `:PackerRoot` opens path where packer packages are installed
-newCommand("PackerRoot", function(_)
-	fn.system('open "' .. fn.stdpath("data") .. '/site/pack/packer"')
-end, {})
 
 -- `:II` inspects the passed object and puts it into a new buffer, https://www.reddit.com/r/neovim/comments/zhweuc/comment/izo9br1/?utm_source=share&utm_medium=web2x&context=3
 newCommand("II", function(ctx)
