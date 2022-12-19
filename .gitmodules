@@ -26,3 +26,7 @@
 	path = nvim/my-plugins/cmp-nerdfont
 	url = git@github.com:chrisgrieser/cmp-nerdfont.git
 	update = rebase
+[submodule "nvim/my-plugins/nvim-various-textobjs"]
+	path = nvim/my-plugins/nvim-various-textobjs
+	url = git@github.com:chrisgrieser/nvim-various-textobjs.git
+	update = rebase
