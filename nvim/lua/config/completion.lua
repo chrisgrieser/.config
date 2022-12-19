@@ -29,9 +29,9 @@ local defaultSources = {
 	snippets,
 	lsp,
 	tabnine,
-	treesitter,
+	treesitter, -- should be fourth
 	emojis,
-	buffer,
+	buffer, -- should be last
 }
 
 --------------------------------------------------------------------------------
@@ -148,12 +148,11 @@ cmp.setup.filetype("toml", {
 })
 
 -- css
+local cssSources = copyTable(defaultSources)
+table.remove(cssSources) -- no buffer, since embedded fonts make this useless
+table.remove(cssSources, 4) -- no treesitter, as laggy on big files
 cmp.setup.filetype("css", {
-	sources = cmp.config.sources {
-		snippets,
-		lsp,
-		treesitter,
-	},
+	sources = cmp.config.sources (cssSources),
 })
 
 -- markdown
