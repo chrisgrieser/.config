@@ -44,27 +44,31 @@ end
 
 ---seek forwards for pattern
 ---@param pattern string lua pattern
----@return nil|integer line pattern was found, or integer
-local function seekForward(pattern)
+---@param seekInStartRowBeforeCursor? boolean Default: false
+---@return integer|nil line pattern was found, or nil if not found
+---@return string linecontent where the pattern was found
+local function seekForward(pattern, seekInStartRowBeforeCursor)
 	local i = -1
 	local lineContent, hasPattern
 	---@diagnostic disable-next-line: assign-type-mismatch, param-type-mismatch
 	local lastLine = fn.getline("$") ---@type string
 	local startRow, startCol = unpack(getCursor(0))
+	if seekInStartRowBeforeCursor then startCol = 1 end
 
 	repeat
 		i = i + 1
+		if i > lookForwardLines or startRow + i > lastLine then
+			vim.notify("Textobject not found within " .. tostring(lookForwardLines) .. ".", vim.log.levels.WARN)
+			return nil, ""
+		end
 		---@diagnostic disable-next-line: assign-type-mismatch
 		lineContent = fn.getline(startRow + i) ---@type string
 		hasPattern = lineContent:find(pattern, startCol)
 		startCol = 1 -- after the current row, pattern can occur everywhere in the line
-		if i > lookForwardLines or startRow + i > lastLine then
-			vim.notify("Textobject not found within " .. tostring(lookForwardLines) .. ".", vim.log.levels.WARN)
-			return nil
-		end
 	until hasPattern
+	local findrow = startRow + i
 
-	return startRow + i
+	return findrow, lineContent
 end
 
 --------------------------------------------------------------------------------
@@ -157,12 +161,9 @@ end
 ---VALUE TEXT OBJECT
 ---@param inner boolean
 function M.valueTextObj(inner)
-	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
-	local lineContent = fn.getline(".") ---@type string
-	local i = 0
 	local pattern = "[=:] ?"
 
-	local row = seekForward(pattern)
+	local row, lineContent = seekForward(pattern, true)
 	if not row then return end
 
 	local _, start = lineContent:find(pattern)
@@ -188,63 +189,34 @@ end
 ---md links textobj
 ---@param inner boolean inner or outer link
 function M.mdlinkTextobj(inner)
-	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
-	local lineContent = fn.getline(".") ---@type string
+	local pattern = "(%b[])%b()"
 	normal("F[") -- go to beginning of link so it can be found when standing on it
-	local curRow, curCol = unpack(getCursor(0))
-	local start, ending, barelink
-	local i = 0
 
-	-- determine next row with link
-	local mdLinkPattern = "(%b[])%b()"
-	local hasLink = lineContent:find(mdLinkPattern, curCol)
-	while not hasLink do
-		i = i + 1
-		---@diagnostic disable-next-line: assign-type-mismatch
-		lineContent = fn.getline(curRow + i) ---@type string
-		hasLink = lineContent:find(mdLinkPattern, curCol)
-		curCol = 1 -- after the current row, pattern can occur everywhere in the line
-		if i > lookForwardLines then return end
-	end
-	curRow = curRow + i
+	local row, lineContent = seekForward(pattern)
+	if not row then return end
 
-	-- determine location of link in row
+	local start, ending, barelink = lineContent:find(pattern)
 	if inner then
-		start, _, barelink = lineContent:find(mdLinkPattern, curCol)
 		ending = start + #barelink - 3
 	else
-		start, ending = lineContent:find(mdLinkPattern, curCol)
+		start, ending = lineContent:find(pattern)
 		start = start - 1
 		ending = ending - 1
 	end
 
-	setSelection(curRow, curRow, start, ending)
+	setSelection(row, row, start, ending)
 end
 
 ---JS Regex
 ---@param inner boolean inner regex
 function M.jsRegexTextobj(inner)
-	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
-	local lineContent = fn.getline(".") ---@type string
 	normal("F/") -- go to beginning of regex
-	local curRow, curCol = unpack(getCursor(0))
-	local i = 0
-
-	-- determine next row with selector
 	local pattern = [[/.-[^\]/]] -- to not match escaped slash in regex
-	local hasPattern = lineContent:find(pattern)
-	while not hasPattern do
-		i = i + 1
-		---@diagnostic disable-next-line: assign-type-mismatch
-		lineContent = fn.getline(curRow + i) ---@type string
-		hasPattern = lineContent:find(pattern)
-		curCol = 1 -- after the current row, pattern can occur everywhere in the line
-		if i > lookForwardLines then return end
-	end
-	curRow = curRow + i
 
-	-- determine location in row
-	local start, ending = lineContent:find(pattern, curCol)
+	local row, lineContent = seekForward(pattern)
+	if not row then return end
+
+	local start, ending = lineContent:find(pattern)
 	if inner then
 		ending = ending - 2
 	else
@@ -252,37 +224,24 @@ function M.jsRegexTextobj(inner)
 		start = start - 1
 	end
 
-	setSelection(curRow, curRow, start, ending)
+	setSelection(row, row, start, ending)
 end
 
 ---CSS Selector Textobj
 ---@param inner boolean inner selector
 function M.cssSelectorTextobj(inner)
-	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
-	local lineContent = fn.getline(".") ---@type string
 	normal("F.") -- go to beginning of selector
-	local curRow, curCol = unpack(getCursor(0))
-	local i = 0
-
-	-- determine next row with selector
 	local pattern = "%.[%w-_]+"
-	local hasPattern = lineContent:find(pattern)
-	while not hasPattern do
-		i = i + 1
-		---@diagnostic disable-next-line: assign-type-mismatch
-		lineContent = fn.getline(curRow + i) ---@type string
-		hasPattern = lineContent:find(pattern)
-		curCol = 1 -- after the current row, pattern can occur everywhere in the line
-		if i > lookForwardLines then return end
-	end
-	curRow = curRow + i
+
+	local row, lineContent = seekForward(pattern)
+	if not row then return end
 
 	-- determine location of selector in row
-	local start, ending = lineContent:find(pattern, curCol)
+	local start, ending = lineContent:find(pattern)
 	ending = ending - 1
 	if not inner then start = start - 1 end
 
-	setSelection(curRow, curRow, start, ending)
+	setSelection(row, row, start, ending)
 end
 
 --------------------------------------------------------------------------------
