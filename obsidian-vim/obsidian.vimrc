@@ -129,8 +129,11 @@ vmap M :mergeLines
 " Add Blank Line above/below
 exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
 exmap blankAbove obcommand obsidian-editor-shortcuts:insertLineAbove
-nmap = :blankAbove
-nmap _ :blankBelow
+" HACK since code editor shortcuts does move the cursor to the new line
+nmap &a& :blankAbove
+nmap = &a&j
+nmap &b& :blankBelow
+nmap _ &b&k
 
 " append space after cursor position
 exmap appendSpace jsfile Meta/obsidian-vim-helpers.js {appendSpace()}
