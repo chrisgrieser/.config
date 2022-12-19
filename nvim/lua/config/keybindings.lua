@@ -31,10 +31,8 @@ keymap("n", "<leader>M", cmd.Mason, { desc = ":Mason" })
 keymap("n", "<leader>p", function()
 	cmd.update { bang = true }
 	packer.compile()
-	if package.loaded["plugin-list"] then
-		package.loaded["plugin-list"] = nil -- empty the cache for lua
-		packer.startup(require("plugin-list").PluginList)
-	end
+	package.loaded["config/plugin-list"] = nil -- empty the cache for lua
+	packer.startup(require("config/plugin-list").PluginList)
 	packer.snapshot("packer-snapshot_" .. os.date("!%Y-%m-%d_%H-%M-%S"))
 	packer.sync()
 	cmd.MasonUpdateAll()
@@ -463,24 +461,27 @@ keymap("n", "<leader>r", function()
 
 	if filename == "sketchybarrc" then
 		fn.system("brew services restart sketchybar")
-	elseif ft == "markdown" then
-		local filepath = fn.expand("%:p")
-		local pdfFilename = fn.expand("%:t:r") .. ".pdf"
-		fn.system("pandoc '" .. filepath .. "' --output='" .. pdfFilename .. "' --pdf-engine=wkhtmltopdf")
-		fn.system("open '" .. pdfFilename .. "'")
-	elseif ft == "lua" then
-		if parentFolder:find("nvim/lua") then
-			cmd.write()
-			cmd.source("%")
-			if filename:find("plugin%-list") then
-				packer.compile()
-				vim.notify("Packer recompiled and " .. fn.expand("%") .. " reloaded.")
-			else
-				vim.notify(fn.expand("%") .. " reloaded.")
-			end
-		elseif parentFolder:find("hammerspoon") then
-			os.execute([[open -g "hammerspoon://hs-reload"]])
-		end
+	-- elseif ft == "markdown" then
+	-- 	local filepath = fn.expand("%:p")
+	-- 	local pdfFilename = fn.expand("%:t:r") .. ".pdf"
+	-- 	fn.system("pandoc '" .. filepath .. "' --output='" .. pdfFilename .. "' --pdf-engine=wkhtmltopdf")
+	-- 	fn.system("open '" .. pdfFilename .. "'")
+
+	-- nvim config
+	elseif ft == "lua" and parentFolder:find("nvim/lua") then
+		cmd.write()
+		cmd.source("%")
+		vim.notify(fn.expand("%") .. " reloaded.")
+
+	-- nvim plugin development
+	elseif ft == "lua" and parentFolder:find("nvim/my-plugins") then
+		local pack = fn.expand("%:r")
+		package.loaded[pack] = nil
+		cmd.source("%")
+
+	-- Hammerspoon
+	elseif ft == "lua" and parentFolder:find("hammerspoon") then
+		os.execute([[open -g "hammerspoon://hs-reload"]])
 	elseif ft == "yaml" and parentFolder:find("/karabiner") then
 		local result = fn.system([[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]])
 		result = result:gsub("\n$", "")
