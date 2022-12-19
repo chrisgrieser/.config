@@ -474,10 +474,17 @@ keymap("n", "<leader>r", function()
 		vim.notify(fn.expand("%") .. " reloaded.")
 
 	-- nvim plugin development
-	elseif ft == "lua" and parentFolder:find("nvim/my-plugins") then
-		local pack = fn.expand("%:r")
-		package.loaded[pack] = nil
-		cmd.source("%")
+	elseif ft == "lua" and parentFolder:find("nvim/my%-plugins") then
+		local toReload = {
+			fn.expand("%:r"),
+			"config/textobjects",
+			"config/keybindings",
+		}
+		for _, pack in pairs(toReload) do
+			package.loaded[pack] = nil -- uncache for lua
+			require(pack)
+		end
+		vim.notify(fn.expand("%:r") .. " reloaded.")
 
 	-- Hammerspoon
 	elseif ft == "lua" and parentFolder:find("hammerspoon") then
