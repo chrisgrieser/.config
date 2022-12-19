@@ -25,11 +25,7 @@ end
 
 local function isWeekend()
 	local weekday = os.date():sub(1, 3)
-	if weekday == "Sun" or weekday == "Sat" then
-		return true
-	else
-		return false
-	end
+	return weekday == "Sun" or weekday == "Sat"
 end
 
 --------------------------------------------------------------------------------

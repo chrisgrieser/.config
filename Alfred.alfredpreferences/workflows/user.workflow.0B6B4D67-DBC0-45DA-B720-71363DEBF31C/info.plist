@@ -152,19 +152,6 @@
 		</array>
 		<key>56CD69F0-DA3F-4EF1-809F-78543F4459A1</key>
 		<array/>
-		<key>73A2E38A-7C71-4171-B392-E309BB8B4612</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>93C5DD7E-10F0-4859-8A11-C1784A7226FB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>7B43FD68-D463-4626-BE13-7D1C65B12ECF</key>
 		<array>
 			<dict>
@@ -196,19 +183,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>56CD69F0-DA3F-4EF1-809F-78543F4459A1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>9AC8F0AE-752B-4F32-98FA-0BB97B8BED4C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5C3BA5D2-5E23-4976-A7DF-6E7446C8E1BE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -905,60 +879,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>19</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>2</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>73A2E38A-7C71-4171-B392-E309BB8B4612</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>NSCursor.hide()</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>10</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>93C5DD7E-10F0-4859-8A11-C1784A7226FB</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
 				<integer>2</integer>
 				<key>hotmod</key>
 				<integer>917504</integer>
@@ -1002,50 +922,6 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 			<string>D608B123-0780-4E08-A9AD-4BBF4396F654</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>NSCursor.show()</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>10</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>5C3BA5D2-5E23-4976-A7DF-6E7446C8E1BE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>show</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Show Cursor</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>9AC8F0AE-752B-4F32-98FA-0BB97B8BED4C</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -1168,13 +1044,6 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
-		<key>5C3BA5D2-5E23-4976-A7DF-6E7446C8E1BE</key>
-		<dict>
-			<key>xpos</key>
-			<real>665</real>
-			<key>ypos</key>
-			<real>805</real>
-		</dict>
 		<key>5CCD4941-B4C3-444A-8318-2DDBF741229A</key>
 		<dict>
 			<key>colorindex</key>
@@ -1193,13 +1062,6 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
-		<key>73A2E38A-7C71-4171-B392-E309BB8B4612</key>
-		<dict>
-			<key>xpos</key>
-			<real>500</real>
-			<key>ypos</key>
-			<real>650</real>
-		</dict>
 		<key>7B43FD68-D463-4626-BE13-7D1C65B12ECF</key>
 		<dict>
 			<key>colorindex</key>
@@ -1217,13 +1079,6 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 			<real>1065</real>
 			<key>ypos</key>
 			<real>250</real>
-		</dict>
-		<key>93C5DD7E-10F0-4859-8A11-C1784A7226FB</key>
-		<dict>
-			<key>xpos</key>
-			<real>675</real>
-			<key>ypos</key>
-			<real>680</real>
 		</dict>
 		<key>9536809F-DBBD-4982-90BC-427C6D115A14</key>
 		<dict>
@@ -1244,13 +1099,6 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>270</real>
-		</dict>
-		<key>9AC8F0AE-752B-4F32-98FA-0BB97B8BED4C</key>
-		<dict>
-			<key>xpos</key>
-			<real>495</real>
-			<key>ypos</key>
-			<real>805</real>
 		</dict>
 		<key>9F5AB69B-0606-4FF5-B321-1DC49BF2184E</key>
 		<dict>
