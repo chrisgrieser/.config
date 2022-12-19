@@ -46,12 +46,12 @@ end
 ---@param pattern string lua pattern
 ---@param seekInStartRowBeforeCursor? boolean Default: false
 ---@return integer|nil line pattern was found, or nil if not found
+---@return integer startCol from where to look, if not first row this is 1
 ---@return string linecontent where the pattern was found
 local function seekForward(pattern, seekInStartRowBeforeCursor)
 	local i = -1
 	local lineContent, hasPattern
-	---@diagnostic disable-next-line: assign-type-mismatch, param-type-mismatch
-	local lastLine = fn.getline("$") ---@type string
+	local lastLine = fn.line("$")
 	local startRow, startCol = unpack(getCursor(0))
 	if seekInStartRowBeforeCursor then startCol = 1 end
 
@@ -59,7 +59,7 @@ local function seekForward(pattern, seekInStartRowBeforeCursor)
 		i = i + 1
 		if i > lookForwardLines or startRow + i > lastLine then
 			vim.notify("Textobject not found within " .. tostring(lookForwardLines) .. ".", vim.log.levels.WARN)
-			return nil, ""
+			return nil, 1, ""
 		end
 		---@diagnostic disable-next-line: assign-type-mismatch
 		lineContent = fn.getline(startRow + i) ---@type string
@@ -68,7 +68,7 @@ local function seekForward(pattern, seekInStartRowBeforeCursor)
 	until hasPattern
 	local findrow = startRow + i
 
-	return findrow, lineContent
+	return findrow, startCol, lineContent
 end
 
 --------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ end
 ---DIAGNOSTIC TEXT OBJECT
 ---similar to https://github.com/andrewferrier/textobj-diagnostic.nvim
 ---requires builtin LSP
-function M.diagnosticTextobj()
+function M.diagnostic()
 	local diag = vim.diagnostic.get_next { wrap = false }
 	if not diag then return end
 	local curLine = fn.line(".")
@@ -123,7 +123,7 @@ end
 ---indentation textobj, based on https://thevaluable.dev/vim-create-text-objects/
 ---@param startBorder boolean
 ---@param endBorder boolean
-function M.indentTextObj(startBorder, endBorder)
+function M.indentation(startBorder, endBorder)
 	local function isBlankLine(lineNr)
 		---@diagnostic disable-next-line: assign-type-mismatch
 		local lineContent = fn.getline(lineNr) ---@type string
@@ -160,10 +160,10 @@ end
 
 ---VALUE TEXT OBJECT
 ---@param inner boolean
-function M.valueTextObj(inner)
+function M.value(inner)
 	local pattern = "[=:] ?"
 
-	local row, lineContent = seekForward(pattern, true)
+	local row, _, lineContent = seekForward(pattern, true)
 	if not row then return end
 
 	local _, start = lineContent:find(pattern)
@@ -173,12 +173,16 @@ function M.valueTextObj(inner)
 		.commentstring
 		:gsub(" ?%%s.*", "") -- remove placeholder and backside of commentstring
 		:gsub("(.)", "%%%1") -- escape commentstring so it's a valid lua pattern
-	local ending, _ = lineContent:find(".. ?" .. comStrPattern)
-	if not valueEnd or comStrPattern == "" then valueEnd = #lineContent - 1 end
+	local ending, _ = lineContent:find(" ?" .. comStrPattern)
+	if not ending or comStrPattern == "" then
+		ending = #lineContent - 1
+	else
+		ending = ending - 2
+	end
 
 	-- inner value = without trailing comma/semicolon
 	local lastChar = lineContent:sub(ending + 1, ending + 1)
-	if inner and lastChar:find("[,;]") then valueEnd = valueEnd - 1 end
+	if inner and lastChar:find("[,;]") then ending = ending - 1 end
 
 	setSelection(row, row, start, ending)
 end
@@ -188,14 +192,14 @@ end
 
 ---md links textobj
 ---@param inner boolean inner or outer link
-function M.mdlinkTextobj(inner)
+function M.mdlink(inner)
 	local pattern = "(%b[])%b()"
 	normal("F[") -- go to beginning of link so it can be found when standing on it
 
-	local row, lineContent = seekForward(pattern)
+	local row, startCol, lineContent = seekForward(pattern)
 	if not row then return end
 
-	local start, ending, barelink = lineContent:find(pattern)
+	local start, ending, barelink = lineContent:find(pattern, startCol)
 	if inner then
 		ending = start + #barelink - 3
 	else
@@ -209,14 +213,14 @@ end
 
 ---JS Regex
 ---@param inner boolean inner regex
-function M.jsRegexTextobj(inner)
+function M.jsRegex(inner)
 	normal("F/") -- go to beginning of regex
 	local pattern = [[/.-[^\]/]] -- to not match escaped slash in regex
 
-	local row, lineContent = seekForward(pattern)
+	local row, startCol, lineContent = seekForward(pattern)
 	if not row then return end
 
-	local start, ending = lineContent:find(pattern)
+	local start, ending = lineContent:find(pattern, startCol)
 	if inner then
 		ending = ending - 2
 	else
@@ -229,15 +233,15 @@ end
 
 ---CSS Selector Textobj
 ---@param inner boolean inner selector
-function M.cssSelectorTextobj(inner)
+function M.cssSelector(inner)
 	normal("F.") -- go to beginning of selector
 	local pattern = "%.[%w-_]+"
 
-	local row, lineContent = seekForward(pattern)
+	local row, startCol, lineContent = seekForward(pattern)
 	if not row then return end
 
 	-- determine location of selector in row
-	local start, ending = lineContent:find(pattern)
+	local start, ending = lineContent:find(pattern, startCol)
 	ending = ending - 1
 	if not inner then start = start - 1 end
 
