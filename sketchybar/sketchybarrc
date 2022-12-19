@@ -2,7 +2,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 # restart: `brew services restart sketchybar`
 # reload (does only update items, not the look of the bar): `sketchybar --update`
-#───────────────────────────────────────────────────────────────────────────────
 # INFO: After app update, needs to be re-granted screen recording permissions
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -13,10 +12,6 @@ while ! pgrep "Stats"; do
 done
 
 PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
-
-##### Bar Appearance #####
-# https://felixkratz.github.io/SketchyBar/config/bar
-# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
 defaults read -g AppleInterfaceStyle | grep -iq "Dark"
 IS_DARK_MODE=$?
@@ -33,7 +28,7 @@ IS_AT_OFFICE=$?
 if [[ $IS_AT_OFFICE -eq 1 ]]; then
 	HEIGHT=25
 	ITEM_Y_OFFSET=2
-	# check for unreliable wifi at the office
+	# beomces $@ further below; check for unreliable wifi at the office
 	# explanation on using "set" here: https://www.shellcheck.net/wiki/SC2089
 	set -- --add alias "Control Centre,WiFi" right --set "Control Centre,WiFi"
 else
@@ -47,7 +42,8 @@ cpu_bar_item=$(sketchybar --query default_menu_items | grep -Ei "Stats.*cpu" | c
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# one big call to speed reloading up
+# one big call to speed up reloading 
+# https://felixkratz.github.io/SketchyBar/config/bar
 sketchybar --bar \
 	height="$HEIGHT" \
 	position=top \
@@ -99,9 +95,7 @@ sketchybar --bar \
 
 #───────────────────────────────────────────────────────────────────────────────
 
-##### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration and
 # should never be run in an item script.
-
 sketchybar --update
 echo "Sketchybar configuration loaded."

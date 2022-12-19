@@ -67,6 +67,11 @@ nmap <Down> :lineDown
 nmap <Right> dlp
 nmap <Left> dlhhp
 
+" [m]atch parenthesis
+" WARNING this prevents any use of `m` for sticky cursor mappings, since there
+" is no noremap
+nmap m %
+
 " [g]oto [s]ymbol
 " requires Another Quick Switcher Plugin
 exmap gotoHeading obcommand obsidian-another-quick-switcher:header-floating-search-in-file
@@ -122,22 +127,14 @@ vmap M :mergeLines
 
 " WHITESPACE CONTROL
 " Add Blank Line above/below
-nmap = mzO<Esc>`z
-nmap _ mzo<Esc>`z
+exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
+exmap blankAbove obcommand obsidian-editor-shortcuts:insertLineAbove
+nmap = :blankAbove
+nmap _ :blankBelow
 
 " append space after cursor position
 exmap appendSpace jsfile Meta/obsidian-vim-helpers.js {appendSpace()}
 nmap ! :appendSpace
-
-" Caveat: in visual mode requires cursor being on the right end of the selection
-vmap = <Esc>O<Esc>gv
-vmap _ <Esc>o<Esc>gv
-
-" Append punctuation to end of line
-" `&§&` are helper commands for addings substitution to command chain,
-" `A;<Esc>` does not work as insert mode keystrokes aren't supported
-nmap &§&. :.s/$/./
-nmap ,. mz&§&.`z
 
 """"""""""""""""""""""
 " Markdown-specific
@@ -162,9 +159,7 @@ nmap gd :gotoFootnoteDefinition
 " Prepend Bullet or Blockquote
 exmap toggleBlockquote obcommand editor:toggle-blockquote
 nmap ,< :toggleBlockquote
-vmap ,< :toggleBlockquote
 nmap ,> :toggleBlockquote
-vmap ,> :toggleBlockquote
 
 """"""""""""""""""""""
 " Indentation
