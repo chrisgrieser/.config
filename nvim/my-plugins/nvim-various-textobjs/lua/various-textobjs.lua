@@ -44,13 +44,13 @@ end
 
 ---seek forwards for pattern
 ---@param pattern string lua pattern
----@param startRow integer
----@param startCol integer where to begin search (only on first line)
----@return nil
-local function seekForward(pattern, startRow, startCol)
+---@return nil|integer line pattern was found, or integer
+local function seekForward(pattern)
 	local i = -1
-	---@diagnostic disable-next-line: assign-type-mismatch
 	local lineContent, hasPattern
+	---@diagnostic disable-next-line: assign-type-mismatch, param-type-mismatch
+	local lastLine = fn.getline("$") ---@type string
+	local startRow, startCol = unpack(getCursor(0))
 
 	repeat
 		i = i + 1
@@ -58,7 +58,7 @@ local function seekForward(pattern, startRow, startCol)
 		lineContent = fn.getline(startRow + i) ---@type string
 		hasPattern = lineContent:find(pattern, startCol)
 		startCol = 1 -- after the current row, pattern can occur everywhere in the line
-		if i > lookForwardLines then
+		if i > lookForwardLines or startRow + i > lastLine then
 			vim.notify("Textobject not found within " .. tostring(lookForwardLines) .. ".", vim.log.levels.WARN)
 			return nil
 		end
@@ -159,20 +159,13 @@ end
 function M.valueTextObj(inner)
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
-	local curRow = fn.line(".")
 	local i = 0
-	local valuePattern = "[=:] ?"
+	local pattern = "[=:] ?"
 
-	local hasValue = lineContent:find(valuePattern)
-	while not hasValue do
-		i = i + 1
-		---@diagnostic disable-next-line: assign-type-mismatch
-		lineContent = fn.getline(curRow + i) ---@type string
-		hasValue = lineContent:find(valuePattern)
-		if i > lookForwardLines then return end
-	end
-	curRow = curRow + i
-	local _, start = lineContent:find(valuePattern)
+	local row = seekForward(pattern)
+	if not row then return end
+
+	local _, start = lineContent:find(pattern)
 
 	-- valueEnd either comment or end of line
 	local comStrPattern = bo
@@ -186,7 +179,7 @@ function M.valueTextObj(inner)
 	local lastChar = lineContent:sub(ending + 1, ending + 1)
 	if inner and lastChar:find("[,;]") then valueEnd = valueEnd - 1 end
 
-	setSelection(curRow, curRow, start, ending)
+	setSelection(row, row, start, ending)
 end
 
 --------------------------------------------------------------------------------
