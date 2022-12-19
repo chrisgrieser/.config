@@ -35,10 +35,13 @@ function holeCover ()
 		bgColor = {["red"]=0.8,["blue"]=0.8,["green"]=0.8,["alpha"]=1}
 	end
 
+	-- local pseudoMaxCorner = pseudoMaximized.w*screen.w -- if sideapp is to the right
+	local pseudoMaxCorner = toTheSide.w*screen.w -- if sideapp is to the left
+
 	-- three points, forming roughly a triangle
-	cover1 = hs.drawing.rectangle({x=pseudoMaximized.w*screen.w-9, y=screen.h-3, w=18, h=3})
-	cover2 = hs.drawing.rectangle({x=pseudoMaximized.w*screen.w-6, y=screen.h-6, w=12, h=3})
-	cover3 = hs.drawing.rectangle({x=pseudoMaximized.w*screen.w-3, y=screen.h-9, w=6, h=3})
+	cover1 = hs.drawing.rectangle({x=pseudoMaxCorner-9, y=screen.h-3, w=18, h=3})
+	cover2 = hs.drawing.rectangle({x=pseudoMaxCorner-6, y=screen.h-6, w=12, h=3})
+	cover3 = hs.drawing.rectangle({x=pseudoMaxCorner-3, y=screen.h-9, w=6, h=3})
 
 	-- for some reason, these cannot be put into a function :/
 	cover1:setFillColor(bgColor)

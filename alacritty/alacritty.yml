@@ -86,7 +86,7 @@ font:
 window:
   decorations: buttonless
   position:
-    x: 0  # move completely to the left
+    x: 20  # move completely to the left
     y: 0
   dimensions:
     columns: 100

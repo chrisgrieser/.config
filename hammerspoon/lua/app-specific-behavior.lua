@@ -13,17 +13,7 @@ local function unHideAll()
 end
 
 transBgAppWatcher = aw.new(function(appName, eventType, appObject)
-	if
-		not (
-			appName == "neovide"
-			or appName == "Neovide"
-			or appName == "Obsidian"
-			or appName == "alacritty"
-			or appName == "Alacritty"
-		)
-	then
-		return
-	end
+	if not (appName:lower() == "neovide" or appName == "Obsidian" or appName:lower() == "alacritty") then return end
 	if eventType == aw.activated or eventType == aw.launched then
 		-- some apps like neovide do not set a "launched" signal, so the delayed
 		-- hiding is used for it activation as well
@@ -46,10 +36,10 @@ local function autoTile(windowFilter)
 	if #wins == 0 and frontApp:name() == "Finder" then
 		frontApp:kill() -- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 	elseif #wins == 1 then
-		if frontApp:name() == "Finder" then
-			moveResize(wins[1], centered)
-		elseif isProjector() then
+		if isProjector() then
 			moveResize(wins[1], maximized)
+		elseif frontApp:name() == "Finder" then
+			moveResize(wins[1], centered)
 		else
 			moveResize(wins[1], baseLayout)
 		end
@@ -65,6 +55,19 @@ local function autoTile(windowFilter)
 		moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
 		moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
 		moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
+	elseif #wins == 5 then
+		moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
+		moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
+		moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
+		moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
+		moveResize(wins[5], { h = 0.5, w = 0.5, x = 0.25, y = 0.25 })
+	elseif #wins == 6 then
+		moveResize(wins[1], { h = 0.5, w = 0.33, x = 0, y = 0 })
+		moveResize(wins[2], { h = 0.5, w = 0.33, x = 0, y = 0.5 })
+		moveResize(wins[3], { h = 0.5, w = 0.34, x = 0.33, y = 0 })
+		moveResize(wins[4], { h = 0.5, w = 0.34, x = 0.33, y = 0.5 })
+		moveResize(wins[5], { h = 0.5, w = 0.33, x = 0.67, y = 0 })
+		moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.67, y = 0.5 })
 	end
 end
 
@@ -106,7 +109,7 @@ spotifyAppWatcher = aw.new(function(appName, eventType)
 	then
 		if eventType == aw.launched then
 			spotifyTUI("pause")
-		elseif eventType == aw.terminated and not (isProjector()) then
+		elseif eventType == aw.terminated and not isProjector() then
 			spotifyTUI("play")
 		end
 	end
