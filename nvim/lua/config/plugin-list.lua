@@ -174,6 +174,7 @@ function M.PluginList(use)
 		keys = {{"n", ":"}},
 	}
 	use {"kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async"} -- better folding
+	use "unblevable/quick-scope" -- f/t preview
 
 	-- Filetype-specific
 	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
