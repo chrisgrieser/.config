@@ -9,14 +9,18 @@ leftHalf = hs.layout.left50
 
 -- device-specific parameters
 if isIMacAtHome() then
-	pseudoMaximized = { x = 0, y = 0, w = 0.816, h = 1 }
+	-- pseudoMaximized = { x = 0, y = 0, w = 0.816, h = 1 }
+	-- toTheSide = { x = 0.815, y = 0.025, w = 0.185, h = 0.975 }
+	pseudoMaximized = { x = 0.184, y = 0, w = 0.816, h = 1 }
+	toTheSide = { x = 0, y = 0.025, w = 0.185, h = 0.975 }
 	baseLayout = pseudoMaximized
-	toTheSide = { x = 0.815, y = 0.025, w = 0.185, h = 0.975 }
 	centered = { x = 0.2, y = 0, w = 0.616, h = 1 }
 elseif isAtMother() then
-	pseudoMaximized = { x = 0, y = 0, w = 0.7875, h = 1 }
+	-- pseudoMaximized = { x = 0, y = 0, w = 0.7875, h = 1 }
+	-- toTheSide = { x = 0.7875, y = 0.03, w = 0.2125, h = 0.97 }
+	pseudoMaximized = { x = 0.2125, y = 0, w = 0.7875, h = 1 }
+	toTheSide = { x = 0, y = 0.03, w = 0.2125, h = 0.97 }
 	baseLayout = pseudoMaximized
-	toTheSide = { x = 0.7875, y = 0.03, w = 0.2125, h = 0.97 }
 	centered = { x = 0.2, y = 0, w = 0.616, h = 1 }
 elseif isAtOffice() then
 	baseLayout = maximized
@@ -48,11 +52,8 @@ function toggleDraftsSidebar(draftsWin)
 	runWithDelays({ 0.05, 0.2 }, function()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
-		if drafts_w / screen_w > 0.6 then
-			openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
-		else
-			openLinkInBackground("drafts://x-callback-url/runAction?text=&action=hide-sidebar")
-		end
+		local mode = drafts_w / screen_w > 0.6 and "show" or "false"
+		openLinkInBackground("drafts://x-callback-url/runAction?text=&action=" .. mode .. "-sidebar")
 	end)
 end
 
@@ -63,11 +64,8 @@ function toggleHighlightsSidebar(highlightsWin)
 		local screen_w = highlightsWin:screen():frame().w
 		local highlightsApp = hs.application("Highlights")
 		highlightsApp:activate()
-		if highlights_w / screen_w > 0.6 then
-			highlightsApp:selectMenuItem { "View", "Show Sidebar" }
-		else
-			highlightsApp:selectMenuItem { "View", "Hide Sidebar" }
-		end
+		local mode = highlights_w / screen_w > 0.6 and "Show" or "False"
+		highlightsApp:selectMenuItem { "View", mode .. " Sidebar" }
 	end)
 end
 
@@ -83,11 +81,8 @@ function toggleObsidianSidebar(obsiWin)
 
 		-- if pseudo-maximized, hide sidebar, if half or full show sidebar
 		-- (full = used as split pane)
-		if (obsi_width / screen_width > 0.6) and (obsi_width / screen_width < 0.99) then
-			openLinkInBackground("obsidian://sidebar?showLeft=true&showRight=false")
-		else
-			openLinkInBackground("obsidian://sidebar?showLeft=false&showRight=false")
-		end
+		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "true" or "false"
+		openLinkInBackground("obsidian://sidebar?showLeft=" .. mode .. "&showRight=false")
 	end)
 end
 
