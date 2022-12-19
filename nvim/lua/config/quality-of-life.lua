@@ -128,12 +128,16 @@ function M.betterClose()
 	local buffers = fn.getbufinfo { buflisted = 1 }
 
 	cmd.nohlsearch()
-	cmd.update()
+	if bo.modifiable then cmd.update() end
+
 	if moreThanOneTab then
 		cmd.tabclose()
 	elseif moreThanOneWin then
-		if bo.filetype == "" then cmd.bwipeout() end -- scratch buffers
-		cmd.close()
+		if bo.filetype == "" then -- scratch buffers
+			cmd.bwipeout()
+		else
+			cmd.close()
+		end
 	elseif #buffers == 2 then
 		cmd.bwipeout() -- only method to clear altfile in this case
 	elseif #buffers > 1 then

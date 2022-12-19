@@ -14,7 +14,7 @@ local lintersAndFormatters = {
 	"vale", -- natural language
 	"selene", -- lua
 	"stylua", -- lua
-	"prettier",
+	"prettier", -- only for TS and JS
 	"codespell", -- common misspellings, autoformatted
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
@@ -23,7 +23,6 @@ local lintersAndFormatters = {
 --------------------------------------------------------------------------------
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
-
 null_ls.setup {
 	sources = {
 		-- Global

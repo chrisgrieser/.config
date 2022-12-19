@@ -461,7 +461,7 @@ keymap("n", "<leader>r", function()
 		fn.system("pandoc '" .. filepath .. "' --output='" .. pdfFilename .. "' --pdf-engine=wkhtmltopdf")
 		fn.system("open '" .. pdfFilename .. "'")
 	elseif ft == "lua" then
-		if parentFolder:find("nvim") then
+		if parentFolder:find("nvim/lua") then
 			cmd.write()
 			cmd.source("%")
 			if filename:find("plugin%-list") then

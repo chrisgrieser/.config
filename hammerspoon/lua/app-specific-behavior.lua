@@ -48,6 +48,8 @@ local function autoTile(windowFilter)
 	elseif #wins == 1 then
 		if frontApp:name() == "Finder" then
 			moveResize(wins[1], centered)
+		elseif isProjector() then
+			moveResize(wins[1], maximized)
 		else
 			moveResize(wins[1], baseLayout)
 		end
