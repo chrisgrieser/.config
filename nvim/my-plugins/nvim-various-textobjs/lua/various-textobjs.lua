@@ -40,7 +40,7 @@ end
 
 --------------------------------------------------------------------------------
 -- TODO setup function with some configs
-local lookForwardLines = 5
+local lookForwardLines = 8
 
 --------------------------------------------------------------------------------
 
@@ -81,10 +81,10 @@ end
 ---similar to https://github.com/andrewferrier/textobj-diagnostic.nvim
 ---requires builtin LSP
 function M.diagnosticTextobj()
-	local diag = vim.diagnostic.get_next {}
+	local diag = vim.diagnostic.get_next {wrap = false}
 	if not diag then return end
 	local curLine = fn.line(".")
-	if diag.lnum - lookForwardLines < curLine then return end
+	if curLine + lookForwardLines > diag.lnum then return end
 	setSelection(diag.lnum + 1, diag.end_lnum + 1, diag.col, diag.end_col)
 end
 
@@ -227,10 +227,10 @@ function M.jsRegexTextobj(inner)
 
 	-- determine location in row
 	local start, ending = lineContent:find(pattern, curCol)
-	ending = ending - 1
 	if inner then
-		ending = ending - 1
+		ending = ending - 2
 	else
+		ending = ending - 1
 		start = start - 1
 	end
 
