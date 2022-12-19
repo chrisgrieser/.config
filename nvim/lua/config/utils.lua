@@ -19,27 +19,28 @@ logTrace = vim.log.levels.TRACE
 
 qol = require("config/quality-of-life")
 telescope = require("telescope.builtin")
+varTextObj = require("various-textobjs")
 
 ---equivalent to `:setlocal option=value`
 ---@param option string
 ---@param value any
 function setlocal(option, value)
 	-- :setlocal does not have a direct access via the vim-module, it seems https://neovim.io/doc/user/lua.html#lua-vim-setlocal
-	vim.api.nvim_set_option_value(option, value, {scope = "local"})
+	vim.api.nvim_set_option_value(option, value, { scope = "local" })
 end
+
+---runs :normal natively with bang
+---@param cmdStr any
+function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 ---equivalent to `:setlocal option&`
 ---@param option string
 ---@return any
-function getlocalopt(option)
-	return vim.api.nvim_get_option_value(option, {scope = "local"})
-end
+function getlocalopt(option) return vim.api.nvim_get_option_value(option, { scope = "local" }) end
 
 ---whether nvim runs in a GUI
 ---@return boolean
-function isGui()
-	return g.neovide or g.goneovim
-end
+function isGui() return g.neovide or g.goneovim end
 
 -- common shell options for fn.jobstart()
 shellOpts = {
@@ -47,12 +48,12 @@ shellOpts = {
 	stderr_buffered = true,
 	detach = true,
 	on_stdout = function(_, data, _)
-		if not (data) or (data[1] == "" and #data == 1) then return end
+		if not data or (data[1] == "" and #data == 1) then return end
 		local stdOut = table.concat(data, " \n "):gsub("%s*$", "")
 		vim.notify(stdOut)
 	end,
 	on_stderr = function(_, data, _)
-		if not (data) or (data[1] == "" and #data == 1) then return end
+		if not data or (data[1] == "" and #data == 1) then return end
 		local stdErr = table.concat(data, " \n "):gsub("%s*$", "")
 		vim.notify(stdErr)
 	end,
@@ -87,7 +88,7 @@ end
 ---@param str string
 ---@return string
 function trim(str)
-	if not (str) then return "" end
+	if not str then return "" end
 	return (str:gsub("^%s*(.-)%s*$", "%1"))
 end
 

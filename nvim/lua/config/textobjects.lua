@@ -1,5 +1,4 @@
 require("config/utils")
-local varTextobjs = require("various-textobjs")
 --------------------------------------------------------------------------------
 -- New Text objects
 -- af -> a [f]unction (treesitter)
@@ -53,26 +52,21 @@ keymap("x", "<Space>", '"_c')
 -- VARIOUS TEXTOBJS
 
 -- subword
-keymap("o", "<Space>", varTextobjs.subword, { desc = "subword textobj" })
+keymap("o", "<Space>", varTextObj.subword, { desc = "subword textobj" })
 
 -- n: [n]ear end of the line
-keymap({ "o", "x" }, "n", varTextobjs.nearEoL, { desc = "almost ending of line textobj" })
+keymap({ "o", "x" }, "n", varTextObj.nearEoL, { desc = "almost ending of line textobj" })
 
 -- r: [r]est of paragraph (linewise)
-keymap({ "o", "x" }, "r", varTextobjs.restOfParagraph, { desc = "rest of paragraph (linewise)" })
+keymap({ "o", "x" }, "r", varTextObj.restOfParagraph, { desc = "rest of paragraph (linewise)" })
 
 -- av/iv: value textobj
-keymap({ "x", "o" }, "iv", function() varTextobjs.value(true) end, { desc = "inner value textobj" })
-keymap({ "x", "o" }, "av", function() varTextobjs.value(false) end, { desc = "outer value textobj" })
+keymap({ "x", "o" }, "iv", function() varTextObj.value(true) end, { desc = "inner value textobj" })
+keymap({ "x", "o" }, "av", function() varTextObj.value(false) end, { desc = "outer value textobj" })
 
 -- ii/ai: indentation textobj
-keymap(
-	{ "x", "o" },
-	"ii",
-	function() varTextobjs.indentation(false, false) end,
-	{ desc = "inner indentation textobj" }
-)
-keymap({ "x", "o" }, "ai", function() varTextobjs.indentation(true, true) end, { desc = "outer indentation textobj" })
+keymap({ "x", "o" }, "ii", function() varTextObj.indentation(false, false) end, { desc = "inner indentation textobj" })
+keymap({ "x", "o" }, "ai", function() varTextObj.indentation(true, true) end, { desc = "outer indentation textobj" })
 
 augroup("IndentedFileTypes", {})
 autocmd("FileType", {
@@ -83,7 +77,7 @@ autocmd("FileType", {
 			keymap(
 				{ "x", "o" },
 				"ai",
-				function() varTextobjs.indentation(true, false) end,
+				function() varTextObj.indentation(true, false) end,
 				{ buffer = true, desc = "indentation textobj with start border" }
 			)
 		end
@@ -98,7 +92,7 @@ for _, prefix in pairs { "a", "i" } do
 	keymap({ "x", "o" }, prefix .. "h", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
 
 	-- Diagnostics
-	keymap({ "x", "o" }, prefix .. "d", varTextobjs.diagnostic, { desc = "diagnostic textobj" })
+	keymap({ "x", "o" }, prefix .. "d", varTextObj.diagnostic, { desc = "diagnostic textobj" })
 end
 
 --------------------------------------------------------------------------------
