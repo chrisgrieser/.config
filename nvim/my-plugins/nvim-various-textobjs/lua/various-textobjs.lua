@@ -7,6 +7,10 @@ local opt = vim.opt
 local M = {}
 --------------------------------------------------------------------------------
 
+-- TODO setup function with some configs
+local lookForwardLines = 8
+--------------------------------------------------------------------------------
+
 ---runs :normal natively with bang
 ---@param cmdStr any
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
@@ -38,9 +42,30 @@ local function setSelection(startLine, endLine, startCol, endCol)
 	setCursor(0, { endLine, endCol })
 end
 
---------------------------------------------------------------------------------
--- TODO setup function with some configs
-local lookForwardLines = 8
+---seek forwards for pattern
+---@param pattern string lua pattern
+---@param startRow integer
+---@param startCol integer where to begin search (only on first line)
+---@return nil
+local function seekForward(pattern, startRow, startCol)
+	local i = -1
+	---@diagnostic disable-next-line: assign-type-mismatch
+	local lineContent, hasPattern
+
+	repeat
+		i = i + 1
+		---@diagnostic disable-next-line: assign-type-mismatch
+		lineContent = fn.getline(startRow + i) ---@type string
+		hasPattern = lineContent:find(pattern, startCol)
+		startCol = 1 -- after the current row, pattern can occur everywhere in the line
+		if i > lookForwardLines then
+			vim.notify("Textobject not found within " .. tostring(lookForwardLines) .. ".", vim.log.levels.WARN)
+			return nil
+		end
+	until hasPattern
+
+	return startRow + i
+end
 
 --------------------------------------------------------------------------------
 
@@ -81,7 +106,7 @@ end
 ---similar to https://github.com/andrewferrier/textobj-diagnostic.nvim
 ---requires builtin LSP
 function M.diagnosticTextobj()
-	local diag = vim.diagnostic.get_next {wrap = false}
+	local diag = vim.diagnostic.get_next { wrap = false }
 	if not diag then return end
 	local curLine = fn.line(".")
 	if curLine + lookForwardLines > diag.lnum then return end
@@ -247,20 +272,20 @@ function M.cssSelectorTextobj(inner)
 	local i = 0
 
 	-- determine next row with selector
-	local selectorPattern = "%.[%w-_]+"
-	local hasSelector = lineContent:find(selectorPattern)
-	while not hasSelector do
+	local pattern = "%.[%w-_]+"
+	local hasPattern = lineContent:find(pattern)
+	while not hasPattern do
 		i = i + 1
 		---@diagnostic disable-next-line: assign-type-mismatch
 		lineContent = fn.getline(curRow + i) ---@type string
-		hasSelector = lineContent:find(selectorPattern)
+		hasPattern = lineContent:find(pattern)
 		curCol = 1 -- after the current row, pattern can occur everywhere in the line
 		if i > lookForwardLines then return end
 	end
 	curRow = curRow + i
 
 	-- determine location of selector in row
-	local start, ending = lineContent:find(selectorPattern, curCol)
+	local start, ending = lineContent:find(pattern, curCol)
 	ending = ending - 1
 	if not inner then start = start - 1 end
 

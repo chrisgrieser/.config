@@ -298,7 +298,7 @@ keymap("n", "Ö", "<C-w>o", {desc = "close other windows"})
 if isGui() then
 	keymap({ "n", "x", "i" }, "<D-w>", qol.betterClose, {desc = "close buffer/window/tab"}) -- cmd+w
 
-	keymap({ "n", "x", "i" }, "<D-s>", cmd.write, {dec = "save"}) -- cmd+s, will be overridden on lsp attach
+	keymap({ "n", "x", "i" }, "<D-s>", cmd.write, {desc = "save"}) -- cmd+s, will be overridden on lsp attach
 	keymap("n", "<D-a>", "ggVG", {desc = "select all"}) -- cmd+a
 	keymap("i", "<D-a>", "<Esc>ggVG", {desc = "select all"})
 	keymap("x", "<D-a>", "ggG", {desc = "select all"})
