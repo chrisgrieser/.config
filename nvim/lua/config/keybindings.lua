@@ -58,7 +58,7 @@ keymap({ "x", "o" }, "J", "6j")
 keymap({ "n", "x", "o" }, "K", "6k")
 
 keymap("n", "k", function()
-	cmd.normal { "k", bang = true }
+	normal("k")
 	cmd.nohlsearch()
 end, { desc = "k also triggers :nohl" })
 
@@ -88,7 +88,7 @@ keymap({ "n", "x", "o" }, "*", "#") -- backwards on the same key (German Layout)
 -- MARKS
 keymap("", "ä", "`M", { desc = "goto mark M" }) -- Goto Mark M
 keymap("", "Ä", function() -- Set Mark M
-	cmd.normal { "mM", bang = true }
+	normal("mM")
 	vim.notify("Mark M set")
 end, { desc = "set mark M" })
 
@@ -107,7 +107,6 @@ keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 
 -- quickscope: only highlight when key is pressed
 g.qs_highlight_on_keys = { "f", "F", "t", "T" }
-g.qs_filetype_blacklist = {}
 
 --------------------------------------------------------------------------------
 
@@ -209,8 +208,7 @@ keymap("n", "X", cmd.ISwapWith, { desc = "swap nodes" })
 keymap("n", "<leader>f", [[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "search & replace" })
 keymap("x", "<leader>f", ":sm///g<Left><Left><Left>", { desc = "search & replace" })
 keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "structural search & replace" }) -- wrapped in function for lazy-loading
-keymap({"n", "x"}, "<leader>n", ":normal ", {desc = ":normal"})
-
+keymap({ "n", "x" }, "<leader>n", ":normal ", { desc = ":normal" })
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine, { desc = "duplicate line" })
@@ -284,17 +282,15 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 -- VISUAL MODE
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
 keymap("x", "v", "<C-v>") -- `vv` from normal mode = visual block mode
-keymap("x", "u", "<Esc>u") -- actually undo/redo in visual mode
-keymap("x", "U", "<Esc><C-r>")
 
 --------------------------------------------------------------------------------
 -- WINDOWS & SPLITS
-keymap("", "<C-w>v", ":vsplit #<CR>") -- open the alternate file in the split instead of the current file
-keymap("", "<C-w>h", ":split #<CR>")
-keymap("", "<C-Right>", ":vertical resize +3<CR>") -- resizing on one key for sanity
-keymap("", "<C-Left>", ":vertical resize -3<CR>")
-keymap("", "<C-Down>", ":resize +3<CR>")
-keymap("", "<C-Up>", ":resize -3<CR>")
+keymap("", "<C-w>v", ":vsplit #<CR>", { desc = "vertical split (alt file)" }) -- open the alternate file in the split instead of the current file
+keymap("", "<C-w>h", ":split #<CR>", { desc = "horizontal split (alt file)" })
+keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize" }) -- resizing on one key for sanity
+keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize" })
+keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize" })
+keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize" })
 keymap("n", "ö", "<C-w>w", { desc = "switch to next window" })
 keymap("n", "Ö", "<C-w>o", { desc = "close other windows" })
 
@@ -328,14 +324,14 @@ if isGui() then
 	keymap("i", "<D-v>", "<C-r><C-o>+", { desc = "paste" })
 
 	-- cmd+e: inline code
-	keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>") -- no selection = word under cursor
-	keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>")
-	keymap("i", "<D-e>", "``<Left>")
+	keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "Inline Code Markup" }) -- no selection = word under cursor
+	keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "Inline Code Markup" })
+	keymap("i", "<D-e>", "``<Left>", { desc = "Inline Code Markup" })
 
-	-- cmd+t: Template ${string}
-	keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>b") -- no selection = word under cursor
-	keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b")
-	keymap("i", "<D-t>", "${}<Left>")
+	-- cmd+t: template string
+	keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>b", { desc = "Template String Markup" }) -- no selection = word under cursor
+	keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b", { desc = "Template String Markup" })
+	keymap("i", "<D-t>", "${}<Left>", { desc = "Template String Markup" })
 end
 
 --------------------------------------------------------------------------------
@@ -375,22 +371,22 @@ autocmd("BufReadPost", {
 -- FILES
 
 -- File Switchers
-keymap("n", "go", telescope.find_files) -- [o]pen file in parent-directory
-keymap("n", "gO", telescope.git_files) -- [o]pen file in git directory
-keymap("n", "gr", telescope.oldfiles) -- [r]ecent files
-keymap("n", "gF", telescope.live_grep) -- search in [f]iles
-keymap("n", "gR", telescope.resume) -- [R]esume last search
+keymap("n", "go", telescope.find_files, { desc = "Telescope: Files in cwd" })
+keymap("n", "gO", telescope.git_files, { desc = "Telescope: Git Files" })
+keymap("n", "gr", telescope.oldfiles, { desc = "Telescope: Recent Files" })
+keymap("n", "gF", telescope.live_grep, { desc = "Telescope: Search in cwd" })
+keymap("n", "gR", telescope.resume, { desc = "Telescope: Resume" })
 
 -- File Operations (no shorthand for lazy-loading)
-keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, {desc = "copy filepath"})
-keymap("n", "<C-n>", function() require("genghis").copyFilename() end, {desc = "copy filename"})
-keymap("n", "<leader>x", function() require("genghis").chmodx() end, {desc = "chmod +x"})
-keymap("n", "<C-r>", function() require("genghis").renameFile() end, {desc = "rename file"})
-keymap("n", "<C-m>", function() require("genghis").moveAndRenameFile() end, {desc = "move & rename file"})
-keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, {desc = "duplicate file"})
-keymap("", "<D-BS>", function() require("genghis").trashFile() end, {desc = "move file to trash"})
-keymap("", "<D-n>", function() require("genghis").createNewFile() end, {desc = "create new file"})
-keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, {desc = "move selection to new file"})
+keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = "copy filepath" })
+keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = "copy filename" })
+keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = "chmod +x" })
+keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = "rename file" })
+keymap("n", "<C-m>", function() require("genghis").moveAndRenameFile() end, { desc = "move & rename file" })
+keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = "duplicate file" })
+keymap("", "<D-BS>", function() require("genghis").trashFile() end, { desc = "move file to trash" })
+keymap("", "<D-n>", function() require("genghis").createNewFile() end, { desc = "create new file" })
+keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = "move selection to new file" })
 
 --------------------------------------------------------------------------------
 -- GIT
@@ -493,9 +489,9 @@ keymap("n", "<leader>r", function()
 		cmd([[!npm run build]]) -- not via fn.system to get the output in the cmdline
 	elseif ft == "applescript" then
 		cmd.AppleScriptRun()
-		cmd.normal { "<C-w><C-p>", bang = true } -- switch to previous window
+		normal("<C-w><C-p>") -- switch to previous window
 	else
-		vim.notify("No build system set.", "warn")
+		vim.notify("No build system set.", logWarn)
 	end
 end)
 

@@ -30,8 +30,8 @@ g.markdown_fenced_languages = {
 
 --------------------------------------------------------------------------------
 
-keymap({ "o", "x" }, "al", function() require("various-textobjs").mdlink(false) end,{ desc =  "outer mdlink textobj", buffer = true })
-keymap({ "o", "x" }, "il", function() require("various-textobjs").mdlink(true) end, { desc = "inner mdlink textobj", buffer = true })
+keymap({ "o", "x" }, "al", function() varTextObj.mdlink(false) end, { desc = "outer mdlink textobj", buffer = true })
+keymap({ "o", "x" }, "il", function() varTextObj.mdlink(true) end, { desc = "inner mdlink textobj", buffer = true })
 
 --------------------------------------------------------------------------------
 
@@ -52,8 +52,6 @@ setlocal("signcolumn", "yes:9")
 -- automatically open float, since virtual text is hard to read with wrapping
 keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, opts)
 keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, opts)
-
---------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 

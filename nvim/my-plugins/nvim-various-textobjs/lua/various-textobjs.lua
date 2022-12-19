@@ -117,8 +117,6 @@ function M.diagnostic()
 	setSelection(diag.lnum + 1, diag.end_lnum + 1, diag.col, diag.end_col)
 end
 
---------------------------------------------------------------------------------
-
 -- INDENTATION OBJECT
 ---indentation textobj, based on https://thevaluable.dev/vim-create-text-objects/
 ---@param startBorder boolean
@@ -156,8 +154,6 @@ function M.indentation(startBorder, endBorder)
 	setCursor(0, { nextLnum, 0 })
 end
 
---------------------------------------------------------------------------------
-
 ---VALUE TEXT OBJECT
 ---@param inner boolean
 function M.value(inner)
@@ -183,6 +179,21 @@ function M.value(inner)
 	-- inner value = without trailing comma/semicolon
 	local lastChar = lineContent:sub(ending + 1, ending + 1)
 	if inner and lastChar:find("[,;]") then ending = ending - 1 end
+
+	setSelection(row, row, start, ending)
+end
+
+
+---number textobj
+---@param inner boolean inner number (no decimal or minus-sign)
+function M.number(inner)
+	local pattern = inner and "%d+" or "-?[%d.]+"
+	normal("E") -- go to beginning of word
+
+	local row, startCol, lineContent = seekForward(pattern)
+	if not row then return end
+
+	local start, ending = lineContent:find(pattern, startCol)
 
 	setSelection(row, row, start, ending)
 end

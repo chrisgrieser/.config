@@ -53,13 +53,13 @@ keymap({ "n", "x" }, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 keymap(
 	{ "o", "x" },
 	"as",
-	function() require("various-textobjs").cssSelector(false) end,
+	function() varTextObj.cssSelector(false) end,
 	{ desc = "outer CSS selector textobj", buffer = true }
 )
 keymap(
 	{ "o", "x" },
 	"is",
-	function() require("various-textobjs").cssSelector(true) end,
+	function() varTextObj.cssSelector(true) end,
 	{ desc = "inner CSS selector textobj", buffer = true }
 )
 
