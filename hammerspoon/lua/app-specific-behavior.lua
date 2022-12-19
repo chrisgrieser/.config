@@ -315,7 +315,7 @@ draftsWatcher = aw.new(function(appName, eventType, appObject)
 
 	if eventType == aw.launching or eventType == aw.activated then
 		local workspace = isAtOffice() and "Office" or "Home"
-		runWithDelays({ 0.2, 0.4 }, function()
+		runWithDelays({ 0.2 }, function()
 			local name = appObject:focusedWindow():title()
 			local isTaskList = name:find("Supermarkt$") or name:find("Drogerie$") or name:find("Ernährung$")
 			if not isTaskList then appObject:selectMenuItem { "Workspaces", workspace } end
