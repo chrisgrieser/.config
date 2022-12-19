@@ -10,40 +10,42 @@ keymap("n", "<leader>lc", function()
 	local lastCommand = fn.getreg(":")
 	fn.setreg("+", lastCommand)
 	vim.notify("COPIED\n" .. lastCommand)
-end)
+end, {desc = "Copy last command"})
 
 -- run [l]ast command [a]gain
-keymap("n", "<leader>la", "@:")
+keymap("n", "<leader>la", "@:", {desc = "Run last command again"})
 
 -- search keymaps
-keymap("n", "?", telescope.keymaps)
+keymap("n", "?", telescope.keymaps, {desc = "Telescope: Keymaps"})
 
 -- Theme Picker
-keymap("n", "<leader>T", telescope.colorscheme)
+keymap("n", "<leader>T", telescope.colorscheme, {desc = "Telescope: Colorschemes"})
 
 -- Highlights
-keymap("n", "<leader>H", telescope.highlights)
+keymap("n", "<leader>H", telescope.highlights, {desc = "Telescope: Highlight Groups"})
 
 -- Mason
-keymap("n", "<leader>M", cmd.Mason)
+keymap("n", "<leader>M", cmd.Mason, {desc = ":Mason"})
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
 	cmd.update { bang = true }
 	packer.compile()
-	package.loaded["plugin-list"] = nil -- empty the cache for lua
-	packer.startup(require("plugin-list").PluginList)
+	if package.loaded["plugin-list"] then
+		package.loaded["plugin-list"] = nil -- empty the cache for lua
+		packer.startup(require("plugin-list").PluginList)
+	end
 	packer.snapshot("packer-snapshot_" .. os.date("!%Y-%m-%d_%H-%M-%S"))
 	packer.sync()
 	cmd.MasonUpdateAll()
 	-- remove oldest snapshot when more than 20
 	local snapshotPath = fn.stdpath("config") .. "/packer-snapshots"
 	os.execute([[cd ']] .. snapshotPath .. [[' ; ls -t | tail -n +20 | tr '\n' '\0' | xargs -0 rm]])
-end)
-keymap("n", "<leader>P", packer.status)
+end, {desc = ":PackerSnapshot & :PackerSync"})
+keymap("n", "<leader>P", packer.status, {desc = ":PackerStatus"})
 
 -- write all before quitting
-keymap("n", "ZZ", ":wall! | qa!<CR>")
+keymap("n", "ZZ", ":wall! | qa!<CR>", {desc = "writeall, quitall"})
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -68,8 +70,8 @@ keymap("n", "J", function() qol.overscroll("6j") end, { desc = "6j (with overscr
 keymap({ "n", "x" }, "G", "Gzz")
 
 -- Jump History
-keymap("n", "<C-h>", "<C-o>") -- Back
-keymap("n", "<C-l>", "<C-i>") -- Forward
+keymap("n", "<C-h>", "<C-o>", {desc = "Jump back"}) 
+keymap("n", "<C-l>", "<C-i>", {desc = "Jump forward"}) 
 
 -- Search
 keymap({ "n", "x", "o" }, "-", [[/\v]]) -- German Keyboard, \v for very-magic search
@@ -94,10 +96,10 @@ end, { desc = "set mark M" })
 keymap("n", "^", "za", { desc = "toggle fold" }) -- quicker toggling of folds
 
 -- [M]atch
-keymap({ "n", "x", "o" }, "m", "%")
+keymap({ "n", "x", "o" }, "m", "%", {desc = "match parenthesis"})
 
 -- Middle of the Line
-keymap({ "n", "x" }, "gm", "gM")
+keymap({ "n", "x" }, "gm", "gM", { desc = "goto middle of logical line" })
 
 -- Hunks
 keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
@@ -118,13 +120,13 @@ require("yanky").setup {
 
 keymap({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
 keymap("n", "P", "<Plug>(YankyCycleForward)")
-keymap("n", "gp", qol.pasteDifferently) -- paste charwise reg as linewise & vice versa
+keymap("n", "gp", qol.pasteDifferently, {desc = "paste differently"}) -- paste charwise reg as linewise & vice versa
 keymap("n", "gP", "<Plug>(YankyCycleBackward)")
 
 -- yanking without moving the cursor
 -- visual https://stackoverflow.com/a/3806683#comment10788861_3806683
 -- normal https://www.reddit.com/r/vim/comments/ekgy47/comment/fddnfl3/
-keymap("x", "y", "ygv<Esc>")
+keymap("x", "y", "ygv<Esc>", {desc = "sticky yank"})
 augroup("yankKeepCursor", {})
 autocmd({ "CursorMoved", "VimEnter" }, {
 	group = "yankKeepCursor",
@@ -156,15 +158,15 @@ recorder.setup {
 --------------------------------------------------------------------------------
 
 -- Whitespace Control
-keymap("n", "!", "a <Esc>h") -- insert space
-keymap("n", "=", "mzO<Esc>`z") -- add blank above
-keymap("n", "_", "mzo<Esc>`z") -- add blank below
+keymap("n", "!", "a <Esc>h", { desc = "insert space" })
+keymap("n", "=", "mzO<Esc>`z", { desc = "add blank above" })
+keymap("n", "_", "mzo<Esc>`z", { desc = "add blank below" })
 
 -- Indentation
-keymap("n", "<Tab>", ">>")
-keymap("n", "<S-Tab>", "<<")
-keymap("x", "<Tab>", ">gv")
-keymap("x", "<S-Tab>", "<gv")
+keymap("n", "<Tab>", ">>", {desc = "indent"})
+keymap("n", "<S-Tab>", "<<", {desc = "outdent"})
+keymap("x", "<Tab>", ">gv", {desc = "indent"})
+keymap("x", "<S-Tab>", "<gv", {desc = "outdent"})
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -190,40 +192,45 @@ keymap("n", "zf", "mz1z=`z") -- auto[f]ix word under cursor (= select 1st sugges
 local substi = require("substitute")
 local exchange = require("substitute.exchange")
 substi.setup()
-keymap("n", "s", substi.operator)
-keymap("n", "ss", substi.line)
-keymap("n", "S", substi.eol)
-keymap("n", "sx", exchange.operator)
-keymap("n", "sxx", exchange.line)
+keymap("n", "s", substi.operator, { desc = "substitute operator" })
+keymap("n", "ss", substi.line, { desc = "substitute line" })
+keymap("n", "S", substi.eol, { desc = "substitute to end of line" })
+keymap("n", "sx", exchange.operator, { desc = "exchange operator" })
+keymap("n", "sxx", exchange.line, { desc = "exchange line" })
 
 -- ISwap
 keymap("n", "X", cmd.ISwapWith, { desc = "swap nodes" })
 
 -- search & replace
-keymap("n", "<leader>f", [[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]])
-keymap("x", "<leader>f", ":sm///g<Left><Left><Left>")
-keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end) -- wrapped in function for lazy-loading
+keymap("n", "<leader>f", [[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "search & replace" })
+keymap("x", "<leader>f", ":sm///g<Left><Left><Left>", { desc = "search & replace" })
+keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "structural search & replace" }) -- wrapped in function for lazy-loading
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
-keymap("n", "R", qol.duplicateLine)
-keymap("n", "<A-r>", function() qol.duplicateLine { increment = true } end)
-keymap("x", "R", qol.duplicateSelection)
+keymap("n", "R", qol.duplicateLine, { desc = "duplicate line" })
+keymap(
+	"n",
+	"<A-r>",
+	function() qol.duplicateLine { increment = true } end,
+	{ desc = "duplicate line, incrementing numbers" }
+)
+keymap("x", "R", qol.duplicateSelection, { desc = "duplicate selection" })
 
 -- Undo
-keymap({ "n", "x" }, "U", "<C-r>") -- redo
-keymap("n", "<C-u>", qol.undoDuration)
-keymap("n", "<leader>u", function() require("telescope-undo")() end)
-keymap("i", "<Space>", "<Space><C-g>u") -- extra undo point for every space
+keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
+keymap("n", "<C-u>", qol.undoDuration, { desc = "undo specific durations" })
+keymap("n", "<leader>u", function() require("telescope-undo")() end, { desc = "Telescope Undotree" })
+keymap("i", "<Space>", "<Space><C-g>u", { desc = "add blank below" })
 
 -- Logging & Debugging
-keymap({ "n", "x" }, "<leader>ll", qol.quicklog)
-keymap("n", "<leader>lr", qol.removeLog)
+keymap({ "n", "x" }, "<leader>ll", qol.quicklog, { desc = "add log statement" })
+keymap("n", "<leader>lr", qol.removeLog, { desc = "remove all log statements" })
 
 -- Sort & highlight duplicate lines
-keymap({ "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]]) -- second <CR> due to cmdheight=0
+keymap({ "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { desc = "sort & highlight duplicates" }) -- second <CR> due to cmdheight=0
 
 -- sane-gx
-keymap("n", "gx", qol.bettergx)
+keymap("n", "gx", qol.bettergx, { desc = "open next URL" })
 
 --------------------------------------------------------------------------------
 
@@ -238,12 +245,12 @@ keymap("x", "<Right>", qol.moveSelectionRight)
 keymap("x", "<Left>", qol.moveSelectionLeft)
 
 -- Merging / Splitting Lines
-keymap({ "n", "x" }, "M", "J") -- [M]erge line up
-keymap({ "n", "x" }, "<leader>m", "ddpkJ") -- [m]erge line down
-keymap("n", "|", "a<CR><Esc>k$") -- Split line at cursor
+keymap({ "n", "x" }, "M", "J", { desc = "merge line up" })
+keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "merge line down" })
+keymap("n", "|", "a<CR><Esc>k$", { desc = "split line at cursor" })
 
 -- TreeSJ plugin + Splitjoin-Fallback
-keymap("n", "<leader>s", cmd.TSJToggle)
+keymap("n", "<leader>s", cmd.TSJToggle, { desc = "split/join" })
 
 require("treesj").setup { use_default_keymaps = false }
 augroup("splitjoinFallback", {}) -- HACK: https://github.com/Wansmer/treesj/discussions/19
@@ -252,7 +259,9 @@ autocmd("FileType", {
 	group = "splitjoinFallback",
 	callback = function()
 		local langs = require("treesj.langs")["presets"]
-		if not langs[bo.filetype] then keymap("n", "<leader>s", ":SplitjoinSplit<CR>", { buffer = true }) end
+		if not langs[bo.filetype] then
+			keymap("n", "<leader>s", ":SplitjoinSplit<CR>", { buffer = true, desc = "split/join" })
+		end
 	end,
 })
 
@@ -280,26 +289,26 @@ keymap("", "<C-Right>", ":vertical resize +3<CR>") -- resizing on one key for sa
 keymap("", "<C-Left>", ":vertical resize -3<CR>")
 keymap("", "<C-Down>", ":resize +3<CR>")
 keymap("", "<C-Up>", ":resize -3<CR>")
-keymap("n", "ö", "<C-w>w") -- switch to next split
-keymap("n", "Ö", "<C-w>o") -- close other window(s)
+keymap("n", "ö", "<C-w>w", {desc = "switch to next window"}) 
+keymap("n", "Ö", "<C-w>o", {desc = "close other windows"}) 
 
 --------------------------------------------------------------------------------
 
 -- CMD-Keybindings
 if isGui() then
-	keymap({ "n", "x", "i" }, "<D-w>", qol.betterClose) -- cmd+w
+	keymap({ "n", "x", "i" }, "<D-w>", qol.betterClose, {desc = "close buffer/window/tab"}) -- cmd+w
 
-	keymap({ "n", "x", "i" }, "<D-s>", cmd.write) -- cmd+s, will be overridden on lsp attach
-	keymap("n", "<D-a>", "ggVG") -- cmd+a
-	keymap("i", "<D-a>", "<Esc>ggVG")
-	keymap("x", "<D-a>", "ggG")
+	keymap({ "n", "x", "i" }, "<D-s>", cmd.write, {dec = "save"}) -- cmd+s, will be overridden on lsp attach
+	keymap("n", "<D-a>", "ggVG", {desc = "select all"}) -- cmd+a
+	keymap("i", "<D-a>", "<Esc>ggVG", {desc = "select all"})
+	keymap("x", "<D-a>", "ggG", {desc = "select all"})
 
 	keymap({ "n", "x" }, "<D-l>", function() -- show file in default GUI file explorer
 		fn.system("open -R '" .. fn.expand("%:p") .. "'")
-	end)
+	end, { desc = "open in file explorer" })
 	keymap({ "n", "x", "i" }, "<D-1>", cmd.Lex) -- file tree (netrw)
-	keymap("n", "<D-0>", ":messages<CR>") -- as cmd.function these wouldn't require confirmation
-	keymap("n", "<D-9>", ":Notification<CR>")
+	keymap("n", "<D-0>", ":messages<CR>", {desc = ":messages"}) -- as cmd.function these wouldn't require confirmation
+	keymap("n", "<D-9>", ":Notification<CR>", {desc = ":Notifications"})
 
 	-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 	g.VM_maps = { -- cmd+j
@@ -308,9 +317,9 @@ if isGui() then
 	}
 
 	-- cut, copy & paste
-	keymap({"n", "x"}, "<D-v>", "<Esc>p", {desc = "paste"}) -- needed for pasting from Alfred clipboard history
-	keymap("c", "<D-v>", "<C-r>+")
-	keymap("i", "<D-v>", "<C-r><C-o>+")
+	keymap({ "n", "x" }, "<D-v>", "<Esc>p", { desc = "paste" }) -- needed for pasting from Alfred clipboard history
+	keymap("c", "<D-v>", "<C-r>+", {desc = "paste"})
+	keymap("i", "<D-v>", "<C-r><C-o>+", {desc = "paste"})
 
 	-- cmd+e: inline code
 	keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>") -- no selection = word under cursor
@@ -324,19 +333,9 @@ if isGui() then
 end
 
 --------------------------------------------------------------------------------
-
 -- BUFFERS
-local function betterAltBuf() -- switch to alternate-file
-	if fn.expand("#") == "" then
-		vim.notify("No alternate file.", "warn")
-	else
-		cmd.nohlsearch()
-		cmd.buffer("#")
-	end
-end
-
 -- cycle between buffers
-keymap("n", "<BS>", [[:nohl<CR><Plug>(CybuNext)]])
+keymap("n", "<BS>", [[:nohl<CR><Plug>(CybuNext)]], {desc = "cycle buffers"})
 
 -- Buffer selector
 keymap("n", "gb", function()
@@ -347,7 +346,7 @@ keymap("n", "gb", function()
 	else
 		vim.notify("Only one buffer open.")
 	end
-end)
+end, {desc = "select an open buffer"})
 
 -- HACK: fix for https://github.com/cshuaimin/ssr.nvim/issues/11
 augroup("ssr-fix", {})
@@ -355,7 +354,14 @@ autocmd("BufReadPost", {
 	group = "ssr-fix",
 	callback = function()
 		if bo.filetype == "ssr" then return end
-		keymap("n", "<CR>", betterAltBuf)
+		keymap("n", "<CR>", function()
+			if fn.expand("#") == "" then
+				vim.notify("No alternate file.", logWarn)
+			else
+				cmd.nohlsearch()
+				cmd.buffer("#")
+			end
+		end, {desc = "switch to alt file"})
 	end,
 })
 
