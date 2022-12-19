@@ -19,7 +19,7 @@ end
 
 local function showAllSidebars()
 	if appIsRunning("Highlights") then app("Highlights"):selectMenuItem { "View", "Show Sidebar" } end
-	openLinkInBackground("obsidian://sidebar?showLeft=true&showRight=false")
+	openLinkInBackground("obsidian://sidebar?showLeft=false&showRight=true")
 	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
 
@@ -287,18 +287,17 @@ wf_appsOnMouseScreen = wf.new {
 wf_appsOnMouseScreen:subscribe(wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()
 	if not mouseScreen then return end
-
 	local screenOfWindow = newWin:screen()
-	local appn = newWin:application():name()
-	if isProjector() and not (mouseScreen:name() == screenOfWindow:name()) then
-		runWithDelays({ 0.1, 0.3 }, function()
-			if not (mouseScreen:name() == screenOfWindow:name()) then newWin:moveToScreen(mouseScreen) end
+	if not isProjector() or mouseScreen:name() == screenOfWindow:name() then return end
 
-			if appn == "Finder" or appn == "Script Editor" or appn == "Hammerspoon" then
-				moveResize(newWin, centered)
-			else
-				moveResize(newWin, maximized)
-			end
-		end)
-	end
+	local appn = newWin:application():name()
+	runWithDelays({ 0.1, 0.3 }, function()
+		if not (mouseScreen:name() == screenOfWindow:name()) then newWin:moveToScreen(mouseScreen) end
+
+		if appn == "Finder" or appn == "Script Editor" or appn == "Hammerspoon" then
+			moveResize(newWin, centered)
+		else
+			moveResize(newWin, maximized)
+		end
+	end)
 end)

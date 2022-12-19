@@ -21,6 +21,7 @@ require("config/utils")
 -- al: a [l]ink (markdown, custom)
 -- as: a [s]elector (css, custom)
 -- aR: a [R]egex (js/ts, custom)
+-- aD: a [D]ouble Square Brackets
 
 -- BUILTIN ONES KEPT
 -- ab: bracket
@@ -50,7 +51,7 @@ keymap("n", "<C-M-Space>", '"_daw') -- HACK since <S-Space> not fully supported,
 keymap("x", "<Space>", '"_c')
 
 --------------------------------------------------------------------------------
--- VARIOUS TEXTOBJS
+-- VARIOUS TEXTOBJS 
 
 -- space: subword
 keymap("o", "<Space>", varTextObj.subword, { desc = "subword textobj" })
@@ -59,11 +60,16 @@ keymap("o", "<Space>", varTextObj.subword, { desc = "subword textobj" })
 keymap({ "o", "x" }, "n", varTextObj.nearEoL, { desc = "almost ending of line textobj" })
 
 -- r: [r]est of paragraph (linewise)
-keymap({ "o", "x" }, "r", varTextObj.restOfParagraph, { desc = "rest of paragraph (linewise)" })
+-- INFO not setting in visual mode, to keep visual block mode replace
+keymap("o", "r", varTextObj.restOfParagraph, { desc = "rest of paragraph (linewise)" })
 
 -- iv/av: value textobj
 keymap({ "x", "o" }, "iv", function() varTextObj.value(true) end, { desc = "inner value textobj" })
 keymap({ "x", "o" }, "av", function() varTextObj.value(false) end, { desc = "outer value textobj" })
+
+-- iD/aD: double square brackets
+keymap({ "x", "o" }, "iD", function() varTextObj.doubleSquareBrackets(true) end, { desc = "inner double square bracket" })
+keymap({ "x", "o" }, "aD", function() varTextObj.doubleSquareBrackets(false) end, { desc = "outer double square bracket" })
 
 -- in/an: number textobj
 keymap({ "x", "o" }, "in", function() varTextObj.number(true) end, { desc = "inner number textobj" })
