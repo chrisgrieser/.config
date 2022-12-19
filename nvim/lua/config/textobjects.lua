@@ -10,7 +10,7 @@ local varTextobjs = require("various-textobjs")
 -- al -> a cal[l] (treesitter)
 -- ah -> a [h]unk (gitsigns)
 -- ai -> an [i]ndentation (custom)
--- ad -> a [d]iagnostic (diagnostic-textobj)
+-- ad -> a [d]iagnostic (custom)
 -- n -> near the [e]nding of line (custom)
 -- r -> rest of paragraph, linewise (custom)
 -- av -> a [v]alue / variable assignment (custom)
@@ -97,13 +97,8 @@ for _, prefix in pairs { "a", "i" } do
 	-- Git Hunks
 	keymap({ "x", "o" }, prefix .. "h", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
 
-	-- textobj-[d]iagnostic
-	keymap(
-		{ "x", "o" },
-		prefix .. "d",
-		function() require("textobj-diagnostic").nearest_diag() end,
-		{ desc = "diagnostic textobj" }
-	)
+	-- Diagnostics
+	keymap({ "x", "o" }, prefix .. "d", varTextobjs.diagnosticTextobj, { desc = "diagnostic textobj" })
 end
 
 --------------------------------------------------------------------------------

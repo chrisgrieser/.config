@@ -152,7 +152,7 @@ autocmd("LspAttach", {
 			local ft = bo.filetype
 			local lspformat = vim.lsp.buf.format
 			if ft == "javascript" or ft == "typescript" then
-				lspformat { async = false } -- prettier
+				lspformat { async = false } -- prettier / tsserver
 				cmd.update { bang = true }
 				cmd.EslintFixAll() -- eslint-lsp
 			elseif ft == "applescript" then
@@ -246,7 +246,7 @@ lspSettings.cssls = {
 
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local jsAndTsSettings = {
-	-- no formatting since using prettier
+	--	-- no formatting since using prettier
 	-- format = {
 	-- 	insertSpaceAfterCommaDelimiter = true,
 	-- 	insertSpaceAfterConstructor = false,

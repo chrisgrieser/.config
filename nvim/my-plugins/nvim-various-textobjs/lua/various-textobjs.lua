@@ -1,13 +1,15 @@
-local normal = vim.cmd.normal
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
-local cmd = vim.cmd
 local bo = vim.bo
 local fn = vim.fn
 local opt = vim.opt
 
 local M = {}
 --------------------------------------------------------------------------------
+
+---runs :normal natively with bang
+---@param cmdStr any
+local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 ---@return boolean
 local function isVisualMode()
@@ -22,17 +24,18 @@ local function isVisualLineMode()
 end
 
 ---sets the selection for the textobj (characterwise)
----@param line integer
+---@param startLine integer
+---@param endLine integer
 ---@param startCol integer
 ---@param endCol integer
-local function setSelection(line, startCol, endCol)
-	setCursor(0, { line, startCol })
+local function setSelection(startLine, endLine, startCol, endCol)
+	setCursor(0, { startLine, startCol })
 	if isVisualMode() then
-		normal { "o", bang = true }
+		normal("o")
 	else
-		normal { "v", bang = true }
+		normal("v")
 	end
-	setCursor(0, { line, endCol })
+	setCursor(0, { endLine, endCol })
 end
 
 --------------------------------------------------------------------------------
@@ -45,33 +48,44 @@ local lookForwardLines = 5
 function M.subword()
 	local iskeywBefore = opt.iskeyword:get()
 	opt.iskeyword:remove { "_", "-", "." }
-	if not isVisualMode() then normal { "v", bang = true } end
-	normal { "iw", bang = true }
+	if not isVisualMode() then normal("v") end
+	normal("iw")
 	opt.iskeyword = iskeywBefore
 end
 
 ---near end of the line, ignoring trailing whitespace (relevant for markdown)
 function M.nearEoL()
-	if not isVisualMode() then normal { "v", bang = true } end
-	normal { "$", bang = true }
+	if not isVisualMode() then normal("v") end
+	normal("$")
 
 	-- loop ensure trailing whitespace is not counted
 	---@diagnostic disable-next-line: assign-type-mismatch, param-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
 	local col = fn.col("$")
 	repeat
-		normal { "h", bang = true }
+		normal("h")
 		col = col - 1
 		local lastChar = lineContent:sub(col, col)
 	until not lastChar:find("%s") or col == 1
 
-	normal { "h", bang = true }
+	normal("h")
 end
 
 ---rest of paragraph (linewise)
 function M.restOfParagraph()
-	if not isVisualLineMode() then normal { "V", bang = true } end
-	normal { "}k", bang = true }
+	if not isVisualLineMode() then normal("V") end
+	normal("}k")
+end
+
+---DIAGNOSTIC TEXT OBJECT
+---similar to https://github.com/andrewferrier/textobj-diagnostic.nvim
+---requires builtin LSP
+function M.diagnosticTextobj()
+	local diag = vim.diagnostic.get_next {}
+	if not diag then return end
+	local curLine = fn.line(".")
+	if diag.lnum - lookForwardLines < curLine then return end
+	setSelection(diag.lnum + 1, diag.end_lnum + 1, diag.col, diag.end_col)
 end
 
 --------------------------------------------------------------------------------
@@ -108,17 +122,11 @@ function M.indentTextObj(startBorder, endBorder)
 
 	-- set selection
 	setCursor(0, { prevLnum, 0 })
-	if not (isVisualLineMode()) then cmd.normal { "V", bang = true } end
-	cmd.normal { "o", bang = true }
+	if not (isVisualLineMode()) then normal("V") end
+	normal("o")
 	setCursor(0, { nextLnum, 0 })
 end
 
---------------------------------------------------------------------------------
-
----DIAGNOSTIC TEXT OBJECT, similar to https://github.com/andrewferrier/textobj-diagnostic.nvim
-function M.diagnosticTextobj()
-	local allDiagnostics = vim.diagnostic.get(0)
-end
 --------------------------------------------------------------------------------
 
 ---VALUE TEXT OBJECT
@@ -153,7 +161,7 @@ function M.valueTextObj(inner)
 	local lastChar = lineContent:sub(ending + 1, ending + 1)
 	if inner and lastChar:find("[,;]") then valueEnd = valueEnd - 1 end
 
-	setSelection(curRow, start, ending)
+	setSelection(curRow, curRow, start, ending)
 end
 
 --------------------------------------------------------------------------------
@@ -164,7 +172,7 @@ end
 function M.mdlinkTextobj(inner)
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
-	normal { "F[", bang = true } -- go to beginning of link so it can be found when standing on it
+	normal("F[") -- go to beginning of link so it can be found when standing on it
 	local curRow, curCol = unpack(getCursor(0))
 	local start, ending, barelink
 	local i = 0
@@ -192,7 +200,7 @@ function M.mdlinkTextobj(inner)
 		ending = ending - 1
 	end
 
-	setSelection(curRow, start, ending)
+	setSelection(curRow, curRow, start, ending)
 end
 
 ---JS Regex
@@ -200,7 +208,7 @@ end
 function M.jsRegexTextobj(inner)
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
-	normal { "F/", bang = true } -- go to beginning of regex
+	normal("F/") -- go to beginning of regex
 	local curRow, curCol = unpack(getCursor(0))
 	local i = 0
 
@@ -226,7 +234,7 @@ function M.jsRegexTextobj(inner)
 		start = start - 1
 	end
 
-	setSelection(curRow, start, ending)
+	setSelection(curRow, curRow, start, ending)
 end
 
 ---CSS Selector Textobj
@@ -234,7 +242,7 @@ end
 function M.cssSelectorTextobj(inner)
 	---@diagnostic disable-next-line: param-type-mismatch, assign-type-mismatch
 	local lineContent = fn.getline(".") ---@type string
-	normal { "F.", bang = true } -- go to beginning of selector
+	normal("F.") -- go to beginning of selector
 	local curRow, curCol = unpack(getCursor(0))
 	local i = 0
 
@@ -256,7 +264,7 @@ function M.cssSelectorTextobj(inner)
 	ending = ending - 1
 	if not inner then start = start - 1 end
 
-	setSelection(curRow, start, ending)
+	setSelection(curRow, curRow, start, ending)
 end
 
 --------------------------------------------------------------------------------

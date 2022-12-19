@@ -106,6 +106,9 @@ autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	callback = function()
 		-- safety net to not save file in wrong folder when autochdir is not reliable
 		if not bo.modifiable then return end
+		ignoredFt = { "TelescopePrompt" }
+		if vim.tbl_contains(ignoredFt, bo.filetype) then return end
+
 		local curFile = fn.expand("%:p")
 		cmd.update(curFile)
 	end,

@@ -17,8 +17,8 @@ packer.startup {
 		display = {
 			open_fn = function() return require("packer.util").float {border = borderStyle} end,
 			prompt_border = borderStyle,
-			compact = true,
-			show_all_info = true,
+			compact = false,
+			show_all_info = false,
 		},
 		snapshot_path = vim.fn.stdpath("config") .. "/packer-snapshots/",
 		autoremove = true, -- remove unused plugins without prompting user

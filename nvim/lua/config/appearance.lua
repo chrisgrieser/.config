@@ -64,7 +64,7 @@ if isGui() then
 		render = "minimal",
 		stages = "slide",
 		level = 0, -- minimum severity level to display (0 = display all)
-		max_height = 15,
+		max_height = 25,
 		max_width = notifyWidth, -- HACK see below
 		minimum_width = 10,
 		timeout = 4000,
@@ -248,7 +248,7 @@ end
 
 -- show branch info only when not on main/master
 augroup("branchChange", {})
-autocmd({ "BufEnter", "FocusGained" }, {
+autocmd({ "BufEnter", "FocusGained", "WinEnter", "TabEnter" }, {
 	group = "branchChange",
 	callback = function() g.cur_branch = trim(fn.system("git branch --show-current")) end,
 })

@@ -64,10 +64,6 @@ function M.PluginList(use)
 		"folke/neodev.nvim", -- lsp for nvim-lua config
 		"b0o/SchemaStore.nvim", -- schemas for json-lsp
 	}}
-	use {"andrewferrier/textobj-diagnostic.nvim",
-		module = "textobj-diagnostic",
-		config = function() require("textobj-diagnostic").setup {create_default_keymaps = false} end,
-	}
 
 	-- Linting & Formatting
 	use {"jose-elias-alvarez/null-ls.nvim", requires = {
