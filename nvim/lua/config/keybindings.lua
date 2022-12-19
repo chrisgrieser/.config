@@ -10,22 +10,22 @@ keymap("n", "<leader>lc", function()
 	local lastCommand = fn.getreg(":")
 	fn.setreg("+", lastCommand)
 	vim.notify("COPIED\n" .. lastCommand)
-end, {desc = "Copy last command"})
+end, { desc = "Copy last command" })
 
 -- run [l]ast command [a]gain
-keymap("n", "<leader>la", "@:", {desc = "Run last command again"})
+keymap("n", "<leader>la", "@:", { desc = "Run last command again" })
 
 -- search keymaps
-keymap("n", "?", telescope.keymaps, {desc = "Telescope: Keymaps"})
+keymap("n", "?", telescope.keymaps, { desc = "Telescope: Keymaps" })
 
 -- Theme Picker
-keymap("n", "<leader>T", telescope.colorscheme, {desc = "Telescope: Colorschemes"})
+keymap("n", "<leader>T", telescope.colorscheme, { desc = "Telescope: Colorschemes" })
 
 -- Highlights
-keymap("n", "<leader>H", telescope.highlights, {desc = "Telescope: Highlight Groups"})
+keymap("n", "<leader>H", telescope.highlights, { desc = "Telescope: Highlight Groups" })
 
 -- Mason
-keymap("n", "<leader>M", cmd.Mason, {desc = ":Mason"})
+keymap("n", "<leader>M", cmd.Mason, { desc = ":Mason" })
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
@@ -41,11 +41,11 @@ keymap("n", "<leader>p", function()
 	-- remove oldest snapshot when more than 20
 	local snapshotPath = fn.stdpath("config") .. "/packer-snapshots"
 	os.execute([[cd ']] .. snapshotPath .. [[' ; ls -t | tail -n +20 | tr '\n' '\0' | xargs -0 rm]])
-end, {desc = ":PackerSnapshot & :PackerSync"})
-keymap("n", "<leader>P", packer.status, {desc = ":PackerStatus"})
+end, { desc = ":PackerSnapshot & :PackerSync" })
+keymap("n", "<leader>P", packer.status, { desc = ":PackerStatus" })
 
 -- write all before quitting
-keymap("n", "ZZ", ":wall! | qa!<CR>", {desc = "writeall, quitall"})
+keymap("n", "ZZ", ":wall! | qa!<CR>", { desc = "writeall, quitall" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -70,8 +70,8 @@ keymap("n", "J", function() qol.overscroll("6j") end, { desc = "6j (with overscr
 keymap({ "n", "x" }, "G", "Gzz")
 
 -- Jump History
-keymap("n", "<C-h>", "<C-o>", {desc = "Jump back"}) 
-keymap("n", "<C-l>", "<C-i>", {desc = "Jump forward"}) 
+keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
+keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Search
 keymap({ "n", "x", "o" }, "-", [[/\v]]) -- German Keyboard, \v for very-magic search
@@ -96,7 +96,7 @@ end, { desc = "set mark M" })
 keymap("n", "^", "za", { desc = "toggle fold" }) -- quicker toggling of folds
 
 -- [M]atch
-keymap({ "n", "x", "o" }, "m", "%", {desc = "match parenthesis"})
+keymap({ "n", "x", "o" }, "m", "%", { desc = "match parenthesis" })
 
 -- Middle of the Line
 keymap({ "n", "x" }, "gm", "gM", { desc = "goto middle of logical line" })
@@ -104,6 +104,10 @@ keymap({ "n", "x" }, "gm", "gM", { desc = "goto middle of logical line" })
 -- Hunks
 keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
+
+-- quickscope: only highlight when key is pressed
+g.qs_highlight_on_keys = { "f", "F", "t", "T" }
+g.qs_filetype_blacklist = {}
 
 --------------------------------------------------------------------------------
 
@@ -120,13 +124,13 @@ require("yanky").setup {
 
 keymap({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
 keymap("n", "P", "<Plug>(YankyCycleForward)")
-keymap("n", "gp", qol.pasteDifferently, {desc = "paste differently"}) -- paste charwise reg as linewise & vice versa
+keymap("n", "gp", qol.pasteDifferently, { desc = "paste differently" }) -- paste charwise reg as linewise & vice versa
 keymap("n", "gP", "<Plug>(YankyCycleBackward)")
 
 -- yanking without moving the cursor
 -- visual https://stackoverflow.com/a/3806683#comment10788861_3806683
 -- normal https://www.reddit.com/r/vim/comments/ekgy47/comment/fddnfl3/
-keymap("x", "y", "ygv<Esc>", {desc = "sticky yank"})
+keymap("x", "y", "ygv<Esc>", { desc = "sticky yank" })
 augroup("yankKeepCursor", {})
 autocmd({ "CursorMoved", "VimEnter" }, {
 	group = "yankKeepCursor",
@@ -163,10 +167,10 @@ keymap("n", "=", "mzO<Esc>`z", { desc = "add blank above" })
 keymap("n", "_", "mzo<Esc>`z", { desc = "add blank below" })
 
 -- Indentation
-keymap("n", "<Tab>", ">>", {desc = "indent"})
-keymap("n", "<S-Tab>", "<<", {desc = "outdent"})
-keymap("x", "<Tab>", ">gv", {desc = "indent"})
-keymap("x", "<S-Tab>", "<gv", {desc = "outdent"})
+keymap("n", "<Tab>", ">>", { desc = "indent" })
+keymap("n", "<S-Tab>", "<<", { desc = "outdent" })
+keymap("x", "<Tab>", ">gv", { desc = "indent" })
+keymap("x", "<S-Tab>", "<gv", { desc = "outdent" })
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -289,26 +293,26 @@ keymap("", "<C-Right>", ":vertical resize +3<CR>") -- resizing on one key for sa
 keymap("", "<C-Left>", ":vertical resize -3<CR>")
 keymap("", "<C-Down>", ":resize +3<CR>")
 keymap("", "<C-Up>", ":resize -3<CR>")
-keymap("n", "ö", "<C-w>w", {desc = "switch to next window"}) 
-keymap("n", "Ö", "<C-w>o", {desc = "close other windows"}) 
+keymap("n", "ö", "<C-w>w", { desc = "switch to next window" })
+keymap("n", "Ö", "<C-w>o", { desc = "close other windows" })
 
 --------------------------------------------------------------------------------
 
 -- CMD-Keybindings
 if isGui() then
-	keymap({ "n", "x", "i" }, "<D-w>", qol.betterClose, {desc = "close buffer/window/tab"}) -- cmd+w
+	keymap({ "n", "x", "i" }, "<D-w>", qol.betterClose, { desc = "close buffer/window/tab" }) -- cmd+w
 
-	keymap({ "n", "x", "i" }, "<D-s>", cmd.write, {desc = "save"}) -- cmd+s, will be overridden on lsp attach
-	keymap("n", "<D-a>", "ggVG", {desc = "select all"}) -- cmd+a
-	keymap("i", "<D-a>", "<Esc>ggVG", {desc = "select all"})
-	keymap("x", "<D-a>", "ggG", {desc = "select all"})
+	keymap({ "n", "x", "i" }, "<D-s>", cmd.write, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
+	keymap("n", "<D-a>", "ggVG", { desc = "select all" }) -- cmd+a
+	keymap("i", "<D-a>", "<Esc>ggVG", { desc = "select all" })
+	keymap("x", "<D-a>", "ggG", { desc = "select all" })
 
 	keymap({ "n", "x" }, "<D-l>", function() -- show file in default GUI file explorer
 		fn.system("open -R '" .. fn.expand("%:p") .. "'")
 	end, { desc = "open in file explorer" })
 	keymap({ "n", "x", "i" }, "<D-1>", cmd.Lex) -- file tree (netrw)
-	keymap("n", "<D-0>", ":messages<CR>", {desc = ":messages"}) -- as cmd.function these wouldn't require confirmation
-	keymap("n", "<D-9>", ":Notification<CR>", {desc = ":Notifications"})
+	keymap("n", "<D-0>", ":messages<CR>", { desc = ":messages" }) -- as cmd.function these wouldn't require confirmation
+	keymap("n", "<D-9>", ":Notification<CR>", { desc = ":Notifications" })
 
 	-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 	g.VM_maps = { -- cmd+j
@@ -318,8 +322,8 @@ if isGui() then
 
 	-- cut, copy & paste
 	keymap({ "n", "x" }, "<D-v>", "<Esc>p", { desc = "paste" }) -- needed for pasting from Alfred clipboard history
-	keymap("c", "<D-v>", "<C-r>+", {desc = "paste"})
-	keymap("i", "<D-v>", "<C-r><C-o>+", {desc = "paste"})
+	keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
+	keymap("i", "<D-v>", "<C-r><C-o>+", { desc = "paste" })
 
 	-- cmd+e: inline code
 	keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>") -- no selection = word under cursor
@@ -335,7 +339,7 @@ end
 --------------------------------------------------------------------------------
 -- BUFFERS
 -- cycle between buffers
-keymap("n", "<BS>", [[:nohl<CR><Plug>(CybuNext)]], {desc = "cycle buffers"})
+keymap("n", "<BS>", [[:nohl<CR><Plug>(CybuNext)]], { desc = "cycle buffers" })
 
 -- Buffer selector
 keymap("n", "gb", function()
@@ -346,7 +350,7 @@ keymap("n", "gb", function()
 	else
 		vim.notify("Only one buffer open.")
 	end
-end, {desc = "select an open buffer"})
+end, { desc = "select an open buffer" })
 
 -- HACK: fix for https://github.com/cshuaimin/ssr.nvim/issues/11
 augroup("ssr-fix", {})
@@ -361,7 +365,7 @@ autocmd("BufReadPost", {
 				cmd.nohlsearch()
 				cmd.buffer("#")
 			end
-		end, {desc = "switch to alt file"})
+		end, { desc = "switch to alt file" })
 	end,
 })
 
