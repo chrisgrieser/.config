@@ -10,6 +10,7 @@ require("config/utils")
 -- ah -> a [h]unk (gitsigns)
 -- ai -> an [i]ndentation (custom)
 -- ad -> a [d]iagnostic (custom)
+-- an -> a [n]umber (custom)
 -- n -> near the [e]nding of line (custom)
 -- r -> rest of paragraph, linewise (custom)
 -- av -> a [v]alue / variable assignment (custom)
@@ -60,9 +61,13 @@ keymap({ "o", "x" }, "n", varTextObj.nearEoL, { desc = "almost ending of line te
 -- r: [r]est of paragraph (linewise)
 keymap({ "o", "x" }, "r", varTextObj.restOfParagraph, { desc = "rest of paragraph (linewise)" })
 
--- av/iv: value textobj
+-- iv/av: value textobj
 keymap({ "x", "o" }, "iv", function() varTextObj.value(true) end, { desc = "inner value textobj" })
 keymap({ "x", "o" }, "av", function() varTextObj.value(false) end, { desc = "outer value textobj" })
+
+-- in/an: number textobj
+keymap({ "x", "o" }, "in", function() varTextObj.number(true) end, { desc = "inner number textobj" })
+keymap({ "x", "o" }, "an", function() varTextObj.number(false) end, { desc = "outer number textobj" })
 
 -- ii/ai: indentation textobj
 keymap({ "x", "o" }, "ii", function() varTextObj.indentation(false, false) end, { desc = "inner indentation textobj" })
