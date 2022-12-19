@@ -25,3 +25,4 @@
 [submodule "nvim/my-plugins/cmp-nerdfont"]
 	path = nvim/my-plugins/cmp-nerdfont
 	url = git@github.com:chrisgrieser/cmp-nerdfont.git
+	update = rebase
