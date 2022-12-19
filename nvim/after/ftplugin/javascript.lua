@@ -5,13 +5,13 @@ bo.path = ".,,../" -- also search parent directory (useful for Alfred)
 keymap(
 	{ "o", "x" },
 	"aR",
-	function() require("various-textobjs").jsRegexTextobj(false) end,
+	function() require("various-textobjs").jsRegex(false) end,
 	{ desc = "inner regex textobj" }
 )
 keymap(
 	{ "o", "x" },
 	"iR",
-	function() require("various-textobjs").jsRegexTextobj(true) end,
+	function() require("various-textobjs").jsRegex(true) end,
 	{ desc = "inner regex textobj" }
 )
 

@@ -62,17 +62,17 @@ keymap({ "o", "x" }, "n", varTextobjs.nearEoL, { desc = "almost ending of line t
 keymap({ "o", "x" }, "r", varTextobjs.restOfParagraph, { desc = "rest of paragraph (linewise)" })
 
 -- av/iv: value textobj
-keymap({ "x", "o" }, "iv", function() varTextobjs.valueTextObj(true) end, { desc = "inner value textobj" })
-keymap({ "x", "o" }, "av", function() varTextobjs.valueTextObj(false) end, { desc = "outer value textobj" })
+keymap({ "x", "o" }, "iv", function() varTextobjs.value(true) end, { desc = "inner value textobj" })
+keymap({ "x", "o" }, "av", function() varTextobjs.value(false) end, { desc = "outer value textobj" })
 
 -- ii/ai: indentation textobj
 keymap(
 	{ "x", "o" },
 	"ii",
-	function() varTextobjs.indentTextObj(false, false) end,
+	function() varTextobjs.indentation(false, false) end,
 	{ desc = "inner indentation textobj" }
 )
-keymap({ "x", "o" }, "ai", function() varTextobjs.indentTextObj(true, true) end, { desc = "outer indentation textobj" })
+keymap({ "x", "o" }, "ai", function() varTextobjs.indentation(true, true) end, { desc = "outer indentation textobj" })
 
 augroup("IndentedFileTypes", {})
 autocmd("FileType", {
@@ -83,7 +83,7 @@ autocmd("FileType", {
 			keymap(
 				{ "x", "o" },
 				"ai",
-				function() varTextobjs.indentTextObj(true, false) end,
+				function() varTextobjs.indentation(true, false) end,
 				{ buffer = true, desc = "indentation textobj with start border" }
 			)
 		end
@@ -98,7 +98,7 @@ for _, prefix in pairs { "a", "i" } do
 	keymap({ "x", "o" }, prefix .. "h", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
 
 	-- Diagnostics
-	keymap({ "x", "o" }, prefix .. "d", varTextobjs.diagnosticTextobj, { desc = "diagnostic textobj" })
+	keymap({ "x", "o" }, prefix .. "d", varTextobjs.diagnostic, { desc = "diagnostic textobj" })
 end
 
 --------------------------------------------------------------------------------

@@ -53,13 +53,13 @@ keymap({ "n", "x" }, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
 keymap(
 	{ "o", "x" },
 	"as",
-	function() require("various-textobjs").cssSelectorTextobj(false) end,
+	function() require("various-textobjs").cssSelector(false) end,
 	{ desc = "outer CSS selector textobj", buffer = true }
 )
 keymap(
 	{ "o", "x" },
 	"is",
-	function() require("various-textobjs").cssSelectorTextobj(true) end,
+	function() require("various-textobjs").cssSelector(true) end,
 	{ desc = "inner CSS selector textobj", buffer = true }
 )
 
@@ -73,7 +73,7 @@ keymap("n", "yas", "yasEp", { buffer = true, silent = true, remap = true })
 keymap("n", "R", function() qol.duplicateLine { reverse = true, moveTo = "value" } end, opts)
 
 ---@diagnostic disable: undefined-field, param-type-mismatch
--- toggle !important
+-- toggle `!important`
 keymap("n", "<leader>i", function()
 	local lineContent = fn.getline(".")
 	if lineContent:find("!important") then
@@ -93,10 +93,10 @@ keymap("n", "qw", function()
 		"",
 	}
 	fn.append(".", hr)
-	local lineNum = api.nvim_win_get_cursor(0)[1] + 2
+	local lineNum = getCursor(0)[1] + 2
 	local colNum = #hr[2] + 2
-	api.nvim_win_set_cursor(0, { lineNum, colNum })
-	cmd([[startinsert!]])
+	setCursor(0, { lineNum, colNum })
+	cmd.startinsert{bang = true}
 end, opts)
 
 ---@diagnostic enable: undefined-field, param-type-mismatch
