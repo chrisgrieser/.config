@@ -7,8 +7,15 @@ local opt = vim.opt
 local M = {}
 --------------------------------------------------------------------------------
 
--- TODO setup function with some configs
+-- default value
 local lookForwardLines = 8
+
+---optional setup function
+---@param opts table
+function M.setup(opts)
+	if opts.lookForwardLines then lookForwardLines = opts.lookForwardLines end
+end
+
 --------------------------------------------------------------------------------
 
 ---runs :normal natively with bang
@@ -60,8 +67,14 @@ local function seekForward(pattern, seekInStartRowBeforeCursor)
 		i = i + 1
 		if i > 0 then startCol = 1 end -- after the current row, pattern can occur everywhere in the line
 		if i > lookForwardLines or startRow + i > lastLine then
-			vim.notify("Textobject not found within " .. tostring(lookForwardLines) .. " lines.", vim.log.levels.WARN)
-			return nil, 0, 0, ""
+			local msg = "Textobject not found within " .. tostring(lookForwardLines) .. " lines."
+			if lookForwardLines == 1 then
+				msg = msg:gsub("s%.$", ".") -- no plural
+			elseif lookForwardLines == 0 then
+				msg = "No textobject found within the current line."
+			end
+			vim.notify(msg, vim.log.levels.WARN)
+			return nil, 0, 0, "" -- not found return values
 		end
 		---@diagnostic disable-next-line: assign-type-mismatch
 		lineContent = fn.getline(startRow + i) ---@type string
@@ -162,18 +175,22 @@ end
 ---VALUE TEXT OBJECT
 ---@param inner boolean
 function M.value(inner)
-	local pattern = "%f[=:] ?[^=:]"
+	local pattern = "[^=:][=:] ?[^=:]"
 
 	local row, _, start = seekForward(pattern, true)
 	if not row then return end
 
 	-- valueEnd either comment or end of line
+	---@diagnostic disable-next-line: assign-type-mismatch
+	local lineContent = fn.getline(row) ---@type string
 	local comStrPattern = bo
 		.commentstring
 		:gsub(" ?%%s.*", "") -- remove placeholder and backside of commentstring
 		:gsub("(.)", "%%%1") -- escape commentstring so it's a valid lua pattern
-	---@diagnostic disable-next-line: assign-type-mismatch
-	local lineContent = fn.getline(row) ---@type string
+
+	local isCommentLine = lineContent:find("%s*" .. comStrPattern)
+	if isCommentLine then return end
+
 	local ending, _ = lineContent:find(" ?" .. comStrPattern)
 	if not ending or comStrPattern == "" then
 		ending = #lineContent - 1

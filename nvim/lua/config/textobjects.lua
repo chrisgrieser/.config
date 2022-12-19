@@ -52,7 +52,7 @@ keymap("x", "<Space>", '"_c')
 --------------------------------------------------------------------------------
 -- VARIOUS TEXTOBJS
 
--- subword
+-- space: subword
 keymap("o", "<Space>", varTextObj.subword, { desc = "subword textobj" })
 
 -- n: [n]ear end of the line
