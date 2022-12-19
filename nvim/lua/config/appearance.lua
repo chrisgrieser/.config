@@ -55,6 +55,12 @@ require("scrollview").setup {
 }
 
 --------------------------------------------------------------------------------
+-- virtual color column
+-- '│'
+vim.g.virtcolumn_char = '║'
+
+
+--------------------------------------------------------------------------------
 -- NOTIFICATIONS
 if isGui() then
 	local notifyWidth = 55

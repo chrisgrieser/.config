@@ -110,6 +110,7 @@ function M.PluginList(use)
 	use "uga-rosa/ccc.nvim" -- color previews & color utilities
 	use "dstein64/nvim-scrollview" -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
 	use {"anuvyklack/windows.nvim", requires = "anuvyklack/middleclass"} -- auto-resize splits
+	use "xiyaowong/virtcolumn.nvim"
 
 	-- File Switching & File Operation
 	use {"stevearc/dressing.nvim", requires = {

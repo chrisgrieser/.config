@@ -12,7 +12,7 @@ cd "$passPath" || configError="repo-path wrong"
 passfiles=$(git status --porcelain --branch | grep -Eo "\d") # to check for ahead/behind instead of untracked
 
 if [[ "$dotfiles" =~ " m " ]]; then # changes in submodules
-	icon="*🔁"
+	icon="🔁*"
 elif [[ -n "$dotfiles" ]] || [[ -n "$vaultfiles" ]] || [[ -n "$passfiles" ]]; then
 	icon="🔁"
 fi

@@ -118,7 +118,7 @@ end
 
 --------------------------------------------------------------------------------
 -- SURROUND
--- need to be consistent with treesitter
+-- need to be consistent with the text obj mappings above
 local functionObjChar = "f"
 local conditionObjChar = "o"
 local callObjChar = "l"
@@ -130,9 +130,6 @@ keymap("n", "yss", "ys_", { remap = true })
 keymap("n", "yS", "ys$", { remap = true })
 
 local config = require("nvim-surround.config")
-
-local b = [[fffffffff]]
--- local b = "bla"
 
 -- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L483
 require("nvim-surround").setup {
@@ -146,7 +143,7 @@ require("nvim-surround").setup {
 	},
 	move_cursor = false,
 	keymaps = {
-		normal_cur = nil,
+		normal_cur = "<Nop>",
 		normal_line = "<Nop>",
 		normal_cur_line = "<Nop>",
 		visual = "s",
@@ -161,11 +158,11 @@ require("nvim-surround").setup {
 			},
 		},
 		[regexObjChar] = {
-			find = "%[%[.-%]%]",
-			add = { "[[", "]]" },
-			delete = "(%[%[)().-(%]%])()",
+			find = "/.-/",
+			add = { "/", "/" },
+			delete = "(/)().-(/)()",
 			change = {
-				target = "(%[%[)().-(%]%])()",
+				target = "(/)().-(/)()",
 			},
 		},
 		[functionObjChar] = {
