@@ -206,6 +206,7 @@ add("applescript", {
 -- Markdown
 add("markdown", {
 	snip("info (GitHub Callout)", "> __Note__  \n> $0"),
+	snip("note (GitHub Callout)", "> __Note__  \n> $0"),
 	snip("warning (GitHub Callout)", "> __Warning__  \n> $0"),
 	snip("vale ignore (Comment)", "<!-- vale ${1:Style${}.${2:Rule} = NO -->\n<!-- vale ${1:Style}.${2:Rule} = YES -->"),
 })
