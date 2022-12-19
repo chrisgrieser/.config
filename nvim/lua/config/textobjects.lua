@@ -51,7 +51,7 @@ keymap("n", "<C-M-Space>", '"_daw') -- HACK since <S-Space> not fully supported,
 keymap("x", "<Space>", '"_c')
 
 --------------------------------------------------------------------------------
--- VARIOUS TEXTOBJS 
+-- VARIOUS TEXTOBJS
 
 -- space: subword
 keymap("o", "<Space>", varTextObj.subword, { desc = "subword textobj" })
@@ -68,8 +68,18 @@ keymap({ "x", "o" }, "iv", function() varTextObj.value(true) end, { desc = "inne
 keymap({ "x", "o" }, "av", function() varTextObj.value(false) end, { desc = "outer value textobj" })
 
 -- iD/aD: double square brackets
-keymap({ "x", "o" }, "iD", function() varTextObj.doubleSquareBrackets(true) end, { desc = "inner double square bracket" })
-keymap({ "x", "o" }, "aD", function() varTextObj.doubleSquareBrackets(false) end, { desc = "outer double square bracket" })
+keymap(
+	{ "x", "o" },
+	"iD",
+	function() varTextObj.doubleSquareBrackets(true) end,
+	{ desc = "inner double square bracket" }
+)
+keymap(
+	{ "x", "o" },
+	"aD",
+	function() varTextObj.doubleSquareBrackets(false) end,
+	{ desc = "outer double square bracket" }
+)
 
 -- in/an: number textobj
 keymap({ "x", "o" }, "in", function() varTextObj.number(true) end, { desc = "inner number textobj" })
@@ -112,11 +122,19 @@ end
 local functionObjChar = "f"
 local conditionObjChar = "o"
 local callObjChar = "l"
+local doubleSquareBracketObjChar = "D"
+local regexObjChar = "R"
 
 -- HACK define these manually, since for some reason they do not work by default
 keymap("n", "yss", "ys_", { remap = true })
 keymap("n", "yS", "ys$", { remap = true })
 
+local config = require("nvim-surround.config")
+
+local b = [[fffffffff]]
+-- local b = "bla"
+
+-- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L483
 require("nvim-surround").setup {
 	aliases = { -- aliases should match the bindings for text objects
 		["b"] = ")",
@@ -128,14 +146,30 @@ require("nvim-surround").setup {
 	},
 	move_cursor = false,
 	keymaps = {
-		normal_cur = "<Nop>",
+		normal_cur = nil,
 		normal_line = "<Nop>",
 		normal_cur_line = "<Nop>",
 		visual = "s",
 	},
 	surrounds = {
+		[doubleSquareBracketObjChar] = {
+			find = "%[%[.-%]%]",
+			add = { "[[", "]]" },
+			delete = "(%[%[)().-(%]%])()",
+			change = {
+				target = "(%[%[)().-(%]%])()",
+			},
+		},
+		[regexObjChar] = {
+			find = "%[%[.-%]%]",
+			add = { "[[", "]]" },
+			delete = "(%[%[)().-(%]%])()",
+			change = {
+				target = "(%[%[)().-(%]%])()",
+			},
+		},
 		[functionObjChar] = {
-			find = function() return require("nvim-surround.config").get_selection { motion = "a" .. functionObjChar } end,
+			find = function() return config.get_selection { motion = "a" .. functionObjChar } end,
 			delete = function()
 				local ft = bo.filetype
 				local patt
@@ -147,7 +181,7 @@ require("nvim-surround").setup {
 					vim.notify("No function-surround defined for " .. ft, logWarn)
 					patt = "()()()()"
 				end
-				return require("nvim-surround.config").get_selections {
+				return config.get_selections {
 					char = functionObjChar,
 					pattern = patt,
 				}
@@ -170,11 +204,11 @@ require("nvim-surround").setup {
 			end,
 		},
 		[callObjChar] = {
-			find = function() return require("nvim-surround.config").get_selection { motion = "a" .. callObjChar } end,
+			find = function() return config.get_selection { motion = "a" .. callObjChar } end,
 			delete = "^([^=%s]-% ?()().-(%))()$",
 		},
 		[conditionObjChar] = {
-			find = function() return require("nvim-surround.config").get_selection { motion = "a" .. conditionObjChar } end,
+			find = function() return config.get_selection { motion = "a" .. conditionObjChar } end,
 			delete = function()
 				local ft = bo.filetype
 				local patt
@@ -186,7 +220,7 @@ require("nvim-surround").setup {
 					vim.notify("No conditional-surround defined for " .. ft, logWarn)
 					patt = "()()()()"
 				end
-				return require("nvim-surround.config").get_selections {
+				return config.get_selections {
 					char = conditionObjChar,
 					pattern = patt,
 				}
