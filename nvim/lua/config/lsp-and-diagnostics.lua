@@ -27,8 +27,8 @@ end
 
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS (also applies to null-ls)
-keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = false } end, { silent = true })
-keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = false } end, { silent = true })
+keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, { silent = true })
+keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, { silent = true })
 keymap("n", "<leader>d", function() vim.diagnostic.open_float { focusable = false } end)
 
 -- toggle diagnostics

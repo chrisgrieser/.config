@@ -30,11 +30,6 @@ g.markdown_fenced_languages = {
 
 --------------------------------------------------------------------------------
 
-keymap({ "o", "x" }, "al", function() varTextObj.mdlink(false) end, { desc = "outer mdlink textobj", buffer = true })
-keymap({ "o", "x" }, "il", function() varTextObj.mdlink(true) end, { desc = "inner mdlink textobj", buffer = true })
-
---------------------------------------------------------------------------------
-
 -- wrapping and related options
 setlocal("wrap", true) -- soft wrap
 setlocal("colorcolumn", "") -- deactivate ruler

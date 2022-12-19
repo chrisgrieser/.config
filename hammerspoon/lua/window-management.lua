@@ -11,17 +11,19 @@ leftHalf = hs.layout.left50
 if isIMacAtHome() then
 	-- pseudoMaximized = { x = 0, y = 0, w = 0.816, h = 1 }
 	-- toTheSide = { x = 0.815, y = 0.025, w = 0.185, h = 0.975 }
+	-- centered = { x = 0.2, y = 0, w = 0.616, h = 1 }
 	pseudoMaximized = { x = 0.184, y = 0, w = 0.816, h = 1 }
 	toTheSide = { x = 0, y = 0.025, w = 0.185, h = 0.975 }
+	centered = { x = 0.186, y = 0, w = 0.6, h = 1 }
 	baseLayout = pseudoMaximized
-	centered = { x = 0.2, y = 0, w = 0.616, h = 1 }
 elseif isAtMother() then
 	-- pseudoMaximized = { x = 0, y = 0, w = 0.7875, h = 1 }
 	-- toTheSide = { x = 0.7875, y = 0.03, w = 0.2125, h = 0.97 }
+	-- centered = { x = 0.2, y = 0, w = 0.616, h = 1 }
 	pseudoMaximized = { x = 0.2125, y = 0, w = 0.7875, h = 1 }
 	toTheSide = { x = 0, y = 0.03, w = 0.2125, h = 0.97 }
+	centered = { x = 0.186, y = 0, w = 0.6, h = 1 }
 	baseLayout = pseudoMaximized
-	centered = { x = 0.2, y = 0, w = 0.616, h = 1 }
 elseif isAtOffice() then
 	baseLayout = maximized
 	pseudoMaximized = maximized
@@ -35,11 +37,17 @@ function checkSize(win, size)
 	if not win then return false end
 	local maxf = win:screen():frame()
 	local winf = win:frame()
-	local diff = winf.w - size.w * maxf.w
-	local posxOkay = winf.x == size.x + maxf.x -- calculated this way for two screens
-	local posyOkay = winf.y == size.y + maxf.y
-	local widthOkay = (diff > -10 and diff < 10) -- leeway for some apps
-	return widthOkay and posxOkay and posyOkay
+
+	local diffw = winf.w - size.w * maxf.w
+	local diffh = winf.h - size.h * maxf.h
+	local diffx = size.x * maxf.w + maxf.x - winf.x -- calculated this way for two screens
+	local diffy = size.y * maxf.h + maxf.y - winf.y
+	local widthOkay = (diffw > -5 and diffw < 5) -- leeway for rounding
+	local heightOkay = (diffh > -5 and diffh < 5) 
+	local posyOkay = (diffy > -5 and diffy < 5)
+	local posxOkay = (diffx > -5 and diffx < 5)
+
+	return widthOkay and heightOkay and posxOkay and posyOkay
 end
 
 --------------------------------------------------------------------------------
@@ -52,7 +60,7 @@ function toggleDraftsSidebar(draftsWin)
 	runWithDelays({ 0.05, 0.2 }, function()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
-		local mode = drafts_w / screen_w > 0.6 and "show" or "false"
+		local mode = drafts_w / screen_w > 0.6 and "show" or "hide"
 		openLinkInBackground("drafts://x-callback-url/runAction?text=&action=" .. mode .. "-sidebar")
 	end)
 end
@@ -64,7 +72,7 @@ function toggleHighlightsSidebar(highlightsWin)
 		local screen_w = highlightsWin:screen():frame().w
 		local highlightsApp = hs.application("Highlights")
 		highlightsApp:activate()
-		local mode = highlights_w / screen_w > 0.6 and "Show" or "False"
+		local mode = highlights_w / screen_w > 0.6 and "Show" or "Hide"
 		highlightsApp:selectMenuItem { "View", mode .. " Sidebar" }
 	end)
 end
