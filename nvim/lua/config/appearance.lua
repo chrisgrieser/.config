@@ -69,7 +69,7 @@ if isGui() then
 	require("notify").setup {
 		render = "minimal",
 		stages = "slide",
-		level = 1, -- minimum severity level to display (0 = display all)
+		level = 2, -- minimum severity level to display (0 = display all)
 		max_height = 25,
 		max_width = notifyWidth, -- HACK see below
 		minimum_width = 10,

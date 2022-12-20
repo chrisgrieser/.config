@@ -101,11 +101,11 @@ autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	group = "autosave",
 	pattern = "?*",
 	callback = function()
-		-- safety net to not save file in wrong folder when autochdir is not reliable
 		if not bo.modifiable then return end
 		ignoredFt = { "TelescopePrompt" }
 		if vim.tbl_contains(ignoredFt, bo.filetype) then return end
 
+		-- safety net to not save file in wrong folder when autochdir is not reliable
 		local curFile = fn.expand("%:p")
 		cmd.update(curFile)
 	end,
@@ -177,7 +177,7 @@ augroup("rememberCursorAndFolds", {})
 autocmd("BufWinLeave", {
 	group = "rememberCursorAndFolds",
 	pattern = "?*",
-	command = "silent! mkview!",
+	command = "silent! mkview",
 })
 autocmd("BufWinEnter", {
 	group = "rememberCursorAndFolds",
