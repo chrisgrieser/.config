@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-global
 require("config/utils")
 local opts = { buffer = true }
 --------------------------------------------------------------------------------
@@ -14,7 +13,7 @@ keymap(
 			prompt_title = "Navigation Markers",
 		}
 	end,
-	opts
+	{ desc = "Search Navigation Markers", buffer = true }
 )
 
 -- search only for variables
@@ -28,7 +27,7 @@ keymap(
 			prompt_title = "CSS Variables",
 		}
 	end,
-	opts
+	{ desc = "Search CSS Variables", buffer = true }
 )
 
 --------------------------------------------------------------------------------
@@ -38,10 +37,6 @@ keymap(
 -- however, using treesitter, this is less of an issue, but treesitter css
 -- highlighting isn't good yet, so…
 keymap("n", "zz", ":syntax sync fromstart<CR>", opts)
-
--- HACK search only below, to not search base64 encoded stuff
--- keymap({"n", "x"}, "-", "/", {desc = "search only below (css only)", buffer = true})
-
 
 --------------------------------------------------------------------------------
 
@@ -65,7 +60,7 @@ keymap(
 )
 
 -- double a selector
-keymap("n", "yas", "yasEp", { buffer = true, silent = true, remap = true })
+keymap("n", "yd", "yasEp", { buffer = true, silent = true, remap = true })
 
 --------------------------------------------------------------------------------
 
@@ -74,7 +69,6 @@ keymap("n", "yas", "yasEp", { buffer = true, silent = true, remap = true })
 keymap("n", "R", function() qol.duplicateLine { reverse = true, moveTo = "value" } end, opts)
 
 ---@diagnostic disable: undefined-field, param-type-mismatch
--- toggle `!important`
 keymap("n", "<leader>i", function()
 	local lineContent = fn.getline(".")
 	if lineContent:find("!important") then
@@ -83,7 +77,7 @@ keymap("n", "<leader>i", function()
 		lineContent = lineContent:gsub(";", " !important;")
 	end
 	fn.setline(".", lineContent)
-end, { buffer = true })
+end, { buffer = true, desc = "toggle !important" })
 
 keymap("n", "qw", function()
 	local hr = {
@@ -97,7 +91,6 @@ keymap("n", "qw", function()
 	local lineNum = getCursor(0)[1] + 2
 	local colNum = #hr[2] + 2
 	setCursor(0, { lineNum, colNum })
-	cmd.startinsert{bang = true}
-end, opts)
-
+	cmd.startinsert { bang = true }
+end, {buffer = true, desc = "insert comment-heading"})
 ---@diagnostic enable: undefined-field, param-type-mismatch
