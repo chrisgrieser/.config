@@ -57,8 +57,7 @@ require("scrollview").setup {
 --------------------------------------------------------------------------------
 -- virtual color column
 -- '│'
-vim.g.virtcolumn_char = '║'
-
+vim.g.virtcolumn_char = "║"
 
 --------------------------------------------------------------------------------
 -- NOTIFICATIONS
@@ -193,11 +192,6 @@ local function lsp_progress()
 	return client .. progress .. "%% " .. task .. " " .. spinners[frame + 1]
 end
 
-local function readOnly()
-	local status = bo.modifiable and "" or ""
-	return status
-end
-
 local function alternateFile()
 	local maxLen = 15
 	local altFile = fn.expand("#:t")
@@ -215,6 +209,7 @@ local function alternateFile()
 end
 
 local function currentFile() -- using this function instead of default filename, since this does not show "[No Name]" for Telescope
+	local readonly = bo.modifiable and "" or " "
 	local maxLen = 15
 	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
@@ -225,7 +220,7 @@ local function currentFile() -- using this function instead of default filename,
 		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
 		return curParent .. "/" .. curFile
 	end
-	return "%% " .. curFile -- "%" is escape character and theremore must be escaped
+	return "%% " .. curFile .. readonly
 end
 
 local function mixedIndentation()
@@ -234,6 +229,7 @@ local function mixedIndentation()
 		"css",
 		"markdown",
 		"sh",
+		"",
 	}
 
 	if vim.tbl_contains(ignoredFts, ft) then return "" end
@@ -304,17 +300,14 @@ end
 
 require("lualine").setup {
 	sections = {
-		lualine_a = {
-			{ readOnly },
-			{ currentFile },
-		},
+		lualine_a = { { currentFile } },
 		lualine_b = { { alternateFile } },
 		lualine_c = {
 			{ lsp_progress },
 			{
 				"searchcount",
 				fmt = function(str)
-					if str == "" then return "" end
+					if str == "" or str == "[0/0]" then return "" end
 					return " " .. str:sub(2, -2)
 				end,
 			},
@@ -344,8 +337,7 @@ require("lualine").setup {
 				cond = showBreadcrumbs,
 			},
 		},
-		lualine_x = {
-		},
+		lualine_x = {},
 		lualine_y = {
 			{ debuggerStatus, section_separators = winSecSeparators },
 		},
