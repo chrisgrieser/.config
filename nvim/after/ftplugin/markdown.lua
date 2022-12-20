@@ -29,9 +29,13 @@ g.markdown_fenced_languages = {
 }
 
 --------------------------------------------------------------------------------
--- link text object
-keymap({"o", "x"}, "il", function () varTextObj.mdlink(true) end, {desc = "inner md link textobj"})
-keymap({"o", "x"}, "al", function () varTextObj.mdlink(false) end, {desc = "outer md link textobj"})
+-- link textobj
+keymap({ "o", "x" }, "il", function() varTextObj.mdlink(true) end, { desc = "inner md link textobj" })
+keymap({ "o", "x" }, "al", function() varTextObj.mdlink(false) end, { desc = "outer md link textobj" })
+
+-- code block textobj
+keymap({ "o", "x" }, "iC", function() varTextObj.mdFencedCodeBlock(true) end, { desc = "inner md code block textobj" })
+keymap({ "o", "x" }, "aC", function() varTextObj.mdFencedCodeBlock(false) end, { desc = "outer md code block textobj" })
 
 --------------------------------------------------------------------------------
 
