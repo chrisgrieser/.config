@@ -8,7 +8,7 @@ return {
 	"savq/melange", -- like Obsidian's Primary color scheme
 	"nyoom-engineering/oxocarbon.nvim",
 	"folke/tokyonight.nvim",
-	-- "EdenEast/nightfox.nvim",
+	"EdenEast/nightfox.nvim",
 	-- "rebelot/kanagawa.nvim",
 
 	-- Treesitter

@@ -1,10 +1,10 @@
 require("config/utils")
 --------------------------------------------------------------------------------
 
-lightTheme = "melange"
+lightTheme = "dawnfox"
 darkTheme = "tokyonight-moon"
+-- lightTheme = "melange"
 -- darkTheme = "oxocarbon"
--- lightTheme = "dawnfox"
 -- darkTheme = "nightfox"
 
 --------------------------------------------------------------------------------
@@ -100,22 +100,20 @@ function setDarkTheme()
 	opt.background = "dark" ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.94
 	cmd.colorscheme(darkTheme)
+	cmd.colorscheme(darkTheme) -- HACK needs to be set twice https://github.com/folke/lazy.nvim/issues/40
 end
 
 function setLightTheme()
 	opt.background = "light" ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.95
 	cmd.colorscheme(lightTheme)
+	cmd.colorscheme(lightTheme)
 end
 
 -- set dark or light mode on neovim startup (requires macos)
--- local macOStheme = fn.system([[defaults read -g AppleInterfaceStyle]]):gsub("\n$", "")
--- if macOStheme == "Dark" then
--- 	setDarkTheme()
--- else
--- 	setLightTheme()
--- end
-
-		            -- test
-
-cmd.colorscheme(darkTheme)
+local macOStheme = fn.system([[defaults read -g AppleInterfaceStyle]]):gsub("\n$", "")
+if macOStheme == "Dark" then
+	setDarkTheme()
+else
+	setLightTheme()
+end
