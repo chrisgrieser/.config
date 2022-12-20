@@ -100,13 +100,12 @@ function setDarkTheme()
 	opt.background = "dark" ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.94
 	cmd.colorscheme(darkTheme)
-	cmd.colorscheme(darkTheme) -- HACK needs to be set twice https://github.com/folke/lazy.nvim/issues/40
+	-- cmd.colorscheme(darkTheme) -- HACK needs to be set twice https://github.com/folke/lazy.nvim/issues/40
 end
 
 function setLightTheme()
 	opt.background = "light" ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.95
-	cmd.colorscheme(lightTheme)
 	cmd.colorscheme(lightTheme)
 end
 
