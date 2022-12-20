@@ -126,6 +126,7 @@ autocmd("TextYankPost", {
 local recorder = require("recorder")
 recorder.setup {
 	clear = true,
+	logLevel = logTrace,
 	mapping = {
 		startStopRecording = "0",
 		playMacro = "9",
