@@ -72,7 +72,7 @@ keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Search
-keymap({ "n", "x", "o" }, "-", [[/\v]]) -- German Keyboard, \v for very-magic search
+keymap({ "n", "x", "o" }, "-", "/", {desc = "Search (German Keyboard)"}) -- German Keyboard, \v for very-magic search
 keymap("n", "<Esc>", function()
 	local clearPending = require("notify").pending() > 10 and true or false
 	require("notify").dismiss { pending = clearPending }
@@ -203,8 +203,8 @@ keymap("n", "sxx", exchange.line, { desc = "exchange line" })
 keymap("n", "X", cmd.ISwapWith, { desc = "swap nodes" })
 
 -- search & replace
-keymap("n", "<leader>f", [[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "search & replace" })
-keymap("x", "<leader>f", ":sm///g<Left><Left><Left>", { desc = "search & replace" })
+keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "search & replace" })
+keymap("x", "<leader>f", ":s///g<Left><Left><Left>", { desc = "search & replace" })
 keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "structural search & replace" }) -- wrapped in function for lazy-loading
 keymap({ "n", "x" }, "<leader>n", ":normal ", { desc = ":normal" })
 

@@ -31,9 +31,6 @@ keymap(
 	opts
 )
 
--- since in big css files search is laggy with it
-setlocal("incsearch", false)
-
 --------------------------------------------------------------------------------
 
 -- INFO: fix syntax highlighting with ':syntax sync fromstart'
@@ -41,6 +38,10 @@ setlocal("incsearch", false)
 -- however, using treesitter, this is less of an issue, but treesitter css
 -- highlighting isn't good yet, so…
 keymap("n", "zz", ":syntax sync fromstart<CR>", opts)
+
+-- HACK search only below, to not search base64 encoded stuff
+-- keymap({"n", "x"}, "-", "/", {desc = "search only below (css only)", buffer = true})
+
 
 --------------------------------------------------------------------------------
 
