@@ -1,24 +1,27 @@
+local M = {}
+
 -- alternative setup method https://www.reddit.com/r/neovim/comments/zk187u/how_does_everyone_segment_plugin_development_from/
 local myrepos = vim.fn.stdpath("config") .. "/my-plugins/"
 
 --------------------------------------------------------------------------------
 -- stylua: ignore start
-return {
+function M.PluginList(use)
 
 	-- Package Management
-	"wbthomason/packer.nvim", -- packer manages itself
-	"lewis6991/impatient.nvim", -- reduces startup time by ~50%
-	{"williamboman/mason.nvim", requires = "RubixDev/mason-update-all"},
+	use "wbthomason/packer.nvim" -- packer manages itself
+	use "lewis6991/impatient.nvim" -- reduces startup time by ~50%
+	use {"williamboman/mason.nvim", requires = "RubixDev/mason-update-all"}
 
 	-- Themes
-	"savq/melange", -- like Obsidian's Primary color scheme
-	"nyoom-engineering/oxocarbon.nvim",
-	-- "folke/tokyonight.nvim",
-	-- "EdenEast/nightfox.nvim",
-	-- "rebelot/kanagawa.nvim",
+	use "savq/melange" -- like Obsidian's Primary color scheme
+	use "nyoom-engineering/oxocarbon.nvim"
+	-- use "folke/tokyonight.nvim"
+	-- use "EdenEast/nightfox.nvim"
+	-- use "rebelot/kanagawa.nvim"
 
 	-- Treesitter
-	{"nvim-treesitter/nvim-treesitter",
+	use {
+		"nvim-treesitter/nvim-treesitter",
 		run = function() -- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
 			require("nvim-treesitter.install").update {with_sync = true}
 		end,
@@ -26,21 +29,23 @@ return {
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"p00f/nvim-ts-rainbow", -- colored brackets
-	}},
+		}
+	}
 
-	{"mizlan/iswap.nvim", -- swapping of notes
+	use {"mizlan/iswap.nvim", -- swapping of notes
 		config = function() require("iswap").setup {autoswap = true} end,
 		cmd = "ISwapWith"
-	},
-	{"m-demare/hlargs.nvim", -- highlight function args
+	}
+	use {"m-demare/hlargs.nvim", -- highlight function args
 		config = function() require("hlargs").setup() end,
-	},
-	{"Wansmer/treesj", -- split-join
+	}
+	use {"Wansmer/treesj", -- split-join
 		requires = {
 			"nvim-treesitter/nvim-treesitter",
 			"AndrewRadev/splitjoin.vim", -- only used as fallback. TODO: remove when treesj has wider language support
-	}},
-	{"cshuaimin/ssr.nvim", -- structural search & replace
+		},
+	}
+	use {"cshuaimin/ssr.nvim", -- structural search & replace
 		module = "ssr",
 		commit = "4304933", -- TODO: update to newest version with nvim 0.9 https://github.com/cshuaimin/ssr.nvim/issues/11#issuecomment-1340671193
 		config = function()
@@ -48,34 +53,34 @@ return {
 				keymaps = {close = "Q"},
 			}
 		end
-	},
+	}
 
 	-- LSP
-	{"neovim/nvim-lspconfig", requires = {
+	use {"neovim/nvim-lspconfig", requires = {
 		"williamboman/mason-lspconfig.nvim",
 		"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		"ray-x/lsp_signature.nvim", -- signature hint
 		"SmiteshP/nvim-navic", -- breadcrumbs
 		"folke/neodev.nvim", -- lsp for nvim-lua config
 		"b0o/SchemaStore.nvim", -- schemas for json-lsp
-	}},
+	}}
 
 	-- Linting & Formatting
-	{"jose-elias-alvarez/null-ls.nvim", requires = {
+	use {"jose-elias-alvarez/null-ls.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"jayp0521/mason-null-ls.nvim",
-	}},
+	}}
 
 	-- DAP
-	{"mfussenegger/nvim-dap", requires = {
+	use {"mfussenegger/nvim-dap", requires = {
 		"jayp0521/mason-nvim-dap.nvim",
 		"theHamsta/nvim-dap-virtual-text",
 		"rcarriga/nvim-dap-ui",
 		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
-	}},
+	}}
 
 	-- Completion & Suggestion
-	{"hrsh7th/nvim-cmp", requires = {
+	use {"hrsh7th/nvim-cmp", requires = {
 		"hrsh7th/cmp-buffer", -- completion sources
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
@@ -87,55 +92,55 @@ return {
 		"hrsh7th/cmp-nvim-lsp", -- lsp
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
-	}},
-	{"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"},
+	}}
+	use {"windwp/nvim-autopairs", requires = "hrsh7th/nvim-cmp"}
 
 	-- AI-Support
-	{"tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp"},
-	{"jackMort/ChatGPT.nvim", requires = {
+	use {"tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp"}
+	use {"jackMort/ChatGPT.nvim", requires = {
 		"MunifTanjim/nui.nvim",
 		"nvim-lua/plenary.nvim",
-	}},
+	}}
 
 	-- Appearance
-	"lukas-reineke/indent-blankline.nvim", -- indentation guides
-	"nvim-lualine/lualine.nvim", -- status line
-	"lewis6991/gitsigns.nvim", -- gutter signs
-	"rcarriga/nvim-notify", -- notifications
-	"uga-rosa/ccc.nvim", -- color previews & color utilities
-	"dstein64/nvim-scrollview", -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
-	{"anuvyklack/windows.nvim", requires = "anuvyklack/middleclass"}, -- auto-resize splits
-	"xiyaowong/virtcolumn.nvim",
+	use "lukas-reineke/indent-blankline.nvim" -- indentation guides
+	use "nvim-lualine/lualine.nvim" -- status line
+	use "lewis6991/gitsigns.nvim" -- gutter signs
+	use "rcarriga/nvim-notify" -- notifications
+	use "uga-rosa/ccc.nvim" -- color previews & color utilities
+	use "dstein64/nvim-scrollview" -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
+	use {"anuvyklack/windows.nvim", requires = "anuvyklack/middleclass"} -- auto-resize splits
+	use "xiyaowong/virtcolumn.nvim"
 
 	-- File Switching & File Operation
-	{"stevearc/dressing.nvim", requires = {
+	use {"stevearc/dressing.nvim", requires = {
 		"hrsh7th/nvim-cmp",
 		"hrsh7th/cmp-omni", -- for autocompletion in input prompts
-	}},
-	{myrepos .. "nvim-genghis",
+	}}
+	use {myrepos .. "nvim-genghis",
 		module = "genghis",
 		requires = "stevearc/dressing.nvim",
-	},
-	{"nvim-telescope/telescope.nvim", requires = {
+	}
+	use {"nvim-telescope/telescope.nvim", requires = {
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons"
-	}},
-	{"ghillb/cybu.nvim", requires = {-- Cycle Buffers
+	}}
+	use {"ghillb/cybu.nvim", requires = {-- Cycle Buffers
 		"nvim-tree/nvim-web-devicons",
 		"nvim-lua/plenary.nvim",
-	}},
-	{ "debugloop/telescope-undo.nvim",
+	}}
+	use { "debugloop/telescope-undo.nvim",
 		requires = {"nvim-telescope/telescope.nvim"},
 		config = function() require("telescope").load_extension("undo") end,
 		module = "telescope-undo",
-	},
+	}
 
 	-- Terminal & Git
-	{"akinsho/toggleterm.nvim",
+	use {"akinsho/toggleterm.nvim",
 		cmd = {"ToggleTerm", "ToggleTermSendVisualSelection"},
 		config = function() require("toggleterm").setup() end
-	},
-	{"sindrets/diffview.nvim",
+	}
+	use {"sindrets/diffview.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		cmd = {"DiffviewFileHistory", "DiffviewOpen"},
 		config = function()
@@ -143,8 +148,8 @@ return {
 				file_history_panel = {win_config = {height = 4}},
 			}
 		end,
-	},
-	{"ruifm/gitlinker.nvim",
+	}
+	use {"ruifm/gitlinker.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		module = "gitlinker",
 		config = function()
@@ -153,33 +158,36 @@ return {
 				opts = {print_url = false},
 			}
 		end
-	},
+	}
 
 	-- EDITING-SUPPORT
-	"kylechui/nvim-surround", -- surround operator
-	"gbprod/substitute.nvim", -- substitution & exchange operator
-	"numToStr/Comment.nvim", -- comment operator
-	{"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"x", "<D-j>"}}},
-	"Darazaki/indent-o-matic", -- auto-determine indents
-	{"gbprod/yanky.nvim"}, -- register manager
-	myrepos .. "nvim-recorder", -- better macros
-	myrepos .. "nvim-various-textobjs", -- custom textobjects
-	{"nacro90/numb.nvim", -- line previews when ":n"
+	use "kylechui/nvim-surround" -- surround operator
+	use "gbprod/substitute.nvim" -- substitution & exchange operator
+	use "numToStr/Comment.nvim" -- comment operator
+	-- use "michaeljsmith/vim-indent-object" -- indention-based text-object
+	use {"mg979/vim-visual-multi", keys = {{"n", "<D-j>"}, {"x", "<D-j>"}}}
+	use "Darazaki/indent-o-matic" -- auto-determine indents
+	use {"gbprod/yanky.nvim"} -- register manager
+	use(myrepos .. "nvim-recorder") -- better macros
+	use(myrepos .. "nvim-various-textobjs") -- custom textobjects
+	use {"nacro90/numb.nvim", -- line previews when ":n"
 		config = function() require("numb").setup() end,
 		keys = {{"n", ":"}},
-	},
-	{"kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async"}, -- better folding
-	"unblevable/quick-scope", -- f/t preview
+	}
+	use {"kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async"} -- better folding
+	use "unblevable/quick-scope" -- f/t preview
 
 	-- Filetype-specific
-	{"mityu/vim-applescript", ft = "applescript"}, -- syntax highlighting
-	{"hail2u/vim-css3-syntax", ft = "css"}, -- better syntax highlighting (until treesitter css looks decent…)
-	{"iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && npm install"},
-	{"bennypowers/nvim-regexplainer",
+	use {"mityu/vim-applescript", ft = "applescript"} -- syntax highlighting
+	use {"hail2u/vim-css3-syntax", ft = "css"} -- better syntax highlighting (until treesitter css looks decent…)
+	use {"iamcco/markdown-preview.nvim", ft = "markdown", run = "cd app && npm install"}
+	use {"bennypowers/nvim-regexplainer",
 		ft = {"javascript", "typescript"},
 		requires = {"nvim-treesitter/nvim-treesitter", "MunifTanjim/nui.nvim"},
 		-- INFO: config set in javascript/typescript ftplugin, since not working
 		-- from here
-	},
+	}
 
-}
+end
+
+return M
