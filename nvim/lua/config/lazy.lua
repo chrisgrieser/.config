@@ -1,8 +1,6 @@
--- https://github.com/folke/lazy.nvim#-installation
 
 --------------------------------------------------------------------------------
--- Bootstrap Lazy.nvim plugin manager
-
+-- Bootstrap Lazy.nvim plugin manager https://github.com/folke/lazy.nvim#-installation
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system {
@@ -17,8 +15,13 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
--- configure
+-- config https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup("config/plugin-list", {
+	defaults = {
+		-- enable this to try installing the latest stable versions of plugins
+		-- nil will install right away
+		version = "*",
+	},
 	dev = {
 		-- alternative setup method https://www.reddit.com/r/neovim/comments/zk187u/how_does_everyone_segment_plugin_development_from/
 		path = vim.fn.stdpath("config") .. "/my-plugins/",

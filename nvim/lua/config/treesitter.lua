@@ -2,6 +2,8 @@ require("config/utils")
 --------------------------------------------------------------------------------
 
 require("nvim-treesitter.configs").setup {
+	parser_install_dir = fn.stdpath("data").."/treesitter", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
 	ensure_installed = {
 		"javascript",
 		"typescript",
@@ -22,7 +24,7 @@ require("nvim-treesitter.configs").setup {
 		"yaml",
 		"json",
 	},
-	auto_install = false, -- install missing parers when entering a buffer
+	auto_install = false, -- install missing parsers when entering a buffer
 
 	highlight = {
 		enable = true,

@@ -1,5 +1,4 @@
 require("config/utils")
-local packer = require("packer")
 --------------------------------------------------------------------------------
 
 -- META
@@ -29,18 +28,10 @@ keymap("n", "<leader>M", cmd.Mason, { desc = ":Mason" })
 
 -- Update [P]lugins
 keymap("n", "<leader>p", function()
-	cmd.update { bang = true }
-	packer.compile()
-	package.loaded["config/plugin-list"] = nil -- empty the cache for lua
-	packer.startup(require("config/plugin-list").PluginList)
-	packer.snapshot("packer-snapshot_" .. os.date("!%Y-%m-%d_%H-%M-%S"))
-	packer.sync()
+	require("lazy").sync()
 	cmd.MasonUpdateAll()
-	-- remove oldest snapshot when more than 20
-	local snapshotPath = fn.stdpath("config") .. "/packer-snapshots"
-	os.execute([[cd ']] .. snapshotPath .. [[' ; ls -t | tail -n +20 | tr '\n' '\0' | xargs -0 rm]])
-end, { desc = ":PackerSnapshot & :PackerSync" })
-keymap("n", "<leader>P", packer.status, { desc = ":PackerStatus" })
+end, { desc = ":Lazy sync & :MasonUpdateAll" })
+keymap("n", "<leader>P", require("lazy").home, { desc = ":Lazy home" })
 
 -- write all before quitting
 keymap("n", "ZZ", ":wall! | qa!<CR>", { desc = "writeall, quitall" })
@@ -55,15 +46,7 @@ keymap({ "n", "x", "o" }, "L", "$")
 keymap({ "x", "o" }, "J", "6j")
 keymap({ "n", "x", "o" }, "K", "6k")
 
-keymap("n", "k", function()
-	normal("k")
-	cmd.nohlsearch()
-end, { desc = "k also triggers :nohl" })
-
-keymap("n", "j", function()
-	qol.overscroll("j")
-	cmd.nohlsearch()
-end, { desc = "j (with overscroll) and :nohl" })
+keymap("n", "j", function() qol.overscroll("j") end, { desc = "j (with overscroll)"})
 keymap("n", "J", function() qol.overscroll("6j") end, { desc = "6j (with overscroll)" })
 keymap({ "n", "x" }, "G", "Gzz")
 
@@ -142,9 +125,7 @@ autocmd("TextYankPost", {
 -- MACROS
 local recorder = require("recorder")
 recorder.setup {
-	slots = { "a", "b" },
 	clear = true,
-	logLevel = logTrace,
 	mapping = {
 		startStopRecording = "0",
 		playMacro = "9",
@@ -459,30 +440,16 @@ keymap("n", "<leader>r", function()
 
 	if filename == "sketchybarrc" then
 		fn.system("brew services restart sketchybar")
-	-- elseif ft == "markdown" then
-	-- 	local filepath = fn.expand("%:p")
-	-- 	local pdfFilename = fn.expand("%:t:r") .. ".pdf"
-	-- 	fn.system("pandoc '" .. filepath .. "' --output='" .. pdfFilename .. "' --pdf-engine=wkhtmltopdf")
-	-- 	fn.system("open '" .. pdfFilename .. "'")
+	elseif ft == "markdown" then
+		local filepath = fn.expand("%:p")
+		local pdfFilename = fn.expand("%:t:r") .. ".pdf"
+		fn.system("pandoc '" .. filepath .. "' --output='" .. pdfFilename .. "' --pdf-engine=wkhtmltopdf")
+		fn.system("open '" .. pdfFilename .. "'")
 
 	-- nvim config
 	elseif ft == "lua" and parentFolder:find("nvim") then
-		-- HACK to preserve folding state and path
-		local prevPath = fn.expand("%:p:h")
-		cmd.mkview() 
-
-		cmd.wall()
-		-- INFO packages need to be unloaded due to lua's caching
-		local pack = fn.expand("%:r")	-- also reloads the current plugin
-		package.loaded[pack] = nil
-		for name, _ in pairs(package.loaded) do
-			if name:match("^config") then package.loaded[name] = nil end
-		end
-		dofile(vim.env.MYVIMRC)
-		vim.notify("All reloaded.", logTrace)
-
-		cmd.loadview()
-		cmd.cd(prevPath)
+		cmd.source()
+		vim.notify(fn.expand("%:r").." re-sourced.")
 
 	-- Hammerspoon
 	elseif ft == "lua" and parentFolder:find("hammerspoon") then

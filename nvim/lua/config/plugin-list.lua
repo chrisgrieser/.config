@@ -2,7 +2,6 @@
 return {
 
 	-- Package Management
-	"wbthomason/packer.nvim", -- packer manages itself
 	{"williamboman/mason.nvim", dependencies = "RubixDev/mason-update-all"},
 
 	-- Themes
@@ -70,24 +69,27 @@ return {
 	}},
 
 	-- Completion & Suggestion
-	{"hrsh7th/nvim-cmp", dependencies = {
-		"hrsh7th/cmp-buffer", -- completion sources
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-cmdline",
-		"dmitmel/cmp-cmdline-history",
-		"hrsh7th/cmp-emoji",
-		{"chrisgriesr/cmp-nerdfont", dev = true},
-		"tamago324/cmp-zsh",
-		"ray-x/cmp-treesitter",
-		"hrsh7th/cmp-nvim-lsp", -- lsp
-		"L3MON4D3/LuaSnip", -- snippet engine
-		"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
-	}},
+	{"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+		dependencies = {
+			"hrsh7th/cmp-buffer", -- completion sources
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"dmitmel/cmp-cmdline-history",
+			"hrsh7th/cmp-emoji",
+			{"chrisgriesr/cmp-nerdfont", dev = true},
+			"tamago324/cmp-zsh",
+			"ray-x/cmp-treesitter",
+			"hrsh7th/cmp-nvim-lsp", -- lsp
+			"L3MON4D3/LuaSnip", -- snippet engine
+			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
+		}
+	},
 	{"windwp/nvim-autopairs", dependencies = "hrsh7th/nvim-cmp"},
 
 	-- AI-Support
 	{"tzachar/cmp-tabnine", build = "./install.sh", dependencies = "hrsh7th/nvim-cmp"},
-	{"jackMort/ChatGPT.nvim", 
+	{"jackMort/ChatGPT.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
 		lazy = true,
 	},
@@ -96,14 +98,14 @@ return {
 	"lukas-reineke/indent-blankline.nvim", -- indentation guides
 	"nvim-lualine/lualine.nvim", -- status line
 	"lewis6991/gitsigns.nvim", -- gutter signs
-	"rcarriga/nvim-notify", -- notifications
+	{"rcarriga/nvim-notify", event = "VeryLazy"}, -- notifications
 	"uga-rosa/ccc.nvim", -- color previews & color utilities
 	"dstein64/nvim-scrollview", -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
 	{"anuvyklack/windows.nvim", dependencies = "anuvyklack/middleclass"}, -- auto-resize splits
 	"xiyaowong/virtcolumn.nvim", -- nicer color column
 
 	-- File Switching & File Operation
-	{"stevearc/dressing.nvim", 
+	{"stevearc/dressing.nvim",
 		event = "VeryLazy",
 		dependencies = {
 			"hrsh7th/nvim-cmp",

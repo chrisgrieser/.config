@@ -216,7 +216,12 @@ function M.pasteDifferently()
 	local reg = useSystemClipb and "+" or '"'
 
 	local isLinewise = fn.getregtype(reg) == "V"
-	local targetRegType = isLinewise and "v" or "V"
+	local targetRegType
+	if isLinewise then
+		targetRegType = "v"
+	else
+		targetRegType = "V"
+	end
 
 	local regContent = fn.getreg(reg)
 	regContent = trim(regContent)

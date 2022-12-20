@@ -15,8 +15,6 @@ require("telescope").setup {
 		prompt_prefix = "❱ ",
 		path_display = { "tail" },
 		file_ignore_patterns = {
-			"packer_compiled.lua", -- packer
-			"packer%-snapshot_", -- packer
 			"%.DS_Store", -- Mac system file
 			"%.git/",
 			"%.git", -- submodules
