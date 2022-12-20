@@ -29,6 +29,11 @@ g.markdown_fenced_languages = {
 }
 
 --------------------------------------------------------------------------------
+-- link text object
+keymap({"o", "x"}, "il", function () varTextObj.mdlink(true) end, {desc = "inner md link textobj"})
+keymap({"o", "x"}, "al", function () varTextObj.mdlink(false) end, {desc = "outer md link textobj"})
+
+--------------------------------------------------------------------------------
 
 -- wrapping and related options
 setlocal("wrap", true) -- soft wrap
@@ -43,10 +48,6 @@ keymap({ "n", "x" }, "j", function() qol.overscroll("gj") end, opts)
 -- decrease line length without zen mode plugins (which unfortunately remove
 -- statuslines and stuff)
 setlocal("signcolumn", "yes:9")
-
--- automatically open float, since virtual text is hard to read with wrapping
-keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, opts)
-keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, opts)
 
 --------------------------------------------------------------------------------
 
