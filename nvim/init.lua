@@ -1,8 +1,10 @@
 -- INFO configs in subfolder to avoid namespace collisions
 
 borderStyle = "single" -- https://neovim.io/doc/user/api.html#nvim_open_win()
-require("config/packer") -- must be 1st
-require("impatient") -- plugin, must be 2nd
+-- require("config/packer") -- must be 1st
+-- require("impatient") -- plugin, must be 2nd
+
+require("config/lazy")
 require("config/utils") -- must be 3rd
 
 --------------------------------------------------------------------------------

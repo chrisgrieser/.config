@@ -12,7 +12,7 @@ if not status_ok then return end
 
 -- Load plugins and display packer as popup
 packer.startup {
-	require("config/plugin-list").PluginList,
+	require("config/plugin-list-packer").PluginList,
 	config = {
 		display = {
 			open_fn = function() return require("packer.util").float {border = borderStyle} end,
