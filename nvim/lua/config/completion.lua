@@ -80,7 +80,6 @@ local source_icons = {
 }
 
 --------------------------------------------------------------------------------
-
 cmp.setup {
 	snippet = {
 		-- REQUIRED a snippet engine must be specified and installed
@@ -88,11 +87,12 @@ cmp.setup {
 	},
 	window = {
 		completion = {
-			col_offset = -3,
 			side_padding = 0,
 			border = borderStyle,
 		},
-		documentation = cmp.config.window.bordered(),
+		documentation = {
+			border = borderStyle,
+		},
 	},
 	mapping = cmp.mapping.preset.insert {
 		["<CR>"] = cmp.mapping.confirm { select = true },
