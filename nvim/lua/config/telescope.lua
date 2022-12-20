@@ -132,6 +132,7 @@ require("telescope").setup {
 			layout_strategy = "bottom_pane",
 		},
 	},
+	-- https://github.com/debugloop/telescope-undo.nvim#configuration
 	extensions = {
 		undo = {
 			layout_config = {
@@ -139,7 +140,8 @@ require("telescope").setup {
 			},
 			prompt_prefix = "",
 			initial_mode = "normal",
-			side_by_side = false,
 		},
 	},
 }
+
+require("telescope").load_extension("undo")

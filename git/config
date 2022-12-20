@@ -34,9 +34,6 @@
 
 # Delta
 [delta]
-	side-by-side = true
-	navigate = true
-
 	# deactivate line numbers in side-by-side-view, but keep vertical separator
 	line-numbers-left-format = ""
 	line-numbers-right-format = "│ "

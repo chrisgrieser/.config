@@ -88,7 +88,12 @@ return {
 	{"windwp/nvim-autopairs", dependencies = "hrsh7th/nvim-cmp"},
 
 	-- AI-Support
-	{"tzachar/cmp-tabnine", build = "./install.sh", dependencies = "hrsh7th/nvim-cmp"},
+	{
+		"tzachar/cmp-tabnine",
+		build = "./install.sh",
+		dependencies = "hrsh7th/nvim-cmp",
+		pin = true,
+	},
 	{"jackMort/ChatGPT.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
 		lazy = true,
@@ -118,16 +123,14 @@ return {
 	},
 	{"nvim-telescope/telescope.nvim", dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-tree/nvim-web-devicons"
+		"nvim-tree/nvim-web-devicons",
+		"debugloop/telescope-undo.nvim",
 	}},
 	{"ghillb/cybu.nvim", dependencies = { -- Cycle Buffers
 		"nvim-tree/nvim-web-devicons",
 		"nvim-lua/plenary.nvim",
+		keys = "<BS>",
 	}},
-	{ "debugloop/telescope-undo.nvim",
-		dependencies = {"nvim-telescope/telescope.nvim"},
-		init = function() require("telescope").load_extension("undo") end,
-	},
 
 	-- Terminal & Git
 	{"akinsho/toggleterm.nvim",
