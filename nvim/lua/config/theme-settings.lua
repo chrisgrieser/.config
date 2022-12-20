@@ -98,20 +98,21 @@ autocmd("ColorScheme", {
 -- functions not local, so they can be accessed via file watcher
 function setDarkTheme()
 	opt.background = "dark" ---@diagnostic disable-line: assign-type-mismatch
-	g.neovide_transparency = 0.94
-	cmd.colorscheme(darkTheme)
-	-- cmd.colorscheme(darkTheme) -- HACK needs to be set twice https://github.com/folke/lazy.nvim/issues/40
+	g.neovide_transparency = 0.93
+	cmd.highlight("clear")-- HACK needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
+	cmd.colorscheme(darkTheme) 
 end
 
 function setLightTheme()
 	opt.background = "light" ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.95
+	cmd.highlight("clear")
 	cmd.colorscheme(lightTheme)
 end
 
 -- set dark or light mode on neovim startup (requires macos)
-local macOStheme = fn.system([[defaults read -g AppleInterfaceStyle]]):gsub("\n$", "")
-if macOStheme == "Dark" then
+local macOStheme = fn.system([[defaults read -g AppleInterfaceStyle]])
+if macOStheme:find("Dark") then
 	setDarkTheme()
 else
 	setLightTheme()
