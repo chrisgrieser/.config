@@ -318,7 +318,7 @@ if isGui() then
 	}
 
 	-- cut, copy & paste
-	keymap({ "n", "x" }, "<D-v>", "<Esc>p", { desc = "paste" }) -- needed for pasting from Alfred clipboard history
+	keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" }) -- needed for pasting from Alfred clipboard history
 	keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
 	keymap("i", "<D-v>", "<C-r><C-o>+", { desc = "paste" })
 
