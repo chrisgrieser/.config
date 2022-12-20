@@ -2,8 +2,6 @@ require("config/utils")
 --------------------------------------------------------------------------------
 
 require("nvim-treesitter.configs").setup {
-	parser_install_dir = fn.stdpath("data").."/treesitter", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
 	ensure_installed = {
 		"javascript",
 		"typescript",

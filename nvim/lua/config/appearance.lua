@@ -69,7 +69,7 @@ if isGui() then
 	require("notify").setup {
 		render = "minimal",
 		stages = "slide",
-		level = 2, -- minimum severity level to display (0 = display all)
+		level = 0, -- minimum severity level to display (0 = display all)
 		max_height = 25,
 		max_width = notifyWidth, -- HACK see below
 		minimum_width = 10,
@@ -319,7 +319,6 @@ require("lualine").setup {
 				end,
 			},
 			"diagnostics",
-			{ lsp_progress },
 			{ mixedIndentation },
 		},
 		lualine_y = {
@@ -342,6 +341,9 @@ require("lualine").setup {
 				function() return " " end, -- dummy to avoid bar appearing and disappearing
 				cond = showBreadcrumbs,
 			},
+		},
+		lualine_x = {
+			{ lsp_progress },
 		},
 		lualine_y = {
 			{ debuggerStatus, section_separators = winSecSeparators },

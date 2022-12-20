@@ -216,18 +216,13 @@ function M.pasteDifferently()
 	local reg = useSystemClipb and "+" or '"'
 
 	local isLinewise = fn.getregtype(reg) == "V"
-	local targetRegType
-	if isLinewise then
-		targetRegType = "v"
-	else
-		targetRegType = "V"
-	end
+	local targetRegType = isLinewise and "v" or "V"
 
 	local regContent = fn.getreg(reg)
 	regContent = trim(regContent)
 
 	fn.setreg(reg, regContent, targetRegType)
-	cmd.normal { reg .. "p", bang = true }
+	cmd.normal { '"' .. reg .. "p", bang = true }
 	if targetRegType == "V" then
 		cmd.normal { "==", bang = true } -- indent the new paste
 	end
