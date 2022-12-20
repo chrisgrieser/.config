@@ -470,8 +470,11 @@ keymap("n", "<leader>r", function()
 
 	-- nvim config
 	elseif ft == "lua" and parentFolder:find("nvim") then
+		-- HACK to preserve folding state and path
+		local prevPath = fn.expand("%:p:h")
+		cmd.mkview() 
+
 		cmd.wall()
-		cmd.mkview() -- HACK to preserve folding state
 		-- INFO packages need to be unloaded due to lua's caching
 		local pack = fn.expand("%:r")	-- also reloads the current plugin
 		package.loaded[pack] = nil
@@ -480,7 +483,9 @@ keymap("n", "<leader>r", function()
 		end
 		dofile(vim.env.MYVIMRC)
 		vim.notify("All reloaded.", logTrace)
+
 		cmd.loadview()
+		cmd.cd(prevPath)
 
 	-- Hammerspoon
 	elseif ft == "lua" and parentFolder:find("hammerspoon") then
