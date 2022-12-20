@@ -13,7 +13,7 @@ require("telescope").setup {
 	defaults = {
 		selection_caret = "ﰉ ",
 		prompt_prefix = "❱ ",
-		path_display = {"tail"},
+		path_display = { "tail" },
 		file_ignore_patterns = {
 			"packer_compiled.lua", -- packer
 			"packer%-snapshot_", -- packer
@@ -44,7 +44,7 @@ require("telescope").setup {
 				height = 0.95,
 				preview_cutoff = 70,
 				width = 0.95,
-				preview_width = {0.60, min = 35}
+				preview_width = { 0.55, min = 30 },
 			},
 			cursor = {
 				preview_cutoff = 9001, -- never use preview here
@@ -71,19 +71,21 @@ require("telescope").setup {
 			trim_text = true,
 			initial_mode = "normal",
 			theme = "cursor",
-			layout_config = {cursor = {
-				width = 0.7,
-				preview_cutoff = 30,
-				preview_width = {0.55, max = 45}
-			}},
+			layout_config = {
+				cursor = {
+					width = 0.7,
+					preview_cutoff = 30,
+					preview_width = { 0.55, max = 45 },
+				},
+			},
 		},
 		lsp_document_symbols = {
 			prompt_prefix = "* ",
-			ignore_symbols = {"string", "boolean", "number"},
+			ignore_symbols = { "string", "boolean", "number" },
 		},
 		lsp_workspace_symbols = {
 			prompt_prefix = "W* ",
-			ignore_symbols = {"string", "boolean", "number"},
+			ignore_symbols = { "string", "boolean", "number" },
 			fname_width = 17,
 		},
 		treesitter = {
@@ -96,9 +98,9 @@ require("telescope").setup {
 			hidden = true,
 			follow = true,
 		},
-		keymaps = {prompt_prefix = " "},
-		oldfiles = {prompt_prefix = " "},
-		highlights = {prompt_prefix = " "},
+		keymaps = { prompt_prefix = " " },
+		oldfiles = { prompt_prefix = " " },
+		highlights = { prompt_prefix = " " },
 		git_files = {
 			prompt_prefix = " ",
 			show_untracked = true,
@@ -111,7 +113,7 @@ require("telescope").setup {
 			prompt_title = false,
 			results_title = false,
 			theme = "cursor",
-			layout_config = {cursor = {width = 0.4}},
+			layout_config = { cursor = { width = 0.4 } },
 		},
 		live_grep = {
 			cwd = "%:p:h",
@@ -123,7 +125,7 @@ require("telescope").setup {
 			initial_mode = "normal",
 			prompt_prefix = "暈",
 			theme = "cursor",
-			layout_config = {cursor = {width = 0.25}},
+			layout_config = { cursor = { width = 0.25 } },
 		},
 		colorscheme = {
 			enable_preview = true,
@@ -134,9 +136,12 @@ require("telescope").setup {
 	},
 	extensions = {
 		undo = {
+			layout_config = {
+				preview_width = 0.65,
+			},
 			prompt_prefix = "",
 			initial_mode = "normal",
+			side_by_side = false,
 		},
 	},
 }
-

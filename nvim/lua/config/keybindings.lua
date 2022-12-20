@@ -221,7 +221,7 @@ keymap("x", "R", qol.duplicateSelection, { desc = "duplicate selection" })
 -- Undo
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
 keymap("n", "<C-u>", qol.undoDuration, { desc = "undo specific durations" })
-keymap("n", "<leader>u", function() require("telescope-undo")() end, { desc = "Telescope Undotree" })
+keymap("n", "<leader>u", function() require("telescope").extensions.undo.undo() end, { desc = "Telescope Undotree" })
 keymap("i", "<Space>", "<Space><C-g>u", { desc = "add blank below" })
 
 -- Logging & Debugging
@@ -471,6 +471,7 @@ keymap("n", "<leader>r", function()
 	-- nvim config
 	elseif ft == "lua" and parentFolder:find("nvim") then
 		cmd.wall()
+		cmd.mkview() -- HACK to preserve folding state
 		-- INFO packages need to be unloaded due to lua's caching
 		local pack = fn.expand("%:r")	-- also reloads the current plugin
 		package.loaded[pack] = nil
@@ -479,6 +480,7 @@ keymap("n", "<leader>r", function()
 		end
 		dofile(vim.env.MYVIMRC)
 		vim.notify("All reloaded.", logTrace)
+		cmd.loadview()
 
 	-- Hammerspoon
 	elseif ft == "lua" and parentFolder:find("hammerspoon") then
