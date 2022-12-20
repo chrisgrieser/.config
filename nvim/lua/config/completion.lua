@@ -12,6 +12,18 @@ local function copyTable(originalTable)
 	return newTable
 end
 
+---Remove an item from a lua table, returns copy of table with item removed
+---@param originalTable table
+---@param itemToRemove any
+---@return table
+local function removeFromTable(originalTable, itemToRemove)
+	local newTable = {}
+	for _, item in pairs(originalTable) do
+		if item ~= itemToRemove then table.insert(newTable, item) end
+	end
+	return newTable
+end
+
 --------------------------------------------------------------------------------
 -- source definitions
 
@@ -29,9 +41,9 @@ local defaultSources = {
 	snippets,
 	lsp,
 	tabnine,
-	treesitter, -- should be fourth
+	treesitter,
 	emojis,
-	buffer, -- should be last
+	buffer,
 }
 
 --------------------------------------------------------------------------------
@@ -149,15 +161,15 @@ cmp.setup.filetype("toml", {
 
 -- css
 local cssSources = copyTable(defaultSources)
-table.remove(cssSources) -- no buffer, since embedded fonts make this useless
-table.remove(cssSources, 4) -- no treesitter, as laggy on big files
+cssSources = removeFromTable(cssSources, buffer) -- too much noise
+cssSources = removeFromTable(cssSources, treesitter) -- laggy on big files
 cmp.setup.filetype("css", {
-	sources = cmp.config.sources (cssSources),
+	sources = cmp.config.sources(cssSources),
 })
 
 -- markdown
 local markdownSources = copyTable(defaultSources)
-table.remove(markdownSources, 3) -- no tabnine, since mostly suggesting useless words
+markdownSources = removeFromTable(markdownSources, tabnine) -- too much noise
 table.insert(markdownSources, 1, path) -- for markdown images
 cmp.setup.filetype("markdown", {
 	sources = cmp.config.sources(markdownSources),
@@ -217,13 +229,13 @@ cmp.setup.cmdline(":", {
 })
 
 --------------------------------------------------------------------------------
+-- PLUGINS
 
 -- Enable Completion in DressingInput
 cmp.setup.filetype("DressingInput", {
 	sources = cmp.config.sources { { name = "omni" } },
 })
 
---------------------------------------------------------------------------------
 -- AUTOPAIRS
 require("nvim-autopairs").setup()
 

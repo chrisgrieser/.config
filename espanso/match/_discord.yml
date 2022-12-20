@@ -1,12 +1,13 @@
 matches:
+  # cencorship for carl (lol)
   - trigger: "roadmap"
     replace: "ro*dmap [auto-censored]"
+  - trigger: "legacy editor"
+    replace: "legacy edit0r [auto-censored]"
 
   # sed for fixing messages
   - trigger: "sss"
     replace: "s/$|$//"
-  - trigger: "legacy editor"
-    replace: "legacy edit0r [auto-censored]"
 
   - trigger: "!update"
     replace: |
@@ -24,5 +25,4 @@ matches:
       ⚠️ __Breaking Changes__
       -
 
-      📓 __Docs__
-      https:\\chrisgrieser.github.io/shimmering-focus/
+      ➡️ <https://github.com/chrisgrieser/shimmering-focus>
