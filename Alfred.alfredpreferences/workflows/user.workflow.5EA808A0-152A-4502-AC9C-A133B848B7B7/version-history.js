@@ -15,7 +15,6 @@ function run (argv) {
 	//------------------------------------------------------------------------------
 
 	const query = argv.join("");
-	const gitAuthor = $.getenv("git_author");
 
 	const FULL_PATH = $.getenv("input");
 	if (!FULL_PATH) return alfredErrorDisplay("No selection");
@@ -45,12 +44,11 @@ function run (argv) {
 				const commitHash = line.split(";")[0];
 				const displayDate = line.split(";")[1]; // results from `extraOptions`
 				const commitMsg = line.split(";")[2]; //             ^
-				const author = line.split(";")[3]; //                ^
+				// const author = line.split(";")[3]; //                ^
 				const numstat = line.split(";")[4].match(/\d+/g); // ^
 				const changes = Number(numstat[0]) + Number(numstat[1]);
 
-				let subtitle = `${changes}  ▪︎  ${commitMsg}`;
-				if (author !== gitAuthor) subtitle += `  ▪︎  ${author}`; // only add author when oneself
+				const subtitle = `${changes}  ▪︎  ${commitMsg}`;
 
 				let appendix = "";
 				if (FIRST_ITEM) {

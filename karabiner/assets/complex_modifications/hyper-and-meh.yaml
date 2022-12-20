@@ -19,7 +19,6 @@ rules:
           - type: variable_unless
             name: LEADER_ACTIVE
             value: true
-      #─────────────────────────────────────────────────────────────────────────
       # Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+,
       - from:
           key_code: comma
@@ -32,8 +31,7 @@ rules:
         to:
           - key_code: vk_none
         type: basic
-  - description: "*️⃣ Keep Esc to Force Quit"
-    manipulators:
+      # Keep Esc to Force Quit"
       - type: basic
         from:
           key_code: f18
@@ -46,6 +44,19 @@ rules:
           modifiers:
             - command
             - option
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "*️⃣ ⇪ Tab  → Meh/Tab"
+    manipulators:
+      - type: basic
+        from:
+          key_code: tab
+        to_if_alone:
+          - key_code: tab
+        to:
+          - key_code: right_shift
+            modifiers:
+              - control
+              - option
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣  \U0001F4C2 Open Locations (Globally Active)"
     manipulators:
