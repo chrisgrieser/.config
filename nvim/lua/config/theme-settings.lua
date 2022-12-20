@@ -2,10 +2,10 @@ require("config/utils")
 --------------------------------------------------------------------------------
 
 lightTheme = "melange"
-darkTheme = "oxocarbon"
--- local lightTheme = "dawnfox"
--- local darkTheme = "nightfox"
--- local darkTheme = "tokyonight-moon"
+darkTheme = "tokyonight-moon"
+-- darkTheme = "oxocarbon"
+-- lightTheme = "dawnfox"
+-- darkTheme = "nightfox"
 
 --------------------------------------------------------------------------------
 -- CUSTOM HIGHLIGHTS & Theme Customization
@@ -60,6 +60,7 @@ local function themeModifications()
 		cmd.highlight("GitSignsChange guifg=#acaa62")
 		cmd.highlight("GitSignsAdd guifg=#7fcc82")
 		cmd.highlight {"def link ScrollView Folded", bang = true}
+		cmd.highlight {"def link VirtColumn NonText", bang = true}
 	elseif theme == "oxocarbon" then
 		cmd.highlight {"def link FloatTitle TelescopePromptTitle", bang = true}
 		cmd.highlight {"def link @function @function.builtin", bang = true} -- no bold

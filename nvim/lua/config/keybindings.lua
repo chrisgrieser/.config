@@ -103,9 +103,6 @@ keymap({ "n", "x" }, "gm", "gM", { desc = "goto middle of logical line" })
 keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 
--- quickscope: only highlight when key is pressed
-g.qs_highlight_on_keys = { "f", "F", "t", "T" }
-
 --------------------------------------------------------------------------------
 
 -- CLIPBOARD

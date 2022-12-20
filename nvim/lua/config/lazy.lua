@@ -18,6 +18,17 @@ vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
 -- configure
-require("lazy").setup("config.plugin-list", {
-
+require("lazy").setup("config/plugin-list", {
+	dev = {
+		-- alternative setup method https://www.reddit.com/r/neovim/comments/zk187u/how_does_everyone_segment_plugin_development_from/
+		path = vim.fn.stdpath("config") .. "/my-plugins/",
+	},
+	ui = {
+		border = borderStyle,
+	},
+	checker = {
+		enabled = true, -- automatically check for plugin updates
+		notify = false, -- get a notification when new updates are found
+		frequency = 86400, -- check for updates every 24 hours
+	},
 })
