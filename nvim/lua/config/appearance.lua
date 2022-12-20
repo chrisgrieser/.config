@@ -233,7 +233,7 @@ local function mixedIndentation()
 	local ignoredFts = {
 		"css",
 		"markdown",
-		"",
+		"sh",
 	}
 
 	if vim.tbl_contains(ignoredFts, ft) then return "" end
@@ -304,13 +304,13 @@ end
 
 require("lualine").setup {
 	sections = {
-		lualine_a = { "mode" },
-		lualine_b = {
+		lualine_a = {
 			{ readOnly },
 			{ currentFile },
 		},
-		lualine_c = { { alternateFile } },
-		lualine_x = {
+		lualine_b = { { alternateFile } },
+		lualine_c = {
+			{ lsp_progress },
 			{
 				"searchcount",
 				fmt = function(str)
@@ -318,6 +318,8 @@ require("lualine").setup {
 					return " " .. str:sub(2, -2)
 				end,
 			},
+		},
+		lualine_x = {
 			"diagnostics",
 			{ mixedIndentation },
 		},
@@ -343,7 +345,6 @@ require("lualine").setup {
 			},
 		},
 		lualine_x = {
-			{ lsp_progress },
 		},
 		lualine_y = {
 			{ debuggerStatus, section_separators = winSecSeparators },
