@@ -1,4 +1,4 @@
-g.mapleader = ","
+vim.g.mapleader = ","
 borderStyle = "single" -- options: https://neovim.io/doc/user/api.html#nvim_open_win()
 
 --------------------------------------------------------------------------------

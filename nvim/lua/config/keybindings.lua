@@ -230,21 +230,8 @@ keymap({ "n", "x" }, "M", "J", { desc = "merge line up" })
 keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "merge line down" })
 keymap("n", "|", "a<CR><Esc>k$", { desc = "split line at cursor" })
 
--- TreeSJ plugin + Splitjoin-Fallback
+-- TreeSJ plugin
 keymap("n", "<leader>s", cmd.TSJToggle, { desc = "split/join" })
-
-require("treesj").setup { use_default_keymaps = false }
-augroup("splitjoinFallback", {}) -- HACK: https://github.com/Wansmer/treesj/discussions/19
-autocmd("FileType", {
-	pattern = "*",
-	group = "splitjoinFallback",
-	callback = function()
-		local langs = require("treesj.langs")["presets"]
-		if not langs[bo.filetype] then
-			keymap("n", "<leader>s", ":SplitjoinSplit<CR>", { buffer = true, desc = "split/join" })
-		end
-	end,
-})
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
