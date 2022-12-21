@@ -2,16 +2,16 @@ require("config/utils")
 local newCommand = vim.api.nvim_create_user_command
 --------------------------------------------------------------------------------
 
--- `:SwapDelete` delete the swapfile
+-- `:SwapDeleteAll` deletes all swap files
 newCommand("SwapDeleteAll", function(_)
 	local swapdir = vimDataDir .. "swap/"
 	local out = fn.system([[rm -vf "]]..swapdir..[["* ]])
 	vim.notify("Deleted:\n"..out)
 end, {})
 
--- `:nvim-data` opens path where packer packages are installed
+-- `:DataDir` opens the nvim data path, where mason and lazy install their stuff
 newCommand("DataDir", function(_)
-	fn.system('open "' .. fn.stdpath("data") .. '/site/pack/packer"')
+	fn.system('open "' .. fn.stdpath("data") .. '"')
 end, {})
 
 -- `:I` inspects the passed lua object
