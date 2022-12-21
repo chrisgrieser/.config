@@ -65,13 +65,6 @@ end, { desc = "clear highlights and notifications" })
 keymap({ "n", "x", "o" }, "+", "*") -- no more modifier key (German Layout)
 keymap({ "n", "x", "o" }, "*", "#") -- backwards on the same key (German Layout)
 
--- MARKS
-keymap("", "ä", "`M", { desc = "goto mark M" }) -- Goto Mark M
-keymap("", "Ä", function() -- Set Mark M
-	normal("mM")
-	vim.notify("Mark M set")
-end, { desc = "set mark M" })
-
 -- FOLDING
 keymap("n", "^", "za", { desc = "toggle fold" }) -- quicker toggling of folds
 
@@ -84,6 +77,11 @@ keymap({ "n", "x" }, "gm", "gM", { desc = "goto middle of logical line" })
 -- Hunks
 keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
+
+-- Leap & Flit
+keymap("n", "ö", "<Plug>(leap-forward-to)", {desc = "Leap forward"})
+keymap("n", "Ö", "<Plug>(leap-backward-to)", {desc = "Leap backward"})
+
 
 --------------------------------------------------------------------------------
 
@@ -255,8 +253,10 @@ keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize" })
 keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize" })
 keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize" })
 keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize" })
-keymap("n", "ö", "<C-w>w", { desc = "switch to next window" })
-keymap("n", "Ö", "<C-w>o", { desc = "close other windows" })
+
+keymap("n", "ä", "<C-w>w", { desc = "switch to next window" })
+keymap("n", "Ä", "<C-w>p", { desc = "switch to previous window" })
+keymap("t", "ä", [[<C-\><C-n><C-w>p]], { desc = "switch to previous window" })
 
 --------------------------------------------------------------------------------
 
@@ -412,7 +412,6 @@ keymap("n", "<leader>ow", ":set wrap!<CR>")
 
 -- TERMINAL AND CODI
 keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = "Esc" }) -- normal mode in Terminal window
-keymap("t", "ö", [[<C-\><C-n><C-w><C-w>]], { desc = "switch window" }) -- switch windows directly from Terminal window
 keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = "ToggleTerm" })
 keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "Send Selection to ToggleTerm" })
 

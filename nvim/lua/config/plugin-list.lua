@@ -179,6 +179,8 @@ return {
 			sorted = false,
 		} end,
 	},
+	{"ggandor/flit.nvim", dependencies = "ggandor/leap.nvim"}, -- easy-motion + clever-ft
+
 
 	-- Filetype-specific
 	{"mityu/vim-applescript", ft = "applescript"}, -- syntax highlighting
