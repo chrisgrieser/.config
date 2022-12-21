@@ -239,8 +239,7 @@ end)
 -- FINDER
 wf_finder = wf.new("Finder")
 	:setOverrideFilter({
-		-- "^$" excludes the Desktop, which has no window title
-		rejectTitles = { "^Move$", "^Bin$", "^Copy$", "^Finder Settings$", " Info$", "^$" },
+		rejectTitles = { "^Move$", "^Bin$", "^Copy$", "^Finder Settings$", " Info$", "^$" }, -- "^$" excludes the Desktop, which has no window title
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
@@ -249,15 +248,14 @@ wf_finder = wf.new("Finder")
 	:subscribe(wf.windowFocused, function()
 		bringAllToFront()
 		app("Finder"):selectMenuItem { "View", "Hide Sidebar" }
-		app("Finder"):selectMenuItem { "View", "Show Toolbar" } -- hiding toolbar leads any dir-change to always open a new window
 	end)
 
 -- quit Finder if it was started as a helper (e.g., JXA), but has no window
 finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 	if appName == "Finder" and eventType == aw.launched then
-		-- INFO delay shouldn't be too low, otherwise other scripts cannot
+		-- INFO delay shouldn't be lower than 2-3s, otherwise other scripts cannot
 		-- properly utilize Finder
-		runWithDelays({ 3, 4, 5 }, function()
+		runWithDelays({ 3, 5, 10 }, function()
 			if finderAppObj and not (finderAppObj:mainWindow()) then finderAppObj:kill() end
 		end)
 	end

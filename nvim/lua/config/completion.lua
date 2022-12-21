@@ -210,18 +210,13 @@ cmp.setup.filetype("text", {
 -- Command Line Completion
 cmp.setup.cmdline({ "/", "?" }, {
 	mapping = cmp.mapping.preset.cmdline(),
-	sources = {
-		{ name = "treesitter", keyword_length = 2 },
-	},
-	{ -- second array only relevant when no source from the first matches
-		{ name = "buffer", keyword_length = 2 },
-	},
+	sources = {},
 })
 
 cmp.setup.cmdline(":", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = "path" },
+		path,
 		{ name = "cmdline" },
 	}, { -- second array only relevant when no source from the first matches
 		{ name = "cmdline_history", keyword_length = 3 },

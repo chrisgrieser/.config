@@ -60,7 +60,7 @@ keymap(
 )
 
 -- double a selector
-keymap("n", "yd", "yasEp", { buffer = true, silent = true, remap = true })
+keymap("n", "yd", "yisEp", { buffer = true, silent = true, remap = true })
 
 --------------------------------------------------------------------------------
 

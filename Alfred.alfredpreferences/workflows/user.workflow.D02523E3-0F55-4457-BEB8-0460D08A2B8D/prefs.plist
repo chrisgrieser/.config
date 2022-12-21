@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>script_location</key>
-	<string>~/.config/utility-scripts/run-backup_[Browser-Path].sh</string>
+	<string>~/.config/utility-scripts/backup-script.sh</string>
 </dict>
 </plist>
