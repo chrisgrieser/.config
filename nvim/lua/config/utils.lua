@@ -64,15 +64,6 @@ shellOpts = {
 --------------------------------------------------------------------------------
 -- GENERAL LUA UTILS
 
----appends t2 to t1 in-place
----@param t1 table
----@param t2 table
-function concatTables(t1, t2)
-	for _, v in ipairs(t2) do
-		table.insert(t1, v)
-	end
-end
-
 ---@param str string
 ---@param separator string uses Lua Pattern, so requires escaping
 ---@return table

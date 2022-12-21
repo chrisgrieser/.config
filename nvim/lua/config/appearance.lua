@@ -3,7 +3,7 @@ require("config/utils")
 
 -- Annotations
 cmd.highlight { "def link myAnnotations Todo", bang = true } -- use same styling as "TODO"
-fn.matchadd("myAnnotations", [[\<\(BUG\|WTF\|HACK\|TODO\|INFO\|NOTE\|WARNING\)\>]])
+fn.matchadd("myAnnotations", [[\<\(BUG\|WTF\|HACK\|INFO\|NOTE\|WARNING\)\>]])
 
 --------------------------------------------------------------------------------
 
@@ -112,7 +112,6 @@ print = function(...)
 	for i = 1, #_ do
 		table.insert(print_safe_args, tostring(_[i]))
 	end
-	-- persistent notification
 	vim.notify(table.concat(print_safe_args, " "), vim.log.levels.INFO, { timeout = 10000 })
 end
 
@@ -166,11 +165,7 @@ require("windows").setup {
 		winwidth = 0.7, -- active window gets 70% of total width
 	},
 	ignore = {
-		filetype = {
-			"Mundo",
-			"MundoDiff",
-			"netrw",
-		},
+		filetype = { "netrw" }, -- BUG https://github.com/anuvyklack/windows.nvim/issues/30
 	},
 }
 
@@ -194,14 +189,14 @@ end
 
 local function alternateFile()
 	local maxLen = 15
-	local altFile = fn.expand("#:t")
-	local curFile = fn.expand("%:t")
-	local altPath = fn.expand("#:p")
-	local curPath = fn.expand("%:p")
+	local altFile = expand("#:t")
+	local curFile = expand("%:t")
+	local altPath = expand("#:p")
+	local curPath = expand("%:p")
 	if altPath == curPath or altFile == "" then
 		return ""
 	elseif curFile == altFile then
-		local altParent = fn.expand("#:p:h:t")
+		local altParent = expand("#:p:h:t")
 		if #altParent > maxLen then altParent = altParent:sub(1, maxLen) .. "…" end
 		return altParent .. "/" .. altFile
 	end
@@ -209,18 +204,18 @@ local function alternateFile()
 end
 
 local function currentFile() -- using this function instead of default filename, since this does not show "[No Name]" for Telescope
-	local readonly = bo.modifiable and "" or " "
+	local readOnly = bo.modifiable and "" or " "
 	local maxLen = 15
-	local altFile = fn.expand("#:t")
-	local curFile = fn.expand("%:t")
-	local altPath = fn.expand("#:p")
-	local curPath = fn.expand("%:p")
+	local altFile = expand("#:t")
+	local curFile = expand("%:t")
+	local altPath = expand("#:p")
+	local curPath = expand("%:p")
 	if curFile == altFile and not (altPath == curPath) then
-		local curParent = fn.expand("%:p:h:t")
+		local curParent = expand("%:p:h:t")
 		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
 		return curParent .. "/" .. curFile
 	end
-	return "%% " .. curFile .. readonly
+	return "%% " .. curFile .. readOnly
 end
 
 local function mixedIndentation()
@@ -231,7 +226,6 @@ local function mixedIndentation()
 		"sh",
 		"",
 	}
-
 	if vim.tbl_contains(ignoredFts, ft) then return "" end
 
 	local hasTabs = fn.search("^\t", "nw") > 0
@@ -289,14 +283,9 @@ end
 
 --------------------------------------------------------------------------------
 
-local secSeparators, winSecSeparators
-if isGui() then
-	secSeparators = { left = " ", right = " " } -- nerdfont: 'nf-ple'
-	winSecSeparators = { left = "", right = "" }
-else
-	secSeparators = { left = "", right = "" } -- separators look off in Terminal
-	winSecSeparators = { left = "", right = "" }
-end
+-- nerdfont: 'nf-ple'; since separators look off in Terminal
+local secSeparators = isGui() and { left = " ", right = " " } or { left = "", right = "" }
+local winSecSeparators = isGui() and { left = "", right = "" } or { left = "", right = "" }
 
 require("lualine").setup {
 	sections = {
@@ -352,7 +341,6 @@ require("lualine").setup {
 			"TelescopePrompt",
 			"DressingInput",
 			"Mason",
-			"packer",
 			"ccc-ui",
 			"",
 		},
