@@ -5,10 +5,10 @@ return {
 	{"williamboman/mason.nvim", dependencies = "RubixDev/mason-update-all"},
 
 	-- Themes
-	"savq/melange", -- like Obsidian's Primary color scheme
-	"nyoom-engineering/oxocarbon.nvim",
+	-- "savq/melange", -- like Obsidian's Primary color scheme
 	"folke/tokyonight.nvim",
 	"EdenEast/nightfox.nvim",
+	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "rebelot/kanagawa.nvim",
 
 	-- Treesitter
@@ -95,7 +95,6 @@ return {
 		"tzachar/cmp-tabnine",
 		build = "./install.sh",
 		dependencies = "hrsh7th/nvim-cmp",
-		pin = true,
 	},
 	{"jackMort/ChatGPT.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
@@ -175,6 +174,15 @@ return {
 		keys = ":",
 	},
 	{"kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async"}, -- better folding
+	{"axieax/urlview.nvim",
+		cmd = "UrlView",
+		dependencies = "nvim-telescope/telescope.nvim",
+		config = function() require("urlview").setup{
+			default_picker = "telescope",
+			default_action = "system",
+			sorted = false,
+		} end,
+	},
 
 	-- Filetype-specific
 	{"mityu/vim-applescript", ft = "applescript"}, -- syntax highlighting

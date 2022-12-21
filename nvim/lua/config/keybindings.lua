@@ -1,8 +1,6 @@
 require("config/utils")
 --------------------------------------------------------------------------------
-
 -- META
-g.mapleader = ","
 
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", function()
@@ -34,7 +32,7 @@ end, { desc = ":Lazy sync & :MasonUpdateAll" })
 keymap("n", "<leader>P", require("lazy").home, { desc = ":Lazy home" })
 
 -- write all before quitting
-keymap("n", "ZZ", ":wall! | qa!<CR>", { desc = "writeall, quitall" })
+keymap("n", "ZZ", ":wall! | qa!<CR>", { desc = ":wall & :quitall" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -211,8 +209,9 @@ keymap("n", "<leader>lr", qol.removeLog, { desc = "remove all log statements" })
 -- Sort & highlight duplicate lines
 keymap({ "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { desc = "sort & highlight duplicates" }) -- second <CR> due to cmdheight=0
 
--- sane-gx
+-- URL Opening
 keymap("n", "gx", qol.bettergx, { desc = "open next URL" })
+keymap("n", "gX", function()cmd.UrlView("buffer") end, { desc = "select URL to open" })
 
 --------------------------------------------------------------------------------
 

@@ -1,11 +1,10 @@
--- INFO configs in subfolder to avoid namespace collisions
+g.mapleader = ","
+borderStyle = "single" -- options: https://neovim.io/doc/user/api.html#nvim_open_win()
 
-borderStyle = "single" -- https://neovim.io/doc/user/api.html#nvim_open_win()
+--------------------------------------------------------------------------------
 
 require("config/lazy")
 require("config/utils") -- should come after lazy
-
---------------------------------------------------------------------------------
 
 require("config/options-and-autocmds")
 if isGui() then
