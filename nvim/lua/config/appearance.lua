@@ -97,7 +97,7 @@ if isGui() then
 		for _, line in pairs(msg) do
 			local new_lines = split_length(line, notifyWidth)
 			for _, nl in ipairs(new_lines) do
-				table.insert(truncated, " " .. nl .. " ")
+				table.insert(truncated, " " .. trim(nl) .. " ")
 			end
 		end
 		return require("notify")(truncated, level, opts)
