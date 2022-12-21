@@ -86,7 +86,7 @@ font:
 window:
   decorations: buttonless
   position:
-    x: 700  # to the side for Twitterrific
+    x: 710  # to the side for Twitterrific
     y: 0
   dimensions:
     columns: 100

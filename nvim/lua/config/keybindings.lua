@@ -59,6 +59,7 @@ keymap("n", "<Esc>", function()
 	require("notify").dismiss { pending = clearPending }
 	cmd.nohlsearch() -- clear highlights
 	cmd.echo() -- clear shortmessage
+	require("lualine").refresh() -- so the highlight count disappears quicker
 end, { desc = "clear highlights and notifications" })
 
 keymap({ "n", "x", "o" }, "+", "*") -- no more modifier key (German Layout)
