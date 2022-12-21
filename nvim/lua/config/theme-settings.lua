@@ -38,6 +38,9 @@ local function customHighlights()
 	-- more visible matching
 	cmd.highlight([[MatchParen gui=underdotted cterm=underdotted]])
 
+	-- Codi
+	cmd.highlight {"def link CodiVirtualText Comment", bang = true}
+
 	-- treesittter refactor focus
 	cmd.highlight([[TSDefinition term=underline gui=underdotted]])
 	cmd.highlight([[TSDefinitionUsage term=underline gui=underdotted]])
