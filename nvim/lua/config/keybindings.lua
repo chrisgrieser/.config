@@ -200,7 +200,6 @@ keymap("x", "R", qol.duplicateSelection, { desc = "duplicate selection" })
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
 keymap("n", "<C-u>", qol.undoDuration, { desc = "undo specific durations" })
 keymap("n", "<leader>u", function() require("telescope").extensions.undo.undo() end, { desc = "Telescope Undotree" })
-keymap("i", "<Space>", "<Space><C-g>u", { desc = "add blank below" })
 
 -- Logging & Debugging
 keymap({ "n", "x" }, "<leader>ll", qol.quicklog, { desc = "add log statement" })
@@ -478,6 +477,10 @@ autocmd("FileType", {
 		"help",
 		"startuptime",
 		"netrw",
+		"lspinfo",
+		"tsplayground",
+		"qf",
+		"notify",
 		"AppleScriptRunOutput",
 		"man",
 	},

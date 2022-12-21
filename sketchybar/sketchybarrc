@@ -3,6 +3,7 @@
 # restart: `brew services restart sketchybar`
 # reload (does only update items, not the look of the bar): `sketchybar --update`
 # INFO: After app update, needs to be re-granted screen recording permissions
+# Alternative: https://github.com/cmacrae/spacebar
 #───────────────────────────────────────────────────────────────────────────────
 
 # ensure Stats.app is running

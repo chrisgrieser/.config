@@ -14,20 +14,6 @@ setlocal("comments", "b:-")
 local foOpts = getlocalopt("formatoptions"):gsub("[ct]", "") .. "ro"
 setlocal("formatoptions", foOpts)
 
--- syntax highlighting in code blocks
-g.markdown_fenced_languages = {
-	"css",
-	"python",
-	"py=python",
-	"yaml",
-	"json",
-	"lua",
-	"javascript",
-	"js=javascript",
-	"bash",
-	"sh=bash",
-}
-
 --------------------------------------------------------------------------------
 -- link textobj
 keymap({ "o", "x" }, "il", function() varTextObj.mdlink(true) end, { desc = "inner md link textobj" })

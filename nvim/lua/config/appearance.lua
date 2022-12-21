@@ -122,7 +122,7 @@ require("dressing").setup {
 		border = borderStyle,
 		relative = "win",
 		max_width = 0.8,
-		min_width = { 40, 0.4 },
+		min_width = { 45, 0.45 },
 		win_options = {
 			sidescrolloff = 0,
 			winblend = 0,
@@ -281,12 +281,6 @@ local function selectionCount()
 	return tostring(lines) .. "l " .. tostring(fn.wordcount().visual_chars) .. "c"
 end
 
-local function cpuUsage()
-	local idle = fn.system("iostat -C | tail -n1 | cut -d' ' -f13")
-	local used = 100 - tonumber(trim(idle))
-	return used .. "%%"
-end
-
 --------------------------------------------------------------------------------
 
 -- nerdfont: 'nf-ple'; since separators look off in Terminal
@@ -351,7 +345,7 @@ require("lualine").setup {
 			"",
 		},
 		globalstatus = true,
-		component_separators = { left = "", right = "" },
+		component_separators = { left = "", right = "/" },
 		section_separators = secSeparators,
 		extensions = { "nvim-dap-ui" },
 		disabled_filetypes = {
