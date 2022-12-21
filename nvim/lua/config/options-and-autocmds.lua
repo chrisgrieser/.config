@@ -171,12 +171,14 @@ opt.foldenable = true
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 
+-- restrict folding amount
+opt.foldminlines = 2
+opt.foldnestmax = 1
+
 -- if not using UFO for folding
 -- opt.foldexpr = "nvim_treesitter#foldexpr()" -- if treesitter folding is used via expr below
 -- opt.foldmethod = "expr"
 -- opt.foldmethod = "indent"
--- opt.foldnestmax = 2
--- opt.foldminlines = 2
 
 --------------------------------------------------------------------------------
 
