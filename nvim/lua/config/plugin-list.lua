@@ -135,6 +135,7 @@ return {
 	},
 
 	-- Terminal & Git
+	{"metakirby5/codi.vim", cmd = {"Codi", "CodiNew", "CodiExpand"} },
 	{"akinsho/toggleterm.nvim",
 		cmd = {"ToggleTerm", "ToggleTermSendVisualSelection"},
 		config = function() require("toggleterm").setup() end
