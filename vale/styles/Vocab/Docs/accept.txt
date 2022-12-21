@@ -27,4 +27,6 @@ code
 Code
 alias
 early
+shell
+enclosed
 accessible

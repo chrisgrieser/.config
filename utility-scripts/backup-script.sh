@@ -12,30 +12,27 @@ LOG_LOCATION="$(dirname "$0")/backup.log"
 echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $VOLUME_NAME -- " >> "$LOG_LOCATION"
 
 function bkp () {
-	echo "-------------------------------------------"
-	echo " ⏺ starting: $1"
+	echo "----------------------------------------------------"
+	echo " 🟣 starting: $1"
+	echo "----------------------------------------------------"
+	mkdir -p "$2"
 	rsync --archive --progress --delete -h --exclude=".Trash/*" --exclude="*/.Trash/*" "$1" "$2"
-	echo "-------------------------------------------"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# Content to Backup
+# CONTENT TO BACKUP
 
-# ⚠️ each command has to sync to individual folders, since otherwise
+# WARNING each command has to sync to individual folders, since otherwise
 # the --delete option will override the previous contents
-mkdir -p ./Library
-bkp ~'/Library/Preferences/' ./Library/Preferences
-mkdir -p ./Homefolder
-bkp ~'/Downloaded/' ./Homefolder/Downloaded
-bkp ~'/RomComs/' ./Homefolder/RomComs
+bkp "$HOME/Library/Preferences/" ./Library/Preferences
+bkp "$HOME/RomComs/" ./Homefolder/RomComs
 bkp "$DOTFILE_FOLDER" ./Homefolder/.config
 bkp "$VAULT_PATH" ./Homefolder/main-vault
 bkp "$ICLOUD" ./iCloud-Folder
+bkp "$PASSWORD_STORE_DIR" ./password-store
 
-passPath="$PASSWORD_STORE_DIR"
-[[ -z "$passPath" ]] && passPath="$HOME/.password-store"
-bkp "$passPath" ./password-store
+#───────────────────────────────────────────────────────────────────────────────
 
 # Brew Dumps
 BREWDUMP_PATH="$BACKUP_DEST/installed-apps-and-packages"
@@ -52,7 +49,7 @@ echo "completed: $(date '+%H:%M')" >> "$LOG_LOCATION"
 log_date="$(date '+%Y-%m-%d %H:%M')"
 osascript -e "tell application id \"com.runningwithcrayons.Alfred\" to set configuration \"last_backup\" to value \"$log_date\" in workflow \"de.chris-grieser.backup-utility\" "
 
-# Log (on Backup Destination)
+# Log (at Backup Destination)
 echo "Backup: $(date '+%Y-%m-%d %H:%M')" >> last_backup.log
 
 # Reminder for Next Backup in 14 days

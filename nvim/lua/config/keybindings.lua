@@ -81,7 +81,7 @@ keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 -- Leap & Flit
 keymap("n", "ö", "<Plug>(leap-forward-to)", {desc = "Leap forward"})
 keymap("n", "Ö", "<Plug>(leap-backward-to)", {desc = "Leap backward"})
-
+require('flit').setup()
 
 --------------------------------------------------------------------------------
 
@@ -161,6 +161,7 @@ end
 
 -- Spelling (mnemonic: [z]pe[l]ling)
 keymap("n", "zl", telescope.spell_suggest, { desc = "spellsuggest" })
+keymap("n", "zg", "zg<CR>") -- needs extra enter due to `cmdheight=0`
 keymap("n", "gl", "]s") -- next misspelling
 keymap("n", "gL", "[s") -- prev misspelling
 keymap("n", "zf", "mz1z=`z") -- auto[f]ix word under cursor (= select 1st suggestion)
