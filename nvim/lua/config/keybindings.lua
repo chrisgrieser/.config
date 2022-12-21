@@ -284,7 +284,7 @@ if isGui() then
 	keymap("x", "<D-a>", "ggG", { desc = "select all" })
 
 	keymap({ "n", "x" }, "<D-l>", function() -- show file in default GUI file explorer
-		fn.system("open -R '" .. fn.expand("%:p") .. "'")
+		fn.system("open -R '" .. expand("%:p") .. "'")
 	end, { desc = "open in file explorer" })
 	keymap({ "n", "x", "i" }, "<D-1>", cmd.Lex) -- file tree (netrw)
 	keymap("n", "<D-0>", ":messages<CR>", { desc = ":messages" }) -- as cmd.function these wouldn't require confirmation
@@ -335,7 +335,7 @@ autocmd("BufReadPost", {
 	callback = function()
 		if bo.filetype == "ssr" then return end
 		keymap("n", "<CR>", function()
-			if fn.expand("#") == "" then
+			if expand("#") == "" then
 				vim.notify("No alternate file.", logWarn)
 			else
 				cmd.nohlsearch()
@@ -435,22 +435,22 @@ keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>")
 -- BUILD SYSTEM
 keymap("n", "<leader>r", function()
 	cmd.update()
-	local filename = fn.expand("%:t")
-	local parentFolder = fn.expand("%:p:h")
+	local filename = expand("%:t")
+	local parentFolder = expand("%:p:h")
 	local ft = bo.filetype
 
 	if filename == "sketchybarrc" then
 		fn.system("brew services restart sketchybar")
 	elseif ft == "markdown" then
-		local filepath = fn.expand("%:p")
-		local pdfFilename = fn.expand("%:t:r") .. ".pdf"
+		local filepath = expand("%:p")
+		local pdfFilename = expand("%:t:r") .. ".pdf"
 		fn.system("pandoc '" .. filepath .. "' --output='" .. pdfFilename .. "' --pdf-engine=wkhtmltopdf")
 		fn.system("open '" .. pdfFilename .. "'")
 
 	-- nvim config
 	elseif ft == "lua" and parentFolder:find("nvim") then
 		cmd.source()
-		vim.notify(fn.expand("%:r").." re-sourced.")
+		vim.notify(expand("%:r").." re-sourced.")
 
 	-- Hammerspoon
 	elseif ft == "lua" and parentFolder:find("hammerspoon") then

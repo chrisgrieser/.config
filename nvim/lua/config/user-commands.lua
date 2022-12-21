@@ -9,8 +9,8 @@ newCommand("SwapDeleteAll", function(_)
 	vim.notify("Deleted:\n"..out)
 end, {})
 
--- `:PackerRoot` opens path where packer packages are installed
-newCommand("PackerRoot", function(_)
+-- `:nvim-data` opens path where packer packages are installed
+newCommand("DataDir", function(_)
 	fn.system('open "' .. fn.stdpath("data") .. '/site/pack/packer"')
 end, {})
 

@@ -20,14 +20,17 @@ require("Comment").setup {
 }
 
 --------------------------------------------------------------------------------
--- STICKY TEXT OBJECTS ACTIONS
+-- STICKY COMMENT TEXT OBJECT ACTIONS
 
--- effectively creating "q" as comment textobj, can't map directly to q since
+-- HACK effectively creating "q" as comment textobj, can't map directly to q since
 -- overlap in visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
--- requires remap for treesitter and comments.nvim mappings
-keymap("n", "dq", [[:normal!mz<CR>dCOM`z]], {remap = true}) -- since remap is required, using mz via :normal, since m has been remapped
+keymap("n", "dq", function ()
+	local prevCursor = getCursor(0)
+	cmd.normal { "dCOM" } -- without bang for remapping of COM
+	setCursor(0, prevCursor)
+end) 
 keymap("n", "yq", "yCOM", {remap = true}) -- thanks to yank position saving, doesn't need to be done here
 keymap("n", "cq", '"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
 
@@ -78,15 +81,14 @@ local function divider()
 	-- shorten if it was on blank line, since fn.indent() does not return indent
 	-- line would have if it has content
 	if wasOnBlank then
-		cmd.normal {"j==", bang = true} -- move down and indent
-		cmd [[normal! j==]]
+		normal("j==")
 		local hrIndent = fn.indent(".")
 		-- cannot use simply :sub, since it assumes one-byte-size chars
 		local hrLine = fn.getline(".") ---@diagnostic disable-next-line: assign-type-mismatch, undefined-field
 		hrLine = hrLine:gsub(linechar, "", hrIndent)
 		fn.setline(".", hrLine)
 	else
-		cmd.normal {"jj==", bang = true}
+		normal("jj==")
 	end
 end
 
