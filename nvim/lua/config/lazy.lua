@@ -26,7 +26,7 @@ require("lazy").setup("config/plugin-list", {
 	},
 	ui = {
 		border = borderStyle,
-		size = { width = 0.9, height = 0.95 }, -- a number <1 is a percentage., >1 is a fixed size
+		size = { width = 0.95, height = 0.9 }, -- a number <1 is a percentage., >1 is a fixed size
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates

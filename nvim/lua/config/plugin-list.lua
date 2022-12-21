@@ -1,4 +1,4 @@
--- stylua: ignore start
+-- stylua: ignore
 return {
 
 	-- Package Management
@@ -80,7 +80,7 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"dmitmel/cmp-cmdline-history",
 			"hrsh7th/cmp-emoji",
-			"chrisgrieser/cmp-nerdfont",
+			{"chrisgrieser/cmp-nerdfont", dev = true},
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp", -- lsp
@@ -91,8 +91,7 @@ return {
 	},
 
 	-- AI-Support
-	{
-		"tzachar/cmp-tabnine",
+	{ "tzachar/cmp-tabnine",
 		build = "./install.sh",
 		dependencies = "hrsh7th/nvim-cmp",
 	},
@@ -119,15 +118,18 @@ return {
 			"hrsh7th/cmp-omni", -- for autocompletion in input prompts
 	}},
 	{"chrisgrieser/nvim-genghis",
+		dev = true,
 		lazy = true,
 		dependencies = "stevearc/dressing.nvim",
 	},
-	{"nvim-telescope/telescope.nvim", dependencies = {
+	{"nvim-telescope/telescope.nvim",
 		lazy = true,
-		"nvim-lua/plenary.nvim",
-		"nvim-tree/nvim-web-devicons",
-		"debugloop/telescope-undo.nvim",
-	}},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"debugloop/telescope-undo.nvim",
+		},
+	},
 	{"ghillb/cybu.nvim", -- Cycle Buffers
 		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim"},
 		keys = "<BS>",
@@ -141,21 +143,17 @@ return {
 	{"sindrets/diffview.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = {"DiffviewFileHistory", "DiffviewOpen"},
-		config = function()
-			require("diffview").setup {
-				file_history_panel = {win_config = {height = 4}},
-			}
-		end,
+		config = function() require("diffview").setup {
+			file_history_panel = {win_config = {height = 4}},
+		} end,
 	},
 	{"ruifm/gitlinker.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
 		lazy = true,
-		config = function()
-			require("gitlinker").setup {
-				mappings = nil,
-				opts = {print_url = false},
-			}
-		end
+		config = function() require("gitlinker").setup {
+			mappings = nil,
+			opts = {print_url = false},
+		} end,
 	},
 
 	-- EDITING-SUPPORT
@@ -165,8 +163,8 @@ return {
 	{"mg979/vim-visual-multi", keys = "<D-j>"},
 	"Darazaki/indent-o-matic", -- auto-determine indents
 	{"gbprod/yanky.nvim"}, -- register manager
-	"chrisgrieser/nvim-recorder", -- better macros
-	"chrisgrieser/nvim-various-textobjs", -- custom textobjects
+	{"chrisgrieser/nvim-recorder", dev = true}, -- better macros
+	{"chrisgrieser/nvim-various-textobjs", dev = true}, -- custom textobjects
 	{"nacro90/numb.nvim", -- line previews when ":n"
 		config = function() require("numb").setup() end,
 		keys = ":",
