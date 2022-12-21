@@ -2,7 +2,7 @@
 # shellcheck disable=SC2154
 export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 
-if ! which iconsur &> /dev/null ; then
+if ! command -v iconsur &> /dev/null ; then
 	echo "iconsur not installed."
 	exit 1
 fi
@@ -122,7 +122,7 @@ fi
 if [[ $NONE_FOUND == 0 ]]; then
 	killall "$APP_TO_UPDATE"
 	killall "Dock"
-	sleep 2
+	while pgrep -q "$APP_TO_UPDATE" ; do sleep 0.1; done
 	open -a "$APP_TO_UPDATE"
 	echo -n "$APP_TO_UPDATE" # pass for notification
 else
