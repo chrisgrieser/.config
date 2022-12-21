@@ -51,12 +51,10 @@ function movieModeLayout()
 	killIfRunning("Highlights")
 	killIfRunning("Alacritty")
 	killIfRunning("alacritty")
+	killIfRunning("Twitterrific")
 
 	dockSwitcher("movie")
 	setDarkmode(true)
-
-	local twitterrificWin = hs.application("Twitterrific"):mainWindow()
-	moveResize(twitterrificWin, toTheSide)
 end
 
 local layoutChangeActive = false
@@ -82,7 +80,7 @@ function homeModeLayout()
 
 	dockSwitcher("home")
 
-	local homeLayout = {
+	useLayout {
 		{ "Twitterrific", nil, iMacDisplay, toTheSide, nil, nil },
 		{ "Marta", nil, iMacDisplay, pseudoMaximized, nil, nil },
 		{ "Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil },
@@ -100,7 +98,6 @@ function homeModeLayout()
 	}
 
 	showAllSidebars()
-	useLayout(homeLayout)
 	runWithDelays({ 0.5, 1 }, function() app("Drafts"):activate() end)
 
 	if screenIsUnlocked() and not layoutChangeActive then
@@ -136,7 +133,7 @@ function officeModeLayout()
 
 	local top = { x = 0, y = 0.015, w = 1, h = 0.485 }
 	local bottom = { x = 0, y = 0.5, w = 1, h = 0.5 }
-	local officeLayout = {
+	officeLayout = {
 		-- screen 2
 		{ "TweetDeck", nil, screen2, top, nil, nil },
 		{ "Discord", nil, screen2, bottom, nil, nil },
@@ -192,7 +189,9 @@ local function motherMovieModeLayout()
 end
 
 local function motherHomeModeLayout()
-	iMacDisplay:setBrightness(0.8)
+	local brightness = betweenTime(1, 8) and 0 or 0.8
+	iMacDisplay:setBrightness(brightness)
+
 	openIfNotRunning("Discord")
 	openIfNotRunning("Slack")
 	openIfNotRunning("Obsidian")
@@ -210,7 +209,7 @@ local function motherHomeModeLayout()
 	alacrittyFontSize(25)
 	dockSwitcher("home")
 
-	local motherHomeLayout = {
+	useLayout {
 		{ "Twitterrific", nil, iMacDisplay, toTheSide, nil, nil },
 		{ "Marta", nil, iMacDisplay, pseudoMaximized, nil, nil },
 		{ "Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil },
@@ -225,7 +224,6 @@ local function motherHomeModeLayout()
 		{ "Alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil },
 	}
 
-	useLayout(motherHomeLayout)
 	showAllSidebars()
 
 	runWithDelays({ 0.05, 0.2 }, function() useLayout(motherHomeLayout) end)
