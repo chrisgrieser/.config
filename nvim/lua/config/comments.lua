@@ -13,8 +13,8 @@ require("Comment").setup {
 		block = "<Nop>",
 	},
 	extra = {
-		above = "<Nop>",
-		below = "<Nop>",
+		above = "qO",
+		below = "qo",
 		eol = "Q",
 	},
 }
