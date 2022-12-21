@@ -345,7 +345,7 @@ require("lualine").setup {
 			"",
 		},
 		globalstatus = true,
-		component_separators = { left = "", right = "/" },
+		component_separators = { left = "", right = "" },
 		section_separators = secSeparators,
 		extensions = { "nvim-dap-ui" },
 		disabled_filetypes = {

@@ -79,9 +79,9 @@ keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 
 -- Leap & Flit
-keymap("n", "ö", "<Plug>(leap-forward-to)", {desc = "Leap forward"})
-keymap("n", "Ö", "<Plug>(leap-backward-to)", {desc = "Leap backward"})
-require('flit').setup()
+keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
+keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
+require("flit").setup()
 
 --------------------------------------------------------------------------------
 
@@ -183,7 +183,8 @@ keymap("n", "X", cmd.ISwapWith, { desc = "swap nodes" })
 keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "search & replace" })
 keymap("x", "<leader>f", ":s///g<Left><Left><Left>", { desc = "search & replace" })
 keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "structural search & replace" }) -- wrapped in function for lazy-loading
-keymap({ "n", "x" }, "<leader>n", ":normal ", { desc = ":normal" })
+keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
+keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine, { desc = "duplicate line" })
@@ -269,10 +270,12 @@ if isGui() then
 	keymap("n", "<D-a>", "ggVG", { desc = "select all" }) -- cmd+a
 	keymap("i", "<D-a>", "<Esc>ggVG", { desc = "select all" })
 	keymap("x", "<D-a>", "ggG", { desc = "select all" })
+	keymap("x", "<D-c>", "y", { desc = "copy selection" }) -- cmd+c, habit sometimes
 
 	keymap({ "n", "x" }, "<D-l>", function() -- show file in default GUI file explorer
 		fn.system("open -R '" .. expand("%:p") .. "'")
 	end, { desc = "open in file explorer" })
+
 	keymap({ "n", "x", "i" }, "<D-1>", cmd.Lex) -- file tree (netrw)
 	keymap("n", "<D-0>", ":messages<CR>", { desc = ":messages" }) -- as cmd.function these wouldn't require confirmation
 	keymap("n", "<D-9>", ":Notification<CR>", { desc = ":Notifications" })
