@@ -7,11 +7,19 @@ opt.undodir:prepend(vimDataDir .. "undo//")
 opt.viewdir = vimDataDir .. "view"
 opt.shadafile = vimDataDir .. "main.shada"
 
-opt.undofile = true -- enable persistent undo history
+
 --------------------------------------------------------------------------------
+-- Undo
+opt.undofile = true -- enable persistent undo history
+opt.undolevels = 4000 -- more undos being saved
+
+local undopointChars = { "<Space>", ".", ",", ";" }
+for _, char in pairs(undopointChars) do
+	keymap("i", char, char.."<C-g>u", { desc = "extra undopoint for "..char })
+end
 
 -- timeouts
-opt.timeoutlen = 1200 -- for awaiting keystrokes when there is no `nowait`
+opt.timeoutlen = 1500 -- for awaiting keystrokes when there is no `nowait`
 opt.updatetime = 250 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 
 -- Search
@@ -34,9 +42,9 @@ opt.softtabstop = 3
 opt.shiftwidth = 3
 opt.shiftround = true
 opt.smartindent = true
-opt.list = true
 
 -- invisible chars
+opt.list = true
 opt.listchars = {
 	tab = "  ",
 	multispace = "·",
@@ -155,7 +163,7 @@ ufo.setup {
 	end,
 }
 
-keymap("n", "zR", ufo.openAllFolds) -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+keymap("n", "zR", ufo.openAllFolds) -- Using ufo provider need remap `zR` and `zM` 
 keymap("n", "zM", ufo.closeAllFolds)
 
 -- fold settings required for UFO
@@ -186,7 +194,7 @@ autocmd("BufWinEnter", {
 		local ignoredFts = { "DressingSelect", "cybu" }
 		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
 		cmd([[silent! loadview]])
-		cmd.normal { "^", bang = true } -- scroll to the left
+		normal("^") -- to scroll to the left on start
 	end,
 })
 
@@ -231,3 +239,20 @@ g.netrw_liststyle = 3 -- tree style as default
 g.netrw_winsize = 30 -- width
 g.netrw_localcopydircmd = "cp -r" -- so copy work with directories
 cmd.highlight { "def link netrwTreeBar IndentBlankLineChar", bang = true }
+
+--------------------------------------------------------------------------------
+
+-- syntax highlighting in code blocks
+g.markdown_fenced_languages = {
+	"css",
+	"python",
+	"py=python",
+	"yaml",
+	"yml=yaml",
+	"json",
+	"lua",
+	"javascript",
+	"js=javascript",
+	"bash",
+	"sh=bash",
+}
