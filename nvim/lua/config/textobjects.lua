@@ -86,8 +86,8 @@ keymap({ "x", "o" }, "in", function() varTextObj.number(true) end, { desc = "inn
 keymap({ "x", "o" }, "an", function() varTextObj.number(false) end, { desc = "outer number textobj" })
 
 -- ii/ai: indentation textobj
-keymap({ "x", "o" }, "ii", function() varTextObj.indentation(false, false) end, { desc = "inner indentation textobj" })
-keymap({ "x", "o" }, "ai", function() varTextObj.indentation(true, true) end, { desc = "outer indentation textobj" })
+keymap({ "x", "o" }, "ii", function() varTextObj.indentation(true, true) end, { desc = "inner indentation textobj" })
+keymap({ "x", "o" }, "ai", function() varTextObj.indentation(false, false) end, { desc = "outer indentation textobj" })
 
 augroup("IndentedFileTypes", {})
 autocmd("FileType", {

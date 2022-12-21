@@ -211,7 +211,7 @@ keymap({ "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { desc
 
 -- URL Opening
 keymap("n", "gx", qol.bettergx, { desc = "open next URL" })
-keymap("n", "gX", function()cmd.UrlView("buffer") end, { desc = "select URL to open" })
+keymap("n", "gX", function() cmd.UrlView("buffer") end, { desc = "select URL to open" })
 
 --------------------------------------------------------------------------------
 
@@ -410,11 +410,17 @@ keymap("n", "<leader>ow", ":set wrap!<CR>")
 
 --------------------------------------------------------------------------------
 
--- TERMINAL MODE
-keymap("t", "<Esc>", [[<C-\><C-n>]], {desc = "Esc"}) -- normal mode in Terminal window
-keymap("t", "ö", [[<C-\><C-n><C-w><C-w>]], {desc = "switch window"}) -- switch windows directly from Terminal window
-keymap("n", "6", ":ToggleTerm size=8<CR>", {desc = "ToggleTerm"})
-keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", {desc = "Send Selection to ToggleTerm"})
+-- TERMINAL AND CODI
+keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = "Esc" }) -- normal mode in Terminal window
+keymap("t", "ö", [[<C-\><C-n><C-w><C-w>]], { desc = "switch window" }) -- switch windows directly from Terminal window
+keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = "ToggleTerm" })
+keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "Send Selection to ToggleTerm" })
+
+keymap("n", "5", function()
+	local ft = bo.filetype
+	cmd.CodiNew()
+	cmd.file("Codi: " .. ft) -- workaround, since Codi does not provide a filename for its buffer
+end, { desc = ":CodiNew" })
 
 --------------------------------------------------------------------------------
 
@@ -496,16 +502,12 @@ autocmd("FileType", {
 autocmd("FileType", {
 	group = "quickQuit",
 	pattern = "TelescopePrompt",
-	callback = function()
-		keymap("n", "q", "<Esc>", { buffer = true, nowait = true, remap = true })
-	end,
+	callback = function() keymap("n", "q", "<Esc>", { buffer = true, nowait = true, remap = true }) end,
 })
 autocmd("FileType", {
 	group = "quickQuit",
 	pattern = "ssr",
-	callback = function()
-		keymap("n", "q", "Q", { buffer = true, nowait = true, remap = true })
-	end,
+	callback = function() keymap("n", "q", "Q", { buffer = true, nowait = true, remap = true }) end,
 })
 
 --------------------------------------------------------------------------------
