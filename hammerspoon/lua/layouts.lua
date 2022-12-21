@@ -37,7 +37,6 @@ function movieModeLayout()
 	runWithDelays({ 0, 0.5, 1 }, function() openIfNotRunning("YouTube") end)
 
 	killIfRunning("Obsidian")
-	killIfRunning("Marta")
 	killIfRunning("Drafts")
 	killIfRunning("Neovide")
 	killIfRunning("neovide")
@@ -82,7 +81,6 @@ function homeModeLayout()
 
 	useLayout {
 		{ "Twitterrific", nil, iMacDisplay, toTheSide, nil, nil },
-		{ "Marta", nil, iMacDisplay, pseudoMaximized, nil, nil },
 		{ "Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil },
 		{ "Highlights", nil, iMacDisplay, pseudoMaximized, nil, nil },
 		{ "Neovide", nil, iMacDisplay, pseudoMaximized, nil, nil },
@@ -140,8 +138,6 @@ function officeModeLayout()
 		{ "Slack", nil, screen2, bottom, nil, nil },
 		-- screen 1
 		{ "Brave Browser", nil, screen1, maximized, nil, nil },
-		{ "Marta", nil, screen1, maximized, nil, nil },
-		{ "Sublime Text", nil, screen1, maximized, nil, nil },
 		{ "Obsidian", nil, screen1, maximized, nil, nil },
 		{ "Neovide", nil, screen1, maximized, nil, nil },
 		{ "neovide", nil, screen1, maximized, nil, nil },
@@ -172,7 +168,6 @@ local function motherMovieModeLayout()
 
 	runWithDelays({ 0, 1 }, function() openIfNotRunning("YouTube") end)
 	killIfRunning("Obsidian")
-	killIfRunning("Marta")
 	killIfRunning("Drafts")
 	killIfRunning("Slack")
 	killIfRunning("Discord")
@@ -193,7 +188,7 @@ local function motherHomeModeLayout()
 	iMacDisplay:setBrightness(brightness)
 
 	openIfNotRunning("Discord")
-	openIfNotRunning("Slack")
+	if not (isWeekend()) then openIfNotRunning("Slack") end
 	openIfNotRunning("Obsidian")
 	openIfNotRunning("Mimestream")
 	openIfNotRunning("Brave Browser")
@@ -209,12 +204,10 @@ local function motherHomeModeLayout()
 	alacrittyFontSize(25)
 	dockSwitcher("home")
 
-	useLayout {
+	local motherHomeLayout = {
 		{ "Twitterrific", nil, iMacDisplay, toTheSide, nil, nil },
-		{ "Marta", nil, iMacDisplay, pseudoMaximized, nil, nil },
 		{ "Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil },
 		{ "Warp", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Sublime Text", nil, iMacDisplay, pseudoMaximized, nil, nil },
 		{ "Slack", nil, iMacDisplay, pseudoMaximized, nil, nil },
 		{ "Discord", nil, iMacDisplay, pseudoMaximized, nil, nil },
 		{ "Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil },
@@ -224,9 +217,9 @@ local function motherHomeModeLayout()
 		{ "Alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil },
 	}
 
+	runWithDelays({ 0, 0.1, 0.2 }, function() useLayout(motherHomeLayout) end)
 	showAllSidebars()
 
-	runWithDelays({ 0.05, 0.2 }, function() useLayout(motherHomeLayout) end)
 end
 
 --------------------------------------------------------------------------------
@@ -271,12 +264,10 @@ wf_appsOnMouseScreen = wf.new {
 	"Discord",
 	"Neovide",
 	"neovide",
-	"Marta",
 	"Espanso",
 	"BusyCal",
 	"Alfred Preferences",
 	"System Preferences",
-	"BetterTouchTool",
 	"YouTube",
 	"Netflix",
 	"Finder",
