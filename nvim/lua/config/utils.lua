@@ -13,6 +13,8 @@ autocmd = vim.api.nvim_create_autocmd
 getCursor = vim.api.nvim_win_get_cursor
 setCursor = vim.api.nvim_win_set_cursor
 keymap = vim.keymap.set
+expand = vim.fn.expand
+
 logWarn = vim.log.levels.WARN
 logError = vim.log.levels.ERROR
 logTrace = vim.log.levels.TRACE

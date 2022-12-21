@@ -32,4 +32,9 @@ require("lazy").setup("config/plugin-list", {
 		notify = false, -- get a notification when new updates are found
 		frequency = 86400, -- check for updates every 24 hours
 	},
+	performance = {
+		rtp = { -- plugins name sto disable
+			disabled_plugins = {},
+		},
+	},
 })

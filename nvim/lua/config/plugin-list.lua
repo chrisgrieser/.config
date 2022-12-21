@@ -61,12 +61,15 @@ return {
 	}},
 
 	-- DAP
-	{"mfussenegger/nvim-dap", dependencies = {
-		"jayp0521/mason-nvim-dap.nvim",
-		"theHamsta/nvim-dap-virtual-text",
-		"rcarriga/nvim-dap-ui",
-		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
-	}},
+	{"mfussenegger/nvim-dap",
+		lazy = true,
+		dependencies = {
+			"jayp0521/mason-nvim-dap.nvim",
+			"theHamsta/nvim-dap-virtual-text",
+			"rcarriga/nvim-dap-ui",
+			"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
+		}
+	},
 
 	-- Completion & Suggestion
 	{"hrsh7th/nvim-cmp",
@@ -83,9 +86,9 @@ return {
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
+			"windwp/nvim-autopairs", -- auto pair brackets/quotes
 		}
 	},
-	{"windwp/nvim-autopairs", dependencies = "hrsh7th/nvim-cmp"},
 
 	-- AI-Support
 	{
@@ -122,6 +125,7 @@ return {
 		dependencies = "stevearc/dressing.nvim",
 	},
 	{"nvim-telescope/telescope.nvim", dependencies = {
+		lazy = true,
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
 		"debugloop/telescope-undo.nvim",

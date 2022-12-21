@@ -106,7 +106,7 @@ autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 		if vim.tbl_contains(ignoredFt, bo.filetype) then return end
 
 		-- safety net to not save file in wrong folder when autochdir is not reliable
-		local curFile = fn.expand("%:p")
+		local curFile = expand("%:p")
 		cmd.update(curFile)
 	end,
 })
@@ -214,7 +214,7 @@ for _, ft in pairs(ftWithSkeletons) do
 		group = "Templates",
 		pattern = "*." .. ft,
 		callback = function()
-			local curFile = fn.expand("%")
+			local curFile = expand("%")
 			local fileIsEmpty = fn.getfsize(curFile) < 4 -- to account for linebreak weirdness
 			if fileIsEmpty then cmd(readCmd) end
 		end,
