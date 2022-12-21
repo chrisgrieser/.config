@@ -314,6 +314,8 @@ rules:
           - key_code: return_or_enter
           - key_code: tab
           - key_code: tab
+          - key_code: tab # extra tabs to switch to files directly
+          - key_code: tab
           - *remove-insert-notice
           - *leave-insert-mode
           - *leave-search-mode

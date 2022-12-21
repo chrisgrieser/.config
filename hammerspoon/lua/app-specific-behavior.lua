@@ -333,6 +333,7 @@ wf_script_editor = wf.new("Script Editor"):subscribe(wf.windowCreated, function(
 		end)
 		runWithDelays(0.4, function() keystroke({ "cmd" }, "k") end)
 	end
+	moveResize(newWin, centered)
 end)
 
 --------------------------------------------------------------------------------
