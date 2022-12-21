@@ -122,7 +122,7 @@ keymap("n", "<leader>b", function()
 	}
 	vim.ui.select(selection, {prompt = " DAP Command"}, function(choice)
 		if not (choice) then return end
-		if choice:find("^Launch") then opt.number = true end
+		if choice:find("^Launch") then bo.number = true end
 
 		if choice == "Toggle DAP UI" then
 			dapUI.toggle()
@@ -131,7 +131,7 @@ keymap("n", "<leader>b", function()
 		elseif choice == "Step into" then
 			dap.step_into()
 		elseif choice == "Step out" then
-			dap.step_into()
+			dap.step_out()
 		elseif choice == "Run to Cursor" then
 			dap.run_to_cursor()
 		elseif choice == "Clear Breakpoints" then

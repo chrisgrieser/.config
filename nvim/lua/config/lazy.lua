@@ -22,18 +22,22 @@ require("lazy").setup("config/plugin-list", {
 	dev = {
 		-- alternative setup method https://www.reddit.com/r/neovim/comments/zk187u/how_does_everyone_segment_plugin_development_from/
 		path = vim.fn.stdpath("config") .. "/my-plugins/",
+		pattern = {"chrisgrieser"} -- these plugins will always be regarded as local
 	},
 	ui = {
 		border = borderStyle,
-		size = { width = 0.9, height = 0.9 }, -- a number <1 is a percentage., >1 is a fixed size
+		size = { width = 0.9, height = 0.95 }, -- a number <1 is a percentage., >1 is a fixed size
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates
 		notify = false, -- get a notification when new updates are found
 		frequency = 86400, -- check for updates every 24 hours
 	},
+	change_detection = {
+		notify = false,
+	},
 	performance = {
-		rtp = { -- plugins name sto disable
+		rtp = { -- plugins names to disable
 			disabled_plugins = {},
 		},
 	},

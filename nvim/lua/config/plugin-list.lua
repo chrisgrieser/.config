@@ -30,14 +30,14 @@ return {
 		config = function() require("hlargs").setup() end,
 	},
 	{"Wansmer/treesj", -- split-join
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"AndrewRadev/splitjoin.vim", -- only used as fallback. TODO: remove when treesj has wider language support
-	}},
+		dependencies = "nvim-treesitter/nvim-treesitter" ,
+		config = function () require("treesj").setup { use_default_keymaps = false } end,
+		cmd = "TSJToggle",
+	},
 	{"cshuaimin/ssr.nvim", -- structural search & replace
 		commit = "4304933", -- TODO: update to newest version with nvim 0.9 https://github.com/cshuaimin/ssr.nvim/issues/11#issuecomment-1340671193
 		pin = true,
-		init = function()
+		config = function()
 			require("ssr").setup {
 				keymaps = {close = "Q"},
 			}
@@ -80,7 +80,7 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"dmitmel/cmp-cmdline-history",
 			"hrsh7th/cmp-emoji",
-			{"chrisgriesr/cmp-nerdfont", dev = true},
+			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp", -- lsp
@@ -98,7 +98,7 @@ return {
 	},
 	{"jackMort/ChatGPT.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-		lazy = true,
+		cmd = {"ChatGPTEditWithInstructions", "ChatGPT"}
 	},
 
 	-- Appearance
@@ -119,7 +119,6 @@ return {
 			"hrsh7th/cmp-omni", -- for autocompletion in input prompts
 	}},
 	{"chrisgrieser/nvim-genghis",
-		dev = true,
 		lazy = true,
 		dependencies = "stevearc/dressing.nvim",
 	},
@@ -129,11 +128,10 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		"debugloop/telescope-undo.nvim",
 	}},
-	{"ghillb/cybu.nvim", dependencies = { -- Cycle Buffers
-		"nvim-tree/nvim-web-devicons",
-		"nvim-lua/plenary.nvim",
+	{"ghillb/cybu.nvim", -- Cycle Buffers
+		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim"},
 		keys = "<BS>",
-	}},
+	},
 
 	-- Terminal & Git
 	{"akinsho/toggleterm.nvim",
@@ -167,8 +165,8 @@ return {
 	{"mg979/vim-visual-multi", keys = "<D-j>"},
 	"Darazaki/indent-o-matic", -- auto-determine indents
 	{"gbprod/yanky.nvim"}, -- register manager
-	{"chrisgrieser/nvim-recorder", dev = true}, -- better macros
-	{"chrisgrieser/nvim-various-textobjs", dev = true}, -- custom textobjects
+	"chrisgrieser/nvim-recorder", -- better macros
+	"chrisgrieser/nvim-various-textobjs", -- custom textobjects
 	{"nacro90/numb.nvim", -- line previews when ":n"
 		config = function() require("numb").setup() end,
 		keys = ":",
