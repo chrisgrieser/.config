@@ -3,6 +3,7 @@
 # requirements:
 # - cowsay
 # - fortune
+# - sp
 
 if [[ "$TERM" == "alacritty" ]] ; then
 	arr[1]=""   # standard

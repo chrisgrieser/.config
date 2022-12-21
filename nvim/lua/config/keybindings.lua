@@ -300,8 +300,8 @@ end
 
 --------------------------------------------------------------------------------
 -- BUFFERS
--- cycle between buffers
-keymap("n", "<BS>", [[:nohl<CR><Plug>(CybuNext)]], { desc = "cycle buffers" })
+-- INFO: <BS> cycle between buffers (cybu) has to be defined in plugin-list for
+-- lazy loading
 
 -- Buffer selector
 keymap("n", "gb", function()

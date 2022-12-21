@@ -29,6 +29,5 @@ else
 fi
 
 source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
-source "$DOTFILE_FOLDER/zsh/plugins/obsidian-vault-navigation.sh"
 
 
