@@ -24,4 +24,7 @@ LSP
 It is
 it is
 code
+Code
+alias
+early
 accessible

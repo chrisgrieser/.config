@@ -40,18 +40,9 @@ function dump () {
 
 function update (){
 
-	print-section "NEOVIM"
-	echo "Running in background..."
-	local isodate
-	isodate=$(date '+%Y-%m-%d_%H-%M-%S')
-	nvim --headless -c 'autocmd User PackerComplete quitall' -c "PackerSnapshot snapshot_$isodate" # https://github.com/wbthomason/packer.nvim#bootstrapping
-	nvim --headless -c 'autocmd User PackerComplete quitall' -c "PackerSync"
-	# TreeSitter and Mason already auto-update on start
-
 	print-section "OBSIDIAN"
 	echo "Opening URIs..."
 	open "obsidian://advanced-uri?vault=main-vault&updateplugins=true"
-	# brat plugins already auto-update on start
 
 	print-section "HOMEBREW"
 	print-section "update"

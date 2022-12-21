@@ -46,7 +46,7 @@ keymap({ "n", "x", "o" }, "L", "$")
 keymap({ "x", "o" }, "J", "6j")
 keymap({ "n", "x", "o" }, "K", "6k")
 
-keymap("n", "j", function() qol.overscroll("j") end, { desc = "j (with overscroll)"})
+keymap("n", "j", function() qol.overscroll("j") end, { desc = "j (with overscroll)" })
 keymap("n", "J", function() qol.overscroll("6j") end, { desc = "6j (with overscroll)" })
 keymap({ "n", "x" }, "G", "Gzz")
 
@@ -55,7 +55,7 @@ keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Search
-keymap({ "n", "x", "o" }, "-", "/", {desc = "Search (German Keyboard)"}) -- German Keyboard, \v for very-magic search
+keymap({ "n", "x", "o" }, "-", "/", { desc = "Search (German Keyboard)" }) -- German Keyboard, \v for very-magic search
 keymap("n", "<Esc>", function()
 	local clearPending = require("notify").pending() > 10 and true or false
 	require("notify").dismiss { pending = clearPending }
@@ -450,7 +450,7 @@ keymap("n", "<leader>r", function()
 	-- nvim config
 	elseif ft == "lua" and parentFolder:find("nvim") then
 		cmd.source()
-		vim.notify(expand("%:r").." re-sourced.")
+		vim.notify(expand("%:r") .. " re-sourced")
 
 	-- Hammerspoon
 	elseif ft == "lua" and parentFolder:find("hammerspoon") then
@@ -478,7 +478,7 @@ keymap("n", "<leader>r", function()
 end)
 
 --------------------------------------------------------------------------------
--- INFO as long as an lsp is attached to a buffer (null-ls or regular), `gq`
+-- BUG as long as an lsp is attached to a buffer (null-ls or regular), `gq`
 -- apparently stops working.
 
 --------------------------------------------------------------------------------
@@ -495,9 +495,26 @@ autocmd("FileType", {
 		"man",
 	},
 	callback = function()
-		local opts = { buffer = true, silent = true, nowait = true }
+		local opts = { buffer = true, nowait = true }
 		keymap("n", "<Esc>", cmd.close, opts)
 		keymap("n", "q", cmd.close, opts)
+	end,
+})
+
+-- HACK to remove the waiting time from the q, due to conflict with `qq`
+-- for comments
+autocmd("FileType", {
+	group = "quickQuit",
+	pattern = "TelescopePrompt",
+	callback = function()
+		keymap("n", "q", "<Esc>", { buffer = true, nowait = true, remap = true })
+	end,
+})
+autocmd("FileType", {
+	group = "quickQuit",
+	pattern = "ssr",
+	callback = function()
+		keymap("n", "q", "Q", { buffer = true, nowait = true, remap = true })
 	end,
 })
 

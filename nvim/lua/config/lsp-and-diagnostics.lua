@@ -144,7 +144,7 @@ autocmd("LspAttach", {
 		end
 
 		keymap("n", "gd", telescope.lsp_definitions, bufopts)
-		keymap("n", "gh", telescope.lsp_references, bufopts)
+		keymap("n", "gD", telescope.lsp_references, bufopts)
 		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, bufopts)
 		keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
