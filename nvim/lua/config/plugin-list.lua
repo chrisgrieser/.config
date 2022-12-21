@@ -186,11 +186,4 @@ return {
 	{"mityu/vim-applescript", ft = "applescript"}, -- syntax highlighting
 	{"hail2u/vim-css3-syntax", ft = "css"}, -- better syntax highlighting (until treesitter css looks decent…)
 	{"iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install"},
-	{"bennypowers/nvim-regexplainer",
-		ft = {"javascript", "typescript"},
-		dependencies = {"nvim-treesitter/nvim-treesitter", "MunifTanjim/nui.nvim"},
-		-- INFO: config set in javascript/typescript ftplugin, since not working
-		-- from here
-	},
-
 }

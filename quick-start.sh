@@ -38,6 +38,7 @@ git submodule foreach git checkout main
 zsh "$HOME/dotfiles/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
 # REQUIRED: SSH setup
+cd ~
 git clone git@github.com:chrisgrieser/main-vault-backup.git
 git clone git@github.com:chrisgrieser/.password-store.git
 
@@ -62,10 +63,6 @@ ln -sf "$DOTFILE_FOLDER/linter-configs/.shellcheckrc" ~
 ln -sf "$DOTFILE_FOLDER/linter-configs/.flake8" ~
 ln -sf "$DOTFILE_FOLDER/vale/.vale.ini" ~
 
-# Fig
-mkdir -p ~/.fig/config
-ln -sf "$DOTFILE_FOLDER/fig/settings.json" ~/.fig
-
 # GPG config
 mkdir ~/.gnupg
 ln -sf "$DOTFILE_FOLDER/gnupg/gpg-agent.conf" ~/.gnupg
@@ -87,6 +84,11 @@ ESPANSO_DIR=~"/Library/Application Support/espanso"
 [[ -e "$ESPANSO_DIR" ]] && rm -rf "$ESPANSO_DIR"
 ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 
-# Warp
-[[ -e ~/.warp ]] && rm -rf ~/.warp
-ln -sf "$DOTFILE_FOLDER/warp" ~/.warp
+# # Warp
+# [[ -e ~/.warp ]] && rm -rf ~/.warp
+# ln -sf "$DOTFILE_FOLDER/warp" ~/.warp
+
+# # Fig
+# mkdir -p ~/.fig/config
+# ln -sf "$DOTFILE_FOLDER/fig/settings.json" ~/.fig
+
