@@ -245,17 +245,17 @@ nmap zR :unfoldall
 " nmap ö :hop
 
 " Lightspeed
-" exmap lightspeed obcommand mrj-jump-to-link:activate-lightspeed-jump
-" nmap ö :lightspeed
+exmap lightspeed obcommand mrj-jump-to-link:activate-lightspeed-jump
+nmap ö :lightspeed
 
 " Link Jump (similar to Vimium's f)
-" exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
-" nmap ,f :linkjump
+exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
+nmap ,f :linkjump
 
 """"""""""""""""""""""
 " Substitute
 """"""""""""""""""""""
-" poor man#s substitute.vim
+" poor man's substitute.vim 🥲
 nmap s Vp
 nmap S vg$p
 
