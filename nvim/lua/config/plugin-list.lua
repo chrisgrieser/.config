@@ -113,7 +113,7 @@ return {
 	-- File Switching & File Operation
 	{"stevearc/dressing.nvim",
 		event = "VeryLazy",
-		dependencies = { "hrsh7th/nvim-cmp", "hrsh7th/cmp-omni" },, -- omni for autocompletion in input prompts
+		dependencies = { "hrsh7th/nvim-cmp", "hrsh7th/cmp-omni" }, -- omni for autocompletion in input prompts
 	},
 	{"chrisgrieser/nvim-genghis",
 		dev = true,

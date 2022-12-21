@@ -281,6 +281,12 @@ local function selectionCount()
 	return tostring(lines) .. "l " .. tostring(fn.wordcount().visual_chars) .. "c"
 end
 
+local function cpuUsage()
+	local idle = fn.system("iostat -C | tail -n1 | cut -d' ' -f13")
+	local used = 100 - tonumber(trim(idle))
+	return used .. "%%"
+end
+
 --------------------------------------------------------------------------------
 
 -- nerdfont: 'nf-ple'; since separators look off in Terminal
