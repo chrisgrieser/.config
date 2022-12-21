@@ -183,7 +183,7 @@ cmp.setup.filetype("yaml", {
 -- ZSH
 local shellSources = copyTable(defaultSources)
 table.insert(shellSources, 2, zsh)
-table.insert(shellSources, 5, nerdfont)
+table.insert(shellSources, 6, nerdfont)
 cmp.setup.filetype("sh", {
 	sources = cmp.config.sources(shellSources),
 })

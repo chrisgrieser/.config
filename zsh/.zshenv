@@ -3,11 +3,11 @@ export PAGER=less
 
 #───────────────────────────────────────────────────────────────────────────────
 # DIRECTORIES
-export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
-export DOTFILE_FOLDER="$HOME/.config"
-export VAULT_PATH="$HOME/main-vault"
+export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+export DOTFILE_FOLDER="$HOME/.config/"
+export VAULT_PATH="$HOME/main-vault/"
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/"
-export PASSWORD_STORE_DIR="$HOME/.password-store"
+export PASSWORD_STORE_DIR="$HOME/.password-store/" # default value, but still needed for bkp script
 
 #───────────────────────────────────────────────────────────────────────────────
 
