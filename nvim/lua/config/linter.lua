@@ -37,7 +37,9 @@ null_ls.setup {
 			extra_args = { "--ignore-words", dotfilesFolder .. "/codespell/codespell-ignore.txt" },
 		},
 		builtins.formatting.trim_newlines, -- trim trailing whitespace & newlines
-		builtins.formatting.trim_whitespace,
+		builtins.formatting.trim_whitespace.with{
+			disabled_filetypes = { "markdown" }, -- do not remove spaces due to two-space-rule
+		},
 
 		-- SHELL
 		builtins.hover.printenv, -- show value of environment variable on hover command
