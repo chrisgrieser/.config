@@ -7,7 +7,7 @@ reference-doc: ${USERDATA}/reference-docs/academic-paper.docx
 
 # General
 verbosity: WARNING
-fail-if-warnings: false # turn on to abort if citekeys are missing
+fail-if-warnings: true # turn on to abort if citekeys are missing
 table-of-contents: false
 toc-depth: 3
 resource-path:  # must be array
