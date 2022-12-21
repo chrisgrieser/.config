@@ -34,7 +34,7 @@ function movieModeLayout()
 	holeCover()
 	iMacDisplay:setBrightness(0)
 
-	runWithDelays({ 0, 0.5, 1 }, function() openIfNotRunning("YouTube") end)
+	runWithDelays({ 0, 0.5, 1, 1.5 }, function() openIfNotRunning("YouTube") end)
 
 	killIfRunning("Obsidian")
 	killIfRunning("Drafts")
@@ -227,7 +227,7 @@ end
 local function setLayout()
 	if isAtOffice() then
 		officeModeLayout()
-	elseif isIMacAtHome() then
+	elseif isIMacAtHome() and isProjector() then
 		if isProjector() then
 			movieModeLayout()
 		else
