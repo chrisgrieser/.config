@@ -411,10 +411,10 @@ keymap("n", "<leader>ow", ":set wrap!<CR>")
 --------------------------------------------------------------------------------
 
 -- TERMINAL MODE
-keymap("t", "<Esc>", [[<C-\><C-n>]]) -- normal mode in Terminal window
-keymap("t", "ö", [[<C-\><C-n><C-w><C-w>]]) -- switch windows directly from Terminal window
-keymap("n", "6", ":ToggleTerm size=8<CR>")
-keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>")
+keymap("t", "<Esc>", [[<C-\><C-n>]], {desc = "Esc"}) -- normal mode in Terminal window
+keymap("t", "ö", [[<C-\><C-n><C-w><C-w>]], {desc = "switch window"}) -- switch windows directly from Terminal window
+keymap("n", "6", ":ToggleTerm size=8<CR>", {desc = "ToggleTerm"})
+keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", {desc = "Send Selection to ToggleTerm"})
 
 --------------------------------------------------------------------------------
 
