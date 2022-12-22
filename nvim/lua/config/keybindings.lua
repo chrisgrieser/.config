@@ -29,7 +29,7 @@ keymap("n", "<leader>p", function()
 	require("lazy").sync()
 	cmd.MasonUpdateAll()
 end, { desc = ":Lazy sync & :MasonUpdateAll" })
-keymap("n", "<leader>P", require("lazy").home, { desc = ":Lazy home" })
+keymap("n", "<leader>P", require("lazy").install, { desc = ":Lazy install" })
 
 -- write all before quitting
 keymap("n", "ZZ", ":wall! | qa!<CR>", { desc = ":wall & :quitall" })
@@ -62,8 +62,9 @@ keymap("n", "<Esc>", function()
 	require("lualine").refresh() -- so the highlight count disappears quicker
 end, { desc = "clear highlights and notifications" })
 
-keymap({ "n", "x", "o" }, "+", "*") -- no more modifier key (German Layout)
-keymap({ "n", "x", "o" }, "*", "#") -- backwards on the same key (German Layout)
+keymap("n", "+", "*") -- no more modifier key (German Layout)
+keymap("n", "*", "#") -- backwards on the same key (German Layout)
+
 
 -- FOLDING
 keymap("n", "^", "za", { desc = "toggle fold" }) -- quicker toggling of folds
@@ -81,7 +82,7 @@ keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 -- Leap & Flit
 keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
 keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
-require("flit").setup()
+require("flit").setup{ multiline = false }
 
 --------------------------------------------------------------------------------
 
@@ -306,6 +307,7 @@ end
 -- BUFFERS
 -- INFO: <BS> cycle between buffers (cybu) has to be defined in plugin-list for
 -- lazy loading
+keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)", { desc = "cycle buffers" })
 
 -- Buffer selector
 keymap("n", "gb", function()

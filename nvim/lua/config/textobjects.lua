@@ -98,7 +98,7 @@ autocmd("FileType", {
 			keymap(
 				{ "x", "o" },
 				"ai",
-				function() varTextObj.indentation(true, false) end,
+				function() varTextObj.indentation(false, true) end,
 				{ buffer = true, desc = "indentation textobj with start border" }
 			)
 		end
