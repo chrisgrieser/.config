@@ -266,7 +266,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://regex101.com/?regex={var:regex}&amp;testString={query}&amp;flags={var:flags}</string>
+				<string>https://regex101.com/?regex={var:regex}&amp;testString={query}&amp;flags={var:flags}&amp;subst=</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
