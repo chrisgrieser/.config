@@ -345,7 +345,7 @@ keymap("n", "go", telescope.find_files, { desc = "Telescope: Files in cwd" })
 keymap("n", "gO", telescope.git_files, { desc = "Telescope: Git Files" })
 keymap("n", "gr", telescope.oldfiles, { desc = "Telescope: Recent Files" })
 keymap("n", "gF", telescope.live_grep, { desc = "Telescope: Search in cwd" })
-keymap("n", "gR", telescope.resume, { desc = "Telescope: Resume" })
+keymap("n", "gc", telescope.resume, { desc = "Telescope: Resume" })
 
 -- File Operations (no shorthand for lazy-loading)
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = "copy filepath" })

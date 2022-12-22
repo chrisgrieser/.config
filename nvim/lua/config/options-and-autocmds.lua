@@ -7,7 +7,6 @@ opt.undodir:prepend(vimDataDir .. "undo//")
 opt.viewdir = vimDataDir .. "view"
 opt.shadafile = vimDataDir .. "main.shada"
 
-
 --------------------------------------------------------------------------------
 -- Undo
 opt.undofile = true -- enable persistent undo history
@@ -15,7 +14,7 @@ opt.undolevels = 4000 -- more undos being saved
 
 local undopointChars = { "<Space>", ".", ",", ";" }
 for _, char in pairs(undopointChars) do
-	keymap("i", char, char.."<C-g>u", { desc = "extra undopoint for "..char })
+	keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char })
 end
 
 -- timeouts
@@ -163,7 +162,7 @@ ufo.setup {
 	end,
 }
 
-keymap("n", "zR", ufo.openAllFolds) -- Using ufo provider need remap `zR` and `zM` 
+keymap("n", "zR", ufo.openAllFolds) -- Using ufo provider need remap `zR` and `zM`
 keymap("n", "zM", ufo.closeAllFolds)
 
 -- fold settings required for UFO
@@ -183,19 +182,28 @@ opt.foldnestmax = 1
 --------------------------------------------------------------------------------
 
 -- Remember folds and cursor
+local ignoredFts = {
+	"DressingSelect",
+	"cybu",
+	"bib",
+	"text",
+	"TelescopePrompt",
+	"gitcommit",
+	"",
+}
 augroup("rememberCursorAndFolds", {})
 autocmd("BufWinLeave", {
 	group = "rememberCursorAndFolds",
-	pattern = "?*",
-	command = "silent! mkview",
+	callback = function()
+		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
+		cmd.mkview()
+	end,
 })
 autocmd("BufWinEnter", {
 	group = "rememberCursorAndFolds",
-	pattern = "?*",
 	callback = function()
-		local ignoredFts = { "DressingSelect", "cybu" }
 		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
-		cmd([[silent! loadview]])
+		cmd.loadview()
 		normal("^") -- to scroll to the left on start
 	end,
 })
