@@ -53,18 +53,17 @@ keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Search
-keymap({ "n", "x", "o" }, "-", "/", { desc = "Search (German Keyboard)" }) -- German Keyboard, \v for very-magic search
+keymap({ "n", "x", "o" }, "-", "/", { desc = "Search (German Keyboard)" })
 keymap("n", "<Esc>", function()
 	local clearPending = require("notify").pending() > 10 and true or false
 	require("notify").dismiss { pending = clearPending }
-	cmd.nohlsearch() -- clear highlights
+	cmd.nohlsearch()
 	cmd.echo() -- clear shortmessage
 	require("lualine").refresh() -- so the highlight count disappears quicker
 end, { desc = "clear highlights and notifications" })
 
-keymap("n", "+", "*") -- no more modifier key (German Layout)
-keymap("n", "*", "#") -- backwards on the same key (German Layout)
-
+keymap("n", "+", "*", { desc = "search word under cursor (German keyboard)" })
+keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "visual star (I use `+` though)" })
 
 -- FOLDING
 keymap("n", "^", "za", { desc = "toggle fold" }) -- quicker toggling of folds
@@ -82,7 +81,7 @@ keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 -- Leap & Flit
 keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
 keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
-require("flit").setup{ multiline = false }
+require("flit").setup { multiline = false }
 
 --------------------------------------------------------------------------------
 
@@ -97,7 +96,7 @@ require("yanky").setup {
 	highlight = { timer = 1500 },
 }
 
-keymap({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+keymap("n", "p", "<Plug>(YankyPutAfter)")
 keymap("n", "P", "<Plug>(YankyCycleForward)")
 keymap("n", "gp", qol.pasteDifferently, { desc = "paste differently" }) -- paste charwise reg as linewise & vice versa
 keymap("n", "gP", "<Plug>(YankyCycleBackward)")
@@ -247,6 +246,7 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 -- VISUAL MODE
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
 keymap("x", "v", "<C-v>") -- `vv` from normal mode = visual block mode
+keymap("x", "p", "P", {desc = "paste without switcing register"})
 
 --------------------------------------------------------------------------------
 -- WINDOWS & SPLITS
