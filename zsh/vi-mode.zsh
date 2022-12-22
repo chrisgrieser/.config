@@ -17,7 +17,7 @@ for m in visual viopp; do
 	done
 done
 
-# i{ i( i< i{ etc.
+# i{ i( i< etc.
 autoload -U select-bracketed
 zle -N select-bracketed
 for m in visual viopp; do

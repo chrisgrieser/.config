@@ -129,9 +129,10 @@ return {
 		},
 	},
 	{"ghillb/cybu.nvim", -- Cycle Buffers
-		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim"},
-		config = function () keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)", { desc = "cycle buffers" }) end,
-		keys = "<BS>",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"nvim-lua/plenary.nvim",
+		},
 	},
 
 	-- Terminal & Git

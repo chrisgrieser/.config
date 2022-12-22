@@ -152,7 +152,7 @@ autocmd("LspAttach", {
 			local ft = bo.filetype
 			local lspformat = vim.lsp.buf.format
 			if ft == "javascript" or ft == "typescript" then
-				lspformat { async = false } -- prettier / tsserver
+				lspformat { async = false } -- prettier & tsserver
 				cmd.update { bang = true }
 				cmd.EslintFixAll() -- eslint-lsp
 			elseif ft == "applescript" then
@@ -210,6 +210,7 @@ lspSettings.sumneko_lua = {
 			callSnippet = "Replace",
 			keywordSnippet = "Replace",
 			displayContext = 2,
+			requireSeparator = "/", -- plays nice with `gf`
 		},
 		diagnostics = {
 			disable = { "trailing-space", "lowercase-global" },
@@ -246,22 +247,21 @@ lspSettings.cssls = {
 
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local jsAndTsSettings = {
-	--	-- no formatting since using prettier
-	-- format = {
-	-- 	insertSpaceAfterCommaDelimiter = true,
-	-- 	insertSpaceAfterConstructor = false,
-	-- 	insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
-	-- 	insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
-	-- 	insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
-	-- 	insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
-	-- 	insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
-	-- 	insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
-	-- 	insertSpaceAfterSemicolonInForStatements = true,
-	-- 	insertSpaceBeforeAndAfterBinaryOperators = true,
-	-- 	insertSpaceBeforeFunctionParenthesis = false,
-	-- 	placeOpenBraceOnNewLineForFunctions = false,
-	-- 	trimTrailingWhitespace = true,
-	-- },
+	format = {
+		insertSpaceAfterCommaDelimiter = true,
+		insertSpaceAfterConstructor = false,
+		insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
+		insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
+		insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
+		insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+		insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+		insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+		insertSpaceAfterSemicolonInForStatements = true,
+		insertSpaceBeforeAndAfterBinaryOperators = true,
+		insertSpaceBeforeFunctionParenthesis = false,
+		placeOpenBraceOnNewLineForFunctions = false,
+		trimTrailingWhitespace = true,
+	},
 	inlayHints = {
 		includeInlayEnumMemberValueHints = true,
 		includeInlayFunctionLikeReturnTypeHints = true,
