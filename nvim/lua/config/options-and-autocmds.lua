@@ -171,7 +171,7 @@ opt.foldlevel = 99
 opt.foldlevelstart = 99
 
 -- restrict folding amount
-opt.foldminlines = 2
+opt.foldminlines = 3
 opt.foldnestmax = 1
 
 -- if not using UFO for folding
@@ -185,7 +185,6 @@ opt.foldnestmax = 1
 local ignoredFts = {
 	"DressingSelect",
 	"cybu",
-	"bib",
 	"text",
 	"TelescopePrompt",
 	"gitcommit",
