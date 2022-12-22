@@ -55,8 +55,7 @@ require("scrollview").setup {
 }
 
 --------------------------------------------------------------------------------
--- virtual color column
--- '│'
+-- virtual color column --- '│'
 vim.g.virtcolumn_char = "║"
 
 --------------------------------------------------------------------------------
@@ -71,7 +70,7 @@ if isGui() then
 		level = 0, -- minimum severity level to display (0 = display all)
 		max_height = 25,
 		max_width = notifyWidth, -- HACK see below
-		minimum_width = 10,
+		minimum_width = 13,
 		timeout = 4000,
 		top_down = false,
 		on_open = function(win)
@@ -278,7 +277,7 @@ local function selectionCount()
 	local starts = fn.line("v")
 	local ends = fn.line(".")
 	local lines = starts <= ends and ends - starts + 1 or starts - ends + 1
-	return tostring(lines) .. "l " .. tostring(fn.wordcount().visual_chars) .. "c"
+	return "/  " .. tostring(lines) .. "l " .. tostring(fn.wordcount().visual_chars) .. "c"
 end
 
 --------------------------------------------------------------------------------
