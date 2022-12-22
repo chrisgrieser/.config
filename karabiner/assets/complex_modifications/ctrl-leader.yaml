@@ -227,7 +227,7 @@ rules:
           - *remove-notice
       # [F]inder
       - type: basic
-        from: {key_code: l}
+        from: {key_code: f}
         conditions: [*leader-active]
         to:
           - shell_command: open -a "Finder"
@@ -263,14 +263,6 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Alfred Preferences'
-          - *deactivate-leader
-          - *remove-notice
-      # [I]noreader
-      - type: basic
-        from: {key_code: i}
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Inoreader' || open 'https://www.inoreader.com/'
           - *deactivate-leader
           - *remove-notice
       # [N]ews Reader (Reeder)
