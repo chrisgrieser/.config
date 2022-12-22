@@ -13,11 +13,12 @@ keymap("n", "gR", function()
 
 	local regex = fn.getreg("z")
 	local pattern = regex:match("/(.*)/")
-	local flags = regex:match("/.*/(.*)")
-	---@diagnostic disable-next-line: param-type-mismatch
-	local replacement = fn.getline("."):match("/.*/")
+	local flags = regex:match("/.*/(%l*)")
+	---@diagnostic disable-next-line: param-type-mismatch, undefined-field
+	local replacement = fn.getline("."):match('replace ?%(/.*/.*, ?"(.-)"')
 
 	-- https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
-	local url = "https://regex101.com/?regex=" .. pattern .. "&flags=" .. flags .. "&subst=" .. replacement
+	local url = "https://regex101.com/?regex=" .. pattern .. "&flags=" .. flags
+	if replacement then url = url .. "&subst=" .. replacement end
 	os.execute("open '" .. url .. "'") -- opening method on macOS
 end, { desc = "Open next js regex in regex101" })
