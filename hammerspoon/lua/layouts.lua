@@ -228,23 +228,18 @@ local function setLayout()
 	if isAtOffice() then
 		officeModeLayout()
 	elseif isIMacAtHome() and isProjector() then
-		if isProjector() then
-			movieModeLayout()
-		else
-			homeModeLayout()
-		end
-	elseif isAtMother() then
-		if isProjector() then
-			motherMovieModeLayout()
-		else
-			motherHomeModeLayout()
-		end
+		movieModeLayout()
+	elseif isIMacAtHome() and not isProjector() then
+		homeModeLayout()
+	elseif isAtMother() and isProjector() then
+		motherMovieModeLayout()
+	elseif isAtMother() and not isProjector() then
+		motherHomeModeLayout()
 	end
 end
 
 -- watcher + hotkey
-displayCountWatcher = hs.screen.watcher.new(setLayout)
-displayCountWatcher:start()
+displayCountWatcher = hs.screen.watcher.new(setLayout):start()
 hotkey(hyper, "home", setLayout) -- hyper + eject on Apple Keyboard
 
 --------------------------------------------------------------------------------
