@@ -35,7 +35,9 @@ nmap k gk
 
 " consistent with emacs bindings
 nmap <C-e> A
+nmap <C-a> I
 vmap <C-e> <Esc>A
+vmap <C-a> <Esc>I
 
 " HJKL behaves like hjkl, but bigger distance
 map H g0
@@ -43,10 +45,16 @@ map L g$
 map J 6j
 map K 6k
 
-" Spelling
+" Spelling / Diagnostics
 " Emulate `z=` (and bind it zo `zl` because more convenient; mnemonic: [z]pelling list)
 exmap contextMenu obcommand editor:context-menu
 nmap zl :contextMenu
+
+exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
+nmap ge :nextSuggestion
+
+exmap enableDiagnostics obsidian-languagetool-plugin:ltcheck-text
+nmap ,od :enableDiagnostics
 
 " Synonyms
 exmap synonymSuggestion obcommand obsidian-wordy:wordy-syn
