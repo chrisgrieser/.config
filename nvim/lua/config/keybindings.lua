@@ -55,11 +55,13 @@ keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 -- Search
 keymap({ "n", "x", "o" }, "-", "/", { desc = "Search (German Keyboard)" })
 keymap("n", "<Esc>", function()
-	local clearPending = require("notify").pending() > 10 and true or false
-	require("notify").dismiss { pending = clearPending }
 	cmd.nohlsearch()
 	cmd.echo() -- clear shortmessage
 	require("lualine").refresh() -- so the highlight count disappears quicker
+	if isGui() then 
+		local clearPending = require("notify").pending() > 10
+		require("notify").dismiss { pending = clearPending }
+	end
 end, { desc = "clear highlights and notifications" })
 
 keymap("n", "+", "*", { desc = "search word under cursor (German keyboard)" })

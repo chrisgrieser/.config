@@ -202,7 +202,7 @@ autocmd("BufWinEnter", {
 	group = "rememberCursorAndFolds",
 	callback = function()
 		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
-		cmd.loadview()
+		cmd[[silent! loadview!]] -- needs silent to avoid error for documents that do not have a view yet (opening first time)
 		normal("^") -- to scroll to the left on start
 	end,
 })
