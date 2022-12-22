@@ -7,7 +7,7 @@ matches:
 
   # sed for fixing messages
   - trigger: "sss"
-    replace: "s/$|$//"
+    replace: "s/$|$/"
 
   - trigger: "!update"
     replace: |
