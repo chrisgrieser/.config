@@ -438,7 +438,7 @@ osascript -l JavaScript pass-cli-search.js "$PASSWORD_STORE_DIR"</string>
 				<key>subtext</key>
 				<string>Loading...</string>
 				<key>title</key>
-				<string>Pass</string>
+				<string>Search Passwords in Pass</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
