@@ -111,31 +111,36 @@ function moveResize(win, pos)
 	end
 
 	-- for Obsidian theme development
-	if not (pos == pseudoMaximized) and not (pos == maximized) then
-		if appOfWin:find("[Nn]eovide") and appIsRunning("Obsidian") then
-			runWithDelays(0.15, function()
-				app("Obsidian"):unhide()
-				app("Obsidian"):mainWindow():raise()
-			end)
-		end
+	if
+		not (pos == pseudoMaximized or pos == maximized)
+		and appOfWin:lower() == "neovide"
+		and appIsRunning("Obsidian")
+	then
+		runWithDelays(0.15, function()
+			app("Obsidian"):unhide()
+			app("Obsidian"):mainWindow():raise()
+		end)
 	end
 
 	if (pos == pseudoMaximized or pos == centered) and appIsRunning("Twitterrific") then
 		app("Twitterrific"):mainWindow():raise()
 	end
 
-	-- has to repeat due window creation delay for some apps
-	if checkSize(win, pos) then return end -- size does not need to be changed
-	runWithDelays({ 0, 0.1, 0.3, 0.5 }, function() win:moveToUnit(pos) end)
+	while not (checkSize(win, pos)) do
+		win:moveToUnit(pos)
+		-- pseudo-timeout
+		local timeout = false
+		runWithDelays(3, function() timeout = true end)
+		if timeout then break end
+	end
 end
 
 local function moveCurWinToOtherDisplay()
-
 	local win = hs.window.focusedWindow()
 	local targetScreen = win:screen():next()
 	win:moveToScreen(targetScreen, true)
 
-	runWithDelays({0.1, 0.2}, function()
+	runWithDelays({ 0.1, 0.2 }, function()
 		-- workaround for ensuring proper resizing
 		win = hs.window.focusedWindow()
 		win:setFrameInScreenBounds(win:frame())

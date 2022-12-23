@@ -25,7 +25,7 @@ end
 --------------------------------------------------------------------------------
 
 ---Repeat a Function multiple times
----@param delaySecs number|table<number>
+---@param delaySecs number|number[]
 ---@param func function function to repeat
 function runWithDelays(delaySecs, func)
 	if type(delaySecs) == "number" then delaySecs = {delaySecs} end
@@ -91,7 +91,7 @@ function notify(text)
 	print("notify: " .. text) -- for the console
 end
 
----Whether the current time is between start & end
+---Whether the current time is between startHour & endHour
 ---@param startHour integer 13.5 = 13:30
 ---@param endHour integer
 ---@return boolean
@@ -100,13 +100,11 @@ function betweenTime(startHour, endHour)
 	return currentHour > startHour and currentHour < endHour
 end
 
----name of frontapp
 ---@return string
 function frontAppName()
 	return hs.application.frontmostApplication():name() ---@diagnostic disable-line: return-type-mismatch
 end
 
----Check whether app is running
 ---@param appName string
 ---@return boolean
 function appIsRunning(appName)
@@ -117,22 +115,24 @@ function appIsRunning(appName)
 	return false
 end
 
----Open App
----@param appName string
-function openIfNotRunning(appName)
-	local runs = hs.application.get(appName)
-	if runs then return end
-	hs.application.open(appName)
+---@param appNames string|string[]
+function openApp(appNames)
+	if type(appNames) == "string" then appNames = {appNames} end
+	for _, name in pairs(appNames) do
+		local runs = app.get(name)
+		if not(runs) then app.open(name) end
+	end
 end
 
----@param appName string
-function killIfRunning(appName)
-	local runs = hs.application.get(appName)
-	if runs then runs:kill() end
-	hs.timer.doAfter(1, function()
-		runs = hs.application.get(appName)
-		if runs then runs:kill9() end
-	end)
+---@param appNames string|string[]
+function quitApp(appNames)
+	if type(appNames) == "string" then appNames = {appNames} end
+	for _, name in pairs(appNames) do
+		runWithDelays({0, 0.5}, function ()
+			local appObj = app.get(name)
+			if appObj then appObj:kill() end
+		end)
+	end
 end
 
 -- won't work with Chromium browsers due to bug

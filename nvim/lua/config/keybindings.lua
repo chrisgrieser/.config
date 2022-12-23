@@ -2,16 +2,6 @@ require("config/utils")
 --------------------------------------------------------------------------------
 -- META
 
--- copy [l]ast ex[c]ommand
-keymap("n", "<leader>lc", function()
-	local lastCommand = fn.getreg(":")
-	fn.setreg("+", lastCommand)
-	vim.notify("COPIED\n" .. lastCommand)
-end, { desc = "Copy last command" })
-
--- run [l]ast command [a]gain
-keymap("n", "<leader>la", "@:", { desc = "Run last command again" })
-
 -- search keymaps
 keymap("n", "?", telescope.keymaps, { desc = "Telescope: Keymaps" })
 
@@ -34,18 +24,34 @@ keymap("n", "<leader>P", require("lazy").install, { desc = ":Lazy install" })
 -- write all before quitting
 keymap("n", "ZZ", ":wall! | qa!<CR>", { desc = ":wall & :quitall" })
 
+-- copy [l]ast ex[c]ommand
+keymap("n", "<leader>lc", function()
+	local lastCommand = fn.getreg(":")
+	fn.setreg("+", lastCommand)
+	vim.notify("COPIED\n" .. lastCommand)
+end, { desc = "Copy last command" })
+
+-- run [l]ast command [a]gain
+keymap("n", "<leader>la", "@:", { desc = "Run last command again" })
+
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 keymap({ "n", "x" }, "H", "0^") -- 0^ ensures fully scrolling to the left on long lines
 keymap("o", "H", "^")
-keymap({ "n", "x", "o" }, "L", "$")
-keymap({ "x", "o" }, "J", "6j")
-keymap({ "n", "x", "o" }, "K", "6k")
 
-keymap("n", "j", function() qol.overscroll("j") end, { desc = "j (with overscroll)" })
+keymap({ "n", "x", "o" }, "L", "$")
+
 keymap("n", "J", function() qol.overscroll("6j") end, { desc = "6j (with overscroll)" })
+keymap("x", "J", "6j")
+keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
+
+keymap({ "n", "x" }, "K", "6k")
+keymap("o", "K", "2k")
+
+-- add overscroll
+keymap("n", "j", function() qol.overscroll("j") end, { desc = "j (with overscroll)" })
 keymap({ "n", "x" }, "G", "Gzz")
 
 -- Jump History
