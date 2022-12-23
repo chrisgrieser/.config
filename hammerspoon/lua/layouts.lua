@@ -23,9 +23,23 @@ local function showAllSidebars()
 	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
 
+---@return boolean
 local function isWeekend()
 	local weekday = os.date():sub(1, 3)
 	return weekday == "Sun" or weekday == "Sat"
+end
+
+---creates a layout for hs.layout.apply
+---@param pos hs.geometry
+---@param display hs.screen
+---@param apps string[]
+---@return table
+local function layoutCreate(pos, display, apps)
+	local out = {}	
+	for _, app in pairs(apps) do
+		table.insert(out, {app, nil, display, pos, nil, nil})	
+	end
+	return out
 end
 
 --------------------------------------------------------------------------------
@@ -34,24 +48,25 @@ function movieModeLayout()
 	holeCover()
 	iMacDisplay:setBrightness(0)
 
-	runWithDelays({ 0, 0.5, 1, 1.5 }, function() openIfNotRunning("YouTube") end)
+	runWithDelays({ 0, 0.5, 1, 1.5 }, function() openApp("YouTube") end)
 
-	killIfRunning("Obsidian")
-	killIfRunning("Drafts")
-	killIfRunning("Neovide")
-	killIfRunning("neovide")
-	killIfRunning("Slack")
-	killIfRunning("Discord")
-	killIfRunning("BusyCal")
-	killIfRunning("Mimestream")
-	killIfRunning("Alfred Preferences")
-	killIfRunning("Finder")
-	killIfRunning("Warp")
-	killIfRunning("Highlights")
-	killIfRunning("Alacritty")
-	killIfRunning("alacritty")
-	killIfRunning("Twitterrific")
-
+	quitApp {
+		"Obsidian",
+		"Drafts",
+		"Neovide",
+		"neovide",
+		"Slack",
+		"Discord",
+		"BusyCal",
+		"Mimestream",
+		"Alfred Preferences",
+		"Finder",
+		"Warp",
+		"Highlights",
+		"Alacritty",
+		"alacritty",
+		"Twitterrific",
+	}
 	dockSwitcher("movie")
 	setDarkmode(true)
 end
@@ -62,38 +77,41 @@ function homeModeLayout()
 	iMacDisplay:setBrightness(brightness)
 
 	holeCover()
-
-	openIfNotRunning("Discord")
-	openIfNotRunning("Mimestream")
-	if not (isWeekend()) then openIfNotRunning("Slack") end
-	openIfNotRunning("Brave Browser")
-	openIfNotRunning("Twitterrific")
-	openIfNotRunning("Drafts")
-
-	killIfRunning("Finder")
-	killIfRunning("YouTube")
-	killIfRunning("Netflix")
-	killIfRunning("IINA")
-	killIfRunning("Twitch")
+	if not (isWeekend()) then openApp("Slack") end
+	openApp {
+		"Discord",
+		"Mimestream",
+		"Brave Browser",
+		"Twitterrific",
+		"Drafts",
+	}
+	quitApp {
+		"Finder",
+		"YouTube",
+		"Netflix",
+		"IINA",
+		"Twitch",
+	}
 	privateClosers()
 
 	dockSwitcher("home")
 
-	useLayout {
-		{ "Twitterrific", nil, iMacDisplay, toTheSide, nil, nil },
-		{ "Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Highlights", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Neovide", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "neovide", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Slack", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Discord", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Warp", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil },
-	}
+	local side = layoutCreate(iMacDisplay, pseudoMaximized, {"Twitterrific"})
+	local main = layoutCreate(iMacDisplay, pseudoMaximized, {
+		"Brave Browser",
+		"Highlights",
+		"Neovide",
+		"neovide",
+		"Slack",
+		"Discord",
+		"Warp",
+		"Obsidian",
+		"Drafts",
+		"Mimestream",
+		"alacritty",
+		"Alacritty",
+	})
+	useLayout (hs.fnutils.concat(main, side))
 
 	showAllSidebars()
 	runWithDelays({ 0.5, 1 }, function() app("Drafts"):activate() end)
@@ -119,18 +137,22 @@ function officeModeLayout()
 	local screen1 = hs.screen.allScreens()[1]
 	local screen2 = hs.screen.allScreens()[2]
 
-	openIfNotRunning("Discord")
-	openIfNotRunning("Mimestream")
-	openIfNotRunning("Slack")
-	openIfNotRunning("Brave Browser")
-	openIfNotRunning("Obsidian")
-	openIfNotRunning("TweetDeck")
-	openIfNotRunning("Drafts")
-
+	openApp {
+		"Discord",
+		"Mimestream",
+		"Slack",
+		"Brave Browser",
+		"Obsidian",
+		"TweetDeck",
+		"Drafts",
+	}
 	dockSwitcher("office") -- separate layout to include "TweetDeck"
 
 	local top = { x = 0, y = 0.015, w = 1, h = 0.485 }
 	local bottom = { x = 0, y = 0.5, w = 1, h = 0.5 }
+	local sideTop = layoutCreate(top, screen2, {"TweetDeck"})
+	local sideBottom = layoutCreate(bottom, screen2, {"Discord", "Slack"})
+	local main = 
 	officeLayout = {
 		-- screen 2
 		{ "TweetDeck", nil, screen2, top, nil, nil },
@@ -166,19 +188,21 @@ local function motherMovieModeLayout()
 	if not (isProjector()) then return end
 	iMacDisplay:setBrightness(0)
 
-	runWithDelays({ 0, 1 }, function() openIfNotRunning("YouTube") end)
-	killIfRunning("Obsidian")
-	killIfRunning("Drafts")
-	killIfRunning("Slack")
-	killIfRunning("Discord")
-	killIfRunning("Mimestream")
-	killIfRunning("Alfred Preferences")
-	killIfRunning("Warp")
-	killIfRunning("neovide")
-	killIfRunning("Neovide")
-	killIfRunning("alacritty")
-	killIfRunning("Alacritty")
-	killIfRunning("Twitterrific")
+	runWithDelays({ 0, 1 }, function() openApp("YouTube") end)
+	quitApp {
+		"Obsidian",
+		"Drafts",
+		"Slack",
+		"Discord",
+		"Mimestream",
+		"Alfred Preferences",
+		"Warp",
+		"neovide",
+		"Neovide",
+		"alacritty",
+		"Alacritty",
+		"Twitterrific",
+	}
 
 	dockSwitcher("mother-movie")
 end
@@ -187,18 +211,22 @@ local function motherHomeModeLayout()
 	local brightness = betweenTime(1, 8) and 0 or 0.8
 	iMacDisplay:setBrightness(brightness)
 
-	openIfNotRunning("Discord")
-	if not (isWeekend()) then openIfNotRunning("Slack") end
-	openIfNotRunning("Obsidian")
-	openIfNotRunning("Mimestream")
-	openIfNotRunning("Brave Browser")
-	openIfNotRunning("Twitterrific")
-	openIfNotRunning("Drafts")
+	if not isWeekend() then openApp("Slack") end
+	openApp {
+		"Discord",
+		"Obsidian",
+		"Mimestream",
+		"Brave Browser",
+		"Twitterrific",
+		"Drafts",
+	}
+	quitApp {
+		"YouTube",
+		"Netflix",
+		"IINA",
+		"Twitch",
+	}
 
-	killIfRunning("YouTube")
-	killIfRunning("Netflix")
-	killIfRunning("IINA")
-	killIfRunning("Twitch")
 	privateClosers()
 
 	alacrittyFontSize(25)
@@ -219,7 +247,6 @@ local function motherHomeModeLayout()
 
 	runWithDelays({ 0, 0.1, 0.2 }, function() useLayout(motherHomeLayout) end)
 	showAllSidebars()
-
 end
 
 --------------------------------------------------------------------------------
@@ -245,7 +272,7 @@ hotkey(hyper, "home", setLayout) -- hyper + eject on Apple Keyboard
 --------------------------------------------------------------------------------
 
 -- Open at Mouse Screen
-wf_appsOnMouseScreen = wf.new {
+wf_appsOnMouseScreen = wf.new({
 	"Drafts",
 	"Brave Browser",
 	"Mimestream",
@@ -266,9 +293,7 @@ wf_appsOnMouseScreen = wf.new {
 	"YouTube",
 	"Netflix",
 	"Finder",
-}
-
-wf_appsOnMouseScreen:subscribe(wf.windowCreated, function(newWin)
+}):subscribe(wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()
 	if not mouseScreen then return end
 	local screenOfWindow = newWin:screen()
