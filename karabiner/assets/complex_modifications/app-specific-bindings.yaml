@@ -1020,10 +1020,10 @@ rules:
             mandatory:
               - shift
         to:
-          - key_code: spacebar
+          - key_code: return_or_enter
             modifiers:
               - option
-              - control
+              - shift
         conditions:
           - type: frontmost_application_if
             file_paths:
