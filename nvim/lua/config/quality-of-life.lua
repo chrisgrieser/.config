@@ -21,8 +21,17 @@ end
 ---trims whitespace from string
 ---@param str string
 ---@return string
-function trim(str) return (str:gsub("^%s*(.-)%s*$", "%1")) end
+local function trim(str) return (str:gsub("^%s*(.-)%s*$", "%1")) end
 
+---equivalent to `:setlocal option&`
+---@param option string
+---@return any
+local function getlocalopt(option) return vim.api.nvim_get_option_value(option, { scope = "local" }) end
+
+---equivalent to `:setlocal option&`
+---@param option string
+---@return any
+local function getglobalopt(option) return vim.api.nvim_get_option_value(option, { scope = "global" }) end
 --------------------------------------------------------------------------------
 
 -- Duplicate line under cursor, and change occurrences of certain words to their
@@ -43,7 +52,11 @@ function M.duplicateLine(opts)
 			line = line:gsub("left", "right")
 		elseif line:find("height") and not (line:find("line-height")) then
 			line = line:gsub("height", "width")
-		elseif line:find("width") and not (line:find("border-width")) and not (line:find("outline-width")) then
+		elseif
+			line:find("width")
+			and not (line:find("border-width"))
+			and not (line:find("outline-width"))
+		then
 			line = line:gsub("width", "height")
 		end
 	end
@@ -59,8 +72,8 @@ function M.duplicateLine(opts)
 	append(".", line)
 
 	-- cursor movement
-	local lineNum = getCursor(0)[1] + 1 -- line down
-	local colNum = getCursor(0)[2]
+	local lineNum, colNum = unpack(getCursor(0))
+	lineNum = lineNum + 1 -- line down
 	local keyPos, valuePos = line:find(".%w+ ?[:=] ?")
 	if opts.moveTo == "value" and valuePos then
 		colNum = valuePos
@@ -93,19 +106,7 @@ function M.bettergx()
 	else
 		local urlLine = fn.getline(urlLineNr) ---@type string
 		local url = urlLine:match(urlLuaRegex)
-		local opener
-		if fn.has("macunix") then
-			opener = "open"
-		elseif fn.has("unix") then
-			opener = "xdg-open"
-		elseif fn.has("win64") or fn.has("win32") then
-			opener = "start"
-		end
-		if opener then
-			os.execute(opener .. ' "' .. url .. '"')
-		else
-			vim.notify("Sorry, you have some arcane operating system that is not supported yet.", logWarn)
-		end
+		os.execute('opener "' .. url .. '"')
 	end
 	setCursor(0, prevCur)
 end
@@ -133,11 +134,7 @@ function M.betterClose()
 	if moreThanOneTab then
 		cmd.tabclose()
 	elseif moreThanOneWin then
-		if bo.filetype == "" then -- scratch buffers
-			cmd.bwipeout()
-		else
-			cmd.close()
-		end
+		cmd.close()
 	elseif #buffers == 2 then
 		cmd.bwipeout() -- only method to clear altfile in this case
 	elseif #buffers > 1 then
@@ -207,6 +204,31 @@ function M.overscroll(action)
 		usedCount = tonumber(actionCount) * usedCount
 	end
 	cmd.normal { tostring(usedCount) .. action, bang = true }
+end
+
+function M.wrapSwitch()
+	local wrapOn = getlocalopt("wrap")
+	local opts = {buffer = true}
+	if wrapOn then
+		setlocal("wrap", false) -- soft wrap
+		setlocal("colorcolumn", getglobalopt("colorcolumn")) -- deactivate ruler
+		local del = vim.keymap.del
+		del({"n", "x"}, "H", opts)
+		del({"n", "x"}, "L", opts)
+		del({"n", "x"}, "J", opts)
+		del({"n", "x"}, "K", opts)
+		del({"n", "x"}, "k", opts)
+		del({"n", "x"}, "j", opts)
+	else
+		setlocal("wrap", true) -- soft wrap
+		setlocal("colorcolumn", "") -- deactivate ruler
+		keymap({ "n", "x" }, "H", "g^", opts)
+		keymap({ "n", "x" }, "L", "g$", opts)
+		keymap({ "n", "x" }, "J", function() M.overscroll("6gj") end, opts)
+		keymap({ "n", "x" }, "K", "6gk", opts)
+		keymap({ "n", "x" }, "k", "gk", opts)
+		keymap({ "n", "x" }, "j", function() M.overscroll("gj") end, opts)
+	end
 end
 
 ---Force pasting a linewise register characterwise and vice versa
@@ -302,7 +324,10 @@ function M.removeLog()
 	elseif ft == "javascript" or ft == "typescript" then
 		logCommand = "console."
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		vim.notify("Shell 'echo' cannot be removed since indistinguishable from other echos.", logWarn)
+		vim.notify(
+			"Shell 'echo' cannot be removed since indistinguishable from other echos.",
+			logWarn
+		)
 	elseif ft == "applescript" then
 		logCommand = "log"
 	else

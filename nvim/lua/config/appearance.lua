@@ -218,13 +218,9 @@ local function currentFile() -- using this function instead of default filename,
 end
 
 local function mixedIndentation()
+	if fn.mode() == "i" then return "" end
 	local ft = bo.filetype
-	local ignoredFts = {
-		"css",
-		"markdown",
-		"sh",
-		"",
-	}
+	local ignoredFts = { "css", "markdown", "sh", "" }
 	if vim.tbl_contains(ignoredFts, ft) then return "" end
 
 	local hasTabs = fn.search("^\t", "nw") > 0

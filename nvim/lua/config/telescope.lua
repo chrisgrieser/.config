@@ -119,6 +119,10 @@ require("telescope").setup {
 			prompt_title = "Search in Folder",
 			prompt_prefix = " ",
 		},
+		loclist = {
+			trim_text = true,
+			prompt_prefix = " ",
+		},
 		spell_suggest = {
 			initial_mode = "normal",
 			prompt_prefix = "暈",

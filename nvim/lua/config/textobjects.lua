@@ -64,8 +64,8 @@ keymap({ "o", "x" }, "n", varTextObj.nearEoL, { desc = "almost ending of line te
 keymap("o", "r", varTextObj.restOfParagraph, { desc = "rest of paragraph (linewise)" })
 
 -- iv/av: value textobj
-keymap({ "x", "o" }, "iv", function() varTextObj.value(true) end, { desc = "inner value textobj" })
-keymap({ "x", "o" }, "av", function() varTextObj.value(false) end, { desc = "outer value textobj" })
+-- keymap({ "x", "o" }, "iv", function() varTextObj.value(true) end, { desc = "inner value textobj" })
+-- keymap({ "x", "o" }, "av", function() varTextObj.value(false) end, { desc = "outer value textobj" })
 
 -- iD/aD: double square brackets
 keymap(
@@ -82,8 +82,8 @@ keymap(
 )
 
 -- in/an: number textobj
-keymap({ "x", "o" }, "in", function() varTextObj.number(true) end, { desc = "inner number textobj" })
-keymap({ "x", "o" }, "an", function() varTextObj.number(false) end, { desc = "outer number textobj" })
+-- keymap({ "x", "o" }, "in", function() varTextObj.number(true) end, { desc = "inner number textobj" })
+-- keymap({ "x", "o" }, "an", function() varTextObj.number(false) end, { desc = "outer number textobj" })
 
 -- ii/ai: indentation textobj
 keymap({ "x", "o" }, "ii", function() varTextObj.indentation(true, true) end, { desc = "inner indentation textobj" })
