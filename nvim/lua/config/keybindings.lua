@@ -419,7 +419,7 @@ end)
 keymap("n", "<leader>os", ":set spell!<CR>")
 keymap("n", "<leader>or", ":set relativenumber!<CR>")
 keymap("n", "<leader>on", ":set number!<CR>")
-keymap("n", "<leader>ow", qol.wrapSwitch)
+keymap("n", "<leader>ow", qol.toggleWrap)
 
 --------------------------------------------------------------------------------
 

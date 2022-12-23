@@ -25,7 +25,6 @@ opt.updatetime = 250 -- affects current symbol highlight (treesitter-refactor) a
 opt.showmatch = true
 opt.smartcase = true
 opt.ignorecase = true
-opt.inccommand = "split" -- for substitute, show off-screen matches in preview as well
 
 -- Quickfix / Locaton List
 opt.grepprg = "rg --vimgrep --no-column" -- use rg for :grep
@@ -80,7 +79,7 @@ opt.textwidth = 80
 opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words
-opt.colorcolumn = { "+1", "+20" } -- relative to textwidth
+opt.colorcolumn = "+1" -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
 opt.backspace = { "start", "eol" } -- restrict insert mode backspace behavior
 
