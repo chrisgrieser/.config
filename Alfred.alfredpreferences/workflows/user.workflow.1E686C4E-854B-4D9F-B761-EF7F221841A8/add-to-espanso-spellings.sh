@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-spell_config="${spell_config/#\~/$HOME}"
+spell_config="$DOTFILE_FOLDER/espanso/match/spelling.yml"
 
 wrong=$(echo "$*" | cut -d" " -f1)
 correct=$(echo "$*" | cut -d" " -f2)

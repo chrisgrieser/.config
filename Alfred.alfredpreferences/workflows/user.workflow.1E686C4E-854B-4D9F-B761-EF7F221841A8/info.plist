@@ -862,30 +862,7 @@ end tell</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>~/.config/espanso/match/spelling.yml
-~/.config/espanso/match/spelling.yml</string>
-				<key>filtermode</key>
-				<integer>2</integer>
-				<key>placeholder</key>
-				<string>spelling.yml</string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>path to spelling espanso file</string>
-			<key>label</key>
-			<string>Spell File</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>spell_config</string>
-		</dict>
-	</array>
+	<array/>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>

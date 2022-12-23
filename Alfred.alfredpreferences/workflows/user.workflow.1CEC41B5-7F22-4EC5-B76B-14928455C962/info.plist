@@ -763,12 +763,14 @@ echo -n "$*"</string>
 	<dict>
 		<key>00C49F8A-E3D2-4751-A79C-A814251AFF30</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
 			<key>note</key>
 			<string>invert display</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>540</real>
 		</dict>
 		<key>0374B2C9-BC32-4520-B8FC-826A3F26C196</key>
 		<dict>
@@ -786,58 +788,72 @@ echo -n "$*"</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>255</real>
 		</dict>
 		<key>0F55C68E-C6D6-4629-B28B-1E323E3CC867</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>410</real>
 		</dict>
 		<key>3427988B-35D1-4145-BB72-8CFF0445F63C</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
 			<key>note</key>
 			<string>default hotkey in macOS settings</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>540</real>
 		</dict>
 		<key>42266127-D884-4B85-92EF-70E28050CCCD</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
 			<real>175</real>
 			<key>ypos</key>
-			<real>945</real>
+			<real>820</real>
 		</dict>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>390</real>
 		</dict>
 		<key>6BF4A116-C3FE-4B51-BFF9-65DE98E2EAD1</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>455</real>
 		</dict>
 		<key>7E7254FB-7761-400D-887B-162AB242F68E</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>315</real>
 		</dict>
 		<key>839D4E68-80B0-4BC1-BFF8-7E5D5367A738</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>175</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>690</real>
 		</dict>
 		<key>8B8645C1-776A-41E4-B093-DF59FEF6D696</key>
 		<dict>
@@ -850,10 +866,12 @@ echo -n "$*"</string>
 		</dict>
 		<key>8FB4FEF7-6EDD-4B19-ABDB-C587A62A3BF9</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>945</real>
+			<real>820</real>
 		</dict>
 		<key>A25DDA0D-DA11-46FF-9CCB-41D3D338B420</key>
 		<dict>
@@ -875,10 +893,12 @@ echo -n "$*"</string>
 		</dict>
 		<key>AA5C04E1-1B2F-4CEA-8B5D-6E4E4ECD0D8B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>390</real>
 		</dict>
 		<key>C129402F-060A-4E14-A919-D21FCE15A4A4</key>
 		<dict>
@@ -896,14 +916,16 @@ echo -n "$*"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>255</real>
 		</dict>
 		<key>D2D919DB-3F73-46E1-88F7-C6743CF222FA</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>690</real>
 		</dict>
 		<key>D6190251-1CA6-4563-B6A9-600A8F0DD885</key>
 		<dict>
@@ -927,10 +949,12 @@ echo -n "$*"</string>
 		</dict>
 		<key>EDEB1C89-49E1-443D-98F5-94AFC17DD1EC</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>945</real>
+			<real>820</real>
 		</dict>
 		<key>F237B22E-6247-4FA6-899C-A9CA938AFED5</key>
 		<dict>
@@ -948,7 +972,7 @@ echo -n "$*"</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>255</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
