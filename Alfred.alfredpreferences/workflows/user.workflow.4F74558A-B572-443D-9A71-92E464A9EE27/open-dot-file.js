@@ -22,9 +22,6 @@ const workArray = app.doShellScript(
 	fd --hidden --no-ignore \
 	-E "Alfred.alfredpreferences" \
 	-E "alacritty/colors/*" \
-	-E "Marta/Themes/*" \
-	-E "packer_compiled.lua" \
-	-E "nvim/packer-snapshots/*" \
 	-E "hammerspoon/Spoons/*" \
 	-E "vale/styles/*/*.yml" \
 	-E "vale/styles/*/*.adoc" \
@@ -35,6 +32,8 @@ const workArray = app.doShellScript(
 	-E "zsh/plugins/*" \
 	-E "*.icns" \
 	-E "*.plist" \
+	-E "*.add" \
+	-E "*.spl" \
 	-E "TODO*" \
 	-E "INFO*" \
 	-E "*.png" \

@@ -186,3 +186,7 @@ matches:
   - trigger: thansk
     replace: thanks
     propagate_case: true
+  - trigger: ejtzt
+    replace: jetzt
+    propagate_casing: true
+    word: true

@@ -4,7 +4,7 @@ local opts = { buffer = true }
 
 -- comment marks more useful than symbols for theme development
 keymap("n", "gs", function()
-	cmd([[silent! lgrep "^(# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
+	cmd([[silent! lgrep "^(\# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
 	telescope.loclist {
 		prompt_title = "Navigation Markers",
 		fname_width = 0,
@@ -32,8 +32,8 @@ keymap("n", "zz", ":syntax sync fromstart<CR>", opts)
 --------------------------------------------------------------------------------
 
 -- Section instead of function movement
-keymap({ "n", "x" }, "<C-j>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
-keymap({ "n", "x" }, "<C-k>", [[/^\/\* <\+ <CR>:nohl<CR>]], opts)
+keymap({ "n", "x" }, "<C-j>", [[/^\/\* <<CR>:nohl<CR>]], opts)
+keymap({ "n", "x" }, "<C-k>", [[?^\/\* <<CR>:nohl<CR>]], opts)
 
 --------------------------------------------------------------------------------
 
