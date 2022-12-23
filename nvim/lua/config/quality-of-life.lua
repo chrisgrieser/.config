@@ -12,11 +12,8 @@ local append = vim.fn.append
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
 
-
 ---runs :normal natively with bang
----@param cmdStr any
-function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
-
+local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 local function leaveVisualMode()
 	-- https://github.com/neovim/neovim/issues/17735#issuecomment-1068525617
@@ -37,7 +34,9 @@ local function getlocalopt(option) return vim.api.nvim_get_option_value(option, 
 ---equivalent to `:setlocal option&`
 ---@param option string
 ---@return any
-local function getglobalopt(option) return vim.api.nvim_get_option_value(option, { scope = "global" }) end
+local function getglobalopt(option)
+	return vim.api.nvim_get_option_value(option, { scope = "global" })
+end
 --------------------------------------------------------------------------------
 
 -- Duplicate line under cursor, and change occurrences of certain words to their
@@ -105,7 +104,7 @@ function M.bettergx()
 	local urlLuaRegex = [[https?:?[^%s]+]] -- lua url regex being simple is okay, since vimregex runs before
 	local prevCur = getCursor(0)
 
-	cmd.normal { "0", bang = true } -- to prioritize URLs in the same line
+	normal("0") -- to prioritize URLs in the same line
 	local urlLineNr = fn.search(urlVimRegex, "wcz")
 	if urlLineNr == 0 then
 		vim.notify("No URL found in this file.", logWarn)
@@ -200,7 +199,7 @@ function M.overscroll(action)
 	if bo.filetype ~= "DressingSelect" then
 		local curLine = lineNo(".")
 		local lastLine = lineNo("$")
-		if (lastLine - curLine) <= vim.wo.scrolloff then cmd.normal { "zz", bang = true } end
+		if (lastLine - curLine) <= vim.wo.scrolloff then normal("zz") end
 	end
 
 	local usedCount = vim.v.count1
@@ -209,24 +208,24 @@ function M.overscroll(action)
 		action = action:gsub("%d+", "")
 		usedCount = tonumber(actionCount) * usedCount
 	end
-	cmd.normal { tostring(usedCount) .. action, bang = true }
+	normal(tostring(usedCount) .. action)
 end
 
 ---toggle wrap, colorcolumn, and hjkl visual/logical maps in one go
 function M.toggleWrap()
 	local wrapOn = getlocalopt("wrap")
-	local opts = {buffer = true}
+	local opts = { buffer = true }
 	if wrapOn then
 		setlocal("wrap", false) -- soft wrap
 		setlocal("colorcolumn", getglobalopt("colorcolumn")) -- deactivate ruler
 
 		local del = vim.keymap.del
-		del({"n", "x"}, "H", opts)
-		del({"n", "x"}, "L", opts)
-		del({"n", "x"}, "J", opts)
-		del({"n", "x"}, "K", opts)
-		del({"n", "x"}, "k", opts)
-		del({"n", "x"}, "j", opts)
+		del({ "n", "x" }, "H", opts)
+		del({ "n", "x" }, "L", opts)
+		del({ "n", "x" }, "J", opts)
+		del({ "n", "x" }, "K", opts)
+		del({ "n", "x" }, "k", opts)
+		del({ "n", "x" }, "j", opts)
 	else
 		setlocal("wrap", true) -- soft wrap
 		setlocal("colorcolumn", "") -- deactivate ruler
@@ -254,24 +253,21 @@ function M.pasteDifferently()
 	regContent = trim(regContent)
 
 	fn.setreg(reg, regContent, targetRegType)
-	cmd.normal { '"' .. reg .. "p", bang = true }
-	if targetRegType == "V" then
-		cmd.normal { "==", bang = true } -- indent the new paste
-	end
+	normal('"' .. reg .. "p")
+	if targetRegType == "V" then normal("==") end
 end
 
 --------------------------------------------------------------------------------
 
 ---log statement for variable under cursor, similar to the 'turbo console log'
 ---VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
----@param addLineNum? boolean default: false
-function M.quicklog(addLineNum)
+function M.quicklog()
 	local varname
 	if fn.mode() == "n" then
 		varname = fn.expand("<cword>")
 	else
 		local prevReg = fn.getreg("z")
-		cmd.normal { '"zy', bang = true }
+		normal('"zy')
 		varname = fn.getreg("z")
 		fn.setreg("z", prevReg)
 	end
@@ -279,7 +275,6 @@ function M.quicklog(addLineNum)
 	local logStatement
 	local ft = bo.filetype
 	local lnStr = ""
-	if addLineNum then lnStr = "L" .. tostring(lineNo(".")) .. " " end
 
 	if ft == "lua" then
 		logStatement = 'print("' .. lnStr .. varname .. ':", ' .. varname .. ")"
@@ -297,7 +292,7 @@ function M.quicklog(addLineNum)
 	end
 
 	append(".", logStatement)
-	cmd.normal { "j==", bang = true }
+	normal("j==")
 end
 
 ---adds simple "beep" log statement to check whether conditionals have been
@@ -320,7 +315,7 @@ function M.beeplog()
 	end
 
 	append(".", logStatement)
-	cmd.normal { "j==", bang = true }
+	normal("j==")
 end
 
 ---Remove all log statements in the current buffer
@@ -360,35 +355,35 @@ end
 function M.moveLineDown()
 	if lineNo(".") == lineNo("$") then return end
 	cmd([[. move +1]])
-	if bo.filetype ~= "yaml" then cmd([[normal! ==]]) end
+	if bo.filetype ~= "yaml" then normal("==") end
 end
 
 function M.moveLineUp()
 	if lineNo(".") == 1 then return end
 	cmd([[. move -2]])
-	if bo.filetype ~= "yaml" then cmd([[normal! ==]]) end
+	if bo.filetype ~= "yaml" then normal("==") end
 end
 
 function M.moveCharRight()
 	if colNo(".") >= colNo("$") - 1 then return end
-	cmd([[:normal! "zx"zp]])
+	normal('"zx"zp')
 end
 
 function M.moveCharLeft()
 	if colNo(".") == 1 then return end
-	cmd([[:normal! "zdh"zph]])
+	normal('"zdh"zph')
 end
 
 function M.moveSelectionDown()
 	leaveVisualMode()
 	cmd([['<,'> move '>+1]])
-	cmd([[normal! gv=gv]])
+	normal("gv=gv")
 end
 
 function M.moveSelectionUp()
 	leaveVisualMode()
 	cmd([['<,'> move '<-2]])
-	cmd([[normal! gv=gv]])
+	normal("gv=gv")
 end
 
 function M.moveSelectionRight() cmd([[normal! "zx"zpgvlolo]]) end
