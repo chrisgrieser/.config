@@ -8,26 +8,47 @@ local opts = { buffer = true, silent = true }
 -- spellcheck
 setlocal("spell", true)
 
--- hack to make lists auto-continue via Return in Insert & o in normal mode
+-- HACK to make lists auto-continue via Return in Insert & o in normal mode
 -- i.e. replaces bullet.vim based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
 setlocal("comments", "b:-")
 local foOpts = getlocalopt("formatoptions"):gsub("[ct]", "") .. "ro"
 setlocal("formatoptions", foOpts)
 
---------------------------------------------------------------------------------
--- link textobj
-keymap({ "o", "x" }, "il", function() varTextObj.mdlink(true) end, { desc = "inner md link textobj" })
-keymap({ "o", "x" }, "al", function() varTextObj.mdlink(false) end, { desc = "outer md link textobj" })
-
--- code block textobj
-keymap({ "o", "x" }, "iC", function() varTextObj.mdFencedCodeBlock(true) end, { desc = "inner md code block textobj" })
-keymap({ "o", "x" }, "aC", function() varTextObj.mdFencedCodeBlock(false) end, { desc = "outer md code block textobj" })
-
---------------------------------------------------------------------------------
-
 -- decrease line length without zen mode plugins (which unfortunately remove
 -- statuslines and stuff)
 setlocal("signcolumn", "yes:9")
+
+-- enable wrapping lines
+if not wo.wrap then qol.toggleWrap() end
+
+--------------------------------------------------------------------------------
+-- link textobj
+keymap(
+	{ "o", "x" },
+	"il",
+	function() varTextObj.mdlink(true) end,
+	{ desc = "inner md link textobj" }
+)
+keymap(
+	{ "o", "x" },
+	"al",
+	function() varTextObj.mdlink(false) end,
+	{ desc = "outer md link textobj" }
+)
+
+-- code block textobj
+keymap(
+	{ "o", "x" },
+	"iC",
+	function() varTextObj.mdFencedCodeBlock(true) end,
+	{ desc = "inner md code block textobj" }
+)
+keymap(
+	{ "o", "x" },
+	"aC",
+	function() varTextObj.mdFencedCodeBlock(false) end,
+	{ desc = "outer md code block textobj" }
+)
 
 --------------------------------------------------------------------------------
 

@@ -206,12 +206,14 @@ function M.overscroll(action)
 	cmd.normal { tostring(usedCount) .. action, bang = true }
 end
 
-function M.wrapSwitch()
+---toggle wrap, colorcolumn, and hjkl visual/logical maps in one go
+function M.toggleWrap()
 	local wrapOn = getlocalopt("wrap")
 	local opts = {buffer = true}
 	if wrapOn then
 		setlocal("wrap", false) -- soft wrap
 		setlocal("colorcolumn", getglobalopt("colorcolumn")) -- deactivate ruler
+
 		local del = vim.keymap.del
 		del({"n", "x"}, "H", opts)
 		del({"n", "x"}, "L", opts)
@@ -222,6 +224,8 @@ function M.wrapSwitch()
 	else
 		setlocal("wrap", true) -- soft wrap
 		setlocal("colorcolumn", "") -- deactivate ruler
+
+		local keymap = vim.keymap.set
 		keymap({ "n", "x" }, "H", "g^", opts)
 		keymap({ "n", "x" }, "L", "g$", opts)
 		keymap({ "n", "x" }, "J", function() M.overscroll("6gj") end, opts)
