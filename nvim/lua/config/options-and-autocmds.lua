@@ -10,7 +10,7 @@ opt.shadafile = vimDataDir .. "main.shada"
 --------------------------------------------------------------------------------
 -- Undo
 opt.undofile = true -- enable persistent undo history
-opt.undolevels = 4000 -- more undos being saved
+opt.undolevels = 2000 -- more undos being saved
 
 local undopointChars = { "<Space>", ".", ",", ";" }
 for _, char in pairs(undopointChars) do
@@ -83,6 +83,14 @@ opt.colorcolumn = "+1" -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
 opt.backspace = { "start", "eol" } -- restrict insert mode backspace behavior
 
+-- status bar & cmdline
+opt.history = 250 -- reduce noise for command history search
+opt.cmdheight = 0
+
+-- Character groups
+opt.iskeyword:append("-") -- don't treat "-" as word boundary, useful e.g. for kebab-case-variables
+-- opt.nrformats = "alpha" -- <C-a> and <C-x> also work on letters
+
 -- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
 -- overwritten by the ftplugins having the o option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
@@ -96,15 +104,7 @@ autocmd("FileType", {
 	end,
 })
 
--- Character groups
-opt.iskeyword:append("-") -- don't treat "-" as word boundary, useful e.g. for kebab-case-variables
--- opt.nrformats = "alpha" -- <C-a> and <C-x> also work on letters
-
 --------------------------------------------------------------------------------
-
--- FILES & SAVING
-opt.autochdir = true -- always current directory
-opt.confirm = true -- ask instead of aborting
 
 augroup("autosave", {})
 autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave", "TextChanged" }, {
@@ -120,10 +120,6 @@ autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave", "TextChanged" },
 })
 
 --------------------------------------------------------------------------------
-
--- status bar & cmdline
-opt.history = 250 -- reduce noise for command history search
-opt.cmdheight = 0
 
 --------------------------------------------------------------------------------
 -- FOLDING
@@ -205,7 +201,7 @@ autocmd("BufWinEnter", {
 	callback = function()
 		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
 		cmd([[silent! loadview 1]]) -- needs silent to avoid error for documents that do not have a view yet (opening first time)
-		normal("^") -- to scroll to the left on start
+		normal("0^") -- to scroll to the left on start
 	end,
 })
 
