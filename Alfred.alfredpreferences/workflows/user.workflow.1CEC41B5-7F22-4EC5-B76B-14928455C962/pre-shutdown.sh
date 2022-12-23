@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 # shellcheck disable=SC2181
-cd ~/dotfiles/ || exit 1
+cd "$DOTFILE_FOLDER" || exit 1
 if [[ -n "$(git status --porcelain)" ]] ; then
 	echo "📴 pre-shutdown-sync dotfiles" >> ~'/dotfiles/hammerspoon/logs/sync.log'
 	zsh ~"/dotfiles/git-dotfile-sync.sh" &> /dev/null
@@ -10,7 +10,7 @@ if [[ -n "$(git status --porcelain)" ]] ; then
 	fi
 fi
 
-cd ~"/Main Vault/" || exit 1
+cd "$VAULT_PATH" || exit 1
 if [[ -n "$(git status --porcelain)" ]] ; then
 	echo "📴 pre-shutdown-sync vault" >> ~'/dotfiles/hammerspoon/logs/sync.log'
 	zsh ~"/Main Vault/Meta/git-vault-sync.sh" &> /dev/null
