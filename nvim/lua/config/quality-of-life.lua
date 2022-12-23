@@ -12,6 +12,12 @@ local append = vim.fn.append
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
 
+
+---runs :normal natively with bang
+---@param cmdStr any
+function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
+
+
 local function leaveVisualMode()
 	-- https://github.com/neovim/neovim/issues/17735#issuecomment-1068525617
 	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
