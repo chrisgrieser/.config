@@ -16,7 +16,7 @@ if [[ "$DEVICE_NAME" =~ "Office" ]]; then
 	LINES=22
 	FONT_SIZE=23
 else
-	X=550
+	X=900
 	Y=100
 	LINES=28
 	FONT_SIZE=24

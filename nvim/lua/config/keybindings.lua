@@ -89,7 +89,6 @@ keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 -- Leap & Flit
 keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
 keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
-require("flit").setup { multiline = false }
 
 --------------------------------------------------------------------------------
 
@@ -420,7 +419,7 @@ end)
 keymap("n", "<leader>os", ":set spell!<CR>")
 keymap("n", "<leader>or", ":set relativenumber!<CR>")
 keymap("n", "<leader>on", ":set number!<CR>")
-keymap("n", "<leader>ow", ":set wrap!<CR>")
+keymap("n", "<leader>ow", qol.wrapSwitch)
 
 --------------------------------------------------------------------------------
 

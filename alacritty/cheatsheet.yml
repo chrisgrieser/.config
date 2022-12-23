@@ -2,6 +2,7 @@
 
 # colors defined via cht.sh color scheme
 window:
+  # position defined dynamically in alfred command
   dimensions:
     columns: 75
     lines: 30

@@ -25,16 +25,6 @@ keymap({ "o", "x" }, "aC", function() varTextObj.mdFencedCodeBlock(false) end, {
 
 --------------------------------------------------------------------------------
 
--- wrapping and related options
-setlocal("wrap", true) -- soft wrap
-setlocal("colorcolumn", "") -- deactivate ruler
-keymap({ "n", "x" }, "H", "g^", opts)
-keymap({ "n", "x" }, "L", "g$", opts)
-keymap({ "n", "x" }, "J", function() qol.overscroll("6gj") end, opts)
-keymap({ "n", "x" }, "K", "6gk", opts)
-keymap({ "n", "x" }, "k", "gk", opts)
-keymap({ "n", "x" }, "j", function() qol.overscroll("gj") end, opts)
-
 -- decrease line length without zen mode plugins (which unfortunately remove
 -- statuslines and stuff)
 setlocal("signcolumn", "yes:9")

@@ -3,32 +3,23 @@ local opts = { buffer = true }
 --------------------------------------------------------------------------------
 
 -- comment marks more useful than symbols for theme development
-keymap(
-	"n",
-	"gs",
-	function()
-		telescope.current_buffer_fuzzy_find {
-			default_text = "/* < ",
-			prompt_prefix = " ",
-			prompt_title = "Navigation Markers",
-		}
-	end,
-	{ desc = "Search Navigation Markers", buffer = true }
-)
+keymap("n", "gs", function()
+	cmd([[silent! lgrep "^(# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
+	telescope.loclist {
+		prompt_title = "Navigation Markers",
+		fname_width = 0,
+	}
+end, { desc = "Search Navigation Markers", buffer = true })
 
 -- search only for variables
-keymap(
-	"n",
-	"gS",
-	function()
-		telescope.current_buffer_fuzzy_find {
-			default_text = "--",
-			prompt_prefix = " ",
-			prompt_title = "CSS Variables",
-		}
-	end,
-	{ desc = "Search CSS Variables", buffer = true }
-)
+keymap("n", "gS", function()
+	cmd([[silent! lgrep "^\s*--" %]]) -- riggrep-search for css variables
+	telescope.loclist {
+		prompt_prefix = " ",
+		prompt_title = "CSS Variables",
+		fname_width = 0,
+	}
+end, { desc = "Search CSS Variables", buffer = true })
 
 --------------------------------------------------------------------------------
 
@@ -92,5 +83,5 @@ keymap("n", "qw", function()
 	local colNum = #hr[2] + 2
 	setCursor(0, { lineNum, colNum })
 	cmd.startinsert { bang = true }
-end, {buffer = true, desc = "insert comment-heading"})
+end, { buffer = true, desc = "insert comment-heading" })
 ---@diagnostic enable: undefined-field, param-type-mismatch

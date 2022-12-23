@@ -151,7 +151,7 @@ end
 
 function twitterrificAction(type)
 	local previousApp = frontAppName()
-	openIfNotRunning("Twitterrific")
+	openApp("Twitterrific")
 	local twitterrific = app("Twitterrific")
 	twitterrific:activate() -- needs activation, cause sending to app in background doesn't work w/ cmd
 

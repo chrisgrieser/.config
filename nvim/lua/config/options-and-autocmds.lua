@@ -25,6 +25,10 @@ opt.updatetime = 250 -- affects current symbol highlight (treesitter-refactor) a
 opt.showmatch = true
 opt.smartcase = true
 opt.ignorecase = true
+opt.inccommand = "split" -- for substitute, show off-screen matches in preview as well
+
+-- Quickfix / Locaton List
+opt.grepprg = "rg --vimgrep --no-column" -- use rg for :grep
 
 -- Popups / Floating Windows
 opt.pumheight = 15 -- max number of items in popup menu
@@ -104,13 +108,11 @@ opt.autochdir = true -- always current directory
 opt.confirm = true -- ask instead of aborting
 
 augroup("autosave", {})
-autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
+autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave", "TextChanged" }, {
 	group = "autosave",
-	pattern = "?*",
+	pattern = "?*", -- pattern required
 	callback = function()
-		if not bo.modifiable then return end
-		ignoredFt = { "TelescopePrompt" }
-		if vim.tbl_contains(ignoredFt, bo.filetype) then return end
+		if not bo.modifiable or bo.filetype == "TelescopePrompt" then return end
 
 		-- safety net to not save file in wrong folder when autochdir is not reliable
 		local curFile = expand("%:p")
@@ -170,7 +172,7 @@ opt.foldenable = true
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 
--- restrict folding amount
+-- restrict folding amount for batch-folding commands like zM
 opt.foldminlines = 3
 opt.foldnestmax = 1
 
@@ -188,21 +190,22 @@ local ignoredFts = {
 	"text",
 	"TelescopePrompt",
 	"gitcommit",
-	"",
 }
 augroup("rememberCursorAndFolds", {})
 autocmd("BufWinLeave", {
 	group = "rememberCursorAndFolds",
+	pattern = "?*", -- pattern required, otherwise does not trigger
 	callback = function()
 		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
-		cmd.mkview()
+		cmd.mkview(1)
 	end,
 })
 autocmd("BufWinEnter", {
 	group = "rememberCursorAndFolds",
+	pattern = "?*",
 	callback = function()
 		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
-		cmd[[silent! loadview!]] -- needs silent to avoid error for documents that do not have a view yet (opening first time)
+		cmd([[silent! loadview 1]]) -- needs silent to avoid error for documents that do not have a view yet (opening first time)
 		normal("^") -- to scroll to the left on start
 	end,
 })
@@ -213,7 +216,8 @@ autocmd("BufWinEnter", {
 -- apply templates for any filetype named `./templates/skeleton.{ft}`
 augroup("Templates", {})
 local skeletionPath = fn.stdpath("config") .. "/templates"
-local filetypeList = fn.system([[ls "]] .. skeletionPath .. [[/skeleton."* | xargs basename | cut -d. -f2]])
+local filetypeList =
+	fn.system([[ls "]] .. skeletionPath .. [[/skeleton."* | xargs basename | cut -d. -f2]])
 local ftWithSkeletons = split(filetypeList, "\n")
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end

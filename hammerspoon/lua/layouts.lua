@@ -18,7 +18,9 @@ local function alacrittyFontSize(size)
 end
 
 local function showAllSidebars()
-	if appIsRunning("Highlights") then app("Highlights"):selectMenuItem { "View", "Show Sidebar" } end
+	if appIsRunning("Highlights") then
+		app("Highlights"):selectMenuItem { "View", "Show Sidebar" }
+	end
 	openLinkInBackground("obsidian://sidebar?showLeft=false&showRight=true")
 	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
@@ -34,10 +36,10 @@ end
 ---@param display hs.screen
 ---@param apps string[]
 ---@return table
-local function layoutCreate(pos, display, apps)
-	local out = {}	
+local function createLayout(pos, display, apps)
+	local out = {}
 	for _, app in pairs(apps) do
-		table.insert(out, {app, nil, display, pos, nil, nil})	
+		table.insert(out, { app, nil, display, pos, nil, nil })
 	end
 	return out
 end
@@ -96,8 +98,8 @@ function homeModeLayout()
 
 	dockSwitcher("home")
 
-	local side = layoutCreate(iMacDisplay, pseudoMaximized, {"Twitterrific"})
-	local main = layoutCreate(iMacDisplay, pseudoMaximized, {
+	local side = createLayout(iMacDisplay, pseudoMaximized, { "Twitterrific" })
+	local main = createLayout(iMacDisplay, pseudoMaximized, {
 		"Brave Browser",
 		"Highlights",
 		"Neovide",
@@ -111,7 +113,7 @@ function homeModeLayout()
 		"alacritty",
 		"Alacritty",
 	})
-	useLayout (hs.fnutils.concat(main, side))
+	useLayout(hs.fnutils.concat(main, side))
 
 	showAllSidebars()
 	runWithDelays({ 0.5, 1 }, function() app("Drafts"):activate() end)
@@ -150,29 +152,23 @@ function officeModeLayout()
 
 	local top = { x = 0, y = 0.015, w = 1, h = 0.485 }
 	local bottom = { x = 0, y = 0.5, w = 1, h = 0.5 }
-	local sideTop = layoutCreate(top, screen2, {"TweetDeck"})
-	local sideBottom = layoutCreate(bottom, screen2, {"Discord", "Slack"})
-	local main = 
-	officeLayout = {
-		-- screen 2
-		{ "TweetDeck", nil, screen2, top, nil, nil },
-		{ "Discord", nil, screen2, bottom, nil, nil },
-		{ "Slack", nil, screen2, bottom, nil, nil },
-		-- screen 1
-		{ "Brave Browser", nil, screen1, maximized, nil, nil },
-		{ "Obsidian", nil, screen1, maximized, nil, nil },
-		{ "Neovide", nil, screen1, maximized, nil, nil },
-		{ "neovide", nil, screen1, maximized, nil, nil },
-		{ "Drafts", nil, screen1, maximized, nil, nil },
-		{ "Mimestream", nil, screen1, maximized, nil, nil },
-		{ "alacritty", nil, screen1, maximized, nil, nil },
-		{ "Alacritty", nil, screen1, maximized, nil, nil },
-		{ "Warp", nil, screen1, maximized, nil, nil },
-	}
+	local sideTop = createLayout(top, screen2, { "TweetDeck" })
+	local sideBottom = createLayout(bottom, screen2, { "Discord", "Slack" })
+	local main = createLayout(maximized, screen1, {
+		"Brave Browser",
+		"Obsidian",
+		"Neovide",
+		"neovide",
+		"Drafts",
+		"Mimestream",
+		"alacritty",
+		"Alacritty",
+		"Warp",
+	})
+	local officeLayout = hs.fnutils.concat(sideTop, sideBottom, main)
+	runWithDelays({ 0, 0.3 }, function() useLayout(officeLayout) end)
 
-	useLayout(officeLayout)
 	showAllSidebars()
-	runWithDelays(0.3, function() useLayout(officeLayout) end)
 	runWithDelays(0.5, function() app("Drafts"):activate() end)
 
 	-- wait until sync is finished, to avoid merge conflict
@@ -226,24 +222,25 @@ local function motherHomeModeLayout()
 		"IINA",
 		"Twitch",
 	}
-
 	privateClosers()
 
 	alacrittyFontSize(25)
 	dockSwitcher("home")
 
-	local motherHomeLayout = {
-		{ "Twitterrific", nil, iMacDisplay, toTheSide, nil, nil },
-		{ "Brave Browser", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Warp", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Slack", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Discord", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Obsidian", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Drafts", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Mimestream", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil },
-		{ "Alacritty", nil, iMacDisplay, pseudoMaximized, nil, nil },
-	}
+	local side = createLayout(toTheSide, iMacDisplay, { "Twitterrific" })
+	local main = createLayout(pseudoMaximized, iMacDisplay, {
+		"Twitterrific",
+		"Brave Browser",
+		"Warp",
+		"Slack",
+		"Discord",
+		"Obsidian",
+		"Drafts",
+		"Mimestream",
+		"alacritty",
+		"Alacritty",
+	})
+	local motherHomeLayout = hs.fnutils.concat(main, side)
 
 	runWithDelays({ 0, 0.1, 0.2 }, function() useLayout(motherHomeLayout) end)
 	showAllSidebars()
