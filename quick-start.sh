@@ -5,7 +5,7 @@
 # - SSH setup
 
 #-------------------------------------------------------------------------------
-# ESSENTIAL
+# ESSENTIALS
 
 # ask for credentials upfront
 sudo -v
@@ -30,6 +30,7 @@ defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from savi
 # DOTFILES / VAULT
 
 cd ~
+[[ -e ~/.config ]] && rm -rfv ~/.config
 git clone --recurse-submodules git@github.com:chrisgrieser/.config.git
 cd ~/.config
 git submodule foreach git checkout main
@@ -39,7 +40,7 @@ zsh "$HOME/dotfiles/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
 # REQUIRED: SSH setup
 cd ~
-git clone git@github.com:chrisgrieser/main-vault-backup.git
+git clone git@github.com:chrisgrieser/main-vault.git
 git clone git@github.com:chrisgrieser/.password-store.git
 
 #-------------------------------------------------------------------------------
@@ -47,9 +48,9 @@ git clone git@github.com:chrisgrieser/.password-store.git
 DOTFILE_FOLDER="$HOME/.config/"
 
 # zsh
-[[ -e ~/.zshrc ]] && rm -rf ~/.zshrc
-[[ -e ~/.zprofile ]] && rm -rf ~/.zprofile
-[[ -e ~/.zshenv ]] && rm -rf ~/.zshenv
+[[ -e ~/.zshrc ]] && rm -fv ~/.zshrc
+[[ -e ~/.zprofile ]] && rm -fv ~/.zprofile
+[[ -e ~/.zshenv ]] && rm -fv ~/.zshenv
 ln -sf "$DOTFILE_FOLDER/zsh/.zshrc" ~
 ln -sf "$DOTFILE_FOLDER/zsh/.zprofile" ~
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~

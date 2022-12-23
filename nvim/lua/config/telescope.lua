@@ -16,20 +16,22 @@ require("telescope").setup {
 		path_display = { "tail" },
 		file_ignore_patterns = {
 			"%.DS_Store", -- Mac system file
-			"%.git/",
 			"%.git", -- submodules
-			"%.spl", -- vim spell files
-			"%.log",
 			"%[No Name%]", -- new files / sometimes folders (netrw)
 			"/$", -- ignore folders (netrw)
-			"node_modules/", -- js
+			"node_modules/", -- node
 			"venv/", -- python
 			"lib/", -- python
+			"%.spl", -- vim spell files
+			"%.log",
 			"%.png",
+			"%.icns",
 			"%.zip",
-			"%.pxd", -- Pixelmator images
+			"%.ttf", -- fonts
+			"%.pxd", -- Pixelmator
 			"%.spoon", -- Hammerspoon
-			"%.plist", -- Alfred Config Data
+			"%.plist", -- Alfred
+			"%.data", -- Alfred
 			"%.string",
 		},
 		mappings = {

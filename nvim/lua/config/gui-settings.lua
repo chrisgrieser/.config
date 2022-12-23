@@ -4,12 +4,12 @@ require("config/utils")
 
 -- font size dependent on device
 local device = fn.hostname()
-if device:find("iMac") then
-	g.neovide_scale_factor = 1
+if device:find("Mother") then
+	g.neovide_scale_factor = 0.94
 elseif device:find("eduroam") or device:find("mini") then
 	g.neovide_scale_factor = 0.92
-elseif device:find("Mother") then
-	g.neovide_scale_factor = 0.9
+elseif device:find("iMac") then
+	g.neovide_scale_factor = 1
 end
 
 opt.guifont = "JetBrainsMonoNL Nerd Font:h26"
@@ -30,9 +30,11 @@ end)
 
 -- Behavior
 g.neovide_confirm_quit = false
-g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
 g.neovide_hide_mouse_when_typing = true
 g.neovide_remember_window_size = true
+
+-- Keymaps
+g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
 g.neovide_input_macos_alt_is_meta = true -- makes `opt` usable on macOS
 keymap("i", "<M-.>", "…") -- needed when alt is turned into meta key
 keymap("i", "<M-->", "–")
