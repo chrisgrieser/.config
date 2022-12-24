@@ -45,6 +45,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>6BE47B31-5477-4429-90B6-3AE77A0233EA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>05B2913E-95E3-4E72-A4C1-93E1A7A0C889</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>9B285645-6D02-442F-8EAC-6DB1EBBF0AD0</key>
 		<array>
 			<dict>
@@ -188,6 +201,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>C35BAC57-E3D9-4FCA-8B09-2C81C2D8D7B9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D59AEC30-AFEC-48B3-92DE-0719210E8506</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6BE47B31-5477-4429-90B6-3AE77A0233EA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -469,6 +495,27 @@ return "{query}"</string>
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alfred preference app</string>
+				<key>subtext</key>
+				<string>apply custom app icon</string>
+				<key>text</key>
+				<string>⚙️ Alfred Preference.app</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D59AEC30-AFEC-48B3-92DE-0719210E8506</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
 				<string>icon</string>
@@ -483,6 +530,23 @@ return "{query}"</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>DF4BD673-F9B0-471E-9562-239EA93A628A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>Alfred Preferences</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>6BE47B31-5477-4429-90B6-3AE77A0233EA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -828,7 +892,7 @@ return "{query}"</string>
 			<key>xpos</key>
 			<real>605</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>440</real>
 		</dict>
 		<key>0951FDD8-D9E2-4DC3-8844-58CF1AABE48C</key>
 		<dict>
@@ -903,6 +967,13 @@ return "{query}"</string>
 			<real>200</real>
 			<key>ypos</key>
 			<real>475</real>
+		</dict>
+		<key>6BE47B31-5477-4429-90B6-3AE77A0233EA</key>
+		<dict>
+			<key>xpos</key>
+			<real>565</real>
+			<key>ypos</key>
+			<real>330</real>
 		</dict>
 		<key>7067A0A4-D9DA-4775-BECD-24C3249B29E2</key>
 		<dict>
@@ -1012,7 +1083,7 @@ return "{query}"</string>
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>440</real>
 		</dict>
 		<key>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</key>
 		<dict>
@@ -1032,6 +1103,17 @@ return "{query}"</string>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
+		<key>D59AEC30-AFEC-48B3-92DE-0719210E8506</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>icon for Alfred prefs</string>
+			<key>xpos</key>
+			<real>425</real>
+			<key>ypos</key>
+			<real>300</real>
+		</dict>
 		<key>D6F7AD54-C4BD-4B8F-8D32-D5680EECB192</key>
 		<dict>
 			<key>colorindex</key>
@@ -1039,7 +1121,7 @@ return "{query}"</string>
 			<key>xpos</key>
 			<real>765</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>440</real>
 		</dict>
 		<key>DF4BD673-F9B0-471E-9562-239EA93A628A</key>
 		<dict>
@@ -1071,21 +1153,6 @@ return "{query}"</string>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
-	<key>variables</key>
-	<dict>
-		<key>custom_icon_folder</key>
-		<string>~/.config/custom-app-icons</string>
-		<key>icon_folder</key>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Icon Collection</string>
-		<key>pwa_folder</key>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Brave Browser Apps.localized/</string>
-	</dict>
-	<key>variablesdontexport</key>
-	<array>
-		<string>pwa_folder</string>
-		<string>custom_icon_folder</string>
-		<string>icon_folder</string>
-	</array>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>

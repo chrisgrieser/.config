@@ -4,9 +4,9 @@ return {
 	{"williamboman/mason.nvim", dependencies = "RubixDev/mason-update-all"},
 
 	-- Themes
-	-- "savq/melange", -- like Obsidian's Primary color scheme
 	"folke/tokyonight.nvim",
 	"EdenEast/nightfox.nvim",
+	-- "savq/melange", -- like Obsidian's Primary color scheme
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "rebelot/kanagawa.nvim",
 
@@ -61,7 +61,6 @@ return {
 
 	-- DAP
 	{"mfussenegger/nvim-dap",
-		lazy = true,
 		dependencies = {
 			"jayp0521/mason-nvim-dap.nvim",
 			"theHamsta/nvim-dap-virtual-text",
@@ -98,6 +97,7 @@ return {
 		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
 		cmd = {"ChatGPTEditWithInstructions", "ChatGPT"}
 	},
+	{ "dense-analysis/neural", dependencies = "MunifTanjim/nui.nvim" },
 
 	-- Appearance
 	"lukas-reineke/indent-blankline.nvim", -- indentation guides
