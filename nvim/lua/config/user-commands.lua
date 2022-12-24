@@ -9,8 +9,14 @@ newCommand("SwapDeleteAll", function(_)
 	vim.notify("Deleted:\n"..out)
 end, {})
 
--- `:DataDir` opens the nvim data path, where mason and lazy install their stuff
-newCommand("DataDir", function(_)
+-- `:ViewDir` opens the nvim view directory
+newCommand("ViewDir", function(_)
+	local viewdir = expand(opt.viewdir:get())
+	fn.system('open "' .. viewdir .. '"')
+end, {})
+
+-- `:PluginDir` opens the nvim data path, where mason and lazy install their stuff
+newCommand("PluginDir", function(_)
 	fn.system('open "' .. fn.stdpath("data") .. '"')
 end, {})
 
