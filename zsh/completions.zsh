@@ -51,7 +51,7 @@ setopt MENU_COMPLETE
 
 # Lazy loading to decrease loading time:
 # https://frederic-hemberger.de/notes/shell/speed-up-initial-zsh-startup-with-lazy-loading/)
-if which npm &> /dev/null; then
+if command -v npm &> /dev/null; then
 	npm() {
 		unfunction "$0" # Remove this function, subsequent calls will execute 'kubectl' directly
 		$0 "$@" # Execute binary
@@ -59,7 +59,7 @@ if which npm &> /dev/null; then
 	}
 fi
 
-if which pip3 &> /dev/null; then
+if command -v pip3 &> /dev/null; then
 	pip3(){
 		unfunction "$0"
 		$0 "$@"
@@ -67,7 +67,7 @@ if which pip3 &> /dev/null; then
 	}
 fi
 
-if which pandoc &> /dev/null; then
+if command -v pandoc &> /dev/null; then
 	pandoc(){
 		unfunction "$0"
 		$0 "$@"

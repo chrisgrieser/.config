@@ -59,7 +59,7 @@ sketchybar --bar \
 	label.font="Recursive:Medium:15.5" \
 	label.color="$FONT_COLOR" \
 	label.padding_left=1 \
-	label.padding_right=6 \
+	label.padding_right=9 \
 	icon.padding_left=1 \
 	icon.padding_right=2 \
 	y_offset="$ITEM_Y_OFFSET" \
@@ -71,10 +71,10 @@ sketchybar --bar \
 	label.padding_right=3 \
 	--add alias "$cpu_bar_item" left \
 	--set "$cpu_bar_item" \
-	width=30 \
+	width=38 \
 	--add alias "$network_bar_item" left \
 	--set "$network_bar_item" \
-	width=40 \
+	width=45 \
 	--add item weather left \
 	--set weather update_freq=1800 \
 	script="$PLUGIN_DIR/weather.sh" \
