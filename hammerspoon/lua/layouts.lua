@@ -3,11 +3,13 @@ require("lua.window-management")
 require("lua.private")
 local useLayout = hs.layout.apply
 --------------------------------------------------------------------------------
--- HELPERS
+
+---@param targetMode string
 local function dockSwitcher(targetMode)
 	hs.execute("zsh ./helpers/dock-switching/dock-switcher.sh --load " .. targetMode)
 end
 
+---@param size integer
 local function alacrittyFontSize(size)
 	hs.execute("VALUE=" .. tostring(size) .. [[
 		ALACRITTY_CONFIG="$HOME/.config/alacritty/alacritty.yml"
@@ -35,7 +37,7 @@ end
 ---@param pos hs.geometry
 ---@param display hs.screen
 ---@param apps string[]
----@return table
+---@return table to be used by hs.layout.apply
 local function createLayout(pos, display, apps)
 	local out = {}
 	for _, app in pairs(apps) do
@@ -79,7 +81,7 @@ function homeModeLayout()
 	iMacDisplay:setBrightness(brightness)
 
 	holeCover()
-	if not (isWeekend()) then openApp("Slack") end
+	if not isWeekend() then openApp("Slack") end
 	openApp {
 		"Discord",
 		"Mimestream",
@@ -136,9 +138,6 @@ function homeModeLayout()
 end
 
 function officeModeLayout()
-	local screen1 = hs.screen.allScreens()[1]
-	local screen2 = hs.screen.allScreens()[2]
-
 	openApp {
 		"Discord",
 		"Mimestream",
@@ -150,6 +149,8 @@ function officeModeLayout()
 	}
 	dockSwitcher("office") -- separate layout to include "TweetDeck"
 
+	local screen1 = hs.screen.allScreens()[1]
+	local screen2 = hs.screen.allScreens()[2]
 	local top = { x = 0, y = 0.015, w = 1, h = 0.485 }
 	local bottom = { x = 0, y = 0.5, w = 1, h = 0.5 }
 	local sideTop = createLayout(top, screen2, { "TweetDeck" })
@@ -181,10 +182,12 @@ function officeModeLayout()
 end
 
 local function motherMovieModeLayout()
-	if not (isProjector()) then return end
 	iMacDisplay:setBrightness(0)
 
-	runWithDelays({ 0, 1 }, function() openApp("YouTube") end)
+	runWithDelays({ 0, 1 }, function()
+		openApp("YouTube")
+		quitApp("Discord")
+	end)
 	quitApp {
 		"Obsidian",
 		"Drafts",

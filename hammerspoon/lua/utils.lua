@@ -1,4 +1,3 @@
-hyper = {"cmd", "alt", "ctrl", "shift"}
 hotkey = hs.hotkey.bind
 alert = hs.alert.show
 keystroke = hs.eventtap.keyStroke
@@ -8,18 +7,22 @@ app = hs.application
 applescript = hs.osascript.applescript
 uriScheme = hs.urlevent.bind
 pw = hs.pathwatcher.new
-I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
 
+hyper = {"cmd", "alt", "ctrl", "shift"}
+I = hs.inspect -- to inspect tables in the console
 home = os.getenv("HOME")
+
+--------------------------------------------------------------------------------
 
 ---trims whitespace from string
 ---@param str string
 ---@return string
 function trim(str)
 	if not(str) then return "" end
-	return (str:gsub("^%s*(.-)%s*$", "%1"))
+	str = str:gsub("^%s*(.-)%s*$", "%1")
+	return str
 end
 
 --------------------------------------------------------------------------------
@@ -82,8 +85,8 @@ function notify(text)
 end
 
 ---Whether the current time is between startHour & endHour
----@param startHour integer 13.5 = 13:30
----@param endHour integer
+---@param startHour number, e.g. 13.5 = 13:30
+---@param endHour number
 ---@return boolean
 function betweenTime(startHour, endHour)
 	local currentHour = hs.timer.localTime() / 60 / 60
@@ -123,7 +126,7 @@ function quitApp(appNames)
 	end
 end
 
--- won't work with Chromium browsers due to bug
+-- won't work with Chromium browsers due to bug, but good for URI schemes
 ---@param url string
 function openLinkInBackground(url)
 	hs.execute('open -g "' .. url .. '"')
