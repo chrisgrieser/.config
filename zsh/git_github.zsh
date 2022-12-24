@@ -143,7 +143,7 @@ function betterClone() {
 		giturl="$1"
 	fi
 	if [[ "$2" == "shallow" ]]; then
-		git clone --depth=1 --filter=blob:none "$giturl"
+		git clone --depth=1 --single-branch --filter=blob:none "$giturl"
 	else
 		git clone "$giturl"
 	fi

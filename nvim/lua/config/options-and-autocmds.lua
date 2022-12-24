@@ -91,20 +91,11 @@ opt.cmdheight = 0
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, useful e.g. for kebab-case-variables
 -- opt.nrformats = "alpha" -- <C-a> and <C-x> also work on letters
 
--- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
--- overwritten by the ftplugins having the o option. therefore needs to be set
--- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
-augroup("formatopts", {})
-autocmd("FileType", {
-	group = "formatopts",
-	callback = function()
-		if not (bo.filetype == "markdown") then -- not for markdown, for autolist hack (see markdown.lua)
-			bo.formatoptions = bo.formatoptions:gsub("o", "")
-		end
-	end,
-})
-
 --------------------------------------------------------------------------------
+
+-- Files & Saving
+opt.autochdir = true -- always current directory
+opt.confirm = true -- ask instead of aborting
 
 augroup("autosave", {})
 autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave", "TextChanged" }, {
@@ -120,6 +111,19 @@ autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave", "TextChanged" },
 })
 
 --------------------------------------------------------------------------------
+
+-- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
+-- overwritten by the ftplugins having the o option. therefore needs to be set
+-- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
+augroup("formatopts", {})
+autocmd("FileType", {
+	group = "formatopts",
+	callback = function()
+		if not (bo.filetype == "markdown") then -- not for markdown, for autolist hack (see markdown.lua)
+			bo.formatoptions = bo.formatoptions:gsub("o", "")
+		end
+	end,
+})
 
 --------------------------------------------------------------------------------
 -- FOLDING

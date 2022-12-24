@@ -1,12 +1,7 @@
 #!/usr/bin/env zsh
 # shellcheck disable=SC2034,SC2164,SC1071
 
-# REQUIREMENTS
-# - SSH setup
-
 #-------------------------------------------------------------------------------
-# ESSENTIALS
-
 # ask for credentials upfront
 sudo -v
 setopt INTERACTIVE_COMMENTS
@@ -23,7 +18,7 @@ brew install --no-quarantine alfred hammerspoon neovim alacritty karabiner-eleme
 brew install --no-quarantine --cask neovide
 
 # Key settings
-defaults write com.apple.finder QuitMenuItem -bool true # Finder quitable
+defaults write com.apple.finder QuitMenuItem -bool true      # Finder quitable
 defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from saving in the keychains
 
 #-------------------------------------------------------------------------------
@@ -38,7 +33,7 @@ git submodule foreach git checkout main
 # load Dock from dotfiles
 zsh "$HOME/dotfiles/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
-# REQUIRED: SSH setup
+# REQUIRED SSH setup
 cd ~
 git clone git@github.com:chrisgrieser/main-vault.git
 git clone git@github.com:chrisgrieser/.password-store.git
@@ -67,9 +62,11 @@ ln -sf "$DOTFILE_FOLDER/vale/.vale.ini" ~
 # GPG config
 mkdir ~/.gnupg
 ln -sf "$DOTFILE_FOLDER/gnupg/gpg-agent.conf" ~/.gnupg
-
-if [[ $(uname -p) == "i386" ]]; then
+if [[ $(uname -p) == "i386" ]]; then # FIX for Intel Macs with different homebrew path
+	mkdir -p /opt/homebrew/bin/
+	ln -sf /usr/local/bin/pinentry-mac /opt/homebrew/bin/pinentry-mac
 fi
+
 # pandoc
 [[ -e ~/.pandoc ]] && rm -rf ~/.pandoc
 ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
@@ -94,4 +91,3 @@ ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 # # Fig
 # mkdir -p ~/.fig/config
 # ln -sf "$DOTFILE_FOLDER/fig/settings.json" ~/.fig
-
