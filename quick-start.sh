@@ -68,6 +68,8 @@ ln -sf "$DOTFILE_FOLDER/vale/.vale.ini" ~
 mkdir ~/.gnupg
 ln -sf "$DOTFILE_FOLDER/gnupg/gpg-agent.conf" ~/.gnupg
 
+if [[ $(uname -p) == "i386" ]]; then
+fi
 # pandoc
 [[ -e ~/.pandoc ]] && rm -rf ~/.pandoc
 ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
