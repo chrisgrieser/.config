@@ -18,6 +18,3 @@ undo_backspace: false # backspace undos expansion
 
 backend: clipboard
 clipboard_threshold: 5
-
-key_delay: 0
-inject_delay: 0
