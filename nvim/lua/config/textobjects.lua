@@ -15,13 +15,14 @@ require("config/utils")
 -- r -> rest of paragraph, linewise (custom)
 -- av -> a [v]alue / variable assignment (custom)
 -- aL -> a [L]oop (treesitter)
--- <Space> -> Subword (custom)
+-- <Space> -> inner subword (custom)
 
 -- FILE-TYPE-SPECIFIC TEXT OBJECTS
 -- al: a [l]ink (markdown, custom)
+-- aC: a [C]ode block (markdown, custom)
 -- as: a [s]elector (css, custom)
 -- aR: a [R]egex (js/ts, custom)
--- aD: a [D]ouble Square Brackets
+-- aD: a [D]ouble Square Brackets (custom)
 
 -- BUILTIN ONES KEPT
 -- ab: bracket
@@ -81,6 +82,8 @@ keymap(
 	{ desc = "outer double square bracket" }
 )
 
+keymap({ "x", "o" }, ".", varTextObj.diagnostic, { desc = "diagnostic textobj" })
+
 -- in/an: number textobj
 keymap({ "x", "o" }, "in", function() varTextObj.number(true) end, { desc = "inner number textobj" })
 keymap({ "x", "o" }, "an", function() varTextObj.number(false) end, { desc = "outer number textobj" })
@@ -108,13 +111,9 @@ autocmd("FileType", {
 --------------------------------------------------------------------------------
 -- SPECIAL PLUGIN TEXT OBJECTS
 
-for _, prefix in pairs { "a", "i" } do
-	-- Git Hunks
-	keymap({ "x", "o" }, prefix .. "h", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
-
-	-- Diagnostics
-	keymap({ "x", "o" }, prefix .. "d", varTextObj.diagnostic, { desc = "diagnostic textobj" })
-end
+-- Git Hunks
+keymap({ "x", "o" }, "ih", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
+keymap({ "x", "o" }, "ah", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
 
 --------------------------------------------------------------------------------
 -- SURROUND
@@ -202,7 +201,7 @@ require("nvim-surround").setup {
 		},
 		[callObjChar] = {
 			find = function() return config.get_selection { motion = "a" .. callObjChar } end,
-			delete = "^([^=%s]-% ?()().-(%))()$",
+			delete ="^([^=%s]+%()().-(%))()$", -- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L357
 		},
 		[conditionObjChar] = {
 			find = function() return config.get_selection { motion = "a" .. conditionObjChar } end,

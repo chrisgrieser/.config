@@ -111,6 +111,7 @@ function M.bettergx()
 	else
 		local urlLine = fn.getline(urlLineNr) ---@type string
 		local url = urlLine:match(urlLuaRegex)
+		print("url:", url)
 		os.execute('opener "' .. url .. '"')
 	end
 	setCursor(0, prevCur)

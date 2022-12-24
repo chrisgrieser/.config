@@ -19,11 +19,33 @@ autocmd("BufRead", {
 })
 
 --------------------------------------------------------------------------------
+-- Neural
+require("config/private-settings") -- API key symlinked and kept out of the dotfile repo
+
+keymap("x", "ga", ":NeuralCode complete<CR>")
+
+require("neural").setup {
+	mappings = {
+		swift = nil,
+		prompt = "gA",
+	},
+	open_ai = {
+		api_key = vim.env.OPENAI_API_KEY, -- not committed, defined in config/private-settings.lua outside of repo
+		max_tokens = 1000,
+		temperature = 0.1,
+		presence_penalty = 0.5,
+		frequency_penalty = 0.5,
+	},
+	ui = { icon = "ﮧ" },
+}
+
+--------------------------------------------------------------------------------
 
 -- ChatGPT
 require("config/private-settings") -- API key symlinked and kept out of the dotfile repo
+
 keymap("n", "ga", ":ChatGPT<CR>", { desc = "ChatGPT Prompt" })
-keymap("x", "ga", ":ChatGPTEditWithInstructions<CR>", { desc = "ChatGPT Edit with Instruction" })
+-- keymap("x", "ga", ":ChatGPTEditWithInstructions<CR>", { desc = "ChatGPT Edit with Instruction" })
 require("chatgpt").setup {
 	welcome_message = "",
 	question_sign = "",
