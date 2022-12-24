@@ -75,19 +75,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>5B7DFCDF-718D-4957-985A-AA31D51AEFFC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D5D0024E-316C-4A4C-BEA4-7366C58BF580</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>DCD9C133-BB06-4C67-9775-B4814A38FF71</key>
 		<array>
 			<dict>
@@ -402,42 +389,6 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>/Applications/Alfred 5.app/Contents/Preferences</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>D5D0024E-316C-4A4C-BEA4-7366C58BF580</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>alfred preference app</string>
-				<key>subtext</key>
-				<string>Reveal in Finder</string>
-				<key>text</key>
-				<string>⚙️ Alfred Preference.app</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>5B7DFCDF-718D-4957-985A-AA31D51AEFFC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -497,15 +448,6 @@
 			<key>ypos</key>
 			<real>100</real>
 		</dict>
-		<key>5B7DFCDF-718D-4957-985A-AA31D51AEFFC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>425</real>
-		</dict>
 		<key>859A813B-BC0E-4FD1-B2A5-E698076BF6E5</key>
 		<dict>
 			<key>xpos</key>
@@ -539,15 +481,6 @@
 			<real>205</real>
 			<key>ypos</key>
 			<real>180</real>
-		</dict>
-		<key>D5D0024E-316C-4A4C-BEA4-7366C58BF580</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>425</real>
 		</dict>
 		<key>DCD9C133-BB06-4C67-9775-B4814A38FF71</key>
 		<dict>

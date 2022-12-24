@@ -1,21 +1,21 @@
 #!/bin/zsh
-# shellcheck disable=SC2154
 export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 
-if ! command -v iconsur &> /dev/null ; then
-	echo "iconsur not installed."
-	exit 1
-fi
+if ! command -v iconsur &> /dev/null ; then echo -n "iconsur not installed." && exit 1 ; fi
 
-CUSTOM_ICON_FOLDER="${custom_icon_folder/#\~/$HOME}"
-PWA_FOLDER="${pwa_folder/#\~/$HOME}"
+#───────────────────────────────────────────────────────────────────────────────
 
+# config
+CUSTOM_ICON_FOLDER="$DOTFILE_FOLDER/custom-app-icons"
+
+PWA_FOLDER="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Brave Browser Apps.localized/"
 DEVICE_NAME=$(scutil --get ComputerName | cut -d" " -f2-)
 [[ "$DEVICE_NAME" =~ "Mother" ]] && PWA_FOLDER="$HOME/Applications/Brave Browser Apps.localized"
 
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
 cd "/Applications/" || exit 1
+
 APP_TO_UPDATE=$(basename "$*")
 APP_TO_UPDATE="${APP_TO_UPDATE%.*}" # no extension
 NONE_FOUND=0
@@ -51,14 +51,11 @@ case $APP_TO_UPDATE in
 	"Obsidian")
 		cp "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" 'Obsidian.app/Contents/Resources/icon.icns'
 		touch "Obsidian.app" ;;
-	"MacPass")
-		cp "$CUSTOM_ICON_FOLDER/MacPass.icns" 'MacPass.app/Contents/Resources/MacPassAppIcon.icns'
-		touch "MacPass.app" ;;
 	"Discord")
 		cp "$CUSTOM_ICON_FOLDER/Discord Black.icns" 'Discord.app/Contents/Resources/electron.icns'
 		touch "Discord.app" ;;
 	"Neovide")
-		cp "$CUSTOM_ICON_FOLDER/Neovim-dark.icns" 'Neovide.app/Contents/Resources/Neovide.icns'
+		cp "$CUSTOM_ICON_FOLDER/Vimari alt.icns" 'Neovide.app/Contents/Resources/Neovide.icns'
 		touch "Neovide.app" ;;
 
 	"Microsoft Word")
@@ -84,7 +81,6 @@ case $APP_TO_UPDATE in
 		INFO_WINDOW=1 ;;
 		# cp "$CUSTOM_ICON_FOLDER/Mail_fancy.icns" 'Mimestream.app/Contents/Resources/AppIcon.icns'
 		# touch "Mimestream.app" ;;
-
 	"TweetDeck")
 		iconsur -k "Twitter" set "$PWA_FOLDER/TweetDeck.app" &> /dev/null ;;
 		# cp "$CUSTOM_ICON_FOLDER/Twitter.icns" 'TweetDeck.app/Contents/Resources/app.icns'
@@ -112,17 +108,20 @@ esac
 if [[ $INFO_WINDOW == 1 ]]; then
 	sleep 0.2
 	osascript -e 'tell application "System Events"
-	keystroke "v" using {command down}
-	delay 0.1
-	keystroke "w" using {command down}
-end tell'
+		keystroke "v" using {command down}
+		delay 0.1
+		keystroke "w" using {command down}
+	end tell'
 sleep 0.2
 fi
 
 if [[ $NONE_FOUND == 0 ]]; then
 	killall "$APP_TO_UPDATE"
 	killall "Dock"
-	while pgrep -q "$APP_TO_UPDATE" ; do sleep 0.1; done
+	while pgrep -q "$APP_TO_UPDATE" || pgrep -q "Dock" ; do 
+		sleep 0.1; 
+	done
+	sleep 0.3
 	open -a "$APP_TO_UPDATE"
 	echo -n "$APP_TO_UPDATE" # pass for notification
 else

@@ -65,30 +65,20 @@ end
 
 ---@return boolean
 function isAtMother()
-	if deviceName():find("Mother") then
-		return true
-	end
-	return false
+	return deviceName():find("Mother") ~= nil
 end
 
 ---@return boolean
 function isIMacAtHome()
-	if deviceName():find("iMac") and deviceName():find("Home") then
-		return true
-	end
-	return false
+	return (deviceName():find("iMac") and deviceName():find("Home")) ~= nil
 end
 
 ---Send Notification
 ---@param text string
 function notify(text)
-	if text then
-		text = trim(text)
-	else
-		text = "empty string"
-	end
+	local out = text and trim(text) or "empty string"
 	hs.notify.new {title = "Hammerspoon", informativeText = text}:send()
-	print("notify: " .. text) -- for the console
+	print("notify: " .. out) -- for the console
 end
 
 ---Whether the current time is between startHour & endHour
@@ -110,9 +100,7 @@ end
 function appIsRunning(appName)
 	-- can't use ":isRunning()", since the application object is nil when it
 	-- wasn't running before
-	local runs = hs.application.get(appName)
-	if runs then return true end
-	return false
+	return hs.application.get(appName) ~= nil
 end
 
 ---@param appNames string|string[]
