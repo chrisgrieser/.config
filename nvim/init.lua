@@ -6,15 +6,14 @@ borderStyle = "single" -- options: https://neovim.io/doc/user/api.html#nvim_open
 require("config/lazy")
 require("config/utils") -- should come after lazy
 
-require("config/options-and-autocmds")
 if isGui() then
 	require("config/theme-settings") -- should come early to start with the proper theme
 	require("config/gui-settings")
 else
 	require("config/terminal-only")
 end
+require("config/options-and-autocmds")
 require("config/keybindings")
-require("config/textobjects")
 require("config/user-commands")
 require("config/automating-nvim")
 require("config/appearance")
@@ -25,6 +24,7 @@ require("config/linter")
 require("config/debugger")
 
 require("config/comments")
+require("config/textobjects")
 require("config/AI-support")
 require("config/telescope")
 require("config/treesitter")
