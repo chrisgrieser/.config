@@ -27,6 +27,7 @@ return {
 	},
 	{"m-demare/hlargs.nvim", -- highlight function args
 		config = function() require("hlargs").setup() end,
+		event = "VeryLazy",
 	},
 	{"Wansmer/treesj", -- split-join
 		dependencies = "nvim-treesitter/nvim-treesitter" ,
@@ -35,6 +36,7 @@ return {
 	},
 	{"cshuaimin/ssr.nvim", -- structural search & replace
 		commit = "4304933", -- TODO: update to newest version with nvim 0.9 https://github.com/cshuaimin/ssr.nvim/issues/11#issuecomment-1340671193
+		lazy = true,
 		pin = true,
 		config = function()
 			require("ssr").setup {
@@ -102,10 +104,13 @@ return {
 	-- Appearance
 	"lukas-reineke/indent-blankline.nvim", -- indentation guides
 	"nvim-lualine/lualine.nvim", -- status line
-	"lewis6991/gitsigns.nvim", -- gutter signs
+	{"lewis6991/gitsigns.nvim", -- gutter signs
+		event = "VeryLazy",
+	}, 
 	{"rcarriga/nvim-notify", event = "VeryLazy"}, -- notifications
 	"uga-rosa/ccc.nvim", -- color previews & color utilities
-	"dstein64/nvim-scrollview", -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
+	-- "dstein64/nvim-scrollview", -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
+	"lewis6991/satellite.nvim",
 	{"anuvyklack/windows.nvim", dependencies = "anuvyklack/middleclass"}, -- auto-resize splits
 	"xiyaowong/virtcolumn.nvim", -- nicer color column
 
@@ -120,7 +125,6 @@ return {
 		dependencies = "stevearc/dressing.nvim",
 	},
 	{"nvim-telescope/telescope.nvim",
-		lazy = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
