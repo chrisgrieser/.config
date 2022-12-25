@@ -5,15 +5,14 @@ require("lua.system-and-cron")
 
 local function unHideAll()
 	local wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
-	for i = 1, #wins do
-		local appli = wins[i]:application()
-		if not appli then break end
-		if appli:isHidden() then appli:unhide() end
+	for _, win in pairs(wins) do
+		local app = win:application()
+		if app and app:isHidden() then app:unhide() end
 	end
 end
 
 transBgAppWatcher = aw.new(function(appName, eventType, appObject)
-	if not (appName:lower() == "neovide" or appName == "Obsidian" or appName:lower() == "alacritty") then return end
+	if not (appName or appName:lower() == "neovide" or appName == "Obsidian" or appName:lower() == "alacritty") then return end
 	if eventType == aw.activated or eventType == aw.launched then
 		-- some apps like neovide do not set a "launched" signal, so the delayed
 		-- hiding is used for it activation as well

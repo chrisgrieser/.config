@@ -38,11 +38,9 @@ return {
 		commit = "4304933", -- TODO: update to newest version with nvim 0.9 https://github.com/cshuaimin/ssr.nvim/issues/11#issuecomment-1340671193
 		lazy = true,
 		pin = true,
-		config = function()
-			require("ssr").setup {
-				keymaps = {close = "Q"},
-			}
-		end
+		config = function() require("ssr").setup {
+			keymaps = {close = "Q"},
+		} end
 	},
 
 	-- LSP
@@ -73,7 +71,6 @@ return {
 
 	-- Completion & Suggestion
 	{"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-buffer", -- completion sources
 			"hrsh7th/cmp-path",
@@ -91,34 +88,24 @@ return {
 	},
 
 	-- AI-Support
-	{ "tzachar/cmp-tabnine",
-		build = "./install.sh",
-		dependencies = "hrsh7th/nvim-cmp",
-	},
-	{"jackMort/ChatGPT.nvim",
-		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-		cmd = {"ChatGPTEditWithInstructions", "ChatGPT"}
-	},
+	{ "tzachar/cmp-tabnine", build = "./install.sh", dependencies = "hrsh7th/nvim-cmp" },
+	{"jackMort/ChatGPT.nvim", dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" } },
 	{ "dense-analysis/neural", dependencies = "MunifTanjim/nui.nvim" },
 
 	-- Appearance
-	"lukas-reineke/indent-blankline.nvim", -- indentation guides
 	"nvim-lualine/lualine.nvim", -- status line
-	{"lewis6991/gitsigns.nvim", -- gutter signs
-		event = "VeryLazy",
-	}, 
-	{"rcarriga/nvim-notify", event = "VeryLazy"}, -- notifications
+	"lukas-reineke/indent-blankline.nvim", -- indentation guides
+	"lewis6991/gitsigns.nvim" , -- gutter signs
+	"rcarriga/nvim-notify", -- notifications
 	"uga-rosa/ccc.nvim", -- color previews & color utilities
-	-- "dstein64/nvim-scrollview", -- "petertriho/nvim-scrollbar" has more features, but is also more buggy atm
-	"lewis6991/satellite.nvim",
-	{"anuvyklack/windows.nvim", dependencies = "anuvyklack/middleclass"}, -- auto-resize splits
-	"xiyaowong/virtcolumn.nvim", -- nicer color column
-
-	-- File Switching & File Operation
+	"lewis6991/satellite.nvim", -- scrollbar
+	{"xiyaowong/virtcolumn.nvim", event = "VeryLazy"}, -- nicer colorcolumn
+	{ "anuvyklack/windows.nvim", dependencies = "anuvyklack/middleclass" }, -- auto-resize splits
 	{"stevearc/dressing.nvim",
-		event = "VeryLazy",
 		dependencies = { "hrsh7th/nvim-cmp", "hrsh7th/cmp-omni" }, -- omni for autocompletion in input prompts
 	},
+
+	-- File Switching & File Operation
 	{"chrisgrieser/nvim-genghis",
 		dev = true,
 		lazy = true,
@@ -162,13 +149,19 @@ return {
 
 	-- EDITING-SUPPORT
 	"kylechui/nvim-surround", -- surround operator
-	"gbprod/substitute.nvim", -- substitution & exchange operator
+	{"gbprod/substitute.nvim", -- substitution & exchange operator
+		lazy = true,
+		config = function () require("substitute").setup() end,
+	},
 	"numToStr/Comment.nvim", -- comment operator
 	{"mg979/vim-visual-multi", keys = "<D-j>"},
 	"Darazaki/indent-o-matic", -- auto-determine indents
 	{"gbprod/yanky.nvim"}, -- register manager
 	{"chrisgrieser/nvim-recorder", dev = true}, -- better macros
-	{"chrisgrieser/nvim-various-textobjs", dev = true}, -- custom textobjects
+	{ "chrisgrieser/nvim-various-textobjs", -- custom textobjects
+		dev = true,
+		lazy = true,
+	},
 	{"nacro90/numb.nvim", -- line previews when ":n"
 		config = function() require("numb").setup() end,
 		keys = ":",
