@@ -98,7 +98,7 @@ opt.autochdir = true -- always current directory
 opt.confirm = true -- ask instead of aborting
 
 augroup("autosave", {})
-autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave", "TextChanged" }, {
+autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	group = "autosave",
 	pattern = "?*", -- pattern required
 	callback = function()
