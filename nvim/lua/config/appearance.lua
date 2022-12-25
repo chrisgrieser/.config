@@ -126,8 +126,8 @@ require("dressing").setup {
 	input = {
 		border = borderStyle,
 		relative = "win",
-		max_width = 0.8,
-		min_width = { 45, 0.45 },
+		max_width = 50, -- length git commit msg
+		min_width = 50,
 		win_options = {
 			sidescrolloff = 0,
 			winblend = 0,

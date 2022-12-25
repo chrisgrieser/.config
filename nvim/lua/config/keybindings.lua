@@ -426,9 +426,8 @@ keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = "ToggleTerm" })
 keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "Send Selection to ToggleTerm" })
 
 keymap("n", "5", function()
-	local ft = bo.filetype
 	cmd.CodiNew()
-	cmd.file("Codi: " .. ft) -- workaround, since Codi does not provide a filename for its buffer
+	cmd.file("Codi: " .. bo.filetype) -- HACK to set buffername, since Codi does not provide a filename for its buffer
 end, { desc = ":CodiNew" })
 
 --------------------------------------------------------------------------------
