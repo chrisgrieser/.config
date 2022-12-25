@@ -47,12 +47,13 @@ require("cybu").setup {
 
 --------------------------------------------------------------------------------
 -- SCROLLBAR
-require("scrollview").setup {
-	current_only = false,
-	winblend = 20,
-	column = 1,
-	excluded_filetypes = {},
-}
+-- require("scrollview").setup {
+-- 	current_only = false,
+-- 	winblend = 20,
+-- 	column = 1,
+-- 	excluded_filetypes = {},
+-- }
+require('satellite').setup()
 
 --------------------------------------------------------------------------------
 -- virtual color column --- '│'

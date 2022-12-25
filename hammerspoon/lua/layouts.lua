@@ -149,13 +149,11 @@ function officeModeLayout()
 	}
 	dockSwitcher("office") -- separate layout to include "TweetDeck"
 
-	local screen1 = hs.screen.allScreens()[1]
-	local screen2 = hs.screen.allScreens()[2]
 	local top = { x = 0, y = 0.015, w = 1, h = 0.485 }
 	local bottom = { x = 0, y = 0.5, w = 1, h = 0.5 }
-	local sideTop = createLayout(top, screen2, { "TweetDeck" })
-	local sideBottom = createLayout(bottom, screen2, { "Discord", "Slack" })
-	local main = createLayout(maximized, screen1, {
+	local sideTop = createLayout(top, hs.screen.allScreens()[2], { "TweetDeck" })
+	local sideBottom = createLayout(bottom, hs.screen.allScreens()[2], { "Discord", "Slack" })
+	local main = createLayout(maximized, hs.screen.allScreens()[1], {
 		"Brave Browser",
 		"Obsidian",
 		"Neovide",
@@ -186,22 +184,21 @@ local function motherMovieModeLayout()
 
 	runWithDelays({ 0, 1 }, function()
 		openApp("YouTube")
-		quitApp("Discord")
+		quitApp {
+			"Obsidian",
+			"Drafts",
+			"Slack",
+			"Discord",
+			"Mimestream",
+			"Alfred Preferences",
+			"Warp",
+			"neovide",
+			"Neovide",
+			"alacritty",
+			"Alacritty",
+			"Twitterrific",
+		}
 	end)
-	quitApp {
-		"Obsidian",
-		"Drafts",
-		"Slack",
-		"Discord",
-		"Mimestream",
-		"Alfred Preferences",
-		"Warp",
-		"neovide",
-		"Neovide",
-		"alacritty",
-		"Alacritty",
-		"Twitterrific",
-	}
 
 	dockSwitcher("mother-movie")
 end

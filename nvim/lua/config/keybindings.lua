@@ -272,7 +272,7 @@ keymap("t", "ä", [[<C-\><C-n><C-w>p]], { desc = "switch to previous window" })
 
 -- CMD-Keybindings
 if isGui() then
-	keymap({ "n", "x", "i" }, "<D-w>", qol.betterClose, { desc = "close buffer/window/tab" }) -- cmd+w
+	keymap({ "n", "x", "i" }, "<D-w>", qol.betterClose, { desc = "close buffer/window/tab" }) 
 
 	keymap({ "n", "x", "i" }, "<D-s>", cmd.write, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
 	keymap("n", "<D-a>", "ggVG", { desc = "select all" }) -- cmd+a
