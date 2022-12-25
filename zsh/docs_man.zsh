@@ -1,3 +1,6 @@
+# openAI
+alias ai='ddo' # https://github.com/yasyf/gpt-do
+
 # search cht.sh for information
 # aggregates stackoverflow, tl;dr and many other help pages
 function ch() {
