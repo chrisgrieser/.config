@@ -17,11 +17,12 @@ require("config/utils")
 -- aL -> a [L]oop (treesitter)
 -- <Space> -> inner subword (custom)
 -- . -> diagnostic (custom)
+-- o -> c[o]lumn (custom)
 
 -- FILE-TYPE-SPECIFIC TEXT OBJECTS
--- al: a [l]ink (markdown, custom)
+-- al: a [l]ink (markdown, custom) → overwrites unused call textobj
+-- as: a [s]elector (css, custom) → overwrites unused sentence textobj
 -- aC: a [C]ode block (markdown, custom)
--- as: a [s]elector (css, custom)
 -- aR: a [R]egex (js/ts, custom)
 -- aD: a [D]ouble Square Brackets (custom)
 
@@ -56,13 +57,13 @@ keymap("x", "<Space>", '"_c')
 -- VARIOUS TEXTOBJS
 
 -- space: subword
-keymap("o", "<Space>", function () varTextObj.subword(true) end, { desc = "inner subword textobj" })
+keymap("o", "<Space>", function() varTextObj.subword(true) end, { desc = "inner subword textobj" })
 
 -- n: [n]ear end of the line
 keymap({ "o", "x" }, "n", varTextObj.nearEoL, { desc = "almost ending of line textobj" })
 
--- ,: column textobj
-keymap({ "o", "x" }, "|", varTextObj.column, { desc = "column textobj" })
+-- o: c[o]lumn textobj
+keymap("o", "o", varTextObj.column, { desc = "column textobj" })
 
 -- r: [r]est of paragraph (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
@@ -72,29 +73,22 @@ keymap("o", "r", varTextObj.restOfParagraph, { desc = "rest of paragraph (linewi
 keymap({ "x", "o" }, "iv", function() varTextObj.value(true) end, { desc = "inner value textobj" })
 keymap({ "x", "o" }, "av", function() varTextObj.value(false) end, { desc = "outer value textobj" })
 
--- iD/aD: double square brackets
-keymap(
-	{ "x", "o" },
-	"iD",
-	function() varTextObj.doubleSquareBrackets(true) end,
-	{ desc = "inner double square bracket" }
-)
-keymap(
-	{ "x", "o" },
-	"aD",
-	function() varTextObj.doubleSquareBrackets(false) end,
-	{ desc = "outer double square bracket" }
-)
-
+-- .: diagnostic textobj
 keymap({ "x", "o" }, ".", varTextObj.diagnostic, { desc = "diagnostic textobj" })
 
 -- in/an: number textobj
-keymap({ "x", "o" }, "in", function() varTextObj.number(true) end, { desc = "inner number textobj" })
-keymap({ "x", "o" }, "an", function() varTextObj.number(false) end, { desc = "outer number textobj" })
+-- stylua: ignore start
+keymap( { "x", "o" }, "in", function() varTextObj.number(true) end, { desc = "inner number textobj" })
+keymap( { "x", "o" }, "an", function() varTextObj.number(false) end, { desc = "outer number textobj" })
+
+-- iD/aD: double square brackets
+keymap( { "x", "o" }, "iD", function() varTextObj.doubleSquareBrackets(true) end, { desc = "inner double square bracket" })
+keymap( { "x", "o" }, "aD", function() varTextObj.doubleSquareBrackets(false) end, { desc = "outer double square bracket" })
 
 -- ii/ai: indentation textobj
 keymap({ "x", "o" }, "ii", function() varTextObj.indentation(true, true) end, { desc = "inner indentation textobj" })
 keymap({ "x", "o" }, "ai", function() varTextObj.indentation(false, false) end, { desc = "outer indentation textobj" })
+-- stylua: ignore end
 
 augroup("IndentedFileTypes", {})
 autocmd("FileType", {
@@ -175,7 +169,13 @@ require("nvim-surround").setup {
 				local patt
 				if ft == "lua" then
 					patt = "^(.-function.-%b() ?)().-( ?end)()$"
-				elseif ft == "javascript" or ft == "typescript" or ft == "bash" or ft == "zsh" or ft == "sh" then
+				elseif
+					ft == "javascript"
+					or ft == "typescript"
+					or ft == "bash"
+					or ft == "zsh"
+					or ft == "sh"
+				then
 					patt = "^(.-function.-%b() ?{)().*(})()$"
 				else
 					vim.notify("No function-surround defined for " .. ft, logWarn)
@@ -193,7 +193,13 @@ require("nvim-surround").setup {
 						{ "function ()", "\t" },
 						{ "", "end" },
 					}
-				elseif ft == "typescript" or ft == "javascript" or ft == "bash" or ft == "zsh" or ft == "sh" then
+				elseif
+					ft == "typescript"
+					or ft == "javascript"
+					or ft == "bash"
+					or ft == "zsh"
+					or ft == "sh"
+				then
 					return {
 						{ "function () {", "\t" },
 						{ "", "}" },
@@ -205,7 +211,7 @@ require("nvim-surround").setup {
 		},
 		[callObjChar] = {
 			find = function() return config.get_selection { motion = "a" .. callObjChar } end,
-			delete ="^([^=%s]+%()().-(%))()$", -- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L357
+			delete = "^([^=%s]+%()().-(%))()$", -- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L357
 		},
 		[conditionObjChar] = {
 			find = function() return config.get_selection { motion = "a" .. conditionObjChar } end,
