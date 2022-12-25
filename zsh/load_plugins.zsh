@@ -15,10 +15,8 @@ fi
 # `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
 
 # BUG autosuggesstions do not work for obsidian-terminal yet
-if [[ "$TERM" != "" ]] ; then
-	source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-	source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-fi
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # has to be loaded *after* zsh syntax highlighting
 source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
@@ -29,6 +27,8 @@ if [[ "$TERM" == "Warp" ]] ; then
 	export STARSHIP_CONFIG=~/.config/starship/starship-warp.toml
 	cd "$WD" || return
 elif [[ "$TERM" == "alacritty" ]] ; then
+	export STARSHIP_CONFIG=~/.config/starship/starship-alacritty.toml
+elif [[ "$TERM" == "xterm-256color" ]] ; then # Obsidian Terminal & nvim Toggleterm
 	export STARSHIP_CONFIG=~/.config/starship/starship-alacritty.toml
 else
 	export STARSHIP_CONFIG=~/.config/starship/starship-alacritty.toml
