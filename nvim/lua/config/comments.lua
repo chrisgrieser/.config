@@ -3,7 +3,7 @@ require("config/utils")
 
 -- COMMENTS (mnemonic: [q]uiet text)
 require("Comment").setup {
-	ignore = "^$", -- ignore empty lines
+	-- ignore = "^$", -- ignore empty lines
 	toggler = {
 		line = "qq",
 		block = "<Nop>",
@@ -59,7 +59,7 @@ local function divider()
 	local textwidth = bo.textwidth
 	local comStr = bo.commentstring
 	local ft = bo.filetype
-	local comStrLength = #(comStr:gsub("%%s", ""):gsub(" ", ""))
+	local comStrLength = #(comStr:gsub(" ?%%s ?", ""))
 
 	if comStr == "" then
 		vim.notify(" No commentstring for this filetype available.", logWarn)

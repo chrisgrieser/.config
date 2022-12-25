@@ -174,14 +174,11 @@ keymap("n", "gL", "[s") -- prev misspelling
 keymap("n", "zf", "mz1z=`z") -- auto[f]ix word under cursor (= select 1st suggestion)
 
 -- [S]ubstitute Operator (substitute.nvim)
-local substi = require("substitute")
-local exchange = require("substitute.exchange")
-substi.setup()
-keymap("n", "s", substi.operator, { desc = "substitute operator" })
-keymap("n", "ss", substi.line, { desc = "substitute line" })
-keymap("n", "S", substi.eol, { desc = "substitute to end of line" })
-keymap("n", "sx", exchange.operator, { desc = "exchange operator" })
-keymap("n", "sxx", exchange.line, { desc = "exchange line" })
+keymap("n", "s", function () require("substitute").operator() end, { desc = "substitute operator" })
+keymap("n", "ss", function () require("substitute").line() end, { desc = "substitute line" })
+keymap("n", "S", function () require("substitute").eol() end, { desc = "substitute to end of line" })
+keymap("n", "sx", function () require("substitute.exchange").operator() end, { desc = "exchange operator" })
+keymap("n", "sxx", function () require("substitute.exchange").line() end, { desc = "exchange line" })
 
 -- ISwap
 keymap("n", "X", cmd.ISwapWith, { desc = "swap nodes" })

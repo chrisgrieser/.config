@@ -3,7 +3,10 @@ require("config/utils")
 
 -- Annotations
 cmd.highlight { "def link myAnnotations Todo", bang = true } -- use same styling as "TODO"
-fn.matchadd("myAnnotations", [[\<\(BUG\|WIP\|TODO\|WTF\|HACK\|INFO\|NOTE\|WARNING\|FIX\|REQUIRED\)\>]])
+fn.matchadd(
+	"myAnnotations",
+	[[\<\(BUG\|WIP\|TODO\|WTF\|HACK\|INFO\|NOTE\|WARNING\|FIX\|REQUIRED\)\>]]
+)
 
 --------------------------------------------------------------------------------
 
@@ -47,17 +50,17 @@ require("cybu").setup {
 
 --------------------------------------------------------------------------------
 -- SCROLLBAR
--- require("scrollview").setup {
--- 	current_only = false,
--- 	winblend = 20,
--- 	column = 1,
--- 	excluded_filetypes = {},
--- }
-require('satellite').setup()
+require("satellite").setup {
+	winblend = 30,
+	excluded_filetypes = {},
+	handlers = {
+		marks = { enable = false },
+	},
+}
 
 --------------------------------------------------------------------------------
 -- virtual color column --- '│'
-vim.g.virtcolumn_char = "║"
+g.virtcolumn_char = "║"
 
 --------------------------------------------------------------------------------
 -- NOTIFICATIONS
@@ -75,7 +78,9 @@ if isGui() then
 		timeout = 4000,
 		top_down = false,
 		on_open = function(win)
-			if api.nvim_win_is_valid(win) then api.nvim_win_set_config(win, { border = borderStyle }) end
+			if api.nvim_win_is_valid(win) then
+				api.nvim_win_set_config(win, { border = borderStyle })
+			end
 		end,
 	}
 
@@ -311,11 +316,13 @@ require("lualine").setup {
 		},
 	},
 	winbar = {
-		lualine_b = { {
-			navic.get_location,
-			cond = showBreadcrumbs,
-			section_separators = winSecSeparators,
-		} },
+		lualine_b = {
+			{
+				navic.get_location,
+				cond = showBreadcrumbs,
+				section_separators = winSecSeparators,
+			},
+		},
 		lualine_c = {
 			{
 				function() return " " end, -- dummy to avoid bar appearing and disappearing
