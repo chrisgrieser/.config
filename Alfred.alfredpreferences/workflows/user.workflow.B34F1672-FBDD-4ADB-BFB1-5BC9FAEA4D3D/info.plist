@@ -24,7 +24,30 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy to Clipboard</string>
+				<string>⌥: Copy URL to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -47,7 +70,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy to Clipboard</string>
+				<string>⌥: Copy URL to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -70,7 +93,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy to Clipboard</string>
+				<string>⌥: Copy URL to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -93,7 +116,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy to Clipboard</string>
+				<string>⌥: Copy URL to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -116,7 +139,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy to Clipboard</string>
+				<string>⌥: Copy URL to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -152,7 +175,20 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy to Clipboard</string>
+				<string>⌥: Copy URL to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D098F778-136C-45DE-A526-93C74F0CDEC3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7099D02E-6857-4A1B-ABE6-8653C16F6A49</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -175,7 +211,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy to Clipboard</string>
+				<string>⌥: Copy URL to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -198,7 +234,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy to Clipboard</string>
+				<string>⌥: Copy URL to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -221,7 +257,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy to Clipboard</string>
+				<string>⌥: Copy URL to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -237,55 +273,6 @@
 	<string>Documentation Searches</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>cani</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Loading</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>can-i-use.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Can I Use?</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>2ABAE956-53E7-4846-B25A-EC53C6145476</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -332,6 +319,78 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>F244FBB2-D206-4A08-9404-12E9A2DB8944</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>qlmanage -p "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>7099D02E-6857-4A1B-ABE6-8653C16F6A49</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ch</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>cheatsheet-pdfs.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search Cheatsheet PDFs</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>D098F778-136C-45DE-A526-93C74F0CDEC3</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -460,6 +519,55 @@
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>cani</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>can-i-use.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Can I Use?</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>2ABAE956-53E7-4846-B25A-EC53C6145476</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
@@ -502,6 +610,46 @@
 			<string>C4E99850-BA50-4D06-A11F-D09AEC8481A0</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>147B74A7-0701-400F-9336-3E942E809AB8</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -555,42 +703,51 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>sh</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>list-cheatsheets.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Shell Cheatsheets</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+			<string>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>147B74A7-0701-400F-9336-3E942E809AB8</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -739,79 +896,6 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>QUERY=$(echo "$*" | tr " " "+")
-curl -s "https://cht.sh/$QUERY?T"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>cheat.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>7B66DF62-F4DE-4985-9579-5E3FFA42CDBA</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>sh</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>list-cheatsheets.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>SHella Chetsheets</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Search various Docs.
@@ -830,23 +914,25 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>600</real>
 		</dict>
 		<key>147B74A7-0701-400F-9336-3E942E809AB8</key>
 		<dict>
 			<key>xpos</key>
-			<real>705</real>
+			<real>695</real>
 			<key>ypos</key>
 			<real>595</real>
 		</dict>
 		<key>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>note</key>
 			<string>search for cheatsheet</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1010</real>
+			<real>715</real>
 		</dict>
 		<key>1CA4905C-0482-4517-93A3-656ACFA985CD</key>
 		<dict>
@@ -861,10 +947,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>can-i-use</string>
 			<key>xpos</key>
-			<real>220</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>360</real>
 		</dict>
 		<key>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</key>
 		<dict>
@@ -884,21 +972,25 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>870</real>
+			<real>1125</real>
+		</dict>
+		<key>7099D02E-6857-4A1B-ABE6-8653C16F6A49</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>note</key>
+			<string>Quicklook</string>
+			<key>xpos</key>
+			<real>560</real>
+			<key>ypos</key>
+			<real>20</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
 			<key>xpos</key>
-			<real>555</real>
+			<real>545</real>
 			<key>ypos</key>
 			<real>595</real>
-		</dict>
-		<key>7B66DF62-F4DE-4985-9579-5E3FFA42CDBA</key>
-		<dict>
-			<key>xpos</key>
-			<real>220</real>
-			<key>ypos</key>
-			<real>1010</real>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
@@ -914,7 +1006,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>490</real>
+		</dict>
+		<key>D098F778-136C-45DE-A526-93C74F0CDEC3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>note</key>
+			<string>cheatsheet PDFs</string>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>20</real>
 		</dict>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<dict>
@@ -934,7 +1037,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>990</real>
 		</dict>
 		<key>FE9038EA-F174-44C3-96CF-EED8F400E783</key>
 		<dict>
@@ -945,11 +1048,33 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>850</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>images, PDFs, etc.</string>
+			<key>label</key>
+			<string>Folder containing cheatsheets</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>cheatfile_folder</string>
+		</dict>
+	</array>
 	<key>version</key>
 	<string>0.9</string>
 	<key>webaddress</key>
