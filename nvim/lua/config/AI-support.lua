@@ -15,15 +15,13 @@ require("cmp_tabnine.config"):setup { -- yes, requires a ":", not "."
 augroup("prefetchTabNine", {})
 autocmd("BufRead", {
 	group = "prefetchTabNine",
-	callback = function() require("cmp_tabnine"):prefetch(fn.expand("%:p")) end,
+	callback = function() require("cmp_tabnine"):prefetch(expand("%:p")) end,
 })
 
 --------------------------------------------------------------------------------
 -- Neural
-require("config/private-settings") -- API key symlinked and kept out of the dotfile repo
-
+-- INFO openai_api_key defined in zshenv but there read from outside of dotfiles
 keymap("x", "ga", ":NeuralCode complete<CR>")
-
 require("neural").setup {
 	mappings = {
 		swift = nil,
@@ -40,9 +38,7 @@ require("neural").setup {
 }
 
 --------------------------------------------------------------------------------
-
 -- ChatGPT
-require("config/private-settings") -- API key symlinked and kept out of the dotfile repo
 
 keymap("n", "ga", ":ChatGPT<CR>", { desc = "ChatGPT Prompt" })
 -- keymap("x", "ga", ":ChatGPTEditWithInstructions<CR>", { desc = "ChatGPT Edit with Instruction" })

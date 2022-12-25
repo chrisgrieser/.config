@@ -18,7 +18,8 @@ brew install --no-quarantine alfred hammerspoon neovim alacritty karabiner-eleme
 brew install --no-quarantine --cask neovide
 
 # Key settings
-defaults write com.apple.finder QuitMenuItem -bool true      # Finder quitable
+defaults write com.apple.finder CreateDesktop false # disable desktop icons & make desktop unfocussable
+defaults write com.apple.finder QuitMenuItem -bool true # Finder quitable
 defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from saving in the keychains
 
 #-------------------------------------------------------------------------------
@@ -83,6 +84,8 @@ ln -sf "$DOTFILE_FOLDER/hammerspoon" ~/.hammerspoon
 ESPANSO_DIR=~"/Library/Application Support/espanso"
 [[ -e "$ESPANSO_DIR" ]] && rm -rf "$ESPANSO_DIR"
 ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # # Warp
 # [[ -e ~/.warp ]] && rm -rf ~/.warp

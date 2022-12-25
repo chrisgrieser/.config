@@ -12,7 +12,7 @@ export PASSWORD_STORE_DIR="$HOME/.password-store/" # default value, but still ne
 
 #───────────────────────────────────────────────────────────────────────────────
 # Open AI API Key stored outside of public git repo (symlinked file)
-OPENAI_API_KEY=$(tr "\n" < "$DOTFILE_FOLDER/openai-key")
+OPENAI_API_KEY=$(tr -d "\n" < "$DOTFILE_FOLDER/openai_api_key")
 export OPENAI_API_KEY
 
 #───────────────────────────────────────────────────────────────────────────────
