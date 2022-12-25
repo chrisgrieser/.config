@@ -339,7 +339,9 @@ require("lualine").setup {
 		},
 	},
 	options = {
-		theme = "auto",
+		refresh = {
+			statusline = 2000, -- less often, so it interferes less with git processes
+		},
 		ignore_focus = {
 			"TelescopePrompt",
 			"DressingInput",
