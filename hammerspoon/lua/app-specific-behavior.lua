@@ -211,26 +211,22 @@ wf_neovim = wf
 -- ALACRITTY
 -- pseudomaximized window
 wf_alacritty = wf.new({ "alacritty", "Alacritty" })
-	:setOverrideFilter({ rejectTitles = { "^cheatsheet: " } })
 	:subscribe(wf.windowCreated, function(newWin)
 		if isProjector() then return end -- has it's own layouting already
 		moveResize(newWin, baseLayout)
 	end)
 
--- ALACRITTY Man / cheat sheet leaader hotkey (for Karabiner)
+-- ALACRITTY Man leader hotkey (for Karabiner)
 -- work around necessary, cause alacritty creates multiple instances, i.e.
 -- multiple applications all with the name "alacritty", preventing conventional
 -- methods for focussing a window via AppleScript
 uriScheme("focus-help", function()
 	local win = hs.window.find("man:")
-	if not win then win = hs.window.find("builtin:") end
-	if not win then win = hs.window.find("cheatsheet:") end
-
-	if win then
-		win:focus()
-	else
+	if not win then
 		notify("None open.")
+		return
 	end
+	win:focus()
 end)
 
 --------------------------------------------------------------------------------

@@ -14,8 +14,8 @@ const jsonArray = app.doShellScript("curl 'https://cheat.sh/:list'")
 		return {
 			"title": item,
 			"match": alfredMatcher (item),
-			"arg": item,
-			"uid": item
+			"arg": "httsp://cheat.sh/" + item,
+			"uid": item,
 		};
 	});
 

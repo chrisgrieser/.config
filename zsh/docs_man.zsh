@@ -8,20 +8,14 @@ function ch() {
 	echo "$CHEAT_CODE_ONLY" | pbcopy
 }
 
-# Better Aprospos (apropos searches descriptions of installed CLIs)
-alias \?='betterApropos'
-function betterApropos() {
-	apropos -s1 "$*" | sed -e 's/([[:digit:]])//' | sort -u
-}
-
 # GET A BETTER MAN
 # first arg: command, second arg: search term
 function man() {
-	local alacrittyConfig="$HOME/.config/alacritty/man-page.yml"
-
 	if ! command -v alacritty &>/dev/null; then echo "alacritty not installed." && exit 1; fi
 	if ! command -v "$1" &>/dev/null; then echo "$1 not installed." && exit 1; fi
 	
+	local alacrittyConfig="$HOME/.config/alacritty/man-page.yml"
+	local title="man: $1"
 	local isBuiltIn=false
 	# shellcheck disable=2230
 	[[ "$(which "$1")" =~ "built-in" ]] && isBuiltIn=true
@@ -31,17 +25,17 @@ function man() {
 
 	# run in subshell to suppress output
 	if [[ $isBuiltIn == true ]] && [[ -z "$2" ]]; then
-		(alacritty --config-file="$alacrittyConfig" --title="built-in help: $1" --command less /usr/share/zsh/*/help/"$1" &)
+		(alacritty --config-file="$alacrittyConfig" --title="$title" --command less /usr/share/zsh/*/help/"$1" &)
 	elif [[ $isBuiltIn == true ]] && [[ -n "$2" ]]; then
-		(alacritty --config-file="$alacrittyConfig" --title="built-in help: $1" --command less --pattern="$2" /usr/share/zsh/*/help/"$1" &)
+		(alacritty --config-file="$alacrittyConfig" --title="$title" --command less --pattern="$2" /usr/share/zsh/*/help/"$1" &)
 	elif [[ $isBuiltIn == false ]] && [[ -z "$2" ]]; then
-		(alacritty --config-file="$alacrittyConfig" --title="man: $1" --command man "$1" &)
+		(alacritty --config-file="$alacrittyConfig" --title="$title" --command man "$1" &)
 	else
-		(alacritty --config-file="$alacrittyConfig" --title="man: $1" --command man -P "/usr/bin/less -is --pattern=$2" "$1" &)
+		(alacritty --config-file="$alacrittyConfig" --title="$title" --command man -P "/usr/bin/less -is --pattern=$2" "$1" &)
 	fi
 }
 
-# simpler version for people reading my dotfiles to snatch
+# # simpler version for people reading my dotfiles to snatch
 # function man () {
 # 	command man "$1" -P "/usr/bin/less -is --pattern=$2"
 # }
@@ -54,5 +48,5 @@ export LESS_TERMCAP_us=$'\E[1;35m' # begin underline = MAGENTA
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
 
 # Pager-specific settings
-# (INFO: less ignore-case is actually smart case)
+# INFO: less' ignore-case is actually smart case
 export LESS='-R --incsearch --ignore-case --window=-3 --quit-if-one-screen --no-init --tilde'
