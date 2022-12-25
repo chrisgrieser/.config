@@ -739,6 +739,79 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>QUERY=$(echo "$*" | tr " " "+")
+curl -s "https://cht.sh/$QUERY?T"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>cheat.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>7B66DF62-F4DE-4985-9579-5E3FFA42CDBA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>sh</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>list-cheatsheets.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>SHella Chetsheets</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Search various Docs.
@@ -765,6 +838,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>705</real>
 			<key>ypos</key>
 			<real>595</real>
+		</dict>
+		<key>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</key>
+		<dict>
+			<key>note</key>
+			<string>search for cheatsheet</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1010</real>
 		</dict>
 		<key>1CA4905C-0482-4517-93A3-656ACFA985CD</key>
 		<dict>
@@ -810,6 +892,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>555</real>
 			<key>ypos</key>
 			<real>595</real>
+		</dict>
+		<key>7B66DF62-F4DE-4985-9579-5E3FFA42CDBA</key>
+		<dict>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>1010</real>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
