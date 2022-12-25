@@ -61,6 +61,9 @@ keymap("o", "<Space>", function () varTextObj.subword(true) end, { desc = "inner
 -- n: [n]ear end of the line
 keymap({ "o", "x" }, "n", varTextObj.nearEoL, { desc = "almost ending of line textobj" })
 
+-- 
+keymap({ "o", "x" }, "n", varTextObj.column, { desc = "column till whitespace textobj" })
+
 -- r: [r]est of paragraph (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
 keymap("o", "r", varTextObj.restOfParagraph, { desc = "rest of paragraph (linewise)" })
