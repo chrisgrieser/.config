@@ -325,7 +325,7 @@ Search through installed AppleScript dictionaries via the Search Keyword (defaul
 
 ![Alfred results for asdic m](images/about/asdicm.png)
 
-The first run will take a few seconds to find the dictionaries, but subsequent runs will be instant. Updating the dictionaries list is done automatically but can be forced with `:applescriptdictionariesforceupdate`.</string>
+The first run will take a few seconds to find the dictionaries, but subsequent runs will be instant. Updating the dictionaries list is done automatically but can be forced with the `:applescriptdictionariesforceupdate` keyword.</string>
 	<key>uidata</key>
 	<dict>
 		<key>18094443-82E3-483A-B5EE-3B9CD814052E</key>
@@ -413,7 +413,7 @@ The first run will take a few seconds to find the dictionaries, but subsequent r
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2022.5</string>
+	<string>2022.6</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/applescript-dictionaries-workflow/</string>
 </dict>

@@ -91,3 +91,24 @@ ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 # # Fig
 # mkdir -p ~/.fig/config
 # ln -sf "$DOTFILE_FOLDER/fig/settings.json" ~/.fig
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# INFO: already set up, no need to run again.
+# Only left here for reference, or when dotfile folder location is changed
+
+# # Brave PWAs
+# [[ -e ~"/Applications/$BROWSER Apps.localized" ]] && rm -rf ~"/Applications/$BROWSER Apps.localized"
+# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
+
+# # to keep private stuff out of the dotfile repo
+# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/hammerspoon-private.lua" "$DOTFILE_FOLDER/hammerspoon/lua/private.lua"
+# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/espanso-private.yml" "$DOTFILE_FOLDER/espanso/match/private.yml"
+# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify-tui-client.yml" "$DOTFILE_FOLDER/.config/spotify-tui/client.yml"
+# ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify_token_cache.json" "$DOTFILE_FOLDER/.config/spotify-tui/.spotify_token_cache.json"
+
+# # Obsidian vimrc
+# ln -sf "$DOTFILE_FOLDER/obsidian/obsidian.vimrc" "$VAULT_PATH/Meta"
+# ln -sf "$DOTFILE_FOLDER/obsidian/obsidian-vim-helpers.js" "$VAULT_PATH/Meta"
+# ln -sf "$DOTFILE_FOLDER/obsidian/obsidian.vimrc" "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development/Meta"
+# ln -sf "$DOTFILE_FOLDER/obsidian/obsidian-vim-helpers.js" "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development/Meta"

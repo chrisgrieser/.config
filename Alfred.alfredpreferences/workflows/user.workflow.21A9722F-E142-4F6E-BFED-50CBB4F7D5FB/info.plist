@@ -88,19 +88,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E1B642B1-7077-4090-9C23-656A55E19199</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>859A813B-BC0E-4FD1-B2A5-E698076BF6E5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -112,27 +99,6 @@
 	<string>Alfred Tweaks</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://npms.io/search?q=alfred+workflow+{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>88BE14E8-8C6C-40C6-9497-48E193416293</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -157,17 +123,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
+				<key>browser</key>
 				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library/Caches/com.runningwithcrayons.Alfred</string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://npms.io/search?q=alfred+workflow+{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>ABF30A35-70D2-41E3-B40B-4A5E783EB7FC</string>
+			<string>88BE14E8-8C6C-40C6-9497-48E193416293</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -193,6 +165,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library/Caches/com.runningwithcrayons.Alfred</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>ABF30A35-70D2-41E3-B40B-4A5E783EB7FC</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -208,48 +195,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>59B65F8F-3EDB-4000-8F90-1C01AF6BC6A5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://pacmax.org/?s={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>BF89C364-F5A2-446D-A3F4-F0EAF2212146</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>http://www.packal.org/workflow-search?query={query}&amp;osx-version=All&amp;items_per_page=50</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>424FC24A-8D2D-4BE5-A394-E934EF993E6F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -292,56 +237,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
+				<key>browser</key>
 				<string></string>
-				<key>hotkey</key>
-				<integer>29</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>0</string>
-				<key>leftcursor</key>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.runningwithcrayons.Alfred-Preferences</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://pacmax.org/?s={query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>E1B642B1-7077-4090-9C23-656A55E19199</string>
+			<string>BF89C364-F5A2-446D-A3F4-F0EAF2212146</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>9</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>http://www.packal.org/workflow-search?query={query}&amp;osx-version=All&amp;items_per_page=50</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>859A813B-BC0E-4FD1-B2A5-E698076BF6E5</string>
+			<string>424FC24A-8D2D-4BE5-A394-E934EF993E6F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -399,18 +330,18 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>725</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>155</real>
 		</dict>
 		<key>411F0C67-7E50-4B01-AF68-F2742465259B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>575</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>155</real>
 		</dict>
 		<key>424FC24A-8D2D-4BE5-A394-E934EF993E6F</key>
 		<dict>
@@ -426,18 +357,18 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>575</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>65</real>
+			<real>30</real>
 		</dict>
 		<key>4A6AD1C0-ABCF-4C85-8E12-C4170B8982C5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>725</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>285</real>
 		</dict>
 		<key>59B65F8F-3EDB-4000-8F90-1C01AF6BC6A5</key>
 		<dict>
@@ -447,13 +378,6 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>100</real>
-		</dict>
-		<key>859A813B-BC0E-4FD1-B2A5-E698076BF6E5</key>
-		<dict>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>305</real>
 		</dict>
 		<key>88BE14E8-8C6C-40C6-9497-48E193416293</key>
 		<dict>
@@ -469,9 +393,9 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>725</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>65</real>
+			<real>30</real>
 		</dict>
 		<key>BF89C364-F5A2-446D-A3F4-F0EAF2212146</key>
 		<dict>
@@ -487,16 +411,9 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>575</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>320</real>
-		</dict>
-		<key>E1B642B1-7077-4090-9C23-656A55E19199</key>
-		<dict>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>305</real>
+			<real>285</real>
 		</dict>
 		<key>F55D1533-F14F-4A8E-88D1-B4C3F3DACB70</key>
 		<dict>

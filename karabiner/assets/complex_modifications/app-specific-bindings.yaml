@@ -642,6 +642,15 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.tinyspeck\.slackmacgap$
+  - description: "Alfred Preferences: cmd+0 as cmd+9"
+    manipulators:
+      - type: basic
+        from: {key_code: "0", modifiers: {mandatory: [command]}}
+        to:
+          - {key_code: "9", modifiers: [command]}
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com.runningwithcrayons.Alfred-Preferences$]
   - description: "\U0001F170️\U0001F4AC Discord"
     manipulators:
       # ctrl-h & ctrl-l to go back / forward a channel

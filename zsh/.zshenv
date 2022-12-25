@@ -1,5 +1,6 @@
 export EDITOR=nvim
 export PAGER=less
+export BROWSER="Brave Browser"
 
 #───────────────────────────────────────────────────────────────────────────────
 # DIRECTORIES
