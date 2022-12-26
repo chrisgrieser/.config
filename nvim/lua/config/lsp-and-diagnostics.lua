@@ -27,20 +27,34 @@ end
 
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS (also applies to null-ls)
-keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, { silent = true })
-keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, { silent = true })
+keymap(
+	"n",
+	"ge",
+	function() vim.diagnostic.goto_next { wrap = true, float = true } end,
+	{ silent = true }
+)
+keymap(
+	"n",
+	"gE",
+	function() vim.diagnostic.goto_prev { wrap = true, float = true } end,
+	{ silent = true }
+)
 keymap("n", "<leader>d", function() vim.diagnostic.open_float { focusable = false } end)
 
 -- toggle diagnostics
 local diagnosticToggled = true
-keymap("n", "<leader>od", function() -- consistent with other option toggling also using <leader>o{letter}
-	if diagnosticToggled then
-		vim.diagnostic.disable(0)
-	else
-		vim.diagnostic.enable(0)
+keymap(
+	"n",
+	"<leader>od",
+	function() -- consistent with other option toggling also using <leader>o{letter}
+		if diagnosticToggled then
+			vim.diagnostic.disable(0)
+		else
+			vim.diagnostic.enable(0)
+		end
+		diagnosticToggled = not diagnosticToggled
 	end
-	diagnosticToggled = not diagnosticToggled
-end)
+)
 
 local function diagnosticFormat(diagnostic, mode)
 	local msg = trim(diagnostic.message)
@@ -132,7 +146,9 @@ autocmd("LspAttach", {
 
 		require("lsp-inlayhints").on_attach(client, bufnr)
 
-		if client.server_capabilities.documentSymbolProvider then require("nvim-navic").attach(client, bufnr) end
+		if client.server_capabilities.documentSymbolProvider then
+			require("nvim-navic").attach(client, bufnr)
+		end
 
 		if client.name == "tsserver" then -- eslint & prettier already take care of formatting
 			client.server_capabilities.documentFormattingProvider = false
@@ -192,8 +208,10 @@ end)
 --------------------------------------------------------------------------------
 -- Add borders to various lsp windows
 require("lspconfig.ui.windows").default_options.border = borderStyle
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderStyle })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
+vim.lsp.handlers["textDocument/hover"] =
+	vim.lsp.with(vim.lsp.handlers.hover, { border = borderStyle })
+vim.lsp.handlers["textDocument/signatureHelp"] =
+	vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
 
 --------------------------------------------------------------------------------
 -- LSP-SERVER-SPECIFIC SETUP

@@ -81,7 +81,8 @@ require("telescope").setup {
 		},
 		lsp_document_symbols = {
 			prompt_prefix = "* ",
-			ignore_symbols = { "string", "boolean", "number" },
+			ignore_symbols = { "boolean", "number" }, -- markdown headings are symbol-type "string"
+			fname_width = 17,
 		},
 		lsp_workspace_symbols = {
 			prompt_prefix = "W* ",
