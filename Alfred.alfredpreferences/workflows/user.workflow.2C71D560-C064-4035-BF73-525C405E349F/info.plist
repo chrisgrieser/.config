@@ -110,6 +110,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>DF8AB89B-FCDB-4C08-8FF9-0CD849536821</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1A695D3B-6C2C-4066-AB82-F79EE52C1225</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>EB84A4C2-76C4-4F85-B569-2BB8574BBA12</key>
 		<array>
 			<dict>
@@ -373,8 +386,13 @@ end run</string>
 				<false/>
 				<key>modsmode</key>
 				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.agiletortoise.Drafts-OSX</string>
+					<string>com.neovide.neovide</string>
+				</array>
 				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
@@ -483,6 +501,62 @@ end run</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>⎋</string>
+				<key>keycode</key>
+				<integer>53</integer>
+				<key>keymod</key>
+				<integer>524288</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>1A695D3B-6C2C-4066-AB82-F79EE52C1225</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>49</integer>
+				<key>hotmod</key>
+				<integer>524288</integer>
+				<key>hotstring</key>
+				<string>Space</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.agiletortoise.Drafts-OSX</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>DF8AB89B-FCDB-4C08-8FF9-0CD849536821</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>requires "aspell" to be installed on the system. (`brew install aspell`)
@@ -511,6 +585,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>150</real>
+		</dict>
+		<key>1A695D3B-6C2C-4066-AB82-F79EE52C1225</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>native macOS autocomplete</string>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>620</real>
 		</dict>
 		<key>1B6BE7EF-EE49-4827-A81C-43DBAC01C611</key>
 		<dict>
@@ -604,6 +689,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>25</real>
+		</dict>
+		<key>DF8AB89B-FCDB-4C08-8FF9-0CD849536821</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>620</real>
 		</dict>
 		<key>EB84A4C2-76C4-4F85-B569-2BB8574BBA12</key>
 		<dict>

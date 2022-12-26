@@ -282,7 +282,7 @@ if isGui() then
 	end, { desc = "open in file explorer" })
 
 	keymap({ "n", "x", "i" }, "<D-1>", cmd.Lex) -- file tree (netrw)
-	keymap("n", "<D-0>", ":messages<CR>", { desc = ":messages" }) -- as cmd.function these wouldn't require confirmation
+	keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
 	keymap("n", "<D-9>", ":Notification<CR>", { desc = ":Notifications" })
 
 	-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt

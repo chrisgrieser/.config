@@ -221,6 +221,15 @@ exmap nextTab obcommand workspace:next-tab
 nmap <CR> :nextTab
 
 """"""""""""""""""""""
+" Terminal
+""""""""""""""""""""""
+" requires Obsidian terminal plugin
+
+exmap open-terminal obcommand obsidian-terminal-plugin:open-terminal
+" exmap edit-in-terminal obcommand obsidian-terminal-plugin:open-terminal-editor
+nmap 6 :open-terminal
+
+""""""""""""""""""""""
 " Folding
 """"""""""""""""""""""
 " Emulate Original Folding command https://vimhelp.org/fold.txt.html#fold-commands
