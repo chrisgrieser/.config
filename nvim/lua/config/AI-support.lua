@@ -25,7 +25,7 @@ keymap("x", "ga", ":NeuralCode complete<CR>")
 require("neural").setup {
 	mappings = {
 		swift = nil,
-		prompt = "gA",
+		prompt = nil,
 	},
 	open_ai = {
 		api_key = vim.env.OPENAI_API_KEY, -- not committed, defined in config/private-settings.lua outside of repo

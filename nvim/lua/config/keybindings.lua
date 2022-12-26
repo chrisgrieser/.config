@@ -359,7 +359,8 @@ autocmd("BufReadPost", {
 		if bo.filetype == "ssr" then return end
 		keymap("n", "<CR>", function()
 			if expand("#") == "" then
-				vim.notify("No alternate file.", logWarn)
+				local lastOldfile = vim.v.oldfiles[2]
+				cmd.edit(lastOldfile)
 			else
 				cmd.nohlsearch()
 				cmd.buffer("#")
