@@ -79,7 +79,6 @@ keymap("n", "^", "za", { desc = "toggle fold" }) -- quicker toggling of folds
 -- [M]atchUp
 g.matchup_text_obj_enabled = 0
 g.matchup_matchparen_enabled = 1 -- highlight
-
 keymap({ "n", "x", "o" }, "m", "<Plug>(matchup-%)", { desc = "matchup" })
 
 -- Middle of the Line
@@ -109,7 +108,6 @@ require("yanky").setup {
 keymap("n", "p", "<Plug>(YankyPutAfter)")
 keymap("n", "P", "<Plug>(YankyCycleForward)")
 keymap("n", "gp", qol.pasteDifferently, { desc = "paste differently" }) -- paste charwise reg as linewise & vice versa
-keymap("n", "gP", "<Plug>(YankyCycleBackward)")
 
 -- yanking without moving the cursor
 -- visual https://stackoverflow.com/a/3806683#comment10788861_3806683
@@ -392,7 +390,7 @@ keymap(
 	"x",
 	"X",
 	function() require("genghis").moveSelectionToNewFile() end,
-	{ desc = "move selection to new file" }
+	{ desc = "selection to new file" }
 )
 
 --------------------------------------------------------------------------------
