@@ -151,6 +151,7 @@ function betterClone() {
 	cd "$(ls -1 -t | head -n1)" || return
 	if grep -q "obsidian" package.json &>/dev/null; then
 		npm i # if it's an Obsidian plugin
+		npm run build
 	fi
 }
 

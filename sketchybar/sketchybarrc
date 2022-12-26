@@ -48,10 +48,11 @@ cpu_bar_item=$(sketchybar --query default_menu_items | grep -Ei "Stats.*cpu" | c
 sketchybar --bar \
 	height="$HEIGHT" \
 	position=top \
-	padding_left=5 \
-	padding_right=6 \
+	padding_left=2 \
+	padding_right=2 \
 	color="$BG_COLOR" \
 	display=all \
+	\
 	--default updates=when_shown \
 	drawing=on \
 	icon.font="Noto Emoji:Bold:16" \
@@ -59,7 +60,7 @@ sketchybar --bar \
 	label.font="Recursive:Medium:15.5" \
 	label.color="$FONT_COLOR" \
 	label.padding_left=1 \
-	label.padding_right=9 \
+	label.padding_right=7 \
 	icon.padding_left=1 \
 	icon.padding_right=2 \
 	y_offset="$ITEM_Y_OFFSET" \

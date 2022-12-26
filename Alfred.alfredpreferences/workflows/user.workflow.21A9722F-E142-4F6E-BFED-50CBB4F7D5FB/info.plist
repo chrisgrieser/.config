@@ -46,7 +46,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>88BE14E8-8C6C-40C6-9497-48E193416293</string>
+				<string>424FC24A-8D2D-4BE5-A394-E934EF993E6F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -66,7 +66,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>424FC24A-8D2D-4BE5-A394-E934EF993E6F</string>
+				<string>4B1187AD-52DB-45E4-92AB-CCAA8013F707</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -123,23 +123,17 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
+				<key>openwith</key>
 				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://npms.io/search?q=alfred+workflow+{query}</string>
+				<key>sourcefile</key>
+				<string>~/Library/Caches/com.runningwithcrayons.Alfred</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>88BE14E8-8C6C-40C6-9497-48E193416293</string>
+			<string>ABF30A35-70D2-41E3-B40B-4A5E783EB7FC</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -165,36 +159,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
+				<key>browser</key>
 				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library/Caches/com.runningwithcrayons.Alfred</string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>http://www.packal.org/workflow-search?query={query}&amp;osx-version=All&amp;items_per_page=50</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>ABF30A35-70D2-41E3-B40B-4A5E783EB7FC</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>pa</string>
-				<key>subtext</key>
-				<string>at Packal, PacMax, and GitHub</string>
-				<key>text</key>
-				<string>Search Alfred Workflows for '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>59B65F8F-3EDB-4000-8F90-1C01AF6BC6A5</string>
+			<string>424FC24A-8D2D-4BE5-A394-E934EF993E6F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -237,21 +216,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://pacmax.org/?s={query}</string>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>pa</string>
+				<key>subtext</key>
+				<string>at Packal, PacMax, and GitHub</string>
+				<key>text</key>
+				<string>Search Alfred Workflows for '{query}'</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>BF89C364-F5A2-446D-A3F4-F0EAF2212146</string>
+			<string>59B65F8F-3EDB-4000-8F90-1C01AF6BC6A5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -267,12 +246,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>http://www.packal.org/workflow-search?query={query}&amp;osx-version=All&amp;items_per_page=50</string>
+				<string>https://pacmax.org/?s={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>424FC24A-8D2D-4BE5-A394-E934EF993E6F</string>
+			<string>BF89C364-F5A2-446D-A3F4-F0EAF2212146</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -320,6 +299,27 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://alfred.app/search/?q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>4B1187AD-52DB-45E4-92AB-CCAA8013F707</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -348,9 +348,9 @@
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>365</real>
+			<real>255</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>140</real>
 		</dict>
 		<key>4A3828AC-7DF5-44AE-84CE-3F1B054C7349</key>
 		<dict>
@@ -370,6 +370,15 @@
 			<key>ypos</key>
 			<real>285</real>
 		</dict>
+		<key>4B1187AD-52DB-45E4-92AB-CCAA8013F707</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>255</real>
+			<key>ypos</key>
+			<real>375</real>
+		</dict>
 		<key>59B65F8F-3EDB-4000-8F90-1C01AF6BC6A5</key>
 		<dict>
 			<key>colorindex</key>
@@ -377,16 +386,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>100</real>
-		</dict>
-		<key>88BE14E8-8C6C-40C6-9497-48E193416293</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>365</real>
-			<key>ypos</key>
-			<real>25</real>
+			<real>195</real>
 		</dict>
 		<key>ABF30A35-70D2-41E3-B40B-4A5E783EB7FC</key>
 		<dict>
@@ -402,9 +402,9 @@
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>255</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>260</real>
 		</dict>
 		<key>DCD9C133-BB06-4C67-9775-B4814A38FF71</key>
 		<dict>
@@ -420,7 +420,7 @@
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>255</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>

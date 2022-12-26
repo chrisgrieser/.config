@@ -73,50 +73,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A253620F-FFA6-4E80-8C60-CE220D4D50DD</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>98959A8A-01E4-411D-93B6-00D953F6B889</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C0DA5B2B-624A-4F09-956B-68158231988A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>DA6F5742-B25C-4044-A613-90AFAA7C559F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>CE7614ED-D40C-491F-9512-567F3BDB68C0</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>8A5B08EE-864A-4668-98C6-D4F8E9A56580</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>DA6F5742-B25C-4044-A613-90AFAA7C559F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>50B66C20-4163-4A8A-A8C9-AFC175AEA52D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -328,62 +289,6 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>25</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>9</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.mimestream.Mimestream</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>A253620F-FFA6-4E80-8C60-CE220D4D50DD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>t</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1572864</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>98959A8A-01E4-411D-93B6-00D953F6B889</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -443,27 +348,6 @@ Chris</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>ma</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🔍 Search Mail Archive for '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>9BF84B32-0217-4A0F-9F75-E541FFDA268D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -506,35 +390,18 @@ end tell</string>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>ma newsletter</string>
+				<string>ma</string>
 				<key>subtext</key>
-				<string>in Mailplane</string>
+				<string></string>
 				<key>text</key>
-				<string>Open Newsletter with attachments</string>
+				<string>🔍 Search Mail Archive for '{query}'</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>C0DA5B2B-624A-4F09-956B-68158231988A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>label:newsletter has:attachment</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>DA6F5742-B25C-4044-A613-90AFAA7C559F</string>
+			<string>9BF84B32-0217-4A0F-9F75-E541FFDA268D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -632,18 +499,18 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>590</real>
 		</dict>
 		<key>47528376-3FAB-4282-8213-DC8E45C19F7B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>470</real>
 		</dict>
 		<key>4D67ED53-EADE-458A-B761-7F5070BEABA6</key>
 		<dict>
@@ -652,7 +519,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>470</real>
 		</dict>
 		<key>50B66C20-4163-4A8A-A8C9-AFC175AEA52D</key>
 		<dict>
@@ -661,9 +528,9 @@ end tell</string>
 			<key>note</key>
 			<string>search query in Mimestream</string>
 			<key>xpos</key>
-			<real>300</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>325</real>
 		</dict>
 		<key>5BD7290A-4D3C-4A41-A4D4-668385E514AB</key>
 		<dict>
@@ -692,9 +559,9 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>590</real>
 		</dict>
 		<key>8A5B08EE-864A-4668-98C6-D4F8E9A56580</key>
 		<dict>
@@ -725,13 +592,6 @@ end tell</string>
 			<key>ypos</key>
 			<real>165</real>
 		</dict>
-		<key>98959A8A-01E4-411D-93B6-00D953F6B889</key>
-		<dict>
-			<key>xpos</key>
-			<real>720</real>
-			<key>ypos</key>
-			<real>160</real>
-		</dict>
 		<key>9BF84B32-0217-4A0F-9F75-E541FFDA268D</key>
 		<dict>
 			<key>colorindex</key>
@@ -741,27 +601,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>315</real>
-		</dict>
-		<key>A253620F-FFA6-4E80-8C60-CE220D4D50DD</key>
-		<dict>
-			<key>note</key>
-			<string>toggle toolbar</string>
-			<key>xpos</key>
-			<real>550</real>
-			<key>ypos</key>
-			<real>160</real>
-		</dict>
-		<key>C0DA5B2B-624A-4F09-956B-68158231988A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>Newsletter with attachments</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>450</real>
+			<real>325</real>
 		</dict>
 		<key>CE7614ED-D40C-491F-9512-567F3BDB68C0</key>
 		<dict>
@@ -773,15 +613,6 @@ end tell</string>
 			<real>550</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>DA6F5742-B25C-4044-A613-90AFAA7C559F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>480</real>
 		</dict>
 		<key>F1646853-4BE7-44BE-985F-9282246BAFCA</key>
 		<dict>

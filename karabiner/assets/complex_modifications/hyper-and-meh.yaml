@@ -31,19 +31,12 @@ rules:
         to:
           - key_code: vk_none
         type: basic
-      # Keep Esc to Force Quit"
+      # Map Esc to F18
       - type: basic
         from:
-          key_code: f18
-          modifiers:
-            mandatory:
-              - command
-              - option
-        to:
           key_code: escape
-          modifiers:
-            - command
-            - option
+        to_if_alone:
+          - key_code: f18
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪ Tab  → Meh/Tab"
     manipulators:
