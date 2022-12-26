@@ -81,7 +81,6 @@ g.matchup_text_obj_enabled = 0
 g.matchup_matchparen_enabled = 1 -- highlight
 
 keymap({ "n", "x", "o" }, "m", "<Plug>(matchup-%)", { desc = "matchup" })
--- keymap({ "n", "x", "o" }, "m", "%", { desc = "match parenthesis" })
 
 -- Middle of the Line
 keymap({ "n", "x" }, "gm", "gM", { desc = "goto middle of logical line" })
@@ -181,12 +180,8 @@ keymap("n", "zf", "mz1z=`z") -- auto[f]ix word under cursor (= select 1st sugges
 keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
 keymap("n", "ss", function() require("substitute").line() end, { desc = "substitute line" })
 keymap("n", "S", function() require("substitute").eol() end, { desc = "substitute to end of line" })
-keymap(
-	"n",
-	"sx",
-	function() require("substitute.exchange").operator() end,
-	{ desc = "exchange operator" }
-)
+-- stylua: ignore
+keymap( "n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange operator" })
 keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
 -- ISwap
@@ -365,7 +360,7 @@ autocmd("BufReadPost", {
 				cmd.nohlsearch()
 				cmd.buffer("#")
 			end
-		end, { desc = "switch to alt file", buffer = true})
+		end, { desc = "switch to alt file", buffer = true })
 	end,
 })
 
@@ -471,12 +466,7 @@ keymap("n", "<leader>ow", qol.toggleWrap)
 -- TERMINAL AND CODI
 keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = "Esc" }) -- normal mode in Terminal window
 keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = "ToggleTerm" })
-keymap(
-	"x",
-	"6",
-	":ToggleTermSendVisualSelection size=8<CR>",
-	{ desc = "Send Selection to ToggleTerm" }
-)
+keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "Selection to ToggleTerm" })
 
 keymap("n", "5", function()
 	cmd.CodiNew()
