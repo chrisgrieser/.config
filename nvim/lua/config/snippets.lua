@@ -112,7 +112,8 @@ add("lua", {
 		$2
 	end
 	]]),
-	snip("ignore (stylua)", "-- stylua: ignore start"),
+	snip("ignore (stylua)", "-- stylua: ignore start\n--stylua: ignore end"),
+	snip("ignore block (stylua)", "-- stylua: ignore"),
 	snip("ignore (selene)", "-- selene: allow(${1:rule_name})"),
 	snip("ignore (selene global)", "--# selene: allow(${1:rule_name})"),
 	snip("home", 'os.getenv("HOME")'),

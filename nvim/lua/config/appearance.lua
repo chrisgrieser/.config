@@ -196,9 +196,7 @@ local function alternateFile()
 	local maxLen = 15
 	local altFile = expand("#:t")
 	local curFile = expand("%:t")
-	local altPath = expand("#:p")
-	local curPath = expand("%:p")
-	if altPath == curPath or altFile == "" then
+	if altFile == "" then
 		return ""
 	elseif curFile == altFile then
 		local altParent = expand("#:p:h:t")
@@ -213,9 +211,7 @@ local function currentFile() -- using this function instead of default filename,
 	local maxLen = 15
 	local altFile = expand("#:t")
 	local curFile = expand("%:t")
-	local altPath = expand("#:p")
-	local curPath = expand("%:p")
-	if curFile == altFile and not (altPath == curPath) then
+	if curFile == altFile then
 		local curParent = expand("%:p:h:t")
 		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
 		return curParent .. "/" .. curFile
