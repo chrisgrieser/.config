@@ -39,10 +39,10 @@ require("nvim-treesitter.configs").setup {
 		enable = true,
 		disable = {},
 	},
-	textobjects = {-- textobj plugin
-		move = {-- move to next comment / function
+	textobjects = { -- textobj plugin
+		move = { -- move to next comment / function
 			enable = true,
-			disable = {"markdown"}, -- so they can be mapped to heading navigation
+			disable = { "markdown" }, -- so they can be mapped to heading navigation
 			set_jumps = true,
 			goto_next_start = {
 				["<C-j>"] = "@function.outer",
@@ -53,7 +53,7 @@ require("nvim-treesitter.configs").setup {
 		},
 		select = {
 			enable = true,
-			disable = {"markdown"}, -- so they can be remapped to link text object
+			disable = { "markdown" }, -- so they can be remapped to link text object
 			lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
 			keymaps = {
 				["af"] = "@function.outer",
@@ -77,20 +77,27 @@ require("nvim-treesitter.configs").setup {
 	},
 
 	-----------------------------------------------------------------------------
+	-- plugins
 
-	rainbow = {-- rainbow plugin
+	rainbow = { -- rainbow plugin
 		enable = true,
 		disable = {}, -- list of languages you want to disable the plugin for
 		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
 		max_file_lines = 2000,
 	},
 
-	refactor = {-- refactor plugin
+	matchup = { -- vim-matchup
+		enable = true, -- mandatory, false will disable the whole extension
+		disable = {}, -- optional, list of language that will be disabled
+		disable_virtual_text = false,
+	},
+
+	refactor = { -- refactor plugin
 		highlight_definitions = {
 			enable = true,
 			clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
 		},
-		highlight_current_scope = {enable = false},
+		highlight_current_scope = { enable = false },
 		smart_rename = {
 			enable = true,
 			keymaps = {
@@ -107,6 +114,6 @@ require("nvim-treesitter.configs").setup {
 augroup("zshAsBash", {})
 autocmd("BufWinEnter", {
 	group = "zshAsBash",
-	pattern = {"*.sh", "*.zsh", ".zsh*"},
+	pattern = { "*.sh", "*.zsh", ".zsh*" },
 	command = "silent! set filetype=sh",
 })

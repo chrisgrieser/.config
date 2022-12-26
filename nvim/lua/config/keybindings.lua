@@ -64,7 +64,7 @@ keymap("n", "<Esc>", function()
 	cmd.nohlsearch()
 	cmd.echo() -- clear shortmessage
 	require("lualine").refresh() -- so the highlight count disappears quicker
-	if isGui() then 
+	if isGui() then
 		local clearPending = require("notify").pending() > 10
 		require("notify").dismiss { pending = clearPending }
 	end
@@ -76,8 +76,12 @@ keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "visual star (I 
 -- FOLDING
 keymap("n", "^", "za", { desc = "toggle fold" }) -- quicker toggling of folds
 
--- [M]atch
-keymap({ "n", "x", "o" }, "m", "%", { desc = "match parenthesis" })
+-- [M]atchUp
+g.matchup_text_obj_enabled = 0
+g.matchup_matchparen_enabled = 1 -- highlight
+
+keymap({ "n", "x", "o" }, "m", "<Plug>(matchup-%)", { desc = "matchup" })
+-- keymap({ "n", "x", "o" }, "m", "%", { desc = "match parenthesis" })
 
 -- Middle of the Line
 keymap({ "n", "x" }, "gm", "gM", { desc = "goto middle of logical line" })
@@ -174,19 +178,34 @@ keymap("n", "gL", "[s") -- prev misspelling
 keymap("n", "zf", "mz1z=`z") -- auto[f]ix word under cursor (= select 1st suggestion)
 
 -- [S]ubstitute Operator (substitute.nvim)
-keymap("n", "s", function () require("substitute").operator() end, { desc = "substitute operator" })
-keymap("n", "ss", function () require("substitute").line() end, { desc = "substitute line" })
-keymap("n", "S", function () require("substitute").eol() end, { desc = "substitute to end of line" })
-keymap("n", "sx", function () require("substitute.exchange").operator() end, { desc = "exchange operator" })
-keymap("n", "sxx", function () require("substitute.exchange").line() end, { desc = "exchange line" })
+keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
+keymap("n", "ss", function() require("substitute").line() end, { desc = "substitute line" })
+keymap("n", "S", function() require("substitute").eol() end, { desc = "substitute to end of line" })
+keymap(
+	"n",
+	"sx",
+	function() require("substitute.exchange").operator() end,
+	{ desc = "exchange operator" }
+)
+keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
 -- ISwap
 keymap("n", "X", cmd.ISwapWith, { desc = "swap nodes" })
 
 -- search & replace
-keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "search & replace" })
+keymap(
+	"n",
+	"<leader>f",
+	[[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]],
+	{ desc = "search & replace" }
+)
 keymap("x", "<leader>f", ":s///g<Left><Left><Left>", { desc = "search & replace" })
-keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "structural search & replace" }) -- wrapped in function for lazy-loading
+keymap(
+	{ "n", "x" },
+	"<leader>F",
+	function() require("ssr").open() end,
+	{ desc = "structural search & replace" }
+) -- wrapped in function for lazy-loading
 keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
 keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
 
@@ -203,7 +222,12 @@ keymap("x", "R", qol.duplicateSelection, { desc = "duplicate selection" })
 -- Undo
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
 keymap("n", "<C-u>", qol.undoDuration, { desc = "undo specific durations" })
-keymap("n", "<leader>u", function() require("telescope").extensions.undo.undo() end, { desc = "Telescope Undotree" })
+keymap(
+	"n",
+	"<leader>u",
+	function() require("telescope").extensions.undo.undo() end,
+	{ desc = "Telescope Undotree" }
+)
 
 -- Logging & Debugging
 keymap({ "n", "x" }, "<leader>ll", qol.quicklog, { desc = "add log statement" })
@@ -211,7 +235,12 @@ keymap({ "n", "x" }, "<leader>lb", qol.beeplog, { desc = "add beep log" })
 keymap("n", "<leader>lr", qol.removeLog, { desc = "remove all log statements" })
 
 -- Sort & highlight duplicate lines
-keymap({ "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { desc = "sort & highlight duplicates" }) -- second <CR> due to cmdheight=0
+keymap(
+	{ "n", "x" },
+	"<leader>S",
+	[[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]],
+	{ desc = "sort & highlight duplicates" }
+) -- second <CR> due to cmdheight=0
 
 -- URL Opening
 keymap("n", "gx", qol.bettergx, { desc = "open next URL" })
@@ -250,7 +279,7 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 -- VISUAL MODE
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
 keymap("x", "v", "<C-v>") -- `vv` from normal mode = visual block mode
-keymap("x", "p", "P", {desc = "paste without switcing register"})
+keymap("x", "p", "P", { desc = "paste without switcing register" })
 
 --------------------------------------------------------------------------------
 -- WINDOWS & SPLITS
@@ -269,7 +298,7 @@ keymap("t", "ä", [[<C-\><C-n><C-w>p]], { desc = "switch to previous window" })
 
 -- CMD-Keybindings
 if isGui() then
-	keymap({ "n", "x", "i" }, "<D-w>", qol.betterClose, { desc = "close buffer/window/tab" }) 
+	keymap({ "n", "x", "i" }, "<D-w>", qol.betterClose, { desc = "close buffer/window/tab" })
 
 	keymap({ "n", "x", "i" }, "<D-s>", cmd.write, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
 	keymap("n", "<D-a>", "ggVG", { desc = "select all" }) -- cmd+a
@@ -309,8 +338,6 @@ end
 
 --------------------------------------------------------------------------------
 -- BUFFERS
--- INFO: <BS> cycle between buffers (cybu) has to be defined in plugin-list for
--- lazy loading
 keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)", { desc = "cycle buffers" })
 
 -- Buffer selector
@@ -337,7 +364,7 @@ autocmd("BufReadPost", {
 				cmd.nohlsearch()
 				cmd.buffer("#")
 			end
-		end, { desc = "switch to alt file" })
+		end, { desc = "switch to alt file", buffer = true})
 	end,
 })
 
@@ -356,11 +383,21 @@ keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = 
 keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = "copy filename" })
 keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = "chmod +x" })
 keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = "rename file" })
-keymap("n", "<C-m>", function() require("genghis").moveAndRenameFile() end, { desc = "move & rename file" })
+keymap(
+	"n",
+	"<C-m>",
+	function() require("genghis").moveAndRenameFile() end,
+	{ desc = "move & rename file" }
+)
 keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = "duplicate file" })
 keymap("", "<D-BS>", function() require("genghis").trashFile() end, { desc = "move file to trash" })
 keymap("", "<D-n>", function() require("genghis").createNewFile() end, { desc = "create new file" })
-keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = "move selection to new file" })
+keymap(
+	"x",
+	"X",
+	function() require("genghis").moveSelectionToNewFile() end,
+	{ desc = "move selection to new file" }
+)
 
 --------------------------------------------------------------------------------
 -- GIT
@@ -378,36 +415,46 @@ keymap("n", "<D-g>", function()
 	end)
 end)
 
--- GitLinker: Copy & Open in Browser
-keymap("n", "<leader>G", function()
-	require("gitlinker").get_buf_range_url("n", { action_callback = require("gitlinker.actions").copy_to_clipboard })
-	require("gitlinker").get_buf_range_url("n", { action_callback = require("gitlinker.actions").open_in_browser })
+-- Git[L]inker: Copy & Open in Browser
+-- stylua: ignore start
+keymap("n", "<leader>L", function()
+	require("gitlinker").get_buf_range_url( "n", { action_callback = require("gitlinker.actions").copy_to_clipboard })
+	require("gitlinker").get_buf_range_url( "n", { action_callback = require("gitlinker.actions").open_in_browser })
 end)
+keymap("v", "<leader>L", function() -- this seems to not work with xmap, requires vmap
+	require("gitlinker").get_buf_range_url( "v", { action_callback = require("gitlinker.actions").copy_to_clipboard })
+	require("gitlinker").get_buf_range_url( "v", { action_callback = require("gitlinker.actions").open_in_browser })
+end)
+-- stylua: ignore end
 
-keymap("v", "<leader>G", function() -- this seems to not work with xmap, requires vmap
-	require("gitlinker").get_buf_range_url("v", { action_callback = require("gitlinker.actions").copy_to_clipboard })
-	require("gitlinker").get_buf_range_url("v", { action_callback = require("gitlinker.actions").open_in_browser })
-end)
+-- Neo[g]it
+keymap("n", "<leader>G", ":Neogit<CR>", { desc = "Neogit" })
 
 -- add-commit-pull-push
 keymap("n", "<leader>g", function()
 	local prefill = b.prevCommitMsg or ""
 
 	-- uses dressing + cmp + omnifunc for autocompletion of filenames
-	vim.ui.input({ prompt = "Commit Message", default = prefill, completion = "file" }, function(commitMsg)
-		if not commitMsg then
-			return
-		elseif #commitMsg > 50 then
-			vim.notify("Commit Message too long.\n(Run again for shortened message.)", logWarn)
-			b.prevCommitMsg = commitMsg:sub(1, 50)
-			return
-		elseif commitMsg == "" then
-			commitMsg = "patch"
-		end
+	vim.ui.input(
+		{ prompt = "Commit Message", default = prefill, completion = "file" },
+		function(commitMsg)
+			if not commitMsg then
+				return
+			elseif #commitMsg > 50 then
+				vim.notify("Commit Message too long.\n(Run again for shortened message.)", logWarn)
+				b.prevCommitMsg = commitMsg:sub(1, 50)
+				return
+			elseif commitMsg == "" then
+				commitMsg = "patch"
+			end
 
-		vim.notify("ﴻ add-commit-push…")
-		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
-	end)
+			vim.notify("ﴻ add-commit-push…")
+			fn.jobstart(
+				"git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push",
+				shellOpts
+			)
+		end
+	)
 end)
 
 --------------------------------------------------------------------------------
@@ -423,7 +470,12 @@ keymap("n", "<leader>ow", qol.toggleWrap)
 -- TERMINAL AND CODI
 keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = "Esc" }) -- normal mode in Terminal window
 keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = "ToggleTerm" })
-keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "Send Selection to ToggleTerm" })
+keymap(
+	"x",
+	"6",
+	":ToggleTermSendVisualSelection size=8<CR>",
+	{ desc = "Send Selection to ToggleTerm" }
+)
 
 keymap("n", "5", function()
 	cmd.CodiNew()
@@ -444,7 +496,9 @@ keymap("n", "<leader>r", function()
 	elseif ft == "markdown" then
 		local filepath = expand("%:p")
 		local pdfFilename = expand("%:t:r") .. ".pdf"
-		fn.system("pandoc '" .. filepath .. "' --output='" .. pdfFilename .. "' --pdf-engine=wkhtmltopdf")
+		fn.system(
+			"pandoc '" .. filepath .. "' --output='" .. pdfFilename .. "' --pdf-engine=wkhtmltopdf"
+		)
 		fn.system("open '" .. pdfFilename .. "'")
 
 	-- nvim config
@@ -458,7 +512,8 @@ keymap("n", "<leader>r", function()
 
 	-- Karabiner
 	elseif ft == "yaml" and parentFolder:find("/karabiner") then
-		local result = fn.system([[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]])
+		local result =
+			fn.system([[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]])
 		result = result:gsub("\n$", "")
 		vim.notify(result)
 

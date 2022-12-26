@@ -126,7 +126,15 @@ return {
 	},
 
 	-- Terminal & Git
-	{"metakirby5/codi.vim", cmd = {"Codi", "CodiNew", "CodiExpand"} },
+	{ "TimUntersberger/neogit",
+		dependencies = "nvim-lua/plenary.nvim",
+		cmd = "Neogit",
+		config = function () require("neogit").setup{
+				disable_signs = true,
+				integrations = {diffview = true},
+		} end
+	},
+	{"metakirby5/codi.vim", cmd = {"Codi", "CodiNew", "CodiExpand"} }, -- only coderunner with virtual text
 	{"akinsho/toggleterm.nvim",
 		cmd = {"ToggleTerm", "ToggleTermSendVisualSelection"},
 		config = function() require("toggleterm").setup() end
@@ -148,6 +156,7 @@ return {
 	},
 
 	-- EDITING-SUPPORT
+	"andymass/vim-matchup",
 	"kylechui/nvim-surround", -- surround operator
 	{"gbprod/substitute.nvim", -- substitution & exchange operator
 		lazy = true,
