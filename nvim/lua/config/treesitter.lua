@@ -81,15 +81,15 @@ require("nvim-treesitter.configs").setup {
 
 	rainbow = { -- rainbow plugin
 		enable = true,
-		disable = {}, -- list of languages you want to disable the plugin for
+		disable = {},
 		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
 		max_file_lines = 2000,
 	},
 
 	matchup = { -- vim-matchup
 		enable = true, -- mandatory, false will disable the whole extension
-		disable = {}, -- optional, list of language that will be disabled
-		disable_virtual_text = false,
+		disable = {},
+		disable_virtual_text = true, -- virtual text at the end of function in js
 	},
 
 	refactor = { -- refactor plugin

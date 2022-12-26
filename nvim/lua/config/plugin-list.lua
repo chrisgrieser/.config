@@ -156,7 +156,7 @@ return {
 	},
 
 	-- EDITING-SUPPORT
-	"andymass/vim-matchup",
+	{"andymass/vim-matchup", lazy = true},
 	"kylechui/nvim-surround", -- surround operator
 	{"gbprod/substitute.nvim", -- substitution & exchange operator
 		lazy = true,
