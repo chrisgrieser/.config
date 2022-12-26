@@ -128,8 +128,7 @@ autocmd("TextYankPost", {
 --------------------------------------------------------------------------------
 
 -- MACROS
-local recorder = require("recorder")
-recorder.setup {
+require("recorder").setup {
 	clear = true,
 	logLevel = logTrace,
 	mapping = {
@@ -186,12 +185,7 @@ keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc 
 keymap("n", "X", cmd.ISwapWith, { desc = "swap nodes" })
 
 -- search & replace
-keymap(
-	"n",
-	"<leader>f",
-	[[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]],
-	{ desc = "search & replace" }
-)
+keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "search & replace" })
 keymap("x", "<leader>f", ":s///g<Left><Left><Left>", { desc = "search & replace" })
 keymap(
 	{ "n", "x" },
@@ -377,7 +371,7 @@ keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = 
 keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = "copy filename" })
 keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = "chmod +x" })
 keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = "rename file" })
-keymap( "n", "<C-m>", function() require("genghis").moveAndRenameFile() end, { desc = "move-rename file" })
+keymap("n", "<C-m>", function() require("genghis").moveAndRenameFile() end, { desc = "move-rename file" })
 keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = "duplicate file" })
 keymap("", "<D-BS>", function() require("genghis").trashFile() end, { desc = "move file to trash" })
 keymap("", "<D-n>", function() require("genghis").createNewFile() end, { desc = "create new file" })
@@ -386,6 +380,9 @@ keymap( "x", "X", function() require("genghis").moveSelectionToNewFile() end, { 
 
 --------------------------------------------------------------------------------
 -- GIT
+
+-- Neo[G]it
+keymap("n", "<leader>G", ":Neogit<CR>", { desc = "Neogit" })
 
 -- Diffview
 keymap("n", "<D-g>", function()
@@ -401,46 +398,54 @@ keymap("n", "<D-g>", function()
 	end)
 end)
 
--- Git[L]inker: Copy & Open in Browser
--- stylua: ignore start
-keymap("n", "<leader>L", function()
-	require("gitlinker").get_buf_range_url( "n", { action_callback = require("gitlinker.actions").copy_to_clipboard })
-	require("gitlinker").get_buf_range_url( "n", { action_callback = require("gitlinker.actions").open_in_browser })
-end)
-keymap("v", "<leader>L", function() -- this seems to not work with xmap, requires vmap
-	require("gitlinker").get_buf_range_url( "v", { action_callback = require("gitlinker.actions").copy_to_clipboard })
-	require("gitlinker").get_buf_range_url( "v", { action_callback = require("gitlinker.actions").open_in_browser })
-end)
--- stylua: ignore end
+-- Git-link (<C-M-S-g> = ctrl-alt-shift-g = meh-g)
+keymap({ "n", "x" }, "<C-M-S-g>", function()
+	local repo = fn.system([[git remote -v]]):gsub(".*:(.-)%.git.*", "%1")
+	local branch = fn.system([[git branch --show-current]]):gsub("\n", "")
+	if branch:find("^fatal: not a git repository") then
+		vim.notify("Not a git repository.", logWarn)
+		return
+	end
+	local filepath = expand("%:p")
+	local gitroot = fn.system([[git rev-parse --show-toplevel]])
+	local pathInRepo = filepath:sub(#gitroot)
 
--- Neo[G]it
-keymap("n", "<leader>G", ":Neogit<CR>", { desc = "Neogit" })
+	local location
+	local selStart = fn.line("v")
+	local selEnd = fn.line(".")
+	if selStart == selEnd then
+		location = "L" .. tostring(selStart)
+	elseif selStart < selEnd then
+		location = "L" .. tostring(selStart) .. "-L" .. tostring(selEnd)
+	else
+		location = "L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
+	end
+
+	local gitRemote = "https://github.com/" .. repo .. "/blob/" .. branch .. pathInRepo .. "#" .. location
+
+	os.execute("open '" .. gitRemote .. "'")
+	fn.setreg("+", gitRemote)
+end, { desc = "git link" })
 
 -- add-commit-pull-push
 keymap("n", "<leader>g", function()
 	local prefill = b.prevCommitMsg or ""
 
 	-- uses dressing + cmp + omnifunc for autocompletion of filenames
-	vim.ui.input(
-		{ prompt = "Commit Message", default = prefill, completion = "file" },
-		function(commitMsg)
-			if not commitMsg then
-				return
-			elseif #commitMsg > 50 then
-				vim.notify("Commit Message too long.\n(Run again for shortened message.)", logWarn)
-				b.prevCommitMsg = commitMsg:sub(1, 50)
-				return
-			elseif commitMsg == "" then
-				commitMsg = "patch"
-			end
-
-			vim.notify("ﴻ add-commit-push…")
-			fn.jobstart(
-				"git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push",
-				shellOpts
-			)
+	vim.ui.input({ prompt = "Commit Message", default = prefill, completion = "file" }, function(commitMsg)
+		if not commitMsg then
+			return
+		elseif #commitMsg > 50 then
+			vim.notify("Commit Message too long.\n(Run again for shortened message.)", logWarn)
+			b.prevCommitMsg = commitMsg:sub(1, 50)
+			return
+		elseif commitMsg == "" then
+			commitMsg = "patch"
 		end
-	)
+
+		vim.notify("ﴻ add-commit-push…")
+		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
+	end)
 end)
 
 --------------------------------------------------------------------------------
@@ -477,9 +482,7 @@ keymap("n", "<leader>r", function()
 	elseif ft == "markdown" then
 		local filepath = expand("%:p")
 		local pdfFilename = expand("%:t:r") .. ".pdf"
-		fn.system(
-			"pandoc '" .. filepath .. "' --output='" .. pdfFilename .. "' --pdf-engine=wkhtmltopdf"
-		)
+		fn.system("pandoc '" .. filepath .. "' --output='" .. pdfFilename .. "' --pdf-engine=wkhtmltopdf")
 		fn.system("open '" .. pdfFilename .. "'")
 
 	-- nvim config
@@ -514,12 +517,9 @@ keymap("n", "<leader>r", function()
 end)
 
 --------------------------------------------------------------------------------
--- BUG as long as an lsp is attached to a buffer (null-ls or regular), `gq`
--- apparently stops working.
-
---------------------------------------------------------------------------------
 
 -- q / Esc to close special windows
+local opts = { buffer = true, nowait = true, remap = true }
 augroup("quickQuit", {})
 autocmd("FileType", {
 	group = "quickQuit",
@@ -535,7 +535,6 @@ autocmd("FileType", {
 		"man",
 	},
 	callback = function()
-		local opts = { buffer = true, nowait = true }
 		keymap("n", "<Esc>", cmd.close, opts)
 		keymap("n", "q", cmd.close, opts)
 	end,
@@ -546,12 +545,12 @@ autocmd("FileType", {
 autocmd("FileType", {
 	group = "quickQuit",
 	pattern = "TelescopePrompt",
-	callback = function() keymap("n", "q", "<Esc>", { buffer = true, nowait = true, remap = true }) end,
+	callback = function() keymap("n", "q", "<Esc>", opts) end,
 })
 autocmd("FileType", {
 	group = "quickQuit",
 	pattern = "ssr",
-	callback = function() keymap("n", "q", "Q", { buffer = true, nowait = true, remap = true }) end,
+	callback = function() keymap("n", "q", "Q", opts) end,
 })
 
 --------------------------------------------------------------------------------
