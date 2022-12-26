@@ -121,7 +121,7 @@ alias gg="git checkout -" # go to last branch, analogues to `zz` switching to la
 
 # open GitHub repo
 function getGithubURL() {
-	git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//'
+	git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//'
 }
 alias gh="getGithubURL | xargs open"
 alias ghi='open "$(getGithubURL)/issues"'

@@ -146,14 +146,6 @@ return {
 			file_history_panel = {win_config = {height = 4}},
 		} end,
 	},
-	{"ruifm/gitlinker.nvim",
-		dependencies = "nvim-lua/plenary.nvim",
-		lazy = true,
-		config = function() require("gitlinker").setup {
-			mappings = nil,
-			opts = {print_url = false},
-		} end,
-	},
 
 	-- EDITING-SUPPORT
 	{"andymass/vim-matchup", event = "VeryLazy"},

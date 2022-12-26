@@ -122,6 +122,14 @@ function M.betterClose()
 	local hasNotify = pcall(require, "notify")
 	if hasNotify then require("notify").dismiss() end
 
+	-- HACK: since scrollview-like plugins counts as a window, but only appears if buffer is
+	-- longer than window https://github.com/dstein64/nvim-scrollview/issues/83
+	local wincount = 0
+	for i = 1, fn.winnr("$"), 1 do
+		local config = api.nvim_win_get_config(fn.win_getid(i))
+		if not config.external and config.focusable then wincount = wincount + 1 end
+	end
+
 	local moreThanOneWin = fn.winnr("$") > 1
 	local moreThanOneTab = fn.tabpagenr("$") > 1
 	local buffers = fn.getbufinfo { buflisted = 1 }
