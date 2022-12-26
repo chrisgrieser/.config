@@ -111,7 +111,6 @@ function M.bettergx()
 	else
 		local urlLine = fn.getline(urlLineNr) ---@type string
 		local url = urlLine:match(urlLuaRegex)
-		print("url:", url)
 		os.execute('opener "' .. url .. '"')
 	end
 	setCursor(0, prevCur)
@@ -119,18 +118,11 @@ end
 
 ---Close tabs, window, buffer in that order if there is more than one of the type
 function M.betterClose()
+	-- to not include notices in window count
 	local hasNotify = pcall(require, "notify")
-	if hasNotify then require("notify").dismiss() end -- to not include notices in window count
+	if hasNotify then require("notify").dismiss() end
 
-	-- HACK: since scrollview counts as a window, but only appears if buffer is
-	-- longer than window https://github.com/dstein64/nvim-scrollview/issues/83
-	local wincount = 0
-	for i = 1, fn.winnr("$"), 1 do
-		local config = api.nvim_win_get_config(fn.win_getid(i))
-		if not config.external and config.focusable then wincount = wincount + 1 end
-	end
-
-	local moreThanOneWin = wincount > 1
+	local moreThanOneWin = fn.winnr("$") > 1
 	local moreThanOneTab = fn.tabpagenr("$") > 1
 	local buffers = fn.getbufinfo { buflisted = 1 }
 
@@ -181,8 +173,9 @@ function M.undoDuration(opts)
 	local resetLabel = "last open (~" .. tostring(minsPassed) .. "m ago)"
 	if not opts then opts = { selection = { resetLabel, "15m", "1h", "4h", "24h" } } end
 	vim.ui.select(opts.selection, { prompt = "Undo the last…" }, function(choice)
-		if not choice then return end
-		if choice:find("last save") then
+		if not choice then
+			return
+		elseif choice:find("last save") then
 			cmd("earlier " .. minsPassed .. "m")
 		else
 			cmd("earlier " .. choice)
@@ -387,9 +380,9 @@ function M.moveSelectionUp()
 	normal("gv=gv")
 end
 
-function M.moveSelectionRight() cmd([[normal! "zx"zpgvlolo]]) end
+function M.moveSelectionRight() normal('"zx"zpgvlolo') end
 
-function M.moveSelectionLeft() cmd([[normal! "zdh"zPgvhoho]]) end
+function M.moveSelectionLeft() normal('"zdh"zPgvhoho') end
 
 --------------------------------------------------------------------------------
 

@@ -377,21 +377,12 @@ keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = 
 keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = "copy filename" })
 keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = "chmod +x" })
 keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = "rename file" })
-keymap(
-	"n",
-	"<C-m>",
-	function() require("genghis").moveAndRenameFile() end,
-	{ desc = "move & rename file" }
-)
+keymap( "n", "<C-m>", function() require("genghis").moveAndRenameFile() end, { desc = "move-rename file" })
 keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = "duplicate file" })
 keymap("", "<D-BS>", function() require("genghis").trashFile() end, { desc = "move file to trash" })
 keymap("", "<D-n>", function() require("genghis").createNewFile() end, { desc = "create new file" })
-keymap(
-	"x",
-	"X",
-	function() require("genghis").moveSelectionToNewFile() end,
-	{ desc = "selection to new file" }
-)
+-- stylua: ignore
+keymap( "x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = "selection to new file" })
 
 --------------------------------------------------------------------------------
 -- GIT
@@ -406,6 +397,7 @@ keymap("n", "<D-g>", function()
 		else
 			cmd("DiffviewFileHistory % -G" .. query)
 		end
+		cmd.execute([["normal! \<C-W>w"]]) -- go directly to file window
 	end)
 end)
 
@@ -421,7 +413,7 @@ keymap("v", "<leader>L", function() -- this seems to not work with xmap, require
 end)
 -- stylua: ignore end
 
--- Neo[g]it
+-- Neo[G]it
 keymap("n", "<leader>G", ":Neogit<CR>", { desc = "Neogit" })
 
 -- add-commit-pull-push

@@ -51,6 +51,7 @@ require("cybu").setup {
 --------------------------------------------------------------------------------
 -- SCROLLBAR
 require("satellite").setup {
+	current_only = true,
 	winblend = 30,
 	excluded_filetypes = {},
 	handlers = {
