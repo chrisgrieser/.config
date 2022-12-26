@@ -249,6 +249,7 @@ keymap("x", "<Left>", qol.moveSelectionLeft)
 keymap({ "n", "x" }, "M", "J", { desc = "merge line up" })
 keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "merge line down" })
 keymap("n", "|", "a<CR><Esc>k$", { desc = "split line at cursor" })
+keymap("x", "|", "<Esc>`>a<CR><Esc>`<i<CR><Esc>", { desc = "split around selection" })
 
 -- TreeSJ plugin
 keymap("n", "<leader>s", cmd.TSJToggle, { desc = "split/join" })
