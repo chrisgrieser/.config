@@ -9,21 +9,16 @@ anchors:
         type: variable_unless
         name: LEADER_ACTIVE
         value: true
-        # Apple vendor ID seems to be sometimes 76 or 1456. 
         # IDs can be seen in the karabiner main app, devices tab
       - &not-apple-keyboard
         type: device_unless
         identifiers:
-          - vendor_id: 76
-            is_keyboard: true
-          - vendor_id: 1452
+          - vendor_id: 76 # = Apple
             is_keyboard: true
       - &is-apple-keyboard
         type: device_if
         identifiers:
           - vendor_id: 76
-            is_keyboard: true
-          - vendor_id: 1452
             is_keyboard: true
   - to:
       - &deactivate-leader

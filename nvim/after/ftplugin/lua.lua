@@ -17,7 +17,7 @@ keymap("n", "go", function()
 	if expand("%:p"):find(fn.stdpath("config")) then
 		telescope.find_files {
 			cwd = fn.stdpath("config"),
-			prompt_title = "Search in neovim config",
+			prompt_title = "nvim config",
 			prompt_prefix = " ",
 		}
 	else

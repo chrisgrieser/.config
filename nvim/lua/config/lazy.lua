@@ -1,5 +1,3 @@
--- TODO structure plugins as suggested here: https://github.com/folke/lazy.nvim#-structuring-your-plugins
---------------------------------------------------------------------------------
 -- Bootstrap Lazy.nvim plugin manager https://github.com/folke/lazy.nvim#-installation
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -41,7 +39,7 @@ require("lazy").setup("config/load-plugins", {
 			disabled_plugins = {
 				-- disable unused builtin plugins from neovim
 				"gzip",
-				"netrwPlugin",
+				"netrwPlugin", 
 				"tarPlugin",
 				"tohtml",
 				"tutor",
