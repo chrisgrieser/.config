@@ -25,10 +25,6 @@ return {
 		config = function() require("iswap").setup {autoswap = true} end,
 		cmd = "ISwapWith"
 	},
-	{"m-demare/hlargs.nvim", -- highlight function args
-		config = function() require("hlargs").setup() end,
-		event = "VeryLazy",
-	},
 	{"Wansmer/treesj", -- split-join
 		dependencies = "nvim-treesitter/nvim-treesitter" ,
 		config = function () require("treesj").setup { use_default_keymaps = false } end,
@@ -75,7 +71,7 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"dmitmel/cmp-cmdline-history",
 			"hrsh7th/cmp-emoji",
-			{"chrisgrieser/cmp-nerdfont", dev = true},
+			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp", -- lsp
@@ -84,24 +80,12 @@ return {
 			"windwp/nvim-autopairs", -- auto pair brackets/quotes
 		}
 	},
-
-	-- AI-Support
 	{ "tzachar/cmp-tabnine", build = "./install.sh", dependencies = "hrsh7th/nvim-cmp" },
-	{"jackMort/ChatGPT.nvim", dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" } },
-	{ "dense-analysis/neural", dependencies = "MunifTanjim/nui.nvim" },
 
 	-- Appearance
 	"nvim-lualine/lualine.nvim", -- status line
-	"lukas-reineke/indent-blankline.nvim", -- indentation guides
-	"lewis6991/gitsigns.nvim" , -- gutter signs
 	"rcarriga/nvim-notify", -- notifications
 	"uga-rosa/ccc.nvim", -- color previews & color utilities
-	"lewis6991/satellite.nvim", -- scrollbar
-	{"xiyaowong/virtcolumn.nvim", event = "VeryLazy"}, -- nicer colorcolumn
-	{ "anuvyklack/windows.nvim", dependencies = "anuvyklack/middleclass" }, -- auto-resize splits
-	{"stevearc/dressing.nvim",
-		dependencies = { "hrsh7th/nvim-cmp", "hrsh7th/cmp-omni" }, -- omni for autocompletion in input prompts
-	},
 
 	-- File Switching & File Operation
 	{"chrisgrieser/nvim-genghis",
@@ -114,12 +98,6 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"debugloop/telescope-undo.nvim",
-		},
-	},
-	{"ghillb/cybu.nvim", -- Cycle Buffers
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-			"nvim-lua/plenary.nvim",
 		},
 	},
 
@@ -153,7 +131,7 @@ return {
 		config = function () require("substitute").setup() end,
 	},
 	"numToStr/Comment.nvim", -- comment operator
-	{"mg979/vim-visual-multi", keys = "<D-j>"},
+	{"mg979/vim-visual-multi", keys = {"<D-j>", {"<D-j>", mode = "x"}}},
 	"Darazaki/indent-o-matic", -- auto-determine indents
 	{"chrisgrieser/nvim-recorder", dev = true}, -- better macros
 	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, -- custom textobjects

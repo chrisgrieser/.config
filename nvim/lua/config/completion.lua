@@ -26,7 +26,6 @@ end
 
 --------------------------------------------------------------------------------
 -- source definitions
-
 local emojis = { name = "emoji", keyword_length = 2 }
 local nerdfont = { name = "nerdfont", keyword_length = 2 }
 local buffer = { name = "buffer", keyword_length = 2 }
@@ -233,7 +232,23 @@ cmp.setup.filetype("DressingInput", {
 
 -- AUTOPAIRS
 require("nvim-autopairs").setup()
-
 -- add brackets to cmp
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+-- TABNINE
+-- INFO also requires setup in cmp config
+require("cmp_tabnine.config"):setup { -- yes, requires a ":", not "."
+	max_lines = 1000,
+	max_num_results = 20,
+	run_on_every_keystroke = true,
+	snippet_placeholder = "…",
+	show_prediction_strength = true,
+}
+
+-- automatically prefetch completions for the buffer
+augroup("prefetchTabNine", {})
+autocmd("BufRead", {
+	group = "prefetchTabNine",
+	callback = function() require("cmp_tabnine"):prefetch(expand("%:p")) end,
+})

@@ -350,6 +350,13 @@ if isGui() then
 end
 
 --------------------------------------------------------------------------------
+-- Neural
+keymap("x", "ga", ":NeuralCode complete<CR>")
+
+-- ChatGPT
+keymap("n", "ga", ":ChatGPT<CR>", { desc = "ChatGPT Prompt" })
+
+--------------------------------------------------------------------------------
 -- BUFFERS
 keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)", { desc = "cycle buffers" })
 -- Buffer selector
@@ -399,7 +406,7 @@ keymap( "x", "X", function() require("genghis").moveSelectionToNewFile() end, { 
 -- GIT
 
 -- Neo[G]it
-keymap("n", "<leader>G", ":Neogit<CR>", { desc = "Neogit" })
+keymap("n", "<leader>G", ":Neogit<CR>")
 
 -- Diffview
 keymap("n", "<D-g>", function()

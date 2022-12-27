@@ -16,7 +16,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
 -- config https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
-require("lazy").setup("config/plugin-list", {
+require("lazy").setup("config/load-plugins", {
 	defaults = {
 		-- version = "*", -- install the latest *stable* versions of plugins
 	},

@@ -78,7 +78,7 @@ opt.sidescrolloff = 18
 opt.textwidth = 80
 opt.wrap = false
 opt.breakindent = false
-opt.linebreak = true -- do not break up full words
+opt.linebreak = true -- do not break up full words on wrap
 opt.colorcolumn = "+1" -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
 opt.backspace = { "start", "eol" } -- restrict insert mode backspace behavior
@@ -102,7 +102,8 @@ autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	group = "autosave",
 	pattern = "?*", -- pattern required
 	callback = function()
-		if not bo.modifiable or bo.filetype == "TelescopePrompt" then return end
+		local isIrregularFile = not (expand("%:p"):find("/")) -- prevent irregular files from spamming view files
+		if not bo.modifiable or isIrregularFile then return end
 
 		-- safety net to not save file in wrong folder when autochdir is not reliable
 		local curFile = expand("%:p")
@@ -215,8 +216,7 @@ autocmd("BufWinEnter", {
 -- apply templates for any filetype named `./templates/skeleton.{ft}`
 augroup("Templates", {})
 local skeletionPath = fn.stdpath("config") .. "/templates"
-local filetypeList =
-	fn.system([[ls "]] .. skeletionPath .. [[/skeleton."* | xargs basename | cut -d. -f2]])
+local filetypeList = fn.system([[ls "]] .. skeletionPath .. [[/skeleton."* | xargs basename | cut -d. -f2]])
 local ftWithSkeletons = split(filetypeList, "\n")
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
