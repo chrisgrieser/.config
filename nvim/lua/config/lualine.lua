@@ -20,10 +20,10 @@ local function alternateFile()
 	local altPath = expand("#:p")
 	local curPath = expand("%:p")
 	if altPath == curPath then
-		return ""	
+		return ""
 	elseif altFile == "" then
 		local lastOldfile = vim.v.oldfiles[2]:gsub(".*/", "") -- 1 is the current file
-		return "# ("..lastOldfile..")"
+		return "# (" .. lastOldfile .. ")"
 	elseif curFile == altFile then
 		local altParent = expand("#:p:h:t")
 		if #altParent > maxLen then altParent = altParent:sub(1, maxLen) .. "…" end
@@ -153,7 +153,12 @@ require("lualine").setup {
 				cond = showBreadcrumbs,
 			},
 		},
-		lualine_x = {},
+			{
+				require("lazy.status").updates,
+				cond = require("lazy.status").has_updates,
+				color = { fg = "#ff9e64" },
+			},
+		lualine_x = ,
 		lualine_y = {
 			{ debuggerStatus, section_separators = winSecSeparators },
 		},

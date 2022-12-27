@@ -10,13 +10,17 @@ keymap("n", "gR", function()
 	local pattern = fn.getreg("z"):match('"(.*)"')
 	local url = "https://gitspartv.github.io/lua-patterns/?pattern=" .. pattern
 	fn.system("open '" .. url .. "'") -- opening method on macOS
-end, { desc = "Open next lua pattern in lua pattern viewer", buffer = true})
+end, { desc = "Open next lua pattern in regex viewer", buffer = true })
 
--- if in neovim dir, open
-keymap("n", "go", function ()
+-- if in neovim config, find files in neovim config only
+keymap("n", "go", function()
 	if expand("%:p"):find(fn.stdpath("config")) then
-		telescope.find_files{ cwd = fn.stdpath("config") }
+		telescope.find_files {
+			cwd = fn.stdpath("config"),
+			prompt_title = "Search in neovim config",
+			prompt_prefix = " ",
+		}
 	else
 		telescope.find_files()
 	end
-end, {desc = "Telescope: Files (for lua)", buffer = true})
+end, { desc = "Telescope: Files in neovim config", buffer = true })

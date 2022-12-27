@@ -38,18 +38,15 @@ require("lazy").setup("config/load-plugins", {
 	},
 	performance = {
 		rtp = { -- plugins names to disable
-			disabled_plugins = {},
+			disabled_plugins = {
+				-- disable unused builtin plugins from neovim
+				"gzip",
+				"netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
 		},
 	},
 })
-
--- disable default `K` from lazy
-augroup("lazyKeymaps", {})
-autocmd({ "FileType" }, {
-	group = "lazyKeymaps",
-	pattern = "lazy",
-	callback = function()
-      g.cursorPreYank = getCursor(0)
-   end,
-})
-

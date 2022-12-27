@@ -1,5 +1,6 @@
 require("config/utils")
 local opts = { buffer = true }
+local varTextObj = require("various-textobjs")
 --------------------------------------------------------------------------------
 
 -- comment marks more useful than symbols for theme development

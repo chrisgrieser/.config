@@ -1,4 +1,3 @@
-
 ---Create a copy of a lua table
 ---@param originalTable table
 ---@return table
@@ -104,7 +103,7 @@ return {
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp", -- lsp
-			"L3MON4D3/LuaSnip", -- snippet engine
+			"L3MON4D3/LuaSnip", -- snippet 
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 			"hrsh7th/cmp-omni", -- omni for autocompletion in input prompts
 		},
@@ -246,18 +245,47 @@ return {
 			require("cmp").setup.filetype("DressingInput", {
 				sources = require("cmp").config.sources { { name = "omni" } },
 			})
-
 		end,
 	},
 	{
 		"windwp/nvim-autopairs",
 		dependencies = "hrsh7th/nvim-cmp",
 		event = "InsertEnter",
-		config = function ()
+		config = function()
 			require("nvim-autopairs").setup()
 			-- add brackets to cmp
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
-	}, 
+	},
+	{
+		"L3MON4D3/LuaSnip",
+		event = "InsertEnter",
+		config = function()
+			require("config/snippets").loadSnippets()
+			local ls = require("luasnip")
+
+			ls.setup {
+				enable_autosnippets = true,
+				history = false, -- false = allow jumping back into the snippet
+				region_check_events = "InsertEnter", -- prevent <Tab> jumping back to a snippet after it has been left early
+				update_events = "TextChanged,TextChangedI", -- live updating of snippets
+			}
+
+			-- to be able to jump without <Tab> (e.g. when there is a non-needed suggestion)
+			vim.keymap.set({ "i", "s" }, "<D-j>", function()
+				if require("luasnip").expand_or_jumpable() then
+					require("luasnip").jump(1)
+				else
+					vim.notify("No Jump available.", logWarn)
+				end
+			end)
+
+			-- needs to come after snippet definitions
+			ls.filetype_extend("typescript", { "javascript" }) -- typescript uses all javascript snippets
+			ls.filetype_extend("bash", { "zsh" })
+			ls.filetype_extend("sh", { "zsh" })
+			ls.filetype_extend("scss", { "css" })
+		end,
+	},
 }

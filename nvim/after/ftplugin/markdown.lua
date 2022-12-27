@@ -1,5 +1,6 @@
 require("config/utils")
 local opts = { buffer = true, silent = true }
+local varTextObj = require("various-textobjs")
 --------------------------------------------------------------------------------
 
 -- hide URLs and other formatting, TODO figure out how to hide only URLs
