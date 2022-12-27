@@ -2,10 +2,12 @@ require("config/utils")
 --------------------------------------------------------------------------------
 
 lightTheme = "dawnfox"
-darkTheme = "tokyonight-moon"
+-- darkTheme = "tokyonight-moon"
 -- lightTheme = "melange"
 -- darkTheme = "oxocarbon"
--- darkTheme = "nightfox"
+darkTheme = "kanagawa"
+
+--------------------------------------------------------------------------------
 
 -- Annotations
 cmd.highlight { "def link myAnnotations Todo", bang = true } -- use same styling as "TODO"
