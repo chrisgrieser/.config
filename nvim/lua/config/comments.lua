@@ -28,25 +28,17 @@ require("Comment").setup {
 -- position.
 keymap("n", "dq", function ()
 	local prevCursor = getCursor(0)
-	cmd.normal { "dCOM" } -- without bang for remapping of COM
+	cmd.normal { "d<<<" } -- without bang for remapping of COM
 	setCursor(0, prevCursor)
 end) 
-keymap("n", "yq", "yCOM", {remap = true}) -- thanks to yank position saving, doesn't need to be done here
-keymap("n", "cq", '"_dCOMxQ', {remap = true}) -- delete & append comment to preserve commentstring
-
-
---------------------------------------------------------------------------------
-
--- Search only comments
-augroup("commentSearch", {})
-autocmd("FileType", {
-	pattern = "?*", -- only active when there is a filetype
-	group = "commentSearch",
-	callback = function()
-		local comStr = bo.commentstring:gsub(" ?%%s.*", "") -- remove replaceholder and back side of comment
-		keymap("n", "gq", [[/\v]] .. comStr.. [[.*]], {buffer = true, desc = "search only comments"})
-	end
-})
+keymap("n", "yq", function ()
+	cmd.normal { "y<<<" } -- without bang for remapping of COM
+end) -- thanks to yank position saving, doesn't need to be done here
+keymap("n", "cq", function ()
+	cmd.normal { "d<<<" } -- without bang for remapping of COM
+	cmd.normal { "xQ" }
+	cmd.startinsert{bang = true}
+end) 
 
 --------------------------------------------------------------------------------
 -- HORIZONTAL DIVIDER
