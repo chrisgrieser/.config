@@ -101,13 +101,13 @@ opt.clipboard = "unnamedplus"
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
+keymap("x", "p", "P", { desc = "paste without switcing register" })
 
 -- yanking without moving the cursor
-keymap("x", "y", "ygv<Esc>", { desc = "sticky yank" })
 augroup("yankImprovements", {})
 autocmd({ "CursorMoved", "VimEnter" }, {
 	group = "yankImprovements",
-	callback = function() g.cursorPreYankPos = fn.getpos(".") end,
+	callback = function() g.cursorPreYank = getCursor(0) end,
 })
 
 -- - yanking without moving the cursor
@@ -118,7 +118,8 @@ autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank { timeout = 1500 } -- highlighted yank
 		if vim.v.event.operator ~= "y" then return end
-		fn.setpos(".", g.cursorPreYankPos) -- sticky yank
+		setCursor(0, g.cursorPreYank)-- sticky yank
+		-- fn.setpos(".", g.cursorPreYankPos) 
 
 		-- add yanks to numbered registers
 		if vim.v.event.regname ~= "" then return end
@@ -139,6 +140,7 @@ keymap("n", "P", function()
 	if g.killringCount > 9 then g.killringCount = 0 end
 	normal('"' .. tostring(g.killringCount) .. "p")
 end, { desc = "simply killring" })
+
 keymap("n", "p", function()
 	g.killringCount = 0
 	normal("p")
@@ -146,7 +148,6 @@ end, { desc = "paste & reset killring" })
 
 -- paste charwise reg as linewise & vice versa
 keymap("n", "gp", function()
-	cmd.undo()
 	local isLinewise = fn.getregtype('"') == "V"
 	local targetRegType = isLinewise and "v" or "V"
 	local regContent = fn.getreg('"'):gsub("\n$", "")
@@ -292,12 +293,11 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 -- VISUAL MODE
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
 keymap("x", "v", "<C-v>") -- `vv` from normal mode = visual block mode
-keymap("x", "p", "P", { desc = "paste without switcing register" })
 
 --------------------------------------------------------------------------------
 -- WINDOWS & SPLITS
-keymap("", "<C-w>v", ":vsplit #<CR>", { desc = "vertical split (alt file)" }) -- open the alternate file in the split instead of the current file
-keymap("", "<C-w>h", ":split #<CR>", { desc = "horizontal split (alt file)" })
+keymap("n", "<C-w>v", ":vsplit #<CR>", { desc = "vertical split (alt file)" }) -- open the alternate file in the split instead of the current file
+keymap("n", "<C-w>h", ":split #<CR>", { desc = "horizontal split (alt file)" })
 keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize" }) -- resizing on one key for sanity
 keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize" })
 keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize" })
@@ -351,10 +351,10 @@ end
 
 --------------------------------------------------------------------------------
 -- Neural
-keymap("x", "ga", ":NeuralCode complete<CR>")
+keymap("x", "ga", ":NeuralCode complete<CR>", {desc = "AI: Code Complete"})
 
 -- ChatGPT
-keymap("n", "ga", ":ChatGPT<CR>", { desc = "ChatGPT Prompt" })
+keymap("n", "ga", ":ChatGPT<CR>", { desc = "AI: ChatGPT Prompt" })
 
 --------------------------------------------------------------------------------
 -- BUFFERS

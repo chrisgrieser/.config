@@ -1,8 +1,5 @@
 require("config/utils")
-
-
 --------------------------------------------------------------------------------
--- STATUS LINE (LUALINE)
 
 -- simple alternative to fidget.nvim, via https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
 local function lsp_progress()
