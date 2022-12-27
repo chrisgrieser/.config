@@ -157,12 +157,8 @@ return {
 	"numToStr/Comment.nvim", -- comment operator
 	{"mg979/vim-visual-multi", keys = "<D-j>"},
 	"Darazaki/indent-o-matic", -- auto-determine indents
-	{"gbprod/yanky.nvim"}, -- register manager
 	{"chrisgrieser/nvim-recorder", dev = true}, -- better macros
-	{ "chrisgrieser/nvim-various-textobjs", -- custom textobjects
-		dev = true,
-		lazy = true,
-	},
+	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, -- custom textobjects
 	{"nacro90/numb.nvim", -- line previews when ":n"
 		config = function() require("numb").setup() end,
 		keys = ":",

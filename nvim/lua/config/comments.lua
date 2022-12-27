@@ -31,9 +31,7 @@ keymap("n", "dq", function ()
 	cmd.normal { "d<<<" } -- without bang for remapping of COM
 	setCursor(0, prevCursor)
 end) 
-keymap("n", "yq", function ()
-	cmd.normal { "y<<<" } -- without bang for remapping of COM
-end) -- thanks to yank position saving, doesn't need to be done here
+keymap("n", "yq", "y<<<", {remap = true}) -- BUG highlight does wvork, but yanking works correctly
 keymap("n", "cq", function ()
 	cmd.normal { "d<<<" } -- without bang for remapping of COM
 	cmd.normal { "xQ" }
@@ -83,7 +81,6 @@ local function divider()
 		normal("jj==")
 	end
 end
-
 ---@diagnostic enable: param-type-mismatch
 
 keymap("n", "qw", divider)
