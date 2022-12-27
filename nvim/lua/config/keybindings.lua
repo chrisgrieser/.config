@@ -324,7 +324,6 @@ if isGui() then
 		fn.system("open -R '" .. expand("%:p") .. "'")
 	end, { desc = "open in file explorer" })
 
-	keymap({ "n", "x", "i" }, "<D-1>", cmd.Lex) -- file tree (netrw)
 	keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
 	keymap("n", "<D-9>", ":Notification<CR>", { desc = ":Notifications" })
 
@@ -351,6 +350,13 @@ if isGui() then
 end
 
 --------------------------------------------------------------------------------
+
+-- Color Picker
+keymap("n", "#", ":CccPick<CR>")
+keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
+keymap("i", "<C-#>", "<Plug>(ccc-insert)")
+
+
 -- Neural
 keymap("x", "ga", ":NeuralCode complete<CR>", { desc = "AI: Code Complete" })
 

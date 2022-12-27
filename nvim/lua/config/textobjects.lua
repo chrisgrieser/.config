@@ -1,4 +1,5 @@
 require("config/utils")
+local varTextObj = require("various-textobjs")
 --------------------------------------------------------------------------------
 -- New Text objects
 -- af -> a [f]unction (treesitter)

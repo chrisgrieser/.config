@@ -67,7 +67,6 @@ return {
 	-- Appearance
 	"nvim-lualine/lualine.nvim", -- status line
 	"rcarriga/nvim-notify", -- notifications
-	"uga-rosa/ccc.nvim", -- color previews & color utilities
 
 	-- File Switching & File Operation
 	{"chrisgrieser/nvim-genghis",

@@ -21,7 +21,6 @@ logTrace = vim.log.levels.TRACE
 
 qol = require("config/quality-of-life")
 telescope = require("telescope.builtin")
-varTextObj = require("various-textobjs")
 
 ---equivalent to `:setlocal option=value`
 ---@param option string

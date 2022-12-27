@@ -1,11 +1,10 @@
 return {
-	{
-		"m-demare/hlargs.nvim", -- highlight function args
+	{ -- highlight function args
+		"m-demare/hlargs.nvim",
 		event = "VeryLazy",
 		config = function() require("hlargs").setup() end,
 	},
-
-	{
+	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		config = function()
 			require("indent_blankline").setup {
@@ -16,8 +15,7 @@ return {
 			}
 		end,
 	},
-
-	{
+	{ -- git gutter + hunk textobj
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
 		config = function()
@@ -27,9 +25,7 @@ return {
 			}
 		end,
 	},
-
-	-- scrollbar
-	{
+	{ -- scrollbar
 		"lewis6991/satellite.nvim",
 		event = "VeryLazy",
 		config = function()
@@ -43,20 +39,53 @@ return {
 			}
 		end,
 	},
-
-	-- nicer colorcolumn
-	{
+	{ -- nicer colorcolumn
 		"xiyaowong/virtcolumn.nvim",
 		event = "VeryLazy",
 		config = function() g.virtcolumn_char = "║" end,
 	},
-
-	-- auto-resize splits
-	{
+	{ -- color previews & color utilities
+		"uga-rosa/ccc.nvim",
+		event = "VeryLazy",
+		cond = function() return g.neovide or g.goneovim end, -- only load in GUI
+		config = function()
+			opt.termguicolors = true -- required for color previewing, but also messes up look in the terminal
+			local ccc = require("ccc")
+			ccc.setup {
+				win_opts = { border = borderStyle },
+				highlighter = {
+					auto_enable = true,
+					max_byte = 2 * 1024 * 1024, -- 2mb
+					lsp = true,
+					excludes = {},
+				},
+				alpha_show = "hide", -- needed when highlighter.lsp is set to true
+				recognize = { output = true }, -- automatically recognize color format under cursor
+				inputs = { ccc.input.hsl },
+				outputs = {
+					ccc.output.css_hsl,
+					ccc.output.css_rgb,
+					ccc.output.hex,
+				},
+				convert = {
+					{ ccc.picker.hex, ccc.output.css_hsl },
+					{ ccc.picker.css_rgb, ccc.output.css_hsl },
+					{ ccc.picker.css_hsl, ccc.output.hex },
+				},
+				mappings = {
+					["<Esc>"] = ccc.mapping.quit,
+					["q"] = ccc.mapping.quit,
+					L = ccc.mapping.increase5,
+					H = ccc.mapping.decrease5,
+				},
+			}
+		end,
+	},
+	{	-- auto-resize splits
 		"anuvyklack/windows.nvim",
 		dependencies = "anuvyklack/middleclass",
 		event = "VeryLazy", -- loading on <C-w> does not seem to work
-		cmd = {"DiffviewFileHistory", "DiffviewOpen"},
+		cmd = { "DiffviewFileHistory", "DiffviewOpen" },
 		config = function()
 			require("windows").setup {
 				autowidth = {
@@ -66,7 +95,7 @@ return {
 			}
 		end,
 	},
-	{
+	{ -- Better input fields
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
 		config = function()

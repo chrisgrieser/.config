@@ -100,7 +100,7 @@ require("telescope").setup {
 			hidden = true,
 			follow = true,
 		},
-		keymaps = { prompt_prefix = " " },
+		keymaps = { prompt_prefix = "  " },
 		oldfiles = { prompt_prefix = " " },
 		highlights = { prompt_prefix = " " },
 		git_files = {
