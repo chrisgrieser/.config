@@ -153,12 +153,13 @@ require("lualine").setup {
 				cond = showBreadcrumbs,
 			},
 		},
+		lualine_x = {
 			{
 				require("lazy.status").updates,
 				cond = require("lazy.status").has_updates,
-				color = { fg = "#ff9e64" },
+				-- color = { fg = "#ff9e64" },
 			},
-		lualine_x = ,
+		},
 		lualine_y = {
 			{ debuggerStatus, section_separators = winSecSeparators },
 		},
