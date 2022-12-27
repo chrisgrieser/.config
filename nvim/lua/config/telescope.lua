@@ -16,13 +16,14 @@ require("telescope").setup {
 		path_display = { "tail" },
 		file_ignore_patterns = {
 			"%.DS_Store", -- Mac system file
-			"%.git", -- submodules
+			"%.git", -- no slash, so ti works for submodule files
 			"%[No Name%]", -- new files / sometimes folders (netrw)
-			"/$", -- ignore folders (netrw)
 			"node_modules/", -- node
 			"venv/", -- python
 			"lib/", -- python
 			"%.spl", -- vim spell files
+			"%.add", -- vim spell files
+			".app/", -- internals of mac apps
 			"%.log",
 			"%.png",
 			"%.icns",
@@ -41,7 +42,7 @@ require("telescope").setup {
 		layout_strategy = "horizontal",
 		layout_config = {
 			horizontal = {
-				height = 0.85,
+				height = 0.9,
 				preview_cutoff = 70,
 				width = 0.9,
 				preview_width = { 0.55, min = 30 },

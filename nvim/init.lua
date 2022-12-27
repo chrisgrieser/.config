@@ -9,6 +9,7 @@ require("config/utils") -- should come after lazy
 if isGui() then
 	require("config/theme-settings") -- should come early to start with the proper theme
 	require("config/gui-settings")
+	require("config/notifications")
 else
 	require("config/terminal-only")
 end
@@ -16,7 +17,7 @@ require("config/options-and-autocmds")
 require("config/keybindings")
 require("config/user-commands")
 require("config/automating-nvim")
-require("config/appearance")
+require("config/lualine")
 
 require("config/lsp-and-diagnostics") -- should come before completion, linter, and debugger
 require("config/completion")
@@ -25,7 +26,6 @@ require("config/debugger")
 
 require("config/comments")
 require("config/textobjects")
-require("config/AI-support")
 require("config/telescope")
 require("config/treesitter")
 if isGui() then require("config/color-picker") end

@@ -7,6 +7,13 @@ darkTheme = "tokyonight-moon"
 -- darkTheme = "oxocarbon"
 -- darkTheme = "nightfox"
 
+-- Annotations
+cmd.highlight { "def link myAnnotations Todo", bang = true } -- use same styling as "TODO"
+fn.matchadd(
+	"myAnnotations",
+	[[\<\(BUG\|WIP\|TODO\|WTF\|HACK\|INFO\|NOTE\|WARNING\|FIX\|REQUIRED\)\>]]
+)
+
 --------------------------------------------------------------------------------
 -- CUSTOM HIGHLIGHTS & Theme Customization
 

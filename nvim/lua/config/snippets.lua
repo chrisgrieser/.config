@@ -17,7 +17,7 @@ ls.setup {
 }
 
 -- to be able to jump without <Tab> (e.g. when there is a non-needed suggestion)
-keymap("i", "<D-j>", function()
+keymap({"i", "s"}, "<D-j>", function()
 	if ls.expand_or_jumpable() then
 		ls.jump(1)
 	else
@@ -28,11 +28,7 @@ end)
 --------------------------------------------------------------------------------
 -- stylua: ignore start
 -- SNIPPETS
-ls.cleanup() -- clears all snippets for writing snippets
-
-add("all", {
-	snip({trig = "!!", wordTrig = false}, "{\n\t$0\n\\}"),
-}, {type = "autosnippets"})
+ls.cleanup() -- clears all snippets for resourcing this file
 
 add("all", {
 	snip("modeline (bash)", "vim: filetype=bash\n$0"),
@@ -362,8 +358,7 @@ add("javascript", {
 	]]),
 })
 
--- YAML
--- Karabiner config
+-- YAML (Karabiner config)
 add("yaml", {
 	snip("delay (Karabiner)", [[
 	- {key_code: vk_none, hold_down_milliseconds: ${1:50}}
