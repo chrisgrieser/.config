@@ -63,24 +63,6 @@ return {
 		}
 	},
 
-	-- Completion & Suggestion
-	{"hrsh7th/nvim-cmp",
-		dependencies = {
-			"hrsh7th/cmp-buffer", -- completion sources
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-			"dmitmel/cmp-cmdline-history",
-			"hrsh7th/cmp-emoji",
-			"chrisgrieser/cmp-nerdfont",
-			"tamago324/cmp-zsh",
-			"ray-x/cmp-treesitter",
-			"hrsh7th/cmp-nvim-lsp", -- lsp
-			"L3MON4D3/LuaSnip", -- snippet engine
-			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
-			"windwp/nvim-autopairs", -- auto pair brackets/quotes
-		}
-	},
-	{ "tzachar/cmp-tabnine", build = "./install.sh", dependencies = "hrsh7th/nvim-cmp" },
 
 	-- Appearance
 	"nvim-lualine/lualine.nvim", -- status line
