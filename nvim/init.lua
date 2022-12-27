@@ -19,7 +19,7 @@ require("config/user-commands")
 require("config/automating-nvim")
 require("config/lualine")
 
-require("config/lsp-and-diagnostics") -- should come before completion, linter, and debugger
+require("config/lsp-and-diagnostics") -- should come before linter and debugger
 require("config/linter")
 require("config/debugger")
 
