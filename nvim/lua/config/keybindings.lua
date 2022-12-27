@@ -118,7 +118,6 @@ autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank { timeout = 1500 } -- highlighted yank
 		if vim.v.event.operator ~= "y" then return end
-
 		fn.setpos(".", g.cursorPreYankPos) -- sticky yank
 
 		-- add yanks to numbered registers
@@ -218,24 +217,19 @@ keymap("n", "X", cmd.ISwapWith, { desc = "swap nodes" })
 -- search & replace
 keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "search & replace" })
 keymap("x", "<leader>f", ":s///g<Left><Left><Left>", { desc = "search & replace" })
-keymap(
-	{ "n", "x" },
-	"<leader>F",
-	function() require("ssr").open() end,
-	{ desc = "structural search & replace" }
-) -- wrapped in function for lazy-loading
+keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "struct. search & replace" })
 keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
 keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine, { desc = "duplicate line" })
+keymap("x", "R", qol.duplicateSelection, { desc = "duplicate selection" })
 keymap(
 	"n",
 	"<A-r>",
 	function() qol.duplicateLine { increment = true } end,
 	{ desc = "duplicate line, incrementing numbers" }
 )
-keymap("x", "R", qol.duplicateSelection, { desc = "duplicate selection" })
 
 -- Undo
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
@@ -334,7 +328,7 @@ if isGui() then
 	keymap("n", "<D-9>", ":Notification<CR>", { desc = ":Notifications" })
 
 	-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
-	g.VM_maps = { -- cmd+j
+	g.VM_maps = {
 		["Find Under"] = "<D-j>",
 		["Visual Add"] = "<D-j>",
 	}
@@ -358,24 +352,15 @@ end
 --------------------------------------------------------------------------------
 -- BUFFERS
 keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)", { desc = "cycle buffers" })
-
 -- Buffer selector
-keymap("n", "gb", function()
-	local moreThanOneBuf = #(fn.getbufinfo { buflisted = 1 }) > 1
-	if moreThanOneBuf then
-		cmd.nohlsearch()
-		telescope.buffers()
-	else
-		vim.notify("Only one buffer open.")
-	end
-end, { desc = "select an open buffer" })
+keymap("n", "gb", telescope.buffers, { desc = "select an open buffer" })
 
 -- HACK: fix for https://github.com/cshuaimin/ssr.nvim/issues/11
 augroup("ssr-fix", {})
 autocmd("BufReadPost", {
 	group = "ssr-fix",
 	callback = function()
-		if bo.filetype == "ssr" then return end
+		if bo.filetype == "" then return end
 		keymap("n", "<CR>", function()
 			if expand("#") == "" then
 				local lastOldfile = vim.v.oldfiles[2]
@@ -403,7 +388,7 @@ keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = 
 keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = "copy filename" })
 keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = "chmod +x" })
 keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = "rename file" })
-keymap("n", "<C-m>", function() require("genghis").moveAndRenameFile() end, { desc = "move-rename file" })
+keymap("n", "<D-S-m>", function() require("genghis").moveAndRenameFile() end, { desc = "move-rename file" })
 keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = "duplicate file" })
 keymap("", "<D-BS>", function() require("genghis").trashFile() end, { desc = "move file to trash" })
 keymap("", "<D-n>", function() require("genghis").createNewFile() end, { desc = "create new file" })
@@ -445,7 +430,7 @@ keymap({ "n", "x" }, "<C-g>", function()
 	local location
 	local selStart = fn.line("v")
 	local selEnd = fn.line(".")
-	if selStart == selEnd then
+	if selStart == selEnd then -- normal mode or one-line-selection
 		location = "L" .. tostring(selStart)
 	elseif selStart < selEnd then
 		location = "L" .. tostring(selStart) .. "-L" .. tostring(selEnd)

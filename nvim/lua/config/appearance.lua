@@ -197,7 +197,11 @@ local function alternateFile()
 	local maxLen = 15
 	local altFile = expand("#:t")
 	local curFile = expand("%:t")
-	if altFile == "" then
+	local altPath = expand("#:p")
+	local curPath = expand("%:p")
+	if altPath == curPath then
+		return ""	
+	elseif altFile == "" then
 		local lastOldfile = vim.v.oldfiles[2]:gsub(".*/", "") -- 1 is the current file
 		return "# ("..lastOldfile..")"
 	elseif curFile == altFile then
