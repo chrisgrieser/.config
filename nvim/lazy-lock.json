@@ -61,7 +61,7 @@
   "plenary.nvim": { "branch": "master", "commit": "4b7e52044bbb84242158d977a50c4cbcd85070c7" },
   "promise-async": { "branch": "main", "commit": "25ac2ddb577bbc1bda2402e6dd6bd33d52cec398" },
   "satellite.nvim": { "branch": "main", "commit": "84e47a303a1aa97e2a81df03ef040d41c8192134" },
-  "ssr.nvim": { "branch": "main", "commit": "4304933853e66060ec03048b2ce3853c39c3886a" },
+  "ssr.nvim": { "branch": "main", "commit": "e6a11a702483d26f767f937575d549ac73b2fea3" },
   "substitute.nvim": { "branch": "main", "commit": "e63afff1ab385bb210a97bbafa23ba05bdc336b7" },
   "telescope-undo.nvim": { "branch": "main", "commit": "85b1cac55bbf8ea843f6a64f57d99aacac3ceff3" },
   "telescope.nvim": { "branch": "master", "commit": "e960efa60e97df58e089b00270f09d60f27202c8" },

@@ -35,9 +35,7 @@ return {
 		cmd = "TSJToggle",
 	},
 	{"cshuaimin/ssr.nvim", -- structural search & replace
-		commit = "4304933", -- TODO: update to newest version with nvim 0.9 https://github.com/cshuaimin/ssr.nvim/issues/11#issuecomment-1340671193
 		lazy = true,
-		pin = true,
 		config = function() require("ssr").setup {
 			keymaps = {close = "Q"},
 		} end
