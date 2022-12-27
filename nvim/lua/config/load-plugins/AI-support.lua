@@ -1,6 +1,30 @@
 -- INFO openai_api_key defined in zshenv but there read from outside of dotfiles
 --------------------------------------------------------------------------------
 return {
+
+	{
+		"tzachar/cmp-tabnine", 
+		build = "./install.sh" ,
+		config = function ()
+			-- TABNINE
+			-- INFO also requires setup in cmp config
+			require("cmp_tabnine.config"):setup { -- yes, requires a ":", not "."
+				max_lines = 1000,
+				max_num_results = 20,
+				run_on_every_keystroke = true,
+				snippet_placeholder = "…",
+				show_prediction_strength = true,
+			}
+
+			-- automatically prefetch completions for the buffer
+			augroup("prefetchTabNine", {})
+			autocmd("BufRead", {
+				group = "prefetchTabNine",
+				callback = function() require("cmp_tabnine"):prefetch(expand("%:p")) end,
+			})
+		end
+	},
+
 	{
 		"jackMort/ChatGPT.nvim",
 		cmd = "ChatGPT",

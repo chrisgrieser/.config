@@ -55,8 +55,8 @@ return {
 	{
 		"anuvyklack/windows.nvim",
 		dependencies = "anuvyklack/middleclass",
+		event = "VeryLazy", -- loading on <C-w> does not seem to work
 		cmd = {"DiffviewFileHistory", "DiffviewOpen"},
-		keys = "<C-w>", -- window split commands
 		config = function()
 			require("windows").setup {
 				autowidth = {
@@ -69,7 +69,6 @@ return {
 	{
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
-		dependencies = { "hrsh7th/nvim-cmp", "hrsh7th/cmp-omni" }, -- omni for autocompletion in input prompts
 		config = function()
 			require("dressing").setup {
 				input = {
