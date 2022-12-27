@@ -11,37 +11,53 @@ hs.window.animationDuration = 0
 --------------------------------------------------------------------------------
 
 -- `hammerspoon://hs-reload` for reloading via Build System
+local reloadIndicator = "/tmp/hs-is-reloading"
 uriScheme("hs-reload", function()
 	if cons.hswindow() then cons.hswindow():close() end -- close console
-	hs.execute("touch ./is-reloading")
+	hs.execute("touch " .. reloadIndicator)
 	hs.reload()
 	-- INFO will also run the systemStart function due to reload
 end)
+
+function systemStart()
+	-- prevent commit spam when updating hammerspoon config regularly
+	local _, isReloading = hs.execute("[[ -e " .. reloadIndicator .. " ]]")
+	if isReloading then
+		os.remove(reloadIndicator)
+		-- use neovim automation to display the notification in neovim
+		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded.")' > /tmp/nvim-automation]])
+		return
+	else
+		if app("Finder") then app("Finder"):kill() end
+		notify("Hammerspoon started.")
+		syncAllGitRepos("full")
+		notify("Sync finished.")
+	end
+end
 
 --------------------------------------------------------------------------------
 -- CONSOLE
 cons.titleVisibility("hidden")
 cons.toolbar(nil)
-
-cons.consoleFont {name = "JetBrainsMonoNL Nerd Font", size = 20}
+cons.consoleFont { name = "JetBrainsMonoNL Nerd Font", size = 21 }
 
 ---@param toDark boolean
 function setConsoleColors(toDark)
 	if toDark then
 		cons.darkMode(true)
-		cons.outputBackgroundColor {white = 0.1}
-		cons.consolePrintColor {white = 0.9}
-		cons.consoleCommandColor {white = 0.5}
+		cons.outputBackgroundColor { white = 0.1 }
+		cons.consolePrintColor { white = 0.9 }
+		cons.consoleCommandColor { white = 0.5 }
 	else
 		cons.darkMode(false)
-		cons.outputBackgroundColor {white = 0.9}
-		cons.consolePrintColor {white = 0.1}
-		cons.consoleCommandColor {white = 0.5}
+		cons.outputBackgroundColor { white = 0.9 }
+		cons.consolePrintColor { white = 0.1 }
+		cons.consoleCommandColor { white = 0.5 }
 	end
 end
 
 -- initialize
-local isDark = hs.execute[[defaults read -g AppleInterfaceStyle]] == "Dark\n"
+local isDark = hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n"
 setConsoleColors(isDark)
 
 -- copy last command to clipboard

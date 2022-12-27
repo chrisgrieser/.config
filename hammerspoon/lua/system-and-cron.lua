@@ -34,18 +34,15 @@ local function gitDotfileSync(arg)
 			gitDotfileScript,
 			function(exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 				stdErr = stdErr:gsub("\n", " –– ")
-				if exitCode ~= 0 then
-					local stdout = hs.execute("git status --short")
-					if not stdout then return end
-					local submodulesStillDirty = stdout:match(" m ")
-					if submodulesStillDirty then
-						local modules = stdout:gsub(".*/", "")
-						notify(dotfileIcon .. "⚠️️ dotfiles submodules still dirty\n\n" .. modules)
-					else
-						notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
-					end
+				if exitCode == 0 then return end
+				local stdout = hs.execute("git status --short")
+				if not stdout then return end
+				local submodulesStillDirty = stdout:match(" m ")
+				if submodulesStillDirty then
+					local modules = stdout:gsub(".*/", "")
+					notify(dotfileIcon .. "⚠️️ dotfiles submodules still dirty\n\n" .. modules)
 				else
-					print("Dotfile Sync successful.")
+					notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
 				end
 			end,
 			{ arg }
@@ -87,7 +84,7 @@ end
 
 ---sync all three git repos
 ---@param mode? string full|partial
-local function syncAllGitRepos(mode)
+function syncAllGitRepos(mode)
 	if mode == "full" then
 		gitDotfileSync("--submodules")
 	elseif mode == "partial" then
@@ -149,21 +146,6 @@ wakeWatcher = caff
 	end)
 	:start()
 
-function systemStart()
-	-- prevent commit spam when updating hammerspoon config regularly
-	local _, isReloading = hs.execute('[[ -e "./is-reloading" ]]')
-	if isReloading then
-		hs.execute("rm ./is-reloading")
-		-- use neovim automation to display the notification in neovim
-		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded.")' > /tmp/nvim-automation]])
-	else
-		if app("Finder") then app("Finder"):kill() end
-		notify("Hammerspoon started.")
-		syncAllGitRepos("--submodules")
-		notify("Sync finished.")
-	end
-end
-
 --------------------------------------------------------------------------------
 -- CRONJOBS AT HOME
 
@@ -197,8 +179,8 @@ end)
 local function sleepYouTube()
 	local minutesIdle = hs.host.idleTime() / 60
 	if minutesIdle < 30 then return end
-	killIfRunning("YouTube")
-	killIfRunning("Twitch")
+	quitApp("YouTube")
+	quitApp("Twitch")
 	-- no need to quit IINA, since it autoquits on finishing playback
 	-- no need to quit Netflix, since it autostops
 	applescript([[
