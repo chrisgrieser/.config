@@ -4,11 +4,11 @@ return {
 	{"williamboman/mason.nvim", dependencies = "RubixDev/mason-update-all"},
 
 	-- Themes
-	"folke/tokyonight.nvim",
-	"EdenEast/nightfox.nvim",
-	-- "savq/melange", -- like Obsidian's Primary color scheme
-	-- "nyoom-engineering/oxocarbon.nvim",
-	-- "rebelot/kanagawa.nvim",
+	{"folke/tokyonight.nvim", enabled = false},
+	{"EdenEast/nightfox.nvim", enabled = true},
+	{"savq/melange", enabled = false}, -- like Obsidian's Primary color scheme
+	{"nyoom-engineering/oxocarbon.nvim", enabled = false},
+	{"rebelot/kanagawa.nvim", enabled = true},
 
 	-- Treesitter
 	{"nvim-treesitter/nvim-treesitter",
@@ -62,7 +62,6 @@ return {
 			"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
 		}
 	},
-
 
 	-- Appearance
 	"nvim-lualine/lualine.nvim", -- status line
