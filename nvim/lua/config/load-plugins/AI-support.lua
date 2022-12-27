@@ -3,9 +3,10 @@
 return {
 
 	{
-		"tzachar/cmp-tabnine", 
-		build = "./install.sh" ,
-		config = function ()
+		"tzachar/cmp-tabnine",
+		build = "./install.sh",
+		event = "InsertEnter",
+		config = function()
 			-- TABNINE
 			-- INFO also requires setup in cmp config
 			require("cmp_tabnine.config"):setup { -- yes, requires a ":", not "."
@@ -15,14 +16,16 @@ return {
 				snippet_placeholder = "…",
 				show_prediction_strength = true,
 			}
+			local function prefetchTabnine() require("cmp_tabnine"):prefetch(expand("%:p")) end
+			prefetchTabnine() -- initialize for the current buffer
 
 			-- automatically prefetch completions for the buffer
 			augroup("prefetchTabNine", {})
 			autocmd("BufRead", {
 				group = "prefetchTabNine",
-				callback = function() require("cmp_tabnine"):prefetch(expand("%:p")) end,
+				callback = prefetchTabnine,
 			})
-		end
+		end,
 	},
 
 	{

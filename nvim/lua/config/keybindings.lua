@@ -118,8 +118,8 @@ autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank { timeout = 1500 } -- highlighted yank
 		if vim.v.event.operator ~= "y" then return end
-		setCursor(0, g.cursorPreYank)-- sticky yank
-		-- fn.setpos(".", g.cursorPreYankPos) 
+		setCursor(0, g.cursorPreYank) -- sticky yank
+		-- fn.setpos(".", g.cursorPreYankPos)
 
 		-- add yanks to numbered registers
 		if vim.v.event.regname ~= "" then return end
@@ -148,11 +148,12 @@ end, { desc = "paste & reset killring" })
 
 -- paste charwise reg as linewise & vice versa
 keymap("n", "gp", function()
-	local isLinewise = fn.getregtype('"') == "V"
+	local reg = "+"
+	local isLinewise = fn.getregtype(reg) == "V"
 	local targetRegType = isLinewise and "v" or "V"
-	local regContent = fn.getreg('"'):gsub("\n$", "")
-	fn.setreg('"', regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
-	normal('""p') -- for whatever reason, `p` along does not work here
+	local regContent = fn.getreg(reg):gsub("\n$", "")
+	fn.setreg(reg, regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
+	normal('"' .. reg .. "p") -- for whatever reason, `p` along does not work here
 	if targetRegType == "V" then normal("==") end
 end, { desc = "paste differently" })
 
@@ -351,7 +352,7 @@ end
 
 --------------------------------------------------------------------------------
 -- Neural
-keymap("x", "ga", ":NeuralCode complete<CR>", {desc = "AI: Code Complete"})
+keymap("x", "ga", ":NeuralCode complete<CR>", { desc = "AI: Code Complete" })
 
 -- ChatGPT
 keymap("n", "ga", ":ChatGPT<CR>", { desc = "AI: ChatGPT Prompt" })
@@ -554,6 +555,7 @@ autocmd("FileType", {
 		"lspinfo",
 		"tsplayground",
 		"qf",
+		"lazy",
 		"notify",
 		"AppleScriptRunOutput",
 		"man",
