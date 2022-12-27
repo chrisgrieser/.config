@@ -83,9 +83,10 @@ rules:
               - command
         conditions:
           - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^com\.hegenberg\.BetterTouchTool$
-              - ^org\.hammerspoon\.Hammerspoon$
+            file_paths:
+              - BetterTouchTool
+              - Hammerspoon
+              - "[Nn]eovide"
       - type: basic
         from:
           pointing_button: button3
@@ -95,9 +96,21 @@ rules:
               - command
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.hegenberg\.BetterTouchTool$
-              - ^org\.hammerspoon\.Hammerspoon$
+            file_paths:
+              - BetterTouchTool
+              - Hammerspoon
+      # neovide: quit via <Esc>ZZ
+      - type: basic
+        from:
+          pointing_button: button3
+        to:
+          - key_code: escape
+          - {key_code: "y", modifiers: [shift]} # z & y switched
+          - {key_code: "y", modifiers: [shift]}
+        conditions:
+          - type: frontmost_application_if
+            file_paths:
+              - "[Nn]eovide"
   #─────────────────────────────────────────────────────────────────────────────
   - description: "\U0001F401 4 (bottom)"
     manipulators:
