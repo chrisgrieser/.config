@@ -1,17 +1,15 @@
 #!/usr/bin/env zsh
 FRONT_APP=$(osascript -e 'tell application "System Events" to return name of first process whose frontmost is true')
 
-
 if [[ "$FRONT_APP" == "neovide" ]]; then
 	# so cursor position and changes are saved properly
-	echo "cmd[[wall | quitall]]" > "/tmp/nvim-automation"
+	echo "cmd[[wall | quitall]]" >"/tmp/nvim-automation"
 else
 	killall "$FRONT_APP"
 fi
 
-
-while pgrep -q "$FRONT_APP" ; do sleep 0.1; done
-
+while pgrep -q "$FRONT_APP"; do sleep 0.1; done
+sleep 0.2
 
 if [[ "$FRONT_APP" == "neovide" ]]; then
 	# for neovide, re-open last file
@@ -22,4 +20,3 @@ if [[ "$FRONT_APP" == "neovide" ]]; then
 else
 	open -a "$FRONT_APP"
 fi
-

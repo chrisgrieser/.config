@@ -10,7 +10,7 @@ opt.shadafile = vimDataDir .. "main.shada"
 --------------------------------------------------------------------------------
 -- Undo
 opt.undofile = true -- enable persistent undo history
-opt.undolevels = 2000 -- more undos being saved
+opt.undolevels = 500 -- less undos saved for quicker loading of undo history
 
 local undopointChars = { "<Space>", ".", ",", ";" }
 for _, char in pairs(undopointChars) do

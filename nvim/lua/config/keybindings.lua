@@ -88,48 +88,73 @@ keymap({ "n", "x" }, "gm", "gM", { desc = "goto middle of logical line" })
 keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 
--- Leap & Flit
+-- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
 keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
 
 --------------------------------------------------------------------------------
 
-opt.clipboard = "unnamedplus"
 -- CLIPBOARD
 opt.clipboard = "unnamedplus"
+
+-- don't pollute the register
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
 
-keymap("n", "P", '"1p', { desc = "simply killring" })
-keymap("n", "gp", qol.pasteDifferently, { desc = "paste differently" }) -- paste charwise reg as linewise & vice versa
-
 -- yanking without moving the cursor
--- visual https://stackoverflow.com/a/3806683#comment10788861_3806683
--- normal https://www.reddit.com/r/vim/comments/ekgy47/comment/fddnfl3/
 keymap("x", "y", "ygv<Esc>", { desc = "sticky yank" })
-augroup("yankKeepCursor", {})
+augroup("yankImprovements", {})
 autocmd({ "CursorMoved", "VimEnter" }, {
-	group = "yankKeepCursor",
+	group = "yankImprovements",
 	callback = function() g.cursorPreYankPos = fn.getpos(".") end,
 })
 
+-- - yanking without moving the cursor
+-- - highlighted yank
+-- - saves yanks in numbered register, so `"1p` pastes previous yanks.
 autocmd("TextYankPost", {
-	group = "yankKeepCursor",
+	group = "yankImprovements",
 	callback = function()
 		vim.highlight.on_yank { timeout = 1500 } -- highlighted yank
-		if vim.v.event.operator == "y" then
-			fn.setpos(".", g.cursorPreYankPos)
-			if vim.v.event.regname ~= "" then return end
-			for i = 8, 1, -1 do
-				local regcontent = fn.getreg(tostring(i))
-				fn.setreg(tostring(i + 1), regcontent)
-			end
-			if g.lastYank then fn.setreg("1", g.lastYank) end
-			g.lastYank = fn.getreg('"')
+		if vim.v.event.operator ~= "y" then return end
+
+		fn.setpos(".", g.cursorPreYankPos) -- sticky yank
+
+		-- add yanks to numbered registers
+		if vim.v.event.regname ~= "" then return end
+		for i = 8, 1, -1 do
+			local regcontent = fn.getreg(tostring(i))
+			fn.setreg(tostring(i + 1), regcontent)
 		end
+		if g.lastYank then fn.setreg("1", g.lastYank) end
+		g.lastYank = fn.getreg('"')
 	end,
 })
+
+-- cycle through the last deletes/yanks
+g.killringCount = 0
+keymap("n", "P", function()
+	cmd.undo()
+	g.killringCount = g.killringCount + 1
+	if g.killringCount > 9 then g.killringCount = 0 end
+	normal('"' .. tostring(g.killringCount) .. "p")
+end, { desc = "simply killring" })
+keymap("n", "p", function()
+	g.killringCount = 0
+	normal("p")
+end, { desc = "paste & reset killring" })
+
+-- paste charwise reg as linewise & vice versa
+keymap("n", "gp", function()
+	cmd.undo()
+	local isLinewise = fn.getregtype('"') == "V"
+	local targetRegType = isLinewise and "v" or "V"
+	local regContent = fn.getreg('"'):gsub("\n$", "")
+	fn.setreg('"', regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
+	normal('""p') -- for whatever reason, `p` along does not work here
+	if targetRegType == "V" then normal("==") end
+end, { desc = "paste differently" })
 
 --------------------------------------------------------------------------------
 
@@ -405,8 +430,8 @@ keymap("n", "<D-g>", function()
 	end)
 end)
 
--- Git-link (<C-M-S-g> = ctrl-alt-shift-g = meh-g)
-keymap({ "n", "x" }, "<C-M-S-g>", function()
+-- Git-link
+keymap({ "n", "x" }, "<C-g>", function()
 	local repo = fn.system([[git remote -v]]):gsub(".*:(.-)%.git.*", "%1")
 	local branch = fn.system([[git branch --show-current]]):gsub("\n", "")
 	if branch:find("^fatal: not a git repository") then
