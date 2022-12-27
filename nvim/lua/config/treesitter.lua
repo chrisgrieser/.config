@@ -66,7 +66,7 @@ require("nvim-treesitter.configs").setup {
 				["al"] = "@call.outer",
 				["iL"] = "@loop.inner", -- [L]oop
 				["aL"] = "@loop.outer",
-				["COM"] = "@comment.outer", -- HACK later remapped to q, done indirectly to avoid conflict with visual mode comments
+				["<<<"] = "@comment.outer", -- HACK later remapped to q, done indirectly to avoid conflict with visual mode comments
 			},
 			-- If you set this to `true` (default is `false`) then any textobject is
 			-- extended to include preceding xor succeeding whitespace. Succeeding

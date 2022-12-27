@@ -242,7 +242,7 @@ local function motherHomeModeLayout()
 	})
 	local motherHomeLayout = hs.fnutils.concat(main, side)
 
-	runWithDelays({ 0, 0.1, 0.2 }, function() useLayout(motherHomeLayout) end)
+	runWithDelays({ 0, 0.2, 0.4, 0.6 }, function() useLayout(motherHomeLayout) end)
 	showAllSidebars()
 end
 
@@ -265,6 +265,7 @@ end
 -- watcher + hotkey
 displayCountWatcher = hs.screen.watcher.new(setLayout):start()
 hotkey(hyper, "home", setLayout) -- hyper + eject on Apple Keyboard
+hotkey({"shift"}, "f6", setLayout) -- for Apple keyboard
 
 --------------------------------------------------------------------------------
 
