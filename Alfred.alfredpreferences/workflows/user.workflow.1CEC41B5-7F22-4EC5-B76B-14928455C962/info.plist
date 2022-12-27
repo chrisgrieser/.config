@@ -402,6 +402,27 @@ done</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>disk space</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>📊 Disk Space</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C581B232-CDA3-4651-BAB4-32144FECFB52</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -462,27 +483,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>disk space</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>📊 Disk Space</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>C581B232-CDA3-4651-BAB4-32144FECFB52</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>command</key>
 				<integer>8</integer>
 				<key>confirm</key>
@@ -492,30 +492,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<string>alfred.workflow.action.systemcommand</string>
 			<key>uid</key>
 			<string>7E7254FB-7761-400D-887B-162AB242F68E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>chmod +x "$*"
-echo -n "$*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>42266127-D884-4B85-92EF-70E28050CCCD</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -556,6 +532,30 @@ echo -n "$*"</string>
 			<string>EDEB1C89-49E1-443D-98F5-94AFC17DD1EC</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>chmod +x "$*"
+echo -n "$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>42266127-D884-4B85-92EF-70E28050CCCD</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
