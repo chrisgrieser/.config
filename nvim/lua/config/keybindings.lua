@@ -94,19 +94,14 @@ keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
 
 --------------------------------------------------------------------------------
 
+opt.clipboard = "unnamedplus"
 -- CLIPBOARD
 opt.clipboard = "unnamedplus"
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
 
-require("yanky").setup {
-	ring = { history_length = 25 },
-	highlight = { timer = 1500 },
-}
-
-keymap("n", "p", "<Plug>(YankyPutAfter)")
-keymap("n", "P", "<Plug>(YankyCycleForward)")
+keymap("n", "P", '"1p', { desc = "simply killring" })
 keymap("n", "gp", qol.pasteDifferently, { desc = "paste differently" }) -- paste charwise reg as linewise & vice versa
 
 -- yanking without moving the cursor
@@ -118,10 +113,21 @@ autocmd({ "CursorMoved", "VimEnter" }, {
 	group = "yankKeepCursor",
 	callback = function() g.cursorPreYankPos = fn.getpos(".") end,
 })
+
 autocmd("TextYankPost", {
 	group = "yankKeepCursor",
 	callback = function()
-		if vim.v.event.operator == "y" then fn.setpos(".", g.cursorPreYankPos) end
+		vim.highlight.on_yank { timeout = 1500 } -- highlighted yank
+		if vim.v.event.operator == "y" then
+			fn.setpos(".", g.cursorPreYankPos)
+			if vim.v.event.regname ~= "" then return end
+			for i = 8, 1, -1 do
+				local regcontent = fn.getreg(tostring(i))
+				fn.setreg(tostring(i + 1), regcontent)
+			end
+			if g.lastYank then fn.setreg("1", g.lastYank) end
+			g.lastYank = fn.getreg('"')
+		end
 	end,
 })
 
