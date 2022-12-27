@@ -1,6 +1,5 @@
 require("config/utils")
 local opts = { buffer = true, silent = true }
-local varTextObj = require("various-textobjs")
 --------------------------------------------------------------------------------
 
 -- hide URLs and other formatting, TODO figure out how to hide only URLs
@@ -27,13 +26,13 @@ if not wo.wrap then qol.toggleWrap() end
 keymap(
 	{ "o", "x" },
 	"il",
-	function() varTextObj.mdlink(true) end,
+	function() require("various-textobjs").mdlink(true) end,
 	{ desc = "inner md link textobj" }
 )
 keymap(
 	{ "o", "x" },
 	"al",
-	function() varTextObj.mdlink(false) end,
+	function() require("various-textobjs").mdlink(false) end,
 	{ desc = "outer md link textobj" }
 )
 
@@ -41,13 +40,13 @@ keymap(
 keymap(
 	{ "o", "x" },
 	"iC",
-	function() varTextObj.mdFencedCodeBlock(true) end,
+	function() require("various-textobjs").mdFencedCodeBlock(true) end,
 	{ desc = "inner md code block textobj" }
 )
 keymap(
 	{ "o", "x" },
 	"aC",
-	function() varTextObj.mdFencedCodeBlock(false) end,
+	function() require("various-textobjs").mdFencedCodeBlock(false) end,
 	{ desc = "outer md code block textobj" }
 )
 

@@ -1,6 +1,5 @@
 require("config/utils")
 local opts = { buffer = true }
-local varTextObj = require("various-textobjs")
 --------------------------------------------------------------------------------
 
 -- comment marks more useful than symbols for theme development
@@ -41,13 +40,13 @@ keymap({ "n", "x" }, "<C-k>", [[?^\/\* <<CR>:nohl<CR>]], opts)
 keymap(
 	{ "o", "x" },
 	"as",
-	function() varTextObj.cssSelector(false) end,
+	function() require("various-textobjs").cssSelector(false) end,
 	{ desc = "outer CSS selector textobj", buffer = true }
 )
 keymap(
 	{ "o", "x" },
 	"is",
-	function() varTextObj.cssSelector(true) end,
+	function() require("various-textobjs").cssSelector(true) end,
 	{ desc = "inner CSS selector textobj", buffer = true }
 )
 

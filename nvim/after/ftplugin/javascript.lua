@@ -2,14 +2,14 @@ require("config/utils")
 --------------------------------------------------------------------------------
 bo.path = ".,,../" -- also search parent directory (useful for Alfred)
 
-keymap({ "o", "x" }, "aR", function() varTextObj.jsRegex(false) end, { desc = "outer regex textobj" })
-keymap({ "o", "x" }, "iR", function() varTextObj.jsRegex(true) end, { desc = "inner regex textobj" })
+keymap({ "o", "x" }, "aR", function() require("various-textobjs").jsRegex(false) end, { desc = "outer regex textobj" })
+keymap({ "o", "x" }, "iR", function() require("various-textobjs").jsRegex(true) end, { desc = "inner regex textobj" })
 
 -- regex opener
 keymap("n", "gR", function()
-	varTextObj.jsRegex(false) -- set visual selection to outer regex
+	require("various-textobjs").jsRegex(false) -- set visual selection to outer regex
 	normal('"zy')
-	varTextObj.jsRegex(true) -- select inner regex for easy replacement
+	require("various-textobjs").jsRegex(true) -- select inner regex for easy replacement
 
 	local regex = fn.getreg("z")
 	local pattern = regex:match("/(.*)/")

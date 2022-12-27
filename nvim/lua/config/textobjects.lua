@@ -1,5 +1,4 @@
 require("config/utils")
-local varTextObj = require("various-textobjs")
 --------------------------------------------------------------------------------
 -- New Text objects
 -- af -> a [f]unction (treesitter)
@@ -58,37 +57,37 @@ keymap("x", "<Space>", '"_c')
 -- VARIOUS TEXTOBJS
 
 -- space: subword
-keymap("o", "<Space>", function() varTextObj.subword(true) end, { desc = "inner subword textobj" })
+keymap("o", "<Space>", function() require("various-textobjs").subword(true) end, { desc = "inner subword textobj" })
 
 -- n: [n]ear end of the line
-keymap({ "o", "x" }, "n", varTextObj.nearEoL, { desc = "almost ending of line textobj" })
+keymap({ "o", "x" }, "n", require("various-textobjs").nearEoL, { desc = "almost ending of line textobj" })
 
 -- o: c[o]lumn textobj
-keymap("o", "o", varTextObj.column, { desc = "column textobj" })
+keymap("o", "o", require("various-textobjs").column, { desc = "column textobj" })
 
 -- r: [r]est of paragraph (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
-keymap("o", "r", varTextObj.restOfParagraph, { desc = "rest of paragraph (linewise)" })
+keymap("o", "r", require("various-textobjs").restOfParagraph, { desc = "rest of paragraph (linewise)" })
 
 -- iv/av: value textobj
-keymap({ "x", "o" }, "iv", function() varTextObj.value(true) end, { desc = "inner value textobj" })
-keymap({ "x", "o" }, "av", function() varTextObj.value(false) end, { desc = "outer value textobj" })
+keymap({ "x", "o" }, "iv", function() require("various-textobjs").value(true) end, { desc = "inner value textobj" })
+keymap({ "x", "o" }, "av", function() require("various-textobjs").value(false) end, { desc = "outer value textobj" })
 
 -- .: diagnostic textobj
-keymap({ "x", "o" }, ".", varTextObj.diagnostic, { desc = "diagnostic textobj" })
+keymap({ "x", "o" }, ".", require("various-textobjs").diagnostic, { desc = "diagnostic textobj" })
 
 -- in/an: number textobj
 -- stylua: ignore start
-keymap( { "x", "o" }, "in", function() varTextObj.number(true) end, { desc = "inner number textobj" })
-keymap( { "x", "o" }, "an", function() varTextObj.number(false) end, { desc = "outer number textobj" })
+keymap( { "x", "o" }, "in", function() require("various-textobjs").number(true) end, { desc = "inner number textobj" })
+keymap( { "x", "o" }, "an", function() require("various-textobjs").number(false) end, { desc = "outer number textobj" })
 
 -- iD/aD: double square brackets
-keymap( { "x", "o" }, "iD", function() varTextObj.doubleSquareBrackets(true) end, { desc = "inner double square bracket" })
-keymap( { "x", "o" }, "aD", function() varTextObj.doubleSquareBrackets(false) end, { desc = "outer double square bracket" })
+keymap( { "x", "o" }, "iD", function() require("various-textobjs").doubleSquareBrackets(true) end, { desc = "inner double square bracket" })
+keymap( { "x", "o" }, "aD", function() require("various-textobjs").doubleSquareBrackets(false) end, { desc = "outer double square bracket" })
 
 -- ii/ai: indentation textobj
-keymap({ "x", "o" }, "ii", function() varTextObj.indentation(true, true) end, { desc = "inner indentation textobj" })
-keymap({ "x", "o" }, "ai", function() varTextObj.indentation(false, false) end, { desc = "outer indentation textobj" })
+keymap({ "x", "o" }, "ii", function() require("various-textobjs").indentation(true, true) end, { desc = "inner indentation textobj" })
+keymap({ "x", "o" }, "ai", function() require("various-textobjs").indentation(false, false) end, { desc = "outer indentation textobj" })
 -- stylua: ignore end
 
 augroup("IndentedFileTypes", {})
@@ -100,7 +99,7 @@ autocmd("FileType", {
 			keymap(
 				{ "x", "o" },
 				"ai",
-				function() varTextObj.indentation(false, true) end,
+				function() require("various-textobjs").indentation(false, true) end,
 				{ buffer = true, desc = "indentation textobj with start border" }
 			)
 		end

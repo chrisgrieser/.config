@@ -262,7 +262,7 @@ return {
 		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
 		config = function()
-			require("config/snippets").loadSnippets()
+			require("config/snippets") -- loads all snippets
 			local ls = require("luasnip")
 
 			ls.setup {
@@ -277,7 +277,7 @@ return {
 				if require("luasnip").expand_or_jumpable() then
 					require("luasnip").jump(1)
 				else
-					vim.notify("No Jump available.", logWarn)
+					vim.notify("No Jump available.", vim.log.levels.WARN)
 				end
 			end)
 
