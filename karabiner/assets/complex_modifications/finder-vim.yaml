@@ -591,7 +591,7 @@ rules:
                   if (number of windows is not 2) then
                     display notification "" with title "Failure" subtitle "⚠️ Not exactly two windows"
                     beep
-                  else if ((count of (selection as list)) is 0) then
+                  else if (the selection is {}) then
                     display notification "" with title "Failure" subtitle "⚠️ No selection"
                     beep
                   else
@@ -1053,24 +1053,44 @@ rules:
           - {key_code: "p", modifiers: [option, command]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
-      # copy path
+      # ctrl-p: copy path
       - type: basic
-        from:
-          key_code: p
-          modifiers: {mandatory: [control]}
+        from: {key_code: p, modifiers: {mandatory: [control]}}
         to:
           - {key_code: "c", modifiers: [option, command]}
           - shell_command: osascript -e 'display notification "File path" with title "✅ Copied"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # copy name
+      # ctrl-n: copy name
       - type: basic
-        from:
-          key_code: n
-          modifiers: {mandatory: [control]}
+        from: {key_code: n, modifiers: {mandatory: [control]}}
         to:
           - key_code: return_or_enter
           - {key_code: "a", modifiers: [command]}
           - {key_code: "c", modifiers: [command]}
           - key_code: return_or_enter
           - shell_command: osascript -e 'display notification "File name" with title "✅ Copied"'
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # ctrl-g: open at github
+      - type: basic
+        from: {key_code: g, modifiers: {mandatory: [control]}}
+        to:
+          - shell_command: |
+              SEL=$(osascript -e 'tell application "Finder"
+                set sel to (item 1 of (selection as list) as alias)
+                return POSIX path of sel
+              end tell')
+              [[ -f "$SEL" ]] || exit 1
+              cd $(dirname "$SEL")
+
+              BRANCH=$(git branch --show-current)
+              ROOT_PATH=$(git rev-parse --show-toplevel)
+              ROOT_LEN=${#ROOT_PATH}
+              REMOTE_URL="$(git remote -v |  head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')"
+              PATH_IN_REPO=${SEL:$ROOT_LEN}
+
+              URL="$REMOTE_URL/blob/$BRANCH/$PATH_IN_REPO"
+              URL="${URL/ /%20}"  # open pseudo-encoded url (to not require a dependency)
+
+              echo "$URL" | pbcopy
+              open "$URL"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]

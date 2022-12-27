@@ -242,23 +242,6 @@ function M.toggleWrap()
 	end
 end
 
----Force pasting a linewise register characterwise and vice versa
-function M.pasteDifferently()
-	local clipboardOpt = vim.opt.clipboard:get()
-	local useSystemClipb = #clipboardOpt > 0 and clipboardOpt[1]:find("unnamed")
-	local reg = useSystemClipb and "+" or '"'
-
-	local isLinewise = fn.getregtype(reg) == "V"
-	local targetRegType = isLinewise and "v" or "V"
-
-	local regContent = fn.getreg(reg)
-	regContent = trim(regContent)
-
-	fn.setreg(reg, regContent, targetRegType)
-	normal('"' .. reg .. "p")
-	if targetRegType == "V" then normal("==") end
-end
-
 --------------------------------------------------------------------------------
 
 ---log statement for variable under cursor, similar to the 'turbo console log'
