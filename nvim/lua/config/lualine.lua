@@ -37,7 +37,9 @@ local function currentFile() -- using this function instead of default filename,
 	local maxLen = 15
 	local altFile = expand("#:t")
 	local curFile = expand("%:t")
-	if curFile == altFile then
+	if curFile == "" then
+		return "%% " .. bo.filetype .. " " -- special windows, e.g., lazy
+	elseif curFile == altFile then
 		local curParent = expand("%:p:h:t")
 		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
 		return curParent .. "/" .. curFile
@@ -48,7 +50,7 @@ end
 local function mixedIndentation()
 	if fn.mode() == "i" then return "" end
 	local ft = bo.filetype
-	local ignoredFts = { "css", "markdown", "sh", "" }
+	local ignoredFts = { "css", "markdown", "sh", "lazy", "" }
 	if vim.tbl_contains(ignoredFts, ft) then return "" end
 
 	local hasTabs = fn.search("^\t", "nw") > 0

@@ -1,4 +1,3 @@
-local cmp = require("cmp")
 
 ---Create a copy of a lua table
 ---@param originalTable table
@@ -110,7 +109,8 @@ return {
 			"hrsh7th/cmp-omni", -- omni for autocompletion in input prompts
 		},
 		config = function()
-			--------------------------------------------------------------------------------
+			local cmp = require("cmp")
+
 			cmp.setup {
 				snippet = {
 					-- REQUIRED a snippet engine must be specified and installed
@@ -242,9 +242,6 @@ return {
 				}),
 			})
 
-			--------------------------------------------------------------------------------
-			-- PLUGINS
-
 			-- Enable Completion in DressingInput
 			require("cmp").setup.filetype("DressingInput", {
 				sources = require("cmp").config.sources { { name = "omni" } },
@@ -255,11 +252,12 @@ return {
 	{
 		"windwp/nvim-autopairs",
 		dependencies = "hrsh7th/nvim-cmp",
+		event = "InsertEnter",
 		config = function ()
 			require("nvim-autopairs").setup()
 			-- add brackets to cmp
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	}, 
 }

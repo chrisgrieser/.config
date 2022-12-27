@@ -26,7 +26,7 @@ require("lazy").setup("config/load-plugins", {
 	},
 	ui = {
 		border = borderStyle,
-		size = { width = 1, height = 1 }, 
+		size = { width = 1, height = 1 }, -- full width
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates
@@ -42,3 +42,14 @@ require("lazy").setup("config/load-plugins", {
 		},
 	},
 })
+
+-- disable default `K` from lazy
+augroup("lazyKeymaps", {})
+autocmd({ "FileType" }, {
+	group = "lazyKeymaps",
+	pattern = "lazy",
+	callback = function()
+      g.cursorPreYank = getCursor(0)
+   end,
+})
+

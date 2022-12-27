@@ -109,14 +109,12 @@ autocmd("ColorScheme", {
 function setDarkTheme()
 	opt.background = "dark" ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.93
-	cmd.highlight("clear")-- HACK needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 	cmd.colorscheme(darkTheme) 
 end
 
 function setLightTheme()
 	opt.background = "light" ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.95
-	cmd.highlight("clear")
 	cmd.colorscheme(lightTheme)
 end
 

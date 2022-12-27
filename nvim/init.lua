@@ -29,5 +29,5 @@ require("config/telescope")
 require("config/treesitter")
 if isGui() then require("config/color-picker") end
 
-require("config/snippets")
+-- require("config/snippets")
 
