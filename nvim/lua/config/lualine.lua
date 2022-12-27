@@ -33,18 +33,21 @@ local function alternateFile()
 end
 
 local function currentFile() -- using this function instead of default filename, since this does not show "[No Name]" for Telescope
-	local readOnly = bo.modifiable and "" or " "
+	local readOnly = bo.modifiable and "" or " "
 	local maxLen = 15
 	local altFile = expand("#:t")
 	local curFile = expand("%:t")
-	if curFile == "" then
-		return "%% " .. bo.filetype .. " " -- special windows, e.g., lazy
+	local ft = bo.filetype
+	if curFile == "" and ft == "" then
+		return "%%  " -- new files
+	elseif curFile == "" and ft ~= "" then
+		return "%%  " .. ft -- special windows, e.g., lazy
 	elseif curFile == altFile then
 		local curParent = expand("%:p:h:t")
 		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
 		return curParent .. "/" .. curFile
 	end
-	return "%% " .. curFile .. readOnly
+	return "%% " .. readOnly .. curFile
 end
 
 local function mixedIndentation()
@@ -173,7 +176,6 @@ require("lualine").setup {
 			statusline = 2000, -- less often, so it interferes less with git processes
 		},
 		ignore_focus = {
-			"TelescopePrompt",
 			"DressingInput",
 			"Mason",
 			"ccc-ui",
