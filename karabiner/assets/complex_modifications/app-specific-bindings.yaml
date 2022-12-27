@@ -1064,12 +1064,8 @@ rules:
               - command
         to:
           - key_code: escape
-          - key_code: "y" # z & y switched
-            modifiers:
-              - shift
-          - key_code: "y"
-            modifiers:
-              - shift
+          - {key_code: "y", modifiers: [shift]} # z & y switched
+          - {key_code: "y", modifiers: [shift]}
         conditions:
           - type: frontmost_application_if
             file_paths:
