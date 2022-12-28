@@ -434,10 +434,11 @@ end, { desc = ":CodiNew" })
 
 --------------------------------------------------------------------------------
 
--- BUILD SYSTEM
+-- BUILD SYSTEM & Quickfix list
 
-keymap("n", "gq", cmd.cnext, {desc = "next quickfix item"})
-keymap("n", "gq", cmd.cprevious, {desc = "next quickfix item"})
+keymap("n", "gq", cmd.cnext, { desc = "next quickfix item" })
+keymap("n", "gQ", cmd.cprevious, { desc = "next quickfix item" })
+keymap("n", "<leader>q", function() cmd.Telescope("quickfix") end, { desc = "Telescope: quickfix list" })
 
 keymap("n", "<leader>r", function()
 	cmd.update()

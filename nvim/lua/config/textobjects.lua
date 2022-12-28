@@ -72,6 +72,8 @@ keymap("o", "r", require("various-textobjs").restOfParagraph, { desc = "rest of 
 -- iv/av: value textobj
 keymap({ "x", "o" }, "iv", function() require("various-textobjs").value(true) end, { desc = "inner value textobj" })
 keymap({ "x", "o" }, "av", function() require("various-textobjs").value(false) end, { desc = "outer value textobj" })
+keymap({ "x", "o" }, "ik", function() require("various-textobjs").key(true) end, { desc = "inner key textobj" })
+keymap({ "x", "o" }, "ak", function() require("various-textobjs").key(false) end, { desc = "outer key textobj" })
 
 -- .: diagnostic textobj
 keymap({ "x", "o" }, ".", require("various-textobjs").diagnostic, { desc = "diagnostic textobj" })
