@@ -11,6 +11,7 @@ local colNo = vim.fn.col
 local append = vim.fn.append
 local getCursor = vim.api.nvim_win_get_cursor
 local setCursor = vim.api.nvim_win_set_cursor
+local expand = vim.fn.expand
 
 ---runs :normal natively with bang
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
@@ -115,22 +116,27 @@ function M.betterClose()
 	local moreThanOneWin = wincount > 1
 	local moreThanOneTab = fn.tabpagenr("$") > 1
 	local buffers = fn.getbufinfo { buflisted = 1 }
+	local unsavedFile = expand("%") == ""
 
 	cmd.nohlsearch()
-	if bo.modifiable then cmd.update() end
+	if bo.modifiable and not unsavedFile then cmd.update() end
 
 	if moreThanOneTab then
 		cmd.tabclose()
 	elseif moreThanOneWin then
-		cmd.close()
+		cmd.bdelete()
 	elseif #buffers == 2 then
 		cmd.bwipeout() -- only method to clear altfile in this case
 	elseif #buffers > 1 then
-		local bufToDel = fn.expand("%:p")
-		cmd.bdelete()
+		local bufToDel = expand("%:p")
+		if unsavedFile then
+			cmd.bwipeout()
+		else
+			cmd.bdelete()
+		end
 
 		-- ensure new alt file points towards open, non-active buffer
-		local curFile = fn.expand("%:p")
+		local curFile = expand("%:p")
 		local i = 0
 		local newAltBuf
 		repeat

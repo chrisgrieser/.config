@@ -15,8 +15,8 @@ if [[ "$FRONT_APP" == "neovide" ]]; then
 	# for neovide, re-open last file
 	temp=/tmp/oldfiles.txt
 	[[ -e "$temp" ]] && rm "$temp"
-	nvim -c "redir > $temp | silent oldfiles | redir end | q"
-	sed "2q" "$temp" | cut -d" " -f2 | xargs open
+	nvim -c "redir > $temp | echo v:oldfiles[1] | redir end | q" &>/dev/null
+	cat "$temp"
 else
 	open -a "$FRONT_APP"
 fi

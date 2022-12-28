@@ -41,7 +41,11 @@ local function autoTile(windowFilter)
 	local wins = windowFilter:getWindows()
 	local frontApp = app.frontmostApplication()
 	if #wins == 0 and frontApp:name() == "Finder" then
-		frontApp:kill() -- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
+		-- prevent quitting when window is created imminently
+		runWithDelays(0.2, function()
+			-- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
+			if #windowFilter:getWindows() == 0 then app("Finder"):kill() end
+		end)
 	elseif #wins == 1 then
 		if isProjector() then
 			moveResize(wins[1], maximized)
@@ -257,7 +261,7 @@ finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 	if eventType == aw.activated then
 		autoTile(wf_finder) -- sometimes window creation is not triggered properly
 		bringAllToFront()
-		app("Finder"):selectMenuItem { "View", "Hide Sidebar" }
+		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
 
 	-- quit Finder if it was started as a helper (e.g., JXA), but has no window
 	elseif eventType == aw.launched then
