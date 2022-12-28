@@ -105,6 +105,7 @@ return {
 
 	-- EDITING-SUPPORT
 	{"andymass/vim-matchup", event = "VeryLazy"},
+	use "ggandor/leap.nvim"
 	"kylechui/nvim-surround", -- surround operator
 	{"gbprod/substitute.nvim", -- substitution & exchange operator
 		lazy = true,
