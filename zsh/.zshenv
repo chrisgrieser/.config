@@ -10,11 +10,12 @@ export VAULT_PATH="$HOME/main-vault/"
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/"
 export PASSWORD_STORE_DIR="$HOME/.password-store/" # default value, but still needed for bkp script
 
-export ZDOTDIR="DOTFILE_FOLDER/zsh" # defines location of the rest of the zsh config 
-
 #───────────────────────────────────────────────────────────────────────────────
 
-# Open AI API Key stored outside of public git repo (symlinked file)
+# defines location of the rest of the zsh config 
+export ZDOTDIR="$DOTFILE_FOLDER/zsh" 
+
+# OpenAI API Key stored outside of public git repo (symlinked file)
 # Accessed by nvim plugins as well as shell plugins
 OPENAI_API_KEY=$(tr -d "\n" < "$ICLOUD/Dotfolder/private dotfiles/openai_api_key")
 export OPENAI_API_KEY
@@ -25,7 +26,7 @@ export PASSWORD_STORE_GENERATED_LENGTH=32
 export PASSWORD_STORE_ENABLE_EXTENSIONS=false
 export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
 
-# vidir
+# vidir availability
 export PATH="$DOTFILE_FOLDER/zsh/plugins":$PATH
 
 # NEOVIM: Neovide https://neovide.dev/command-line-referencehtml#frame

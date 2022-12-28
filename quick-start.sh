@@ -43,12 +43,8 @@ git clone git@github.com:chrisgrieser/.password-store.git
 # CREATE SYMLINKS
 DOTFILE_FOLDER="$HOME/.config/"
 
-# zsh
-[[ -e ~/.zshrc ]] && rm -fv ~/.zshrc
-[[ -e ~/.zprofile ]] && rm -fv ~/.zprofile
+# zsh (ZDOTDIR set in .zshenv for the remaining config)
 [[ -e ~/.zshenv ]] && rm -fv ~/.zshenv
-ln -sf "$DOTFILE_FOLDER/zsh/.zshrc" ~
-ln -sf "$DOTFILE_FOLDER/zsh/.zprofile" ~
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
 
 # linter configs
