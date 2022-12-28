@@ -78,9 +78,7 @@ local function autoTile(windowFilter)
 	end
 end
 
-local function bringAllToFront()
-	app.frontmostApplication():selectMenuItem { "Window", "Bring All to Front" }
-end
+local function bringAllToFront() app.frontmostApplication():selectMenuItem { "Window", "Bring All to Front" } end
 
 --------------------------------------------------------------------------------
 
@@ -102,8 +100,7 @@ local function spotifyTUI(toStatus) -- has to be non-local function
 	)
 	currentStatus = trim(currentStatus) ---@diagnostic disable-line: param-type-mismatch
 	if
-		(currentStatus == "▶️" and toStatus == "pause")
-		or (currentStatus == "⏸" and toStatus == "play")
+		(currentStatus == "▶️" and toStatus == "pause") or (currentStatus == "⏸" and toStatus == "play")
 	then
 		local stdout = hs.execute(
 			"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle"
@@ -183,10 +180,7 @@ wf_mimestream = wf.new("Mimestream")
 iinaAppLauncher = aw.new(function(appName, eventType, appObject)
 	if eventType == aw.launched and appName == "IINA" and isProjector() then
 		-- going full screen needs a small delay
-		runWithDelays(
-			{ 0.05, 0.2 },
-			function() appObject:selectMenuItem { "Video", "Enter Full Screen" } end
-		)
+		runWithDelays({ 0.05, 0.2 }, function() appObject:selectMenuItem { "Video", "Enter Full Screen" } end)
 	end
 end):start()
 
@@ -198,9 +192,7 @@ end):start()
 twitterificVisible = aw.new(function(appName, eventType)
 	if appName == "Twitterrific" and eventType == aw.launched then
 		runWithDelays(1, function() twitterrificAction("scrollup") end)
-	elseif
-		appIsRunning("Twitterrific") and (eventType == aw.activated or eventType == aw.launching)
-	then
+	elseif appIsRunning("Twitterrific") and (eventType == aw.activated or eventType == aw.launching) then
 		local currentWin = hs.window.focusedWindow()
 		if checkSize(currentWin, pseudoMaximized) then app("Twitterrific"):mainWindow():raise() end
 	end
@@ -214,19 +206,16 @@ wf_neovim = wf
 	.new({ "neovide", "Neovide" })
 	:subscribe(wf.windowCreated, function(newWin)
 		runWithDelays({ 0.2, 0.4, 0.6, 0.8 }, function()
-			if isProjector() then return end -- has it's own layouting already
+			if isProjector() then return end -- has its own layouting already
 			moveResize(newWin, baseLayout)
 		end)
 	end)
 	-- bugfix for: https://github.com/neovide/neovide/issues/1595
-	:subscribe(
-		wf.windowDestroyed,
-		function()
-			if #wf_neovim:getWindows() == 0 then
-				runWithDelays(3, function() hs.execute("pgrep neovide || pkill nvim") end)
-			end
+	:subscribe(wf.windowDestroyed, function()
+		if #wf_neovim:getWindows() == 0 then
+			runWithDelays(3, function() hs.execute("pgrep neovide || pkill nvim") end)
 		end
-	)
+	end)
 
 --------------------------------------------------------------------------------
 
@@ -237,7 +226,7 @@ wf_alacritty = wf.new({ "alacritty", "Alacritty" }):subscribe(wf.windowCreated, 
 	moveResize(newWin, baseLayout)
 end)
 
--- ALACRITTY Man leader hotkey (for Karabiner)
+-- Man leader hotkey (for Karabiner)
 -- work around necessary, cause alacritty creates multiple instances, i.e.
 -- multiple applications all with the name "alacritty", preventing conventional
 -- methods for focussing a window via AppleScript
@@ -261,15 +250,17 @@ wf_finder = wf.new("Finder")
 	})
 	:subscribe(wf.windowCreated, function() autoTile(wf_finder) end)
 	:subscribe(wf.windowDestroyed, function() autoTile(wf_finder) end)
-	:subscribe(wf.windowFocused, function()
+
+finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
+	if not appName == "Finder" then return end
+
+	if eventType == aw.activated then
 		autoTile(wf_finder) -- sometimes window creation is not triggered properly
 		bringAllToFront()
 		app("Finder"):selectMenuItem { "View", "Hide Sidebar" }
-	end)
 
--- quit Finder if it was started as a helper (e.g., JXA), but has no window
-finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
-	if appName == "Finder" and eventType == aw.launched then
+	-- quit Finder if it was started as a helper (e.g., JXA), but has no window
+	elseif eventType == aw.launched then
 		-- INFO delay shouldn't be lower than 2-3s, otherwise other scripts cannot
 		-- properly utilize Finder
 		runWithDelays({ 3, 5, 10 }, function()
@@ -332,9 +323,7 @@ draftsWatcher = aw.new(function(appName, eventType, appObject)
 		local workspace = isAtOffice() and "Office" or "Home"
 		runWithDelays({ 0.2 }, function()
 			local name = appObject:focusedWindow():title()
-			local isTaskList = name:find("Supermarkt$")
-				or name:find("Drogerie$")
-				or name:find("Ernährung$")
+			local isTaskList = name:find("Supermarkt$") or name:find("Drogerie$") or name:find("Ernährung$")
 			if not isTaskList then appObject:selectMenuItem { "Workspaces", workspace } end
 			appObject:selectMenuItem { "View", "Hide Toolbar" }
 		end)
@@ -375,9 +364,7 @@ discordAppWatcher = aw.new(function(appName, eventType)
 		local hasURL = clipb:match("^https?:%S+$")
 		local hasObsidianURL = clipb:match("^obsidian:%S+$")
 		local isTweet = clipb:match("^https?://twitter%.com") -- for tweets, the previews are actually useful
-		if (hasURL or hasObsidianURL) and not isTweet then
-			hs.pasteboard.setContents("<" .. clipb .. ">")
-		end
+		if (hasURL or hasObsidianURL) and not isTweet then hs.pasteboard.setContents("<" .. clipb .. ">") end
 	elseif eventType == aw.deactivated then
 		local hasEnclosedURL = clipb:match("^<https?:%S+>$")
 		local hasEnclosedObsidianURL = clipb:match("^<obsidian:%S+>$")
