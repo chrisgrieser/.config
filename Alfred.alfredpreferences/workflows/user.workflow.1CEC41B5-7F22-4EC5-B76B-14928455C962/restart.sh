@@ -9,14 +9,14 @@ else
 fi
 
 while pgrep -q "$FRONT_APP"; do sleep 0.1; done
-sleep 0.2
+sleep 0.1
 
+# for neovide, re-open last file
 if [[ "$FRONT_APP" == "neovide" ]]; then
-	# for neovide, re-open last file
 	temp=/tmp/oldfiles.txt
 	[[ -e "$temp" ]] && rm "$temp"
-	nvim -c "redir > $temp | echo v:oldfiles[1] | redir end | q" &>/dev/null
-	cat "$temp"
+	nvim -c "redir > $temp | echo v:oldfiles[0] | redir end | q" &>/dev/null
+	open "$(tr -d "\n" < "$temp")"
 else
 	open -a "$FRONT_APP"
 fi
