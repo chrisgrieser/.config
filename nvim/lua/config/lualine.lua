@@ -61,11 +61,11 @@ local function mixedIndentation()
 	local mixed = fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
 
 	if (hasSpaces and hasTabs) or mixed then
-		return "  mixed"
+		return " mixed"
 	elseif hasSpaces and not bo.expandtab then
-		return "  et"
+		return " tabs"
 	elseif hasTabs and bo.expandtab then
-		return "  noet"
+		return " spaces"
 	end
 	return ""
 end
@@ -160,8 +160,9 @@ require("lualine").setup {
 			{
 				require("lazy.status").updates,
 				cond = function ()
-					local numberOfUpdates
-					return require("lazy.status").has_updates()
+					if not require("lazy.status").has_updates() then return false end
+					local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
+					return numberOfUpdates > 1
 				end,
 				color = "NonText",
 			},
