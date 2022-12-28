@@ -468,12 +468,12 @@ keymap({ "n", "x" }, "<C-g>", function()
 end, { desc = "git link" })
 
 -- add-commit-pull-push
----@param prefill? string
-local function addCommitPush(prefill)
-	if not prefill then prefill = "" end
+---@param prefillMsg? string
+local function addCommitPush(prefillMsg)
+	if not prefillMsg then prefillMsg = "" end
 
 	-- uses dressing + cmp + omnifunc for autocompletion of filenames
-	vim.ui.input({ prompt = "Commit Message", default = prefill, completion = "file" }, function(commitMsg)
+	vim.ui.input({ prompt = "Commit Message", default = prefillMsg, completion = "file" }, function(commitMsg)
 		if not commitMsg then
 			return
 		elseif #commitMsg > 50 then
