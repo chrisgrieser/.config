@@ -81,7 +81,7 @@ local function themeModifications()
 
 	-- kanagawa
 	elseif theme == "kanagawa" then
-		cmd.highlight ("VirtColumn guifg=")
+		cmd.highlight ("VirtColumn guifg=#323036")
 
 	-- dawnfox
 	elseif theme == "dawnfox" then

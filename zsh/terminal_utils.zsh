@@ -81,7 +81,7 @@ function separator (){
 
 # smarter z/cd
 # (also alternative to https://blog.meain.io/2019/automatically-ls-after-cd/)
-eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
+
 function z () {
 	if [[ -f "$1" ]] ; then
 		__zoxide_z "$(dirname "$1")"

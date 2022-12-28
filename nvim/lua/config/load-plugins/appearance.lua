@@ -57,7 +57,6 @@ return {
 					auto_enable = true,
 					max_byte = 2 * 1024 * 1024, -- 2mb
 					lsp = true,
-					excludes = {},
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
@@ -75,10 +74,11 @@ return {
 				mappings = {
 					["<Esc>"] = ccc.mapping.quit,
 					["q"] = ccc.mapping.quit,
-					L = ccc.mapping.increase5,
-					H = ccc.mapping.decrease5,
+					["L"] = ccc.mapping.increase5,
+					["H"] = ccc.mapping.decrease5,
 				},
 			}
+			cmd.CccHighlighterEnable() -- initialize once
 		end,
 	},
 	{	-- auto-resize splits

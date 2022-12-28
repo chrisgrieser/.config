@@ -10,11 +10,18 @@ setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasti
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# fzf
 export FZF_DEFAULT_COMMAND='fd --hidden'
 export FZF_DEFAULT_OPTS='--pointer=⟐ --prompt="❱ " --ellipsis=… --tabstop=3 --scroll-off=2'
 
+# magic enter
 export MAGIC_ENTER_GIT_COMMAND="exagit"
 export MAGIC_ENTER_OTHER_COMMAND="exa"
+
+# zoxide
+export _ZO_DATA_DIR="$DOTFILE_FOLDER" # sync the zoxide database with dotfiles
+# export _ZO_EXCLUDE_DIRS=""
+eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
 
 #───────────────────────────────────────────────────────────────────────────────
 
