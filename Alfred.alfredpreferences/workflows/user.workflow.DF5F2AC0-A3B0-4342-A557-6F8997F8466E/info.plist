@@ -970,6 +970,8 @@ return "{query}"</string>
 		</dict>
 		<key>6BE47B31-5477-4429-90B6-3AE77A0233EA</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
 			<key>xpos</key>
 			<real>565</real>
 			<key>ypos</key>
