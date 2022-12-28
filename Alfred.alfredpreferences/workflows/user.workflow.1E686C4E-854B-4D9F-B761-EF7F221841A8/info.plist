@@ -592,7 +592,7 @@ end tell</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>login-automation_[Browser].applescript</string>
+				<string>zoom-login-automation.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
