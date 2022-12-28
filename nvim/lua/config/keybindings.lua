@@ -162,18 +162,6 @@ end, { desc = "paste differently" })
 
 --------------------------------------------------------------------------------
 
--- MACROS
-require("recorder").setup {
-	clear = true,
-	logLevel = logTrace,
-	mapping = {
-		startStopRecording = "0",
-		playMacro = "9",
-		editMacro = "c0",
-		switchSlot = "<C-0>",
-	},
-}
-
 --------------------------------------------------------------------------------
 
 -- Whitespace Control
@@ -378,24 +366,15 @@ keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)", { desc = "cycle buffers" })
 -- Buffer selector
 keymap("n", "gb", telescope.buffers, { desc = "select an open buffer" })
 
--- HACK: fix for https://github.com/cshuaimin/ssr.nvim/issues/11
-augroup("ssr-fix", {})
-autocmd("BufReadPost", {
-	group = "ssr-fix",
-	callback = function()
-		if bo.filetype == "" then return end
-		keymap("n", "<CR>", function()
-			if expand("#") == "" then
-				local lastOldfile = vim.v.oldfiles[2]
-				cmd.edit(lastOldfile)
-			else
-				cmd.nohlsearch()
-				cmd.buffer("#")
-			end
-		end, { desc = "switch to alt file", buffer = true })
-	end,
-})
-
+keymap("n", "<CR>", function()
+	if expand("#") == "" then
+		local lastOldfile = vim.v.oldfiles[2]
+		cmd.edit(lastOldfile)
+	else
+		cmd.nohlsearch()
+		cmd.buffer("#")
+	end
+end, { desc = "switch to alt file" })
 --------------------------------------------------------------------------------
 -- FILES
 
@@ -403,8 +382,8 @@ autocmd("BufReadPost", {
 keymap("n", "go", telescope.find_files, { desc = "Telescope: Files in cwd" })
 keymap("n", "gO", telescope.git_files, { desc = "Telescope: Git Files" })
 keymap("n", "gr", telescope.oldfiles, { desc = "Telescope: Recent Files" })
-keymap("n", "gF", telescope.live_grep, { desc = "Telescope: Search in cwd" })
-keymap("n", "gc", telescope.resume, { desc = "Telescope: Resume" })
+keymap("n", "gf", telescope.live_grep, { desc = "Telescope: Search in cwd" })
+keymap("n", "gc", telescope.resume, { desc = "Telescope: Continue" })
 
 -- File Operations (no shorthand for lazy-loading)
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = "copy filepath" })
@@ -413,8 +392,8 @@ keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = "c
 keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = "rename file" })
 keymap("n", "<D-S-m>", function() require("genghis").moveAndRenameFile() end, { desc = "move-rename file" })
 keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = "duplicate file" })
-keymap("", "<D-BS>", function() require("genghis").trashFile() end, { desc = "move file to trash" })
-keymap("", "<D-n>", function() require("genghis").createNewFile() end, { desc = "create new file" })
+keymap("n", "<D-BS>", function() require("genghis").trashFile() end, { desc = "move file to trash" })
+keymap("n", "<D-n>", function() require("genghis").createNewFile() end, { desc = "create new file" })
 -- stylua: ignore
 keymap( "x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = "selection to new file" })
 
@@ -484,19 +463,20 @@ local function addCommitPush(prefillMsg)
 			commitMsg = "chore"
 		end
 
-		local cc = { "chore", "built", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
+		local cc =
+			{ "chore", "built", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
 		local firstWord = commitMsg:find("^%w+")
 		if not vim.tbl_contains(cc, firstWord) then
 			vim.notify("Not using a Conventional Commits keyword.", logWarn)
 			addCommitPush(commitMsg)
-			return	
+			return
 		end
 
 		vim.notify("ﴻ add-commit-push…")
 		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
 	end)
 end
-keymap("n", "<leader>g", addCommitPush, {desc = "git add-commit-pull-push"})
+keymap("n", "<leader>g", addCommitPush, { desc = "git add-commit-pull-push" })
 
 --------------------------------------------------------------------------------
 

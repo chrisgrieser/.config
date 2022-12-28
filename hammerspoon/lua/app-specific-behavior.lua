@@ -262,6 +262,7 @@ wf_finder = wf.new("Finder")
 	:subscribe(wf.windowCreated, function() autoTile(wf_finder) end)
 	:subscribe(wf.windowDestroyed, function() autoTile(wf_finder) end)
 	:subscribe(wf.windowFocused, function()
+		autoTile(wf_finder) -- sometimes window creation is not triggered properly
 		bringAllToFront()
 		app("Finder"):selectMenuItem { "View", "Hide Sidebar" }
 	end)
