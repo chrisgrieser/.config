@@ -104,7 +104,7 @@ return {
 	},
 
 	-- EDITING-SUPPORT
-	{"andymass/vim-matchup", event = "VeryLazy"},
+	"andymass/vim-matchup",
 	{"ggandor/leap.nvim", event = "VeryLazy"},
 	"kylechui/nvim-surround", -- surround operator
 	{"gbprod/substitute.nvim", -- substitution & exchange operator
@@ -114,7 +114,22 @@ return {
 	"numToStr/Comment.nvim", -- comment operator
 	{"mg979/vim-visual-multi", keys = {"<D-j>", {"<D-j>", mode = "x"}}},
 	"Darazaki/indent-o-matic", -- auto-determine indents
-	{"chrisgrieser/nvim-recorder", dev = true}, -- better macros
+	{ "chrisgrieser/nvim-recorder", -- better macros
+		dev = true,
+		keys = {"0", "9"},
+		config = function ()
+			require("recorder").setup {
+				clear = true,
+				logLevel = logTrace,
+				mapping = {
+					startStopRecording = "0",
+					playMacro = "9",
+					editMacro = "c0",
+					switchSlot = "<C-0>",
+				},
+			}
+		end,
+	},
 	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, -- custom textobjects
 	{"nacro90/numb.nvim", -- line previews when ":n"
 		config = function() require("numb").setup() end,

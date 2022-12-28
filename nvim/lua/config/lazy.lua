@@ -19,7 +19,6 @@ require("lazy").setup("config/load-plugins", {
 		-- version = "*", -- install the latest *stable* versions of plugins
 	},
 	dev = {
-		-- alternative setup method https://www.reddit.com/r/neovim/comments/zk187u/how_does_everyone_segment_plugin_development_from/
 		path = vim.fn.stdpath("config") .. "/my-plugins/",
 	},
 	ui = {
@@ -27,13 +26,11 @@ require("lazy").setup("config/load-plugins", {
 		size = { width = 1, height = 1 }, -- full width
 	},
 	checker = {
-		enabled = true, -- automatically check for plugin updates
+		enabled = true, -- automatically check for plugin updates, required for statusline
 		notify = false, -- get a notification when new updates are found
 		frequency = 86400, -- check for updates every 24 hours
 	},
-	change_detection = {
-		notify = false,
-	},
+	change_detection = { notify = false },
 	performance = {
 		rtp = { -- plugins names to disable
 			disabled_plugins = {

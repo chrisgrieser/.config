@@ -1,9 +1,6 @@
 require("config/utils")
 --------------------------------------------------------------------------------
 
--- make `gf` work for init.lua
-bo.path = ".,./lua,,"
-
 -- lua regex opener
 keymap("n", "gR", function()
 	normal('"zya"vi"') -- yank and keep selection for quick replacement when done

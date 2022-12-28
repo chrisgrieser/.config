@@ -24,9 +24,9 @@ end
 ---trims whitespace from string
 ---@param str string
 ---@return string
-local function trim(str) return (str:gsub("^%s*(.-)%s*$", "%1")) end
+loc---equivalent to `:setlocal option&`al function trim(str) return (str:gsub("^%s*(.-)%s*$", "%1")) end
 
----equivalent to `:setlocal option&`
+
 ---@param option string
 ---@return any
 local function getlocalopt(option) return vim.api.nvim_get_option_value(option, { scope = "local" }) end
@@ -173,17 +173,16 @@ autocmd("BufReadPost", {
 })
 
 ---select between undoing the last 1h, 4h, or 24h
----@param opts table
-function M.undoDuration(opts)
+function M.undoDuration()
 	local now = os.time() -- saved in epoch secs
-	local minsPassed = math.floor(now - b.timeOpened / 60)
-
+	local minsPassed = math.floor((now - b.timeOpened) / 60)
 	local resetLabel = "last open (~" .. tostring(minsPassed) .. "m ago)"
-	if not opts then opts = { selection = { resetLabel, "15m", "1h", "4h", "24h" } } end
-	vim.ui.select(opts.selection, { prompt = "Undo the last…" }, function(choice)
+	local selection = { resetLabel, "15m", "1h", "4h", "24h" }
+
+	vim.ui.select(selection, { prompt = "Undo the last…" }, function(choice)
 		if not choice then
 			return
-		elseif choice:find("last save") then
+		elseif choice:find("last open") then
 			cmd("earlier " .. minsPassed .. "m")
 		else
 			cmd("earlier " .. choice)

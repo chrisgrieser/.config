@@ -26,17 +26,21 @@ require("Comment").setup {
 -- overlap in visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
+keymap("n", "yq", "y<<<", {remap = true, desc = "yank comment"}) -- BUG highlight does work, but yanking works correctly
 keymap("n", "dq", function ()
 	local prevCursor = getCursor(0)
 	cmd.normal { "d<<<" } -- without bang for remapping of COM
 	setCursor(0, prevCursor)
-end) 
-keymap("n", "yq", "y<<<", {remap = true}) -- BUG highlight does wvork, but yanking works correctly
+end, {remap = true, desc = "delete comment"}) 
 keymap("n", "cq", function ()
 	cmd.normal { "d<<<" } -- without bang for remapping of COM
 	cmd.normal { "xQ" }
 	cmd.startinsert{bang = true}
-end) 
+end, {desc = "change comment"}) 
+
+--------------------------------------------------------------------------------
+-- Duplicate line as comment
+keymap("n", "qd", "Rkqqj", {desc = "Duplicate Line as Comment", remap = true})
 
 --------------------------------------------------------------------------------
 -- HORIZONTAL DIVIDER
