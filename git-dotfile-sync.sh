@@ -23,16 +23,6 @@ if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
 	exit 1
 fi
 
-# safeguard against accidental pushing of API keys
-file_with_leaked_key=$(rg --ignore-case --glob="*.plist" "api.?key" --context=2 --no-filename \
-	| rg "[\w-]{15,}" --only-matching \
-	| xargs rg --ignore --files-with-matches)
-if [[ -n "$file_with_leaked_key" ]] ; then
-	echo "Potential API key leak in:"
-	echo "$file_with_leaked_key"
-	exit 1
-fi
-
 # git add-commit-pull-push sequence
 msg="$device_name ($filesChanged)"
 git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
