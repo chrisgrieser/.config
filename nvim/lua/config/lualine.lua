@@ -33,10 +33,10 @@ local function alternateFile()
 end
 
 local function currentFile() -- using this function instead of default filename, since this does not show "[No Name]" for Telescope
-	local readOnly = bo.modifiable and "" or " "
 	local maxLen = 15
 	local altFile = expand("#:t")
 	local curFile = expand("%:t")
+	local readOnly = bo.modifiable and "" or " "
 	local ft = bo.filetype
 	if curFile == "" and ft == "" then
 		return "%%  " -- new files
@@ -120,7 +120,6 @@ require("lualine").setup {
 		lualine_a = { { currentFile } },
 		lualine_b = { { alternateFile } },
 		lualine_c = {
-			{ lsp_progress },
 			{
 				"searchcount",
 				fmt = function(str)
@@ -130,6 +129,7 @@ require("lualine").setup {
 			},
 		},
 		lualine_x = {
+			{ lsp_progress },
 			"diagnostics",
 			{ mixedIndentation },
 		},
