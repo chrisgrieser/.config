@@ -99,13 +99,13 @@ return {
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = {"DiffviewFileHistory", "DiffviewOpen"},
 		config = function() require("diffview").setup {
-			file_history_panel = {win_config = {height = 4}},
+			file_history_panel = {win_config = {height = 5}},
 		} end,
 	},
 
 	-- EDITING-SUPPORT
 	{"andymass/vim-matchup", event = "VeryLazy"},
-	use "ggandor/leap.nvim"
+	{"ggandor/leap.nvim", event = "VeryLazy"},
 	"kylechui/nvim-surround", -- surround operator
 	{"gbprod/substitute.nvim", -- substitution & exchange operator
 		lazy = true,

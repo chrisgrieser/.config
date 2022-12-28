@@ -10,6 +10,8 @@ export VAULT_PATH="$HOME/main-vault/"
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/"
 export PASSWORD_STORE_DIR="$HOME/.password-store/" # default value, but still needed for bkp script
 
+export ZDOTDIR="DOTFILE_FOLDER/zsh" # defines location of the rest of the zsh config 
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # Open AI API Key stored outside of public git repo (symlinked file)

@@ -79,6 +79,10 @@ local function themeModifications()
 		cmd.highlight { "def link FloatTitle TelescopePromptTitle", bang = true }
 		cmd.highlight { "def link @function @function.builtin", bang = true } -- no bold
 
+	-- kanagawa
+	elseif theme == "kanagawa" then
+		cmd.highlight ("VirtColumn guifg=")
+
 	-- dawnfox
 	elseif theme == "dawnfox" then
 		cmd.highlight([[IndentBlanklineChar guifg=#deccba]])
