@@ -339,6 +339,7 @@ function M.quicklog()
 end
 
 function M.timelog()
+	if not g.timelogCount then g.timelogCount = 0 end
 	local logStatement1, logStatement2
 	local ft = bo.filetype
 
@@ -354,15 +355,17 @@ function M.timelog()
 	elseif ft == "javascript" or ft == "typescript" then
 		logStatement1 = 'console.time("timelog")'
 		logStatement2 = 'console.timeEnd("timelog")'
-
 	else
 		vim.notify("Timelog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
+	local logToAdd = (g.timelogCount % 2 == 0) and logStatement1 or logStatement2
 
-
-	append(".", logStatement1)
-	normal("j==j==")
+	append(".", logToAdd)
+	for _ = 1, #logToAdd, 1 do
+		normal("j==")
+	end
+	g.timelogCount = g.timelogCount + 1
 end
 
 ---adds simple "beep" log statement to check whether conditionals have been
