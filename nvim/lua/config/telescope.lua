@@ -16,24 +16,23 @@ require("telescope").setup {
 		path_display = { "tail" },
 		file_ignore_patterns = {
 			"%.DS_Store", -- Mac system file
-			"%.git", -- no slash, so ti works for submodule files
-			"%[No Name%]", -- new files / sometimes folders (netrw)
+			"%.git", -- no slash, so it orks for submodule files
 			"node_modules/", -- node
 			"venv/", -- python
 			"lib/", -- python
 			"%.spl", -- vim spell files
 			"%.add", -- vim spell files
-			".app/", -- internals of mac apps
-			"%.log",
-			"%.png",
-			"%.icns",
-			"%.zip",
+			"%.app/", -- internals of mac apps
 			"%.ttf", -- fonts
 			"%.pxd", -- Pixelmator
 			"%.spoon", -- Hammerspoon
 			"%.plist", -- Alfred
 			"%.data", -- Alfred
 			"%.string",
+			"%.log",
+			"%.png",
+			"%.icns",
+			"%.zip",
 		},
 		mappings = {
 			i = maps,
@@ -148,9 +147,9 @@ require("telescope").setup {
 	-- https://github.com/debugloop/telescope-undo.nvim#configuration
 	extensions = {
 		undo = {
-			layout_config = {
-				preview_width = 0.65,
-			},
+			diff_context_lines = opt.scrolloff:get(),
+			entry_format = "$STAT: $TIME",
+			layout_config = { preview_width = 0.75 },
 			prompt_prefix = "",
 			initial_mode = "normal",
 		},
