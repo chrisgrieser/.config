@@ -267,7 +267,7 @@ function M.addCommitPush(prefillMsg)
 
 		local cc =
 			{ "chore", "built", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
-		local firstWord = commitMsg:find("^%w+")
+		local firstWord = commitMsg:match("^%w+")
 		if not vim.tbl_contains(cc, firstWord) then
 			vim.notify("Not using a Conventional Commits keyword.", logWarn)
 			M.addCommitPush(commitMsg)
