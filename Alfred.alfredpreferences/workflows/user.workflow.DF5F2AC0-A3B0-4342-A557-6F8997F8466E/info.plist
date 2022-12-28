@@ -19,19 +19,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>1DEB7DC6-BC1F-4E24-8930-2D157EF66CE1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>669EC31A-C9B1-4515-85BA-4809329A85F8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</key>
 		<array>
 			<dict>
@@ -91,19 +78,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>AB2F50DC-81E4-4FE9-B053-EE4331CB76D5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E8277AD7-938D-47A3-8C3E-CA4929723C43</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>ADC0722C-95D6-4BDE-B235-615784A424DA</key>
 		<array>
 			<dict>
@@ -134,19 +108,6 @@
 				<string>15FF9B9D-0AF2-48F4-84C0-9781E0F3766B</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>B5FEA91E-E371-4D98-863B-604F2D5DCADA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>DF55CB29-2AC2-4527-BCDC-A622FBD4BAE1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -637,27 +598,6 @@ return "{query}"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>icon</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Big Sur Icons: '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>1DEB7DC6-BC1F-4E24-8930-2D157EF66CE1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -667,12 +607,12 @@ return "{query}"</string>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://macosicons.com/{query}</string>
+				<string>https://unicode-table.com/en/search/?q={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>669EC31A-C9B1-4515-85BA-4809329A85F8</string>
+			<string>0951FDD8-D9E2-4DC3-8844-58CF1AABE48C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -709,111 +649,6 @@ return "{query}"</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>ADC0722C-95D6-4BDE-B235-615784A424DA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://fonts.google.com/icons?icon.query={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>E8277AD7-938D-47A3-8C3E-CA4929723C43</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>icon</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Material Icons: '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>AB2F50DC-81E4-4FE9-B053-EE4331CB76D5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://lucide.dev/?search={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>DF55CB29-2AC2-4527-BCDC-A622FBD4BAE1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>icon</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Lucide Icons: '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B5FEA91E-E371-4D98-863B-604F2D5DCADA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://unicode-table.com/en/search/?q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>0951FDD8-D9E2-4DC3-8844-58CF1AABE48C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -901,7 +736,7 @@ return "{query}"</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>480</real>
 		</dict>
 		<key>15FF9B9D-0AF2-48F4-84C0-9781E0F3766B</key>
 		<dict>
@@ -911,15 +746,6 @@ return "{query}"</string>
 			<real>690</real>
 			<key>ypos</key>
 			<real>140</real>
-		</dict>
-		<key>1DEB7DC6-BC1F-4E24-8930-2D157EF66CE1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>475</real>
 		</dict>
 		<key>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</key>
 		<dict>
@@ -948,7 +774,7 @@ return "{query}"</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>930</real>
+			<real>595</real>
 		</dict>
 		<key>5E00EB78-1FAB-400E-B437-E867401108F0</key>
 		<dict>
@@ -958,15 +784,6 @@ return "{query}"</string>
 			<real>605</real>
 			<key>ypos</key>
 			<real>570</real>
-		</dict>
-		<key>669EC31A-C9B1-4515-85BA-4809329A85F8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>475</real>
 		</dict>
 		<key>6BE47B31-5477-4429-90B6-3AE77A0233EA</key>
 		<dict>
@@ -1020,7 +837,7 @@ return "{query}"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>930</real>
+			<real>595</real>
 		</dict>
 		<key>A069BE51-DA62-4835-8048-AF3A608C97D0</key>
 		<dict>
@@ -1030,15 +847,6 @@ return "{query}"</string>
 			<real>350</real>
 			<key>ypos</key>
 			<real>130</real>
-		</dict>
-		<key>AB2F50DC-81E4-4FE9-B053-EE4331CB76D5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>585</real>
 		</dict>
 		<key>ADC0722C-95D6-4BDE-B235-615784A424DA</key>
 		<dict>
@@ -1058,7 +866,7 @@ return "{query}"</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>1050</real>
+			<real>715</real>
 		</dict>
 		<key>B2FE0349-860A-44F0-B49D-20C8F895F9C0</key>
 		<dict>
@@ -1068,15 +876,6 @@ return "{query}"</string>
 			<real>510</real>
 			<key>ypos</key>
 			<real>75</real>
-		</dict>
-		<key>B5FEA91E-E371-4D98-863B-604F2D5DCADA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>700</real>
 		</dict>
 		<key>BAA2ADF7-2FEB-4F9A-AE98-17378171B5CA</key>
 		<dict>
@@ -1133,24 +932,6 @@ return "{query}"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>300</real>
-		</dict>
-		<key>DF55CB29-2AC2-4527-BCDC-A622FBD4BAE1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>700</real>
-		</dict>
-		<key>E8277AD7-938D-47A3-8C3E-CA4929723C43</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>585</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
