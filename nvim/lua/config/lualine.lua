@@ -176,6 +176,7 @@ require("lualine").setup {
 			statusline = 2000, -- less often, so it interferes less with git processes
 		},
 		ignore_focus = {
+			"TelescopePrompt",
 			"DressingInput",
 			"Mason",
 			"ccc-ui",

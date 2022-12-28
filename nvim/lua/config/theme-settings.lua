@@ -11,10 +11,7 @@ darkTheme = "kanagawa"
 
 -- Annotations
 cmd.highlight { "def link myAnnotations Todo", bang = true } -- use same styling as "TODO"
-fn.matchadd(
-	"myAnnotations",
-	[[\<\(BUG\|WIP\|TODO\|WTF\|HACK\|INFO\|NOTE\|WARNING\|FIX\|REQUIRED\)\>]]
-)
+fn.matchadd("myAnnotations", [[\<\(BUG\|WIP\|TODO\|WTF\|HACK\|INFO\|NOTE\|WARNING\|FIX\|REQUIRED\)\>]])
 
 --------------------------------------------------------------------------------
 -- CUSTOM HIGHLIGHTS & Theme Customization
@@ -48,7 +45,7 @@ local function customHighlights()
 	cmd.highlight([[MatchParen gui=underdotted cterm=underdotted]])
 
 	-- Codi
-	cmd.highlight {"def link CodiVirtualText Comment", bang = true}
+	cmd.highlight { "def link CodiVirtualText Comment", bang = true }
 
 	-- treesittter refactor focus
 	cmd.highlight([[TSDefinition term=underline gui=underdotted]])
@@ -81,7 +78,8 @@ local function themeModifications()
 
 	-- kanagawa
 	elseif theme == "kanagawa" then
-		cmd.highlight ("VirtColumn guifg=#323036")
+		cmd.highlight("VirtColumn guifg=#323036")
+		cmd.highlight { "def link UfoFoldedBg Folded", bang = true }
 
 	-- dawnfox
 	elseif theme == "dawnfox" then
@@ -115,8 +113,8 @@ autocmd("ColorScheme", {
 function setDarkTheme()
 	opt.background = "dark" ---@diagnostic disable-line: assign-type-mismatch
 	g.neovide_transparency = 0.93
-	cmd.highlight("clear")-- HACK needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
-	cmd.colorscheme(darkTheme) 
+	cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
+	cmd.colorscheme(darkTheme)
 end
 
 function setLightTheme()
