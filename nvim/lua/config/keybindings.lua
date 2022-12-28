@@ -229,7 +229,8 @@ keymap( "n", "<leader>u", function() require("telescope").extensions.undo.undo()
 -- Logging & Debugging
 keymap({ "n", "x" }, "<leader>ll", qol.quicklog, { desc = "add log statement" })
 keymap({ "n", "x" }, "<leader>lb", qol.beeplog, { desc = "add beep log" })
-keymap("n", "<leader>lr", qol.removeLog, { desc = "remove all log statements" })
+keymap({ "n", "x" }, "<leader>lt", qol.timelog, { desc = "log time" })
+keymap({ "n", "x" }, "<leader>lr", qol.removelogs, { desc = "remove all log statements" })
 
 -- Sort & highlight duplicate lines
 -- stylua: ignore
@@ -350,9 +351,10 @@ keymap("n", "ga", ":ChatGPT<CR>", { desc = "AI: ChatGPT Prompt" })
 
 --------------------------------------------------------------------------------
 -- BUFFERS
+-- INFO: <BS> to cycle buffer has to be set in cybu config
+
 keymap("n", "gb", telescope.buffers, { desc = "select an open buffer" })
 
--- INFO: <BS> to cycle buffer has to be set in cybu config
 keymap("n", "<CR>", function()
 	if expand("#") == "" then
 		local lastOldfile = vim.v.oldfiles[2]

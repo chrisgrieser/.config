@@ -22,9 +22,7 @@ local function getlocalopt(option) return vim.api.nvim_get_option_value(option, 
 ---equivalent to `:setlocal option&`
 ---@param option string
 ---@return any
-local function getglobalopt(option)
-	return vim.api.nvim_get_option_value(option, { scope = "global" })
-end
+local function getglobalopt(option) return vim.api.nvim_get_option_value(option, { scope = "global" }) end
 --------------------------------------------------------------------------------
 
 -- Duplicate line under cursor, and change occurrences of certain words to their
@@ -45,11 +43,7 @@ function M.duplicateLine(opts)
 			line = line:gsub("left", "right")
 		elseif line:find("height") and not (line:find("line-height")) then
 			line = line:gsub("height", "width")
-		elseif
-			line:find("width")
-			and not (line:find("border-width"))
-			and not (line:find("outline-width"))
-		then
+		elseif line:find("width") and not (line:find("border-width")) and not (line:find("outline-width")) then
 			line = line:gsub("width", "height")
 		end
 	end
@@ -344,6 +338,33 @@ function M.quicklog()
 	normal("j==")
 end
 
+function M.timelog()
+	local logStatement1, logStatement2
+	local ft = bo.filetype
+
+	if ft == "lua" then
+		logStatement1 = {
+			'print("timelog start")',
+			"local timelogStart = os.time()",
+		}
+		logStatement2 = {
+			"local duration = os.difftime(timelogStart, os.time())",
+			'print("timelog: ", duration)',
+		}
+	elseif ft == "javascript" or ft == "typescript" then
+		logStatement1 = 'console.time("timelog")'
+		logStatement2 = 'console.timeEnd("timelog")'
+
+	else
+		vim.notify("Timelog does not support " .. ft .. " yet.", logWarn)
+		return
+	end
+
+
+	append(".", logStatement1)
+	normal("j==j==")
+end
+
 ---adds simple "beep" log statement to check whether conditionals have been
 --entered Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.beeplog()
@@ -369,7 +390,7 @@ end
 
 ---Remove all log statements in the current buffer
 ---Supported: lua, python, js/ts, zsh/bash/fish, and applescript
-function M.removeLog()
+function M.removelogs()
 	local ft = bo.filetype
 	local logCommand
 	local linesBefore = fn.line("$")
@@ -378,14 +399,11 @@ function M.removeLog()
 	elseif ft == "javascript" or ft == "typescript" then
 		logCommand = "console."
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		vim.notify(
-			"Shell 'echo' cannot be removed since indistinguishable from other echos.",
-			logWarn
-		)
+		vim.notify("Shell 'echo' cannot be removed since indistinguishable from other echos.", logWarn)
 	elseif ft == "applescript" then
 		logCommand = "log"
 	else
-		vim.notify("Quicklog does not support " .. ft .. " yet.", logWarn)
+		vim.notify("Removelog does not support " .. ft .. " yet.", logWarn)
 	end
 
 	cmd([[g/^\s*]] .. logCommand .. [[/d]])
