@@ -280,6 +280,13 @@ return {
 					vim.notify("No Jump available.", vim.log.levels.WARN)
 				end
 			end)
+			vim.keymap.set({ "i", "s" }, "<D-S-j>", function()
+				if require("luasnip").jumpable(-1) then
+					require("luasnip").jump(-1)
+				else
+					vim.notify("No Jump back available.", vim.log.levels.WARN)
+				end
+			end)
 
 			-- needs to come after snippet definitions
 			ls.filetype_extend("typescript", { "javascript" }) -- typescript uses all javascript snippets

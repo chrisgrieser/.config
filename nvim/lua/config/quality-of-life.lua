@@ -15,18 +15,6 @@ local setCursor = vim.api.nvim_win_set_cursor
 ---runs :normal natively with bang
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
-local function leaveVisualMode()
-	-- https://github.com/neovim/neovim/issues/17735#issuecomment-1068525617
-	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
-	vim.api.nvim_feedkeys(escKey, "nx", false)
-end
-
----trims whitespace from string
----@param str string
----@return string
-loc---equivalent to `:setlocal option&`al function trim(str) return (str:gsub("^%s*(.-)%s*$", "%1")) end
-
-
 ---@param option string
 ---@return any
 local function getlocalopt(option) return vim.api.nvim_get_option_value(option, { scope = "local" }) end
@@ -194,7 +182,7 @@ end
 --------------------------------------------------------------------------------
 
 ---enables overscrolling for that action when close to the last line, depending
---on 'scrolloff' option
+---on 'scrolloff' option
 ---@param action string The motion to be executed when not at the EOF
 function M.overscroll(action)
 	if bo.filetype ~= "DressingSelect" then
@@ -241,6 +229,83 @@ function M.toggleWrap()
 	end
 end
 
+--------------------------------------------------------------------------------
+-- GIT
+
+-- common shell options for fn.jobstart()
+local shellOpts = {
+	stdout_buffered = true,
+	stderr_buffered = true,
+	detach = true,
+	on_stdout = function(_, data, _)
+		if not data or (data[1] == "" and #data == 1) then return end
+		local stdOut = table.concat(data, " \n "):gsub("%s*$", "")
+		vim.notify(stdOut)
+	end,
+	on_stderr = function(_, data, _)
+		if not data or (data[1] == "" and #data == 1) then return end
+		local stdErr = table.concat(data, " \n "):gsub("%s*$", "")
+		vim.notify(stdErr)
+	end,
+}
+
+---@param prefillMsg? string
+function M.addCommitPush(prefillMsg)
+	if not prefillMsg then prefillMsg = "" end
+
+	-- uses dressing + cmp + omnifunc for autocompletion of filenames
+	vim.ui.input({ prompt = "Commit Message", default = prefillMsg, completion = "file" }, function(commitMsg)
+		if not commitMsg then
+			return
+		elseif #commitMsg > 50 then
+			vim.notify("Commit Message too long.", logWarn)
+			M.addCommitPush(commitMsg:sub(1, 50))
+			return
+		elseif commitMsg == "" then
+			commitMsg = "chore"
+		end
+
+		local cc =
+			{ "chore", "built", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
+		local firstWord = commitMsg:find("^%w+")
+		if not vim.tbl_contains(cc, firstWord) then
+			vim.notify("Not using a Conventional Commits keyword.", logWarn)
+			M.addCommitPush(commitMsg)
+			return
+		end
+
+		vim.notify("ﴻ add-commit-push…")
+		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
+	end)
+end
+
+function M.gitLink()
+	local repo = fn.system([[git remote -v]]):gsub(".*:(.-)%.git.*", "%1")
+	local branch = fn.system([[git branch --show-current]]):gsub("\n", "")
+	if branch:find("^fatal: not a git repository") then
+		vim.notify("Not a git repository.", logWarn)
+		return
+	end
+	local filepath = expand("%:p")
+	local gitroot = fn.system([[git rev-parse --show-toplevel]])
+	local pathInRepo = filepath:sub(#gitroot)
+
+	local location
+	local selStart = fn.line("v")
+	local selEnd = fn.line(".")
+	if selStart == selEnd then -- normal mode or one-line-selection
+		location = "L" .. tostring(selStart)
+	elseif selStart < selEnd then
+		location = "L" .. tostring(selStart) .. "-L" .. tostring(selEnd)
+	else
+		location = "L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
+	end
+
+	local gitRemote = "https://github.com/" .. repo .. "/blob/" .. branch .. pathInRepo .. "#" .. location
+
+	os.execute("open '" .. gitRemote .. "'")
+	fn.setreg("+", gitRemote)
+end
 --------------------------------------------------------------------------------
 
 ---log statement for variable under cursor, similar to the 'turbo console log'
@@ -335,6 +400,12 @@ end
 --------------------------------------------------------------------------------
 -- MOVEMENT
 -- performed via `:normal` makes them less glitchy
+
+local function leaveVisualMode()
+	-- https://github.com/neovim/neovim/issues/17735#issuecomment-1068525617
+	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
+	vim.api.nvim_feedkeys(escKey, "nx", false)
+end
 
 function M.moveLineDown()
 	if lineNo(".") == lineNo("$") then return end

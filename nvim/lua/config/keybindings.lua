@@ -217,22 +217,14 @@ keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine, { desc = "duplicate line" })
 keymap("x", "R", qol.duplicateSelection, { desc = "duplicate selection" })
-keymap(
-	"n",
-	"<A-r>",
-	function() qol.duplicateLine { increment = true } end,
-	{ desc = "duplicate line, incrementing numbers" }
-)
+-- stylua: ignore
+keymap( "n", "<A-r>", function() qol.duplicateLine { increment = true } end, { desc = "duplicate line (+ increment)" })
 
 -- Undo
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
 keymap("n", "<C-u>", qol.undoDuration, { desc = "undo specific durations" })
-keymap(
-	"n",
-	"<leader>u",
-	function() require("telescope").extensions.undo.undo() end,
-	{ desc = "Telescope Undotree" }
-)
+-- stylua: ignore
+keymap( "n", "<leader>u", function() require("telescope").extensions.undo.undo() end, { desc = "Telescope Undotree" })
 
 -- Logging & Debugging
 keymap({ "n", "x" }, "<leader>ll", qol.quicklog, { desc = "add log statement" })
@@ -240,12 +232,8 @@ keymap({ "n", "x" }, "<leader>lb", qol.beeplog, { desc = "add beep log" })
 keymap("n", "<leader>lr", qol.removeLog, { desc = "remove all log statements" })
 
 -- Sort & highlight duplicate lines
-keymap(
-	{ "n", "x" },
-	"<leader>S",
-	[[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]],
-	{ desc = "sort & highlight duplicates" }
-) -- second <CR> due to cmdheight=0
+-- stylua: ignore
+keymap( { "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { desc = "sort & highlight duplicates" })
 
 -- URL Opening
 keymap("n", "gx", qol.bettergx, { desc = "open next URL" })
@@ -362,10 +350,9 @@ keymap("n", "ga", ":ChatGPT<CR>", { desc = "AI: ChatGPT Prompt" })
 
 --------------------------------------------------------------------------------
 -- BUFFERS
-keymap("n", "<BS>", ":nohl<CR><Plug>(CybuNext)", { desc = "cycle buffers" })
--- Buffer selector
 keymap("n", "gb", telescope.buffers, { desc = "select an open buffer" })
 
+-- INFO: <BS> to cycle buffer has to be set in cybu config
 keymap("n", "<CR>", function()
 	if expand("#") == "" then
 		local lastOldfile = vim.v.oldfiles[2]
@@ -418,65 +405,10 @@ keymap("n", "<D-g>", function()
 end)
 
 -- Git-link
-keymap({ "n", "x" }, "<C-g>", function()
-	local repo = fn.system([[git remote -v]]):gsub(".*:(.-)%.git.*", "%1")
-	local branch = fn.system([[git branch --show-current]]):gsub("\n", "")
-	if branch:find("^fatal: not a git repository") then
-		vim.notify("Not a git repository.", logWarn)
-		return
-	end
-	local filepath = expand("%:p")
-	local gitroot = fn.system([[git rev-parse --show-toplevel]])
-	local pathInRepo = filepath:sub(#gitroot)
-
-	local location
-	local selStart = fn.line("v")
-	local selEnd = fn.line(".")
-	if selStart == selEnd then -- normal mode or one-line-selection
-		location = "L" .. tostring(selStart)
-	elseif selStart < selEnd then
-		location = "L" .. tostring(selStart) .. "-L" .. tostring(selEnd)
-	else
-		location = "L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
-	end
-
-	local gitRemote = "https://github.com/" .. repo .. "/blob/" .. branch .. pathInRepo .. "#" .. location
-
-	os.execute("open '" .. gitRemote .. "'")
-	fn.setreg("+", gitRemote)
-end, { desc = "git link" })
+keymap({ "n", "x" }, "<C-g>", qol.gitLink, { desc = "git link" })
 
 -- add-commit-pull-push
----@param prefillMsg? string
-local function addCommitPush(prefillMsg)
-	if not prefillMsg then prefillMsg = "" end
-
-	-- uses dressing + cmp + omnifunc for autocompletion of filenames
-	vim.ui.input({ prompt = "Commit Message", default = prefillMsg, completion = "file" }, function(commitMsg)
-		if not commitMsg then
-			return
-		elseif #commitMsg > 50 then
-			vim.notify("Commit Message too long.", logWarn)
-			addCommitPush(commitMsg:sub(1, 50))
-			return
-		elseif commitMsg == "" then
-			commitMsg = "chore"
-		end
-
-		local cc =
-			{ "chore", "built", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
-		local firstWord = commitMsg:find("^%w+")
-		if not vim.tbl_contains(cc, firstWord) then
-			vim.notify("Not using a Conventional Commits keyword.", logWarn)
-			addCommitPush(commitMsg)
-			return
-		end
-
-		vim.notify("ﴻ add-commit-push…")
-		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
-	end)
-end
-keymap("n", "<leader>g", addCommitPush, { desc = "git add-commit-pull-push" })
+keymap("n", "<leader>g", qol.addCommitPush, { desc = "git add-commit-pull-push" })
 
 --------------------------------------------------------------------------------
 

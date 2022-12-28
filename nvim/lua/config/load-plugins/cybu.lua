@@ -4,6 +4,9 @@ return {
 		keys = "<BS>",
 		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
 		config = function()
+			-- has to be set here to work
+			vim.keymap.set("n", "<BS>", ":nohl<CR><Plug>(CybuNext)", { desc = "cycle buffers" })
+
 			require("cybu").setup {
 				display_time = 1000,
 				position = {
