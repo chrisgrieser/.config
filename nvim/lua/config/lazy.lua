@@ -22,7 +22,7 @@ require("lazy").setup("config/load-plugins", {
 		path = vim.fn.stdpath("config") .. "/my-plugins/",
 	},
 	ui = {
-		border = "none", -- no border to use more space
+		border = borderStyle,
 		size = { width = 1, height = 1 }, -- full width
 	},
 	checker = {

@@ -280,7 +280,7 @@ function M.addCommitPush(prefillMsg)
 end
 
 function M.gitLink()
-	local repo = fn.system([[git remote -v]]):gsub(".*:(.-)%.git.*", "%1")
+	local repo = fn.system([[git remote -v]]):gsub(".*:(.-) %(.*", "%1")
 	local branch = fn.system([[git branch --show-current]]):gsub("\n", "")
 	if branch:find("^fatal: not a git repository") then
 		vim.notify("Not a git repository.", logWarn)

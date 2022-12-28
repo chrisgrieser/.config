@@ -159,7 +159,10 @@ require("lualine").setup {
 		lualine_x = {
 			{
 				require("lazy.status").updates,
-				cond = require("lazy.status").has_updates,
+				cond = function ()
+					local numberOfUpdates
+					return require("lazy.status").has_updates()
+				end,
 				color = "NonText",
 			},
 		},
