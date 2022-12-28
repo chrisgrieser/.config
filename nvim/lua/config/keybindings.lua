@@ -435,6 +435,10 @@ end, { desc = ":CodiNew" })
 --------------------------------------------------------------------------------
 
 -- BUILD SYSTEM
+
+keymap("n", "gq", cmd.cnext, {desc = "next quickfix item"})
+keymap("n", "gq", cmd.cprevious, {desc = "next quickfix item"})
+
 keymap("n", "<leader>r", function()
 	cmd.update()
 	local filename = expand("%:t")
@@ -467,7 +471,12 @@ keymap("n", "<leader>r", function()
 
 	-- Typescript
 	elseif ft == "typescript" then
-		cmd([[!npm run build]]) -- not via fn.system to get the output in the cmdline
+		cmd.redir("@z")
+		cmd.make() -- defined via makeprg
+		local output = fn.getreg("z")
+		local logLevel = output:find("error") and logError or logTrace
+		vim.notify(output, logLevel)
+		cmd.redir("END")
 
 	-- AppleScript
 	elseif ft == "applescript" then
