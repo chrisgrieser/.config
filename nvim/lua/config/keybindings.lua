@@ -74,7 +74,7 @@ keymap("n", "+", "*", { desc = "search word under cursor (German keyboard)" })
 keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "visual star (I use `+` though)" })
 
 -- FOLDING
-keymap("n", "^", function ()
+keymap("n", "^", function()
 	normal("za")
 	cmd.SatelliteRefresh() -- https://github.com/lewis6991/satellite.nvim/blob/main/doc/satellite.txt#L113
 end, { desc = "toggle fold" })
@@ -294,11 +294,11 @@ keymap("c", "<C-e>", "<End>")
 keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 
 -- autopairs for command mode
-keymap("c", "(", "()<Left>") 
-keymap("c", "[", "[]<Left>") 
-keymap("c", "{", "{}<Left>") 
-keymap("c", "'", "''<Left>") 
-keymap("c", '"', '""<Left>') 
+keymap("c", "(", "()<Left>")
+keymap("c", "[", "[]<Left>")
+keymap("c", "{", "{}<Left>")
+keymap("c", "'", "''<Left>")
+keymap("c", '"', '""<Left>')
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
@@ -365,7 +365,6 @@ end
 keymap("n", "#", ":CccPick<CR>")
 keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
 keymap("i", "<C-#>", "<Plug>(ccc-insert)")
-
 
 -- Neural
 keymap("x", "ga", ":NeuralCode complete<CR>", { desc = "AI: Code Complete" })
@@ -469,25 +468,35 @@ keymap({ "n", "x" }, "<C-g>", function()
 end, { desc = "git link" })
 
 -- add-commit-pull-push
-keymap("n", "<leader>g", function()
-	local prefill = b.prevCommitMsg or ""
+---@param prefill? string
+local function addCommitPush(prefill)
+	if not prefill then prefill = "" end
 
 	-- uses dressing + cmp + omnifunc for autocompletion of filenames
 	vim.ui.input({ prompt = "Commit Message", default = prefill, completion = "file" }, function(commitMsg)
 		if not commitMsg then
 			return
 		elseif #commitMsg > 50 then
-			vim.notify("Commit Message too long.\n(Run again for shortened message.)", logWarn)
-			b.prevCommitMsg = commitMsg:sub(1, 50)
+			vim.notify("Commit Message too long.", logWarn)
+			addCommitPush(commitMsg:sub(1, 50))
 			return
 		elseif commitMsg == "" then
-			commitMsg = "patch"
+			commitMsg = "chore"
+		end
+
+		local cc = { "chore", "built", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
+		local firstWord = commitMsg:find("^%w+")
+		if not vim.tbl_contains(cc, firstWord) then
+			vim.notify("Not using a Conventional Commits keyword.", logWarn)
+			addCommitPush(commitMsg)
+			return	
 		end
 
 		vim.notify("ﴻ add-commit-push…")
 		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
 	end)
-end)
+end
+keymap("n", "<leader>g", addCommitPush, {desc = "git add-commit-pull-push"})
 
 --------------------------------------------------------------------------------
 

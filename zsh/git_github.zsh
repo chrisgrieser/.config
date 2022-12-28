@@ -52,14 +52,11 @@ function acp() {
 	local MSG_LENGTH=${#COMMIT_MSG}
 	if [[ $MSG_LENGTH -gt 50 ]]; then
 		echo "Commit Message too long ($MSG_LENGTH chars)."
-		[[ "$TERM" != "alacritty" ]] && return 1
-		# shellcheck disable=SC1087,SC2154
-		FUNC_NAME="$funcstack[1]"             # https://stackoverflow.com/a/62527825
-		print -z "$FUNC_NAME \"$COMMIT_MSG\"" # put back into buffer
+		print -z "acp \"$COMMIT_MSG\"" # put back into buffer
 		return 1
 	fi
 	if [[ "$COMMIT_MSG" == "" ]]; then
-		COMMIT_MSG="patch"
+		COMMIT_MSG="chore"
 	fi
 
 	git add -A && git commit -m "$COMMIT_MSG"
