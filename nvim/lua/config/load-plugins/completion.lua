@@ -92,7 +92,7 @@ local source_icons = {
 return {
 	{
 		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
+		event = {"InsertEnter", "CmdlineEnter"}, -- CmdlineEnter for completions there
 		dependencies = {
 			"hrsh7th/cmp-buffer", -- completion sources
 			"hrsh7th/cmp-path",
