@@ -10,16 +10,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4B2606CD-2C98-4BEB-8E44-4A047BE9B3FA</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: brew home</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>72B78E7D-69B1-4E83-AB9B-26507DE2C33E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -55,26 +45,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>4B2606CD-2C98-4BEB-8E44-4A047BE9B3FA</key>
-		<array/>
 		<key>6DB061FF-1A40-4EE0-BEAA-52ADCC3DB108</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>15EACC42-5C45-4D93-92F1-4ACE532FB54B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>70235FFB-5E85-4C61-A7CE-B1CCC3E1DD0B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>90992FC3-67B0-4E57-A6B5-65BFAA91EDCC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -120,16 +95,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>4B2606CD-2C98-4BEB-8E44-4A047BE9B3FA</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: brew home</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>89F35AB8-AC54-4BB2-B884-9B206671D5AE</key>
 		<array>
@@ -169,31 +134,8 @@
 				<false/>
 			</dict>
 		</array>
-		<key>90992FC3-67B0-4E57-A6B5-65BFAA91EDCC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4B2606CD-2C98-4BEB-8E44-4A047BE9B3FA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>CE590292-EEA5-4025-A89B-42AE38188503</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4B2606CD-2C98-4BEB-8E44-4A047BE9B3FA</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: brew home</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>8E20F8A9-6C70-4ADF-81BA-8BE2BEF4241E</string>
@@ -380,142 +322,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
-brew home "$*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>4B2606CD-2C98-4BEB-8E44-4A047BE9B3FA</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>1</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>bh</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>build-brew-list.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>&gt; brew home '{query}'</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>70235FFB-5E85-4C61-A7CE-B1CCC3E1DD0B</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>--\w+</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>90992FC3-67B0-4E57-A6B5-65BFAA91EDCC</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>macappstores://search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?mt=12&amp;ign-mscache=1&amp;q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>15EACC42-5C45-4D93-92F1-4ACE532FB54B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>mas</string>
-				<key>subtext</key>
-				<string>in the App</string>
-				<key>text</key>
-				<string>Mac App Store: '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>6DB061FF-1A40-4EE0-BEAA-52ADCC3DB108</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
@@ -621,63 +427,35 @@ brew home "$*"</string>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/{query}#readme</string>
+				<string>macappstores://search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?mt=12&amp;ign-mscache=1&amp;q={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>E016D711-BC20-4751-AD2A-FEDDD4949D27</string>
+			<string>15EACC42-5C45-4D93-92F1-4ACE532FB54B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
 				<key>keyword</key>
-				<string>zsh</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>oh-my-zsh-plugin-search.js</string>
+				<string>mas</string>
 				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Oh My ZSH: {query}</string>
-				<key>type</key>
-				<integer>8</integer>
+				<string>in the App</string>
+				<key>text</key>
+				<string>Mac App Store: '{query}'</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>27B242B6-18EC-4406-AF3F-BEEFC41EE4C2</string>
+			<string>6DB061FF-1A40-4EE0-BEAA-52ADCC3DB108</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -778,6 +556,76 @@ brew home "$*"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/{query}#readme</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>E016D711-BC20-4751-AD2A-FEDDD4949D27</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>zsh</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>oh-my-zsh-plugin-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Oh My ZSH: {query}</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>27B242B6-18EC-4406-AF3F-BEEFC41EE4C2</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
@@ -829,7 +677,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>295</real>
 		</dict>
 		<key>0F3F996A-3FC8-4FBD-990C-9D54C43DD642</key>
 		<dict>
@@ -838,7 +686,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>410</real>
 		</dict>
 		<key>134021C5-60C3-4CE6-BB01-1629F036ED44</key>
 		<dict>
@@ -878,17 +726,6 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
-		<key>4B2606CD-2C98-4BEB-8E44-4A047BE9B3FA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>brew home</string>
-			<key>xpos</key>
-			<real>315</real>
-			<key>ypos</key>
-			<real>155</real>
-		</dict>
 		<key>6DB061FF-1A40-4EE0-BEAA-52ADCC3DB108</key>
 		<dict>
 			<key>colorindex</key>
@@ -898,17 +735,6 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
-		<key>70235FFB-5E85-4C61-A7CE-B1CCC3E1DD0B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>install</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>180</real>
-		</dict>
 		<key>72B78E7D-69B1-4E83-AB9B-26507DE2C33E</key>
 		<dict>
 			<key>colorindex</key>
@@ -916,7 +742,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>315</real>
 		</dict>
 		<key>72D18DBC-72FF-40AA-B367-D4C148AEC3A6</key>
 		<dict>
@@ -936,7 +762,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>285</real>
 		</dict>
 		<key>89F35AB8-AC54-4BB2-B884-9B206671D5AE</key>
 		<dict>
@@ -945,7 +771,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>430</real>
 		</dict>
 		<key>8E20F8A9-6C70-4ADF-81BA-8BE2BEF4241E</key>
 		<dict>
@@ -954,18 +780,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>255</real>
 			<key>ypos</key>
-			<real>355</real>
-		</dict>
-		<key>90992FC3-67B0-4E57-A6B5-65BFAA91EDCC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>remove options</string>
-			<key>xpos</key>
 			<real>185</real>
-			<key>ypos</key>
-			<real>210</real>
 		</dict>
 		<key>A95AE0C7-7A80-4DA9-96C5-4561B4F4E6F2</key>
 		<dict>
@@ -983,7 +798,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>165</real>
 		</dict>
 		<key>CE590292-EEA5-4025-A89B-42AE38188503</key>
 		<dict>
@@ -994,7 +809,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>165</real>
 		</dict>
 		<key>E016D711-BC20-4751-AD2A-FEDDD4949D27</key>
 		<dict>

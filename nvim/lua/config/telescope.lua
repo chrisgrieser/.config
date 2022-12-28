@@ -117,9 +117,7 @@ require("telescope").setup {
 			layout_config = { cursor = { width = 0.4 } },
 		},
 		quickfix = {
-			layout_config = { horizontal = {
-				preview_cutoff = 9001,
-			} },
+			layout_config = { preview_cutoff = 9001 },
 		},
 		live_grep = {
 			cwd = "%:p:h",
