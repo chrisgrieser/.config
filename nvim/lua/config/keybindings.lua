@@ -293,6 +293,13 @@ keymap("c", "<C-a>", "<Home>")
 keymap("c", "<C-e>", "<End>")
 keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 
+-- autopairs for command mode
+keymap("c", "(", "()<Left>") 
+keymap("c", "[", "[]<Left>") 
+keymap("c", "{", "{}<Left>") 
+keymap("c", "'", "''<Left>") 
+keymap("c", '"', '""<Left>') 
+
 --------------------------------------------------------------------------------
 -- VISUAL MODE
 keymap("x", "V", "j") -- repeatedly pressing "V" selects more lines (indented for Visual Line Mode)
