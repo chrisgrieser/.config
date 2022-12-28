@@ -43,23 +43,6 @@ function getlocalopt(option) return vim.api.nvim_get_option_value(option, { scop
 ---@return boolean
 function isGui() return g.neovide or g.goneovim end
 
--- common shell options for fn.jobstart()
-shellOpts = {
-	stdout_buffered = true,
-	stderr_buffered = true,
-	detach = true,
-	on_stdout = function(_, data, _)
-		if not data or (data[1] == "" and #data == 1) then return end
-		local stdOut = table.concat(data, " \n "):gsub("%s*$", "")
-		vim.notify(stdOut)
-	end,
-	on_stderr = function(_, data, _)
-		if not data or (data[1] == "" and #data == 1) then return end
-		local stdErr = table.concat(data, " \n "):gsub("%s*$", "")
-		vim.notify(stdErr)
-	end,
-}
-
 --------------------------------------------------------------------------------
 -- GENERAL LUA UTILS
 
