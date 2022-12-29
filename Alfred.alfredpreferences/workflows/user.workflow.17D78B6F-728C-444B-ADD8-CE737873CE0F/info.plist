@@ -6,8 +6,46 @@
 	<string>com.rudgavis.openAI.helpers</string>
 	<key>connections</key>
 	<dict>
+		<key>059F564D-6DF6-4257-8165-D4EBF53F8EE5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9715BFDE-8185-44F9-B599-1FC2DDE501EA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1D4244BC-122A-4164-A41C-7C200E37A558</key>
 		<array/>
+		<key>47682DC7-2080-48CB-BF04-F8EC43FC72DD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>059F564D-6DF6-4257-8165-D4EBF53F8EE5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>56288D6B-F0D0-435D-9E2C-E95DE68B377C</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>9715BFDE-8185-44F9-B599-1FC2DDE501EA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7B84C695-C751-47B2-9CFE-A76195793996</key>
 		<array>
 			<dict>
@@ -25,7 +63,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>9715BFDE-8185-44F9-B599-1FC2DDE501EA</string>
+				<string>47682DC7-2080-48CB-BF04-F8EC43FC72DD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -70,6 +108,23 @@
 	<string>OpenAI</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+  tell application "System Events"	key code 123 using {command down, shift down}	delay 0.1	keystroke "c" using {command down}	delay 0.1	return the clipboardend tell
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>059F564D-6DF6-4257-8165-D4EBF53F8EE5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -129,6 +184,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>no sel</string>
+						<key>uid</key>
+						<string>56288D6B-F0D0-435D-9E2C-E95DE68B377C</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>sel</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>47682DC7-2080-48CB-BF04-F8EC43FC72DD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string>{query}</string>
 				<key>passthroughargument</key>
@@ -149,6 +236,32 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># unselect
+# osascript -e 'tell application "System Events" to key code 124'
+
+echo -n $(./node_modules/.bin/run-node ask.js)</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>ask.js</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>7B84C695-C751-47B2-9CFE-A76195793996</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>autopaste</key>
 				<true/>
 				<key>clipboardtext</key>
@@ -165,71 +278,65 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># osascript -e 'tell application "System Events" to key code 124' # unselect
-echo -n $(./node_modules/.bin/run-node ask.js)</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>ask.js</string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>7B84C695-C751-47B2-9CFE-A76195793996</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>original by https://rudgalvis.com</string>
 	<key>uidata</key>
 	<dict>
+		<key>059F564D-6DF6-4257-8165-D4EBF53F8EE5</key>
+		<dict>
+			<key>note</key>
+			<string>select line</string>
+			<key>xpos</key>
+			<real>280</real>
+			<key>ypos</key>
+			<real>110</real>
+		</dict>
 		<key>1D4244BC-122A-4164-A41C-7C200E37A558</key>
 		<dict>
 			<key>xpos</key>
-			<real>275</real>
+			<real>555</real>
 			<key>ypos</key>
-			<real>70</real>
+			<real>160</real>
+		</dict>
+		<key>47682DC7-2080-48CB-BF04-F8EC43FC72DD</key>
+		<dict>
+			<key>xpos</key>
+			<real>175</real>
+			<key>ypos</key>
+			<real>225</real>
 		</dict>
 		<key>7B84C695-C751-47B2-9CFE-A76195793996</key>
 		<dict>
+			<key>note</key>
+			<string>call openAI</string>
 			<key>xpos</key>
-			<real>275</real>
+			<real>555</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>275</real>
 		</dict>
 		<key>8871FA8E-5658-4816-BACB-695ECD934CCE</key>
 		<dict>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>205</real>
 		</dict>
 		<key>9715BFDE-8185-44F9-B599-1FC2DDE501EA</key>
 		<dict>
 			<key>xpos</key>
-			<real>185</real>
+			<real>460</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>250</real>
 		</dict>
 		<key>9CF16FDF-64CB-488C-85FE-EF7029CE7CEC</key>
 		<dict>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>425</real>
+			<real>705</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>275</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -268,9 +375,9 @@ echo -n $(./node_modules/.bin/run-node ask.js)</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>symlink</string>
+			<string>symlinked</string>
 			<key>label</key>
-			<string></string>
+			<string>OpenAI API key</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
