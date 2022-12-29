@@ -19,7 +19,7 @@ export MAGIC_ENTER_GIT_COMMAND="exagit"
 export MAGIC_ENTER_OTHER_COMMAND="exa"
 
 # zoxide
-export _ZO_DATA_DIR="$DOTFILE_FOLDER" # sync the zoxide database with dotfiles
+export _ZO_DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder" # sync the zoxide database with dotfiles
 # export _ZO_EXCLUDE_DIRS=""
 eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
 

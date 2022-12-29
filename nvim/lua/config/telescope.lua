@@ -1,4 +1,5 @@
 require("config/utils")
+local actions = require("telescope.actions")
 --------------------------------------------------------------------------------
 
 local maps = {
@@ -7,15 +8,27 @@ local maps = {
 	["?"] = "which_key",
 	["<S-Down>"] = "preview_scrolling_down",
 	["<S-Up>"] = "preview_scrolling_up",
-	["<Tab>"] = "toggle_selection", -- multi-select
-	["^"] = "add_selected_to_qflist",
+	["<C-h>"] = "cycle_history_prev",
+	["<C-l>"] = "cycle_history_next",
+	["<Up>"] = "move_selection_previous",
+	["<Down>"] = "move_selection_next",
+	["<Tab>"] = function(prompt) -- multi-select
+		actions.toggle_selection(prompt)
+		actions.move_selection_next(prompt)
+	end,
+	["^"] = function(prompt) -- quickfix
+		actions.add_selected_to_qflist(prompt)
+		actions.close(prompt)
+	end,
 }
 
 require("telescope").setup {
 	defaults = {
 		selection_caret = "ﰉ ",
 		prompt_prefix = "❱ ",
+		multi_icon = "洛",
 		path_display = { "tail" },
+		history = { path = vimDataDir .. "telescope_history" }, -- sync the history
 		file_ignore_patterns = {
 			"%.DS_Store", -- Mac system file
 			"%.git", -- no slash, so it orks for submodule files
@@ -36,9 +49,19 @@ require("telescope").setup {
 			"%.icns",
 			"%.zip",
 		},
-		mappings = {
+		default_mappings = { -- by using `default_mappings` instead of `mappings`, the defaults are overridden
 			i = maps,
 			n = maps,
+		},
+		vimgrep_arguments = {
+			"rg",
+			"--color=never",
+			"--no-heading",
+			"--with-filename",
+			"--line-number",
+			"--column",
+			"--smart-case",
+			"--trim", -- this added to trim results
 		},
 		layout_strategy = "horizontal",
 		layout_config = {
@@ -101,7 +124,7 @@ require("telescope").setup {
 			hidden = true,
 			follow = true,
 		},
-		keymaps = { prompt_prefix = "  " },
+		keymaps = { prompt_prefix = "  ", modes = { "n", "i", "c", "x", "o", "t" } },
 		oldfiles = { prompt_prefix = " " },
 		highlights = { prompt_prefix = " " },
 		git_files = {
@@ -119,7 +142,7 @@ require("telescope").setup {
 			layout_config = { cursor = { width = 0.4 } },
 		},
 		quickfix = {
-			layout_config = { preview_cutoff = 9001 },
+			-- layout_config = { preview_cutoff = 9001 },
 			trim_text = true,
 			show_line = true,
 		},
