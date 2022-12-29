@@ -18,10 +18,7 @@ bindEverywhere '…' insert-last-word # …=alt+.
 # edit in Vim
 autoload edit-command-line
 zle -N edit-command-line
-bindEverywhere '^V' edit-command-line
-
-# zsh-autosuggest
-bindkey -M viins '^[[32;5~' autosuggest-execute # ctrl+esc (with esc remapped to f18)
+bindEverywhere '^F' edit-command-line
 
 # shift+tab: Cycle through base directories
 bindEverywhere "^[[Z" dir-cycler

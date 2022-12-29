@@ -193,7 +193,7 @@ return {
 				sources = cmp.config.sources(markdownSources),
 			})
 			local yamlSources = copyTable(defaultSources)
-			table.remove(yamlSources) -- remove buffer
+			yamlSources = removeFromTable(yamlSources, buffer)
 			cmp.setup.filetype("yaml", {
 				sources = cmp.config.sources(yamlSources),
 			})
