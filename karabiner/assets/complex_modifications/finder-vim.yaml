@@ -403,7 +403,7 @@ rules:
         to:
           - key_code: right_shift
             modifiers: [command, control, option] # keep hyper binding
-        conditions: [*finder-app]
+        conditions: [*finder-app, *move-inactive]
       - type: basic
         from: {key_code: escape}
         to:
@@ -413,7 +413,7 @@ rules:
           - *leave-search-mode
           - *end-alfred
           - *end-context-menu
-        conditions: [*finder-app]
+        conditions: [*finder-app, *move-inactive]
         # Closing window or quitting Finder should also disable Insert mode
       - type: basic
         from: {key_code: w, modifiers: {mandatory: [command]}}

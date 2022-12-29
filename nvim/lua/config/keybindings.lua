@@ -538,21 +538,4 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
--- Remaps for the refactoring operations currently offered by the plugin
 
-keymap("n", "zi", function () require('refactoring').refactor('Inline Variable') end, {desc = "Refactor: Inline Variable"})
-keymap("x", "zv", function () require('refactoring').refactor('Extract Variable') end, {desc = "Refactor: Extract Variable"})
-keymap("x", "zb", function () require('refactoring').refactor('Extract Block') end, {desc = "Refactor: Extract Block"})
-keymap("x", "zf", function () require('refactoring').refactor('Extract Function') end, {desc = "Refactor: Extract Function"})
-
---------------------------------------------------------------------------------
-
-local bar = "aaaaa"
-local function foo()
-	print(bar)
-	print(bar .. "aa")
-end
-
-print("bar" .. "aa")
-print("bar" .. "aa")
-print("bar" .. "aa")
