@@ -212,6 +212,19 @@ autocmd("BufWinEnter", {
 
 --------------------------------------------------------------------------------
 
+---@param str string
+---@param separator string uses Lua Pattern, so requires escaping
+---@return table
+local function split(str, separator)
+	str = str .. separator
+	local output = {}
+	-- https://www.lua.org/manual/5.4/manual.html#pdf-string.gmatch
+	for i in str:gmatch("(.-)" .. separator) do
+		table.insert(output, i)
+	end
+	return output
+end
+
 -- Skeletons (Templates)
 -- apply templates for any filetype named `./templates/skeleton.{ft}`
 augroup("Templates", {})
