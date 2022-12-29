@@ -42,7 +42,7 @@ return {
 	{ -- nicer colorcolumn
 		"xiyaowong/virtcolumn.nvim",
 		event = "VeryLazy",
-		config = function() g.virtcolumn_char = "║" end,
+		init = function() vim.g.virtcolumn_char = "║" end,
 	},
 	{ -- color previews & color utilities
 		"uga-rosa/ccc.nvim",

@@ -11,14 +11,14 @@ CONFIG+=('terminal-keybindings')
 CONFIG+=('docs_man')
 CONFIG+=('git_github')
 CONFIG+=('homebrew')
-CONFIG+=('alacritty_theme_utilities')
-CONFIG+=('intro-messages')
 
 # Terminal specific
-if [[ $TERM != "xterm-256color" ]]; then
-	CONFIG+=('vi-mode') # don't use vi mode
-elif [[ $TERM == "Warp" ]]; then
-	cd "$WD" || return # working directory for Warp
+if [[ $TERM == "Warp" ]]; then
+	cd "$WD" || return 
+elif [[ $TERM == "alacritty" ]]; then
+	CONFIG+=('vi-mode')
+	CONFIG+=('alacritty_theme_utilities')
+	CONFIG+=('intro-messages')
 fi
 
 for config_file in "${CONFIG[@]}"; do

@@ -124,6 +124,15 @@ return {
 		config = function () require("refactoring").setup() end,
 	},
 	{"ggandor/leap.nvim", event = "VeryLazy"},
+	{ "unblevable/quick-scope",
+		keys = {"f", "F", "t", "T"},
+		init = function ()
+			vim.g.qs_highlight_on_keys = {"f", "F", "t", "T"} -- needs to be enabled before
+		end,
+		config = function ()
+			cmd.highlight { "def link QuickScopePrimary CurSearch", bang = true }
+		end
+	},
 	"kylechui/nvim-surround", -- surround operator
 	{"gbprod/substitute.nvim", -- substitution & exchange operator
 		lazy = true,

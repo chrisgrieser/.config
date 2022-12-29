@@ -3,4 +3,3 @@ filter_class: "com.hnc.Discord"
 
 extra_includes:
   - "../match/_discord.yml"
-  - "../match/_carl-commands.yml"
