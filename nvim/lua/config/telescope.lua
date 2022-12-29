@@ -1,24 +1,20 @@
-require("config/utils")
+require("config.utils")
 local actions = require("telescope.actions")
 --------------------------------------------------------------------------------
 
 local maps = {
 	["<Esc>"] = "close",
 	["<D-w>"] = "delete_buffer",
-	["?"] = "which_key",
 	["<S-Down>"] = "preview_scrolling_down",
 	["<S-Up>"] = "preview_scrolling_up",
 	["<C-h>"] = "cycle_history_prev",
 	["<C-l>"] = "cycle_history_next",
 	["<Up>"] = "move_selection_previous",
 	["<Down>"] = "move_selection_next",
+	["^"] = "smart_send_to_qflist",
 	["<Tab>"] = function(prompt) -- multi-select
 		actions.toggle_selection(prompt)
 		actions.move_selection_next(prompt)
-	end,
-	["^"] = function(prompt) -- quickfix
-		actions.add_selected_to_qflist(prompt)
-		actions.close(prompt)
 	end,
 }
 

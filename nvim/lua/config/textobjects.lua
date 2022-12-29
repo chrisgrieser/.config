@@ -1,4 +1,4 @@
-require("config/utils")
+require("config.utils")
 --------------------------------------------------------------------------------
 -- New Text objects
 -- af -> a [f]unction (treesitter)
