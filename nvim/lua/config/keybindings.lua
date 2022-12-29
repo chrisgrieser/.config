@@ -154,15 +154,21 @@ end, { desc = "paste & reset killring" })
 -- paste charwise reg as linewise & vice versa
 keymap("n", "gp", function()
 	local reg = "+"
+	local regContent = fn.getreg(reg)
 	local isLinewise = fn.getregtype(reg) == "V"
-	local targetRegType = isLinewise and "v" or "V"
-	local regContent = fn.getreg(reg):gsub("\n$", "")
+
+	local targetRegType
+	if isLinewise then
+		targetRegType = "v"
+		regContent = regContent:gsub("^%s*", ""):gsub("%s*$", "")
+	else
+		targetRegType = "V"
+	end
+
 	fn.setreg(reg, regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
-	normal('"' .. reg .. "p") -- for whatever reason, `p` along does not work here
+	normal('"' .. reg .. "p") -- for whatever reason, not naming a register does not work here
 	if targetRegType == "V" then normal("==") end
 end, { desc = "paste differently" })
-
---------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 
@@ -200,10 +206,7 @@ keymap("n", "za", "mz1z=`z", { desc = "autofix spelling" }) -- [a]utofix word un
 
 -- [S]ubstitute Operator (substitute.nvim)
 keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
-keymap("n", "ss", function()
-	require("substitute").line()
-	normal("==")
-end, { desc = "substitute line" })
+keymap("n", "ss", function() require("substitute").line() end, { desc = "substitute line" })
 keymap("n", "S", function() require("substitute").eol() end, { desc = "substitute to end of line" })
 keymap("n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange op" })
 keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
