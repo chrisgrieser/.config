@@ -110,7 +110,7 @@ return {
 		config = function ()
 			require("delaytrain").setup {
 				delay_ms = 1000, -- How long repeated usage of a key should be prevented
-				grace_period = 5, -- How many repeated keypresses are allowed
+				grace_period = 7, -- How many repeated keypresses are allowed
 				keys = { -- Which keys (in which modes) should be delayed
 					["n"] = { "h", "l", "x" },
 				},
@@ -119,6 +119,7 @@ return {
 	},
 
 	{ "ThePrimeagen/refactoring.nvim",
+		lazy = true,
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
 		config = function () require("refactoring").setup() end,
 	},
