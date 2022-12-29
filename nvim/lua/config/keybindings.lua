@@ -188,22 +188,22 @@ local trailingKeys = { ".", ",", ";", ":", '"', "'" }
 for _, v in pairs(trailingKeys) do
 	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = "append " .. v .. " to EoL" })
 end
-keymap("n", "X", "mz$x`z", {desc = "delete last character"})
+keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Spelling (mnemonic: [z]pe[l]ling)
 keymap("n", "zl", telescope.spell_suggest, { desc = "spellsuggest" })
-keymap("n", "zg", "zg<CR>", {desc = "mark as correct spelling"}) -- needs extra enter due to `cmdheight=0`
-keymap("n", "gz", "]s", {desc = "next misspelling"}) 
-keymap("n", "za", "mz1z=`z", {desc = "autofix spelling"}) -- [a]utofix word under cursor 
+keymap("n", "zg", "zg<CR>", { desc = "mark as correct spelling" }) -- needs extra enter due to `cmdheight=0`
+keymap("n", "gz", "]s", { desc = "next misspelling" })
+keymap("n", "za", "mz1z=`z", { desc = "autofix spelling" }) -- [a]utofix word under cursor
 
 -- [S]ubstitute Operator (substitute.nvim)
 keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
 keymap("n", "ss", function()
-   require("substitute").line()
+	require("substitute").line()
 	normal("==")
 end, { desc = "substitute line" })
 keymap("n", "S", function() require("substitute").eol() end, { desc = "substitute to end of line" })
-keymap( "n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange op" })
+keymap("n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange op" })
 keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
 -- ISwap
@@ -215,7 +215,7 @@ keymap("x", "<leader>f", ":s///g<Left><Left><Left>", { desc = "search & replace"
 keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "struct. search & replace" })
 keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
 keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
-keymap( "n", "<A-r>", "R", { desc = "replace mode" })
+keymap("n", "<A-r>", "R", { desc = "replace mode" })
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine, { desc = "duplicate line" })

@@ -7,6 +7,8 @@ local maps = {
 	["?"] = "which_key",
 	["<S-Down>"] = "preview_scrolling_down",
 	["<S-Up>"] = "preview_scrolling_up",
+	["<Tab>"] = "toggle_selection", -- multi-select
+	["^"] = "add_selected_to_qflist",
 }
 
 require("telescope").setup {
@@ -118,6 +120,8 @@ require("telescope").setup {
 		},
 		quickfix = {
 			layout_config = { preview_cutoff = 9001 },
+			trim_text = true,
+			show_line = true,
 		},
 		live_grep = {
 			cwd = "%:p:h",

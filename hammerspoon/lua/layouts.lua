@@ -52,7 +52,7 @@ function movieModeLayout()
 	holeCover()
 	iMacDisplay:setBrightness(0)
 
-	runWithDelays({ 0, 0.5, 1, 1.5 }, function() openApp("YouTube") end)
+	runWithDelays({ 0, 0.5 }, function() openApp("YouTube") end)
 
 	quitApp {
 		"Obsidian",

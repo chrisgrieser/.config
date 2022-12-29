@@ -16,8 +16,8 @@ end
 require("config/options-and-autocmds")
 require("config/keybindings")
 require("config/user-commands")
-require("config/automating-nvim")
 require("config/lualine")
+require("config/treesitter")
 
 require("config/lsp-and-diagnostics") -- should come before linter and debugger
 require("config/linter")
@@ -26,6 +26,6 @@ require("config/debugger")
 require("config/comments")
 require("config/textobjects")
 require("config/telescope")
-require("config/treesitter")
+require("config/automating-nvim")
 
 
