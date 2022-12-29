@@ -86,9 +86,6 @@ g.matchup_text_obj_enabled = 0
 g.matchup_matchparen_enabled = 1 -- highlight
 keymap({ "n", "x", "o" }, "m", "<Plug>(matchup-%)", { desc = "matchup" })
 
--- Middle of the Line
-keymap({ "n", "x" }, "gm", "gM", { desc = "goto middle of logical line" })
-
 -- Hunks & changes
 keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
