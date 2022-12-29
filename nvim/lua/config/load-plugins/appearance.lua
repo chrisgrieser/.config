@@ -107,8 +107,8 @@ return {
 				input = {
 					border = borderStyle,
 					relative = "win",
-					max_width = 50, -- length git commit msg
-					min_width = 50,
+					max_width = 52, -- length git commit msg (+ 2 for borders)
+					min_width = 52,
 					win_options = {
 						sidescrolloff = 0,
 						winblend = 0,
