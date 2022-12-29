@@ -4,11 +4,11 @@ return {
 	{"williamboman/mason.nvim", dependencies = "RubixDev/mason-update-all"},
 
 	-- Themes
-	{"folke/tokyonight.nvim", enabled = true},
-	{"EdenEast/nightfox.nvim", enabled = true},
-	{"savq/melange", enabled = false}, -- like Obsidian's Primary color scheme
-	{"nyoom-engineering/oxocarbon.nvim", enabled = false},
-	{"rebelot/kanagawa.nvim", enabled = true},
+	"EdenEast/nightfox.nvim",
+	"rebelot/kanagawa.nvim",
+	-- "folke/tokyonight.nvim",
+	-- "nyoom-engineering/oxocarbon.nvim",
+	-- "savq/melange",
 
 	-- Treesitter
 	{"nvim-treesitter/nvim-treesitter",
@@ -105,6 +105,18 @@ return {
 
 	-- EDITING-SUPPORT
 	"andymass/vim-matchup",
+	{"ja-ford/delaytrain.nvim",
+		keys = {"h", "l", "x"},
+		config = function ()
+			require("delaytrain").setup {
+				delay_ms = 1000, -- How long repeated usage of a key should be prevented
+				grace_period = 5, -- How many repeated keypresses are allowed
+				keys = { -- Which keys (in which modes) should be delayed
+					["n"] = { "h", "l", "x" },
+				},
+			}
+		end
+	},
 
 	{ "ThePrimeagen/refactoring.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },

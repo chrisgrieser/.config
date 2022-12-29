@@ -59,7 +59,9 @@ keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Search
-keymap({ "n", "x", "o" }, "-", "/", { desc = "Search (German Keyboard)" })
+keymap("n", "-", "/", { desc = "Search (German Keyboard)" })
+keymap("x", "-", "/", { desc = "Search (German Keyboard)" })
+
 keymap("n", "<Esc>", function()
 	cmd.nohlsearch()
 	cmd.echo() -- clear shortmessage
@@ -102,6 +104,10 @@ keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
 -- CLIPBOARD
 opt.clipboard = "unnamedplus"
 
+g.killringCount = 0
+g.cursorPreYank = getCursor(0)
+g.lastYank = nil
+
 -- don't pollute the register
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
@@ -110,7 +116,7 @@ keymap("x", "p", "P", { desc = "paste without switcing register" })
 
 -- yanking without moving the cursor
 augroup("yankImprovements", {})
-autocmd({ "CursorMoved", "VimEnter" }, {
+autocmd("CursorMoved", {
 	group = "yankImprovements",
 	callback = function() g.cursorPreYank = getCursor(0) end,
 })
@@ -121,12 +127,13 @@ autocmd({ "CursorMoved", "VimEnter" }, {
 autocmd("TextYankPost", {
 	group = "yankImprovements",
 	callback = function()
-		vim.highlight.on_yank { timeout = 1500 } -- highlighted yank
-		if vim.v.event.operator ~= "y" then return end
-		setCursor(0, g.cursorPreYank) -- sticky yank
-		-- fn.setpos(".", g.cursorPreYankPos)
+		-- highlighted yank
+		vim.highlight.on_yank { timeout = 1500 }
 
-		-- add yanks to numbered registers
+		-- sticky yank
+		if vim.v.event.operator == "y" then setCursor(0, g.cursorPreYank) end
+
+		-- add yanks and deletes to numbered registers
 		if vim.v.event.regname ~= "" then return end
 		for i = 8, 1, -1 do
 			local regcontent = fn.getreg(tostring(i))
@@ -138,7 +145,7 @@ autocmd("TextYankPost", {
 })
 
 -- cycle through the last deletes/yanks
-g.killringCount = 0
+
 keymap("n", "P", function()
 	cmd.undo()
 	g.killringCount = g.killringCount + 1
@@ -552,3 +559,5 @@ autocmd("FileType", {
 	pattern = "ssr",
 	callback = function() keymap("n", "q", "Q", opts) end,
 })
+
+--------------------------------------------------------------------------------
