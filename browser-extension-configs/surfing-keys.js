@@ -2,24 +2,11 @@
 
 // Compatibility Prefix
 const {
-	Clipboard,
-	Front,
-	Hints,
-	Normal,
-	RUNTIME,
-	Visual,
-	aceVimMap,
-	addSearchAlias,
-	cmap,
-	getClickableElements,
 	imap,
 	imapkey,
-	iunmap,
 	map,
 	mapkey,
-	readText,
 	removeSearchAlias,
-	tabOpenLink,
 	unmap,
 	unmapAllExcept,
 	vmapkey,
@@ -35,7 +22,15 @@ settings.focusAfterClosed = "last";
 settings.scrollStepSize = 300;
 settings.tabsThreshold = 7;
 settings.modeAfterYank = "Normal";
-settings.showModeStatus = false;
+
+//──────────────────────────────────────────────────────────────────────────────
+
+// IGNORE LIST
+settings.blocklistPattern = undefined; /* eslint-disable-line no-undefined */
+
+// unmap jk on google for web search navigator (vimium-like controls for google only)
+unmap("j", /google/);
+unmap("k", /google/);
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -90,15 +85,6 @@ mapkey("F", "Fullscreen", function () {
 		document.documentElement.requestFullscreen();
 	}
 });
-
-//──────────────────────────────────────────────────────────────────────────────
-
-// IGNORE LIST
-settings.blocklistPattern = undefined; /* eslint-disable-line no-undefined */
-
-// unmap jk on google for web search navigator (vimium-like controls for google only)
-unmap("j", /google/);
-unmap("k", /google/);
 
 //──────────────────────────────────────────────────────────────────────────────
 
