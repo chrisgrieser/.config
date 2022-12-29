@@ -33,8 +33,9 @@ keymap("n", "dq", function ()
 	setCursor(0, prevCursor)
 end, {remap = true, desc = "delete comment"}) 
 keymap("n", "cq", function ()
-	cmd.normal { "d<<<" } -- without bang for remapping of COM
-	cmd.normal { "xQ" }
+	cmd.normal { "d<<<" } -- without bang for remapping 
+	cmd.normal { "x" }
+	cmd.normal { "Q" }
 	cmd.startinsert{bang = true}
 end, {desc = "change comment"}) 
 

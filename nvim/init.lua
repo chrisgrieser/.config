@@ -1,5 +1,7 @@
 vim.g.mapleader = ","
-borderStyle = "single" -- options: https://neovim.io/doc/user/api.html#nvim_open_win()
+borderStyle = "single" -- none|single|double|rounded|shadow|solid
+linterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/"
+vimDataDir = vim.env.DATA_DIR .. "/vim-data/"
 
 --------------------------------------------------------------------------------
 

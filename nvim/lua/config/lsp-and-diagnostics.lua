@@ -19,6 +19,14 @@ local lsp_servers = {
 }
 
 --------------------------------------------------------------------------------
+
+local signIcons = {
+	Error = "",
+	Warn = "▲",
+	Info = "",
+	Hint = "",
+}
+
 -- SIGN-COLUMN ICONS
 for type, icon in pairs(signIcons) do
 	local hl = "DiagnosticSign" .. type

@@ -1,14 +1,3 @@
--- CONFIGS SHARED SCROSS MULTIPLE FILES
-local home = os.getenv("HOME")
-dotfilesFolder = home .. "/.config"
-vimDataDir = vim.env.DATA_DIR .. "/vim-data/"
-
-signIcons = {
-	Error = "",
-	Warn = "▲",
-	Info = "",
-	Hint = "",
-}
 
 --------------------------------------------------------------------------------
 -- NVIM UTILS

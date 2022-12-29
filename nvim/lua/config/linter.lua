@@ -23,7 +23,6 @@ local lintersAndFormatters = {
 --------------------------------------------------------------------------------
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
-local linterConfig = dotfilesFolder .. "/linter-configs/"
 
 null_ls.setup {
 	sources = {
