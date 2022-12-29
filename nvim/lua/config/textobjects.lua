@@ -13,7 +13,8 @@ require("config.utils")
 -- an -> a [n]umber (custom)
 -- n -> near the [e]nding of line (custom)
 -- r -> rest of paragraph, linewise (custom)
--- av -> a [v]alue / variable assignment (custom)
+-- av -> a [v]alue / right side of assignment (custom)
+-- ak -> a [k]ey / left side of assignment (custom)
 -- aL -> a [L]oop (treesitter)
 -- <Space> -> inner subword (custom)
 -- . -> diagnostic (custom)
@@ -76,7 +77,7 @@ keymap({ "x", "o" }, "ik", function() require("various-textobjs").key(true) end,
 keymap({ "x", "o" }, "ak", function() require("various-textobjs").key(false) end, { desc = "outer key textobj" })
 
 -- .: diagnostic textobj
-keymap({ "x", "o" }, ".", function () require("various-textobjs").diagnostic end, { desc = "diagnostic textobj" })
+keymap({ "x", "o" }, ".", function () require("various-textobjs").diagnostic() end, { desc = "diagnostic textobj" })
 
 -- in/an: number textobj
 -- stylua: ignore start
