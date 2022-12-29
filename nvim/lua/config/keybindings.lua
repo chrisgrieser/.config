@@ -60,7 +60,7 @@ keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Search
 keymap("n", "-", "/", { desc = "Search (German Keyboard)" })
-keymap("x", "-", "/", { desc = "Search (German Keyboard)" })
+keymap("x", "-", "<Esc>/\\%V", { desc = "Search (German Keyboard)" })
 
 keymap("n", "<Esc>", function()
 	cmd.nohlsearch()
