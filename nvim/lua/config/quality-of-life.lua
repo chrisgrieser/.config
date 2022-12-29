@@ -52,7 +52,7 @@ function M.duplicateLine(opts)
 	local lineHasNumberedKey, _, num = line:find("(%d+).*[:=]")
 	if opts.incrementKeys and lineHasNumberedKey then
 		local nextNum = tostring(tonumber(num) + 1)
-		line = line:gsub("%d+(.*[:=])", nextNum.."%1")	
+		line = line:gsub("%d+(.*[:=])", nextNum .. "%1")
 	end
 
 	append(".", line)
@@ -104,13 +104,13 @@ function M.betterClose()
 
 	-- HACK: since scrollview-like plugins counts as a window, but only appears if buffer is
 	-- longer than window https://github.com/dstein64/nvim-scrollview/issues/83
-	local wincount = 0
-	for i = 1, fn.winnr("$"), 1 do
-		local win = api.nvim_win_get_config(fn.win_getid(i))
-		if not win.external and win.focusable then wincount = wincount + 1 end
-	end
-
-	local moreThanOneWin = wincount > 1
+	-- local wincount = 0
+	-- for i = 1, fn.winnr("$"), 1 do
+	-- 	local win = api.nvim_win_get_config(fn.win_getid(i))
+	-- 	if not win.external and win.focusable then wincount = wincount + 1 end
+	-- end
+	--
+	-- local moreThanOneWin = wincount > 1
 	local moreThanOneTab = fn.tabpagenr("$") > 1
 	local buffers = fn.getbufinfo { buflisted = 1 }
 	local unsavedFile = expand("%") == ""
@@ -120,8 +120,6 @@ function M.betterClose()
 
 	if moreThanOneTab then
 		cmd.tabclose()
-	elseif moreThanOneWin then
-		cmd.bdelete()
 	elseif #buffers == 2 then
 		cmd.bwipeout() -- only method to clear altfile in this case
 	elseif #buffers > 1 then
@@ -133,13 +131,12 @@ function M.betterClose()
 		end
 
 		-- ensure new alt file points towards open, non-active buffer
-		local curFile = expand("%:p")
 		local i = 0
 		local newAltBuf
 		repeat
 			i = i + 1
 			newAltBuf = buffers[i].name
-		until newAltBuf ~= curFile and newAltBuf ~= bufToDel
+		until newAltBuf ~= expand("%:p") and newAltBuf ~= bufToDel
 
 		fn.setreg("#", newAltBuf)
 	else
@@ -162,15 +159,17 @@ function M.undoDuration()
 	local now = os.time() -- saved in epoch secs
 	local minsPassed = math.floor((now - b.timeOpened) / 60)
 	local resetLabel = "last open (~" .. tostring(minsPassed) .. "m ago)"
-	local selection = { resetLabel, "15m", "1h", "4h", "24h" }
+	local selection = { resetLabel, "15m", "1h", "4h", "24h", "back to present" }
 
 	vim.ui.select(selection, { prompt = "Undo the last…" }, function(choice)
 		if not choice then
 			return
 		elseif choice:find("last open") then
-			cmd("earlier " .. minsPassed .. "m")
+			cmd.earlier(minsPassed.."m")
+		elseif choice:find("present") then
+			cmd.later(tostring(bo.undolevels)) -- redo as much as there are undolevels
 		else
-			cmd("earlier " .. choice)
+			cmd.earlier(choice)
 		end
 		vim.notify("Restored to " .. choice .. " earlier.")
 	end)
