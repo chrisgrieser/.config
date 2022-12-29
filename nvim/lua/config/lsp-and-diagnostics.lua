@@ -302,7 +302,7 @@ lspSettings.eslint = {
 		disableRuleComment = { location = "sameLine" }, -- add ignore-comments on the same line
 	},
 	-- needed to use mason's eslint with the eslint-lsp https://github.com/williamboman/mason.nvim/issues/697#issuecomment-1330855352
-	nodePath = os.getenv("HOME") .. "/.local/share/nvim/mason/packages/eslint/node_modules",
+	-- nodePath = os.getenv("HOME") .. "/.local/share/nvim/mason/packages/eslint/node_modules",
 }
 
 -- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings

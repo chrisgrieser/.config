@@ -47,12 +47,8 @@ DOTFILE_FOLDER="$HOME/.config/"
 [[ -e ~/.zshenv ]] && rm -fv ~/.zshenv
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
 
-# linter configs
-ln -sf "$DOTFILE_FOLDER/linter-configs/.stylelintrc.yml" ~
+# eslint (eslint LSP does not allow custom config paths?)
 ln -sf "$DOTFILE_FOLDER/linter-configs/.eslintrc.yml" ~
-ln -sf "$DOTFILE_FOLDER/linter-configs/.markdownlintrc" ~
-ln -sf "$DOTFILE_FOLDER/linter-configs/.pylintrc" ~
-ln -sf "$DOTFILE_FOLDER/linter-configs/.shellcheckrc" ~
 
 # GPG config
 mkdir ~/.gnupg

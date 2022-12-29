@@ -77,8 +77,7 @@ end
 
 --------------------------------------------------------------------------------
 
--- macOS only
--- https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-ai.txt
+--- open URLs (non macOS needs to modify open comment)
 function M.bettergx()
 	local urlVimRegex =
 		[[https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*]] -- https://gist.github.com/tobym/584909
@@ -92,7 +91,7 @@ function M.bettergx()
 	else
 		local urlLine = fn.getline(urlLineNr) ---@type string
 		local url = urlLine:match(urlLuaRegex)
-		os.execute('opener "' .. url .. '"')
+		os.execute('open "' .. url .. '"')
 	end
 	setCursor(0, prevCur)
 end
