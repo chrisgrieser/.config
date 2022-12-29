@@ -1,4 +1,4 @@
-/* global api, settings, window */
+/* global api, settings, window, document */
 
 // Compatibility Prefix
 const {
@@ -26,6 +26,8 @@ const {
 	vunmap,
 } = api;
 
+//──────────────────────────────────────────────────────────────────────────────
+
 // ---- SETTINGS ----
 // https://github.com/brookhong/Surfingkeys#edit-your-own-settings
 // Hints.setCharacters("asdfgyuiopqwertnmzxcvb");
@@ -35,12 +37,7 @@ settings.tabsThreshold = 7;
 settings.modeAfterYank = "Normal";
 settings.showModeStatus = false;
 
-// IGNORE LIST
-settings.blocklistPattern = undefined; /* eslint-disable-line no-undefined */
-
-// REQUIRED unmapping the default maps, not the custom mappings
-// unmap jk on google for web search navigator (vimium-like controls for google only)
-unmapAllExcept(["S", "D", "T", ";e", "R", "E", "x", "X"], /google/);
+//──────────────────────────────────────────────────────────────────────────────
 
 // ---- Mappings -----
 map("J", "P"); // page down
@@ -50,9 +47,9 @@ map("e", "R"); // one tab right
 map("b", "E"); // one tab right
 map("i", "x"); // close tab
 map("u", "X"); // reopen tab
-map("wq", "gx0") // close tabs on left
-map("we", "gx$") // close tabs on right
-map("ww", "gx$") // close all other tabs
+map("wq", "gx0"); // close tabs on left
+map("we", "gx$"); // close tabs on right
+map("ww", "gx$"); // close all other tabs
 map("<", "<<"); // move tab to the left
 map(">", ">>"); // move tab to the right
 
@@ -84,6 +81,26 @@ map("p", "cc"); // open URL from clipboard or selection
 // 		window.location.href = response.data;
 // 	});
 // });
+
+// toggle fullscreen, mainly because of YouTube
+mapkey("F", "Fullscreen", function () {
+	if (window.fullScreen) {
+		document.exitFullscreen();
+	} else {
+		document.documentElement.requestFullscreen();
+	}
+});
+
+//──────────────────────────────────────────────────────────────────────────────
+
+// IGNORE LIST
+settings.blocklistPattern = undefined; /* eslint-disable-line no-undefined */
+
+// unmap jk on google for web search navigator (vimium-like controls for google only)
+unmap("j", /google/);
+unmap("k", /google/);
+
+//──────────────────────────────────────────────────────────────────────────────
 
 // unmapping unused stuff
 removeSearchAlias("b", "s");
