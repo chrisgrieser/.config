@@ -86,7 +86,7 @@ add("lua", {
 	end
 	]]),
 	snip("trim", ':gsub("\\n$", "")'),
-	snip("ignore (stylua)", "-- stylua: ignore start\n--stylua: ignore end"),
+	snip("ignore (stylua)", "-- stylua: ignore start\n-- stylua: ignore end"),
 	snip("ignore block (stylua)", "-- stylua: ignore"),
 	snip("ignore (selene)", "-- selene: allow(${1:rule_name})"),
 	snip("ignore (selene global)", "--# selene: allow(${1:rule_name})"),
@@ -102,7 +102,7 @@ add("lua", {
 add("lua", {
 	snip("keymap", 'keymap("n", "$1", $2, {desc = "$3"})'),
 	snip("keymap (multi-mode)", 'keymap({"n", "x"}, "$1", $2, {desc = "$3"})'),
-	snip("highlight (link)", [[cmd.highlight {"def link ${1:fromGroup} ${2:toGroup}", bang = true}]]),
+	snip("highlight (link)", [[cmd.highlight { "def link ${1:fromGroup} ${2:toGroup}", bang = true }]]),
 	snip("highlight", [[cmd.highlight ("${1:group} guifg=${2:color}")]]),
 	snip("input (vim.ui)", [[
 		vim.ui.input({ prompt = "${1:prompt_msg}"}, function (input)
