@@ -1,4 +1,8 @@
 return {
+
+	"nvim-lualine/lualine.nvim", -- status line
+	"rcarriga/nvim-notify", -- notifications
+
 	{ -- highlight function args
 		"m-demare/hlargs.nvim",
 		event = "VeryLazy",
