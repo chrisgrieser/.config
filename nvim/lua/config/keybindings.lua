@@ -183,29 +183,31 @@ keymap("n", "ü", "mzlblgueh~`z", { desc = "toggle capital/lowercase of word" })
 keymap("n", "Ü", "gUiw", { desc = "uppercase word" })
 keymap("n", "~", "~h", { desc = "switch char case w/o moving" })
 
--- <leader>{char} → Append {char} to end of line
+-- Append to / delete from EoL
 local trailingKeys = { ".", ",", ";", ":", '"', "'" }
 for _, v in pairs(trailingKeys) do
 	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = "append " .. v .. " to EoL" })
 end
+keymap("n", "X", "mz$x`z", {desc = "delete last character"})
 
 -- Spelling (mnemonic: [z]pe[l]ling)
 keymap("n", "zl", telescope.spell_suggest, { desc = "spellsuggest" })
-keymap("n", "zg", "zg<CR>") -- needs extra enter due to `cmdheight=0`
-keymap("n", "gl", "]s") -- next misspelling
-keymap("n", "gL", "[s") -- prev misspelling
-keymap("n", "zf", "mz1z=`z") -- auto[f]ix word under cursor (= select 1st suggestion)
+keymap("n", "zg", "zg<CR>", {desc = "mark as correct spelling"}) -- needs extra enter due to `cmdheight=0`
+keymap("n", "gz", "]s", {desc = "next misspelling"}) 
+keymap("n", "za", "mz1z=`z", {desc = "autofix spelling"}) -- [a]utofix word under cursor 
 
 -- [S]ubstitute Operator (substitute.nvim)
 keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
-keymap("n", "ss", function() require("substitute").line() end, { desc = "substitute line" })
+keymap("n", "ss", function()
+   require("substitute").line()
+	normal("==")
+end, { desc = "substitute line" })
 keymap("n", "S", function() require("substitute").eol() end, { desc = "substitute to end of line" })
--- stylua: ignore
-keymap( "n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange operator" })
+keymap( "n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange op" })
 keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
 -- ISwap
-keymap("n", "X", cmd.ISwapWith, { desc = "swap nodes" })
+keymap("n", "<leader>e", cmd.ISwapWith, { desc = "exchange nodes" })
 
 -- search & replace
 keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "search & replace" })
@@ -213,12 +215,11 @@ keymap("x", "<leader>f", ":s///g<Left><Left><Left>", { desc = "search & replace"
 keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "struct. search & replace" })
 keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
 keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
+keymap( "n", "<A-r>", "R", { desc = "replace mode" })
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine, { desc = "duplicate line" })
 keymap("x", "R", qol.duplicateSelection, { desc = "duplicate selection" })
--- stylua: ignore
-keymap( "n", "<A-r>", function() qol.duplicateLine { increment = true } end, { desc = "duplicate line (+ increment)" })
 
 -- Undo
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
@@ -434,11 +435,10 @@ end, { desc = ":CodiNew" })
 
 --------------------------------------------------------------------------------
 
--- BUILD SYSTEM & Quickfix list
+-- BUILD SYSTEM & QUICKFIX LIST
 
 keymap("n", "gq", cmd.cnext, { desc = "next quickfix item" })
-keymap("n", "gQ", cmd.cprevious, { desc = "next quickfix item" })
-keymap("n", "<leader>q", function() cmd.Telescope("quickfix") end, { desc = "Telescope: quickfix list" })
+keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = "Telescope: quickfix list" })
 
 keymap("n", "<leader>r", function()
 	cmd.update()
