@@ -39,8 +39,7 @@ end):start()
 ---@param windowFilter hs.window.filter
 local function autoTile(windowFilter)
 	local wins = windowFilter:getWindows()
-	local frontApp = app.frontmostApplication()
-	if #wins == 0 and frontApp:name() == "Finder" then
+	if #wins == 0 and frontAppName() == "Finder" then
 		-- prevent quitting when window is created imminently
 		runWithDelays(0.2, function()
 			-- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
@@ -49,7 +48,7 @@ local function autoTile(windowFilter)
 	elseif #wins == 1 then
 		if isProjector() then
 			moveResize(wins[1], maximized)
-		elseif frontApp:name() == "Finder" then
+		elseif frontAppName() == "Finder" then
 			moveResize(wins[1], centered)
 		else
 			moveResize(wins[1], baseLayout)
@@ -256,7 +255,7 @@ wf_finder = wf.new("Finder")
 	:subscribe(wf.windowDestroyed, function() autoTile(wf_finder) end)
 
 finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
-	if not appName == "Finder" then return end
+	if not (appName == "Finder") then return end
 
 	if eventType == aw.activated then
 		autoTile(wf_finder) -- sometimes window creation is not triggered properly

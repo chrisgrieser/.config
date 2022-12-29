@@ -1,10 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>OPENAI_API_KEY</key>
-	<string>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</string>
-	<key>TOKEN_LIMIT</key>
-	<string>200</string>
-</dict>
-</plist>
+/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/openAI_key_for_Alfred.plist
