@@ -2,7 +2,7 @@
 
 on run argv
 	-- workaround, since apple's float ("real") interpret , or . differently
-	-- depending on system language m( ...
+	-- depending on system language m(
 	set delayAmount to (system attribute "delay_ms") as number
 	set delayAmount to delayAmount/1000
 
@@ -40,4 +40,3 @@ on run argv
 	end if
 
 end run
-
