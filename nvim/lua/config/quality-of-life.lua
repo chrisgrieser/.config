@@ -28,9 +28,9 @@ local function getglobalopt(option) return vim.api.nvim_get_option_value(option,
 
 -- Duplicate line under cursor, and change occurrences of certain words to their
 -- opposite, e.g., "right" to "left". Intended for languages like CSS.
----@param opts? table available: reverse, moveTo = key|value|none, increment
+---@param opts? table available: reverse, moveTo = key|value|none, incrementKeys
 function M.duplicateLine(opts)
-	if not opts then opts = { reverse = false, moveTo = "key", increment = false } end
+	if not opts then opts = { reverse = false, moveTo = "key", incrementKeys = true } end
 
 	local line = getline(".") ---@type string
 	if opts.reverse then
@@ -49,12 +49,10 @@ function M.duplicateLine(opts)
 		end
 	end
 
-	if opts.increment then
-		local digits = line:match("%d+")
-		if digits then
-			digits = tostring(tonumber(digits) + 1)
-			line = line:gsub("%d+", digits, 1)
-		end
+	local lineHasNumberedKey, _, num = line:find("(%d+).*[:=]")
+	if opts.incrementKeys and lineHasNumberedKey then
+		local nextNum = tostring(tonumber(num) + 1)
+		line = line:gsub("%d+(.*[:=])", nextNum.."%1")	
 	end
 
 	append(".", line)
@@ -356,19 +354,20 @@ function M.timelog()
 		}
 		logStatement2 = {
 			"local duration = os.difftime(timelogStart, os.time())",
-			'print("timelog: ", duration)',
+			'print("timelog: ", duration, "s")',
 		}
 	elseif ft == "javascript" or ft == "typescript" then
 		logStatement1 = 'console.time("timelog")'
 		logStatement2 = 'console.timeEnd("timelog")'
 	elseif ft == "bash" or ft == "zsh" or ft == "sh" or ft == "fish" then
 		logStatement1 = {
-         "timelogStart=$(date +%s)",
-			"echo"
-      }
+			"timelogStart=$(date +%s)",
+			'echo "(time) start"',
+		}
 		logStatement2 = {
-         "timelogEnd=$(date +%s)",
-      }
+			"timelogEnd=$(date +%s) && runtime = $((timelogEnd - timelogStart))",
+			'echo "(time) ${runtime}s"',
+		}
 	else
 		vim.notify("Timelog does not support " .. ft .. " yet.", logWarn)
 		return
@@ -383,7 +382,7 @@ function M.timelog()
 end
 
 ---adds simple "beep" log statement to check whether conditionals have been
---entered Supported: lua, python, js/ts, zsh/bash/fish, and applescript
+---entered Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.beeplog()
 	local logStatement
 	local ft = bo.filetype
@@ -418,8 +417,8 @@ function M.removelogs()
 		logCommand = "console."
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
 		cmd([[g/echo "(beep)"/d]]) -- keywords in () needed to ensure that other echos are not deleted
-		cmd([[g/echo "(log)"/d]])
-		cmd([[g/echo "(time)"/d]])
+		cmd([[g/echo "(log)/d]])
+		cmd([[g/echo "(time)/d]])
 		return
 	elseif ft == "applescript" then
 		logCommand = "log"
