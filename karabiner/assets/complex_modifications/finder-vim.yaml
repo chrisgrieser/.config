@@ -31,14 +31,6 @@ anchors:
         type: variable_unless
         name: FINDER_FIND_MODE
         value: true
-      - &is-search-mode
-        type: variable_if
-        name: FINDER_SEARCH_MODE
-        value: true
-      - &not-search-mode
-        type: variable_unless
-        name: FINDER_SEARCH_MODE
-        value: true
       - &alfred-active
         type: variable_if
         name: FINDER_ALFRED_ACTIVE
@@ -85,14 +77,6 @@ anchors:
         set_notification_message:
           id: insert-notice
           text: ""
-      - &enter-search-mode
-        set_variable: # Search Mode
-          name: FINDER_SEARCH_MODE
-          value: true
-      - &leave-search-mode
-        set_variable:
-          name: FINDER_SEARCH_MODE
-          value: false
       - &enter-find-mode
         set_variable: # Find Mode
           name: FINDER_FIND_MODE
@@ -236,7 +220,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
       #─────────────────────────────────────────────────────────────────────────
       # INSERT MODE
-      # enter
+      # ENTER
       # Rename
       - type: basic
         from: {key_code: return_or_enter}
@@ -279,7 +263,6 @@ rules:
           - {key_code: f, modifiers: [command]}
           - *insert-notice
           - *enter-insert-mode
-          - *enter-search-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       - type: basic
         from: {key_code: f, modifiers: {mandatory: [command]}}
@@ -287,7 +270,6 @@ rules:
           - {key_code: f, modifiers: [command]}
           - *insert-notice
           - *enter-insert-mode
-          - *enter-search-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       # Alfred: so you can insert text in Alfred/Spotlight while Finder is frontmost
       - type: basic
@@ -306,21 +288,7 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
           - *end-alfred
-        conditions: [*finder-app, *is-insert-mode, *not-search-mode]
-      # Confirm Search Mode
-      - type: basic
-        from: {key_code: return_or_enter}
-        to:
-          - key_code: return_or_enter
-          - key_code: tab
-          - key_code: tab
-          - key_code: tab # extra tabs to switch to files directly
-          - key_code: tab
-          - *remove-insert-notice
-          - *leave-insert-mode
-          - *leave-search-mode
-          - *end-alfred
-        conditions: [*finder-app, *is-insert-mode, *is-search-mode]
+        conditions: [*finder-app, *is-insert-mode]
       # Confirm Alfred Mode with various modifiers
       - type: basic
         from: {key_code: return_or_enter, modifiers: {mandatory: [control]}}
@@ -397,23 +365,25 @@ rules:
           - key_code: escape
           - *remove-insert-notice
           - *leave-insert-mode
-          - *leave-search-mode
           - *end-alfred
           - *end-context-menu
+          - *end-move
+          - *remove-move-notice
         to:
           - key_code: right_shift
             modifiers: [command, control, option] # keep hyper binding
-        conditions: [*finder-app, *move-inactive]
+        conditions: [*finder-app]
       - type: basic
         from: {key_code: escape}
         to:
           - key_code: escape
           - *remove-insert-notice
           - *leave-insert-mode
-          - *leave-search-mode
           - *end-alfred
           - *end-context-menu
-        conditions: [*finder-app, *move-inactive]
+          - *end-move
+          - *remove-move-notice
+        conditions: [*finder-app]
         # Closing window or quitting Finder should also disable Insert mode
       - type: basic
         from: {key_code: w, modifiers: {mandatory: [command]}}
@@ -421,7 +391,6 @@ rules:
           - {key_code: w, modifiers: [command]}
           - *remove-insert-notice
           - *leave-insert-mode
-          - *leave-search-mode
           - *end-context-menu
         conditions: [*finder-app, *alfred-inactive]
       - type: basic
@@ -430,7 +399,6 @@ rules:
           - {key_code: q, modifiers: [command]}
           - *remove-insert-notice
           - *leave-insert-mode
-          - *leave-search-mode
           - *end-context-menu
         conditions: [*finder-app, *alfred-inactive]
       #─────────────────────────────────────────────────────────────────────────
@@ -993,19 +961,6 @@ rules:
           - *end-move
           - *remove-move-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
-      # Esc = Abort move
-      - type: basic
-        from: {key_code: caps_lock}
-        to_if_alone:
-          - *end-move
-          - *remove-move-notice
-        conditions: [*finder-app, *move-active]
-      - type: basic
-        from: {key_code: escape}
-        to:
-          - *end-move
-          - *remove-move-notice
-        conditions: [*finder-app, *move-active]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
       # SORT

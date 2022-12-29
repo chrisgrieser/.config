@@ -226,8 +226,20 @@ keymap("x", "R", qol.duplicateSelection, { desc = "duplicate selection" })
 -- Undo
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
 keymap("n", "<C-u>", qol.undoDuration, { desc = "undo specific durations" })
--- stylua: ignore
-keymap( "n", "<leader>u", function() require("telescope").extensions.undo.undo() end, { desc = "Telescope Undotree" })
+keymap(
+	"n",
+	"<leader>u",
+	function() require("telescope").extensions.undo.undo() end,
+	{ desc = "Telescope Undotree" }
+)
+
+-- Refactor
+keymap(
+	"n",
+	"<leader>i",
+	function() require("refactoring").refactor("Inline Variable") end,
+	{ desc = "Refactor: Inline Variable" }
+)
 
 -- Logging & Debugging
 keymap({ "n", "x" }, "<leader>ll", qol.quicklog, { desc = "add log statement" })
@@ -356,17 +368,17 @@ keymap("n", "ga", ":ChatGPT<CR>", { desc = "AI: ChatGPT Prompt" })
 -- BUFFERS
 -- INFO: <BS> to cycle buffer has to be set in cybu config
 
-keymap("n", "gb", telescope.buffers, { desc = "select an open buffer" })
+keymap("n", "gb", telescope.buffers, { desc = "Telescope: open buffers" })
 
 keymap("n", "<CR>", function()
+	cmd.nohlsearch()
 	if expand("#") == "" then
-		local lastOldfile = vim.v.oldfiles[2]
-		cmd.edit(lastOldfile)
+		cmd.edit(vim.v.oldfiles[2])
 	else
-		cmd.nohlsearch()
 		cmd.buffer("#")
 	end
 end, { desc = "switch to alt file" })
+
 --------------------------------------------------------------------------------
 -- FILES
 
@@ -421,8 +433,9 @@ keymap("n", "<leader>os", ":set spell!<CR>")
 keymap("n", "<leader>or", ":set relativenumber!<CR>")
 keymap("n", "<leader>on", ":set number!<CR>")
 keymap("n", "<leader>ow", qol.toggleWrap, { desc = "toggle wrap" })
+
+g.diagnosticOn = true
 keymap("n", "<leader>od", function()
-	g.diagnosticOn = g.diagnosticOn or true
 	if g.diagnosticOn then
 		vim.diagnostic.disable(0)
 	else
@@ -536,6 +549,3 @@ autocmd("FileType", {
 	pattern = "ssr",
 	callback = function() keymap("n", "q", "Q", opts) end,
 })
-
---------------------------------------------------------------------------------
-
