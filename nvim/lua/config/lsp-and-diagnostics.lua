@@ -27,37 +27,14 @@ end
 
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS (also applies to null-ls)
-keymap(
-	"n",
-	"ge",
-	function() vim.diagnostic.goto_next { wrap = true, float = true } end,
-	{ silent = true }
-)
-keymap(
-	"n",
-	"gE",
-	function() vim.diagnostic.goto_prev { wrap = true, float = true } end,
-	{ silent = true }
-)
+-- stylua: ignore
+keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, { silent = true })
+-- stylua: ignore
+keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, { silent = true })
 keymap("n", "<leader>d", function() vim.diagnostic.open_float { focusable = false } end)
 
--- toggle diagnostics
-local diagnosticToggled = true
-keymap(
-	"n",
-	"<leader>od",
-	function() -- consistent with other option toggling also using <leader>o{letter}
-		if diagnosticToggled then
-			vim.diagnostic.disable(0)
-		else
-			vim.diagnostic.enable(0)
-		end
-		diagnosticToggled = not diagnosticToggled
-	end
-)
-
 local function diagnosticFormat(diagnostic, mode)
-	local msg = diagnostic.message:gsub("^%s*"):gsub("%s*$")
+	local msg = diagnostic.message:gsub("^%s*", ""):gsub("%s*$", "")
 	local source = diagnostic.source and diagnostic.source:gsub("%.$", "") or ""
 	local code = tostring(diagnostic.code)
 	local out = msg .. " (" .. code .. ")"
@@ -142,7 +119,7 @@ autocmd("LspAttach", {
 	callback = function(args)
 		local bufnr = args.buf
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		local bufopts = { silent = true, buffer = true }
+		local bufopts = { buffer = true }
 
 		require("lsp-inlayhints").on_attach(client, bufnr)
 
@@ -159,8 +136,8 @@ autocmd("LspAttach", {
 			keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts)
 		end
 
-		keymap("n", "gd", telescope.lsp_definitions, bufopts)
-		keymap("n", "gD", telescope.lsp_references, bufopts)
+		keymap("n", "gd", telescope.lsp_definitions, {desc = "LSP: Goto Definition", buffer = true})
+		keymap("n", "gf", telescope.lsp_references, {desc = "LSP: Goto Re[f]erence", buffer = true})
 		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, bufopts)
 		keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 

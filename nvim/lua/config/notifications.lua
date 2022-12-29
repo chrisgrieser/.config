@@ -35,9 +35,10 @@ vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-s
 	local truncated = {}
 	for _, line in pairs(msg) do
 		local new_lines = split_length(line, notifyWidth)
-		new_lines = new_lines:gsub("^%s*"):gsub("%s*$")
+		new_lines = new_lines
 		for _, nl in ipairs(new_lines) do
-			table.insert(truncated, " " .. nl .. " ")
+			nl = nl:gsub("^%s*", ""):gsub("%s*$", "")
+			table.insert(truncated, " " ..nl .. " ")
 		end
 	end
 	return require("notify")(truncated, level, opts)

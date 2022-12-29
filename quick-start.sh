@@ -53,8 +53,6 @@ ln -sf "$DOTFILE_FOLDER/linter-configs/.eslintrc.yml" ~
 ln -sf "$DOTFILE_FOLDER/linter-configs/.markdownlintrc" ~
 ln -sf "$DOTFILE_FOLDER/linter-configs/.pylintrc" ~
 ln -sf "$DOTFILE_FOLDER/linter-configs/.shellcheckrc" ~
-ln -sf "$DOTFILE_FOLDER/linter-configs/.flake8" ~
-ln -sf "$DOTFILE_FOLDER/vale/.vale.ini" ~
 
 # GPG config
 mkdir ~/.gnupg

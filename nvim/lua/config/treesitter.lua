@@ -102,7 +102,7 @@ require("nvim-treesitter.configs").setup {
 			enable = true,
 			keymaps = {
 				-- overwritten by on lsp-attach with LSP's rename, but useful for
-				-- filetypes without proper lsp support
+				-- filetypes without lsp support
 				smart_rename = "<leader>R",
 			},
 		},

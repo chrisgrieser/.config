@@ -23,6 +23,8 @@ local lintersAndFormatters = {
 --------------------------------------------------------------------------------
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
+local linterConfig = dotfilesFolder .. "/linter-configs/"
+
 null_ls.setup {
 	sources = {
 		-- Global
@@ -30,14 +32,14 @@ null_ls.setup {
 		builtins.diagnostics.codespell.with { -- common misspellings. Far less false positives than with cspell
 			disabled_filetypes = { "css", "bib" }, -- base64-encoded fonts cause a lot of errors
 			-- can't use `--skip`, since it null-ls reads from stdin and not a file
-			args = { "--ignore-words", dotfilesFolder .. "/codespell/codespell-ignore.txt", "-" },
+			args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt", "-" },
 		},
 		builtins.formatting.codespell.with { -- autofix those misspellings
 			disabled_filetypes = { "css", "bib" },
-			extra_args = { "--ignore-words", dotfilesFolder .. "/codespell/codespell-ignore.txt" },
+			extra_args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" },
 		},
 		builtins.formatting.trim_newlines, -- trim trailing whitespace & newlines
-		builtins.formatting.trim_whitespace.with{
+		builtins.formatting.trim_whitespace.with {
 			disabled_filetypes = { "markdown" }, -- do not remove spaces due to two-space-rule
 		},
 
@@ -55,39 +57,53 @@ null_ls.setup {
 		-- JS/TS
 		builtins.formatting.prettier.with {
 			filetypes = { "javascript", "typescript" }, -- do format markdown, css, and so on
-			extra_args = { "--config", dotfilesFolder .. "/linter-configs/.prettierrc.yaml" },
+			extra_args = { "--config", linterConfig .. "/.prettierrc.yaml" },
 		},
 
 		-- CSS
 		builtins.formatting.stylelint.with {
 			-- using config without ordering, since ordering on save is confusing
-			extra_args = { "--config", dotfilesFolder .. "/linter-configs/.stylelintrc-formatting.yml" },
+			extra_args = { "--config", linterConfig .. "/.stylelintrc-formatting.yml" },
 		},
 		builtins.diagnostics.stylelint.with { -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 			filetypes = { "css" },
-			extra_args = { "--quiet" }, -- only errors, no warnings
+			extra_args = {
+				"--quiet", -- only errors, no warnings
+				"--config",
+				linterConfig .. "/.stylelintrc.yml",
+			},
 		},
 
 		-- LUA
-		builtins.formatting.stylua,
+		builtins.formatting.stylua.with {
+			extra_args = { "--config-path", linterConfig .. "/.stylua.toml" },
+		},
 		builtins.diagnostics.selene.with {
-			extra_args = { "--config", dotfilesFolder .. "/linter-configs/selene.toml" },
+			extra_args = { "--config", linterConfig .. "/selene.toml" },
 		},
 
 		-- YAML
 		builtins.formatting.yamlfmt,
 		builtins.diagnostics.yamllint.with {
-			extra_args = { "--config-file", dotfilesFolder .. "/yamllint/config/.yamllint.yaml" },
+			extra_args = { "--config-file", linterConfig .. "/.yamllint.yaml" },
 		},
 
 		-- MARKDOWN & PROSE
-		builtins.diagnostics.vale,
+		builtins.diagnostics.vale.with {
+			extra_args = { "--config", linterConfig .. "/vale/.vale.ini" },
+		},
+		builtins.formatting.markdownlint,
 		builtins.diagnostics.markdownlint.with {
-			-- fixed via formatting command already
-			extra_args = { "--disable", "trailing-spaces", "no-multiple-blanks" },
+			-- disabling rules that are autofixed already
+			extra_args = {
+				"--disable",
+				"trailing-spaces",
+				"no-multiple-blanks",
+				"--config",
+				linterConfig .. "/.markdownlintrc",
+			},
 		},
 		builtins.hover.dictionary, -- vim's builtin dictionary
-		builtins.formatting.markdownlint,
 		builtins.completion.spell.with { -- vim's built-in spell-suggestions
 			filetypes = { "markdown", "text" },
 		},

@@ -19,7 +19,7 @@ export MAGIC_ENTER_GIT_COMMAND="exagit"
 export MAGIC_ENTER_OTHER_COMMAND="exa"
 
 # zoxide
-export _ZO_DATA_DIR="$DATA_DIR"
+export _ZO_DATA_DIR="$DATA_DIR/zoxide/"
 # export _ZO_EXCLUDE_DIRS=""
 eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
 
