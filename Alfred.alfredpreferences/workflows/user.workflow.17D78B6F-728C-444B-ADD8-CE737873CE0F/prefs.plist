@@ -3,6 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>OPENAI_API_KEY</key>
-	<string>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</string>
+	<string>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</string>
+	<key>TOKEN_LIMIT</key>
+	<string>200</string>
 </dict>
 </plist>
