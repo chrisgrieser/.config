@@ -25,7 +25,6 @@ source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substrin
 eval "$(starship init zsh)"
 if [[ "$TERM" == "Warp" ]] ; then
 	export STARSHIP_CONFIG=~/.config/starship/starship-warp.toml
-	cd "$WD" || return
 elif [[ "$TERM" == "alacritty" ]] ; then
 	export STARSHIP_CONFIG=~/.config/starship/starship-alacritty.toml
 elif [[ "$TERM" == "xterm-256color" ]] ; then # Obsidian Terminal & nvim Toggleterm

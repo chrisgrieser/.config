@@ -39,6 +39,7 @@ require("telescope").setup {
 			"%.spoon", -- Hammerspoon
 			"%.plist", -- Alfred
 			"%.data", -- Alfred
+			"%.zcomp", -- zsh completion data
 			"%.string",
 			"%.log",
 			"%.png",
