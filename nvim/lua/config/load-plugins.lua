@@ -63,10 +63,6 @@ return {
 		}
 	},
 
-	-- Appearance
-	"nvim-lualine/lualine.nvim", -- status line
-	"rcarriga/nvim-notify", -- notifications
-
 	-- File Switching & File Operation
 	{"chrisgrieser/nvim-genghis",
 		dev = true,
@@ -133,6 +129,7 @@ return {
 			cmd.highlight { "def link QuickScopePrimary CurSearch", bang = true }
 		end
 	},
+	{"kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async"}, -- better folding
 	"kylechui/nvim-surround", -- surround operator
 	{"gbprod/substitute.nvim", -- substitution & exchange operator
 		lazy = true,
@@ -162,7 +159,6 @@ return {
 		config = function() require("numb").setup() end,
 		keys = ":",
 	},
-	{"kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async"}, -- better folding
 	{"axieax/urlview.nvim",
 		cmd = "UrlView",
 		dependencies = "nvim-telescope/telescope.nvim",
