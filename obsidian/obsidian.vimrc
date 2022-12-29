@@ -204,6 +204,16 @@ vmap V j
 vmap v <C-v>
 
 """"""""""""""""""""""
+" Text Objects
+""""""""""""""""""""""
+map am aW
+map im iW
+map aq a"
+map iq i"
+map ir i[
+map ar a[
+
+""""""""""""""""""""""
 " Tabs/Window
 """"""""""""""""""""""
 

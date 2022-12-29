@@ -332,7 +332,7 @@ function M.quicklog()
 	elseif ft == "javascript" or ft == "typescript" then
 		logStatement = 'console.log("' .. lnStr .. varname .. ': " + ' .. varname .. ");"
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		logStatement = 'echo "' .. lnStr .. varname .. ": $" .. varname .. '"'
+		logStatement = 'echo "(log) ' .. lnStr .. varname .. ": $" .. varname .. '"'
 	elseif ft == "applescript" then
 		logStatement = 'log "' .. lnStr .. varname .. ': " & ' .. varname
 	else
@@ -361,6 +361,14 @@ function M.timelog()
 	elseif ft == "javascript" or ft == "typescript" then
 		logStatement1 = 'console.time("timelog")'
 		logStatement2 = 'console.timeEnd("timelog")'
+	elseif ft == "bash" or ft == "zsh" or ft == "sh" or ft == "fish" then
+		logStatement1 = {
+         "timelogStart=$(date +%s)",
+			"echo"
+      }
+		logStatement2 = {
+         "timelogEnd=$(date +%s)",
+      }
 	else
 		vim.notify("Timelog does not support " .. ft .. " yet.", logWarn)
 		return
@@ -385,7 +393,7 @@ function M.beeplog()
 	elseif ft == "javascript" or ft == "typescript" then
 		logStatement = 'console.log("beep")'
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		logStatement = 'echo "beep"'
+		logStatement = 'echo "(beep)"'
 	elseif ft == "applescript" then
 		logStatement = 'log "beep"'
 	else
@@ -400,6 +408,7 @@ end
 ---Remove all log statements in the current buffer
 ---Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.removelogs()
+	g.timelogCount = 0 -- reset timelog
 	local ft = bo.filetype
 	local logCommand
 	local linesBefore = fn.line("$")
@@ -408,7 +417,10 @@ function M.removelogs()
 	elseif ft == "javascript" or ft == "typescript" then
 		logCommand = "console."
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		vim.notify("Shell 'echo' cannot be removed since indistinguishable from other echos.", logWarn)
+		cmd([[g/echo "(beep)"/d]]) -- keywords in () needed to ensure that other echos are not deleted
+		cmd([[g/echo "(log)"/d]])
+		cmd([[g/echo "(time)"/d]])
+		return
 	elseif ft == "applescript" then
 		logCommand = "log"
 	else
@@ -420,7 +432,7 @@ function M.removelogs()
 
 	local linesRemoved = linesBefore - fn.line("$")
 	local msg = "Cleared " .. tostring(linesRemoved) .. " log statements."
-	if linesRemoved == 1 then msg = msg:gsub("s%.$", ".") end
+	if linesRemoved == 1 then msg = msg:gsub("s%.$", ".") end -- remove plural
 	vim.notify(msg)
 end
 
