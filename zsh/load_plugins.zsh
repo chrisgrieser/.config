@@ -12,7 +12,7 @@ fi
 # INFO zoxide loading in terminal-utils, cause needs to be loaded with configuration
 # parameters
 
-# `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
+# INFO `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
 
 # BUG autosuggesstions do not work for obsidian-terminal yet
 source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

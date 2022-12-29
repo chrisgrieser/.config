@@ -14,7 +14,7 @@ CONFIG+=('git_github')
 CONFIG+=('homebrew')
 CONFIG+=('alacritty_theme_utilities')
 CONFIG+=('../pandoc/pandoc')
-CONFIG+=('intro-messages')
+# CONFIG+=('intro-messages')
 [[ $TERM != "xterm-256color" ]] && CONFIG+=('vi-mode') # don't use vi mode for toggleterm in neovim
 
 for config_file in "${CONFIG[@]}"; do

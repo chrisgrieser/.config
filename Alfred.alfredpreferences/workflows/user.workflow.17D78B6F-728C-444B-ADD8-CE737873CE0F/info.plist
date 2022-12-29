@@ -280,7 +280,9 @@ echo -n $(./node_modules/.bin/run-node ask.js)</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>original by https://rudgalvis.com</string>
+	<string>⚠️ changing anything here will lead to an overwrite of the prefs.plist, and therefore leaking of then API key
+
+original by https://rudgalvis.com</string>
 	<key>uidata</key>
 	<dict>
 		<key>059F564D-6DF6-4257-8165-D4EBF53F8EE5</key>
