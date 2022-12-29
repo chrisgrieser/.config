@@ -4,7 +4,7 @@ return {
 	{"williamboman/mason.nvim", dependencies = "RubixDev/mason-update-all"},
 
 	-- Themes
-	{"folke/tokyonight.nvim", enabled = false},
+	{"folke/tokyonight.nvim", enabled = true},
 	{"EdenEast/nightfox.nvim", enabled = true},
 	{"savq/melange", enabled = false}, -- like Obsidian's Primary color scheme
 	{"nyoom-engineering/oxocarbon.nvim", enabled = false},
@@ -105,7 +105,11 @@ return {
 
 	-- EDITING-SUPPORT
 	"andymass/vim-matchup",
-	-- "cbochs/portal.nvim",
+
+	{ "ThePrimeagen/refactoring.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
+		config = function () require("refactoring").setup() end,
+	},
 	{"ggandor/leap.nvim", event = "VeryLazy"},
 	"kylechui/nvim-surround", -- surround operator
 	{"gbprod/substitute.nvim", -- substitution & exchange operator
