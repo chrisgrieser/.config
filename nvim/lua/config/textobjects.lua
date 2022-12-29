@@ -76,7 +76,7 @@ keymap({ "x", "o" }, "ik", function() require("various-textobjs").key(true) end,
 keymap({ "x", "o" }, "ak", function() require("various-textobjs").key(false) end, { desc = "outer key textobj" })
 
 -- .: diagnostic textobj
-keymap({ "x", "o" }, "id", require("various-textobjs").diagnostic, { desc = "diagnostic textobj" })
+keymap({ "x", "o" }, ".", function () require("various-textobjs").diagnostic end, { desc = "diagnostic textobj" })
 
 -- in/an: number textobj
 -- stylua: ignore start
