@@ -1,6 +1,6 @@
 vim.g.mapleader = ","
 borderStyle = "single" -- none|single|double|rounded|shadow|solid
-linterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/"
+linterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- reading from .zshenv
 vimDataDir = vim.env.DATA_DIR .. "/vim-data/"
 
 --------------------------------------------------------------------------------
