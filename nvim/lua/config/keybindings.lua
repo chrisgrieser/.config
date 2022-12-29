@@ -38,16 +38,16 @@ keymap("n", "<leader>la", "@:", { desc = "Run last command again" })
 -- NAVIGATION
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
-keymap({ "n", "x" }, "H", "0^") -- 0^ ensures fully scrolling to the left on long lines
-keymap("o", "H", "^")
+keymap({ "o", "x" }, "H", "^")
+keymap("n", "H", "0^") -- 0^ ensures fully scrolling to the left on long lines
 
 keymap({ "n", "x", "o" }, "L", "$")
 
 keymap("n", "J", function() qol.overscroll("6j") end, { desc = "6j (with overscroll)" })
 keymap("x", "J", "6j")
-keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
-
 keymap({ "n", "x" }, "K", "6k")
+
+keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "K", "2k")
 
 -- add overscroll
@@ -59,8 +59,8 @@ keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Search
-keymap("n", "-", "/", { desc = "Search (German Keyboard)" })
-keymap("x", "-", "<Esc>/\\%V", { desc = "Search (German Keyboard)" })
+keymap("n", "-", "/", { desc = "Search" })
+keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 
 keymap("n", "<Esc>", function()
 	cmd.nohlsearch()
