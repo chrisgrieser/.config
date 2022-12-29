@@ -87,9 +87,11 @@ keymap({ "n", "x", "o" }, "m", "<Plug>(matchup-%)", { desc = "matchup" })
 -- Middle of the Line
 keymap({ "n", "x" }, "gm", "gM", { desc = "goto middle of logical line" })
 
--- Hunks
+-- Hunks & changes
 keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
+keymap("n", "gc", "g;", { desc = "goto next change" })
+keymap("n", "gC", "g,", { desc = "goto previous change" })
 
 -- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
@@ -371,11 +373,10 @@ end, { desc = "switch to alt file" })
 -- File Switchers
 keymap("n", "go", telescope.find_files, { desc = "Telescope: Files in cwd" })
 keymap("n", "gO", telescope.git_files, { desc = "Telescope: Git Files" })
-keymap("n", "gr", telescope.oldfiles, { desc = "Telescope: Recent Files" })
-keymap("n", "gf", telescope.live_grep, { desc = "Telescope: Search in cwd" })
-keymap("n", "gc", telescope.resume, { desc = "Telescope: Continue" })
+keymap("n", "gr", telescope.oldfiles, { desc = "Telescope: [R]ecent Files" })
+keymap("n", "gF", telescope.live_grep, { desc = "Telescope: Search in cwd" })
 
--- File Operations (no shorthand for lazy-loading)
+-- File Operations
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = "copy filepath" })
 keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = "copy filename" })
 keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = "chmod +x" })
@@ -419,7 +420,16 @@ keymap("n", "<leader>g", qol.addCommitPush, { desc = "git add-commit-pull-push" 
 keymap("n", "<leader>os", ":set spell!<CR>")
 keymap("n", "<leader>or", ":set relativenumber!<CR>")
 keymap("n", "<leader>on", ":set number!<CR>")
-keymap("n", "<leader>ow", qol.toggleWrap)
+keymap("n", "<leader>ow", qol.toggleWrap, {desc = "toggle wrap"})
+keymap("n", "<leader>od", function()
+	g.diagnosticOn = g.diagnosticOn or true
+	if g.diagnosticOn then
+		vim.diagnostic.disable(0)
+	else
+		vim.diagnostic.enable(0)
+	end
+	g.diagnosticOn = not g.diagnosticOn
+end, { desc = "toggle diagnostics" })
 
 --------------------------------------------------------------------------------
 
@@ -436,7 +446,6 @@ end, { desc = ":CodiNew" })
 --------------------------------------------------------------------------------
 
 -- BUILD SYSTEM & QUICKFIX LIST
-
 keymap("n", "gq", cmd.cnext, { desc = "next quickfix item" })
 keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = "Telescope: quickfix list" })
 

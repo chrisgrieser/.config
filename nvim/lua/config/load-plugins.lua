@@ -105,6 +105,7 @@ return {
 
 	-- EDITING-SUPPORT
 	"andymass/vim-matchup",
+	-- "cbochs/portal.nvim",
 	{"ggandor/leap.nvim", event = "VeryLazy"},
 	"kylechui/nvim-surround", -- surround operator
 	{"gbprod/substitute.nvim", -- substitution & exchange operator
