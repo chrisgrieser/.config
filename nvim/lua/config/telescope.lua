@@ -49,7 +49,7 @@ require("telescope").setup {
 			"%.icns",
 			"%.zip",
 		},
-		default_mappings = { -- by using `default_mappings` instead of `mappings`, the defaults are overridden
+		mappings = { 
 			i = maps,
 			n = maps,
 		},

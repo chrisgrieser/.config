@@ -74,7 +74,7 @@ end
 augroup("branchChange", {})
 autocmd({ "BufEnter", "FocusGained", "WinEnter", "TabEnter" }, {
 	group = "branchChange",
-	callback = function() g.cur_branch = trim(fn.system("git branch --show-current")) end,
+	callback = function() g.cur_branch = fn.system("git branch --show-current"):gsub("\n$", "") end,
 })
 
 local function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
@@ -159,7 +159,7 @@ require("lualine").setup {
 		lualine_x = {
 			{
 				require("lazy.status").updates,
-				cond = function ()
+				cond = function()
 					if not require("lazy.status").has_updates() then return false end
 					local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
 					return numberOfUpdates > 15

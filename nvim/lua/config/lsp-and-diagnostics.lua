@@ -57,7 +57,7 @@ keymap(
 )
 
 local function diagnosticFormat(diagnostic, mode)
-	local msg = trim(diagnostic.message)
+	local msg = diagnostic.message:gsub("^%s*"):gsub("%s*$")
 	local source = diagnostic.source and diagnostic.source:gsub("%.$", "") or ""
 	local code = tostring(diagnostic.code)
 	local out = msg .. " (" .. code .. ")"

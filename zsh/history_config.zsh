@@ -4,7 +4,7 @@ export HISTSIZE=1500
 export SAVEHIST=$HISTSIZE
 
 # so it isn't saved in the dotfile repo (privacy), but still synced
-export HISTFILE="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/zsh_history"
+export HISTFILE="$DATA_DIR/zsh_history"
 
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS

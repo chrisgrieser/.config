@@ -1,4 +1,18 @@
+-- CONFIGS SHARED SCROSS MULTIPLE FILES
+local home = os.getenv("HOME")
+dotfilesFolder = home .. "/.config"
+vimDataDir = vim.env.DATA_DIR .. "/vim-data/"
+
+signIcons = {
+	Error = "",
+	Warn = "▲",
+	Info = "",
+	Hint = "",
+}
+
+--------------------------------------------------------------------------------
 -- NVIM UTILS
+
 opt = vim.opt -- global options obj
 g = vim.g -- global variables
 api = vim.api
@@ -43,41 +57,3 @@ function getlocalopt(option) return vim.api.nvim_get_option_value(option, { scop
 ---@return boolean
 function isGui() return g.neovide or g.goneovim end
 
---------------------------------------------------------------------------------
--- GENERAL LUA UTILS
-
----@param str string
----@param separator string uses Lua Pattern, so requires escaping
----@return table
-function split(str, separator)
-	str = str .. separator
-	local output = {}
-	-- https://www.lua.org/manual/5.4/manual.html#pdf-string.gmatch
-	for i in str:gmatch("(.-)" .. separator) do
-		table.insert(output, i)
-	end
-	return output
-end
-
----trims whitespace from string
----@param str string
----@return string
-function trim(str)
-	if not str then return "" end
-	return (str:gsub("^%s*(.-)%s*$", "%1"))
-end
-
---------------------------------------------------------------------------------
-
--- CONFIGS SHARED SCROSS MULTIPLE FILES
-local home = os.getenv("HOME")
-dotfilesFolder = home .. "/.config"
-vaultFolder = home .. "/main-vault"
-vimDataDir = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/vim-data/"
-
-signIcons = {
-	Error = "",
-	Warn = "▲",
-	Info = "",
-	Hint = "",
-}
