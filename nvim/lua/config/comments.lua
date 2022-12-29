@@ -1,4 +1,4 @@
-require("config/utils")
+require("config.utils")
 --------------------------------------------------------------------------------
 
 -- COMMENTS (mnemonic: [q]uiet text)

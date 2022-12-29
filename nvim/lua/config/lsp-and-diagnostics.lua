@@ -1,4 +1,4 @@
-require("config/utils")
+require("config.utils")
 -- INFO: required order of setup() calls is mason, mason-config, nvim-dev, lspconfig
 -- https://github.com/williamboman/mason-lspconfig.nvim#setup
 --------------------------------------------------------------------------------
@@ -205,7 +205,6 @@ lspSettings.sumneko_lua = {
 			callSnippet = "Replace",
 			keywordSnippet = "Replace",
 			displayContext = 2,
-			requireSeparator = "/", -- plays nice with `gf`
 		},
 		diagnostics = {
 			disable = { "trailing-space", "lowercase-global" },

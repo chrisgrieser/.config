@@ -1,4 +1,4 @@
-require("config/utils")
+require("config.utils")
 local null_ls = require("null-ls")
 local builtins = null_ls.builtins
 --------------------------------------------------------------------------------

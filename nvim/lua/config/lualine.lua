@@ -1,4 +1,4 @@
-require("config/utils")
+require("config.utils")
 --------------------------------------------------------------------------------
 
 -- simple alternative to fidget.nvim, via https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
