@@ -29,7 +29,7 @@ null_ls.setup {
 	sources = {
 		-- Global
 		builtins.code_actions.gitsigns, -- gitsigns.nvim plugin, e.g. reset hunks
-		builtins.code_actions.refactoring , -- gitsigns.nvim plugin, e.g. reset hunks
+		builtins.code_actions.refactoring, -- refactoring.nvim plugin
 		builtins.diagnostics.codespell.with { -- common misspellings. Far less false positives than with cspell
 			disabled_filetypes = { "css", "bib" }, -- base64-encoded fonts cause a lot of errors
 			-- can't use `--skip`, since it null-ls reads from stdin and not a file

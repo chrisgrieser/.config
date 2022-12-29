@@ -31,7 +31,7 @@ local function inspect(str)
 		end,
 	})
 end
-keymap("x", "<leader>i", function()
+keymap("x", "<leader>I", function()
 	normal('"zy')
 	inspect(fn.getreg("z"))
 end, { desc = "inspect selection" })

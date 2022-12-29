@@ -539,24 +539,20 @@ autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 -- Remaps for the refactoring operations currently offered by the plugin
--- stylua: ignore start
-vim.api.nvim_set_keymap("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})
-vim.api.nvim_set_keymap("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
-vim.api.nvim_set_keymap("v", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], {noremap = true, silent = true, expr = false})
-vim.api.nvim_set_keymap("v", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
 
--- Extract block doesn't need visual mode
-vim.api.nvim_set_keymap("n", "<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], {noremap = true, silent = true, expr = false})
-vim.api.nvim_set_keymap("n", "<leader>rbf", [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], {noremap = true, silent = true, expr = false})
-
--- Inline variable can also pick up the identifier currently under the cursor without visual mode
-vim.api.nvim_set_keymap("n", "<leader>q", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
+keymap("n", "zi", function () require('refactoring').refactor('Inline Variable') end, {desc = "Refactor: Inline Variable"})
+keymap("x", "zv", function () require('refactoring').refactor('Extract Variable') end, {desc = "Refactor: Extract Variable"})
+keymap("x", "zb", function () require('refactoring').refactor('Extract Block') end, {desc = "Refactor: Extract Block"})
+keymap("x", "zf", function () require('refactoring').refactor('Extract Function') end, {desc = "Refactor: Extract Function"})
 
 --------------------------------------------------------------------------------
 
-local bla = "bar"
+local bar = "aaaaa"
 local function foo()
-	print(bla)	
+	print(bar)
+	print(bar .. "aa")
 end
 
-print(bla .. "aa")
+print("bar" .. "aa")
+print("bar" .. "aa")
+print("bar" .. "aa")

@@ -111,7 +111,7 @@ keymap("n", "gs", telescope.treesitter)
 
 -- actions defined globally so null-ls can use them without LSP, e.g., for bash
 -- or gitsigns
-keymap("n", "<leader>a", vim.lsp.buf.code_action)
+keymap({"n", "x"}, "<leader>a", vim.lsp.buf.code_action)
 
 augroup("LSP", {})
 autocmd("LspAttach", {
