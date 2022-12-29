@@ -86,6 +86,11 @@ fileHubWatcher = pw(fileHub, function(paths)
 			os.rename(file, browserSettings .. fileName)
 			notify(fileName .. " filed away.")
 
+			-- vimium-c
+		elseif fileName:match("vimium_c") then
+			os.rename(file, browserSettings .. "vimium-c-settings.json")
+			notify("Vimium-C backup filed away.")
+
 			-- adguard backup
 		elseif fileName:match(".*_adg_ext_settings_.*%.json") then
 			os.rename(file, browserSettings .. "adguard-settings.json")

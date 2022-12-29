@@ -55,6 +55,8 @@ duti -s com.mimestream.Mimestream mailto # = default mail client
 duti -s com.brave.Browser http           # = default browser
 duti -s com.brave.Browser https
 duti -s com.brave.Browser chrome-extension
+duti -s com.brave.Browser chrome
+duti -s com.brave.Browser brave
 
 duti -s com.brave.Browser webloc all     # link files
 duti -s com.brave.Browser url all     # link files

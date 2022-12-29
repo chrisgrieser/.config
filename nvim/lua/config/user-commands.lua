@@ -18,7 +18,7 @@ end, {})
 -- `:PluginDir` opens the nvim data path, where mason and lazy install their stuff
 newCommand("PluginDir", function(_) fn.system('open "' .. fn.stdpath("data") .. '"') end, {})
 
--- `:I` or `<leader>i` inspects the passed lua object / selection
+-- `:I` or `<leader>I` inspects the passed lua object / selection
 local function inspect(str)
 	local output = vim.inspect(fn.luaeval(str))
 	vim.notify(output, logTrace, {
@@ -29,7 +29,9 @@ local function inspect(str)
 				api.nvim_buf_set_option(buf, "filetype", "lua")
 			end
 		end,
+		timeout = 10000,
 	})
+
 end
 keymap("x", "<leader>I", function()
 	normal('"zy')

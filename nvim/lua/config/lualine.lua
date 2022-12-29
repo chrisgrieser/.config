@@ -38,7 +38,10 @@ local function currentFile() -- using this function instead of default filename,
 	local curFile = expand("%:t")
 	local icon = bo.modifiable and "%% " or " "
 	local ft = bo.filetype
-	if curFile == "" and ft == "" then
+	if bo.buftype == "terminal" then
+		local mode = fn.mode() == "t" and "[N]" or "[T]"
+		return " Terminal " .. mode
+	elseif curFile == "" and ft == "" then
 		return " "
 	elseif curFile == "" and ft ~= "" then
 		return " " .. ft -- special windows, e.g., lazy
@@ -51,10 +54,10 @@ local function currentFile() -- using this function instead of default filename,
 end
 
 local function mixedIndentation()
-	if fn.mode() == "i" then return "" end
-	local ft = bo.filetype
 	local ignoredFts = { "css", "markdown", "sh", "lazy", "" }
-	if vim.tbl_contains(ignoredFts, ft) then return "" end
+	if vim.tbl_contains(ignoredFts, bo.filetype) or fn.mode() == "i" or bo.buftype == "terminal" then
+		return ""
+	end
 
 	local hasTabs = fn.search("^\t", "nw") > 0
 	local hasSpaces = fn.search("^ ", "nw") > 0

@@ -1,11 +1,11 @@
 require("config.utils")
 --------------------------------------------------------------------------------
 
-lightTheme = "dawnfox"
--- darkTheme = "tokyonight-moon"
--- lightTheme = "melange"
--- darkTheme = "oxocarbon"
-darkTheme = "kanagawa"
+local lightTheme = "dawnfox"
+-- local darkTheme = "tokyonight-moon"
+-- local lightTheme = "melange"
+-- local darkTheme = "oxocarbon"
+local darkTheme = "kanagawa"
 
 --------------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ local function customHighlights()
 	-- rainbow brackets without aggressive red…
 	cmd.highlight([[rainbowcol1 guifg=#7e8a95]])
 
-	-- more visible matching
+	-- more visible matchparens
 	cmd.highlight([[MatchParen gui=underdotted cterm=underdotted]])
 
 	-- Codi
