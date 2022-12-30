@@ -11,7 +11,6 @@
 	ui = true
 [core]
 	editor = nvim
-	excludesfile = /Users/chrisgrieser/.config/git/gitignore_global
 	autocrlf = input
 [pager]
 	branch = false
@@ -20,7 +19,11 @@
 [status]
 	showUntrackedFiles = all
 [advice]
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-advice
+	statusHints = false
 	detachedHead = false
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # Diff-related
 [core]
