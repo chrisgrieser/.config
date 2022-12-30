@@ -292,8 +292,8 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
-keymap("x", "V", "j", {desc = "repeated V selects more lines"}) 
-keymap("x", "v", "<C-v>", {desc = "vv from Normal Mode goes to Visual Block Mode"}) 
+keymap("x", "V", "j", { desc = "repeated V selects more lines" })
+keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode goes to Visual Block Mode" })
 
 --------------------------------------------------------------------------------
 -- SPLITS
@@ -368,7 +368,6 @@ keymap("x", "ga", ":NeuralCode complete<CR>", { desc = "AI: Code Complete" })
 -- ChatGPT
 keymap("n", "ga", ":ChatGPT<CR>", { desc = "AI: ChatGPT Prompt" })
 
-
 --------------------------------------------------------------------------------
 -- FILES
 
@@ -395,11 +394,16 @@ keymap( "x", "X", function() require("genghis").moveSelectionToNewFile() end, { 
 
 -- Neo[G]it
 keymap("n", "<leader>G", ":Neogit<CR>")
+keymap("n", "<leader>c", ":Neogit commit<CR>")
 
 -- Diffview
 g.diffviewOpen = false
 keymap("n", "<D-g>", function()
-	if g.diffviewOpen then cmd.DiffviewClose() end 
+	if g.diffviewOpen then
+		cmd.DiffviewClose()
+		g.diffviewOpen = false
+		return
+	end
 	vim.ui.input({ prompt = "Git Pickaxe (empty = full history)" }, function(query)
 		if not query then
 			return
@@ -408,8 +412,8 @@ keymap("n", "<D-g>", function()
 		else
 			cmd("DiffviewFileHistory % -G" .. query)
 		end
-		cmd.wincmd("w")-- go directly to file window
-		g.diffviewOpen = true	
+		cmd.wincmd("w") -- go directly to file window
+		g.diffviewOpen = true
 	end)
 end)
 
@@ -440,15 +444,13 @@ end, { desc = "toggle diagnostics" })
 --------------------------------------------------------------------------------
 
 -- TERMINAL AND CODI
-keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = "Esc (Normal Mode in Terminal)" }) 
-keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = "Paste in Terminal Mode" }) 
+keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = "Esc (Normal Mode in Terminal)" })
+keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = "Paste in Terminal Mode" })
 augroup("terminal", {})
 autocmd("FileType", {
 	group = "terminal",
 	pattern = "toggleterm",
-	callback = function()
-		keymap("n", "<CR>", "i<CR>", {desc = "Accept Terminal Input", buffer = true})
-	end
+	callback = function() keymap("n", "<CR>", "i<CR>", { desc = "Accept Terminal Input", buffer = true }) end,
 })
 
 keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = "ToggleTerm" })

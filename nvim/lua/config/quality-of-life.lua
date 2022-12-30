@@ -148,14 +148,19 @@ local function altOldfile()
 end
 
 ---shows info on alternate window/buffer/oldfile in that priority
+g.altWindow = ""
 function M.alternateFileStatusline()
 	local maxLen = 15
 	local altFile = expand("#:t")
 	local curFile = expand("%:t")
 
+	-- insert mode completion windows also get recognized as altwindow
+	-- TODO find method of expluding them better?
 	if trueWincount() > 1 then
-		local altWindow = fn.bufname(fn.winbufnr(fn.winnr("#")))
-		return "  " .. altWindow
+		if fn.mode() ~= "i" then
+			g.altWindow = fn.bufname(fn.winbufnr(fn.winnr("#")))
+		end
+		return "  " .. g.altWindow
 	elseif altFile == "" and not altOldfile() then -- no oldfile, no altfile
 		return ""
 	elseif altFile == "" and altOldfile() then
