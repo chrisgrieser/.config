@@ -4,7 +4,8 @@ local snip = require("luasnip").parser.parse_snippet -- lsp-style-snippets for f
 -- https://code.visualstudio.com/docs/editor/userdefinedsnippets
 -- https://github.com/L3MON4D3/LuaSnip/blob/master/Examples/snippets.lua
 -- https://github.com/L3MON4D3/LuaSnip/blob/master/doc/luasnip.txt
--- INFO: Snippets can be converted between formats with https://github.com/smjonas/snippet-converter.nvim
+-- INFO Snippets can be converted between formats with https://github.com/smjonas/snippet-converter.nvim
+-- INFO `$` are escape by with `\\$`
 --------------------------------------------------------------------------------
 require("luasnip").cleanup() -- clears all snippets for resourcing this file
 -- stylua: ignore start
@@ -38,13 +39,15 @@ add("css", {
 -- Shell (zsh)
 add("zsh", {
 	snip("##", "#!/usr/bin/env zsh\n$0"),
-	snip("expansion", "\\${${1:var}/${2:search}/${3:replace}}"),
+	snip("default arg value", '${1:input}=${1-"${2:default_value}"}'),
+	snip("slice", '${${1:var}:${2:start}:${3:length}}'),
+	snip("substitute", "${${1:var}/${2:search}/${3:replace}}"),
 	snip("PATH", "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\\$PATH\n$0"),
 	snip("resolve home", '${1:path}="${${1:path}/#\\~/\\$HOME}"'),
-	snip("filename", '${1:file_name}=$(basename "$${1:filepath}")'),
+	snip("filename", 'file_name=$(basename "$${1:file_path}")'),
 	snip("parent folder", '$(dirname "$${1:filepath}")'),
-	snip("ext", "${2:ext}=\\${${1:file_name}##*.}"),
-	snip("filename w/o ext", "${1:file_name}=\\${${1:file_name}%.*}"),
+	snip("ext", "ext=${${1:file_name}##*.}"),
+	snip("filename w/o ext", "${1:file_name}=${${1:file_name}%.*}"),
 	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
 
 	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
@@ -52,7 +55,6 @@ add("zsh", {
 	snip("if .. then .. else", 'if [[ "$${1:var}" ]]; then\n\t$2\nelse\n\t$0\nfi'),
 	snip("check installed", 'if ! command -v ${1:cli} &>/dev/null; then echo "${1:cli} not installed." && exit 1; fi\n$0'),
 
-	-- if ! command -v yamllint &> /dev/null; then echo "yamllint not installed." ; exit 1 ; fi
 	snip("stderr (pipe)", "2>&1 "),
 	snip("null (pipe)", "&>/dev/null "),
 	snip("sed (pipe)", "sed -E 's/${1:pattern}/${2:replacement}/g'"),
@@ -355,4 +357,3 @@ add("yaml", {
 	from: {key_code: ${1:key}, modifiers: {mandatory: [${2:command}]}}
 	]]),
 })
-

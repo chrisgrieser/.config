@@ -79,8 +79,7 @@ function separator (){
 	echo "$SEP"
 }
 
-# smarter z/cd
-# (also alternative to https://blog.meain.io/2019/automatically-ls-after-cd/)
+# smarter z/cd (alternative to https://blog.meain.io/2019/automatically-ls-after-cd/)
 
 function z () {
 	if [[ -f "$1" ]] ; then
@@ -115,27 +114,28 @@ function settings () {
 
 # copies last command(s)
 function lc (){
-	num=${1-"1"}
-	history | tail -n$num | cut -c8- | sed 's/"/\\\"/g' | sed "s/'/\\\'/g" | sed -E 's/^$/d'| pbcopy
+	num=${1-"1"} # default: 1 last command
+	history | tail -n$num | cut -c8- | sed 's/"/\\\"/g' | sed "s/'/\\\'/g" | sed -E '/^$/d'| pbcopy
 	echo "Copied."
 }
-
-# saves last command(s) in Drafts
+# save last command(s) in Drafts
 function lcd (){
+	num=${1-"1"} # default: 1 last command
 	local timestamp="$(date +%Y-%m-%d_%H-%M-%S)"
 	local drafts_inbox="$HOME/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/"
-	history | tail -n1 | cut -c8- | sed -E 's/^$/d' > "$drafts_inbox/$timestamp.md"
+	history | tail -n$num | cut -c8- | sed -E '/^$/d' > "$drafts_inbox/$timestamp.md"
 	echo "Saved in Drafts."
 }
 
-# copies result of last command
+# copies result of last command(s)
 function lr (){
-	last_command=$(history | tail -n 1 | cut -c 8-)
+	num=${1-"1"} # default: 1 last command
+	last_command=$(history | tail -n$num | cut -c 8-)
 	echo -n "$(eval "$last_command")" | pbcopy
 	echo "Copied."
 }
 
-# extract function
+# extract
 function ex () {
 	if [[ -f $1 ]] ; then
 		case $1 in
@@ -160,7 +160,7 @@ function ex () {
 function appid () {
 	local id
 	id=$(osascript -e "id of app \"$1\"")
-	echo "appid: $id"
+	echo "Copid appid: $id"
 	echo "$id" | pbcopy
 }
 
