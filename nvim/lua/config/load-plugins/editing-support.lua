@@ -59,17 +59,6 @@ return {
 	},
 	{ "ggandor/leap.nvim", event = "VeryLazy" },
 	{
-		"ggandor/flit.nvim",
-		dependencies = "ggandor/leap.nvim",
-		keys = { "f", "F", "t", "T" },
-		config = function()
-			require("flit").setup {
-				labeled_modes = "v", -- A string like "nv", "nvo", "o", etc.
-				multiline = false,
-			}
-		end,
-	},
-	{
 		"unblevable/quick-scope",
 		keys = { "f", "F", "t", "T" },
 		init = function()

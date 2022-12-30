@@ -33,9 +33,13 @@ local function inspect(str)
 	})
 
 end
-keymap("x", "<leader>I", function()
-	normal('"zy')
-	inspect(fn.getreg("z"))
+keymap({"n", "x"}, "<leader>li", function()
+	if fn.mode() == "n" then 
+		inspect(expand("<cWORD>"))
+	else
+		normal('"zy')
+		inspect(fn.getreg("z"))
+	end
 end, { desc = "inspect selection" })
 newCommand("I", function(ctx) inspect(ctx.args) end, { nargs = "+" })
 

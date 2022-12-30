@@ -22,7 +22,6 @@
   "delaytrain.nvim": { "branch": "main", "commit": "eb8d2157e6a7de1b4f024f7ca5bccc4014d88b05" },
   "diffview.nvim": { "branch": "main", "commit": "18f83302f71889b39403919b8be00d7244d1fcfc" },
   "dressing.nvim": { "branch": "master", "commit": "4436d6f41e2f6b8ada57588acd1a9f8b3d21453c" },
-  "flit.nvim": { "branch": "main", "commit": "be110f9814a45788d10537fd59b3c76d956bb7ad" },
   "gitsigns.nvim": { "branch": "main", "commit": "2ab3bdf0a40bab53033048c6be75bda86316b55d" },
   "hlargs.nvim": { "branch": "main", "commit": "88b925d699fb39633cdda02c24f0b3ba5d0e6964" },
   "indent-blankline.nvim": { "branch": "master", "commit": "c4c203c3e8a595bc333abaf168fcb10c13ed5fb7" },

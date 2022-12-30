@@ -25,6 +25,7 @@ settings.blocklistPattern = undefined; /* eslint-disable-line no-undefined */
 // unmap jk on google for web search navigator (vimium-like controls for google only)
 unmap("j", /google/);
 unmap("k", /google/);
+unmap("?", /github/);
 
 //──────────────────────────────────────────────────────────────────────────────
 // ---- Mappings -----
@@ -42,15 +43,16 @@ map("L", "]]");
 // tabs
 map("e", "R"); // one tab right
 map("b", "E"); // one tab right
+map("<", "<<"); // move tab to the left
+map(">", ">>"); // move tab to the right
 
 map("i", "x"); // close tab
 map("u", "X"); // reopen tab
+
+unmap ("w"); // so it can be mapped for window commands
 map("wq", "gx0"); // close tabs on left
 map("we", "gx$"); // close tabs on right
-map("ww", "gx$"); // close all other tabs
-
-map("<", "<<"); // move tab to the left
-map(">", ">>"); // move tab to the right
+map("ww", "gxx"); // close all other tabs
 map("wv", "W"); // move tab to new window (vsplit with Hammerspoon)
 map("wm", ";gw"); // merge all windows to current one
 
@@ -101,93 +103,92 @@ removeSearchAlias("y", "s");
 removeSearchAlias("s", "s");
 removeSearchAlias("e", "s");
 
-unmap(";ql");
-unmap("]]");
-unmap("[[");
-unmap("S");
-unmap("W");
-unmap("R");
-unmap("ya");
-unmap("C");
-unmap("W");
-unmap("yG");
-unmap("yS");
-unmap(";w");
-unmap("P");
-unmap("D");
-unmap("yj");
-unmap("ys");
-unmap("yv");
-unmap("yma");
-unmap("U");
-unmap("cs");
-unmap("cS");
-unmap("$");
-unmap("0");
-unmap("<Alt-i>");
-unmap("I");
-unmap("q");
-unmap(";m");
-unmap(";fs");
-unmap(";di");
-unmap("gf");
-unmap("cf");
-unmap("yT");
-unmap("gxp");
-unmap(";U");
-unmap(";u");
-unmap("<Ctrl-6>");
-unmap("gx0");
-unmap("gx$");
-unmap("<Alt-p>");
-unmap("<Alt-m>");
-unmap("gxt");
-unmap("gxT");
-unmap("gT");
-unmap("gt");
-unmap("g?");
-unmap("g#");
-unmap("on");
-unmap("on");
-unmap("zr");
-unmap("zi");
-unmap("zo");
-unmap(";gt");
-unmap(";e");
-unmap(";v");
-unmap("yq");
-unmap("yQ");
-unmap("yh");
-unmap(";yQ");
-unmap("d");
-unmap("cp");
-unmap(";pa");
-unmap(";pf");
-unmap(";pj");
-unmap(";pp");
-unmap("cc");
-unmap(";yh");
-unmap(";dh");
-unmap("gs");
-unmap("gn");
-unmap("gb");
-unmap("<Ctrl-'>");
-unmap("zv");
-unmap(";pb");
-unmap(";gw");
-unmap("gxx");
-unmap("zt");
-unmap(";pm");
-unmap("zb");
-unmap(";pc");
-unmap(";ps");
-unmap(";pd");
-unmap(";ap");
-unmap(";j");
-unmap("<Ctrl-Alt-i>");
-unmap("<Ctrl-h>");
-unmap("<Ctrl-j>");
-unmap("g0");
-unmap("g$");
-unmap("ga");
-unmap("gc");
+// unmap(";ql");
+// unmap("]]");
+// unmap("[[");
+// unmap("S");
+// unmap("W");
+// unmap("R");
+// unmap("ya");
+// unmap("C");
+// unmap("yG");
+// unmap("yS");
+// unmap(";w");
+// unmap("P");
+// unmap("D");
+// unmap("yj");
+// unmap("ys");
+// unmap("yv");
+// unmap("yma");
+// unmap("U");
+// unmap("cs");
+// unmap("cS");
+// unmap("$");
+// unmap("0");
+// unmap("<Alt-i>");
+// unmap("I");
+// unmap("q");
+// unmap(";m");
+// unmap(";fs");
+// unmap(";di");
+// unmap("gf");
+// unmap("cf");
+// unmap("yT");
+// unmap("gxp");
+// unmap(";U");
+// unmap(";u");
+// unmap("<Ctrl-6>");
+// unmap("gx0");
+// unmap("gx$");
+// unmap("<Alt-p>");
+// unmap("<Alt-m>");
+// unmap("gxt");
+// unmap("gxT");
+// unmap("gT");
+// unmap("gt");
+// unmap("g?");
+// unmap("g#");
+// unmap("on");
+// unmap("on");
+// unmap("zr");
+// unmap("zi");
+// unmap("zo");
+// unmap(";gt");
+// unmap(";e");
+// unmap(";v");
+// unmap("yq");
+// unmap("yQ");
+// unmap("yh");
+// unmap(";yQ");
+// unmap("d");
+// unmap("cp");
+// unmap(";pa");
+// unmap(";pf");
+// unmap(";pj");
+// unmap(";pp");
+// unmap("cc");
+// unmap(";yh");
+// unmap(";dh");
+// unmap("gs");
+// unmap("gn");
+// unmap("gb");
+// unmap("<Ctrl-'>");
+// unmap("zv");
+// unmap(";pb");
+// unmap(";gw");
+// unmap("gxx");
+// unmap("zt");
+// unmap(";pm");
+// unmap("zb");
+// unmap(";pc");
+// unmap(";ps");
+// unmap(";pd");
+// unmap(";ap");
+// unmap(";j");
+// unmap("<Ctrl-Alt-i>");
+// unmap("<Ctrl-h>");
+// unmap("<Ctrl-j>");
+// unmap("g0");
+// unmap("g$");
+// unmap("ga");
+// unmap("gc");
