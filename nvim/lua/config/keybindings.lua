@@ -397,7 +397,9 @@ keymap( "x", "X", function() require("genghis").moveSelectionToNewFile() end, { 
 keymap("n", "<leader>G", ":Neogit<CR>")
 
 -- Diffview
+g.diffviewOpen = false
 keymap("n", "<D-g>", function()
+	if g.diffviewOpen then cmd.DiffviewClose() end 
 	vim.ui.input({ prompt = "Git Pickaxe (empty = full history)" }, function(query)
 		if not query then
 			return
@@ -406,7 +408,8 @@ keymap("n", "<D-g>", function()
 		else
 			cmd("DiffviewFileHistory % -G" .. query)
 		end
-		cmd.execute([["normal! \<C-W>w"]]) -- go directly to file window
+		cmd.wincmd("w")-- go directly to file window
+		g.diffviewOpen = true	
 	end)
 end)
 
