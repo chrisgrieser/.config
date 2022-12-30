@@ -61,6 +61,7 @@ return {
 					auto_enable = true,
 					max_byte = 2 * 1024 * 1024, -- 2mb
 					lsp = true,
+					excludes = { "lazy" },
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
@@ -85,7 +86,7 @@ return {
 			cmd.CccHighlighterEnable() -- initialize once
 		end,
 	},
-	{	-- auto-resize splits
+	{ -- auto-resize splits
 		"anuvyklack/windows.nvim",
 		dependencies = "anuvyklack/middleclass",
 		event = "VeryLazy", -- loading on <C-w> does not seem to work

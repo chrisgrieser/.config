@@ -92,7 +92,7 @@ local source_icons = {
 return {
 	{
 		"hrsh7th/nvim-cmp",
-		event = {"InsertEnter", "CmdlineEnter"}, -- CmdlineEnter for completions there
+		event = { "InsertEnter", "CmdlineEnter" }, -- CmdlineEnter for completions there
 		dependencies = {
 			"hrsh7th/cmp-buffer", -- completion sources
 			"hrsh7th/cmp-path",
@@ -103,8 +103,9 @@ return {
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
 			"petertriho/cmp-git", -- git issues/PRs
+			"davidsierradz/cmp-conventionalcommits", -- conventional commits keywords
 			"hrsh7th/cmp-nvim-lsp", -- lsp
-			"L3MON4D3/LuaSnip", -- snippet 
+			"L3MON4D3/LuaSnip", -- snippet
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 			"hrsh7th/cmp-omni", -- omni for autocompletion in input prompts
 		},
@@ -246,6 +247,37 @@ return {
 			require("cmp").setup.filetype("DressingInput", {
 				sources = require("cmp").config.sources { { name = "omni" } },
 			})
+		end,
+	},
+	{
+		"petertriho/cmp-git",
+		dependencies = "hrsh7th/nvim-cmp",
+		ft = { "gitcommit", "NeogitCommitMessage" },
+		config = function()
+
+			-- plaintext (e.g., pass editing)
+			require("cmp").setup.filetype("text", {
+				sources = require("cmp").config.sources {
+					snippets,
+					buffer,
+					emojis,
+				},
+			})
+
+			require("cmp_git").setup {
+				filetypes = { "gitcommit", "NeogitCommitMessage" },
+				git = { commits = { limit = 0 } }, -- 0 = disable completing commits
+				github = {
+					issues = {
+						limit = 100,
+						state = "open", -- open, closed, all
+					},
+					pull_requests = {
+						limit = 10,
+						state = "open",
+					},
+				},
+			}
 		end,
 	},
 	{
