@@ -193,18 +193,16 @@ function M.betterClose()
 	if bo.modifiable and not unsavedFile then cmd.update() end
 
 	if #buffers == 0 then
-	elseif  or unsavedFile then
-		return
 		vim.notify("Only one buffer open.", logWarn)
-	else
-		if unsavedFile then
-			cmd.bwipeout()
-		else
-			cmd.bdelete()
-		end
-
-		fn.setreg("#", altOldfile())
+		return
 	end
+	if unsavedFile then
+		cmd.bwipeout()
+	else
+		cmd.bdelete()
+	end
+
+	fn.setreg("#", altOldfile())
 end
 
 --------------------------------------------------------------------------------
