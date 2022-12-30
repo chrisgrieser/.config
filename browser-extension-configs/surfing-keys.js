@@ -14,7 +14,7 @@ settings.modeAfterYank = "Normal";
 settings.hintAlign = "left";
 settings.theme = `
 	#sk_status, #sk_find {
-		font-size: 20pt;
+		font-size: 16pt;
 	}
 }`;
 
