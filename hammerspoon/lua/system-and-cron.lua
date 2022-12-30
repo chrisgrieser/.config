@@ -155,11 +155,11 @@ biweeklyTimer = timer("02:00", "02d", function()
 	applescript([[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
-			run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles" with argument "no sound"
+			run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles"
 		end tell
 	]])
 	hs.execute(
-		'cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Browser-Bookmarks.bkp"'
+		'cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$DATA_DIR/Backups/Browser-Bookmarks.bkp"'
 	)
 	hs.loadSpoon("EmmyLua") -- so it runs not as often
 end, true)

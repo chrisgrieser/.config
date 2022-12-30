@@ -1,6 +1,9 @@
 # Quick Open File/Folder
-# requires: exa, bat, zoxide, fd, fzf
 function o (){
+	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && exit 1; fi
+	if ! command -v fd &>/dev/null; then echo "fd not installed." && exit 1; fi
+	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && exit 1; fi
+
 	local selected
 	local input="$*"
 
@@ -38,6 +41,8 @@ function o (){
 }
 
 function directoryInspect (){
+	if ! command -v exa &>/dev/null; then echo "exa not installed." && exit 1; fi
+	
 	if command git rev-parse --is-inside-work-tree &>/dev/null ; then
 		git status --short
 		echo
@@ -54,19 +59,12 @@ function timezsh(){
 
 # no arg = all files in folder will be deleted
 function d () {
+	if ! command -v trash &>/dev/null; then echo "trash-cli not installed." && exit 1; fi
 	if [[ $# == 0 ]]; then
-		IFS=$'\n'
-		# shellcheck disable=SC2207
-		ALL_FILES=($(find . -not -name ".*"))
-		unset IFS
+		trash *
 	else
-		ALL_FILES=( "$@" ) # save files as array
+		trash $*
 	fi
-	for item in "${ALL_FILES[@]}"; do
-		local itemInTrash="$HOME/.Trash/$(basename "$item")"
-		[[ -e "$itemInTrash" ]] && rm -r
-		mv "$item" "$itemInTrash"
-	done
 }
 
 # draws a separator line with terminal width
@@ -82,6 +80,7 @@ function separator (){
 # smarter z/cd (alternative to https://blog.meain.io/2019/automatically-ls-after-cd/)
 
 function z () {
+	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && exit 1; fi
 	if [[ -f "$1" ]] ; then
 		__zoxide_z "$(dirname "$1")"
 	else
@@ -90,6 +89,7 @@ function z () {
 	[[ $? -eq 0 ]] && directoryInspect
 }
 function zi () {
+	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && exit 1; fi
 	__zoxide_zi
 	directoryInspect
 }
@@ -123,6 +123,7 @@ function lcd (){
 	num=${1-"1"} # default: 1 last command
 	local timestamp="$(date +%Y-%m-%d_%H-%M-%S)"
 	local drafts_inbox="$HOME/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/"
+	mkdir -p "$drafts_inbox"
 	history | tail -n$num | cut -c8- | sed -E '/^$/d' > "$drafts_inbox/$timestamp.md"
 	echo "Saved in Drafts."
 }

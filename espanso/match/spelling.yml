@@ -181,8 +181,6 @@ matches:
     replace: but
     word: true
     propagate_case: true
-  - trigger: "e.g. "
-    replace: "e.g., "
   - trigger: thansk
     replace: thanks
     propagate_case: true
