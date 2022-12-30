@@ -222,7 +222,9 @@ keymap("x", "<leader>f", ":s///g<Left><Left><Left>", { desc = "search & replace"
 keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "struct. search & replace" })
 keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
 keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
-keymap("n", "<A-r>", "R", { desc = "replace mode" })
+
+-- Replace Mode
+keymap("n", "gR", "R", { desc = "replace mode" })
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.duplicateLine, { desc = "duplicate line" })

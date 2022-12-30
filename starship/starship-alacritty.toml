@@ -4,8 +4,7 @@
 
 add_newline = false
 continuation_prompt = "❯"
-format = """[
-$directory\
+format = """[$directory\
 ${custom.folder_number}\
 $git_branch\
 $git_status\

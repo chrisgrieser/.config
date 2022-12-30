@@ -8,9 +8,6 @@ const { imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vm
 // ---- SETTINGS ----
 // https://github.com/brookhong/Surfingkeys#edit-your-own-settings
 settings.focusAfterClosed = "last";
-settings.focusOnSaved = false; // do not keep focus on text input field after leaving vim editor
-settings.modeAfterYank = "Normal";
-settings.hintAlign = "left";
 // settings.theme = `
 // 	#sk_status, #sk_find {
 // 		font-size: 16pt;

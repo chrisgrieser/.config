@@ -113,16 +113,18 @@ function settings () {
 	fi )
 }
 
-# copies last command
+# copies last command(s)
 function lc (){
-	history | tail -n1 | cut -c8- | sed 's/"/\\\"/g' | sed "s/'/\\\'/g" | xargs | pbcopy
+	num=${1-"1"}
+	history | tail -n$num | cut -c8- | sed 's/"/\\\"/g' | sed "s/'/\\\'/g" | sed -E 's/^$/d'| pbcopy
 	echo "Copied."
 }
 
-# saves last command in Drafts
+# saves last command(s) in Drafts
 function lcd (){
-	local drafts_inbox="$HOME/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox"
-	history | tail -n1 | cut -c8- | sed 's/"/\\\"/g' | sed "s/'/\\\'/g" > "$drafts_inbox"
+	local timestamp="$(date +%Y-%m-%d_%H-%M-%S)"
+	local drafts_inbox="$HOME/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/"
+	history | tail -n1 | cut -c8- | sed -E 's/^$/d' > "$drafts_inbox/$timestamp.md"
 	echo "Saved in Drafts."
 }
 
