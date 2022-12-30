@@ -1,5 +1,29 @@
 # shellcheck disable=SC2164,SC2030,SC2012
 
+alias co="git checkout"
+alias gs='git status'
+alias gd='git diff'
+alias gc="git commit -m"
+alias ga="git add"
+alias gr="git reset"
+alias grh="git reset --hard"
+alias push="git push"
+alias pull="git pull"
+
+# go to git root https://stackoverflow.com/a/38843585
+# shellcheck disable=2031
+alias g='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
+alias gg="git checkout -" # go to last branch, analogues to `zz` switching to last directory
+
+# open GitHub repo
+function getGithubURL() {
+	git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//'
+}
+alias gh="getGithubURL | xargs open"
+alias ghi='open "$(getGithubURL)/issues"'
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # git log
 # append `true` to avoid exit code 141: https://www.ingeniousmalarkey.com/2016/07/git-log-exit-code-141.html
 alias gl="git log --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; true"
@@ -72,33 +96,6 @@ function acp() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function gittree() { (
-	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
-	command exa --long --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git --tree --color=always | grep -v "\--"
-); }
-
-alias gc="git checkout"
-alias gs='git status'
-alias gd='git diff'
-alias gt='gittree'
-alias add="git add"
-alias commit="git commit -m"
-alias push="git push"
-alias pull="git pull"
-
-# go to git root https://stackoverflow.com/a/38843585
-# shellcheck disable=2031
-alias g='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
-alias gg="git checkout -" # go to last branch, analogues to `zz` switching to last directory
-
-# open GitHub repo
-function getGithubURL() {
-	git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//'
-}
-alias gh="getGithubURL | xargs open"
-alias ghi='open "$(getGithubURL)/issues"'
-
-#───────────────────────────────────────────────────────────────────────────────
 
 function clone() {
 	betterClone "$*" "normal"
@@ -204,3 +201,11 @@ function gdf() {
 		git show "$last_commit:$deleted_path" | bat
 	fi
 }
+
+#───────────────────────────────────────────────────────────────────────────────
+
+function gittree() { (
+	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
+	command exa --long --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git --tree --color=always | grep -v "\--"
+); }
+
