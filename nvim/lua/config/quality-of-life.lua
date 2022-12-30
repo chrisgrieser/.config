@@ -109,19 +109,20 @@ function M.currentFileStatusline()
 		local mode = fn.mode() == "t" and "[N]" or "[T]"
 		return " Terminal " .. mode
 	elseif curFile == "" and ft == "" then
-		return " "
+		return "%% New"
 	elseif curFile == "" and ft ~= "" then
 		return " " .. ft -- special windows, e.g., lazy
 	elseif curFile == altFile then
 		local curParent = expand("%:p:h:t")
 		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
-		return "% "..curParent .. "/" .. curFile
+		return "%% " .. curParent .. "/" .. curFile
 	end
 	return icon .. curFile
 end
 
 ---(HACK) get true wincount, since scrollview-like plugins counts as a window,
 ---but only appears if buffer is longer than window https://github.com/dstein64/nvim-scrollview/issues/83
+---@return integer wincount
 local function trueWincount()
 	local wincount = 0
 	for i = 1, fn.winnr("$"), 1 do
@@ -129,6 +130,20 @@ local function trueWincount()
 		if not win.external and win.focusable then wincount = wincount + 1 end
 	end
 	return wincount
+end
+
+---get the alternate oldfile, accounting for non-existing files etc.
+---@return string|nil path of oldfile, empty if none exists in all oldfiles
+local function altOldfile()
+	local i = 1
+	local oldfile
+	repeat
+		i = i + 1 -- start at [2] since [1] would be current file
+		if i > #vim.v.oldfiles then return "" end
+		oldfile = vim.v.oldfiles[i]
+		local fileExists = fn.filereadable(oldfile) == 1
+	until fileExists -- check for deleted, renamed, or irregular files
+	return oldfile
 end
 
 ---shows info on alternate window/buffer/oldfile in that priority
@@ -145,12 +160,13 @@ function M.alternateFileStatusline()
 	elseif altPath == curPath then
 		return ""
 	elseif altFile == "" then
-		local lastOldfile = vim.v.oldfiles[2]:gsub(".*/", "") -- 1 is the current file
+		local lastOldfile = vim.fs.basename(altOldfile())
+		if lastOldfile == "" then return "" end
 		return " " .. lastOldfile
 	elseif curFile == altFile then
 		local altParent = expand("#:p:h:t")
 		if #altParent > maxLen then altParent = altParent:sub(1, maxLen) .. "…" end
-		return "# "..altParent .. "/" .. altFile
+		return "# " .. altParent .. "/" .. altFile
 	end
 	return "# " .. altFile
 end
@@ -162,8 +178,8 @@ function M.altBufferWindow()
 		cmd.wincmd("p") -- previous window
 	elseif expand("#") ~= "" then
 		cmd.buffer("#") -- alt buffer
-	else
-		cmd.edit(vim.v.oldfiles[2]) -- last oldfile
+	elseif altOldfile() ~= "" then
+		cmd.edit(altOldfile())
 	end
 end
 
