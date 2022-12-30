@@ -6,6 +6,7 @@ if not vim.loop.fs_stat(lazypath) then
 		"clone",
 		"--filter=blob:none",
 		"--single-branch",
+		"--branch=stable", -- remove this if you want to bootstrap to HEAD
 		"https://github.com/folke/lazy.nvim.git",
 		lazypath,
 	}
