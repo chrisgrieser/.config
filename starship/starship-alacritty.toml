@@ -4,8 +4,30 @@
 
 add_newline = false
 continuation_prompt = "❯"
-format = "[$directory${custom.folder_number}$git_branch$git_status$git_metrics$git_commit$git_state$sudo](bg:black)[](black)$cmd_duration$status$character"
-right_format="$package${custom.alfred}$nodejs$python$jobs$memory_usage"
+format = """[
+$directory\
+${custom.folder_number}\
+$git_branch\
+$git_status\
+$git_metrics\
+$git_commit\
+$git_state\
+$sudo\
+](bg:black)\
+[](black)\
+$cmd_duration\
+$status\
+$character\
+"""
+
+right_format="""
+$package \
+${custom.alfred} \
+$nodejs \
+$python \
+$jobs \
+$memory_usage \
+"""
 
 # ⏼⏻⟐ﰉﰊ★ﮊגּﮏ﫜ﲮﲭﱬﳄﯖﴣﯟﯢﳝﯶﯾ卵擄勞ﮧ閭ﴯﰪﭾ璉ﲅ晴ﲊ羽⚡
 [character]
@@ -87,7 +109,6 @@ format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$de
 # lines
 [git_metrics]
 disabled = false
-# only_nonzero_diffs = false
 added_style = "fg:green bg:black"
 deleted_style = "fg:red bg:black"
 format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\) )'

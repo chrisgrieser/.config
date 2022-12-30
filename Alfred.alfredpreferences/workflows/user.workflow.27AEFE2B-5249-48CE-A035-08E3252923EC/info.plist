@@ -620,11 +620,11 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>vimium-c</string>
+				<string>surfingkey</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Open Vimium Settings</string>
+				<string>Open SurfingKey Settings</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -647,7 +647,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html#</string>
+				<string>chrome-extension://gfbliohnnapiefjpjlpjnehglfpaknnc/pages/options.html</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -932,6 +932,8 @@
 		</dict>
 		<key>14C11AAF-4BA7-4F10-8AE5-C5BF378187DE</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>590</real>
 			<key>ypos</key>
@@ -951,7 +953,7 @@
 		<key>392CDF54-5BA6-4C23-BAD4-3DB158DA354C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
@@ -960,7 +962,7 @@
 		<key>40631024-7C9F-4784-A3E7-1116BD6C894A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>790</real>
 			<key>ypos</key>
@@ -969,7 +971,7 @@
 		<key>46A0180C-0144-4433-8238-86DD95349753</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>590</real>
 			<key>ypos</key>
@@ -1014,7 +1016,7 @@
 		<key>8D2676E8-2C88-4759-9445-2DBC22311D6D</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>manage extensions</string>
 			<key>xpos</key>
@@ -1043,7 +1045,7 @@
 		<key>9AA14640-4989-4266-9F9B-E6DB0264EFA5</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>extension shortcuts</string>
 			<key>xpos</key>
@@ -1081,7 +1083,7 @@
 		<key>B6430DD8-BB7B-43C8-ADCA-D14DD9FC0D7A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
@@ -1090,7 +1092,7 @@
 		<key>BCBA39EC-1A03-42AE-AC02-3008B7476776</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
@@ -1099,7 +1101,7 @@
 		<key>BE7EDFB7-052F-45E8-BC4B-5448613EE413</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>415</real>
 			<key>ypos</key>
@@ -1108,7 +1110,7 @@
 		<key>BE8B707A-6DA8-4CDD-A5BF-434F69DAC7B4</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>725</real>
 			<key>ypos</key>
@@ -1134,6 +1136,8 @@
 		</dict>
 		<key>D14B4522-0A25-4F4D-9985-FF8B04E43832</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>745</real>
 			<key>ypos</key>
@@ -1141,6 +1145,8 @@
 		</dict>
 		<key>D1AFFF36-7CC6-4D2F-8728-863C85053348</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>note</key>
 			<string>bookmark update</string>
 			<key>xpos</key>
@@ -1182,7 +1188,7 @@
 		<key>F34E5081-7725-4B48-867B-36BC4DFAD990</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
@@ -1191,7 +1197,7 @@
 		<key>F3966E19-739B-4CD9-9ADE-6AFE837C3817</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
