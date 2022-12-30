@@ -180,35 +180,30 @@ function M.altBufferWindow()
 	end
 end
 
----Close tabs/window/buffer in that priority
+---Close window/buffer in that priority
 function M.betterClose()
 	-- to not include notices 
 	local hasNotify = pcall(require, "notify")
 	if hasNotify then require("notify").dismiss() end
 
-	local moreThanOneTab = fn.tabpagenr("$") > 1
 	local buffers = fn.getbufinfo { buflisted = 1 }
 	local unsavedFile = expand("%") == ""
 
 	cmd.nohlsearch()
 	if bo.modifiable and not unsavedFile then cmd.update() end
 
-	if moreThanOneTab then
-		cmd.tabclose()
-	elseif #buffers == 2 then
-		cmd.bwipeout() -- apparently only method to clear altfile in this case
-	elseif #buffers > 1 then
+	if #buffers == 0 then
+	elseif  or unsavedFile then
+		return
+		vim.notify("Only one buffer open.", logWarn)
+	else
 		if unsavedFile then
 			cmd.bwipeout()
 		else
 			cmd.bdelete()
 		end
 
-		-- ensure new alt file points towards open, non-active buffer
-		local newAltBuf = altOldfile()
-		fn.setreg("#", newAltBuf)
-	else
-		vim.notify("Only one buffer open.", logWarn)
+		fn.setreg("#", altOldfile())
 	end
 end
 
