@@ -108,10 +108,10 @@ function M.currentFileStatusline()
 	if bo.buftype == "terminal" then
 		local mode = fn.mode() == "t" and "[N]" or "[T]"
 		return " Terminal " .. mode
-	elseif curFile == "" and ft == "" then
-		return "%% New"
-	elseif curFile == "" and ft ~= "" then
+	elseif bo.buftype == "nofile" or (curFile == "" and ft ~= "") then
 		return " " .. ft -- special windows, e.g., lazy
+	elseif curFile == "" and ft == "" then
+		return "%% [New]"
 	elseif curFile == altFile then
 		local curParent = expand("%:p:h:t")
 		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
@@ -120,16 +120,25 @@ function M.currentFileStatusline()
 	return icon .. curFile
 end
 
----(HACK) get true wincount, since scrollview-like plugins counts as a window,
----but only appears if buffer is longer than window https://github.com/dstein64/nvim-scrollview/issues/83
----@return integer wincount
-local function trueWincount()
-	local wincount = 0
-	for i = 1, fn.winnr("$"), 1 do
-		local win = api.nvim_win_get_config(fn.win_getid(i))
-		if not win.external and win.focusable then wincount = wincount + 1 end
-	end
-	return wincount
+---get the alternate window, accounting for special windows (scrollbars, notify)
+---@return string|nil path of buffer in altwindow, nil if none exists (= only
+--one window)
+local function altWindow()
+	local i = 0
+	local altWin
+
+	repeat
+		if i > fn.winnr("$") then return nil end
+
+		-- two checks for regular window to catch all edge cases
+		altWin = fn.bufname(fn.winbufnr(i))
+		local isRegularWin1 = altWin and altWin ~= fn.bufname() and altWin ~= ""
+		local win = api.nvim_win_get_config(fn.win_getid(i)) -- https://github.com/dstein64/nvim-scrollview/issues/83
+		local isRegularWin2 = not win.external and win.focusable
+		i = i + 1
+	until isRegularWin1 and isRegularWin2
+
+	return altWin
 end
 
 ---get the alternate oldfile, accounting for non-existing files etc.
@@ -148,40 +157,32 @@ local function altOldfile()
 end
 
 ---shows info on alternate window/buffer/oldfile in that priority
-g.altFile = ""
 function M.alternateFileStatusline()
 	local maxLen = 15
 	local altFile = expand("#:t")
-	local curFile = expand("%:t") 
+	local curFile = expand("%:t")
 
-	-- insert mode completion windows also get recognized as altwindow
-	-- TODO find method of expluding them better?
-	if fn.mode() == "i" then
-		return g.altFile
-	elseif trueWincount() > 1 then
-		local altWindow = fn.bufname(fn.winbufnr(fn.winnr("#")))
-		g.altFile = "  " .. altWindow
+	if altWindow() then
+		return "  " .. altWindow()
 	elseif altFile == "" and not altOldfile() then -- no oldfile and after start
-		g.altFile = ""
+		return ""
 	elseif altFile == "" and altOldfile() then
-		g.altFile = " " .. vim.fs.basename(altOldfile())
+		return " " .. vim.fs.basename(altOldfile())
 	elseif curFile == altFile then -- same name, different file
 		local altParent = expand("#:p:h:t")
 		if #altParent > maxLen then altParent = altParent:sub(1, maxLen) .. "…" end
-		g.altFile = "# " .. altParent .. "/" .. altFile
-	else
-		g.altFile = "# " .. altFile
+		return "# " .. altParent .. "/" .. altFile
 	end
-	return g.altFile
+	return "# " .. altFile
 end
 
 ---switch to alternate window/buffer/oldfile in that priority
 function M.altBufferWindow()
 	cmd.nohlsearch()
-	if trueWincount() > 1 then
-		cmd.wincmd("p") -- previous window
+	if altWindow() then
+		cmd.wincmd("w")
 	elseif expand("#") ~= "" then
-		cmd.buffer("#") -- alt buffer
+		cmd.buffer("#")
 	elseif altOldfile() ~= "" then
 		cmd.edit(altOldfile())
 	end
@@ -189,17 +190,13 @@ end
 
 ---Close window/buffer in that priority
 function M.betterClose()
-	-- to not include notices
-	local hasNotify = pcall(require, "notify")
-	if hasNotify then require("notify").dismiss() end
-
-	local buffers = fn.getbufinfo { buflisted = 1 }
+	local openBuffers = fn.getbufinfo { buflisted = 1 }
 	local unsavedFile = expand("%") == ""
 
 	cmd.nohlsearch()
 	if bo.modifiable and not unsavedFile then cmd.update() end
 
-	if #buffers == 0 then
+	if #openBuffers == 1 then
 		vim.notify("Only one buffer open.", logWarn)
 		return
 	end
