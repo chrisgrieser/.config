@@ -8,6 +8,7 @@ const { imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vm
 // ---- SETTINGS ----
 // https://github.com/brookhong/Surfingkeys#edit-your-own-settings
 settings.focusAfterClosed = "last";
+settings.focusOnSaved = false; // do not keep focus on text input field after leaving vim editor
 settings.modeAfterYank = "Normal";
 settings.hintAlign = "left";
 // settings.theme = `
@@ -29,9 +30,10 @@ unmap("k", /google/);
 // ---- Mappings -----
 
 // Navigation & History
-settings.scrollStepSize = 300;
 map("J", "P"); // page down
 map("K", "U"); // page up
+settings.scrollStepSize = 300;
+
 map("h", "S"); // History Back/Forward
 map("l", "D");
 map("H", "[["); // Next/Prev Page
