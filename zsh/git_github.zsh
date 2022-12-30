@@ -12,7 +12,7 @@ alias pull="git pull"
 
 # go to git root https://stackoverflow.com/a/38843585
 # shellcheck disable=2031
-alias g='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
+alias g.='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
 alias gg="git checkout -" # go to last branch, analogues to `zz` switching to last directory
 
 # open GitHub repo
@@ -26,13 +26,13 @@ alias ghi='open "$(getGithubURL)/issues"'
 
 # git log
 # append `true` to avoid exit code 141: https://www.ingeniousmalarkey.com/2016/07/git-log-exit-code-141.html
-alias gl="git log --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; true"
+alias gl="git log --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; true"
 
 # git log (interactive)
 function gli() {
 	local hash key_pressed selected
 	selected=$(
-		git log --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' |
+		git log --all --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' |
 			fzf -0 \
 				--query="$1" \
 				--ansi \

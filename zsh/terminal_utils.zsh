@@ -113,10 +113,17 @@ function settings () {
 	fi )
 }
 
-# copies last commands
+# copies last command
 function lc (){
 	history | tail -n1 | cut -c8- | sed 's/"/\\\"/g' | sed "s/'/\\\'/g" | xargs | pbcopy
 	echo "Copied."
+}
+
+# saves last command in Drafts
+function lcd (){
+	local drafts_inbox="$HOME/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox"
+	history | tail -n1 | cut -c8- | sed 's/"/\\\"/g' | sed "s/'/\\\'/g" > "$drafts_inbox"
+	echo "Saved in Drafts."
 }
 
 # copies result of last command

@@ -51,13 +51,10 @@ zle -N copy-buffer
 
 function dir-cycler () {
 	if [[ "$PWD/" == "$WD" ]]; then
-		echo
 		cd "$DOTFILE_FOLDER"
 	elif [[ "$PWD/" == "$DOTFILE_FOLDER" ]]; then
-		echo
 		cd "$VAULT_PATH"
 	else
-		echo
 		cd "$WD"
 	fi
 	zle reset-prompt
