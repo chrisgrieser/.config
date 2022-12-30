@@ -6,7 +6,7 @@ keymap({ "o", "x" }, "aR", function() require("various-textobjs").jsRegex(false)
 keymap({ "o", "x" }, "iR", function() require("various-textobjs").jsRegex(true) end, { desc = "inner regex textobj" })
 
 -- regex opener
-keymap("n", "gR", function()
+keymap("n", "g/", function()
 	require("various-textobjs").jsRegex(false) -- set visual selection to outer regex
 	normal('"zy')
 	require("various-textobjs").jsRegex(true) -- select inner regex for easy replacement
