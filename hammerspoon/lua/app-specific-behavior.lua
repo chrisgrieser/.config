@@ -1,6 +1,7 @@
 require("lua.utils")
 require("lua.window-management")
 require("lua.system-and-cron")
+local tableContains = hs.fnutils.contains
 --------------------------------------------------------------------------------
 
 local function unHideAll()
@@ -19,7 +20,7 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 		"alacritty",
 		"Alacritty",
 	}
-	if not hs.fnutils.contains(appsWithTransparency, appName) then return end
+	if not tableContains(appsWithTransparency, appName) then return end
 
 	if eventType == aw.activated or eventType == aw.launched then
 		-- some apps like neovide do not set a "launched" signal, so the delayed
@@ -36,14 +37,28 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 end):start()
 
 ---automatically apply per-app auto-tiling of the windows of the app
----@param windowFilter hs.window.filter
-local function autoTile(windowFilter)
-	local wins = windowFilter:getWindows()
+---@param windowSource hs.window.filter|string windowFilter OR string representing app name
+local function autoTile(windowSource)
+	---necessary b/c windowfilter is null when not triggered via
+	---windowfilter-subscription-event. This check allows for using app names,
+	---which enables using the autotile-function e.g. within app watchers
+	---@param _windowSource hs.window.filter|string windowFilter OR string representing app name
+	---@return hs.window[]
+	local function getWins(_windowSource)
+		if type(_windowSource) == "string" then
+			return app(_windowSource):allWindows()
+		else
+			return _windowSource:getWindows()
+		end
+	end
+	local wins = getWins(windowSource)
+
 	if #wins == 0 and frontAppName() == "Finder" then
 		-- prevent quitting when window is created imminently
 		runWithDelays(0.2, function()
 			-- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
-			if #windowFilter:getWindows() == 0 then app("Finder"):kill() end
+			-- getWins() again to check if window count has changed in the meantime
+			if #getWins(windowSource) == 0 then app("Finder"):kill() end
 		end)
 	elseif #wins == 1 then
 		if isProjector() then
@@ -95,9 +110,9 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- SPOTIFY
--- Pause Spotify on launch
--- Resume Spotify on quit
-local function spotifyTUI(toStatus) -- has to be non-local function
+---play/pause spotify with spotifyTUI
+---@param toStatus string pause|play
+local function spotifyTUI(toStatus)
 	local currentStatus = hs.execute(
 		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s"
 	)
@@ -112,17 +127,15 @@ local function spotifyTUI(toStatus) -- has to be non-local function
 	end
 end
 
+-- auto-pause Spotify on launch of apps w/ sound
+-- auto-resume Spotify on quit of apps w/ sound
 spotifyAppWatcher = aw.new(function(appName, eventType)
-	if
-		appName == "YouTube"
-		or appName == "zoom.us"
-		or appName == "FaceTime"
-		or appName == "Twitch"
-		or appName == "Netflix"
-	then
+	if isProjector() then return end -- never start music when on projector
+	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix" }
+	if tableContains(appsWithSound, appName) then
 		if eventType == aw.launched then
 			spotifyTUI("pause")
-		elseif eventType == aw.terminated and not isProjector() then
+		elseif eventType == aw.terminated then
 			spotifyTUI("play")
 		end
 	end
@@ -156,7 +169,6 @@ wf_browser_all = wf.new("Brave Browser")
 -- MIMESTREAM
 -- split when second window is opened
 -- change sizing back, when back to one window
-
 wf_mimestream = wf.new("Mimestream")
 	:setOverrideFilter({
 		allowRoles = "AXStandardWindow",
@@ -258,7 +270,7 @@ finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 	if not (appName == "Finder") then return end
 
 	if eventType == aw.activated then
-		autoTile(wf_finder) -- sometimes window creation is not triggered properly
+		autoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
 		bringAllToFront()
 		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
 
@@ -276,7 +288,7 @@ end):start()
 
 -- ZOOM
 -- close first window, when second is open
--- don't leave tab behind when opening zoom
+-- don't leave browser tab behind when opening zoom
 wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
 	applescript([[
 			tell application "Brave Browser"
@@ -318,7 +330,9 @@ end):start()
 
 --------------------------------------------------------------------------------
 
--- DRAFTS: Hide Toolbar & set proper workspace
+-- DRAFTS
+-- - Hide Toolbar
+-- - set workspace
 draftsWatcher = aw.new(function(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
 
@@ -335,6 +349,8 @@ end):start()
 
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR
+-- - auto-paste and lint content
+-- - skip new file creaton dialog
 wf_script_editor = wf.new("Script Editor"):subscribe(wf.windowCreated, function(newWin)
 	if newWin:title() == "Open" then
 		keystroke({ "cmd" }, "n")
@@ -381,7 +397,7 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- SHOTTR
--- Auto-select Arrow-Tool
+-- Auto-select Arrow-Tool on start
 wf_shottr = wf.new("Shottr"):subscribe(wf.windowCreated, function(newWindow)
 	if newWindow:title() == "Preferences" then return end
 	runWithDelays(0.1, function() keystroke({}, "a") end)
