@@ -115,18 +115,34 @@ function M.currentFileStatusline()
 	elseif curFile == altFile then
 		local curParent = expand("%:p:h:t")
 		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
-		return curParent .. "/" .. curFile
+		return "% "..curParent .. "/" .. curFile
 	end
 	return icon .. curFile
 end
 
+---(HACK) get true wincount, since scrollview-like plugins counts as a window,
+---but only appears if buffer is longer than window https://github.com/dstein64/nvim-scrollview/issues/83
+local function trueWincount()
+	local wincount = 0
+	for i = 1, fn.winnr("$"), 1 do
+		local win = api.nvim_win_get_config(fn.win_getid(i))
+		if not win.external and win.focusable then wincount = wincount + 1 end
+	end
+	return wincount
+end
+
+---shows info on alternate window/buffer/oldfile in that priority
 function M.alternateFileStatusline()
 	local maxLen = 15
 	local altFile = expand("#:t")
 	local curFile = expand("%:t")
 	local altPath = expand("#:p")
 	local curPath = expand("%:p")
-	if altPath == curPath then
+
+	if trueWincount() > 1 then
+		local altWindow = fn.bufname(fn.winbufnr(fn.winnr("#")))
+		return " " .. altWindow
+	elseif altPath == curPath then
 		return ""
 	elseif altFile == "" then
 		local lastOldfile = vim.v.oldfiles[2]:gsub(".*/", "") -- 1 is the current file
@@ -134,24 +150,16 @@ function M.alternateFileStatusline()
 	elseif curFile == altFile then
 		local altParent = expand("#:p:h:t")
 		if #altParent > maxLen then altParent = altParent:sub(1, maxLen) .. "…" end
-		return altParent .. "/" .. altFile
+		return "# "..altParent .. "/" .. altFile
 	end
 	return "# " .. altFile
 end
 
----switch window/buffer/firstOldfile in that priority
+---switch to alternate window/buffer/oldfile in that priority
 function M.altBufferWindow()
-	-- HACK: since scrollview-like plugins counts as a window, but only appears if buffer is
-	-- longer than window https://github.com/dstein64/nvim-scrollview/issues/83
-	local wincount = 0
-	for i = 1, fn.winnr("$"), 1 do
-		local win = api.nvim_win_get_config(fn.win_getid(i))
-		if not win.external and win.focusable then wincount = wincount + 1 end
-	end
-
 	cmd.nohlsearch()
-	if wincount > 1 then
-		normal("<C-w>w") -- next window
+	if trueWincount() > 1 then
+		cmd.wincmd("p") -- previous window
 	elseif expand("#") ~= "" then
 		cmd.buffer("#") -- alt buffer
 	else
@@ -159,7 +167,7 @@ function M.altBufferWindow()
 	end
 end
 
----Close tabs, window, buffer in that order if there is more than one of the type
+---Close tabs/window/buffer in that priority
 function M.betterClose()
 	-- to not include notices in window count
 	local hasNotify = pcall(require, "notify")
