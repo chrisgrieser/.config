@@ -602,7 +602,7 @@ echo "$backup"</string>
 		<key>877D0FB8-C312-4433-A6EF-6CA2A683D76F</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>175</real>
 			<key>ypos</key>
@@ -667,20 +667,15 @@ echo "$backup"</string>
 	<array/>
 	<key>variables</key>
 	<dict>
-		<key>dotfile_bkp_destination</key>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/dotfile bkp/</string>
 		<key>dotfile_folder</key>
 		<string>~/.config/</string>
-		<key>max_number_of_bkps</key>
-		<string>20</string>
 		<key>working_directory</key>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
-		<string>dotfile_folder</string>
 		<string>working_directory</string>
-		<string>dotfile_bkp_destination</string>
+		<string>dotfile_folder</string>
 	</array>
 	<key>version</key>
 	<string></string>

@@ -226,20 +226,19 @@ autocmd("BufReadPost", {
 function M.undoDuration()
 	local now = os.time() -- saved in epoch secs
 	local minsPassed = math.floor((now - b.timeOpened) / 60)
-	local resetLabel = "last open (~" .. tostring(minsPassed) .. "m ago)"
-	local selection = { resetLabel, "15m", "1h", "4h", "24h", "back to present" }
+	local resetLabel = "~" .. tostring(minsPassed) .. "m ago)"
+	local selection = { resetLabel, "15m", "1h", "4h", "24h", " present" }
 
-	vim.ui.select(selection, { prompt = "Undo the last…" }, function(choice)
+	vim.ui.select(selection, { prompt = "Undo…" }, function(choice)
 		if not choice then
 			return
-		elseif choice:find("last open") then
+		elseif choice:find("ago") then
 			cmd.earlier(minsPassed .. "m")
 		elseif choice:find("present") then
-			cmd.later(tostring(bo.undolevels)) -- redo as much as there are undolevels
+			cmd.later(tostring(opt.undolevels:get())) -- redo as much as there are undolevels
 		else
 			cmd.earlier(choice)
 		end
-		vim.notify("Restored to " .. choice .. " earlier.")
 	end)
 end
 

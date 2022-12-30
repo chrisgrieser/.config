@@ -70,31 +70,6 @@ function acp() {
 	fi
 }
 
-function amend() {
-	local COMMIT_MSG="$*"
-	local LAST_COMMIT_MSG
-	LAST_COMMIT_MSG=$(git log -1 --pretty=%B | head -n1)
-	local MSG_LENGTH=${#COMMIT_MSG}
-	if [[ $MSG_LENGTH -gt 50 ]]; then
-		echo "Commit Message too long ($MSG_LENGTH chars)."
-		[[ "$TERM" != "alacritty" ]] && return 1
-		print -z "\"$COMMIT_MSG\""
-		return 1
-	fi
-	if [[ -z "$COMMIT_MSG" ]]; then
-		# prefile last commit message
-		# shellcheck disable=1087
-		FUNC_NAME="$funcstack[1]" # https://stackoverflow.com/a/62527825
-		print -z "$FUNC_NAME \"$LAST_COMMIT_MSG\""
-		return 0
-	else
-		git commit --amend -m "$COMMIT_MSG" # directly set new commit message
-	fi
-	# ⚠️ only when working alone – might lead to conflicts when working
-	# with collaboraters: https://stackoverflow.com/a/255080
-	git push --force
-}
-
 #───────────────────────────────────────────────────────────────────────────────
 
 function gittree() { (
@@ -196,7 +171,8 @@ function rel() {
 # search for [g]it [d]eleted [f]ile -> https://stackoverflow.com/a/42582877
 function gdf() {
 	local deleted_path deletion_commit
-
+	if ! command -v bat &>/dev/null; then echo "bat not installed." && exit 1; fi
+	
 	# goto git root
 	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
 
@@ -225,6 +201,6 @@ function gdf() {
 	if [[ "$DECISION:l" == "c" ]]; then
 		git checkout "$last_commit" -- "$deleted_path"
 	elif [[ "$DECISION:l" == "o" ]]; then
-		git show "$last_commit:$deleted_path" | less
+		git show "$last_commit:$deleted_path" | bat
 	fi
 }

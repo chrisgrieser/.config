@@ -69,14 +69,14 @@ local function selectionCount()
 	local starts = fn.line("v")
 	local ends = fn.line(".")
 	local lines = starts <= ends and ends - starts + 1 or starts - ends + 1
-	return "/  " .. tostring(lines) .. "l " .. tostring(fn.wordcount().visual_chars) .. "c"
+	return "/  " .. tostring(lines) .. "L " .. tostring(fn.wordcount().visual_chars) .. "c"
 end
 
 --------------------------------------------------------------------------------
 
 -- nerdfont: 'nf-ple'; since separators look off in Terminal
-local secSeparators = isGui() and { left = " ", right = " " } or { left = "", right = "" }
-local winSecSeparators = isGui() and { left = "", right = "" } or { left = "", right = "" }
+local bottomSeparators = isGui() and { left = " ", right = " " } or { left = "", right = "" }
+local topSeparators = isGui() and { left = "", right = "" } or { left = "", right = "" }
 
 require("lualine").setup {
 	sections = {
@@ -110,7 +110,7 @@ require("lualine").setup {
 			{
 				navic.get_location,
 				cond = showBreadcrumbs,
-				section_separators = winSecSeparators,
+				section_separators = topSeparators,
 			},
 		},
 		lualine_c = {
@@ -131,11 +131,11 @@ require("lualine").setup {
 			},
 		},
 		lualine_y = {
-			{ debuggerStatus, section_separators = winSecSeparators },
+			{ debuggerStatus, section_separators = topSeparators },
 		},
 		lualine_z = {
-			{ require("recorder").recordingStatus, section_separators = winSecSeparators },
-			{ require("recorder").displaySlots, section_separators = winSecSeparators },
+			{ require("recorder").recordingStatus, section_separators = topSeparators },
+			{ require("recorder").displaySlots, section_separators = topSeparators },
 		},
 	},
 	options = {
@@ -151,7 +151,7 @@ require("lualine").setup {
 		},
 		globalstatus = true,
 		component_separators = { left = "", right = "" },
-		section_separators = secSeparators,
+		section_separators = bottomSeparators,
 		extensions = { "nvim-dap-ui" },
 		disabled_filetypes = {
 			statusline = {},
