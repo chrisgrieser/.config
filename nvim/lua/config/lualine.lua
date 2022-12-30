@@ -13,46 +13,6 @@ local function lsp_progress()
 	return client .. progress .. "%% " .. task
 end
 
-local function alternateFile()
-	local maxLen = 15
-	local altFile = expand("#:t")
-	local curFile = expand("%:t")
-	local altPath = expand("#:p")
-	local curPath = expand("%:p")
-	if altPath == curPath then
-		return ""
-	elseif altFile == "" then
-		local lastOldfile = vim.v.oldfiles[2]:gsub(".*/", "") -- 1 is the current file
-		return " " .. lastOldfile
-	elseif curFile == altFile then
-		local altParent = expand("#:p:h:t")
-		if #altParent > maxLen then altParent = altParent:sub(1, maxLen) .. "…" end
-		return altParent .. "/" .. altFile
-	end
-	return "# " .. altFile
-end
-
-local function currentFile() -- using this function instead of default filename, since this does not show "[No Name]" for Telescope
-	local maxLen = 15
-	local altFile = expand("#:t")
-	local curFile = expand("%:t")
-	local icon = bo.modifiable and "%% " or " "
-	local ft = bo.filetype
-	if bo.buftype == "terminal" then
-		local mode = fn.mode() == "t" and "[N]" or "[T]"
-		return " Terminal " .. mode
-	elseif curFile == "" and ft == "" then
-		return " "
-	elseif curFile == "" and ft ~= "" then
-		return " " .. ft -- special windows, e.g., lazy
-	elseif curFile == altFile then
-		local curParent = expand("%:p:h:t")
-		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
-		return curParent .. "/" .. curFile
-	end
-	return icon .. curFile
-end
-
 local function mixedIndentation()
 	local ignoredFts = { "css", "markdown", "sh", "lazy", "" }
 	if vim.tbl_contains(ignoredFts, bo.filetype) or fn.mode() == "i" or bo.buftype == "terminal" then
@@ -120,8 +80,8 @@ local winSecSeparators = isGui() and { left = "", right = "" } or { left =
 
 require("lualine").setup {
 	sections = {
-		lualine_a = { { currentFile } },
-		lualine_b = { { alternateFile } },
+		lualine_a = { { qol.currentFileStatusline } },
+		lualine_b = { { qol.alternateFileStatusline } },
 		lualine_c = {
 			{
 				"searchcount",
