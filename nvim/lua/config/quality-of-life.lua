@@ -148,30 +148,31 @@ local function altOldfile()
 end
 
 ---shows info on alternate window/buffer/oldfile in that priority
-g.altWindow = ""
+g.altFile = ""
 function M.alternateFileStatusline()
 	local maxLen = 15
 	local altFile = expand("#:t")
-	local curFile = expand("%:t")
+	local curFile = expand("%:t") 
 
 	-- insert mode completion windows also get recognized as altwindow
 	-- TODO find method of expluding them better?
-	if trueWincount() > 1 then
-		if fn.mode() ~= "i" then
-			g.altWindow = fn.bufname(fn.winbufnr(fn.winnr("#")))
-		end
-		return "  " .. g.altWindow
-	elseif altFile == "" and not altOldfile() then -- no oldfile, no altfile
-		return ""
+	if fn.mode() == "i" then
+		return g.altFile
+	elseif trueWincount() > 1 then
+		local altWindow = fn.bufname(fn.winbufnr(fn.winnr("#")))
+		g.altFile = "  " .. altWindow
+	elseif altFile == "" and not altOldfile() then -- no oldfile and after start
+		g.altFile = ""
 	elseif altFile == "" and altOldfile() then
-		local lastOldfile = vim.fs.basename(altOldfile())
-		return " " .. lastOldfile
-	elseif curFile == altFile then
+		g.altFile = " " .. vim.fs.basename(altOldfile())
+	elseif curFile == altFile then -- same name, different file
 		local altParent = expand("#:p:h:t")
 		if #altParent > maxLen then altParent = altParent:sub(1, maxLen) .. "…" end
-		return "# " .. altParent .. "/" .. altFile
+		g.altFile = "# " .. altParent .. "/" .. altFile
+	else
+		g.altFile = "# " .. altFile
 	end
-	return "# " .. altFile
+	return g.altFile
 end
 
 ---switch to alternate window/buffer/oldfile in that priority
@@ -188,7 +189,7 @@ end
 
 ---Close window/buffer in that priority
 function M.betterClose()
-	-- to not include notices 
+	-- to not include notices
 	local hasNotify = pcall(require, "notify")
 	if hasNotify then require("notify").dismiss() end
 
