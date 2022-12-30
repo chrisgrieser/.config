@@ -244,7 +244,7 @@ end)
 -- Man leader hotkey (for Karabiner)
 -- work around necessary, cause alacritty creates multiple instances, i.e.
 -- multiple applications all with the name "alacritty", preventing conventional
--- methods for focussing a window via AppleScript
+-- methods for focussing a window via AppleScript or `open`
 uriScheme("focus-help", function()
 	local win = hs.window.find("man:")
 	if not win then

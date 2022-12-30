@@ -119,6 +119,14 @@ rules:
         from:
           pointing_button: button4
         to:
+          # not done via keypress so it works in insert mode as well 
+          # (where cmd+left would move the cursor)
+          - shell_command: |
+              osascript -e '
+              tell application "System Events" to tell process "Brave Browser"
+                set frontmost to true
+                click menu item "Back" of menu "History" of menu bar 1
+              end tell'
           - key_code: escape # to leave insert mode (Vimium)
           - key_code: left_arrow
             modifiers:
