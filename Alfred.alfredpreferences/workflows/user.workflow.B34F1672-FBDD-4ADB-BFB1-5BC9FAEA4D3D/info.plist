@@ -75,6 +75,21 @@
 				<false/>
 			</dict>
 		</array>
+		<key>1FE345F3-85DD-44F2-A273-950FBEEEA71F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>667546DE-C588-449B-BAD3-89DDFE26371A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>0914C46E-4A35-4C65-8501-F63F3947A40E</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2ABAE956-53E7-4846-B25A-EC53C6145476</key>
 		<array>
 			<dict>
@@ -157,6 +172,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>98AAE9F9-5186-4AFC-9B57-4FAE561C05AE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F4EA4D6A-5EC4-4ECE-9BF6-39E6A49C321E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9C5F7E53-FEEC-4EB3-A1DE-4E3C3C2A5488</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>667546DE-C588-449B-BAD3-89DDFE26371A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<array>
 			<dict>
@@ -193,6 +234,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D9F7B43C-9766-4330-B6D1-433CCF2ABB41</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1FE345F3-85DD-44F2-A273-950FBEEEA71F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<array>
 			<dict>
@@ -212,6 +266,19 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy URL to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F4EA4D6A-5EC4-4ECE-9BF6-39E6A49C321E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D9F7B43C-9766-4330-B6D1-433CCF2ABB41</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -276,6 +343,89 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>open -a 'Script Editor' "${1}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F4EA4D6A-5EC4-4ECE-9BF6-39E6A49C321E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:search_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching for AppleScript dictionaries…</string>
+				<key>script</key>
+				<string>readonly cache="${alfred_workflow_cache}/cache.json"
+
+# If cache does not exist, build it now
+if [[ ! -f "${cache}" ]]; then
+  osascript -e "tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"rebuild_cache\" in workflow \"${alfred_workflow_bundleid}\""
+
+  until [[ -f "${cache}" ]]; do
+    sleep 0.2
+  done
+fi
+
+cat "${cache}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>AppleScript Dictionaries</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>98AAE9F9-5186-4AFC-9B57-4FAE561C05AE</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -330,9 +480,11 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>qlmanage -p "{query}"</string>
+				<string>readonly cache="${alfred_workflow_cache}/cache.json"
+
+[[ -n "$(find "${cache}" -mtime +15)" ]] &amp;&amp; echo -n 'REBUILD_CACHE'</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
@@ -341,58 +493,85 @@
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>7099D02E-6857-4A1B-ABE6-8653C16F6A49</string>
+			<string>D9F7B43C-9766-4330-B6D1-433CCF2ABB41</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>REBUILD_CACHE</string>
+						<key>outputlabel</key>
+						<string>Rebuild cache</string>
+						<key>uid</key>
+						<string>0914C46E-4A35-4C65-8501-F63F3947A40E</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Keep current cache</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>1FE345F3-85DD-44F2-A273-950FBEEEA71F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ch</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
+				<integer>102</integer>
 				<key>script</key>
-				<string></string>
+				<string>readonly cache="${alfred_workflow_cache}/cache.json"
+mkdir -p "$(dirname "${cache}")"
+
+IFS=$'\n' read -d '' -rA dict_array &lt; &lt;(find '/Applications' "${HOME}/Applications" '/System/Applications' '/System/Cryptexes/App/System/Applications' '/System/Library/CoreServices/' '/System/Library/ScriptingAdditions' '/System/Library/ScriptingDefinitions' '/System/Library/PrivateFrameworks' -name '*.sdef' 2&gt; /dev/null | grep 'Contents/Resources')
+
+osascript -l JavaScript -e '
+  function run(argv) {
+    return JSON.stringify({
+      "items": argv.map(dict =&gt; {
+        const app_path = $(dict).stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.js
+
+        return {
+          "uid": dict,
+          "type": "file",
+          "title": $(app_path).lastPathComponent.stringByDeletingPathExtension.js,
+          "subtitle": dict,
+          "icon": { "path": app_path, "type": "fileicon" },
+          "arg": dict
+        }})
+      })
+    }
+' "${dict_array[@]}" &gt; "${cache}"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>cheatsheet-pdfs.js</string>
-				<key>subtext</key>
 				<string></string>
-				<key>title</key>
-				<string>Search Cheatsheet PDFs</string>
 				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>D098F778-136C-45DE-A526-93C74F0CDEC3</string>
+			<string>667546DE-C588-449B-BAD3-89DDFE26371A</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -446,6 +625,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>rebuild_cache</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>9C5F7E53-FEEC-4EB3-A1DE-4E3C3C2A5488</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -491,27 +685,6 @@
 			<string>1CA4905C-0482-4517-93A3-656ACFA985CD</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -576,6 +749,78 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ch</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>cheatsheet-pdfs.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search Cheatsheet PDFs</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>D098F778-136C-45DE-A526-93C74F0CDEC3</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>qlmanage -p "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>7099D02E-6857-4A1B-ABE6-8653C16F6A49</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
 				<string>lua</string>
@@ -614,40 +859,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
+				<key>skipvarencode</key>
 				<false/>
-				<key>transient</key>
-				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>147B74A7-0701-400F-9336-3E942E809AB8</string>
+			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -748,6 +974,46 @@
 			<string>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>147B74A7-0701-400F-9336-3E942E809AB8</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -918,10 +1184,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>147B74A7-0701-400F-9336-3E942E809AB8</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>695</real>
+			<real>575</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>720</real>
 		</dict>
 		<key>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</key>
 		<dict>
@@ -942,6 +1210,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>245</real>
+		</dict>
+		<key>1FE345F3-85DD-44F2-A273-950FBEEEA71F</key>
+		<dict>
+			<key>xpos</key>
+			<real>790</real>
+			<key>ypos</key>
+			<real>35</real>
 		</dict>
 		<key>2ABAE956-53E7-4846-B25A-EC53C6145476</key>
 		<dict>
@@ -974,6 +1249,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>1125</real>
 		</dict>
+		<key>667546DE-C588-449B-BAD3-89DDFE26371A</key>
+		<dict>
+			<key>note</key>
+			<string>Rebuild cache</string>
+			<key>xpos</key>
+			<real>1000</real>
+			<key>ypos</key>
+			<real>45</real>
+		</dict>
 		<key>7099D02E-6857-4A1B-ABE6-8653C16F6A49</key>
 		<dict>
 			<key>colorindex</key>
@@ -981,23 +1265,43 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Quicklook</string>
 			<key>xpos</key>
-			<real>560</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>430</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>425</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>720</real>
+		</dict>
+		<key>98AAE9F9-5186-4AFC-9B57-4FAE561C05AE</key>
+		<dict>
+			<key>note</key>
+			<string>List AppleScript dictionaries</string>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
+		<key>9C5F7E53-FEEC-4EB3-A1DE-4E3C3C2A5488</key>
+		<dict>
+			<key>xpos</key>
+			<real>790</real>
+			<key>ypos</key>
+			<real>165</real>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>575</real>
 		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>
@@ -1015,9 +1319,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>cheatsheet PDFs</string>
 			<key>xpos</key>
-			<real>360</real>
+			<real>415</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>430</real>
+		</dict>
+		<key>D9F7B43C-9766-4330-B6D1-433CCF2ABB41</key>
+		<dict>
+			<key>note</key>
+			<string>Check if cache is old</string>
+			<key>xpos</key>
+			<real>640</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<dict>
@@ -1025,6 +1338,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<integer>8</integer>
 			<key>xpos</key>
 			<real>30</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
+		<key>F4EA4D6A-5EC4-4ECE-9BF6-39E6A49C321E</key>
+		<dict>
+			<key>note</key>
+			<string>Open dictionary</string>
+			<key>xpos</key>
+			<real>460</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>

@@ -27,27 +27,27 @@ keymap(
 	{ "o", "x" },
 	"il",
 	function() require("various-textobjs").mdlink(true) end,
-	{ desc = "inner md link textobj" }
+	{ desc = "inner md link textobj", buffer = true }
 )
 keymap(
 	{ "o", "x" },
 	"al",
 	function() require("various-textobjs").mdlink(false) end,
-	{ desc = "outer md link textobj" }
+	{ desc = "outer md link textobj", buffer = true }
 )
 
--- code block textobj
+-- iE/aE: code block textobj
 keymap(
 	{ "o", "x" },
-	"iC",
+	"iE",
 	function() require("various-textobjs").mdFencedCodeBlock(true) end,
-	{ desc = "inner md code block textobj" }
+	{ desc = "inner md code block textobj", buffer = true }
 )
 keymap(
 	{ "o", "x" },
-	"aC",
+	"aE",
 	function() require("various-textobjs").mdFencedCodeBlock(false) end,
-	{ desc = "outer md code block textobj" }
+	{ desc = "outer md code block textobj", buffer = true }
 )
 
 --------------------------------------------------------------------------------
