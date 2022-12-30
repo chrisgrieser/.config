@@ -102,6 +102,7 @@ return {
 			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
+			"petertriho/cmp-git", -- git issues/PRs
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet 
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
