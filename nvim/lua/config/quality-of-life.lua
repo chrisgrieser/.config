@@ -133,13 +133,13 @@ local function trueWincount()
 end
 
 ---get the alternate oldfile, accounting for non-existing files etc.
----@return string|nil path of oldfile, empty if none exists in all oldfiles
+---@return string|nil path of oldfile, nil if none exists in all oldfiles
 local function altOldfile()
 	local i = 1
 	local oldfile
 	repeat
 		i = i + 1 -- start at [2] since [1] would be current file
-		if i > #vim.v.oldfiles then return "" end
+		if i > #vim.v.oldfiles then return nil end
 		oldfile = vim.v.oldfiles[i]
 		local fileExists = fn.filereadable(oldfile) == 1
 	until fileExists -- check for deleted, renamed, or irregular files
@@ -151,17 +151,14 @@ function M.alternateFileStatusline()
 	local maxLen = 15
 	local altFile = expand("#:t")
 	local curFile = expand("%:t")
-	local altPath = expand("#:p")
-	local curPath = expand("%:p")
 
 	if trueWincount() > 1 then
 		local altWindow = fn.bufname(fn.winbufnr(fn.winnr("#")))
-		return " " .. altWindow
-	elseif altPath == curPath then
+		return "  " .. altWindow
+	elseif altFile == "" and not altOldfile() then -- no oldfile, no altfile
 		return ""
-	elseif altFile == "" then
+	elseif altFile == "" and altOldfile() then
 		local lastOldfile = vim.fs.basename(altOldfile())
-		if lastOldfile == "" then return "" end
 		return " " .. lastOldfile
 	elseif curFile == altFile then
 		local altParent = expand("#:p:h:t")
@@ -185,7 +182,7 @@ end
 
 ---Close tabs/window/buffer in that priority
 function M.betterClose()
-	-- to not include notices in window count
+	-- to not include notices 
 	local hasNotify = pcall(require, "notify")
 	if hasNotify then require("notify").dismiss() end
 
@@ -199,9 +196,8 @@ function M.betterClose()
 	if moreThanOneTab then
 		cmd.tabclose()
 	elseif #buffers == 2 then
-		cmd.bwipeout() -- only method to clear altfile in this case
+		cmd.bwipeout() -- apparently only method to clear altfile in this case
 	elseif #buffers > 1 then
-		local bufToDel = expand("%:p")
 		if unsavedFile then
 			cmd.bwipeout()
 		else
@@ -209,13 +205,7 @@ function M.betterClose()
 		end
 
 		-- ensure new alt file points towards open, non-active buffer
-		local i = 0
-		local newAltBuf
-		repeat
-			i = i + 1
-			newAltBuf = buffers[i].name
-		until newAltBuf ~= expand("%:p") and newAltBuf ~= bufToDel
-
+		local newAltBuf = altOldfile()
 		fn.setreg("#", newAltBuf)
 	else
 		vim.notify("Only one buffer open.", logWarn)
