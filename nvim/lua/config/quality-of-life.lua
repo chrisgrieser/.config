@@ -135,14 +135,15 @@ end
 ---get the alternate oldfile, accounting for non-existing files etc.
 ---@return string|nil path of oldfile, nil if none exists in all oldfiles
 local function altOldfile()
-	local i = 1
+	local i = 0
 	local oldfile
 	repeat
-		i = i + 1 -- start at [2] since [1] would be current file
+		i = i + 1
 		if i > #vim.v.oldfiles then return nil end
 		oldfile = vim.v.oldfiles[i]
 		local fileExists = fn.filereadable(oldfile) == 1
-	until fileExists -- check for deleted, renamed, or irregular files
+		local isCurrentFile = oldfile == expand("%:p")
+	until fileExists and not isCurrentFile -- check for deleted, renamed, or irregular files
 	return oldfile
 end
 

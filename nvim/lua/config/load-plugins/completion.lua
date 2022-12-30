@@ -32,7 +32,6 @@ local tabnine = { name = "cmp_tabnine", keyword_length = 3 }
 local snippets = { name = "luasnip" }
 local lsp = { name = "nvim_lsp" }
 local treesitter = { name = "treesitter" }
-local cc = { name = "conventionalcommits" }
 local git = { name = "git" } -- commits with ":", issues/PRs with "#"
 
 local defaultSources = {
@@ -88,9 +87,164 @@ local source_icons = {
 	path = "",
 	omni = "", -- since only used for folders right now
 	git = "",
-	conventionalcommits = "",
 }
+local function cmpconfig()
+	local cmp = require("cmp")
 
+	cmp.setup {
+		snippet = {
+			-- REQUIRED a snippet engine must be specified and installed
+			expand = function(args) require("luasnip").lsp_expand(args.body) end,
+		},
+		window = {
+			completion = {
+				side_padding = 0,
+				border = borderStyle,
+			},
+			documentation = {
+				border = borderStyle,
+			},
+		},
+		mapping = cmp.mapping.preset.insert {
+			["<CR>"] = cmp.mapping.confirm { select = true },
+			["<S-Up>"] = cmp.mapping.scroll_docs(-4),
+			["<S-Down>"] = cmp.mapping.scroll_docs(4),
+
+			-- expand or jump in luasnip snippet https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
+			["<Tab>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_next_item()
+				else
+					fallback()
+				end
+			end, { "i", "s" }),
+			["<S-Tab>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_prev_item()
+				else
+					fallback()
+				end
+			end, { "i", "s" }),
+		},
+		formatting = {
+			fields = { "kind", "abbr", "menu" }, -- order of the fields
+			format = function(entry, vim_item)
+				vim_item.kind = " " .. kind_icons[vim_item.kind] .. " "
+				vim_item.menu = source_icons[entry.source.name]
+				return vim_item
+			end,
+		},
+		-- DEFAULT SOURCES
+		sources = cmp.config.sources(defaultSources),
+	}
+	--------------------------------------------------------------------------------
+
+	-- lua and toml
+	local defaultAndNerdfont = copyTable(defaultSources)
+	table.insert(defaultAndNerdfont, 5, nerdfont)
+
+	-- Filetype specific Completion
+	cmp.setup.filetype("lua", {
+		-- disable leading "-"
+		enabled = function()
+			local lineContent = fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
+			return not (lineContent:match(" %-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
+		end,
+		sources = cmp.config.sources(defaultAndNerdfont),
+	})
+
+	-- also use nerdfont for starship config
+	cmp.setup.filetype("toml", {
+		sources = cmp.config.sources(defaultAndNerdfont),
+	})
+
+	-- css
+	local cssSources = copyTable(defaultSources)
+	cssSources = removeFromTable(cssSources, buffer) -- too much noise
+	cssSources = removeFromTable(cssSources, treesitter) -- laggy on big files
+	cmp.setup.filetype("css", {
+		sources = cmp.config.sources(cssSources),
+	})
+
+	-- markdown
+	local markdownSources = copyTable(defaultSources)
+	markdownSources = removeFromTable(markdownSources, tabnine) -- too much noise
+	table.insert(markdownSources, 1, path) -- for markdown images
+	cmp.setup.filetype("markdown", {
+		sources = cmp.config.sources(markdownSources),
+	})
+	local yamlSources = copyTable(defaultSources)
+	yamlSources = removeFromTable(yamlSources, buffer)
+	cmp.setup.filetype("yaml", {
+		sources = cmp.config.sources(yamlSources),
+	})
+
+	-- ZSH
+	local shellSources = copyTable(defaultSources)
+	table.insert(shellSources, 2, zsh)
+	table.insert(shellSources, 6, nerdfont)
+	cmp.setup.filetype("sh", {
+		sources = cmp.config.sources(shellSources),
+	})
+
+	-- bibtex
+	cmp.setup.filetype("bib", {
+		sources = cmp.config.sources {
+			snippets,
+			treesitter,
+			buffer,
+		},
+	})
+
+	-- plaintext (e.g., pass editing)
+	cmp.setup.filetype("text", {
+		sources = cmp.config.sources {
+			snippets,
+			buffer,
+			emojis,
+		},
+	})
+
+	-- gitcommit
+	cmp.setup.filetype("gitcommit", {
+		sources = cmp.config.sources({
+			git,
+			path,
+		}, { -- second array only relevant when no source from the first matches
+			emojis,
+		}),
+	})
+
+	cmp.setup.filetype("NeogitCommitMessage", {
+		sources = cmp.config.sources({
+			git,
+			path,
+		}, { -- second array only relevant when no source from the first matches
+			emojis,
+		}),
+	})
+	--------------------------------------------------------------------------------
+	-- Command Line Completion
+	cmp.setup.cmdline({ "/", "?" }, {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = {},
+	})
+
+	cmp.setup.cmdline(":", {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources({
+			path,
+			{ name = "cmdline" },
+		}, { -- second array only relevant when no source from the first matches
+			{ name = "cmdline_history", keyword_length = 3 },
+		}),
+	})
+
+	-- Enable Completion in DressingInput
+	cmp.setup.filetype("DressingInput", {
+		sources =cmp.config.sources { { name = "omni" } },
+	})
+end
 --------------------------------------------------------------------------------
 
 return {
@@ -107,168 +261,12 @@ return {
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
 			"petertriho/cmp-git",
-			"davidsierradz/cmp-conventionalcommits",
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 			"hrsh7th/cmp-omni", -- omni for autocompletion in input prompts
 		},
-		config = function()
-			local cmp = require("cmp")
-
-			cmp.setup {
-				snippet = {
-					-- REQUIRED a snippet engine must be specified and installed
-					expand = function(args) require("luasnip").lsp_expand(args.body) end,
-				},
-				window = {
-					completion = {
-						side_padding = 0,
-						border = borderStyle,
-					},
-					documentation = {
-						border = borderStyle,
-					},
-				},
-				mapping = cmp.mapping.preset.insert {
-					["<CR>"] = cmp.mapping.confirm { select = true },
-					["<S-Up>"] = cmp.mapping.scroll_docs(-4),
-					["<S-Down>"] = cmp.mapping.scroll_docs(4),
-
-					-- expand or jump in luasnip snippet https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-				},
-				formatting = {
-					fields = { "kind", "abbr", "menu" }, -- order of the fields
-					format = function(entry, vim_item)
-						vim_item.kind = " " .. kind_icons[vim_item.kind] .. " "
-						vim_item.menu = source_icons[entry.source.name]
-						return vim_item
-					end,
-				},
-				-- DEFAULT SOURCES
-				sources = cmp.config.sources(defaultSources),
-			}
-			--------------------------------------------------------------------------------
-
-			-- lua and toml
-			local defaultAndNerdfont = copyTable(defaultSources)
-			table.insert(defaultAndNerdfont, 5, nerdfont)
-
-			-- Filetype specific Completion
-			cmp.setup.filetype("lua", {
-				-- disable leading "-"
-				enabled = function()
-					local lineContent = fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
-					return not (lineContent:match(" %-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
-				end,
-				sources = cmp.config.sources(defaultAndNerdfont),
-			})
-
-			-- also use nerdfont for starship config
-			cmp.setup.filetype("toml", {
-				sources = cmp.config.sources(defaultAndNerdfont),
-			})
-
-			-- css
-			local cssSources = copyTable(defaultSources)
-			cssSources = removeFromTable(cssSources, buffer) -- too much noise
-			cssSources = removeFromTable(cssSources, treesitter) -- laggy on big files
-			cmp.setup.filetype("css", {
-				sources = cmp.config.sources(cssSources),
-			})
-
-			-- markdown
-			local markdownSources = copyTable(defaultSources)
-			markdownSources = removeFromTable(markdownSources, tabnine) -- too much noise
-			table.insert(markdownSources, 1, path) -- for markdown images
-			cmp.setup.filetype("markdown", {
-				sources = cmp.config.sources(markdownSources),
-			})
-			local yamlSources = copyTable(defaultSources)
-			yamlSources = removeFromTable(yamlSources, buffer)
-			cmp.setup.filetype("yaml", {
-				sources = cmp.config.sources(yamlSources),
-			})
-
-			-- ZSH
-			local shellSources = copyTable(defaultSources)
-			table.insert(shellSources, 2, zsh)
-			table.insert(shellSources, 6, nerdfont)
-			cmp.setup.filetype("sh", {
-				sources = cmp.config.sources(shellSources),
-			})
-
-			-- bibtex
-			cmp.setup.filetype("bib", {
-				sources = cmp.config.sources {
-					snippets,
-					treesitter,
-					buffer,
-				},
-			})
-
-			-- plaintext (e.g., pass editing)
-			cmp.setup.filetype("text", {
-				sources = cmp.config.sources {
-					snippets,
-					buffer,
-					emojis,
-				},
-			})
-
-			cmp.setup.filetype("gitcommit", {
-				sources = cmp.config.sources ({
-					git,
-				}, { -- second array only relevant when no source from the first matches
-					path,
-					emojis,
-				}),
-			})
-
-			cmp.setup.filetype("NeogitCommitMessage", {
-				sources = cmp.config.sources ({
-					git,
-				}, { -- second array only relevant when no source from the first matches
-					path,
-					emojis,
-				}),
-			})
-			--------------------------------------------------------------------------------
-			-- Command Line Completion
-			cmp.setup.cmdline({ "/", "?" }, {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {},
-			})
-
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					path,
-					{ name = "cmdline" },
-				}, { -- second array only relevant when no source from the first matches
-					{ name = "cmdline_history", keyword_length = 3 },
-				}),
-			})
-
-			-- Enable Completion in DressingInput
-			require("cmp").setup.filetype("DressingInput", {
-				sources = require("cmp").config.sources { { name = "omni" } },
-			})
-		end,
+		config = cmpconfig,
 	},
 	{ -- git-related completion
 		"petertriho/cmp-git",
@@ -281,6 +279,9 @@ return {
 					issues = {
 						limit = 100,
 						state = "open", -- open, closed, all
+					},
+					mentions = {
+						limit = 100,
 					},
 					pull_requests = {
 						limit = 10,
