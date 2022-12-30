@@ -96,21 +96,75 @@ function M.bettergx()
 	setCursor(0, prevCur)
 end
 
+--------------------------------------------------------------------------------
+-- BUFFERS
+
+function M.currentFileStatusline()
+	local maxLen = 15
+	local altFile = expand("#:t")
+	local curFile = expand("%:t")
+	local icon = bo.modifiable and "%% " or " "
+	local ft = bo.filetype
+	if bo.buftype == "terminal" then
+		local mode = fn.mode() == "t" and "[N]" or "[T]"
+		return " Terminal " .. mode
+	elseif curFile == "" and ft == "" then
+		return " "
+	elseif curFile == "" and ft ~= "" then
+		return " " .. ft -- special windows, e.g., lazy
+	elseif curFile == altFile then
+		local curParent = expand("%:p:h:t")
+		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
+		return curParent .. "/" .. curFile
+	end
+	return icon .. curFile
+end
+
+function M.alternateFileStatusline()
+	local maxLen = 15
+	local altFile = expand("#:t")
+	local curFile = expand("%:t")
+	local altPath = expand("#:p")
+	local curPath = expand("%:p")
+	if altPath == curPath then
+		return ""
+	elseif altFile == "" then
+		local lastOldfile = vim.v.oldfiles[2]:gsub(".*/", "") -- 1 is the current file
+		return " " .. lastOldfile
+	elseif curFile == altFile then
+		local altParent = expand("#:p:h:t")
+		if #altParent > maxLen then altParent = altParent:sub(1, maxLen) .. "…" end
+		return altParent .. "/" .. altFile
+	end
+	return "# " .. altFile
+end
+
+---switch window/buffer/firstOldfile in that priority
+function M.altBufferWindow()
+	-- HACK: since scrollview-like plugins counts as a window, but only appears if buffer is
+	-- longer than window https://github.com/dstein64/nvim-scrollview/issues/83
+	local wincount = 0
+	for i = 1, fn.winnr("$"), 1 do
+		local win = api.nvim_win_get_config(fn.win_getid(i))
+		if not win.external and win.focusable then wincount = wincount + 1 end
+	end
+
+	cmd.nohlsearch()
+	if wincount > 1 then
+		normal("<C-w>w") -- next window
+	elseif expand("#") ~= "" then
+		cmd.buffer("#") -- alt buffer
+	else
+		cmd.edit(vim.v.oldfiles[2]) -- last oldfile
+	end
+end
+
 ---Close tabs, window, buffer in that order if there is more than one of the type
 function M.betterClose()
 	-- to not include notices in window count
 	local hasNotify = pcall(require, "notify")
 	if hasNotify then require("notify").dismiss() end
 
-	-- HACK: since scrollview-like plugins counts as a window, but only appears if buffer is
-	-- longer than window https://github.com/dstein64/nvim-scrollview/issues/83
-	-- local wincount = 0
-	-- for i = 1, fn.winnr("$"), 1 do
-	-- 	local win = api.nvim_win_get_config(fn.win_getid(i))
-	-- 	if not win.external and win.focusable then wincount = wincount + 1 end
-	-- end
-	--
-	-- local moreThanOneWin = wincount > 1
 	local moreThanOneTab = fn.tabpagenr("$") > 1
 	local buffers = fn.getbufinfo { buflisted = 1 }
 	local unsavedFile = expand("%") == ""
@@ -165,7 +219,7 @@ function M.undoDuration()
 		if not choice then
 			return
 		elseif choice:find("last open") then
-			cmd.earlier(minsPassed.."m")
+			cmd.earlier(minsPassed .. "m")
 		elseif choice:find("present") then
 			cmd.later(tostring(bo.undolevels)) -- redo as much as there are undolevels
 		else
@@ -202,7 +256,7 @@ function M.toggleWrap()
 	local opts = { buffer = true }
 	if wrapOn then
 		setlocal("wrap", false) -- soft wrap
-		setlocal("colorcolumn", getglobalopt("colorcolumn")) -- deactivate ruler
+		setlocal("colorcolumn", getglobalopt("colorcolumn")) -- reactivate ruler
 
 		local del = vim.keymap.del
 		del({ "n", "x" }, "H", opts)
@@ -228,7 +282,7 @@ end
 --------------------------------------------------------------------------------
 -- GIT
 
--- common shell options for fn.jobstart()
+-- options for fn.jobstart()
 local shellOpts = {
 	stdout_buffered = true,
 	stderr_buffered = true,
@@ -270,13 +324,13 @@ function M.addCommitPush(prefillMsg)
 			return
 		end
 
-		vim.notify("ﴻ add-commit-push…")
+		vim.notify(" add-commit-push…")
 		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
 	end)
 end
 
 function M.gitLink()
-	local repo = fn.system([[git remote -v]]):gsub(".*:(.-) %(.*", "%1")
+	local repo = fn.system([[git remote -v]]):gsub(".*:(.-)%.git .*", "%1")
 	local branch = fn.system([[git branch --show-current]]):gsub("\n", "")
 	if branch:find("^fatal: not a git repository") then
 		vim.notify("Not a git repository.", logWarn)

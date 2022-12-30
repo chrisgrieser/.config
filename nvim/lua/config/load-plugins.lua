@@ -102,8 +102,9 @@ return {
 	-- EDITING-SUPPORT
 	{"andymass/vim-matchup",
 		init = function ()
-			
-		end
+			vim.g.matchup_text_obj_enabled = 0
+			vim.g.matchup_matchparen_enabled = 1 -- highlight
+		end,
 	},
 	{"ja-ford/delaytrain.nvim",
 		keys = {"h", "l", "x"},

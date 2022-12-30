@@ -296,7 +296,7 @@ keymap("x", "V", "j", {desc = "repeated V selects more lines"})
 keymap("x", "v", "<C-v>", {desc = "vv from Normal Mode goes to Visual Block Mode"}) 
 
 --------------------------------------------------------------------------------
--- WINDOWS & SPLITS
+-- SPLITS
 keymap("n", "<C-w>v", ":vsplit #<CR>", { desc = "vertical split (alt file)" }) -- open the alternate file in the split instead of the current file
 keymap("n", "<C-w>h", ":split #<CR>", { desc = "horizontal split (alt file)" })
 keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize" }) -- resizing on one key for sanity
@@ -304,9 +304,15 @@ keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize" })
 keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize" })
 keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize" })
 
-keymap("n", "ä", "<C-w>w", { desc = "switch to next window" })
-keymap("n", "Ä", "<C-w>p", { desc = "switch to previous window" })
+--------------------------------------------------------------------------------
+-- BUFFERS & WINDOWS
+
+keymap("n", "gb", telescope.buffers, { desc = "Telescope: open buffers" })
+-- INFO: <BS> to cycle buffer has to be set in cybu config
+
 keymap("t", "ä", [[<C-\><C-n><C-w>p]], { desc = "switch to previous window" })
+
+keymap("n", "<CR>", qol.altBufferWindow, { desc = "switch to alt buffer/window" })
 
 --------------------------------------------------------------------------------
 
@@ -362,20 +368,6 @@ keymap("x", "ga", ":NeuralCode complete<CR>", { desc = "AI: Code Complete" })
 -- ChatGPT
 keymap("n", "ga", ":ChatGPT<CR>", { desc = "AI: ChatGPT Prompt" })
 
---------------------------------------------------------------------------------
--- BUFFERS
--- INFO: <BS> to cycle buffer has to be set in cybu config
-
-keymap("n", "gb", telescope.buffers, { desc = "Telescope: open buffers" })
-
-keymap("n", "<CR>", function()
-	cmd.nohlsearch()
-	if expand("#") == "" then
-		cmd.edit(vim.v.oldfiles[2])
-	else
-		cmd.buffer("#")
-	end
-end, { desc = "switch to alt file" })
 
 --------------------------------------------------------------------------------
 -- FILES
