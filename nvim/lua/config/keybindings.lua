@@ -393,12 +393,18 @@ keymap( "x", "X", function() require("genghis").moveSelectionToNewFile() end, { 
 -- GIT
 
 -- Neo[G]it
-keymap("n", "<leader>G", ":Neogit<CR>")
-keymap("n", "<leader>c", ":Neogit commit<CR>")
+keymap("n", "<leader>gs", ":Neogit<CR>")
+keymap("n", "<leader>gc", ":Neogit commit<CR>")
+
+-- Git-link
+keymap({ "n", "x" }, "<leader>gl", qol.gitLink, { desc = "git link" })
+
+-- add-commit-pull-push
+keymap("n", "<leader>gg", qol.addCommitPush, { desc = "git add-commit-pull-push" })
 
 -- Diffview
 g.diffviewOpen = false
-keymap("n", "<D-g>", function()
+keymap("n", "<leader>gd", function()
 	if g.diffviewOpen then
 		cmd.DiffviewClose()
 		g.diffviewOpen = false
@@ -417,12 +423,6 @@ keymap("n", "<D-g>", function()
 	end)
 end)
 
--- Git-link
-keymap({ "n", "x" }, "<C-g>", qol.gitLink, { desc = "git link" })
-
--- add-commit-pull-push
-keymap("n", "<leader>g", qol.addCommitPush, { desc = "git add-commit-pull-push" })
-
 --------------------------------------------------------------------------------
 
 -- Option Toggling
@@ -431,8 +431,8 @@ keymap("n", "<leader>or", ":set relativenumber!<CR>")
 keymap("n", "<leader>on", ":set number!<CR>")
 keymap("n", "<leader>ow", qol.toggleWrap, { desc = "toggle wrap" })
 
-g.diagnosticOn = true
 keymap("n", "<leader>od", function()
+	g.diagnosticOn = g.diagnosticOn or true
 	if g.diagnosticOn then
 		vim.diagnostic.disable(0)
 	else

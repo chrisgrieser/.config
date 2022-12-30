@@ -4,28 +4,28 @@ require("config.utils")
 -- af -> a [f]unction (treesitter)
 -- ao -> a c[o]ndition (treesitter)
 -- q -> comment (mnemonic: [q]uiet text) (treesitter)
--- Q/u -> consecutive comment (comments.nvim / custom)
+-- u -> consec[u]tive comment (comments.nvim / custom)
 -- aa -> an [a]rgument (treesitter)
 -- al -> a cal[l] (treesitter)
--- ah -> a [h]unk (gitsigns)
+-- gh -> [g]it [h]unk (gitsigns.nvim)
 -- ai -> an [i]ndentation (custom)
 -- ad -> a [d]iagnostic (custom)
 -- an -> a [n]umber (custom)
--- n -> near the [e]nding of line (custom)
--- r -> rest of paragraph, linewise (custom)
+-- n -> [n]ear the [e]nding of line (custom)
+-- r -> [r]est of paragraph, linewise (custom)
 -- av -> a [v]alue / right side of assignment (custom)
 -- ak -> a [k]ey / left side of assignment (custom)
 -- aL -> a [L]oop (treesitter)
 -- <Space> -> inner subword (custom)
--- . -> diagnostic (custom)
+-- # -> diagnostic (custom)
 -- o -> c[o]lumn (custom)
 
 -- FILE-TYPE-SPECIFIC TEXT OBJECTS
 -- al: a [l]ink (markdown, custom) → overwrites unused call textobj
 -- as: a [s]elector (css, custom) → overwrites unused sentence textobj
--- aC: a [C]ode block (markdown, custom)
--- aR: a [R]egex (js/ts, custom)
--- aD: a [D]ouble Square Brackets (custom)
+-- a/: a regex (js/ts, custom)
+-- aE: a Cod(e) block (markdown, custom, mnemonic: big cod[e])
+-- aR: a Double Square Brackets (custom, mnemonic: big [r]ectangular bracket)
 
 -- BUILTIN ONES KEPT
 -- ab: bracket
@@ -38,8 +38,8 @@ keymap({ "o", "x" }, "iq", 'i"') -- [q]uote
 keymap({ "o", "x" }, "aq", 'a"')
 keymap({ "o", "x" }, "iz", "i'") -- [z]ingle quote
 keymap({ "o", "x" }, "az", "a'")
-keymap({ "o", "x" }, "at", "a`") -- [t]emplate-string
-keymap({ "o", "x" }, "it", "i`")
+keymap({ "o", "x" }, "ae", "a`") -- t[e]mplate-string / inline cod[e]
+keymap({ "o", "x" }, "ie", "i`")
 keymap({ "o", "x" }, "ir", "i]") -- [r]ectangular brackets
 keymap({ "o", "x" }, "ar", "a]")
 keymap({ "o", "x" }, "ic", "i}") -- [c]urly brackets
@@ -76,17 +76,17 @@ keymap({ "x", "o" }, "av", function() require("various-textobjs").value(false) e
 keymap({ "x", "o" }, "ik", function() require("various-textobjs").key(true) end, { desc = "inner key textobj" })
 keymap({ "x", "o" }, "ak", function() require("various-textobjs").key(false) end, { desc = "outer key textobj" })
 
--- .: diagnostic textobj
-keymap({ "x", "o" }, ".", function () require("various-textobjs").diagnostic() end, { desc = "diagnostic textobj" })
+-- #: diagnostic textobj
+keymap({ "x", "o" }, "#", function () require("various-textobjs").diagnostic() end, { desc = "diagnostic textobj" })
 
 -- in/an: number textobj
 -- stylua: ignore start
 keymap( { "x", "o" }, "in", function() require("various-textobjs").number(true) end, { desc = "inner number textobj" })
 keymap( { "x", "o" }, "an", function() require("various-textobjs").number(false) end, { desc = "outer number textobj" })
 
--- iD/aD: double square brackets
-keymap( { "x", "o" }, "iD", function() require("various-textobjs").doubleSquareBrackets(true) end, { desc = "inner double square bracket" })
-keymap( { "x", "o" }, "aD", function() require("various-textobjs").doubleSquareBrackets(false) end, { desc = "outer double square bracket" })
+-- iR/aR: double square brackets
+keymap( { "x", "o" }, "iR", function() require("various-textobjs").doubleSquareBrackets(true) end, { desc = "inner double square bracket" })
+keymap( { "x", "o" }, "aR", function() require("various-textobjs").doubleSquareBrackets(false) end, { desc = "outer double square bracket" })
 
 -- ii/ai: indentation textobj
 keymap({ "x", "o" }, "ii", function() require("various-textobjs").indentation(true, true) end, { desc = "inner indentation textobj" })
@@ -109,12 +109,8 @@ autocmd("FileType", {
 	end,
 })
 
---------------------------------------------------------------------------------
--- SPECIAL PLUGIN TEXT OBJECTS
-
 -- Git Hunks
-keymap({ "x", "o" }, "ih", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
-keymap({ "x", "o" }, "ah", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
+keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
 
 --------------------------------------------------------------------------------
 -- SURROUND
@@ -122,8 +118,8 @@ keymap({ "x", "o" }, "ah", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" 
 local functionObjChar = "f"
 local conditionObjChar = "o"
 local callObjChar = "l"
-local doubleSquareBracketObjChar = "D"
-local regexObjChar = "R"
+local doubleSquareBracketObjChar = "R"
+local regexObjChar = "/"
 
 -- HACK define these manually, since for some reason they do not work by default
 keymap("n", "yss", "ys_", { remap = true })

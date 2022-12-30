@@ -20,18 +20,7 @@
 			</dict>
 		</array>
 		<key>1A820AA0-CFDD-4B5A-9E6D-BF2990A3E581</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A883397A-C748-4E51-B5EB-96B4F58AADCD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>222B531F-8CC2-406A-BEFD-1DB401A7880C</key>
 		<array>
 			<dict>
@@ -72,20 +61,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>97B7CF87-4080-4394-87B8-2074B83B59A7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5707C8CC-3CD7-4D92-A6CD-283E796905EC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>97B7CF87-4080-4394-87B8-2074B83B59A7</string>
+				<string>877D0FB8-C312-4433-A6EF-6CA2A683D76F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -111,7 +87,7 @@
 		</array>
 		<key>64C686C1-E836-4CB7-AAD4-52E72832714C</key>
 		<array/>
-		<key>97B7CF87-4080-4394-87B8-2074B83B59A7</key>
+		<key>877D0FB8-C312-4433-A6EF-6CA2A683D76F</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -123,12 +99,9 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-		</array>
-		<key>A0F4AE0E-4A85-4D7A-AAF1-54C04E9DE25D</key>
-		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>1A820AA0-CFDD-4B5A-9E6D-BF2990A3E581</string>
+				<string>97B7CF87-4080-4394-87B8-2074B83B59A7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -137,11 +110,13 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A883397A-C748-4E51-B5EB-96B4F58AADCD</key>
+		<key>97B7CF87-4080-4394-87B8-2074B83B59A7</key>
+		<array/>
+		<key>A0F4AE0E-4A85-4D7A-AAF1-54C04E9DE25D</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A91C3D48-6860-4B50-B5E9-83B5ACFF6C05</string>
+				<string>1A820AA0-CFDD-4B5A-9E6D-BF2990A3E581</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -169,7 +144,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5707C8CC-3CD7-4D92-A6CD-283E796905EC</string>
+				<string>877D0FB8-C312-4433-A6EF-6CA2A683D76F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -484,27 +459,6 @@ echo "$backup"</string>
 			<key>config</key>
 			<dict>
 				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>dotfiles</string>
-				<key>title</key>
-				<string>⏳ Creating Backup...</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>97B7CF87-4080-4394-87B8-2074B83B59A7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
 				<true/>
 				<key>onlyshowifquerypopulated</key>
 				<true/>
@@ -523,49 +477,10 @@ echo "$backup"</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Blow</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>A91C3D48-6860-4B50-B5E9-83B5ACFF6C05</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:mode}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>no sound</string>
-						<key>outputlabel</key>
-						<string>no</string>
-						<key>uid</key>
-						<string>FEA7E4E2-00DD-487A-B6A4-1A72E14035C4</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>yes</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>A883397A-C748-4E51-B5EB-96B4F58AADCD</string>
+			<string>877D0FB8-C312-4433-A6EF-6CA2A683D76F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -587,20 +502,21 @@ echo "$backup"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>variables</key>
-				<dict>
-					<key>mode</key>
-					<string>{query}</string>
-				</dict>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>dotfiles</string>
+				<key>title</key>
+				<string>⏳ Creating Backup...</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>5707C8CC-3CD7-4D92-A6CD-283E796905EC</string>
+			<string>97B7CF87-4080-4394-87B8-2074B83B59A7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -625,7 +541,7 @@ echo "$backup"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>525</real>
+			<real>390</real>
 			<key>ypos</key>
 			<real>575</real>
 		</dict>
@@ -665,15 +581,6 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>575</real>
 		</dict>
-		<key>5707C8CC-3CD7-4D92-A6CD-283E796905EC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>160</real>
-			<key>ypos</key>
-			<real>725</real>
-		</dict>
 		<key>5D832920-C82B-4DD3-8853-68ABE3D3552A</key>
 		<dict>
 			<key>colorindex</key>
@@ -692,6 +599,15 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>450</real>
 		</dict>
+		<key>877D0FB8-C312-4433-A6EF-6CA2A683D76F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>175</real>
+			<key>ypos</key>
+			<real>660</real>
+		</dict>
 		<key>97B7CF87-4080-4394-87B8-2074B83B59A7</key>
 		<dict>
 			<key>colorindex</key>
@@ -699,7 +615,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>700</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
@@ -713,20 +629,9 @@ echo "$backup"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>245</real>
 			<key>ypos</key>
 			<real>575</real>
-		</dict>
-		<key>A883397A-C748-4E51-B5EB-96B4F58AADCD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>sound</string>
-			<key>xpos</key>
-			<real>691</real>
-			<key>ypos</key>
-			<real>595</real>
 		</dict>
 		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
 		<dict>
@@ -738,15 +643,6 @@ echo "$backup"</string>
 			<real>400</real>
 			<key>ypos</key>
 			<real>275</real>
-		</dict>
-		<key>A91C3D48-6860-4B50-B5E9-83B5ACFF6C05</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>765</real>
-			<key>ypos</key>
-			<real>575</real>
 		</dict>
 		<key>E91BA4CB-B708-47B1-B606-EC119ECC9301</key>
 		<dict>
