@@ -82,10 +82,15 @@ return {
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = "Neogit",
 		config = function () require("neogit").setup{
-				disable_signs = true,
-				integrations = {diffview = true},
+				disable_insert_on_commit = false, -- false = start commit msgs in insert mode
+				disable_commit_confirmation = false,
+				integrations = {diffview = true}, -- diffview plugin
+				signs = {
+					section = { "", "" },
+					item = { "", "" },
+				},
 		} end
-	},
+	}, 
 	{"metakirby5/codi.vim", cmd = {"Codi", "CodiNew", "CodiExpand"} }, -- only coderunner with virtual text
 	{"akinsho/toggleterm.nvim",
 		cmd = {"ToggleTerm", "ToggleTermSendVisualSelection"},
@@ -113,7 +118,7 @@ return {
 				delay_ms = 1000, -- How long repeated usage of a key should be prevented
 				grace_period = 7, -- How many repeated keypresses are allowed
 				keys = { -- Which keys (in which modes) should be delayed
-					["n"] = { "h", "l" },
+					["nv"] = { "h", "l" },
 				},
 			}
 		end
