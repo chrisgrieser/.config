@@ -61,7 +61,7 @@ return {
 					auto_enable = true,
 					max_byte = 2 * 1024 * 1024, -- 2mb
 					lsp = true,
-					excludes = { "lazy" },
+					excludes = { "lazy", "gitcommit", "NeogitCommitMessage" },
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
