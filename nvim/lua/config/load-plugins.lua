@@ -107,13 +107,13 @@ return {
 		end,
 	},
 	{"ja-ford/delaytrain.nvim",
-		keys = {"h", "l", "x"},
+		keys = {"h", "l"},
 		config = function ()
 			require("delaytrain").setup {
 				delay_ms = 1000, -- How long repeated usage of a key should be prevented
 				grace_period = 7, -- How many repeated keypresses are allowed
 				keys = { -- Which keys (in which modes) should be delayed
-					["n"] = { "h", "l", "x" },
+					["n"] = { "h", "l" },
 				},
 			}
 		end

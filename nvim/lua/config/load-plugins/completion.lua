@@ -106,6 +106,8 @@ return {
 			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
+			"petertriho/cmp-git",
+			"davidsierradz/cmp-conventionalcommits",
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
@@ -228,6 +230,23 @@ return {
 				},
 			})
 
+			cmp.setup.filetype("gitcommit", {
+				sources = cmp.config.sources ({
+					git,
+				}, { -- second array only relevant when no source from the first matches
+					path,
+					emojis,
+				}),
+			})
+
+			cmp.setup.filetype("NeogitCommitMessage", {
+				sources = cmp.config.sources ({
+					git,
+				}, { -- second array only relevant when no source from the first matches
+					path,
+					emojis,
+				}),
+			})
 			--------------------------------------------------------------------------------
 			-- Command Line Completion
 			cmp.setup.cmdline({ "/", "?" }, {
@@ -253,27 +272,8 @@ return {
 	},
 	{ -- git-related completion
 		"petertriho/cmp-git",
-		dependencies = { "hrsh7th/nvim-cmp", "davidsierradz/cmp-conventionalcommits" },
-		ft = { "gitcommit", "NeogitCommitMessage" },
+		lazy = true,
 		config = function()
-			require("cmp").setup.filetype("gitcommit", {
-				sources = require("cmp").config.sources {
-					git,
-					cc,
-					path,
-					emojis,
-				},
-			})
-
-			require("cmp").setup.filetype("NeogitCommitMessage", {
-				sources = require("cmp").config.sources {
-					git,
-					cc,
-					path,
-					emojis,
-				},
-			})
-
 			require("cmp_git").setup {
 				filetypes = { "gitcommit", "NeogitCommitMessage" },
 				git = { commits = { limit = 0 } }, -- 0 = disable completing commits
