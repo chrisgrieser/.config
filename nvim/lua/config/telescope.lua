@@ -11,7 +11,7 @@ local maps = {
 	["<C-l>"] = "cycle_history_next",
 	["<Up>"] = "move_selection_previous",
 	["<Down>"] = "move_selection_next",
-	["^"] = "smart_send_to_qflist",
+	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
 	["<Tab>"] = function(prompt) -- multi-select
 		actions.toggle_selection(prompt)
 		actions.move_selection_next(prompt)
@@ -26,8 +26,8 @@ require("telescope").setup {
 		path_display = { "tail" },
 		history = { path = vimDataDir .. "telescope_history" }, -- sync the history
 		file_ignore_patterns = {
-			"%.DS_Store", -- Mac system file
-			"%.git", -- no slash, so it orks for submodule files
+			"%.DS_Store", -- macOS system file
+			"%.git", -- no slash, so it also works for submodule files
 			"node_modules/", -- node
 			"venv/", -- python
 			"lib/", -- python
@@ -169,9 +169,9 @@ require("telescope").setup {
 	-- https://github.com/debugloop/telescope-undo.nvim#configuration
 	extensions = {
 		undo = {
-			diff_context_lines = opt.scrolloff:get(),
-			entry_format = "$STAT: $TIME",
-			layout_config = { preview_width = 0.75 },
+			diff_context_lines = opt.scrolloff:get() - 2,
+			entry_format = "#$ID/$STAT/$TIME",
+			layout_config = { preview_width = 0.7 },
 			prompt_prefix = "",
 			initial_mode = "normal",
 		},

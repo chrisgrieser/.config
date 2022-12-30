@@ -10,9 +10,6 @@ require("luasnip").cleanup() -- clears all snippets for resourcing this file
 -- stylua: ignore start
 --------------------------------------------------------------------------------
 
-
-
-
 add("all", {
 	snip("modeline (bash)", "vim: filetype=bash\n$0"),
 
@@ -51,8 +48,8 @@ add("zsh", {
 	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
 
 	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
-	snip("if", 'if [[ "$${1:var}" ]]; then\n\t$0\nfi'),
-	snip("if else", 'if [[ "$${1:var}" ]]; then\n\t$2\nelse\n\t$0\nfi'),
+	snip("if .. then", 'if [[ "$${1:var}" ]]; then\n\t$0\nfi'),
+	snip("if .. then .. else", 'if [[ "$${1:var}" ]]; then\n\t$2\nelse\n\t$0\nfi'),
 	snip("check installed", 'if ! command -v ${1:cli} &>/dev/null; then echo "${1:cli} not installed." && exit 1; fi\n$0'),
 
 	-- if ! command -v yamllint &> /dev/null; then echo "yamllint not installed." ; exit 1 ; fi
@@ -61,7 +58,7 @@ add("zsh", {
 	snip("sed (pipe)", "sed -E 's/${1:pattern}/${2:replacement}/g'"),
 
 	snip("plist: extract key", 'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
-	snip("running process", 'pgrep -x "$${1:process}" > /dev/null && $0'),
+	snip("running process", 'pgrep -x "${1:process}" > /dev/null && $0'),
 	snip("quicklook", 'qlmanage -p "${1:filepath}"'), -- mac only
 	snip("sound", 'afplay "/System/Library/Sounds/${1:Submarine}.aiff"'), -- mac only
 
@@ -91,7 +88,7 @@ add("lua", {
 		$2
 	end
 	]]),
-	snip("trim", ':gsub("\\n$", "")'),
+	snip("trim trailing \n", ':gsub("\\n$", "")'),
 	snip("ignore (stylua)", "-- stylua: ignore start\n-- stylua: ignore end"),
 	snip("ignore block (stylua)", "-- stylua: ignore"),
 	snip("ignore (selene)", "-- selene: allow(${1:rule_name})"),
@@ -114,6 +111,7 @@ add("lua", {
 -- nvim-lua
 add("lua", {
 	snip("keymap", 'keymap("n", "$1", $2, {desc = "$3"})'),
+	snip("keymap (buffer)", 'keymap("n", "$2", $2, {desc = "$3", buffer = true})'),
 	snip("keymap (multi-mode)", 'keymap({"n", "x"}, "$1", $2, {desc = "$3"})'),
 	snip("highlight (link)", [[cmd.highlight { "def link ${1:fromGroup} ${2:toGroup}", bang = true }]]),
 	snip("highlight", [[cmd.highlight ("${1:group} guifg=${2:color}")]]),
@@ -196,10 +194,7 @@ add("markdown", {
 
 -- JavaScript (General)
 add("javascript", {
-	snip({trig = ".rr", wordTrig = false}, '.replace(/${1:regexp}/${2:flags}, "${3:replacement}");'),
-}, {type = "autosnippets"})
-
-add("javascript", {
+	snip("replace", 'replace(/${1:regexp}/${2:flags}, "${3:replacement}");'),
 	snip("ternary", "${1:cond} ? ${2:then} : ${3:else}"),
 	snip("ISO date", "new Date().toISOString().slice(0, 10);"),
 })

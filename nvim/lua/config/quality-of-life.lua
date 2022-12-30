@@ -5,7 +5,6 @@ local bo = vim.bo
 local b = vim.b
 local fn = vim.fn
 local cmd = vim.cmd
-local getline = vim.fn.getline
 local lineNo = vim.fn.line
 local colNo = vim.fn.col
 local append = vim.fn.append
@@ -32,7 +31,7 @@ local function getglobalopt(option) return vim.api.nvim_get_option_value(option,
 function M.duplicateLine(opts)
 	if not opts then opts = { reverse = false, moveTo = "key", incrementKeys = true } end
 
-	local line = getline(".") ---@type string
+	local line = fn.getline(".") ---@type string
 	if opts.reverse then
 		if line:find("top") then
 			line = line:gsub("top", "bottom")
@@ -192,21 +191,35 @@ end
 function M.betterClose()
 	local openBuffers = fn.getbufinfo { buflisted = 1 }
 	local unsavedFile = expand("%") == ""
-
-	cmd.nohlsearch()
-	if bo.modifiable and not unsavedFile then cmd.update() end
+	local bufToDel = expand("%:p")
 
 	if #openBuffers == 1 then
 		vim.notify("Only one buffer open.", logWarn)
 		return
 	end
+
+	cmd.nohlsearch()
+	if bo.modifiable and not unsavedFile then cmd.update() end
 	if unsavedFile then
 		cmd.bwipeout()
 	else
 		cmd.bdelete()
 	end
 
-	fn.setreg("#", altOldfile())
+	-- ensure new alt file points towards open, non-active buffer, or altoldfile
+	local curFile = expand("%:p")
+	local i = 0
+	local newAltBuf = ""
+	repeat
+		i = i + 1
+		if i > #openBuffers then 
+			newAltBuf = altOldfile() or ""
+			break
+		end
+		newAltBuf = openBuffers[i].name
+	until newAltBuf ~= curFile and newAltBuf ~= bufToDel
+
+	fn.setreg("#", newAltBuf)
 end
 
 --------------------------------------------------------------------------------
@@ -326,7 +339,7 @@ function M.addCommitPush(prefillMsg)
 		end
 
 		local cc =
-			{ "chore", "built", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
+			{ "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
 		local firstWord = commitMsg:match("^%w+")
 		if not vim.tbl_contains(cc, firstWord) then
 			vim.notify("Not using a Conventional Commits keyword.", logWarn)
@@ -334,7 +347,7 @@ function M.addCommitPush(prefillMsg)
 			return
 		end
 
-		vim.notify(" add-commit-push…")
+		vim.notify("  git add-commit-push…")
 		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
 	end)
 end
