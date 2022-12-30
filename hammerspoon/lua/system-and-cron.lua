@@ -9,14 +9,16 @@ local timer = hs.timer.doAt
 
 -- CONFIG
 local repoSyncFreqMin = 20
-
 local dotfileIcon = "🔵"
 local vaultIcon = "🟪"
 local passIcon = "🔑"
 
-local dotfilesFolder = home .. "/.config/"
-local vaultLocation = home .. "/main-vault/"
-local passwordStore = home .. "/.password-store/"
+--------------------------------------------------------------------------------
+
+-- retrieve configs from zshenv
+local dotfilesFolder = getenv("DOTFILE_FOLDER")
+local passwordStore = getenv("PASSWORD_STORE_DIR")
+local vaultLocation = getenv("VAULT_PATH")
 
 local gitDotfileScript = dotfilesFolder .. "/git-dotfile-sync.sh"
 local gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"

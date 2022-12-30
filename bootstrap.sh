@@ -1,6 +1,13 @@
 #!/usr/bin/env zsh
 # shellcheck disable=SC2034,SC2164,SC1071
 
+DOTFILE_FOLDER="$HOME/.config/"
+
+REQUIRED SSH setup
+cd ~
+git clone git@github.com:chrisgrieser/main-vault.git
+git clone git@github.com:chrisgrieser/.password-store.git
+
 #-------------------------------------------------------------------------------
 # ask for credentials upfront
 sudo -v
@@ -8,7 +15,7 @@ setopt INTERACTIVE_COMMENTS
 
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-xcode-select --install
+xcode-select --install # install core CLIs like git for homebrew
 
 # get passwords
 brew install pinentry-mac pass gnupg
@@ -17,10 +24,11 @@ brew install pinentry-mac pass gnupg
 brew install --no-quarantine alfred hammerspoon neovim alacritty karabiner-elements brave-browser
 brew install --no-quarantine --cask neovide
 
-# Key settings
+# important settings
 defaults write com.apple.finder CreateDesktop false # disable desktop icons & make desktop unfocussable
 defaults write com.apple.finder QuitMenuItem -bool true # Finder quitable
 defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from saving in the keychains
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "$DOTFILE_FOLDER/hammerspoon/init.lua"
 
 #-------------------------------------------------------------------------------
 # DOTFILES / VAULT
@@ -32,16 +40,10 @@ cd ~/.config
 git submodule foreach git checkout main
 
 # load Dock from dotfiles
-zsh "$HOME/dotfiles/hammerspoon/dock-switching/dock-switcher.sh" --load home
-
-# REQUIRED SSH setup
-cd ~
-git clone git@github.com:chrisgrieser/main-vault.git
-git clone git@github.com:chrisgrieser/.password-store.git
+zsh "$DOTFILE_FOLDER/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
 #-------------------------------------------------------------------------------
 # CREATE SYMLINKS
-DOTFILE_FOLDER="$HOME/.config/"
 
 # zsh (ZDOTDIR set in .zshenv for the remaining config)
 [[ -e ~/.zshenv ]] && rm -fv ~/.zshenv
@@ -65,10 +67,6 @@ ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
 # searchlink
 [[ -e ~/.searchlink ]] && rm -f ~/.searchlink
 ln -sf "$DOTFILE_FOLDER/searchlink/.searchlink" ~
-
-# Hammerspoon
-[[ -e ~/.hammerspoon ]] && rm -rf ~/.hammerspoon
-ln -sf "$DOTFILE_FOLDER/hammerspoon" ~/.hammerspoon
 
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"

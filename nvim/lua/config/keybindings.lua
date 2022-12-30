@@ -82,8 +82,6 @@ keymap("n", "^", function()
 end, { desc = "toggle fold" })
 
 -- [M]atchUp
-g.matchup_text_obj_enabled = 0
-g.matchup_matchparen_enabled = 1 -- highlight
 keymap({ "n", "x", "o" }, "m", "<Plug>(matchup-%)", { desc = "matchup" })
 
 -- Hunks & changes

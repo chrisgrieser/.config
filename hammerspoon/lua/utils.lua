@@ -12,9 +12,16 @@ pw = hs.pathwatcher.new
 
 hyper = {"cmd", "alt", "ctrl", "shift"}
 I = hs.inspect -- to inspect tables in the console
-home = os.getenv("HOME")
 
 --------------------------------------------------------------------------------
+
+---gets shell environment variable
+---@param VAR string
+---@return string
+function getenv(VAR)
+	local out = hs.execute("echo $"..VAR):gsub("\n$", "")
+	return out
+end
 
 ---trims whitespace from string
 ---@param str string
@@ -24,8 +31,6 @@ function trim(str)
 	str = str:gsub("^%s*(.-)%s*$", "%1")
 	return str
 end
-
---------------------------------------------------------------------------------
 
 ---Repeat a Function multiple times
 ---@param delaySecs number|number[]

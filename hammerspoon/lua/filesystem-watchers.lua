@@ -1,8 +1,10 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
 -- CONFIG
-local fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-local dotfilesFolder = home .. "/.config/"
+local dotfilesFolder = getenv("DOTFILE_FOLDER")
+local fileHub = getenv("WD")
+local home = os.getenv("HOME")
+
 --------------------------------------------------------------------------------
 
 -- BRAVE Bookmarks synced to Chrome Bookmarks (needed for Alfred)
@@ -81,15 +83,10 @@ fileHubWatcher = pw(fileHub, function(paths)
 		if fileName:sub(-15) == ".alfredworkflow" or fileName:sub(-4) == ".ics" then
 			runWithDelays(3, function() os.rename(file, home .. "/.Trash/" .. fileName) end)
 
-			-- vimium/ublacklist
-		elseif fileName == "vimium-options.json" or fileName == "ublacklist-settings.json" then
+			-- ublacklist
+		elseif fileName == "ublacklist-settings.json" then
 			os.rename(file, browserSettings .. fileName)
 			notify(fileName .. " filed away.")
-
-			-- vimium-c
-		elseif fileName:match("vimium_c") then
-			os.rename(file, browserSettings .. "vimium-c-settings.json")
-			notify("Vimium-C backup filed away.")
 
 			-- adguard backup
 		elseif fileName:match(".*_adg_ext_settings_.*%.json") then

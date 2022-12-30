@@ -100,7 +100,11 @@ return {
 	},
 
 	-- EDITING-SUPPORT
-	"andymass/vim-matchup",
+	{"andymass/vim-matchup",
+		init = function ()
+			
+		end
+	},
 	{"ja-ford/delaytrain.nvim",
 		keys = {"h", "l", "x"},
 		config = function ()
