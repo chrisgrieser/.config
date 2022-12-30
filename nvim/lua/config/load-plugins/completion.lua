@@ -32,6 +32,8 @@ local tabnine = { name = "cmp_tabnine", keyword_length = 3 }
 local snippets = { name = "luasnip" }
 local lsp = { name = "nvim_lsp" }
 local treesitter = { name = "treesitter" }
+local cc = { name = "conventionalcommits" }
+local git = { name = "git" } -- commits with ":", issues/PRs with "#"
 
 local defaultSources = {
 	snippets,
@@ -85,6 +87,8 @@ local source_icons = {
 	cmdline_history = "",
 	path = "",
 	omni = "", -- since only used for folders right now
+	git = "",
+	conventionalcommits = "",
 }
 
 --------------------------------------------------------------------------------
@@ -102,8 +106,6 @@ return {
 			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
-			"petertriho/cmp-git", -- git issues/PRs
-			"davidsierradz/cmp-conventionalcommits", -- conventional commits keywords
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
@@ -249,17 +251,25 @@ return {
 			})
 		end,
 	},
-	{
+	{ -- git-related completion
 		"petertriho/cmp-git",
-		dependencies = "hrsh7th/nvim-cmp",
+		dependencies = { "hrsh7th/nvim-cmp", "davidsierradz/cmp-conventionalcommits" },
 		ft = { "gitcommit", "NeogitCommitMessage" },
 		config = function()
-
-			-- plaintext (e.g., pass editing)
-			require("cmp").setup.filetype("text", {
+			require("cmp").setup.filetype("gitcommit", {
 				sources = require("cmp").config.sources {
-					snippets,
-					buffer,
+					git,
+					cc,
+					path,
+					emojis,
+				},
+			})
+
+			require("cmp").setup.filetype("NeogitCommitMessage", {
+				sources = require("cmp").config.sources {
+					git,
+					cc,
+					path,
 					emojis,
 				},
 			})

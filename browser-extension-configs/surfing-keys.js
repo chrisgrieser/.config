@@ -182,3 +182,7 @@ unmap(";j");
 unmap("<Ctrl-Alt-i>");
 unmap("<Ctrl-h>");
 unmap("<Ctrl-j>");
+unmap("g0");
+unmap("g$");
+unmap("ga");
+unmap("gc");
