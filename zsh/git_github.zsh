@@ -32,18 +32,18 @@ alias gl="git log --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) 
 function gli() {
 	local hash key_pressed selected
 	selected=$(
-		git log --all --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' |
-			fzf -0 \
-				--query="$1" \
-				--ansi \
-				--nth=2.. \
-				--with-nth=2.. \
-				--no-sort \
-				--no-info \
-				--header-first --header="↵ : checkout  ^H: copy [h]ash  ^R: reset" \
-				--expect=ctrl-h \
-				--preview-window="wrap" \
-				--preview="git show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"
+		git log --all --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' | fzf \
+			-0 \
+			--query="$1" \
+			--ansi \
+			--nth=2.. \
+			--with-nth=2.. \
+			--no-sort \
+			--no-info \
+			--header-first --header="↵ : checkout  ^H: copy [h]ash  ^R: [r]eset" \
+			--expect="ctrl-h,ctrl-r" \
+			--preview-window="wrap" \
+			--preview="git show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
@@ -73,29 +73,29 @@ function acp() {
 	fi
 
 	local COMMIT_MSG="$*"
+	[[ -z "$COMMIT_MSG" ]] && COMMIT_MSG="chore"
+	# shellcheck disable=2155
+	local first_word=$(echo "$COMMIT_MSG" | grep -e "^\w*")
+	conventional_commits="feat chore build fix perf refactor style ci docs test revert"
 	local MSG_LENGTH=${#COMMIT_MSG}
+
 	if [[ $MSG_LENGTH -gt 50 ]]; then
 		echo "Commit Message too long ($MSG_LENGTH chars)."
+		COMMIT_MSG=${COMMIT_MSG::50}
 		print -z "acp \"$COMMIT_MSG\"" # put back into buffer
 		return 1
-	fi
-	if [[ "$COMMIT_MSG" == "" ]]; then
-		COMMIT_MSG="chore"
+	elif ! [[ "$conventional_commits" =~ $first_word ]]; then
+		echo "'$first_word' not a conventional commits keyword."
+		print -z "acp \"$COMMIT_MSG\"" 
+		return 1
 	fi
 
 	git add -A && git commit -m "$COMMIT_MSG"
 	git pull
 	git push
-
-	# open issue automatically
-	if [[ "$COMMIT_MSG" =~ "#" ]]; then
-		issueNumber=$(echo "$COMMIT_MSG" | grep -Eo "#\d+" | cut -c2-)
-		open "$(getGithubURL)/issues/$issueNumber"
-	fi
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-
 
 function clone() {
 	betterClone "$*" "normal"
@@ -106,8 +106,8 @@ function sclone() { # shallow clone
 }
 
 function betterClone() {
-	if [[ "$1" =~ "http" ]]; then # safety net to not accidentally use https
-		giturl="git@github.com:$(echo "$1" | sed 's/https:\/\/github.com\///' | sed 's/.git.git/.git/')"
+	if [[ "$1" =~ http ]]; then # safety net to not accidentally use https
+		giturl="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
 	else
 		giturl="$1"
 	fi
@@ -169,7 +169,7 @@ function rel() {
 function gdf() {
 	local deleted_path deletion_commit
 	if ! command -v bat &>/dev/null; then echo "bat not installed." && exit 1; fi
-	
+
 	# goto git root
 	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
 
@@ -203,9 +203,3 @@ function gdf() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-
-function gittree() { (
-	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
-	command exa --long --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git --tree --color=always | grep -v "\--"
-); }
-

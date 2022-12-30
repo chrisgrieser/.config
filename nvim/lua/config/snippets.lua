@@ -1,4 +1,3 @@
--- stylua: ignore start
 local add = require("luasnip").add_snippets
 local snip = require("luasnip").parser.parse_snippet -- lsp-style-snippets for future-proofness
 --------------------------------------------------------------------------------
@@ -7,6 +6,13 @@ local snip = require("luasnip").parser.parse_snippet -- lsp-style-snippets for f
 -- https://github.com/L3MON4D3/LuaSnip/blob/master/doc/luasnip.txt
 -- INFO: Snippets can be converted between formats with https://github.com/smjonas/snippet-converter.nvim
 --------------------------------------------------------------------------------
+require("luasnip").cleanup() -- clears all snippets for resourcing this file
+-- stylua: ignore start
+--------------------------------------------------------------------------------
+
+
+
+
 add("all", {
 	snip("modeline (bash)", "vim: filetype=bash\n$0"),
 
@@ -52,9 +58,9 @@ add("zsh", {
 	-- if ! command -v yamllint &> /dev/null; then echo "yamllint not installed." ; exit 1 ; fi
 	snip("stderr (pipe)", "2>&1 "),
 	snip("null (pipe)", "&>/dev/null "),
-	snip("sed (pipe)", "sed 's/${1:pattern}/${2:replacement}/g'"),
+	snip("sed (pipe)", "sed -E 's/${1:pattern}/${2:replacement}/g'"),
 
-	snip("plist extract key", 'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
+	snip("plist: extract key", 'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
 	snip("running process", 'pgrep -x "$${1:process}" > /dev/null && $0'),
 	snip("quicklook", 'qlmanage -p "${1:filepath}"'), -- mac only
 	snip("sound", 'afplay "/System/Library/Sounds/${1:Submarine}.aiff"'), -- mac only
@@ -90,6 +96,13 @@ add("lua", {
 	snip("ignore block (stylua)", "-- stylua: ignore"),
 	snip("ignore (selene)", "-- selene: allow(${1:rule_name})"),
 	snip("ignore (selene global)", "--# selene: allow(${1:rule_name})"),
+	snip("if .. then .. else", [[
+		if $1 then
+			$2
+		else
+			$3
+		end
+	]]),
 	snip("home", 'os.getenv("HOME")'),
 	snip("for (list)", [[
 	for _, ${1:v} in pairs(${2:list_table}) do
