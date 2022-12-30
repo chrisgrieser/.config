@@ -492,8 +492,8 @@ keymap("n", "<leader>r", function()
 
 	-- Karabiner
 	elseif ft == "yaml" and parentFolder:find("/karabiner") then
-		local result =
-			fn.system([[osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js"]])
+		local karabinerBuildScp = vim.env.DOTFILE_FOLDER .. "/karabiner/build-karabiner-config.js"
+		local result = fn.system('osascript -l JavaScript "' .. karabinerBuildScp .. '"')
 		result = result:gsub("\n$", "")
 		vim.notify(result)
 

@@ -21,12 +21,12 @@ $character\
 """
 
 right_format="""
-$package \
-${custom.alfred} \
-$nodejs \
-$python \
-$jobs \
-$memory_usage \
+$package\
+${custom.alfred}\
+$nodejs\
+$python\
+$jobs\
+$memory_usage\
 """
 
 # ⏼⏻⟐ﰉﰊ★ﮊגּﮏ﫜ﲮﲭﱬﳄﯖﴣﯟﯢﳝﯶﯾ卵擄勞ﮧ閭ﴯﰪﭾ璉ﲅ晴ﲊ羽⚡

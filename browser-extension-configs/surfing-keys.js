@@ -8,15 +8,13 @@ const { imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vm
 // ---- SETTINGS ----
 // https://github.com/brookhong/Surfingkeys#edit-your-own-settings
 settings.focusAfterClosed = "last";
-settings.scrollStepSize = 300;
-settings.tabsThreshold = 7;
 settings.modeAfterYank = "Normal";
 settings.hintAlign = "left";
-settings.theme = `
-	#sk_status, #sk_find {
-		font-size: 16pt;
-	}
-}`;
+// settings.theme = `
+// 	#sk_status, #sk_find {
+// 		font-size: 16pt;
+// 	}
+// }`;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -28,54 +26,59 @@ unmap("j", /google/);
 unmap("k", /google/);
 
 //──────────────────────────────────────────────────────────────────────────────
-
 // ---- Mappings -----
+
+// Navigation & History
+settings.scrollStepSize = 300;
 map("J", "P"); // page down
 map("K", "U"); // page up
+map("h", "S"); // History Back/Forward
+map("l", "D");
+map("H", "[["); // Next/Prev Page
+map("L", "]]");
 
+// tabs
 map("e", "R"); // one tab right
 map("b", "E"); // one tab right
+
 map("i", "x"); // close tab
 map("u", "X"); // reopen tab
 map("wq", "gx0"); // close tabs on left
 map("we", "gx$"); // close tabs on right
 map("ww", "gx$"); // close all other tabs
+
 map("<", "<<"); // move tab to the left
 map(">", ">>"); // move tab to the right
+map("wv", "W"); // move tab to new window (vsplit with Hammerspoon)
+map("wm", ";gw"); // merge all windows to current one
 
+map("t", "T"); // choose tab via hint
+settings.tabsThreshold = 7; // higher than this threshold, fuzzy find instead
+
+// Links
+map("gf", "go"); // fuzzy find url on page
 map("F", "C"); // Open Hint in new tab
+map("yf", "ya"); // yank a link
+map("ge", ";U"); // Edit current URL
 
+// yank & clipboard
+map("ye", "yv"); // yank text of an element
+map("p", "cc"); // open URL from clipboard or selection
+
+// find & visual
+map("-", "/"); // find
+map("+", "*"); // find selection
+
+// Misc
 map("B", "ab"); // bookmark
 map("X", ";dh"); // delete bookmark
 map("m", "<Alt-m>"); // mute tab
 map("M", ";pm"); // markdown preview
-
-map("ye", "yv"); // yank text of an element
-
-map("wv", "W"); // move tab to new window (vsplit with Hammerspoon)
-map("wm", ";gw"); // merge all windows to current one
-
 map("gi", "I"); // enter insert field
 map("a", "p"); // disable for one key
-
-map("h", "S"); // History Back/Forward
-map("l", "D");
-
-map("H", "[["); // Next/Prev Page
-map("L", "]]");
-
-map("I", ";j"); // inspector
-
-map("-", "/"); // find
-map("+", "*"); // find selection
-
-map("ge", ";U"); // Edit current URL
 map(",", ";e"); // Settings
-map("t", "T"); // choose tab via hint
 
-map("p", "cc"); // open URL from clipboard or selection
-
-// toggle fullscreen, mainly because of YouTube
+// toggle fullscreen
 mapkey("Z", "Fullscreen", function () {
 	if (window.fullScreen) {
 		document.exitFullscreen();
@@ -102,6 +105,7 @@ unmap("[[");
 unmap("S");
 unmap("W");
 unmap("R");
+unmap("ya");
 unmap("C");
 unmap("W");
 unmap("yG");
@@ -165,7 +169,6 @@ unmap(";dh");
 unmap("gs");
 unmap("gn");
 unmap("gb");
-unmap("gd");
 unmap("<Ctrl-'>");
 unmap("zv");
 unmap(";pb");
