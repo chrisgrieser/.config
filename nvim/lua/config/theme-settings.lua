@@ -1,5 +1,15 @@
-require("config.utils")
+--------------------------------------------------------------------------------
+-- CONFIG
+local lightTheme = "dawnfox"
+local darkTheme = "tokyonight-moon"
+-- local lightTheme = "melange"
+-- local darkTheme = "oxocarbon"
+local darkTransparency = 0.97
+local lightTransparency = 0.95
 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+require("config.utils")
 ---@param hlgroupfrom string
 ---@param hlgroupto string
 local function linkHighlight(hlgroupfrom, hlgroupto)
@@ -9,15 +19,6 @@ end
 ---@param hlgroup string
 ---@param changes string
 local function addHighlight(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. changes) end
-
---------------------------------------------------------------------------------
-
-local lightTheme = "dawnfox"
--- local darkTheme = "tokyonight-moon"
--- local lightTheme = "melange"
--- local darkTheme = "oxocarbon"
-local darkTheme = "catpuccin"
-
 --------------------------------------------------------------------------------
 
 -- Annotations
@@ -124,14 +125,14 @@ autocmd("ColorScheme", {
 -- functions not local, so they can be accessed via file watcher
 function setDarkTheme()
 	opt.background = "dark" ---@diagnostic disable-line: assign-type-mismatch
-	g.neovide_transparency = 0.92
+	g.neovide_transparency = darkTransparency
 	cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 	cmd.colorscheme(darkTheme)
 end
 
 function setLightTheme()
 	opt.background = "light" ---@diagnostic disable-line: assign-type-mismatch
-	g.neovide_transparency = 0.95
+	g.neovide_transparency = lightTransparency
 	cmd.highlight("clear")
 	cmd.colorscheme(lightTheme)
 end
