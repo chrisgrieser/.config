@@ -1,4 +1,15 @@
 require("config.utils")
+
+---@param hlgroupfrom string
+---@param hlgroupto string
+local function linkHighlight(hlgroupfrom, hlgroupto)
+	vim.cmd.highlight { "def link " .. hlgroupfrom .. " " .. hlgroupto, bang = true }
+end
+
+---@param hlgroup string
+---@param changes string
+local function addHighlight(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. changes) end
+
 --------------------------------------------------------------------------------
 
 local lightTheme = "dawnfox"
@@ -10,7 +21,7 @@ local darkTheme = "kanagawa"
 --------------------------------------------------------------------------------
 
 -- Annotations
-cmd.highlight { "def link myAnnotations Todo", bang = true } -- use same styling as "TODO"
+linkHighlight("myAnnotations", "Todo")
 fn.matchadd("myAnnotations", [[\<\(BUG\|WIP\|TODO\|WTF\|HACK\|INFO\|NOTE\|WARNING\|FIX\|REQUIRED\)\>]])
 
 --------------------------------------------------------------------------------
@@ -28,28 +39,28 @@ local function customHighlights()
 		"SpellBad",
 	}
 	for _, v in pairs(highlights) do
-		cmd.highlight(v .. " gui=underline")
+		addHighlight(v, "gui=underline")
 	end
 
 	-- active indent
-	cmd.highlight { "def link IndentBlanklineContextChar Comment", bang = true }
+	linkHighlight("IndentBlanklineContextChar", "Comment")
 
 	-- URLs
-	cmd.highlight([[urls cterm=underline gui=underline]])
+	addHighlight("urls", "cterm=underline gui=underline")
 	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&]*]])
 
-	-- rainbow brackets without aggressive red…
-	cmd.highlight([[rainbowcol1 guifg=#7e8a95]])
+	-- rainbow brackets without aggressive red
+	addHighlight("rainbowcol1", " guifg=#7e8a95")
 
 	-- more visible matchparens
-	cmd.highlight([[MatchParen gui=underdotted cterm=underdotted]])
+	addHighlight("MatchParen", " gui=underdotted cterm=underdotted")
 
 	-- Codi
-	cmd.highlight { "def link CodiVirtualText Comment", bang = true }
+	linkHighlight("CodiVirtualText", "Comment")
 
 	-- treesittter refactor focus
-	cmd.highlight([[TSDefinition term=underline gui=underdotted]])
-	cmd.highlight([[TSDefinitionUsage term=underline gui=underdotted]])
+	addHighlight("TSDefinition", " term=underline gui=underdotted")
+	addHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
 end
 
 local function themeModifications()
@@ -59,41 +70,42 @@ local function themeModifications()
 	-- tokyo night
 	if theme == "tokyonight" then
 		-- HACK bugfix for https://github.com/neovim/neovim/issues/20456
-		cmd.highlight { "def link luaParenError.highlight NormalFloat", bang = true }
-		cmd.highlight { "def link luaParenError NormalFloat", bang = true }
+		linkHighlight("luaParenError.highlight", "NormalFloat")
+		linkHighlight("luaParenError", "NormalFloat")
 
 		local modes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 		for _, v in pairs(modes) do
-			cmd.highlight("lualine_y_diff_modified_" .. v .. " guifg=#acaa62")
-			cmd.highlight("lualine_y_diff_added_" .. v .. " guifg=#8cbf8e")
+			addHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
+			addHighlight("lualine_y_diff_added_" .. v, "guifg=#8cbf8e")
 		end
-		cmd.highlight("GitSignsChange guifg=#acaa62")
-		cmd.highlight("GitSignsAdd guifg=#7fcc82")
-		cmd.highlight { "def link ScrollView Folded", bang = true }
+		addHighlight("GitSignsChange", "guifg=#acaa62")
+		addHighlight("GitSignsAdd", "guifg=#7fcc82")
+		linkHighlight("ScrollView", "Folded")
 
 	-- oxocarbon
 	elseif theme == "oxocarbon" then
-		cmd.highlight { "def link FloatTitle TelescopePromptTitle", bang = true }
-		cmd.highlight { "def link @function @function.builtin", bang = true } -- no bold
+		linkHighlight("FloatTitle", "TelescopePromptTitle")
+		linkHighlight("@function", "@function.builtin")
 
 	-- kanagawa
 	elseif theme == "kanagawa" then
-		cmd.highlight("VirtColumn guifg=#323036")
-		cmd.highlight { "def link UfoFoldedBg Folded", bang = true }
+		addHighlight("ScrollView", "guibg=#303050")
+		addHighlight("VirtColumn", "guifg=#323036")
+		linkHighlight("UfoFoldedBg", "Folded")
 
 	-- dawnfox
 	elseif theme == "dawnfox" then
-		cmd.highlight([[IndentBlanklineChar guifg=#deccba]])
-		cmd.highlight([[VertSplit guifg=#b29b84]])
+		addHighlight("IndentBlanklineChar", "guifg=#deccba")
+		addHighlight("VertSplit", "guifg=#b29b84")
 
 	-- melange
 	elseif theme == "melange" then
-		cmd.highlight { "def link Todo IncSearch", bang = true }
+		linkHighlight("Todo", "IncSearch")
 		if mode == "light" then
-			cmd.highlight { "def link NonText Conceal", bang = true }
-			cmd.highlight { "def link NotifyINFOIcon @define", bang = true }
-			cmd.highlight { "def link NotifyINFOTitle @define", bang = true }
-			cmd.highlight { "def link NotifyINFOBody @define", bang = true }
+			linkHighlight("NonText", "Conceal")
+			linkHighlight("NotifyINFOIcon", "@define")
+			linkHighlight("NotifyINFOTitle", "@define")
+			linkHighlight("NotifyINFOBody", "@define")
 		end
 	end
 end

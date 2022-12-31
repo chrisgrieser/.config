@@ -1,6 +1,9 @@
 #!/bin/zsh
 
 max_number_of_bkps=20
+
+#───────────────────────────────────────────────────────────────────────────────
+
 timestamp=$(date '+%Y-%m-%d_%H-%M')
 bkp_destination="$DATA_DIR/Backups/dotfile bkp" # DATA_DIR defined in zshenv
 backup_file="$bkp_destination/dotfile-bkp_$timestamp.zip"
@@ -10,8 +13,9 @@ backup_file="$bkp_destination/dotfile-bkp_$timestamp.zip"
 [[ -e "$bkp_destination" ]] || mkdir -p "$bkp_destination"
 cd "$DOTFILE_FOLDER" || exit 1 # DATA_DIR defined in zshenv
 
-# zip -r --quiet "$backup_path" ./* ./.{searchlink,vimrc,config,gitignore}
-zip -r --quiet "$backup_path" ./*
+# hidden files on the first level have to named explicitly since not matched
+# by globbing
+zip -r --quiet "$backup_file" ./* ./.{gitmodule,gitignore}
 
 # restrict number of backups
 # shellcheck disable=SC2154

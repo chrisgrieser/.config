@@ -115,8 +115,6 @@ add("lua", {
 	snip("keymap", 'keymap("n", "$1", $2, {desc = "$3"})'),
 	snip("keymap (buffer)", 'keymap("n", "$2", $2, {desc = "$3", buffer = true})'),
 	snip("keymap (multi-mode)", 'keymap({"n", "x"}, "$1", $2, {desc = "$3"})'),
-	snip("highlight (link)", [[cmd.highlight { "def link ${1:fromGroup} ${2:toGroup}", bang = true }]]),
-	snip("highlight", [[cmd.highlight ("${1:group} guifg=${2:color}")]]),
 	snip("input (vim.ui)", [[
 		vim.ui.input({ prompt = "${1:prompt_msg}"}, function (input)
 			if not(input) then return end
