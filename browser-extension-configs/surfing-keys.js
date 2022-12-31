@@ -41,6 +41,7 @@ map("E", ">>"); // move tab to the right
 
 map("i", "x"); // close tab
 map("u", "X"); // reopen tab
+map("yt", "yT"); // duplicate tab in background
 
 unmap("w"); // so it can be mapped for window commands
 map("wq", "gx0"); // close tabs on left
@@ -53,7 +54,6 @@ map("t", "T"); // choose tab via hint
 settings.tabsThreshold = 7; // higher than this threshold, fuzzy find instead
 
 // Links
-map("gf", "go"); // fuzzy find url on page
 map("F", "C"); // Open Hint in new tab
 map("yf", "ya"); // yank a link
 map("ge", ";U"); // Edit current URL
@@ -72,6 +72,7 @@ map("X", ";dh"); // delete bookmark
 map("m", "<Alt-m>"); // mute tab
 map("M", ";pm"); // markdown preview
 map("gi", "I"); // enter insert field
+unmap("a"); // open link (remapped)
 map("a", "p"); // disable for one key
 map(",", ";e"); // Settings
 
@@ -88,6 +89,7 @@ map(",", ";e"); // Settings
 // Insert Mode
 // imap("<Space>", "ciw") TODO look up requires syntax for this
 // imap("<Shift-Space>", "daw")
+imap("<Ctrl-a>", "<Ctrl-f>"); // boL
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -101,91 +103,94 @@ removeSearchAlias("y", "s");
 removeSearchAlias("s", "s");
 removeSearchAlias("e", "s");
 
-unmap(";ql"); // show last action
-unmap("]]"); // page navigation
-unmap("[[");
-// unmap("S");
-// unmap("W");
-// unmap("R");
-// unmap("ya");
-// unmap("C");
-// unmap("yG");
-// unmap("yS");
-// unmap(";w");
-// unmap("P");
-// unmap("D");
-// unmap("yj");
-// unmap("ys");
-// unmap("yv");
-// unmap("yma");
-// unmap("U");
-// unmap("cs");
-// unmap("cS");
-unmap("$"); // scroll to right
-unmap("0"); // scroll to left
-// unmap("<Alt-i>");
-// unmap("I");
-// unmap("q");
-// unmap(";m");
-// unmap(";fs");
-// unmap(";di");
-// unmap("gf");
-// unmap("cf");
-// unmap("yT");
-// unmap("gxp");
-unmap(";U"); // edit URL (remapped)
-// unmap(";u");
-unmap("<Ctrl-6>"); // switch to last tab (remapped)
-unmap("gx0"); // close tabs to left (remapped)
-unmap("gx$"); // close tabs to right (remapped)
-// unmap("<Alt-p>");
-// unmap("<Alt-m>");
-// unmap("gxt");
-// unmap("gxT");
-// unmap("gT");
-// unmap("gt");
-// unmap("g?");
-// unmap("g#");
-// unmap("on");
-// unmap("zr");
-// unmap("zi");
-// unmap("zo");
-// unmap(";gt");
-// unmap(";e");
-// unmap(";v");
-// unmap("yq");
-// unmap("yQ");
-// unmap("yh");
-// unmap(";yQ");
-// unmap("d");
-// unmap("cp");
-// unmap(";pa");
-// unmap(";pf");
-// unmap(";pj");
-// unmap(";pp");
-// unmap("cc");
-// unmap(";yh");
-// unmap(";dh");
-// unmap("gs");
-// unmap("gn");
-// unmap("gb");
-// unmap("<Ctrl-'>");
-// unmap("zv");
-// unmap(";pb");
-// unmap(";gw");
-unmap("gxx"); // close other tabs (remapped)
-// unmap("zt");
-// unmap(";pm");
-// unmap("zb");
-// unmap(";pc");
-// unmap(";ps");
-// unmap(";pd");
 // unmap(";ap");
+// unmap(";di");
+// unmap(";e");
+// unmap(";fs");
+// unmap(";gt");
+// unmap(";gw");
 // unmap(";j");
+// unmap(";m");
+// unmap(";pa");
+// unmap(";pb");
+// unmap(";pc");
+// unmap(";pd");
+// unmap(";pf");
+// unmap(";ps");
+// unmap(";u");
+// unmap(";v");
+// unmap(";w");
+// unmap(";yQ");
+// unmap("<Alt-m>");
+// unmap("<Alt-p>");
 // unmap("<Ctrl-Alt-i>");
 // unmap("<Ctrl-h>");
 // unmap("<Ctrl-j>");
-unmap("g0"); // first tab
-unmap("g$"); // last tab
+// unmap("C");
+// unmap("I");
+// unmap("P");
+// unmap("R");
+// unmap("U");
+// unmap("W");
+// unmap("cS");
+// unmap("cf");
+// unmap("cp");
+// unmap("cs");
+// unmap("d");
+// unmap("g#");
+// unmap("g?");
+// unmap("gT");
 // unmap("ga");
+// unmap("gb");
 // unmap("gc");
+// unmap("gf");
+// unmap("gn");
+// unmap("gs");
+// unmap("gt");
+// unmap("gxT");
+// unmap("gxp");
+// unmap("gxt");
+// unmap("on");
+// unmap("q");
+// unmap("yG");
+// unmap("yS");
+// unmap("ya");
+// unmap("yh");
+// unmap("yj");
+// unmap("yma");
+// unmap("yq");
+// unmap("yv");
+// unmap("zb");
+// unmap("zi");
+// unmap("zo");
+// unmap("zr");
+// unmap("zt");
+// unmap("zv");
+unmap("$"); // scroll to right
+unmap("*"); // find selected text (remapped)
+unmap("/"); // find (remapped)
+unmap("0"); // scroll to left
+unmap(";U"); // edit URL (remapped)
+unmap(";dh"); // delete bookmark (remapped)
+unmap(";pj"); // restore settings from clipboard
+unmap(";pm"); // markdown preview (remapped)
+unmap(";pp"); // paste as html
+unmap(";ql"); // show last action
+unmap(";yh"); // yank history
+unmap("<Alt-i>"); // pass through (remapped)
+unmap("<Ctrl-'>"); // jump to vim-mark in new tab
+unmap("<Ctrl-6>"); // switch to last tab (remapped)
+unmap("<Ctrl-a>"); // BoL (remapped)
+unmap("D");
+unmap("S"); // history back (remapped)
+unmap("[[");
+unmap("]]"); // page navigation (remapped)
+unmap("cc"); // paste link (remapped)
+unmap("g$"); // last tab
+unmap("g0"); // first tab
+unmap("gx$"); // close tabs to right (remapped)
+unmap("gx0"); // close tabs to left (remapped)
+unmap("gxx"); // close other tabs (remapped)
+unmap("yQ"); // copy omnibar query history
+unmap("yT"); // duplicate tab in background (remapped)
+unmap("ys"); // copy page source
