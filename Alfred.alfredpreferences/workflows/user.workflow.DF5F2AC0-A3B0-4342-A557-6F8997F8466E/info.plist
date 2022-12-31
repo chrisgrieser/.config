@@ -45,39 +45,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>9B285645-6D02-442F-8EAC-6DB1EBBF0AD0</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0951FDD8-D9E2-4DC3-8844-58CF1AABE48C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>5BA12A65-7280-4D1E-AE15-F609CF646399</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>AF9EC7AB-2DA7-4A8E-86CC-D63DF4929210</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>ADC0722C-95D6-4BDE-B235-615784A424DA</key>
 		<array>
 			<dict>
@@ -598,27 +565,6 @@ return "{query}"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://unicode-table.com/en/search/?q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>0951FDD8-D9E2-4DC3-8844-58CF1AABE48C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -652,69 +598,6 @@ return "{query}"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>uni</string>
-				<key>subtext</key>
-				<string>on several sites</string>
-				<key>text</key>
-				<string>Unicode Character: '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>9B285645-6D02-442F-8EAC-6DB1EBBF0AD0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>http://www.amp-what.com/unicode/search/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>5BA12A65-7280-4D1E-AE15-F609CF646399</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://graphemica.com/search?q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>AF9EC7AB-2DA7-4A8E-86CC-D63DF4929210</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -728,15 +611,6 @@ return "{query}"</string>
 			<real>605</real>
 			<key>ypos</key>
 			<real>440</real>
-		</dict>
-		<key>0951FDD8-D9E2-4DC3-8844-58CF1AABE48C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>480</real>
 		</dict>
 		<key>15FF9B9D-0AF2-48F4-84C0-9781E0F3766B</key>
 		<dict>
@@ -766,15 +640,6 @@ return "{query}"</string>
 			<real>200</real>
 			<key>ypos</key>
 			<real>250</real>
-		</dict>
-		<key>5BA12A65-7280-4D1E-AE15-F609CF646399</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>595</real>
 		</dict>
 		<key>5E00EB78-1FAB-400E-B437-E867401108F0</key>
 		<dict>
@@ -830,15 +695,6 @@ return "{query}"</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>9B285645-6D02-442F-8EAC-6DB1EBBF0AD0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>595</real>
-		</dict>
 		<key>A069BE51-DA62-4835-8048-AF3A608C97D0</key>
 		<dict>
 			<key>colorindex</key>
@@ -858,15 +714,6 @@ return "{query}"</string>
 			<real>430</real>
 			<key>ypos</key>
 			<real>570</real>
-		</dict>
-		<key>AF9EC7AB-2DA7-4A8E-86CC-D63DF4929210</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>715</real>
 		</dict>
 		<key>B2FE0349-860A-44F0-B49D-20C8F895F9C0</key>
 		<dict>

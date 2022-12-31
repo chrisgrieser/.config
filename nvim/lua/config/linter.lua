@@ -92,7 +92,7 @@ null_ls.setup {
 		builtins.diagnostics.vale.with {
 			extra_args = { "--config", linterConfig .. "/vale/.vale.ini" },
 		},
-		builtins.formatting.markdownlint{
+		builtins.formatting.markdownlint.with{
 			extra_args = { "--config", linterConfig .. "/.markdownlintrc" },
 		},
 		builtins.diagnostics.markdownlint.with {
