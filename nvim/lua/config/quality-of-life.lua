@@ -128,7 +128,6 @@ local function altWindow()
 
 	repeat
 		if i > fn.winnr("$") then return nil end
-
 		-- two checks for regular window to catch all edge cases
 		altWin = fn.bufname(fn.winbufnr(i))
 		local isRegularWin1 = altWin and altWin ~= fn.bufname() and altWin ~= ""
@@ -182,8 +181,10 @@ function M.altBufferWindow()
 		cmd.wincmd("p")
 	elseif expand("#") ~= "" then
 		cmd.buffer("#")
-	elseif altOldfile() ~= "" then
+	elseif altOldfile() then
 		cmd.edit(altOldfile())
+	else
+		vim.notify("Nothing to switch to.", logWarn)
 	end
 end
 
@@ -346,7 +347,7 @@ function M.addCommitPush(prefillMsg)
 			return
 		end
 
-		vim.notify(" git add-commit-push…")
+		vim.notify(" git add-commit-push…\n"..commitMsg)
 		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
 	end)
 end
