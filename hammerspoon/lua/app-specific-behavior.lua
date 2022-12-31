@@ -356,11 +356,11 @@ wf_script_editor = wf.new("Script Editor"):subscribe(wf.windowCreated, function(
 		keystroke({ "cmd" }, "n")
 		runWithDelays(0.2, function()
 			keystroke({ "cmd" }, "v")
-			moveResize(newWin, centered)
+			local win = app("Script Editor"):mainWindow() -- cannot use newWin, since it's the open dialog
+			moveResize(win, centered)
 		end)
 		runWithDelays(0.4, function() keystroke({ "cmd" }, "k") end)
 	end
-	moveResize(newWin, centered)
 end)
 
 --------------------------------------------------------------------------------

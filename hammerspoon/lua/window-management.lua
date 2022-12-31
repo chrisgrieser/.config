@@ -91,10 +91,10 @@ end
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
----replaces `win:moveToUnit(pos)`
 ---@param win hs.window
 ---@param pos hs.geometry
 function moveResize(win, pos)
+	if not win then return end -- window been closed before
 	local appOfWin = win:application():name()
 	if appOfWin == "Drafts" then
 		toggleDraftsSidebar(win)
@@ -120,12 +120,11 @@ function moveResize(win, pos)
 		app("Twitterrific"):mainWindow():raise()
 	end
 
+	local timeout = false -- pseudo-timeout
+	runWithDelays(3, function() timeout = true end)
 	while not (checkSize(win, pos)) do
 		win:moveToUnit(pos)
-		-- pseudo-timeout
-		local timeout = false
-		runWithDelays(3, function() timeout = true end)
-		if timeout then break end
+		if timeout or not(win) then break end
 	end
 end
 
