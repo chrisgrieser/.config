@@ -43,8 +43,8 @@ function o (){
 function directoryInspect (){
 	if ! command -v exa &>/dev/null; then echo "exa not installed." && exit 1; fi
 	
-	if command git rev-parse --is-inside-work-tree &>/dev/null ; then
-		git status --short
+	if command git --no-optional-locks rev-parse --is-inside-work-tree &>/dev/null ; then
+		git --no-optional-locks status --short
 		echo
 	fi
 	if [[ $(ls | wc -l) -lt 20 ]] ; then

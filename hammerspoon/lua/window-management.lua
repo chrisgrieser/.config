@@ -83,7 +83,8 @@ function toggleObsidianSidebar(obsiWin)
 
 		-- if pseudo-maximized, hide sidebar, if half or full show sidebar
 		-- (full = used as split pane)
-		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "true" or "false"
+		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "true"
+			or "false"
 		openLinkInBackground("obsidian://sidebar?showRight=" .. mode .. "&showLeft=false")
 	end)
 end
@@ -124,7 +125,7 @@ function moveResize(win, pos)
 	runWithDelays(3, function() timeout = true end)
 	while not (checkSize(win, pos)) do
 		win:moveToUnit(pos)
-		if timeout or not(win) then break end
+		if timeout or not win then return end
 	end
 end
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # https://chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/
 #-------------------------------------------------------------------------------
-brew install duti
+if ! command -v duti &>/dev/null; then echo "duti not installed." && exit 1; fi
 
 # general
 duti -s net.highlightsapp.universal pdf all
