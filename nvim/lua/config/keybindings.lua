@@ -517,7 +517,7 @@ end)
 --------------------------------------------------------------------------------
 
 -- q / Esc to close special windows
-local opts = { buffer = true, nowait = true, remap = true }
+local opts = { buffer = true, nowait = true }
 augroup("quickQuit", {})
 autocmd("FileType", {
 	group = "quickQuit",
@@ -541,6 +541,7 @@ autocmd("FileType", {
 
 -- HACK to remove the waiting time from the q, due to conflict with `qq`
 -- for comments
+opts = { buffer = true, nowait = true, remap = true }
 autocmd("FileType", {
 	group = "quickQuit",
 	pattern = "TelescopePrompt",
