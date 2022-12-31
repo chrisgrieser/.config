@@ -74,7 +74,6 @@ require("mason").setup {
 		icons = { package_installed = "✓", package_pending = "羽", package_uninstalled = "✗" },
 	},
 }
-require("mason-update-all").setup()
 require("mason-lspconfig").setup {
 	ensure_installed = lsp_servers,
 }

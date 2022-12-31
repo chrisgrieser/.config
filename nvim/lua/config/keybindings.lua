@@ -11,15 +11,10 @@ keymap("n", "<leader>T", telescope.colorscheme, { desc = "Telescope: Colorscheme
 -- Highlights
 keymap("n", "<leader>H", telescope.highlights, { desc = "Telescope: Highlight Groups" })
 
--- Mason
-keymap("n", "<leader>M", cmd.Mason, { desc = ":Mason" })
-
 -- Update [P]lugins
-keymap("n", "<leader>p", function()
-	require("lazy").sync()
-	cmd.MasonUpdateAll()
-end, { desc = ":Lazy sync & :MasonUpdateAll" })
-keymap("n", "<leader>P", require("lazy").install, { desc = ":Lazy install" })
+keymap("n", "<leader>p", require("lazy").sync, { desc = ":Lazy sync" })
+keymap("n", "<leader>P", require("lazy").home, { desc = ":Lazy home" })
+keymap("n", "<leader>M", cmd.Mason, { desc = ":Mason" })
 
 -- write all before quitting
 keymap("n", "ZZ", ":wall! | qa!<CR>", { desc = ":wall & :quitall" })

@@ -1,7 +1,4 @@
 return {
-	-- Package Management
-	{ "williamboman/mason.nvim", dependencies = "RubixDev/mason-update-all" },
-
 	-- Themes
 	"EdenEast/nightfox.nvim",
 	"folke/tokyonight.nvim",
@@ -26,6 +23,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
+			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 			"ray-x/lsp_signature.nvim", -- signature hint
