@@ -138,26 +138,20 @@ autocmd("TextYankPost", {
 			fn.setreg("1", fn.getreg("0")) -- so both y and d copy to "1
 			if g.lastYank then fn.setreg("2", g.lastYank) end
 		end
-		g.lastYank = fn.getreg('"') -- do deletes gets stored here as well
+		g.lastYank = fn.getreg('"') -- so deletes get stored here
 	end,
 })
 
-function clearallregs()
-	for i = 0, 9, 1 do
-		fn.setreg(tostring(i), "")	
-	end	
-end
-
--- cycle through the last deletes/yanks
+-- cycle through the last deletes/yanks ("2 till "9)
 keymap("n", "P", function()
 	cmd.undo()
-	g.killringCount = g.killringCount + 1
-	if g.killringCount > 9 then g.killringCount = 0 end
 	normal('"' .. tostring(g.killringCount) .. "p")
+	g.killringCount = g.killringCount + 1
+	if g.killringCount > 9 then g.killringCount = 2 end
 end, { desc = "simply killring" })
 
 keymap("n", "p", function()
-	g.killringCount = 0
+	g.killringCount = 2
 	normal("p")
 end, { desc = "paste & reset killring" })
 

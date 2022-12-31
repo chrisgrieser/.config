@@ -1,4 +1,4 @@
-require("config/utils")
+require("config.utils")
 --------------------------------------------------------------------------------
 
 -- use 2 spaces instead of tabs

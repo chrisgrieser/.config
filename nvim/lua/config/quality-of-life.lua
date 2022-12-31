@@ -143,8 +143,8 @@ end
 ---get the alternate oldfile, accounting for non-existing files etc.
 ---@return string|nil path of oldfile, nil if none exists in all oldfiles
 local function altOldfile()
-	local i = 0
 	local oldfile
+	local i = 0
 	repeat
 		i = i + 1
 		if i > #vim.v.oldfiles then return nil end
@@ -179,7 +179,7 @@ end
 function M.altBufferWindow()
 	cmd.nohlsearch()
 	if altWindow() then
-		cmd.wincmd("w")
+		cmd.wincmd("p")
 	elseif expand("#") ~= "" then
 		cmd.buffer("#")
 	elseif altOldfile() ~= "" then
@@ -190,21 +190,20 @@ end
 ---Close window/buffer in that priority
 function M.betterClose()
 	local openBuffers = fn.getbufinfo { buflisted = 1 }
-	local unsavedFile = expand("%") == ""
 	local bufToDel = expand("%:p")
+
+	if bo.modifiable then cmd.update() end
+	cmd.nohlsearch()
 
 	if #openBuffers == 1 then
 		vim.notify("Only one buffer open.", logWarn)
 		return
+	elseif #openBuffers == 2 then
+		cmd.bwipeout() -- cannot clear altfile otherwise :/
+		return
 	end
 
-	cmd.nohlsearch()
-	if bo.modifiable and not unsavedFile then cmd.update() end
-	if unsavedFile then
-		cmd.bwipeout()
-	else
-		cmd.bdelete()
-	end
+	cmd.bdelete()
 
 	-- ensure new alt file points towards open, non-active buffer, or altoldfile
 	local curFile = expand("%:p")
@@ -213,13 +212,13 @@ function M.betterClose()
 	repeat
 		i = i + 1
 		if i > #openBuffers then
-			newAltBuf = altOldfile() or ""
+			newAltBuf = altOldfile() or "" 
 			break
 		end
 		newAltBuf = openBuffers[i].name
 	until newAltBuf ~= curFile and newAltBuf ~= bufToDel
 
-	fn.setreg("#", newAltBuf)
+	fn.setreg("#", newAltBuf) -- empty string will set the altfile to the current buffer
 end
 
 --------------------------------------------------------------------------------

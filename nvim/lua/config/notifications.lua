@@ -31,6 +31,10 @@ local function split_length(text, length)
 end
 
 vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
+	local isCodeOutput = msg:find("^{")
+	if isCodeOutput then 
+		return require("notify")(msg, level, opts)
+	end
 	if type(msg) == "string" then msg = vim.split(msg, "\n", { trimepty = true }) end
 	local truncated = {}
 	for _, line in pairs(msg) do
