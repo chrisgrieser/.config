@@ -1,7 +1,7 @@
 require("lua.meta")
 require("lua.utils")
-require("lua.visuals")
 
+require("lua.visuals")
 require("lua.window-management")
 require("lua.dark-mode")
 require("lua.layouts")
