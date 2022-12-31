@@ -16,9 +16,6 @@ keymap("n", "<leader>p", require("lazy").sync, { desc = ":Lazy sync" })
 keymap("n", "<leader>P", require("lazy").home, { desc = ":Lazy home" })
 keymap("n", "<leader>M", cmd.Mason, { desc = ":Mason" })
 
--- write all before quitting
-keymap("n", "ZZ", ":wall! | qa!<CR>", { desc = ":wall & :quitall" })
-
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", function()
 	local lastCommand = fn.getreg(":")
