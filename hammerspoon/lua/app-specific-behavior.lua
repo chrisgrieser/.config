@@ -340,7 +340,7 @@ draftsWatcher = aw.new(function(appName, eventType, appObject)
 		local workspace = isAtOffice() and "Office" or "Home"
 		runWithDelays({ 0.2 }, function()
 			local name = appObject:focusedWindow():title()
-			local isTaskList = name:find("Supermarkt$") or name:find("Drogerie$") or name:find("Ernährung$")
+			local isTaskList = name:find("Supermarkt$") or name:find("Drogerie$")
 			if not isTaskList then appObject:selectMenuItem { "Workspaces", workspace } end
 			appObject:selectMenuItem { "View", "Hide Toolbar" }
 		end)

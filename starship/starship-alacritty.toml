@@ -19,8 +19,7 @@ $status\
 $character\
 """
 
-right_format="""
-$package\
+right_format="""$package\
 ${custom.alfred}\
 $nodejs\
 $python\
@@ -74,7 +73,8 @@ symbol = ""
 #───────────────────────────────────────────────────────────────────────────────
 # GIT
 
-[git_state] # mostly conflicts or rebasing
+# conflicts or rebasing
+[git_state]
 style = 'fg:yellow bg:black'
 
 # checkout
@@ -97,8 +97,8 @@ deleted = '[-$count ](fg:red bg:black)'
 modified = '[~$count ](fg:blue bg:black)'
 renamed = '[凜$count ](fg:blue bg:black)'
 staged = '[ $count ](fg:green bg:black)'
-conflicted = '[⤱$count ](fg:red bg:black)'
-diverged = '[!!$count ](fg:red bg:black)'
+conflicted = '[ $count ](fg:red bg:black)'
+diverged = '[燎$count ](fg:red bg:black)'
 ahead = '[⇡$count ](fg:cyan bg:black)'
 behind = '[⇣$count ](fg:yellow bg:black)'
 ignore_submodules=false
