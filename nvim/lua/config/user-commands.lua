@@ -29,7 +29,7 @@ local function inspect(str)
 				api.nvim_buf_set_option(buf, "filetype", "lua")
 			end
 		end,
-		timeout = 10000,
+		timeout = 15000,
 	})
 
 end

@@ -1,4 +1,4 @@
-require("config/utils")
+require("config.utils")
 --------------------------------------------------------------------------------
 
 -- https://github.com/mityu/vim-applescript
