@@ -76,18 +76,18 @@ map("a", "p"); // disable for one key
 map(",", ";e"); // Settings
 
 // toggle fullscreen
-mapkey("Z", "Fullscreen", function () {
-	if (window.fullScreen) {
-		document.exitFullscreen();
-	} else {
-		document.documentElement.requestFullscreen();
-	}
-});
+// mapkey("Z", "Fullscreen", function () {
+// 	if (window.fullScreen) {
+// 		document.exitFullscreen();
+// 	} else {
+// 		document.documentElement.requestFullscreen();
+// 	}
+// });
 
 //──────────────────────────────────────────────────────────────────────────────
 // Insert Mode
-imap("<Space>", "ciw")
-imap("<Shift-Space>", "daw")
+// imap("<Space>", "ciw") TODO look up requires syntax for this
+// imap("<Shift-Space>", "daw")
 
 //──────────────────────────────────────────────────────────────────────────────
 

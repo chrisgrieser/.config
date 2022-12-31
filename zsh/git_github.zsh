@@ -1,7 +1,7 @@
 # shellcheck disable=SC2164,SC2030,SC2012
 
 alias co="git checkout"
-alias gs='git status'
+alias gs='git --no-optional-locks status'
 alias gd='git diff'
 alias gc="git commit -m"
 alias ga="git add"
@@ -26,7 +26,7 @@ alias ghi='open "$(getGithubURL)/issues"'
 
 # git log
 # append `true` to avoid exit code 141: https://www.ingeniousmalarkey.com/2016/07/git-log-exit-code-141.html
-alias gl="git log --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; true"
+alias gl="git --no-optional-locks log --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; true"
 
 # git log (interactive)
 function gli() {
@@ -75,7 +75,7 @@ function acp() {
 	local COMMIT_MSG="$*"
 	[[ -z "$COMMIT_MSG" ]] && COMMIT_MSG="chore"
 	# shellcheck disable=2155
-	local first_word=$(echo "$COMMIT_MSG" | grep -e "^\w*")
+	local first_word=$(echo "$COMMIT_MSG" | grep -oe "^\w*")
 	conventional_commits="feat chore build fix perf refactor style ci docs test revert"
 	local MSG_LENGTH=${#COMMIT_MSG}
 
