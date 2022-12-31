@@ -1,9 +1,9 @@
 #!/bin/zsh
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
 # with "--submodules" arg → also pull submodules
+MAX_FILE_SIZE_MB=10
 #───────────────────────────────────────────────────────────────────────────────
 
-MAX_FILE_SIZE_MB=10
 cd "$(dirname "$0")" || exit 1 # go to location of this script, i.e. cd'ing into the git repo
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 
@@ -24,7 +24,7 @@ if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
 fi
 
 # git add-commit-pull-push sequence
-msg="$device_name ($filesChanged)"
+msg="auto($device_name): $filesChanged"
 git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
 git pull
 [[ "$1" == "--submodules" ]] && git submodule update --remote
