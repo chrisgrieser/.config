@@ -16,7 +16,7 @@ local lightTheme = "dawnfox"
 -- local darkTheme = "tokyonight-moon"
 -- local lightTheme = "melange"
 -- local darkTheme = "oxocarbon"
-local darkTheme = "kanagawa"
+local darkTheme = "catpuccin"
 
 --------------------------------------------------------------------------------
 
@@ -124,7 +124,7 @@ autocmd("ColorScheme", {
 -- functions not local, so they can be accessed via file watcher
 function setDarkTheme()
 	opt.background = "dark" ---@diagnostic disable-line: assign-type-mismatch
-	g.neovide_transparency = 0.93
+	g.neovide_transparency = 0.92
 	cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 	cmd.colorscheme(darkTheme)
 end
