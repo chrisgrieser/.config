@@ -15,7 +15,6 @@ return {
 				show_current_context = true,
 				use_treesitter = true,
 				strict_tabs = false,
-				filetype_exclude = {},
 			}
 		end,
 	},
@@ -30,31 +29,29 @@ return {
 		end,
 	},
 	{ -- scrollbar
-		"lewis6991/satellite.nvim",
+		"dstein64/nvim-scrollview",
 		event = "VeryLazy",
 		config = function()
-			require("satellite").setup {
+			require("scrollview").setup {
 				current_only = true,
-				winblend = 30,
-				excluded_filetypes = {},
-				handlers = {
-					marks = { enable = false },
-				},
+				winblend = 75,
+				base = "right",
+				column = 1,
 			}
 		end,
 	},
 	{ -- nicer colorcolumn
 		"xiyaowong/virtcolumn.nvim",
-		event = "VeryLazy",
 		init = function() vim.g.virtcolumn_char = "║" end,
+		event = "VeryLazy",
 	},
 	{ -- color previews & color utilities
 		"uga-rosa/ccc.nvim",
 		event = "VeryLazy",
-		cond = function() return g.neovide or g.goneovim end, -- only load in GUI
+		cond = function() return vim.g.neovide or vim.g.goneovim end, -- only load in GUI
 		config = function()
-			opt.termguicolors = true -- required for color previewing, but also messes up look in the terminal
 			local ccc = require("ccc")
+			vim.opt.termguicolors = true -- required for color previewing, but also messes up look in the terminal
 			ccc.setup {
 				win_opts = { border = borderStyle },
 				highlighter = {
@@ -83,7 +80,7 @@ return {
 					["H"] = ccc.mapping.decrease5,
 				},
 			}
-			cmd.CccHighlighterEnable() -- initialize once
+			cmd.CccHighlighterEnable() -- initialize once for the buffer where it's loaded
 		end,
 	},
 	{ -- auto-resize splits

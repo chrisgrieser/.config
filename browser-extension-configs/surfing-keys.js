@@ -8,21 +8,17 @@ const { imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vm
 // ---- SETTINGS ----
 // https://github.com/brookhong/Surfingkeys#edit-your-own-settings
 settings.focusAfterClosed = "last";
-// settings.theme = `
-// 	#sk_status, #sk_find {
-// 		font-size: 16pt;
-// 	}
-// }`;
+settings.richHintsForKeystroke = 400; // like whichkey, value is delay till shown
+settings.hintShiftNonActive = true; // vimium-like: holding shift while pressing hint opens in bg tab
 
 //──────────────────────────────────────────────────────────────────────────────
 
 // IGNORE LIST
 settings.blocklistPattern = undefined; /* eslint-disable-line no-undefined */
 
-// unmap jk on google for web search navigator (vimium-like controls for google only)
-unmap("j", /google/);
+unmap("j", /google/); // unmap jk on google for web search navigator (vimium-like controls for google only)
 unmap("k", /google/);
-unmap("?", /github/);
+unmap("?", /github/); // cheatsheet for github shortcuts
 
 //──────────────────────────────────────────────────────────────────────────────
 // ---- Mappings -----
@@ -40,13 +36,13 @@ map("L", "]]");
 // tabs
 map("e", "R"); // one tab right
 map("b", "E"); // one tab right
-map("<", "<<"); // move tab to the left
-map(">", ">>"); // move tab to the right
+map("B", "<<"); // move tab to the left
+map("E", ">>"); // move tab to the right
 
 map("i", "x"); // close tab
 map("u", "X"); // reopen tab
 
-unmap ("w"); // so it can be mapped for window commands
+unmap("w"); // so it can be mapped for window commands
 map("wq", "gx0"); // close tabs on left
 map("we", "gx$"); // close tabs on right
 map("ww", "gxx"); // close all other tabs
