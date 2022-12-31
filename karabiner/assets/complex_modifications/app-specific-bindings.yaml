@@ -1063,9 +1063,8 @@ rules:
             mandatory:
               - command
         to:
-          - key_code: escape
-          - {key_code: "y", modifiers: [shift]} # z & y switched
-          - {key_code: "y", modifiers: [shift]}
+          # so cursor position and changes are saved properly
+          - shell_command: echo "cmd[[wall | quitall]]" >"/tmp/nvim-automation"
         conditions:
           - type: frontmost_application_if
             file_paths:
