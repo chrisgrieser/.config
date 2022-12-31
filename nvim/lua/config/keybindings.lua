@@ -433,10 +433,11 @@ end)
 keymap("n", "<leader>os", ":set spell!<CR>")
 keymap("n", "<leader>or", ":set relativenumber!<CR>")
 keymap("n", "<leader>on", ":set number!<CR>")
+keymap("n", "<leader>ol", cmd.LspRestart, {desc = "LSP Restart"})
 keymap("n", "<leader>ow", qol.toggleWrap, { desc = "toggle wrap" })
 
 keymap("n", "<leader>od", function()
-	g.diagnosticOn = g.diagnosticOn or true
+	if g.diagnosticOn == nil then g.diagnosticOn = true end
 	if g.diagnosticOn then
 		vim.diagnostic.disable(0)
 	else

@@ -61,14 +61,17 @@ keymap("x", "<Space>", '"_c')
 keymap("o", "<Space>", function() require("various-textobjs").subword(true) end, { desc = "inner subword textobj" })
 
 -- n: [n]ear end of the line
-keymap({ "o", "x" }, "n", require("various-textobjs").nearEoL, { desc = "almost ending of line textobj" })
+keymap({ "o", "x" }, "n", function () require("various-textobjs").nearEoL() end, { desc = "almost ending of line textobj" })
 
 -- o: c[o]lumn textobj
-keymap("o", "o", require("various-textobjs").column, { desc = "column textobj" })
+keymap("o", "o", function() require("various-textobjs").column() end, { desc = "column textobj" })
+
+-- gG: entire buffer textobj
+keymap({"x", "o"}, "gG", function () require("various-textobjs").entireBuffer() end, { desc = "column textobj" })
 
 -- r: [r]est of paragraph (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
-keymap("o", "r", require("various-textobjs").restOfParagraph, { desc = "rest of paragraph (linewise)" })
+keymap("o", "r", function () require("various-textobjs").restOfParagraph() end, { desc = "rest of paragraph (linewise)" })
 
 -- iv/av: value textobj
 keymap({ "x", "o" }, "iv", function() require("various-textobjs").value(true) end, { desc = "inner value textobj" })
