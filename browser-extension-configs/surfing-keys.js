@@ -85,6 +85,11 @@ mapkey("Z", "Fullscreen", function () {
 });
 
 //──────────────────────────────────────────────────────────────────────────────
+// Insert Mode
+imap("<Space>", "ciw")
+imap("<Shift-Space>", "daw")
+
+//──────────────────────────────────────────────────────────────────────────────
 
 // unmapping unused stuff
 removeSearchAlias("b", "s");
