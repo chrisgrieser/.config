@@ -127,10 +127,6 @@ rules:
                 set frontmost to true
                 click menu item "Back" of menu "History" of menu bar 1
               end tell'
-          - key_code: escape # to leave insert mode (Vimium)
-          - key_code: left_arrow
-            modifiers:
-              - command
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:

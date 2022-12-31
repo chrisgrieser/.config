@@ -101,9 +101,9 @@ removeSearchAlias("y", "s");
 removeSearchAlias("s", "s");
 removeSearchAlias("e", "s");
 
-// unmap(";ql");
-// unmap("]]");
-// unmap("[[");
+unmap(";ql"); // show last action
+unmap("]]"); // page navigation
+unmap("[[");
 // unmap("S");
 // unmap("W");
 // unmap("R");
@@ -121,8 +121,8 @@ removeSearchAlias("e", "s");
 // unmap("U");
 // unmap("cs");
 // unmap("cS");
-// unmap("$");
-// unmap("0");
+unmap("$"); // scroll to right
+unmap("0"); // scroll to left
 // unmap("<Alt-i>");
 // unmap("I");
 // unmap("q");
@@ -133,11 +133,11 @@ removeSearchAlias("e", "s");
 // unmap("cf");
 // unmap("yT");
 // unmap("gxp");
-// unmap(";U");
+unmap(";U"); // edit URL (remapped)
 // unmap(";u");
-// unmap("<Ctrl-6>");
-// unmap("gx0");
-// unmap("gx$");
+unmap("<Ctrl-6>"); // switch to last tab (remapped)
+unmap("gx0"); // close tabs to left (remapped)
+unmap("gx$"); // close tabs to right (remapped)
 // unmap("<Alt-p>");
 // unmap("<Alt-m>");
 // unmap("gxt");
@@ -146,7 +146,6 @@ removeSearchAlias("e", "s");
 // unmap("gt");
 // unmap("g?");
 // unmap("g#");
-// unmap("on");
 // unmap("on");
 // unmap("zr");
 // unmap("zi");
@@ -174,7 +173,7 @@ removeSearchAlias("e", "s");
 // unmap("zv");
 // unmap(";pb");
 // unmap(";gw");
-// unmap("gxx");
+unmap("gxx"); // close other tabs (remapped)
 // unmap("zt");
 // unmap(";pm");
 // unmap("zb");
@@ -186,7 +185,7 @@ removeSearchAlias("e", "s");
 // unmap("<Ctrl-Alt-i>");
 // unmap("<Ctrl-h>");
 // unmap("<Ctrl-j>");
-// unmap("g0");
-// unmap("g$");
+unmap("g0"); // first tab
+unmap("g$"); // last tab
 // unmap("ga");
 // unmap("gc");
