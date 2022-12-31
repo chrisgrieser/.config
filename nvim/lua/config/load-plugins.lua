@@ -4,8 +4,8 @@ return {
 
 	-- Themes
 	"EdenEast/nightfox.nvim",
-	"rebelot/kanagawa.nvim",
 	"folke/tokyonight.nvim",
+	-- "rebelot/kanagawa.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "savq/melange",
 
@@ -21,7 +21,7 @@ return {
 			"p00f/nvim-ts-rainbow", -- colored brackets
 		},
 	},
-
+	
 	-- LSP
 	{
 		"neovim/nvim-lspconfig",
@@ -34,7 +34,7 @@ return {
 			"b0o/SchemaStore.nvim", -- schemas for json-lsp
 		},
 	},
-
+	
 	-- Linting & Formatting
 	{
 		"jose-elias-alvarez/null-ls.nvim",
@@ -43,7 +43,7 @@ return {
 			"jayp0521/mason-null-ls.nvim",
 		},
 	},
-
+	
 	-- DAP
 	{
 		"mfussenegger/nvim-dap",
@@ -54,7 +54,7 @@ return {
 			"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
 		},
 	},
-
+	
 	-- File Switching & File Operation
 	{ "chrisgrieser/nvim-genghis", dev = true, lazy = true, dependencies = "stevearc/dressing.nvim" },
 	{
@@ -65,7 +65,7 @@ return {
 			"debugloop/telescope-undo.nvim",
 		},
 	},
-
+	
 	-- Terminal & Git
 	{
 		"TimUntersberger/neogit",
@@ -99,7 +99,7 @@ return {
 			}
 		end,
 	},
-
+	
 	{
 		"axieax/urlview.nvim",
 		cmd = "UrlView",
@@ -114,7 +114,7 @@ return {
 	},
 	"Darazaki/indent-o-matic", -- auto-determine indents
 	{ "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" }, -- better folding
-
+	
 	-- Filetype-specific
 	{ "mityu/vim-applescript", ft = "applescript" }, -- syntax highlighting
 	{ "hail2u/vim-css3-syntax", ft = "css" }, -- better syntax highlighting (until treesitter css looks decent…)
