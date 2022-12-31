@@ -167,6 +167,7 @@ removeSearchAlias("e", "s");
 // unmap("zt");
 // unmap("zv");
 unmap("$"); // scroll to right
+unmap("B"); // add bookmark (remapped)
 unmap("*"); // find selected text (remapped)
 unmap("/"); // find (remapped)
 unmap("0"); // scroll to left
