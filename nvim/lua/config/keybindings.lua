@@ -125,22 +125,30 @@ autocmd("TextYankPost", {
 		-- highlighted yank
 		vim.highlight.on_yank { timeout = 1500 }
 
-		-- sticky yank
-		if vim.v.event.operator == "y" then setCursor(0, g.cursorPreYank) end
+		if vim.v.event.operator == "y" then -- deletion does not need stickiness and also already shifts registers
+			-- sticky yank
+			setCursor(0, g.cursorPreYank)
 
-		-- add yanks and deletes to numbered registers
-		if vim.v.event.regname ~= "" then return end
-		for i = 8, 1, -1 do
-			local regcontent = fn.getreg(tostring(i))
-			fn.setreg(tostring(i + 1), regcontent)
+			-- add yanks and deletes to numbered registers
+			if vim.v.event.regname ~= "" then return end
+			for i = 8, 2, -1 do
+				local regcontent = fn.getreg(tostring(i))
+				fn.setreg(tostring(i + 1), regcontent)
+			end
+			fn.setreg("1", fn.getreg("0")) -- so both y and d copy to "1
+			if g.lastYank then fn.setreg("2", g.lastYank) end
 		end
-		if g.lastYank then fn.setreg("1", g.lastYank) end
-		g.lastYank = fn.getreg('"')
+		g.lastYank = fn.getreg('"') -- do deletes gets stored here as well
 	end,
 })
 
--- cycle through the last deletes/yanks
+function clearallregs()
+	for i = 0, 9, 1 do
+		fn.setreg(tostring(i), "")	
+	end	
+end
 
+-- cycle through the last deletes/yanks
 keymap("n", "P", function()
 	cmd.undo()
 	g.killringCount = g.killringCount + 1

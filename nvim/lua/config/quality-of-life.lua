@@ -161,10 +161,10 @@ function M.alternateFileStatusline()
 	local altFile = expand("#:t")
 	local curFile = expand("%:t")
 
-	if altWindow() then
-		return "  " .. altWindow()
-	elseif altFile == "" and not altOldfile() then -- no oldfile and after start
+	if altFile == "" and not altOldfile() then -- no oldfile and after start
 		return ""
+	elseif altWindow() then
+		return "  " .. altWindow()
 	elseif altFile == "" and altOldfile() then
 		return " " .. vim.fs.basename(altOldfile())
 	elseif curFile == altFile then -- same name, different file
@@ -212,7 +212,7 @@ function M.betterClose()
 	local newAltBuf = ""
 	repeat
 		i = i + 1
-		if i > #openBuffers then 
+		if i > #openBuffers then
 			newAltBuf = altOldfile() or ""
 			break
 		end
