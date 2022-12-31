@@ -5,6 +5,7 @@ return {
 	-- Themes
 	"EdenEast/nightfox.nvim",
 	"rebelot/kanagawa.nvim",
+	{ "catppuccin/nvim", as = "catppuccin" },
 	-- "folke/tokyonight.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "savq/melange",
