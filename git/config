@@ -34,10 +34,8 @@
 	conflictstyle = diff3
 [diff]
 	colorMoved = default
-
-# Delta
 [delta]
-	# deactivate line numbers in side-by-side-view, but keep vertical separator
+	# side-by-side-view: deactivate line numbers in but keep vertical separator
 	line-numbers-left-format = ""
 	line-numbers-right-format = "│ "
 

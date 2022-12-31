@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# shellcheck disable=2034
+GIT_OPTIONAL_LOCKS=0
+
 configError=""
 cd "$DOTFILE_FOLDER" || configError="repo-path wrong"
 dotfiles=$(git status --short)

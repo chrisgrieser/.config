@@ -37,7 +37,7 @@ end
 augroup("branchChange", {})
 autocmd({ "BufEnter", "FocusGained", "WinEnter", "TabEnter" }, {
 	group = "branchChange",
-	callback = function() g.cur_branch = fn.system("git branch --show-current"):gsub("\n$", "") end,
+	callback = function() g.cur_branch = fn.system("git --no-optional-locks branch --show-current"):gsub("\n$", "") end,
 })
 
 local function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…

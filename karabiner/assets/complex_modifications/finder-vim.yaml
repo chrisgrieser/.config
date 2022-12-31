@@ -1030,6 +1030,7 @@ rules:
         from: {key_code: g, modifiers: {mandatory: [control]}}
         to:
           - shell_command: |
+              GIT_OPTIONAL_LOCKS=0
               SEL=$(osascript -e 'tell application "Finder"
                 set sel to (item 1 of (selection as list) as alias)
                 return POSIX path of sel

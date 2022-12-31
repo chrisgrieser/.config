@@ -2,6 +2,10 @@
 
 # with "--submodules" arg → also pull submodules
 MAX_FILE_SIZE_MB=10
+
+# shellcheck disable=2034
+GIT_OPTIONAL_LOCKS=0
+
 #───────────────────────────────────────────────────────────────────────────────
 
 cd "$(dirname "$0")" || exit 1 # go to location of this script, i.e. cd'ing into the git repo

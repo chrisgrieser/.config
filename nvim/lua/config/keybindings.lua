@@ -76,10 +76,7 @@ keymap("n", "+", "*", { desc = "search word under cursor (German keyboard)" })
 keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "visual star (I use `+` though)" })
 
 -- FOLDING
-keymap("n", "^", function()
-	normal("za")
-	cmd.SatelliteRefresh() -- https://github.com/lewis6991/satellite.nvim/blob/main/doc/satellite.txt#L113
-end, { desc = "toggle fold" })
+keymap("n", "^", "za", { desc = "toggle fold" })
 
 -- [M]atchUp
 keymap({ "n", "x", "o" }, "m", "<Plug>(matchup-%)", { desc = "matchup" })
