@@ -88,16 +88,15 @@ keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
 -- CLIPBOARD
 opt.clipboard = "unnamedplus"
 
-g.killringCount = 0
-g.cursorPreYank = getCursor(0)
-g.lastYank = nil
-
--- don't pollute the register
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = "paste without switching register" })
 
+
+g.killringCount = 2
+g.cursorPreYank = getCursor(0)
+g.lastYank = nil
 -- yanking without moving the cursor
 augroup("yankImprovements", {})
 autocmd("CursorMoved", {
@@ -114,37 +113,31 @@ autocmd("TextYankPost", {
 		-- highlighted yank
 		vim.highlight.on_yank { timeout = 1500 }
 
-		if vim.v.event.operator == "y" then -- deletion does not need stickiness and also already shifts registers
-			-- sticky yank
-			setCursor(0, g.cursorPreYank)
+		-- deletion does not need stickiness and also already shifts register, so
+		-- only saving the last yank is required
+		if vim.v.event.operator == "d" then g.lastYank = fn.getreg('"') end
 
-			-- add yanks and deletes to numbered registers
-			if vim.v.event.regname ~= "" then return end
-			for i = 8, 2, -1 do
-				local regcontent = fn.getreg(tostring(i))
-				fn.setreg(tostring(i + 1), regcontent)
-			end
-			fn.setreg("1", fn.getreg("0")) -- so both y and d copy to "1
-			if g.lastYank then fn.setreg("2", g.lastYank) end
+		-- sticky yank
+		setCursor(0, g.cursorPreYank)
+
+		-- add yanks and deletes to numbered registers
+		if vim.v.event.regname ~= "" then return end
+		for i = 8, 2, -1 do
+			local regcontent = fn.getreg(tostring(i))
+			fn.setreg(tostring(i + 1), regcontent)
 		end
-		g.lastYank = fn.getreg('"') -- so deletes get stored here
+		fn.setreg("1", fn.getreg("0")) -- so both y and d copy to "1
+		if g.lastYank then fn.setreg("2", g.lastYank) end
+		g.lastYank = fn.getreg('"')
 	end,
 })
 
 -- cycle through the last deletes/yanks ("2 till "9)
 keymap("n", "P", function()
-	o.more = false
-	cmd.redir("@z")
-	cmd.changes()
-	cmd.redir("END")
-	o.more = true
-	local changes = vim.split(fn.getreg("z"), "\n", {})
-	local lastchange = changes[#changes-1]:gsub("^%s*1%s*%d+%s*%d+%s*", "")
-	print(lastchange)
-	-- cmd.undo()
-	-- normal('"' .. tostring(g.killringCount) .. "p")
-	-- g.killringCount = g.killringCount + 1
-	-- if g.killringCount > 9 then g.killringCount = 2 end -- cycle when at the end
+	if g.killringCount > 2 then cmd.undo() end -- do not undo first call
+	normal('"' .. tostring(g.killringCount) .. "p")
+	g.killringCount = g.killringCount + 1
+	if g.killringCount > 9 then g.killringCount = 2 end -- cycle when at the end
 end, { desc = "simply killring" })
 
 keymap("n", "p", function()
@@ -174,7 +167,6 @@ end, { desc = "paste differently" })
 --------------------------------------------------------------------------------
 
 -- Whitespace Control
-keymap("n", "!", "a <Esc>h", { desc = "insert space" })
 keymap("n", "=", "mzO<Esc>`z", { desc = "add blank above" })
 keymap("n", "_", "mzo<Esc>`z", { desc = "add blank below" })
 
@@ -202,7 +194,7 @@ keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 -- Spelling (mnemonic: [z]pe[l]ling)
 keymap("n", "zl", telescope.spell_suggest, { desc = "spellsuggest" })
 keymap("n", "zg", "zg<CR>", { desc = "mark as correct spelling" }) -- needs extra enter due to `cmdheight=0`
-keymap("n", "gz", "]s", { desc = "next misspelling" })
+keymap("n", "gl", "]s", { desc = "next misspelling" })
 keymap("n", "za", "mz1z=`z", { desc = "autofix spelling" }) -- [a]utofix word under cursor
 
 -- [S]ubstitute Operator (substitute.nvim)
@@ -436,7 +428,7 @@ end)
 keymap("n", "<leader>os", ":set spell!<CR>")
 keymap("n", "<leader>or", ":set relativenumber!<CR>")
 keymap("n", "<leader>on", ":set number!<CR>")
-keymap("n", "<leader>ol", cmd.LspRestart, {desc = "LSP Restart"})
+keymap("n", "<leader>ol", cmd.LspRestart, { desc = "LSP Restart" })
 keymap("n", "<leader>ow", qol.toggleWrap, { desc = "toggle wrap" })
 
 keymap("n", "<leader>od", function()

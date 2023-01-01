@@ -144,8 +144,8 @@ nmap &b& :blankBelow
 nmap _ &b&k
 
 " append space after cursor position
-exmap appendSpace jsfile Meta/obsidian-vim-helpers.js {appendSpace()}
-nmap ! :appendSpace
+" exmap appendSpace jsfile Meta/obsidian-vim-helpers.js {appendSpace()}
+" nmap ! :appendSpace
 
 """"""""""""""""""""""
 " Markdown-specific
