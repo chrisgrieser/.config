@@ -209,8 +209,8 @@ keymap("n", "S", function() require("substitute").eol() end, { desc = "substitut
 keymap("n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange op" })
 keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
--- ISwap
-keymap("n", "<leader>e", cmd.ISwapWith, { desc = "exchange nodes" })
+-- IS[w]ap
+keymap("n", "gw", cmd.ISwapWith, { desc = "exchange nodes (ISwap)" })
 
 -- search & replace
 keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "search & replace" })
