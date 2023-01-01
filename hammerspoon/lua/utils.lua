@@ -7,7 +7,7 @@ app = hs.application
 applescript = hs.osascript.applescript
 uriScheme = hs.urlevent.bind
 pw = hs.pathwatcher.new
-
+tableContains = hs.fnutils.contains
 --------------------------------------------------------------------------------
 
 hyper = {"cmd", "alt", "ctrl", "shift"}

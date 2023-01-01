@@ -34,8 +34,8 @@ map("gh", "[["); // Next/Prev Page
 map("gl", "]]");
 
 // tabs
-map("H", "R"); // goto tab right
-map("L", "E"); // goto tab left
+map("H", "E"); // goto tab right
+map("L", "R"); // goto tab left
 map("b", "<<"); // move tab to the left
 map("e", ">>"); // move tab to the right
 

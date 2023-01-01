@@ -14,5 +14,5 @@ if pgrep "neovide"; then
 	osascript -e 'tell application "Neovide" to activate'
 else
 	# shellcheck disable=2086
-	neovide --notabs --frame="buttonless" --multigrid $LINE "$file"
+	neovide --geometry=101x32 --notabs --frame="buttonless" $LINE "$file"
 fi

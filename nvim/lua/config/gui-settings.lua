@@ -31,7 +31,7 @@ end)
 -- Behavior
 g.neovide_confirm_quit = false
 g.neovide_hide_mouse_when_typing = true
-g.neovide_remember_window_size = true
+g.neovide_remember_window_size = false -- done via --geometry in `neovide` call
 
 -- Keymaps
 g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
@@ -44,11 +44,11 @@ g.neovide_underline_automatic_scaling = true -- slightly unstable according to d
 -- INFO: Transparency set in theme-settings.lua, since varying with dark/light mode
 
 -- cursor
-g.neovide_cursor_animation_length = 0.01
+g.neovide_cursor_animation_length = 0.003
 g.neovide_cursor_trail_size = 0.5
 g.neovide_cursor_unfocused_outline_width = 0.1
 
-g.neovide_cursor_vfx_mode = "ripple" -- railgun|torpedo|pixiedust|sonicboom|ripple|wireframe
+g.neovide_cursor_vfx_mode = "" -- railgun|torpedo|pixiedust|sonicboom|ripple|wireframe
 
 local particleModes = {"railgun", "torpedo", "pixiedust"}
 if vim.tbl_contains(particleModes, g.neovide_cursor_vfx_mode) then

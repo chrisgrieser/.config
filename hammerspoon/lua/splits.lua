@@ -2,45 +2,41 @@ require("lua.utils")
 require("lua.window-management")
 --------------------------------------------------------------------------------
 
+-- helpers
+---@return boolean whether a split is currently active
+local function splitActive()
+	if SPLIT_RIGHT and SPLIT_LEFT then return true end
+	return false
+end
+
+---@return table list of apps that are running, formatted for hs.chooser
 local function runningApps()
-	local wins = hs.window:allWindows()
 	local appsArr = {}
-	for i = 1, #wins do
-		local appName = wins[i]:application():name()
-		local isExcludedApp = appName == frontAppName() or appName == "Hammerspoon" or appName == "Twitterrific" or
-			appName == "Notification Centre"
-		if not (isExcludedApp) then
-			table.insert(appsArr, {text = appName})
-		end
+	for _, win in pairs(hs.window:allWindows()) do
+		local appName = win:application():name()
+		local isExcludedApp = { "Hammerspoon", "Twitterrific", "Notification Centre", frontAppName() }
+		if not tableContains(isExcludedApp, appName) then table.insert(appsArr, { text = appName }) end
 	end
 	return appsArr
 end
 
-local function startSplit()
-	local function splitWithSecondWin(selection)
-		if not (selection) then return end
-		local appName = selection.text
-		local secondWin = hs.application(appName):allWindows()[1]
-		vsplit("split", secondWin)
+--------------------------------------------------------------------------------
+
+---if one of the two is activated, also activate the other
+---unsplit if one of the two windows has been closed
+---@param mode string start|end of paired-activation
+local function pairedActivation(mode)
+	if mode == "stop" then
+		if wf_pairedActivation then wf_pairedActivation:unsubscribeAll() end
+		wf_pairedActivation = nil
+		return
 	end
 
-	local apps = runningApps()
-	hs.chooser.new(splitWithSecondWin)
-		:choices(apps)
-		:rows(#apps - 2)-- for whatever reason, the rows parameter is off by 3?!
-		:width(30)
-		:placeholderText("Split " .. frontAppName() .. " with...")
-		:show()
-end
+	local app1 = SPLIT_LEFT:application():name()
+	local app2 = SPLIT_RIGHT:application():name()
 
--- if one of the two is activated, also activate the other
--- unsplit if one of the two windows has been closed
-function pairedActivation(mode)
-	if mode == "start" then
-		local app1 = SPLIT_LEFT:application():name()
-		local app2 = SPLIT_RIGHT:application():name()
-		wf_pairedActivation = wf.new {app1, app2}
-		wf_pairedActivation:subscribe(wf.windowFocused, function(focusedWin)
+	wf_pairedActivation = wf.new({ app1, app2 })
+		:subscribe(wf.windowFocused, function(focusedWin)
 			-- not using :focus(), since that would cause infinite recursion
 			-- raising needs small delay, so that focused window is already at front
 			if focusedWin:id() == SPLIT_RIGHT:id() then
@@ -49,32 +45,25 @@ function pairedActivation(mode)
 				runWithDelays(0.02, function() SPLIT_RIGHT:raise() end)
 			end
 		end)
-		wf_pairedActivation:subscribe(wf.windowDestroyed, function(closedWin)
-			if not (SPLIT_LEFT) or not (SPLIT_RIGHT) or (SPLIT_RIGHT:id() == closedWin:id()) or
-				(SPLIT_LEFT:id() == closedWin:id()) then
-				vsplit("unsplit")
+		:subscribe(wf.windowDestroyed, function(closedWin)
+			if
+				not SPLIT_LEFT
+				or not SPLIT_RIGHT
+				or (SPLIT_RIGHT:id() == closedWin:id())
+				or (SPLIT_LEFT:id() == closedWin:id())
+			then
+				vsplitSetLayout("unsplit")
 			end
 		end)
-	elseif mode == "stop" then
-		if wf_pairedActivation then wf_pairedActivation:unsubscribeAll() end
-		wf_pairedActivation = nil
-	end
 end
 
-function vsplit(mode, secondWin)
+---main split function
+---@param mode string swap|unsplit|split, split will use the secondWin and the current win
+---@param secondWin? hs.window required when using mode "split"
+function vsplitSetLayout(mode, secondWin)
 	-- various guard clauses
-	local splitActive
-	if SPLIT_RIGHT and SPLIT_LEFT then
-		splitActive = true
-	else
-		splitActive = false
-	end
-	if not (splitActive) and (mode == "swap" or mode == "unsplit") then
+	if not (splitActive()) and (mode == "swap" or mode == "unsplit") then
 		notify("no split active")
-		return
-	end
-	if splitActive and mode == "split" then
-		notify("split still active")
 		return
 	end
 
@@ -112,15 +101,21 @@ function vsplit(mode, secondWin)
 	SPLIT_LEFT:raise()
 	runWithDelays(0.3, function()
 		if SPLIT_RIGHT:application() then
-			if SPLIT_RIGHT:application():name() == "Drafts" then toggleDraftsSidebar(SPLIT_RIGHT)
-			elseif SPLIT_RIGHT:application():name() == "Obsidian" then toggleObsidianSidebar(SPLIT_RIGHT)
-			elseif SPLIT_RIGHT:application():name() == "Highlights" then toggleHighlightsSidebar(SPLIT_RIGHT)
+			if SPLIT_RIGHT:application():name() == "Drafts" then
+				toggleDraftsSidebar(SPLIT_RIGHT)
+			elseif SPLIT_RIGHT:application():name() == "Obsidian" then
+				toggleObsidianSidebar(SPLIT_RIGHT)
+			elseif SPLIT_RIGHT:application():name() == "Highlights" then
+				toggleHighlightsSidebar(SPLIT_RIGHT)
 			end
 		end
 		if SPLIT_LEFT:application() then
-			if SPLIT_LEFT:application():name() == "Drafts" then toggleDraftsSidebar(SPLIT_LEFT)
-			elseif SPLIT_LEFT:application():name() == "Obsidian" then toggleObsidianSidebar(SPLIT_LEFT)
-			elseif SPLIT_LEFT:application():name() == "Highlights" then toggleHighlightsSidebar(SPLIT_LEFT)
+			if SPLIT_LEFT:application():name() == "Drafts" then
+				toggleDraftsSidebar(SPLIT_LEFT)
+			elseif SPLIT_LEFT:application():name() == "Obsidian" then
+				toggleObsidianSidebar(SPLIT_LEFT)
+			elseif SPLIT_LEFT:application():name() == "Highlights" then
+				toggleHighlightsSidebar(SPLIT_LEFT)
 			end
 		end
 	end)
@@ -131,9 +126,32 @@ function vsplit(mode, secondWin)
 	end
 end
 
+---select a second window to pass to vsplitSetLayout()
+local function selectSecondWin()
+	local apps = runningApps()
+	hs
+		.chooser
+		.new(function(selection)
+			if not selection then return end
+			local appName = selection.text
+			local secondWin = hs.application(appName):allWindows()[1]
+			vsplitSetLayout("split", secondWin)
+		end)
+		:choices(apps)
+		:rows(#apps - 2) -- for whatever reason, the rows parameter is off by 3?!
+		:width(30)
+		:placeholderText("Split " .. frontAppName() .. " with...")
+		:show()
+end
+
 --------------------------------------------------------------------------------
 -- HOTKEYS
 
-hotkey(hyper, "X", function() vsplit("swap") end)
-hotkey(hyper, "C", function() vsplit("unsplit") end)
-hotkey(hyper, "V", startSplit)
+hotkey(hyper, "X", function() vsplitSetLayout("swap") end)
+hotkey(hyper, "V", function()
+	if splitActive() then
+		selectSecondWin()
+	else
+		vsplitSetLayout("unsplit")
+	end
+end)

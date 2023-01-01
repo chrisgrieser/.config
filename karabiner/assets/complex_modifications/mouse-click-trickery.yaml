@@ -105,7 +105,7 @@ rules:
           pointing_button: button3
         to:
           # so cursor position and changes are saved properly
-          - shell_command: echo "cmd[[wall | quitall]]" >"/tmp/nvim-automation"
+          - shell_command: echo "vim.cmd [[silent! wqall]]" >"/tmp/nvim-automation"
         conditions:
           - type: frontmost_application_if
             file_paths:
