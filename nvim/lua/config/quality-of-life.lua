@@ -418,7 +418,7 @@ function M.quicklog()
 end
 
 function M.timelog()
-	if not g.timelogCount then g.timelogCount = 0 end
+	if not g.timelogStart == nil then g.timelogStart = true end
 	local logStatement1, logStatement2
 	local ft = bo.filetype
 
@@ -447,13 +447,13 @@ function M.timelog()
 		vim.notify("Timelog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
-	local logToAdd = (g.timelogCount % 2 == 0) and logStatement1 or logStatement2
+	local logToAdd = g.timelogStart and logStatement1 or logStatement2
 
 	append(".", logToAdd)
-	for _ = 1, #logToAdd, 1 do
+	for i = 1, #logToAdd, 1 do
 		normal("j==")
 	end
-	g.timelogCount = g.timelogCount + 1
+	g.timelogStart = not g.timelogStart
 end
 
 ---adds simple "beep" log statement to check whether conditionals have been
