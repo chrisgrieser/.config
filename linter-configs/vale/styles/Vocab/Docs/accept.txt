@@ -38,3 +38,4 @@ As
 etc.
 textobj
 filetypes
+allows
