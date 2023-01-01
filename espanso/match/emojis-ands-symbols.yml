@@ -2,6 +2,30 @@
 # ------------------------------------------
 
 matches:
+
+  - triggers: ['!ctrl', "!control"]
+    replace: ⌃
+  - trigger: '!space'
+    replace: ␣
+  - trigger: '!shift'
+    replace: ⇧
+  - trigger: '!cmd'
+    replace: ⌘
+  - triggers: ['!alt', "!opt"]
+    replace: ⌥
+  - triggers: ['!caps', "!hyper"]
+    replace: ⇪
+  - trigger: '!esc'
+    replace: ⎋
+  - trigger: '!tab'
+    replace: ↹
+  - triggers: ['!return', "!enter"]
+    replace: ↵
+  - trigger: '!delete'
+    replace: ⌦
+  - trigger: '!backspace'
+    replace: ⌫
+
   - trigger: '!no'
     replace: ❌
   - trigger: '!info'
@@ -17,11 +41,8 @@ matches:
   - trigger: '->'
     replace: →
     word: true
-  - trigger: '!->'
-    replace: ▸
   - trigger: '->>'
     replace: ➡️
-    word: true
   - trigger: '!ampel'
     replace: 🔴🟡🟢
   - trigger: ' mm'

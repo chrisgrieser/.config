@@ -288,7 +288,7 @@ brew services restart sketchybar</string>
 				<key>keyword</key>
 				<string>bar</string>
 				<key>subtext</key>
-				<string>⌘: Reload</string>
+				<string>↵:Restart, ⌘↵: Reload</string>
 				<key>text</key>
 				<string>❗️ Restart SketchyBar</string>
 				<key>withspace</key>
