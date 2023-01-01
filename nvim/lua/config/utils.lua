@@ -2,7 +2,6 @@
 --------------------------------------------------------------------------------
 -- NVIM UTILS
 
-opt = vim.opt -- global options obj
 g = vim.g -- global variables
 api = vim.api
 fn = vim.fn
@@ -10,6 +9,8 @@ cmd = vim.cmd
 bo = vim.bo -- buffer-scoped options
 b = vim.b -- buffer-scoped variables
 wo = vim.wo -- window-scoped variables
+opt = vim.opt -- global options obj
+o = vim.o -- global options variables
 
 augroup = vim.api.nvim_create_augroup
 autocmd = vim.api.nvim_create_autocmd

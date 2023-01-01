@@ -101,12 +101,13 @@ return {
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
 		config = function()
+			local gitCommitMsgLength = 50
 			require("dressing").setup {
 				input = {
 					border = borderStyle,
 					relative = "win",
-					max_width = 52, -- length git commit msg (+ 2 for borders)
-					min_width = 52,
+					max_width = gitCommitMsgLength,
+					min_width = gitCommitMsgLength,
 					win_options = {
 						sidescrolloff = 0,
 						winblend = 0,
