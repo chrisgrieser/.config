@@ -198,7 +198,7 @@ keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Spelling (mnemonic: [z]pe[l]ling)
 keymap("n", "zl", telescope.spell_suggest, { desc = "spellsuggest" })
-keymap("n", "zg", "zg<CR>", { desc = "mark as correct spelling" }) -- needs extra enter due to `cmdheight=0`
+keymap("n", "zg", "zg", { desc = "mark as correct spelling" }) -- needs extra enter due to `cmdheight=0`
 keymap("n", "gl", "]s", { desc = "next misspelling" })
 keymap("n", "za", "mz1z=`z", { desc = "autofix spelling" }) -- [a]utofix word under cursor
 
