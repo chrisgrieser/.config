@@ -93,7 +93,6 @@ keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = "paste without switching register" })
 
-
 g.killringCount = 2
 g.cursorPreYank = getCursor(0)
 g.lastYank = nil
@@ -115,7 +114,10 @@ autocmd("TextYankPost", {
 
 		-- deletion does not need stickiness and also already shifts register, so
 		-- only saving the last yank is required
-		if vim.v.event.operator == "d" then g.lastYank = fn.getreg('"') end
+		if vim.v.event.operator == "d" then
+			g.lastYank = fn.getreg('"')
+			return
+		end
 
 		-- sticky yank
 		setCursor(0, g.cursorPreYank)
