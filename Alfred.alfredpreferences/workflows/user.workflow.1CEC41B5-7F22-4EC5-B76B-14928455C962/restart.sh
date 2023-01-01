@@ -3,7 +3,7 @@ FRONT_APP=$(osascript -e 'tell application "System Events" to return name of fir
 
 if [[ "$FRONT_APP" == "neovide" ]]; then
 	# so cursor position and changes are saved properly
-	echo "cmd[[wall | quitall]]" >"/tmp/nvim-automation"
+	echo "cmd[[qwall]]" >"/tmp/nvim-automation"
 else
 	killall "$FRONT_APP"
 fi
