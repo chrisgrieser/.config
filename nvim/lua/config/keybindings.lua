@@ -32,7 +32,6 @@ keymap("n", "<leader>la", "@:", { desc = "Run last command again" })
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 keymap({ "o", "x" }, "H", "^")
 keymap("n", "H", "0^") -- 0^ ensures fully scrolling to the left on long lines
-
 keymap({ "n", "x", "o" }, "L", "$")
 
 keymap("n", "J", function() qol.overscroll("6j") end, { desc = "6j (with overscroll)" })
@@ -71,7 +70,7 @@ keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "visual star (I 
 keymap("n", "^", "za", { desc = "toggle fold" })
 
 -- [M]atchUp
-keymap({ "n", "x", "o" }, "m", "<Plug>(matchup-%)", { desc = "matchup" })
+keymap({ "n", "x" }, "m", "<Plug>(matchup-%)", { desc = "matchup" })
 
 -- Hunks & changes
 keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
