@@ -17,7 +17,7 @@ if [[ "$FRONT_APP" == "neovide" ]]; then
 	[[ -e "$temp" ]] && rm "$temp"
 	nvim -c "redir > $temp | echo v:oldfiles[0] | redir end | q" &>/dev/null
 	sleep 0.1
-	open "$(tr -d "\n" < "$temp")"
+	open "$(tr -d "\n" <"$temp")"
 else
 	open -a "$FRONT_APP"
 fi

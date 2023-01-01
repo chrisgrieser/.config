@@ -32,9 +32,6 @@ export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
 # vidir availability
 export PATH="$DOTFILE_FOLDER/zsh/plugins":$PATH
 
-# NEOVIM: Neovide https://neovide.dev/command-line-referencehtml#frame
-export NEOVIDE_FRAME="buttonless"
-
 # NEOVIM: completions for cmp-zsh https://github.com/tamago324/cmp-zsh#configuration
 [[ -d $HOME/.zsh/comp ]] && export FPATH="$HOME/.zsh/comp:$FPATH"
 
