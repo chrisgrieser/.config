@@ -238,6 +238,12 @@ keymap(
 	function() require("refactoring").refactor("Inline Variable") end,
 	{ desc = "Refactor: Inline Variable" }
 )
+keymap(
+	"n",
+	"<leader>e",
+	function() require("refactoring").refactor("Extract Variable") end,
+	{ desc = "Refactor: Extract Variable" }
+)
 
 -- Logging & Debugging
 keymap({ "n", "x" }, "<leader>ll", qol.quicklog, { desc = "add log statement" })

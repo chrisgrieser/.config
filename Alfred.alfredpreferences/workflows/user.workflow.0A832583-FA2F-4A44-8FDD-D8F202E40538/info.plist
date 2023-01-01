@@ -10,6 +10,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>986C033D-6BCE-4098-9098-F4A46BF1703B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Reload Sketchybar</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>335056B8-CF17-4C0A-AC12-6F8AD5A5D685</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -38,19 +48,6 @@
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Save</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>18F1473F-54DE-48F6-B18D-838C540701AF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>986C033D-6BCE-4098-9098-F4A46BF1703B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -261,27 +258,6 @@ sketchybar --update</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>bar</string>
-				<key>subtext</key>
-				<string>only updates items</string>
-				<key>text</key>
-				<string>🔁 Reload SketchyBar</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>18F1473F-54DE-48F6-B18D-838C540701AF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -310,9 +286,9 @@ brew services restart sketchybar</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>barr</string>
+				<string>bar</string>
 				<key>subtext</key>
-				<string></string>
+				<string>⌘: Reload</string>
 				<key>text</key>
 				<string>❗️ Restart SketchyBar</string>
 				<key>withspace</key>
@@ -352,17 +328,6 @@ brew services restart sketchybar</string>
 			<key>ypos</key>
 			<real>100</real>
 		</dict>
-		<key>18F1473F-54DE-48F6-B18D-838C540701AF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>reload</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>290</real>
-		</dict>
 		<key>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</key>
 		<dict>
 			<key>colorindex</key>
@@ -377,7 +342,7 @@ brew services restart sketchybar</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>235</real>
+			<real>220</real>
 			<key>ypos</key>
 			<real>445</real>
 		</dict>
@@ -404,7 +369,7 @@ brew services restart sketchybar</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>235</real>
+			<real>220</real>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
