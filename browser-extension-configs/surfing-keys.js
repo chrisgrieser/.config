@@ -1,7 +1,7 @@
 /* global api, settings, window, document */
 
 // Compatibility Prefix
-const { imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vmapkey, vunmap } = api;
+const { imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vmapkey, vunmap, aceVimMap } = api;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -30,12 +30,12 @@ settings.scrollStepSize = 300;
 
 map("h", "S"); // History Back/Forward
 map("l", "D");
-map("H", "[["); // Next/Prev Page
-map("L", "]]");
+map("gh", "[["); // Next/Prev Page
+map("gl", "]]");
 
 // tabs
-map("e", "R"); // one tab right
-map("b", "E"); // one tab right
+map("H", "R"); // goto tab right
+map("L", "E"); // goto tab left
 map("B", "<<"); // move tab to the left
 map("E", ">>"); // move tab to the right
 
@@ -51,7 +51,7 @@ map("wv", "W"); // move tab to new window (vsplit with Hammerspoon)
 map("wm", ";gw"); // merge all windows to current one
 
 map("t", "T"); // choose tab via hint
-settings.tabsThreshold = 7; // higher than this threshold, fuzzy find instead
+settings.tabsThreshold = 8; // higher than this threshold, fuzzy find instead
 
 // Links
 map("F", "C"); // Open Hint in new tab
@@ -62,9 +62,8 @@ map("ge", ";U"); // Edit current URL
 map("ye", "yv"); // yank text of an element
 map("p", "cc"); // open URL from clipboard or selection
 
-// find & visual
+// find
 map("-", "/"); // find
-map("+", "*"); // find selection
 
 // Misc
 map("B", "ab"); // bookmark
@@ -86,9 +85,16 @@ map(",", ";e"); // Settings
 // });
 
 //──────────────────────────────────────────────────────────────────────────────
-// Insert Mode
-// imap("<Space>", "ciw") TODO look up requires syntax for this
-// imap("<Shift-Space>", "daw")
+// Insert Mode & ACE editor
+
+// BUG these seem not to be working: https://github.com/brookhong/Surfingkeys/discussions/1926
+aceVimMap("<Space>", "ciw");
+aceVimMap("<S-Space>", "daw");
+aceVimMap("H", "0");
+aceVimMap("L", "$");
+aceVimMap("j", "gj");
+aceVimMap("l", "gk");
+
 imap("<Ctrl-a>", "<Ctrl-f>"); // boL
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -103,69 +109,6 @@ removeSearchAlias("y", "s");
 removeSearchAlias("s", "s");
 removeSearchAlias("e", "s");
 
-// unmap(";ap");
-// unmap(";di");
-// unmap(";e");
-// unmap(";fs");
-// unmap(";gt");
-// unmap(";gw");
-// unmap(";j");
-// unmap(";m");
-// unmap(";pa");
-// unmap(";pb");
-// unmap(";pc");
-// unmap(";pd");
-// unmap(";pf");
-// unmap(";ps");
-// unmap(";u");
-// unmap(";v");
-// unmap(";w");
-// unmap(";yQ");
-// unmap("<Alt-m>");
-// unmap("<Alt-p>");
-// unmap("<Ctrl-Alt-i>");
-// unmap("<Ctrl-h>");
-// unmap("<Ctrl-j>");
-// unmap("C");
-// unmap("I");
-// unmap("P");
-// unmap("R");
-// unmap("U");
-// unmap("W");
-// unmap("cS");
-// unmap("cf");
-// unmap("cp");
-// unmap("cs");
-// unmap("d");
-// unmap("g#");
-// unmap("g?");
-// unmap("gT");
-// unmap("ga");
-// unmap("gb");
-// unmap("gc");
-// unmap("gf");
-// unmap("gn");
-// unmap("gs");
-// unmap("gt");
-// unmap("gxT");
-// unmap("gxp");
-// unmap("gxt");
-// unmap("on");
-// unmap("q");
-// unmap("yG");
-// unmap("yS");
-// unmap("ya");
-// unmap("yh");
-// unmap("yj");
-// unmap("yma");
-// unmap("yq");
-// unmap("yv");
-// unmap("zb");
-// unmap("zi");
-// unmap("zo");
-// unmap("zr");
-// unmap("zt");
-// unmap("zv");
 unmap("$"); // scroll to right
 unmap("B"); // add bookmark (remapped)
 unmap("*"); // find selected text (remapped)
@@ -182,9 +125,9 @@ unmap("<Alt-i>"); // pass through (remapped)
 unmap("<Ctrl-'>"); // jump to vim-mark in new tab
 unmap("<Ctrl-6>"); // switch to last tab (remapped)
 unmap("<Ctrl-a>"); // BoL (remapped)
-unmap("D");
+unmap("D"); // scroll donw (remapped)
 unmap("S"); // history back (remapped)
-unmap("[[");
+unmap("[["); // page navigation (remapped)
 unmap("]]"); // page navigation (remapped)
 unmap("cc"); // paste link (remapped)
 unmap("g$"); // last tab

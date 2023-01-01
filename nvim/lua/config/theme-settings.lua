@@ -1,11 +1,13 @@
 --------------------------------------------------------------------------------
 -- CONFIG
-local lightTheme = "dawnfox"
-local darkTheme = "tokyonight-moon"
+local lightTheme = "rose-pine"
+local darkTheme = "rose-pine"
+-- local lightTheme = "dawnfox"
+-- local darkTheme = "tokyonight-moon"
 -- local lightTheme = "melange"
 -- local darkTheme = "oxocarbon"
-local darkTransparency = 0.97
-local lightTransparency = 0.95
+local darkTransparency = 0.95
+local lightTransparency = 0.94
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -18,7 +20,7 @@ end
 
 ---@param hlgroup string
 ---@param changes string
-local function addHighlight(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. changes) end
+local function setHighlight(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. changes) end
 --------------------------------------------------------------------------------
 
 -- Annotations
@@ -40,35 +42,35 @@ local function customHighlights()
 		"SpellBad",
 	}
 	for _, v in pairs(highlights) do
-		addHighlight(v, "gui=underline")
+		setHighlight(v, "gui=underline")
 	end
 
 	-- active indent
 	linkHighlight("IndentBlanklineContextChar", "Comment")
 
 	-- URLs
-	addHighlight("urls", "cterm=underline gui=underline")
+	setHighlight("urls", "cterm=underline gui=underline")
 	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&]*]])
 
 	-- rainbow brackets without aggressive red
-	addHighlight("rainbowcol1", " guifg=#7e8a95")
+	setHighlight("rainbowcol1", " guifg=#7e8a95")
 
 	-- more visible matchparens
-	addHighlight("MatchParen", " gui=underdotted cterm=underdotted")
+	setHighlight("MatchParen", " gui=underdotted cterm=underdotted")
 
 	-- Codi
 	linkHighlight("CodiVirtualText", "Comment")
 
 	-- treesittter refactor focus
-	addHighlight("TSDefinition", " term=underline gui=underdotted")
-	addHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
+	setHighlight("TSDefinition", " term=underline gui=underdotted")
+	setHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
 end
 
 local function themeModifications()
 	local mode = opt.background:get()
 	local theme = g.colors_name
 
-	-- tokyo night
+	-- tokyonight
 	if theme == "tokyonight" then
 		-- HACK bugfix for https://github.com/neovim/neovim/issues/20456
 		linkHighlight("luaParenError.highlight", "NormalFloat")
@@ -76,11 +78,11 @@ local function themeModifications()
 
 		local modes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 		for _, v in pairs(modes) do
-			addHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
-			addHighlight("lualine_y_diff_added_" .. v, "guifg=#8cbf8e")
+			setHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
+			setHighlight("lualine_y_diff_added_" .. v, "guifg=#8cbf8e")
 		end
-		addHighlight("GitSignsChange", "guifg=#acaa62")
-		addHighlight("GitSignsAdd", "guifg=#7fcc82")
+		setHighlight("GitSignsChange", "guifg=#acaa62")
+		setHighlight("GitSignsAdd", "guifg=#7fcc82")
 		linkHighlight("ScrollView", "Folded")
 
 	-- oxocarbon
@@ -88,16 +90,31 @@ local function themeModifications()
 		linkHighlight("FloatTitle", "TelescopePromptTitle")
 		linkHighlight("@function", "@function.builtin")
 
+	-- rose-pine
+	elseif theme == "rose-pine" then
+		local blueHlgroups = {
+			"@keyword",
+			"@include",
+			"@exception",
+			"@repeat",
+			"@conditional",
+			"Conditional",
+			"@string.escape",
+		}
+		for _, hlgroup in pairs(blueHlgroups) do
+			setHighlight(hlgroup, "guifg=#4fa1c3")
+		end
+
 	-- kanagawa
 	elseif theme == "kanagawa" then
-		addHighlight("ScrollView", "guibg=#303050")
-		addHighlight("VirtColumn", "guifg=#323036")
+		setHighlight("ScrollView", "guibg=#303050")
+		setHighlight("VirtColumn", "guifg=#323036")
 		linkHighlight("UfoFoldedBg", "Folded")
 
 	-- dawnfox
 	elseif theme == "dawnfox" then
-		addHighlight("IndentBlanklineChar", "guifg=#deccba")
-		addHighlight("VertSplit", "guifg=#b29b84")
+		setHighlight("IndentBlanklineChar", "guifg=#deccba")
+		setHighlight("VertSplit", "guifg=#b29b84")
 
 	-- melange
 	elseif theme == "melange" then
