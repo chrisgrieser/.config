@@ -92,21 +92,15 @@ aceVimMap("H", "0");
 aceVimMap("L", "$");
 aceVimMap("j", "gj");
 aceVimMap("k", "gk");
-aceVimMap("U", "<C-R>");
+aceVimMap("U", "<C-r>");
+aceVimMap("J", "6j");
+aceVimMap("K", "6k");
 
 imap("<Ctrl-a>", "<Ctrl-f>"); // boL
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// unmapping unused stuff
-removeSearchAlias("b", "s");
-removeSearchAlias("d", "s");
-removeSearchAlias("g", "s");
-removeSearchAlias("h", "s");
-removeSearchAlias("w", "s");
-removeSearchAlias("y", "s");
-removeSearchAlias("s", "s");
-removeSearchAlias("e", "s");
+// unmapping unused stuff to make the cheatsheet more useful
 
 unmap("$"); // scroll to right
 unmap("B"); // add bookmark (remapped)
@@ -137,3 +131,13 @@ unmap("gxx"); // close other tabs (remapped)
 unmap("yQ"); // copy omnibar query history
 unmap("yT"); // duplicate tab in background (remapped)
 unmap("ys"); // copy page source
+
+removeSearchAlias("b", "s");
+removeSearchAlias("d", "s");
+removeSearchAlias("g", "s");
+removeSearchAlias("h", "s");
+removeSearchAlias("w", "s");
+removeSearchAlias("y", "s");
+removeSearchAlias("s", "s");
+removeSearchAlias("e", "s");
+
