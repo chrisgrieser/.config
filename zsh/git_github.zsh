@@ -1,7 +1,7 @@
 # shellcheck disable=SC2164,SC2030,SC2012
 
 alias co="git checkout"
-alias gs='git --no-optional-locks status'
+alias gs='git status'
 alias gd='git diff'
 alias gc="git commit -m"
 alias ga="git add"
@@ -150,14 +150,11 @@ function rel() {
 	if [[ -f .release.sh ]]; then
 		zsh .release.sh "$*"
 	elif [[ -f ../.release.sh ]]; then
-		cd ..
-		zsh .release.sh "$*"
+		zsh ../.release.sh "$*"
 	elif [[ -f ../../.release.sh ]]; then
-		cd ../..
-		zsh .release.sh "$*"
+		zsh ../../.release.sh "$*"
 	elif [[ -f ../../../.release.sh ]]; then
-		cd ../../..
-		zsh .release.sh "$*"
+		zsh ../../../.release.sh "$*"
 	else
 		echo "No '.release.sh' found."
 	fi
@@ -180,7 +177,7 @@ function gdf() {
 		echo "🔍 multiple files found: "
 		echo "$deleted_path"
 		echo
-		echo "ℹ️ narrow down query so only one file is selected."
+		echo "➡️ narrow down query so only one file is selected."
 		return 0
 	elif [[ -z "$deleted_path" ]]; then
 		echo "🔍 no deleted file found"

@@ -96,7 +96,7 @@ g.lastYank = nil
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
-keymap("x", "p", "P", { desc = "paste without switcing register" })
+keymap("x", "p", "P", { desc = "paste without switching register" })
 
 -- yanking without moving the cursor
 augroup("yankImprovements", {})
@@ -133,14 +133,22 @@ autocmd("TextYankPost", {
 
 -- cycle through the last deletes/yanks ("2 till "9)
 keymap("n", "P", function()
-	cmd.undo()
-	normal('"' .. tostring(g.killringCount) .. "p")
-	g.killringCount = g.killringCount + 1
-	if g.killringCount > 9 then g.killringCount = 2 end
+	o.more = false
+	cmd.redir("@z")
+	cmd.changes()
+	cmd.redir("END")
+	o.more = true
+	local changes = vim.split(fn.getreg("z"), "\n", {})
+	local lastchange = changes[#changes-1]:gsub("^%s*1%s*%d+%s*%d+%s*", "")
+	print(lastchange)
+	-- cmd.undo()
+	-- normal('"' .. tostring(g.killringCount) .. "p")
+	-- g.killringCount = g.killringCount + 1
+	-- if g.killringCount > 9 then g.killringCount = 2 end -- cycle when at the end
 end, { desc = "simply killring" })
 
 keymap("n", "p", function()
-	g.killringCount = 2
+	g.killringCount = 2 -- pasting resets the killring
 	normal("p")
 end, { desc = "paste & reset killring" })
 
