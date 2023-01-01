@@ -1,8 +1,12 @@
 require("config.utils")
-opt.termguicolors = true
+opt.termguicolors = true -- required for the plugin
 --------------------------------------------------------------------------------
 
+-- Base config
 local notifyWidth = 55
+local printDurationSecs = 8
+
+--------------------------------------------------------------------------------
 
 require("notify").setup {
 	render = "minimal",
@@ -56,5 +60,5 @@ print = function(...)
 	for i = 1, #_ do
 		table.insert(print_safe_args, tostring(_[i]))
 	end
-	vim.notify(table.concat(print_safe_args, " "), vim.log.levels.INFO, { timeout = 10000 })
+	vim.notify(table.concat(print_safe_args, " "), vim.log.levels.INFO, { timeout = printDurationSecs * 1000 })
 end

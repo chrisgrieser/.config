@@ -1,7 +1,6 @@
 require("lua.utils")
 require("lua.window-management")
 require("lua.system-and-cron")
-local tableContains = hs.fnutils.contains
 --------------------------------------------------------------------------------
 
 local function unHideAll()
@@ -215,20 +214,20 @@ end):start()
 
 --------------------------------------------------------------------------------
 
--- NEOVIM
--- pseudomaximized window & killing leftover neovide process
+-- NEOVIM / NEOVIDE
 wf_neovim = wf
 	.new({ "neovide", "Neovide" })
+	-- required, since window size saving is sometimes ignored by Neovide :/
 	:subscribe(wf.windowCreated, function(newWin)
-		runWithDelays({ 0.2, 0.4, 0.6, 0.8 }, function()
-			if isProjector() then return end -- has its own layouting already
-			moveResize(newWin, baseLayout)
+		runWithDelays({ 0.2, 0.4, 0.6 }, function()
+			local size = isProjector() and maximized or baseLayout
+			moveResize(newWin, size)
 		end)
 	end)
-	-- bugfix for: https://github.com/neovide/neovide/issues/1595
+	-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
 	:subscribe(wf.windowDestroyed, function()
 		if #wf_neovim:getWindows() == 0 then
-			runWithDelays(3, function() hs.execute("pgrep neovide || pkill nvim") end)
+			runWithDelays(5, function() hs.execute("pgrep neovide || killall nvim") end)
 		end
 	end)
 

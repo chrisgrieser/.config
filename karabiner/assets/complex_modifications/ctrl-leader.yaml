@@ -299,14 +299,6 @@ rules:
           - shell_command: open -a 'IINA'
           - *deactivate-leader
           - *remove-notice
-      # [#] Color Picker
-      - type: basic
-        from: {key_code: non_us_pound} # "#" on Germany keyboard
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Color Picker'
-          - *deactivate-leader
-          - *remove-notice
       # [W]hatsApp
       - type: basic
         from: {key_code: w}
@@ -323,14 +315,6 @@ rules:
           - shell_command: open 'https://web.telegram.org/z/'
           - *deactivate-leader
           - *remove-notice
-      # [4] (mnemonic: $ sign) MoneyMoney
-      - type: basic
-        from: {key_code: "4"}
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'MoneyMoney'
-          - *deactivate-leader
-          - *remove-notice
       # [?] (w/o shift, German keyboard) man page or cheatsheet
       - type: basic
         from: {key_code: hyphen}
@@ -341,12 +325,12 @@ rules:
           - type: input_source_if
             input_sources: [language: ^de$]
         to:
-          - shell_command: open 'hammerspoon://focus-help'
+          - shell_command: open -g 'hammerspoon://focus-help'
           - *deactivate-leader
           - *remove-notice
-      # [esc] (f18) Activity Monitor
+      # [esc] Activity Monitor
       - type: basic
-        from: {key_code: "f18"}
+        from: {key_code: escape}
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Activity Monitor'

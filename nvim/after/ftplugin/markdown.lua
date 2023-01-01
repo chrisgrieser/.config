@@ -14,12 +14,13 @@ setlocal("comments", "b:-")
 local foOpts = getlocalopt("formatoptions"):gsub("[ct]", "") .. "ro"
 setlocal("formatoptions", foOpts)
 
+-- enable wrapping lines
+if not wo.wrap then qol.toggleWrap() end
+
 -- decrease line length without zen mode plugins (which unfortunately remove
 -- statuslines and stuff)
 setlocal("signcolumn", "yes:9")
-
--- enable wrapping lines
-if not wo.wrap then qol.toggleWrap() end
+setlocal("colorcolumn", "")
 
 --------------------------------------------------------------------------------
 -- link textobj

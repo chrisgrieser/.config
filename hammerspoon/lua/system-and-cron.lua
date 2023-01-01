@@ -26,7 +26,7 @@ local gitPassScript = passwordStore .. "/pass-sync.sh"
 
 --------------------------------------------------------------------------------
 
--- calling with "--submodules" also updates submodules
+---@param arg? string flag for the gitDotfileScript, "--submodules" also updates submodules
 local function gitDotfileSync(arg)
 	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then return end
 	if not (screenIsUnlocked()) then return end -- prevent background sync when in office
@@ -106,10 +106,12 @@ uriScheme("sync-repos", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
--- update icons for sketchybar
+-- update icons for sketchybar, triggering `git-sync.sh`
 local function updateSketchybar()
+	-- https://felixkratz.github.io/SketchyBar/config/events#triggering-custom-events
 	hs.execute(
-		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --trigger repo-files-update"
+		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
+			.. " sketchybar --trigger repo-files-update FROM_PATHWATCHER=1"
 	)
 end
 

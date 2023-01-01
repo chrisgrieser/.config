@@ -115,7 +115,7 @@ function settings () {
 # copies last command(s)
 function lc (){
 	num=${1-"1"} # default: 1 last command
-	history | tail -n$num | cut -c8- | sed 's/"/\\\"/g' | sed "s/'/\\\'/g" | sed -E '/^$/d'| pbcopy
+	history | tail -n$num | cut -c8- | sed 's/"/\"/g' | sed "s/'/\'/g" | sed -E '/^$/d'| pbcopy
 	echo "Copied."
 }
 # save last command(s) in Drafts

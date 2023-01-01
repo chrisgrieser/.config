@@ -1063,26 +1063,10 @@ rules:
             mandatory:
               - command
         to:
-          # so cursor position and changes are saved properly
-          - shell_command: echo "cmd[[wall | quitall]]" >"/tmp/nvim-automation"
+          # so cursor position and changes are saved
+          - shell_command: echo "vim.cmd [[silent! wqall]]" >"/tmp/nvim-automation"
         conditions:
           - type: frontmost_application_if
             file_paths:
               - "[Nn]eovide"
-  - description: "\U0001F170️  Alfred Restart"
-    manipulators:
-      - type: basic
-        from:
-          key_code: "5"
-          modifiers:
-            mandatory:
-              - command
-              - shift
-              - option
-              - control
-        to:
-          - shell_command: |
-              osascript -e 'display notification "" with title "Restarting Alfred…"'
-              killall -KILL "Alfred"
-              sleep 0.5
-              open -a Alfred\ 5
+#─────────────────────────────────────────────────────────────────

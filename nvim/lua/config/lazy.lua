@@ -6,7 +6,7 @@ if not vim.loop.fs_stat(lazypath) then
 		"clone",
 		"--filter=blob:none",
 		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
+		"--branch=stable",
 		lazypath,
 	}
 end
@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 
 --------------------------------------------------------------------------------
 -- config https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
+-- INFO `.` lazy requires dot as separator to recognize the plugin module
 require("lazy").setup("config.load-plugins", {
 	defaults = {
 		-- version = "*", -- install the latest *stable* versions of plugins
@@ -23,7 +24,7 @@ require("lazy").setup("config.load-plugins", {
 	},
 	ui = {
 		border = borderStyle,
-		size = { width = 1, height = 1 }, -- full width
+		size = { width = 1, height = 1 }, -- full sized
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates, required for statusline
@@ -32,7 +33,7 @@ require("lazy").setup("config.load-plugins", {
 	},
 	change_detection = { notify = false },
 	performance = {
-		rtp = { -- plugins names to disable
+		rtp = { 
 			disabled_plugins = {
 				-- disable unused builtin plugins from neovim
 				"gzip",
