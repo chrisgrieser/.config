@@ -1,4 +1,0 @@
-
-
-local bbb = "foobar"
-
