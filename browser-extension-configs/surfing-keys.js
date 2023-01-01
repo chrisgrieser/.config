@@ -36,8 +36,8 @@ map("gl", "]]");
 // tabs
 map("H", "R"); // goto tab right
 map("L", "E"); // goto tab left
-map("B", "<<"); // move tab to the left
-map("E", ">>"); // move tab to the right
+map("b", "<<"); // move tab to the left
+map("e", ">>"); // move tab to the right
 
 map("i", "x"); // close tab
 map("u", "X"); // reopen tab
@@ -87,13 +87,12 @@ map(",", ";e"); // Settings
 //──────────────────────────────────────────────────────────────────────────────
 // Insert Mode & ACE editor
 
-// BUG these seem not to be working: https://github.com/brookhong/Surfingkeys/discussions/1926
 aceVimMap("<Space>", "ciw");
-aceVimMap("<S-Space>", "daw");
 aceVimMap("H", "0");
 aceVimMap("L", "$");
 aceVimMap("j", "gj");
-aceVimMap("l", "gk");
+aceVimMap("k", "gk");
+aceVimMap("U", "<C-R>");
 
 imap("<Ctrl-a>", "<Ctrl-f>"); // boL
 
