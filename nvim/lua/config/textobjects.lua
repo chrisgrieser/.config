@@ -138,7 +138,7 @@ require("nvim-surround").setup {
 		["r"] = "]",
 		["q"] = '"',
 		["z"] = "'",
-		["t"] = "`",
+		["e"] = "`",
 	},
 	move_cursor = false,
 	keymaps = {
