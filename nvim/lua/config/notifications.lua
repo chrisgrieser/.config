@@ -31,18 +31,18 @@ local function split_length(text, length)
 end
 
 vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
-	local isCodeOutput = msg:find("^{")
-	if isCodeOutput then 
-		return require("notify")(msg, level, opts)
+	if type(msg) == "string" then
+		local isCodeOutput = msg:find("^{")
+		if isCodeOutput then return require("notify")(msg, level, opts) end
+		msg = vim.split(msg, "\n", { trimepty = true })
 	end
-	if type(msg) == "string" then msg = vim.split(msg, "\n", { trimepty = true }) end
 	local truncated = {}
 	for _, line in pairs(msg) do
 		local new_lines = split_length(line, notifyWidth)
 		new_lines = new_lines
 		for _, nl in ipairs(new_lines) do
 			nl = nl:gsub("^%s*", ""):gsub("%s*$", "")
-			table.insert(truncated, " " ..nl .. " ")
+			table.insert(truncated, " " .. nl .. " ")
 		end
 	end
 	return require("notify")(truncated, level, opts)

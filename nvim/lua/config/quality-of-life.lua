@@ -347,7 +347,7 @@ function M.addCommitPush(prefillMsg)
 			return
 		end
 
-		vim.notify(" GIT add-commit-push\n\n"..commitMsg)
+		vim.notify({" GIT add-commit-push", "", "", commitMsg})
 		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
 	end)
 end
