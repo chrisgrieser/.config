@@ -84,7 +84,6 @@ keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
 keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
 
 --------------------------------------------------------------------------------
-
 -- CLIPBOARD
 opt.clipboard = "unnamedplus"
 
@@ -134,16 +133,17 @@ autocmd("TextYankPost", {
 	end,
 })
 
--- cycle through the last deletes/yanks ("2 till "9)
+-- cycle through the last deletes/yanks ("2 till "9), starting at non-last
+-- delete/yank
 keymap("n", "P", function()
 	if g.killringCount > 2 then cmd.undo() end -- do not undo first call
 	normal('"' .. tostring(g.killringCount) .. "p")
 	g.killringCount = g.killringCount + 1
 	if g.killringCount > 9 then
-		vim.notify("Reached end of yankring. ")
+		vim.notify("Reached end of killring.")
 		g.killringCount = 2
 	end
-end, { desc = "simply killring" })
+end, { desc = "cycle through killring" })
 
 keymap("n", "p", function()
 	g.killringCount = 2 -- pasting resets the killring

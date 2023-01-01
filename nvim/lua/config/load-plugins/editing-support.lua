@@ -71,6 +71,7 @@ return {
 					playMacro = "9",
 					editMacro = "c0",
 					switchSlot = "<C-0>",
+					addBreakPoint = "!",
 				},
 			}
 		end,
