@@ -91,12 +91,9 @@ keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = "paste without switching register" })
 
-g.killringCount = 2
-g.cursorPreYank = getCursor(0)
-g.lastYank = nil
 -- yanking without moving the cursor
 augroup("yankImprovements", {})
-autocmd("CursorMoved", {
+autocmd({ "CursorMoved", "VimEnter" }, {
 	group = "yankImprovements",
 	callback = function() g.cursorPreYank = getCursor(0) end,
 })
@@ -135,7 +132,11 @@ autocmd("TextYankPost", {
 -- cycle through the last deletes/yanks ("2 till "9), starting at non-last
 -- delete/yank
 keymap("n", "P", function()
-	if g.killringCount > 2 then cmd.undo() end -- do not undo first call
+	if not g.killringCount then
+		g.killringCount = 2 -- initialize
+	elseif g.killringCount > 2 then
+		cmd.undo() -- do not undo first call
+	end
 	normal('"' .. tostring(g.killringCount) .. "p")
 	g.killringCount = g.killringCount + 1
 	if g.killringCount > 9 then

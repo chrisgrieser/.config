@@ -418,7 +418,7 @@ function M.quicklog()
 end
 
 function M.timelog()
-	if not g.timelogStart == nil then g.timelogStart = true end
+	if g.timelogStart == nil then g.timelogStart = true end
 	local logStatement1, logStatement2
 	local ft = bo.filetype
 
@@ -428,12 +428,22 @@ function M.timelog()
 			"local timelogStart = os.time()",
 		}
 		logStatement2 = {
-			"local duration = os.difftime(timelogStart, os.time())",
+			"local duration = os.difftime(os.time(), timelogStart)",
 			'print("timelog: ", duration, "s")',
 		}
-	elseif ft == "javascript" or ft == "typescript" then
-		logStatement1 = 'console.time("timelog")'
-		logStatement2 = 'console.timeEnd("timelog")'
+	elseif ft == "javascript" then
+		-- JXA for example does not support console.time()
+		logStatement1 = {
+			'console.log("timelog start")',
+			"const timelogStart = new Date()",
+		}
+		logStatement2 = {
+			"const duration = (new Date() - timelogStart) / 1000",
+			'console.log("timelog: ", duration, "s")',
+		}
+	elseif ft == "typescript" then
+		logStatement1 = {'console.time("timelog")'}
+		logStatement2 = {'console.timeEnd("timelog")'}
 	elseif ft == "bash" or ft == "zsh" or ft == "sh" or ft == "fish" then
 		logStatement1 = {
 			"timelogStart=$(date +%s)",
@@ -450,7 +460,7 @@ function M.timelog()
 	local logToAdd = g.timelogStart and logStatement1 or logStatement2
 
 	append(".", logToAdd)
-	for i = 1, #logToAdd, 1 do
+	for _ = 1, #logToAdd, 1 do
 		normal("j==")
 	end
 	g.timelogStart = not g.timelogStart
