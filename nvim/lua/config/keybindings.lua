@@ -139,7 +139,10 @@ keymap("n", "P", function()
 	if g.killringCount > 2 then cmd.undo() end -- do not undo first call
 	normal('"' .. tostring(g.killringCount) .. "p")
 	g.killringCount = g.killringCount + 1
-	if g.killringCount > 9 then g.killringCount = 2 end -- cycle when at the end
+	if g.killringCount > 9 then
+		vim.notify("Reached end of yankring. ")
+		g.killringCount = 2
+	end
 end, { desc = "simply killring" })
 
 keymap("n", "p", function()
