@@ -131,11 +131,11 @@ require("lualine").setup {
 			},
 		},
 		lualine_y = {
-			{ debuggerStatus, section_separators = topSeparators },
+			{ require("recorder").displaySlots, section_separators = topSeparators },
 		},
 		lualine_z = {
 			{ require("recorder").recordingStatus, section_separators = topSeparators },
-			{ require("recorder").displaySlots, section_separators = topSeparators },
+			{ debuggerStatus, section_separators = topSeparators },
 		},
 	},
 	options = {
