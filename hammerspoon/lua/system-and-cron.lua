@@ -59,11 +59,8 @@ local function gitVaultSync()
 	gitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
 			stdErr = stdErr:gsub("\n", " –– ")
-			if exitCode ~= 0 then
-				notify(vaultIcon .. "⚠️️ vault " .. stdErr)
-			else
-				print("Vault Sync successful.")
-			end
+			if exitCode ~= 0 then print("Vault Sync successful.") end
+			notify(vaultIcon .. "⚠️️ vault " .. stdErr)
 		end)
 		:start()
 end
@@ -75,11 +72,11 @@ local function gitPassSync()
 	gitpassSync = hs.task
 		.new(gitPassScript, function(exitCode, _, stdErr)
 			stdErr = stdErr:gsub("\n", " –– ")
-			if exitCode ~= 0 then
-				notify(passIcon .. "⚠️️ password-store " .. stdErr)
-			else
+			if exitCode == 0 then
 				print("Password-Store Sync successful.")
+				return
 			end
+				notify(passIcon .. "⚠️️ password-store " .. stdErr)
 		end)
 		:start()
 end
@@ -98,9 +95,7 @@ end
 
 --------------------------------------------------------------------------------
 
-repoSyncTimer = hs.timer
-	.doEvery(repoSyncFreqMin * 60, function() syncAllGitRepos("partial") end)
-	:start()
+repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, function() syncAllGitRepos("partial") end):start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
 uriScheme("sync-repos", function()
