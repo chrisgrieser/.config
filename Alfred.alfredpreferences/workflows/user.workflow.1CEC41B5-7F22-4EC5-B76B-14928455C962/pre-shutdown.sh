@@ -19,5 +19,14 @@ if [[ -n "$(git status --porcelain)" ]] ; then
 	fi
 fi
 
+cd "$PASSWORD_STORE_DIR" || exit 1
+if [[ -n "$(git status --porcelain)" ]] ; then
+	zsh "$VAULT_PATH/pass-sync.sh" &> /dev/null
+	if [[ $? -ne 0 ]] ; then
+		echo "Pass-Store Repo not clean."
+		exit 1
+	fi
+fi
+
 echo -n "success"
 

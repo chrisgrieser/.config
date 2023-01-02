@@ -109,19 +109,18 @@ uriScheme("sync-repos", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
--- update icons for sketchybar, triggering `git-sync.sh`
-local function updateSketchybar()
+---@param dirty number 0|1|2 dirty status passed to sketchybar's `git-sync.sh`
+local function updateSketchybar(dirty)
 	-- https://felixkratz.github.io/SketchyBar/config/events#triggering-custom-events
 	hs.execute(
 		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
-			.. " sketchybar --trigger repo-files-update FROM_PATHWATCHER=1"
+			.. " sketchybar --trigger repo-files-update DIRTY="..dirty
 	)
-	notify("path watcher triggered")
 end
 
-dotfilesWatcher = pw(dotfilesFolder, updateSketchybar):start()
-vaultWatcher = pw(vaultLocation, updateSketchybar):start()
-passFileWatcher = pw(passwordStore, updateSketchybar):start()
+dotfilesWatcher = pw(dotfilesFolder, function () updateSketchybar(1) end):start()
+vaultWatcher = pw(vaultLocation, function () updateSketchybar(1) end):start()
+passFileWatcher = pw(passwordStore, function () updateSketchybar(1) end):start()
 
 --------------------------------------------------------------------------------
 
