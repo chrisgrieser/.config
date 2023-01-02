@@ -13,14 +13,14 @@ local w = vim.loop.new_fs_event()
 local function readFile(path)
 	local file = io.open(path, "r")
 	if not file then return nil end
-	local content = file:read("*all") 
+	local content = file:read("*all")
 	file:close()
 	return content:gsub("\n$", ""):gsub("\r$", "")
 end
 
 local function executeExtCommand()
 	local command = readFile(watchedFile)
-	fn.luaeval(command)
+	cmd("silent! lua" .. command)
 	if w then
 		w:stop() -- prevent multiple executions
 		startWatching()
@@ -28,9 +28,7 @@ local function executeExtCommand()
 end
 
 function startWatching()
-	if w then
-		w:start(watchedFile, {}, vim.schedule_wrap(executeExtCommand))
-	end
+	if w then w:start(watchedFile, {}, vim.schedule_wrap(executeExtCommand)) end
 end
 
 startWatching()
