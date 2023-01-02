@@ -72,11 +72,13 @@ keymap("n", "^", "za", { desc = "toggle fold" })
 -- [M]atchUp
 keymap({ "n", "x" }, "m", "<Plug>(matchup-%)", { desc = "matchup" })
 
--- Hunks & changes
+-- Hunks, Changes, and Quicklist
 keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 keymap("n", "gc", "g;", { desc = "goto next change" })
 keymap("n", "gC", "g,", { desc = "goto previous change" })
+keymap("n", "gq", cmd.cnext, { desc = "next quickfix item" })
+keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = "Telescope: quickfix list" })
 
 -- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
@@ -469,16 +471,13 @@ end, { desc = ":CodiNew" })
 --------------------------------------------------------------------------------
 
 -- BUILD SYSTEM & QUICKFIX LIST
-keymap("n", "gq", cmd.cnext, { desc = "next quickfix item" })
-keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = "Telescope: quickfix list" })
 
 keymap("n", "<leader>r", function()
 	cmd.update()
-	local filename = expand("%:t")
 	local parentFolder = expand("%:p:h")
 	local ft = bo.filetype
 
-	if filename == "sketchybarrc" then
+	if parentFolder:find("sketchybarrc") then
 		fn.system("brew services restart sketchybar")
 	elseif ft == "markdown" then
 		local filepath = expand("%:p")

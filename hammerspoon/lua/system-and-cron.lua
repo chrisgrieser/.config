@@ -88,19 +88,28 @@ end
 
 --------------------------------------------------------------------------------
 
+local function updateSketchybar()
+	-- https://felixkratz.github.io/SketchyBar/config/events#triggering-custom-events
+	hs.execute(
+		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
+			.. "sketchybar --trigger repo-files-update"
+	)
+end
+
 ---sync all three git repos
 function syncAllGitRepos()
 	gitDotfileSync()
 	gitPassSync()
 	gitVaultSync()
+	updateSketchybar()
 end
-
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, syncAllGitRepos):start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
 uriScheme("sync-repos", function()
 	syncAllGitRepos()
+	updateSketchybar()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
