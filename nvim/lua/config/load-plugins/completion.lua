@@ -141,7 +141,7 @@ local function cmpconfig()
 
 	-- lua and toml
 	local defaultAndNerdfont = copyTable(defaultSources)
-	table.insert(defaultAndNerdfont, 5, nerdfont)
+	table.insert(defaultAndNerdfont, 6, nerdfont)
 
 	-- Filetype specific Completion
 	cmp.setup.filetype("lua", {
