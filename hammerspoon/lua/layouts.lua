@@ -20,9 +20,7 @@ local function alacrittyFontSize(size)
 end
 
 local function showAllSidebars()
-	if appIsRunning("Highlights") then
-		app("Highlights"):selectMenuItem { "View", "Show Sidebar" }
-	end
+	if appIsRunning("Highlights") then app("Highlights"):selectMenuItem { "View", "Show Sidebar" } end
 	openLinkInBackground("obsidian://sidebar?showLeft=false&showRight=true")
 	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
@@ -93,6 +91,7 @@ function homeModeLayout()
 		"Finder",
 		"YouTube",
 		"Netflix",
+		"CrunchyRoll",
 		"IINA",
 		"Twitch",
 	}
@@ -219,6 +218,7 @@ local function motherHomeModeLayout()
 	quitApp {
 		"YouTube",
 		"Netflix",
+		"CrunchyRoll",
 		"IINA",
 		"Twitch",
 	}
@@ -265,7 +265,7 @@ end
 -- watcher + hotkey
 displayCountWatcher = hs.screen.watcher.new(setLayout):start()
 hotkey(hyper, "home", setLayout) -- hyper + eject on Apple Keyboard
-hotkey({"shift"}, "f6", setLayout) -- for Apple keyboard
+hotkey({ "shift" }, "f6", setLayout) -- for Apple keyboard
 
 --------------------------------------------------------------------------------
 
@@ -290,6 +290,7 @@ wf_appsOnMouseScreen = wf.new({
 	"System Preferences",
 	"YouTube",
 	"Netflix",
+	"CrunchyRoll",
 	"Finder",
 }):subscribe(wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()
