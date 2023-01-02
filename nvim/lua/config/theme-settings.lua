@@ -91,11 +91,11 @@ local function themeModifications()
 
 	-- rose-pine
 	elseif theme == "rose-pine" then
-		if theme == "rose-pine" and mode == "dark" then
-			linkHighlight("ScrollView", "Search")
-			linkHighlight("IndentBlanklineContextChar", "FloatBorder")
-		elseif theme == "rose-pine" and mode == "light" then
-			setHighlight("ScrollView", "guibg=#d1ae93")
+		if mode == "dark" then
+			linkHighlight("ScrollView", "FloatShadow")
+			linkHighlight("IndentBlanklineChar", "FloatBorder")
+		elseif mode == "light" then
+			setHighlight("ScrollView", "guibg=#bb8861")
 			linkHighlight("IndentBlanklineChar", "FloatBorder")
 		end
 		local blueHlgroups = {
