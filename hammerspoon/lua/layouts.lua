@@ -19,12 +19,6 @@ local function alacrittyFontSize(size)
 	]])
 end
 
-local function showAllSidebars()
-	if appIsRunning("Highlights") then app("Highlights"):selectMenuItem { "View", "Show Sidebar" } end
-	openLinkInBackground("obsidian://sidebar?showLeft=false&showRight=true")
-	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
-end
-
 ---@return boolean
 local function isWeekend()
 	local weekday = os.date():sub(1, 3)
