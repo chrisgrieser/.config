@@ -31,8 +31,8 @@ if [[ $IS_AT_OFFICE -eq 1 ]]; then
 	# explanation on using "set" here: https://www.shellcheck.net/wiki/SC2089
 	set -- --add alias "Control Centre,WiFi" right --set "Control Centre,WiFi"
 else
-	HEIGHT=35 # 10px using extra height to cover the holes at the corner where the wallpaper shines through
-	ITEM_Y_OFFSET=5
+	HEIGHT=50 # extra height for second row & to cover the holes at the corner where the wallpaper shines through
+	ITEM_Y_OFFSET=13.5
 fi
 
 # globs are necessary, since the exact name of the menubar item changes a bit
@@ -63,12 +63,14 @@ sketchybar --bar \
 	label.padding_right=5 \
 	icon.padding_left=1 \
 	icon.padding_right=2 \
-	background.padding_right=2 \
 	y_offset="$ITEM_Y_OFFSET" \
 	\
 	popup.drawing=true \
-	popup.y_offset=-20 \
+	popup.y_offset=-27 \
 	popup.background.color="$BG_COLOR" \
+	\
+	\
+	\
 	\
 	--add item clock left \
 	--set clock update_freq=1 \
@@ -88,7 +90,7 @@ sketchybar --bar \
 	--set weather update_freq=1800 \
 	script="$PLUGIN_DIR/weather.sh" \
 	\
-	--add item covid-stats left \
+	--add item covid-stats popup.clock \
 	--set covid-stats update_freq=43200 \
 	script="$PLUGIN_DIR/covid-stats.sh" \
 	\
@@ -99,10 +101,8 @@ sketchybar --bar \
 	--subscribe git-sync repo-files-update \
 	--subscribe git-sync system_woke \
 	\
-	--add item secondRow popup.clock \
-	--set secondRow label="AAAAA"\
-	\
 	"$@" \
+	\
 	\
 	--update
 
