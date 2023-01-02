@@ -1,4 +1,4 @@
-# vim: filetype=bash
+#!/usr/bin/env bash
 #───────────────────────────────────────────────────────────────────────────────
 # restart: `brew services restart sketchybar`
 # reload (does only update items, not the look of the bar): `sketchybar --update`
@@ -63,15 +63,18 @@ sketchybar --bar \
 	label.padding_right=5 \
 	icon.padding_left=1 \
 	icon.padding_right=2 \
+	background.padding_right=2 \
 	y_offset="$ITEM_Y_OFFSET" \
+	\
+	popup.drawing=true \
+	popup.y_offset=-20 \
+	popup.background.color="$BG_COLOR" \
 	\
 	--add item clock left \
 	--set clock update_freq=1 \
 	script="$PLUGIN_DIR/clock.sh" \
 	width=135 \
 	label.padding_right=3 \
-	\
-	--add item apple.preferences popup.apple.logo \
 	\
 	--add alias "$cpu_bar_item" left \
 	--set "$cpu_bar_item" \
@@ -96,6 +99,9 @@ sketchybar --bar \
 	--subscribe git-sync repo-files-update \
 	--subscribe git-sync system_woke \
 	\
+	--add item secondRow popup.clock \
+	--set secondRow label="AAAAA"\
+	\
 	"$@" \
 	\
 	--update
@@ -106,5 +112,7 @@ sketchybar --bar \
 # - $@ is the WiFi-Indicator further
 # - `--update` needs to run at the end of the configuration and should never be
 # run in an item script.
+# - the popup only refers to the clock item to anchor it to the leftmost item,
+# it actually has nothing to do with the clock
 
 echo "Sketchybar configuration loaded."

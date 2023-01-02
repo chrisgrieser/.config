@@ -36,10 +36,10 @@ local git = { name = "git" } -- commits with ":", issues/PRs with "#"
 
 local defaultSources = {
 	snippets,
+	emojis,
 	lsp,
 	tabnine,
 	treesitter,
-	emojis,
 	buffer,
 }
 
