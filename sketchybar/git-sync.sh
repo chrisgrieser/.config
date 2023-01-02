@@ -8,9 +8,11 @@ GIT_OPTIONAL_LOCKS=0
 # FROM_PATCHWATCHER gets set when called from hammerspoon
 if [[ "$FROM_PATCHWATCHER" -eq 1 ]]; then
 	sketchybar --set "$NAME" icon="🔁"
+	osascript -e 'display notification "" with title "pathwatcher loop"'
 	exit 0
 fi
 
+osascript -e 'display notification "" with title "regular trigger"'
 configError=""
 
 cd "$DOTFILE_FOLDER" || configError="repo-path wrong"
