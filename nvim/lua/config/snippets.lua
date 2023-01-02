@@ -49,7 +49,7 @@ add("zsh", {
 	snip("ext", "ext=${${1:file_name}##*.}"),
 	snip("filename w/o ext", "${1:file_name}=${${1:file_name}%.*}"),
 	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
-	snip("notify", [[osascript -e 'display notification "${2:subtitle}" with title "${1:title}"']]),
+	snip("notify", [[osascript -e 'display notification "" with title "${1:title}"']]),
 
 	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
 	snip("if .. then", 'if [[ "$${1:var}" ]]; then\n\t$0\nfi'),
@@ -191,6 +191,11 @@ add("markdown", {
 	snip("note (GitHub Callout)", "> __Note__  \n> $0"),
 	snip("warning (GitHub Callout)", "> __Warning__  \n> $0"),
 	snip("vale ignore (Comment)", "<!-- vale ${1:Style${}.${2:Rule} = NO -->\n<!-- vale ${1:Style}.${2:Rule} = YES -->"),
+})
+
+-- TypeScript
+add("typescript", {
+	snip("ignore (tsignore)", "// @ts-ignore"),
 })
 
 -- JavaScript (General)

@@ -477,7 +477,7 @@ keymap("n", "<leader>r", function()
 	local parentFolder = expand("%:p:h")
 	local ft = bo.filetype
 
-	if parentFolder:find("sketchybarrc") then
+	if parentFolder:find("sketchybar") then
 		fn.system("brew services restart sketchybar")
 	elseif ft == "markdown" then
 		local filepath = expand("%:p")
