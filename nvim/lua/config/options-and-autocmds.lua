@@ -91,7 +91,7 @@ opt.cmdheight = 0
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, useful e.g. for kebab-case-variables
 
 opt.nrformats:append("unsigned") -- <C-a>/<C-x> only works with positive numbers
-opt.nrformats:remove({"bin", "hex"}) -- remove edge case ambiguity
+opt.nrformats:remove { "bin", "hex" } -- remove edge case ambiguity
 
 --------------------------------------------------------------------------------
 

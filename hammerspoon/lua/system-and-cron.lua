@@ -98,7 +98,12 @@ end
 
 --------------------------------------------------------------------------------
 
-repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, function() syncAllGitRepos("partial") end):start()
+repoSyncTimer = hs.timer
+	.doEvery(repoSyncFreqMin * 60, function()
+		syncAllGitRepos("partial")
+		notify("✅ Sync ran")
+	end)
+	:start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
 uriScheme("sync-repos", function()
@@ -174,19 +179,19 @@ end)
 
 projectorScreensaverWatcher = caff.new(function(eventType)
 	if eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart then
-		runWithDelays(3, function()
+		runWithDelays(2, function()
 			if isProjector() then iMacDisplay:setBrightness(0) end
 		end)
 	end
 end)
 
-local function sleepYouTube()
+local function sleepMovieApps()
 	local minutesIdle = hs.host.idleTime() / 60
 	if minutesIdle < 30 then return end
 	quitApp("YouTube")
 	quitApp("Twitch")
 	-- no need to quit IINA, since it autoquits on finishing playback
-	-- no need to quit Netflix, since it autostops
+	-- no need to quit Netflix or CrunchyRoll, since they autostops
 	applescript([[
 		tell application "Brave Browser"
 			if ((count of window) is not 0)
@@ -199,11 +204,11 @@ local function sleepYouTube()
 	]])
 end
 
-sleepTimer0 = timer("02:00", "01d", sleepYouTube, true)
-sleepTimer1 = timer("03:00", "01d", sleepYouTube, true)
-sleepTimer2 = timer("04:00", "01d", sleepYouTube, true)
-sleepTimer3 = timer("05:00", "01d", sleepYouTube, true)
-sleepTimer4 = timer("06:00", "01d", sleepYouTube, true)
+sleepTimer0 = timer("02:00", "01d", sleepMovieApps, true)
+sleepTimer1 = timer("03:00", "01d", sleepMovieApps, true)
+sleepTimer2 = timer("04:00", "01d", sleepMovieApps, true)
+sleepTimer3 = timer("05:00", "01d", sleepMovieApps, true)
+sleepTimer4 = timer("06:00", "01d", sleepMovieApps, true)
 
 --------------------------------------------------------------------------------
 
