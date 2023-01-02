@@ -99,10 +99,7 @@ end
 --------------------------------------------------------------------------------
 
 repoSyncTimer = hs.timer
-	.doEvery(repoSyncFreqMin * 60, function()
-		syncAllGitRepos("partial")
-		notify("✅ Sync ran")
-	end)
+	.doEvery(repoSyncFreqMin * 60, function() syncAllGitRepos("partial") end)
 	:start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
