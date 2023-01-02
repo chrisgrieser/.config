@@ -25,7 +25,7 @@ local function setHighlight(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .
 
 -- Annotations
 linkHighlight("myAnnotations", "Todo")
-fn.matchadd("myAnnotations", [[\<\(BUG\|WIP\|TODO\|WTF\|HACK\|INFO\|NOTE\|WARNING\|FIX\|REQUIRED\)\>]])
+fn.matchadd("myAnnotations", [[\<\(BUG\|WARN\|WIP\|TODO\|WTF\|HACK\|INFO\|NOTE\|WARNING\|FIX\|REQUIRED\)\>]])
 
 --------------------------------------------------------------------------------
 -- CUSTOM HIGHLIGHTS & Theme Customization
