@@ -8,7 +8,7 @@ local timer = hs.timer.doAt
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local repoSyncFreqMin = 20
+local repoSyncFreqMin = 15
 local dotfileIcon = "🔵"
 local vaultIcon = "🟪"
 local passIcon = "🔑"
@@ -36,7 +36,10 @@ local function gitDotfileSync(arg)
 			gitDotfileScript,
 			function(exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
 				stdErr = stdErr:gsub("\n", " –– ")
-				if exitCode == 0 then return end
+				if exitCode == 0 then
+					print("Dotfile Sync successful.")
+					return
+				end
 				local stdout = hs.execute("git status --short")
 				if not stdout then return end
 				local submodulesStillDirty = stdout:match(" m ")
@@ -59,7 +62,10 @@ local function gitVaultSync()
 	gitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
 			stdErr = stdErr:gsub("\n", " –– ")
-			if exitCode ~= 0 then print("Vault Sync successful.") end
+			if exitCode == 0 then
+				print("Vault Sync successful.")
+				return
+			end
 			notify(vaultIcon .. "⚠️️ vault " .. stdErr)
 		end)
 		:start()
@@ -76,7 +82,7 @@ local function gitPassSync()
 				print("Password-Store Sync successful.")
 				return
 			end
-				notify(passIcon .. "⚠️️ password-store " .. stdErr)
+			notify(passIcon .. "⚠️️ password-store " .. stdErr)
 		end)
 		:start()
 end
