@@ -15,14 +15,14 @@ local function readFile(path)
 	if not file then return nil end
 	local content = file:read("*all") 
 	file:close()
-	return content:gsub("\n$", "")
+	return content:gsub("\n$", ""):gsub("\r$", "")
 end
 
 local function executeExtCommand()
 	local command = readFile(watchedFile)
 	fn.luaeval(command)
 	if w then
-		w:stop() -- prevent multiple execution
+		w:stop() -- prevent multiple executions
 		startWatching()
 	end
 end

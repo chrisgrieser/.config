@@ -37,7 +37,9 @@ end
 augroup("branchChange", {})
 autocmd({ "BufEnter", "FocusGained", "WinEnter", "TabEnter" }, {
 	group = "branchChange",
-	callback = function() g.cur_branch = fn.system("git --no-optional-locks branch --show-current"):gsub("\n$", "") end,
+	callback = function()
+		g.cur_branch = fn.system("git --no-optional-locks branch --show-current"):gsub("\n$", "")
+	end,
 })
 
 local function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
@@ -72,6 +74,14 @@ local function selectionCount()
 	return "/  " .. tostring(lines) .. "L " .. tostring(fn.wordcount().visual_chars) .. "c"
 end
 
+local function searchCounter()
+	if fn.mode() ~= "n" then return end
+	local total = fn.searchcount().total
+	local current = fn.searchcount().current
+	local term = fn.getreg("/")
+	return "  " .. term .. " " .. current .. "/" .. total
+end
+
 --------------------------------------------------------------------------------
 
 -- nerdfont: 'nf-ple'; since separators look off in Terminal
@@ -83,16 +93,7 @@ require("lualine").setup {
 		lualine_a = { { qol.currentFileStatusline } },
 		lualine_b = { { qol.alternateFileStatusline } },
 		lualine_c = {
-			{
-				"searchcount",
-				fmt = function(str)
-					if str == "" or str == "[0/0]" then return "" end
-					local count = "" .. str:sub(2, -2) .. ""
-					local term = fn.getreg("/")
-					return "  " ..term .. " ".. count
-				end,
-				cond = function () return fn.mode() == "n" end,
-			},
+			{ searchCounter },
 		},
 		lualine_x = {
 			{ lsp_progress },

@@ -147,13 +147,16 @@ nmap _ &b&k
 " exmap appendSpace jsfile Meta/obsidian-vim-helpers.js {appendSpace()}
 " nmap ! :appendSpace
 
-""""""""""""""""""""""
-" Markdown-specific
-""""""""""""""""""""""
+""""""""""""""""""""""""""""
+" Markdown/Obsidian specific
+""""""""""""""""""""""""""""
+
+" show commands in console
+nmap ,c :obcommand
 
 " delete alias part of next Wikilink
 " (or Link Homepage when using Auto Title Plugin)
-nmap ,a t|"_dt]
+nmap ,a F[t|"_dt]
 
 " append to [y]aml (line 3 = tags)
 nmap ,y 3ggA
