@@ -49,7 +49,8 @@ zsh "$DOTFILE_FOLDER/hammerspoon/dock-switching/dock-switcher.sh" --load home
 [[ -e ~/.zshenv ]] && rm -fv ~/.zshenv
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
 
-# eslint (eslint LSP does not allow custom config paths?)
+# eslint (eslint LSP does not allow custom config paths, also should be used for
+# projects anyway)
 ln -sf "$DOTFILE_FOLDER/linter-configs/.eslintrc.yml" ~
 
 # GPG config
