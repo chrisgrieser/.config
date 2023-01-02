@@ -31,9 +31,9 @@ if [[ $IS_AT_OFFICE -eq 1 ]]; then
 	# explanation on using "set" here: https://www.shellcheck.net/wiki/SC2089
 	set -- --add alias "Control Centre,WiFi" right --set "Control Centre,WiFi"
 else
-	HEIGHT=55 # extra height for second row & to cover the holes at the corner where the wallpaper shines through
-	ITEM_Y_OFFSET=16 # needs to be adjusted for Height
-	POPUP_Y_OFFSET=-33
+	HEIGHT=60 # extra height for second row & to cover the holes at the corner where the wallpaper shines through
+	ITEM_Y_OFFSET=19 # needs to be adjusted for Height
+	POPUP_Y_OFFSET=-35
 fi
 
 # globs are necessary, since the exact name of the menubar item changes a bit
@@ -50,15 +50,14 @@ ram_bar_item="Stats,RAM"
 sketchybar \
 	--bar \
 	height="$HEIGHT" position=top display=all \
-	padding_left=0 padding_right=0 \
-	color="$BG_COLOR" \
+	padding_left=0 padding_right=0 color="$BG_COLOR" \
 	\
 	--default \
-	updates=when_shown drawing=on \
+	updates=when_shown drawing=on align=left\
 	icon.font="Noto Emoji:Bold:16" icon.color="$FONT_COLOR" \
 	label.font="Recursive:Medium:15.5" label.color="$FONT_COLOR" \
-	label.padding_left=2 label.padding_right=5 \
-	icon.padding_left=5 icon.padding_right=1 \
+	icon.padding_left=2 icon.padding_right=1 \
+	label.padding_left=2 label.padding_right=10 \
 	popup.drawing=true popup.horizontal=true\
 	popup.y_offset="$POPUP_Y_OFFSET" y_offset="$ITEM_Y_OFFSET" \
 	\
@@ -66,35 +65,35 @@ sketchybar \
 	\
 	--add item clock left \
 	--set clock update_freq=1 \
-	script="$PLUGIN_DIR/clock.sh" width=140 \
-	\
-	--add alias "$ram_bar_item" left \
-	--set "$ram_bar_item" width=38 \
-	\
-	--add alias "$cpu_bar_item" left \
-	--set "$cpu_bar_item" width=55 \
-	\
-	--add alias "$network_bar_item" left \
-	--set "$network_bar_item" width=65 \
+	script="$PLUGIN_DIR/clock.sh" \
+	background.padding_left=5 \
 	\
 	"$@" \
 	\
-	--add item git-sync left \
+	--add item covid-stats left \
+	--set covid-stats update_freq=43200 \
+	script="$PLUGIN_DIR/covid-stats.sh" \
+	\
+	--add item weather left \
+	--set weather update_freq=1800 \
+	script="$PLUGIN_DIR/weather.sh" \
+	\
+	\
+	--add alias "$ram_bar_item" popup.clock \
+	--set "$ram_bar_item" width=38 \
+	\
+	--add alias "$cpu_bar_item" popup.clock \
+	--set "$cpu_bar_item" width=55 \
+	\
+	--add alias "$network_bar_item" popup.clock \
+	--set "$network_bar_item" width=65 \
+	\
+	--add item git-sync popup.clock \
 	--set git-sync update_freq=300 \
 	script="$PLUGIN_DIR/git-sync.sh" \
 	--add event repo-files-update \
 	--subscribe git-sync repo-files-update \
 	--subscribe git-sync system_woke \
-	\
-	\
-	\
-	--add item covid-stats popup.clock \
-	--set covid-stats update_freq=43200 \
-	script="$PLUGIN_DIR/covid-stats.sh" \
-	\
-	--add item weather popup.clock \
-	--set weather update_freq=1800 \
-	script="$PLUGIN_DIR/weather.sh" \
 	\
 	\
 	--update

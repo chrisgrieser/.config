@@ -93,8 +93,8 @@ function homeModeLayout()
 
 	dockSwitcher("home")
 
-	local side = createLayout(iMacDisplay, pseudoMaximized, { "Twitterrific" })
-	local main = createLayout(iMacDisplay, pseudoMaximized, {
+	local side = createLayout(toTheSide, iMacDisplay, { "Twitterrific" })
+	local main = createLayout(pseudoMaximized, iMacDisplay, {
 		"Brave Browser",
 		"Highlights",
 		"Neovide",
