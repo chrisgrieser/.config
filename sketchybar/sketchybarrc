@@ -83,7 +83,7 @@ sketchybar \
 	--set "$ram_bar_item" width=38 \
 	\
 	--add alias "$cpu_bar_item" popup.clock \
-	--set "$cpu_bar_item" width=55 \
+	--set "$cpu_bar_item" width=60 \
 	\
 	--add alias "$gpu_bar_item" popup.clock \
 	--set "$gpu_bar_item" width=55 \
