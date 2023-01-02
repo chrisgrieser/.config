@@ -101,6 +101,7 @@ function syncAllGitRepos()
 			"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
 				.. "sketchybar --trigger repo-files-update"
 		)
+		print("updating sketchybar")
 	end
 	local function noSyncInProgress()
 		local dotfiles = not (gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
