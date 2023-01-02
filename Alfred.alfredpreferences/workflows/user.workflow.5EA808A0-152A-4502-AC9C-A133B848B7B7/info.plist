@@ -6,19 +6,6 @@
 	<string>de.chris-grieser.github</string>
 	<key>connections</key>
 	<dict>
-		<key>0216398A-09AD-4D85-A101-3884E853D638</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C21186A4-BFA2-43DB-8893-567B30CBA24D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</key>
 		<array>
 			<dict>
@@ -70,16 +57,6 @@
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>8528AFE1-2E0D-42FB-A357-BADB551CBB64</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>0216398A-09AD-4D85-A101-3884E853D638</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -153,16 +130,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>78077732-42EB-4967-885E-DF4366FAB695</string>
-				<key>modifiers</key>
-				<integer>131072</integer>
-				<key>modifiersubtext</key>
-				<string>⇧: Search GitHub Issues</string>
-				<key>vitoclose</key>
-				<true/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>CC7C190D-D205-4F5B-A0DC-2A6D64736EC7</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
@@ -170,6 +137,16 @@
 				<string>⌃: Open in Terminal</string>
 				<key>vitoclose</key>
 				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>78077732-42EB-4967-885E-DF4366FAB695</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Search GitHub Issues</string>
+				<key>vitoclose</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -321,6 +298,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>open-old-version.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>478C272A-AA90-4C7C-B103-6A3BC82916D4</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -364,29 +364,6 @@
 			<string>C7CDBB63-914B-4E57-8643-E8D751667BF6</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-old-version.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>478C272A-AA90-4C7C-B103-6A3BC82916D4</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -460,9 +437,9 @@
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>else (Neovide)</string>
+				<string>--</string>
 				<key>hideelse</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -470,29 +447,6 @@
 			<string>483A17BF-0497-45AC-BCA4-132D7A7F5405</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>github-history_[Browser].js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>6DD83908-25CD-4BBE-8715-259DE58C2A17</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -551,6 +505,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>github-history_[Browser].js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6DD83908-25CD-4BBE-8715-259DE58C2A17</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -566,29 +543,6 @@
 			<string>F02DA72C-B6FC-41F0-874A-46A76906E65E</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-neovide-path.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0216398A-09AD-4D85-A101-3884E853D638</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -702,6 +656,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>path</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>CC7C190D-D205-4F5B-A0DC-2A6D64736EC7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -770,39 +737,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>localRepoFilePath</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>78077732-42EB-4967-885E-DF4366FAB695</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>path</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.browseinterminal</string>
-			<key>uid</key>
-			<string>CC7C190D-D205-4F5B-A0DC-2A6D64736EC7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -848,6 +782,26 @@
 			<string>AC483565-D8EB-4AAD-99AA-229D0C632CE8</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>localRepoFilePath</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>78077732-42EB-4967-885E-DF4366FAB695</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1027,17 +981,6 @@ echo "$url"</string>
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>0216398A-09AD-4D85-A101-3884E853D638</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>get path</string>
-			<key>xpos</key>
-			<real>415</real>
-			<key>ypos</key>
-			<real>255</real>
-		</dict>
 		<key>02AA23EC-23B2-4D85-A6B8-D9C275E5C8D7</key>
 		<dict>
 			<key>colorindex</key>
@@ -1052,7 +995,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>1055</real>
+			<real>750</real>
 			<key>ypos</key>
 			<real>255</real>
 		</dict>
@@ -1090,16 +1033,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>525</real>
+			<real>520</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>555</real>
 		</dict>
 		<key>478C272A-AA90-4C7C-B103-6A3BC82916D4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>915</real>
+			<real>610</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1108,9 +1051,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>185</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>115</real>
+			<real>95</real>
 		</dict>
 		<key>4D767180-5C0F-4AAE-9C93-BE41D821EB5D</key>
 		<dict>
@@ -1119,7 +1062,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>show diff</string>
 			<key>xpos</key>
-			<real>915</real>
+			<real>610</real>
 			<key>ypos</key>
 			<real>135</real>
 		</dict>
@@ -1139,18 +1082,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>githistory.xyz</string>
 			<key>xpos</key>
-			<real>415</real>
+			<real>325</real>
 			<key>ypos</key>
-			<real>120</real>
+			<real>140</real>
 		</dict>
 		<key>78077732-42EB-4967-885E-DF4366FAB695</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>305</real>
+			<real>290</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>585</real>
 		</dict>
 		<key>7EE02F05-65D4-4B6C-8634-A6CA65E3261C</key>
 		<dict>
@@ -1188,9 +1131,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>issue search GitHub</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>365</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>555</real>
 		</dict>
 		<key>AC483565-D8EB-4AAD-99AA-229D0C632CE8</key>
 		<dict>
@@ -1215,7 +1158,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>645</real>
+			<real>305</real>
 			<key>ypos</key>
 			<real>45</real>
 		</dict>
@@ -1226,7 +1169,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>restore</string>
 			<key>xpos</key>
-			<real>915</real>
+			<real>610</real>
 			<key>ypos</key>
 			<real>375</real>
 		</dict>
@@ -1246,7 +1189,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>720</real>
+			<real>390</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1266,7 +1209,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>370</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>440</real>
 		</dict>
 		<key>D2317B23-8AFF-4D40-AE86-B6BDB64BA87E</key>
 		<dict>
@@ -1284,7 +1227,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>915</real>
+			<real>610</real>
 			<key>ypos</key>
 			<real>255</real>
 		</dict>

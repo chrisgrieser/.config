@@ -241,10 +241,12 @@ wf_neovim = wf
 
 -- ALACRITTY
 -- pseudomaximized window
-wf_alacritty = wf.new({ "alacritty", "Alacritty" }):subscribe(wf.windowCreated, function(newWin)
-	if isProjector() then return end -- has it's own layouting already
-	moveResize(newWin, baseLayout)
-end)
+wf_alacritty = wf.new({ "alacritty", "Alacritty" })
+	:setOverrideFilter({ rejectTitles = { "btop" } })
+	:subscribe(wf.windowCreated, function(newWin)
+		if isProjector() then return end -- has it's own layouting already
+		moveResize(newWin, baseLayout)
+	end)
 
 -- Man leader hotkey (for Karabiner)
 -- work around necessary, cause alacritty creates multiple instances, i.e.
@@ -264,17 +266,25 @@ end)
 -- multiple applications all with the name "alacritty", preventing conventional
 -- methods for focussing a window via AppleScript or `open`
 uriScheme("focus-btop", function()
-	local win = hs.window.find("btop")
+	local win = hs.window.find("^btop$")
 	if win then
 		win:focus()
-	else
-		-- starting with smaller font be able to read all processes
-		local out, success = hs.execute([[
+		return
+	end
+	-- 1. using hs.execute does note make that command block hammerspoon
+	-- 2. starting with smaller font be able to read all processes
+	local success = os.execute([[
 			export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 			if ! command -v btop &>/dev/null; then exit 1 ; fi
-			alacritty --option="font.size=20" --option="colors.primary.background='#000000'" --title="btop" --command btop
+			nohup alacritty --option="font.size=20" --option="colors.primary.background='#000000'" --title="btop" --command btop &
 		]])
-		if not success then notify("⚠️ btop not installed") end
+	if success then
+		runWithDelays({0.2, 0.3, 0.4}, function ()
+			local btopWin = hs.window.find("^btop$")
+			moveResize(btopWin, maximized)
+		end)
+	else
+		notify("⚠️ btop not installed")
 	end
 end)
 
