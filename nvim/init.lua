@@ -1,8 +1,8 @@
 -- CORE CONFIG
 vim.g.mapleader = ","
 borderStyle = "single" -- none|single|double|rounded|shadow|solid
-linterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- reading from .zshenv
-vimDataDir = vim.env.DATA_DIR .. "/vim-data/"
+linterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- read from .zshenv
+vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
 
 --------------------------------------------------------------------------------
 
@@ -16,17 +16,18 @@ if isGui() then
 else
 	require("config.terminal-only")
 end
-require("config.options-and-autocmds")
-require("config.automating-nvim")
-require("config.keybindings")
-require("config.user-commands")
 require("config.lualine")
 require("config.treesitter")
 
-require("config.lsp-and-diagnostics") -- should come before linter and debugger
+require("config.options-and-autocmds")
+require("config.automating-nvim")
+require("config.keybindings")
+
+require("config.lsp-and-diagnostics") -- should come before linter and debugger, since it includes mason setup
 require("config.linter")
 require("config.debugger")
 
 require("config.comments")
 require("config.textobjects")
 require("config.telescope")
+require("config.user-commands")

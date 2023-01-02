@@ -1064,7 +1064,7 @@ rules:
               - command
         to:
           # so cursor position and changes are saved
-          - shell_command: echo "vim.cmd [[silent! wqall]]" >"/tmp/nvim-automation"
+          - shell_command: echo "vim.cmd.wq()" >"/tmp/nvim-automation"
         conditions:
           - type: frontmost_application_if
             file_paths:
