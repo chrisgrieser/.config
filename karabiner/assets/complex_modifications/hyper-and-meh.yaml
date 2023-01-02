@@ -106,12 +106,13 @@ rules:
                 killall "$FRONT_APP"
               fi
 
-              while pgrep -q "$FRONT_APP"; do sleep 0.05; done
+              while pgrep -q "$FRONT_APP"; do sleep 0.03; done
 
               if [[ "$FRONT_APP" == "neovide" ]]; then
-                sleep 0.05
+                sleep 0.03
                 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-                neovide --frame=buttonless --notabs --geometry=101x32 -- -c "normal! '0"
+                # bwipeout necessary due to empty buffer created before jumping to '0
+                neovide --frame=buttonless --notabs --geometry=101x32 -- -c "execute \"normal! '0\" | bwipeout #"
               else
                 open -a "$FRONT_APP"
               fi
