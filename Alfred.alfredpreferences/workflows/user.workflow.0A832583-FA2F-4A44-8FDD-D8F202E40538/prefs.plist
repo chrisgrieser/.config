@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>dock_switcher_path</key>
-	<string>~/.hammerspoon/helpers/dock-switching/dock-switcher.sh</string>
+	<string>~/.config/hammerspoon/helpers/dock-switching/dock-switcher.sh</string>
 </dict>
 </plist>
