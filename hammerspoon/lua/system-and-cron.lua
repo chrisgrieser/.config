@@ -8,7 +8,7 @@ local timer = hs.timer.doAt
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local repoSyncFreqMin = 15
+local repoSyncFreqMin = 20
 local dotfileIcon = "🔵"
 local vaultIcon = "🟪"
 local passIcon = "🔑"
