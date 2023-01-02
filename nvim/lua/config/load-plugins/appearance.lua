@@ -34,7 +34,7 @@ return {
 		config = function()
 			require("scrollview").setup {
 				current_only = true,
-				winblend = 75,
+				winblend = 85,
 				base = "right",
 				column = 1,
 			}

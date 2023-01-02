@@ -4,7 +4,6 @@ require("lua.dark-mode")
 require("lua.layouts")
 local caff = hs.caffeinate.watcher
 local timer = hs.timer.doAt
-
 --------------------------------------------------------------------------------
 
 -- CONFIG
