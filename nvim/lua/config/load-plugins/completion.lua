@@ -1,5 +1,5 @@
 -- source definitions
-local emojis = { name = "emoji", keyword_length = 2, group_index = 1 }
+local emojis = { name = "emoji", keyword_length = 2 }
 local nerdfont = { name = "nerdfont", keyword_length = 2 }
 local buffer = { name = "buffer", keyword_length = 3 }
 local path = { name = "path" }
@@ -13,10 +13,10 @@ local git = { name = "git" } -- mentions with "@", issues/PRs with "#"
 local defaultSources = {
 	snippets,
 	lsp,
+	tabnine,
 	emojis,
 	treesitter,
 	buffer,
-	tabnine,
 }
 
 --------------------------------------------------------------------------------
@@ -114,54 +114,81 @@ local function cmpconfig()
 		sources = cmp.config.sources(defaultSources),
 	}
 	--------------------------------------------------------------------------------
+	-- FILETYPE SPECIFIC COMPLETION
 
-	local defaultAndNerdfont = {
-		snippets,
-		lsp,
-		emojis,
-		nerdfont,
-		treesitter,
-		buffer,
-		tabnine,
-	}
-
-	-- Filetype specific Completion
 	cmp.setup.filetype("lua", {
-		-- disable leading "-"
-		enabled = function()
+		enabled = function() -- disable leading "-"
 			local lineContent = fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
 			return not (lineContent:match(" %-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
 		end,
-		sources = cmp.config.sources(defaultAndNerdfont),
-	})
-
-	-- also use nerdfont for starship config
-	cmp.setup.filetype("toml", {
-		sources = cmp.config.sources(defaultAndNerdfont),
-	})
-
-	-- css
-	cmp.setup.filetype("css", {
-		sources = cmp.config.sources{
+		sources = cmp.config.sources {
 			snippets,
 			lsp,
 			tabnine,
 			emojis,
+			nerdfont, -- add nerdfont for config
+			treesitter,
+			buffer,
+		},
+	})
+
+	cmp.setup.filetype("toml", {
+		sources = cmp.config.sources {
+			snippets,
+			lsp,
+			tabnine,
+			emojis,
+			nerdfont, -- add nerdfont for config
+			treesitter,
+			buffer,
+		},
+	})
+
+	-- css
+	cmp.setup.filetype("css", {
+		sources = cmp.config.sources {
+			snippets,
+			lsp,
+			tabnine,
+			emojis,
+			-- buffer and treesitter too lazzy on big files
 		},
 	})
 
 	-- markdown
 	cmp.setup.filetype("markdown", {
-		sources = cmp.config.sources(markdownSources),
+		sources = cmp.config.sources {
+			snippets,
+			path, -- e.g. image paths
+			lsp,
+			emojis,
+			-- no buffer or tabnine, since only adding noise
+		},
 	})
 
 	cmp.setup.filetype("yaml", {
-		sources = cmp.config.sources(yamlSources),
+		sources = cmp.config.sources {
+			snippets,
+			treesitter, -- treesitter works good on yaml
+			lsp,
+			tabnine,
+			emojis,
+			buffer,
+		},
 	})
 
 	-- ZSH
 	cmp.setup.filetype("sh", {
-		sources = cmp.config.sources(shellSources),
+		sources = cmp.config.sources {
+			zsh,
+			snippets,
+			lsp,
+			tabnine,
+			treesitter,
+			buffer,
+			emojis,
+			nerdfont, -- used for some configs
+		},
 	})
 
 	-- bibtex
@@ -184,21 +211,21 @@ local function cmpconfig()
 
 	-- gitcommit
 	cmp.setup.filetype("gitcommit", {
-		sources = cmp.config.sources({
+		sources = cmp.config.sources {
 			git,
 			path,
-		}, { -- second array only relevant when no source from the first matches
+			buffer,
 			emojis,
-		}),
+		},
 	})
 
 	cmp.setup.filetype("NeogitCommitMessage", {
-		sources = cmp.config.sources({
+		sources = cmp.config.sources {
 			git,
 			path,
-		}, { -- second array only relevant when no source from the first matches
+			buffer,
 			emojis,
-		}),
+		},
 	})
 	--------------------------------------------------------------------------------
 	-- Command Line Completion
