@@ -218,18 +218,24 @@ end):start()
 wf_neovim = wf
 	.new({ "neovide", "Neovide" })
 	-- required, since window size saving is sometimes ignored by Neovide :/
-	:subscribe(wf.windowCreated, function(newWin)
-		runWithDelays({ 0.2, 0.4, 0.6 }, function()
-			local size = isProjector() and maximized or baseLayout
-			moveResize(newWin, size)
-		end)
-	end)
-	-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
-	:subscribe(wf.windowDestroyed, function()
-		if #wf_neovim:getWindows() == 0 then
-			runWithDelays(5, function() hs.execute("pgrep neovide || killall nvim") end)
+	:subscribe(
+		wf.windowCreated,
+		function(newWin)
+			runWithDelays({ 0.2, 0.4, 0.6 }, function()
+				local size = isProjector() and maximized or baseLayout
+				moveResize(newWin, size)
+			end)
 		end
-	end)
+	)
+	-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
+	:subscribe(
+		wf.windowDestroyed,
+		function()
+			if #wf_neovim:getWindows() == 0 then
+				runWithDelays(5, function() hs.execute("pgrep neovide || killall nvim") end)
+			end
+		end
+	)
 
 --------------------------------------------------------------------------------
 
@@ -246,11 +252,12 @@ end)
 -- methods for focussing a window via AppleScript or `open`
 uriScheme("focus-help", function()
 	local win = hs.window.find("man:")
-	if win then win:focus() end
-
-	notify("None open.")
+	if win then
+		win:focus()
+	else
+		notify("None open.")
+	end
 end)
-
 
 -- btop leader hotkey (for Karabiner and Alfred)
 -- work around necessary, cause alacritty creates multiple instances, i.e.
@@ -258,10 +265,17 @@ end)
 -- methods for focussing a window via AppleScript or `open`
 uriScheme("focus-btop", function()
 	local win = hs.window.find("btop")
-	if win then win:focus()
-		return
+	if win then
+		win:focus()
+	else
+		-- starting with smaller font be able to read all processes
+		local out, success = hs.execute([[
+			export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+			if ! command -v btop &>/dev/null; then exit 1 ; fi
+			alacritty --option="font.size=20" --option="colors.primary.background='#000000'" --title="btop" --command btop
+		]])
+		if not success then notify("⚠️ btop not installed") end
 	end
-	win:focus()
 end)
 
 --------------------------------------------------------------------------------
