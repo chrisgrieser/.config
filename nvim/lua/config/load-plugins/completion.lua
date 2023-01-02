@@ -1,46 +1,22 @@
----Create a copy of a lua table
----@param originalTable table
----@return table
-local function copyTable(originalTable)
-	local newTable = {}
-	for _, value in pairs(originalTable) do
-		table.insert(newTable, value)
-	end
-	return newTable
-end
-
----Remove an item from a lua table, returns copy of table with item removed
----@param originalTable table
----@param itemToRemove any
----@return table
-local function removeFromTable(originalTable, itemToRemove)
-	local newTable = {}
-	for _, item in pairs(originalTable) do
-		if item ~= itemToRemove then table.insert(newTable, item) end
-	end
-	return newTable
-end
-
---------------------------------------------------------------------------------
 -- source definitions
-local emojis = { name = "emoji", keyword_length = 2 }
+local emojis = { name = "emoji", keyword_length = 2, group_index = 1 }
 local nerdfont = { name = "nerdfont", keyword_length = 2 }
-local buffer = { name = "buffer", keyword_length = 2 }
+local buffer = { name = "buffer", keyword_length = 3 }
 local path = { name = "path" }
 local zsh = { name = "zsh" }
 local tabnine = { name = "cmp_tabnine", keyword_length = 3 }
 local snippets = { name = "luasnip" }
 local lsp = { name = "nvim_lsp" }
 local treesitter = { name = "treesitter" }
-local git = { name = "git" } -- commits with ":", issues/PRs with "#"
+local git = { name = "git" } -- mentions with "@", issues/PRs with "#"
 
 local defaultSources = {
 	snippets,
-	emojis,
 	lsp,
-	tabnine,
+	emojis,
 	treesitter,
 	buffer,
+	tabnine,
 }
 
 --------------------------------------------------------------------------------
@@ -139,9 +115,15 @@ local function cmpconfig()
 	}
 	--------------------------------------------------------------------------------
 
-	-- lua and toml
-	local defaultAndNerdfont = copyTable(defaultSources)
-	table.insert(defaultAndNerdfont, 6, nerdfont)
+	local defaultAndNerdfont = {
+		snippets,
+		lsp,
+		emojis,
+		nerdfont,
+		treesitter,
+		buffer,
+		tabnine,
+	}
 
 	-- Filetype specific Completion
 	cmp.setup.filetype("lua", {
@@ -159,30 +141,25 @@ local function cmpconfig()
 	})
 
 	-- css
-	local cssSources = copyTable(defaultSources)
-	cssSources = removeFromTable(cssSources, buffer) -- too much noise
-	cssSources = removeFromTable(cssSources, treesitter) -- laggy on big files
 	cmp.setup.filetype("css", {
-		sources = cmp.config.sources(cssSources),
+		sources = cmp.config.sources{
+			snippets,
+			lsp,
+			tabnine,
+			emojis,
+		},
 	})
 
 	-- markdown
-	local markdownSources = copyTable(defaultSources)
-	markdownSources = removeFromTable(markdownSources, tabnine) -- too much noise
-	table.insert(markdownSources, 1, path) -- for markdown images
 	cmp.setup.filetype("markdown", {
 		sources = cmp.config.sources(markdownSources),
 	})
-	local yamlSources = copyTable(defaultSources)
-	yamlSources = removeFromTable(yamlSources, buffer)
+
 	cmp.setup.filetype("yaml", {
 		sources = cmp.config.sources(yamlSources),
 	})
 
 	-- ZSH
-	local shellSources = copyTable(defaultSources)
-	table.insert(shellSources, 2, zsh)
-	table.insert(shellSources, 6, nerdfont)
 	cmp.setup.filetype("sh", {
 		sources = cmp.config.sources(shellSources),
 	})
@@ -242,7 +219,7 @@ local function cmpconfig()
 
 	-- Enable Completion in DressingInput
 	cmp.setup.filetype("DressingInput", {
-		sources =cmp.config.sources { { name = "omni" } },
+		sources = cmp.config.sources { { name = "omni" } },
 	})
 end
 --------------------------------------------------------------------------------

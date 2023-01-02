@@ -10,12 +10,12 @@ leftHalf = hs.layout.left50
 -- device-specific parameters
 if isIMacAtHome() then
 	pseudoMaximized = { x = 0.184, y = 0, w = 0.817, h = 1 }
-	toTheSide = { x = 0, y = 0.025, w = 0.185, h = 0.975 }
+	toTheSide = { x = 0, y = 0.05, w = 0.185, h = 0.95 }
 	centered = { x = 0.186, y = 0, w = 0.6, h = 1 }
 	baseLayout = pseudoMaximized
 elseif isAtMother() then
 	pseudoMaximized = { x = 0.2125, y = 0, w = 0.7875, h = 1 }
-	toTheSide = { x = 0, y = 0.03, w = 0.2125, h = 0.97 }
+	toTheSide = { x = 0, y = 0.05, w = 0.185, h = 0.95 }
 	centered = { x = 0.212, y = 0, w = 0.6, h = 1 }
 	baseLayout = pseudoMaximized
 elseif isAtOffice() then
