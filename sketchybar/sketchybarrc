@@ -31,15 +31,16 @@ if [[ $IS_AT_OFFICE -eq 1 ]]; then
 	# explanation on using "set" here: https://www.shellcheck.net/wiki/SC2089
 	set -- --add alias "Control Centre,WiFi" right --set "Control Centre,WiFi"
 else
-	HEIGHT=50 # extra height for second row & to cover the holes at the corner where the wallpaper shines through
-	ITEM_Y_OFFSET=13.5
+	HEIGHT=55 # extra height for second row & to cover the holes at the corner where the wallpaper shines through
+	ITEM_Y_OFFSET=16
 fi
 
 # globs are necessary, since the exact name of the menubar item changes a bit
 # depending on installation whether mac is M1 or not
-menu_items=$(sketchybar --query default_menu_items )
+menu_items=$(sketchybar --query default_menu_items)
 network_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*network" | cut -d\" -f2)
 cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | cut -d\" -f2)
+ram_bar_item=$(echo "$menu_items" | grep -Ei "Stats,RAM" | cut -d\" -f2)
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -48,8 +49,8 @@ cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | cut -d\" -f2)
 sketchybar --bar \
 	height="$HEIGHT" \
 	position=top \
-	padding_left=2 \
-	padding_right=2 \
+	padding_left=0 \
+	padding_right=0 \
 	color="$BG_COLOR" \
 	display=all \
 	\
@@ -61,38 +62,35 @@ sketchybar --bar \
 	label.color="$FONT_COLOR" \
 	label.padding_left=2 \
 	label.padding_right=5 \
-	icon.padding_left=1 \
-	icon.padding_right=2 \
+	icon.padding_left=5 \
+	icon.padding_right=1 \
 	y_offset="$ITEM_Y_OFFSET" \
 	\
+	\
 	popup.drawing=true \
-	popup.y_offset=-27 \
-	popup.background.color="$BG_COLOR" \
-	\
-	\
+	popup.y_offset=-32 \
+	popup.horizontal=true \
 	\
 	\
 	--add item clock left \
 	--set clock update_freq=1 \
 	script="$PLUGIN_DIR/clock.sh" \
 	width=135 \
-	label.padding_right=3 \
+	label.padding_right=5 \
+	\
+	--add alias "$ram_bar_item" left \
+	--set "$ram_bar_item" \
+	width=20 \
 	\
 	--add alias "$cpu_bar_item" left \
 	--set "$cpu_bar_item" \
-	width=38 \
+	width=45 \
 	\
 	--add alias "$network_bar_item" left \
 	--set "$network_bar_item" \
-	width=45 \
+	width=55 \
 	\
-	--add item weather left \
-	--set weather update_freq=1800 \
-	script="$PLUGIN_DIR/weather.sh" \
-	\
-	--add item covid-stats popup.clock \
-	--set covid-stats update_freq=43200 \
-	script="$PLUGIN_DIR/covid-stats.sh" \
+	"$@" \
 	\
 	--add item git-sync left \
 	--set git-sync update_freq=300 \
@@ -101,7 +99,13 @@ sketchybar --bar \
 	--subscribe git-sync repo-files-update \
 	--subscribe git-sync system_woke \
 	\
-	"$@" \
+	--add item covid-stats popup.clock \
+	--set covid-stats update_freq=43200 \
+	script="$PLUGIN_DIR/covid-stats.sh" \
+	\
+	--add item weather popup.clock \
+	--set weather update_freq=1800 \
+	script="$PLUGIN_DIR/weather.sh" \
 	\
 	\
 	--update
