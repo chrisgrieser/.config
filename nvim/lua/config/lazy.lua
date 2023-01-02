@@ -42,6 +42,7 @@ require("lazy").setup("config.load-plugins", {
 				"tohtml",
 				"tutor",
 				"zipPlugin",
+				"man",
 			},
 		},
 	},

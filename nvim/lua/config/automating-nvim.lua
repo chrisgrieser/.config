@@ -10,17 +10,23 @@ require("config.utils")
 local watchedFile = "/tmp/nvim-automation"
 local w = vim.loop.new_fs_event()
 
+---reads file from disk, replacing trailing newlines
+---@param path string
+---@return string filecontent
 local function readFile(path)
 	local file = io.open(path, "r")
-	if not file then return nil end
+	if not file then return "" end
 	local content = file:read("*all")
 	file:close()
 	return content:gsub("\n$", ""):gsub("\r$", "")
 end
 
 local function executeExtCommand()
-	local command = readFile(watchedFile)
-	cmd("silent! lua" .. command)
+	local commandStr = readFile(watchedFile)
+	local command = load(commandStr) -- load() is the lua equivalent of eval()
+	if command then command() end
+	-- alternative method: `cmd("silent! call luaeval('" .. command .. "')")`
+
 	if w then
 		w:stop() -- prevent multiple executions
 		startWatching()
