@@ -104,10 +104,10 @@ function syncAllGitRepos()
 		print("updating sketchybar")
 	end
 	local function noSyncInProgress()
-		local dotfiles = not (gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
-		local pass = not (gitPassSync and gitPassSync:isRunning())
-		local vault = not (gitVaultSync and gitVaultSync:isRunning())
-		return not (dotfiles or vault or pass)
+		local dotfilesSyncing = gitDotfileSyncTask and gitDotfileSyncTask:isRunning()
+		local passSyncing = gitPassSync and gitPassSync:isRunning()
+		local vaultSyncing = gitVaultSync and gitVaultSync:isRunning()
+		return not (dotfilesSyncing or vaultSyncing or passSyncing)
 	end
 
 	hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
