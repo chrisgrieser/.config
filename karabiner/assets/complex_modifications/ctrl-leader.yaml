@@ -328,11 +328,13 @@ rules:
           - shell_command: open -g 'hammerspoon://focus-help'
           - *deactivate-leader
           - *remove-notice
-      # [esc] Activity Monitor
+      # [esc] btop
       - type: basic
         from: {key_code: escape}
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'Activity Monitor'
+          - shell_command: |
+              source $HOME/.zshenv    # needs to be sourced when using 
+              zsh "$DOTFILE_FOLDER/Alfred.alfredpreferences/workflows/user.workflow.1CEC41B5-7F22-4EC5-B76B-14928455C962/start-btop.sh"
           - *deactivate-leader
           - *remove-notice
