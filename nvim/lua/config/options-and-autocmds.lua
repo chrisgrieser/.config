@@ -81,10 +81,10 @@ opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
 opt.colorcolumn = "+1" -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
-opt.backspace = { "start", "eol" } -- restrict insert mode backspace behavior
+opt.backspace:remove("indent") -- restrict insert mode backspace behavior
 
 -- status bar & cmdline
-opt.history = 250 -- reduce noise for command history search
+opt.history = 400 -- reduce noise for command history search
 opt.cmdheight = 0
 
 -- Character groups
@@ -98,16 +98,15 @@ opt.autochdir = true -- always current directory
 opt.confirm = true -- ask instead of aborting
 
 augroup("autosave", {})
-autocmd({ "BufWinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
+autocmd({ "BufWinLeave", "WinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	group = "autosave",
 	pattern = "?*", -- pattern required
 	callback = function()
-		local isIrregularFile = not (expand("%:p"):find("/")) -- prevent irregular files from spamming view files
+		local isIrregularFile = not (expand("%:p"):find("/"))
 		if not bo.modifiable or isIrregularFile then return end
 
 		-- safety net to not save file in wrong folder when autochdir is not reliable
-		local curFile = expand("%:p")
-		cmd.update(curFile)
+		cmd.update(expand("%:p"))
 	end,
 })
 
@@ -197,6 +196,8 @@ autocmd("BufWinLeave", {
 	pattern = "?*", -- pattern required, otherwise does not trigger
 	callback = function()
 		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
+		local isIrregularFile = not (expand("%:p"):find("/"))
+		if isIrregularFile then return end -- prevent irregular files from spamming view files
 		cmd.mkview(1)
 	end,
 })
@@ -205,6 +206,8 @@ autocmd("BufWinEnter", {
 	pattern = "?*",
 	callback = function()
 		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
+		local isIrregularFile = not (expand("%:p"):find("/"))
+		if isIrregularFile then return end -- prevent irregular files from spamming view files
 		cmd([[silent! loadview 1]]) -- needs silent to avoid error for documents that do not have a view yet (opening first time)
 		normal("0^") -- to scroll to the left on start
 	end,

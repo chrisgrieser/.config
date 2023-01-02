@@ -96,7 +96,7 @@ rules:
           - shell_command: |
               FRONT_APP=$(osascript -e 'tell application "System Events" to return name of first process whose frontmost is true')
               if [[ "$FRONT_APP" == "neovide" ]]; then
-                echo "vim.cmd [[silent! wqall]]" >"/tmp/nvim-automation"
+                echo "vim.cmd.wq()" >"/tmp/nvim-automation"
               else
                 killall "$FRONT_APP"
               fi

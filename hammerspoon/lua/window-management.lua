@@ -121,11 +121,10 @@ function moveResize(win, pos)
 		app("Twitterrific"):mainWindow():raise()
 	end
 
-	local timeout = false -- pseudo-timeout
-	runWithDelays(3, function() timeout = true end)
-	while not (checkSize(win, pos)) do
+	local i = 0 -- pseudo-timeout
+	while win and i < 30 and not (checkSize(win, pos)) do
 		win:moveToUnit(pos)
-		if timeout or not win then return end
+		os.execute("sleep 0.05") -- since lua itself does not have a blocking wait function
 	end
 end
 
