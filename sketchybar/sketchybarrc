@@ -71,6 +71,8 @@ sketchybar --bar \
 	width=135 \
 	label.padding_right=3 \
 	\
+	--add item apple.preferences popup.apple.logo \
+	\
 	--add alias "$cpu_bar_item" left \
 	--set "$cpu_bar_item" \
 	width=38 \

@@ -1,4 +1,4 @@
-title: 🔺 CTRL Leader
+title: "\U0001F53A CTRL Leader"
 anchors:
   - conditions:
       - &leader-active
@@ -36,11 +36,10 @@ anchors:
       - &set-notice
         set_notification_message:
           id: leader-notice
-          text: "🔺 Leader"
-
+          text: "\U0001F53A Leader"
 #───────────────────────────────────────────────────────────────────────────────
 rules:
-  - description: '🔺 L-Ctrl (Non-Apple) / fn (Apple)'
+  - description: "\U0001F53A L-Ctrl (Non-Apple) / fn (Apple)"
     manipulators:
       # non-apple keyboard
       - type: basic
@@ -99,10 +98,8 @@ rules:
           - key_code: f19
           - *deactivate-leader
           - *remove-notice
-
   #─────────────────────────────────────────────────────────────────────────────
-
-  - description: 🔺 App Switcher Actions
+  - description: "\U0001F53A App Switcher Actions"
     manipulators:
       # Cancel (Esc/Hyper)
       - type: basic
@@ -214,11 +211,7 @@ rules:
           - *remove-notice
       # Brave [B]rowser: re-open tab (Shift)
       - type: basic
-        from:
-          key_code: b
-          modifiers:
-            mandatory:
-              - shift
+        from: {key_code: b, modifiers: {mandatory: [shift]}}
         conditions: [*leader-active]
         to:
           - shell_command: osascript -e 'tell application "Brave Browser" to activate'
@@ -243,12 +236,20 @@ rules:
           - shell_command: open -a 'Hammerspoon'
           - *deactivate-leader
           - *remove-notice
-      # [K]arabiner-EventViewer
+      # [k]arabiner-EventViewer
       - type: basic
         from: {key_code: k}
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Karabiner-EventViewer'
+          - *deactivate-leader
+          - *remove-notice
+      # [K]arabiner-Elements
+      - type: basic
+        from: {key_code: k, modifiers: {mandatory: [shift]}}
+        conditions: [*leader-active]
+        to:
+          - shell_command: open -a 'Karabiner-Elements'
           - *deactivate-leader
           - *remove-notice
       # [Y]ouTube
@@ -267,7 +268,7 @@ rules:
           - shell_command: open -a 'Alfred Preferences'
           - *deactivate-leader
           - *remove-notice
-      # [N]ews Reader (Reeder)
+      # [N]ews Reader (Reeder / inoreader)
       - type: basic
         from: {key_code: "n"}
         conditions: [*leader-active]
@@ -315,7 +316,7 @@ rules:
           - shell_command: open 'https://web.telegram.org/z/'
           - *deactivate-leader
           - *remove-notice
-      # [?] (w/o shift, German keyboard) man page or cheatsheet
+      # [?] (w/o shift, German keyboard) man page
       - type: basic
         from: {key_code: hyphen}
         conditions:
@@ -323,18 +324,16 @@ rules:
             name: LEADER_ACTIVE
             value: true
           - type: input_source_if
-            input_sources: [language: ^de$]
+            input_sources: [{language: ^de$}]
         to:
           - shell_command: open -g 'hammerspoon://focus-help'
           - *deactivate-leader
           - *remove-notice
-      # [esc] btop
+      # [esc]: btop
       - type: basic
         from: {key_code: escape}
         conditions: [*leader-active]
         to:
-          - shell_command: |
-              source $HOME/.zshenv    # needs to be sourced when using 
-              zsh "$DOTFILE_FOLDER/Alfred.alfredpreferences/workflows/user.workflow.1CEC41B5-7F22-4EC5-B76B-14928455C962/start-btop.sh"
+          - shell_command: open -g 'hammerspoon://focus-btop'
           - *deactivate-leader
           - *remove-notice
