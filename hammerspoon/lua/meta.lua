@@ -30,7 +30,7 @@ function systemStart()
 	else
 		if app("Finder") then app("Finder"):kill() end
 		notify("Hammerspoon started.")
-		syncAllGitRepos("full")
+		syncAllGitRepos()
 		notify("Sync finished.")
 	end
 end
