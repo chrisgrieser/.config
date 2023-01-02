@@ -1,12 +1,6 @@
 #!/bin/zsh
 
-# with "--submodules" arg → also pull submodules
-
-#───────────────────────────────────────────────────────────────────────────────
 MAX_FILE_SIZE_MB=10
-
-# shellcheck disable=2034
-GIT_OPTIONAL_LOCKS=0
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -16,7 +10,7 @@ device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
 if [[ "$filesChanged" == 0 ]] ; then
 	git pull
-	[[ "$1" == "--submodules" ]] && git submodule update --remote --rebase # --rebase ensures that there is no detached head in the submodules
+	git submodule update --remote --rebase # --rebase ensures that there is no detached head in the submodules
 	exit 0
 fi
 

@@ -26,8 +26,7 @@ local gitPassScript = passwordStore .. "/pass-sync.sh"
 
 --------------------------------------------------------------------------------
 
----@param arg? string flag for the gitDotfileScript, "--submodules" also updates submodules
-local function gitDotfileSync(arg)
+local function gitDotfileSync()
 	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then return end
 	if not (screenIsUnlocked()) then return end -- prevent background sync when in office
 
@@ -40,6 +39,7 @@ local function gitDotfileSync(arg)
 					print("Dotfile Sync successful.")
 					return
 				end
+
 				local stdout = hs.execute("git status --short")
 				if not stdout then return end
 				local submodulesStillDirty = stdout:match(" m ")
@@ -49,8 +49,7 @@ local function gitDotfileSync(arg)
 				else
 					notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
 				end
-			end,
-			{ arg }
+			end
 		)
 		:start()
 end
@@ -87,55 +86,36 @@ local function gitPassSync()
 		:start()
 end
 
+--------------------------------------------------------------------------------
+
 ---sync all three git repos
----@param mode? string full|partial
-function syncAllGitRepos(mode)
-	if mode == "full" then
-		gitDotfileSync("--submodules")
-	elseif mode == "partial" then
-		gitDotfileSync()
-	end
+function syncAllGitRepos()
+	gitDotfileSync()
 	gitPassSync()
 	gitVaultSync()
 end
 
---------------------------------------------------------------------------------
 
-repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, function() syncAllGitRepos("partial") end):start()
+repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, syncAllGitRepos):start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
 uriScheme("sync-repos", function()
-	syncAllGitRepos("full")
+	syncAllGitRepos()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
-
----@param dirty number 0|1|2 dirty status passed to sketchybar's `git-sync.sh`
-local function updateSketchybar(dirty)
-	-- https://felixkratz.github.io/SketchyBar/config/events#triggering-custom-events
-	hs.execute(
-		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
-			.. " sketchybar --trigger repo-files-update DIRTY="..dirty
-	)
-end
-
-dotfilesWatcher = pw(dotfilesFolder, function () updateSketchybar(1) end):start()
-vaultWatcher = pw(vaultLocation, function () updateSketchybar(1) end):start()
-passFileWatcher = pw(passwordStore, function () updateSketchybar(1) end):start()
 
 --------------------------------------------------------------------------------
 
 shutDownWatcher = caff
 	.new(function(eventType)
-		if eventType == caff.screensDidSleep then syncAllGitRepos("full") end
+		if eventType == caff.screensDidSleep then syncAllGitRepos() end
 	end)
 	:start()
 
---------------------------------------------------------------------------------
--- SYSTEM WAKE/START
 wakeWatcher = caff
 	.new(function(eventType)
 		if isAtOffice() and eventType == caff.screensDidUnlock then
-			syncAllGitRepos("full")
+			syncAllGitRepos()
 			officeModeLayout()
 		elseif not (isAtOffice()) and (eventType == caff.screensDidWake or eventType == caff.systemDidWake) then
 			runWithDelays(1, function()
@@ -143,7 +123,7 @@ wakeWatcher = caff
 					setDarkmode(true)
 					movieModeLayout()
 				else
-					syncAllGitRepos("full")
+					syncAllGitRepos()
 					local toDark = betweenTime(7, 19)
 					homeModeLayout() -- should run after git sync, to avoid conflicts
 					setDarkmode(toDark)
