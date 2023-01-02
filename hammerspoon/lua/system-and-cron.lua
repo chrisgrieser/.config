@@ -88,29 +88,28 @@ end
 
 --------------------------------------------------------------------------------
 
-local function updateSketchybar()
-	-- https://felixkratz.github.io/SketchyBar/config/events#triggering-custom-events
-	hs.execute(
-		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
-			.. "sketchybar --trigger repo-files-update"
-	)
-end
-
 ---sync all three git repos
 function syncAllGitRepos()
 	gitDotfileSync()
 	gitPassSync()
 	gitVaultSync()
 
-	-- wait until sync is finished, to avoid merge conflict
-	local function noSynxInProgress()
+	-- wait until sync is finished so sketchybar update shows success/failure
+	local function updateSketchybar()
+		-- https://felixkratz.github.io/SketchyBar/config/events#triggering-custom-events
+		hs.execute(
+			"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
+				.. "sketchybar --trigger repo-files-update"
+		)
+	end
+	local function noSyncInProgress()
 		local dotfiles = not (gitDotfileSyncTask and gitDotfileSyncTask:isRunning())
 		local pass = not (gitPassSync and gitPassSync:isRunning())
-		local vault = not (gitvaultSync and gitvaultSync:isRunning())
+		local vault = not (gitVaultSync and gitVaultSync:isRunning())
 		return not (dotfiles or vault or pass)
 	end
-	hs.timer.waitUntil(noSynxInProgress, function() alacrittyFontSize(26) end):start()
-	updateSketchybar()
+
+	hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
 end
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, syncAllGitRepos):start()
@@ -118,7 +117,6 @@ repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, syncAllGitRepos):start()
 -- manual sync for Alfred: `hammerspoon://sync-repos`
 uriScheme("sync-repos", function()
 	syncAllGitRepos()
-	updateSketchybar()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
