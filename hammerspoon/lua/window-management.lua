@@ -50,7 +50,7 @@ end
 -- requires these two helper actions for Drafts installed:
 -- https://directory.getdrafts.com/a/2BS & https://directory.getdrafts.com/a/2BR
 ---@param draftsWin hs.window
-function toggleDraftsSidebar(draftsWin)
+local function toggleDraftsSidebar(draftsWin)
 	runWithDelays({ 0.05, 0.2 }, function()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
@@ -60,7 +60,7 @@ function toggleDraftsSidebar(draftsWin)
 end
 
 ---@param highlightsWin hs.window
-function toggleHighlightsSidebar(highlightsWin)
+local function toggleHighlightsSidebar(highlightsWin)
 	runWithDelays(0.3, function()
 		local highlights_w = highlightsWin:frame().w
 		local screen_w = highlightsWin:screen():frame().w
@@ -73,7 +73,7 @@ end
 
 -- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
 ---@param obsiWin hs.window
-function toggleObsidianSidebar(obsiWin)
+local function toggleObsidianSidebar(obsiWin)
 	runWithDelays({ 0.05, 0.2 }, function()
 		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
 		if numberOfObsiWindows > 1 then return end -- prevent popout window resizing to affect sidebars
@@ -89,13 +89,9 @@ function toggleObsidianSidebar(obsiWin)
 	end)
 end
 
---------------------------------------------------------------------------------
--- WINDOW MOVEMENT
-
 ---@param win hs.window
----@param pos hs.geometry
-function moveResize(win, pos)
-	if not win then return end -- window been closed before
+function toggleWinSidebar(win)
+	if not win or not win:application() then return end
 	local appOfWin = win:application():name()
 	if appOfWin == "Drafts" then
 		toggleDraftsSidebar(win)
@@ -104,11 +100,22 @@ function moveResize(win, pos)
 	elseif appOfWin == "Highlights" then
 		toggleHighlightsSidebar(win)
 	end
+end
 
-	-- for Obsidian theme development
+function showAllSidebars()
+	if appIsRunning("Highlights") then app("Highlights"):selectMenuItem { "View", "Show Sidebar" } end
+	openLinkInBackground("obsidian://sidebar?showLeft=false&showRight=true")
+	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
+end
+
+
+---ensures Obsidian windows are always shown when developing css
+---@param win hs.window
+---@param pos hs.geometry
+local function obsidianThemeDevHelper(win, pos)
 	if
 		not (pos == pseudoMaximized or pos == maximized)
-		and appOfWin:lower() == "neovide"
+		and win:application():name():lower() == "neovide"
 		and appIsRunning("Obsidian")
 	then
 		runWithDelays(0.15, function()
@@ -116,6 +123,18 @@ function moveResize(win, pos)
 			app("Obsidian"):mainWindow():raise()
 		end)
 	end
+end
+
+--------------------------------------------------------------------------------
+-- WINDOW MOVEMENT
+
+---@param win hs.window
+---@param pos hs.geometry
+function moveResize(win, pos)
+	if not win then return end -- window been closed before
+	toggleWinSidebar(win)
+
+	obsidianThemeDevHelper(win, pos)
 
 	if (pos == pseudoMaximized or pos == centered) and appIsRunning("Twitterrific") then
 		app("Twitterrific"):mainWindow():raise()

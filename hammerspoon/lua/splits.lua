@@ -14,7 +14,7 @@ local function runningApps()
 	local appsArr = {}
 	for _, win in pairs(hs.window:allWindows()) do
 		local appName = win:application():name()
-		local isExcludedApp = { "Hammerspoon", "Twitterrific", "Notification Centre", frontAppName() }
+		local isExcludedApp = { "Hammerspoon", "Gifox", "Twitterrific", "Notification Centre", frontAppName() }
 		if not tableContains(isExcludedApp, appName) then table.insert(appsArr, { text = appName }) end
 	end
 	return appsArr
@@ -61,7 +61,6 @@ end
 ---@param mode string swap|unsplit|split, split will use the secondWin and the current win
 ---@param secondWin? hs.window required when using mode "split"
 function vsplitSetLayout(mode, secondWin)
-	-- various guard clauses
 	if not (splitActive()) and (mode == "swap" or mode == "unsplit") then
 		notify("no split active")
 		return
@@ -100,24 +99,8 @@ function vsplitSetLayout(mode, secondWin)
 	SPLIT_RIGHT:raise()
 	SPLIT_LEFT:raise()
 	runWithDelays(0.3, function()
-		if SPLIT_RIGHT:application() then
-			if SPLIT_RIGHT:application():name() == "Drafts" then
-				toggleDraftsSidebar(SPLIT_RIGHT)
-			elseif SPLIT_RIGHT:application():name() == "Obsidian" then
-				toggleObsidianSidebar(SPLIT_RIGHT)
-			elseif SPLIT_RIGHT:application():name() == "Highlights" then
-				toggleHighlightsSidebar(SPLIT_RIGHT)
-			end
-		end
-		if SPLIT_LEFT:application() then
-			if SPLIT_LEFT:application():name() == "Drafts" then
-				toggleDraftsSidebar(SPLIT_LEFT)
-			elseif SPLIT_LEFT:application():name() == "Obsidian" then
-				toggleObsidianSidebar(SPLIT_LEFT)
-			elseif SPLIT_LEFT:application():name() == "Highlights" then
-				toggleHighlightsSidebar(SPLIT_LEFT)
-			end
-		end
+		toggleWinSidebar(SPLIT_RIGHT)
+		toggleWinSidebar(SPLIT_LEFT)
 	end)
 
 	if mode == "unsplit" then
@@ -150,8 +133,8 @@ end
 hotkey(hyper, "X", function() vsplitSetLayout("swap") end)
 hotkey(hyper, "V", function()
 	if splitActive() then
-		selectSecondWin()
-	else
 		vsplitSetLayout("unsplit")
+	else
+		selectSecondWin()
 	end
 end)
