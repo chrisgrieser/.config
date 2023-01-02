@@ -95,6 +95,7 @@ aceVimMap("k", "gk");
 aceVimMap("U", "<C-r>");
 aceVimMap("J", "6j");
 aceVimMap("K", "6k");
+aceVimMap("M", "gJ"); // mapping to gJ instead of J to prevent recursion, as noremap does not seem to be available
 
 imap("<Ctrl-a>", "<Ctrl-f>"); // boL
 
