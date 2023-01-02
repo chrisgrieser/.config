@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 
+osascript -e 'display notification "" with title "weather update"'
+
 weather=$(curl "https://wttr.in/Berlin?format=1" | tr -d "C ")
-if [[ "$weather" =~ Unknown ]] || [[ "$weather" =~ Sorry ]] ; then
+if [[ "$weather" =~ Unknown ]] || [[ "$weather" =~ Sorry ]]; then
 	icon=""
 	temp="–"
 else

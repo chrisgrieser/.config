@@ -49,6 +49,7 @@ add("zsh", {
 	snip("ext", "ext=${${1:file_name}##*.}"),
 	snip("filename w/o ext", "${1:file_name}=${${1:file_name}%.*}"),
 	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
+	snip("notify", [[osascript -e 'display notification "${2:subtitle}" with title "${1:title}"']]),
 
 	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
 	snip("if .. then", 'if [[ "$${1:var}" ]]; then\n\t$0\nfi'),

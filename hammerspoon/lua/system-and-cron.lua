@@ -116,6 +116,7 @@ local function updateSketchybar()
 		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
 			.. " sketchybar --trigger repo-files-update FROM_PATHWATCHER=1"
 	)
+	notify("path watcher triggered")
 end
 
 dotfilesWatcher = pw(dotfilesFolder, updateSketchybar):start()

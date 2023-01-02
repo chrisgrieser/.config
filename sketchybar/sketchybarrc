@@ -70,18 +70,23 @@ sketchybar --bar \
 	script="$PLUGIN_DIR/clock.sh" \
 	width=135 \
 	label.padding_right=3 \
+	\
 	--add alias "$cpu_bar_item" left \
 	--set "$cpu_bar_item" \
 	width=38 \
+	\
 	--add alias "$network_bar_item" left \
 	--set "$network_bar_item" \
 	width=45 \
+	\
 	--add item weather left \
 	--set weather update_freq=1800 \
 	script="$PLUGIN_DIR/weather.sh" \
+	\
 	--add item covid-stats left \
 	--set covid-stats update_freq=43200 \
 	script="$PLUGIN_DIR/covid-stats.sh" \
+	\
 	--add item git-sync left \
 	--set git-sync update_freq=9001 \
 	script="$PLUGIN_DIR/git-sync.sh" \
