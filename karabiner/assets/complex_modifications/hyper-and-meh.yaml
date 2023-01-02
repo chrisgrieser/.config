@@ -37,6 +37,11 @@ rules:
           key_code: escape
         to_if_alone:
           - key_code: f18
+        # INFO condition to avoid conflict with finder-vim-mode; mapping to f18 
+        # is done in finder-vim-alfred-addon.yaml
+        conditions:
+          - type: frontmost_application_unless
+            bundle_identifiers: [^com\.apple\.finder$]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪ Tab  → Meh/Tab"
     manipulators:
