@@ -5,14 +5,15 @@ GIT_OPTIONAL_LOCKS=0
 
 # INFO to prevent constantly calling `git status`, which prevents other git processes
 # from running due to lock (happens sometimes even with optional locks)
-# FROM_PATCHWATCHER gets set when called from hammerspoon
-if [[ "$FROM_PATCHWATCHER" -eq 1 ]]; then
+# FROM_PATCHWATCHER gets set when called from hammerspoon. 
+# WARN running a git command on a path watcher trigger leads to an infinite loop
+# since git commands create index lock files, which again trigger the path 
+# watcher, therefore this workaround seems necessary
+if [[ "$FROM_PATHWATCHER" -eq 1 ]]; then
 	sketchybar --set "$NAME" icon="🔁"
-	osascript -e 'display notification "" with title "pathwatcher loop"'
 	exit 0
 fi
 
-osascript -e 'display notification "" with title "regular trigger"'
 configError=""
 
 cd "$DOTFILE_FOLDER" || configError="repo-path wrong"
