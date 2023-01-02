@@ -69,8 +69,8 @@ rules:
             value: true
       # Alfred Custom Clipboard Search
       - type: basic
-        from: {key_code: f18}
-        to:
+        from: {key_code: escape}
+        to_if_alone:
           - key_code: f18
           - set_variable:
               name: FINDER_INSERT_MODE
@@ -89,8 +89,8 @@ rules:
             value: true
       # abort Alfred Clipboard
       - type: basic
-        from: {key_code: f18}
-        to:
+        from: {key_code: escape}
+        to_if_alone:
           - key_code: f18
           - set_variable:
               name: FINDER_INSERT_MODE
