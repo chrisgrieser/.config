@@ -71,10 +71,10 @@ local function gitVaultSync()
 end
 
 local function gitPassSync()
-	if gitpassSync and gitpassSync:isRunning() then return end
+	if gitPassSyncTask and gitPassSyncTask:isRunning() then return end
 	if not screenIsUnlocked() then return end -- prevent background sync when in office
 
-	gitpassSync = hs.task
+	gitPassSyncTask = hs.task
 		.new(gitPassScript, function(exitCode, _, stdErr)
 			stdErr = stdErr:gsub("\n", " –– ")
 			if exitCode == 0 then
@@ -105,8 +105,8 @@ function syncAllGitRepos()
 	end
 	local function noSyncInProgress()
 		local dotfilesSyncing = gitDotfileSyncTask and gitDotfileSyncTask:isRunning()
-		local passSyncing = gitPassSync and gitPassSync:isRunning()
-		local vaultSyncing = gitVaultSync and gitVaultSync:isRunning()
+		local passSyncing = gitPassSyncTask and gitPassSyncTask:isRunning()
+		local vaultSyncing = gitVaultSyncTask and gitVaultSyncTask:isRunning()
 		return not (dotfilesSyncing or vaultSyncing or passSyncing)
 	end
 
