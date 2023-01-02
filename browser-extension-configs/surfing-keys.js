@@ -7,9 +7,9 @@ const { imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vm
 
 // ---- SETTINGS ----
 // https://github.com/brookhong/Surfingkeys#edit-your-own-settings
-settings.focusAfterClosed = "last";
 settings.richHintsForKeystroke = 400; // like whichkey, value is delay till shown
 settings.hintShiftNonActive = true; // vimium-like: holding shift while pressing hint opens in bg tab
+settings.startToShowEmoji = 0; // length of chars to show emojis
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -140,4 +140,3 @@ removeSearchAlias("w", "s");
 removeSearchAlias("y", "s");
 removeSearchAlias("s", "s");
 removeSearchAlias("e", "s");
-
