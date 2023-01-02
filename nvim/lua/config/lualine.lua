@@ -75,11 +75,11 @@ local function selectionCount()
 end
 
 local function searchCounter()
-	if fn.mode() ~= "n" then return end
+	if fn.mode() ~= "n" or vim.v.hlsearch == 0 then return "" end
 	local total = fn.searchcount().total
 	local current = fn.searchcount().current
 	local term = fn.getreg("/")
-	return "  " .. term .. " " .. current .. "/" .. total
+	return " " .. current .. "/" .. total .. " " .. term
 end
 
 --------------------------------------------------------------------------------
