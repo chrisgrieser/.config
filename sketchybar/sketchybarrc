@@ -12,6 +12,16 @@ while ! pgrep "Stats"; do
 	sleep 1
 done
 
+# globs are necessary, since the exact name of the menubar item changes a bit
+# depending on installation whether mac is M1 or not
+menu_items=$(sketchybar --query default_menu_items)
+network_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*network" | cut -d\" -f2)
+cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | cut -d\" -f2)
+gpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*gpu" | cut -d\" -f2)
+ram_bar_item="Stats,RAM"
+
+#───────────────────────────────────────────────────────────────────────────────
+
 PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
 defaults read -g AppleInterfaceStyle | grep -iq "Dark" ; IS_DARK_MODE=$?
@@ -32,16 +42,9 @@ if [[ $IS_AT_OFFICE -eq 1 ]]; then
 	set -- --add alias "Control Centre,WiFi" right --set "Control Centre,WiFi"
 else
 	HEIGHT=60 # extra height for second row & to cover the holes at the corner where the wallpaper shines through
-	ITEM_Y_OFFSET=19 # needs to be adjusted for Height
+	ITEM_Y_OFFSET=18 # needs to be adjusted for Height
 	POPUP_Y_OFFSET=-35
 fi
-
-# globs are necessary, since the exact name of the menubar item changes a bit
-# depending on installation whether mac is M1 or not
-menu_items=$(sketchybar --query default_menu_items)
-network_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*network" | cut -d\" -f2)
-cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | cut -d\" -f2)
-ram_bar_item="Stats,RAM"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -62,13 +65,10 @@ sketchybar \
 	popup.y_offset="$POPUP_Y_OFFSET" y_offset="$ITEM_Y_OFFSET" \
 	\
 	\
-	\
 	--add item clock left \
 	--set clock update_freq=1 \
 	script="$PLUGIN_DIR/clock.sh" \
 	background.padding_left=5 \
-	\
-	"$@" \
 	\
 	--add item covid-stats left \
 	--set covid-stats update_freq=43200 \
@@ -85,16 +85,21 @@ sketchybar \
 	--add alias "$cpu_bar_item" popup.clock \
 	--set "$cpu_bar_item" width=55 \
 	\
+	--add alias "$gpu_bar_item" popup.clock \
+	--set "$gpu_bar_item" width=55 \
+	\
 	--add alias "$network_bar_item" popup.clock \
 	--set "$network_bar_item" width=65 \
 	\
-	--add item git-sync popup.clock \
-	--set git-sync update_freq=300 \
-	script="$PLUGIN_DIR/git-sync.sh" \
+	--add item git-sync-bar-icon popup.clock \
+	--set git-sync-bar-icon update_freq=300 \
+	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
+	icon.font="JetBrainsMonoNL Nerd Font:Bold:16"\
 	--add event repo-files-update \
-	--subscribe git-sync repo-files-update \
-	--subscribe git-sync system_woke \
+	--subscribe git-sync-bar-icon repo-files-update \
+	--subscribe git-sync-bar-icon system_woke \
 	\
+	"$@" \
 	\
 	--update
 
