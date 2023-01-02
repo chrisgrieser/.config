@@ -505,8 +505,10 @@ keymap("n", "<leader>r", function()
 	-- Typescript
 	elseif ft == "typescript" then
 		cmd.redir("@z")
-		cmd.make() -- defined via makeprg
-		local output = fn.getreg("z")
+		-- silent, to not show up message (redirection still works)
+		-- make-command run is defined in bo.makeprg in the typescript ftplugin
+		cmd[[silent make]] 
+		local output = fn.getreg("z"):gsub(".-\r", "") -- remove first line
 		local logLevel = output:find("error") and logError or logTrace
 		vim.notify(output, logLevel)
 		cmd.redir("END")
@@ -514,7 +516,7 @@ keymap("n", "<leader>r", function()
 	-- AppleScript
 	elseif ft == "applescript" then
 		cmd.AppleScriptRun()
-		normal("<C-w><C-p>") -- switch to previous window
+		cmd.wincmd("p")-- switch to previous window
 
 	-- None
 	else

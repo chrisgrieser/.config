@@ -16,14 +16,18 @@ rules:
 
   # TypeScript specific
   "@typescript-eslint/no-unused-vars": off
-  "@typescript-eslint/ban-ts-comment": [warn, allow-with-description]
+  "@typescript-eslint/ban-ts-comment": 
+    - warn
+    - ts-ignore: allow-with-description
+      ts-expect-error: allow-with-description
   "@typescript-eslint/no-extra-semi": warn
   "@typescript-eslint/no-empty-function": warn
   no-unused-vars: warn
+  require-await: off # errors for `async onload`, still have to figure out how to fix
 
   # code structure
-  complexity: [warn, 13]
-  max-depth: [warn, 4]
+  complexity: [error, 13]
+  max-depth: [error, 4]
 
   # variables
   no-shadow:
@@ -79,7 +83,6 @@ rules:
     - max: 2
 
   # Async & Await
-  require-await: error
   no-await-in-loop: error
   require-atomic-updates: error
 

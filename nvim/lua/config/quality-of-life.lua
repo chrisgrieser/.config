@@ -159,8 +159,12 @@ function M.alternateFileStatusline()
 	local maxLen = 15
 	local altFile = expand("#:t")
 	local curFile = expand("%:t")
+	local altPath = expand("#:p")
+	local curPath = expand("%:p")
 
 	if altFile == "" and not altOldfile() then -- no oldfile and after start
+		return ""
+	elseif altPath == curPath then -- no idea why, but in some rare cases that still happens
 		return ""
 	elseif altWindow() then
 		return "  " .. altWindow()
