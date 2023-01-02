@@ -1,6 +1,8 @@
 #!/bin/zsh
 
 # with "--submodules" arg → also pull submodules
+
+#───────────────────────────────────────────────────────────────────────────────
 MAX_FILE_SIZE_MB=10
 
 # shellcheck disable=2034
@@ -28,7 +30,7 @@ if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
 fi
 
 # git add-commit-pull-push sequence
-msg="auto($device_name): $filesChanged"
+msg="$device_name ($filesChanged)"
 git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
 git pull
 [[ "$1" == "--submodules" ]] && git submodule update --remote

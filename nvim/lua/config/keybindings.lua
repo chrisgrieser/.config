@@ -213,8 +213,8 @@ keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc 
 keymap("n", "gw", cmd.ISwapWith, { desc = "exchange nodes (ISwap)" })
 
 -- search & replace
-keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "search & replace" })
-keymap("x", "<leader>f", ":s///g<Left><Left><Left>", { desc = "search & replace" })
+keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//gcI<Left><Left><Left><Left>]], { desc = "search & replace" })
+keymap("x", "<leader>f", ":s///gcI<Left><Left><Left><Left><Left>", { desc = "search & replace" })
 keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "struct. search & replace" })
 keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
 keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
