@@ -87,8 +87,11 @@ require("lualine").setup {
 				"searchcount",
 				fmt = function(str)
 					if str == "" or str == "[0/0]" then return "" end
-					return " " .. str:sub(2, -2)
+					local count = "" .. str:sub(2, -2) .. ""
+					local term = fn.getreg("/")
+					return "  " ..term .. " ".. count
 				end,
+				cond = function () return fn.mode() == "n" end,
 			},
 		},
 		lualine_x = {
