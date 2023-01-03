@@ -15,7 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 --------------------------------------------------------------------------------
 -- config https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 -- INFO `.` lazy requires dot as separator to recognize the plugin module
-require("lazy").setup("config.load-plugins", {
+require("lazy").setup("config.load-plugins2", {
 	defaults = {
 		-- version = "*", -- install the latest *stable* versions of plugins
 	},
