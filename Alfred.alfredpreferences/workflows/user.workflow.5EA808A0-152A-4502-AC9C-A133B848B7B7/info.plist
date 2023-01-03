@@ -104,7 +104,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>BEA583C1-293D-4CF7-AB3A-7BEE5A3B41CA</string>
+				<string>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -276,6 +276,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>0696CF60-CCEE-4A13-B435-B3F0384C89C8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F8F48763-BCE8-4520-8C9E-07C4152CB311</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>17F4A7AF-87E2-40D1-856D-D97003B34694</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -665,7 +678,30 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>repo-health.js</string>
+				<string>search-repo.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>17F4A7AF-87E2-40D1-856D-D97003B34694</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-browser-url.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -903,21 +939,6 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -973,7 +994,7 @@ echo "$url"</string>
 			<key>type</key>
 			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>BEA583C1-293D-4CF7-AB3A-7BEE5A3B41CA</string>
+			<string>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1027,9 +1048,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>300</real>
+			<real>70</real>
 			<key>ypos</key>
-			<real>1350</real>
+			<real>1095</real>
 		</dict>
 		<key>0E26657D-87C2-4501-A282-F674945D73C9</key>
 		<dict>
@@ -1038,27 +1059,38 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Open GitHub</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>920</real>
+			<real>790</real>
 		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>370</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>1200</real>
+			<real>1065</real>
+		</dict>
+		<key>17F4A7AF-87E2-40D1-856D-D97003B34694</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>clone &amp; search repo</string>
+			<key>xpos</key>
+			<real>345</real>
+			<key>ypos</key>
+			<real>400</real>
 		</dict>
 		<key>2272192E-81AD-4662-A0D4-58300A23360E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>520</real>
+			<real>465</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>660</real>
 		</dict>
 		<key>478C272A-AA90-4C7C-B103-6A3BC82916D4</key>
 		<dict>
@@ -1096,7 +1128,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>400</real>
 		</dict>
 		<key>6DD83908-25CD-4BBE-8715-259DE58C2A17</key>
 		<dict>
@@ -1114,9 +1146,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>290</real>
+			<real>230</real>
 			<key>ypos</key>
-			<real>820</real>
+			<real>690</real>
 		</dict>
 		<key>7EE02F05-65D4-4B6C-8634-A6CA65E3261C</key>
 		<dict>
@@ -1134,18 +1166,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>fd search</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>140</real>
 			<key>ypos</key>
-			<real>1320</real>
+			<real>1065</real>
 		</dict>
 		<key>8D2069C6-2EDB-40CD-854E-38574F301A4B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>530</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>1055</real>
+			<real>925</real>
 		</dict>
 		<key>A9C9D34F-A692-412A-9152-2BC3E99B51BE</key>
 		<dict>
@@ -1154,9 +1186,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>issue search GitHub</string>
 			<key>xpos</key>
-			<real>365</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>660</real>
 		</dict>
 		<key>AC483565-D8EB-4AAD-99AA-229D0C632CE8</key>
 		<dict>
@@ -1165,16 +1197,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>805</real>
-		</dict>
-		<key>BEA583C1-293D-4CF7-AB3A-7BEE5A3B41CA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>545</real>
-			<key>ypos</key>
-			<real>1320</real>
+			<real>675</real>
 		</dict>
 		<key>C21186A4-BFA2-43DB-8893-567B30CBA24D</key>
 		<dict>
@@ -1203,9 +1226,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Copy GitHub URL</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>1055</real>
+			<real>925</real>
 		</dict>
 		<key>C7CDBB63-914B-4E57-8643-E8D751667BF6</key>
 		<dict>
@@ -1230,9 +1253,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>365</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>545</real>
 		</dict>
 		<key>D2317B23-8AFF-4D40-AE86-B6BDB64BA87E</key>
 		<dict>
@@ -1258,10 +1281,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
+			<key>note</key>
+			<string>get browser URL</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>400</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
