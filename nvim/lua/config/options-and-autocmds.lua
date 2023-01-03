@@ -27,7 +27,7 @@ opt.smartcase = true
 opt.ignorecase = true
 
 -- Quickfix / Locaton List
-opt.grepprg = "rg --vimgrep --no-column" -- use rg for :grep
+opt.grepprg = "rg --vimgrep" -- use rg for :grep
 
 -- Popups / Floating Windows
 opt.pumheight = 15 -- max number of items in popup menu
@@ -35,7 +35,6 @@ opt.pumwidth = 10 -- min width popup menu
 opt.winblend = 2 -- % transparency
 
 -- Spelling
-opt.spell = false
 opt.spelllang = "en_us"
 
 -- whitespace & indentation
