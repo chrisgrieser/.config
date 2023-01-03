@@ -25,10 +25,11 @@ cd "./$repoName" || exit 1
 
 QUERY="local"
 if ! pgrep "neovide"; then
+	# INFO cannot start neovide cli from Alfred https://github.com/neovide/neovide/issues/1604
 	open -a "Neovim" # opens neovide frameless
 	while ! pgrep "neovide"; do sleep 0.1 ; done
 	sleep 1
 fi
 
 echo "vim.cmd([[cd $cache | grep $QUERY]])" >"/tmp/nvim-automation" # this part requires the setup in /lua/file-watcher.lua
-osascript -e 'tell application "Neovide" to activate'
+osascript -e 'tell application "Neovide" to activate' # open -a "Neovide" does not work
