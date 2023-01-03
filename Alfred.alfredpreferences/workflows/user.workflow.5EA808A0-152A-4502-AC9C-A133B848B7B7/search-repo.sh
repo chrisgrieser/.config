@@ -8,7 +8,9 @@ repo=$(echo "$url" | cut "")
 giturl="$(echo "$url" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
 cd /tmp/ || exit 1
 git clone --depth=1 --single-branch "$giturl"
-cd ./"$repo" || exit 1
+
+cd "./$repo" || exit 1
+open .
 
 
 
