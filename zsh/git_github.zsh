@@ -9,26 +9,31 @@ alias gr="git reset"
 alias grh="git reset --hard"
 alias push="git push"
 alias pull="git pull"
+alias amend="git commit --amend"
 
 # go to git root https://stackoverflow.com/a/38843585
-# shellcheck disable=2031
-alias g.='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
+alias root='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
 alias gg="git checkout -" # go to last branch, analogues to `zz` switching to last directory
 
 # open GitHub repo
 function getGithubURL() {
 	git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//'
 }
-alias gh="getGithubURL | xargs open"
+alias gh='open "$(getGithubURL)"'
 alias ghi='open "$(getGithubURL)/issues"'
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# git log
+# GIT LOG
 # append `true` to avoid exit code 141: https://www.ingeniousmalarkey.com/2016/07/git-log-exit-code-141.html
-alias gl="git --no-optional-locks log --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; true"
 
-# git log (interactive)
+# short
+alias gl="git log -n 15 --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; true"
+
+# long
+alias gll="git log --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; true"
+
+# interactive
 function gli() {
 	local hash key_pressed selected
 	selected=$(
@@ -43,7 +48,7 @@ function gli() {
 			--header-first --header="↵ : checkout  ^H: copy [h]ash  ^R: [r]eset" \
 			--expect="ctrl-h,ctrl-r" \
 			--preview-window="wrap" \
-			--preview="git show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"
+			--preview="git --no-optional-locks show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
@@ -51,7 +56,7 @@ function gli() {
 
 	if [[ "$key_pressed" == "ctrl-h" ]]; then
 		echo "$hash" | pbcopy
-		echo "$hash copied."
+		echo "'$hash' copied."
 	elif [[ "$key_pressed" == "ctrl-r" ]]; then
 		git reset "$hash"
 	else
@@ -112,7 +117,7 @@ function betterClone() {
 		giturl="$1"
 	fi
 	if [[ "$2" == "shallow" ]]; then
-		git clone --depth=1 --single-branch --filter=blob:none "$giturl"
+		git clone --depth=1 --single-branch "$giturl"
 	else
 		git clone "$giturl"
 	fi
@@ -135,7 +140,6 @@ function nuke {
 	rm -rvf "$LOCAL_REPO"
 	echo "---"
 	echo "Local repo removed."
-	echo
 	echo "Downloading repo again from remote…"
 	echo "---"
 

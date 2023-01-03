@@ -1,9 +1,9 @@
 matches:
   # cencorship for carl (lol)
   - trigger: "roadmap"
-    replace: "ro*dmap [auto-censored]"
+    replace: "ro*dmap (carl, no!)"
   - trigger: "legacy editor"
-    replace: "legacy edit0r [auto-censored]"
+    replace: "legacy edit0r (carl, no!)"
 
   # Carl
   - trigger: '!carl'
