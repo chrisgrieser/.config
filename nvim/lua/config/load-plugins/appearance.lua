@@ -27,15 +27,30 @@ return {
 			}
 		end,
 	},
-	{ -- scrollbar
-		"dstein64/nvim-scrollview",
-		event = "VeryLazy",
+	-- scrollbar
+	-- {
+	-- 	"dstein64/nvim-scrollview",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("scrollview").setup {
+	-- 			current_only = true,
+	-- 			winblend = 85,
+	-- 			base = "right",
+	-- 			column = 1,
+	-- 		}
+	-- 	end,
+	-- },
+	{
+		"lewis6991/satellite.nvim",
 		config = function()
-			require("scrollview").setup {
-				current_only = true,
+			require("satellite").setup {
 				winblend = 85,
-				base = "right",
-				column = 1,
+				width = 2,
+				handlers = {
+					marks = {
+						enable = false,
+					},
+				},
 			}
 		end,
 	},
