@@ -96,6 +96,6 @@ return {
 				},
 			}
 		end,
-		-- ft = "markdown",
+		ft = "markdown",
 	},
 }
