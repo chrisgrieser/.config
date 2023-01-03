@@ -142,10 +142,10 @@ require("nvim-surround").setup {
 	},
 	move_cursor = false,
 	keymaps = {
-		normal_cur = "<Nop>",
-		normal_line = "<Nop>",
+		normal_cur = "<Nop>", -- mapped on my own (see above)
+		normal_line = "<Nop>",-- mapped on my own (see above)
 		normal_cur_line = "<Nop>",
-		visual = "s",
+		visual = "ys",
 	},
 	surrounds = {
 		[doubleSquareBracketObjChar] = {
@@ -191,6 +191,9 @@ require("nvim-surround").setup {
 			add = function()
 				local ft = bo.filetype
 				if ft == "lua" then
+					if fn.mode() == "n" then
+						return
+					end
 					return {
 						{ "function ()", "\t" },
 						{ "", "end" },
