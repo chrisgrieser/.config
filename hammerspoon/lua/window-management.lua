@@ -108,15 +108,36 @@ function showAllSidebars()
 	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
 
+--------------------------------------------------------------------------------
+-- WINDOW MOVEMENT HELPERS
+
 ---(HACK) show/hide second row of sketchybar, workaround for https://github.com/FelixKratz/SketchyBar/issues/309
----@param show any
-local function showSketchybarPopup(show)
+---@param arg string|hs.geometry "show"|"hide"|hs.geometry obj
+local function sketchybarPopup(arg)
+	local mode
+	if type(arg) == "string" then
+		mode = (arg == "show") and "true" or "false"
+	elseif type(arg) == "table" then
+		if arg == maximized or arg == leftHalf then
+			mode = "false"
+		else
+			mode = "true"
+		end
+	end
 	hs.execute(
 		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
 			.. "sketchybar --set clock popup.drawing="
-			.. tostring(show)
+			.. mode
 	)
 end
+
+-- change sketchybarPopups on change of active app
+-- since window size saving & session saving is not separated
+sizeWatcher = aw.new(function(_, eventType, appObj)
+	if not (eventType == aw.activated or eventType == aw.launched) then return end
+	local winsize = appObj:focusedWindow():size()
+	sketchybarPopup(winsize)
+end):start()
 
 ---ensures Obsidian windows are always shown when developing css
 ---@param win hs.window
@@ -139,7 +160,8 @@ end
 
 ---@param win hs.window
 ---@param pos hs.geometry
-function moveResize(win, pos)
+---@param updateSketchy? boolean whether to use the sketchybarpopup-toggle-hack. defaults to `true`
+function moveResize(win, pos, updateSketchy)
 	if not win then return end -- window been closed before
 
 	toggleWinSidebar(win)
@@ -148,8 +170,8 @@ function moveResize(win, pos)
 	if (pos == pseudoMaximized or pos == centered) and appIsRunning("Twitterrific") then
 		app("Twitterrific"):mainWindow():raise()
 	end
-	local show = (pos == maximized or pos == leftHalf) and false or true
-	showSketchybarPopup(show)
+
+	if updateSketchy ~= false then sketchybarPopup(pos) end
 
 	local i = 0 -- pseudo-timeout
 	while win and i < 30 and not (checkSize(win, pos)) do
@@ -171,6 +193,78 @@ local function moveCurWinToOtherDisplay()
 end
 
 --------------------------------------------------------------------------------
+-- WINDOW TILING (OF SAME APP)
+
+---automatically apply per-app auto-tiling of the windows of the app
+---@param windowSource hs.window.filter|string windowFilter OR string representing app name
+function autoTile(windowSource)
+	---necessary b/c windowfilter is null when not triggered via
+	---windowfilter-subscription-event. This check allows for using app names,
+	---which enables using the autotile-function e.g. within app watchers
+	---@param _windowSource hs.window.filter|string windowFilter OR string representing app name
+	---@return hs.window[]
+	local function getWins(_windowSource)
+		if type(_windowSource) == "string" then
+			return app(_windowSource):allWindows()
+		else
+			return _windowSource:getWindows()
+		end
+	end
+	local wins = getWins(windowSource)
+
+	if #wins > 1 then -- needed to avoid every call of moveResize changing the popup
+		sketchybarPopup("hide")
+	else
+		sketchybarPopup("show")
+	end
+
+	if #wins == 0 and frontAppName() == "Finder" then
+		-- prevent quitting when window is created imminently
+		runWithDelays(0.2, function()
+			-- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
+			-- getWins() again to check if window count has changed in the meantime
+			if #getWins(windowSource) == 0 then app("Finder"):kill() end
+		end)
+	elseif #wins == 1 then
+		if isProjector() then
+			moveResize(wins[1], maximized)
+		elseif frontAppName() == "Finder" then
+			moveResize(wins[1], centered)
+		else
+			moveResize(wins[1], baseLayout)
+		end
+	elseif #wins == 2 then
+		moveResize(wins[1], leftHalf, false)
+		moveResize(wins[2], rightHalf, false)
+	elseif #wins == 3 then
+		moveResize(wins[1], { h = 1, w = 0.33, x = 0, y = 0 }, false)
+		moveResize(wins[2], { h = 1, w = 0.34, x = 0.33, y = 0 }, false)
+		moveResize(wins[3], { h = 1, w = 0.33, x = 0.67, y = 0 }, false)
+	elseif #wins == 4 then
+		moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 }, false)
+		moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 }, false)
+		moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 }, false)
+		moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 }, false)
+	elseif #wins == 5 then
+		moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 }, false)
+		moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 }, false)
+		moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 }, false)
+		moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 }, false)
+		moveResize(wins[5], { h = 0.5, w = 0.5, x = 0.25, y = 0.25 }, false)
+	elseif #wins == 6 then
+		moveResize(wins[1], { h = 0.5, w = 0.33, x = 0, y = 0 }, false)
+		moveResize(wins[2], { h = 0.5, w = 0.33, x = 0, y = 0.5 }, false)
+		moveResize(wins[3], { h = 0.5, w = 0.34, x = 0.33, y = 0 }, false)
+		moveResize(wins[4], { h = 0.5, w = 0.34, x = 0.33, y = 0.5 }, false)
+		moveResize(wins[5], { h = 0.5, w = 0.33, x = 0.67, y = 0 }, false)
+		moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.67, y = 0.5 }, false)
+	end
+end
+
+function bringAllToFront() app.frontmostApplication():selectMenuItem { "Window", "Bring All to Front" } end
+
+--------------------------------------------------------------------------------
+-- HOTKEY ACTIONS
 
 ---@param type string
 function twitterrificAction(type)
@@ -196,8 +290,6 @@ function twitterrificAction(type)
 	end
 end
 
---------------------------------------------------------------------------------
--- HOTKEY ACTIONS
 local function controlSpaceAction()
 	local currentWin = hs.window.focusedWindow()
 	local pos
