@@ -31,25 +31,24 @@ return {
 		config = function()
 			local actions = require("diffview.actions")
 			require("diffview").setup {
-				enhanced_diff_hl = true,
+				-- https://github.com/sindrets/diffview.nvim#configuration
+				enhanced_diff_hl = false, -- true = no red for deletes
+				show_help_hints = false,
 				file_history_panel = {
 					win_config = { height = 5 },
 				},
 				keymaps = {
+					view = {
+						{ "n", "<D-w>", vim.cmd.tabclose, {} }, -- close tab instead of window
+						{ "n", "<CR>", function () vim.cmd.wincmd("w") end, {} }, -- consistent with general buffer switcher
+					},
 					file_history_panel = {
-						{ "n", "<CR>", false }, -- avoid conflict with buffer switcher
-						{ "n", "?", actions.help("file_history_panel") },
+						{ "n", "<D-w>", vim.cmd.tabclose, {} }, 
+						{ "n", "<CR>", function () vim.cmd.wincmd("w") end, {} }, 
+						{ "n", "?", actions.help("file_history_panel"), {} },
 					},
 				},
 			}
-			augroup("diffview", {})
-			autocmd("DiffviewDiffBufRead", {
-				group = "diffview",
-				pattern = "DiffviewFileHistory",
-				callback = function()
-					vim.keymap.set("n", "<CR>", "<C-w>w", {buffer = true}) 	
-				end
-			})
 		end,
 	},
 }

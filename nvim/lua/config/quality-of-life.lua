@@ -96,28 +96,7 @@ function M.bettergx()
 end
 
 --------------------------------------------------------------------------------
--- BUFFERS
-
-function M.currentFileStatusline()
-	local maxLen = 15
-	local altFile = expand("#:t")
-	local curFile = expand("%:t")
-	local icon = bo.modifiable and "%% " or " "
-	local ft = bo.filetype
-	if bo.buftype == "terminal" then
-		local mode = fn.mode() == "t" and "[N]" or "[T]"
-		return " Terminal " .. mode
-	elseif bo.buftype == "nofile" or (curFile == "" and ft ~= "") then
-		return " " .. ft -- special windows, e.g., lazy
-	elseif curFile == "" and ft == "" then
-		return "%% [New]"
-	elseif curFile == altFile then
-		local curParent = expand("%:p:h:t")
-		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
-		return "%% " .. curParent .. "/" .. curFile
-	end
-	return icon .. curFile
-end
+-- ALTALTFILE
 
 ---get the alternate window, accounting for special windows (scrollbars, notify)
 ---@return string|nil path of buffer in altwindow, nil if none exists (= only
@@ -125,7 +104,6 @@ end
 local function altWindow()
 	local i = 0
 	local altWin
-
 	repeat
 		if i > fn.winnr("$") then return nil end
 		-- two checks for regular window to catch all edge cases
