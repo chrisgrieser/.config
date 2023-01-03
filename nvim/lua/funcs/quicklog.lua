@@ -105,7 +105,7 @@ function M.beeplog()
 	if ft == "lua" or ft == "python" then
 		logStatement = 'print("beep")'
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = 'console.log("beep")'
+		logStatement = 'console.log("beep");'
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
 		logStatement = 'echo "(beep)"'
 	elseif ft == "applescript" then
