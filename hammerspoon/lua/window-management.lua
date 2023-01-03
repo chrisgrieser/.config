@@ -113,7 +113,7 @@ end
 
 ---(HACK) show/hide second row of sketchybar, workaround for https://github.com/FelixKratz/SketchyBar/issues/309
 ---@param arg string|hs.geometry "show"|"hide"|hs.geometry obj
-local function sketchybarPopup(arg)
+function sketchybarPopup(arg)
 	local mode
 	if type(arg) == "string" then
 		mode = (arg == "show") and "true" or "false"

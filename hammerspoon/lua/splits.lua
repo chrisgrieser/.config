@@ -85,17 +85,19 @@ function vsplitSetLayout(mode, secondWin)
 		pairedActivation("start")
 		f1 = leftHalf
 		f2 = rightHalf
+		sketchybarPopup("hide")
 	elseif mode == "unsplit" then
 		f1 = baseLayout
 		f2 = baseLayout
+		sketchybarPopup("show")
 		pairedActivation("stop")
 	elseif mode == "swap" then
 		f1 = rightHalf
 		f2 = leftHalf
 	end
 
-	moveResize(SPLIT_RIGHT, f1)
-	moveResize(SPLIT_LEFT, f2)
+	moveResize(SPLIT_RIGHT, f1, false)
+	moveResize(SPLIT_LEFT, f2, false)
 	SPLIT_RIGHT:raise()
 	SPLIT_LEFT:raise()
 	runWithDelays(0.3, function()
