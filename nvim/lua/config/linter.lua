@@ -83,7 +83,7 @@ null_ls.setup {
 		},
 
 		-- YAML
-		-- builtins.formatting.yamlfmt,
+		builtins.formatting.yamlfmt,
 		builtins.diagnostics.yamllint.with {
 			extra_args = { "--config-file", linterConfig .. "/.yamllint.yaml" },
 		},
