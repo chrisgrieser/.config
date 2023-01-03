@@ -77,9 +77,10 @@ keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 keymap("n", "gc", "g;", { desc = "goto next change" })
 keymap("n", "gC", "g,", { desc = "goto previous change" })
-keymap("n", "gq", cmd.cnext, { desc = "next quickfix item" })
 keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = "Telescope: quickfix list" })
 
+-- make cnext loop back https://vi.stackexchange.com/a/8535
+keymap("n", "gq", [[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]], { desc = "next quickfix item" })
 -- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
 keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
