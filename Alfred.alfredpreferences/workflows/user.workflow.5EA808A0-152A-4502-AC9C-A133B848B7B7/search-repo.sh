@@ -20,12 +20,12 @@ else
 fi
 
 cd "./$repoName" || exit 1
-#
-# if pgrep "neovide"; then
-# 	# echo "cmd[[edit $LINE $file]]" >"/tmp/nvim-automation" # this part requires the setup in /lua/file-watcher.lua
-# 	osascript -e 'tell application "Neovide" to activate'
-# else
-# 	# shellcheck disable=2086
-# 	neovide --geometry=101x32 --notabs --frame="buttonless" $LINE "$file"
-# fi
-#
+
+if pgrep "neovide"; then
+	echo "vim.cmd.grep('$QUERY')" >"/tmp/nvim-automation" # this part requires the setup in /lua/file-watcher.lua
+	# else
+	# # shellcheck disable=2086
+	# neovide --geometry=101x32 --notabs --frame="buttonless" $LINE "$file"
+fi
+
+
