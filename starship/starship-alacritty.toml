@@ -136,8 +136,8 @@ symbol = " "
 style = "dimmed 208"
 
 [custom.alfred]
-files = ["info.plist"]
-command = "plutil -extract version xml1 -o - info.plist | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
+files = ["info.plist", "../info.plist"]
+command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1 "
 symbol = " "
 os = "macos"
 description = "Version number of Alfred Workflow"
