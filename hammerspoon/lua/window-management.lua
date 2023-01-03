@@ -261,8 +261,6 @@ function autoTile(windowSource)
 	end
 end
 
-function bringAllToFront() app.frontmostApplication():selectMenuItem { "Window", "Bring All to Front" } end
-
 --------------------------------------------------------------------------------
 -- HOTKEY ACTIONS
 

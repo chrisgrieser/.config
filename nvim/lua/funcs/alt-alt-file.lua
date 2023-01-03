@@ -36,7 +36,8 @@ local function altOldfile()
 		oldfile = vim.v.oldfiles[i]
 		local fileExists = fn.filereadable(oldfile) == 1
 		local isCurrentFile = oldfile == expand("%:p")
-	until fileExists and not isCurrentFile -- check for deleted, renamed, or irregular files
+		local commitMsg = oldfile:find("COMMIT_EDITMSG$")
+	until fileExists and not commitMsg and not isCurrentFile
 	return oldfile
 end
 
