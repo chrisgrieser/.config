@@ -16,7 +16,7 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			"p00f/nvim-ts-rainbow", -- colored brackets
+			"p00f/nvim-ts-rainbow", -- WARN: no longer maintained
 		},
 	},
 
@@ -28,7 +28,7 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 			"ray-x/lsp_signature.nvim", -- signature hint
-			"SmiteshP/nvim-navic", -- breadcrumbs
+			"SmiteshP/nvim-navic", -- breadcrumbs for statusline/winbar
 			"folke/neodev.nvim", -- lsp for nvim-lua config
 			"b0o/SchemaStore.nvim", -- schemas for json-lsp
 		},
