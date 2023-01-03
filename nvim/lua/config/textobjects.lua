@@ -191,9 +191,6 @@ require("nvim-surround").setup {
 			add = function()
 				local ft = bo.filetype
 				if ft == "lua" then
-					if fn.mode() == "n" then
-						return
-					end
 					return {
 						{ "function ()", "\t" },
 						{ "", "end" },
