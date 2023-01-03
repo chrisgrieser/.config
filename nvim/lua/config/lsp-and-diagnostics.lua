@@ -118,7 +118,7 @@ keymap("n", "gs", telescope.treesitter)
 
 -- actions defined globally so null-ls can use them without LSP, e.g., for bash
 -- or gitsigns
-keymap({"n", "x"}, "<leader>a", vim.lsp.buf.code_action)
+keymap({ "n", "x" }, "<leader>a", vim.lsp.buf.code_action)
 
 augroup("LSP", {})
 autocmd("LspAttach", {
@@ -143,8 +143,8 @@ autocmd("LspAttach", {
 			keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts)
 		end
 
-		keymap("n", "gd", telescope.lsp_definitions, {desc = "LSP: Goto Definition", buffer = true})
-		keymap("n", "gf", telescope.lsp_references, {desc = "LSP: Goto Re[f]erence", buffer = true})
+		keymap("n", "gd", telescope.lsp_definitions, { desc = "LSP: Goto Definition", buffer = true })
+		keymap("n", "gf", telescope.lsp_references, { desc = "LSP: Goto Re[f]erence", buffer = true })
 		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, bufopts)
 		keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
@@ -192,8 +192,7 @@ end)
 --------------------------------------------------------------------------------
 -- Add borders to various lsp windows
 require("lspconfig.ui.windows").default_options.border = borderStyle
-vim.lsp.handlers["textDocument/hover"] =
-	vim.lsp.with(vim.lsp.handlers.hover, { border = borderStyle })
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderStyle })
 vim.lsp.handlers["textDocument/signatureHelp"] =
 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
 
@@ -286,21 +285,25 @@ lspSettings.tsserver = {
 }
 
 -- https://github.com/redhat-developer/yaml-language-server#language-server-settings
-lspSettings.yamlls = {
-	yaml = {
-		format = {
-			enable = true, -- does not seem to be supported yet
-			singleQuote = false,
-			bracketSpacing = true,
-			proseWrap = "preserve", -- preserve|always|never
-			printWidth = 120, -- relevant for proseWrap
-		},
-		hover = true,
-		completion = true,
-		validate = true,
-		schemaStore = { enable = true }, -- Automatically pull available YAML schemas from JSON Schema Store
-	},
-}
+-- lspSettings.yamlls = {
+-- 	yaml = {
+-- 		format = {
+-- 			enable = true, -- does not seem to be supported yet
+-- 			singleQuote = false,
+-- 			bracketSpacing = true,
+-- 			proseWrap = "preserve", -- preserve|always|never
+-- 			printWidth = 120, -- relevant for proseWrap
+-- 		},
+-- 		hover = true,
+-- 		completion = true,
+-- 		validate = true,
+-- 		-- schemaStore = { enable = true }, -- Automatically pull available YAML schemas from JSON Schema Store
+-- 		schemas = {
+-- 			["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+-- 			["https://json.schemastore.org/github-issue-config.json"] = "/.github/ISSUE_TEMPLATE/*",
+-- 		},
+-- 	},
+-- }
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
 lspSettings.eslint = {

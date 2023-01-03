@@ -168,9 +168,10 @@ local function cmpconfig()
 
 	cmp.setup.filetype("yaml", {
 		sources = cmp.config.sources {
+
+			lsp,
 			snippets,
 			treesitter, -- treesitter works good on yaml
-			lsp,
 			tabnine,
 			emojis,
 			buffer,

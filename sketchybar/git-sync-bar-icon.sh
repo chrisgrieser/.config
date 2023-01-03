@@ -6,7 +6,7 @@
 # script plus trigger it after sync events via Hammerspoon
 
 cd "$DOTFILE_FOLDER" || configError="repo-path wrong"
-dotfiles=$(git status --porcelain)
+dotfiles=$(git status --short)
 
 cd "$VAULT_PATH" || configError="repo-path wrong"
 vaultfiles=$(git status --porcelain)
@@ -17,11 +17,12 @@ cd "$passPath" || configError="repo-path wrong"
 passfiles=$(git status --porcelain --branch | grep -Eo "\d") # to check for ahead/behind instead of untracked
 
 if [[ "$dotfiles" =~ " m " ]]; then # changes in submodules
-	icon="痢!"
+	icon="痢"
+	label="!"
 elif [[ -n "$dotfiles" ]] || [[ -n "$vaultfiles" ]] || [[ -n "$passfiles" ]]; then
 	icon="痢"
 else
 	icon=""
 fi
 
-sketchybar --set "$NAME" icon="$icon$configError"
+sketchybar --set "$NAME" icon="$icon$configError" label="$label$configError"
