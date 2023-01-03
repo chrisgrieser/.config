@@ -16,7 +16,7 @@ function run() {
 	}
 
 	// check if repo-url and truncate non-repo part
-	const githubURL = url.match(/^https?:\/\/github\.com\/\w+\/\w+/);
+	const githubURL = url.match(/^https?:\/\/github\.com\/[\w-]+\/[\w-]+/);
 	if (!githubURL) return "Not a GitHub Repo.";
 	return githubURL[0];
 }
