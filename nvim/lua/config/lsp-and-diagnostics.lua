@@ -284,27 +284,6 @@ lspSettings.tsserver = {
 	javascript = jsAndTsSettings,
 }
 
--- https://github.com/redhat-developer/yaml-language-server#language-server-settings
--- lspSettings.yamlls = {
--- 	yaml = {
--- 		format = {
--- 			enable = true, -- does not seem to be supported yet
--- 			singleQuote = false,
--- 			bracketSpacing = true,
--- 			proseWrap = "preserve", -- preserve|always|never
--- 			printWidth = 120, -- relevant for proseWrap
--- 		},
--- 		hover = true,
--- 		completion = true,
--- 		validate = true,
--- 		-- schemaStore = { enable = true }, -- Automatically pull available YAML schemas from JSON Schema Store
--- 		schemas = {
--- 			["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
--- 			["https://json.schemastore.org/github-issue-config.json"] = "/.github/ISSUE_TEMPLATE/*",
--- 		},
--- 	},
--- }
-
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
 lspSettings.eslint = {
 	quiet = false, -- = include warnings
@@ -314,6 +293,11 @@ lspSettings.eslint = {
 	-- needed to use mason's eslint with the eslint-lsp https://github.com/williamboman/mason.nvim/issues/697#issuecomment-1330855352
 	-- nodePath = os.getenv("HOME") .. "/.local/share/nvim/mason/packages/eslint/node_modules",
 }
+
+-- INFO: yaml
+-- - no need to set schemas, all common ones are automatically enabled
+-- - formatting does not work when set from yamlls, but yamllint and yamlfmt
+-- work just fine I guess
 
 -- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings
 lspSettings.jsonls = {
