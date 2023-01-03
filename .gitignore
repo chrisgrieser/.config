@@ -1,5 +1,10 @@
 # don't add "node_modules" here since some Alfred workflows actually rely on it
 
+# ZSH Completion Data (shouldn't be synced since some machines have different
+# CLIs installed)
+.zcompcache
+.zcomdump
+
 # Activity Data
 sync.log
 some.log
@@ -7,9 +12,6 @@ dlFolderLastChange
 
 # redundant
 .config/karabiner/automatic_backups
-
-# default location of (large) coc extensions; actually not necessary because of `g.coc_data_home` is changed in the coc-config, but still put here as a safety net
-.config/coc
 
 # in case of accidental saving of such files in the repo
 *.mp4
