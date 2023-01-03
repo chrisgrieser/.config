@@ -27,7 +27,8 @@ require("telescope").setup {
 		history = { path = vimDataDir .. "telescope_history" }, -- sync the history
 		file_ignore_patterns = {
 			"%.DS_Store", -- macOS system file
-			"%.git", -- no slash, so it also works for submodule files
+			"%.git/",
+			"%.git$", -- submodules
 			"node_modules/", -- node
 			"venv/", -- python
 			"lib/", -- python
