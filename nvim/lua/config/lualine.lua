@@ -82,7 +82,29 @@ local function searchCounter()
 	return " " .. current .. "/" .. total .. " " .. term
 end
 
+local function currentFile()
+	local maxLen = 15
+	local altFile = expand("#:t")
+	local curFile = expand("%:t")
+	local icon = bo.modifiable and "%% " or " "
+	local ft = bo.filetype
+	if bo.buftype == "terminal" then
+		local mode = fn.mode() == "t" and "[N]" or "[T]"
+		return " Terminal " .. mode
+	elseif bo.buftype == "nofile" or (curFile == "" and ft ~= "") then
+		return " " .. ft -- special windows, e.g., lazy
+	elseif curFile == "" and ft == "" then
+		return "%% [New]"
+	elseif curFile == altFile then
+		local curParent = expand("%:p:h:t")
+		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
+		return "%% " .. curParent .. "/" .. curFile
+	end
+	return icon .. curFile
+end
+
 --------------------------------------------------------------------------------
+
 
 -- nerdfont: 'nf-ple'; since separators look off in Terminal
 local bottomSeparators = isGui() and { left = " ", right = " " } or { left = "", right = "" }
@@ -90,7 +112,7 @@ local topSeparators = isGui() and { left = "", right = "" } or { left = ""
 
 require("lualine").setup {
 	sections = {
-		lualine_a = { { qol.currentFileStatusline } },
+		lualine_a = { { currentFile } },
 		lualine_b = { { qol.alternateFileStatusline } },
 		lualine_c = {
 			{ searchCounter },
