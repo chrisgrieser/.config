@@ -136,13 +136,12 @@ symbol = " "
 style = "dimmed 208"
 
 [custom.alfred]
-files = ["info.plist", "../info.plist"]
-command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1 "
-symbol = " "
+when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
+# multi-line version somehow does not work
+command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
 os = "macos"
 description = "Version number of Alfred Workflow"
-style = "dimmed 208"
-format = '[](purple) [$symbol$output]($style)'
+format = '[](purple) [ $output](dimmed 208)'
 
 [nodejs]
 format = " [$symbol$version]($style)"
