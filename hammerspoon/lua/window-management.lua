@@ -108,6 +108,15 @@ function showAllSidebars()
 	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
 
+---(HACK) show/hide second row of sketchybar, workaround for https://github.com/FelixKratz/SketchyBar/issues/309
+---@param show any
+local function showSketchybarPopup(show)
+	hs.execute(
+		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
+			.. "sketchybar --set clock popup.drawing="
+			.. tostring(show)
+	)
+end
 
 ---ensures Obsidian windows are always shown when developing css
 ---@param win hs.window
@@ -132,13 +141,15 @@ end
 ---@param pos hs.geometry
 function moveResize(win, pos)
 	if not win then return end -- window been closed before
-	toggleWinSidebar(win)
 
+	toggleWinSidebar(win)
 	obsidianThemeDevHelper(win, pos)
 
 	if (pos == pseudoMaximized or pos == centered) and appIsRunning("Twitterrific") then
 		app("Twitterrific"):mainWindow():raise()
 	end
+	local show = (pos == maximized or pos == leftHalf) and false or true
+	showSketchybarPopup(show)
 
 	local i = 0 -- pseudo-timeout
 	while win and i < 30 and not (checkSize(win, pos)) do
@@ -161,6 +172,7 @@ end
 
 --------------------------------------------------------------------------------
 
+---@param type string
 function twitterrificAction(type)
 	local previousApp = frontAppName()
 	openApp("Twitterrific")
