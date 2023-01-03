@@ -2,10 +2,10 @@ return {
 	-- Themes
 	"EdenEast/nightfox.nvim",
 	"folke/tokyonight.nvim",
-	"rose-pine/neovim",
+	-- "rose-pine/neovim",
 	-- "rebelot/kanagawa.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
-	-- "savq/melange",
+	"savq/melange",
 
 	-- Treesitter
 	{
