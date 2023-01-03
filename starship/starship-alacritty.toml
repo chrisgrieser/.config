@@ -44,7 +44,7 @@ min_time = 2500
 format = " [羽$duration](bold cyan)"
 
 [directory]
-truncation_length = 2
+truncation_length = 3
 truncation_symbol = "/"
 truncate_to_repo = true
 read_only = "ﮖ  "
@@ -55,7 +55,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 [directory.substitutions]
 "/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
 "/File Hub" = "/柳"
-"/Alfred.alfredpreferences/workflows/user.workflow." = "/  "
+"/.config/Alfred.alfredpreferences/workflows/user.workflow." = "/  "
 
 [custom.folder_number]
 command = "find . -maxdepth 1 -not -name '.git' -not -name '.' -not -name '.DS_Store' | wc -l"
