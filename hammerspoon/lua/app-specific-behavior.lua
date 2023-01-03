@@ -37,8 +37,7 @@ end):start()
 
 local function bringAllToFront() app.frontmostApplication():selectMenuItem { "Window", "Bring All to Front" } end
 
--- when currently auto-tiled, hide the app on inactivity to it does not cover
--- sketchybar
+-- when currently auto-tiled, hide the app on deactivation to it does not cover sketchybar
 autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
 	local autoTileApps = { "Finder", "Mimestream", "Brave Browser" }
 	if eventType == aw.deactivated and tableContains(autoTileApps, appName) then
@@ -49,7 +48,7 @@ end):start()
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
--- PIXELMATOR
+-- PIXELMATOR: maximized
 pixelmatorWatcher = aw.new(function(appName, eventType, appObj)
 	if appName == "Pixelmator" and eventType == aw.launched then
 		runWithDelays(0.3, function() moveResize(appObj, maximized) end)

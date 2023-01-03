@@ -115,10 +115,12 @@ end
 ---@param arg string|hs.geometry "show"|"hide"|hs.geometry obj
 function sketchybarPopup(arg)
 	local mode
-	if type(arg) == "string" then
+	if isProjector() or isAtOffice() then
+		mode = "true" -- show always
+	elseif type(arg) == "string" then
 		mode = (arg == "show") and "true" or "false"
 	elseif type(arg) == "table" then
-		if arg == maximized or arg == leftHalf then
+		if arg.x == 0 and arg.y == 0 then -- comparing to 0 works for rect (absolute) and unitrect (relative)
 			mode = "false"
 		else
 			mode = "true"
@@ -133,11 +135,15 @@ end
 
 -- change sketchybarPopups on change of active app
 -- since window size saving & session saving is not separated
-sizeWatcher = aw.new(function(_, eventType, appObj)
-	if not (eventType == aw.activated or eventType == aw.launched) then return end
-	local winsize = appObj:focusedWindow():size()
-	sketchybarPopup(winsize)
+watcherForSketchy = aw.new(function(_, eventType, appObj)
+	if eventType == aw.activated or eventType == aw.launched then
+		local winFrame = appObj:focusedWindow():frame()
+		sketchybarPopup(winFrame)
+		return
+	end
 end):start()
+
+--------------------------------------------------------------------------------
 
 ---ensures Obsidian windows are always shown when developing css
 ---@param win hs.window

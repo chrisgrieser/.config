@@ -34,7 +34,7 @@ categoryArr.forEach(category => {
 		"mods": {
 			"alt": {
 				"arg": category.name,
-				"subtitle": `⌥: Paste ${category.name}`
+				"subtitle": `⌥: Paste ${category.name}`,
 			},
 		},
 	});
@@ -51,7 +51,7 @@ categoryArr.forEach(category => {
 			"mods": {
 				"alt": {
 					"arg": shortdef,
-					"subtitle": `⌥: Paste ${shortdef}`
+					"subtitle": `⌥: Paste ${shortdef}`,
 				},
 			},
 
@@ -66,7 +66,7 @@ workArray.push({
 	"mods": {
 		"alt": {
 			"valid": false,
-			"subtitle": "❌"
+			"subtitle": "❌",
 		},
 	},
 });
