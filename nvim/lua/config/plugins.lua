@@ -84,18 +84,4 @@ return {
 	{ "mityu/vim-applescript", ft = "applescript" }, -- syntax highlighting
 	{ "hail2u/vim-css3-syntax", ft = "css" }, -- better syntax highlighting (until treesitter css looks decent…)
 	{ "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install" },
-	{
-		"lukas-reineke/headlines.nvim",
-		config = function()
-			require("headlines").setup {
-				markdown = {
-					fat_headlines = true,
-					fat_headline_lower_string = "▀",
-					fat_headline_upper_string = "",
-					codeblock_highlight = false, -- deactivated b/c of https://github.com/lukas-reineke/headlines.nvim/issues/44
-				},
-			}
-		end,
-		ft = "markdown",
-	},
 }

@@ -54,6 +54,10 @@ return {
 			}
 		end,
 	},
+	{ -- quickfix in sign column
+		"dhruvasagar/vim-markify",
+		init = function() vim.g.markify_info_text = "" end,
+	},
 	{ -- nicer colorcolumn
 		"xiyaowong/virtcolumn.nvim",
 		init = function() vim.g.virtcolumn_char = "║" end,
@@ -111,6 +115,22 @@ return {
 			}
 		end,
 	},
+
+	{
+		"lukas-reineke/headlines.nvim",
+		config = function()
+			require("headlines").setup {
+				markdown = {
+					fat_headlines = true,
+					fat_headline_lower_string = "▀",
+					fat_headline_upper_string = "",
+					codeblock_highlight = false, -- deactivated b/c of https://github.com/lukas-reineke/headlines.nvim/issues/44
+				},
+			}
+		end,
+		ft = "markdown",
+	},
+
 	{ -- Better input fields
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
