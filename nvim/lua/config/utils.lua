@@ -1,7 +1,3 @@
-
---------------------------------------------------------------------------------
--- NVIM UTILS
-
 g = vim.g -- global variables
 api = vim.api
 fn = vim.fn
@@ -23,7 +19,7 @@ logWarn = vim.log.levels.WARN
 logError = vim.log.levels.ERROR
 logTrace = vim.log.levels.TRACE
 
-qol = require("config.quality-of-life")
+qol = require("funcs.quality-of-life")
 telescope = require("telescope.builtin")
 
 ---equivalent to `:setlocal option=value`

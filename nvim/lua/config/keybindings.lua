@@ -253,10 +253,11 @@ keymap(
 )
 
 -- Logging & Debugging
-keymap({ "n", "x" }, "<leader>ll", qol.quicklog, { desc = "add log statement" })
-keymap({ "n", "x" }, "<leader>lb", qol.beeplog, { desc = "add beep log" })
-keymap({ "n", "x" }, "<leader>lt", qol.timelog, { desc = "log time" })
-keymap({ "n", "x" }, "<leader>lr", qol.removelogs, { desc = "remove all log statements" })
+local qlog = require("funcs.quicklog")
+keymap({ "n", "x" }, "<leader>ll", qlog.quicklog, { desc = "add log statement" })
+keymap({ "n", "x" }, "<leader>lb", qlog.beeplog, { desc = "add beep log" })
+keymap({ "n", "x" }, "<leader>lt", qlog.timelog, { desc = "log time" })
+keymap({ "n", "x" }, "<leader>lr", qlog.removelogs, { desc = "remove all log statements" })
 
 -- Sort & highlight duplicate lines
 -- stylua: ignore
@@ -316,15 +317,18 @@ keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize" })
 keymap("n", "gb", telescope.buffers, { desc = "Telescope: open buffers" })
 -- INFO: <BS> to cycle buffer has to be set in cybu config
 
-keymap("t", "ä", [[<C-\><C-n><C-w>p]], { desc = "switch to previous window" })
 
-keymap("n", "<CR>", qol.altBufferWindow, { desc = "switch to alt buffer/window" })
+local altalt = require("funcs.alt-alt-file")
+keymap("n", "<CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/window" })
+
+if isGui() then
+	keymap({ "n", "x", "i" }, "<D-w>", altalt.betterClose, { desc = "close buffer/window/tab" })
+end
 
 --------------------------------------------------------------------------------
 
 -- CMD-Keybindings
 if isGui() then
-	keymap({ "n", "x", "i" }, "<D-w>", qol.betterClose, { desc = "close buffer/window/tab" })
 
 	keymap({ "n", "x", "i" }, "<D-s>", cmd.write, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
 	keymap("n", "<D-a>", "ggVG", { desc = "select all" }) -- cmd+a
