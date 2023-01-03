@@ -35,7 +35,18 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 	end
 end):start()
 
+local function bringAllToFront() app.frontmostApplication():selectMenuItem { "Window", "Bring All to Front" } end
 
+-- when currently auto-tiled, hide the app on inactivity to it does not cover
+-- sketchybar
+autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
+	local autoTileApps = { "Finder", "Mimestream", "Brave Browser" }
+	if eventType == aw.deactivated and tableContains(autoTileApps, appName) then
+		if #appObj:allWindows() > 1 then appObj:hide() end
+	end
+end):start()
+
+--------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 -- PIXELMATOR
@@ -218,7 +229,7 @@ uriScheme("focus-btop", function()
 			nohup alacritty --option="font.size=20" --option="colors.primary.background='#000000'" --title="btop" --command btop &
 		]])
 	if success then
-		runWithDelays({0.2, 0.3, 0.4}, function ()
+		runWithDelays({ 0.2, 0.3, 0.4 }, function()
 			local btopWin = hs.window.find("^btop$")
 			moveResize(btopWin, maximized)
 		end)
