@@ -3,7 +3,7 @@
 # ZSH Completion Data (shouldn't be synced since some machines have different
 # CLIs installed)
 .zcompcache
-.zcomdump
+.zcompdump
 
 # Activity Data
 sync.log
