@@ -79,8 +79,10 @@ local function searchCounter()
 	if fn.mode() ~= "n" or vim.v.hlsearch == 0 then return "" end
 	local total = fn.searchcount().total
 	local current = fn.searchcount().current
-	local term = fn.getreg("/")
-	return " " .. current .. "/" .. total .. " " .. term
+	local searchTerm = fn.getreg("/")
+	local isStarSearch = searchTerm:find([[^\<.*\>$]])
+	if isStarSearch then searchTerm = "*" .. searchTerm:sub(3, -3) end
+	return " " .. current .. "/" .. total .. " " .. searchTerm
 end
 
 local function currentFile()
@@ -90,7 +92,7 @@ local function currentFile()
 	local icon = bo.modifiable and "%% " or " "
 	local ft = bo.filetype
 	if bo.buftype == "terminal" then
-		local mode = fn.mode() == "t" and "[N]" or "[T]"
+		local mode = fn.mode() == "t" and "[T]" or "[N]"
 		return " Terminal " .. mode
 	elseif bo.buftype == "nofile" or (curFile == "" and ft ~= "") then
 		return " " .. ft -- special windows, e.g., lazy
