@@ -264,7 +264,7 @@ add("javascript", {
 			} else {
 				return "You need a supported browser as your frontmost app";
 			}
-			return {"url": url, "title": title};
+			return { "url": url, "title": title };
 		}
 	]]),
 })
