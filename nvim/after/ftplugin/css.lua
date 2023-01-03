@@ -1,7 +1,8 @@
-require("config/utils")
+require("config.utils")
 local opts = { buffer = true }
 --------------------------------------------------------------------------------
 
+bo.grepprg = "rg --vimgrep --no-column" -- remove columns
 -- comment marks more useful than symbols for theme development
 keymap("n", "gs", function()
 	cmd([[silent! lgrep "^(\# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
