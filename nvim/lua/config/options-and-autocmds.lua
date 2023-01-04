@@ -73,7 +73,15 @@ opt.titlestring = '%{expand("%:p")} [%{mode()}]'
 -- Editor
 opt.cursorline = true
 opt.scrolloff = 12
-opt.sidescrolloff = 18
+opt.sidescrolloff = 15
+
+augroup("sidescroll", {})
+autocmd("FileType", {
+	group = "sidescroll",
+	pattern = {"ssr"},
+	callback = function() wo.sidescrolloff = 0 end
+})
+
 opt.textwidth = 80
 opt.wrap = false
 opt.breakindent = false

@@ -114,7 +114,7 @@ require("neodev").setup {
 -- LSP KEYBINDINGS
 
 -- fallback for languages without an action LSP
-keymap("n", "gs", telescope.treesitter)
+keymap("n", "gs", function() cmd.Telescope("treesitter") end)
 
 -- actions defined globally so null-ls can use them without LSP, e.g., for bash
 -- or gitsigns
@@ -143,8 +143,8 @@ autocmd("LspAttach", {
 			keymap("n", "<leader>R", vim.lsp.buf.rename, bufopts)
 		end
 
-		keymap("n", "gd", telescope.lsp_definitions, { desc = "LSP: Goto Definition", buffer = true })
-		keymap("n", "gf", telescope.lsp_references, { desc = "LSP: Goto Re[f]erence", buffer = true })
+		keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "LSP: Goto Definition", buffer = true })
+		keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "LSP: Goto Re[f]erence", buffer = true })
 		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, bufopts)
 		keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
@@ -167,8 +167,8 @@ autocmd("LspAttach", {
 		end, bufopts)
 
 		if bo.filetype ~= "css" then -- don't override navigation marker search for css files
-			keymap("n", "gs", telescope.lsp_document_symbols, bufopts) -- overrides treesitter symbols browsing
-			keymap("n", "gS", telescope.lsp_workspace_symbols, bufopts)
+			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, bufopts) -- overrides treesitter symbols browsing
+			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, bufopts)
 		end
 	end,
 })

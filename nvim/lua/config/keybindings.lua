@@ -371,7 +371,6 @@ end
 -- Color Picker
 keymap("n", "#", ":CccPick<CR>")
 keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
-keymap("i", "<C-#>", "<Plug>(ccc-insert)")
 
 -- Neural
 keymap("x", "ga", ":NeuralCode complete<CR>", { desc = "AI: Code Complete" })
@@ -389,14 +388,13 @@ keymap("n", "go", function ()
 	local scope = "git_files"
 	if cwd:find("/nvim/") and not(cwd:find("/my%-plugins/")) then
 		scope = "find_files cwd="..fn.stdpath("config")
-		print("scope:", scope)
 	elseif not(isGitRepo) or cwd:find("/hammerspoon/") then
 		scope = "find_files"
 	end
 	cmd("Telescope "..scope)
 end, { desc = "Telescope: Files in Folder / Git Repo" })
 keymap("n", "gr", function () cmd.Telescope("oldfiles") end, { desc = "Telescope: [R]ecent Files" })
-keymap("n", "gr", function () cmd.Telescope("live_grep") end, { desc = "Telescope: live grep (search in cwd)" })
+keymap("n", "gF", function () cmd.Telescope("live_grep") end, { desc = "Telescope: live grep (search in cwd)" })
 
 -- File Operations
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = "copy filepath" })
