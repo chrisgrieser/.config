@@ -137,9 +137,9 @@ end
 -- since window size saving & session saving is not separated
 watcherForSketchy = aw.new(function(_, eventType, appObj)
 	if eventType == aw.activated or eventType == aw.launched then
-		local winFrame = appObj:focusedWindow():frame()
-		sketchybarPopup(winFrame)
-		return
+		local win = appObj:focusedWindow()
+		if not win then return end
+		sketchybarPopup(win:frame())
 	end
 end):start()
 

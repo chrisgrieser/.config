@@ -6,13 +6,29 @@ Simple workflow to replace now defunct Python 2 workflow. Uses pure SQLite3 - wi
 
 ## Usage
 
-- `utf right arr` - Search for a Unicode character
-    - Default action: copy the character (e.g. `→`)
-    - <kbd>Cmd</kbd> - copy the HTML version (e.g. `&rarr;`)
-    - <kbd>Option</kbd> - copy the Unicode point for js/php/python/… (e.g. `\u2192`)
-    - <kbd>Ctrl</kbd> - copy the decimal value for whatever reason (e.g. `2192`) 
-- `utf :whatever*` - If your query starts with **colon**, you are writing raw SQLite fts5 match syntax. Use only if you desire to fool around with stuff.
-- `utf10` - Top 10 characters you've used in the past, with count of times you've used them
+### Search/show:
+
+- `utf right arr` - Search for a Unicode character by full-text matched name, alternative name, html entity or hexadecimal code
+- `utf !<character>` - Get details for a single exact character, except
+- `utf !h` - get HELP!
+- `utf9` - Your top 9 Unicode characters
+
+### Result Actions:
+- Default action: copy the character (e.g. `!`)
+- <kbd>Cmd</kbd> - copy the HTML version (e.g. `&excl;`)
+- <kbd>Option</kbd> - copy the Unicode point for js/python/… (e.g. `\u0021`)
+- <kbd>Option</kbd><kbd>Cmd</kbd> - copy the Unicode point for PHP (e.g. `\u{0021}`)
+- <kbd>Ctrl</kbd> - copy the hex value(e.g. `21`) 
+- <kbd>Option</kbd><kbd>Ctrl</kbd> - copy the full code point (e.g. `0021`) 
+- Use Copy result (<kbd>Cmd</kbd>+<kbd>C</kbd>) to copy the character name (e.g. `exclamation mark`)
+
+↳ Result actions (except Copy result <kbd>Cmd</kbd>+<kbd>C</kbd>) also paste to the frontmost app
+
+### Tips
+
+- `utf u0027` - you can prefix the full codepoint with `u`, and the matcher will mostly match this to the character's json value (`\u0027`), which means you get "find a Unicode codepoint" function for free
+- `utf larr` - one of the fields matched are html entities - use this for a precise and quick matching
+- `utf :raw* query*` - if you prefix your query with a colon, you'll gain access to the underlying technology - and you get to write raw SQLite FTS5 Match Query. Use this power for good
 
 ## Installation
 

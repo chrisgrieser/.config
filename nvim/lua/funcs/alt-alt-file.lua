@@ -7,8 +7,7 @@ local M = {}
 --------------------------------------------------------------------------------
 
 ---get the alternate window, accounting for special windows (scrollbars, notify)
----@return string|nil path of buffer in altwindow, nil if none exists (= only
---one window)
+---@return string|nil path of buffer in altwindow, nil if none exists (= only one window)
 local function altWindow()
 	local i = 0
 	local altWin
@@ -16,12 +15,12 @@ local function altWindow()
 		if i > fn.winnr("$") then return nil end
 		-- two checks for regular window to catch all edge cases
 		altWin = fn.bufname(fn.winbufnr(i))
+		local winId = fn.win_getid(i)
 		local isRegularWin1 = altWin and altWin ~= fn.bufname() and altWin ~= ""
-		local win = api.nvim_win_get_config(fn.win_getid(i)) -- https://github.com/dstein64/nvim-scrollview/issues/83
-		local isRegularWin2 = not win.external and win.focusable
+		local win = api.nvim_win_get_config(winId) -- https://github.com/dstein64/nvim-scrollview/issues/83
+		local isRegularWin2 = not win.external and win.focusable and api.nvim_win_is_valid(winId)
 		i = i + 1
 	until isRegularWin1 and isRegularWin2
-
 	return altWin
 end
 

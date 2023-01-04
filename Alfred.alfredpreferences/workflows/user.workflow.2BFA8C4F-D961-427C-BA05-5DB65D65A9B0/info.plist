@@ -76,7 +76,7 @@
 	<key>createdby</key>
 	<string>Adam Kiss</string>
 	<key>description</key>
-	<string>Searh thorugh unicode database</string>
+	<string>Search through the Unicode database</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -116,60 +116,176 @@
 # trim and collapse whitespace - source: https://stackoverflow.com/a/40962059
 query=`echo $1 | xargs`
 
-# if query contains ':', it's full fts5 query
-# otherwise, change multiple groups into asterisk'd AND query
-# 'right arr' =&gt; 'right* AND arr*'
-raw=":"
-if test "${query#*$raw}" = "$query"
-then
-	query="${query// /* AND }*"
-else
-	query="${query#*$raw}"
-fi
-
-/usr/bin/sqlite3 unicode.sqlite3 &lt;&lt;EOF
-ATTACH "./user.sqlite3" as user;
-CREATE TABLE IF NOT EXISTS user."usage" (
+# prepare the user database (it must exist)
+/usr/bin/sqlite3 user.sqlite3 &lt;&lt;INIT
+CREATE TABLE IF NOT EXISTS "usage" (
 	"id" string UNIQUE NOT NULL,
 	"count" integer NOT NULL DEFAULT 1,
 	PRIMARY KEY (id)
 );
+INIT
 
--- the query
-WITH found AS (
-	SELECT character, name, category, hex, html, json, user.usage.count
-	FROM main.characters('$query')
-	LEFT JOIN user.usage ON main.characters.hex = user.usage.id
-	ORDER BY user.usage.count DESC, rank ASC, length(name) ASC
-	LIMIT 50
-)
--- the formatter
-select JSON_OBJECT(
-	'items', JSON_GROUP_ARRAY(
-		JSON_OBJECT(
-			'variables', JSON_OBJECT('hex', hex),
-			'title', character,
-			'subtitle', name || " (" || category || IIF(count &gt; 0, ", " || count, '') || ")",
-			'icon', JSON_OBJECT('path', 'icon.png'),
-			'arg', character,
-			'mods', JSON_OBJECT(
-				'cmd', JSON_OBJECT(
-					'arg', html,
-					'subtitle', 'Copy &amp; paste as HTML'
+# CASE: give me help
+if [[ "$query" == "!h" ]]; then
+cat &lt;&lt; HELP
+{
+	"items": [
+		{
+			"title": "👉 \`utf &lt;query&gt;\`",
+			"autocomplete": "right arrow",
+			"subtitle": "Search for a Unicode character with name, altname, html or hex matching &lt;query&gt;",
+			"valid": false
+		},
+		{
+			"title": "🔍 \`utf !&lt;character&gt;\`",
+			"autocomplete": "!!",
+			"subtitle": "Get details for a &lt;character&gt;…",
+			"valid": false
+		},
+		{
+			"title": "🆘 \`utf !h\`",
+			"subtitle": "…except '!h', which returns this help",
+			"valid": false
+		},
+		{
+			"title": "🥩 \`utf :&lt;query&gt;\`",
+			"autocomplete": ":sea* AND Other*",
+			"subtitle": "Start query with a colon to use raw SQLite FTS5 Match syntax (the underlying technology)",
+			"valid": false
+		},
+		{
+			"title": "💡 tip: \`utf u0021\`",
+			"autocomplete": "u0021",
+			"subtitle": "Will mostly match the json field, so you can easily query exact Unicode codepoints",
+			"valid": false
+		},
+		{
+			"title": "💡 tip: \`utf larr\`",
+			"autocomplete": "larr",
+			"subtitle": "Use HTML named entities to quickly match useful characters",
+			"valid": false
+		}
+	]
+}
+HELP
+exit
+fi
+
+# CASE: give me character
+# query starts with !, it's a "give me character X query"
+if [[ "$query" =~ ^! ]]; then
+/usr/bin/sqlite3 unicode.sqlite3 &lt;&lt;SQL
+	ATTACH "./user.sqlite3" as user;
+	-- the query
+	WITH found AS (
+		SELECT hex, codepoint, character, name, altname, category, html, json, user.usage.count
+		FROM main.characters
+		LEFT JOIN user.usage ON cast(user.usage.id as text) = cast(characters.hex as text)
+		WHERE character = SUBSTR('$query', 2)
+		ORDER BY user.usage.count
+	)
+	-- the formatter
+	select JSON_OBJECT(
+		'items', JSON_GROUP_ARRAY(
+			JSON_OBJECT(
+				'variables', JSON_OBJECT('hex', hex),
+				'title', character,
+				'subtitle', name || iif(altname is not null, " / " || altname, '') || " (" || category || IIF(count &gt; 0, ", " || count, '') || ")",
+				'icon', JSON_OBJECT('path', 'icon.png'),
+				'arg', character,
+				'mods', JSON_OBJECT(
+					'cmd', JSON_OBJECT(
+						'arg', html,
+						'subtitle', 'Copy &amp; paste as HTML → "' || html || '"'
+					),
+					'option', JSON_OBJECT(
+						'arg', json,
+						'subtitle', 'Copy &amp; paste as JS/Python/… → "' || json || '"'
+					),
+					'option+cmd', JSON_OBJECT(
+						'arg', "\u{" || codepoint || "}",
+						'subtitle', 'Copy &amp; paste as PHP → "\u{' || codepoint || '}"'
+					),
+					'ctrl', JSON_OBJECT(
+						'arg', hex,
+						'subtitle', 'Copy &amp; paste hex → "' || hex || '"'
+					),
+					'ctrl+option', JSON_OBJECT(
+						'arg', codepoint,
+						'subtitle', 'Copy &amp; paste full codepoint → "' || codepoint || '"'
+					)
 				),
-				'option', JSON_OBJECT(
-					'arg', json,
-					'subtitle', 'Copy &amp; paste as JS/Python/…'
-				),
-				'ctrl', JSON_OBJECT(
-					'arg', hex,
-					'subtitle', 'Copy &amp; paste as Decimal value'
+				'text', JSON_OBJECT(
+					'copy', name,
+					'largetype', character || '(' || name || ')'
 				)
 			)
 		)
+	) FROM found;
+SQL
+exit
+fi
+
+# CASE: fulltext over name, altname, and other fields
+# if query contains ':', it's full fts5 query
+# otherwise, change multiple groups into asterisk'd AND query
+# 'right arr' =&gt; 'right* AND arr*'
+if [[ "${query#*':'}" == "$query" ]]; then
+	query="${query// /* AND }*"
+else
+	query="${query#*':'}"
+fi
+
+/usr/bin/sqlite3 unicode.sqlite3 &lt;&lt;SQL
+	ATTACH "./user.sqlite3" as user;
+	-- the query
+	WITH found AS (
+		SELECT hex, codepoint, character, name, altname, category, html, json, user.usage.count
+		FROM main.characters('$query')
+		LEFT JOIN user.usage ON cast(user.usage.id as text) = cast(characters.hex as text)
+		ORDER BY user.usage.count DESC, rank ASC, length(name) ASC
+		LIMIT 50
 	)
-) FROM found;
-EOF</string>
+	-- the formatter
+	select JSON_OBJECT(
+		'items', JSON_GROUP_ARRAY(
+			JSON_OBJECT(
+				'variables', JSON_OBJECT('hex', hex),
+				'title', character,
+				'subtitle', name || iif(altname is not null, " / " || altname, '') || " (" || category || IIF(count &gt; 0, ", " || count, '') || ")",
+				'icon', JSON_OBJECT('path', 'icon.png'),
+				'arg', character,
+				'mods', JSON_OBJECT(
+					'cmd', JSON_OBJECT(
+						'arg', html,
+						'subtitle', 'Copy &amp; paste as HTML → "' || html || '"'
+					),
+					'option', JSON_OBJECT(
+						'arg', json,
+						'subtitle', 'Copy &amp; paste as JS/Python/… → "' || json || '"'
+					),
+					'option+cmd', JSON_OBJECT(
+						'arg', "\u{" || codepoint || "}",
+						'subtitle', 'Copy &amp; paste as PHP → "\u{' || codepoint || '}"'
+					),
+					'ctrl', JSON_OBJECT(
+						'arg', hex,
+						'subtitle', 'Copy &amp; paste hex → "' || hex || '"'
+					),
+					'ctrl+option', JSON_OBJECT(
+						'arg', codepoint,
+						'subtitle', 'Copy &amp; paste full codepoint → "' || codepoint || '"'
+					)
+				),
+				'text', JSON_OBJECT(
+					'copy', name,
+					'largetype', character || '(' || name || ')'
+				)
+			)
+		)
+	) FROM found;
+SQL
+</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -239,7 +355,7 @@ EOF</string>
 				<key>script</key>
 				<string>#!/usr/bin/env zsh
 
-# Load the top 10 and display the as alfred results
+# Load the top 9 and display the as alfred results
 /usr/bin/sqlite3 user.sqlite3 &lt;&lt;EOF
 ATTACH "./unicode.sqlite3" as u;
 CREATE TABLE IF NOT EXISTS "usage" (
@@ -250,9 +366,9 @@ CREATE TABLE IF NOT EXISTS "usage" (
 
 -- the query
 WITH top AS (
-	SELECT id, count, hex, character, name, category, html, json
+	SELECT id, count, hex, codepoint, character, name, altname, category, html, json
 	FROM main.usage
-	LEFT JOIN u.characters ON usage.id = characters.hex
+	LEFT JOIN u.characters ON cast(usage.id as text) = cast(characters.hex as text)
 	ORDER BY count DESC
 	LIMIT 9
 )
@@ -263,23 +379,35 @@ select IIF(
 		'items', JSON_GROUP_ARRAY(
 			JSON_OBJECT(
 				'variables', JSON_OBJECT('hex', hex),
-				'title', character || "   (" || count || "⨉)",
-				'subtitle', name || " (" || category || ")",
+				'title', character || "   (" || count || "×)",
+				'subtitle', name || iif(altname is not null, " / " || altname, '') || " (" || category ||  ")",
 				'icon', JSON_OBJECT('path', 'icon.png'),
 				'arg', character,
 				'mods', JSON_OBJECT(
 					'cmd', JSON_OBJECT(
 						'arg', html,
-						'subtitle', 'Copy &amp; paste as HTML'
+						'subtitle', 'Copy &amp; paste as HTML → "' || html || '"'
 					),
 					'option', JSON_OBJECT(
 						'arg', json,
-						'subtitle', 'Copy &amp; paste as JS/Python/…'
+						'subtitle', 'Copy &amp; paste as JS/Python/… → "' || json || '"'
+					),
+					'option+cmd', JSON_OBJECT(
+						'arg', "\u{" || codepoint || "}",
+						'subtitle', 'Copy &amp; paste as PHP → "\u{' || codepoint || '}"'
 					),
 					'ctrl', JSON_OBJECT(
 						'arg', hex,
-						'subtitle', 'Copy &amp; paste as Decimal value'
+						'subtitle', 'Copy &amp; paste hex → "' || hex || '"'
+					),
+					'ctrl+option', JSON_OBJECT(
+						'arg', codepoint,
+						'subtitle', 'Copy &amp; paste full codepoint → "' || codepoint || '"'
 					)
+				),
+				'text', JSON_OBJECT(
+					'copy', name,
+					'largetype', character || '(' || name || ')'
 				)
 			)
 		)
@@ -374,18 +502,31 @@ EOF</string>
 	<key>readme</key>
 	<string># Alfred-UTF: Unicode Character Search
 
-
-Simple workflow to replace now defunct Python 2 workflow. Uses pure SQLite3 - with fts5 and json1 extensions - which is still packaged with MacOS, unlike PHP or Python 2 in versions of MacOS 13+.
-
 ## Usage
 
-- `utf right arr` - Search for a Unicode character
-    - Default action: copy the character (e.g. `→`)
-    - &lt;kbd&gt;Cmd&lt;/kbd&gt; - copy the HTML version (e.g. `&amp;rarr;`)
-    - &lt;kbd&gt;Option&lt;/kbd&gt; - copy the Unicode point for js/php/python/… (e.g. `\u2192`)
-    - &lt;kbd&gt;Ctrl&lt;/kbd&gt; - copy the decimal value for whatever reason (e.g. `2192`) 
-- `utf :whatever*` - If your query starts with **colon**, you are writing raw SQLite fts5 match syntax. Use only if you desire to fool around with stuff.
-- `utf10` - Top 10 characters you've used in the past, with count of times you've used them
+### Search/show:
+
+- `utf right arr` - Search for a Unicode character by full-text matched name, alternative name, html entity or hexadecimal code
+- `utf !&lt;character&gt;` - Get details for a single exact character, except
+- `utf !h` - get HELP!
+- `utf9` - Your top 9 Unicode characters
+
+### Result Actions:
+- Default action: copy the character (e.g. `!`)
+- &lt;kbd&gt;Cmd&lt;/kbd&gt; - copy the HTML version (e.g. `&amp;excl;`)
+- &lt;kbd&gt;Option&lt;/kbd&gt; - copy the Unicode point for js/python/… (e.g. `\u0021`)
+- &lt;kbd&gt;Option&lt;/kbd&gt;&lt;kbd&gt;Cmd&lt;/kbd&gt; - copy the Unicode point for PHP (e.g. `\u{0021}`)
+- &lt;kbd&gt;Ctrl&lt;/kbd&gt; - copy the hex value(e.g. `21`) 
+- &lt;kbd&gt;Option&lt;/kbd&gt;&lt;kbd&gt;Ctrl&lt;/kbd&gt; - copy the full code point (e.g. `0021`) 
+- Use Copy result (&lt;kbd&gt;Cmd&lt;/kbd&gt;+&lt;kbd&gt;C&lt;/kbd&gt;) to copy the character name (e.g. `exclamation mark`)
+
+↳ Result actions (except Copy result &lt;kbd&gt;Cmd&lt;/kbd&gt;+&lt;kbd&gt;C&lt;/kbd&gt;) also paste to the frontmost app
+
+### Tips
+
+- `utf u0027` - you can prefix the full codepoint with `u`, and the matcher will mostly match this to the character's json value (`\u0027`), which means you get "find a Unicode codepoint" function for free
+- `utf larr` - one of the fields matched are html entities - use this for a precise and quick matching
+- `utf :raw* query*` - if you prefix your query with a colon, you'll gain access to the underlying technology - and you get to write raw SQLite FTS5 Match Query. Use this power for good
 
 ## Installation
 
@@ -441,7 +582,7 @@ MIT License - see [LICENSE](./LICENSE)
 	<key>userconfigurationconfig</key>
 	<array/>
 	<key>version</key>
-	<string>2.0.3</string>
+	<string>2.1.0</string>
 	<key>webaddress</key>
 	<string>https://adamkiss.com</string>
 </dict>

@@ -1,7 +1,6 @@
 return {
 
 	"nvim-lualine/lualine.nvim", -- status line
-	"rcarriga/nvim-notify", -- notifications
 
 	{ -- highlight function args
 		"m-demare/hlargs.nvim",
@@ -57,7 +56,6 @@ return {
 		"dhruvasagar/vim-markify",
 		init = function()
 			vim.g.markify_info_text = ""
-			vim.g.markify_echo_current_message = 0
 		end,
 		event = "QuickFixCmdPost",
 	},
