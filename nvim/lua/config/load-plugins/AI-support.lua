@@ -37,12 +37,19 @@ return {
 				welcome_message = "",
 				question_sign = "",
 				answer_sign = "ﮧ",
-				max_line_length = 80,
+				max_line_length = 90,
 				keymaps = {
-					close = "<Esc>", -- removes ability to use normal mode
+					close = "<Esc>", -- mappings Esc here removes ability to use normal mode
 					yank_last = "<D-c>",
 					scroll_up = "<S-Up>",
+					new_session = "<D-n>",
 					scroll_down = "<S-Down>",
+				},
+				chat_layout = {
+					size = {
+						height = "90%",
+						width = "90%",
+					},
 				},
 				chat_window = {
 					border = { style = borderStyle },
