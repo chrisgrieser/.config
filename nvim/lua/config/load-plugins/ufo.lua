@@ -1,7 +1,7 @@
 return {
 	"kevinhwang91/nvim-ufo",
 	dependencies = "kevinhwang91/promise-async",
-	event = "VeryLazy",
+	lazy = false, -- can't lazy load, or folds from previous sessions are opened
 	config = function()
 		local ufo = require("ufo")
 		local foldIcon = "  "
@@ -39,7 +39,6 @@ return {
 			end,
 		}
 
-		cmd([[silent! loadview 1]]) -- needs silent to avoid error for documents that do not have a view yet (opening first time)
 		vim.keymap.set("n", "zR", ufo.openAllFolds) -- Using ufo provider need remap `zR` and `zM`
 		vim.keymap.set("n", "zM", ufo.closeAllFolds)
 
