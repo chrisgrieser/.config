@@ -76,13 +76,13 @@ map("a", "p"); // disable for one key
 map(",", ";e"); // Settings
 
 // toggle fullscreen
-// mapkey("Z", "Fullscreen", function () {
-// 	if (window.fullScreen) {
-// 		document.exitFullscreen();
-// 	} else {
-// 		document.documentElement.requestFullscreen();
-// 	}
-// });
+mapkey("s", "Fullscreen", function () {
+	if (window.fullScreen) {
+		document.exitFullscreen();
+	} else {
+		document.documentElement.requestFullscreen();
+	}
+});
 
 //──────────────────────────────────────────────────────────────────────────────
 // Insert Mode & ACE editor
@@ -96,6 +96,10 @@ aceVimMap("U", "<C-r>");
 aceVimMap("J", "6j");
 aceVimMap("K", "6k");
 aceVimMap("M", "gJ"); // mapping to gJ instead of J to prevent recursion, as noremap does not seem to be available
+aceVimMap("im", "iW"); // intended for operater-pending mode
+aceVimMap("am", "aW");
+aceVimMap("ir", "i["); 
+aceVimMap("ar", "a[");
 
 imap("<Ctrl-a>", "<Ctrl-f>"); // boL
 

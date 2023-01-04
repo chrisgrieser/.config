@@ -192,6 +192,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "outdent" })
 keymap("n", "ü", "mzlblgueh~`z", { desc = "toggle capital/lowercase of word" })
 keymap("n", "Ü", "gUiw", { desc = "uppercase word" })
 keymap("n", "~", "~h", { desc = "switch char case w/o moving" })
+keymap("n", "ä", qol.wordSwitch, {desc = "switch common words"})
 
 -- Append to / delete from EoL
 local trailingKeys = { ".", ",", ";", ":", '"', "'" }
@@ -227,7 +228,7 @@ keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
 keymap("n", "gR", "R", { desc = "replace mode" })
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
-keymap("n", "R", qol.duplicateLine, { desc = "duplicate line" })
+keymap("n", "R", qol.smartDuplicateLine, { desc = "duplicate line" })
 keymap("x", "R", qol.duplicateSelection, { desc = "duplicate selection" })
 
 -- Undo

@@ -1,4 +1,3 @@
----@diagnostic disable: param-type-mismatch, assign-type-mismatch
 local M = {}
 --------------------------------------------------------------------------------
 local bo = vim.bo
@@ -23,48 +22,84 @@ local function getlocalopt(option) return vim.api.nvim_get_option_value(option, 
 ---@param option string
 ---@return any
 local function getglobalopt(option) return vim.api.nvim_get_option_value(option, { scope = "global" }) end
+
+---equivalent to fn.getline(), but using more efficient nvim api
+---@param lnum integer|string
+---@return string
+local function getline(lnum)
+	local arg
+	if type(lnum) == "number" then
+		arg = lnum
+	elseif lnum == "." then
+		local curRow = getCursor(0)[1]
+		arg = curRow
+	else
+		return ""
+	end
+	local lineContent = vim.api.nvim_buf_get_lines(0, arg - 1, arg, true)
+	return lineContent[1]
+end
+
 --------------------------------------------------------------------------------
 
--- Duplicate line under cursor, and change occurrences of certain words to their
--- opposite, e.g., "right" to "left". Intended for languages like CSS.
----@param opts? table available: reverse, moveTo = key|value|none, incrementKeys
-function M.duplicateLine(opts)
-	if not opts then opts = { reverse = false, moveTo = "key", incrementKeys = true } end
+-- Duplicate line under cursor, change occurrences of certain words to their
+-- opposite, e.g., "right" to "left", and move cursor to key is there is one
+function M.cssDuplicateLine()
+	local line = getline(".")
 
-	local line = fn.getline(".") ---@type string
-	if opts.reverse then
-		if line:find("top") then
-			line = line:gsub("top", "bottom")
-		elseif line:find("bottom") then
-			line = line:gsub("bottom", "top")
-		elseif line:find("right") then
-			line = line:gsub("right", "left")
-		elseif line:find("left") then
-			line = line:gsub("left", "right")
-		elseif line:find("height") and not (line:find("line-height")) then
-			line = line:gsub("height", "width")
-		elseif line:find("width") and not (line:find("border-width")) and not (line:find("outline-width")) then
-			line = line:gsub("width", "height")
-		end
+	if line:find("top") then
+		line = line:gsub("top", "bottom")
+	elseif line:find("bottom") then
+		line = line:gsub("bottom", "top")
+	elseif line:find("right") then
+		line = line:gsub("right", "left")
+	elseif line:find("left") then
+		line = line:gsub("left", "right")
+	elseif line:find("height") and not (line:find("line-height")) then
+		line = line:gsub("height", "width")
+	elseif line:find("width") and not (line:find("border-width")) and not (line:find("outline-width")) then
+		line = line:gsub("width", "height")
 	end
 
-	local lineHasNumberedKey, _, num = line:find("(%d+).*[:=]")
-	if opts.incrementKeys and lineHasNumberedKey then
-		local nextNum = tostring(tonumber(num) + 1)
-		line = line:gsub("%d+(.*[:=])", nextNum .. "%1")
-	end
-
-	append(".", line)
-
-	-- cursor movement
+	-- cursor moved to key if there is one
 	local lineNum, colNum = unpack(getCursor(0))
 	lineNum = lineNum + 1 -- line down
-	local keyPos, valuePos = line:find(".%w+ ?[:=] ?")
-	if opts.moveTo == "value" and valuePos then
-		colNum = valuePos
-	elseif opts.moveTo == "key" and keyPos then
-		colNum = keyPos
+	local keyPos = line:find(".%w+ ?: ?")
+	if keyPos then colNum = keyPos end
+	setCursor(0, { lineNum, colNum })
+end
+
+-- Duplicate line under cursor, smartly change words like "if" to "elseif",
+-- and if there is a variable assignment with a numbered variable like "item1",
+-- then increment the number. If there is a variable assignment or key-value
+-- pair, move to the key
+function M.smartDuplicateLine()
+	local line = getline(".")
+	local ft = bo.filetype
+
+	-- smart switching of words
+	if ft == "lua" and line:find("^%s*if.+then$") then
+		line = line:gsub("^(%s*)if", "%1elseif")
+	elseif (ft == "bash" or ft == "zsh" or ft == "sh") and line:find("^%s*if.+then$") then
+		line = line:gsub("^(%s*)if", "%1elif")
+	elseif (ft == "javascript" or ft == "typescript") and line:find("^%s*if.+{$") then
+		line = line:gsub("^(%s*)if", "%1else if")
 	end
+
+	-- increment numbered vars
+	local lineHasNumberedVarAssignment, _, num = line:find("(%d+).*=")
+	if lineHasNumberedVarAssignment then
+		local nextNum = tostring(tonumber(num) + 1)
+		line = line:gsub("%d+(.*=)", nextNum .. "%1")
+	end
+
+	append(".", line) ---@diagnostic disable-line: param-type-mismatch
+
+	-- cursor movement to value if there is one
+	local lineNum, colNum = unpack(getCursor(0))
+	lineNum = lineNum + 1 -- line down
+	local _, valuePos = line:find(".%w+ ?[:=] ?")
+	if valuePos then colNum = valuePos end
 	setCursor(0, { lineNum, colNum })
 end
 
@@ -74,6 +109,57 @@ function M.duplicateSelection()
 	fn.setreg("z", prevReg)
 end
 
+--------------------------------------------------------------------------------
+
+---switches words under the cursor from `true` to `false` and similar cases
+function M.wordSwitch()
+	local iskeywBefore = opt.iskeyword:get()
+	opt.iskeyword:remove { "_", "-", "." }
+
+	local ft = bo.filetype
+	local words
+	if ft == "lua" then
+		words = {
+			{ "if", "elseif" },
+			{ "elseif", "else" },
+			{ "else", "if" },
+			{ "function", "local function" },
+		}
+	elseif ft == "bash" or ft == "zsh" or ft == "sh" then
+		words = {
+			{ "if", "elif" },
+			{ "elif", "else" },
+			{ "else", "if" },
+		}
+	elseif ft == "javascript" or ft == "typescript" then
+		words = {
+			{ "if", "else if" },
+			{ "else", "if" },
+			{ "const", "let" },
+			{ "let", "const" },
+		}
+	end
+	table.insert(words, {"true", "false"})
+	table.insert(words, {"false", "true"})
+
+	local cword = expand("<cword>")
+	local newWord = nil
+	for _, pair in pairs(words) do
+		if cword == pair[1] then
+			newWord = pair[2]
+			break
+		end
+	end
+
+	if newWord then
+		fn.setreg("z", newWord) -- HACK no idea why, but ciw does not work well with normal, therefore pasting instead
+		normal([[viw"zP]])
+	else
+		vim.notify("Word under cursor cannot be switched.", vim.log.levels.WARN)
+	end
+
+	opt.iskeyword = iskeywBefore
+end
 --------------------------------------------------------------------------------
 
 --- open URLs (non macOS needs to modify open comment)
@@ -88,7 +174,7 @@ function M.bettergx()
 	if urlLineNr == 0 then
 		vim.notify("No URL found in this file.", logWarn)
 	else
-		local urlLine = fn.getline(urlLineNr) ---@type string
+		local urlLine = getline(urlLineNr)
 		local url = urlLine:match(urlLuaRegex)
 		os.execute('open "' .. url .. '"')
 	end
@@ -151,7 +237,7 @@ function M.toggleWrap()
 	local wrapOn = getlocalopt("wrap")
 	local opts = { buffer = true }
 	if wrapOn then
-		setlocal("wrap", false) -- soft wrap
+		setlocal("wrap", true) -- soft wrap
 		setlocal("colorcolumn", getglobalopt("colorcolumn")) -- reactivate ruler
 
 		local del = vim.keymap.del
@@ -220,7 +306,7 @@ function M.addCommitPush(prefillMsg)
 			return
 		end
 
-		vim.notify(' git add-commit-push\n"'..commitMsg.. '"')
+		vim.notify(' git add-commit-push\n"' .. commitMsg .. '"')
 		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
 	end)
 end
@@ -239,7 +325,7 @@ function M.gitLink()
 	local location
 	local selStart = fn.line("v")
 	local selEnd = fn.line(".")
-	local notVisualMode = not(fn.mode():find("[Vv]"))
+	local notVisualMode = not (fn.mode():find("[Vv]"))
 	if notVisualMode then
 		location = "" -- link just the file itself
 	elseif selStart == selEnd then -- one-line-selection

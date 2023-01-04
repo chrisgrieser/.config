@@ -491,7 +491,7 @@ rules:
               - ^org\.hammerspoon\.Hammerspoon$
   - description: "\U0001F170️\U0001F4AC Slack"
     # https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
-    # INFO: cmd+e for inline code is at the Discord-Section
+    # INFO: cmd+e for inline code is in the Discord-Section
     manipulators:
       # go to next unread message
       - type: basic
@@ -596,10 +596,8 @@ rules:
             bundle_identifiers: [^com.runningwithcrayons.Alfred-Preferences$]
   - description: "\U0001F170️\U0001F4AC Discord"
     manipulators:
-      # ctrl-h & ctrl-l to go back / forward a channel
-      # to circumvent Discord's weird keybindings, which seem to capture things
-      # before transformation. Hyper key bindings seem to conflict with those,
-      # since they temporarily send a control.
+      # HACK ctrl-h & ctrl-l to go back / forward a channel cannot be mapped
+      # directly in Discord, since they seem to capture things.
       - type: basic
         from:
           key_code: h
@@ -676,8 +674,7 @@ rules:
               - command
           - key_code: vk_none
             hold_down_milliseconds: 100
-          - shell_command: |
-              pbpaste -pboard ruler | pbcopy # restore previous clipboard
+          - shell_command: pbpaste -pboard ruler | pbcopy # restore previous cb
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -685,19 +682,18 @@ rules:
               - ^com\.tinyspeck\.slackmacgap$
       # [r]eply to msg above
       - type: basic
-        from:
-          key_code: r
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: r, modifiers: {mandatory: [command]}}
         to:
+          # saving text in the clipboard required, since tab->up->r only works with empty text input field
+          - {key_code: a, modifiers: [command]} 
+          - {key_code: x, modifiers: [command]}
+          - {key_code: vk_none, hold_down_milliseconds: 30}
           - key_code: tab
-          - key_code: vk_none
-            hold_down_milliseconds: 70
+          - {key_code: vk_none, hold_down_milliseconds: 70}
           - key_code: up_arrow
-          - key_code: vk_none
-            hold_down_milliseconds: 70
+          - {key_code: vk_none, hold_down_milliseconds: 70}
           - key_code: r
+          - {key_code: v, modifiers: [command]}
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:

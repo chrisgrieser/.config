@@ -116,7 +116,7 @@ end
 function sketchybarPopup(arg)
 	local mode
 	if isProjector() or isAtOffice() then
-		mode = "true" -- show always
+		mode = "false" -- always hide
 	elseif type(arg) == "string" then
 		mode = (arg == "show") and "true" or "false"
 	elseif type(arg) == "table" then
