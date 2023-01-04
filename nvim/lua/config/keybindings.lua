@@ -3,13 +3,13 @@ require("config.utils")
 -- META
 
 -- search keymaps
-keymap("n", "?", telescope.keymaps, { desc = "Telescope: Keymaps" })
+keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = "Telescope: Keymaps" })
 
 -- Theme Picker
-keymap("n", "<leader>T", telescope.colorscheme, { desc = "Telescope: Colorschemes" })
+keymap("n", "<leader>T", function() cmd.Telescope("colorscheme") end, { desc = "Telescope: Colorschemes" })
 
 -- Highlights
-keymap("n", "<leader>H", telescope.highlights, { desc = "Telescope: Highlight Groups" })
+keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = "Telescope: Highlight Groups" })
 
 -- Update [P]lugins
 keymap("n", "<leader>p", require("lazy").sync, { desc = ":Lazy sync" })
@@ -200,7 +200,7 @@ end
 keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Spelling (mnemonic: [z]pe[l]ling)
-keymap("n", "zl", telescope.spell_suggest, { desc = "spellsuggest" })
+keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "spellsuggest" })
 keymap("n", "zg", "zg", { desc = "mark as correct spelling" }) -- needs extra enter due to `cmdheight=0`
 keymap("n", "gl", "]s", { desc = "next misspelling" })
 keymap("n", "za", "mz1z=`z", { desc = "autofix spelling" }) -- [a]utofix word under cursor
@@ -315,7 +315,7 @@ keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize" })
 --------------------------------------------------------------------------------
 -- BUFFERS & WINDOWS
 
-keymap("n", "gb", telescope.buffers, { desc = "Telescope: open buffers" })
+keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = "Telescope: open buffers" })
 -- INFO: <BS> to cycle buffer has to be set in cybu config
 
 
@@ -385,14 +385,18 @@ keymap("n", "ga", ":ChatGPT<CR>", { desc = "AI: ChatGPT Prompt" })
 -- File Switchers
 keymap("n", "go", function ()
 	local isGitRepo = 0 == os.execute("test -d $(git rev-parse --show-toplevel)/.git")
-	local 
-	if expand("%:p:h"):find("/%.config/nvim") or 
-	if bo.filetype == "lua"
-	local scope = isGitRepo and "git_files" or "find_files"
-	cmd.Telescope(scope)	
+	local cwd = vim.loop.cwd() or ""
+	local scope = "git_files"
+	if cwd:find("/nvim/") and not(cwd:find("/my%-plugins/")) then
+		scope = "find_files cwd="..fn.stdpath("config")
+		print("scope:", scope)
+	elseif not(isGitRepo) or cwd:find("/hammerspoon/") then
+		scope = "find_files"
+	end
+	cmd("Telescope "..scope)
 end, { desc = "Telescope: Files in Folder / Git Repo" })
-keymap("n", "gr", telescope.oldfiles, { desc = "Telescope: [R]ecent Files" })
-keymap("n", "gF", telescope.live_grep, { desc = "Telescope: live grep (search in cwd)" })
+keymap("n", "gr", function () cmd.Telescope("oldfiles") end, { desc = "Telescope: [R]ecent Files" })
+keymap("n", "gr", function () cmd.Telescope("live_grep") end, { desc = "Telescope: live grep (search in cwd)" })
 
 -- File Operations
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = "copy filepath" })
