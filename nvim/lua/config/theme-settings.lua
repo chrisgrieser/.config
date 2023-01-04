@@ -2,7 +2,8 @@
 -- local lightTheme = "rose-pine"
 -- local darkTheme = "rose-pine"
 local lightTheme = "dawnfox"
-local darkTheme = "tokyonight-moon"
+-- local darkTheme = "tokyonight-moon"
+local darkTheme = "zephyr"
 -- local lightTheme = "melange"
 -- local darkTheme = "oxocarbon"
 local darkTransparency = 0.95
