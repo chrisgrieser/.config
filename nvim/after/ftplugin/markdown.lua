@@ -15,7 +15,7 @@ local foOpts = getlocalopt("formatoptions"):gsub("[ct]", "") .. "ro"
 setlocal("formatoptions", foOpts)
 
 -- enable wrapping lines
-if not wo.wrap then qol.toggleWrap() end
+if not wo.wrap then require("funcs.quality-of-life").toggleWrap() end
 
 -- decrease line length without zen mode plugins (which unfortunately remove
 -- statuslines and stuff)
