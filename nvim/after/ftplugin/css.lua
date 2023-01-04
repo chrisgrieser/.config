@@ -7,13 +7,20 @@ bo.grepprg = "rg --vimgrep --no-column" -- remove columns
 -- comment marks more useful than symbols for theme development
 keymap("n", "gs", function()
 	cmd([[silent! lgrep "^(\# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
-	cmd[[Telescope loclist prompt_title=Navigation\ Markers fname_width=0]]
+	require("telescope.builtin").loclist {
+		prompt_title = "Navigation Markers",
+		fname_width = 0,
+	}
 end, { desc = "Search Navigation Markers", buffer = true })
 
 -- search only for variables
 keymap("n", "gS", function()
 	cmd([[silent! lgrep "^\s*--" %]]) -- riggrep-search for css variables
-	cmd[[Telescope loclist prompt_title=CSS\ Variables fname_width=0]]
+	require("telescope.builtin").loclist {
+		prompt_title = "CSS Variables",
+		prompt_prefix = "",
+		fname_width = 0,
+	}
 end, { desc = "Search CSS Variables", buffer = true })
 
 --------------------------------------------------------------------------------
@@ -75,9 +82,8 @@ keymap("n", "qw", function()
 	}
 	fn.append(".", hr)
 	local lineNum = getCursor(0)[1] + 2
-	local colNum = #(hr[2]) + 2
+	local colNum = #hr[2] + 2
 	setCursor(0, { lineNum, colNum })
 	cmd.startinsert { bang = true }
 end, { buffer = true, desc = "insert comment-heading" })
 ---@diagnostic enable: undefined-field, param-type-mismatch
-
