@@ -59,7 +59,7 @@ keymap("n", "yd", "yisEp", { buffer = true, silent = true, remap = true })
 
 -- smart line duplicate (mnemonic: [R]eplicate)
 -- switches top/bottom & moves to value
-keymap("n", "R", function() qol.duplicateLine { reverse = true, moveTo = "value" } end, opts)
+keymap("n", "R", qol.cssDuplicateLine, opts)
 
 ---@diagnostic disable: undefined-field, param-type-mismatch
 keymap("n", "<leader>i", function()

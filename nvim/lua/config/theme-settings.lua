@@ -112,7 +112,6 @@ local function themeModifications()
 
 	-- zephyr
 	elseif theme == "zephyr" then
-		customHighlights() -- needs to be loaded more often?!
 
 	-- dawnfox
 	elseif theme == "dawnfox" then
