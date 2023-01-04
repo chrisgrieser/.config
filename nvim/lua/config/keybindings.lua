@@ -384,7 +384,7 @@ keymap("n", "ga", ":ChatGPT<CR>", { desc = "AI: ChatGPT Prompt" })
 
 -- File Switchers
 keymap("n", "go", function ()
-	local isGitRepo = 0 == os.execute("test -d $(git rev-parse --show-toplevel)/.git")
+	local isGitRepo = 0 == os.execute("test -e $(git rev-parse --show-toplevel)/.git") -- using test -e to check for repo and submodule
 	local cwd = vim.loop.cwd() or ""
 	local scope = "git_files"
 	if cwd:find("/nvim/") and not(cwd:find("/my%-plugins/")) then
