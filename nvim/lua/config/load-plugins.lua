@@ -56,14 +56,6 @@ return {
 
 	-- File Switching & File Operation
 	{ "chrisgrieser/nvim-genghis", dev = true, lazy = true, dependencies = "stevearc/dressing.nvim" },
-	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"debugloop/telescope-undo.nvim",
-		},
-	},
 
 	{
 		"axieax/urlview.nvim",
@@ -78,7 +70,6 @@ return {
 		end,
 	},
 	"Darazaki/indent-o-matic", -- auto-determine indents
-	{ "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" }, -- better folding
 
 	-- Filetype-specific
 	{ "mityu/vim-applescript", ft = "applescript" }, -- syntax highlighting

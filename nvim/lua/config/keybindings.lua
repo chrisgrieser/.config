@@ -1,4 +1,5 @@
 require("config.utils")
+local qol = require("funcs.quality-of-life")
 --------------------------------------------------------------------------------
 -- META
 

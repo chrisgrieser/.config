@@ -1,7 +1,4 @@
-require("config.utils")
 local actions = require("telescope.actions")
---------------------------------------------------------------------------------
-
 local maps = {
 	["<Esc>"] = "close",
 	["<D-w>"] = "delete_buffer",
@@ -18,7 +15,7 @@ local maps = {
 	end,
 }
 
-require("telescope").setup {
+local options = {
 	defaults = {
 		selection_caret = "ﰉ ",
 		prompt_prefix = "❱ ",
@@ -47,7 +44,7 @@ require("telescope").setup {
 			"%.icns",
 			"%.zip",
 		},
-		mappings = { 
+		mappings = {
 			i = maps,
 			n = maps,
 		},
@@ -170,13 +167,26 @@ require("telescope").setup {
 	-- https://github.com/debugloop/telescope-undo.nvim#configuration
 	extensions = {
 		undo = {
-			diff_context_lines = opt.scrolloff:get() - 2,
 			entry_format = "#$ID/$STAT/$TIME",
 			layout_config = { preview_width = 0.7 },
-			prompt_prefix = "",
+			prompt_prefix = "碑",
 			initial_mode = "normal",
 		},
 	},
 }
 
-require("telescope").load_extension("undo")
+return {
+	{
+		"nvim-telescope/telescope.nvim",
+		cmd = "Telescope",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"debugloop/telescope-undo.nvim",
+		},
+		config = function()
+			require("telescope").setup(options)
+			require("telescope").load_extension("undo")
+		end,
+	},
+}

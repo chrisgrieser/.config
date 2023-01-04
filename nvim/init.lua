@@ -29,5 +29,4 @@ require("config.debugger")
 
 require("config.comments")
 require("config.textobjects")
-require("config.telescope")
 require("config.user-commands")

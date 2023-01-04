@@ -19,8 +19,18 @@ logWarn = vim.log.levels.WARN
 logError = vim.log.levels.ERROR
 logTrace = vim.log.levels.TRACE
 
-qol = require("funcs.quality-of-life")
-telescope = require("telescope.builtin")
+---runs :normal natively with bang
+---@param cmdStr any
+function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
+
+---whether nvim runs in a GUI
+---@return boolean
+function isGui() return g.neovide or g.goneovim end
+
+---equivalent to `:setlocal option&`
+---@param option string
+---@return any
+function getlocalopt(option) return vim.api.nvim_get_option_value(option, { scope = "local" }) end
 
 ---equivalent to `:setlocal option=value`
 ---@param option string
@@ -29,17 +39,4 @@ function setlocal(option, value)
 	-- :setlocal does not have a direct access via the vim-module, it seems https://neovim.io/doc/user/lua.html#lua-vim-setlocal
 	vim.api.nvim_set_option_value(option, value, { scope = "local" })
 end
-
----runs :normal natively with bang
----@param cmdStr any
-function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
-
----equivalent to `:setlocal option&`
----@param option string
----@return any
-function getlocalopt(option) return vim.api.nvim_get_option_value(option, { scope = "local" }) end
-
----whether nvim runs in a GUI
----@return boolean
-function isGui() return g.neovide or g.goneovim end
 
