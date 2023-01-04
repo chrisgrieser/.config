@@ -28,16 +28,18 @@ function M.quicklog()
 	local ft = bo.filetype
 	local lnStr = ""
 
-	if ft == "lua" then
-		logStatement = 'print("' .. lnStr .. varname .. ':", ' .. varname .. ")"
+	if ft == "lua" and expand("%:p:h"):find("/hammerspoon/") then
+		logStatement = 'notify("' .. varname .. ':", ' .. varname .. ")"
+	elseif ft == "lua" then
+		logStatement = 'print("' .. varname .. ':", ' .. varname .. ")"
 	elseif ft == "python" then
-		logStatement = 'print("' .. lnStr .. varname .. ': " + ' .. varname .. ")"
+		logStatement = 'print("' .. varname .. ': " + ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = 'console.log("' .. lnStr .. varname .. ': " + ' .. varname .. ");"
+		logStatement = 'console.log("' .. varname .. ': " + ' .. varname .. ");"
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		logStatement = 'echo "(log) ' .. lnStr .. varname .. ": $" .. varname .. '"'
+		logStatement = 'echo "(log) ' .. varname .. ": $" .. varname .. '"'
 	elseif ft == "applescript" then
-		logStatement = 'log "' .. lnStr .. varname .. ': " & ' .. varname
+		logStatement = 'log "' .. varname .. ': " & ' .. varname
 	else
 		vim.notify("Quicklog does not support " .. ft .. " yet.", logWarn)
 		return
@@ -102,7 +104,9 @@ function M.beeplog()
 	local logStatement
 	local ft = bo.filetype
 
-	if ft == "lua" or ft == "python" then
+	if ft == "lua" and expand("%:p:h"):find("/hammerspoon/") then
+		logStatement = 'notify("beep")'
+	elseif ft == "lua" or ft == "python" then
 		logStatement = 'print("beep")'
 	elseif ft == "javascript" or ft == "typescript" then
 		logStatement = 'console.log("beep");'
@@ -126,7 +130,10 @@ function M.removelogs()
 	local ft = bo.filetype
 	local logCommand
 	local linesBefore = fn.line("$")
-	if ft == "lua" or ft == "python" then
+	if ft == "lua" and expand("%:p:h"):find("/hammerspoon/") then
+		logCommand = "print"
+		vim.notify("Only removing 'print' statements, not 'notify' statements.")
+	elseif ft == "lua" or ft == "python" then
 		logCommand = "print"
 	elseif ft == "javascript" or ft == "typescript" then
 		logCommand = "console."

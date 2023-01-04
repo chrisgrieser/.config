@@ -5,6 +5,7 @@ return {
 	-- "rose-pine/neovim",
 	-- "rebelot/kanagawa.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
+	"glepnir/zephyr-nvim",
 	"savq/melange",
 
 	-- Treesitter

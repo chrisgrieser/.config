@@ -10,7 +10,7 @@ pw = hs.pathwatcher.new
 tableContains = hs.fnutils.contains
 --------------------------------------------------------------------------------
 
-hyper = {"cmd", "alt", "ctrl", "shift"}
+hyper = { "cmd", "alt", "ctrl", "shift" }
 I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ I = hs.inspect -- to inspect tables in the console
 ---@param VAR string
 ---@return string
 function getenv(VAR)
-	local out = hs.execute("echo $"..VAR):gsub("\n$", "")
+	local out = hs.execute("echo $" .. VAR):gsub("\n$", "")
 	return out
 end
 
@@ -27,7 +27,7 @@ end
 ---@param str string
 ---@return string
 function trim(str)
-	if not(str) then return "" end
+	if not str then return "" end
 	str = str:gsub("^%s*(.-)%s*$", "%1")
 	return str
 end
@@ -36,7 +36,7 @@ end
 ---@param delaySecs number|number[]
 ---@param func function function to repeat
 function runWithDelays(delaySecs, func)
-	if type(delaySecs) == "number" then delaySecs = {delaySecs} end
+	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do
 		hs.timer.doAfter(delay, func)
 	end
@@ -60,7 +60,9 @@ end
 
 ---@return boolean
 function screenIsUnlocked()
-	local _, success = hs.execute('[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]] && exit 0 || exit 1')
+	local _, success = hs.execute(
+		'[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]] && exit 0 || exit 1'
+	)
 	return success ---@diagnostic disable-line: return-type-mismatch
 end
 
@@ -72,21 +74,21 @@ function deviceName()
 end
 
 ---@return boolean
-function isAtMother()
-	return deviceName():find("Mother") ~= nil
-end
+function isAtMother() return deviceName():find("Mother") ~= nil end
 
 ---@return boolean
-function isIMacAtHome()
-	return (deviceName():find("iMac") and deviceName():find("Home")) ~= nil
-end
+function isIMacAtHome() return (deviceName():find("iMac") and deviceName():find("Home")) ~= nil end
 
 ---Send Notification
----@param text string
-function notify(text)
-	local out = text and trim(text) or "empty string"
-	hs.notify.new {title = "Hammerspoon", informativeText = text}:send()
-	print("notify: " .. out) -- for the console
+function notify(...)
+	local safe_args = {}
+	local args = { ... }
+	for _, arg in pairs(args) do
+		table.insert(safe_args, tostring(arg))
+	end
+	local out = table.concat(safe_args, " ")
+	hs.notify.show("Hammerspoon", "", out)
+	print("notify: " .. out) -- log in the console, too
 end
 
 ---Whether the current time is between startHour & endHour
@@ -113,18 +115,18 @@ end
 
 ---@param appNames string|string[]
 function openApp(appNames)
-	if type(appNames) == "string" then appNames = {appNames} end
+	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
 		local runs = app.get(name)
-		if not(runs) then app.open(name) end
+		if not runs then app.open(name) end
 	end
 end
 
 ---@param appNames string|string[]
 function quitApp(appNames)
-	if type(appNames) == "string" then appNames = {appNames} end
+	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		runWithDelays({0, 0.5}, function ()
+		runWithDelays({ 0, 0.5 }, function()
 			local appObj = app.get(name)
 			if appObj then appObj:kill() end
 		end)
@@ -133,6 +135,4 @@ end
 
 -- won't work with Chromium browsers due to bug, but good for URI schemes
 ---@param url string
-function openLinkInBackground(url)
-	hs.execute('open -g "' .. url .. '"')
-end
+function openLinkInBackground(url) hs.execute('open -g "' .. url .. '"') end
