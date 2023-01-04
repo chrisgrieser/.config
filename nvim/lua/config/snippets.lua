@@ -203,6 +203,7 @@ add("javascript", {
 	snip("replace", 'replace(/${1:regexp}/${2:flags}, "${3:replacement}");'),
 	snip("ternary", "${1:cond} ? ${2:then} : ${3:else}"),
 	snip("ISO date", "new Date().toISOString().slice(0, 10);"),
+	snip("ignore (prettier)", "// prettier-ignore\n$0"),
 })
 
 -- JXA-specific
@@ -274,7 +275,6 @@ add("javascript", {
 	snip("argv", [[
 		function run(argv){
 			const ${1:query} = argv[0];
-
 		}
 	]]),
 	snip("Modifiers (Script Filter)", [[
