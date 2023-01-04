@@ -110,6 +110,10 @@ local function themeModifications()
 		setHighlight("VirtColumn", "guifg=#323036")
 		linkHighlight("UfoFoldedBg", "Folded")
 
+	-- zephyr
+	elseif theme == "zephyr" then
+		customHighlights() -- needs to be loaded more often?!
+
 	-- dawnfox
 	elseif theme == "dawnfox" then
 		setHighlight("IndentBlanklineChar", "guifg=#deccba")
