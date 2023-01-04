@@ -23,7 +23,6 @@ fi
 
 cd "./$repoName" || exit 1
 
-QUERY="local"
 if ! pgrep "neovide"; then
 	# INFO cannot start neovide cli from Alfred https://github.com/neovide/neovide/issues/1604
 	open -a "Neovim" # opens neovide frameless

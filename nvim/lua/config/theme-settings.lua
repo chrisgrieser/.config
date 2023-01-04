@@ -74,9 +74,6 @@ local function themeModifications()
 		-- HACK bugfix for https://github.com/neovim/neovim/issues/20456
 		linkHighlight("luaParenError.highlight", "NormalFloat")
 		linkHighlight("luaParenError", "NormalFloat")
-
-		-- linkHighlight("ScrollbarHandle", "FloatShadow")
-
 		local modes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 		for _, v in pairs(modes) do
 			setHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
@@ -84,7 +81,6 @@ local function themeModifications()
 		end
 		setHighlight("GitSignsChange", "guifg=#acaa62")
 		setHighlight("GitSignsAdd", "guifg=#7fcc82")
-		linkHighlight("ScrollView", "Folded")
 
 	-- oxocarbon
 	elseif theme == "oxocarbon" then
@@ -93,13 +89,7 @@ local function themeModifications()
 
 	-- rose-pine
 	elseif theme == "rose-pine" then
-		if mode == "dark" then
-			linkHighlight("ScrollView", "FloatShadow")
-			linkHighlight("IndentBlanklineChar", "FloatBorder")
-		elseif mode == "light" then
-			setHighlight("ScrollView", "guibg=#bb8861")
-			linkHighlight("IndentBlanklineChar", "FloatBorder")
-		end
+		linkHighlight("IndentBlanklineChar", "FloatBorder")
 		local blueHlgroups = {
 			"@keyword",
 			"@include",
@@ -115,7 +105,7 @@ local function themeModifications()
 
 	-- kanagawa
 	elseif theme == "kanagawa" then
-		setHighlight("ScrollView", "guibg=#303050")
+		-- setHighlight("ScrollView", "guibg=#303050")
 		setHighlight("VirtColumn", "guifg=#323036")
 		linkHighlight("UfoFoldedBg", "Folded")
 

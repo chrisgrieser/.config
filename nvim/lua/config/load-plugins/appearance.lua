@@ -55,8 +55,11 @@ return {
 	},
 	{ -- quickfix in sign column
 		"dhruvasagar/vim-markify",
-		init = function() vim.g.markify_info_text = "" end,
-		event = "VeryLazy",
+		init = function()
+			vim.g.markify_info_text = ""
+			vim.g.markify_echo_current_message = 0
+		end,
+		event = "QuickFixCmdPost",
 	},
 	{ -- nicer colorcolumn
 		"xiyaowong/virtcolumn.nvim",
