@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 #───────────────────────────────────────────────────────────────────────────────
-# restart: `brew services restart sketchybar`
-# reload (does only update items, not the look of the bar): `sketchybar --update`
 # INFO: After app update, needs to be re-granted screen recording permissions
-# Alternative: https://github.com/cmacrae/spacebar
 #───────────────────────────────────────────────────────────────────────────────
 
 # ensure Stats.app is running
@@ -18,7 +15,7 @@ menu_items=$(sketchybar --query default_menu_items)
 network_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*network" | cut -d\" -f2)
 cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | cut -d\" -f2)
 gpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*gpu" | cut -d\" -f2)
-ram_bar_item="Stats,RAM"
+ram_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*ram" | head -n1 | cut -d\" -f2)
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -60,18 +57,18 @@ sketchybar \
 	padding_left=0 padding_right=0 color="$BG_COLOR" \
 	\
 	--default \
-	updates=when_shown drawing=on align=left icon.font="Noto Emoji:Bold:16" icon.color="$FONT_COLOR" \
+	updates=when_shown drawing=on align=left \
+	icon.font="Noto Emoji:Bold:16" icon.color="$FONT_COLOR" \
 	label.font="Recursive:Medium:15.5" label.color="$FONT_COLOR" \
 	icon.padding_left=2 icon.padding_right=1 \
 	label.padding_left=2 label.padding_right=10 \
-	popup.drawing=true popup.horizontal=true popup.y_offset="$POPUP_Y_OFFSET" y_offset="$ITEM_Y_OFFSET" \
+	popup.drawing=true popup.horizontal=true popup.topmost=true \
+	popup.y_offset="$POPUP_Y_OFFSET" y_offset="$ITEM_Y_OFFSET" \
 	\
 	--add item clock left \
 	--set clock update_freq=1 \
 	script="$PLUGIN_DIR/clock.sh" \
 	background.padding_left=5 \
-	\
-	--add alias "Control Centre,Clock" left \
 	\
 	--add item covid-stats left \
 	--set covid-stats update_freq=43200 \
@@ -91,12 +88,12 @@ sketchybar \
 	--set "$gpu_bar_item" width=55 \
 	\
 	--add alias "$network_bar_item" $second_set \
-	--set "$network_bar_item" width=65 \
+	--set "$network_bar_item" width=50 \
 	\
 	--add alias "Control Centre,WiFi" $second_set \
 	--set "Control Centre,WiFi" \
 	\
-	--add item git-sync-bar-icon popup.clock \
+	--add item git-sync-bar-icon $second_set \
 	--set git-sync-bar-icon update_freq=300 \
 	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
 	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
@@ -111,5 +108,8 @@ sketchybar \
 # run in an item script.
 # - `repo-files-update` gets triggered via Hammerspoon path watcher after sync events
 # - clock and alias items needs the fixed-width to fix whitespace of the item next (stats)
+# - not using builtin clock, to be able to customize font etc.
+# - only existing items are loaded, so e.g. WiFi does not get shown when
+# disabled outside of the office
 
 echo "Sketchybar configuration loaded."

@@ -12,7 +12,7 @@
 				<key>destinationuid</key>
 				<string>986C033D-6BCE-4098-9098-F4A46BF1703B</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Reload Sketchybar</string>
 				<key>vitoclose</key>
@@ -288,7 +288,7 @@ brew services restart sketchybar</string>
 				<key>keyword</key>
 				<string>bar</string>
 				<key>subtext</key>
-				<string>↵:Restart, ⌘↵: Reload</string>
+				<string>↵: Restart     ⌘↵: Reload</string>
 				<key>text</key>
 				<string>❗️ Restart SketchyBar</string>
 				<key>withspace</key>
@@ -371,7 +371,7 @@ brew services restart sketchybar</string>
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>320</real>
 		</dict>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<dict>
