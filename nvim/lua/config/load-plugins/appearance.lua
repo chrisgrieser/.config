@@ -10,6 +10,7 @@ return {
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
+		event = "VimEnter", -- not using "VeryLazy", so the lines appear a bit quicker
 		config = function()
 			require("indent_blankline").setup {
 				show_current_context = true, -- active indent
@@ -42,14 +43,12 @@ return {
 	-- },
 	{
 		"lewis6991/satellite.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("satellite").setup {
-				winblend = 85,
-				width = 2,
+				winblend = 40, -- winblend = transparency
 				handlers = {
-					marks = {
-						enable = false,
-					},
+					marks = { enable = false },
 				},
 			}
 		end,
@@ -57,6 +56,7 @@ return {
 	{ -- quickfix in sign column
 		"dhruvasagar/vim-markify",
 		init = function() vim.g.markify_info_text = "" end,
+		event = "VeryLazy",
 	},
 	{ -- nicer colorcolumn
 		"xiyaowong/virtcolumn.nvim",

@@ -75,6 +75,8 @@ local function themeModifications()
 		linkHighlight("luaParenError.highlight", "NormalFloat")
 		linkHighlight("luaParenError", "NormalFloat")
 
+		-- linkHighlight("ScrollbarHandle", "FloatShadow")
+
 		local modes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 		for _, v in pairs(modes) do
 			setHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
