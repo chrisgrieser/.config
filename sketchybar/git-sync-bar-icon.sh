@@ -6,23 +6,23 @@
 # script plus trigger it after sync events via Hammerspoon
 
 cd "$DOTFILE_FOLDER" || configError="repo-path wrong"
-dotfiles=$(git status --short)
+dotfiles=$(git --no-optional-locks status --short)
+dotChanges=$(echo "$dotfiles" | wc -l | td -d " ")
+[[ "$dotfiles" =~ " m " ]] && dotChanges="$dotChanges!" # changes in submodules
 
 cd "$VAULT_PATH" || configError="repo-path wrong"
-vaultfiles=$(git status --porcelain)
+vaultfiles=$(git --no-optional-locks status --porcelain)
+vaultChanges=$(echo "$vaultfiles" | wc -l | td -d " ")
 
 passPath="$PASSWORD_STORE_DIR"
 [[ -z "$passPath" ]] && passPath="$HOME/.password-store"
 cd "$passPath" || configError="repo-path wrong"
-passfiles=$(git status --porcelain --branch | grep -Eo "\d") # to check for ahead/behind instead of untracked
+passfiles=$(git --no-optional-locks status --porcelain --branch | grep -Eo "\d") # to check for ahead/behind instead of untracked, since pass auto add-commits, but does not auto-push
 
-if [[ "$dotfiles" =~ " m " ]]; then # changes in submodules
+label="$dotChanges/$vaultChanges/$passfiles"
+label=${label/#\//} ; label=${label/\/%/}
+if [[ -n "$dotfiles" ]] || [[ -n "$vaultfiles" ]] || [[ -n "$passfiles" ]]; then
 	icon="痢"
-	label="!"
-elif [[ -n "$dotfiles" ]] || [[ -n "$vaultfiles" ]] || [[ -n "$passfiles" ]]; then
-	icon="痢"
-else
-	icon=""
 fi
 
 sketchybar --set "$NAME" icon="$icon$configError" label="$label$configError"

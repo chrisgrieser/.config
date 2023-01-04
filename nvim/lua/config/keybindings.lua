@@ -81,7 +81,12 @@ keymap("n", "gC", "g,", { desc = "goto previous change" })
 keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = "Telescope: quickfix list" })
 
 -- make cnext loop back https://vi.stackexchange.com/a/8535
-keymap("n", "gq", [[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]], { desc = "next quickfix item" })
+keymap(
+	"n",
+	"gq",
+	[[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]],
+	{ desc = "next quickfix item" }
+)
 -- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
 keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
@@ -192,7 +197,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "outdent" })
 keymap("n", "ü", "mzlblgueh~`z", { desc = "toggle capital/lowercase of word" })
 keymap("n", "Ü", "gUiw", { desc = "uppercase word" })
 keymap("n", "~", "~h", { desc = "switch char case w/o moving" })
-keymap("n", "ä", qol.wordSwitch, {desc = "switch common words"})
+keymap("n", "ä", qol.wordSwitch, { desc = "switch common words" })
 
 -- Append to / delete from EoL
 local trailingKeys = { ".", ",", ";", ":", '"', "'" }
@@ -218,7 +223,12 @@ keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc 
 keymap("n", "gw", cmd.ISwapWith, { desc = "exchange nodes (ISwap)" })
 
 -- search & replace
-keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//gcI<Left><Left><Left><Left>]], { desc = "search & replace" })
+keymap(
+	"n",
+	"<leader>f",
+	[[:%s/<C-r>=expand("<cword>")<CR>//gcI<Left><Left><Left><Left>]],
+	{ desc = "search & replace" }
+)
 keymap("x", "<leader>f", ":s///gcI<Left><Left><Left><Left><Left>", { desc = "search & replace" })
 keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "struct. search & replace" })
 keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
@@ -238,7 +248,7 @@ keymap(
 	"n",
 	"<leader>u",
 	function() require("telescope").extensions.undo.undo() end,
-	{ desc = "Telescope Undotree" }
+	{ desc = "Telescope: Undotree" }
 )
 
 -- Refactor
@@ -320,7 +330,6 @@ keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize" })
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = "Telescope: open buffers" })
 -- INFO: <BS> to cycle buffer has to be set in cybu config
 
-
 local altalt = require("funcs.alt-alt-file")
 keymap("n", "<CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/window" })
 
@@ -332,7 +341,6 @@ end
 
 -- CMD-Keybindings
 if isGui() then
-
 	keymap({ "n", "x", "i" }, "<D-s>", cmd.write, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
 	keymap("n", "<D-a>", "ggVG", { desc = "select all" }) -- cmd+a
 	keymap("i", "<D-a>", "<Esc>ggVG", { desc = "select all" })
@@ -384,19 +392,20 @@ keymap("n", "ga", ":ChatGPT<CR>", { desc = "AI: ChatGPT Prompt" })
 -- FILES
 
 -- File Switchers
-keymap("n", "go", function ()
+keymap("n", "go", function()
 	local isGitRepo = 0 == os.execute("test -e $(git rev-parse --show-toplevel)/.git") -- using test -e to check for repo and submodule
 	local cwd = expand("%:p:h")
 	local scope = "git_files"
-	if cwd:find("/nvim/") and not(cwd:find("/my%-plugins/")) then
-		scope = "find_files cwd="..fn.stdpath("config")
-	elseif not(isGitRepo) or cwd:find("/hammerspoon/") then
+	if cwd:find("/nvim/") and not (cwd:find("/my%-plugins/")) then
+		scope = "find_files cwd=" .. fn.stdpath("config")
+	elseif not isGitRepo or cwd:find("/hammerspoon/") then
 		scope = "find_files"
 	end
-	cmd("Telescope "..scope)
-end, { desc = "Telescope: Files in Folder / Git Repo" })
-keymap("n", "gr", function () cmd.Telescope("oldfiles") end, { desc = "Telescope: [R]ecent Files" })
-keymap("n", "gF", function () cmd.Telescope("live_grep") end, { desc = "Telescope: live grep (search in cwd)" })
+	cmd("Telescope " .. scope)
+end, { desc = "Telescope: Files in cwd / git repo" })
+keymap("n", "gO", function() cmd.Telescope("find_files") end, { desc = "Telescope: Files in cwd" })
+keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = "Telescope: [R]ecent Files" })
+keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = "Telescope: Text in cwd" })
 
 -- File Operations
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = "copy filepath" })
@@ -513,7 +522,7 @@ keymap("n", "<leader>r", function()
 		cmd.redir("@z")
 		-- silent, to not show up message (redirection still works)
 		-- make-command run is defined in bo.makeprg in the typescript ftplugin
-		cmd[[silent make]] 
+		cmd([[silent make]])
 		local output = fn.getreg("z"):gsub(".-\r", "") -- remove first line
 		local logLevel = output:find("error") and logError or logTrace
 		vim.notify(output, logLevel)
@@ -522,7 +531,7 @@ keymap("n", "<leader>r", function()
 	-- AppleScript
 	elseif ft == "applescript" then
 		cmd.AppleScriptRun()
-		cmd.wincmd("p")-- switch to previous window
+		cmd.wincmd("p") -- switch to previous window
 
 	-- None
 	else
