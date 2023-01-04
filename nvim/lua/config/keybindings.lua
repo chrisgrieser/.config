@@ -383,10 +383,16 @@ keymap("n", "ga", ":ChatGPT<CR>", { desc = "AI: ChatGPT Prompt" })
 -- FILES
 
 -- File Switchers
-keymap("n", "go", telescope.find_files, { desc = "Telescope: Files in cwd" })
-keymap("n", "gO", telescope.git_files, { desc = "Telescope: Git Files" })
+keymap("n", "go", function ()
+	local isGitRepo = 0 == os.execute("test -d $(git rev-parse --show-toplevel)/.git")
+	local 
+	if expand("%:p:h"):find("/%.config/nvim") or 
+	if bo.filetype == "lua"
+	local scope = isGitRepo and "git_files" or "find_files"
+	cmd.Telescope(scope)	
+end, { desc = "Telescope: Files in Folder / Git Repo" })
 keymap("n", "gr", telescope.oldfiles, { desc = "Telescope: [R]ecent Files" })
-keymap("n", "gF", telescope.live_grep, { desc = "Telescope: Search in cwd" })
+keymap("n", "gF", telescope.live_grep, { desc = "Telescope: live grep (search in cwd)" })
 
 -- File Operations
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = "copy filepath" })
@@ -414,23 +420,15 @@ keymap({ "n", "x" }, "<leader>gl", qol.gitLink, { desc = "git link" })
 keymap("n", "<leader>gg", qol.addCommitPush, { desc = "git add-commit-pull-push" })
 
 -- Diffview
-g.diffviewOpen = false
 keymap("n", "<leader>gd", function()
-	if g.diffviewOpen then
-		cmd.DiffviewClose()
-		g.diffviewOpen = false
-		return
-	end
 	vim.ui.input({ prompt = "Git Pickaxe (empty = full history)" }, function(query)
-		if not query then
-			return
-		elseif query == "" then
+		if not query then return end
+		if query == "" then
 			cmd("DiffviewFileHistory %")
 		else
 			cmd("DiffviewFileHistory % -G" .. query)
 		end
 		cmd.wincmd("w") -- go directly to file window
-		g.diffviewOpen = true
 	end)
 end)
 
