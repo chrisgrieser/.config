@@ -1,5 +1,6 @@
 require("config.utils")
 local opts = { buffer = true }
+local qol = require("funcs.quality-of-life")
 --------------------------------------------------------------------------------
 
 bo.grepprg = "rg --vimgrep --no-column" -- remove columns
@@ -12,7 +13,7 @@ end, { desc = "Search Navigation Markers", buffer = true })
 -- search only for variables
 keymap("n", "gS", function()
 	cmd([[silent! lgrep "^\s*--" %]]) -- riggrep-search for css variables
-	cmd[[Telescope loclist prompt_title="CSS Variables" fname_width=0]]
+	cmd[[Telescope loclist prompt_title=CSS\ Variables fname_width=0]]
 end, { desc = "Search CSS Variables", buffer = true })
 
 --------------------------------------------------------------------------------
