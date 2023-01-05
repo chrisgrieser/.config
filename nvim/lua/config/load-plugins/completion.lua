@@ -66,6 +66,7 @@ local source_icons = {
 }
 local function cmpconfig()
 	local cmp = require("cmp")
+	local compare = require("cmp.config.compare")
 
 	cmp.setup {
 		snippet = {
@@ -79,6 +80,21 @@ local function cmpconfig()
 			},
 			documentation = {
 				border = borderStyle,
+			},
+		},
+		sorting = {
+			-- disable exact matches getting higher priority https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
+			comparators = { 
+				compare.offset,
+				-- compare.exact,
+				-- compare.scopes,
+				compare.score,
+				compare.recently_used,
+				compare.locality,
+				compare.kind,
+				compare.sort_text,
+				compare.length,
+				compare.order,
 			},
 		},
 		mapping = cmp.mapping.preset.insert {
