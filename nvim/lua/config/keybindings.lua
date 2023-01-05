@@ -53,15 +53,15 @@ keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 -- Search
 keymap("n", "-", "/", { desc = "Search" })
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
-keymap("n", "+", "*", { desc = "search word under cursor (German keyboard)" })
-keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "visual star (I use `+` though)" })
+keymap("n", "+", "*", { desc = "Search word under cursor" })
+keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
 
 -- automatically do `:nohl` when done with search https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
-	if vim.fn.mode() == "n" then
+	if fn.mode() == "n" then
 		-- INFO table requires the original vim keys, not the remappings
-		local new_hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, vim.fn.keytrans(char))
-		if vim.opt.hlsearch:get() ~= new_hlsearch then vim.opt.hlsearch = new_hlsearch end
+		local new_hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, fn.keytrans(char))
+		if opt.hlsearch:get() ~= new_hlsearch then vim.opt.hlsearch = new_hlsearch end
 	end
 end, vim.api.nvim_create_namespace("auto_hlsearch"))
 
@@ -75,7 +75,7 @@ keymap("n", "<Esc>", function()
 		local clearPending = require("notify").pending() > 10
 		require("notify").dismiss { pending = clearPending }
 	end
-end, { desc = "clear highlights and notifications" })
+end, { desc = "clear highlights & notifications" })
 
 -- FOLDING
 keymap("n", "^", "za", { desc = "toggle fold" })
@@ -88,7 +88,6 @@ keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 keymap("n", "gc", "g;", { desc = "goto next change" })
 keymap("n", "gC", "g,", { desc = "goto previous change" })
-keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickfix list" })
 
 -- make cnext loop back https://vi.stackexchange.com/a/8535
 keymap(
@@ -97,6 +96,7 @@ keymap(
 	[[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]],
 	{ desc = "next quickfix item" }
 )
+keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickfix list" })
 -- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
 keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
@@ -113,7 +113,7 @@ keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = "paste without switching register" })
 -- so `dd` does not copy an empty line into the register
 keymap("n", "dd", function()
-	if fn.getline(".") == "" then return '"_dd' end ---@diagnostic disable-line: param-type-mismatch
+	if fn.getline("."):find("^%s*$") then return '"_dd' end ---@diagnostic disable-line: param-type-mismatch, undefined-field
 	return "dd"
 end, { expr = true })
 
@@ -294,8 +294,14 @@ keymap({ "n", "x" }, "<leader>lr", qlog.removelogs, { desc = "remove all log sta
 keymap( { "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { desc = "sort & highlight duplicates" })
 
 -- URL Opening
-keymap("n", "gx", qol.bettergx, { desc = "open next URL" })
-keymap("n", "gX", function() cmd.UrlView("buffer") end, { desc = "select URL to open" })
+keymap("n", "gx", function ()
+	require("various-textobjs").url() -- select url
+	normal("y")
+	
+end, {desc = "Smart URL Opener"})
+
+-- keymap("n", "gx", qol.bettergx, { desc = "open next URL" })
+-- keymap("n", "gX", function() cmd.UrlView("buffer") end, { desc = "select URL to open" })
 
 --------------------------------------------------------------------------------
 
