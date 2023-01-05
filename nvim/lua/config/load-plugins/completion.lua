@@ -152,8 +152,8 @@ local function cmpconfig()
 			s.snippets,
 			s.lsp,
 			s.tabnine,
-			s.emojis,
 			s.nerdfont, -- add nerdfont for config
+			s.emojis,
 			s.treesitter,
 			s.buffer,
 		},
@@ -164,8 +164,8 @@ local function cmpconfig()
 			s.snippets,
 			s.lsp,
 			s.tabnine,
-			s.emojis,
 			s.nerdfont, -- add nerdfont for config
+			s.emojis,
 			s.treesitter,
 			s.buffer,
 		},
@@ -207,8 +207,8 @@ local function cmpconfig()
 	-- ZSH
 	cmp.setup.filetype("sh", {
 		sources = cmp.config.sources {
-			s.zsh,
 			s.snippets,
+			s.zsh,
 			s.lsp,
 			s.tabnine,
 			s.treesitter,

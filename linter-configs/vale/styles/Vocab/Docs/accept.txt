@@ -40,3 +40,4 @@ textobj
 filetypes
 allows
 few
+etc

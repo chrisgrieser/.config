@@ -12,7 +12,9 @@ bo.comments = "b:-"
 bo.formatoptions = bo.formatoptions:gsub("[ct]", "") .. "ro"
 
 -- enable wrapping lines
-require("funcs.quality-of-life").toggleWrap()
+-- HACK for whatever reason, needs to be wrapped in a condition, otherwise it
+-- worn't trigger?!
+if not wo.wrap then require("funcs.quality-of-life").toggleWrap() end
 
 -- decrease line length without zen mode plugins 
 setlocal("signcolumn", "yes:9")

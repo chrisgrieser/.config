@@ -76,7 +76,7 @@ local function searchCounter()
 	local searchTerm = fn.getreg("/")
 	local isStarSearch = searchTerm:find([[^\<.*\>$]])
 	if isStarSearch then searchTerm = "*" .. searchTerm:sub(3, -3) end
-	if total == 0 then return " ".. searchTerm end
+	if total == 0 then return "窱".. searchTerm end
 	return " " .. current .. "/" .. total .. " " .. searchTerm
 end
 
