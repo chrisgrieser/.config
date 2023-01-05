@@ -45,7 +45,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("satellite").setup {
-				winblend = 40, -- winblend = transparency
+				winblend = 50, -- winblend = transparency
 				handlers = {
 					marks = { enable = false },
 				},
@@ -56,6 +56,7 @@ return {
 		"dhruvasagar/vim-markify",
 		init = function()
 			vim.g.markify_info_text = ""
+			vim.g.markify_echo_current_message = 0
 		end,
 		event = "QuickFixCmdPost",
 	},
@@ -66,7 +67,7 @@ return {
 	},
 	{ -- color previews & color utilities
 		"uga-rosa/ccc.nvim",
-		event = "VeryLazy",
+		event = "BufEnter", -- cannot use VeryLazy, since the first buffer entered would not get highlights
 		cond = function() return vim.g.neovide or vim.g.goneovim end, -- only load in GUI
 		config = function()
 			local ccc = require("ccc")
@@ -99,7 +100,6 @@ return {
 					["H"] = ccc.mapping.decrease5,
 				},
 			}
-			vim.cmd.CccHighlighterEnable() -- initialize once for the buffer where it's loaded
 		end,
 	},
 	{ -- auto-resize splits

@@ -36,9 +36,9 @@ end
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS (also applies to null-ls)
 -- stylua: ignore
-keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, { silent = true })
+keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, { desc = "LSP: Next Diagnostic" })
 -- stylua: ignore
-keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, { silent = true })
+keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, { desc = "LSP: Previous Diagnostic" })
 keymap("n", "<leader>d", function() vim.diagnostic.open_float { focusable = false } end)
 
 local function diagnosticFormat(diagnostic, mode)
@@ -145,7 +145,7 @@ autocmd("LspAttach", {
 
 		keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "LSP: Goto Definition", buffer = true })
 		keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "LSP: Goto Re[f]erence", buffer = true })
-		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, bufopts)
+		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, {buffer = true})
 		keymap("n", "<leader>h", vim.lsp.buf.hover, bufopts) -- docs popup
 
 		keymap({ "n", "x", "i" }, "<D-s>", function()
@@ -167,8 +167,8 @@ autocmd("LspAttach", {
 		end, bufopts)
 
 		if bo.filetype ~= "css" then -- don't override navigation marker search for css files
-			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, bufopts) -- overrides treesitter symbols browsing
-			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, bufopts)
+			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, {desc = "LSP: Document Symbols", buffer = true}) -- overrides treesitter symbols browsing
+			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, {desc = "LSP: Workspace Symbols", buffer = true})
 		end
 	end,
 })
