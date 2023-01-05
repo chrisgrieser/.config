@@ -33,7 +33,17 @@ local function config()
 		end
 	end
 
+	-- HACK to filter out annoying buggy messages from the satellite plugin: https://github.com/lewis6991/satellite.nvim/issues/36
+	local function banned(msg) -- https://github.com/rcarriga/nvim-notify/issues/114#issuecomment-1179754969
+		local ban = {
+			"^gitsigns ROW: %d+$",
+			"^line value outside of range$",
+		}		
+		if vim.tbl_contains(ban, msg) then return true end
+	end
+
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
+		if banned(msg) then return end
 		if type(msg) == "string" then
 			local isCodeOutput = msg:find("^{")
 			if isCodeOutput then return require("notify")(msg, level, opts) end

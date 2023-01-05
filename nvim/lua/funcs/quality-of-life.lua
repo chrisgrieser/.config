@@ -194,26 +194,6 @@ function M.wordSwitch()
 
 	opt.iskeyword = iskeywBefore
 end
---------------------------------------------------------------------------------
-
---- open URLs (non macOS needs to modify open comment)
-function M.bettergx()
-	local urlVimRegex =
-		[[https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*]] -- https://gist.github.com/tobym/584909
-	local urlLuaRegex = [[https?:?[^%s]+]] -- lua url regex being simple is okay, since vimregex runs before
-	local prevCur = getCursor(0)
-
-	normal("0") -- to prioritize URLs in the same line
-	local urlLineNr = fn.search(urlVimRegex, "wcz")
-	if urlLineNr == 0 then
-		vim.notify("No URL found in this file.", logWarn)
-	else
-		local urlLine = getline(urlLineNr)
-		local url = urlLine:match(urlLuaRegex)
-		os.execute('open "' .. url .. '"')
-	end
-	setCursor(0, prevCur)
-end
 
 --------------------------------------------------------------------------------
 -- UNDO
