@@ -137,15 +137,12 @@ vmap M :mergeLines
 " Add Blank Line above/below
 exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
 exmap blankAbove obcommand obsidian-editor-shortcuts:insertLineAbove
-" HACK since code editor shortcuts does move the cursor to the new line
+" HACK since code editor shortcuts does move the cursor to the new line, and
+" mz(...)`z cannot be used as m is mapped to matching
 nmap &a& :blankAbove
 nmap = &a&j
 nmap &b& :blankBelow
 nmap _ &b&k
-
-" append space after cursor position
-" exmap appendSpace jsfile Meta/obsidian-vim-helpers.js {appendSpace()}
-" nmap ! :appendSpace
 
 """"""""""""""""""""""""""""
 " Markdown/Obsidian specific
@@ -170,7 +167,7 @@ nmap ,x :toggleTask
 exmap gotoFootnoteDefinition obcommand obsidian-footnotes:insert-footnote
 nmap gd :gotoFootnoteDefinition
 
-" Prepend Bullet or Blockquote
+" Blockquote
 exmap toggleBlockquote obcommand editor:toggle-blockquote
 nmap ,< :toggleBlockquote
 nmap ,> :toggleBlockquote
