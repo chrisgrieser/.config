@@ -116,35 +116,44 @@ function M.wordSwitch()
 	local iskeywBefore = opt.iskeyword:get()
 	opt.iskeyword:remove { "_", "-", "." }
 
+	local generalWords = {
+		{ "true", "false" },
+		{ "false", "true" },
+		{ "show", "hide" },
+		{ "hide", "show" },
+		{ "disable", "enable" },
+		{ "enable", "disable" },
+		{ "on", "off" },
+		{ "off", "on" },
+	}
 	local ft = bo.filetype
-	local words
+	local ftWords
 	if ft == "lua" then
-		words = {
+		ftWords = {
 			{ "if", "elseif" },
 			{ "elseif", "else" },
 			{ "else", "if" },
 			{ "function", "local function" },
 		}
 	elseif ft == "bash" or ft == "zsh" or ft == "sh" then
-		words = {
+		ftWords = {
 			{ "if", "elif" },
 			{ "elif", "else" },
 			{ "else", "if" },
 		}
 	elseif ft == "javascript" or ft == "typescript" then
-		words = {
+		ftWords = {
 			{ "if", "else if" },
 			{ "else", "if" },
 			{ "const", "let" },
 			{ "let", "const" },
 		}
 	end
-	table.insert(words, {"true", "false"})
-	table.insert(words, {"false", "true"})
+	local words = table.concat
 
 	local cword = expand("<cword>")
 	local newWord = nil
-	for _, pair in pairs(words) do
+	for _, pair in pairs(ftWords) do
 		if cword == pair[1] then
 			newWord = pair[2]
 			break

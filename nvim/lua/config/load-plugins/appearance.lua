@@ -123,9 +123,9 @@ return {
 			require("headlines").setup {
 				markdown = {
 					fat_headlines = true,
-					fat_headline_lower_string = "▀",
 					fat_headline_upper_string = "",
-					codeblock_highlight = false, -- deactivated b/c of https://github.com/lukas-reineke/headlines.nvim/issues/44
+					fat_headline_lower_string = "▀",
+					codeblock_highlight = true, -- deactivated b/c of https://github.com/lukas-reineke/headlines.nvim/issues/44
 				},
 			}
 		end,
