@@ -161,7 +161,7 @@ rules:
           - shell_command: open -a 'zoom.us'
           - *deactivate-leader
           - *remove-notice
-      # [E]ditor: Neovim
+      # [E]ditor: Neovide
       - type: basic
         from: {key_code: e}
         conditions: [*leader-active]
@@ -169,9 +169,9 @@ rules:
           - shell_command: osascript -e 'tell application "Neovide" to activate'
           - *deactivate-leader
           - *remove-notice
-      # D[r]afts
+      # [j]: Drafts (mnemonic: jot down quickly)
       - type: basic
-        from: {key_code: r}
+        from: {key_code: j}
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Drafts'
@@ -324,6 +324,14 @@ rules:
           - shell_command: open 'https://www.messenger.com/'
           - *deactivate-leader
           - *remove-notice
+      # [R]eddit: neovim
+      - type: basic
+        from: {key_code: r}
+        conditions: [*leader-active]
+        to:
+          - shell_command: open 'https://www.reddit.com/r/neovim/'
+          - *deactivate-leader
+          - *remove-notice
       # [?] (w/o shift, German keyboard) man page
       - type: basic
         from: {key_code: hyphen}
@@ -337,7 +345,7 @@ rules:
           - shell_command: open -g 'hammerspoon://focus-help'
           - *deactivate-leader
           - *remove-notice
-      # [esc]: btop
+      # [esc]: System Monitor (btop)
       - type: basic
         from: {key_code: escape}
         conditions: [*leader-active]
