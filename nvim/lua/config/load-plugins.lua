@@ -44,17 +44,6 @@ return {
 		},
 	},
 
-	-- DAP
-	{
-		"mfussenegger/nvim-dap",
-		dependencies = {
-			"jayp0521/mason-nvim-dap.nvim",
-			"theHamsta/nvim-dap-virtual-text",
-			"rcarriga/nvim-dap-ui",
-			"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
-		},
-	},
-
 	-- Misc
 	{
 		"chrisgrieser/nvim-genghis",
