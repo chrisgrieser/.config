@@ -66,6 +66,8 @@ function M.cssDuplicateLine()
 		line = line:gsub("width", "height")
 	end
 
+	append(".", line) ---@diagnostic disable-line: param-type-mismatch
+
 	-- cursor moved to key if there is one
 	local lineNum, colNum = unpack(getCursor(0))
 	lineNum = lineNum + 1 -- line down
