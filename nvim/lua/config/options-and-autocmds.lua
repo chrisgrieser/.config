@@ -18,7 +18,7 @@ for _, char in pairs(undopointChars) do
 end
 
 -- timeouts
-opt.timeoutlen = 1500 -- for awaiting keystrokes when there is no `nowait`
+opt.timeoutlen = 700 -- for awaiting keystrokes when there is no `nowait`
 opt.updatetime = 250 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 
 -- Search
