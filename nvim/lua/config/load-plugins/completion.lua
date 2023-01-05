@@ -178,7 +178,7 @@ local function cmpconfig()
 			s.lsp,
 			s.tabnine,
 			s.emojis,
-			-- buffer and treesitter too lazzy on big files
+			-- buffer and treesitter too slow on big files
 		},
 	})
 
@@ -258,7 +258,7 @@ local function cmpconfig()
 	-- Command Line Completion
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
-		sources = {},
+		sources = {}, -- empty cause all suggestions do not help much?
 	})
 
 	cmp.setup.cmdline(":", {
