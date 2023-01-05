@@ -167,8 +167,10 @@ function M.wordSwitch()
 			{ "replace", "replaceAll" },
 		}
 	end
-	for _, item in pairs(ftWords) do
-		table.insert(words, item)
+	if ftWords then
+		for _, item in pairs(ftWords) do
+			table.insert(words, item)
+		end
 	end
 
 	local cword = expand("<cword>")
