@@ -73,9 +73,9 @@ return {
 					padding = { 0, 0, 0, 0 },
 					margin = { 0, 0, 0, 0 },
 				},
-				layout = { -- of columns
+				layout = { -- of the columns
 					height = { min = 4, max = 17 },
-					width = { min = 20, max = 30 },
+					width = { min = 20, max = 33 },
 					spacing = 1,
 				},
 			}
