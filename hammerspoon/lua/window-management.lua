@@ -182,7 +182,7 @@ function moveResize(win, pos, updateSketchy)
 	local i = 0 -- pseudo-timeout
 	while win and i < 30 and not (checkSize(win, pos)) do
 		win:moveToUnit(pos)
-		os.execute("sleep 0.05") -- since lua itself does not have a blocking wait function
+		os.execute("sleep 0.1") -- since lua itself does not have a blocking wait function
 	end
 end
 

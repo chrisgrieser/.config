@@ -269,7 +269,7 @@ keymap(
 local qlog = require("funcs.quicklog")
 keymap({ "n", "x" }, "<leader>ll", qlog.quicklog, { desc = "add log statement" })
 keymap({ "n", "x" }, "<leader>lb", qlog.beeplog, { desc = "add beep log" })
-keymap({ "n", "x" }, "<leader>lt", qlog.timelog, { desc = "log time" })
+keymap({ "n", "x" }, "<leader>lt", qlog.timelog, { desc = "add time log" })
 keymap({ "n", "x" }, "<leader>lr", qlog.removelogs, { desc = "remove all log statements" })
 
 -- Sort & highlight duplicate lines

@@ -220,9 +220,9 @@ rules:
             modifiers: [command, shift]
           - *deactivate-leader
           - *remove-notice
-      # [F]inder
+      # [L]: Finder (mnemonic: File [L]ocation)
       - type: basic
-        from: {key_code: f}
+        from: {key_code: l}
         conditions: [*leader-active]
         to:
           - shell_command: open -a "Finder"
@@ -314,6 +314,14 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: open 'https://web.telegram.org/z/'
+          - *deactivate-leader
+          - *remove-notice
+      # [F]acebook
+      - type: basic
+        from: {key_code: f}
+        conditions: [*leader-active]
+        to:
+          - shell_command: open 'https://www.messenger.com/'
           - *deactivate-leader
           - *remove-notice
       # [?] (w/o shift, German keyboard) man page

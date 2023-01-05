@@ -239,10 +239,20 @@ end)
 
 --------------------------------------------------------------------------------
 
+-- QuickLook: bigger window
+wf_quicklook = wf
+	.new(true) -- BUG for some reason, restricting this to "Finder" does not work
+	:setOverrideFilter({ allowRoles = "Quick Look" })
+	:subscribe(wf.windowCreated, function(newWin)
+		runWithDelays(0.4, function() moveResize(newWin, centered) end)
+	end)
+
+--------------------------------------------------------------------------------
+
 -- FINDER
 wf_finder = wf.new("Finder")
 	:setOverrideFilter({
-		rejectTitles = { "^Move$", "^Bin$", "^Copy$", "^Finder Settings$", " Info$", "^$" }, -- "^$" excludes the Desktop, which has no window title
+		rejectTitles = { "^Quick Look$", "^Move$", "^Bin$", "^Copy$", "^Finder Settings$", " Info$", "^$" }, -- "^$" excludes the Desktop, which has no window title
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})

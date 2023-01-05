@@ -94,8 +94,10 @@ local function currentFile()
 	if bo.buftype == "terminal" then
 		local mode = fn.mode() == "t" and "[T]" or "[N]"
 		return " Terminal " .. mode
-	elseif bo.buftype == "nofile" or (curFile == "" and ft ~= "") then
-		return " " .. ft -- special windows, e.g., lazy
+	elseif bo.buftype == "nofile" then
+		return " " .. curFile -- e.g. Codi
+	elseif curFile == "" and ft ~= "" then
+		return " " .. ft 
 	elseif curFile == "" and ft == "" then
 		return "%% [New]"
 	elseif curFile == altFile then
@@ -154,7 +156,7 @@ require("lualine").setup {
 				cond = function()
 					if not require("lazy.status").has_updates() then return false end
 					local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
-					return numberOfUpdates > 15
+					return numberOfUpdates > 5
 				end,
 				color = "NonText",
 			},
