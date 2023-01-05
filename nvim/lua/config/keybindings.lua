@@ -4,13 +4,13 @@ local qol = require("funcs.quality-of-life")
 -- META
 
 -- search keymaps
-keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = "Telescope: Keymaps" })
+keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = " Keymaps" })
 
 -- Theme Picker
-keymap("n", "<leader>T", function() cmd.Telescope("colorscheme") end, { desc = "Telescope: Colorschemes" })
+keymap("n", "<leader>T", function() cmd.Telescope("colorscheme") end, { desc = " Colorschemes" })
 
 -- Highlights
-keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = "Telescope: Highlight Groups" })
+keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
 -- Update [P]lugins
 keymap("n", "<leader>p", require("lazy").sync, { desc = ":Lazy sync" })
@@ -78,7 +78,7 @@ keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 keymap("n", "gc", "g;", { desc = "goto next change" })
 keymap("n", "gC", "g,", { desc = "goto previous change" })
-keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = "Telescope: quickfix list" })
+keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickfix list" })
 
 -- make cnext loop back https://vi.stackexchange.com/a/8535
 keymap(
@@ -238,7 +238,7 @@ keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
 keymap("n", "gR", "R", { desc = "replace mode" })
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
-keymap("n", "R", qol.smartDuplicateLine, { desc = "duplicate line" })
+keymap("n", "R", qol.smartDuplicateLine, { desc = "smart duplicate line" })
 keymap("x", "R", qol.duplicateSelection, { desc = "duplicate selection" })
 
 -- Undo
@@ -248,10 +248,10 @@ keymap(
 	"n",
 	"<leader>u",
 	function() require("telescope").extensions.undo.undo() end,
-	{ desc = "Telescope: Undotree" }
+	{ desc = " Undotree" }
 )
 
--- Refactor
+-- Refactor 
 keymap(
 	"n",
 	"<leader>i",
@@ -327,7 +327,7 @@ keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize" })
 --------------------------------------------------------------------------------
 -- BUFFERS & WINDOWS
 
-keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = "Telescope: open buffers" })
+keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " open buffers" })
 -- INFO: <BS> to cycle buffer has to be set in cybu config
 
 local altalt = require("funcs.alt-alt-file")
@@ -402,10 +402,10 @@ keymap("n", "go", function()
 		scope = "find_files"
 	end
 	cmd("Telescope " .. scope)
-end, { desc = "Telescope: Files in cwd / git repo" })
-keymap("n", "gO", function() cmd.Telescope("find_files") end, { desc = "Telescope: Files in cwd" })
-keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = "Telescope: [R]ecent Files" })
-keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = "Telescope: Text in cwd" })
+end, { desc = " Smart Find Files" })
+keymap("n", "gO", function() cmd.Telescope("find_files") end, { desc = " Files in cwd" })
+keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
+keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " Text in cwd" })
 
 -- File Operations
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = "copy filepath" })
@@ -531,15 +531,15 @@ keymap("n", "<leader>r", function()
 	else
 		vim.notify("No build system set.", logWarn)
 	end
-end)
+end, {desc = "Build System"})
 
 --------------------------------------------------------------------------------
 
 -- q / Esc to close special windows
-local opts = { buffer = true, nowait = true }
-augroup("quickQuit", {})
+local opts = { buffer = true, nowait = true, desc = "close" }
+augroup("quickClose", {})
 autocmd("FileType", {
-	group = "quickQuit",
+	group = "quickClose",
 	pattern = {
 		"help",
 		"startuptime",
@@ -560,16 +560,17 @@ autocmd("FileType", {
 
 -- HACK to remove the waiting time from the q, due to conflict with `qq`
 -- for comments
-opts = { buffer = true, nowait = true, remap = true }
+opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 autocmd("FileType", {
-	group = "quickQuit",
-	pattern = "TelescopePrompt",
-	callback = function() keymap("n", "q", "<Esc>", opts) end,
-})
-autocmd("FileType", {
-	group = "quickQuit",
-	pattern = "ssr",
-	callback = function() keymap("n", "q", "Q", opts) end,
+	group = "quickClose",
+	pattern = {"ssr", "TelescopePrompt"},
+	callback = function()
+		if bo.filetype == "ssr" then
+			keymap("n", "q", "Q", opts)
+		else
+			keymap("n", "q", "<Esc>", opts)
+		end
+   end,
 })
 
 --------------------------------------------------------------------------------

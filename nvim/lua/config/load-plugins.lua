@@ -56,17 +56,27 @@ return {
 	},
 
 	-- Misc
-	{ "chrisgrieser/nvim-genghis", dev = true, lazy = true, dependencies = "stevearc/dressing.nvim" },
+	{
+      "chrisgrieser/nvim-genghis",
+      dev = true,
+      lazy = true,
+      dependencies = "stevearc/dressing.nvim",
+   },
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		config = function()
 			require("which-key").setup {
-				ignore_missing = false,
 				window = {
 					border = "none", -- none to save space
 					padding = { 0, 0, 0, 0 },
 					margin = { 0, 0, 0, 0 },
+				},
+				layout = { -- of columns
+					height = { min = 4, max = 17 }, 
+					width = { min = 20, max = 30 }, 
+					spacing = 1, 
+					align = "left", 
 				},
 			}
 		end,

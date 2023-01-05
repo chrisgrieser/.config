@@ -19,14 +19,15 @@ require("mason-nvim-dap").setup {
 -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
 
 -- Lua (one-step-for-vimkind plugin)
-dap.configurations.lua = {{
-	type = "nlua",
-	request = "attach",
-	name = "Attach to running Neovim instance",
-}}
+dap.configurations.lua =
+	{ {
+		type = "nlua",
+		request = "attach",
+		name = "Attach to running Neovim instance",
+	} }
 
 dap.adapters.nlua = function(callback, config)
-	callback {type = "server", host = config.host or "127.0.0.1", port = config.port or 8086}
+	callback { type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 }
 end
 
 -- Node2
@@ -35,8 +36,8 @@ dap.adapters.node2 = {
 	type = "executable",
 	command = "node",
 	args = {
-		fn.stdpath("data") .. "/mason/packages/node-debug2-adapter/out/src/nodeDebug.js"
-	}
+		fn.stdpath("data") .. "/mason/packages/node-debug2-adapter/out/src/nodeDebug.js",
+	},
 }
 
 dap.configurations.javascript = {
@@ -54,36 +55,38 @@ dap.configurations.javascript = {
 		name = "Attach to process",
 		type = "node2",
 		request = "attach",
-		processId = require "dap.utils".pick_process,
+		processId = require("dap.utils").pick_process,
 	},
 }
 
 -- Bash
 dap.adapters.bashdb = {
-	type = "executable";
-	command = fn.stdpath("data") .. "/mason/packages/bash-debug-adapter/bash-debug-adapter";
-	name = "bashdb";
+	type = "executable",
+	command = fn.stdpath("data") .. "/mason/packages/bash-debug-adapter/bash-debug-adapter",
+	name = "bashdb",
 }
 
-dap.configurations.sh = {{
-	type = "bashdb";
-	request = "launch";
-	name = "Launch file";
-	showDebugOutput = true;
-	pathBashdb = fn.stdpath("data") .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb";
-	pathBashdbLib = fn.stdpath("data") .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir";
-	trace = true;
-	file = "${file}";
-	program = "${file}";
-	cwd = "${workspaceFolder}";
-	pathCat = "cat";
-	pathBash = "/bin/bash";
-	pathMkfifo = "mkfifo";
-	pathPkill = "pkill";
-	args = {};
-	env = {};
-	terminalKind = "integrated";
-}}
+dap.configurations.sh = {
+	{
+		type = "bashdb",
+		request = "launch",
+		name = "Launch file",
+		showDebugOutput = true,
+		pathBashdb = fn.stdpath("data") .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb",
+		pathBashdbLib = fn.stdpath("data") .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir",
+		trace = true,
+		file = "${file}",
+		program = "${file}",
+		cwd = "${workspaceFolder}",
+		pathCat = "cat",
+		pathBash = "/bin/bash",
+		pathMkfifo = "mkfifo",
+		pathPkill = "pkill",
+		args = {},
+		env = {},
+		terminalKind = "integrated",
+	},
+}
 
 --------------------------------------------------------------------------------
 -- DAP-RELATED PLUGINS
@@ -93,19 +96,17 @@ dapUI.setup()
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
 
-keymap("n", "7", dap.toggle_breakpoint)
--- wrap `continue` in this, since the nvim-lua-debugger has to be started
--- separately
+keymap("n", "7", dap.toggle_breakpoint, { desc = "  Toggle Breakpoint" })
 keymap("n", "8", function()
+	-- HACK wrap `continue` in this, since the nvim-lua-debugger has to be started separately
 	local dapRunning = dap.status() ~= ""
-	if not (dapRunning) and bo.filetype == "lua" then
+	if not dapRunning and bo.filetype == "lua" then
 		require("osv").run_this()
 	else
 		dap.continue()
 	end
 	wo.number = true
-end)
-
+end, { desc = "  Continue" })
 
 -- selection of dap-commands
 keymap("n", "<leader>b", function()
@@ -120,8 +121,8 @@ keymap("n", "<leader>b", function()
 		"Step out",
 		"Run to Cursor",
 	}
-	vim.ui.select(selection, {prompt = " DAP Command"}, function(choice)
-		if not (choice) then return end
+	vim.ui.select(selection, { prompt = " DAP Command" }, function(choice)
+		if not choice then return end
 		if choice:find("^Launch") then bo.number = true end
 
 		if choice == "Toggle DAP UI" then
@@ -137,13 +138,13 @@ keymap("n", "<leader>b", function()
 		elseif choice == "Clear Breakpoints" then
 			dap.clear_breakpoints()
 		elseif choice == "Conditional Breakpoint" then
-			vim.ui.input({prompt = "Breakpoint condition: "}, function (cond)
-				if not(cond) then return end
+			vim.ui.input({ prompt = "Breakpoint condition: " }, function(cond)
+				if not cond then return end
 				dap.set_breakpoint(cond)
 			end)
 		elseif choice == "Log Point" then
-			vim.ui.input({prompt = "Log point message: "}, function(msg)
-				if not (msg) then return end
+			vim.ui.input({ prompt = "Log point message: " }, function(msg)
+				if not msg then return end
 				dap.set_breakpoint(nil, nil, msg)
 			end)
 		elseif choice == "Terminate" then
@@ -151,9 +152,8 @@ keymap("n", "<leader>b", function()
 			dapUI.close()
 			dap.terminate()
 		end
-
 	end)
-end)
+end, { desc = " Debugging Action" })
 
 --------------------------------------------------------------------------------
 -- SIGN-COLUMN ICONS
