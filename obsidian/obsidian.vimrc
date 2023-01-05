@@ -53,9 +53,6 @@ nmap zl :contextMenu
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
 nmap ge :nextSuggestion
 
-exmap enableDiagnostics obsidian-languagetool-plugin:ltcheck-text
-nmap ,od :enableDiagnostics
-
 " Synonyms
 exmap synonymSuggestion obcommand obsidian-wordy:wordy-syn
 nmap zs :synonymSuggestion
@@ -88,13 +85,11 @@ vmap gs :gotoHeading
 
 " [g]oto [f]ile (= Follow Link under cursor)
 exmap followLinkUnderCursor obcommand editor:follow-link
-exmap followLinkInNewTab obcommand editor:open-link-in-new-leaf
 nmap gx :followLinkUnderCursor
 nmap gf :followLinkUnderCursor
-nmap gF :followLinkInNewTab
-vmap gx :followLinkUnderCursor
-vmap gf :followLinkUnderCursor
-vmap gF :followLinkInNewTab
+
+exmap live-grep obcommand obsidian-another-quick-switcher:grep
+nmap gF :live-grep
 
 " [g]oto [o]pen file (= Quick Switcher)
 exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_recent-search
@@ -102,7 +97,7 @@ nmap go :quickSwitcher
 vmap go :quickSwitcher
 
 " go to last change - https://vimhelp.org/motion.txt.html#g%3B
-nmap g; u<C-r>
+nmap gc u<C-r>
 
 """"""""""""""""""""""
 " Editing
@@ -114,7 +109,6 @@ nmap x "_dl
 
 " UNDO consistently on one key
 nmap U <C-r>
-vmap U <C-r>
 
 " Case Switch via Smarter MD Hotkeys Plugin
 exmap caseSwitch obcommand obsidian-smarter-md-hotkeys:smarter-upper-lower
@@ -292,10 +286,14 @@ nmap S vg$p
 exmap number obcommand obsidian-smarter-md-hotkeys:toggle-line-numbers
 exmap readableLineLength obcommand obsidian-smarter-md-hotkeys:toggle-readable-line-length
 exmap spellcheck obcommand editor:toggle-spellcheck
+exmap enableDiagnostics obsidian-languagetool-plugin:ltcheck-text
 
 " [O]ption: line [n]umbers
 map ,on :number
 " [O]ption: [s]pellcheck
 map ,os :spellcheck
-" [O]ption: line [w]rap
+" [O]ption: [w]rap
 map ,ow :readableLineLength
+" [O]ption: [d]iagnostics (language tool check)
+nmap ,od :enableDiagnostics
+
