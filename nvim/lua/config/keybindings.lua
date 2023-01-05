@@ -95,11 +95,17 @@ keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
 -- CLIPBOARD
 opt.clipboard = "unnamedplus"
 
+-- keep the register clean
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
+keymap("n", "cc", '"_cc')
 keymap("n", "C", '"_C')
-keymap("n", "dd", '"_dd')
 keymap("x", "p", "P", { desc = "paste without switching register" })
+-- so `dd` does not copy an empty line into the register
+keymap("n", "dd", function ()
+	if fn.getline(".") == "" then return '"_dd' end ---@diagnostic disable-line: param-type-mismatch
+	return "dd"
+end, {expr = true})
 
 -- yanking without moving the cursor
 augroup("yankImprovements", {})
