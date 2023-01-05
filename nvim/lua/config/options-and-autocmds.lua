@@ -156,7 +156,7 @@ local function remember(mode)
 		"qf",
 	}
 	if vim.tbl_contains(ignoredFts, bo.filetype) or bo.buftype == "nofile" or not bo.modifiable then return end
-	if mode == "load" then
+	if mode == "save" then
 		cmd.mkview(1)	
 	else
 		cmd([[silent! loadview 1]]) -- needs silent to avoid error for documents that do not have a view yet (opening first time)
