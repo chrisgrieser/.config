@@ -49,12 +49,6 @@ local function isStandardBranch() -- not checking for branch here, since running
 	return notMainBranch and validFiletype
 end
 
-local function debuggerStatus()
-	local dapStatus = require("dap").status()
-	if dapStatus == "" then return "" end
-	return "  " .. dapStatus
-end
-
 -- NAVIC
 local navic = require("nvim-navic")
 navic.setup {
@@ -166,7 +160,6 @@ require("lualine").setup {
 		},
 		lualine_z = {
 			{ require("recorder").recordingStatus, section_separators = topSeparators },
-			{ debuggerStatus, section_separators = topSeparators },
 		},
 	},
 	options = {
@@ -176,6 +169,7 @@ require("lualine").setup {
 		ignore_focus = {
 			"TelescopePrompt",
 			"DressingInput",
+			"DressingSelect",
 			"Mason",
 			"ccc-ui",
 			"",
@@ -183,7 +177,6 @@ require("lualine").setup {
 		globalstatus = true,
 		component_separators = { left = "", right = "" },
 		section_separators = bottomSeparators,
-		extensions = { "nvim-dap-ui" },
 		disabled_filetypes = {
 			statusline = {},
 			winbar = {},
