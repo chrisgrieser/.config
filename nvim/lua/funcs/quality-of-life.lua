@@ -118,10 +118,12 @@ function M.wordSwitch()
 
 	local words = {
 		{ "true", "false" },
-		{ "show", "hide" },
+		{ "<=", ">=" },
+		{ "on", "off" },
+		{ "yes", "no" },
 		{ "disable", "enable" },
 		{ "disabled", "enabled" },
-		{ "on", "off" },
+		{ "show", "hide" },
 		{ "right", "left" },
 		{ "top", "bottom" },
 		{ "width", "height" },
@@ -132,6 +134,7 @@ function M.wordSwitch()
 	local ftWords -- 3rd item false if 2nd item shouldn't also switch to first
 	if ft == "lua" then
 		ftWords = {
+			{ "~=", "==" },
 			{ "if", "elseif", false },
 			{ "elseif", "else", false },
 			{ "else", "if", false },
@@ -150,6 +153,7 @@ function M.wordSwitch()
 		}
 	elseif ft == "javascript" or ft == "typescript" then
 		ftWords = {
+			{ "!==", "===" },
 			{ "if", "else if", false },
 			{ "else", "if", false },
 			{ "const", "let" },

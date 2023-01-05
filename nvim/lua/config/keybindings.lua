@@ -531,7 +531,7 @@ keymap("n", "<leader>r", function()
 	else
 		vim.notify("No build system set.", logWarn)
 	end
-end, {desc = "Build System"})
+end, { desc = "Build System" })
 
 --------------------------------------------------------------------------------
 
@@ -563,14 +563,27 @@ autocmd("FileType", {
 opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 autocmd("FileType", {
 	group = "quickClose",
-	pattern = {"ssr", "TelescopePrompt"},
+	pattern = { "ssr", "TelescopePrompt" },
 	callback = function()
 		if bo.filetype == "ssr" then
 			keymap("n", "q", "Q", opts)
 		else
 			keymap("n", "q", "<Esc>", opts)
 		end
-   end,
+	end,
 })
 
 --------------------------------------------------------------------------------
+
+g.delayTrain = 0
+vim.keymap.set("n", key, function()
+	if count <= 10 then
+	else
+		count = count + 1
+		vim.defer_fn(function() count = count - 1 end, 3000) ---@diagnostic disable-line: param-type-mismatch
+		return key
+	end
+end, { expr = true })
+for _, key in ipairs { "h", "l" } do
+	local count = 0
+end

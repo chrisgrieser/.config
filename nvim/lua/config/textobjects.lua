@@ -92,8 +92,8 @@ keymap( { "x", "o" }, "iR", function() require("various-textobjs").doubleSquareB
 keymap( { "x", "o" }, "aR", function() require("various-textobjs").doubleSquareBrackets(false) end, { desc = "outer double square bracket" })
 
 -- ii/ai: indentation textobj
-keymap({ "x", "o" }, "ii", function() require("various-textobjs").indentation(true, true) end, { desc = "inner indentation textobj" })
-keymap({ "x", "o" }, "ai", function() require("various-textobjs").indentation(false, false) end, { desc = "outer indentation textobj" })
+keymap({ "x", "o" }, "ii", function() require("various-textobjs").indentation(true, true) end, { desc = "inner indent textobj" })
+keymap({ "x", "o" }, "ai", function() require("various-textobjs").indentation(false, false) end, { desc = "outer indent textobj" })
 -- stylua: ignore end
 
 augroup("IndentedFileTypes", {})
@@ -106,7 +106,7 @@ autocmd("FileType", {
 				{ "x", "o" },
 				"ai",
 				function() require("various-textobjs").indentation(false, true) end,
-				{ buffer = true, desc = "indentation textobj with start border" }
+				{ buffer = true, desc = "indent textobj w/ start border" }
 			)
 		end
 	end,
@@ -125,8 +125,8 @@ local doubleSquareBracketObjChar = "R"
 local regexObjChar = "/"
 
 -- HACK define these manually, since for some reason they do not work by default
-keymap("n", "yss", "ys_", { remap = true })
-keymap("n", "yS", "ys$", { remap = true })
+keymap("n", "yss", "ys_", { remap = true, desc = "surround line" })
+keymap("n", "yS", "ys$", { remap = true, desc = "surround till EoL"})
 
 local config = require("nvim-surround.config")
 

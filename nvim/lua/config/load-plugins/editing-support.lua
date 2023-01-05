@@ -3,7 +3,7 @@ return {
 	"numToStr/Comment.nvim", -- comment operator
 	{ "mg979/vim-visual-multi", keys = { "<D-j>", { "<D-j>", mode = "x" } } },
 	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, -- custom textobjects
-	"kylechui/nvim-surround", 
+	"kylechui/nvim-surround",
 
 	{
 		"mizlan/iswap.nvim", -- swapping of notes
@@ -48,10 +48,8 @@ return {
 	{
 		"unblevable/quick-scope",
 		keys = { "f", "F", "t", "T" },
-		init = function()
-			vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" } -- needs to be enabled before
-		end,
-		config = function() cmd.highlight { "def link QuickScopePrimary CurSearch", bang = true } end,
+		init = function() vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" } end,
+		config = function() vim.cmd.highlight { "def link QuickScopePrimary CurSearch", bang = true } end,
 	},
 	{
 		"gbprod/substitute.nvim", -- substitution & exchange operator
@@ -76,9 +74,10 @@ return {
 			}
 		end,
 	},
-{
+	{
 		-- INFO has to be disabled during macro execution https://github.com/ja-ford/delaytrain.nvim/issues/8
 		"ja-ford/delaytrain.nvim",
+		enabled = false,
 		keys = { "h", "l" },
 		config = function()
 			require("delaytrain").setup {
@@ -89,5 +88,5 @@ return {
 				},
 			}
 		end,
-	}
+	},
 }
