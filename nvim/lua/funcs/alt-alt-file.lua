@@ -48,10 +48,10 @@ function M.altFileStatusline()
 
 	if altFile == "" and not altOldfile() then -- no oldfile and after start
 		return ""
-	elseif altFile:find("^diffview") then
-		return " File Diffview" -- diffview is ugly string otherwise
-	elseif altFile:find("^term") then
-		return " Terminal" -- term is ugly string otherwise
+	elseif altWindow() and altWindow():find("^diffview:") then
+		return " File Diffview" 
+	elseif altWindow() and altWindow():find("^term:") then
+		return " Terminal" 
 	elseif altWindow() then
 		return "  " .. altWindow()
 	elseif altFile == "" and altOldfile() then
