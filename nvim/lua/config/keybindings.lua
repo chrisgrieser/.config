@@ -98,6 +98,7 @@ opt.clipboard = "unnamedplus"
 keymap("n", "x", '"_x')
 keymap("n", "c", '"_c')
 keymap("n", "C", '"_C')
+keymap("n", "dd", '"_dd')
 keymap("x", "p", "P", { desc = "paste without switching register" })
 
 -- yanking without moving the cursor
