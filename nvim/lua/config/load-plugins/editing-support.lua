@@ -56,19 +56,6 @@ return {
 		lazy = true,
 		config = function() require("substitute").setup() end,
 	},
-	{
-		"asiryk/auto-hlsearch.nvim", -- automate :nohl
-		keys = { "n", "N" },
-		cmd = "AutoHlsearch",
-		init = function()
-			require("auto-hlsearch").setup {
-				remap_keys = { "n", "N" },
-			}
-			vim.keymap.set("n", "-", ":AutoHlsearch<CR>/")
-			vim.keymap.set("n", "+", ":AutoHlsearch<CR>*")
-			vim.keymap.set("x", "-", "<Esc>:AutoHlsearch<CR>/\\%V")
-		end,
-	},
 
 	{
 		"chrisgrieser/nvim-recorder", -- better macros
@@ -77,7 +64,7 @@ return {
 		config = function()
 			require("recorder").setup {
 				clear = true,
-				logLevel = logTrace,
+				logLevel = vim.log.levels.TRACE,
 				mapping = {
 					startStopRecording = "0",
 					playMacro = "9",
