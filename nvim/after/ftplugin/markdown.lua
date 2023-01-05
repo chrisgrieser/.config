@@ -2,25 +2,21 @@ require("config.utils")
 local opts = { buffer = true, silent = true }
 --------------------------------------------------------------------------------
 
--- hide URLs and other formatting, TODO figure out how to hide only URLs
--- setlocal("conceallevel", 2)
-
 -- spellcheck
-setlocal("spell", true)
+-- api.nvim_set_option_value("spell", true, { scope = "local" })
+wo.spell = true
 
 -- HACK to make lists auto-continue via Return in Insert & o in normal mode
 -- i.e. replaces bullet.vim based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
-setlocal("comments", "b:-")
-local foOpts = getlocalopt("formatoptions"):gsub("[ct]", "") .. "ro"
-setlocal("formatoptions", foOpts)
+bo.comments = "b:-"
+bo.formatoptions = bo.formatoptions:gsub("[ct]", "") .. "ro"
 
 -- enable wrapping lines
 if not wo.wrap then require("funcs.quality-of-life").toggleWrap() end
 
 -- decrease line length without zen mode plugins (which unfortunately remove
 -- statuslines and stuff)
-setlocal("signcolumn", "yes:9")
-setlocal("colorcolumn", "")
+bo.signcolumn = "yes:9"
 
 --------------------------------------------------------------------------------
 -- link textobj
