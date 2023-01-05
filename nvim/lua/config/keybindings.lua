@@ -200,7 +200,7 @@ keymap("n", "~", "~h", { desc = "switch char case w/o moving" })
 keymap("n", "ä", qol.wordSwitch, { desc = "switch common words" })
 
 -- Append to / delete from EoL
-local trailingKeys = { ".", ",", ";", ":", '"', "'" }
+local trailingKeys = { ".", ",", ";", ":", '"', "'", ")", "}", "]" }
 for _, v in pairs(trailingKeys) do
 	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = "append " .. v .. " to EoL" })
 end
@@ -226,10 +226,10 @@ keymap("n", "gw", cmd.ISwapWith, { desc = "exchange nodes (ISwap)" })
 keymap(
 	"n",
 	"<leader>f",
-	[[:%s/<C-r>=expand("<cword>")<CR>//gcI<Left><Left><Left><Left>]],
+	[[:%s/<C-r>=expand("<cword>")<CR>//gI<Left><Left><Left>]],
 	{ desc = "search & replace" }
 )
-keymap("x", "<leader>f", ":s///gcI<Left><Left><Left><Left><Left>", { desc = "search & replace" })
+keymap("x", "<leader>f", ":s///gI<Left><Left><Left><Left>", { desc = "search & replace" })
 keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "struct. search & replace" })
 keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
 keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
@@ -469,12 +469,6 @@ end, { desc = "toggle diagnostics" })
 -- TERMINAL AND CODI
 keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = "Esc (Normal Mode in Terminal)" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = "Paste in Terminal Mode" })
-augroup("terminal", {})
-autocmd("FileType", {
-	group = "terminal",
-	pattern = "toggleterm",
-	callback = function() keymap("n", "<CR>", "i<CR>", { desc = "Accept Terminal Input", buffer = true }) end,
-})
 
 keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = "ToggleTerm" })
 keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "Selection to ToggleTerm" })

@@ -50,6 +50,8 @@ function M.altFileStatusline()
 		return ""
 	elseif altFile:find("^diffview") then
 		return " File Diffview" -- diffview is ugly string otherwise
+	elseif altFile:find("^term") then
+		return " Terminal" -- term is ugly string otherwise
 	elseif altWindow() then
 		return "  " .. altWindow()
 	elseif altFile == "" and altOldfile() then
