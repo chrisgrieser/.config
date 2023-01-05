@@ -51,8 +51,21 @@ keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Search
--- keymap("n", "-", "/", { desc = "Search" })
--- keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
+keymap("n", "-", "/", { desc = "Search" })
+keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
+keymap("n", "+", "*", { desc = "search word under cursor (German keyboard)" })
+keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "visual star (I use `+` though)" })
+
+-- automatically do `:nohl` when done with search https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
+vim.on_key(function(char)
+	if vim.fn.mode() == "n" then
+		-- INFO table requires the original vim keys, not the remappings
+		local new_hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, vim.fn.keytrans(char))
+		if vim.opt.hlsearch:get() ~= new_hlsearch then vim.opt.hlsearch = new_hlsearch end
+	end
+end, vim.api.nvim_create_namespace("auto_hlsearch"))
+
+--------------------------------------------------------------------------------
 
 keymap("n", "<Esc>", function()
 	cmd.nohlsearch()
@@ -63,9 +76,6 @@ keymap("n", "<Esc>", function()
 		require("notify").dismiss { pending = clearPending }
 	end
 end, { desc = "clear highlights and notifications" })
-
-keymap("n", "+", "*", { desc = "search word under cursor (German keyboard)" })
-keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "visual star (I use `+` though)" })
 
 -- FOLDING
 keymap("n", "^", "za", { desc = "toggle fold" })
@@ -102,10 +112,10 @@ keymap("n", "cc", '"_cc')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = "paste without switching register" })
 -- so `dd` does not copy an empty line into the register
-keymap("n", "dd", function ()
+keymap("n", "dd", function()
 	if fn.getline(".") == "" then return '"_dd' end ---@diagnostic disable-line: param-type-mismatch
 	return "dd"
-end, {expr = true})
+end, { expr = true })
 
 -- yanking without moving the cursor
 augroup("yankImprovements", {})
