@@ -116,46 +116,58 @@ function M.wordSwitch()
 	local iskeywBefore = opt.iskeyword:get()
 	opt.iskeyword:remove { "_", "-", "." }
 
-	local generalWords = {
+	local words = {
 		{ "true", "false" },
-		{ "false", "true" },
 		{ "show", "hide" },
-		{ "hide", "show" },
 		{ "disable", "enable" },
-		{ "enable", "disable" },
+		{ "disabled", "enabled" },
 		{ "on", "off" },
-		{ "off", "on" },
+		{ "right", "left" },
+		{ "top", "bottom" },
+		{ "width", "height" },
+		{ "relative", "absolute" },
+		{ "dark", "light" },
 	}
 	local ft = bo.filetype
-	local ftWords
+	local ftWords -- 3rd item false if 2nd item shouldn't also switch to first
 	if ft == "lua" then
 		ftWords = {
-			{ "if", "elseif" },
-			{ "elseif", "else" },
-			{ "else", "if" },
-			{ "function", "local function" },
+			{ "if", "elseif", false },
+			{ "elseif", "else", false },
+			{ "else", "if", false },
+			{ "function", "local function", false },
+			{ "pairs", "ipairs" },
+		}
+	elseif ft == "python" then
+		ftWords = {
+			{ "True", "False" },
 		}
 	elseif ft == "bash" or ft == "zsh" or ft == "sh" then
 		ftWords = {
-			{ "if", "elif" },
-			{ "elif", "else" },
-			{ "else", "if" },
+			{ "if", "elif", false },
+			{ "elif", "else", false },
+			{ "else", "if", false },
 		}
 	elseif ft == "javascript" or ft == "typescript" then
 		ftWords = {
-			{ "if", "else if" },
-			{ "else", "if" },
+			{ "if", "else if", false },
+			{ "else", "if", false },
 			{ "const", "let" },
-			{ "let", "const" },
+			{ "replace", "replaceAll" },
 		}
 	end
-	local words = table.concat
+	for _, item in pairs(ftWords) do
+		table.insert(words, item)
+	end
 
 	local cword = expand("<cword>")
 	local newWord = nil
-	for _, pair in pairs(ftWords) do
+	for _, pair in pairs(words) do
 		if cword == pair[1] then
 			newWord = pair[2]
+			break
+		elseif cword == pair[2] and pair[3] ~= nil then
+			newWord = pair[1]
 			break
 		end
 	end

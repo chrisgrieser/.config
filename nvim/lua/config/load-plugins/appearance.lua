@@ -125,7 +125,7 @@ return {
 					fat_headlines = true,
 					fat_headline_upper_string = "",
 					fat_headline_lower_string = "▀",
-					codeblock_highlight = true, -- deactivated b/c of https://github.com/lukas-reineke/headlines.nvim/issues/44
+					-- codeblock_highlight = true, -- deactivated b/c of https://github.com/lukas-reineke/headlines.nvim/issues/44
 				},
 			}
 		end,
