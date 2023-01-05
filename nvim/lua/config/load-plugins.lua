@@ -17,7 +17,7 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			"p00f/nvim-ts-rainbow", -- WARN: no longer maintained
+			"mrjones2014/nvim-ts-rainbow", 
 		},
 	},
 
