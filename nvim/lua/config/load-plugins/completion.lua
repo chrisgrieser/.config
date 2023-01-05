@@ -82,9 +82,16 @@ local function cmpconfig()
 			},
 		},
 		mapping = cmp.mapping.preset.insert {
-			["<CR>"] = cmp.mapping.confirm { select = true },
+			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
 			["<S-Up>"] = cmp.mapping.scroll_docs(-4),
 			["<S-Down>"] = cmp.mapping.scroll_docs(4),
+			["<C-e>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.abort()
+				else
+					fallback()
+				end
+			end, { "i", "s" }),
 
 			-- expand or jump in luasnip snippet https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
 			["<Tab>"] = cmp.mapping(function(fallback)
@@ -168,7 +175,6 @@ local function cmpconfig()
 
 	cmp.setup.filetype("yaml", {
 		sources = cmp.config.sources {
-
 			lsp,
 			snippets,
 			treesitter, -- treesitter works good on yaml
