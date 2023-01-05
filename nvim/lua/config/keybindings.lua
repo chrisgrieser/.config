@@ -575,15 +575,15 @@ autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
-g.delayTrain = 0
-vim.keymap.set("n", key, function()
-	if count <= 10 then
-	else
-		count = count + 1
-		vim.defer_fn(function() count = count - 1 end, 3000) ---@diagnostic disable-line: param-type-mismatch
-		return key
-	end
-end, { expr = true })
-for _, key in ipairs { "h", "l" } do
+-- Simple version of delaytrain
+for _, key in ipairs { "x", "h", "l" } do
 	local count = 0
+	keymap("n", key, function()
+		if count <= 10 then
+			count = count + 1
+			vim.defer_fn(function() count = count - 1 end, 3000) ---@diagnostic disable-line: param-type-mismatch
+			if key == "x" then return [["_x]] end
+			return key
+		end
+	end, { expr = true })
 end
