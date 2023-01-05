@@ -1,22 +1,26 @@
 -- source definitions
-local emojis = { name = "emoji", keyword_length = 2 }
-local nerdfont = { name = "nerdfont", keyword_length = 2 }
-local buffer = { name = "buffer", keyword_length = 3 }
-local path = { name = "path" }
-local zsh = { name = "zsh" }
-local tabnine = { name = "cmp_tabnine", keyword_length = 3 }
-local snippets = { name = "luasnip" }
-local lsp = { name = "nvim_lsp" }
-local treesitter = { name = "treesitter" }
-local git = { name = "git" } -- mentions with "@", issues/PRs with "#"
+local s = {
+	emojis = { name = "emoji", keyword_length = 2 },
+	nerdfont = { name = "nerdfont", keyword_length = 2 },
+	buffer = { name = "buffer", keyword_length = 3 },
+	path = { name = "path" },
+	zsh = { name = "zsh" },
+	tabnine = { name = "cmp_tabnine", keyword_length = 3 },
+	snippets = { name = "luasnip" },
+	lsp = { name = "nvim_lsp" },
+	treesitter = { name = "treesitter" },
+	git = { name = "git" }, -- mentions with "@", issues/PRs with "#"
+	cmdline_history = { name = "cmdline_history", keyword_length = 3 },
+	cmdline = { name = "cmdline" },
+}
 
 local defaultSources = {
-	snippets,
-	lsp,
-	tabnine,
-	emojis,
-	treesitter,
-	buffer,
+	s.snippets,
+	s.lsp,
+	s.tabnine,
+	s.emojis,
+	s.treesitter,
+	s.buffer,
 }
 
 --------------------------------------------------------------------------------
@@ -64,6 +68,7 @@ local source_icons = {
 	omni = "", -- since only used for folders right now
 	git = "",
 }
+
 local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
@@ -83,10 +88,9 @@ local function cmpconfig()
 			},
 		},
 		sorting = {
-			-- disable exact matches getting higher priority https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
-			comparators = { 
+			comparators = {
 				compare.offset,
-				-- compare.exact,
+				-- compare.exact, -- disable exact matches getting higher priority https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
 				-- compare.scopes,
 				compare.score,
 				compare.recently_used,
@@ -145,35 +149,35 @@ local function cmpconfig()
 			return not (lineContent:match(" %-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
 		end,
 		sources = cmp.config.sources {
-			snippets,
-			lsp,
-			tabnine,
-			emojis,
-			nerdfont, -- add nerdfont for config
-			treesitter,
-			buffer,
+			s.snippets,
+			s.lsp,
+			s.tabnine,
+			s.emojis,
+			s.nerdfont, -- add nerdfont for config
+			s.treesitter,
+			s.buffer,
 		},
 	})
 
 	cmp.setup.filetype("toml", {
 		sources = cmp.config.sources {
-			snippets,
-			lsp,
-			tabnine,
-			emojis,
-			nerdfont, -- add nerdfont for config
-			treesitter,
-			buffer,
+			s.snippets,
+			s.lsp,
+			s.tabnine,
+			s.emojis,
+			s.nerdfont, -- add nerdfont for config
+			s.treesitter,
+			s.buffer,
 		},
 	})
 
 	-- css
 	cmp.setup.filetype("css", {
 		sources = cmp.config.sources {
-			snippets,
-			lsp,
-			tabnine,
-			emojis,
+			s.snippets,
+			s.lsp,
+			s.tabnine,
+			s.emojis,
 			-- buffer and treesitter too lazzy on big files
 		},
 	})
@@ -181,73 +185,73 @@ local function cmpconfig()
 	-- markdown
 	cmp.setup.filetype("markdown", {
 		sources = cmp.config.sources {
-			snippets,
-			path, -- e.g. image paths
-			lsp,
-			emojis,
+			s.snippets,
+			s.path, -- e.g. image paths
+			s.lsp,
+			s.emojis,
 			-- no buffer or tabnine, since only adding noise
 		},
 	})
 
 	cmp.setup.filetype("yaml", {
 		sources = cmp.config.sources {
-			lsp,
-			snippets,
-			treesitter, -- treesitter works good on yaml
-			tabnine,
-			emojis,
-			buffer,
+			s.lsp,
+			s.snippets,
+			s.treesitter, -- treesitter works good on yaml
+			s.tabnine,
+			s.emojis,
+			s.buffer,
 		},
 	})
 
 	-- ZSH
 	cmp.setup.filetype("sh", {
 		sources = cmp.config.sources {
-			zsh,
-			snippets,
-			lsp,
-			tabnine,
-			treesitter,
-			buffer,
-			emojis,
-			nerdfont, -- used for some configs
+			s.zsh,
+			s.snippets,
+			s.lsp,
+			s.tabnine,
+			s.treesitter,
+			s.buffer,
+			s.emojis,
+			s.nerdfont, -- used for some configs
 		},
 	})
 
 	-- bibtex
 	cmp.setup.filetype("bib", {
 		sources = cmp.config.sources {
-			snippets,
-			treesitter,
-			buffer,
+			s.snippets,
+			s.treesitter,
+			s.buffer,
 		},
 	})
 
 	-- plaintext (e.g., pass editing)
 	cmp.setup.filetype("text", {
 		sources = cmp.config.sources {
-			snippets,
-			buffer,
-			emojis,
+			s.snippets,
+			s.buffer,
+			s.emojis,
 		},
 	})
 
 	-- gitcommit
 	cmp.setup.filetype("gitcommit", {
 		sources = cmp.config.sources {
-			git,
-			path,
-			buffer,
-			emojis,
+			s.git,
+			s.path,
+			s.buffer,
+			s.emojis,
 		},
 	})
 
 	cmp.setup.filetype("NeogitCommitMessage", {
 		sources = cmp.config.sources {
-			git,
-			path,
-			buffer,
-			emojis,
+			s.git,
+			s.path,
+			s.buffer,
+			s.emojis,
 		},
 	})
 	--------------------------------------------------------------------------------
@@ -260,10 +264,10 @@ local function cmpconfig()
 	cmp.setup.cmdline(":", {
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = cmp.config.sources({
-			path,
-			{ name = "cmdline" },
+			s.path,
+			s.cmdline,
 		}, { -- second array only relevant when no source from the first matches
-			{ name = "cmdline_history", keyword_length = 3 },
+			s.cmdline_history,
 		}),
 	})
 
