@@ -77,8 +77,8 @@ opt.sidescrolloff = 15
 augroup("sidescroll", {})
 autocmd("FileType", {
 	group = "sidescroll",
-	pattern = {"ssr"},
-	callback = function() wo.sidescrolloff = 0 end
+	pattern = { "ssr" },
+	callback = function() wo.sidescrolloff = 0 end,
 })
 
 opt.textwidth = 80
@@ -148,60 +148,52 @@ opt.foldnestmax = 2
 --------------------------------------------------------------------------------
 
 -- Remember folds and cursor
-local ignoredFts = {
-	"DressingSelect",
-	"cybu",
-	"text",
-	"TelescopePrompt",
-	"gitcommit",
-}
+local function remember(mode)
+	local ignoredFts = {
+		"DressingSelect",
+		"cybu",
+		"TelescopePrompt",
+		"gitcommit",
+		"toggleterm",
+		"help",
+		"qf",
+	}
+	if vim.tbl_contains(ignoredFts, bo.filetype) or bo.buftype == "nofile" or not bo.modifiable then return end
+	if mode == "load" then
+		cmd.mkview(1)	
+	else
+		cmd([[silent! loadview 1]]) -- needs silent to avoid error for documents that do not have a view yet (opening first time)
+		normal("0^") -- to scroll to the left on start
+	end
+end
 augroup("rememberCursorAndFolds", {})
 autocmd("BufWinLeave", {
 	group = "rememberCursorAndFolds",
 	pattern = "?*", -- pattern required, otherwise does not trigger
-	callback = function()
-		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
-		local isIrregularFile = not (expand("%:p"):find("/"))
-		if isIrregularFile then return end -- prevent irregular files from spamming view files
-		cmd.mkview(1)
-	end,
+	callback = function() remember("save") end,
 })
 autocmd("BufWinEnter", {
 	group = "rememberCursorAndFolds",
 	pattern = "?*",
-	callback = function()
-		if vim.tbl_contains(ignoredFts, bo.filetype) then return end
-		local isIrregularFile = not (expand("%:p"):find("/"))
-		if isIrregularFile then return end -- prevent irregular files from spamming view files
-		cmd([[silent! loadview 1]]) -- needs silent to avoid error for documents that do not have a view yet (opening first time)
-		normal("0^") -- to scroll to the left on start
-	end,
+	callback = function() remember("load") end,
 })
 
 --------------------------------------------------------------------------------
 
----@param str string
----@param separator string uses Lua Pattern, so requires escaping
----@return table
-local function split(str, separator)
-	str = str .. separator
-	local output = {}
-	-- https://www.lua.org/manual/5.4/manual.html#pdf-string.gmatch
-	for i in str:gmatch("(.-)" .. separator) do
-		table.insert(output, i)
-	end
-	return output
-end
-
 -- Skeletons (Templates)
 -- apply templates for any filetype named `./templates/skeleton.{ft}`
 augroup("Templates", {})
-local skeletionPath = fn.stdpath("config") .. "/templates"
-local filetypeList = fn.system([[ls "]] .. skeletionPath .. [[/skeleton."* | xargs basename | cut -d. -f2]])
-local ftWithSkeletons = split(filetypeList, "\n")
+local skeletonPath = fn.stdpath("config") .. "/templates"
+local filetypeList = fn.system([[ls "]] .. skeletonPath .. [[/skeleton."* | xargs basename | cut -d. -f2]])
+
+local ftWithSkeletons = {}
+for line in filetypeList:gmatch("(.-)..\n") do -- split https://www.lua.org/manual/5.4/manual.html#pdf-string.gmatch
+	table.insert(ftWithSkeletons, line)
+end
+
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
-	local readCmd = "keepalt 0r $HOME/.config/nvim/templates/skeleton." .. ft .. " | normal! G"
+	local readCmd = "keepalt 0r ".. skeletonPath.."/skeleton." .. ft .. " | normal! G"
 
 	autocmd("BufNewFile", {
 		group = "Templates",

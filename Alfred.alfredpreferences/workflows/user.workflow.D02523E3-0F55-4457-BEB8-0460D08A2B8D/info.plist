@@ -1040,9 +1040,9 @@ open "$(dirname "$script_location")"/backup.log</string>
 	<key>variables</key>
 	<dict>
 		<key>backup_destination</key>
-		<string>/Volumes/Externe A</string>
+		<string>/Volumes/Externe C</string>
 		<key>last_backup</key>
-		<string>2022-12-21 19:38</string>
+		<string>2023-01-05 15:58</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
