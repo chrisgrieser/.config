@@ -36,8 +36,8 @@ local function config()
 	-- HACK to filter out annoying buggy messages from the satellite plugin: https://github.com/lewis6991/satellite.nvim/issues/36
 	local function banned(msg) -- https://github.com/rcarriga/nvim-notify/issues/114#issuecomment-1179754969
 		local ban = {
-			"^gitsigns ROW: %d+$",
-			"^line value outside of range$",
+			"gitsigns ROW: ",
+			"line value outside of range",
 		}		
 		if vim.tbl_contains(ban, msg) then return true end
 	end

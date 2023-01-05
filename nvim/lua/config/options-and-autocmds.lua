@@ -110,11 +110,8 @@ autocmd({ "BufWinLeave", "WinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	group = "autosave",
 	pattern = "?*", -- pattern required
 	callback = function()
-		local isIrregularFile = not (expand("%:p"):find("/"))
-		if not bo.modifiable or isIrregularFile then return end
-
-		-- safety net to not save file in wrong folder when autochdir is not reliable
-		cmd.update(expand("%:p"))
+		if not bo.modifiable or bo.buftype == "nofile" then return end
+		cmd.update(expand("%:p")) -- safety net to not save file in wrong folder when autochdir is not reliable,,
 	end,
 })
 
@@ -187,7 +184,7 @@ local skeletonPath = fn.stdpath("config") .. "/templates"
 local filetypeList = fn.system([[ls "]] .. skeletonPath .. [[/skeleton."* | xargs basename | cut -d. -f2]])
 
 local ftWithSkeletons = {}
-for line in filetypeList:gmatch("(.-)..\n") do -- split https://www.lua.org/manual/5.4/manual.html#pdf-string.gmatch
+for line in filetypeList:gmatch("(.-)\n") do -- split https://www.lua.org/manual/5.4/manual.html#pdf-string.gmatch
 	table.insert(ftWithSkeletons, line)
 end
 
