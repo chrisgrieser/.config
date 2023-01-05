@@ -14,15 +14,6 @@ local expand = vim.fn.expand
 ---runs :normal natively with bang
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
----@param option string
----@return any
-local function getlocalopt(option) return vim.api.nvim_get_option_value(option, { scope = "local" }) end
-
----equivalent to `:setlocal option&`
----@param option string
----@return any
-local function getglobalopt(option) return vim.api.nvim_get_option_value(option, { scope = "global" }) end
-
 ---equivalent to fn.getline(), but using more efficient nvim api
 ---@param lnum integer|string
 ---@return string
@@ -259,11 +250,11 @@ end
 
 ---toggle wrap, colorcolumn, and hjkl visual/logical maps in one go
 function M.toggleWrap()
-	local wrapOn = getlocalopt("wrap")
+	local wrapOn = wo.wrap
 	local opts = { buffer = true }
 	if wrapOn then
-		setlocal("wrap", true) -- soft wrap
-		setlocal("colorcolumn", getglobalopt("colorcolumn")) -- reactivate ruler
+		wo.wrap = false
+		wo.colorcolumn = o.colorcolumn
 
 		local del = vim.keymap.del
 		del({ "n", "x" }, "H", opts)
@@ -273,8 +264,8 @@ function M.toggleWrap()
 		del({ "n", "x" }, "k", opts)
 		del({ "n", "x" }, "j", opts)
 	else
-		setlocal("wrap", true) -- soft wrap
-		setlocal("colorcolumn", "") -- deactivate ruler
+		wo.wrap = true
+		wo.colorcolumn = ""
 
 		local keymap = vim.keymap.set
 		keymap({ "n", "x" }, "H", "g^", opts)

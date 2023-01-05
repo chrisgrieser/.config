@@ -50,9 +50,9 @@ keymap({ "o", "x" }, "im", "iW")
 --------------------------------------------------------------------------------
 -- QUICK TEXTOBJ OPERATIONS
 keymap("n", "C", '"_C')
-keymap("n", "<Space>", '"_ciw') -- change word
-keymap("n", "<M-S-CR>", '"_daw') -- HACK since <S-Space> not fully supported, requires karabiner remapping it
-keymap("x", "<Space>", '"_c')
+keymap("n", "<Space>", '"_ciw', {desc = "change word"})
+keymap("x", "<Space>", '"_c', {desc = "change word"})
+keymap("n", "<M-S-CR>", '"_daw', {desc = "delete word"}) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
 
 --------------------------------------------------------------------------------
 -- VARIOUS TEXTOBJS
@@ -60,18 +60,21 @@ keymap("x", "<Space>", '"_c')
 -- space: subword
 keymap("o", "<Space>", function() require("various-textobjs").subword(true) end, { desc = "inner subword textobj" })
 
+-- U: url
+keymap({"o", "x"}, "U", function() require("various-textobjs").url() end, { desc = "url textobj" })
+
 -- n: [n]ear end of the line
-keymap({ "o", "x" }, "n", function () require("various-textobjs").nearEoL() end, { desc = "almost ending of line textobj" })
+keymap({ "o", "x" }, "n", function () require("various-textobjs").nearEoL() end, { desc = "near EoL textobj" })
 
 -- o: c[o]lumn textobj
 keymap("o", "o", function() require("various-textobjs").column() end, { desc = "column textobj" })
 
 -- gG: entire buffer textobj
-keymap({"x", "o"}, "gG", function () require("various-textobjs").entireBuffer() end, { desc = "column textobj" })
+keymap({"x", "o"}, "gG", function () require("various-textobjs").entireBuffer() end, { desc = "entire buffer textobj" })
 
 -- r: [r]est of paragraph (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
-keymap("o", "r", function () require("various-textobjs").restOfParagraph() end, { desc = "rest of paragraph (linewise)" })
+keymap("o", "r", function () require("various-textobjs").restOfParagraph() end, { desc = "rest of paragraph textobj" })
 
 -- iv/av: value textobj
 keymap({ "x", "o" }, "iv", function() require("various-textobjs").value(true) end, { desc = "inner value textobj" })
