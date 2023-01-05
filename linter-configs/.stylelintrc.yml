@@ -5,7 +5,7 @@ plugins:
 reportNeedlessDisables: [false, {severity: warning}]
 reportInvalidScopeDisables: [true, {severity: error}]
 ignoreFiles:
-  - '**/Main Vault/.obsidian/plugins/**'
+  - '**/main-vault/.obsidian/plugins/**'
 
 #───────────────────────────────────────────────────────────────────────────────
 rules:
@@ -16,6 +16,7 @@ rules:
 
   # plugin rules
   plugin/declaration-block-no-ignored-properties: true
+
   # https://github.com/hudochenkov/stylelint-order/blob/master/rules/properties-order/README.md#emptylineminimumpropertythreshold
   order/properties-order:
     - - groupName: Content & Display
