@@ -19,6 +19,8 @@ if not wo.wrap then require("funcs.quality-of-life").toggleWrap() end
 -- decrease line length without zen mode plugins 
 setlocal("signcolumn", "yes:9")
 
+keymap("n", "gf", {buffer = true})
+
 --------------------------------------------------------------------------------
 -- link textobj
 keymap(
