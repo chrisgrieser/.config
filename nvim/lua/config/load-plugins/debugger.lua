@@ -6,10 +6,7 @@ local function dapConfig()
 	-- DAP SETUP
 	-- INFO: uses dap-names, not mason-names https://github.com/jayp0521/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
 	require("mason-nvim-dap").setup {
-		ensure_installed = {
-			"node2",
-			"bash",
-		},
+		ensure_installed = { "node2" },
 	}
 
 	--------------------------------------------------------------------------------
@@ -54,35 +51,6 @@ local function dapConfig()
 			type = "node2",
 			request = "attach",
 			processId = require("dap.utils").pick_process,
-		},
-	}
-
-	-- Bash
-	dap.adapters.bashdb = {
-		type = "executable",
-		command = dataPath .. "/mason/packages/bash-debug-adapter/bash-debug-adapter",
-		name = "bashdb",
-	}
-
-	dap.configurations.sh = {
-		{
-			type = "bashdb",
-			request = "launch",
-			name = "Launch file",
-			showDebugOutput = true,
-			pathBashdb = dataPath .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb",
-			pathBashdbLib = dataPath .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir",
-			trace = true,
-			file = "${file}",
-			program = "${file}",
-			cwd = "${workspaceFolder}",
-			pathCat = "cat",
-			pathBash = "/bin/bash",
-			pathMkfifo = "mkfifo",
-			pathPkill = "pkill",
-			args = {},
-			env = {},
-			terminalKind = "integrated",
 		},
 	}
 
