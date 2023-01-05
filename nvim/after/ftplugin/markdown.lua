@@ -19,7 +19,8 @@ if not wo.wrap then require("funcs.quality-of-life").toggleWrap() end
 -- decrease line length without zen mode plugins 
 setlocal("signcolumn", "yes:9")
 
-keymap("n", "gf", {buffer = true})
+-- make gf for filepaths available in markdown again
+keymap("n", "gP", "gf", {desc = "goto path (gf)", buffer = true})
 
 --------------------------------------------------------------------------------
 -- link textobj

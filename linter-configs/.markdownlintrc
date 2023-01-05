@@ -11,5 +11,6 @@
   "ul-indent": false,
   "no-blanks-blockquote": false,
   "no-emphasis-as-heading": false,
-  "no-alt-text": false
+  "no-alt-text": false,
+  "link-fragements": false
 }
