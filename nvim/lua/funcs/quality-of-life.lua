@@ -31,6 +31,20 @@ local function getline(lnum)
 	return lineContent[1]
 end
 
+---equivalent to `:setlocal option&`
+---@param option string
+---@return any
+function getlocal(option) return vim.api.nvim_get_option_value(option, { scope = "local" }) end
+
+---equivalent to `:setlocal option=value`
+---@param option string
+---@param value any
+function setlocal(option, value)
+	-- :setlocal does not have a direct access via the vim-module, it seems https://neovim.io/doc/user/lua.html#lua-vim-setlocal
+	vim.api.nvim_set_option_value(option, value, { scope = "local" })
+end
+
+
 --------------------------------------------------------------------------------
 
 -- Duplicate line under cursor, change occurrences of certain words to their
@@ -161,7 +175,7 @@ function M.wordSwitch()
 		if cword == pair[1] then
 			newWord = pair[2]
 			break
-		elseif cword == pair[2] and pair[3] ~= nil then
+		elseif cword == pair[2] and pair[3] ~= false then
 			newWord = pair[1]
 			break
 		end
@@ -250,11 +264,12 @@ end
 
 ---toggle wrap, colorcolumn, and hjkl visual/logical maps in one go
 function M.toggleWrap()
-	local wrapOn = wo.wrap
+	local wrapOn = getlocal("wrap")
 	local opts = { buffer = true }
+
 	if wrapOn then
-		wo.wrap = false
-		wo.colorcolumn = o.colorcolumn
+		setlocal("wrap", false)
+		setlocal("colorcolumn", o.colorcolumn)
 
 		local del = vim.keymap.del
 		del({ "n", "x" }, "H", opts)
@@ -264,8 +279,8 @@ function M.toggleWrap()
 		del({ "n", "x" }, "k", opts)
 		del({ "n", "x" }, "j", opts)
 	else
-		wo.wrap = true
-		wo.colorcolumn = ""
+		setlocal("wrap", true)
+		setlocal("colorcolumn", "")
 
 		local keymap = vim.keymap.set
 		keymap({ "n", "x" }, "H", "g^", opts)

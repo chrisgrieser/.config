@@ -27,11 +27,6 @@ function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 ---@return boolean
 function isGui() return g.neovide or g.goneovim end
 
----equivalent to `:setlocal option&`
----@param option string
----@return any
-function getlocalopt(option) return vim.api.nvim_get_option_value(option, { scope = "local" }) end
-
 ---equivalent to `:setlocal option=value`
 ---@param option string
 ---@param value any
