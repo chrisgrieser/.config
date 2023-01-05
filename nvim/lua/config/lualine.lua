@@ -164,9 +164,7 @@ require("lualine").setup {
 		},
 	},
 	options = {
-		refresh = {
-			statusline = 2000, -- less often, so it interferes less with git processes
-		},
+		refresh = { statusline = 1000 },
 		ignore_focus = {
 			"TelescopePrompt",
 			"DressingInput",
@@ -180,7 +178,7 @@ require("lualine").setup {
 		section_separators = bottomSeparators,
 		disabled_filetypes = {
 			statusline = {},
-			winbar = {},
+			winbar = {"toggleterm"},
 		},
 	},
 }
