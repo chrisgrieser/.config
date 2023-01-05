@@ -294,18 +294,18 @@ keymap({ "n", "x" }, "<leader>lr", qlog.removelogs, { desc = "remove all log sta
 keymap( { "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { desc = "sort & highlight duplicates" })
 
 -- URL Opening
-keymap("n", "gx", function ()
+keymap("n", "gx", function()
 	require("various-textobjs").url() -- select url
 	local foundURL = fn.mode():find("v")
 	local url
 	if foundURL then
 		normal([["zy"]])
 		url = fn.getreg("z")
-		os.execute("open '"..url.."'")
+		os.execute("open '" .. url .. "'")
 	else
 		cmd.UrlView("buffer") -- if not found in proximity, search whole buffer via urlview.nvim
 	end
-end, {desc = "Smart URL Opener"})
+end, { desc = "Smart URL Opener" })
 
 --------------------------------------------------------------------------------
 
@@ -507,15 +507,18 @@ end, { desc = ":CodiNew" })
 
 --------------------------------------------------------------------------------
 
--- BUILD SYSTEM & QUICKFIX LIST
+-- BUILD SYSTEM
 
 keymap("n", "<leader>r", function()
 	cmd.update()
 	local parentFolder = expand("%:p:h")
 	local ft = bo.filetype
 
+	-- sketchybar
 	if parentFolder:find("sketchybar") then
 		fn.system("brew services restart sketchybar")
+
+	-- markdown / pandoc
 	elseif ft == "markdown" then
 		local filepath = expand("%:p")
 		local pdfFilename = expand("%:t:r") .. ".pdf"
@@ -557,6 +560,7 @@ keymap("n", "<leader>r", function()
 	-- None
 	else
 		vim.notify("No build system set.", logWarn)
+
 	end
 end, { desc = "Build System" })
 
@@ -604,11 +608,14 @@ autocmd("FileType", {
 
 -- Simple version of delaytrain
 for _, key in ipairs { "x", "h", "l" } do
+	local timeout = 5000
+	local maxUsage = 10
+
 	local count = 0
 	keymap("n", key, function()
-		if count <= 10 then
+		if count <= maxUsage then
 			count = count + 1
-			vim.defer_fn(function() count = count - 1 end, 3000) ---@diagnostic disable-line: param-type-mismatch
+			vim.defer_fn(function() count = count - 1 end, timeout) ---@diagnostic disable-line: param-type-mismatch
 			if key == "x" then return [["_x]] end
 			return key
 		end
