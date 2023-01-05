@@ -74,19 +74,4 @@ return {
 			}
 		end,
 	},
-	{
-		-- INFO has to be disabled during macro execution https://github.com/ja-ford/delaytrain.nvim/issues/8
-		"ja-ford/delaytrain.nvim",
-		enabled = false,
-		keys = { "h", "l" },
-		config = function()
-			require("delaytrain").setup {
-				delay_ms = 1000, -- How long repeated usage of a key should be prevented
-				grace_period = 7, -- How many repeated keypresses are allowed
-				keys = { -- Which keys (in which modes) should be delayed
-					["nv"] = { "h", "l" },
-				},
-			}
-		end,
-	},
 }
