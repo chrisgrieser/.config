@@ -3,8 +3,8 @@ local opts = { buffer = true, silent = true }
 --------------------------------------------------------------------------------
 
 -- spellcheck
--- api.nvim_set_option_value("spell", true, { scope = "local" })
-wo.spell = true
+-- setting the window option makes it persist, therefore setting as local option
+setlocal("spell", true)
 
 -- HACK to make lists auto-continue via Return in Insert & o in normal mode
 -- i.e. replaces bullet.vim based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
@@ -12,11 +12,10 @@ bo.comments = "b:-"
 bo.formatoptions = bo.formatoptions:gsub("[ct]", "") .. "ro"
 
 -- enable wrapping lines
-if not wo.wrap then require("funcs.quality-of-life").toggleWrap() end
+require("funcs.quality-of-life").toggleWrap()
 
--- decrease line length without zen mode plugins (which unfortunately remove
--- statuslines and stuff)
-bo.signcolumn = "yes:9"
+-- decrease line length without zen mode plugins 
+setlocal("signcolumn", "yes:9")
 
 --------------------------------------------------------------------------------
 -- link textobj
