@@ -82,6 +82,9 @@ sketchybar \
 	--add item drafts $first_set \
 	--set drafts icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
 	script="$PLUGIN_DIR/drafts-counter.sh" \
+	--add event drafts-counter-update \
+	--subscribe drafts drafts-counter-update \
+	--subscribe drafts system_woke \
 	\
 	--add alias "$ram_bar_item" $second_set \
 	--set "$ram_bar_item" width=38 \
@@ -95,13 +98,13 @@ sketchybar \
 	--add alias "$network_bar_item" $second_set \
 	--set "$network_bar_item" width=65 \
 	\
-	--add item git-sync-bar-icon $second_set \
-	--set git-sync-bar-icon update_freq=300 \
+	--add item sync-indicator $second_set \
+	--set sync-indicator update_freq=300 \
 	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
 	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
 	--add event repo-files-update \
-	--subscribe git-sync-bar-icon repo-files-update \
-	--subscribe git-sync-bar-icon system_woke \
+	--subscribe sync-indicator repo-files-update \
+	--subscribe sync-indicator system_woke \
 	\
 	--update
 

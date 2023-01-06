@@ -96,10 +96,7 @@ function syncAllGitRepos()
 	-- wait until sync is finished so sketchybar update shows success/failure
 	local function updateSketchybar()
 		-- https://felixkratz.github.io/SketchyBar/config/events#triggering-custom-events
-		hs.execute(
-			"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
-				.. "sketchybar --trigger repo-files-update"
-		)
+		hs.execute("sketchybar --trigger repo-files-update")
 		print("Updating sketchybar sync icon.")
 	end
 	local function noSyncInProgress()

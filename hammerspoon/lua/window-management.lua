@@ -126,11 +126,7 @@ function sketchybarPopup(arg)
 			mode = "true"
 		end
 	end
-	hs.execute(
-		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
-			.. "sketchybar --set clock popup.drawing="
-			.. mode
-	)
+	hs.execute("sketchybar --set clock popup.drawing=" .. mode)
 end
 
 -- change sketchybarPopups on change of active app
@@ -211,7 +207,7 @@ function autoTile(windowSource)
 	---@return hs.window[]
 	local function getWins(_windowSource)
 		if type(_windowSource) == "string" then
-			return app(_windowSource):allWindows()	
+			return app(_windowSource):allWindows()
 		else
 			return _windowSource:getWindows()
 		end
