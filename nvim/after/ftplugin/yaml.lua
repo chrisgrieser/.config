@@ -18,8 +18,8 @@ wo.listchars = "tab: >"
 keymap("x", "<D-m>", function ()
 	leaveVisualMode()
 	cmd [['<,'> !yq -P -o=json -I=0]]
-	cmd[[.s/"//ge]]
+	cmd[[.s/"\d\@!\d\@<!//ge]]
 	cmd[[.s/:/: /ge]]
 	cmd[[.s/,/, /ge]]
-	normal("==")
+	normal("kJ")
 end, {desc = "compatify YAML", buffer = true})
