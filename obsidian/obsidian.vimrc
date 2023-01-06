@@ -200,12 +200,20 @@ vmap v <C-v>
 """"""""""""""""""""""
 " Text Objects
 """"""""""""""""""""""
+" quicker access to [m]assive word, [q]uote, [z]ingle quote, inline cod[e],
+" [r]ectangular bracket, and [c]urly braces
 map am aW
 map im iW
 map aq a"
 map iq i"
+map az a'
+map iz i'
+map ae a`
+map ie i`
 map ir i[
 map ar a[
+map ac a{
+map ic i{
 
 """"""""""""""""""""""
 " Tabs/Window
@@ -236,7 +244,7 @@ nmap 6 :open-terminal
 """"""""""""""""""""""
 " Folding
 """"""""""""""""""""""
-" Emulate Original Folding command https://vimhelp.org/fold.txt.html#fold-commands
+" Emulate vim folding command https://vimhelp.org/fold.txt.html#fold-commands
 exmap unfoldall obcommand editor:unfold-all
 exmap togglefold obcommand editor:toggle-fold
 exmap foldall obcommand editor:fold-all
