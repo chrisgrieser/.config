@@ -91,7 +91,7 @@ function acp() {
 		return 1
 	elif ! [[ "$conventional_commits" =~ $first_word ]]; then
 		echo "'$first_word' not a conventional commits keyword."
-		print -z "acp \"$COMMIT_MSG\"" 
+		print -z "acp \"$COMMIT_MSG\""
 		return 1
 	fi
 
@@ -177,21 +177,24 @@ function gdf() {
 	# alternative method: `git rev-list -n 1 HEAD -- "**/*$1*"` to get the commit of a deleted file
 	deleted_path=$(git log --diff-filter=D --summary | grep delete | grep -i "$*" | cut -d" " -f5-)
 
-	if [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
-		echo "🔍 multiple files found: "
-		echo "$deleted_path"
-		echo
-		echo "➡️ narrow down query so only one file is selected."
-		return 0
-	elif [[ -z "$deleted_path" ]]; then
-		echo "🔍 no deleted file found"
+	if [[ -z "$deleted_path" ]]; then
+		print "🔍\033[1;31m no deleted file found"
 		return 1
+	elif [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
+		print "🔍\033[1;32m multiple files found: "
+		deleted_path=$(
+			echo "$deleted_path" | fzf \
+				--layout=reverse \
+				--no-info \
+				--height=60%
+		)
+	else
+		print "🔍\033[1;32m last version found: '$deleted_path' ($last_commit)"
 	fi
 
 	deletion_commit=$(git log --format='%h' --follow -- "$deleted_path" | head -n1)
 	last_commit=$(git show --format='%h' "$deletion_commit^" | head -n1)
 
-	echo "🔍 last version found: '$deleted_path' ($last_commit)"
 	echo
 	echo "c: checkout file, o: open file"
 	read -r -k 1 DECISION
