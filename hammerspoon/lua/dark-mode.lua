@@ -15,14 +15,14 @@ function toggleDarkMode()
 		if appIsRunning("Highlights") then
 			app("Highlights"):selectMenuItem { "View", "PDF Appearance", "Default" }
 		end
-		hs.execute([[echo "setLightTheme()" > /tmp/nvim-automation]]) -- requires setup in ~/.config/nvim/lua/file-watcher.lua
-		setConsoleColors(false)
+		hs.execute([[echo "setThemeMode('light')" > /tmp/nvim-automation]]) -- requires setup in ~/.config/nvim/lua/file-watcher.lua
+		setConsoleColors("light")
 	else
 		if appIsRunning("Highlights") then
 			app("Highlights"):selectMenuItem { "View", "PDF Appearance", "Night" }
 		end
-		hs.execute([[echo "setDarkTheme()" > /tmp/nvim-automation]])
-		setConsoleColors(true)
+		hs.execute([[echo "setThemeMode('dark')" > /tmp/nvim-automation]])
+		setConsoleColors("dark")
 	end
 
 	-- Brave & System
