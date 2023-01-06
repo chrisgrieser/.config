@@ -1,15 +1,11 @@
 title: "(Apps)App-kpecific-Bindings"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
-  - description: "(Apps)Zoom"
+  - description: "(Apps) Zoom"
     manipulators:
       # Toggle Sidebar
       - type: basic
-        from:
-          key_code: "0"
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: "0", modifiers: {mandatory: [command]}}
         to:
           - key_code: h
             modifiers:
@@ -19,16 +15,11 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^us\.zoom\.xos$
-  - description: "(Apps)Microsoft & Google Office"
+  - description: "(Apps) Microsoft & Google Office"
     manipulators:
       # export
       - type: basic
-        from:
-          key_code: e
-          modifiers:
-            mandatory:
-              - command
-              - shift
+        from: {key_code: e, modifiers: {mandatory: [command, shift]}}
         to:
           - key_code: s
             modifiers:
@@ -42,11 +33,7 @@ rules:
               - ^com\.microsoft\.Powerpoint$
       # Comment in MS Word
       - type: basic
-        from:
-          key_code: k
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: k, modifiers: {mandatory: [command]}}
         to:
           - shell_command: |
               osascript -e '
@@ -62,11 +49,7 @@ rules:
               - ^com\.microsoft\.Word$
       # Comment in Google Docs
       - type: basic
-        from:
-          key_code: k
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: k, modifiers: {mandatory: [command]}}
         to:
           - key_code: m
             modifiers:
@@ -78,11 +61,7 @@ rules:
               - ^com.brave.Browser.app.mpnpojknpmmopombnjdcgaaiekajbnjb
       # Footnote in Google Docs
       - type: basic
-        from:
-          key_code: non_us_backslash
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: non_us_backslash, modifiers: {mandatory: [command]}}
         to:
           - key_code: f
             modifiers:
@@ -92,15 +71,11 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com.brave.Browser.app.mpnpojknpmmopombnjdcgaaiekajbnjb
-  - description: "(Apps)Highlights"
+  - description: "(Apps) Highlights"
     manipulators:
       # cmd+l = show in Explorer
       - type: basic
-        from:
-          key_code: l
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: l, modifiers: {mandatory: [command]}}
         to:
           - software_function:
               set_mouse_cursor_position:
@@ -117,11 +92,7 @@ rules:
               - ^net\.highlightsapp\.universal$
       # Back & Forward
       - type: basic
-        from:
-          key_code: h
-          modifiers:
-            mandatory:
-              - control
+        from: {key_code: h, modifiers: {mandatory: [control]}}
         to:
           - shell_command: |
               osascript -e '
@@ -136,11 +107,7 @@ rules:
             bundle_identifiers:
               - ^net\.highlightsapp\.universal$
       - type: basic
-        from:
-          key_code: l
-          modifiers:
-            mandatory:
-              - control
+        from: {key_code: l, modifiers: {mandatory: [control]}}
         to:
           - shell_command: |
               osascript -e '
@@ -156,42 +123,24 @@ rules:
               - ^net\.highlightsapp\.universal$
       # Right Sidebar
       - type: basic
-        from:
-          key_code: "0"
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: "0", modifiers: {mandatory: [command]}}
         to:
           - key_code: "2"
             modifiers:
               - command
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^net\.highlightsapp\.universal$
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\\.highlightsapp\\.universal$]}]
       # Toolbar
       - type: basic
-        from:
-          key_code: "9"
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: "9", modifiers: {mandatory: [command]}}
         to:
-          - key_code: t
-            modifiers:
-              - command
-              - option
+          [{key_code: t, modifiers: [command, option]}]
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^net\.highlightsapp\.universal$
       # Image Tool
       - type: basic
-        from:
-          key_code: i
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: i, modifiers: {mandatory: [command]}}
         to:
           - key_code: i
             modifiers:
@@ -208,11 +157,7 @@ rules:
               - ^net\.highlightsapp\.universal$
       # Red Underline Tool
       - type: basic
-        from:
-          key_code: u
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: u, modifiers: {mandatory: [command]}}
         to:
           - key_code: u
             modifiers:
@@ -229,11 +174,7 @@ rules:
               - ^net\.highlightsapp\.universal$
       # Comment Tool
       - type: basic
-        from:
-          key_code: k
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: k, modifiers: {mandatory: [command]}}
         to:
           - key_code: n
             modifiers:
@@ -250,11 +191,7 @@ rules:
               - ^net\.highlightsapp\.universal$
       # Yellow Highlight Tool
       - type: basic
-        from:
-          key_code: z # z and y switched on German keyboard
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: z, modifiers: {mandatory: [command]}} # z and y switched on German keyboard
         to:
           - key_code: h
             modifiers:
@@ -273,11 +210,7 @@ rules:
     manipulators:
       # open dev tools
       - type: basic
-        from:
-          key_code: escape
-          modifiers:
-            mandatory:
-              - control
+        from: {key_code: escape, modifiers: {mandatory: [control]}}
         to:
           - key_code: i
             modifiers:
@@ -296,11 +229,7 @@ rules:
   - description: "\U0001F170️\U0001F3DE YouTube: ⌘+P → Picture-in-Picture Mode"
     manipulators:
       - type: basic
-        from:
-          key_code: p
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: p, modifiers: {mandatory: [command]}}
         to:
           - software_function:
               set_mouse_cursor_position:
@@ -342,8 +271,7 @@ rules:
   - description: "\U0001F170️\U0001F4D6 Inoreader: b opens in background, switch jk & np"
     manipulators:
       - type: basic
-        from:
-          key_code: b
+        from: {key_code: b}
         to:
           - key_code: v
           - key_code: vk_none
@@ -351,37 +279,23 @@ rules:
           - key_code: h
             modifiers:
               - command
-        conditions:
-          - type: frontmost_application_if
-            file_paths:
-              - Inoreader.app
+        conditions: [{type: frontmost_application_if, file_paths: [Inoreader.app]}]
       - type: basic
         from:
           key_code: j
         to:
           - key_code: "n"
-        conditions:
-          - type: frontmost_application_if
-            file_paths:
-              - Inoreader.app
+        conditions: [{type: frontmost_application_if, file_paths: [Inoreader.app]}]
       - type: basic
-        from:
-          key_code: k
+        from: {key_code: k}
         to:
           - key_code: p
-        conditions:
-          - type: frontmost_application_if
-            file_paths:
-              - Inoreader.app
+        conditions: [{type: frontmost_application_if, file_paths: [Inoreader.app]}]
       - type: basic
-        from:
-          key_code: "n"
+        from: {key_code: n}
         to:
           - key_code: j
-        conditions:
-          - type: frontmost_application_if
-            file_paths:
-              - Inoreader.app
+        conditions: [{type: frontmost_application_if, file_paths: [Inoreader.app]}]
       - type: basic
         from:
           key_code: p
@@ -394,11 +308,7 @@ rules:
   - description: "\U0001F170️\U0001F511 MacPass: ⌘+c/u → ⌘⌥+c/⌘⇧+c, then ⌘+h"
     manipulators:
       - type: basic
-        from:
-          key_code: c
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: c, modifiers: {mandatory: [command]}}
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -412,11 +322,7 @@ rules:
             modifiers:
               - command
       - type: basic
-        from:
-          key_code: u
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: u, modifiers: {mandatory: [command]}}
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -434,11 +340,7 @@ rules:
       # does not work 100% cause Bartender seems to overlay a window sometimes
       # to cover parts of the menubar
       - type: basic
-        from:
-          key_code: q
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: q, modifiers: {mandatory: [command]}}
         to:
           - key_code: w
             modifiers:
@@ -451,11 +353,7 @@ rules:
   - description: "\U0001F170️\U0001F528 Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
       - type: basic
-        from:
-          key_code: q
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: q, modifiers: {mandatory: [command]}}
         to:
           - key_code: w
             modifiers:
@@ -465,11 +363,7 @@ rules:
             bundle_identifiers:
               - ^org\.hammerspoon\.Hammerspoon$
       - type: basic
-        from:
-          key_code: k
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: k, modifiers: {mandatory: [command]}}
         to:
           - shell_command: open 'hammerspoon://clear-console'
         conditions:
@@ -477,12 +371,7 @@ rules:
             bundle_identifiers:
               - ^org\.hammerspoon\.Hammerspoon$
       - type: basic
-        from:
-          key_code: c
-          modifiers:
-            mandatory:
-              - command
-              - shift
+        from: {key_code: c, modifiers: {mandatory: [command, shift]}}
         to:
           - shell_command: open 'hammerspoon://copy-last-command'
         conditions:
@@ -495,11 +384,7 @@ rules:
     manipulators:
       # go to next unread message
       - type: basic
-        from:
-          key_code: u
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: u, modifiers: {mandatory: [command]}}
         to:
           - key_code: down_arrow
             modifiers:
@@ -511,11 +396,7 @@ rules:
               - ^com\.tinyspeck\.slackmacgap$
       # toggle sidebar
       - type: basic
-        from:
-          key_code: "1"
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: "1", modifiers: {mandatory: [command]}}
         to:
           - key_code: d
             modifiers:
@@ -527,11 +408,7 @@ rules:
               - ^com\.tinyspeck\.slackmacgap$
       # back in history
       - type: basic
-        from:
-          key_code: h
-          modifiers:
-            mandatory:
-              - control
+        from: {key_code: h, modifiers: {mandatory: [control]}}
         to:
           - key_code: semicolon
             modifiers:
@@ -542,11 +419,7 @@ rules:
               - ^com\.tinyspeck\.slackmacgap$
       # forward in history
       - type: basic
-        from:
-          key_code: l
-          modifiers:
-            mandatory:
-              - control
+        from: {key_code: l, modifiers: {mandatory: [control]}}
         to:
           - key_code: quote
             modifiers:
@@ -557,11 +430,7 @@ rules:
               - ^com\.tinyspeck\.slackmacgap$
       # next channel
       - type: basic
-        from:
-          key_code: j
-          modifiers:
-            mandatory:
-              - control
+        from: {key_code: j, modifiers: {mandatory: [control]}}
         to:
           - key_code: down_arrow
             modifiers:
@@ -572,11 +441,7 @@ rules:
               - ^com\.tinyspeck\.slackmacgap$
       # prev channel
       - type: basic
-        from:
-          key_code: k
-          modifiers:
-            mandatory:
-              - control
+        from: {key_code: k, modifiers: {mandatory: [control]}}
         to:
           - key_code: up_arrow
             modifiers:
@@ -599,11 +464,7 @@ rules:
       # HACK ctrl-h & ctrl-l to go back / forward a channel cannot be mapped
       # directly in Discord, since they seem to capture things.
       - type: basic
-        from:
-          key_code: h
-          modifiers:
-            mandatory:
-              - control
+        from: {key_code: h, modifiers: {mandatory: [control]}}
         to:
           - key_code: left_arrow
             modifiers:
@@ -613,11 +474,7 @@ rules:
             bundle_identifiers:
               - ^com\.hnc\.Discord$
       - type: basic
-        from:
-          key_code: l
-          modifiers:
-            mandatory:
-              - control
+        from: {key_code: l, modifiers: {mandatory: [control]}}
         to:
           - key_code: right_arrow
             modifiers:
@@ -628,28 +485,16 @@ rules:
               - ^com\.hnc\.Discord$
       # go to next [u]nread
       - type: basic
-        from:
-          key_code: u
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: u, modifiers: {mandatory: [command]}}
         to:
-          - key_code: down_arrow
-            modifiers:
-              - command
-              - shift
-              - option
+          - {key_code: down_arrow, modifiers: [command, shift, option]}
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.hnc\.Discord$
       # inline cod[e]
       - type: basic
-        from:
-          key_code: e
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: e, modifiers: {mandatory: [command]}}
         to:
           - shell_command: |
               pbpaste | pbcopy -pboard ruler # move to alt clipboard
@@ -685,7 +530,7 @@ rules:
         from: {key_code: r, modifiers: {mandatory: [command]}}
         to:
           # saving text in the clipboard required, since tab->up->r only works with empty text input field
-          - {key_code: a, modifiers: [command]} 
+          - {key_code: a, modifiers: [command]}
           - {key_code: x, modifiers: [command]}
           - {key_code: vk_none, hold_down_milliseconds: 30}
           - key_code: tab
@@ -700,11 +545,7 @@ rules:
               - ^com\.hnc\.Discord$
       # em[o]ji reaction to msg above
       - type: basic
-        from:
-          key_code: o
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: o, modifiers: {mandatory: [command]}}
         to:
           - key_code: tab
           - key_code: vk_none
@@ -719,11 +560,7 @@ rules:
               - ^com\.hnc\.Discord$
       # go 3 up [t]
       - type: basic
-        from:
-          key_code: t
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: t, modifiers: {mandatory: [command]}}
         to:
           - key_code: tab
           - key_code: vk_none
@@ -743,11 +580,7 @@ rules:
               - ^com\.hnc\.Discord$
       # next/prev channel
       - type: basic
-        from:
-          key_code: j
-          modifiers:
-            mandatory:
-              - control
+        from: {key_code: j, modifiers: {mandatory: [control]}}
         to:
           - key_code: down_arrow
             modifiers:
@@ -758,27 +591,16 @@ rules:
             bundle_identifiers:
               - ^com\.hnc\.Discord$
       - type: basic
-        from:
-          key_code: k
-          modifiers:
-            mandatory:
-              - control
+        from: {key_code: k, modifiers: {mandatory: [control]}}
         to:
-          - key_code: up_arrow
-            modifiers:
-              - shift
-              - option
+          - {key_code: up_arrow, modifiers: [shift, option]}
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.hnc\.Discord$
       # scroll to bottom (mnenonic: vim's G)
       - type: basic
-        from:
-          key_code: g
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: g, modifiers: {mandatory: [command]}}
         to:
           - key_code: tab
           - key_code: vk_none
@@ -797,15 +619,9 @@ rules:
       # Quick Closing skipping save prompt
       # for movement with tab required: `defaults write NSGlobalDomain AppleKeyboardUIMode -int 3`
       - type: basic
-        from:
-          key_code: q
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: q, modifiers: {mandatory: [command]}}
         to:
-          - key_code: q
-            modifiers:
-              - command
+          - {key_code: q, modifiers: [command]}
           - key_code: vk_none
             hold_down_milliseconds: 500
           - key_code: tab
@@ -824,12 +640,7 @@ rules:
   - description: "(Apps)Drafts"
     manipulators:
       - type: basic
-        from:
-          key_code: comma
-          modifiers:
-            mandatory:
-              - shift
-              - command
+        from: {key_code: comma, modifiers: {mandatory: [shift, command]}}
         to:
           - shell_command: |
               osascript -e 'tell application "System Events"
@@ -843,11 +654,7 @@ rules:
               - ^com\.agiletortoise\.Drafts-OSX$
       # Archive
       - type: basic
-        from:
-          key_code: delete_or_backspace
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: delete_or_backspace, modifiers: {mandatory: [command]}}
         to:
           - shell_command: |
               osascript -e 'tell application "System Events"
@@ -862,11 +669,7 @@ rules:
               - ^com\.agiletortoise\.Drafts-OSX$
       # Next/Prev Draft
       - type: basic
-        from:
-          key_code: j
-          modifiers:
-            mandatory:
-              - control
+        from: {key_code: j, modifiers: {mandatory: [control]}}
         to:
           - shell_command: |
               osascript -e 'tell application "System Events"
@@ -879,9 +682,7 @@ rules:
             bundle_identifiers:
               - ^com\.agiletortoise\.Drafts-OSX$
       - type: basic
-        from: {key_code: f, modifiers: {mandatory: [command]}}
-        from:
-          {key_code: k,modifiers: {mandatory: [control]}}
+        from: {key_code: k, modifiers: {mandatory: [control]}}
         to:
           - shell_command: |
               osascript -e 'tell application "System Events"
@@ -893,7 +694,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.agiletortoise\.Drafts-OSX$
-  - description: "(Apps)\U0001F4EB Mimestream"
+  - description: "(Apps) Mimestream"
     manipulators:
       # snoozing consistent with snoozing in Drafts
       - type: basic
