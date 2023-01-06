@@ -61,7 +61,7 @@ function gli() {
 		echo "'$hash' copied."
 	elif [[ "$key_pressed" == "ctrl-r" ]]; then
 		git reset "$hash"
-	else
+	else # pressed return
 		git checkout "$hash"
 	fi
 }
@@ -186,7 +186,7 @@ function gdf() {
 		print "🔍\033[1;31m No deleted file found."
 		return 1
 	elif [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
-		print "🔍\033[1;32m Multiple files found: "
+		print "🔍\033[1;34m Multiple files found."
 		selection=$(echo "$deleted_path" | fzf --layout=reverse --height=70%)
 		[[ -z "$selection" ]] && return 0
 		deleted_path="$selection"
@@ -194,24 +194,33 @@ function gdf() {
 
 	deletion_commit=$(git log --format='%h' --follow -- "$deleted_path" | head -n1)
 	last_commit=$(git show --format='%h' "$deletion_commit^" | head -n1)
-	[[ -z "$selection" ]] && print "🔍\033[1;32m One file found: $deleted_path"
+	if [[ -z "$selection" ]] ; then
+		print "🔍\033[1;32m One file found:"
+	else
+		print "🔍\033[1;32m Selected file:"
+	fi
 
 	# decision on how to act on file
-	echo
-	print "\033[1;34mr: restore file, s: show content, c: copy content, h: copy hash of last commit \033[0m"
+	echo "$deleted_path"
+	print "\033[1;34m"
+	echo "r: restore (checkout file)"
+	echo "s: show file"
+	echo "c: copy content"
+	echo "h: copy hash of last commit w/ file"
+	print "a: abort\033[0m"
+
 	read -r -k 1 DECISION
 	# shellcheck disable=SC2193
 	if [[ "$DECISION:l" == "c" ]]; then
 		git show "$last_commit:$deleted_path" | pbcopy
 		echo "Content copied."
+	elif [[ "$DECISION:l" == "h" ]]; then
+		echo "$last_commit" | pbcopy
+		echo "Hash \"$last_commit\" copied."
 	elif [[ "$DECISION:l" == "r" ]]; then
 		git checkout "$last_commit" -- "$deleted_path"
 	elif [[ "$DECISION:l" == "s" ]]; then
-		local viewer="cat"
-		command -v bat &>/dev/null && viewer="bat"
-		git show "$last_commit:$deleted_path" | "$viewer"
-	else
-		echo "Invalid choice."
+		git show "$last_commit:$deleted_path" | bat
 	fi
 }
 
