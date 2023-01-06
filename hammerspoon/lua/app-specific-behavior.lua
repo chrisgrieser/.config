@@ -329,6 +329,8 @@ end):start()
 draftsWatcher = aw.new(function(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
 
+	hs.execute("sketchybar --trigger drafts-counter-update")
+
 	if eventType == aw.launching or eventType == aw.activated then
 		local workspace = isAtOffice() and "Office" or "Home"
 		runWithDelays({ 0.2 }, function()

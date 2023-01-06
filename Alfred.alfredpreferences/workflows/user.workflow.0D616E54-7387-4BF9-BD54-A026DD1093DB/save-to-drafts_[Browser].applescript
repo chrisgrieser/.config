@@ -35,7 +35,7 @@ on run argv
 	tell application "Drafts" to make new draft with properties {content: output}
 
 	-- update count in sketchybar
-	do shell script ("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --update")
+	do shell script ("sketchybar --trigger drafts-counter-update || true")
 
 	return notif_msg
 

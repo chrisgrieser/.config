@@ -192,7 +192,6 @@ function gdf() {
 
 	deletion_commit=$(git log --format='%h' --follow -- "$deleted_path" | head -n1)
 	last_commit=$(git show --format='%h' "$deletion_commit^" | head -n1)
-	# if
 	[[ -z "$selection" ]] && print "🔍\033[1;32m One file found: $deleted_path ($last_commit)"
 
 	# decision on how to act on file

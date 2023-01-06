@@ -42,6 +42,16 @@ keymap({ "n", "x" }, "K", "6k")
 keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "K", "2k")
 
+-- e,w,b make small movements, treating _-. as word boundaries
+for key in { "e", "w", "b" } do
+	keymap({ "n", "x" }, key, function()
+		local iskeywBefore = opt.iskeyword:get()
+		opt.iskeyword:remove { "_", "-", "." }
+		normal(key)
+		opt.iskeyword = iskeywBefore
+	end, { desc = "small " .. key })
+end
+
 -- add overscroll
 keymap("n", "j", function() qol.overscroll("j") end, { desc = "j (with overscroll)" })
 keymap({ "n", "x" }, "G", "Gzz")
@@ -560,7 +570,6 @@ keymap("n", "<leader>r", function()
 	-- None
 	else
 		vim.notify("No build system set.", logWarn)
-
 	end
 end, { desc = "Build System" })
 
