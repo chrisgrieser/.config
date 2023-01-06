@@ -13,7 +13,6 @@ import os
 # tags not to display in search
 TAG_TO_EXCLUDE = os.getenv('tagToExcludeFromSearch')
 
-
 def search_draft(str_search):
 	str_path_db = expanduser("~") + "/Library/Group Containers/GTFQ98J4YG.com.agiletortoise.Drafts/DraftStore.sqlite"
 
@@ -22,14 +21,13 @@ def search_draft(str_search):
 			rows = cursor.execute(("select ZUUID, ZCONTENT, ZCREATED_AT, ZCHANGED_AT, ZCACHED_TAGS, ZFOLDER, ZFLAGGED from main.ZMANAGEDDRAFT where ZCONTENT like '%{}%' and ZFOLDER = 0 and ZCACHED_TAGS != 'ZZZ" + TAG_TO_EXCLUDE + "ZZZ';").format(str_search)).fetchall()  # type: ignore
 			return rows
 
-# draft ZFOLDER codes: Inbox = 0, Archive = 1, Trash = 10000
+# INFO draft ZFOLDER codes: Inbox = 0, Archive = 1, Trash = 10000
 # the condition at the end of line "rows = cursor.execute" filters for drafts in the Inbox not being a tasklist.
 # draft ZFLAGGED codes: unflagged = 0, flagged = 1
 
 
 STR_ARG = ' '.join(sys.argv[1:])
-# Normalise any decomposed UTF-8 text from Alfred to composed UTF-8 test to use with SQLite
-STR_ARG = ud.normalize('NFC', STR_ARG)
+STR_ARG = ud.normalize('NFC', STR_ARG) # Normalise any decomposed UTF-8 text from Alfred to composed UTF-8 test to use with SQLite
 
 INT_SQLLITE_EPOCH = 978307200
 draftMatch = search_draft(STR_ARG)
@@ -39,10 +37,7 @@ for x in draftMatch:
 
 	# flagged status
 	is_flagged = x[6]
-	if is_flagged == 1:
-		DRAFT_FLAGGED = "🟠 "
-	else:
-		DRAFT_FLAGGED = ""
+	DRAFT_FLAGGED = "🟠 " if is_flagged == 1 else ""
 
 	# remove markdown from title for readability
 	draftTitle = x[1].partition('\n')[0]

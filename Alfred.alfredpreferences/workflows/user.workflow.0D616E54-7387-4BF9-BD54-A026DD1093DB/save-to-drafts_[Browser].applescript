@@ -6,6 +6,7 @@ on run argv
 	tell application "System Events" to set frontApp to (name of first process where it is frontmost)
 
 	set hotkeyUsed to (system attribute "hotkeyUsed")
+	tell application id "com.runningwithcrayons.Alfred" to remove configuration "hotkeyUsed" in workflow (system attribute "alfred_workflow_bundleid")
 
 	if (selectionExists is false) and (frontApp is not "Brave Browser") then
 		return "🛑 No Input provided."
@@ -32,6 +33,9 @@ on run argv
 	end if
 
 	tell application "Drafts" to make new draft with properties {content: output}
+
+	-- update count in sketchybar
+	do shell script ("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --update")
 
 	return notif_msg
 
