@@ -20,8 +20,8 @@ passPath="$PASSWORD_STORE_DIR"
 cd "$passPath" || configError="repo-path wrong"
 passChanges=$(git status --porcelain --branch | grep -Eo "\d") # to check for ahead/behind instead of untracked, since pass auto add-commits, but does not auto-push
 
-[[ $dotChanges -ne 0 ]] && label="${dotChanges}d"
-[[ $vaultChanges -ne 0 ]] && label="$label ${vaultChanges}v"
-[[ -n "$passChanges" ]] && label="$label ${passChanges}p"
+[[ $dotChanges -ne 0 ]] && label="${dotChanges}d "
+[[ $vaultChanges -ne 0 ]] && label="$label${vaultChanges}v "
+[[ -n "$passChanges" ]] && label="$label${passChanges}p "
 [[ -n "$label" ]] && icon="痢"
 sketchybar --set "$NAME" icon="$icon" label="$label$configError"

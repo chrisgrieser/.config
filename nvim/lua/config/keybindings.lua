@@ -43,7 +43,7 @@ keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "K", "2k")
 
 -- e,w,b make small movements, treating _-. as word boundaries
-for _, key in ipairs{ "e", "w", "b" } do
+for _, key in ipairs { "e", "w", "b" } do
 	keymap({ "n", "x" }, key, function()
 		local iskeywBefore = opt.iskeyword:get()
 		opt.iskeyword:remove { "_", "-", "." }
@@ -223,11 +223,11 @@ keymap("x", "<S-Tab>", "<gv", { desc = "outdent" })
 -- Casing
 keymap("n", "ü", "mzlblgueh~`z", { desc = "toggle capital/lowercase of word" })
 keymap("n", "Ü", "gUiw", { desc = "uppercase word" })
-keymap("n", "~", "~h", { desc = "switch char case w/o moving" })
+keymap("n", "~", "~h")
 keymap("n", "ä", qol.wordSwitch, { desc = "switch common words" })
 
 -- Append to / delete from EoL
-local trailingKeys = { ".", ",", ";", ":", '"', "'", ")", "}", "]" }
+local trailingKeys = { ",", ";", '"', "'", ")", "}", "]" }
 for _, v in pairs(trailingKeys) do
 	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = "append " .. v .. " to EoL" })
 end
@@ -243,11 +243,12 @@ keymap("n", "za", "mz1z=`z", { desc = "autofix spelling" }) -- [a]utofix word un
 keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
 keymap("n", "ss", function() require("substitute").line() end, { desc = "substitute line" })
 keymap("n", "S", function() require("substitute").eol() end, { desc = "substitute to end of line" })
-keymap("n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange op" })
+-- stylua: ignore
+keymap( "n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange operator" })
 keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
 -- IS[w]ap
-keymap("n", "gw", cmd.ISwapWith, { desc = "exchange nodes (ISwap)" })
+keymap("n", "<leader>w", cmd.ISwapWith, { desc = "swap nodes" })
 
 -- search & replace
 keymap(
@@ -257,7 +258,12 @@ keymap(
 	{ desc = "search & replace" }
 )
 keymap("x", "<leader>f", ":s///gI<Left><Left><Left><Left>", { desc = "search & replace" })
-keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "struct. search & replace" })
+keymap(
+	{ "n", "x" },
+	"<leader>F",
+	function() require("ssr").open() end,
+	{ desc = "struct. search & replace" }
+)
 keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
 keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
 
@@ -446,7 +452,12 @@ keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = 
 keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = "copy filename" })
 keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = "chmod +x" })
 keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = "rename file" })
-keymap("n", "<D-S-m>", function() require("genghis").moveAndRenameFile() end, { desc = "move-rename file" })
+keymap(
+	"n",
+	"<D-S-m>",
+	function() require("genghis").moveAndRenameFile() end,
+	{ desc = "move-rename file" }
+)
 keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = "duplicate file" })
 keymap("n", "<D-BS>", function() require("genghis").trashFile() end, { desc = "move file to trash" })
 keymap("n", "<D-n>", function() require("genghis").createNewFile() end, { desc = "create new file" })

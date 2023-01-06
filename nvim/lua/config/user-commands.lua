@@ -18,10 +18,6 @@ end, {})
 -- `:PluginDir` opens the nvim data path, where mason and lazy install their stuff
 newCommand("PluginDir", function(_) fn.system('open "' .. fn.stdpath("data") .. '"') end, {})
 
--- remove bad linebreaks from Applescript
--- WARN: do not save (auto-format) this file, will remove the line break
-newCommand("NoAppleLineBreaks", function () cmd[[.s//\r/g]]	end, {})
-
 -- `:I` or `<leader>I` inspects the passed lua object / selection
 local function inspect(str)
 	local output = vim.inspect(fn.luaeval(str))
