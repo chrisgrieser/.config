@@ -1,10 +1,9 @@
 #!/usr/bin/env osascript
 on run argv
-	set AppleScript's text item delimiters to ""
 	set input to argv as string
+
 	set selectionExists to (input is not "")
 	tell application "System Events" to set frontApp to (name of first process where it is frontmost)
-	tell application id "com.runningwithcrayons.Alfred" to set configuration "focusedapp" to value frontApp in workflow (system attribute "alfred_workflow_bundleid") with exportable
 
 	set hotkeyUsed to (system attribute "hotkeyUsed")
 
@@ -33,9 +32,6 @@ on run argv
 	end if
 
 	tell application "Drafts" to make new draft with properties {content: output}
-
-	-- reset
-	tell application id "com.runningwithcrayons.Alfred" to set configuration "hotkeyUsed" to value "false" in workflow (system attribute "alfred_workflow_bundleid")
 
 	return notif_msg
 

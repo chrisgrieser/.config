@@ -211,7 +211,7 @@ function autoTile(windowSource)
 	---@return hs.window[]
 	local function getWins(_windowSource)
 		if type(_windowSource) == "string" then
-			return app(_windowSource):allWindows()
+			return app(_windowSource):allWindows()	
 		else
 			return _windowSource:getWindows()
 		end
@@ -226,9 +226,11 @@ function autoTile(windowSource)
 
 	if #wins == 0 and frontAppName() == "Finder" then
 		-- prevent quitting when window is created imminently
-		runWithDelays(0.2, function()
-			-- INFO: quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
-			-- getWins() again to check if window count has changed in the meantime
+		runWithDelays(0.5, function()
+			-- 1) quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
+			-- 2) getWins() again to check if window count has changed in the meantime
+			-- 3) delay needs to be high enough to since e.g. during quitting fullscreen
+			-- mode, Hammerspoon temporarily cannot detect Finder windows (sic!)
 			if #getWins(windowSource) == 0 then app("Finder"):kill() end
 		end)
 	elseif #wins == 1 then
