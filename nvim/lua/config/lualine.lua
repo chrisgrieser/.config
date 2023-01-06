@@ -90,6 +90,8 @@ local function currentFile()
 		local mode = fn.mode() == "t" and "[T]" or "[N]"
 		return " Terminal " .. mode
 	elseif bo.buftype == "nofile" then
+		curFile = curFile ~= "" and ft or curFile
+		if curFile == "" then curFile = ft end
 		return " " .. curFile -- e.g. Codi
 	elseif curFile == "" and ft ~= "" then
 		return " " .. ft 
