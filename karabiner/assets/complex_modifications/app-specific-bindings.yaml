@@ -1,4 +1,4 @@
-title: "(Apps)App-kpecific-Bindings"
+title: "App-specific-Bindings"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
   - description: "(Apps) Zoom"
@@ -9,7 +9,7 @@ rules:
         to:
           - key_code: h
             modifiers: [command, shift]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^us\\.zoom\\.xos$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^us\.zoom\.xos$]}]
   - description: "(Apps) Microsoft & Google Office"
     manipulators:
       # export
@@ -36,7 +36,7 @@ rules:
                     click menu item "Comment" of menu "Insert" of menu bar 1
                   end tell
                 end tell'
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.microsoft\\.Word$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$]}]
       # Comment in Google Docs
       - type: basic
         from: {key_code: k, modifiers: {mandatory: [command]}}
@@ -66,7 +66,7 @@ rules:
           - key_code: down_arrow
           - key_code: down_arrow # assuming hidden menubar, otherwise only 1x arrow down
           - key_code: return_or_enter
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\\.highlightsapp\\.universal$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$]}]
       # Back & Forward
       - type: basic
         from: {key_code: h, modifiers: {mandatory: [control]}}
@@ -79,7 +79,7 @@ rules:
                     click menu item "Back" of menu "Go" of menu bar 1
                   end tell
                 end tell'
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\\.highlightsapp\\.universal$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$]}]
       - type: basic
         from: {key_code: l, modifiers: {mandatory: [control]}}
         to:
@@ -91,19 +91,19 @@ rules:
                     click menu item "Forward" of menu "Go" of menu bar 1
                   end tell
                 end tell'
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\\.highlightsapp\\.universal$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$]}]
       # Right Sidebar
       - type: basic
         from: {key_code: "0", modifiers: {mandatory: [command]}}
         to:
           - key_code: "2"
             modifiers: [command]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\\.highlightsapp\\.universal$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$]}]
       # Toolbar
       - type: basic
         from: {key_code: "9", modifiers: {mandatory: [command]}}
         to: [{key_code: t, modifiers: [command, option]}]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\\.highlightsapp\\.universal$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$]}]
       # Image Tool
       - type: basic
         from: {key_code: i, modifiers: {mandatory: [command]}}
@@ -113,7 +113,7 @@ rules:
           - key_code: "7" # purple borders
             modifiers: [command, control]
           - shell_command: "osascript -e 'display notification \"Tool\" with title \"Image \U0001F5BC️\"'"
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\\.highlightsapp\\.universal$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$]}]
       # Red Underline Tool
       - type: basic
         from: {key_code: u, modifiers: {mandatory: [command]}}
@@ -123,7 +123,7 @@ rules:
           - key_code: "1"
             modifiers: [command, control]
           - shell_command: "osascript -e 'display notification \"Tool\" with title \"Underline \U0001F58D️\"'"
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\\.highlightsapp\\.universal$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$]}]
       # Comment Tool
       - type: basic
         from: {key_code: k, modifiers: {mandatory: [command]}}
@@ -133,7 +133,7 @@ rules:
           - key_code: "3" # yellow
             modifiers: [command, control]
           - shell_command: "osascript -e 'display notification \"Tool\" with title \"Comment \U0001F5E3️\"'"
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\\.highlightsapp\\.universal$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$]}]
       # Yellow Highlight Tool
       - type: basic
         from: {key_code: z, modifiers: {mandatory: [command]}} # z and y switched on German keyboard
@@ -143,7 +143,7 @@ rules:
           - key_code: "3"
             modifiers: [command, control]
           - shell_command: "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\\.highlightsapp\\.universal$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$]}]
   - description: "(Apps)Brave"
     manipulators:
       # open dev tools
@@ -158,7 +158,7 @@ rules:
             modifiers: [command, shift]
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers: [^com\\.brave\\.Browser] # no $ to also work in PWAs
+            bundle_identifiers: [^com\.brave\.Browser] # no $ to also work in PWAs
   - description: "\U0001F170️\U0001F3DE YouTube: ⌘+P → Picture-in-Picture Mode"
     manipulators:
       - type: basic
@@ -178,7 +178,7 @@ rules:
         conditions:
           - type: frontmost_application_if
             file_paths: [YouTube, Brave Browser]
-  - description: "\U0001F170️\U0001F4D6 Reeder: b opens in background"
+  - description: "(Apps) Reeder: b opens in background"
     manipulators:
       - type: basic
         from: {key_code: b}
@@ -188,8 +188,8 @@ rules:
             hold_down_milliseconds: 300
           - key_code: h
             modifiers: [command]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.reederapp\\.\\d\\.macOS$]}]
-  - description: "\U0001F170️\U0001F4D6 Inoreader: b opens in background, switch jk & np"
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.reederapp\.\d\.macOS$]}]
+  - description: "(Apps) Inoreader: b opens in background, switch jk & np"
     manipulators:
       - type: basic
         from: {key_code: b}
@@ -219,23 +219,19 @@ rules:
   - description: "\U0001F170️\U0001F528 Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
       - type: basic
-        from:
-          key_code: q
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: q, modifiers: {mandatory: [command]}}
         to: [{key_code: w, modifiers: [command]}]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^org\\.hammerspoon\\.Hammerspoon$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^org\.hammerspoon\.Hammerspoon$]}]
       - type: basic
         from: {key_code: k, modifiers: {mandatory: [command]}}
         to:
           - shell_command: open 'hammerspoon://clear-console'
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^org\\.hammerspoon\\.Hammerspoon$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^org\.hammerspoon\.Hammerspoon$]}]
       - type: basic
         from: {key_code: c, modifiers: {mandatory: [command, shift]}}
         to:
           - shell_command: open 'hammerspoon://copy-last-command'
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^org\\.hammerspoon\\.Hammerspoon$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^org\.hammerspoon\.Hammerspoon$]}]
   - description: "\U0001F170️\U0001F4AC Slack"
     # https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
     # INFO: cmd+e for inline code is in the Discord-Section
@@ -246,42 +242,42 @@ rules:
         to:
           - key_code: down_arrow
             modifiers: [option, shift]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.tinyspeck\\.slackmacgap$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$]}]
       # toggle sidebar
       - type: basic
         from: {key_code: "1", modifiers: {mandatory: [command]}}
         to:
           - key_code: d
             modifiers: [command, shift]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.tinyspeck\\.slackmacgap$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$]}]
       # back in history
       - type: basic
         from: {key_code: h, modifiers: {mandatory: [control]}}
         to:
           - key_code: semicolon
             modifiers: [command]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.tinyspeck\\.slackmacgap$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$]}]
       # forward in history
       - type: basic
         from: {key_code: l, modifiers: {mandatory: [control]}}
         to:
           - key_code: quote
             modifiers: [command]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.tinyspeck\\.slackmacgap$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$]}]
       # next channel
       - type: basic
         from: {key_code: j, modifiers: {mandatory: [control]}}
         to:
           - key_code: down_arrow
             modifiers: [option]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.tinyspeck\\.slackmacgap$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$]}]
       # prev channel
       - type: basic
         from: {key_code: k, modifiers: {mandatory: [control]}}
         to:
           - key_code: up_arrow
             modifiers: [option]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.tinyspeck\\.slackmacgap$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$]}]
   - description: "Alfred Preferences: cmd+0 as cmd+9"
     manipulators:
       - type: basic
@@ -298,19 +294,19 @@ rules:
         to:
           - key_code: left_arrow
             modifiers: [control]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.hnc\\.Discord$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$]}]
       - type: basic
         from: {key_code: l, modifiers: {mandatory: [control]}}
         to:
           - key_code: right_arrow
             modifiers: [control]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.hnc\\.Discord$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$]}]
       # go to next [u]nread
       - type: basic
         from: {key_code: u, modifiers: {mandatory: [command]}}
         to:
           - {key_code: down_arrow, modifiers: [command, shift, option]}
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.hnc\\.Discord$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$]}]
       # inline cod[e]
       - type: basic
         from: {key_code: e, modifiers: {mandatory: [command]}}
@@ -354,7 +350,7 @@ rules:
           - {key_code: vk_none, hold_down_milliseconds: 70}
           - key_code: r
           - {key_code: v, modifiers: [command]}
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.hnc\\.Discord$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$]}]
       # em[o]ji reaction to msg above
       - type: basic
         from: {key_code: o, modifiers: {mandatory: [command]}}
@@ -366,7 +362,7 @@ rules:
           - key_code: vk_none
             hold_down_milliseconds: 50
           - key_code: close_bracket
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.hnc\\.Discord$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$]}]
       # go 3 up [t]
       - type: basic
         from: {key_code: t, modifiers: {mandatory: [command]}}
@@ -383,19 +379,19 @@ rules:
           - key_code: up_arrow
           - key_code: vk_none
             hold_down_milliseconds: 30
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.hnc\\.Discord$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$]}]
       # next/prev channel
       - type: basic
         from: {key_code: j, modifiers: {mandatory: [control]}}
         to:
           - key_code: down_arrow
             modifiers: [shift, option]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.hnc\\.Discord$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$]}]
       - type: basic
         from: {key_code: k, modifiers: {mandatory: [control]}}
         to:
           - {key_code: up_arrow, modifiers: [shift, option]}
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.hnc\\.Discord$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$]}]
       # scroll to bottom (mnenonic: vim's G)
       - type: basic
         from: {key_code: g, modifiers: {mandatory: [command]}}
@@ -408,8 +404,8 @@ rules:
             hold_down_milliseconds: 30
           - key_code: escape
           - key_code: escape
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.hnc\\.Discord$]}]
-  - description: "(Apps)Script Editor"
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$]}]
+  - description: "(Apps) Script Editor"
     manipulators:
       # Quick Closing skipping save prompt
       # for movement with tab required: `defaults write NSGlobalDomain AppleKeyboardUIMode -int 3`
@@ -428,7 +424,7 @@ rules:
           - key_code: vk_none
             hold_down_milliseconds: 100
           - key_code: spacebar
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.apple\\.ScriptEditor]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor]}]
   - description: "(Apps)Drafts"
     manipulators:
       - type: basic
@@ -440,7 +436,7 @@ rules:
                   click menu item "Manage Actions..." of menu "Actions" of menu bar 1
                 end tell
               end tell'
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.agiletortoise\\.Drafts-OSX$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.agiletortoise\.Drafts-OSX$]}]
       # Archive
       - type: basic
         from: {key_code: delete_or_backspace, modifiers: {mandatory: [command]}}
@@ -452,7 +448,7 @@ rules:
                 end tell
               end tell'
               afplay "/System/Library/Sounds/Tink.aiff"
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.agiletortoise\\.Drafts-OSX$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.agiletortoise\.Drafts-OSX$]}]
       # Next/Prev Draft
       - type: basic
         from: {key_code: j, modifiers: {mandatory: [control]}}
@@ -463,7 +459,7 @@ rules:
                   click menu item "Next Draft" of menu "File" of menu bar 1
                 end tell
               end tell'
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.agiletortoise\\.Drafts-OSX$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.agiletortoise\.Drafts-OSX$]}]
       - type: basic
         from: {key_code: k, modifiers: {mandatory: [control]}}
         to:
@@ -473,7 +469,7 @@ rules:
                   click menu item "Previous Draft" of menu "File" of menu bar 1
                 end tell
               end tell'
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.agiletortoise\\.Drafts-OSX$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.agiletortoise\.Drafts-OSX$]}]
   - description: "(Apps) Mimestream"
     manipulators:
       # snoozing consistent with snoozing in Drafts
@@ -482,19 +478,19 @@ rules:
         to:
           - key_code: s
             modifiers: [command, option]
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.mimestream\\.Mimestream$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$]}]
       # toggle toolbar
       - type: basic
         from: {key_code: "9", modifiers: {mandatory: [command]}}
         to:
           - {key_code: t, modifiers: [command, option]}
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.mimestream\\.Mimestream$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$]}]
       # toggle sidebar
       - type: basic
         from: {key_code: "1", modifiers: {mandatory: [command]}}
         to:
           - {key_code: s, modifiers: [command, control]}
-        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\\.mimestream\\.Mimestream$]}]
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$]}]
   - description: "(Apps)Alacritty: cmd+l → open location"
     manipulators:
       - type: basic

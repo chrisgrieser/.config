@@ -324,12 +324,19 @@ rules:
           - shell_command: open 'https://www.messenger.com/'
           - *deactivate-leader
           - *remove-notice
-      # [R]eddit: neovim
+      # [R]eddit: neovim/vim
       - type: basic
         from: {key_code: r}
         conditions: [*leader-active]
         to:
-          - shell_command: open 'https://www.reddit.com/r/neovim/'
+          - shell_command: |
+              tab=$(osascript -e 'tell application "Brave Browser" to return URL of active tab of front window')
+              if [[ "$tab" =~ reddit.com.r.neovim ]] ; then
+                osascript -e 'tell application "Brave Browser" to set the URL of active tab of front window to ""'
+                open 'https://www.reddit.com/r/vim/'
+              else
+                open 'https://www.reddit.com/r/neovim/'
+              fi
           - *deactivate-leader
           - *remove-notice
       # [?] (w/o shift, German keyboard) man page
