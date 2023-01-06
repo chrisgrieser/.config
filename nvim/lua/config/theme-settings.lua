@@ -25,7 +25,10 @@ local function setHighlight(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .
 
 -- Annotations
 linkHighlight("myAnnotations", "Todo")
-fn.matchadd("myAnnotations", [[\<\(BUG\|WARN\|WIP\|TODO\|WTF\|HACK\|INFO\|NOTE\|WARNING\|FIX\|REQUIRED\)\>]])
+fn.matchadd(
+	"myAnnotations",
+	[[\<\(BUG\|WARN\|WIP\|TODO\|WTF\|HACK\|INFO\|NOTE\|WARNING\|FIX\|REQUIRED\)\>]]
+)
 
 --------------------------------------------------------------------------------
 -- CUSTOM HIGHLIGHTS & Theme Customization
@@ -42,7 +45,7 @@ local function customHighlights()
 		"SpellBad",
 	}
 	for _, v in pairs(highlights) do
-		setHighlight(v, "gui=underline")
+		s etHighlight(v, "gui=underline cterm=underline")
 	end
 
 	-- active indent
@@ -112,6 +115,20 @@ local function themeModifications()
 
 	-- zephyr
 	elseif theme == "zephyr" then
+		setHighlight("IncSearch", "guifg=#FFFFFF")
+		local highlights = {
+			"DiagnosticUnderlineError",
+			"DiagnosticUnderlineWarn",
+			"DiagnosticUnderlineHint",
+			"DiagnosticUnderlineInfo",
+			"SpellLocal",
+			"SpellRare",
+			"SpellCap",
+			"SpellBad",
+		}
+		for _, v in pairs(highlights) do
+			setHighlight(v, "gui=underline cterm=underline")
+		end
 
 	-- dawnfox
 	elseif theme == "dawnfox" then

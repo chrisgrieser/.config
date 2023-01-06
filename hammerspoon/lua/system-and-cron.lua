@@ -130,8 +130,10 @@ wakeWatcher = caff
 		if isAtOffice() and eventType == caff.screensDidUnlock then
 			syncAllGitRepos()
 			officeModeLayout()
+			sketchybarPopup("show")
 		elseif not (isAtOffice()) and (eventType == caff.screensDidWake or eventType == caff.systemDidWake) then
 			runWithDelays(1, function()
+				sketchybarPopup("show")
 				if isProjector() then
 					setDarkmode(true)
 					movieModeLayout()

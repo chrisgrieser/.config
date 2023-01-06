@@ -28,6 +28,15 @@ return {
 		"sindrets/diffview.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = { "DiffviewFileHistory", "DiffviewOpen" },
+		init = function()
+			-- HACK since for whatever reason, adding this as a keymap below does not work
+			vim.api.nvim_create_augroup("diffview-fix", {})
+			vim.api.nvim_create_autocmd("FileType", {
+				group = "diffview-fix",
+				pattern = "DiffviewFileHistory",
+				callback = function() vim.keymap.set("n", "<CR>", "<C-w>w", { buffer = true }) end,
+			})
+		end,
 		config = function()
 			local actions = require("diffview.actions")
 			require("diffview").setup {
@@ -40,11 +49,10 @@ return {
 				keymaps = {
 					view = {
 						{ "n", "<D-w>", vim.cmd.tabclose, {} }, -- close tab instead of window
-						{ "n", "<CR>", function () vim.cmd.wincmd("w") end, {} }, -- consistent with general buffer switcher
+						{ "n", "<CR>", function() vim.cmd.wincmd("w") end, {} }, -- consistent with general buffer switcher
 					},
 					file_history_panel = {
-						{ "n", "<D-w>", vim.cmd.tabclose, {} }, 
-						{ "n", "<CR>", function () vim.cmd.wincmd("w") end, {} }, 
+						{ "n", "<D-w>", vim.cmd.tabclose, {} },
 						{ "n", "?", actions.help("file_history_panel"), {} },
 					},
 				},

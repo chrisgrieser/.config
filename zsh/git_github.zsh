@@ -36,21 +36,21 @@ alias gll="git log --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset)
 # interactive
 function gli() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && exit 1; fi
-	
+
 	local hash key_pressed selected
 	selected=$(
-		git log --all --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' \
-			| fzf -0 \
-			--query="$1" \
-			--ansi \
-			--nth=2.. \
-			--with-nth=2.. \
-			--no-sort \
-			--no-info \
-			--header-first --header="↵ : checkout  ^H: copy [h]ash  ^R: [r]eset" \
-			--expect="ctrl-h,ctrl-r" \
-			--preview-window="wrap" \
-			--preview="git --no-optional-locks show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"
+		git log --all --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' |
+			fzf -0 \
+				--query="$1" \
+				--ansi \
+				--nth=2.. \
+				--with-nth=2.. \
+				--no-sort \
+				--no-info \
+				--header-first --header="↵ : checkout  ^H: copy [h]ash  ^R: [r]eset" \
+				--expect="ctrl-h,ctrl-r" \
+				--preview-window="wrap" \
+				--preview="git --no-optional-locks show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
@@ -81,16 +81,19 @@ function acp() {
 
 	local COMMIT_MSG="$*"
 	[[ -z "$COMMIT_MSG" ]] && COMMIT_MSG="chore"
+
 	# shellcheck disable=2155
 	local first_word=$(echo "$COMMIT_MSG" | grep -oe "^\w*")
 	conventional_commits="feat chore build fix perf refactor style ci docs test revert"
 	local MSG_LENGTH=${#COMMIT_MSG}
 
+	# ensure no overlength
 	if [[ $MSG_LENGTH -gt 50 ]]; then
 		echo "Commit Message too long ($MSG_LENGTH chars)."
 		COMMIT_MSG=${COMMIT_MSG::50}
 		print -z "acp \"$COMMIT_MSG\"" # put back into buffer
 		return 1
+	# enforce conventional commits keyword
 	elif ! [[ "$conventional_commits" =~ $first_word ]]; then
 		echo "'$first_word' not a conventional commits keyword."
 		print -z "acp \"$COMMIT_MSG\""
@@ -184,10 +187,7 @@ function gdf() {
 		return 1
 	elif [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
 		print "🔍\033[1;32m Multiple files found: "
-		selection=$(echo "$deleted_path" | fzf \
-			--layout=reverse \
-			--height=70%\
-		)
+		selection=$(echo "$deleted_path" | fzf --layout=reverse --height=70%)
 		[[ -z "$selection" ]] && return 0
 		deleted_path="$selection"
 	fi
@@ -198,15 +198,20 @@ function gdf() {
 
 	# decision on how to act on file
 	echo
-	print "\033[1;34mc: checkout file, o: open file"
+	print "\033[1;34mr: restore file, s: show content, c: copy content"
 	read -r -k 1 DECISION
 	# shellcheck disable=SC2193
 	if [[ "$DECISION:l" == "c" ]]; then
+		git show "$last_commit:$deleted_path" | pbcopy
+		echo "Content copied."
+	elif [[ "$DECISION:l" == "r" ]]; then
 		git checkout "$last_commit" -- "$deleted_path"
-	elif [[ "$DECISION:l" == "o" ]]; then
+	elif [[ "$DECISION:l" == "s" ]]; then
 		local viewer="cat"
 		command -v bat &>/dev/null && viewer="bat"
 		git show "$last_commit:$deleted_path" | "$viewer"
+	else
+		echo "Invalid choice."
 	fi
 }
 

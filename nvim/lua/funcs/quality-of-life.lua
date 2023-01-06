@@ -84,13 +84,13 @@ function M.smartDuplicateLine()
 	local line = getline(".")
 	local ft = bo.filetype
 
-	-- smart switching of words
+	-- smart switching of conditionals
 	if ft == "lua" and line:find("^%s*if.+then$") then
 		line = line:gsub("^(%s*)if", "%1elseif")
 	elseif (ft == "bash" or ft == "zsh" or ft == "sh") and line:find("^%s*if.+then$") then
 		line = line:gsub("^(%s*)if", "%1elif")
 	elseif (ft == "javascript" or ft == "typescript") and line:find("^%s*if.+{$") then
-		line = line:gsub("^(%s*)if", "%1else if")
+		line = line:gsub("^(%s*)if", "%1} else if")
 	end
 
 	-- increment numbered vars
@@ -136,6 +136,7 @@ function M.wordSwitch()
 		{ "width", "height" },
 		{ "relative", "absolute" },
 		{ "dark", "light" },
+		{ "and", "or" },
 	}
 	local ft = bo.filetype
 	local ftWords -- 3rd item false if 2nd item shouldn't also switch to first
@@ -147,7 +148,6 @@ function M.wordSwitch()
 			{ "else", "if", false },
 			{ "function", "local function", false },
 			{ "pairs", "ipairs" },
-			{ "and", "or" },
 		}
 	elseif ft == "python" then
 		ftWords = {
