@@ -46,7 +46,7 @@ function themeSettings()
 			"DiagnosticUnderlineError",
 			"DiagnosticUnderlineWarn",
 			"DiagnosticUnderlineHint",
-			"DiagnosticUnderlineInfo",
+				-- function not local, so they can be accessed via file watcher",
 			"SpellLocal",
 			"SpellRare",
 			"SpellCap",
@@ -155,32 +155,19 @@ function themeSettings()
 
 	--------------------------------------------------------------------------------
 	-- DARK MODE / LIGHT MODE
-	-- functions not local, so they can be accessed via file watcher
-	---comment
-	---@param mode any
+	---@param mode string "dark"|"light"
 	function setThemeMode(mode)
 		o.background = mode
-		g.neovide_transparency = darkTransparency
+		g.neovide_transparency = mode == "dark" and darkTransparency or lightTransparency
 		cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
-		cmd.colorscheme(darkTheme)
-	end
-
-	function setLightTheme()
-		o.background = "light" 
-		g.neovide_transparency = lightTransparency
-		cmd.highlight("clear")
-		cmd.colorscheme(lightTheme)
+		local targetTheme = mode == "dark" and darkTheme or lightTheme
+		cmd.colorscheme(targetTheme)
 	end
 
 	-- set dark or light mode on neovim startup (requires macos)
 	local macOStheme = fn.system([[defaults read -g AppleInterfaceStyle]])
 	local targetMode = macOStheme:find("Dark") and "dark" or "light"
 	setThemeMode(targetMode)
-	if macOStheme:find("Dark") then
-		setDarkTheme()
-	else
-		setLightTheme()
-	end
 end
 
 return themePackages

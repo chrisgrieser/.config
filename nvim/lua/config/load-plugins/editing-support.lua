@@ -56,7 +56,6 @@ return {
 		lazy = true,
 		config = function() require("substitute").setup() end,
 	},
-
 	{
 		"chrisgrieser/nvim-recorder", -- better macros
 		dev = true,

@@ -41,9 +41,9 @@ cons.titleVisibility("hidden")
 cons.toolbar(nil)
 cons.consoleFont { name = "JetBrainsMonoNL Nerd Font", size = 21 }
 
----@param toDark boolean
-function setConsoleColors(toDark)
-	if toDark then
+---@param mode string "dark"|"light""
+function setConsoleColors(mode)
+	if mode == "dark" then
 		cons.darkMode(true)
 		cons.outputBackgroundColor { white = 0.1 }
 		cons.consolePrintColor { white = 0.9 }
@@ -57,7 +57,7 @@ function setConsoleColors(toDark)
 end
 
 -- initialize
-local isDark = hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n"
+local isDark = hs.execute([[defaults read -g AppleInterfaceStyle]]):find("Dark") and "dark" or "light"
 setConsoleColors(isDark)
 
 -- copy last command to clipboard
