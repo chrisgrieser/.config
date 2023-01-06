@@ -1,7 +1,6 @@
 require("lua.utils")
 require("lua.window-management")
 require("lua.private")
-local useLayout = hs.layout.apply
 --------------------------------------------------------------------------------
 
 ---@param targetMode string
@@ -108,7 +107,7 @@ function homeModeLayout()
 		"alacritty",
 		"Alacritty",
 	})
-	useLayout(hs.fnutils.concat(main, side))
+	hs.layout.apply(hs.fnutils.concat(main, side))
 
 	showAllSidebars()
 	runWithDelays({ 0.5, 1 }, function() app("Drafts"):activate() end)
@@ -158,7 +157,7 @@ function officeModeLayout()
 		"Warp",
 	})
 	local officeLayout = hs.fnutils.concat(sideTop, sideBottom, main)
-	runWithDelays({ 0, 0.3 }, function() useLayout(officeLayout) end)
+	runWithDelays({ 0, 0.3 }, function() hs.layout.apply(officeLayout) end)
 
 	showAllSidebars()
 	runWithDelays(0.5, function() app("Drafts"):activate() end)
@@ -236,7 +235,7 @@ local function motherHomeModeLayout()
 	})
 	local motherHomeLayout = hs.fnutils.concat(main, side)
 
-	runWithDelays({ 0, 0.2, 0.4, 0.6 }, function() useLayout(motherHomeLayout) end)
+	runWithDelays({ 0, 0.2, 0.4, 0.6 }, function() hs.layout.apply(motherHomeLayout) end)
 	showAllSidebars()
 end
 

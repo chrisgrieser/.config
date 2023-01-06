@@ -8,14 +8,13 @@ function bindEverywhere () {
 bindEverywhere "^A" beginning-of-line
 bindEverywhere "^E" end-of-line
 bindEverywhere "^K" kill-line
-bindEverywhere "^Z" undo
 bindEverywhere "^U" kill-whole-line
 bindEverywhere "^P" copy-location
 bindEverywhere "^B" copy-buffer
-bindEverywhere "^L" open-location
+bindEverywhere "^L" open-location # remapped to cmd+l via karabiner
 bindEverywhere '…' insert-last-word # …=alt+.
 
-# edit in Vim
+# [f]orward to $EDITOR
 autoload edit-command-line
 zle -N edit-command-line
 bindEverywhere '^F' edit-command-line

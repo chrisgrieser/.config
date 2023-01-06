@@ -1,7 +1,7 @@
-title: "\U0001F170️ App-kpecific-Bindings"
+title: "(Apps)App-kpecific-Bindings"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
-  - description: "\U0001F170️  Zoom"
+  - description: "(Apps)Zoom"
     manipulators:
       # Toggle Sidebar
       - type: basic
@@ -19,7 +19,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^us\.zoom\.xos$
-  - description: "\U0001F170️  Microsoft & Google Office"
+  - description: "(Apps)Microsoft & Google Office"
     manipulators:
       # export
       - type: basic
@@ -92,7 +92,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com.brave.Browser.app.mpnpojknpmmopombnjdcgaaiekajbnjb
-  - description: "\U0001F170️  Highlights"
+  - description: "(Apps)Highlights"
     manipulators:
       # cmd+l = show in Explorer
       - type: basic
@@ -269,7 +269,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^net\.highlightsapp\.universal$
-  - description: "\U0001F170️  Brave"
+  - description: "(Apps)Brave"
     manipulators:
       # open dev tools
       - type: basic
@@ -792,7 +792,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.hnc\.Discord$
-  - description: "\U0001F170️  Script Editor"
+  - description: "(Apps)Script Editor"
     manipulators:
       # Quick Closing skipping save prompt
       # for movement with tab required: `defaults write NSGlobalDomain AppleKeyboardUIMode -int 3`
@@ -821,7 +821,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.apple\.ScriptEditor
-  - description: "\U0001F170️  Drafts"
+  - description: "(Apps)Drafts"
     manipulators:
       - type: basic
         from:
@@ -895,7 +895,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.agiletortoise\.Drafts-OSX$
-  - description: "\U0001F170️ \U0001F4EB Mimestream"
+  - description: "(Apps)\U0001F4EB Mimestream"
     manipulators:
       # snoozing consistent with snoozing in Drafts
       - type: basic
@@ -932,29 +932,10 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
-  - description: "\U0001F170️  Alacritty: Undo & open location"
+  - description: "(Apps)Alacritty: cmd+l → open location"
     manipulators:
-      # ⌘Z → ⌃Z (zle-widget: undo)
       - type: basic
-        from:
-          key_code: "y" # z and y switched
-          modifiers:
-            mandatory:
-              - command
-        to:
-          - key_code: "y"
-            modifiers:
-              - control
-        conditions:
-          - type: frontmost_application_if
-            file_paths:
-              - alacritty$
-      - type: basic
-        from:
-          key_code: l
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: l, modifiers: {mandatory: [command]}}
         to:
           - key_code: "l"
             modifiers:
@@ -963,13 +944,10 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
-
+  - description: "(Apps) shift+space → daw"
+    manipulators:
       - type: basic
-        from:
-          key_code: spacebar
-          modifiers:
-            mandatory:
-              - shift
+        from: {key_code: spacebar, modifiers: {mandatory: [shift]}}
         to:
           - key_code: d
           - key_code: a
@@ -978,35 +956,23 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
-  - description: "\U0001F170️  Neovide: Fix <S-Space> and cmd+q → ZZ"
+              - Brave Browser$ # for surfing keys ace editor
+  - description: "(Apps) Neovide: Fix <S-Space> and cmd+q → ZZ"
     manipulators:
       - type: basic
-        from:
-          key_code: spacebar
-          modifiers:
-            mandatory:
-              - shift
+        from: {key_code: spacebar, modifiers: {mandatory: [shift]}}
         to:
-          - key_code: return_or_enter
-            modifiers:
-              - option
-              - shift
+          - {key_code: return_or_enter, modifiers: [option, shift]}
         conditions:
           - type: frontmost_application_if
-            file_paths:
-              - "[Nn]eovide"
+            file_paths: ["[Nn]eovide"]
       # cmd+q -> <Esc>ZZ (does not skip pre-quit triggers)
       - type: basic
-        from:
-          key_code: q
-          modifiers:
-            mandatory:
-              - command
+        from: {key_code: q, modifiers: {mandatory: [command]}}
         to:
           # so cursor position and changes are saved
           - shell_command: echo "vim.cmd.wq()" >"/tmp/nvim-automation"
         conditions:
           - type: frontmost_application_if
-            file_paths:
-              - "[Nn]eovide"
+            file_paths: ["[Nn]eovide"]
 #─────────────────────────────────────────────────────────────────
