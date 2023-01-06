@@ -34,15 +34,25 @@ require("lazy").setup("config.load-plugins", {
 	},
 	change_detection = { notify = false },
 	performance = {
-		rtp = { 
+		rtp = {
 			disabled_plugins = {
 				-- disable unused builtin plugins from neovim
-				"gzip",
+				"netrw",
 				"netrwPlugin",
-				"tarPlugin",
-				"tohtml",
-				"tutor",
+				"netrwSettings",
+				"netrwFileHandlers",
+				"gzip",
+				"zip",
 				"zipPlugin",
+				"tar",
+				"tarPlugin",
+				"getscript",
+				"getscriptPlugin",
+				"vimball",
+				"vimballPlugin",
+				"2html_plugin",
+				"logipat",
+				"rrhelper",
 				"man",
 			},
 		},
