@@ -44,7 +44,6 @@ null_ls.setup {
 		},
 
 		-- SHELL
-		builtins.hover.printenv, -- show value of environment variable on hover command
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		builtins.formatting.shfmt,
 		-- no diagnostics for shellcheck needed, since handled by bash-lsp

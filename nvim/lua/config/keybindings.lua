@@ -43,7 +43,7 @@ keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "K", "2k")
 
 -- e,w,b make small movements, treating _-. as word boundaries
-for key in { "e", "w", "b" } do
+for _, key in ipairs{ "e", "w", "b" } do
 	keymap({ "n", "x" }, key, function()
 		local iskeywBefore = opt.iskeyword:get()
 		opt.iskeyword:remove { "_", "-", "." }
@@ -379,10 +379,6 @@ end
 -- CMD-Keybindings
 if isGui() then
 	keymap({ "n", "x", "i" }, "<D-s>", cmd.write, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
-	keymap("n", "<D-a>", "ggVG", { desc = "select all" }) -- cmd+a
-	keymap("i", "<D-a>", "<Esc>ggVG", { desc = "select all" })
-	keymap("x", "<D-a>", "ggG", { desc = "select all" })
-	keymap("x", "<D-c>", "y", { desc = "copy selection" }) -- cmd+c, habit sometimes
 
 	keymap({ "n", "x" }, "<D-l>", function() -- show file in default GUI file explorer
 		fn.system("open -R '" .. expand("%:p") .. "'")
@@ -393,8 +389,9 @@ if isGui() then
 
 	-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 	g.VM_maps = {
-		["Find Under"] = "<D-j>",
-		["Visual Add"] = "<D-j>",
+		["Find Under"] = "<D-j>", -- select word under cursor and enter visual-multi (normal)
+		["Visual Add"] = "<D-j>", -- enter visual-multi (visual)
+		["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi)
 	}
 
 	-- cut, copy & paste
@@ -617,7 +614,7 @@ autocmd("FileType", {
 
 -- Simple version of delaytrain
 for _, key in ipairs { "x", "h", "l" } do
-	local timeout = 6000
+	local timeout = 5000
 	local maxUsage = 8
 
 	local count = 0

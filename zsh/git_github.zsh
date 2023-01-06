@@ -35,6 +35,8 @@ alias gll="git log --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset)
 
 # interactive
 function gli() {
+	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && exit 1; fi
+	
 	local hash key_pressed selected
 	selected=$(
 		git log --all --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' \
@@ -117,7 +119,7 @@ function betterClone() {
 		giturl="$1"
 	fi
 	if [[ "$2" == "shallow" ]]; then
-		git clone --depth=1 --single-branch "$giturl"
+		git clone --depth=1 --single-branch --filter:blob "$giturl"
 	else
 		git clone "$giturl"
 	fi
