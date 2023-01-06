@@ -134,6 +134,7 @@ require("lualine").setup {
 	},
 	winbar = {
 		lualine_b = {
+			-- {MatchupStatusOffscreen},
 			{
 				navic.get_location,
 				cond = showBreadcrumbs,
