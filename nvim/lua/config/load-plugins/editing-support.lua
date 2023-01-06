@@ -1,12 +1,13 @@
 return {
 	-- EDITING-SUPPORT
 	"numToStr/Comment.nvim", -- comment operator
-	{ "mg979/vim-visual-multi", keys = { "<D-j>", { "<D-j>", mode = "x" } } },
-	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, -- custom textobjects
 	"kylechui/nvim-surround",
 
+	{ "mg979/vim-visual-multi", keys = { "<D-j>", { "<D-j>", mode = "x" } } },
+	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, -- custom textobjects
+
 	{
-		"mizlan/iswap.nvim", -- swapping of notes
+		"mizlan/iswap.nvim", -- swapping of nodes
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("iswap").setup { autoswap = true } end,
 		cmd = "ISwapWith",
@@ -32,6 +33,7 @@ return {
 			vim.g.matchup_text_obj_enabled = 0
 			vim.g.matchup_matchparen_enabled = 1 -- highlight
 		end,
+		event = "BufReadPost", -- other lazyloading methods do not seem to work
 	},
 	{
 		"nacro90/numb.nvim", -- line previews when ":n"
