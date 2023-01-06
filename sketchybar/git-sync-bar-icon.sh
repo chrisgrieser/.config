@@ -21,9 +21,8 @@ cd "$passPath" || configError="repo-path wrong"
 passfiles=$(git --no-optional-locks status --porcelain --branch | grep -Eo "\d") # to check for ahead/behind instead of untracked, since pass auto add-commits, but does not auto-push
 
 if [[ -n "$dotfiles" ]] || [[ -n "$vaultfiles" ]] || [[ -n "$passfiles" ]]; then
-	label=$(echo "$dotChanges  $vaultChanges  $passfiles" | sed -E 's/^\s//' | sed -E 's/\s$//')
+	label=$(echo "$dotChanges + $vaultChanges + $passfiles" | sed -E 's/^\+//' | sed -E 's/\+$//')
 	icon="痢"
 fi
 
-
-sketchybar --set "$NAME" icon="$icon$configError" label="$label$configError"
+sketchybar --set "$NAME" icon="$icon" label="$label$configError"

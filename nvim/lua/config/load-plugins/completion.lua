@@ -210,6 +210,7 @@ local function cmpconfig()
 			s.snippets,
 			s.zsh,
 			s.lsp,
+			s.path,
 			s.tabnine,
 			s.treesitter,
 			s.buffer,

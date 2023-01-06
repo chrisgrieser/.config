@@ -26,9 +26,9 @@ local function mixedIndentation()
 	if (hasSpaces and hasTabs) or mixed then
 		return " mixed"
 	elseif hasSpaces and not bo.expandtab then
-		return " tabs"
+		return " noet"
 	elseif hasTabs and bo.expandtab then
-		return " spaces"
+		return " et"
 	end
 	return ""
 end
@@ -90,7 +90,6 @@ local function currentFile()
 		local mode = fn.mode() == "t" and "[T]" or "[N]"
 		return " Terminal " .. mode
 	elseif bo.buftype == "nofile" then
-		curFile = curFile ~= "" and ft or curFile
 		if curFile == "" then curFile = ft end
 		return " " .. curFile -- e.g. Codi
 	elseif curFile == "" and ft ~= "" then
