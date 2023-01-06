@@ -879,11 +879,9 @@ rules:
             bundle_identifiers:
               - ^com\.agiletortoise\.Drafts-OSX$
       - type: basic
+        from: {key_code: f, modifiers: {mandatory: [command]}}
         from:
-          key_code: k
-          modifiers:
-            mandatory:
-              - control
+          {key_code: k,modifiers: {mandatory: [control]}}
         to:
           - shell_command: |
               osascript -e 'tell application "System Events"
