@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+pgrep -x "Drafts" > /dev/null || exit 0 # drafts not running
+
 scutil --get ComputerName | grep -iq "iMac"
 IS_HOME=$?
 if [[ $IS_HOME -eq 0 ]]; then
