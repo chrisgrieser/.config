@@ -1,37 +1,45 @@
-	-- local lightTheme = "rose-pine"
-	-- local darkTheme = "rose-pine"
-	local lightTheme = "dawnfox"
-	-- local darkTheme = "tokyonight-moon"
-	local darkTheme = "zephyr"
-	-- local lightTheme = "melange"
-	-- local darkTheme = "oxocarbon"
+-- local lightTheme = "rose-pine"
+-- local darkTheme = "rose-pine"
+local lightTheme = "dawnfox"
+-- local darkTheme = "tokyonight-moon"
+local darkTheme = "zephyr"
+-- local lightTheme = "melange"
+-- local darkTheme = "oxocarbon"
 
-	local darkTransparency = 0.95
-	local lightTransparency = 0.94
+local themePackages = {
+	"EdenEast/nightfox.nvim",
+	-- "rose-pine/neovim",
+	-- "rebelot/kanagawa.nvim",
+	-- "nyoom-engineering/oxocarbon.nvim",
+	"glepnir/zephyr-nvim", 
+	"folke/tokyonight.nvim",
+	-- "savq/melange",
+}
 
-local function themeSettings()
-	local cmd = vim.cmd
+local darkTransparency = 0.95
+local lightTransparency = 0.94
+
+--------------------------------------------------------------------------------
+
+function themeSettings()
+	require("config.utils")
 	---@param hlgroupfrom string
 	---@param hlgroupto string
 	local function linkHighlight(hlgroupfrom, hlgroupto)
-		vim.cmd.highlight { "def link " .. hlgroupfrom .. " " .. hlgroupto, bang = true }
+		cmd.highlight { "def link " .. hlgroupfrom .. " " .. hlgroupto, bang = true }
 	end
 
 	---@param hlgroup string
 	---@param changes string
-	local function setHighlight(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. changes) end
+	local function setHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
 
 	-----------------------------------------------------------------------------
 
-	-- Annotations
 	linkHighlight("myAnnotations", "Todo")
 	fn.matchadd(
 		"myAnnotations",
 		[[\<\(BUG\|WARN\|WIP\|TODO\|WTF\|HACK\|INFO\|NOTE\|WARNING\|FIX\|REQUIRED\)\>]]
 	)
-
-	--------------------------------------------------------------------------------
-	-- CUSTOM HIGHLIGHTS & Theme Customization
 
 	function customHighlights()
 		local highlights = {
@@ -148,15 +156,17 @@ local function themeSettings()
 	--------------------------------------------------------------------------------
 	-- DARK MODE / LIGHT MODE
 	-- functions not local, so they can be accessed via file watcher
-	function setDarkTheme()
-		opt.background = "dark" ---@diagnostic disable-line: assign-type-mismatch
+	---comment
+	---@param mode any
+	function setThemeMode(mode)
+		o.background = mode
 		g.neovide_transparency = darkTransparency
 		cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 		cmd.colorscheme(darkTheme)
 	end
 
 	function setLightTheme()
-		opt.background = "light" ---@diagnostic disable-line: assign-type-mismatch
+		o.background = "light" 
 		g.neovide_transparency = lightTransparency
 		cmd.highlight("clear")
 		cmd.colorscheme(lightTheme)
@@ -164,18 +174,13 @@ local function themeSettings()
 
 	-- set dark or light mode on neovim startup (requires macos)
 	local macOStheme = fn.system([[defaults read -g AppleInterfaceStyle]])
+	local targetMode = macOStheme:find("Dark") and "dark" or "light"
+	setThemeMode(targetMode)
 	if macOStheme:find("Dark") then
 		setDarkTheme()
 	else
 		setLightTheme()
 	end
 end
-return {
-	"EdenEast/nightfox.nvim",
-	"folke/tokyonight.nvim",
-	-- "rose-pine/neovim",
-	-- "rebelot/kanagawa.nvim",
-	-- "nyoom-engineering/oxocarbon.nvim",
-	"glepnir/zephyr-nvim",
-	"savq/melange",
-}
+
+return themePackages
