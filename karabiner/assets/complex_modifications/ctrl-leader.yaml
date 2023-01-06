@@ -169,7 +169,7 @@ rules:
           - shell_command: osascript -e 'tell application "Neovide" to activate'
           - *deactivate-leader
           - *remove-notice
-      # [j]: Drafts (mnemonic: jot down quickly)
+      # [j]: Drafts (mnemonic: Jot down)
       - type: basic
         from: {key_code: j}
         conditions: [*leader-active]
@@ -330,13 +330,15 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: |
-              tab=$(osascript -e 'tell application "Brave Browser" to return URL of active tab of front window')
-              if [[ "$tab" =~ reddit.com.r.neovim ]] ; then
-                osascript -e 'tell application "Brave Browser" to set the URL of active tab of front window to ""'
-                open 'https://www.reddit.com/r/vim/'
-              else
-                open 'https://www.reddit.com/r/neovim/'
-              fi
+              osascript -e '
+                tell application "Brave Browser"
+                  set theURL to the URL of active tab of front window
+                  if the theURL contains "reddit.com/r/neovim" then
+                    set the URL of active tab of front window to "https://www.reddit.com/r/vim/"
+                  else
+                    open location "https://www.reddit.com/r/neovim/"
+                  end if
+                end tell'
           - *deactivate-leader
           - *remove-notice
       # [?] (w/o shift, German keyboard) man page

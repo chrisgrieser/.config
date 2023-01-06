@@ -147,6 +147,7 @@ function M.wordSwitch()
 			{ "else", "if", false },
 			{ "function", "local function", false },
 			{ "pairs", "ipairs" },
+			{ "and", "or" },
 		}
 	elseif ft == "python" then
 		ftWords = {
@@ -154,6 +155,8 @@ function M.wordSwitch()
 		}
 	elseif ft == "bash" or ft == "zsh" or ft == "sh" then
 		ftWords = {
+			{ "-eq", "-ne" },
+			{ "||", "&&" },
 			{ "if", "elif", false },
 			{ "elif", "else", false },
 			{ "else", "if", false },
@@ -163,6 +166,7 @@ function M.wordSwitch()
 	elseif ft == "javascript" or ft == "typescript" then
 		ftWords = {
 			{ "!==", "===" },
+			{ "||", "&&" },
 			{ "if", "else if", false },
 			{ "else", "if", false },
 			{ "const", "let" },

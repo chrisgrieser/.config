@@ -1,17 +1,20 @@
 #!/usr/bin/env zsh
 
-pgrep -x "Drafts" > /dev/null || exit 0 # drafts not running
-
 scutil --get ComputerName | grep -iq "iMac"
 IS_HOME=$?
 if [[ $IS_HOME -eq 0 ]]; then
-	list="office"
+	exclude="office"
 else
-	list="home"
+	exclude="home"
 fi
 
 cd "$(dirname "$0")" || exit 1 # python script in same folder as this script
-count=$(python3 ./numberOfDrafts.py "tasklist" "$list" | xargs)
+count=$(python3 ./numberOfDrafts.py "tasklist" "$exclude" | xargs)
 
-[[ $count -eq 0 ]] && exit 0
-sketchybar --set "$NAME" icon="" label="$count"
+# only show menubar item if Drafts running and at least 1 task
+if [[ $count -gt 0 ]] && pgrep -x "Drafts" ; then
+	label="$count" 
+	icon=""	
+fi
+
+sketchybar --set "$NAME" icon="$icon" label="$label"
