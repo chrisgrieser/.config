@@ -932,7 +932,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
-  - description: "\U0001F170️  Alacritty: Undo & open location, Spacebar → daw"
+  - description: "\U0001F170️  Alacritty: Undo & open location"
     manipulators:
       # ⌘Z → ⌃Z (zle-widget: undo)
       - type: basic
@@ -963,6 +963,7 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
+
       - type: basic
         from:
           key_code: spacebar

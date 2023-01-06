@@ -88,6 +88,7 @@ mapkey("s", "Fullscreen", function () {
 // Insert Mode & ACE editor
 
 aceVimMap("<Space>", "ciw");
+// HACK <S-Space> done via Karabiner, since not working here
 aceVimMap("H", "0");
 aceVimMap("L", "$");
 aceVimMap("j", "gj");
