@@ -66,7 +66,6 @@ end
 
 ---switch to alternate window/buffer/oldfile in that priority
 function M.altBufferWindow()
-	cmd.nohlsearch()
 	if altWindow() then
 		cmd.wincmd("p")
 	elseif expand("#") ~= "" then
@@ -76,6 +75,7 @@ function M.altBufferWindow()
 	else
 		vim.notify("Nothing to switch to.", logWarn)
 	end
+	if require("satellite") then cmd.SatelliteRefresh() end
 end
 
 ---Close window/buffer in that priority

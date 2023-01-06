@@ -39,18 +39,19 @@ if [[ $IS_HOME -eq 0 ]]; then
 
 	# - HACK using popup for second row. the popup only refers to the clock item to anchor it to the leftmost item,
 	# it actually has nothing to do with the clock
+	first_set="left"
 	second_set="popup.clock" # = two rows elsewhere
 	POPUP_Y_OFFSET=-35
 else
 	HEIGHT=25
 	ITEM_Y_OFFSET=2
-	second_set="left" # = one row at the office
+	first_set="left"
+	second_set="right" 
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# one big call to speed up reloading
-# https://felixkratz.github.io/SketchyBar/config/bar
+# one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
 sketchybar \
 	--bar \
 	height="$HEIGHT" position=top display=all \
@@ -65,20 +66,20 @@ sketchybar \
 	popup.drawing=true popup.horizontal=true popup.topmost=true \
 	popup.y_offset="$POPUP_Y_OFFSET" y_offset="$ITEM_Y_OFFSET" \
 	\
-	--add item clock left \
+	--add item clock $first_set \
 	--set clock update_freq=1 \
 	script="$PLUGIN_DIR/clock.sh" \
 	background.padding_left=5 \
 	\
-	--add item covid-stats left \
+	--add item covid-stats $first_set \
 	--set covid-stats update_freq=43200 \
 	script="$PLUGIN_DIR/covid-stats.sh" \
 	\
-	--add item weather left \
+	--add item weather $first_set \
 	--set weather update_freq=1800 \
 	script="$PLUGIN_DIR/weather.sh" \
 	\
-	--add item drafts left \
+	--add item drafts $first_set \
 	--set drafts icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
 	script="$PLUGIN_DIR/drafts-counter.sh" \
 	\

@@ -157,6 +157,8 @@ function M.wordSwitch()
 			{ "if", "elif", false },
 			{ "elif", "else", false },
 			{ "else", "if", false },
+			{ "echo", "print" },
+			{ "exit", "return" },
 		}
 	elseif ft == "javascript" or ft == "typescript" then
 		ftWords = {

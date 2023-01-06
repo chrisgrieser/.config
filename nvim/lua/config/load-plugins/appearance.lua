@@ -111,7 +111,7 @@ return {
 			require("windows").setup {
 				autowidth = {
 					enable = true,
-					winwidth = 0.7, -- active window gets 70% of total width
+					winwidth = 0.65, -- active window gets 65% of total width
 				},
 			}
 		end,
