@@ -37,8 +37,8 @@ alias gll="git log --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset)
 function gli() {
 	local hash key_pressed selected
 	selected=$(
-		git log --all --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' | fzf \
-			-0 \
+		git log --all --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' \
+			| fzf -0 \
 			--query="$1" \
 			--ansi \
 			--nth=2.. \
@@ -124,8 +124,8 @@ function betterClone() {
 	# shellcheck disable=SC2012
 	cd "$(ls -1 -t | head -n1)" || return
 	if grep -q "obsidian" package.json &>/dev/null; then
-		npm i # if it's an Obsidian plugin
-		npm run build
+		if ! command -v node &>/dev/null; then print "\033[1;33mnode not installed, not running npm." && exit 0; fi
+		npm i && npm run build
 	fi
 }
 
@@ -166,43 +166,46 @@ function rel() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# search for [g]it [d]eleted [f]ile -> https://stackoverflow.com/a/42582877
+# search for [g]it [d]eleted [f]ile
 function gdf() {
-	local deleted_path deletion_commit
+	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && exit 1; fi
 	if ! command -v bat &>/dev/null; then echo "bat not installed." && exit 1; fi
 
-	# goto git root
-	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
+	local deleted_path deletion_commit
+	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}" # goto git root
 
 	# alternative method: `git rev-list -n 1 HEAD -- "**/*$1*"` to get the commit of a deleted file
 	deleted_path=$(git log --diff-filter=D --summary | grep delete | grep -i "$*" | cut -d" " -f5-)
 
 	if [[ -z "$deleted_path" ]]; then
-		print "🔍\033[1;31m no deleted file found"
+		print "🔍\033[1;31m No deleted file found."
 		return 1
 	elif [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
-		print "🔍\033[1;32m multiple files found: "
-		deleted_path=$(
-			echo "$deleted_path" | fzf \
-				--layout=reverse \
-				--no-info \
-				--height=60%
+		print "🔍\033[1;32m Multiple files found: "
+		selection=$(echo "$deleted_path" | fzf \
+			--layout=reverse \
+			--height=70%\
 		)
-	else
-		print "🔍\033[1;32m last version found: '$deleted_path' ($last_commit)"
+		[[ -z "$selection" ]] && return 0
+		deleted_path="$selection"
 	fi
 
 	deletion_commit=$(git log --format='%h' --follow -- "$deleted_path" | head -n1)
 	last_commit=$(git show --format='%h' "$deletion_commit^" | head -n1)
+	# if
+	[[ -z "$selection" ]] && print "🔍\033[1;32m One file found: $deleted_path ($last_commit)"
 
+	# decision on how to act on file
 	echo
-	echo "c: checkout file, o: open file"
+	print "\033[1;34mc: checkout file, o: open file"
 	read -r -k 1 DECISION
 	# shellcheck disable=SC2193
 	if [[ "$DECISION:l" == "c" ]]; then
 		git checkout "$last_commit" -- "$deleted_path"
 	elif [[ "$DECISION:l" == "o" ]]; then
-		git show "$last_commit:$deleted_path" | bat
+		local viewer="cat"
+		command -v bat &>/dev/null && viewer="bat"
+		git show "$last_commit:$deleted_path" | "$viewer"
 	fi
 }
 

@@ -34,6 +34,7 @@ function hs {
 			--query "$*" \
 			--height=60%
 	)
+	[[ -z "$SELECTED" ]] && return 0
 	COMMAND=$(echo "$SELECTED" | cut -c"$TO_CUT"-)
 	print -z "$COMMAND" # print to buffer
 }
