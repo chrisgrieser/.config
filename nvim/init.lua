@@ -10,8 +10,8 @@ require("config.lazy")
 require("config.utils") -- should come after lazy
 
 if isGui() then
-	require("config.theme-settings") -- should come early to start with the proper theme
 	require("config.gui-settings")
+	themeSettings()
 else
 	require("config.terminal-only")
 end
