@@ -32,12 +32,8 @@ else
 fi
 
 scutil --get ComputerName | grep -iq "iMac"
-IS_AT_OFFICE=$?
-if [[ $IS_AT_OFFICE -eq 1 ]]; then
-	HEIGHT=25
-	ITEM_Y_OFFSET=2
-	second_set="left" # = one row at the office
-else
+IS_HOME=$?
+if [[ $IS_HOME -eq 0 ]]; then
 	HEIGHT=60        # extra height for second row & to cover the holes at the corner where the wallpaper shines through
 	ITEM_Y_OFFSET=18 # needs to be adjusted for Height
 
@@ -45,6 +41,10 @@ else
 	# it actually has nothing to do with the clock
 	second_set="popup.clock" # = two rows elsewhere
 	POPUP_Y_OFFSET=-35
+else
+	HEIGHT=25
+	ITEM_Y_OFFSET=2
+	second_set="left" # = one row at the office
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -77,6 +77,10 @@ sketchybar \
 	--add item weather left \
 	--set weather update_freq=1800 \
 	script="$PLUGIN_DIR/weather.sh" \
+	\
+	--add item drafts left \
+	--set drafts icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
+	script="$PLUGIN_DIR/drafts-counter.sh" \
 	\
 	--add alias "$ram_bar_item" $second_set \
 	--set "$ram_bar_item" width=38 \
