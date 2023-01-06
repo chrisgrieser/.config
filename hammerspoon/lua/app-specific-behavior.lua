@@ -12,19 +12,13 @@ local function unHideAll()
 end
 
 transBgAppWatcher = aw.new(function(appName, eventType, appObject)
-	local appsWithTransparency = {
-		"neovide",
-		"Neovide",
-		"Obsidian",
-		"alacritty",
-		"Alacritty",
-	}
+	local appsWithTransparency = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty" }
 	if not tableContains(appsWithTransparency, appName) then return end
 
 	if eventType == aw.activated or eventType == aw.launched then
 		-- some apps like neovide do not set a "launched" signal, so the delayed
 		-- hiding is used for it activation as well
-		runWithDelays({ 0, 0.1 }, function()
+		runWithDelays({ 0, 0.1, 0.2, 0.3 }, function()
 			local win = appObject:mainWindow()
 			if checkSize(win, pseudoMaximized) or checkSize(win, maximized) then
 				appObject:selectMenuItem("Hide Others")
@@ -244,6 +238,12 @@ wf_quicklook = wf
 	.new(true) -- BUG for some reason, restricting this to "Finder" does not work
 	:setOverrideFilter({ allowRoles = "Quick Look" })
 	:subscribe(wf.windowCreated, function(newWin)
+		local _, sel = applescript([[
+			tell application "Finder" to return POSIX path of (selection as alias)
+		]])
+		-- do not enlage window for images (which are enlarged already with
+		-- landscape proportions)
+		if sel and (sel:find("%.png$") or sel:find("%.jpe?g$")) then return end
 		runWithDelays(0.4, function() moveResize(newWin, centered) end)
 	end)
 
