@@ -9,37 +9,23 @@ return {
 				pattern = "NeogitCommitMessage";
 				command = "silent! set filetype=gitcommit",
 			})
-			-- autocmd("NeogitCommitComplete", {
-			-- 	group = "neogit-additions",
-			-- 	callback = function() vim.notify("Commit completed.") end,
-			-- })
-			-- autocmd("NeogitPushComplete", {
-			-- 	group = "neogit-additions",
-			-- 	callback = function()
-			-- 		vim.notify("Push completed.")
-			-- 		require("neogit").close()
-			-- 	end,
-			-- })
+			vim.api.nvim_create_autocmd("NeogitPushComplete", {
+				group = "neogit-additions",
+				callback = require("neogit").close,
+			})
 		end,
 		cmd = "Neogit",
 		config = function()
 			require("neogit").setup {
 				disable_insert_on_commit = false, -- false = start commit msgs in insert mode
 				disable_commit_confirmation = false,
-				disable_builtin_notifications = false,
+				disable_builtin_notifications = true, -- add notifications for events below
 				integrations = { diffview = true }, -- diffview plugin
 				signs = {
 					section = { "", "" },
 					item = { "", "" },
 				},
 			}
-			augroup("neogit-additions", {})
-			autocmd("NeogitCommitComplete", {
-				group = "neogit-additions",
-				callback = function()
-					
-				end
-			})
 		end,
 	},
 	{ -- only coderunner with virtual text
