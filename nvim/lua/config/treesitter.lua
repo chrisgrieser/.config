@@ -13,6 +13,7 @@ require("nvim-treesitter.configs").setup {
 		"markdown_inline", -- fenced code blocks
 		"bibtex",
 		"gitignore",
+		"gitcommit",
 		"diff",
 		"regex",
 		"python",
