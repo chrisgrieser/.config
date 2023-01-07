@@ -62,7 +62,7 @@ local function dapConfig()
 	--------------------------------------------------------------------------------
 	-- KEYBINDINGS
 
-	vim.keymap.set("n", "7", dap.toggle_breakpoint, { desc = "  Toggle Breakpoint" })
+	vim.keymap.set("n", "7", dap.toggle_breakpoint, { desc = " Toggle Breakpoint" })
 	vim.keymap.set("n", "8", function()
 		-- HACK wrap `continue` in this, since the nvim-lua-debugger has to be started separately
 		local dapRunning = dap.status() ~= ""
@@ -72,7 +72,7 @@ local function dapConfig()
 			dap.continue()
 		end
 		vim.api.nvim_set_option_value("number", true, { scope = "local" })
-	end, { desc = "  Continue" })
+	end, { desc = " Continue" })
 
 	-- selection of dap-commands
 	vim.keymap.set("n", "<leader>b", function()
@@ -89,7 +89,9 @@ local function dapConfig()
 		}
 		vim.ui.select(selection, { prompt = " DAP Command" }, function(choice)
 			if not choice then return end
-			if choice:find("^Launch") then vim.api.nvim_set_option_value("number", true, { scope = "local" }) end
+			if choice:find("^Launch") then
+				vim.api.nvim_set_option_value("number", true, { scope = "local" })
+			end
 
 			if choice == "Toggle DAP UI" then
 				require("dapui").toggle()
@@ -126,27 +128,22 @@ local function dapConfig()
 	vim.fn.sign_define("DapBreakpoint", {
 		text = "",
 		texthl = "DiagnosticHint",
-		numhl = "DiagnosticHint",
 	})
 	vim.fn.sign_define("DapBreakpointCondition", {
 		text = "",
 		texthl = "DiagnosticHint",
-		numhl = "DiagnosticHint",
 	})
 	vim.fn.sign_define("DapLogPoint", {
 		text = "",
 		texthl = "DiagnosticHint",
-		numhl = "DiagnosticHint",
 	})
 	vim.fn.sign_define("DapStopped", {
 		text = "",
 		texthl = "DiagnosticInfo",
-		numhl = "DiagnosticInfo",
 	})
 	vim.fn.sign_define("DapBreakpointRejected", {
 		text = "",
 		texthl = "DiagnosticError",
-		numhl = "DiagnosticError",
 	})
 end
 
@@ -178,8 +175,12 @@ return {
 		"rcarriga/nvim-dap-ui",
 		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
 	},
-	keys = { "8", "7", "<leader>b" },
-	config = function ()
+	keys = {
+		{ "7", nil, { desc = " Toggle Breakpoint" } },
+		{ "8", nil, { desc = " Continue" } },
+		{ "<leader>b", nil, { desc = " Debugger Action" } },
+	},
+	config = function()
 		dapConfig()
 		dapLualine()
 	end,

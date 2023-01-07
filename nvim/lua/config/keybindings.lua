@@ -431,10 +431,10 @@ keymap("n", "#", ":CccPick<CR>")
 keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
 
 -- Neural
-keymap("x", "ga", ":NeuralCode complete<CR>", { desc = "AI: Code Complete" })
+keymap("x", "ga", ":NeuralCode complete<CR>", { desc = "ﮧ Code Completion" })
 
 -- ChatGPT
-keymap("n", "ga", ":ChatGPT<CR>", { desc = "AI: ChatGPT Prompt" })
+keymap("n", "ga", ":ChatGPT<CR>", { desc = "ﮧ ChatGPT Prompt" })
 
 --------------------------------------------------------------------------------
 -- FILES
@@ -476,14 +476,14 @@ keymap( "x", "X", function() require("genghis").moveSelectionToNewFile() end, { 
 -- GIT
 
 -- Neo[G]it
-keymap("n", "<leader>gs", ":Neogit<CR>")
-keymap("n", "<leader>gc", ":Neogit commit<CR>")
+keymap("n", "<leader>gs", ":Neogit<CR>", {desc = " Neogit"})
+keymap("n", "<leader>gc", ":Neogit commit<CR>", {desc = " Commit"})
 
 -- Git-link
-keymap({ "n", "x" }, "<leader>gl", qol.gitLink, { desc = " link" })
+keymap({ "n", "x" }, "<leader>gl", qol.gitLink, { desc = " Link" })
 
 -- add-commit-pull-push
-keymap("n", "<leader>gg", qol.addCommitPush, { desc = "  add-commit-pull-push" })
+keymap("n", "<leader>gg", qol.addCommitPush, { desc = " add-commit-push" })
 
 -- Diffview
 keymap("n", "<leader>gd", function()
@@ -496,14 +496,14 @@ keymap("n", "<leader>gd", function()
 		end
 		cmd.wincmd("w") -- go directly to file window
 	end)
-end)
+end, { desc = " File History" })
 
 --------------------------------------------------------------------------------
 
 -- Option Toggling
-keymap("n", "<leader>os", ":set spell!<CR>")
-keymap("n", "<leader>or", ":set relativenumber!<CR>")
-keymap("n", "<leader>on", ":set number!<CR>")
+keymap("n", "<leader>os", ":set spell!<CR>", { desc = "toggle spelling" })
+keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = "toggle rel. line numbers" })
+keymap("n", "<leader>on", ":set number!<CR>", { desc = "toggle line numbers" })
 keymap("n", "<leader>ol", cmd.LspRestart, { desc = "LSP Restart" })
 keymap("n", "<leader>ow", qol.toggleWrap, { desc = "toggle wrap" })
 

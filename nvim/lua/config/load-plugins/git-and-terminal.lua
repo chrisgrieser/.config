@@ -7,12 +7,20 @@ return {
 			require("neogit").setup {
 				disable_insert_on_commit = false, -- false = start commit msgs in insert mode
 				disable_commit_confirmation = false,
+				disable_builtin_notifications = false,
 				integrations = { diffview = true }, -- diffview plugin
 				signs = {
 					section = { "", "" },
 					item = { "", "" },
 				},
 			}
+			augroup("neogit-additions", {})
+			autocmd("NeogitCommitComplete", {
+				group = "neogit-additions",
+				callback = function()
+					
+				end
+			})
 		end,
 	},
 	{ -- only coderunner with virtual text
