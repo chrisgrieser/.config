@@ -2,6 +2,14 @@ return {
 	{
 		"TimUntersberger/neogit",
 		dependencies = "nvim-lua/plenary.nvim",
+		init = function ()
+			vim.api.nvim_create_augroup("neogit-additions", {})
+			vim.api.nvim_create_autocmd("FileType", {
+				group = "neogit-additions",
+				pattern = "NeogitCommitMessage";
+				command = "silent! set filetype=gitcommit",
+			})
+		end,
 		cmd = "Neogit",
 		config = function()
 			require("neogit").setup {
