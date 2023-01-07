@@ -180,7 +180,7 @@ require("lualine").setup {
 		section_separators = bottomSeparators,
 		disabled_filetypes = {
 			statusline = {},
-			winbar = {"toggleterm"},
+			winbar = {"toggleterm", "NeogitCommitMessage"},
 		},
 	},
 }
