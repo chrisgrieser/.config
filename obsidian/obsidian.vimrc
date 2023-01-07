@@ -25,6 +25,12 @@ nmap + *
 " (by mirroring American keyboard layout on German keyboard layout)
 map - /
 
+" <Esc> clears notices & highlights (:nohl)
+exmap clearNotices obcommand obsidian-smarter-md-hotkeys:hide-notice
+nmap &c& :clearNotices
+nmap &n& :nohl
+nmap <Esc> &c&&n&
+
 """"""""""""""""""""""
 " Navigation
 """"""""""""""""""""""
@@ -81,12 +87,10 @@ nmap m %
 " requires Another Quick Switcher Plugin
 exmap gotoHeading obcommand obsidian-another-quick-switcher:header-floating-search-in-file
 nmap gs :gotoHeading
-vmap gs :gotoHeading
 
 " [g]oto [f]ile (= Follow Link under cursor)
 exmap followLinkUnderCursor obcommand editor:follow-link
 nmap gx :followLinkUnderCursor
-nmap gf :followLinkUnderCursor
 
 exmap live-grep obcommand obsidian-another-quick-switcher:grep
 nmap gF :live-grep
@@ -161,10 +165,11 @@ nmap ,y 3ggA
 exmap toggleTask obcommand editor:toggle-checklist-status
 nmap ,x :toggleTask
 
-" [g]oto [d]efiniton ~= footnotes
+" [g]oto [d]efiniton == footnotes
 " requires Footnotes Shortcut Plugin
 exmap gotoFootnoteDefinition obcommand obsidian-footnotes:insert-footnote
 nmap gd :gotoFootnoteDefinition
+nmap gf :gotoFootnoteDefinition
 
 " Blockquote
 exmap toggleBlockquote obcommand editor:toggle-blockquote
@@ -292,6 +297,13 @@ nmap ,f :linkjump
 " poor man's substitute.vim 🥲
 nmap s Vp
 nmap S vg$p
+
+
+""""""""""""""""""""""
+" Comment
+""""""""""""""""""""""
+" poor man's comment
+nmap qq Vp
 
 """"""""""""""""""""""
 " Option Toggling
