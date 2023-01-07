@@ -225,21 +225,26 @@ map ac a{
 map ic i{
 
 """"""""""""""""""""""
-" Tabs/Window
+" Tabs, Splits & Alt-file
 """"""""""""""""""""""
 
-" https://vimhelp.org/index.txt.html#CTRL-W
+" Splits
 exmap splitVertical obcommand workspace:split-vertical
 exmap splitHorizontal obcommand workspace:split-horizontal
-nmap <C-w>v :splitVertical
-nmap <C-w>s :splitHorizontal
-
 exmap only obcommand workspace:close-others
+nmap <C-w>v :splitVertical
+nmap <C-w>h :splitHorizontal
 nmap <C-w>o :only
-exmap close obcommand workspace:close
 
+" Tabs
 exmap nextTab obcommand workspace:next-tab
-nmap <CR> :nextTab
+exmap prevTab obcommand workspace:previous-tab
+nmap gt :nextTab
+nmap gT :prevTab
+
+" Alt Buffer (emulates `:buffer #`)
+exmap altBuffer jsfile Meta/obsidian-vim-helpers.js {altBuffer()}
+nmap <CR> :altBuffer
 
 """"""""""""""""""""""
 " Terminal

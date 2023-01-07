@@ -2,7 +2,13 @@
 // all hail the @koala
 //------------------------------------------------------------------------------
 
-// eslint-disable-next-line no-unused-vars
+// emulates `:buffer #`
+function altBuffer() {
+	const altPath = app.workspace.lastOpenFiles[0];
+	const altTFile = app.vault.getAbstractFileByPath(altPath);
+	app.workspace.activeLeaf.openFile(altTFile);
+}
+
 function appendSpace() {
 	const editor = app.workspace.activeLeaf.view.editor;
 	const pos = editor.getCursor();
