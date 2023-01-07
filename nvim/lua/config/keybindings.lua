@@ -235,9 +235,9 @@ keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Spelling (mnemonic: [z]pe[l]ling)
 keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "spellsuggest" })
-keymap("n", "zg", "zg", { desc = "mark as correct spelling" }) -- needs extra enter due to `cmdheight=0`
 keymap("n", "gl", "]s", { desc = "next misspelling" })
-keymap("n", "za", "mz1z=`z", { desc = "autofix spelling" }) -- [a]utofix word under cursor
+keymap("n", "gL", "]s", { desc = "prev misspelling" })
+keymap("n", "za", "mz]s1z=`z", { desc = "autofix spelling" }) -- [a]utofix word under cursor
 
 -- [S]ubstitute Operator (substitute.nvim)
 keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
@@ -268,7 +268,7 @@ keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
 keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
 
 -- Replace Mode
-keymap("n", "gR", "R", { desc = "replace mode" })
+keymap("n", "cR", "R", { desc = "replace mode" })
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
 keymap("n", "R", qol.smartDuplicateLine, { desc = "smart duplicate line" })
@@ -284,18 +284,18 @@ keymap(
 	{ desc = " Undotree" }
 )
 
--- Refactor 
+-- Refactor
 keymap(
 	"n",
 	"<leader>i",
 	function() require("refactoring").refactor("Inline Variable") end,
-	{ desc = "Refactor: Inline Variable" }
+	{ desc = "Refactor: Inline Var" }
 )
 keymap(
 	"n",
 	"<leader>e",
 	function() require("refactoring").refactor("Extract Variable") end,
-	{ desc = "Refactor: Extract Variable" }
+	{ desc = "Refactor: Extract Var" }
 )
 
 -- Logging & Debugging

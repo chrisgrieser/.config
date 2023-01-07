@@ -18,6 +18,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>5F150909-EBF0-4C8C-BC2E-F22F63176E31</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
@@ -100,6 +110,25 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>5F150909-EBF0-4C8C-BC2E-F22F63176E31</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string># GitHub Repos workflow for Alfred
@@ -157,6 +186,13 @@ You can submit your bug reports or feature requests at:
 https://github.com/edgarjs/alfred-github-repos/issues</string>
 	<key>uidata</key>
 	<dict>
+		<key>5F150909-EBF0-4C8C-BC2E-F22F63176E31</key>
+		<dict>
+			<key>xpos</key>
+			<real>235</real>
+			<key>ypos</key>
+			<real>175</real>
+		</dict>
 		<key>72D9F53C-2F43-447A-8012-CA07801C1407</key>
 		<dict>
 			<key>xpos</key>
