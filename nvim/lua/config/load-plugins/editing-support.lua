@@ -18,19 +18,13 @@ return {
 		config = function() require("treesj").setup { use_default_keymaps = false } end,
 		cmd = "TSJToggle",
 	},
-	{
-		"ckolkey/ts-node-action",
-		dependencies = { "nvim-treesitter" },
-		lazy = true,
-		config = function()
-			local action = require("ts-node-action.helpers")
-         require("ts-node-action").setup {
-				["Lua"] = {
-					["if"] = action.handle_conditional,
-				},
-			}
-      end,
-	},
+	-- TODO checkout later if they added support for more filetypes
+	-- {
+	-- 	"ckolkey/ts-node-action",
+	-- 	dependencies = { "nvim-treesitter" },
+	-- 	lazy = true,
+	-- 	config = function() require("ts-node-action").setup() end,
+	-- },
 	{
 		"cshuaimin/ssr.nvim", -- structural search & replace
 		lazy = true,
