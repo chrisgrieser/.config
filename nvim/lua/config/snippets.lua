@@ -92,7 +92,7 @@ add("lua", {
 		$2
 	end
 	]]),
-
+	snip("ternary", '${1:cond} and ${2:yes} or ${3:no}'),
 	snip("trim trailing \n", ':gsub("\\n$", "")'),
 	snip("ignore (stylua)", "-- stylua: ignore start\n-- stylua: ignore end"),
 	snip("ignore block (stylua)", "-- stylua: ignore"),
@@ -203,7 +203,7 @@ add("typescript", {
 -- JavaScript (General)
 add("javascript", {
 	snip("replace", 'replace(/${1:regexp}/${2:flags}, "${3:replacement}");'),
-	snip("ternary", "${1:cond} ? ${2:then} : ${3:else}"),
+	snip("ternary", "${1:cond} ? ${2:yes} : ${3:no}"),
 	snip("ISO date", "new Date().toISOString().slice(0, 10);"),
 	snip("ignore (prettier)", "// prettier-ignore\n$0"),
 })
