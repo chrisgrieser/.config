@@ -55,7 +55,7 @@ opt.listchars = {
 	extends = "…",
 }
 opt.fillchars = {
-	eob = " ", -- no ~ for the eof, no dots for folds
+	eob = " ", -- no ~ for the eof
 	fold = " ", -- no dots for folds
 }
 opt.showbreak = "↪ " -- precedes wrapped lines
@@ -65,9 +65,9 @@ opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
 
 -- Window Managers/espanso: set title
-opt.title = true
-opt.titlelen = 0 -- do not shorten title
-opt.titlestring = '%{expand("%:p")} [%{mode()}]'
+-- opt.title = true
+-- opt.titlelen = 0 -- do not shorten title
+-- opt.titlestring = '%{expand("%:p")} [%{mode()}]'
 
 -- Editor
 opt.cursorline = true
