@@ -50,40 +50,85 @@ keymap({ "o", "x" }, "im", "iW")
 --------------------------------------------------------------------------------
 -- QUICK TEXTOBJ OPERATIONS
 keymap("n", "C", '"_C')
-keymap("n", "<Space>", '"_ciw', {desc = "change word"})
-keymap("x", "<Space>", '"_c', {desc = "change word"})
-keymap("n", "<M-S-CR>", '"_daw', {desc = "delete word"}) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
+keymap("n", "<Space>", '"_ciw', { desc = "change word" })
+keymap("x", "<Space>", '"_c', { desc = "change word" })
+keymap("n", "<M-S-CR>", '"_daw', { desc = "delete word" }) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
 
 --------------------------------------------------------------------------------
 -- VARIOUS TEXTOBJS
 
 -- space: subword
-keymap("o", "<Space>", function() require("various-textobjs").subword(true) end, { desc = "inner subword textobj" })
+keymap(
+	"o",
+	"<Space>",
+	function() require("various-textobjs").subword(true) end,
+	{ desc = "inner subword textobj" }
+)
 
 -- U: url
-keymap({"o", "x"}, "U", function() require("various-textobjs").url() end, { desc = "url textobj" })
+keymap({ "o", "x" }, "U", function() require("various-textobjs").url() end, { desc = "url textobj" })
 
 -- n: [n]ear end of the line
-keymap({ "o", "x" }, "n", function () require("various-textobjs").nearEoL() end, { desc = "near EoL textobj" })
+keymap(
+	{ "o", "x" },
+	"n",
+	function() require("various-textobjs").nearEoL() end,
+	{ desc = "near EoL textobj" }
+)
 
 -- o: c[o]lumn textobj
 keymap("o", "o", function() require("various-textobjs").column() end, { desc = "column textobj" })
 
 -- gG: entire buffer textobj
-keymap({"x", "o"}, "gG", function () require("various-textobjs").entireBuffer() end, { desc = "entire buffer textobj" })
+keymap(
+	{ "x", "o" },
+	"gG",
+	function() require("various-textobjs").entireBuffer() end,
+	{ desc = "entire buffer textobj" }
+)
 
 -- r: [r]est of paragraph (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
-keymap("o", "r", function () require("various-textobjs").restOfParagraph() end, { desc = "rest of paragraph textobj" })
+keymap(
+	"o",
+	"r",
+	function() require("various-textobjs").restOfParagraph() end,
+	{ desc = "rest of paragraph textobj" }
+)
 
 -- iv/av: value textobj
-keymap({ "x", "o" }, "iv", function() require("various-textobjs").value(true) end, { desc = "inner value textobj" })
-keymap({ "x", "o" }, "av", function() require("various-textobjs").value(false) end, { desc = "outer value textobj" })
-keymap({ "x", "o" }, "ik", function() require("various-textobjs").key(true) end, { desc = "inner key textobj" })
-keymap({ "x", "o" }, "ak", function() require("various-textobjs").key(false) end, { desc = "outer key textobj" })
+keymap(
+	{ "x", "o" },
+	"iv",
+	function() require("various-textobjs").value(true) end,
+	{ desc = "inner value textobj" }
+)
+keymap(
+	{ "x", "o" },
+	"av",
+	function() require("various-textobjs").value(false) end,
+	{ desc = "outer value textobj" }
+)
+keymap(
+	{ "x", "o" },
+	"ik",
+	function() require("various-textobjs").key(true) end,
+	{ desc = "inner key textobj" }
+)
+keymap(
+	{ "x", "o" },
+	"ak",
+	function() require("various-textobjs").key(false) end,
+	{ desc = "outer key textobj" }
+)
 
 -- #: diagnostic textobj
-keymap({ "x", "o" }, "#", function () require("various-textobjs").diagnostic() end, { desc = "diagnostic textobj" })
+keymap(
+	{ "x", "o" },
+	"#",
+	function() require("various-textobjs").diagnostic() end,
+	{ desc = "diagnostic textobj" }
+)
 
 -- in/an: number textobj
 -- stylua: ignore start
@@ -129,7 +174,7 @@ local regexObjChar = "/"
 
 -- HACK define these manually, since for some reason they do not work by default
 keymap("n", "yss", "ys_", { remap = true, desc = "surround line" })
-keymap("n", "yS", "ys$", { remap = true, desc = "surround till EoL"})
+keymap("n", "yS", "ys$", { remap = true, desc = "surround till EoL" })
 
 local config = require("nvim-surround.config")
 
@@ -145,10 +190,13 @@ require("nvim-surround").setup {
 	},
 	move_cursor = false,
 	keymaps = {
-		normal_cur = "<Nop>", -- mapped on my own (see above)
-		normal_line = "<Nop>",-- mapped on my own (see above)
-		normal_cur_line = "<Nop>",
-		visual = "ys",
+		insert = nil,
+		insert_line = nil,
+		normal_cur = nil, -- mapped on my own (see above)
+		normal_line = nil, -- mapped on my own (see above)
+		normal_cur_line = nil,
+		visual = "s",
+		visual_line = nil,
 	},
 	surrounds = {
 		[doubleSquareBracketObjChar] = {

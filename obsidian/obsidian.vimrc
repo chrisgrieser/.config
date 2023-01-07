@@ -104,7 +104,7 @@ nmap gc u<C-r>
 """"""""""""""""""""""
 
 " don't pollute the register
-" workarounds, since Obsidian vimrc does not support noremap properly
+" HACK to avoid recursion since Obsidian vimrc does not support noremap
 nmap x "_dl
 
 " UNDO consistently on one key
@@ -113,7 +113,7 @@ nmap U <C-r>
 " Case Switch via Smarter MD Hotkeys Plugin
 exmap caseSwitch obcommand obsidian-smarter-md-hotkeys:smarter-upper-lower
 nmap ü :caseSwitch
-" to CapitalCase without the plugin, use: nmap Ü mzlblgueh~`z
+" to CapitalCase without the plugin, use: nmap ü mzlblgueh~`z
 vmap ü :caseSwitch
 
 """"""""""""""""""""""
@@ -121,8 +121,8 @@ vmap ü :caseSwitch
 """"""""""""""""""""""
 
 " [M]erge Lines
-" can't remap to J, cause there is no noremap;
-" also the merge from Code Editor Shortcuts plugin is smarter than J
+" can't remap to J, cause there is no noremap; also the merge from Code Editor 
+" Shortcuts plugin is smarter since it removes list prefixes
 exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 nmap M :mergeLines
 vmap M :mergeLines
@@ -131,12 +131,17 @@ vmap M :mergeLines
 " Add Blank Line above/below
 exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
 exmap blankAbove obcommand obsidian-editor-shortcuts:insertLineAbove
+nmap &a& :blankAbove
+nmap &b& :blankBelow
+
 " HACK since code editor shortcuts does move the cursor to the new line, and
 " mz(...)`z cannot be used as m is mapped to matching
-nmap &a& :blankAbove
 nmap = &a&j
-nmap &b& :blankBelow
 nmap _ &b&k
+
+" Smarter o and O (inserting prefix for markdown lists)
+nmap o &b&i
+nmap O &a&i
 
 """"""""""""""""""""""""""""
 " Markdown/Obsidian specific
