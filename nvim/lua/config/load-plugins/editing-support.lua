@@ -22,7 +22,14 @@ return {
 		"ckolkey/ts-node-action",
 		dependencies = { "nvim-treesitter" },
 		lazy = true,
-		config = function() require("ts-node-action").setup {} end,
+		config = function()
+			local action = require("ts-node-action.helpers")
+         require("ts-node-action").setup {
+				["Lua"] = {
+					["if"] = action.handle_conditional,
+				},
+			}
+      end,
 	},
 	{
 		"cshuaimin/ssr.nvim", -- structural search & replace
