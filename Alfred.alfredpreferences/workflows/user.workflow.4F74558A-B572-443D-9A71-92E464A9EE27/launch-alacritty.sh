@@ -12,10 +12,8 @@ if [[ "$FRONT_APP" =~ "Finder" ]]; then
 	[[ -d "$WD" ]] || exit 1
 elif [[ "$FRONT_APP" =~ "neovide" ]]; then
 	win_title=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
-	# INFO requires vim.opt.titlestring='%{expand(\"%:p\")} [%{mode()}]'
-	# full_path=$(echo "$win_title" | sed 's/ \[.*\]$//' )
-	full_path=${win_title//% \[*\]$/}
-	WD=$(dirname "$full_path")
+	# INFO requires vim.opt.titlestring='%{expand(\"%:p\")}'
+	WD=$(dirname "$win_title")
 else
 	WD="${working_directory/#\~/$HOME}"
 fi

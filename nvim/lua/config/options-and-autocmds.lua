@@ -64,10 +64,10 @@ opt.showbreak = "↪ " -- precedes wrapped lines
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
 
--- Window Managers/espanso: set title
--- opt.title = true
--- opt.titlelen = 0 -- do not shorten title
--- opt.titlestring = '%{expand("%:p")} [%{mode()}]'
+-- For external apps
+opt.title = true
+opt.titlelen = 0 -- do not shorten title
+opt.titlestring = '%{expand("%:p")}'
 
 -- Editor
 opt.cursorline = true
