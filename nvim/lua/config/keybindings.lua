@@ -480,10 +480,10 @@ keymap("n", "<leader>gs", ":Neogit<CR>")
 keymap("n", "<leader>gc", ":Neogit commit<CR>")
 
 -- Git-link
-keymap({ "n", "x" }, "<leader>gl", qol.gitLink, { desc = "git link" })
+keymap({ "n", "x" }, "<leader>gl", qol.gitLink, { desc = " link" })
 
 -- add-commit-pull-push
-keymap("n", "<leader>gg", qol.addCommitPush, { desc = "git add-commit-pull-push" })
+keymap("n", "<leader>gg", qol.addCommitPush, { desc = "  add-commit-pull-push" })
 
 -- Diffview
 keymap("n", "<leader>gd", function()
