@@ -1,20 +1,15 @@
 # https://espanso.org/docs/configuration/options/
 # yamllint disable rule:truthy
 #───────────────────────────────────────────────────────────────────────────────
-
+ 
 toggle_key: OFF
 search_trigger: OFF
 search_shortcut: META+ALT+CTRL+SHIFT+E # Hyper+E
-show_icon: false
+show_icon: true
 show_notifications: true
 auto_restart: true
 
-# Because injecting long texts char-by-char is a slow operation, espanso automatically
-# uses the clipboard if the text is longer than 'clipboard_threshold' characters.
-preserve_clipboard: true
-restore_clipboard_delay: 200
-
 undo_backspace: false # backspace undos expansion
 
-backend: clipboard
-clipboard_threshold: 5
+backend: auto
+clipboard_threshold: 6

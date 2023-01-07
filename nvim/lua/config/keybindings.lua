@@ -345,12 +345,12 @@ keymap("x", "|", "<Esc>`>a<CR><Esc>`<i<CR><Esc>", { desc = "split around selecti
 keymap("n", "<leader>s", cmd.TSJToggle, { desc = "split/join" })
 
 -- TS Node Action Plugin
-keymap(
-	"n",
-	"<leader>t",
-	function() require("ts-node-action").node_action() end,
-	{ desc = "node action" }
-)
+-- keymap(
+-- 	"n",
+-- 	"<leader>t",
+-- 	function() require("ts-node-action").node_action() end,
+-- 	{ desc = "node action" }
+-- )
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
