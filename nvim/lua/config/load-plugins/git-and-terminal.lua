@@ -9,6 +9,17 @@ return {
 				pattern = "NeogitCommitMessage";
 				command = "silent! set filetype=gitcommit",
 			})
+			-- autocmd("NeogitCommitComplete", {
+			-- 	group = "neogit-additions",
+			-- 	callback = function() vim.notify("Commit completed.") end,
+			-- })
+			-- autocmd("NeogitPushComplete", {
+			-- 	group = "neogit-additions",
+			-- 	callback = function()
+			-- 		vim.notify("Push completed.")
+			-- 		require("neogit").close()
+			-- 	end,
+			-- })
 		end,
 		cmd = "Neogit",
 		config = function()
