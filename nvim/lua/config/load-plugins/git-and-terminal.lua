@@ -2,24 +2,21 @@ return {
 	{
 		"TimUntersberger/neogit",
 		dependencies = "nvim-lua/plenary.nvim",
-		init = function ()
-			vim.api.nvim_create_augroup("neogit-additions", {})
-			vim.api.nvim_create_autocmd("FileType", {
-				group = "neogit-additions",
-				pattern = "NeogitCommitMessage";
-				command = "silent! set filetype=gitcommit",
-			})
-			vim.api.nvim_create_autocmd("NeogitPushComplete", {
-				group = "neogit-additions",
-				callback = require("neogit").close,
-			})
-		end,
 		cmd = "Neogit",
+		init = function()
+			-- vim.api.nvim_create_augroup("neogit-additions", {})
+			-- -- HACK https://github.com/TimUntersberger/neogit/issues/405
+			-- vim.api.nvim_create_autocmd("FileType", {
+			-- 	group = "neogit-additions",
+			-- 	pattern = "NeogitCommitMessage",
+			-- 	command = "silent! set filetype=gitcommit",
+			-- })
+		end,
 		config = function()
 			require("neogit").setup {
 				disable_insert_on_commit = false, -- false = start commit msgs in insert mode
 				disable_commit_confirmation = false,
-				disable_builtin_notifications = true, -- add notifications for events below
+				disable_builtin_notifications = true, -- BUG does not seem to be working
 				integrations = { diffview = true }, -- diffview plugin
 				signs = {
 					section = { "", "" },
