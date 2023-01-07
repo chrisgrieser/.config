@@ -11,12 +11,12 @@ CONFIG+=('terminal-keybindings')
 CONFIG+=('docs_man')
 CONFIG+=('git_github')
 CONFIG+=('homebrew')
+CONFIG+=('vi-mode')
 
 # Terminal specific
 if [[ $TERM == "Warp" ]]; then
 	cd "$WD" || return 
 elif [[ $TERM == "alacritty" ]]; then
-	CONFIG+=('vi-mode')
 	CONFIG+=('alacritty_theme_utilities')
 	CONFIG+=('intro-messages')
 fi

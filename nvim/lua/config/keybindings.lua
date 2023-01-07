@@ -520,7 +520,7 @@ end, { desc = "toggle diagnostics" })
 --------------------------------------------------------------------------------
 
 -- TERMINAL AND CODI
-keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = "Esc (Normal Mode in Terminal)" })
+keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = "go to next window" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = "Paste in Terminal Mode" })
 
 keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = "ToggleTerm" })
