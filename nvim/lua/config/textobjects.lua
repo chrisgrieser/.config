@@ -17,7 +17,7 @@ require("config.utils")
 -- ak -> a [k]ey / left side of assignment (custom)
 -- aL -> a [L]oop (treesitter)
 -- <Space> -> inner subword (custom)
--- # -> diagnostic (custom)
+-- ge -> diagnostic (custom)
 -- o -> c[o]lumn (custom)
 
 -- FILE-TYPE-SPECIFIC TEXT OBJECTS
@@ -122,10 +122,10 @@ keymap(
 	{ desc = "outer key textobj" }
 )
 
--- #: diagnostic textobj
+-- ge: diagnostic textobj (similar to ge for the next diagnostic)
 keymap(
 	{ "x", "o" },
-	"#",
+	"ge",
 	function() require("various-textobjs").diagnostic() end,
 	{ desc = "diagnostic textobj" }
 )
