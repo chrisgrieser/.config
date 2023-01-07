@@ -1,22 +1,22 @@
 -- local lightTheme = "rose-pine"
 -- local darkTheme = "rose-pine"
-local lightTheme = "dawnfox"
 -- local darkTheme = "tokyonight-moon"
-local darkTheme = "zephyr"
 -- local lightTheme = "melange"
 -- local darkTheme = "oxocarbon"
+local lightTheme = "dawnfox"
+local darkTheme = "zephyr"
 
 local themePackages = {
 	"EdenEast/nightfox.nvim",
+	"glepnir/zephyr-nvim", 
+	-- "folke/tokyonight.nvim",
 	-- "rose-pine/neovim",
 	-- "rebelot/kanagawa.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
-	"glepnir/zephyr-nvim", 
-	"folke/tokyonight.nvim",
 	-- "savq/melange",
 }
 
-local darkTransparency = 0.95
+local darkTransparency = 0.96
 local lightTransparency = 0.94
 
 --------------------------------------------------------------------------------

@@ -51,87 +51,44 @@ keymap({ "o", "x" }, "im", "iW")
 -- QUICK TEXTOBJ OPERATIONS
 keymap("n", "C", '"_C')
 keymap("n", "<Space>", '"_ciw', { desc = "change word" })
-keymap("x", "<Space>", '"_c', { desc = "change word" })
+-- keymap("x", "<Space>", '"_c', { desc = "change word" })
 keymap("n", "<M-S-CR>", '"_daw', { desc = "delete word" }) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
 
 --------------------------------------------------------------------------------
 -- VARIOUS TEXTOBJS
+-- stylua: ignore start
 
 -- space: subword
-keymap(
-	"o",
-	"<Space>",
-	function() require("various-textobjs").subword(true) end,
-	{ desc = "inner subword textobj" }
-)
+keymap({"o", "x"}, "<Space>", function() require("various-textobjs").subword(false) end, { desc = "inner subword textobj" })
 
 -- U: url
 keymap({ "o", "x" }, "U", function() require("various-textobjs").url() end, { desc = "url textobj" })
 
 -- n: [n]ear end of the line
-keymap(
-	{ "o", "x" },
-	"n",
-	function() require("various-textobjs").nearEoL() end,
-	{ desc = "near EoL textobj" }
-)
+keymap({ "o", "x" }, "n", function() require("various-textobjs").nearEoL() end, { desc = "near EoL textobj" })
 
 -- o: c[o]lumn textobj
 keymap("o", "o", function() require("various-textobjs").column() end, { desc = "column textobj" })
 
 -- gG: entire buffer textobj
-keymap(
-	{ "x", "o" },
-	"gG",
-	function() require("various-textobjs").entireBuffer() end,
-	{ desc = "entire buffer textobj" }
-)
+keymap( { "x", "o" }, "gG", function() require("various-textobjs").entireBuffer() end, { desc = "entire buffer textobj" })
 
 -- r: [r]est of paragraph (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
-keymap(
-	"o",
-	"r",
-	function() require("various-textobjs").restOfParagraph() end,
-	{ desc = "rest of paragraph textobj" }
-)
+keymap( "o", "r", function() require("various-textobjs").restOfParagraph() end, { desc = "rest of paragraph textobj" })
 
 -- iv/av: value textobj
-keymap(
-	{ "x", "o" },
-	"iv",
-	function() require("various-textobjs").value(true) end,
-	{ desc = "inner value textobj" }
-)
-keymap(
-	{ "x", "o" },
-	"av",
-	function() require("various-textobjs").value(false) end,
-	{ desc = "outer value textobj" }
-)
-keymap(
-	{ "x", "o" },
-	"ik",
-	function() require("various-textobjs").key(true) end,
-	{ desc = "inner key textobj" }
-)
-keymap(
-	{ "x", "o" },
-	"ak",
-	function() require("various-textobjs").key(false) end,
-	{ desc = "outer key textobj" }
-)
+keymap({ "x", "o" }, "iv", function() require("various-textobjs").value(true) end, { desc = "inner value textobj" })
+keymap({ "x", "o" }, "av", function() require("various-textobjs").value(false) end, { desc = "outer value textobj" })
+
+-- ik/ak: value textobj
+keymap({ "x", "o" }, "ik", function() require("various-textobjs").key(true) end, { desc = "inner key textobj" })
+keymap({ "x", "o" }, "ak", function() require("various-textobjs").key(false) end, { desc = "outer key textobj" })
 
 -- ge: diagnostic textobj (similar to ge for the next diagnostic)
-keymap(
-	{ "x", "o" },
-	"ge",
-	function() require("various-textobjs").diagnostic() end,
-	{ desc = "diagnostic textobj" }
-)
+keymap({ "x", "o" }, "ge", function() require("various-textobjs").diagnostic() end, { desc = "diagnostic textobj" })
 
 -- in/an: number textobj
--- stylua: ignore start
 keymap( { "x", "o" }, "in", function() require("various-textobjs").number(true) end, { desc = "inner number textobj" })
 keymap( { "x", "o" }, "an", function() require("various-textobjs").number(false) end, { desc = "outer number textobj" })
 
