@@ -15,6 +15,10 @@ set clipboard=unnamed
 " Y consistent with D and C to the end of line
 nmap Y y$
 
+" don't pollute the register
+" HACK to avoid recursion since Obsidian vimrc does not support noremap
+nmap x "_dl
+
 """"""""""""""""""""""
 " Search
 """"""""""""""""""""""
@@ -107,10 +111,6 @@ nmap gc u<C-r>
 " Editing
 """"""""""""""""""""""
 
-" don't pollute the register
-" HACK to avoid recursion since Obsidian vimrc does not support noremap
-nmap x "_dl
-
 " UNDO consistently on one key
 nmap U <C-r>
 
@@ -141,8 +141,8 @@ nmap o &b&i
 nmap O &a&i
 
 " Add Blank Line above/below 
-" HACK not using mz...`z since m remapped & d$ to empty the line from list
-" markers from the o/O remapping above
+" HACK not using mz...`z since m remapped 
+" HACK adding in d$ to clear the line from list markers from the o/O remapping above
 nmap = O<Esc>d$j
 nmap _ o<Esc>d$k
 
@@ -164,7 +164,7 @@ nmap ,y 3ggA
 exmap toggleTask obcommand editor:toggle-checklist-status
 nmap ,x :toggleTask
 
-" [g]oto [d]efiniton == footnotes
+" [g]oto [d]efiniton -> footnotes
 " requires Footnotes Shortcut Plugin
 exmap gotoFootnoteDefinition obcommand obsidian-footnotes:insert-footnote
 nmap gd :gotoFootnoteDefinition
@@ -302,12 +302,12 @@ nmap ,f :linkjump
 nmap s Vp
 nmap S vg$p
 
-
 """"""""""""""""""""""
 " Comment
 """"""""""""""""""""""
 " poor man's comment
-nmap qq Vp
+exmap comment obcommand obsidian-smarter-md-hotkeys:smarter-html-comments
+nmap qq :comment
 
 """"""""""""""""""""""
 " Option Toggling
