@@ -12,7 +12,7 @@ require("luasnip").cleanup() -- clears all snippets for resourcing this file
 --------------------------------------------------------------------------------
 
 add("all", {
-	snip("modeline (bash)", "vim: filetype=bash\n$0"),
+	snip("modeline", "vim: filetype=\n$0"),
 
 	-- macOS symbols
 	snip("cmd", "⌘"),
@@ -38,7 +38,7 @@ add("css", {
 
 -- Shell (zsh)
 add("zsh", {
-	snip("##", "#!/usr/bin/env zsh\n$0"),
+	snip("shebang", "#!/usr/bin/env zsh\n$0"),
 	snip("default arg value", '${1:input}=${1-"${2:default_value}"}'),
 	snip("slice", '${${1:var}:${2:start}:${3:length}}'),
 	snip("substitute", "${${1:var}/${2:search}/${3:replace}}"),
@@ -46,12 +46,13 @@ add("zsh", {
 	snip("resolve home", '${1:path}="${${1:path}/#\\~/\\$HOME}"'),
 	snip("filename", 'file_name=$(basename "$${1:file_path}")'),
 	snip("parent folder", '$(dirname "$${1:filepath}")'),
-	snip("ext", "ext=${${1:file_name}##*.}"),
+	snip("ext", "ext=${${1:file_name}shebang*.}"),
 	snip("filename w/o ext", "${1:file_name}=${${1:file_name}%.*}"),
 	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
 	snip("notify", [[osascript -e 'display notification "" with title "${1:title}"']]),
 
 	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
+	snip("ternary", '[[ "$${1:cond}" ]] && ${2:var}="$${3:one}" || ${2:var}="$${4:two}"'),
 	snip("if .. then", 'if [[ "$${1:var}" ]]; then\n\t$0\nfi'),
 	snip("if .. then .. else", 'if [[ "$${1:var}" ]]; then\n\t$2\nelse\n\t$0\nfi'),
 	snip("check installed", 'if ! command -v ${1:cli} &>/dev/null; then echo "${1:cli} not installed." && exit 1; fi\n$0'),
@@ -91,6 +92,7 @@ add("lua", {
 		$2
 	end
 	]]),
+
 	snip("trim trailing \n", ':gsub("\\n$", "")'),
 	snip("ignore (stylua)", "-- stylua: ignore start\n-- stylua: ignore end"),
 	snip("ignore block (stylua)", "-- stylua: ignore"),
@@ -147,7 +149,7 @@ add("applescript", {
 	snip("browser tab title",
 		'tell application "Brave Browser" to set currentTabName to title of active tab of front window\n$0'),
 	snip("notify", 'display notification "${2:subtitle}" with title "${1:title}"\n$0'),
-	snip("##", "#!/usr/bin/env osascript\n$0"),
+	snip("shebang", "#!/usr/bin/env osascript\n$0"),
 	snip("menu item", [[
 		tell application "System Events" to tell process "${1:process}"
 			set frontmost to true
@@ -226,7 +228,7 @@ add("javascript", {
 		}
 	]]),
 
-	snip("##", "#!/usr/bin/env osascript -l JavaScript\n$0"),
+	snip("shebang", "#!/usr/bin/env osascript -l JavaScript\n$0"),
 	snip("online JSON", 'const onlineJSON = (url) => JSON.parse(app.doShellScript(`curl -s "${url}"`));'),
 	snip("read file", [[
 		function readFile(path) {
