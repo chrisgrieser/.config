@@ -117,7 +117,6 @@ nmap U <C-r>
 " Case Switch via Smarter MD Hotkeys Plugin
 exmap caseSwitch obcommand obsidian-smarter-md-hotkeys:smarter-upper-lower
 nmap ü :caseSwitch
-" to CapitalCase without the plugin, use: nmap ü mzlblgueh~`z
 vmap ü :caseSwitch
 
 """"""""""""""""""""""
@@ -132,20 +131,20 @@ nmap M :mergeLines
 vmap M :mergeLines
 
 " WHITESPACE CONTROL
-" Add Blank Line above/below
 exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
 exmap blankAbove obcommand obsidian-editor-shortcuts:insertLineAbove
 nmap &a& :blankAbove
 nmap &b& :blankBelow
 
-" HACK since code editor shortcuts does move the cursor to the new line, and
-" mz(...)`z cannot be used as m is mapped to matching
-nmap = &a&j
-nmap _ &b&k
-
 " Smarter o and O (inserting prefix for markdown lists)
 nmap o &b&i
 nmap O &a&i
+
+" Add Blank Line above/below 
+" HACK not using mz...`z since m remapped & d$ to empty the line from list
+" markers from the o/O remapping above
+nmap = O<Esc>d$j
+nmap _ o<Esc>d$k
 
 """"""""""""""""""""""""""""
 " Markdown/Obsidian specific
