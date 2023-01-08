@@ -9,7 +9,6 @@ end
 function restOfParagraph()
 	print("operator:", operator)
 	-- vim.cmd.normal { operator .. "V}k", bang = true }
-	print("beep")
 end
 
 vim.keymap.set("o", "ä", dotrepeat, { expr = true })
