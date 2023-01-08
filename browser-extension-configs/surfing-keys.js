@@ -137,6 +137,7 @@ unmap("gxx"); // close other tabs (remapped)
 unmap("yQ"); // copy omnibar query history
 unmap("yT"); // duplicate tab in background (remapped)
 unmap("ys"); // copy page source
+unmap("gr"); // read out loud
 
 removeSearchAlias("b", "s");
 removeSearchAlias("d", "s");
