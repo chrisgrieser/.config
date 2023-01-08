@@ -11,7 +11,6 @@ local s = {
 	treesitter = { name = "treesitter" },
 	cmdline_history = { name = "cmdline_history", keyword_length = 3 },
 	cmdline = { name = "cmdline" },
-	git = { name = "git" }, -- mentions with "@", issues/PRs with "#"
 }
 
 local defaultSources = {
@@ -287,14 +286,6 @@ return {
 		lazy = true, -- is being loaded by cmp
 		dependencies = "nvim-lua/plenary.nvim",
 		config = function()
-			-- HACK https://github.com/petertriho/cmp-git/issues/47
-			vim.api.nvim_create_augroup("cmp-git-fix", {})
-			vim.api.nvim_create_autocmd("FileType", {
-				group = "cmp-git-fix",
-				pattern = "gitcommit",
-				command = "cd ./../"
-			})
-
 			local cmp = require("cmp")
 			cmp.setup.filetype("gitcommit", {
 				sources = cmp.config.sources {
