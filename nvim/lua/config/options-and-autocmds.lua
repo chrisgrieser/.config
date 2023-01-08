@@ -183,11 +183,7 @@ autocmd("BufWinEnter", {
 augroup("Templates", {})
 local skeletonPath = fn.stdpath("config") .. "/templates"
 local filetypeList = fn.system([[ls "]] .. skeletonPath .. [[/skeleton."* | xargs basename | cut -d. -f2]])
-
-local ftWithSkeletons = {}
-for line in filetypeList:gmatch("(.-)\n") do -- split https://www.lua.org/manual/5.4/manual.html#pdf-string.gmatch
-	table.insert(ftWithSkeletons, line)
-end
+local ftWithSkeletons = vim.split(filetypeList, "\n", {})
 
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
