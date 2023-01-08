@@ -2,12 +2,13 @@
 # with '#' will be ignored, and an empty message aborts the commit.
 #
 # On branch main
-# Your branch is up to date with 'origin/main'.
+# Your branch is ahead of 'origin/main' by 1 commit.
 #
 # Changes to be committed:
-#	modified:   ../options-and-autocmds.lua
+#	modified:   completion.lua
 #
 # Changes not staged for commit:
+#	modified:   ../../../../COMMIT_EDITMSG
 #	modified:   completion.lua
 #	modified:   ../options-and-autocmds.lua
 #

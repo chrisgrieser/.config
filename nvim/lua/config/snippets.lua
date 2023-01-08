@@ -137,7 +137,17 @@ add("lua", {
 			group = "${1:groupname}",
 			callback = function()
 				$0
-			end
+			end,
+		})
+	]]),
+	snip("FileType autocmd", [[
+		augroup("${1:groupname}", {\})
+		autocmd("FileType", {
+			group = "${1:groupname}",
+			pattern = {"${2:ft}"},
+			callback = function()
+				$0
+			end,
 		})
 	]]),
 })
