@@ -133,8 +133,8 @@ require("lualine").setup {
 		},
 	},
 	winbar = {
+		-- INFO dap and recording status defined in the respective plugin configs
 		lualine_b = {
-			-- {MatchupStatusOffscreen},
 			{
 				navic.get_location,
 				cond = showBreadcrumbs,
@@ -157,12 +157,6 @@ require("lualine").setup {
 				end,
 				color = "NonText",
 			},
-		},
-		lualine_y = {
-			{ require("recorder").displaySlots, section_separators = topSeparators },
-		},
-		lualine_z = {
-			{ require("recorder").recordingStatus, section_separators = topSeparators },
 		},
 	},
 	options = {
