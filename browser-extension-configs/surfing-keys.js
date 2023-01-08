@@ -9,19 +9,28 @@ const { imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vm
 // https://github.com/brookhong/Surfingkeys#edit-your-own-settings
 settings.richHintsForKeystroke = 400; // like whichkey, value is delay till shown
 settings.hintShiftNonActive = true; // vimium-like: holding shift while pressing hint opens in bg tab
-settings.startToShowEmoji = 0; // length of chars to show emojis
+settings.startToShowEmoji = 1; // length of chars to show emojis (acemode)
 
 //──────────────────────────────────────────────────────────────────────────────
 
 // IGNORE LIST
-settings.blocklistPattern = undefined; /* eslint-disable-line no-undefined */
-
 unmap("j", /google/); // unmap jk on google for web search navigator (vimium-like controls for google only)
 unmap("k", /google/);
-unmap("?", /github/); // cheatsheet for github shortcuts
+
+unmap("?", /github.com/); // cheatsheet for github shortcuts
+
+unmap("?", /reddit.com/); // cheatsheet for reddit shortcuts
+unmap("l", /reddit.com/); // open reddit link
+unmap("j", /reddit.com/);
+unmap("k", /reddit.com/);
+unmap("x", /reddit.com/); // toggle fold
+unmap("a", /reddit.com/); // upvote
+unmap("z", /reddit.com/); // downvote
+unmap("r", /reddit.com/); // reply
+unmap("c", /reddit.com/); // compose new post
 
 //──────────────────────────────────────────────────────────────────────────────
-// ---- Mappings -----
+// Mappings
 
 // Navigation & History
 map("J", "P"); // page down
@@ -97,16 +106,22 @@ aceVimMap("U", "<C-r>");
 aceVimMap("J", "6j");
 aceVimMap("K", "6k");
 aceVimMap("M", "gJ"); // mapping to gJ instead of J to prevent recursion, as noremap does not seem to be available
-aceVimMap("im", "iW"); // intended for operater-pending mode
+
+// text objects
+aceVimMap("im", "iW");
 aceVimMap("am", "aW");
-aceVimMap("ir", "i["); 
+aceVimMap("ir", "i[");
 aceVimMap("ar", "a[");
+aceVimMap("iq", 'i"');
+aceVimMap("aq", 'a"');
+aceVimMap("ie", "i`");
+aceVimMap("ae", "a`");
 
 imap("<Ctrl-a>", "<Ctrl-f>"); // boL
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// unmapping unused stuff to make the cheatsheet more useful
+// unmapping unused stuff to reduce noise in the cheatsheet 
 
 unmap("$"); // scroll to right
 unmap("B"); // add bookmark (remapped)
