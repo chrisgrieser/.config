@@ -62,7 +62,7 @@ local function dapConfig()
 	--------------------------------------------------------------------------------
 	-- KEYBINDINGS
 
-	vim.keymap.set("n", "8", function()
+	vim.keymap.set("n", "7", function()
 		-- HACK wrap `continue` in this, since the nvim-lua-debugger has to be started separately
 		local dapRunning = dap.status() ~= ""
 		if not dapRunning and vim.bo.filetype == "lua" then
@@ -120,30 +120,16 @@ local function dapConfig()
 				dap.terminate()
 			end
 		end)
-	end, { desc = " Debugging Action" })
+	end, { desc = " Select Action" })
 
 	--------------------------------------------------------------------------------
 	-- SIGN-COLUMN ICONS
-	vim.fn.sign_define("DapBreakpoint", {
-		text = "",
-		texthl = "DiagnosticHint",
-	})
-	vim.fn.sign_define("DapBreakpointCondition", {
-		text = "",
-		texthl = "DiagnosticHint",
-	})
-	vim.fn.sign_define("DapLogPoint", {
-		text = "",
-		texthl = "DiagnosticHint",
-	})
-	vim.fn.sign_define("DapStopped", {
-		text = "",
-		texthl = "DiagnosticInfo",
-	})
-	vim.fn.sign_define("DapBreakpointRejected", {
-		text = "",
-		texthl = "DiagnosticError",
-	})
+	local sign = vim.fn.sign_define
+	sign("DapBreakpoint", { text = "", texthl = "DiagnosticHint" })
+	sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticHint" })
+	sign("DapLogPoint", { text = "", texthl = "DiagnosticHint" })
+	sign("DapStopped", { text = "", texthl = "DiagnosticInfo" })
+	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
 end
 
 local function dapLualine()
@@ -175,8 +161,8 @@ return {
 		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
 	},
 	keys = {
-		{ "8", nil, desc = " Continue" },
-		{ "<leader>b", nil, desc = " Debugger Action" },
+		{ "7", nil, desc = " Continue" },
+		{ "<leader>b", nil, desc = " Select Action" },
 	},
 	config = function()
 		dapConfig()

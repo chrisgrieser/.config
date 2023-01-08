@@ -71,9 +71,8 @@ return {
 		keys = {
 			{ "9", nil, desc = " Play Macro" },
 			{ "0", nil, desc = " Start/Stop Recording" },
-			{ "!", nil, desc = "/ Breakpoint" },
+			{ "8", nil, desc = "/ Breakpoint" },
 		},
-		dependencies =	"mfussenegger/nvim-dap",
 		config = function()
 			require("recorder").setup {
 				clear = true,
@@ -83,7 +82,7 @@ return {
 					playMacro = "9",
 					editMacro = "c0",
 					switchSlot = "<C-0>",
-					addBreakPoint = "!",
+					addBreakPoint = "8",
 				},
 				-- if true, `addBreakPoint` will map to `dap.toggle_breakpoint()` outside
 				-- a recording. During a recording, it will add a macro breakpoint instead.
@@ -92,6 +91,9 @@ return {
 			local topSeparators = isGui() and { left = "", right = "" } or { left = "", right = "" }
 			require("lualine").setup {
 				winbar = {
+					lualine_y = {
+						{ require("recorder").displaySlots, section_separators = topSeparators },
+					},
 					lualine_z = {
 						{ require("recorder").recordingStatus, section_separators = topSeparators },
 					},
