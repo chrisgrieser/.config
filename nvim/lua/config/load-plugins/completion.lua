@@ -242,8 +242,6 @@ local function cmpconfig()
 		sources = cmp.config.sources {
 			s.git,
 			s.path,
-			s.buffer,
-			s.emojis,
 		},
 	})
 
@@ -251,8 +249,6 @@ local function cmpconfig()
 		sources = cmp.config.sources {
 			s.git,
 			s.path,
-			s.buffer,
-			s.emojis,
 		},
 	})
 	--------------------------------------------------------------------------------
@@ -276,6 +272,24 @@ local function cmpconfig()
 	cmp.setup.filetype("DressingInput", {
 		sources = cmp.config.sources { { name = "omni" } },
 	})
+
+	require("cmp_git").setup {
+		filetypes = { "gitcommit", "NeogitCommitMessage" },
+		git = { commits = { limit = 0 } }, -- 0 = disable completing commits
+		github = {
+			issues = {
+				limit = 100,
+				state = "open", -- open, closed, all
+			},
+			mentions = {
+				limit = 100,
+			},
+			pull_requests = {
+				limit = 10,
+				state = "open",
+			},
+		},
+	}
 end
 --------------------------------------------------------------------------------
 
@@ -292,7 +306,6 @@ return {
 			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
-			"petertriho/cmp-git",
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
@@ -302,7 +315,7 @@ return {
 	},
 	{ -- git-related completion
 		"petertriho/cmp-git",
-		lazy = true,
+		ft = {"gitcommit", "NeogitCommitMessage"},
 		config = function()
 			require("cmp_git").setup {
 				filetypes = { "gitcommit", "NeogitCommitMessage" },
