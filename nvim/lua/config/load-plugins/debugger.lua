@@ -145,11 +145,9 @@ local function dapLualine()
 	table.insert(lualineY, {
 		function()
 			local breakpoints = require("dap.breakpoints").get()
-			-- selene: allow(constant_table_comparison)
-			if breakpoints == {} then return "" end
-			for k, _ in pairs(breakpoints) do
-				breakpointNum = #breakpoints[k]
-			end
+			local debuggerIndex = next(breakpoints)
+			if debuggerIndex == nil then return "" end
+			local breakpointNum = #breakpoints[debuggerIndex]
 			return "  " .. tostring(breakpointNum)
 		end,
 		section_separators = topSeparators,
