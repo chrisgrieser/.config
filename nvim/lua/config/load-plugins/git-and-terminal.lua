@@ -15,7 +15,7 @@ return {
 		config = function()
 			require("neogit").setup {
 				disable_insert_on_commit = false, -- false = start commit msgs in insert mode
-				disable_commit_confirmation = false,
+				disable_commit_confirmation = true,
 				disable_builtin_notifications = true, -- BUG does not seem to be working
 				integrations = { diffview = true }, -- diffview plugin
 				signs = {
@@ -39,7 +39,8 @@ return {
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = { "DiffviewFileHistory", "DiffviewOpen" },
 		init = function()
-			-- HACK since for whatever reason, adding this as a keymap below does not work
+			-- HACK since for whatever reason, adding this as a keymap below does
+			-- not always work
 			vim.api.nvim_create_augroup("diffview-fix", {})
 			vim.api.nvim_create_autocmd("FileType", {
 				group = "diffview-fix",
@@ -64,6 +65,8 @@ return {
 					file_history_panel = {
 						{ "n", "<D-w>", vim.cmd.tabclose, {} },
 						{ "n", "?", actions.help("file_history_panel"), {} },
+						{ "n", "<CR>", function() vim.cmd.wincmd("w") end, {} }, -- consistent with general buffer switcher
+						{ "n", "<S-CR>", function() vim.cmd.wincmd("w") end, {} }, 
 					},
 				},
 			}

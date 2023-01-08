@@ -283,11 +283,11 @@ return {
 		config = cmpconfig,
 	},
 	{
-
 		"petertriho/cmp-git",
 		lazy = true, -- is being loaded by cmp
 		dependencies = "nvim-lua/plenary.nvim",
 		config = function()
+			-- HACK https://github.com/petertriho/cmp-git/issues/47
 			vim.api.nvim_create_augroup("cmp-git-fix", {})
 			vim.api.nvim_create_autocmd("FileType", {
 				group = "cmp-git-fix",
@@ -320,7 +320,6 @@ return {
 			}
 		end,
 	},
-
 	{
 		"windwp/nvim-autopairs",
 		dependencies = "hrsh7th/nvim-cmp",

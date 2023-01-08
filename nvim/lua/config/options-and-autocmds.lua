@@ -103,7 +103,6 @@ opt.nrformats:remove { "bin", "hex" } -- remove edge case ambiguity
 --------------------------------------------------------------------------------
 
 -- Files & Saving
-opt.autochdir = true -- always current directory
 opt.confirm = true -- ask instead of aborting
 
 augroup("autosave", {})
@@ -111,8 +110,19 @@ autocmd({ "BufWinLeave", "WinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	group = "autosave",
 	pattern = "?*", -- pattern required
 	callback = function()
-		if not bo.modifiable or bo.buftype == "nofile" then return end
-		cmd.update(expand("%:p")) -- safety net to not save file in wrong folder when autochdir is not reliable,,
+		if not bo.modifiable or bo.buftype == "nofile" or bo.filetype == "gitcommit" then return end
+		cmd.update(expand("%:p"))
+	end,
+})
+
+augroup("autochdir", {})
+autocmd({"BufWinEnter", "FileType"}, {
+	group = "autochdir",
+	callback = function()
+		local ft = bo.filetype
+		-- needs to exclude commit filetypes: https://github.com/petertriho/cmp-git/issues/47#issuecomment-1374788422
+		if bo.modifiable or ft == "" or ft == "gitcommit" or ft == "NeogitCommitMessage" then return end
+		cmd.lcd(expand("%:p:h"))
 	end,
 })
 
@@ -159,7 +169,7 @@ local function remember(mode)
 	}
 	if vim.tbl_contains(ignoredFts, bo.filetype) or bo.buftype == "nofile" or not bo.modifiable then return end
 	if mode == "save" then
-		cmd.mkview(1)	
+		cmd.mkview(1)
 	else
 		cmd([[silent! loadview 1]]) -- needs silent to avoid error for documents that do not have a view yet (opening first time)
 		normal("0^") -- to scroll to the left on start
