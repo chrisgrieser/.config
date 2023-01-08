@@ -9,13 +9,12 @@ local s = {
 	snippets = { name = "luasnip" },
 	lsp = { name = "nvim_lsp" },
 	treesitter = { name = "treesitter" },
-	git = { name = "git" }, -- mentions with "@", issues/PRs with "#"
+	-- git = { name = "git" }, -- mentions with "@", issues/PRs with "#"
 	cmdline_history = { name = "cmdline_history", keyword_length = 3 },
 	cmdline = { name = "cmdline" },
 }
 
 local defaultSources = {
-	s.git,
 	s.snippets,
 	s.lsp,
 	s.tabnine,
@@ -67,7 +66,7 @@ local source_icons = {
 	cmdline_history = "",
 	path = "",
 	omni = "", -- since only used for folders right now
-	git = "",
+	-- git = "",
 }
 
 local function cmpconfig()
@@ -244,14 +243,15 @@ local function cmpconfig()
 			{name = "git"},
 		},
 	})
-
-	cmp.setup.filetype("NeogitCommitMessage", {
-		sources = cmp.config.sources {
-			s.git,
-			s.path,
-		},
-	})
 	require("cmp_git").setup()
+
+	-- cmp.setup.filetype("NeogitCommitMessage", {
+	-- 	sources = cmp.config.sources {
+	-- 		s.git,
+	-- 		s.path,
+	-- 	},
+	-- })
+
 	--------------------------------------------------------------------------------
 	-- Command Line Completion
 	cmp.setup.cmdline({ "/", "?" }, {
@@ -262,7 +262,6 @@ local function cmpconfig()
 	cmp.setup.cmdline(":", {
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = cmp.config.sources({
-			s.git,
 			s.path,
 			s.cmdline,
 		}, { -- second array only relevant when no source from the first matches
@@ -275,23 +274,6 @@ local function cmpconfig()
 		sources = cmp.config.sources { { name = "omni" } },
 	})
 
-	-- require("cmp_git").setup {
-	-- 	filetypes = { "gitcommit", "NeogitCommitMessage" },
-	-- 	git = { commits = { limit = 0 } }, -- 0 = disable completing commits
-	-- 	github = {
-	-- 		issues = {
-	-- 			limit = 100,
-	-- 			state = "open", -- open, closed, all
-	-- 		},
-	-- 		mentions = {
-	-- 			limit = 100,
-	-- 		},
-	-- 		pull_requests = {
-	-- 			limit = 10,
-	-- 			state = "open",
-	-- 		},
-	-- 	},
-	-- }
 end
 --------------------------------------------------------------------------------
 
@@ -300,7 +282,6 @@ return {
 		"hrsh7th/nvim-cmp",
 		-- event = { "InsertEnter", "CmdlineEnter" }, -- CmdlineEnter for completions there
 		dependencies = {
-			"nvim-lua/plenary.nvim", -- required by cmp-git
 			"hrsh7th/cmp-buffer", -- completion sources
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
@@ -309,7 +290,7 @@ return {
 			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
-			"petertriho/cmp-git",
+			-- { "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
