@@ -9,7 +9,6 @@ local s = {
 	snippets = { name = "luasnip" },
 	lsp = { name = "nvim_lsp" },
 	treesitter = { name = "treesitter" },
-	-- git = { name = "git" }, -- mentions with "@", issues/PRs with "#"
 	cmdline_history = { name = "cmdline_history", keyword_length = 3 },
 	cmdline = { name = "cmdline" },
 }
@@ -66,7 +65,6 @@ local source_icons = {
 	cmdline_history = "",
 	path = "",
 	omni = "", -- since only used for folders right now
-	-- git = "",
 }
 
 local function cmpconfig()
@@ -237,21 +235,6 @@ local function cmpconfig()
 		},
 	})
 
-	-- gitcommit
-	cmp.setup.filetype("gitcommit", {
-		sources = cmp.config.sources {
-			{name = "git"},
-		},
-	})
-	require("cmp_git").setup()
-
-	-- cmp.setup.filetype("NeogitCommitMessage", {
-	-- 	sources = cmp.config.sources {
-	-- 		s.git,
-	-- 		s.path,
-	-- 	},
-	-- })
-
 	--------------------------------------------------------------------------------
 	-- Command Line Completion
 	cmp.setup.cmdline({ "/", "?" }, {
@@ -273,14 +256,13 @@ local function cmpconfig()
 	cmp.setup.filetype("DressingInput", {
 		sources = cmp.config.sources { { name = "omni" } },
 	})
-
 end
 --------------------------------------------------------------------------------
 
 return {
 	{
 		"hrsh7th/nvim-cmp",
-		-- event = { "InsertEnter", "CmdlineEnter" }, -- CmdlineEnter for completions there
+		event = { "InsertEnter", "CmdlineEnter" }, -- CmdlineEnter for completions there
 		dependencies = {
 			"hrsh7th/cmp-buffer", -- completion sources
 			"hrsh7th/cmp-path",
@@ -290,7 +272,6 @@ return {
 			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
-			-- { "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
@@ -312,7 +293,7 @@ return {
 	},
 	{
 		"L3MON4D3/LuaSnip",
-		-- event = "InsertEnter",
+		event = "InsertEnter",
 		config = function()
 			require("config/snippets") -- loads all snippets
 			local ls = require("luasnip")
