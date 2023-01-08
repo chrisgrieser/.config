@@ -15,6 +15,7 @@ local s = {
 }
 
 local defaultSources = {
+	s.git,
 	s.snippets,
 	s.lsp,
 	s.tabnine,
@@ -240,8 +241,7 @@ local function cmpconfig()
 	-- gitcommit
 	cmp.setup.filetype("gitcommit", {
 		sources = cmp.config.sources {
-			s.git,
-			s.path,
+			{name = "git"},
 		},
 	})
 
@@ -251,6 +251,7 @@ local function cmpconfig()
 			s.path,
 		},
 	})
+	require("cmp_git").setup()
 	--------------------------------------------------------------------------------
 	-- Command Line Completion
 	cmp.setup.cmdline({ "/", "?" }, {
@@ -261,6 +262,7 @@ local function cmpconfig()
 	cmp.setup.cmdline(":", {
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = cmp.config.sources({
+			s.git,
 			s.path,
 			s.cmdline,
 		}, { -- second array only relevant when no source from the first matches
@@ -273,31 +275,32 @@ local function cmpconfig()
 		sources = cmp.config.sources { { name = "omni" } },
 	})
 
-	require("cmp_git").setup {
-		filetypes = { "gitcommit", "NeogitCommitMessage" },
-		git = { commits = { limit = 0 } }, -- 0 = disable completing commits
-		github = {
-			issues = {
-				limit = 100,
-				state = "open", -- open, closed, all
-			},
-			mentions = {
-				limit = 100,
-			},
-			pull_requests = {
-				limit = 10,
-				state = "open",
-			},
-		},
-	}
+	-- require("cmp_git").setup {
+	-- 	filetypes = { "gitcommit", "NeogitCommitMessage" },
+	-- 	git = { commits = { limit = 0 } }, -- 0 = disable completing commits
+	-- 	github = {
+	-- 		issues = {
+	-- 			limit = 100,
+	-- 			state = "open", -- open, closed, all
+	-- 		},
+	-- 		mentions = {
+	-- 			limit = 100,
+	-- 		},
+	-- 		pull_requests = {
+	-- 			limit = 10,
+	-- 			state = "open",
+	-- 		},
+	-- 	},
+	-- }
 end
 --------------------------------------------------------------------------------
 
 return {
 	{
 		"hrsh7th/nvim-cmp",
-		event = { "InsertEnter", "CmdlineEnter" }, -- CmdlineEnter for completions there
+		-- event = { "InsertEnter", "CmdlineEnter" }, -- CmdlineEnter for completions there
 		dependencies = {
+			"nvim-lua/plenary.nvim", -- required by cmp-git
 			"hrsh7th/cmp-buffer", -- completion sources
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
@@ -306,6 +309,7 @@ return {
 			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
+			"petertriho/cmp-git",
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
@@ -313,43 +317,21 @@ return {
 		},
 		config = cmpconfig,
 	},
-	{ -- git-related completion
-		"petertriho/cmp-git",
-		ft = {"gitcommit", "NeogitCommitMessage"},
-		config = function()
-			require("cmp_git").setup {
-				filetypes = { "gitcommit", "NeogitCommitMessage" },
-				git = { commits = { limit = 0 } }, -- 0 = disable completing commits
-				github = {
-					issues = {
-						limit = 100,
-						state = "open", -- open, closed, all
-					},
-					mentions = {
-						limit = 100,
-					},
-					pull_requests = {
-						limit = 10,
-						state = "open",
-					},
-				},
-			}
-		end,
-	},
 	{
 		"windwp/nvim-autopairs",
 		dependencies = "hrsh7th/nvim-cmp",
-		event = "InsertEnter",
+		-- event = "InsertEnter",
 		config = function()
 			require("nvim-autopairs").setup()
-			-- add brackets to cmp
+
+			-- add brackets to cmp completions, e.g. "function" -> "function()"
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
 	{
 		"L3MON4D3/LuaSnip",
-		event = "InsertEnter",
+		-- event = "InsertEnter",
 		config = function()
 			require("config/snippets") -- loads all snippets
 			local ls = require("luasnip")
