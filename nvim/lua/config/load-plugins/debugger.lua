@@ -9,9 +9,7 @@ local function dapConfig()
 		ensure_installed = { "node2" },
 	}
 
-	--------------------------------------------------------------------------------
 	-- CONFIGURATION OF SPECIFIC DEBUGGERS
-	-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
 
 	-- Lua (one-step-for-vimkind plugin)
 	dap.configurations.lua =
@@ -63,22 +61,11 @@ local function dapConfig()
 	-- KEYBINDINGS
 	-- INFO toggling breakpoints already done via nvim-recorder
 
-	vim.keymap.set("n", "7", function()
-		-- HACK wrap `continue` in this, since the nvim-lua-debugger has to be started separately
-		local dapRunning = dap.status() ~= ""
-		if not dapRunning and vim.bo.filetype == "lua" then
-			require("osv").run_this()
-		else
-			dap.continue()
-		end
-		vim.api.nvim_set_option_value("number", true, { scope = "local" })
-	end, { desc = " Continue" })
-
 	-- selection of dap-commands
 	vim.keymap.set("n", "<leader>b", function()
 		local selection = {
 			"Toggle DAP UI",
-			"Start nvim-lua debugger", 
+			"Start nvim-lua debugger",
 			"Terminate",
 			"Set Log Point",
 			"Clear Breakpoints",
@@ -91,21 +78,19 @@ local function dapConfig()
 		}
 		vim.ui.select(selection, { prompt = " DAP Command" }, function(choice)
 			if not choice then return end
-			if choice:find("^Launch") then
-				vim.api.nvim_set_option_value("number", true, { scope = "local" })
-			end
 
 			if choice == "Toggle DAP UI" then
 				require("dapui").toggle()
 			elseif choice == "Step over" then
 				dap.step_over()
 			elseif choice == "Start nvim-lua debugger" then
-				-- INFO is the only one that needs manual starting, other debuggers 
+				vim.api.nvim_set_option_value("number", true, { scope = "local" })
+				-- INFO is the only one that needs manual starting, other debuggers
 				-- start with `continue` by themselves
 				local dapRunning = dap.status() ~= ""
-				if dapRunning then 
+				if dapRunning then
 					vim.notify("Debugger already running.", vim.log.levels.WARN)
-				elseif not vim.bo.filetype == "lua" then 
+				elseif not vim.bo.filetype == "lua" then
 					vim.notify("Not a lua file.", vim.log.levels.WARN)
 				else
 					require("osv").run_this() -- start lua debugger
@@ -157,10 +142,11 @@ local function dapLualine()
 	table.insert(lualineY, {
 		function()
 			local breakpoints = require("dap.breakpoints").get()
-			local debuggerIndex = next(breakpoints)
-			if debuggerIndex == nil then return "" end
-			local breakpointNum = #breakpoints[debuggerIndex]
-			return "  " .. tostring(breakpointNum)
+			local breakpointSum = 0
+			for buf, _ in pairs(breakpoints) do
+				breakpointSum = breakpointSum + #breakpoints[buf]
+			end
+			return "  " .. tostring(breakpointSum)
 		end,
 		section_separators = topSeparators,
 	})
