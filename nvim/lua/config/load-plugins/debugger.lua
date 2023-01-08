@@ -78,6 +78,7 @@ local function dapConfig()
 	vim.keymap.set("n", "<leader>b", function()
 		local selection = {
 			"Toggle DAP UI",
+			"Start nvim-lua debugger", 
 			"Terminate",
 			"Set Log Point",
 			"Clear Breakpoints",
@@ -98,6 +99,17 @@ local function dapConfig()
 				require("dapui").toggle()
 			elseif choice == "Step over" then
 				dap.step_over()
+			elseif choice == "Start nvim-lua debugger" then
+				-- INFO is the only one that needs manual starting, other debuggers 
+				-- start with `continue` by themselves
+				local dapRunning = dap.status() ~= ""
+				if dapRunning then 
+					vim.notify("Debugger already running.", vim.log.levels.WARN)
+				elseif not vim.bo.filetype == "lua" then 
+					vim.notify("Not a lua file.", vim.log.levels.WARN)
+				else
+					require("osv").run_this() -- start lua debugger
+				end
 			elseif choice == "Step into" then
 				dap.step_into()
 			elseif choice == "Step out" then
@@ -180,7 +192,6 @@ return {
 		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
 	},
 	keys = {
-		{ "7", nil, desc = " Continue" },
 		{ "<leader>b", nil, desc = " Select Action" },
 	},
 	config = function()
