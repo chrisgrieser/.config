@@ -1,5 +1,4 @@
 require("config.utils")
-local opts = { buffer = true, silent = true }
 --------------------------------------------------------------------------------
 
 -- spellcheck
@@ -53,6 +52,7 @@ keymap(
 
 --------------------------------------------------------------------------------
 
+local opts = { buffer = true, silent = true }
 -- Heading instead of function navigation
 keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], opts)
 keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], opts)

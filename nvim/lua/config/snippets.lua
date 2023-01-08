@@ -239,7 +239,7 @@ add("javascript", {
 		}
 	]]),
 	snip("write file", [[
-		function writeToFile(text, file) {
+		function writeToFile(file, text) {
 			const str = $.NSString.alloc.initWithUTF8String(text);
 			str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
 		}

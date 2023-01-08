@@ -106,7 +106,7 @@ null_ls.setup {
 		},
 		builtins.hover.dictionary, -- vim's builtin dictionary
 		builtins.completion.spell.with { -- vim's built-in spell-suggestions
-			filetypes = { "markdown", "text" },
+			filetypes = { "markdown", "text", "gitcommit" },
 		},
 	},
 }
