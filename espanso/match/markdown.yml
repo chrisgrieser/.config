@@ -10,29 +10,31 @@ matches:
     vars:
       - name: clipb
         type: shell
+        # remove trailing blank lines (first awk), then remove indentation
         params:
-          cmd: "pbpaste | awk 'NF {p=1} p'" # remove trailing blank lines
+          cmd: |
+            cb=$(pbpaste | awk 'NF {p=1} p')
+            first_char=$(echo "$cb" | awk 'NR == 1 {print $1}')
+            while echo "$cb" | awk '$1 != "'"$first_char"'" {exit 1}'; do
+              cb=$(echo "$cb" | cut -c2-)
+            done
   - trigger: TTT
     replace: '- [ ] '
     label: Markdown Task
-
   - trigger: '!references'
     replace: |
       ::: {#refs}
       :::
     label: Pandoc Reference List
-
   - trigger: '!table'
     replace: |
       ::: {custom-style="Table Caption"}
       Table $|$:
       :::
     label: Pandoc Table Caption
-
   - trigger: '!img'
     replace: '<img width=60% alt="" src="$|$">'
     label: HTML Image
-
   - trigger: '!progress'
     replace: '<progress value="$|$" max="10"></progress>'
     label: HTML Progress Bar
