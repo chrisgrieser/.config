@@ -35,7 +35,7 @@ local function config()
 
 	-- HACK to filter out annoying buggy messages from the satellite plugin: https://github.com/lewis6991/satellite.nvim/issues/36
 	local function banned(msg) -- https://github.com/rcarriga/nvim-notify/issues/114#issuecomment-1179754969
-		return msg:find("gitsigns ROW") or msg:find("line value outside range")
+		return msg:find("^gitsigns ROW: %d+") or msg:find("^line value outside range") or msg:find("^diagnostic ROW: %d+")
 	end
 
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
