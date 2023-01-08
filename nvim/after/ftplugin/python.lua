@@ -6,4 +6,4 @@ bo.expandtab = true
 bo.shiftwidth = 4
 bo.tabstop = 4
 bo.softtabstop = 4
-wo.listchars = "tab: >"
+wo.listchars = "tab: >,multispace:·,leadmultispace: "
