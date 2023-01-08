@@ -15,12 +15,12 @@ bo.expandtab = true
 wo.listchars = "tab: >"
 
 -- does not work perfectly yet though
-keymap("x", "<D-m>", function ()
+keymap("x", "<D-m>", function()
 	leaveVisualMode()
-	cmd [['<,'> !yq -P -o=json -I=0]]
-	cmd[[.s/\d\@<!"\d\@!//ge]] -- remove quotes that do not surround a number https://vim.fandom.com/wiki/Regex_lookahead_and_lookbehind
-	cmd[[.s/:/: /ge]] -- fix some stuff since this isn't real json
-	cmd[[.s/,/, /ge]]
-	cmd[[.s/\\\\/\\/ge]]
+	cmd([['<,'> !yq -P -o=json -I=0]])
+	cmd([[.s/\d\@<!"\d\@!//ge]]) -- remove quotes that do not surround a number https://vim.fandom.com/wiki/Regex_lookahead_and_lookbehind
+	cmd([[.s/:/: /ge]]) -- fix some stuff since this isn't real json
+	cmd([[.s/,/, /ge]])
+	cmd([[.s/\\\\/\\/ge]])
 	normal("kJ")
-end, {desc = "minify YAML", buffer = true})
+end, { desc = "minify YAML", buffer = true })
