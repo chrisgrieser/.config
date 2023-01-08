@@ -70,8 +70,8 @@ return {
 		dev = true,
 		keys = {
 			{ "9", nil, desc = " Play Macro" },
+			{ "8", nil, desc = "/ Breakpoint", remap = false },
 			{ "0", nil, desc = " Start/Stop Recording" },
-			{ "8", nil, desc = "/ Breakpoint" },
 		},
 		config = function()
 			require("recorder").setup {
@@ -84,9 +84,7 @@ return {
 					switchSlot = "<C-0>",
 					addBreakPoint = "8",
 				},
-				-- if true, `addBreakPoint` will map to `dap.toggle_breakpoint()` outside
-				-- a recording. During a recording, it will add a macro breakpoint instead.
-				dapBreakpoint = true,
+				dapSharedKeymaps = true,
 			}
 			local topSeparators = isGui() and { left = "", right = "" } or { left = "", right = "" }
 
