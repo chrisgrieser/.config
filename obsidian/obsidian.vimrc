@@ -25,8 +25,7 @@ nmap x "_dl
 " no modifier key for jumping to next word
 nmap + *
 
-" quicker Find Mode
-" (by mirroring American keyboard layout on German keyboard layout)
+" Find Mode (by mirroring American keyboard layout on German keyboard layout)
 map - /
 
 " <Esc> clears notices & highlights (:nohl)
@@ -52,8 +51,8 @@ vmap <C-a> <Esc>I
 " HJKL behaves like hjkl, but bigger distance
 map H g0
 map L g$
-map J 6j
-map K 6k
+map J 6gj
+map K 6gk
 
 " Spelling / Diagnostics
 " Emulate `z=` (and bind it zo `zl` because more convenient; mnemonic: [z]pelling list)
@@ -128,7 +127,6 @@ vmap ü :caseSwitch
 " Shortcuts plugin is smarter since it removes list prefixes
 exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 nmap M :mergeLines
-vmap M :mergeLines
 
 " WHITESPACE CONTROL
 exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
@@ -142,27 +140,23 @@ nmap O &a&i
 
 " Add Blank Line above/below 
 " HACK not using mz...`z since m remapped 
-" HACK adding in d$ to clear the line from list markers from the o/O remapping above
-nmap = O<Esc>d$j
-nmap _ o<Esc>d$k
+" HACK adding in ^d$ to clear the line from list markers from the o/O remapping above
+nmap = O<Esc>^d$j
+nmap _ o<Esc>^d$k
 
 """"""""""""""""""""""""""""
 " Markdown/Obsidian specific
 """"""""""""""""""""""""""""
 
-" show commands in console
-nmap ,c :obcommand
+" [i]nspect commands in console
+nmap ,i :obcommand
 
-" delete alias part of next Wikilink
+" [c]lean alias part of next Wikilink
 " (or Link Homepage when using Auto Title Plugin)
-nmap ,a F[t|"_dt]
+nmap ,c F[t|"_dt]
 
 " append to [y]aml (line 3 = tags)
 nmap ,y 3ggA
-
-" complete a Markdown task
-exmap toggleTask obcommand editor:toggle-checklist-status
-nmap ,x :toggleTask
 
 " [g]oto [d]efiniton -> footnotes
 " requires Footnotes Shortcut Plugin
