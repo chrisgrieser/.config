@@ -106,7 +106,7 @@ local function dapConfig()
 				dap.run_to_cursor()
 			elseif choice == "Clear Breakpoints" then
 				dap.clear_breakpoints()
-			elseif choice == 	"Add Breakpoints to Quickfix List" then
+			elseif choice == "Add Breakpoints to Quickfix List" then
 				dap.list_breakpoints()
 			elseif choice == "Conditional Breakpoint" then
 				vim.ui.input({ prompt = "Breakpoint condition: " }, function(cond)
@@ -138,19 +138,37 @@ end
 
 local function dapLualine()
 	local topSeparators = isGui() and { left = "", right = "" } or { left = "", right = "" }
+
+	lualineZ = require("lualine").get_config().winbar.lualine_z
+	lualineY = require("lualine").get_config().winbar.lualine_y
+	table.insert(lualineZ, {
+		{
+			function()
+				local dapStatus = require("dap").status()
+				if dapStatus ~= "" then dapStatus = "  " .. dapStatus end
+				return dapStatus
+			end,
+			section_separators = topSeparators,
+		},
+	})
+	table.insert(lualineY, {
+		{
+			function()
+				local breakpointNum = #(require('dap.breakpoints').get())
+				if breakpointNum == 0 then return "" end
+				return tostring(breakpointNum)
+				return tostring(#require('dap.breakpoints').get())
+			end,
+			cond = #(require('dap.breakpoints').get()) > 0,
+			section_separators = topSeparators,
+		},
+	})
+
 	require("lualine").setup {
 		extensions = { "nvim-dap-ui" },
 		winbar = {
-			lualine_z = {
-				{
-					function()
-						local dapStatus = require("dap").status()
-						if dapStatus ~= "" then dapStatus = "  " .. dapStatus end
-						return dapStatus
-					end,
-					section_separators = topSeparators,
-				},
-			},
+			lualine_y = {},
+			lualine_z = {},
 		},
 	}
 end

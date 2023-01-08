@@ -142,13 +142,10 @@ require("nvim-surround").setup {
 	},
 	move_cursor = false,
 	keymaps = {
-		insert = nil,
-		insert_line = nil,
-		normal_cur = nil, -- mapped on my own (see above)
-		normal_line = nil, -- mapped on my own (see above)
-		normal_cur_line = nil,
+		normal_cur = "<Nop>", -- mapped on my own (see above)
+		normal_line = "<Nop>", -- mapped on my own (see above)
+		normal_cur_line = "<Nop>",
 		visual = "s",
-		visual_line = nil,
 	},
 	surrounds = {
 		[doubleSquareBracketObjChar] = {

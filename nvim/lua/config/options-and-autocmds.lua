@@ -115,13 +115,19 @@ autocmd({ "BufWinLeave", "WinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	end,
 })
 
+-- emulate autochdir, which is deprecated
 augroup("autochdir", {})
 autocmd({"BufWinEnter", "FileType"}, {
 	group = "autochdir",
 	callback = function()
-		local ft = bo.filetype
+		local ignoredFT = {
+			"gitcommit",
+			"NeogitCommitMessage",
+			"DiffviewFileHistory",
+			"",
+		}
 		-- needs to exclude commit filetypes: https://github.com/petertriho/cmp-git/issues/47#issuecomment-1374788422
-		if bo.modifiable or ft == "" or ft == "gitcommit" or ft == "NeogitCommitMessage" then return end
+		if not (bo.modifiable) or vim.tbl_contains(ignoredFT, bo.filetype) or not (expand("%:p"):find("^/")) then return end
 		cmd.lcd(expand("%:p:h"))
 	end,
 })

@@ -133,7 +133,6 @@ require("lualine").setup {
 		},
 	},
 	winbar = {
-		-- INFO dap and recording status defined in the respective plugin configs
 		lualine_b = {
 			{
 				navic.get_location,
@@ -158,6 +157,8 @@ require("lualine").setup {
 				color = "NonText",
 			},
 		},
+		-- INFO dap and recording status defined in the respective plugin configs
+		-- for lualine_y and lualine_z
 	},
 	options = {
 		refresh = { statusline = 1000 },
