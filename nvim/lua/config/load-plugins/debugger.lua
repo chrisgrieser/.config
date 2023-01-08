@@ -61,6 +61,7 @@ local function dapConfig()
 
 	--------------------------------------------------------------------------------
 	-- KEYBINDINGS
+	-- INFO toggling breakpoints already done via nvim-recorder
 
 	vim.keymap.set("n", "7", function()
 		-- HACK wrap `continue` in this, since the nvim-lua-debugger has to be started separately
@@ -81,6 +82,7 @@ local function dapConfig()
 			"Set Log Point",
 			"Clear Breakpoints",
 			"Conditional Breakpoint",
+			"Add Breakpoints to Quickfix List",
 			"Step over",
 			"Step into",
 			"Step out",
@@ -104,6 +106,8 @@ local function dapConfig()
 				dap.run_to_cursor()
 			elseif choice == "Clear Breakpoints" then
 				dap.clear_breakpoints()
+			elseif choice == 	"Add Breakpoints to Quickfix List" then
+				dap.list_breakpoints()
 			elseif choice == "Conditional Breakpoint" then
 				vim.ui.input({ prompt = "Breakpoint condition: " }, function(cond)
 					if not cond then return end
@@ -141,8 +145,8 @@ local function dapLualine()
 				{
 					function()
 						local dapStatus = require("dap").status()
-						if dapStatus == "" then return "" end
-						return "  " .. dapStatus
+						if dapStatus ~= "" then dapStatus = "  " .. dapStatus end
+						return dapStatus
 					end,
 					section_separators = topSeparators,
 				},
