@@ -49,7 +49,7 @@ add("zsh", {
 	snip("ext", "ext=${${1:file_name}shebang*.}"),
 	snip("filename w/o ext", "${1:file_name}=${${1:file_name}%.*}"),
 	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
-	snip("notify", [[osascript -e 'display notification "" with title "${1:title}"']]),
+	snip("notify", [[osascript -e "display notification \"\" with title \"$${1:var}\""]]),
 
 	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
 	snip("ternary", '[[ "$${1:cond}" ]] && ${2:var}="$${3:one}" || ${2:var}="$${4:two}"'),
