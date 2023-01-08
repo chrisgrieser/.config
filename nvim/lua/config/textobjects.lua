@@ -59,7 +59,7 @@ keymap("n", "<M-S-CR>", '"_daw', { desc = "delete word" }) -- HACK since <S-Spac
 -- stylua: ignore start
 
 -- space: subword
-keymap({"o", "x"}, "<Space>", function() require("various-textobjs").subword(false) end, { desc = "inner subword textobj" })
+keymap({"o", "x"}, "<Space>", function() require("various-textobjs").subword(true) end, { desc = "inner subword textobj" })
 
 -- U: url
 keymap({ "o", "x" }, "U", function() require("various-textobjs").url() end, { desc = "url textobj" })
@@ -99,7 +99,6 @@ keymap( { "x", "o" }, "aR", function() require("various-textobjs").doubleSquareB
 -- ii/ai: indentation textobj
 keymap({ "x", "o" }, "ii", function() require("various-textobjs").indentation(true, true) end, { desc = "inner indent textobj" })
 keymap({ "x", "o" }, "ai", function() require("various-textobjs").indentation(false, false) end, { desc = "outer indent textobj" })
--- stylua: ignore end
 
 augroup("IndentedFileTypes", {})
 autocmd("FileType", {
@@ -107,12 +106,7 @@ autocmd("FileType", {
 	callback = function()
 		local indentedFts = { "python", "yaml", "markdown" }
 		if vim.tbl_contains(indentedFts, bo.filetype) then
-			keymap(
-				{ "x", "o" },
-				"ai",
-				function() require("various-textobjs").indentation(false, true) end,
-				{ buffer = true, desc = "indent textobj w/ start border" }
-			)
+			keymap( { "x", "o" }, "ai", function() require("various-textobjs").indentation(false, true) end, { buffer = true, desc = "indent textobj w/ start border" })
 		end
 	end,
 })
@@ -120,6 +114,7 @@ autocmd("FileType", {
 -- Git Hunks
 keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
 
+-- stylua: ignore end
 --------------------------------------------------------------------------------
 -- SURROUND
 -- need to be consistent with the text obj mappings above
