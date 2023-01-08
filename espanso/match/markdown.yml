@@ -10,14 +10,11 @@ matches:
     vars:
       - name: clipb
         type: shell
-        # remove trailing blank lines (first awk), then remove indentation
         params:
+          # awk: remove trailing blank lines
+          # python3: remove indentation
           cmd: |
-            cb=$(pbpaste | awk 'NF {p=1} p')
-            first_char=$(echo "$cb" | awk 'NR == 1 {print $1}')
-            while echo "$cb" | awk '$1 != "'"$first_char"'" {exit 1}'; do
-              cb=$(echo "$cb" | cut -c2-)
-            done
+            pbpaste | awk 'NF {p=1} p' | python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))"
   - trigger: TTT
     replace: '- [ ] '
     label: Markdown Task
