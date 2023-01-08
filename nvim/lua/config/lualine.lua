@@ -54,7 +54,7 @@ local navic = require("nvim-navic")
 navic.setup {
 	icons = { Object = "ﴯ " },
 	separator = "  ",
-	depth_limit = 8,
+	depth_limit = 7,
 	depth_limit_indicator = "…",
 }
 
@@ -76,7 +76,7 @@ local function searchCounter()
 	local searchTerm = fn.getreg("/")
 	local isStarSearch = searchTerm:find([[^\<.*\>$]])
 	if isStarSearch then searchTerm = "*" .. searchTerm:sub(3, -3) end
-	if total == 0 then return "  窱".. searchTerm end
+	if total == 0 then return " 0 ".. searchTerm end
 	return " " .. current .. "/" .. total .. " " .. searchTerm
 end
 
@@ -152,7 +152,7 @@ require("lualine").setup {
 				cond = function()
 					if not require("lazy.status").has_updates() then return false end
 					local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
-					return numberOfUpdates > 5
+					return numberOfUpdates > 10
 				end,
 				color = "NonText",
 			},
@@ -175,7 +175,7 @@ require("lualine").setup {
 		section_separators = bottomSeparators,
 		disabled_filetypes = {
 			statusline = {},
-			winbar = {"toggleterm", "NeogitCommitMessage"},
+			winbar = {"toggleterm", "gitcommit"},
 		},
 	},
 }

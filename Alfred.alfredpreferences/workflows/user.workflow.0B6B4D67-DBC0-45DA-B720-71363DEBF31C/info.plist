@@ -663,7 +663,7 @@ echo -n "$title"</string>
 				<key>allowemptyfiles</key>
 				<false/>
 				<key>createintermediatefolders</key>
-				<false/>
+				<true/>
 				<key>filename</key>
 				<string>{var:default_folder}/{var:tabName}.url</string>
 				<key>filetext</key>

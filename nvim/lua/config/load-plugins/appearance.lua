@@ -45,7 +45,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("satellite").setup {
-				winblend = 50, -- winblend = transparency
+				winblend = 70, -- winblend = transparency
 				handlers = {
 					marks = { enable = false },
 				},
@@ -78,7 +78,7 @@ return {
 					auto_enable = true,
 					max_byte = 2 * 1024 * 1024, -- 2mb
 					lsp = true,
-					excludes = { "lazy", "gitcommit", "NeogitCommitMessage" },
+					excludes = { "lazy", "gitcommit" },
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
