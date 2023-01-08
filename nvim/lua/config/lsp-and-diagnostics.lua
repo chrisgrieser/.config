@@ -39,7 +39,12 @@ end
 keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, { desc = "璉Next Diagnostic" })
 -- stylua: ignore
 keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, { desc = "璉Previous Diagnostic" })
-keymap("n", "<leader>d", function() vim.diagnostic.open_float { focusable = false } end, { desc = "璉Show Diagnostic" })
+keymap(
+	"n",
+	"<leader>d",
+	function() vim.diagnostic.open_float { focusable = false } end,
+	{ desc = "璉Show Diagnostic" }
+)
 
 local function diagnosticFormat(diagnostic, mode)
 	local msg = diagnostic.message:gsub("^%s*", ""):gsub("%s*$", "")
@@ -114,11 +119,11 @@ require("neodev").setup {
 -- LSP KEYBINDINGS
 
 -- fallback for languages without an action LSP
-keymap("n", "gs", function() cmd.Telescope("treesitter") end, {desc = " Document Symbol"})
+keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbol" })
 
 -- actions defined globally so null-ls can use them without LSP, e.g., for bash
 -- or gitsigns
-keymap({ "n", "x" }, "<leader>a", vim.lsp.buf.code_action, {desc = "璉Code Action"})
+keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "璉Code Action" })
 
 augroup("LSP", {})
 autocmd("LspAttach", {
@@ -140,13 +145,15 @@ autocmd("LspAttach", {
 
 		if client.server_capabilities.renameProvider then
 			-- overrides treesitter-refactor's rename
-			keymap("n", "<leader>R", vim.lsp.buf.rename, {desc = "璉Rename", buffer = true})
+			keymap("n", "<leader>R", vim.lsp.buf.rename, { desc = "璉Var Rename", buffer = true })
 		end
 
+		-- stylua: ignore start
 		keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "璉Goto Definition", buffer = true })
 		keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "璉Goto Re[f]erence", buffer = true })
 		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, {desc = "璉Signature", buffer = true})
 		keymap("n", "<leader>h", vim.lsp.buf.hover, {desc = "璉Hover", buffer = true})
+		-- stylua: ignore end
 
 		keymap({ "n", "x", "i" }, "<D-s>", function()
 			local ft = bo.filetype
@@ -157,7 +164,7 @@ autocmd("LspAttach", {
 				cmd.EslintFixAll() -- eslint-lsp
 			elseif ft == "applescript" then
 				cmd.mkview { bang = true }
-				cmd.normal { "gg=G", bang = true } -- poor man's formatting
+				normal("gg=G") -- poor man's formatting
 				lspformat { async = false } -- still used for null-ls-codespell
 				cmd.loadview()
 			else
@@ -167,8 +174,18 @@ autocmd("LspAttach", {
 		end, bufopts)
 
 		if bo.filetype ~= "css" then -- don't override navigation marker search for css files
-			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, {desc = "璉Document Symbols", buffer = true}) -- overrides treesitter symbols browsing
-			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, {desc = "璉Workspace Symbols", buffer = true})
+			keymap(
+				"n",
+				"gs",
+				function() cmd.Telescope("lsp_document_symbols") end,
+				{ desc = "璉Document Symbols", buffer = true }
+			) -- overrides treesitter symbols browsing
+			keymap(
+				"n",
+				"gS",
+				function() cmd.Telescope("lsp_workspace_symbols") end,
+				{ desc = "璉Workspace Symbols", buffer = true }
+			)
 		end
 	end,
 })
