@@ -3,8 +3,14 @@
 //------------------------------------------------------------------------------
 
 // emulates `:buffer #`
-function altBuffer() {
-	const altPath = app.workspace.lastOpenFiles[0];
+async function altBuffer() {
+
+	let altPath = app.workspace.lastOpenFiles[0];
+	let fileExists = await this.app.vault.exists(altPath);
+	do 
+		fileExists = await this.app.vault.exists(altPath);
+	while (fileExists)
+
 	const altTFile = app.vault.getAbstractFileByPath(altPath);
 	app.workspace.activeLeaf.openFile(altTFile);
 }

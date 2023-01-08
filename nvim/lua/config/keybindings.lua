@@ -432,10 +432,10 @@ keymap("n", "#", ":CccPick<CR>")
 keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
 
 -- Neural
-keymap("x", "ga", ":NeuralCode complete<CR>", { desc = "ﮧ Code Completion" })
+keymap("x", "<leader>a", ":NeuralCode complete<CR>", { desc = "ﮧ Code Completion" })
 
 -- ChatGPT
-keymap("n", "ga", ":ChatGPT<CR>", { desc = "ﮧ ChatGPT Prompt" })
+keymap("n", "<leader>a", ":ChatGPT<CR>", { desc = "ﮧ ChatGPT Prompt" })
 
 --------------------------------------------------------------------------------
 -- FILES
@@ -499,7 +499,7 @@ keymap("n", "<leader>gd", function()
 		end
 		cmd.wincmd("w") -- go directly to file window
 	end)
-end, { desc = " File History" })
+end, { desc = " File History (Diffview)" })
 
 --------------------------------------------------------------------------------
 
