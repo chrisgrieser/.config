@@ -37,10 +37,7 @@ rules:
 
   # spaces
   no-mixed-spaces-and-tabs: warn
-  indent:
-    - warn
-    - tab
-    - SwitchCase: 1
+
   no-multi-spaces: warn
   array-bracket-spacing: warn
   space-before-blocks: warn
