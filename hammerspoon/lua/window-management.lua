@@ -109,37 +109,6 @@ function showAllSidebars()
 end
 
 --------------------------------------------------------------------------------
--- WINDOW MOVEMENT HELPERS
-
----(HACK) show/hide second row of sketchybar, workaround for https://github.com/FelixKratz/SketchyBar/issues/309
----@param arg string|hs.geometry "show"|"hide"|hs.geometry obj
-function sketchybarPopup(arg)
-	local mode
-	if isProjector() or isAtOffice() then
-		mode = "false" -- always hide
-	elseif type(arg) == "string" then
-		mode = (arg == "show") and "true" or "false"
-	elseif type(arg) == "table" then
-		if arg.x == 0 and arg.y == 0 then -- comparing to 0 works for rect (absolute) and unitrect (relative)
-			mode = "false"
-		else
-			mode = "true"
-		end
-	end
-	hs.execute("sketchybar --set clock popup.drawing=" .. mode)
-end
-
--- change sketchybarPopups on change of active app
--- since window size saving & session saving is not separated
-watcherForSketchy = aw.new(function(_, eventType, appObj)
-	if eventType == aw.activated or eventType == aw.launched then
-		local win = appObj:focusedWindow()
-		if not win then return end
-		sketchybarPopup(win:frame())
-	end
-end):start()
-
---------------------------------------------------------------------------------
 
 ---ensures Obsidian windows are always shown when developing css
 ---@param win hs.window
@@ -162,8 +131,7 @@ end
 
 ---@param win hs.window
 ---@param pos hs.geometry
----@param updateSketchy? boolean whether to use the sketchybarpopup-toggle-hack. defaults to `true`
-function moveResize(win, pos, updateSketchy)
+function moveResize(win, pos)
 	if not win then return end -- window been closed before
 
 	toggleWinSidebar(win)
@@ -172,8 +140,6 @@ function moveResize(win, pos, updateSketchy)
 	if (pos == pseudoMaximized or pos == centered) and appIsRunning("Twitterrific") then
 		app("Twitterrific"):mainWindow():raise()
 	end
-
-	if updateSketchy ~= false then sketchybarPopup(pos) end
 
 	local i = 0 -- pseudo-timeout
 	while win and i < 30 and not (checkSize(win, pos)) do
@@ -214,12 +180,6 @@ function autoTile(windowSource)
 	end
 	local wins = getWins(windowSource)
 
-	if #wins > 1 then -- needed to avoid every call of moveResize changing the popup
-		sketchybarPopup("hide")
-	else
-		sketchybarPopup("show")
-	end
-
 	if #wins == 0 and frontAppName() == "Finder" then
 		-- prevent quitting when window is created imminently
 		runWithDelays(0.5, function()
@@ -238,30 +198,30 @@ function autoTile(windowSource)
 			moveResize(wins[1], baseLayout)
 		end
 	elseif #wins == 2 then
-		moveResize(wins[1], leftHalf, false)
-		moveResize(wins[2], rightHalf, false)
+		moveResize(wins[1], leftHalf)
+		moveResize(wins[2], rightHalf)
 	elseif #wins == 3 then
-		moveResize(wins[1], { h = 1, w = 0.33, x = 0, y = 0 }, false)
-		moveResize(wins[2], { h = 1, w = 0.34, x = 0.33, y = 0 }, false)
-		moveResize(wins[3], { h = 1, w = 0.33, x = 0.67, y = 0 }, false)
+		moveResize(wins[1], { h = 1, w = 0.33, x = 0, y = 0 })
+		moveResize(wins[2], { h = 1, w = 0.34, x = 0.33, y = 0 })
+		moveResize(wins[3], { h = 1, w = 0.33, x = 0.67, y = 0 })
 	elseif #wins == 4 then
-		moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 }, false)
-		moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 }, false)
-		moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 }, false)
-		moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 }, false)
+		moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
+		moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
+		moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
+		moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
 	elseif #wins == 5 then
-		moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 }, false)
-		moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 }, false)
-		moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 }, false)
-		moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 }, false)
-		moveResize(wins[5], { h = 0.5, w = 0.5, x = 0.25, y = 0.25 }, false)
+		moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
+		moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
+		moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
+		moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
+		moveResize(wins[5], { h = 0.5, w = 0.5, x = 0.25, y = 0.25 })
 	elseif #wins == 6 then
-		moveResize(wins[1], { h = 0.5, w = 0.33, x = 0, y = 0 }, false)
-		moveResize(wins[2], { h = 0.5, w = 0.33, x = 0, y = 0.5 }, false)
-		moveResize(wins[3], { h = 0.5, w = 0.34, x = 0.33, y = 0 }, false)
-		moveResize(wins[4], { h = 0.5, w = 0.34, x = 0.33, y = 0.5 }, false)
-		moveResize(wins[5], { h = 0.5, w = 0.33, x = 0.67, y = 0 }, false)
-		moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.67, y = 0.5 }, false)
+		moveResize(wins[1], { h = 0.5, w = 0.33, x = 0, y = 0 })
+		moveResize(wins[2], { h = 0.5, w = 0.33, x = 0, y = 0.5 })
+		moveResize(wins[3], { h = 0.5, w = 0.34, x = 0.33, y = 0 })
+		moveResize(wins[4], { h = 0.5, w = 0.34, x = 0.33, y = 0.5 })
+		moveResize(wins[5], { h = 0.5, w = 0.33, x = 0.67, y = 0 })
+		moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.67, y = 0.5 })
 	end
 end
 
