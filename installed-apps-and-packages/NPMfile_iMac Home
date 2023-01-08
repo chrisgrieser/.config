@@ -4,7 +4,6 @@ eslint
 npm
 postcss
 readability-cli
-splashcii
 stylelint-config-recommended
 stylelint-declaration-block-no-ignored-properties
 stylelint-order

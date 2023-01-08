@@ -11,6 +11,7 @@ local lintersAndFormatters = {
 	"shellcheck", -- needed for bash-lsp
 	"shfmt", -- shell
 	"markdownlint",
+	"black", -- python formatter
 	"vale", -- natural language
 	"selene", -- lua
 	"stylua", -- lua
@@ -41,6 +42,18 @@ null_ls.setup {
 		builtins.formatting.trim_newlines, -- trim trailing whitespace & newlines
 		builtins.formatting.trim_whitespace.with {
 			disabled_filetypes = { "markdown" }, -- do not remove spaces due to two-space-rule
+		},
+
+		-- Python
+		builtins.formatting.black.with {
+			args = {
+				"--config",
+				linterConfig .. "/black.toml",
+				"--stdin-filename",
+				"$FILENAME",
+				"--quiet",
+				"-",
+			},
 		},
 
 		-- SHELL
@@ -91,7 +104,7 @@ null_ls.setup {
 		builtins.diagnostics.vale.with {
 			extra_args = { "--config", linterConfig .. "/vale/.vale.ini" },
 		},
-		builtins.formatting.markdownlint.with{
+		builtins.formatting.markdownlint.with {
 			extra_args = { "--config", linterConfig .. "/.markdownlintrc" },
 		},
 		builtins.diagnostics.markdownlint.with {
