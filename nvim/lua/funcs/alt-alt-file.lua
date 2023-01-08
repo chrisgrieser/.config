@@ -49,7 +49,7 @@ function M.altFileStatusline()
 	if altFile == "" and not altOldfile() then -- no oldfile and after start
 		return ""
 	elseif altWindow() and altWindow():find("^diffview:") then
-		return " File Diffview" 
+		return " File History" 
 	elseif altWindow() and altWindow():find("^term:") then
 		return " Terminal" 
 	elseif altWindow() then
