@@ -332,7 +332,11 @@ rules:
           - shell_command: |
               osascript -e '
                 tell application "Brave Browser"
-                  set theURL to the URL of active tab of front window
+                  if (count of window) > 0 then
+                    set theURL to the URL of active tab of front window
+                  else
+                    set theURL to ""
+                  end if
                   if the theURL contains "reddit.com/r/neovim" then
                     set the URL of active tab of front window to "https://www.reddit.com/r/vim/"
                   else

@@ -148,6 +148,10 @@ nmap _ o<Esc>^d$k
 " Markdown/Obsidian specific
 """"""""""""""""""""""""""""
 
+" [a]i completion
+exmap aiComplete obcommand obsidian-textgenerator-plugin:generate-text
+nmap ,a :aiComplete 
+
 " [i]nspect commands in console
 nmap ,i :obcommand
 
