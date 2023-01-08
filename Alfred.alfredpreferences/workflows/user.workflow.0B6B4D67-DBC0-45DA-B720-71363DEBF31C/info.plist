@@ -1189,15 +1189,28 @@ alacritty --working-directory="$finderWin" --command vidir</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
-	<key>variables</key>
-	<dict>
-		<key>default_folder</key>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub</string>
-	</dict>
-	<key>variablesdontexport</key>
 	<array>
-		<string>default_folder</string>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>working directory</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>default_folder</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string></string>
