@@ -255,14 +255,14 @@ keymap(
 	"n",
 	"<leader>f",
 	[[:%s/<C-r>=expand("<cword>")<CR>//gI<Left><Left><Left>]],
-	{ desc = "search & replace" }
+	{ desc = "substitute" }
 )
-keymap("x", "<leader>f", ":s///gI<Left><Left><Left><Left>", { desc = "search & replace" })
+keymap("x", "<leader>f", ":s///gI<Left><Left><Left><Left>", { desc = "substitute" })
 keymap(
 	{ "n", "x" },
 	"<leader>F",
 	function() require("ssr").open() end,
-	{ desc = "struct. search & replace" }
+	{ desc = "structural search & replace" }
 )
 keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
 keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
@@ -300,10 +300,10 @@ keymap(
 
 -- Logging & Debugging
 local qlog = require("funcs.quicklog")
-keymap({ "n", "x" }, "<leader>ll", qlog.quicklog, { desc = "add log statement" })
-keymap({ "n", "x" }, "<leader>lb", qlog.beeplog, { desc = "add beep log" })
-keymap({ "n", "x" }, "<leader>lt", qlog.timelog, { desc = "add time log" })
-keymap({ "n", "x" }, "<leader>lr", qlog.removelogs, { desc = "remove all log statements" })
+keymap({ "n", "x" }, "<leader>ll", qlog.quicklog, { desc = " log" })
+keymap({ "n", "x" }, "<leader>lb", qlog.beeplog, { desc = " beep log" })
+keymap({ "n", "x" }, "<leader>lt", qlog.timelog, { desc = " time log" })
+keymap({ "n", "x" }, "<leader>lr", qlog.removelogs, { desc = "  log" })
 
 -- Sort & highlight duplicate lines
 -- stylua: ignore

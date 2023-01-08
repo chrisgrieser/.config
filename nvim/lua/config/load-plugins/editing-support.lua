@@ -68,7 +68,10 @@ return {
 	{
 		"chrisgrieser/nvim-recorder", -- better macros
 		dev = true,
-		keys = { "0", "9" },
+		keys = {
+			{ "9", nil, desc = " Play Macro" },
+			{ "0", nil, desc = " Start/Stop Recording" },
+		},
 		config = function()
 			require("recorder").setup {
 				clear = true,
