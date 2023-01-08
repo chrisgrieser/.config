@@ -73,8 +73,8 @@ function M.timelog()
 			'console.log("timelog: ", duration, "s")',
 		}
 	elseif ft == "typescript" then
-		logStatement1 = {'console.time("timelog")'}
-		logStatement2 = {'console.timeEnd("timelog")'}
+		logStatement1 = { 'console.time("timelog")' }
+		logStatement2 = { 'console.timeEnd("timelog")' }
 	elseif ft == "bash" or ft == "zsh" or ft == "sh" or ft == "fish" then
 		logStatement1 = {
 			"timelogStart=$(date +%s)",
@@ -90,7 +90,7 @@ function M.timelog()
 	end
 	local logToAdd = g.timelogStart and logStatement1 or logStatement2
 
-	append(".", logToAdd)---@diagnostic disable-line: param-type-mismatch
+	append(".", logToAdd) ---@diagnostic disable-line: param-type-mismatch
 	for _ = 1, #logToAdd, 1 do
 		normal("j==")
 	end
@@ -98,7 +98,7 @@ function M.timelog()
 end
 
 ---adds simple "beep" log statement to check whether conditionals have been
----entered Supported: lua, python, js/ts, zsh/bash/fish, and applescript
+---entered. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.beeplog()
 	local logStatement
 	local ft = bo.filetype
@@ -118,7 +118,23 @@ function M.beeplog()
 		return
 	end
 
-	append(".", logStatement)---@diagnostic disable-line: param-type-mismatch
+	append(".", logStatement) ---@diagnostic disable-line: param-type-mismatch
+	normal("j==")
+end
+
+-- simple debug statement
+function M.debuglog()
+	local logStatement
+	local ft = bo.filetype
+
+	if ft == "javascript" or ft == "typescript" then
+		logStatement = "debugger"
+	else
+		vim.notify("Debuglog does not support " .. ft .. " yet.", logWarn)
+		return
+	end
+
+	append(".", logStatement) ---@diagnostic disable-line: param-type-mismatch
 	normal("j==")
 end
 

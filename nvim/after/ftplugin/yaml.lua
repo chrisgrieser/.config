@@ -12,7 +12,7 @@ bo.shiftwidth = 2
 bo.tabstop = 2
 bo.softtabstop = 2
 bo.expandtab = true
-wo.listchars = "tab: >"
+wo.listchars = "tab: >,multispace:·,leadmultispace: "
 
 -- does not work perfectly yet though
 keymap("x", "<D-m>", function()

@@ -1,13 +1,11 @@
-local counter = 0
+local operator
 
-function __dot_repeat(motion)
-	if motion == nil then
-		vim.o.operatorfunc = "v:lua.__dot_repeat"
-		return "g@"
-	end
-
-	print("counter:", counter, "motion:", motion)
-	counter = counter + 1
+function restOfParagraph()
+	operator = vim.v.operator
+	vim.o.operatorfunc = "v:lua.restOfParagraph"
+	vim.cmd.normal { operator .. "V}k", bang = true }
+	print("operator:", operator)
+	return "g@"
 end
 
-vim.keymap.set("n", "gt", __dot_repeat, { expr = true })
+vim.keymap.set("o", "ä", restOfParagraph, { expr = true })

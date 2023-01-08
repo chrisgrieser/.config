@@ -304,6 +304,7 @@ keymap({ "n", "x" }, "<leader>ll", qlog.quicklog, { desc = " log" })
 keymap({ "n", "x" }, "<leader>lb", qlog.beeplog, { desc = " beep log" })
 keymap({ "n", "x" }, "<leader>lt", qlog.timelog, { desc = " time log" })
 keymap({ "n", "x" }, "<leader>lr", qlog.removelogs, { desc = "  log" })
+keymap({ "n", "x" }, "<leader>ld", qlog.debuglog, { desc = " debugger" })
 
 -- Sort & highlight duplicate lines
 -- stylua: ignore
