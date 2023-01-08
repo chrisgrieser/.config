@@ -11,6 +11,7 @@ local s = {
 	treesitter = { name = "treesitter" },
 	cmdline_history = { name = "cmdline_history", keyword_length = 3 },
 	cmdline = { name = "cmdline" },
+	git = { name = "git" }, -- mentions with "@", issues/PRs with "#"
 }
 
 local defaultSources = {
@@ -65,6 +66,7 @@ local source_icons = {
 	cmdline_history = "",
 	path = "",
 	omni = "", -- since only used for folders right now
+	git = "",
 }
 
 local function cmpconfig()
@@ -235,6 +237,23 @@ local function cmpconfig()
 		},
 	})
 
+
+	cmp.setup.filetype("gitcommit", {
+		sources = cmp.config.sources {
+			{name = "git"},
+		},
+	})
+
+	cmp.setup.filetype("NeogitCommitMessage", {
+		sources = cmp.config.sources {
+			{name = "git"},
+		},
+	})
+
+	require("cmp_git").setup{
+		filetypes = { "gitcommit", "NeogitCommitMessage" },
+	}
+
 	--------------------------------------------------------------------------------
 	-- Command Line Completion
 	cmp.setup.cmdline({ "/", "?" }, {
@@ -272,6 +291,7 @@ return {
 			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
+			{ "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
