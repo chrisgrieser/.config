@@ -12,7 +12,8 @@ opt.shadafile = vimDataDir .. "main.shada"
 opt.undofile = true -- enable persistent undo history
 opt.undolevels = 500 -- less undos saved for quicker loading of undo history
 
-local undopointChars = { "<Space>", ".", ",", ";" }
+-- extra undopoints
+local undopointChars = { ".", ",", ";" }
 for _, char in pairs(undopointChars) do
 	keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char })
 end

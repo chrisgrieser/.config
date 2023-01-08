@@ -176,9 +176,9 @@ return {
 		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
 	},
 	keys = {
-		{ "7", nil, { desc = " Toggle Breakpoint" } },
-		{ "8", nil, { desc = " Continue" } },
-		{ "<leader>b", nil, { desc = " Debugger Action" } },
+		{ "7", nil, desc = " Toggle Breakpoint" },
+		{ "8", nil, desc = " Continue" },
+		{ "<leader>b", nil, desc = " Debugger Action" },
 	},
 	config = function()
 		dapConfig()

@@ -26,7 +26,6 @@ function M.quicklog()
 
 	local logStatement
 	local ft = bo.filetype
-	local lnStr = ""
 
 	if ft == "lua" and expand("%:p:h"):find("/hammerspoon/") then
 		logStatement = 'notify("' .. varname .. ':", ' .. varname .. ")"
