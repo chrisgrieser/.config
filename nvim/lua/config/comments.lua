@@ -121,5 +121,4 @@ local function commented_lines_textobject()
 	vim.fn.execute("normal! " .. rs .. "GV" .. re .. "G")
 end
 
-keymap("o", "u", commented_lines_textobject, {silent = true})
-keymap("o", "Q", commented_lines_textobject, {silent = true})
+keymap("o", "u", commented_lines_textobject, {desc = "Big comment textobj"})

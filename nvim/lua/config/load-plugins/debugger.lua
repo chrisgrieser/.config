@@ -62,7 +62,6 @@ local function dapConfig()
 	--------------------------------------------------------------------------------
 	-- KEYBINDINGS
 
-	vim.keymap.set("n", "7", dap.toggle_breakpoint, { desc = " Toggle Breakpoint" })
 	vim.keymap.set("n", "8", function()
 		-- HACK wrap `continue` in this, since the nvim-lua-debugger has to be started separately
 		local dapRunning = dap.status() ~= ""
@@ -176,7 +175,6 @@ return {
 		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
 	},
 	keys = {
-		{ "7", nil, desc = " Toggle Breakpoint" },
 		{ "8", nil, desc = " Continue" },
 		{ "<leader>b", nil, desc = " Debugger Action" },
 	},
