@@ -139,36 +139,35 @@ end
 local function dapLualine()
 	local topSeparators = isGui() and { left = "", right = "" } or { left = "", right = "" }
 
-	lualineZ = require("lualine").get_config().winbar.lualine_z
-	lualineY = require("lualine").get_config().winbar.lualine_y
-	table.insert(lualineZ, {
-		{
-			function()
-				local dapStatus = require("dap").status()
-				if dapStatus ~= "" then dapStatus = "  " .. dapStatus end
-				return dapStatus
-			end,
-			section_separators = topSeparators,
-		},
-	})
+	-- INFO inserting needed, to not disrupt existing lualine-segment set by nvim-recorder
+	lualineY = require("lualine").get_config().winbar.lualine_y or {}
+	lualineZ = require("lualine").get_config().winbar.lualine_z or {}
 	table.insert(lualineY, {
-		{
-			function()
-				local breakpointNum = #(require('dap.breakpoints').get())
-				if breakpointNum == 0 then return "" end
-				return tostring(breakpointNum)
-				return tostring(#require('dap.breakpoints').get())
-			end,
-			cond = #(require('dap.breakpoints').get()) > 0,
-			section_separators = topSeparators,
-		},
+		function()
+			local breakpoints = require("dap.breakpoints").get()
+			for k, _ in ipairs(breakpoints) do
+				print(k)
+			end
+			local breakpointNum = #(require("dap.breakpoints").get())
+			if breakpointNum == 0 then return "" end
+			return " " .. tostring(breakpointNum)
+		end,
+		section_separators = topSeparators,
+	})
+	table.insert(lualineZ, {
+		function()
+			local dapStatus = require("dap").status()
+			if dapStatus ~= "" then dapStatus = "  " .. dapStatus end
+			return dapStatus
+		end,
+		section_separators = topSeparators,
 	})
 
 	require("lualine").setup {
 		extensions = { "nvim-dap-ui" },
 		winbar = {
-			lualine_y = {},
-			lualine_z = {},
+			lualine_y = lualineY,
+			lualine_z = lualineZ,
 		},
 	}
 end

@@ -41,7 +41,7 @@ local function config()
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
 		if banned(msg) then return end
 		if type(msg) == "string" then
-			local isCodeOutput = msg:find("^{")
+			local isCodeOutput = msg:find("^%s*{")
 			if isCodeOutput then return require("notify")(msg, level, opts) end
 			msg = vim.split(msg, "\n", { trimepty = true })
 		end
