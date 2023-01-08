@@ -479,12 +479,14 @@ keymap( "x", "X", function() require("genghis").moveSelectionToNewFile() end, { 
 -- Neo[G]it
 keymap("n", "<leader>gs", ":Neogit<CR>", {desc = " Neogit"})
 keymap("n", "<leader>gc", ":Neogit commit<CR>", {desc = " Commit"})
+keymap("n", "<leader>ga", ":Gitsigns stage_runk<CR>", {desc = " Add Hunk"})
+keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", {desc = " Reset Hunk"})
 
 -- Git-link
-keymap({ "n", "x" }, "<leader>gl", qol.gitLink, { desc = " Link" })
+keymap({ "n", "x" }, "<leader>gl", qol.gitLink, { desc = " GitHub Link" })
 
 -- add-commit-pull-push
-keymap("n", "<leader>gg", qol.addCommitPush, { desc = " add-commit-push" })
+keymap("n", "<leader>gg", qol.addCommitPush, { desc = " Add-Commit-Push" })
 
 -- Diffview
 keymap("n", "<leader>gd", function()
