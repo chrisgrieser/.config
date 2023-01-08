@@ -237,23 +237,6 @@ local function cmpconfig()
 		},
 	})
 
-
-	cmp.setup.filetype("gitcommit", {
-		sources = cmp.config.sources {
-			{name = "git"},
-		},
-	})
-
-	cmp.setup.filetype("NeogitCommitMessage", {
-		sources = cmp.config.sources {
-			{name = "git"},
-		},
-	})
-
-	require("cmp_git").setup{
-		filetypes = { "gitcommit", "NeogitCommitMessage" },
-	}
-
 	--------------------------------------------------------------------------------
 	-- Command Line Completion
 	cmp.setup.cmdline({ "/", "?" }, {
@@ -291,7 +274,7 @@ return {
 			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
-			{ "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
+			"petertriho/cmp-git",
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
@@ -299,6 +282,45 @@ return {
 		},
 		config = cmpconfig,
 	},
+	{
+
+		"petertriho/cmp-git",
+		lazy = true, -- is being loaded by cmp
+		dependencies = "nvim-lua/plenary.nvim",
+		config = function()
+			vim.api.nvim_create_augroup("cmp-git-fix", {})
+			vim.api.nvim_create_autocmd("FileType", {
+				group = "cmp-git-fix",
+				pattern = "gitcommit",
+				command = "cd ./../"
+			})
+
+			local cmp = require("cmp")
+			cmp.setup.filetype("gitcommit", {
+				sources = cmp.config.sources {
+					{ name = "git" },
+				},
+			})
+
+			require("cmp_git").setup {
+				git = { commits = { limit = 0 } }, -- 0 = disable completing commits
+				github = {
+					issues = {
+						limit = 100,
+						state = "open", -- open, closed, all
+					},
+					mentions = {
+						limit = 100,
+					},
+					pull_requests = {
+						limit = 10,
+						state = "open",
+					},
+				},
+			}
+		end,
+	},
+
 	{
 		"windwp/nvim-autopairs",
 		dependencies = "hrsh7th/nvim-cmp",

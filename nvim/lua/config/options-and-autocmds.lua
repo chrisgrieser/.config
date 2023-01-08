@@ -148,6 +148,7 @@ opt.foldnestmax = 2
 -- Remember folds and cursor
 local function remember(mode)
 	local ignoredFts = {
+		"DressingInput",
 		"DressingSelect",
 		"cybu",
 		"TelescopePrompt",

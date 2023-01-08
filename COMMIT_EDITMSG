@@ -1,4 +1,3 @@
-@
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
 #
@@ -6,9 +5,9 @@
 # Your branch is up to date with 'origin/main'.
 #
 # Changes to be committed:
-#	modified:   completion.lua
+#	modified:   ../options-and-autocmds.lua
 #
 # Changes not staged for commit:
-#	modified:   ../../../lazy-lock.json
 #	modified:   completion.lua
+#	modified:   ../options-and-autocmds.lua
 #
