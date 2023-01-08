@@ -64,9 +64,6 @@ rules:
   newline-per-chained-call:
     - error
     - ignoreChainWithDepth: 3
-  no-multiple-empty-lines:
-    - warn
-    - max: 2
 
   # Async & Await
   require-await: error
