@@ -1,6 +1,7 @@
 git
 beta
 BRAT
+currently
 keymaps
 vim
 Vim

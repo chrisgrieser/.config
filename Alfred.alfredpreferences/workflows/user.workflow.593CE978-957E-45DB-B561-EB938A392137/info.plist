@@ -23,16 +23,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A058A8C1-584D-4A19-8A34-28E3D89BE412</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>8BD829FB-FA30-46D7-ABBE-1255DFE26375</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -44,6 +34,16 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>C250E316-8E97-429F-A193-1ED46722A912</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>54108A38-6929-4455-A62B-5EFADC3B4CF8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -86,27 +86,6 @@
 	<string>Dictionary &amp; Translation</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://translate.google.com/?sl=auto&amp;text={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>A058A8C1-584D-4A19-8A34-28E3D89BE412</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -167,6 +146,27 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>C250E316-8E97-429F-A193-1ED46722A912</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://sentencestack.com/q/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>54108A38-6929-4455-A62B-5EFADC3B4CF8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -285,81 +285,81 @@
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<integer>55</integer>
+			<real>60</real>
 			<key>ypos</key>
-			<integer>420</integer>
+			<real>435</real>
 		</dict>
 		<key>4267517F-135F-4BC9-9F30-955369812887</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>50</integer>
+			<real>50</real>
 			<key>ypos</key>
-			<integer>175</integer>
+			<real>175</real>
 		</dict>
 		<key>43880D3B-C354-4AC9-BFB5-C7A430DAC0DF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>290</integer>
+			<real>295</real>
 			<key>ypos</key>
-			<integer>685</integer>
+			<real>690</real>
+		</dict>
+		<key>54108A38-6929-4455-A62B-5EFADC3B4CF8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>295</real>
+			<key>ypos</key>
+			<real>315</real>
 		</dict>
 		<key>8AA5AD09-3EF5-4C93-8DF9-6690A90B221D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>290</integer>
+			<real>295</real>
 			<key>ypos</key>
-			<integer>560</integer>
+			<real>565</real>
 		</dict>
 		<key>8BD829FB-FA30-46D7-ABBE-1255DFE26375</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>290</integer>
+			<real>295</real>
 			<key>ypos</key>
-			<integer>175</integer>
-		</dict>
-		<key>A058A8C1-584D-4A19-8A34-28E3D89BE412</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<integer>290</integer>
-			<key>ypos</key>
-			<integer>65</integer>
+			<real>80</real>
 		</dict>
 		<key>A744F634-72A4-4373-86F2-EBC783690DB8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<integer>55</integer>
+			<real>60</real>
 			<key>ypos</key>
-			<integer>605</integer>
+			<real>610</real>
 		</dict>
 		<key>C250E316-8E97-429F-A193-1ED46722A912</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<integer>290</integer>
+			<real>295</real>
 			<key>ypos</key>
-			<integer>295</integer>
+			<real>200</real>
 		</dict>
 		<key>CAD493F4-333E-4D5A-8720-8709EE20C984</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<integer>290</integer>
+			<real>295</real>
 			<key>ypos</key>
-			<integer>420</integer>
+			<real>435</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
