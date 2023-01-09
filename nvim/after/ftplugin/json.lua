@@ -1,8 +1,6 @@
 require("config.utils")
 --------------------------------------------------------------------------------
 
-bo.expandtab = true
-wo.listchars = "tab: >"
 wo.conceallevel = 2 -- hides quotes in JSON, making it actually more readable
 
 -- https://mikefarah.gitbook.io/yq/usage/convert
