@@ -151,7 +151,7 @@ function M.removelogs()
 	elseif ft == "lua" or ft == "python" then
 		logCommand = "print"
 	elseif ft == "javascript" or ft == "typescript" then
-		logCommand = "console."
+		logCommand = "console.log"
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
 		cmd([[g/echo "(beep)"/d]]) -- keywords in () needed to ensure that other echos are not deleted
 		cmd([[g/echo "(log)/d]])

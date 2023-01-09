@@ -124,7 +124,7 @@ imap("<Ctrl-a>", "<Ctrl-f>"); // boL
 // unmapping unused stuff to reduce noise in the cheatsheet 
 
 unmap("$"); // scroll to right
-unmap("ab"); // add bookmark (remapped)
+unmap("B"); // add bookmark (remapped)
 unmap("*"); // find selected text (remapped)
 unmap("/"); // find (remapped)
 unmap("0"); // scroll to left

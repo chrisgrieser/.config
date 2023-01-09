@@ -241,7 +241,7 @@ nmap gt :nextTab
 nmap gT :prevTab
 
 " Alt Buffer (emulates `:buffer #`)
-exmap altBuffer jsfile Meta/obsidian-vim-helpers.js {altBuffer()}
+exmap altBuffer obcommand grappling-hook:alternate-note
 nmap <CR> :altBuffer
 
 """"""""""""""""""""""
