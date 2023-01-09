@@ -1,4 +1,6 @@
 git
+beta
+BRAT
 keymaps
 vim
 Vim

@@ -2,25 +2,6 @@
 // all hail the @koala
 //------------------------------------------------------------------------------
 
-// emulates `:buffer #`
-function altBuffer() {
-	const recentFiles = app.workspace.lastOpenFiles;
-	let altPath;
-	let fileExists;
-	let i = 0;
-	do {
-		altPath = recentFiles[i];
-		fileExists = app.vault.exists(altPath); // e.g. deleted files
-		i++;
-	} while (!fileExists && i < recentFiles.length)
-	if (!fileExists) {
-		new Notice ("There is no recent file that exists.");
-		return;
-	}
-	const altTFile = app.vault.getAbstractFileByPath(altPath);
-	app.workspace.activeLeaf.openFile(altTFile);
-}
-
 function appendSpace() {
 	const editor = app.workspace.activeLeaf.view.editor;
 	const pos = editor.getCursor();

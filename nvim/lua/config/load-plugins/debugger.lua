@@ -146,6 +146,7 @@ local function dapLualine()
 			for buf, _ in pairs(breakpoints) do
 				breakpointSum = breakpointSum + #breakpoints[buf]
 			end
+			if breakpointSum == 0 then return "" end
 			return "  " .. tostring(breakpointSum)
 		end,
 		section_separators = topSeparators,

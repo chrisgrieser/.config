@@ -152,6 +152,7 @@ obsiAlphaWatcher = pw(fileHub, function(files)
 				rm obsidian-*.*.*.asar
 				gunzip obsidian-*.*.*.asar.gz
 				while pgrep -q "Obsidian" ; do sleep 0.1; done
+				sleep 0.2
 				open -a "Obsidian"]])
 			-- close the created tab
 			applescript([[
