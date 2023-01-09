@@ -119,17 +119,15 @@ return {
 
 	{
 		"lukas-reineke/headlines.nvim",
+		ft = "markdown",
 		config = function()
 			require("headlines").setup {
 				markdown = {
-					fat_headlines = true,
-					fat_headline_upper_string = "",
-					fat_headline_lower_string = "▀",
+					fat_headlines = false,
 					codeblock_highlight = false, -- deactivated b/c of https://github.com/lukas-reineke/headlines.nvim/issues/44
 				},
 			}
 		end,
-		ft = "markdown",
 	},
 
 	{ -- Better input fields

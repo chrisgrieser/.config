@@ -1,14 +1,15 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
 -- CONFIG
-local dotfilesFolder = getenv("DOTFILE_FOLDER")
-local fileHub = getenv("WD")
-local home = os.getenv("HOME")
+-- non-local for persistence against garbage collection
+dotfilesFolder = getenv("DOTFILE_FOLDER")
+fileHub = getenv("WD")
+home = getenv("HOME")
 
 --------------------------------------------------------------------------------
 
 -- BRAVE Bookmarks synced to Chrome Bookmarks (needed for Alfred)
-local browserFolder = home .. "/Library/Application Support/BraveSoftware/Brave-Browser/"
+browserFolder = home .. "/Library/Application Support/BraveSoftware/Brave-Browser/"
 bookmarkWatcher = pw(
 	browserFolder .. "Default/Bookmarks",
 	function()
