@@ -3,7 +3,7 @@ alias ai='ddo' # https://github.com/yasyf/gpt-do
 
 # search cht.sh for information
 # aggregates stackoverflow, tl;dr and many other help pages
-function ch() {
+function sh() {
 	QUERY=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
 	CHEAT_INFO=$(curl -s "https://cht.sh/$QUERY")   # https://cht.sh/:help
 	CHEAT_CODE_ONLY=$(curl -s "https://cht.sh/$QUERY?QT")
