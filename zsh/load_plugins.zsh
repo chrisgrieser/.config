@@ -21,18 +21,13 @@ source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # has to be loaded *after* zsh syntax highlighting
 source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
-# Starship
-eval "$(starship init zsh)"
-if [[ "$TERM" == "Warp" ]] ; then
-	export STARSHIP_CONFIG=~/.config/starship/starship-warp.toml
-elif [[ "$TERM" == "alacritty" ]] ; then
-	export STARSHIP_CONFIG=~/.config/starship/starship-alacritty.toml
-elif [[ "$TERM" == "xterm-256color" ]] ; then # Obsidian Terminal & nvim Toggleterm
-	export STARSHIP_CONFIG=~/.config/starship/starship-alacritty.toml
-else
-	export STARSHIP_CONFIG=~/.config/starship/starship-alacritty.toml
-fi
-
+# Magic enter
 source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
 
-
+# Starship
+eval "$(starship init zsh)"
+if [[ "$TERM" != "Warp" ]]; then
+	export STARSHIP_CONFIG=~/.config/starship/starship.toml
+else
+	export STARSHIP_CONFIG=~/.config/starship/starship-warp.toml
+fi
