@@ -1,7 +1,7 @@
 return {
 	-- EDITING-SUPPORT
-	"numToStr/Comment.nvim", -- comment operator
-	"kylechui/nvim-surround",
+	{"numToStr/Comment.nvim"}, -- comment operator
+	{"kylechui/nvim-surround"},
 
 	{ "mg979/vim-visual-multi", keys = { "<D-j>", { "<D-j>", mode = "x" } } },
 	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, -- custom textobjects
@@ -57,8 +57,11 @@ return {
 	{
 		"unblevable/quick-scope",
 		keys = { "f", "F", "t", "T" },
-		init = function() vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" } end,
-		config = function() vim.cmd.highlight { "def link QuickScopePrimary CurSearch", bang = true } end,
+		init = function()
+			vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
+			vim.cmd.highlight { "def link QuickScopePrimary CurSearch", bang = true }
+			vim.cmd.highlight { "QuickScopePrimary gui=underline", bang = true }
+		end,
 	},
 	{
 		"gbprod/substitute.nvim", -- substitution & exchange operator
