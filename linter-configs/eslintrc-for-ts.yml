@@ -106,10 +106,6 @@ rules:
   semi-style:
     - error
     - last
-  semi:
-    - warn
-    - always
-    - omitLastInOneLineBlock: true
 
   # Commas
   comma-spacing: warn
