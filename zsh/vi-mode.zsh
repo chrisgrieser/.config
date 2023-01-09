@@ -92,7 +92,8 @@ bindkey -M vicmd 'q' normal-mode-exit
 # Ps = 5  -> blinking bar (xterm)
 # Ps = 6  -> steady bar (xterm)
 
-if [[ "$TERM_PROGRAM" != "Terminus-Sublime" ]] ; then
+# does not work with xterm, therefore using starship indicator instead
+if [[ "$TERM" != "xterm-256color" ]] ; then
 	function zle-keymap-select () {
 	    case $KEYMAP in
 	        vicmd) echo -ne '\e[1 q';;      # block
