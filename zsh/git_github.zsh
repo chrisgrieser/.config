@@ -47,7 +47,7 @@ function gli() {
 				--with-nth=2.. \
 				--no-sort \
 				--no-info \
-				--header-first --header="↵ : checkout  ^H: copy [h]ash  ^R: [r]eset" \
+				--header-first --header="↵ : Checkout  ^H: Copy [H]ash  ^R: [R]eset Hard" \
 				--expect="ctrl-h,ctrl-r" \
 				--preview-window="wrap" \
 				--preview="git --no-optional-locks show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"
@@ -60,7 +60,7 @@ function gli() {
 		echo "$hash" | pbcopy
 		echo "'$hash' copied."
 	elif [[ "$key_pressed" == "ctrl-r" ]]; then
-		git reset "$hash"
+		git reset --hard "$hash"
 	else # pressed return
 		git checkout "$hash"
 	fi
@@ -129,8 +129,11 @@ function betterClone() {
 	# shellcheck disable=SC2012
 	cd "$(ls -1 -t | head -n1)" || return
 	if grep -q "obsidian" package.json &>/dev/null; then
+		echo "Detected Obsidian plugin. Installing NPM dependencies…"
 		if ! command -v node &>/dev/null; then print "\033[1;33mnode not installed, not running npm." && exit 0; fi
-		npm i && npm run build
+		npm i 
+		echo "Building…"
+		npm run build
 	fi
 }
 
@@ -203,11 +206,11 @@ function gdf() {
 	# decision on how to act on file
 	echo "$deleted_path"
 	print "\033[1;34m"
-	echo "r: restore (checkout file)"
-	echo "s: show file"
-	echo "c: copy content"
-	echo "h: copy hash of last commit w/ file"
-	print "a: abort\033[0m"
+	echo "[r]estore (checkout file)"
+	echo "[s]how file"
+	echo "[c]opy content"
+	echo "copy [h]ash of last commit w/ file"
+	print "[a]bort\033[0m"
 
 	read -r -k 1 DECISION
 	# shellcheck disable=SC2193
