@@ -31,7 +31,7 @@ $memory_usage\
 [character]
 success_symbol = " [](bold green)"
 error_symbol = " [](bold red)"
-vimcmd_symbol = " [Normal](bold blue)"
+vimcmd_symbol = " [N](bold blue)" # only active on xterm due to cursor shape snippet intefering with it
 
 [sudo]
 style = 'fg:green bg:black'
