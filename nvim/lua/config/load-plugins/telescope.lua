@@ -41,6 +41,7 @@ local options = {
 			"%.string",
 			"%.log",
 			"%.png",
+			"%.jpe?g",
 			"%.icns",
 			"%.zip",
 		},
