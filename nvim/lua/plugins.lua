@@ -31,14 +31,24 @@ return {
 		"kosayoda/nvim-lightbulb",
 		lazy = true,
 		config = function()
-			require("nvim-lightbulb").setup {
-				autocmd = { enabled = true },
-				ignore = {
-					"sumneko_lua", -- only non-diagnostic code action is to change roder of parameters, which is not very useful and mostly noise
-					"marksman", -- marksman adds the "Update ToC" code action everywhere
-				},
-			}
 			vim.fn.sign_define("LightBulbSign", { text = "" })
+
+			require("nvim-lightbulb").setup {
+				autocmd = { enabled = false },
+			}
+			-- HACK since ignore options does not work
+			vim.api.nvim_create_augroup("lightbulb-fix", {})
+			vim.api.nvim_create_autocmd({ "CursorHold" }, {
+				group = "lightbulb-fix",
+				callback = function()
+					require("nvim-lightbulb").update_lightbulb {
+						ignore = {
+							"sumneko_lua", -- only non-diagnostic code action is to change roder of parameters, which is not very useful and mostly noise
+							"marksman", -- marksman adds the "Update ToC" code action everywhere
+						},
+					}
+				end,
+			})
 		end,
 	},
 
