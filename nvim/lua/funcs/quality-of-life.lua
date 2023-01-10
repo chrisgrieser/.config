@@ -290,32 +290,46 @@ end
 --------------------------------------------------------------------------------
 -- GIT
 
--- options for fn.jobstart()
-local function shellNotify(_, data)
-	if not data or (data[1] == "" and #data == 1) then return end
-	local out = table.concat(data, " \n "):gsub("%s*$", "")
-	local logLevel
-	if out:lower():find("error") then
-		logLevel = logError
-	elseif out:lower():find("warning") then
-		logLevel = logWarn
-	else
-		logLevel = logInfo
-	end
-	vim.notify(out, logLevel)
-end
-
-local gitShellOpts = {
-	stdout_buffered = true,
-	stderr_buffered = true,
-	detach = true,
-	on_stdout = function(_, data) shellNotify(_, data) end,
-	on_stderr = function(_, data) shellNotify(_, data) end,
-}
-
 ---@param prefillMsg? string
 function M.addCommitPush(prefillMsg)
 	if not prefillMsg then prefillMsg = "" end
+
+	local output = {}
+	local gitShellOpts = {
+		stdout_buffered = true,
+		stderr_buffered = true,
+		detach = true,
+		on_stdout = function(_, data)
+			for _, d in pairs(data) do
+				if not (d[1] == "" and #d == 1) then 
+					table.insert(output, d)
+				end
+			end
+		end,
+		on_stderr = function(_, data)
+			for _, d in pairs(data) do
+				if not (d[1] == "" and #d == 1) then 
+					table.insert(output, d)
+				end
+			end
+		end,
+		on_exit = function()
+			-- if not output or (output[1] == "" and #output == 1) then return end
+			if #output == 0 then return end
+			local out = table.concat(output, " \n "):gsub("%s*$", "")
+			local logLevel = logInfo
+			if out:lower():find("error") then
+				logLevel = logError
+			elseif out:lower():find("warning") then
+				logLevel = logWarn
+			end
+			vim.notify(out, logLevel)
+			-- HACK for linters writing the current file, and autoread failing, preventing to
+			-- quit the file. Requires manual reloading via `:edit`.
+			if bo.modifiable then cmd.edit() end
+		end,
+	}
+
 
 	-- uses dressing + cmp + omnifunc for autocompletion of filenames
 	vim.ui.input(
@@ -369,6 +383,8 @@ function M.addCommitPush(prefillMsg)
 	)
 end
 
+---normal mode: link to file
+---visual mode: link to selected lines
 function M.gitLink()
 	local repo = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git .*", "%1")
 	local branch = fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n", "")
