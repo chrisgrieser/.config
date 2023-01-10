@@ -3,6 +3,8 @@
 matches:
   - trigger: "I#d"
     replace: "I'd"
+  - trigger: "... "
+    replace: "…"
   - trigger: appraoch
     replace: approach
     propagate_case: true
