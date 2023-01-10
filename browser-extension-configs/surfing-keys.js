@@ -1,7 +1,8 @@
 /* global api, settings, window, document */
+// example configs: https://github.com/brookhong/Surfingkeys/wiki/Example-Configurations
 
 // Compatibility Prefix
-const { imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vmapkey, vunmap, aceVimMap } = api;
+const { Hints, imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vmapkey, vunmap, aceVimMap } = api;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -10,6 +11,8 @@ const { imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vm
 settings.richHintsForKeystroke = 400; // like whichkey, value is delay till shown
 settings.hintShiftNonActive = true; // vimium-like: holding shift while pressing hint opens in bg tab
 settings.startToShowEmoji = 1; // length of chars to show emojis (acemode)
+
+Hints.style("font-family: Arial; font-size: 12px;");
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -121,7 +124,7 @@ imap("<Ctrl-a>", "<Ctrl-f>"); // boL
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// unmapping unused stuff to reduce noise in the cheatsheet 
+// unmapping unused stuff to reduce noise in the cheatsheet
 
 unmap("$"); // scroll to right
 unmap("B"); // add bookmark (remapped)

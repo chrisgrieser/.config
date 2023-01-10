@@ -39,9 +39,12 @@ add("css", {
 -- Shell (zsh)
 add("zsh", {
 	snip("shebang", "#!/usr/bin/env zsh\n$0"),
+
 	snip("default arg value", '${1:input}=${1-"${2:default_value}"}'),
 	snip("slice", '${${1:var}:${2:start}:${3:length}}'),
 	snip("substitute", "${${1:var}/${2:search}/${3:replace}}"),
+	snip("URL encode", [[encoded_text=$(python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])" "$text")]]),
+
 	snip("PATH", "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\\$PATH\n$0"),
 	snip("resolve home", '${1:path}="${${1:path}/#\\~/\\$HOME}"'),
 	snip("filename", 'file_name=$(basename "$${1:file_path}")'),
@@ -49,6 +52,7 @@ add("zsh", {
 	snip("ext", "ext=${${1:file_name}shebang*.}"),
 	snip("filename w/o ext", "${1:file_name}=${${1:file_name}%.*}"),
 	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
+
 	snip("notify", [[osascript -e "display notification \"\" with title \"$${1:var}\""]]),
 
 	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
