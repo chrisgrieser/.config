@@ -329,6 +329,7 @@ return {
 		config = function()
 			require("config/snippets") -- loads all snippets
 			local ls = require("luasnip")
+			require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
 
 			ls.setup {
 				enable_autosnippets = true,
