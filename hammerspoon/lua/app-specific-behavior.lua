@@ -29,7 +29,9 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 	end
 end):start()
 
-local function bringAllToFront() app.frontmostApplication():selectMenuItem { "Window", "Bring All to Front" } end
+local function bringAllToFront()
+	app.frontmostApplication():selectMenuItem { "Window", "Bring All to Front" }
+end
 
 -- when currently auto-tiled, hide the app on deactivation to it does not cover sketchybar
 autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
@@ -60,7 +62,8 @@ local function spotifyTUI(toStatus)
 	)
 	currentStatus = trim(currentStatus) ---@diagnostic disable-line: param-type-mismatch
 	if
-		(currentStatus == "▶️" and toStatus == "pause") or (currentStatus == "⏸" and toStatus == "play")
+		(currentStatus == "▶️" and toStatus == "pause")
+		or (currentStatus == "⏸" and toStatus == "play")
 	then
 		local stdout = hs.execute(
 			"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle"
@@ -137,7 +140,10 @@ wf_mimestream = wf.new("Mimestream")
 iinaAppLauncher = aw.new(function(appName, eventType, appObject)
 	if eventType == aw.launched and appName == "IINA" and isProjector() then
 		-- going full screen needs a small delay
-		runWithDelays({ 0.05, 0.2 }, function() appObject:selectMenuItem { "Video", "Enter Full Screen" } end)
+		runWithDelays(
+			{ 0.05, 0.2 },
+			function() appObject:selectMenuItem { "Video", "Enter Full Screen" } end
+		)
 	end
 end):start()
 
@@ -179,6 +185,18 @@ wf_neovim = wf
 			end
 		end
 	)
+	-- Add dots when copypasting to from devtools
+	:subscribe(wf.windowFocused, function(win)
+		if not win:title():find("%.css$") then return end -- only css files
+		local clipb = hs.pasteboard.getContents()
+		if not clipb then return end
+
+		local hasSelectorAndClass = clipb:find(".%-.")
+		if hasSelectorAndClass then
+			clipb = clipb:gsub("^", "."):gsub(" ", ".")
+		end
+		hs.pasteboard.setContents(clipb)
+	end)
 
 --------------------------------------------------------------------------------
 
@@ -380,7 +398,9 @@ discordAppWatcher = aw.new(function(appName, eventType)
 		local hasURL = clipb:match("^https?:%S+$")
 		local hasObsidianURL = clipb:match("^obsidian:%S+$")
 		local isTweet = clipb:match("^https?://twitter%.com") -- for tweets, the previews are actually useful
-		if (hasURL or hasObsidianURL) and not isTweet then hs.pasteboard.setContents("<" .. clipb .. ">") end
+		if (hasURL or hasObsidianURL) and not isTweet then
+			hs.pasteboard.setContents("<" .. clipb .. ">")
+		end
 	elseif eventType == aw.deactivated then
 		local hasEnclosedURL = clipb:match("^<https?:%S+>$")
 		local hasEnclosedObsidianURL = clipb:match("^<obsidian:%S+>$")
