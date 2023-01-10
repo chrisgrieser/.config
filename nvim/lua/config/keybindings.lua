@@ -286,13 +286,13 @@ keymap(
 
 -- Refactor
 keymap(
-	"n",
+	{"n", "x"},
 	"<leader>i",
 	function() require("refactoring").refactor("Inline Variable") end,
 	{ desc = "Refactor: Inline Var" }
 )
 keymap(
-	"n",
+	{"n", "x"},
 	"<leader>e",
 	function() require("refactoring").refactor("Extract Variable") end,
 	{ desc = "Refactor: Extract Var" }
