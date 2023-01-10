@@ -129,9 +129,11 @@ wakeWatcher = caff
 		if isAtOffice() and eventType == caff.screensDidUnlock then
 			syncAllGitRepos()
 			officeModeLayout()
-		elseif not (isAtOffice()) and (eventType == caff.screensDidWake or eventType == caff.systemDidWake) then
+		elseif
+			not (isAtOffice()) and (eventType == caff.screensDidWake or eventType == caff.systemDidWake)
+		then
 			runWithDelays(1, function()
-			-- hs.execute("sketchybar --set clock popup.drawing=true")
+				-- hs.execute("sketchybar --set clock popup.drawing=true")
 				if isProjector() then
 					setDarkmode(true)
 					movieModeLayout()
@@ -150,6 +152,21 @@ wakeWatcher = caff
 
 -- CRONJOBS AT HOME
 
+-- Drafts to do if trackpadBattery is low
+function trackpadBatteryCheck()
+	local warningLevel = 101
+	local trackpadPercent = hs.execute(
+		[[ ioreg -c AppleDeviceManagementHIDEventService -r -l | grep -i trackpad -A 20 | grep BatteryPercent | cut -d= -f2 | cut -d' ' -f2 ]]
+	)
+	if not trackpadPercent then return end -- no trackpad connected
+	trackpadPercent = trim(trackpadPercent)
+	if tonumber(trackpadPercent) < warningLevel then
+		local msg = "Trackpad Battery is low (" .. trackpadPercent .. "%)"
+		-- write to drafts inbox (= new draft without opening Drafts)
+		hs.execute('echo "' .. msg .. [[" > "$HOME/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/battery.md"]])
+	end
+end
+
 biweeklyTimer = timer("02:00", "02d", function()
 	applescript([[
 		tell application id "com.runningwithcrayons.Alfred"
@@ -161,7 +178,7 @@ biweeklyTimer = timer("02:00", "02d", function()
 		'cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$DATA_DIR/Backups/Browser-Bookmarks.bkp"'
 	)
 	hs.loadSpoon("EmmyLua") -- so it runs not as often
-	
+	trackpadBatteryCheck()
 end, true)
 
 -- timers not local for longevity with garbage collection

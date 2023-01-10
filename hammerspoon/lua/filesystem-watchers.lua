@@ -62,15 +62,6 @@ systemDlFolderWatcher = pw(systemDownloadFolder, function()
 	notify("Download moved to File Hub.")
 end):start()
 
-local draftsIcloud = home .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
-draftsIcloudWatcher = pw(draftsIcloud, function(files)
-	for _, file in pairs(files) do
-		if file:sub(-3) ~= ".md" then return end
-		hs.execute("mv '" .. draftsIcloud .. "'/*.md '" .. fileHub .. "'")
-		notify("Drafts doc moved to File Hub.")
-	end
-end):start()
-
 --------------------------------------------------------------------------------
 
 -- Redirects FROM File Hub
