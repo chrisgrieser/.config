@@ -1,14 +1,14 @@
-function dotrepeat()
-	g.my_operator = vim.v.operator
-	vim.o.operatorfunc = "v:lua.linewiseRestOfParagraph"
-	return "g@"
-end
+-- vim.keymap.set({ "o", "x" }, "r", ":<C-U>normal! V}k<CR>")
 
 function linewiseRestOfParagraph()
-	vim.cmd.normal { g.my_operator .. "V}k", bang = true }
+	vim.api.nvim_feedkeys(":", "nx", false)
+	local key = vim.api.nvim_replace_termcodes("<C-u>", false, true, true)
+	vim.api.nvim_feedkeys(key, "nx", false)
+
+	vim.cmd.normal { "V}k", bang = true }
 end
 
-vim.keymap.set({ "o", "x" }, "r", dotrepeat, { expr = true })
+vim.keymap.set({ "o", "x" }, "r", linewiseRestOfParagraph)
 
 -- Morbi vitae ligula est. Fusce eleifend blandit convallis.
 -- Etiam leo massa, fringilla nec imperdiet sit amet, accumsan nec nisi.
