@@ -213,7 +213,7 @@ autocmd("BufReadPost", {
 function M.undoDuration()
 	local now = os.time() -- saved in epoch secs
 	local minsPassed = math.floor((now - b.timeOpened) / 60)
-	local resetLabel = "~" .. tostring(minsPassed) .. "m ago)"
+	local resetLabel = "last open (~" .. tostring(minsPassed) .. "m ago)"
 	local selection = { resetLabel, "15m", "1h", "4h", "24h", " present" }
 
 	vim.ui.select(selection, { prompt = "Undo…" }, function(choice)
