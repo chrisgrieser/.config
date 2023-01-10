@@ -368,16 +368,7 @@ keymap("x", "V", "j", { desc = "repeated V selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode goes to Visual Block Mode" })
 
 --------------------------------------------------------------------------------
--- SPLITS
-keymap("n", "<C-w>v", ":vsplit #<CR>", { desc = "vertical split (alt file)" }) -- open the alternate file in the split instead of the current file
-keymap("n", "<C-w>h", ":split #<CR>", { desc = "horizontal split (alt file)" })
-keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize" }) -- resizing on one key for sanity
-keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize" })
-keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize" })
-keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize" })
-
---------------------------------------------------------------------------------
--- BUFFERS & WINDOWS
+-- BUFFERS & WINDOWS & SPLITS
 
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " open buffers" })
 -- INFO: <BS> to cycle buffer has to be set in cybu config
@@ -388,6 +379,13 @@ keymap("n", "<CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/windo
 if isGui() then
 	keymap({ "n", "x", "i" }, "<D-w>", altalt.betterClose, { desc = "close buffer/window/tab" })
 end
+
+keymap("n", "<C-w>v", ":vsplit #<CR>", { desc = "vertical split (alt file)" }) -- open the alternate file in the split instead of the current file
+keymap("n", "<C-w>h", ":split #<CR>", { desc = "horizontal split (alt file)" })
+keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize (+)" }) -- resizing on one key for sanity
+keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize (-)" })
+keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize (+)" })
+keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
 
 --------------------------------------------------------------------------------
 
@@ -492,12 +490,10 @@ keymap("n", "<leader>gg", qol.addCommitPush, { desc = " Add-Commit-Push" })
 keymap("n", "<leader>gd", function()
 	vim.ui.input({ prompt = "Git Pickaxe (empty = full history)" }, function(query)
 		if not query then return end
-		if query == "" then
-			cmd("DiffviewFileHistory %")
-		else
-			cmd("DiffviewFileHistory % -G" .. query)
-		end
+		if query ~= "" then query = " -G"..query end
+		cmd("DiffviewFileHistory %"..query)
 		cmd.wincmd("w") -- go directly to file window
+		cmd.wincmd("|") -- maximize
 	end)
 end, { desc = " File History (Diffview)" })
 

@@ -27,7 +27,7 @@ local gitPassScript = passwordStore .. "/pass-sync.sh"
 
 local function gitDotfileSync()
 	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then return end
-	if not (screenIsUnlocked()) then return end -- prevent background sync when in office
+	if not (screenIsUnlocked()) then return end -- prevent of standby home device background sync when in office
 
 	gitDotfileSyncTask = hs.task
 		.new(
@@ -55,7 +55,7 @@ end
 
 local function gitVaultSync()
 	if gitVaultSyncTask and gitVaultSyncTask:isRunning() then return end
-	if not (screenIsUnlocked()) then return end -- prevent background sync when in office
+	if not (screenIsUnlocked()) then return end -- prevent of standby home device background sync when in office
 
 	gitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
@@ -71,7 +71,7 @@ end
 
 local function gitPassSync()
 	if gitPassSyncTask and gitPassSyncTask:isRunning() then return end
-	if not screenIsUnlocked() then return end -- prevent background sync when in office
+	if not screenIsUnlocked() then return end -- prevent of standby home device background sync when in office
 
 	gitPassSyncTask = hs.task
 		.new(gitPassScript, function(exitCode, _, stdErr)
@@ -93,17 +93,16 @@ function syncAllGitRepos()
 	gitPassSync()
 	gitVaultSync()
 
-	-- wait until sync is finished so sketchybar update shows success/failure
-	local function updateSketchybar()
-		-- https://felixkratz.github.io/SketchyBar/config/events#triggering-custom-events
-		hs.execute("sketchybar --trigger repo-files-update")
-		print("Updating sketchybar sync icon.")
-	end
 	local function noSyncInProgress()
 		local dotfilesSyncing = gitDotfileSyncTask and gitDotfileSyncTask:isRunning()
 		local passSyncing = gitPassSyncTask and gitPassSyncTask:isRunning()
 		local vaultSyncing = gitVaultSyncTask and gitVaultSyncTask:isRunning()
 		return not (dotfilesSyncing or vaultSyncing or passSyncing)
+	end
+	-- wait until sync is finished so sketchybar update shows success/failure
+	local function updateSketchybar()
+		-- https://felixkratz.github.io/SketchyBar/config/events#triggering-custom-events
+		hs.execute("sketchybar --trigger repo-files-update")
 	end
 
 	hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
@@ -148,6 +147,7 @@ wakeWatcher = caff
 	:start()
 
 --------------------------------------------------------------------------------
+
 -- CRONJOBS AT HOME
 
 biweeklyTimer = timer("02:00", "02d", function()
@@ -161,6 +161,7 @@ biweeklyTimer = timer("02:00", "02d", function()
 		'cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$DATA_DIR/Backups/Browser-Bookmarks.bkp"'
 	)
 	hs.loadSpoon("EmmyLua") -- so it runs not as often
+	
 end, true)
 
 -- timers not local for longevity with garbage collection
