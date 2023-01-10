@@ -1,5 +1,4 @@
 #!/usr/bin/env osascript -l JavaScript
-
 // INFO https://forum.obsidian.md/t/make-obsidian-a-default-app-for-markdown-files-on-macos/22260
 
 function run(input) {
@@ -30,13 +29,12 @@ function run(input) {
 	// When Obsidian is frontmost, it means the "Open in default app" command was
 	// used, for which we also do not open right in Obsidian again
 	const openInObsidian = isFileInObsidianVault && !isInHiddenFolder && !obsidianIsFrontmost;
-
-	const canvasOutside =
-		firstFile.endsWith(".canvas") && (!isFileInObsidianVault || isInHiddenFolder) && !obsidianIsFrontmost;
+	const canvasOutside = firstFile.endsWith(".canvas") && (!isFileInObsidianVault || isInHiddenFolder)
 
 	// symlink outside canvas
 	if (canvasOutside) {
 		const firstFileBasename = firstFile.replace(/.*\//, "");
+		app.doShellScript(`rm "${vaultDummyFolder}"* || true`); // remove existing symlinks
 		app.doShellScript(`ln -sf '${firstFile}' '${vaultDummyFolder}'`);
 		delay(0.1); // buffer so the new symlink is registered by Obsidian
 		firstFile = vaultDummyFolder + firstFileBasename;

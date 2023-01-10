@@ -290,6 +290,7 @@ end
 local function shellNotify(_, data, _)
 	if not data or (data[1] == "" and #data == 1) then return end
 	local out = table.concat(data, " \n "):gsub("%s*$", "")
+	local logLevel
 	vim.notify(out)
 	-- HACK linters writing the current file, and autoread failing, preventing to
 	-- quit the file. Requires manual reloading via `:edit`.
