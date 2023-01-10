@@ -53,6 +53,7 @@ keymap("n", "C", '"_C')
 keymap("n", "<Space>", '"_ciw', { desc = "change word" })
 -- keymap("x", "<Space>", '"_c', { desc = "change word" })
 keymap("n", "<M-S-CR>", '"_daw', { desc = "delete word" }) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
+keymap("i", "<M-S-CR>", '<Space>') -- prevent accidental triggering in insert mode when typing quickly
 
 --------------------------------------------------------------------------------
 -- VARIOUS TEXTOBJS
