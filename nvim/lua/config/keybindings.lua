@@ -77,8 +77,8 @@ end, vim.api.nvim_create_namespace("auto_hlsearch"))
 
 -- Marks
 require("funcs.mark-cycler").clearMarks() -- HACK clear marks due to nvim's mark bug
-keymap("n", "ä", require("funcs.mark-cycler").gotoMark, {desc = "Goto Next Mark"})
-keymap("n", "Ä", require("funcs.mark-cycler").setMark, {desc = "Set Next Mark"})
+keymap("n", "ä", require("funcs.mark-cycler").gotoMark, { desc = "Goto Next Mark" })
+keymap("n", "Ä", require("funcs.mark-cycler").setMark, { desc = "Set Next Mark" })
 --------------------------------------------------------------------------------
 
 keymap("n", "<Esc>", function()
@@ -290,13 +290,13 @@ keymap(
 
 -- Refactor
 keymap(
-	{"n", "x"},
+	{ "n", "x" },
 	"<leader>i",
 	function() require("refactoring").refactor("Inline Variable") end,
 	{ desc = "Refactor: Inline Var" }
 )
 keymap(
-	{"n", "x"},
+	{ "n", "x" },
 	"<leader>e",
 	function() require("refactoring").refactor("Extract Variable") end,
 	{ desc = "Refactor: Extract Var" }
@@ -479,10 +479,10 @@ keymap( "x", "X", function() require("genghis").moveSelectionToNewFile() end, { 
 -- GIT
 
 -- Neo[G]it
-keymap("n", "<leader>gs", ":Neogit<CR>", {desc = " Neogit"})
-keymap("n", "<leader>gc", ":Neogit commit<CR>", {desc = " Commit"})
-keymap("n", "<leader>ga", ":Gitsigns stage_runk<CR>", {desc = " Add Hunk"})
-keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", {desc = " Reset Hunk"})
+keymap("n", "<leader>gs", ":Neogit<CR>", { desc = " Neogit" })
+keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = " Commit" })
+keymap("n", "<leader>ga", ":Gitsigns stage_runk<CR>", { desc = " Add Hunk" })
+keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = " Reset Hunk" })
 
 -- Git-link
 keymap({ "n", "x" }, "<leader>gl", qol.gitLink, { desc = " GitHub Link" })
@@ -494,8 +494,8 @@ keymap("n", "<leader>gg", qol.addCommitPush, { desc = " Add-Commit-Push" })
 keymap("n", "<leader>gd", function()
 	vim.ui.input({ prompt = "Git Pickaxe (empty = full history)" }, function(query)
 		if not query then return end
-		if query ~= "" then query = " -G"..query end
-		cmd("DiffviewFileHistory %"..query)
+		if query ~= "" then query = " -G" .. query end
+		cmd("DiffviewFileHistory %" .. query)
 		cmd.wincmd("w") -- go directly to file window
 		cmd.wincmd("|") -- maximize
 	end)
@@ -651,3 +651,6 @@ for _, key in ipairs { "x", "h", "l" } do
 		end
 	end, { expr = true })
 end
+
+--------------------------------------------------------------------------------
+

@@ -88,7 +88,6 @@ opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
 opt.colorcolumn = "+1" -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
-opt.backspace:remove("indent") -- restrict insert mode backspace behavior
 
 -- status bar & cmdline
 opt.history = 400 -- reduce noise for command history search

@@ -314,7 +314,7 @@ return {
 	{
 		"windwp/nvim-autopairs",
 		dependencies = "hrsh7th/nvim-cmp",
-		-- event = "InsertEnter",
+		event = "InsertEnter",
 		config = function()
 			require("nvim-autopairs").setup()
 
@@ -324,44 +324,45 @@ return {
 		end,
 	},
 	{
-		"L3MON4D3/LuaSnip", 
+		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
 		config = function()
-			-- local ls = require("luasnip")
-			-- require("config.snippets") -- loads all snippets
-
-			-- ls.setup {
-			-- 	enable_autosnippets = true,
-			-- 	history = false, -- false = allow jumping back into the snippet
-			-- 	region_check_events = "InsertEnter", -- prevent <Tab> jumping back to a snippet after it has been left early
-			-- 	update_events = "TextChanged,TextChangedI", -- live updating of snippets
-			-- }
-			
 			local ls = require("luasnip")
-			ls.setup{}
-			require("luasnip.loaders.from_vscode").load()
+
+			-- luasnip-style snippets
+			require("lua-snips") 
+
+			-- VS-code-style snippets 
+			-- (INFO has to be loaded after the regular luasnip-snippets)
+			require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
+
+			ls.setup {
+				history = false, -- false = allow jumping back into the snippet
+				region_check_events = "InsertEnter", -- prevent <Tab> jumping back to a snippet after it has been left early
+				update_events = "TextChanged,TextChangedI", -- live updating of snippets
+			}
 
 			-- to be able to jump without <Tab> (e.g. when there is a non-needed suggestion)
-			-- vim.keymap.set({ "i", "s" }, "<D-j>", function()
-			-- 	if require("luasnip").expand_or_jumpable() then
-			-- 		require("luasnip").jump(1)
-			-- 	else
-			-- 		vim.notify("No Jump available.", vim.log.levels.WARN)
-			-- 	end
-			-- end)
-			-- vim.keymap.set({ "i", "s" }, "<D-S-j>", function()
-			-- 	if require("luasnip").jumpable(-1) then
-			-- 		require("luasnip").jump(-1)
-			-- 	else
-			-- 		vim.notify("No Jump back available.", vim.log.levels.WARN)
-			-- 	end
-			-- end)
+			vim.keymap.set({ "i", "s" }, "<D-j>", function()
+				if require("luasnip").expand_or_jumpable() then
+					require("luasnip").jump(1)
+				else
+					vim.notify("No Jump available.", vim.log.levels.WARN)
+				end
+			end, {desc = "LuaSnip: Jump"})
+			vim.keymap.set({ "i", "s" }, "<D-S-j>", function()
+				if require("luasnip").jumpable(-1) then
+					require("luasnip").jump(-1)
+				else
+					vim.notify("No Jump back available.", vim.log.levels.WARN)
+				end
+			end, {desc = "LuaSnip: Jump Back"})
 
 			-- needs to come after snippet definitions
-			-- ls.filetype_extend("typescript", { "javascript" }) -- typescript uses all javascript snippets
-			-- ls.filetype_extend("bash", { "zsh" })
-			-- ls.filetype_extend("sh", { "zsh" })
-			-- ls.filetype_extend("scss", { "css" })
+			ls.filetype_extend("typescript", { "javascript" }) -- typescript uses all javascript snippets
+			ls.filetype_extend("bash", { "zsh" })
+			ls.filetype_extend("sh", { "zsh" })
+			ls.filetype_extend("scss", { "css" })
 		end,
 	},
 }
