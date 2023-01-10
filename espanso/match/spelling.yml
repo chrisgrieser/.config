@@ -80,7 +80,7 @@ matches:
   - trigger: verison
     replace: version
     propagate_case: true
-  - triggers: [definitly, definetly, definetely, definitely]
+  - triggers: [definitly, definetly, definetely]
     replace: definitely
     propagate_case: true
   - trigger: auxilliary
@@ -189,4 +189,7 @@ matches:
   - trigger: ejtzt
     replace: jetzt
     propagate_casing: true
+    word: true
+  - trigger: esle
+    replace: else
     word: true
