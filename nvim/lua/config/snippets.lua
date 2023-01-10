@@ -227,6 +227,7 @@ add("javascript", {
 	snip("running check", 'Application("${1:appName}").running()'),
 	snip("check frontmost", 'Application("${1:appName}").frontmost();'),
 	snip("running apps array", 'Application("System Events").applicationProcesses.where({ backgroundOnly: false }).displayedName();'),
+	snip("running apps array", 'app.displayNotification("${1:msg}", { withTitle: "${2:title}" });'),
 
 	snip("window path (Finder)", [[
 		function finderFrontWindow(){
