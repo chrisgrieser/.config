@@ -402,7 +402,7 @@ if isGui() then
 	end, { desc = "open in file explorer" })
 
 	keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
-	keymap("n", "<D-9>", ":Notification<CR>", { desc = ":Notifications" })
+	keymap("n", "<D-9>", function() cmd.Telescope("notify") end, { desc = " Notifications" })
 
 	-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 	g.VM_maps = {
@@ -653,4 +653,3 @@ for _, key in ipairs { "x", "h", "l" } do
 end
 
 --------------------------------------------------------------------------------
-
