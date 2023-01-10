@@ -481,7 +481,7 @@ keymap( "x", "X", function() require("genghis").moveSelectionToNewFile() end, { 
 -- Neo[G]it
 keymap("n", "<leader>gs", ":Neogit<CR>", { desc = " Neogit" })
 keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = " Commit" })
-keymap("n", "<leader>ga", ":Gitsigns stage_runk<CR>", { desc = " Add Hunk" })
+keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = " Add Hunk" })
 keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = " Reset Hunk" })
 
 -- Git-link

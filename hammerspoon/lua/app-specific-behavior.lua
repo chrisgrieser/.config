@@ -185,18 +185,24 @@ wf_neovim = wf
 			end
 		end
 	)
-	-- Add dots when copypasting to from devtools
-	:subscribe(wf.windowFocused, function(win)
-		if not win:title():find("%.css$") then return end -- only css files
-		local clipb = hs.pasteboard.getContents()
-		if not clipb then return end
 
-		local hasSelectorAndClass = clipb:find(".%-.")
-		if hasSelectorAndClass then
-			clipb = clipb:gsub("^", "."):gsub(" ", ".")
-		end
-		hs.pasteboard.setContents(clipb)
-	end)
+-- Add dots when copypasting to from devtools
+-- not using window focused, since not reliable
+neovideWatcher = aw.new(function(appName, eventType, appObj)
+	if not (appName:lower() == "neovide" and eventType == aw.activated) then return end
+
+	local winName = appObj:mainWindow():title()
+	if not winName:find("%.css$") then return end -- only css files
+
+	local clipb = hs.pasteboard.getContents()
+	if not clipb then return end
+
+	local hasSelectorAndClass = clipb:find(".%-.") and not (clipb:find("\n"))
+	if not hasSelectorAndClass then return end
+
+	clipb = clipb:gsub("^", "."):gsub(" ", ".")
+	hs.pasteboard.setContents(clipb)
+end):start()
 
 --------------------------------------------------------------------------------
 
