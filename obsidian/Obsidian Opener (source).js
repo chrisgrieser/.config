@@ -5,7 +5,7 @@
 function run(input) {
 	// 👉 CONFIG
 	const markdownApp = "Neovim"; // default markdown app
-	let vaultDummyFolder = "~/main-vault/Meta/Canvases Outside"; // where outside canvas symlinks will be placed
+	let vaultDummyFolder = "~/main-vault/Meta/Canvases Outside/"; // where outside canvas symlinks will be placed
 
 	//───────────────────────────────────────────────────────────────────────────
 
@@ -14,28 +14,33 @@ function run(input) {
 	const home = app.pathTo("home folder");
 
 	vaultDummyFolder = vaultDummyFolder.replace(/^~/, home);
+	if (!vaultDummyFolder.endsWith("/")) vaultDummyFolder += "/"; // ensure trailing slash for `ln`
+
 	const pathArray = input.toString().split(",");
 	const obsidianJsonFilePath = home + "/Library/Application Support/obsidian/obsidian.json";
 	const vaults = JSON.parse(app.read(obsidianJsonFilePath)).vaults;
 
 	// conditions for deciding where to open
-	const isFileInObsidianVault = Object.values(vaults).some(vault => pathArray[0].startsWith(vault.path));
-	const obsidianIsFrontmost = Application("Obsidian").frontmost();
 	let firstFile = pathArray[0];
+	const isFileInObsidianVault = Object.values(vaults).some(vault => firstFile.startsWith(vault.path));
+	const obsidianIsFrontmost = Application("Obsidian").frontmost();
 	const isInHiddenFolder = firstFile.includes("/.");
-	const canvasOutside = firstFile.endsWith(".canvas") && !isFileInObsidianVault;
 
 	// Hidden Folder means '.obsidian' or '.trash', which cannot be opened in Obsidian
 	// When Obsidian is frontmost, it means the "Open in default app" command was
 	// used, for which we also do not open right in Obsidian again
 	const openInObsidian = isFileInObsidianVault && !isInHiddenFolder && !obsidianIsFrontmost;
 
+	const canvasOutside =
+		firstFile.endsWith(".canvas") && (!isFileInObsidianVault || isInHiddenFolder) && !obsidianIsFrontmost;
+
 	// symlink outside canvas
 	if (canvasOutside) {
-		app.doShellScript(`ln -sf '${firstFile}'`);
-		const firstFileBasename = firstFile.replace(/.*\//, "replacement");
-		firstFile = vaultDummyFolder + "/" + firstFileBasename;
-	} 
+		const firstFileBasename = firstFile.replace(/.*\//, "");
+		app.doShellScript(`ln -sf '${firstFile}' '${vaultDummyFolder}'`);
+		delay(0.1); // buffer so the new symlink is registered by Obsidian
+		firstFile = vaultDummyFolder + firstFileBasename;
+	}
 
 	if (openInObsidian || canvasOutside) {
 		app.openLocation("obsidian://open?path=" + encodeURIComponent(firstFile));
