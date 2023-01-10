@@ -184,10 +184,12 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"debugloop/telescope-undo.nvim",
+			"rcarriga/nvim-notify",
 		},
 		config = function()
 			require("telescope").setup(options)
 			require("telescope").load_extension("undo")
+			require("telescope").load_extension("notify")
 		end,
 	},
 }

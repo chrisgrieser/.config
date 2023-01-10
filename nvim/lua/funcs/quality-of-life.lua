@@ -302,24 +302,27 @@ function M.addCommitPush(prefillMsg)
 		detach = true,
 		on_stdout = function(_, data)
 			for _, d in pairs(data) do
-				table.insert(output, d)
+				if not (d[1] == "" and #d == 1) then 
+					table.insert(output, d)
+				end
 			end
 		end,
 		on_stderr = function(_, data)
 			for _, d in pairs(data) do
-				table.insert(output, d)
+				if not (d[1] == "" and #d == 1) then 
+					table.insert(output, d)
+				end
 			end
 		end,
 		on_exit = function()
 			-- if not output or (output[1] == "" and #output == 1) then return end
+			if #output == 0 then return end
 			local out = table.concat(output, " \n "):gsub("%s*$", "")
-			local logLevel
+			local logLevel = logInfo
 			if out:lower():find("error") then
 				logLevel = logError
 			elseif out:lower():find("warning") then
 				logLevel = logWarn
-			else
-				logLevel = logInfo
 			end
 			vim.notify(out, logLevel)
 			-- HACK for linters writing the current file, and autoread failing, preventing to
