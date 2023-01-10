@@ -13,7 +13,7 @@ opt.undofile = true -- enable persistent undo history
 opt.undolevels = 500 -- less undos saved for quicker loading of undo history
 
 -- extra undopoints
-local undopointChars = { ".", ",", ";" }
+local undopointChars = { ".", ",", ";", " " }
 for _, char in pairs(undopointChars) do
 	keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char })
 end

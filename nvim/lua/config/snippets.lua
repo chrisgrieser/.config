@@ -216,7 +216,7 @@ add("typescript", {
 
 -- JavaScript (General)
 add("javascript", {
-	snip("replace", 'replace(/${1:regexp}/${2:flags}, "${3:replacement}");'),
+	snip("replace", 'replace(/${1:regexp}/gm, "${2:replacement}");'),
 	snip("ternary", "${1:cond} ? ${2:yes} : ${3:no}"),
 	snip("ISO date", "new Date().toISOString().slice(0, 10);"),
 	snip("ignore (prettier)", "// prettier-ignore\n$0"),

@@ -1,31 +1,46 @@
 #!/usr/bin/env osascript -l JavaScript
 
+// INFO https://forum.obsidian.md/t/make-obsidian-a-default-app-for-markdown-files-on-macos/22260
+
 function run(input) {
-	// 👉 CONFIG: Enter your default non-Obsidian Markdown App here
-	const markdownApp = "Neovim";
+	// 👉 CONFIG
+	const markdownApp = "Neovim"; // default markdown app
+	let vaultDummyFolder = "~/main-vault/Meta/Canvases Outside"; // where outside canvas symlinks will be placed
 
 	//───────────────────────────────────────────────────────────────────────────
 
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
+	const home = app.pathTo("home folder");
+
+	vaultDummyFolder = vaultDummyFolder.replace(/^~/, home);
 	const pathArray = input.toString().split(",");
-	const obsidianJsonFilePath = app.pathTo("home folder") + "/Library/Application Support/obsidian/obsidian.json";
+	const obsidianJsonFilePath = home + "/Library/Application Support/obsidian/obsidian.json";
 	const vaults = JSON.parse(app.read(obsidianJsonFilePath)).vaults;
 
 	// conditions for deciding where to open
-	const isFileInObsidianVault = Object.values(vaults).some(v => pathArray[0].startsWith(v.path));
+	const isFileInObsidianVault = Object.values(vaults).some(vault => pathArray[0].startsWith(vault.path));
 	const obsidianIsFrontmost = Application("Obsidian").frontmost();
-	const isInHiddenFolder = pathArray[0].includes("/.");
+	let firstFile = pathArray[0];
+	const isInHiddenFolder = firstFile.includes("/.");
+	const canvasOutside = firstFile.endsWith(".canvas") && !isFileInObsidianVault;
 
 	// Hidden Folder means '.obsidian' or '.trash', which cannot be opened in Obsidian
 	// When Obsidian is frontmost, it means the "Open in default app" command was
 	// used, for which we also do not open right in Obsidian again
 	const openInObsidian = isFileInObsidianVault && !isInHiddenFolder && !obsidianIsFrontmost;
 
-	if (openInObsidian) {
-		app.openLocation("obsidian://open?path=" + encodeURIComponent(pathArray[0]));
+	// symlink outside canvas
+	if (canvasOutside) {
+		app.doShellScript(`ln -sf '${firstFile}'`);
+		const firstFileBasename = firstFile.replace(/.*\//, "replacement");
+		firstFile = vaultDummyFolder + "/" + firstFileBasename;
+	} 
+
+	if (openInObsidian || canvasOutside) {
+		app.openLocation("obsidian://open?path=" + encodeURIComponent(firstFile));
 		if (pathArray.length > 1) {
-			app.displayNotification("opening: " + pathArray[0], { withTitle: "Obsidian can only open one file at a time." });
+			app.displayNotification("opening: " + firstFile, { withTitle: "Obsidian can only open one file at a time." });
 		}
 	} else {
 		// opens *all* selected files if they are not in Obsidian
