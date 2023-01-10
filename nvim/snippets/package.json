@@ -10,14 +10,14 @@
 				"language": [
 					"typescript"
 				],
-				"path": "./obsdian-plugin-dev.json"
+				"path": "./obsidian-plugin-dev.json"
 			},
 			{
 				"language": [
 					"css",
 					"scss"
 				],
-				"path": "./obsdian-theme-dev.json"
+				"path": "./obsidian-theme-dev.json"
 			}
 		]
 	}
