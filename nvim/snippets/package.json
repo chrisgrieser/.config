@@ -1,5 +1,9 @@
 {
-	"name": "example-snippets",
+	"DOCS": [
+		"https://code.visualstudio.com/docs/editor/userdefinedsnippets",
+		"https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vscode"
+	],
+	"name": "pseudometa-snippets",
 	"contributes": {
 		"snippets": [
 			{
@@ -7,6 +11,12 @@
 					"lua"
 				],
 				"path": "./lua.json"
+			},
+			{
+				"language": [
+					"typescript"
+				],
+				"path": "./obsdian-dev.json"
 			}
 		]
 	}

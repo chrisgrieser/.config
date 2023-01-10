@@ -99,7 +99,6 @@ return {
 			}
 		end,
 	},
-	"Darazaki/indent-o-matic", -- auto-determine indents
 
 	-- Filetype-specific
 	{ "mityu/vim-applescript", ft = "applescript" }, -- syntax highlighting
