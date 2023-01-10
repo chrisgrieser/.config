@@ -33,7 +33,10 @@ return {
 		config = function()
 			require("nvim-lightbulb").setup {
 				autocmd = { enabled = true },
-				-- ignore = {"null-ls"},
+				ignore = {
+					"sumneko_lua", -- only non-diagnostic code action is to change roder of parameters, which is not very useful and mostly noise
+					"marksman", -- marksman adds the "Update ToC" code action everywhere
+				},
 			}
 			vim.fn.sign_define("LightBulbSign", { text = "" })
 		end,

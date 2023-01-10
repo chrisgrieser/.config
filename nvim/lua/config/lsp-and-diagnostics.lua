@@ -123,7 +123,12 @@ keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Docu
 
 -- actions defined globally so null-ls can use them without LSP, e.g., for bash
 -- or gitsigns
-keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "璉Code Action" })
+keymap(
+	{ "n", "x" },
+	"<leader>c",
+	function() vim.lsp.buf.code_action { apply = true } end, -- "apply" auto-executes code action if there is only one
+	{ desc = "璉Code Action" }
+)
 
 augroup("LSP", {})
 autocmd("LspAttach", {

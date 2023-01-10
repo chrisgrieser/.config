@@ -7,6 +7,9 @@ if ! command -v duti &>/dev/null; then echo "duti not installed." && exit 1; fi
 duti -s net.highlightsapp.universal pdf all
 duti -s org.m0k.transmission torrent all
 duti -s com.busymac.busycal3 ics all
+
+# Obsidian
+duti -s com.apple.automator.Obsidian-Opener canvas all
 duti -s com.apple.automator.Obsidian-Opener md all
 
 # video & mp3
