@@ -28,8 +28,11 @@ end, { desc = "Search CSS Variables", buffer = true })
 -- paste selectors from the console with dots
 keymap("n", "p", function ()
 	local reg = fn.getreg('"')	
-
-	fn.setreg('"', reg)
+	if reg:find(".%-.") then
+		reg = reg:gsub("^", "."):gsub(" ", ".")
+		fn.setreg('"', reg)
+	end
+	normal("p")
 end, {desc = "paste (css console fix)", buffer = true})
 
 --------------------------------------------------------------------------------
