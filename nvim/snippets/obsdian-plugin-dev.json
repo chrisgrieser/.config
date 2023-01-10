@@ -10,6 +10,17 @@
 			"const ${1:activeFile} = this.app.workspace.activeFile();"
 		]
 	},
+	"recent files": {
+		"description": "Obsidian: Get the 10 most recent files. (The ones visible in the Quick Switcher, when there no input yet.)",
+		"prefix": [
+			"recent files",
+			"quickSwitcher",
+			"last opened files"
+		],
+		"body": [
+			"const recentFiles = this.app.workspace.lastOpenFiles;"
+		]
+	},
 	"get editor": {
 		"description": "Obsidian: Get the editor of the currently active note.",
 		"prefix": [
@@ -38,13 +49,28 @@
 		]
 	},
 	"Add Command": {
-		"description": "Obsidian: Get the TFile corresponding to the (vault-relative) file path string.",
+		"description": "Obsidian: Add a command to the command palette. Usually added to the `onload()` call.",
 		"prefix": [
-			"TFile from file path",
-			"file path to TFile"
+			"add command",
+			"register command"
 		],
 		"body": [
-			"this.app.vault.getAbstractFileByPath(${1:filepath});"
+			"this.addCommand({",
+			"\tid: \"${1:command-id}\",",
+			"\tname: \"${2:commandName}\",",
+			"\tcallback: () => this.${3:method}(),",
+			"});"
+		]
+	},
+	"Multiple Cursors?": {
+		"description": "Obsidian: Check whether there are currently multiple cursors",
+		"prefix": [
+			"cursors",
+			"multiple cursors",
+			"multiple selections"
+		],
+		"body": [
+			"const hasMultipleCursors = editor.listSelections().length > 1;"
 		]
 	}
 }
