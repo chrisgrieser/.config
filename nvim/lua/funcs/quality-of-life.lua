@@ -298,7 +298,7 @@ local function shellNotify(_, data, _)
 	vim.notify(out, logLevel)
 	-- HACK for linters writing the current file, and autoread failing, preventing to
 	-- quit the file. Requires manual reloading via `:edit`.
-	if bo.modified then cmd.edit() end
+	if bo.modifiable then cmd.edit() end
 end
 
 local gitShellOpts = {
