@@ -9,7 +9,7 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			"mrjones2014/nvim-ts-rainbow", 
+			"mrjones2014/nvim-ts-rainbow",
 		},
 	},
 
@@ -25,6 +25,18 @@ return {
 			"folke/neodev.nvim", -- lsp for nvim-lua config
 			"b0o/SchemaStore.nvim", -- schemas for json-lsp
 		},
+	},
+	{
+		"kosayoda/nvim-lightbulb",
+		dependencies = "neovim/nvim-lspconfig",
+		event = "VeryLazy",
+		config = function()
+			require("nvim-lightbulb").setup {
+				autocmd = { enabled = true },
+				-- ignore = {"null-ls"},
+			}
+			vim.fn.sign_define("LightBulbSign", { text = "" })
+		end,
 	},
 
 	-- Linting & Formatting

@@ -25,18 +25,6 @@ end, { desc = "Search CSS Variables", buffer = true })
 
 --------------------------------------------------------------------------------
 
--- paste selectors from the console with dots
-keymap("n", "p", function ()
-	local reg = fn.getreg('"')	
-	if reg:find(".%-.") then
-		reg = reg:gsub("^", "."):gsub(" ", ".")
-		fn.setreg('"', reg)
-	end
-	normal("p")
-end, {desc = "paste (css console fix)", buffer = true})
-
---------------------------------------------------------------------------------
-
 -- INFO: fix syntax highlighting with ':syntax sync fromstart'
 -- various other solutions are described here: https://github.com/vim/vim/issues/2790
 -- however, using treesitter, this is less of an issue, but treesitter css
