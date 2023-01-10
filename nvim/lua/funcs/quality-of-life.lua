@@ -44,7 +44,6 @@ function setlocal(option, value)
 	vim.api.nvim_set_option_value(option, value, { scope = "local" })
 end
 
-
 --------------------------------------------------------------------------------
 
 -- Duplicate line under cursor, change occurrences of certain words to their
@@ -62,7 +61,11 @@ function M.cssDuplicateLine()
 		line = line:gsub("left", "right")
 	elseif line:find("height") and not (line:find("line-height")) then
 		line = line:gsub("height", "width")
-	elseif line:find("width") and not (line:find("border-width")) and not (line:find("outline-width")) then
+	elseif
+		line:find("width")
+		and not (line:find("border-width"))
+		and not (line:find("outline-width"))
+	then
 		line = line:gsub("width", "height")
 	end
 
@@ -284,55 +287,76 @@ end
 -- GIT
 
 -- options for fn.jobstart()
-local shellOpts = {
+local function shellNotify(_, data, _)
+	if not data or (data[1] == "" and #data == 1) then return end
+	local out = table.concat(data, " \n "):gsub("%s*$", "")
+	vim.notify(out)
+	-- HACK linters writing the current file, and autoread failing, preventing to
+	-- quit the file. Requires manual reloading via `:edit`.
+	if bo.modified then cmd.edit() end
+end
+local gitShellOpts = {
 	stdout_buffered = true,
 	stderr_buffered = true,
 	detach = true,
-	on_stdout = function(_, data, _)
-		if not data or (data[1] == "" and #data == 1) then return end
-		local stdOut = table.concat(data, " \n "):gsub("%s*$", "")
-		vim.notify(stdOut)
-	end,
-	on_stderr = function(_, data, _)
-		if not data or (data[1] == "" and #data == 1) then return end
-		local stdErr = table.concat(data, " \n "):gsub("%s*$", "")
-		vim.notify(stdErr)
-	end,
+	on_stdout = function(_, data, _) shellNotify(_, data, _) end,
+	on_stderr = function(_, data, _) shellNotify(_, data, _) end,
 }
-
-
 
 ---@param prefillMsg? string
 function M.addCommitPush(prefillMsg)
 	if not prefillMsg then prefillMsg = "" end
 
 	-- uses dressing + cmp + omnifunc for autocompletion of filenames
-	vim.ui.input({ prompt = "Commit Message", default = prefillMsg, completion = "file" }, function(commitMsg)
-		if not commitMsg then
-			return
-		elseif #commitMsg > 50 then
-			vim.notify("Commit Message too long.", logWarn)
-			M.addCommitPush(commitMsg:sub(1, 50))
-			return
-		elseif commitMsg == "" then
-			commitMsg = "chore"
-		end
+	vim.ui.input(
+		{ prompt = "Commit Message", default = prefillMsg, completion = "file" },
+		function(commitMsg)
+			if not commitMsg then
+				return
+			elseif #commitMsg > 50 then
+				vim.notify("Commit Message too long.", logWarn)
+				M.addCommitPush(commitMsg:sub(1, 50))
+				return
+			elseif commitMsg == "" then
+				commitMsg = "chore"
+			end
 
-		local cc =
-			{ "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
-		local firstWord = commitMsg:match("^%w+")
-		if not vim.tbl_contains(cc, firstWord) then
-			vim.notify("Not using a Conventional Commits keyword.", logWarn)
-			M.addCommitPush(commitMsg)
-			return
-		end
-		if expand("%:p:h:t") then
-			
-		end
+			local cc = {
+				"chore",
+				"build",
+				"test",
+				"fix",
+				"feat",
+				"refactor",
+				"perf",
+				"style",
+				"revert",
+				"ci",
+				"docs",
+			}
+			local firstWord = commitMsg:match("^%w+")
+			if not vim.tbl_contains(cc, firstWord) then
+				vim.notify("Not using a Conventional Commits keyword.", logWarn)
+				M.addCommitPush(commitMsg)
+				return
+			end
 
-		vim.notify(' git add-commit-push\n"' .. commitMsg .. '"')
-		fn.jobstart("git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push", shellOpts)
-	end)
+			-- Shimmering Focus specific actions instead
+			if expand("%:p"):find("themes/Shimmering Focus/theme.css$") then
+				vim.notify(' Building theme…\n"' .. commitMsg .. '"')
+				local buildScript =
+					expand("~/Library/Mobile Documents/com~apple~CloudDocs/Repos/shimmering-focus/build.sh")
+				fn.jobstart('zsh "' .. buildScript .. '" "' .. commitMsg .. '"', gitShellOpts)
+				return
+			end
+
+			vim.notify(' git add-commit-push\n"' .. commitMsg .. '"')
+			fn.jobstart(
+				"git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push",
+				gitShellOpts
+			)
+		end
+	)
 end
 
 function M.gitLink()
