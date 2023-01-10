@@ -75,6 +75,10 @@ vim.on_key(function(char)
 	end
 end, vim.api.nvim_create_namespace("auto_hlsearch"))
 
+-- Marks
+require("funcs.mark-cycler").clearMarks() -- HACK clear marks due to nvim's mark bug
+keymap("n", "ä", require("funcs.mark-cycler").gotoMark, {desc = "Goto Next Mark"})
+keymap("n", "Ä", require("funcs.mark-cycler").setMark, {desc = "Set Next Mark"})
 --------------------------------------------------------------------------------
 
 keymap("n", "<Esc>", function()
@@ -224,7 +228,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "outdent" })
 keymap("n", "ü", "mzlblgueh~`z", { desc = "toggle capital/lowercase of word" })
 keymap("n", "Ü", "gUiw", { desc = "uppercase word" })
 keymap("n", "~", "~h")
-keymap("n", "ä", qol.wordSwitch, { desc = "switch common words" })
+keymap("n", "<C-ü>", qol.wordSwitch, { desc = "switch common words" })
 
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]" }
