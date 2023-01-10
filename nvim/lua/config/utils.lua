@@ -18,6 +18,7 @@ expand = vim.fn.expand
 logWarn = vim.log.levels.WARN
 logError = vim.log.levels.ERROR
 logTrace = vim.log.levels.TRACE
+logInfo = vim.log.levels.INFO
 
 ---runs :normal natively with bang
 ---@param cmdStr any
