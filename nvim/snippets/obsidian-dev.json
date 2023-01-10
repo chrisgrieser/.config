@@ -1,0 +1,13 @@
+{
+	"Active File (Obsidian)": {
+		"prefix": [
+			"active",
+			"tFile",
+			"current"
+		],
+		"body": [
+			"this.app.workspace.activeFile()"
+		],
+		"description": "The current file in obsidian"
+	}
+}
