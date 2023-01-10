@@ -102,21 +102,6 @@ return {
 			}
 		end,
 	},
-	{ -- auto-resize splits
-		"anuvyklack/windows.nvim",
-		dependencies = "anuvyklack/middleclass",
-		event = "VeryLazy", -- loading on <C-w> does not seem to work
-		cmd = { "DiffviewFileHistory", "DiffviewOpen" },
-		config = function()
-			require("windows").setup {
-				autowidth = {
-					enable = true,
-					winwidth = 0.65, -- active window gets 65% of total width
-				},
-			}
-		end,
-	},
-
 	{
 		"lukas-reineke/headlines.nvim",
 		ft = "markdown",

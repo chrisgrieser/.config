@@ -214,27 +214,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>hammerspoon://focus-btop</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>16256A06-CEDA-44C4-A6E8-38C512624E63</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -294,6 +273,27 @@ done</string>
 			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
 			<string>D2D919DB-3F73-46E1-88F7-C6743CF222FA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>hammerspoon://focus-btop</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>16256A06-CEDA-44C4-A6E8-38C512624E63</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -587,6 +587,35 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>8B8645C1-776A-41E4-B093-DF59FEF6D696</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -633,35 +662,6 @@ last reboot | head -n 10 | cut -c 37-</string>
 			<string>A25DDA0D-DA11-46FF-9CCB-41D3D338B420</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>8B8645C1-776A-41E4-B093-DF59FEF6D696</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -756,7 +756,7 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>note</key>
 			<string>invert display</string>
 			<key>xpos</key>
-			<real>40</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
