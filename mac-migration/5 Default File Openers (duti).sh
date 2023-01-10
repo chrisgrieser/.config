@@ -3,17 +3,17 @@
 #-------------------------------------------------------------------------------
 if ! command -v duti &>/dev/null; then echo "duti not installed." && exit 1; fi
 
-# general
-duti -s net.highlightsapp.universal pdf all
-duti -s org.m0k.transmission torrent all
-duti -s com.busymac.busycal3 ics all
+# Config
+browserID="com.brave.Browser"
+videoplayerID="com.colliderli.iina"
+editorID="com.apple.automator.Neovim"
+obsiOpenerID="com.apple.automator.Obsidian-Opener"
 
 # Obsidian
-duti -s com.apple.automator.Obsidian-Opener canvas all
-duti -s com.apple.automator.Obsidian-Opener md all
+duti -s "$obsiOpenerID" md all
+duti -s "$obsiOpenerID" canvas all
 
 # video & mp3
-videoplayerID="com.colliderli.iina"
 duti -s "$videoplayerID" vid all
 duti -s "$videoplayerID" mp4 all
 duti -s "$videoplayerID" mp3 all
@@ -24,7 +24,6 @@ duti -s "$videoplayerID" mkv all
 duti -s "$videoplayerID" m4a all
 
 # code
-editorID="com.apple.automator.Neovim"
 duti -s "$editorID" conf all
 duti -s "$editorID" ini all
 duti -s "$editorID" com.apple.property-list all # plist
@@ -55,14 +54,21 @@ duti -s "$editorID" sketchybarrc all
 # URI Schemes
 duti -s org.m0k.transmission magnet
 duti -s com.mimestream.Mimestream mailto # = default mail client
-duti -s com.brave.Browser http           # = default browser
-duti -s com.brave.Browser https
-duti -s com.brave.Browser chrome-extension
-duti -s com.brave.Browser chrome
-duti -s com.brave.Browser brave
 
-duti -s com.brave.Browser webloc all     # link files
-duti -s com.brave.Browser url all     # link files
+# Browser
+duti -s "$browserID" http           # = default browser
+duti -s "$browserID" https
+duti -s "$browserID" chrome-extension
+duti -s "$browserID" chrome
+duti -s "$browserID" brave
+duti -s "$browserID" webloc all     # link files
+duti -s "$browserID" url all     # link files
+
+# Misc
+duti -s net.highlightsapp.universal pdf all
+duti -s org.m0k.transmission torrent all
+duti -s com.busymac.busycal3 ics all
+
 
 #───────────────────────────────────────────────────────────────────────────────
 

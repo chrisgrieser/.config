@@ -1,6 +1,7 @@
 #!/usr/bin/env osascript -l JavaScript
+
 function run(input) {
-	// 👉 CONFIG: Enter your Default non-Obsidian Markdown App here
+	// 👉 CONFIG: Enter your default non-Obsidian Markdown App here
 	const markdownApp = "Neovim";
 
 	//───────────────────────────────────────────────────────────────────────────
