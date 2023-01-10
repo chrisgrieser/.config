@@ -295,6 +295,11 @@ local function shellNotify(_, data, _)
 	if not data or (data[1] == "" and #data == 1) then return end
 	local out = table.concat(data, " \n "):gsub("%s*$", "")
 	local logLevel = out:lower():find("error") and logError or logInfo
+	if out:lower():find("error") then
+		logLevel = logError
+	elseif out:lower():find("warning") then
+		logLevel = logWarn
+	end
 	vim.notify(out, logLevel)
 	-- HACK for linters writing the current file, and autoread failing, preventing to
 	-- quit the file. Requires manual reloading via `:edit`.
