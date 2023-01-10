@@ -1,7 +1,7 @@
 require("config.utils")
 --------------------------------------------------------------------------------
 
-wo.conceallevel = 2 -- hides quotes in JSON, making it actually more readable
+-- wo.conceallevel = 2 -- hides quotes in JSON, making it actually more readable
 
 -- https://mikefarah.gitbook.io/yq/usage/convert
 keymap("n", "<D-p>", ":.!yq -o=json<CR><CR>", {desc = "prettify JSON", buffer = true})

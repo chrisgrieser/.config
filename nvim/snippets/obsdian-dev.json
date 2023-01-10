@@ -1,0 +1,50 @@
+{
+	"get active file": {
+		"description": "Obsidian: Get the TFile of the currently active note.",
+		"prefix": [
+			"tFile",
+			"active file",
+			"current"
+		],
+		"body": [
+			"const ${1:activeFile} = this.app.workspace.activeFile();"
+		]
+	},
+	"get editor": {
+		"description": "Obsidian: Get the editor of the currently active note.",
+		"prefix": [
+			"editor",
+			"active file",
+			"current"
+		],
+		"body": [
+			"const view = app.workspace.getActiveViewOfType(MarkdownView);",
+			"// getActiveViewOfType will return null if the active view is",
+			"// null or not of type MarkdownView.",
+			"if (view) {",
+			"\tconst editor = view.editor;",
+			"\t// Do something with editor",
+			"}"
+		]
+	},
+	"get TFile from path": {
+		"description": "Obsidian: Get the TFile corresponding to the (vault-relative) file path string.",
+		"prefix": [
+			"TFile from file path",
+			"file path to TFile"
+		],
+		"body": [
+			"this.app.vault.getAbstractFileByPath(${1:filepath});"
+		]
+	},
+	"Add Command": {
+		"description": "Obsidian: Get the TFile corresponding to the (vault-relative) file path string.",
+		"prefix": [
+			"TFile from file path",
+			"file path to TFile"
+		],
+		"body": [
+			"this.app.vault.getAbstractFileByPath(${1:filepath});"
+		]
+	}
+}
