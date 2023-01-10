@@ -104,7 +104,7 @@ opt.nrformats:remove { "bin", "hex" } -- remove edge case ambiguity
 
 -- Files & Saving
 opt.confirm = true -- ask instead of aborting
-opt.autowriteall = true
+opt.autowriteall = false -- seems to cause annoyances sometimes?
 
 augroup("autosave", {})
 autocmd({ "BufWinLeave", "WinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
