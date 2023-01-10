@@ -290,33 +290,35 @@ end
 --------------------------------------------------------------------------------
 -- GIT
 
--- options for fn.jobstart()
-local function shellNotify(_, data, _)
-	if not data or (data[1] == "" and #data == 1) then return end
-	local out = table.concat(data, " \n "):gsub("%s*$", "")
-	local logLevel = out:lower():find("error") and logError or logInfo
-	if out:lower():find("error") then
-		logLevel = logError
-	elseif out:lower():find("warning") then
-		logLevel = logWarn
-	end
-	vim.notify(out, logLevel)
-	-- HACK for linters writing the current file, and autoread failing, preventing to
-	-- quit the file. Requires manual reloading via `:edit`.
-	if bo.modifiable then cmd.edit() end
-end
-
-local gitShellOpts = {
-	stdout_buffered = true,
-	stderr_buffered = true,
-	detach = true,
-	on_stdout = function(_, data, _) shellNotify(_, data, _) end,
-	on_stderr = function(_, data, _) shellNotify(_, data, _) end,
-}
-
+---git add-commit-pull-push
 ---@param prefillMsg? string
 function M.addCommitPush(prefillMsg)
 	if not prefillMsg then prefillMsg = "" end
+
+	local output = {}
+	local gitShellOpts = {
+		stdout_buffered = true,
+		stderr_buffered = true,
+		detach = true,
+		on_stdout = function(_, data) table.insert(output, data) end,
+		on_stderr = function(_, data) table.insert(output, data) end,
+		on_exit = function()
+			if not output or (output[1] == "" and #output == 1) then return end
+			local out = table.concat(output, " \n "):gsub("%s*$", "")
+			local logLevel
+			if out:lower():find("error") then
+				logLevel = logError
+			elseif out:lower():find("warning") then
+				logLevel = logWarn
+			else
+				logLevel = logInfo
+			end
+			vim.notify(out, logLevel)
+			-- HACK for linters writing the current file, and autoread failing, preventing to
+			-- quit the file. Requires manual reloading via `:edit`.
+			if bo.modifiable then cmd.edit() end
+		end,
+	}
 
 	-- uses dressing + cmp + omnifunc for autocompletion of filenames
 	vim.ui.input(
@@ -370,6 +372,8 @@ function M.addCommitPush(prefillMsg)
 	)
 end
 
+---normal mode: github link to file
+---visual mode: link to selected lines
 function M.gitLink()
 	local repo = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git .*", "%1")
 	local branch = fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n", "")
