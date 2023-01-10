@@ -10,7 +10,7 @@ const { Hints, imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExc
 // https://github.com/brookhong/Surfingkeys#edit-your-own-settings
 settings.richHintsForKeystroke = 400; // like whichkey, value is delay till shown
 settings.hintShiftNonActive = true; // vimium-like: holding shift while pressing hint opens in bg tab
-settings.startToShowEmoji = 1; // length of chars to show emojis (acemode)
+settings.startToShowEmoji = 0; // length of chars to show emojis (acemode)
 
 Hints.style("font-family: Arial; font-size: 12px;");
 
@@ -22,15 +22,14 @@ unmap("k", /google/);
 
 unmap("?", /github.com/); // cheatsheet for github shortcuts
 
+unmap("j", /reddit.com\/r\/\w+\/$/); // = in threads, use surfing-keys, in subreddit views, use reddit's controls
+unmap("k", /reddit.com\/r\/\w+\/$/);
 unmap("?", /reddit.com/); // cheatsheet for reddit shortcuts
 unmap("l", /reddit.com/); // open reddit link
-unmap("j", /reddit.com/);
-unmap("k", /reddit.com/);
 unmap("x", /reddit.com/); // toggle fold
 unmap("a", /reddit.com/); // upvote
 unmap("z", /reddit.com/); // downvote
 unmap("r", /reddit.com/); // reply
-unmap("c", /reddit.com/); // compose new post
 
 //──────────────────────────────────────────────────────────────────────────────
 // Mappings
