@@ -126,7 +126,7 @@ keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Docu
 keymap(
 	{ "n", "x" },
 	"<leader>c",
-	function() vim.lsp.buf.code_action { apply = true } end, -- "apply" auto-executes code action if there is only one
+	function() vim.lsp.buf.code_action { apply = false } end, -- "apply = true" auto-executes code action if there is only one
 	{ desc = "璉Code Action" }
 )
 

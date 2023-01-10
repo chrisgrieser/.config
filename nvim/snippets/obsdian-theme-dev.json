@@ -1,0 +1,12 @@
+{
+	"Callouts": {
+		"description": "Obsidian: callouts",
+		"prefix": [
+			".callouts",
+			"callouts"
+		],
+		"body": [
+			".callouts"
+		]
+	}
+}

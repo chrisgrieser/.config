@@ -8,15 +8,16 @@
 		"snippets": [
 			{
 				"language": [
-					"lua"
+					"typescript"
 				],
-				"path": "./lua.json"
+				"path": "./obsdian-plugin-dev.json"
 			},
 			{
 				"language": [
-					"typescript"
+					"css",
+					"scss"
 				],
-				"path": "./obsdian-dev.json"
+				"path": "./obsdian-theme-dev.json"
 			}
 		]
 	}
