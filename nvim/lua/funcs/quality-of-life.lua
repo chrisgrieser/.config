@@ -300,10 +300,18 @@ function M.addCommitPush(prefillMsg)
 		stdout_buffered = true,
 		stderr_buffered = true,
 		detach = true,
-		on_stdout = function(_, data) table.insert(output, data) end,
-		on_stderr = function(_, data) table.insert(output, data) end,
+		on_stdout = function(_, data)
+			for _, d in pairs(data) do
+				table.insert(output, d)
+			end
+		end,
+		on_stderr = function(_, data)
+			for _, d in pairs(data) do
+				table.insert(output, d)
+			end
+		end,
 		on_exit = function()
-			if not output or (output[1] == "" and #output == 1) then return end
+			-- if not output or (output[1] == "" and #output == 1) then return end
 			local out = table.concat(output, " \n "):gsub("%s*$", "")
 			local logLevel
 			if out:lower():find("error") then
