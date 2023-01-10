@@ -149,19 +149,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A0FAE938-AC0D-4352-B187-8CE398415693</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>846A75D1-67B5-4DFC-A2B0-8F8276CA4423</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>B3464F95-B489-4113-82A7-9CCB3300B0E1</key>
 		<array>
 			<dict>
@@ -662,55 +649,6 @@ open "$sf_path" --env=LINE=$lineNo</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>var</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>definition-shimmering-focus.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>🔍 Shimmering Focus Variable</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>A0FAE938-AC0D-4352-B187-8CE398415693</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -806,9 +744,9 @@ open "$sf_path" --env=LINE=$lineNo</string>
 			<key>note</key>
 			<string>open at line</string>
 			<key>xpos</key>
-			<real>245</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>360</real>
 		</dict>
 		<key>8627A802-741F-4477-A445-AA3EA82ED4C8</key>
 		<dict>
@@ -838,17 +776,6 @@ open "$sf_path" --env=LINE=$lineNo</string>
 			<real>700</real>
 			<key>ypos</key>
 			<real>95</real>
-		</dict>
-		<key>A0FAE938-AC0D-4352-B187-8CE398415693</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>Open Shimmering Focus at Variable Defintion</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>505</real>
 		</dict>
 		<key>B3464F95-B489-4113-82A7-9CCB3300B0E1</key>
 		<dict>
