@@ -300,6 +300,8 @@ local shellOpts = {
 	end,
 }
 
+
+
 ---@param prefillMsg? string
 function M.addCommitPush(prefillMsg)
 	if not prefillMsg then prefillMsg = "" end
@@ -323,6 +325,9 @@ function M.addCommitPush(prefillMsg)
 			vim.notify("Not using a Conventional Commits keyword.", logWarn)
 			M.addCommitPush(commitMsg)
 			return
+		end
+		if expand("%:p:h:t") then
+			
 		end
 
 		vim.notify(' git add-commit-push\n"' .. commitMsg .. '"')

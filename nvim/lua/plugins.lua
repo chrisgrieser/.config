@@ -18,6 +18,7 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"williamboman/mason.nvim",
+			"kosayoda/nvim-lightbulb",
 			"williamboman/mason-lspconfig.nvim",
 			"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 			"ray-x/lsp_signature.nvim", -- signature hint
@@ -28,8 +29,7 @@ return {
 	},
 	{
 		"kosayoda/nvim-lightbulb",
-		dependencies = "neovim/nvim-lspconfig",
-		event = "VeryLazy",
+		lazy = true,
 		config = function()
 			require("nvim-lightbulb").setup {
 				autocmd = { enabled = true },
