@@ -324,12 +324,12 @@ return {
 		end,
 	},
 	{
-		"L3MON4D3/LuaSnip",
+		"L3MON4D3/LuaSnip", -- current
 		event = "InsertEnter",
 		config = function()
 			require("config/snippets") -- loads all snippets
 			local ls = require("luasnip")
-			require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
+			require("luasnip.loaders.from_vscode").load({ paths = { "./snippets" } })
 
 			ls.setup {
 				enable_autosnippets = true,
