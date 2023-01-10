@@ -116,7 +116,7 @@ add("lua", {
 -- nvim-lua
 add("lua", {
 	snip("keymap", 'keymap("n", "$1", $2, {desc = "$3"})'),
-	snip("keymap (buffer)", 'keymap("n", "$2", $2, {desc = "$3", buffer = true})'),
+	snip("keymap (buffer)", 'keymap("n", "$1", $2, {desc = "$3", buffer = true})'),
 	snip("keymap (multi-mode)", 'keymap({"n", "x"}, "$1", $2, {desc = "$3"})'),
 	snip("input (vim.ui)", [[
 		vim.ui.input({ prompt = "${1:prompt_msg}"}, function (input)
