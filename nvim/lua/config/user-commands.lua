@@ -22,7 +22,7 @@ newCommand("PluginDir", function(_) fn.system('open "' .. fn.stdpath("data") .. 
 local function inspect(str)
 	local output = vim.inspect(fn.luaeval(str))
 	vim.notify(output, logTrace, {
-		on_open = function(win) -- enable highlighting in the notification
+		on_open = function(win) -- enable treesitter highlighting in the notification
 			local outputIsStr = output:find('^"') and output:find('"$')
 			if not outputIsStr then
 				local buf = api.nvim_win_get_buf(win)
