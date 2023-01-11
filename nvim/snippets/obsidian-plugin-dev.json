@@ -48,7 +48,7 @@
 			"this.app.vault.getAbstractFileByPath(${1:filepath});"
 		]
 	},
-	"Add Command": {
+	"add command": {
 		"description": "Obsidian: Add a command to the command palette. Usually added to the `onload()` call.",
 		"prefix": [
 			"add command",
@@ -71,6 +71,26 @@
 		],
 		"body": [
 			"const hasMultipleCursors = editor.listSelections().length > 1;"
+		]
+	},
+	"get selection (edit mode)": {
+		"description": "Obsidian: Get the selection in Live Preview / Source mode.",
+		"prefix": [
+			"selection",
+			"selected text"
+		],
+		"body": [
+			"const selection = editor.getSelection();"
+		]
+	},
+	"get selection (reading mode)": {
+		"description": "Obsidian: Get the selection in Reading Mode. (Note that this will retrieve plain text without formatting.)",
+		"prefix": [
+			"selection",
+			"selected text"
+		],
+		"body": [
+			"const selection = activeWindow.getSelection().toString(); "
 		]
 	}
 }
