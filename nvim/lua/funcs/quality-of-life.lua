@@ -301,16 +301,12 @@ function M.addCommitPush(prefillMsg)
 		detach = true,
 		on_stdout = function(_, data)
 			for _, d in pairs(data) do
-				if not (d[1] == "" and #d == 1) then 
-					table.insert(output, d)
-				end
+				if not (d[1] == "" and #d == 1) then table.insert(output, d) end
 			end
 		end,
 		on_stderr = function(_, data)
 			for _, d in pairs(data) do
-				if not (d[1] == "" and #d == 1) then 
-					table.insert(output, d)
-				end
+				if not (d[1] == "" and #d == 1) then table.insert(output, d) end
 			end
 		end,
 		on_exit = function()
@@ -329,7 +325,6 @@ function M.addCommitPush(prefillMsg)
 			if bo.modifiable then cmd.edit() end
 		end,
 	}
-
 
 	-- uses dressing + cmp + omnifunc for autocompletion of filenames
 	vim.ui.input(
