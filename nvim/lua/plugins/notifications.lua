@@ -15,7 +15,9 @@ local function config()
 		timeout = 4000,
 		top_down = false,
 		on_open = function(win)
-			if vim.api.nvim_win_is_valid(win) then vim.api.nvim_win_set_config(win, { border = borderStyle }) end
+			if vim.api.nvim_win_is_valid(win) then
+				vim.api.nvim_win_set_config(win, { border = borderStyle })
+			end
 		end,
 	}
 
@@ -35,7 +37,9 @@ local function config()
 
 	-- HACK to filter out annoying buggy messages from the satellite plugin: https://github.com/lewis6991/satellite.nvim/issues/36
 	local function banned(msg) -- https://github.com/rcarriga/nvim-notify/issues/114#issuecomment-1179754969
-		return msg:find("^gitsigns ROW: %d+") or msg:find("^line value outside range") or msg:find("^diagnostic ROW: %d+")
+		return msg:find("^gitsigns ROW: %d+")
+			or msg:find("^line value outside range")
+			or msg:find("^diagnostic ROW: %d+")
 	end
 
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
@@ -63,9 +67,10 @@ local function config()
 		local safe_args = {}
 		local args = { ... }
 		for _, arg in pairs(args) do
+			if type(arg) == "table" then arg = vim.inspect(arg) end -- pretty print tables
 			table.insert(safe_args, tostring(arg))
 		end
-		vim.notify(table.concat(safe_args, " "), vim.log.levels.INFO, { timeout = printDurationSecs * 1000 })
+		vim.notify(table.concat(safe_args, " "), logInfo, { timeout = printDurationSecs * 1000 })
 	end
 end
 
