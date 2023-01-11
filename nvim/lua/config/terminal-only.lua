@@ -1,5 +1,4 @@
 require("config.utils")
--- a color scheme
 --------------------------------------------------------------------------------
 
 -- Gutter transparent
@@ -19,10 +18,3 @@ cmd[[highlight Comment ctermfg=grey]]
 
 -- Popup Menus
 cmd[[highlight Pmenu ctermbg=DarkGrey]]
-
--- Line Numbers
-cmd[[highlight LineNr ctermfg=DarkGrey]]
-cmd[[highlight CursorLineNr ctermfg=Grey]]
-
--- Tree Sitter Context Line
-cmd[[highlight TreesitterContext ctermbg=Black]]
