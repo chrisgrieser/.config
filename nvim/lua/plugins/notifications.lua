@@ -66,11 +66,17 @@ local function config()
 	print = function(...)
 		local safe_args = {}
 		local args = { ... }
+		local hasTable = false
 		for _, arg in pairs(args) do
-			if type(arg) == "table" then arg = vim.inspect(arg) end -- pretty print tables
+			if type(arg) == "table" then arg = "= "..vim.inspect(arg) end -- pretty print tables
+			hasTable = true
 			table.insert(safe_args, tostring(arg))
 		end
-		vim.notify(table.concat(safe_args, " "), logInfo, { timeout = printDurationSecs * 1000 })
+		local notifyOpts = { timeout = printDurationSecs * 1000 }
+		if hasTable then
+			notifyOpts.on_open = 
+		end
+		vim.notify(table.concat(safe_args, " "), logInfo, notifyOpts)
 	end
 end
 
