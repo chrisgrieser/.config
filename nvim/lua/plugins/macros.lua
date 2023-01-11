@@ -14,8 +14,9 @@ return {
 				mapping = {
 					startStopRecording = "0",
 					playMacro = "9",
-					editMacro = "c0",
 					switchSlot = "<C-0>",
+					editMacro = "c0",
+					yankMacro = "y0",
 					addBreakPoint = "8",
 				},
 				dapSharedKeymaps = true,
