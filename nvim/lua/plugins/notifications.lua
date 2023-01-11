@@ -35,7 +35,7 @@ local function config()
 		end
 	end
 
-	-- HACK to filter out annoying buggy messages from the satellite plugin: https://github.com/lewis6991/satellite.nvim/issues/36
+	-- HACK filter out annoying buggy messages from the satellite plugin: https://github.com/lewis6991/satellite.nvim/issues/36
 	local function banned(msg) -- https://github.com/rcarriga/nvim-notify/issues/114#issuecomment-1179754969
 		return msg:find("^gitsigns ROW: %d+")
 			or msg:find("^line value outside range")
@@ -66,16 +66,22 @@ local function config()
 	print = function(...)
 		local safe_args = {}
 		local args = { ... }
-		local hasTable = false
+		local includesTable = false
 		for _, arg in pairs(args) do
-			if type(arg) == "table" then arg = "= "..vim.inspect(arg) end -- pretty print tables
-			hasTable = true
+			if type(arg) == "table" then arg = "= " .. vim.inspect(arg) end -- pretty print tables
+			includesTable = true
 			table.insert(safe_args, tostring(arg))
 		end
 		local notifyOpts = { timeout = printDurationSecs * 1000 }
-		if hasTable then
-			notifyOpts.on_open = 
+
+		-- enable treesitter highlighting in the notification
+		if includesTable then
+			notifyOpts.on_open = function(win) 
+				local buf = api.nvim_win_get_buf(win)
+				api.nvim_buf_set_option(buf, "filetype", "lua")
+			end
 		end
+
 		vim.notify(table.concat(safe_args, " "), logInfo, notifyOpts)
 	end
 end
