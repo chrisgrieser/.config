@@ -344,15 +344,13 @@ return {
 
 			-- to be able to jump without <Tab> (e.g. when there is a non-needed suggestion)
 			vim.keymap.set({ "i", "s" }, "<D-j>", function()
-				if require("luasnip").choice_active() then
-					require("luasnip.extras.select_choice")()
-					return "<Esc>" -- HACK so we do not end up in insert mode
-				elseif require("luasnip").jumpable(1) then
+				if require("luasnip").jumpable(1) then
 					require("luasnip").jump(1)
 				else
-					vim.notify("No Jump or Choice available.", vim.log.levels.WARN)
+					vim.notify("No Jump available.", vim.log.levels.WARN)
 				end
-			end, { desc = "LuaSnip: Jump", expr = true })
+			end, { desc = "LuaSnip: Jump" })
+
 			vim.keymap.set({ "i", "s" }, "<D-S-j>", function()
 				if require("luasnip").jumpable(-1) then
 					require("luasnip").jump(-1)
@@ -360,6 +358,18 @@ return {
 					vim.notify("No Jump back available.", vim.log.levels.WARN)
 				end
 			end, { desc = "LuaSnip: Jump Back" })
+
+			vim.keymap.set({ "i", "s" }, "<D-k>", function()
+				if require("luasnip").choice_active() then
+					require("luasnip.extras.select_choice")()
+					return "<Esc>" -- HACK so we do not end up in insert mode for the selection
+				elseif bo.filetype == "markdown" then
+					return "<D-k>" -- md link creation
+				else
+					vim.notify("No Choice available.", vim.log.levels.WARN)
+					return ""
+				end
+			end, { desc = "LuaSnip: Select Choice", expr = true, remap = true })
 
 			-- needs to come after snippet definitions
 			ls.filetype_extend("typescript", { "javascript" }) -- typescript uses all javascript snippets
