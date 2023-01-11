@@ -19,7 +19,7 @@ keymap("n", "gR", function()
 
 	-- https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
 	local url1 = "https://regex101.com/?regex=" .. pattern .. "&flags=" .. flags
-	if replacement then url = url .. "&subst=" .. replacement end
+	if replacement then url1 = url1 .. "&subst=" .. replacement end
 	local url2 = "https://regexper.com/#" .. pattern
 
 	os.execute("open '" .. url1 .. "'") -- opening method on macOS
