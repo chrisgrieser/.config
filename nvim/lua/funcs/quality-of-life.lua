@@ -423,15 +423,6 @@ end
 -- MOVEMENT
 -- performed via `:normal` makes them less glitchy
 
-augroup("bla", {})
-autocmd("TextChanged", {
-	group = "bla",
-	callback = function()
-		
-	end,
-})
-
-
 local function leaveVisualMode()
 	-- https://github.com/neovim/neovim/issues/17735#issuecomment-1068525617
 	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
