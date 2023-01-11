@@ -12,7 +12,7 @@ opt.shadafile = vimDataDir .. "main.shada"
 opt.undofile = true -- enable persistent undo history
 opt.undolevels = 500 -- less undos saved for quicker loading of undo history
 
--- extra undopoints
+-- extra undopoints (= more fine-grained undos)
 local undopointChars = { ".", ",", ";", " " }
 for _, char in pairs(undopointChars) do
 	keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char })
@@ -35,7 +35,7 @@ opt.pumwidth = 10 -- min width popup menu
 opt.winblend = 2 -- % transparency
 
 -- Spelling
-opt.spelllang = "en_us"
+opt.spelllang = { "en_us", "de_de" }
 
 -- whitespace & indentation
 opt.tabstop = 3
@@ -128,7 +128,13 @@ autocmd("BufWinEnter", {
 			"",
 		}
 		-- needs to exclude commit filetypes: https://github.com/petertriho/cmp-git/issues/47#issuecomment-1374788422
-		if not (bo.modifiable) or vim.tbl_contains(ignoredFT, bo.filetype) or not (expand("%:p"):find("^/")) then return end
+		if
+			not bo.modifiable
+			or vim.tbl_contains(ignoredFT, bo.filetype)
+			or not (expand("%:p"):find("^/"))
+		then
+			return
+		end
 		cmd.cd(expand("%:p:h"))
 	end,
 })
@@ -176,7 +182,9 @@ local function remember(mode)
 		"help",
 		"qf",
 	}
-	if vim.tbl_contains(ignoredFts, bo.filetype) or bo.buftype == "nofile" or not bo.modifiable then return end
+	if vim.tbl_contains(ignoredFts, bo.filetype) or bo.buftype == "nofile" or not bo.modifiable then
+		return
+	end
 	if mode == "save" then
 		cmd.mkview(1)
 	else
@@ -202,12 +210,13 @@ autocmd("BufWinEnter", {
 -- apply templates for any filetype named `./templates/skeleton.{ft}`
 augroup("Templates", {})
 local skeletonPath = fn.stdpath("config") .. "/templates"
-local filetypeList = fn.system([[ls "]] .. skeletonPath .. [[/skeleton."* | xargs basename | cut -d. -f2]])
+local filetypeList =
+	fn.system([[ls "]] .. skeletonPath .. [[/skeleton."* | xargs basename | cut -d. -f2]])
 local ftWithSkeletons = vim.split(filetypeList, "\n", {})
 
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
-	local readCmd = "keepalt 0r ".. skeletonPath.."/skeleton." .. ft .. " | normal! G"
+	local readCmd = "keepalt 0r " .. skeletonPath .. "/skeleton." .. ft .. " | normal! G"
 
 	autocmd("BufNewFile", {
 		group = "Templates",
