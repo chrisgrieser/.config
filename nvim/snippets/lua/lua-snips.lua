@@ -137,14 +137,14 @@ add("lua", {
 	]]),
 	snip("autocmd & augroup", [[
 		augroup("${1:groupname}", {\})
-		autocmd("${2|FileType,WinEnter|}", {
+		autocmd(${2|"WinEnter","BufEnter","BufPostRead","TextChanged","CursorHold"|}, {
 			group = "${1:groupname}",
 			callback = function()
 				$0
 			end,
 		})
 	]]),
-	snip("FileType autocmd", [[
+	snip("autocmd (FileType)", [[
 		augroup("${1:groupname}", {\})
 		autocmd("FileType", {
 			group = "${1:groupname}",
@@ -154,14 +154,6 @@ add("lua", {
 			end,
 		})
 	]]),
-})
-
-augroup("bla", {})
-autocmd("FileType", {
-	group = "bla",
-	callback = function()
-		
-	end,
 })
 
 -- AppleScript

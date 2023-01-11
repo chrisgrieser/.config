@@ -330,9 +330,9 @@ return {
 			local ls = require("luasnip")
 
 			-- luasnip-style snippets
-			require("lua-snips") 
+			require("lua-snips")
 
-			-- VS-code-style snippets 
+			-- VS-code-style snippets
 			-- (INFO has to be loaded after the regular luasnip-snippets)
 			require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
 
@@ -344,28 +344,22 @@ return {
 
 			-- to be able to jump without <Tab> (e.g. when there is a non-needed suggestion)
 			vim.keymap.set({ "i", "s" }, "<D-j>", function()
-				if require("luasnip").expand_or_jumpable() then
+				if require("luasnip").choice_active() then
+					require("luasnip.extras.select_choice")()
+					return "<Esc>" -- HACK so we do not end up in insert mode
+				elseif require("luasnip").jumpable(1) then
 					require("luasnip").jump(1)
 				else
-					vim.notify("No Jump available.", vim.log.levels.WARN)
+					vim.notify("No Jump or Choice available.", vim.log.levels.WARN)
 				end
-			end, {desc = "LuaSnip: Jump"})
+			end, { desc = "LuaSnip: Jump", expr = true })
 			vim.keymap.set({ "i", "s" }, "<D-S-j>", function()
 				if require("luasnip").jumpable(-1) then
 					require("luasnip").jump(-1)
 				else
 					vim.notify("No Jump back available.", vim.log.levels.WARN)
 				end
-			end, {desc = "LuaSnip: Jump Back"})
-			vim.keymap.set({ "i", "s" }, "<D-k>", function()
-				if require("luasnip").choice_active() then
-					require("luasnip").change_choice(1)
-				elseif bo.filetype == "markdown" then
-					return "<D-k>" -- for markdown's link creation
-				else
-					vim.notify("No choice available.", vim.log.levels.WARN)
-				end
-			end, {desc = "LuaSnip: Next Choice", expr = true})
+			end, { desc = "LuaSnip: Jump Back" })
 
 			-- needs to come after snippet definitions
 			ls.filetype_extend("typescript", { "javascript" }) -- typescript uses all javascript snippets
