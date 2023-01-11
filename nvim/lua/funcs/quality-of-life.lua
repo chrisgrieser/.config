@@ -290,6 +290,15 @@ end
 --------------------------------------------------------------------------------
 -- GIT
 
+---@param commitMsg string
+---@param gitShellOpts table
+local function shimmeringFocusBuild(commitMsg, gitShellOpts)
+	vim.notify(' Building theme…\n"' .. commitMsg .. '"')
+	local buildScript =
+		expand("~/Library/Mobile Documents/com~apple~CloudDocs/Repos/shimmering-focus/build.sh")
+	fn.jobstart('zsh "' .. buildScript .. '" "' .. commitMsg .. '"', gitShellOpts)
+end
+
 ---@param prefillMsg? string
 function M.addCommitPush(prefillMsg)
 	if not prefillMsg then prefillMsg = "" end
@@ -323,6 +332,8 @@ function M.addCommitPush(prefillMsg)
 			-- HACK for linters writing the current file, and autoread failing, preventing to
 			-- quit the file. Requires manual reloading via `:edit`.
 			if bo.modifiable then cmd.edit() end
+			-- specific to my setup
+			os.execute("sketchybar --trigger repo-files-update")
 		end,
 	}
 
@@ -362,10 +373,7 @@ function M.addCommitPush(prefillMsg)
 
 			-- Shimmering Focus specific actions instead
 			if expand("%:p"):find("themes/Shimmering Focus/theme.css$") then
-				vim.notify(' Building theme…\n"' .. commitMsg .. '"')
-				local buildScript =
-					expand("~/Library/Mobile Documents/com~apple~CloudDocs/Repos/shimmering-focus/build.sh")
-				fn.jobstart('zsh "' .. buildScript .. '" "' .. commitMsg .. '"', gitShellOpts)
+				shimmeringFocusBuild(commitMsg, gitShellOpts)
 				return
 			end
 

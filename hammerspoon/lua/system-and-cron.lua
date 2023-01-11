@@ -163,7 +163,11 @@ function trackpadBatteryCheck()
 	if tonumber(trackpadPercent) < warningLevel then
 		local msg = "Trackpad Battery is low (" .. trackpadPercent .. "%)"
 		-- write to drafts inbox (= new draft without opening Drafts)
-		hs.execute('echo "' .. msg .. [[" > "$HOME/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/battery.md"]])
+		hs.execute(
+			'echo "'
+				.. msg
+				.. [[" > "$HOME/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/battery.md"]]
+		)
 	end
 end
 
@@ -198,10 +202,9 @@ end)
 local function sleepMovieApps()
 	local minutesIdle = hs.host.idleTime() / 60
 	if minutesIdle < 30 then return end
-	quitApp("YouTube")
-	quitApp("Twitch")
+	quitApp { "YouTube", "Twitch", "CrunchyRoll" }
 	-- no need to quit IINA, since it autoquits on finishing playback
-	-- no need to quit Netflix or CrunchyRoll, since they autostops
+	-- no need to quit Netflix since it autostops
 	applescript([[
 		tell application "Brave Browser"
 			if ((count of window) is not 0)
