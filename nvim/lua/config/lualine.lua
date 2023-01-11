@@ -76,7 +76,7 @@ local function searchCounter()
 	local searchTerm = fn.getreg("/")
 	local isStarSearch = searchTerm:find([[^\<.*\>$]])
 	if isStarSearch then searchTerm = "*" .. searchTerm:sub(3, -3) end
-	if total == 0 then return " 0 ".. searchTerm end
+	if total == 0 then return " 0 " .. searchTerm end
 	return " " .. current .. "/" .. total .. " " .. searchTerm
 end
 
@@ -93,7 +93,7 @@ local function currentFile()
 		if curFile == "" then curFile = ft end
 		return " " .. curFile -- e.g. Codi
 	elseif curFile == "" and ft ~= "" then
-		return " " .. ft 
+		return " " .. ft
 	elseif curFile == "" and ft == "" then
 		return "%% [New]"
 	elseif curFile == altFile then
@@ -105,7 +105,6 @@ local function currentFile()
 end
 
 --------------------------------------------------------------------------------
-
 
 -- nerdfont: 'nf-ple'; since separators look off in Terminal
 local bottomSeparators = isGui() and { left = " ", right = " " } or { left = "", right = "" }
@@ -120,7 +119,15 @@ require("lualine").setup {
 		},
 		lualine_x = {
 			{ lsp_progress },
-			"diagnostics",
+			{
+				"diagnostics",
+				symbols = {
+					error = " ",
+					warn = " ",
+					info = " ",
+					hint = " ",
+				},
+			},
 			{ mixedIndentation },
 		},
 		lualine_y = {
@@ -175,7 +182,7 @@ require("lualine").setup {
 		section_separators = bottomSeparators,
 		disabled_filetypes = {
 			statusline = {},
-			winbar = {"toggleterm", "gitcommit"},
+			winbar = { "toggleterm", "gitcommit" },
 		},
 	},
 }
