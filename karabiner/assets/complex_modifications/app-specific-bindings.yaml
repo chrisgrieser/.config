@@ -232,7 +232,7 @@ rules:
         to:
           - shell_command: open 'hammerspoon://copy-last-command'
         conditions: [{type: frontmost_application_if, bundle_identifiers: [^org\.hammerspoon\.Hammerspoon$]}]
-  - description: "\U0001F170️\U0001F4AC Slack"
+  - description: "(App) Slack"
     # https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
     # INFO: cmd+e for inline code is in the Discord-Section
     manipulators:
@@ -278,6 +278,13 @@ rules:
           - key_code: up_arrow
             modifiers: [option]
         conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$]}]
+      # react to top msg with emoji
+      - type: basic
+        from: {key_code: o, modifiers: {mandatory: [command]}}
+        to:
+          - {key_code: tab, modifiers: [shift]}
+          - key_code: r
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$]}]
   - description: "Alfred Preferences: cmd+0 as cmd+9"
     manipulators:
       - type: basic
@@ -285,7 +292,7 @@ rules:
         to:
           - {key_code: "9", modifiers: [command]}
         conditions: [{type: frontmost_application_if, bundle_identifiers: [^com.runningwithcrayons.Alfred-Preferences$]}]
-  - description: "\U0001F170️\U0001F4AC Discord"
+  - description: "(App) Discord"
     manipulators:
       # HACK ctrl-h & ctrl-l to go back / forward a channel cannot be mapped
       # directly in Discord, since they seem to capture things.
