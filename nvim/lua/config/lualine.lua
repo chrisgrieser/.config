@@ -114,7 +114,7 @@ local topSeparators = isGui() and { left = "", right = "" } or { left = ""
 require("lualine").setup {
 	sections = {
 		lualine_a = { { currentFile } },
-		lualine_b = { { require("funcs.alt-alt-file").altFileStatusline } },
+		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
 			{ searchCounter },
 		},

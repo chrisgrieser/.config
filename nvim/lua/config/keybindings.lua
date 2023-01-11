@@ -377,7 +377,7 @@ keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode goes to Visual Block Mod
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " open buffers" })
 -- INFO: <BS> to cycle buffer has to be set in cybu config
 
-local altalt = require("funcs.alt-alt-file")
+local altalt = require("funcs.alt-alt")
 keymap("n", "<CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/window" })
 
 if isGui() then
