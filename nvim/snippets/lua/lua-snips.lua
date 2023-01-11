@@ -137,7 +137,7 @@ add("lua", {
 	]]),
 	snip("autocmd & augroup", [[
 		augroup("${1:groupname}", {\})
-		autocmd("${2:event}", {
+		autocmd("${2|FileType,WinEnter|}", {
 			group = "${1:groupname}",
 			callback = function()
 				$0
@@ -154,6 +154,14 @@ add("lua", {
 			end,
 		})
 	]]),
+})
+
+augroup("bla", {})
+autocmd("FileType", {
+	group = "bla",
+	callback = function()
+		
+	end,
 })
 
 -- AppleScript

@@ -357,6 +357,15 @@ return {
 					vim.notify("No Jump back available.", vim.log.levels.WARN)
 				end
 			end, {desc = "LuaSnip: Jump Back"})
+			vim.keymap.set({ "i", "s" }, "<D-k>", function()
+				if require("luasnip").choice_active() then
+					require("luasnip").change_choice(1)
+				elseif bo.filetype == "markdown" then
+					return "<D-k>" -- for markdown's link creation
+				else
+					vim.notify("No choice available.", vim.log.levels.WARN)
+				end
+			end, {desc = "LuaSnip: Next Choice", expr = true})
 
 			-- needs to come after snippet definitions
 			ls.filetype_extend("typescript", { "javascript" }) -- typescript uses all javascript snippets
