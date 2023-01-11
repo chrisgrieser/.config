@@ -4,7 +4,7 @@
 function run(input) {
 	// 👉 CONFIG
 	const markdownApp = "Neovim"; // default markdown app
-	let vaultDummyFolder = "~/main-vault/Meta/Canvases Outside/"; // where outside canvas symlinks will be placed
+	let vaultDummyFolder = "~/main-vault/Meta/outside-canvas-symlink-temp/"; // where outside canvas symlinks will be placed
 
 	//───────────────────────────────────────────────────────────────────────────
 
