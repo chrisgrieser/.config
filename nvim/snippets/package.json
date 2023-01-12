@@ -65,6 +65,12 @@
 			},
 			{
 				"language": [
+					"typescript"
+				],
+				"path": "./basic/typescript.json"
+			},
+			{
+				"language": [
 					"jxa"
 				],
 				"path": "./basic/jxa.json"
@@ -86,6 +92,12 @@
 					"javascript"
 				],
 				"path": "./project-specific/alfred-jxa.json"
+			},
+			{
+				"language": [
+					"applescript"
+				],
+				"path": "./project-specific/alfred-applescript.json"
 			},
 			{
 				"language": [

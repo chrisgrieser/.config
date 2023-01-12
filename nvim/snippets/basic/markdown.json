@@ -1,11 +1,25 @@
 {
-	"Insert task list": {
-		"prefix": "task",
-		"body": [
-			"- [${1| ,x|}] ${2:text}",
-			"${0}"
+	"info (GitHub Callout)": {
+		"prefix": [
+			"info (GitHub Callout)",
+			"note (GitHub Callout)"
 		],
-		"description": "Insert task list"
+		"body": [
+			"> __Note__  ",
+			"> $0"
+		]
+	},
+	"warning (GitHub Callout)": {
+		"prefix": "warning (GitHub Callout)",
+		"body": [
+			"> __Warning__  ",
+			"> $0"
+		]
+	},
+	"Insert task": {
+		"prefix": "task",
+		"body": "- [ ] $0",
+		"description": "Insert task"
 	},
 	"Insert 2x2 table": {
 		"prefix": "2x2table",

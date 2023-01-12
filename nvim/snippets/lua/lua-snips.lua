@@ -11,55 +11,8 @@ require("luasnip").cleanup() -- clears all snippets for resourcing this file
 -- stylua: ignore start
 --------------------------------------------------------------------------------
 
--- Shell (zsh)
-add("zsh", {
-	snip("shebang", "#!/usr/bin/env zsh\n$0"),
-
-	snip("default arg value", '${1:input}=${1-"${2:default_value}"}'),
-	snip("slice", '${${1:var}:${2:start}:${3:length}}'),
-	snip("substitute", "${${1:var}/${2:search}/${3:replace}}"),
-
-	snip("PATH", "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\\$PATH\n$0"),
-	snip("resolve home", '${1:path}="${${1:path}/#\\~/\\$HOME}"'),
-	snip("filename", 'file_name=$(basename "$${1:file_path}")'),
-	snip("parent folder", '$(dirname "$${1:filepath}")'),
-	snip("ext", "ext=${${1:file_name}shebang*.}"),
-	snip("filename w/o ext", "${1:file_name}=${${1:file_name}%.*}"),
-	snip("directory of script", 'cd "$(dirname "\\$0")"\n$0'),
-
-	snip("notify", [[osascript -e "display notification \"\" with title \"$${1:var}\""]]),
-
-	snip("if (short)", '[[ "$${1:var}" ]] && $0'),
-	snip("ternary", '[[ "$${1:cond}" ]] && ${2:var}="$${3:one}" || ${2:var}="$${4:two}"'),
-	snip("if .. then", 'if [[ "$${1:var}" ]]; then\n\t$0\nfi'),
-	snip("if .. then .. else", 'if [[ "$${1:var}" ]]; then\n\t$2\nelse\n\t$0\nfi'),
-	snip("check installed", 'if ! command -v ${1:cli} &>/dev/null; then echo "${1:cli} not installed." && exit 1; fi\n$0'),
-
-	snip("stderr (pipe)", "2>&1 "),
-	snip("null (pipe)", "&>/dev/null "),
-	snip("sed (pipe)", "sed -E 's/${1:pattern}/${2:replacement}/g'"),
-
-	snip("plist: extract key", 'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'),
-	snip("running process", 'pgrep -x "${1:process}" > /dev/null && $0'),
-	snip("quicklook", 'qlmanage -p "${1:filepath}"'), -- mac only
-	snip("sound", 'afplay "/System/Library/Sounds/${1:Submarine}.aiff"'), -- mac only
-
-})
-
--- Lua
-add("lua", {
-	snip("trim trailing line break", ':gsub("\\n$", "")'),
-	snip("ignore (stylua)", "-- stylua: ignore start\n-- stylua: ignore end"),
-	snip("ignore block (stylua)", "-- stylua: ignore"),
-	snip("ignore (selene)", "-- selene: allow(${1:rule_name})"),
-	snip("ignore (selene global)", "--# selene: allow(${1:rule_name})"),
-})
-
 -- nvim-lua
 add("lua", {
-	snip("keymap", 'keymap("n", "$1", $2, {desc = "$3"})'),
-	snip("keymap (buffer)", 'keymap("n", "$1", $2, {desc = "$3", buffer = true})'),
-	snip("keymap (multi-mode)", 'keymap({"n", "x"}, "$1", $2, {desc = "$3"})'),
 	snip("input (vim.ui)", [[
 		vim.ui.input({ prompt = "${1:prompt_msg}"}, function (input)
 			if not(input) then return end
@@ -96,12 +49,8 @@ add("lua", {
 
 -- AppleScript
 add("applescript", {
-	snip("get selection (Finder)", 'tell application "Finder" to return POSIX path of (selection as alias)'),
-	snip("browser URL", 'tell application "Brave Browser" to set currentTabUrl to URL of active tab of front window\n$0'),
 	snip("browser tab title",
 		'tell application "Brave Browser" to set currentTabName to title of active tab of front window\n$0'),
-	snip("notify", 'display notification "${2:subtitle}" with title "${1:title}"\n$0'),
-	snip("shebang", "#!/usr/bin/env osascript\n$0"),
 	snip("menu item", [[
 		tell application "System Events" to tell process "${1:process}"
 			set frontmost to true
@@ -114,9 +63,6 @@ add("applescript", {
 			click menu item "${2:item}" of menu of menu item "${3:submenu}" of menu "${4:menu}" of menu bar 1
 		end tell
 	]]),
-	snip("keystroke", [[tell application "System Events" to keystroke "${1:key}" using {${2:command} down}]]),
-	snip("key code", [[tell application "System Events" to key code "${1:num}"]]),
-	snip("home", "(POSIX path of (path to home folder as string))"),
 	snip("resolve home", [[
 		set unresolved_path to "~/Documents"
 		set AppleScript's text item delimiters to "~/"
@@ -129,44 +75,16 @@ add("applescript", {
 
 -- Alfred AppleScript
 add("applescript", {
-	snip("Get Alfred Env", 'set ${1:envvar} to (system attribute "${1:envvar}")'),
 	snip("Get Alfred Env (Unicode Fix)",
 		'set ${1:envvar} to do shell script "echo " & quoted form of (system attribute "${1:envvar}") & " | iconv -f UTF-8-MAC -t MACROMAN"\n$0'),
 	snip("Set Alfred Env",
 		'tell application id "com.runningwithcrayons.Alfred" to set configuration "${1:envvar}" to value ${2:value} in workflow (system attribute "alfred_workflow_bundleid")\n$0'),
-	snip("argv", "set input to argv as string\n$0"),
 	snip("Remove Alfred Env",
 		'tell application id "com.runningwithcrayons.Alfred" to remove configuration "${1:var}" in workflow (system attribute "alfred_workflow_bundleid")'),
 })
 
--- Markdown
-add("markdown", {
-	snip("info (GitHub Callout)", "> __Note__  \n> $0"),
-	snip("note (GitHub Callout)", "> __Note__  \n> $0"),
-	snip("warning (GitHub Callout)", "> __Warning__  \n> $0"),
-	snip("vale ignore (Comment)", "<!-- vale ${1:Style${}.${2:Rule} = NO -->\n<!-- vale ${1:Style}.${2:Rule} = YES -->"),
-})
-
--- TypeScript
-add("typescript", {
-	snip("ignore (tsignore)", "// @ts-ignore"),
-})
-
--- JavaScript (General)
-add("javascript", {
-	snip("replace", 'replace(/${1:regexp}/gm, "${2:replacement}");'),
-	snip("ternary", "${1:cond} ? ${2:yes} : ${3:no}"),
-	snip("ISO date", "new Date().toISOString().slice(0, 10);"),
-	snip("ignore (prettier)", "// prettier-ignore\n$0"),
-})
-
 -- JXA-specific
 add("javascript", {
-	snip("running check", 'Application("${1:appName}").running()'),
-	snip("check frontmost", 'Application("${1:appName}").frontmost();'),
-	snip("running apps array", 'Application("System Events").applicationProcesses.where({ backgroundOnly: false }).displayedName();'),
-	snip("running apps array", 'app.displayNotification("${1:msg}", { withTitle: "${2:title}" });'),
-
 	snip("window path (Finder)", [[
 		function finderFrontWindow(){
 			const posixPath = (finderWindow) => $.NSURL.alloc.initWithString(finderWindow.target.url()).fileSystemRepresentation;
@@ -181,8 +99,6 @@ add("javascript", {
 		}
 	]]),
 
-	snip("shebang", "#!/usr/bin/env osascript -l JavaScript\n$0"),
-	snip("online JSON", 'const onlineJSON = (url) => JSON.parse(app.doShellScript(`curl -s "${url}"`));'),
 	snip("read file", [[
 		function readFile(path) {
 			const fm = $.NSFileManager.defaultManager;
@@ -197,13 +113,6 @@ add("javascript", {
 			str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
 		}
 	]]),
-	snip("app", "const app = Application.currentApplication();\napp.includeStandardAdditions = true;\n$0"),
-	snip("shell script", "app.doShellScript(`${1:shellscript}`);\n$0"),
-	snip("open", 'app.openLocation("${1:url}");\n$0'),
-	snip("clipboard", 'app.setTheClipboardTo("${1:str}");\n$0'),
-	snip("home (JXA)", 'app.pathTo("home folder")'),
-	snip("resolve home (JXA)", 'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/, app.pathTo("home folder"));'),
-	snip("exists (file)", 'const fileExists = (filePath) => Application("Finder").exists(Path(filePath));\n$0'),
 	snip("browser URL & title (function)", [[
 		function browserTab() {
 			const frontmostAppName = Application("System Events").applicationProcesses.where({ frontmost: true }).name()[0];
@@ -259,7 +168,6 @@ add("javascript", {
 
 		JSON.stringify({ items: jsonArray });
 	]]),
-	snip("Get Alfred Env", 'const ${1:envVar} = $.getenv("${2:envVar}");\n$0'),
 	snip("Get Alfred Env (safe)", [[
 	function env(envVar) {
 		let out;
@@ -270,7 +178,6 @@ add("javascript", {
 	]]),
 	snip("Get Alfred Env (+ resolve home)",
 		'const ${1:envVar} = $.getenv("${2:envVar}").replace(/^~/, app.pathTo("home folder"));\n$0'),
-	-- workaround cause of unreliable saving of variables by Alfred
 	snip("read Alfred data", [[
 		function readData (key) {
 			const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
@@ -301,18 +208,5 @@ add("javascript", {
 			});
 		}
 		$0
-	]]),
-})
-
--- YAML (Karabiner config)
-add("yaml", {
-	snip("delay (Karabiner)", [[
-	- {key_code: vk_none, hold_down_milliseconds: ${1:50}}
-	]]),
-	snip("to (Karabiner)", [[
-	- {key_code: ${1:key}, modifiers: [${2:command}]}
-	]]),
-	snip("from (Karabiner)", [[
-	from: {key_code: ${1:key}, modifiers: {mandatory: [${2:command}]}}
 	]]),
 })

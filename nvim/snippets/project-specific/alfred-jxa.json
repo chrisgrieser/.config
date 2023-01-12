@@ -1,3 +1,6 @@
 {
-
+	"Get Alfred Env": {
+		"prefix": "Get Alfred Env",
+		"body": "'const ${1:envVar} = $.getenv(\"${2:envVar}\");"
+	}
 }
