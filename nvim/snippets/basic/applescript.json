@@ -18,5 +18,38 @@
 	"key code": {
 		"prefix": "key code",
 		"body": "tell application \"System Events\" to key code ${1:num} using {${2:command} down}"
+	},
+	"browser tab title": {
+		"prefix": "browser tab title",
+		"body": "tell application \"Brave Browser\" to set currentTabName to title of active tab of front window"
+	},
+	"menu item": {
+		"prefix": "menu item",
+		"body": [
+			"tell application \"System Events\" to tell process \"${1:process}\"",
+			"set frontmost to true",
+			"click menu item \"${2:item}\" of menu \"${3:menu}\" of menu bar 1",
+			"end tell"
+		]
+	},
+	"submenu item": {
+		"prefix": "submenu item",
+		"body": [
+			"tell application \"System Events\" to tell process \"${1:process}\"",
+			"set frontmost to true",
+			"click menu item \"${2:item}\" of menu of menu item \"${3:submenu}\" of menu \"${4:menu}\" of menu bar 1",
+			"end tell"
+		]
+	},
+	"resolve home": {
+		"prefix": "resolve home",
+		"body": [
+			"set unresolved_path to \"~/Documents\"",
+			"set AppleScript's text item delimiters to \"~/\"",
+			"set theTextItems to every text item of unresolved_path",
+			"set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))",
+			"set resolved_path to theTextItems as string"
+		],
+		"description": "desc"
 	}
 }
