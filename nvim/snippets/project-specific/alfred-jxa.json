@@ -2,5 +2,88 @@
 	"Get Alfred Env": {
 		"prefix": "Get Alfred Env",
 		"body": "'const ${1:envVar} = $.getenv(\"${2:envVar}\");"
+	},
+	"argv": {
+		"prefix": "",
+		"body": [
+			"function run(argv){",
+			"const ${1:query} = argv[0];",
+			"}"
+		]
+	},
+	"Modifiers (Script Filter)": {
+		"prefix": "",
+		"body": [
+			"\"mods\": {",
+			"\"cmd\": { \"arg\": \"foo\" },",
+			"\"alt\": {",
+			"\"arg\": \"bar\",",
+			"\"subtitle\": \"⌥: Copy Link\",",
+			"},"
+		]
+	},
+	"Script Filter": {
+		"prefix": "",
+		"body": [
+			"const jsonArray = app.doShellScript(`$1`)",
+			".split(\"\r\")",
+			".map(item => {",
+			"$2",
+			"return {",
+			"\"title\": item,",
+			"\"match\": alfredMatcher (item),",
+			"\"subtitle\": item,",
+			"\"type\": \"file:skipcheck\",",
+			"\"icon\": { \"type\": \"fileicon\", \"path\": item },",
+			"\"arg\": item,",
+			"\"uid\": item,",
+			"};",
+			"});",
+			"JSON.stringify({ items: jsonArray",
+			"});"
+		]
+	},
+	"Get Alfred Env (safe)": {
+		"prefix": "",
+		"body": [
+			"function env(envVar) {",
+			"let out;",
+			"try { out = $.getenv(envVar)",
+			"}",
+			"catch (e) { out = \"\" }",
+			"return out;",
+			"}"
+		]
+	},
+	"read Alfred data": {
+		"prefix": "",
+		"body": [
+			"function readData (key) {",
+			"const fileExists = (filePath) => Application(\"Finder\").exists(Path(filePath));",
+			"const dataPath = $.getenv(\"alfred_workflow_data\") + \"/\" + key;",
+			"if (!fileExists(dataPath)) return \"data does not exist.\";",
+			"const data = $.NSFileManager.defaultManager.contentsAtPath(dataPath);",
+			"const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);",
+			"return ObjC.unwrap(str);",
+			"}"
+		]
+	},
+	"write Alfred data": {
+		"prefix": "",
+		"body": [
+			"function writeData(key, newValue) {",
+			"const dataFolder = $.getenv(\"alfred_workflow_data\");",
+			"const fileManager = $.NSFileManager.defaultManager;",
+			"const folderExists = fileManager.fileExistsAtPath(dataFolder);",
+			"if (!folderExists) fileManager.createDirectoryAtPathWithIntermediateDirectoriesAttributesError(dataFolder,",
+			"false, $(), $());",
+				"const dataPath = `\${dataFolder",
+						"}/\${key",
+			"}`;",
+			"const str = $.NSString.alloc.initWithUTF8String(newValue);",
+			"str.writeToFileAtomicallyEncodingError(dataPath,",
+			"true, $.NSUTF8StringEncoding, null);",
+			"}"
+		]
 	}
 }

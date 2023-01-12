@@ -45,5 +45,66 @@
 	"exists (file)": {
 		"prefix": "exists (file)",
 		"body": "'const fileExists = (filePath) => Application(\"Finder\").exists(Path(filePath));"
+	},
+	"window path (Finder)": {
+		"prefix": "window path (Finder)",
+		"body": [
+			"function finderFrontWindow(){",
+			"\tconst posixPath = (finderWindow) => $.NSURL.alloc.initWithString(finderWindow.target.url()).fileSystemRepresentation;",
+			"\treturn posixPath(Application(\"Finder\").finderWindows[0]);",
+			"}"
+		]
+	},
+	"selection (Finder)": {
+		"prefix": "selection (Finder)",
+		"body": [
+			"function finderSelection () {",
+			"\tconst selection = decodeURI(Application(\"Finder\").selection()[0]?.url());",
+			"\tif (selection === \"undefined\") return \"\"; // no selection",
+			"\treturn selection.slice(7);",
+			"}"
+		]
+	},
+	"read file": {
+		"prefix": "read file",
+		"body": [
+			"function readFile(path) {",
+			"\tconst fm = $.NSFileManager.defaultManager;",
+			"\tconst data = fm.contentsAtPath(path);",
+			"\tconst str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);",
+			"\treturn ObjC.unwrap(str);",
+			"}"
+		]
+	},
+	"write file": {
+		"prefix": "write file",
+		"body": [
+			"function writeToFile(file, text) {",
+			"\tconst str = $.NSString.alloc.initWithUTF8String(text);",
+			"\tstr.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);",
+			"}"
+		]
+	},
+	"browser URL & title (function)": {
+		"prefix": "window path (Finder)",
+		"body": [
+			"function browserTab() {",
+			"\tconst frontmostAppName = Application(\"System Events\").applicationProcesses.where({ frontmost: true }).name()[0];",
+			"\tconst frontmostApp = Application(frontmostAppName);",
+			"\tconst chromiumVariants = [\"Google Chrome\", \"Chromium\", \"Opera\", \"Vivaldi\", \"Brave Browser\", \"Microsoft Edge\"];",
+			"\tconst webkitVariants = [\"Safari\", \"Webkit\"];",
+			"\tlet title, url;",
+			"\tif (chromiumVariants.some(appName => frontmostAppName.startsWith(appName))) {",
+			"\t\turl = frontmostApp.windows[0].activeTab.url();",
+			"\t\ttitle = frontmostApp.windows[0].activeTab.name();",
+			"\t} else if (webkitVariants.some(appName => frontmostAppName.startsWith(appName))) {",
+			"\t\turl = frontmostApp.documents[0].url();",
+			"\t\ttitle = frontmostApp.documents[0].name();",
+			"\t} else {",
+			"\t\treturn \"You need a supported browser as your frontmost app\";",
+			"\t}",
+			"\t\treturn { \"url\": url, \"title\": title };",
+			"}"
+		]
 	}
 }

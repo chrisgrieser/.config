@@ -11,57 +11,6 @@ require("luasnip").cleanup() -- clears all snippets for resourcing this file
 -- stylua: ignore start
 --------------------------------------------------------------------------------
 
--- JXA-specific
-add("javascript", {
-	snip("window path (Finder)", [[
-		function finderFrontWindow(){
-			const posixPath = (finderWindow) => $.NSURL.alloc.initWithString(finderWindow.target.url()).fileSystemRepresentation;
-			return posixPath(Application("Finder").finderWindows[0]);
-		}
-	]]),
-	snip("selection (Finder)", [[
-		function finderSelection () {
-			const selection = decodeURI(Application("Finder").selection()[0]?.url());
-			if (selection === "undefined") return ""; // no selection
-			return selection.slice(7);
-		}
-	]]),
-
-	snip("read file", [[
-		function readFile(path) {
-			const fm = $.NSFileManager.defaultManager;
-			const data = fm.contentsAtPath(path);
-			const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
-			return ObjC.unwrap(str);
-		}
-	]]),
-	snip("write file", [[
-		function writeToFile(file, text) {
-			const str = $.NSString.alloc.initWithUTF8String(text);
-			str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
-		}
-	]]),
-	snip("browser URL & title (function)", [[
-		function browserTab() {
-			const frontmostAppName = Application("System Events").applicationProcesses.where({ frontmost: true }).name()[0];
-			const frontmostApp = Application(frontmostAppName);
-			const chromiumVariants = ["Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge"];
-			const webkitVariants = ["Safari", "Webkit"];
-			let title, url;
-			if (chromiumVariants.some(appName => frontmostAppName.startsWith(appName))) {
-				url = frontmostApp.windows[0].activeTab.url();
-				title = frontmostApp.windows[0].activeTab.name();
-			} else if (webkitVariants.some(appName => frontmostAppName.startsWith(appName))) {
-				url = frontmostApp.documents[0].url();
-				title = frontmostApp.documents[0].name();
-			} else {
-				return "You need a supported browser as your frontmost app";
-			}
-			return { "url": url, "title": title };
-		}
-	]]),
-})
-
 -- Alfred JXA
 add("javascript", {
 	snip("argv", [[
@@ -93,7 +42,6 @@ add("javascript", {
 					"uid": item,
 				};
 			});
-
 		JSON.stringify({ items: jsonArray });
 	]]),
 	snip("Get Alfred Env (safe)", [[
