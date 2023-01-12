@@ -17,11 +17,10 @@
 			"\t\"body\": [",
 			"\t\t\"$2\"",
 			"\t\t\"$3\"",
-			"],",
+			"\t],",
 			"\t\"description\": \"${4:desc}\"",
 			"},"
 		],
 		"description": "VS Code Snippet (short)"
-	},
-	"sni"
+	}
 }

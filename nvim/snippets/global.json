@@ -1,6 +1,6 @@
 {
 	"modeline": {
-		"prefix": "",
+		"prefix": "modeline",
 		"body": "vim: filetype=\n$0"
 	},
 	"cmd": {

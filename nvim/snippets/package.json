@@ -61,20 +61,20 @@
 				"language": [
 					"json"
 				],
-				"path": "./projects-specific/vscode-snippets.json"
+				"path": "./project-specific/vscode-snippets.json"
 			},
 			{
 				"language": [
 					"typescript"
 				],
-				"path": "./projects-specific/obsidian-plugin-dev.json"
+				"path": "./project-specific/obsidian-plugin-dev.json"
 			},
 			{
 				"language": [
 					"css",
 					"scss"
 				],
-				"path": "./projects-specific/obsidian-theme-dev.json"
+				"path": "./project-specific/obsidian-theme-dev.json"
 			}
 		]
 	}
