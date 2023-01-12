@@ -18,7 +18,6 @@ add("zsh", {
 	snip("default arg value", '${1:input}=${1-"${2:default_value}"}'),
 	snip("slice", '${${1:var}:${2:start}:${3:length}}'),
 	snip("substitute", "${${1:var}/${2:search}/${3:replace}}"),
-	snip("URL encode", [[encoded_text=$(python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])" "$text")]]),
 
 	snip("PATH", "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\\$PATH\n$0"),
 	snip("resolve home", '${1:path}="${${1:path}/#\\~/\\$HOME}"'),
@@ -71,16 +70,11 @@ add("lua", {
 		$2
 	end
 	]]),
-	snip("trim trailing \n", ':gsub("\\n$", "")'),
+	snip("trim trailing line break", ':gsub("\\n$", "")'),
 	snip("ignore (stylua)", "-- stylua: ignore start\n-- stylua: ignore end"),
 	snip("ignore block (stylua)", "-- stylua: ignore"),
 	snip("ignore (selene)", "-- selene: allow(${1:rule_name})"),
 	snip("ignore (selene global)", "--# selene: allow(${1:rule_name})"),
-	snip("for (list)", [[
-	for _, ${1:v} in pairs(${2:list_table}) do
-		$0
-	end
-	]]),
 })
 
 -- nvim-lua
