@@ -11,6 +11,18 @@ require("luasnip").cleanup() -- clears all snippets for resourcing this file
 -- stylua: ignore start
 --------------------------------------------------------------------------------
 
+-- spellfixing
+add("all", {
+	snip("nto", "not"),
+	snip("sicne", "since"),
+	snip("teh", "the"),
+}, {
+	type = "autosnippets",
+	key = "all_auto",
+})
+
+--------------------------------------------------------------------------------
+
 add("all", {
 	snip("modeline", "vim: filetype=\n$0"),
 
