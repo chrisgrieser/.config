@@ -52,10 +52,22 @@
 			},
 			{
 				"language": [
+					"applescript"
+				],
+				"path": "./basic/applescript.json"
+			},
+			{
+				"language": [
 					"javascript",
 					"typescript"
 				],
 				"path": "./basic/javascript.json"
+			},
+			{
+				"language": [
+					"jxa"
+				],
+				"path": "./basic/jxa.json"
 			},
 			{
 				"language": [
@@ -68,6 +80,12 @@
 					"typescript"
 				],
 				"path": "./project-specific/obsidian-plugin-dev.json"
+			},
+			{
+				"language": [
+					"javascript"
+				],
+				"path": "./project-specific/alfred-jxa.json"
 			},
 			{
 				"language": [

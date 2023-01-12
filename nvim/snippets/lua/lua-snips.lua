@@ -44,32 +44,10 @@ add("zsh", {
 	snip("quicklook", 'qlmanage -p "${1:filepath}"'), -- mac only
 	snip("sound", 'afplay "/System/Library/Sounds/${1:Submarine}.aiff"'), -- mac only
 
-	snip("reset color", "\\033[0m"),
-	snip("black", "\\033[1;30m"),
-	snip("red", "\\033[1;31m"),
-	snip("green", "\\033[1;32m"),
-	snip("yellow", "\\033[1;33m"),
-	snip("blue", "\\033[1;34m"),
-	snip("magenta", "\\033[1;35m"),
-	snip("cyan", "\\033[1;36m"),
-	snip("white", "\\033[1;37m"),
-	snip("black bg", "\\033[1;40m"),
-	snip("red bg", "\\033[1;41m"),
-	snip("green bg", "\\033[1;42m"),
-	snip("yellow bg", "\\033[1;43m"),
-	snip("blue bg", "\\033[1;44m"),
-	snip("magenta bg", "\\033[1;45m"),
-	snip("cyan bg", "\\033[1;46m"),
-	snip("white bg", "\\033[1;47m"),
 })
 
 -- Lua
 add("lua", {
-	snip("lf", [[
-	local function $1()
-		$2
-	end
-	]]),
 	snip("trim trailing line break", ':gsub("\\n$", "")'),
 	snip("ignore (stylua)", "-- stylua: ignore start\n-- stylua: ignore end"),
 	snip("ignore block (stylua)", "-- stylua: ignore"),
