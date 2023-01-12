@@ -399,6 +399,11 @@ return {
 				end
 			end, { desc = "LuaSnip: Select Choice", expr = true, remap = true })
 
+			-- needs to come after snippet definitions
+			ls.filetype_extend("typescript", { "javascript" }) -- typescript uses all javascript snippets
+			ls.filetype_extend("bash", { "zsh" })
+			ls.filetype_extend("sh", { "zsh" })
+			ls.filetype_extend("scss", { "css" })
 		end,
 	},
 }

@@ -10,7 +10,7 @@
 	"local function": {
 		"prefix": "local function",
 		"body": [
-			"if ${1:true} then",
+			"local function $1()",
 			"\t$0",
 			"end"
 		]
