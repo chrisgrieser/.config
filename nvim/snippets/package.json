@@ -4,33 +4,71 @@
 		"https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vscode"
 	],
 	"name": "pseudometa-snippets",
+	"engines": {
+		"vscode": "^1.11.0"
+	},
 	"contributes": {
 		"snippets": [
 			{
 				"language": [
+					"global",
+					"all",
+					"plaintext"
+				],
+				"path": "./global.json"
+			},
+			{
+				"language": [
+					"markdown"
+				],
+				"path": "./languages/markdown.json"
+			},
+			{
+				"language": [
+					"python"
+				],
+				"path": "./languages/python.json"
+			},
+			{
+				"language": [
+					"gitcommit"
+				],
+				"path": "./languages/gitcommit.json"
+			},
+			{
+				"language": [
+					"bash",
+					"zsh",
+					"fish",
+					"sh"
+				],
+				"path": "./languages/shell.json"
+			},
+			{
+				"language": [
 					"lua"
 				],
-				"path": "./lua.json"
+				"path": "./languages/lua.json"
 			},
 			{
 				"language": [
 					"javascript",
 					"typescript"
 				],
-				"path": "./javascript.json"
+				"path": "./languages/javascript.json"
 			},
 			{
 				"language": [
 					"typescript"
 				],
-				"path": "./obsidian-plugin-dev.json"
+				"path": "./obsidian/obsidian-plugin-dev.json"
 			},
 			{
 				"language": [
 					"css",
 					"scss"
 				],
-				"path": "./obsidian-theme-dev.json"
+				"path": "./obsidian/obsidian-theme-dev.json"
 			}
 		]
 	}
