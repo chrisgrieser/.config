@@ -30,17 +30,9 @@
 			"end"
 		]
 	},
-	"local function": {
-		"prefix": "local function",
-		"body": [
-			"local function $1()",
-			"\t$0",
-			"end"
-		]
-	},
 	"guard clause ending": {
-		"prefix": "then ",
-		"body": "then return end\n$0"
+		"prefix": "then return end",
+		"body": "then return end"
 	},
 	"elseif": {
 		"prefix": "elseif",
