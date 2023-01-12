@@ -1,0 +1,14 @@
+{
+	"ignore (stylelint)": {
+		"prefix": "ignore (stylelint)",
+		"body": "/* stylelint-disable-line ${1:rule_name} */"
+	},
+	"ignore range (stylelint)": {
+		"prefix": "ignore range (stylelint)",
+		"body": [
+			"/* stylelint-disable ${1:rule_name} */",
+			"/* stylelint-enable ${1:rule_name} */"
+	],
+		"description": "desc"
+	}
+}

@@ -11,8 +11,6 @@ require("luasnip").cleanup() -- clears all snippets for resourcing this file
 -- stylua: ignore start
 --------------------------------------------------------------------------------
 
---------------------------------------------------------------------------------
-
 -- CSS
 add("css", {
 	snip("ignore (stylelint)", "/* stylelint-disable-line ${1:rule_name} */"),
