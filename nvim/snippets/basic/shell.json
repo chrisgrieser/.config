@@ -1,4 +1,5 @@
 {
+
 	"echo": {
 		"prefix": "echo",
 		"body": "echo \"${0:message}\"",
