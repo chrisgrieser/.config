@@ -11,18 +11,6 @@ require("luasnip").cleanup() -- clears all snippets for resourcing this file
 -- stylua: ignore start
 --------------------------------------------------------------------------------
 
--- spelling
--- INFO using these instead of vim abbreviations since they do not work with
--- added extra undo points
-add("all", {
-	snip("nto", "not"),
-	snip("sicne", "since"),
-	snip("teh", "the"),
-}, {
-	type = "autosnippets",
-	key = "all_auto",
-})
-
 --------------------------------------------------------------------------------
 
 -- CSS

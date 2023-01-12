@@ -323,6 +323,9 @@ return {
 			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
+
+	-----------------------------------------------------------------------------
+
 	{
 		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
@@ -342,6 +345,31 @@ return {
 				update_events = "TextChanged,TextChangedI", -- live updating of snippets
 				enable_autosnippets = true,
 			}
+
+			-- SPELLING
+			-- INFO using these instead of vim abbreviations since they do not work with
+			-- added extra undo points
+			local spellfixes = {
+				{"nto", "not"},
+				{"sicne", "since"},
+				{"teh", "the"},
+			}
+			local spellAutoFixes = {}
+			for _, wordPair in pairs(spellfixes) do
+				-- lsp-style-snippets for future-proofness
+				local parsed = require("luasnip").parser.parse_snippet ( wordPair[1], wordPair[2])
+				table.insert("")
+			end
+
+			local snip = require("luasnip").parser.parse_snippet -- lsp-style-snippets for future-proofness
+			require("luasnip").add_snippets("all", {
+				snip("nto", "not"),
+				snip("since", "since"),
+				snip("the", "the"),
+			}, {
+				type = "autosnippets",
+				key = "all_auto",
+			})
 
 			-- to be able to jump without <Tab> (e.g. when there is a non-needed suggestion)
 			vim.keymap.set({ "i", "s" }, "<D-j>", function()
