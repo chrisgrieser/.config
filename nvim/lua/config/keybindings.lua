@@ -307,7 +307,7 @@ local qlog = require("funcs.quicklog")
 keymap({ "n", "x" }, "<leader>ll", qlog.quicklog, { desc = " log" })
 keymap({ "n", "x" }, "<leader>lb", qlog.beeplog, { desc = " beep log" })
 keymap({ "n", "x" }, "<leader>lt", qlog.timelog, { desc = " time log" })
-keymap({ "n", "x" }, "<leader>lr", qlog.removelogs, { desc = "  log" })
+keymap({ "n", "x" }, "<leader>lr", qlog.removelogs, { desc = "  remove log" })
 keymap({ "n", "x" }, "<leader>ld", qlog.debuglog, { desc = " debugger" })
 
 -- Sort & highlight duplicate lines
@@ -406,9 +406,9 @@ if isGui() then
 
 	-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 	g.VM_maps = {
-		["Find Under"] = "<D-j>", -- select word under cursor and enter visual-multi (normal)
-		["Visual Add"] = "<D-j>", -- enter visual-multi (visual)
-		["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi)
+		["Find Under"] = "<D-j>", -- select word under cursor and enter visual-multi (normal mode)
+		["Visual Add"] = "<D-j>", -- enter visual-multi (visual mode)
+		["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi mode)
 	}
 
 	-- cut, copy & paste
