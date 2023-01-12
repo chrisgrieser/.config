@@ -8,6 +8,19 @@
 		"snippets": [
 			{
 				"language": [
+					"lua"
+				],
+				"path": "./lua.json"
+			},
+			{
+				"language": [
+					"javascript",
+					"typescript"
+				],
+				"path": "./javascript.json"
+			},
+			{
+				"language": [
 					"typescript"
 				],
 				"path": "./obsidian-plugin-dev.json"
