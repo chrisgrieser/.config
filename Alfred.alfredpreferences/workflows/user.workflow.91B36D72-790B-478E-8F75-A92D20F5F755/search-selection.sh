@@ -18,7 +18,6 @@ if [[ -z "$SEL" ]]; then
 	# restore clipboard
 	[[ -n "$PREV_CLIPBOARD" ]] && echo "$PREV_CLIPBOARD" | pbcopy
 fi
-
 # clean up
 SEL=$(echo -n "$SEL" | xargs echo -n) # trims whitespace
 SEL="${SEL/#\~/$HOME}"                # resolve ~
@@ -34,7 +33,7 @@ elif [[ "$SEL" =~ ^http.* ]]; then
 elif [[ "$SEL" =~ "@" ]]; then
 	open "mailto:$SEL"
 elif [[ -n "$SEL" ]]; then
-	URL_ENCODED_SEL=$(python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])" "$SEL")
+	URL_ENCODED_SEL=$(osascript -l JavaScript -e "encodeURIComponent('$SEL')")
 	open "https://www.google.com/search?q=$URL_ENCODED_SEL"
 	open "https://duckduckgo.com/?q=$URL_ENCODED_SEL+!ducky"
 fi
