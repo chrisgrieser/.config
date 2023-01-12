@@ -1,8 +1,46 @@
 {
-	"snip1": {
-		"prefix": "lua",
+	"if": {
+		"prefix": "if",
 		"body": [
-			"lualualua"
+			"if ${1:true} then",
+			"\t$0",
+			"end"
 		]
+	},
+	"elseif": {
+		"prefix": "elseif",
+		"body": [
+			"elseif ${1:true} then",
+			"\t$0"
+		]
+	},
+	"for": {
+		"prefix": "for",
+		"body": [
+			"for ${1:i}=${2:1},${3:10} do",
+			"\t$0",
+			"end"
+		],
+		"description": "for loop range"
+	},
+	"foreach": {
+		"prefix": "foreach",
+		"body": [
+			"for i, ${1:x} in pairs(${2:table}) do",
+			"\t$0",
+			"end"
+		]
+	},
+	"forline": {
+		"prefix": "forline",
+		"body": [
+			"f = io.open(${1:\"${2:filename}\"}, \"${3:r}\")\n",
+			"while true do",
+			"\tline = f:read()",
+			"\tif line == nil then break end\n",
+			"\t${0:-- code}",
+			"end"
+		],
+		"description": "read file line by line"
 	}
 }
