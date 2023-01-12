@@ -1,3 +1,14 @@
 {
-
+	"keymap": {
+		"prefix": "keymap",
+		"body": "keymap(\"n\", \"$1\", $2, { desc = \"\" }"
+	},
+	"keymap (multi mode)": {
+		"prefix": "keymap (multi-mode)",
+		"body": "keymap({ \"n\", \"x\" }, \"$1\", $2, { desc = \"\" }"
+	},
+	"keymap (buffer)": {
+		"prefix": "keymap (buffer)",
+		"body": "keymap(\"n\", \"$1\", $2, { desc = \"\", buffer = true }"
+	}
 }

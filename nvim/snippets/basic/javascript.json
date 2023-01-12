@@ -1,48 +1,15 @@
 {
-	"Public Method Definition": {
-		"prefix": "public method",
-		"body": [
-			"/**",
-			" * ${1:name}",
-			" */",
-			"public ${1:name}() {",
-			"\t$0",
-			"}"
-		],
-		"description": "Public Method Definition"
+	"replace": {
+		"prefix": "replace",
+		"body": "replace(/${1:regexp}/gm, \"$2\");"
 	},
-	"Private Method Definition": {
-		"prefix": "private method",
-		"body": [
-			"private ${1:name}() {",
-			"\t$0",
-			"}"
-		],
-		"description": "Private Method Definition"
+	"ISO date": {
+		"prefix": "ISO date",
+		"body": "new Date().toISOString().slice(0"
 	},
-	"Log to the console": {
-		"prefix": "log",
-		"body": [
-			"console.log($1);",
-			"$0"
-		],
-		"description": "Log to the console"
-	},
-	"Log warning to console": {
-		"prefix": "warn",
-		"body": [
-			"console.warn($1);",
-			"$0"
-		],
-		"description": "Log warning to the console"
-	},
-	"Log error to console": {
-		"prefix": "error",
-		"body": [
-			"console.error($1);",
-			"$0"
-		],
-		"description": "Log error to the console"
+	"ignore (prettier)": {
+		"prefix": "ignore (prettier)",
+		"body": "// prettier-ignore"
 	},
 	"For Loop": {
 		"prefix": "for",
@@ -54,7 +21,7 @@
 		],
 		"description": "For Loop"
 	},
-	"For-Each Loop using =>": {
+	"For-Each" :{
 		"prefix": "foreach =>",
 		"body": [
 			"${1:array}.forEach(${2:element} => {",
@@ -75,7 +42,7 @@
 		],
 		"description": "For-In Loop"
 	},
-	"For-Of Loop": {
+	"For-of Loop": {
 		"prefix": "forof",
 		"body": [
 			"for (const ${1:iterator} of ${2:object}) {",

@@ -1,0 +1,6 @@
+{
+	"ignore (tsignore)": {
+		"prefix": "ignore (tsignore)",
+		"body": "// @ts-ignore"
+	}
+}

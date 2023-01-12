@@ -1,3 +1,22 @@
 {
-
+	"get selection (Finder)": {
+		"prefix": "get selection (Finder)",
+		"body": "tell application \"Finder\" to return POSIX path of (selection as alias)"
+	},
+	"browser URL": {
+		"prefix": "browser URL",
+		"body": "tell application \"Brave Browser\" to set currentTabUrl to URL of active tab of front window"
+	},
+	"notify": {
+		"prefix": "notify",
+		"body": "display notification \"${2:subtitle}\" with title \"${1:title}\""
+	},
+	"keystroke": {
+		"prefix": "keystroke",
+		"body": "tell application \"System Events\" to keystroke \"${1:key}\" using {${2:command} down}"
+	},
+	"key code": {
+		"prefix": "key code",
+		"body": "tell application \"System Events\" to key code ${1:num} using {${2:command} down}"
+	}
 }

@@ -1,4 +1,27 @@
 {
+	"trim trailing line break": {
+		"prefix": [
+			":gsub",
+			"gsub",
+			"trim trailing line break"
+		],
+		"body": ":gsub(\"0$\", \"\")"
+	},
+	"ignore (stylua)": {
+		"prefix": "ignore (stylua)",
+		"body": [
+			"-- stylua: ignore start",
+			"-- stylua: ignore end"
+		]
+	},
+	"ignore block (stylua)": {
+		"prefix": "ignore block (stylua)",
+		"body": "-- stylua: ignore"
+	},
+	"ignore (selene)": {
+		"prefix": "ignore (selene)",
+		"body": "-- selene: allow(${1:rule_name})"
+	},
 	"if": {
 		"prefix": "if",
 		"body": [
@@ -17,7 +40,7 @@
 	},
 	"guard clause ending": {
 		"prefix": "then ",
-		"body": "then return end\n$0" 
+		"body": "then return end\n$0"
 	},
 	"elseif": {
 		"prefix": "elseif",
@@ -27,7 +50,10 @@
 		]
 	},
 	"for (list)": {
-		"prefix": ["foreach", "for (list)"],
+		"prefix": [
+			"foreach",
+			"for (list)"
+		],
 		"body": [
 			"for i, ${1:x} in pairs(${2:table}) do",
 			"\t$0",
