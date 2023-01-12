@@ -189,6 +189,7 @@ wf_neovim = wf
 -- Add dots when copypasting to from devtools
 -- not using window focused, since not reliable
 neovideWatcher = aw.new(function(appName, eventType, appObj)
+	if not (appName) then return end
 	if not (appName:lower() == "neovide" and eventType == aw.activated) then return end
 
 	local winName = appObj:mainWindow():title()
