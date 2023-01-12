@@ -1,584 +1,145 @@
-	"shebang"
-$0")": {
-		"prefix": "shebang"
-$0")",
-		"body": ""
-	},
-	"default arg value"": {
-		"prefix": "default arg value"",
-		"body": ""
-	},
-	"slice"": {
-		"prefix": "slice"",
-		"body": ""
-	},
-	"substitute"": {
-		"prefix": "substitute"",
-		"body": ""
-	},
-	"PATH"
-$0")": {
-		"prefix": "PATH"
-$0")",
-		"body": ""
-	},
-	"resolve home"": {
-		"prefix": "resolve home"",
-		"body": ""
-	},
-	"filename"": {
-		"prefix": "filename"",
-		"body": ""
-	},
-	"parent folder"": {
-		"prefix": "parent folder"",
-		"body": ""
-	},
-	"ext"": {
-		"prefix": "ext"",
-		"body": ""
-	},
-	"filename w/o ext"": {
-		"prefix": "filename w/o ext"",
-		"body": ""
-	},
-	"directory of script"
-$0')": {
-		"prefix": "directory of script"
-$0')",
-		"body": ""
-	},
-	"notify"": {
-		"prefix": "notify"",
-		"body": ""
-	},
-	"if (short)"": {
-		"prefix": "if (short)"",
-		"body": ""
-	},
-	"ternary"": {
-		"prefix": "ternary"",
-		"body": ""
-	},
-	"if .. then"
-	$0
-fi')": {
-		"prefix": "if .. then"
-	$0
-fi')",
-		"body": ""
-	},
-	"if .. then .. else"
-	$2
-else
-	$0
-fi')": {
-		"prefix": "if .. then .. else"
-	$2
-else
-	$0
-fi')",
-		"body": ""
-	},
-	"check installed"
-$0')": {
-		"prefix": "check installed"
-$0')",
-		"body": ""
-	},
-	"stderr (pipe)"": {
-		"prefix": "stderr (pipe)"",
-		"body": ""
-	},
-	"null (pipe)"": {
-		"prefix": "null (pipe)"",
-		"body": ""
-	},
-	"sed (pipe)"": {
-		"prefix": "sed (pipe)"",
-		"body": ""
-	},
-	"plist: extract key"": {
-		"prefix": "plist: extract key"",
-		"body": ""
-	},
-	"running process"": {
-		"prefix": "running process"",
-		"body": ""
-	},
-	"quicklook"": {
-		"prefix": "quicklook"",
-		"body": ""
-	},
-	"sound"": {
-		"prefix": "sound"",
-		"body": ""
-	},
-	"trim trailing line break"": {
-		"prefix": "trim trailing line break"",
-		"body": ""
-	},
-	"ignore (stylua)"
--- stylua: ignore end")": {
-		"prefix": "ignore (stylua)"
--- stylua: ignore end")",
-		"body": ""
-	},
-	"ignore block (stylua)"": {
-		"prefix": "ignore block (stylua)"",
-		"body": ""
-	},
-	"ignore (selene)"": {
-		"prefix": "ignore (selene)"",
-		"body": ""
-	},
-	"ignore (selene global)"": {
-		"prefix": "ignore (selene global)"",
-		"body": ""
-	},
-	"keymap"": {
-		"prefix": "keymap"",
-		"body": ""
-	},
-	"keymap (buffer)"": {
-		"prefix": "keymap (buffer)"",
-		"body": ""
-	},
-	"keymap (multi-mode)"": {
-		"prefix": "keymap (multi-mode)"",
-		"body": ""
-	},
-	"get selection (Finder)"": {
-		"prefix": "get selection (Finder)"",
-		"body": ""
-	},
-	"browser URL"
-$0')": {
-		"prefix": "browser URL"
-$0')",
-		"body": ""
-	},
-	"notify"
-$0')": {
-		"prefix": "notify"
-$0')",
-		"body": ""
-	},
-	"shebang"
-$0")": {
-		"prefix": "shebang"
-$0")",
-		"body": ""
-	},
-	"keystroke"": {
-		"prefix": "keystroke"",
-		"body": ""
-	},
-	"key code"": {
-		"prefix": "key code"",
-		"body": ""
-	},
-	"home"": {
-		"prefix": "home"",
-		"body": ""
-	},
-	"Get Alfred Env"": {
-		"prefix": "Get Alfred Env"",
-		"body": ""
-	},
-	"argv"
-$0")": {
-		"prefix": "argv"
-$0")",
-		"body": ""
-	},
-	"info (GitHub Callout)"
-> $0")": {
-		"prefix": "info (GitHub Callout)"
-> $0")",
-		"body": ""
-	},
-	"note (GitHub Callout)"
-> $0")": {
-		"prefix": "note (GitHub Callout)"
-> $0")",
-		"body": ""
-	},
-	"warning (GitHub Callout)"
-> $0")": {
-		"prefix": "warning (GitHub Callout)"
-> $0")",
-		"body": ""
-	},
-	"vale ignore (Comment)"
-<!-- vale ${1:Style}.${2:Rule} = YES -->")": {
-		"prefix": "vale ignore (Comment)"
-<!-- vale ${1:Style}.${2:Rule} = YES -->")",
-		"body": ""
-	},
-	"ignore (tsignore)"": {
-		"prefix": "ignore (tsignore)"",
-		"body": ""
-	},
-	"replace"": {
-		"prefix": "replace"",
-		"body": ""
-	},
-	"ternary"": {
-		"prefix": "ternary"",
-		"body": ""
-	},
-	"ISO date"": {
-		"prefix": "ISO date"",
-		"body": ""
-	},
-	"ignore (prettier)"
-$0")": {
-		"prefix": "ignore (prettier)"
-$0")",
-		"body": ""
-	},
-	"running check"": {
-		"prefix": "running check"",
-		"body": ""
-	},
-	"check frontmost"": {
-		"prefix": "check frontmost"",
-		"body": ""
-	},
-	"running apps array"": {
-		"prefix": "running apps array"",
-		"body": ""
-	},
-	"running apps array"": {
-		"prefix": "running apps array"",
-		"body": ""
-	},
-	"shebang"
-$0")": {
-		"prefix": "shebang"
-$0")",
-		"body": ""
-	},
-	"online JSON"": {
-		"prefix": "online JSON"",
-		"body": ""
-	},
-	"app"
-app.includeStandardAdditions = true;
-$0")": {
-		"prefix": "app"
-app.includeStandardAdditions = true;
-$0")",
-		"body": ""
-	},
-	"shell script"
-$0")": {
-		"prefix": "shell script"
-$0")",
-		"body": ""
-	},
-	"open"
-$0')": {
-		"prefix": "open"
-$0')",
-		"body": ""
-	},
-	"clipboard"
-$0')": {
-		"prefix": "clipboard"
-$0')",
-		"body": ""
-	},
-	"home (JXA)"": {
-		"prefix": "home (JXA)"",
-		"body": ""
-	},
-	"resolve home (JXA)"": {
-		"prefix": "resolve home (JXA)"",
-		"body": ""
-	},
-	"exists (file)"
-$0')": {
-		"prefix": "exists (file)"
-$0')",
-		"body": ""
-	},
-	"Get Alfred Env"
-$0')": {
-		"prefix": "Get Alfred Env"
-$0')",
-		"body": ""
-	},
-	"shebang"
-$0")": {
-		"prefix": "shebang"
-$0")",
-		"body": ""#!/usr/bin/env zsh"
-	},
-	"default arg value"": {
-		"prefix": "default arg value"",
-		"body": "'${1:input}=${1-"${2:default_value}"}'"
-	},
-	"slice"": {
-		"prefix": "slice"",
-		"body": "'${${1:var}:${2:start}:${3:length}}'"
-	},
-	"substitute"": {
-		"prefix": "substitute"",
-		"body": ""${${1:var}/${2:search}/${3:replace}}""
-	},
-	"PATH"
-$0")": {
-		"prefix": "PATH"
-$0")",
-		"body": ""export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\$PATH"
-	},
-	"resolve home"": {
-		"prefix": "resolve home"",
-		"body": "'${1:path}="${${1:path}/#\~/\$HOME}"'"
-	},
-	"filename"": {
-		"prefix": "filename"",
-		"body": "'file_name=$(basename "$${1:file_path}")'"
-	},
-	"parent folder"": {
-		"prefix": "parent folder"",
-		"body": "'$(dirname "$${1:filepath}")'"
-	},
-	"ext"": {
-		"prefix": "ext"",
-		"body": ""ext=${${1:file_name}shebang*.}""
-	},
-	"filename w/o ext"": {
-		"prefix": "filename w/o ext"",
-		"body": ""${1:file_name}=${${1:file_name}%.*}""
-	},
-	"directory of script"
-$0')": {
-		"prefix": "directory of script"
-$0')",
-		"body": "'cd "$(dirname "\$0")""
-	},
-	"notify"": {
-		"prefix": "notify"",
-		"body": "[[osascript -e "display notification \"\" with title \"$${1:var}\""]]"
-	},
-	"if (short)"": {
-		"prefix": "if (short)"",
-		"body": "'[[ "$${1:var}" ]] && $0'"
-	},
-	"ternary"": {
-		"prefix": "ternary"",
-		"body": "'[[ "$${1:cond}" ]] && ${2:var}="$${3:one}" || ${2:var}="$${4:two}"'"
-	},
-	"if .. then"
-	$0
-fi')": {
-		"prefix": "if .. then"
-	$0
-fi')",
-		"body": "'if [[ "$${1:var}" ]]; then
-$0"
-	},
-	"if .. then .. else"
-	$2
-else
-	$0
-fi')": {
-		"prefix": "if .. then .. else"
-	$2
-else
-	$0
-fi')",
-		"body": "'if [[ "$${1:var}" ]]; then
-$2
-lse
-$0"
-	},
-	"check installed"
-$0')": {
-		"prefix": "check installed"
-$0')",
-		"body": "'if ! command -v ${1:cli} &>/dev/null; then echo "${1:cli} not installed." && exit 1; fi"
-	},
-	"stderr (pipe)"": {
-		"prefix": "stderr (pipe)"",
-		"body": ""2>&1 ""
-	},
-	"null (pipe)"": {
-		"prefix": "null (pipe)"",
-		"body": ""&>/dev/null ""
-	},
-	"sed (pipe)"": {
-		"prefix": "sed (pipe)"",
-		"body": ""sed -E 's/${1:pattern}/${2:replacement}/g'""
-	},
-	"plist: extract key"": {
-		"prefix": "plist: extract key"",
-		"body": "'plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1'"
-	},
-	"running process"": {
-		"prefix": "running process"",
-		"body": "'pgrep -x "${1:process}" > /dev/null && $0'"
-	},
-	"quicklook"": {
-		"prefix": "quicklook"",
-		"body": "'qlmanage -p "${1:filepath}"'"
-	},
-	"sound"": {
-		"prefix": "sound"",
-		"body": "'afplay "/System/Library/Sounds/${1:Submarine}.aiff"'"
-	},
-	"trim trailing line break"": {
-		"prefix": "trim trailing line break"",
-		"body": "':gsub("
-$""
-	},
-	"ignore (stylua)"
--- stylua: ignore end")": {
-		"prefix": "ignore (stylua)"
--- stylua: ignore end")",
-		"body": ""-- stylua: ignore start"
-	},
-	"ignore block (stylua)"": {
-		"prefix": "ignore block (stylua)"",
-		"body": ""-- stylua: ignore""
-	},
-	"ignore (selene)"": {
-		"prefix": "ignore (selene)"",
-		"body": ""-- selene: allow(${1:rule_name})""
-	},
-	"ignore (selene global)"": {
-		"prefix": "ignore (selene global)"",
-		"body": ""--# selene: allow(${1:rule_name})""
-	},
-	"keymap"": {
-		"prefix": "keymap"",
-		"body": "'keymap("n""
-	},
-	"keymap (buffer)"": {
-		"prefix": "keymap (buffer)"",
-		"body": "'keymap("n""
-	},
-	"keymap (multi-mode)"": {
-		"prefix": "keymap (multi-mode)"",
-		"body": "'keymap({"n""
-	},
-	"get selection (Finder)"": {
-		"prefix": "get selection (Finder)"",
+{
+	"trim trailing line break": {
+		"prefix": [":gsub", "gsub", "trim trailing line break"],
+		"body": ":gsub(\"0$\", \"\")"
+	},
+	"ignore (stylua)": {
+		"prefix": "ignore (stylua)",
+		"body": [
+         "-- stylua: ignore start",
+         "-- stylua: ignore end"
+      ]
+	},
+	"ignore block (stylua)": {
+		"prefix": "ignore block (stylua)",
+		"body": "-- stylua: ignore"
+	},
+	"ignore (selene)": {
+		"prefix": "ignore (selene)",
+		"body": "-- selene: allow(${1:rule_name})"
+	},
+	"keymap": {
+		"prefix": "keymap",
+		"body": "keymap(\"n\", \"$1\", $2, { desc = \"\" }"
+	},
+	"keymap (multi mode)": {
+		"prefix": "keymap (multi-mode)",
+		"body": "keymap({ \"n\", \"x\" }, \"$1\", $2, { desc = \"\" }"
+	},
+	"keymap (buffer)": {
+		"prefix": "keymap (buffer)",
+		"body": "keymap(\"n\", \"$1\", $2, { desc = \"\", buffer = true }"
+	},
+	"get selection (Finder)": {
+		"prefix": "get selection (Finder)",
 		"body": "'tell application "Finder" to return POSIX path of (selection as alias)'"
 	},
-	"browser URL"
-$0')": {
-		"prefix": "browser URL"
-$0')",
-		"body": "'tell application "Brave Browser" to set currentTabUrl to URL of active tab of front window"
+	"browser URL": {
+		"prefix": "browser URL",
+		"body": "tell application \"Brave Browser\" to set currentTabUrl to URL of active tab of front window"
 	},
-	"notify"
-$0')": {
-		"prefix": "notify"
-$0')",
-		"body": "'display notification "${2:subtitle}" with title "${1:title}""
+	"notify": {
+		"prefix": "notify",
+		"body": "'display notification "${2:subtitle}" with title "${1:title}"
 	},
 	"shebang"
 $0")": {
 		"prefix": "shebang"
 $0")",
-		"body": ""#!/usr/bin/env osascript"
+		"body": "#!/usr/bin/env osascript"
 	},
-	"keystroke"": {
-		"prefix": "keystroke"",
+	"keystroke": {
+		"prefix": "keystroke",
 		"body": "[[tell application "System Events" to keystroke "${1:key}" using {${2:command} down}]]"
 	},
-	"key code"": {
-		"prefix": "key code"",
+	"key code": {
+		"prefix": "key code",
 		"body": "[[tell application "System Events" to key code "${1:num}"]]"
 	},
-	"home"": {
-		"prefix": "home"",
-		"body": ""(POSIX path of (path to home folder as string))""
+	"home": {
+		"prefix": "home",
+		"body": "(POSIX path of (path to home folder as string))"
 	},
-	"Get Alfred Env"": {
-		"prefix": "Get Alfred Env"",
+	"Get Alfred Env": {
+		"prefix": "Get Alfred Env",
 		"body": "'set ${1:envvar} to (system attribute "${1:envvar}")'"
 	},
 	"argv"
 $0")": {
 		"prefix": "argv"
 $0")",
-		"body": ""set input to argv as string"
+		"body": "set input to argv as string"
 	},
 	"info (GitHub Callout)"
 > $0")": {
 		"prefix": "info (GitHub Callout)"
 > $0")",
-		"body": ""> __Note__  "
+		"body": "> __Note__  "
 	},
 	"note (GitHub Callout)"
 > $0")": {
 		"prefix": "note (GitHub Callout)"
 > $0")",
-		"body": ""> __Note__  "
+		"body": "> __Note__  "
 	},
 	"warning (GitHub Callout)"
 > $0")": {
 		"prefix": "warning (GitHub Callout)"
 > $0")",
-		"body": ""> __Warning__  "
+		"body": "> __Warning__  "
 	},
 	"vale ignore (Comment)"
 <!-- vale ${1:Style}.${2:Rule} = YES -->")": {
 		"prefix": "vale ignore (Comment)"
 <!-- vale ${1:Style}.${2:Rule} = YES -->")",
-		"body": ""<!-- vale ${1:Style${}.${2:Rule} = NO -->"
+		"body": "<!-- vale ${1:Style${}.${2:Rule} = NO -->"
 	},
-	"ignore (tsignore)"": {
-		"prefix": "ignore (tsignore)"",
-		"body": ""// @ts-ignore""
+	"ignore (tsignore)": {
+		"prefix": "ignore (tsignore)",
+		"body": "// @ts-ignore"
 	},
-	"replace"": {
-		"prefix": "replace"",
+	"replace": {
+		"prefix": "replace",
 		"body": "'replace(/${1:regexp}/gm"
 	},
-	"ternary"": {
-		"prefix": "ternary"",
-		"body": ""${1:cond} ? ${2:yes} : ${3:no}""
+	"ternary": {
+		"prefix": "ternary",
+		"body": "${1:cond} ? ${2:yes} : ${3:no}"
 	},
-	"ISO date"": {
-		"prefix": "ISO date"",
-		"body": ""new Date().toISOString().slice(0"
+	"ISO date": {
+		"prefix": "ISO date",
+		"body": "new Date().toISOString().slice(0"
 	},
 	"ignore (prettier)"
 $0")": {
 		"prefix": "ignore (prettier)"
 $0")",
-		"body": ""// prettier-ignore"
+		"body": "// prettier-ignore"
 	},
-	"running check"": {
-		"prefix": "running check"",
+	"running check": {
+		"prefix": "running check",
 		"body": "'Application("${1:appName}").running()'"
 	},
-	"check frontmost"": {
-		"prefix": "check frontmost"",
+	"check frontmost": {
+		"prefix": "check frontmost",
 		"body": "'Application("${1:appName}").frontmost();'"
 	},
-	"running apps array"": {
-		"prefix": "running apps array"",
+	"running apps array": {
+		"prefix": "running apps array",
 		"body": "'Application("System Events").applicationProcesses.where({ backgroundOnly: false }).displayedName();'"
 	},
-	"running apps array"": {
-		"prefix": "running apps array"",
-		"body": "'app.displayNotification("${1:msg}""
+	"running apps array": {
+		"prefix": "running apps array",
+		"body": "'app.displayNotification("${1:msg}"
 	},
 	"shebang"
 $0")": {
 		"prefix": "shebang"
 $0")",
-		"body": ""#!/usr/bin/env osascript -l JavaScript"
+		"body": "#!/usr/bin/env osascript -l JavaScript"
 	},
-	"online JSON"": {
-		"prefix": "online JSON"",
+	"online JSON": {
+		"prefix": "online JSON",
 		"body": "'const onlineJSON = (url) => JSON.parse(app.doShellScript(`curl -s "${url}"`));'"
 	},
 	"app"
@@ -587,14 +148,14 @@ $0")": {
 		"prefix": "app"
 app.includeStandardAdditions = true;
 $0")",
-		"body": ""const app = Application.currentApplication();
+		"body": "const app = Application.currentApplication();
 pp.includeStandardAdditions = true;"
 	},
 	"shell script"
 $0")": {
 		"prefix": "shell script"
 $0")",
-		"body": ""app.doShellScript(`${1:shellscript}`);"
+		"body": "app.doShellScript(`${1:shellscript}`);"
 	},
 	"open"
 $0')": {
@@ -608,12 +169,12 @@ $0')": {
 $0')",
 		"body": "'app.setTheClipboardTo("${1:str}");"
 	},
-	"home (JXA)"": {
-		"prefix": "home (JXA)"",
+	"home (JXA)": {
+		"prefix": "home (JXA)",
 		"body": "'app.pathTo("home folder")'"
 	},
-	"resolve home (JXA)"": {
-		"prefix": "resolve home (JXA)"",
+	"resolve home (JXA)": {
+		"prefix": "resolve home (JXA)",
 		"body": "'const ${1:vari} = $.getenv("${2:envvar}").replace(/^~/"
 	},
 	"exists (file)"
@@ -628,3 +189,4 @@ $0')": {
 $0')",
 		"body": "'const ${1:envVar} = $.getenv("${2:envVar}");"
 	},
+}
