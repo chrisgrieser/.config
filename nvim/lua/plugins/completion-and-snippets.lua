@@ -1,3 +1,12 @@
+-- spellfixes
+local spellfixes = {
+	{ "nto", "not" },
+	{ "since", "since" },
+	{ "the", "the" },
+}
+
+--------------------------------------------------------------------------------
+
 -- source definitions
 local s = {
 	emojis = { name = "emoji", keyword_length = 2 },
@@ -349,24 +358,14 @@ return {
 			-- SPELLING
 			-- INFO using these instead of vim abbreviations since they do not work with
 			-- added extra undo points
-			local spellfixes = {
-				{"nto", "not"},
-				{"sicne", "since"},
-				{"teh", "the"},
-			}
 			local spellAutoFixes = {}
 			for _, wordPair in pairs(spellfixes) do
 				-- lsp-style-snippets for future-proofness
-				local parsed = require("luasnip").parser.parse_snippet ( wordPair[1], wordPair[2])
-				table.insert("")
+				local parsed = require("luasnip").parser.parse_snippet(wordPair[1], wordPair[2])
+				table.insert(spellAutoFixes, parsed)
 			end
 
-			local snip = require("luasnip").parser.parse_snippet -- lsp-style-snippets for future-proofness
-			require("luasnip").add_snippets("all", {
-				snip("nto", "not"),
-				snip("since", "since"),
-				snip("the", "the"),
-			}, {
+			require("luasnip").add_snippets("all", spellAutoFixes, {
 				type = "autosnippets",
 				key = "all_auto",
 			})
@@ -400,11 +399,6 @@ return {
 				end
 			end, { desc = "LuaSnip: Select Choice", expr = true, remap = true })
 
-			-- needs to come after snippet definitions
-			ls.filetype_extend("typescript", { "javascript" }) -- typescript uses all javascript snippets
-			ls.filetype_extend("bash", { "zsh" })
-			ls.filetype_extend("sh", { "zsh" })
-			ls.filetype_extend("scss", { "css" })
 		end,
 	},
 }
