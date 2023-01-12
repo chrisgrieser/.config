@@ -21,8 +21,8 @@ require("config.utils")
 -- o -> c[o]lumn (custom)
 
 -- FILE-TYPE-SPECIFIC TEXT OBJECTS
--- al: a [l]ink (markdown, custom) → overwrites unused call textobj
--- as: a [s]elector (css, custom) → overwrites unused sentence textobj
+-- al: a [l]ink (markdown, custom) → overwrites in markdown unused call textobj
+-- as: a [s]elector (css, custom) → overwrites in css unused sentence textobj
 -- a/: a regex (js/ts, custom)
 -- aE: a Cod(e) block (markdown, custom, mnemonic: big cod[e])
 -- aR: a Double Square Brackets (custom, mnemonic: big [r]ectangular bracket)
@@ -49,9 +49,7 @@ keymap({ "o", "x" }, "im", "iW")
 
 --------------------------------------------------------------------------------
 -- QUICK TEXTOBJ OPERATIONS
-keymap("n", "C", '"_C')
 keymap("n", "<Space>", '"_ciw', { desc = "change word" })
--- keymap("x", "<Space>", '"_c', { desc = "change word" })
 keymap("n", "<M-S-CR>", '"_daw', { desc = "delete word" }) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
 keymap("i", "<M-S-CR>", '<Space>') -- prevent accidental triggering in insert mode when typing quickly
 
@@ -62,8 +60,8 @@ keymap("i", "<M-S-CR>", '<Space>') -- prevent accidental triggering in insert mo
 -- space: subword
 keymap({"o", "x"}, "<Space>", function() require("various-textobjs").subword(true) end, { desc = "inner subword textobj" })
 
--- U: url
-keymap({ "o", "x" }, "U", function() require("various-textobjs").url() end, { desc = "url textobj" })
+-- L: link
+keymap({ "o", "x" }, "L", function() require("various-textobjs").url() end, { desc = "link textobj" })
 
 -- n: [n]ear end of the line
 keymap({ "o", "x" }, "n", function() require("various-textobjs").nearEoL() end, { desc = "near EoL textobj" })

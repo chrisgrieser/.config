@@ -2,11 +2,11 @@ require("config.utils")
 --------------------------------------------------------------------------------
 bo.path = ".,,../" -- also search parent directory (useful for Alfred)
 
-keymap({ "o", "x" }, "aR", function() require("various-textobjs").jsRegex(false) end, { desc = "outer regex textobj" })
-keymap({ "o", "x" }, "iR", function() require("various-textobjs").jsRegex(true) end, { desc = "inner regex textobj" })
+keymap({ "o", "x" }, "a/", function() require("various-textobjs").jsRegex(false) end, { desc = "outer regex textobj" })
+keymap({ "o", "x" }, "i/", function() require("various-textobjs").jsRegex(true) end, { desc = "inner regex textobj" })
 
 -- Open regex in regex101 and regexper (railroad diagram)
-keymap("n", "gR", function()
+keymap("n", "g/", function()
 	require("various-textobjs").jsRegex(false) -- set visual selection to outer regex
 	normal('"zy')
 	require("various-textobjs").jsRegex(true) -- select inner regex for easy replacement
