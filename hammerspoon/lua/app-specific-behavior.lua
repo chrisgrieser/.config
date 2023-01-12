@@ -268,7 +268,7 @@ wf_quicklook = wf
 		]])
 		-- do not enlage window for images (which are enlarged already with
 		-- landscape proportions)
-		if sel and (sel:find("%.png$") or sel:find("%.jpe?g$") or sel:find("%.gif")) then return end
+		if sel and (sel:find("%.png$") or sel:find("%.jpe?g$") or sel:find("%.gif") or sel:find("%.mp4")) then return end
 		runWithDelays(0.4, function() moveResize(newWin, centered) end)
 	end)
 
