@@ -36,7 +36,7 @@ opt.pumwidth = 10 -- min width popup menu
 opt.winblend = 2 -- % transparency
 
 -- Spelling
-opt.spelllang = { "en_us", "de_de" }
+opt.spelllang =  "en_us" 
 
 -- whitespace & indentation
 opt.tabstop = 3
