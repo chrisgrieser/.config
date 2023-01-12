@@ -8,7 +8,6 @@
 		"body": [
 			"/* stylelint-disable ${1:rule_name} */",
 			"/* stylelint-enable ${1:rule_name} */"
-	],
-		"description": "desc"
+		]
 	}
 }

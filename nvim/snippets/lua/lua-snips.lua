@@ -11,15 +11,6 @@ require("luasnip").cleanup() -- clears all snippets for resourcing this file
 -- stylua: ignore start
 --------------------------------------------------------------------------------
 
--- CSS
-add("css", {
-	snip("ignore (stylelint)", "/* stylelint-disable-line ${1:rule_name} */"),
-	snip("ignore (stylelint range)", [[
-		/* stylelint-disable ${1:rule_name} */
-		/* stylelint-enable ${1:rule_name} */
-	]]),
-})
-
 -- Shell (zsh)
 add("zsh", {
 	snip("shebang", "#!/usr/bin/env zsh\n$0"),
@@ -80,20 +71,11 @@ add("lua", {
 		$2
 	end
 	]]),
-	snip("ternary", '${1:cond} and ${2:yes} or ${3:no}'),
 	snip("trim trailing \n", ':gsub("\\n$", "")'),
 	snip("ignore (stylua)", "-- stylua: ignore start\n-- stylua: ignore end"),
 	snip("ignore block (stylua)", "-- stylua: ignore"),
 	snip("ignore (selene)", "-- selene: allow(${1:rule_name})"),
 	snip("ignore (selene global)", "--# selene: allow(${1:rule_name})"),
-	snip("if .. then .. else", [[
-		if $1 then
-			$2
-		else
-			$3
-		end
-	]]),
-	snip("home", 'os.getenv("HOME")'),
 	snip("for (list)", [[
 	for _, ${1:v} in pairs(${2:list_table}) do
 		$0
