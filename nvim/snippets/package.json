@@ -21,19 +21,19 @@
 				"language": [
 					"markdown"
 				],
-				"path": "./languages/markdown.json"
+				"path": "./basic/markdown.json"
 			},
 			{
 				"language": [
 					"python"
 				],
-				"path": "./languages/python.json"
+				"path": "./basic/python.json"
 			},
 			{
 				"language": [
 					"gitcommit"
 				],
-				"path": "./languages/gitcommit.json"
+				"path": "./basic/gitcommit.json"
 			},
 			{
 				"language": [
@@ -42,33 +42,39 @@
 					"fish",
 					"sh"
 				],
-				"path": "./languages/shell.json"
+				"path": "./basic/shell.json"
 			},
 			{
 				"language": [
 					"lua"
 				],
-				"path": "./languages/lua.json"
+				"path": "./basic/lua.json"
 			},
 			{
 				"language": [
 					"javascript",
 					"typescript"
 				],
-				"path": "./languages/javascript.json"
+				"path": "./basic/javascript.json"
+			},
+			{
+				"language": [
+					"json"
+				],
+				"path": "./projects-specific/vscode-snippets.json"
 			},
 			{
 				"language": [
 					"typescript"
 				],
-				"path": "./obsidian/obsidian-plugin-dev.json"
+				"path": "./projects-specific/obsidian-plugin-dev.json"
 			},
 			{
 				"language": [
 					"css",
 					"scss"
 				],
-				"path": "./obsidian/obsidian-theme-dev.json"
+				"path": "./projects-specific/obsidian-theme-dev.json"
 			}
 		]
 	}

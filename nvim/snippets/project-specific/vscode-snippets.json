@@ -1,0 +1,27 @@
+{
+	"VS Code Snippet (short)": {
+		"prefix": "snippet",
+		"body": [
+			"\"${1:name}\": {",
+			"\t\"prefix\": \"${1:name}\",",
+			"\t\"body\": \"$2\"",
+			"},"
+		],
+		"description": "VS Code Snippet (short)"
+	},
+	"VS Code Snippet (long)": {
+		"prefix": "snippet",
+		"body": [
+			"\"${1:name}\": {",
+			"\t\"prefix\": \"${1:name}\",",
+			"\t\"body\": [",
+			"\t\t\"$2\"",
+			"\t\t\"$3\"",
+			"],",
+			"\t\"description\": \"${4:desc}\"",
+			"},"
+		],
+		"description": "VS Code Snippet (short)"
+	},
+	"sni"
+}

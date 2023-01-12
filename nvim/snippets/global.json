@@ -1,28 +1,61 @@
 {
 	"modeline": {
 		"prefix": "",
-		"body": "vim: filetype=\n$0",
+		"body": "vim: filetype=\n$0"
 	},
 	"cmd": {
 		"prefix": "cmd",
-		"body": "⌘",
+		"body": "⌘"
+	},
+	"shift": {
+		"prefix": "shift",
+		"body": "⇧"
 	},
 	"opt": {
-		"prefix": ["opt", "alt"],
-		"body": "⌘",
+		"prefix": [
+			"opt",
+			"alt"
+		],
+		"body": "⌥"
 	},
-
-	snip("cmd", "⌘"),
-	snip("opt", "⌥"),
-	snip("alt", "⌥"),
-	snip("ctrl", "⌃"),
-	snip("shift", "⇧"),
-	snip("capslock", "⇪"),
-	snip("backspace", "⌫"),
-	snip("escape", "⎋"),
-	snip("tab", "↹ "),
-	snip("enter", "↵"),
-
+	"ctrl": {
+		"prefix": [
+			"control",
+			"ctrl"
+		],
+		"body": "⌃"
+	},
+	"capslock": {
+		"prefix": [
+			"capslock",
+			"hyper"
+		],
+		"body": "⌃"
+	},
+	"escape": {
+		"prefix": "escape",
+		"body": "⎋"
+	},
+	"backspace": {
+		"prefix": "backspace",
+		"body": "⌫"
+	},
+	"enter": {
+		"prefix": "enter",
+		"body": "↵"
+	},
+	"tab": {
+		"prefix": "tab",
+		"body": "↹ "
+	},
+	"Lorem Ipsum Sentence": {
+		"prefix": "lorem sentence",
+		"body": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."
+	},
+	"Lorem Ipsum Paragraph": {
+		"prefix": "lorem Paragraph",
+		"body": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+	},
 	"MIT": {
 		"prefix": "mit",
 		"description": "MIT License",
