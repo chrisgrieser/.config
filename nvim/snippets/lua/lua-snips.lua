@@ -25,22 +25,6 @@ add("all", {
 
 --------------------------------------------------------------------------------
 
-add("all", {
-	snip("modeline", "vim: filetype=\n$0"),
-
-	-- macOS symbols
-	snip("cmd", "⌘"),
-	snip("opt", "⌥"),
-	snip("alt", "⌥"),
-	snip("ctrl", "⌃"),
-	snip("shift", "⇧"),
-	snip("capslock", "⇪"),
-	snip("backspace", "⌫"),
-	snip("escape", "⎋"),
-	snip("tab", "↹ "),
-	snip("enter", "↵"),
-})
-
 -- CSS
 add("css", {
 	snip("ignore (stylelint)", "/* stylelint-disable-line ${1:rule_name} */"),
