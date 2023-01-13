@@ -13,7 +13,7 @@ alias amend="git commit --amend"
 
 # go to git root https://stackoverflow.com/a/38843585
 alias root='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
-alias gg="git checkout -" # go to last branch, analogues to `zz` switching to last directory
+alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 
 # open GitHub repo
 function getGithubURL() {
