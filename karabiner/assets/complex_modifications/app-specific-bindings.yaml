@@ -363,6 +363,7 @@ rules:
 
           # restore previous text & previous clipboard
           - {key_code: v, modifiers: [command]}
+          - {key_code: vk_none, hold_down_milliseconds: 30}
           - shell_command: pbpaste -pboard ruler | pbcopy
 
         conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$]}]

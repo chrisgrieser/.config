@@ -2,6 +2,7 @@ require("lua.utils")
 require("lua.window-management")
 require("lua.system-and-cron")
 --------------------------------------------------------------------------------
+-- automations for multiple apps
 
 local function unHideAll()
 	local wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
@@ -41,15 +42,7 @@ autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
 	end
 end):start()
 
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
--- PIXELMATOR: maximized
-pixelmatorWatcher = aw.new(function(appName, eventType, appObj)
-	if appName == "Pixelmator" and eventType == aw.launched then
-		runWithDelays(0.3, function() moveResize(appObj, maximized) end)
-	end
-end):start()
+wf_maxWindows = wf.new()
 
 --------------------------------------------------------------------------------
 
@@ -83,6 +76,16 @@ spotifyAppWatcher = aw.new(function(appName, eventType)
 		elseif eventType == aw.terminated then
 			spotifyTUI("play")
 		end
+	end
+end):start()
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+-- PIXELMATOR: maximized
+pixelmatorWatcher = aw.new(function(appName, eventType, appObj)
+	if appName == "Pixelmator" and eventType == aw.launched then
+		runWithDelays(0.3, function() moveResize(appObj, maximized) end)
 	end
 end):start()
 
@@ -189,7 +192,7 @@ wf_neovim = wf
 -- Add dots when copypasting to from devtools
 -- not using window focused, since not reliable
 neovideWatcher = aw.new(function(appName, eventType, appObj)
-	if not (appName) then return end
+	if not appName then return end
 	if not (appName:lower() == "neovide" and eventType == aw.activated) then return end
 
 	local winName = appObj:mainWindow():title()
@@ -268,7 +271,11 @@ wf_quicklook = wf
 		]])
 		-- do not enlage window for images (which are enlarged already with
 		-- landscape proportions)
-		if sel and (sel:find("%.png$") or sel:find("%.jpe?g$") or sel:find("%.gif") or sel:find("%.mp4")) then return end
+		if
+			sel and (sel:find("%.png$") or sel:find("%.jpe?g$") or sel:find("%.gif") or sel:find("%.mp4"))
+		then
+			return
+		end
 		runWithDelays(0.4, function() moveResize(newWin, centered) end)
 	end)
 
