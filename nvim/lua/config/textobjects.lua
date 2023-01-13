@@ -50,7 +50,7 @@ keymap({ "o", "x" }, "im", "iW")
 --------------------------------------------------------------------------------
 -- QUICK TEXTOBJ OPERATIONS
 keymap("n", "<Space>", '"_ciw', { desc = "change word" })
-keymap("n", "<M-S-CR>", 'daw', { desc = "delete word" }) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
+keymap("n", "<M-S-CR>", '"_daw', { desc = "delete word" }) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
 keymap("i", "<M-S-CR>", '<Space>') -- prevent accidental triggering in insert mode when typing quickly
 
 --------------------------------------------------------------------------------

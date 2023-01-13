@@ -186,7 +186,7 @@ nmap ,> :toggleBlockquote
 nmap <Space> "_ciw
 
 " Delete Word/Selection
-nmap <S-Space> daw
+nmap <S-Space> "_daw
 
 " [R]eplicate (duplicate)
 exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
@@ -294,14 +294,14 @@ nmap ,f :linkjump
 """"""""""""""""""""""
 " Substitute
 """"""""""""""""""""""
-" poor man's substitute.vim 🥲
+" poor man's substitute.nvim 🥲
 nmap s Vp
 nmap S vg$p
 
 """"""""""""""""""""""
 " Comment
 """"""""""""""""""""""
-" poor man's comment
+" poor man's comment.nvim
 exmap comment obcommand obsidian-smarter-md-hotkeys:smarter-html-comments
 nmap qq :comment
 
