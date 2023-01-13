@@ -1,4 +1,4 @@
-# shellcheck disable=SC2164,SC2030,SC2012
+# shellcheck disable=SC2164
 
 alias co="git checkout"
 alias gs='git status'
@@ -46,6 +46,7 @@ function gli() {
 				--nth=2.. \
 				--with-nth=2.. \
 				--no-sort \
+				--layout=reverse-list \
 				--no-info \
 				--header-first --header="↵ : Checkout  ^H: Copy [H]ash  ^R: [R]eset Hard" \
 				--expect="ctrl-h,ctrl-r" \
@@ -151,7 +152,7 @@ function nuke {
 	echo "Downloading repo again from remote…"
 	echo "---"
 
-	git clone "$SSH_REMOTE" "$LOCAL_REPO" && cd "$LOCAL_REPO"
+	git clone "$SSH_REMOTE" "$LOCAL_REPO" && cd "$LOCAL_REPO" || return 1
 }
 
 #───────────────────────────────────────────────────────────────────────────────
