@@ -17,7 +17,7 @@ local themePackages = {
 }
 
 local darkTransparency = 0.96
-local lightTransparency = 0.94
+local lightTransparency = 0.93
 
 --------------------------------------------------------------------------------
 
