@@ -14,7 +14,7 @@
 		"description": "Obsidian: Get the 10 most recent files. (The ones visible in the Quick Switcher, when there no input yet.)",
 		"prefix": [
 			"recent files",
-			"quickSwitcher",
+			"Quick Switcher",
 			"last opened files"
 		],
 		"body": [
@@ -29,12 +29,12 @@
 			"current"
 		],
 		"body": [
-			"const view = app.workspace.getActiveViewOfType(MarkdownView);",
 			"// getActiveViewOfType will return null if the active view is",
 			"// null or not of type MarkdownView.",
+			"const view = app.workspace.getActiveViewOfType(MarkdownView);",
 			"if (view) {",
 			"\tconst editor = view.editor;",
-			"\t// Do something with editor",
+			"\t${1: // Do something with editor}",
 			"}"
 		]
 	},
@@ -63,7 +63,7 @@
 		]
 	},
 	"Multiple Cursors?": {
-		"description": "Obsidian: Check whether there are currently multiple cursors",
+		"description": "Obsidian: Check whether there are currently multiple cursors.",
 		"prefix": [
 			"cursors",
 			"multiple cursors",
@@ -72,6 +72,15 @@
 		"body": [
 			"const hasMultipleCursors = editor.listSelections().length > 1;"
 		]
+	},
+	"Write a file": {
+		"description": "Obsidian: Write text to an existing file.",
+		"prefix": [
+			"modify file",
+			"write to file",
+			"change file"
+		],
+		"body": "this.app.vault.modify(${1:TFile}, ${2:text});"
 	},
 	"get selection (edit mode)": {
 		"description": "Obsidian: Get the selection in Live Preview / Source mode.",
