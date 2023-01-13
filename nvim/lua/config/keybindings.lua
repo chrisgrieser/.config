@@ -369,7 +369,7 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 --------------------------------------------------------------------------------
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
-keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode goes to Visual Block Mode" })
+keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode" })
 
 --------------------------------------------------------------------------------
 -- BUFFERS & WINDOWS & SPLITS
@@ -444,7 +444,7 @@ keymap("n", "<leader>a", ":ChatGPT<CR>", { desc = "ﮧ ChatGPT Prompt" })
 
 -- File Switchers
 keymap("n", "go", function()
-	local isGitRepo = 0 == os.execute("test -e $(git rev-parse --show-toplevel)/.git") -- using test -e to check for repo and submodule
+	local isGitRepo = os.execute("test -e $(git rev-parse --show-toplevel)/.git") == 0 -- using test -e instead of -f to check for repo and submodule
 	local cwd = expand("%:p:h")
 	local scope = "git_files"
 	if cwd:find("/nvim/") and not (cwd:find("/my%-plugins/")) then
@@ -463,17 +463,13 @@ keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = 
 keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = "copy filename" })
 keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = "chmod +x" })
 keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = "rename file" })
-keymap(
-	"n",
-	"<D-S-m>",
-	function() require("genghis").moveAndRenameFile() end,
-	{ desc = "move-rename file" }
-)
+-- stylua: ignore
+keymap("n", "<D-S-m>", function() require("genghis").moveAndRenameFile() end, { desc = "move-rename file" })
 keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = "duplicate file" })
 keymap("n", "<D-BS>", function() require("genghis").trashFile() end, { desc = "move file to trash" })
 keymap("n", "<D-n>", function() require("genghis").createNewFile() end, { desc = "create new file" })
 -- stylua: ignore
-keymap( "x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = "selection to new file" })
+keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = "selection to new file" })
 
 --------------------------------------------------------------------------------
 -- GIT
@@ -504,11 +500,11 @@ end, { desc = " File History (Diffview)" })
 --------------------------------------------------------------------------------
 
 -- Option Toggling
-keymap("n", "<leader>os", ":set spell!<CR>", { desc = "toggle spelling" })
-keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = "toggle rel. line numbers" })
-keymap("n", "<leader>on", ":set number!<CR>", { desc = "toggle line numbers" })
-keymap("n", "<leader>ol", cmd.LspRestart, { desc = "LSP Restart" })
-keymap("n", "<leader>ow", qol.toggleWrap, { desc = "toggle wrap" })
+keymap("n", "<leader>os", ":set spell!<CR>", { desc = "  toggle spelling" })
+keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = "  relative line numbers" })
+keymap("n", "<leader>on", ":set number!<CR>", { desc = "  line numbers" })
+keymap("n", "<leader>ol", cmd.LspRestart, { desc = " 璉LSP Restart" })
+keymap("n", "<leader>ow", qol.toggleWrap, { desc = "  wrap" })
 
 keymap("n", "<leader>od", function()
 	if g.diagnosticOn == nil then g.diagnosticOn = true end
@@ -518,7 +514,7 @@ keymap("n", "<leader>od", function()
 		vim.diagnostic.enable(0)
 	end
 	g.diagnosticOn = not g.diagnosticOn
-end, { desc = "toggle diagnostics" })
+end, { desc = "  diagnostics" })
 
 --------------------------------------------------------------------------------
 
@@ -595,7 +591,6 @@ end, { desc = "Build System" })
 --------------------------------------------------------------------------------
 
 -- q / Esc to close special windows
-local opts = { buffer = true, nowait = true, desc = "close" }
 augroup("quickClose", {})
 autocmd("FileType", {
 	group = "quickClose",
@@ -612,6 +607,7 @@ autocmd("FileType", {
 		"man",
 	},
 	callback = function()
+		local opts = { buffer = true, nowait = true, desc = "close" }
 		keymap("n", "<Esc>", cmd.close, opts)
 		keymap("n", "q", cmd.close, opts)
 	end,
@@ -619,11 +615,11 @@ autocmd("FileType", {
 
 -- HACK to remove the waiting time from the q, due to conflict with `qq`
 -- for comments
-opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 autocmd("FileType", {
 	group = "quickClose",
 	pattern = { "ssr", "TelescopePrompt" },
 	callback = function()
+		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 		if bo.filetype == "ssr" then
 			keymap("n", "q", "Q", opts)
 		else
@@ -649,7 +645,7 @@ for _, key in ipairs { "x", "h", "l" } do
 			vim.defer_fn(function() count = count - 1 end, timeout) ---@diagnostic disable-line: param-type-mismatch
 			return key
 		end
-	end, { expr = true })
+	end, { expr = true, desc = key.. " (delaytrain)" })
 end
 
 --------------------------------------------------------------------------------
