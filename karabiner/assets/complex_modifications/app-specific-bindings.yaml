@@ -216,7 +216,7 @@ rules:
         from: {key_code: p}
         to: [{key_code: k}]
         conditions: [{type: frontmost_application_if, file_paths: [Inoreader.app]}]
-  - description: "\U0001F170️\U0001F528 Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
+  - description: "(Apps) Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
       - type: basic
         from: {key_code: q, modifiers: {mandatory: [command]}}
@@ -347,16 +347,24 @@ rules:
       - type: basic
         from: {key_code: r, modifiers: {mandatory: [command]}}
         to:
-          # saving text in the clipboard required, since tab->up->r only works with empty text input field
+          # saving text in the clipboard required, since tab->up->r only works 
+          # with empty text input field. need to preserve previous clipboard then
+          - shell_command: pbpaste | pbcopy -pboard ruler 
           - {key_code: a, modifiers: [command]}
           - {key_code: x, modifiers: [command]}
+
+          # reply
           - {key_code: vk_none, hold_down_milliseconds: 30}
           - key_code: tab
           - {key_code: vk_none, hold_down_milliseconds: 70}
           - key_code: up_arrow
           - {key_code: vk_none, hold_down_milliseconds: 70}
           - key_code: r
+
+          # restore previous text & previous clipboard
           - {key_code: v, modifiers: [command]}
+          - shell_command: pbpaste -pboard ruler | pbcopy
+
         conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$]}]
       # em[o]ji reaction to msg above
       - type: basic
