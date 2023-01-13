@@ -184,11 +184,9 @@ nmap ,> :toggleBlockquote
 
 " Change Word/Selection
 nmap <Space> "_ciw
-vmap <Space> "_c
 
 " Delete Word/Selection
-nmap <S-Space> "_daw
-vmap <S-Space> "_d
+nmap <S-Space> daw
 
 " [R]eplicate (duplicate)
 exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
