@@ -41,7 +41,7 @@ keymap("i", "<M-->", "–")
 
 -- Window Appearance
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
--- INFO: Transparency set in theme-settings.lua, since varying with dark/light mode
+-- INFO: Transparency set in themes.lua, since varying with dark/light mode
 
 -- cursor
 g.neovide_cursor_animation_length = 0.003

@@ -2,7 +2,7 @@ require("lua.utils")
 require("lua.window-management")
 require("lua.system-and-cron")
 --------------------------------------------------------------------------------
--- automations for multiple apps
+-- AUTOMATIONS FOR MULTIPLE APPS
 
 local function unHideAll()
 	local wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
@@ -42,11 +42,21 @@ autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
 	end
 end):start()
 
-wf_maxWindows = wf.new()
+-- prevent maximized window from covering sketchybar if they are unfocused
+-- pseudomaximized windows always get Twitterrific to the side
+wf_maxWindows = wf.new(true)
+	:subscribe(wf.windowUnfocused, function(win)
+		if checkSize(win, maximized) then
+			win:application():hide()
+		end
+	end)
+	:subscribe(wf.windowFocused, function(win)
+		if checkSize(win, pseudoMaximized) and appIsRunning("Twitterrific") then
+			app("Twitterrific"):mainWindow():raise()
+		end
+	end)
 
---------------------------------------------------------------------------------
 
--- SPOTIFY
 ---play/pause spotify with spotifyTUI
 ---@param toStatus string pause|play
 local function spotifyTUI(toStatus)
@@ -153,14 +163,10 @@ end):start()
 --------------------------------------------------------------------------------
 -- TWITTERRIFIC
 
--- keep visible, when active window is pseudomaximized
 -- scroll up on launch
 twitterificVisible = aw.new(function(appName, eventType)
 	if appName == "Twitterrific" and eventType == aw.launched then
 		runWithDelays(1, function() twitterrificAction("scrollup") end)
-	elseif appIsRunning("Twitterrific") and (eventType == aw.activated or eventType == aw.launching) then
-		local currentWin = hs.window.focusedWindow()
-		if checkSize(currentWin, pseudoMaximized) then app("Twitterrific"):mainWindow():raise() end
 	end
 end):start()
 
