@@ -42,6 +42,16 @@ local function config()
 			or msg:find("^diagnostic ROW: %d+")
 	end
 
+	augroup("macOSnotification", {})
+	autocmd("FocusGained", {
+		group = "macOSnotification",
+		callback = function() g.nvim_has_focus = true end,
+	})
+	autocmd("FocusLost", {
+		group = "macOSnotification",
+		callback = function() g.nvim_has_focus = false end,
+	})
+
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
 		if banned(msg) then return end
 		if type(msg) == "string" then
@@ -58,8 +68,16 @@ local function config()
 				table.insert(truncated, " " .. nl .. " ")
 			end
 		end
+
+		-- use macOS notification if not focused
+		if not g.nvim_has_focus then
+			local _msg = table.concat(truncated, "\n")
+			os.execute([[osascript -e 'display notification "" with title "]] .. _msg .. [[" with sound']])
+		end
 		return require("notify")(truncated, level, opts)
 	end
+
+	-----------------------------------------------------------------------------
 
 	-- replace lua's print message with notify.nvim → https://www.reddit.com/r/neovim/comments/xv3v68/tip_nvimnotify_can_be_used_to_display_print/
 	-- selene: allow(incorrect_standard_library_use)
@@ -76,7 +94,7 @@ local function config()
 
 		-- enable treesitter highlighting in the notification
 		if includesTable then
-			notifyOpts.on_open = function(win) 
+			notifyOpts.on_open = function(win)
 				local buf = api.nvim_win_get_buf(win)
 				api.nvim_buf_set_option(buf, "filetype", "lua")
 			end
@@ -85,6 +103,8 @@ local function config()
 		vim.notify(table.concat(safe_args, " "), logInfo, notifyOpts)
 	end
 end
+
+--------------------------------------------------------------------------------
 
 return {
 	"rcarriga/nvim-notify",
