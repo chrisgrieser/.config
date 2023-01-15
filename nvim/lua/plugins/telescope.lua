@@ -165,18 +165,22 @@ local options = {
 			layout_strategy = "bottom_pane",
 		},
 	},
-	-- https://github.com/debugloop/telescope-undo.nvim#configuration
 	extensions = {
 		undo = {
-			entry_format = "#$ID/$STAT/$TIME",
+			-- https://github.com/debugloop/telescope-undo.nvim#configuration
+			entry_format = "$STAT/$TIME",
 			layout_config = { preview_width = 0.7 },
 			prompt_prefix = "碑",
 			initial_mode = "normal",
 		},
-		smart_open = {
-			ignore_patterns = {
-				"*.git/*",
-				"*/tmp/*",
+		frecency = {
+			db_root = vimDataDir,
+			ignore_patterns = { "*.git/*", "*/tmp/*" },
+			layout_strategy = "bottom_pane",
+			layout_config = {
+				horizontal = {
+					width = 0.4,
+				},
 			},
 		},
 	},
@@ -190,13 +194,13 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"debugloop/telescope-undo.nvim",
-			{ "danielfalk/smart-open.nvim", dependencies = "tami5/sqlite.lua" },
+			{ "nvim-telescope/telescope-frecency.nvim", dependencies = "kkharji/sqlite.lua" },
 		},
 		config = function()
 			require("telescope").setup(options)
 			require("telescope").load_extension("undo")
 			require("telescope").load_extension("notify")
-			require("telescope").load_extension("smart_open")
+			require("telescope").load_extension("frecency")
 		end,
 	},
 }
