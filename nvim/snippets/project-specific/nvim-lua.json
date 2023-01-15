@@ -1,22 +1,22 @@
 {
 	"keymap": {
 		"prefix": "keymap",
-		"body": "keymap(\"n\", \"$1\", $2, { desc = \"\" }"
+		"body": "keymap(\"n\", \"$1\", $2, { desc = \"$3\" }"
 	},
 	"keymap (multi mode)": {
 		"prefix": "keymap (multi-mode)",
-		"body": "keymap({ \"n\", \"x\" }, \"$1\", $2, { desc = \"\" }"
+		"body": "keymap({ \"n\", \"x\" }, \"$1\", $2, { desc = \"$3\" }"
 	},
 	"keymap (buffer)": {
 		"prefix": "keymap (buffer)",
-		"body": "keymap(\"n\", \"$1\", $2, { desc = \"\", buffer = true }"
+		"body": "keymap(\"n\", \"$1\", $2, { desc = \"$3\", buffer = true }"
 	},
 	"input (vim.ui)": {
 		"prefix": "input (vim.ui)",
 		"body": [
 			"vim.ui.input({ prompt = \"${1:prompt_msg}\"}, function (input)",
-			"if not(input) then return end",
-			"$2",
+			"\tif not(input) then return end",
+			"\t$2",
 			"end)"
 		]
 	},
@@ -25,8 +25,8 @@
 		"body": [
 			"local ${1:list} = {}",
 			"vim.ui.select(${1:list}, { prompt = \"${2:prompt_msg}\" }, function (choice)",
-			"if not choice then return end",
-			"$3",
+			"\tif not choice then return end",
+			"\t$3",
 			"end)"
 		]
 	},
@@ -35,13 +35,13 @@
 			"autocmd & augroup"
 		],
 		"body": [
-			"augroup (${1:groupname}, {})",
+			"augroup (\"${1:groupname}\", {})",
 			"autocmd (\"${2:event}\", {",
-			"\tgroup = \"${1:groupname}\"",
+			"\tgroup = \"${1:groupname}\",",
 			"\tcallback = function()",
 			"\t\t$3",
 			"\tend,",
-			"}"
+			"})"
 		]
 	},
 	"autocmd (FileType)": {
@@ -50,14 +50,14 @@
 			"FileType autocmd"
 		],
 		"body": [
-			"augroup (${1:groupname}, {})",
+			"augroup (\"${1:groupname}\", {})",
 			"autocmd (\"FileType\", {",
-			"\tgroup = \"${1:groupname}\"",
-			"\tpattern = \"${2:ft}\"",
+			"\tgroup = \"${1:groupname}\",",
+			"\tpattern = \"${2:ft}\",",
 			"\tcallback = function()",
 			"\t\t$3",
 			"\tend,",
-			"}"
+			"})"
 		]
 	}
 }

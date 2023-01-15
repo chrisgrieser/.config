@@ -49,7 +49,7 @@ function toggleDarkMode()
 	]])
 
 	-- sketchybar
-	hs.execute("brew services restart sketchybar")
+	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar")
 
 	app(prevApp):activate()
 	holeCover() -- redraw hole-covers in proper color

@@ -62,6 +62,35 @@
 			"});"
 		]
 	},
+	"add editor command": {
+		"description": "Obsidian: Add a command to the command palette that is only active in edit mode and passes the currently active editor to the respective method.",
+		"prefix": [
+			"add editor command",
+			"register editor command"
+		],
+		"body": [
+			"this.addCommand({",
+			"\tid: \"${1:command-id}\",",
+			"\tname: \"${2:commandName}\",",
+			"\teditorCallback: (editor) => this.${3:method}(editor),",
+			"});"
+		]
+	},
+	"Run Command": {
+		"prefix": "Run Command",
+		"description": "Run a command from another plugin or from Obsidian core.",
+		"body": "this.app.commands.executeCommandById(${1:cmd-id});"
+	},
+	"set config": {
+		"prefix": "set config",
+		"description": "Set a configuration value for the core Obsidian settings.",
+		"body": "this.app.vault.setConfig(\"${1:config-name}\", ${2:value});"
+	},
+	"get config": {
+		"prefix": "get config",
+		"description": "Get a configuration value from the core Obsidian settings.",
+		"body": "const ${1:config-name} = this.app.vault.getConfig(\"${1:config-name}\");"
+	},
 	"Multiple Cursors?": {
 		"description": "Obsidian: Check whether there are currently multiple cursors.",
 		"prefix": [
@@ -88,9 +117,7 @@
 			"selection",
 			"selected text"
 		],
-		"body": [
-			"const selection = editor.getSelection();"
-		]
+		"body": "const selection = editor.getSelection();"
 	},
 	"get selection (reading mode)": {
 		"description": "Obsidian: Get the selection in Reading Mode. (Note that this will retrieve plain text without formatting.)",
@@ -98,8 +125,14 @@
 			"selection",
 			"selected text"
 		],
-		"body": [
-			"const selection = activeWindow.getSelection().toString(); "
-		]
+		"body": "const selection = activeWindow.getSelection().toString();"
+	},
+	"Notification": {
+		"description": "Obsidian: Create notification",
+		"prefix": [
+			"notice",
+			"notification"
+		],
+		"body": "new Notice (\"${1:msg}\");"
 	}
 }

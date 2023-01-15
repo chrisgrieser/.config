@@ -39,22 +39,26 @@ require("lazy").setup("plugins", {
 				-- disable unused builtin plugins from neovim
 				"netrw",
 				"netrwPlugin",
-				"netrwSettings",
-				"netrwFileHandlers",
 				"gzip",
 				"zip",
-				"zipPlugin",
 				"tar",
 				"tarPlugin",
-				"getscript",
-				"getscriptPlugin",
-				"vimball",
-				"vimballPlugin",
-				"2html_plugin",
-				"logipat",
-				"rrhelper",
+				"tutor",
+				"rplugin",
 				"man",
+				"health",
+				"tohtml",
+				"zipPlugin",
 			},
 		},
 	},
+})
+
+--------------------------------------------------------------------------------
+
+vim.api.nvim_create_augroup("lazyui", {})
+vim.api.nvim_create_autocmd("FileType", {
+	group = "lazyui",
+	pattern = "lazy",
+	callback = function() vim.wo.wrap = false end,
 })
