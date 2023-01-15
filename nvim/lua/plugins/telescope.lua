@@ -173,16 +173,16 @@ local options = {
 			prompt_prefix = "碑",
 			initial_mode = "normal",
 		},
-		frecency = {
-			db_root = vimDataDir,
-			ignore_patterns = { "*.git/*", "*/tmp/*" },
-			layout_strategy = "bottom_pane",
-			layout_config = {
-				horizontal = {
-					width = 0.4,
-				},
-			},
-		},
+		-- frecency = {
+		-- 	db_root = vimDataDir,
+		-- 	ignore_patterns = { "*.git/*", "*/tmp/*" },
+		-- 	layout_strategy = "bottom_pane",
+		-- 	layout_config = {
+		-- 		horizontal = {
+		-- 			width = 0.4,
+		-- 		},
+		-- 	},
+		-- },
 	},
 }
 
@@ -194,13 +194,15 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"debugloop/telescope-undo.nvim",
-			{ "nvim-telescope/telescope-frecency.nvim", dependencies = "kkharji/sqlite.lua" },
+			"benfowler/telescope-luasnip.nvim",
+			-- { "nvim-telescope/telescope-frecency.nvim", dependencies = "kkharji/sqlite.lua" },
 		},
 		config = function()
 			require("telescope").setup(options)
 			require("telescope").load_extension("undo")
 			require("telescope").load_extension("notify")
-			require("telescope").load_extension("frecency")
+			require('telescope').load_extension('luasnip')
+			-- require("telescope").load_extension("frecency")
 		end,
 	},
 }

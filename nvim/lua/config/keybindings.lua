@@ -417,6 +417,39 @@ if isGui() then
 end
 
 --------------------------------------------------------------------------------
+-- luasnip
+
+keymap({ "i", "s" }, "<D-j>", function()
+	if require("luasnip").jumpable(1) then
+		require("luasnip").jump(1)
+	else
+		vim.notify("No Jump available.", logWarn)
+	end
+end, { desc = "LuaSnip: Jump" })
+
+keymap({ "i", "s" }, "<D-S-j>", function()
+	if require("luasnip").jumpable(-1) then
+		require("luasnip").jump(-1)
+	else
+		vim.notify("No Jump back available.", logWarn)
+	end
+end, { desc = "LuaSnip: Jump Back" })
+
+keymap({ "i", "s" }, "<D-k>", function()
+	if require("luasnip").choice_active() then
+		require("luasnip.extras.select_choice")()
+		return "<Esc>" -- HACK so we do not end up in insert mode for the selection
+	elseif bo.filetype == "markdown" then
+		return "<D-k>" -- md link creation
+	else
+		vim.notify("No Choice available.", logWarn)
+		return ""
+	end
+end, { desc = "LuaSnip: Select Choice", expr = true, remap = true })
+
+keymap("n", "<leader>ls", function () cmd.Telescope("luasnip") end, { desc = " LuaSnip: Snippets" })
+
+--------------------------------------------------------------------------------
 
 -- Color Picker
 keymap("n", "#", ":CccPick<CR>")
@@ -439,14 +472,14 @@ keymap("n", "go", function()
 	if cwd:find("/nvim/") and not (cwd:find("/my%-plugins/")) then
 		scope = "find_files cwd=" .. fn.stdpath("config")
 	elseif not isGitRepo or cwd:find("/hammerspoon/") then
-		-- scope = "find_files"
 		scope = "find_files"
 	end
 	cmd("Telescope " .. scope)
 end, { desc = " Smart Find Files" })
 keymap("n", "gO", function() cmd.Telescope("find_files") end, { desc = " Files in cwd" })
 keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " Text in cwd" })
-keymap("n", "gr", function() cmd.Telescope("frecency") end, { desc = " Recent Files" })
+keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
+-- keymap("n", "gr", function() cmd.Telescope("frecency") end, { desc = " Recent Files" })
 
 -- File Operations
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = "copy filepath" })
