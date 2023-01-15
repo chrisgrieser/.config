@@ -9,7 +9,7 @@ local lsp_servers = {
 	"sumneko_lua",
 	"yamlls",
 	"jsonls",
-	"bashls", -- also used for zsh; requires shellcheck-cli
+	"bashls", -- used for zsh; also requires shellcheck-cli
 	"cssls",
 	"emmet_ls", -- css & html completion
 	"pyright", -- python
