@@ -82,14 +82,11 @@ keymap("n", "Ä", require("funcs.mark-cycler").setMark, { desc = "Set Next Mark"
 --------------------------------------------------------------------------------
 
 keymap("n", "<Esc>", function()
-	cmd.nohlsearch()
-	cmd.echo() -- clear shortmessage
-	require("lualine").refresh() -- so the highlight count disappears quicker
 	if isGui() then
 		local clearPending = require("notify").pending() > 10
 		require("notify").dismiss { pending = clearPending }
 	end
-end, { desc = "clear highlights & notifications" })
+end, { desc = "clear notifications" })
 
 -- FOLDING
 keymap("n", "^", "za", { desc = "toggle fold" })
@@ -125,10 +122,10 @@ keymap("n", "c", '"_c')
 keymap("n", "cc", '"_cc')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = "paste without switching register" })
--- so `dd` does not copy an empty line into the register
 keymap("n", "dd", function()
-	if fn.getline("."):find("^%s*$") then return '"_dd' end ---@diagnostic disable-line: param-type-mismatch, undefined-field
-	return "dd"
+	local isBlankLine = fn.getline("."):find("^%s*$") ---@diagnostic disable-line: param-type-mismatch, undefined-field
+	local expr = isBlankLine and '"_dd' or "dd"
+	return expr
 end, { expr = true })
 
 -- yanking without moving the cursor
@@ -172,11 +169,8 @@ autocmd("TextYankPost", {
 -- cycle through the last deletes/yanks ("2 till "9), starting at non-last
 -- delete/yank
 keymap("n", "P", function()
-	if not g.killringCount then
-		g.killringCount = 2 -- initialize
-	elseif g.killringCount > 2 then
-		cmd.undo() -- do not undo first call
-	end
+	if not g.killringCount then g.killringCount = 2 end
+	cmd.undo()
 	normal('"' .. tostring(g.killringCount) .. "p")
 	g.killringCount = g.killringCount + 1
 	if g.killringCount > 9 then
@@ -281,12 +275,7 @@ keymap("x", "R", qol.duplicateSelection, { desc = "duplicate selection" })
 -- Undo
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
 keymap("n", "<C-u>", qol.undoDuration, { desc = "undo specific durations" })
-keymap(
-	"n",
-	"<leader>u",
-	function() require("telescope").extensions.undo.undo() end,
-	{ desc = " Undotree" }
-)
+keymap("n", "<leader>u", function() cmd.Telescope("undo") end, { desc = " Undotree" })
 
 -- Refactor
 keymap(
@@ -450,12 +439,14 @@ keymap("n", "go", function()
 	if cwd:find("/nvim/") and not (cwd:find("/my%-plugins/")) then
 		scope = "find_files cwd=" .. fn.stdpath("config")
 	elseif not isGitRepo or cwd:find("/hammerspoon/") then
+		-- scope = "find_files"
 		scope = "find_files"
 	end
 	cmd("Telescope " .. scope)
 end, { desc = " Smart Find Files" })
 keymap("n", "gO", function() cmd.Telescope("find_files") end, { desc = " Files in cwd" })
-keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
+-- keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
+keymap("n", "gr", function() cmd.Telescope("smart_open") end, { desc = " Recent Files" })
 keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " Text in cwd" })
 
 -- File Operations
@@ -645,7 +636,7 @@ for _, key in ipairs { "x", "h", "l" } do
 			vim.defer_fn(function() count = count - 1 end, timeout) ---@diagnostic disable-line: param-type-mismatch
 			return key
 		end
-	end, { expr = true, desc = key.. " (delaytrain)" })
+	end, { expr = true, desc = key .. " (delaytrain)" })
 end
 
 --------------------------------------------------------------------------------

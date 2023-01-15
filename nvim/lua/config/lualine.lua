@@ -104,6 +104,15 @@ local function currentFile()
 	return icon .. curFile
 end
 
+-- clock, but only when full screen (and therefore covering the sketchybar)
+local function clock()
+	if fn.winwidth(0) < 110 then return "" end
+	local time = os.date():sub(12, 19)
+	-- blinking `:`
+	if os.time() % 2 == 1 then time = time:gsub(":", " ") end
+	return " " .. time
+end
+
 --------------------------------------------------------------------------------
 
 -- nerdfont: 'nf-ple'; since separators look off in Terminal
@@ -125,7 +134,7 @@ require("lualine").setup {
 					error = " ",
 					warn = " ",
 					info = " ",
-					hint = " ",
+					hint = "ﬤ ",
 				},
 			},
 			{ mixedIndentation },
@@ -140,6 +149,9 @@ require("lualine").setup {
 		},
 	},
 	winbar = {
+		lualine_a = {
+			{ clock },
+		},
 		lualine_b = {
 			{
 				navic.get_location,
@@ -182,7 +194,10 @@ require("lualine").setup {
 		section_separators = bottomSeparators,
 		disabled_filetypes = {
 			statusline = {},
-			winbar = { "toggleterm", "gitcommit" },
+			winbar = {
+				"toggleterm",
+				"gitcommit",
+			},
 		},
 	},
 }

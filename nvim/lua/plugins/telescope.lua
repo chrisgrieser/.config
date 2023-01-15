@@ -138,9 +138,9 @@ local options = {
 			layout_config = { cursor = { width = 0.4 } },
 		},
 		quickfix = {
-			-- layout_config = { preview_cutoff = 9001 },
 			trim_text = true,
 			show_line = true,
+			prompt_prefix = " ",
 		},
 		live_grep = {
 			cwd = "%:p:h",
@@ -173,6 +173,12 @@ local options = {
 			prompt_prefix = "碑",
 			initial_mode = "normal",
 		},
+		smart_open = {
+			ignore_patterns = {
+				"*.git/*",
+				"*/tmp/*",
+			},
+		},
 	},
 }
 
@@ -184,12 +190,13 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"debugloop/telescope-undo.nvim",
-			"rcarriga/nvim-notify",
+			{ "danielfalk/smart-open.nvim", dependencies = "tami5/sqlite.lua" },
 		},
 		config = function()
 			require("telescope").setup(options)
 			require("telescope").load_extension("undo")
 			require("telescope").load_extension("notify")
+			require("telescope").load_extension("smart_open")
 		end,
 	},
 }

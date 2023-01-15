@@ -83,6 +83,12 @@
 			},
 			{
 				"language": [
+					"lua"
+				],
+				"path": "./project-specific/nvim-lua.json"
+			},
+			{
+				"language": [
 					"typescript"
 				],
 				"path": "./project-specific/obsidian-plugin-dev.json"

@@ -13,7 +13,8 @@
 	},
 	"substitute": {
 		"prefix": "substitute",
-		"body": "${${1:var}/${2:search}/${3:replace}}"
+		"body": "${${1:var}//${2:search}/${3:replace}}",
+		"description": "one slash for single substitution, two for global substitution"
 	},
 	"PATH": {
 		"prefix": "PATH",
@@ -114,15 +115,7 @@
 	},
 	"function": {
 		"prefix": "function",
-		"body": "${1:name} ()\n{\n\t${0}\n}",
-		"description": [
-			"This defines a function named name.\n",
-			"The reserved word function is optional.\n",
-			"If the function reserved word is supplied, the parentheses are optional.\n",
-			"1. Recommended way:\n",
-			"name() {}\n",
-			"2. C-like-way:\nfunction name [()] {}"
-		]
+		"body": "function ${1:name} ()\n{\n\t${0}\n}"
 	},
 	"case": {
 		"prefix": "case",
