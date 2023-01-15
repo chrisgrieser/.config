@@ -445,9 +445,8 @@ keymap("n", "go", function()
 	cmd("Telescope " .. scope)
 end, { desc = " Smart Find Files" })
 keymap("n", "gO", function() cmd.Telescope("find_files") end, { desc = " Files in cwd" })
--- keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
-keymap("n", "gr", function() cmd.Telescope("smart_open") end, { desc = " Recent Files" })
 keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " Text in cwd" })
+keymap("n", "gr", function() cmd.Telescope("frecency") end, { desc = " Recent Files" })
 
 -- File Operations
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = "copy filepath" })

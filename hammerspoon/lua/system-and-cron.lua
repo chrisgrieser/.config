@@ -102,7 +102,9 @@ function syncAllGitRepos()
 	-- wait until sync is finished so sketchybar update shows success/failure
 	local function updateSketchybar()
 		-- https://felixkratz.github.io/SketchyBar/config/events#triggering-custom-events
-		hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --trigger repo-files-update")
+		hs.execute(
+			"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --trigger repo-files-update"
+		)
 	end
 
 	hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
@@ -133,7 +135,9 @@ wakeWatcher = caff
 			not (isAtOffice()) and (eventType == caff.screensDidWake or eventType == caff.systemDidWake)
 		then
 			runWithDelays(1, function()
-				hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --set clock popup.drawing=true")
+				hs.execute(
+					"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --set clock popup.drawing=true"
+				)
 				if isProjector() then
 					setDarkmode(true)
 					movieModeLayout()
@@ -153,10 +157,10 @@ wakeWatcher = caff
 -- CRONJOBS AT HOME
 
 -- Drafts to do if trackpadBattery is low
-function trackpadBatteryCheck()
-	local warningLevel = 101
+local function trackpadBatteryCheck()
+	local warningLevel = 20
 	local trackpadPercent = hs.execute(
-		[[ ioreg -c AppleDeviceManagementHIDEventService -r -l | grep -i trackpad -A 20 | grep BatteryPercent | cut -d= -f2 | cut -d' ' -f2 ]]
+		[[ioreg -c AppleDeviceManagementHIDEventService -r -l | grep -i trackpad -A 20 | grep BatteryPercent | cut -d= -f2 | cut -d' ' -f2]]
 	)
 	if not trackpadPercent then return end -- no trackpad connected
 	trackpadPercent = trim(trackpadPercent)
