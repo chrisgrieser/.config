@@ -37,10 +37,10 @@ require("nvim-treesitter.configs").setup {
 	incremental_selection = {
 		enable = true,
 		keymaps = {
-			init_selection = "<leader>vv", -- set to `false` to disable one of the mappings
-			node_incremental = "<leader>vj",
-			scope_incremental = "<leader>vl",
-			node_decremental = "<leader>vk",
+			init_selection = false, -- set to `false` to disable one of the mappings
+			node_incremental = "<CR>",
+			scope_incremental = false,
+			node_decremental = "<BS>",
 		},
 	},
 	-- use treesitter for autoindent with `=`

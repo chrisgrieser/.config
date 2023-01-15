@@ -309,7 +309,7 @@ keymap("n", "gx", function()
 	local foundURL = fn.mode():find("v")
 	local url
 	if foundURL then
-		normal([["zy"]])
+		normal([["zy]])
 		url = fn.getreg("z")
 		os.execute("open '" .. url .. "'")
 	else
@@ -359,6 +359,7 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode" })
+-- INFO <CR> to increment, <BS> to decrement selection defined via treesitter
 
 --------------------------------------------------------------------------------
 -- BUFFERS & WINDOWS & SPLITS
@@ -447,7 +448,7 @@ keymap({ "i", "s" }, "<D-k>", function()
 	end
 end, { desc = "LuaSnip: Select Choice", expr = true, remap = true })
 
-keymap("n", "<leader>ls", function () cmd.Telescope("luasnip") end, { desc = " LuaSnip: Snippets" })
+keymap("n", "<leader>ls", function() cmd.Telescope("luasnip") end, { desc = " LuaSnip: Snippets" })
 
 --------------------------------------------------------------------------------
 

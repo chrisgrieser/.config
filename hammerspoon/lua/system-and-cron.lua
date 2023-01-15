@@ -19,9 +19,10 @@ local dotfilesFolder = getenv("DOTFILE_FOLDER")
 local passwordStore = getenv("PASSWORD_STORE_DIR")
 local vaultLocation = getenv("VAULT_PATH")
 
-local gitDotfileScript = dotfilesFolder .. "/git-dotfile-sync.sh"
-local gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
-local gitPassScript = passwordStore .. "/pass-sync.sh"
+-- not local, cause otherwise vault-launch-path sometimes becomes inaccessible?!
+gitDotfileScript = dotfilesFolder .. "/git-dotfile-sync.sh"
+gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
+gitPassScript = passwordStore .. "/pass-sync.sh"
 
 --------------------------------------------------------------------------------
 
