@@ -69,11 +69,19 @@ local function config()
 			end
 		end
 
-		-- use macOS notification if not focused
+		-- use macOS notification if neovim is not focused
 		if not g.nvim_has_focus then
-			local _msg = table.concat(truncated, "\n")
-			os.execute([[osascript -e 'display notification "" with title "]] .. _msg .. [[" with sound']])
+			local title = table.remove(truncated, 1)
+			local text = #truncated > 0 and table.concat(truncated, "\n") or ""
+			os.execute(
+				[[osascript -e 'display notification "]]
+					.. text
+					.. [[" with title "]]
+					.. title
+					.. [[" sound name "Blow"']]
+			)
 		end
+
 		return require("notify")(truncated, level, opts)
 	end
 
