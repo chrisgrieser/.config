@@ -46,16 +46,14 @@ end):start()
 -- pseudomaximized windows always get Twitterrific to the side
 wf_maxWindows = wf.new(true)
 	:subscribe(wf.windowUnfocused, function(win)
-		if checkSize(win, maximized) then
-			win:application():hide()
-		end
+		if isProjector() then return end
+		if checkSize(win, maximized) then win:application():hide() end
 	end)
 	:subscribe(wf.windowFocused, function(win)
 		if checkSize(win, pseudoMaximized) and appIsRunning("Twitterrific") then
 			app("Twitterrific"):mainWindow():raise()
 		end
 	end)
-
 
 ---play/pause spotify with spotifyTUI
 ---@param toStatus string pause|play
@@ -92,7 +90,7 @@ end):start()
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
--- PIXELMATOR: maximized
+-- PIXELMATOR: open maximized
 pixelmatorWatcher = aw.new(function(appName, eventType, appObj)
 	if appName == "Pixelmator" and eventType == aw.launched then
 		runWithDelays(0.3, function() moveResize(appObj, maximized) end)
@@ -321,6 +319,7 @@ end):start()
 -- close first window, when second is open
 -- don't leave browser tab behind when opening zoom
 wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
+	quitApp("BusyCal") -- mostly only used to open a Zoom link
 	applescript([[
 			tell application "Brave Browser"
 				set window_list to every window
