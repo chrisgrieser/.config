@@ -34,7 +34,15 @@ require("nvim-treesitter.configs").setup {
 			"markdown", -- looks worse and enables spellcheck in URLs and Code Blocks 🙈
 		},
 	},
-
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "<leader>vv", -- set to `false` to disable one of the mappings
+			node_incremental = "<leader>vj",
+			scope_incremental = "<leader>vl",
+			node_decremental = "<leader>vk",
+		},
+	},
 	-- use treesitter for autoindent with `=`
 	indentation = {
 		enable = true,

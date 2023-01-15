@@ -358,35 +358,6 @@ return {
 			-- INFO has to be loaded after the regular luasnip-snippets
 			require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
 
-			-- to be able to jump without <Tab> (e.g. when there is a non-needed suggestion)
-			vim.keymap.set({ "i", "s" }, "<D-j>", function()
-				if require("luasnip").jumpable(1) then
-					require("luasnip").jump(1)
-				else
-					vim.notify("No Jump available.", vim.log.levels.WARN)
-				end
-			end, { desc = "LuaSnip: Jump" })
-
-			vim.keymap.set({ "i", "s" }, "<D-S-j>", function()
-				if require("luasnip").jumpable(-1) then
-					require("luasnip").jump(-1)
-				else
-					vim.notify("No Jump back available.", vim.log.levels.WARN)
-				end
-			end, { desc = "LuaSnip: Jump Back" })
-
-			vim.keymap.set({ "i", "s" }, "<D-k>", function()
-				if require("luasnip").choice_active() then
-					require("luasnip.extras.select_choice")()
-					return "<Esc>" -- HACK so we do not end up in insert mode for the selection
-				elseif bo.filetype == "markdown" then
-					return "<D-k>" -- md link creation
-				else
-					vim.notify("No Choice available.", vim.log.levels.WARN)
-					return ""
-				end
-			end, { desc = "LuaSnip: Select Choice", expr = true, remap = true })
-
 		end,
 	},
 }
