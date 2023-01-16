@@ -272,7 +272,7 @@ keymap("n", "cR", "R", { desc = "replace mode" })
 -- TODO figure out how to use duplicate line with the same motion
 keymap("n", "R", require("funcs.duplication").smartDuplicateLine, { desc = "smart duplicate line" })
 keymap("x", "R", require("funcs.duplication").duplicateSelection, { desc = "duplicate selection" })
-keymap("n", "yd", require("funcs.duplication").duplicateLines, { expr = true, desc = "duplicate lines" })
+keymap("n", "yd", require("funcs.duplication").duplicateOperator, { expr = true, desc = "duplicate lines" })
 
 -- Undo
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo

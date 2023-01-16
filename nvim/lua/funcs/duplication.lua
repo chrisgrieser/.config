@@ -26,11 +26,27 @@ local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 --------------------------------------------------------------------------------
 
+-- INFO `:h :map-operator`
+function g.duplicationOperator(motionType)
+	if motionType == "block" then
+		vim.notify("Blockwise is not supported", vim.log.levels.WARN)
+		return
+	end
+	normal([['[V']"zy']"zp]])
+end
+
+function M.duplicateOperator()
+	opt.opfunc = "v:lua.g.duplicationOperator"
+	return "g@"
+end
+
 function M.duplicateSelection()
 	local prevReg = fn.getreg("z")
 	cmd([[noautocmd silent! normal!"zy`]"zp]]) -- `noautocmd` to not trigger highlighted-yank
 	fn.setreg("z", prevReg)
 end
+
+--------------------------------------------------------------------------------
 
 -- Duplicate line under cursor, change occurrences of certain words to their
 -- opposite, e.g., "right" to "left", and move cursor to key is there is one
@@ -97,21 +113,6 @@ function M.smartDuplicateLine()
 	local _, valuePos = line:find(".%w+ ?[:=] ?")
 	if valuePos then colNum = valuePos end
 	setCursor(0, { lineNum, colNum })
-end
-
---------------------------------------------------------------------------------
--- `:h :map-operator`
-function g.duplicationOperator(motionType)
-	if motionType == "block" then
-		vim.notify("Blockwise is not supported", vim.log.levels.WARN)
-		return
-	end
-	normal([['[V']"zy']"zp]])
-end
-
-function M.duplicateLines()
-	opt.opfunc = "v:lua.duplicationOperator"
-	return "g@"
 end
 
 --------------------------------------------------------------------------------
