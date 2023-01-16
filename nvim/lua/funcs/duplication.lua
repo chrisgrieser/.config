@@ -94,17 +94,17 @@ function M.smartDuplicateLine()
 end
 
 --------------------------------------------------------------------------------
--- selene: allow(global_usage)
-function _G.duplicationOperator(motionType)
-	if motionType ~= "line" then
-		vim.notify("Only linewise motions are supported", vim.log.levels.WARN)
+-- `:h :map-operator`
+function g.duplicationOperator(motionType)
+	if motionType == "block" then
+		vim.notify("Blockwise is not supported", vim.log.levels.WARN)
 		return
 	end
 	normal([['[V']"zy']"zp]])
 end
 
 function M.duplicateLines()
-	opt.opfunc = "v:lua._G.duplicationOperator"
+	opt.opfunc = "v:lua.duplicationOperator"
 	return "g@"
 end
 
