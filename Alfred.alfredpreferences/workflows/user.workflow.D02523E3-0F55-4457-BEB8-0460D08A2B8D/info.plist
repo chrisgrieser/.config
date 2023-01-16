@@ -23,13 +23,13 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E40A4B08-727F-4348-83B7-4DDADF9D0A42</string>
+				<string>153E3F6A-95A8-4FF7-805A-A623048AF293</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>sourceoutputuid</key>
-				<string>6789BAE6-020C-4E2F-B19D-A2A76ABB7B1E</string>
+				<string>B67D9E5B-4B10-4448-89F2-F3C8DD142154</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -40,18 +40,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>153E3F6A-95A8-4FF7-805A-A623048AF293</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>B67D9E5B-4B10-4448-89F2-F3C8DD142154</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -73,6 +61,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>43252EC6-55CA-4A44-A188-D5BBD5C4AA80</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>BC51A3E9-3309-48C6-95AB-FF3BA9BECFB2</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -83,18 +81,7 @@
 			</dict>
 		</array>
 		<key>695CE482-D056-450D-B34E-0374DBE3E130</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>43252EC6-55CA-4A44-A188-D5BBD5C4AA80</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>76B52A08-F741-4099-8E6F-497F935F3F46</key>
 		<array>
 			<dict>
@@ -106,19 +93,6 @@
 				<string></string>
 				<key>vitoclose</key>
 				<true/>
-			</dict>
-		</array>
-		<key>7ED1ECFF-CA2A-4CA8-9708-104CC4AC0F66</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3AB5A5A0-4AC0-41EA-BC28-57C32CB52CE0</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
 			</dict>
 		</array>
 		<key>8CC9695B-FF16-4D41-96E2-00AB6C8E0FD8</key>
@@ -189,6 +163,18 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>B8C5C265-F91B-4B36-9A9D-38616D002172</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>B0C05202-9440-44C7-A17C-33A859889BDA</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>21773296-E9A5-45E2-BFAD-B68AA2338E9C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -218,32 +204,6 @@
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>3D30D3D8-0555-4201-AB3B-CF2051679D12</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>D03967B5-2EA2-4564-A50E-4DCFE6A462D8</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7ED1ECFF-CA2A-4CA8-9708-104CC4AC0F66</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<true/>
-			</dict>
-		</array>
-		<key>E40A4B08-727F-4348-83B7-4DDADF9D0A42</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D03967B5-2EA2-4564-A50E-4DCFE6A462D8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -336,149 +296,108 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>anchorfields</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>daterange</key>
-				<integer>0</integer>
-				<key>fields</key>
-				<array>
-					<dict>
-						<key>field</key>
-						<string>kMDItemDisplayName</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>field</key>
-						<string>kMDItemAlternateNames</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>field</key>
-						<string>kMDItemFinderComment</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-				</array>
-				<key>includesystem</key>
-				<false/>
-				<key>limit</key>
-				<integer>0</integer>
-				<key>runningsubtext</key>
+				<key>openwith</key>
 				<string></string>
-				<key>scopes</key>
-				<array>
-					<string>/</string>
-				</array>
-				<key>sortmode</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string>Press [space] to show recently modified</string>
-				<key>title</key>
-				<string>Select a Folder</string>
-				<key>types</key>
-				<array>
-					<string>public.folder</string>
-				</array>
-				<key>withspace</key>
-				<false/>
+				<key>sourcefile</key>
+				<string>{var:script_location}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.filefilter</string>
+			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>D03967B5-2EA2-4564-A50E-4DCFE6A462D8</string>
+			<string>B8C5C265-F91B-4B36-9A9D-38616D002172</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string> </string>
-				<key>passthroughargument</key>
+				<key>paths</key>
+				<array>
+					<string>/System/Applications/Utilities/Disk Utility.app</string>
+				</array>
+				<key>toggle</key>
 				<false/>
-				<key>variables</key>
-				<dict/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
+			<string>alfred.workflow.action.launchfiles</string>
 			<key>uid</key>
-			<string>E40A4B08-727F-4348-83B7-4DDADF9D0A42</string>
+			<string>153E3F6A-95A8-4FF7-805A-A623048AF293</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>^\/users\/[^\/]*(\/.*)$</string>
-				<key>regexcaseinsensitive</key>
-				<true/>
-				<key>regexmultiline</key>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>create</string>
+						<key>outputlabel</key>
+						<string>create</string>
+						<key>uid</key>
+						<string>A13F9A97-CEE4-437F-84BF-487F8B006FEE</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>destination</string>
+						<key>outputlabel</key>
+						<string>destination</string>
+						<key>uid</key>
+						<string>FA5B8C94-F929-4CF5-A28A-6EC7F8AB9F13</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>edit_script</string>
+						<key>outputlabel</key>
+						<string>edit_script</string>
+						<key>uid</key>
+						<string>B0C05202-9440-44C7-A17C-33A859889BDA</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>log</string>
+						<key>outputlabel</key>
+						<string>log</string>
+						<key>uid</key>
+						<string>3D30D3D8-0555-4201-AB3B-CF2051679D12</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>exit</string>
+				<key>hideelse</key>
 				<false/>
-				<key>replacestring</key>
-				<string>~$1</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>7ED1ECFF-CA2A-4CA8-9708-104CC4AC0F66</string>
+			<string>C9B603D2-DA32-4499-B9FB-4E4C4A44199D</string>
 			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>on run
-
-tell application "Alfred" 
-    set configuration "backup_destination" to value "{query}" in workflow "de.chris-grieser.backup-utility"
-end tell
-
-end run</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>3AB5A5A0-4AC0-41EA-BC28-57C32CB52CE0</string>
-			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -502,21 +421,48 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>'{var:backup_destination}'</string>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<true/>
+				<key>items</key>
+				<string>[{"title":"🚪 Exit","arg":"exit"},{"title":"➡️ Create Backup","arg":"create","subtitle":""},{"title":"📍 Select Destination","arg":"destination","subtitle":"{var:backup_destination}"},{"title":"🗄 Show Log of Backups","arg":"log","subtitle":"Last Backup: {var:last_backup}"}]</string>
+				<key>keyword</key>
+				<string>bkp utility</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Last Backup: {var:last_backup}</string>
 				<key>title</key>
-				<string>✅ Backup Destination set</string>
+				<string>Backup Utility</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.input.listfilter</string>
 			<key>uid</key>
-			<string>BC51A3E9-3309-48C6-95AB-FF3BA9BECFB2</string>
+			<string>928B3C0B-1C4F-4E82-8FB5-A8D994E7B377</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>21773296-E9A5-45E2-BFAD-B68AA2338E9C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -613,37 +559,8 @@ JSON.stringify({ 'items': volume_array });
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>soundname</key>
-				<string>Blow</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>695CE482-D056-450D-B34E-0374DBE3E130</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>folder</string>
-						<key>outputlabel</key>
-						<string>Folder</string>
-						<key>uid</key>
-						<string>6789BAE6-020C-4E2F-B19D-A2A76ABB7B1E</string>
-					</dict>
 					<dict>
 						<key>inputstring</key>
 						<string></string>
@@ -674,125 +591,65 @@ JSON.stringify({ 'items': volume_array });
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>create</string>
-						<key>outputlabel</key>
-						<string>create</string>
-						<key>uid</key>
-						<string>A13F9A97-CEE4-437F-84BF-487F8B006FEE</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>destination</string>
-						<key>outputlabel</key>
-						<string>destination</string>
-						<key>uid</key>
-						<string>FA5B8C94-F929-4CF5-A28A-6EC7F8AB9F13</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>log</string>
-						<key>outputlabel</key>
-						<string>log</string>
-						<key>uid</key>
-						<string>3D30D3D8-0555-4201-AB3B-CF2051679D12</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>exit</string>
-				<key>hideelse</key>
+				<key>concurrently</key>
 				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>on run
+
+tell application "Alfred" 
+    set configuration "backup_destination" to value "{query}" in workflow "de.chris-grieser.backup-utility"
+end tell
+
+end run</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>C9B603D2-DA32-4499-B9FB-4E4C4A44199D</string>
+			<string>3AB5A5A0-4AC0-41EA-BC28-57C32CB52CE0</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>21773296-E9A5-45E2-BFAD-B68AA2338E9C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>fixedorder</key>
-				<true/>
-				<key>items</key>
-				<string>[{"title":"🚪 Exit","arg":"exit"},{"title":"➡️ Create Backup","arg":"create","subtitle":""},{"title":"📍 Select Destination","arg":"destination","subtitle":"{var:backup_destination}"},{"title":"🗄 Show Log of Backups","arg":"log","subtitle":"Last Backup: {var:last_backup}"}]</string>
-				<key>keyword</key>
-				<string>bkp utility</string>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Last Backup: {var:last_backup}</string>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>'{var:backup_destination}'</string>
 				<key>title</key>
-				<string>Backup Utility</string>
-				<key>withspace</key>
-				<true/>
+				<string>✅ Backup Destination set</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.listfilter</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>928B3C0B-1C4F-4E82-8FB5-A8D994E7B377</string>
+			<string>BC51A3E9-3309-48C6-95AB-FF3BA9BECFB2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>paths</key>
-				<array>
-					<string>/System/Applications/Utilities/Disk Utility.app</string>
-				</array>
-				<key>toggle</key>
-				<false/>
+				<key>soundname</key>
+				<string>Blow</string>
+				<key>systemsound</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.launchfiles</string>
+			<string>alfred.workflow.output.playsound</string>
 			<key>uid</key>
-			<string>153E3F6A-95A8-4FF7-805A-A623048AF293</string>
+			<string>695CE482-D056-450D-B34E-0374DBE3E130</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -849,18 +706,18 @@ open "$(dirname "$script_location")"/backup.log</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>500</real>
+			<real>560</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>290</real>
 		</dict>
 		<key>153E3F6A-95A8-4FF7-805A-A623048AF293</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>745</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>195</real>
 		</dict>
 		<key>1E6008CC-A359-4017-8146-31C971DB1042</key>
 		<dict>
@@ -876,36 +733,36 @@ open "$(dirname "$script_location")"/backup.log</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>290</real>
+			<real>335</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>285</real>
 		</dict>
 		<key>3AB5A5A0-4AC0-41EA-BC28-57C32CB52CE0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>905</real>
+			<real>685</real>
 			<key>ypos</key>
-			<real>230</real>
+			<real>320</real>
 		</dict>
 		<key>43252EC6-55CA-4A44-A188-D5BBD5C4AA80</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>1345</real>
+			<real>860</real>
 			<key>ypos</key>
-			<real>230</real>
+			<real>265</real>
 		</dict>
 		<key>487E90B9-FE7B-429C-BFCB-E7E12B983BAF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>565</real>
+			<real>580</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>390</real>
 		</dict>
 		<key>695CE482-D056-450D-B34E-0374DBE3E130</key>
 		<dict>
@@ -914,29 +771,18 @@ open "$(dirname "$script_location")"/backup.log</string>
 			<key>note</key>
 			<string>Sucess Sound</string>
 			<key>xpos</key>
-			<real>1200</real>
+			<real>1005</real>
 			<key>ypos</key>
-			<real>230</real>
+			<real>390</real>
 		</dict>
 		<key>76B52A08-F741-4099-8E6F-497F935F3F46</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>355</real>
+			<real>415</real>
 			<key>ypos</key>
-			<real>230</real>
-		</dict>
-		<key>7ED1ECFF-CA2A-4CA8-9708-104CC4AC0F66</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>replace home with ~</string>
-			<key>xpos</key>
-			<real>805</real>
-			<key>ypos</key>
-			<real>185</real>
+			<real>285</real>
 		</dict>
 		<key>8CC9695B-FF16-4D41-96E2-00AB6C8E0FD8</key>
 		<dict>
@@ -956,14 +802,21 @@ open "$(dirname "$script_location")"/backup.log</string>
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
+		<key>B8C5C265-F91B-4B36-9A9D-38616D002172</key>
+		<dict>
+			<key>xpos</key>
+			<real>410</real>
+			<key>ypos</key>
+			<real>170</real>
+		</dict>
 		<key>BC51A3E9-3309-48C6-95AB-FF3BA9BECFB2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>1050</real>
+			<real>860</real>
 			<key>ypos</key>
-			<real>230</real>
+			<real>390</real>
 		</dict>
 		<key>C6827BBA-3B61-41F0-AE3B-A0F9EC8B1BA0</key>
 		<dict>
@@ -972,9 +825,9 @@ open "$(dirname "$script_location")"/backup.log</string>
 			<key>note</key>
 			<string>open backup.log</string>
 			<key>xpos</key>
-			<real>345</real>
+			<real>450</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>450</real>
 		</dict>
 		<key>C9B603D2-DA32-4499-B9FB-4E4C4A44199D</key>
 		<dict>
@@ -984,24 +837,6 @@ open "$(dirname "$script_location")"/backup.log</string>
 			<real>180</real>
 			<key>ypos</key>
 			<real>260</real>
-		</dict>
-		<key>D03967B5-2EA2-4564-A50E-4DCFE6A462D8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>645</real>
-			<key>ypos</key>
-			<real>155</real>
-		</dict>
-		<key>E40A4B08-727F-4348-83B7-4DDADF9D0A42</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>590</real>
-			<key>ypos</key>
-			<real>185</real>
 		</dict>
 		<key>ED3C9FD2-44B2-4B74-AA30-21125E2222FF</key>
 		<dict>
@@ -1042,7 +877,7 @@ open "$(dirname "$script_location")"/backup.log</string>
 		<key>backup_destination</key>
 		<string>/Volumes/Externe C</string>
 		<key>last_backup</key>
-		<string>2023-01-05 15:58</string>
+		<string>2023-01-16 14:20</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
