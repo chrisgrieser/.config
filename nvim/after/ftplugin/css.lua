@@ -1,6 +1,6 @@
 require("config.utils")
 local opts = { buffer = true }
-local qol = require("funcs.quality-of-life")
+local qol = require("funcs.duplication")
 --------------------------------------------------------------------------------
 
 bo.grepprg = "rg --vimgrep --no-column" -- remove columns
