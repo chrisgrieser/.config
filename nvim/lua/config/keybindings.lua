@@ -670,3 +670,15 @@ for _, key in ipairs { "x", "h", "l" } do
 end
 
 --------------------------------------------------------------------------------
+
+function duplicationOperator(vt)
+	print("beep")
+	print(type(vt))	
+end
+
+keymap("n", "z", function ()
+	opt.opfunc = "duplicationOperator"
+	return "g@"
+end, { expr = true, desc = "duplication operator" })
+
+-- test
