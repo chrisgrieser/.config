@@ -93,31 +93,20 @@ function M.smartDuplicateLine()
 	setCursor(0, { lineNum, colNum })
 end
 
-function M.duplicateSelection()
-	local prevReg = fn.getreg("z")
-	cmd([[noautocmd silent! normal!"zy`]"zp]]) -- `noautocmd` to not trigger highlighted-yank
-	fn.setreg("z", prevReg)
-end
-
 --------------------------------------------------------------------------------
 -- selene: allow(global_usage)
 function _G.duplicationOperator(motionType)
-	print("motionType:", motionType)
-	if motionType == "char" then
-		vim.cmd([[noautocmd normal!`[v`]"zy]])
-	elseif motionType == "line" then
-		normal([['[v']$"zy]])
-	else
-		vim.notify("Visual Block Mode not supported yet.", logWarn)
+	if motionType ~= "line" then
+		vim.notify("Only linewise motions are supported", vim.log.levels.WARN)
 		return
 	end
-	normal('"zp')
+	normal([['[V']"zy']"zp]])
 end
 
-vim.keymap.set("n", "yd", function()
+function M.duplicateLines()
 	opt.opfunc = "v:lua._G.duplicationOperator"
 	return "g@"
-end, { expr = true, desc = "duplication operator" })
+end
 
 --------------------------------------------------------------------------------
 

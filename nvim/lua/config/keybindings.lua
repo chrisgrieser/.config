@@ -269,8 +269,8 @@ keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
 keymap("n", "cR", "R", { desc = "replace mode" })
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
-keymap("n", "R", require("funcs.duplication").smartDuplicateLine, { desc = "smart duplicate line" })
-keymap("x", "R", require("funcs.duplication").duplicateSelection, { desc = "duplicate selection" })
+keymap("n", "R", require("funcs.duplication").smartDuplicateLine, { nowait = true, desc = "smart duplicate line" })
+keymap("n", "yd", require("funcs.duplication").duplicateLines, { nowait = true, expr = true, desc = "duplicate lines" })
 
 -- Undo
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
