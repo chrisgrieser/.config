@@ -305,7 +305,7 @@ keymap( { "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { des
 
 -- URL Opening
 keymap("n", "gx", function()
-	require("various-textobjs").url() 
+	require("various-textobjs").url()
 	local foundURL = fn.mode():find("v")
 	if foundURL then
 		normal([["zy]])
@@ -671,14 +671,15 @@ end
 
 --------------------------------------------------------------------------------
 
-function duplicationOperator(vt)
-	print("beep")
-	print(type(vt))	
+function duplicationOperator(motionType)
+	-- local start = fn.getpos("'[")
+	-- local ending = fn.getpos("']")
+	normal('`["zy`]')
+	local object = fn.getreg("z")
+	vim.notify(object)
 end
 
-keymap("n", "z", function ()
-	opt.opfunc = "duplicationOperator"
-	return "g@"
-end, { expr = true, desc = "duplication operator" })
+keymap("n", "zz", ":set opfunc=v:lua.duplicationOperator<CR>g@", { desc = "duplication operator" })
 
+-- test
 -- test
