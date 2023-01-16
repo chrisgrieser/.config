@@ -65,7 +65,9 @@ local function config()
 			new_lines = new_lines
 			for _, nl in ipairs(new_lines) do
 				nl = nl:gsub("^%s*", ""):gsub("%s*$", "")
-				table.insert(truncated, " " .. nl .. " ")
+				if nl and nl ~= "" then
+					table.insert(truncated, " " .. nl .. " ")
+				end
 			end
 		end
 
