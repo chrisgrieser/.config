@@ -10,8 +10,9 @@ roundedCorners = hs.loadSpoon("RoundedCorners")
 roundedCorners.radius = 8
 roundedCorners:start()
 
--- to stop wallpaper shining through
-function holeCover ()
+---to stop wallpaper shining through
+---@param arg? string
+function holeCover (arg)
 	if isAtOffice() or isProjector() then return end
 
 	if cover1 then
@@ -26,6 +27,7 @@ function holeCover ()
 		cover3:delete()
 		cover3 = nil
 	end
+	if arg == "remove" then return end
 
 	local bgColor
 	local screen = hs.screen.mainScreen():frame()

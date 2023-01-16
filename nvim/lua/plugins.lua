@@ -33,10 +33,8 @@ return {
 		config = function()
 			vim.fn.sign_define("LightBulbSign", { text = "" })
 
-			require("nvim-lightbulb").setup {
-				autocmd = { enabled = false },
-			}
-			-- HACK since ignore options does not work
+			-- HACK since ignore options does not work https://github.com/kosayoda/nvim-lightbulb/issues/39
+			require("nvim-lightbulb").setup { autocmd = { enabled = false } }
 			vim.api.nvim_create_augroup("lightbulb-fix", {})
 			vim.api.nvim_create_autocmd({ "CursorHold" }, {
 				group = "lightbulb-fix",
@@ -84,18 +82,6 @@ return {
 					width = { min = 20, max = 33 },
 					spacing = 1,
 				},
-			}
-		end,
-	},
-	{
-		"axieax/urlview.nvim",
-		cmd = "UrlView",
-		dependencies = "nvim-telescope/telescope.nvim",
-		config = function()
-			require("urlview").setup {
-				default_picker = "telescope",
-				default_action = "system",
-				sorted = false,
 			}
 		end,
 	},

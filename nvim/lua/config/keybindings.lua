@@ -305,15 +305,12 @@ keymap( { "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { des
 
 -- URL Opening
 keymap("n", "gx", function()
-	require("various-textobjs").url() -- select url
+	require("various-textobjs").url() 
 	local foundURL = fn.mode():find("v")
-	local url
 	if foundURL then
 		normal([["zy]])
-		url = fn.getreg("z")
+		local url = fn.getreg("z")
 		os.execute("open '" .. url .. "'")
-	else
-		cmd.UrlView("buffer") -- if not found in proximity, search whole buffer via urlview.nvim
 	end
 end, { desc = "Smart URL Opener" })
 
