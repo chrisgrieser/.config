@@ -1,4 +1,3 @@
-local actions = require("telescope.actions")
 local maps = {
 	["<Esc>"] = "close",
 	["<D-w>"] = "delete_buffer",
@@ -10,8 +9,8 @@ local maps = {
 	["<Down>"] = "move_selection_next",
 	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
 	["<Tab>"] = function(prompt) -- multi-select
-		actions.toggle_selection(prompt)
-		actions.move_selection_next(prompt)
+		require("telescope.actions").toggle_selection(prompt)
+		require("telescope.actions").move_selection_next(prompt)
 	end,
 }
 
