@@ -52,6 +52,8 @@ function directoryInspect (){
 	fi
 }
 
+alias bkp='zsh "$DOTFILE_FOLDER/utility-scripts/backup-script.sh"'
+
 # measure zsh loading time, https://blog.jonlu.ca/posts/speeding-up-zsh
 function timezsh(){
 	time $SHELL -i -c exit

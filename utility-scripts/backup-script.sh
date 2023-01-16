@@ -1,24 +1,35 @@
 #!/bin/zsh
 
-DEVICE_NAME="$(scutil --get ComputerName)"
-
 VOLUME_NAME="$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)"
-if [[ $(echo "$VOLUME_NAME" | wc -l) -ne 1 ]] ; then echo "More than one volume connected." ; exit 1 ; fi
+if [[ $(echo "$VOLUME_NAME" | wc -l) -gt 1 ]] ; then 
+	print "\033[1;33mMore than one volume connected.\033[0m"
+	exit 1
+elif [[ $(echo "$VOLUME_NAME" | wc -l) -gt 1 ]] ; then 
+	print "\033[1;33mNo volume connected.\033[0m"
+	exit 1
+fi
+
+echo "Backing up to $VOLUME_NAME…"
+
+DEVICE_NAME="$(scutil --get ComputerName)"
 
 BACKUP_DEST="$VOLUME_NAME/Backup_$DEVICE_NAME"
 mkdir -p "$BACKUP_DEST"
 cd "$BACKUP_DEST" || exit 1
 
-#───────────────────────────────────────────────────────────────────────────────
-
 # Log (on the Mac)
 LOG_LOCATION="$(dirname "$0")/backup.log"
 echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $VOLUME_NAME -- " >>"$LOG_LOCATION"
 
+#───────────────────────────────────────────────────────────────────────────────
+
 function bkp() {
+	print -n "\033[1;34m"
+	echo
 	echo "----------------------------------------------------"
-	echo "👉 starting: $1"
-	echo "----------------------------------------------------"
+	echo "Backing up: $1"
+	echo -n "----------------------------------------------------"
+	print "\033[0m"
 	mkdir -p "$2"
 	rsync --archive --progress --delete -h --exclude="*.Trash/*" "$1" "$2"
 }
@@ -33,7 +44,7 @@ function bkp() {
 # INFO locations defined in zshenv
 bkp "$HOME/Library/Preferences/" ./Library/Preferences
 bkp "$HOME/RomComs/" ./Homefolder/RomComs
-bkp "$DOTFILE_FOLDER" ./Homefolder/.config
+bkp "$DOTFILE_FOLDER" ./Homefolder/config
 bkp "$VAULT_PATH" ./Homefolder/main-vault
 bkp "$ICLOUD" ./iCloud-Folder
 bkp "$PASSWORD_STORE_DIR" ./Homefolder/password-store
@@ -41,12 +52,8 @@ bkp "$HOME/.gnupg/" ./Homefolder/gnupg
 
 #───────────────────────────────────────────────────────────────────────────────
 
-echo "----------------------------------------------------"
-
 # Log (on Mac)
 echo "completed: $(date '+%H:%M')" >>"$LOG_LOCATION"
-log_date="$(date '+%Y-%m-%d %H:%M')"
-osascript -e "tell application id \"com.runningwithcrayons.Alfred\" to set configuration \"last_backup\" to value \"$log_date\" in workflow \"de.chris-grieser.backup-utility\" "
 
 # Log (at Backup Destination)
 echo "Backup: $(date '+%Y-%m-%d %H:%M')" >>last_backup.log
