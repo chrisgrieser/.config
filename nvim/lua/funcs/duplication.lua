@@ -26,6 +26,12 @@ local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 --------------------------------------------------------------------------------
 
+function M.duplicateSelection()
+	local prevReg = fn.getreg("z")
+	cmd([[noautocmd silent! normal!"zy`]"zp]]) -- `noautocmd` to not trigger highlighted-yank
+	fn.setreg("z", prevReg)
+end
+
 -- Duplicate line under cursor, change occurrences of certain words to their
 -- opposite, e.g., "right" to "left", and move cursor to key is there is one
 function M.cssDuplicateLine()
