@@ -21,6 +21,9 @@ local function getline(lnum)
 	return lineContent[1]
 end
 
+---runs :normal natively with bang
+local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
+
 --------------------------------------------------------------------------------
 
 -- Duplicate line under cursor, change occurrences of certain words to their
@@ -97,25 +100,24 @@ function M.duplicateSelection()
 end
 
 --------------------------------------------------------------------------------
-
+-- selene: allow(global_usage)
 function _G.duplicationOperator(motionType)
 	print("motionType:", motionType)
-	if motionType == "char"  then
-		normal([[`[v`]"zy]])
-	elseif motionType == "line"  then
+	if motionType == "char" then
+		vim.cmd([[noautocmd normal!`[v`]"zy]])
+	elseif motionType == "line" then
 		normal([['[v']$"zy]])
 	else
-		vim.notify("Block Mode not supported yet.", logWarn)
+		vim.notify("Visual Block Mode not supported yet.", logWarn)
 		return
 	end
-	local object = fn.getreg("z")
-	vim.notify(object)
+	normal('"zp')
 end
 
-vim.keymap.set("n", "z", function ()
+vim.keymap.set("n", "yd", function()
 	opt.opfunc = "v:lua._G.duplicationOperator"
 	return "g@"
-end, { expr = true, nowait = true, desc = "duplication operator" })
+end, { expr = true, desc = "duplication operator" })
 
 --------------------------------------------------------------------------------
 
