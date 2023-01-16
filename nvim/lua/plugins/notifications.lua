@@ -62,17 +62,14 @@ local function config()
 		local truncated = {}
 		for _, line in pairs(msg) do
 			local new_lines = split_length(line, notifyWidth)
-			new_lines = new_lines
 			for _, nl in ipairs(new_lines) do
 				nl = nl:gsub("^%s*", ""):gsub("%s*$", "")
-				if nl and nl ~= "" then
-					table.insert(truncated, " " .. nl .. " ")
-				end
+				if nl and nl ~= "" then table.insert(truncated, " " .. nl .. " ") end
 			end
 		end
 
 		-- use macOS notification if neovim is not focused
-		if not g.nvim_has_focus then
+		if g.nvim_has_focus == false then
 			local title = table.remove(truncated, 1)
 			local text = #truncated > 0 and table.concat(truncated, "\n") or ""
 			os.execute(

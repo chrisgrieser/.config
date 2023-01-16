@@ -269,8 +269,8 @@ keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
 keymap("n", "cR", "R", { desc = "replace mode" })
 
 -- Duplicate Line / Selection (mnemonic: [r]eplicate)
-keymap("n", "R", qol.smartDuplicateLine, { desc = "smart duplicate line" })
-keymap("x", "R", qol.duplicateSelection, { desc = "duplicate selection" })
+keymap("n", "R", require("funcs.duplication").smartDuplicateLine, { desc = "smart duplicate line" })
+keymap("x", "R", require("funcs.duplication").duplicateSelection, { desc = "duplicate selection" })
 
 -- Undo
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
@@ -670,16 +670,3 @@ for _, key in ipairs { "x", "h", "l" } do
 end
 
 --------------------------------------------------------------------------------
-
-function duplicationOperator(motionType)
-	-- local start = fn.getpos("'[")
-	-- local ending = fn.getpos("']")
-	normal('`["zy`]')
-	local object = fn.getreg("z")
-	vim.notify(object)
-end
-
-keymap("n", "zz", ":set opfunc=v:lua.duplicationOperator<CR>g@", { desc = "duplication operator" })
-
--- test
--- test
