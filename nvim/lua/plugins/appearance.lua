@@ -1,6 +1,6 @@
 return {
 
-	"nvim-lualine/lualine.nvim", -- status line
+	{"nvim-lualine/lualine.nvim"}, -- status line
 
 	{ -- highlight function args
 		"m-demare/hlargs.nvim",
@@ -51,14 +51,6 @@ return {
 				},
 			}
 		end,
-	},
-	{ -- quickfix in sign column
-		"dhruvasagar/vim-markify",
-		init = function()
-			vim.g.markify_info_text = ""
-			vim.g.markify_echo_current_message = 0
-		end,
-		event = "QuickFixCmdPost",
 	},
 	{ -- nicer colorcolumn
 		"xiyaowong/virtcolumn.nvim",

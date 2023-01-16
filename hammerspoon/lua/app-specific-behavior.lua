@@ -15,6 +15,7 @@ end
 transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 	local appsWithTransparency = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty" }
 	if not tableContains(appsWithTransparency, appName) then return end
+	if isProjector() then return end
 
 	if eventType == aw.activated or eventType == aw.launched then
 		-- some apps like neovide do not set a "launched" signal, so the delayed
