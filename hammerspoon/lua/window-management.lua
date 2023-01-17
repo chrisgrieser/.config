@@ -259,7 +259,7 @@ local function controlSpaceAction()
 	local pos
 	if frontAppName() == "Finder" or frontAppName() == "Script Editor" then
 		pos = centered
-	elseif (isIMacAtHome() or isAtMother()) and not checkSize(currentWin, pseudoMaximized) then
+	elseif not checkSize(currentWin, pseudoMaximized) then
 		pos = pseudoMaximized
 	else
 		pos = maximized
