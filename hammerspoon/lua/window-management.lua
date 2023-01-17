@@ -8,7 +8,7 @@ rightHalf = hs.layout.right50
 leftHalf = hs.layout.left50
 
 -- device-specific parameters
-if isIMacAtHome() then
+if isIMacAtHome() or isAtOffice() then
 	pseudoMaximized = { x = 0.184, y = 0, w = 0.817, h = 1 }
 	toTheSide = { x = 0, y = 0.05, w = 0.185, h = 0.95 }
 	centered = { x = 0.186, y = 0, w = 0.6, h = 1 }
@@ -18,10 +18,6 @@ elseif isAtMother() then
 	toTheSide = { x = 0, y = 0.05, w = 0.185, h = 0.95 }
 	centered = { x = 0.212, y = 0, w = 0.6, h = 1 }
 	baseLayout = pseudoMaximized
-elseif isAtOffice() then
-	baseLayout = maximized
-	pseudoMaximized = maximized
-	centered = { x = 0.2, y = 0, w = 0.616, h = 1 }
 end
 
 ---@param win hs.window
@@ -133,6 +129,10 @@ end
 ---@param pos hs.geometry
 function moveResize(win, pos)
 	if not win then return end -- window been closed before
+	if win:application() == "System Settings" then
+		notify("System Settings cannot be resized properly.")
+		return
+	end
 
 	toggleWinSidebar(win)
 	obsidianThemeDevHelper(win, pos)
@@ -142,7 +142,7 @@ function moveResize(win, pos)
 	end
 
 	local i = 0 -- pseudo-timeout
-	while win and i < 30 and not (checkSize(win, pos)) do
+	while win and i < 25 and not (checkSize(win, pos)) do
 		win:moveToUnit(pos)
 		os.execute("sleep 0.1") -- since lua itself does not have a blocking wait function
 	end

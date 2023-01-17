@@ -69,7 +69,7 @@ end
 local layoutChangeActive = false
 function homeModeLayout()
 	local brightness = betweenTime(1, 8) and 0 or 0.8
-	iMacDisplay:setBrightness(brightness)
+	if iMacDisplay then iMacDisplay:setBrightness(brightness) end
 
 	holeCover()
 	if not isWeekend() then openApp("Slack") end
@@ -242,11 +242,9 @@ end
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
 local function setLayout()
-	if isAtOffice() then
-		officeModeLayout()
-	elseif isIMacAtHome() and isProjector() then
+	if isIMacAtHome() and isProjector() then
 		movieModeLayout()
-	elseif isIMacAtHome() and not isProjector() then
+	elseif isAtOffice() or (isIMacAtHome() and not isProjector()) then
 		homeModeLayout()
 	elseif isAtMother() and isProjector() then
 		motherMovieModeLayout()

@@ -106,7 +106,7 @@ end
 
 -- clock, but only when full screen (and therefore covering the sketchybar)
 local function clock()
-	if fn.winwidth(0) < 110 or fn.hostname():find("eduroam") then return "" end
+	if fn.winwidth(0) < 110 then return "" end
 	local time = os.date():sub(12, 19)
 	-- blinking `:`
 	if os.time() % 2 == 1 then time = time:gsub(":", " ") end
