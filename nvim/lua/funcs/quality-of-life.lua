@@ -28,7 +28,6 @@ function setlocal(option, value)
 	vim.api.nvim_set_option_value(option, value, { scope = "local" })
 end
 
-
 --------------------------------------------------------------------------------
 
 ---switches words under the cursor from `true` to `false` and similar cases
@@ -225,7 +224,6 @@ function M.addCommitPush(prefillMsg)
 			end
 		end,
 		on_exit = function()
-			-- if not output or (output[1] == "" and #output == 1) then return end
 			if #output == 0 then return end
 			local out = table.concat(output, " \n "):gsub("%s*$", "")
 			local logLevel = logInfo
@@ -237,7 +235,11 @@ function M.addCommitPush(prefillMsg)
 			vim.notify(out, logLevel)
 			-- HACK for linters writing the current file, and autoread failing, preventing to
 			-- quit the file. Requires manual reloading via `:edit`.
-			if bo.modifiable then cmd.edit() end
+			if bo.modifiable then
+				cmd.mkview(1)
+				cmd.edit()
+				cmd.loadview()
+			end
 			-- specific to my setup
 			os.execute("sketchybar --trigger repo-files-update")
 		end,
@@ -377,9 +379,9 @@ function M.moveSelectionLeft() normal('"zdh"zPgvhoho') end
 
 function duplicationOperator(motionType)
 	print("motionType:", motionType)
-	if motionType == "char"  then
+	if motionType == "char" then
 		normal([[`[v`]"zy]])
-	elseif motionType == "line"  then
+	elseif motionType == "line" then
 		normal([['[v']$"zy]])
 	else
 		vim.notify("Block Mode not supported yet.", logWarn)
@@ -389,7 +391,7 @@ function duplicationOperator(motionType)
 	vim.notify(object)
 end
 
-keymap("n", "z", function ()
+keymap("n", "z", function()
 	opt.opfunc = "v:lua.duplicationOperator"
 	return "g@"
 end, { expr = true, nowait = true, desc = "duplication operator" })
