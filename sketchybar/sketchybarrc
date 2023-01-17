@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
+# does not work
 sketchybar \
-	--bar color="0xff333333" \
-	--default popup.drawing=true popup.height=20 popup.background.drawing=true popup.y_offset=20 \
+	--default popup.drawing=true \
 	--add item foo left --set foo label="bar" \
-	--add alias "Stats,Network_network_chart" popup.foo
+	--add item baz popup.foo --set baz label="nek"
+
+# works
+# sketchybar \
+# 	--default popup.drawing=true \
+# 	--add item foo left --set foo label="bar" \
+# 	--add item baz left --set baz label="nek"
 
 
