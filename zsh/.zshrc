@@ -13,12 +13,12 @@ CONFIG+=('git_github')
 CONFIG+=('homebrew')
 CONFIG+=('vi-mode')
 
+CONFIG+=('alacritty_theme_utilities')
+CONFIG+=('intro-messages')
+
 # Terminal specific
 if [[ $TERM == "Warp" ]]; then
 	cd "$WD" || return 
-elif [[ $TERM == "alacritty" ]]; then
-	CONFIG+=('alacritty_theme_utilities')
-	CONFIG+=('intro-messages')
 fi
 
 for config_file in "${CONFIG[@]}"; do
