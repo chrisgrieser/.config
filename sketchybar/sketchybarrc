@@ -50,6 +50,12 @@ POPUP_Y_OFFSET=-35
 
 #───────────────────────────────────────────────────────────────────────────────
 
+
+PLUGIN_DIR=/Users/chrisgrieser/.config/sketchybar/
+sketchybar --add item clock --set clock update_freq=1 script="$PLUGIN_DIR/clock.sh"
+sketchybar --add alias clock --set clock update_freq=2 script="$PLUGIN_DIR/clock.sh"
+
+
 # one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
 sketchybar \
 	--bar \

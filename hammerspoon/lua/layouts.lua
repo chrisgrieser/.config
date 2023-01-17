@@ -67,7 +67,7 @@ function movieModeLayout()
 end
 
 local layoutChangeActive = false
-function homeModeLayout()
+function workLayout()
 	local brightness = betweenTime(1, 8) and 0 or 0.8
 	if iMacDisplay then iMacDisplay:setBrightness(brightness) end
 
@@ -125,48 +125,6 @@ function homeModeLayout()
 		.waitUntil(
 			function() return not (gitDotfileSyncTask and gitDotfileSyncTask:isRunning()) end,
 			function() alacrittyFontSize(26) end
-		)
-		:start()
-end
-
-function officeModeLayout()
-	openApp {
-		"Discord",
-		"Mimestream",
-		"Slack",
-		"Brave Browser",
-		"Obsidian",
-		"TweetDeck",
-		"Drafts",
-	}
-	dockSwitcher("office") -- separate layout to include "TweetDeck"
-
-	local top = { x = 0, y = 0.015, w = 1, h = 0.485 }
-	local bottom = { x = 0, y = 0.5, w = 1, h = 0.5 }
-	local sideTop = createLayout(top, hs.screen.allScreens()[2], { "TweetDeck" })
-	local sideBottom = createLayout(bottom, hs.screen.allScreens()[2], { "Discord", "Slack" })
-	local main = createLayout(maximized, hs.screen.allScreens()[1], {
-		"Brave Browser",
-		"Obsidian",
-		"Neovide",
-		"neovide",
-		"Drafts",
-		"Mimestream",
-		"alacritty",
-		"Alacritty",
-		"Warp",
-	})
-	local officeLayout = hs.fnutils.concat(sideTop, sideBottom, main)
-	runWithDelays({ 0, 0.3 }, function() hs.layout.apply(officeLayout) end)
-
-	showAllSidebars()
-	runWithDelays(0.5, function() app("Drafts"):activate() end)
-
-	-- wait until sync is finished, to avoid merge conflict
-	hs.timer
-		.waitUntil(
-			function() return not (gitDotfileSyncTask and gitDotfileSyncTask:isRunning()) end,
-			function() alacrittyFontSize(24) end
 		)
 		:start()
 end
@@ -245,7 +203,7 @@ local function setLayout()
 	if isIMacAtHome() and isProjector() then
 		movieModeLayout()
 	elseif isAtOffice() or (isIMacAtHome() and not isProjector()) then
-		homeModeLayout()
+		workLayout()
 	elseif isAtMother() and isProjector() then
 		motherMovieModeLayout()
 	elseif isAtMother() and not isProjector() then

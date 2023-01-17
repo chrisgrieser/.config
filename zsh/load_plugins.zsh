@@ -26,8 +26,5 @@ source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
 
 # Starship
 eval "$(starship init zsh)"
-if [[ "$TERM" != "Warp" ]]; then
-	export STARSHIP_CONFIG=~/.config/starship/starship.toml
-else
-	export STARSHIP_CONFIG=~/.config/starship/starship-warp.toml
-fi
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+[[ "$TERM" == "Warp" ]] && export STARSHIP_CONFIG=~/.config/starship/starship-warp.toml
