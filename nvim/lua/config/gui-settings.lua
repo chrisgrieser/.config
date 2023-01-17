@@ -6,9 +6,7 @@ require("config.utils")
 local device = fn.hostname()
 if device:find("Mother") then
 	g.neovide_scale_factor = 0.94
-elseif device:find("eduroam") or device:find("mini") then
-	g.neovide_scale_factor = 0.92
-elseif device:find("iMac") then
+elseif device:find("eduroam") or device:find("iMac") then
 	g.neovide_scale_factor = 1
 end
 
