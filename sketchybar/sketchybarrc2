@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+#───────────────────────────────────────────────────────────────────────────────
+# INFO: After app update, needs to be re-granted screen recording permissions
+#───────────────────────────────────────────────────────────────────────────────
+
+# ensure Stats.app is running
+while ! pgrep "Stats"; do
+	open -a "Stats"
+	sleep 1
+done
+
+# globs are necessary, since the exact name of the menubar item changes a bit
+# depending on installation whether mac is M1 or not
+menu_items=$(sketchybar --query default_menu_items)
+network_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*network" | cut -d\" -f2)
+cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | cut -d\" -f2)
+gpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*gpu" | cut -d\" -f2)
+ram_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*ram" | head -n1 | cut -d\" -f2)
+
+#───────────────────────────────────────────────────────────────────────────────
+
+PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
+
+defaults read -g AppleInterfaceStyle | grep -iq "Dark"
+IS_DARK_MODE=$?
+if [[ $IS_DARK_MODE -eq 0 ]]; then
+	BG_COLOR="0xff333333"
+	FONT_COLOR="0xffffffff"
+else
+	BG_COLOR="0xffcdcdcd"
+	FONT_COLOR="0xff000000"
+fi
+
+HEIGHT=60        # extra height for second row & to cover the holes at the corner where the wallpaper shines through
+ITEM_Y_OFFSET=18 # needs to be adjusted for Height
+
+# - HACK using popup for second row. the popup only refers to the clock item to anchor it to the leftmost item,
+# it actually has nothing to do with the clock
+first_set="left"
+second_set="popup.clock" # = two rows elsewhere
+POPUP_Y_OFFSET=-35
+
+HEIGHT=60        # extra height for second row & to cover the holes at the corner where the wallpaper shines through
+ITEM_Y_OFFSET=18 # needs to be adjusted for Height
+# - HACK using popup for second row. the popup only refers to the clock item to anchor it to the leftmost item,
+# it actually has nothing to do with the clock
+first_set="left"
+second_set="popup.clock" # = two rows elsewhere
+POPUP_Y_OFFSET=-35
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
+sketchybar \
+	--bar \
+	height="$HEIGHT" position=top display=all \
+	padding_left=0 padding_right=0 color="$BG_COLOR" \
+	--default \
+	updates=when_shown drawing=on align=left \
+	icon.font="Noto Emoji:Bold:16" icon.color="$FONT_COLOR" \
+	label.font="Recursive:Medium:15.5" label.color="$FONT_COLOR" \
+	icon.padding_left=2 icon.padding_right=1 \
+	label.padding_left=2 label.padding_right=10 \
+	popup.drawing=true popup.horizontal=true popup.topmost=false \
+	popup.y_offset="$POPUP_Y_OFFSET" y_offset="$ITEM_Y_OFFSET" \
+	--add item clock $first_set \
+	--set clock update_freq=1 \
+	script="$PLUGIN_DIR/clock.sh" \
+	background.padding_left=5 \
+	--add item covid-stats $first_set \
+	--set covid-stats update_freq=43200 \
+	script="$PLUGIN_DIR/covid-stats.sh" \
+	--add item weather $first_set \
+	--set weather update_freq=1800 \
+	script="$PLUGIN_DIR/weather.sh" \
+	--add item drafts $first_set \
+	--set drafts icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
+	script="$PLUGIN_DIR/drafts-counter.sh" \
+	--add event drafts-counter-update \
+	--subscribe drafts drafts-counter-update \
+	--subscribe drafts system_woke \
+	--add alias "$ram_bar_item" $second_set \
+	--set "$ram_bar_item" width=38 \
+	--add alias "$cpu_bar_item" $second_set \
+	--set "$cpu_bar_item" width=60 \
+	--add alias "$gpu_bar_item" $second_set \
+	--set "$gpu_bar_item" width=55 \
+	--add alias "$network_bar_item" $second_set \
+	--set "$network_bar_item" width=65 \
+	--add item sync-indicator $second_set \
+	--set sync-indicator update_freq=300 \
+	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
+	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
+	--add event repo-files-update \
+	--subscribe sync-indicator repo-files-update \
+	--subscribe sync-indicator system_woke \
+	--update
+
+# INFO
+# - `--update` needs to run at the end of config and should not be run in an item script
+# - `repo-files-update` gets triggered via Hammerspoon path watcher after sync events
+# - clock and alias items needs the fixed-width to fix whitespace of the item next (stats)
+# - not using builtin clock, to be able to customize font etc.
+
+echo "Sketchybar configuration loaded."
