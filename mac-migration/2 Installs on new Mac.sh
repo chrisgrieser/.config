@@ -8,7 +8,6 @@ sudo -v
 sudo gem install anystyle-cli
 
 pip3 install pdfannots
-pip3 install alacritty-colorscheme
 
 # MAS CLI sign in currently broken due to Apple API change
 # Sign in Bug: https://github.com/mas-cli/mas#-sign-in
