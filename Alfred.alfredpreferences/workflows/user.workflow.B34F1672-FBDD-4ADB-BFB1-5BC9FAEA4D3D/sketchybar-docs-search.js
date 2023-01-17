@@ -6,15 +6,16 @@ const alfredMatcher = (str) => str.replace (/[-()_./]/g, " ") + " " + str + " ";
 
 const workArray = JSON.parse(app.doShellScript('curl -s "https://api.github.com/repos/FelixKratz/SketchyBar/git/trees/documentation?recursive=1"'))
 	.tree
-	.filter(file => file.path.startsWith("docs/"))
+	.filter(file => file.path.startsWith("docs/") && file.path.endsWith(".md"))
 	.map(file => {
-		// eslint-disable-next-line no-magic-numbers
-		const site = file.path.slice(15, -11); // remove "docs/docs/json/" and "/index.html"
+		const site = file.path.slice(5, -3); // remove "docs/" and ".md"
 		const parts = site.split("/");
-		const parentSite = parts.join("/") + "/";
+		let subsite = parts.pop();
+		subsite = subsite.charAt(0).toUpperCase() + subsite.slice(1); // capitalize
+		const parentSite = parts.join("/");
 		const url = "https://felixkratz.github.io/SketchyBar/" + site;
 		return {
-			"title": site,
+			"title": subsite,
 			"match": alfredMatcher (site),
 			"subtitle": parentSite,
 			"arg": url,
