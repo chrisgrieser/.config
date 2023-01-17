@@ -39,7 +39,7 @@ case $APP_TO_UPDATE in
 	INFO_WINDOW=1
 	;;
 	# cp "$CUSTOM_ICON_FOLDER/Alfred Prefs.icns" 'Alfred 5.app/Contents/Preferences/Alfred Preferences.app/Contents/Resources/appicon.icns'
-	# touch 'Alfred 5.app/Contents/Preferences/Alfred Preferences.app/Contents/Resources/appicon.icns' ;;
+	# touch 'Alfred 4.app/Contents/Preferences/Alfred Preferences.app/Contents/Resources/appicon.icns' ;;
 "Cryptomator")
 	cp "$CUSTOM_ICON_FOLDER/Cryptomator.icns" 'Cryptomator.app/Contents/Resources/Cryptomator.icns'
 	touch "Cryptomator.app"
