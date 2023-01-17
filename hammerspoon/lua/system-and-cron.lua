@@ -89,7 +89,8 @@ end
 --------------------------------------------------------------------------------
 
 ---sync all three git repos
-function syncAllGitRepos()
+---@param sendNotification? string whether to send notification on finished sync
+function syncAllGitRepos(sendNotification)
 	gitDotfileSync()
 	gitPassSync()
 	gitVaultSync()
@@ -109,13 +110,16 @@ function syncAllGitRepos()
 	end
 
 	hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
+	if sendNotification then
+		hs.timer.waitUntil(noSyncInProgress, function() notify("Sync finished.") end):start()
+	end
 end
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, syncAllGitRepos):start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
 uriScheme("sync-repos", function()
-	syncAllGitRepos()
+	syncAllGitRepos("notify")
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 end)
 
@@ -129,27 +133,29 @@ shutDownWatcher = caff
 
 wakeWatcher = caff
 	.new(function(eventType)
-		if isAtOffice() and eventType == caff.screensDidUnlock then
-			syncAllGitRepos()
-			workLayout()
-		elseif
-			not (isAtOffice()) and (eventType == caff.screensDidWake or eventType == caff.systemDidWake)
+		if
+			eventType ~= caff.screensDidUnlock
+			and eventType ~= caff.screensDidWake
+			and eventType ~= caff.screensDidUnlock
 		then
-			runWithDelays(1, function()
-				hs.execute(
-					"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --set clock popup.drawing=true"
-				)
-				if isProjector() then
-					setDarkmode(true)
-					movieModeLayout()
-				else
-					syncAllGitRepos()
-					local toDark = betweenTime(7, 19)
-					workLayout() -- should run after git sync, to avoid conflicts
-					setDarkmode(toDark)
-				end
-			end)
+			return
 		end
+		hs.execute(
+			"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --set clock popup.drawing=true"
+		)
+		if isAtOffice() then
+			workLayout()
+		elseif isProjector() then
+			setDarkmode(true)
+			movieModeLayout()
+		end
+		syncAllGitRepos()
+
+		runWithDelays(1, function()
+			local toDark = betweenTime(7, 19)
+			workLayout() -- should run after git sync, to avoid conflicts
+			setDarkmode(toDark)
+		end)
 	end)
 	:start()
 

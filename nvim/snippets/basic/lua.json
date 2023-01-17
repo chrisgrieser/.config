@@ -31,8 +31,8 @@
 		]
 	},
 	"guard clause ending": {
-		"prefix": "then return end",
-		"body": "then return end"
+		"prefix": "return end",
+		"body": "return end"
 	},
 	"for (list)": {
 		"prefix": [
