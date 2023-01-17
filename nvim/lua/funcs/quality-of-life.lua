@@ -238,7 +238,7 @@ function M.addCommitPush(prefillMsg)
 			if bo.modifiable then
 				cmd.mkview(1)
 				cmd.edit()
-				cmd.loadview()
+				cmd.loadview(1)
 			end
 			-- specific to my setup
 			os.execute("sketchybar --trigger repo-files-update")

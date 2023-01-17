@@ -247,6 +247,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>DB0FF08A-04FB-4663-9EF5-E89C6C4CD8F1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<array>
 			<dict>
@@ -692,55 +715,6 @@ osascript -l JavaScript -e '
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>cani</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Loading</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>can-i-use.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Can I Use?</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>2ABAE956-53E7-4846-B25A-EC53C6145476</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
@@ -806,6 +780,55 @@ osascript -l JavaScript -e '
 			<string>7099D02E-6857-4A1B-ABE6-8653C16F6A49</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>cani</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>can-i-use.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Can I Use?</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>2ABAE956-53E7-4846-B25A-EC53C6145476</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1162,6 +1185,55 @@ osascript -l JavaScript -e '
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>hs</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>sketchybar-docs-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Sketchybar Docs Search...</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>DB0FF08A-04FB-4663-9EF5-E89C6C4CD8F1</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Search various Docs.
@@ -1247,7 +1319,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1125</real>
+			<real>1180</real>
 		</dict>
 		<key>667546DE-C588-449B-BAD3-89DDFE26371A</key>
 		<dict>
@@ -1265,9 +1337,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Quicklook</string>
 			<key>xpos</key>
-			<real>615</real>
+			<real>620</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>320</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
@@ -1319,9 +1391,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>cheatsheet PDFs</string>
 			<key>xpos</key>
-			<real>415</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>320</real>
 		</dict>
 		<key>D9F7B43C-9766-4330-B6D1-433CCF2ABB41</key>
 		<dict>
@@ -1331,6 +1403,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>640</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>DB0FF08A-04FB-4663-9EF5-E89C6C4CD8F1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>hammerspoon docs</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1325</real>
 		</dict>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<dict>
@@ -1359,7 +1442,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>990</real>
+			<real>1045</real>
 		</dict>
 		<key>FE9038EA-F174-44C3-96CF-EED8F400E783</key>
 		<dict>
@@ -1370,7 +1453,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>850</real>
+			<real>905</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
