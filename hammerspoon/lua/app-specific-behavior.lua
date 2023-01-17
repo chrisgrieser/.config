@@ -12,6 +12,10 @@ local function unHideAll()
 	end
 end
 
+local function hideOthersOnSameDisplay()
+	
+end
+
 transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 	local appsWithTransparency = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty" }
 	if not tableContains(appsWithTransparency, appName) then return end
