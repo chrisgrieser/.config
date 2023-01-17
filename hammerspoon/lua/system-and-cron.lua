@@ -131,7 +131,7 @@ wakeWatcher = caff
 	.new(function(eventType)
 		if isAtOffice() and eventType == caff.screensDidUnlock then
 			syncAllGitRepos()
-			officeModeLayout()
+			workLayout()
 		elseif
 			not (isAtOffice()) and (eventType == caff.screensDidWake or eventType == caff.systemDidWake)
 		then
@@ -145,7 +145,7 @@ wakeWatcher = caff
 				else
 					syncAllGitRepos()
 					local toDark = betweenTime(7, 19)
-					homeModeLayout() -- should run after git sync, to avoid conflicts
+					workLayout() -- should run after git sync, to avoid conflicts
 					setDarkmode(toDark)
 				end
 			end)
