@@ -1,6 +1,6 @@
 return {
 
-	{"nvim-lualine/lualine.nvim"}, -- status line
+	{ "nvim-lualine/lualine.nvim" }, -- status line
 
 	{ -- highlight function args
 		"m-demare/hlargs.nvim",
@@ -70,7 +70,11 @@ return {
 					auto_enable = true,
 					max_byte = 2 * 1024 * 1024, -- 2mb
 					lsp = true,
-					excludes = { "lazy", "gitcommit" },
+					excludes = {
+						"lazy",
+						"gitcommit",
+						"DiffviewFileHistoryPanel",
+					},
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
