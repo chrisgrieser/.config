@@ -1,18 +1,18 @@
 local lightTheme = "rose-pine"
+local darkTheme = "bluloco"
 -- local darkTheme = "rose-pine"
 -- local darkTheme = "tokyonight-moon"
 -- local lightTheme = "melange"
 -- local darkTheme = "oxocarbon"
 -- local lightTheme = "dawnfox"
 -- local darkTheme = "zephyr"
-local darkTheme = "bluloco"
 
 local themePackages = {
-	-- "EdenEast/nightfox.nvim",
-	-- "glepnir/zephyr-nvim", 
-	-- "folke/tokyonight.nvim",
-	{"uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim"},
+	{ "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
 	"rose-pine/neovim",
+	-- "EdenEast/nightfox.nvim",
+	-- "glepnir/zephyr-nvim",
+	-- "folke/tokyonight.nvim",
 	-- "rebelot/kanagawa.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "savq/melange",
@@ -33,7 +33,7 @@ function themeSettings()
 
 	---@param hlgroup string
 	---@param changes string
-	local function setHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
+	function setHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
 
 	-----------------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ function themeSettings()
 			"DiagnosticUnderlineError",
 			"DiagnosticUnderlineWarn",
 			"DiagnosticUnderlineHint",
-				-- function not local, so they can be accessed via file watcher",
+			-- function not local, so they can be accessed via file watcher",
 			"SpellLocal",
 			"SpellRare",
 			"SpellCap",
@@ -100,6 +100,12 @@ function themeSettings()
 		elseif theme == "oxocarbon" then
 			linkHighlight("FloatTitle", "TelescopePromptTitle")
 			linkHighlight("@function", "@function.builtin")
+
+		-- blueloco
+		elseif theme == "bluloco" then
+			setHighlight("lualine_a_normal", "gui=bold")
+			setHighlight("lualine_a_visual", "gui=bold")
+			setHighlight("lualine_a_insert", "gui=bold")
 
 		-- rose-pine
 		elseif theme == "rose-pine" then
@@ -155,7 +161,7 @@ function themeSettings()
 		end,
 	})
 
-	--------------------------------------------------------------------------------
+	-----------------------------------------------------------------------------
 	-- DARK MODE / LIGHT MODE
 	---@param mode string "dark"|"light"
 	function setThemeMode(mode)
@@ -164,6 +170,9 @@ function themeSettings()
 		cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 		local targetTheme = mode == "dark" and darkTheme or lightTheme
 		cmd.colorscheme(targetTheme)
+		-- HACK defer needed for some modifications to properly take effect, for
+		-- whatever reason…
+		vim.defer_fn(themeModifications, 100) ---@diagnostic disable-line: param-type-mismatch
 	end
 
 	-- set dark or light mode on neovim startup (requires macos)
