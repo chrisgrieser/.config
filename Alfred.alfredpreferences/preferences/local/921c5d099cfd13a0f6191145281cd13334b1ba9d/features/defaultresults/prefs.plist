@@ -5,13 +5,7 @@
 	<key>scope</key>
 	<array>
 		<string>~/Downloaded</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Photos/Selbstbilder - Eigene Bilder - Avatare</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Photos/Wallpapers</string>
-		<string>~/Main Vault/Meta</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs</string>
 		<string>~/RomComs/-new</string>
 	</array>
 </dict>
