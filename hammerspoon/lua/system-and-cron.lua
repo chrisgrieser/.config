@@ -102,18 +102,20 @@ function syncAllGitRepos(sendNotification)
 		return not (dotfilesSyncing or vaultSyncing or passSyncing)
 	end
 
-	hs.timer.waitUntil(noSyncInProgress, function ()
-		if sendNotification then notify("Sync finished.") end
-		hs.execute("sketchybar --trigger repo-files-update")
-	end):start()
+	hs.timer
+		.waitUntil(noSyncInProgress, function()
+			hs.execute("sketchybar --trigger repo-files-update")
+			if sendNotification then notify("Sync finished.") end
+		end)
+		:start()
 end
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, syncAllGitRepos):start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
 uriScheme("sync-repos", function()
-	syncAllGitRepos("notify")
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
+	syncAllGitRepos("notify")
 end)
 
 --------------------------------------------------------------------------------
@@ -133,21 +135,27 @@ wakeWatcher = caff
 		then
 			return
 		end
+
+		syncAllGitRepos()
 		hs.execute(
 			"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --set clock popup.drawing=true"
 		)
 		if isAtOffice() then
 			workLayout()
-		elseif isProjector() then
-			setDarkmode(true)
-			movieModeLayout()
+			return
 		end
-		syncAllGitRepos()
 
 		runWithDelays(1, function()
-			local toDark = betweenTime(7, 19)
-			workLayout() -- should run after git sync, to avoid conflicts
-			setDarkmode(toDark)
+			-- INFO checks need to run after delay, since display number is not
+			-- immediately picked up after wake
+			if isProjector() then
+				setDarkmode(true)
+				movieModeLayout()
+			else
+				workLayout() -- should run after git sync, to avoid conflicts
+				local toDark = betweenTime(7, 19)
+				setDarkmode(toDark)
+			end
 		end)
 	end)
 	:start()

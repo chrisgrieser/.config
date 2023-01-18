@@ -215,14 +215,13 @@ end)
 -- Add borders to various lsp windows
 require("lspconfig.ui.windows").default_options.border = borderStyle
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderStyle })
-vim.lsp.handlers["textDocument/signatureHelp"] =
-	vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
 
 --------------------------------------------------------------------------------
 -- LSP-SERVER-SPECIFIC SETUP
 
 local lspSettings = {}
-local lspFilestypes = {}
+local lspFileTypes = {}
 
 -- https://github.com/sumneko/lua-language-server/wiki/Annotations#annotations
 -- https://github.com/sumneko/lua-language-server/wiki/Settings
@@ -330,8 +329,8 @@ lspSettings.jsonls = {
 	},
 }
 
-lspFilestypes.bashls = { "sh", "zsh", "bash" } -- force lsp to work with zsh
-lspFilestypes.emmet_ls = { "css", "scss", "html" }
+lspFileTypes.bashls = { "sh", "zsh", "bash" } -- force lsp to work with zsh
+lspFileTypes.emmet_ls = { "css", "scss", "html" }
 
 --------------------------------------------------------------------------------
 
@@ -343,6 +342,6 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 for _, lsp in pairs(lsp_servers) do
 	local config = { capabilities = capabilities }
 	if lspSettings[lsp] then config.settings = lspSettings[lsp] end
-	if lspFilestypes[lsp] then config.filetypes = lspFilestypes[lsp] end
+	if lspFileTypes[lsp] then config.filetypes = lspFileTypes[lsp] end
 	require("lspconfig")[lsp].setup(config)
 end
