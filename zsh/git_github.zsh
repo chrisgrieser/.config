@@ -104,6 +104,10 @@ function acp() {
 	git add -A && git commit -m "$COMMIT_MSG"
 	git pull
 	git push
+
+	if [[ "$PWD" =~ $DOTFILE_FOLDER ]] || [[ "$PWD" =~ $VAULT_PATH ]] ; then
+		sketchybar --trigger drafts-counter-update
+	fi
 }
 
 #───────────────────────────────────────────────────────────────────────────────
