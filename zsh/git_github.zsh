@@ -106,7 +106,7 @@ function acp() {
 	git push
 
 	if [[ "$PWD" =~ $DOTFILE_FOLDER ]] || [[ "$PWD" =~ $VAULT_PATH ]] ; then
-		sketchybar --trigger drafts-counter-update
+		sketchybar --trigger repo-files-update
 	fi
 }
 
