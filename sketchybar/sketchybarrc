@@ -31,22 +31,13 @@ else
 	FONT_COLOR="0xff000000"
 fi
 
-HEIGHT=60        # extra height for second row & to cover the holes at the corner where the wallpaper shines through
-ITEM_Y_OFFSET=18 # needs to be adjusted for Height
-
-# - HACK using popup for second row. the popup only refers to the clock item to anchor it to the leftmost item,
+# HACK using popup for second row. the popup only refers to the clock item to anchor it to the leftmost item,
 # it actually has nothing to do with the clock
 first_set="left"
 second_set="popup.clock" # = two rows elsewhere
 POPUP_Y_OFFSET=-35
-
 HEIGHT=60        # extra height for second row & to cover the holes at the corner where the wallpaper shines through
 ITEM_Y_OFFSET=18 # needs to be adjusted for Height
-# - HACK using popup for second row. the popup only refers to the clock item to anchor it to the leftmost item,
-# it actually has nothing to do with the clock
-first_set="left"
-second_set="popup.clock" # = two rows elsewhere
-POPUP_Y_OFFSET=-35
 
 #───────────────────────────────────────────────────────────────────────────────
 
