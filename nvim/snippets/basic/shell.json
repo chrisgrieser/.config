@@ -52,6 +52,10 @@
 		"prefix": "if (short)",
 		"body": "[[ \"$${1:var}\" ]] && $0"
 	},
+	"then": {
+		"prefix": "then .. fi",
+		"body": "then\n\t$0\nfi"
+	},
 	"ternary": {
 		"prefix": "ternary",
 		"body": "[[ \"$${1:cond}\" ]] && ${2:var}=\"$${3:one}\" || ${2:var}=\"$${4:two}\""
