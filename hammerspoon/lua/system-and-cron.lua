@@ -101,18 +101,11 @@ function syncAllGitRepos(sendNotification)
 		local vaultSyncing = gitVaultSyncTask and gitVaultSyncTask:isRunning()
 		return not (dotfilesSyncing or vaultSyncing or passSyncing)
 	end
-	-- wait until sync is finished so sketchybar update shows success/failure
-	local function updateSketchybar()
-		-- https://felixkratz.github.io/SketchyBar/config/events#triggering-custom-events
-		hs.execute(
-			"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --trigger repo-files-update"
-		)
-	end
 
-	hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
-	if sendNotification then
-		hs.timer.waitUntil(noSyncInProgress, function() notify("Sync finished.") end):start()
-	end
+	hs.timer.waitUntil(noSyncInProgress, function ()
+		if sendNotification then notify("Sync finished.") end
+		hs.execute("sketchybar --trigger repo-files-update")
+	end):start()
 end
 
 repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, syncAllGitRepos):start()
