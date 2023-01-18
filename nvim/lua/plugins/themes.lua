@@ -4,12 +4,14 @@ local lightTheme = "rose-pine"
 -- local lightTheme = "melange"
 -- local darkTheme = "oxocarbon"
 -- local lightTheme = "dawnfox"
-local darkTheme = "zephyr"
+-- local darkTheme = "zephyr"
+local darkTheme = "bluloco"
 
 local themePackages = {
 	-- "EdenEast/nightfox.nvim",
-	"glepnir/zephyr-nvim", 
+	-- "glepnir/zephyr-nvim", 
 	-- "folke/tokyonight.nvim",
+	{"uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim"},
 	"rose-pine/neovim",
 	-- "rebelot/kanagawa.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
