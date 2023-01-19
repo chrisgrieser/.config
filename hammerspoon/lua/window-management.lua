@@ -1,23 +1,13 @@
 require("lua.utils")
 
 --------------------------------------------------------------------------------
--- WINDOW MANAGEMENT UTILS
 iMacDisplay = hs.screen("Built%-in")
 maximized = hs.layout.maximized
 rightHalf = hs.layout.right50
 leftHalf = hs.layout.left50
-
--- device-specific parameters
-if isIMacAtHome() or isAtOffice() then
-	pseudoMaximized = { x = 0.184, y = 0, w = 0.817, h = 1 }
-	toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
-	toTheSide = { x = 0, y = 0.05, w = 0.185, h = 0.95 }
-	centered = { x = 0.186, y = 0, w = 0.6, h = 1 }
-elseif isAtMother() then
-	pseudoMaximized = { x = 0.2125, y = 0, w = 0.7875, h = 1 }
-	toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0)
-	centered = { x = 0.212, y = 0, w = 0.6, h = 1 }
-end
+pseudoMaximized = { x = 0.184, y = 0, w = 0.817, h = 1 }
+centered = { x = 0.186, y = 0, w = 0.6, h = 1 }
+toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
 
 ---@param win hs.window
 ---@param size hs.geometry
@@ -128,8 +118,9 @@ end
 ---@param pos hs.geometry
 function moveResize(win, pos)
 	if not win then return end -- window been closed before
-	if win:application() == "System Settings" then
-		notify("System Settings cannot be resized properly.")
+	local appName = win:application():name()
+	if appName == "System Settings" or appName == "Twitter" then
+		notify(appName .. " cannot be resized properly.")
 		return
 	end
 
@@ -243,17 +234,31 @@ local function controlSpaceAction()
 end
 
 local function pagedownAction()
-	if #hs.screen.allScreens() > 1 then moveCurWinToOtherDisplay() end
+	if #hs.screen.allScreens() > 1 then
+		moveCurWinToOtherDisplay()
+	elseif appIsRunning("Twitter") then
+		keystroke({}, "down", 1, app("Twitter")) -- tweet down
+	end
 end
 
 local function pageupAction()
-	if #hs.screen.allScreens() > 1 then moveCurWinToOtherDisplay() end
+	if #hs.screen.allScreens() > 1 then
+		moveCurWinToOtherDisplay()
+	elseif appIsRunning("Twitter") then
+		keystroke({}, "up", 1, app("Twitter")) -- tweet up
+	end
 end
 
 local function homeAction()
 	if appIsRunning("zoom.us") then
 		alert("🔈/🔇") -- toggle mute
 		keystroke({ "shift", "command" }, "A", 1, app("zoom.us"))
+	elseif appIsRunning("Twitter") then
+		keystroke({ "shift", "command" }, "R", 1, app("Twitter")) -- reload
+		-- needs delay to wait for tweet loading
+		runWithDelays({ 0.2, 0.4 }, function()
+			keystroke({ "command" }, "1", 1, app("Twitter")) -- scroll up
+		end)
 	end
 end
 
@@ -268,5 +273,4 @@ hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+s
 hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
 hotkey({}, "pagedown", pagedownAction, nil, pagedownAction)
 hotkey({}, "pageup", pageupAction, nil, pageupAction)
-
 hotkey({}, "home", homeAction)

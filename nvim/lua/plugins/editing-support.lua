@@ -70,11 +70,13 @@ return {
 	},
 	{
 		"smjonas/duplicate.nvim",
-		keys = {"yd"},
+		keys = { "yd", { "R", mode = "x" } },
 		config = function()
-			require("duplicate").setup()
-			-- HACK not mapping in visual mode, since creating delay there https://github.com/smjonas/duplicate.nvim/issues/1
-			vim.keymap.del("x", "yd") 
+			require("duplicate").setup {
+				textobject = "yd", -- duplicate in normal mode, expects an operator
+				textobject_visual_mode = "R", 
+				textobject_cur_line = nil, 
+			}
 		end,
 	},
 }

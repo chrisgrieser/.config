@@ -91,8 +91,7 @@ function workLayout()
 
 	dockSwitcher("home")
 
-	local side = createLayout(toTheSide, iMacDisplay, { "Twitter" })
-	local main = createLayout(pseudoMaximized, iMacDisplay, {
+	local layout = createLayout(pseudoMaximized, iMacDisplay, {
 		"Brave Browser",
 		"Highlights",
 		"Neovide",
@@ -106,7 +105,7 @@ function workLayout()
 		"alacritty",
 		"Alacritty",
 	})
-	hs.layout.apply(hs.fnutils.concat(main, side))
+	hs.layout.apply(layout)
 
 	showAllSidebars()
 	runWithDelays({ 0.5, 1 }, function() app("Drafts"):activate() end)
@@ -169,9 +168,7 @@ local function motherHomeModeLayout()
 	alacrittyFontSize(25)
 	dockSwitcher("home")
 
-	local side = createLayout(toTheSide, iMacDisplay, { "Twitter" })
-	local main = createLayout(pseudoMaximized, iMacDisplay, {
-		"Twitter",
+	local layout = createLayout(pseudoMaximized, iMacDisplay, {
 		"Brave Browser",
 		"Warp",
 		"Slack",
@@ -182,9 +179,8 @@ local function motherHomeModeLayout()
 		"alacritty",
 		"Alacritty",
 	})
-	local motherHomeLayout = hs.fnutils.concat(main, side)
 
-	runWithDelays({ 0, 0.2, 0.4, 0.6 }, function() hs.layout.apply(motherHomeLayout) end)
+	runWithDelays({ 0, 0.2, 0.4, 0.6 }, function() hs.layout.apply(layout) end)
 	showAllSidebars()
 end
 
@@ -221,6 +217,7 @@ wf_appsOnMouseScreen = wf.new({
 	"Slack",
 	"IINA",
 	"Hammerspoon",
+	"System Settings",
 	"Discord",
 	"Neovide",
 	"neovide",
