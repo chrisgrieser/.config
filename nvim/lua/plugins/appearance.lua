@@ -7,11 +7,6 @@ return {
 		event = "VeryLazy",
 		config = function() require("hlargs").setup() end,
 	},
-	{ -- highlight matchParen, if inside them, not only if standing on one of them
-		"Yggdroot/hiPairs",
-		event = "VimEnter",
-		config = function() vim.cmd.highlight { "def link hiPairs_matchPair MatchParen", bang = true } end,
-	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		event = "VimEnter", -- not using "VeryLazy", so the lines appear a bit quicker

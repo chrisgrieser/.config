@@ -6,7 +6,7 @@ require("lua.system-and-cron")
 
 -- unhide all apps
 local function unHideAll()
-	local wins = hs.window.orderedWindows()
+	local wins = hs.window.allWindows()
 	for _, win in pairs(wins) do
 		local app = win:application()
 		if app and app:isHidden() then app:unhide() end
@@ -16,7 +16,7 @@ end
 -- hide windows of other apps, except twitter
 ---@param win hs.window the window of the app not to hide
 local function hideOthers(win)
-	local wins = hs.window.orderedWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
+	local wins = win:otherWindowsSameScreen()
 	local winName = win:application():name()
 	for _, w in pairs(wins) do
 		local app = w:application()
@@ -204,7 +204,6 @@ neovideWatcher = aw.new(function(appName, eventType, appObj)
 			if not neovideWin then return end
 			local size = isProjector() and maximized or pseudoMaximized
 			moveResize(neovideWin, size)
-			notify("beep")
 		end)
 
 	-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
