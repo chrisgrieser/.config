@@ -1,17 +1,17 @@
 #!/usr/bin/env zsh
 # shellcheck disable=SC2034,SC2164,SC1071
 
+setopt INTERACTIVE_COMMENTS
+# ask for credentials upfront
+sudo -v
 DOTFILE_FOLDER="$HOME/.config/"
 
-REQUIRED SSH setup
+# INFO requires SSH setup
 cd ~
 git clone git@github.com:chrisgrieser/main-vault.git
 git clone git@github.com:chrisgrieser/.password-store.git
 
 #-------------------------------------------------------------------------------
-# ask for credentials upfront
-sudo -v
-setopt INTERACTIVE_COMMENTS
 
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
