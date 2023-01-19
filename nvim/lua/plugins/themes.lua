@@ -18,7 +18,7 @@ local themePackages = {
 	-- "savq/melange",
 }
 
-local darkTransparency = 0.96
+local darkTransparency = 0.94
 local lightTransparency = 0.97
 
 --------------------------------------------------------------------------------
@@ -33,14 +33,14 @@ function themeSettings()
 
 	---@param hlgroup string
 	---@param changes string
-	function setHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
+	local function setHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
 
 	-----------------------------------------------------------------------------
 
 	linkHighlight("myAnnotations", "Todo")
 	fn.matchadd(
 		"myAnnotations",
-		[[\<\(BUG\|WARN\|WIP\|TODO\|WTF\|HACK\|INFO\|NOTE\|WARNING\|FIX\|REQUIRED\)\>]]
+		[[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|NOTE\|WARNING\)\>]]
 	)
 
 	function customHighlights()
