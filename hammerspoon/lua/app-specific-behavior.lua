@@ -65,7 +65,7 @@ wf_maxWindows = wf.new(true)
 		if checkSize(win, maximized) then win:application():hide() end
 	end)
 	:subscribe(wf.windowFocused, function(win)
-		if checkSize(win, pseudoMaximized) and appIsRunning("Twitter") then
+		if win:title() ~= "Quick Look" and checkSize(win, pseudoMaximized) and appIsRunning("Twitter") then
 			app("Twitter"):mainWindow():raise()
 		end
 	end)
@@ -92,7 +92,7 @@ end
 -- auto-resume Spotify on quit of apps w/ sound
 spotifyAppWatcher = aw.new(function(appName, eventType)
 	if isProjector() then return end -- never start music when on projector
-	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix" }
+	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
 	if tableContains(appsWithSound, appName) then
 		if eventType == aw.launched then
 			spotifyTUI("pause")
