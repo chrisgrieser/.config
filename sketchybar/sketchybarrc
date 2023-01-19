@@ -19,11 +19,8 @@ ram_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*ram" | head -n1 | cut -d\" 
 
 #───────────────────────────────────────────────────────────────────────────────
 
-PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
-defaults read -g AppleInterfaceStyle | grep -iq "Dark"
-IS_DARK_MODE=$?
-if [[ $IS_DARK_MODE -eq 0 ]]; then
+if defaults read -g AppleInterfaceStyle | grep -iq "Dark"; then
 	BG_COLOR="0xff333333"
 	FONT_COLOR="0xffffffff"
 else
@@ -38,6 +35,7 @@ second_set="popup.clock" # = two rows elsewhere
 POPUP_Y_OFFSET=-35
 HEIGHT=60        # extra height for second row & to cover the holes at the corner where the wallpaper shines through
 ITEM_Y_OFFSET=18 # needs to be adjusted for Height
+PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -78,7 +76,7 @@ sketchybar \
 	--set "$gpu_bar_item" width=55 \
 	--add alias "$network_bar_item" $second_set \
 	--set "$network_bar_item" width=65 \
-	--add item sync-indicator $first_set \
+	--add item sync-indicator $second_set \
 	--set sync-indicator update_freq=300 \
 	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
 	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
