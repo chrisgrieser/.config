@@ -139,6 +139,7 @@ function themeSettings()
 		elseif theme == "dawnfox" then
 			setHighlight("IndentBlanklineChar", "guifg=#deccba")
 			setHighlight("VertSplit", "guifg=#b29b84")
+			setHighlight("ScrollView", "guibg=#303050")
 
 		-- melange
 		elseif theme == "melange" then

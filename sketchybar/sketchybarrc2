@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# does not work
+sketchybar \
+	--default popup.drawing=on \
+	--add item foo left --set foo label="bar" popup.drawing=on \
+	--add item baz popup.foo --set baz label="nek"
+

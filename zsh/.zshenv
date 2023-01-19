@@ -18,9 +18,6 @@ export ZDOTDIR="$DOTFILE_FOLDER/zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# tell pandoc where to look for the pandoc config folder
-export XDG_DATA_HOME="$HOME/.config/"
-
 # OpenAI API Key stored outside of public git repo (symlinked file)
 # (key is accessed by nvim as well as shell plugins)
 OPENAI_API_KEY=$(tr -d "\n" < "$ICLOUD/Dotfolder/private dotfiles/openai_api_key")
