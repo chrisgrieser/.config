@@ -104,6 +104,16 @@ end):start()
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+-- TWITTER: fixed size to the side, with the sidebar hidden
+twitterWatcher = aw.new(function(appName, eventType, appObj)
+	if appName == "Twitter" and eventType == aw.launched then
+		runWithDelays(0.2, function()
+			appObj:mainWindow():setFrame(toTheSide)
+		end)
+	end
+end):start()
+
+--------------------------------------------------------------------------------
 
 -- PIXELMATOR: open maximized
 pixelmatorWatcher = aw.new(function(appName, eventType, appObj)
@@ -180,7 +190,7 @@ end):start()
 -- Add dots when copypasting to from devtools
 -- not using window focused, since not reliable
 local function clipboardFix()
-	if not app("neovide"):title():find("%.css$") then return end 
+	if not app("neovide"):title():find("%.css$") then return end
 
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
