@@ -157,8 +157,10 @@ function themeSettings()
 	autocmd("ColorScheme", {
 		group = "themeChange",
 		callback = function()
-			themeModifications()
-			customHighlights()
+			-- HACK defer needed for some modifications to properly take effect, for
+			-- whatever reason…
+			vim.defer_fn(themeModifications, 100) ---@diagnostic disable-line: param-type-mismatch
+			vim.defer_fn(customHighlights, 100) ---@diagnostic disable-line: param-type-mismatch
 		end,
 	})
 
@@ -171,9 +173,7 @@ function themeSettings()
 		cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 		local targetTheme = mode == "dark" and darkTheme or lightTheme
 		cmd.colorscheme(targetTheme)
-		-- HACK defer needed for some modifications to properly take effect, for
-		-- whatever reason…
-		vim.defer_fn(themeModifications, 100) ---@diagnostic disable-line: param-type-mismatch
+		-- vim.defer_fn(themeModifications, 100) ---@diagnostic disable-line: param-type-mismatch
 	end
 
 	-- set dark or light mode on neovim startup (requires macos)
