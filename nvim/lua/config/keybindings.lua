@@ -108,6 +108,7 @@ keymap(
 	{ desc = "next quickfix item" }
 )
 keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickfix list" })
+
 -- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
 keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })

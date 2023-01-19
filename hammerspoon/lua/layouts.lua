@@ -60,13 +60,12 @@ function movieModeLayout()
 		"Highlights",
 		"Alacritty",
 		"alacritty",
-		"Twitterrific",
+		"Twitter",
 	}
 	dockSwitcher("movie")
 	setDarkmode(true)
 end
 
-local layoutChangeActive = false
 function workLayout()
 	local brightness = betweenTime(1, 8) and 0 or 0.8
 	if iMacDisplay then iMacDisplay:setBrightness(brightness) end
@@ -77,7 +76,7 @@ function workLayout()
 		"Discord",
 		"Mimestream",
 		"Brave Browser",
-		"Twitterrific",
+		"Twitter",
 		"Drafts",
 	}
 	quitApp {
@@ -92,7 +91,7 @@ function workLayout()
 
 	dockSwitcher("home")
 
-	local side = createLayout(toTheSide, iMacDisplay, { "Twitterrific" })
+	local side = createLayout(toTheSide, iMacDisplay, { "Twitter" })
 	local main = createLayout(pseudoMaximized, iMacDisplay, {
 		"Brave Browser",
 		"Highlights",
@@ -111,14 +110,6 @@ function workLayout()
 
 	showAllSidebars()
 	runWithDelays({ 0.5, 1 }, function() app("Drafts"):activate() end)
-
-	if screenIsUnlocked() and not layoutChangeActive then
-		layoutChangeActive = true
-		runWithDelays(2, function()
-			twitterrificAction("scrollup")
-			layoutChangeActive = false
-		end)
-	end
 
 	-- wait until sync is finished, to avoid merge conflict
 	hs.timer
@@ -146,7 +137,7 @@ local function motherMovieModeLayout()
 			"Neovide",
 			"alacritty",
 			"Alacritty",
-			"Twitterrific",
+			"Twitter",
 		}
 	end)
 
@@ -163,7 +154,7 @@ local function motherHomeModeLayout()
 		"Obsidian",
 		"Mimestream",
 		"Brave Browser",
-		"Twitterrific",
+		"Twitter",
 		"Drafts",
 	}
 	quitApp {
@@ -178,9 +169,9 @@ local function motherHomeModeLayout()
 	alacrittyFontSize(25)
 	dockSwitcher("home")
 
-	local side = createLayout(toTheSide, iMacDisplay, { "Twitterrific" })
+	local side = createLayout(toTheSide, iMacDisplay, { "Twitter" })
 	local main = createLayout(pseudoMaximized, iMacDisplay, {
-		"Twitterrific",
+		"Twitter",
 		"Brave Browser",
 		"Warp",
 		"Slack",

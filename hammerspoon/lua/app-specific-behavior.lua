@@ -4,6 +4,7 @@ require("lua.system-and-cron")
 --------------------------------------------------------------------------------
 -- AUTOMATIONS FOR MULTIPLE APPS
 
+-- unhide all apps
 local function unHideAll()
 	local wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
 	for _, win in pairs(wins) do
@@ -11,6 +12,23 @@ local function unHideAll()
 		if app and app:isHidden() then app:unhide() end
 	end
 end
+
+-- hide windows of other apps, except twitter
+---@param win hs.window the window of the app not to hide
+local function hideOthers(win)
+	local wins = hs.window.orderedWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
+	local winName = win:application():name()
+	for _, w in pairs(wins) do
+		local app = w:application()
+		if app and app:name() ~= "Twitter" and app:name() ~= winName then app:hide() end
+	end
+end
+
+local function bringAllToFront()
+	app.frontmostApplication():selectMenuItem { "Window", "Bring All to Front" }
+end
+
+--------------------------------------------------------------------------------
 
 transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 	local appsWithTransparency = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty" }
@@ -22,18 +40,12 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 		-- hiding is used for it activation as well
 		runWithDelays({ 0, 0.1, 0.2, 0.3 }, function()
 			local win = appObject:mainWindow()
-			if checkSize(win, pseudoMaximized) or checkSize(win, maximized) then
-				appObject:selectMenuItem("Hide Others")
-			end
+			if checkSize(win, pseudoMaximized) or checkSize(win, maximized) then hideOthers(win) end
 		end)
 	elseif eventType == aw.terminated then
 		unHideAll()
 	end
 end):start()
-
-local function bringAllToFront()
-	app.frontmostApplication():selectMenuItem { "Window", "Bring All to Front" }
-end
 
 -- when currently auto-tiled, hide the app on deactivation to it does not cover sketchybar
 autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
@@ -44,15 +56,15 @@ autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
 end):start()
 
 -- prevent maximized window from covering sketchybar if they are unfocused
--- pseudomaximized windows always get Twitterrific to the side
+-- pseudomaximized windows always get twitter to the side
 wf_maxWindows = wf.new(true)
 	:subscribe(wf.windowUnfocused, function(win)
 		if isProjector() then return end
 		if checkSize(win, maximized) then win:application():hide() end
 	end)
 	:subscribe(wf.windowFocused, function(win)
-		if checkSize(win, pseudoMaximized) and appIsRunning("Twitterrific") then
-			app("Twitterrific"):mainWindow():raise()
+		if checkSize(win, pseudoMaximized) and appIsRunning("Twitter") then
+			app("Twitter"):mainWindow():raise()
 		end
 	end)
 
@@ -156,16 +168,6 @@ iinaAppLauncher = aw.new(function(appName, eventType, appObject)
 			{ 0.05, 0.2 },
 			function() appObject:selectMenuItem { "Video", "Enter Full Screen" } end
 		)
-	end
-end):start()
-
---------------------------------------------------------------------------------
--- TWITTERRIFIC
-
--- scroll up on launch
-twitterificVisible = aw.new(function(appName, eventType)
-	if appName == "Twitterrific" and eventType == aw.launched then
-		runWithDelays(1, function() twitterrificAction("scrollup") end)
 	end
 end):start()
 
