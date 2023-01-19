@@ -9,9 +9,8 @@ return {
 	},
 	{
 		"Yggdroot/hiPairs",
-		init = function ()
-			
-		end,
+		event = "VimEnter",
+		config = function() vim.cmd.highlight { "def link hiPairs_matchPair MatchParen", bang = true } end,
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",

@@ -1,7 +1,6 @@
 -- INFO openai_api_key defined in zshenv but there read from outside of dotfiles
 --------------------------------------------------------------------------------
 return {
-
 	{
 		"tzachar/cmp-tabnine",
 		build = "./install.sh",
@@ -27,7 +26,6 @@ return {
 			})
 		end,
 	},
-
 	{
 		"jackMort/ChatGPT.nvim",
 		cmd = "ChatGPT",
@@ -35,8 +33,8 @@ return {
 		config = function()
 			require("chatgpt").setup {
 				welcome_message = "",
-				question_sign = "",
-				answer_sign = "ﮧ",
+				-- question_sign = "",
+				-- answer_sign = "ﮧ",
 				max_line_length = 90,
 				keymaps = {
 					close = "<Esc>", -- mappings Esc here removes ability to use normal mode
@@ -80,6 +78,12 @@ return {
 				},
 				ui = { icon = "ﮧ" },
 			}
+		end,
+	},
+	{
+		"Exafunction/codeium.vim",
+		config = function()
+			vim.keymap.set("i", "<S-CR>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "codium accept" })
 		end,
 	},
 }
