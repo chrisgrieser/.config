@@ -7,6 +7,12 @@ return {
 		event = "VeryLazy",
 		config = function() require("hlargs").setup() end,
 	},
+	{
+		"Yggdroot/hiPairs",
+		init = function ()
+			
+		end,
+	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		event = "VimEnter", -- not using "VeryLazy", so the lines appear a bit quicker

@@ -10,12 +10,6 @@ elseif device:find("eduroam") or device:find("iMac") then
 	g.neovide_scale_factor = 1
 end
 
-opt.guifont = "JetBrainsMonoNL Nerd Font:h26"
-opt.guicursor = "n-sm:block," ..
-	"i-ci-c-ve:ver25," ..
-	"r-cr-o-v:hor10," ..
-	"a:blinkwait200-blinkoff500-blinkon700"
-
 --------------------------------------------------------------------------------
 
 local delta = 1.1

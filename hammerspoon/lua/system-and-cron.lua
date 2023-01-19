@@ -142,12 +142,14 @@ wakeWatcher = caff
 		)
 		if isAtOffice() then
 			workLayout()
+			local toDark = betweenTime(7, 18)
+			setDarkmode(toDark)
 			return
 		end
 
+		-- INFO checks need to run after delay, since display number is not
+		-- immediately picked up after wake
 		runWithDelays(1, function()
-			-- INFO checks need to run after delay, since display number is not
-			-- immediately picked up after wake
 			if isProjector() then
 				setDarkmode(true)
 				movieModeLayout()

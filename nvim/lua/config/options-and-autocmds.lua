@@ -19,6 +19,14 @@ for _, char in pairs(undopointChars) do
 	keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char })
 end
 
+opt.guifont = "JetBrainsMonoNL Nerd Font:h26"
+opt.guicursor = {
+	"n-sm:block",
+	"i-ci-c-ve:ver25",
+	"r-cr-o-v:hor10",
+	"a:blinkwait200-blinkoff500-blinkon700",
+}
+
 -- timeouts
 opt.updatetime = 250 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 
@@ -36,7 +44,7 @@ opt.pumwidth = 10 -- min width popup menu
 opt.winblend = 2 -- % transparency
 
 -- Spelling
-opt.spelllang =  "en_us" 
+opt.spelllang = "en_us"
 
 -- whitespace & indentation
 opt.tabstop = 3
