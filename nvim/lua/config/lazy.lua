@@ -24,6 +24,7 @@ require("lazy").setup("plugins", {
 		path = vim.fn.stdpath("config") .. "/my-plugins/",
 	},
 	ui = {
+		wrap = true,
 		border = borderStyle,
 		size = { width = 1, height = 1 }, -- full sized
 	},
@@ -54,11 +55,3 @@ require("lazy").setup("plugins", {
 	},
 })
 
---------------------------------------------------------------------------------
-
-vim.api.nvim_create_augroup("lazyui", {})
-vim.api.nvim_create_autocmd("FileType", {
-	group = "lazyui",
-	pattern = "lazy",
-	callback = function() vim.wo.wrap = false end,
-})
