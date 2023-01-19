@@ -12,12 +12,10 @@ if isIMacAtHome() or isAtOffice() then
 	pseudoMaximized = { x = 0.184, y = 0, w = 0.817, h = 1 }
 	toTheSide = { x = 0, y = 0.05, w = 0.185, h = 0.95 }
 	centered = { x = 0.186, y = 0, w = 0.6, h = 1 }
-	baseLayout = pseudoMaximized
 elseif isAtMother() then
 	pseudoMaximized = { x = 0.2125, y = 0, w = 0.7875, h = 1 }
 	toTheSide = { x = 0, y = 0.05, w = 0.185, h = 0.95 }
 	centered = { x = 0.212, y = 0, w = 0.6, h = 1 }
-	baseLayout = pseudoMaximized
 end
 
 ---@param win hs.window
@@ -197,7 +195,7 @@ function autoTile(windowSource)
 		elseif frontAppName() == "Finder" then
 			moveResize(wins[1], centered)
 		else
-			moveResize(wins[1], baseLayout)
+			moveResize(wins[1], pseudoMaximized)
 		end
 	elseif #wins == 2 then
 		moveResize(wins[1], leftHalf)

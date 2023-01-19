@@ -2,11 +2,11 @@ require("lua.utils")
 require("lua.window-management")
 require("lua.system-and-cron")
 --------------------------------------------------------------------------------
--- AUTOMATIONS FOR MULTIPLE APPS
+-- HELPERS
 
 -- unhide all apps
 local function unHideAll()
-	local wins = hs.window.allWindows() -- using `allWindows`, since `orderedWindows` only lists visible windows
+	local wins = hs.window.orderedWindows()
 	for _, win in pairs(wins) do
 		local app = win:application()
 		if app and app:isHidden() then app:unhide() end
@@ -30,6 +30,7 @@ end
 
 --------------------------------------------------------------------------------
 
+-- AUTOMATIONS FOR MULTIPLE APPS
 transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 	local appsWithTransparency = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty" }
 	if not tableContains(appsWithTransparency, appName) then return end
@@ -40,6 +41,7 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 		-- hiding is used for it activation as well
 		runWithDelays({ 0, 0.1, 0.2, 0.3 }, function()
 			local win = appObject:mainWindow()
+			if not win then return end
 			if checkSize(win, pseudoMaximized) or checkSize(win, maximized) then hideOthers(win) end
 		end)
 	elseif eventType == aw.terminated then
@@ -174,36 +176,11 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- NEOVIM / NEOVIDE
-wf_neovim = wf
-	.new({ "neovide", "Neovide" })
-	-- required, since window size saving is sometimes ignored by Neovide :/
-	:subscribe(
-		wf.windowCreated,
-		function(newWin)
-			runWithDelays({ 0.2, 0.4, 0.6 }, function()
-				local size = isProjector() and maximized or baseLayout
-				moveResize(newWin, size)
-			end)
-		end
-	)
-	-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
-	:subscribe(
-		wf.windowDestroyed,
-		function()
-			if #wf_neovim:getWindows() == 0 then
-				runWithDelays(5, function() hs.execute("pgrep neovide || killall nvim") end)
-			end
-		end
-	)
 
 -- Add dots when copypasting to from devtools
 -- not using window focused, since not reliable
-neovideWatcher = aw.new(function(appName, eventType, appObj)
-	if not appName then return end
-	if not (appName:lower() == "neovide" and eventType == aw.activated) then return end
-
-	local winName = appObj:mainWindow():title()
-	if not winName:find("%.css$") then return end -- only css files
+local function clipboardFix()
+	if not app("neovide"):title():find("%.css$") then return end 
 
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
@@ -213,6 +190,27 @@ neovideWatcher = aw.new(function(appName, eventType, appObj)
 
 	clipb = clipb:gsub("^", "."):gsub(" ", ".")
 	hs.pasteboard.setContents(clipb)
+end
+
+neovideWatcher = aw.new(function(appName, eventType, appObj)
+	if not appName or appName:lower() ~= "neovide" then return end
+
+	local neovideWin = appObj:mainWindow()
+	if eventType == aw.activated then
+		clipboardFix()
+		-- maximize app, INFO cannot use aw.launched, since that signal isn't sent
+		-- by neovide
+		runWithDelays({ 0.2, 0.4, 0.6 }, function()
+			if not neovideWin then return end
+			local size = isProjector() and maximized or pseudoMaximized
+			moveResize(neovideWin, size)
+			notify("beep")
+		end)
+
+	-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
+	elseif eventType == aw.terminated then
+		runWithDelays(5, function() hs.execute("pgrep neovide || killall nvim") end)
+	end
 end):start()
 
 --------------------------------------------------------------------------------
@@ -223,7 +221,7 @@ wf_alacritty = wf.new({ "alacritty", "Alacritty" })
 	:setOverrideFilter({ rejectTitles = { "btop" } })
 	:subscribe(wf.windowCreated, function(newWin)
 		if isProjector() then return end -- has it's own layouting already
-		moveResize(newWin, baseLayout)
+		moveResize(newWin, pseudoMaximized)
 	end)
 
 -- Man leader hotkey (for Karabiner)
@@ -358,7 +356,7 @@ highlightsAppWatcher = aw.new(function(appName, eventType, appObject)
 	appObject:selectMenuItem { "Tools", "Color", "Yellow" }
 	appObject:selectMenuItem { "View", "Hide Toolbar" }
 
-	moveResize(appObject:mainWindow(), baseLayout)
+	moveResize(appObject:mainWindow(), pseudoMaximized)
 end):start()
 
 --------------------------------------------------------------------------------
