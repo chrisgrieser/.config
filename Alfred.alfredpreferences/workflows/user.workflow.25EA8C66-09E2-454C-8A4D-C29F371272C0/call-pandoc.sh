@@ -9,6 +9,7 @@ function md2docx () {
 	pandoc \
 		"$INPUT_FILE" \
 		--output="$OUTPUT_FILE" \
+		--data-dir="$DOTFILE_FOLDER/pandoc"\
 		--defaults="md2docx" \
 		--metadata=date:"$(date "+%d. %B %Y")" \
 	&& open -R "$OUTPUT_FILE" \
