@@ -61,10 +61,6 @@ if [[ $(uname -p) == "i386" ]]; then # FIX for Intel Macs with different homebre
 	ln -sf /usr/local/bin/pinentry-mac /opt/homebrew/bin/pinentry-mac
 fi
 
-# pandoc
-[[ -e ~/.pandoc ]] && rm -rf ~/.pandoc
-ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
-
 # searchlink
 [[ -e ~/.searchlink ]] && rm -f ~/.searchlink
 ln -sf "$DOTFILE_FOLDER/searchlink/.searchlink" ~
