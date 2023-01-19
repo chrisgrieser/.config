@@ -21,31 +21,6 @@ local function getline(lnum)
 	return lineContent[1]
 end
 
----runs :normal natively with bang
-local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
-
---------------------------------------------------------------------------------
-
--- INFO `:h :map-operator`
-function g.duplicationOperator(motionType)
-	if motionType == "block" then
-		vim.notify("Blockwise is not supported", vim.log.levels.WARN)
-		return
-	end
-	normal([['[V']"zy']"zp]])
-end
-
-function M.duplicateOperator()
-	opt.opfunc = "v:lua.g.duplicationOperator"
-	return "g@"
-end
-
-function M.duplicateSelection()
-	local prevReg = fn.getreg("z")
-	cmd([[noautocmd silent! normal!"zy`]"zp]]) -- `noautocmd` to not trigger highlighted-yank
-	fn.setreg("z", prevReg)
-end
-
 --------------------------------------------------------------------------------
 
 -- Duplicate line under cursor, change occurrences of certain words to their

@@ -1,7 +1,7 @@
 return {
 	-- EDITING-SUPPORT
-	{"numToStr/Comment.nvim"}, -- comment operator
-	{"kylechui/nvim-surround"},
+	{ "numToStr/Comment.nvim" }, -- comment operator
+	{ "kylechui/nvim-surround" },
 
 	{ "mg979/vim-visual-multi", keys = { "<D-j>", { "<D-j>", mode = "x" } } },
 	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, -- custom textobjects
@@ -67,5 +67,9 @@ return {
 		"gbprod/substitute.nvim", -- substitution & exchange operator
 		lazy = true,
 		config = function() require("substitute").setup() end,
+	},
+	{
+		"smjonas/duplicate.nvim",
+		config = function() require("duplicate").setup() end,
 	},
 }

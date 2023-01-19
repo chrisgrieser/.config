@@ -300,6 +300,8 @@ osascript -l JavaScript pass-folder-search.js "$PASSWORD_STORE_DIR"</string>
 			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
+				<key>keyword</key>
+				<string>cccc</string>
 				<key>subtext</key>
 				<string>'{query}'</string>
 				<key>text</key>
@@ -318,7 +320,7 @@ osascript -l JavaScript pass-folder-search.js "$PASSWORD_STORE_DIR"</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string></string>
+				<string> </string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
