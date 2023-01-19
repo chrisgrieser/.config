@@ -50,7 +50,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("satellite").setup {
-				winblend = 70, -- winblend = transparency
+				winblend = 20, -- winblend = transparency
 				handlers = {
 					marks = { enable = false },
 				},
