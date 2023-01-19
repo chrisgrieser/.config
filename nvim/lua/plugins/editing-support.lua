@@ -70,6 +70,11 @@ return {
 	},
 	{
 		"smjonas/duplicate.nvim",
-		config = function() require("duplicate").setup() end,
+		keys = {"yd"},
+		config = function()
+			require("duplicate").setup()
+			-- HACK not mapping in visual mode, since creating delay there https://github.com/smjonas/duplicate.nvim/issues/1
+			vim.keymap.del("x", "yd") 
+		end,
 	},
 }

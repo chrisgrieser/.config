@@ -10,11 +10,12 @@ leftHalf = hs.layout.left50
 -- device-specific parameters
 if isIMacAtHome() or isAtOffice() then
 	pseudoMaximized = { x = 0.184, y = 0, w = 0.817, h = 1 }
+	toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
 	toTheSide = { x = 0, y = 0.05, w = 0.185, h = 0.95 }
 	centered = { x = 0.186, y = 0, w = 0.6, h = 1 }
 elseif isAtMother() then
 	pseudoMaximized = { x = 0.2125, y = 0, w = 0.7875, h = 1 }
-	toTheSide = { x = 0, y = 0.05, w = 0.185, h = 0.95 }
+	toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0)
 	centered = { x = 0.212, y = 0, w = 0.6, h = 1 }
 end
 
@@ -135,8 +136,8 @@ function moveResize(win, pos)
 	toggleWinSidebar(win)
 	obsidianThemeDevHelper(win, pos)
 
-	if (pos == pseudoMaximized or pos == centered) and appIsRunning("Twitterrific") then
-		app("Twitterrific"):mainWindow():raise()
+	if (pos == pseudoMaximized or pos == centered) and appIsRunning("Twitter") then
+		app("Twitter"):mainWindow():raise()
 	end
 
 	local i = 0 -- pseudo-timeout
@@ -228,30 +229,6 @@ end
 --------------------------------------------------------------------------------
 -- HOTKEY ACTIONS
 
----@param type string
-function twitterrificAction(type)
-	local previousApp = frontAppName()
-	openApp("Twitterrific")
-	local twitterrific = app("Twitterrific")
-	twitterrific:activate() -- needs activation, cause sending to app in background doesn't work w/ cmd
-
-	if type == "link" then
-		keystroke({}, "right")
-	elseif type == "scrollup" then
-		local prevMousePos = hs.mouse.absolutePosition()
-
-		local f = twitterrific:mainWindow():frame()
-		keystroke({ "cmd" }, "1") -- properly up (to avoid clicking on tweet content)
-		hs.eventtap.leftClick { x = f.x + f.w * 0.04, y = f.y + 150 }
-		keystroke({ "cmd" }, "k") -- mark all as red
-		keystroke({ "cmd" }, "j") -- scroll up
-		keystroke({}, "down") -- enable j/k movement
-
-		hs.mouse.absolutePosition(prevMousePos)
-		app(previousApp):activate()
-	end
-end
-
 local function controlSpaceAction()
 	local currentWin = hs.window.focusedWindow()
 	local pos
@@ -266,32 +243,18 @@ local function controlSpaceAction()
 end
 
 local function pagedownAction()
-	if #hs.screen.allScreens() > 1 then
-		moveCurWinToOtherDisplay()
-	elseif appIsRunning("Twitterrific") then
-		keystroke({}, "down", 1, app("Twitterrific"))
-	end
+	if #hs.screen.allScreens() > 1 then moveCurWinToOtherDisplay() end
 end
 
 local function pageupAction()
-	if #hs.screen.allScreens() > 1 then
-		moveCurWinToOtherDisplay()
-	elseif appIsRunning("Twitterrific") then
-		keystroke({}, "up", 1, app("Twitterrific"))
-	end
+	if #hs.screen.allScreens() > 1 then moveCurWinToOtherDisplay() end
 end
 
 local function homeAction()
 	if appIsRunning("zoom.us") then
 		alert("🔈/🔇") -- toggle mute
 		keystroke({ "shift", "command" }, "A", 1, app("zoom.us"))
-	elseif appIsRunning("Twitterrific") then
-		twitterrificAction("scrollup")
 	end
-end
-
-local function endAction()
-	if appIsRunning("Twitterrific") then twitterrificAction("link") end
 end
 
 --------------------------------------------------------------------------------
@@ -301,11 +264,9 @@ hotkey(hyper, "right", function() moveResize(hs.window.focusedWindow(), rightHal
 hotkey(hyper, "left", function() moveResize(hs.window.focusedWindow(), leftHalf) end)
 hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
 
--- move to other display or scroll Twitterrific
+-- move to other display
 hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
 hotkey({}, "pagedown", pagedownAction, nil, pagedownAction)
 hotkey({}, "pageup", pageupAction, nil, pageupAction)
 
--- Twitterrific or Zoom
 hotkey({}, "home", homeAction)
-hotkey({}, "end", endAction)

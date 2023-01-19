@@ -108,7 +108,6 @@ keymap(
 	{ desc = "next quickfix item" }
 )
 keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickfix list" })
-
 -- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
 keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
@@ -265,6 +264,14 @@ keymap(
 )
 keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
 keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
+
+-- Replace Mode
+keymap("n", "cR", "R", { desc = "replace mode" })
+
+-- Duplicate Line / Selection (mnemonic: [r]eplicate)
+-- TODO figure out how to use duplicate line with the same motion
+keymap("n", "R", require("funcs.duplication").smartDuplicateLine, { desc = "smart duplicate line" })
+keymap("x", "R", require("funcs.duplication").duplicateSelection, { desc = "duplicate selection" })
 
 -- Undo
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
