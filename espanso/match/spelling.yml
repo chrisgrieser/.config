@@ -90,7 +90,7 @@ matches:
     propagate_case: true
   - trigger: shoudl
     replace: should
-  - triggers: ["Bibtex", "bibtex"]
+  - trigger: "Bibtex"
     replace: BibTeX
     word: true
   - trigger: torwards
