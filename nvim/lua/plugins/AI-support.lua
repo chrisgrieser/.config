@@ -82,6 +82,7 @@ return {
 	},
 	{
 		"Exafunction/codeium.vim",
+		-- currently supported languages: https://discord.com/channels/1027685395649015980/1027697446446432336/1053406784569737227
 		config = function()
 			vim.keymap.set(
 				"i",

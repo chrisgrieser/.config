@@ -164,9 +164,6 @@ wakeWatcher = caff
 
 --------------------------------------------------------------------------------
 
--- capitalize string
-
-
 -- CRONJOBS AT HOME
 
 -- Drafts to do if trackpadBattery is low
