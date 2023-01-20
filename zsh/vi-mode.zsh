@@ -92,7 +92,9 @@ bindkey -M vicmd 'q' normal-mode-exit
 # Ps = 5 -> blinking bar (xterm)
 # Ps = 6 -> steady bar (xterm)
 
-# does not work with xterm, therefore using starship indicator instead
+# INFO does not work with xterm, therefore using starship indicator instead
+# INFO if $TERM is not set for alacritty, reinstall alacritty, which
+# recreates the required ~/.terminfo directory.
 if [[ "$TERM" != "xterm-256color" ]]; then
 	function zle-keymap-select () {
 			case $KEYMAP in
