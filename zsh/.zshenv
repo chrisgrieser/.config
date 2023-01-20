@@ -1,3 +1,9 @@
+if [[ $(whoami) == "admin" ]] ; then
+	export HOME="/Users/chrisgrieser/"	
+fi
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # Apps
 export EDITOR=nvim
 export PAGER=less
