@@ -56,7 +56,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>55DFA247-EA56-4F3F-ADE4-39260BE8F5FD</string>
+				<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -92,27 +92,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>55DFA247-EA56-4F3F-ADE4-39260BE8F5FD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -134,6 +113,27 @@ zsh "$dock_switcher_path" --load "$1"</string>
 			<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -183,27 +183,6 @@ zsh "$dock_switcher_path" --load "$1"</string>
 			<string>15B1A722-85AB-4042-B9F7-B755D027674F</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -346,23 +325,14 @@ brew services restart sketchybar</string>
 			<key>ypos</key>
 			<real>445</real>
 		</dict>
-		<key>55DFA247-EA56-4F3F-ADE4-39260BE8F5FD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>375</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
 		<key>71149DFC-88DE-4E74-9FDA-F9336F759485</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>375</real>
+			<real>445</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>70</real>
 		</dict>
 		<key>986C033D-6BCE-4098-9098-F4A46BF1703B</key>
 		<dict>
