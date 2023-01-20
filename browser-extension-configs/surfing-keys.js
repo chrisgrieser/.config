@@ -22,8 +22,8 @@ unmap("k", /google/);
 
 unmap("?", /github.com/); // cheatsheet for github shortcuts
 
-unmap("j", /reddit.com\/r\/\w+\/$/); // = in threads, use surfing-keys, in subreddit views, use reddit's controls
-unmap("k", /reddit.com\/r\/\w+\/$/);
+unmap("j", /reddit.com/); 
+unmap("k", /reddit.com/); 
 unmap("?", /reddit.com/); // cheatsheet for reddit shortcuts
 unmap("l", /reddit.com/); // open reddit link
 unmap("x", /reddit.com/); // toggle fold
