@@ -256,7 +256,7 @@ local function homeAction()
 	elseif appIsRunning("Twitter") then
 		keystroke({ "shift", "command" }, "R", 1, app("Twitter")) -- reload
 		-- needs delay to wait for tweet loading
-		runWithDelays({ 0.2, 0.4, 0.6 }, function()
+		runWithDelays({ 0.2, 0.4, 0.6, 0.9, 1.2 }, function()
 			keystroke({ "command" }, "1", 1, app("Twitter")) -- scroll up
 		end)
 	end
