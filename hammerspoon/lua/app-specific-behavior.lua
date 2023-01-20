@@ -106,7 +106,9 @@ end):start()
 --------------------------------------------------------------------------------
 -- TWITTER: fixed size to the side, with the sidebar hidden
 twitterWatcher = aw.new(function(appName, eventType, appObj)
-	if appName == "Twitter" and eventType == aw.launched then
+	if appName ~= "Twitter" then return end
+
+	if eventType == aw.launched or eventType == aw.deactivated then
 		runWithDelays(0.2, function()
 			appObj:mainWindow():setFrame(toTheSide)
 		end)
