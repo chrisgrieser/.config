@@ -155,7 +155,7 @@ wakeWatcher = caff
 				movieModeLayout()
 			else
 				workLayout() -- should run after git sync, to avoid conflicts
-				local toDark = betweenTime(7, 19)
+				local toDark = not (betweenTime(7, 19))
 				setDarkmode(toDark)
 			end
 		end)
