@@ -249,6 +249,12 @@ local function pageupAction()
 	end
 end
 
+local function endAction()
+	if appIsRunning("Twitter") then
+		keystroke({ "command" }, "K", 1, app("Twitter")) -- open tweet
+	end
+end
+
 local function homeAction()
 	if appIsRunning("zoom.us") then
 		alert("🔈/🔇") -- toggle mute
@@ -258,6 +264,7 @@ local function homeAction()
 		-- needs delay to wait for tweet loading
 		runWithDelays({ 0.2, 0.4, 0.6, 0.9, 1.2 }, function()
 			keystroke({ "command" }, "1", 1, app("Twitter")) -- scroll up
+			keystroke({ "command" }, "up", 1, app("Twitter")) -- goto top
 		end)
 	end
 end
@@ -274,3 +281,4 @@ hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
 hotkey({}, "pagedown", pagedownAction, nil, pagedownAction)
 hotkey({}, "pageup", pageupAction, nil, pageupAction)
 hotkey({}, "home", homeAction)
+hotkey({}, "end", endAction)
