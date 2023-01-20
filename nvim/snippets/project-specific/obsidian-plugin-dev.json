@@ -1,5 +1,5 @@
 {
-	"get active file": {
+	"get active file/Tfile": {
 		"description": "Obsidian: Get the TFile of the currently active note.",
 		"prefix": [
 			"tFile",
@@ -8,6 +8,16 @@
 		],
 		"body": [
 			"const ${1:activeFile} = this.app.workspace.activeFile();"
+		]
+	},
+	"get Tfile of active leaf": {
+		"description": "Obsidian: Get the TFile of a leaf, checking if the active leaf is a markdown file.",
+		"prefix": [
+			"tFile of leaf"
+		],
+		"body": [
+			"const currentLeaf = this.app.workspace.activeLeaf();",
+			"const file = currentLeaf.view instanceof MarkdownView ? currentLeaf.view.file : null;"
 		]
 	},
 	"recent files": {
