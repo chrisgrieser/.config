@@ -70,12 +70,35 @@ return {
 	},
 	{
 		"smjonas/duplicate.nvim",
-		keys = { "yd", { "R", mode = "x" } },
+		keys = { "yd", "R", { "R", mode = "x" } },
 		config = function()
 			require("duplicate").setup {
-				textobject = "yd", -- duplicate in normal mode, expects an operator
-				textobject_visual_mode = "R", 
-				textobject_cur_line = nil, 
+				operator = {
+					textobject = "yd",
+					textobject_visual_mode = "R",
+					textobject_cur_line = "R",
+				},
+				transform = function(lines)
+					local ft = vim.bo.filetype
+					for _, line in pairs(lines) do
+						-- smart switching of conditionals
+						if ft == "lua" and line:find("^%s*if.+then$") then
+							line = line:gsub("^(%s*)if", "%1elseif")
+						elseif (ft == "bash" or ft == "zsh" or ft == "sh") and line:find("^%s*if.+then$") then
+							line = line:gsub("^(%s*)if", "%1elif")
+						elseif (ft == "javascript" or ft == "typescript") and line:find("^%s*if.+{$") then
+							line = line:gsub("^(%s*)if", "%1} else if")
+						end
+
+						-- increment numbered vars
+						local lineHasNumberedVarAssignment, _, num = line:find("(%d+).*=")
+						if lineHasNumberedVarAssignment then
+							local nextNum = tostring(tonumber(num) + 1)
+							line = line:gsub("%d+(.*=)", nextNum .. "%1")
+						end
+					end
+					return lines
+				end,
 			}
 		end,
 	},
