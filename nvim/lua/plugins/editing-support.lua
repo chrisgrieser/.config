@@ -83,7 +83,6 @@ return {
 					local ft = vim.bo.filetype
 					local out = {}
 					for _, line in pairs(lines) do
-
 						-- smart switching of conditionals
 						if ft == "lua" and line:find("^%s*if.+then$") then
 							line = line:gsub("^(%s*)if", "%1elseif")
@@ -101,8 +100,8 @@ return {
 								line = line:gsub("right", "left")
 							elseif line:find("left") then
 								line = line:gsub("left", "right")
-							elseif line:find("%sheight") and not (line:find("line-height")) then
-								line = line:gsub("height", "width")
+							elseif line:find("%sheight") then
+								line = line:gsub("(%s)height", "%1width")
 							elseif line:find("%swidth") then
 								line = line:gsub("(%s)width", "%1height")
 							end
@@ -115,6 +114,16 @@ return {
 							line = line:gsub("%d+(.*=)", nextNum .. "%1")
 						end
 						table.insert(out, line)
+
+						-- move cursor position
+						local lineNum, colNum = unpack(vim.api.nvim_win_get_cursor(0))
+						local keyPos, valuePos = line:find(".%w+ ?[:=] ?")
+						if valuePos and not (ft == "css") then
+							colNum = valuePos
+						elseif keyPos and ft == "css" then
+							colNum = keyPos
+						end
+						vim.api.nvim_win_set_cursor(0, { lineNum, colNum })
 					end
 					return out
 				end,
