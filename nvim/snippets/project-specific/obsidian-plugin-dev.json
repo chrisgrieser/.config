@@ -141,6 +141,7 @@
 		"description": "Obsidian: Create notification",
 		"prefix": [
 			"notice",
+			"notify",
 			"notification"
 		],
 		"body": "new Notice (\"${1:msg}\");"
