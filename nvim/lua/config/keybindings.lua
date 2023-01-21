@@ -458,22 +458,34 @@ keymap("n", "<leader>a", ":ChatGPT<CR>", { desc = "ﮧ ChatGPT Prompt" })
 --------------------------------------------------------------------------------
 -- FILES
 
+local function determineScope()
+	
+end
+
 -- File Switchers
 keymap("n", "go", function()
 	local isGitRepo = os.execute("test -e $(git rev-parse --show-toplevel)/.git") == 0 -- using test -e instead of -f to check for repo and submodule
 	local cwd = expand("%:p:h")
-	local scope = "git_files"
+	local scope = "find_files"
 	if cwd:find("/nvim/") and not (cwd:find("/my%-plugins/")) then
 		scope = "find_files cwd=" .. fn.stdpath("config")
-	elseif not isGitRepo or cwd:find("/hammerspoon/") then
-		scope = "find_files"
+	elseif isGitRepo and not (cwd:find(vim.env.DOTFILE_FOLDER)) then
+		scope = "git_files"
 	end
 	cmd("Telescope " .. scope)
-end, { desc = " Smart Find Files" })
+end, { desc = " Smart in repo/folder" })
+keymap("n", "gF", function()
+	local scope = expand("%:p:h") -- default: just search the buffer's folder
+	local isGitRepo = os.execute("test -e $(git rev-parse --show-toplevel)/.git") == 0 -- using test -e instead of -f to check for repo and submodule
+	if scope:find("/nvim/") and not (scope:find("/my%-plugins/")) then
+		scope = fn.stdpath("config")
+	elseif isGitRepo and not (scope:find(vim.env.DOTFILE_FOLDER)) then
+		scope = fn.system("git rev-parse --show-toplevel")
+	end
+	cmd("Telescope live_grep cwd=" .. scope)
+end, { desc = " ripgrep repo/folder" })
 keymap("n", "gO", function() cmd.Telescope("find_files") end, { desc = " Files in cwd" })
-keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " Text in cwd" })
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
--- keymap("n", "gr", function() cmd.Telescope("frecency") end, { desc = " Recent Files" })
 
 -- File Operations
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = "copy filepath" })
