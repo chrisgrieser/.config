@@ -14,7 +14,7 @@ function run(argv) {
 	const home = app.pathTo("home folder");
 
 	//──────────────────────────────────────────────────────────────────────────────
-	let passwordStore = argv[0];
+	let passwordStore = argv[0]; // INFO password store location retrieved via .zshenv
 	if (passwordStore === "") passwordStore = home + "/.password-store";
 	const jsonArray = [];
 
