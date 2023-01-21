@@ -82,13 +82,14 @@ return {
 	},
 	{
 		"Exafunction/codeium.vim",
+		event = "InsertEnter",
 		-- currently supported languages: https://discord.com/channels/1027685395649015980/1027697446446432336/1053406784569737227
 		config = function()
 			vim.keymap.set(
 				"i",
-				"<C-g>",
+				"<M-Tab>",
 				function() return vim.fn["codeium#Accept"]() end,
-				{ expr = true, desc = "codium accept", nowait = true }
+				{ expr = true, desc = "codium accept" }
 			)
 		end,
 	},
