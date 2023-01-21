@@ -85,7 +85,7 @@ local options = {
 			include_declaration = false,
 			initial_mode = "normal",
 		},
-		lsp_definitions = {
+		lsp_type_definitions = {
 			prompt_prefix = "➡️",
 			show_line = false,
 			trim_text = true,
@@ -96,6 +96,20 @@ local options = {
 					width = 0.7,
 					preview_cutoff = 30,
 					preview_width = { 0.55, max = 45 },
+				},
+			},
+		},
+		lsp_definitions = {
+			prompt_prefix = "➡️",
+			show_line = false,
+			trim_text = true,
+			initial_mode = "normal",
+			theme = "cursor",
+			layout_config = {
+				cursor = {
+					width = 0.7,
+					preview_cutoff = 30,
+					preview_width = { 1.55, max = 45 },
 				},
 			},
 		},

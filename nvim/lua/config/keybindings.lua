@@ -458,10 +458,6 @@ keymap("n", "<leader>a", ":ChatGPT<CR>", { desc = "ﮧ ChatGPT Prompt" })
 --------------------------------------------------------------------------------
 -- FILES
 
-local function determineScope()
-	
-end
-
 -- File Switchers
 keymap("n", "go", function()
 	local isGitRepo = os.execute("test -e $(git rev-parse --show-toplevel)/.git") == 0 -- using test -e instead of -f to check for repo and submodule
@@ -499,6 +495,10 @@ keymap("n", "<D-BS>", function() require("genghis").trashFile() end, { desc = "m
 keymap("n", "<D-n>", function() require("genghis").createNewFile() end, { desc = "create new file" })
 -- stylua: ignore
 keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = "selection to new file" })
+
+-- goto file
+-- needed, since gf remapped to reference search
+keymap("n", "gP", "gf", {desc = "goto path (gf)"})
 
 --------------------------------------------------------------------------------
 -- GIT

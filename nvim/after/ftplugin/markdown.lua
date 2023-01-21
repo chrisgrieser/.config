@@ -17,9 +17,6 @@ if not opt_local.wrap:get() then require("funcs.quality-of-life").toggleWrap() e
 -- decrease line length without zen mode plugins 
 opt_local.signcolumn = "yes:9"
 
--- make gf for filepaths available in markdown again
-keymap("n", "gP", "gf", {desc = "goto path (gf)", buffer = true})
-
 --------------------------------------------------------------------------------
 -- link textobj
 keymap(
@@ -51,7 +48,7 @@ keymap(
 
 --------------------------------------------------------------------------------
 
-local opts = { buffer = true, silent = true }
+local opts = { buffer = true }
 -- Heading instead of function navigation
 keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], opts)
 keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], opts)

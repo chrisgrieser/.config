@@ -136,62 +136,49 @@ autocmd("LspAttach", {
 	callback = function(args)
 		local bufnr = args.buf
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		local capabilities = client.server_capabilities
 		local bufopts = { buffer = true }
 
 		require("lsp-inlayhints").on_attach(client, bufnr)
 
-		if client.server_capabilities.documentSymbolProvider then
-			require("nvim-navic").attach(client, bufnr)
-		end
+		-- eslint & prettier already take care of formatting
+		if client.name == "tsserver" then capabilities.documentFormattingProvider = false end
 
-		if client.name == "tsserver" then -- eslint & prettier already take care of formatting
-			client.server_capabilities.documentFormattingProvider = false
-		end
-
-		if client.server_capabilities.renameProvider then
+		if capabilities.renameProvider then
 			-- overrides treesitter-refactor's rename
 			keymap("n", "<leader>R", vim.lsp.buf.rename, { desc = "璉Var Rename", buffer = true })
 		end
 
 		-- stylua: ignore start
-		keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "璉Goto Definition", buffer = true })
+		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
+			require("nvim-navic").attach(client, bufnr)
+			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "璉Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
+			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "璉Workspace Symbols", buffer = true })
+		end
+		keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "璉Goto [d]efinition", buffer = true })
 		keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "璉Goto Re[f]erence", buffer = true })
+		keymap("n", "gy", function() cmd.Telescope("lsp_type_definitions") end, { desc = "璉Goto T[y]pe Definition", buffer = true })
 		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, {desc = "璉Signature", buffer = true})
 		keymap("n", "<leader>h", vim.lsp.buf.hover, {desc = "璉Hover", buffer = true})
-		-- stylua: ignore end
 
+		-- Formatters
 		keymap({ "n", "x", "i" }, "<D-s>", function()
 			local ft = bo.filetype
-			local lspformat = vim.lsp.buf.format
 			if ft == "javascript" or ft == "typescript" then
-				lspformat { async = false } -- prettier & tsserver
+				vim.lsp.buf.format { async = false } -- prettier & tsserver
 				cmd.update { bang = true }
 				cmd.EslintFixAll() -- eslint-lsp
 			elseif ft == "applescript" then
-				cmd.mkview { bang = true }
+				cmd.mkview(2)
 				normal("gg=G") -- poor man's formatting
-				lspformat { async = false } -- still used for null-ls-codespell
-				cmd.loadview()
+				vim.lsp.buf.format { async = false } -- still used for null-ls-codespell
+				cmd.loadview(2)
 			else
-				lspformat { async = true }
+				vim.lsp.buf.format { async = true }
 			end
 			cmd.write()
 		end, bufopts)
-
-		if bo.filetype ~= "css" then -- don't override navigation marker search for css files
-			keymap(
-				"n",
-				"gs",
-				function() cmd.Telescope("lsp_document_symbols") end,
-				{ desc = "璉Document Symbols", buffer = true }
-			) -- overrides treesitter symbols browsing
-			keymap(
-				"n",
-				"gS",
-				function() cmd.Telescope("lsp_workspace_symbols") end,
-				{ desc = "璉Workspace Symbols", buffer = true }
-			)
-		end
+		-- stylua: ignore end
 	end,
 })
 
@@ -215,7 +202,8 @@ end)
 -- Add borders to various lsp windows
 require("lspconfig.ui.windows").default_options.border = borderStyle
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderStyle })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
+vim.lsp.handlers["textDocument/signatureHelp"] =
+	vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
 
 --------------------------------------------------------------------------------
 -- LSP-SERVER-SPECIFIC SETUP
