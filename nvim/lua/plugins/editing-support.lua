@@ -80,6 +80,7 @@ return {
 				},
 				transform = function(lines)
 					local ft = vim.bo.filetype
+					local out = {}
 					for _, line in pairs(lines) do
 						-- smart switching of conditionals
 						if ft == "lua" and line:find("^%s*if.+then$") then
@@ -96,8 +97,9 @@ return {
 							local nextNum = tostring(tonumber(num) + 1)
 							line = line:gsub("%d+(.*=)", nextNum .. "%1")
 						end
+						table.insert(out, line)
 					end
-					return lines
+					return out
 				end,
 			}
 		end,
