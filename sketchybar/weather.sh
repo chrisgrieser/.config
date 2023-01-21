@@ -6,6 +6,6 @@ if [[ "$weather" =~ Unknown ]] || [[ "$weather" =~ Sorry ]] || [[ -z "$weather" 
 	temp="–"
 else
 	icon=$(echo "$weather" | cut -c1)
-	temp=$(echo "$weather" | cut -c3-)
+	temp=$(echo "$weather" | cut -c2-)
 fi
 sketchybar --set "$NAME" icon="$icon" label="$temp"
