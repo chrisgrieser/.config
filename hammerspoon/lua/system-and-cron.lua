@@ -132,6 +132,7 @@ wakeWatcher = caff
 			eventType ~= caff.screensDidUnlock
 			and eventType ~= caff.screensDidWake
 			and eventType ~= caff.screensDidUnlock
+			and eventType ~= caff.systemDidWake
 		then
 			return
 		end
@@ -145,6 +146,12 @@ wakeWatcher = caff
 			return
 		end
 
+		if eventType ~= caff.systemDidWake then
+			hs.execute(
+				"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar"
+			)
+		end
+
 		-- INFO checks need to run after delay, since display number is not
 		-- immediately picked up after wake
 		runWithDelays(1, function()
@@ -155,7 +162,6 @@ wakeWatcher = caff
 				workLayout() -- should run after git sync, to avoid conflicts
 				local toDark = not (betweenTime(7, 19))
 				setDarkmode(toDark)
-				hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar")
 			end
 		end)
 	end)
