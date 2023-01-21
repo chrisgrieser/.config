@@ -137,9 +137,7 @@ wakeWatcher = caff
 		end
 
 		syncAllGitRepos()
-		hs.execute(
-			"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; sketchybar --set clock popup.drawing=true"
-		)
+		hs.execute("sketchybar --set clock popup.drawing=true")
 		if isAtOffice() then
 			workLayout()
 			local toDark = betweenTime(7, 18)
@@ -157,6 +155,7 @@ wakeWatcher = caff
 				workLayout() -- should run after git sync, to avoid conflicts
 				local toDark = not (betweenTime(7, 19))
 				setDarkmode(toDark)
+				hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar")
 			end
 		end)
 	end)
