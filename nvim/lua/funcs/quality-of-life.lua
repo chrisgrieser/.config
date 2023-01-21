@@ -36,6 +36,7 @@ function M.wordSwitch()
 		{ "relative", "absolute" },
 		{ "dark", "light" },
 		{ "and", "or" },
+		{ "next", "prev" },
 	}
 	local ft = bo.filetype
 	local ftWords -- 3rd item false if 2nd item shouldn't also switch to first
@@ -54,7 +55,6 @@ function M.wordSwitch()
 		}
 	elseif ft == "bash" or ft == "zsh" or ft == "sh" then
 		ftWords = {
-			{ "-eq", "-ne" },
 			{ "if", "elif", false },
 			{ "elif", "else", false },
 			{ "else", "if", false },
@@ -63,7 +63,6 @@ function M.wordSwitch()
 		}
 	elseif ft == "javascript" or ft == "typescript" then
 		ftWords = {
-			{ "!==", "===" },
 			{ "if", "else if", false },
 			{ "else", "if", false },
 			{ "const", "let" },

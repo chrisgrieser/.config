@@ -1,6 +1,5 @@
 require("config.utils")
-local opts = { buffer = true }
-local qol = require("funcs.duplication")
+
 --------------------------------------------------------------------------------
 
 bo.grepprg = "rg --vimgrep --no-column" -- remove columns
@@ -29,13 +28,13 @@ end, { desc = "Search CSS Variables", buffer = true })
 -- various other solutions are described here: https://github.com/vim/vim/issues/2790
 -- however, using treesitter, this is less of an issue, but treesitter css
 -- highlighting isn't good yet, so…
-keymap("n", "zz", ":syntax sync fromstart<CR>", opts)
+keymap("n", "zz", ":syntax sync fromstart<CR>", { buffer = true })
 
 --------------------------------------------------------------------------------
 
 -- Section instead of function movement
-keymap({ "n", "x" }, "<C-j>", [[/^\/\* <<CR>:nohl<CR>]], opts)
-keymap({ "n", "x" }, "<C-k>", [[?^\/\* <<CR>:nohl<CR>]], opts)
+keymap({ "n", "x" }, "<C-j>", [[/^\/\* <<CR>:nohl<CR>]], { buffer = true, desc = "next section" })
+keymap({ "n", "x" }, "<C-k>", [[?^\/\* <<CR>:nohl<CR>]], { buffer = true, desc = "prev section" })
 
 --------------------------------------------------------------------------------
 
@@ -52,14 +51,7 @@ keymap(
 	{ desc = "inner CSS selector textobj", buffer = true }
 )
 
--- double a selector
-keymap("n", "yd", "yisEp", { buffer = true, silent = true, remap = true })
-
 --------------------------------------------------------------------------------
-
--- smart line duplicate (mnemonic: [R]eplicate)
--- switches top/bottom & moves to value
-keymap("n", "R", qol.cssDuplicateLine, opts)
 
 ---@diagnostic disable: undefined-field, param-type-mismatch
 keymap("n", "<leader>i", function()
