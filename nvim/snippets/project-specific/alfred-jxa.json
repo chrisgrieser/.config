@@ -19,10 +19,10 @@
 		"prefix": "Modifiers (Script Filter)",
 		"body": [
 			"\"mods\": {",
-			"\t\"cmd\": { \"arg\": \"foo\" },",
-			"\t\"alt\": {",
-			"\t\t\"arg\": \"bar\",",
-			"\t\t\"subtitle\": \"⌥: Copy Link\",",
+			"\t\"${1:cmd}\": {",
+			"\t\t\"arg\": \"${2:arg}\",",
+			"\t\t\"subtitle\": \"${1:cmd}: ${3:text}\",",
+			"\t},",
 			"},"
 		]
 	},
@@ -78,7 +78,7 @@
 			"\tconst fileManager = $.NSFileManager.defaultManager;",
 			"\tconst folderExists = fileManager.fileExistsAtPath(dataFolder);",
 			"\tif (!folderExists) fileManager.createDirectoryAtPathWithIntermediateDirectoriesAttributesError(dataFolder, false, $(), $());",
-			"\tconst dataPath = `\${dataFolder}/\${key}`;",
+			"\tconst dataPath = dataFolder + \"/\" + key;",
 			"\tconst str = $.NSString.alloc.initWithUTF8String(newValue);",
 			"\tstr.writeToFileAtomicallyEncodingError(dataPath,",
 			"\ttrue, $.NSUTF8StringEncoding, null);",

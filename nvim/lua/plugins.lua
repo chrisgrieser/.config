@@ -18,7 +18,6 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"williamboman/mason.nvim",
-			"kosayoda/nvim-lightbulb",
 			"williamboman/mason-lspconfig.nvim",
 			"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 			"ray-x/lsp_signature.nvim", -- signature hint
@@ -26,28 +25,6 @@ return {
 			"folke/neodev.nvim", -- lsp for nvim-lua config
 			"b0o/SchemaStore.nvim", -- schemas for json-lsp
 		},
-	},
-	{
-		"kosayoda/nvim-lightbulb",
-		lazy = true,
-		config = function()
-			vim.fn.sign_define("LightBulbSign", { text = "" })
-
-			-- HACK since ignore options does not work https://github.com/kosayoda/nvim-lightbulb/issues/39
-			require("nvim-lightbulb").setup { autocmd = { enabled = false } }
-			vim.api.nvim_create_augroup("lightbulb-fix", {})
-			vim.api.nvim_create_autocmd({ "CursorHold" }, {
-				group = "lightbulb-fix",
-				callback = function()
-					require("nvim-lightbulb").update_lightbulb {
-						ignore = {
-							"sumneko_lua", -- only non-diagnostic code action is to change roder of parameters, which is not very useful and mostly noise
-							"marksman", -- marksman adds the "Update ToC" code action everywhere
-						},
-					}
-				end,
-			})
-		end,
 	},
 
 	-- Linting & Formatting

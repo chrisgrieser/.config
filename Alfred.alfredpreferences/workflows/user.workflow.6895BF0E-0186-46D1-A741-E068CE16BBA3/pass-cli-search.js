@@ -16,7 +16,6 @@ function run(argv) {
 	//──────────────────────────────────────────────────────────────────────────────
 	let passwordStore = argv[0];
 	if (passwordStore === "") passwordStore = home + "/.password-store";
-
 	const jsonArray = [];
 
 	if (fileExists(passwordStore)) {
@@ -34,6 +33,12 @@ function run(argv) {
 					"match": alfredMatcher(id),
 					"arg": id,
 					"uid": id,
+					"mods": {
+						"fn": {
+							"arg": group,
+							"subtitle": "fn: Create new entry in " + group,
+						},
+					},
 				});
 			});
 	} else {
