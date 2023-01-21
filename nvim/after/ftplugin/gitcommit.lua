@@ -1,3 +1,4 @@
--- spellcheck
--- setting the window option makes it persist, therefore setting as local option
-setlocal("spell", true)
+require("config.utils")
+--------------------------------------------------------------------------------
+
+opt_local.spell = true

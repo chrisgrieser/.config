@@ -6,6 +6,7 @@ bo = vim.bo -- buffer-scoped options
 b = vim.b -- buffer-scoped variables
 wo = vim.wo -- window-scoped variables
 opt = vim.opt -- global options obj
+opt_local = vim.opt_local -- local options variables
 o = vim.o -- global options variables
 
 augroup = vim.api.nvim_create_augroup
@@ -27,12 +28,4 @@ function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 ---whether nvim runs in a GUI
 ---@return boolean
 function isGui() return g.neovide or g.goneovim end
-
----equivalent to `:setlocal option=value`
----@param option string
----@param value any
-function setlocal(option, value)
-	-- :setlocal does not have a direct access via the vim-module, it seems https://neovim.io/doc/user/lua.html#lua-vim-setlocal
-	vim.api.nvim_set_option_value(option, value, { scope = "local" })
-end
 

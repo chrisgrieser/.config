@@ -15,19 +15,6 @@ local logInfo = vim.log.levels.INFO
 ---runs :normal natively with bang
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
----equivalent to `:setlocal option&`
----@param option string
----@return any
-function getlocal(option) return vim.api.nvim_get_option_value(option, { scope = "local" }) end
-
----equivalent to `:setlocal option=value`
----@param option string
----@param value any
-function setlocal(option, value)
-	-- :setlocal does not have a direct access via the vim-module, it seems https://neovim.io/doc/user/lua.html#lua-vim-setlocal
-	vim.api.nvim_set_option_value(option, value, { scope = "local" })
-end
-
 --------------------------------------------------------------------------------
 
 ---switches words under the cursor from `true` to `false` and similar cases
@@ -164,12 +151,12 @@ end
 
 ---toggle wrap, colorcolumn, and hjkl visual/logical maps in one go
 function M.toggleWrap()
-	local wrapOn = getlocal("wrap")
+	local wrapOn = opt_local.wrap:get()
 	local opts = { buffer = true }
 
 	if wrapOn then
-		setlocal("wrap", false)
-		setlocal("colorcolumn", o.colorcolumn)
+		opt_local.wrap = false
+		opt_local.colorcolumn = opt.colorcolumn:get()
 
 		local del = vim.keymap.del
 		del({ "n", "x" }, "H", opts)
@@ -179,8 +166,8 @@ function M.toggleWrap()
 		del({ "n", "x" }, "k", opts)
 		del({ "n", "x" }, "j", opts)
 	else
-		setlocal("wrap", true)
-		setlocal("colorcolumn", "")
+		opt_local.wrap = true
+		opt_local.colorcolumn = ""
 
 		local keymap = vim.keymap.set
 		keymap({ "n", "x" }, "H", "g^", opts)
@@ -374,27 +361,6 @@ end
 function M.moveSelectionRight() normal('"zx"zpgvlolo') end
 
 function M.moveSelectionLeft() normal('"zdh"zPgvhoho') end
-
---------------------------------------------------------------------------------
-
-function duplicationOperator(motionType)
-	print("motionType:", motionType)
-	if motionType == "char" then
-		normal([[`[v`]"zy]])
-	elseif motionType == "line" then
-		normal([['[v']$"zy]])
-	else
-		vim.notify("Block Mode not supported yet.", logWarn)
-		return
-	end
-	local object = fn.getreg("z")
-	vim.notify(object)
-end
-
-keymap("n", "z", function()
-	opt.opfunc = "v:lua.duplicationOperator"
-	return "g@"
-end, { expr = true, nowait = true, desc = "duplication operator" })
 
 --------------------------------------------------------------------------------
 

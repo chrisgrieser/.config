@@ -2,8 +2,7 @@ require("config.utils")
 --------------------------------------------------------------------------------
 
 -- spellcheck
--- setting the window option makes it persist, therefore setting as local option
-setlocal("spell", true)
+opt_local.spell = true
 
 -- HACK to make lists auto-continue via Return in Insert & o in normal mode
 -- i.e. replaces bullet.vim based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
@@ -13,7 +12,7 @@ bo.formatoptions = bo.formatoptions:gsub("[ct]", "") .. "ro"
 -- enable wrapping lines
 -- HACK for whatever reason, needs to be wrapped in a condition, otherwise it
 -- worn't trigger?!
-if not wo.wrap then require("funcs.quality-of-life").toggleWrap() end
+if not opt_local.wrap:get() then require("funcs.quality-of-life").toggleWrap() end
 
 -- decrease line length without zen mode plugins 
 setlocal("signcolumn", "yes:9")

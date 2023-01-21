@@ -74,14 +74,16 @@ return {
 		config = function()
 			require("duplicate").setup {
 				operator = {
-					textobject = "yd",
-					textobject_visual_mode = "R",
-					textobject_cur_line = "R",
+					normal_mode = "yd",
+					visual_mode = "R",
+					line = "R",
 				},
+				-- selene: allow(high_cyclomatic_complexity)
 				transform = function(lines)
 					local ft = vim.bo.filetype
 					local out = {}
 					for _, line in pairs(lines) do
+
 						-- smart switching of conditionals
 						if ft == "lua" and line:find("^%s*if.+then$") then
 							line = line:gsub("^(%s*)if", "%1elseif")
@@ -89,6 +91,21 @@ return {
 							line = line:gsub("^(%s*)if", "%1elif")
 						elseif (ft == "javascript" or ft == "typescript") and line:find("^%s*if.+{$") then
 							line = line:gsub("^(%s*)if", "%1} else if")
+						-- smart switching of css words
+						elseif ft == "css" then
+							if line:find("top") then
+								line = line:gsub("top", "bottom")
+							elseif line:find("bottom") then
+								line = line:gsub("bottom", "top")
+							elseif line:find("right") then
+								line = line:gsub("right", "left")
+							elseif line:find("left") then
+								line = line:gsub("left", "right")
+							elseif line:find("%sheight") and not (line:find("line-height")) then
+								line = line:gsub("height", "width")
+							elseif line:find("%swidth") then
+								line = line:gsub("(%s)width", "%1height")
+							end
 						end
 
 						-- increment numbered vars
