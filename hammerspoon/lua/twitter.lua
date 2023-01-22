@@ -16,7 +16,7 @@ twitterWatcher = aw.new(function(appName, eventType, appObj)
 	-- move twitter and scroll it up
 	if appName == "Twitter" and (eventType == aw.launched or eventType == aw.activated) then
 		runWithDelays({ 0.05, 0.2 }, function()
-			appObj:mainWindow():setFrame(toTheSide)
+			appObj:findWindow("Twitter"):setFrame(toTheSide)
 			scrollUp()
 		end)
 
@@ -24,7 +24,10 @@ twitterWatcher = aw.new(function(appName, eventType, appObj)
 	elseif appName == "Twitter" and eventType == aw.deactivated then
 		local wins = appObj:allWindows()
 		for _, win in pairs(wins) do
-			if win:title() == "Media" then win:close() end
+			if win:title():find("Media") then
+				-- HACK using keystroke, since closing window does not seem to work
+				keystroke({ "command" }, "w", 1, app("Twitter")) 
+			end
 		end
 
 	-- raise twitter
@@ -71,6 +74,7 @@ end
 local function endAction()
 	if appIsRunning("Twitter") then
 		keystroke({ "command" }, "K", 1, app("Twitter")) -- open tweet
+		app("Twitter"):activate() -- so media windows come to the foreground
 	end
 end
 
