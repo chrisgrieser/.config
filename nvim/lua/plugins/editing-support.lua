@@ -104,6 +104,10 @@ return {
 								line = line:gsub("(%s)height", "%1width")
 							elseif line:find("%swidth") then
 								line = line:gsub("(%s)width", "%1height")
+							elseif line:find("dark") then
+								line = line:gsub("dark", "light")
+							elseif line:find("light") then
+								line = line:gsub("light", "dark")
 							end
 						end
 

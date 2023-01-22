@@ -64,11 +64,6 @@ wf_maxWindows = wf.new(true)
 		if isProjector() then return end
 		if checkSize(win, maximized) then win:application():hide() end
 	end)
-	:subscribe(wf.windowFocused, function(win)
-		if win:title() ~= "Quick Look" and checkSize(win, pseudoMaximized) and appIsRunning("Twitter") then
-			app("Twitter"):mainWindow():raise()
-		end
-	end)
 
 ---play/pause spotify with spotifyTUI
 ---@param toStatus string pause|play
@@ -99,20 +94,6 @@ spotifyAppWatcher = aw.new(function(appName, eventType)
 		elseif eventType == aw.terminated then
 			spotifyTUI("play")
 		end
-	end
-end):start()
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
--- TWITTER: fixed size to the side, with the sidebar hidden
-twitterWatcher = aw.new(function(appName, eventType, appObj)
-	if appName ~= "Twitter" then return end
-
-	if eventType == aw.launched or eventType == aw.deactivated or eventType == aw.activated then
-		runWithDelays({0.05, 0.2}, function()
-			appObj:mainWindow():setFrame(toTheSide)
-			keystroke({ "command" }, "1", 1, app("Twitter")) -- scroll up
-		end)
 	end
 end):start()
 
