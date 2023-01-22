@@ -129,9 +129,8 @@ shutDownWatcher = caff
 wakeWatcher = caff
 	.new(function(eventType)
 		if
-			eventType ~= caff.screensDidUnlock
-			and eventType ~= caff.screensDidWake
-			and eventType ~= caff.screensDidUnlock
+			eventType ~= caff.screensDidWake
+			-- and eventType ~= caff.screensDidUnlock
 			and eventType ~= caff.systemDidWake
 		then
 			return
@@ -146,7 +145,7 @@ wakeWatcher = caff
 			return
 		end
 
-		if eventType ~= caff.systemDidWake then
+		if eventType == caff.screensDidWake then
 			hs.execute(
 				"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar"
 			)
