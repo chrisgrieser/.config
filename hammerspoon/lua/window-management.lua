@@ -138,20 +138,6 @@ function moveResize(win, pos)
 	end
 end
 
-local function moveCurWinToOtherDisplay()
-	local win = hs.window.focusedWindow()
-	if not win then return end
-	local targetScreen = win:screen():next()
-	win:moveToScreen(targetScreen, true)
-
-	runWithDelays({ 0.1, 0.2 }, function()
-		-- workaround for ensuring proper resizing
-		win = hs.window.focusedWindow()
-		if not win then return end
-		win:setFrameInScreenBounds(win:frame())
-	end)
-end
-
 --------------------------------------------------------------------------------
 -- WINDOW TILING (OF SAME APP)
 
@@ -233,52 +219,7 @@ local function controlSpaceAction()
 	moveResize(currentWin, pos)
 end
 
-local function pagedownAction()
-	if #hs.screen.allScreens() > 1 then
-		moveCurWinToOtherDisplay()
-	elseif appIsRunning("Twitter") then
-		keystroke({}, "down", 1, app("Twitter")) -- tweet down
-	end
-end
-
-local function pageupAction()
-	if #hs.screen.allScreens() > 1 then
-		moveCurWinToOtherDisplay()
-	elseif appIsRunning("Twitter") then
-		keystroke({}, "up", 1, app("Twitter")) -- tweet up
-	end
-end
-
-local function endAction()
-	if appIsRunning("Twitter") then
-		keystroke({ "command" }, "K", 1, app("Twitter")) -- open tweet
-	end
-end
-
-local function homeAction()
-	if appIsRunning("zoom.us") then
-		alert("🔈/🔇") -- toggle mute
-		keystroke({ "shift", "command" }, "A", 1, app("zoom.us"))
-	elseif appIsRunning("Twitter") then
-		keystroke({ "shift", "command" }, "R", 1, app("Twitter")) -- reload
-		-- needs delay to wait for tweet loading
-		runWithDelays({ 0.2, 0.4, 0.6, 0.9, 1.2 }, function()
-			keystroke({ "command" }, "1", 1, app("Twitter")) -- scroll up
-			keystroke({ "command" }, "up", 1, app("Twitter")) -- goto top
-		end)
-	end
-end
-
---------------------------------------------------------------------------------
--- HOTKEYS
 -- Window resizing
 hotkey(hyper, "right", function() moveResize(hs.window.focusedWindow(), rightHalf) end)
 hotkey(hyper, "left", function() moveResize(hs.window.focusedWindow(), leftHalf) end)
 hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
-
--- move to other display
-hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
-hotkey({}, "pagedown", pagedownAction, nil, pagedownAction)
-hotkey({}, "pageup", pageupAction, nil, pageupAction)
-hotkey({}, "home", homeAction)
-hotkey({}, "end", endAction)

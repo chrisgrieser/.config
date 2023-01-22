@@ -179,9 +179,9 @@ local function motherHomeModeLayout()
 	})
 
 	runWithDelays({ 0, 0.2, 0.4, 0.6 }, function()
-      hs.layout.apply(layout)
+		hs.layout.apply(layout)
 		app("Twitter"):mainWindow():raise()
-   end)
+	end)
 	showAllSidebars()
 end
 

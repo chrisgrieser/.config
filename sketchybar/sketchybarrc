@@ -19,7 +19,6 @@ ram_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*ram" | head -n1 | cut -d\" 
 
 #───────────────────────────────────────────────────────────────────────────────
 
-
 if defaults read -g AppleInterfaceStyle | grep -iq "Dark"; then
 	BG_COLOR="0xff333333"
 	FONT_COLOR="0xffffffff"
@@ -33,8 +32,8 @@ fi
 first_set="left"
 second_set="popup.clock" # = two rows elsewhere
 POPUP_Y_OFFSET=-35
-HEIGHT=60        # extra height for second row & to cover the holes at the corner where the wallpaper shines through
-ITEM_Y_OFFSET=18 # needs to be adjusted for Height
+HEIGHT=60                    # extra height for second row & to cover the holes at the corner where the wallpaper shines through
+ITEM_Y_OFFSET=18             # needs to be adjusted for Height
 PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
 #───────────────────────────────────────────────────────────────────────────────
