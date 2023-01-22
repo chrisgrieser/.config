@@ -106,7 +106,7 @@ function workLayout()
 		"Alacritty",
 	})
 	hs.layout.apply(layout)
-
+	app("Twitter"):mainWindow():raise()
 	showAllSidebars()
 	runWithDelays({ 0.5, 1 }, function() app("Drafts"):activate() end)
 
@@ -121,7 +121,7 @@ end
 
 local function motherMovieModeLayout()
 	iMacDisplay:setBrightness(0)
-
+	dockSwitcher("mother-movie")
 	runWithDelays({ 0, 1 }, function()
 		openApp("YouTube")
 		quitApp {
@@ -139,8 +139,6 @@ local function motherMovieModeLayout()
 			"Twitter",
 		}
 	end)
-
-	dockSwitcher("mother-movie")
 end
 
 local function motherHomeModeLayout()
@@ -180,7 +178,10 @@ local function motherHomeModeLayout()
 		"Alacritty",
 	})
 
-	runWithDelays({ 0, 0.2, 0.4, 0.6 }, function() hs.layout.apply(layout) end)
+	runWithDelays({ 0, 0.2, 0.4, 0.6 }, function()
+      hs.layout.apply(layout)
+		app("Twitter"):mainWindow():raise()
+   end)
 	showAllSidebars()
 end
 
