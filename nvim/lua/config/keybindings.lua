@@ -152,7 +152,7 @@ autocmd("TextYankPost", {
 		end
 
 		-- sticky yank
-		setCursor(0, g.cursorPreYank)
+		-- setCursor(0, g.cursorPreYank)
 
 		-- add yanks and deletes to numbered registers
 		if vim.v.event.regname ~= "" then return end
