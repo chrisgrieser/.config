@@ -9,6 +9,8 @@ keymap("n", "c", '"_c')
 keymap("n", "cc", '"_cc')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = "paste without switching register" })
+
+-- do not clutter the register if blank line is deleted
 keymap("n", "dd", function()
 	local isBlankLine = fn.getline("."):find("^%s*$") ---@diagnostic disable-line: param-type-mismatch, undefined-field
 	local expr = isBlankLine and '"_dd' or "dd"
@@ -53,8 +55,7 @@ autocmd("TextYankPost", {
 	end,
 })
 
--- cycle through the last deletes/yanks ("2 till "9), starting at non-last
--- delete/yank
+-- cycle through the last deletes/yanks ("2 till "9), starting at non-last delete/yank
 keymap("n", "P", function()
 	if not g.killringCount then g.killringCount = 2 end
 	cmd.undo()
@@ -67,7 +68,7 @@ keymap("n", "P", function()
 end, { desc = "cycle through killring" })
 
 keymap("n", "p", function()
-	g.killringCount = 2 -- pasting resets the killring
+	g.killringCount = 2 -- normal pasting resets the killring
 	normal("p")
 end, { desc = "paste & reset killring" })
 

@@ -320,8 +320,7 @@ if isGui() then
 end
 
 --------------------------------------------------------------------------------
--- luasnip
-
+-- LUASNIP
 keymap({ "i", "s" }, "<D-j>", function()
 	if require("luasnip").jumpable(1) then
 		require("luasnip").jump(1)
@@ -340,13 +339,11 @@ end, { desc = "LuaSnip: Jump Back" })
 
 keymap({ "i", "s" }, "<D-k>", function()
 	if require("luasnip").choice_active() then
-		require("luasnip.extras.select_choice")()
-		return "<Esc>" -- HACK so we do not end up in insert mode for the selection
+		require("luasnip").change_choice(1)
 	elseif bo.filetype == "markdown" then
 		return "<D-k>" -- md link creation
 	else
 		vim.notify("No Choice available.", logWarn)
-		return ""
 	end
 end, { desc = "LuaSnip: Select Choice", expr = true, remap = true })
 
@@ -370,40 +367,52 @@ keymap("n", "<leader>a", ":ChatGPT<CR>", { desc = "ﮧ ChatGPT Prompt" })
 -- File Switchers
 keymap("n", "go", function()
 	local isGitRepo = os.execute("test -e $(git rev-parse --show-toplevel)/.git") == 0 -- using test -e instead of -f to check for repo and submodule
+
 	local cwd = expand("%:p:h")
+	local scope = isGitRepo and "git_files" or "find_files"
+	if isGitRepo then
+		scope = "git_files"	
+	else
+	end
 	local scope = "find_files"
 	if cwd:find("/nvim/") and not (cwd:find("/my%-plugins/")) then
 		scope = "find_files cwd=" .. fn.stdpath("config")
+	elseif cwd:find("/hammerspoon/") then
+		scope = "find_files cwd=" .. vim.env.DOTFILE_FOLDER .. "/hammerspoon/"
 	elseif isGitRepo and not (cwd:find(vim.env.DOTFILE_FOLDER)) then
 		scope = "git_files"
 	end
 	cmd("Telescope " .. scope)
 end, { desc = " Smart in repo/folder" })
+
 keymap("n", "gF", function()
 	local scope = expand("%:p:h") -- default: just search the buffer's folder
 	local isGitRepo = os.execute("test -e $(git rev-parse --show-toplevel)/.git") == 0 -- using test -e instead of -f to check for repo and submodule
 	if scope:find("/nvim/") and not (scope:find("/my%-plugins/")) then
 		scope = fn.stdpath("config")
+	elseif scope:find("/hammerspoon/") then
+		scope = vim.env.DOTFILE_FOLDER .. "/hammerspoon/"
 	elseif isGitRepo and not (scope:find(vim.env.DOTFILE_FOLDER)) then
 		scope = fn.system("git rev-parse --show-toplevel")
 	end
 	cmd("Telescope live_grep cwd=" .. scope)
 end, { desc = " ripgrep repo/folder" })
+
 keymap("n", "gO", function() cmd.Telescope("find_files") end, { desc = " Files in cwd" })
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 
 -- File Operations
-keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = "copy filepath" })
-keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = "copy filename" })
-keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = "chmod +x" })
-keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = "rename file" })
+keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = " copy filepath" })
+keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = " copy filename" })
+keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = " chmod +x" })
+keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = " rename file" })
 -- stylua: ignore
-keymap("n", "<D-S-m>", function() require("genghis").moveAndRenameFile() end, { desc = "move-rename file" })
-keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = "duplicate file" })
-keymap("n", "<D-BS>", function() require("genghis").trashFile() end, { desc = "move file to trash" })
-keymap("n", "<D-n>", function() require("genghis").createNewFile() end, { desc = "create new file" })
+keymap("n", "<D-S-m>", function() require("genghis").moveAndRenameFile() end, { desc = " move-rename file" })
+keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = " duplicate file" })
+keymap("n", "<D-BS>", function() require("genghis").trashFile() end, { desc = " move file to trash" })
+keymap("n", "<D-n>", function() require("genghis").createNewFile() end, { desc = " create new file" })
 -- stylua: ignore
-keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = "selection to new file" })
+keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = " selection to new file" })
 
 -- goto file
 -- needed, since gf remapped to reference search

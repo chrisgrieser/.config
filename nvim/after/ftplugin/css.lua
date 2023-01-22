@@ -74,7 +74,7 @@ keymap("n", "qw", function()
 	}
 	fn.append(".", hr)
 	local lineNum = getCursor(0)[1] + 2
-	local colNum = #hr[2] + 2
+	local colNum = #(hr[2]) + 2
 	setCursor(0, { lineNum, colNum })
 	cmd.startinsert { bang = true }
 end, { buffer = true, desc = "insert comment-heading" })
