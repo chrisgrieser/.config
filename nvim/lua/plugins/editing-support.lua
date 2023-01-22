@@ -102,9 +102,9 @@ return {
 							line = line:gsub("right", "left")
 						elseif line:find("left") then
 							line = line:gsub("left", "right")
-						elseif line:find("%sheight") then
+						elseif line:find("%sheight") then -- %s condition to avoid matching line-height etc
 							line = line:gsub("(%s)height", "%1width")
-						elseif line:find("%swidth") then
+						elseif line:find("%swidth") then -- %s condition to avoid matching border-width etc
 							line = line:gsub("(%s)width", "%1height")
 						elseif line:find("dark") then
 							line = line:gsub("dark", "light")
