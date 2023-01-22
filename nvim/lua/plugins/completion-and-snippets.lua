@@ -315,10 +315,8 @@ return {
 	{ -- smarter autopairs
 		"hrsh7th/nvim-insx",
 		event = "InsertEnter",
-		config = function()
-			require('insx.preset.standard').setup()
-		end,
- },
+		config = function() require("insx.preset.standard").setup() end,
+	},
 	-- {
 	-- 	"windwp/nvim-autopairs",
 	-- 	dependencies = "hrsh7th/nvim-cmp",
