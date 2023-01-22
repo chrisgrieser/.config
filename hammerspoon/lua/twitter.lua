@@ -20,6 +20,13 @@ twitterWatcher = aw.new(function(appName, eventType, appObj)
 			scrollUp()
 		end)
 
+	-- auto-close media windows
+	elseif appName == "Twitter" and eventType == aw.deactivated then
+		local wins = appObj:allWindows()
+		for _, win in pairs(wins) do
+			if win:title() == "Media" then win:close() end
+		end
+
 	-- raise twitter
 	elseif appIsRunning("Twitter") then
 		local win = appObj:mainWindow()
