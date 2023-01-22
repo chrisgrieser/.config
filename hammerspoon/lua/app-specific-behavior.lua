@@ -108,9 +108,10 @@ end):start()
 twitterWatcher = aw.new(function(appName, eventType, appObj)
 	if appName ~= "Twitter" then return end
 
-	if eventType == aw.launched or eventType == aw.deactivated then
-		runWithDelays(0.2, function()
+	if eventType == aw.launched or eventType == aw.deactivated or eventType == aw.activated then
+		runWithDelays({0.05, 0.2}, function()
 			appObj:mainWindow():setFrame(toTheSide)
+			keystroke({ "command" }, "1", 1, app("Twitter")) -- scroll up
 		end)
 	end
 end):start()
