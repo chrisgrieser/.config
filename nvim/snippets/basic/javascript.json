@@ -3,10 +3,6 @@
 		"prefix": "replace",
 		"body": "replace(/${1:regexp}/${2:gm}, \"$3\");"
 	},
-	"ISO date": {
-		"prefix": "ISO date",
-		"body": "new Date().toISOString().slice(0"
-	},
 	"ignore (prettier)": {
 		"prefix": "ignore (prettier)",
 		"body": "// prettier-ignore"
@@ -29,6 +25,21 @@
 			"});"
 		],
 		"description": "For-Each Loop using =>"
+	},
+	"today's date": {
+		"prefix": ["today", "date"],
+		"body": "const today = new Date();"
+	},
+	"tomorrow's date": {
+		"prefix": ["tomorrow", "date"],
+		"body": [
+			"const tomorrow = new Date();",
+			"tomorrow.setDate(tomorrow.getDate() + 1);"
+		]
+	},
+	"today as ISO 8601 string": {
+		"prefix": "ISO date",
+		"body": "new Date().toISOString().slice(0, 10);"
 	},
 	"For-In Loop": {
 		"prefix": "forin",
@@ -85,7 +96,6 @@
 			"\tcase ${2:value}:",
 			"\t\t$0",
 			"\t\tbreak;",
-			"",
 			"\tdefault:",
 			"\t\tbreak;",
 			"}"
@@ -93,7 +103,7 @@
 		"description": "Switch Statement"
 	},
 	"While Statement": {
-		"prefix": "while",
+		"prefix": "while ..",
 		"body": [
 			"while (${1:condition}) {",
 			"\t$0",
@@ -102,7 +112,7 @@
 		"description": "While Statement"
 	},
 	"Do-While Statement": {
-		"prefix": "dowhile",
+		"prefix": ["do .. while", "repeat until"],
 		"body": [
 			"do {",
 			"\t$0",
@@ -111,7 +121,7 @@
 		"description": "Do-While Statement"
 	},
 	"Try-Catch Statement": {
-		"prefix": "trycatch",
+		"prefix": "try .. catch",
 		"body": [
 			"try {",
 			"\t$0",
@@ -126,7 +136,7 @@
 		"body": [
 			"setTimeout(() => {",
 			"\t$0",
-			"}, ${1:timeout});"
+			"}, ${1:timeoutMs});"
 		],
 		"description": "Set Timeout Function"
 	}
