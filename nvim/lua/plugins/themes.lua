@@ -1,17 +1,15 @@
 local lightTheme = "rose-pine"
--- local darkTheme = "bluloco"
+local darkTheme = "bluloco"
 -- local darkTheme = "rose-pine"
 -- local darkTheme = "tokyonight-moon"
 -- local lightTheme = "melange"
 -- local darkTheme = "oxocarbon"
 -- local lightTheme = "dawnfox"
 -- local darkTheme = "zephyr"
-local darkTheme = "nordic"
 
 local themePackages = {
-	-- { "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
+	{ "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
 	"rose-pine/neovim",
-	"AlexvZyl/nordic.nvim",
 	-- "EdenEast/nightfox.nvim",
 	-- "glepnir/zephyr-nvim",
 	-- "folke/tokyonight.nvim",

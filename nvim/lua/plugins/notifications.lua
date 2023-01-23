@@ -40,6 +40,7 @@ local function config()
 		return msg:find("^gitsigns ROW: %d+")
 			or msg:find("^line value outside range")
 			or msg:find("^diagnostic ROW: %d+")
+			or msg:find("^nvim%-navic:.*Already attached to %w+")
 	end
 
 	augroup("macOSnotification", {})

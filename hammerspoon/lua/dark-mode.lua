@@ -25,6 +25,17 @@ function toggleDarkMode()
 		setConsoleColors("dark")
 	end
 
+	-- sketchybar
+	hs.execute([[
+	BG_COLOR="0xffcdcdcd"
+	FONT_COLOR="0xff000000"
+	[[]]sketchybar --bar color="$BG_COLOR" \
+		set drafts icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
+		set sync-indicator icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
+		set clock icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
+		set covid-stats icon.color="$FONT_COLOR" label.color="$FONT_COLOR"
+	]])
+
 	-- Brave & System
 	applescript([[
 		set openBlank to false
@@ -47,9 +58,6 @@ function toggleDarkMode()
 			tell application "Brave Browser" to close active tab of front window
 		end if
 	]])
-
-	-- sketchybar
-	hs.execute("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar")
 
 	app(prevApp):activate()
 	holeCover() -- redraw hole-covers in proper color
