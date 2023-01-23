@@ -7,6 +7,6 @@ on run argv
 	set dueDate to (current date) + inDays * (60 * 60 * 24)
 	tell application "Reminders"
 		tell (list theList) to make new reminder at end with properties {name:eventText, allday due date: dueDate}
-		# quit
+		quit
 	end tell
 end run
