@@ -1,6 +1,7 @@
 require("lua.utils")
 require("lua.window-management")
 require("lua.private")
+require("lua.twitter")
 --------------------------------------------------------------------------------
 
 ---@param targetMode string
@@ -106,7 +107,7 @@ function workLayout()
 		"Alacritty",
 	})
 	hs.layout.apply(layout)
-	app("Twitter"):mainWindow():raise()
+	twitterToTheSide()
 	showAllSidebars()
 	runWithDelays({ 0.5, 1 }, function() app("Drafts"):activate() end)
 
@@ -180,7 +181,7 @@ local function motherHomeModeLayout()
 
 	runWithDelays({ 0, 0.2, 0.4, 0.6 }, function()
 		hs.layout.apply(layout)
-		app("Twitter"):mainWindow():raise()
+		twitterToTheSide()
 	end)
 	showAllSidebars()
 end

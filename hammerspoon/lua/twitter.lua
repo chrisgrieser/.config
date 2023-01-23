@@ -11,12 +11,17 @@ local function scrollUp()
 	end)
 end
 
+function twitterToTheSide()
+	app("Twitter"):findWindow("Twitter"):raise()
+	app("Twitter"):findWindow("Twitter"):setFrame(toTheSide)
+end
+
 -- TWITTER: fixed size to the side, with the sidebar hidden
 twitterWatcher = aw.new(function(appName, eventType, appObj)
 	-- move twitter and scroll it up
 	if appName == "Twitter" and (eventType == aw.launched or eventType == aw.activated) then
 		runWithDelays({ 0.05, 0.2 }, function()
-			appObj:findWindow("Twitter"):setFrame(toTheSide)
+			twitterToTheSide()
 			scrollUp()
 		end)
 
@@ -31,7 +36,7 @@ twitterWatcher = aw.new(function(appName, eventType, appObj)
 		end
 
 	-- raise twitter
-	elseif appIsRunning("Twitter") then
+	elseif appIsRunning("Twitter") and eventType == aw.activated then
 		local win = appObj:mainWindow()
 		if checkSize(win, pseudoMaximized) and win:title() ~= "Quick Look" then
 			app("Twitter"):mainWindow():raise()
