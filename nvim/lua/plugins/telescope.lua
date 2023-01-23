@@ -38,6 +38,7 @@ local options = {
 			"%.data", -- Alfred
 			"%.zcomp", -- zsh completion data
 			"%.string",
+			"%.pdf",
 			"%.log",
 			"%.png",
 			"%.jpe?g",
