@@ -22,7 +22,7 @@ twitterWatcher = aw.new(function(appName, eventType, appObj)
 	if appName == "Twitter" and (eventType == aw.launched or eventType == aw.activated) then
 		runWithDelays({ 0.05, 0.2 }, function()
 			twitterToTheSide()
-			scrollUp()
+			if eventType == aw.launched then scrollUp() end
 		end)
 
 	-- auto-close media windows
@@ -30,7 +30,8 @@ twitterWatcher = aw.new(function(appName, eventType, appObj)
 		local wins = appObj:allWindows()
 		for _, win in pairs(wins) do
 			if win:title():find("Media") then
-				-- HACK using keystroke, since closing window does not seem to work
+				win:close()
+				-- HACK using keystroke, since closing window does not seem to work reliably
 				keystroke({ "command" }, "w", 1, app("Twitter")) 
 			end
 		end

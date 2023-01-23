@@ -41,7 +41,6 @@ opt.grepprg = "rg --vimgrep" -- use rg for :grep
 -- Popups / Floating Windows
 opt.pumheight = 15 -- max number of items in popup menu
 opt.pumwidth = 10 -- min width popup menu
-opt.winblend = 2 -- % transparency
 
 -- Spelling
 opt.spelllang = "en_us"
