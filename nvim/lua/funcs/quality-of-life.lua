@@ -64,6 +64,7 @@ function M.wordSwitch()
 	elseif ft == "javascript" or ft == "typescript" then
 		ftWords = {
 			{ "if", "else if", false },
+			{ "var", "const", false },
 			{ "else", "if", false },
 			{ "const", "let" },
 			{ "replace", "replaceAll" },
