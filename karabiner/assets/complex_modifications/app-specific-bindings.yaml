@@ -347,12 +347,11 @@ rules:
       - type: basic
         from: {key_code: r, modifiers: {mandatory: [command]}}
         to:
-          # saving text in the clipboard required, since tab->up->r only works 
+          # saving text in the clipboard required, since tab->up->r only works
           # with empty text input field. need to preserve previous clipboard then
-          - shell_command: pbpaste | pbcopy -pboard ruler 
+          - shell_command: pbpaste | pbcopy -pboard ruler
           - {key_code: a, modifiers: [command]}
           - {key_code: x, modifiers: [command]}
-
           # reply
           - {key_code: vk_none, hold_down_milliseconds: 30}
           - key_code: tab
@@ -360,12 +359,10 @@ rules:
           - key_code: up_arrow
           - {key_code: vk_none, hold_down_milliseconds: 70}
           - key_code: r
-
           # restore previous text & previous clipboard
           - {key_code: v, modifiers: [command]}
           - {key_code: vk_none, hold_down_milliseconds: 30}
           - shell_command: pbpaste -pboard ruler | pbcopy
-
         conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$]}]
       # em[o]ji reaction to msg above
       - type: basic
@@ -486,6 +483,13 @@ rules:
                 end tell
               end tell'
         conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.agiletortoise\.Drafts-OSX$]}]
+  - description: "BusyCal"
+    manipulators:
+      - type: basic
+        from: {key_code: "1", modifiers: {mandatory: [command]}}
+        to:
+          - {key_code: c, modifiers: [command, option]}
+        conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.busymac\.busycal3$]}]
   - description: "(Apps) Mimestream"
     manipulators:
       # snoozing consistent with snoozing in Drafts
