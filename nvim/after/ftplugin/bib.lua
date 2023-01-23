@@ -1,3 +1,4 @@
 require("config.utils")
 --------------------------------------------------------------------------------
-bo.formatoptions = bo.formatoptions:gsub("t", "") -- do not autowrap
+-- do not autowrap
+bo.formatoptions = bo.formatoptions:gsub("t", "") 
