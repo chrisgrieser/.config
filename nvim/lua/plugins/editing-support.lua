@@ -80,8 +80,13 @@ return {
 				},
 				-- selene: allow(high_cyclomatic_complexity)
 				transform = function(lines)
+					-- move cursor down
+					
+
+
 					-- only work with single line duplication
 					if #lines > 1 then return lines end
+
 					local line = lines[1]
 					local ft = vim.bo.filetype
 
@@ -92,7 +97,7 @@ return {
 						line = line:gsub("^(%s*)if", "%1elif")
 					elseif (ft == "javascript" or ft == "typescript") and line:find("^%s*if.+{$") then
 						line = line:gsub("^(%s*)if", "%1} else if")
-						-- smart switching of css words
+					-- smart switching of css words
 					elseif ft == "css" then
 						if line:find("top") then
 							line = line:gsub("top", "bottom")
@@ -130,7 +135,7 @@ return {
 					end
 					vim.api.nvim_win_set_cursor(0, { lineNum, colNum })
 
-					return {line} -- return as array, since that's what the plugin expects
+					return { line } -- return as array, since that's what the plugin expects
 				end,
 			}
 		end,

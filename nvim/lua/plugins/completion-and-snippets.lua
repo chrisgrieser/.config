@@ -273,7 +273,7 @@ return {
 			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
-			"petertriho/cmp-git",
+			{"petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim"},
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
@@ -311,7 +311,6 @@ return {
 			}
 		end,
 	},
-
 	{ -- smarter autopairs
 		"hrsh7th/nvim-insx",
 		event = "InsertEnter",
