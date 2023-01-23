@@ -7,8 +7,6 @@ function run(argv) {
 	const daysUntilSunday = (6 - weekdayNum).toString;
 	const query = argv[0];
 
-	console.log("Number of days until next Monday: " + daysUntilMonday);
-
 	const jsonArray = [
 		{
 			title: "Tomorrow",

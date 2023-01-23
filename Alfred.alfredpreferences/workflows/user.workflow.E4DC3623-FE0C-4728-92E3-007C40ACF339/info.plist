@@ -350,29 +350,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>242F3AE7-0C8C-4271-A4AB-4BF5B3CE4483</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -453,13 +430,6 @@
 			<real>550</real>
 			<key>ypos</key>
 			<real>185</real>
-		</dict>
-		<key>242F3AE7-0C8C-4271-A4AB-4BF5B3CE4483</key>
-		<dict>
-			<key>xpos</key>
-			<real>465</real>
-			<key>ypos</key>
-			<real>380</real>
 		</dict>
 		<key>578C08D0-C681-4E8A-AC1A-63359A0F0C34</key>
 		<dict>
@@ -652,6 +622,27 @@
 			<string>textfield</string>
 			<key>variable</key>
 			<string>bundesland_feiertage</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>General</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>List where new reminders should be added</string>
+			<key>label</key>
+			<string>Reminder List</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>theList</string>
 		</dict>
 	</array>
 	<key>variables</key>
