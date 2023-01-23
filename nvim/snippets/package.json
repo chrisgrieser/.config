@@ -83,6 +83,12 @@
 			},
 			{
 				"language": [
+					"yaml"
+				],
+				"path": "./project-specific/karabiner-modifications.json"
+			},
+			{
+				"language": [
 					"lua"
 				],
 				"path": "./project-specific/nvim-lua.json"

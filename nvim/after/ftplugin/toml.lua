@@ -1,6 +1,9 @@
 require("config.utils")
 --------------------------------------------------------------------------------
 
+-- do not autowrap
+bo.formatoptions = bo.formatoptions:gsub("t", "") 
+
 -- link textobj
 keymap(
 	{ "o", "x" },

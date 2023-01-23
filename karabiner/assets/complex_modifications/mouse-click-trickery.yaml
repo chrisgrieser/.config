@@ -111,6 +111,7 @@ rules:
             file_paths:
               - "[Nn]eovide"
   #─────────────────────────────────────────────────────────────────────────────
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "\U0001F401 4 (bottom)"
     manipulators:
       # Brave: Back
@@ -211,6 +212,8 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.apple\.finder$
+  #─────────────────────────────────────────────────────────────────────────────
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "\U0001F401 5 (top)"
     manipulators:
       # held-down: universal-search
@@ -230,6 +233,23 @@ rules:
               - ^net\.highlightsapp\.universal$
               - ^org\.yanex\.marta$
               - ^cc\.ffitch\.shottr$
+              - ^maccatalyst\.com\.atebits\.Tweetie
+        to_if_held_down:
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 250
+          basic.to_if_held_down_threshold_milliseconds: 250
+      # Twitter: Close Media Window
+      - type: basic
+        from:
+          pointing_button: button5
+        to:
+          - {key_code: w, modifiers: [command]}
+          - {key_code: tab, modifiers: [command]}
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^maccatalyst\.com\.atebits\.Tweetie
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
         parameters:
