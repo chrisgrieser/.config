@@ -137,7 +137,6 @@ wakeWatcher = caff
 		end
 
 		syncAllGitRepos()
-		hs.execute("sketchybar --set clock popup.drawing=true")
 		if isAtOffice() then
 			workLayout()
 			local toDark = betweenTime(7, 18)
@@ -158,7 +157,7 @@ wakeWatcher = caff
 				setDarkmode(true)
 				movieModeLayout()
 			else
-				workLayout() -- should run after git sync, to avoid conflicts
+				workLayout() 
 				local toDark = not (betweenTime(7, 19))
 				setDarkmode(toDark)
 			end
