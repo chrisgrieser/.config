@@ -45,19 +45,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>25343D36-C6C2-4B05-843E-61818411F654</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>AE660F92-2F96-4A1D-A7C0-FE2BE3261FC4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>26C5FB84-42DC-4F59-94BB-1865BCE97418</key>
 		<array>
 			<dict>
@@ -162,19 +149,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A7DFF1E7-ACCB-415D-A54A-11581C89EEC5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9360FDBD-ACF1-4146-9C10-D3C8417735EC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>C73C4C50-6AAA-4294-929D-5C770E4E4E36</key>
 		<array>
 			<dict>
@@ -267,37 +241,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
 				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>18</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>1</string>
-				<key>leftcursor</key>
+				<key>transient</key>
 				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.busymac.busycal3</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>25343D36-C6C2-4B05-843E-61818411F654</string>
+			<string>F00C2986-4FD7-478F-B72E-810CA90E50D0</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -340,46 +298,6 @@
 			<string>F4FE8A6C-1141-485C-8B99-0651788E8F5F</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>c</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1572864</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>AE660F92-2F96-4A1D-A7C0-FE2BE3261FC4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>F00C2986-4FD7-478F-B72E-810CA90E50D0</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -459,62 +377,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>29</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>0</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.busymac.busycal3</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>A7DFF1E7-ACCB-415D-A54A-11581C89EEC5</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>t</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1572864</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>9360FDBD-ACF1-4146-9C10-D3C8417735EC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -568,6 +430,55 @@
 			<string>12847B13-277D-4EF2-B65C-2F594D522510</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>tt</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>add-reminder.js</string>
+				<key>subtext</key>
+				<string>Loading</string>
+				<key>title</key>
+				<string>Search</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>F300A89D-7DA2-4976-BF45-0CE5C7EA2C98</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -799,9 +710,9 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>935</real>
+			<real>550</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>185</real>
 		</dict>
 		<key>21D99566-C83A-4DC5-BCDB-9676E5EE8678</key>
 		<dict>
@@ -811,15 +722,6 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>715</real>
-		</dict>
-		<key>25343D36-C6C2-4B05-843E-61818411F654</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>445</real>
-			<key>ypos</key>
-			<real>15</real>
 		</dict>
 		<key>26C5FB84-42DC-4F59-94BB-1865BCE97418</key>
 		<dict>
@@ -864,9 +766,9 @@
 			<key>note</key>
 			<string>weekly date generator</string>
 			<key>xpos</key>
-			<real>785</real>
+			<real>400</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>155</real>
 		</dict>
 		<key>9297F245-B547-4CD0-A4E1-40ECCDC3D441</key>
 		<dict>
@@ -882,20 +784,9 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>1300</real>
+			<real>915</real>
 			<key>ypos</key>
-			<real>55</real>
-		</dict>
-		<key>9360FDBD-ACF1-4146-9C10-D3C8417735EC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>toggle sidebar</string>
-			<key>xpos</key>
-			<real>615</real>
-			<key>ypos</key>
-			<real>155</real>
+			<real>45</real>
 		</dict>
 		<key>9B99EEB1-492C-4165-B8CF-DCCBF3E96201</key>
 		<dict>
@@ -911,29 +802,9 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>995</real>
-			<key>ypos</key>
-			<real>165</real>
-		</dict>
-		<key>A7DFF1E7-ACCB-415D-A54A-11581C89EEC5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>445</real>
+			<real>610</real>
 			<key>ypos</key>
 			<real>155</real>
-		</dict>
-		<key>AE660F92-2F96-4A1D-A7C0-FE2BE3261FC4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>toggle sidebar</string>
-			<key>xpos</key>
-			<real>615</real>
-			<key>ypos</key>
-			<real>15</real>
 		</dict>
 		<key>C6DAAB1D-609E-4930-B1D7-F7D3F3D59BC6</key>
 		<dict>
@@ -949,9 +820,9 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>1145</real>
+			<real>760</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>15</real>
 		</dict>
 		<key>D2BD37F0-E419-4DDF-903A-45426C37155D</key>
 		<dict>
@@ -976,9 +847,9 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>1375</real>
+			<real>990</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>15</real>
 		</dict>
 		<key>F2CF2E38-24B7-4272-8E42-FA4159C104D1</key>
 		<dict>
@@ -989,10 +860,23 @@
 			<key>ypos</key>
 			<real>370</real>
 		</dict>
+		<key>F300A89D-7DA2-4976-BF45-0CE5C7EA2C98</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>add reminder</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>210</real>
+		</dict>
 		<key>F4FE8A6C-1141-485C-8B99-0651788E8F5F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>add event</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1005,9 +889,9 @@
 			<key>note</key>
 			<string>add week</string>
 			<key>xpos</key>
-			<real>785</real>
+			<real>400</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>15</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
