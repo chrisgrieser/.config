@@ -1,16 +1,11 @@
 #!/usr/bin/env osascript -l JavaScript
 function run(argv) {
-	ObjC.import("stdlib");
-	const app = Application.currentApplication();
-	app.includeStandardAdditions = true;
-
-	//──────────────────────────────────────────────────────────────────────────────
 
 	const today = new Date();
-	const day = today.getDay();
-	const daysUntilMonday = 7 - day;
-	const daysUntilSunday = 6 - day;
-	// const query = argv[0];
+	const weekdayNum = today.getDay();
+	const daysUntilMonday = (7 - weekdayNum).toString;
+	const daysUntilSunday = (6 - weekdayNum).toString;
+	const query = argv[0];
 
 	console.log("Number of days until next Monday: " + daysUntilMonday);
 
@@ -37,5 +32,8 @@ function run(argv) {
 		},
 	];
 
-	return JSON.stringify({ items: jsonArray });
+	return JSON.stringify({
+		variables: { eventText: query },
+		items: jsonArray,
+	});
 }
