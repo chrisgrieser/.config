@@ -81,10 +81,9 @@ return {
 				-- selene: allow(high_cyclomatic_complexity)
 				transform = function(lines)
 					-- move cursor down
-					
+					vim.cmd.normal{tostring(#lines).."+", bang = true}
 
-
-					-- only work with single line duplication
+					-- transformation for single line duplication
 					if #lines > 1 then return lines end
 
 					local line = lines[1]

@@ -367,9 +367,17 @@ keymap("n", "<leader>a", ":ChatGPT<CR>", { desc = "ﮧ ChatGPT Prompt" })
 -- File Switchers
 keymap("n", "go", function()
 	local isGitRepo = os.execute("test -e $(git rev-parse --show-toplevel)/.git") == 0 -- using test -e instead of -f to check for repo and submodule
-	local scope = isGitRepo and "git_files" or "find_files"
+	local cwd = expand("%:p:h")
+	local scope = "find_files"
+	if cwd:find("/nvim/") and not (cwd:find("/my%-plugins/")) then
+		scope = "find_files cwd=" .. fn.stdpath("config")
+	elseif cwd:find("/hammerspoon/") then
+		scope = "find_files cwd=" .. vim.env.DOTFILE_FOLDER .. "/hammerspoon/"
+	elseif isGitRepo and not (cwd:find(vim.env.DOTFILE_FOLDER)) then
+		scope = "git_files"
+	end
 	cmd("Telescope " .. scope)
-end, { desc = " Open File in repo/folder" })
+end, { buffer = true, desc = " Open File in repo/folder" })
 
 keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " ripgrep folder" })
 keymap("n", "gO", function() cmd.Telescope("find_files") end, { desc = " Files in cwd" })
