@@ -32,19 +32,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>1F5FD192-50C5-498F-BC98-45D3DF7951E5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9B99EEB1-492C-4165-B8CF-DCCBF3E96201</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>21D99566-C83A-4DC5-BCDB-9676E5EE8678</key>
 		<array>
 			<dict>
@@ -188,19 +175,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>B5C61DD8-0F52-481D-BD4B-D64E06F0C661</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C6DAAB1D-609E-4930-B1D7-F7D3F3D59BC6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>C73C4C50-6AAA-4294-929D-5C770E4E4E36</key>
 		<array>
 			<dict>
@@ -293,27 +267,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>c</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Add as Event '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>F4FE8A6C-1141-485C-8B99-0651788E8F5F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -349,27 +302,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>c</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1572864</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>AE660F92-2F96-4A1D-A7C0-FE2BE3261FC4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -391,23 +323,138 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>c</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Add as Event '{query}'</string>
+				<key>withspace</key>
 				<true/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Add as Event to BusyCal</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>B5C61DD8-0F52-481D-BD4B-D64E06F0C661</string>
+			<string>F4FE8A6C-1141-485C-8B99-0651788E8F5F</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>c</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1572864</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>AE660F92-2F96-4A1D-A7C0-FE2BE3261FC4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>F00C2986-4FD7-478F-B72E-810CA90E50D0</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>26</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>7</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>FFFCD856-9A0A-4D43-A899-CCA1AE5235BB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>weekly-generator.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C73C4C50-6AAA-4294-929D-5C770E4E4E36</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>931A201F-67BF-4D23-845D-15074A56A83D</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -468,21 +515,57 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>weekly</string>
+				<key>subtext</key>
+				<string>Set new Start Date</string>
+				<key>text</key>
+				<string>Weekly Date Generator</string>
+				<key>withspace</key>
 				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Add as Task to BusyCal</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>1F5FD192-50C5-498F-BC98-45D3DF7951E5</string>
+			<string>578C08D0-C681-4E8A-AC1A-63359A0F0C34</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>subtext</key>
+				<string>Format: YYYY-MM-DD</string>
+				<key>text</key>
+				<string>New Start Date: '{query}'</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A0AD41AF-569F-405D-BB88-29B96C8DF007</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{date:yyyy-MM-dd}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>12847B13-277D-4EF2-B65C-2F594D522510</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -624,100 +707,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>F00C2986-4FD7-478F-B72E-810CA90E50D0</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>26</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>7</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>FFFCD856-9A0A-4D43-A899-CCA1AE5235BB</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>weekly-generator.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C73C4C50-6AAA-4294-929D-5C770E4E4E36</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>931A201F-67BF-4D23-845D-15074A56A83D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -750,63 +739,6 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>50001D1E-D9D3-46B6-B03B-0FC014777BD7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>weekly</string>
-				<key>subtext</key>
-				<string>Set new Start Date</string>
-				<key>text</key>
-				<string>Weekly Date Generator</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>578C08D0-C681-4E8A-AC1A-63359A0F0C34</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>subtext</key>
-				<string>Format: YYYY-MM-DD</string>
-				<key>text</key>
-				<string>New Start Date: '{query}'</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A0AD41AF-569F-405D-BB88-29B96C8DF007</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{date:yyyy-MM-dd}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>12847B13-277D-4EF2-B65C-2F594D522510</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -867,18 +799,9 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>590</real>
+			<real>935</real>
 			<key>ypos</key>
-			<real>800</real>
-		</dict>
-		<key>1F5FD192-50C5-498F-BC98-45D3DF7951E5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>250</real>
+			<real>195</real>
 		</dict>
 		<key>21D99566-C83A-4DC5-BCDB-9676E5EE8678</key>
 		<dict>
@@ -894,9 +817,9 @@
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>725</real>
+			<real>445</real>
 			<key>ypos</key>
-			<real>60</real>
+			<real>15</real>
 		</dict>
 		<key>26C5FB84-42DC-4F59-94BB-1865BCE97418</key>
 		<dict>
@@ -941,9 +864,9 @@
 			<key>note</key>
 			<string>weekly date generator</string>
 			<key>xpos</key>
-			<real>440</real>
+			<real>785</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>165</real>
 		</dict>
 		<key>9297F245-B547-4CD0-A4E1-40ECCDC3D441</key>
 		<dict>
@@ -959,9 +882,9 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>955</real>
+			<real>1300</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>55</real>
 		</dict>
 		<key>9360FDBD-ACF1-4146-9C10-D3C8417735EC</key>
 		<dict>
@@ -970,9 +893,9 @@
 			<key>note</key>
 			<string>toggle sidebar</string>
 			<key>xpos</key>
-			<real>895</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>200</real>
+			<real>155</real>
 		</dict>
 		<key>9B99EEB1-492C-4165-B8CF-DCCBF3E96201</key>
 		<dict>
@@ -988,18 +911,18 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>995</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>165</real>
 		</dict>
 		<key>A7DFF1E7-ACCB-415D-A54A-11581C89EEC5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>725</real>
+			<real>445</real>
 			<key>ypos</key>
-			<real>200</real>
+			<real>155</real>
 		</dict>
 		<key>AE660F92-2F96-4A1D-A7C0-FE2BE3261FC4</key>
 		<dict>
@@ -1008,36 +931,27 @@
 			<key>note</key>
 			<string>toggle sidebar</string>
 			<key>xpos</key>
-			<real>895</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>60</real>
-		</dict>
-		<key>B5C61DD8-0F52-481D-BD4B-D64E06F0C661</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>130</real>
+			<real>15</real>
 		</dict>
 		<key>C6DAAB1D-609E-4930-B1D7-F7D3F3D59BC6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>275</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>15</real>
 		</dict>
 		<key>C73C4C50-6AAA-4294-929D-5C770E4E4E36</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>800</real>
+			<real>1145</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>25</real>
 		</dict>
 		<key>D2BD37F0-E419-4DDF-903A-45426C37155D</key>
 		<dict>
@@ -1062,9 +976,9 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>1030</real>
+			<real>1375</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>25</real>
 		</dict>
 		<key>F2CF2E38-24B7-4272-8E42-FA4159C104D1</key>
 		<dict>
@@ -1091,9 +1005,9 @@
 			<key>note</key>
 			<string>add week</string>
 			<key>xpos</key>
-			<real>440</real>
+			<real>785</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>25</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
