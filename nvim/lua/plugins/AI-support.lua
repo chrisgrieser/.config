@@ -39,8 +39,8 @@ return {
 				keymaps = {
 					close = "<Esc>", -- mappings Esc here removes ability to use normal mode
 					yank_last = "<D-c>",
+					new_session = "<D-k>", -- clear
 					scroll_up = "<S-Up>",
-					new_session = "<D-n>",
 					scroll_down = "<S-Down>",
 				},
 				chat_layout = {
