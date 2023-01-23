@@ -377,6 +377,7 @@ end run</string>
 				<array>
 					<string>com.agiletortoise.Drafts-OSX</string>
 					<string>com.neovide.neovide</string>
+					<string>com.mimestream.Mimestream</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>

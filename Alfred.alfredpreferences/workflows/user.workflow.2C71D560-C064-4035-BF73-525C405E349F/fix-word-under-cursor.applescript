@@ -1,7 +1,7 @@
 #!/usr/bin/env osascript
 
 on run argv
-	-- workaround, since apple's float ("real") interpret , or . differently
+	-- HACK workaround, since apple's float ("real") interpret , or . differently
 	-- depending on system language m(
 	set delayAmount to (system attribute "delay_ms") as number
 	set delayAmount to delayAmount/1000
@@ -9,11 +9,12 @@ on run argv
 	set langArg to item 1 of argv
 	#----------------------------------------------------------------------------
 
+	-- clipboard cannot be preserved if it contains non-text (image, file)
 	try
 		set prevClipboard to the clipboard
-		set success to true
+		set clipboardPreserved to true
 	on error
-		set success to false
+		set clipboardPreserved to false
 	end try
 
 	delay delayAmount
@@ -29,13 +30,14 @@ on run argv
 
 	-- http://aspell.net/man-html/Through-A-Pipe.html
 	set theFixedWord to do shell script "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; echo '" & theWord & "' | aspell pipe " & langArg & " | sed -n 2p | cut -d, -f1 | cut -d: -f2 | cut -c2-"
+	if (theFixedWord is "") then set theFixedWord to theWord # on error, preserve word
 
 	set the clipboard to theFixedWord
 	delay delayAmount
 	tell application "System Events" to keystroke "v" using {command down}
 	delay delayAmount
 
-	if success is true then
+	if clipboardPreserved is true then
 		set the clipboard to prevClipboard
 	end if
 
