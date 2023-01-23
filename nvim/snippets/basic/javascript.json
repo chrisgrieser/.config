@@ -1,7 +1,7 @@
 {
 	"replace": {
 		"prefix": "replace",
-		"body": "replace(/${1:regexp}/gm, \"$2\");"
+		"body": "replace(/${1:regexp}/${2:gm}, \"$3\");"
 	},
 	"ISO date": {
 		"prefix": "ISO date",
