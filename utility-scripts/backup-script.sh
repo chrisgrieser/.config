@@ -60,9 +60,9 @@ echo "Backup: $(date '+%Y-%m-%d %H:%M')" >>last_backup.log
 
 # Reminder for Next Backup in 14 days
 osascript -e'
-	set nextDate to (current date) + (60 * 60 * 24) * 14
-	tell application "Reminders" to tell (list "General")
-		make new reminder at end with properties {name: "Backup", due date: nextDate}
+	set nextDate to (current date) + 14 * (60 * 60 * 24)
+	tell application "Reminders" 
+		tell (list "General") to make new reminder at end with properties {name: "Backup", due date: nextDate}
 		quit
 	end tell' &>/dev/null
 
