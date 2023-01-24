@@ -28,7 +28,7 @@ local options = {
 			"node_modules/", -- node
 			"venv/", -- python
 			"lib/", -- python
-			"", -- folder
+			"/$", -- folder
 			"%.spl", -- vim spell files
 			"%.add", -- vim spell files
 			"%.app/", -- internals of mac apps
