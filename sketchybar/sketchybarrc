@@ -36,6 +36,9 @@ HEIGHT=60                    # extra height for second row & to cover the holes 
 ITEM_Y_OFFSET=18             # needs to be adjusted for Height
 PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
+# HACK sync indicator to top row in office, second row elsewhere. workaround for https://github.com/FelixKratz/SketchyBar/issues/316
+[[ "$(scutil --get ComputerName)" =~ Office ]] && third_set="$first_set" || third_set="$second_set"
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
@@ -75,7 +78,7 @@ sketchybar \
 	--set "$gpu_bar_item" width=55 \
 	--add alias "$network_bar_item" $second_set \
 	--set "$network_bar_item" width=65 \
-	--add item sync-indicator $second_set \
+	--add item sync-indicator $third_set \
 	--set sync-indicator update_freq=300 \
 	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
 	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
