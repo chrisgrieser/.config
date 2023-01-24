@@ -7,7 +7,7 @@
 			"current"
 		],
 		"body": [
-			"const ${1:activeFile} = this.app.workspace.activeFile();"
+			"const ${1:activeFile} = this.app.workspace.getActiveFile();"
 		]
 	},
 	"get Tfile of active leaf": {
@@ -85,6 +85,18 @@
 			"\teditorCallback: (editor) => this.${3:method}(editor),",
 			"});"
 		]
+	},
+	"append to note": {
+		"prefix": "append to note",
+		"body": "await this.app.vault.append(${1:TFile}, ${2:textToAppend});"
+	},
+	"read note content": {
+		"prefix": "read note content",
+		"body": "await this.app.vault.read(${1:TFile});"
+	},
+	"write note content": {
+		"prefix": "write note content",
+		"body": "await this.app.vault.append(${1:TFile}, ${2:textToWrite});"
 	},
 	"Run Command": {
 		"prefix": "Run Command",
