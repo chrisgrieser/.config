@@ -9,28 +9,33 @@ require("lua.utils")
 -- - Hammerspoon Console
 function toggleDarkMode()
 	local prevApp = frontAppName()
-	local sketchyfont, sketchybg
+	local sketchyfont, sketchybg, toMode, pdfbg
 
-	-- neovim & highlights & hammerspoon
 	if isDarkMode() then
-		if appIsRunning("Highlights") then
-			app("Highlights"):selectMenuItem { "View", "PDF Appearance", "Default" }
-		end
-		hs.execute([[echo "setThemeMode('light')" > /tmp/nvim-automation]]) -- requires setup in ~/.config/nvim/lua/file-watcher.lua
-		setConsoleColors("light")
+		pdfbg = "Default"
+		toMode = "dark"
 		sketchybg = "0xffcdcdcd"
 		sketchyfont = "0xff000000"
 	else
-		if appIsRunning("Highlights") then
-			app("Highlights"):selectMenuItem { "View", "PDF Appearance", "Night" }
-		end
-		hs.execute([[echo "setThemeMode('dark')" > /tmp/nvim-automation]])
-		setConsoleColors("dark")
+		pdfbg = "Night"
+		toMode = "dark"
 		sketchybg = "0xff333333"
 		sketchyfont = "0xffffffff"
 	end
 
+	-- neovim
+	hs.execute([[echo "setThemeMode(']] .. toMode .. [[')" > /tmp/nvim-automation]]) -- requires setup in ~/.config/nvim/lua/file-watcher.lua
+
+	-- hammerspoon console
+	setConsoleColors(toMode)
+
+	-- Highlights PDF background
+	if appIsRunning("Highlights") then
+		app("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfbg }
+	end
+
 	-- sketchybar
+	-- stylua: ignore
 	hs.execute( 'BG_COLOR="'..sketchybg..'" ; FONT_COLOR="'..sketchyfont..'" ; '..
 	[[sketchybar --bar color="$BG_COLOR" \
 		--set drafts icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
@@ -41,26 +46,21 @@ function toggleDarkMode()
 		--update
 	]])
 
-	-- Brave & System
+	-- System & Brave (Workaround for Dark Reader)
 	applescript([[
-		set openBlank to false
 		tell application "Brave Browser"
-			if ((count of window) is 0) then
-				set openBlank to true
-			else
-				if ((URL of active tab of front window) starts with "chrome://") then set openBlank to true
-			end if
-			if (openBlank)
-				open location "https://www.blank.org/"
-				delay 0.4
-			end if
+			set openBlank to false
+			if ((count of window) is 0) then set openBlank to true
+			if ((URL of active tab of front window) starts with "chrome://") then set openBlank to true
 		end tell
-
-		tell application "System Events" to tell appearance preferences to set dark mode to not dark mode
-
 		if (openBlank)
+			open location "https://www.blank.org/"
+			delay 0.4
+			tell application "System Events" to tell appearance preferences to set dark mode to not dark mode
 			delay 0.2
 			tell application "Brave Browser" to close active tab of front window
+		else
+			tell application "System Events" to tell appearance preferences to set dark mode to not dark mode
 		end if
 	]])
 
