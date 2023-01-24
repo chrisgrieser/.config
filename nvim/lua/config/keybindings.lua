@@ -135,7 +135,7 @@ keymap("n", "~", "~h")
 keymap("n", "<C-ü>", qol.wordSwitch, { desc = "switch common words" })
 
 -- Append to / delete from EoL
-local trailingKeys = { ",", ";", '"', "'", ")", "}", "]" }
+local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
 for _, v in pairs(trailingKeys) do
 	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = "append " .. v .. " to EoL" })
 end
