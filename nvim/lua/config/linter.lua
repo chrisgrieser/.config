@@ -15,7 +15,7 @@ local lintersAndFormatters = {
 	"vale", -- natural language
 	"selene", -- lua
 	"stylua", -- lua
-	"eslint_d",
+	"eslint_d", -- eslint-lsp seems to be too buggy
 	"prettier", -- only for TS and JS
 	"codespell", -- common misspellings, autoformatted
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
