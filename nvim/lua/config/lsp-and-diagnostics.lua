@@ -333,7 +333,9 @@ for _, lsp in pairs(lsp_servers) do
 	if lspFileTypes[lsp] then config.filetypes = lspFileTypes[lsp] end
 
 	-- FIX missing root-directory detection for eslint LSP
-	if lsp == "eslint" then config.root_dir = require("lspconfig.util").find_git_ancestor end
+	if lsp == "eslint" then config.root_dir = function ()
+		
+	end end
 
 	require("lspconfig")[lsp].setup(config)
 end
