@@ -48,6 +48,7 @@ function themeSettings()
 			"DiagnosticUnderlineError",
 			"DiagnosticUnderlineWarn",
 			"DiagnosticUnderlineHint",
+			"DiagnosticUnderlineInfo",
 			-- function not local, so they can be accessed via file watcher",
 			"SpellLocal",
 			"SpellRare",

@@ -13,11 +13,11 @@ local lintersAndFormatters = {
 	"markdownlint",
 	"black", -- python formatter
 	"vale", -- natural language
+	"codespell", -- natural language (common misspellings, autoformatted)
 	"selene", -- lua
 	"stylua", -- lua
 	"eslint_d", -- eslint-lsp seems to be too buggy
 	"prettier", -- only for TS and JS
-	"codespell", -- common misspellings, autoformatted
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
@@ -28,7 +28,7 @@ local lintersAndFormatters = {
 
 null_ls.setup {
 	sources = {
-		-- Global
+		-- GLOBAL
 		builtins.diagnostics.codespell.with { -- common misspellings. Far less false positives than with cspell
 			disabled_filetypes = { "css", "bib" }, -- base64-encoded fonts cause a lot of errors
 			-- can't use `--skip`, since it null-ls reads from stdin and not a file
@@ -43,7 +43,7 @@ null_ls.setup {
 			disabled_filetypes = { "markdown" }, -- do not remove spaces due to two-space-rule
 		},
 
-		-- Python
+		-- PYTHON
 		builtins.formatting.black.with {
 			args = {
 				"--config",
@@ -70,7 +70,7 @@ null_ls.setup {
 			filetypes = { "javascript", "typescript" }, -- do format markdown, css, and so on
 			extra_args = { "--config", linterConfig .. "/.prettierrc.yml" },
 		},
-		builtins.code_actions.eslint_d,
+		builtins.code_actions.eslint_d, -- must not use a config file
 		builtins.formatting.eslint_d.with {
 			extra_args = { "--config", linterConfig .. "/.eslintrc.yml" },
 		},

@@ -1,16 +1,8 @@
 {
   "ChatGPT.nvim": { "branch": "main", "commit": "dac83f630fc6aafd256b149a2c2ae0d4466ec85e" },
   "Comment.nvim": { "branch": "master", "commit": "eab2c83a0207369900e92783f56990808082eac2" },
-<<<<<<< HEAD
-  "LuaSnip": { "branch": "master", "commit": "4eead79ef0f93a3786ca5b6265294ea94849586d" },
-  "SchemaStore.nvim": { "branch": "main", "commit": "69eacd9df20b14174b3209d74128bffbe711ed85" },
-||||||| parent of 69835f1b (iMac Home (2))
-  "LuaSnip": { "branch": "master", "commit": "448e6bc421c899fd7330e0f710f85867a332a177" },
-  "SchemaStore.nvim": { "branch": "main", "commit": "384af0bc8c572a4153348236a90f7e8313cad330" },
-=======
   "LuaSnip": { "branch": "master", "commit": "3181cef8a5c6a71f263a28e61651233d7a7afeb2" },
   "SchemaStore.nvim": { "branch": "main", "commit": "69eacd9df20b14174b3209d74128bffbe711ed85" },
->>>>>>> 69835f1b (iMac Home (2))
   "bluloco.nvim": { "branch": "main", "commit": "058ac22dd0f01ed176909653ba518fc85852b2f7" },
   "ccc.nvim": { "branch": "main", "commit": "be0a8122fd77efb7b6a0d672bab10417e68fab8b" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
@@ -26,13 +18,7 @@
   "cmp-treesitter": { "branch": "master", "commit": "b40178b780d547bcf131c684bc5fd41af17d05f2" },
   "cmp-zsh": { "branch": "main", "commit": "c24db8e58fac9006ec23d93f236749288d00dec9" },
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
-<<<<<<< HEAD
-  "codeium.vim": { "branch": "main", "commit": "cf3bbfa52658fa4380ea2bb764493356f04768c3" },
-||||||| parent of 69835f1b (iMac Home (2))
-  "codeium.vim": { "branch": "main", "commit": "2466cdeaced89ef5b71a00013ae35fc7ee40222e" },
-=======
   "codeium.vim": { "branch": "main", "commit": "b987b168b48b28e60642fc548f6da15078086a9a" },
->>>>>>> 69835f1b (iMac Home (2))
   "codi.vim": { "branch": "master", "commit": "ab8c5faa867424c79a7d5d3a7f55d3a2528ee9b9" },
   "cybu.nvim": { "branch": "main", "commit": "395791b1e1177e3459c85415970ab8216b19a5dc" },
   "diffview.nvim": { "branch": "main", "commit": "7de7334ef61a3f3806b1616c2d785b8bbf080060" },

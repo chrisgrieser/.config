@@ -116,7 +116,7 @@ end
 
 return {
 	"rcarriga/nvim-notify",
-	event = "VeryLazy",
+	event = "VimEnter", -- not VeryLazy, so notifications on entry are still shown
 	config = config,
 	cond = function() return vim.g.neovide or vim.g.goneovim end,
 }
