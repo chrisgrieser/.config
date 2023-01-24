@@ -15,6 +15,7 @@ local lintersAndFormatters = {
 	"vale", -- natural language
 	"selene", -- lua
 	"stylua", -- lua
+	"eslint_d",
 	"prettier", -- only for TS and JS
 	"codespell", -- common misspellings, autoformatted
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
@@ -67,7 +68,14 @@ null_ls.setup {
 		-- JS/TS
 		builtins.formatting.prettier.with {
 			filetypes = { "javascript", "typescript" }, -- do format markdown, css, and so on
-			extra_args = { "--config", linterConfig .. "/.prettierrc.yaml" },
+			extra_args = { "--config", linterConfig .. "/.prettierrc.yml" },
+		},
+		builtins.code_actions.eslint_d,
+		builtins.formatting.eslint_d.with {
+			extra_args = { "--config", linterConfig .. "/.eslintrc.yml" },
+		},
+		builtins.diagnostics.eslint_d.with {
+			extra_args = { "--config", linterConfig .. "/.eslintrc.yml" },
 		},
 
 		-- CSS

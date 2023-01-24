@@ -49,13 +49,9 @@ zsh "$DOTFILE_FOLDER/hammerspoon/dock-switching/dock-switcher.sh" --load home
 [[ -e ~/.zshenv ]] && rm -fv ~/.zshenv
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
 
-# eslint (eslint LSP does not allow custom config paths, also should be used for
-# projects anyway)
-ln -sf "$DOTFILE_FOLDER/linter-configs/.eslintrc.yml" ~
-
+# Codeium
 mkdir -p "$HOME/.codeium"
 ln -sf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/codium-api-key.json" ~/.codeium/config.json
-
 
 # GPG config
 mkdir ~/.gnupg
