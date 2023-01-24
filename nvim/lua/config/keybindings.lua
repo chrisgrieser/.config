@@ -377,7 +377,7 @@ keymap("n", "go", function()
 		scope = "git_files"
 	end
 	cmd("Telescope " .. scope)
-end, { buffer = true, desc = " Open File in repo/folder" })
+end, { desc = " Open File in repo/folder" })
 
 keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " ripgrep folder" })
 keymap("n", "gO", function() cmd.Telescope("find_files") end, { desc = " Files in cwd" })
