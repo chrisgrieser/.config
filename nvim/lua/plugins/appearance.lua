@@ -47,7 +47,7 @@ return {
 			require("satellite").setup {
 				winblend = 20, -- winblend = transparency
 				handlers = {
-					marks = { enable = false },
+					marks = { enable = true },
 				},
 			}
 		end,
