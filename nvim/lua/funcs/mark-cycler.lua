@@ -4,22 +4,10 @@ local g = vim.g
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 --------------------------------------------------------------------------------
 
+-- CONFIG
 local marks = { "A", "B" } -- the marks to use
 
 --------------------------------------------------------------------------------
-
-function M.clearMarks()
-	augroup("markFix", {})
-	autocmd("BufReadPost", {
-		group = "markFix",
-		callback = function()
-			-- HACK workaround for https://www.reddit.com/r/neovim/comments/qliuid/the_overly_persistent_marks_problem/
-			for _, mark in pairs(marks) do
-				vim.cmd.delmarks(mark)
-			end
-		end,
-	})
-end
 
 ---check whether a global mark is set
 ---@param mark string
@@ -33,7 +21,7 @@ end
 function M.gotoMark()
 	if g.markOneGo == nil then g.markOneGo = true end
 
-	-- selene: allow(if_same_then_else) --- more readable this way actually
+	-- selene: allow(if_same_then_else) --- more readable this way
 	if g.markOneGo and globalMarkIsSet(marks[1]) then
 		markToGo = marks[1]
 	elseif not g.markOneGo and globalMarkIsSet(marks[2]) then
@@ -48,7 +36,6 @@ function M.gotoMark()
 	end
 	normal("`" .. markToGo)
 	g.markOneGo = not g.markOneGo
-	vim.notify("Jumping to  " .. markToGo .. ". ")
 end
 
 function M.setMark()
