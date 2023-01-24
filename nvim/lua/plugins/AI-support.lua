@@ -33,8 +33,6 @@ return {
 		config = function()
 			require("chatgpt").setup {
 				welcome_message = "",
-				-- question_sign = "",
-				-- answer_sign = "ﮧ",
 				max_line_length = 90,
 				keymaps = {
 					close = "<Esc>", -- mappings Esc here removes ability to use normal mode
@@ -83,14 +81,17 @@ return {
 	{
 		"Exafunction/codeium.vim",
 		event = "InsertEnter",
-		-- currently supported languages: https://discord.com/channels/1027685395649015980/1027697446446432336/1053406784569737227
+		init = function()
+			vim.g.codeium_disable_bindings = 1 -- no default bindings
+			vim.g.codeium_filetypes = {
+				applescript = false,
+			}
+		end,
 		config = function()
-			vim.keymap.set(
-				"i",
-				"<C-c>",
-				function() return vim.fn["codeium#Accept"]() end,
-				{ expr = true, desc = "codium accept" }
-			)
+			-- stylua: ignore
+			vim.keymap.set("i", "<C-e>", function() return vim.fn["codeium#Clear"]() end, { desc = "codium clear", expr = true })
+			-- stylua: ignore
+			vim.keymap.set("i", "<C-c>", function() return vim.fn["codeium#Accept"]() end, { desc = "codium accept", expr = true })
 		end,
 	},
 }

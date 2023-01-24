@@ -108,7 +108,7 @@ local function cmpconfig()
 				if cmp.visible() then
 					cmp.abort()
 				else
-					fallback()
+					fallback() -- e.g. codium clear
 				end
 			end, { "i", "s" }),
 
