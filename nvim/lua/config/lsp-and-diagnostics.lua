@@ -163,7 +163,12 @@ autocmd("LspAttach", {
 
 		-- Formatters
 		keymap({ "n", "x", "i" }, "<D-s>", function()
-			if bo.filetype == "applescript" then
+			local ft = bo.filetype
+			if ft == "javascript" or ft == "typescript" then
+				vim.lsp.buf.format { async = false } -- prettier & tsserver
+				cmd.update { bang = true }
+				cmd.EslintFixAll() -- eslint-lsp
+			elseif ft == "applescript" then
 				cmd.mkview(2)
 				normal("gg=G") -- poor man's formatting
 				vim.lsp.buf.format { async = false } -- still used for null-ls-codespell
