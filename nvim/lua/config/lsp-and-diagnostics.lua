@@ -15,7 +15,6 @@ local lsp_servers = {
 	"pyright", -- python
 	"marksman", -- markdown
 	"tsserver", -- ts/js
-	"eslint", -- ts/js, requires eslint-cli https://github.com/williamboman/mason.nvim/issues/697
 }
 
 --------------------------------------------------------------------------------
@@ -163,12 +162,7 @@ autocmd("LspAttach", {
 
 		-- Formatters
 		keymap({ "n", "x", "i" }, "<D-s>", function()
-			local ft = bo.filetype
-			if ft == "javascript" or ft == "typescript" then
-				vim.lsp.buf.format { async = false } -- prettier & tsserver
-				cmd.update { bang = true }
-				cmd.EslintFixAll() -- eslint-lsp
-			elseif ft == "applescript" then
+			if bo.filetype == "applescript" then
 				cmd.mkview(2)
 				normal("gg=G") -- poor man's formatting
 				vim.lsp.buf.format { async = false } -- still used for null-ls-codespell
@@ -293,21 +287,6 @@ lspSettings.tsserver = {
 	javascript = jsAndTsSettings,
 }
 
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
-lspSettings.eslint = {
-	quiet = false, -- = include warnings
-	codeAction = {
-		disableRuleComment = { location = "sameLine" }, -- add ignore-comments on the same line
-	},
-	-- needed to use mason's eslint with the eslint-lsp https://github.com/williamboman/mason.nvim/issues/697#issuecomment-1330855352
-	-- nodePath = os.getenv("HOME") .. "/.local/share/nvim/mason/packages/eslint/node_modules",
-}
-
--- INFO: yaml
--- - no need to set schemas, all common ones are automatically enabled
--- - formatting does not work when set from yamlls, but yamllint and yamlfmt
--- work just fine I guess
-
 -- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings
 lspSettings.jsonls = {
 	json = {
@@ -331,11 +310,6 @@ for _, lsp in pairs(lsp_servers) do
 	local config = { capabilities = capabilities }
 	if lspSettings[lsp] then config.settings = lspSettings[lsp] end
 	if lspFileTypes[lsp] then config.filetypes = lspFileTypes[lsp] end
-
-	-- FIX missing root-directory detection for eslint LSP
-	if lsp == "eslint" then config.root_dir = function ()
-		
-	end end
 
 	require("lspconfig")[lsp].setup(config)
 end
