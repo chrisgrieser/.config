@@ -3,8 +3,6 @@
 matches:
   - trigger: "I#d"
     replace: "I'd"
-  - trigger: "... "
-    replace: "…"
   - trigger: appraoch
     replace: approach
     propagate_case: true
@@ -187,3 +185,6 @@ matches:
   - trigger: esle
     replace: else
     word: true
+  - trigger: lwoer
+    replace: lower
+    propagate_casing: true
