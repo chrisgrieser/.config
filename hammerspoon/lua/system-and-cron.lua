@@ -130,14 +130,13 @@ wakeWatcher = caff
 	.new(function(eventType)
 		if
 			eventType ~= caff.screensDidWake
-			-- and eventType ~= caff.screensDidUnlock
 			and eventType ~= caff.systemDidWake
 		then
 			return
 		end
 
-		syncAllGitRepos()
 		if isAtOffice() then
+			syncAllGitRepos()
 			workLayout()
 			local toDark = betweenTime(7, 18)
 			setDarkmode(toDark)
@@ -157,6 +156,10 @@ wakeWatcher = caff
 				setDarkmode(true)
 				movieModeLayout()
 			else
+					syncAllGitRepos()
+				if eventType ~= caff.systemDidWake then
+					syncAllGitRepos("notify")
+				end
 				workLayout() 
 				local toDark = not (betweenTime(7, 19))
 				setDarkmode(toDark)
