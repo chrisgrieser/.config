@@ -71,9 +71,9 @@ null_ls.setup {
 			extra_args = { "--config", linterConfig .. "/.prettierrc.yml" },
 		},
 		builtins.code_actions.eslint_d, -- must not use a config file
-		-- builtins.formatting.eslint_d.with {
-		-- 	extra_args = { "--config", linterConfig .. "/.eslintrc.yml" },
-		-- },
+		builtins.formatting.eslint_d.with {
+			extra_args = { "--config", linterConfig .. "/.eslintrc.yml" },
+		},
 		builtins.diagnostics.eslint_d.with {
 			extra_args = { "--config", linterConfig .. "/.eslintrc.yml" },
 		},
