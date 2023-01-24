@@ -135,6 +135,8 @@ wakeWatcher = caff
 			return
 		end
 
+		twitterScrollUp()
+
 		if isAtOffice() then
 			syncAllGitRepos()
 			workLayout()
@@ -156,8 +158,8 @@ wakeWatcher = caff
 				setDarkmode(true)
 				movieModeLayout()
 			else
-					syncAllGitRepos()
 				if eventType ~= caff.systemDidWake then
+					notify("System Wake, syncing git repos…")
 					syncAllGitRepos("notify")
 				end
 				workLayout() 

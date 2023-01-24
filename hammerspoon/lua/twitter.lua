@@ -1,7 +1,7 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
 
-local function scrollUp()
+function twitterScrollUp()
 	if not (appIsRunning("Twitter")) then return end
 	keystroke({ "shift", "command" }, "R", 1, app("Twitter")) -- reload
 	-- needs delay to wait for tweet loading
@@ -22,7 +22,7 @@ twitterWatcher = aw.new(function(appName, eventType, appObj)
 	if appName == "Twitter" and (eventType == aw.launched or eventType == aw.activated) then
 		runWithDelays({ 0.05, 0.2 }, function()
 			twitterToTheSide()
-			if eventType == aw.launched then scrollUp() end
+			if eventType == aw.launched then twitterScrollUp() end
 		end)
 
 	-- auto-close media windows
@@ -90,7 +90,7 @@ local function homeAction()
 		keystroke({ "shift", "command" }, "A", 1, app("zoom.us"))
 		return
 	end
-	scrollUp()
+	twitterScrollUp()
 end
 
 -- Hotkeys
