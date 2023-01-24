@@ -49,7 +49,6 @@ function themeSettings()
 			"DiagnosticUnderlineWarn",
 			"DiagnosticUnderlineHint",
 			"DiagnosticUnderlineInfo",
-			-- function not local, so they can be accessed via file watcher",
 			"SpellLocal",
 			"SpellRare",
 			"SpellCap",
@@ -107,6 +106,8 @@ function themeSettings()
 			setHighlight("lualine_a_normal", "gui=bold")
 			setHighlight("lualine_a_visual", "gui=bold")
 			setHighlight("lualine_a_insert", "gui=bold")
+			setHighlight("lualine_a_replace", "gui=bold")
+			setHighlight("ScrollView", "guibg=#303d50")
 
 		-- rose-pine
 		elseif theme == "rose-pine" then
@@ -126,9 +127,8 @@ function themeSettings()
 
 		-- kanagawa
 		elseif theme == "kanagawa" then
-			-- setHighlight("ScrollView", "guibg=#303050")
+			setHighlight("ScrollView", "guibg=#303050")
 			setHighlight("VirtColumn", "guifg=#323036")
-			linkHighlight("UfoFoldedBg", "Folded")
 
 		-- zephyr
 		elseif theme == "zephyr" then

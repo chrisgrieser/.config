@@ -409,6 +409,7 @@ keymap("n", "<leader>gs", ":Neogit<CR>", { desc = " Neogit" })
 keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = " Commit" })
 keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = " Add Hunk" })
 keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = " Reset Hunk" })
+keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = " Blame Line" })
 
 -- Git-link
 keymap({ "n", "x" }, "<leader>gl", qol.gitLink, { desc = " GitHub Link" })

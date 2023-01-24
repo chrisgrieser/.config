@@ -338,7 +338,7 @@ return {
 			local ls = require("luasnip")
 
 			ls.setup {
-				history = false, -- false = allow jumping back into the snippet
+				history = true, -- allow jumping back into the snippet
 				region_check_events = "InsertEnter", -- prevent <Tab> jumping back to a snippet after it has been left early
 				update_events = "TextChanged,TextChangedI", -- live updating of snippets
 				enable_autosnippets = true,
