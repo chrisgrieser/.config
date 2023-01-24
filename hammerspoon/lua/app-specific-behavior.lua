@@ -174,7 +174,7 @@ end):start()
 -- Add dots when copypasting to from devtools
 -- not using window focused, since not reliable
 local function clipboardFix()
-	if not app("neovide"):title():find("%.css$") then return end
+	if not app("neovide"):mainWindow():title():find("%.css$") then return end
 
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
@@ -196,6 +196,7 @@ neovideWatcher = aw.new(function(appName, eventType, appObj)
 		-- by neovide
 		runWithDelays({ 0.2, 0.4, 0.6 }, function()
 			if not neovideWin then return end
+			if checkSize(neovideWin, leftHalf) or checkSize(neovideWin, rightHalf) then return end
 			local size = isProjector() and maximized or pseudoMaximized
 			moveResize(neovideWin, size)
 		end)
