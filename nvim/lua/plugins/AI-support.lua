@@ -37,7 +37,7 @@ return {
 				keymaps = {
 					close = "<Esc>", -- mappings Esc here removes ability to use normal mode
 					yank_last = "<D-c>",
-					new_session = "<D-k>", -- clear
+					new_session = "<D-k>", -- = clear
 					scroll_up = "<S-Up>",
 					scroll_down = "<S-Down>",
 				},
@@ -88,10 +88,10 @@ return {
 			}
 		end,
 		config = function()
-			-- stylua: ignore
+			-- stylua: ignore start
 			vim.keymap.set("i", "<C-e>", function() return vim.fn["codeium#Clear"]() end, { desc = "codium clear", expr = true })
-			-- stylua: ignore
 			vim.keymap.set("i", "<C-c>", function() return vim.fn["codeium#Accept"]() end, { desc = "codium accept", expr = true })
+			-- stylua: ignore end
 		end,
 	},
 }
