@@ -67,7 +67,6 @@ opt.fillchars = {
 	eob = " ", -- no ~ for the eof
 	fold = " ", -- no dots for folds
 }
-opt.showbreak = "↪ " -- precedes wrapped lines
 
 -- Split
 opt.splitright = true -- vsplit right instead of left
