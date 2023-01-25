@@ -13,7 +13,7 @@ function toggleDarkMode()
 
 	if isDarkMode() then
 		pdfbg = "Default"
-		toMode = "dark"
+		toMode = "light"
 		sketchybg = "0xffcdcdcd"
 		sketchyfont = "0xff000000"
 	else
@@ -50,10 +50,13 @@ function toggleDarkMode()
 	applescript([[
 		tell application "Brave Browser"
 			set openBlank to false
-			if ((count of window) is 0) then set openBlank to true
-			if ((URL of active tab of front window) starts with "chrome://") then set openBlank to true
+			if ((count of window) is 0) then
+				set openBlank to true
+			else if ((URL of active tab of front window) starts with "chrome://") then
+				set openBlank to true
+			end if
 		end tell
-		if (openBlank)
+		if (openBlank) then
 			open location "https://www.blank.org/"
 			delay 0.4
 			tell application "System Events" to tell appearance preferences to set dark mode to not dark mode

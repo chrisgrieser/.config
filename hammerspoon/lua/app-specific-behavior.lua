@@ -59,11 +59,10 @@ end):start()
 
 -- prevent maximized window from covering sketchybar if they are unfocused
 -- pseudomaximized windows always get twitter to the side
-wf_maxWindows = wf.new(true)
-	:subscribe(wf.windowUnfocused, function(win)
-		if isProjector() then return end
-		if checkSize(win, maximized) then win:application():hide() end
-	end)
+wf_maxWindows = wf.new(true):subscribe(wf.windowUnfocused, function(win)
+	if isProjector() then return end
+	if checkSize(win, maximized) then win:application():hide() end
+end)
 
 ---play/pause spotify with spotifyTUI
 ---@param toStatus string pause|play
@@ -380,17 +379,26 @@ end):start()
 -- SCRIPT EDITOR
 -- - auto-paste and lint content
 -- - skip new file creaton dialog
-wf_script_editor = wf.new("Script Editor"):subscribe(wf.windowCreated, function(newWin)
-	if newWin:title() == "Open" then
-		keystroke({ "cmd" }, "n")
-		runWithDelays(0.2, function()
-			keystroke({ "cmd" }, "v")
-			local win = app("Script Editor"):mainWindow() -- cannot use newWin, since it's the open dialog
-			moveResize(win, centered)
-		end)
-		runWithDelays(0.4, function() keystroke({ "cmd" }, "k") end)
-	end
-end)
+wf_script_editor = wf
+	.new("Script Editor")
+	:subscribe(wf.windowCreated, function(newWin)
+		if newWin:title() == "Open" then
+			keystroke({ "cmd" }, "n")
+			runWithDelays(0.2, function()
+				keystroke({ "cmd" }, "v")
+				local win = app("Script Editor"):mainWindow() -- cannot use newWin, since it's the open dialog
+				moveResize(win, centered)
+			end)
+			runWithDelays(0.4, function() keystroke({ "cmd" }, "k") end)
+		end
+	end)
+	-- fix line breaks, e.g. for copypasting into neovide
+	:subscribe(wf.windowUnfocused, function()
+		local clipb = hs.pasteboard.getContents()
+		if not clipb then return end
+		clipb = clipb:gsub("\r", "\n")
+		hs.pasteboard.setContents(clipb)
+	end)
 
 --------------------------------------------------------------------------------
 
