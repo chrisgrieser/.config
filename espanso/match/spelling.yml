@@ -191,3 +191,6 @@ matches:
     replace: find
     propagate_casing: true
     word: true
+  - triggers: ["url", "Url"]
+    replace: URL
+    word: true
