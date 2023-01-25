@@ -78,11 +78,6 @@ end, vim.api.nvim_create_namespace("auto_hlsearch"))
 -- Marks
 keymap("n", "ä", require("funcs.mark-cycler").gotoMark, { desc = "Goto Next Mark" })
 keymap("n", "Ä", require("funcs.mark-cycler").setMark, { desc = "Set Next Mark" })
-augroup ("clearTempMark", {})
-autocmd ("BufReadPost", {
-	group = "clearTempMark",
-	command = "delmarks z",
-})
 
 --------------------------------------------------------------------------------
 
@@ -97,7 +92,7 @@ end, { desc = "clear notifications" })
 keymap("n", "^", "za", { desc = "toggle fold" })
 
 -- [M]atchUp
-keymap({ "n", "x" }, "m", "<Plug>(matchup-%)", { desc = "matchup" })
+keymap({ "n", "x" }, "m", "<Plug>(matchup-%)", { desc = "matchup", nowait = true })
 
 -- Hunks, Changes, and Quicklist
 keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
@@ -121,8 +116,8 @@ keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
 --------------------------------------------------------------------------------
 
 -- Whitespace Control
-keymap("n", "=", "mzO<Esc>`z:delmarks z<CR>", { desc = "add blank line above" })
-keymap("n", "_", "mzo<Esc>`z:delmarks z<CR>", { desc = "add blank line below" })
+keymap("n", "=", "mzO<Esc>`z<CR>", { desc = "add blank line above" })
+keymap("n", "_", "mzo<Esc>`z<CR>", { desc = "add blank line below" })
 
 -- Indentation
 keymap("n", "<Tab>", ">>", { desc = "indent" })
@@ -134,7 +129,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "outdent" })
 -- EDITING
 
 -- Casing
-keymap("n", "ü", "mzlblgueh~`z:delmarks z<CR>", { desc = "toggle capital/lowercase of word" })
+keymap("n", "ü", "mzlblgueh~`z<CR>", { desc = "toggle capital/lowercase of word" })
 keymap("n", "Ü", "gUiw", { desc = "uppercase word" })
 keymap("n", "~", "~h")
 keymap("n", "<C-ü>", qol.wordSwitch, { desc = "switch common words" })
@@ -142,15 +137,15 @@ keymap("n", "<C-ü>", qol.wordSwitch, { desc = "switch common words" })
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
 for _, v in pairs(trailingKeys) do
-	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z:delmarks z<CR>", { desc = "append " .. v .. " to EoL" })
+	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z<CR>", { desc = "append " .. v .. " to EoL" })
 end
-keymap("n", "X", "mz$x`z:delmarks z<CR>", { desc = "delete last character" })
+keymap("n", "X", "mz$x`z<CR>", { desc = "delete last character" })
 
 -- Spelling (mnemonic: [z]pe[l]ling)
 keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "spellsuggest" })
 keymap("n", "gl", "]s", { desc = "next misspelling" })
 keymap("n", "gL", "]s", { desc = "prev misspelling" })
-keymap("n", "za", "mz]s1z=`z:delmarks z<CR>", { desc = "autofix spelling" }) -- [a]utofix word under cursor
+keymap("n", "za", "mz]s1z=`z<CR>", { desc = "autofix spelling" }) -- [a]utofix word under cursor
 
 -- [S]ubstitute Operator (substitute.nvim)
 keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })

@@ -18,18 +18,33 @@ function run(argv) {
 		app.doShellScript(
 			`echo "${token}" | gh auth login --with-token ; gh search issues --include-prs --involves=${username} --json="repository,title,url,number,state,commentsCount"`,
 		),
+	// eslint-disable-next-line complexity
 	).map(item => {
-		let icon = "🟦"; // also lists PRs due to --include-prs
-		if (item.state === "closed") icon = "🟣";
-		if (item.state === "open") icon = "🟢";
+		const isPR = item.url.includes("pull");
+		
+		const title = item.title;
+
+		let icon; // also lists PRs due to --include-prs
+		if (item.state === "merged") icon = "🟦 ";
+		else if (item.state === "closed" && isPR) icon = "🟥 ";
+		else if (item.state === "open" && isPR) icon = "🟨 ";
+		else if (item.state === "closed" && !isPR) icon = "🟣 ";
+		else if (item.state === "open" && !isPR) icon = "🟢 ";
+
+		if (title.toLowerCase().includes("request") || title.includes("FR")) icon += "🙏 ";
+		if (title.toLowerCase().includes("suggestion")) icon += "💡 ";
+		if (title.toLowerCase().includes("bug")) icon += "🪲 ";
+		if (title.includes("?")) icon += "❓ ";
 
 		const repo = item.repository.nameWithOwner;
 		const comments = item.commentsCount > 0 ? "💬 " + item.commentsCount.toString() : "";
+		let matcher = alfredMatcher(item.title) + " " + alfredMatcher(repo);
+		if (isPR) matcher += " pr";
 
 		return {
-			title: `${icon} ${item.title}`,
+			title: icon + title,
 			subtitle: `#${item.number}  ${repo}   ${comments}`,
-			match: alfredMatcher(item.title),
+			match: matcher,
 			arg: item.url,
 		};
 	});
