@@ -33,16 +33,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>C250E316-8E97-429F-A193-1ED46722A912</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>54108A38-6929-4455-A62B-5EFADC3B4CF8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -115,7 +105,7 @@
 				<key>keyword</key>
 				<string>t</string>
 				<key>subtext</key>
-				<string>Lingue — Google Translate — Ludwig</string>
+				<string>Lingue — Sentence Stack</string>
 				<key>text</key>
 				<string>Phrase Translation: '{query}'</string>
 				<key>withspace</key>
@@ -125,27 +115,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>4267517F-135F-4BC9-9F30-955369812887</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://ludwig.guru/s/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>C250E316-8E97-429F-A193-1ED46722A912</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -294,9 +263,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>50</real>
+			<real>65</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>240</real>
 		</dict>
 		<key>43880D3B-C354-4AC9-BFB5-C7A430DAC0DF</key>
 		<dict>
@@ -314,7 +283,7 @@
 			<key>xpos</key>
 			<real>295</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>305</real>
 		</dict>
 		<key>8AA5AD09-3EF5-4C93-8DF9-6690A90B221D</key>
 		<dict>
@@ -332,7 +301,7 @@
 			<key>xpos</key>
 			<real>295</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>175</real>
 		</dict>
 		<key>A744F634-72A4-4373-86F2-EBC783690DB8</key>
 		<dict>
@@ -342,15 +311,6 @@
 			<real>60</real>
 			<key>ypos</key>
 			<real>610</real>
-		</dict>
-		<key>C250E316-8E97-429F-A193-1ED46722A912</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>295</real>
-			<key>ypos</key>
-			<real>200</real>
 		</dict>
 		<key>CAD493F4-333E-4D5A-8720-8709EE20C984</key>
 		<dict>

@@ -69,8 +69,8 @@ keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
 -- automatically do `:nohl` when done with search https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
 	if fn.mode() == "n" then
-		-- INFO table requires the original vim keys, not the remappings
-		local new_hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, fn.keytrans(char))
+		local originalSearchRelatedKeys = { "<CR>", "n", "N", "*", "#", "?", "/" }
+		local new_hlsearch = vim.tbl_contains(originalSearchRelatedKeys, fn.keytrans(char))
 		if opt.hlsearch:get() ~= new_hlsearch then vim.opt.hlsearch = new_hlsearch end
 	end
 end, vim.api.nvim_create_namespace("auto_hlsearch"))
@@ -78,6 +78,11 @@ end, vim.api.nvim_create_namespace("auto_hlsearch"))
 -- Marks
 keymap("n", "ä", require("funcs.mark-cycler").gotoMark, { desc = "Goto Next Mark" })
 keymap("n", "Ä", require("funcs.mark-cycler").setMark, { desc = "Set Next Mark" })
+augroup ("clearTempMark", {})
+autocmd ("BufReadPost", {
+	group = "clearTempMark",
+	command = "delmarks z",
+})
 
 --------------------------------------------------------------------------------
 

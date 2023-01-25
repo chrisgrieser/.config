@@ -102,7 +102,7 @@ opt.history = 400 -- reduce noise for command history search
 opt.cmdheight = 0
 
 -- Character groups
-opt.iskeyword:append("-") -- don't treat "-" as word boundary, useful e.g. for kebab-case-variables
+vim.opt.iskeyword:append("-") -- don't treat "-" as word boundary, useful e.g. for kebab-case-variables
 
 opt.nrformats:append("unsigned") -- <C-a>/<C-x> only works with positive numbers
 opt.nrformats:remove { "bin", "hex" } -- remove edge case ambiguity
@@ -158,9 +158,8 @@ augroup("formatopts", {})
 autocmd("FileType", {
 	group = "formatopts",
 	callback = function()
-		if not (bo.filetype == "markdown") then -- not for markdown, for autolist hack (see markdown.lua)
-			bo.formatoptions = bo.formatoptions:gsub("o", "")
-		end
+		if not (bo.filetype == "markdown") then return end -- not for markdown, for autolist hack (see markdown.lua)
+		opt_local.formatoptions:remove("o")
 	end,
 })
 
