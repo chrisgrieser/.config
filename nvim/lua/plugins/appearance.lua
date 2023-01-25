@@ -47,7 +47,9 @@ return {
 			require("satellite").setup {
 				winblend = 20, -- winblend = transparency
 				handlers = {
-					marks = { enable = true },
+					-- displaying marks creates autocmds mapping of things with m, 
+					-- making m-bindings infeasable
+					marks = { enable = false },
 				},
 			}
 		end,
