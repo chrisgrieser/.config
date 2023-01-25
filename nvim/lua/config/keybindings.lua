@@ -433,6 +433,10 @@ keymap("n", "<leader>gd", function()
 	end)
 end, { desc = " File History (Diffview)" })
 
+-- Octo https://github.com/pwntester/octo.nvim#-commands
+keymap("n", "<leader>gi", ":Octo issues list", { desc = "  GitHub Issues" })
+keymap("n", "<leader>gp", ":Octo pr list", { desc = "  GitHub PRs" })
+
 --------------------------------------------------------------------------------
 
 -- Option Toggling
