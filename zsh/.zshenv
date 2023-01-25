@@ -34,6 +34,7 @@ export PATH="$DOTFILE_FOLDER/zsh/plugins":$PATH
 
 # NEOVIM: completions for cmp-zsh https://github.com/tamago324/cmp-zsh#configuration
 [[ -d $HOME/.zsh/comp ]] && export FPATH="$HOME/.zsh/comp:$FPATH"
+alias eslint="eslint_d"
 
 # NEOVIM: so linters managed by mason are available to other apps
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH

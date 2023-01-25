@@ -18,13 +18,29 @@
 		"description": "For Loop"
 	},
 	"For-Each" :{
-		"prefix": "foreach =>",
+		"prefix": "forEach =>",
 		"body": [
-			"${1:array}.forEach(${2:element} => {",
+			".forEach(${1:item} => {",
 			"\t$0",
 			"});"
-		],
-		"description": "For-Each Loop using =>"
+		]
+	},
+	"Map (complex)" :{
+		"prefix": "map => (complex)",
+		"body": [
+			"map(${1:item} => {",
+			"\t$0",
+			"\treturn ${1:item};",
+			"})"
+		]
+	},
+	"Map (simple)" :{
+		"prefix": "map => (simple)",
+		"body": "map(${1:item} => ${1:item})"
+	},
+	"Filter (simple)" :{
+		"prefix": "filter => (simple)",
+		"body": "filter(${1:item} => ${1:item})"
 	},
 	"today's date": {
 		"prefix": ["today", "date"],

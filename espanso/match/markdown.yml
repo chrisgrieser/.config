@@ -5,19 +5,31 @@ matches:
   # `,,lang,,` will create a code block of the respective language and prefill
   # it with the clipboard content, e.g. `,,js,,`
   - regex: ",,(?P<lang>\\w*),,"
-    replace: "```{{lang}}\n{{clipb}}\n```"
+    replace: "```{{lang}}\n{{unindentedCode}}\n```"
     label: Markdown Codeblock
     vars:
-      - name: clipb
+      - name: unindentedCode
         type: shell
         params:
           # awk: remove trailing blank lines
           # python3: remove indentation
-          cmd: |
-            pbpaste | awk 'NF {p=1} p' | python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))"
-  - trigger: TTT
+          cmd: 'pbpaste | awk "NF {p=1} p" | python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))"'
+  - trigger: kkk
+    replace: '[$|$]({{url}})'
+    label: Markdown Link
+    vars:
+      - name: url
+        type: shell
+        params:
+          # only pastes clipboard content if it's an URL
+          cmd: '[[ "$(pbpaste)" =~ ^http.* ]] && pbpaste || echo ""'
+  - trigger: ttt
     replace: '- [ ] '
     label: Markdown Task
+  - trigger: eee
+    replace: '`$|$`'
+    label: Markdown Inline Code
+  #─────────────────────────────────────────────────────────────────────────────
   - trigger: '!references'
     replace: |
       ::: {#refs}
