@@ -1,9 +1,6 @@
-# https://espanso.org/docs/
-#───────────────────────────────────────────────────────────────────────────────
-
 matches:
-  - trigger: "... "
-    replace: "… "
+  - trigger: "..."
+    replace: "…"
   - trigger: "::"
     replace: ":innen"
   #─────────────────────────────────────────────────────────────────────────────
@@ -24,7 +21,7 @@ matches:
     replace: "~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
   - trigger: "!path"
     replace: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH"
-    label: "$PATH"
+    label: "PATH for homebrew"
     #───────────────────────────────────────────────────────────────────────────
   - trigger: "!dontask"
     replace: "<https://dontasktoask.com/>"
@@ -33,8 +30,7 @@ matches:
   - trigger: "!xy"
     replace: "<https://xyproblem.info/>"
   - trigger: "!bug"
-    replace: >-
-      Could you open a bug report at the GitHub repo? Reason being that the bug report forms asks for various information I need to investigate the issue. (also, I don't have the time to look into it right now, so an issue will make sure that I can keep track of it.)
+    replace: Could you open a bug report at the GitHub repo? Reason being that the bug report forms asks for various information I need to investigate the issue. (also, I don't have the time to look into it right now, so an issue will make sure that I can keep track of it.)
     #───────────────────────────────────────────────────────────────────────────
   - trigger: "!iso"
     replace: "{{todayISO}}"
