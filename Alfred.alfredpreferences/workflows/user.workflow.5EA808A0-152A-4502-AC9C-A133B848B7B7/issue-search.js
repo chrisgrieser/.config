@@ -33,9 +33,7 @@ issueJSON.forEach(issue => {
 	const title = issue.title;
 	const issueCreator = issue.user.login;
 
-	let state = "";
-	if (issue.state === "open") state += "🟢 ";
-	else state += "🟣 ";
+	let state = issue.state === "open" ? "🟣 " : "🟢 "
 	if (title.toLowerCase().includes("request") || title.includes("FR")) state += "🙏 ";
 	if (title.toLowerCase().includes("suggestion")) state += "💡 ";
 	if (title.toLowerCase().includes("bug")) state += "🪲 ";
@@ -47,14 +45,14 @@ issueJSON.forEach(issue => {
 		issue.state,
 		alfredMatcher(title),
 		alfredMatcher(issueCreator),
-		"#" + issue.number
+		"#" + issue.number,
 	].join(" ");
 
 	jsonArray.push({
 		"title": state + title,
 		"match": issueMatcher,
 		"subtitle": "#" + issue.number + " by " + issueCreator + comments,
-		"arg": issue.html_url
+		"arg": issue.html_url,
 	});
 });
 
