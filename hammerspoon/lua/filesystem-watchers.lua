@@ -53,7 +53,7 @@ end):start()
 local scanFolder = home .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 scanFolderWatcher = pw(scanFolder, function()
 	hs.execute("mv '" .. scanFolder .. "'/* '" .. fileHub .. "'")
-	notify("Scan moved to File Hub.")
+	notify("Scan moved to File Hub")
 end):start()
 
 local systemDownloadFolder = home .. "/Downloads/"
