@@ -146,6 +146,7 @@ autocmd("BufWinEnter", {
 		cmd.cd(expand("%:p:h"))
 	end,
 })
+
 -- so autochdir does not interfere with saving of views
 opt.viewoptions:remove("curdir")
 
