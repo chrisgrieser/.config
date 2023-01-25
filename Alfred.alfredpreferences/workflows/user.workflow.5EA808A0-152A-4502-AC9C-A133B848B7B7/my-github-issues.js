@@ -16,16 +16,19 @@ function run(argv) {
 	const username = $.getenv("github_username");
 	const issues = JSON.parse(
 		app.doShellScript(
-			`echo "${token}" | gh auth login --with-token ; gh search issues --involves=${username} --json="repository,title,url,number,state,commentsCount"`,
+			`echo "${token}" | gh auth login --with-token ; gh search issues --include-prs --involves=${username} --json="repository,title,url,number,state,commentsCount"`,
 		),
 	).map(item => {
-		const icon = item.state === "open" ? "🟣" : "🟢"
-		const repo = item.repository.nameWithOwner
-		const comments = item.commentsCount > 0 ? "💬 " + item.commentsCount.toString() : ""
+		let icon = "🟦"; // also lists PRs due to --include-prs
+		if (item.state === "closed") icon = "🟣";
+		if (item.state === "open") icon = "🟢";
+
+		const repo = item.repository.nameWithOwner;
+		const comments = item.commentsCount > 0 ? "💬 " + item.commentsCount.toString() : "";
 
 		return {
 			title: `${icon} ${item.title}`,
-			subtitle: `#${item.number} ${repo}   ${comments}`,
+			subtitle: `#${item.number}  ${repo}   ${comments}`,
 			match: alfredMatcher(item.title),
 			arg: item.url,
 		};
