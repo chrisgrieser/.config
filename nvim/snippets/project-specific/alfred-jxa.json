@@ -1,7 +1,7 @@
 {
 	"Get Alfred Env": {
 		"prefix": "Get Alfred Env",
-		"body": "'const ${1:envVar} = $.getenv(\"${2:envVar}\");"
+		"body": "const ${1:envVar} = $.getenv(\"${2:envVar}\");"
 	},
 	"Get Alfred Env (+ resolve home)": {
 		"prefix": "Get Alfred Env (+ resolve home)",
@@ -11,7 +11,7 @@
 		"prefix": "argv",
 		"body": [
 			"function run(argv){",
-			"const ${1:query} = argv[0];",
+			"\tconst ${1:query} = argv[0];",
 			"}"
 		]
 	},
@@ -43,7 +43,7 @@
 			"\t\t\t\"uid\": item,",
 			"\t\t};",
 			"\t});",
-			"JSON.stringify({ items: jsonArray});"
+			"JSON.stringify({ items: jsonArray });"
 		]
 	},
 	"Get Alfred Env (safe)": {
