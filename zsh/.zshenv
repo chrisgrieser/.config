@@ -18,10 +18,15 @@ export ZDOTDIR="$DOTFILE_FOLDER/zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 
+GITHUB_TOKEN=$(tr -d "\n" < "$ICLOUD/Dotfolder/private dotfiles/github_token")
+export GITHUB_TOKEN
+
 # OpenAI API Key stored outside of public git repo (symlinked file)
 # (key is accessed by nvim as well as shell plugins)
 OPENAI_API_KEY=$(tr -d "\n" < "$ICLOUD/Dotfolder/private dotfiles/openai_api_key")
 export OPENAI_API_KEY
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # Pass Config
 export PASSWORD_STORE_CLIP_TIME=60
@@ -34,7 +39,7 @@ export PATH="$DOTFILE_FOLDER/zsh/plugins":$PATH
 
 # NEOVIM: completions for cmp-zsh https://github.com/tamago324/cmp-zsh#configuration
 [[ -d $HOME/.zsh/comp ]] && export FPATH="$HOME/.zsh/comp:$FPATH"
-alias eslint="eslint_d"
 
 # NEOVIM: so linters managed by mason are available to other apps
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
+alias eslint="eslint_d"
