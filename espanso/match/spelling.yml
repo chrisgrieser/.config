@@ -138,8 +138,8 @@ matches:
   - trigger: hwo
     replace: how
     word: true
-  - trigger: " ot"
-    replace: " to"
+  - trigger: " ot "
+    replace: " to "
   - trigger: si
     replace: is
     word: true
@@ -187,3 +187,7 @@ matches:
   - trigger: lwoer
     replace: lower
     propagate_casing: true
+  - trigger: fidn
+    replace: find
+    propagate_casing: true
+    word: true

@@ -144,7 +144,7 @@ rules:
             modifiers: [command, control]
           - shell_command: "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
         conditions: [{type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$]}]
-  - description: "(Apps)Brave"
+  - description: "(Apps) Brave"
     manipulators:
       # open dev tools
       - type: basic
