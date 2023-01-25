@@ -94,6 +94,7 @@ nmap gs :gotoHeading
 " [g]oto [f]ile (= Follow Link under cursor)
 exmap followLinkUnderCursor obcommand editor:follow-link
 nmap gx :followLinkUnderCursor
+nmap gd :followLinkUnderCursor
 
 exmap live-grep obcommand obsidian-another-quick-switcher:grep
 nmap gF :live-grep
@@ -162,10 +163,9 @@ nmap ,c F[t|"_dt]
 " append to [y]aml (line 3 = tags)
 nmap ,y 3ggA
 
-" [g]oto [d]efiniton -> footnotes
+" [g]oto -> [f]ootnotes
 " requires Footnotes Shortcut Plugin
 exmap gotoFootnoteDefinition obcommand obsidian-footnotes:insert-footnote
-nmap gd :gotoFootnoteDefinition
 nmap gf :gotoFootnoteDefinition
 
 " Blockquote
