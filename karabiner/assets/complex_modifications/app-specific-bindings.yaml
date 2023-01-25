@@ -438,7 +438,7 @@ rules:
             hold_down_milliseconds: 100
           - key_code: spacebar
         conditions: [{type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor]}]
-  - description: "(Apps)Drafts"
+  - description: "(Apps) Drafts"
     manipulators:
       - type: basic
         from: {key_code: comma, modifiers: {mandatory: [shift, command]}}
@@ -518,7 +518,7 @@ rules:
           - key_code: "l"
             modifiers: [control]
         conditions: [{type: frontmost_application_if, file_paths: [alacritty$]}]
-  - description: "(Apps) shift+space → daw"
+  - description: "(Apps) Alacritty/Brave: shift+space → daw"
     manipulators:
       - type: basic
         from: {key_code: spacebar, modifiers: {mandatory: [shift]}}

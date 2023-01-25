@@ -138,9 +138,8 @@ matches:
   - trigger: hwo
     replace: how
     word: true
-  - trigger: ot
-    replace: to
-    word: true
+  - trigger: " ot"
+    replace: " to"
   - trigger: si
     replace: is
     word: true
