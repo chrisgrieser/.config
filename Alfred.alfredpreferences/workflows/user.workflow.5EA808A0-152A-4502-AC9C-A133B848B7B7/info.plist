@@ -499,6 +499,56 @@ open $(git remote -v | grep git@github.com | grep fetch | head -n1 | cut -f2 | c
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ghi</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string># this way token is read from.zshenv
+osascript -l JavaScript "$GITHUB_TOKEN"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>my-github-issues.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search my GitHub issues</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>378B3595-A76C-4026-AC7F-0AC288FDF625</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -766,7 +816,7 @@ echo "$url"</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Install ripgrep for quicker search
+	<string>issue search reguires `gh`.
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
@@ -828,6 +878,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>465</real>
 			<key>ypos</key>
 			<real>130</real>
+		</dict>
+		<key>378B3595-A76C-4026-AC7F-0AC288FDF625</key>
+		<dict>
+			<key>xpos</key>
+			<real>755</real>
+			<key>ypos</key>
+			<real>330</real>
 		</dict>
 		<key>56B03C06-62FC-49FC-989A-B21950776754</key>
 		<dict>
@@ -978,7 +1035,29 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>GitHub username</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>github_username</string>
+		</dict>
+	</array>
 	<key>variables</key>
 	<dict>
 		<key>dotfile_folder</key>
@@ -992,9 +1071,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
+		<string>vault_path</string>
 		<string>working_folder</string>
 		<string>dotfile_folder</string>
-		<string>vault_path</string>
 	</array>
 	<key>version</key>
 	<string></string>

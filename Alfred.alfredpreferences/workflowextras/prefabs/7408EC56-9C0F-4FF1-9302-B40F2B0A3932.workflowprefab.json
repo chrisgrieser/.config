@@ -4,7 +4,7 @@
     "items" : [
       {
         "workflowobjecttype" : "alfred.workflow.input.scriptfilter",
-        "uid" : "6B2AB4A2-2873-497D-93E2-8F441DF05147",
+        "uid" : "378B3595-A76C-4026-AC7F-0AC288FDF625",
         "note" : "",
         "workflowobjectconfig" : {
           "argumenttrimmode" : 0,
@@ -15,8 +15,8 @@
           "queuedelaymode" : 0,
           "type" : 8,
           "script" : "",
-          "title" : "Search",
-          "runningsubtext" : "",
+          "title" : "",
+          "runningsubtext" : "loading…",
           "queuemode" : 1,
           "argumenttreatemptyqueryasnil" : true,
           "subtext" : "",
@@ -35,5 +35,5 @@
 
     ]
   },
-  "description" : "preconfigured"
+  "description" : ""
 }

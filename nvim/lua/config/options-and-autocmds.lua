@@ -159,7 +159,7 @@ augroup("formatopts", {})
 autocmd("FileType", {
 	group = "formatopts",
 	callback = function()
-		if not (bo.filetype == "markdown") then return end -- not for markdown, for autolist hack (see markdown.lua)
+		if bo.filetype == "markdown" then return end -- not for markdown, for autolist hack (see markdown.lua)
 		opt_local.formatoptions:remove("o")
 	end,
 })
