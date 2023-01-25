@@ -57,10 +57,20 @@ return {
 						{ "n", "?", actions.help("file_history_panel"), {} },
 						-- INFO "<cr>" needs to be lowercase to override the default behavior
 						{ "n", "<cr>", function() vim.cmd.wincmd("w") end, {} },
-						{ "n", "<S-CR>", function() vim.cmd.wincmd("w") end, {} }, 
+						{ "n", "<S-CR>", function() vim.cmd.wincmd("w") end, {} },
 					},
 				},
 			}
 		end,
+	},
+	{
+		"pwntester/octo.nvim",
+		cmd = "Octo",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"kyazdani42/nvim-web-devicons",
+		},
+		config = function() require("octo").setup() end,
 	},
 }
