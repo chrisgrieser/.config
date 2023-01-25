@@ -553,8 +553,7 @@ autocmd("FileType", {
 	end,
 })
 
--- HACK to remove the waiting time from the q, due to conflict with `qq`
--- for comments
+-- remove the waiting time from the q, due to conflict with `qq` for comments
 autocmd("FileType", {
 	group = "quickClose",
 	pattern = { "ssr", "TelescopePrompt" },
