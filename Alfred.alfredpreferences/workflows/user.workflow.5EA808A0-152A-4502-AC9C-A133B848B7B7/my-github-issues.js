@@ -21,13 +21,11 @@ function run(argv) {
 	).map(item => {
 		const icon = item.state === "open" ? "🟣" : "🟢"
 		const repo = item.repository.nameWithOwner
-		const comments = item.commentsCount > 0 ? item.commentsCount.toString() + " "
-
-		if (issue.comments !== "0") comments = "   💬 " + issue.comments;
+		const comments = item.commentsCount > 0 ? "💬 " + item.commentsCount.toString() : ""
 
 		return {
 			title: `${icon} ${item.title}`,
-			subtitle: `#${item.number} ${repo}`,
+			subtitle: `#${item.number} ${repo}   ${comments}`,
 			match: alfredMatcher(item.title),
 			arg: item.url,
 		};
