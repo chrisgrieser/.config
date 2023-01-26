@@ -123,15 +123,15 @@ return {
 					end
 
 					-- move cursor position
-					-- local lineNum, colNum = unpack(vim.api.nvim_win_get_cursor(0))
-					-- local keyPos, valuePos = line:find(".%w+ ?[:=] ?")
-					-- if valuePos and not (ft == "css") then
-					-- 	colNum = valuePos
-					-- elseif keyPos and ft == "css" then
-					-- 	colNum = keyPos
-					-- end
-					-- vim.api.nvim_win_set_cursor(0, { lineNum, colNum })
-					--
+					local lineNum, colNum = unpack(vim.api.nvim_win_get_cursor(0))
+					local keyPos, valuePos = line:find(".%w+ ?[:=] ?")
+					if valuePos and not (ft == "css") then
+						colNum = valuePos
+					elseif keyPos and ft == "css" then
+						colNum = keyPos
+					end
+					vim.api.nvim_win_set_cursor(0, { lineNum, colNum })
+
 					return { line } -- return as array, since that's what the plugin expects
 				end,
 			}
