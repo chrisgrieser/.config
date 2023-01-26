@@ -20,7 +20,7 @@ local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 ---switches words under the cursor from `true` to `false` and similar cases
 function M.wordSwitch()
 	local iskeywBefore = opt.iskeyword:get()
-	opt.iskeyword:remove { "_", "-", "." }
+	vim.opt.iskeyword:remove { "_", "-", "." }
 
 	local words = {
 		{ "true", "false" },
@@ -189,12 +189,18 @@ function M.issueSearch()
 		return
 	end
 	repo = repo:match(":.*%."):sub(2, -2)
+
+
+	local output = {}
+	local opts = {
+		stdout_buffered = true,
+		stderr_buffered = true,
+		on_stdout = function(_, data)
+			table.insert(output, data)
+		end,
+	}
 	-- TODO figure out how to make a proper http request in nvim
-	local json = fn.system([[curl -sL "https://api.github.com/repos/]] .. repo.. [[/issues"]])
-	local issues = vim.json.decode(json)
-
-
-		
+	fn.jobstart([[curl -sL "https://api.github.com/repos/]] .. repo .. [[/issues"]], opts)
 end
 
 ---@param commitMsg string

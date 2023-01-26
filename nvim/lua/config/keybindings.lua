@@ -411,11 +411,10 @@ keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = " Add Hunk" })
 keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = " Reset Hunk" })
 keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = " Blame Line" })
 
--- Git-link
+-- my custom functions
 keymap({ "n", "x" }, "<leader>gl", qol.gitLink, { desc = " GitHub Link" })
-
--- add-commit-pull-push
 keymap("n", "<leader>gg", qol.addCommitPush, { desc = " Add-Commit-Push" })
+keymap("n", "<leader>ghi", qol.issueSearch, { desc = " GitHub Issues" })
 
 -- Diffview
 keymap("n", "<leader>gd", function()
